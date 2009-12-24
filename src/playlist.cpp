@@ -6,6 +6,8 @@
 #include <QMimeData>
 #include <QBuffer>
 #include <QSettings>
+#include <QFileInfo>
+#include <QDirIterator>
 
 #include <boost/bind.hpp>
 
@@ -162,12 +164,36 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       if (url.scheme() != "file")
         continue;
 
-      Song song;
-      song.InitFromFile(url.toLocalFile(), -1);
-      if (!song.is_valid())
+      QString filename(url.toLocalFile());
+      QFileInfo info(filename);
+
+      if (!info.exists())
         continue;
 
-      songs << song;
+      if (info.isDir()) {
+        // Add all the songs in the directory
+        QDirIterator it(filename,
+            QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
+            QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
+
+        while (it.hasNext()) {
+          QString path(it.next());
+
+          Song song;
+          song.InitFromFile(path, -1);
+          if (!song.is_valid())
+            continue;
+
+          songs << song;
+        }
+      } else {
+        Song song;
+        song.InitFromFile(filename, -1);
+        if (!song.is_valid())
+          continue;
+
+        songs << song;
+      }
     }
 
     InsertSongs(songs, row);
