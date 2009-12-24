@@ -19,8 +19,9 @@ class FileView : public QWidget {
  signals:
   void PathChanged(const QString& path);
 
-  void PlayFile(const QString& path);
-  void PlayDirectory(const QString& path);
+  void Queue(const QList<QUrl>& urls);
+  void CopyToLibrary(const QList<QUrl>& urls);
+  void MoveToLibrary(const QList<QUrl>& urls);
 
  private slots:
   void FileUp();

@@ -49,6 +49,7 @@ class Playlist : public QAbstractListModel {
   // Changing the playlist
   QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);
   QModelIndex InsertSongs(const SongList& items, int after = -1);
+  QModelIndex InsertPaths(const QList<QUrl>& urls, int after = -1);
   void StopAfter(int row);
 
   // QAbstractListModel

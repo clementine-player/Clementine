@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow {
   void closeEvent(QCloseEvent* event);
 
  private slots:
-  void PlayFile(const QString& path);
+  void QueueFiles(const QList<QUrl>& urls);
   void FilePathChanged(const QString& path);
 
   void ReportError(const QString& message);

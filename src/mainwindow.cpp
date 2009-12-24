@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.library_view->SetLibrary(library_);
 
   // File view connections
-  connect(ui_.file_view, SIGNAL(PlayFile(QString)), SLOT(PlayFile(QString)));
+  connect(ui_.file_view, SIGNAL(Queue(QList<QUrl>)), SLOT(QueueFiles(QList<QUrl>)));
   connect(ui_.file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
 
   // Action connections
@@ -176,14 +176,8 @@ MainWindow::~MainWindow() {
   SaveGeometry();
 }
 
-void MainWindow::PlayFile(const QString& path) {
-  Song song;
-  song.InitFromFile(path, -1);
-
-  if (!song.is_valid())
-    return;
-
-  QModelIndex playlist_index = playlist_->InsertSongs(SongList() << song);
+void MainWindow::QueueFiles(const QList<QUrl>& urls) {
+  QModelIndex playlist_index = playlist_->InsertPaths(urls);
 
   if (playlist_index.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(playlist_index.row());

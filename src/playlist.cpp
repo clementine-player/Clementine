@@ -158,48 +158,52 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     layoutChanged();
 
   } else if (data->hasUrls()) {
-    // URL list dragged from some other app probably
-    SongList songs;
-    foreach (const QUrl& url, data->urls()) {
-      if (url.scheme() != "file")
-        continue;
+    // URL list dragged from the file list or some other app
+    InsertPaths(data->urls(), row);
+  }
 
-      QString filename(url.toLocalFile());
-      QFileInfo info(filename);
+  return true;
+}
 
-      if (!info.exists())
-        continue;
+QModelIndex Playlist::InsertPaths(const QList<QUrl>& urls, int after) {
+  SongList songs;
+  foreach (const QUrl& url, urls) {
+    if (url.scheme() != "file")
+      continue;
 
-      if (info.isDir()) {
-        // Add all the songs in the directory
-        QDirIterator it(filename,
-            QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
-            QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
+    QString filename(url.toLocalFile());
+    QFileInfo info(filename);
 
-        while (it.hasNext()) {
-          QString path(it.next());
+    if (!info.exists())
+      continue;
 
-          Song song;
-          song.InitFromFile(path, -1);
-          if (!song.is_valid())
-            continue;
+    if (info.isDir()) {
+      // Add all the songs in the directory
+      QDirIterator it(filename,
+          QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
+          QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
 
-          songs << song;
-        }
-      } else {
+      while (it.hasNext()) {
+        QString path(it.next());
+
         Song song;
-        song.InitFromFile(filename, -1);
+        song.InitFromFile(path, -1);
         if (!song.is_valid())
           continue;
 
         songs << song;
       }
-    }
+    } else {
+      Song song;
+      song.InitFromFile(filename, -1);
+      if (!song.is_valid())
+        continue;
 
-    InsertSongs(songs, row);
+      songs << song;
+    }
   }
 
-  return true;
+  return InsertSongs(songs, after);
 }
 
 QModelIndex Playlist::InsertItems(const QList<PlaylistItem*>& items, int after) {

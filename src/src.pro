@@ -31,7 +31,8 @@ SOURCES += main.cpp \
     libraryconfig.cpp \
     systemtrayicon.cpp \
     libraryquery.cpp \
-    fileview.cpp
+    fileview.cpp \
+    fileviewlist.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -59,7 +60,8 @@ HEADERS += mainwindow.h \
     libraryconfig.h \
     systemtrayicon.h \
     libraryquery.h \
-    fileview.h
+    fileview.h \
+    fileviewlist.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui
