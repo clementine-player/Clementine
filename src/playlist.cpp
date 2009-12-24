@@ -165,9 +165,10 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
   return true;
 }
 
-QModelIndex Playlist::InsertPaths(const QList<QUrl>& urls, int after) {
+QModelIndex Playlist::InsertPaths(QList<QUrl> urls, int after) {
   SongList songs;
-  foreach (const QUrl& url, urls) {
+  for (int i=0 ; i<urls.count() ; ++i) {
+    QUrl url(urls[i]);
     if (url.scheme() != "file")
       continue;
 
@@ -183,16 +184,13 @@ QModelIndex Playlist::InsertPaths(const QList<QUrl>& urls, int after) {
           QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
           QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
 
+      QList<QUrl> new_urls;
       while (it.hasNext()) {
         QString path(it.next());
-
-        Song song;
-        song.InitFromFile(path, -1);
-        if (!song.is_valid())
-          continue;
-
-        songs << song;
+        new_urls << QUrl::fromLocalFile(path);
       }
+      qSort(new_urls);
+      urls << new_urls;
     } else {
       Song song;
       song.InitFromFile(filename, -1);
