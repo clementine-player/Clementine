@@ -482,8 +482,12 @@ QMimeData* Library::mimeData(const QModelIndexList& indexes) const {
 }
 
 bool Library::CompareItems(const LibraryItem* a, const LibraryItem* b) const {
-  return data(a, Library::Role_SortText).toString() <
-         data(b, Library::Role_SortText).toString();
+  QVariant left(data(a, Library::Role_SortText));
+  QVariant right(data(b, Library::Role_SortText));
+
+  if (left.type() == QVariant::Int)
+    return left.toInt() < right.toInt();
+  return left.toString() < right.toString();
 }
 
 void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const {
