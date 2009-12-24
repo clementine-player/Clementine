@@ -167,7 +167,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       if (!song.is_valid())
         continue;
 
-      songs << songs;
+      songs << song;
     }
 
     InsertSongs(songs, row);
