@@ -77,10 +77,6 @@ void Library::Initialise() {
   Reset();
 }
 
-bool Library::IsEmpty() const {
-  return root_->children.isEmpty();
-}
-
 void Library::SongsDiscovered(const SongList& songs) {
   foreach (const Song& song, songs) {
     LibraryItem* artist = NULL;

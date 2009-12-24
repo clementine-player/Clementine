@@ -29,10 +29,9 @@ class Library : public QAbstractItemModel {
 
   void StartThreads();
 
+  // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const;
   SongList GetChildSongs(const QModelIndex& index) const;
-
-  bool IsEmpty() const;
 
   // QAbstractItemModel
   int columnCount(const QModelIndex & parent = QModelIndex()) const;

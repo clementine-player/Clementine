@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     libraryitem.cpp \
     libraryconfig.cpp \
     systemtrayicon.cpp \
-    libraryquery.cpp
+    libraryquery.cpp \
+    fileview.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -57,9 +58,11 @@ HEADERS += mainwindow.h \
     libraryitem.h \
     libraryconfig.h \
     systemtrayicon.h \
-    libraryquery.h
+    libraryquery.h \
+    fileview.h
 FORMS += mainwindow.ui \
-    libraryconfig.ui
+    libraryconfig.ui \
+    fileview.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

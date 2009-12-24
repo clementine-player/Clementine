@@ -26,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     player_(new Player(playlist_, this)),
     library_(new Library(player_->GetEngine(), this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
-    file_model_(new QFileSystemModel(this)),
-    file_undo_stack_(new QUndoStack(this)),
     tray_icon_(new SystemTrayIcon(this))
 {
   ui_.setupUi(this);
@@ -49,21 +47,9 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.library_view->setModel(library_sort_model_);
   ui_.library_view->SetLibrary(library_);
 
-  // File browser
-  ui_.file_view->setModel(file_model_);
-  ChangeFilePathWithoutUndo(QDir::homePath());
-
-  connect(ui_.file_back, SIGNAL(clicked()), SLOT(FileBack()));
-  connect(ui_.file_forward, SIGNAL(clicked()), SLOT(FileForward()));
-  connect(ui_.file_home, SIGNAL(clicked()), SLOT(FileHome()));
-  connect(ui_.file_up, SIGNAL(clicked()), SLOT(FileUp()));
-  connect(ui_.file_path, SIGNAL(textChanged(QString)), SLOT(ChangeFilePath(QString)));
-
-  connect(file_undo_stack_, SIGNAL(canUndoChanged(bool)), ui_.file_back, SLOT(setEnabled(bool)));
-  connect(file_undo_stack_, SIGNAL(canRedoChanged(bool)), ui_.file_forward, SLOT(setEnabled(bool)));
-
-  connect(ui_.file_view, SIGNAL(activated(QModelIndex)), SLOT(FileClicked(QModelIndex)));
-  connect(ui_.file_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(FileDoubleClicked(QModelIndex)));
+  // File view connections
+  connect(ui_.file_view, SIGNAL(PlayFile(QString)), SLOT(PlayFile(QString)));
+  connect(ui_.file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
 
   // Action connections
   connect(ui_.action_next_track, SIGNAL(triggered()), player_, SLOT(Next()));
@@ -168,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStyleSheet(stylesheet.readAll());
   }
 
-  // Load geometry
+  // Load settings
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
@@ -177,6 +163,8 @@ MainWindow::MainWindow(QWidget *parent)
     tabifyDockWidget(ui_.files_dock, ui_.radio_dock);
     tabifyDockWidget(ui_.files_dock, ui_.library_dock);
   }
+
+  ui_.file_view->SetPath(settings.value("file_path", QDir::homePath()).toString());
 
   if (!settings.value("hidden", false).toBool())
     show();
@@ -188,59 +176,9 @@ MainWindow::~MainWindow() {
   SaveGeometry();
 }
 
-void MainWindow::FileUp() {
-  QDir dir(file_model_->rootDirectory());
-  dir.cdUp();
-
-  ChangeFilePath(dir.path());
-}
-
-void MainWindow::FileBack() {
-  QString new_path(file_undo_stack_->command(file_undo_stack_->index()-1)->text());
-  file_undo_stack_->undo();
-  ChangeFilePathWithoutUndo(new_path);
-}
-
-void MainWindow::FileForward() {
-  QString new_path(file_undo_stack_->command(file_undo_stack_->index()+1)->text());
-  file_undo_stack_->redo();
-  ChangeFilePathWithoutUndo(new_path);
-}
-
-void MainWindow::FileHome() {
-  ChangeFilePath(QDir::homePath());
-}
-
-void MainWindow::ChangeFilePath(const QString& new_path) {
-  QFileInfo info(new_path);
-  if (!info.exists() || !info.isDir())
-    return;
-
-  QString old_path(file_model_->rootPath());
-
-  ChangeFilePathWithoutUndo(new_path);
-  file_undo_stack_->push(new QUndoCommand(old_path));
-}
-
-void MainWindow::ChangeFilePathWithoutUndo(const QString& new_path) {
-  ui_.file_view->setRootIndex(file_model_->setRootPath(new_path));
-  ui_.file_path->setText(new_path);
-
-  QDir dir(new_path);
-  ui_.file_up->setEnabled(dir.cdUp());
-}
-
-void MainWindow::FileClicked(const QModelIndex& index) {
-  if (file_model_->isDir(index))
-    ChangeFilePath(file_model_->filePath(index));
-}
-
-void MainWindow::FileDoubleClicked(const QModelIndex& index) {
-  if (file_model_->isDir(index))
-    return;
-
+void MainWindow::PlayFile(const QString& path) {
   Song song;
-  song.InitFromFile(file_model_->filePath(index), -1);
+  song.InitFromFile(path, -1);
 
   if (!song.is_valid())
     return;
@@ -346,4 +284,10 @@ void MainWindow::SetHiddenInTray(bool hidden) {
 void MainWindow::ClearLibraryFilter() {
   ui_.library_filter->clear();
   ui_.library_filter->setFocus();
+}
+
+void MainWindow::FilePathChanged(const QString& path) {
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("file_path", path);
 }
