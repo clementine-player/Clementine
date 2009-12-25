@@ -1,5 +1,6 @@
 #include "playlistview.h"
 #include "playlist.h"
+#include "playlistheader.h"
 
 #include <QPainter>
 #include <QHeaderView>
@@ -101,6 +102,8 @@ PlaylistView::PlaylistView(QWidget *parent)
 {
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
+
+  setHeader(new PlaylistHeader(Qt::Horizontal, this));
   header()->setMovable(true);
 
   connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));

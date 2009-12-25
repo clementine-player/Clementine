@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     systemtrayicon.cpp \
     libraryquery.cpp \
     fileview.cpp \
-    fileviewlist.cpp
+    fileviewlist.cpp \
+    playlistheader.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -61,7 +62,8 @@ HEADERS += mainwindow.h \
     systemtrayicon.h \
     libraryquery.h \
     fileview.h \
-    fileviewlist.h
+    fileviewlist.h \
+    playlistheader.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui
