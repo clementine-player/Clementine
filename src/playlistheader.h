@@ -14,13 +14,17 @@ class PlaylistHeader : public QHeaderView {
 
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
+  void resizeEvent(QResizeEvent *event);
 
  private slots:
   void HideCurrent();
   void ToggleVisible(int section);
 
+  void SectionMoved();
+
  private:
   void AddColumnAction(int index);
+  int LastVisualIndex() const;
 
  private:
   int menu_section_;

@@ -16,12 +16,14 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
   show_action->setMenu(show_menu_);
 
   connect(show_mapper_, SIGNAL(mapped(int)), SLOT(ToggleVisible(int)));
+  connect(this, SIGNAL(sectionMoved(int,int,int)), SLOT(SectionMoved()));
 }
 
 void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
   menu_section_ = logicalIndexAt(e->pos());
 
-  if (menu_section_ == -1)
+  if (menu_section_ == -1 || (
+        menu_section_ == logicalIndex(0) && logicalIndex(1) == -1))
     hide_action_->setVisible(false);
   else {
     hide_action_->setVisible(true);
@@ -31,7 +33,7 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
   }
 
   show_menu_->clear();
-  for (int i=0 ; i<model()->columnCount() ; ++i) {
+  for (int i=0 ; i<count() ; ++i) {
     AddColumnAction(i);
   }
 
@@ -57,6 +59,39 @@ void PlaylistHeader::HideCurrent() {
 
 void PlaylistHeader::ToggleVisible(int section) {
   setSectionHidden(section, !isSectionHidden(section));
+}
+
+void PlaylistHeader::resizeEvent(QResizeEvent *event) {
+  if (!event->oldSize().isValid())
+    return;
+
+  const float scale = float(event->size().width()) / event->oldSize().width();
+
+  for (int i=0 ; i<count() ; ++i) {
+    resizeSection(i, sectionSize(i) * scale);
+  }
+}
+
+void PlaylistHeader::SectionMoved() {
+  for (int i=0 ; i<count() ; ++i) {
+    setResizeMode(i, Interactive);
+    if (sectionSize(i) < 20)
+      resizeSection(i, 50);
+  }
+
+  setResizeMode(logicalIndex(LastVisualIndex()), Stretch);
+}
+
+int PlaylistHeader::LastVisualIndex() const {
+  int ret = -1;
+  for (int i=0 ; i<count() ; ++i) {
+    if (isSectionHidden(i))
+      continue;
+
+    ret = qMax(visualIndex(i), ret);
+  }
+
+  return ret;
 }
 
 
