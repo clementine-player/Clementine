@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-12-15T18:38:35
 # -------------------------------------------------
 QT += sql \
-    opengl
+    network opengl xml
 TARGET = tangerine
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -36,7 +36,9 @@ SOURCES += main.cpp \
     radioitem.cpp \
     radioservice.cpp \
     lastfmservice.cpp \
-    radiomodel.cpp
+    radiomodel.cpp \
+    lastfmconfig.cpp \
+    busyindicator.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -72,13 +74,17 @@ HEADERS += mainwindow.h \
     radioservice.h \
     lastfmservice.h \
     simpletreemodel.h \
-    radiomodel.h
+    radiomodel.h \
+    lastfmconfig.h \
+    busyindicator.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
-    fileview.ui
+    fileview.ui \
+    lastfmconfig.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
+LIBS += -llastfm
 !win32 { 
     QMAKE_CXXFLAGS += $$system(taglib-config --cflags)
     LIBS += $$system(taglib-config --libs)

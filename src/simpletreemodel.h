@@ -72,7 +72,8 @@ QModelIndex SimpleTreeModel<T>::parent(const QModelIndex& index) const {
 template <typename T>
 int SimpleTreeModel<T>::rowCount(const QModelIndex & parent) const {
   T* item = IndexToItem(parent);
-  const_cast<SimpleTreeModel<T>*>(this)->LazyPopulate(item); // Ahem
+  if (!item->lazy_loaded)
+    const_cast<SimpleTreeModel<T>*>(this)->LazyPopulate(item); // Ahem
 
   return item->children.count();
 }

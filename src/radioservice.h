@@ -10,6 +10,7 @@ class RadioService : public QObject {
 
  public:
   RadioService(const QString& name, QObject* parent = 0);
+  virtual ~RadioService() {}
 
   QString name() const { return name_; }
 
