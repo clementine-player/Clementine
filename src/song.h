@@ -5,6 +5,10 @@
 #include <QList>
 #include <QSqlQuery>
 
+namespace lastfm {
+  class Track;
+}
+
 class Song {
  public:
   Song();
@@ -16,6 +20,7 @@ class Song {
   // Constructors
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const QSqlQuery& query);
+  void InitFromLastFM(const lastfm::Track& track);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

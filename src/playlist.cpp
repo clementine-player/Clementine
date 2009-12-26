@@ -93,6 +93,8 @@ int Playlist::previous_item() const {
 
 void Playlist::set_current_item(int i) {
   QModelIndex old_current = current_item_;
+  ClearStreamMetadata();
+
   current_item_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
 
   if (old_current.isValid())
@@ -124,7 +126,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     InsertSongs(song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
-    InsertRadioStations(radio_data->services, radio_data->urls(), row);
+    InsertRadioStations(radio_data->services, radio_data->urls(), radio_data->titles, row);
   } else if (data->hasFormat(kRowsMimetype)) {
     // Dragged from the playlist
     // Rearranging it is tricky...
@@ -237,12 +239,14 @@ QModelIndex Playlist::InsertSongs(const SongList& songs, int after) {
 }
 
 QModelIndex Playlist::InsertRadioStations(const QList<RadioService*>& services,
-                                          const QList<QUrl>& urls, int after) {
+                                          const QList<QUrl>& urls,
+                                          const QStringList& titles, int after) {
   Q_ASSERT(services.count() == urls.count());
+  Q_ASSERT(services.count() == titles.count());
 
   QList<PlaylistItem*> items;
   for (int i=0 ; i<services.count() ; ++i) {
-    items << new RadioPlaylistItem(services[i], urls[i]);
+    items << new RadioPlaylistItem(services[i], urls[i], titles[i]);
   }
   return InsertItems(items, after);
 }
@@ -402,4 +406,27 @@ void Playlist::StopAfter(int row) {
     emit dataChanged(old_stop_after, old_stop_after.sibling(old_stop_after.row(), ColumnCount));
   if (stop_after_.isValid())
     emit dataChanged(stop_after_, stop_after_.sibling(stop_after_.row(), ColumnCount));
+}
+
+void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
+  if (!current_item_.isValid())
+    return;
+
+  PlaylistItem* item = items_[current_item_.row()];
+  if (item->Url() != url)
+    return;
+
+  item->SetTemporaryMetadata(song);
+
+  emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
+}
+
+void Playlist::ClearStreamMetadata() {
+  if (!current_item_.isValid())
+    return;
+
+  PlaylistItem* item = items_[current_item_.row()];
+  item->ClearTemporaryMetadata();
+
+  emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
 }

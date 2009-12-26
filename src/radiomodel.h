@@ -5,6 +5,7 @@
 #include "simpletreemodel.h"
 
 class RadioService;
+class Song;
 
 class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
@@ -33,6 +34,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void StreamFinished();
   void StreamError(const QString& message);
+  void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
  protected:
   void LazyPopulate(RadioItem* parent);

@@ -9,6 +9,8 @@
 #include <taglib/vorbisfile.h>
 #include <taglib/flacfile.h>
 
+#include <lastfm/Track>
+
 #include <QFile>
 #include <QFileInfo>
 #include <QTime>
@@ -191,6 +193,16 @@ void Song::InitFromQuery(const QSqlQuery& q) {
   #undef tostr
   #undef toint
   #undef tofloat
+}
+
+void Song::InitFromLastFM(const lastfm::Track& track) {
+  valid_ = true;
+
+  title_ = track.title();
+  album_ = track.album();
+  artist_ = track.artist();
+  track_ = track.trackNumber();
+  length_ = track.duration();
 }
 
 void Song::BindToQuery(QSqlQuery *query) const {

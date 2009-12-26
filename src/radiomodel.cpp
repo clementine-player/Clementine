@@ -27,6 +27,7 @@ void RadioModel::AddService(RadioService *service) {
   connect(service, SIGNAL(StreamReady(QUrl,QUrl)), SIGNAL(StreamReady(QUrl,QUrl)));
   connect(service, SIGNAL(StreamFinished()), SIGNAL(StreamFinished()));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
+  connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
 }
 
 RadioService* RadioModel::ServiceByName(const QString& name) {
@@ -85,16 +86,18 @@ QStringList RadioModel::mimeTypes() const {
 QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
   QList<RadioService*> services;
+  QStringList titles;
 
   foreach (const QModelIndex& index, indexes) {
     RadioItem* item = IndexToItem(index);
     if (!item || !item->service || !item->playable)
       continue;
 
-    QList<QUrl> service_urls(item->service->UrlsForItem(item));
-    foreach (const QUrl& url, service_urls) {
-      urls << url;
+    QList<RadioItem::PlaylistData> item_data(item->service->DataForItem(item));
+    foreach (const RadioItem::PlaylistData& data, item_data) {
+      urls << data.url;
       services << item->service;
+      titles << data.title;
     }
   }
 
@@ -104,6 +107,7 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   RadioMimeData* data = new RadioMimeData;
   data->setUrls(urls);
   data->services = services;
+  data->titles = titles;
 
   return data;
 }

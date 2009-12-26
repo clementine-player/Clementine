@@ -1,6 +1,7 @@
 #include "lastfmservice.h"
 #include "lastfmconfig.h"
 #include "radioitem.h"
+#include "song.h"
 
 #include <lastfm/ws.h>
 #include <lastfm/misc.h>
@@ -107,24 +108,30 @@ void LastFMService::AuthenticateReplyFinished() {
   emit AuthenticationComplete(true);
 }
 
-QList<QUrl> LastFMService::UrlsForItem(RadioItem* item) {
-  QList<QUrl> ret;
+QList<RadioItem::PlaylistData> LastFMService::DataForItem(RadioItem* item) {
+  QList<RadioItem::PlaylistData> ret;
+
+  const QString user(lastfm::ws::Username);
 
   switch (item->type) {
     case Type_MyRecommendations:
-      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/recommended");
+      ret << RadioItem::PlaylistData(user + "'s Recommended Radio",
+                                     "lastfm://user/" + lastfm::ws::Username + "/recommended");
       break;
 
     case Type_MyLoved:
-      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/loved");
+      ret << RadioItem::PlaylistData(user + "'s Loved Tracks",
+                                     "lastfm://user/" + lastfm::ws::Username + "/loved");
       break;
 
     case Type_MyNeighbourhood:
-      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/neighbours");
+      ret << RadioItem::PlaylistData(user + "'s Neighbour Radio",
+                                     "lastfm://user/" + lastfm::ws::Username + "/neighbours");
       break;
 
     case Type_MyRadio:
-      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/library");
+      ret << RadioItem::PlaylistData(user + "'s Library",
+                                     "lastfm://user/" + lastfm::ws::Username + "/library");
       break;
   }
 
@@ -192,4 +199,8 @@ void LastFMService::TunerTrackAvailable() {
 
   lastfm::Track track = tuner_->takeNextTrack();
   emit StreamReady(last_url_, track.url());
+
+  Song metadata;
+  metadata.InitFromLastFM(track);
+  emit StreamMetadataFound(last_url_, metadata);
 }

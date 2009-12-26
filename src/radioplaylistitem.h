@@ -2,6 +2,7 @@
 #define RADIOPLAYLISTITEM_H
 
 #include "playlistitem.h"
+#include "song.h"
 
 #include <QUrl>
 
@@ -10,7 +11,7 @@ class RadioService;
 class RadioPlaylistItem : public PlaylistItem {
  public:
   RadioPlaylistItem();
-  RadioPlaylistItem(RadioService* service, const QUrl& url);
+  RadioPlaylistItem(RadioService* service, const QUrl& url, const QString& title);
 
   Type type() const { return Type_Radio; }
 
@@ -26,9 +27,15 @@ class RadioPlaylistItem : public PlaylistItem {
   bool StartLoading();
   QUrl Url();
 
+  void SetTemporaryMetadata(const Song& metadata);
+  void ClearTemporaryMetadata();
+
  private:
   RadioService* service_;
   QUrl url_;
+  QString title_;
+
+  Song metadata_;
 };
 
 #endif // RADIOPLAYLISTITEM_H

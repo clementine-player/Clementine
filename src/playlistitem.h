@@ -6,6 +6,8 @@
 
 class QSettings;
 
+class Song;
+
 class PlaylistItem {
  public:
   PlaylistItem() {}
@@ -36,6 +38,9 @@ class PlaylistItem {
   // directly to xine instead.
   virtual bool StartLoading() { return false; }
   virtual QUrl Url() = 0;
+
+  virtual void SetTemporaryMetadata(const Song& metadata) {Q_UNUSED(metadata)}
+  virtual void ClearTemporaryMetadata() {}
 };
 
 #endif // PLAYLISTITEM_H

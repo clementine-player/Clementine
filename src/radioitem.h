@@ -2,6 +2,7 @@
 #define RADIOITEM_H
 
 #include <QIcon>
+#include <QUrl>
 
 #include "simpletreeitem.h"
 
@@ -12,6 +13,13 @@ class RadioItem : public SimpleTreeItem<RadioItem> {
   enum Type {
     Type_Root = 1,
     Type_Service,
+  };
+
+  struct PlaylistData {
+    PlaylistData(const QString& _title, const QUrl& _url) : title(_title), url(_url) {}
+
+    QString title;
+    QUrl url;
   };
 
   RadioItem(RadioService* _service, int type, const QString& key = QString::null,

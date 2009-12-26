@@ -73,7 +73,7 @@ LengthItemDelegate::LengthItemDelegate(QTreeView* view)
 {
 }
 
-QString LengthItemDelegate::displayText(const QVariant& value, const QLocale& locale) const {
+QString LengthItemDelegate::displayText(const QVariant& value, const QLocale&) const {
   bool ok = false;
   int seconds = value.toInt(&ok);
   QString ret = "-";

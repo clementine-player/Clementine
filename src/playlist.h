@@ -52,7 +52,8 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);
   QModelIndex InsertSongs(const SongList& items, int after = -1);
   QModelIndex InsertRadioStations(const QList<RadioService*>& services,
-                                  const QList<QUrl>& urls, int after = -1);
+                                  const QList<QUrl>& urls,
+                                  const QStringList& titles, int after = -1);
   QModelIndex InsertPaths(QList<QUrl> urls, int after = -1);
   void StopAfter(int row);
 
@@ -75,6 +76,9 @@ class Playlist : public QAbstractListModel {
   void Playing();
   void Stopped();
   void IgnoreSorting(bool value) { ignore_sorting_ = value; }
+
+  void ClearStreamMetadata();
+  void SetStreamMetadata(const QUrl& url, const Song& song);
 
  private:
   void SetCurrentIsPaused(bool paused);

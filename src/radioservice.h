@@ -5,7 +5,9 @@
 #include <QList>
 #include <QUrl>
 
-class RadioItem;
+#include "radioitem.h"
+
+class Song;
 
 class RadioService : public QObject {
   Q_OBJECT
@@ -19,7 +21,7 @@ class RadioService : public QObject {
   virtual RadioItem* CreateRootItem(RadioItem* parent) = 0;
   virtual void LazyPopulate(RadioItem* item) = 0;
 
-  virtual QList<QUrl> UrlsForItem(RadioItem* item) = 0;
+  virtual QList<RadioItem::PlaylistData> DataForItem(RadioItem* item) = 0;
   virtual void StartLoading(const QUrl& url) = 0;
 
  signals:
@@ -28,6 +30,7 @@ class RadioService : public QObject {
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void StreamFinished();
   void StreamError(const QString& message);
+  void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
  private:
   QString name_;

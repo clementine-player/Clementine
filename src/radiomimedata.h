@@ -10,6 +10,7 @@ class RadioMimeData : public QMimeData {
 
  public:
   QList<RadioService*> services;
+  QList<QString> titles;
 };
 
 #endif // RADIOMIMEDATA_H
