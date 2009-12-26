@@ -2,7 +2,9 @@
 # Project created by QtCreator 2009-12-15T18:38:35
 # -------------------------------------------------
 QT += sql \
-    network opengl xml
+    network \
+    opengl \
+    xml
 TARGET = tangerine
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -24,7 +26,6 @@ SOURCES += main.cpp \
     backgroundthread.cpp \
     librarywatcher.cpp \
     song.cpp \
-    songmimedata.cpp \
     songplaylistitem.cpp \
     libraryview.cpp \
     libraryconfig.cpp \
@@ -38,7 +39,9 @@ SOURCES += main.cpp \
     lastfmservice.cpp \
     radiomodel.cpp \
     lastfmconfig.cpp \
-    busyindicator.cpp
+    busyindicator.cpp \
+    radioplaylistitem.cpp \
+    radioloadingindicator.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -76,11 +79,15 @@ HEADERS += mainwindow.h \
     simpletreemodel.h \
     radiomodel.h \
     lastfmconfig.h \
-    busyindicator.h
+    busyindicator.h \
+    radiomimedata.h \
+    radioplaylistitem.h \
+    radioloadingindicator.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
-    lastfmconfig.ui
+    lastfmconfig.ui \
+    radioloadingindicator.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

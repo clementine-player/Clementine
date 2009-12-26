@@ -11,14 +11,15 @@
 const char* LastFMService::kSettingsGroup = "Last.fm";
 
 LastFMService::LastFMService(QObject* parent)
-  : RadioService("Last.fm", parent)
+  : RadioService("Last.fm", parent),
+    tuner_(NULL)
 {
   lastfm::ws::ApiKey = "75d20fb472be99275392aefa2760ea09";
   lastfm::ws::SharedSecret = "d3072b60ae626be12be69448f5c46e70";
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  lastfm::ws::Username = settings.value("user").toString();
+  lastfm::ws::Username = settings.value("username").toString();
   lastfm::ws::SessionKey = settings.value("session").toString();
 
   config_ = new LastFMConfig(this);
@@ -63,6 +64,7 @@ RadioItem* LastFMService::CreateStationItem(ItemType type, const QString& name,
   RadioItem* ret = new RadioItem(this, type, name, parent);
   ret->lazy_loaded = true;
   ret->icon = QIcon(icon);
+  ret->playable = true;
 
   return ret;
 }
@@ -103,4 +105,91 @@ void LastFMService::AuthenticateReplyFinished() {
   settings.setValue("session", lastfm::ws::SessionKey);
 
   emit AuthenticationComplete(true);
+}
+
+QList<QUrl> LastFMService::UrlsForItem(RadioItem* item) {
+  QList<QUrl> ret;
+
+  switch (item->type) {
+    case Type_MyRecommendations:
+      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/recommended");
+      break;
+
+    case Type_MyLoved:
+      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/loved");
+      break;
+
+    case Type_MyNeighbourhood:
+      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/neighbours");
+      break;
+
+    case Type_MyRadio:
+      ret << QUrl("lastfm://user/" + lastfm::ws::Username + "/library");
+      break;
+  }
+
+  return ret;
+}
+
+void LastFMService::StartLoading(const QUrl& url) {
+  if (url.scheme() != "lastfm")
+    return;
+  if (lastfm::ws::SessionKey.isEmpty())
+    return;
+
+  emit LoadingStarted();
+
+  delete tuner_;
+  last_url_ = url;
+  tuner_ = new lastfm::RadioTuner(lastfm::RadioStation(url));
+  connect(tuner_, SIGNAL(trackAvailable()), SLOT(TunerTrackAvailable()));
+  connect(tuner_, SIGNAL(error(lastfm::ws::Error)), SLOT(TunerError(lastfm::ws::Error)));
+}
+
+void LastFMService::TunerError(lastfm::ws::Error error) {
+  emit LoadingFinished();
+
+  if (error == lastfm::ws::NotEnoughContent) {
+    emit StreamFinished();
+    return;
+  }
+
+  emit StreamError(ErrorString(error));
+  qDebug() << "Last.fm error" << error;
+}
+
+QString LastFMService::ErrorString(lastfm::ws::Error error) const {
+  switch (error) {
+    case lastfm::ws::InvalidService: return "Invalid service";
+    case lastfm::ws::InvalidMethod: return "Invalid method";
+    case lastfm::ws::AuthenticationFailed: return "Authentication failed";
+    case lastfm::ws::InvalidFormat: return "Invalid format";
+    case lastfm::ws::InvalidParameters: return "Invalid parameters";
+    case lastfm::ws::InvalidResourceSpecified: return "Invalid resource specified";
+    case lastfm::ws::OperationFailed: return "Operation failed";
+    case lastfm::ws::InvalidSessionKey: return "Invalid session key";
+    case lastfm::ws::InvalidApiKey: return "Invalid API key";
+    case lastfm::ws::ServiceOffline: return "Service offline";
+    case lastfm::ws::SubscribersOnly: return "This stream is for paid subscribers only";
+
+    case lastfm::ws::TryAgainLater: return "Last.fm is currently busy, please try again in a few minutes";
+
+    case lastfm::ws::NotEnoughContent: return "Not enough content";
+    case lastfm::ws::NotEnoughMembers: return "Not enough members";
+    case lastfm::ws::NotEnoughFans: return "Not enough fans";
+    case lastfm::ws::NotEnoughNeighbours: return "Not enough neighbours";
+
+    case lastfm::ws::MalformedResponse: return "Malformed response";
+
+    case lastfm::ws::UnknownError:
+    default:
+      return "Unknown error";
+  }
+}
+
+void LastFMService::TunerTrackAvailable() {
+  emit LoadingFinished();
+
+  lastfm::Track track = tuner_->takeNextTrack();
+  emit StreamReady(last_url_, track.url());
 }

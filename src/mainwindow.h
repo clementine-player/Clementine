@@ -55,10 +55,10 @@ class MainWindow : public QMainWindow {
 
   Ui::MainWindow ui_;
 
+  RadioModel* radio_model_;
   Playlist* playlist_;
   Player* player_;
   Library* library_;
-  RadioModel* radio_model_;
 
   QSortFilterProxyModel* library_sort_model_;
 

@@ -1,6 +1,8 @@
 #include "playlist.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
+#include "radiomimedata.h"
+#include "radioplaylistitem.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -117,10 +119,12 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
   if (action == Qt::IgnoreAction)
     return false;
 
-  QList<PlaylistItem*> added_items;
   if (const SongMimeData* song_data = qobject_cast<const SongMimeData*>(data)) {
     // Dragged from the library
     InsertSongs(song_data->songs, row);
+  } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
+    // Dragged from the Radio pane
+    InsertRadioStations(radio_data->services, radio_data->urls(), row);
   } else if (data->hasFormat(kRowsMimetype)) {
     // Dragged from the playlist
     // Rearranging it is tricky...
@@ -228,6 +232,17 @@ QModelIndex Playlist::InsertSongs(const SongList& songs, int after) {
   QList<PlaylistItem*> items;
   foreach (const Song& song, songs) {
     items << new SongPlaylistItem(song);
+  }
+  return InsertItems(items, after);
+}
+
+QModelIndex Playlist::InsertRadioStations(const QList<RadioService*>& services,
+                                          const QList<QUrl>& urls, int after) {
+  Q_ASSERT(services.count() == urls.count());
+
+  QList<PlaylistItem*> items;
+  for (int i=0 ; i<services.count() ; ++i) {
+    items << new RadioPlaylistItem(services[i], urls[i]);
   }
   return InsertItems(items, after);
 }

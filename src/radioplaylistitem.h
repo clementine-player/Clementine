@@ -1,0 +1,34 @@
+#ifndef RADIOPLAYLISTITEM_H
+#define RADIOPLAYLISTITEM_H
+
+#include "playlistitem.h"
+
+#include <QUrl>
+
+class RadioService;
+
+class RadioPlaylistItem : public PlaylistItem {
+ public:
+  RadioPlaylistItem();
+  RadioPlaylistItem(RadioService* service, const QUrl& url);
+
+  Type type() const { return Type_Radio; }
+
+  void Save(QSettings& settings) const;
+  void Restore(const QSettings& settings);
+
+  QString Title() const;
+  QString Artist() const;
+  QString Album() const;
+  int Length() const;
+  int Track() const;
+
+  bool StartLoading();
+  QUrl Url();
+
+ private:
+  RadioService* service_;
+  QUrl url_;
+};
+
+#endif // RADIOPLAYLISTITEM_H

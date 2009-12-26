@@ -4,6 +4,8 @@
 #include <QStyledItemDelegate>
 #include <QTreeView>
 
+class RadioLoadingIndicator;
+
 class PlaylistDelegateBase : public QStyledItemDelegate {
  public:
   PlaylistDelegateBase(QTreeView* view);
@@ -28,6 +30,9 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
+  // QWidget
+  void resizeEvent(QResizeEvent *event);
+
   // QTreeView
   void setModel(QAbstractItemModel *model);
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -39,6 +44,9 @@ class PlaylistView : public QTreeView {
  public slots:
   void StopGlowing();
   void StartGlowing();
+
+  void StartRadioLoading();
+  void StopRadioLoading();
 
  protected:
   void hideEvent(QHideEvent* event);
@@ -74,6 +82,8 @@ class PlaylistView : public QTreeView {
 
   QMenu* menu_;
   QModelIndex menu_index_;
+
+  RadioLoadingIndicator* radio_loading_;
 };
 
 #endif // PLAYLISTVIEW_H

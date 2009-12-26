@@ -3,6 +3,8 @@
 
 #include "radioservice.h"
 
+#include <lastfm/RadioTuner>
+
 class LastFMConfig;
 
 class LastFMService : public RadioService {
@@ -21,8 +23,11 @@ class LastFMService : public RadioService {
     Type_MyNeighbourhood,
   };
 
+  // RadioService
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem *item);
+  QList<QUrl> UrlsForItem(RadioItem* item);
+  void StartLoading(const QUrl& url);
 
   void Authenticate(const QString& username, const QString& password);
 
@@ -32,12 +37,18 @@ class LastFMService : public RadioService {
  private slots:
   void AuthenticateReplyFinished();
 
+  void TunerTrackAvailable();
+  void TunerError(lastfm::ws::Error error);
+
  private:
   RadioItem* CreateStationItem(ItemType type, const QString& name,
                                const QString& icon, RadioItem* parent);
+  QString ErrorString(lastfm::ws::Error error) const;
 
  private:
   LastFMConfig* config_;
+  lastfm::RadioTuner* tuner_;
+  QUrl last_url_;
 };
 
 #endif // LASTFMSERVICE_H

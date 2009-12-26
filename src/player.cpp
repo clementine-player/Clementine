@@ -99,5 +99,21 @@ Engine::State Player::GetState() const {
 
 void Player::PlayAt(int index) {
   playlist_->set_current_item(index);
-  engine_->play(playlist_->item_at(index)->Url());
+
+  PlaylistItem* item = playlist_->item_at(index);
+
+  if (!item->StartLoading())
+    engine_->play(item->Url());
+}
+
+void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
+  int current_index = playlist_->current_item();
+  if (current_index == -1)
+    return;
+
+  PlaylistItem* item = playlist_->item_at(current_index);
+  if (!item || item->Url() != original_url)
+    return;
+
+  engine_->play(media_url);
 }

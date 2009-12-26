@@ -15,6 +15,7 @@ class PlaylistItem {
 
   enum Type {
     Type_Song,
+    Type_Radio,
   };
 
   virtual Type type() const = 0;
@@ -29,6 +30,11 @@ class PlaylistItem {
   virtual int Length() const = 0;
   virtual int Track() const = 0;
 
+  // If the item needs to do anything special before it can play (eg. start
+  // streaming the radio stream), then it should implement StartLoading() and
+  // return true.  If it returns false then the URL from Url() will be passed
+  // directly to xine instead.
+  virtual bool StartLoading() { return false; }
   virtual QUrl Url() = 0;
 };
 

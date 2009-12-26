@@ -23,10 +23,10 @@ const char* MainWindow::kSettingsGroup = "MainWindow";
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent),
+    radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, this)),
     library_(new Library(player_->GetEngine(), this)),
-    radio_model_(new RadioModel(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     tray_icon_(new SystemTrayIcon(this))
 {
@@ -136,6 +136,13 @@ MainWindow::MainWindow(QWidget *parent)
   library_menu->addSeparator();
   library_menu->addAction("Configure library...", library_, SLOT(ShowConfig()));
   ui_.library_options->setMenu(library_menu);
+
+  // Radio connections
+  connect(radio_model_, SIGNAL(LoadingStarted()), ui_.playlist, SLOT(StartRadioLoading()));
+  connect(radio_model_, SIGNAL(LoadingFinished()), ui_.playlist, SLOT(StopRadioLoading()));
+  connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
+  connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(Next()));
+  connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
 
   // Tray icon
   QMenu* tray_menu = new QMenu(this);

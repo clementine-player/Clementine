@@ -19,6 +19,7 @@ class RadioItem : public SimpleTreeItem<RadioItem> {
 
   QIcon icon;
   RadioService* service;
+  bool playable;
 };
 
 #endif // RADIOITEM_H
