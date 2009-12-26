@@ -20,6 +20,8 @@ Library::Library(EngineBase* engine, QObject* parent)
     album_icon_(":album.png"),
     config_(new LibraryConfig)
 {
+  root_->lazy_loaded = true;
+
   connect(backend_, SIGNAL(Initialised()), SLOT(BackendInitialised()));
   connect(watcher_, SIGNAL(Initialised()), SLOT(WatcherInitialised()));
   waiting_for_threads_ = 2;
@@ -143,6 +145,7 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
 
       LibraryItem* divider =
           new LibraryItem(LibraryItem::Type_Divider, QString(divider_char), root_);
+      divider->lazy_loaded = true;
 
       if (divider_char.isDigit())
         divider->display_text = "0-9";
@@ -180,6 +183,7 @@ LibraryItem* Library::CreateSongNode(bool signal, const Song& song, LibraryItem*
     beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
   LibraryItem* ret = new LibraryItem(LibraryItem::Type_Song, song.title(), parent);
+  ret->lazy_loaded = true;
   ret->display_text = song.PrettyTitleWithArtist();
   ret->song = song;
 
@@ -398,6 +402,7 @@ void Library::Reset() {
   compilation_artist_node_ = NULL;
 
   root_ = new LibraryItem(LibraryItem::Type_Root);
+  root_->lazy_loaded = true;
 
   // Various artists?
   if (backend_->Worker()->HasCompilations(query_options_))

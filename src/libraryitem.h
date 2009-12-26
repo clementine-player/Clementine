@@ -5,8 +5,10 @@
 #include <QList>
 
 #include "song.h"
+#include "simpletreeitem.h"
 
-struct LibraryItem {
+class LibraryItem : public SimpleTreeItem<LibraryItem> {
+ public:
   enum Type {
     Type_Root,
     Type_Divider,
@@ -17,25 +19,10 @@ struct LibraryItem {
     Type_Song,
   };
 
-  LibraryItem(Type _type, const QString& _key = QString::null, LibraryItem* _parent = NULL);
-  ~LibraryItem();
+  LibraryItem(Type type, const QString& key = QString::null, LibraryItem* parent = NULL)
+    : SimpleTreeItem<LibraryItem>(type, key, parent) {}
 
-  void Delete(int child_row);
-  LibraryItem* ChildByKey(const QString& key) const;
-
-  QString DisplayText() const { return display_text.isNull() ? key : display_text; }
-  QString SortText() const { return sort_text.isNull() ? key : sort_text; }
-
-  Type type;
-  QString key;
-  QString sort_text;
-  QString display_text;
-  int row;
-  bool lazy_loaded;
   Song song;
-
-  LibraryItem* parent;
-  QList<LibraryItem*> children;
 };
 
 #endif // LIBRARYITEM_H

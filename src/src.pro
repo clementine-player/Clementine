@@ -27,7 +27,6 @@ SOURCES += main.cpp \
     songmimedata.cpp \
     songplaylistitem.cpp \
     libraryview.cpp \
-    libraryitem.cpp \
     libraryconfig.cpp \
     systemtrayicon.cpp \
     libraryquery.cpp \
@@ -63,7 +62,8 @@ HEADERS += mainwindow.h \
     libraryquery.h \
     fileview.h \
     fileviewlist.h \
-    playlistheader.h
+    playlistheader.h \
+    simpletreeitem.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui
