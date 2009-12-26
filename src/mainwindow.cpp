@@ -5,6 +5,7 @@
 #include "libraryconfig.h"
 #include "songplaylistitem.h"
 #include "systemtrayicon.h"
+#include "radiomodel.h"
 
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, this)),
     library_(new Library(player_->GetEngine(), this)),
+    radio_model_(new RadioModel(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     tray_icon_(new SystemTrayIcon(this))
 {
@@ -46,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.playlist->setModel(playlist_);
   ui_.library_view->setModel(library_sort_model_);
   ui_.library_view->SetLibrary(library_);
+
+  ui_.radio_view->setModel(radio_model_);
 
   // File view connections
   connect(ui_.file_view, SIGNAL(Queue(QList<QUrl>)), SLOT(QueueFiles(QList<QUrl>)));

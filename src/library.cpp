@@ -11,11 +11,10 @@
 
 
 Library::Library(EngineBase* engine, QObject* parent)
-  : QAbstractItemModel(parent),
+  : SimpleTreeModel<LibraryItem>(new LibraryItem(LibraryItem::Type_Root), parent),
     engine_(engine),
     backend_(new BackgroundThread<LibraryBackend>(this)),
     watcher_(new BackgroundThread<LibraryWatcher>(this)),
-    root_(new LibraryItem(LibraryItem::Type_Root)),
     artist_icon_(":artist.png"),
     album_icon_(":album.png"),
     config_(new LibraryConfig)
@@ -280,22 +279,6 @@ void Library::SongsDeleted(const SongList& songs) {
   }
 }
 
-LibraryItem* Library::IndexToItem(const QModelIndex& index) const {
-  if (!index.isValid())
-    return root_;
-  return reinterpret_cast<LibraryItem*>(index.internalPointer());
-}
-
-QModelIndex Library::ItemToIndex(LibraryItem* item) const {
-  if (!item || !item->parent)
-    return QModelIndex();
-  return createIndex(item->row, 0, item);
-}
-
-int Library::columnCount(const QModelIndex &) const {
-  return 1;
-}
-
 QVariant Library::data(const QModelIndex& index, int role) const {
   const LibraryItem* item = IndexToItem(index);
 
@@ -332,33 +315,6 @@ QVariant Library::data(const LibraryItem* item, int role) const {
       return item->SortText();
   }
   return QVariant();
-}
-
-QModelIndex Library::index(int row, int, const QModelIndex& parent) const {
-  LibraryItem* parent_item = IndexToItem(parent);
-  if (!parent_item || parent_item->children.count() <= row)
-    return QModelIndex();
-
-  return ItemToIndex(parent_item->children[row]);
-}
-
-QModelIndex Library::parent(const QModelIndex& index) const {
-  return ItemToIndex(IndexToItem(index)->parent);
-}
-
-int Library::rowCount(const QModelIndex & parent) const {
-  LibraryItem* item = IndexToItem(parent);
-  const_cast<Library*>(this)->LazyPopulate(item); // Ahem
-
-  return item->children.count();
-}
-
-bool Library::hasChildren(const QModelIndex &parent) const {
-  LibraryItem* item = IndexToItem(parent);
-  if (item->lazy_loaded)
-    return !item->children.isEmpty();
-  else
-    return true;
 }
 
 void Library::LazyPopulate(LibraryItem* item) {

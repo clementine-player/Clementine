@@ -10,6 +10,7 @@ class Playlist;
 class Player;
 class Library;
 class LibraryConfig;
+class RadioModel;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -57,6 +58,7 @@ class MainWindow : public QMainWindow {
   Playlist* playlist_;
   Player* player_;
   Library* library_;
+  RadioModel* radio_model_;
 
   QSortFilterProxyModel* library_sort_model_;
 

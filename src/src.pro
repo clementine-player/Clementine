@@ -32,7 +32,11 @@ SOURCES += main.cpp \
     libraryquery.cpp \
     fileview.cpp \
     fileviewlist.cpp \
-    playlistheader.cpp
+    playlistheader.cpp \
+    radioitem.cpp \
+    radioservice.cpp \
+    lastfmservice.cpp \
+    radiomodel.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -63,7 +67,12 @@ HEADERS += mainwindow.h \
     fileview.h \
     fileviewlist.h \
     playlistheader.h \
-    simpletreeitem.h
+    simpletreeitem.h \
+    radioitem.h \
+    radioservice.h \
+    lastfmservice.h \
+    simpletreemodel.h \
+    radiomodel.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui

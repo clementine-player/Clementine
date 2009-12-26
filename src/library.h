@@ -10,11 +10,12 @@
 #include "libraryquery.h"
 #include "engine_fwd.h"
 #include "song.h"
+#include "libraryitem.h"
+#include "simpletreemodel.h"
 
-class LibraryItem;
 class LibraryConfig;
 
-class Library : public QAbstractItemModel {
+class Library : public SimpleTreeModel<LibraryItem> {
   Q_OBJECT
 
  public:
@@ -34,12 +35,7 @@ class Library : public QAbstractItemModel {
   SongList GetChildSongs(const QModelIndex& index) const;
 
   // QAbstractItemModel
-  int columnCount(const QModelIndex & parent = QModelIndex()) const;
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-  QModelIndex index(int row, int column, const QModelIndex & parent = QModelIndex()) const;
-  QModelIndex parent(const QModelIndex & index) const;
-  int rowCount(const QModelIndex & parent = QModelIndex()) const;
-  bool hasChildren(const QModelIndex &parent) const;
   Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
@@ -54,6 +50,9 @@ class Library : public QAbstractItemModel {
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);
 
+ protected:
+  void LazyPopulate(LibraryItem* item);
+
  private slots:
   // From LibraryBackend
   void BackendInitialised();
@@ -66,7 +65,6 @@ class Library : public QAbstractItemModel {
 
  private:
   void Initialise();
-  void LazyPopulate(LibraryItem* item);
 
   LibraryItem* CreateCompilationArtistNode(bool signal);
   LibraryItem* CreateArtistNode(bool signal, const QString& name);
@@ -79,8 +77,6 @@ class Library : public QAbstractItemModel {
   QString SortTextForArtist(QString artist) const;
   QString SortTextForAlbum(QString album) const;
 
-  LibraryItem* IndexToItem(const QModelIndex& index) const;
-  QModelIndex ItemToIndex(LibraryItem* item) const;
   QVariant data(const LibraryItem* item, int role) const;
 
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
@@ -94,7 +90,6 @@ class Library : public QAbstractItemModel {
 
   QueryOptions query_options_;
 
-  LibraryItem* root_;
   QMap<int, LibraryItem*> song_nodes_;
   QMap<QString, LibraryItem*> artist_nodes_;
   QMap<QChar, LibraryItem*> divider_nodes_;
