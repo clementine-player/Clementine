@@ -27,6 +27,8 @@ class RadioPlaylistItem : public PlaylistItem {
   bool StartLoading();
   QUrl Url();
 
+  bool LoadNext();
+
   void SetTemporaryMetadata(const Song& metadata);
   void ClearTemporaryMetadata();
 

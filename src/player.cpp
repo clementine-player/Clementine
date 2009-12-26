@@ -17,7 +17,7 @@ Player::Player(Playlist* playlist, QObject* parent)
   SetVolume(settings_.value("volume", 50).toInt());
 
   connect(engine_, SIGNAL(stateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(engine_, SIGNAL(trackEnded()), SLOT(Next()));
+  connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
 }
 
 void Player::Next() {
@@ -30,6 +30,20 @@ void Player::Next() {
 
   qDebug() << "Playing item" << i;
   PlayAt(i);
+}
+
+void Player::TrackEnded() {
+  int i = playlist_->current_item();
+  if (i == -1) {
+    Stop();
+    return;
+  }
+
+  // Is this track a radio station (like Last.fm) that can have another track?
+  if (playlist_->item_at(i)->LoadNext())
+    return;
+
+  Next();
 }
 
 void Player::PlayPause() {

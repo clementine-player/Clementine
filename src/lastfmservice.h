@@ -27,7 +27,9 @@ class LastFMService : public RadioService {
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem *item);
   QList<RadioItem::PlaylistData> DataForItem(RadioItem* item);
+
   void StartLoading(const QUrl& url);
+  void LoadNext(const QUrl& url);
 
   void Authenticate(const QString& username, const QString& password);
 
@@ -49,6 +51,7 @@ class LastFMService : public RadioService {
   LastFMConfig* config_;
   lastfm::RadioTuner* tuner_;
   QUrl last_url_;
+  bool initial_tune_;
 };
 
 #endif // LASTFMSERVICE_H

@@ -39,6 +39,10 @@ class PlaylistItem {
   virtual bool StartLoading() { return false; }
   virtual QUrl Url() = 0;
 
+  // If the item is a radio station that can play another song after one has
+  // finished then it should do so and return true
+  virtual bool LoadNext() { return false; }
+
   virtual void SetTemporaryMetadata(const Song& metadata) {Q_UNUSED(metadata)}
   virtual void ClearTemporaryMetadata() {}
 };

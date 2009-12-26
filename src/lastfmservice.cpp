@@ -13,7 +13,8 @@ const char* LastFMService::kSettingsGroup = "Last.fm";
 
 LastFMService::LastFMService(QObject* parent)
   : RadioService("Last.fm", parent),
-    tuner_(NULL)
+    tuner_(NULL),
+    initial_tune_(false)
 {
   lastfm::ws::ApiKey = "75d20fb472be99275392aefa2760ea09";
   lastfm::ws::SharedSecret = "d3072b60ae626be12be69448f5c46e70";
@@ -147,13 +148,35 @@ void LastFMService::StartLoading(const QUrl& url) {
   emit LoadingStarted();
 
   delete tuner_;
+
   last_url_ = url;
+  initial_tune_ = true;
   tuner_ = new lastfm::RadioTuner(lastfm::RadioStation(url));
+
   connect(tuner_, SIGNAL(trackAvailable()), SLOT(TunerTrackAvailable()));
   connect(tuner_, SIGNAL(error(lastfm::ws::Error)), SLOT(TunerError(lastfm::ws::Error)));
 }
 
+void LastFMService::LoadNext(const QUrl &) {
+  lastfm::Track track = tuner_->takeNextTrack();
+
+  if (track.isNull()) {
+    emit StreamFinished();
+    return;
+  }
+
+  emit StreamReady(last_url_, track.url());
+
+  Song metadata;
+  metadata.InitFromLastFM(track);
+  emit StreamMetadataFound(last_url_, metadata);
+}
+
 void LastFMService::TunerError(lastfm::ws::Error error) {
+  qDebug() << "Last.fm error" << error;
+  if (!initial_tune_)
+    return;
+
   emit LoadingFinished();
 
   if (error == lastfm::ws::NotEnoughContent) {
@@ -162,7 +185,6 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   }
 
   emit StreamError(ErrorString(error));
-  qDebug() << "Last.fm error" << error;
 }
 
 QString LastFMService::ErrorString(lastfm::ws::Error error) const {
@@ -195,12 +217,10 @@ QString LastFMService::ErrorString(lastfm::ws::Error error) const {
 }
 
 void LastFMService::TunerTrackAvailable() {
-  emit LoadingFinished();
+  if (initial_tune_) {
+    emit LoadingFinished();
 
-  lastfm::Track track = tuner_->takeNextTrack();
-  emit StreamReady(last_url_, track.url());
-
-  Song metadata;
-  metadata.InitFromLastFM(track);
-  emit StreamMetadataFound(last_url_, metadata);
+    LoadNext(last_url_);
+    initial_tune_ = false;
+  }
 }

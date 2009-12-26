@@ -65,6 +65,14 @@ bool RadioPlaylistItem::StartLoading() {
   return true;
 }
 
+bool RadioPlaylistItem::LoadNext() {
+  if (service_) {
+    service_->LoadNext(url_);
+    return true;
+  }
+  return false;
+}
+
 QUrl RadioPlaylistItem::Url() {
   return url_;
 }
