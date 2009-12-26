@@ -46,6 +46,7 @@ class Playlist : public QAbstractListModel {
   int current_item() const;
   int next_item() const;
   int previous_item() const;
+  bool stop_after_current() const;
   PlaylistItem* item_at(int index) const { return items_[index]; }
 
   // Changing the playlist

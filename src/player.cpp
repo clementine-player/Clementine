@@ -34,7 +34,7 @@ void Player::Next() {
 
 void Player::TrackEnded() {
   int i = playlist_->current_item();
-  if (i == -1) {
+  if (i == -1 || playlist_->stop_after_current()) {
     Stop();
     return;
   }

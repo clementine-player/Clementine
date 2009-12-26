@@ -430,3 +430,8 @@ void Playlist::ClearStreamMetadata() {
 
   emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
 }
+
+bool Playlist::stop_after_current() const {
+  return stop_after_.isValid() && current_item_.isValid() &&
+         stop_after_.row() == current_item_.row();
+}
