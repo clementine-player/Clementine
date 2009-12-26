@@ -70,6 +70,7 @@ class Playlist : public QAbstractListModel {
   void Paused();
   void Playing();
   void Stopped();
+  void IgnoreSorting(bool value) { ignore_sorting_ = value; }
 
  private:
   void SetCurrentIsPaused(bool paused);
@@ -82,7 +83,7 @@ class Playlist : public QAbstractListModel {
   bool current_is_paused_;
 
   // Hack to stop QTreeView::setModel sorting the playlist
-  bool ignore_next_sort_;
+  bool ignore_sorting_;
 };
 
 #endif // PLAYLIST_H

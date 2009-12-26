@@ -17,7 +17,7 @@ const char* Playlist::kSettingsGroup = "Playlist";
 Playlist::Playlist(QObject *parent) :
     QAbstractListModel(parent),
     current_is_paused_(false),
-    ignore_next_sort_(true)
+    ignore_sorting_(false)
 {
 }
 
@@ -273,10 +273,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
 }
 
 void Playlist::sort(int column, Qt::SortOrder order) {
-  if (ignore_next_sort_) {
-    ignore_next_sort_ = false;
+  if (ignore_sorting_)
     return;
-  }
 
   layoutAboutToBeChanged();
 

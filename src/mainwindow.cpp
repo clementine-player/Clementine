@@ -45,7 +45,10 @@ MainWindow::MainWindow(QWidget *parent)
 
   playlist_->Restore();
 
+  playlist_->IgnoreSorting(true);
   ui_.playlist->setModel(playlist_);
+  playlist_->IgnoreSorting(false);
+
   ui_.library_view->setModel(library_sort_model_);
   ui_.library_view->SetLibrary(library_);
 
