@@ -6,6 +6,8 @@
 #include "songplaylistitem.h"
 #include "systemtrayicon.h"
 #include "radiomodel.h"
+#include "enginebase.h"
+#include "lastfmservice.h"
 
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
@@ -18,17 +20,20 @@
 #include <QCloseEvent>
 #include <QSignalMapper>
 
+#include <cmath>
+
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
 
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent),
+    tray_icon_(new SystemTrayIcon(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
-    tray_icon_(new SystemTrayIcon(this))
+    track_position_timer_(new QTimer(this))
 {
   ui_.setupUi(this);
   tray_icon_->setIcon(windowIcon());
@@ -37,6 +42,9 @@ MainWindow::MainWindow(QWidget *parent)
 
   ui_.volume->setValue(player_->GetVolume());
   ui_.last_fm_controls->hide();
+
+  track_position_timer_->setInterval(1000);
+  connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
 
   // Models
   library_sort_model_->setSourceModel(library_);
@@ -218,6 +226,8 @@ void MainWindow::MediaStopped() {
   ui_.action_ban->setVisible(false);
   ui_.action_love->setVisible(false);
   ui_.last_fm_controls->hide();
+
+  track_position_timer_->stop();
 }
 
 void MainWindow::MediaPaused() {
@@ -227,6 +237,8 @@ void MainWindow::MediaPaused() {
   ui_.action_play_pause->setText("Play");
 
   ui_.action_play_pause->setEnabled(true);
+
+  track_position_timer_->stop();
 }
 
 void MainWindow::MediaPlaying() {
@@ -242,6 +254,9 @@ void MainWindow::MediaPlaying() {
   ui_.action_ban->setVisible(lastfm);
   ui_.action_love->setVisible(lastfm);
   ui_.last_fm_controls->setVisible(lastfm);
+
+  track_position_timer_->start();
+  UpdateTrackPosition();
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
@@ -292,7 +307,7 @@ void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {
 }
 
 void MainWindow::StopAfterCurrent() {
-  playlist_->StopAfter(playlist_->current_item());
+  playlist_->StopAfter(playlist_->current_index());
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
@@ -320,4 +335,14 @@ void MainWindow::FilePathChanged(const QString& path) {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   settings.setValue("file_path", path);
+}
+
+void MainWindow::UpdateTrackPosition() {
+  int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
+
+  if (!playlist_->has_scrobbled() &&
+      position >= playlist_->scrobble_point()) {
+    radio_model_->GetLastFMService()->Scrobble(playlist_->current_item_metadata());
+    playlist_->set_scrobbled(true);
+  }
 }

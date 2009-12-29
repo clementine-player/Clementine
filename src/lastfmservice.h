@@ -54,8 +54,6 @@ class LastFMService : public RadioService {
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
 
-  void ScrobblerStatus(int status);
-
  private:
   RadioItem* CreateStationItem(ItemType type, const QString& name,
                                const QString& icon, RadioItem* parent);

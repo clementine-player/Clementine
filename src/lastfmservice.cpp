@@ -243,20 +243,13 @@ bool LastFMService::InitScrobbler() {
   if (!IsAuthenticated())
     return false;
 
-  if (!scrobbler_) {
+  if (!scrobbler_)
     scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
-    connect(scrobbler_, SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
-  }
 
   return true;
 }
 
 lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
-  qDebug() << song.title() << last_track_.title();
-  qDebug() << song.artist() << last_track_.artist();
-  qDebug() << song.album() << last_track_.album();
-  qDebug() << last_track_.fingerprintId() << last_track_.mbid();
-
   if (song.title() == last_track_.title() &&
       song.artist() == last_track_.artist() &&
       song.album() == last_track_.album())
@@ -290,8 +283,4 @@ void LastFMService::Love(const Song& song) {
 void LastFMService::Ban(const Song& song) {
   lastfm::MutableTrack mtrack(TrackFromSong(song));
   mtrack.ban();
-}
-
-void LastFMService::ScrobblerStatus(int status) {
-  qDebug() << static_cast<lastfm::Audioscrobbler::Status>(status);
 }

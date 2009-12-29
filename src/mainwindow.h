@@ -46,6 +46,8 @@ class MainWindow : public QMainWindow {
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
 
+  void UpdateTrackPosition();
+
  private:
   void SaveGeometry();
 
@@ -54,6 +56,7 @@ class MainWindow : public QMainWindow {
   static const char* kSettingsGroup;
 
   Ui::MainWindow ui_;
+  SystemTrayIcon* tray_icon_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;
@@ -62,7 +65,7 @@ class MainWindow : public QMainWindow {
 
   QSortFilterProxyModel* library_sort_model_;
 
-  SystemTrayIcon* tray_icon_;
+  QTimer* track_position_timer_;
 };
 
 #endif // MAINWINDOW_H

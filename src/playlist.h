@@ -43,12 +43,21 @@ class Playlist : public QAbstractListModel {
   void Restore();
 
   // Accessors
-  int current_item() const;
-  int next_item() const;
-  int previous_item() const;
+  int current_index() const;
+  int next_index() const;
+  int previous_index() const;
   bool stop_after_current() const;
+
   PlaylistItem* item_at(int index) const { return items_[index]; }
+  PlaylistItem* current_item() const;
+
   PlaylistItem::Options current_item_options() const;
+  Song current_item_metadata() const;
+
+  // Scrobbling
+  int scrobble_point() const { return scrobble_point_; }
+  bool has_scrobbled() const { return has_scrobbled_; }
+  void set_scrobbled(bool v) { has_scrobbled_ = v; }
 
   // Changing the playlist
   QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);
@@ -73,7 +82,7 @@ class Playlist : public QAbstractListModel {
   bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
 
  public slots:
-  void set_current_item(int index);
+  void set_current_index(int index);
   void Paused();
   void Playing();
   void Stopped();
@@ -84,6 +93,7 @@ class Playlist : public QAbstractListModel {
 
  private:
   void SetCurrentIsPaused(bool paused);
+  void UpdateScrobblePoint();
 
  private:
   QList<PlaylistItem*> items_;
@@ -91,6 +101,9 @@ class Playlist : public QAbstractListModel {
   QPersistentModelIndex current_item_;
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
+
+  int scrobble_point_;
+  bool has_scrobbled_;
 
   // Hack to stop QTreeView::setModel sorting the playlist
   bool ignore_sorting_;

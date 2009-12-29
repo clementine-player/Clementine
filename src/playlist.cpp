@@ -13,13 +13,17 @@
 
 #include <boost/bind.hpp>
 
+#include <lastfm/ScrobblePoint>
+
 const char* Playlist::kRowsMimetype = "application/x-tangerine-playlist-rows";
 const char* Playlist::kSettingsGroup = "Playlist";
 
 Playlist::Playlist(QObject *parent) :
     QAbstractListModel(parent),
     current_is_paused_(false),
-    ignore_sorting_(false)
+    ignore_sorting_(false),
+    scrobble_point_(-1),
+    has_scrobbled_(false)
 {
 }
 
@@ -71,28 +75,28 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
   }
 }
 
-int Playlist::current_item() const {
+int Playlist::current_index() const {
   return current_item_.isValid() ? current_item_.row() : -1;
 }
 
-int Playlist::next_item() const {
-  int i = current_item() + 1;
+int Playlist::next_index() const {
+  int i = current_index() + 1;
   if (i >= items_.count())
     return -1;
-  if (stop_after_.isValid() && current_item() == stop_after_.row())
+  if (stop_after_.isValid() && current_index() == stop_after_.row())
     return -1;
 
   return i;
 }
 
-int Playlist::previous_item() const {
-  int i = current_item() - 1;
+int Playlist::previous_index() const {
+  int i = current_index() - 1;
   if (i < 0)
     return -1;
   return i;
 }
 
-void Playlist::set_current_item(int i) {
+void Playlist::set_current_index(int i) {
   QModelIndex old_current = current_item_;
   ClearStreamMetadata();
 
@@ -102,6 +106,8 @@ void Playlist::set_current_item(int i) {
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount));
   if (current_item_.isValid())
     emit dataChanged(current_item_, current_item_.sibling(current_item_.row(), ColumnCount));
+
+  UpdateScrobblePoint();
 }
 
 Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
@@ -387,7 +393,7 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
 
   // Remove items
   for (int i=0 ; i<count ; ++i)
-    items_.removeAt(row);
+    delete items_.takeAt(row);
 
   endRemoveRows();
 
@@ -418,6 +424,7 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
     return;
 
   item->SetTemporaryMetadata(song);
+  UpdateScrobblePoint();
 
   emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
 }
@@ -428,6 +435,7 @@ void Playlist::ClearStreamMetadata() {
 
   PlaylistItem* item = items_[current_item_.row()];
   item->ClearTemporaryMetadata();
+  UpdateScrobblePoint();
 
   emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
 }
@@ -437,14 +445,34 @@ bool Playlist::stop_after_current() const {
          stop_after_.row() == current_item_.row();
 }
 
-PlaylistItem::Options Playlist::current_item_options() const {
-  int i = current_item();
+PlaylistItem* Playlist::current_item() const {
+  int i = current_index();
   if (i == -1)
-    return PlaylistItem::Default;
+    return NULL;
 
-  PlaylistItem* item = item_at(i);
+  return item_at(i);
+}
+
+PlaylistItem::Options Playlist::current_item_options() const {
+  PlaylistItem* item = current_item();
   if (!item)
     return PlaylistItem::Default;
 
   return item->options();
+}
+
+Song Playlist::current_item_metadata() const {
+  PlaylistItem* item = current_item();
+  if (!item)
+    return Song();
+
+  return item->Metadata();
+}
+
+void Playlist::UpdateScrobblePoint() {
+  int length = current_item_metadata().length();
+
+  ScrobblePoint point(length / 2);
+  scrobble_point_ = point;
+  has_scrobbled_ = false;
 }

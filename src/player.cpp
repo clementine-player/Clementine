@@ -23,8 +23,8 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 }
 
 void Player::Next() {
-  int i = playlist_->next_item();
-  playlist_->set_current_item(i);
+  int i = playlist_->next_index();
+  playlist_->set_current_index(i);
   if (i == -1) {
     Stop();
     return;
@@ -35,7 +35,7 @@ void Player::Next() {
 }
 
 void Player::TrackEnded() {
-  int i = playlist_->current_item();
+  int i = playlist_->current_index();
   if (i == -1 || playlist_->stop_after_current()) {
     Stop();
     return;
@@ -63,7 +63,7 @@ void Player::PlayPause() {
 
   case Engine::Empty:
   case Engine::Idle: {
-    int i = playlist_->current_item();
+    int i = playlist_->current_index();
     if (i == -1) {
       if (playlist_->rowCount() == 0)
         break;
@@ -78,12 +78,12 @@ void Player::PlayPause() {
 void Player::Stop() {
   qDebug() << "Stopping";
   engine_->stop();
-  playlist_->set_current_item(-1);
+  playlist_->set_current_index(-1);
 }
 
 void Player::Previous() {
-  int i = playlist_->previous_item();
-  playlist_->set_current_item(i);
+  int i = playlist_->previous_index();
+  playlist_->set_current_index(i);
   if (i == -1) {
     Stop();
     return;
@@ -115,7 +115,7 @@ Engine::State Player::GetState() const {
 }
 
 void Player::PlayAt(int index) {
-  playlist_->set_current_item(index);
+  playlist_->set_current_index(index);
 
   PlaylistItem* item = playlist_->item_at(index);
 
@@ -128,7 +128,7 @@ void Player::PlayAt(int index) {
 }
 
 void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
-  int current_index = playlist_->current_item();
+  int current_index = playlist_->current_index();
   if (current_index == -1)
     return;
 
