@@ -435,3 +435,15 @@ bool Playlist::stop_after_current() const {
   return stop_after_.isValid() && current_item_.isValid() &&
          stop_after_.row() == current_item_.row();
 }
+
+PlaylistItem::Options Playlist::current_item_options() const {
+  int i = current_item();
+  if (i == -1)
+    return PlaylistItem::Default;
+
+  PlaylistItem* item = item_at(i);
+  if (!item)
+    return PlaylistItem::Default;
+
+  return item->options();
+}

@@ -48,6 +48,7 @@ class Playlist : public QAbstractListModel {
   int previous_item() const;
   bool stop_after_current() const;
   PlaylistItem* item_at(int index) const { return items_[index]; }
+  PlaylistItem::Options current_item_options() const;
 
   // Changing the playlist
   QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);

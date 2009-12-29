@@ -207,6 +207,8 @@ void MainWindow::MediaStopped() {
   ui_.action_stop_after_this_track->setEnabled(false);
   ui_.action_play_pause->setIcon(QIcon(":media-playback-start.png"));
   ui_.action_play_pause->setText("Play");
+
+  ui_.action_play_pause->setEnabled(true);
 }
 
 void MainWindow::MediaPaused() {
@@ -214,6 +216,8 @@ void MainWindow::MediaPaused() {
   ui_.action_stop_after_this_track->setEnabled(true);
   ui_.action_play_pause->setIcon(QIcon(":media-playback-start.png"));
   ui_.action_play_pause->setText("Play");
+
+  ui_.action_play_pause->setEnabled(true);
 }
 
 void MainWindow::MediaPlaying() {
@@ -221,6 +225,9 @@ void MainWindow::MediaPlaying() {
   ui_.action_stop_after_this_track->setEnabled(true);
   ui_.action_play_pause->setIcon(QIcon(":media-playback-pause.png"));
   ui_.action_play_pause->setText("Pause");
+
+  ui_.action_play_pause->setEnabled(
+      ! playlist_->current_item_options() & PlaylistItem::PauseDisabled);
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
