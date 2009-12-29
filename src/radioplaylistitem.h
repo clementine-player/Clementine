@@ -19,11 +19,7 @@ class RadioPlaylistItem : public PlaylistItem {
   void Save(QSettings& settings) const;
   void Restore(const QSettings& settings);
 
-  QString Title() const;
-  QString Artist() const;
-  QString Album() const;
-  int Length() const;
-  int Track() const;
+  Song Metadata() const;
 
   void StartLoading();
   QUrl Url();
@@ -34,11 +30,15 @@ class RadioPlaylistItem : public PlaylistItem {
   void ClearTemporaryMetadata();
 
  private:
+  void InitMetadata();
+
+ private:
   RadioService* service_;
   QUrl url_;
   QString title_;
 
   Song metadata_;
+  Song temp_metadata_;
 };
 
 #endif // RADIOPLAYLISTITEM_H

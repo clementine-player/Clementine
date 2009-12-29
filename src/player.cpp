@@ -1,12 +1,14 @@
 #include "player.h"
 #include "playlist.h"
 #include "xine-engine.h"
+#include "lastfmservice.h"
 
 #include <QtDebug>
 
-Player::Player(Playlist* playlist, QObject* parent)
+Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   : QObject(parent),
     playlist_(playlist),
+    lastfm_(lastfm),
     engine_(new XineEngine)
 {
   if (!engine_->init()) {
@@ -119,8 +121,10 @@ void Player::PlayAt(int index) {
 
   if (item->options() & PlaylistItem::SpecialPlayBehaviour)
     item->StartLoading();
-  else
+  else {
     engine_->play(item->Url());
+    lastfm_->NowPlaying(item->Metadata());
+  }
 }
 
 void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
@@ -133,4 +137,5 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
     return;
 
   engine_->play(media_url);
+  lastfm_->NowPlaying(item->Metadata());
 }

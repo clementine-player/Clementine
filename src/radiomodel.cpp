@@ -111,3 +111,9 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
 
   return data;
 }
+
+LastFMService* RadioModel::GetLastFMService() const {
+  if (sServices.contains(LastFMService::kServiceName))
+    return static_cast<LastFMService*>(sServices[LastFMService::kServiceName]);
+  return NULL;
+}

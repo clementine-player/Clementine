@@ -24,26 +24,6 @@ void SongPlaylistItem::Restore(const QSettings& settings) {
   song_.InitFromFile(filename, directory_id);
 }
 
-QString SongPlaylistItem::Title() const {
-  return song_.PrettyTitle();
-}
-
-QString SongPlaylistItem::Artist() const {
-  return song_.artist();
-}
-
-QString SongPlaylistItem::Album() const {
-  return song_.album();
-}
-
-int SongPlaylistItem::Length() const {
-  return song_.length();
-}
-
-int SongPlaylistItem::Track() const {
-  return song_.track();
-}
-
 QUrl SongPlaylistItem::Url() {
   QUrl ret(QUrl::fromLocalFile(song_.filename()));
   ret.setHost("localhost");

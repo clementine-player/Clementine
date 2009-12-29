@@ -9,6 +9,7 @@ namespace lastfm {
   class Track;
 }
 
+// TODO: QSharedData
 class Song {
  public:
   Song();
@@ -24,6 +25,7 @@ class Song {
 
   // Save
   void BindToQuery(QSqlQuery* query) const;
+  void ToLastFM(lastfm::Track* track) const;
 
   // Simple accessors
   bool is_valid() const { return valid_; }
@@ -59,6 +61,7 @@ class Song {
 
   // Setters
   void set_id(int id) { id_ = id; }
+  void set_title(const QString& title) { title_ = title; }
 
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;

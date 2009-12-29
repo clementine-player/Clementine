@@ -55,13 +55,14 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
 
     case Qt::DisplayRole: {
       PlaylistItem* item = items_[index.row()];
+      Song song = item->Metadata();
 
       switch (index.column()) {
-        case Column_Title:    return item->Title();
-        case Column_Artist:   return item->Artist();
-        case Column_Album:    return item->Album();
-        case Column_Length:   return item->Length();
-        case Column_Track:    return item->Track();
+        case Column_Title:    return song.title();
+        case Column_Artist:   return song.artist();
+        case Column_Album:    return song.album();
+        case Column_Length:   return song.length();
+        case Column_Track:    return song.track();
       }
     }
 
@@ -282,11 +283,11 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
   const PlaylistItem* b = order == Qt::AscendingOrder ? _b : _a;
 
   switch (column) {
-    case Column_Title:  return a->Title() < b->Title();
-    case Column_Artist: return a->Artist() < b->Artist();
-    case Column_Album:  return a->Album() < b->Album();
-    case Column_Length: return a->Length() < b->Length();
-    case Column_Track:  return a->Track() < b->Track();
+    case Column_Title:  return a->Metadata().title() < b->Metadata().title();
+    case Column_Artist: return a->Metadata().artist() < b->Metadata().artist();
+    case Column_Album:  return a->Metadata().album() < b->Metadata().album();
+    case Column_Length: return a->Metadata().length() < b->Metadata().length();
+    case Column_Track:  return a->Metadata().track() < b->Metadata().track();
   }
   return false;
 }

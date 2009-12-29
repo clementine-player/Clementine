@@ -5,6 +5,7 @@
 #include "simpletreemodel.h"
 
 class RadioService;
+class LastFMService;
 class Song;
 
 class RadioModel : public SimpleTreeModel<RadioItem> {
@@ -21,6 +22,9 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
 
   // Needs to be static for RadioPlaylistItem::restore
   static RadioService* ServiceByName(const QString& name);
+
+  // This is special because Player needs it for scrobbling
+  LastFMService* GetLastFMService() const;
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

@@ -6,6 +6,7 @@
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("Tangerine");
+  QCoreApplication::setApplicationVersion("0.1");
   QCoreApplication::setOrganizationName("Tangerine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 

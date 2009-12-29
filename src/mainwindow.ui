@@ -137,6 +137,51 @@
         </widget>
        </item>
        <item>
+        <widget class="QWidget" name="last_fm_controls" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="love_button">
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="ban_button">
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="autoRaise">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="Line" name="line">
          <property name="maximumSize">
           <size>
@@ -487,6 +532,30 @@
    </property>
    <property name="text">
     <string>Added this month</string>
+   </property>
+  </action>
+  <action name="action_love">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
+   </property>
+   <property name="text">
+    <string>Love</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="action_ban">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ban</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
    </property>
   </action>
  </widget>

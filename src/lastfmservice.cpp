@@ -6,18 +6,24 @@
 #include <lastfm/ws.h>
 #include <lastfm/misc.h>
 #include <lastfm/XmlQuery>
+#include <lastfm/Audioscrobbler>
 
 #include <QSettings>
 
+const char* LastFMService::kServiceName = "Last.fm";
 const char* LastFMService::kSettingsGroup = "Last.fm";
+const char* LastFMService::kAudioscrobblerClientId = "tng";
+const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
+const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
 
 LastFMService::LastFMService(QObject* parent)
-  : RadioService("Last.fm", parent),
+  : RadioService(kServiceName, parent),
     tuner_(NULL),
+    scrobbler_(NULL),
     initial_tune_(false)
 {
-  lastfm::ws::ApiKey = "75d20fb472be99275392aefa2760ea09";
-  lastfm::ws::SharedSecret = "d3072b60ae626be12be69448f5c46e70";
+  lastfm::ws::ApiKey = kApiKey;
+  lastfm::ws::SharedSecret = kSecret;
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
@@ -29,6 +35,10 @@ LastFMService::LastFMService(QObject* parent)
 
 LastFMService::~LastFMService() {
   delete config_;
+}
+
+bool LastFMService::IsAuthenticated() const {
+  return !lastfm::ws::SessionKey.isEmpty();
 }
 
 RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
@@ -50,7 +60,7 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       CreateStationItem(Type_MyNeighbourhood, "My Neighbourhood",
                         ":last.fm/neighbour_radio.png", item);
 
-      if (lastfm::ws::SessionKey.isEmpty())
+      if (!IsAuthenticated())
         config_->show();
       break;
 
@@ -106,6 +116,10 @@ void LastFMService::AuthenticateReplyFinished() {
   settings.setValue("username", lastfm::ws::Username);
   settings.setValue("session", lastfm::ws::SessionKey);
 
+  // Invalidate the scrobbler - it will get recreated later
+  delete scrobbler_;
+  scrobbler_ = NULL;
+
   emit AuthenticationComplete(true);
 }
 
@@ -142,7 +156,7 @@ QList<RadioItem::PlaylistData> LastFMService::DataForItem(RadioItem* item) {
 void LastFMService::StartLoading(const QUrl& url) {
   if (url.scheme() != "lastfm")
     return;
-  if (lastfm::ws::SessionKey.isEmpty())
+  if (!IsAuthenticated())
     return;
 
   emit LoadingStarted();
@@ -158,18 +172,18 @@ void LastFMService::StartLoading(const QUrl& url) {
 }
 
 void LastFMService::LoadNext(const QUrl &) {
-  lastfm::Track track = tuner_->takeNextTrack();
+  last_track_ = tuner_->takeNextTrack();
 
-  if (track.isNull()) {
+  if (last_track_.isNull()) {
     emit StreamFinished();
     return;
   }
 
-  emit StreamReady(last_url_, track.url());
-
   Song metadata;
-  metadata.InitFromLastFM(track);
+  metadata.InitFromLastFM(last_track_);
+
   emit StreamMetadataFound(last_url_, metadata);
+  emit StreamReady(last_url_, last_track_.url());
 }
 
 void LastFMService::TunerError(lastfm::ws::Error error) {
@@ -223,4 +237,61 @@ void LastFMService::TunerTrackAvailable() {
     LoadNext(last_url_);
     initial_tune_ = false;
   }
+}
+
+bool LastFMService::InitScrobbler() {
+  if (!IsAuthenticated())
+    return false;
+
+  if (!scrobbler_) {
+    scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
+    connect(scrobbler_, SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
+  }
+
+  return true;
+}
+
+lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
+  qDebug() << song.title() << last_track_.title();
+  qDebug() << song.artist() << last_track_.artist();
+  qDebug() << song.album() << last_track_.album();
+  qDebug() << last_track_.fingerprintId() << last_track_.mbid();
+
+  if (song.title() == last_track_.title() &&
+      song.artist() == last_track_.artist() &&
+      song.album() == last_track_.album())
+    return last_track_;
+
+  lastfm::Track ret;
+  song.ToLastFM(&ret);
+  return ret;
+
+}
+
+void LastFMService::NowPlaying(const Song &song) {
+  if (!InitScrobbler())
+    return;
+
+  scrobbler_->nowPlaying(TrackFromSong(song));
+}
+
+void LastFMService::Scrobble(const Song& song) {
+  if (!InitScrobbler())
+    return;
+
+  scrobbler_->cache(TrackFromSong(song));
+}
+
+void LastFMService::Love(const Song& song) {
+  lastfm::MutableTrack mtrack(TrackFromSong(song));
+  mtrack.love();
+}
+
+void LastFMService::Ban(const Song& song) {
+  lastfm::MutableTrack mtrack(TrackFromSong(song));
+  mtrack.ban();
+}
+
+void LastFMService::ScrobblerStatus(int status) {
+  qDebug() << static_cast<lastfm::Audioscrobbler::Status>(status);
 }

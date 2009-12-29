@@ -15,6 +15,7 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
     url_(url),
     title_(title)
 {
+  InitMetadata();
 }
 
 void RadioPlaylistItem::Save(QSettings& settings) const {
@@ -27,35 +28,23 @@ void RadioPlaylistItem::Restore(const QSettings& settings) {
   service_ = RadioModel::ServiceByName(settings.value("service").toString());
   url_ = settings.value("url").toString();
   title_ = settings.value("title").toString();
+
+  InitMetadata();
 }
 
-QString RadioPlaylistItem::Title() const {
+void RadioPlaylistItem::InitMetadata() {
   if (!service_)
-    return "Radio service couldn't be loaded :-(";
-
-  if (metadata_.is_valid())
-    return metadata_.title();
-
-  if (!title_.isEmpty())
-    return title_;
-
-  return url_.toString();
+    metadata_.set_title("Radio service couldn't be loaded :-(");
+  else if (!title_.isEmpty())
+    metadata_.set_title(title_);
+  else
+    metadata_.set_title(url_.toString());
 }
 
-QString RadioPlaylistItem::Artist() const {
-  return metadata_.is_valid() ? metadata_.artist() : QString::null;
-}
-
-QString RadioPlaylistItem::Album() const {
-  return metadata_.is_valid() ? metadata_.album() : QString::null;
-}
-
-int RadioPlaylistItem::Length() const {
-  return metadata_.is_valid() ? metadata_.length() : -1;
-}
-
-int RadioPlaylistItem::Track() const {
-  return metadata_.is_valid() ? metadata_.track() : -1;
+Song RadioPlaylistItem::Metadata() const {
+  if (temp_metadata_.is_valid())
+    return temp_metadata_;
+  return metadata_;
 }
 
 void RadioPlaylistItem::StartLoading() {
@@ -88,9 +77,9 @@ PlaylistItem::Options RadioPlaylistItem::options() const {
 }
 
 void RadioPlaylistItem::SetTemporaryMetadata(const Song& metadata) {
-  metadata_ = metadata;
+  temp_metadata_ = metadata;
 }
 
 void RadioPlaylistItem::ClearTemporaryMetadata() {
-  metadata_ = Song();
+  temp_metadata_ = Song();
 }

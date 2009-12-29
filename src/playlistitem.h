@@ -38,11 +38,7 @@ class PlaylistItem {
   virtual void Save(QSettings& settings) const = 0;
   virtual void Restore(const QSettings& settings) = 0;
 
-  virtual QString Title() const = 0;
-  virtual QString Artist() const = 0;
-  virtual QString Album() const = 0;
-  virtual int Length() const = 0;
-  virtual int Track() const = 0;
+  virtual Song Metadata() const = 0;
 
   // If the item needs to do anything special before it can play (eg. start
   // streaming the radio stream), then it should implement StartLoading() and

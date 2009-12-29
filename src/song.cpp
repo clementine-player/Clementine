@@ -234,6 +234,16 @@ void Song::BindToQuery(QSqlQuery *query) const {
   #undef intval
 }
 
+void Song::ToLastFM(lastfm::Track* track) const {
+  lastfm::MutableTrack mtrack(*track);
+
+  mtrack.setArtist(artist_);
+  mtrack.setAlbum(album_);
+  mtrack.setTitle(title_);
+  mtrack.setDuration(length_);
+  mtrack.setTrackNumber(track_);
+}
+
 QString Song::PrettyTitleWithArtist() const {
   QString title(title_);
 

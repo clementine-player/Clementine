@@ -8,12 +8,13 @@
 
 class Playlist;
 class Settings;
+class LastFMService;
 
 class Player : public QObject {
   Q_OBJECT
 
  public:
-  Player(Playlist* playlist, QObject* parent = 0);
+  Player(Playlist* playlist, LastFMService* lastfm, QObject* parent = 0);
 
   EngineBase* GetEngine() { return engine_; }
   Engine::State GetState() const;
@@ -41,6 +42,7 @@ class Player : public QObject {
 
  private:
   Playlist* playlist_;
+  LastFMService* lastfm_;
   QSettings settings_;
 
   EngineBase* engine_;

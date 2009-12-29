@@ -14,11 +14,7 @@ class SongPlaylistItem : public PlaylistItem {
   void Save(QSettings& settings) const;
   void Restore(const QSettings& settings);
 
-  QString Title() const;
-  QString Artist() const;
-  QString Album() const;
-  int Length() const;
-  int Track() const;
+  Song Metadata() const { return song_; }
 
   QUrl Url();
 

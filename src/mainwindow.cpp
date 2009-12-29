@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
-    player_(new Player(playlist_, this)),
+    player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     tray_icon_(new SystemTrayIcon(this))
@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
   tray_icon_->show();
 
   ui_.volume->setValue(player_->GetVolume());
+  ui_.last_fm_controls->hide();
 
   // Models
   library_sort_model_->setSourceModel(library_);
@@ -72,6 +73,8 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.back_button->setDefaultAction(ui_.action_previous_track);
   ui_.pause_play_button->setDefaultAction(ui_.action_play_pause);
   ui_.stop_button->setDefaultAction(ui_.action_stop);
+  ui_.love_button->setDefaultAction(ui_.action_love);
+  ui_.ban_button->setDefaultAction(ui_.action_ban);
 
   // Stop actions
   QMenu* stop_menu = new QMenu(this);
@@ -151,6 +154,8 @@ MainWindow::MainWindow(QWidget *parent)
   tray_menu->addAction(ui_.action_play_pause);
   tray_menu->addAction(ui_.action_stop);
   tray_menu->addAction(ui_.action_next_track);
+  tray_menu->addAction(ui_.action_love);
+  tray_menu->addAction(ui_.action_ban);
   tray_menu->addSeparator();
   tray_menu->addAction(ui_.action_quit);
   tray_icon_->setContextMenu(tray_menu);
@@ -209,6 +214,10 @@ void MainWindow::MediaStopped() {
   ui_.action_play_pause->setText("Play");
 
   ui_.action_play_pause->setEnabled(true);
+
+  ui_.action_ban->setVisible(false);
+  ui_.action_love->setVisible(false);
+  ui_.last_fm_controls->hide();
 }
 
 void MainWindow::MediaPaused() {
@@ -228,6 +237,11 @@ void MainWindow::MediaPlaying() {
 
   ui_.action_play_pause->setEnabled(
       ! playlist_->current_item_options() & PlaylistItem::PauseDisabled);
+
+  bool lastfm = playlist_->current_item_options() & PlaylistItem::LastFMControls;
+  ui_.action_ban->setVisible(lastfm);
+  ui_.action_love->setVisible(lastfm);
+  ui_.last_fm_controls->setVisible(lastfm);
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
