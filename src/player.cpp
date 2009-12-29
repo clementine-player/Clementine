@@ -40,10 +40,11 @@ void Player::TrackEnded() {
   }
 
   // Is this track a radio station (like Last.fm) that can have another track?
-  if (playlist_->item_at(i)->LoadNext())
-    return;
-
-  Next();
+  PlaylistItem* item = playlist_->item_at(i);
+  if (item->options() & PlaylistItem::ContainsMultipleTracks)
+    item->LoadNext();
+  else
+    Next();
 }
 
 void Player::PlayPause() {
@@ -116,7 +117,9 @@ void Player::PlayAt(int index) {
 
   PlaylistItem* item = playlist_->item_at(index);
 
-  if (!item->StartLoading())
+  if (item->options() & PlaylistItem::SpecialPlayBehaviour)
+    item->StartLoading();
+  else
     engine_->play(item->Url());
 }
 

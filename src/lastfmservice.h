@@ -31,6 +31,9 @@ class LastFMService : public RadioService {
   void StartLoading(const QUrl& url);
   void LoadNext(const QUrl& url);
 
+  bool IsPauseAllowed() const { return false; }
+  bool ShowLastFmControls() const { return true; }
+
   void Authenticate(const QString& username, const QString& password);
 
  signals:

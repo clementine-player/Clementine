@@ -26,6 +26,9 @@ class RadioService : public QObject {
   virtual void StartLoading(const QUrl& url) = 0;
   virtual void LoadNext(const QUrl& url) = 0;
 
+  virtual bool IsPauseAllowed() const { return true; }
+  virtual bool ShowLastFmControls() const { return false; }
+
  signals:
   void LoadingStarted();
   void LoadingFinished();

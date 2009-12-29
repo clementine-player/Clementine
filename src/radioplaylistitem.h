@@ -14,6 +14,7 @@ class RadioPlaylistItem : public PlaylistItem {
   RadioPlaylistItem(RadioService* service, const QUrl& url, const QString& title);
 
   Type type() const { return Type_Radio; }
+  Options options() const;
 
   void Save(QSettings& settings) const;
   void Restore(const QSettings& settings);
@@ -24,10 +25,10 @@ class RadioPlaylistItem : public PlaylistItem {
   int Length() const;
   int Track() const;
 
-  bool StartLoading();
+  void StartLoading();
   QUrl Url();
 
-  bool LoadNext();
+  void LoadNext();
 
   void SetTemporaryMetadata(const Song& metadata);
   void ClearTemporaryMetadata();

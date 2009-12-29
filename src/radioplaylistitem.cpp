@@ -58,23 +58,33 @@ int RadioPlaylistItem::Track() const {
   return metadata_.is_valid() ? metadata_.track() : -1;
 }
 
-bool RadioPlaylistItem::StartLoading() {
+void RadioPlaylistItem::StartLoading() {
   if (service_)
     service_->StartLoading(url_);
-
-  return true;
 }
 
-bool RadioPlaylistItem::LoadNext() {
-  if (service_) {
+void RadioPlaylistItem::LoadNext() {
+  if (service_)
     service_->LoadNext(url_);
-    return true;
-  }
-  return false;
 }
 
 QUrl RadioPlaylistItem::Url() {
   return url_;
+}
+
+PlaylistItem::Options RadioPlaylistItem::options() const {
+  PlaylistItem::Options ret = SpecialPlayBehaviour;
+
+  if (service_) {
+    ret |= ContainsMultipleTracks;
+
+    if (!service_->IsPauseAllowed())
+      ret |= PauseDisabled;
+    if (service_->ShowLastFmControls())
+      ret |= LastFMControls;
+  }
+
+  return ret;
 }
 
 void RadioPlaylistItem::SetTemporaryMetadata(const Song& metadata) {
