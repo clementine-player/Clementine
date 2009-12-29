@@ -38,18 +38,23 @@ class LastFMService : public RadioService {
   bool ShowLastFmControls() const { return true; }
 
   bool IsAuthenticated() const;
+  bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   void Authenticate(const QString& username, const QString& password);
 
   void NowPlaying(const Song& song);
+
+ public slots:
   void Scrobble();
   void Love();
   void Ban();
 
  signals:
   void AuthenticationComplete(bool success);
+  void ScrobblingEnabledChanged(bool value);
 
  private slots:
   void AuthenticateReplyFinished();
+  void ScrobblingEnabledChangedSlot(bool value);
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
@@ -69,6 +74,8 @@ class LastFMService : public RadioService {
   LastFMConfig* config_;
   QUrl last_url_;
   bool initial_tune_;
+
+  bool scrobbling_enabled_;
 };
 
 #endif // LASTFMSERVICE_H

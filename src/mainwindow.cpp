@@ -41,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent)
   tray_icon_->show();
 
   ui_.volume->setValue(player_->GetVolume());
-  ui_.last_fm_controls->hide();
 
   track_position_timer_->setInterval(1000);
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
@@ -75,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
   connect(ui_.action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
   connect(ui_.library_filter, SIGNAL(textChanged(QString)), library_, SLOT(SetFilterText(QString)));
+  connect(ui_.action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
+  connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -155,6 +156,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(Next()));
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
+  connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
 
   // Tray icon
   QMenu* tray_menu = new QMenu(this);
@@ -223,9 +225,8 @@ void MainWindow::MediaStopped() {
 
   ui_.action_play_pause->setEnabled(true);
 
-  ui_.action_ban->setVisible(false);
-  ui_.action_love->setVisible(false);
-  ui_.last_fm_controls->hide();
+  ui_.action_ban->setEnabled(false);
+  ui_.action_love->setEnabled(false);
 
   track_position_timer_->stop();
 }
@@ -250,13 +251,19 @@ void MainWindow::MediaPlaying() {
   ui_.action_play_pause->setEnabled(
       ! playlist_->current_item_options() & PlaylistItem::PauseDisabled);
 
-  bool lastfm = playlist_->current_item_options() & PlaylistItem::LastFMControls;
-  ui_.action_ban->setVisible(lastfm);
-  ui_.action_love->setVisible(lastfm);
-  ui_.last_fm_controls->setVisible(lastfm);
+  bool is_lastfm = playlist_->current_item_options() & PlaylistItem::LastFMControls;
+  LastFMService* lastfm = radio_model_->GetLastFMService();
+
+  ui_.action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
+  ui_.action_love->setEnabled(lastfm->IsScrobblingEnabled());
 
   track_position_timer_->start();
   UpdateTrackPosition();
+}
+
+void MainWindow::ScrobblingEnabledChanged(bool value) {
+  ui_.action_ban->setEnabled(value);
+  ui_.action_love->setEnabled(value);
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
@@ -340,9 +347,16 @@ void MainWindow::FilePathChanged(const QString& path) {
 void MainWindow::UpdateTrackPosition() {
   int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
 
+  LastFMService* lastfm = radio_model_->GetLastFMService();
+
   if (!playlist_->has_scrobbled() &&
       position >= playlist_->scrobble_point()) {
-    radio_model_->GetLastFMService()->Scrobble();
+    lastfm->Scrobble();
     playlist_->set_scrobbled(true);
   }
+}
+
+void MainWindow::Love() {
+  radio_model_->GetLastFMService()->Love();
+  ui_.action_love->setEnabled(false);
 }

@@ -23,6 +23,11 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 }
 
 void Player::Next() {
+  if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+    playlist_->current_item()->LoadNext();
+    return;
+  }
+
   int i = playlist_->next_index();
   playlist_->set_current_index(i);
   if (i == -1) {
@@ -30,7 +35,6 @@ void Player::Next() {
     return;
   }
 
-  qDebug() << "Playing item" << i;
   PlayAt(i);
 }
 
@@ -41,12 +45,7 @@ void Player::TrackEnded() {
     return;
   }
 
-  // Is this track a radio station (like Last.fm) that can have another track?
-  PlaylistItem* item = playlist_->item_at(i);
-  if (item->options() & PlaylistItem::ContainsMultipleTracks)
-    item->LoadNext();
-  else
-    Next();
+  Next();
 }
 
 void Player::PlayPause() {
@@ -123,7 +122,9 @@ void Player::PlayAt(int index) {
     item->StartLoading();
   else {
     engine_->play(item->Url());
-    lastfm_->NowPlaying(item->Metadata());
+
+    if (lastfm_->IsScrobblingEnabled())
+      lastfm_->NowPlaying(item->Metadata());
   }
 }
 
@@ -137,5 +138,6 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
     return;
 
   engine_->play(media_url);
+
   lastfm_->NowPlaying(item->Metadata());
 }

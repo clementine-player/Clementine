@@ -15,11 +15,15 @@ class LastFMConfig : public QDialog {
 
   void accept();
 
+  Ui::LastFMConfig ui_;
+
+ signals:
+  void ScrobblingEnabledChanged(bool value);
+
  private slots:
   void AuthenticationComplete(bool success);
 
  private:
-  Ui::LastFMConfig ui_;
   LastFMService* service_;
 };
 

@@ -11,6 +11,7 @@ class Player;
 class Library;
 class LibraryConfig;
 class RadioModel;
+class Song;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -47,6 +48,9 @@ class MainWindow : public QMainWindow {
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
 
   void UpdateTrackPosition();
+
+  void ScrobblingEnabledChanged(bool value);
+  void Love();
 
  private:
   void SaveGeometry();

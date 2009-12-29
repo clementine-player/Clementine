@@ -535,6 +535,9 @@
    </property>
   </action>
   <action name="action_love">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
@@ -542,20 +545,17 @@
    <property name="text">
     <string>Love</string>
    </property>
-   <property name="visible">
-    <bool>false</bool>
-   </property>
   </action>
   <action name="action_ban">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
    </property>
    <property name="text">
     <string>Ban</string>
-   </property>
-   <property name="visible">
-    <bool>false</bool>
    </property>
   </action>
  </widget>

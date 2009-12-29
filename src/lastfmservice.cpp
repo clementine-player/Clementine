@@ -20,7 +20,8 @@ LastFMService::LastFMService(QObject* parent)
   : RadioService(kServiceName, parent),
     tuner_(NULL),
     scrobbler_(NULL),
-    initial_tune_(false)
+    initial_tune_(false),
+    scrobbling_enabled_(false)
 {
   lastfm::ws::ApiKey = kApiKey;
   lastfm::ws::SharedSecret = kSecret;
@@ -29,8 +30,13 @@ LastFMService::LastFMService(QObject* parent)
   settings.beginGroup(kSettingsGroup);
   lastfm::ws::Username = settings.value("username").toString();
   lastfm::ws::SessionKey = settings.value("session").toString();
+  scrobbling_enabled_ = settings.value("scrobbling_enabled", true).toBool();
 
   config_ = new LastFMConfig(this);
+  connect(config_, SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChangedSlot(bool)));
+
+  config_->ui_.username->setText(lastfm::ws::Username);
+  config_->ui_.scrobble->setEnabled(scrobbling_enabled_);
 }
 
 LastFMService::~LastFMService() {
@@ -39,6 +45,16 @@ LastFMService::~LastFMService() {
 
 bool LastFMService::IsAuthenticated() const {
   return !lastfm::ws::SessionKey.isEmpty();
+}
+
+void LastFMService::ScrobblingEnabledChangedSlot(bool value) {
+  scrobbling_enabled_ = value;
+
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("scrobbling_enabled", scrobbling_enabled_);
+
+  emit ScrobblingEnabledChanged(value);
 }
 
 RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
@@ -240,7 +256,7 @@ void LastFMService::TunerTrackAvailable() {
 }
 
 bool LastFMService::InitScrobbler() {
-  if (!IsAuthenticated())
+  if (!IsAuthenticated() || !IsScrobblingEnabled())
     return false;
 
   if (!scrobbler_)
@@ -282,6 +298,9 @@ void LastFMService::Scrobble() {
 }
 
 void LastFMService::Love() {
+  if (!IsAuthenticated())
+    config_->show();
+
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.love();
 }
@@ -289,4 +308,7 @@ void LastFMService::Love() {
 void LastFMService::Ban() {
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.ban();
+
+  Scrobble();
+  LoadNext(last_url_);
 }
