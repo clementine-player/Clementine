@@ -3,14 +3,13 @@
 
 #include <QMimeData>
 
-class RadioService;
+class RadioItem;
 
 class RadioMimeData : public QMimeData {
   Q_OBJECT
 
  public:
-  QList<RadioService*> services;
-  QList<QString> titles;
+  QList<RadioItem*> items;
 };
 
 #endif // RADIOMIMEDATA_H

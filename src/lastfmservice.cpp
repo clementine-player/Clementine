@@ -145,34 +145,33 @@ void LastFMService::AuthenticateReplyFinished() {
   emit AuthenticationComplete(true);
 }
 
-QList<RadioItem::PlaylistData> LastFMService::DataForItem(RadioItem* item) {
-  QList<RadioItem::PlaylistData> ret;
+QUrl LastFMService::UrlForItem(const RadioItem* item) const {
+  switch (item->type) {
+    case Type_MyRecommendations:
+      return "lastfm://user/" + lastfm::ws::Username + "/recommended";
 
+    case Type_MyLoved:
+      return "lastfm://user/" + lastfm::ws::Username + "/loved";
+
+    case Type_MyNeighbourhood:
+      return "lastfm://user/" + lastfm::ws::Username + "/neighbours";
+
+    case Type_MyRadio:
+      return "lastfm://user/" + lastfm::ws::Username + "/library";
+  }
+  return QUrl();
+}
+
+QString LastFMService::TitleForItem(const RadioItem* item) const {
   const QString user(lastfm::ws::Username);
 
   switch (item->type) {
-    case Type_MyRecommendations:
-      ret << RadioItem::PlaylistData(user + "'s Recommended Radio",
-                                     "lastfm://user/" + lastfm::ws::Username + "/recommended");
-      break;
-
-    case Type_MyLoved:
-      ret << RadioItem::PlaylistData(user + "'s Loved Tracks",
-                                     "lastfm://user/" + lastfm::ws::Username + "/loved");
-      break;
-
-    case Type_MyNeighbourhood:
-      ret << RadioItem::PlaylistData(user + "'s Neighbour Radio",
-                                     "lastfm://user/" + lastfm::ws::Username + "/neighbours");
-      break;
-
-    case Type_MyRadio:
-      ret << RadioItem::PlaylistData(user + "'s Library",
-                                     "lastfm://user/" + lastfm::ws::Username + "/library");
-      break;
+    case Type_MyRecommendations: return user + "'s Recommended Radio";
+    case Type_MyLoved:           return user + "'s Loved Tracks";
+    case Type_MyNeighbourhood:   return user + "'s Neighbour Radio";
+    case Type_MyRadio:           return user + "'s Library";
   }
-
-  return ret;
+  return QString();
 }
 
 void LastFMService::StartLoading(const QUrl& url) {

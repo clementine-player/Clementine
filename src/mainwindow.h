@@ -49,6 +49,7 @@ class MainWindow : public QMainWindow {
 
   void UpdateTrackPosition();
 
+  void RadioDoubleClick(const QModelIndex& index);
   void ScrobblingEnabledChanged(bool value);
   void Love();
 

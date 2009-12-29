@@ -33,13 +33,19 @@ class LastFMService : public RadioService {
   // RadioService
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem *item);
-  QList<RadioItem::PlaylistData> DataForItem(RadioItem* item);
+
+  QUrl UrlForItem(const RadioItem* item) const;
+  QString TitleForItem(const RadioItem* item) const;
+
   void ShowContextMenu(RadioItem *item, const QPoint &global_pos);
+
   void StartLoading(const QUrl& url);
   void LoadNext(const QUrl& url);
+
   bool IsPauseAllowed() const { return false; }
   bool ShowLastFmControls() const { return true; }
 
+  // Last.fm specific stuff
   bool IsAuthenticated() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   void Authenticate(const QString& username, const QString& password);

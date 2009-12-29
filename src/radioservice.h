@@ -21,7 +21,9 @@ class RadioService : public QObject {
   virtual RadioItem* CreateRootItem(RadioItem* parent) = 0;
   virtual void LazyPopulate(RadioItem* item) = 0;
 
-  virtual QList<RadioItem::PlaylistData> DataForItem(RadioItem* item) = 0;
+  virtual QUrl UrlForItem(const RadioItem* item) const = 0;
+  virtual QString TitleForItem(const RadioItem* item) const = 0;
+
   virtual void ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
     Q_UNUSED(item); Q_UNUSED(global_pos); }
 

@@ -6,6 +6,7 @@
 
 #include "playlistitem.h"
 #include "song.h"
+#include "radioitem.h"
 
 class RadioService;
 
@@ -62,9 +63,7 @@ class Playlist : public QAbstractListModel {
   // Changing the playlist
   QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);
   QModelIndex InsertSongs(const SongList& items, int after = -1);
-  QModelIndex InsertRadioStations(const QList<RadioService*>& services,
-                                  const QList<QUrl>& urls,
-                                  const QStringList& titles, int after = -1);
+  QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int after = -1);
   QModelIndex InsertPaths(QList<QUrl> urls, int after = -1);
   void StopAfter(int row);
 

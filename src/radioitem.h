@@ -15,15 +15,11 @@ class RadioItem : public SimpleTreeItem<RadioItem> {
     Type_Service,
   };
 
-  struct PlaylistData {
-    PlaylistData(const QString& _title, const QUrl& _url) : title(_title), url(_url) {}
-
-    QString title;
-    QUrl url;
-  };
-
   RadioItem(RadioService* _service, int type, const QString& key = QString::null,
             RadioItem* parent = NULL);
+
+  QUrl Url() const;
+  QString Title() const;
 
   QIcon icon;
   RadioService* service;

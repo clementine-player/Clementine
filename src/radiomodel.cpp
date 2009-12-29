@@ -85,20 +85,15 @@ QStringList RadioModel::mimeTypes() const {
 
 QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
-  QList<RadioService*> services;
-  QStringList titles;
+  QList<RadioItem*> items;
 
   foreach (const QModelIndex& index, indexes) {
     RadioItem* item = IndexToItem(index);
     if (!item || !item->service || !item->playable)
       continue;
 
-    QList<RadioItem::PlaylistData> item_data(item->service->DataForItem(item));
-    foreach (const RadioItem::PlaylistData& data, item_data) {
-      urls << data.url;
-      services << item->service;
-      titles << data.title;
-    }
+    items << item;
+    urls << item->service->UrlForItem(item);
   }
 
   if (urls.isEmpty())
@@ -106,8 +101,7 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
 
   RadioMimeData* data = new RadioMimeData;
   data->setUrls(urls);
-  data->services = services;
-  data->titles = titles;
+  data->items = items;
 
   return data;
 }
