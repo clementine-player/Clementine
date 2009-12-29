@@ -342,7 +342,7 @@ void MainWindow::UpdateTrackPosition() {
 
   if (!playlist_->has_scrobbled() &&
       position >= playlist_->scrobble_point()) {
-    radio_model_->GetLastFMService()->Scrobble(playlist_->current_item_metadata());
+    radio_model_->GetLastFMService()->Scrobble();
     playlist_->set_scrobbled(true);
   }
 }

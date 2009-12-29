@@ -265,22 +265,28 @@ void LastFMService::NowPlaying(const Song &song) {
   if (!InitScrobbler())
     return;
 
-  scrobbler_->nowPlaying(TrackFromSong(song));
+  last_track_ = TrackFromSong(song);
+
+  lastfm::MutableTrack mtrack(last_track_);
+  mtrack.stamp();
+
+  scrobbler_->nowPlaying(last_track_);
 }
 
-void LastFMService::Scrobble(const Song& song) {
+void LastFMService::Scrobble() {
   if (!InitScrobbler())
     return;
 
-  scrobbler_->cache(TrackFromSong(song));
+  scrobbler_->cache(last_track_);
+  scrobbler_->submit();
 }
 
-void LastFMService::Love(const Song& song) {
-  lastfm::MutableTrack mtrack(TrackFromSong(song));
+void LastFMService::Love() {
+  lastfm::MutableTrack mtrack(last_track_);
   mtrack.love();
 }
 
-void LastFMService::Ban(const Song& song) {
-  lastfm::MutableTrack mtrack(TrackFromSong(song));
+void LastFMService::Ban() {
+  lastfm::MutableTrack mtrack(last_track_);
   mtrack.ban();
 }

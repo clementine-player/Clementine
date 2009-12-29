@@ -21,9 +21,9 @@ const char* Playlist::kSettingsGroup = "Playlist";
 Playlist::Playlist(QObject *parent) :
     QAbstractListModel(parent),
     current_is_paused_(false),
-    ignore_sorting_(false),
     scrobble_point_(-1),
-    has_scrobbled_(false)
+    has_scrobbled_(false),
+    ignore_sorting_(false)
 {
 }
 

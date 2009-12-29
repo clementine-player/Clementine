@@ -41,9 +41,9 @@ class LastFMService : public RadioService {
   void Authenticate(const QString& username, const QString& password);
 
   void NowPlaying(const Song& song);
-  void Scrobble(const Song& song);
-  void Love(const Song& song);
-  void Ban(const Song& song);
+  void Scrobble();
+  void Love();
+  void Ban();
 
  signals:
   void AuthenticationComplete(bool success);
