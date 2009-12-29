@@ -357,7 +357,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QTreeView" name="radio_view">
+      <widget class="RadioView" name="radio_view">
        <property name="dragEnabled">
         <bool>true</bool>
        </property>
@@ -587,6 +587,11 @@
    <extends>QWidget</extends>
    <header>fileview.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RadioView</class>
+   <extends>QTreeView</extends>
+   <header>radioview.h</header>
   </customwidget>
  </customwidgets>
  <resources>

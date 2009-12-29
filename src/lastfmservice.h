@@ -6,6 +6,8 @@
 
 #include <lastfm/RadioTuner>
 
+class QMenu;
+
 class LastFMConfig;
 
 class LastFMService : public RadioService {
@@ -32,6 +34,7 @@ class LastFMService : public RadioService {
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem *item);
   QList<RadioItem::PlaylistData> DataForItem(RadioItem* item);
+  void ShowContextMenu(RadioItem *item, const QPoint &global_pos);
   void StartLoading(const QUrl& url);
   void LoadNext(const QUrl& url);
   bool IsPauseAllowed() const { return false; }
@@ -72,6 +75,8 @@ class LastFMService : public RadioService {
   lastfm::Track last_track_;
 
   LastFMConfig* config_;
+  QMenu* context_menu_;
+
   QUrl last_url_;
   bool initial_tune_;
 

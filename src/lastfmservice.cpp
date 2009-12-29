@@ -9,6 +9,7 @@
 #include <lastfm/Audioscrobbler>
 
 #include <QSettings>
+#include <QMenu>
 
 const char* LastFMService::kServiceName = "Last.fm";
 const char* LastFMService::kSettingsGroup = "Last.fm";
@@ -20,6 +21,7 @@ LastFMService::LastFMService(QObject* parent)
   : RadioService(kServiceName, parent),
     tuner_(NULL),
     scrobbler_(NULL),
+    context_menu_(new QMenu),
     initial_tune_(false),
     scrobbling_enabled_(false)
 {
@@ -37,10 +39,14 @@ LastFMService::LastFMService(QObject* parent)
 
   config_->ui_.username->setText(lastfm::ws::Username);
   config_->ui_.scrobble->setEnabled(scrobbling_enabled_);
+
+  context_menu_->addAction(QIcon(":configure.png"), "Configure Last.fm...",
+                           config_, SLOT(show()));
 }
 
 LastFMService::~LastFMService() {
   delete config_;
+  delete context_menu_;
 }
 
 bool LastFMService::IsAuthenticated() const {
@@ -311,4 +317,8 @@ void LastFMService::Ban() {
 
   Scrobble();
   LoadNext(last_url_);
+}
+
+void LastFMService::ShowContextMenu(RadioItem *, const QPoint &global_pos) {
+  context_menu_->popup(global_pos);
 }

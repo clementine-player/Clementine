@@ -117,3 +117,8 @@ LastFMService* RadioModel::GetLastFMService() const {
     return static_cast<LastFMService*>(sServices[LastFMService::kServiceName]);
   return NULL;
 }
+
+void RadioModel::ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
+  if (item->service)
+    item->service->ShowContextMenu(item, global_pos);
+}

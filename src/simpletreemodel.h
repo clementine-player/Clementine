@@ -18,10 +18,10 @@ class SimpleTreeModel : public QAbstractItemModel {
   int rowCount(const QModelIndex& parent) const;
   bool hasChildren(const QModelIndex& parent) const;
 
- protected:
   T* IndexToItem(const QModelIndex& index) const;
   QModelIndex ItemToIndex(T* item) const;
 
+ protected:
   virtual void LazyPopulate(T* item) = 0;
 
  protected:
