@@ -32,8 +32,10 @@ class LastFMService : public RadioService {
     Type_TagRadio,
     Type_MyFriends,
     Type_MyNeighbours,
-    Type_FriendRadio,
-    Type_NeighbourRadio,
+    Type_OtherUser,
+    Type_OtherUserRadio,
+    Type_OtherUserLoved,
+    Type_OtherUserNeighbourhood,
   };
 
   // RadioService

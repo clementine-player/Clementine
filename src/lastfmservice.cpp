@@ -77,14 +77,10 @@ void LastFMService::LazyPopulate(RadioItem *item) {
   switch (item->type) {
     case RadioItem::Type_Service:
       // Normal radio types
-      CreateStationItem(Type_MyRecommendations, "My Recommendations",
-                        ":last.fm/recommended_radio.png", item);
-      CreateStationItem(Type_MyRadio, "My Radio Station",
-                        ":last.fm/personal_radio.png", item);
-      CreateStationItem(Type_MyLoved, "My Loved Tracks",
-                        ":last.fm/loved_radio.png", item);
-      CreateStationItem(Type_MyNeighbourhood, "My Neighbourhood",
-                        ":last.fm/neighbour_radio.png", item);
+      CreateStationItem(Type_MyRecommendations, "My Recommendations", ":last.fm/recommended_radio.png", item);
+      CreateStationItem(Type_MyRadio, "My Radio Station", ":last.fm/personal_radio.png", item);
+      CreateStationItem(Type_MyLoved, "My Loved Tracks", ":last.fm/loved_radio.png", item);
+      CreateStationItem(Type_MyNeighbourhood, "My Neighbourhood", ":last.fm/neighbour_radio.png", item);
 
       // Types that spawn a popup dialog
       c = CreateStationItem(Type_ArtistRadio, "Artist radio...",
@@ -112,6 +108,15 @@ void LastFMService::LazyPopulate(RadioItem *item) {
 
     case Type_MyNeighbours:
       RefreshNeighbours();
+      break;
+
+    case Type_OtherUser:
+      CreateStationItem(Type_OtherUserRadio, item->key, ":last.fm/recommended_radio.png", item)
+          ->display_text = item->key + "'s Radio Station";
+      CreateStationItem(Type_OtherUserLoved, item->key, ":last.fm/loved_radio.png", item)
+          ->display_text = item->key + "'s Loved Tracks";
+      CreateStationItem(Type_OtherUserNeighbourhood, item->key, ":last.fm/neighbour_radio.png", item)
+          ->display_text = item->key + "'s Neighbourhood";
       break;
 
     default:
@@ -187,11 +192,15 @@ QUrl LastFMService::UrlForItem(const RadioItem* item) const {
     case Type_MyRadio:
       return "lastfm://user/" + lastfm::ws::Username + "/library";
 
-    case Type_FriendRadio:
+    case Type_OtherUser:
+    case Type_OtherUserRadio:
       return "lastfm://user/" + item->key + "/library";
 
-    case Type_NeighbourRadio:
-      return "lastfm://user/" + item->key + "/library";
+    case Type_OtherUserLoved:
+      return "lastfm://user/" + item->key + "/loved";
+
+    case Type_OtherUserNeighbourhood:
+      return "lastfm://user/" + item->key + "/neighbours";
   }
   return QUrl();
 }
@@ -204,8 +213,10 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
     case Type_MyLoved:           return me + "'s Loved Tracks";
     case Type_MyNeighbourhood:   return me + "'s Neighbour Radio";
     case Type_MyRadio:           return me + "'s Library";
-    case Type_FriendRadio:       return item->key + "'s Library";
-    case Type_NeighbourRadio:    return item->key + "'s Library";
+    case Type_OtherUser:
+    case Type_OtherUserRadio:    return item->key + "'s Library";
+    case Type_OtherUserLoved:    return item->key + "'s Loved Tracks";
+    case Type_OtherUserNeighbourhood: return item->key + "'s Neighbour Radio";
   }
   return QString();
 }
@@ -395,10 +406,9 @@ void LastFMService::RefreshFriendsFinished() {
   }
 
   foreach (const lastfm::User& f, friends) {
-    RadioItem* item = new RadioItem(this, Type_FriendRadio, f);
+    RadioItem* item = new RadioItem(this, Type_OtherUser, f);
     item->icon = QIcon(":last.fm/icon_user.png");
     item->playable = true;
-    item->lazy_loaded = true;
     item->InsertNotify(friends_list_);
   }
 }
@@ -418,10 +428,9 @@ void LastFMService::RefreshNeighboursFinished() {
   }
 
   foreach (const lastfm::User& n, neighbours) {
-    RadioItem* item = new RadioItem(this, Type_NeighbourRadio, n);
+    RadioItem* item = new RadioItem(this, Type_OtherUser, n);
     item->icon = QIcon(":last.fm/user_purple.png");
     item->playable = true;
-    item->lazy_loaded = true;
     item->InsertNotify(neighbours_list_);
   }
 }
