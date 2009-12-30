@@ -251,7 +251,7 @@ void MainWindow::MediaPlaying() {
   ui_.action_play_pause->setText("Pause");
 
   ui_.action_play_pause->setEnabled(
-      ! playlist_->current_item_options() & PlaylistItem::PauseDisabled);
+      ! (playlist_->current_item_options() & PlaylistItem::PauseDisabled));
 
   bool is_lastfm = playlist_->current_item_options() & PlaylistItem::LastFMControls;
   LastFMService* lastfm = radio_model_->GetLastFMService();
