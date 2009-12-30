@@ -298,7 +298,8 @@ bool CompareSelectionRanges(const QItemSelectionRange& a, const QItemSelectionRa
 }
 
 void PlaylistView::keyPressEvent(QKeyEvent* event) {
-  if (model() && event->matches(QKeySequence::Delete)) {
+  if (model() && (event->matches(QKeySequence::Delete) ||
+                  event->key() == Qt::Key_Backspace)) {
     QItemSelection selection(selectionModel()->selection());
 
     // Sort the selection so we remove the items at the *bottom* first, ensuring
