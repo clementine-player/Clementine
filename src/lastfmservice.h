@@ -85,6 +85,7 @@ class LastFMService : public RadioService {
   void AddToPlaylist();
   void AddArtistRadio();
   void AddTagRadio();
+  void Remove();
 
  private:
   RadioItem* CreateStationItem(ItemType type, const QString& name,

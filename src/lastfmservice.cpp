@@ -47,12 +47,14 @@ LastFMService::LastFMService(QObject* parent)
   config_->ui_.scrobble->setEnabled(scrobbling_enabled_);
 
   play_action_ = context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
+  remove_action_ = context_menu_->addAction(QIcon(":list-remove.png"), "Remove", this, SLOT(Remove()));
   context_menu_->addSeparator();
   add_artist_action_ = context_menu_->addAction(QIcon(":last.fm/icon_radio.png"), "Play artist radio...", this, SLOT(AddArtistRadio()));
   add_tag_action_ = context_menu_->addAction(QIcon(":last.fm/icon_tag.png"), "Play tag radio...", this, SLOT(AddTagRadio()));
   context_menu_->addAction(QIcon(":configure.png"), "Configure Last.fm...",
                            config_, SLOT(show()));
 
+  remove_action_->setEnabled(false);
   add_artist_action_->setEnabled(false);
   add_tag_action_->setEnabled(false);
 }
@@ -391,6 +393,17 @@ void LastFMService::Ban() {
 void LastFMService::ShowContextMenu(RadioItem* item, const QPoint &global_pos) {
   context_item_ = item;
 
+  switch (item->type) {
+    case Type_Artist:
+    case Type_Tag:
+      remove_action_->setEnabled(true);
+      break;
+
+    default:
+      remove_action_->setEnabled(false);
+      break;
+  }
+
   play_action_->setEnabled(item->playable);
   context_menu_->popup(global_pos);
 }
@@ -522,4 +535,15 @@ void LastFMService::RestoreList(const QString &name, ItemType item_type,
     item->lazy_loaded = true;
   }
   settings.endArray();
+}
+
+void LastFMService::Remove() {
+  int type = context_item_->type;
+
+  context_item_->parent->DeleteNotify(context_item_->row);
+
+  if (type == Type_Artist)
+    SaveList("artists", artist_list_);
+  else if (type == Type_Tag)
+    SaveList("tags", tag_list_);
 }
