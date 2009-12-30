@@ -28,6 +28,7 @@ void RadioModel::AddService(RadioService *service) {
   connect(service, SIGNAL(StreamFinished()), SIGNAL(StreamFinished()));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
+  connect(service, SIGNAL(AddItemToPlaylist(RadioItem*)), SIGNAL(AddItemToPlaylist(RadioItem*)));
 }
 
 RadioService* RadioModel::ServiceByName(const QString& name) {

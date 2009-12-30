@@ -41,6 +41,8 @@ class RadioService : public QObject {
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
+  void AddItemToPlaylist(RadioItem* item);
+
  private:
   QString name_;
 };

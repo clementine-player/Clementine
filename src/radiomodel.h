@@ -42,6 +42,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
+  void AddItemToPlaylist(RadioItem* item);
+
  protected:
   void LazyPopulate(RadioItem* parent);
 

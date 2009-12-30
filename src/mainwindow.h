@@ -12,6 +12,7 @@ class Library;
 class LibraryConfig;
 class RadioModel;
 class Song;
+class RadioItem;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -50,6 +51,7 @@ class MainWindow : public QMainWindow {
   void UpdateTrackPosition();
 
   void RadioDoubleClick(const QModelIndex& index);
+  void InsertRadioItem(RadioItem*);
   void ScrobblingEnabledChanged(bool value);
   void Love();
 

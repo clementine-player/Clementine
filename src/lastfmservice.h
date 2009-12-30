@@ -7,6 +7,7 @@
 #include <lastfm/RadioTuner>
 
 class QMenu;
+class QAction;
 
 class LastFMConfig;
 
@@ -78,6 +79,8 @@ class LastFMService : public RadioService {
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
 
+  void AddToPlaylist();
+
  private:
   RadioItem* CreateStationItem(ItemType type, const QString& name,
                                const QString& icon, RadioItem* parent);
@@ -93,7 +96,10 @@ class LastFMService : public RadioService {
   lastfm::Track last_track_;
 
   LastFMConfig* config_;
+
   QMenu* context_menu_;
+  QAction* play_action_;
+  RadioItem* context_item_;
 
   QUrl last_url_;
   bool initial_tune_;

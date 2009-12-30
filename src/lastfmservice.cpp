@@ -42,8 +42,11 @@ LastFMService::LastFMService(QObject* parent)
   config_->ui_.username->setText(lastfm::ws::Username);
   config_->ui_.scrobble->setEnabled(scrobbling_enabled_);
 
+  play_action_ = context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
+  context_menu_->addSeparator();
   context_menu_->addAction(QIcon(":configure.png"), "Configure Last.fm...",
                            config_, SLOT(show()));
+
 }
 
 LastFMService::~LastFMService() {
@@ -365,7 +368,10 @@ void LastFMService::Ban() {
   LoadNext(last_url_);
 }
 
-void LastFMService::ShowContextMenu(RadioItem *, const QPoint &global_pos) {
+void LastFMService::ShowContextMenu(RadioItem* item, const QPoint &global_pos) {
+  context_item_ = item;
+
+  play_action_->setEnabled(item->playable);
   context_menu_->popup(global_pos);
 }
 
@@ -433,4 +439,8 @@ void LastFMService::RefreshNeighboursFinished() {
     item->playable = true;
     item->InsertNotify(neighbours_list_);
   }
+}
+
+void LastFMService::AddToPlaylist() {
+  emit AddItemToPlaylist(context_item_);
 }
