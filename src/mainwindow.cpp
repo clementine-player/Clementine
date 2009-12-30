@@ -9,6 +9,8 @@
 #include "enginebase.h"
 #include "lastfmservice.h"
 
+#include "qxtglobalshortcut.h"
+
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
 #include <QUndoStack>
@@ -174,6 +176,17 @@ MainWindow::MainWindow(QWidget *parent)
 
   connect(tray_icon_, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
   connect(tray_icon_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(TrayClicked(QSystemTrayIcon::ActivationReason)));
+
+  // Global shortcuts
+  QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
+  QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
+  QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
+  QxtGlobalShortcut* prev = new QxtGlobalShortcut(QKeySequence("Media Previous"), this);
+  connect(play_pause, SIGNAL(activated()), ui_.action_play_pause, SLOT(trigger()));
+  connect(stop, SIGNAL(activated()), ui_.action_stop, SLOT(trigger()));
+  connect(next, SIGNAL(activated()), ui_.action_next_track, SLOT(trigger()));
+  connect(prev, SIGNAL(activated()), ui_.action_previous_track, SLOT(trigger()));
+  connect(play_pause, SIGNAL(activated()), this, SLOT(close()));
 
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());

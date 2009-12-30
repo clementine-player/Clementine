@@ -86,7 +86,8 @@ HEADERS += mainwindow.h \
     radioplaylistitem.h \
     radioloadingindicator.h \
     radioview.h \
-    lastfmstationdialog.h
+    lastfmstationdialog.h \
+    ../3rdparty/qxt/keymapper_x11.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -112,3 +113,14 @@ win32 {
         -lxine \
         -lpthreadGC2
 }
+
+# QXT
+INCLUDEPATH += ../3rdparty/qxt
+HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
+HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
+HEADERS += ../3rdparty/qxt/qxtglobal.h
+SOURCES += ../3rdparty/qxt/qxtglobalshortcut.cpp
+SOURCES += ../3rdparty/qxt/qxtglobal.cpp
+unix:!macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_x11.cpp
+macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_mac.cpp
+win32:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_win.cpp
