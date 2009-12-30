@@ -10,6 +10,7 @@ class PlaylistDelegateBase : public QStyledItemDelegate {
  public:
   PlaylistDelegateBase(QTreeView* view);
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  QString displayText(const QVariant& value, const QLocale& locale) const;
 
   QStyleOptionViewItemV4 Adjusted(const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
@@ -19,7 +20,13 @@ class PlaylistDelegateBase : public QStyledItemDelegate {
 
 class LengthItemDelegate : public PlaylistDelegateBase {
  public:
-  LengthItemDelegate(QTreeView* view);
+  LengthItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  QString displayText(const QVariant& value, const QLocale& locale) const;
+};
+
+class SizeItemDelegate : public PlaylistDelegateBase {
+ public:
+  SizeItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 

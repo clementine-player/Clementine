@@ -24,6 +24,27 @@ PlaylistDelegateBase::PlaylistDelegateBase(QTreeView* view)
 {
 }
 
+QString PlaylistDelegateBase::displayText(const QVariant& value, const QLocale&) const {
+  switch (value.type()) {
+    case QVariant::Int: {
+      int v = value.toInt();
+      if (v <= 0)
+        return QString::null;
+      return QString::number(v);
+    }
+
+    case QVariant::Double: {
+      double v = value.toDouble();
+      if (v <= 0)
+        return QString::null;
+      return QString::number(v);
+    }
+
+    default:
+      return value.toString();
+  }
+}
+
 void PlaylistDelegateBase::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
   QStyledItemDelegate::paint(painter, Adjusted(option, index), index);
 
@@ -67,16 +88,10 @@ QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(const QStyleOptionViewItem
 }
 
 
-
-LengthItemDelegate::LengthItemDelegate(QTreeView* view)
-  : PlaylistDelegateBase(view)
-{
-}
-
 QString LengthItemDelegate::displayText(const QVariant& value, const QLocale&) const {
   bool ok = false;
   int seconds = value.toInt(&ok);
-  QString ret = "-";
+  QString ret;
 
   if (ok && seconds > 0) {
     int hours = seconds / (60*60);
@@ -87,6 +102,25 @@ QString LengthItemDelegate::displayText(const QVariant& value, const QLocale&) c
       ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);
     else
       ret.sprintf("%d:%02d", minutes, seconds);
+  }
+  return ret;
+}
+
+
+QString SizeItemDelegate::displayText(const QVariant& value, const QLocale&) const {
+  bool ok = false;
+  int bytes = value.toInt(&ok);
+  QString ret;
+
+  if (ok && bytes > 0) {
+    if (bytes <= 1024)
+      ret.sprintf("%d bytes", bytes);
+    else if (bytes <= 1024*1024)
+      ret.sprintf("%.1f KB", float(bytes) / 1024);
+    else if (bytes <= 1024*1024*1024)
+      ret.sprintf("%.1f MB", float(bytes) / (1024*1024));
+    else
+      ret.sprintf("%.1f GB", float(bytes) / (1024*1024*1024));
   }
   return ret;
 }
@@ -105,6 +139,7 @@ PlaylistView::PlaylistView(QWidget *parent)
 {
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
 
   setHeader(new PlaylistHeader(Qt::Horizontal, this));
   header()->setMovable(true);
@@ -130,7 +165,16 @@ void PlaylistView::LoadGeometry() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  header()->restoreState(settings.value("state").toByteArray());
+  if (!header()->restoreState(settings.value("state").toByteArray())) {
+    header()->hideSection(Playlist::Column_Disc);
+    header()->hideSection(Playlist::Column_Year);
+    header()->hideSection(Playlist::Column_Genre);
+    header()->hideSection(Playlist::Column_BPM);
+    header()->hideSection(Playlist::Column_Bitrate);
+    header()->hideSection(Playlist::Column_Samplerate);
+    header()->hideSection(Playlist::Column_Filename);
+    header()->hideSection(Playlist::Column_Filesize);
+  }
 }
 
 void PlaylistView::SaveGeometry() {

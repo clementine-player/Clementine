@@ -41,6 +41,15 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
     case Column_Album:    return "Album";
     case Column_Length:   return "Length";
     case Column_Track:    return "Track";
+    case Column_Disc:     return "Disc";
+    case Column_Year:     return "Year";
+    case Column_Genre:    return "Genre";
+
+    case Column_BPM:      return "BPM";
+    case Column_Bitrate:  return "Bit rate";
+    case Column_Samplerate: return "Sample rate";
+    case Column_Filename: return "File name";
+    case Column_Filesize: return "File size";
   }
 
   return QVariant();
@@ -67,6 +76,15 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Album:    return song.album();
         case Column_Length:   return song.length();
         case Column_Track:    return song.track();
+        case Column_Disc:     return song.disc();
+        case Column_Year:     return song.year();
+        case Column_Genre:    return song.genre();
+
+        case Column_BPM:      return song.bpm();
+        case Column_Bitrate:  return song.bitrate();
+        case Column_Samplerate: return song.samplerate();
+        case Column_Filename: return song.filename();
+        case Column_Filesize: return song.filesize();
       }
     }
 

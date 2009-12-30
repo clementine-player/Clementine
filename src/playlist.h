@@ -23,6 +23,15 @@ class Playlist : public QAbstractListModel {
     Column_Album,
     Column_Length,
     Column_Track,
+    Column_Disc,
+    Column_Year,
+    Column_Genre,
+
+    Column_BPM,
+    Column_Bitrate,
+    Column_Samplerate,
+    Column_Filename,
+    Column_Filesize,
 
     ColumnCount
   };
