@@ -3,6 +3,7 @@
 
 #include "radioservice.h"
 #include "song.h"
+#include "lastfmstationdialog.h"
 
 #include <lastfm/RadioTuner>
 
@@ -37,6 +38,8 @@ class LastFMService : public RadioService {
     Type_OtherUserRadio,
     Type_OtherUserLoved,
     Type_OtherUserNeighbourhood,
+    Type_Artist,
+    Type_Tag,
   };
 
   // RadioService
@@ -80,6 +83,8 @@ class LastFMService : public RadioService {
   void TunerError(lastfm::ws::Error error);
 
   void AddToPlaylist();
+  void AddArtistRadio();
+  void AddTagRadio();
 
  private:
   RadioItem* CreateStationItem(ItemType type, const QString& name,
@@ -89,6 +94,12 @@ class LastFMService : public RadioService {
   lastfm::Track TrackFromSong(const Song& song) const;
   void RefreshFriends();
   void RefreshNeighbours();
+  void AddArtistOrTag(const QString& name,
+                      LastFMStationDialog::Type dialog_type, ItemType item_type,
+                      const QIcon& icon, RadioItem* list);
+  void SaveList(const QString& name, RadioItem* list) const;
+  void RestoreList(const QString &name, ItemType item_type,
+                   const QIcon& icon, RadioItem *list);
 
  private:
   lastfm::RadioTuner* tuner_;
@@ -96,9 +107,13 @@ class LastFMService : public RadioService {
   lastfm::Track last_track_;
 
   LastFMConfig* config_;
+  LastFMStationDialog* station_dialog_;
 
   QMenu* context_menu_;
   QAction* play_action_;
+  QAction* remove_action_;
+  QAction* add_artist_action_;
+  QAction* add_tag_action_;
   RadioItem* context_item_;
 
   QUrl last_url_;
@@ -106,6 +121,8 @@ class LastFMService : public RadioService {
 
   bool scrobbling_enabled_;
 
+  RadioItem* artist_list_;
+  RadioItem* tag_list_;
   RadioItem* friends_list_;
   RadioItem* neighbours_list_;
 };

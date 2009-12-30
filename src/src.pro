@@ -42,7 +42,8 @@ SOURCES += main.cpp \
     busyindicator.cpp \
     radioplaylistitem.cpp \
     radioloadingindicator.cpp \
-    radioview.cpp
+    radioview.cpp \
+    lastfmstationdialog.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -84,12 +85,14 @@ HEADERS += mainwindow.h \
     radiomimedata.h \
     radioplaylistitem.h \
     radioloadingindicator.h \
-    radioview.h
+    radioview.h \
+    lastfmstationdialog.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
     lastfmconfig.ui \
-    radioloadingindicator.ui
+    radioloadingindicator.ui \
+    lastfmstationdialog.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

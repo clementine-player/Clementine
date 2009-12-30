@@ -2,6 +2,7 @@
 #include "lastfmconfig.h"
 #include "radioitem.h"
 #include "song.h"
+#include "lastfmstationdialog.h"
 
 #include <lastfm/ws.h>
 #include <lastfm/misc.h>
@@ -21,9 +22,12 @@ LastFMService::LastFMService(QObject* parent)
   : RadioService(kServiceName, parent),
     tuner_(NULL),
     scrobbler_(NULL),
+    station_dialog_(new LastFMStationDialog),
     context_menu_(new QMenu),
     initial_tune_(false),
     scrobbling_enabled_(false),
+    artist_list_(NULL),
+    tag_list_(NULL),
     friends_list_(NULL),
     neighbours_list_(NULL)
 {
@@ -44,13 +48,18 @@ LastFMService::LastFMService(QObject* parent)
 
   play_action_ = context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
+  add_artist_action_ = context_menu_->addAction(QIcon(":last.fm/icon_radio.png"), "Play artist radio...", this, SLOT(AddArtistRadio()));
+  add_tag_action_ = context_menu_->addAction(QIcon(":last.fm/icon_tag.png"), "Play tag radio...", this, SLOT(AddTagRadio()));
   context_menu_->addAction(QIcon(":configure.png"), "Configure Last.fm...",
                            config_, SLOT(show()));
 
+  add_artist_action_->setEnabled(false);
+  add_tag_action_->setEnabled(false);
 }
 
 LastFMService::~LastFMService() {
   delete config_;
+  delete station_dialog_;
   delete context_menu_;
 }
 
@@ -75,8 +84,6 @@ RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
 }
 
 void LastFMService::LazyPopulate(RadioItem *item) {
-  RadioItem* c = NULL;
-
   switch (item->type) {
     case RadioItem::Type_Service:
       // Normal radio types
@@ -85,16 +92,18 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       CreateStationItem(Type_MyLoved, "My Loved Tracks", ":last.fm/loved_radio.png", item);
       CreateStationItem(Type_MyNeighbourhood, "My Neighbourhood", ":last.fm/neighbour_radio.png", item);
 
-      // Types that spawn a popup dialog
-      c = CreateStationItem(Type_ArtistRadio, "Artist radio...",
-                            ":last.fm/icon_radio.png", item);
-      c->playable = false;
-
-      c = CreateStationItem(Type_TagRadio, "Tag radio...",
-                            ":last.fm/icon_tag.png", item);
-      c->playable = false;
-
       // Types that have children
+      artist_list_ = new RadioItem(this, Type_ArtistRadio, "Artist radio", item);
+      artist_list_->icon = QIcon(":last.fm/icon_radio.png");
+      artist_list_->lazy_loaded = true;
+
+      tag_list_ = new RadioItem(this, Type_TagRadio, "Tag radio", item);
+      tag_list_->icon = QIcon(":last.fm/icon_tag.png");
+      tag_list_->lazy_loaded = true;
+
+      RestoreList("artists", Type_Artist, QIcon(":last.fm/icon_radio.png"), artist_list_);
+      RestoreList("tags", Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
+
       friends_list_ = new RadioItem(this, Type_MyFriends, "Friends", item);
       friends_list_->icon = QIcon(":last.fm/my_friends.png");
 
@@ -103,6 +112,9 @@ void LastFMService::LazyPopulate(RadioItem *item) {
 
       if (!IsAuthenticated())
         config_->show();
+
+      add_artist_action_->setEnabled(true);
+      add_tag_action_->setEnabled(true);
       break;
 
     case Type_MyFriends:
@@ -204,6 +216,12 @@ QUrl LastFMService::UrlForItem(const RadioItem* item) const {
 
     case Type_OtherUserNeighbourhood:
       return "lastfm://user/" + item->key + "/neighbours";
+
+    case Type_Artist:
+      return "lastfm://artist/" + item->key + "/similarartists";
+
+    case Type_Tag:
+      return "lastfm://globaltags/" + item->key;
   }
   return QUrl();
 }
@@ -220,6 +238,8 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
     case Type_OtherUserRadio:    return item->key + "'s Library";
     case Type_OtherUserLoved:    return item->key + "'s Loved Tracks";
     case Type_OtherUserNeighbourhood: return item->key + "'s Neighbour Radio";
+    case Type_Artist:            return "Similar artists to " + item->key;
+    case Type_Tag:               return "Tag radio: " + item->key;
   }
   return QString();
 }
@@ -443,4 +463,63 @@ void LastFMService::RefreshNeighboursFinished() {
 
 void LastFMService::AddToPlaylist() {
   emit AddItemToPlaylist(context_item_);
+}
+
+void LastFMService::AddArtistRadio() {
+  AddArtistOrTag("artists", LastFMStationDialog::Artist, Type_Artist, QIcon(":last.fm/icon_radio.png"), artist_list_);
+}
+
+void LastFMService::AddTagRadio() {
+  AddArtistOrTag("tags", LastFMStationDialog::Tag, Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
+}
+
+void LastFMService::AddArtistOrTag(const QString& name,
+                                   LastFMStationDialog::Type dialog_type, ItemType item_type,
+                                   const QIcon& icon, RadioItem* list) {
+  station_dialog_->SetType(dialog_type);
+  if (station_dialog_->exec() == QDialog::Rejected)
+    return;
+
+  if (station_dialog_->content().isEmpty())
+    return;
+
+  RadioItem* item = new RadioItem(this, item_type, station_dialog_->content());
+  item->icon = icon;
+  item->playable = true;
+  item->lazy_loaded = true;
+  item->InsertNotify(list);
+  emit AddItemToPlaylist(item);
+
+  SaveList(name, list);
+}
+
+void LastFMService::SaveList(const QString& name, RadioItem* list) const {
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+
+  settings.beginWriteArray(name, list->children.count());
+  for (int i=0 ; i<list->children.count() ; ++i) {
+    settings.setArrayIndex(i);
+    settings.setValue("key", list->children[i]->key);
+  }
+  settings.endArray();
+}
+
+void LastFMService::RestoreList(const QString &name, ItemType item_type,
+                                const QIcon& icon, RadioItem *list) {
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+
+  list->ClearNotify();
+
+  int count = settings.beginReadArray(name);
+  for (int i=0 ; i<count ; ++i) {
+    settings.setArrayIndex(i);
+    RadioItem* item = new RadioItem(this, item_type,
+                                    settings.value("key").toString(), list);
+    item->icon = icon;
+    item->playable = true;
+    item->lazy_loaded = true;
+  }
+  settings.endArray();
 }
