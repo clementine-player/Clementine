@@ -23,7 +23,9 @@ LastFMService::LastFMService(QObject* parent)
     scrobbler_(NULL),
     context_menu_(new QMenu),
     initial_tune_(false),
-    scrobbling_enabled_(false)
+    scrobbling_enabled_(false),
+    friends_list_(NULL),
+    neighbours_list_(NULL)
 {
   lastfm::ws::ApiKey = kApiKey;
   lastfm::ws::SharedSecret = kSecret;
@@ -70,9 +72,11 @@ RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
 }
 
 void LastFMService::LazyPopulate(RadioItem *item) {
+  RadioItem* c = NULL;
+
   switch (item->type) {
     case RadioItem::Type_Service:
-      // Create child items
+      // Normal radio types
       CreateStationItem(Type_MyRecommendations, "My Recommendations",
                         ":last.fm/recommended_radio.png", item);
       CreateStationItem(Type_MyRadio, "My Radio Station",
@@ -82,8 +86,32 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       CreateStationItem(Type_MyNeighbourhood, "My Neighbourhood",
                         ":last.fm/neighbour_radio.png", item);
 
+      // Types that spawn a popup dialog
+      c = CreateStationItem(Type_ArtistRadio, "Artist radio...",
+                            ":last.fm/icon_radio.png", item);
+      c->playable = false;
+
+      c = CreateStationItem(Type_TagRadio, "Tag radio...",
+                            ":last.fm/icon_tag.png", item);
+      c->playable = false;
+
+      // Types that have children
+      friends_list_ = new RadioItem(this, Type_MyFriends, "Friends", item);
+      friends_list_->icon = QIcon(":last.fm/my_friends.png");
+
+      neighbours_list_ = new RadioItem(this, Type_MyNeighbours, "Neighbours", item);
+      neighbours_list_->icon = QIcon(":last.fm/my_neighbours.png");
+
       if (!IsAuthenticated())
         config_->show();
+      break;
+
+    case Type_MyFriends:
+      RefreshFriends();
+      break;
+
+    case Type_MyNeighbours:
+      RefreshNeighbours();
       break;
 
     default:
@@ -158,18 +186,26 @@ QUrl LastFMService::UrlForItem(const RadioItem* item) const {
 
     case Type_MyRadio:
       return "lastfm://user/" + lastfm::ws::Username + "/library";
+
+    case Type_FriendRadio:
+      return "lastfm://user/" + item->key + "/library";
+
+    case Type_NeighbourRadio:
+      return "lastfm://user/" + item->key + "/library";
   }
   return QUrl();
 }
 
 QString LastFMService::TitleForItem(const RadioItem* item) const {
-  const QString user(lastfm::ws::Username);
+  const QString me(lastfm::ws::Username);
 
   switch (item->type) {
-    case Type_MyRecommendations: return user + "'s Recommended Radio";
-    case Type_MyLoved:           return user + "'s Loved Tracks";
-    case Type_MyNeighbourhood:   return user + "'s Neighbour Radio";
-    case Type_MyRadio:           return user + "'s Library";
+    case Type_MyRecommendations: return me + "'s Recommended Radio";
+    case Type_MyLoved:           return me + "'s Loved Tracks";
+    case Type_MyNeighbourhood:   return me + "'s Neighbour Radio";
+    case Type_MyRadio:           return me + "'s Library";
+    case Type_FriendRadio:       return item->key + "'s Library";
+    case Type_NeighbourRadio:    return item->key + "'s Library";
   }
   return QString();
 }
@@ -320,4 +356,72 @@ void LastFMService::Ban() {
 
 void LastFMService::ShowContextMenu(RadioItem *, const QPoint &global_pos) {
   context_menu_->popup(global_pos);
+}
+
+void LastFMService::RefreshFriends() {
+  if (!friends_list_ || !IsAuthenticated())
+    return;
+
+  friends_list_->ClearNotify();
+
+  lastfm::AuthenticatedUser user;
+  QNetworkReply* reply = user.getFriends();
+  connect(reply, SIGNAL(finished()), SLOT(RefreshFriendsFinished()));
+}
+
+void LastFMService::RefreshNeighbours() {
+  if (!friends_list_ || !IsAuthenticated())
+    return;
+
+  neighbours_list_->ClearNotify();
+
+  lastfm::AuthenticatedUser user;
+  QNetworkReply* reply = user.getNeighbours();
+  connect(reply, SIGNAL(finished()), SLOT(RefreshNeighboursFinished()));
+}
+
+void LastFMService::RefreshFriendsFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  QList<lastfm::User> friends;
+
+  try {
+    friends = lastfm::User::list(reply);
+  } catch (std::runtime_error& e) {
+    qDebug() << e.what();
+    return;
+  }
+
+  foreach (const lastfm::User& f, friends) {
+    RadioItem* item = new RadioItem(this, Type_FriendRadio, f);
+    item->icon = QIcon(":last.fm/icon_user.png");
+    item->playable = true;
+    item->lazy_loaded = true;
+    item->InsertNotify(friends_list_);
+  }
+}
+
+void LastFMService::RefreshNeighboursFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  QList<lastfm::User> neighbours;
+
+  try {
+    neighbours = lastfm::User::list(reply);
+  } catch (std::runtime_error& e) {
+    qDebug() << e.what();
+    return;
+  }
+
+  foreach (const lastfm::User& n, neighbours) {
+    RadioItem* item = new RadioItem(this, Type_NeighbourRadio, n);
+    item->icon = QIcon(":last.fm/user_purple.png");
+    item->playable = true;
+    item->lazy_loaded = true;
+    item->InsertNotify(neighbours_list_);
+  }
 }

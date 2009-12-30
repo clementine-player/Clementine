@@ -1,6 +1,12 @@
 #include "radioitem.h"
 #include "radioservice.h"
 
+RadioItem::RadioItem(SimpleTreeModel<RadioItem> *model)
+  : SimpleTreeItem<RadioItem>(Type_Root, model),
+    service(NULL)
+{
+}
+
 RadioItem::RadioItem(RadioService* _service, int type, const QString& key,
                      RadioItem* parent)
   : SimpleTreeItem<RadioItem>(type, key, parent),

@@ -15,6 +15,7 @@ class RadioItem : public SimpleTreeItem<RadioItem> {
     Type_Service,
   };
 
+  RadioItem(SimpleTreeModel<RadioItem>* model);
   RadioItem(RadioService* _service, int type, const QString& key = QString::null,
             RadioItem* parent = NULL);
 

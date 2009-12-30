@@ -19,6 +19,8 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
     Type_Song,
   };
 
+  LibraryItem(SimpleTreeModel<LibraryItem>* model)
+    : SimpleTreeItem<LibraryItem>(Type_Root, model) {}
   LibraryItem(Type type, const QString& key = QString::null, LibraryItem* parent = NULL)
     : SimpleTreeItem<LibraryItem>(type, key, parent) {}
 

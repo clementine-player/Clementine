@@ -11,7 +11,7 @@
 
 
 Library::Library(EngineBase* engine, QObject* parent)
-  : SimpleTreeModel<LibraryItem>(new LibraryItem(LibraryItem::Type_Root), parent),
+  : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     engine_(engine),
     backend_(new BackgroundThread<LibraryBackend>(this)),
     watcher_(new BackgroundThread<LibraryWatcher>(this)),
@@ -357,7 +357,7 @@ void Library::Reset() {
   divider_nodes_.clear();
   compilation_artist_node_ = NULL;
 
-  root_ = new LibraryItem(LibraryItem::Type_Root);
+  root_ = new LibraryItem(this);
   root_->lazy_loaded = true;
 
   // Various artists?

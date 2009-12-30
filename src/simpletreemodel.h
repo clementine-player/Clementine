@@ -21,6 +21,12 @@ class SimpleTreeModel : public QAbstractItemModel {
   T* IndexToItem(const QModelIndex& index) const;
   QModelIndex ItemToIndex(T* item) const;
 
+  // Called by items
+  void BeginInsert(T* parent, int start, int end = -1);
+  void EndInsert();
+  void BeginDelete(T* parent, int start, int end = -1);
+  void EndDelete();
+
  protected:
   virtual void LazyPopulate(T* item) = 0;
 
@@ -85,6 +91,28 @@ bool SimpleTreeModel<T>::hasChildren(const QModelIndex &parent) const {
     return !item->children.isEmpty();
   else
     return true;
+}
+
+template <typename T>
+void SimpleTreeModel<T>::BeginInsert(T* parent, int start, int end) {
+  if (end == -1) end = start;
+  beginInsertRows(ItemToIndex(parent), start, end);
+}
+
+template <typename T>
+void SimpleTreeModel<T>::EndInsert() {
+  endInsertRows();
+}
+
+template <typename T>
+void SimpleTreeModel<T>::BeginDelete(T* parent, int start, int end) {
+  if (end == -1) end = start;
+  beginRemoveRows(ItemToIndex(parent), start, end);
+}
+
+template <typename T>
+void SimpleTreeModel<T>::EndDelete() {
+  endRemoveRows();
 }
 
 #endif // SIMPLETREEMODEL_H

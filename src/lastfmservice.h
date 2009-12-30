@@ -28,6 +28,12 @@ class LastFMService : public RadioService {
     Type_MyRadio,
     Type_MyLoved,
     Type_MyNeighbourhood,
+    Type_ArtistRadio,
+    Type_TagRadio,
+    Type_MyFriends,
+    Type_MyNeighbours,
+    Type_FriendRadio,
+    Type_NeighbourRadio,
   };
 
   // RadioService
@@ -48,11 +54,11 @@ class LastFMService : public RadioService {
   // Last.fm specific stuff
   bool IsAuthenticated() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
+
   void Authenticate(const QString& username, const QString& password);
 
-  void NowPlaying(const Song& song);
-
  public slots:
+  void NowPlaying(const Song& song);
   void Scrobble();
   void Love();
   void Ban();
@@ -64,6 +70,8 @@ class LastFMService : public RadioService {
  private slots:
   void AuthenticateReplyFinished();
   void ScrobblingEnabledChangedSlot(bool value);
+  void RefreshFriendsFinished();
+  void RefreshNeighboursFinished();
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
@@ -74,6 +82,8 @@ class LastFMService : public RadioService {
   QString ErrorString(lastfm::ws::Error error) const;
   bool InitScrobbler();
   lastfm::Track TrackFromSong(const Song& song) const;
+  void RefreshFriends();
+  void RefreshNeighbours();
 
  private:
   lastfm::RadioTuner* tuner_;
@@ -87,6 +97,9 @@ class LastFMService : public RadioService {
   bool initial_tune_;
 
   bool scrobbling_enabled_;
+
+  RadioItem* friends_list_;
+  RadioItem* neighbours_list_;
 };
 
 #endif // LASTFMSERVICE_H

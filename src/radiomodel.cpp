@@ -9,7 +9,7 @@
 QMap<QString, RadioService*> RadioModel::sServices;
 
 RadioModel::RadioModel(QObject* parent)
-  : SimpleTreeModel<RadioItem>(new RadioItem(NULL, RadioItem::Type_Root), parent)
+  : SimpleTreeModel<RadioItem>(new RadioItem(this), parent)
 {
   Q_ASSERT(sServices.isEmpty());
 
