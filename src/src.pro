@@ -43,7 +43,9 @@ SOURCES += main.cpp \
     radioplaylistitem.cpp \
     radioloadingindicator.cpp \
     radioview.cpp \
-    lastfmstationdialog.cpp
+    lastfmstationdialog.cpp \
+    osd.cpp \
+    osd_x11.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -87,7 +89,8 @@ HEADERS += mainwindow.h \
     radioloadingindicator.h \
     radioview.h \
     lastfmstationdialog.h \
-    ../3rdparty/qxt/keymapper_x11.h
+    ../3rdparty/qxt/keymapper_x11.h \
+    osd.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -103,6 +106,8 @@ LIBS += -llastfm
     LIBS += $$system(taglib-config --libs)
     QMAKE_CXXFLAGS += $$system(xine-config --cflags)
     LIBS += $$system(xine-config --libs)
+    QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
+    LIBS += $$system(pkg-config --libs libnotify)
 }
 win32 { 
     INCLUDEPATH += C:/msys/1.0/local/include \

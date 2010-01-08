@@ -122,8 +122,11 @@ void Playlist::set_current_index(int i) {
 
   if (old_current.isValid())
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount));
-  if (current_item_.isValid())
+
+  if (current_item_.isValid()) {
     emit dataChanged(current_item_, current_item_.sibling(current_item_.row(), ColumnCount));
+    emit CurrentSongChanged(current_item_metadata());
+  }
 
   UpdateScrobblePoint();
 }
@@ -443,6 +446,7 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
   UpdateScrobblePoint();
 
   emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
+  emit CurrentSongChanged(song);
 }
 
 void Playlist::ClearStreamMetadata() {

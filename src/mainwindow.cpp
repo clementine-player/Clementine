@@ -8,6 +8,7 @@
 #include "radiomodel.h"
 #include "enginebase.h"
 #include "lastfmservice.h"
+#include "osd.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -30,6 +31,7 @@ const char* MainWindow::kSettingsGroup = "MainWindow";
 MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent),
     tray_icon_(new SystemTrayIcon(this)),
+    osd_(new OSD(tray_icon_, this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
@@ -108,6 +110,10 @@ MainWindow::MainWindow(QWidget *parent)
   connect(player_, SIGNAL(Paused()), ui_.playlist, SLOT(StopGlowing()));
   connect(player_, SIGNAL(Playing()), ui_.playlist, SLOT(StartGlowing()));
   connect(player_, SIGNAL(Stopped()), ui_.playlist, SLOT(StopGlowing()));
+
+  connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
+  connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
+  connect(playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
 
   connect(ui_.playlist, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 

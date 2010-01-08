@@ -99,6 +99,9 @@ class Playlist : public QAbstractListModel {
   void ClearStreamMetadata();
   void SetStreamMetadata(const QUrl& url, const Song& song);
 
+ signals:
+  void CurrentSongChanged(const Song& metadata);
+
  private:
   void SetCurrentIsPaused(bool paused);
   void UpdateScrobblePoint();
