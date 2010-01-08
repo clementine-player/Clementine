@@ -103,6 +103,7 @@ void Player::EngineStateChanged(Engine::State state) {
 void Player::SetVolume(int value) {
   settings_.setValue("volume", value);
   engine_->setVolume(value);
+  emit VolumeChanged(value);
 }
 
 int Player::GetVolume() const {

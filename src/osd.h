@@ -28,6 +28,7 @@ class OSD : public QObject {
   void SongChanged(const Song& song);
   void Paused();
   void Stopped();
+  void VolumeChanged(int value);
 
  private:
   QSystemTrayIcon* tray_icon_;

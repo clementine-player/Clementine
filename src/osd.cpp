@@ -11,9 +11,11 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
 }
 
 void OSD::SongChanged(const Song &song) {
-  QString summary(song.PrettyTitleWithArtist());
-  QStringList message_parts;
+  QString summary(song.PrettyTitle());
+  if (!song.artist().isNull())
+    summary = QString("%1 - %2").arg(song.artist(), summary);
 
+  QStringList message_parts;
   if (!song.album().isEmpty())
     message_parts << song.album();
   if (song.disc() > 0)
@@ -30,4 +32,8 @@ void OSD::Paused() {
 
 void OSD::Stopped() {
   ShowMessage(QCoreApplication::applicationName(), "Playlist finished");
+}
+
+void OSD::VolumeChanged(int value) {
+  ShowMessage(QCoreApplication::applicationName(), QString("Volume %1%").arg(value));
 }

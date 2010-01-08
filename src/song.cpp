@@ -250,7 +250,7 @@ QString Song::PrettyTitleWithArtist() const {
   if (title.isEmpty())
     title = QFileInfo(filename_).baseName();
 
-  if (!compilation_ && !artist_.isEmpty())
+  if (compilation_ && !artist_.isEmpty())
     title = artist_ + " - " + title;
 
   return title;
