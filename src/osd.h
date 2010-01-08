@@ -7,6 +7,12 @@
 #include "engine_fwd.h"
 #include "song.h"
 
+#ifdef Q_WS_X11
+# ifndef _NOTIFY_NOTIFICATION_H_
+    struct NotifyNotification;
+# endif
+#endif
+
 class OSD : public QObject {
   Q_OBJECT
 
@@ -25,6 +31,10 @@ class OSD : public QObject {
 
  private:
   QSystemTrayIcon* tray_icon_;
+
+#ifdef Q_WS_X11
+  NotifyNotification* notification_;
+#endif
 };
 
 #endif // OSD_H
