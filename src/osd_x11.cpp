@@ -28,7 +28,7 @@ void OSD::ShowMessage(const QString& summary, const QString& message,
   }
 
   notify_notification_set_urgency(notification_, NOTIFY_URGENCY_LOW);
-  notify_notification_set_timeout(notification_, 5000);
+  notify_notification_set_timeout(notification_, timeout_);
 
   GError* error = NULL;
   notify_notification_show(notification_, &error);

@@ -31,6 +31,7 @@ class OSD : public QObject {
 
  private:
   QSystemTrayIcon* tray_icon_;
+  int timeout_;
 
 #ifdef Q_WS_X11
   NotifyNotification* notification_;

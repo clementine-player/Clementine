@@ -44,8 +44,7 @@ SOURCES += main.cpp \
     radioloadingindicator.cpp \
     radioview.cpp \
     lastfmstationdialog.cpp \
-    osd.cpp \
-    osd_x11.cpp
+    osd.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -118,6 +117,9 @@ win32 {
         -lxine \
         -lpthreadGC2
 }
+unix:!macx:SOURCES += osd_x11.cpp
+macx:SOURCES += osd_mac.cpp
+
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt

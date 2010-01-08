@@ -2,7 +2,8 @@
 
 OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
-    tray_icon_(tray_icon)
+    tray_icon_(tray_icon),
+    timeout_(5000)
 {
   Init();
 }
