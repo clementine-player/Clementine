@@ -1,6 +1,7 @@
 #include "osd.h"
 
 #include <QCoreApplication>
+#include <QtDebug>
 
 OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
@@ -19,11 +20,11 @@ void OSD::SongChanged(const Song &song) {
   if (!song.album().isEmpty())
     message_parts << song.album();
   if (song.disc() > 0)
-    message_parts << QString("Disc %1").arg(song.disc());
+    message_parts << QString("disc %1").arg(song.disc());
   if (song.track() > 0)
-    message_parts << QString("Track %1").arg(song.track());
+    message_parts << QString("track %1").arg(song.track());
 
-  ShowMessage(summary, message_parts.join(" "), "notification-audio-play");
+  ShowMessage(summary, message_parts.join(", "), "notification-audio-play");
 }
 
 void OSD::Paused() {

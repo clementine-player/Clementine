@@ -7,6 +7,7 @@
 
 #include <QCoreApplication>
 #include <QtDebug>
+#include <QTextDocument>
 
 void OSD::Init() {
   notification_ = NULL;
@@ -22,10 +23,10 @@ void OSD::ShowMessage(const QString& summary, const QString& message,
 
   if (notification_) {
     notify_notification_update(notification_,
-        STR(summary), STR(message), STR(icon));
+        STR(summary), STR(Qt::escape(message)), STR(icon));
   } else {
     notification_ = notify_notification_new(
-        STR(summary), STR(message), STR(icon), NULL);
+        STR(summary), STR(Qt::escape(message)), STR(icon), NULL);
   }
 
   #undef STR
