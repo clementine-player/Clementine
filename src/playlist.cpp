@@ -15,7 +15,7 @@
 
 #include <lastfm/ScrobblePoint>
 
-const char* Playlist::kRowsMimetype = "application/x-tangerine-playlist-rows";
+const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kSettingsGroup = "Playlist";
 
 Playlist::Playlist(QObject *parent) :

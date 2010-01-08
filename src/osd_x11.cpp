@@ -5,11 +5,12 @@
 
 #include "osd.h"
 
+#include <QCoreApplication>
 #include <QtDebug>
 
 void OSD::Init() {
   notification_ = NULL;
-  notify_init("Tangerine");
+  notify_init(QCoreApplication::applicationName().toUtf8().constData());
 }
 
 void OSD::ShowMessage(const QString& summary, const QString& message,
@@ -26,6 +27,8 @@ void OSD::ShowMessage(const QString& summary, const QString& message,
     notification_ = notify_notification_new(
         STR(summary), STR(message), STR(icon), NULL);
   }
+
+  #undef STR
 
   notify_notification_set_urgency(notification_, NOTIFY_URGENCY_LOW);
   notify_notification_set_timeout(notification_, timeout_);

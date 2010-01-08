@@ -5,7 +5,7 @@ QT += sql \
     network \
     opengl \
     xml
-TARGET = tangerine
+TARGET = clementine
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \

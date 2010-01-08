@@ -11,7 +11,7 @@
 #include <QCoreApplication>
 #include <QThread>
 
-const char* LibraryBackend::kDatabaseName = "tangerine.db";
+const char* LibraryBackend::kDatabaseName = "clementine.db";
 
 LibraryBackend::LibraryBackend(QObject* parent)
   : QObject(parent)

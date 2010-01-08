@@ -1,5 +1,7 @@
 #include "osd.h"
 
+#include <QCoreApplication>
+
 OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
@@ -23,9 +25,9 @@ void OSD::SongChanged(const Song &song) {
 }
 
 void OSD::Paused() {
-  ShowMessage("Tangerine", "Paused");
+  ShowMessage(QCoreApplication::applicationName(), "Paused");
 }
 
 void OSD::Stopped() {
-  ShowMessage("Tangerine", "Playlist finished");
+  ShowMessage(QCoreApplication::applicationName(), "Playlist finished");
 }

@@ -91,7 +91,7 @@ void LibraryView::paintEvent(QPaintEvent* event) {
 
   QRect rect(viewport()->rect());
   if (total_song_count_ == 0) {
-    // Draw the confused tangerine
+    // Draw the confused clementine
     QRect image_rect((rect.width() - nomusic_.width()) / 2, 50,
                      nomusic_.width(), nomusic_.height());
     p.drawPixmap(image_rect, nomusic_);

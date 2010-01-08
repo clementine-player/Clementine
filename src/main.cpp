@@ -5,9 +5,9 @@
 #include <QApplication>
 
 int main(int argc, char *argv[]) {
-  QCoreApplication::setApplicationName("Tangerine");
+  QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion("0.1");
-  QCoreApplication::setOrganizationName("Tangerine");
+  QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 
   qRegisterMetaType<DirectoryList>("DirectoryList");

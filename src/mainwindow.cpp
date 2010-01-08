@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
   ui_.setupUi(this);
   tray_icon_->setIcon(windowIcon());
-  tray_icon_->setToolTip("Tangerine");
+  tray_icon_->setToolTip(QCoreApplication::applicationName());
   tray_icon_->show();
 
   ui_.volume->setValue(player_->GetVolume());
