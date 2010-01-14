@@ -496,3 +496,9 @@ void Playlist::UpdateScrobblePoint() {
   scrobble_point_ = point;
   has_scrobbled_ = false;
 }
+
+void Playlist::Clear() {
+  qDeleteAll(items_);
+  items_.clear();
+  reset();
+}

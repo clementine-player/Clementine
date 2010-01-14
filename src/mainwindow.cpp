@@ -80,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.library_filter, SIGNAL(textChanged(QString)), library_, SLOT(SetFilterText(QString)));
   connect(ui_.action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
+  connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -88,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.stop_button->setDefaultAction(ui_.action_stop);
   ui_.love_button->setDefaultAction(ui_.action_love);
   ui_.ban_button->setDefaultAction(ui_.action_ban);
+  ui_.clear_playlist_button->setDefaultAction(ui_.action_clear_playlist);
 
   // Stop actions
   QMenu* stop_menu = new QMenu(this);
@@ -193,7 +195,6 @@ MainWindow::MainWindow(QWidget *parent)
   connect(stop, SIGNAL(activated()), ui_.action_stop, SLOT(trigger()));
   connect(next, SIGNAL(activated()), ui_.action_next_track, SLOT(trigger()));
   connect(prev, SIGNAL(activated()), ui_.action_previous_track, SLOT(trigger()));
-  connect(play_pause, SIGNAL(activated()), this, SLOT(close()));
 
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());

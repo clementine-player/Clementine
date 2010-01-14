@@ -99,6 +99,8 @@ class Playlist : public QAbstractListModel {
   void ClearStreamMetadata();
   void SetStreamMetadata(const QUrl& url, const Song& song);
 
+  void Clear();
+
  signals:
   void CurrentSongChanged(const Song& metadata);
 
