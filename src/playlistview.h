@@ -55,6 +55,9 @@ class PlaylistView : public QTreeView {
   void StartRadioLoading();
   void StopRadioLoading();
 
+ signals:
+  void PlayPauseItem(const QModelIndex& index);
+
  protected:
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);

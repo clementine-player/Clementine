@@ -298,8 +298,13 @@ bool CompareSelectionRanges(const QItemSelectionRange& a, const QItemSelectionRa
 }
 
 void PlaylistView::keyPressEvent(QKeyEvent* event) {
-  if (model() && (event->matches(QKeySequence::Delete) ||
-                  event->key() == Qt::Key_Backspace)) {
+  if (!model()) {
+    QTreeView::keyPressEvent(event);
+    return;
+  }
+
+  if (event->matches(QKeySequence::Delete) ||
+      event->key() == Qt::Key_Backspace) {
     QItemSelection selection(selectionModel()->selection());
 
     // Sort the selection so we remove the items at the *bottom* first, ensuring
@@ -310,6 +315,19 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
       model()->removeRows(range.top(), range.height(), range.parent());
     }
 
+    // Select the new current item
+    if (currentIndex().isValid())
+      selectionModel()->select(
+          QItemSelection(currentIndex().sibling(currentIndex().row(), 0),
+                         currentIndex().sibling(currentIndex().row(), model()->columnCount()-1)),
+          QItemSelectionModel::Select);
+
+    event->accept();
+  } else if (event->key() == Qt::Key_Enter ||
+             event->key() == Qt::Key_Return ||
+             event->key() == Qt::Key_Space) {
+    if (currentIndex().isValid())
+      emit PlayPauseItem(currentIndex());
     event->accept();
   } else {
     QTreeView::keyPressEvent(event);
