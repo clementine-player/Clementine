@@ -119,6 +119,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
 
   connect(ui_.playlist, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+  connect(ui_.playlist, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
   // Library connections
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
