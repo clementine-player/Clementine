@@ -1,4 +1,5 @@
 #include "libraryquery.h"
+#include "song.h"
 
 #include <QtDebug>
 #include <QDateTime>
@@ -53,4 +54,20 @@ QSqlQuery LibraryQuery::Query(QSqlDatabase db) const {
   }
 
   return q;
+}
+
+bool QueryOptions::Matches(const Song& song) const {
+  if (max_age != -1) {
+    const uint cutoff = QDateTime::currentDateTime().toTime_t() - max_age;
+    if (song.ctime() <= cutoff)
+      return false;
+  }
+
+  if (!filter.isNull()) {
+    return song.artist().contains(filter, Qt::CaseInsensitive) ||
+           song.album().contains(filter, Qt::CaseInsensitive) ||
+           song.title().contains(filter, Qt::CaseInsensitive);
+  }
+
+  return true;
 }

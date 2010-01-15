@@ -80,6 +80,9 @@ void Library::Initialise() {
 
 void Library::SongsDiscovered(const SongList& songs) {
   foreach (const Song& song, songs) {
+    if (!query_options_.Matches(song))
+      continue;
+
     LibraryItem* artist = NULL;
     LibraryItem* album = NULL;
 

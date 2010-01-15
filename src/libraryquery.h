@@ -7,8 +7,12 @@
 #include <QStringList>
 #include <QVariantList>
 
+class Song;
+
 struct QueryOptions {
   QueryOptions() : max_age(-1) {}
+
+  bool Matches(const Song& song) const;
 
   QString filter;
   int max_age;
