@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
+    playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))
 {
@@ -120,6 +121,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   connect(ui_.playlist, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_.playlist, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+  connect(ui_.playlist, SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
 
   // Library connections
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
@@ -160,6 +162,13 @@ MainWindow::MainWindow(QWidget *parent)
   library_menu->addSeparator();
   library_menu->addAction("Configure library...", library_, SLOT(ShowConfig()));
   ui_.library_options->setMenu(library_menu);
+
+  // Playlist menu
+  playlist_play_pause_ = playlist_menu_->addAction("Play", this, SLOT(PlaylistPlay()));
+  playlist_menu_->addAction(ui_.action_stop);
+  playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), "Stop after this track", this, SLOT(PlaylistStopAfter()));
+  playlist_menu_->addSeparator();
+  playlist_menu_->addAction(ui_.action_clear_playlist);
 
   // Radio connections
   connect(radio_model_, SIGNAL(LoadingStarted()), ui_.playlist, SLOT(StartRadioLoading()));
@@ -399,4 +408,33 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row());
+}
+
+void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
+  playlist_menu_index_ = index;
+
+  if (playlist_->current_index() == index.row()) {
+    playlist_play_pause_->setText("Pause");
+    playlist_play_pause_->setIcon(QIcon(":media-playback-pause.png"));
+  } else {
+    playlist_play_pause_->setText("Play");
+    playlist_play_pause_->setIcon(QIcon(":media-playback-start.png"));
+  }
+
+  playlist_play_pause_->setEnabled(index.isValid());
+  playlist_stop_after_->setEnabled(index.isValid());
+
+  playlist_menu_->popup(global_pos);
+}
+
+void MainWindow::PlaylistPlay() {
+  if (playlist_->current_index() == playlist_menu_index_.row()) {
+    player_->PlayPause();
+  } else {
+    player_->PlayAt(playlist_menu_index_.row());
+  }
+}
+
+void MainWindow::PlaylistStopAfter() {
+  playlist_->StopAfter(playlist_menu_index_.row());
 }

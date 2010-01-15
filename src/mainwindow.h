@@ -40,6 +40,10 @@ class MainWindow : public QMainWindow {
   void MediaPaused();
   void MediaPlaying();
 
+  void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);
+  void PlaylistPlay();
+  void PlaylistStopAfter();
+
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
@@ -71,6 +75,11 @@ class MainWindow : public QMainWindow {
   Playlist* playlist_;
   Player* player_;
   Library* library_;
+
+  QMenu* playlist_menu_;
+  QAction* playlist_play_pause_;
+  QAction* playlist_stop_after_;
+  QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;
 

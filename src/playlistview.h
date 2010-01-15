@@ -57,6 +57,7 @@ class PlaylistView : public QTreeView {
 
  signals:
   void PlayPauseItem(const QModelIndex& index);
+  void RightClicked(const QPoint& global_pos, const QModelIndex& index);
 
  protected:
   void hideEvent(QHideEvent* event);
@@ -66,8 +67,6 @@ class PlaylistView : public QTreeView {
   void LoadGeometry();
   void SaveGeometry();
   void GlowIntensityChanged();
-
-  void StopAfter();
 
  private:
   void ReloadBarPixmaps();
@@ -89,9 +88,6 @@ class PlaylistView : public QTreeView {
   QList<QPixmap> currenttrack_bar_right_;
   QPixmap currenttrack_play_;
   QPixmap currenttrack_pause_;
-
-  QMenu* menu_;
-  QModelIndex menu_index_;
 
   RadioLoadingIndicator* radio_loading_;
 };

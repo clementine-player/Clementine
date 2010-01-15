@@ -134,7 +134,6 @@ PlaylistView::PlaylistView(QWidget *parent)
     row_height_(-1),
     currenttrack_play_(":currenttrack_play.png"),
     currenttrack_pause_(":currenttrack_pause.png"),
-    menu_(new QMenu(this)),
     radio_loading_(new RadioLoadingIndicator(this))
 {
   setItemDelegate(new PlaylistDelegateBase(this));
@@ -149,9 +148,6 @@ PlaylistView::PlaylistView(QWidget *parent)
 
   glow_timer_->setInterval(1500 / kGlowIntensitySteps);
   connect(glow_timer_, SIGNAL(timeout()), SLOT(GlowIntensityChanged()));
-
-  menu_->addAction(QIcon(":media-playback-stop.png"), "Stop playing after track",
-                   this, SLOT(StopAfter()));
 
   radio_loading_->hide();
 }
@@ -335,19 +331,8 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
 }
 
 void PlaylistView::contextMenuEvent(QContextMenuEvent* e) {
-  menu_index_ = indexAt(e->pos());
-  if (!menu_index_.isValid())
-    return;
-
-  menu_->popup(e->globalPos());
+  emit RightClicked(e->globalPos(), indexAt(e->pos()));
   e->accept();
-}
-
-void PlaylistView::StopAfter() {
-  Playlist* playlist = qobject_cast<Playlist*>(model());
-  Q_ASSERT(playlist);
-
-  playlist->StopAfter(menu_index_.row());
 }
 
 void PlaylistView::resizeEvent(QResizeEvent *event) {
