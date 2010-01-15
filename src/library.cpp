@@ -502,3 +502,11 @@ void Library::SetFilterText(const QString& text) {
   query_options_.filter = text;
   Reset();
 }
+
+bool Library::canFetchMore(const QModelIndex &parent) const {
+  if (!parent.isValid())
+    return false;
+
+  LibraryItem* item = IndexToItem(parent);
+  return !item->lazy_loaded;
+}

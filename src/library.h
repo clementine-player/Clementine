@@ -39,6 +39,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
   Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
+  bool canFetchMore(const QModelIndex &parent) const;
 
  signals:
   void Error(const QString& message);
