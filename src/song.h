@@ -4,69 +4,16 @@
 #include <QString>
 #include <QList>
 #include <QSqlQuery>
+#include <QSharedData>
+#include <QSharedDataPointer>
 
 namespace lastfm {
   class Track;
 }
 
-// TODO: QSharedData
-class Song {
- public:
-  Song();
+struct SongData : public QSharedData {
+  SongData();
 
-  static const char* kColumnSpec;
-  static const char* kBindSpec;
-  static const char* kUpdateSpec;
-
-  // Constructors
-  void InitFromFile(const QString& filename, int directory_id);
-  void InitFromQuery(const QSqlQuery& query);
-  void InitFromLastFM(const lastfm::Track& track);
-
-  // Save
-  void BindToQuery(QSqlQuery* query) const;
-  void ToLastFM(lastfm::Track* track) const;
-
-  // Simple accessors
-  bool is_valid() const { return valid_; }
-  int id() const { return id_; }
-
-  QString title() const { return title_; }
-  QString album() const { return album_; }
-  QString artist() const { return artist_; }
-  QString albumartist() const { return albumartist_; }
-  QString composer() const { return composer_; }
-  int track() const { return track_; }
-  int disc() const { return disc_; }
-  float bpm() const { return bpm_; }
-  int year() const { return year_; }
-  QString genre() const { return genre_; }
-  QString comment() const { return comment_; }
-  bool is_compilation() const { return compilation_; }
-
-  int length() const { return length_; }
-  int bitrate() const { return bitrate_; }
-  int samplerate() const { return samplerate_; }
-
-  int directory_id() const { return directory_id_; }
-  QString filename() const { return filename_; }
-  uint mtime() const { return mtime_; }
-  uint ctime() const { return ctime_; }
-  int filesize() const { return filesize_; }
-
-  // Pretty accessors
-  QString PrettyTitle() const;
-  QString PrettyTitleWithArtist() const;
-  QString PrettyLength() const;
-
-  // Setters
-  void set_id(int id) { id_ = id; }
-  void set_title(const QString& title) { title_ = title; }
-
-  // Comparison functions
-  bool IsMetadataEqual(const Song& other) const;
-
- private:
   bool valid_;
   int id_;
 
@@ -92,6 +39,67 @@ class Song {
   int mtime_;
   int ctime_;
   int filesize_;
+};
+
+class Song {
+ public:
+  Song();
+  Song(const Song& other);
+
+  static const char* kColumnSpec;
+  static const char* kBindSpec;
+  static const char* kUpdateSpec;
+
+  // Constructors
+  void InitFromFile(const QString& filename, int directory_id);
+  void InitFromQuery(const QSqlQuery& query);
+  void InitFromLastFM(const lastfm::Track& track);
+
+  // Save
+  void BindToQuery(QSqlQuery* query) const;
+  void ToLastFM(lastfm::Track* track) const;
+
+  // Simple accessors
+  bool is_valid() const { return d->valid_; }
+  int id() const { return d->id_; }
+
+  QString title() const { return d->title_; }
+  QString album() const { return d->album_; }
+  QString artist() const { return d->artist_; }
+  QString albumartist() const { return d->albumartist_; }
+  QString composer() const { return d->composer_; }
+  int track() const { return d->track_; }
+  int disc() const { return d->disc_; }
+  float bpm() const { return d->bpm_; }
+  int year() const { return d->year_; }
+  QString genre() const { return d->genre_; }
+  QString comment() const { return d->comment_; }
+  bool is_compilation() const { return d->compilation_; }
+
+  int length() const { return d->length_; }
+  int bitrate() const { return d->bitrate_; }
+  int samplerate() const { return d->samplerate_; }
+
+  int directory_id() const { return d->directory_id_; }
+  QString filename() const { return d->filename_; }
+  uint mtime() const { return d->mtime_; }
+  uint ctime() const { return d->ctime_; }
+  int filesize() const { return d->filesize_; }
+
+  // Pretty accessors
+  QString PrettyTitle() const;
+  QString PrettyTitleWithArtist() const;
+  QString PrettyLength() const;
+
+  // Setters
+  void set_id(int id) { d->id_ = id; }
+  void set_title(const QString& title) { d->title_ = title; }
+
+  // Comparison functions
+  bool IsMetadataEqual(const Song& other) const;
+
+ private:
+  QSharedDataPointer<SongData> d;
 };
 
 typedef QList<Song> SongList;
