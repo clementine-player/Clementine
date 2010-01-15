@@ -27,6 +27,7 @@ class Player : public QObject {
   void Previous();
   void Stop();
   void SetVolume(int value);
+  void Seek(int seconds);
 
   void TrackEnded();
   void StreamReady(const QUrl& original_url, const QUrl& media_url);

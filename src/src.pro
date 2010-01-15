@@ -44,7 +44,8 @@ SOURCES += main.cpp \
     radioloadingindicator.cpp \
     radioview.cpp \
     lastfmstationdialog.cpp \
-    osd.cpp
+    osd.cpp \
+    trackslider.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -89,13 +90,15 @@ HEADERS += mainwindow.h \
     radioview.h \
     lastfmstationdialog.h \
     ../3rdparty/qxt/keymapper_x11.h \
-    osd.h
+    osd.h \
+    trackslider.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
     lastfmconfig.ui \
     radioloadingindicator.ui \
-    lastfmstationdialog.ui
+    lastfmstationdialog.ui \
+    trackslider.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
@@ -119,7 +122,6 @@ win32 {
 }
 unix:!macx:SOURCES += osd_x11.cpp
 macx:SOURCES += osd_mac.cpp
-
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt

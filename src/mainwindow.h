@@ -14,6 +14,7 @@ class RadioModel;
 class Song;
 class RadioItem;
 class OSD;
+class TrackSlider;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -70,6 +71,7 @@ class MainWindow : public QMainWindow {
   Ui::MainWindow ui_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
+  TrackSlider* track_slider_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;

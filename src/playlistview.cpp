@@ -2,6 +2,7 @@
 #include "playlist.h"
 #include "playlistheader.h"
 #include "radioloadingindicator.h"
+#include "trackslider.h"
 
 #include <QPainter>
 #include <QHeaderView>
@@ -91,19 +92,10 @@ QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(const QStyleOptionViewItem
 QString LengthItemDelegate::displayText(const QVariant& value, const QLocale&) const {
   bool ok = false;
   int seconds = value.toInt(&ok);
-  QString ret;
 
-  if (ok && seconds > 0) {
-    int hours = seconds / (60*60);
-    int minutes = (seconds / 60) % 60;
-    seconds %= 60;
-
-    if (hours)
-      ret.sprintf("%d:%02d:%02d", hours, minutes, seconds);
-    else
-      ret.sprintf("%d:%02d", minutes, seconds);
-  }
-  return ret;
+  if (ok && seconds > 0)
+    return TrackSlider::PrettyTime(seconds);
+  return QString::null;
 }
 
 

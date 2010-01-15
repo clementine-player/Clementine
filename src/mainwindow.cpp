@@ -9,6 +9,7 @@
 #include "enginebase.h"
 #include "lastfmservice.h"
 #include "osd.h"
+#include "trackslider.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent),
     tray_icon_(new SystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, this)),
+    track_slider_(new TrackSlider(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
@@ -123,6 +125,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.playlist, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_.playlist, SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
 
+  connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
+
   // Library connections
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
   connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryDoubleClick(QModelIndex)));
@@ -210,6 +214,9 @@ MainWindow::MainWindow(QWidget *parent)
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());
 
+  // Statusbar widgets
+  ui_.statusBar->addPermanentWidget(track_slider_);
+
   // Load theme
   QFile stylesheet(":mainwindow.css");
   if (!stylesheet.open(QIODevice::ReadOnly)) {
@@ -263,6 +270,7 @@ void MainWindow::MediaStopped() {
   ui_.action_love->setEnabled(false);
 
   track_position_timer_->stop();
+  track_slider_->SetStopped();
 }
 
 void MainWindow::MediaPaused() {
@@ -290,6 +298,8 @@ void MainWindow::MediaPlaying() {
 
   ui_.action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
   ui_.action_love->setEnabled(lastfm->IsScrobblingEnabled());
+
+  track_slider_->SetCanSeek(!is_lastfm);
 
   track_position_timer_->start();
   UpdateTrackPosition();
@@ -392,6 +402,8 @@ void MainWindow::UpdateTrackPosition() {
     lastfm->Scrobble();
     playlist_->set_scrobbled(true);
   }
+
+  track_slider_->SetValue(position, playlist_->current_item()->Metadata().length());
 }
 
 void MainWindow::Love() {

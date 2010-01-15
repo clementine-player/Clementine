@@ -142,3 +142,7 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
 
   lastfm_->NowPlaying(item->Metadata());
 }
+
+void Player::Seek(int seconds) {
+  engine_->seek(seconds * 1000);
+}
