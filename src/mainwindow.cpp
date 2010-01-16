@@ -11,6 +11,7 @@
 #include "osd.h"
 #include "trackslider.h"
 #include "edittagdialog.h"
+#include "multiloadingindicator.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -36,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     osd_(new OSD(tray_icon_, this)),
     track_slider_(new TrackSlider(this)),
     edit_tag_dialog_(new EditTagDialog(this)),
+    multi_loading_indicator_(new MultiLoadingIndicator(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
@@ -135,6 +137,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryDoubleClick(QModelIndex)));
   connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_, SLOT(ShowConfig()));
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
+  connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
+  connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
 
   // Age filters
   QActionGroup* filter_age_group = new QActionGroup(this);
@@ -220,6 +224,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Statusbar widgets
   ui_.statusBar->addPermanentWidget(track_slider_);
+  ui_.statusBar->addWidget(multi_loading_indicator_);
+  multi_loading_indicator_->hide();
 
   // Load theme
   QFile stylesheet(":mainwindow.css");
@@ -490,4 +496,12 @@ void MainWindow::EditTracks() {
     return;
 
   playlist_->ReloadItems(rows);
+}
+
+void MainWindow::LibraryScanStarted() {
+  multi_loading_indicator_->TaskStarted("Updating library");
+}
+
+void MainWindow::LibraryScanFinished() {
+  multi_loading_indicator_->TaskFinished("Updating library");
 }

@@ -6,6 +6,7 @@ RadioLoadingIndicator::RadioLoadingIndicator(QWidget *parent)
   : QWidget(parent)
 {
   ui_.setupUi(this);
+  ui_.text->setText("<b>Loading radio stream...</b>");
 }
 
 void RadioLoadingIndicator::paintEvent(QPaintEvent*) {

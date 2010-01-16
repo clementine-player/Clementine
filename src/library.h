@@ -45,6 +45,9 @@ class Library : public SimpleTreeModel<LibraryItem> {
   void Error(const QString& message);
   void TotalSongCountUpdated(int count);
 
+  void ScanStarted();
+  void ScanFinished();
+
  public slots:
   void ShowConfig();
 

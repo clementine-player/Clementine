@@ -16,6 +16,7 @@ class RadioItem;
 class OSD;
 class TrackSlider;
 class EditTagDialog;
+class MultiLoadingIndicator;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -63,6 +64,9 @@ class MainWindow : public QMainWindow {
   void ScrobblingEnabledChanged(bool value);
   void Love();
 
+  void LibraryScanStarted();
+  void LibraryScanFinished();
+
  private:
   void SaveGeometry();
 
@@ -75,6 +79,7 @@ class MainWindow : public QMainWindow {
   OSD* osd_;
   TrackSlider* track_slider_;
   EditTagDialog* edit_tag_dialog_;
+  MultiLoadingIndicator* multi_loading_indicator_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;

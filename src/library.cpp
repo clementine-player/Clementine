@@ -51,7 +51,11 @@ void Library::BackendInitialised() {
 }
 
 void Library::WatcherInitialised() {
+  connect(watcher_->Worker().get(), SIGNAL(ScanStarted()), SIGNAL(ScanStarted()));
+  connect(watcher_->Worker().get(), SIGNAL(ScanFinished()), SIGNAL(ScanFinished()));
+
   watcher_->Worker()->SetEngine(engine_);
+
   if (--waiting_for_threads_ == 0)
     Initialise();
 }

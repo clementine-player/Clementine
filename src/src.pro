@@ -47,7 +47,8 @@ SOURCES += main.cpp \
     osd.cpp \
     trackslider.cpp \
     edittagdialog.cpp \
-    lineedit.cpp
+    lineedit.cpp \
+    multiloadingindicator.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -95,7 +96,8 @@ HEADERS += mainwindow.h \
     osd.h \
     trackslider.h \
     edittagdialog.h \
-    lineedit.h
+    lineedit.h \
+    multiloadingindicator.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -103,7 +105,8 @@ FORMS += mainwindow.ui \
     radioloadingindicator.ui \
     lastfmstationdialog.ui \
     trackslider.ui \
-    edittagdialog.ui
+    edittagdialog.ui \
+    multiloadingindicator.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
