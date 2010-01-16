@@ -29,3 +29,7 @@ QUrl SongPlaylistItem::Url() {
   ret.setHost("localhost");
   return ret;
 }
+
+void SongPlaylistItem::Reload() {
+  song_.InitFromFile(song_.filename(), song_.directory_id());
+}

@@ -72,7 +72,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   d->filename_ = filename;
   d->directory_id_ = directory_id;
 
-  TagLib::FileRef fileref = TagLib::FileRef(QFile::encodeName(filename).constData());
+  TagLib::FileRef fileref(QFile::encodeName(filename).constData());
 
   if( fileref.isNull() )
     return;
@@ -300,4 +300,20 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->length_ == other.d->length_ &&
          d->bitrate_ == other.d->bitrate_ &&
          d->samplerate_ == other.d->samplerate_;
+}
+
+bool Song::Save() const {
+  if (d->filename_.isNull())
+    return false;
+
+  TagLib::FileRef ref(QFile::encodeName(d->filename_).constData());
+  ref.tag()->setTitle(d->title_.toUtf8().constData());
+  ref.tag()->setArtist(d->artist_.toUtf8().constData());
+  ref.tag()->setAlbum(d->album_.toUtf8().constData());
+  ref.tag()->setGenre(d->genre_.toUtf8().constData());
+  ref.tag()->setComment(d->comment_.toUtf8().constData());
+  ref.tag()->setYear(d->year_);
+  ref.tag()->setTrack(d->track_);
+
+  return ref.save();
 }

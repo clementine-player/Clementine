@@ -15,6 +15,7 @@ class Song;
 class RadioItem;
 class OSD;
 class TrackSlider;
+class EditTagDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -44,6 +45,7 @@ class MainWindow : public QMainWindow {
   void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);
   void PlaylistPlay();
   void PlaylistStopAfter();
+  void EditTracks();
 
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
@@ -72,6 +74,7 @@ class MainWindow : public QMainWindow {
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   TrackSlider* track_slider_;
+  EditTagDialog* edit_tag_dialog_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;

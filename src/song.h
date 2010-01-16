@@ -92,8 +92,29 @@ class Song {
   QString PrettyLength() const;
 
   // Setters
+  bool IsEditable() const { return d->valid_ && !d->filename_.isNull(); }
+  bool Save() const;
+
   void set_id(int id) { d->id_ = id; }
-  void set_title(const QString& title) { d->title_ = title; }
+  void set_title(const QString& v) { d->title_ = v; }
+
+  void set_album(const QString& v) { d->album_ = v; }
+  void set_artist(const QString& v) { d->artist_ = v; }
+  void set_albumartist(const QString& v) { d->albumartist_ = v; }
+  void set_composer(const QString& v) { d->composer_ = v; }
+  void set_track(int v) { d->track_ = v; }
+  void set_disc(int v) { d->disc_ = v; }
+  void set_bpm(float v) { d->bpm_ = v; }
+  void set_year(int v) { d->year_ = v; }
+  void set_genre(const QString& v) { d->genre_ = v; }
+  void set_comment(const QString& v) { d->comment_ = v; }
+  void set_compilation(bool v) { d->compilation_ = v; }
+  void set_length(int v) { d->length_ = v; }
+  void set_bitrate(int v) { d->bitrate_ = v; }
+  void set_samplerate(int v) { d->samplerate_ = v; }
+  void set_mtime(int v) { d->mtime_ = v; }
+  void set_ctime(int v) { d->ctime_ = v; }
+  void set_filesize(int v) { d->filesize_ = v; }
 
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;

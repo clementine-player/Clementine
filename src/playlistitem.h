@@ -37,6 +37,7 @@ class PlaylistItem {
 
   virtual void Save(QSettings& settings) const = 0;
   virtual void Restore(const QSettings& settings) = 0;
+  virtual void Reload() {}
 
   virtual Song Metadata() const = 0;
 

@@ -45,7 +45,9 @@ SOURCES += main.cpp \
     radioview.cpp \
     lastfmstationdialog.cpp \
     osd.cpp \
-    trackslider.cpp
+    trackslider.cpp \
+    edittagdialog.cpp \
+    lineedit.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -91,14 +93,17 @@ HEADERS += mainwindow.h \
     lastfmstationdialog.h \
     ../3rdparty/qxt/keymapper_x11.h \
     osd.h \
-    trackslider.h
+    trackslider.h \
+    edittagdialog.h \
+    lineedit.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
     lastfmconfig.ui \
     radioloadingindicator.ui \
     lastfmstationdialog.ui \
-    trackslider.ui
+    trackslider.ui \
+    edittagdialog.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

@@ -10,6 +10,7 @@
 #include "lastfmservice.h"
 #include "osd.h"
 #include "trackslider.h"
+#include "edittagdialog.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -34,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     tray_icon_(new SystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, this)),
     track_slider_(new TrackSlider(this)),
+    edit_tag_dialog_(new EditTagDialog(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
@@ -84,6 +86,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
+  connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -171,6 +174,7 @@ MainWindow::MainWindow(QWidget *parent)
   playlist_play_pause_ = playlist_menu_->addAction("Play", this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_.action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), "Stop after this track", this, SLOT(PlaylistStopAfter()));
+  playlist_menu_->addAction(ui_.action_edit_track);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_clear_playlist);
 
@@ -437,6 +441,19 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_play_pause_->setEnabled(index.isValid());
   playlist_stop_after_->setEnabled(index.isValid());
 
+  // Are any of the selected songs editable?
+  bool editable = false;
+  foreach (const QModelIndex& index,
+           ui_.playlist->selectionModel()->selection().indexes()) {
+    if (index.column() != 0)
+      continue;
+    if (playlist_->item_at(index.row())->Metadata().IsEditable()) {
+      editable = true;
+      break;
+    }
+  }
+  ui_.action_edit_track->setEnabled(editable);
+
   playlist_menu_->popup(global_pos);
 }
 
@@ -450,4 +467,27 @@ void MainWindow::PlaylistPlay() {
 
 void MainWindow::PlaylistStopAfter() {
   playlist_->StopAfter(playlist_menu_index_.row());
+}
+
+void MainWindow::EditTracks() {
+  SongList songs;
+  QList<int> rows;
+
+  foreach (const QModelIndex& index,
+           ui_.playlist->selectionModel()->selection().indexes()) {
+    if (index.column() != 0)
+      continue;
+    Song song = playlist_->item_at(index.row())->Metadata();
+
+    if (song.IsEditable()) {
+      songs << song;
+      rows << index.row();
+    }
+  }
+
+  edit_tag_dialog_->SetSongs(songs);
+  if (edit_tag_dialog_->exec() == QDialog::Rejected)
+    return;
+
+  playlist_->ReloadItems(rows);
 }

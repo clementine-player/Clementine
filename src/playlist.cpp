@@ -502,3 +502,10 @@ void Playlist::Clear() {
   items_.clear();
   reset();
 }
+
+void Playlist::ReloadItems(const QList<int>& rows) {
+  foreach (int row, rows) {
+    item_at(row)->Reload();
+    emit dataChanged(index(row, 0), index(row, ColumnCount-1));
+  }
+}

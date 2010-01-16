@@ -14,7 +14,7 @@
    <string>Clementine</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../data/data.qrc">
+   <iconset>
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -294,7 +294,7 @@
        <item>
         <widget class="QToolButton" name="library_filter_clear">
          <property name="icon">
-          <iconset resource="../data/data.qrc">
+          <iconset>
            <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
          </property>
          <property name="iconSize">
@@ -314,7 +314,7 @@
        <item>
         <widget class="QToolButton" name="library_options">
          <property name="icon">
-          <iconset resource="../data/data.qrc">
+          <iconset>
            <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
          </property>
          <property name="iconSize">
@@ -430,7 +430,7 @@
   </widget>
   <action name="action_previous_track">
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/media-skip-backward.png</normaloff>:/media-skip-backward.png</iconset>
    </property>
    <property name="text">
@@ -439,7 +439,7 @@
   </action>
   <action name="action_play_pause">
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/media-playback-start.png</normaloff>:/media-playback-start.png</iconset>
    </property>
    <property name="text">
@@ -451,7 +451,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -460,7 +460,7 @@
   </action>
   <action name="action_next_track">
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/media-skip-forward.png</normaloff>:/media-skip-forward.png</iconset>
    </property>
    <property name="text">
@@ -469,7 +469,7 @@
   </action>
   <action name="action_quit">
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/exit.png</normaloff>:/exit.png</iconset>
    </property>
    <property name="text">
@@ -481,7 +481,7 @@
   </action>
   <action name="action_stop_after_this_track">
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -547,7 +547,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
    </property>
    <property name="text">
@@ -559,7 +559,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
    </property>
    <property name="text">
@@ -568,7 +568,7 @@
   </action>
   <action name="action_clear_playlist">
    <property name="icon">
-    <iconset resource="../data/data.qrc">
+    <iconset>
      <normaloff>:/clear-list.png</normaloff>:/clear-list.png</iconset>
    </property>
    <property name="text">
@@ -576,6 +576,15 @@
    </property>
    <property name="toolTip">
     <string>Clear playlist</string>
+   </property>
+  </action>
+  <action name="action_edit_track">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/edit-track.png</normaloff>:/edit-track.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit track information...</string>
    </property>
   </action>
  </widget>
@@ -614,8 +623,6 @@
    <header>radioview.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

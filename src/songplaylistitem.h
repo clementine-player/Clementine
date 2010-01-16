@@ -13,6 +13,7 @@ class SongPlaylistItem : public PlaylistItem {
 
   void Save(QSettings& settings) const;
   void Restore(const QSettings& settings);
+  void Reload();
 
   Song Metadata() const { return song_; }
 
