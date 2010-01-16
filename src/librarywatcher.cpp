@@ -35,6 +35,16 @@ void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
 
     // Start monitoring this directory for more changes
     fs_watcher_->addPath(dir.path);
+
+    // And all the subdirectories
+    QDirIterator it(dir.path,
+                    QDir::NoDotAndDotDot | QDir::Dirs,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+      QString subdir(it.next());
+      fs_watcher_->addPath(subdir);
+      paths_watched_[subdir] = dir;
+    }
   }
 }
 
@@ -43,6 +53,16 @@ void LibraryWatcher::RemoveDirectories(const DirectoryList &directories) {
     fs_watcher_->removePath(dir.path);
     paths_watched_.remove(dir.path);
     paths_needing_rescan_.removeAll(dir.path);
+
+    // And all the subdirectories
+    QDirIterator it(dir.path,
+                    QDir::NoDotAndDotDot | QDir::Dirs,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+      QString subdir(it.next());
+      fs_watcher_->removePath(subdir);
+      paths_watched_.remove(subdir);
+    }
   }
 }
 
@@ -140,6 +160,7 @@ bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, S
 }
 
 void LibraryWatcher::DirectoryChanged(const QString &path) {
+  qDebug() << path;
   if (!paths_needing_rescan_.contains(path))
     paths_needing_rescan_ << path;
 

@@ -1,5 +1,7 @@
 #include "song.h"
 
+#include <sys/stat.h>
+
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
 #include <taglib/tstring.h>
@@ -315,5 +317,12 @@ bool Song::Save() const {
   ref.tag()->setYear(d->year_);
   ref.tag()->setTrack(d->track_);
 
-  return ref.save();
+  bool ret = ref.save();
+  if (ret) {
+    // Linux: inotify doesn't seem to notice the change to the file unless we
+    // change the timestamps as well. (this is what touch does)
+    utimensat(0, QFile::encodeName(d->filename_).constData(), NULL, 0);
+  }
+
+  return ret;
 }
