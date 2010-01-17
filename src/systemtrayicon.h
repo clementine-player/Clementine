@@ -11,8 +11,15 @@ class SystemTrayIcon : public QSystemTrayIcon {
 
   bool event(QEvent* event);
 
+ public slots:
+  void SetProgress(int percentage);
+
  signals:
   void WheelEvent(int delta);
+
+ private:
+  QPixmap icon_;
+  QPixmap grey_icon_;
 };
 
 #endif // SYSTEMTRAYICON_H

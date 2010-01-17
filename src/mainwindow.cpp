@@ -281,6 +281,7 @@ void MainWindow::MediaStopped() {
 
   track_position_timer_->stop();
   track_slider_->SetStopped();
+  tray_icon_->SetProgress(0);
 }
 
 void MainWindow::MediaPaused() {
@@ -403,8 +404,11 @@ void MainWindow::FilePathChanged(const QString& path) {
 }
 
 void MainWindow::UpdateTrackPosition() {
-  int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
+  // Track position in seconds
+  const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
+  const int length = playlist_->current_item()->Metadata().length();
 
+  // Time to scrobble?
   LastFMService* lastfm = radio_model_->GetLastFMService();
 
   if (!playlist_->has_scrobbled() &&
@@ -413,7 +417,13 @@ void MainWindow::UpdateTrackPosition() {
     playlist_->set_scrobbled(true);
   }
 
-  track_slider_->SetValue(position, playlist_->current_item()->Metadata().length());
+  // Update the slider
+  track_slider_->SetValue(position, length);
+
+  // Update the tray icon every 10 seconds
+  if (position % 10 == 1) {
+    tray_icon_->SetProgress(double(position) / length * 100);
+  }
 }
 
 void MainWindow::Love() {
