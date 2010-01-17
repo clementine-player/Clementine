@@ -1,6 +1,6 @@
-# -------------------------------------------------
-# Project created by QtCreator 2009-12-15T18:38:35
-# -------------------------------------------------
+# Change this line to install Clementine somewhere else
+install_prefix = /usr
+
 QT += sql \
     network \
     opengl \
@@ -153,3 +153,13 @@ SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
 unix:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
 win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win32.cpp
+
+# Installs
+target.path = $${install_prefix}/bin/
+desktop.path = dummy
+desktop.extra = xdg-icon-resource install --size 64 ../dist/clementine_64.png application-x-clementine ; \
+                xdg-desktop-menu install --novendor ../dist/clementine.desktop
+INSTALLS += target desktop
+
+
+
