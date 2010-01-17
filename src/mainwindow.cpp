@@ -436,7 +436,7 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
   playlist_menu_index_ = index;
 
-  if (playlist_->current_index() == index.row()) {
+  if (playlist_->current_index() == index.row() && player_->GetState() == Engine::Playing) {
     playlist_play_pause_->setText("Pause");
     playlist_play_pause_->setIcon(QIcon(":media-playback-pause.png"));
   } else {
@@ -444,7 +444,14 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     playlist_play_pause_->setIcon(QIcon(":media-playback-start.png"));
   }
 
-  playlist_play_pause_->setEnabled(index.isValid());
+  if (index.isValid()) {
+    playlist_play_pause_->setEnabled(
+        playlist_->current_index() != index.row() ||
+        ! (playlist_->item_at(index.row())->options() & PlaylistItem::PauseDisabled));
+  } else {
+    playlist_play_pause_->setEnabled(false);
+  }
+
   playlist_stop_after_->setEnabled(index.isValid());
 
   // Are any of the selected songs editable?

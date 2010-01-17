@@ -56,6 +56,10 @@ void Player::PlayPause() {
     break;
 
   case Engine::Playing:
+    // We really shouldn't pause last.fm streams
+    if (playlist_->current_item()->options() & PlaylistItem::PauseDisabled)
+      break;
+
     qDebug() << "Pausing";
     engine_->pause();
     break;
