@@ -160,6 +160,3 @@ desktop.path = dummy
 desktop.extra = xdg-icon-resource install --size 64 ../dist/clementine_64.png application-x-clementine ; \
                 xdg-desktop-menu install --novendor ../dist/clementine.desktop
 INSTALLS += target desktop
-
-
-

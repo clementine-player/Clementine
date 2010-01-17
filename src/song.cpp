@@ -168,9 +168,11 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     d->compilation_ = (i == 1);
   }
 
-  d->bitrate_    = fileref.audioProperties()->bitrate();
-  d->length_     = fileref.audioProperties()->length();
-  d->samplerate_ = fileref.audioProperties()->sampleRate();
+  if (fileref.audioProperties()) {
+    d->bitrate_    = fileref.audioProperties()->bitrate();
+    d->length_     = fileref.audioProperties()->length();
+    d->samplerate_ = fileref.audioProperties()->sampleRate();
+  }
 }
 
 void Song::InitFromQuery(const QSqlQuery& q) {
