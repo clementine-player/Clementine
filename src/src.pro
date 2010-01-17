@@ -141,3 +141,15 @@ SOURCES += ../3rdparty/qxt/qxtglobal.cpp
 unix:!macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_x11.cpp
 macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_mac.cpp
 win32:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_win.cpp
+
+# QtSingleApplication
+INCLUDEPATH += ../3rdparty/qtsingleapplication
+HEADERS += ../3rdparty/qtsingleapplication/qtlocalpeer.h
+HEADERS += ../3rdparty/qtsingleapplication/qtsingleapplication.h
+HEADERS += ../3rdparty/qtsingleapplication/qtsinglecoreapplication.h
+SOURCES += ../3rdparty/qtsingleapplication/qtsingleapplication.cpp
+SOURCES += ../3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp
+SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
+SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
+unix:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
+win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win32.cpp
