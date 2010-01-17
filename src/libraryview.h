@@ -34,6 +34,9 @@ class LibraryView : public QTreeView {
   void paintEvent(QPaintEvent* event);
   void mouseReleaseEvent(QMouseEvent* e);
 
+ private slots:
+  void ItemExpanded(const QModelIndex& index);
+
  private:
   void RecheckIsEmpty();
   bool RecursivelyExpand(const QModelIndex& index, int* count);

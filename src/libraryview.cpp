@@ -59,6 +59,8 @@ LibraryView::LibraryView(QWidget* parent)
     nomusic_(":nomusic.png")
 {
   setItemDelegate(new LibraryItemDelegate(this));
+
+  connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
 }
 
 void LibraryView::SetLibrary(Library *library) {
@@ -136,4 +138,9 @@ bool LibraryView::RecursivelyExpand(const QModelIndex& index, int* count) {
   }
 
   return true;
+}
+
+void LibraryView::ItemExpanded(const QModelIndex& index) {
+  if (model()->rowCount(index) == 1)
+    expand(model()->index(0, 0, index));
 }
