@@ -1,6 +1,7 @@
 # Change this line to install Clementine somewhere else
 install_prefix = /usr
 
+VERSION = 0.1
 QT += sql \
     network \
     opengl \
