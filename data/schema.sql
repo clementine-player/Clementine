@@ -30,3 +30,9 @@ CREATE TABLE songs (
   ctime INTEGER NOT NULL,
   filesize INTEGER NOT NULL
 );
+
+
+CREATE TABLE schema_version (
+  version INTEGER NOT NULL
+);
+INSERT INTO schema_version (version) VALUES (0);
