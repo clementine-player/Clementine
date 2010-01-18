@@ -6,6 +6,8 @@
 #include <QXmlStreamReader>
 #include <QSettings>
 #include <QTemporaryFile>
+#include <QMenu>
+#include <QDesktopServices>
 #include <QCoreApplication>
 #include <QtDebug>
 
@@ -13,16 +15,27 @@ const char* SomaFMService::kServiceName = "SomaFM";
 const char* SomaFMService::kLoadingChannelsText = "Getting channels";
 const char* SomaFMService::kLoadingStreamText = "Loading stream";
 const char* SomaFMService::kChannelListUrl = "http://somafm.com/channels.xml";
+const char* SomaFMService::kHomepage = "http://somafm.com";
 
 SomaFMService::SomaFMService(QObject* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
+    context_menu_(new QMenu),
     network_(new QNetworkAccessManager(this))
 {
+  context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(QIcon(":web.png"), "Open somafm.com in browser", this, SLOT(Homepage()));
+  context_menu_->addAction(QIcon(":refresh.png"), "Refresh channels", this, SLOT(RefreshChannels()));
+}
+
+SomaFMService::~SomaFMService() {
+  delete context_menu_;
 }
 
 RadioItem* SomaFMService::CreateRootItem(RadioItem* parent) {
   root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
+  root_->icon = QIcon(":somafm.png");
   return root_;
 }
 
@@ -40,7 +53,8 @@ void SomaFMService::LazyPopulate(RadioItem* item) {
 }
 
 void SomaFMService::ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
-
+  context_item_ = item;
+  context_menu_->popup(global_pos);
 }
 
 void SomaFMService::StartLoading(const QUrl& url) {
@@ -98,6 +112,8 @@ void SomaFMService::RefreshChannelsFinished() {
     return;
   }
 
+  root_->ClearNotify();
+
   QXmlStreamReader reader(reply);
   while (!reader.atEnd()) {
     reader.readNext();
@@ -107,12 +123,15 @@ void SomaFMService::RefreshChannelsFinished() {
       ReadChannel(reader);
     }
   }
+
+  root_->lazy_loaded = true;
 }
 
 void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
   RadioItem* item = new RadioItem(this, Type_Stream, QString::null);
   item->lazy_loaded = true;
   item->playable = true;
+  item->icon = QIcon(":last.fm/icon_radio.png");
 
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
@@ -161,4 +180,12 @@ void SomaFMService::ConsumeElement(QXmlStreamReader& reader) {
 
 QString SomaFMService::TitleForItem(const RadioItem* item) const {
   return "SomaFM " + item->display_text;
+}
+
+void SomaFMService::Homepage() {
+  QDesktopServices::openUrl(QUrl(kHomepage));
+}
+
+void SomaFMService::AddToPlaylist() {
+  emit AddItemToPlaylist(context_item_);
 }

@@ -408,6 +408,13 @@ void MainWindow::UpdateTrackPosition() {
   const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
   const int length = playlist_->current_item()->Metadata().length();
 
+  if (length <= 0) {
+    // Probably a stream that we don't know the length of
+    track_slider_->SetStopped();
+    tray_icon_->SetProgress(0);
+    return;
+  }
+
   // Time to scrobble?
   LastFMService* lastfm = radio_model_->GetLastFMService();
 
