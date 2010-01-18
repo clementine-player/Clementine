@@ -11,7 +11,8 @@ class RadioService;
 class RadioPlaylistItem : public PlaylistItem {
  public:
   RadioPlaylistItem();
-  RadioPlaylistItem(RadioService* service, const QUrl& url, const QString& title);
+  RadioPlaylistItem(RadioService* service, const QUrl& url,
+                    const QString& title, const QString& artist);
 
   Type type() const { return Type_Radio; }
   Options options() const;
@@ -36,6 +37,7 @@ class RadioPlaylistItem : public PlaylistItem {
   RadioService* service_;
   QUrl url_;
   QString title_;
+  QString artist_;
 
   Song metadata_;
   Song temp_metadata_;

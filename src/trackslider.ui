@@ -29,6 +29,9 @@
    </item>
    <item>
     <widget class="QSlider" name="slider">
+     <property name="singleStep">
+      <number>10</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>

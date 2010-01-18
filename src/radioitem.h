@@ -21,8 +21,10 @@ class RadioItem : public SimpleTreeItem<RadioItem> {
 
   QUrl Url() const;
   QString Title() const;
+  QString Artist() const;
 
   QIcon icon;
+  QString artist;
   RadioService* service;
   bool playable;
 };

@@ -1,11 +1,10 @@
 # Change this line to install Clementine somewhere else
 install_prefix = /usr
-
 VERSION = 0.1
 QT += sql \
     network \
-    opengl \
-    xml
+    xml \
+    opengl
 TARGET = clementine
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -49,7 +48,8 @@ SOURCES += main.cpp \
     trackslider.cpp \
     edittagdialog.cpp \
     lineedit.cpp \
-    multiloadingindicator.cpp
+    multiloadingindicator.cpp \
+    somafmservice.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -98,12 +98,12 @@ HEADERS += mainwindow.h \
     trackslider.h \
     edittagdialog.h \
     lineedit.h \
-    multiloadingindicator.h
+    multiloadingindicator.h \
+    somafmservice.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
     lastfmconfig.ui \
-    radioloadingindicator.ui \
     lastfmstationdialog.ui \
     trackslider.ui \
     edittagdialog.ui \
@@ -158,6 +158,16 @@ win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win32.cpp
 # Installs
 target.path = $${install_prefix}/bin/
 desktop.path = dummy
-desktop.extra = xdg-icon-resource install --size 64 ../dist/clementine_64.png application-x-clementine ; \
-                xdg-desktop-menu install --novendor ../dist/clementine.desktop
-INSTALLS += target desktop
+desktop.extra = xdg-icon-resource \
+    install \
+    --size \
+    64 \
+    ../dist/clementine_64.png \
+    application-x-clementine \
+    ; \
+    xdg-desktop-menu \
+    install \
+    --novendor \
+    ../dist/clementine.desktop
+INSTALLS += target \
+    desktop

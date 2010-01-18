@@ -35,8 +35,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void ShowContextMenu(RadioItem* item, const QPoint& global_pos);
 
  signals:
-  void LoadingStarted();
-  void LoadingFinished();
+  void TaskStarted(const QString&);
+  void TaskFinished(const QString&);
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void StreamFinished();
   void StreamError(const QString& message);

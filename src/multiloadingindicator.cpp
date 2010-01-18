@@ -7,6 +7,9 @@ MultiLoadingIndicator::MultiLoadingIndicator(QWidget *parent)
 }
 
 void MultiLoadingIndicator::TaskStarted(const QString &name) {
+  if (tasks_.contains(name))
+    return;
+
   tasks_ << name;
 
   UpdateText();

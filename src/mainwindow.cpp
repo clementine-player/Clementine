@@ -183,8 +183,8 @@ MainWindow::MainWindow(QWidget *parent)
   playlist_menu_->addAction(ui_.action_clear_playlist);
 
   // Radio connections
-  connect(radio_model_, SIGNAL(LoadingStarted()), ui_.playlist, SLOT(StartRadioLoading()));
-  connect(radio_model_, SIGNAL(LoadingFinished()), ui_.playlist, SLOT(StopRadioLoading()));
+  connect(radio_model_, SIGNAL(TaskStarted(QString)), multi_loading_indicator_, SLOT(TaskStarted(QString)));
+  connect(radio_model_, SIGNAL(TaskFinished(QString)), multi_loading_indicator_, SLOT(TaskFinished(QString)));
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
   connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(Next()));
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));

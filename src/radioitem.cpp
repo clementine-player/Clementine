@@ -22,3 +22,7 @@ QUrl RadioItem::Url() const {
 QString RadioItem::Title() const {
   return service->TitleForItem(this);
 }
+
+QString RadioItem::Artist() const {
+  return service->ArtistForItem(this);
+}

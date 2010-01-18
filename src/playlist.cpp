@@ -272,7 +272,7 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int af
     if (!item->playable)
       continue;
 
-    playlist_items << new RadioPlaylistItem(item->service, item->Url(), item->Title());
+    playlist_items << new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist());
   }
   return InsertItems(playlist_items, after);
 }

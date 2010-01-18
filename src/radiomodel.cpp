@@ -1,6 +1,7 @@
 #include "radiomodel.h"
 #include "radioservice.h"
 #include "lastfmservice.h"
+#include "somafmservice.h"
 #include "radiomimedata.h"
 
 #include <QMimeData>
@@ -16,14 +17,15 @@ RadioModel::RadioModel(QObject* parent)
   root_->lazy_loaded = true;
 
   AddService(new LastFMService(this));
+  AddService(new SomaFMService(this));
 }
 
 void RadioModel::AddService(RadioService *service) {
   sServices[service->name()] = service;
   service->CreateRootItem(root_);
 
-  connect(service, SIGNAL(LoadingStarted()), SIGNAL(LoadingStarted()));
-  connect(service, SIGNAL(LoadingFinished()), SIGNAL(LoadingFinished()));
+  connect(service, SIGNAL(TaskStarted(QString)), SIGNAL(TaskStarted(QString)));
+  connect(service, SIGNAL(TaskFinished(QString)), SIGNAL(TaskFinished(QString)));
   connect(service, SIGNAL(StreamReady(QUrl,QUrl)), SIGNAL(StreamReady(QUrl,QUrl)));
   connect(service, SIGNAL(StreamFinished()), SIGNAL(StreamFinished()));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));

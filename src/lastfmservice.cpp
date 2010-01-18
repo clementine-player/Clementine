@@ -14,6 +14,7 @@
 
 const char* LastFMService::kServiceName = "Last.fm";
 const char* LastFMService::kSettingsGroup = "Last.fm";
+const char* LastFMService::kLoadingText = "Loading Last.fm radio";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
@@ -80,7 +81,7 @@ void LastFMService::ScrobblingEnabledChangedSlot(bool value) {
 }
 
 RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
-  RadioItem* item = new RadioItem(this, RadioItem::Type_Service, "Last.fm", parent);
+  RadioItem* item = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
   item->icon = QIcon(":last.fm/as.png");
   return item;
 }
@@ -252,7 +253,7 @@ void LastFMService::StartLoading(const QUrl& url) {
   if (!IsAuthenticated())
     return;
 
-  emit LoadingStarted();
+  emit TaskStarted(kLoadingText);
 
   delete tuner_;
 
@@ -284,7 +285,7 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   if (!initial_tune_)
     return;
 
-  emit LoadingFinished();
+  emit TaskFinished(kLoadingText);
 
   if (error == lastfm::ws::NotEnoughContent) {
     emit StreamFinished();
@@ -325,7 +326,7 @@ QString LastFMService::ErrorString(lastfm::ws::Error error) const {
 
 void LastFMService::TunerTrackAvailable() {
   if (initial_tune_) {
-    emit LoadingFinished();
+    emit TaskFinished(kLoadingText);
 
     LoadNext(last_url_);
     initial_tune_ = false;

@@ -1,7 +1,6 @@
 #include "playlistview.h"
 #include "playlist.h"
 #include "playlistheader.h"
-#include "radioloadingindicator.h"
 #include "trackslider.h"
 
 #include <QPainter>
@@ -125,8 +124,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     glow_intensity_step_(0),
     row_height_(-1),
     currenttrack_play_(":currenttrack_play.png"),
-    currenttrack_pause_(":currenttrack_pause.png"),
-    radio_loading_(new RadioLoadingIndicator(this))
+    currenttrack_pause_(":currenttrack_pause.png")
 {
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
@@ -140,8 +138,6 @@ PlaylistView::PlaylistView(QWidget *parent)
 
   glow_timer_->setInterval(1500 / kGlowIntensitySteps);
   connect(glow_timer_, SIGNAL(timeout()), SLOT(GlowIntensityChanged()));
-
-  radio_loading_->hide();
 }
 
 void PlaylistView::setModel(QAbstractItemModel *model) {
@@ -325,25 +321,4 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
 void PlaylistView::contextMenuEvent(QContextMenuEvent* e) {
   emit RightClicked(e->globalPos(), indexAt(e->pos()));
   e->accept();
-}
-
-void PlaylistView::resizeEvent(QResizeEvent *event) {
-  const QPoint kPadding(5,5);
-
-  QPoint pos(viewport()->mapTo(this, viewport()->rect().bottomRight()) -
-             kPadding - QPoint(radio_loading_->sizeHint().width(),
-                               radio_loading_->sizeHint().height()));
-
-  radio_loading_->move(pos);
-  radio_loading_->resize(radio_loading_->sizeHint());
-
-  QTreeView::resizeEvent(event);
-}
-
-void PlaylistView::StartRadioLoading() {
-  radio_loading_->show();
-}
-
-void PlaylistView::StopRadioLoading() {
-  radio_loading_->hide();
 }

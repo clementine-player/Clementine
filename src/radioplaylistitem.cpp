@@ -10,10 +10,11 @@ RadioPlaylistItem::RadioPlaylistItem()
 }
 
 RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
-                                     const QString& title)
+                                     const QString& title, const QString& artist)
   : service_(service),
     url_(url),
-    title_(title)
+    title_(title),
+    artist_(artist)
 {
   InitMetadata();
 }
@@ -22,12 +23,15 @@ void RadioPlaylistItem::Save(QSettings& settings) const {
   settings.setValue("service", service_->name());
   settings.setValue("url", url_.toString());
   settings.setValue("title", title_);
+  if (!artist_.isEmpty())
+    settings.setValue("artist", artist_);
 }
 
 void RadioPlaylistItem::Restore(const QSettings& settings) {
   service_ = RadioModel::ServiceByName(settings.value("service").toString());
   url_ = settings.value("url").toString();
   title_ = settings.value("title").toString();
+  artist_ = settings.value("artist").toString();
 
   InitMetadata();
 }
@@ -39,6 +43,8 @@ void RadioPlaylistItem::InitMetadata() {
     metadata_.set_title(title_);
   else
     metadata_.set_title(url_.toString());
+
+  metadata_.set_artist(artist_);
 }
 
 Song RadioPlaylistItem::Metadata() const {

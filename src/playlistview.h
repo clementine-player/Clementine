@@ -37,9 +37,6 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
-  // QWidget
-  void resizeEvent(QResizeEvent *event);
-
   // QTreeView
   void setModel(QAbstractItemModel *model);
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -51,9 +48,6 @@ class PlaylistView : public QTreeView {
  public slots:
   void StopGlowing();
   void StartGlowing();
-
-  void StartRadioLoading();
-  void StopRadioLoading();
 
  signals:
   void PlayPauseItem(const QModelIndex& index);
@@ -88,8 +82,6 @@ class PlaylistView : public QTreeView {
   QList<QPixmap> currenttrack_bar_right_;
   QPixmap currenttrack_play_;
   QPixmap currenttrack_pause_;
-
-  RadioLoadingIndicator* radio_loading_;
 };
 
 #endif // PLAYLISTVIEW_H
