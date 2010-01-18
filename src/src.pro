@@ -41,7 +41,6 @@ SOURCES += main.cpp \
     lastfmconfig.cpp \
     busyindicator.cpp \
     radioplaylistitem.cpp \
-    radioloadingindicator.cpp \
     radioview.cpp \
     lastfmstationdialog.cpp \
     osd.cpp \
@@ -90,7 +89,6 @@ HEADERS += mainwindow.h \
     busyindicator.h \
     radiomimedata.h \
     radioplaylistitem.h \
-    radioloadingindicator.h \
     radioview.h \
     lastfmstationdialog.h \
     ../3rdparty/qxt/keymapper_x11.h \
