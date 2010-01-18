@@ -1,0 +1,14 @@
+Source: clementine
+Section: unknown
+Priority: extra
+Maintainer: David Sansome <me@davidsansome.com>
+Build-Depends: debhelper (>= 7), liblastfm-dev, libtag1-dev, libxine-dev, libnotify-dev, libboost-dev, libqt4-dev, qt4-dev-tools, libqt4-opengl-dev
+Standards-Version: 3.8.1
+Homepage: http://code.google.com/p/clementine-player/
+
+Package: clementine
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libxine1-all-plugins
+Description: Clementine is a modern music player and library organiser.
+  It is largely a port of Amarok 1.4, with some features rewritten to take
+  advantage of Qt4.
