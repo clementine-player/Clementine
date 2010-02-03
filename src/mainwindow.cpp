@@ -14,6 +14,7 @@
 #include "multiloadingindicator.h"
 #include "settingsdialog.h"
 #include "libraryconfigdialog.h"
+#include "about.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -41,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     edit_tag_dialog_(new EditTagDialog(this)),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
     library_config_dialog_(new LibraryConfigDialog(this)),
+    about_dialog_(new About(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
@@ -96,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
+  connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);

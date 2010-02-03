@@ -52,7 +52,8 @@ SOURCES += main.cpp \
     settingsdialog.cpp \
     librarydirectorymodel.cpp \
     libraryconfigdialog.cpp \
-    lastfmconfigdialog.cpp
+    lastfmconfigdialog.cpp \
+    about.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -105,7 +106,8 @@ HEADERS += mainwindow.h \
     settingsdialog.h \
     librarydirectorymodel.h \
     libraryconfigdialog.h \
-    lastfmconfigdialog.h
+    lastfmconfigdialog.h \
+    about.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -116,7 +118,8 @@ FORMS += mainwindow.ui \
     multiloadingindicator.ui \
     settingsdialog.ui \
     libraryconfigdialog.ui \
-    lastfmconfigdialog.ui
+    lastfmconfigdialog.ui \
+    about.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

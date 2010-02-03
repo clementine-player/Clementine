@@ -18,6 +18,7 @@ class TrackSlider;
 class EditTagDialog;
 class MultiLoadingIndicator;
 class SettingsDialog;
+class About;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -82,6 +83,7 @@ class MainWindow : public QMainWindow {
   EditTagDialog* edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
   LibraryConfigDialog* library_config_dialog_;
+  About* about_dialog_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;
