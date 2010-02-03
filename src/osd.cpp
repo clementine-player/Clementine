@@ -2,13 +2,28 @@
 
 #include <QCoreApplication>
 #include <QtDebug>
+#include <QSettings>
+
+const char* OSD::kSettingsGroup = "OSD";
 
 OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
-    timeout_(5000)
+    timeout_(5000),
+    behaviour_(Native)
 {
+  ReloadSettings();
   Init();
+}
+
+void OSD::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  behaviour_ = OSD::Behaviour(s.value("Behaviour", Native).toInt());
+  timeout_ = s.value("Timeout", 5000).toInt();
+
+  if (!CanShowNativeMessages() && behaviour_ == Native)
+    behaviour_ = TrayPopup;
 }
 
 void OSD::SongChanged(const Song &song) {
@@ -37,4 +52,22 @@ void OSD::Stopped() {
 
 void OSD::VolumeChanged(int value) {
   ShowMessage(QCoreApplication::applicationName(), QString("Volume %1%").arg(value));
+}
+
+void OSD::ShowMessage(const QString& summary,
+                      const QString& message,
+                      const QString& icon) {
+  switch (behaviour_) {
+    case Native:
+      ShowMessageNative(summary, message, icon);
+      break;
+
+    case TrayPopup:
+      tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_);
+      break;
+
+    case Disabled:
+    default:
+      break;
+  }
 }

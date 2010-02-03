@@ -51,8 +51,17 @@
        <string>Playback</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/media-playback-start-32.png</normaloff>:/media-playback-start-32.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Notifications</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>:/lightbulb.png</normaloff>:/lightbulb.png</iconset>
       </property>
      </item>
      <item>
@@ -60,7 +69,7 @@
        <string>Music Library</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/library.png</normaloff>:/library.png</iconset>
       </property>
      </item>
@@ -69,7 +78,7 @@
        <string>Last.fm</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
@@ -90,7 +99,7 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -186,6 +195,99 @@
         <zorder>groupBox</zorder>
         <zorder>verticalSpacer</zorder>
        </widget>
+       <widget class="QWidget" name="page_4">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Clementine can show a message when the track changes.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="notifications_none">
+           <property name="text">
+            <string>Don't show notifications</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="notifications_native">
+           <property name="text">
+            <string>Show a native desktop notification</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="notifications_tray">
+           <property name="text">
+            <string>Show a popup from the system tray</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>4</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QWidget" name="notifications_options" native="true">
+           <layout class="QFormLayout" name="formLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Popup duration</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="notifications_duration">
+              <property name="suffix">
+               <string> seconds</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>286</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="page_2">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="margin">
@@ -232,9 +334,7 @@
   <tabstop>fadeout_duration</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>list</sender>

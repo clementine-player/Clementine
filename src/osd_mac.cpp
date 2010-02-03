@@ -5,7 +5,12 @@
 void OSD::Init() {
 }
 
-void OSD::ShowMessage(const QString& summary, const QString& message,
-                      const QString& icon) {
+bool OSD::CanShowNativeMessages() const {
+  return true;
+}
+
+void OSD::ShowMessageNative(const QString& summary, const QString& message,
+                            const QString& icon) {
+  // This should use growl
   tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_);
 }

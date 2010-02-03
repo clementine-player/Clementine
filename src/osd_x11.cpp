@@ -14,8 +14,12 @@ void OSD::Init() {
   notify_init(QCoreApplication::applicationName().toUtf8().constData());
 }
 
-void OSD::ShowMessage(const QString& summary, const QString& message,
-                      const QString& icon) {
+bool OSD::CanShowNativeMessages() const {
+  return true;
+}
+
+void OSD::ShowMessageNative(const QString& summary, const QString& message,
+                            const QString& icon) {
   if (summary.isNull())
     return;
 

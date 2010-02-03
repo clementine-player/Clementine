@@ -228,6 +228,7 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Settings
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
+  connect(settings_dialog_, SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
 
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());

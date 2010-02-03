@@ -23,6 +23,7 @@ class SettingsDialog : public QDialog {
 
  private slots:
   void CurrentTextChanged(const QString& text);
+  void NotificationTypeChanged();
 
  private:
   Ui::SettingsDialog ui_;
