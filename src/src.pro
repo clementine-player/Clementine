@@ -48,7 +48,10 @@ SOURCES += main.cpp \
     edittagdialog.cpp \
     lineedit.cpp \
     multiloadingindicator.cpp \
-    somafmservice.cpp
+    somafmservice.cpp \
+    settingsdialog.cpp \
+    librarydirectorymodel.cpp \
+    libraryconfigdialog.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -97,7 +100,10 @@ HEADERS += mainwindow.h \
     edittagdialog.h \
     lineedit.h \
     multiloadingindicator.h \
-    somafmservice.h
+    somafmservice.h \
+    settingsdialog.h \
+    librarydirectorymodel.h \
+    libraryconfigdialog.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -105,7 +111,9 @@ FORMS += mainwindow.ui \
     lastfmstationdialog.ui \
     trackslider.ui \
     edittagdialog.ui \
-    multiloadingindicator.ui
+    multiloadingindicator.ui \
+    settingsdialog.ui \
+    libraryconfigdialog.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

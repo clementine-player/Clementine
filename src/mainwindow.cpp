@@ -12,6 +12,8 @@
 #include "trackslider.h"
 #include "edittagdialog.h"
 #include "multiloadingindicator.h"
+#include "settingsdialog.h"
+#include "libraryconfigdialog.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -38,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
     track_slider_(new TrackSlider(this)),
     edit_tag_dialog_(new EditTagDialog(this)),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
+    settings_dialog_(new SettingsDialog(this)),
+    library_config_dialog_(new LibraryConfigDialog(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
@@ -70,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   ui_.library_view->setModel(library_sort_model_);
   ui_.library_view->SetLibrary(library_);
+  library_config_dialog_->SetModel(library_->GetDirectoryModel());
+  settings_dialog_->SetLibraryDirectoryModel(library_->GetDirectoryModel());
 
   ui_.radio_view->setModel(radio_model_);
 
@@ -89,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
+  connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -135,7 +142,7 @@ MainWindow::MainWindow(QWidget *parent)
   // Library connections
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
   connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryDoubleClick(QModelIndex)));
-  connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_, SLOT(ShowConfig()));
+  connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_config_dialog_, SLOT(show()));
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
@@ -171,7 +178,7 @@ MainWindow::MainWindow(QWidget *parent)
   QMenu* library_menu = new QMenu(this);
   library_menu->addActions(filter_age_group->actions());
   library_menu->addSeparator();
-  library_menu->addAction("Configure library...", library_, SLOT(ShowConfig()));
+  library_menu->addAction("Configure library...", library_config_dialog_, SLOT(show()));
   ui_.library_options->setMenu(library_menu);
 
   // Playlist menu

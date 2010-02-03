@@ -13,7 +13,7 @@
 #include "libraryitem.h"
 #include "simpletreemodel.h"
 
-class LibraryConfig;
+class LibraryDirectoryModel;
 
 class Library : public SimpleTreeModel<LibraryItem> {
   Q_OBJECT
@@ -29,6 +29,8 @@ class Library : public SimpleTreeModel<LibraryItem> {
   };
 
   void StartThreads();
+
+  LibraryDirectoryModel* GetDirectoryModel() const { return dir_model_; }
 
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const;
@@ -49,8 +51,6 @@ class Library : public SimpleTreeModel<LibraryItem> {
   void ScanFinished();
 
  public slots:
-  void ShowConfig();
-
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);
 
@@ -89,6 +89,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
   EngineBase* engine_;
   BackgroundThread<LibraryBackend>* backend_;
   BackgroundThread<LibraryWatcher>* watcher_;
+  LibraryDirectoryModel* dir_model_;
 
   int waiting_for_threads_;
 
@@ -101,8 +102,6 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
   QIcon artist_icon_;
   QIcon album_icon_;
-
-  LibraryConfig* config_;
 };
 
 #endif // LIBRARY_H

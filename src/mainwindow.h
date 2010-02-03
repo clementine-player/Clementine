@@ -9,7 +9,7 @@
 class Playlist;
 class Player;
 class Library;
-class LibraryConfig;
+class LibraryConfigDialog;
 class RadioModel;
 class Song;
 class RadioItem;
@@ -17,6 +17,7 @@ class OSD;
 class TrackSlider;
 class EditTagDialog;
 class MultiLoadingIndicator;
+class SettingsDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -80,6 +81,8 @@ class MainWindow : public QMainWindow {
   TrackSlider* track_slider_;
   EditTagDialog* edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
+  SettingsDialog* settings_dialog_;
+  LibraryConfigDialog* library_config_dialog_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;

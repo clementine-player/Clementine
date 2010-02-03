@@ -2,7 +2,7 @@
 #include "librarybackend.h"
 #include "libraryitem.h"
 #include "songmimedata.h"
-#include "libraryconfig.h"
+#include "librarydirectorymodel.h"
 
 #include <QStringList>
 #include <QUrl>
@@ -15,9 +15,9 @@ Library::Library(EngineBase* engine, QObject* parent)
     engine_(engine),
     backend_(new BackgroundThread<LibraryBackend>(this)),
     watcher_(new BackgroundThread<LibraryWatcher>(this)),
+    dir_model_(new LibraryDirectoryModel(this)),
     artist_icon_(":artist.png"),
-    album_icon_(":album.png"),
-    config_(new LibraryConfig)
+    album_icon_(":album.png")
 {
   root_->lazy_loaded = true;
 
@@ -28,7 +28,6 @@ Library::Library(EngineBase* engine, QObject* parent)
 
 Library::~Library() {
   delete root_;
-  delete config_;
 }
 
 void Library::StartThreads() {
@@ -44,7 +43,7 @@ void Library::BackendInitialised() {
   connect(backend_->Worker().get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(backend_->Worker().get(), SIGNAL(TotalSongCountUpdated(int)), SIGNAL(TotalSongCountUpdated(int)));
 
-  config_->SetBackend(backend_->Worker());
+  dir_model_->SetBackend(backend_->Worker());
 
   if (--waiting_for_threads_ == 0)
     Initialise();
@@ -494,10 +493,6 @@ SongList Library::GetChildSongs(const QModelIndex& index) const {
 
   GetChildSongs(IndexToItem(index), &dontcare, &ret);
   return ret;
-}
-
-void Library::ShowConfig() {
-  config_->show();
 }
 
 void Library::SetFilterAge(int age) {

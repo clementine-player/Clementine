@@ -1,39 +1,32 @@
 #ifndef LIBRARYCONFIG_H
 #define LIBRARYCONFIG_H
 
-#include <QDialog>
-
-#include <boost/shared_ptr.hpp>
+#include <QWidget>
 
 #include "ui_libraryconfig.h"
-#include "directory.h"
 
-class LibraryBackend;
+class LibraryDirectoryModel;
 
-class LibraryConfig : public QDialog {
+class LibraryConfig : public QWidget {
   Q_OBJECT
 
  public:
   LibraryConfig(QWidget* parent = 0);
 
-  void SetBackend(boost::shared_ptr<LibraryBackend> backend);
+  void SetModel(LibraryDirectoryModel* model);
 
  private slots:
   void Add();
   void Remove();
+  void BackendReady();
 
-  void DirectoriesDiscovered(const DirectoryList&);
-  void DirectoriesDeleted(const DirectoryList&);
-
-  void CurrentRowChanged(int);
+  void CurrentRowChanged(const QModelIndex& index);
 
  private:
   static const char* kSettingsGroup;
 
   Ui::LibraryConfig ui_;
-  QIcon dir_icon_;
-
-  boost::shared_ptr<LibraryBackend> backend_;
+  LibraryDirectoryModel* model_;
 };
 
 #endif // LIBRARYCONFIG_H

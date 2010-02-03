@@ -1,5 +1,5 @@
 #include "libraryconfig.h"
-#include "librarybackend.h"
+#include "librarydirectorymodel.h"
 
 #include <QFileDialog>
 #include <QSettings>
@@ -8,24 +8,28 @@
 const char* LibraryConfig::kSettingsGroup = "LibraryConfig";
 
 LibraryConfig::LibraryConfig(QWidget* parent)
-  : QDialog(parent),
-    dir_icon_(":folder.png")
+  : QWidget(parent),
+    model_(NULL)
 {
   ui_.setupUi(this);
 
   connect(ui_.add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_.remove, SIGNAL(clicked()), SLOT(Remove()));
-  connect(ui_.list, SIGNAL(currentRowChanged(int)), SLOT(CurrentRowChanged(int)));
 }
 
-void LibraryConfig::SetBackend(boost::shared_ptr<LibraryBackend> backend) {
-  backend_ = backend;
+void LibraryConfig::SetModel(LibraryDirectoryModel *model) {
+  model_ = model;
+  ui_.list->setModel(model_);
 
-  connect(backend_.get(), SIGNAL(DirectoriesDiscovered(DirectoryList)), SLOT(DirectoriesDiscovered(DirectoryList)));
-  connect(backend_.get(), SIGNAL(DirectoriesDeleted(DirectoryList)), SLOT(DirectoriesDeleted(DirectoryList)));
+  connect(ui_.list->selectionModel(),
+          SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+          SLOT(CurrentRowChanged(QModelIndex)));
 
-  ui_.list->setEnabled(true);
-  ui_.add->setEnabled(true);
+
+  if (model_->IsBackendReady())
+    BackendReady();
+  else
+    connect(model_, SIGNAL(BackendReady()), SLOT(BackendReady()));
 }
 
 void LibraryConfig::Add() {
@@ -36,41 +40,22 @@ void LibraryConfig::Add() {
   path = QFileDialog::getExistingDirectory(this, "Add directory...", path);
 
   if (!path.isNull()) {
-    backend_->AddDirectory(path);
+    model_->AddDirectory(path);
   }
 
   settings.setValue("last_path", path);
 }
 
 void LibraryConfig::Remove() {
-  QListWidgetItem* item = ui_.list->currentItem();
-  if (item == NULL)
-    return;
-
-  Directory dir;
-  dir.path = item->text();
-  dir.id = item->type();
-
-  backend_->RemoveDirectory(dir);
+  model_->RemoveDirectory(ui_.list->currentIndex());
 }
 
-void LibraryConfig::DirectoriesDiscovered(const DirectoryList& list) {
-  foreach (const Directory& dir, list) {
-    new QListWidgetItem(dir_icon_, dir.path, ui_.list, dir.id);
-  }
+void LibraryConfig::CurrentRowChanged(const QModelIndex& index) {
+  ui_.remove->setEnabled(index.isValid());
 }
 
-void LibraryConfig::DirectoriesDeleted(const DirectoryList& list) {
-  foreach (const Directory& dir, list) {
-    for (int i=0 ; i<ui_.list->count() ; ++i) {
-      if (ui_.list->item(i)->type() == dir.id) {
-        delete ui_.list->takeItem(i);
-        break;
-      }
-    }
-  }
-}
-
-void LibraryConfig::CurrentRowChanged(int row) {
-  ui_.remove->setEnabled(row != -1);
+void LibraryConfig::BackendReady() {
+  ui_.list->setEnabled(true);
+  ui_.add->setEnabled(true);
+  ui_.remove->setEnabled(true);
 }
