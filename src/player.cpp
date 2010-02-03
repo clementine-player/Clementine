@@ -207,5 +207,9 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   Song song;
   song.InitFromSimpleMetaBundle(bundle);
 
+  // Ignore useless metadata
+  if (song.title().isEmpty() && song.artist().isEmpty())
+    return;
+
   playlist_->SetStreamMetadata(item->Url(), song);
 }

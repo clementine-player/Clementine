@@ -523,3 +523,23 @@ void Playlist::ReloadItems(const QList<int>& rows) {
     emit dataChanged(index(row, 0), index(row, ColumnCount-1));
   }
 }
+
+void Playlist::Shuffle() {
+  layoutAboutToBeChanged();
+
+  const int count = items_.count();
+  for (int i=0 ; i < count; ++i) {
+    int new_pos = i + (rand() % (count - i));
+
+    std::swap(items_[i], items_[new_pos]);
+
+    foreach (const QModelIndex& pidx, persistentIndexList()) {
+      if (pidx.row() == i)
+        changePersistentIndex(pidx, index(new_pos, pidx.column(), QModelIndex()));
+      else if (pidx.row() == new_pos)
+        changePersistentIndex(pidx, index(i, pidx.column(), QModelIndex()));
+    }
+  }
+
+  layoutChanged();
+}

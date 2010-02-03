@@ -456,6 +456,7 @@
      <string>Playlist</string>
     </property>
     <addaction name="action_clear_playlist"/>
+    <addaction name="action_shuffle"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -645,6 +646,15 @@
   <action name="action_about">
    <property name="text">
     <string>About Clementine...</string>
+   </property>
+  </action>
+  <action name="action_shuffle">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/shuffle.png</normaloff>:/shuffle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Shuffle playlist</string>
    </property>
   </action>
  </widget>

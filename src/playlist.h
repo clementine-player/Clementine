@@ -101,6 +101,7 @@ class Playlist : public QAbstractListModel {
   void SetStreamMetadata(const QUrl& url, const Song& song);
 
   void Clear();
+  void Shuffle();
 
  signals:
   void CurrentSongChanged(const Song& metadata);

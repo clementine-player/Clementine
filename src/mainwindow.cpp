@@ -103,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
   connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
+  connect(ui_.action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -196,6 +197,7 @@ MainWindow::MainWindow(QWidget *parent)
   playlist_menu_->addAction(ui_.action_edit_track);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_clear_playlist);
+  playlist_menu_->addAction(ui_.action_shuffle);
 
   // Radio connections
   connect(radio_model_, SIGNAL(TaskStarted(QString)), multi_loading_indicator_, SLOT(TaskStarted(QString)));
