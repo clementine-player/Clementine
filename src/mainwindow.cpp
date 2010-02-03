@@ -302,9 +302,9 @@ void MainWindow::MediaPlaying() {
   ui_.action_play_pause->setText("Pause");
 
   ui_.action_play_pause->setEnabled(
-      ! (playlist_->current_item_options() & PlaylistItem::PauseDisabled));
+      ! (player_->GetCurrentItemOptions() & PlaylistItem::PauseDisabled));
 
-  bool is_lastfm = (playlist_->current_item_options() & PlaylistItem::LastFMControls);
+  bool is_lastfm = (player_->GetCurrentItemOptions() & PlaylistItem::LastFMControls);
   LastFMService* lastfm = radio_model_->GetLastFMService();
 
   ui_.action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
@@ -320,7 +320,7 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (!player_->GetState() == Engine::Idle)
     return;
 
-  bool is_lastfm = (playlist_->current_item_options() & PlaylistItem::LastFMControls);
+  bool is_lastfm = (player_->GetCurrentItemOptions() & PlaylistItem::LastFMControls);
   ui_.action_ban->setEnabled(value && is_lastfm);
   ui_.action_love->setEnabled(value);
 }
@@ -406,7 +406,7 @@ void MainWindow::FilePathChanged(const QString& path) {
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
-  const int length = playlist_->current_item()->Metadata().length();
+  const int length = player_->GetCurrentItem().length();
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of

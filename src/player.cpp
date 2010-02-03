@@ -9,6 +9,7 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   : QObject(parent),
     playlist_(playlist),
     lastfm_(lastfm),
+    current_item_options_(PlaylistItem::Default),
     engine_(new XineEngine)
 {
   if (!engine_->init()) {
@@ -57,7 +58,7 @@ void Player::PlayPause() {
 
   case Engine::Playing:
     // We really shouldn't pause last.fm streams
-    if (playlist_->current_item()->options() & PlaylistItem::PauseDisabled)
+    if (current_item_options_ & PlaylistItem::PauseDisabled)
       break;
 
     qDebug() << "Pausing";
@@ -122,6 +123,8 @@ void Player::PlayAt(int index) {
   playlist_->set_current_index(index);
 
   PlaylistItem* item = playlist_->item_at(index);
+  current_item_options_ = item->options();
+  current_item_ = item->Metadata();
 
   if (item->options() & PlaylistItem::SpecialPlayBehaviour)
     item->StartLoading();

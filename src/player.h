@@ -5,6 +5,8 @@
 #include <QSettings>
 
 #include "engine_fwd.h"
+#include "playlistitem.h"
+#include "song.h"
 
 class Playlist;
 class Settings;
@@ -19,6 +21,9 @@ class Player : public QObject {
   EngineBase* GetEngine() { return engine_; }
   Engine::State GetState() const;
   int GetVolume() const;
+
+  PlaylistItem::Options GetCurrentItemOptions() const { return current_item_options_; }
+  Song GetCurrentItem() const { return current_item_; }
 
  public slots:
   void PlayAt(int index);
@@ -46,6 +51,9 @@ class Player : public QObject {
   Playlist* playlist_;
   LastFMService* lastfm_;
   QSettings settings_;
+
+  PlaylistItem::Options current_item_options_;
+  Song current_item_;
 
   EngineBase* engine_;
 };
