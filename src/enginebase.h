@@ -73,6 +73,8 @@ namespace Engine
          */
         void infoMessage( const QString& );
 
+        void error( const QString& );
+
         /** Transmits metadata package. */
         void metaData( const Engine::SimpleMetaBundle& );
 

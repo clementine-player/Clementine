@@ -4,26 +4,46 @@
 #include "lastfmservice.h"
 
 #include <QtDebug>
+#include <QtConcurrentRun>
+
+#include <boost/bind.hpp>
 
 Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   : QObject(parent),
     playlist_(playlist),
     lastfm_(lastfm),
     current_item_options_(PlaylistItem::Default),
-    engine_(new XineEngine)
+    engine_(new XineEngine),
+    init_engine_watcher_(new QFutureWatcher<bool>(this))
 {
-  if (!engine_->init()) {
-    qFatal("Couldn't load engine");
+  settings_.beginGroup("Player");
+
+  connect(init_engine_watcher_, SIGNAL(finished()), SLOT(EngineInitFinished()));
+  connect(engine_, SIGNAL(error(QString)), SIGNAL(Error(QString)));
+}
+
+void Player::Init() {
+  init_engine_ = QtConcurrent::run(boost::bind(&EngineBase::init, engine_));
+  init_engine_watcher_->setFuture(init_engine_);
+}
+
+void Player::EngineInitFinished() {
+  if (init_engine_.result() == false) {
+    qFatal("Error initialising audio engine");
   }
 
-  settings_.beginGroup("Player");
-  SetVolume(settings_.value("volume", 50).toInt());
+  SetVolumeInternal(settings_.value("volume", 50).toInt());
 
   connect(engine_, SIGNAL(stateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
+
+  emit InitFinished();
 }
 
 void Player::ReloadSettings() {
+  if (!init_engine_.isFinished())
+    return;
+
   engine_->reloadSettings();
 }
 
@@ -54,6 +74,9 @@ void Player::TrackEnded() {
 }
 
 void Player::PlayPause() {
+  if (!init_engine_.isFinished())
+    return;
+
   switch (engine_->state()) {
   case Engine::Paused:
     qDebug() << "Unpausing";
@@ -84,6 +107,9 @@ void Player::PlayPause() {
 }
 
 void Player::Stop() {
+  if (!init_engine_.isFinished())
+    return;
+
   qDebug() << "Stopping";
   engine_->stop();
   playlist_->set_current_index(-1);
@@ -110,9 +136,13 @@ void Player::EngineStateChanged(Engine::State state) {
 }
 
 void Player::SetVolume(int value) {
+  SetVolumeInternal(value);
+  emit VolumeChanged(value);
+}
+
+void Player::SetVolumeInternal(int value) {
   settings_.setValue("volume", value);
   engine_->setVolume(value);
-  emit VolumeChanged(value);
 }
 
 int Player::GetVolume() const {
@@ -124,6 +154,9 @@ Engine::State Player::GetState() const {
 }
 
 void Player::PlayAt(int index) {
+  if (!init_engine_.isFinished())
+    return;
+
   playlist_->set_current_index(index);
 
   PlaylistItem* item = playlist_->item_at(index);
@@ -141,6 +174,9 @@ void Player::PlayAt(int index) {
 }
 
 void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
+  if (!init_engine_.isFinished())
+    return;
+
   int current_index = playlist_->current_index();
   if (current_index == -1)
     return;
@@ -155,5 +191,8 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
 }
 
 void Player::Seek(int seconds) {
+  if (!init_engine_.isFinished())
+    return;
+
   engine_->seek(seconds * 1000);
 }

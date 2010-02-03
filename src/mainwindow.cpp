@@ -118,6 +118,7 @@ MainWindow::MainWindow(QWidget *parent)
   // Player connections
   connect(ui_.volume, SIGNAL(valueChanged(int)), player_, SLOT(SetVolume(int)));
 
+  connect(player_, SIGNAL(InitFinished()), SLOT(PlayerInitFinished()));
   connect(player_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
@@ -265,6 +266,9 @@ MainWindow::MainWindow(QWidget *parent)
     show();
 
   library_->StartThreads();
+
+  player_->Init();
+  multi_loading_indicator_->TaskStarted("Loading audio engine");
 }
 
 MainWindow::~MainWindow() {
@@ -542,4 +546,8 @@ void MainWindow::LibraryScanStarted() {
 
 void MainWindow::LibraryScanFinished() {
   multi_loading_indicator_->TaskFinished("Updating library");
+}
+
+void MainWindow::PlayerInitFinished() {
+  multi_loading_indicator_->TaskFinished("Loading audio engine");
 }

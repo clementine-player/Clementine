@@ -69,6 +69,8 @@ class MainWindow : public QMainWindow {
   void LibraryScanStarted();
   void LibraryScanFinished();
 
+  void PlayerInitFinished();
+
  private:
   void SaveGeometry();
 

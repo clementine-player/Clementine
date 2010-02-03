@@ -25,5 +25,19 @@ void MultiLoadingIndicator::TaskFinished(const QString &name) {
 }
 
 void MultiLoadingIndicator::UpdateText() {
-  ui_.text->setText(tasks_.join(", ") + "...");
+  QStringList strings;
+  foreach (QString task, tasks_) {
+    if (task.isEmpty())
+      continue;
+
+    task[0] = task[0].toLower();
+    strings << task;
+  }
+
+  QString text(strings.join(", "));
+  if (!text.isEmpty()) {
+    text[0] = text[0].toUpper();
+  }
+
+  ui_.text->setText(text + "...");
 }

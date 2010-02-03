@@ -125,7 +125,7 @@ XineEngine::init()
    m_xine = xine_new();
 
    if( !m_xine ) {
-      QMessageBox::critical( 0, "Error", "Amarok could not initialize xine." );
+      emit error("Could not initialize xine.");
       return false;
    }
 
@@ -153,7 +153,7 @@ XineEngine::makeNewStream()
    m_audioPort = xine_open_audio_driver( m_xine, m_currentAudioPlugin.toLocal8Bit().constData(), NULL );
    if( !m_audioPort ) {
       //TODO make engine method that is the same but parents the dialog for us
-      QMessageBox::critical(0, "Error", "xine was unable to initialize any audio drivers." );
+      emit error("xine was unable to initialize any audio drivers.");
       return false;
    }
 
@@ -161,7 +161,7 @@ XineEngine::makeNewStream()
    if( !m_stream ) {
       xine_close_audio_driver( m_xine, m_audioPort );
       m_audioPort = NULL;
-      QMessageBox::critical(NULL, "Error", "Amarok could not create a new xine stream.");
+      emit error("Could not create a new xine stream");
       return false;
    }
 

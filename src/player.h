@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QFuture>
+#include <QFutureWatcher>
 
 #include "engine_fwd.h"
 #include "playlistitem.h"
@@ -17,6 +19,8 @@ class Player : public QObject {
 
  public:
   Player(Playlist* playlist, LastFMService* lastfm, QObject* parent = 0);
+
+  void Init();
 
   EngineBase* GetEngine() { return engine_; }
   Engine::State GetState() const;
@@ -40,6 +44,8 @@ class Player : public QObject {
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
 
  signals:
+  void InitFinished();
+
   void Playing();
   void Paused();
   void Stopped();
@@ -47,7 +53,11 @@ class Player : public QObject {
   void Error(const QString& message);
 
  private slots:
+  void EngineInitFinished();
   void EngineStateChanged(Engine::State);
+
+ private:
+  void SetVolumeInternal(int value);
 
  private:
   Playlist* playlist_;
@@ -58,6 +68,8 @@ class Player : public QObject {
   Song current_item_;
 
   EngineBase* engine_;
+  QFuture<bool> init_engine_;
+  QFutureWatcher<bool>* init_engine_watcher_;
 };
 
 #endif // PLAYER_H
