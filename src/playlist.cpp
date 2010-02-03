@@ -182,11 +182,25 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     const int start = row == -1 ? items_.count() : row;
     for (int i=start ; i<start+moved_items.count() ; ++i) {
       items_.insert(i, moved_items[i - start]);
+    }
 
-      // Update persistent indexes
-      for (int column=0 ; column<ColumnCount ; ++column)
-        changePersistentIndex(index(source_rows[i-start], column, QModelIndex()),
-                              index(i, column, QModelIndex()));
+    // Update persistent indexes
+    foreach (const QModelIndex& pidx, persistentIndexList()) {
+      const int dest_offset = source_rows.indexOf(pidx.row());
+      if (dest_offset != -1) {
+        // This index was moved
+        changePersistentIndex(pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
+      } else {
+        int d = 0;
+        foreach (int source_row, source_rows) {
+          if (pidx.row() > source_row)
+            d --;
+        }
+        if (pidx.row() + d >= start)
+          d += source_rows.count();
+
+        changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
+      }
     }
 
     layoutChanged();
