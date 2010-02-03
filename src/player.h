@@ -35,6 +35,7 @@ class Player : public QObject {
   void PlayAt(int index);
   void PlayPause();
   void Next();
+  void NextItem();
   void Previous();
   void Stop();
   void SetVolume(int value);

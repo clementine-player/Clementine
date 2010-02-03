@@ -55,6 +55,10 @@ void Player::Next() {
     return;
   }
 
+  NextItem();
+}
+
+void Player::NextItem() {
   int i = playlist_->next_index();
   playlist_->set_current_index(i);
   if (i == -1) {

@@ -122,6 +122,8 @@ XineEngine::init()
       QCoreApplication::applicationDirPath() + "/xine/plugins").toAscii().constData());
 #endif
 
+   QMutexLocker l(&m_initMutex);
+
    m_xine = xine_new();
 
    if( !m_xine ) {
@@ -619,8 +621,7 @@ XineEngine::canDecode( const QUrl &url ) const
     static QStringList list;
     if(list.isEmpty())
     {
-        static QMutex mutex;
-        QMutexLocker l(&mutex);
+        QMutexLocker l(&const_cast<XineEngine*>(this)->m_initMutex);
 
         if (list.isEmpty()) {
             char* exts = xine_get_file_extensions( m_xine );

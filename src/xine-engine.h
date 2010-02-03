@@ -15,6 +15,7 @@
 #include <QThread>
 #include <QEvent>
 #include <QSettings>
+#include <QMutex>
 
 extern "C"
 {
@@ -109,6 +110,8 @@ class XineEngine : public Engine::Base
     bool                m_equalizerEnabled;
     int                 m_intPreamp;
     QList<int>     m_equalizerGains;
+
+    QMutex m_initMutex;
 
     QSettings m_settings;
     bool m_fadeoutOnExit;

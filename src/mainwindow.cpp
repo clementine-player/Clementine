@@ -62,6 +62,10 @@ MainWindow::MainWindow(QWidget *parent)
   track_position_timer_->setInterval(1000);
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
 
+  // Start initialising the player
+  multi_loading_indicator_->TaskStarted("Loading audio engine");
+  player_->Init();
+
   // Models
   library_sort_model_->setSourceModel(library_);
   library_sort_model_->setSortRole(Library::Role_SortText);
@@ -197,7 +201,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(radio_model_, SIGNAL(TaskStarted(QString)), multi_loading_indicator_, SLOT(TaskStarted(QString)));
   connect(radio_model_, SIGNAL(TaskFinished(QString)), multi_loading_indicator_, SLOT(TaskFinished(QString)));
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
-  connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(Next()));
+  connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(NextItem()));
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
@@ -266,9 +270,6 @@ MainWindow::MainWindow(QWidget *parent)
     show();
 
   library_->StartThreads();
-
-  player_->Init();
-  multi_loading_indicator_->TaskStarted("Loading audio engine");
 }
 
 MainWindow::~MainWindow() {
