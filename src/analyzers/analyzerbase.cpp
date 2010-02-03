@@ -150,7 +150,7 @@ int Analyzer::Base::resizeForBands( int bands )
     return m_fht->size() / 2;
 }
 
-void Analyzer::Base::paused(QPainter& p) //virtual
+void Analyzer::Base::paused(QPainter&) //virtual
 {}
 
 void Analyzer::Base::demo(QPainter& p) //virtual

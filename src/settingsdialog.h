@@ -15,6 +15,12 @@ class SettingsDialog : public QDialog {
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
 
+  // QDialog
+  void accept();
+
+  // QWidget
+  void showEvent(QShowEvent* e);
+
  private slots:
   void CurrentTextChanged(const QString& text);
 

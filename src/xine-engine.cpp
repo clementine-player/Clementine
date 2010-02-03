@@ -67,7 +67,7 @@ XineEngine::XineEngine()
         , m_fadeOutRunning ( false )
         , m_equalizerEnabled( false )
 {
-  m_settings.beginGroup("Player");
+  m_settings.beginGroup(kSettingsGroup);
   reloadSettings();
 }
 

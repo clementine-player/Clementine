@@ -26,6 +26,8 @@ class Player : public QObject {
   Song GetCurrentItem() const { return current_item_; }
 
  public slots:
+  void ReloadSettings();
+
   void PlayAt(int index);
   void PlayPause();
   void Next();

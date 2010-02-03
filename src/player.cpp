@@ -23,6 +23,10 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
 }
 
+void Player::ReloadSettings() {
+  engine_->reloadSettings();
+}
+
 void Player::Next() {
   if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
     playlist_->current_item()->LoadNext();

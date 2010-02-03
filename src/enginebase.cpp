@@ -6,6 +6,7 @@
 
 #include <cmath>
 
+const char* Engine::Base::kSettingsGroup = "Player";
 
 Engine::Base::Base()
   : m_xfadeLength( 0 )

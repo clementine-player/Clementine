@@ -237,6 +237,8 @@ namespace Engine
 
         virtual void reloadSettings() {};
 
+        static const char* kSettingsGroup;
+
     protected:
         Base();
 

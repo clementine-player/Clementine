@@ -226,6 +226,9 @@ MainWindow::MainWindow(QWidget *parent)
   connect(next, SIGNAL(activated()), ui_.action_next_track, SLOT(trigger()));
   connect(prev, SIGNAL(activated()), ui_.action_previous_track, SLOT(trigger()));
 
+  // Settings
+  connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
+
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());
 

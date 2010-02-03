@@ -1,6 +1,7 @@
-
 #ifndef ENGINE_FWD_H
 #define ENGINE_FWD_H
+
+#include <QString>
 
 /// Used by eg engineobserver.h, and thus we reduce header dependencies on enginebase.h
 
