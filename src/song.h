@@ -7,6 +7,8 @@
 #include <QSharedData>
 #include <QSharedDataPointer>
 
+#include "engine_fwd.h"
+
 namespace lastfm {
   class Track;
 }
@@ -54,6 +56,7 @@ class Song {
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const QSqlQuery& query);
   void InitFromLastFM(const lastfm::Track& track);
+  void InitFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

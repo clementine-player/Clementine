@@ -20,6 +20,7 @@
 #include <QVariant>
 
 #include "trackslider.h"
+#include "enginebase.h"
 
 const char* Song::kColumnSpec =
     "title, album, artist, albumartist, composer, "
@@ -219,6 +220,21 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->artist_ = track.artist();
   d->track_ = track.trackNumber();
   d->length_ = track.duration();
+}
+
+void Song::InitFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
+  d->valid_ = true;
+
+  d->title_ = bundle.title;
+  d->artist_ = bundle.artist;
+  d->album_ = bundle.album;
+  d->comment_ = bundle.comment;
+  d->genre_ = bundle.genre;
+  d->bitrate_ = bundle.bitrate.toInt();
+  d->samplerate_ = bundle.samplerate.toInt();
+  d->length_ = bundle.length.toInt();
+  d->year_ = bundle.year.toInt();
+  d->track_ = bundle.tracknr.toInt();
 }
 
 void Song::BindToQuery(QSqlQuery *query) const {

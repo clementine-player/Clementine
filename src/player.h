@@ -55,6 +55,7 @@ class Player : public QObject {
  private slots:
   void EngineInitFinished();
   void EngineStateChanged(Engine::State);
+  void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
 
  private:
   Playlist* playlist_;

@@ -36,6 +36,8 @@ void Player::EngineInitFinished() {
 
   connect(engine_, SIGNAL(stateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
+  connect(engine_, SIGNAL(metaData(Engine::SimpleMetaBundle)),
+                   SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
   emit InitFinished();
 }
@@ -191,4 +193,15 @@ void Player::Seek(int seconds) {
     return;
 
   engine_->seek(seconds * 1000);
+}
+
+void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
+  PlaylistItem* item = playlist_->current_item();
+  if (item == NULL)
+    return;
+
+  Song song;
+  song.InitFromSimpleMetaBundle(bundle);
+
+  playlist_->SetStreamMetadata(item->Url(), song);
 }

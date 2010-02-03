@@ -23,8 +23,7 @@ void RadioPlaylistItem::Save(QSettings& settings) const {
   settings.setValue("service", service_->name());
   settings.setValue("url", url_.toString());
   settings.setValue("title", title_);
-  if (!artist_.isEmpty())
-    settings.setValue("artist", artist_);
+  settings.setValue("artist", artist_);
 }
 
 void RadioPlaylistItem::Restore(const QSettings& settings) {
