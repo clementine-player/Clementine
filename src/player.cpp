@@ -18,6 +18,8 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 {
   settings_.beginGroup("Player");
 
+  SetVolume(settings_.value("volume", 50).toInt());
+
   connect(init_engine_watcher_, SIGNAL(finished()), SLOT(EngineInitFinished()));
   connect(engine_, SIGNAL(error(QString)), SIGNAL(Error(QString)));
 }
@@ -31,8 +33,6 @@ void Player::EngineInitFinished() {
   if (init_engine_.result() == false) {
     qFatal("Error initialising audio engine");
   }
-
-  SetVolumeInternal(settings_.value("volume", 50).toInt());
 
   connect(engine_, SIGNAL(stateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
@@ -136,13 +136,9 @@ void Player::EngineStateChanged(Engine::State state) {
 }
 
 void Player::SetVolume(int value) {
-  SetVolumeInternal(value);
-  emit VolumeChanged(value);
-}
-
-void Player::SetVolumeInternal(int value) {
   settings_.setValue("volume", value);
   engine_->setVolume(value);
+  emit VolumeChanged(value);
 }
 
 int Player::GetVolume() const {

@@ -57,9 +57,6 @@ class Player : public QObject {
   void EngineStateChanged(Engine::State);
 
  private:
-  void SetVolumeInternal(int value);
-
- private:
   Playlist* playlist_;
   LastFMService* lastfm_;
   QSettings settings_;
