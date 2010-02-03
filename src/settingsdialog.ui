@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Settings</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -51,7 +51,7 @@
        <string>Playback</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/media-playback-start-32.png</normaloff>:/media-playback-start-32.png</iconset>
       </property>
      </item>
@@ -60,7 +60,7 @@
        <string>Notifications</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/lightbulb.png</normaloff>:/lightbulb.png</iconset>
       </property>
      </item>
@@ -69,7 +69,7 @@
        <string>Music Library</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/library.png</normaloff>:/library.png</iconset>
       </property>
      </item>
@@ -78,7 +78,7 @@
        <string>Last.fm</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
@@ -99,9 +99,9 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>3</number>
        </property>
-       <widget class="QWidget" name="page">
+       <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <property name="margin">
           <number>0</number>
@@ -195,7 +195,7 @@
         <zorder>groupBox</zorder>
         <zorder>verticalSpacer</zorder>
        </widget>
-       <widget class="QWidget" name="page_4">
+       <widget class="QWidget" name="notifications_page">
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="margin">
           <number>0</number>
@@ -288,7 +288,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="page_2">
+       <widget class="QWidget" name="library_page">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="margin">
           <number>0</number>
@@ -298,7 +298,16 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="page_3"/>
+       <widget class="QWidget" name="lastfm_page">
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="LastFMConfig" name="lastfm" native="true"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>
@@ -326,6 +335,12 @@
    <header>libraryconfig.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>LastFMConfig</class>
+   <extends>QWidget</extends>
+   <header>lastfmconfig.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>list</tabstop>
@@ -334,7 +349,9 @@
   <tabstop>fadeout_duration</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>list</sender>

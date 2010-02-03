@@ -34,6 +34,8 @@ class RadioService : public QObject {
   virtual bool IsPauseAllowed() const { return true; }
   virtual bool ShowLastFmControls() const { return false; }
 
+  virtual void ReloadSettings() {}
+
  signals:
   void TaskStarted(const QString& name);
   void TaskFinished(const QString& name);

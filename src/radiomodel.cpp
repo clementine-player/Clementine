@@ -119,3 +119,9 @@ void RadioModel::ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
   if (item->service)
     item->service->ShowContextMenu(item, global_pos);
 }
+
+void RadioModel::ReloadSettings() {
+  foreach (RadioService* service, sServices.values()) {
+    service->ReloadSettings();
+  }
+}

@@ -81,13 +81,14 @@ class MainWindow : public QMainWindow {
   TrackSlider* track_slider_;
   EditTagDialog* edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
-  SettingsDialog* settings_dialog_;
   LibraryConfigDialog* library_config_dialog_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;
   Player* player_;
   Library* library_;
+
+  SettingsDialog* settings_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

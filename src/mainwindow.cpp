@@ -40,12 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
     track_slider_(new TrackSlider(this)),
     edit_tag_dialog_(new EditTagDialog(this)),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
-    settings_dialog_(new SettingsDialog(this)),
     library_config_dialog_(new LibraryConfigDialog(this)),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
+    settings_dialog_(new SettingsDialog(this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))

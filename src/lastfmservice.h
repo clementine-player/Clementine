@@ -10,7 +10,7 @@
 class QMenu;
 class QAction;
 
-class LastFMConfig;
+class LastFMConfigDialog;
 
 class LastFMService : public RadioService {
   Q_OBJECT
@@ -58,6 +58,8 @@ class LastFMService : public RadioService {
   bool IsPauseAllowed() const { return false; }
   bool ShowLastFmControls() const { return true; }
 
+  void ReloadSettings();
+
   // Last.fm specific stuff
   bool IsAuthenticated() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
@@ -76,9 +78,9 @@ class LastFMService : public RadioService {
 
  private slots:
   void AuthenticateReplyFinished();
-  void ScrobblingEnabledChangedSlot(bool value);
   void RefreshFriendsFinished();
   void RefreshNeighboursFinished();
+  void ShowConfig();
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
@@ -108,7 +110,7 @@ class LastFMService : public RadioService {
   lastfm::Audioscrobbler* scrobbler_;
   lastfm::Track last_track_;
 
-  LastFMConfig* config_;
+  LastFMConfigDialog* config_;
   LastFMStationDialog* station_dialog_;
 
   QMenu* context_menu_;

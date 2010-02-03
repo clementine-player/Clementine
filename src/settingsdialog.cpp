@@ -9,6 +9,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 {
   ui_.setupUi(this);
 
+  // Last.fm
+  connect(ui_.lastfm, SIGNAL(ValidationComplete(bool)), SLOT(LastFMValidationComplete(bool)));
+
   // List box
   connect(ui_.list, SIGNAL(currentTextChanged(QString)), SLOT(CurrentTextChanged(QString)));
   ui_.list->setCurrentRow(0);
@@ -32,7 +35,22 @@ void SettingsDialog::SetLibraryDirectoryModel(LibraryDirectoryModel* model) {
   ui_.library_config->SetModel(model);
 }
 
+void SettingsDialog::LastFMValidationComplete(bool success) {
+  ui_.buttonBox->setEnabled(true);
+
+  if (success)
+    accept();
+}
+
 void SettingsDialog::accept() {
+  if (ui_.lastfm->NeedsValidation()) {
+    ui_.lastfm->Validate();
+    ui_.buttonBox->setEnabled(false);
+    return;
+  } else {
+    ui_.lastfm->Save();
+  }
+
   QSettings s;
 
   // Playback
@@ -57,6 +75,9 @@ void SettingsDialog::accept() {
 
 void SettingsDialog::showEvent(QShowEvent*) {
   QSettings s;
+
+  // Last.fm
+  ui_.lastfm->Load();
 
   // Playback
   s.beginGroup(Engine::Base::kSettingsGroup);

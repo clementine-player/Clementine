@@ -33,6 +33,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   QMimeData* mimeData(const QModelIndexList& indexes) const;
 
   void ShowContextMenu(RadioItem* item, const QPoint& global_pos);
+  void ReloadSettings();
 
  signals:
   void TaskStarted(const QString&);

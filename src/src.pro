@@ -51,7 +51,8 @@ SOURCES += main.cpp \
     somafmservice.cpp \
     settingsdialog.cpp \
     librarydirectorymodel.cpp \
-    libraryconfigdialog.cpp
+    libraryconfigdialog.cpp \
+    lastfmconfigdialog.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -103,7 +104,8 @@ HEADERS += mainwindow.h \
     somafmservice.h \
     settingsdialog.h \
     librarydirectorymodel.h \
-    libraryconfigdialog.h
+    libraryconfigdialog.h \
+    lastfmconfigdialog.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -113,7 +115,8 @@ FORMS += mainwindow.ui \
     edittagdialog.ui \
     multiloadingindicator.ui \
     settingsdialog.ui \
-    libraryconfigdialog.ui
+    libraryconfigdialog.ui \
+    lastfmconfigdialog.ui
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css

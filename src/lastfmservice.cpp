@@ -1,8 +1,8 @@
 #include "lastfmservice.h"
-#include "lastfmconfig.h"
 #include "radioitem.h"
 #include "song.h"
 #include "lastfmstationdialog.h"
+#include "lastfmconfigdialog.h"
 
 #include <lastfm/ws.h>
 #include <lastfm/misc.h>
@@ -23,6 +23,7 @@ LastFMService::LastFMService(QObject* parent)
   : RadioService(kServiceName, parent),
     tuner_(NULL),
     scrobbler_(NULL),
+    config_(NULL),
     station_dialog_(new LastFMStationDialog),
     context_menu_(new QMenu),
     initial_tune_(false),
@@ -35,17 +36,7 @@ LastFMService::LastFMService(QObject* parent)
   lastfm::ws::ApiKey = kApiKey;
   lastfm::ws::SharedSecret = kSecret;
 
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
-  lastfm::ws::Username = settings.value("username").toString();
-  lastfm::ws::SessionKey = settings.value("session").toString();
-  scrobbling_enabled_ = settings.value("scrobbling_enabled", true).toBool();
-
-  config_ = new LastFMConfig(this);
-  connect(config_, SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChangedSlot(bool)));
-
-  config_->ui_.username->setText(lastfm::ws::Username);
-  config_->ui_.scrobble->setEnabled(scrobbling_enabled_);
+  ReloadSettings();
 
   play_action_ = context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
   remove_action_ = context_menu_->addAction(QIcon(":list-remove.png"), "Remove", this, SLOT(Remove()));
@@ -53,7 +44,7 @@ LastFMService::LastFMService(QObject* parent)
   add_artist_action_ = context_menu_->addAction(QIcon(":last.fm/icon_radio.png"), "Play artist radio...", this, SLOT(AddArtistRadio()));
   add_tag_action_ = context_menu_->addAction(QIcon(":last.fm/icon_tag.png"), "Play tag radio...", this, SLOT(AddTagRadio()));
   context_menu_->addAction(QIcon(":configure.png"), "Configure Last.fm...",
-                           config_, SLOT(show()));
+                           this, SLOT(ShowConfig()));
 
   remove_action_->setEnabled(false);
   add_artist_action_->setEnabled(false);
@@ -66,18 +57,26 @@ LastFMService::~LastFMService() {
   delete context_menu_;
 }
 
-bool LastFMService::IsAuthenticated() const {
-  return !lastfm::ws::SessionKey.isEmpty();
-}
-
-void LastFMService::ScrobblingEnabledChangedSlot(bool value) {
-  scrobbling_enabled_ = value;
-
+void LastFMService::ReloadSettings() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  settings.setValue("scrobbling_enabled", scrobbling_enabled_);
+  lastfm::ws::Username = settings.value("Username").toString();
+  lastfm::ws::SessionKey = settings.value("Session").toString();
+  scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
 
-  emit ScrobblingEnabledChanged(value);
+  emit ScrobblingEnabledChanged(scrobbling_enabled_);
+}
+
+void LastFMService::ShowConfig() {
+  if (!config_) {
+    config_ = new LastFMConfigDialog;
+  }
+
+  config_->show();
+}
+
+bool LastFMService::IsAuthenticated() const {
+  return !lastfm::ws::SessionKey.isEmpty();
 }
 
 RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
@@ -114,7 +113,7 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       neighbours_list_->icon = QIcon(":last.fm/my_neighbours.png");
 
       if (!IsAuthenticated())
-        config_->show();
+        ShowConfig();
 
       add_artist_action_->setEnabled(true);
       add_tag_action_->setEnabled(true);
@@ -186,8 +185,8 @@ void LastFMService::AuthenticateReplyFinished() {
   // Save the session key
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  settings.setValue("username", lastfm::ws::Username);
-  settings.setValue("session", lastfm::ws::SessionKey);
+  settings.setValue("Username", lastfm::ws::Username);
+  settings.setValue("Session", lastfm::ws::SessionKey);
 
   // Invalidate the scrobbler - it will get recreated later
   delete scrobbler_;
@@ -377,7 +376,7 @@ void LastFMService::Scrobble() {
 
 void LastFMService::Love() {
   if (!IsAuthenticated())
-    config_->show();
+    ShowConfig();
 
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.love();

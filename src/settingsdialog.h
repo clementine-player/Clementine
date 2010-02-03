@@ -24,6 +24,7 @@ class SettingsDialog : public QDialog {
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
+  void LastFMValidationComplete(bool success);
 
  private:
   Ui::SettingsDialog ui_;
