@@ -204,6 +204,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     }
 
     layoutChanged();
+    Save();
 
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
@@ -515,6 +516,8 @@ void Playlist::Clear() {
   qDeleteAll(items_);
   items_.clear();
   reset();
+
+  Save();
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {
@@ -542,4 +545,6 @@ void Playlist::Shuffle() {
   }
 
   layoutChanged();
+
+  Save();
 }
