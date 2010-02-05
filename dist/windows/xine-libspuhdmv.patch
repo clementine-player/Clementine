@@ -1,0 +1,138 @@
+--- src/libspuhdmv/xine_hdmv_decoder_old.c	2009-11-30 20:55:59 +0000
++++ src/libspuhdmv/xine_hdmv_decoder.c	2010-02-05 02:38:39 +0000
+@@ -47,8 +47,8 @@
+ 
+ #define TRACE(x...) printf(x)
+ /*#define TRACE(x...) */
+-#define ERROR(x...) fprintf(stderr, "spuhdmv: " x)
+-/*#define ERROR(x...) lprintf(x) */
++#define HDMVERROR(x...) fprintf(stderr, "spuhdmv: " x)
++/*#define HDMVERROR(x...) lprintf(x) */
+ 
+ /*
+  * cached palette (xine-lib format)
+@@ -73,7 +73,7 @@
+   uint16_t    width, height;
+ 
+   rle_elem_t *rle;
+-  uint        num_rle;
++  unsigned int        num_rle;
+   size_t      data_size;
+ 
+ #if 0
+@@ -150,7 +150,7 @@
+ 
+ #define LIST_REPLACE(list, obj, FREE_FUNC)      \
+   do {						\
+-    uint id = obj->id;				\
++    unsigned int id = obj->id;				\
+ 						\
+     /* insert to list */			\
+     obj->next = list;				\
+@@ -252,7 +252,7 @@
+     if ( buf->segment_type < 0x14 ||
+ 	 ( buf->segment_type > 0x18 &&
+ 	   buf->segment_type != 0x80)) {
+-      ERROR("unknown segment type, resetting\n");
++      HDMVERROR("unknown segment type, resetting\n");
+       segbuf_reset(buf);
+     }
+   } else {
+@@ -291,10 +291,10 @@
+ 
+     segbuf_parse_segment_header(buf);
+ 
+-    TRACE("  skip_segment: %d bytes left\n", (uint)buf->len);
++    TRACE("  skip_segment: %d bytes left\n", (unsigned int)buf->len);
+   } else {
+-    ERROR("  skip_segment: ERROR - %d bytes queued, %d required\n",
+-          (uint)buf->len, buf->segment_len);
++    HDMVERROR("  skip_segment: ERROR - %d bytes queued, %d required\n",
++          (unsigned int)buf->len, buf->segment_len);
+     segbuf_reset (buf);
+   }
+ }
+@@ -319,7 +319,7 @@
+ {
+   if (!(buf->error = ++buf->segment_data > buf->segment_end))
+     return buf->segment_data[-1];
+-  ERROR("segbuf_get_u8: read failed (end of segment reached) !");
++  HDMVERROR("segbuf_get_u8: read failed (end of segment reached) !");
+   return 0;
+ }
+ 
+@@ -341,7 +341,7 @@
+     if (buf->segment_data <= buf->segment_end)
+       return val;
+   }
+-  ERROR("segbuf_get_string(%d): read failed (end of segment reached) !", (int)len);
++  HDMVERROR("segbuf_get_string(%d): read failed (end of segment reached) !", (int)len);
+   buf->error = 1;
+   return NULL;
+ }
+@@ -363,12 +363,12 @@
+     return NULL;
+ 
+   if (len % 5) {
+-    ERROR("  decode_palette: segment size error (%d ; expected %d for %d entries)\n",
+-	  (uint)len, (uint)(5 * entries), (uint)entries);
++    HDMVERROR("  decode_palette: segment size error (%d ; expected %d for %d entries)\n",
++          (unsigned int)len, (unsigned int)(5 * entries), (unsigned int)entries);
+     return NULL;
+   }
+   TRACE("decode_palette: %d items (id %d, version %d)\n",
+-	(uint)entries, palette_id, palette_version_number);
++        (unsigned int)entries, palette_id, palette_version_number);
+ 
+   /* convert to xine-lib clut */
+   subtitle_clut_t *clut = calloc(1, sizeof(subtitle_clut_t));
+@@ -480,7 +480,7 @@
+     }
+ 
+   } else {
+-    ERROR("    TODO: APPEND RLE, length %d bytes\n", buf->segment_len - 4);
++    HDMVERROR("    TODO: APPEND RLE, length %d bytes\n", buf->segment_len - 4);
+     /* TODO */
+     free_subtitle_object(obj);
+     return NULL;
+@@ -681,7 +681,7 @@
+   return 0;
+ }
+ 
+-static int show_overlay(spuhdmv_decoder_t *this, composition_object_t *cobj, uint palette_id_ref,
++static int show_overlay(spuhdmv_decoder_t *this, composition_object_t *cobj, unsigned int palette_id_ref,
+ 			int overlay_index, int64_t pts, int force_update)
+ {
+   video_overlay_manager_t *ovl_manager = this->stream->video_out->get_overlay_manager(this->stream->video_out);
+@@ -819,7 +819,7 @@
+ 
+       for (i = 0; i < pseg->object_number; i++) {
+         if (!cobj) {
+-          ERROR("show_overlays: composition object %d missing !\n", i);
++          HDMVERROR("show_overlays: composition object %d missing !\n", i);
+         } else {
+           show_overlay(this, cobj, pseg->palette_id_ref, i, pseg->pts, !pseg->shown);
+           cobj = cobj->next;
+@@ -844,7 +844,7 @@
+ static void decode_segment(spuhdmv_decoder_t *this)
+ {
+   TRACE("*** new segment, pts %010ld: 0x%02x (%8d bytes)",
+-	 this->pts, (uint)this->buf->segment_type, (uint)this->buf->segment_len);
++         this->pts, (unsigned int)this->buf->segment_type, (unsigned int)this->buf->segment_len);
+ 
+   switch (this->buf->segment_type) {
+   case 0x14:
+@@ -872,11 +872,11 @@
+     free_objs(this);
+     break;
+   default:
+-    ERROR("  segment type 0x%x unknown, skipping\n", this->buf->segment_type);
++    HDMVERROR("  segment type 0x%x unknown, skipping\n", this->buf->segment_type);
+     break;
+   }
+   if (this->buf->error) {
+-    ERROR("*** DECODE ERROR ***\n");
++    HDMVERROR("*** DECODE ERROR ***\n");
+   }
+ 
+   update_overlays (this);
