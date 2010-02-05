@@ -165,7 +165,7 @@ SOURCES += ../3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
 unix:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
-win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win32.cpp
+win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
 
 # Installs
 target.path = $${install_prefix}/bin/
