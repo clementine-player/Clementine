@@ -137,6 +137,8 @@ LIBS += -llastfm
         QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
         LIBS += $$system(pkg-config --libs libnotify)
     }
+    CMAKE_CXXFLAGS =+ $$system(pkg-config glib-2.0 --cflags)
+    LIBS += $$system(pkg-config --libs glib-2.0)
 }
 win32 { 
     INCLUDEPATH += C:/msys/1.0/local/include \
