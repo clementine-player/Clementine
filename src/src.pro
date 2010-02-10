@@ -125,12 +125,18 @@ OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
 LIBS += -llastfm
 !win32 { 
-    QMAKE_CXXFLAGS += $$system(taglib-config --cflags)
-    LIBS += $$system(taglib-config --libs)
-    QMAKE_CXXFLAGS += $$system(xine-config --cflags)
-    LIBS += $$system(xine-config --libs)
-    QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
-    LIBS += $$system(pkg-config --libs libnotify)
+    mac {
+        QMAKE_CXXFLAGS += -I/usr/local/include
+        LIBS += -L/usr/local/lib -ltag -llastfm -lxine -framework Carbon
+    }
+    !mac {
+        QMAKE_CXXFLAGS += $$system(taglib-config --cflags)
+        LIBS += $$system(taglib-config --libs)
+        QMAKE_CXXFLAGS += $$system(xine-config --cflags)
+        LIBS += $$system(xine-config --libs)
+        QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
+        LIBS += $$system(pkg-config --libs libnotify)
+    }
 }
 win32 { 
     INCLUDEPATH += C:/msys/1.0/local/include \
