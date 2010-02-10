@@ -55,16 +55,16 @@ static Fader *s_fader = 0;
 static OutFader *s_outfader = 0;
 
 
-  XineEngine::XineEngine()
-  : EngineBase()
-  , m_xine( 0 )
-  , m_stream( 0 )
-  , m_audioPort( 0 )
-  , m_eventQueue( 0 )
-  , m_post( 0 )
-  , m_preamp( 1.0 )
-  , m_stopFader( false )
-  , m_fadeOutRunning ( false )
+XineEngine::XineEngine()
+    : EngineBase()
+    , m_xine( 0 )
+    , m_stream( 0 )
+    , m_audioPort( 0 )
+    , m_eventQueue( 0 )
+    , m_post( 0 )
+    , m_preamp( 1.0 )
+    , m_stopFader( false )
+    , m_fadeOutRunning ( false )
     , m_equalizerEnabled( false )
 {
   m_settings.beginGroup(kSettingsGroup);
