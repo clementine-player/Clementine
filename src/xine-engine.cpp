@@ -120,7 +120,11 @@ XineEngine::init()
 #ifdef Q_OS_WIN32
    putenv(QString("XINE_PLUGIN_PATH=" +
       QCoreApplication::applicationDirPath() + "/xine/plugins").toAscii().constData());
-#endif
+#endif  // Q_OS_WIN32
+
+#ifdef Q_OS_DARWIN
+   setenv("XINE_PLUGIN_PATH", QString(QCoreApplication::applicationDirPath() + "/../PlugIns/xine").toAscii().constData(), 1);
+#endif // Q_OS_DARWIN
 
    QMutexLocker l(&m_initMutex);
 

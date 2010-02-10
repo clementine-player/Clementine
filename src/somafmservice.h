@@ -1,10 +1,11 @@
 #ifndef SOMAFMSERVICE_H
 #define SOMAFMSERVICE_H
 
+#include <QXmlStreamReader>
+
 #include "radioservice.h"
 
 class QNetworkAccessManager;
-class QXmlStreamReader;
 class QMenu;
 
 class SomaFMService : public RadioService {

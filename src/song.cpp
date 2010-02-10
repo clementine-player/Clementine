@@ -336,11 +336,13 @@ bool Song::Save() const {
   ref.tag()->setTrack(d->track_);
 
   bool ret = ref.save();
+  #ifdef Q_OS_LINUX
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
     // change the timestamps as well. (this is what touch does)
     utimensat(0, QFile::encodeName(d->filename_).constData(), NULL, 0);
   }
+  #endif  // Q_OS_LINUX
 
   return ret;
 }

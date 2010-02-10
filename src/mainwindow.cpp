@@ -227,6 +227,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(tray_icon_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(TrayClicked(QSystemTrayIcon::ActivationReason)));
 
   // Global shortcuts
+  // Breaks on OS X.
+#ifndef Q_OS_DARWIN
   QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
   QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
   QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
@@ -235,6 +237,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(stop, SIGNAL(activated()), ui_.action_stop, SLOT(trigger()));
   connect(next, SIGNAL(activated()), ui_.action_next_track, SLOT(trigger()));
   connect(prev, SIGNAL(activated()), ui_.action_previous_track, SLOT(trigger()));
+#endif  // Q_OS_DARWIN
 
   // Settings
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
