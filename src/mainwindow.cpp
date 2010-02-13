@@ -227,8 +227,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(tray_icon_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(TrayClicked(QSystemTrayIcon::ActivationReason)));
 
   // Global shortcuts
-  // Breaks on OS X.
-#ifndef Q_OS_DARWIN
+  // Breaks on OS X and Windows
+#ifdef Q_OS_LINUX
   QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
   QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
   QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);

@@ -125,11 +125,15 @@ OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
 LIBS += -llastfm
 !win32 { 
-    mac {
+    mac { 
         QMAKE_CXXFLAGS += -I/usr/local/include
-        LIBS += -L/usr/local/lib -ltag -llastfm -lxine -framework Carbon
+        LIBS += -L/usr/local/lib \
+            -ltag \
+            -lxine \
+            -framework \
+            Carbon
     }
-    !mac {
+    !mac { 
         QMAKE_CXXFLAGS += $$system(taglib-config --cflags)
         LIBS += $$system(taglib-config --libs)
         QMAKE_CXXFLAGS += $$system(xine-config --cflags)
@@ -138,28 +142,25 @@ LIBS += -llastfm
         LIBS += $$system(pkg-config --libs libnotify)
     }
 }
-win32 { 
-    INCLUDEPATH += C:/msys/1.0/local/include \
-        C:/msys/1.0/local/include/taglib
-    LIBS += -Lc:/msys/1.0/local/lib \
-        -Lc:/msys/1.0/local/bin \
-        -ltag \
-        -lxine \
-        -lpthreadGC2
-}
+win32:LIBS += -ltag \
+    -lxine \
+    -lpthreadGC2
 unix:!macx:SOURCES += osd_x11.cpp
 macx:SOURCES += osd_mac.cpp
+win32:SOURCES += osd_win.cpp
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt
-HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
-HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
-HEADERS += ../3rdparty/qxt/qxtglobal.h
-SOURCES += ../3rdparty/qxt/qxtglobalshortcut.cpp
-SOURCES += ../3rdparty/qxt/qxtglobal.cpp
-unix:!macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_x11.cpp
-macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_mac.cpp
-win32:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_win.cpp
+unix:!macx: {
+    HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
+    HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
+    HEADERS += ../3rdparty/qxt/qxtglobal.h
+    SOURCES += ../3rdparty/qxt/qxtglobalshortcut.cpp
+    SOURCES += ../3rdparty/qxt/qxtglobal.cpp
+    unix:!macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_x11.cpp
+    macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_mac.cpp
+    win32:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_win.cpp
+}
 
 # QtSingleApplication
 INCLUDEPATH += ../3rdparty/qtsingleapplication
