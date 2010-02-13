@@ -28,6 +28,7 @@
 #include <QTime>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QLocale>
 
 extern "C"
 {
