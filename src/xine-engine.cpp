@@ -118,7 +118,7 @@ XineEngine::init()
   qDebug() << "'Bringing joy to small mexican gerbils, a few weeks at a time.'";
 
 #ifdef Q_OS_WIN32
-  putenv(QString("XINE_PLUGIN_PATH" + QCoreApplication::applicationDirPath() + "/xine/plugins").toAscii().constData());
+  putenv(QString("XINE_PLUGIN_PATH=" + QCoreApplication::applicationDirPath() + "/xine/plugins").toAscii().constData());
 #endif  // Q_OS_WIN32
 
 #ifdef Q_OS_DARWIN

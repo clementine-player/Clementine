@@ -124,7 +124,7 @@ RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
 LIBS += -llastfm
-!win32 { 
+!win32:!fedora-win32-cross {
     mac { 
         QMAKE_CXXFLAGS += -I/usr/local/include
         LIBS += -L/usr/local/lib \
@@ -142,16 +142,16 @@ LIBS += -llastfm
         LIBS += $$system(pkg-config --libs libnotify)
     }
 }
-win32:LIBS += -ltag \
+win32|fedora-win32-cross:LIBS += -ltag \
     -lxine \
     -lpthreadGC2
-unix:!macx:SOURCES += osd_x11.cpp
+unix:!macx:!fedora-win32-cross:SOURCES += osd_x11.cpp
 macx:SOURCES += osd_mac.cpp
-win32:SOURCES += osd_win.cpp
+win32|fedora-win32-cross:SOURCES += osd_win.cpp
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt
-unix:!macx: {
+unix:!macx:!fedora-win32-cross: {
     HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
     HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
     HEADERS += ../3rdparty/qxt/qxtglobal.h
@@ -171,8 +171,15 @@ SOURCES += ../3rdparty/qtsingleapplication/qtsingleapplication.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
-unix:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
-win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
+unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
+win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
+
+# Hide the console on windows
+win32|fedora-win32-cross: {
+  CONFIG -= console
+  CONFIG += windows
+  LIBS += -Wl,-subsystem,windows
+}
 
 # Installs
 target.path = $${install_prefix}/bin/
