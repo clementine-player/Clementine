@@ -1,0 +1,13 @@
+--- src/combined/ffmpeg/ff_video_decoder.c~	2010-02-13 13:42:52.000000000 +0000
++++ src/combined/ffmpeg/ff_video_decoder.c	2010-02-13 13:42:52.000000000 +0000
+@@ -1235,8 +1235,10 @@
+     if (this->decoder_init_mode) {
+       int codec_type = buf->type & 0xFFFF0000;
+ 
++#ifdef AVCODEC_HAS_REORDERED_OPAQUE
+       if (!ff_check_extradata(this, codec_type, buf))
+ 	return;
++#endif // AVCODEC_HAS_REORDERED_OPAQUE
+ 
+       /* init ffmpeg decoder */
+       init_video_codec(this, codec_type);
