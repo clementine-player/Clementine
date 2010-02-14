@@ -123,7 +123,12 @@ FORMS += mainwindow.ui \
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
+RC_FILE += ../dist/windres.rc
+
+# Last.fm
 LIBS += -llastfm
+
+# Other platform specific libraries
 !win32:!fedora-win32-cross {
     mac { 
         QMAKE_CXXFLAGS += -I/usr/local/include
@@ -145,6 +150,8 @@ LIBS += -llastfm
 win32|fedora-win32-cross:LIBS += -ltag \
     -lxine \
     -lpthreadGC2
+
+# OSD
 unix:!macx:!fedora-win32-cross:SOURCES += osd_x11.cpp
 macx:SOURCES += osd_mac.cpp
 win32|fedora-win32-cross:SOURCES += osd_win.cpp
@@ -174,8 +181,8 @@ SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
 unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
 win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
 
-# Hide the console on windows
 win32|fedora-win32-cross: {
+  # Hide the console on windows
   CONFIG -= console
   CONFIG += windows
   LIBS += -Wl,-subsystem,windows
