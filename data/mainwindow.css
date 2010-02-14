@@ -6,3 +6,16 @@
   background-repeat: none;
   background-clip: content;
 }
+
+QToolButton {
+  border: none;
+}
+
+QToolButton::menu-button {
+  width: 16px;
+  border: none;
+}
+
+QToolButton[popupMode="1"] {
+  padding-right: 16px;
+}
