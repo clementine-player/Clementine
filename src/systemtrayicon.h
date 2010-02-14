@@ -8,8 +8,9 @@ class SystemTrayIcon : public QSystemTrayIcon {
 
  public:
   SystemTrayIcon(QObject* parent = 0);
+  virtual ~SystemTrayIcon();
 
-  bool event(QEvent* event);
+  virtual bool event(QEvent* event);
 
  public slots:
   void SetProgress(int percentage);

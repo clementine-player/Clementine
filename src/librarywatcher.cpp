@@ -16,7 +16,8 @@
 LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
     fs_watcher_(new QFileSystemWatcher(this)),
-    rescan_timer_(new QTimer(this))
+    rescan_timer_(new QTimer(this)),
+	total_watches_(0)
 {
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
@@ -35,6 +36,7 @@ void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
 
     // Start monitoring this directory for more changes
     fs_watcher_->addPath(dir.path);
+	++total_watches_;
 
     // And all the subdirectories
     QDirIterator it(dir.path,
@@ -44,6 +46,12 @@ void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
       QString subdir(it.next());
       fs_watcher_->addPath(subdir);
       paths_watched_[subdir] = dir;
+	  #ifdef Q_OS_DARWIN
+	  if (++total_watches_ > kMaxWatches) {
+		qWarning() << "Trying to watch more files than we can manage";
+		return;
+	  }
+	  #endif
     }
   }
 }

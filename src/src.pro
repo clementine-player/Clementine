@@ -123,13 +123,22 @@ FORMS += mainwindow.ui \
 RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
+RC_FILE += ../dist/windres.rc
+
+# Last.fm
 LIBS += -llastfm
-!win32 { 
-    mac {
+
+# Other platform specific libraries
+!win32:!fedora-win32-cross {
+    mac { 
         QMAKE_CXXFLAGS += -I/usr/local/include
-        LIBS += -L/usr/local/lib -ltag -llastfm -lxine -framework Carbon
+        LIBS += -L/usr/local/lib \
+            -ltag \
+            -lxine \
+            -framework \
+            Carbon
     }
-    !mac {
+    !mac { 
         QMAKE_CXXFLAGS += $$system(taglib-config --cflags)
         LIBS += $$system(taglib-config --libs)
         QMAKE_CXXFLAGS += $$system(xine-config --cflags)
@@ -140,28 +149,27 @@ LIBS += -llastfm
     CMAKE_CXXFLAGS =+ $$system(pkg-config glib-2.0 --cflags)
     LIBS += $$system(pkg-config --libs glib-2.0)
 }
-win32 { 
-    INCLUDEPATH += C:/msys/1.0/local/include \
-        C:/msys/1.0/local/include/taglib
-    LIBS += -Lc:/msys/1.0/local/lib \
-        -Lc:/msys/1.0/local/bin \
-        -ltag \
-        -lxine \
-        -lpthreadGC2
-}
-unix:!macx:SOURCES += osd_x11.cpp
+win32|fedora-win32-cross:LIBS += -ltag \
+    -lxine \
+    -lpthreadGC2
+
+# OSD
+unix:!macx:!fedora-win32-cross:SOURCES += osd_x11.cpp
 macx:SOURCES += osd_mac.cpp
+win32|fedora-win32-cross:SOURCES += osd_win.cpp
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt
-HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
-HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
-HEADERS += ../3rdparty/qxt/qxtglobal.h
-SOURCES += ../3rdparty/qxt/qxtglobalshortcut.cpp
-SOURCES += ../3rdparty/qxt/qxtglobal.cpp
-unix:!macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_x11.cpp
-macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_mac.cpp
-win32:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_win.cpp
+unix:!macx:!fedora-win32-cross: {
+    HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
+    HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
+    HEADERS += ../3rdparty/qxt/qxtglobal.h
+    SOURCES += ../3rdparty/qxt/qxtglobalshortcut.cpp
+    SOURCES += ../3rdparty/qxt/qxtglobal.cpp
+    unix:!macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_x11.cpp
+    macx:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_mac.cpp
+    win32:SOURCES += ../3rdparty/qxt/qxtglobalshortcut_win.cpp
+}
 
 # QtSingleApplication
 INCLUDEPATH += ../3rdparty/qtsingleapplication
@@ -172,8 +180,16 @@ SOURCES += ../3rdparty/qtsingleapplication/qtsingleapplication.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
-unix:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
-win32:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
+unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
+win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
+
+win32|fedora-win32-cross: {
+  # Hide the console on windows
+  #LIBS += -Wl,-subsystem,windows
+
+  # Show console for now since it seems to fix a xine race condition :(
+  CONFIG += console
+}
 
 # Installs
 target.path = $${install_prefix}/bin/

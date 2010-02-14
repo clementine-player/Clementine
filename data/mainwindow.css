@@ -6,3 +6,31 @@
   background-repeat: none;
   background-clip: content;
 }
+
+QToolButton {
+  border: none;
+  padding: 2px;
+}
+
+QToolButton::menu-button {
+  width: 16px;
+  border: none;
+}
+
+QToolButton[popupMode="1"] {
+  padding-right: 16px;
+}
+
+QToolButton:hover {
+  border: 2px solid #fec798;
+  background-color: #fedbbd;
+  border-radius: 3px;
+  padding: 1px;
+}
+
+QToolButton:pressed {
+  border: 2px solid #fe963e;
+  background-color: #fedbbd;
+  border-radius: 3px;
+  padding: 1px;
+}

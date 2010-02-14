@@ -54,6 +54,12 @@ class LibraryWatcher : public QObject {
 
   QMap<QString, Directory> paths_watched_;
   QStringList paths_needing_rescan_;
+
+  int total_watches_;
+
+  #ifdef Q_OS_DARWIN
+  static const int kMaxWatches = 200;
+  #endif
 };
 
 #endif // LIBRARYWATCHER_H

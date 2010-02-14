@@ -50,7 +50,7 @@ QSqlDatabase LibraryBackend::Connect() {
   db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
   db.setDatabaseName(directory_ + "/" + kDatabaseName);
   if (!db.open()) {
-    emit Error(db.lastError().text());
+    emit Error("LibraryBackend: " + db.lastError().text());
     return db;
   }
 
@@ -72,7 +72,7 @@ QSqlDatabase LibraryBackend::Connect() {
 bool LibraryBackend::CheckErrors(const QSqlError& error) {
   if (error.isValid()) {
     qDebug() << error;
-    emit Error(error.text());
+    emit Error("LibraryBackend: " + error.text());
     return true;
   }
   return false;

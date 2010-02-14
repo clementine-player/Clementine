@@ -28,6 +28,7 @@
 #include <QTime>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QLocale>
 
 extern "C"
 {
@@ -40,7 +41,9 @@ extern "C"
 
 
 //define this to use xine in a more standard way
-//#define XINE_SAFE_MODE
+#ifdef Q_OS_WIN32
+#define XINE_SAFE_MODE
+#endif
 
 
 ///some logging static globals
@@ -118,8 +121,7 @@ XineEngine::init()
   qDebug() << "'Bringing joy to small mexican gerbils, a few weeks at a time.'";
 
 #ifdef Q_OS_WIN32
-  putenv(QString("XINE_PLUGIN_PATH=" +
-        QCoreApplication::applicationDirPath() + "/xine/plugins").toAscii().constData());
+  putenv(QString("XINE_PLUGIN_PATH=" + QCoreApplication::applicationDirPath() + "/xine/plugins").toAscii().constData());
 #endif  // Q_OS_WIN32
 
 #ifdef Q_OS_DARWIN
@@ -262,8 +264,8 @@ XineEngine::load( const QUrl &url, bool isStream )
   else
   {
 #ifdef XINE_PARAM_GAPLESS_SWITCH
-    if ( xine_check_version(1,1,1) && !(m_xfadeLength > 0) )
-      xine_set_param( m_stream, XINE_PARAM_GAPLESS_SWITCH, 0);
+    //if ( xine_check_version(1,1,1) && !(m_xfadeLength > 0) )
+      //xine_set_param( m_stream, XINE_PARAM_GAPLESS_SWITCH, 0);
 #endif
   }
 
