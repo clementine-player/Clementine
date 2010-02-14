@@ -183,9 +183,10 @@ win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile
 
 win32|fedora-win32-cross: {
   # Hide the console on windows
-  CONFIG -= console
-  CONFIG += windows
-  LIBS += -Wl,-subsystem,windows
+  #LIBS += -Wl,-subsystem,windows
+
+  # Show console for now since it seems to fix a xine race condition :(
+  CONFIG += console
 }
 
 # Installs
