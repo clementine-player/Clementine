@@ -145,6 +145,8 @@ LIBS += -llastfm
         LIBS += $$system(xine-config --libs)
         QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
         LIBS += $$system(pkg-config --libs libnotify)
+        CMAKE_CXXFLAGS =+ $$system(pkg-config glib-2.0 --cflags)
+        LIBS += $$system(pkg-config --libs glib-2.0)
     }
 }
 win32|fedora-win32-cross:LIBS += -ltag \
