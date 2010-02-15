@@ -46,12 +46,12 @@ void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
       QString subdir(it.next());
       fs_watcher_->addPath(subdir);
       paths_watched_[subdir] = dir;
-    #ifdef Q_OS_DARWIN
-    if (++total_watches_ > kMaxWatches) {
-      qWarning() << "Trying to watch more files than we can manage";
-      return;
-    }
-    #endif
+      #ifdef Q_OS_DARWIN
+      if (++total_watches_ > kMaxWatches) {
+        qWarning() << "Trying to watch more files than we can manage";
+        return;
+      }
+      #endif
     }
   }
 }
