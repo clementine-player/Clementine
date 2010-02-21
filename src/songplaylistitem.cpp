@@ -25,9 +25,7 @@ void SongPlaylistItem::Restore(const QSettings& settings) {
 }
 
 QUrl SongPlaylistItem::Url() {
-  QUrl ret(QUrl::fromLocalFile(song_.filename()));
-  ret.setHost("localhost");
-  return ret;
+  return QUrl::fromLocalFile(song_.filename());
 }
 
 void SongPlaylistItem::Reload() {
