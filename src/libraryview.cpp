@@ -36,7 +36,7 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
       painter->drawText(text_rect, text);
 
       //Draw the line under the item
-      QPen line_pen(opt.palette.color(QPalette::Disabled, QPalette::Text).lighter());
+      QPen line_pen(opt.palette.color(QPalette::Dark));
       line_pen.setWidth(2);
 
       painter->setPen(line_pen);
