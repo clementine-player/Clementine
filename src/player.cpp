@@ -1,6 +1,7 @@
 #include "player.h"
 #include "playlist.h"
 #include "xine-engine.h"
+#include "phononengine.h"
 #include "lastfmservice.h"
 
 #include <QtDebug>
@@ -13,9 +14,15 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
     playlist_(playlist),
     lastfm_(lastfm),
     current_item_options_(PlaylistItem::Default),
-    engine_(new XineEngine),
+    engine_(NULL),
     init_engine_watcher_(new QFutureWatcher<bool>(this))
 {
+//#ifdef Q_OS_WIN32
+  engine_ = new PhononEngine;
+//#else
+//  engine_ = new XineEngine;
+//#endif
+
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());

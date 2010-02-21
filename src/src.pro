@@ -4,7 +4,8 @@ VERSION = 0.1
 QT += sql \
     network \
     xml \
-    opengl
+    opengl \
+    phonon
 TARGET = clementine
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -53,7 +54,8 @@ SOURCES += main.cpp \
     librarydirectorymodel.cpp \
     libraryconfigdialog.cpp \
     lastfmconfigdialog.cpp \
-    about.cpp
+    about.cpp \
+    phononengine.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -107,7 +109,8 @@ HEADERS += mainwindow.h \
     librarydirectorymodel.h \
     libraryconfigdialog.h \
     lastfmconfigdialog.h \
-    about.h
+    about.h \
+    phononengine.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -129,7 +132,7 @@ RC_FILE += ../dist/windres.rc
 LIBS += -llastfm
 
 # Other platform specific libraries
-!win32:!fedora-win32-cross {
+!win32:!fedora-win32-cross { 
     mac { 
         QMAKE_CXXFLAGS += -I/usr/local/include
         LIBS += -L/usr/local/lib \
@@ -160,7 +163,7 @@ win32|fedora-win32-cross:SOURCES += osd_win.cpp
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt
-unix:!macx:!fedora-win32-cross: {
+unix:!macx:!fedora-win32-cross: { 
     HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
     HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
     HEADERS += ../3rdparty/qxt/qxtglobal.h
@@ -182,14 +185,9 @@ SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
 unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
 win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
-
-win32|fedora-win32-cross: {
-  # Hide the console on windows
-  #LIBS += -Wl,-subsystem,windows
-
-  # Show console for now since it seems to fix a xine race condition :(
-  CONFIG += console
-}
+win32|fedora-win32-cross:# Hide the console on windows
+:
+LIBS += -Wl,-subsystem,windows
 
 # Installs
 target.path = $${install_prefix}/bin/
