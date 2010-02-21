@@ -4,8 +4,7 @@ VERSION = 0.1
 QT += sql \
     network \
     xml \
-    opengl \
-    phonon
+    opengl
 TARGET = clementine
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -20,8 +19,6 @@ SOURCES += main.cpp \
     analyzers/analyzerbase.cpp \
     fht.cpp \
     analyzers/blockanalyzer.cpp \
-    xine-engine.cpp \
-    xine-scope.c \
     sliderwidget.cpp \
     playlistview.cpp \
     backgroundthread.cpp \
@@ -54,8 +51,7 @@ SOURCES += main.cpp \
     librarydirectorymodel.cpp \
     libraryconfigdialog.cpp \
     lastfmconfigdialog.cpp \
-    about.cpp \
-    phononengine.cpp
+    about.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -68,8 +64,6 @@ HEADERS += mainwindow.h \
     analyzers/analyzerbase.h \
     fht.h \
     analyzers/blockanalyzer.h \
-    xine-engine.h \
-    xine-scope.h \
     sliderwidget.h \
     playlistview.h \
     backgroundthread.h \
@@ -109,8 +103,7 @@ HEADERS += mainwindow.h \
     librarydirectorymodel.h \
     libraryconfigdialog.h \
     lastfmconfigdialog.h \
-    about.h \
-    phononengine.h
+    about.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -127,6 +120,19 @@ RESOURCES += ../data/data.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
 RC_FILE += ../dist/windres.rc
+
+# Xine on unix, phonon on windows
+win32|fedora-win32-cross {
+    QT += phonon
+    SOURCES += phononengine.cpp
+    HEADERS += phononengine.h
+}
+!win32:!fedora-win32-cross {
+    SOURCES += xine-engine.cpp \
+        xine-scope.c
+    HEADERS += xine-engine.h \
+        xine-scope.h
+}
 
 # Last.fm
 LIBS += -llastfm
@@ -153,7 +159,6 @@ LIBS += -llastfm
     }
 }
 win32|fedora-win32-cross:LIBS += -ltag \
-    -lxine \
     -lpthreadGC2
 
 # OSD
@@ -187,8 +192,8 @@ unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile
 win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
 
 # Hide the console on windows
-#win32|fedora-win32-cross:LIBS += -Wl,-subsystem,windows
-CONFIG += console
+win32|fedora-win32-cross:LIBS += -Wl,-subsystem,windows
+#CONFIG += console
 
 # Installs
 target.path = $${install_prefix}/bin/
