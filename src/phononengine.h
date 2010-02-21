@@ -3,10 +3,14 @@
 
 #include "enginebase.h"
 
-#include <Phonon/MediaObject>
-#include <Phonon/AudioOutput>
+#include <phonon/mediaobject.h>
+#include <phonon/audiooutput.h>
+
+class QTimer;
 
 class PhononEngine : public Engine::Base {
+  Q_OBJECT
+
  public:
   PhononEngine();
   ~PhononEngine();
@@ -30,9 +34,16 @@ class PhononEngine : public Engine::Base {
  protected:
   void setVolumeSW( uint percent );
 
+ private slots:
+  void PhononFinished();
+  void PhononStateChanged(Phonon::State new_state);
+  void StateTimeoutExpired();
+
  private:
   Phonon::MediaObject* media_object_;
   Phonon::AudioOutput* audio_output_;
+
+  QTimer* state_timer_;
 };
 
 #endif // PHONONENGINE_H

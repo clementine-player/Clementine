@@ -185,9 +185,9 @@ SOURCES += ../3rdparty/qtsingleapplication/qtlocalpeer.cpp
 SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
 unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
 win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
-win32|fedora-win32-cross:# Hide the console on windows
-:
-LIBS += -Wl,-subsystem,windows
+
+# Hide the console on windows
+win32|fedora-win32-cross:LIBS += -Wl,-subsystem,windows
 
 # Installs
 target.path = $${install_prefix}/bin/
