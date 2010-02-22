@@ -152,17 +152,22 @@ LIBS += -llastfm
         LIBS += $$system(taglib-config --libs)
         QMAKE_CXXFLAGS += $$system(xine-config --cflags)
         LIBS += $$system(xine-config --libs)
-        QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
-        LIBS += $$system(pkg-config --libs libnotify)
-        QMAKE_CXXFLAGS += $$system(pkg-config glib-2.0 --cflags)
-        LIBS += $$system(pkg-config --libs glib-2.0)
     }
 }
 win32|fedora-win32-cross:LIBS += -ltag \
     -lpthreadGC2
 
 # OSD
-unix:!macx:!fedora-win32-cross:SOURCES += osd_x11.cpp
+unix:!macx:!fedora-win32-cross {
+    nolibnotify {
+        SOURCES += osd_win.cpp
+    }
+    !nolibnotify {
+        SOURCES += osd_x11.cpp
+        QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
+        LIBS += $$system(pkg-config --libs libnotify)
+    }
+}
 macx:SOURCES += osd_mac.cpp
 win32|fedora-win32-cross:SOURCES += osd_win.cpp
 
