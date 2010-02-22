@@ -144,6 +144,9 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
   if (!name.isEmpty()) {
     QChar divider_char = ret->sort_text[0];
 
+    if (divider_char.isDigit())
+      divider_char = '0';
+
     if (!divider_nodes_.contains(divider_char)) {
       if (signal)
         beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());

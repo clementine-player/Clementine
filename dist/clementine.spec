@@ -6,11 +6,11 @@ Summary:        A music player and library organiser
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://code.google.com/p/clementine-player
-Source0:        %{name}-%{version}.tar.gz
+Source0:        %{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel xine-lib-devel
-BuildRequires:  libnotify-devel qt4-devel boost-devel
+BuildRequires:  libnotify-devel qt4-devel boost-devel notification-daemon gcc-c++
 Requires:       xine-lib-extras-freeworld
 
 %description

@@ -19,8 +19,6 @@ SOURCES += main.cpp \
     analyzers/analyzerbase.cpp \
     fht.cpp \
     analyzers/blockanalyzer.cpp \
-    xine-engine.cpp \
-    xine-scope.c \
     sliderwidget.cpp \
     playlistview.cpp \
     backgroundthread.cpp \
@@ -66,8 +64,6 @@ HEADERS += mainwindow.h \
     analyzers/analyzerbase.h \
     fht.h \
     analyzers/blockanalyzer.h \
-    xine-engine.h \
-    xine-scope.h \
     sliderwidget.h \
     playlistview.h \
     backgroundthread.h \
@@ -125,11 +121,24 @@ OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
 RC_FILE += ../dist/windres.rc
 
+# Xine on unix, phonon on windows
+win32|fedora-win32-cross {
+    QT += phonon
+    SOURCES += phononengine.cpp
+    HEADERS += phononengine.h
+}
+!win32:!fedora-win32-cross {
+    SOURCES += xine-engine.cpp \
+        xine-scope.c
+    HEADERS += xine-engine.h \
+        xine-scope.h
+}
+
 # Last.fm
 LIBS += -llastfm
 
 # Other platform specific libraries
-!win32:!fedora-win32-cross {
+!win32:!fedora-win32-cross { 
     mac { 
         QMAKE_CXXFLAGS += -I/usr/local/include
         LIBS += -L/usr/local/lib \
@@ -145,12 +154,13 @@ LIBS += -llastfm
         LIBS += $$system(xine-config --libs)
         QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
         LIBS += $$system(pkg-config --libs libnotify)
+        QMAKE_CXXFLAGS += $$system(pkg-config glib-2.0 --cflags)
+        LIBS += $$system(pkg-config --libs glib-2.0)
     }
     CMAKE_CXXFLAGS =+ $$system(pkg-config glib-2.0 --cflags)
     LIBS += $$system(pkg-config --libs glib-2.0)
 }
 win32|fedora-win32-cross:LIBS += -ltag \
-    -lxine \
     -lpthreadGC2
 
 # OSD
@@ -160,7 +170,7 @@ win32|fedora-win32-cross:SOURCES += osd_win.cpp
 
 # QXT
 INCLUDEPATH += ../3rdparty/qxt
-unix:!macx:!fedora-win32-cross: {
+unix:!macx:!fedora-win32-cross: { 
     HEADERS += ../3rdparty/qxt/qxtglobalshortcut.h
     HEADERS += ../3rdparty/qxt/qxtglobalshortcut_p.h
     HEADERS += ../3rdparty/qxt/qxtglobal.h
@@ -183,13 +193,9 @@ SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile.cpp
 unix:!fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_unix.cpp
 win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile_win.cpp
 
-win32|fedora-win32-cross: {
-  # Hide the console on windows
-  #LIBS += -Wl,-subsystem,windows
-
-  # Show console for now since it seems to fix a xine race condition :(
-  CONFIG += console
-}
+# Hide the console on windows
+win32|fedora-win32-cross:LIBS += -Wl,-subsystem,windows
+#CONFIG += console
 
 # Installs
 target.path = $${install_prefix}/bin/
