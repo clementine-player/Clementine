@@ -274,6 +274,7 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setTitle(d->title_);
   mtrack.setDuration(d->length_);
   mtrack.setTrackNumber(d->track_);
+  mtrack.setSource(lastfm::Track::Player);
 }
 
 QString Song::PrettyTitleWithArtist() const {
