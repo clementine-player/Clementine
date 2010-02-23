@@ -8,7 +8,7 @@ Homepage: http://code.google.com/p/clementine-player/
 
 Package: clementine
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libxine1-all-plugins
+Depends: ${shlibs:Depends}, ${misc:Depends}, libxine1-all-plugins, libqt4-sql-sqlite
 Description: Clementine is a modern music player and library organiser.
   It is largely a port of Amarok 1.4, with some features rewritten to take
   advantage of Qt4.
