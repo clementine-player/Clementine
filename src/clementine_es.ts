@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="es_ES">
 <defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>About</name>
@@ -100,7 +102,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>QLineEdit {
-<byte value="x9"/>background-color: transparent;
+	background-color: transparent;
 }</source>
         <translation type="unfinished"></translation>
     </message>
@@ -681,7 +683,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> ms</source>
-        <translation>ms</translation>
+        <translation> ms</translation>
     </message>
     <message>
         <source>Clementine can show a message when the track changes.</source>
@@ -705,7 +707,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> seconds</source>
-        <translation>segundos</translation>
+        <translation> segundos</translation>
     </message>
 </context>
 <context>
