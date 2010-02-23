@@ -21,7 +21,7 @@ class AlbumCoverFetcher : public QObject {
   lastfm::Album FetchAlbumCover(const QString& artist, const QString& album);
 
  signals:
-  void AlbumCoverFetched(lastfm::Album, QImage cover);
+  void AlbumCoverFetched(const lastfm::Album&, const QImage& cover);
 
  private slots:
   void AlbumGetInfoFinished();

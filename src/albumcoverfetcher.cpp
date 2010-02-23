@@ -32,7 +32,7 @@ void AlbumCoverFetcher::AlbumGetInfoFinished() {
   QNetworkReply* image_reply = network_.get(QNetworkRequest(image_url));
   connect(image_reply, SIGNAL(finished()), SLOT(AlbumCoverFetchFinished()));
 
-  lastfm::Album album = requests_[reply];
+  lastfm::Album album = requests_.take(reply);
   requests_[image_reply] = album;
 }
 
