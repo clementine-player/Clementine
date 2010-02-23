@@ -327,14 +327,18 @@ bool Song::Save() const {
   if (d->filename_.isNull())
     return false;
 
+# define str(x) TagLib::String(x.toUtf8().constData(), TagLib::String::UTF8)
+
   TagLib::FileRef ref(QFile::encodeName(d->filename_).constData());
-  ref.tag()->setTitle(d->title_.toUtf8().constData());
-  ref.tag()->setArtist(d->artist_.toUtf8().constData());
-  ref.tag()->setAlbum(d->album_.toUtf8().constData());
-  ref.tag()->setGenre(d->genre_.toUtf8().constData());
-  ref.tag()->setComment(d->comment_.toUtf8().constData());
+  ref.tag()->setTitle(str(d->title_));
+  ref.tag()->setArtist(str(d->artist_));
+  ref.tag()->setAlbum(str(d->album_));
+  ref.tag()->setGenre(str(d->genre_));
+  ref.tag()->setComment(str(d->comment_));
   ref.tag()->setYear(d->year_);
   ref.tag()->setTrack(d->track_);
+
+# undef str
 
   bool ret = ref.save();
   #ifdef Q_OS_LINUX
