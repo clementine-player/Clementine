@@ -137,6 +137,9 @@ win32|fedora-win32-cross {
 # Last.fm
 LIBS += -llastfm
 
+# Enable a bunch of warnings
+QMAKE_CXXFLAGS += -Wall -Werror=non-virtual-dtor -Woverloaded-virtual
+
 # Other platform specific libraries
 !win32:!fedora-win32-cross { 
     mac { 

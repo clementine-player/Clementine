@@ -10,6 +10,7 @@ class BackgroundThreadBase : public QThread {
   Q_OBJECT
  public:
   BackgroundThreadBase(QObject* parent = 0) : QThread(parent) {}
+  virtual ~BackgroundThreadBase() {}
  signals:
   void Initialised();
 };
@@ -18,7 +19,7 @@ template <typename T>
 class BackgroundThread : public BackgroundThreadBase {
  public:
   BackgroundThread(QObject* parent = 0);
-  ~BackgroundThread();
+  virtual ~BackgroundThread();
 
   boost::shared_ptr<T> Worker() const { return worker_; }
 
