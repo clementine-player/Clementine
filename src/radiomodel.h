@@ -3,6 +3,7 @@
 
 #include "radioitem.h"
 #include "simpletreemodel.h"
+#include "multiloadingindicator.h"
 
 class RadioService;
 class LastFMService;
@@ -36,8 +37,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void ReloadSettings();
 
  signals:
-  void TaskStarted(const QString&);
-  void TaskFinished(const QString&);
+  void TaskStarted(MultiLoadingIndicator::TaskType);
+  void TaskFinished(MultiLoadingIndicator::TaskType);
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void StreamFinished();
   void StreamError(const QString& message);

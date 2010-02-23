@@ -8,10 +8,10 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 {
   ui_.setupUi(this);
 
-  static const char* kHintText = "[click to edit]";
-  ui_.album->SetHint(kHintText);
-  ui_.artist->SetHint(kHintText);
-  ui_.genre->SetHint(kHintText);
+  QString hint_text(tr("[click to edit]"));
+  ui_.album->SetHint(hint_text);
+  ui_.artist->SetHint(hint_text);
+  ui_.genre->SetHint(hint_text);
 }
 
 bool EditTagDialog::SetSongs(const SongList &s) {
@@ -70,7 +70,7 @@ bool EditTagDialog::SetSongs(const SongList &s) {
     ui_.genre->setText(genre);
     ui_.year->setValue(year);
 
-    ui_.filename->setText("Editing " + QString::number(songs.count()) + " tracks");
+    ui_.filename->setText(tr("Editing %n tracks", "", songs.count()));
   }
 
   return true;

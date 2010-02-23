@@ -37,7 +37,7 @@ void LastFMConfig::AuthenticationComplete(bool success) {
     ui_.username->setText(lastfm::ws::Username);
     ui_.password->clear();
   } else {
-    QMessageBox::warning(this, "Authentication failed", "Your Last.fm credentials were incorrect");
+    QMessageBox::warning(this, tr("Authentication failed"), tr("Your Last.fm credentials were incorrect"));
   }
 
   emit ValidationComplete(success);

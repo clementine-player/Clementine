@@ -8,7 +8,7 @@ About::About(QWidget *parent)
 {
   ui_.setupUi(this);
 
-  setWindowTitle("About " + QCoreApplication::applicationName());
+  setWindowTitle(tr("About %1").arg(QCoreApplication::applicationName()));
   ui_.title->setText(QCoreApplication::applicationName());
-  ui_.version->setText("Version " + QCoreApplication::applicationVersion());
+  ui_.version->setText(tr("Version %1").arg(QCoreApplication::applicationVersion()));
 }

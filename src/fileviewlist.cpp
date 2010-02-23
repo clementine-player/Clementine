@@ -9,12 +9,12 @@ FileViewList::FileViewList(QWidget* parent)
     : QListView(parent),
       menu_(new QMenu(this))
 {
-  menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist",
+  menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"),
                    this, SLOT(AddToPlaylistSlot()));
   menu_->addSeparator();
-  menu_->addAction(QIcon(":copy.png"), "Copy to library...",
+  menu_->addAction(QIcon(":copy.png"), tr("Copy to library..."),
                    this, SLOT(CopyToLibrarySlot()));
-  menu_->addAction(QIcon(":move.png"),"Move to library...",
+  menu_->addAction(QIcon(":move.png"), tr("Move to library..."),
                    this, SLOT(MoveToLibrarySlot()));
 }
 

@@ -106,13 +106,13 @@ void LibraryView::paintEvent(QPaintEvent* event) {
     QFontMetrics metrics(bold_font);
 
     QRect title_rect(0, image_rect.bottom() + 20, rect.width(), metrics.height());
-    p.drawText(title_rect, Qt::AlignHCenter, "Your library is empty!");
+    p.drawText(title_rect, Qt::AlignHCenter, tr("Your library is empty!"));
 
     // Draw the other text
     p.setFont(QFont());
 
     QRect text_rect(0, title_rect.bottom() + 5, rect.width(), metrics.height());
-    p.drawText(text_rect, Qt::AlignHCenter, "Click here to add some music");
+    p.drawText(text_rect, Qt::AlignHCenter, tr("Click here to add some music"));
   }
 }
 

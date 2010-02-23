@@ -11,8 +11,8 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
       show_menu_(new QMenu(this)),
       show_mapper_(new QSignalMapper(this))
 {
-  hide_action_ = menu_->addAction("Hide...", this, SLOT(HideCurrent()));
-  QAction* show_action = menu_->addAction("Show section");
+  hide_action_ = menu_->addAction(tr("Hide..."), this, SLOT(HideCurrent()));
+  QAction* show_action = menu_->addAction(tr("Show section"));
   show_action->setMenu(show_menu_);
 
   connect(show_mapper_, SIGNAL(mapped(int)), SLOT(ToggleVisible(int)));
@@ -28,7 +28,7 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
     hide_action_->setVisible(true);
 
     QString title(model()->headerData(menu_section_, Qt::Horizontal).toString());
-    hide_action_->setText("Hide " + title);
+    hide_action_->setText(tr("Hide %1").arg(title));
   }
 
   show_menu_->clear();

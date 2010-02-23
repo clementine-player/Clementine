@@ -116,18 +116,22 @@ FORMS += mainwindow.ui \
     libraryconfigdialog.ui \
     lastfmconfigdialog.ui \
     about.ui
-RESOURCES += ../data/data.qrc
+RESOURCES += ../data/data.qrc \
+    translations.qrc
 OTHER_FILES += ../data/schema.sql \
     ../data/mainwindow.css
 RC_FILE += ../dist/windres.rc
+TRANSLATIONS = clementine_ru.ts \
+    clementine_es.ts \
+    clementine_el.ts
 
 # Xine on unix, phonon on windows
-win32|fedora-win32-cross {
+win32|fedora-win32-cross { 
     QT += phonon
     SOURCES += phononengine.cpp
     HEADERS += phononengine.h
 }
-!win32:!fedora-win32-cross {
+!win32:!fedora-win32-cross { 
     SOURCES += xine-engine.cpp \
         xine-scope.c
     HEADERS += xine-engine.h \
@@ -161,11 +165,9 @@ win32|fedora-win32-cross:LIBS += -ltag \
     -lpthreadGC2
 
 # OSD
-unix:!macx:!fedora-win32-cross {
-    nolibnotify {
-        SOURCES += osd_win.cpp
-    }
-    !nolibnotify {
+unix:!macx:!fedora-win32-cross { 
+    nolibnotify:SOURCES += osd_win.cpp
+    !nolibnotify { 
         SOURCES += osd_x11.cpp
         QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
         LIBS += $$system(pkg-config --libs libnotify)
@@ -201,8 +203,8 @@ win32|fedora-win32-cross:SOURCES += ../3rdparty/qtsingleapplication/qtlockedfile
 
 # Hide the console on windows
 win32|fedora-win32-cross:LIBS += -Wl,-subsystem,windows
-#CONFIG += console
 
+# CONFIG += console
 # Installs
 target.path = $${install_prefix}/bin/
 desktop.path = dummy

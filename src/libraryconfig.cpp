@@ -37,7 +37,7 @@ void LibraryConfig::Add() {
   settings.beginGroup(kSettingsGroup);
 
   QString path(settings.value("last_path", QDir::homePath()).toString());
-  path = QFileDialog::getExistingDirectory(this, "Add directory...", path);
+  path = QFileDialog::getExistingDirectory(this, tr("Add directory..."), path);
 
   if (!path.isNull()) {
     model_->AddDirectory(path);

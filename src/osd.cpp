@@ -43,15 +43,15 @@ void OSD::SongChanged(const Song &song) {
 }
 
 void OSD::Paused() {
-  ShowMessage(QCoreApplication::applicationName(), "Paused");
+  ShowMessage(QCoreApplication::applicationName(), tr("Paused"));
 }
 
 void OSD::Stopped() {
-  ShowMessage(QCoreApplication::applicationName(), "Playlist finished");
+  ShowMessage(QCoreApplication::applicationName(), tr("Playlist finished"));
 }
 
 void OSD::VolumeChanged(int value) {
-  ShowMessage(QCoreApplication::applicationName(), QString("Volume %1%").arg(value));
+  ShowMessage(QCoreApplication::applicationName(), tr("Volume %1%").arg(value));
 }
 
 void OSD::ShowMessage(const QString& summary,

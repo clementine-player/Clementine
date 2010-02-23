@@ -11,17 +11,26 @@ class MultiLoadingIndicator : public QWidget {
  public:
   MultiLoadingIndicator(QWidget* parent = 0);
 
+  enum TaskType {
+    LoadingAudioEngine,
+    UpdatingLibrary,
+    GettingChannels,
+    LoadingStream,
+    LoadingLastFM,
+  };
+
  public slots:
-  void TaskStarted(const QString& name);
-  void TaskFinished(const QString& name);
+  void TaskStarted(MultiLoadingIndicator::TaskType type);
+  void TaskFinished(MultiLoadingIndicator::TaskType type);
 
  private:
   void UpdateText();
+  static QString TaskTypeToString(TaskType type);
 
  private:
   Ui::MultiLoadingIndicator ui_;
 
-  QStringList tasks_;
+  QList<TaskType> tasks_;
 };
 
 #endif // MULTILOADINGINDICATOR_H

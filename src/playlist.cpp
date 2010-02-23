@@ -36,20 +36,20 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
     return QVariant();
 
   switch (section) {
-    case Column_Title:    return "Title";
-    case Column_Artist:   return "Artist";
-    case Column_Album:    return "Album";
-    case Column_Length:   return "Length";
-    case Column_Track:    return "Track";
-    case Column_Disc:     return "Disc";
-    case Column_Year:     return "Year";
-    case Column_Genre:    return "Genre";
+    case Column_Title:    return tr("Title");
+    case Column_Artist:   return tr("Artist");
+    case Column_Album:    return tr("Album");
+    case Column_Length:   return tr("Length");
+    case Column_Track:    return tr("Track");
+    case Column_Disc:     return tr("Disc");
+    case Column_Year:     return tr("Year");
+    case Column_Genre:    return tr("Genre");
 
-    case Column_BPM:      return "BPM";
-    case Column_Bitrate:  return "Bit rate";
-    case Column_Samplerate: return "Sample rate";
-    case Column_Filename: return "File name";
-    case Column_Filesize: return "File size";
+    case Column_BPM:      return tr("BPM");
+    case Column_Bitrate:  return tr("Bit rate");
+    case Column_Samplerate: return tr("Sample rate");
+    case Column_Filename: return tr("File name");
+    case Column_Filesize: return tr("File size");
   }
 
   return QVariant();

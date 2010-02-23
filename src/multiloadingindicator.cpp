@@ -6,18 +6,18 @@ MultiLoadingIndicator::MultiLoadingIndicator(QWidget *parent)
   ui_.setupUi(this);
 }
 
-void MultiLoadingIndicator::TaskStarted(const QString &name) {
-  if (tasks_.contains(name))
+void MultiLoadingIndicator::TaskStarted(TaskType type) {
+  if (tasks_.contains(type))
     return;
 
-  tasks_ << name;
+  tasks_ << type;
 
   UpdateText();
   show();
 }
 
-void MultiLoadingIndicator::TaskFinished(const QString &name) {
-  tasks_.removeAll(name);
+void MultiLoadingIndicator::TaskFinished(TaskType type) {
+  tasks_.removeAll(type);
 
   UpdateText();
   if (tasks_.count() == 0)
@@ -26,10 +26,8 @@ void MultiLoadingIndicator::TaskFinished(const QString &name) {
 
 void MultiLoadingIndicator::UpdateText() {
   QStringList strings;
-  foreach (QString task, tasks_) {
-    if (task.isEmpty())
-      continue;
-
+  foreach (TaskType type, tasks_) {
+    QString task(TaskTypeToString(type));
     task[0] = task[0].toLower();
     strings << task;
   }
@@ -40,4 +38,16 @@ void MultiLoadingIndicator::UpdateText() {
   }
 
   ui_.text->setText(text + "...");
+}
+
+QString MultiLoadingIndicator::TaskTypeToString(TaskType type) {
+  switch (type) {
+    case LoadingAudioEngine: return tr("Loading audio engine");
+    case UpdatingLibrary:    return tr("Updating library");
+    case GettingChannels:    return tr("Getting channels");
+    case LoadingStream:      return tr("Loading stream");
+    case LoadingLastFM:      return tr("Loading Last.fm radio");
+
+    default: return QString::null;
+  }
 }

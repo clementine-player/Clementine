@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
 
   // Start initialising the player
-  multi_loading_indicator_->TaskStarted("Loading audio engine");
+  multi_loading_indicator_->TaskStarted(MultiLoadingIndicator::LoadingAudioEngine);
   player_->Init();
 
   // Models
@@ -187,21 +187,21 @@ MainWindow::MainWindow(QWidget *parent)
   QMenu* library_menu = new QMenu(this);
   library_menu->addActions(filter_age_group->actions());
   library_menu->addSeparator();
-  library_menu->addAction("Configure library...", library_config_dialog_, SLOT(show()));
+  library_menu->addAction(tr("Configure library..."), library_config_dialog_, SLOT(show()));
   ui_.library_options->setMenu(library_menu);
 
   // Playlist menu
-  playlist_play_pause_ = playlist_menu_->addAction("Play", this, SLOT(PlaylistPlay()));
+  playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_.action_stop);
-  playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), "Stop after this track", this, SLOT(PlaylistStopAfter()));
+  playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_menu_->addAction(ui_.action_edit_track);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_clear_playlist);
   playlist_menu_->addAction(ui_.action_shuffle);
 
   // Radio connections
-  connect(radio_model_, SIGNAL(TaskStarted(QString)), multi_loading_indicator_, SLOT(TaskStarted(QString)));
-  connect(radio_model_, SIGNAL(TaskFinished(QString)), multi_loading_indicator_, SLOT(TaskFinished(QString)));
+  connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
+  connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
   connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(NextItem()));
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
@@ -296,7 +296,7 @@ void MainWindow::MediaStopped() {
   ui_.action_stop->setEnabled(false);
   ui_.action_stop_after_this_track->setEnabled(false);
   ui_.action_play_pause->setIcon(QIcon(":media-playback-start.png"));
-  ui_.action_play_pause->setText("Play");
+  ui_.action_play_pause->setText(tr("Play"));
 
   ui_.action_play_pause->setEnabled(true);
 
@@ -312,7 +312,7 @@ void MainWindow::MediaPaused() {
   ui_.action_stop->setEnabled(true);
   ui_.action_stop_after_this_track->setEnabled(true);
   ui_.action_play_pause->setIcon(QIcon(":media-playback-start.png"));
-  ui_.action_play_pause->setText("Play");
+  ui_.action_play_pause->setText(tr("Play"));
 
   ui_.action_play_pause->setEnabled(true);
 
@@ -323,7 +323,7 @@ void MainWindow::MediaPlaying() {
   ui_.action_stop->setEnabled(true);
   ui_.action_stop_after_this_track->setEnabled(true);
   ui_.action_play_pause->setIcon(QIcon(":media-playback-pause.png"));
-  ui_.action_play_pause->setText("Pause");
+  ui_.action_play_pause->setText(tr("Pause"));
 
   ui_.action_play_pause->setEnabled(
       ! (player_->GetCurrentItemOptions() & PlaylistItem::PauseDisabled));
@@ -478,10 +478,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_menu_index_ = index;
 
   if (playlist_->current_index() == index.row() && player_->GetState() == Engine::Playing) {
-    playlist_play_pause_->setText("Pause");
+    playlist_play_pause_->setText(tr("Pause"));
     playlist_play_pause_->setIcon(QIcon(":media-playback-pause.png"));
   } else {
-    playlist_play_pause_->setText("Play");
+    playlist_play_pause_->setText(tr("Play"));
     playlist_play_pause_->setIcon(QIcon(":media-playback-start.png"));
   }
 
@@ -547,13 +547,13 @@ void MainWindow::EditTracks() {
 }
 
 void MainWindow::LibraryScanStarted() {
-  multi_loading_indicator_->TaskStarted("Updating library");
+  multi_loading_indicator_->TaskStarted(MultiLoadingIndicator::UpdatingLibrary);
 }
 
 void MainWindow::LibraryScanFinished() {
-  multi_loading_indicator_->TaskFinished("Updating library");
+  multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::UpdatingLibrary);
 }
 
 void MainWindow::PlayerInitFinished() {
-  multi_loading_indicator_->TaskFinished("Loading audio engine");
+  multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::LoadingAudioEngine);
 }

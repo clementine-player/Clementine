@@ -10,6 +10,8 @@
 
 #include <QtSingleApplication>
 #include <QtDebug>
+#include <QLibraryInfo>
+#include <QTranslator>
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("Clementine");
@@ -29,6 +31,17 @@ int main(int argc, char *argv[]) {
     // Couldn't send the message so start anyway
   }
 
+  // Translations
+  QTranslator qt_translator;
+  qt_translator.load("qt_" + QLocale::system().name(),
+       QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  a.installTranslator(&qt_translator);
+
+  QTranslator clementine_translator;
+  clementine_translator.load("clementine_" + QLocale::system().name(), ":/translations");
+  a.installTranslator(&clementine_translator);
+
+  // Window
   MainWindow w;
   a.setActivationWindow(&w);
 

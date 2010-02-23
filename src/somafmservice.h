@@ -20,8 +20,6 @@ class SomaFMService : public RadioService {
   };
 
   static const char* kServiceName;
-  static const char* kLoadingChannelsText;
-  static const char* kLoadingStreamText;
   static const char* kChannelListUrl;
   static const char* kHomepage;
 

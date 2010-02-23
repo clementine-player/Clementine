@@ -3,6 +3,7 @@
 #include "radiomodel.h"
 
 #include <QSettings>
+#include <QApplication>
 
 RadioPlaylistItem::RadioPlaylistItem()
   : service_(NULL)
@@ -37,7 +38,7 @@ void RadioPlaylistItem::Restore(const QSettings& settings) {
 
 void RadioPlaylistItem::InitMetadata() {
   if (!service_)
-    metadata_.set_title("Radio service couldn't be loaded :-(");
+    metadata_.set_title(QApplication::translate("RadioPlaylistItem", "Radio service couldn't be loaded :-("));
   else if (!title_.isEmpty())
     metadata_.set_title(title_);
   else

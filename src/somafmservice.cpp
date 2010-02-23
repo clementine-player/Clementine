@@ -12,8 +12,6 @@
 #include <QtDebug>
 
 const char* SomaFMService::kServiceName = "SomaFM";
-const char* SomaFMService::kLoadingChannelsText = "Getting channels";
-const char* SomaFMService::kLoadingStreamText = "Loading stream";
 const char* SomaFMService::kChannelListUrl = "http://somafm.com/channels.xml";
 const char* SomaFMService::kHomepage = "http://somafm.com";
 
@@ -23,10 +21,10 @@ SomaFMService::SomaFMService(QObject* parent)
     context_menu_(new QMenu),
     network_(new QNetworkAccessManager(this))
 {
-  context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
+  context_menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
-  context_menu_->addAction(QIcon(":web.png"), "Open somafm.com in browser", this, SLOT(Homepage()));
-  context_menu_->addAction(QIcon(":refresh.png"), "Refresh channels", this, SLOT(RefreshChannels()));
+  context_menu_->addAction(QIcon(":web.png"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(QIcon(":refresh.png"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
 }
 
 SomaFMService::~SomaFMService() {
@@ -66,12 +64,12 @@ void SomaFMService::StartLoading(const QUrl& url) {
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
 
-  emit TaskStarted(kLoadingStreamText);
+  emit TaskStarted(MultiLoadingIndicator::LoadingStream);
 }
 
 void SomaFMService::LoadPlaylistFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  emit TaskFinished(kLoadingStreamText);
+  emit TaskFinished(MultiLoadingIndicator::LoadingStream);
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
@@ -99,12 +97,12 @@ void SomaFMService::RefreshChannels() {
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(RefreshChannelsFinished()));
 
-  emit TaskStarted(kLoadingChannelsText);
+  emit TaskStarted(MultiLoadingIndicator::GettingChannels);
 }
 
 void SomaFMService::RefreshChannelsFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  emit TaskFinished(kLoadingChannelsText);
+  emit TaskFinished(MultiLoadingIndicator::GettingChannels);
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling

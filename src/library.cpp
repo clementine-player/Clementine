@@ -118,7 +118,7 @@ LibraryItem* Library::CreateCompilationArtistNode(bool signal) {
     beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
   compilation_artist_node_ =
-      new LibraryItem(LibraryItem::Type_CompilationArtist, "Various Artists", parent);
+      new LibraryItem(LibraryItem::Type_CompilationArtist, tr("Various Artists"), parent);
   compilation_artist_node_->sort_text = " various";
 
   if (signal)
@@ -382,7 +382,7 @@ void Library::Reset() {
 
 QString Library::PrettyArtist(QString artist) const {
   if (artist.isEmpty()) {
-    artist = "Unknown";
+    artist = tr("Unknown");
   }
 
   return artist;
@@ -400,7 +400,7 @@ QString Library::SortTextForArtist(QString artist) const {
 
 QString Library::PrettyAlbum(QString album) const {
   if (album.isEmpty()) {
-    album = "Unknown";
+    album = tr("Unknown");
   }
 
   return album;

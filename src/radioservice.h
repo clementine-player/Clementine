@@ -6,6 +6,7 @@
 #include <QUrl>
 
 #include "radioitem.h"
+#include "multiloadingindicator.h"
 
 class Song;
 
@@ -37,8 +38,8 @@ class RadioService : public QObject {
   virtual void ReloadSettings() {}
 
  signals:
-  void TaskStarted(const QString& name);
-  void TaskFinished(const QString& name);
+  void TaskStarted(MultiLoadingIndicator::TaskType);
+  void TaskFinished(MultiLoadingIndicator::TaskType);
 
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void StreamFinished();

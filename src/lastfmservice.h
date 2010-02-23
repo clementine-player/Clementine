@@ -21,7 +21,6 @@ class LastFMService : public RadioService {
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
-  static const char* kLoadingText;
   static const char* kAudioscrobblerClientId;
   static const char* kApiKey;
   static const char* kSecret;

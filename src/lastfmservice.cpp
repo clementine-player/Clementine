@@ -14,7 +14,6 @@
 
 const char* LastFMService::kServiceName = "Last.fm";
 const char* LastFMService::kSettingsGroup = "Last.fm";
-const char* LastFMService::kLoadingText = "Loading Last.fm radio";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
@@ -38,13 +37,17 @@ LastFMService::LastFMService(QObject* parent)
 
   ReloadSettings();
 
-  play_action_ = context_menu_->addAction(QIcon(":media-playback-start.png"), "Add to playlist", this, SLOT(AddToPlaylist()));
-  remove_action_ = context_menu_->addAction(QIcon(":list-remove.png"), "Remove", this, SLOT(Remove()));
+  play_action_ = context_menu_->addAction(
+      QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  remove_action_ = context_menu_->addAction(
+      QIcon(":list-remove.png"), tr("Remove"), this, SLOT(Remove()));
   context_menu_->addSeparator();
-  add_artist_action_ = context_menu_->addAction(QIcon(":last.fm/icon_radio.png"), "Play artist radio...", this, SLOT(AddArtistRadio()));
-  add_tag_action_ = context_menu_->addAction(QIcon(":last.fm/icon_tag.png"), "Play tag radio...", this, SLOT(AddTagRadio()));
-  context_menu_->addAction(QIcon(":configure.png"), "Configure Last.fm...",
-                           this, SLOT(ShowConfig()));
+  add_artist_action_ = context_menu_->addAction(
+      QIcon(":last.fm/icon_radio.png"), tr("Play artist radio..."), this, SLOT(AddArtistRadio()));
+  add_tag_action_ = context_menu_->addAction(
+      QIcon(":last.fm/icon_tag.png"), tr("Play tag radio..."), this, SLOT(AddTagRadio()));
+  context_menu_->addAction(
+      QIcon(":configure.png"), tr("Configure Last.fm..."), this, SLOT(ShowConfig()));
 
   remove_action_->setEnabled(false);
   add_artist_action_->setEnabled(false);
@@ -89,27 +92,27 @@ void LastFMService::LazyPopulate(RadioItem *item) {
   switch (item->type) {
     case RadioItem::Type_Service:
       // Normal radio types
-      CreateStationItem(Type_MyRecommendations, "My Recommendations", ":last.fm/recommended_radio.png", item);
-      CreateStationItem(Type_MyRadio, "My Radio Station", ":last.fm/personal_radio.png", item);
-      CreateStationItem(Type_MyLoved, "My Loved Tracks", ":last.fm/loved_radio.png", item);
-      CreateStationItem(Type_MyNeighbourhood, "My Neighbourhood", ":last.fm/neighbour_radio.png", item);
+      CreateStationItem(Type_MyRecommendations, tr("My Recommendations"), ":last.fm/recommended_radio.png", item);
+      CreateStationItem(Type_MyRadio, tr("My Radio Station"), ":last.fm/personal_radio.png", item);
+      CreateStationItem(Type_MyLoved, tr("My Loved Tracks"), ":last.fm/loved_radio.png", item);
+      CreateStationItem(Type_MyNeighbourhood, tr("My Neighbourhood"), ":last.fm/neighbour_radio.png", item);
 
       // Types that have children
-      artist_list_ = new RadioItem(this, Type_ArtistRadio, "Artist radio", item);
+      artist_list_ = new RadioItem(this, Type_ArtistRadio, tr("Artist radio"), item);
       artist_list_->icon = QIcon(":last.fm/icon_radio.png");
       artist_list_->lazy_loaded = true;
 
-      tag_list_ = new RadioItem(this, Type_TagRadio, "Tag radio", item);
+      tag_list_ = new RadioItem(this, Type_TagRadio, tr("Tag radio"), item);
       tag_list_->icon = QIcon(":last.fm/icon_tag.png");
       tag_list_->lazy_loaded = true;
 
       RestoreList("artists", Type_Artist, QIcon(":last.fm/icon_radio.png"), artist_list_);
       RestoreList("tags", Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
 
-      friends_list_ = new RadioItem(this, Type_MyFriends, "Friends", item);
+      friends_list_ = new RadioItem(this, Type_MyFriends, tr("Friends"), item);
       friends_list_->icon = QIcon(":last.fm/my_friends.png");
 
-      neighbours_list_ = new RadioItem(this, Type_MyNeighbours, "Neighbours", item);
+      neighbours_list_ = new RadioItem(this, Type_MyNeighbours, tr("Neighbours"), item);
       neighbours_list_->icon = QIcon(":last.fm/my_neighbours.png");
 
       if (!IsAuthenticated())
@@ -129,11 +132,11 @@ void LastFMService::LazyPopulate(RadioItem *item) {
 
     case Type_OtherUser:
       CreateStationItem(Type_OtherUserRadio, item->key, ":last.fm/recommended_radio.png", item)
-          ->display_text = item->key + "'s Radio Station";
+          ->display_text = tr("%1's Radio Station").arg(item->key);
       CreateStationItem(Type_OtherUserLoved, item->key, ":last.fm/loved_radio.png", item)
-          ->display_text = item->key + "'s Loved Tracks";
+          ->display_text = tr("%1's Loved Tracks").arg(item->key);
       CreateStationItem(Type_OtherUserNeighbourhood, item->key, ":last.fm/neighbour_radio.png", item)
-          ->display_text = item->key + "'s Neighbourhood";
+          ->display_text = tr("%1's Neighborhood").arg(item->key);
       break;
 
     default:
@@ -232,16 +235,16 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
   const QString me(lastfm::ws::Username);
 
   switch (item->type) {
-    case Type_MyRecommendations: return me + "'s Recommended Radio";
-    case Type_MyLoved:           return me + "'s Loved Tracks";
-    case Type_MyNeighbourhood:   return me + "'s Neighbour Radio";
-    case Type_MyRadio:           return me + "'s Library";
+    case Type_MyRecommendations: return tr("%1's Recommended Radio").arg(me);
+    case Type_MyLoved:           return tr("%1's Loved Tracks").arg(me);
+    case Type_MyNeighbourhood:   return tr("%1's Neighbour Radio").arg(me);
+    case Type_MyRadio:           return tr("%1's Library").arg(me);
     case Type_OtherUser:
-    case Type_OtherUserRadio:    return item->key + "'s Library";
-    case Type_OtherUserLoved:    return item->key + "'s Loved Tracks";
-    case Type_OtherUserNeighbourhood: return item->key + "'s Neighbour Radio";
-    case Type_Artist:            return "Similar artists to " + item->key;
-    case Type_Tag:               return "Tag radio: " + item->key;
+    case Type_OtherUserRadio:    return tr("%1's Library").arg(item->key);
+    case Type_OtherUserLoved:    return tr("%1's Loved Tracks").arg(item->key);
+    case Type_OtherUserNeighbourhood: return tr("%1's Neighbour Radio").arg(item->key);
+    case Type_Artist:            return tr("Similar Artists to %1").arg(item->key);
+    case Type_Tag:               return tr("Tag Radio: %1").arg(item->key);
   }
   return QString();
 }
@@ -252,7 +255,7 @@ void LastFMService::StartLoading(const QUrl& url) {
   if (!IsAuthenticated())
     return;
 
-  emit TaskStarted(kLoadingText);
+  emit TaskStarted(MultiLoadingIndicator::LoadingLastFM);
 
   delete tuner_;
 
@@ -284,7 +287,7 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   if (!initial_tune_)
     return;
 
-  emit TaskFinished(kLoadingText);
+  emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
 
   if (error == lastfm::ws::NotEnoughContent) {
     emit StreamFinished();
@@ -296,36 +299,36 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
 
 QString LastFMService::ErrorString(lastfm::ws::Error error) const {
   switch (error) {
-    case lastfm::ws::InvalidService: return "Invalid service";
-    case lastfm::ws::InvalidMethod: return "Invalid method";
-    case lastfm::ws::AuthenticationFailed: return "Authentication failed";
-    case lastfm::ws::InvalidFormat: return "Invalid format";
-    case lastfm::ws::InvalidParameters: return "Invalid parameters";
-    case lastfm::ws::InvalidResourceSpecified: return "Invalid resource specified";
-    case lastfm::ws::OperationFailed: return "Operation failed";
-    case lastfm::ws::InvalidSessionKey: return "Invalid session key";
-    case lastfm::ws::InvalidApiKey: return "Invalid API key";
-    case lastfm::ws::ServiceOffline: return "Service offline";
-    case lastfm::ws::SubscribersOnly: return "This stream is for paid subscribers only";
+    case lastfm::ws::InvalidService: return tr("Invalid service");
+    case lastfm::ws::InvalidMethod: return tr("Invalid method");
+    case lastfm::ws::AuthenticationFailed: return tr("Authentication failed");
+    case lastfm::ws::InvalidFormat: return tr("Invalid format");
+    case lastfm::ws::InvalidParameters: return tr("Invalid parameters");
+    case lastfm::ws::InvalidResourceSpecified: return tr("Invalid resource specified");
+    case lastfm::ws::OperationFailed: return tr("Operation failed");
+    case lastfm::ws::InvalidSessionKey: return tr("Invalid session key");
+    case lastfm::ws::InvalidApiKey: return tr("Invalid API key");
+    case lastfm::ws::ServiceOffline: return tr("Service offline");
+    case lastfm::ws::SubscribersOnly: return tr("This stream is for paid subscribers only");
 
-    case lastfm::ws::TryAgainLater: return "Last.fm is currently busy, please try again in a few minutes";
+    case lastfm::ws::TryAgainLater: return tr("Last.fm is currently busy, please try again in a few minutes");
 
-    case lastfm::ws::NotEnoughContent: return "Not enough content";
-    case lastfm::ws::NotEnoughMembers: return "Not enough members";
-    case lastfm::ws::NotEnoughFans: return "Not enough fans";
-    case lastfm::ws::NotEnoughNeighbours: return "Not enough neighbours";
+    case lastfm::ws::NotEnoughContent: return tr("Not enough content");
+    case lastfm::ws::NotEnoughMembers: return tr("Not enough members");
+    case lastfm::ws::NotEnoughFans: return tr("Not enough fans");
+    case lastfm::ws::NotEnoughNeighbours: return tr("Not enough neighbours");
 
-    case lastfm::ws::MalformedResponse: return "Malformed response";
+    case lastfm::ws::MalformedResponse: return tr("Malformed response");
 
     case lastfm::ws::UnknownError:
     default:
-      return "Unknown error";
+      return tr("Unknown error");
   }
 }
 
 void LastFMService::TunerTrackAvailable() {
   if (initial_tune_) {
-    emit TaskFinished(kLoadingText);
+    emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
 
     LoadNext(last_url_);
     initial_tune_ = false;
