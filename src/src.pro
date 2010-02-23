@@ -51,7 +51,8 @@ SOURCES += main.cpp \
     librarydirectorymodel.cpp \
     libraryconfigdialog.cpp \
     lastfmconfigdialog.cpp \
-    about.cpp
+    about.cpp \
+    albumcoverfetcher.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -103,7 +104,8 @@ HEADERS += mainwindow.h \
     librarydirectorymodel.h \
     libraryconfigdialog.h \
     lastfmconfigdialog.h \
-    about.h
+    about.h \
+    albumcoverfetcher.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \

@@ -32,9 +32,6 @@ LastFMService::LastFMService(QObject* parent)
     friends_list_(NULL),
     neighbours_list_(NULL)
 {
-  lastfm::ws::ApiKey = kApiKey;
-  lastfm::ws::SharedSecret = kSecret;
-
   ReloadSettings();
 
   play_action_ = context_menu_->addAction(

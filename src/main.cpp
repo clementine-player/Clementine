@@ -4,8 +4,9 @@
 #  include <iostream>
 #endif // Q_OS_WIN32
 
-#include "mainwindow.h"
 #include "directory.h"
+#include "lastfmservice.h"
+#include "mainwindow.h"
 #include "song.h"
 
 #include <QtSingleApplication>
@@ -21,6 +22,9 @@ int main(int argc, char *argv[]) {
 
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<SongList>("SongList");
+
+  lastfm::ws::ApiKey = LastFMService::kApiKey;
+  lastfm::ws::SharedSecret = LastFMService::kSecret;
 
   QtSingleApplication a(argc, argv);
 
