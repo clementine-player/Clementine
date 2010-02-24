@@ -81,8 +81,8 @@ void PhononEngine::seek(uint ms) {
   media_object_->seek(ms);
 }
 
-void PhononEngine::setVolumeSW(uint percent) {
-  audio_output_->setVolume(qreal(percent) / 100.0);
+void PhononEngine::setVolumeSW(uint) {
+  audio_output_->setVolume(qreal(m_volume) / 100.0);
 }
 
 void PhononEngine::PhononFinished() {
