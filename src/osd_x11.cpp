@@ -45,3 +45,8 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
     g_error_free(error);
   }
 }
+
+void OSD::ShowMessageNative(const QString& summary, const QString& message,
+                            const QImage& image) {
+  qWarning() << __PRETTY_FUNCTION__ << ": NOT IMPLEMENTED";
+}

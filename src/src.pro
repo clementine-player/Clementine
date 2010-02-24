@@ -154,7 +154,11 @@ QMAKE_CXXFLAGS += -Wall -Werror=non-virtual-dtor -Woverloaded-virtual
             -ltag \
             -lxine \
             -framework \
-            Carbon
+            Carbon \
+            -framework \
+            Growl \
+            -framework \
+            Cocoa
     }
     !mac { 
         QMAKE_CXXFLAGS += $$system(taglib-config --cflags)
@@ -175,7 +179,7 @@ unix:!macx:!fedora-win32-cross {
         LIBS += $$system(pkg-config --libs libnotify)
     }
 }
-macx:SOURCES += osd_mac.cpp
+macx:SOURCES += osd_mac.mm
 win32|fedora-win32-cross:SOURCES += osd_win.cpp
 
 # QXT

@@ -1,6 +1,7 @@
 #ifndef OSD_H
 #define OSD_H
 
+#include <QImage>
 #include <QObject>
 #include <QSystemTrayIcon>
 
@@ -37,15 +38,19 @@ class OSD : public QObject {
 
  private:
   void ShowMessage(const QString& summary,
-                   const QString& message = QString::null,
-                   const QString& icon = QString::null);
+                   const QString& message = QString(),
+                   const QString& icon = QString());
 
   // These are implemented in the OS-specific files
   void Init();
   bool CanShowNativeMessages() const;
   void ShowMessageNative(const QString& summary,
-                         const QString& message = QString::null,
-                         const QString& icon = QString::null);
+                         const QString& message = QString(),
+                         const QString& icon = QString());
+
+  void ShowMessageNative(const QString& summary,
+                         const QString& message,
+                         const QImage& image);
 
  private:
   QSystemTrayIcon* tray_icon_;
@@ -55,6 +60,11 @@ class OSD : public QObject {
 #ifdef Q_WS_X11
   NotifyNotification* notification_;
 #endif
+
+#ifdef Q_OS_DARWIN
+  class GrowlNotificationWrapper;
+  GrowlNotificationWrapper* wrapper_;
+#endif  // Q_OS_DARWIN
 };
 
 #endif // OSD_H
