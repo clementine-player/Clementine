@@ -1,4 +1,6 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="el_GR" sourcelanguage="en">
 <context>
     <name>About</name>
     <message>
@@ -16,15 +18,28 @@
   font-size: 10px;
 }
 </source>
-        <translation type="unfinished"></translation>
+        <translation>#line {
+  color: lightgrey;
+}
+
+#title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#version {
+  font-style: italic;
+  font-size: 10px;
+}
+</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Τίτλος</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Έκδοση</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -40,685 +55,685 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mark Kretschmann &amp;lt;&lt;a href=&quot;mailto:markey@web.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;markey@web.de&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Max Howell &amp;lt;&lt;a href=&quot;mailto:max.howell@methylblue.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;max.howell@methylblue.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and all the Amarok contributors&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Περί %1</translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Έκδοση %1</translation>
     </message>
 </context>
 <context>
     <name>EditTagDialog</name>
     <message>
         <source>Edit track information</source>
-        <translation type="unfinished"></translation>
+        <translation>Τροποποίηση πληροφοριών κομματιού</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Τίτλος</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλμπουμ</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Καλλιτέχνης</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Είδος</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Κομμάτι</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Έτος</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Σχόλια</translation>
     </message>
     <message>
         <source>QLineEdit {
-<byte value="x9"/>background-color: transparent;
+	background-color: transparent;
 }</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>[click to edit]</source>
-        <translation type="unfinished"></translation>
+        <translation>[κλικ για τροποποίηση]</translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Μορφή</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
     <name>FileViewList</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη στη λίστα</translation>
     </message>
     <message>
         <source>Copy to library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή στην βιβλιοθήκη...</translation>
     </message>
     <message>
         <source>Move to library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετακίνηση στην βιβλιοθήκη...</translation>
     </message>
 </context>
 <context>
     <name>LastFMConfig</name>
     <message>
         <source>Enter your Last.fm details below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε τις λεπτομέρειες για το Last.fm:</translation>
     </message>
     <message>
         <source>Last.fm username</source>
-        <translation type="unfinished"></translation>
+        <translation>Last.fm όνομα χρήστη</translation>
     </message>
     <message>
         <source>Last.fm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Last.fm συνθηματικό</translation>
     </message>
     <message>
         <source>Scrobble tracks that I listen to</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάνε &quot;srobble&quot; τα κομμάτια που ακούω</translation>
     </message>
     <message>
         <source>Note that you must be a &lt;span style=&quot; font-weight:600;&quot;&gt;paid subscriber&lt;/span&gt; to listen to Last.fm radio from within Clementine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Σημείωσε πως πρέπει να είσαι &lt;span style=&quot; font-weight:600;&quot;&gt;συνδρομητής&lt;/span&gt; για να ακούσεις Last.fm από το Clementine.</translation>
     </message>
     <message>
         <source>Authenticating...</source>
-        <translation type="unfinished"></translation>
+        <translation>Πιστοποίηση...</translation>
     </message>
     <message>
         <source>Authentication failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Η πιστοποίηση απέτυχε</translation>
     </message>
     <message>
         <source>Your Last.fm credentials were incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα</translation>
     </message>
 </context>
 <context>
     <name>LastFMConfigDialog</name>
     <message>
         <source>Last,fm</source>
-        <translation type="unfinished"></translation>
+        <translation>Last,fm</translation>
     </message>
 </context>
 <context>
     <name>LastFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη στην λίστα</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <source>Play artist radio...</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή ραδιόφωνο καλλιτέχνη...</translation>
     </message>
     <message>
         <source>Play tag radio...</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή ραδιόφωνο ετικετών...</translation>
     </message>
     <message>
         <source>Configure Last.fm...</source>
-        <translation type="unfinished"></translation>
+        <translation>Παραμετροποίηση Last.fm...</translation>
     </message>
     <message>
         <source>My Recommendations</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι Προτάσεις μου</translation>
     </message>
     <message>
         <source>My Radio Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι Σταθμοί μου</translation>
     </message>
     <message>
         <source>My Loved Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Τα αγαπημένα μου κομμάτια</translation>
     </message>
     <message>
         <source>My Neighbourhood</source>
-        <translation type="unfinished"></translation>
+        <translation>Η Γειτονιά μου</translation>
     </message>
     <message>
         <source>Artist radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ραδιόφωνο καλλιτέχνη</translation>
     </message>
     <message>
         <source>Tag radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ραδιόφωνο ετικετών</translation>
     </message>
     <message>
         <source>Friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Φίλοι</translation>
     </message>
     <message>
         <source>Neighbours</source>
-        <translation type="unfinished"></translation>
+        <translation>Γείτονες</translation>
     </message>
     <message>
         <source>%1&apos;s Radio Station</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;s Ραδιοσταθμοί</translation>
     </message>
     <message>
         <source>%1&apos;s Loved Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;s Αγαπημένα κομμάτια</translation>
     </message>
     <message>
         <source>%1&apos;s Neighborhood</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;s Συνοικιακά</translation>
     </message>
     <message>
         <source>%1&apos;s Recommended Radio</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;s Προτεινόμενα ραδιόφωνα</translation>
     </message>
     <message>
         <source>%1&apos;s Neighbour Radio</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;s Συνοικιακά ραδιόφωνα</translation>
     </message>
     <message>
         <source>%1&apos;s Library</source>
-        <translation type="unfinished"></translation>
+        <translation>%1&apos;s Βιβλιοθήκη</translation>
     </message>
     <message>
         <source>Similar Artists to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρόμοιοι καλλιτέχνες σε %1</translation>
     </message>
     <message>
         <source>Tag Radio: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ραδιόφωνο ετικετών: %1</translation>
     </message>
     <message>
         <source>Invalid service</source>
-        <translation type="unfinished"></translation>
+        <translation>Εσφαλμένη υπηρεσία</translation>
     </message>
     <message>
         <source>Invalid method</source>
-        <translation type="unfinished"></translation>
+        <translation>Εσφαλμένη μέθοδος</translation>
     </message>
     <message>
         <source>Authentication failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Η πιστοποίηση απέτυχε</translation>
     </message>
     <message>
         <source>Invalid format</source>
-        <translation type="unfinished"></translation>
+        <translation>Εσφαλμένη διαμόρφωση</translation>
     </message>
     <message>
         <source>Invalid parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Εσφαλμένοι παράμετροι</translation>
     </message>
     <message>
         <source>Invalid resource specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Καθορίστηκε εσφαλμένος πόρος</translation>
     </message>
     <message>
         <source>Operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Η λειτουργία απέτυχε</translation>
     </message>
     <message>
         <source>Invalid session key</source>
-        <translation type="unfinished"></translation>
+        <translation>Εσφαλμένο κλειδί συνεδρίας</translation>
     </message>
     <message>
         <source>Invalid API key</source>
-        <translation type="unfinished"></translation>
+        <translation>Εσφαλμένο κλειδί API</translation>
     </message>
     <message>
         <source>Service offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Υπηρεσία εκτός σύνδεσης</translation>
     </message>
     <message>
         <source>This stream is for paid subscribers only</source>
-        <translation type="unfinished"></translation>
+        <translation>Η ροή (stream) αυτή είναι για συνδρομητές μόνο</translation>
     </message>
     <message>
         <source>Last.fm is currently busy, please try again in a few minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Το Last.fm είναι απασχολημένο, παρακαλώ δοκιμάστε σε λίγα λεπτά</translation>
     </message>
     <message>
         <source>Not enough content</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχει αρκετό περιεχόμενο</translation>
     </message>
     <message>
         <source>Not enough members</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχουν αρκετά μέλη</translation>
     </message>
     <message>
         <source>Not enough fans</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχουν αρκετοί οπαδοί</translation>
     </message>
     <message>
         <source>Not enough neighbours</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν υπάρχουν αρκετοί γείτονες</translation>
     </message>
     <message>
         <source>Malformed response</source>
-        <translation type="unfinished"></translation>
+        <translation>Παραμορφωμένη απάντηση</translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>Άγνωστο σφάλμα</translation>
     </message>
 </context>
 <context>
     <name>LastFMStationDialog</name>
     <message>
         <source>Play Artist or Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή καλλιτέχνη ή ετικέτας</translation>
     </message>
     <message>
         <source>Enter an &lt;b&gt;artist&lt;/b&gt; or &lt;b&gt;tag&lt;/b&gt; to start listening to Last.fm radio.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε έναν &lt;b&gt;καλλιτέχνη&lt;/b&gt; ή &lt;b&gt;ετικέτα&lt;/b&gt; για να ξεκινήσετε να ακούτε Last.fm.</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Καλλιτέχνης</translation>
     </message>
     <message>
         <source>Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτα</translation>
     </message>
 </context>
 <context>
     <name>Library</name>
     <message>
         <source>Various Artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάφοροι καλλιτέχνες</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Άγνωστο</translation>
     </message>
 </context>
 <context>
     <name>LibraryConfig</name>
     <message>
         <source>These folders will be scanned for music to make up your library</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας</translation>
     </message>
     <message>
         <source>Add new folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη νέου φακέλου...</translation>
     </message>
     <message>
         <source>Remove folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση φακέλου</translation>
     </message>
     <message>
         <source>Add directory...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη καταλόγου...</translation>
     </message>
 </context>
 <context>
     <name>LibraryConfigDialog</name>
     <message>
         <source>Music Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Μουσική βιβλιοθήκη</translation>
     </message>
 </context>
 <context>
     <name>LibraryView</name>
     <message>
         <source>Your library is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Η βιβλιοθήκη σας είναι άδεια!</translation>
     </message>
     <message>
         <source>Click here to add some music</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλικ εδώ για την προσθήκη μουσικής</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Clementine</source>
-        <translation type="unfinished"></translation>
+        <translation>Clementine</translation>
     </message>
     <message>
         <source>Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Βιβλιοθήκη</translation>
     </message>
     <message>
         <source>Radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ραδιόφωνο</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχεία</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Μουσική</translation>
     </message>
     <message>
         <source>Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Λίστα</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρυθμίσεις</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Βοήθεια</translation>
     </message>
     <message>
         <source>Previous track</source>
-        <translation type="unfinished"></translation>
+        <translation>Προηγούμενο κομμάτι</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Σταμάτημα</translation>
     </message>
     <message>
         <source>Next track</source>
-        <translation type="unfinished"></translation>
+        <translation>Επόμενο κομμάτι</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Έξοδος</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <source>Stop after this track</source>
-        <translation type="unfinished"></translation>
+        <translation>Σταμάτημα μετά από αυτό το κομμάτι</translation>
     </message>
     <message>
         <source>Entire collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ολόκληρη η συλλογή</translation>
     </message>
     <message>
         <source>Added today</source>
-        <translation type="unfinished"></translation>
+        <translation>Προστέθηκε σήμερα</translation>
     </message>
     <message>
         <source>Added this week</source>
-        <translation type="unfinished"></translation>
+        <translation>Προστέθηκε αυτή την εβδομάδα</translation>
     </message>
     <message>
         <source>Added within three months</source>
-        <translation type="unfinished"></translation>
+        <translation>Προστέθηκε μέσα τρεις μήνες</translation>
     </message>
     <message>
         <source>Added this year</source>
-        <translation type="unfinished"></translation>
+        <translation>Προστέθηκε φέτος</translation>
     </message>
     <message>
         <source>Added this month</source>
-        <translation type="unfinished"></translation>
+        <translation>Προστέθηκε αυτόν τον μήνα</translation>
     </message>
     <message>
         <source>Love</source>
-        <translation type="unfinished"></translation>
+        <translation>Αγάπη</translation>
     </message>
     <message>
         <source>Ban</source>
-        <translation type="unfinished"></translation>
+        <translation>Απαγόρευση</translation>
     </message>
     <message>
         <source>Clear playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Καθαρισμός λίστας</translation>
     </message>
     <message>
         <source>Edit track information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Τροποποίηση πληροφοριών κομματιού...</translation>
     </message>
     <message>
         <source>Configure Clementine...</source>
-        <translation type="unfinished"></translation>
+        <translation>Παραμετροποίηση του Clementine...</translation>
     </message>
     <message>
         <source>About Clementine...</source>
-        <translation type="unfinished"></translation>
+        <translation>Περί του Clementine...</translation>
     </message>
     <message>
         <source>Shuffle playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανάμιξη λίστας</translation>
     </message>
     <message>
         <source>Configure library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Παραμετροποίηση της λίστας...</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Παύση</translation>
     </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Μορφή</translation>
     </message>
     <message>
         <source>Loading audio engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωμα της μηχανής ήχου</translation>
     </message>
     <message>
         <source>Updating library</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενημέρωση λίστας</translation>
     </message>
     <message>
         <source>Getting channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Λήψη καναλιών</translation>
     </message>
     <message>
         <source>Loading stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωμα ροής (stream)</translation>
     </message>
     <message>
         <source>Loading Last.fm radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρτωμα Last.fm</translation>
     </message>
 </context>
 <context>
     <name>OSD</name>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Σταματημένο</translation>
     </message>
     <message>
         <source>Playlist finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Η λίστα τελείωσε</translation>
     </message>
     <message>
         <source>Volume %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Ένταση %1%</translation>
     </message>
 </context>
 <context>
     <name>Playlist</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Τίτλος</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Καλλιτέχνης</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλμπουμ</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Μήκος</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Κομμάτι</translation>
     </message>
     <message>
         <source>Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Δίσκος</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Έτος</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Είδος</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρυθμός bit</translation>
     </message>
     <message>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρυθμός δειγματοληψίας</translation>
     </message>
     <message>
         <source>File name</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα αρχείου</translation>
     </message>
     <message>
         <source>File size</source>
-        <translation type="unfinished"></translation>
+        <translation>Μέγεθος αρχείου</translation>
     </message>
 </context>
 <context>
     <name>PlaylistHeader</name>
     <message>
         <source>Hide...</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη...</translation>
     </message>
     <message>
         <source>Show section</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνισε το τμήμα</translation>
     </message>
     <message>
         <source>Hide %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Απόκρυψη %1</translation>
     </message>
 </context>
 <context>
     <name>RadioPlaylistItem</name>
     <message>
         <source>Radio service couldn&apos;t be loaded :-(</source>
-        <translation type="unfinished"></translation>
+        <translation>Η υπηρεσίες ραδιοφώνου απέτυχαν να φορτωθούν :-(</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρυθμίσεις</translation>
     </message>
     <message>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Ειδοποιήσεις</translation>
     </message>
     <message>
         <source>Music Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Μουσική βιβλιοθήκη</translation>
     </message>
     <message>
         <source>Last.fm</source>
-        <translation type="unfinished"></translation>
+        <translation>Last.fm</translation>
     </message>
     <message>
         <source>Fadeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαλό σβήσιμο</translation>
     </message>
     <message>
         <source>No fadeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς ομαλό σβήσιμο</translation>
     </message>
     <message>
         <source>Fadeout duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάρκεια σβησίματος</translation>
     </message>
     <message>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <source>Clementine can show a message when the track changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το Clementine μπορεί να δείχνει ένα μήνυμα όταν το κομμάτι αλλάζει.</translation>
     </message>
     <message>
         <source>Don&apos;t show notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Μην εμφανίζεις ειδοποιήσεις</translation>
     </message>
     <message>
         <source>Show a native desktop notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνισε εγγενής ειδοποιήσεις</translation>
     </message>
     <message>
         <source>Show a popup from the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνισε αναδυόμενα μηνύματα από το εικονίδιο συστήματος</translation>
     </message>
     <message>
         <source>Popup duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάρκεια αναδυόμενου μηνύματος</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> δευτερόλεπτα</translation>
     </message>
 </context>
 <context>
     <name>SomaFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη στην λίστα</translation>
     </message>
     <message>
         <source>Open somafm.com in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα του somafm.com στον περιηγητή</translation>
     </message>
     <message>
         <source>Refresh channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανανέωση καναλιών</translation>
     </message>
 </context>
 <context>
     <name>TrackSlider</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Μορφή</translation>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation>0:00:00</translation>
     </message>
 </context>
 </TS>
