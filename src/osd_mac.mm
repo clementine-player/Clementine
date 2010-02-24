@@ -80,8 +80,8 @@ class OSD::GrowlNotificationWrapper {
                    const QString& message,
                    const QImage& image) {
 
-    NSString* mac_message = [[NSString alloc] initWithUTF8String:message.toUtf8().data()];
-    NSString* mac_summary = [[NSString alloc] initWithUTF8String:summary.toUtf8().data()];
+    NSString* mac_message = [[NSString alloc] initWithUTF8String:message.toUtf8().constData()];
+    NSString* mac_summary = [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()];
 
     NSData* image_data = nil;
     // Growl expects raw TIFF data.
