@@ -1,7 +1,8 @@
 #include "trackslider.h"
 
 TrackSlider::TrackSlider(QWidget* parent)
-  : QWidget(parent)
+  : QWidget(parent),
+    setting_value_(false)
 {
   ui_.setupUi(this);
 
@@ -10,6 +11,7 @@ TrackSlider::TrackSlider(QWidget* parent)
   ui_.remaining->setFont(font);
 
   connect(ui_.slider, SIGNAL(sliderMoved(int)), SIGNAL(ValueChanged(int)));
+  connect(ui_.slider, SIGNAL(valueChanged(int)), SLOT(ValueMaybeChanged(int)));
 }
 
 QSize TrackSlider::sizeHint() const {
@@ -23,11 +25,17 @@ QSize TrackSlider::sizeHint() const {
 }
 
 void TrackSlider::SetValue(int elapsed, int total) {
+  setting_value_ = true; // This is so we don't emit from QAbstractSlider::valueChanged
   ui_.slider->setMaximum(total);
   ui_.slider->setValue(elapsed);
+  setting_value_ = false;
 
+  UpdateTimes(elapsed);
+}
+
+void TrackSlider::UpdateTimes(int elapsed) {
   ui_.elapsed->setText(PrettyTime(elapsed));
-  ui_.remaining->setText(PrettyTime(total - elapsed));
+  ui_.remaining->setText(PrettyTime(ui_.slider->maximum() - elapsed));
 
   setEnabled(true);
 }
@@ -36,7 +44,10 @@ void TrackSlider::SetStopped() {
   setEnabled(false);
   ui_.elapsed->setText("0:00:00");
   ui_.remaining->setText("0:00:00");
+
+  setting_value_ = true;
   ui_.slider->setValue(0);
+  setting_value_ = false;
 }
 
 QString TrackSlider::PrettyTime(int seconds) {
@@ -55,4 +66,12 @@ QString TrackSlider::PrettyTime(int seconds) {
 
 void TrackSlider::SetCanSeek(bool can_seek) {
   ui_.slider->setEnabled(can_seek);
+}
+
+void TrackSlider::ValueMaybeChanged(int value) {
+  if (setting_value_)
+    return;
+
+  UpdateTimes(value);
+  emit ValueChanged(value);
 }

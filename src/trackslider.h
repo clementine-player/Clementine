@@ -24,8 +24,16 @@ class TrackSlider : public QWidget {
  signals:
   void ValueChanged(int value);
 
+ private slots:
+  void ValueMaybeChanged(int value);
+
+ private:
+  void UpdateTimes(int elapsed);
+
  private:
   Ui::TrackSlider ui_;
+
+  bool setting_value_;
 };
 
 #endif // TRACKSLIDER_H
