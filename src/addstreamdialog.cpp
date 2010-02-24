@@ -32,7 +32,7 @@ AddStreamDialog::AddStreamDialog(QWidget *parent)
 }
 
 QUrl AddStreamDialog::url() const {
-  return QUrl::fromUserInput(ui_.url->text());
+  return QUrl(ui_.url->text());
 }
 
 void AddStreamDialog::accept() {
@@ -51,7 +51,7 @@ void AddStreamDialog::accept() {
 
 void AddStreamDialog::TextChanged(const QString &text) {
   // Decide whether the URL is valid
-  QUrl url(QUrl::fromUserInput(text));
+  QUrl url(text);
 
   bool valid = url.isValid() &&
                !url.scheme().isEmpty() &&
