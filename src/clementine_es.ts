@@ -55,15 +55,15 @@ p, li { white-space: pre-wrap; }
   font-size: 10px;
 }
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre %1</translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión %1</translation>
     </message>
 </context>
 <context>
@@ -104,11 +104,11 @@ p, li { white-space: pre-wrap; }
         <source>QLineEdit {
 	background-color: transparent;
 }</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>[click to edit]</source>
-        <translation type="unfinished"></translation>
+        <translation>[click para editar]</translation>
     </message>
 </context>
 <context>
@@ -126,15 +126,15 @@ p, li { white-space: pre-wrap; }
     <name>FileViewList</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir a la lista de reproducción</translation>
     </message>
     <message>
         <source>Copy to library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar a la colección...</translation>
     </message>
     <message>
         <source>Move to library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover a la colección...</translation>
     </message>
 </context>
 <context>
@@ -165,11 +165,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Authentication failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticación fallida</translation>
     </message>
     <message>
         <source>Your Last.fm credentials were incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Sus credenciales de Last.fm fueron incorrectas</translation>
     </message>
 </context>
 <context>
@@ -183,170 +183,170 @@ p, li { white-space: pre-wrap; }
     <name>LastFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir a la lista de reproducción</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar</translation>
     </message>
     <message>
         <source>Play artist radio...</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir radio del artista...</translation>
     </message>
     <message>
         <source>Play tag radio...</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir radio de la etiqueta...</translation>
     </message>
     <message>
         <source>Configure Last.fm...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Last.fm...</translation>
     </message>
     <message>
         <source>My Recommendations</source>
-        <translation type="unfinished"></translation>
+        <translation>Mis Recomendaciones</translation>
     </message>
     <message>
         <source>My Radio Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Mis Estaciones de Radio</translation>
     </message>
     <message>
         <source>My Loved Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Mis Pistas Favoritas</translation>
     </message>
     <message>
         <source>My Neighbourhood</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi barrio (vecinos)</translation>
     </message>
     <message>
         <source>Artist radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio del artista</translation>
     </message>
     <message>
         <source>Tag radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio de la etiqueta</translation>
     </message>
     <message>
         <source>Friends</source>
-        <translation type="unfinished"></translation>
+        <translation>Amigos</translation>
     </message>
     <message>
         <source>Neighbours</source>
-        <translation type="unfinished"></translation>
+        <translation>Vecinos</translation>
     </message>
     <message>
         <source>%1&apos;s Radio Station</source>
-        <translation type="unfinished"></translation>
+        <translation>Estaciones de radio de %1</translation>
     </message>
     <message>
         <source>%1&apos;s Loved Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Pistas favoritas de %1</translation>
     </message>
     <message>
         <source>%1&apos;s Neighborhood</source>
-        <translation type="unfinished"></translation>
+        <translation>Vecinos de %1</translation>
     </message>
     <message>
         <source>%1&apos;s Recommended Radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio recomendada de %1</translation>
     </message>
     <message>
         <source>%1&apos;s Neighbour Radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio de los vecinos de %1</translation>
     </message>
     <message>
         <source>%1&apos;s Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Colección de %1</translation>
     </message>
     <message>
         <source>Similar Artists to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Artistas similares a %1</translation>
     </message>
     <message>
         <source>Tag Radio: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio de tag: %1</translation>
     </message>
     <message>
         <source>Invalid service</source>
-        <translation type="unfinished"></translation>
+        <translation>Servicio invalido</translation>
     </message>
     <message>
         <source>Invalid method</source>
-        <translation type="unfinished"></translation>
+        <translation>Metodo invalido</translation>
     </message>
     <message>
         <source>Authentication failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la autenticación</translation>
     </message>
     <message>
         <source>Invalid format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato invalido</translation>
     </message>
     <message>
         <source>Invalid parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametros invalidos</translation>
     </message>
     <message>
         <source>Invalid resource specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Recurso especificado invalido</translation>
     </message>
     <message>
         <source>Operation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la operación</translation>
     </message>
     <message>
         <source>Invalid session key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clave de session invalida</translation>
     </message>
     <message>
         <source>Invalid API key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clave API invalida</translation>
     </message>
     <message>
         <source>Service offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Servicio fuera de linea</translation>
     </message>
     <message>
         <source>This stream is for paid subscribers only</source>
-        <translation type="unfinished"></translation>
+        <translation>Este flujo es solo para suscriptores pagos</translation>
     </message>
     <message>
         <source>Last.fm is currently busy, please try again in a few minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Last.fm esta actualmente ocupado, por favor intente en unos minutos</translation>
     </message>
     <message>
         <source>Not enough content</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficiente contenido</translation>
     </message>
     <message>
         <source>Not enough members</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficientes miembros</translation>
     </message>
     <message>
         <source>Not enough fans</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficientes fans</translation>
     </message>
     <message>
         <source>Not enough neighbours</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficientes vecinos</translation>
     </message>
     <message>
         <source>Malformed response</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error desconocido</translation>
     </message>
 </context>
 <context>
     <name>LastFMStationDialog</name>
     <message>
         <source>Play Artist or Tag</source>
-        <translation>Reproducir Artista o Género</translation>
+        <translation>Reproducir Artista o Etiqueta</translation>
     </message>
     <message>
         <source>Enter an &lt;b&gt;artist&lt;/b&gt; or &lt;b&gt;tag&lt;/b&gt; to start listening to Last.fm radio.</source>
-        <translation>Ingrese un &lt;b&gt;artista&lt;/b&gt; o  &lt;b&gt;género&lt;/b&gt; para escuchar la radio de Last.fm.</translation>
+        <translation>Ingrese un &lt;b&gt;artista&lt;/b&gt; o  &lt;b&gt;etiqueta&lt;/b&gt; para escuchar la radio de Last.fm.</translation>
     </message>
     <message>
         <source>Artist</source>
@@ -354,18 +354,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tag</source>
-        <translation>Género</translation>
+        <translation>Etiqueta</translation>
     </message>
 </context>
 <context>
     <name>Library</name>
     <message>
         <source>Various Artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Varios Artistas</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocido</translation>
     </message>
 </context>
 <context>
@@ -384,7 +384,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add directory...</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir directorio...</translation>
     </message>
 </context>
 <context>
@@ -398,11 +398,11 @@ p, li { white-space: pre-wrap; }
     <name>LibraryView</name>
     <message>
         <source>Your library is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu colección está vacia!</translation>
     </message>
     <message>
         <source>Click here to add some music</source>
-        <translation type="unfinished"></translation>
+        <translation>Click aqui para añadir música</translation>
     </message>
 </context>
 <context>
@@ -493,11 +493,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Love</source>
-        <translation>Agregar a Favoritos</translation>
+        <translation>Me encanta</translation>
     </message>
     <message>
         <source>Ban</source>
-        <translation>Quitar de Favoritos</translation>
+        <translation>Prohibir</translation>
     </message>
     <message>
         <source>Clear playlist</source>
@@ -521,11 +521,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Configure library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar colección...</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa</translation>
     </message>
 </context>
 <context>
@@ -536,115 +536,115 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Loading audio engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando motor de sonido</translation>
     </message>
     <message>
         <source>Updating library</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizando colección</translation>
     </message>
     <message>
         <source>Getting channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Obteniendo canales</translation>
     </message>
     <message>
         <source>Loading stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando flujo</translation>
     </message>
     <message>
         <source>Loading Last.fm radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando radio de Last.fm</translation>
     </message>
 </context>
 <context>
     <name>OSD</name>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Detenido</translation>
     </message>
     <message>
         <source>Playlist finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de reproducción finalizada</translation>
     </message>
     <message>
         <source>Volume %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Volumen %1%</translation>
     </message>
 </context>
 <context>
     <name>Playlist</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Título</translation>
+        <translation>Título</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished">Artista</translation>
+        <translation>Artista</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished">Álbum</translation>
+        <translation>Álbum</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="unfinished">Pista</translation>
+        <translation>Pista</translation>
     </message>
     <message>
         <source>Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Año</translation>
+        <translation>Año</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished">Género</translation>
+        <translation>Género</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa de bits</translation>
     </message>
     <message>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa de muestreo</translation>
     </message>
     <message>
         <source>File name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del archivo</translation>
     </message>
     <message>
         <source>File size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño del archivo</translation>
     </message>
 </context>
 <context>
     <name>PlaylistHeader</name>
     <message>
         <source>Hide...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar...</translation>
     </message>
     <message>
         <source>Show section</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar columna</translation>
     </message>
     <message>
         <source>Hide %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar %1</translation>
     </message>
 </context>
 <context>
     <name>RadioPlaylistItem</name>
     <message>
         <source>Radio service couldn&apos;t be loaded :-(</source>
-        <translation type="unfinished"></translation>
+        <translation>Servicio de radio no pudo ser cargado :-(</translation>
     </message>
 </context>
 <context>
@@ -714,15 +714,15 @@ p, li { white-space: pre-wrap; }
     <name>SomaFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir a la lista de reproducción</translation>
     </message>
     <message>
         <source>Open somafm.com in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir somafm.com en el navegador</translation>
     </message>
     <message>
         <source>Refresh channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar canales</translation>
     </message>
 </context>
 <context>
