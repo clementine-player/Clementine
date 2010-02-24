@@ -15,6 +15,7 @@
 #include "settingsdialog.h"
 #include "libraryconfigdialog.h"
 #include "about.h"
+#include "addstreamdialog.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -28,6 +29,7 @@
 #include <QtDebug>
 #include <QCloseEvent>
 #include <QSignalMapper>
+#include <QFileDialog>
 
 #include <cmath>
 
@@ -48,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
     settings_dialog_(new SettingsDialog(this)),
+    add_stream_dialog_(new AddStreamDialog(this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))
@@ -104,6 +107,9 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
   connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
   connect(ui_.action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
+  connect(ui_.action_open_media, SIGNAL(triggered()), SLOT(AddMedia()));
+  connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
+  connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -242,6 +248,9 @@ MainWindow::MainWindow(QWidget *parent)
   // Settings
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
+
+  // Add stream dialog
+  connect(add_stream_dialog_, SIGNAL(accepted()), SLOT(AddStreamAccepted()));
 
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());
@@ -556,4 +565,41 @@ void MainWindow::LibraryScanFinished() {
 
 void MainWindow::PlayerInitFinished() {
   multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::LoadingAudioEngine);
+}
+
+void MainWindow::AddMedia() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  // Last used directory
+  QString directory = s.value("add_media_path", QDir::currentPath()).toString();
+
+  // Show dialog
+  QStringList file_names = QFileDialog::getOpenFileNames(this, "Add media", directory);
+  if (file_names.isEmpty())
+    return;
+
+  // Save last used directory
+  s.setValue("add_media_path", file_names[0]);
+
+  // Add media
+  QList<QUrl> urls;
+  foreach (const QString& path, file_names) {
+    QUrl url(path);
+    if (url.scheme().isEmpty())
+      url.setScheme("file");
+    urls << url;
+  }
+  playlist_->InsertPaths(urls);
+}
+
+void MainWindow::AddStream() {
+  add_stream_dialog_->show();
+}
+
+void MainWindow::AddStreamAccepted() {
+  QList<QUrl> urls;
+  urls << add_stream_dialog_->url();
+  
+  playlist_->InsertStreamUrls(urls);
 }

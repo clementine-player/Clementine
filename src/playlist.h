@@ -73,6 +73,7 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);
   QModelIndex InsertSongs(const SongList& items, int after = -1);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int after = -1);
+  QModelIndex InsertStreamUrls(const QList<QUrl>& urls, int after = -1);
   QModelIndex InsertPaths(QList<QUrl> urls, int after = -1);
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);

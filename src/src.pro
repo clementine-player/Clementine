@@ -52,7 +52,9 @@ SOURCES += main.cpp \
     libraryconfigdialog.cpp \
     lastfmconfigdialog.cpp \
     about.cpp \
-    albumcoverfetcher.cpp
+    albumcoverfetcher.cpp \
+    addstreamdialog.cpp \
+    savedradio.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -105,7 +107,9 @@ HEADERS += mainwindow.h \
     libraryconfigdialog.h \
     lastfmconfigdialog.h \
     about.h \
-    albumcoverfetcher.h
+    albumcoverfetcher.h \
+    addstreamdialog.h \
+    savedradio.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -117,7 +121,8 @@ FORMS += mainwindow.ui \
     settingsdialog.ui \
     libraryconfigdialog.ui \
     lastfmconfigdialog.ui \
-    about.ui
+    about.ui \
+    addstreamdialog.ui
 RESOURCES += ../data/data.qrc \
     translations.qrc
 OTHER_FILES += ../data/schema.sql \
@@ -144,7 +149,9 @@ win32|fedora-win32-cross {
 LIBS += -llastfm
 
 # Enable a bunch of warnings
-QMAKE_CXXFLAGS += -Wall -Werror=non-virtual-dtor -Woverloaded-virtual
+QMAKE_CXXFLAGS += -Wall \
+    -Werror=non-virtual-dtor \
+    -Woverloaded-virtual
 
 # Other platform specific libraries
 !win32:!fedora-win32-cross { 

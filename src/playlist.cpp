@@ -3,6 +3,8 @@
 #include "songplaylistitem.h"
 #include "radiomimedata.h"
 #include "radioplaylistitem.h"
+#include "radiomodel.h"
+#include "savedradio.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -288,6 +290,15 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int af
       continue;
 
     playlist_items << new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist());
+  }
+  return InsertItems(playlist_items, after);
+}
+
+QModelIndex Playlist::InsertStreamUrls(const QList<QUrl>& urls, int after) {
+  QList<PlaylistItem*> playlist_items;
+  foreach (const QUrl& url, urls) {
+    playlist_items << new RadioPlaylistItem(
+        RadioModel::ServiceByName(SavedRadio::kServiceName), url.toString(), url.toString(), QString());
   }
   return InsertItems(playlist_items, after);
 }

@@ -19,6 +19,7 @@ class EditTagDialog;
 class MultiLoadingIndicator;
 class SettingsDialog;
 class About;
+class AddStreamDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -71,6 +72,10 @@ class MainWindow : public QMainWindow {
 
   void PlayerInitFinished();
 
+  void AddMedia();
+  void AddStream();
+  void AddStreamAccepted();
+
  private:
   void SaveGeometry();
 
@@ -93,6 +98,7 @@ class MainWindow : public QMainWindow {
   Library* library_;
 
   SettingsDialog* settings_dialog_;
+  AddStreamDialog* add_stream_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

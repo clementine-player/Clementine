@@ -353,6 +353,9 @@
        <attribute name="headerVisible">
         <bool>false</bool>
        </attribute>
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
     </layout>
@@ -434,13 +437,15 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
     <property name="title">
      <string>Music</string>
     </property>
+    <addaction name="action_open_media"/>
+    <addaction name="separator"/>
     <addaction name="action_previous_track"/>
     <addaction name="action_play_pause"/>
     <addaction name="action_stop"/>
@@ -455,6 +460,9 @@
     <property name="title">
      <string>Playlist</string>
     </property>
+    <addaction name="action_add_media"/>
+    <addaction name="action_add_stream"/>
+    <addaction name="separator"/>
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
    </widget>
@@ -655,6 +663,33 @@
    </property>
    <property name="text">
     <string>Shuffle playlist</string>
+   </property>
+  </action>
+  <action name="action_add_media">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add media...</string>
+   </property>
+  </action>
+  <action name="action_add_stream">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/open_stream.png</normaloff>:/open_stream.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add stream...</string>
+   </property>
+  </action>
+  <action name="action_open_media">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open media...</string>
    </property>
   </action>
  </widget>
