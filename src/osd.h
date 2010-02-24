@@ -10,6 +10,7 @@
 
 #ifdef Q_WS_X11
 # ifndef _NOTIFY_NOTIFICATION_H_
+    struct GdkPixbuf;
     struct NotifyNotification;
 # endif
 #endif
@@ -59,6 +60,7 @@ class OSD : public QObject {
 
 #ifdef Q_WS_X11
   NotifyNotification* notification_;
+  GdkPixbuf* pixbuf_;
 #endif
 
 #ifdef Q_OS_DARWIN
