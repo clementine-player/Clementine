@@ -111,6 +111,11 @@ class LastFMService : public RadioService {
   void FetchImageFinished();
 
  private:
+  struct QueuedTrack {
+    lastfm::Track track;
+    QImage image;
+  };
+
   RadioItem* CreateStationItem(ItemType type, const QString& name,
                                const QString& icon, RadioItem* parent);
   QString ErrorString(lastfm::ws::Error error) const;
@@ -126,13 +131,12 @@ class LastFMService : public RadioService {
                    const QIcon& icon, RadioItem *list);
 
   void Tune(const lastfm::RadioStation& station);
-  void FetchImage(lastfm::Track track, const QString& image_url);
+  void FetchImage(QueuedTrack* track, const QString& image_url);
 
  private:
   lastfm::Audioscrobbler* scrobbler_;
   lastfm::Track last_track_;
-
-  QQueue<lastfm::Track> playlist_;
+  QQueue<QueuedTrack*> playlist_;
 
   LastFMConfigDialog* config_;
   LastFMStationDialog* station_dialog_;
@@ -155,8 +159,7 @@ class LastFMService : public RadioService {
   RadioItem* neighbours_list_;
 
   QNetworkAccessManager network_;
-  QMap<QNetworkReply*, lastfm::Track> image_requests_;
-  QHash<lastfm::Track, QImage> cached_images_;
+  QMap<QNetworkReply*, QueuedTrack*> image_requests_;
 };
 
 #endif // LASTFMSERVICE_H

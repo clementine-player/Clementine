@@ -4,6 +4,8 @@
 #include "lastfmstationdialog.h"
 #include "lastfmconfigdialog.h"
 
+#include <boost/scoped_ptr.hpp>
+
 #include <lastfm/Audioscrobbler>
 #include <lastfm/misc.h>
 #include <lastfm/RadioStation>
@@ -13,6 +15,7 @@
 #include <QSettings>
 #include <QMenu>
 
+using boost::scoped_ptr;
 using lastfm::XmlQuery;
 
 uint qHash(const lastfm::Track& track) {
@@ -273,15 +276,25 @@ void LastFMService::LoadNext(const QUrl &) {
     return;
   }
 
-  last_track_ = playlist_.dequeue();
+  scoped_ptr<QueuedTrack> track(playlist_.dequeue());
+  for (QMap<QNetworkReply*, QueuedTrack*>::iterator it = image_requests_.begin();
+       it != image_requests_.end(); ++it) {
+    if (it.value() == track.get()) {
+      // Cancel pending album cover request.
+      it.key()->abort();
+      image_requests_.erase(it);
+      break;
+    }
+  }
+  last_track_ = track->track;
   if (playlist_.empty()) {
     FetchMoreTracks();
   }
 
   Song metadata;
   metadata.InitFromLastFM(last_track_);
-  if (cached_images_.contains(last_track_)) {
-    metadata.set_image(cached_images_.take(last_track_));
+  if (!track->image.isNull()) {
+    metadata.set_image(track->image);
   }
 
   emit StreamMetadataFound(last_url_, metadata);
@@ -572,9 +585,9 @@ void LastFMService::FetchMoreTracksFinished() {
     return;
   }
 
-  const XmlQuery query = lastfm::ws::parse(reply);
-  const XmlQuery playlist = query["playlist"];
-  foreach (XmlQuery q, playlist["trackList"].children("track")) {
+  const XmlQuery& query = lastfm::ws::parse(reply);
+  const XmlQuery& playlist = query["playlist"];
+  foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
     lastfm::MutableTrack t;
     t.setUrl(q["location"].text());
     t.setExtra("trackauth", q["extension"]["trackauth"].text());
@@ -583,14 +596,17 @@ void LastFMService::FetchMoreTracksFinished() {
     t.setAlbum(q["album"].text());
     t.setDuration(q["duration"].text().toInt() / 1000);
     const QString& image = q["image"].text();
+    QueuedTrack* queued_track = new QueuedTrack;
+    queued_track->track = t;
     if (!image.isEmpty()) {
-      FetchImage(t, q["image"].text());
+      FetchImage(queued_track, image);
     }
-    playlist_ << t;
+    playlist_ << queued_track;
     qDebug() << "Adding track to playlist: " << t.title();
   }
 
   TunerTrackAvailable();
+  reply->deleteLater();
 }
 
 void LastFMService::Tune(const lastfm::RadioStation& station) {
@@ -612,7 +628,7 @@ void LastFMService::TuneFinished() {
   reply->deleteLater();
 }
 
-void LastFMService::FetchImage(lastfm::Track track, const QString& image_url) {
+void LastFMService::FetchImage(QueuedTrack* track, const QString& image_url) {
   QUrl url(image_url);
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
   connect(reply, SIGNAL(finished()), SLOT(FetchImageFinished()));
@@ -625,9 +641,12 @@ void LastFMService::FetchImageFinished() {
     qWarning() << "Invalid reply on track image fetch.";
     return;
   }
+  // The response might be too late to matter.
+  if (image_requests_.contains(reply)) {
+    QueuedTrack* track = image_requests_.take(reply);
+    QImage image = QImage::fromData(reply->readAll());
+    track->image = image;
+  }
 
-  lastfm::Track track = image_requests_.take(reply);
-  QImage image = QImage::fromData(reply->readAll());
-  cached_images_[track] = image;
   reply->deleteLater();
 }
