@@ -97,7 +97,6 @@ class OSD::GrowlNotificationWrapper {
                       title:mac_summary
                       image:image_data];
 
-    [image_data release];
     [mac_message release];
     [mac_summary release];
   }
