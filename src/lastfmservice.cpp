@@ -610,6 +610,10 @@ void LastFMService::FetchMoreTracksFinished() {
 }
 
 void LastFMService::Tune(const lastfm::RadioStation& station) {
+  foreach (QueuedTrack* t, playlist_) {
+    delete t;
+  }
+  playlist_.clear();
   QMap<QString, QString> params;
   params["method"] = "radio.tune";
   params["station"] = station.url();
