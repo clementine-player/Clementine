@@ -1,30 +1,15 @@
-<!DOCTYPE TS><TS>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="ru_RU">
 <context>
     <name>About</name>
     <message>
-        <source>#line {
-  color: lightgrey;
-}
-
-#title {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-#version {
-  font-style: italic;
-  font-size: 10px;
-}
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Название</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -40,14 +25,41 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mark Kretschmann &amp;lt;&lt;a href=&quot;mailto:markey@web.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;markey@web.de&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Max Howell &amp;lt;&lt;a href=&quot;mailto:max.howell@methylblue.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;max.howell@methylblue.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... and all the Amarok contributors&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://code.google.com/p/clementine-player/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://code.google.com/p/clementine-player/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Авторы:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;David Sansome &amp;lt;&lt;a href=&quot;mailto:me@davidsansome.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;me@davidsansome.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Выражаем благодарность:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mark Kretschmann &amp;lt;&lt;a href=&quot;mailto:markey@web.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;markey@web.de&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Max Howell &amp;lt;&lt;a href=&quot;mailto:max.howell@methylblue.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;max.howell@methylblue.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... и всем создателям Amarok&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе %1</translation>
     </message>
     <message>
         <source>Version %1</source>
+        <translation>Версия %1</translation>
+    </message>
+</context>
+<context>
+    <name>AddStreamDialog</name>
+    <message>
+        <source>Add Stream</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the URL of an internet radio stream:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save this stream in the Radio tab</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -59,41 +71,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Альбом</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполнитель</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Жанр</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Дорожка</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Год</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QLineEdit {
-<byte value="x9"/>background-color: transparent;
-}</source>
-        <translation type="unfinished"></translation>
+        <translation>Комментарий</translation>
     </message>
     <message>
         <source>[click to edit]</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>Editing %n tracks</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -104,22 +118,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
     <name>FileViewList</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить в плейлист</translation>
     </message>
     <message>
         <source>Copy to library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать в коллекцию...</translation>
     </message>
     <message>
         <source>Move to library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Преместить в коллекцию...</translation>
     </message>
 </context>
 <context>
@@ -168,7 +182,7 @@ p, li { white-space: pre-wrap; }
     <name>LastFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавить в плейлист</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -335,7 +349,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Исполнитель</translation>
     </message>
     <message>
         <source>Tag</source>
@@ -346,26 +360,26 @@ p, li { white-space: pre-wrap; }
     <name>Library</name>
     <message>
         <source>Various Artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Разные исполнители</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный</translation>
     </message>
 </context>
 <context>
     <name>LibraryConfig</name>
     <message>
         <source>These folders will be scanned for music to make up your library</source>
-        <translation type="unfinished"></translation>
+        <translation>В этих каталогах будет выполнен поиск музыки для создания вашей коллекции</translation>
     </message>
     <message>
         <source>Add new folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить каталог...</translation>
     </message>
     <message>
         <source>Remove folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить каталог</translation>
     </message>
     <message>
         <source>Add directory...</source>
@@ -376,18 +390,18 @@ p, li { white-space: pre-wrap; }
     <name>LibraryConfigDialog</name>
     <message>
         <source>Music Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Музыкальная коллекция</translation>
     </message>
 </context>
 <context>
     <name>LibraryView</name>
     <message>
         <source>Your library is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша коллекция пуста!</translation>
     </message>
     <message>
         <source>Click here to add some music</source>
-        <translation type="unfinished"></translation>
+        <translation>Щелкните здесь, что бы добавить музыку</translation>
     </message>
 </context>
 <context>
@@ -398,51 +412,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Коллекция</translation>
     </message>
     <message>
         <source>Radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Радио</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы</translation>
     </message>
     <message>
         <source>Music</source>
-        <translation type="unfinished"></translation>
+        <translation>Песня</translation>
     </message>
     <message>
         <source>Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Плейлист</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <source>Previous track</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущая</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизвести</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Стоп</translation>
     </message>
     <message>
         <source>Next track</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующая</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <source>Ctrl+Q</source>
@@ -450,31 +464,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Stop after this track</source>
-        <translation type="unfinished"></translation>
+        <translation>Остановить после этой дорожки</translation>
     </message>
     <message>
         <source>Entire collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Вся коллекция</translation>
     </message>
     <message>
         <source>Added today</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено сегодня</translation>
     </message>
     <message>
         <source>Added this week</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено за неделю</translation>
     </message>
     <message>
         <source>Added within three months</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено за три месяца</translation>
     </message>
     <message>
         <source>Added this year</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено за год</translation>
     </message>
     <message>
         <source>Added this month</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено за месяц</translation>
     </message>
     <message>
         <source>Love</source>
@@ -486,30 +500,42 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Clear playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить плейлист</translation>
     </message>
     <message>
         <source>Edit track information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о песне...</translation>
     </message>
     <message>
         <source>Configure Clementine...</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить Clementine...</translation>
     </message>
     <message>
         <source>About Clementine...</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе Clementine...</translation>
     </message>
     <message>
         <source>Shuffle playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Премешать плейлист</translation>
     </message>
     <message>
         <source>Configure library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки коллекции...</translation>
     </message>
     <message>
         <source>Pause</source>
+        <translation>Пауза</translation>
+    </message>
+    <message>
+        <source>Add media...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add stream...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open media...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -544,58 +570,58 @@ p, li { white-space: pre-wrap; }
     <name>OSD</name>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Пауза</translation>
     </message>
     <message>
         <source>Playlist finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Плейлист закончен</translation>
     </message>
     <message>
         <source>Volume %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Громкость %1%</translation>
     </message>
 </context>
 <context>
     <name>Playlist</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполнитель</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Альбом</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность</translation>
     </message>
     <message>
         <source>Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Дорожка</translation>
     </message>
     <message>
         <source>Disc</source>
-        <translation type="unfinished"></translation>
+        <translation>Диск</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Год</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Жанр</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Битрейт</translation>
     </message>
     <message>
         <source>Sample rate</source>
@@ -603,11 +629,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя файла</translation>
     </message>
     <message>
         <source>File size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
 </context>
 <context>
@@ -633,81 +659,96 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>SavedRadio</name>
+    <message>
+        <source>Add to playlist</source>
+        <translation type="unfinished">Добавить в плейлист</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add another stream...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизведение</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Уведомления</translation>
     </message>
     <message>
         <source>Music Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Музыкальная коллекция</translation>
     </message>
     <message>
         <source>Last.fm</source>
-        <translation type="unfinished"></translation>
+        <translation>Last.fm</translation>
     </message>
     <message>
         <source>Fadeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Затихание</translation>
     </message>
     <message>
         <source>No fadeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить</translation>
     </message>
     <message>
         <source>Fadeout duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность затихания</translation>
     </message>
     <message>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <source>Clementine can show a message when the track changes.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Clementine может показывать сообщения при смене дорожки.</translation>
     </message>
     <message>
         <source>Don&apos;t show notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показывать</translation>
     </message>
     <message>
         <source>Show a native desktop notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать системные сообщения</translation>
     </message>
     <message>
         <source>Show a popup from the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать всплывающие сообщения</translation>
     </message>
     <message>
         <source>Popup duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность всплывающего сообщения</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> секунд</translation>
     </message>
 </context>
 <context>
     <name>SomaFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить в плейлист</translation>
     </message>
     <message>
         <source>Open somafm.com in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть somafm.com в браузере</translation>
     </message>
     <message>
         <source>Refresh channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить каналы</translation>
     </message>
 </context>
 <context>

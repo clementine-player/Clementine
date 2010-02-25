@@ -18,7 +18,7 @@
   font-size: 10px;
 }
 </source>
-        <translation>#line {
+        <translation type="obsolete">#line {
   color: lightgrey;
 }
 
@@ -67,6 +67,21 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>AddStreamDialog</name>
+    <message>
+        <source>Add Stream</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the URL of an internet radio stream:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save this stream in the Radio tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EditTagDialog</name>
     <message>
         <source>Edit track information</source>
@@ -101,14 +116,15 @@ p, li { white-space: pre-wrap; }
         <translation>Σχόλια</translation>
     </message>
     <message>
-        <source>QLineEdit {
-	background-color: transparent;
-}</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>[click to edit]</source>
         <translation>[κλικ για τροποποίηση]</translation>
+    </message>
+    <message numerus="yes">
+        <source>Editing %n tracks</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -527,6 +543,18 @@ p, li { white-space: pre-wrap; }
         <source>Pause</source>
         <translation>Παύση</translation>
     </message>
+    <message>
+        <source>Add media...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add stream...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open media...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
@@ -645,6 +673,21 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Radio service couldn&apos;t be loaded :-(</source>
         <translation>Η υπηρεσίες ραδιοφώνου απέτυχαν να φορτωθούν :-(</translation>
+    </message>
+</context>
+<context>
+    <name>SavedRadio</name>
+    <message>
+        <source>Add to playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Αφαίρεση</translation>
+    </message>
+    <message>
+        <source>Add another stream...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

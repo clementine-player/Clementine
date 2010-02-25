@@ -41,29 +41,27 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... y todos los que contribuyeron con Amarok&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>#line {
-  color: lightgrey;
-}
-
-#title {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-#version {
-  font-style: italic;
-  font-size: 10px;
-}
-</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>About %1</source>
         <translation>Sobre %1</translation>
     </message>
     <message>
         <source>Version %1</source>
         <translation>Versión %1</translation>
+    </message>
+</context>
+<context>
+    <name>AddStreamDialog</name>
+    <message>
+        <source>Add Stream</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the URL of an internet radio stream:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save this stream in the Radio tab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -101,14 +99,15 @@ p, li { white-space: pre-wrap; }
         <translation>Comentario</translation>
     </message>
     <message>
-        <source>QLineEdit {
-	background-color: transparent;
-}</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>[click to edit]</source>
         <translation>[click para editar]</translation>
+    </message>
+    <message numerus="yes">
+        <source>Editing %n tracks</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -527,6 +526,18 @@ p, li { white-space: pre-wrap; }
         <source>Pause</source>
         <translation>Pausa</translation>
     </message>
+    <message>
+        <source>Add media...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add stream...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open media...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
@@ -645,6 +656,21 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Radio service couldn&apos;t be loaded :-(</source>
         <translation>Servicio de radio no pudo ser cargado :-(</translation>
+    </message>
+</context>
+<context>
+    <name>SavedRadio</name>
+    <message>
+        <source>Add to playlist</source>
+        <translation type="unfinished">Añadir a la lista de reproducción</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Quitar</translation>
+    </message>
+    <message>
+        <source>Add another stream...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
