@@ -1,11 +1,12 @@
 #ifndef SONG_H
 #define SONG_H
 
-#include <QString>
+#include <QImage>
 #include <QList>
-#include <QSqlQuery>
 #include <QSharedData>
 #include <QSharedDataPointer>
+#include <QSqlQuery>
+#include <QString>
 
 #include "engine_fwd.h"
 
@@ -41,6 +42,8 @@ struct SongData : public QSharedData {
   int mtime_;
   int ctime_;
   int filesize_;
+
+  QImage image_;
 };
 
 class Song {
@@ -89,6 +92,8 @@ class Song {
   uint ctime() const { return d->ctime_; }
   int filesize() const { return d->filesize_; }
 
+  const QImage& image() const { return d->image_; }
+
   // Pretty accessors
   QString PrettyTitle() const;
   QString PrettyTitleWithArtist() const;
@@ -118,6 +123,7 @@ class Song {
   void set_mtime(int v) { d->mtime_ = v; }
   void set_ctime(int v) { d->ctime_ = v; }
   void set_filesize(int v) { d->filesize_ = v; }
+  void set_image(const QImage& i) { d->image_ = i; }
 
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;

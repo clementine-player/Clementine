@@ -27,6 +27,7 @@ void OSD::ReloadSettings() {
 }
 
 void OSD::SongChanged(const Song &song) {
+  qDebug() << __PRETTY_FUNCTION__;
   QString summary(song.PrettyTitle());
   if (!song.artist().isNull())
     summary = QString("%1 - %2").arg(song.artist(), summary);
@@ -39,7 +40,7 @@ void OSD::SongChanged(const Song &song) {
   if (song.track() > 0)
     message_parts << QString("track %1").arg(song.track());
 
-  ShowMessage(summary, message_parts.join(", "), "notification-audio-play");
+  ShowMessage(summary, message_parts.join(", "), "notification-audio-play", song.image());
 }
 
 void OSD::Paused() {
@@ -56,10 +57,15 @@ void OSD::VolumeChanged(int value) {
 
 void OSD::ShowMessage(const QString& summary,
                       const QString& message,
-                      const QString& icon) {
+                      const QString& icon,
+                      const QImage& image) {
   switch (behaviour_) {
     case Native:
-      ShowMessageNative(summary, message, icon);
+      if (image.isNull()) {
+        ShowMessageNative(summary, message, icon);
+      } else {
+        ShowMessageNative(summary, message, image);
+      }
       break;
 
     case TrayPopup:

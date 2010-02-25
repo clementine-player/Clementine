@@ -1,11 +1,24 @@
 #ifndef LASTFMSERVICE_H
 #define LASTFMSERVICE_H
 
+namespace lastfm {
+class RadioStation;
+class Track;
+}
+
+#include <QtGlobal>
+uint qHash(const lastfm::Track& track);
+
+#include <lastfm/Track>
+#include <lastfm/ws.h>
+
 #include "radioservice.h"
 #include "song.h"
 #include "lastfmstationdialog.h"
 
-#include <lastfm/RadioTuner>
+#include <QMap>
+#include <QNetworkAccessManager>
+#include <QQueue>
 
 class QMenu;
 class QAction;
@@ -65,6 +78,8 @@ class LastFMService : public RadioService {
 
   void Authenticate(const QString& username, const QString& password);
 
+  void FetchMoreTracks();
+
  public slots:
   void NowPlaying(const Song& song);
   void Scrobble();
@@ -89,6 +104,12 @@ class LastFMService : public RadioService {
   void AddTagRadio();
   void Remove();
 
+  // Radio tuner.
+  void FetchMoreTracksFinished();
+  void TuneFinished();
+
+  void FetchImageFinished();
+
  private:
   RadioItem* CreateStationItem(ItemType type, const QString& name,
                                const QString& icon, RadioItem* parent);
@@ -104,10 +125,14 @@ class LastFMService : public RadioService {
   void RestoreList(const QString &name, ItemType item_type,
                    const QIcon& icon, RadioItem *list);
 
+  void Tune(const lastfm::RadioStation& station);
+  void FetchImage(lastfm::Track track, const QString& image_url);
+
  private:
-  lastfm::RadioTuner* tuner_;
   lastfm::Audioscrobbler* scrobbler_;
   lastfm::Track last_track_;
+
+  QQueue<lastfm::Track> playlist_;
 
   LastFMConfigDialog* config_;
   LastFMStationDialog* station_dialog_;
@@ -128,6 +153,10 @@ class LastFMService : public RadioService {
   RadioItem* tag_list_;
   RadioItem* friends_list_;
   RadioItem* neighbours_list_;
+
+  QNetworkAccessManager network_;
+  QMap<QNetworkReply*, lastfm::Track> image_requests_;
+  QHash<lastfm::Track, QImage> cached_images_;
 };
 
 #endif // LASTFMSERVICE_H
