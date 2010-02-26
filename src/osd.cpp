@@ -29,7 +29,7 @@ void OSD::ReloadSettings() {
 void OSD::SongChanged(const Song &song) {
   qDebug() << __PRETTY_FUNCTION__;
   QString summary(song.PrettyTitle());
-  if (!song.artist().isNull())
+  if (!song.artist().isEmpty())
     summary = QString("%1 - %2").arg(song.artist(), summary);
 
   QStringList message_parts;
