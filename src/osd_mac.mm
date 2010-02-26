@@ -110,8 +110,12 @@ void OSD::Init() {
   wrapper_ = new GrowlNotificationWrapper;
 }
 
-bool OSD::CanShowNativeMessages() const {
+bool OSD::SupportsNativeNotifications() {
   return true;
+}
+
+bool OSD::SupportsTrayPopups() {
+  return false;
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,

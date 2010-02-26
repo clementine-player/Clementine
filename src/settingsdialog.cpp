@@ -21,10 +21,10 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   connect(ui_.notifications_native, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
   connect(ui_.notifications_tray, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
 
-#ifdef Q_WS_WIN
-  // Sucks to be a windows user
-  ui_.notifications_native->setEnabled(false);
-#endif
+  if (!OSD::SupportsNativeNotifications())
+    ui_.notifications_native->setEnabled(false);
+  if (!OSD::SupportsTrayPopups())
+    ui_.notifications_tray->setEnabled(false);
 }
 
 void SettingsDialog::CurrentTextChanged(const QString &text) {
@@ -92,10 +92,24 @@ void SettingsDialog::showEvent(QShowEvent*) {
   s.beginGroup(OSD::kSettingsGroup);
   OSD::Behaviour osd_behaviour = OSD::Behaviour(s.value("Behaviour", OSD::Native).toInt());
   switch (osd_behaviour) {
-    case OSD::Native:    ui_.notifications_native->setChecked(true); break;
-    case OSD::TrayPopup: ui_.notifications_tray->setChecked(true); break;
+    case OSD::Native:
+      if (OSD::SupportsNativeNotifications()) {
+        ui_.notifications_native->setChecked(true);
+        break;
+      }
+      // Fallthrough
+
+    case OSD::TrayPopup:
+      if (OSD::SupportsTrayPopups()) {
+        ui_.notifications_tray->setChecked(true);
+        break;
+      }
+      // Fallthrough
+
     case OSD::Disabled:
-    default:             ui_.notifications_none->setChecked(true); break;
+    default:
+      ui_.notifications_none->setChecked(true);
+      break;
   }
   ui_.notifications_duration->setValue(s.value("Timeout", 5000).toInt() / 1000);
   s.endGroup();

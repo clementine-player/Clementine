@@ -22,8 +22,10 @@ void OSD::ReloadSettings() {
   behaviour_ = OSD::Behaviour(s.value("Behaviour", Native).toInt());
   timeout_ = s.value("Timeout", 5000).toInt();
 
-  if (!CanShowNativeMessages() && behaviour_ == Native)
+  if (!SupportsNativeNotifications() && behaviour_ == Native)
     behaviour_ = TrayPopup;
+  if (!SupportsTrayPopups() && behaviour_ == TrayPopup)
+    behaviour_ = Disabled;
 }
 
 void OSD::SongChanged(const Song &song) {

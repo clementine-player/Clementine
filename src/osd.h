@@ -29,6 +29,10 @@ class OSD : public QObject {
     TrayPopup,
   };
 
+  // Implemented in the OS-specific files
+  static bool SupportsNativeNotifications();
+  static bool SupportsTrayPopups();
+
  public slots:
   void ReloadSettings();
 
@@ -45,11 +49,9 @@ class OSD : public QObject {
 
   // These are implemented in the OS-specific files
   void Init();
-  bool CanShowNativeMessages() const;
   void ShowMessageNative(const QString& summary,
                          const QString& message = QString(),
                          const QString& icon = QString());
-
   void ShowMessageNative(const QString& summary,
                          const QString& message,
                          const QImage& image);

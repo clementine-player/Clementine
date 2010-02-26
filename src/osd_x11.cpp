@@ -1,8 +1,10 @@
 // Libnotify headers need to go before Qt ones because they use "signals" as
 // a variable name
-#include <libnotify/notify.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <glib.h>
+#ifndef NOLIBNOTIFY
+#  include <libnotify/notify.h>
+#  include <gdk-pixbuf/gdk-pixbuf.h>
+#  include <glib.h>
+#endif // NOLIBNOTIFY
 
 #include "osd.h"
 
@@ -13,15 +15,26 @@
 void OSD::Init() {
   notification_ = NULL;
   pixbuf_ = NULL;
+#ifndef NOLIBNOTIFY
   notify_init(QCoreApplication::applicationName().toUtf8().constData());
+#endif
 }
 
-bool OSD::CanShowNativeMessages() const {
+bool OSD::SupportsNativeNotifications() {
+#ifdef NOLIBNOTIFY
+  return false;
+#else
+  return true;
+#endif
+}
+
+bool OSD::SupportsTrayPopups() {
   return true;
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon) {
+#ifndef NOLIBNOTIFY
   if (summary.isNull())
     return;
 
@@ -47,10 +60,12 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   }
 
   pixbuf_ = NULL;
+#endif // NOLIBNOTIFY
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QImage& image) {
+#ifndef NOLIBNOTIFY
   QImage happy_gdk_image = image.convertToFormat(QImage::Format_RGB888).scaledToHeight(100);
   pixbuf_ = gdk_pixbuf_new_from_data(
       happy_gdk_image.bits(),
@@ -63,4 +78,5 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
       NULL, NULL);
 
   ShowMessageNative(summary, message, QString());
+#endif // NOLIBNOTIFY
 }

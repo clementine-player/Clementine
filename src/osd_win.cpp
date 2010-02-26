@@ -5,8 +5,12 @@
 void OSD::Init() {
 }
 
-bool OSD::CanShowNativeMessages() const {
+bool OSD::SupportsNativeNotifications() {
   return false;
+}
+
+bool OSD::SupportsTrayPopups() {
+  return true;
 }
 
 void OSD::ShowMessageNative(const QString&, const QString&,
