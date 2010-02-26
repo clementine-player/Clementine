@@ -72,6 +72,8 @@ class MainWindow : public QMainWindow {
 
   void PlayerInitFinished();
 
+  void HideShowTrayIcon();
+
   void AddMedia();
   void AddStream();
   void AddStreamAccepted();

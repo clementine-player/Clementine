@@ -353,9 +353,6 @@
        <attribute name="headerVisible">
         <bool>false</bool>
        </attribute>
-       <attribute name="headerVisible">
-        <bool>false</bool>
-       </attribute>
       </widget>
      </item>
     </layout>
@@ -437,7 +434,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -471,6 +468,8 @@
      <string>Settings</string>
     </property>
     <addaction name="action_configure"/>
+    <addaction name="separator"/>
+    <addaction name="action_hide_tray_icon"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -690,6 +689,11 @@
    </property>
    <property name="text">
     <string>Open media...</string>
+   </property>
+  </action>
+  <action name="action_hide_tray_icon">
+   <property name="text">
+    <string>&amp;Hide tray icon</string>
    </property>
   </action>
  </widget>

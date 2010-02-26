@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.setupUi(this);
   tray_icon_->setIcon(windowIcon());
   tray_icon_->setToolTip(QCoreApplication::applicationName());
-  tray_icon_->show();
+  //tray_icon_->show();
 
   ui_.volume->setValue(player_->GetVolume());
 
@@ -110,6 +110,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_open_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
+  connect(ui_.action_hide_tray_icon, SIGNAL(triggered()), SLOT(HideShowTrayIcon()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -226,6 +227,8 @@ MainWindow::MainWindow(QWidget *parent)
   tray_menu->addAction(ui_.action_love);
   tray_menu->addAction(ui_.action_ban);
   tray_menu->addSeparator();
+  tray_menu->addAction(ui_.action_hide_tray_icon);
+  tray_menu->addSeparator();
   tray_menu->addAction(ui_.action_quit);
   tray_icon_->setContextMenu(tray_menu);
 
@@ -280,14 +283,45 @@ MainWindow::MainWindow(QWidget *parent)
 
   ui_.file_view->SetPath(settings.value("file_path", QDir::homePath()).toString());
 
-  if (!settings.value("hidden", false).toBool())
+  if (!settings.value("hidden", false).toBool()) {
     show();
+  }
+
+  if (settings.value("showtray", true).toBool()) {
+    tray_icon_->show();
+  }
+  else {
+    ui_.action_hide_tray_icon->setText(tr("&Show tray icon"));
+  }
+
+  // Force the window to show in case somehow the config has tray and window set to hide
+  // Why doesn't .toBool() work? This might be the case for any combinations with .toBool(); use .toInt()
+  if (!settings.value("hidden", true).toInt() && !settings.value("showtray", false).toInt()) {
+    settings.setValue("hidden", false);
+    show();
+  }
 
   library_->StartThreads();
 }
 
 MainWindow::~MainWindow() {
   SaveGeometry();
+}
+
+void MainWindow::HideShowTrayIcon() {
+  QSettings settings;
+
+  if (!isHidden() && tray_icon_->isVisible()) {
+    tray_icon_->setVisible(false);
+    ui_.action_hide_tray_icon->setText(tr("&Show tray icon"));
+  }
+  else if (!isHidden()) {
+    tray_icon_->setVisible(true);
+    ui_.action_hide_tray_icon->setText("&Hide tray icon");
+  }
+
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("showtray", tray_icon_->isVisible());
 }
 
 void MainWindow::QueueFiles(const QList<QUrl>& urls) {
@@ -409,9 +443,19 @@ void MainWindow::StopAfterCurrent() {
   playlist_->StopAfter(playlist_->current_index());
 }
 
+/**
+  * Exit if the tray icon is not visible, otherwise ignore and set hidden in tray.
+  */
 void MainWindow::closeEvent(QCloseEvent* event) {
-  event->ignore();
-  SetHiddenInTray(true);
+  if (tray_icon_->isVisible()) {
+    event->ignore();
+    SetHiddenInTray(true);
+  }
+  else {
+    QSettings settings;
+    settings.beginGroup(kSettingsGroup);
+    settings.setValue("showtray", tray_icon_->isVisible());
+  }
 }
 
 void MainWindow::SetHiddenInTray(bool hidden) {
@@ -419,10 +463,14 @@ void MainWindow::SetHiddenInTray(bool hidden) {
   settings.beginGroup(kSettingsGroup);
   settings.setValue("hidden", hidden);
 
-  if (hidden)
+  if (hidden) {
     hide();
-  else
+    ui_.action_hide_tray_icon->setEnabled(false); // Disable hiding tray icon if window is hidden
+  }
+  else {
     show();
+    ui_.action_hide_tray_icon->setEnabled(true);
+  }
 }
 
 void MainWindow::ClearLibraryFilter() {
@@ -600,6 +648,6 @@ void MainWindow::AddStream() {
 void MainWindow::AddStreamAccepted() {
   QList<QUrl> urls;
   urls << add_stream_dialog_->url();
-  
+
   playlist_->InsertStreamUrls(urls);
 }
