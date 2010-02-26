@@ -798,11 +798,15 @@ XineEngine::event( QEvent* e )
       return true;
 
     case XineEvent::MetaInfoChanged: { //meta info has changed
-                                       qDebug() << "Metadata received.";
-                                       const Engine::SimpleMetaBundle bundle = fetchMetaData();
-                                       m_currentBundle = bundle;
-                                       emit metaData( bundle );
-                                     }   return true;
+      qDebug() << "Metadata received.";
+      const Engine::SimpleMetaBundle bundle = fetchMetaData();
+      if( bundle.title != m_currentBundle.title || bundle.artist != m_currentBundle.artist ) {
+        m_currentBundle = bundle;
+
+        emit metaData( bundle );
+      }
+      return true;
+    }
 
     case XineEvent::Redirecting:
                                      emit statusText( QString("Redirecting to: ").arg( *message ) );
