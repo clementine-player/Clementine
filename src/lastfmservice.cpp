@@ -12,8 +12,9 @@
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery>
 
-#include <QSettings>
 #include <QMenu>
+#include <QSettings>
+#include <QTimer>
 
 using boost::scoped_ptr;
 using lastfm::XmlQuery;
@@ -276,29 +277,33 @@ void LastFMService::LoadNext(const QUrl &) {
     return;
   }
 
-  scoped_ptr<QueuedTrack> track(playlist_.dequeue());
-  for (QMap<QNetworkReply*, QueuedTrack*>::iterator it = image_requests_.begin();
-       it != image_requests_.end(); ++it) {
-    if (it.value() == track.get()) {
-      // Cancel pending album cover request.
-      it.key()->abort();
-      image_requests_.erase(it);
-      break;
-    }
-  }
-  last_track_ = track->track;
+  lastfm::Track track = playlist_.dequeue();
+  last_track_ = track;
   if (playlist_.empty()) {
     FetchMoreTracks();
   }
 
+  next_metadata_ = track;
+  if (initial_tune_) {
+    QTimer::singleShot(5000, this,
+        SLOT(StreamMetadataReady()));
+  } else {
+    StreamMetadataReady();
+  }
+  emit StreamReady(last_url_, last_track_.url());
+}
+
+void LastFMService::StreamMetadataReady() {
   Song metadata;
-  metadata.InitFromLastFM(last_track_);
-  if (!track->image.isNull()) {
-    metadata.set_image(track->image);
+  metadata.InitFromLastFM(next_metadata_);
+  QImage track_image = GetImageForTrack(next_metadata_);
+  if (!track_image.isNull()) {
+    metadata.set_image(track_image);
+  } else {
+    qDebug() << "No image ready";
   }
 
   emit StreamMetadataFound(last_url_, metadata);
-  emit StreamReady(last_url_, last_track_.url());
 }
 
 void LastFMService::TunerError(lastfm::ws::Error error) {
@@ -596,13 +601,10 @@ void LastFMService::FetchMoreTracksFinished() {
     t.setAlbum(q["album"].text());
     t.setDuration(q["duration"].text().toInt() / 1000);
     const QString& image = q["image"].text();
-    QueuedTrack* queued_track = new QueuedTrack;
-    queued_track->track = t;
     if (!image.isEmpty()) {
-      FetchImage(queued_track, image);
+      FetchImage(t, image);
     }
-    playlist_ << queued_track;
-    qDebug() << "Adding track to playlist: " << t.title();
+    playlist_ << t;
   }
 
   TunerTrackAvailable();
@@ -610,8 +612,13 @@ void LastFMService::FetchMoreTracksFinished() {
 }
 
 void LastFMService::Tune(const lastfm::RadioStation& station) {
-  qDeleteAll(playlist_);
   playlist_.clear();
+  // Remove all the old image requests.
+  QHash<lastfm::Track, QNetworkReply*>::iterator it = image_requests_.begin();
+  while (it != image_requests_.end()) {
+    it.value()->deleteLater();
+    it = image_requests_.erase(it);
+  }
 
   QMap<QString, QString> params;
   params["method"] = "radio.tune";
@@ -631,25 +638,23 @@ void LastFMService::TuneFinished() {
   reply->deleteLater();
 }
 
-void LastFMService::FetchImage(QueuedTrack* track, const QString& image_url) {
+void LastFMService::FetchImage(const lastfm::Track& track, const QString& image_url) {
   QUrl url(image_url);
   QNetworkReply* reply = network_.get(QNetworkRequest(url));
-  connect(reply, SIGNAL(finished()), SLOT(FetchImageFinished()));
-  image_requests_[reply] = track;
+  image_requests_[track] = reply;
 }
 
-void LastFMService::FetchImageFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    qWarning() << "Invalid reply on track image fetch.";
-    return;
+QImage LastFMService::GetImageForTrack(const lastfm::Track& track) {
+  QNetworkReply* reply = image_requests_.take(track);
+  if (reply) {
+    // QNetworkReply::isFinished() only in Qt 4.6 :-(
+    QVariant content_length = reply->header(QNetworkRequest::ContentLengthHeader);
+    if (!content_length.isNull() && content_length.toInt() == reply->bytesAvailable()) {
+      QImage image = QImage::fromData(reply->readAll());
+      reply->deleteLater();
+      return image;
+    }
+    reply->deleteLater();
   }
-  // The response might be too late to matter.
-  if (image_requests_.contains(reply)) {
-    QueuedTrack* track = image_requests_.take(reply);
-    QImage image = QImage::fromData(reply->readAll());
-    track->image = image;
-  }
-
-  reply->deleteLater();
+  return QImage();
 }
