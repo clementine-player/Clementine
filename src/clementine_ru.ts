@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.0">
 <context>
     <name>About</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Version</source>
@@ -52,22 +52,22 @@ p, li { white-space: pre-wrap; }
     <name>AddStreamDialog</name>
     <message>
         <source>Add Stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить поток</translation>
     </message>
     <message>
         <source>Enter the URL of an internet radio stream:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите адрес радиопотока:</translation>
     </message>
     <message>
         <source>Save this stream in the Radio tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить поток на вкладке Радио</translation>
     </message>
 </context>
 <context>
     <name>EditTagDialog</name>
     <message>
         <source>Edit track information</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать информацию</translation>
     </message>
     <message>
         <source>Title</source>
@@ -99,14 +99,13 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>[click to edit]</source>
-        <translation type="unfinished"></translation>
+        <translation>[щелкните, чтобы изменить]</translation>
     </message>
     <message numerus="yes">
         <source>Editing %n tracks</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Редактирую %n треков
+        </numerusform>
         </translation>
     </message>
 </context>
@@ -114,7 +113,7 @@ p, li { white-space: pre-wrap; }
     <name>FileView</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>...</source>
@@ -140,65 +139,65 @@ p, li { white-space: pre-wrap; }
     <name>LastFMConfig</name>
     <message>
         <source>Enter your Last.fm details below:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите ваши данные Last.fm:</translation>
     </message>
     <message>
         <source>Last.fm username</source>
-        <translation type="unfinished"></translation>
+        <translation>Логин Last.fm</translation>
     </message>
     <message>
         <source>Last.fm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль Last.fm</translation>
     </message>
     <message>
         <source>Scrobble tracks that I listen to</source>
-        <translation type="unfinished"></translation>
+        <translation>Скробблить треки, которые я слушаю</translation>
     </message>
     <message>
         <source>Note that you must be a &lt;span style=&quot; font-weight:600;&quot;&gt;paid subscriber&lt;/span&gt; to listen to Last.fm radio from within Clementine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратите внимание, что вы должны быть &lt;span style=&quot;font-weight:600;&quot;&gt;платным подписчиком&lt;/span&gt; ,чтобы слушать радио Last.fm из Clementine.</translation>
     </message>
     <message>
         <source>Authenticating...</source>
-        <translation type="unfinished"></translation>
+        <translation>Аутентификация...</translation>
     </message>
     <message>
         <source>Authentication failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка аутентификации</translation>
     </message>
     <message>
         <source>Your Last.fm credentials were incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваши данные Last.fm некорректны</translation>
     </message>
 </context>
 <context>
     <name>LastFMConfigDialog</name>
     <message>
         <source>Last.fm</source>
-        <translation type="unfinished">Last.fm</translation>
+        <translation>Last.fm</translation>
     </message>
 </context>
 <context>
     <name>LastFMService</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished">Добавить в плейлист</translation>
+        <translation>Добавить в плейлист</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Play artist radio...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проиграть радио артиста...</translation>
     </message>
     <message>
         <source>Play tag radio...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проиграть радио тега...</translation>
     </message>
     <message>
         <source>Configure Last.fm...</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки Last.fm...</translation>
     </message>
     <message>
         <source>My Recommendations</source>
@@ -274,7 +273,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Authentication failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка аутентификации</translation>
     </message>
     <message>
         <source>Invalid format</source>
@@ -341,19 +340,19 @@ p, li { white-space: pre-wrap; }
     <name>LastFMStationDialog</name>
     <message>
         <source>Play Artist or Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Проиграть исполнителя или тег</translation>
     </message>
     <message>
         <source>Enter an &lt;b&gt;artist&lt;/b&gt; or &lt;b&gt;tag&lt;/b&gt; to start listening to Last.fm radio.</source>
-        <translation type="unfinished"></translation>
+        <translation>Укажите &lt;b&gt;исполнителя&lt;/b&gt; или &lt;b&gt;тег&lt;/b&gt; чтобы слушать радио Last.fm.</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished">Исполнитель</translation>
+        <translation>Исполнитель</translation>
     </message>
     <message>
         <source>Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Тег</translation>
     </message>
 </context>
 <context>
@@ -383,7 +382,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add directory...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить каталог...</translation>
     </message>
 </context>
 <context>
@@ -408,7 +407,7 @@ p, li { white-space: pre-wrap; }
     <name>MainWindow</name>
     <message>
         <source>Clementine</source>
-        <translation type="unfinished"></translation>
+        <translation>Clementine</translation>
     </message>
     <message>
         <source>Library</source>
@@ -460,7 +459,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Й</translation>
     </message>
     <message>
         <source>Stop after this track</source>
@@ -492,11 +491,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Love</source>
-        <translation type="unfinished"></translation>
+        <translation>Полюбить</translation>
     </message>
     <message>
         <source>Ban</source>
-        <translation type="unfinished"></translation>
+        <translation>Запретить</translation>
     </message>
     <message>
         <source>Clear playlist</source>
@@ -528,15 +527,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add media...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить...</translation>
     </message>
     <message>
         <source>Add stream...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить поток...</translation>
     </message>
     <message>
         <source>Open media...</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть...</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
@@ -551,27 +550,27 @@ p, li { white-space: pre-wrap; }
     <name>MultiLoadingIndicator</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Loading audio engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка движка аудио</translation>
     </message>
     <message>
         <source>Updating library</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновление библиотеки</translation>
     </message>
     <message>
         <source>Getting channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Получение каналов</translation>
     </message>
     <message>
         <source>Loading stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка потока</translation>
     </message>
     <message>
         <source>Loading Last.fm radio</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка радио Last.fm</translation>
     </message>
 </context>
 <context>
@@ -633,7 +632,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота</translation>
     </message>
     <message>
         <source>File name</source>
@@ -648,37 +647,37 @@ p, li { white-space: pre-wrap; }
     <name>PlaylistHeader</name>
     <message>
         <source>Hide...</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть...</translation>
     </message>
     <message>
         <source>Show section</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать секцию</translation>
     </message>
     <message>
         <source>Hide %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть %1</translation>
     </message>
 </context>
 <context>
     <name>RadioPlaylistItem</name>
     <message>
         <source>Radio service couldn&apos;t be loaded :-(</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервис радио не запустился =(</translation>
     </message>
 </context>
 <context>
     <name>SavedRadio</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished">Добавить в плейлист</translation>
+        <translation>Добавить в плейлист</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Add another stream...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить другой поток...</translation>
     </message>
 </context>
 <context>
@@ -721,7 +720,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Clementine can show a message when the track changes.</source>
-        <translation type="unfinished">Clementine может показывать сообщения при смене дорожки.</translation>
+        <translation>Clementine может показывать сообщения при смене дорожки.</translation>
     </message>
     <message>
         <source>Don&apos;t show notifications</source>
@@ -767,11 +766,11 @@ p, li { white-space: pre-wrap; }
     <name>TrackSlider</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation>0:00:00</translation>
     </message>
 </context>
 </TS>
