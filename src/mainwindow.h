@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSettings>
 #include <QSystemTrayIcon>
 
 #include "ui_mainwindow.h"
@@ -110,6 +111,7 @@ class MainWindow : public QMainWindow {
   QSortFilterProxyModel* library_sort_model_;
 
   QTimer* track_position_timer_;
+  QSettings settings;
 };
 
 #endif // MAINWINDOW_H

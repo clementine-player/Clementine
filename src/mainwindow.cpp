@@ -58,7 +58,6 @@ MainWindow::MainWindow(QWidget *parent)
   ui_.setupUi(this);
   tray_icon_->setIcon(windowIcon());
   tray_icon_->setToolTip(QCoreApplication::applicationName());
-  //tray_icon_->show();
 
   ui_.volume->setValue(player_->GetVolume());
 
@@ -272,7 +271,6 @@ MainWindow::MainWindow(QWidget *parent)
   }
 
   // Load settings
-  QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
   restoreGeometry(settings.value("geometry").toByteArray());
@@ -309,8 +307,6 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::HideShowTrayIcon() {
-  QSettings settings;
-
   if (!isHidden() && tray_icon_->isVisible()) {
     tray_icon_->setVisible(false);
     ui_.action_hide_tray_icon->setText(tr("&Show tray icon"));
@@ -320,7 +316,6 @@ void MainWindow::HideShowTrayIcon() {
     ui_.action_hide_tray_icon->setText("&Hide tray icon");
   }
 
-  settings.beginGroup(kSettingsGroup);
   settings.setValue("showtray", tray_icon_->isVisible());
 }
 
@@ -397,8 +392,6 @@ void MainWindow::resizeEvent(QResizeEvent*) {
 }
 
 void MainWindow::SaveGeometry() {
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
   settings.setValue("geometry", saveGeometry());
   settings.setValue("state", saveState(kStateVersion));
 }
@@ -452,15 +445,11 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     SetHiddenInTray(true);
   }
   else {
-    QSettings settings;
-    settings.beginGroup(kSettingsGroup);
     settings.setValue("showtray", tray_icon_->isVisible());
   }
 }
 
 void MainWindow::SetHiddenInTray(bool hidden) {
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
   settings.setValue("hidden", hidden);
 
   if (hidden) {
@@ -479,8 +468,6 @@ void MainWindow::ClearLibraryFilter() {
 }
 
 void MainWindow::FilePathChanged(const QString& path) {
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
   settings.setValue("file_path", path);
 }
 
@@ -616,11 +603,8 @@ void MainWindow::PlayerInitFinished() {
 }
 
 void MainWindow::AddMedia() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
   // Last used directory
-  QString directory = s.value("add_media_path", QDir::currentPath()).toString();
+  QString directory = settings.value("add_media_path", QDir::currentPath()).toString();
 
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(this, "Add media", directory);
@@ -628,7 +612,7 @@ void MainWindow::AddMedia() {
     return;
 
   // Save last used directory
-  s.setValue("add_media_path", file_names[0]);
+  settings.setValue("add_media_path", file_names[0]);
 
   // Add media
   QList<QUrl> urls;
