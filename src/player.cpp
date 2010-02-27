@@ -50,6 +50,8 @@ void Player::EngineInitFinished() {
   connect(engine_, SIGNAL(metaData(Engine::SimpleMetaBundle)),
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
+  engine_->setVolume(settings_.value("volume", 50).toInt());
+
   emit InitFinished();
 }
 
