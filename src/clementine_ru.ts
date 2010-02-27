@@ -174,8 +174,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>LastFMConfigDialog</name>
     <message>
-        <source>Last,fm</source>
-        <translation type="unfinished"></translation>
+        <source>Last.fm</source>
+        <translation type="unfinished">Last.fm</translation>
     </message>
 </context>
 <context>
@@ -538,6 +538,14 @@ p, li { white-space: pre-wrap; }
         <source>Open media...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Show tray icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide tray icon</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
@@ -734,6 +742,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source> seconds</source>
         <translation> секунд</translation>
+    </message>
+    <message>
+        <source>Show a notification when I change the volume</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
