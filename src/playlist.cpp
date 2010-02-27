@@ -468,6 +468,11 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
   if (item->Url() != url)
     return;
 
+  // Don't update the metadata if it's only a minor change from before
+  if (item->Metadata().artist() == song.artist() &&
+      item->Metadata().title() == song.title())
+    return;
+
   item->SetTemporaryMetadata(song);
   UpdateScrobblePoint();
 
