@@ -467,6 +467,7 @@
     <property name="title">
      <string>Settings</string>
     </property>
+    <addaction name="action_global_shortcuts"/>
     <addaction name="action_configure"/>
     <addaction name="separator"/>
     <addaction name="action_hide_tray_icon"/>
@@ -694,6 +695,15 @@
   <action name="action_hide_tray_icon">
    <property name="text">
     <string>&amp;Hide tray icon</string>
+   </property>
+  </action>
+  <action name="action_global_shortcuts">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
+   </property>
+   <property name="text">
+    <string>Configure &amp;Global Shortcuts...</string>
    </property>
   </action>
  </widget>

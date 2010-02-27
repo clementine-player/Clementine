@@ -21,6 +21,7 @@ class MultiLoadingIndicator;
 class SettingsDialog;
 class About;
 class AddStreamDialog;
+class ShortcutsDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -102,6 +103,7 @@ class MainWindow : public QMainWindow {
 
   SettingsDialog* settings_dialog_;
   AddStreamDialog* add_stream_dialog_;
+  ShortcutsDialog* shortcuts_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;
