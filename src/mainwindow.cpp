@@ -268,21 +268,21 @@ MainWindow::MainWindow(QWidget *parent)
   css_loader->SetStyleSheet(this, ":mainwindow.css");
 
   // Load settings
-  settings.beginGroup(kSettingsGroup);
+  settings_.beginGroup(kSettingsGroup);
 
-  restoreGeometry(settings.value("geometry").toByteArray());
-  if (!restoreState(settings.value("state").toByteArray(), kStateVersion)) {
+  restoreGeometry(settings_.value("geometry").toByteArray());
+  if (!restoreState(settings_.value("state").toByteArray(), kStateVersion)) {
     tabifyDockWidget(ui_.files_dock, ui_.radio_dock);
     tabifyDockWidget(ui_.files_dock, ui_.library_dock);
   }
 
-  ui_.file_view->SetPath(settings.value("file_path", QDir::homePath()).toString());
+  ui_.file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
-  if (!settings.value("hidden", false).toBool()) {
+  if (!settings_.value("hidden", false).toBool()) {
     show();
   }
 
-  if (settings.value("showtray", true).toBool()) {
+  if (settings_.value("showtray", true).toBool()) {
     tray_icon_->show();
   }
   else {
@@ -291,8 +291,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   // Force the window to show in case somehow the config has tray and window set to hide
   // Why doesn't .toBool() work? This might be the case for any combinations with .toBool(); use .toInt()
-  if (!settings.value("hidden", true).toInt() && !settings.value("showtray", false).toInt()) {
-    settings.setValue("hidden", false);
+  if (!settings_.value("hidden", true).toInt() && !settings_.value("showtray", false).toInt()) {
+    settings_.setValue("hidden", false);
     show();
   }
 
@@ -313,7 +313,7 @@ void MainWindow::HideShowTrayIcon() {
     ui_.action_hide_tray_icon->setText("&Hide tray icon");
   }
 
-  settings.setValue("showtray", tray_icon_->isVisible());
+  settings_.setValue("showtray", tray_icon_->isVisible());
 }
 
 void MainWindow::QueueFiles(const QList<QUrl>& urls) {
@@ -389,8 +389,8 @@ void MainWindow::resizeEvent(QResizeEvent*) {
 }
 
 void MainWindow::SaveGeometry() {
-  settings.setValue("geometry", saveGeometry());
-  settings.setValue("state", saveState(kStateVersion));
+  settings_.setValue("geometry", saveGeometry());
+  settings_.setValue("state", saveState(kStateVersion));
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {
@@ -442,12 +442,12 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     SetHiddenInTray(true);
   }
   else {
-    settings.setValue("showtray", tray_icon_->isVisible());
+    settings_.setValue("showtray", tray_icon_->isVisible());
   }
 }
 
 void MainWindow::SetHiddenInTray(bool hidden) {
-  settings.setValue("hidden", hidden);
+  settings_.setValue("hidden", hidden);
 
   if (hidden) {
     hide();
@@ -465,7 +465,7 @@ void MainWindow::ClearLibraryFilter() {
 }
 
 void MainWindow::FilePathChanged(const QString& path) {
-  settings.setValue("file_path", path);
+  settings_.setValue("file_path", path);
 }
 
 void MainWindow::UpdateTrackPosition() {
@@ -601,7 +601,7 @@ void MainWindow::PlayerInitFinished() {
 
 void MainWindow::AddMedia() {
   // Last used directory
-  QString directory = settings.value("add_media_path", QDir::currentPath()).toString();
+  QString directory = settings_.value("add_media_path", QDir::currentPath()).toString();
 
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(this, "Add media", directory);
@@ -609,7 +609,7 @@ void MainWindow::AddMedia() {
     return;
 
   // Save last used directory
-  settings.setValue("add_media_path", file_names[0]);
+  settings_.setValue("add_media_path", file_names[0]);
 
   // Add media
   QList<QUrl> urls;

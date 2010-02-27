@@ -111,7 +111,7 @@ class MainWindow : public QMainWindow {
   QSortFilterProxyModel* library_sort_model_;
 
   QTimer* track_position_timer_;
-  QSettings settings;
+  QSettings settings_;
 };
 
 #endif // MAINWINDOW_H
