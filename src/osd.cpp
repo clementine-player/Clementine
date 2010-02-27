@@ -10,7 +10,8 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
     timeout_(5000),
-    behaviour_(Native)
+    behaviour_(Native),
+    show_on_volume_change_(false)
 {
   ReloadSettings();
   Init();
@@ -21,6 +22,7 @@ void OSD::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
   behaviour_ = OSD::Behaviour(s.value("Behaviour", Native).toInt());
   timeout_ = s.value("Timeout", 5000).toInt();
+  show_on_volume_change_ = s.value("ShowOnVolumeChange", false).toBool();
 
   if (!SupportsNativeNotifications() && behaviour_ == Native)
     behaviour_ = TrayPopup;
@@ -54,6 +56,9 @@ void OSD::Stopped() {
 }
 
 void OSD::VolumeChanged(int value) {
+  if (!show_on_volume_change_)
+    return;
+
   ShowMessage(QCoreApplication::applicationName(), tr("Volume %1%").arg(value));
 }
 

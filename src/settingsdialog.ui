@@ -51,7 +51,7 @@
        <string>Playback</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/media-playback-start-32.png</normaloff>:/media-playback-start-32.png</iconset>
       </property>
      </item>
@@ -60,7 +60,7 @@
        <string>Notifications</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/lightbulb.png</normaloff>:/lightbulb.png</iconset>
       </property>
      </item>
@@ -69,7 +69,7 @@
        <string>Music Library</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/library.png</normaloff>:/library.png</iconset>
       </property>
      </item>
@@ -78,7 +78,7 @@
        <string>Last.fm</string>
       </property>
       <property name="icon">
-       <iconset resource="../data/data.qrc">
+       <iconset>
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
@@ -99,7 +99,7 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>3</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -274,6 +274,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="notifications_volume">
+           <property name="text">
+            <string>Show a notification when I change the volume</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="verticalSpacer_3">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -349,9 +356,7 @@
   <tabstop>fadeout_duration</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>list</sender>

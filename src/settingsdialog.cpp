@@ -68,6 +68,7 @@ void SettingsDialog::accept() {
   s.beginGroup(OSD::kSettingsGroup);
   s.setValue("Behaviour", int(osd_behaviour));
   s.setValue("Timeout", ui_.notifications_duration->value() * 1000);
+  s.setValue("ShowOnVolumeChange", ui_.notifications_volume->isChecked());
   s.endGroup();
 
   QDialog::accept();
@@ -112,9 +113,12 @@ void SettingsDialog::showEvent(QShowEvent*) {
       break;
   }
   ui_.notifications_duration->setValue(s.value("Timeout", 5000).toInt() / 1000);
+  ui_.notifications_volume->setChecked(s.value("ShowOnVolumeChange", false).toBool());
   s.endGroup();
 }
 
 void SettingsDialog::NotificationTypeChanged() {
-  ui_.notifications_options->setEnabled(!ui_.notifications_none->isChecked());
+  bool enabled = !ui_.notifications_none->isChecked();
+  ui_.notifications_options->setEnabled(enabled);
+  ui_.notifications_volume->setEnabled(enabled);
 }

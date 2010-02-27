@@ -60,6 +60,7 @@ class OSD : public QObject {
   QSystemTrayIcon* tray_icon_;
   int timeout_;
   Behaviour behaviour_;
+  bool show_on_volume_change_;
 
 #ifdef Q_WS_X11
   NotifyNotification* notification_;
