@@ -16,6 +16,7 @@
 #include "libraryconfigdialog.h"
 #include "about.h"
 #include "addstreamdialog.h"
+#include "stylesheetloader.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -263,12 +264,8 @@ MainWindow::MainWindow(QWidget *parent)
   multi_loading_indicator_->hide();
 
   // Load theme
-  QFile stylesheet(":mainwindow.css");
-  if (!stylesheet.open(QIODevice::ReadOnly)) {
-    qWarning("Could not open stylesheet");
-  } else {
-    setStyleSheet(stylesheet.readAll());
-  }
+  StyleSheetLoader* css_loader = new StyleSheetLoader(this);
+  css_loader->SetStyleSheet(this, ":mainwindow.css");
 
   // Load settings
   settings.beginGroup(kSettingsGroup);

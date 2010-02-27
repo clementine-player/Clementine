@@ -1,5 +1,5 @@
 #playlist {
-  background-color: white;
+  background-color: %palette-base;
   background-image: url(:logo.png);
   background-attachment: fixed;
   background-position: bottom right;
@@ -22,8 +22,8 @@ QToolButton[popupMode="1"] {
 }
 
 QToolButton:hover {
-  border: 2px solid #fec798;
-  background-color: #fedbbd;
+  border: 2px solid %palette-highlight;
+  background-color: %palette-highlight-lighter;
   border-radius: 3px;
   padding: 1px;
 }
@@ -33,8 +33,8 @@ QToolButton:hover[popupMode="1"] {
 }
 
 QToolButton:pressed {
-  border: 2px solid #fe963e;
-  background-color: #fedbbd;
+  border: 2px solid %palette-highlight-darker;
+  background-color: %palette-highlight-lighter;
   border-radius: 3px;
   padding: 1px;
 }

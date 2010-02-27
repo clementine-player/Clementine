@@ -54,7 +54,8 @@ SOURCES += main.cpp \
     about.cpp \
     albumcoverfetcher.cpp \
     addstreamdialog.cpp \
-    savedradio.cpp
+    savedradio.cpp \
+    stylesheetloader.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -109,7 +110,8 @@ HEADERS += mainwindow.h \
     about.h \
     albumcoverfetcher.h \
     addstreamdialog.h \
-    savedradio.h
+    savedradio.h \
+    stylesheetloader.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -178,9 +180,9 @@ win32|fedora-win32-cross:LIBS += -ltag \
     -lpthreadGC2
 
 # OSD
-unix:!macx {
+unix:!macx { 
     SOURCES += osd_x11.cpp
-    !nolibnotify {
+    !nolibnotify { 
         DEFINES += HAVE_LIBNOTIFY
         QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
         LIBS += $$system(pkg-config --libs libnotify)
