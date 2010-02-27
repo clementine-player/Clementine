@@ -25,6 +25,7 @@ class LibraryQuery {
 
   void SetColumnSpec(const QString& spec) { column_spec_ = spec; }
   void AddWhere(const QString& column, const QVariant& value);
+  void AddCompilationRequirement(bool compilation);
 
   QSqlQuery Query(QSqlDatabase db) const;
 

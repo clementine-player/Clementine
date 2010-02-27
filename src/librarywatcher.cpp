@@ -54,6 +54,9 @@ void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
       #endif
     }
   }
+
+  qDebug() << "Updating compilations...";
+  backend_.get()->UpdateCompilationsAsync();
 }
 
 void LibraryWatcher::RemoveDirectories(const DirectoryList &directories) {
@@ -179,4 +182,7 @@ void LibraryWatcher::RescanPathsNow() {
   foreach (const QString& path, paths_needing_rescan_)
     ScanDirectory(path);
   paths_needing_rescan_.clear();
+
+  qDebug() << "Updating compilations...";
+  backend_.get()->UpdateCompilationsAsync();
 }

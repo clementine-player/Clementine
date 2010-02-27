@@ -40,6 +40,13 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value) {
   }
 }
 
+void LibraryQuery::AddCompilationRequirement(bool compilation) {
+  if (compilation)
+    where_clauses_ << "(compilation = 1 OR sampler = 1)";
+  else
+    where_clauses_ << "(compilation = 0 AND sampler = 0)";
+}
+
 QSqlQuery LibraryQuery::Query(QSqlDatabase db) const {
   QString sql = QString("SELECT %1 FROM songs").arg(column_spec_);
 

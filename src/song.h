@@ -32,6 +32,7 @@ struct SongData : public QSharedData {
   QString genre_;
   QString comment_;
   bool compilation_;
+  bool sampler_;
 
   int length_;
   int bitrate_;
@@ -80,7 +81,7 @@ class Song {
   int year() const { return d->year_; }
   QString genre() const { return d->genre_; }
   QString comment() const { return d->comment_; }
-  bool is_compilation() const { return d->compilation_; }
+  bool is_compilation() const { return d->compilation_ || d->sampler_; }
 
   int length() const { return d->length_; }
   int bitrate() const { return d->bitrate_; }
@@ -117,6 +118,7 @@ class Song {
   void set_genre(const QString& v) { d->genre_ = v; }
   void set_comment(const QString& v) { d->comment_ = v; }
   void set_compilation(bool v) { d->compilation_ = v; }
+  void set_sampler(bool v) { d->sampler_ = v; }
   void set_length(int v) { d->length_ = v; }
   void set_bitrate(int v) { d->bitrate_ = v; }
   void set_samplerate(int v) { d->samplerate_ = v; }

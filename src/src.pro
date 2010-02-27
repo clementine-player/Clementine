@@ -131,7 +131,8 @@ FORMS += mainwindow.ui \
 RESOURCES += ../data/data.qrc \
     translations.qrc
 OTHER_FILES += ../data/schema.sql \
-    ../data/mainwindow.css
+    ../data/mainwindow.css \
+    ../data/schema-1.sql
 RC_FILE += ../dist/windres.rc
 TRANSLATIONS = clementine_ru.ts \
     clementine_es.ts \

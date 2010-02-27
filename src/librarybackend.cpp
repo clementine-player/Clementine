@@ -12,6 +12,7 @@
 #include <QThread>
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
+const int LibraryBackend::kSchemaVersion = 1;
 
 LibraryBackend::LibraryBackend(QObject* parent)
   : QObject(parent)
@@ -61,12 +62,51 @@ QSqlDatabase LibraryBackend::Connect() {
     QString schema(QString::fromUtf8(schema_file.readAll()));
 
     QStringList commands(schema.split(";\n\n"));
+    db.transaction();
     foreach (const QString& command, commands) {
       QSqlQuery query(db.exec(command));
-      if (CheckErrors(query.lastError())) return db;
+      if (CheckErrors(query.lastError()))
+        qFatal("Unable to create music library database");
+    }
+    db.commit();
+  }
+
+  // Get the database's schema version
+  QSqlQuery q("SELECT version FROM schema_version", db);
+  int schema_version = 0;
+  if (q.next())
+    schema_version = q.value(0).toInt();
+
+  if (schema_version > kSchemaVersion) {
+    qWarning() << "The database schema (version" << schema_version << ") is newer than I was expecting";
+    return db;
+  }
+  if (schema_version < kSchemaVersion) {
+    // Update the schema
+    qDebug() << "Updating database schema from" << schema_version << "to" << kSchemaVersion;
+    for (int v=schema_version+1 ; v<= kSchemaVersion ; ++v) {
+      UpdateDatabaseSchema(v, db);
     }
   }
+
   return db;
+}
+
+void LibraryBackend::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
+  QFile schema_file(QString(":/schema-%1.sql").arg(version));
+  schema_file.open(QIODevice::ReadOnly);
+  QString schema(QString::fromUtf8(schema_file.readAll()));
+
+  qDebug() << "Updating database schema to version" << version;
+
+  QStringList commands(schema.split(";\n\n"));
+  db.transaction();
+  foreach (const QString& command, commands) {
+    QSqlQuery query(db.exec(command));
+    if (CheckErrors(query.lastError()))
+      qFatal("Unable to update music library database");
+  }
+  db.commit();
 }
 
 bool LibraryBackend::CheckErrors(const QSqlError& error) {
@@ -84,6 +124,10 @@ void LibraryBackend::LoadDirectoriesAsync() {
 
 void LibraryBackend::UpdateTotalSongCountAsync() {
   metaObject()->invokeMethod(this, "UpdateTotalSongCount", Qt::QueuedConnection);
+}
+
+void LibraryBackend::UpdateCompilationsAsync() {
+  metaObject()->invokeMethod(this, "UpdateCompilations", Qt::QueuedConnection);
 }
 
 void LibraryBackend::LoadDirectories() {
@@ -266,7 +310,7 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
 QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("DISTINCT artist");
-  query.AddWhere("compilation", 0);
+  query.AddCompilationRequirement(false);
 
   QSqlQuery q(query.Query(Connect()));
   q.exec();
@@ -282,7 +326,7 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
 QStringList LibraryBackend::GetAlbumsByArtist(const QueryOptions& opt, const QString& artist) {
   LibraryQuery query(opt);
   query.SetColumnSpec("DISTINCT album");
-  query.AddWhere("compilation", 0);
+  query.AddCompilationRequirement(false);
   query.AddWhere("artist", artist);
 
   QSqlQuery q(query.Query(Connect()));
@@ -299,7 +343,7 @@ QStringList LibraryBackend::GetAlbumsByArtist(const QueryOptions& opt, const QSt
 SongList LibraryBackend::GetSongs(const QueryOptions& opt, const QString& artist, const QString& album) {
   LibraryQuery query(opt);
   query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
-  query.AddWhere("compilation", 0);
+  query.AddCompilationRequirement(false);
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
 
@@ -335,7 +379,7 @@ Song LibraryBackend::GetSongById(int id) {
 bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("ROWID");
-  query.AddWhere("compilation", 1);
+  query.AddCompilationRequirement(true);
 
   QSqlQuery q(query.Query(Connect()));
   q.exec();
@@ -347,7 +391,7 @@ bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
 QStringList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("DISTINCT album");
-  query.AddWhere("compilation", 1);
+  query.AddCompilationRequirement(true);
 
   QSqlQuery q(query.Query(Connect()));
   q.exec();
@@ -363,7 +407,7 @@ QStringList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
 SongList LibraryBackend::GetCompilationSongs(const QueryOptions& opt, const QString& album) {
   LibraryQuery query(opt);
   query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
-  query.AddWhere("compilation", 1);
+  query.AddCompilationRequirement(true);
   query.AddWhere("album", album);
 
   QSqlQuery q(query.Query(Connect()));
@@ -377,6 +421,100 @@ SongList LibraryBackend::GetCompilationSongs(const QueryOptions& opt, const QStr
     ret << song;
   }
   return ret;
+}
+
+void LibraryBackend::UpdateCompilations() {
+  QSqlDatabase db(Connect());
+
+  // Look for albums that have songs by more than one artist in the same
+  // directory
+
+  QSqlQuery q("SELECT artist, album, filename, sampler FROM songs ORDER BY album", db);
+  q.exec();
+  if (CheckErrors(q.lastError())) return;
+
+  QMap<QString, CompilationInfo> compilation_info;
+  while (q.next()) {
+    QString artist = q.value(0).toString();
+    QString album = q.value(1).toString();
+    QString filename = q.value(2).toString();
+    bool sampler = q.value(3).toBool();
+
+    // Ignore songs that don't have an album field set
+    if (album.isEmpty())
+      continue;
+
+    // Find the directory the song is in
+    QDir dir(filename);
+    QString path = QDir::toNativeSeparators(dir.canonicalPath());
+    int last_separator = path.lastIndexOf(QDir::separator());
+
+    if (last_separator == -1)
+      continue;
+
+    path = path.left(last_separator);
+
+    CompilationInfo& info = compilation_info[album];
+    info.artists.insert(artist);
+    info.directories.insert(path);
+    if (sampler) info.has_samplers = true;
+    else         info.has_not_samplers = true;
+  }
+
+  // Now mark the songs that we think are in compilations
+  QSqlQuery update("UPDATE songs SET sampler = :sampler WHERE album = :album", db);
+  QSqlQuery find_songs("SELECT ROWID, " + QString(Song::kColumnSpec) + " FROM songs"
+                       " WHERE album = :album AND sampler = :sampler", db);
+
+  SongList updated_songs;
+
+  db.transaction();
+
+  QMap<QString, CompilationInfo>::const_iterator it = compilation_info.constBegin();
+  for ( ; it != compilation_info.constEnd() ; ++it) {
+    const CompilationInfo& info = it.value();
+    QString album(it.key());
+
+    // If there were more artists than there were directories for this album,
+    // then it's a compilation
+
+    if (info.artists.count() > info.directories.count()) {
+      if (info.has_not_samplers)
+        UpdateCompilations(find_songs, update, updated_songs, album, 1);
+    } else {
+      if (info.has_samplers)
+        UpdateCompilations(find_songs, update, updated_songs, album, 0);
+    }
+  }
+
+  db.commit();
+
+  if (!updated_songs.isEmpty()) {
+    emit SongsDeleted(updated_songs);
+    emit SongsDiscovered(updated_songs);
+  }
+}
+
+void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
+                                        SongList& updated_songs,
+                                        const QString& album, int sampler) {
+  // Get songs that were already in that album, so we can tell the model
+  // they've been updated
+  find_songs.bindValue(":album", album);
+  find_songs.bindValue(":sampler", int(!sampler));
+  find_songs.exec();
+  while (find_songs.next()) {
+    Song song;
+    song.InitFromQuery(find_songs);
+    song.set_sampler(true);
+    updated_songs << song;
+  }
+
+  // Mark this album
+  update.bindValue(":sampler", sampler);
+  update.bindValue(":album", album);
+  update.exec();
+  CheckErrors(update.lastError());
 }
 
 

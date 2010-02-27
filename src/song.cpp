@@ -26,13 +26,13 @@ const char* Song::kColumnSpec =
     "title, album, artist, albumartist, composer, "
     "track, disc, bpm, year, genre, comment, compilation, "
     "length, bitrate, samplerate, directory, filename, "
-    "mtime, ctime, filesize";
+    "mtime, ctime, filesize, sampler";
 
 const char* Song::kBindSpec =
     ":title, :album, :artist, :albumartist, :composer, "
     ":track, :disc, :bpm, :year, :genre, :comment, :compilation, "
     ":length, :bitrate, :samplerate, :directory_id, :filename, "
-    ":mtime, :ctime, :filesize";
+    ":mtime, :ctime, :filesize, :sampler";
 
 const char* Song::kUpdateSpec =
     "title = :title, album = :album, artist = :artist, "
@@ -41,7 +41,7 @@ const char* Song::kUpdateSpec =
     "comment = :comment, compilation = :compilation, length = :length, "
     "bitrate = :bitrate, samplerate = :samplerate, "
     "directory = :directory_id, filename = :filename, mtime = :mtime, "
-    "ctime = :ctime, filesize = :filesize";
+    "ctime = :ctime, filesize = :filesize, sampler = :sampler";
 
 SongData::SongData()
   : valid_(false),
@@ -51,6 +51,7 @@ SongData::SongData()
     bpm_(-1),
     year_(-1),
     compilation_(false),
+    sampler_(false),
     length_(-1),
     bitrate_(-1),
     samplerate_(-1),
@@ -207,6 +208,8 @@ void Song::InitFromQuery(const QSqlQuery& q) {
   d->ctime_ = toint(19);
   d->filesize_ = toint(20);
 
+  d->sampler_ = q.value(21).toBool();
+
   #undef tostr
   #undef toint
   #undef tofloat
@@ -262,6 +265,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":mtime", intval(d->mtime_));
   query->bindValue(":ctime", intval(d->ctime_));
   query->bindValue(":filesize", intval(d->filesize_));
+
+  query->bindValue(":sampler", d->sampler_ ? 1 : 0);
 
   #undef intval
 }

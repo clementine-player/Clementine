@@ -5,6 +5,7 @@
 #include <QSqlError>
 #include <QSqlDatabase>
 #include <QMutex>
+#include <QSet>
 
 #include "directory.h"
 #include "song.h"
@@ -41,12 +42,15 @@ class LibraryBackend : public QObject {
   void AddDirectory(const QString& path);
   void RemoveDirectory(const Directory& dir);
 
+  void UpdateCompilationsAsync();
+
  public slots:
   void LoadDirectories();
   void UpdateTotalSongCount();
   void AddOrUpdateSongs(const SongList& songs);
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
+  void UpdateCompilations();
 
  signals:
   void Error(const QString& message);
@@ -60,11 +64,28 @@ class LibraryBackend : public QObject {
   void TotalSongCountUpdated(int total);
 
  private:
+  struct CompilationInfo {
+    CompilationInfo() : has_samplers(false), has_not_samplers(false) {}
+
+    QSet<QString> artists;
+    QSet<QString> directories;
+
+    bool has_samplers;
+    bool has_not_samplers;
+  };
+
   QSqlDatabase Connect();
+  void UpdateDatabaseSchema(int version, QSqlDatabase& db);
   bool CheckErrors(const QSqlError& error);
+
+  void UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
+                          SongList& updated_songs,
+                          const QString& album, int sampler);
 
  private:
   static const char* kDatabaseName;
+  static const int kSchemaVersion;
+
   QString directory_;
   QMutex connect_mutex_;
 };
