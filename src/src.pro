@@ -179,9 +179,9 @@ win32|fedora-win32-cross:LIBS += -ltag \
 
 # OSD
 unix:!macx {
-    nolibnotify:DEFINES += NOLIBNOTIFY
     SOURCES += osd_x11.cpp
     !nolibnotify {
+        DEFINES += HAVE_LIBNOTIFY
         QMAKE_CXXFLAGS += $$system(pkg-config --cflags libnotify)
         LIBS += $$system(pkg-config --libs libnotify)
     }
