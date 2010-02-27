@@ -220,9 +220,11 @@ void Library::SongsDeleted(const SongList& songs) {
   foreach (const Song& song, songs) {
     LibraryItem* artist = NULL;
 
-    if (song.is_compilation() && compilation_artist_node_->lazy_loaded)
+    if (song.is_compilation() && compilation_artist_node_ &&
+        compilation_artist_node_->lazy_loaded)
       artist = compilation_artist_node_;
-    else if (artist_nodes_.contains(song.artist()) &&
+    else if (!song.is_compilation() &&
+             artist_nodes_.contains(song.artist()) &&
              artist_nodes_[song.artist()]->lazy_loaded)
       artist = artist_nodes_[song.artist()];
 
