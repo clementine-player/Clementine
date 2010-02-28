@@ -29,6 +29,7 @@ class AlbumCoverManager : public QDialog {
  protected:
   void showEvent(QShowEvent *);
   void closeEvent(QCloseEvent *);
+  bool event(QEvent *);
 
  private slots:
   void ArtistChanged(QListWidgetItem* current);
@@ -52,6 +53,8 @@ class AlbumCoverManager : public QDialog {
   void CancelRequests();
 
  private:
+  bool constructed_;
+
   Ui::CoverManager ui_;
   boost::shared_ptr<LibraryBackend> backend_;
 

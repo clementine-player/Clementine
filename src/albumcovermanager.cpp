@@ -10,11 +10,14 @@
 #include <QListWidget>
 #include <QCryptographicHash>
 #include <QDir>
+#include <QEvent>
+#include <QScrollBar>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
 AlbumCoverManager::AlbumCoverManager(QWidget *parent)
   : QDialog(parent),
+    constructed_(false),
     cover_loader_(new BackgroundThread<AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
     artist_icon_(":/artist.png"),
@@ -70,6 +73,7 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
   }
 
   cover_loader_->start();
+  constructed_ = true;
 }
 
 AlbumCoverManager::~AlbumCoverManager() {
@@ -236,4 +240,19 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
 
   if (cover_fetching_tasks_.isEmpty())
     ui_.fetch->setEnabled(true);
+}
+
+bool AlbumCoverManager::event(QEvent* e) {
+  if (constructed_) {
+    // I think KDE styles override these, and ScrollPerItem really confusing
+    // when you have huge items.
+    // We seem to have to reset them to sensible values each time the contents
+    // of ui_.albums changes.
+    ui_.albums->setVerticalScrollMode(QListWidget::ScrollPerPixel);
+    //ui_.albums->verticalScrollBar()->setPageStep(10);
+    ui_.albums->verticalScrollBar()->setSingleStep(20);
+  }
+
+  QDialog::event(e);
+  return false;
 }
