@@ -132,7 +132,7 @@ FORMS += mainwindow.ui \
     about.ui \
     addstreamdialog.ui \
     shortcutsdialog.ui \
-    covermanager.ui
+    albumcovermanager.ui
 RESOURCES += ../data/data.qrc \
     translations.qrc
 OTHER_FILES += ../data/schema.sql \
