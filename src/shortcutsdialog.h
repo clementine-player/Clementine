@@ -17,6 +17,7 @@ class ShortcutsDialog : public QDialog {
     void SaveShortcuts();
     void CancelEvent();
 
+
   private:
     Ui::ShortcutsDialog ui_;
     QSettings settings_;

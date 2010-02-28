@@ -8,11 +8,11 @@ ShortcutsDialog::ShortcutsDialog(QWidget* parent)
 
   // Load settings
   // Check if settings exist first, if not create them
-  // TODO: How do we store the button values? Numbers, strings, especially when it comes to combinations?
+  // TODO: QKeySequence::toString() to load/save values
 
   connect(ui_.button_defaults, SIGNAL(clicked()), SLOT(DefaultShortcuts()));
-  connect(ui_.button_save, SIGNAL(clicked()), SLOT(SaveShortcuts()));
-  connect(ui_.button_cancel, SIGNAL(clicked()), SLOT(CancelEvent()));
+  connect(ui_.button_box, SIGNAL(accepted()), SLOT(SaveShortcuts()));
+  connect(ui_.button_box, SIGNAL(rejected()), SLOT(CancelEvent()));
 }
 
 /**
@@ -21,15 +21,12 @@ ShortcutsDialog::ShortcutsDialog(QWidget* parent)
 void ShortcutsDialog::DefaultShortcuts() {
 }
 
-/**
-  * Save the shortcuts and close the window
-  */
 void ShortcutsDialog::SaveShortcuts() {
-  close();
+  accept();
 }
 
 /**
-  * Reset settings to original values taken from settings file and then close the window.
+  * Reset back to original values found in settings file and close
   */
 void ShortcutsDialog::CancelEvent() {
   close();
