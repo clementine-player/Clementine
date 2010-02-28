@@ -6,7 +6,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "ui_covermanager.h"
+#include "ui_albumcovermanager.h"
 #include "backgroundthread.h"
 #include "albumcoverloader.h"
 
