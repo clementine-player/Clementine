@@ -26,13 +26,13 @@ const char* Song::kColumnSpec =
     "title, album, artist, albumartist, composer, "
     "track, disc, bpm, year, genre, comment, compilation, "
     "length, bitrate, samplerate, directory, filename, "
-    "mtime, ctime, filesize, sampler";
+    "mtime, ctime, filesize, sampler, art_automatic, art_manual";
 
 const char* Song::kBindSpec =
     ":title, :album, :artist, :albumartist, :composer, "
     ":track, :disc, :bpm, :year, :genre, :comment, :compilation, "
     ":length, :bitrate, :samplerate, :directory_id, :filename, "
-    ":mtime, :ctime, :filesize, :sampler";
+    ":mtime, :ctime, :filesize, :sampler, :art_automatic, :art_manual";
 
 const char* Song::kUpdateSpec =
     "title = :title, album = :album, artist = :artist, "
@@ -41,7 +41,8 @@ const char* Song::kUpdateSpec =
     "comment = :comment, compilation = :compilation, length = :length, "
     "bitrate = :bitrate, samplerate = :samplerate, "
     "directory = :directory_id, filename = :filename, mtime = :mtime, "
-    "ctime = :ctime, filesize = :filesize, sampler = :sampler";
+    "ctime = :ctime, filesize = :filesize, sampler = :sampler, "
+    "art_automatic = :art_automatic, art_manual = :art_manual";
 
 SongData::SongData()
   : valid_(false),
@@ -210,6 +211,9 @@ void Song::InitFromQuery(const QSqlQuery& q) {
 
   d->sampler_ = q.value(21).toBool();
 
+  d->art_automatic_ = q.value(22).toString();
+  d->art_manual_ = q.value(23).toString();
+
   #undef tostr
   #undef toint
   #undef tofloat
@@ -243,6 +247,8 @@ void Song::InitFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
 void Song::BindToQuery(QSqlQuery *query) const {
   #define intval(x) (x == -1 ? QVariant() : x)
 
+  // Remember to bind these in the same order as kBindSpec
+
   query->bindValue(":title", d->title_);
   query->bindValue(":album", d->album_);
   query->bindValue(":artist", d->artist_);
@@ -267,6 +273,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":filesize", intval(d->filesize_));
 
   query->bindValue(":sampler", d->sampler_ ? 1 : 0);
+  query->bindValue(":art_automatic", d->art_automatic_);
+  query->bindValue(":art_manual", d->art_manual_);
 
   #undef intval
 }
@@ -325,7 +333,10 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->compilation_ == other.d->compilation_ &&
          d->length_ == other.d->length_ &&
          d->bitrate_ == other.d->bitrate_ &&
-         d->samplerate_ == other.d->samplerate_;
+         d->samplerate_ == other.d->samplerate_ &&
+         d->sampler_ == other.d->sampler_ &&
+         d->art_automatic_ == other.d->art_automatic_ &&
+         d->art_manual_ == other.d->art_manual_;
 }
 
 bool Song::Save() const {
@@ -355,4 +366,17 @@ bool Song::Save() const {
   #endif  // Q_OS_LINUX
 
   return ret;
+}
+
+QImage Song::GetBestImage() const {
+  if (!d->image_.isNull())
+    return d->image_;
+
+  if (!d->art_manual_.isEmpty())
+    return QImage(d->art_manual_);
+
+  if (!d->art_automatic_.isEmpty())
+    return QImage(d->art_automatic_);
+
+  return QImage();
 }

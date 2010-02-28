@@ -12,7 +12,7 @@
 #include <QThread>
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
-const int LibraryBackend::kSchemaVersion = 1;
+const int LibraryBackend::kSchemaVersion = 2;
 
 LibraryBackend::LibraryBackend(QObject* parent)
   : QObject(parent)
@@ -57,18 +57,7 @@ QSqlDatabase LibraryBackend::Connect() {
 
   if (db.tables().count() == 0) {
     // Set up initial schema
-    QFile schema_file(":/schema.sql");
-    schema_file.open(QIODevice::ReadOnly);
-    QString schema(QString::fromUtf8(schema_file.readAll()));
-
-    QStringList commands(schema.split(";\n\n"));
-    db.transaction();
-    foreach (const QString& command, commands) {
-      QSqlQuery query(db.exec(command));
-      if (CheckErrors(query.lastError()))
-        qFatal("Unable to create music library database");
-    }
-    db.commit();
+    UpdateDatabaseSchema(0, db);
   }
 
   // Get the database's schema version
@@ -93,12 +82,21 @@ QSqlDatabase LibraryBackend::Connect() {
 }
 
 void LibraryBackend::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
-  QFile schema_file(QString(":/schema-%1.sql").arg(version));
-  schema_file.open(QIODevice::ReadOnly);
+  QString filename;
+  if (version == 0)
+    filename = ":/schema.sql";
+  else
+    filename = QString(":/schema-%1.sql").arg(version);
+
+  // Open and read the database schema
+  QFile schema_file(filename);
+  if (!schema_file.open(QIODevice::ReadOnly))
+    qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
   QString schema(QString::fromUtf8(schema_file.readAll()));
 
-  qDebug() << "Updating database schema to version" << version;
+  qDebug() << "Applying database schema version" << version;
 
+  // Run each command
   QStringList commands(schema.split(";\n\n"));
   db.transaction();
   foreach (const QString& command, commands) {

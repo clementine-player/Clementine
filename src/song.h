@@ -44,6 +44,10 @@ struct SongData : public QSharedData {
   int ctime_;
   int filesize_;
 
+  // Filenames to album art for this song.
+  QString art_automatic_; // Guessed by LibraryWatcher
+  QString art_manual_;    // Set by the user - should take priority
+
   QImage image_;
 };
 
@@ -70,17 +74,17 @@ class Song {
   bool is_valid() const { return d->valid_; }
   int id() const { return d->id_; }
 
-  QString title() const { return d->title_; }
-  QString album() const { return d->album_; }
-  QString artist() const { return d->artist_; }
-  QString albumartist() const { return d->albumartist_; }
-  QString composer() const { return d->composer_; }
+  const QString& title() const { return d->title_; }
+  const QString& album() const { return d->album_; }
+  const QString& artist() const { return d->artist_; }
+  const QString& albumartist() const { return d->albumartist_; }
+  const QString& composer() const { return d->composer_; }
   int track() const { return d->track_; }
   int disc() const { return d->disc_; }
   float bpm() const { return d->bpm_; }
   int year() const { return d->year_; }
-  QString genre() const { return d->genre_; }
-  QString comment() const { return d->comment_; }
+  const QString& genre() const { return d->genre_; }
+  const QString& comment() const { return d->comment_; }
   bool is_compilation() const { return d->compilation_ || d->sampler_; }
 
   int length() const { return d->length_; }
@@ -88,10 +92,13 @@ class Song {
   int samplerate() const { return d->samplerate_; }
 
   int directory_id() const { return d->directory_id_; }
-  QString filename() const { return d->filename_; }
+  const QString& filename() const { return d->filename_; }
   uint mtime() const { return d->mtime_; }
   uint ctime() const { return d->ctime_; }
   int filesize() const { return d->filesize_; }
+
+  const QString& art_automatic() const { return d->art_automatic_; }
+  const QString& art_manual() const { return d->art_manual_; }
 
   const QImage& image() const { return d->image_; }
 
@@ -99,6 +106,12 @@ class Song {
   QString PrettyTitle() const;
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
+
+  // Loads and returns some album art for the song.  Tries, in this order:
+  //  1) An image set explicitly with set_image (eg. last.fm radio)
+  //  2) An image set by the user with set_art_manual
+  //  3) An image found by the library scanner
+  QImage GetBestImage() const;
 
   // Setters
   bool IsEditable() const { return d->valid_ && !d->filename_.isNull(); }
@@ -125,6 +138,8 @@ class Song {
   void set_mtime(int v) { d->mtime_ = v; }
   void set_ctime(int v) { d->ctime_ = v; }
   void set_filesize(int v) { d->filesize_ = v; }
+  void set_art_automatic(const QString& v) { d->art_automatic_ = v; }
+  void set_art_manual(const QString& v) { d->art_manual_ = v; }
   void set_image(const QImage& i) { d->image_ = i; }
 
   // Comparison functions

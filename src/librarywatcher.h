@@ -44,6 +44,10 @@ class LibraryWatcher : public QObject {
 
  private:
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
+  inline static QString ExtensionPart( const QString &fileName );
+  inline static QString DirectoryPart( const QString &fileName );
+  static QString PickBestImage(const QStringList& images);
+  static QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
 
  private:
   EngineBase* engine_;
@@ -61,5 +65,13 @@ class LibraryWatcher : public QObject {
   static const int kMaxWatches = 200;
   #endif
 };
+
+// Thanks Amarok
+inline QString LibraryWatcher::ExtensionPart( const QString &fileName ) {
+  return fileName.contains( '.' ) ? fileName.mid( fileName.lastIndexOf('.') + 1 ).toLower() : "";
+}
+inline QString LibraryWatcher::DirectoryPart( const QString &fileName ) {
+  return fileName.section( '/', 0, -2 );
+}
 
 #endif // LIBRARYWATCHER_H

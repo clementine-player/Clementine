@@ -82,18 +82,26 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
   qDebug() << "Scanning" << path;
   emit ScanStarted();
 
+  QStringList valid_images = QStringList() << "jpg" << "png" << "gif" << "jpeg";
+  QStringList valid_playlists = QStringList() << "m3u" << "pls";
+
+  // Map from canonical directory name to list of possible filenames for cover
+  // art
+  QMap<QString, QStringList> album_art;
+
   QStringList files_on_disk;
   QDirIterator it(dir.path,
                   QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                   QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
   while (it.hasNext()) {
     QString path(it.next());
+    QString ext(ExtensionPart(path));
+    QString dir(DirectoryPart(path));
 
-    // Don't bother if the engine can't decode it
-    if (!engine_->canDecode(QUrl::fromLocalFile(path)))
-      continue;
-
-    files_on_disk << path;
+    if (valid_images.contains(ext))
+      album_art[dir] << path;
+    else if (engine_->canDecode(QUrl::fromLocalFile(path)))
+      files_on_disk << path;
   }
 
   // Ask the database for a list of files in this directory
@@ -107,14 +115,23 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
     if (FindSongByPath(songs_in_db, file, &matching_song)) {
       // The song is in the database and still on disk.
       // Check the mtime to see if it's been changed since it was added.
+      bool changed = matching_song.mtime() != QFileInfo(file).lastModified().toTime_t();
 
-      if (matching_song.mtime() != QFileInfo(file).lastModified().toTime_t()) {
+      // Also want to look to see whether the album art has changed
+      QString image = ImageForSong(file, album_art);
+      if ((matching_song.art_automatic().isEmpty() && !image.isEmpty()) ||
+          (!matching_song.art_automatic().isEmpty() && !QFile::exists(matching_song.art_automatic()))) {
+        changed = true;
+      }
+
+      if (changed) {
         qDebug() << file << "changed";
 
         // It's changed - reread the metadata from the file
         Song song_on_disk;
         song_on_disk.InitFromFile(file, dir.id);
         song_on_disk.set_id(matching_song.id());
+        song_on_disk.set_art_automatic(image);
 
         if (!matching_song.IsMetadataEqual(song_on_disk)) {
           qDebug() << file << "metadata changed";
@@ -133,6 +150,9 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
       if (!song.is_valid())
         continue;
       qDebug() << file << "created";
+
+      // Choose an image for the song
+      song.set_art_automatic(ImageForSong(file, album_art));
 
       new_songs << song;
     }
@@ -185,4 +205,41 @@ void LibraryWatcher::RescanPathsNow() {
 
   qDebug() << "Updating compilations...";
   backend_.get()->UpdateCompilationsAsync();
+}
+
+QString LibraryWatcher::PickBestImage(const QStringList& images) {
+  // This is used when there is more than one image in a directory.
+  // Just pick the biggest image.
+
+  int biggest_size = 0;
+  QString biggest_path;
+
+  foreach (const QString& path, images) {
+    QImage image(path);
+    if (image.isNull())
+      continue;
+
+    int size = image.width() * image.height();
+    if (size > biggest_size) {
+      biggest_size = size;
+      biggest_path = path;
+    }
+  }
+
+  return biggest_path;
+}
+
+QString LibraryWatcher::ImageForSong(const QString& path, QMap<QString, QStringList>& album_art) {
+  QString dir(DirectoryPart(path));
+
+  if (album_art.contains(dir)) {
+    if (album_art[dir].count() == 1)
+      return album_art[dir][0];
+    else {
+      QString best_image = PickBestImage(album_art[dir]);
+      album_art[dir] = QStringList() << best_image;
+      return best_image;
+    }
+  }
+  return QString();
 }

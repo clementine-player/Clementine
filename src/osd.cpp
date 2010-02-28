@@ -44,7 +44,7 @@ void OSD::SongChanged(const Song &song) {
   if (song.track() > 0)
     message_parts << QString("track %1").arg(song.track());
 
-  ShowMessage(summary, message_parts.join(", "), "notification-audio-play", song.image());
+  ShowMessage(summary, message_parts.join(", "), "notification-audio-play", song.GetBestImage());
 }
 
 void OSD::Paused() {
