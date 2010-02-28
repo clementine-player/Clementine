@@ -57,8 +57,8 @@ SOURCES += main.cpp \
     savedradio.cpp \
     stylesheetloader.cpp \
     shortcutsdialog.cpp \
-    covermanager.cpp \
-    coverloader.cpp
+    albumcovermanager.cpp \
+    albumcoverloader.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -116,8 +116,8 @@ HEADERS += mainwindow.h \
     savedradio.h \
     stylesheetloader.h \
     shortcutsdialog.h \
-    covermanager.h \
-    coverloader.h
+    albumcovermanager.h \
+    albumcoverloader.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
