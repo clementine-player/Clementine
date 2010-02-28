@@ -378,5 +378,5 @@ QImage Song::GetBestImage() const {
   if (!d->art_automatic_.isEmpty())
     return QImage(d->art_automatic_);
 
-  return QImage();
+  return QImage(":/nocover.png");
 }

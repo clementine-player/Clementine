@@ -66,7 +66,8 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QImage& image) {
 #ifdef HAVE_LIBNOTIFY
-  QImage happy_gdk_image = image.convertToFormat(QImage::Format_RGB888).scaledToHeight(100);
+  QImage happy_gdk_image = image.scaledToHeight(100, Qt::SmoothTransformation)
+                           .convertToFormat(QImage::Format_RGB888);
   pixbuf_ = gdk_pixbuf_new_from_data(
       happy_gdk_image.bits(),
       GDK_COLORSPACE_RGB,
