@@ -309,7 +309,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="library_filter"/>
+        <widget class="LineEdit" name="library_filter">
+         <property name="hint" stdset="0">
+          <string>Enter search terms here</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QToolButton" name="library_options">
@@ -350,6 +354,9 @@
        <property name="allColumnsShowFocus">
         <bool>true</bool>
        </property>
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
        <attribute name="headerVisible">
         <bool>false</bool>
        </attribute>
@@ -434,7 +441,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -478,8 +485,15 @@
     </property>
     <addaction name="action_about"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="action_cover_manager"/>
+   </widget>
    <addaction name="menuMusic"/>
    <addaction name="menuPlaylist"/>
+   <addaction name="menuTools"/>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -706,9 +720,23 @@
     <string>Configure &amp;Global Shortcuts...</string>
    </property>
   </action>
+  <action name="action_cover_manager">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/download.png</normaloff>:/download.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cover Manager</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+  <customwidget>
+   <class>LineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>lineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>BlockAnalyzer</class>
    <extends>QWidget</extends>

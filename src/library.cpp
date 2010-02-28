@@ -45,6 +45,8 @@ void Library::BackendInitialised() {
 
   dir_model_->SetBackend(backend_->Worker());
 
+  emit BackendReady(backend_->Worker());
+
   if (--waiting_for_threads_ == 0)
     Initialise();
 }
@@ -339,17 +341,17 @@ void Library::LazyPopulate(LibraryItem* item) {
       break;
 
     case LibraryItem::Type_CompilationAlbum:
-      foreach (const Song& song, backend_->Worker()->GetCompilationSongs(query_options_, item->key))
+      foreach (const Song& song, backend_->Worker()->GetCompilationSongs(item->key, query_options_))
         CreateSongNode(false, song, item);
       break;
 
     case LibraryItem::Type_Artist:
-      foreach (const QString& album, backend_->Worker()->GetAlbumsByArtist(query_options_, item->key))
+      foreach (const QString& album, backend_->Worker()->GetAlbumsByArtist(item->key, query_options_))
         CreateAlbumNode(false, album, item, false);
       break;
 
     case LibraryItem::Type_Album:
-      foreach (const Song& song, backend_->Worker()->GetSongs(query_options_, item->parent->key, item->key))
+      foreach (const Song& song, backend_->Worker()->GetSongs(item->parent->key, item->key, query_options_))
         CreateSongNode(false, song, item);
       break;
 

@@ -18,6 +18,7 @@
 #include "about.h"
 #include "addstreamdialog.h"
 #include "stylesheetloader.h"
+#include "albumcovermanager.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -54,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     settings_dialog_(new SettingsDialog(this)),
     add_stream_dialog_(new AddStreamDialog(this)),
     shortcuts_dialog_(new ShortcutsDialog(this)),
+    cover_manager_(new AlbumCoverManager(this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))
@@ -114,6 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
   connect(ui_.action_hide_tray_icon, SIGNAL(triggered()), SLOT(HideShowTrayIcon()));
   connect(ui_.action_global_shortcuts, SIGNAL(triggered()), shortcuts_dialog_, SLOT(show()));
+  connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_, SLOT(show()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -165,6 +168,8 @@ MainWindow::MainWindow(QWidget *parent)
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
+  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackend>)),
+          cover_manager_, SLOT(SetBackend(boost::shared_ptr<LibraryBackend>)));
 
   // Age filters
   QActionGroup* filter_age_group = new QActionGroup(this);

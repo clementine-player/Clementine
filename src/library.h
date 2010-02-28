@@ -50,6 +50,8 @@ class Library : public SimpleTreeModel<LibraryItem> {
   void ScanStarted();
   void ScanFinished();
 
+  void BackendReady(boost::shared_ptr<LibraryBackend> backend);
+
  public slots:
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);

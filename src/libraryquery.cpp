@@ -53,6 +53,9 @@ QSqlQuery LibraryQuery::Query(QSqlDatabase db) const {
   if (!where_clauses_.isEmpty())
     sql += " WHERE " + where_clauses_.join(" AND ");
 
+  if (!order_by_.isEmpty())
+    sql += " ORDER BY " + order_by_;
+
   QSqlQuery q(sql, db);
 
   // Bind values

@@ -56,7 +56,9 @@ SOURCES += main.cpp \
     addstreamdialog.cpp \
     savedradio.cpp \
     stylesheetloader.cpp \
-    shortcutsdialog.cpp
+    shortcutsdialog.cpp \
+    covermanager.cpp \
+    coverloader.cpp
 HEADERS += mainwindow.h \
     player.h \
     library.h \
@@ -113,7 +115,9 @@ HEADERS += mainwindow.h \
     addstreamdialog.h \
     savedradio.h \
     stylesheetloader.h \
-    shortcutsdialog.h
+    shortcutsdialog.h \
+    covermanager.h \
+    coverloader.h
 FORMS += mainwindow.ui \
     libraryconfig.ui \
     fileview.ui \
@@ -127,7 +131,8 @@ FORMS += mainwindow.ui \
     lastfmconfigdialog.ui \
     about.ui \
     addstreamdialog.ui \
-    shortcutsdialog.ui
+    shortcutsdialog.ui \
+    covermanager.ui
 RESOURCES += ../data/data.qrc \
     translations.qrc
 OTHER_FILES += ../data/schema.sql \

@@ -9,14 +9,19 @@
 
 #include "directory.h"
 #include "song.h"
-
-struct QueryOptions;
+#include "libraryquery.h"
 
 class LibraryBackend : public QObject {
   Q_OBJECT
 
  public:
   LibraryBackend(QObject* parent = 0);
+
+  struct AlbumArtInfo {
+    QString album_name;
+    QString art_automatic;
+    QString art_manual;
+  };
 
   // This actually refers to the location of the sqlite database
   static QString DefaultDirectory();
@@ -29,13 +34,16 @@ class LibraryBackend : public QObject {
 
   SongList FindSongsInDirectory(int id);
 
-  QStringList GetAllArtists(const QueryOptions& opt);
-  QStringList GetAlbumsByArtist(const QueryOptions& opt, const QString& artist);
-  SongList GetSongs(const QueryOptions& opt, const QString& artist, const QString& album);
+  QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
+  QStringList GetAllAlbums(const QueryOptions& opt = QueryOptions());
+  QStringList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions());
+  SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
 
-  bool HasCompilations(const QueryOptions& opt);
-  QStringList GetCompilationAlbums(const QueryOptions& opt);
-  SongList GetCompilationSongs(const QueryOptions& opt, const QString& album);
+  bool HasCompilations(const QueryOptions& opt = QueryOptions());
+  QStringList GetCompilationAlbums(const QueryOptions& opt = QueryOptions());
+  SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions());
+
+  QList<AlbumArtInfo> GetAlbumArtInfo(const QString& artist = QString(), const QueryOptions& opt = QueryOptions());
 
   Song GetSongById(int id);
 

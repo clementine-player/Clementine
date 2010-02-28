@@ -52,6 +52,8 @@ set(CLEMENTINE-SOURCES
     savedradio.cpp
     stylesheetloader.cpp
     shortcutsdialog.cpp
+    albumcovermanager.cpp
+    albumcoverloader.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -96,6 +98,8 @@ set(CLEMENTINE-MOC-HEADERS
     addstreamdialog.h
     savedradio.h
     shortcutsdialog.h
+    albumcovermanager.h
+    albumcoverloader.h
 )
 
 # UI files
@@ -114,6 +118,7 @@ set(CLEMENTINE-UI
     about.ui
     addstreamdialog.ui
     shortcutsdialog.ui
+    albumcovermanager.ui
 )
 
 # Resource files

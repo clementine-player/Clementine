@@ -321,11 +321,17 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
   return ret;
 }
 
-QStringList LibraryBackend::GetAlbumsByArtist(const QueryOptions& opt, const QString& artist) {
+QStringList LibraryBackend::GetAllAlbums(const QueryOptions &opt) {
+  return GetAlbumsByArtist(QString(), opt);
+}
+
+QStringList LibraryBackend::GetAlbumsByArtist(const QString& artist, const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("DISTINCT album");
   query.AddCompilationRequirement(false);
-  query.AddWhere("artist", artist);
+
+  if (!artist.isNull())
+    query.AddWhere("artist", artist);
 
   QSqlQuery q(query.Query(Connect()));
   q.exec();
@@ -338,7 +344,7 @@ QStringList LibraryBackend::GetAlbumsByArtist(const QueryOptions& opt, const QSt
   return ret;
 }
 
-SongList LibraryBackend::GetSongs(const QueryOptions& opt, const QString& artist, const QString& album) {
+SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
   query.AddCompilationRequirement(false);
@@ -402,7 +408,7 @@ QStringList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
   return ret;
 }
 
-SongList LibraryBackend::GetCompilationSongs(const QueryOptions& opt, const QString& album) {
+SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
   query.AddCompilationRequirement(true);
@@ -515,4 +521,33 @@ void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update
   CheckErrors(update.lastError());
 }
 
+QList<LibraryBackend::AlbumArtInfo>
+    LibraryBackend::GetAlbumArtInfo(const QString& artist,
+                                    const QueryOptions& opt) {
+  QList<AlbumArtInfo> ret;
+  LibraryQuery query(opt);
+  query.SetColumnSpec("album, art_automatic, art_manual");
+  query.SetOrderBy("album");
 
+  if (!artist.isNull())
+    query.AddWhere("artist", artist);
+
+  QSqlQuery q(query.Query(Connect()));
+  q.exec();
+  if (CheckErrors(q.lastError())) return ret;
+
+  QString last_album;
+  while (q.next()) {
+    if (q.value(0).toString() == last_album)
+      continue;
+
+    AlbumArtInfo info;
+    info.album_name = q.value(0).toString();
+    info.art_automatic = q.value(1).toString();
+    info.art_manual = q.value(2).toString();
+    ret << info;
+
+    last_album = info.album_name;
+  }
+  return ret;
+}
