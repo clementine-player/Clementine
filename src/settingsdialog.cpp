@@ -69,6 +69,7 @@ void SettingsDialog::accept() {
   s.setValue("Behaviour", int(osd_behaviour));
   s.setValue("Timeout", ui_.notifications_duration->value() * 1000);
   s.setValue("ShowOnVolumeChange", ui_.notifications_volume->isChecked());
+  s.setValue("ShowArt", ui_.notifications_art->isChecked());
   s.endGroup();
 
   QDialog::accept();
@@ -114,6 +115,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   }
   ui_.notifications_duration->setValue(s.value("Timeout", 5000).toInt() / 1000);
   ui_.notifications_volume->setChecked(s.value("ShowOnVolumeChange", false).toBool());
+  ui_.notifications_art->setChecked(s.value("ShowArt", true).toBool());
   s.endGroup();
 }
 

@@ -11,7 +11,8 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
     tray_icon_(tray_icon),
     timeout_(5000),
     behaviour_(Native),
-    show_on_volume_change_(false)
+    show_on_volume_change_(false),
+    show_art_(true)
 {
   ReloadSettings();
   Init();
@@ -23,6 +24,7 @@ void OSD::ReloadSettings() {
   behaviour_ = OSD::Behaviour(s.value("Behaviour", Native).toInt());
   timeout_ = s.value("Timeout", 5000).toInt();
   show_on_volume_change_ = s.value("ShowOnVolumeChange", false).toBool();
+  show_art_ = s.value("ShowArt", true).toBool();
 
   if (!SupportsNativeNotifications() && behaviour_ == Native)
     behaviour_ = TrayPopup;
@@ -44,7 +46,8 @@ void OSD::SongChanged(const Song &song) {
   if (song.track() > 0)
     message_parts << QString("track %1").arg(song.track());
 
-  ShowMessage(summary, message_parts.join(", "), "notification-audio-play", song.GetBestImage());
+  ShowMessage(summary, message_parts.join(", "), "notification-audio-play",
+              show_art_ ? song.GetBestImage() : QImage());
 }
 
 void OSD::Paused() {
