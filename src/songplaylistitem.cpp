@@ -15,6 +15,12 @@ SongPlaylistItem::SongPlaylistItem(const Song& song)
 void SongPlaylistItem::Save(QSettings& settings) const {
   settings.setValue("filename", song_.filename());
   settings.setValue("library_directory", song_.directory_id());
+
+  if (!song_.art_automatic().isEmpty())
+    settings.setValue("art_automatic", song_.art_automatic());
+
+  if (!song_.art_manual().isEmpty())
+    settings.setValue("art_manual", song_.art_manual());
 }
 
 void SongPlaylistItem::Restore(const QSettings& settings) {
@@ -22,6 +28,8 @@ void SongPlaylistItem::Restore(const QSettings& settings) {
   int directory_id(settings.value("library_directory", -1).toInt());
 
   song_.InitFromFile(filename, directory_id);
+  song_.set_art_automatic(settings.value("art_automatic").toString());
+  song_.set_art_manual(settings.value("art_manual").toString());
 }
 
 QUrl SongPlaylistItem::Url() {
