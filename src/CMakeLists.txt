@@ -152,6 +152,7 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qxt")
 
 set(EXECUTABLE_OUTPUT_PATH ..)
 add_executable(clementine
+   MACOSX_BUNDLE
    ${CLEMENTINE-SOURCES}
    ${CLEMENTINE-SOURCES-MOC}
    ${CLEMENTINE-SOURCES-UI}
@@ -166,6 +167,11 @@ target_link_libraries(clementine
     ${TAGLIB_LIBRARIES}
     lastfm
 )
+if (APPLE)
+  target_link_libraries(clementine
+      ${GROWL}
+  )
+endif (APPLE)
 add_dependencies(clementine qtsingleapplication qxt)
 
 set_property(TARGET clementine
@@ -173,5 +179,19 @@ set_property(TARGET clementine
     "-Werror=non-virtual-dtor -Woverloaded-virtual -Wall"
 )
 
+set_target_properties(clementine PROPERTIES
+    MACOSX_BUNDLE_INFO_STRING "Clementine 0.1"
+    MACOSX_BUNDLE_ICON_FILE "clementine"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
+)
+
+add_custom_target(bundle
+    mkdir -p Frameworks/
+    COMMAND mkdir -p PlugIns/xine
+    COMMAND mkdir -p Resources/
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../clementine.app/Contents/
+)
+add_dependencies(bundle clementine)
+
 install(TARGETS clementine
-  RUNTIME DESTINATION bin)
+  BUNDLE DESTINATION bin)
