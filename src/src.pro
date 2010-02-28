@@ -137,7 +137,8 @@ OTHER_FILES += ../data/schema.sql \
 RC_FILE += ../dist/windres.rc
 TRANSLATIONS = clementine_ru.ts \
     clementine_es.ts \
-    clementine_el.ts
+    clementine_el.ts \
+    clementine_sk.ts
 
 # Xine on unix, phonon on windows
 win32|fedora-win32-cross { 
