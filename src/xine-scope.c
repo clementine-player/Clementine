@@ -132,7 +132,7 @@ scope_dispose( post_plugin_t *this )
 xine_post_t*
 scope_plugin_new( xine_t *xine, xine_audio_port_t *audio_target )
 {
-    scope_plugin_t *scope_plugin = xine_xmalloc( sizeof(scope_plugin_t) );
+    scope_plugin_t *scope_plugin = malloc( sizeof(scope_plugin_t) );
     post_plugin_t  *post_plugin  = (post_plugin_t*)scope_plugin;
 
     {
@@ -161,7 +161,7 @@ scope_plugin_new( xine_t *xine, xine_audio_port_t *audio_target )
     post_plugin->xine = xine;
 
     /* scope_plugin_t init */
-    scope_plugin->list = xine_xmalloc( sizeof(MyNode) );
+    scope_plugin->list = malloc( sizeof(MyNode) );
     scope_plugin->list->next = scope_plugin->list;
 
     return &post_plugin->xine_post;

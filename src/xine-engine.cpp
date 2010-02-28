@@ -901,11 +901,12 @@ XineEngine::XineEventListener( void *p, const xine_event_t* xineEvent )
 
     }   break;
 
-    case XINE_EVENT_MRL_REFERENCE: {
+    case XINE_EVENT_MRL_REFERENCE_EXT: {
       /// xine has read the stream and found it actually links to something else
       /// so we need to play that instead
 
-      QString message = QString::fromUtf8( static_cast<xine_mrl_reference_data_t*>(xineEvent->data)->mrl );
+      QString message = QString::fromUtf8(
+          static_cast<xine_mrl_reference_data_ext_t*>(xineEvent->data)->mrl);
       XineEvent *e = new XineEvent( XineEvent::Redirecting );
       e->setData( new QString( message ) );
 
