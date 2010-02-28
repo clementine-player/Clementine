@@ -25,6 +25,9 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
     : SimpleTreeItem<LibraryItem>(type, key, parent) {}
 
   Song song;
+
+  // Maybe stores album cover art
+  QPixmap cover_art;
 };
 
 #endif // LIBRARYITEM_H

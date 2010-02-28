@@ -17,7 +17,8 @@ Library::Library(EngineBase* engine, QObject* parent)
     watcher_(new BackgroundThread<LibraryWatcher>(this)),
     dir_model_(new LibraryDirectoryModel(this)),
     artist_icon_(":artist.png"),
-    album_icon_(":album.png")
+    album_icon_(":album.png"),
+    no_cover_icon_(":nocover.png")
 {
   root_->lazy_loaded = true;
 
@@ -106,7 +107,8 @@ void Library::SongsDiscovered(const SongList& songs) {
     if (artist->lazy_loaded) {
       album = artist->ChildByKey(song.album());
       if (album == NULL)
-        album = CreateAlbumNode(true, song.album(), artist, song.is_compilation());
+        album = CreateAlbumNode(true, song.album(), artist, song.is_compilation(),
+                                song.art_automatic(), song.art_manual());
 
       if (album->lazy_loaded)
         CreateSongNode(true, song, album);
@@ -170,7 +172,10 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
   return ret;
 }
 
-LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name, LibraryItem* parent, bool compilation) {
+LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name,
+                                      LibraryItem* parent, bool compilation,
+                                      const QString& art_automatic,
+                                      const QString& art_manual) {
   if (signal)
     beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
@@ -181,6 +186,12 @@ LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name, LibraryI
 
   ret->display_text = PrettyAlbum(name);
   ret->sort_text = SortTextForAlbum(name);
+
+  // TODO: These should be async
+  /*if (!art_manual.isNull())
+    ret->cover_art.load(art_manual);
+  if (!art_automatic.isNull() && ret->cover_art.isNull())
+    ret->cover_art.load(art_automatic);*/
 
   if (signal)
     endInsertRows();
@@ -306,8 +317,15 @@ QVariant Library::data(const LibraryItem* item, int role) const {
     case Qt::DecorationRole:
       switch (item->type) {
         case LibraryItem::Type_Album:
-        case LibraryItem::Type_CompilationAlbum:
+        case LibraryItem::Type_CompilationAlbum: {
+          // TODO
+          /*if (item->cover_art.isNull())
+            return no_cover_icon_;
+          else
+            return QIcon(item->cover_art);*/
+
           return album_icon_;
+        }
         case LibraryItem::Type_Artist:
         case LibraryItem::Type_CompilationArtist:
           return artist_icon_;
@@ -336,8 +354,9 @@ void Library::LazyPopulate(LibraryItem* item) {
 
   switch (item->type) {
     case LibraryItem::Type_CompilationArtist:
-      foreach (const QString& album, backend_->Worker()->GetCompilationAlbums(query_options_))
-        CreateAlbumNode(false, album, item, true);
+      foreach (const LibraryBackend::Album& album,
+               backend_->Worker()->GetCompilationAlbums(query_options_))
+        CreateAlbumNode(false, album.album_name, item, true, album.art_automatic, album.art_manual);
       break;
 
     case LibraryItem::Type_CompilationAlbum:
@@ -346,8 +365,9 @@ void Library::LazyPopulate(LibraryItem* item) {
       break;
 
     case LibraryItem::Type_Artist:
-      foreach (const QString& album, backend_->Worker()->GetAlbumsByArtist(item->key, query_options_))
-        CreateAlbumNode(false, album, item, false);
+      foreach (const LibraryBackend::Album& album,
+               backend_->Worker()->GetAlbumsByArtist(item->key, query_options_))
+        CreateAlbumNode(false, album.album_name, item, false, album.art_automatic, album.art_manual);
       break;
 
     case LibraryItem::Type_Album:

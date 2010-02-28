@@ -145,7 +145,8 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
   ui_.albums->clear();
   CancelRequests();
 
-  foreach (const LibraryBackend::AlbumArtInfo& info, backend_->GetAlbumArtInfo(artist)) {
+  foreach (const LibraryBackend::Album& info,
+           backend_->GetAlbumsByArtist(artist)) {
     QListWidgetItem* item = new QListWidgetItem(no_cover_icon_, info.album_name, ui_.albums);
     item->setData(Role_ArtistName, info.artist);
     item->setData(Role_AlbumName, info.album_name);

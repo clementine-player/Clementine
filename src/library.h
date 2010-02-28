@@ -74,7 +74,10 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
   LibraryItem* CreateCompilationArtistNode(bool signal);
   LibraryItem* CreateArtistNode(bool signal, const QString& name);
-  LibraryItem* CreateAlbumNode(bool signal, const QString& name, LibraryItem* parent, bool compilation);
+  LibraryItem* CreateAlbumNode(bool signal, const QString& name,
+                               LibraryItem* parent, bool compilation,
+                               const QString& art_automatic,
+                               const QString& art_manual);
   LibraryItem* CreateSongNode(bool signal, const Song& song, LibraryItem* parent);
 
   QString PrettyArtist(QString artist) const;
@@ -104,6 +107,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
   QIcon artist_icon_;
   QIcon album_icon_;
+  QIcon no_cover_icon_;
 };
 
 #endif // LIBRARY_H

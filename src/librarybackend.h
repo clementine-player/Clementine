@@ -17,12 +17,14 @@ class LibraryBackend : public QObject {
  public:
   LibraryBackend(QObject* parent = 0);
 
-  struct AlbumArtInfo {
+  struct Album {
     QString artist;
     QString album_name;
+
     QString art_automatic;
     QString art_manual;
   };
+  typedef QList<Album> AlbumList;
 
   // This actually refers to the location of the sqlite database
   static QString DefaultDirectory();
@@ -36,16 +38,17 @@ class LibraryBackend : public QObject {
   SongList FindSongsInDirectory(int id);
 
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
-  QStringList GetAllAlbums(const QueryOptions& opt = QueryOptions());
-  QStringList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
 
   bool HasCompilations(const QueryOptions& opt = QueryOptions());
-  QStringList GetCompilationAlbums(const QueryOptions& opt = QueryOptions());
   SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions());
 
-  QList<AlbumArtInfo> GetAlbumArtInfo(const QString& artist = QString(), const QueryOptions& opt = QueryOptions());
+  AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions());
+  AlbumList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions());
+  AlbumList GetCompilationAlbums(const QueryOptions& opt = QueryOptions());
+
   void UpdateManualAlbumArtAsync(const QString& artist, const QString& album, const QString& art);
+  Album GetAlbumArt(const QString& artist, const QString& album);
 
   Song GetSongById(int id);
 
@@ -94,6 +97,8 @@ class LibraryBackend : public QObject {
   void UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
                           SongList& updated_songs,
                           const QString& album, int sampler);
+  AlbumList GetAlbums(const QString& artist, bool compilation = false,
+                      const QueryOptions& opt = QueryOptions());
 
  private:
   static const char* kDatabaseName;

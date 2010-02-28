@@ -321,27 +321,13 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
   return ret;
 }
 
-QStringList LibraryBackend::GetAllAlbums(const QueryOptions &opt) {
-  return GetAlbumsByArtist(QString(), opt);
+LibraryBackend::AlbumList LibraryBackend::GetAllAlbums(const QueryOptions &opt) {
+  return GetAlbums(QString(), false, opt);
 }
 
-QStringList LibraryBackend::GetAlbumsByArtist(const QString& artist, const QueryOptions& opt) {
-  LibraryQuery query(opt);
-  query.SetColumnSpec("DISTINCT album");
-  query.AddCompilationRequirement(false);
-
-  if (!artist.isNull())
-    query.AddWhere("artist", artist);
-
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return QStringList();
-
-  QStringList ret;
-  while (q.next()) {
-    ret << q.value(0).toString();
-  }
-  return ret;
+LibraryBackend::AlbumList LibraryBackend::GetAlbumsByArtist(const QString& artist,
+                                                            const QueryOptions& opt) {
+  return GetAlbums(artist, false, opt);
 }
 
 SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, const QueryOptions& opt) {
@@ -392,20 +378,8 @@ bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
   return q.next();
 }
 
-QStringList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
-  LibraryQuery query(opt);
-  query.SetColumnSpec("DISTINCT album");
-  query.AddCompilationRequirement(true);
-
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return QStringList();
-
-  QStringList ret;
-  while (q.next()) {
-    ret << q.value(0).toString();
-  }
-  return ret;
+LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
+  return GetAlbums(QString(), true, opt);
 }
 
 SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOptions& opt) {
@@ -521,16 +495,21 @@ void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update
   CheckErrors(update.lastError());
 }
 
-QList<LibraryBackend::AlbumArtInfo>
-    LibraryBackend::GetAlbumArtInfo(const QString& artist,
-                                    const QueryOptions& opt) {
-  QList<AlbumArtInfo> ret;
+LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
+                                                    bool compilation,
+                                                    const QueryOptions& opt) {
+  AlbumList ret;
+
   LibraryQuery query(opt);
   query.SetColumnSpec("album, artist, compilation, sampler, art_automatic, art_manual");
   query.SetOrderBy("album");
 
-  if (!artist.isNull())
+  if (compilation) {
+    query.AddCompilationRequirement(true);
+  } else if (!artist.isNull()) {
+    query.AddCompilationRequirement(false);
     query.AddWhere("artist", artist);
+  }
 
   QSqlQuery q(query.Query(Connect()));
   q.exec();
@@ -543,7 +522,7 @@ QList<LibraryBackend::AlbumArtInfo>
 
     bool compilation = q.value(2).toBool() | q.value(3).toBool();
 
-    AlbumArtInfo info;
+    Album info;
     info.artist = compilation ? QString() : q.value(1).toString();
     info.album_name = q.value(0).toString();
     info.art_automatic = q.value(4).toString();
@@ -552,6 +531,28 @@ QList<LibraryBackend::AlbumArtInfo>
 
     last_album = info.album_name;
   }
+  return ret;
+}
+
+LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const QString& album) {
+  Album ret;
+  ret.album_name = album;
+  ret.artist = artist;
+
+  LibraryQuery query = LibraryQuery(QueryOptions());
+  query.SetColumnSpec("art_automatic, art_manual");
+  query.AddWhere("artist", artist);
+  query.AddWhere("album", album);
+
+  QSqlQuery q(query.Query(Connect()));
+  q.exec();
+  if (CheckErrors(q.lastError())) return ret;
+
+  if (q.next()) {
+    ret.art_automatic = q.value(0).toString();
+    ret.art_manual = q.value(1).toString();
+  }
+
   return ret;
 }
 
