@@ -1,12 +1,19 @@
 #include "albumcoverloader.h"
 
 #include <QPainter>
+#include <QDir>
+#include <QCoreApplication>
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     height_(120),
     next_id_(0)
 {
+}
+
+QString AlbumCoverLoader::ImageCacheDir() {
+  return QString("%1/.config/%2/albumcovers/")
+      .arg(QDir::homePath(), QCoreApplication::organizationName());
 }
 
 void AlbumCoverLoader::Clear() {

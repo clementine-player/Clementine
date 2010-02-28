@@ -1,4 +1,5 @@
 #include "albumcovermanager.h"
+#include "albumcoverfetcher.h"
 #include "librarybackend.h"
 #include "libraryquery.h"
 
@@ -6,12 +7,16 @@
 #include <QPainter>
 #include <QMenu>
 #include <QActionGroup>
+#include <QListWidget>
+#include <QCryptographicHash>
+#include <QDir>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
 AlbumCoverManager::AlbumCoverManager(QWidget *parent)
   : QDialog(parent),
     cover_loader_(new BackgroundThread<AlbumCoverLoader>(this)),
+    cover_fetcher_(new AlbumCoverFetcher(this)),
     artist_icon_(":/artist.png"),
     all_artists_icon_(":/album.png")
 {
@@ -50,6 +55,9 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
   connect(ui_.filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
   connect(filter_group, SIGNAL(triggered(QAction*)), SLOT(UpdateFilter()));
   connect(ui_.view, SIGNAL(clicked()), ui_.view, SLOT(showMenu()));
+  connect(ui_.fetch, SIGNAL(clicked()), SLOT(FetchAlbumCovers()));
+  connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage)),
+          SLOT(AlbumCoverFetched(quint64,QImage)));
 
   // Restore settings
   QSettings s;
@@ -62,6 +70,10 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
   }
 
   cover_loader_->start();
+}
+
+AlbumCoverManager::~AlbumCoverManager() {
+  CancelRequests();
 }
 
 void AlbumCoverManager::CoverLoaderInitialised() {
@@ -81,11 +93,24 @@ void AlbumCoverManager::showEvent(QShowEvent *) {
 }
 
 void AlbumCoverManager::closeEvent(QCloseEvent *) {
+  // Save geometry
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
   s.setValue("geometry", saveGeometry());
   s.setValue("splitter_state", ui_.splitter->saveState());
+
+  // Cancel any outstanding requests
+  CancelRequests();
+}
+
+void AlbumCoverManager::CancelRequests() {
+  cover_loading_tasks_.clear();
+  cover_loader_->Worker()->Clear();
+
+  cover_fetching_tasks_.clear();
+  cover_fetcher_->Clear();
+  ui_.fetch->setEnabled(true);
 }
 
 void AlbumCoverManager::Reset() {
@@ -114,11 +139,12 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     artist = current->text();
 
   ui_.albums->clear();
-  cover_loading_tasks_.clear();
-  cover_loader_->Worker()->Clear();
+  CancelRequests();
 
   foreach (const LibraryBackend::AlbumArtInfo& info, backend_->GetAlbumArtInfo(artist)) {
     QListWidgetItem* item = new QListWidgetItem(no_cover_icon_, info.album_name, ui_.albums);
+    item->setData(Role_ArtistName, info.artist);
+    item->setData(Role_AlbumName, info.album_name);
 
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
       quint64 id = cover_loader_->Worker()->LoadImageAsync(
@@ -157,4 +183,57 @@ void AlbumCoverManager::UpdateFilter() {
                     (has_cover && hide_with_covers) ||
                     (!has_cover && hide_without_covers));
   }
+}
+
+void AlbumCoverManager::FetchAlbumCovers() {
+  for (int i=0 ; i<ui_.albums->count() ; ++i) {
+    QListWidgetItem* item = ui_.albums->item(i);
+    if (item->isHidden())
+      continue;
+    if (item->icon().cacheKey() != no_cover_icon_.cacheKey())
+      continue;
+
+    quint64 id = cover_fetcher_->FetchAlbumCover(
+        item->data(Role_ArtistName).toString(), item->data(Role_AlbumName).toString());
+    cover_fetching_tasks_[id] = item;
+  }
+
+  if (!cover_fetching_tasks_.isEmpty())
+    ui_.fetch->setEnabled(false);
+}
+
+void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
+  if (!cover_fetching_tasks_.contains(id))
+    return;
+
+  QListWidgetItem* item = cover_fetching_tasks_.take(id);
+  if (!image.isNull()) {
+    const QString artist = item->data(Role_ArtistName).toString();
+    const QString album = item->data(Role_AlbumName).toString();
+
+    // Hash the artist and album into a filename for the image
+    QCryptographicHash hash(QCryptographicHash::Sha1);
+    hash.addData(artist.toLower().toUtf8().constData());
+    hash.addData(album.toLower().toUtf8().constData());
+
+    QString filename = hash.result().toHex() + ".jpg";
+    QString path = AlbumCoverLoader::ImageCacheDir() + "/" + filename;
+
+    // Make sure this directory exists first
+    QDir dir;
+    dir.mkdir(AlbumCoverLoader::ImageCacheDir());
+
+    // Save the image to disk
+    image.save(path, "JPG");
+
+    // Save the image in the database
+    backend_->UpdateManualAlbumArtAsync(artist, album, path);
+
+    // Update the icon in our list
+    quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), path);
+    cover_loading_tasks_[id] = item;
+  }
+
+  if (cover_fetching_tasks_.isEmpty())
+    ui_.fetch->setEnabled(true);
 }

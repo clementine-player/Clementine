@@ -526,7 +526,7 @@ QList<LibraryBackend::AlbumArtInfo>
                                     const QueryOptions& opt) {
   QList<AlbumArtInfo> ret;
   LibraryQuery query(opt);
-  query.SetColumnSpec("album, art_automatic, art_manual");
+  query.SetColumnSpec("album, artist, compilation, sampler, art_automatic, art_manual");
   query.SetOrderBy("album");
 
   if (!artist.isNull())
@@ -541,13 +541,45 @@ QList<LibraryBackend::AlbumArtInfo>
     if (q.value(0).toString() == last_album)
       continue;
 
+    bool compilation = q.value(2).toBool() | q.value(3).toBool();
+
     AlbumArtInfo info;
+    info.artist = compilation ? QString() : q.value(1).toString();
     info.album_name = q.value(0).toString();
-    info.art_automatic = q.value(1).toString();
-    info.art_manual = q.value(2).toString();
+    info.art_automatic = q.value(4).toString();
+    info.art_manual = q.value(5).toString();
     ret << info;
 
     last_album = info.album_name;
   }
   return ret;
+}
+
+void LibraryBackend::UpdateManualAlbumArtAsync(const QString &artist,
+                                               const QString &album,
+                                               const QString &art) {
+  metaObject()->invokeMethod(this, "UpdateManualAlbumArt", Qt::QueuedConnection,
+                             Q_ARG(QString, artist),
+                             Q_ARG(QString, album),
+                             Q_ARG(QString, art));
+}
+
+void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
+                                          const QString &album,
+                                          const QString &art) {
+  QSqlDatabase db(Connect());
+
+  QString sql("UPDATE songs SET art_manual = :art"
+              " WHERE album = :album");
+  if (!artist.isNull())
+    sql += " AND artist = :artist";
+
+  QSqlQuery q(sql, db);
+  q.bindValue(":art", art);
+  q.bindValue(":album", album);
+  if (!artist.isNull())
+    q.bindValue(":artist", artist);
+
+  q.exec();
+  CheckErrors(q.lastError());
 }

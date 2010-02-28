@@ -14,6 +14,8 @@ class AlbumCoverLoader : public QObject {
  public:
   AlbumCoverLoader(QObject* parent = 0);
 
+  static QString ImageCacheDir();
+
   void SetDesiredHeight(int height) { height_ = height; }
   quint64 LoadImageAsync(const QString& art_automatic, const QString& art_manual);
 

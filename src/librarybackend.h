@@ -18,6 +18,7 @@ class LibraryBackend : public QObject {
   LibraryBackend(QObject* parent = 0);
 
   struct AlbumArtInfo {
+    QString artist;
     QString album_name;
     QString art_automatic;
     QString art_manual;
@@ -44,6 +45,7 @@ class LibraryBackend : public QObject {
   SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions());
 
   QList<AlbumArtInfo> GetAlbumArtInfo(const QString& artist = QString(), const QueryOptions& opt = QueryOptions());
+  void UpdateManualAlbumArtAsync(const QString& artist, const QString& album, const QString& art);
 
   Song GetSongById(int id);
 
@@ -70,6 +72,9 @@ class LibraryBackend : public QObject {
   void SongsDeleted(const SongList& songs);
 
   void TotalSongCountUpdated(int total);
+
+ private slots:
+  void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
 
  private:
   struct CompilationInfo {

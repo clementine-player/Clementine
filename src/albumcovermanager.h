@@ -11,11 +11,13 @@
 #include "albumcoverloader.h"
 
 class LibraryBackend;
+class AlbumCoverFetcher;
 
 class AlbumCoverManager : public QDialog {
   Q_OBJECT
  public:
   AlbumCoverManager(QWidget *parent = 0);
+  ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
 
@@ -33,12 +35,21 @@ class AlbumCoverManager : public QDialog {
   void CoverLoaderInitialised();
   void CoverImageLoaded(quint64 id, const QImage& image);
   void UpdateFilter();
+  void FetchAlbumCovers();
+  void AlbumCoverFetched(quint64 id, const QImage& image);
 
  private:
   enum ArtistItemType {
     All_Artists,
     Specific_Artist,
   };
+
+  enum Role {
+    Role_ArtistName = Qt::UserRole + 1,
+    Role_AlbumName,
+  };
+
+  void CancelRequests();
 
  private:
   Ui::CoverManager ui_;
@@ -50,6 +61,9 @@ class AlbumCoverManager : public QDialog {
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   QMap<quint64, QListWidgetItem*> cover_loading_tasks_;
+
+  AlbumCoverFetcher* cover_fetcher_;
+  QMap<quint64, QListWidgetItem*> cover_fetching_tasks_;
 
   QIcon artist_icon_;
   QIcon all_artists_icon_;

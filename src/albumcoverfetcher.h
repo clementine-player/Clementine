@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QNetworkAccessManager>
 #include <QObject>
+#include <QQueue>
 
 #include <lastfm/Album>
 
@@ -18,18 +19,34 @@ class AlbumCoverFetcher : public QObject {
   AlbumCoverFetcher(QObject* parent = 0);
   virtual ~AlbumCoverFetcher() {}
 
-  lastfm::Album FetchAlbumCover(const QString& artist, const QString& album);
+  static const int kMaxConcurrentRequests;
+
+  quint64 FetchAlbumCover(const QString& artist, const QString& album);
+
+  void Clear();
 
  signals:
-  void AlbumCoverFetched(const lastfm::Album&, const QImage& cover);
+  void AlbumCoverFetched(quint64, const QImage& cover);
 
  private slots:
   void AlbumGetInfoFinished();
   void AlbumCoverFetchFinished();
+  void StartRequests();
 
  private:
+  struct QueuedRequest {
+    quint64 id;
+    QString artist;
+    QString album;
+  };
+
   QNetworkAccessManager network_;
-  QMap<QNetworkReply*, lastfm::Album> requests_;
+  quint64 next_id_;
+
+  QQueue<QueuedRequest> queued_requests_;
+  QMap<QNetworkReply*, quint64> active_requests_;
+
+  QTimer* request_starter_;
 };
 
 #endif  // ALBUMCOVERFETCHER_H
