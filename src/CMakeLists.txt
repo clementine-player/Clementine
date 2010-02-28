@@ -194,4 +194,5 @@ add_custom_target(bundle
 add_dependencies(bundle clementine)
 
 install(TARGETS clementine
-  BUNDLE DESTINATION bin)
+  BUNDLE DESTINATION bin
+  RUNTIME DESTINATION bin)
