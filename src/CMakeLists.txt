@@ -162,6 +162,7 @@ target_link_libraries(clementine_lib
     ${XINE_LIBRARIES}
     ${LIBNOTIFY_LIBRARIES}
     ${TAGLIB_LIBRARIES}
+    ${CLEMENTINE-SOURCES-RESOURCE}
     lastfm
 )
 if (APPLE)
@@ -174,7 +175,6 @@ add_dependencies(clementine_lib qtsingleapplication qxt)
 
 add_executable(clementine
    MACOSX_BUNDLE
-   ${CLEMENTINE-SOURCES-RESOURCE}
    main.cpp
 )
 target_link_libraries(clementine clementine_lib)

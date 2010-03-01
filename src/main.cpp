@@ -35,6 +35,9 @@ int main(int argc, char *argv[]) {
     // Couldn't send the message so start anyway
   }
 
+  // Resources
+  Q_INIT_RESOURCE(data);
+
   // Translations
   QTranslator qt_translator;
   qt_translator.load("qt_" + QLocale::system().name(),
