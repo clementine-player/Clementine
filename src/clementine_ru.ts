@@ -64,6 +64,25 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>CoverManager</name>
+    <message>
+        <source>Cover Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter search terms here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fetch Missing Covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EditTagDialog</name>
     <message>
         <source>Edit track information</source>
@@ -549,6 +568,18 @@ p, li { white-space: pre-wrap; }
         <source>Configure &amp;Global Shortcuts...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enter search terms here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cover Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
@@ -819,14 +850,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Defaults</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

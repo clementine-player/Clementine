@@ -125,8 +125,29 @@ set(CLEMENTINE-UI
 # Resource files
 set(CLEMENTINE-RESOURCES
   ../data/data.qrc
-  translations.qrc
 )
+
+# Translations
+file (GLOB TRANSLATIONS_FILES *.ts)
+set (FILES_TO_TRANSLATE ${CLEMENTINE-SOURCES} ${CLEMENTINE-UI} ${CLEMENTINE-MOC-HEADERS})
+
+option (UPDATE_TRANSLATIONS "Update source translation translations/*.ts files
+    (WARNING: make clean will delete the source .ts files! Danger!)")
+if (UPDATE_TRANSLATIONS)
+  qt4_create_translation(CLEMENTINE-QM-FILES ${FILES_TO_TRANSLATE} ${TRANSLATIONS_FILES})
+else (UPDATE_TRANSLATIONS)
+  qt4_add_translation(CLEMENTINE-QM-FILES ${TRANSLATIONS_FILES})
+endif (UPDATE_TRANSLATIONS)
+
+# Generate a qrc file for the translations
+set(CLEMENTINE-QM-RESOURCE ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
+file(WRITE ${CLEMENTINE-QM-RESOURCE} "<RCC><qresource prefix=\"/translations\">")
+foreach(QM-FILE ${CLEMENTINE-QM-FILES})
+  file(RELATIVE_PATH QM-RELATIVE-PATH ${CMAKE_CURRENT_BINARY_DIR} ${QM-FILE})
+  file(APPEND ${CLEMENTINE-QM-RESOURCE} "<file>" ${QM-RELATIVE-PATH} "</file>")
+endforeach(QM-FILE)
+file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
+
 
 if(WIN32)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} phononengine.cpp osd_win.cpp)
@@ -144,7 +165,7 @@ endif(APPLE)
 
 qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})
 qt4_wrap_ui(CLEMENTINE-SOURCES-UI ${CLEMENTINE-UI})
-qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-RESOURCES})
+qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-RESOURCES} ${CLEMENTINE-QM-RESOURCE})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -158,6 +179,7 @@ add_library(clementine_lib
    ${CLEMENTINE-SOURCES-MOC}
    ${CLEMENTINE-SOURCES-UI}
    ${CLEMENTINE-SOURCES-RESOURCE}
+   ${CLEMENTINE-QM-FILES}
 )
 target_link_libraries(clementine_lib
     ${QT_LIBRARIES}
