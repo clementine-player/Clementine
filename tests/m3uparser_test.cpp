@@ -27,3 +27,27 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
   ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));
   EXPECT_EQ(QUrl("file:///foo/bar.mp3"), url);
 }
+
+TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
+  M3UParser parser(NULL, QDir("/tmp"));
+  QString line("foo/bar.mp3");
+  QUrl url;
+  ASSERT_TRUE(parser.ParseTrackLocation(line, &url));
+  EXPECT_EQ(QUrl("file:///tmp/foo/bar.mp3"), url);
+}
+
+TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
+  QString line("http://example.com/foo/bar.mp3");
+  QUrl url;
+  ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));
+  EXPECT_EQ(QUrl("http://example.com/foo/bar.mp3"), url);
+}
+
+#ifdef Q_OS_WIN32
+TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
+  QString line("c:/foo/bar.mp3");
+  QUrl url;
+  ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));
+  EXPECT_EQ(QUrl("file:///c:/foo/bar.mp3"), url);
+}
+#endif  // Q_OS_WIN32

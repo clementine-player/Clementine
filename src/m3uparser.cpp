@@ -2,7 +2,7 @@
 
 #include <QtDebug>
 
-M3UParser::M3UParser(QIODevice* device, QDir directory, QObject* parent)
+M3UParser::M3UParser(QIODevice* device, const QDir& directory, QObject* parent)
     : QObject(parent),
       device_(device),
       type_(STANDARD),
@@ -38,7 +38,7 @@ const QList<Song>& M3UParser::Parse() {
   return songs_;
 }
 
-bool M3UParser::ParseMetadata(QString line, M3UParser::Metadata* metadata) const {
+bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata) const {
   // Extended info, eg.
   // #EXTINF:123,Sample Artist - Sample title
   QString info = line.section(':', 1);
@@ -59,7 +59,7 @@ bool M3UParser::ParseMetadata(QString line, M3UParser::Metadata* metadata) const
   return true;
 }
 
-bool M3UParser::ParseTrackLocation(QString line, QUrl* url) const {
+bool M3UParser::ParseTrackLocation(const QString& line, QUrl* url) const {
   if (line.contains(QRegExp("^[a-z]+://"))) {
     // Looks like a url.
     QUrl temp(line);
@@ -72,10 +72,11 @@ bool M3UParser::ParseTrackLocation(QString line, QUrl* url) const {
   }
 
   // Should be a local path.
-  if (line.contains(QRegExp("^([a-zA-Z]:\\)|(/)"))) {
+  if (QDir::isAbsolutePath(line)) {
     // Absolute path.
-    // Fix windows \.
-    QString proper_path = line.replace('\\', '/');
+    // Fix windows \, eg. C:\foo -> C:/foo.
+    QString proper_path = QDir::fromNativeSeparators(line);
+    // C:/foo -> /C:/foo.
     if (!proper_path.startsWith('/')) {
       proper_path.prepend("/");
     }
@@ -83,8 +84,12 @@ bool M3UParser::ParseTrackLocation(QString line, QUrl* url) const {
     return true;
   } else {
     // Relative path.
-    QString proper_path = line.replace('\\', '/');
+    QString proper_path = QDir::fromNativeSeparators(line);
     QString absolute_path = directory_.absoluteFilePath(proper_path);
+    // C:/foo -> /C:/foo.
+    if (!absolute_path.startsWith('/')) {
+      absolute_path.prepend("/");
+    }
     *url = "file://" + absolute_path;
     return true;
   }
