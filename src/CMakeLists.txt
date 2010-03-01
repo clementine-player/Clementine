@@ -168,6 +168,7 @@ if (APPLE)
   target_link_libraries(clementine_lib
       ${GROWL}
   )
+  include_directories(${GROWL}/Headers)
 endif (APPLE)
 add_dependencies(clementine_lib qtsingleapplication qxt)
 
@@ -180,7 +181,7 @@ target_link_libraries(clementine clementine_lib)
 
 set_property(TARGET clementine
     PROPERTY COMPILE_FLAGS
-    "-Werror=non-virtual-dtor -Woverloaded-virtual -Wall"
+    "-Wnon-virtual-dtor -Woverloaded-virtual -Wall"
 )
 
 set_target_properties(clementine PROPERTIES
@@ -189,14 +190,5 @@ set_target_properties(clementine PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
 )
 
-add_custom_target(bundle
-    mkdir -p Frameworks/
-    COMMAND mkdir -p PlugIns/xine
-    COMMAND mkdir -p Resources/
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../clementine.app/Contents/
-)
-add_dependencies(bundle clementine)
-
 install(TARGETS clementine
-  BUNDLE DESTINATION bin
-  RUNTIME DESTINATION bin)
+  BUNDLE DESTINATION bin)

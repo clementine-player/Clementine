@@ -31,6 +31,10 @@ endif (LIBNOTIFY_FOUND)
 find_library(LASTFM_LIBRARY_DIRS lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
+if (APPLE)
+  find_library(GROWL Growl)
+endif (APPLE)
+
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)

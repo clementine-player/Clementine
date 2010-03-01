@@ -5,12 +5,12 @@ import re
 import subprocess
 import sys
 
-FRAMEWORK_SEARCH_PATH=['/Library/Frameworks', '~/Library/Frameworks']
+FRAMEWORK_SEARCH_PATH=['/Library/Frameworks', os.path.join(os.environ['HOME'], 'Library/Frameworks')]
 LIBRARY_SEARCH_PATH=['/usr/local/lib', '/sw/lib']
 
 XINE_PLUGINS = [
-    #'xineplug_decode_vorbis.so',
-    #'xineplug_dmx_ogg.so',
+    'xineplug_decode_vorbis.so',
+    'xineplug_dmx_ogg.so',
     'xineplug_ao_out_coreaudio.so',
     'xineplug_decode_a52.so',
     'xineplug_decode_dts.so',
@@ -32,6 +32,25 @@ XINEPLUGIN_SEARCH_PATH=[
     '/sw/lib/xine/plugins',
 ]
 
+QT_PLUGINS = [
+    'accessible/libqtaccessiblewidgets.dylib',
+    'codecs/libqcncodecs.dylib',
+    'codecs/libqjpcodecs.dylib',
+    'codecs/libqkrcodecs.dylib',
+    'codecs/libqtwcodecs.dylib',
+    'iconengines/libqsvgicon.dylib',
+    'imageformats/libqgif.dylib',
+    'imageformats/libqico.dylib',
+    'imageformats/libqjpeg.dylib',
+    'imageformats/libqmng.dylib',
+    'imageformats/libqsvg.dylib',
+    'imageformats/libqtiff.dylib',
+    'sqldrivers/libqsqlite.dylib',
+]
+QT_PLUGINS_SEARCH_PATH=[
+    '/Developer/Applications/Qt/plugins',
+]
+
 
 class Error(Exception):
   pass
@@ -49,6 +68,10 @@ class CouldNotFindXinePluginError(Error):
   pass
 
 
+class CouldNotFindQtPluginError(Error):
+  pass
+
+
 if len(sys.argv) < 2:
   print 'Usage: %s <bundle.app>' % sys.argv[0]
 
@@ -56,14 +79,17 @@ bundle_dir = sys.argv[1]
 
 bundle_name = bundle_dir.split('.')[0]
 
+commands = []
+
 frameworks_dir = os.path.join(bundle_dir, 'Contents', 'Frameworks')
+commands.append(['mkdir', '-p', frameworks_dir])
 resources_dir = os.path.join(bundle_dir, 'Contents', 'Resources')
+commands.append(['mkdir', '-p', resources_dir])
 plugins_dir = os.path.join(bundle_dir, 'Contents', 'PlugIns')
 binary = os.path.join(bundle_dir, 'Contents', 'MacOS', bundle_name)
 
 fixed_libraries = []
 fixed_frameworks = []
-
 
 def GetBrokenLibraries(binary):
   output = subprocess.Popen(['otool', '-L', binary], stdout=subprocess.PIPE).communicate()[0]
@@ -82,7 +108,10 @@ def GetBrokenLibraries(binary):
     elif re.match(r'^\s*\w+\.framework', line):
       broken_libs['frameworks'].append(line)
     elif re.match(r'^\s*@executable_path', line):
-      continue # Already fixed library
+      # Potentially already fixed library
+      relative_path = os.path.join(*line.split('/')[3:])
+      if not os.path.exists(os.path.join(frameworks_dir, relative_path)):
+        broken_libs['frameworks'].append(relative_path)
     else:
       broken_libs['libs'].append(line)
 
@@ -144,13 +173,11 @@ def FixLibrary(path):
   for library in broken_libs['libs']:
     FixLibraryInstallPath(library, new_path)
 
-def FixPlugin(path):
-  abs_path = FindXinePlugin(path)
+def FixPlugin(abs_path, subdir):
   broken_libs = GetBrokenLibraries(abs_path)
   FixAllLibraries(broken_libs)
 
-  new_path = CopyPlugin(abs_path)
-  FixLibraryId(new_path)
+  new_path = CopyPlugin(abs_path, subdir)
   for framework in broken_libs['frameworks']:
     FixFrameworkInstallPath(framework, new_path)
   for library in broken_libs['libs']:
@@ -167,13 +194,15 @@ def FixBinary(path):
 def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
   args = ['cp', '-f', path, new_path]
-  print ' '.join(args)
+  commands.append(args)
   return new_path
 
-def CopyPlugin(path):
-  new_path = os.path.join(plugins_dir, os.path.basename(path))
+def CopyPlugin(path, subdir):
+  new_path = os.path.join(plugins_dir, subdir, os.path.basename(path))
+  args = ['mkdir', '-p', os.path.dirname(new_path)]
+  commands.append(args)
   args = ['cp', '-f', path, new_path]
-  print ' '.join(args)
+  commands.append(args)
   return new_path
 
 def CopyFramework(path):
@@ -183,15 +212,15 @@ def CopyFramework(path):
       full_path = os.path.join(frameworks_dir, *parts[i:-1])
       break
   args = ['mkdir', '-p', full_path]
-  print ' '.join(args)
-  args = ['cp', '-fR', path, full_path]
-  print ' '.join(args)
+  commands.append(args)
+  args = ['cp', '-f', path, full_path]
+  commands.append(args)
   return os.path.join(frameworks_dir, path)
 
 def FixId(path, library_name):
   id = '@executable_path/../Frameworks/%s' % library_name
   args = ['install_name_tool', '-id', id, path]
-  print ' '.join(args)
+  commands.append(args)
   
 def FixLibraryId(path):
   library_name = os.path.basename(path)
@@ -202,7 +231,7 @@ def FixFrameworkId(path, id):
 
 def FixInstallPath(library_path, library, new_path):
   args = ['install_name_tool', '-change', library_path, new_path, library]
-  print ' '.join(args)
+  commands.append(args)
 
 def FixLibraryInstallPath(library_path, library):
   new_path = '@executable_path/../Frameworks/%s' % os.path.basename(library_path)
@@ -221,10 +250,32 @@ def FindXinePlugin(name):
   raise CouldNotFindXinePluginError(name)
 
 
+def FindQtPlugin(name):
+  for path in QT_PLUGINS_SEARCH_PATH:
+    if os.path.exists(path):
+      if os.path.exists(os.path.join(path, name)):
+        return os.path.join(path, name)
+  raise CouldNotFindQtPluginError(name)
+
+
 FixBinary(binary)
 
 for plugin in XINE_PLUGINS:
-  FixPlugin(plugin)
+  FixPlugin(FindXinePlugin(plugin), 'xine')
+
+for plugin in QT_PLUGINS:
+  FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
+
+print 'Would run %d commands:' % len(commands)
+for command in commands:
+  print ' '.join(command)
+
+print 'OK?'
+raw_input()
+
+for command in commands:
+  p = subprocess.Popen(command)
+  os.waitpid(p.pid, 0)
 
 qtconf = open(os.path.join(resources_dir, 'qt.conf'), 'w')
 qtconf.write('''[Paths]
