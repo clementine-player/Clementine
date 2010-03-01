@@ -3,10 +3,7 @@
 
 #include "gtest/gtest.h"
 
-std::ostream& operator<<(std::ostream& stream, const QString& str) {
-  stream << str.toStdString();
-  return stream;
-}
+#include "test_utils.h"
 
 namespace {
 
