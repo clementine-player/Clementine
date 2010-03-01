@@ -20,7 +20,7 @@ add_library(gtest ${GTEST-SOURCES})
 add_custom_target(test
     echo "Running tests"
     WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
-    DEPENDS song_test m3uparser_test)
+)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
 macro(add_test_file test_source)
@@ -31,6 +31,7 @@ macro(add_test_file test_source)
     target_link_libraries(${TEST_NAME} clementine_lib gtest)
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME})
+    add_dependencies(test ${TEST_NAME})
 endmacro (add_test_file)
 
 
