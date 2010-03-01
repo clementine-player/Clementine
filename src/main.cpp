@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
 
   // Resources
   Q_INIT_RESOURCE(data);
+  Q_INIT_RESOURCE(translations);
 
   // Translations
   QTranslator qt_translator;
