@@ -154,7 +154,6 @@ add_library(clementine_lib
    ${CLEMENTINE-SOURCES}
    ${CLEMENTINE-SOURCES-MOC}
    ${CLEMENTINE-SOURCES-UI}
-   ${CLEMENTINE-SOURCES-RESOURCE}
 )
 target_link_libraries(clementine_lib
     ${QT_LIBRARIES}
@@ -174,6 +173,7 @@ add_dependencies(clementine_lib qtsingleapplication qxt)
 
 add_executable(clementine
    MACOSX_BUNDLE
+   ${CLEMENTINE-SOURCES-RESOURCE}
    main.cpp
 )
 target_link_libraries(clementine clementine_lib)
