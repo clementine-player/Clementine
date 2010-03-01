@@ -52,3 +52,5 @@ include_directories(${LASTFM_INCLUDE_DIRS})
 add_subdirectory(3rdparty/qtsingleapplication)
 add_subdirectory(3rdparty/qxt)
 add_subdirectory(src)
+
+add_subdirectory(tests)

@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.6)
 
 # Source files
 set(CLEMENTINE-SOURCES
-    main.cpp
     mainwindow.cpp
     player.cpp
     library.cpp
@@ -151,14 +150,13 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qtsingleapplication
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qxt")
 
 set(EXECUTABLE_OUTPUT_PATH ..)
-add_executable(clementine
-   MACOSX_BUNDLE
+add_library(clementine_lib
    ${CLEMENTINE-SOURCES}
    ${CLEMENTINE-SOURCES-MOC}
    ${CLEMENTINE-SOURCES-UI}
    ${CLEMENTINE-SOURCES-RESOURCE}
 )
-target_link_libraries(clementine
+target_link_libraries(clementine_lib
     ${QT_LIBRARIES}
     qtsingleapplication
     qxt
@@ -168,11 +166,17 @@ target_link_libraries(clementine
     lastfm
 )
 if (APPLE)
-  target_link_libraries(clementine
+  target_link_libraries(clementine_lib
       ${GROWL}
   )
 endif (APPLE)
-add_dependencies(clementine qtsingleapplication qxt)
+add_dependencies(clementine_lib qtsingleapplication qxt)
+
+add_executable(clementine
+   MACOSX_BUNDLE
+   main.cpp
+)
+target_link_libraries(clementine clementine_lib)
 
 set_property(TARGET clementine
     PROPERTY COMPILE_FLAGS
