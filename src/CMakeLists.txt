@@ -154,6 +154,7 @@ add_library(clementine_lib
    ${CLEMENTINE-SOURCES}
    ${CLEMENTINE-SOURCES-MOC}
    ${CLEMENTINE-SOURCES-UI}
+   ${CLEMENTINE-SOURCES-RESOURCE}
 )
 target_link_libraries(clementine_lib
     ${QT_LIBRARIES}
@@ -162,7 +163,6 @@ target_link_libraries(clementine_lib
     ${XINE_LIBRARIES}
     ${LIBNOTIFY_LIBRARIES}
     ${TAGLIB_LIBRARIES}
-    ${CLEMENTINE-SOURCES-RESOURCE}
     lastfm
 )
 if (APPLE)
@@ -191,4 +191,5 @@ set_target_properties(clementine PROPERTIES
 )
 
 install(TARGETS clementine
-  BUNDLE DESTINATION bin)
+  BUNDLE DESTINATION bin
+  RUNTIME DESTINATION bin)
