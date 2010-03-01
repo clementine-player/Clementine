@@ -15,7 +15,7 @@ class LibraryBackend : public QObject {
   Q_OBJECT
 
  public:
-  LibraryBackend(QObject* parent = 0);
+  LibraryBackend(QObject* parent = 0, QSqlDriver* driver = 0);
 
   struct Album {
     QString artist;
@@ -106,6 +106,8 @@ class LibraryBackend : public QObject {
 
   QString directory_;
   QMutex connect_mutex_;
+
+  QSqlDriver* injected_driver_;
 };
 
 #endif // LIBRARYBACKEND_H

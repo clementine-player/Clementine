@@ -14,8 +14,9 @@
 const char* LibraryBackend::kDatabaseName = "clementine.db";
 const int LibraryBackend::kSchemaVersion = 2;
 
-LibraryBackend::LibraryBackend(QObject* parent)
-  : QObject(parent)
+LibraryBackend::LibraryBackend(QObject* parent, QSqlDriver* driver)
+  : QObject(parent),
+    injected_driver_(driver)
 {
   QSettings s;
   s.beginGroup("Library");
@@ -48,8 +49,12 @@ QSqlDatabase LibraryBackend::Connect() {
     return db;
   }
 
-  db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
-  db.setDatabaseName(directory_ + "/" + kDatabaseName);
+  if (injected_driver_) {
+    db = QSqlDatabase::addDatabase(injected_driver_, connection_id);
+  } else {
+    db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
+    db.setDatabaseName(directory_ + "/" + kDatabaseName);
+  }
   if (!db.open()) {
     emit Error("LibraryBackend: " + db.lastError().text());
     return db;

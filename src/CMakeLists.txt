@@ -171,7 +171,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qtsingleapplication")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qxt")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gtest/include")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest/include")
 
 set(EXECUTABLE_OUTPUT_PATH ..)
 add_library(clementine_lib
