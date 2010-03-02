@@ -15,6 +15,12 @@
 #include <QTranslator>
 #include <QDir>
 
+void LoadTranslation(const QString& prefix, const QString& path) {
+  QTranslator* t = new QTranslator;
+  t->load(prefix + "_" + QLocale::system().name(), path);
+  QCoreApplication::installTranslator(t);
+}
+
 int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion("0.1");
@@ -41,20 +47,10 @@ int main(int argc, char *argv[]) {
   Q_INIT_RESOURCE(translations);
 
   // Translations
-  QTranslator qt_translator;
-  qt_translator.load("qt_" + QLocale::system().name(),
-       QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-  a.installTranslator(&qt_translator);
-
-  QTranslator clementine_translator;
-  clementine_translator.load("clementine_" + QLocale::system().name(), ":/translations");
-  a.installTranslator(&clementine_translator);
-
-  // Also look for translations in the current directory so translators don't
-  // need to recompile Clementine to test their translations
-  QTranslator pwd_translator;
-  clementine_translator.load("clementine_" + QLocale::system().name(), QDir::currentPath());
-  a.installTranslator(&clementine_translator);
+  LoadTranslation("qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  LoadTranslation("clementine", ":/translations");
+  LoadTranslation("clementine", a.applicationDirPath());
+  LoadTranslation("clementine", QDir::currentPath());
 
   // Window
   MainWindow w;
