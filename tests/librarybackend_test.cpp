@@ -1,9 +1,9 @@
-#include "gmock/gmock-printers.h"
 #include "test_utils.h"
 #include "gtest/gtest.h"
-#include "mock_sqldriver.h"
+#include "gmock/gmock.h"
 
 #include "librarybackend.h"
+#include "song.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -15,167 +15,115 @@ using ::testing::AtMost;
 using ::testing::Invoke;
 using ::testing::Return;
 
-using boost::scoped_ptr;
-
 void PrintTo(const ::QString& str, std::ostream& os) {
   os << str.toStdString();
 }
 
 class LibraryBackendTest : public ::testing::Test {
  protected:
-  LibraryBackendTest()
-      : current_result_(0) {
-  }
-
   virtual void SetUp() {
-    // Owned by QSqlDatabase.
-    driver_ = new MockSqlDriver;
-    // DB connect calls.
-    EXPECT_CALL(*driver_, open(_, _, _, _, _, _)).WillOnce(Return(true));
-    EXPECT_CALL(*driver_, isOpen()).WillRepeatedly(Return(true));
-    EXPECT_CALL(*driver_, hasFeature(_)).WillRepeatedly(Return(true));
+    backend_.reset(new LibraryBackend(NULL, ":memory:"));
 
-    QStringList tables;
-    tables << "Foo";
-    EXPECT_CALL(*driver_, tables(QSql::Tables)).WillOnce(Return(tables));
-
-    MockSqlResult* result = new MockSqlResult(driver_);
-    EXPECT_CALL(*driver_, createResult()).
-        WillOnce(Return(result));
-    EXPECT_CALL(*result, reset(QString("SELECT version FROM schema_version"))).WillOnce(
-        DoAll(
-            Invoke(result, &MockSqlResult::hackSetActive),
-            Return(true)));
-    EXPECT_CALL(*result, fetch(1)).WillOnce(
-        DoAll(
-            Invoke(result, &MockSqlResult::setAt),
-            Return(true)));
-    EXPECT_CALL(*result, data(0)).WillOnce(Return(QVariant(2)));
-
-    EXPECT_CALL(*driver_, close());
-
-    backend_.reset(new LibraryBackend(NULL, driver_));
+    connection_name_ = "thread_" + QString::number(
+        reinterpret_cast<quint64>(QThread::currentThread()));
+    database_ = QSqlDatabase::database(connection_name_);
   }
 
   void TearDown() {
     // Make sure Qt does not re-use the connection.
-    QSqlDatabase::removeDatabase("thread_" + QString::number(
-        reinterpret_cast<quint64>(QThread::currentThread())));
+    database_ = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connection_name_);
   }
 
-  // Call this to mock a single query with one row of results.
-  void ExpectQuery(const QString& query,
-                   const QList<QVariant>& bind_values,
-                   const QMap<QString, QVariant>& named_bind_values,
-                   const QList<QVariant>& columns) {
-    // Owned by QSqlDatabase.
-    current_result_ = new MockSqlResult(driver_);
-    EXPECT_CALL(*driver_, createResult()).
-        WillOnce(Return(current_result_));
-
-    // Query string is set.
-    EXPECT_CALL(*current_result_, reset(QString(query))).WillOnce(
-        DoAll(
-            Invoke(current_result_, &MockSqlResult::hackSetActive),
-            Return(true)));
-    // Query is executed.
-    EXPECT_CALL(*current_result_, exec()).WillOnce(Return(true));
-
-    // Values are bound.
-    for (int i = 0; i < bind_values.size(); ++i) {
-      ExpectBind(i, bind_values[i]);
-    }
-    for (QMap<QString, QVariant>::const_iterator it = named_bind_values.begin();
-         it != named_bind_values.end(); ++it) {
-      ExpectBind(it.key(), it.value());
-    }
-
-    // One row is fetched.
-    EXPECT_CALL(*current_result_, fetch(1)).WillOnce(
-        DoAll(
-            Invoke(current_result_, &MockSqlResult::setAt),
-            Return(true)));
-    // Tries to fetch second row but we say we do not have any more rows.
-    // Can be called 0-1 times. This catches the case where a query is only expected
-    // to have one row so QSqlQuery::next() is only called once.
-    EXPECT_CALL(*current_result_, fetch(2)).Times(AtMost(1)).WillOnce(Return(false));
-
-    // Expect data() calls for each column.
-    ExpectData(columns);
+  Song MakeDummySong(int directory_id) {
+    // Returns a valid song with all the required fields set
+    Song ret;
+    ret.set_directory_id(directory_id);
+    ret.set_filename("foo.mp3");
+    ret.set_mtime(0);
+    ret.set_ctime(0);
+    ret.set_filesize(0);
+    return ret;
   }
 
-  void ExpectBind(int index, const QVariant& value) {
-    EXPECT_CALL(*current_result_, bindValue(index, value, _));
-  }
-
-  void ExpectBind(const QString& bind, const QVariant& value) {
-    EXPECT_CALL(*current_result_, bindValue(bind, value, _));
-  }
-
-  void ExpectData(const QList<QVariant>& columns) {
-    for (int i = 0; i < columns.size(); ++i) {
-      EXPECT_CALL(*current_result_, data(i)).WillRepeatedly(
-          Return(columns[i])).RetiresOnSaturation();
-    }
-  }
-
-  MockSqlDriver* driver_;
-  scoped_ptr<LibraryBackend> backend_;
-
-  MockSqlResult* current_result_;
+  boost::scoped_ptr<LibraryBackend> backend_;
+  QString connection_name_;
+  QSqlDatabase database_;
 };
 
 TEST_F(LibraryBackendTest, DatabaseInitialises) {
+  // Check that these tables exist
+  QStringList tables = database_.tables();
+  EXPECT_TRUE(tables.contains("songs"));
+  EXPECT_TRUE(tables.contains("directories"));
+  ASSERT_TRUE(tables.contains("schema_version"));
 
+  // Check the schema version is correct
+  QSqlQuery q("SELECT version FROM schema_version", database_);
+  ASSERT_TRUE(q.exec());
+  ASSERT_TRUE(q.next());
+  EXPECT_EQ(2, q.value(0).toInt());
+  EXPECT_FALSE(q.next());
 }
 
-TEST_F(LibraryBackendTest, GetSongsSuccessfully) {
-  const char* query =
-      "SELECT ROWID, title, album, artist, albumartist, composer, "
-      "track, disc, bpm, year, genre, comment, compilation, "
-      "length, bitrate, samplerate, directory, filename, "
-      "mtime, ctime, filesize, sampler, art_automatic, art_manual"
-      " FROM songs "
-      "WHERE (compilation = 0 AND sampler = 0) AND artist = ?"
-      " AND album = ?";
-  QList<QVariant> bind_values;
-  bind_values << "foo";
-  bind_values << "bar";
+TEST_F(LibraryBackendTest, EmptyDatabase) {
+  // Check the database is empty to start with
+  QStringList artists = backend_->GetAllArtists();
+  EXPECT_TRUE(artists.isEmpty());
 
-  QList<QVariant> columns;
-  for (int i = 0; i < 24; ++i) {
-    // Fill every column with 42.
-    columns << 42;
-  }
-
-  ExpectQuery(query, bind_values, QMap<QString, QVariant>(), columns);
-
-  SongList songs = backend_->GetSongs("foo", "bar");
-  ASSERT_EQ(1, songs.length());
-  EXPECT_EQ(42, songs[0].length());
-  EXPECT_EQ(42, songs[0].id());
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  EXPECT_TRUE(albums.isEmpty());
 }
 
-TEST_F(LibraryBackendTest, GetSongByIdSuccessfully) {
-  const char* query =
-      "SELECT ROWID, title, album, artist, albumartist, composer, "
-      "track, disc, bpm, year, genre, comment, compilation, "
-      "length, bitrate, samplerate, directory, filename, "
-      "mtime, ctime, filesize, sampler, art_automatic, art_manual"
-      " FROM songs "
-      "WHERE ROWID = :id";
-  QMap<QString, QVariant> bind_values;
-  bind_values[":id"] = 42;
+TEST_F(LibraryBackendTest, AddSong) {
+  // Add a directory
+  backend_->AddDirectory("/test");
 
-  QList<QVariant> columns;
-  for (int i = 0; i < 24; ++i) {
-    // Fill every column with 42.
-    columns << 42;
-  }
+  // Add the song
+  Song s = MakeDummySong(1);
+  s.set_title("Foo");
+  s.set_artist("Bar");
+  s.set_album("Meep");
+  backend_->AddOrUpdateSongs(SongList() << s);
 
-  ExpectQuery(query, QList<QVariant>(), bind_values, columns);
+  // Check the artist
+  QStringList artists = backend_->GetAllArtists();
+  ASSERT_EQ(1, artists.size());
+  EXPECT_EQ(s.artist(), artists[0]);
 
-  Song song = backend_->GetSongById(42);
-  EXPECT_EQ(42, song.length());
-  EXPECT_EQ(42, song.id());
+  // Check the various album getters
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  ASSERT_EQ(1, albums.size());
+  EXPECT_EQ(s.album(), albums[0].album_name);
+  EXPECT_EQ(s.artist(), albums[0].artist);
+
+  albums = backend_->GetAlbumsByArtist("Bar");
+  ASSERT_EQ(1, albums.size());
+  EXPECT_EQ(s.album(), albums[0].album_name);
+  EXPECT_EQ(s.artist(), albums[0].artist);
+
+  LibraryBackend::Album album = backend_->GetAlbumArt("Bar", "Meep");
+  EXPECT_EQ(s.album(), album.album_name);
+  EXPECT_EQ(s.artist(), album.artist);
+
+  // Check we can get the song back
+  SongList songs = backend_->GetSongs("Bar", "Meep");
+  ASSERT_EQ(1, songs.size());
+  EXPECT_EQ(s.album(), songs[0].album());
+  EXPECT_EQ(s.artist(), songs[0].artist());
+  EXPECT_EQ(s.title(), songs[0].title());
+  EXPECT_EQ(1, songs[0].id());
+
+  // Check we can get the song by ID
+  Song song2 = backend_->GetSongById(1);
+  EXPECT_EQ(s.album(), song2.album());
+  EXPECT_EQ(s.artist(), song2.artist()); // This is an error - song2.artist() should obviously be "Blur"
+  EXPECT_EQ(s.title(), song2.title());
+  EXPECT_EQ(1, song2.id());
+}
+
+TEST_F(LibraryBackendTest, AddSongWithoutFilename) {
+}
+
+TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
 }

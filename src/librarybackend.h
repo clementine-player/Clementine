@@ -15,7 +15,7 @@ class LibraryBackend : public QObject {
   Q_OBJECT
 
  public:
-  LibraryBackend(QObject* parent = 0, QSqlDriver* driver = 0);
+  LibraryBackend(QObject* parent = 0, const QString& database_name = QString());
 
   struct Album {
     QString artist;
@@ -27,7 +27,7 @@ class LibraryBackend : public QObject {
   typedef QList<Album> AlbumList;
 
   // This actually refers to the location of the sqlite database
-  static QString DefaultDirectory();
+  static QString DefaultDatabaseDirectory();
 
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
   void LoadDirectoriesAsync();
@@ -107,7 +107,8 @@ class LibraryBackend : public QObject {
   QString directory_;
   QMutex connect_mutex_;
 
-  QSqlDriver* injected_driver_;
+  // Used by tests
+  QString injected_database_name_;
 };
 
 #endif // LIBRARYBACKEND_H

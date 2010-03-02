@@ -14,18 +14,18 @@
 const char* LibraryBackend::kDatabaseName = "clementine.db";
 const int LibraryBackend::kSchemaVersion = 2;
 
-LibraryBackend::LibraryBackend(QObject* parent, QSqlDriver* driver)
+LibraryBackend::LibraryBackend(QObject* parent, const QString& database_name)
   : QObject(parent),
-    injected_driver_(driver)
+    injected_database_name_(database_name)
 {
   QSettings s;
   s.beginGroup("Library");
-  directory_ = s.value("database_directory", DefaultDirectory()).toString();
+  directory_ = s.value("database_directory", DefaultDatabaseDirectory()).toString();
 
   Connect();
 }
 
-QString LibraryBackend::DefaultDirectory() {
+QString LibraryBackend::DefaultDatabaseDirectory() {
   QDir ret(QDir::homePath() + "/.config/" + QCoreApplication::organizationName());
   return QDir::toNativeSeparators(ret.path());
 }
@@ -49,12 +49,13 @@ QSqlDatabase LibraryBackend::Connect() {
     return db;
   }
 
-  if (injected_driver_) {
-    db = QSqlDatabase::addDatabase(injected_driver_, connection_id);
-  } else {
-    db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
+  db = QSqlDatabase::addDatabase("QSQLITE", connection_id);
+
+  if (!injected_database_name_.isNull())
+    db.setDatabaseName(injected_database_name_);
+  else
     db.setDatabaseName(directory_ + "/" + kDatabaseName);
-  }
+
   if (!db.open()) {
     emit Error("LibraryBackend: " + db.lastError().text());
     return db;
