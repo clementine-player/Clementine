@@ -34,7 +34,6 @@ const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
 LastFMService::LastFMService(QObject* parent)
   : RadioService(kServiceName, parent),
     scrobbler_(NULL),
-    config_(NULL),
     station_dialog_(new LastFMStationDialog),
     context_menu_(new QMenu),
     initial_tune_(false),
@@ -64,9 +63,6 @@ LastFMService::LastFMService(QObject* parent)
 }
 
 LastFMService::~LastFMService() {
-  delete config_;
-  delete station_dialog_;
-  delete context_menu_;
 }
 
 void LastFMService::ReloadSettings() {
@@ -81,7 +77,7 @@ void LastFMService::ReloadSettings() {
 
 void LastFMService::ShowConfig() {
   if (!config_) {
-    config_ = new LastFMConfigDialog;
+    config_.reset(new LastFMConfigDialog);
   }
 
   config_->show();

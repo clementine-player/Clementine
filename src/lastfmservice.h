@@ -14,16 +14,17 @@ uint qHash(const lastfm::Track& track);
 
 #include "radioservice.h"
 #include "song.h"
+#include "lastfmconfigdialog.h"
 #include "lastfmstationdialog.h"
 
 #include <QMap>
+#include <QMenu>
 #include <QNetworkAccessManager>
 #include <QQueue>
 
-class QMenu;
-class QAction;
+#include <boost/scoped_ptr.hpp>
 
-class LastFMConfigDialog;
+class QAction;
 
 class LastFMService : public RadioService {
   Q_OBJECT
@@ -135,10 +136,10 @@ class LastFMService : public RadioService {
   lastfm::Track next_metadata_;
   QQueue<lastfm::Track> playlist_;
 
-  LastFMConfigDialog* config_;
-  LastFMStationDialog* station_dialog_;
+  boost::scoped_ptr<LastFMConfigDialog> config_;
+  boost::scoped_ptr<LastFMStationDialog> station_dialog_;
 
-  QMenu* context_menu_;
+  boost::scoped_ptr<QMenu> context_menu_;
   QAction* play_action_;
   QAction* remove_action_;
   QAction* add_artist_action_;
