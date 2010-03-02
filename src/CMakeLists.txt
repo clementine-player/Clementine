@@ -168,6 +168,11 @@ else(APPLE)
   endif(WIN32)
 endif(APPLE)
 
+# resource file for windows
+if(WIN32)
+  set(CLEMENTINE-WIN32-RESOURCES ../dist/windres.rc)
+endif(WIN32)
+
 qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})
 qt4_wrap_ui(CLEMENTINE-SOURCES-UI ${CLEMENTINE-UI})
 qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-RESOURCES} ${CLEMENTINE-QM-RESOURCE})
@@ -205,6 +210,8 @@ add_dependencies(clementine_lib qtsingleapplication qxt)
 
 add_executable(clementine
    MACOSX_BUNDLE
+   WIN32
+   ${CLEMENTINE-WIN32-RESOURCES}
    main.cpp
 )
 target_link_libraries(clementine clementine_lib)
