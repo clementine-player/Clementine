@@ -40,7 +40,7 @@ macro(add_test_file test_source)
     add_executable(${TEST_NAME}
        ${ARGV0}
        ../3rdparty/gmock/src/gmock_main.cc)
-    target_link_libraries(${TEST_NAME} clementine_lib gmock)
+    target_link_libraries(${TEST_NAME} gmock clementine_lib)
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME})
     add_dependencies(test ${TEST_NAME})

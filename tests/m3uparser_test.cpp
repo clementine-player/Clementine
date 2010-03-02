@@ -44,7 +44,7 @@ TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
 }
 
 #ifdef Q_OS_WIN32
-TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
+TEST_F(M3UParserTest, ParsesTrackLocationAbsoluteWindows) {
   QString line("c:/foo/bar.mp3");
   QUrl url;
   ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));

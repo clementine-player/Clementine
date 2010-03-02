@@ -148,19 +148,24 @@ foreach(QM-FILE ${CLEMENTINE-QM-FILES})
 endforeach(QM-FILE)
 file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
 
-
+# Audio engine - phonon on windows, xine elsewhere
 if(WIN32)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} phononengine.cpp osd_win.cpp)
+  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} phononengine.cpp)
   set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} phononengine.h)
 else(WIN32)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} xine-engine.cpp xine-scope.c)
   set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} xine-engine.h)
 endif(WIN32)
 
+# OSD
 if(APPLE)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_mac.mm)
 else(APPLE)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_x11.cpp)
+  if(WIN32)
+    set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_win.cpp)
+  else(WIN32)
+    set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_x11.cpp)
+  endif(WIN32)
 endif(APPLE)
 
 qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})
@@ -182,13 +187,13 @@ add_library(clementine_lib
    ${CLEMENTINE-QM-FILES}
 )
 target_link_libraries(clementine_lib
-    ${QT_LIBRARIES}
     qtsingleapplication
     qxt
+    lastfm
     ${XINE_LIBRARIES}
     ${LIBNOTIFY_LIBRARIES}
     ${TAGLIB_LIBRARIES}
-    lastfm
+    ${QT_LIBRARIES}
 )
 if (APPLE)
   target_link_libraries(clementine_lib

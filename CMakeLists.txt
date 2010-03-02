@@ -2,6 +2,14 @@ cmake_minimum_required(VERSION 2.6)
 
 include(FindPkgConfig)
 
+if (CMAKE_FIND_ROOT_PATH)
+  # Help find the Qt headers if we're cross compiling (since we can't run qmake.exe)
+  # CMAKE_FIND_ROOT_PATH should get set by your cmake toolchain file
+  set(QT_HEADERS_DIR ${CMAKE_FIND_ROOT_PATH}/include)
+  set(QT_LIBRARY_DIR ${CMAKE_FIND_ROOT_PATH}/lib)
+  set(QT_PHONON_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/include/phonon)
+endif (CMAKE_FIND_ROOT_PATH)
+
 find_package(Qt4 REQUIRED)
 set(QT_USE_QTOPENGL 1)
 set(QT_USE_QTSQL 1)
@@ -14,9 +22,13 @@ endif(WIN32)
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 
-pkg_check_modules(TAGLIB taglib)
-pkg_check_modules(XINE libxine)
-pkg_check_modules(LIBNOTIFY libnotify)
+if(WIN32)
+  find_library(TAGLIB_LIBRARIES tag)
+else(WIN32)
+  pkg_check_modules(TAGLIB taglib)
+  pkg_check_modules(XINE libxine)
+  pkg_check_modules(LIBNOTIFY libnotify)
+endif(WIN32)
 
 if (NOT Boost_FOUND)
   message(FATAL_ERROR "Boost not found")
@@ -51,6 +63,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${XINE_INCLUDE_DIRS})
 include_directories(${LASTFM_INCLUDE_DIRS})
+
+# Remove GLU and GL from the link line - they're not really required
+# and don't exist on my mingw toolchain
+list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
