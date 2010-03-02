@@ -13,6 +13,7 @@
 #include <QtDebug>
 #include <QLibraryInfo>
 #include <QTranslator>
+#include <QDir>
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("Clementine");
@@ -47,6 +48,12 @@ int main(int argc, char *argv[]) {
 
   QTranslator clementine_translator;
   clementine_translator.load("clementine_" + QLocale::system().name(), ":/translations");
+  a.installTranslator(&clementine_translator);
+
+  // Also look for translations in the current directory so translators don't
+  // need to recompile Clementine to test their translations
+  QTranslator pwd_translator;
+  clementine_translator.load("clementine_" + QLocale::system().name(), QDir::currentPath());
   a.installTranslator(&clementine_translator);
 
   // Window
