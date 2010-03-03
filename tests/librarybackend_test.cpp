@@ -109,6 +109,37 @@ TEST_F(LibraryBackendTest, RemoveDirectory) {
   EXPECT_EQ(1, list[0].id);
 }
 
+TEST_F(LibraryBackendTest, AddInvalidSong) {
+  // Adding a song without certain fields set should fail
+  backend_->AddDirectory("/test");
+  Song s;
+  s.set_directory_id(1);
+
+  QSignalSpy spy(backend_.get(), SIGNAL(Error(QString)));
+
+  backend_->AddOrUpdateSongs(SongList() << s);
+  ASSERT_EQ(1, spy.count()); spy.takeFirst();
+
+  s.set_filename("foo");
+  backend_->AddOrUpdateSongs(SongList() << s);
+  ASSERT_EQ(1, spy.count()); spy.takeFirst();
+
+  s.set_filesize(100);
+  backend_->AddOrUpdateSongs(SongList() << s);
+  ASSERT_EQ(1, spy.count()); spy.takeFirst();
+
+  s.set_mtime(100);
+  backend_->AddOrUpdateSongs(SongList() << s);
+  ASSERT_EQ(1, spy.count()); spy.takeFirst();
+
+  s.set_ctime(100);
+  backend_->AddOrUpdateSongs(SongList() << s);
+  ASSERT_EQ(0, spy.count());
+}
+
+TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
+}
+
 
 // Test adding a single song to the database, then getting various information
 // back about it.
@@ -214,10 +245,4 @@ TEST_F(SingleSong, FindSongsInDirectory) {
   EXPECT_EQ(song_.artist(), songs[0].artist());
   EXPECT_EQ(song_.title(), songs[0].title());
   EXPECT_EQ(1, songs[0].id());
-}
-
-TEST_F(LibraryBackendTest, AddSongWithoutFilename) {
-}
-
-TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
 }
