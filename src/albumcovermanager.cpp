@@ -12,6 +12,10 @@
 #include <QDir>
 #include <QEvent>
 #include <QScrollBar>
+#include <QContextMenuEvent>
+#include <QLabel>
+#include <QFileDialog>
+#include <QMessageBox>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
@@ -21,7 +25,8 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
     cover_loader_(new BackgroundThread<AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
     artist_icon_(":/artist.png"),
-    all_artists_icon_(":/album.png")
+    all_artists_icon_(":/album.png"),
+    context_menu_(new QMenu(this))
 {
   ui_.setupUi(this);
 
@@ -37,9 +42,9 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
 
   // View menu
   QActionGroup* filter_group = new QActionGroup(this);
-  filter_all_ = filter_group->addAction("All albums");
-  filter_with_covers_ = filter_group->addAction("Albums with covers");
-  filter_without_covers_ = filter_group->addAction("Albums without covers");
+  filter_all_ = filter_group->addAction(tr("All albums"));
+  filter_with_covers_ = filter_group->addAction(tr("Albums with covers"));
+  filter_without_covers_ = filter_group->addAction(tr("Albums without covers"));
   filter_all_->setCheckable(true);
   filter_with_covers_->setCheckable(true);
   filter_without_covers_->setCheckable(true);
@@ -51,6 +56,14 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
 
   ui_.view->setMenu(view_menu);
 
+  // Context menu
+  context_menu_->addAction(ui_.action_show_fullsize);
+  context_menu_->addAction(ui_.action_fetch);
+  context_menu_->addAction(ui_.action_choose_manual);
+  context_menu_->addSeparator();
+  context_menu_->addAction(ui_.action_unset_cover);
+  ui_.albums->installEventFilter(this);
+
   // Connections
   connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
   connect(ui_.artists, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
@@ -61,6 +74,10 @@ AlbumCoverManager::AlbumCoverManager(QWidget *parent)
   connect(ui_.fetch, SIGNAL(clicked()), SLOT(FetchAlbumCovers()));
   connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage)),
           SLOT(AlbumCoverFetched(quint64,QImage)));
+  connect(ui_.action_show_fullsize, SIGNAL(triggered()), SLOT(ShowFullsize()));
+  connect(ui_.action_fetch, SIGNAL(triggered()), SLOT(FetchSingleCover()));
+  connect(ui_.action_choose_manual, SIGNAL(triggered()), SLOT(ChooseManualCover()));
+  connect(ui_.action_unset_cover, SIGNAL(triggered()), SLOT(UnsetCover()));
 
   // Restore settings
   QSettings s;
@@ -122,7 +139,7 @@ void AlbumCoverManager::Reset() {
     return;
 
   ui_.artists->clear();
-  new QListWidgetItem(all_artists_icon_, "All artists", ui_.artists, All_Artists);
+  new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_.artists, All_Artists);
 
   foreach (const QString& artist, backend_->GetAllArtists()) {
     if (artist.isEmpty())
@@ -143,6 +160,7 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     artist = current->text();
 
   ui_.albums->clear();
+  context_menu_items_.clear();
   CancelRequests();
 
   foreach (const LibraryBackend::Album& info,
@@ -154,6 +172,8 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
       quint64 id = cover_loader_->Worker()->LoadImageAsync(
           info.art_automatic, info.art_manual);
+      item->setData(Role_PathAutomatic, info.art_automatic);
+      item->setData(Role_PathManual, info.art_manual);
       cover_loading_tasks_[id] = item;
     }
   }
@@ -236,6 +256,7 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
 
     // Update the icon in our list
     quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), path);
+    item->setData(Role_PathManual, path);
     cover_loading_tasks_[id] = item;
   }
 
@@ -250,10 +271,99 @@ bool AlbumCoverManager::event(QEvent* e) {
     // We seem to have to reset them to sensible values each time the contents
     // of ui_.albums changes.
     ui_.albums->setVerticalScrollMode(QListWidget::ScrollPerPixel);
-    //ui_.albums->verticalScrollBar()->setPageStep(10);
     ui_.albums->verticalScrollBar()->setSingleStep(20);
   }
 
   QDialog::event(e);
   return false;
+}
+
+bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
+  if (obj == ui_.albums && event->type() == QEvent::ContextMenu) {
+    context_menu_items_ = ui_.albums->selectedItems();
+    if (context_menu_items_.isEmpty())
+      return false;
+
+    bool some_with_covers = false;
+
+    foreach (QListWidgetItem* item, context_menu_items_) {
+      if (item->icon().cacheKey() != no_cover_icon_.cacheKey())
+        some_with_covers = true;
+    }
+
+    ui_.action_show_fullsize->setEnabled(some_with_covers && context_menu_items_.size() == 1);
+    ui_.action_choose_manual->setEnabled(context_menu_items_.size() == 1);
+    ui_.action_unset_cover->setEnabled(some_with_covers);
+
+    QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
+    context_menu_->popup(e->globalPos());
+    return true;
+  }
+  return false;
+}
+
+void AlbumCoverManager::ShowFullsize() {
+  if (context_menu_items_.size() != 1)
+    return;
+  QListWidgetItem* item = context_menu_items_[0];
+
+  QString title = item->data(Role_AlbumName).toString();
+  if (!item->data(Role_ArtistName).toString().isNull())
+    title = item->data(Role_ArtistName).toString() + " - " + title;
+
+  QDialog* dialog = new QDialog(this);
+  dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+  dialog->setWindowTitle(title);
+
+  QLabel* label = new QLabel(dialog);
+  label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
+      item->data(Role_PathAutomatic).toString(),
+      item->data(Role_PathManual).toString()));
+
+  dialog->resize(label->pixmap()->size());
+  dialog->show();
+}
+
+void AlbumCoverManager::FetchSingleCover() {
+  foreach (QListWidgetItem* item, context_menu_items_) {
+    quint64 id = cover_fetcher_->FetchAlbumCover(
+        item->data(Role_ArtistName).toString(), item->data(Role_AlbumName).toString());
+    cover_fetching_tasks_[id] = item;
+  }
+}
+
+void AlbumCoverManager::ChooseManualCover() {
+  if (context_menu_items_.size() != 1)
+    return;
+  QListWidgetItem* item = context_menu_items_[0];
+
+  QString cover = QFileDialog::getOpenFileName(
+      this, tr("Choose manual cover"), item->data(Role_PathAutomatic).toString());
+  if (cover.isNull())
+    return;
+
+  // Can we load the image?
+  QImage image(cover);
+  if (image.isNull())
+    return;
+
+  // Update database
+  backend_->UpdateManualAlbumArtAsync(item->data(Role_ArtistName).toString(),
+                                      item->data(Role_AlbumName).toString(),
+                                      cover);
+
+  // Update the icon in our list
+  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
+  item->setData(Role_PathManual, cover);
+  cover_loading_tasks_[id] = item;
+}
+
+void AlbumCoverManager::UnsetCover() {
+  foreach (QListWidgetItem* item, context_menu_items_) {
+    item->setIcon(no_cover_icon_);
+    item->setData(Role_PathManual, AlbumCoverLoader::kManuallyUnsetCover);
+    backend_->UpdateManualAlbumArtAsync(item->data(Role_ArtistName).toString(),
+                                        item->data(Role_AlbumName).toString(),
+                                        AlbumCoverLoader::kManuallyUnsetCover);
+  }
 }

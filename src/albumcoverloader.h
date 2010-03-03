@@ -21,6 +21,11 @@ class AlbumCoverLoader : public QObject {
 
   void Clear();
 
+  static QImage TryLoadImage(const QString& automatic, const QString& manual);
+  static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual);
+
+  static const char* kManuallyUnsetCover;
+
  signals:
   void ImageLoaded(quint64 id, const QImage& image);
 

@@ -31,6 +31,9 @@ class AlbumCoverManager : public QDialog {
   void closeEvent(QCloseEvent *);
   bool event(QEvent *);
 
+  // For the album view context menu events
+  bool eventFilter(QObject *obj, QEvent *event);
+
  private slots:
   void ArtistChanged(QListWidgetItem* current);
   void CoverLoaderInitialised();
@@ -38,6 +41,12 @@ class AlbumCoverManager : public QDialog {
   void UpdateFilter();
   void FetchAlbumCovers();
   void AlbumCoverFetched(quint64 id, const QImage& image);
+
+  // On the context menu
+  void ShowFullsize();
+  void FetchSingleCover();
+  void ChooseManualCover();
+  void UnsetCover();
 
  private:
   enum ArtistItemType {
@@ -48,6 +57,8 @@ class AlbumCoverManager : public QDialog {
   enum Role {
     Role_ArtistName = Qt::UserRole + 1,
     Role_AlbumName,
+    Role_PathAutomatic,
+    Role_PathManual,
   };
 
   void CancelRequests();
@@ -71,6 +82,9 @@ class AlbumCoverManager : public QDialog {
   QIcon artist_icon_;
   QIcon all_artists_icon_;
   QIcon no_cover_icon_;
+
+  QMenu* context_menu_;
+  QList<QListWidgetItem*> context_menu_items_;
 };
 
 #endif // ALBUMCOVERMANAGER_H

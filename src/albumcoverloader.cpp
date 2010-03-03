@@ -4,6 +4,8 @@
 #include <QDir>
 #include <QCoreApplication>
 
+const char* AlbumCoverLoader::kManuallyUnsetCover = "(unset)";
+
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     height_(120),
@@ -50,11 +52,7 @@ void AlbumCoverLoader::ProcessTasks() {
     }
 
     // Try to load the image
-    QImage image;
-    if (!task.art_manual.isEmpty())
-      image.load(task.art_manual);
-    if (!task.art_automatic.isEmpty() && image.isNull())
-      image.load(task.art_automatic);
+    QImage image(TryLoadImage(task.art_automatic, task.art_manual));
 
     if (!image.isNull()) {
       // Scale the image down
@@ -74,4 +72,26 @@ void AlbumCoverLoader::ProcessTasks() {
 
     emit ImageLoaded(task.id, image);
   }
+}
+
+QImage AlbumCoverLoader::TryLoadImage(const QString &automatic, const QString &manual) {
+  QImage ret;
+  if (manual == kManuallyUnsetCover)
+    return ret;
+  if (!manual.isEmpty())
+    ret.load(manual);
+  if (!automatic.isEmpty() && ret.isNull())
+    ret.load(automatic);
+  return ret;
+}
+
+QPixmap AlbumCoverLoader::TryLoadPixmap(const QString &automatic, const QString &manual) {
+  QPixmap ret;
+  if (manual == kManuallyUnsetCover)
+    return ret;
+  if (!manual.isEmpty())
+    ret.load(manual);
+  if (!automatic.isEmpty() && ret.isNull())
+    ret.load(automatic);
+  return ret;
 }

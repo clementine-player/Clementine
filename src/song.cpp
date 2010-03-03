@@ -21,6 +21,7 @@
 
 #include "trackslider.h"
 #include "enginebase.h"
+#include "albumcoverloader.h"
 
 const char* Song::kColumnSpec =
     "title, album, artist, albumartist, composer, "
@@ -372,11 +373,9 @@ QImage Song::GetBestImage() const {
   if (!d->image_.isNull())
     return d->image_;
 
-  if (!d->art_manual_.isEmpty())
-    return QImage(d->art_manual_);
-
-  if (!d->art_automatic_.isEmpty())
-    return QImage(d->art_automatic_);
+  QImage art(AlbumCoverLoader::TryLoadImage(d->art_automatic_, d->art_manual_));
+  if (!art.isNull())
+    return art;
 
   return QImage(":/nocover.png");
 }

@@ -124,6 +124,42 @@
     </widget>
    </item>
   </layout>
+  <action name="action_show_fullsize">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/zoom-in.png</normaloff>:/zoom-in.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show fullsize...</string>
+   </property>
+  </action>
+  <action name="action_fetch">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/download.png</normaloff>:/download.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fetch automatically</string>
+   </property>
+  </action>
+  <action name="action_choose_manual">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
+   </property>
+   <property name="text">
+    <string>Choose manual cover...</string>
+   </property>
+  </action>
+  <action name="action_unset_cover">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
+   </property>
+   <property name="text">
+    <string>Unset cover</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -140,9 +176,7 @@
   <tabstop>fetch</tabstop>
   <tabstop>albums</tabstop>
  </tabstops>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>clear</sender>
