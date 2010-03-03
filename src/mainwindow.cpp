@@ -39,7 +39,7 @@
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   : QMainWindow(parent),
     tray_icon_(new SystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, this)),
@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     settings_dialog_(new SettingsDialog(this)),
     add_stream_dialog_(new AddStreamDialog(this)),
     shortcuts_dialog_(new ShortcutsDialog(this)),
-    cover_manager_(new AlbumCoverManager(this)),
+    cover_manager_(new AlbumCoverManager(network, this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))

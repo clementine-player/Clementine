@@ -9,15 +9,12 @@
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
-AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent, QNetworkAccessManager* network)
+AlbumCoverFetcher::AlbumCoverFetcher(QNetworkAccessManager* network, QObject* parent)
     : QObject(parent),
       network_(network),
       next_id_(0),
       request_starter_(new QTimer(this))
 {
-  if (!network_.get()) {
-    network_.reset(new QNetworkAccessManager);
-  }
   request_starter_->setInterval(1000);
   connect(request_starter_, SIGNAL(timeout()), SLOT(StartRequests()));
 }

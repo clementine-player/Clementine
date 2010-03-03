@@ -14,6 +14,7 @@
 #include <QLibraryInfo>
 #include <QTranslator>
 #include <QDir>
+#include <QNetworkAccessManager>
 
 void LoadTranslation(const QString& prefix, const QString& path) {
   QTranslator* t = new QTranslator;
@@ -52,8 +53,10 @@ int main(int argc, char *argv[]) {
   LoadTranslation("clementine", a.applicationDirPath());
   LoadTranslation("clementine", QDir::currentPath());
 
+  QNetworkAccessManager network;
+
   // Window
-  MainWindow w;
+  MainWindow w(&network);;
   a.setActivationWindow(&w);
 
   QObject::connect(&a, SIGNAL(messageReceived(QString)), &w, SLOT(show()));

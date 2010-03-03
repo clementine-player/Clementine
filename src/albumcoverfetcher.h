@@ -18,7 +18,7 @@ class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(QObject* parent = 0, QNetworkAccessManager* network_ = 0);
+  AlbumCoverFetcher(QNetworkAccessManager* network, QObject* parent = 0);
   virtual ~AlbumCoverFetcher() {}
 
   static const int kMaxConcurrentRequests;
@@ -42,7 +42,7 @@ class AlbumCoverFetcher : public QObject {
     QString album;
   };
 
-  boost::scoped_ptr<QNetworkAccessManager> network_;
+  QNetworkAccessManager* network_;
   quint64 next_id_;
 
   QQueue<QueuedRequest> queued_requests_;

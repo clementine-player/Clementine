@@ -27,11 +27,13 @@ class AlbumCoverManager;
 class QSortFilterProxyModel;
 class SystemTrayIcon;
 
+class QNetworkAccessManager;
+
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget *parent = 0);
+  MainWindow(QNetworkAccessManager* network, QWidget *parent = 0);
   ~MainWindow();
 
   void SetHiddenInTray(bool hidden);

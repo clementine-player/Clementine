@@ -19,11 +19,11 @@
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
-AlbumCoverManager::AlbumCoverManager(QWidget *parent)
+AlbumCoverManager::AlbumCoverManager(QNetworkAccessManager* network, QWidget *parent)
   : QDialog(parent),
     constructed_(false),
     cover_loader_(new BackgroundThread<AlbumCoverLoader>(this)),
-    cover_fetcher_(new AlbumCoverFetcher(this)),
+    cover_fetcher_(new AlbumCoverFetcher(network, this)),
     artist_icon_(":/artist.png"),
     all_artists_icon_(":/album.png"),
     context_menu_(new QMenu(this))

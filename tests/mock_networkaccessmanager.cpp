@@ -26,8 +26,8 @@ class RequestForUrlMatcher : public MatcherInterface<const QNetworkRequest&> {
       return false;
     }
 
-    for (QMap<QString, QString>::const_iterator it = expected_params_.begin();
-         it != expected_params_.end(); ++it) {
+    for (QMap<QString, QString>::const_iterator it = expected_params_.constBegin();
+         it != expected_params_.constEnd(); ++it) {
       if (!url.hasQueryItem(it.key()) ||
           url.queryItemValue(it.key()) != it.value()) {
         return false;
@@ -55,9 +55,9 @@ MockNetworkReply* MockNetworkAccessManager::ExpectGet(
     const QString& contains,
     const QMap<QString, QString>& expected_params,
     int status,
-    const char* data) {
+    const QByteArray& data) {
   MockNetworkReply* reply = new MockNetworkReply(data);
-  reply->setAttribute(QNetworkRequest::HttpStatusCodeAttribute, 200);
+  reply->setAttribute(QNetworkRequest::HttpStatusCodeAttribute, status);
 
   EXPECT_CALL(*this, createRequest(
       GetOperation, RequestForUrl(contains, expected_params), NULL)).
@@ -66,32 +66,26 @@ MockNetworkReply* MockNetworkAccessManager::ExpectGet(
   return reply;
 }
 
-MockNetworkAccessManager::~MockNetworkAccessManager() {
-}
-
 MockNetworkReply::MockNetworkReply()
-    : data_(NULL),
-      size_(0) {
+    : data_(NULL) {
 }
 
-MockNetworkReply::MockNetworkReply(const char* data)
+MockNetworkReply::MockNetworkReply(const QByteArray& data)
     : data_(data),
-      size_(strlen(data)),
       pos_(0) {
 }
 
-void MockNetworkReply::SetData(const char* data) {
+void MockNetworkReply::SetData(const QByteArray& data) {
   data_ = data;
-  size_ = strlen(data);
   pos_ = 0;
 }
 
 qint64 MockNetworkReply::readData(char* data, qint64 size) {
-  if (size_ == pos_) {
+  if (data_.size() == pos_) {
     return -1;
   }
-  qint64 bytes_to_read = min(size_ - pos_, size);
-  memcpy(data, data_, bytes_to_read);
+  qint64 bytes_to_read = min(data_.size() - pos_, size);
+  memcpy(data, data_.constData() + pos_, bytes_to_read);
   pos_ += bytes_to_read;
   return bytes_to_read;
 }

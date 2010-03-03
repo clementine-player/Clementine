@@ -23,6 +23,7 @@ class AlbumCoverFetcherTest : public ::testing::Test {
   }
 
   void SetUp() {
+    // Lastfm takes ownership of this.
     network_ = new MockNetworkAccessManager;
     lastfm::setNetworkAccessManager(network_);
   }
@@ -44,7 +45,7 @@ TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
   params.clear();
   MockNetworkReply* album_reply = network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
 
-  AlbumCoverFetcher fetcher(NULL, network_);
+  AlbumCoverFetcher fetcher(network_, NULL);
   QSignalSpy spy(&fetcher, SIGNAL(AlbumCoverFetched(quint64, const QImage&)));
   ASSERT_TRUE(spy.isValid());
   fetcher.FetchAlbumCover("Foo", "Bar");

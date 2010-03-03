@@ -13,10 +13,12 @@
 class LibraryBackend;
 class AlbumCoverFetcher;
 
+class QNetworkAccessManager;
+
 class AlbumCoverManager : public QDialog {
   Q_OBJECT
  public:
-  AlbumCoverManager(QWidget *parent = 0);
+  AlbumCoverManager(QNetworkAccessManager* network, QWidget *parent = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
