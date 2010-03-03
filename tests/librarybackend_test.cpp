@@ -125,7 +125,9 @@ class SingleSong : public LibraryBackendTest {
     song_.set_title("Title");
     song_.set_artist("Artist");
     song_.set_album("Album");
+  }
 
+  void AddDummySong() {
     QSignalSpy added_spy(backend_.get(), SIGNAL(SongsDiscovered(SongList)));
     QSignalSpy deleted_spy(backend_.get(), SIGNAL(SongsDeleted(SongList)));
 
@@ -149,12 +151,16 @@ class SingleSong : public LibraryBackendTest {
 };
 
 TEST_F(SingleSong, GetAllArtists) {
+  AddDummySong();
+
   QStringList artists = backend_->GetAllArtists();
   ASSERT_EQ(1, artists.size());
   EXPECT_EQ(song_.artist(), artists[0]);
 }
 
 TEST_F(SingleSong, GetAllAlbums) {
+  AddDummySong();
+
   LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
   ASSERT_EQ(1, albums.size());
   EXPECT_EQ(song_.album(), albums[0].album_name);
@@ -162,6 +168,8 @@ TEST_F(SingleSong, GetAllAlbums) {
 }
 
 TEST_F(SingleSong, GetAlbumsByArtist) {
+  AddDummySong();
+
   LibraryBackend::AlbumList albums = backend_->GetAlbumsByArtist("Artist");
   ASSERT_EQ(1, albums.size());
   EXPECT_EQ(song_.album(), albums[0].album_name);
@@ -169,12 +177,16 @@ TEST_F(SingleSong, GetAlbumsByArtist) {
 }
 
 TEST_F(SingleSong, GetAlbumArt) {
+  AddDummySong();
+
   LibraryBackend::Album album = backend_->GetAlbumArt("Artist", "Album");
   EXPECT_EQ(song_.album(), album.album_name);
   EXPECT_EQ(song_.artist(), album.artist);
 }
 
 TEST_F(SingleSong, GetSongs) {
+  AddDummySong();
+
   SongList songs = backend_->GetSongs("Artist", "Album");
   ASSERT_EQ(1, songs.size());
   EXPECT_EQ(song_.album(), songs[0].album());
@@ -184,6 +196,8 @@ TEST_F(SingleSong, GetSongs) {
 }
 
 TEST_F(SingleSong, GetSongById) {
+  AddDummySong();
+
   Song song = backend_->GetSongById(1);
   EXPECT_EQ(song_.album(), song.album());
   EXPECT_EQ(song_.artist(), song.artist());
@@ -192,6 +206,8 @@ TEST_F(SingleSong, GetSongById) {
 }
 
 TEST_F(SingleSong, FindSongsInDirectory) {
+  AddDummySong();
+
   SongList songs = backend_->FindSongsInDirectory(1);
   ASSERT_EQ(1, songs.size());
   EXPECT_EQ(song_.album(), songs[0].album());
