@@ -182,7 +182,7 @@ class SingleSong : public LibraryBackendTest {
 };
 
 TEST_F(SingleSong, GetAllArtists) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   QStringList artists = backend_->GetAllArtists();
   ASSERT_EQ(1, artists.size());
@@ -190,7 +190,7 @@ TEST_F(SingleSong, GetAllArtists) {
 }
 
 TEST_F(SingleSong, GetAllAlbums) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
   ASSERT_EQ(1, albums.size());
@@ -199,7 +199,7 @@ TEST_F(SingleSong, GetAllAlbums) {
 }
 
 TEST_F(SingleSong, GetAlbumsByArtist) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   LibraryBackend::AlbumList albums = backend_->GetAlbumsByArtist("Artist");
   ASSERT_EQ(1, albums.size());
@@ -208,7 +208,7 @@ TEST_F(SingleSong, GetAlbumsByArtist) {
 }
 
 TEST_F(SingleSong, GetAlbumArt) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   LibraryBackend::Album album = backend_->GetAlbumArt("Artist", "Album");
   EXPECT_EQ(song_.album(), album.album_name);
@@ -216,7 +216,7 @@ TEST_F(SingleSong, GetAlbumArt) {
 }
 
 TEST_F(SingleSong, GetSongs) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   SongList songs = backend_->GetSongs("Artist", "Album");
   ASSERT_EQ(1, songs.size());
@@ -227,7 +227,7 @@ TEST_F(SingleSong, GetSongs) {
 }
 
 TEST_F(SingleSong, GetSongById) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   Song song = backend_->GetSongById(1);
   EXPECT_EQ(song_.album(), song.album());
@@ -237,7 +237,7 @@ TEST_F(SingleSong, GetSongById) {
 }
 
 TEST_F(SingleSong, FindSongsInDirectory) {
-  AddDummySong();
+  AddDummySong();  if (HasFatalFailure()) return;
 
   SongList songs = backend_->FindSongsInDirectory(1);
   ASSERT_EQ(1, songs.size());
@@ -245,4 +245,59 @@ TEST_F(SingleSong, FindSongsInDirectory) {
   EXPECT_EQ(song_.artist(), songs[0].artist());
   EXPECT_EQ(song_.title(), songs[0].title());
   EXPECT_EQ(1, songs[0].id());
+}
+
+TEST_F(SingleSong, UpdateSong) {
+  AddDummySong();  if (HasFatalFailure()) return;
+
+  Song new_song(song_);
+  new_song.set_id(1);
+  new_song.set_title("A different title");
+
+  QSignalSpy deleted_spy(backend_.get(), SIGNAL(SongsDeleted(SongList)));
+  QSignalSpy added_spy(backend_.get(), SIGNAL(SongsDiscovered(SongList)));
+
+  backend_->AddOrUpdateSongs(SongList() << new_song);
+
+  ASSERT_EQ(1, added_spy.size());
+  ASSERT_EQ(1, deleted_spy.size());
+
+  SongList songs_added = added_spy[0][0].value<SongList>();
+  SongList songs_deleted = deleted_spy[0][0].value<SongList>();
+  ASSERT_EQ(1, songs_added.size());
+  ASSERT_EQ(1, songs_deleted.size());
+  EXPECT_EQ("Title", songs_deleted[0].title());
+  EXPECT_EQ("A different title", songs_added[0].title());
+  EXPECT_EQ(1, songs_deleted[0].id());
+  EXPECT_EQ(1, songs_added[0].id());
+}
+
+TEST_F(SingleSong, DeleteSongs) {
+  AddDummySong();  if (HasFatalFailure()) return;
+
+  Song new_song(song_);
+  new_song.set_id(1);
+
+  QSignalSpy deleted_spy(backend_.get(), SIGNAL(SongsDeleted(SongList)));
+
+  backend_->DeleteSongs(SongList() << new_song);
+
+  ASSERT_EQ(1, deleted_spy.size());
+
+  SongList songs_deleted = deleted_spy[0][0].value<SongList>();
+  ASSERT_EQ(1, songs_deleted.size());
+  EXPECT_EQ("Title", songs_deleted[0].title());
+  EXPECT_EQ(1, songs_deleted[0].id());
+
+  // Check we can't retreive that song any more
+  Song song = backend_->GetSongById(1);
+  EXPECT_FALSE(song.is_valid());
+  EXPECT_EQ(-1, song.id());
+
+  // And the artist or album shouldn't show up either
+  QStringList artists = backend_->GetAllArtists();
+  EXPECT_EQ(0, artists.size());
+
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  EXPECT_EQ(0, albums.size());
 }

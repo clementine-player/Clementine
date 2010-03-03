@@ -64,6 +64,7 @@ class LibraryBackend : public QObject {
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
   void UpdateCompilations();
+  void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
 
  signals:
   void Error(const QString& message);
@@ -75,9 +76,6 @@ class LibraryBackend : public QObject {
   void SongsDeleted(const SongList& songs);
 
   void TotalSongCountUpdated(int total);
-
- private slots:
-  void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
 
  private:
   struct CompilationInfo {

@@ -180,6 +180,9 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 }
 
 void Song::InitFromQuery(const QSqlQuery& q) {
+  if (!q.isValid())
+    return;
+
   d->valid_ = true;
 
   #define tostr(n) (q.value(n).isNull() ? QString::null : q.value(n).toString())
