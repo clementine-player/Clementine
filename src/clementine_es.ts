@@ -53,34 +53,34 @@ p, li { white-space: pre-wrap; }
     <name>AddStreamDialog</name>
     <message>
         <source>Add Stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Flujo de Radio</translation>
     </message>
     <message>
         <source>Enter the URL of an internet radio stream:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingrese la URL de un flujo de radio por internet:</translation>
     </message>
     <message>
         <source>Save this stream in the Radio tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar este flujo en la seccion de Radios</translation>
     </message>
 </context>
 <context>
     <name>CoverManager</name>
     <message>
         <source>Cover Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de carátulas</translation>
     </message>
     <message>
         <source>Enter search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca aqúi los términos de búsqueda</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista</translation>
     </message>
     <message>
         <source>Fetch Missing Covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Descargar las carátulas que faltan</translation>
     </message>
 </context>
 <context>
@@ -123,9 +123,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message numerus="yes">
         <source>Editing %n tracks</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Editando %n pista</numerusform>
+            <numerusform>Editando %n pistas</numerusform>
         </translation>
     </message>
 </context>
@@ -198,7 +198,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Last.fm</source>
-        <translation type="unfinished">Last.fm</translation>
+        <translation>Last.fm</translation>
     </message>
 </context>
 <context>
@@ -463,7 +463,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Previous track</source>
-        <translation>Pista Anterior</translation>
+        <translation>Pista anterior</translation>
     </message>
     <message>
         <source>Play</source>
@@ -551,39 +551,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add media...</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir medio...</translation>
     </message>
     <message>
         <source>Add stream...</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir flujo...</translation>
     </message>
     <message>
         <source>Open media...</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir medio...</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mostrar icono de la bandeja</translation>
     </message>
     <message>
         <source>&amp;Hide tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ocultar icono de la bandeja</translation>
     </message>
     <message>
         <source>Configure &amp;Global Shortcuts...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar los accesos rápidos &amp;globales...</translation>
     </message>
     <message>
         <source>Enter search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca aqúi los términos de búsqueda</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramientas</translation>
     </message>
     <message>
         <source>Cover Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de carátulas</translation>
     </message>
 </context>
 <context>
@@ -709,15 +709,15 @@ p, li { white-space: pre-wrap; }
     <name>SavedRadio</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished">Añadir a la lista de reproducción</translation>
+        <translation>Añadir a la lista de reproducción</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Quitar</translation>
+        <translation>Quitar</translation>
     </message>
     <message>
         <source>Add another stream...</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir un flujo de radio...</translation>
     </message>
 </context>
 <context>
@@ -784,102 +784,102 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show a notification when I change the volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar una notificación cuando cambio el volúmen</translation>
     </message>
     <message>
         <source>Include album art in the notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Incluir arte del disco en la notificación</translation>
     </message>
 </context>
 <context>
     <name>ShortcutsDialog</name>
     <message>
         <source>Configure Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Accesos Rápidos</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished">Reproducir</translation>
+        <translation>Reproducir</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished">Pausa</translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <source>Play/Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir/Pausar</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished">Detener</translation>
+        <translation>Detener</translation>
     </message>
     <message>
         <source>Stop Playing After Current Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Detener reproducción al finalizar la pista</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista siguiente</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista anterior</translation>
     </message>
     <message>
         <source>Increase Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar Volúmen</translation>
     </message>
     <message>
         <source>Decrease Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Disminuir Volumen</translation>
     </message>
     <message>
         <source>Mute Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Silencio</translation>
     </message>
     <message>
         <source>Seek Forwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar hacia delante</translation>
     </message>
     <message>
         <source>Seek Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar hacia atrás</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceso rápido</translation>
     </message>
     <message>
         <source>Alternate</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternativo</translation>
     </message>
     <message>
         <source>&amp;Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Por defecto</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceso rápido para la acción seleccionada</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ninguno</translation>
     </message>
     <message>
         <source>De&amp;fault</source>
-        <translation type="unfinished"></translation>
+        <translation>Por &amp;defecto</translation>
     </message>
     <message>
         <source>&amp;Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Personalizado</translation>
     </message>
     <message>
         <source>Non&amp;e</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ninguno</translation>
     </message>
     <message>
         <source>Default key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Acceso por defecto:</translation>
     </message>
 </context>
 <context>
