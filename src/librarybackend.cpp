@@ -78,7 +78,6 @@ QSqlDatabase LibraryBackend::Connect() {
   }
   if (schema_version < kSchemaVersion) {
     // Update the schema
-    qDebug() << "Updating database schema from" << schema_version << "to" << kSchemaVersion;
     for (int v=schema_version+1 ; v<= kSchemaVersion ; ++v) {
       UpdateDatabaseSchema(v, db);
     }
@@ -99,8 +98,6 @@ void LibraryBackend::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
   QString schema(QString::fromUtf8(schema_file.readAll()));
-
-  qDebug() << "Applying database schema version" << version;
 
   // Run each command
   QStringList commands(schema.split(";\n\n"));

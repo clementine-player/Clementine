@@ -9,6 +9,7 @@
 
 #include <QtDebug>
 #include <QThread>
+#include <QSignalSpy>
 
 using ::testing::_;
 using ::testing::AtMost;
@@ -75,51 +76,128 @@ TEST_F(LibraryBackendTest, EmptyDatabase) {
   EXPECT_TRUE(albums.isEmpty());
 }
 
-TEST_F(LibraryBackendTest, AddSong) {
-  // Add a directory
+TEST_F(LibraryBackendTest, AddDirectory) {
+  QSignalSpy spy(backend_.get(), SIGNAL(DirectoriesDiscovered(DirectoryList)));
+
   backend_->AddDirectory("/test");
 
-  // Add the song
-  Song s = MakeDummySong(1);
-  s.set_title("Foo");
-  s.set_artist("Bar");
-  s.set_album("Meep");
-  backend_->AddOrUpdateSongs(SongList() << s);
+  // Check the signal was emitted correctly
+  ASSERT_EQ(1, spy.count());
+  DirectoryList list = spy[0][0].value<DirectoryList>();
+  ASSERT_EQ(1, list.size());
+  EXPECT_EQ("/test", list[0].path);
+  EXPECT_EQ(1, list[0].id);
+}
 
-  // Check the artist
+TEST_F(LibraryBackendTest, RemoveDirectory) {
+  // Add a directory
+  Directory dir;
+  dir.id = 1;
+  dir.path = "/test";
+  backend_->AddDirectory(dir.path);
+
+  QSignalSpy spy(backend_.get(), SIGNAL(DirectoriesDeleted(DirectoryList)));
+
+  // Remove the directory again
+  backend_->RemoveDirectory(dir);
+
+  // Check the signal was emitted correctly
+  ASSERT_EQ(1, spy.count());
+  DirectoryList list = spy[0][0].value<DirectoryList>();
+  ASSERT_EQ(1, list.size());
+  EXPECT_EQ("/test", list[0].path);
+  EXPECT_EQ(1, list[0].id);
+}
+
+
+// Test adding a single song to the database, then getting various information
+// back about it.
+class SingleSong : public LibraryBackendTest {
+ protected:
+  virtual void SetUp() {
+    LibraryBackendTest::SetUp();
+
+    // Add a directory - this will get ID 1
+    backend_->AddDirectory("/test");
+
+    // Make a song in that directory
+    song_ = MakeDummySong(1);
+    song_.set_title("Title");
+    song_.set_artist("Artist");
+    song_.set_album("Album");
+
+    QSignalSpy added_spy(backend_.get(), SIGNAL(SongsDiscovered(SongList)));
+    QSignalSpy deleted_spy(backend_.get(), SIGNAL(SongsDeleted(SongList)));
+
+    // Add the song
+    backend_->AddOrUpdateSongs(SongList() << song_);
+
+    // Check the correct signals were emitted
+    EXPECT_EQ(0, deleted_spy.count());
+    ASSERT_EQ(1, added_spy.count());
+
+    SongList list = added_spy[0][0].value<SongList>();
+    ASSERT_EQ(1, list.count());
+    EXPECT_EQ(song_.title(), list[0].title());
+    EXPECT_EQ(song_.artist(), list[0].artist());
+    EXPECT_EQ(song_.album(), list[0].album());
+    EXPECT_EQ(1, list[0].id());
+    EXPECT_EQ(1, list[0].directory_id());
+  }
+
+  Song song_;
+};
+
+TEST_F(SingleSong, GetAllArtists) {
   QStringList artists = backend_->GetAllArtists();
   ASSERT_EQ(1, artists.size());
-  EXPECT_EQ(s.artist(), artists[0]);
+  EXPECT_EQ(song_.artist(), artists[0]);
+}
 
-  // Check the various album getters
+TEST_F(SingleSong, GetAllAlbums) {
   LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
   ASSERT_EQ(1, albums.size());
-  EXPECT_EQ(s.album(), albums[0].album_name);
-  EXPECT_EQ(s.artist(), albums[0].artist);
+  EXPECT_EQ(song_.album(), albums[0].album_name);
+  EXPECT_EQ(song_.artist(), albums[0].artist);
+}
 
-  albums = backend_->GetAlbumsByArtist("Bar");
+TEST_F(SingleSong, GetAlbumsByArtist) {
+  LibraryBackend::AlbumList albums = backend_->GetAlbumsByArtist("Artist");
   ASSERT_EQ(1, albums.size());
-  EXPECT_EQ(s.album(), albums[0].album_name);
-  EXPECT_EQ(s.artist(), albums[0].artist);
+  EXPECT_EQ(song_.album(), albums[0].album_name);
+  EXPECT_EQ(song_.artist(), albums[0].artist);
+}
 
-  LibraryBackend::Album album = backend_->GetAlbumArt("Bar", "Meep");
-  EXPECT_EQ(s.album(), album.album_name);
-  EXPECT_EQ(s.artist(), album.artist);
+TEST_F(SingleSong, GetAlbumArt) {
+  LibraryBackend::Album album = backend_->GetAlbumArt("Artist", "Album");
+  EXPECT_EQ(song_.album(), album.album_name);
+  EXPECT_EQ(song_.artist(), album.artist);
+}
 
-  // Check we can get the song back
-  SongList songs = backend_->GetSongs("Bar", "Meep");
+TEST_F(SingleSong, GetSongs) {
+  SongList songs = backend_->GetSongs("Artist", "Album");
   ASSERT_EQ(1, songs.size());
-  EXPECT_EQ(s.album(), songs[0].album());
-  EXPECT_EQ(s.artist(), songs[0].artist());
-  EXPECT_EQ(s.title(), songs[0].title());
+  EXPECT_EQ(song_.album(), songs[0].album());
+  EXPECT_EQ(song_.artist(), songs[0].artist());
+  EXPECT_EQ(song_.title(), songs[0].title());
   EXPECT_EQ(1, songs[0].id());
+}
 
-  // Check we can get the song by ID
-  Song song2 = backend_->GetSongById(1);
-  EXPECT_EQ(s.album(), song2.album());
-  EXPECT_EQ(s.artist(), song2.artist()); // This is an error - song2.artist() should obviously be "Blur"
-  EXPECT_EQ(s.title(), song2.title());
-  EXPECT_EQ(1, song2.id());
+TEST_F(SingleSong, GetSongById) {
+  Song song = backend_->GetSongById(1);
+  EXPECT_EQ(song_.album(), song.album());
+  EXPECT_EQ(song_.artist(), song.artist());
+  EXPECT_EQ(song_.title(), song.title());
+  EXPECT_EQ(1, song.id());
+}
+
+TEST_F(SingleSong, FindSongsInDirectory) {
+  SongList songs = backend_->FindSongsInDirectory(1);
+  ASSERT_EQ(1, songs.size());
+  EXPECT_EQ(song_.album(), songs[0].album());
+  EXPECT_EQ(song_.artist(), songs[0].artist());
+  EXPECT_EQ(song_.title(), songs[0].title());
+  EXPECT_EQ(1, songs[0].id());
 }
 
 TEST_F(LibraryBackendTest, AddSongWithoutFilename) {

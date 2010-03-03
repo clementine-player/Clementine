@@ -7,6 +7,7 @@
 #include <QSharedDataPointer>
 #include <QSqlQuery>
 #include <QString>
+#include <QMetaType>
 
 #include "engine_fwd.h"
 
@@ -152,7 +153,9 @@ class Song {
  private:
   QSharedDataPointer<SongData> d;
 };
+Q_DECLARE_METATYPE(Song);
 
 typedef QList<Song> SongList;
+Q_DECLARE_METATYPE(SongList);
 
 #endif // SONG_H
