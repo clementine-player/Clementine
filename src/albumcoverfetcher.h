@@ -9,6 +9,8 @@
 
 #include <lastfm/Album>
 
+#include <boost/scoped_ptr.hpp>
+
 class QNetworkReply;
 class QString;
 
@@ -16,7 +18,7 @@ class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(QObject* parent = 0);
+  AlbumCoverFetcher(QObject* parent = 0, QNetworkAccessManager* network_ = 0);
   virtual ~AlbumCoverFetcher() {}
 
   static const int kMaxConcurrentRequests;
@@ -40,7 +42,7 @@ class AlbumCoverFetcher : public QObject {
     QString album;
   };
 
-  QNetworkAccessManager network_;
+  boost::scoped_ptr<QNetworkAccessManager> network_;
   quint64 next_id_;
 
   QQueue<QueuedRequest> queued_requests_;

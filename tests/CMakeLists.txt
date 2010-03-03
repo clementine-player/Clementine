@@ -29,6 +29,17 @@ set(GMOCK-SOURCES
 add_library(gmock ${GMOCK-SOURCES})
 target_link_libraries(gmock gtest)
 
+set(MOCK-SOURCES
+    mock_networkaccessmanager.cpp)
+
+set(MOCK-MOC-HEADERS
+    mock_networkaccessmanager.h)
+
+qt4_wrap_cpp(MOCK-SOURCES-MOC ${MOCK-MOC-HEADERS})
+
+add_library(mocks ${MOCK-SOURCES} ${MOCK-SOURCES-MOC})
+target_link_libraries(mocks gmock)
+
 add_custom_target(test
     echo "Running tests"
     WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
@@ -41,7 +52,7 @@ macro(add_test_file test_source)
        ${ARGV0}
        main.cpp
     )
-    target_link_libraries(${TEST_NAME} gmock clementine_lib)
+    target_link_libraries(${TEST_NAME} gmock clementine_lib mocks)
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME})
     add_dependencies(test ${TEST_NAME})
@@ -51,3 +62,4 @@ endmacro (add_test_file)
 add_test_file(m3uparser_test.cpp)
 add_test_file(song_test.cpp)
 add_test_file(librarybackend_test.cpp)
+add_test_file(albumcoverfetcher_test.cpp)

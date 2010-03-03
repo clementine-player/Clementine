@@ -1,5 +1,6 @@
 #include "test_utils.h"
 
+#include <QNetworkRequest>
 #include <QString>
 #include <QUrl>
 
@@ -13,3 +14,7 @@ std::ostream& operator <<(std::ostream& stream, const QUrl& url) {
   return stream;
 }
 
+std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req) {
+  stream << req.url().toString().toStdString();
+  return stream;
+}

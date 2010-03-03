@@ -9,11 +9,15 @@
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
-AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent)
+AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent, QNetworkAccessManager* network)
     : QObject(parent),
+      network_(network),
       next_id_(0),
       request_starter_(new QTimer(this))
 {
+  if (!network_.get()) {
+    network_.reset(new QNetworkAccessManager);
+  }
   request_starter_->setInterval(1000);
   connect(request_starter_, SIGNAL(timeout()), SLOT(StartRequests()));
 }
@@ -68,7 +72,7 @@ void AlbumCoverFetcher::AlbumGetInfoFinished() {
     lastfm::XmlQuery query(lastfm::ws::parse(reply));
 
     QUrl image_url(query["album"]["image size=large"].text());
-    QNetworkReply* image_reply = network_.get(QNetworkRequest(image_url));
+    QNetworkReply* image_reply = network_->get(QNetworkRequest(image_url));
     connect(image_reply, SIGNAL(finished()), SLOT(AlbumCoverFetchFinished()));
 
     active_requests_[image_reply] = id;
