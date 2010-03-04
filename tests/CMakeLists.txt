@@ -47,9 +47,9 @@ add_custom_target(test
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
 macro(add_test_file test_source)
-    get_filename_component(TEST_NAME ${ARGV0} NAME_WE)
+    get_filename_component(TEST_NAME ${test_source} NAME_WE)
     add_executable(${TEST_NAME}
-       ${ARGV0}
+       ${test_source}
        main.cpp
     )
     target_link_libraries(${TEST_NAME} gmock clementine_lib mocks)
