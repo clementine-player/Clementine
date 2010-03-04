@@ -229,4 +229,14 @@ set_target_properties(clementine PROPERTIES
 
 install(TARGETS clementine
   BUNDLE DESTINATION bin
-  RUNTIME DESTINATION bin)
+  RUNTIME DESTINATION bin
+)
+  
+install(FILES ../dist/clementine_64.png
+  DESTINATION share/icons/hicolor/64x64/apps/
+  RENAME application-x-clementine.png
+)
+
+install(FILES ../dist/clementine.desktop
+  DESTINATION share/applications
+)
