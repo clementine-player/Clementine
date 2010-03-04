@@ -9,8 +9,10 @@
 #include "mock_networkaccessmanager.h"
 #include "gtest/gtest.h"
 
-int argc = 1;
-char* argv[] = { "test", 0 };
+namespace {
+
+static int argc = 1;
+static const char* argv[] = { "test", 0 };
 
 class AlbumCoverFetcherTest : public ::testing::Test {
  protected:
@@ -34,8 +36,8 @@ class AlbumCoverFetcherTest : public ::testing::Test {
 
 
 TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
-  const char* data = "<lfm status=\"ok\"><album><name>Bar</name><artist>Foo</artist>"
-                     "<image size=\"large\">http://example.com/image.jpg</image></album></lfm>";
+  QByteArray data("<lfm status=\"ok\"><album><name>Bar</name><artist>Foo</artist>"
+                  "<image size=\"large\">http://example.com/image.jpg</image></album></lfm>");
 
   QMap<QString, QString> params;
   params["artist"] = "Foo";
@@ -51,10 +53,12 @@ TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
   fetcher.FetchAlbumCover("Foo", "Bar");
 
   get_info_reply->Done();
-  app_.processEvents(QEventLoop::AllEvents);
+  app_.processEvents(QEventLoop::ExcludeUserInputEvents);
 
   album_reply->Done();
-  app_.processEvents(QEventLoop::AllEvents);
+  app_.processEvents(QEventLoop::ExcludeUserInputEvents);
 
   EXPECT_EQ(1, spy.count());
 }
+
+}  // namespace
