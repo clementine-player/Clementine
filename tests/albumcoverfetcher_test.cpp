@@ -43,6 +43,7 @@ TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
   params["artist"] = "Foo";
   params["album"] = "Bar";
   params["api_key"] = "foobar";
+  params["method"] = "album.getInfo";
   MockNetworkReply* get_info_reply = network_->ExpectGet("audioscrobbler", params, 200, data);
   params.clear();
   MockNetworkReply* album_reply = network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
