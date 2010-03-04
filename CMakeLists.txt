@@ -72,7 +72,7 @@ list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 if (WIN32)
   # RC compiler
   string(REPLACE "gcc" "windres" CMAKE_RC_COMPILER_INIT ${CMAKE_C_COMPILER})
-  ENABLE_LANGUAGE(RC)
+  enable_language(RC)
   SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE>")
 endif(WIN32)
 
@@ -84,10 +84,10 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 # Uninstall support
-CONFIGURE_FILE(
+configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
   IMMEDIATE @ONLY)
 
-ADD_CUSTOM_TARGET(uninstall
+add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
