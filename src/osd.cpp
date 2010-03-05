@@ -4,6 +4,7 @@
 #include <QtDebug>
 #include <QSettings>
 
+
 const char* OSD::kSettingsGroup = "OSD";
 
 OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
@@ -33,7 +34,7 @@ void OSD::ReloadSettings() {
 }
 
 void OSD::SongChanged(const Song &song) {
-  qDebug() << __PRETTY_FUNCTION__;
+  qDebug() << Q_FUNC_INFO;
   QString summary(song.PrettyTitle());
   if (!song.artist().isEmpty())
     summary = QString("%1 - %2").arg(song.artist(), summary);

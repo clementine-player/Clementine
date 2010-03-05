@@ -63,6 +63,7 @@ void Player::ReloadSettings() {
 }
 
 void Player::Next() {
+  Q_ASSERT(playlist_ != NULL ) ; 
   if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
     playlist_->current_item()->LoadNext();
     return;
@@ -72,6 +73,7 @@ void Player::Next() {
 }
 
 void Player::NextItem() {
+  Q_ASSERT(playlist_ != NULL ) ; 
   int i = playlist_->next_index();
   playlist_->set_current_index(i);
   if (i == -1) {
@@ -83,6 +85,7 @@ void Player::NextItem() {
 }
 
 void Player::TrackEnded() {
+  Q_ASSERT(playlist_ != NULL ) ; 
   int i = playlist_->current_index();
   if (i == -1 || playlist_->stop_after_current()) {
     Stop();
@@ -93,6 +96,7 @@ void Player::TrackEnded() {
 }
 
 void Player::PlayPause() {
+  Q_ASSERT(playlist_ != NULL ) ; 
   if (!init_engine_.isFinished())
     return;
 
@@ -126,6 +130,7 @@ void Player::PlayPause() {
 }
 
 void Player::Stop() {
+  Q_ASSERT(playlist_ != NULL ) ; 
   if (!init_engine_.isFinished())
     return;
 
@@ -135,6 +140,7 @@ void Player::Stop() {
 }
 
 void Player::Previous() {
+  Q_ASSERT(playlist_ != NULL ) ; 
   int i = playlist_->previous_index();
   playlist_->set_current_index(i);
   if (i == -1) {
@@ -169,6 +175,7 @@ Engine::State Player::GetState() const {
 }
 
 void Player::PlayAt(int index) {
+  Q_ASSERT(playlist_ != NULL ) ; 
   if (!init_engine_.isFinished())
     return;
 
@@ -189,6 +196,7 @@ void Player::PlayAt(int index) {
 }
 
 void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
+  Q_ASSERT(playlist_ != NULL ) ; 
   if (!init_engine_.isFinished())
     return;
 
@@ -215,6 +223,7 @@ void Player::Seek(int seconds) {
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
+  Q_ASSERT(playlist_ != NULL ) ; 
   PlaylistItem* item = playlist_->current_item();
   if (item == NULL)
     return;
