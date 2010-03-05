@@ -20,6 +20,7 @@ class M3UParser : public QObject {
   const SongList& Parse();
 
   struct Metadata {
+    Metadata() : length(-1) {}
     QString artist;
     QString title;
     int length;

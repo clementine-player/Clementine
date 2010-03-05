@@ -11,18 +11,19 @@ M3UParser::M3UParser(QIODevice* device, const QDir& directory, QObject* parent)
 
 const QList<Song>& M3UParser::Parse() {
   QString line = QString::fromLatin1(device_->readLine());
-  if (line == "#EXTM3U") {
+  if (line.startsWith("#EXTM3U")) {
     // This is in extended M3U format.
     type_ = EXTENDED;
     line = QString::fromLatin1(device_->readLine());
   }
 
-  do {
+  forever {
     if (line.startsWith('#')) {
       // Extended info or comment.
       if (type_ == EXTENDED && line.startsWith("#EXT")) {
         if (!ParseMetadata(line, &current_metadata_)) {
           qWarning() << "Failed to parse metadata: " << line;
+          continue;
         }
       }
     } else {
@@ -30,10 +31,23 @@ const QList<Song>& M3UParser::Parse() {
       QUrl url;
       if (!ParseTrackLocation(line, &url)) {
         qWarning() << "Failed to parse location: " << line;
+        continue;
       }
+      Song song;
+      song.set_title(current_metadata_.title);
+      song.set_artist(current_metadata_.artist);
+      song.set_length(current_metadata_.length);
+      song.set_filename(url.toString());
+      songs_ << song;
+      current_metadata_.artist.clear();
+      current_metadata_.title.clear();
+      current_metadata_.length = -1;
+    }
+    if (!device_->canReadLine()) {
+      break;
     }
     line = QString::fromLatin1(device_->readLine());
-  } while (device_->canReadLine());
+  }
 
   return songs_;
 }

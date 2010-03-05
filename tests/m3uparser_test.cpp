@@ -3,6 +3,8 @@
 
 #include "m3uparser.h"
 
+#include <QBuffer>
+
 class M3UParserTest : public ::testing::Test {
  protected:
   M3UParserTest()
@@ -51,3 +53,37 @@ TEST_F(M3UParserTest, ParsesTrackLocationAbsoluteWindows) {
   EXPECT_EQ(QUrl("file:///c:/foo/bar.mp3"), url);
 }
 #endif  // Q_OS_WIN32
+
+TEST_F(M3UParserTest, ParsesSongsFromDevice) {
+  QByteArray data = "#EXTM3U\n"
+                    "#EXTINF:123,Some Artist - Some Title\n"
+                    "foo/bar/somefile.mp3\n";
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+  M3UParser parser(&buffer, QDir("somedir"));
+  const QList<Song>& songs = parser.Parse();
+  ASSERT_EQ(1, songs.size());
+  Song s = songs[0];
+  EXPECT_EQ("Some Artist", s.artist());
+  EXPECT_EQ("Some Title", s.title());
+  EXPECT_EQ(123, s.length());
+  EXPECT_PRED_FORMAT2(::testing::IsSubstring,
+      "somedir/foo/bar/somefile.mp3", s.filename().toStdString());
+}
+
+TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
+  QByteArray data = "foo/bar/somefile.mp3\n"
+                    "baz/thing.mp3\n";
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+  M3UParser parser(&buffer, QDir("somedir"));
+  const QList<Song>& songs = parser.Parse();
+  ASSERT_EQ(2, songs.size());
+  EXPECT_PRED_FORMAT2(::testing::IsSubstring,
+      "somedir/foo/bar/somefile.mp3", songs[0].filename().toStdString());
+  EXPECT_PRED_FORMAT2(::testing::IsSubstring,
+      "somedir/baz/thing.mp3", songs[1].filename().toStdString());
+  EXPECT_EQ(-1, songs[0].length());
+  EXPECT_EQ(-1, songs[1].length());
+  EXPECT_TRUE(songs[0].artist().isEmpty());
+}
