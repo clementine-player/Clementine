@@ -13,7 +13,6 @@ set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest-port.cc
     ../3rdparty/gmock/gtest/src/gtest-test-part.cc
     ../3rdparty/gmock/gtest/src/gtest-typed-test.cc
-    test_utils.cpp
 )
 
 add_library(gtest ${GTEST-SOURCES})
@@ -29,16 +28,17 @@ set(GMOCK-SOURCES
 add_library(gmock ${GMOCK-SOURCES})
 target_link_libraries(gmock gtest)
 
-set(MOCK-SOURCES
+set(TESTUTILS-SOURCES
+    test_utils.cpp
     mock_networkaccessmanager.cpp)
 
-set(MOCK-MOC-HEADERS
+set(TESTUTILS-MOC-HEADERS
     mock_networkaccessmanager.h)
 
-qt4_wrap_cpp(MOCK-SOURCES-MOC ${MOCK-MOC-HEADERS})
+qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
-add_library(mocks ${MOCK-SOURCES} ${MOCK-SOURCES-MOC})
-target_link_libraries(mocks gmock)
+add_library(test_utils ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
+target_link_libraries(test_utils gmock ${QT_LIBRARIES})
 
 add_custom_target(test
     echo "Running tests"
@@ -52,7 +52,7 @@ macro(add_test_file test_source)
        ${test_source}
        main.cpp
     )
-    target_link_libraries(${TEST_NAME} gmock clementine_lib mocks)
+    target_link_libraries(${TEST_NAME} gmock clementine_lib test_utils)
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME})
     add_dependencies(test ${TEST_NAME})
