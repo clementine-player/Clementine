@@ -519,10 +519,8 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
   if (CheckErrors(q.lastError())) return ret;
 
   QString last_album;
+  QString last_artist;
   while (q.next()) {
-    if (q.value(0).toString() == last_album)
-      continue;
-
     bool compilation = q.value(2).toBool() | q.value(3).toBool();
 
     Album info;
@@ -530,9 +528,14 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     info.album_name = q.value(0).toString();
     info.art_automatic = q.value(4).toString();
     info.art_manual = q.value(5).toString();
+
+    if (info.artist == last_artist && info.album_name == last_album)
+      continue;
+
     ret << info;
 
     last_album = info.album_name;
+    last_artist = info.artist;
   }
   return ret;
 }

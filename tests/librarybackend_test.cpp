@@ -181,6 +181,17 @@ class SingleSong : public LibraryBackendTest {
   Song song_;
 };
 
+TEST_F(SingleSong, GetSongWithNoAlbum) {
+  song_.set_album("");
+  AddDummySong(); if (HasFatalFailure()) return;
+  
+  EXPECT_EQ(1, backend_->GetAllArtists().size());
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  EXPECT_EQ(1, albums.size());
+  EXPECT_EQ("Artist", albums[0].artist);
+  EXPECT_EQ("", albums[0].album_name);
+}
+
 TEST_F(SingleSong, GetAllArtists) {
   AddDummySong();  if (HasFatalFailure()) return;
 
