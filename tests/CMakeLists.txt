@@ -15,7 +15,7 @@ set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest-typed-test.cc
 )
 
-add_library(gtest ${GTEST-SOURCES})
+add_library(gtest EXCLUDE_FROM_ALL ${GTEST-SOURCES})
 
 set(GMOCK-SOURCES
     ../3rdparty/gmock/src/gmock-cardinalities.cc
@@ -25,7 +25,7 @@ set(GMOCK-SOURCES
     ../3rdparty/gmock/src/gmock-printers.cc
     ../3rdparty/gmock/src/gmock-spec-builders.cc)
 
-add_library(gmock ${GMOCK-SOURCES})
+add_library(gmock EXCLUDE_FROM_ALL ${GMOCK-SOURCES})
 target_link_libraries(gmock gtest)
 
 set(TESTUTILS-SOURCES
@@ -37,7 +37,7 @@ set(TESTUTILS-MOC-HEADERS
 
 qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
-add_library(test_utils ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
+add_library(test_utils EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
 target_link_libraries(test_utils gmock ${QT_LIBRARIES})
 
 add_custom_target(test
@@ -49,8 +49,9 @@ add_custom_target(test
 macro(add_test_file test_source)
     get_filename_component(TEST_NAME ${test_source} NAME_WE)
     add_executable(${TEST_NAME}
-       ${test_source}
-       main.cpp
+      EXCLUDE_FROM_ALL
+      ${test_source}
+      main.cpp
     )
     target_link_libraries(${TEST_NAME} gmock clementine_lib test_utils)
     add_custom_command(TARGET test POST_BUILD
