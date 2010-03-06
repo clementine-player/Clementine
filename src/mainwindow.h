@@ -83,14 +83,14 @@ class MainWindow : public QMainWindow {
   void AddMedia();
   void AddStream();
   void AddStreamAccepted();
-  
-  void NewPlaylist() ; 
-  
-  void CurrentTabChanged ( int ) ; 
+
+  void NewPlaylist(const QString& title = QString());
+
+  void CurrentTabChanged(int);
 
  private:
   void SaveGeometry();
-  
+
   void SetCurrentPlaylist(PlaylistView * pCurrent) ; 
 
  private:
@@ -107,10 +107,10 @@ class MainWindow : public QMainWindow {
   About* about_dialog_;
 
   RadioModel* radio_model_;
-  QList<Playlist*> playlists_ ; 
-  Playlist* currentPlaylist_ ; 
-  PlaylistView* currentPlaylistView_ ; 
-  
+  QList<Playlist*> playlists_;
+  Playlist* current_playlist_;
+  PlaylistView* current_playlist_view_;
+
   Player* player_;
   Library* library_;
 
@@ -128,6 +128,8 @@ class MainWindow : public QMainWindow {
 
   QTimer* track_position_timer_;
   QSettings settings_;
+
+  int next_playlist_number_;
 };
 
 #endif // MAINWINDOW_H

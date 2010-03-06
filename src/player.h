@@ -28,9 +28,9 @@ class Player : public QObject {
 
   PlaylistItem::Options GetCurrentItemOptions() const { return current_item_options_; }
   Song GetCurrentItem() const { return current_item_; }
-  
-  Playlist* CurrentPlaylist() const { return playlist_ ; } 
-  void SetCurrentPlaylist(Playlist* _current) { playlist_ = _current ; } 
+
+  Playlist* CurrentPlaylist() const { return playlist_; }
+  void SetCurrentPlaylist(Playlist* current) { playlist_ = current; }
 
  public slots:
   void ReloadSettings();

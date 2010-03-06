@@ -399,6 +399,7 @@ void Playlist::SetCurrentIsPaused(bool paused) {
 void Playlist::Save() const {
   QSettings s;
   s.beginGroup(kSettingsGroup);
+  s.beginGroup(title_);
 
   s.beginWriteArray("items", items_.count());
   for (int i=0 ; i<items_.count() ; ++i) {
@@ -415,6 +416,7 @@ void Playlist::Restore() {
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
+  s.beginGroup(title_);
 
   int count = s.beginReadArray("items");
   for (int i=0 ; i<count ; ++i) {

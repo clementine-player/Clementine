@@ -63,9 +63,9 @@ class Playlist : public QAbstractListModel {
 
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
-  
-  const QString & Title() const { return title_ ; } 
-  void SetTitle ( const QString & _title)  { title_ = _title ; } 
+
+  const QString& Title() const { return title_; }
+  void SetTitle(const QString& title)  { title_ = title; }
 
   // Scrobbling
   int scrobble_point() const { return scrobble_point_; }
@@ -126,7 +126,7 @@ class Playlist : public QAbstractListModel {
 
   // Hack to stop QTreeView::setModel sorting the playlist
   bool ignore_sorting_;
-  QString title_ ; 
+  QString title_;
 };
 
 #endif // PLAYLIST_H
