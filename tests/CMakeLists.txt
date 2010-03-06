@@ -30,7 +30,8 @@ target_link_libraries(gmock gtest)
 
 set(TESTUTILS-SOURCES
     test_utils.cpp
-    mock_networkaccessmanager.cpp)
+    mock_networkaccessmanager.cpp
+    mock_taglib.cpp)
 
 set(TESTUTILS-MOC-HEADERS
     mock_networkaccessmanager.h)

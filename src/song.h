@@ -15,6 +15,10 @@ namespace lastfm {
   class Track;
 }
 
+namespace TagLib {
+  class FileRef;
+}
+
 struct SongData : public QSharedData {
   SongData();
 
@@ -52,10 +56,22 @@ struct SongData : public QSharedData {
   QImage image_;
 };
 
+class FileRefFactory {
+ public:
+  virtual ~FileRefFactory() {}
+  virtual TagLib::FileRef* GetFileRef(const QString& filename) = 0;
+};
+
+class TagLibFileRefFactory : public FileRefFactory {
+ public:
+  virtual TagLib::FileRef* GetFileRef(const QString& filename);
+};
+
 class Song {
  public:
   Song();
   Song(const Song& other);
+  Song(FileRefFactory* factory);
 
   static const char* kColumnSpec;
   static const char* kBindSpec;
@@ -152,6 +168,9 @@ class Song {
 
  private:
   QSharedDataPointer<SongData> d;
+  FileRefFactory* factory_;
+
+  static TagLibFileRefFactory kDefaultFactory;
 };
 Q_DECLARE_METATYPE(Song);
 

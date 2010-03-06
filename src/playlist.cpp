@@ -523,7 +523,7 @@ Song Playlist::current_item_metadata() const {
 }
 
 void Playlist::UpdateScrobblePoint() {
-  int length = current_item_metadata().length();
+  int length = qMin(current_item_metadata().length(), 240);
 
   ScrobblePoint point(length / 2);
   scrobble_point_ = point;

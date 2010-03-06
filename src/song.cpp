@@ -19,6 +19,9 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+#include <boost/scoped_ptr.hpp>
+using boost::scoped_ptr;
+
 #include "trackslider.h"
 #include "enginebase.h"
 #include "albumcoverloader.h"
@@ -45,6 +48,8 @@ const char* Song::kUpdateSpec =
     "ctime = :ctime, filesize = :filesize, sampler = :sampler, "
     "art_automatic = :art_automatic, art_manual = :art_manual";
 
+TagLibFileRefFactory Song::kDefaultFactory;
+
 SongData::SongData()
   : valid_(false),
     id_(-1),
@@ -64,23 +69,34 @@ SongData::SongData()
 {
 }
 
+TagLib::FileRef* TagLibFileRefFactory::GetFileRef(const QString& filename) {
+  return new TagLib::FileRef(QFile::encodeName(filename).constData());
+}
+
 Song::Song()
-  : d(new SongData)
+  : d(new SongData),
+    factory_(&kDefaultFactory)
 {
 }
 
 Song::Song(const Song &other)
-  : d(other.d)
+  : d(other.d),
+    factory_(&kDefaultFactory)
 {
+}
+
+Song::Song(FileRefFactory* factory)
+    : d(new SongData),
+      factory_(factory) {
 }
 
 void Song::InitFromFile(const QString& filename, int directory_id) {
   d->filename_ = filename;
   d->directory_id_ = directory_id;
 
-  TagLib::FileRef fileref(QFile::encodeName(filename).constData());
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
-  if( fileref.isNull() )
+  if(fileref->isNull())
     return;
 
   QFileInfo info(filename);
@@ -88,7 +104,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   d->mtime_ = info.lastModified().toTime_t();
   d->ctime_ = info.created().toTime_t();
 
-  TagLib::Tag* tag = fileref.tag();
+  TagLib::Tag* tag = fileref->tag();
   if (tag) {
     #define strip(x) TStringToQString( x ).trimmed()
     d->title_ = strip(tag->title());
@@ -105,7 +121,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   QString disc;
   QString compilation;
-  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref.file())) {
+  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     if (file->ID3v2Tag()) {
       if (!file->ID3v2Tag()->frameListMap()["TPOS"].isEmpty())
         disc = TStringToQString(file->ID3v2Tag()->frameListMap()["TPOS"].front()->toString()).trimmed();
@@ -123,7 +139,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         compilation = TStringToQString(file->ID3v2Tag()->frameListMap()["TCMP"].front()->toString()).trimmed();
     }
   }
-  else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref.file())) {
+  else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
       if ( !file->tag()->fieldListMap()["COMPOSER"].isEmpty() )
         d->composer_ = TStringToQString(file->tag()->fieldListMap()["COMPOSER"].front()).trimmed();
@@ -138,7 +154,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         compilation = TStringToQString(file->tag()->fieldListMap()["COMPILATION"].front()).trimmed();
     }
   }
-  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref.file())) {
+  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
       if (!file->xiphComment()->fieldListMap()["COMPOSER"].isEmpty())
         d->composer_ = TStringToQString( file->xiphComment()->fieldListMap()["COMPOSER"].front() ).trimmed();
@@ -172,10 +188,10 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     d->compilation_ = (i == 1);
   }
 
-  if (fileref.audioProperties()) {
-    d->bitrate_    = fileref.audioProperties()->bitrate();
-    d->length_     = fileref.audioProperties()->length();
-    d->samplerate_ = fileref.audioProperties()->sampleRate();
+  if (fileref->audioProperties()) {
+    d->bitrate_    = fileref->audioProperties()->bitrate();
+    d->length_     = fileref->audioProperties()->length();
+    d->samplerate_ = fileref->audioProperties()->sampleRate();
   }
 }
 
