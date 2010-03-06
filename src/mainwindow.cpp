@@ -678,7 +678,7 @@ void MainWindow::NewPlaylist(const QString& title) {
 
 void MainWindow::SetCurrentPlaylist(PlaylistView* current) {
   // Disconnect current playlist and tab.
-  if (current) {
+  if (current_playlist_) {
     disconnect(current_playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
     disconnect(current_playlist_view_, SIGNAL(doubleClicked(QModelIndex)),
         this, SLOT(PlayIndex(QModelIndex)));
