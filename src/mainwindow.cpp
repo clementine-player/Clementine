@@ -306,6 +306,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   }
 
   library_->StartThreads();
+
+  NewPlaylist();
 }
 
 MainWindow::~MainWindow() {
