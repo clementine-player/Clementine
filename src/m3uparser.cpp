@@ -28,9 +28,9 @@ const QList<Song>& M3UParser::Parse() {
       }
     } else {
       Song song;
-      song.set_title(current_metadata_.title);
-      song.set_artist(current_metadata_.artist);
-      song.set_length(current_metadata_.length);
+      song.Init(current_metadata_.title,
+                current_metadata_.artist,
+                current_metadata_.length);
       // Track location.
       QString location;
       if (!ParseTrackLocation(line, &song)) {

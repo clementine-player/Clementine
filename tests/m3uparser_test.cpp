@@ -5,6 +5,7 @@
 #include "m3uparser.h"
 
 #include <QBuffer>
+#include <QTemporaryFile>
 
 class M3UParserTest : public ::testing::Test {
  protected:
@@ -30,23 +31,28 @@ TEST_F(M3UParserTest, ParsesMetadata) {
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocation) {
-  taglib_.ExpectCall("/foo/bar.mp3", "foo", "bar", "baz");
+  QTemporaryFile temp;
+  temp.open();
+  taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
   Song song(&taglib_);
-  QString line("/foo/bar.mp3");
+  QString line(temp.fileName());
   ASSERT_TRUE(parser_.ParseTrackLocation(line, &song));
-  EXPECT_EQ("/foo/bar.mp3", song.filename());
+  EXPECT_EQ(temp.fileName(), song.filename());
   EXPECT_EQ("foo", song.title());
   EXPECT_EQ("bar", song.artist());
   EXPECT_EQ("baz", song.album());
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
-  taglib_.ExpectCall("/tmp/foo/bar.mp3", "foo", "bar", "baz");
-  M3UParser parser(NULL, QDir("/tmp"));
-  QString line("foo/bar.mp3");
+  QTemporaryFile temp;
+  temp.open();
+  QFileInfo info(temp);
+  taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
+  M3UParser parser(NULL, info.dir());
+  QString line(info.fileName());
   Song song(&taglib_);
   ASSERT_TRUE(parser.ParseTrackLocation(line, &song));
-  EXPECT_EQ("/tmp/foo/bar.mp3", song.filename());
+  EXPECT_EQ(temp.fileName(), song.filename());
   EXPECT_EQ("foo", song.title());
 }
 

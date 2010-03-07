@@ -17,6 +17,7 @@ class M3UParser : public QObject {
   M3UParser(QIODevice* device, const QDir& directory = QDir(), QObject* parent = 0);
   virtual ~M3UParser() {}
 
+  // Reference valid as long as the M3UParser instance lives.
   const SongList& Parse();
 
   struct Metadata {

@@ -1,6 +1,6 @@
 #include "mock_taglib.h"
 
-#include <QTemporaryFile>
+#include <QFile>
 
 using ::testing::Return;
 
@@ -34,9 +34,7 @@ void MockFileRefFactory::ExpectCall(const QString& filename,
 
 TagLib::FileRef* MockFileRefFactory::GetFileRef(const QString& filename) {
   MockTag* tag = tags_.take(filename);
-  QTemporaryFile temp_file;
-  temp_file.open();
-  MockFile* file = new MockFile(tag, temp_file.fileName());
+  MockFile* file = new MockFile(tag, filename);
   TagLib::FileRef* fileref = new TagLib::FileRef(file);
   return fileref;
 }

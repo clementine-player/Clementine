@@ -7,6 +7,8 @@
 #include "test_utils.h"
 #include "mock_taglib.h"
 
+#include <QTemporaryFile>
+
 namespace {
 
 class SongTest : public ::testing::Test {
@@ -36,9 +38,11 @@ TEST_F(SongTest, InitsFromLastFM) {
 }
 
 TEST_F(SongTest, InitsFromFile) {
-  mock_factory_.ExpectCall("foobar.mp3", "Foo", "Bar", "Baz");
+  QTemporaryFile temp;
+  temp.open();
+  mock_factory_.ExpectCall(temp.fileName(), "Foo", "Bar", "Baz");
   Song song(&mock_factory_);
-  song.InitFromFile("foobar.mp3", 42);
+  song.InitFromFile(temp.fileName(), 42);
   EXPECT_EQ("Foo", song.title());
   EXPECT_EQ("Bar", song.artist());
   EXPECT_EQ("Baz", song.album());

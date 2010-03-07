@@ -78,6 +78,7 @@ class Song {
   static const char* kUpdateSpec;
 
   // Constructors
+  void Init(const QString& title, const QString& artist, int length);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const QSqlQuery& query);
   void InitFromLastFM(const lastfm::Track& track);
