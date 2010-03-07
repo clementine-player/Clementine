@@ -67,14 +67,14 @@ bool PlaylistManager::Restore(){
   bool bOk ; 
   int nOfPlaylist = s.value("numberofplaylists").toInt(&bOk) ; 
   playlistCount_ = nOfPlaylist ;
-  qDebug() << nOfPlaylist ; 
+  s.beginGroup(Playlist::kSettingsGroup);
+  QStringList childs = s.childGroups() ; 
   if ( bOk == false || nOfPlaylist == 0 ) {
     qDebug()<< "No reading from settings"; 
     return false; 
   }
-  int nCurrentIndex = -1 ;
-  for ( int i=0;i<nOfPlaylist;++i){
-    
+  int index = 0;
+  foreach ( QString title, childs ) {
     PlaylistView* playListView = new PlaylistView(pTabWidget_);
   
     playListView->setObjectName(QString::fromUtf8("playlist"));
@@ -94,20 +94,35 @@ bool PlaylistManager::Restore(){
     playListView->setModel(playList);
     playList->IgnoreSorting(false);
     
-    playList->SetPlaylistIndex( i+1 ) ; 
+    playList->SetPlaylistIndex( index+1 ) ; 
+    playList->SetTitle(title);
     playList->RestoreR() ; 
     
     pTabWidget_->addTab( playListView, playList->GetTitle() );
   
     SetCurrentPlaylist(playList);
     pCurrentPlaylistView_ = playListView ;
-    playlists_ << playList ; 
+    playlists_ << playList ;
   }
+  int nCurrentIndex = -1 ;
   int currentIndex = s.value("currentplaylistindex").toInt(&bOk);
   if(bOk)
     pTabWidget_->setCurrentIndex(currentIndex);
   return true ; 
 }
-
-
-
+void PlaylistManager::TabCloseRequest(int index){
+  const PlaylistView* playListView = qobject_cast<const PlaylistView*> (pTabWidget_->widget(index)) ; 
+  Playlist* playlist = qobject_cast<Playlist*>( playListView->model() ) ; 
+  playlists_.removeAll(playlist);
+  pTabWidget_->removeTab(index);
+  
+  QSettings s ; 
+  s.beginGroup(Playlist::kSettingsGroup);
+  s.remove(playlist->GetTitle());
+}
+void PlaylistManager::SetTabWidget(QTabWidget* pWidget) { 
+  if ( pTabWidget_ )
+    disconnect ( pTabWidget_, SIGNAL(tabCloseRequested(int)),this, SLOT(TabCloseRequest(int)));
+  pTabWidget_ = pWidget ; 
+  connect ( pTabWidget_, SIGNAL(tabCloseRequested(int)),this, SLOT(TabCloseRequest(int)));
+}

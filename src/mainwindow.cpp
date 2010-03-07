@@ -306,7 +306,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   playlistManager_->SetTabWidget(ui_.tab_widget);
   
   QTimer::singleShot(500,this,SLOT(InitPlaylists())) ; 
-    
 }
 
 MainWindow::~MainWindow() {

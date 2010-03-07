@@ -14,7 +14,7 @@ class PlaylistManager : public QObject{
     void addPlaylist( const QString& playlistName = QString() ) ; 
     
     // accessors
-    void SetTabWidget( QTabWidget * pWidget ) { pTabWidget_ = pWidget ; } 
+    void SetTabWidget( QTabWidget * pWidget ) ; 
     QTabWidget* GetTabWidget() const {return pTabWidget_; }
     
     void SetCurrentPlaylist ( Playlist * pPlaylist ) ; 
@@ -32,6 +32,9 @@ class PlaylistManager : public QObject{
     int playlistCount_ ; 
   signals:
     void CurrentPlaylistChanged( Playlist* pPlaylist ) ; 
+    
+  private slots:
+    void TabCloseRequest( int index ) ;
 };
 
 #endif // PLAYLISTMANAGER_H

@@ -401,8 +401,8 @@ void Playlist::SetCurrentIsPaused(bool paused) {
 void Playlist::SaveR() const {
   QSettings s;
   Q_ASSERT(index_ != -1 ) ; 
-  QString setGrp = kSettingsGroup + QString::number(index_) ; 
-  s.beginGroup(setGrp);
+  s.beginGroup(kSettingsGroup);
+  s.beginGroup(title_);
   s.beginWriteArray("items", items_.count());
   for (int i=0 ; i<items_.count() ; ++i) {
     s.setArrayIndex(i);
@@ -411,6 +411,8 @@ void Playlist::SaveR() const {
   }
   s.endArray();
   s.setValue("title",title_);
+  s.endGroup();
+  s.endGroup();
 }
 
 void Playlist::RestoreR() {
@@ -418,8 +420,8 @@ void Playlist::RestoreR() {
   items_.clear();
 
   QSettings s;
-  QString setGrp = kSettingsGroup + QString::number(index_) ; 
-  s.beginGroup(setGrp);
+  s.beginGroup(kSettingsGroup);
+  s.beginGroup(title_);
 
   int count = s.beginReadArray("items");
   for (int i=0 ; i<count ; ++i) {
@@ -434,7 +436,8 @@ void Playlist::RestoreR() {
     items_ << item;
   }
   s.endArray();
-  title_ = s.value("title").toString();
+  s.endGroup();
+  s.endGroup();
   reset();
 }
 
