@@ -27,17 +27,16 @@ const QList<Song>& M3UParser::Parse() {
         }
       }
     } else {
-      // Track location.
-      QUrl url;
-      if (!ParseTrackLocation(line, &url)) {
-        qWarning() << "Failed to parse location: " << line;
-        continue;
-      }
       Song song;
       song.set_title(current_metadata_.title);
       song.set_artist(current_metadata_.artist);
       song.set_length(current_metadata_.length);
-      song.set_filename(url.toString());
+      // Track location.
+      QString location;
+      if (!ParseTrackLocation(line, &song)) {
+        qWarning() << "Failed to parse location: " << line;
+        continue;
+      }
       songs_ << song;
       current_metadata_.artist.clear();
       current_metadata_.title.clear();
@@ -73,12 +72,12 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
   return true;
 }
 
-bool M3UParser::ParseTrackLocation(const QString& line, QUrl* url) const {
+bool M3UParser::ParseTrackLocation(const QString& line, Song* song) const {
   if (line.contains(QRegExp("^[a-z]+://"))) {
     // Looks like a url.
     QUrl temp(line);
     if (temp.isValid()) {
-      *url = temp;
+      song->set_filename(temp.toString());
       return true;
     } else {
       return false;
@@ -90,21 +89,12 @@ bool M3UParser::ParseTrackLocation(const QString& line, QUrl* url) const {
     // Absolute path.
     // Fix windows \, eg. C:\foo -> C:/foo.
     QString proper_path = QDir::fromNativeSeparators(line);
-    // C:/foo -> /C:/foo.
-    if (!proper_path.startsWith('/')) {
-      proper_path.prepend("/");
-    }
-    *url = "file://" + proper_path;
-    return true;
+    song->set_filename(proper_path);
   } else {
     // Relative path.
     QString proper_path = QDir::fromNativeSeparators(line);
     QString absolute_path = directory_.absoluteFilePath(proper_path);
-    // C:/foo -> /C:/foo.
-    if (!absolute_path.startsWith('/')) {
-      absolute_path.prepend("/");
-    }
-    *url = "file://" + absolute_path;
-    return true;
+    song->set_filename(absolute_path);
   }
+  song->InitFromFile(song->filename(), -1);
 }

@@ -34,7 +34,7 @@ class M3UParser : public QObject {
   };
 
   bool ParseMetadata(const QString& line, Metadata* metadata) const;
-  bool ParseTrackLocation(const QString& line, QUrl* url) const;
+  bool ParseTrackLocation(const QString& line, Song* song) const;
 
   FRIEND_TEST(M3UParserTest, ParsesMetadata);
   FRIEND_TEST(M3UParserTest, ParsesTrackLocation);

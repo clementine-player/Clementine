@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "test_utils.h"
+#include "mock_taglib.h"
 
 #include "m3uparser.h"
 
@@ -7,11 +8,16 @@
 
 class M3UParserTest : public ::testing::Test {
  protected:
+  static void SetUpTestCase() {
+    testing::DefaultValue<TagLib::String>::Set("foobarbaz");
+  }
+
   M3UParserTest()
       : parser_(NULL) {
   }
 
   M3UParser parser_;
+  MockFileRefFactory taglib_;
 };
 
 TEST_F(M3UParserTest, ParsesMetadata) {
@@ -24,43 +30,40 @@ TEST_F(M3UParserTest, ParsesMetadata) {
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocation) {
+  taglib_.ExpectCall("/foo/bar.mp3", "foo", "bar", "baz");
+  Song song(&taglib_);
   QString line("/foo/bar.mp3");
-  QUrl url;
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));
-  EXPECT_EQ(QUrl("file:///foo/bar.mp3"), url);
+  ASSERT_TRUE(parser_.ParseTrackLocation(line, &song));
+  EXPECT_EQ("/foo/bar.mp3", song.filename());
+  EXPECT_EQ("foo", song.title());
+  EXPECT_EQ("bar", song.artist());
+  EXPECT_EQ("baz", song.album());
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
+  taglib_.ExpectCall("/tmp/foo/bar.mp3", "foo", "bar", "baz");
   M3UParser parser(NULL, QDir("/tmp"));
   QString line("foo/bar.mp3");
-  QUrl url;
-  ASSERT_TRUE(parser.ParseTrackLocation(line, &url));
-  EXPECT_EQ(QUrl("file:///tmp/foo/bar.mp3"), url);
+  Song song(&taglib_);
+  ASSERT_TRUE(parser.ParseTrackLocation(line, &song));
+  EXPECT_EQ("/tmp/foo/bar.mp3", song.filename());
+  EXPECT_EQ("foo", song.title());
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
   QString line("http://example.com/foo/bar.mp3");
-  QUrl url;
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));
-  EXPECT_EQ(QUrl("http://example.com/foo/bar.mp3"), url);
+  Song song;
+  ASSERT_TRUE(parser_.ParseTrackLocation(line, &song));
+  EXPECT_EQ("http://example.com/foo/bar.mp3", song.filename());
 }
-
-#ifdef Q_OS_WIN32
-TEST_F(M3UParserTest, ParsesTrackLocationAbsoluteWindows) {
-  QString line("c:/foo/bar.mp3");
-  QUrl url;
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, &url));
-  EXPECT_EQ(QUrl("file:///c:/foo/bar.mp3"), url);
-}
-#endif  // Q_OS_WIN32
 
 TEST_F(M3UParserTest, ParsesSongsFromDevice) {
   QByteArray data = "#EXTM3U\n"
                     "#EXTINF:123,Some Artist - Some Title\n"
-                    "foo/bar/somefile.mp3\n";
+                    "http://foo.com/bar/somefile.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  M3UParser parser(&buffer, QDir("somedir"));
+  M3UParser parser(&buffer);
   const QList<Song>& songs = parser.Parse();
   ASSERT_EQ(1, songs.size());
   Song s = songs[0];
@@ -68,21 +71,21 @@ TEST_F(M3UParserTest, ParsesSongsFromDevice) {
   EXPECT_EQ("Some Title", s.title());
   EXPECT_EQ(123, s.length());
   EXPECT_PRED_FORMAT2(::testing::IsSubstring,
-      "somedir/foo/bar/somefile.mp3", s.filename().toStdString());
+      "http://foo.com/bar/somefile.mp3", s.filename().toStdString());
 }
 
 TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
-  QByteArray data = "foo/bar/somefile.mp3\n"
-                    "baz/thing.mp3\n";
+  QByteArray data = "http://foo.com/bar/somefile.mp3\n"
+                    "http://baz.com/thing.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
   M3UParser parser(&buffer, QDir("somedir"));
   const QList<Song>& songs = parser.Parse();
   ASSERT_EQ(2, songs.size());
   EXPECT_PRED_FORMAT2(::testing::IsSubstring,
-      "somedir/foo/bar/somefile.mp3", songs[0].filename().toStdString());
+      "http://foo.com/bar/somefile.mp3", songs[0].filename().toStdString());
   EXPECT_PRED_FORMAT2(::testing::IsSubstring,
-      "somedir/baz/thing.mp3", songs[1].filename().toStdString());
+      "http://baz.com/thing.mp3", songs[1].filename().toStdString());
   EXPECT_EQ(-1, songs[0].length());
   EXPECT_EQ(-1, songs[1].length());
   EXPECT_TRUE(songs[0].artist().isEmpty());
