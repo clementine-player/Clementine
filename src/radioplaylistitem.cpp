@@ -45,6 +45,7 @@ void RadioPlaylistItem::InitMetadata() {
     metadata_.set_title(url_.toString());
 
   metadata_.set_artist(artist_);
+  metadata_.set_filetype(Song::Type_Stream);
 }
 
 Song RadioPlaylistItem::Metadata() const {
@@ -84,6 +85,7 @@ PlaylistItem::Options RadioPlaylistItem::options() const {
 
 void RadioPlaylistItem::SetTemporaryMetadata(const Song& metadata) {
   temp_metadata_ = metadata;
+  temp_metadata_.set_filetype(Song::Type_Stream);
 }
 
 void RadioPlaylistItem::ClearTemporaryMetadata() {

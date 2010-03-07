@@ -30,6 +30,18 @@ class SizeItemDelegate : public PlaylistDelegateBase {
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
+class DateItemDelegate : public PlaylistDelegateBase {
+ public:
+  DateItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  QString displayText(const QVariant& value, const QLocale& locale) const;
+};
+
+class FileTypeItemDelegate : public PlaylistDelegateBase {
+ public:
+  FileTypeItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  QString displayText(const QVariant& value, const QLocale& locale) const;
+};
+
 
 class PlaylistView : public QTreeView {
   Q_OBJECT

@@ -12,7 +12,7 @@
 #include <QThread>
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
-const int LibraryBackend::kSchemaVersion = 2;
+const int LibraryBackend::kSchemaVersion = 3;
 
 LibraryBackend::LibraryBackend(QObject* parent, const QString& database_name)
   : QObject(parent),

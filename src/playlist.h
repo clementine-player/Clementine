@@ -22,6 +22,8 @@ class Playlist : public QAbstractListModel {
     Column_Title = 0,
     Column_Artist,
     Column_Album,
+    Column_AlbumArtist,
+    Column_Composer,
     Column_Length,
     Column_Track,
     Column_Disc,
@@ -33,6 +35,9 @@ class Playlist : public QAbstractListModel {
     Column_Samplerate,
     Column_Filename,
     Column_Filesize,
+    Column_Filetype,
+    Column_DateCreated,
+    Column_DateModified,
 
     ColumnCount
   };

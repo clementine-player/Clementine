@@ -8,8 +8,16 @@
 #include <taglib/mpegfile.h>
 #include <taglib/id3v2tag.h>
 #include <taglib/oggfile.h>
+#include <taglib/oggflacfile.h>
 #include <taglib/vorbisfile.h>
 #include <taglib/flacfile.h>
+#include <taglib/asffile.h>
+#include <taglib/mp4file.h>
+#include <taglib/mpcfile.h>
+#include <taglib/aifffile.h>
+#include <taglib/wavfile.h>
+#include <taglib/speexfile.h>
+#include <taglib/trueaudiofile.h>
 
 #include <lastfm/Track>
 
@@ -30,13 +38,15 @@ const char* Song::kColumnSpec =
     "title, album, artist, albumartist, composer, "
     "track, disc, bpm, year, genre, comment, compilation, "
     "length, bitrate, samplerate, directory, filename, "
-    "mtime, ctime, filesize, sampler, art_automatic, art_manual";
+    "mtime, ctime, filesize, sampler, art_automatic, art_manual, "
+    "filetype, playcount, lastplayed, rating";
 
 const char* Song::kBindSpec =
     ":title, :album, :artist, :albumartist, :composer, "
     ":track, :disc, :bpm, :year, :genre, :comment, :compilation, "
     ":length, :bitrate, :samplerate, :directory_id, :filename, "
-    ":mtime, :ctime, :filesize, :sampler, :art_automatic, :art_manual";
+    ":mtime, :ctime, :filesize, :sampler, :art_automatic, :art_manual, "
+    ":filetype, :playcount, :lastplayed, :rating";
 
 const char* Song::kUpdateSpec =
     "title = :title, album = :album, artist = :artist, "
@@ -46,11 +56,13 @@ const char* Song::kUpdateSpec =
     "bitrate = :bitrate, samplerate = :samplerate, "
     "directory = :directory_id, filename = :filename, mtime = :mtime, "
     "ctime = :ctime, filesize = :filesize, sampler = :sampler, "
-    "art_automatic = :art_automatic, art_manual = :art_manual";
+    "art_automatic = :art_automatic, art_manual = :art_manual, "
+    "filetype = :filetype, playcount = :playcount, lastplayed = :lastplayed, "
+    "rating = :rating";
 
 TagLibFileRefFactory Song::kDefaultFactory;
 
-SongData::SongData()
+Song::Private::Private()
   : valid_(false),
     id_(-1),
     track_(-1),
@@ -65,7 +77,8 @@ SongData::SongData()
     directory_id_(-1),
     mtime_(-1),
     ctime_(-1),
-    filesize_(-1)
+    filesize_(-1),
+    filetype_(Type_Unknown)
 {
 }
 
@@ -74,7 +87,7 @@ TagLib::FileRef* TagLibFileRefFactory::GetFileRef(const QString& filename) {
 }
 
 Song::Song()
-  : d(new SongData),
+  : d(new Private),
     factory_(&kDefaultFactory)
 {
 }
@@ -86,7 +99,7 @@ Song::Song(const Song &other)
 }
 
 Song::Song(FileRefFactory* factory)
-    : d(new SongData),
+    : d(new Private),
       factory_(factory) {
 }
 
@@ -200,6 +213,34 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     d->length_     = fileref->audioProperties()->length();
     d->samplerate_ = fileref->audioProperties()->sampleRate();
   }
+
+  // Get the filetype if we can
+  GuessFileType(fileref.get());
+}
+
+void Song::GuessFileType(TagLib::FileRef* fileref) {
+  if (dynamic_cast<TagLib::ASF::File*>(fileref->file()))
+    d->filetype_ = Type_Asf;
+  if (dynamic_cast<TagLib::FLAC::File*>(fileref->file()))
+    d->filetype_ = Type_Flac;
+  if (dynamic_cast<TagLib::MP4::File*>(fileref->file()))
+    d->filetype_ = Type_Mp4;
+  if (dynamic_cast<TagLib::MPC::File*>(fileref->file()))
+    d->filetype_ = Type_Mpc;
+  if (dynamic_cast<TagLib::MPEG::File*>(fileref->file()))
+    d->filetype_ = Type_Mpeg;
+  if (dynamic_cast<TagLib::Ogg::FLAC::File*>(fileref->file()))
+    d->filetype_ = Type_OggFlac;
+  if (dynamic_cast<TagLib::Ogg::Speex::File*>(fileref->file()))
+    d->filetype_ = Type_OggSpeex;
+  if (dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file()))
+    d->filetype_ = Type_OggVorbis;
+  if (dynamic_cast<TagLib::RIFF::AIFF::File*>(fileref->file()))
+    d->filetype_ = Type_Aiff;
+  if (dynamic_cast<TagLib::RIFF::WAV::File*>(fileref->file()))
+    d->filetype_ = Type_Wav;
+  if (dynamic_cast<TagLib::TrueAudio::File*>(fileref->file()))
+    d->filetype_ = Type_TrueAudio;
 }
 
 void Song::InitFromQuery(const QSqlQuery& q) {
@@ -241,6 +282,11 @@ void Song::InitFromQuery(const QSqlQuery& q) {
   d->art_automatic_ = q.value(22).toString();
   d->art_manual_ = q.value(23).toString();
 
+  d->filetype_ = FileType(q.value(24).toInt());
+  // playcount = 25
+  // lastplayed = 26
+  // rating = 27
+
   #undef tostr
   #undef toint
   #undef tofloat
@@ -248,6 +294,7 @@ void Song::InitFromQuery(const QSqlQuery& q) {
 
 void Song::InitFromLastFM(const lastfm::Track& track) {
   d->valid_ = true;
+  d->filetype_ = Type_Stream;
 
   d->title_ = track.title();
   d->album_ = track.album();
@@ -302,6 +349,11 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":sampler", d->sampler_ ? 1 : 0);
   query->bindValue(":art_automatic", d->art_automatic_);
   query->bindValue(":art_manual", d->art_manual_);
+
+  query->bindValue(":filetype", d->filetype_);
+  query->bindValue(":playcount", 0); // TODO
+  query->bindValue(":lastplayed", -1); // TODO
+  query->bindValue(":rating", -1);
 
   #undef intval
 }

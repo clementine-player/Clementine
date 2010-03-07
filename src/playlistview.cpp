@@ -11,6 +11,7 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QScrollBar>
+#include <QDateTime>
 
 #include <math.h>
 
@@ -116,6 +117,45 @@ QString SizeItemDelegate::displayText(const QVariant& value, const QLocale&) con
   return ret;
 }
 
+QString DateItemDelegate::displayText(const QVariant &value, const QLocale &locale) const {
+  bool ok = false;
+  int time = value.toInt(&ok);
+
+  if (!ok || time == -1)
+    return QString::null;
+
+  return QDateTime::fromTime_t(time).toString(
+      QLocale::system().dateTimeFormat(QLocale::ShortFormat));
+}
+
+QString FileTypeItemDelegate::displayText(const QVariant &value, const QLocale &locale) const {
+  bool ok = false;
+  Song::FileType type = Song::FileType(value.toInt(&ok));
+
+  if (!ok)
+    return tr("Unknown");
+
+  switch (type) {
+    case Song::Type_Asf:       return tr("ASF");
+    case Song::Type_Flac:      return tr("FLAC");
+    case Song::Type_Mp4:       return tr("MP4");
+    case Song::Type_Mpc:       return tr("MPC");
+    case Song::Type_Mpeg:      return tr("MP3"); // Not technically correct
+    case Song::Type_OggFlac:   return tr("Ogg FLAC");
+    case Song::Type_OggSpeex:  return tr("Ogg Speex");
+    case Song::Type_OggVorbis: return tr("Ogg Vorbis");
+    case Song::Type_Aiff:      return tr("AIFF");
+    case Song::Type_Wav:       return tr("WAV");
+    case Song::Type_TrueAudio: return tr("TrueAudio");
+
+    case Song::Type_Stream:    return tr("Stream");
+
+    case Song::Type_Unknown:
+    default:
+      return tr("Unknown");
+  }
+}
+
 
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
@@ -129,6 +169,9 @@ PlaylistView::PlaylistView(QWidget *parent)
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_DateCreated, new DateItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
 
   setHeader(new PlaylistHeader(Qt::Horizontal, this));
   header()->setMovable(true);
@@ -158,6 +201,9 @@ void PlaylistView::LoadGeometry() {
     header()->hideSection(Playlist::Column_Samplerate);
     header()->hideSection(Playlist::Column_Filename);
     header()->hideSection(Playlist::Column_Filesize);
+    header()->hideSection(Playlist::Column_Filetype);
+    header()->hideSection(Playlist::Column_DateCreated);
+    header()->hideSection(Playlist::Column_DateModified);
   }
 }
 

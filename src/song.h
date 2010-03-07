@@ -19,43 +19,6 @@ namespace TagLib {
   class FileRef;
 }
 
-struct SongData : public QSharedData {
-  SongData();
-
-  bool valid_;
-  int id_;
-
-  QString title_;
-  QString album_;
-  QString artist_;
-  QString albumartist_;
-  QString composer_;
-  int track_;
-  int disc_;
-  float bpm_;
-  int year_;
-  QString genre_;
-  QString comment_;
-  bool compilation_;
-  bool sampler_;
-
-  int length_;
-  int bitrate_;
-  int samplerate_;
-
-  int directory_id_;
-  QString filename_;
-  int mtime_;
-  int ctime_;
-  int filesize_;
-
-  // Filenames to album art for this song.
-  QString art_automatic_; // Guessed by LibraryWatcher
-  QString art_manual_;    // Set by the user - should take priority
-
-  QImage image_;
-};
-
 class FileRefFactory {
  public:
   virtual ~FileRefFactory() {}
@@ -76,6 +39,24 @@ class Song {
   static const char* kColumnSpec;
   static const char* kBindSpec;
   static const char* kUpdateSpec;
+
+  // Don't change these values - they're stored in the database
+  enum FileType {
+    Type_Unknown = 0,
+    Type_Asf = 1,
+    Type_Flac = 2,
+    Type_Mp4 = 3,
+    Type_Mpc = 4,
+    Type_Mpeg = 5,
+    Type_OggFlac = 6,
+    Type_OggSpeex = 7,
+    Type_OggVorbis = 8,
+    Type_Aiff = 9,
+    Type_Wav = 10,
+    Type_TrueAudio = 11,
+
+    Type_Stream = 99,
+  };
 
   // Constructors
   void Init(const QString& title, const QString& artist, int length);
@@ -114,6 +95,7 @@ class Song {
   uint mtime() const { return d->mtime_; }
   uint ctime() const { return d->ctime_; }
   int filesize() const { return d->filesize_; }
+  FileType filetype() const { return d->filetype_; }
 
   const QString& art_automatic() const { return d->art_automatic_; }
   const QString& art_manual() const { return d->art_manual_; }
@@ -156,6 +138,7 @@ class Song {
   void set_mtime(int v) { d->mtime_ = v; }
   void set_ctime(int v) { d->ctime_ = v; }
   void set_filesize(int v) { d->filesize_ = v; }
+  void set_filetype(FileType v) { d->filetype_ = v; }
   void set_art_automatic(const QString& v) { d->art_automatic_ = v; }
   void set_art_manual(const QString& v) { d->art_manual_ = v; }
   void set_image(const QImage& i) { d->image_ = i; }
@@ -168,7 +151,49 @@ class Song {
   bool IsMetadataEqual(const Song& other) const;
 
  private:
-  QSharedDataPointer<SongData> d;
+  void GuessFileType(TagLib::FileRef* fileref);
+
+ private:
+  struct Private : public QSharedData {
+    Private();
+
+    bool valid_;
+    int id_;
+
+    QString title_;
+    QString album_;
+    QString artist_;
+    QString albumartist_;
+    QString composer_;
+    int track_;
+    int disc_;
+    float bpm_;
+    int year_;
+    QString genre_;
+    QString comment_;
+    bool compilation_;
+    bool sampler_;
+
+    int length_;
+    int bitrate_;
+    int samplerate_;
+
+    int directory_id_;
+    QString filename_;
+    int mtime_;
+    int ctime_;
+    int filesize_;
+    FileType filetype_;
+
+    // Filenames to album art for this song.
+    QString art_automatic_; // Guessed by LibraryWatcher
+    QString art_manual_;    // Set by the user - should take priority
+
+    QImage image_;
+  };
+
+ private:
+  QSharedDataPointer<Private> d;
   FileRefFactory* factory_;
 
   static TagLibFileRefFactory kDefaultFactory;
