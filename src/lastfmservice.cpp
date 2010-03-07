@@ -596,6 +596,7 @@ void LastFMService::FetchMoreTracksFinished() {
     t.setArtist(q["creator"].text());
     t.setAlbum(q["album"].text());
     t.setDuration(q["duration"].text().toInt() / 1000);
+    t.setSource(lastfm::Track::LastFmRadio);
     const QString& image = q["image"].text();
     if (!image.isEmpty()) {
       FetchImage(t, image);
