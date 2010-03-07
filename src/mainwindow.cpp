@@ -21,6 +21,7 @@
 #include "stylesheetloader.h"
 #include "albumcovermanager.h"
 #include "m3uparser.h"
+#include "playlistmanager.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -37,6 +38,7 @@
 #include <QFileDialog>
 
 #include <cmath>
+
 
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
@@ -64,7 +66,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
-    next_playlist_number_(1)
+    next_playlist_number_(1),
+    playlistManager_( new PlaylistManager(this) ) 
 {
   ui_.setupUi(this);
   tray_icon_->setIcon(windowIcon());
@@ -146,6 +149,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
+  
+  // PlaylistManager connections
+  connect (playlistManager_, SIGNAL(CurrentPlaylistChanged(Playlist*)), this, SLOT(CurrentPlaylistChanged(Playlist*)));
 
   connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
@@ -211,6 +217,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
   connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(NextItem()));
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
+  connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), current_playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(ui_.radio_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
@@ -295,25 +302,17 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   }
 
   library_->StartThreads();
-
-  settings_.endGroup();
-  settings_.beginGroup(Playlist::kSettingsGroup);
-  foreach (const QString& group, settings_.childGroups()) {
-    QRegExp re(" \\d+");
-    if (re.indexIn(group) != -1) {
-      next_playlist_number_ = qMax(re.cap(0).toInt() + 1, next_playlist_number_);
-    }
-    NewPlaylist(group);
-  }
-  if (settings_.childGroups().isEmpty()) {
-    NewPlaylist();
-  }
-  settings_.endGroup();
-  settings_.beginGroup(kSettingsGroup);
+  
+  playlistManager_->SetTabWidget(ui_.tabWidget);
+  qDebug() << "restoring";
+  playlistManager_->Restore() ; 
 }
 
 MainWindow::~MainWindow() {
   SaveGeometry();
+  playlistManager_->Save() ; 
+  
+  delete player_ ; 
 }
 
 void MainWindow::HideShowTrayIcon() {
@@ -657,48 +656,53 @@ void MainWindow::AddStreamAccepted() {
 
   current_playlist_->InsertStreamUrls(urls);
 }
-
-void MainWindow::NewPlaylist(const QString& title) {
-  PlaylistView* playlist_view = new PlaylistView(ui_.tabWidget);
-  playlist_view->setObjectName(QString::fromUtf8("playlist"));
-  playlist_view->setAcceptDrops(true);
-  playlist_view->setDragEnabled(true);
-  playlist_view->setDragDropMode(QAbstractItemView::DragDrop);
-  playlist_view->setSelectionMode(QAbstractItemView::ExtendedSelection);
-  playlist_view->setRootIsDecorated(false);
-  playlist_view->setUniformRowHeights(true);
-  playlist_view->setItemsExpandable(false);
-  playlist_view->setSortingEnabled(true);
-  playlist_view->setAllColumnsShowFocus(true);
-  Playlist* playlist = new Playlist(playlist_view) ;
-
-  playlist->IgnoreSorting(true);
-  playlist_view->setModel(playlist);
-  playlist->IgnoreSorting(false);
-
-  QString actual_title = title;
-  if (title.isEmpty()) {
-    actual_title = tr("New playlist %1").arg(next_playlist_number_++);
-    playlist->SetTitle(actual_title);
-  } else {
-    playlist->SetTitle(title);
-    playlist->Restore();
-  }
-  ui_.tabWidget->addTab(playlist_view, actual_title);
-
-  SetCurrentPlaylist(playlist_view);
+void MainWindow::NewPlaylist()
+{
+  playlistManager_->addPlaylist();
+//     PlaylistView * playListView = new PlaylistView(ui_.tabWidget);
+//     playListView->setObjectName(QString::fromUtf8("playlist"));
+//     playListView->setAcceptDrops(true);
+//     playListView->setDragEnabled(true);
+//     playListView->setDragDropMode(QAbstractItemView::DragDrop);
+//     playListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+//     playListView->setRootIsDecorated(false);
+//     playListView->setUniformRowHeights(true);
+//     playListView->setItemsExpandable(false);
+//     playListView->setSortingEnabled(true);
+//     playListView->setAllColumnsShowFocus(true);
+//     Playlist * playList = new Playlist(playListView) ;
+//     
+//     
+//     
+//     playList->IgnoreSorting(true);
+//     playListView->setModel(playList);
+//     playList->IgnoreSorting(false);
+//     
+//     QString title = playList->Title(); 
+//     if ( title.isEmpty() ) 
+//         title = tr("New playlist") ;  
+//     ui_.tabWidget->addTab(playListView, tr("New playlist"));
+//     
+//     SetCurrentPlaylist(playListView);
+    
+//   if (title.isEmpty()) {
+//     actual_title = tr("New playlist %1").arg(next_playlist_number_++);
+//     playlist->SetTitle(actual_title);
+//   } else {
+//     playlist->SetTitle(title);
+//     playlist->Restore();
+//   }
+//   ui_.tabWidget->addTab(playlist_view, actual_title);
 }
-
-void MainWindow::SetCurrentPlaylist(PlaylistView* current) {
-  // Disconnect current playlist and tab.
-  if (current_playlist_) {
+void MainWindow::SetCurrentPlaylist(PlaylistView* pCurrent)
+{
+    // tab widget ;     
+    //disconnects!!
+    
     disconnect(current_playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
-    disconnect(current_playlist_view_, SIGNAL(doubleClicked(QModelIndex)),
-        this, SLOT(PlayIndex(QModelIndex)));
-    disconnect(current_playlist_view_, SIGNAL(PlayPauseItem(QModelIndex)),
-        this, SLOT(PlayIndex(QModelIndex)));
-    disconnect(current_playlist_view_, SIGNAL(RightClicked(QPoint,QModelIndex)),
-        this, SLOT(PlaylistRightClick(QPoint,QModelIndex)));
+    disconnect(current_playlist_view_, SIGNAL(doubleClicked(QModelIndex)),this, SLOT(PlayIndex(QModelIndex)));
+    disconnect(current_playlist_view_, SIGNAL(PlayPauseItem(QModelIndex)),this, SLOT(PlayIndex(QModelIndex)));
+    disconnect(current_playlist_view_, SIGNAL(RightClicked(QPoint,QModelIndex)),this, SLOT(PlaylistRightClick(QPoint,QModelIndex)));
     disconnect(ui_.action_clear_playlist, SIGNAL(triggered()), current_playlist_, SLOT(Clear()));
     disconnect(ui_.action_shuffle, SIGNAL(triggered()), current_playlist_, SLOT(Shuffle()));
     disconnect(player_, SIGNAL(Paused()), current_playlist_, SLOT(Paused()));
@@ -708,35 +712,42 @@ void MainWindow::SetCurrentPlaylist(PlaylistView* current) {
     disconnect(player_, SIGNAL(Paused()), current_playlist_view_, SLOT(StopGlowing()));
     disconnect(player_, SIGNAL(Playing()), current_playlist_view_, SLOT(StartGlowing()));
     disconnect(player_, SIGNAL(Stopped()), current_playlist_view_, SLOT(StopGlowing()));
-  }
+    
+    disconnect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), current_playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
+    
+    // repin pointers
+    
+    ui_.tabWidget->setCurrentWidget(pCurrent);
+    current_playlist_view_ = pCurrent ; 
+    current_playlist_ = qobject_cast< Playlist* >( pCurrent->model() );
+    player_->SetCurrentPlaylist(current_playlist_);
+    
+    
+    // connects !! :)
+    
+    connect(current_playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
+    connect(current_playlist_view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+    connect(current_playlist_view_, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+    connect(current_playlist_view_, SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
+    connect(ui_.action_clear_playlist, SIGNAL(triggered()), current_playlist_, SLOT(Clear()));
+    connect(ui_.action_shuffle, SIGNAL(triggered()), current_playlist_, SLOT(Shuffle()));
+    connect(player_, SIGNAL(Paused()), current_playlist_, SLOT(Paused()));
+    connect(player_, SIGNAL(Playing()), current_playlist_, SLOT(Playing()));
+    connect(player_, SIGNAL(Stopped()), current_playlist_, SLOT(Stopped()));
 
-  // Repin pointers.
-  ui_.tabWidget->setCurrentWidget(current);
-  current_playlist_view_ = current;
-  current_playlist_ = qobject_cast<Playlist*>(current->model());
-  player_->SetCurrentPlaylist(current_playlist_);
-
-  // Connect new playlist and tab.
-  connect(current_playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
-  connect(current_playlist_view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
-  connect(current_playlist_view_, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
-  connect(current_playlist_view_, SIGNAL(RightClicked(QPoint,QModelIndex)),
-      SLOT(PlaylistRightClick(QPoint,QModelIndex)));
-  connect(ui_.action_clear_playlist, SIGNAL(triggered()), current_playlist_, SLOT(Clear()));
-  connect(ui_.action_shuffle, SIGNAL(triggered()), current_playlist_, SLOT(Shuffle()));
-  connect(player_, SIGNAL(Paused()), current_playlist_, SLOT(Paused()));
-  connect(player_, SIGNAL(Playing()), current_playlist_, SLOT(Playing()));
-  connect(player_, SIGNAL(Stopped()), current_playlist_, SLOT(Stopped()));
-
-  connect(player_, SIGNAL(Paused()), current_playlist_view_, SLOT(StopGlowing()));
-  connect(player_, SIGNAL(Playing()), current_playlist_view_, SLOT(StartGlowing()));
-  connect(player_, SIGNAL(Stopped()), current_playlist_view_, SLOT(StopGlowing()));
-
-  connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)),
-      current_playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
+    connect(player_, SIGNAL(Paused()), current_playlist_view_, SLOT(StopGlowing()));
+    connect(player_, SIGNAL(Playing()), current_playlist_view_, SLOT(StartGlowing()));
+    connect(player_, SIGNAL(Stopped()), current_playlist_view_, SLOT(StopGlowing()));
+    
+    connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), current_playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
 }
 
-void MainWindow::CurrentTabChanged(int index) {
-  PlaylistView* current = qobject_cast<PlaylistView*>(ui_.tabWidget->currentWidget());
-  SetCurrentPlaylist(current);
+void MainWindow::CurrentTabChanged(int index )
+{
+    PlaylistView *pCurrent = qobject_cast< PlaylistView* >( ui_.tabWidget->currentWidget() ); 
+    SetCurrentPlaylist(pCurrent);
+}
+void MainWindow::CurrentPlaylistChanged(Playlist* pPlaylist)
+{
+
 }

@@ -54,6 +54,7 @@ set(CLEMENTINE-SOURCES
     albumcovermanager.cpp
     albumcoverloader.cpp
     m3uparser.cpp
+    playlistmanager.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -101,6 +102,7 @@ set(CLEMENTINE-MOC-HEADERS
     albumcovermanager.h
     albumcoverloader.h
     m3uparser.h
+    playlistmanager.h
 )
 
 # UI files

@@ -25,7 +25,9 @@ Playlist::Playlist(QObject *parent) :
     current_is_paused_(false),
     scrobble_point_(-1),
     has_scrobbled_(false),
-    ignore_sorting_(false)
+    ignore_sorting_(false),
+    title_(""),
+    index_(-1)
 {
 }
 
@@ -206,7 +208,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     }
 
     layoutChanged();
-    Save();
+//     Save();
 
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
@@ -270,7 +272,7 @@ QModelIndex Playlist::InsertItems(const QList<PlaylistItem*>& items, int after) 
 
   endInsertRows();
 
-  Save();
+//   Save();
 
   return index(start, 0);
 }
@@ -370,7 +372,7 @@ void Playlist::sort(int column, Qt::SortOrder order) {
 
   layoutChanged();
 
-  Save();
+//   Save();
 }
 
 void Playlist::Playing() {
@@ -396,11 +398,11 @@ void Playlist::SetCurrentIsPaused(bool paused) {
                 index(current_item_.row(), ColumnCount));
 }
 
-void Playlist::Save() const {
+void Playlist::SaveR() const {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.beginGroup(title_);
-
+  Q_ASSERT(index_ != -1 ) ; 
+  QString setGrp = kSettingsGroup + QString::number(index_) ; 
+  s.beginGroup(setGrp);
   s.beginWriteArray("items", items_.count());
   for (int i=0 ; i<items_.count() ; ++i) {
     s.setArrayIndex(i);
@@ -408,15 +410,16 @@ void Playlist::Save() const {
     items_.at(i)->Save(s);
   }
   s.endArray();
+  s.setValue("title",title_);
 }
 
-void Playlist::Restore() {
+void Playlist::RestoreR() {
   qDeleteAll(items_);
   items_.clear();
 
   QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.beginGroup(title_);
+  QString setGrp = kSettingsGroup + QString::number(index_) ; 
+  s.beginGroup(setGrp);
 
   int count = s.beginReadArray("items");
   for (int i=0 ; i<count ; ++i) {
@@ -431,7 +434,7 @@ void Playlist::Restore() {
     items_ << item;
   }
   s.endArray();
-
+  title_ = s.value("title").toString();
   reset();
 }
 
@@ -444,7 +447,7 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
 
   endRemoveRows();
 
-  Save();
+//   Save();
   return true;
 }
 
@@ -535,7 +538,7 @@ void Playlist::Clear() {
   items_.clear();
   reset();
 
-  Save();
+//   Save();
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {
@@ -564,5 +567,5 @@ void Playlist::Shuffle() {
 
   layoutChanged();
 
-  Save();
+//   Save();
 }

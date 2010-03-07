@@ -7,6 +7,7 @@
 
 #include "ui_mainwindow.h"
 
+class PlaylistManager;
 class Playlist;
 class PlaylistView;
 class Player;
@@ -83,10 +84,12 @@ class MainWindow : public QMainWindow {
   void AddMedia();
   void AddStream();
   void AddStreamAccepted();
-
-  void NewPlaylist(const QString& title = QString());
-
-  void CurrentTabChanged(int);
+  
+  void NewPlaylist() ; 
+  
+  void CurrentTabChanged ( int ) ; 
+  
+  void CurrentPlaylistChanged( Playlist * pPlaylist ) ; 
 
  private:
   void SaveGeometry();
@@ -129,7 +132,7 @@ class MainWindow : public QMainWindow {
 
   QTimer* track_position_timer_;
   QSettings settings_;
-
+  PlaylistManager * playlistManager_ ; 
   int next_playlist_number_;
 };
 
