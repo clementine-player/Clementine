@@ -46,6 +46,7 @@ class Player : public QObject {
 
   void TrackEnded();
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
+  void CurrentMetadataChanged(const Song& metadata);
 
  signals:
   void InitFinished();

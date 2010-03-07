@@ -210,9 +210,13 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
 
   engine_->play(media_url);
 
-  lastfm_->NowPlaying(item->Metadata());
-  current_item_options_ = item->options();
   current_item_ = item->Metadata();
+  current_item_options_ = item->options();
+}
+
+void Player::CurrentMetadataChanged(const Song &metadata) {
+  lastfm_->NowPlaying(metadata);
+  current_item_ = metadata;
 }
 
 void Player::Seek(int seconds) {
