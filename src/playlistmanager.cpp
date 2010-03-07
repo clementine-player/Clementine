@@ -59,6 +59,7 @@ void PlaylistManager::Save() const{
     p->SaveR() ; 
   }
   s.setValue("numberofplaylists", playlistCount_ ) ; 
+  s.setValue("currentplaylistindex",pTabWidget_->currentIndex());
 }
 bool PlaylistManager::Restore(){
   Q_ASSERT ( pTabWidget_ ) ; 
@@ -102,6 +103,9 @@ bool PlaylistManager::Restore(){
     pCurrentPlaylistView_ = playListView ;
     playlists_ << playList ; 
   }
+  int currentIndex = s.value("currentplaylistindex").toInt(&bOk);
+  if(bOk)
+    pTabWidget_->setCurrentIndex(currentIndex);
   return true ; 
 }
 

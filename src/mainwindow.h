@@ -90,6 +90,8 @@ class MainWindow : public QMainWindow {
   void CurrentTabChanged ( int ) ; 
   
   void CurrentPlaylistChanged( Playlist * pPlaylist ) ; 
+  
+  void InitPlaylists() ; 
 
  private:
   void SaveGeometry();

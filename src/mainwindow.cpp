@@ -304,10 +304,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   library_->StartThreads();
   
   playlistManager_->SetTabWidget(ui_.tabWidget);
-  qDebug() << "restoring";
-  bool bRestored = playlistManager_->Restore() ; 
-  if ( !bRestored ) 
-    playlistManager_->addPlaylist();
+  
+  QTimer::singleShot(500,this,SLOT(InitPlaylists())) ; 
     
 }
 
@@ -716,4 +714,9 @@ void MainWindow::CurrentTabChanged(int index ){
 }
 void MainWindow::CurrentPlaylistChanged(Playlist* pPlaylist){
 
+}
+void MainWindow::InitPlaylists(){
+  bool bRestored = playlistManager_->Restore() ; 
+  if ( !bRestored ) 
+    playlistManager_->addPlaylist();
 }
