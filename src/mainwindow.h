@@ -91,11 +91,12 @@ class MainWindow : public QMainWindow {
  private:
   void SaveGeometry();
 
-  void SetCurrentPlaylist(PlaylistView * pCurrent) ; 
+  void SetCurrentPlaylist(PlaylistView* current);
 
  private:
   static const int kStateVersion;
   static const char* kSettingsGroup;
+  static const char* kMediaFilterSpec;
 
   Ui::MainWindow ui_;
   SystemTrayIcon* tray_icon_;

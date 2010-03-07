@@ -10,11 +10,11 @@ M3UParser::M3UParser(QIODevice* device, const QDir& directory, QObject* parent)
 }
 
 const QList<Song>& M3UParser::Parse() {
-  QString line = QString::fromLatin1(device_->readLine());
+  QString line = QString::fromLatin1(device_->readLine()).trimmed();
   if (line.startsWith("#EXTM3U")) {
     // This is in extended M3U format.
     type_ = EXTENDED;
-    line = QString::fromLatin1(device_->readLine());
+    line = QString::fromLatin1(device_->readLine()).trimmed();
   }
 
   forever {
@@ -35,17 +35,17 @@ const QList<Song>& M3UParser::Parse() {
       QString location;
       if (!ParseTrackLocation(line, &song)) {
         qWarning() << "Failed to parse location: " << line;
-        continue;
+      } else {
+        songs_ << song;
+        current_metadata_.artist.clear();
+        current_metadata_.title.clear();
+        current_metadata_.length = -1;
       }
-      songs_ << song;
-      current_metadata_.artist.clear();
-      current_metadata_.title.clear();
-      current_metadata_.length = -1;
     }
-    if (!device_->canReadLine()) {
+    if (device_->atEnd()) {
       break;
     }
-    line = QString::fromLatin1(device_->readLine());
+    line = QString::fromLatin1(device_->readLine()).trimmed();
   }
 
   return songs_;
@@ -89,12 +89,19 @@ bool M3UParser::ParseTrackLocation(const QString& line, Song* song) const {
     // Absolute path.
     // Fix windows \, eg. C:\foo -> C:/foo.
     QString proper_path = QDir::fromNativeSeparators(line);
+    if (!QFile::exists(proper_path)) {
+      return false;
+    }
     song->set_filename(proper_path);
   } else {
     // Relative path.
     QString proper_path = QDir::fromNativeSeparators(line);
     QString absolute_path = directory_.absoluteFilePath(proper_path);
+    if (!QFile::exists(absolute_path)) {
+      return false;
+    }
     song->set_filename(absolute_path);
   }
   song->InitFromFile(song->filename(), -1);
+  return true;
 }

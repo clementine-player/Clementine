@@ -20,6 +20,7 @@
 #include "addstreamdialog.h"
 #include "stylesheetloader.h"
 #include "albumcovermanager.h"
+#include "m3uparser.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -39,6 +40,8 @@
 
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
+const char* MainWindow::kMediaFilterSpec =
+    "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma);;Playlists (*.m3u)";
 
 MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   : QMainWindow(parent),
@@ -616,7 +619,8 @@ void MainWindow::AddMedia() {
   QString directory = settings_.value("add_media_path", QDir::currentPath()).toString();
 
   // Show dialog
-  QStringList file_names = QFileDialog::getOpenFileNames(this, "Add media", directory);
+  QStringList file_names = QFileDialog::getOpenFileNames(
+      this, "Add media", directory, kMediaFilterSpec);
   if (file_names.isEmpty())
     return;
 
@@ -626,10 +630,19 @@ void MainWindow::AddMedia() {
   // Add media
   QList<QUrl> urls;
   foreach (const QString& path, file_names) {
-    QUrl url(path);
-    if (url.scheme().isEmpty())
-      url.setScheme("file");
-    urls << url;
+    if (path.endsWith(".m3u")) {
+      QFile file(path);
+      QFileInfo info(file);
+      file.open(QIODevice::ReadOnly);
+      M3UParser parser(&file, info.dir());
+      const SongList& songs = parser.Parse();
+      current_playlist_->InsertSongs(songs);
+    } else {
+      QUrl url(path);
+      if (url.scheme().isEmpty())
+        url.setScheme("file");
+      urls << url;
+    }
   }
   current_playlist_->InsertPaths(urls);
 }
