@@ -13,9 +13,8 @@ pCurrentPlaylistView_(NULL),
 playlistCount_(0)
 {
 }
-void PlaylistManager::addPlaylist(const QString & playlistName /*= QString()*/)
-{
-  Q_ASSERT ( pTabWidget_ != NULL ) ; 
+void PlaylistManager::addPlaylist(const QString & playlistName /*= QString()*/){
+  Q_ASSERT ( pTabWidget_ ) ; 
   PlaylistView * playListView = new PlaylistView(pTabWidget_);
   
   playListView->setObjectName(QString::fromUtf8("playlist"));
@@ -29,7 +28,7 @@ void PlaylistManager::addPlaylist(const QString & playlistName /*= QString()*/)
   playListView->setSortingEnabled(true);
   playListView->setAllColumnsShowFocus(true);
   
-  Playlist * playList = new Playlist(playListView) ;
+  Playlist* playList = new Playlist(playListView) ;
   
   playList->IgnoreSorting(true);
   playListView->setModel(playList);
@@ -48,24 +47,21 @@ void PlaylistManager::addPlaylist(const QString & playlistName /*= QString()*/)
   
   playlists_ << playList ; 
 }
-void PlaylistManager::SetCurrentPlaylist(Playlist* pPlaylist)
-{
+void PlaylistManager::SetCurrentPlaylist(Playlist* pPlaylist){
   pCurrentPlaylist_ = pPlaylist ; 
   
   emit CurrentPlaylistChanged( pCurrentPlaylist_ ) ; 
 }
-void PlaylistManager::Save() const
-{
+void PlaylistManager::Save() const{
   QSettings s ; 
-  Q_FOREACH ( Playlist *p, playlists_ ) {
+  Q_FOREACH ( Playlist* p, playlists_ ) {
     qDebug() << "Saving" << p->GetTitle() ; 
     p->SaveR() ; 
   }
   s.setValue("numberofplaylists", playlistCount_ ) ; 
 }
-void PlaylistManager::Restore()
-{
-  Q_ASSERT ( pTabWidget_ != NULL ) ; 
+bool PlaylistManager::Restore(){
+  Q_ASSERT ( pTabWidget_ ) ; 
   QSettings s ; 
   bool bOk ; 
   int nOfPlaylist = s.value("numberofplaylists").toInt(&bOk) ; 
@@ -73,12 +69,12 @@ void PlaylistManager::Restore()
   qDebug() << nOfPlaylist ; 
   if ( bOk == false || nOfPlaylist == 0 ) {
     qDebug()<< "No reading from settings"; 
-    return ; 
+    return false; 
   }
   int nCurrentIndex = -1 ;
   for ( int i=0;i<nOfPlaylist;++i){
     
-    PlaylistView * playListView = new PlaylistView(pTabWidget_);
+    PlaylistView* playListView = new PlaylistView(pTabWidget_);
   
     playListView->setObjectName(QString::fromUtf8("playlist"));
     playListView->setAcceptDrops(true);
@@ -91,7 +87,7 @@ void PlaylistManager::Restore()
     playListView->setSortingEnabled(true);
     playListView->setAllColumnsShowFocus(true);
   
-    Playlist * playList = new Playlist(playListView) ;
+    Playlist* playList = new Playlist(playListView) ;
   
     playList->IgnoreSorting(true);
     playListView->setModel(playList);
@@ -106,6 +102,7 @@ void PlaylistManager::Restore()
     pCurrentPlaylistView_ = playListView ;
     playlists_ << playList ; 
   }
+  return true ; 
 }
 
 
