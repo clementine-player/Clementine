@@ -156,7 +156,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
   // Tab connections
-  connect (ui_.tabWidget, SIGNAL(currentChanged(int)), SLOT(CurrentTabChanged(int)));
+  connect (ui_.tab_widget, SIGNAL(currentChanged(int)), SLOT(CurrentTabChanged(int)));
 
   // Library connections
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
@@ -303,7 +303,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   library_->StartThreads();
   
-  playlistManager_->SetTabWidget(ui_.tabWidget);
+  playlistManager_->SetTabWidget(ui_.tab_widget);
   
   QTimer::singleShot(500,this,SLOT(InitPlaylists())) ; 
     
@@ -683,7 +683,7 @@ void MainWindow::SetCurrentPlaylist(PlaylistView* pCurrent){
     
     // repin pointers
     
-    ui_.tabWidget->setCurrentWidget(pCurrent);
+    ui_.tab_widget->setCurrentWidget(pCurrent);
     current_playlist_view_ = pCurrent ; 
     current_playlist_ = qobject_cast< Playlist* >( pCurrent->model() );
     player_->SetCurrentPlaylist(current_playlist_);
@@ -709,7 +709,7 @@ void MainWindow::SetCurrentPlaylist(PlaylistView* pCurrent){
 }
 
 void MainWindow::CurrentTabChanged(int index ){
-    PlaylistView *pCurrent = qobject_cast< PlaylistView* >( ui_.tabWidget->currentWidget() ); 
+    PlaylistView *pCurrent = qobject_cast< PlaylistView* >( ui_.tab_widget->currentWidget() ); 
     SetCurrentPlaylist(pCurrent);
 }
 void MainWindow::CurrentPlaylistChanged(Playlist* pPlaylist){
