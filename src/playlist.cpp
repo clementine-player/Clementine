@@ -14,6 +14,7 @@
 #include <QDirIterator>
 
 #include <boost/bind.hpp>
+#include <algorithm>
 
 #include <lastfm/ScrobblePoint>
 
@@ -23,11 +24,14 @@ const char* Playlist::kSettingsGroup = "Playlist";
 Playlist::Playlist(QObject *parent) :
     QAbstractListModel(parent),
     current_is_paused_(false),
+    current_virtual_index_(-1),
+    is_shuffled_(false),
     scrobble_point_(-1),
     has_scrobbled_(false),
     ignore_sorting_(false),
     title_(""),
-    index_(-1)
+    index_(-1),
+    shuffle_repeat_widget_(NULL)
 {
 }
 
@@ -111,14 +115,68 @@ int Playlist::current_index() const {
   return current_item_.isValid() ? current_item_.row() : -1;
 }
 
+void Playlist::ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode mode) {
+  is_shuffled_ = (mode != ShuffleRepeatWidget::Shuffle_Off);
+  ReshuffleIndices();
+}
+
+int Playlist::NextVirtualIndex(int i) const {
+  ShuffleRepeatWidget::RepeatMode repeat_mode = shuffle_repeat_widget_->repeat_mode();
+  ShuffleRepeatWidget::ShuffleMode shuffle_mode = shuffle_repeat_widget_->shuffle_mode();
+  bool album_only = repeat_mode == ShuffleRepeatWidget::Repeat_Album ||
+                    shuffle_mode == ShuffleRepeatWidget::Shuffle_Album;
+
+  // This one's easy - if we have to repeat the current track then just return i
+  if (repeat_mode == ShuffleRepeatWidget::Repeat_Track)
+    return i;
+
+  // If we're not bothered about whether a song is on the same album then
+  // return the next virtual index, whatever it is.
+  if (!album_only)
+    return i+1;
+
+  // We need to advance i until we get something else on the same album
+  Song last_song = current_item_metadata();
+  for (int j=i+1 ; j<virtual_items_.count(); ++j) {
+    Song this_song = item_at(virtual_items_[j])->Metadata();
+    if ((last_song.is_compilation() && this_song.is_compilation() ||
+         last_song.artist() == this_song.artist()) &&
+        last_song.album() == this_song.album()) {
+      return j; // Found one
+    }
+  }
+
+  // Couldn't find one - return past the end of the list
+  return virtual_items_.count();
+}
+
 int Playlist::next_index() const {
-  int i = current_index() + 1;
-  if (i >= items_.count())
-    return -1;
+  // Did we want to stop after this track?
   if (stop_after_.isValid() && current_index() == stop_after_.row())
     return -1;
 
-  return i;
+  int next_virtual_index = NextVirtualIndex(current_virtual_index_);
+  if (next_virtual_index >= virtual_items_.count()) {
+    // We've gone off the end of the playlist.
+
+    switch (shuffle_repeat_widget_->repeat_mode()) {
+      case ShuffleRepeatWidget::Repeat_Off:
+        return -1;
+      case ShuffleRepeatWidget::Repeat_Track:
+        next_virtual_index = current_virtual_index_;
+        break;
+
+      default:
+        next_virtual_index = NextVirtualIndex(-1);
+        break;
+    }
+  }
+
+  // Still off the end?  Then just give up
+  if (next_virtual_index >= virtual_items_.count())
+    return -1;
+
+  return virtual_items_[next_virtual_index];
 }
 
 int Playlist::previous_index() const {
@@ -141,6 +199,23 @@ void Playlist::set_current_index(int i) {
     emit dataChanged(current_item_, current_item_.sibling(current_item_.row(), ColumnCount));
     emit CurrentSongChanged(current_item_metadata());
   }
+
+  // Update the virtual index
+  if (i == -1)
+    current_virtual_index_ = -1;
+  else if (is_shuffled_ && current_virtual_index_ == -1) {
+    // This is the first thing we're playing so we want to make sure the array
+    // is shuffled
+    ReshuffleIndices();
+
+    // Bring the one we've been asked to play to the start of the list
+    virtual_items_.takeAt(virtual_items_.indexOf(i));
+    virtual_items_.prepend(i);
+    current_virtual_index_ = 0;
+  } else if (is_shuffled_)
+    current_virtual_index_ = virtual_items_.indexOf(i);
+  else
+    current_virtual_index_ = i;
 
   UpdateScrobblePoint();
 }
@@ -275,14 +350,14 @@ QModelIndex Playlist::InsertItems(const QList<PlaylistItem*>& items, int after) 
   const int end = start + items.count() - 1;
 
   beginInsertRows(QModelIndex(), start, end);
-
   for (int i=start ; i<=end ; ++i) {
     items_.insert(i, items[i - start]);
+    virtual_items_ << virtual_items_.count();
   }
-
   endInsertRows();
 
 //   Save();
+  ReshuffleIndices();
 
   return index(start, 0);
 }
@@ -428,6 +503,7 @@ void Playlist::SaveR() const {
 void Playlist::RestoreR() {
   qDeleteAll(items_);
   items_.clear();
+  virtual_items_.clear();
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -444,6 +520,7 @@ void Playlist::RestoreR() {
 
     item->Restore(s);
     items_ << item;
+    virtual_items_ << virtual_items_.count();
   }
   s.endArray();
   s.endGroup();
@@ -459,6 +536,20 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
     delete items_.takeAt(row);
 
   endRemoveRows();
+
+  QList<int>::iterator it = virtual_items_.begin();
+  int i = 0;
+  while (it != virtual_items_.end()) {
+    if (*it >= items_.count()) {
+      if (i >= current_virtual_index_)
+        current_virtual_index_ --;
+
+      it = virtual_items_.erase(it);
+    } else {
+      ++it;
+    }
+    ++i;
+  }
 
 //   Save();
   return true;
@@ -581,4 +672,23 @@ void Playlist::Shuffle() {
   layoutChanged();
 
 //   Save();
+}
+
+void Playlist::ReshuffleIndices() {
+  if (!is_shuffled_) {
+    std::sort(virtual_items_.begin(), virtual_items_.end());
+    if (current_index() != -1)
+      current_virtual_index_ = virtual_items_.indexOf(current_index());
+  } else {
+    QList<int>::iterator begin = virtual_items_.begin();
+    if (current_virtual_index_ != -1)
+      std::advance(begin, current_virtual_index_ + 1);
+
+    std::random_shuffle(begin, virtual_items_.end());
+  }
+}
+
+void Playlist::set_shuffle_repeat_widget(ShuffleRepeatWidget* w) {
+  shuffle_repeat_widget_ = w;
+  ShuffleModeChanged(w->shuffle_mode());
 }

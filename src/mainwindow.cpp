@@ -689,7 +689,8 @@ void MainWindow::SetCurrentPlaylist(PlaylistView* pCurrent){
     current_playlist_view_ = pCurrent ; 
     current_playlist_ = qobject_cast< Playlist* >( pCurrent->model() );
     player_->SetCurrentPlaylist(current_playlist_);
-    
+
+    current_playlist_->set_shuffle_repeat_widget(shuffle_repeat_widget_);
     
     // connects !! :)
     
@@ -709,6 +710,9 @@ void MainWindow::SetCurrentPlaylist(PlaylistView* pCurrent){
     connect(player_, SIGNAL(Stopped()), current_playlist_view_, SLOT(StopGlowing()));
     
     connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), current_playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
+
+    connect(shuffle_repeat_widget_, SIGNAL(ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode)),
+            current_playlist_, SLOT(ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode)));
 }
 
 void MainWindow::CurrentTabChanged(int index ){

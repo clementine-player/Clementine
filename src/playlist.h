@@ -7,6 +7,7 @@
 #include "playlistitem.h"
 #include "song.h"
 #include "radioitem.h"
+#include "shufflerepeatwidget.h"
 
 class RadioService;
 
@@ -72,7 +73,10 @@ class Playlist : public QAbstractListModel {
   void SetTitle(const QString& title)  { title_ = title; }
   
   void SetPlaylistIndex( int ipos ) { index_ = ipos ; } 
-  int GetPlaylistIndex() const { return index_ ; } 
+  int GetPlaylistIndex() const { return index_ ; }
+
+  void set_shuffle_repeat_widget(ShuffleRepeatWidget* w);
+  ShuffleRepeatWidget* shuffle_repeat_widget() const { return shuffle_repeat_widget_; }
 
   // Scrobbling
   int scrobble_point() const { return scrobble_point_; }
@@ -114,12 +118,16 @@ class Playlist : public QAbstractListModel {
   void Clear();
   void Shuffle();
 
+  void ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode mode);
+
  signals:
   void CurrentSongChanged(const Song& metadata);
 
  private:
   void SetCurrentIsPaused(bool paused);
   void UpdateScrobblePoint();
+  void ReshuffleIndices();
+  int NextVirtualIndex(int i) const;
   
   // Persistence
   void SaveR() const;
@@ -127,10 +135,14 @@ class Playlist : public QAbstractListModel {
 
  private:
   QList<PlaylistItem*> items_;
+  QList<int> virtual_items_; // Contains the indices into items_ in the order
+                             // that they will be played.
+  bool is_shuffled_;
 
   QPersistentModelIndex current_item_;
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
+  int current_virtual_index_;
 
   int scrobble_point_;
   bool has_scrobbled_;
@@ -138,7 +150,9 @@ class Playlist : public QAbstractListModel {
   // Hack to stop QTreeView::setModel sorting the playlist
   bool ignore_sorting_;
   QString title_;
-  int index_ ; 
+  int index_ ;
+
+  ShuffleRepeatWidget* shuffle_repeat_widget_;
 };
 
 #endif // PLAYLIST_H

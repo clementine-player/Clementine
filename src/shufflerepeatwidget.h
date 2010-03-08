@@ -3,9 +3,9 @@
 
 #include <QWidget>
 
-class QMenu;
-
 #include "ui_shufflerepeatwidget.h"
+
+class QMenu;
 
 class ShuffleRepeatWidget : public QWidget {
   Q_OBJECT
@@ -27,20 +27,24 @@ class ShuffleRepeatWidget : public QWidget {
 
   static const char* kSettingsGroup;
 
-  void Load();
-  void Save();
+  RepeatMode repeat_mode() const { return repeat_mode_; }
+  ShuffleMode shuffle_mode() const { return shuffle_mode_; }
 
  public slots:
-  void SetRepeatMode(RepeatMode mode);
-  void SetShuffleMode(ShuffleMode mode);
+  void SetRepeatMode(ShuffleRepeatWidget::RepeatMode mode);
+  void SetShuffleMode(ShuffleRepeatWidget::ShuffleMode mode);
 
  signals:
-  void RepeatModeChanged(RepeatMode mode);
-  void ShuffleModeChanged(ShuffleMode mode);
+  void RepeatModeChanged(ShuffleRepeatWidget::RepeatMode mode);
+  void ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode mode);
 
  private slots:
   void RepeatActionTriggered(QAction*);
   void ShuffleActionTriggered(QAction*);
+
+ private:
+  void Load();
+  void Save();
 
  private:
   Ui::ShuffleRepeatWidget ui_;
