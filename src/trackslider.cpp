@@ -19,14 +19,18 @@ TrackSlider::TrackSlider(QWidget* parent)
 void TrackSlider::UpdateLabelWidth() {
   // We set the label's minimum size so it won't resize itself when the user
   // is dragging the slider.
-  QString old_text = ui_.elapsed->text();
-  ui_.elapsed->setText("0:00:00");
-  ui_.elapsed->setMinimumWidth(0);
-  int width = ui_.elapsed->sizeHint().width();
-  ui_.elapsed->setText(old_text);
+  UpdateLabelWidth(ui_.elapsed, "0:00:00");
+  UpdateLabelWidth(ui_.remaining, "-0:00:00");
+}
 
-  ui_.elapsed->setMinimumWidth(width);
-  ui_.remaining->setMinimumWidth(width);
+void TrackSlider::UpdateLabelWidth(QLabel* label, const QString& text) {
+  QString old_text = label->text();
+  label->setText(text);
+  label->setMinimumWidth(0);
+  int width = label->sizeHint().width();
+  label->setText(old_text);
+
+  label->setMinimumWidth(width);
 }
 
 QSize TrackSlider::sizeHint() const {
@@ -50,7 +54,7 @@ void TrackSlider::SetValue(int elapsed, int total) {
 
 void TrackSlider::UpdateTimes(int elapsed) {
   ui_.elapsed->setText(PrettyTime(elapsed));
-  ui_.remaining->setText(PrettyTime(ui_.slider->maximum() - elapsed));
+  ui_.remaining->setText("-" + PrettyTime(ui_.slider->maximum() - elapsed));
 
   setEnabled(true);
 }
