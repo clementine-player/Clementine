@@ -1,17 +1,17 @@
-#ifndef SHUFFLEREPEATWIDGET_H
-#define SHUFFLEREPEATWIDGET_H
+#ifndef PLAYLISTSEQUENCE_H
+#define PLAYLISTSEQUENCE_H
 
 #include <QWidget>
 
-#include "ui_shufflerepeatwidget.h"
+#include "ui_playlistsequence.h"
 
 class QMenu;
 
-class ShuffleRepeatWidget : public QWidget {
+class PlaylistSequence : public QWidget {
   Q_OBJECT
 
  public:
-  ShuffleRepeatWidget(QWidget *parent = 0);
+  PlaylistSequence(QWidget *parent = 0);
 
   enum RepeatMode {
     Repeat_Off = 0,
@@ -31,12 +31,12 @@ class ShuffleRepeatWidget : public QWidget {
   ShuffleMode shuffle_mode() const { return shuffle_mode_; }
 
  public slots:
-  void SetRepeatMode(ShuffleRepeatWidget::RepeatMode mode);
-  void SetShuffleMode(ShuffleRepeatWidget::ShuffleMode mode);
+  void SetRepeatMode(PlaylistSequence::RepeatMode mode);
+  void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
 
  signals:
-  void RepeatModeChanged(ShuffleRepeatWidget::RepeatMode mode);
-  void ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode mode);
+  void RepeatModeChanged(PlaylistSequence::RepeatMode mode);
+  void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 
  private slots:
   void RepeatActionTriggered(QAction*);
@@ -47,7 +47,7 @@ class ShuffleRepeatWidget : public QWidget {
   void Save();
 
  private:
-  Ui::ShuffleRepeatWidget ui_;
+  Ui::PlaylistSequence ui_;
 
   QMenu* repeat_menu_;
   QMenu* shuffle_menu_;
@@ -57,4 +57,4 @@ class ShuffleRepeatWidget : public QWidget {
   ShuffleMode shuffle_mode_;
 };
 
-#endif // SHUFFLEREPEATWIDGET_H
+#endif // PLAYLISTSEQUENCE_H

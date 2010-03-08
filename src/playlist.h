@@ -7,7 +7,7 @@
 #include "playlistitem.h"
 #include "song.h"
 #include "radioitem.h"
-#include "shufflerepeatwidget.h"
+#include "playlistsequence.h"
 
 class RadioService;
 
@@ -75,8 +75,8 @@ class Playlist : public QAbstractListModel {
   void SetPlaylistIndex( int ipos ) { index_ = ipos ; } 
   int GetPlaylistIndex() const { return index_ ; }
 
-  void set_shuffle_repeat_widget(ShuffleRepeatWidget* w);
-  ShuffleRepeatWidget* shuffle_repeat_widget() const { return shuffle_repeat_widget_; }
+  void set_sequence(PlaylistSequence* v);
+  PlaylistSequence* sequence() const { return playlist_sequence_; }
 
   // Scrobbling
   int scrobble_point() const { return scrobble_point_; }
@@ -118,7 +118,7 @@ class Playlist : public QAbstractListModel {
   void Clear();
   void Shuffle();
 
-  void ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode mode);
+  void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 
  signals:
   void CurrentSongChanged(const Song& metadata);
@@ -152,7 +152,7 @@ class Playlist : public QAbstractListModel {
   QString title_;
   int index_ ;
 
-  ShuffleRepeatWidget* shuffle_repeat_widget_;
+  PlaylistSequence* playlist_sequence_;
 };
 
 #endif // PLAYLIST_H

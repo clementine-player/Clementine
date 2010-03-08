@@ -1,13 +1,13 @@
-#include "shufflerepeatwidget.h"
+#include "playlistsequence.h"
 
 #include <QMenu>
 #include <QActionGroup>
 #include <QSettings>
 #include <QtDebug>
 
-const char* ShuffleRepeatWidget::kSettingsGroup = "ShuffleRepeat";
+const char* PlaylistSequence::kSettingsGroup = "PlaylistSequence";
 
-ShuffleRepeatWidget::ShuffleRepeatWidget(QWidget *parent)
+PlaylistSequence::PlaylistSequence(QWidget *parent)
   : QWidget(parent),
     repeat_menu_(new QMenu(this)),
     shuffle_menu_(new QMenu(this)),
@@ -38,7 +38,7 @@ ShuffleRepeatWidget::ShuffleRepeatWidget(QWidget *parent)
   Load();
 }
 
-void ShuffleRepeatWidget::Load() {
+void PlaylistSequence::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
@@ -48,7 +48,7 @@ void ShuffleRepeatWidget::Load() {
   loading_ = false;
 }
 
-void ShuffleRepeatWidget::Save() {
+void PlaylistSequence::Save() {
   if (loading_) return;
 
   QSettings s;
@@ -58,7 +58,7 @@ void ShuffleRepeatWidget::Save() {
   s.setValue("repeat_mode", repeat_mode_);
 }
 
-void ShuffleRepeatWidget::RepeatActionTriggered(QAction* action) {
+void PlaylistSequence::RepeatActionTriggered(QAction* action) {
   RepeatMode mode = Repeat_Off;
   if (action == ui_.action_repeat_track)    mode = Repeat_Track;
   if (action == ui_.action_repeat_album)    mode = Repeat_Album;
@@ -67,7 +67,7 @@ void ShuffleRepeatWidget::RepeatActionTriggered(QAction* action) {
   SetRepeatMode(mode);
 }
 
-void ShuffleRepeatWidget::ShuffleActionTriggered(QAction* action) {
+void PlaylistSequence::ShuffleActionTriggered(QAction* action) {
   ShuffleMode mode = Shuffle_Off;
   if (action == ui_.action_shuffle_all)   mode = Shuffle_All;
   if (action == ui_.action_shuffle_album) mode = Shuffle_Album;
@@ -75,7 +75,7 @@ void ShuffleRepeatWidget::ShuffleActionTriggered(QAction* action) {
   SetShuffleMode(mode);
 }
 
-void ShuffleRepeatWidget::SetRepeatMode(RepeatMode mode) {
+void PlaylistSequence::SetRepeatMode(RepeatMode mode) {
   ui_.repeat->setChecked(mode != Repeat_Off);
 
   switch(mode) {
@@ -91,7 +91,7 @@ void ShuffleRepeatWidget::SetRepeatMode(RepeatMode mode) {
   Save();
 }
 
-void ShuffleRepeatWidget::SetShuffleMode(ShuffleMode mode) {
+void PlaylistSequence::SetShuffleMode(ShuffleMode mode) {
   ui_.shuffle->setChecked(mode != Shuffle_Off);
 
   switch (mode) {

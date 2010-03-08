@@ -31,7 +31,7 @@ Playlist::Playlist(QObject *parent) :
     ignore_sorting_(false),
     title_(""),
     index_(-1),
-    shuffle_repeat_widget_(NULL)
+    playlist_sequence_(NULL)
 {
 }
 
@@ -115,19 +115,19 @@ int Playlist::current_index() const {
   return current_item_.isValid() ? current_item_.row() : -1;
 }
 
-void Playlist::ShuffleModeChanged(ShuffleRepeatWidget::ShuffleMode mode) {
-  is_shuffled_ = (mode != ShuffleRepeatWidget::Shuffle_Off);
+void Playlist::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
+  is_shuffled_ = (mode != PlaylistSequence::Shuffle_Off);
   ReshuffleIndices();
 }
 
 int Playlist::NextVirtualIndex(int i) const {
-  ShuffleRepeatWidget::RepeatMode repeat_mode = shuffle_repeat_widget_->repeat_mode();
-  ShuffleRepeatWidget::ShuffleMode shuffle_mode = shuffle_repeat_widget_->shuffle_mode();
-  bool album_only = repeat_mode == ShuffleRepeatWidget::Repeat_Album ||
-                    shuffle_mode == ShuffleRepeatWidget::Shuffle_Album;
+  PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
+  PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
+  bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
+                    shuffle_mode == PlaylistSequence::Shuffle_Album;
 
   // This one's easy - if we have to repeat the current track then just return i
-  if (repeat_mode == ShuffleRepeatWidget::Repeat_Track)
+  if (repeat_mode == PlaylistSequence::Repeat_Track)
     return i;
 
   // If we're not bothered about whether a song is on the same album then
@@ -159,10 +159,10 @@ int Playlist::next_index() const {
   if (next_virtual_index >= virtual_items_.count()) {
     // We've gone off the end of the playlist.
 
-    switch (shuffle_repeat_widget_->repeat_mode()) {
-      case ShuffleRepeatWidget::Repeat_Off:
+    switch (playlist_sequence_->repeat_mode()) {
+      case PlaylistSequence::Repeat_Off:
         return -1;
-      case ShuffleRepeatWidget::Repeat_Track:
+      case PlaylistSequence::Repeat_Track:
         next_virtual_index = current_virtual_index_;
         break;
 
@@ -688,7 +688,10 @@ void Playlist::ReshuffleIndices() {
   }
 }
 
-void Playlist::set_shuffle_repeat_widget(ShuffleRepeatWidget* w) {
-  shuffle_repeat_widget_ = w;
-  ShuffleModeChanged(w->shuffle_mode());
+void Playlist::set_sequence(PlaylistSequence* v) {
+  playlist_sequence_ = v;
+  connect(v, SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+          SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
+
+  ShuffleModeChanged(v->shuffle_mode());
 }

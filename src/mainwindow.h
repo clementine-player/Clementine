@@ -25,7 +25,7 @@ class About;
 class AddStreamDialog;
 class ShortcutsDialog;
 class AlbumCoverManager;
-class ShuffleRepeatWidget;
+class PlaylistSequence;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -108,7 +108,7 @@ class MainWindow : public QMainWindow {
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   TrackSlider* track_slider_;
-  ShuffleRepeatWidget* shuffle_repeat_widget_;
+  PlaylistSequence* playlist_sequence_;
   EditTagDialog* edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
   LibraryConfigDialog* library_config_dialog_;
