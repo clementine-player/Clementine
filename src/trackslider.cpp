@@ -10,8 +10,23 @@ TrackSlider::TrackSlider(QWidget* parent)
   ui_.elapsed->setFont(font);
   ui_.remaining->setFont(font);
 
+  UpdateLabelWidth();
+
   connect(ui_.slider, SIGNAL(sliderMoved(int)), SIGNAL(ValueChanged(int)));
   connect(ui_.slider, SIGNAL(valueChanged(int)), SLOT(ValueMaybeChanged(int)));
+}
+
+void TrackSlider::UpdateLabelWidth() {
+  // We set the label's minimum size so it won't resize itself when the user
+  // is dragging the slider.
+  QString old_text = ui_.elapsed->text();
+  ui_.elapsed->setText("0:00:00");
+  ui_.elapsed->setMinimumWidth(0);
+  int width = ui_.elapsed->sizeHint().width();
+  ui_.elapsed->setText(old_text);
+
+  ui_.elapsed->setMinimumWidth(width);
+  ui_.remaining->setMinimumWidth(width);
 }
 
 QSize TrackSlider::sizeHint() const {
@@ -74,4 +89,14 @@ void TrackSlider::ValueMaybeChanged(int value) {
 
   UpdateTimes(value);
   emit ValueChanged(value);
+}
+
+bool TrackSlider::event(QEvent* e) {
+  switch (e->type()) {
+    case QEvent::ApplicationFontChange:
+    case QEvent::StyleChange:
+      UpdateLabelWidth();
+      break;
+  }
+  return false;
 }

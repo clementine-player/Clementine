@@ -14,6 +14,9 @@ class TrackSlider : public QWidget {
   // QWidget
   QSize sizeHint() const;
 
+  // QObject
+  bool event(QEvent *);
+
   static QString PrettyTime(int seconds);
 
  public slots:
@@ -29,6 +32,7 @@ class TrackSlider : public QWidget {
 
  private:
   void UpdateTimes(int elapsed);
+  void UpdateLabelWidth();
 
  private:
   Ui::TrackSlider ui_;
