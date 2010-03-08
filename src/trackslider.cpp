@@ -70,6 +70,10 @@ void TrackSlider::SetStopped() {
 }
 
 QString TrackSlider::PrettyTime(int seconds) {
+  // last.fm sometimes gets the track length wrong, so you end up with
+  // negative times.
+  seconds = qAbs(seconds);
+
   int hours = seconds / (60*60);
   int minutes = (seconds / 60) % 60;
   seconds %= 60;
