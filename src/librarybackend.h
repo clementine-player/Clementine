@@ -26,6 +26,8 @@ class LibraryBackend : public QObject {
   };
   typedef QList<Album> AlbumList;
 
+  static const int kSchemaVersion;
+
   // This actually refers to the location of the sqlite database
   static QString DefaultDatabaseDirectory();
 
@@ -100,7 +102,6 @@ class LibraryBackend : public QObject {
 
  private:
   static const char* kDatabaseName;
-  static const int kSchemaVersion;
 
   QString directory_;
   QMutex connect_mutex_;

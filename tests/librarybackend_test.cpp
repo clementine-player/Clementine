@@ -63,7 +63,7 @@ TEST_F(LibraryBackendTest, DatabaseInitialises) {
   QSqlQuery q("SELECT version FROM schema_version", database_);
   ASSERT_TRUE(q.exec());
   ASSERT_TRUE(q.next());
-  EXPECT_EQ(2, q.value(0).toInt());
+  EXPECT_EQ(LibraryBackend::kSchemaVersion, q.value(0).toInt());
   EXPECT_FALSE(q.next());
 }
 
