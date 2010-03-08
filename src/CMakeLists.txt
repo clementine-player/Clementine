@@ -55,6 +55,7 @@ set(CLEMENTINE-SOURCES
     albumcoverloader.cpp
     m3uparser.cpp
     playlistmanager.cpp
+    shufflerepeatwidget.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -103,6 +104,7 @@ set(CLEMENTINE-MOC-HEADERS
     albumcoverloader.h
     m3uparser.h
     playlistmanager.h
+    shufflerepeatwidget.h
 )
 
 # UI files
@@ -122,6 +124,7 @@ set(CLEMENTINE-UI
     addstreamdialog.ui
     shortcutsdialog.ui
     albumcovermanager.ui
+    shufflerepeatwidget.ui
 )
 
 # Resource files

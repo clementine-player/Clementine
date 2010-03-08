@@ -22,6 +22,7 @@
 #include "albumcovermanager.h"
 #include "m3uparser.h"
 #include "playlistmanager.h"
+#include "shufflerepeatwidget.h"
 
 #include "qxtglobalshortcut.h"
 
@@ -50,6 +51,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     tray_icon_(new SystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, this)),
     track_slider_(new TrackSlider(this)),
+    shuffle_repeat_widget_(new ShuffleRepeatWidget(this)),
     edit_tag_dialog_(new EditTagDialog(this)),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
     library_config_dialog_(new LibraryConfigDialog(this)),
@@ -264,6 +266,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   ui_.analyzer->set_engine(player_->GetEngine());
 
   // Statusbar widgets
+  ui_.statusBar->addPermanentWidget(shuffle_repeat_widget_);
   ui_.statusBar->addPermanentWidget(track_slider_);
   ui_.statusBar->addWidget(multi_loading_indicator_);
   multi_loading_indicator_->hide();
