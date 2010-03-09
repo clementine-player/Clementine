@@ -244,7 +244,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   // Global shortcuts
   // Breaks on OS X and Windows
-#ifdef Q_OS_LINUX
+#ifdef Q_OS_X11
   QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
   QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
   QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
@@ -253,7 +253,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(stop, SIGNAL(activated()), ui_.action_stop, SLOT(trigger()));
   connect(next, SIGNAL(activated()), ui_.action_next_track, SLOT(trigger()));
   connect(prev, SIGNAL(activated()), ui_.action_previous_track, SLOT(trigger()));
-#endif  // Q_OS_LINUX
+#endif  // Q_OS_X11
 
   // Settings
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
