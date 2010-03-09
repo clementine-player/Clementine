@@ -325,7 +325,7 @@ void MainWindow::HideShowTrayIcon() {
   }
   else if (!isHidden()) {
     tray_icon_->setVisible(true);
-    ui_.action_hide_tray_icon->setText("&Hide tray icon");
+    ui_.action_hide_tray_icon->setText(tr("&Hide tray icon"));
   }
 
   settings_.setValue("showtray", tray_icon_->isVisible());
