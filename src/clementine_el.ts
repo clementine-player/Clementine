@@ -82,6 +82,29 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>AlbumCoverManager</name>
+    <message>
+        <source>All albums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Albums with covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Albums without covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All artists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose manual cover</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverManager</name>
     <message>
         <source>Cover Manager</source>
@@ -97,6 +120,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Fetch Missing Covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show fullsize...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fetch automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose manual cover...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unset cover</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -144,6 +183,61 @@ p, li { white-space: pre-wrap; }
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>FileTypeItemDelegate</name>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished">Άγνωστο</translation>
+    </message>
+    <message>
+        <source>ASF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FLAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MP4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MPC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg FLAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Speex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AIFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WAV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TrueAudio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stream</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -602,6 +696,10 @@ p, li { white-space: pre-wrap; }
         <source>Cover Manager</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
@@ -699,6 +797,26 @@ p, li { white-space: pre-wrap; }
         <source>File size</source>
         <translation>Μέγεθος αρχείου</translation>
     </message>
+    <message>
+        <source>Album artist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date created</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlaylistHeader</name>
@@ -713,6 +831,52 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Hide %1</source>
         <translation>Απόκρυψη %1</translation>
+    </message>
+</context>
+<context>
+    <name>PlaylistManager</name>
+    <message>
+        <source>New playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlaylistSequence</name>
+    <message>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shuffle by album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shuffle all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -60,6 +60,34 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>AlbumCoverManager</name>
+    <message>
+        <location filename="albumcovermanager.cpp" line="45"/>
+        <source>All albums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.cpp" line="46"/>
+        <source>Albums with covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.cpp" line="47"/>
+        <source>Albums without covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.cpp" line="142"/>
+        <source>All artists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.cpp" line="341"/>
+        <source>Choose manual cover</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverManager</name>
     <message>
         <location filename="albumcovermanager.ui" line="14"/>
@@ -79,6 +107,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="albumcovermanager.ui" line="78"/>
         <source>Fetch Missing Covers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.ui" line="133"/>
+        <source>Show fullsize...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.ui" line="142"/>
+        <source>Fetch automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.ui" line="151"/>
+        <source>Choose manual cover...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="albumcovermanager.ui" line="160"/>
+        <source>Unset cover</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -134,6 +182,75 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="edittagdialog.ui" line="142"/>
         <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileTypeItemDelegate</name>
+    <message>
+        <location filename="playlistview.cpp" line="136"/>
+        <location filename="playlistview.cpp" line="155"/>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="139"/>
+        <source>ASF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="140"/>
+        <source>FLAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="141"/>
+        <source>MP4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="142"/>
+        <source>MPC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="143"/>
+        <source>MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="144"/>
+        <source>Ogg FLAC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="145"/>
+        <source>Ogg Speex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="146"/>
+        <source>Ogg Vorbis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="147"/>
+        <source>AIFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="148"/>
+        <source>WAV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="149"/>
+        <source>TrueAudio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistview.cpp" line="151"/>
+        <source>Stream</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -224,201 +341,201 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>LastFMService</name>
     <message>
-        <location filename="lastfmservice.cpp" line="50"/>
+        <location filename="lastfmservice.cpp" line="49"/>
         <source>Add to playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="52"/>
+        <location filename="lastfmservice.cpp" line="51"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="55"/>
+        <location filename="lastfmservice.cpp" line="54"/>
         <source>Play artist radio...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="57"/>
+        <location filename="lastfmservice.cpp" line="56"/>
         <source>Play tag radio...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="59"/>
+        <location filename="lastfmservice.cpp" line="58"/>
         <source>Configure Last.fm...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="104"/>
+        <location filename="lastfmservice.cpp" line="100"/>
         <source>My Recommendations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="105"/>
+        <location filename="lastfmservice.cpp" line="101"/>
         <source>My Radio Station</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="106"/>
+        <location filename="lastfmservice.cpp" line="102"/>
         <source>My Loved Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="107"/>
+        <location filename="lastfmservice.cpp" line="103"/>
         <source>My Neighbourhood</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="110"/>
+        <location filename="lastfmservice.cpp" line="106"/>
         <source>Artist radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="114"/>
+        <location filename="lastfmservice.cpp" line="110"/>
         <source>Tag radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="121"/>
+        <location filename="lastfmservice.cpp" line="117"/>
         <source>Friends</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="124"/>
+        <location filename="lastfmservice.cpp" line="120"/>
         <source>Neighbours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="144"/>
+        <location filename="lastfmservice.cpp" line="140"/>
         <source>%1&apos;s Radio Station</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="146"/>
-        <location filename="lastfmservice.cpp" line="248"/>
-        <location filename="lastfmservice.cpp" line="253"/>
+        <location filename="lastfmservice.cpp" line="142"/>
+        <location filename="lastfmservice.cpp" line="244"/>
+        <location filename="lastfmservice.cpp" line="249"/>
         <source>%1&apos;s Loved Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="148"/>
+        <location filename="lastfmservice.cpp" line="144"/>
         <source>%1&apos;s Neighborhood</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="247"/>
+        <location filename="lastfmservice.cpp" line="243"/>
         <source>%1&apos;s Recommended Radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="249"/>
-        <location filename="lastfmservice.cpp" line="254"/>
+        <location filename="lastfmservice.cpp" line="245"/>
+        <location filename="lastfmservice.cpp" line="250"/>
         <source>%1&apos;s Neighbour Radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="250"/>
-        <location filename="lastfmservice.cpp" line="252"/>
+        <location filename="lastfmservice.cpp" line="246"/>
+        <location filename="lastfmservice.cpp" line="248"/>
         <source>%1&apos;s Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="255"/>
+        <location filename="lastfmservice.cpp" line="251"/>
         <source>Similar Artists to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="256"/>
+        <location filename="lastfmservice.cpp" line="252"/>
         <source>Tag Radio: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="326"/>
+        <location filename="lastfmservice.cpp" line="322"/>
         <source>Invalid service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="327"/>
+        <location filename="lastfmservice.cpp" line="323"/>
         <source>Invalid method</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="328"/>
+        <location filename="lastfmservice.cpp" line="324"/>
         <source>Authentication failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="329"/>
+        <location filename="lastfmservice.cpp" line="325"/>
         <source>Invalid format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="330"/>
+        <location filename="lastfmservice.cpp" line="326"/>
         <source>Invalid parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="331"/>
+        <location filename="lastfmservice.cpp" line="327"/>
         <source>Invalid resource specified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="332"/>
+        <location filename="lastfmservice.cpp" line="328"/>
         <source>Operation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="333"/>
+        <location filename="lastfmservice.cpp" line="329"/>
         <source>Invalid session key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="334"/>
+        <location filename="lastfmservice.cpp" line="330"/>
         <source>Invalid API key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="335"/>
+        <location filename="lastfmservice.cpp" line="331"/>
         <source>Service offline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="336"/>
+        <location filename="lastfmservice.cpp" line="332"/>
         <source>This stream is for paid subscribers only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="338"/>
+        <location filename="lastfmservice.cpp" line="334"/>
         <source>Last.fm is currently busy, please try again in a few minutes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="340"/>
+        <location filename="lastfmservice.cpp" line="336"/>
         <source>Not enough content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="341"/>
+        <location filename="lastfmservice.cpp" line="337"/>
         <source>Not enough members</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="342"/>
+        <location filename="lastfmservice.cpp" line="338"/>
         <source>Not enough fans</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="343"/>
+        <location filename="lastfmservice.cpp" line="339"/>
         <source>Not enough neighbours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="345"/>
+        <location filename="lastfmservice.cpp" line="341"/>
         <source>Malformed response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lastfmservice.cpp" line="349"/>
+        <location filename="lastfmservice.cpp" line="345"/>
         <source>Unknown error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -507,34 +624,34 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="205"/>
+        <location filename="mainwindow.cpp" line="204"/>
         <source>Configure library...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="209"/>
-        <location filename="mainwindow.cpp" line="342"/>
-        <location filename="mainwindow.cpp" line="358"/>
-        <location filename="mainwindow.cpp" line="533"/>
-        <location filename="mainwindow.ui" line="512"/>
+        <location filename="mainwindow.ui" line="493"/>
+        <location filename="mainwindow.cpp" line="208"/>
+        <location filename="mainwindow.cpp" line="349"/>
+        <location filename="mainwindow.cpp" line="365"/>
+        <location filename="mainwindow.cpp" line="542"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="211"/>
-        <location filename="mainwindow.ui" line="554"/>
+        <location filename="mainwindow.ui" line="535"/>
+        <location filename="mainwindow.cpp" line="210"/>
         <source>Stop after this track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="297"/>
-        <location filename="mainwindow.cpp" line="317"/>
+        <location filename="mainwindow.cpp" line="324"/>
         <source>&amp;Show tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="369"/>
-        <location filename="mainwindow.cpp" line="530"/>
+        <location filename="mainwindow.cpp" line="376"/>
+        <location filename="mainwindow.cpp" line="539"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
@@ -544,170 +661,176 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="276"/>
+        <location filename="mainwindow.ui" line="255"/>
         <source>Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="314"/>
+        <location filename="mainwindow.ui" line="293"/>
         <source>Enter search terms here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="370"/>
+        <location filename="mainwindow.ui" line="349"/>
         <source>Radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="416"/>
+        <location filename="mainwindow.ui" line="395"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="446"/>
+        <location filename="mainwindow.ui" line="425"/>
         <source>Music</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="462"/>
+        <location filename="mainwindow.ui" line="441"/>
         <source>Playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="472"/>
+        <location filename="mainwindow.ui" line="453"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="481"/>
+        <location filename="mainwindow.ui" line="462"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="487"/>
+        <location filename="mainwindow.ui" line="468"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="503"/>
+        <location filename="mainwindow.ui" line="484"/>
         <source>Previous track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="524"/>
+        <location filename="mainwindow.ui" line="505"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="533"/>
+        <location filename="mainwindow.ui" line="514"/>
         <source>Next track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="542"/>
+        <location filename="mainwindow.ui" line="523"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="545"/>
+        <location filename="mainwindow.ui" line="526"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="565"/>
+        <location filename="mainwindow.ui" line="546"/>
         <source>Entire collection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="573"/>
+        <location filename="mainwindow.ui" line="554"/>
         <source>Added today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="581"/>
+        <location filename="mainwindow.ui" line="562"/>
         <source>Added this week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="589"/>
-        <location filename="mainwindow.ui" line="592"/>
+        <location filename="mainwindow.ui" line="570"/>
+        <location filename="mainwindow.ui" line="573"/>
         <source>Added within three months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="600"/>
+        <location filename="mainwindow.ui" line="581"/>
         <source>Added this year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="608"/>
+        <location filename="mainwindow.ui" line="589"/>
         <source>Added this month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="620"/>
+        <location filename="mainwindow.ui" line="601"/>
         <source>Love</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="632"/>
+        <location filename="mainwindow.ui" line="613"/>
         <source>Ban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="641"/>
-        <location filename="mainwindow.ui" line="644"/>
+        <location filename="mainwindow.ui" line="622"/>
+        <location filename="mainwindow.ui" line="625"/>
         <source>Clear playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="653"/>
+        <location filename="mainwindow.ui" line="634"/>
         <source>Edit track information...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="662"/>
+        <location filename="mainwindow.ui" line="643"/>
         <source>Configure Clementine...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="667"/>
+        <location filename="mainwindow.ui" line="648"/>
         <source>About Clementine...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="676"/>
+        <location filename="mainwindow.ui" line="657"/>
         <source>Shuffle playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="685"/>
+        <location filename="mainwindow.ui" line="666"/>
         <source>Add media...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="694"/>
+        <location filename="mainwindow.ui" line="675"/>
         <source>Add stream...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="703"/>
+        <location filename="mainwindow.ui" line="684"/>
         <source>Open media...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="708"/>
+        <location filename="mainwindow.ui" line="689"/>
+        <location filename="mainwindow.cpp" line="328"/>
         <source>&amp;Hide tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="717"/>
+        <location filename="mainwindow.ui" line="698"/>
         <source>Configure &amp;Global Shortcuts...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="726"/>
+        <location filename="mainwindow.ui" line="707"/>
         <source>Cover Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="712"/>
+        <source>New playlist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -747,17 +870,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>OSD</name>
     <message>
-        <location filename="osd.cpp" line="54"/>
+        <location filename="osd.cpp" line="55"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="osd.cpp" line="58"/>
+        <location filename="osd.cpp" line="59"/>
         <source>Playlist finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="osd.cpp" line="65"/>
+        <location filename="osd.cpp" line="66"/>
         <source>Volume %1%</source>
         <translation type="unfinished"></translation>
     </message>
@@ -765,68 +888,93 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Playlist</name>
     <message>
-        <location filename="playlist.cpp" line="41"/>
+        <location filename="playlist.cpp" line="47"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="42"/>
+        <location filename="playlist.cpp" line="48"/>
         <source>Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="43"/>
+        <location filename="playlist.cpp" line="49"/>
         <source>Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="44"/>
+        <location filename="playlist.cpp" line="50"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="45"/>
+        <location filename="playlist.cpp" line="51"/>
         <source>Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="46"/>
+        <location filename="playlist.cpp" line="52"/>
         <source>Disc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="47"/>
+        <location filename="playlist.cpp" line="53"/>
         <source>Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="48"/>
+        <location filename="playlist.cpp" line="54"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="50"/>
+        <location filename="playlist.cpp" line="55"/>
+        <source>Album artist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlist.cpp" line="56"/>
+        <source>Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlist.cpp" line="58"/>
         <source>BPM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="51"/>
+        <location filename="playlist.cpp" line="59"/>
         <source>Bit rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="52"/>
+        <location filename="playlist.cpp" line="60"/>
         <source>Sample rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="53"/>
+        <location filename="playlist.cpp" line="61"/>
         <source>File name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="54"/>
+        <location filename="playlist.cpp" line="62"/>
         <source>File size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlist.cpp" line="63"/>
+        <source>File type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlist.cpp" line="64"/>
+        <source>Date modified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlist.cpp" line="65"/>
+        <source>Date created</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -845,6 +993,62 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="playlistheader.cpp" line="31"/>
         <source>Hide %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlaylistManager</name>
+    <message>
+        <location filename="playlistmanager.cpp" line="40"/>
+        <source>New playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlaylistSequence</name>
+    <message>
+        <location filename="playlistsequence.ui" line="33"/>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="57"/>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="94"/>
+        <source>Don&apos;t repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="102"/>
+        <source>Repeat track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="110"/>
+        <source>Repeat album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="118"/>
+        <source>Repeat playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="129"/>
+        <source>Don&apos;t shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="137"/>
+        <source>Shuffle by album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="playlistsequence.ui" line="145"/>
+        <source>Shuffle all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1103,7 +1307,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="trackslider.ui" line="26"/>
-        <location filename="trackslider.ui" line="43"/>
+        <location filename="trackslider.ui" line="46"/>
         <source>0:00:00</source>
         <translation type="unfinished"></translation>
     </message>
