@@ -15,7 +15,6 @@ set(CLEMENTINE-SOURCES
     analyzers/blockanalyzer.cpp
     sliderwidget.cpp
     playlistview.cpp
-    backgroundthread.cpp
     librarywatcher.cpp
     song.cpp
     songplaylistitem.cpp
