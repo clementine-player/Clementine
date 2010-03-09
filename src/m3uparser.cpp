@@ -30,6 +30,7 @@ const QList<Song>& M3UParser::Parse() {
       Song song;
       song.Init(current_metadata_.title,
                 current_metadata_.artist,
+                QString(),  // Unknown album.
                 current_metadata_.length);
       // Track location.
       QString location;

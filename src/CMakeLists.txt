@@ -55,6 +55,7 @@ set(CLEMENTINE-SOURCES
     m3uparser.cpp
     playlistmanager.cpp
     playlistsequence.cpp
+    xspfparser.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -104,6 +105,7 @@ set(CLEMENTINE-MOC-HEADERS
     m3uparser.h
     playlistmanager.h
     playlistsequence.h
+    xspfparser.h
 )
 
 # UI files

@@ -103,10 +103,11 @@ Song::Song(FileRefFactory* factory)
       factory_(factory) {
 }
 
-void Song::Init(const QString& title, const QString& artist, int length) {
+void Song::Init(const QString& title, const QString& artist, const QString& album, int length) {
   d->valid_ = true;
   d->title_ = title;
   d->artist_ = artist;
+  d->album_ = album;
   d->length_ = length;
 }
 

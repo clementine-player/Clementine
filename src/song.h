@@ -59,7 +59,7 @@ class Song {
   };
 
   // Constructors
-  void Init(const QString& title, const QString& artist, int length);
+  void Init(const QString& title, const QString& artist, const QString& album, int length);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const QSqlQuery& query);
   void InitFromLastFM(const lastfm::Track& track);
