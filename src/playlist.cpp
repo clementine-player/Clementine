@@ -632,6 +632,7 @@ void Playlist::UpdateScrobblePoint() {
 void Playlist::Clear() {
   qDeleteAll(items_);
   items_.clear();
+  virtual_items_.clear();
   reset();
 
   Save();
