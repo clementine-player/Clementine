@@ -20,6 +20,11 @@ class SongPlaylistItem : public PlaylistItem {
   QUrl Url();
 
  private:
+  void SaveFile(QSettings& settings) const;
+  void SaveStream(QSettings& settings) const;
+
+  void RestoreFile(const QSettings& settings);
+  void RestoreStream(const QSettings& settings);
   Song song_;
 };
 

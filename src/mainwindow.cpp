@@ -20,6 +20,7 @@
 #include "stylesheetloader.h"
 #include "albumcovermanager.h"
 #include "m3uparser.h"
+#include "xspfparser.h"
 #include "playlistsequence.h"
 
 #include "qxtglobalshortcut.h"
@@ -41,7 +42,7 @@
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kMediaFilterSpec =
-    "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma);;Playlists (*.m3u)";
+    "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma);;Playlists (*.m3u *.xspf *.xml)";
 
 MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   : QMainWindow(parent),
@@ -635,6 +636,12 @@ void MainWindow::AddMedia() {
       QFileInfo info(file);
       file.open(QIODevice::ReadOnly);
       M3UParser parser(&file, info.dir());
+      const SongList& songs = parser.Parse();
+      playlist_->InsertSongs(songs);
+    } else if (path.endsWith(".xspf") || path.endsWith(".xml")) {
+      QFile file(path);
+      file.open(QIODevice::ReadOnly);
+      XSPFParser parser(&file);
       const SongList& songs = parser.Parse();
       playlist_->InsertSongs(songs);
     } else {

@@ -355,9 +355,7 @@ XineEngine::determineAndShowErrorMessage()
   }
 
   // TODO
-  /*Amarok::StatusBar::instance()->longMessage(
-    "<b>" + i18n("Error Loading Media") + "</b><p>" + body + "<p>" + m_url.prettyURL(),
-    KDE::StatusBar::Error );*/
+  qWarning() << body;
 }
 
 void

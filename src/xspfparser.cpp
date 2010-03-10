@@ -104,10 +104,17 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
         }
         break;
       }
+      case QXmlStreamReader::EndElement: {
+        if (reader->name() == "track") {
+          song.Init(title, artist, album, length);
+          return song;
+        }
+      }
       default:
         break;
     }
   }
+  // At least make an effort if we never find a </track>.
   song.Init(title, artist, album, length);
   return song;
 }
