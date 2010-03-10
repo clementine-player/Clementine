@@ -289,6 +289,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
         changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
       }
     }
+    current_virtual_index_ = virtual_items_.indexOf(current_index());
 
     layoutChanged();
     Save();
