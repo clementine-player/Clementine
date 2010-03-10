@@ -38,7 +38,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Gracias a:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mark Kretschmann &amp;lt;&lt;a href=&quot;mailto:markey@web.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;markey@web.de&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Max Howell &amp;lt;&lt;a href=&quot;mailto:max.howell@methylblue.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;max.howell@methylblue.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... y todos los que contribuyeron con Amarok&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... y a todos los que contribuyeron con Amarok&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -68,23 +68,23 @@ p, li { white-space: pre-wrap; }
     <name>AlbumCoverManager</name>
     <message>
         <source>All albums</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos los álbumes</translation>
     </message>
     <message>
         <source>Albums with covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Álbumes con carátula</translation>
     </message>
     <message>
         <source>Albums without covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Álbumes sin carátula</translation>
     </message>
     <message>
         <source>All artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos los artistas</translation>
     </message>
     <message>
         <source>Choose manual cover</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer carátula personalizada</translation>
     </message>
 </context>
 <context>
@@ -107,19 +107,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show fullsize...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar carátula...</translation>
     </message>
     <message>
         <source>Fetch automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtener carátula</translation>
     </message>
     <message>
         <source>Choose manual cover...</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer carátula personalizada...</translation>
     </message>
     <message>
         <source>Unset cover</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitar carátula</translation>
     </message>
 </context>
 <context>
@@ -172,55 +172,55 @@ p, li { white-space: pre-wrap; }
     <name>FileTypeItemDelegate</name>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Desconocido</translation>
+        <translation>Desconocido</translation>
     </message>
     <message>
         <source>ASF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>FLAC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MP4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MPC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg FLAC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg Speex</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Ogg Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AIFF</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>WAV</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>TrueAudio</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Stream</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -681,7 +681,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva lista de reproducción</translation>
     </message>
 </context>
 <context>
@@ -782,23 +782,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Album artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Álbum Artista</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"></translation>
+        <translation>Compositor</translation>
     </message>
     <message>
         <source>File type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Date modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha modificado</translation>
     </message>
     <message>
         <source>Date created</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha creado</translation>
     </message>
 </context>
 <context>
@@ -820,46 +820,46 @@ p, li { white-space: pre-wrap; }
     <name>PlaylistManager</name>
     <message>
         <source>New playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva Lista </translation>
     </message>
 </context>
 <context>
     <name>PlaylistSequence</name>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>Aleatorio</translation>
     </message>
     <message>
         <source>Don&apos;t repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>No repetir</translation>
     </message>
     <message>
         <source>Repeat track</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir pista</translation>
     </message>
     <message>
         <source>Repeat album</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir álbum</translation>
     </message>
     <message>
         <source>Repeat playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir lista de reproducción</translation>
     </message>
     <message>
         <source>Don&apos;t shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>No barajar</translation>
     </message>
     <message>
         <source>Shuffle by album</source>
-        <translation type="unfinished"></translation>
+        <translation>Barajar por álbum</translation>
     </message>
     <message>
         <source>Shuffle all</source>
-        <translation type="unfinished"></translation>
+        <translation>Barajar todo</translation>
     </message>
 </context>
 <context>
