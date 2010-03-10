@@ -272,6 +272,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   ui_.analyzer->set_engine(player_->GetEngine());
 
   // Statusbar widgets
+  playlist_->set_sequence(playlist_sequence_);
   ui_.statusBar->addPermanentWidget(playlist_sequence_);
   ui_.statusBar->addPermanentWidget(track_slider_);
   ui_.statusBar->addWidget(multi_loading_indicator_);
