@@ -28,10 +28,8 @@ Playlist::Playlist(QObject *parent) :
     is_shuffled_(false),
     scrobble_point_(-1),
     has_scrobbled_(false),
-    ignore_sorting_(false),
-    title_(""),
-    index_(-1),
-    playlist_sequence_(NULL)
+    playlist_sequence_(NULL),
+    ignore_sorting_(false)
 {
 }
 
@@ -293,7 +291,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     }
 
     layoutChanged();
-//     Save();
+    Save();
 
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
@@ -356,7 +354,7 @@ QModelIndex Playlist::InsertItems(const QList<PlaylistItem*>& items, int after) 
   }
   endInsertRows();
 
-//   Save();
+  Save();
   ReshuffleIndices();
 
   return index(start, 0);
@@ -457,7 +455,7 @@ void Playlist::sort(int column, Qt::SortOrder order) {
 
   layoutChanged();
 
-//   Save();
+  Save();
 }
 
 void Playlist::Playing() {
@@ -483,11 +481,10 @@ void Playlist::SetCurrentIsPaused(bool paused) {
                 index(current_item_.row(), ColumnCount));
 }
 
-void Playlist::SaveR() const {
+void Playlist::Save() const {
   QSettings s;
-  Q_ASSERT(index_ != -1 ) ; 
   s.beginGroup(kSettingsGroup);
-  s.beginGroup(title_);
+
   s.beginWriteArray("items", items_.count());
   for (int i=0 ; i<items_.count() ; ++i) {
     s.setArrayIndex(i);
@@ -495,19 +492,15 @@ void Playlist::SaveR() const {
     items_.at(i)->Save(s);
   }
   s.endArray();
-  s.setValue("title",title_);
-  s.endGroup();
-  s.endGroup();
 }
 
-void Playlist::RestoreR() {
+void Playlist::Restore() {
   qDeleteAll(items_);
   items_.clear();
   virtual_items_.clear();
 
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.beginGroup(title_);
 
   int count = s.beginReadArray("items");
   for (int i=0 ; i<count ; ++i) {
@@ -523,8 +516,7 @@ void Playlist::RestoreR() {
     virtual_items_ << virtual_items_.count();
   }
   s.endArray();
-  s.endGroup();
-  s.endGroup();
+
   reset();
 }
 
@@ -551,7 +543,7 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
     ++i;
   }
 
-//   Save();
+  Save();
   return true;
 }
 
@@ -642,7 +634,7 @@ void Playlist::Clear() {
   items_.clear();
   reset();
 
-//   Save();
+  Save();
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {
@@ -671,7 +663,7 @@ void Playlist::Shuffle() {
 
   layoutChanged();
 
-//   Save();
+  Save();
 }
 
 void Playlist::ReshuffleIndices() {

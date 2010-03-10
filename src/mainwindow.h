@@ -7,9 +7,7 @@
 
 #include "ui_mainwindow.h"
 
-class PlaylistManager;
 class Playlist;
-class PlaylistView;
 class Player;
 class Library;
 class LibraryConfigDialog;
@@ -85,19 +83,9 @@ class MainWindow : public QMainWindow {
   void AddMedia();
   void AddStream();
   void AddStreamAccepted();
-  
-  void NewPlaylist() ; 
-  
-  void CurrentTabChanged ( int ) ; 
-  
-  void CurrentPlaylistChanged( Playlist * pPlaylist ) ; 
-  
-  void InitPlaylists() ; 
 
  private:
   void SaveGeometry();
-
-  void SetCurrentPlaylist(PlaylistView* current);
 
  private:
   static const int kStateVersion;
@@ -115,10 +103,7 @@ class MainWindow : public QMainWindow {
   About* about_dialog_;
 
   RadioModel* radio_model_;
-  QList<Playlist*> playlists_;
-  Playlist* current_playlist_;
-  PlaylistView* current_playlist_view_;
-
+  Playlist* playlist_;
   Player* player_;
   Library* library_;
 
@@ -136,8 +121,6 @@ class MainWindow : public QMainWindow {
 
   QTimer* track_position_timer_;
   QSettings settings_;
-  PlaylistManager * playlistManager_ ; 
-  int next_playlist_number_;
 };
 
 #endif // MAINWINDOW_H

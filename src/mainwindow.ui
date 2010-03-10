@@ -36,11 +36,32 @@
      </widget>
     </item>
     <item>
-     <widget class="QTabWidget" name="tab_widget">
-      <property name="tabsClosable">
+     <widget class="PlaylistView" name="playlist">
+      <property name="acceptDrops">
        <bool>true</bool>
       </property>
-      <property name="movable">
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="rootIsDecorated">
+       <bool>false</bool>
+      </property>
+      <property name="uniformRowHeights">
+       <bool>true</bool>
+      </property>
+      <property name="itemsExpandable">
+       <bool>false</bool>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="allColumnsShowFocus">
        <bool>true</bool>
       </property>
      </widget>
@@ -417,7 +438,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -445,8 +466,6 @@
     <addaction name="separator"/>
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
-    <addaction name="separator"/>
-    <addaction name="action_new_playlist"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -707,11 +726,6 @@
     <string>Cover Manager</string>
    </property>
   </action>
-  <action name="action_new_playlist">
-   <property name="text">
-    <string>New playlist</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -730,6 +744,11 @@
    <class>Amarok::VolumeSlider</class>
    <extends>QSlider</extends>
    <header>sliderwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PlaylistView</class>
+   <extends>QTreeView</extends>
+   <header>playlistview.h</header>
   </customwidget>
   <customwidget>
    <class>LibraryView</class>

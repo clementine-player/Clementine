@@ -53,7 +53,6 @@ set(CLEMENTINE-SOURCES
     albumcovermanager.cpp
     albumcoverloader.cpp
     m3uparser.cpp
-    playlistmanager.cpp
     playlistsequence.cpp
     xspfparser.cpp
 )
@@ -103,7 +102,6 @@ set(CLEMENTINE-MOC-HEADERS
     albumcovermanager.h
     albumcoverloader.h
     m3uparser.h
-    playlistmanager.h
     playlistsequence.h
     xspfparser.h
 )

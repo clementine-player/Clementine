@@ -14,7 +14,6 @@ class RadioService;
 class Playlist : public QAbstractListModel {
   Q_OBJECT
 
-  friend class PlaylistManager ; 
  public:
   Playlist(QObject* parent = 0);
   ~Playlist();
@@ -55,7 +54,9 @@ class Playlist : public QAbstractListModel {
   static bool CompareItems(int column, Qt::SortOrder order,
                            const PlaylistItem* a, const PlaylistItem* b);
 
-  
+  // Persistence
+  void Save() const;
+  void Restore();
 
   // Accessors
   int current_index() const;
@@ -68,12 +69,6 @@ class Playlist : public QAbstractListModel {
 
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
-
-  const QString & GetTitle() const { return title_ ; } 
-  void SetTitle(const QString& title)  { title_ = title; }
-  
-  void SetPlaylistIndex( int ipos ) { index_ = ipos ; } 
-  int GetPlaylistIndex() const { return index_ ; }
 
   void set_sequence(PlaylistSequence* v);
   PlaylistSequence* sequence() const { return playlist_sequence_; }
@@ -129,10 +124,6 @@ class Playlist : public QAbstractListModel {
   void ReshuffleIndices();
   int NextVirtualIndex(int i) const;
   
-  // Persistence
-  void SaveR() const;
-  void RestoreR();
-
  private:
   QList<PlaylistItem*> items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order
@@ -149,8 +140,6 @@ class Playlist : public QAbstractListModel {
 
   // Hack to stop QTreeView::setModel sorting the playlist
   bool ignore_sorting_;
-  QString title_;
-  int index_ ;
 
   PlaylistSequence* playlist_sequence_;
 };
