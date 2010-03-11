@@ -47,10 +47,11 @@ class ShortcutsDialog : public QDialog {
     void ResetShortcuts();
     void SaveShortcuts();
     void CancelEvent();
-    void GetShortcut(QKeyEvent* event);
+    /*void GetShortcut(QKeyEvent* event);*/
     void CellClickedEvent();
     void DefaultText(QString str);
     void DefaultRadioClickedEvent();
+		bool event(QEvent* event);
 
   private:
     Ui::ShortcutsDialog ui_;

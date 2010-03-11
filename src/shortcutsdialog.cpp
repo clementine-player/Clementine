@@ -151,19 +151,19 @@ void ShortcutsDialog::CellClickedEvent() {
   currentKey_ = keys_.at(ui_.table->currentRow());
 
   //TODO: Read setting and set correct radio button
-
-  /*
-    Where should this go?
-    If uncommented, and a cell is clicked, segfault
-  QKeyEvent* event;
-  GetShortcut(event);
-  */
+	//      Disable ALL hotkey functionality built-in to Qt for this widget
 }
 
 void ShortcutsDialog::DefaultRadioClickedEvent() {
   settings_.setValue(currentKey_, currentDefault_);
 }
 
-void ShortcutsDialog::GetShortcut(QKeyEvent* event) {
-  qDebug() << event->text();
+bool ShortcutsDialog::event(QEvent* event) {	
+	if (event->type() == QEvent::ShortcutOverride) {
+	  QKeyEvent *ke = static_cast<QKeyEvent *>(event);
+		qDebug() << ke->text();
+		qDebug() << ke->key();
+		return true;
+	}
+	return QWidget::event(event);
 }
