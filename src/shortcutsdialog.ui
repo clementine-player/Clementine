@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Configure Shortcuts</string>
   </property>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="table">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -46,66 +46,21 @@
    <attribute name="horizontalHeaderStretchLastSection">
     <bool>true</bool>
    </attribute>
-   <row>
-    <property name="text">
-     <string>Play</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Pause</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Play/Pause</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Stop</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Stop Playing After Current Track</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Next Track</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Previous Track</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Increase Volume</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Decrease Volume</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Mute Volume</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Seek Forwards</string>
-    </property>
-   </row>
-   <row>
-    <property name="text">
-     <string>Seek Backwards</string>
-    </property>
-   </row>
+   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderStretchLastSection">
+    <bool>true</bool>
+   </attribute>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>24</number>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>116</number>
+   </attribute>
    <column>
     <property name="text">
      <string>Shortcut</string>
@@ -116,19 +71,6 @@
      <string>Alternate</string>
     </property>
    </column>
-  </widget>
-  <widget class="QPushButton" name="button_defaults">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>330</y>
-     <width>80</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&amp;Defaults</string>
-   </property>
   </widget>
   <widget class="QGroupBox" name="shortcut_options">
    <property name="enabled">
@@ -154,17 +96,20 @@
       <x>10</x>
       <y>30</y>
       <width>91</width>
-      <height>22</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
      <string>&amp;None</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QRadioButton" name="radio_default">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>190</x>
       <y>30</y>
       <width>93</width>
       <height>22</height>
@@ -177,30 +122,14 @@
    <widget class="QRadioButton" name="radio_custom">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>360</x>
       <y>30</y>
-      <width>111</width>
+      <width>81</width>
       <height>22</height>
      </rect>
     </property>
     <property name="text">
      <string>&amp;Custom</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="button_custom">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>30</y>
-      <width>101</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Non&amp;e</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -213,84 +142,36 @@
      </rect>
     </property>
     <property name="text">
-     <string>Default key:</string>
+     <string/>
     </property>
    </widget>
   </widget>
   <widget class="QDialogButtonBox" name="button_box">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>15</x>
      <y>330</y>
-     <width>166</width>
+     <width>451</width>
      <height>32</height>
     </rect>
    </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::Reset</set>
+   </property>
+   <property name="centerButtons">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>tableWidget</tabstop>
+  <tabstop>table</tabstop>
   <tabstop>radio_none</tabstop>
   <tabstop>radio_default</tabstop>
   <tabstop>radio_custom</tabstop>
-  <tabstop>button_custom</tabstop>
-  <tabstop>button_defaults</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>radio_custom</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>button_custom</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>299</x>
-     <y>273</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>378</x>
-     <y>286</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radio_default</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>button_custom</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>175</x>
-     <y>281</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>418</x>
-     <y>276</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radio_none</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>button_custom</receiver>
-   <slot>setDisabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>79</x>
-     <y>276</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>431</x>
-     <y>290</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
+ <connections/>
 </ui>
