@@ -94,9 +94,8 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
           bool ok = false;
           length = duration.toInt(&ok) / 1000;
           if (!ok) {
-            return Song();
+            length = -1;
           }
-          song.set_length(length);
         } else if (name == "image") {
           // TODO: Fetch album covers.
         } else if (name == "info") {
