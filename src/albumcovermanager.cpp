@@ -140,6 +140,7 @@ void AlbumCoverManager::Reset() {
 
   ui_.artists->clear();
   new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_.artists, All_Artists);
+  new QListWidgetItem(artist_icon_, tr("Various artists"), ui_.artists, Various_Artists);
 
   foreach (const QString& artist, backend_->GetAllArtists()) {
     if (artist.isEmpty())
@@ -163,8 +164,21 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
   context_menu_items_.clear();
   CancelRequests();
 
-  foreach (const LibraryBackend::Album& info,
-           backend_->GetAlbumsByArtist(artist)) {
+  // Get the list of albums.  How we do it depends on what thing we have
+  // selected in the artist list.
+  LibraryBackend::AlbumList albums;
+  switch (current->type()) {
+    case Various_Artists: albums = backend_->GetCompilationAlbums(); break;
+    case Specific_Artist: albums = backend_->GetAlbumsByArtist(current->text()); break;
+    case All_Artists:
+    default:              albums = backend_->GetAllAlbums(); break;
+  }
+
+  foreach (const LibraryBackend::Album& info, albums) {
+    // Don't show songs without an album, obviously
+    if (info.album_name.isEmpty())
+      continue;
+
     QListWidgetItem* item = new QListWidgetItem(no_cover_icon_, info.album_name, ui_.albums);
     item->setData(Role_ArtistName, info.artist);
     item->setData(Role_AlbumName, info.album_name);

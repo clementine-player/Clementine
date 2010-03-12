@@ -53,6 +53,7 @@ class AlbumCoverManager : public QDialog {
  private:
   enum ArtistItemType {
     All_Artists,
+    Various_Artists,
     Specific_Artist,
   };
 
