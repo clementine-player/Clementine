@@ -30,6 +30,9 @@ class PlaylistSequence : public QWidget {
   RepeatMode repeat_mode() const { return repeat_mode_; }
   ShuffleMode shuffle_mode() const { return shuffle_mode_; }
 
+  QMenu* repeat_menu() const { return repeat_menu_; }
+  QMenu* shuffle_menu() const { return shuffle_menu_; }
+
  public slots:
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);

@@ -14,7 +14,7 @@
    <string>Clementine</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -294,7 +294,7 @@
        <item>
         <widget class="QToolButton" name="library_filter_clear">
          <property name="icon">
-          <iconset>
+          <iconset resource="../data/data.qrc">
            <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
          </property>
          <property name="iconSize">
@@ -318,7 +318,7 @@
        <item>
         <widget class="QToolButton" name="library_options">
          <property name="icon">
-          <iconset>
+          <iconset resource="../data/data.qrc">
            <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
          </property>
          <property name="iconSize">
@@ -438,7 +438,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -463,6 +463,9 @@
     </property>
     <addaction name="action_add_media"/>
     <addaction name="action_add_stream"/>
+    <addaction name="separator"/>
+    <addaction name="action_shuffle_mode"/>
+    <addaction name="action_repeat_mode"/>
     <addaction name="separator"/>
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
@@ -496,7 +499,7 @@
   </widget>
   <action name="action_previous_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-skip-backward.png</normaloff>:/media-skip-backward.png</iconset>
    </property>
    <property name="text">
@@ -505,7 +508,7 @@
   </action>
   <action name="action_play_pause">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-start.png</normaloff>:/media-playback-start.png</iconset>
    </property>
    <property name="text">
@@ -517,7 +520,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -526,7 +529,7 @@
   </action>
   <action name="action_next_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-skip-forward.png</normaloff>:/media-skip-forward.png</iconset>
    </property>
    <property name="text">
@@ -535,7 +538,7 @@
   </action>
   <action name="action_quit">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/exit.png</normaloff>:/exit.png</iconset>
    </property>
    <property name="text">
@@ -547,7 +550,7 @@
   </action>
   <action name="action_stop_after_this_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -613,7 +616,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
    </property>
    <property name="text">
@@ -625,7 +628,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
    </property>
    <property name="text">
@@ -634,7 +637,7 @@
   </action>
   <action name="action_clear_playlist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/clear-list.png</normaloff>:/clear-list.png</iconset>
    </property>
    <property name="text">
@@ -646,7 +649,7 @@
   </action>
   <action name="action_edit_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/edit-track.png</normaloff>:/edit-track.png</iconset>
    </property>
    <property name="text">
@@ -655,7 +658,7 @@
   </action>
   <action name="action_configure">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
    </property>
    <property name="text">
@@ -669,7 +672,7 @@
   </action>
   <action name="action_shuffle">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/shuffle.png</normaloff>:/shuffle.png</iconset>
    </property>
    <property name="text">
@@ -678,7 +681,7 @@
   </action>
   <action name="action_add_media">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -687,7 +690,7 @@
   </action>
   <action name="action_add_stream">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_stream.png</normaloff>:/open_stream.png</iconset>
    </property>
    <property name="text">
@@ -696,7 +699,7 @@
   </action>
   <action name="action_open_media">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -710,7 +713,7 @@
   </action>
   <action name="action_global_shortcuts">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
    </property>
    <property name="text">
@@ -719,11 +722,21 @@
   </action>
   <action name="action_cover_manager">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/download.png</normaloff>:/download.png</iconset>
    </property>
    <property name="text">
     <string>Cover Manager</string>
+   </property>
+  </action>
+  <action name="action_shuffle_mode">
+   <property name="text">
+    <string>Shuffle mode</string>
+   </property>
+  </action>
+  <action name="action_repeat_mode">
+   <property name="text">
+    <string>Repeat mode</string>
    </property>
   </action>
  </widget>
@@ -767,6 +780,8 @@
    <header>radioview.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections/>
 </ui>

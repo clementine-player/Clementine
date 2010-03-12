@@ -133,6 +133,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   ui_.ban_button->setDefaultAction(ui_.action_ban);
   ui_.clear_playlist_button->setDefaultAction(ui_.action_clear_playlist);
 
+  // Add the shuffle and repeat action groups to the menu
+  ui_.action_shuffle_mode->setMenu(playlist_sequence_->shuffle_menu());
+  ui_.action_repeat_mode->setMenu(playlist_sequence_->repeat_menu());
+
   // Stop actions
   QMenu* stop_menu = new QMenu(this);
   stop_menu->addAction(ui_.action_stop);
