@@ -220,12 +220,16 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 }
 
 void Song::GuessFileType(TagLib::FileRef* fileref) {
+#ifdef TAGLIB_WITH_ASF
   if (dynamic_cast<TagLib::ASF::File*>(fileref->file()))
     d->filetype_ = Type_Asf;
+#endif
   if (dynamic_cast<TagLib::FLAC::File*>(fileref->file()))
     d->filetype_ = Type_Flac;
+#ifdef TAGLIB_WITH_MP4
   if (dynamic_cast<TagLib::MP4::File*>(fileref->file()))
     d->filetype_ = Type_Mp4;
+#endif
   if (dynamic_cast<TagLib::MPC::File*>(fileref->file()))
     d->filetype_ = Type_Mpc;
   if (dynamic_cast<TagLib::MPEG::File*>(fileref->file()))

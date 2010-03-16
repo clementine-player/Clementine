@@ -4,9 +4,9 @@
 #include "song.h"
 
 #include <QObject>
+#include <QXmlStreamReader>
 
 class QIODevice;
-class QXmlStreamReader;
 
 class XSPFParser : public QObject {
   Q_OBJECT
