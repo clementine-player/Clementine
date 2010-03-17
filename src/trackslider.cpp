@@ -105,6 +105,8 @@ bool TrackSlider::event(QEvent* e) {
     case QEvent::StyleChange:
       UpdateLabelWidth();
       break;
+    default:
+      break;
   }
   return false;
 }
