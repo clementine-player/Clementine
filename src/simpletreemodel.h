@@ -64,7 +64,7 @@ int SimpleTreeModel<T>::columnCount(const QModelIndex &) const {
 template <typename T>
 QModelIndex SimpleTreeModel<T>::index(int row, int, const QModelIndex& parent) const {
   T* parent_item = IndexToItem(parent);
-  if (!parent_item || parent_item->children.count() <= row)
+  if (!parent_item || row < 0 || parent_item->children.count() <= row)
     return QModelIndex();
 
   return ItemToIndex(parent_item->children[row]);
