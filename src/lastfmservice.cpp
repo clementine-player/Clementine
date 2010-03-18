@@ -585,27 +585,34 @@ void LastFMService::FetchMoreTracksFinished() {
     qWarning() << "Invalid reply on radio.getPlaylist";
     return;
   }
+  reply->deleteLater();
 
-  const XmlQuery& query = lastfm::ws::parse(reply);
-  const XmlQuery& playlist = query["playlist"];
-  foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
-    lastfm::MutableTrack t;
-    t.setUrl(q["location"].text());
-    t.setExtra("trackauth", q["extension"]["trackauth"].text());
-    t.setTitle(q["title"].text());
-    t.setArtist(q["creator"].text());
-    t.setAlbum(q["album"].text());
-    t.setDuration(q["duration"].text().toInt() / 1000);
-    t.setSource(lastfm::Track::LastFmRadio);
-    const QString& image = q["image"].text();
-    if (!image.isEmpty()) {
-      FetchImage(t, image);
+  try {
+    const XmlQuery& query = lastfm::ws::parse(reply);
+    const XmlQuery& playlist = query["playlist"];
+    foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
+      lastfm::MutableTrack t;
+      t.setUrl(q["location"].text());
+      t.setExtra("trackauth", q["extension"]["trackauth"].text());
+      t.setTitle(q["title"].text());
+      t.setArtist(q["creator"].text());
+      t.setAlbum(q["album"].text());
+      t.setDuration(q["duration"].text().toInt() / 1000);
+      t.setSource(lastfm::Track::LastFmRadio);
+      const QString& image = q["image"].text();
+      if (!image.isEmpty()) {
+        FetchImage(t, image);
+      }
+      playlist_ << t;
     }
-    playlist_ << t;
+  } catch (lastfm::ws::ParseError& e) {
+    qDebug() << "Lastfm parse error:" << e.enumValue();
+  } catch (std::runtime_error& e) {
+    qDebug() << e.what();
+    return;
   }
 
   TunerTrackAvailable();
-  reply->deleteLater();
 }
 
 void LastFMService::Tune(const lastfm::RadioStation& station) {
