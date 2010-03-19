@@ -57,6 +57,7 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
     case Column_Bitrate:  return tr("Bit rate");
     case Column_Samplerate: return tr("Sample rate");
     case Column_Filename: return tr("File name");
+    case Column_BaseFilename: return tr("File name (without path)");
     case Column_Filesize: return tr("File size");
     case Column_Filetype: return tr("File type");
     case Column_DateModified: return tr("Date modified");
@@ -97,6 +98,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Bitrate:  return song.bitrate();
         case Column_Samplerate: return song.samplerate();
         case Column_Filename: return song.filename();
+        case Column_BaseFilename: return song.basefilename();
         case Column_Filesize: return song.filesize();
         case Column_Filetype: return song.filetype();
         case Column_DateModified: return song.mtime();

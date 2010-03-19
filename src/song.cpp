@@ -121,6 +121,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     return;
 
   QFileInfo info(filename);
+  d->basefilename_ = info.fileName();
   d->filesize_ = info.size();
   d->mtime_ = info.lastModified().toTime_t();
   d->ctime_ = info.created().toTime_t();
@@ -278,6 +279,7 @@ void Song::InitFromQuery(const QSqlQuery& q) {
 
   d->directory_id_ = toint(16);
   d->filename_ = tostr(17);
+  d->basefilename_ = QFileInfo(d->filename_).fileName();
   d->mtime_ = toint(18);
   d->ctime_ = toint(19);
   d->filesize_ = toint(20);

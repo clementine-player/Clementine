@@ -92,6 +92,7 @@ class Song {
 
   int directory_id() const { return d->directory_id_; }
   const QString& filename() const { return d->filename_; }
+  const QString& basefilename() const { return d->basefilename_; }
   uint mtime() const { return d->mtime_; }
   uint ctime() const { return d->ctime_; }
   int filesize() const { return d->filesize_; }
@@ -145,6 +146,7 @@ class Song {
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }
+  void set_basefilename(const QString& v) { d->basefilename_ = v; } 
   void set_directory_id(int v) { d->directory_id_ = v; }
 
   // Comparison functions
@@ -180,6 +182,7 @@ class Song {
 
     int directory_id_;
     QString filename_;
+    QString basefilename_;
     int mtime_;
     int ctime_;
     int filesize_;

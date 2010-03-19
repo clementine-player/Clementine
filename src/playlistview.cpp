@@ -200,6 +200,7 @@ void PlaylistView::LoadGeometry() {
     header()->hideSection(Playlist::Column_Bitrate);
     header()->hideSection(Playlist::Column_Samplerate);
     header()->hideSection(Playlist::Column_Filename);
+    header()->hideSection(Playlist::Column_BaseFilename);
     header()->hideSection(Playlist::Column_Filesize);
     header()->hideSection(Playlist::Column_Filetype);
     header()->hideSection(Playlist::Column_DateCreated);

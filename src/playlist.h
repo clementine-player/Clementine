@@ -34,6 +34,7 @@ class Playlist : public QAbstractListModel {
     Column_Bitrate,
     Column_Samplerate,
     Column_Filename,
+    Column_BaseFilename,
     Column_Filesize,
     Column_Filetype,
     Column_DateCreated,
