@@ -9,15 +9,16 @@ FRAMEWORK_SEARCH_PATH=['/Library/Frameworks', os.path.join(os.environ['HOME'], '
 LIBRARY_SEARCH_PATH=['/usr/local/lib', '/sw/lib']
 
 XINE_PLUGINS = [
-    'xineplug_decode_vorbis.so',
-    'xineplug_dmx_ogg.so',
     'xineplug_ao_out_coreaudio.so',
     'xineplug_decode_a52.so',
     'xineplug_decode_dts.so',
     'xineplug_decode_faad.so',
     'xineplug_decode_mad.so',
     'xineplug_decode_mpc.so',
+    'xineplug_decode_vorbis.so',
     'xineplug_dmx_audio.so',
+    'xineplug_dmx_ogg.so',
+    'xineplug_flac.so',
     'xineplug_inp_cdda.so',
     'xineplug_inp_file.so',
     'xineplug_inp_http.so',
