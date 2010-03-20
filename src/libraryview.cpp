@@ -3,6 +3,9 @@
 #include "libraryitem.h"
 
 #include <QPainter>
+#include <QContextMenuEvent>
+#include <QMenu>
+#include <QSortFilterProxyModel>
 
 const int LibraryView::kRowsToShow = 50;
 
@@ -56,11 +59,17 @@ LibraryView::LibraryView(QWidget* parent)
   : QTreeView(parent),
     library_(NULL),
     total_song_count_(-1),
-    nomusic_(":nomusic.png")
+    nomusic_(":nomusic.png"),
+    context_menu_(new QMenu(this))
 {
   setItemDelegate(new LibraryItemDelegate(this));
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
+
+  show_in_various_ = context_menu_->addAction(
+      tr("Show in various artists"), this, SLOT(ShowInVarious()));
+  no_show_in_various_ = context_menu_->addAction(
+      tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
 }
 
 void LibraryView::SetLibrary(Library *library) {
@@ -143,4 +152,39 @@ bool LibraryView::RecursivelyExpand(const QModelIndex& index, int* count) {
 void LibraryView::ItemExpanded(const QModelIndex& index) {
   if (model()->rowCount(index) == 1)
     expand(model()->index(0, 0, index));
+}
+
+void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
+  context_menu_index_ = indexAt(e->pos());
+  if (!context_menu_index_.isValid())
+    return;
+
+  context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
+                        ->mapToSource(context_menu_index_);
+
+  int type = library_->data(context_menu_index_, Library::Role_Type).toInt();
+  bool enable_various = type == LibraryItem::Type_Album ||
+                        type == LibraryItem::Type_CompilationAlbum;
+
+  show_in_various_->setEnabled(enable_various);
+  no_show_in_various_->setEnabled(enable_various);
+
+  context_menu_->popup(e->globalPos());
+}
+
+void LibraryView::ShowInVarious() {
+  ShowInVarious(true);
+}
+
+void LibraryView::NoShowInVarious() {
+  ShowInVarious(false);
+}
+
+void LibraryView::ShowInVarious(bool on) {
+  if (!context_menu_index_.isValid())
+    return;
+
+  QString artist = library_->data(context_menu_index_, Library::Role_Artist).toString();
+  QString album = library_->data(context_menu_index_, Library::Role_Key).toString();
+  library_->GetBackend()->ForceCompilation(artist, album, on);
 }

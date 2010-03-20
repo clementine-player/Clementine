@@ -28,6 +28,9 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
 
   // Maybe stores album cover art
   QPixmap cover_art;
+
+  // Stores the artist of an album
+  QString artist;
 };
 
 #endif // LIBRARYITEM_H

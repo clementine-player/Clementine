@@ -15,7 +15,7 @@
 #include <sqlite3.h>
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
-const int LibraryBackend::kSchemaVersion = 3;
+const int LibraryBackend::kSchemaVersion = 4;
 
 // Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
 void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
@@ -628,4 +628,60 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
 
   q.exec();
   CheckErrors(q.lastError());
+}
+
+void LibraryBackend::ForceCompilation(const QString& artist, const QString& album, bool on) {
+  QSqlDatabase db(Connect());
+
+  // Get the songs before they're updated
+  LibraryQuery query;
+  query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
+  query.AddWhere("album", album);
+  if (!artist.isNull())
+    query.AddWhere("artist", artist);
+
+  QSqlQuery q(query.Query(db));
+  q.exec();
+  CheckErrors(q.lastError());
+
+  SongList deleted_songs;
+  while (q.next()) {
+    Song song;
+    song.InitFromQuery(q);
+    deleted_songs << song;
+  }
+
+  // Update the songs
+  QString sql("UPDATE songs SET forced_compilation_on = :forced_compilation_on,"
+              "                 forced_compilation_off = :forced_compilation_off"
+              " WHERE album = :album");
+  if (!artist.isEmpty())
+    sql += " AND artist = :artist";
+
+  q = QSqlQuery(sql, db);
+  q.bindValue(":forced_compilation_on", on ? 1 : 0);
+  q.bindValue(":forced_compilation_off", on ? 0 : 1);
+  q.bindValue(":album", album);
+  if (!artist.isEmpty())
+    q.bindValue(":artist", artist);
+
+  q.exec();
+  CheckErrors(q.lastError());
+
+  // Now get the updated songs
+  q = QSqlQuery(query.Query(db));
+  q.exec();
+  CheckErrors(q.lastError());
+
+  SongList added_songs;
+  while (q.next()) {
+    Song song;
+    song.InitFromQuery(q);
+    added_songs << song;
+  }
+
+  if (!added_songs.isEmpty() || !deleted_songs.isEmpty()) {
+    emit SongsDeleted(deleted_songs);
+    emit SongsDiscovered(added_songs);
+  }
 }

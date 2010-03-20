@@ -108,7 +108,7 @@ void Library::SongsDiscovered(const SongList& songs) {
       album = artist->ChildByKey(song.album());
       if (album == NULL)
         album = CreateAlbumNode(true, song.album(), artist, song.is_compilation(),
-                                song.art_automatic(), song.art_manual());
+                                song.art_automatic(), song.art_manual(), album->artist);
 
       if (album->lazy_loaded)
         CreateSongNode(true, song, album);
@@ -175,7 +175,8 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
 LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name,
                                       LibraryItem* parent, bool compilation,
                                       const QString& art_automatic,
-                                      const QString& art_manual) {
+                                      const QString& art_manual,
+                                      const QString& artist) {
   if (signal)
     beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
@@ -192,6 +193,8 @@ LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name,
     ret->cover_art.load(art_manual);
   if (!art_automatic.isNull() && ret->cover_art.isNull())
     ret->cover_art.load(art_automatic);*/
+
+  ret->artist = compilation ? QString::null : artist;
 
   if (signal)
     endInsertRows();
@@ -340,6 +343,9 @@ QVariant Library::data(const LibraryItem* item, int role) const {
     case Role_Key:
       return item->key;
 
+    case Role_Artist:
+      return item->artist;
+
     case Role_SortText:
       if (item->type == LibraryItem::Type_Song)
         return item->song.disc() * 1000 + item->song.track();
@@ -356,7 +362,7 @@ void Library::LazyPopulate(LibraryItem* item) {
     case LibraryItem::Type_CompilationArtist:
       foreach (const LibraryBackend::Album& album,
                backend_->Worker()->GetCompilationAlbums(query_options_))
-        CreateAlbumNode(false, album.album_name, item, true, album.art_automatic, album.art_manual);
+        CreateAlbumNode(false, album.album_name, item, true, album.art_automatic, album.art_manual, album.artist);
       break;
 
     case LibraryItem::Type_CompilationAlbum:
@@ -367,7 +373,7 @@ void Library::LazyPopulate(LibraryItem* item) {
     case LibraryItem::Type_Artist:
       foreach (const LibraryBackend::Album& album,
                backend_->Worker()->GetAlbumsByArtist(item->key, query_options_))
-        CreateAlbumNode(false, album.album_name, item, false, album.art_automatic, album.art_manual);
+        CreateAlbumNode(false, album.album_name, item, false, album.art_automatic, album.art_manual, album.artist);
       break;
 
     case LibraryItem::Type_Album:

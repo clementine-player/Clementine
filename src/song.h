@@ -84,7 +84,10 @@ class Song {
   int year() const { return d->year_; }
   const QString& genre() const { return d->genre_; }
   const QString& comment() const { return d->comment_; }
-  bool is_compilation() const { return d->compilation_ || d->sampler_; }
+  bool is_compilation() const {
+    return (d->compilation_ || d->sampler_ || d->forced_compilation_on_)
+            && ! d->forced_compilation_off_;
+  }
 
   int length() const { return d->length_; }
   int bitrate() const { return d->bitrate_; }
@@ -173,8 +176,10 @@ class Song {
     int year_;
     QString genre_;
     QString comment_;
-    bool compilation_;
-    bool sampler_;
+    bool compilation_;            // From the file tag
+    bool sampler_;                // From the library scanner
+    bool forced_compilation_on_;  // Set by the user
+    bool forced_compilation_off_; // Set by the user
 
     int length_;
     int bitrate_;

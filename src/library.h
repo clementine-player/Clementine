@@ -26,11 +26,13 @@ class Library : public SimpleTreeModel<LibraryItem> {
     Role_Type = Qt::UserRole + 1,
     Role_SortText,
     Role_Key,
+    Role_Artist,
   };
 
   void StartThreads();
 
   LibraryDirectoryModel* GetDirectoryModel() const { return dir_model_; }
+  boost::shared_ptr<LibraryBackend> GetBackend() const { return backend_->Worker(); }
 
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const;
@@ -77,7 +79,8 @@ class Library : public SimpleTreeModel<LibraryItem> {
   LibraryItem* CreateAlbumNode(bool signal, const QString& name,
                                LibraryItem* parent, bool compilation,
                                const QString& art_automatic,
-                               const QString& art_manual);
+                               const QString& art_manual,
+                               const QString& artist);
   LibraryItem* CreateSongNode(bool signal, const Song& song, LibraryItem* parent);
 
   QString PrettyArtist(QString artist) const;

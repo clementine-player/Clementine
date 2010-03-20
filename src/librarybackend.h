@@ -67,6 +67,7 @@ class LibraryBackend : public QObject {
   void DeleteSongs(const SongList& songs);
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
+  void ForceCompilation(const QString& artist, const QString& album, bool on);
 
  signals:
   void Error(const QString& message);

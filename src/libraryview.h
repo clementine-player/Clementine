@@ -33,13 +33,17 @@ class LibraryView : public QTreeView {
   // QWidget
   void paintEvent(QPaintEvent* event);
   void mouseReleaseEvent(QMouseEvent* e);
+  void contextMenuEvent(QContextMenuEvent* e);
 
  private slots:
   void ItemExpanded(const QModelIndex& index);
+  void ShowInVarious();
+  void NoShowInVarious();
 
  private:
   void RecheckIsEmpty();
   bool RecursivelyExpand(const QModelIndex& index, int* count);
+  void ShowInVarious(bool on);
 
  private:
   static const int kRowsToShow;
@@ -48,6 +52,11 @@ class LibraryView : public QTreeView {
   int total_song_count_;
 
   QPixmap nomusic_;
+
+  QMenu* context_menu_;
+  QModelIndex context_menu_index_;
+  QAction* show_in_various_;
+  QAction* no_show_in_various_;
 };
 
 #endif // LIBRARYVIEW_H

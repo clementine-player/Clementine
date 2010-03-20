@@ -39,14 +39,16 @@ const char* Song::kColumnSpec =
     "track, disc, bpm, year, genre, comment, compilation, "
     "length, bitrate, samplerate, directory, filename, "
     "mtime, ctime, filesize, sampler, art_automatic, art_manual, "
-    "filetype, playcount, lastplayed, rating";
+    "filetype, playcount, lastplayed, rating, forced_compilation_on, "
+    "forced_compilation_off";
 
 const char* Song::kBindSpec =
     ":title, :album, :artist, :albumartist, :composer, "
     ":track, :disc, :bpm, :year, :genre, :comment, :compilation, "
     ":length, :bitrate, :samplerate, :directory_id, :filename, "
     ":mtime, :ctime, :filesize, :sampler, :art_automatic, :art_manual, "
-    ":filetype, :playcount, :lastplayed, :rating";
+    ":filetype, :playcount, :lastplayed, :rating, :forced_compilation_on, "
+    ":forced_compilation_off";
 
 const char* Song::kUpdateSpec =
     "title = :title, album = :album, artist = :artist, "
@@ -58,7 +60,8 @@ const char* Song::kUpdateSpec =
     "ctime = :ctime, filesize = :filesize, sampler = :sampler, "
     "art_automatic = :art_automatic, art_manual = :art_manual, "
     "filetype = :filetype, playcount = :playcount, lastplayed = :lastplayed, "
-    "rating = :rating";
+    "rating = :rating, forced_compilation_on = :forced_compilation_on, "
+    "forced_compilation_off = :forced_compilation_off";
 
 TagLibFileRefFactory Song::kDefaultFactory;
 
@@ -71,6 +74,8 @@ Song::Private::Private()
     year_(-1),
     compilation_(false),
     sampler_(false),
+    forced_compilation_on_(false),
+    forced_compilation_off_(false),
     length_(-1),
     bitrate_(-1),
     samplerate_(-1),
@@ -294,6 +299,9 @@ void Song::InitFromQuery(const QSqlQuery& q) {
   // lastplayed = 26
   // rating = 27
 
+  d->forced_compilation_on_ = q.value(28).toBool();
+  d->forced_compilation_off_ = q.value(29).toBool();
+
   #undef tostr
   #undef toint
   #undef tofloat
@@ -361,6 +369,9 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":playcount", 0); // TODO
   query->bindValue(":lastplayed", -1); // TODO
   query->bindValue(":rating", -1);
+
+  query->bindValue(":forced_compilation_on", d->forced_compilation_on_);
+  query->bindValue(":forced_compilation_off", d->forced_compilation_off_);
 
   #undef intval
 }
