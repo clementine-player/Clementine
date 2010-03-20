@@ -23,6 +23,8 @@ endif(WIN32)
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 
+find_library(SQLITE3_LIBRARIES sqlite3)
+
 if(WIN32)
   find_library(TAGLIB_LIBRARIES tag)
 else(WIN32)

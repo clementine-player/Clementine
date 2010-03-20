@@ -7,12 +7,36 @@
 #include <QSettings>
 #include <QtDebug>
 #include <QSqlDatabase>
+#include <QSqlDriver>
 #include <QSqlQuery>
 #include <QCoreApplication>
 #include <QThread>
 
+#include <sqlite3.h>
+
 const char* LibraryBackend::kDatabaseName = "clementine.db";
 const int LibraryBackend::kSchemaVersion = 3;
+
+// Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
+void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
+  Q_ASSERT(argc == 2 || argc == 3);
+  Q_ASSERT(sqlite3_value_type(argv[0]) == sqlite3_value_type(argv[1]));
+  switch (sqlite3_value_type(argv[0])) {
+    case SQLITE_INTEGER: {
+      qint64 result = sqlite3_value_int64(argv[0]) - sqlite3_value_int64(argv[1]);
+      sqlite3_result_int64(context, result ? 0 : 1);
+      break;
+    }
+    case SQLITE_TEXT: {
+      const uchar* data_a = sqlite3_value_text(argv[0]);
+      const uchar* data_b = sqlite3_value_text(argv[1]);
+      QString a = QString::fromUtf8(reinterpret_cast<const char*>(data_a)).section('%', 1, 1);
+      QString b = QString::fromUtf8(reinterpret_cast<const char*>(data_b));
+      sqlite3_result_int64(context, b.contains(a, Qt::CaseInsensitive) ? 1 : 0);
+      break;
+    }
+  }
+}
 
 LibraryBackend::LibraryBackend(QObject* parent, const QString& database_name)
   : QObject(parent),
@@ -59,6 +83,21 @@ QSqlDatabase LibraryBackend::Connect() {
   if (!db.open()) {
     emit Error("LibraryBackend: " + db.lastError().text());
     return db;
+  }
+  // We want Unicode aware LIKE clauses.
+  QVariant v = db.driver()->handle();
+  if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
+    sqlite3* handle = *static_cast<sqlite3**>(v.data());
+    if (handle) {
+      sqlite3_create_function(
+          handle,       // Sqlite3 handle.
+          "LIKE",       // Function name (either override or new).
+          2,            // Number of args.
+          SQLITE_ANY,   // What types this function accepts.
+          NULL,         // Custom data available via sqlite3_user_data().
+          &SqliteLike,  // Our function :-)
+          NULL, NULL);
+    }
   }
 
   if (db.tables().count() == 0) {

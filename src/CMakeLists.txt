@@ -208,6 +208,7 @@ target_link_libraries(clementine_lib
     ${LIBNOTIFY_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${QT_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
 )
 if (APPLE)
   target_link_libraries(clementine_lib
