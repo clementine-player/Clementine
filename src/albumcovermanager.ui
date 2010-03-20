@@ -37,7 +37,7 @@
          <item>
           <widget class="QToolButton" name="clear">
            <property name="icon">
-            <iconset>
+            <iconset resource="../data/data.qrc">
              <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
            </property>
            <property name="autoRaise">
@@ -58,7 +58,7 @@
             <string>View</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../data/data.qrc">
              <normaloff>:/view-choose.png</normaloff>:/view-choose.png</iconset>
            </property>
            <property name="popupMode">
@@ -78,7 +78,7 @@
             <string>Fetch Missing Covers</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../data/data.qrc">
              <normaloff>:/download.png</normaloff>:/download.png</iconset>
            </property>
           </widget>
@@ -89,6 +89,9 @@
         <widget class="QListWidget" name="albums">
          <property name="alternatingRowColors">
           <bool>false</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
          </property>
          <property name="iconSize">
           <size>
@@ -126,7 +129,7 @@
   </layout>
   <action name="action_show_fullsize">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/zoom-in.png</normaloff>:/zoom-in.png</iconset>
    </property>
    <property name="text">
@@ -135,7 +138,7 @@
   </action>
   <action name="action_fetch">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/download.png</normaloff>:/download.png</iconset>
    </property>
    <property name="text">
@@ -144,7 +147,7 @@
   </action>
   <action name="action_choose_manual">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -153,7 +156,7 @@
   </action>
   <action name="action_unset_cover">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
    </property>
    <property name="text">
@@ -176,7 +179,9 @@
   <tabstop>fetch</tabstop>
   <tabstop>albums</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>clear</sender>
