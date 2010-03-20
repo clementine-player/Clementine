@@ -19,8 +19,9 @@ class QPalette;
 
 class BlockAnalyzer : public Analyzer::Base
 {
+  Q_OBJECT
 public:
-    BlockAnalyzer( QWidget* );
+    Q_INVOKABLE BlockAnalyzer( QWidget* );
    ~BlockAnalyzer();
 
     static const uint HEIGHT;
@@ -29,6 +30,8 @@ public:
     static const uint MIN_COLUMNS;
     static const uint MAX_COLUMNS;
     static const uint FADE_SIZE;
+
+    static const char* kName;
 
 protected:
     virtual void transform( Scope& );

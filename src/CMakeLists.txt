@@ -13,6 +13,7 @@ set(CLEMENTINE-SOURCES
     analyzers/analyzerbase.cpp
     fht.cpp
     analyzers/blockanalyzer.cpp
+    analyzers/analyzercontainer.cpp
     sliderwidget.cpp
     playlistview.cpp
     librarywatcher.cpp
@@ -104,6 +105,10 @@ set(CLEMENTINE-MOC-HEADERS
     m3uparser.h
     playlistsequence.h
     xspfparser.h
+    analyzers/analyzercontainer.h
+    analyzers/baranalyzer.h
+    analyzers/blockanalyzer.h
+    analyzers/analyzerbase.h
 )
 
 # UI files

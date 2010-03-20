@@ -36,14 +36,17 @@ typedef std::vector<float> Scope;
 
 class Base : public QWidget
 {
+  Q_OBJECT
+
 public:
+    ~Base() { delete m_fht; }
+
     uint timeout() const { return m_timeout; }
 
     void set_engine(EngineBase* engine) { m_engine = engine; }
 
 protected:
     Base( QWidget*, uint timeout, uint scopeSize = 7 );
-    ~Base() { delete m_fht; }
 
     void hideEvent(QHideEvent *);
     void showEvent(QShowEvent *);

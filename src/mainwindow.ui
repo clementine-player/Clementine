@@ -215,7 +215,7 @@
         </widget>
        </item>
        <item>
-        <widget class="BlockAnalyzer" name="analyzer" native="true">
+        <widget class="AnalyzerContainer" name="analyzer" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>100</horstretch>
@@ -748,12 +748,6 @@
    <header>lineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>BlockAnalyzer</class>
-   <extends>QWidget</extends>
-   <header>analyzers/blockanalyzer.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>Amarok::VolumeSlider</class>
    <extends>QSlider</extends>
    <header>sliderwidget.h</header>
@@ -778,6 +772,12 @@
    <class>RadioView</class>
    <extends>QTreeView</extends>
    <header>radioview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AnalyzerContainer</class>
+   <extends>QWidget</extends>
+   <header>analyzers/analyzercontainer.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

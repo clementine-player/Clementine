@@ -13,8 +13,9 @@ typedef std::vector<uint> aroofMemVec;
 
 class BarAnalyzer : public Analyzer::Base
 {
+  Q_OBJECT
     public:
-        BarAnalyzer( QWidget* );
+        Q_INVOKABLE BarAnalyzer( QWidget* );
 
         void init();
         virtual void analyze( QPainter& p, const Scope& );
@@ -33,6 +34,8 @@ class BarAnalyzer : public Analyzer::Base
         static const int  ROOF_VELOCITY_REDUCTION_FACTOR = 32;
         static const uint NUM_ROOFS = 16;
         static const uint COLUMN_WIDTH = 4;
+
+        static const char* kName;
 
     protected:
         QPixmap m_pixRoof[NUM_ROOFS];

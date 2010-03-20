@@ -36,6 +36,7 @@
 #include <QCloseEvent>
 #include <QSignalMapper>
 #include <QFileDialog>
+#include <QTimer>
 
 #include <cmath>
 
