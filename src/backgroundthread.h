@@ -9,6 +9,9 @@
 #ifdef Q_OS_LINUX
 #  include <sys/syscall.h>
 #endif
+#ifdef Q_OS_DARWIN
+#  include <sys/resource.h>
+#endif
 
 class BackgroundThreadBase : public QThread {
   Q_OBJECT
@@ -96,6 +99,8 @@ void BackgroundThread<T>::run() {
 int BackgroundThreadBase::ioprio_set(int which, int who, int ioprio) {
 #ifdef Q_OS_LINUX
   return syscall(SYS_ioprio_set, which, who, ioprio);
+#elif defined(Q_OS_DARWIN)
+  return setpriority(PRIO_DARWIN_THREAD, 0, ioprio == IOPRIO_CLASS_IDLE ? PRIO_DARWIN_BG : 0);
 #else
   return 0;
 #endif
