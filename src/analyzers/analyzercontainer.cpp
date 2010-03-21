@@ -2,7 +2,7 @@
 #include "baranalyzer.h"
 #include "blockanalyzer.h"
 
-#include <QContextMenuEvent>
+#include <QMouseEvent>
 #include <QHBoxLayout>
 #include <QSettings>
 
@@ -34,8 +34,9 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   Load();
 }
 
-void AnalyzerContainer::contextMenuEvent(QContextMenuEvent* e) {
-  context_menu_->popup(e->globalPos());
+void AnalyzerContainer::mouseReleaseEvent(QMouseEvent* e) {
+  if (e->button() == Qt::LeftButton || e->button() == Qt::RightButton)
+    context_menu_->popup(e->globalPos());
 }
 
 void AnalyzerContainer::set_engine(EngineBase *engine) {

@@ -19,7 +19,7 @@ public:
   static const char* kSettingsGroup;
 
 protected:
-  void contextMenuEvent(QContextMenuEvent *);
+  void mouseReleaseEvent(QMouseEvent *);
 
 private slots:
   void ChangeAnalyzer(int id);
