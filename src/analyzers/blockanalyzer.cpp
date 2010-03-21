@@ -11,7 +11,6 @@
 
 #include <QMouseEvent>
 #include <QResizeEvent>
-#include <QPainter>
 #include <cstdlib>
 
 const uint BlockAnalyzer::HEIGHT      = 2;

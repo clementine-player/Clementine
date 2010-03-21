@@ -3,11 +3,6 @@
 
 #include "boomanalyzer.h"
 #include <cmath>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qpainter.h>
-#include <qslider.h>
-#include <qspinbox.h>
 
 const char* BoomAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
 

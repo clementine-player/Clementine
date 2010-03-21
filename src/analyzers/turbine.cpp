@@ -8,7 +8,6 @@
 //
 
 #include <cmath>
-#include <qpainter.h>
 
 #include "turbine.h"
 
