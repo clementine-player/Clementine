@@ -370,8 +370,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":lastplayed", -1); // TODO
   query->bindValue(":rating", -1);
 
-  query->bindValue(":forced_compilation_on", d->forced_compilation_on_);
-  query->bindValue(":forced_compilation_off", d->forced_compilation_off_);
+  query->bindValue(":forced_compilation_on", d->forced_compilation_on_ ? 1 : 0);
+  query->bindValue(":forced_compilation_off", d->forced_compilation_off_ ? 1 : 0);
 
   #undef intval
 }
