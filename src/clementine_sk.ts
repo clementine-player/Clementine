@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="albumcovermanager.cpp" line="143"/>
         <source>Various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Rôzny interpréti</translation>
     </message>
     <message>
         <location filename="albumcovermanager.cpp" line="355"/>
@@ -109,17 +109,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="analyzers/analyzercontainer.cpp" line="30"/>
         <source>No analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>bez analyzéru</translation>
     </message>
     <message>
         <location filename="analyzers/baranalyzer.cpp" line="19"/>
         <source>Bar analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>prúžkový analyzér</translation>
     </message>
     <message>
         <location filename="analyzers/blockanalyzer.cpp" line="24"/>
         <source>Block analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>blokový analyzér</translation>
     </message>
 </context>
 <context>
@@ -147,7 +147,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="albumcovermanager.ui" line="136"/>
         <source>Show fullsize...</source>
-        <translation>Ukázať celú veľkosť</translation>
+        <translation>Ukázať celú veľkosť...</translation>
     </message>
     <message>
         <location filename="albumcovermanager.ui" line="145"/>
@@ -176,9 +176,9 @@ p, li { white-space: pre-wrap; }
         <location filename="edittagdialog.cpp" line="73"/>
         <source>Editing %n tracks</source>
         <translation>
+            <numerusform>Upravovanie %n skladby</numerusform>
             <numerusform>Upravovanie %n skladieb</numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Upravovanie %n skladieb</numerusform>
         </translation>
     </message>
     <message>
@@ -321,7 +321,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="fileviewlist.cpp" line="17"/>
         <source>Move to library...</source>
-        <translation>Presunúť do zbierky</translation>
+        <translation>Presunúť do zbierky...</translation>
     </message>
 </context>
 <context>
@@ -334,7 +334,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="lastfmconfig.cpp" line="40"/>
         <source>Your Last.fm credentials were incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše Last.fm poverenie bolo nekorektné</translation>
     </message>
     <message>
         <location filename="lastfmconfig.ui" line="20"/>
@@ -629,7 +629,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="libraryconfig.ui" line="41"/>
         <source>Add new folder...</source>
-        <translation>Pridať nový priečinok</translation>
+        <translation>Pridať nový priečinok...</translation>
     </message>
     <message>
         <location filename="libraryconfig.ui" line="64"/>
@@ -650,12 +650,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="libraryview.cpp" line="70"/>
         <source>Show in various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazovať v rôznich interprétoch</translation>
     </message>
     <message>
         <location filename="libraryview.cpp" line="72"/>
         <source>Don&apos;t show in various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Nzobrazovať v rôznich interprétoch</translation>
     </message>
     <message>
         <location filename="libraryview.cpp" line="118"/>
@@ -811,12 +811,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="623"/>
         <source>Love</source>
-        <translation type="unfinished"></translation>
+        <translation>Milujem</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="635"/>
         <source>Ban</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznášam</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="644"/>
@@ -878,12 +878,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="734"/>
         <source>Shuffle mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamiešavací mód</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="739"/>
         <source>Repeat mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakovací mód</translation>
     </message>
     <message>
         <source>New playlist</source>
@@ -910,7 +910,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="multiloadingindicator.cpp" line="48"/>
         <source>Loading stream</source>
-        <translation>Načíta va stream</translation>
+        <translation>Načítava sa stream</translation>
     </message>
     <message>
         <location filename="multiloadingindicator.cpp" line="49"/>
@@ -1016,7 +1016,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="playlist.cpp" line="60"/>
         <source>File name (without path)</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov súboru (bez cesty)</translation>
     </message>
     <message>
         <location filename="playlist.cpp" line="61"/>
@@ -1140,7 +1140,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="savedradio.cpp" line="27"/>
         <source>Your radio streams</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše rádio streamy</translation>
     </message>
 </context>
 <context>
@@ -1194,7 +1194,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="settingsdialog.ui" line="206"/>
         <source>Clementine can show a message when the track changes.</source>
-        <translation>Clementine môže zobraziť správu keď sa zmení skladba</translation>
+        <translation>Clementine môže zobraziť správu keď sa zmení skladba.</translation>
     </message>
     <message>
         <location filename="settingsdialog.ui" line="213"/>
@@ -1295,7 +1295,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="shortcutsdialog.ui" line="71"/>
         <source>Alternate</source>
-        <translation type="unfinished"></translation>
+        <translation>Striedať</translation>
     </message>
     <message>
         <source>&amp;Defaults</source>
@@ -1332,12 +1332,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="shortcutsdialog.cpp" line="77"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Varovanie</translation>
     </message>
     <message>
         <location filename="shortcutsdialog.cpp" line="78"/>
         <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete pokračovať?</translation>
     </message>
     <message>
         <location filename="shortcutsdialog.cpp" line="99"/>
@@ -1352,12 +1352,12 @@ p, li { white-space: pre-wrap; }
         <location filename="shortcutsdialog.cpp" line="135"/>
         <location filename="shortcutsdialog.cpp" line="139"/>
         <source>Default: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pôvodné: %1</translation>
     </message>
     <message>
         <location filename="shortcutsdialog.cpp" line="143"/>
         <source>Default: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Pôvodné: žiadna</translation>
     </message>
 </context>
 <context>
