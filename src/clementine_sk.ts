@@ -1127,6 +1127,11 @@ p, li { white-space: pre-wrap; }
         <source>Add another stream...</source>
         <translation>Pridať ďalší stream...</translation>
     </message>
+    <message>
+        <location filename="savedradio.cpp" line="27"/>
+        <source>Your radio streams</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

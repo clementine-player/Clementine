@@ -898,6 +898,10 @@ p, li { white-space: pre-wrap; }
         <source>Add another stream...</source>
         <translation>Добавить другой поток...</translation>
     </message>
+    <message>
+        <source>Your radio streams</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

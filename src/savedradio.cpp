@@ -24,7 +24,7 @@ SavedRadio::~SavedRadio() {
 }
 
 RadioItem* SavedRadio::CreateRootItem(RadioItem* parent) {
-  root_ = new RadioItem(this, RadioItem::Type_Service, "Your radio streams", parent);
+  root_ = new RadioItem(this, RadioItem::Type_Service, tr("Your radio streams"), parent);
   root_->icon = QIcon(":open_stream.png");
   return root_;
 }
