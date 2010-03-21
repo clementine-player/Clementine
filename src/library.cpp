@@ -35,7 +35,9 @@ void Library::StartThreads() {
   Q_ASSERT(waiting_for_threads_);
 
   backend_->start();
-  watcher_->start();
+
+  watcher_->set_io_priority(BackgroundThreadBase::IOPRIO_CLASS_IDLE);
+  watcher_->start(QThread::IdlePriority);
 }
 
 void Library::BackendInitialised() {
