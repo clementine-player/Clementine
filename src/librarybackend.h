@@ -126,7 +126,7 @@ class LibraryBackend : public QObject {
   // Sqlite3 functions. These will be loaded from the sqlite3 plugin.
   static Sqlite3CreateFunc _sqlite3_create_function;
   static int (*_sqlite3_value_type) (sqlite3_value*);
-  static sqlite3_int64 (*_sqlite3_value_int64) (sqlite3_value*);
+  static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
   static uchar* (*_sqlite3_value_text) (sqlite3_value*);
   static void (*_sqlite3_result_int64) (sqlite3_context*, int);
 };

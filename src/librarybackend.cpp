@@ -24,7 +24,7 @@ void (*LibraryBackend::_sqlite3_create_function) (
     void (*) (sqlite3_context*, int, sqlite3_value**),
     void (*) (sqlite3_context*)) = NULL;
 int (*LibraryBackend::_sqlite3_value_type) (sqlite3_value*) = NULL;
-sqlite3_int64 (*LibraryBackend::_sqlite3_value_int64) (sqlite3_value*) = NULL;
+sqlite_int64 (*LibraryBackend::_sqlite3_value_int64) (sqlite3_value*) = NULL;
 uchar* (*LibraryBackend::_sqlite3_value_text) (sqlite3_value*) = NULL;
 void (*LibraryBackend::_sqlite3_result_int64) (sqlite3_context*, int) = NULL;
 
@@ -46,7 +46,7 @@ bool LibraryBackend::StaticInit() {
       library.resolve("sqlite3_create_function"));
   _sqlite3_value_type = reinterpret_cast<int (*) (sqlite3_value*)>(
       library.resolve("sqlite3_value_type"));
-  _sqlite3_value_int64 = reinterpret_cast<sqlite3_int64 (*) (sqlite3_value*)>(
+  _sqlite3_value_int64 = reinterpret_cast<sqlite_int64 (*) (sqlite3_value*)>(
       library.resolve("sqlite3_value_int64"));
   _sqlite3_value_text = reinterpret_cast<uchar* (*) (sqlite3_value*)>(
       library.resolve("sqlite3_value_text"));
