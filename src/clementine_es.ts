@@ -88,22 +88,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Varios artistas</translation>
     </message>
 </context>
 <context>
     <name>AnalyzerContainer</name>
     <message>
         <source>No analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin Analizador</translation>
     </message>
     <message>
         <source>Bar analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Analizador en barras</translation>
     </message>
     <message>
         <source>Block analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Analizador en bloques</translation>
     </message>
 </context>
 <context>
@@ -541,11 +541,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show in various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar en Varios artistas</translation>
     </message>
     <message>
         <source>Don&apos;t show in various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>No mostrar en Varios artistas</translation>
     </message>
 </context>
 <context>
@@ -712,11 +712,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Shuffle mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo Aleatorio</translation>
     </message>
     <message>
         <source>Repeat mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo Repetir</translation>
     </message>
 </context>
 <context>
@@ -837,7 +837,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File name (without path)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del archivo (sin ruta)</translation>
     </message>
 </context>
 <context>
@@ -924,7 +924,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Your radio streams</source>
-        <translation type="unfinished"></translation>
+        <translation>Tus flujos de radio</translation>
     </message>
 </context>
 <context>
@@ -1090,19 +1090,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuidado</translation>
     </message>
     <message>
         <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Estas por reinicar las teclas rapidas a sus valores por defecto. Estás seguro que deseas continuar?</translation>
     </message>
     <message>
         <source>Default: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Por defecto: %1</translation>
     </message>
     <message>
         <source>Default: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Por defecto: Ninguna</translation>
     </message>
 </context>
 <context>
