@@ -92,6 +92,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
   QVariant data(const LibraryItem* item, int role) const;
 
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
+  QChar DividerChar(const QString& sort_text) const;
 
  private:
   EngineBase* engine_;

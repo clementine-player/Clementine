@@ -148,12 +148,9 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
     endInsertRows();
 
   if (!name.isEmpty()) {
-    QChar divider_char = ret->sort_text[0];
+    QChar divider_char = DividerChar(ret->sort_text);
 
-    if (divider_char.isDigit())
-      divider_char = '0';
-
-    if (!divider_nodes_.contains(divider_char)) {
+    if (!divider_char.isNull() && !divider_nodes_.contains(divider_char)) {
       if (signal)
         beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
@@ -161,7 +158,7 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
           new LibraryItem(LibraryItem::Type_Divider, QString(divider_char), root_);
       divider->lazy_loaded = true;
 
-      if (divider_char.isDigit())
+      if (divider_char == '0')
         divider->display_text = "0-9";
 
       divider_nodes_[divider_char] = divider;
@@ -170,6 +167,17 @@ LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
         endInsertRows();
     }
   }
+
+  return ret;
+}
+
+QChar Library::DividerChar(const QString& sort_text) const {
+  if (sort_text.isEmpty())
+    return QChar();
+
+  QChar ret = sort_text[0];
+  if (ret.isDigit())
+    return '0';
 
   return ret;
 }
@@ -280,29 +288,34 @@ void Library::SongsDeleted(const SongList& songs) {
 
         if (song.is_compilation())
           compilation_artist_node_ = NULL;
-        else {
+        else
           artist_nodes_.remove(song.artist());
 
-          // Delete now-empty dividers
-          QString sort_text(SortTextForArtist(song.artist()));
-          if (!sort_text.isEmpty() && divider_nodes_.contains(sort_text[0])) {
-            QChar c(sort_text[0]);
-            bool found = false;
-            foreach (LibraryItem* artist_node, artist_nodes_.values()) {
-              if (artist_node->sort_text.startsWith(c)) {
-                found = true;
-                break;
-              }
-            }
-
-            if (!found) {
-              root_->Delete(divider_nodes_[c]->row);
-              divider_nodes_.remove(c);
-            }
-          }
-        }
-
         endRemoveRows();
+      }
+    }
+  }
+
+  // Delete now-empty dividers
+  foreach (const Song& song, songs) {
+    QString sort_text(SortTextForArtist(song.artist()));
+    QChar divider_char(DividerChar(sort_text));
+    if (!divider_char.isNull() && !sort_text.isEmpty() &&
+        divider_nodes_.contains(divider_char)) {
+      bool found = false;
+      foreach (LibraryItem* artist_node, artist_nodes_.values()) {
+        if (artist_node->sort_text.startsWith(divider_char)) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        int row = divider_nodes_[divider_char]->row;
+        beginRemoveRows(ItemToIndex(root_), row, row);
+        root_->Delete(row);
+        endRemoveRows();
+        divider_nodes_.remove(divider_char);
       }
     }
   }

@@ -98,7 +98,7 @@ class LibraryBackend : public QObject {
   bool CheckErrors(const QSqlError& error);
 
   void UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
-                          SongList& updated_songs,
+                          SongList& deleted_songs, SongList& added_songs,
                           const QString& album, int sampler);
   AlbumList GetAlbums(const QString& artist, bool compilation = false,
                       const QueryOptions& opt = QueryOptions());

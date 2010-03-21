@@ -542,7 +542,8 @@ void LibraryBackend::UpdateCompilations() {
   QSqlQuery find_songs("SELECT ROWID, " + QString(Song::kColumnSpec) + " FROM songs"
                        " WHERE album = :album AND sampler = :sampler", db);
 
-  SongList updated_songs;
+  SongList deleted_songs;
+  SongList added_songs;
 
   db.transaction();
 
@@ -556,23 +557,23 @@ void LibraryBackend::UpdateCompilations() {
 
     if (info.artists.count() > info.directories.count()) {
       if (info.has_not_samplers)
-        UpdateCompilations(find_songs, update, updated_songs, album, 1);
+        UpdateCompilations(find_songs, update, deleted_songs, added_songs, album, 1);
     } else {
       if (info.has_samplers)
-        UpdateCompilations(find_songs, update, updated_songs, album, 0);
+        UpdateCompilations(find_songs, update, deleted_songs, added_songs, album, 0);
     }
   }
 
   db.commit();
 
-  if (!updated_songs.isEmpty()) {
-    emit SongsDeleted(updated_songs);
-    emit SongsDiscovered(updated_songs);
+  if (!deleted_songs.isEmpty()) {
+    emit SongsDeleted(deleted_songs);
+    emit SongsDiscovered(added_songs);
   }
 }
 
 void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
-                                        SongList& updated_songs,
+                                        SongList& deleted_songs, SongList& added_songs,
                                         const QString& album, int sampler) {
   // Get songs that were already in that album, so we can tell the model
   // they've been updated
@@ -582,8 +583,9 @@ void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update
   while (find_songs.next()) {
     Song song;
     song.InitFromQuery(find_songs);
+    deleted_songs << song;
     song.set_sampler(true);
-    updated_songs << song;
+    added_songs << song;
   }
 
   // Mark this album
@@ -710,7 +712,8 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
 
   // Update the songs
   QString sql("UPDATE songs SET forced_compilation_on = :forced_compilation_on,"
-              "                 forced_compilation_off = :forced_compilation_off"
+              "                 forced_compilation_off = :forced_compilation_off,"
+              "                 effective_compilation = ((compilation OR sampler OR :forced_compilation_on) AND NOT :forced_compilation_off) + 0"
               " WHERE album = :album");
   if (!artist.isEmpty())
     sql += " AND artist = :artist";
