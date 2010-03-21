@@ -22,7 +22,7 @@
 #include "xspfparser.h"
 #include "playlistsequence.h"
 
-#include "qxtglobalshortcut.h"
+#include "globalshortcuts/globalshortcuts.h"
 
 #include <QFileSystemModel>
 #include <QSortFilterProxyModel>
@@ -58,6 +58,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
+    global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog(this)),
     add_stream_dialog_(new AddStreamDialog(this)),
     cover_manager_(new AlbumCoverManager(network, this)),
@@ -253,17 +254,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(tray_icon_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(TrayClicked(QSystemTrayIcon::ActivationReason)));
 
   // Global shortcuts
-  // Breaks on OS X and Windows
-#ifdef Q_WS_X11
-  QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
-  QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
-  QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
-  QxtGlobalShortcut* prev = new QxtGlobalShortcut(QKeySequence("Media Previous"), this);
-  connect(play_pause, SIGNAL(activated()), ui_.action_play_pause, SLOT(trigger()));
-  connect(stop, SIGNAL(activated()), ui_.action_stop, SLOT(trigger()));
-  connect(next, SIGNAL(activated()), ui_.action_next_track, SLOT(trigger()));
-  connect(prev, SIGNAL(activated()), ui_.action_previous_track, SLOT(trigger()));
-#endif  // Q_WS_X11
+  connect(global_shortcuts_, SIGNAL(PlayPause()), ui_.action_play_pause, SLOT(trigger()));
+  connect(global_shortcuts_, SIGNAL(Stop()), ui_.action_stop, SLOT(trigger()));
+  connect(global_shortcuts_, SIGNAL(Next()), ui_.action_next_track, SLOT(trigger()));
+  connect(global_shortcuts_, SIGNAL(Previous()), ui_.action_previous_track, SLOT(trigger()));
 
   // Settings
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));

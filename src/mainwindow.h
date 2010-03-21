@@ -23,6 +23,7 @@ class About;
 class AddStreamDialog;
 class AlbumCoverManager;
 class PlaylistSequence;
+class GlobalShortcuts;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -105,6 +106,7 @@ class MainWindow : public QMainWindow {
   Playlist* playlist_;
   Player* player_;
   Library* library_;
+  GlobalShortcuts* global_shortcuts_;
 
   SettingsDialog* settings_dialog_;
   AddStreamDialog* add_stream_dialog_;

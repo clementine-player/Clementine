@@ -58,6 +58,7 @@ set(CLEMENTINE-SOURCES
     m3uparser.cpp
     playlistsequence.cpp
     xspfparser.cpp
+    globalshortcuts/globalshortcuts.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -113,6 +114,7 @@ set(CLEMENTINE-MOC-HEADERS
     analyzers/boomanalyzer.h
     analyzers/sonogram.h
     analyzers/turbine.h
+    globalshortcuts/globalshortcuts.h
 )
 
 # UI files
