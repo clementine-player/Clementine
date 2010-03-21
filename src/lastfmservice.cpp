@@ -273,7 +273,9 @@ void LastFMService::LoadNext(const QUrl &) {
     return;
   }
 
-  lastfm::Track track = playlist_.dequeue();
+  lastfm::MutableTrack track = playlist_.dequeue();
+  track.stamp();
+
   last_track_ = track;
   if (playlist_.empty()) {
     FetchMoreTracks();
@@ -385,8 +387,9 @@ void LastFMService::NowPlaying(const Song &song) {
 
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.stamp();
+  last_track_ = mtrack;
 
-  scrobbler_->nowPlaying(last_track_);
+  scrobbler_->nowPlaying(mtrack);
 }
 
 void LastFMService::Scrobble() {
@@ -403,11 +406,13 @@ void LastFMService::Love() {
 
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.love();
+  last_track_ = mtrack;
 }
 
 void LastFMService::Ban() {
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.ban();
+  last_track_ = mtrack;
 
   Scrobble();
   LoadNext(last_url_);
