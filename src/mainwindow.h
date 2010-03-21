@@ -21,7 +21,6 @@ class MultiLoadingIndicator;
 class SettingsDialog;
 class About;
 class AddStreamDialog;
-class ShortcutsDialog;
 class AlbumCoverManager;
 class PlaylistSequence;
 
@@ -109,7 +108,6 @@ class MainWindow : public QMainWindow {
 
   SettingsDialog* settings_dialog_;
   AddStreamDialog* add_stream_dialog_;
-  ShortcutsDialog* shortcuts_dialog_;
   AlbumCoverManager* cover_manager_;
 
   QMenu* playlist_menu_;

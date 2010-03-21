@@ -13,7 +13,6 @@
 #include "edittagdialog.h"
 #include "multiloadingindicator.h"
 #include "settingsdialog.h"
-#include "shortcutsdialog.h"
 #include "libraryconfigdialog.h"
 #include "about.h"
 #include "addstreamdialog.h"
@@ -61,7 +60,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     library_(new Library(player_->GetEngine(), this)),
     settings_dialog_(new SettingsDialog(this)),
     add_stream_dialog_(new AddStreamDialog(this)),
-    shortcuts_dialog_(new ShortcutsDialog(this)),
     cover_manager_(new AlbumCoverManager(network, this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
@@ -122,7 +120,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
   connect(ui_.action_hide_tray_icon, SIGNAL(triggered()), SLOT(HideShowTrayIcon()));
-  connect(ui_.action_global_shortcuts, SIGNAL(triggered()), shortcuts_dialog_, SLOT(show()));
   connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_, SLOT(show()));
 
   // Give actions to buttons

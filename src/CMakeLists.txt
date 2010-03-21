@@ -50,7 +50,6 @@ set(CLEMENTINE-SOURCES
     addstreamdialog.cpp
     savedradio.cpp
     stylesheetloader.cpp
-    shortcutsdialog.cpp
     albumcovermanager.cpp
     albumcoverloader.cpp
     m3uparser.cpp
@@ -99,7 +98,6 @@ set(CLEMENTINE-MOC-HEADERS
     albumcoverfetcher.h
     addstreamdialog.h
     savedradio.h
-    shortcutsdialog.h
     albumcovermanager.h
     albumcoverloader.h
     m3uparser.h
@@ -126,7 +124,6 @@ set(CLEMENTINE-UI
     lastfmconfigdialog.ui
     about.ui
     addstreamdialog.ui
-    shortcutsdialog.ui
     albumcovermanager.ui
     playlistsequence.ui
 )
