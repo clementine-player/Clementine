@@ -111,6 +111,16 @@ p, li { white-space: pre-wrap; }
         <source>No analyzer</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="analyzers/baranalyzer.cpp" line="19"/>
+        <source>Bar analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="analyzers/blockanalyzer.cpp" line="24"/>
+        <source>Block analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverManager</name>

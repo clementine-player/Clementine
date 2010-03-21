@@ -16,7 +16,7 @@
 #include <QtDebug>
 #include <QPainter>
 
-const char* BarAnalyzer::kName = QT_TR_NOOP("Bar analyzer");
+const char* BarAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Bar analyzer");
 
 
 BarAnalyzer::BarAnalyzer( QWidget *parent )

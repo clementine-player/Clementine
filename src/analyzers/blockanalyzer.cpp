@@ -21,7 +21,7 @@ const uint BlockAnalyzer::MIN_COLUMNS = 32;  //arbituary
 const uint BlockAnalyzer::MAX_COLUMNS = 256; //must be 2**n
 const uint BlockAnalyzer::FADE_SIZE   = 90;
 
-const char* BlockAnalyzer::kName = QT_TR_NOOP("Block analyzer");
+const char* BlockAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Block analyzer");
 
 BlockAnalyzer::BlockAnalyzer( QWidget *parent )
         : Analyzer::Base( parent, 20, 9 )
