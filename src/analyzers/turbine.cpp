@@ -10,14 +10,12 @@
 #include <cmath>
 #include <qpainter.h>
 
-#include "amarok.h"
 #include "turbine.h"
 
-void TurbineAnalyzer::analyze( const Scope &scope )
-{
-    eraseCanvas();
+const char* TurbineAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Turbine");
 
-    QPainter p( canvas() );
+void TurbineAnalyzer::analyze( QPainter& p, const Scope &scope )
+{
     float h;
     const uint hd2 = height() / 2;
     const uint MAX_HEIGHT = hd2 - 1;
@@ -62,14 +60,15 @@ void TurbineAnalyzer::analyze( const Scope &scope )
 
 
         y = hd2 - uint(bar_height[i]);
-        bitBlt( canvas(), x+1, y,   &barPixmap, 0, y );
-        bitBlt( canvas(), x+1, hd2, &barPixmap, 0, (int)bar_height[i] );
+        p.drawPixmap(x+1, y, barPixmap, 0, y, -1, -1);
+        p.drawPixmap(x+1, hd2, barPixmap, 0, int(bar_height[i]), -1, -1);
 
-        p.setPen( Amarok::ColorScheme::Foreground );
-        p.drawRect( x, y, COLUMN_WIDTH, (int)bar_height[i]*2 );
+        p.setPen( palette().color(QPalette::Highlight) );
+        if (bar_height[i] > 0)
+          p.drawRect( x, y, COLUMN_WIDTH-1, (int)bar_height[i]*2 -1 );
 
         const uint x2 = x+COLUMN_WIDTH-1;
-        p.setPen( Amarok::ColorScheme::Text );
+        p.setPen( palette().color(QPalette::Base) );
         y = hd2 - uint(peak_height[i]);
         p.drawLine( x, y, x2, y );
         y = hd2 + uint(peak_height[i]);

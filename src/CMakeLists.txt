@@ -14,6 +14,9 @@ set(CLEMENTINE-SOURCES
     fht.cpp
     analyzers/blockanalyzer.cpp
     analyzers/analyzercontainer.cpp
+    analyzers/boomanalyzer.cpp
+    analyzers/sonogram.cpp
+    analyzers/turbine.cpp
     sliderwidget.cpp
     playlistview.cpp
     librarywatcher.cpp
@@ -107,6 +110,9 @@ set(CLEMENTINE-MOC-HEADERS
     analyzers/baranalyzer.h
     analyzers/blockanalyzer.h
     analyzers/analyzerbase.h
+    analyzers/boomanalyzer.h
+    analyzers/sonogram.h
+    analyzers/turbine.h
 )
 
 # UI files

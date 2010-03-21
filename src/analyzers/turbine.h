@@ -13,10 +13,13 @@
 
 class TurbineAnalyzer : public BoomAnalyzer
 {
+  Q_OBJECT
     public:
-        TurbineAnalyzer( QWidget *parent ) : BoomAnalyzer( parent ) {}
+        Q_INVOKABLE TurbineAnalyzer( QWidget *parent ) : BoomAnalyzer( parent ) {}
 
-        void analyze( const Scope& );
+        void analyze( QPainter& p, const Scope& );
+
+        static const char* kName;
 };
 
 #endif

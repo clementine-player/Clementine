@@ -1,7 +1,6 @@
 // Author: Max Howell <max.howell@methylblue.com>, (C) 2004
 // Copyright: See COPYING file that comes with this distribution
 
-#include "amarok.h"
 #include "boomanalyzer.h"
 #include <cmath>
 #include <qlabel.h>
@@ -10,8 +9,10 @@
 #include <qslider.h>
 #include <qspinbox.h>
 
+const char* BoomAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
+
 BoomAnalyzer::BoomAnalyzer( QWidget *parent )
-    : Analyzer::Base2D( parent, 10, 9 )
+    : Analyzer::Base( parent, 10, 9 )
     , K_barHeight( 1.271 )//1.471
     , F_peakSpeed( 1.103 )//1.122
     , F( 1.0 )
@@ -20,29 +21,7 @@ BoomAnalyzer::BoomAnalyzer( QWidget *parent )
     , peak_speed( BAND_COUNT, 0.01 )
     , barPixmap( COLUMN_WIDTH, 50 )
 {
-    QWidget *o, *box = new QWidget( this, 0, WType_TopLevel );
-    QSpinBox *m;
-    int v;
-
-    (new QGridLayout( box, 2, 3 ))->setAutoAdd( true );
-
-    v = int(K_barHeight*1000);
-    new QLabel( "Bar fall-rate:", box );
-    o = new QSlider( 100, 2000, 100, v, Qt::Horizontal, box );
-   (m = new QSpinBox( 100, 2000, 1, box ))->setValue( v );
-    connect( o, SIGNAL(valueChanged(int)), SLOT(changeK_barHeight( int )) );
-    connect( o, SIGNAL(valueChanged(int)), m, SLOT(setValue( int )) );
-
-    v = int(F_peakSpeed*1000);
-    new QLabel( "Peak acceleration: ", box );
-    o = new QSlider( 1000, 1300, 50, v, Qt::Horizontal, box );
-   (m = new QSpinBox( 1000, 1300, 1, box ))->setValue( v );
-    connect( o, SIGNAL(valueChanged(int)), SLOT(changeF_peakSpeed( int )) );
-    connect( o, SIGNAL(valueChanged(int)), m, SLOT(setValue( int )) );
-
-    //box->show();
 }
-
 
 void
 BoomAnalyzer::changeK_barHeight( int newValue )
@@ -56,6 +35,10 @@ BoomAnalyzer::changeF_peakSpeed( int newValue )
     F_peakSpeed = (double)newValue / 1000;
 }
 
+void BoomAnalyzer::resizeEvent(QResizeEvent *) {
+  init();
+}
+
 void
 BoomAnalyzer::init()
 {
@@ -64,7 +47,7 @@ BoomAnalyzer::init()
 
     F = double(HEIGHT) / (log10( 256 ) * 1.1 /*<- max. amplitude*/);
 
-    barPixmap.resize( COLUMN_WIDTH-2, HEIGHT );
+    barPixmap = QPixmap( COLUMN_WIDTH-2, HEIGHT );
 
     QPainter p( &barPixmap );
     for( uint y = 0; y < HEIGHT; ++y )
@@ -97,11 +80,8 @@ BoomAnalyzer::transform( Scope &s )
 }
 
 void
-BoomAnalyzer::analyze( const Scope &scope )
+BoomAnalyzer::analyze( QPainter& p, const Scope& scope )
 {
-    eraseCanvas();
-
-    QPainter p( canvas() );
     float h;
     const uint MAX_HEIGHT = height() - 1;
 
@@ -144,14 +124,13 @@ BoomAnalyzer::analyze( const Scope &scope )
         }
 
         y = height() - uint(bar_height[i]);
-        bitBlt( canvas(), x+1, y, &barPixmap, 0, y );
-        p.setPen( Amarok::ColorScheme::Foreground );
-        p.drawRect( x, y, COLUMN_WIDTH, height() - y );
+        p.drawPixmap(x+1, y, barPixmap, 0, y, -1, -1);
+        p.setPen( palette().color(QPalette::Highlight) );
+        if (bar_height[i] > 0)
+          p.drawRect( x, y, COLUMN_WIDTH - 1, height() - y - 1 );
 
         y = height() - uint(peak_height[i]);
-        p.setPen( Amarok::ColorScheme::Text );
+        p.setPen( palette().color(QPalette::Base) );
         p.drawLine( x, y, x+COLUMN_WIDTH-1, y );
     }
 }
-
-#include "boomanalyzer.moc"

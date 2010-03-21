@@ -1,10 +1,14 @@
 #include "analyzercontainer.h"
 #include "baranalyzer.h"
 #include "blockanalyzer.h"
+#include "boomanalyzer.h"
+#include "sonogram.h"
+#include "turbine.h"
 
 #include <QMouseEvent>
 #include <QHBoxLayout>
 #include <QSettings>
+#include <QtDebug>
 
 const char* AnalyzerContainer::kSettingsGroup = "Analyzer";
 
@@ -22,6 +26,9 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
 
   AddAnalyzerType<BarAnalyzer>();
   AddAnalyzerType<BlockAnalyzer>();
+  AddAnalyzerType<BoomAnalyzer>();
+  AddAnalyzerType<Sonogram>();
+  AddAnalyzerType<TurbineAnalyzer>();
   connect(mapper_, SIGNAL(mapped(int)), SLOT(ChangeAnalyzer(int)));
 
   context_menu_->addSeparator();
@@ -53,9 +60,15 @@ void AnalyzerContainer::DisableAnalyzer() {
 }
 
 void AnalyzerContainer::ChangeAnalyzer(int id) {
+  QObject* instance = analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
+
+  if (!instance) {
+    qWarning() << "Couldn't intialise a new" << analyzer_types_[id]->className();
+    return;
+  }
+
   delete current_analyzer_;
-  current_analyzer_ = qobject_cast<Analyzer::Base*>(
-      analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this)));
+  current_analyzer_ = qobject_cast<Analyzer::Base*>(instance);
   current_analyzer_->set_engine(engine_);
 
   layout()->addWidget(current_analyzer_);

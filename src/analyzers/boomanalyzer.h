@@ -11,21 +11,25 @@
 @author Max Howell
 */
 
-class BoomAnalyzer : public Analyzer::Base2D
+class BoomAnalyzer : public Analyzer::Base
 {
 Q_OBJECT
 public:
-    BoomAnalyzer( QWidget* );
+    Q_INVOKABLE BoomAnalyzer( QWidget* );
+
+    static const char* kName;
 
     virtual void init();
     virtual void transform( Scope &s );
-    virtual void analyze( const Scope& );
+    virtual void analyze( QPainter& p, const Scope& );
 
 public slots:
     void changeK_barHeight( int );
     void changeF_peakSpeed( int );
 
 protected:
+    void resizeEvent( QResizeEvent * e);
+
     static const uint COLUMN_WIDTH = 4;
     static const uint BAND_COUNT = 32;
 
@@ -37,16 +41,5 @@ protected:
 
     QPixmap barPixmap;
 };
-
-namespace Amarok
-{
-    namespace ColorScheme
-    {
-        extern QColor Base;
-        extern QColor Text;
-        extern QColor Background;
-        extern QColor Foreground;
-    }
-}
 
 #endif

@@ -14,8 +14,10 @@
 #include <qpainter.h>
 #include "sonogram.h"
 
+const char* Sonogram::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Sonogram");
+
 Sonogram::Sonogram(QWidget *parent) :
-    Analyzer::Base2D(parent, 16, 9)
+    Analyzer::Base(parent, 16, 9)
 {
 }
 
@@ -25,40 +27,32 @@ Sonogram::~Sonogram()
 }
 
 
-void Sonogram::init()
-{
-    eraseCanvas();
-}
-
-
 void Sonogram::resizeEvent(QResizeEvent *e)
 {
     QWidget::resizeEvent(e);
-    canvas()->resize(size());
-    background()->resize(size());
 
 //only for gcc < 4.0
 #if !( __GNUC__ > 4 || ( __GNUC__ == 4 && __GNUC_MINOR__ >= 0 ) )
     resizeForBands(height() < 128 ? 128 : height());
 #endif
 
-    background()->fill(backgroundColor());
-    bitBlt(canvas(), 0, 0, background());
-    bitBlt(this, 0, 0, background());
+    canvas_ = QPixmap(size());
+    canvas_.fill(palette().color(QPalette::Background));
 }
 
 
-void Sonogram::analyze(const Scope &s)
+void Sonogram::analyze(QPainter& p, const Scope &s)
 {
     int x = width() - 1;
     QColor c;
-    QPainter p(canvas());
 
-    bitBlt(canvas(), 0, 0, canvas(), 1, 0, x, height());
+    QPainter canvas_painter(&canvas_);
+    canvas_painter.drawPixmap(0, 0, canvas_, 1, 0, x, -1);
+
     Scope::const_iterator it = s.begin(), end = s.end();
     for (int y = height() - 1; y;) {
         if (it >= end || *it < .005)
-            c = backgroundColor();
+            c = palette().color(QPalette::Background);
         else if (*it < .05)
             c.setHsv(95, 255, 255 - int(*it * 4000.0));
         else if (*it < 1.0)
@@ -66,12 +60,16 @@ void Sonogram::analyze(const Scope &s)
         else
             c = Qt::red;
 
-        p.setPen(c);
-        p.drawPoint(x, y--);
+        canvas_painter.setPen(c);
+        canvas_painter.drawPoint(x, y--);
 
         if (it < end)
             ++it;
     }
+
+    canvas_painter.end();
+
+    p.drawPixmap(0, 0, canvas_);
 }
 
 
@@ -84,8 +82,8 @@ void Sonogram::transform(Scope &scope)
 }
 
 
-void Sonogram::demo()
+void Sonogram::demo(QPainter& p)
 {
-    analyze(Scope(m_fht->size(), 0));
+    analyze(p, Scope(m_fht->size(), 0));
 }
 
