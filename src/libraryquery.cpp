@@ -41,12 +41,7 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value) {
 }
 
 void LibraryQuery::AddCompilationRequirement(bool compilation) {
-  if (compilation)
-    where_clauses_ << "((compilation = 1 OR sampler = 1 OR forced_compilation_on = 1)"
-                      " AND forced_compilation_off = 0)";
-  else
-    where_clauses_ << "((compilation = 0 AND sampler = 0 AND forced_compilation_on = 0)"
-                      " OR forced_compilation_off = 1)";
+  where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
 }
 
 QSqlQuery LibraryQuery::Query(QSqlDatabase db) const {

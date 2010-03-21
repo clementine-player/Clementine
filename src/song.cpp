@@ -40,7 +40,7 @@ const char* Song::kColumnSpec =
     "length, bitrate, samplerate, directory, filename, "
     "mtime, ctime, filesize, sampler, art_automatic, art_manual, "
     "filetype, playcount, lastplayed, rating, forced_compilation_on, "
-    "forced_compilation_off";
+    "forced_compilation_off, effective_compilation";
 
 const char* Song::kBindSpec =
     ":title, :album, :artist, :albumartist, :composer, "
@@ -48,7 +48,7 @@ const char* Song::kBindSpec =
     ":length, :bitrate, :samplerate, :directory_id, :filename, "
     ":mtime, :ctime, :filesize, :sampler, :art_automatic, :art_manual, "
     ":filetype, :playcount, :lastplayed, :rating, :forced_compilation_on, "
-    ":forced_compilation_off";
+    ":forced_compilation_off, :effective_compilation";
 
 const char* Song::kUpdateSpec =
     "title = :title, album = :album, artist = :artist, "
@@ -61,7 +61,8 @@ const char* Song::kUpdateSpec =
     "art_automatic = :art_automatic, art_manual = :art_manual, "
     "filetype = :filetype, playcount = :playcount, lastplayed = :lastplayed, "
     "rating = :rating, forced_compilation_on = :forced_compilation_on, "
-    "forced_compilation_off = :forced_compilation_off";
+    "forced_compilation_off = :forced_compilation_off, "
+    "effective_compilation = :effective_compilation";
 
 TagLibFileRefFactory Song::kDefaultFactory;
 
@@ -302,6 +303,8 @@ void Song::InitFromQuery(const QSqlQuery& q) {
   d->forced_compilation_on_ = q.value(28).toBool();
   d->forced_compilation_off_ = q.value(29).toBool();
 
+  // effective_compilation = 30
+
   #undef tostr
   #undef toint
   #undef tofloat
@@ -372,6 +375,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
 
   query->bindValue(":forced_compilation_on", d->forced_compilation_on_ ? 1 : 0);
   query->bindValue(":forced_compilation_off", d->forced_compilation_off_ ? 1 : 0);
+
+  query->bindValue(":effective_compilation", is_compilation() ? 1 : 0);
 
   #undef intval
 }

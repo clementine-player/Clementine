@@ -16,7 +16,7 @@
 
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
-const int LibraryBackend::kSchemaVersion = 4;
+const int LibraryBackend::kSchemaVersion = 5;
 
 void (*LibraryBackend::_sqlite3_create_function) (
     sqlite3*, const char*, int, int, void*,
@@ -535,7 +535,10 @@ void LibraryBackend::UpdateCompilations() {
   }
 
   // Now mark the songs that we think are in compilations
-  QSqlQuery update("UPDATE songs SET sampler = :sampler WHERE album = :album", db);
+  QSqlQuery update("UPDATE songs"
+                   " SET sampler = :sampler,"
+                   "     effective_compilation = ((compilation OR :sampler OR forced_compilation_on) AND NOT forced_compilation_off) + 0"
+                   " WHERE album = :album", db);
   QSqlQuery find_songs("SELECT ROWID, " + QString(Song::kColumnSpec) + " FROM songs"
                        " WHERE album = :album AND sampler = :sampler", db);
 
@@ -629,6 +632,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     last_album = info.album_name;
     last_artist = info.artist;
   }
+
   return ret;
 }
 
