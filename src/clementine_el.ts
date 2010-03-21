@@ -103,6 +103,17 @@ p, li { white-space: pre-wrap; }
         <source>Choose manual cover</source>
         <translation>Επιλογή εξώφυλλου χειροκίνητα</translation>
     </message>
+    <message>
+        <source>Various artists</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AnalyzerContainer</name>
+    <message>
+        <source>No analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverManager</name>
@@ -537,6 +548,14 @@ p, li { white-space: pre-wrap; }
         <source>Click here to add some music</source>
         <translation>Κλικ εδώ για την προσθήκη μουσικής</translation>
     </message>
+    <message>
+        <source>Show in various artists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show in various artists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -698,7 +717,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New playlist</source>
-        <translation>Νέα λίστα</translation>
+        <translation type="obsolete">Νέα λίστα</translation>
+    </message>
+    <message>
+        <source>Shuffle mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -817,6 +844,10 @@ p, li { white-space: pre-wrap; }
         <source>Date created</source>
         <translation>Ημερομηνία δημιουργίας</translation>
     </message>
+    <message>
+        <source>File name (without path)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlaylistHeader</name>
@@ -837,7 +868,7 @@ p, li { white-space: pre-wrap; }
     <name>PlaylistManager</name>
     <message>
         <source>New playlist</source>
-        <translation>Νέα λίστα</translation>
+        <translation type="obsolete">Νέα λίστα</translation>
     </message>
 </context>
 <context>
@@ -980,51 +1011,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play</source>
-        <translation>Αναπαραγωγή</translation>
+        <translation type="obsolete">Αναπαραγωγή</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation>Παύση</translation>
+        <translation type="obsolete">Παύση</translation>
     </message>
     <message>
         <source>Play/Pause</source>
-        <translation>Αναπαραγωγή/Παύση</translation>
+        <translation type="obsolete">Αναπαραγωγή/Παύση</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Σταμάτημα</translation>
+        <translation type="obsolete">Σταμάτημα</translation>
     </message>
     <message>
         <source>Stop Playing After Current Track</source>
-        <translation>Σταμάτημα μετά από αυτό το κομμάτι</translation>
+        <translation type="obsolete">Σταμάτημα μετά από αυτό το κομμάτι</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation>Επόμενο κομμάτι</translation>
+        <translation type="obsolete">Επόμενο κομμάτι</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation>Προηγούμενο κομμάτι</translation>
+        <translation type="obsolete">Προηγούμενο κομμάτι</translation>
     </message>
     <message>
         <source>Increase Volume</source>
-        <translation>Αύξηση ήχου</translation>
+        <translation type="obsolete">Αύξηση ήχου</translation>
     </message>
     <message>
         <source>Decrease Volume</source>
-        <translation>Μείωση ήχου</translation>
+        <translation type="obsolete">Μείωση ήχου</translation>
     </message>
     <message>
         <source>Mute Volume</source>
-        <translation>Σίγαση</translation>
+        <translation type="obsolete">Σίγαση</translation>
     </message>
     <message>
         <source>Seek Forwards</source>
-        <translation>Αναζήτηση εμπρός</translation>
+        <translation type="obsolete">Αναζήτηση εμπρός</translation>
     </message>
     <message>
         <source>Seek Backwards</source>
-        <translation>Αναζήτηση πίσω</translation>
+        <translation type="obsolete">Αναζήτηση πίσω</translation>
     </message>
     <message>
         <source>Shortcut</source>
@@ -1036,7 +1067,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Defaults</source>
-        <translation>&amp;Προεπιλογή</translation>
+        <translation type="obsolete">&amp;Προεπιλογή</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
@@ -1056,11 +1087,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Non&amp;e</source>
-        <translation>Καμ&amp;ία</translation>
+        <translation type="obsolete">Καμ&amp;ία</translation>
     </message>
     <message>
         <source>Default key:</source>
-        <translation>Προεπιλεγμένο κλειδί:</translation>
+        <translation type="obsolete">Προεπιλεγμένο κλειδί:</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default: None</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

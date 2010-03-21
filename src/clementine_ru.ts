@@ -85,6 +85,17 @@ p, li { white-space: pre-wrap; }
         <source>Choose manual cover</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Various artists</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AnalyzerContainer</name>
+    <message>
+        <source>No analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverManager</name>
@@ -515,6 +526,14 @@ p, li { white-space: pre-wrap; }
         <source>Click here to add some music</source>
         <translation>Щелкните здесь, что бы добавить музыку</translation>
     </message>
+    <message>
+        <source>Show in various artists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show in various artists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -675,7 +694,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New playlist</source>
+        <source>Shuffle mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat mode</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -795,6 +818,10 @@ p, li { white-space: pre-wrap; }
         <source>Date created</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>File name (without path)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlaylistHeader</name>
@@ -809,13 +836,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Hide %1</source>
         <translation>Скрыть %1</translation>
-    </message>
-</context>
-<context>
-    <name>PlaylistManager</name>
-    <message>
-        <source>New playlist</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -958,51 +978,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished">Воспроизвести</translation>
+        <translation type="obsolete">Воспроизвести</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished">Пауза</translation>
-    </message>
-    <message>
-        <source>Play/Pause</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Пауза</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished">Стоп</translation>
-    </message>
-    <message>
-        <source>Stop Playing After Current Track</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next Track</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Previous Track</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Increase Volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decrease Volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mute Volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seek Forwards</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seek Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Стоп</translation>
     </message>
     <message>
         <source>Shortcut</source>
@@ -1010,10 +994,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Alternate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1033,11 +1013,19 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Non&amp;e</source>
+        <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default key:</source>
+        <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default: None</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
