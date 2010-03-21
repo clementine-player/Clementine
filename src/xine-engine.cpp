@@ -29,6 +29,7 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QLocale>
+#include <QTimer>
 
 extern "C"
 {
@@ -69,6 +70,7 @@ XineEngine::XineEngine()
     , m_stopFader( false )
     , m_fadeOutRunning ( false )
     , m_equalizerEnabled( false )
+    , prune_(NULL)
 {
   m_settings.beginGroup(kSettingsGroup);
   reloadSettings();
@@ -83,8 +85,15 @@ XineEngine::~XineEngine()
     s_fader->wait();
   }
 
+  // Wait until the prune scope thread is done
+  if (prune_) {
+    prune_->exit();
+    prune_->wait();
+  }
+
   delete s_fader;
   delete s_outfader;
+  delete prune_;
 
   if( m_fadeoutOnExit ) {
     bool terminateFader = false;
@@ -149,7 +158,8 @@ XineEngine::init()
   makeNewStream();
 
 #ifndef XINE_SAFE_MODE
-  startTimer( 200 ); //prunes the scope
+  prune_ = new PruneScopeThread(this);
+  prune_->start();
 #endif
 
   return true;
@@ -250,7 +260,7 @@ XineEngine::load( const QUrl &url, bool isStream )
 
 #ifndef XINE_SAFE_MODE
     //we must ensure the scope is pruned of old buffers
-    timerEvent( 0 );
+    PruneScope();
 
     xine_post_out_t *source = xine_get_audio_source( m_stream );
     xine_post_in_t  *target = (xine_post_in_t*)xine_post_input( m_post, const_cast<char*>("audio in") );
@@ -683,7 +693,7 @@ XineEngine::scope()
     return m_scope;
 
   //prune the buffer list and update m_currentVpts
-  timerEvent( 0 );
+  PruneScope();
 
   for( int n, frame = 0; frame < 512; )
   {
@@ -737,7 +747,7 @@ XineEngine::scope()
 }
 
 void
-XineEngine::timerEvent( QTimerEvent* )
+XineEngine::PruneScope()
 {
   if ( !m_stream )
     return;
@@ -1289,4 +1299,19 @@ void
 OutFader::finish()
 {
   m_terminated = true;
+}
+
+PruneScopeThread::PruneScopeThread(XineEngine *parent)
+  : engine_(parent)
+{
+}
+
+void PruneScopeThread::run() {
+  QTimer* timer = new QTimer;
+  connect(timer, SIGNAL(timeout()), engine_, SLOT(PruneScope()), Qt::DirectConnection);
+  timer->start(1000);
+
+  exec();
+
+  delete timer;
 }

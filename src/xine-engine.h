@@ -45,12 +45,15 @@ private:
   void* data_;
 };
 
+class PruneScopeThread;
+
 class XineEngine : public Engine::Base
 {
     Q_OBJECT
 
     friend class Fader;
     friend class OutFader;
+    friend class PruneScopeThread;
 
    ~XineEngine();
 
@@ -79,7 +82,6 @@ class XineEngine : public Engine::Base
 
     static  void XineEventListener( void*, const xine_event_t* );
     virtual bool event( QEvent* );
-    virtual void timerEvent( QTimerEvent* );
 
     virtual void playlistChanged();
     virtual void reloadSettings();
@@ -119,10 +121,15 @@ class XineEngine : public Engine::Base
     bool m_crossfadeEnabled;
     int m_fadeoutDuration;
 
+    PruneScopeThread* prune_;
+
     mutable Engine::SimpleMetaBundle m_currentBundle;
 
 public:
     XineEngine();
+
+  private slots:
+    void PruneScope();
 
 signals:
     void resetConfig(xine_t *xine);
@@ -163,6 +170,17 @@ public:
     ~OutFader();
 
    void finish();
+};
+
+class PruneScopeThread : public QThread {
+public:
+  PruneScopeThread(XineEngine* parent);
+
+protected:
+  virtual void run();
+
+private:
+  XineEngine* engine_;
 };
 
 #endif
