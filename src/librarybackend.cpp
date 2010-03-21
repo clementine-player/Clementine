@@ -11,28 +11,74 @@
 #include <QSqlQuery>
 #include <QCoreApplication>
 #include <QThread>
+#include <QLibrary>
+#include <QLibraryInfo>
 
-#include <sqlite3.h>
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
 const int LibraryBackend::kSchemaVersion = 4;
 
+void (*LibraryBackend::_sqlite3_create_function) (
+    sqlite3*, const char*, int, int, void*,
+    void (*) (sqlite3_context*, int, sqlite3_value**),
+    void (*) (sqlite3_context*, int, sqlite3_value**),
+    void (*) (sqlite3_context*)) = NULL;
+int (*LibraryBackend::_sqlite3_value_type) (sqlite3_value*) = NULL;
+sqlite3_int64 (*LibraryBackend::_sqlite3_value_int64) (sqlite3_value*) = NULL;
+uchar* (*LibraryBackend::_sqlite3_value_text) (sqlite3_value*) = NULL;
+void (*LibraryBackend::_sqlite3_result_int64) (sqlite3_context*, int) = NULL;
+
+
+bool LibraryBackend::StaticInit() {
+  if (_sqlite3_create_function) {
+    return true;
+  }
+
+  QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
+      "/sqldrivers/libqsqlite";
+  QLibrary library(plugin_path);
+  if (!library.load()) {
+    qDebug() << "QLibrary::load() failed for " << plugin_path;
+    return false;
+  }
+
+  _sqlite3_create_function = reinterpret_cast<Sqlite3CreateFunc>(
+      library.resolve("sqlite3_create_function"));
+  _sqlite3_value_type = reinterpret_cast<int (*) (sqlite3_value*)>(
+      library.resolve("sqlite3_value_type"));
+  _sqlite3_value_int64 = reinterpret_cast<sqlite3_int64 (*) (sqlite3_value*)>(
+      library.resolve("sqlite3_value_int64"));
+  _sqlite3_value_text = reinterpret_cast<uchar* (*) (sqlite3_value*)>(
+      library.resolve("sqlite3_value_text"));
+  _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, int)>(
+      library.resolve("sqlite3_result_int64"));
+
+  if (_sqlite3_create_function &&
+      _sqlite3_value_type &&
+      _sqlite3_value_int64 &&
+      _sqlite3_value_text &&
+      _sqlite3_result_int64) {
+    return true;
+  }
+  return false;
+}
+
 // Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
-void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
+void LibraryBackend::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
   Q_ASSERT(argc == 2 || argc == 3);
-  Q_ASSERT(sqlite3_value_type(argv[0]) == sqlite3_value_type(argv[1]));
-  switch (sqlite3_value_type(argv[0])) {
+  Q_ASSERT(_sqlite3_value_type(argv[0]) == _sqlite3_value_type(argv[1]));
+  switch (_sqlite3_value_type(argv[0])) {
     case SQLITE_INTEGER: {
-      qint64 result = sqlite3_value_int64(argv[0]) - sqlite3_value_int64(argv[1]);
-      sqlite3_result_int64(context, result ? 0 : 1);
+      qint64 result = _sqlite3_value_int64(argv[0]) - _sqlite3_value_int64(argv[1]);
+      _sqlite3_result_int64(context, result ? 0 : 1);
       break;
     }
     case SQLITE_TEXT: {
-      const uchar* data_a = sqlite3_value_text(argv[0]);
-      const uchar* data_b = sqlite3_value_text(argv[1]);
+      const uchar* data_a = _sqlite3_value_text(argv[0]);
+      const uchar* data_b = _sqlite3_value_text(argv[1]);
       QString a = QString::fromUtf8(reinterpret_cast<const char*>(data_a)).section('%', 1, 1);
       QString b = QString::fromUtf8(reinterpret_cast<const char*>(data_b));
-      sqlite3_result_int64(context, b.contains(a, Qt::CaseInsensitive) ? 1 : 0);
+      _sqlite3_result_int64(context, b.contains(a, Qt::CaseInsensitive) ? 1 : 0);
       break;
     }
   }
@@ -84,18 +130,25 @@ QSqlDatabase LibraryBackend::Connect() {
     emit Error("LibraryBackend: " + db.lastError().text());
     return db;
   }
+
+  // Find Sqlite3 functions in the Qt plugin.
+  if (!StaticInit()) {
+    emit Error("LibraryBackend: StaticInit() failed.");
+    return db;
+  }
+
   // We want Unicode aware LIKE clauses.
   QVariant v = db.driver()->handle();
   if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
     sqlite3* handle = *static_cast<sqlite3**>(v.data());
     if (handle) {
-      sqlite3_create_function(
+      _sqlite3_create_function(
           handle,       // Sqlite3 handle.
           "LIKE",       // Function name (either override or new).
           2,            // Number of args.
           SQLITE_ANY,   // What types this function accepts.
           NULL,         // Custom data available via sqlite3_user_data().
-          &SqliteLike,  // Our function :-)
+          &LibraryBackend::SqliteLike,  // Our function :-)
           NULL, NULL);
     }
   }

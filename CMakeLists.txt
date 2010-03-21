@@ -23,7 +23,7 @@ endif(WIN32)
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 
-find_library(SQLITE3_LIBRARIES sqlite3)
+find_path(SQLITE3_INCLUDE_DIRS "sqlite3.h")
 
 if(WIN32)
   find_library(TAGLIB_LIBRARIES tag)
@@ -66,6 +66,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${XINE_INCLUDE_DIRS})
 include_directories(${LASTFM_INCLUDE_DIRS})
+include_directories(${SQLITE3_INCLUDE_DIRS})
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
