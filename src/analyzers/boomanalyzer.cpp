@@ -54,7 +54,10 @@ BoomAnalyzer::init()
     {
         const double F = (double)y * h;
 
-        p.setPen( QColor( 255 - int(229.0 * F), 255 - int(229.0 * F), 255 - int(191.0 * F) ) );
+        p.setPen(QColor(
+            qMax(0, 255 - int(229.0 * F)),
+            qMax(0, 255 - int(229.0 * F)),
+            qMax(0, 255 - int(191.0 * F))));
         p.drawLine( 0, y, COLUMN_WIDTH-2, y );
     }
 }
