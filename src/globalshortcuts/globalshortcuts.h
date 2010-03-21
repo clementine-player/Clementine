@@ -3,8 +3,6 @@
 
 #include <QObject>
 
-class QDBusInterface;
-
 class GlobalShortcuts : public QObject {
   Q_OBJECT
 

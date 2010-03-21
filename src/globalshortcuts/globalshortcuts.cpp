@@ -1,7 +1,9 @@
 #include "globalshortcuts.h"
 #include "qxtglobalshortcut.h"
 
-#include <QtDBus>
+#ifdef QT_DBUS_LIB
+#  include <QtDBus>
+#endif
 
 const char* GlobalShortcuts::kGsdService = "org.gnome.SettingsDaemon";
 const char* GlobalShortcuts::kGsdPath = "/org/gnome/SettingsDaemon/MediaKeys";
@@ -22,6 +24,7 @@ void GlobalShortcuts::Init() {
 }
 
 bool GlobalShortcuts::RegisterGnome() {
+#ifdef QT_DBUS_LIB
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService))
     return false;
@@ -33,9 +36,13 @@ bool GlobalShortcuts::RegisterGnome() {
           this, SLOT(GnomeMediaKeyPressed(QString,QString)));
 
   return true;
+#else // QT_DBUS_LIB
+  return false;
+#endif
 }
 
 bool GlobalShortcuts::RegisterX11() {
+#ifdef Q_WS_X11
   QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
   QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
   QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
@@ -45,6 +52,11 @@ bool GlobalShortcuts::RegisterX11() {
   connect(stop, SIGNAL(activated()), SIGNAL(Stop()));
   connect(next, SIGNAL(activated()), SIGNAL(Next()));
   connect(prev, SIGNAL(activated()), SIGNAL(Previous()));
+
+  return true;
+#else // Q_WS_X11
+  return false;
+#endif
 }
 
 void GlobalShortcuts::GnomeMediaKeyPressed(const QString&, const QString& key) {
