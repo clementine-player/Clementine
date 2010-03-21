@@ -70,73 +70,73 @@ p, li { white-space: pre-wrap; }
     <name>AddStreamDialog</name>
     <message>
         <source>Add Stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη ροής</translation>
     </message>
     <message>
         <source>Enter the URL of an internet radio stream:</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισαγωγή της διεύθυνσης της ροης ραδιοφώνου:</translation>
     </message>
     <message>
         <source>Save this stream in the Radio tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση της ροής αυτής στην πινακίδα του ραδιοφώνου</translation>
     </message>
 </context>
 <context>
     <name>AlbumCoverManager</name>
     <message>
         <source>All albums</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλα τα άλμπουμ</translation>
     </message>
     <message>
         <source>Albums with covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλμπουμ με εξώφυλλα</translation>
     </message>
     <message>
         <source>Albums without covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλμπουμ χωρίς εξώφυλλα</translation>
     </message>
     <message>
         <source>All artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλοι οι καλλιτέχνες</translation>
     </message>
     <message>
         <source>Choose manual cover</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή εξώφυλλου χειροκίνητα</translation>
     </message>
 </context>
 <context>
     <name>CoverManager</name>
     <message>
         <source>Cover Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχείριση εξώφυλλων</translation>
     </message>
     <message>
         <source>Enter search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε όρους αναζήτησης εδώ</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Προβολή</translation>
     </message>
     <message>
         <source>Fetch Missing Covers</source>
-        <translation type="unfinished"></translation>
+        <translation>Κατέβασμα εξώφυλλων που λείπουν</translation>
     </message>
     <message>
         <source>Show fullsize...</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνισε σε πλήρες μέγεθος...</translation>
     </message>
     <message>
         <source>Fetch automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτόματο κατέβασμα</translation>
     </message>
     <message>
         <source>Choose manual cover...</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή εξώφυλλου χειροκίνητα...</translation>
     </message>
     <message>
         <source>Unset cover</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση εξώφυλλου</translation>
     </message>
 </context>
 <context>
@@ -179,8 +179,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message numerus="yes">
         <source>Editing %n tracks</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Τροποποίηση %n κομματιών</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -189,55 +189,55 @@ p, li { white-space: pre-wrap; }
     <name>FileTypeItemDelegate</name>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Άγνωστο</translation>
+        <translation>Άγνωστο</translation>
     </message>
     <message>
         <source>ASF</source>
-        <translation type="unfinished"></translation>
+        <translation>ASF</translation>
     </message>
     <message>
         <source>FLAC</source>
-        <translation type="unfinished"></translation>
+        <translation>FLAC</translation>
     </message>
     <message>
         <source>MP4</source>
-        <translation type="unfinished"></translation>
+        <translation>MP4</translation>
     </message>
     <message>
         <source>MPC</source>
-        <translation type="unfinished"></translation>
+        <translation>MPC</translation>
     </message>
     <message>
         <source>MP3</source>
-        <translation type="unfinished"></translation>
+        <translation>MP3</translation>
     </message>
     <message>
         <source>Ogg FLAC</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg FLAC</translation>
     </message>
     <message>
         <source>Ogg Speex</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg Speex</translation>
     </message>
     <message>
         <source>Ogg Vorbis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogg Vorbis</translation>
     </message>
     <message>
         <source>AIFF</source>
-        <translation type="unfinished"></translation>
+        <translation>AIFF</translation>
     </message>
     <message>
         <source>WAV</source>
-        <translation type="unfinished"></translation>
+        <translation>WAV</translation>
     </message>
     <message>
         <source>TrueAudio</source>
-        <translation type="unfinished"></translation>
+        <translation>TrueAudio</translation>
     </message>
     <message>
         <source>Stream</source>
-        <translation type="unfinished"></translation>
+        <translation>Stream</translation>
     </message>
 </context>
 <context>
@@ -309,7 +309,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Last.fm</source>
-        <translation type="unfinished">Last.fm</translation>
+        <translation>Last.fm</translation>
     </message>
 </context>
 <context>
@@ -662,43 +662,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add media...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη πολυμέσων...</translation>
     </message>
     <message>
         <source>Add stream...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη ροής...</translation>
     </message>
     <message>
         <source>Open media...</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα πολυμέσων...</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Εμφάνιση εικονιδίου συστήματος</translation>
     </message>
     <message>
         <source>&amp;Hide tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Απόκρυψη εικονιδίου συστήματος</translation>
     </message>
     <message>
         <source>Configure &amp;Global Shortcuts...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρύθμιση &amp;καθολικών συντομεύσεων...</translation>
     </message>
     <message>
         <source>Enter search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισάγετε όρους αναζήτησης εδώ</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλεία</translation>
     </message>
     <message>
         <source>Cover Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχείριση εξώφυλλων</translation>
     </message>
     <message>
         <source>New playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Νέα λίστα</translation>
     </message>
 </context>
 <context>
@@ -799,23 +799,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Album artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Άλμπουμ καλλιτέχνη</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"></translation>
+        <translation>Συνθέτης</translation>
     </message>
     <message>
         <source>File type</source>
-        <translation type="unfinished"></translation>
+        <translation>Τύπος αρχείου</translation>
     </message>
     <message>
         <source>Date modified</source>
-        <translation type="unfinished"></translation>
+        <translation>Ημερομηνία τροποποίησης</translation>
     </message>
     <message>
         <source>Date created</source>
-        <translation type="unfinished"></translation>
+        <translation>Ημερομηνία δημιουργίας</translation>
     </message>
 </context>
 <context>
@@ -837,46 +837,46 @@ p, li { white-space: pre-wrap; }
     <name>PlaylistManager</name>
     <message>
         <source>New playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Νέα λίστα</translation>
     </message>
 </context>
 <context>
     <name>PlaylistSequence</name>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Επανάληψη</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανακάτεμα</translation>
     </message>
     <message>
         <source>Don&apos;t repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς επανάληψη</translation>
     </message>
     <message>
         <source>Repeat track</source>
-        <translation type="unfinished"></translation>
+        <translation>Επανάληψη κομματιού</translation>
     </message>
     <message>
         <source>Repeat album</source>
-        <translation type="unfinished"></translation>
+        <translation>Επανάληψη άλμπουμ</translation>
     </message>
     <message>
         <source>Repeat playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Επανάληψη λίστας</translation>
     </message>
     <message>
         <source>Don&apos;t shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς ανακάτεμα</translation>
     </message>
     <message>
         <source>Shuffle by album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανακάτεμα κατα άλμπουμ</translation>
     </message>
     <message>
         <source>Shuffle all</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανακάτεμα όλων</translation>
     </message>
 </context>
 <context>
@@ -890,15 +890,15 @@ p, li { white-space: pre-wrap; }
     <name>SavedRadio</name>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη στη λίστα</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Αφαίρεση</translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <source>Add another stream...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη άλλης ροής...</translation>
     </message>
 </context>
 <context>
@@ -965,102 +965,102 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show a notification when I change the volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση ειδοποίησης κατα την αλλαγή του ήχου</translation>
     </message>
     <message>
         <source>Include album art in the notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση του άλμπουμ (εικόνα) στην ειδοποίηση</translation>
     </message>
 </context>
 <context>
     <name>ShortcutsDialog</name>
     <message>
         <source>Configure Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρύθμιση συντομεύσεων</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished">Αναπαραγωγή</translation>
+        <translation>Αναπαραγωγή</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished">Παύση</translation>
+        <translation>Παύση</translation>
     </message>
     <message>
         <source>Play/Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναπαραγωγή/Παύση</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished">Σταμάτημα</translation>
+        <translation>Σταμάτημα</translation>
     </message>
     <message>
         <source>Stop Playing After Current Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Σταμάτημα μετά από αυτό το κομμάτι</translation>
     </message>
     <message>
         <source>Next Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Επόμενο κομμάτι</translation>
     </message>
     <message>
         <source>Previous Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Προηγούμενο κομμάτι</translation>
     </message>
     <message>
         <source>Increase Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Αύξηση ήχου</translation>
     </message>
     <message>
         <source>Decrease Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Μείωση ήχου</translation>
     </message>
     <message>
         <source>Mute Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Σίγαση</translation>
     </message>
     <message>
         <source>Seek Forwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναζήτηση εμπρός</translation>
     </message>
     <message>
         <source>Seek Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Αναζήτηση πίσω</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Συντόμευση</translation>
     </message>
     <message>
         <source>Alternate</source>
-        <translation type="unfinished"></translation>
+        <translation>Εναλλακτική</translation>
     </message>
     <message>
         <source>&amp;Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Προεπιλογή</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Συντόμευση για την επιλεγμένη ενέργεια</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Καμιά</translation>
     </message>
     <message>
         <source>De&amp;fault</source>
-        <translation type="unfinished"></translation>
+        <translation>Προ&amp;επιλογή</translation>
     </message>
     <message>
         <source>&amp;Custom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Προσωπική</translation>
     </message>
     <message>
         <source>Non&amp;e</source>
-        <translation type="unfinished"></translation>
+        <translation>Καμ&amp;ία</translation>
     </message>
     <message>
         <source>Default key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπιλεγμένο κλειδί:</translation>
     </message>
 </context>
 <context>
