@@ -108,7 +108,7 @@ void Library::SongsDiscovered(const SongList& songs) {
       album = artist->ChildByKey(song.album());
       if (album == NULL)
         album = CreateAlbumNode(true, song.album(), artist, song.is_compilation(),
-                                song.art_automatic(), song.art_manual(), album->artist);
+                                song.art_automatic(), song.art_manual(), artist->key);
 
       if (album->lazy_loaded)
         CreateSongNode(true, song, album);
@@ -194,7 +194,7 @@ LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name,
   if (!art_automatic.isNull() && ret->cover_art.isNull())
     ret->cover_art.load(art_automatic);*/
 
-  ret->artist = compilation ? QString::null : artist;
+  ret->artist = compilation ? QString() : artist;
 
   if (signal)
     endInsertRows();
