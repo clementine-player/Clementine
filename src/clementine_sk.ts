@@ -107,7 +107,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>AnalyzerContainer</name>
     <message>
-        <location filename="analyzers/analyzercontainer.cpp" line="30"/>
+        <location filename="analyzers/analyzercontainer.cpp" line="37"/>
         <source>No analyzer</source>
         <translation>bez analyzéru</translation>
     </message>
@@ -120,6 +120,21 @@ p, li { white-space: pre-wrap; }
         <location filename="analyzers/blockanalyzer.cpp" line="24"/>
         <source>Block analyzer</source>
         <translation>blokový analyzér</translation>
+    </message>
+    <message>
+        <location filename="analyzers/boomanalyzer.cpp" line="8"/>
+        <source>Boom analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="analyzers/sonogram.cpp" line="18"/>
+        <source>Sonogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="analyzers/turbine.cpp" line="15"/>
+        <source>Turbine</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -603,13 +618,13 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Library</name>
     <message>
-        <location filename="library.cpp" line="125"/>
+        <location filename="library.cpp" line="127"/>
         <source>Various Artists</source>
         <translation>Rôzny interpréti</translation>
     </message>
     <message>
-        <location filename="library.cpp" line="415"/>
-        <location filename="library.cpp" line="433"/>
+        <location filename="library.cpp" line="430"/>
+        <location filename="library.cpp" line="448"/>
         <source>Unknown</source>
         <translation>Neznámi</translation>
     </message>
@@ -671,34 +686,34 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="217"/>
+        <location filename="mainwindow.cpp" line="216"/>
         <source>Configure library...</source>
         <translation>Nastaviť zbierku...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="515"/>
-        <location filename="mainwindow.cpp" line="221"/>
-        <location filename="mainwindow.cpp" line="356"/>
-        <location filename="mainwindow.cpp" line="372"/>
-        <location filename="mainwindow.cpp" line="547"/>
+        <location filename="mainwindow.ui" line="514"/>
+        <location filename="mainwindow.cpp" line="220"/>
+        <location filename="mainwindow.cpp" line="349"/>
+        <location filename="mainwindow.cpp" line="365"/>
+        <location filename="mainwindow.cpp" line="540"/>
         <source>Play</source>
         <translation>Hrať</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="557"/>
-        <location filename="mainwindow.cpp" line="223"/>
+        <location filename="mainwindow.ui" line="556"/>
+        <location filename="mainwindow.cpp" line="222"/>
         <source>Stop after this track</source>
         <translation>Zastaviť po tejto skladbe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="311"/>
-        <location filename="mainwindow.cpp" line="331"/>
+        <location filename="mainwindow.cpp" line="304"/>
+        <location filename="mainwindow.cpp" line="324"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Zobraziť tray ikonu</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="383"/>
-        <location filename="mainwindow.cpp" line="544"/>
+        <location filename="mainwindow.cpp" line="376"/>
+        <location filename="mainwindow.cpp" line="537"/>
         <source>Pause</source>
         <translation>Pauza</translation>
     </message>
@@ -743,145 +758,149 @@ p, li { white-space: pre-wrap; }
         <translation>Nastavenia</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="484"/>
+        <location filename="mainwindow.ui" line="483"/>
         <source>Help</source>
         <translation>Nápoveda</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="490"/>
+        <location filename="mainwindow.ui" line="489"/>
         <source>Tools</source>
         <translation>Nástroje</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="506"/>
+        <location filename="mainwindow.ui" line="505"/>
         <source>Previous track</source>
         <translation>Predchádzajúca skladba</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="527"/>
+        <location filename="mainwindow.ui" line="526"/>
         <source>Stop</source>
         <translation>Zastaviť</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="536"/>
+        <location filename="mainwindow.ui" line="535"/>
         <source>Next track</source>
         <translation>Nesledujca skladba</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="545"/>
+        <location filename="mainwindow.ui" line="544"/>
         <source>&amp;Quit</source>
         <translation>&amp;Zavrieť</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="548"/>
+        <location filename="mainwindow.ui" line="547"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="568"/>
+        <location filename="mainwindow.ui" line="567"/>
         <source>Entire collection</source>
         <translation>Celá zbierka</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="576"/>
+        <location filename="mainwindow.ui" line="575"/>
         <source>Added today</source>
         <translation>Dnes pridané</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="584"/>
+        <location filename="mainwindow.ui" line="583"/>
         <source>Added this week</source>
         <translation>Pridané tento týždeň</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="592"/>
-        <location filename="mainwindow.ui" line="595"/>
+        <location filename="mainwindow.ui" line="591"/>
+        <location filename="mainwindow.ui" line="594"/>
         <source>Added within three months</source>
         <translation>Pridané posledný štvrťrok</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="603"/>
+        <location filename="mainwindow.ui" line="602"/>
         <source>Added this year</source>
         <translation>Pridané tento rok</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="611"/>
+        <location filename="mainwindow.ui" line="610"/>
         <source>Added this month</source>
         <translation>Prudané tento mesiac</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="623"/>
+        <location filename="mainwindow.ui" line="622"/>
         <source>Love</source>
         <translation>Milujem</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="635"/>
+        <location filename="mainwindow.ui" line="634"/>
         <source>Ban</source>
         <translation>Neznášam</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="644"/>
-        <location filename="mainwindow.ui" line="647"/>
+        <location filename="mainwindow.ui" line="643"/>
+        <location filename="mainwindow.ui" line="646"/>
         <source>Clear playlist</source>
         <translation>Vyčistiť playlist</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="656"/>
+        <location filename="mainwindow.ui" line="655"/>
         <source>Edit track information...</source>
         <translation>Upravť informácie o skladbe...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="665"/>
+        <location filename="mainwindow.ui" line="664"/>
+        <source>Renumber tracks in this order...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="673"/>
         <source>Configure Clementine...</source>
         <translation>Nastaviť Clementine...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="670"/>
+        <location filename="mainwindow.ui" line="678"/>
         <source>About Clementine...</source>
         <translation>O Clemetine...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="679"/>
+        <location filename="mainwindow.ui" line="687"/>
         <source>Shuffle playlist</source>
         <translation>Zamiešať playlist</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="688"/>
+        <location filename="mainwindow.ui" line="696"/>
         <source>Add media...</source>
         <translation>Pridať médiá...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="697"/>
+        <location filename="mainwindow.ui" line="705"/>
         <source>Add stream...</source>
         <translation>Pridať stream...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="706"/>
+        <location filename="mainwindow.ui" line="714"/>
         <source>Open media...</source>
         <translation>Otvoriť médium...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="711"/>
-        <location filename="mainwindow.cpp" line="335"/>
+        <location filename="mainwindow.ui" line="719"/>
+        <location filename="mainwindow.cpp" line="328"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Schovať tray ikonu</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="720"/>
         <source>Configure &amp;Global Shortcuts...</source>
-        <translation>Nastaviť &amp;Globálne skratky...</translation>
+        <translation type="obsolete">Nastaviť &amp;Globálne skratky...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="729"/>
+        <location filename="mainwindow.ui" line="728"/>
         <source>Cover Manager</source>
         <translation>Správca obalov</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="734"/>
+        <location filename="mainwindow.ui" line="733"/>
         <source>Shuffle mode</source>
         <translation>Zamiešavací mód</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="739"/>
+        <location filename="mainwindow.ui" line="738"/>
         <source>Repeat mode</source>
         <translation>Opakovací mód</translation>
     </message>
@@ -1235,9 +1254,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ShortcutsDialog</name>
     <message>
-        <location filename="shortcutsdialog.ui" line="14"/>
         <source>Configure Shortcuts</source>
-        <translation>Nastaviť skratky</translation>
+        <translation type="obsolete">Nastaviť skratky</translation>
     </message>
     <message>
         <source>Play</source>
@@ -1288,38 +1306,32 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">pretočiť dozadu</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.ui" line="66"/>
         <source>Shortcut</source>
-        <translation>Skratka</translation>
+        <translation type="obsolete">Skratka</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.ui" line="71"/>
         <source>Alternate</source>
-        <translation>Striedať</translation>
+        <translation type="obsolete">Striedať</translation>
     </message>
     <message>
         <source>&amp;Defaults</source>
         <translation type="obsolete">&amp;Pôvodné</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.ui" line="88"/>
         <source>Shortcut for Selected Action</source>
-        <translation>Skratka pre vybranú akciu</translation>
+        <translation type="obsolete">Skratka pre vybranú akciu</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.ui" line="103"/>
         <source>&amp;None</source>
-        <translation>&amp;Nijaká</translation>
+        <translation type="obsolete">&amp;Nijaká</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.ui" line="119"/>
         <source>De&amp;fault</source>
-        <translation>Pôvo&amp;dná</translation>
+        <translation type="obsolete">Pôvo&amp;dná</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.ui" line="132"/>
         <source>&amp;Custom</source>
-        <translation>&amp;Užívateľská</translation>
+        <translation type="obsolete">&amp;Užívateľská</translation>
     </message>
     <message>
         <source>Non&amp;e</source>
@@ -1330,34 +1342,20 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Pôvodný kľúč</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.cpp" line="77"/>
         <source>Warning</source>
-        <translation>Varovanie</translation>
+        <translation type="obsolete">Varovanie</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.cpp" line="78"/>
         <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation>Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete pokračovať?</translation>
+        <translation type="obsolete">Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete pokračovať?</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.cpp" line="99"/>
-        <location filename="shortcutsdialog.cpp" line="103"/>
-        <location filename="shortcutsdialog.cpp" line="107"/>
-        <location filename="shortcutsdialog.cpp" line="111"/>
-        <location filename="shortcutsdialog.cpp" line="115"/>
-        <location filename="shortcutsdialog.cpp" line="119"/>
-        <location filename="shortcutsdialog.cpp" line="123"/>
-        <location filename="shortcutsdialog.cpp" line="127"/>
-        <location filename="shortcutsdialog.cpp" line="131"/>
-        <location filename="shortcutsdialog.cpp" line="135"/>
-        <location filename="shortcutsdialog.cpp" line="139"/>
         <source>Default: %1</source>
-        <translation>Pôvodné: %1</translation>
+        <translation type="obsolete">Pôvodné: %1</translation>
     </message>
     <message>
-        <location filename="shortcutsdialog.cpp" line="143"/>
         <source>Default: None</source>
-        <translation>Pôvodné: žiadna</translation>
+        <translation type="obsolete">Pôvodné: žiadna</translation>
     </message>
 </context>
 <context>
