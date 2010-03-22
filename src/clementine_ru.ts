@@ -104,6 +104,18 @@ p, li { white-space: pre-wrap; }
         <source>Block analyzer</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Boom analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sonogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turbine</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverManager</name>
@@ -686,10 +698,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure &amp;Global Shortcuts...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enter search terms here</source>
         <translation type="unfinished"></translation>
     </message>
@@ -707,6 +715,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Repeat mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Renumber tracks in this order...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -985,10 +997,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ShortcutsDialog</name>
     <message>
-        <source>Configure Shortcuts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Play</source>
         <translation type="obsolete">Воспроизвести</translation>
     </message>
@@ -999,46 +1007,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Stop</source>
         <translation type="obsolete">Стоп</translation>
-    </message>
-    <message>
-        <source>Shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alternate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortcut for Selected Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>De&amp;fault</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default: None</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

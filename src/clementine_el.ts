@@ -122,6 +122,18 @@ p, li { white-space: pre-wrap; }
         <source>Block analyzer</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Boom analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sonogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turbine</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverManager</name>
@@ -709,7 +721,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Configure &amp;Global Shortcuts...</source>
-        <translation>Ρύθμιση &amp;καθολικών συντομεύσεων...</translation>
+        <translation type="obsolete">Ρύθμιση &amp;καθολικών συντομεύσεων...</translation>
     </message>
     <message>
         <source>Enter search terms here</source>
@@ -733,6 +745,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Repeat mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Renumber tracks in this order...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1019,7 +1035,7 @@ p, li { white-space: pre-wrap; }
     <name>ShortcutsDialog</name>
     <message>
         <source>Configure Shortcuts</source>
-        <translation>Ρύθμιση συντομεύσεων</translation>
+        <translation type="obsolete">Ρύθμιση συντομεύσεων</translation>
     </message>
     <message>
         <source>Play</source>
@@ -1071,11 +1087,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Συντόμευση</translation>
+        <translation type="obsolete">Συντόμευση</translation>
     </message>
     <message>
         <source>Alternate</source>
-        <translation>Εναλλακτική</translation>
+        <translation type="obsolete">Εναλλακτική</translation>
     </message>
     <message>
         <source>&amp;Defaults</source>
@@ -1083,19 +1099,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation>Συντόμευση για την επιλεγμένη ενέργεια</translation>
+        <translation type="obsolete">Συντόμευση για την επιλεγμένη ενέργεια</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation>&amp;Καμιά</translation>
+        <translation type="obsolete">&amp;Καμιά</translation>
     </message>
     <message>
         <source>De&amp;fault</source>
-        <translation>Προ&amp;επιλογή</translation>
+        <translation type="obsolete">Προ&amp;επιλογή</translation>
     </message>
     <message>
         <source>&amp;Custom</source>
-        <translation type="unfinished">&amp;Προσωπική</translation>
+        <translation type="obsolete">&amp;Προσωπική</translation>
     </message>
     <message>
         <source>Non&amp;e</source>
@@ -1104,22 +1120,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Default key:</source>
         <translation type="obsolete">Προεπιλεγμένο κλειδί:</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default: None</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

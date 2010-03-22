@@ -65,6 +65,12 @@ void AlbumCoverFetcher::AlbumGetInfoFinished() {
   reply->deleteLater();
   quint64 id = active_requests_.take(reply);
 
+  if (reply->error() != QNetworkReply::NoError) {
+    // TODO: retry request.
+    emit AlbumCoverFetched(id, QImage());
+    return;
+  }
+
   try {
     lastfm::XmlQuery query(lastfm::ws::parse(reply));
 
@@ -81,10 +87,16 @@ void AlbumCoverFetcher::AlbumGetInfoFinished() {
 void AlbumCoverFetcher::AlbumCoverFetchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
+  quint64 id = active_requests_.take(reply);
+
+  if (reply->error() != QNetworkReply::NoError) {
+    // TODO: retry request.
+    emit AlbumCoverFetched(id, QImage());
+    return;
+  }
 
   QImage image;
   image.loadFromData(reply->readAll());
 
-  quint64 id = active_requests_.take(reply);
   emit AlbumCoverFetched(id, image);
 }

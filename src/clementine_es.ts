@@ -105,6 +105,18 @@ p, li { white-space: pre-wrap; }
         <source>Block analyzer</source>
         <translation>Analizador en bloques</translation>
     </message>
+    <message>
+        <source>Boom analyzer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sonogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turbine</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverManager</name>
@@ -692,7 +704,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Configure &amp;Global Shortcuts...</source>
-        <translation>Configurar los accesos rápidos &amp;globales...</translation>
+        <translation type="obsolete">Configurar los accesos rápidos &amp;globales...</translation>
     </message>
     <message>
         <source>Enter search terms here</source>
@@ -717,6 +729,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat mode</source>
         <translation>Modo Repetir</translation>
+    </message>
+    <message>
+        <source>Renumber tracks in this order...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1002,7 +1018,7 @@ p, li { white-space: pre-wrap; }
     <name>ShortcutsDialog</name>
     <message>
         <source>Configure Shortcuts</source>
-        <translation>Configurar Accesos Rápidos</translation>
+        <translation type="obsolete">Configurar Accesos Rápidos</translation>
     </message>
     <message>
         <source>Play</source>
@@ -1054,11 +1070,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Acceso rápido</translation>
+        <translation type="obsolete">Acceso rápido</translation>
     </message>
     <message>
         <source>Alternate</source>
-        <translation>Alternativo</translation>
+        <translation type="obsolete">Alternativo</translation>
     </message>
     <message>
         <source>&amp;Defaults</source>
@@ -1066,19 +1082,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation>Acceso rápido para la acción seleccionada</translation>
+        <translation type="obsolete">Acceso rápido para la acción seleccionada</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation>&amp;Ninguno</translation>
+        <translation type="obsolete">&amp;Ninguno</translation>
     </message>
     <message>
         <source>De&amp;fault</source>
-        <translation>Por &amp;defecto</translation>
+        <translation type="obsolete">Por &amp;defecto</translation>
     </message>
     <message>
         <source>&amp;Custom</source>
-        <translation>&amp;Personalizado</translation>
+        <translation type="obsolete">&amp;Personalizado</translation>
     </message>
     <message>
         <source>Non&amp;e</source>
@@ -1090,19 +1106,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Warning</source>
-        <translation>Cuidado</translation>
+        <translation type="obsolete">Cuidado</translation>
     </message>
     <message>
         <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation>Estas por reinicar las teclas rapidas a sus valores por defecto. Estás seguro que deseas continuar?</translation>
+        <translation type="obsolete">Estas por reinicar las teclas rapidas a sus valores por defecto. Estás seguro que deseas continuar?</translation>
     </message>
     <message>
         <source>Default: %1</source>
-        <translation>Por defecto: %1</translation>
+        <translation type="obsolete">Por defecto: %1</translation>
     </message>
     <message>
         <source>Default: None</source>
-        <translation>Por defecto: Ninguna</translation>
+        <translation type="obsolete">Por defecto: Ninguna</translation>
     </message>
 </context>
 <context>

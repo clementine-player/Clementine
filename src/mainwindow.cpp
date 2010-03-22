@@ -114,6 +114,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
+  connect(ui_.action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
   connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
   connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
   connect(ui_.action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
@@ -220,6 +221,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   playlist_menu_->addAction(ui_.action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_menu_->addAction(ui_.action_edit_track);
+  playlist_menu_->addAction(ui_.action_renumber_tracks);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_clear_playlist);
   playlist_menu_->addAction(ui_.action_shuffle);
@@ -561,6 +563,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     }
   }
   ui_.action_edit_track->setEnabled(editable);
+  ui_.action_renumber_tracks->setEnabled(editable);
 
   playlist_menu_->popup(global_pos);
 }
@@ -598,6 +601,33 @@ void MainWindow::EditTracks() {
     return;
 
   playlist_->ReloadItems(rows);
+}
+
+void MainWindow::RenumberTracks() {
+  QModelIndexList indexes=ui_.playlist->selectionModel()->selection().indexes();
+  int track=1;
+
+  // if first selected song has a track number set, start from that offset
+  if (indexes.size()) {
+    Song first_song=playlist_->item_at(indexes[0].row())->Metadata();
+    if (int first_track = first_song.track())
+      track = first_track;
+  }
+
+  foreach (const QModelIndex& index, indexes) {
+    if (index.column() != 0)
+      continue;
+
+    int row = index.row();
+    Song song = playlist_->item_at(row)->Metadata();
+
+    if (song.IsEditable()) {
+      song.set_track(track);
+      song.Save();
+      playlist_->item_at(row)->Reload();
+    }
+    track++;
+  }
 }
 
 void MainWindow::LibraryScanStarted() {

@@ -56,6 +56,7 @@ class MainWindow : public QMainWindow {
   void PlaylistPlay();
   void PlaylistStopAfter();
   void EditTracks();
+  void RenumberTracks();
 
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();

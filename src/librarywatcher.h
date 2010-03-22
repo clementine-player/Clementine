@@ -62,7 +62,7 @@ class LibraryWatcher : public QObject {
   int total_watches_;
 
   #ifdef Q_OS_DARWIN
-  static const int kMaxWatches = 200;
+  static const int kMaxWatches = 100;
   #endif
 };
 
