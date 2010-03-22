@@ -2,7 +2,7 @@
 
 name=clementine
 url=http://clementine-player.googlecode.com/svn/trunk
-version=`grep Version $name.spec | awk '{print $2}'`
+version=`grep Version $name.spec | head -n1 | awk '{print $2}'`
 
 rm -rf $name-$version
 svn export $url $name-$version
