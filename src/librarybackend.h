@@ -136,7 +136,7 @@ class LibraryBackend : public QObject {
   static int (*_sqlite3_value_type) (sqlite3_value*);
   static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
-  static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite3_int64);
+  static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
 };
 
 #endif // LIBRARYBACKEND_H
