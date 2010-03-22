@@ -236,9 +236,9 @@ set_property(TARGET clementine
 )
 
 set_target_properties(clementine PROPERTIES
-    MACOSX_BUNDLE_INFO_STRING "Clementine 0.1"
+    MACOSX_BUNDLE_INFO_STRING "Clementine 0.2"
     MACOSX_BUNDLE_ICON_FILE "clementine"
-    MACOSX_BUNDLE_SHORT_VERSION_STRING "0.1"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "0.2"
 )
 
 install(TARGETS clementine
