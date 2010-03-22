@@ -63,6 +63,12 @@ bool LibraryBackend::StaticInit() {
   return false;
 }
 
+bool LibraryBackend::Like(const char* needle, const char* haystack) {
+  QString a = QString::fromUtf8(needle).section('%', 1, 1);
+  QString b = QString::fromUtf8(haystack);
+  return b.contains(a, Qt::CaseInsensitive);
+}
+
 // Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
 void LibraryBackend::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
   Q_ASSERT(argc == 2 || argc == 3);
@@ -74,11 +80,9 @@ void LibraryBackend::SqliteLike(sqlite3_context* context, int argc, sqlite3_valu
       break;
     }
     case SQLITE_TEXT: {
-      const uchar* data_a = _sqlite3_value_text(argv[0]);
-      const uchar* data_b = _sqlite3_value_text(argv[1]);
-      QString a = QString::fromUtf8(reinterpret_cast<const char*>(data_a)).section('%', 1, 1);
-      QString b = QString::fromUtf8(reinterpret_cast<const char*>(data_b));
-      _sqlite3_result_int64(context, b.contains(a, Qt::CaseInsensitive) ? 1 : 0);
+      const char* data_a = reinterpret_cast<const char*>(_sqlite3_value_text(argv[0]));
+      const char* data_b = reinterpret_cast<const char*>(_sqlite3_value_text(argv[1]));
+      _sqlite3_result_int64(context, Like(data_a, data_b) ? 1 : 0);
       break;
     }
   }

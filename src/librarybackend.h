@@ -13,6 +13,8 @@
 
 #include <sqlite3.h>
 
+#include "gtest/gtest_prod.h"
+
 class LibraryBackend : public QObject {
   Q_OBJECT
 
@@ -113,9 +115,15 @@ class LibraryBackend : public QObject {
   QString injected_database_name_;
 
 
+  FRIEND_TEST(LibraryBackendTest, LikeWorksWithAllAscii);
+  FRIEND_TEST(LibraryBackendTest, LikeWorksWithUnicode);
+  FRIEND_TEST(LibraryBackendTest, LikeAsciiCaseInsensitive);
+  FRIEND_TEST(LibraryBackendTest, LikeUnicodeCaseInsensitive);
+
   // Do static initialisation like loading sqlite functions.
   static bool StaticInit();
   // Custom LIKE() function for sqlite.
+  static bool Like(const char* needle, const char* haystack);
   static void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv);
   typedef void (*Sqlite3CreateFunc) (
       sqlite3*, const char*, int, int, void*,

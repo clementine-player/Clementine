@@ -140,6 +140,24 @@ TEST_F(LibraryBackendTest, AddInvalidSong) {
 TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
 }
 
+TEST_F(LibraryBackendTest, LikeWorksWithAllAscii) {
+  EXPECT_TRUE(LibraryBackend::Like("%ar%", "bar"));
+  EXPECT_FALSE(LibraryBackend::Like("%ar%", "foo"));
+}
+
+TEST_F(LibraryBackendTest, LikeWorksWithUnicode) {
+  EXPECT_TRUE(LibraryBackend::Like("%Снег%", "Снег"));
+  EXPECT_FALSE(LibraryBackend::Like("%Снег%", "foo"));
+}
+
+TEST_F(LibraryBackendTest, LikeAsciiCaseInsensitive) {
+  EXPECT_TRUE(LibraryBackend::Like("%ar%", "BAR"));
+  EXPECT_FALSE(LibraryBackend::Like("%ar%", "FOO"));
+}
+
+TEST_F(LibraryBackendTest, LikeUnicodeCaseInsensitive) {
+  EXPECT_TRUE(LibraryBackend::Like("%снег%", "Снег"));
+}
 
 // Test adding a single song to the database, then getting various information
 // back about it.
