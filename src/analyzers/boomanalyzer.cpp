@@ -3,6 +3,7 @@
 
 #include "boomanalyzer.h"
 #include <cmath>
+#include <QPainter>
 
 const char* BoomAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
 

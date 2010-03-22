@@ -13,6 +13,8 @@
 
 #include "sonogram.h"
 
+#include <QPainter>
+
 const char* Sonogram::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Sonogram");
 
 Sonogram::Sonogram(QWidget *parent) :

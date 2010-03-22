@@ -14,6 +14,7 @@
 #include "baranalyzer.h"
 #include <cmath>     //log10(), etc.
 #include <QtDebug>
+#include <QPainter>
 
 const char* BarAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Bar analyzer");
 
