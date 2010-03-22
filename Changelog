@@ -17,6 +17,7 @@ Version 0.2:
   Bugfixes:
     * Fixed Last.fm scrobbling for local music
     * Fixed problems writing UTF-8 tags
+    * Searching the library now supports unicode
     * Fixed a serious memory leak when the window is minimized to the tray
     * Fixed tracks without an album field not showing up in the library
     * Clicking the track slider to move it now works properly
@@ -28,6 +29,7 @@ Version 0.2:
     * (Linux and Mac) Volume is now saved and restored properly when you exit
     * (Linux and Mac) Library scanner now runs at a low IO priority to make it
       much less intrusive
+    * (Mac) Fix crash when universal access options are enabled
 
   Internationalization:
     * Added translations for Spanish, Russian, Greek and Slovak
