@@ -123,4 +123,5 @@ void SettingsDialog::NotificationTypeChanged() {
   bool enabled = !ui_.notifications_none->isChecked();
   ui_.notifications_options->setEnabled(enabled);
   ui_.notifications_volume->setEnabled(enabled);
+  ui_.notifications_art->setEnabled(enabled);
 }
