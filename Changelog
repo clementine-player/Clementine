@@ -1,0 +1,39 @@
+Version 0.2:
+  Features:
+    * Album cover art is now automatically loaded from disk for your library
+	* Cover manager downloads missing covers from Last.fm
+	* Covers for Last.fm radio tracks are shown in notifications
+	* Much better "Various Artists" detection
+	* Menu items to force albums to be shown under "Various Artists"
+	* Support for M3U and XSPF playlists
+	* Menu items to add files and streams by URL
+	* Shuffle and Repeat modes for the playlist
+	* Option to hide the system tray icon
+	* Option to show notifications when changing volume (disabled by default)
+	* Playlist columns for albumartist, composer, file type, date
+	* More 2D analyzers from Amarok 1.4
+	* (Linux) Media keys (play, stop, etc.) should work under Gnome
+
+  Bugfixes:
+    * Fixed Last.fm scrobbling for local music
+	* Fixed problems writing UTF-8 tags
+	* Fixed a serious memory leak when the window is minimized to the tray
+	* Fixed tracks without an album field not showing up in the library
+	* Clicking the track slider to move it now works properly
+	* The track slider should no longer move around underneath you while being
+      dragged
+	* Colours should now obey the system colour scheme
+	* Searching the library should now be much faster
+	* (Windows) Fixed logarithmic volume issues
+	* (Linux and Mac) Volume is now saved and restored properly when you exit
+	* (Linux and Mac) Library scanner now runs at a low IO priority to make it
+      much less intrusive
+
+  Internationalization:
+    * Added translations for Spanish, Russian, Greek and Slovak
+
+  Buildsystem changes:
+    * Moved from qmake to cmake
+	* It's now possible to build without libnotify
+	* Unit tests using gtest
+
