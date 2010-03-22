@@ -16,14 +16,14 @@
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	qmake-qt4
+	cd bin && cmake ..
 	touch configure-stamp
 
 
 build: build-stamp
 build-stamp: configure-stamp  
 	dh_testdir
-	make
+	cd bin && make
 	touch $@
 
 clean: 
@@ -48,7 +48,7 @@ install: build
 	install -d $(CURDIR)/debian/clementine/usr/share/applications
 	install -d $(CURDIR)/debian/clementine/usr/share/icons/hicolor/64x64/apps
 
-	install -m 0755 src/clementine $(CURDIR)/debian/clementine/usr/bin/clementine
+	install -m 0755 bin/clementine $(CURDIR)/debian/clementine/usr/bin/clementine
 	install -m 0644 dist/clementine.desktop $(CURDIR)/debian/clementine/usr/share/applications/clementine.desktop
 	install -m 0644 dist/clementine_64.png $(CURDIR)/debian/clementine/usr/share/icons/hicolor/64x64/apps/application-x-clementine.png
 
