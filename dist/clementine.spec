@@ -1,16 +1,17 @@
 Name:           clementine
 Version:        0.2
-Release:        5%{?dist}
+Release:        1%{?dist}
 Summary:        A music player and library organiser
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://code.google.com/p/clementine-player
-Source0:        %{name}-%{version}.tar.bz2
+Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel xine-lib-devel
 BuildRequires:  libnotify-devel qt4-devel boost-devel notification-daemon gcc-c++
+BuildRequires:  cmake sqlite-devel
 Requires:       xine-lib-extras-freeworld
 
 %description
@@ -23,7 +24,8 @@ advantage of Qt4.
 
 
 %build
-qmake-qt4
+cd bin
+cmake ..
 make %{?_smp_mflags}
 
 
@@ -32,7 +34,7 @@ install -d %{buildroot}/%{_bindir}
 install -d %{buildroot}%{_datadir}/applications
 install -d %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
 
-install -m 0755 src/%{name} %{buildroot}/%{_bindir}/clementine
+install -m 0755 bin/%{name} %{buildroot}/%{_bindir}/clementine
 install -m 0644 dist/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
 install -m 0644 dist/%{name}_64.png %{buildroot}/%{_datadir}/icons/hicolor/64x64/apps/application-x-clementine.png
 
@@ -42,8 +44,8 @@ desktop-file-install \
     %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %clean
+cd bin
 make clean
-rm Makefile src/Makefile
 
 
 %files
