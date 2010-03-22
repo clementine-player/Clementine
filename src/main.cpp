@@ -16,6 +16,12 @@
 #include <QDir>
 #include <QNetworkAccessManager>
 
+// Load sqlite plugin on windows
+#ifdef WIN32
+# include <QtPlugin>
+  Q_IMPORT_PLUGIN(qsqlite)
+#endif
+
 void LoadTranslation(const QString& prefix, const QString& path) {
   QTranslator* t = new QTranslator;
   t->load(prefix + "_" + QLocale::system().name(), path);

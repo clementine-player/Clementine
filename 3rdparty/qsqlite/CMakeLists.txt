@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 2.6)
+
+# Source files
+set(SQLITE-SOURCES
+    sqlite3.c
+    qsql_sqlite.cpp
+    smain.cpp
+)
+
+# Header files that have Q_OBJECT in
+set(SQLITE-MOC-HEADERS
+    qsql_sqlite.h
+)
+
+set(SQLITE-WIN32-RESOURCES qsqlite_resource.rc)
+
+qt4_wrap_cpp(SQLITE-SOURCES-MOC ${SQLITE-MOC-HEADERS})
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_definitions(-DQT_PLUGIN -DQT_NO_DEBUG)
+
+add_library(qsqlite
+   ${SQLITE-SOURCES}
+   ${SQLITE-SOURCES-MOC}
+   ${SQLITE-WIN32-RESOURCES}
+)
+target_link_libraries(qsqlite
+    ${QT_LIBRARIES}
+)

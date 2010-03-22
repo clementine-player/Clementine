@@ -18,15 +18,15 @@
 const char* LibraryBackend::kDatabaseName = "clementine.db";
 const int LibraryBackend::kSchemaVersion = 5;
 
-void (*LibraryBackend::_sqlite3_create_function) (
+int (*LibraryBackend::_sqlite3_create_function) (
     sqlite3*, const char*, int, int, void*,
     void (*) (sqlite3_context*, int, sqlite3_value**),
     void (*) (sqlite3_context*, int, sqlite3_value**),
     void (*) (sqlite3_context*)) = NULL;
 int (*LibraryBackend::_sqlite3_value_type) (sqlite3_value*) = NULL;
 sqlite_int64 (*LibraryBackend::_sqlite3_value_int64) (sqlite3_value*) = NULL;
-uchar* (*LibraryBackend::_sqlite3_value_text) (sqlite3_value*) = NULL;
-void (*LibraryBackend::_sqlite3_result_int64) (sqlite3_context*, int) = NULL;
+const uchar* (*LibraryBackend::_sqlite3_value_text) (sqlite3_value*) = NULL;
+void (*LibraryBackend::_sqlite3_result_int64) (sqlite3_context*, sqlite3_int64) = NULL;
 
 
 bool LibraryBackend::StaticInit() {
@@ -34,8 +34,18 @@ bool LibraryBackend::StaticInit() {
     return true;
   }
 
+#ifdef Q_OS_WIN32
+  // We statically link libqsqlite.dll on windows so these symbols are already
+  // available
+  _sqlite3_create_function = sqlite3_create_function;
+  _sqlite3_value_type = sqlite3_value_type;
+  _sqlite3_value_int64 = sqlite3_value_int64;
+  _sqlite3_value_text = sqlite3_value_text;
+  _sqlite3_result_int64 = sqlite3_result_int64;
+#else // Q_OS_WIN32
   QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
-      "/sqldrivers/libqsqlite";
+                        "/sqldrivers/libqsqlite";
+
   QLibrary library(plugin_path);
   if (!library.load()) {
     qDebug() << "QLibrary::load() failed for " << plugin_path;
@@ -48,9 +58,9 @@ bool LibraryBackend::StaticInit() {
       library.resolve("sqlite3_value_type"));
   _sqlite3_value_int64 = reinterpret_cast<sqlite_int64 (*) (sqlite3_value*)>(
       library.resolve("sqlite3_value_int64"));
-  _sqlite3_value_text = reinterpret_cast<uchar* (*) (sqlite3_value*)>(
+  _sqlite3_value_text = reinterpret_cast<const uchar* (*) (sqlite3_value*)>(
       library.resolve("sqlite3_value_text"));
-  _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, int)>(
+  _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, sqlite3_int64)>(
       library.resolve("sqlite3_result_int64"));
 
   if (_sqlite3_create_function &&
@@ -60,7 +70,9 @@ bool LibraryBackend::StaticInit() {
       _sqlite3_result_int64) {
     return true;
   }
+  qDebug() << "Couldn't resolve sqlite symbols";
   return false;
+#endif
 }
 
 bool LibraryBackend::Like(const char* needle, const char* haystack) {

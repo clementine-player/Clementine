@@ -89,6 +89,11 @@ add_subdirectory(src)
 
 add_subdirectory(tests)
 
+if (WIN32)
+  add_definitions(-DQT_STATICPLUGIN)
+  add_subdirectory(3rdparty/qsqlite)
+endif(WIN32)
+
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"

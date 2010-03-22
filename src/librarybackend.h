@@ -125,7 +125,7 @@ class LibraryBackend : public QObject {
   // Custom LIKE() function for sqlite.
   static bool Like(const char* needle, const char* haystack);
   static void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv);
-  typedef void (*Sqlite3CreateFunc) (
+  typedef int (*Sqlite3CreateFunc) (
       sqlite3*, const char*, int, int, void*,
       void (*) (sqlite3_context*, int, sqlite3_value**),
       void (*) (sqlite3_context*, int, sqlite3_value**),
@@ -135,8 +135,8 @@ class LibraryBackend : public QObject {
   static Sqlite3CreateFunc _sqlite3_create_function;
   static int (*_sqlite3_value_type) (sqlite3_value*);
   static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
-  static uchar* (*_sqlite3_value_text) (sqlite3_value*);
-  static void (*_sqlite3_result_int64) (sqlite3_context*, int);
+  static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
+  static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite3_int64);
 };
 
 #endif // LIBRARYBACKEND_H

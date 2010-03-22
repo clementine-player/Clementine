@@ -184,7 +184,7 @@ endif(APPLE)
 
 # resource file for windows
 if(WIN32)
-  set(CLEMENTINE-WIN32-RESOURCES ../dist/windres.rc)
+  set(CLEMENTINE-WIN32-RESOURCES ../dist/windows/windres.rc)
 endif(WIN32)
 
 qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})
@@ -221,6 +221,12 @@ if (APPLE)
   include_directories(${GROWL}/Headers)
 endif (APPLE)
 add_dependencies(clementine_lib qtsingleapplication qxt)
+
+# Link against the qsqlite plugin on windows
+if(WIN32)
+  set(3RDPARTY_SQLITE_LIBRARY qsqlite)
+  target_link_libraries(clementine_lib qsqlite)
+endif(WIN32)
 
 add_executable(clementine
    MACOSX_BUNDLE
