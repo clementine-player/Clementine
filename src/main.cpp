@@ -24,7 +24,7 @@ void LoadTranslation(const QString& prefix, const QString& path) {
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("Clementine");
-  QCoreApplication::setApplicationVersion("0.1");
+  QCoreApplication::setApplicationVersion("0.2");
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 

@@ -1,5 +1,5 @@
 Name:           clementine
-Version:        0.1
+Version:        0.2
 Release:        5%{?dist}
 Summary:        A music player and library organiser
 
@@ -55,6 +55,9 @@ rm Makefile src/Makefile
 
 
 %changelog
+* Mon Mar 22 2010 David Sansome <me@davidsansome.com> - 0.2
+- Version 0.2
+
 * Sun Feb 21 2010 David Sansome <me@davidsansome.com> - 0.1-5
 - Various last-minute bugfixes
 
