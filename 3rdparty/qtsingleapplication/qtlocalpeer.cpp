@@ -191,7 +191,7 @@ void QtLocalPeer::receiveConnection()
         uMsgBuf += got;
     } while (remaining && got >= 0 && socket->waitForReadyRead(2000));
     if (got < 0) {
-        qWarning() << "QtLocalPeer: Message reception failed" << socket->errorString();
+        qWarning("QtLocalPeer: Message reception failed %s", socket->errorString().toUtf8().constData());
         delete socket;
         return;
     }

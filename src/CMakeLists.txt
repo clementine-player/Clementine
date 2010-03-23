@@ -59,6 +59,7 @@ set(CLEMENTINE-SOURCES
     playlistsequence.cpp
     xspfparser.cpp
     globalshortcuts/globalshortcuts.cpp
+    fixlastfm.cpp
 )
 
 # Header files that have Q_OBJECT in

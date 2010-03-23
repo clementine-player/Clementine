@@ -9,6 +9,7 @@ class Track;
 #include <QtGlobal>
 uint qHash(const lastfm::Track& track);
 
+#include "fixlastfm.h"
 #include <lastfm/Track>
 #include <lastfm/ws.h>
 

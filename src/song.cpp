@@ -19,6 +19,7 @@
 #include <taglib/speexfile.h>
 #include <taglib/trueaudiofile.h>
 
+#include "fixlastfm.h"
 #include <lastfm/Track>
 
 #include <QFile>
