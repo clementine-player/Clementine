@@ -11,17 +11,10 @@
 
 namespace {
 
-static int argc = 1;
-static const char* argv[] = { "test", 0 };
-
 class AlbumCoverFetcherTest : public ::testing::Test {
  protected:
   static void SetUpTestCase() {
     lastfm::ws::ApiKey = "foobar";
-  }
-
-  AlbumCoverFetcherTest()
-      : app_(argc, (char**)argv) {
   }
 
   void SetUp() {
@@ -31,7 +24,6 @@ class AlbumCoverFetcherTest : public ::testing::Test {
   }
 
   MockNetworkAccessManager* network_;
-  QCoreApplication app_;
 };
 
 
@@ -54,10 +46,10 @@ TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
   fetcher.FetchAlbumCover("Foo", "Bar");
 
   get_info_reply->Done();
-  app_.processEvents(QEventLoop::ExcludeUserInputEvents);
+  QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
   album_reply->Done();
-  app_.processEvents(QEventLoop::ExcludeUserInputEvents);
+  QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
   EXPECT_EQ(1, spy.count());
 }
