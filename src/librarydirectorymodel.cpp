@@ -8,6 +8,9 @@ LibraryDirectoryModel::LibraryDirectoryModel(QObject* parent)
 }
 
 void LibraryDirectoryModel::SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) {
+  if (backend_)
+    backend_->disconnect(this);
+
   backend_ = backend;
 
   connect(backend_.get(), SIGNAL(DirectoriesDiscovered(DirectoryList)), SLOT(DirectoriesDiscovered(DirectoryList)));
