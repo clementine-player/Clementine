@@ -14,7 +14,7 @@ SetCompressor /SOLID lzma
 !define MUI_ICON "clementine.ico"
 
 !define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_FINISHPAGE_RUN clementine.exe
+!define MUI_FINISHPAGE_RUN $INSTDIR/clementine.exe
 
 ; Installer pages
 !insertmacro MUI_PAGE_WELCOME
@@ -30,7 +30,7 @@ SetCompressor /SOLID lzma
 !insertmacro MUI_LANGUAGE "English"
 
 Name "${PRODUCT_NAME}"
-OutFile "${PRODUCT_NAME}-${PRODUCT_DISPLAY_VERSION}.exe"
+OutFile "${PRODUCT_NAME}Setup-${PRODUCT_DISPLAY_VERSION}.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show
@@ -45,8 +45,8 @@ Section "Clementine" Clementine
   File "/oname=clementine.ico" "clementine.ico"
   File "/oname=lastfm.lib" "lastfm.lib"
   File "/oname=libgcc_s_dw2-1.dll" "libgcc_s_dw2-1.dll"
-  File "/oname=clementine.exe" "libgcc_s_sjlj-1.dll"
-  File "/oname=libgcc_s_sjlj-1.dll" "libtag.dll"
+  File "/oname=libgcc_s_sjlj-1.dll" "libgcc_s_sjlj-1.dll"
+  File "/oname=libtag.dll" "libtag.dll"
   File "/oname=mingwm10.dll" "mingwm10.dll"
   File "/oname=phonon4.dll" "phonon4.dll"
   File "/oname=QtCore4.dll" "QtCore4.dll"
