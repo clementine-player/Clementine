@@ -82,6 +82,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
       PlaylistItem* item = items_[index.row()];
       Song song = item->Metadata();
 
+      // Don't forget to change Playlist::CompareItems when adding new columns
       switch (index.column()) {
         case Column_Title:    return song.title();
         case Column_Artist:   return song.artist();
@@ -421,13 +422,33 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
   const PlaylistItem* a = order == Qt::AscendingOrder ? _a : _b;
   const PlaylistItem* b = order == Qt::AscendingOrder ? _b : _a;
 
+#define cmp(field) return a->Metadata().field() < b->Metadata().field()
+
   switch (column) {
-    case Column_Title:  return a->Metadata().title() < b->Metadata().title();
-    case Column_Artist: return a->Metadata().artist() < b->Metadata().artist();
-    case Column_Album:  return a->Metadata().album() < b->Metadata().album();
-    case Column_Length: return a->Metadata().length() < b->Metadata().length();
-    case Column_Track:  return a->Metadata().track() < b->Metadata().track();
+    case Column_Title:        cmp(title);
+    case Column_Artist:       cmp(artist);
+    case Column_Album:        cmp(album);
+    case Column_Length:       cmp(length);
+    case Column_Track:        cmp(track);
+    case Column_Disc:         cmp(disc);
+    case Column_Year:         cmp(year);
+    case Column_Genre:        cmp(genre);
+    case Column_AlbumArtist:  cmp(albumartist);
+    case Column_Composer:     cmp(composer);
+
+    case Column_BPM:          cmp(bpm);
+    case Column_Bitrate:      cmp(bitrate);
+    case Column_Samplerate:   cmp(samplerate);
+    case Column_Filename:     cmp(filename);
+    case Column_BaseFilename: cmp(basefilename);
+    case Column_Filesize:     cmp(filesize);
+    case Column_Filetype:     cmp(filetype);
+    case Column_DateModified: cmp(mtime);
+    case Column_DateCreated:  cmp(ctime);
   }
+
+#undef cmp
+
   return false;
 }
 
