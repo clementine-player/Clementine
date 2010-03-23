@@ -15,11 +15,11 @@
 
 #include "gtest/gtest_prod.h"
 
-class LibraryBackend : public QObject {
+class LibraryBackendInterface : public QObject {
   Q_OBJECT
 
  public:
-  LibraryBackend(QObject* parent = 0, const QString& database_name = QString());
+  LibraryBackendInterface(QObject* parent = 0);
 
   struct Album {
     QString artist;
@@ -29,6 +29,63 @@ class LibraryBackend : public QObject {
     QString art_manual;
   };
   typedef QList<Album> AlbumList;
+
+  // Get a list of directories in the library.  Emits DirectoriesDiscovered.
+  virtual void LoadDirectoriesAsync() = 0;
+
+  // Counts the songs in the library.  Emits TotalSongCountUpdated
+  virtual void UpdateTotalSongCountAsync() = 0;
+
+  virtual SongList FindSongsInDirectory(int id) = 0;
+
+  virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+
+  virtual bool HasCompilations(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+
+  virtual AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual AlbumList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions()) = 0;
+  virtual AlbumList GetCompilationAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+
+  virtual void UpdateManualAlbumArtAsync(const QString& artist, const QString& album, const QString& art) = 0;
+  virtual Album GetAlbumArt(const QString& artist, const QString& album) = 0;
+
+  virtual Song GetSongById(int id) = 0;
+
+  virtual void AddDirectory(const QString& path) = 0;
+  virtual void RemoveDirectory(const Directory& dir) = 0;
+
+  virtual void UpdateCompilationsAsync() = 0;
+
+ public slots:
+  virtual void LoadDirectories() = 0;
+  virtual void UpdateTotalSongCount() = 0;
+  virtual void AddOrUpdateSongs(const SongList& songs) = 0;
+  virtual void UpdateMTimesOnly(const SongList& songs) = 0;
+  virtual void DeleteSongs(const SongList& songs) = 0;
+  virtual void UpdateCompilations() = 0;
+  virtual void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art) = 0;
+  virtual void ForceCompilation(const QString& artist, const QString& album, bool on) = 0;
+
+ signals:
+  void Error(const QString& message);
+
+  void DirectoriesDiscovered(const DirectoryList& directories);
+  void DirectoriesDeleted(const DirectoryList& directories);
+
+  void SongsDiscovered(const SongList& songs);
+  void SongsDeleted(const SongList& songs);
+
+  void TotalSongCountUpdated(int total);
+};
+
+
+class LibraryBackend : public LibraryBackendInterface {
+  Q_OBJECT
+
+ public:
+  LibraryBackend(QObject* parent = 0, const QString& database_name = QString());
 
   static const int kSchemaVersion;
 
@@ -72,17 +129,6 @@ class LibraryBackend : public QObject {
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
   void ForceCompilation(const QString& artist, const QString& album, bool on);
-
- signals:
-  void Error(const QString& message);
-
-  void DirectoriesDiscovered(const DirectoryList& directories);
-  void DirectoriesDeleted(const DirectoryList& directories);
-
-  void SongsDiscovered(const SongList& songs);
-  void SongsDeleted(const SongList& songs);
-
-  void TotalSongCountUpdated(int total);
 
  private:
   struct CompilationInfo {

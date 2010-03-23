@@ -22,7 +22,7 @@ const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 AlbumCoverManager::AlbumCoverManager(QNetworkAccessManager* network, QWidget *parent)
   : QDialog(parent),
     constructed_(false),
-    cover_loader_(new BackgroundThread<AlbumCoverLoader>(this)),
+    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(network, this)),
     artist_icon_(":/artist.png"),
     all_artists_icon_(":/album.png"),
@@ -89,7 +89,7 @@ AlbumCoverManager::AlbumCoverManager(QNetworkAccessManager* network, QWidget *pa
     ui_.splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
 
-  cover_loader_->start();
+  cover_loader_->Start();
   constructed_ = true;
 }
 
@@ -102,7 +102,7 @@ void AlbumCoverManager::CoverLoaderInitialised() {
           SLOT(CoverImageLoaded(quint64,QImage)));
 }
 
-void AlbumCoverManager::SetBackend(boost::shared_ptr<LibraryBackend> backend) {
+void AlbumCoverManager::SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) {
   backend_ = backend;
 
   if (isVisible())
@@ -166,7 +166,7 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
 
   // Get the list of albums.  How we do it depends on what thing we have
   // selected in the artist list.
-  LibraryBackend::AlbumList albums;
+  LibraryBackendInterface::AlbumList albums;
   switch (current->type()) {
     case Various_Artists: albums = backend_->GetCompilationAlbums(); break;
     case Specific_Artist: albums = backend_->GetAlbumsByArtist(current->text()); break;
@@ -174,7 +174,7 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     default:              albums = backend_->GetAllAlbums(); break;
   }
 
-  foreach (const LibraryBackend::Album& info, albums) {
+  foreach (const LibraryBackendInterface::Album& info, albums) {
     // Don't show songs without an album, obviously
     if (info.album_name.isEmpty())
       continue;

@@ -13,6 +13,8 @@
 #include "libraryitem.h"
 #include "simpletreemodel.h"
 
+#include <boost/scoped_ptr.hpp>
+
 class LibraryDirectoryModel;
 
 class Library : public SimpleTreeModel<LibraryItem> {
@@ -29,10 +31,15 @@ class Library : public SimpleTreeModel<LibraryItem> {
     Role_Artist,
   };
 
+  // Useful for tests.  The library takes ownership.
+  void set_backend_factory(BackgroundThreadFactory<LibraryBackendInterface>* factory);
+  void set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory);
+
+  void Init();
   void StartThreads();
 
   LibraryDirectoryModel* GetDirectoryModel() const { return dir_model_; }
-  boost::shared_ptr<LibraryBackend> GetBackend() const { return backend_->Worker(); }
+  boost::shared_ptr<LibraryBackendInterface> GetBackend() const { return backend_->Worker(); }
 
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const;
@@ -52,7 +59,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
   void ScanStarted();
   void ScanFinished();
 
-  void BackendReady(boost::shared_ptr<LibraryBackend> backend);
+  void BackendReady(boost::shared_ptr<LibraryBackendInterface> backend);
 
  public slots:
   void SetFilterAge(int age);
@@ -96,7 +103,9 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
  private:
   EngineBase* engine_;
-  BackgroundThread<LibraryBackend>* backend_;
+  boost::scoped_ptr<BackgroundThreadFactory<LibraryBackendInterface> > backend_factory_;
+  boost::scoped_ptr<BackgroundThreadFactory<LibraryWatcher> > watcher_factory_;
+  BackgroundThread<LibraryBackendInterface>* backend_;
   BackgroundThread<LibraryWatcher>* watcher_;
   LibraryDirectoryModel* dir_model_;
 

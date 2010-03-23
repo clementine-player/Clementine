@@ -179,8 +179,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
-  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackend>)),
-          cover_manager_, SLOT(SetBackend(boost::shared_ptr<LibraryBackend>)));
+  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
+          cover_manager_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
 
   // Age filters
   QActionGroup* filter_age_group = new QActionGroup(this);
@@ -311,6 +311,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     show();
   }
 
+  library_->Init();
   library_->StartThreads();
 }
 

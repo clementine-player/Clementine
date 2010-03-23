@@ -31,10 +31,12 @@ target_link_libraries(gmock gtest)
 set(TESTUTILS-SOURCES
     test_utils.cpp
     mock_networkaccessmanager.cpp
-    mock_taglib.cpp)
+    mock_taglib.cpp
+)
 
 set(TESTUTILS-MOC-HEADERS
-    mock_networkaccessmanager.h)
+    mock_networkaccessmanager.h
+)
 
 qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
@@ -45,6 +47,10 @@ add_custom_target(test
     echo "Running tests"
     WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
 )
+add_custom_target(build_tests
+    WORKING_DIRECTORY ${CURRENT_BINARY_DIR}
+)
+add_dependencies(test build_tests)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
 macro(add_test_file test_source)
@@ -57,7 +63,7 @@ macro(add_test_file test_source)
     target_link_libraries(${TEST_NAME} gmock clementine_lib test_utils)
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME})
-    add_dependencies(test ${TEST_NAME})
+    add_dependencies(build_tests ${TEST_NAME})
 endmacro (add_test_file)
 
 
@@ -66,3 +72,4 @@ add_test_file(song_test.cpp)
 add_test_file(librarybackend_test.cpp)
 add_test_file(albumcoverfetcher_test.cpp)
 add_test_file(xspfparser_test.cpp)
+add_test_file(library_test.cpp)

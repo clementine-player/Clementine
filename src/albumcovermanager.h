@@ -10,7 +10,7 @@
 #include "backgroundthread.h"
 #include "albumcoverloader.h"
 
-class LibraryBackend;
+class LibraryBackendInterface;
 class AlbumCoverFetcher;
 
 class QNetworkAccessManager;
@@ -26,7 +26,7 @@ class AlbumCoverManager : public QDialog {
   void Reset();
 
  public slots:
-  void SetBackend(boost::shared_ptr<LibraryBackend> backend);
+  void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend);
 
  protected:
   void showEvent(QShowEvent *);
@@ -70,7 +70,7 @@ class AlbumCoverManager : public QDialog {
   bool constructed_;
 
   Ui::CoverManager ui_;
-  boost::shared_ptr<LibraryBackend> backend_;
+  boost::shared_ptr<LibraryBackendInterface> backend_;
 
   QAction* filter_all_;
   QAction* filter_with_covers_;

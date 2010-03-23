@@ -13,11 +13,29 @@
 #  include <sys/resource.h>
 #endif
 
+// These classes are a bit confusing because they're trying to do so many
+// things:
+//  * Run a worker in a background thread
+//  * ... or maybe run it in the same thread if we're in a test
+//  * Use interfaces throughout, so the implementations can be mocked
+//  * Create concrete implementations of the interfaces when threads start
+//
+// The types you should use throughout your header files are:
+//   BackgroundThread<InterfaceType>
+//   BackgroundThreadFactory<InterfaceType>
+//
+// You should allow callers to set their own factory (which might return mocks
+// of your interface), and default to using a:
+//   BackgroundThreadFactoryImplementation<InterfaceType, DerivedType>
+
+
+// This is the base class.  We need one because moc doesn't like templated
+// classes.  This also deals with anything that doesn't depend on the type of
+// the worker.
 class BackgroundThreadBase : public QThread {
   Q_OBJECT
  public:
   BackgroundThreadBase(QObject* parent = 0) : QThread(parent), io_priority_(IOPRIO_CLASS_NONE) {}
-  virtual ~BackgroundThreadBase() {}
 
   // Borrowed from schedutils
   enum IoPriority {
@@ -28,14 +46,16 @@ class BackgroundThreadBase : public QThread {
   };
 
   void set_io_priority(IoPriority priority) { io_priority_ = priority; }
+  void set_cpu_priority(QThread::Priority priority) { cpu_priority_ = priority; }
+
+  virtual void Start() { QThread::start(cpu_priority_); }
 
  signals:
   void Initialised();
 
  protected:
-  // Borrowed from schedutils
-  static inline int ioprio_set(int which, int who, int ioprio);
-  static inline int gettid();
+  int SetIOPriority();
+  static int gettid();
 
   enum {
     IOPRIO_WHO_PROCESS = 1,
@@ -45,31 +65,61 @@ class BackgroundThreadBase : public QThread {
   static const int IOPRIO_CLASS_SHIFT = 13;
 
   IoPriority io_priority_;
+  QThread::Priority cpu_priority_;
 };
 
-template <typename T>
+// This is the templated class that stores and returns the worker object.
+template <typename InterfaceType>
 class BackgroundThread : public BackgroundThreadBase {
  public:
   BackgroundThread(QObject* parent = 0);
-  virtual ~BackgroundThread();
+  ~BackgroundThread();
 
-  boost::shared_ptr<T> Worker() const { return worker_; }
+  boost::shared_ptr<InterfaceType> Worker() const { return worker_; }
+
+ protected:
+  boost::shared_ptr<InterfaceType> worker_;
+};
+
+// This class actually creates an implementation of the worker object
+template <typename InterfaceType, typename DerivedType>
+class BackgroundThreadImplementation : public BackgroundThread<InterfaceType> {
+ public:
+  BackgroundThreadImplementation(QObject* parent = 0);
 
  protected:
   void run();
-
- private:
-  boost::shared_ptr<T> worker_;
 };
 
-template <typename T>
-BackgroundThread<T>::BackgroundThread(QObject *parent)
+
+// This is a pure virtual factory for creating threads.
+template <typename InterfaceType>
+class BackgroundThreadFactory {
+ public:
+  virtual ~BackgroundThreadFactory() {}
+  virtual BackgroundThread<InterfaceType>* GetThread(QObject* parent) = 0;
+};
+
+// This implementation of the factory returns a BackgroundThread that creates
+// the right derived types...
+template <typename InterfaceType, typename DerivedType>
+class BackgroundThreadFactoryImplementation : public BackgroundThreadFactory<InterfaceType> {
+ public:
+  BackgroundThread<InterfaceType>* GetThread(QObject* parent) {
+    return new BackgroundThreadImplementation<InterfaceType, DerivedType>(parent);
+  }
+};
+
+
+
+template <typename InterfaceType>
+BackgroundThread<InterfaceType>::BackgroundThread(QObject *parent)
   : BackgroundThreadBase(parent)
 {
 }
 
-template <typename T>
-BackgroundThread<T>::~BackgroundThread() {
+template <typename InterfaceType>
+BackgroundThread<InterfaceType>::~BackgroundThread() {
   if (isRunning()) {
     quit();
     if (wait(10000))
@@ -79,39 +129,27 @@ BackgroundThread<T>::~BackgroundThread() {
   }
 }
 
-template <typename T>
-void BackgroundThread<T>::run() {
-#ifdef Q_OS_LINUX
-  if (io_priority_ != IOPRIO_CLASS_NONE) {
-    ioprio_set(IOPRIO_WHO_PROCESS, gettid(),
-               4 | io_priority_ << IOPRIO_CLASS_SHIFT);
-  }
-#endif
-
-  worker_.reset(new T);
-
-  emit Initialised();
-  exec();
-
-  worker_.reset();
+template <typename InterfaceType, typename DerivedType>
+BackgroundThreadImplementation<InterfaceType, DerivedType>::
+    BackgroundThreadImplementation(QObject* parent)
+      : BackgroundThread<InterfaceType>(parent)
+{
 }
 
-int BackgroundThreadBase::ioprio_set(int which, int who, int ioprio) {
-#ifdef Q_OS_LINUX
-  return syscall(SYS_ioprio_set, which, who, ioprio);
-#elif defined(Q_OS_DARWIN)
-  return setpriority(PRIO_DARWIN_THREAD, 0, ioprio == IOPRIO_CLASS_IDLE ? PRIO_DARWIN_BG : 0);
-#else
-  return 0;
-#endif
+
+template <typename InterfaceType, typename DerivedType>
+void BackgroundThreadImplementation<InterfaceType, DerivedType>::run() {
+  BackgroundThreadBase::SetIOPriority();
+
+  BackgroundThread<InterfaceType>::worker_.reset(new DerivedType);
+
+  emit BackgroundThreadBase::Initialised();
+  QThread::exec();
+
+  BackgroundThread<InterfaceType>::worker_.reset();
 }
 
-int BackgroundThreadBase::gettid() {
-#ifdef Q_OS_LINUX
-  return syscall(SYS_gettid);
-#else
-  return 0;
-#endif
-}
+
+
 
 #endif // BACKGROUNDTHREAD_H

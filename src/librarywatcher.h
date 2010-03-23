@@ -14,7 +14,7 @@
 class QFileSystemWatcher;
 class QTimer;
 
-class LibraryBackend;
+class LibraryBackendInterface;
 
 class LibraryWatcher : public QObject {
   Q_OBJECT
@@ -22,7 +22,7 @@ class LibraryWatcher : public QObject {
  public:
   LibraryWatcher(QObject* parent = 0);
 
-  void SetBackend(boost::shared_ptr<LibraryBackend> backend) { backend_ = backend; }
+  void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) { backend_ = backend; }
   void SetEngine(EngineBase* engine) { engine_ = engine; } // TODO: shared_ptr
 
  signals:
@@ -51,7 +51,7 @@ class LibraryWatcher : public QObject {
 
  private:
   EngineBase* engine_;
-  boost::shared_ptr<LibraryBackend> backend_;
+  boost::shared_ptr<LibraryBackendInterface> backend_;
 
   QFileSystemWatcher* fs_watcher_;
   QTimer* rescan_timer_;

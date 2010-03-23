@@ -8,7 +8,7 @@
 
 #include "directory.h"
 
-class LibraryBackend;
+class LibraryBackendInterface;
 
 class LibraryDirectoryModel : public QStandardItemModel {
   Q_OBJECT
@@ -16,7 +16,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
  public:
   LibraryDirectoryModel(QObject* parent = 0);
 
-  void SetBackend(boost::shared_ptr<LibraryBackend> backend);
+  void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend);
   bool IsBackendReady() const { return backend_; }
 
   // To be called by GUIs
@@ -35,7 +35,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
   static const int kIdRole = Qt::UserRole + 1;
 
   QIcon dir_icon_;
-  boost::shared_ptr<LibraryBackend> backend_;
+  boost::shared_ptr<LibraryBackendInterface> backend_;
 };
 
 #endif // LIBRARYDIRECTORYMODEL_H

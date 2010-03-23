@@ -13,31 +13,49 @@
 Library::Library(EngineBase* engine, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     engine_(engine),
-    backend_(new BackgroundThread<LibraryBackend>(this)),
-    watcher_(new BackgroundThread<LibraryWatcher>(this)),
+    backend_factory_(new BackgroundThreadFactoryImplementation<LibraryBackendInterface, LibraryBackend>),
+    watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
+    backend_(NULL),
+    watcher_(NULL),
     dir_model_(new LibraryDirectoryModel(this)),
+    waiting_for_threads_(2),
     artist_icon_(":artist.png"),
     album_icon_(":album.png"),
     no_cover_icon_(":nocover.png")
 {
   root_->lazy_loaded = true;
-
-  connect(backend_, SIGNAL(Initialised()), SLOT(BackendInitialised()));
-  connect(watcher_, SIGNAL(Initialised()), SLOT(WatcherInitialised()));
-  waiting_for_threads_ = 2;
 }
 
 Library::~Library() {
   delete root_;
 }
 
+void Library::set_backend_factory(BackgroundThreadFactory<LibraryBackendInterface>* factory) {
+  backend_factory_.reset(factory);
+}
+
+void Library::set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory) {
+  watcher_factory_.reset(factory);
+}
+
+void Library::Init() {
+  backend_ = backend_factory_->GetThread(this);
+  watcher_ = watcher_factory_->GetThread(this);
+
+  connect(backend_, SIGNAL(Initialised()), SLOT(BackendInitialised()));
+  connect(watcher_, SIGNAL(Initialised()), SLOT(WatcherInitialised()));
+}
+
 void Library::StartThreads() {
   Q_ASSERT(waiting_for_threads_);
+  Q_ASSERT(backend_);
+  Q_ASSERT(watcher_);
 
-  backend_->start();
+  backend_->Start();
 
   watcher_->set_io_priority(BackgroundThreadBase::IOPRIO_CLASS_IDLE);
-  watcher_->start(QThread::IdlePriority);
+  watcher_->set_cpu_priority(QThread::IdlePriority);
+  watcher_->Start();
 }
 
 void Library::BackendInitialised() {
@@ -375,7 +393,7 @@ void Library::LazyPopulate(LibraryItem* item) {
 
   switch (item->type) {
     case LibraryItem::Type_CompilationArtist:
-      foreach (const LibraryBackend::Album& album,
+      foreach (const LibraryBackendInterface::Album& album,
                backend_->Worker()->GetCompilationAlbums(query_options_))
         CreateAlbumNode(false, album.album_name, item, true, album.art_automatic, album.art_manual, album.artist);
       break;
@@ -386,7 +404,7 @@ void Library::LazyPopulate(LibraryItem* item) {
       break;
 
     case LibraryItem::Type_Artist:
-      foreach (const LibraryBackend::Album& album,
+      foreach (const LibraryBackendInterface::Album& album,
                backend_->Worker()->GetAlbumsByArtist(item->key, query_options_))
         CreateAlbumNode(false, album.album_name, item, false, album.art_automatic, album.art_manual, album.artist);
       break;
