@@ -23,9 +23,17 @@
 #endif
 
 void LoadTranslation(const QString& prefix, const QString& path) {
+  // QTranslator::load will try to open and read "clementine" if it exists,
+  // without checking if it's a file first.
+  QFileInfo maybe_clementine_directory(path + "/clementine");
+  if (maybe_clementine_directory.exists() && !maybe_clementine_directory.isFile())
+    return;
+
   QTranslator* t = new QTranslator;
-  t->load(prefix + "_" + QLocale::system().name(), path);
-  QCoreApplication::installTranslator(t);
+  if (t->load(prefix + "_" + QLocale::system().name(), path))
+    QCoreApplication::installTranslator(t);
+  else
+    delete t;
 }
 
 int main(int argc, char *argv[]) {
