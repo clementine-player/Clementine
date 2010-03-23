@@ -11,7 +11,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel xine-lib-devel
 BuildRequires:  libnotify-devel qt4-devel boost-devel notification-daemon gcc-c++
-BuildRequires:  cmake sqlite-devel
+BuildRequires:  cmake
 Requires:       xine-lib-extras-freeworld
 
 %description
