@@ -1,4 +1,5 @@
 #include "song.h"
+#include "fixlastfm.h"
 #include <lastfm/Track>
 
 #include "gmock/gmock.h"
