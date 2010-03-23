@@ -99,23 +99,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bar analyzer</source>
-        <translation>Analizador en barras</translation>
+        <translation>Barras</translation>
     </message>
     <message>
         <source>Block analyzer</source>
-        <translation>Analizador en bloques</translation>
+        <translation>Bloques</translation>
     </message>
     <message>
         <source>Boom analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Boom</translation>
     </message>
     <message>
         <source>Sonogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonograma</translation>
     </message>
     <message>
         <source>Turbine</source>
-        <translation type="unfinished"></translation>
+        <translation>Turbina</translation>
     </message>
 </context>
 <context>
@@ -732,7 +732,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Renumber tracks in this order...</source>
-        <translation type="unfinished"></translation>
+        <translation>Renumerar pistas en este orden...</translation>
     </message>
 </context>
 <context>
