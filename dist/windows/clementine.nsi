@@ -14,7 +14,7 @@ SetCompressor /SOLID lzma
 !define MUI_ICON "clementine.ico"
 
 !define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_FINISHPAGE_RUN clementine.exe
+!define MUI_FINISHPAGE_RUN $INSTDIR/clementine.exe
 
 ; Installer pages
 !insertmacro MUI_PAGE_WELCOME
