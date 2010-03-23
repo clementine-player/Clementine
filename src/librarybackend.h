@@ -22,6 +22,12 @@ class LibraryBackendInterface : public QObject {
   LibraryBackendInterface(QObject* parent = 0);
 
   struct Album {
+    Album() {}
+    Album(const QString& _artist, const QString& _album_name,
+          const QString& _art_automatic, const QString& _art_manual)
+            : artist(_artist), album_name(_album_name),
+              art_automatic(_art_automatic), art_manual(_art_manual) {}
+
     QString artist;
     QString album_name;
 

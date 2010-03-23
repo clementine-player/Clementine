@@ -3,8 +3,13 @@
 
 #include "librarybackend.h"
 
+#include <gmock/gmock.h>
+
 class MockLibraryBackend : public LibraryBackendInterface {
  public:
+  ~MockLibraryBackend() { Die(); }
+  MOCK_METHOD0(Die, void());
+
   MOCK_METHOD0(LoadDirectoriesAsync,
       void());
   MOCK_METHOD0(UpdateTotalSongCountAsync,
@@ -53,6 +58,9 @@ class MockLibraryBackend : public LibraryBackendInterface {
       void(const QString& artist, const QString& album, const QString& art));
   MOCK_METHOD3(ForceCompilation,
       void(const QString& artist, const QString& album, bool on));
+
+  void ExpectSetup(bool has_compilations = false,
+                   const QStringList& artists = QStringList());
 };
 
 #endif
