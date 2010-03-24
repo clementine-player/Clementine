@@ -117,5 +117,65 @@ TEST_F(LibraryTest, CompilationAlbums) {
   EXPECT_TRUE(library_->hasChildren(album_index));
 }
 
+TEST_F(LibraryTest, NumericHeaders) {
+  backend_->ExpectSetup(false, QStringList() << "1artist" << "2artist" << "0artist" << "zartist");
+  library_->StartThreads();
+
+  ASSERT_EQ(6, library_sorted_->rowCount(QModelIndex()));
+  EXPECT_EQ("0-9", library_sorted_->index(0, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("0artist", library_sorted_->index(1, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("1artist", library_sorted_->index(2, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("2artist", library_sorted_->index(3, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("z", library_sorted_->index(4, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("zartist", library_sorted_->index(5, 0, QModelIndex()).data().toString());
+}
+
+TEST_F(LibraryTest, MixedCaseHeaders) {
+  backend_->ExpectSetup(false, QStringList() << "Artist" << "artist");
+  library_->StartThreads();
+
+  ASSERT_EQ(3, library_sorted_->rowCount(QModelIndex()));
+  EXPECT_EQ("a", library_sorted_->index(0, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("Artist", library_sorted_->index(1, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("artist", library_sorted_->index(2, 0, QModelIndex()).data().toString());
+}
+
+TEST_F(LibraryTest, UnknownArtists) {
+  backend_->ExpectSetup(false, QStringList() << "");
+  library_->StartThreads();
+
+  ASSERT_EQ(1, library_->rowCount(QModelIndex()));
+  QModelIndex unknown_index = library_->index(0, 0, QModelIndex());
+  EXPECT_EQ("Unknown", unknown_index.data().toString());
+
+  LibraryBackendInterface::AlbumList albums;
+  albums << LibraryBackendInterface::Album("", "Album", "", "");
+  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString(""), _))
+      .WillOnce(Return(albums));
+
+  ASSERT_EQ(1, library_->rowCount(unknown_index));
+  EXPECT_EQ("Album", library_->index(0, 0, unknown_index).data().toString());
+}
+
+TEST_F(LibraryTest, UnknownAlbums) {
+  backend_->ExpectSetup(false, QStringList() << "Artist");
+  library_->StartThreads();
+
+  LibraryBackendInterface::AlbumList albums;
+  albums << LibraryBackendInterface::Album("Artist", "", "", "");
+  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
+  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
+      .WillOnce(Return(albums));
+
+  QModelIndex artist_index = library_->index(0, 0, QModelIndex());
+  ASSERT_EQ(2, library_->rowCount(artist_index));
+
+  QModelIndex unknown_album_index = library_->index(0, 0, artist_index);
+  QModelIndex real_album_index = library_->index(1, 0, artist_index);
+
+  EXPECT_EQ("Unknown", unknown_album_index.data().toString());
+  EXPECT_EQ("Album", real_album_index.data().toString());
+}
+
 
 } // namespace
