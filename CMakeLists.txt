@@ -43,6 +43,10 @@ if (LIBNOTIFY_FOUND)
   include_directories(${LIBNOTIFY_INCLUDE_DIRS})
 endif (LIBNOTIFY_FOUND)
 
+if (TAGLIB_VERSION VERSION_LESS 1.6)
+  message(FATAL_ERROR "Taglib version 1.6 or greater is required")
+endif (TAGLIB_VERSION VERSION_LESS 1.6)
+
 find_library(LASTFM_LIBRARY_DIRS lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
