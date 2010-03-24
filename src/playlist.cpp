@@ -57,28 +57,9 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
   if (role != Qt::DisplayRole)
     return QVariant();
 
-  switch (section) {
-    case Column_Title:    return tr("Title");
-    case Column_Artist:   return tr("Artist");
-    case Column_Album:    return tr("Album");
-    case Column_Length:   return tr("Length");
-    case Column_Track:    return tr("Track");
-    case Column_Disc:     return tr("Disc");
-    case Column_Year:     return tr("Year");
-    case Column_Genre:    return tr("Genre");
-    case Column_AlbumArtist: return tr("Album artist");
-    case Column_Composer: return tr("Composer");
-
-    case Column_BPM:      return tr("BPM");
-    case Column_Bitrate:  return tr("Bit rate");
-    case Column_Samplerate: return tr("Sample rate");
-    case Column_Filename: return tr("File name");
-    case Column_BaseFilename: return tr("File name (without path)");
-    case Column_Filesize: return tr("File size");
-    case Column_Filetype: return tr("File type");
-    case Column_DateModified: return tr("Date modified");
-    case Column_DateCreated: return tr("Date created");
-  }
+  QString name = column_name((Playlist::Column)section);
+  if(name.size())
+      return name;
 
   return QVariant();
 }
@@ -466,6 +447,32 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
 #undef cmp
 
   return false;
+}
+
+QString Playlist::column_name(Column column) {
+  switch (column) {
+    case Column_Title:    return tr("Title");
+    case Column_Artist:   return tr("Artist");
+    case Column_Album:    return tr("Album");
+    case Column_Length:   return tr("Length");
+    case Column_Track:    return tr("Track");
+    case Column_Disc:     return tr("Disc");
+    case Column_Year:     return tr("Year");
+    case Column_Genre:    return tr("Genre");
+    case Column_AlbumArtist: return tr("Album artist");
+    case Column_Composer: return tr("Composer");
+
+    case Column_BPM:      return tr("BPM");
+    case Column_Bitrate:  return tr("Bit rate");
+    case Column_Samplerate: return tr("Sample rate");
+    case Column_Filename: return tr("File name");
+    case Column_BaseFilename: return tr("File name (without path)");
+    case Column_Filesize: return tr("File size");
+    case Column_Filetype: return tr("File type");
+    case Column_DateModified: return tr("Date modified");
+    case Column_DateCreated: return tr("Date created");
+  }
+  return "";
 }
 
 void Playlist::sort(int column, Qt::SortOrder order) {

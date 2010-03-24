@@ -656,12 +656,13 @@
    </property>
   </action>
   <action name="action_renumber_tracks">
-   <property name="icon">
-    <iconset resource="../data/data.qrc">
-     <normaloff>:/edit-track.png</normaloff>:/edit-track.png</iconset>
-   </property>
    <property name="text">
     <string>Renumber tracks in this order...</string>
+   </property>
+  </action>
+  <action name="action_selection_set_value">
+   <property name="text">
+    <string>Set value for all selected tracks...</string>
    </property>
   </action>
   <action name="action_configure">

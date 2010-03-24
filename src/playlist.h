@@ -71,6 +71,8 @@ class Playlist : public QAbstractListModel {
   static bool CompareItems(int column, Qt::SortOrder order,
                            const PlaylistItem* a, const PlaylistItem* b);
 
+  static QString column_name(Column column);
+
   // Persistence
   void Save() const;
   void Restore();

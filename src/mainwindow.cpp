@@ -131,6 +131,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_.action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
+  connect(ui_.action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
   connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
   connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
   connect(ui_.action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
@@ -236,8 +237,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_.action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
+  playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_edit_track);
   playlist_menu_->addAction(ui_.action_renumber_tracks);
+  playlist_menu_->addAction(ui_.action_selection_set_value);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_clear_playlist);
   playlist_menu_->addAction(ui_.action_shuffle);
@@ -569,18 +572,28 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_stop_after_->setEnabled(index.isValid());
 
   // Are any of the selected songs editable?
-  bool editable = false;
+  int editable = 0;
   foreach (const QModelIndex& index,
            ui_.playlist->selectionModel()->selection().indexes()) {
     if (index.column() != 0)
       continue;
     if (playlist_->item_at(index.row())->Metadata().IsEditable()) {
-      editable = true;
-      break;
+      editable++;
     }
   }
   ui_.action_edit_track->setEnabled(editable);
   ui_.action_renumber_tracks->setEnabled(editable);
+  ui_.action_selection_set_value->setEnabled(editable >= 2);
+
+  Playlist::Column column = (Playlist::Column)playlist_menu_index_.column();
+  ui_.action_selection_set_value->setVisible(
+      column <= Playlist::Column_Genre &&
+      column != Playlist::Column_Length);
+
+  QString column_name = Playlist::column_name(column);
+  QString column_value = playlist_->data(playlist_menu_index_).toString();
+  ui_.action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
+           .arg(column_name.toLower()).arg(column_value));
 
   playlist_menu_->popup(global_pos);
 }
@@ -644,6 +657,54 @@ void MainWindow::RenumberTracks() {
       playlist_->item_at(row)->Reload();
     }
     track++;
+  }
+}
+
+void MainWindow::SelectionSetValue() {
+  Playlist::Column column = (Playlist::Column)playlist_menu_index_.column();
+  QVariant column_value = playlist_->data(playlist_menu_index_);
+
+  QModelIndexList indexes=ui_.playlist->selectionModel()->selection().indexes();
+  foreach (const QModelIndex& index, indexes) {
+    if (index.column() != 0)
+      continue;
+
+    int row = index.row();
+    Song song = playlist_->item_at(row)->Metadata();
+
+    if (song.IsEditable()) {
+      switch(column) {
+        case Playlist::Column_Title:
+          song.set_title(column_value.toString());
+          break;
+        case Playlist::Column_Artist:
+          song.set_artist(column_value.toString());
+          break;
+        case Playlist::Column_Album:
+          song.set_album(column_value.toString());
+          break;
+        case Playlist::Column_AlbumArtist:
+          song.set_albumartist(column_value.toString());
+          break;
+        case Playlist::Column_Composer:
+          song.set_composer(column_value.toString());
+          break;
+        case Playlist::Column_Track:
+          song.set_track(column_value.toInt());
+          break;
+        case Playlist::Column_Disc:
+          song.set_disc(column_value.toInt());
+          break;
+        case Playlist::Column_Year:
+          song.set_year(column_value.toInt());
+          break;
+        case Playlist::Column_Genre:
+          song.set_genre(column_value.toString());
+          break;
+      }
+      song.Save();
+      playlist_->item_at(row)->Reload();
+    }
   }
 }
 
