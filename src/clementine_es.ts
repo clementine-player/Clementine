@@ -734,6 +734,14 @@ p, li { white-space: pre-wrap; }
         <source>Renumber tracks in this order...</source>
         <translation>Renumerar pistas en este orden...</translation>
     </message>
+    <message>
+        <source>Set value for all selected tracks...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set %1 to &quot;%2&quot;...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
