@@ -35,6 +35,7 @@
 
 #include <boost/bind.hpp>
 
+#ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
   arg.beginStructure();
   arg << status.Play;
@@ -54,6 +55,7 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
   arg.endStructure();
   return arg;
 }
+#endif
 
 Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   : QObject(parent),

@@ -25,7 +25,6 @@
 #include "mainwindow.h"
 #include "player.h"
 #include "song.h"
-#include "mpris.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -33,8 +32,12 @@
 #include <QTranslator>
 #include <QDir>
 #include <QNetworkAccessManager>
-#include <QDBusConnection>
-#include <QDBusMetaType>
+
+#ifdef Q_WS_X11
+#  include <QDBusConnection>
+#  include <QDBusMetaType>
+#  include "mpris.h"
+#endif
 
 // Load sqlite plugin on windows
 #ifdef WIN32

@@ -21,7 +21,6 @@
 #include <QSettings>
 #include <QFuture>
 #include <QFutureWatcher>
-#include <QDBusArgument>
 
 #include "engine_fwd.h"
 #include "playlistitem.h"
@@ -39,8 +38,11 @@ struct DBusStatus {   // From Amarok.
 };
 Q_DECLARE_METATYPE(DBusStatus);
 
+#ifdef Q_WS_X11
+#include <QDBusArgument>
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status);
 const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status);
+#endif
 
 class Player : public QObject {
   Q_OBJECT

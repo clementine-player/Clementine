@@ -238,6 +238,8 @@ target_link_libraries(clementine_lib
 if (APPLE)
   target_link_libraries(clementine_lib
       ${GROWL}
+      /System/Library/Frameworks/Carbon.framework
+      /System/Library/Frameworks/Foundation.framework
   )
   include_directories(${GROWL}/Headers)
 endif (APPLE)
