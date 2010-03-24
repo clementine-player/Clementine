@@ -232,6 +232,9 @@ void Player::Seek(int seconds) {
     return;
 
   engine_->seek(seconds * 1000);
+
+  // If we seek the track we don't want to submit it to last.fm
+  playlist_->set_scrobbled(true);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
