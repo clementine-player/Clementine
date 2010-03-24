@@ -580,16 +580,18 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
   QList<int>::iterator it = virtual_items_.begin();
   int i = 0;
   while (it != virtual_items_.end()) {
-    if (*it >= items_.count()) {
-      if (i >= current_virtual_index_)
-        current_virtual_index_ --;
-
+    if (*it >= items_.count())
       it = virtual_items_.erase(it);
-    } else {
+    else
       ++it;
-    }
     ++i;
   }
+
+  // Reset current_virtual_index_
+  if (current_index() == -1)
+    current_virtual_index_ = -1;
+  else
+    current_virtual_index_ = virtual_items_.indexOf(current_index());
 
   Save();
   return true;
@@ -682,6 +684,8 @@ void Playlist::Clear() {
   items_.clear();
   virtual_items_.clear();
   reset();
+
+  current_virtual_index_ = -1;
 
   Save();
 }
