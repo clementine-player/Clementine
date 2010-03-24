@@ -38,20 +38,20 @@
 #ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
   arg.beginStructure();
-  arg << status.Play;
-  arg << status.Random;
-  arg << status.Repeat;
-  arg << status.RepeatPlaylist;
+  arg << status.play;
+  arg << status.random;
+  arg << status.repeat;
+  arg << status.repeat_playlist;
   arg.endStructure();
   return arg;
 }
 
 const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
   arg.beginStructure();
-  arg >> status.Play;
-  arg >> status.Random;
-  arg >> status.Repeat;
-  arg >> status.RepeatPlaylist;
+  arg >> status.play;
+  arg >> status.random;
+  arg >> status.repeat;
+  arg >> status.repeat_playlist;
   arg.endStructure();
   return arg;
 }
@@ -298,7 +298,7 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
 int Player::GetCaps() const {
   int caps = CAN_HAS_TRACKLIST;
   if (current_item_.is_valid()) { caps |= CAN_PROVIDE_METADATA; }
-  if (GetState() == Engine::Playing && current_item_.filetype() != Song::Type_Stream) {
+  if (GetState() == Engine::Playing && current_item_options_ & PlaylistItem::PauseDisabled) {
     caps |= CAN_PAUSE;
   }
   if (GetState() == Engine::Paused) {
@@ -322,19 +322,19 @@ DBusStatus Player::GetStatus() const {
   switch (GetState()) {
     case Engine::Empty:
     case Engine::Idle:
-      status.Play = 2;
+      status.play = DBusStatus::Mpris_Stopped;
       break;
     case Engine::Playing:
-      status.Play = 0;
+      status.play = DBusStatus::Mpris_Playing;
       break;
     case Engine::Paused:
-      status.Play = 1;
+      status.play = DBusStatus::Mpris_Paused;
       break;
   }
-  status.Random = playlist_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
+  status.random = playlist_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
   PlaylistSequence::RepeatMode repeat_mode = playlist_->sequence()->repeat_mode();
-  status.Repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
-  status.RepeatPlaylist = (repeat_mode == PlaylistSequence::Repeat_Album ||
+  status.repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
+  status.repeat_playlist = (repeat_mode == PlaylistSequence::Repeat_Album ||
                            repeat_mode == PlaylistSequence::Repeat_Playlist) ? 1 : 0;
   return status;
 }
@@ -474,9 +474,9 @@ int Player::AddTrack(const QString& track, bool play_now) {
     if (play_now) {
       Next();
     }
-    return 0;
+    return 0;  // Success.
   }
-  return -1;
+  return -1;  // Anything else for failure.
 }
 
 void Player::DelTrack(int index) {

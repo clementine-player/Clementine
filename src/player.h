@@ -30,11 +30,17 @@ class Playlist;
 class Settings;
 class LastFMService;
 
-struct DBusStatus {   // From Amarok.
-  int Play;           // Playing = 0, Paused = 1, Stopped = 2
-  int Random;         // Linearly = 0, Randomly = 1
-  int Repeat;         // Go_To_Next = 0, Repeat_Current = 1
-  int RepeatPlaylist; // Stop_When_Finished = 0, Never_Give_Up_Playing = 1
+struct DBusStatus {    // From Amarok.
+  int play;            // Playing = 0, Paused = 1, Stopped = 2
+  int random;          // Linearly = 0, Randomly = 1
+  int repeat;          // Go_To_Next = 0, Repeat_Current = 1
+  int repeat_playlist; // Stop_When_Finished = 0, Never_Give_Up_Playing = 1, Never_Let_You_Down = 42
+
+  enum MprisPlayState {
+    Mpris_Playing = 0,
+    Mpris_Paused = 1,
+    Mpris_Stopped = 2,
+  };
 };
 Q_DECLARE_METATYPE(DBusStatus);
 

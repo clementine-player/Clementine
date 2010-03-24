@@ -41,7 +41,9 @@ MPRIS::MPRIS(QObject* parent)
 }
 
 QString MPRIS::Identity() {
-  return "Clementine 0.2";
+  return QString("%1 %2").arg(
+      QCoreApplication::applicationName(),
+      QCoreApplication::applicationVersion());
 }
 
 Version MPRIS::MprisVersion() {
