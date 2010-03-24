@@ -258,5 +258,102 @@ TEST_F(LibraryTest, RemoveSongsLazyLoaded) {
   EXPECT_EQ("Title 3", library_->index(0, 0, album_index).data().toString());
 }
 
+TEST_F(LibraryTest, RemoveSongsNotLazyLoaded) {
+  backend_->ExpectSetup(false, QStringList() << "Artist");
+  library_->StartThreads();
+
+  LibraryBackendInterface::AlbumList albums;
+  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
+
+  SongList songs;
+  songs << Song() << Song() << Song();
+  songs[0].Init("Title 1", "Artist", "Album", 0); songs[0].set_id(0);
+  songs[1].Init("Title 2", "Artist", "Album", 0); songs[1].set_id(1);
+
+  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
+      .WillOnce(Return(albums));
+
+  // Remove the first two songs
+  QSignalSpy spy1(library_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
+  QSignalSpy spy2(library_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+
+  backend_->EmitSongsDeleted(songs);
+
+  ASSERT_EQ(0, spy1.count());
+  ASSERT_EQ(0, spy2.count());
+}
+
+TEST_F(LibraryTest, RemoveEmptyAlbums) {
+  backend_->ExpectSetup(false, QStringList() << "Artist");
+  library_->StartThreads();
+
+  LibraryBackendInterface::AlbumList albums;
+  albums << LibraryBackendInterface::Album("Artist", "Album 1", "", "");
+  albums << LibraryBackendInterface::Album("Artist", "Album 2", "", "");
+
+  SongList songs_one; songs_one << Song();
+  SongList songs_two; songs_two << Song() << Song();
+  songs_one[0].Init("Title 1", "Artist", "Album 1", 0); songs_one[0].set_id(0);
+  songs_two[0].Init("Title 2", "Artist", "Album 2", 0); songs_two[0].set_id(1);
+  songs_two[1].Init("Title 3", "Artist", "Album 2", 0); songs_two[1].set_id(2);
+
+  // Lazy load the album
+  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
+      .WillOnce(Return(albums));
+
+  QModelIndex artist_index = library_->index(0, 0, QModelIndex());
+  ASSERT_EQ(2, library_->rowCount(artist_index));
+
+  // Remove one song from each album
+  SongList songs_to_delete;
+  songs_to_delete << songs_one.takeFirst() << songs_two.takeFirst();
+
+  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album 1"), _))
+      .WillOnce(Return(songs_one));
+  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album 2"), _))
+      .WillOnce(Return(songs_two));
+
+  backend_->EmitSongsDeleted(songs_to_delete);
+
+  // Check the model
+  ASSERT_EQ(1, library_->rowCount(artist_index));
+  QModelIndex album_index = library_->index(0, 0, artist_index);
+  EXPECT_EQ("Album 2", album_index.data().toString());
+
+  ASSERT_EQ(1, library_->rowCount(album_index));
+  EXPECT_EQ("Title 3", library_->index(0, 0, album_index).data().toString());
+}
+
+TEST_F(LibraryTest, RemoveEmptyArtists) {
+  backend_->ExpectSetup(false, QStringList() << "Artist");
+  library_->StartThreads();
+
+  LibraryBackendInterface::AlbumList albums;
+  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
+
+  SongList songs = SongList() << Song();
+  songs[0].Init("Title 1", "Artist", "Album", 0); songs[0].set_id(0);
+
+  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
+      .WillOnce(Return(albums));
+  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album"), _))
+      .WillOnce(Return(songs));
+
+  // Lazy load the items
+  QModelIndex artist_index = library_->index(0, 0, QModelIndex());
+  ASSERT_EQ(1, library_->rowCount(artist_index));
+  QModelIndex album_index = library_->index(0, 0, artist_index);
+  ASSERT_EQ(1, library_->rowCount(album_index));
+
+  // The artist header is there too right?
+  ASSERT_EQ(2, library_->rowCount(QModelIndex()));
+
+  // Remove the song
+  backend_->EmitSongsDeleted(songs);
+
+  // Everything should be gone - even the artist header
+  ASSERT_EQ(0, library_->rowCount(QModelIndex()));
+}
+
 
 } // namespace
