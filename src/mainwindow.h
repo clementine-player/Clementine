@@ -71,6 +71,7 @@ class MainWindow : public QMainWindow {
   void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);
   void PlaylistPlay();
   void PlaylistStopAfter();
+  void PlaylistRemoveCurrent();
   void EditTracks();
   void RenumberTracks();
   void SelectionSetValue();

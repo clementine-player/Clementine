@@ -129,6 +129,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
+  connect(ui_.action_remove_from_playlist, SIGNAL(triggered()), SLOT(PlaylistRemoveCurrent()));
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_.action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
   connect(ui_.action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
@@ -237,6 +238,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_.action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
+  playlist_menu_->addSeparator();
+  playlist_menu_->addAction(ui_.action_remove_from_playlist);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_edit_track);
   playlist_menu_->addAction(ui_.action_renumber_tracks);
@@ -572,9 +575,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_stop_after_->setEnabled(index.isValid());
 
   // Are any of the selected songs editable?
+  QModelIndexList selection = ui_.playlist->selectionModel()->selection().indexes();
   int editable = 0;
-  foreach (const QModelIndex& index,
-           ui_.playlist->selectionModel()->selection().indexes()) {
+  foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
       continue;
     if (playlist_->item_at(index.row())->Metadata().IsEditable()) {
@@ -584,6 +587,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   ui_.action_edit_track->setEnabled(editable);
   ui_.action_renumber_tracks->setEnabled(editable);
   ui_.action_selection_set_value->setEnabled(editable >= 2);
+  ui_.action_remove_from_playlist->setEnabled(!selection.isEmpty());
 
   if (!index.isValid()) {
     ui_.action_selection_set_value->setVisible(false);
@@ -777,4 +781,8 @@ void MainWindow::AddStreamAccepted() {
   urls << add_stream_dialog_->url();
 
   playlist_->InsertStreamUrls(urls);
+}
+
+void MainWindow::PlaylistRemoveCurrent() {
+  ui_.playlist->RemoveSelected();
 }

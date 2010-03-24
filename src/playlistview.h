@@ -65,6 +65,8 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
+  void RemoveSelected();
+
   // QTreeView
   void setModel(QAbstractItemModel *model);
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;

@@ -352,23 +352,7 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
 
   if (event->matches(QKeySequence::Delete) ||
       event->key() == Qt::Key_Backspace) {
-    QItemSelection selection(selectionModel()->selection());
-
-    // Sort the selection so we remove the items at the *bottom* first, ensuring
-    // we don't have to mess around with changing row numbers
-    qSort(selection.begin(), selection.end(), CompareSelectionRanges);
-
-    foreach (const QItemSelectionRange& range, selection) {
-      model()->removeRows(range.top(), range.height(), range.parent());
-    }
-
-    // Select the new current item
-    if (currentIndex().isValid())
-      selectionModel()->select(
-          QItemSelection(currentIndex().sibling(currentIndex().row(), 0),
-                         currentIndex().sibling(currentIndex().row(), model()->columnCount()-1)),
-          QItemSelectionModel::Select);
-
+    RemoveSelected();
     event->accept();
   } else if (event->key() == Qt::Key_Enter ||
              event->key() == Qt::Key_Return ||
@@ -384,4 +368,23 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
 void PlaylistView::contextMenuEvent(QContextMenuEvent* e) {
   emit RightClicked(e->globalPos(), indexAt(e->pos()));
   e->accept();
+}
+
+void PlaylistView::RemoveSelected() {
+  QItemSelection selection(selectionModel()->selection());
+
+  // Sort the selection so we remove the items at the *bottom* first, ensuring
+  // we don't have to mess around with changing row numbers
+  qSort(selection.begin(), selection.end(), CompareSelectionRanges);
+
+  foreach (const QItemSelectionRange& range, selection) {
+    model()->removeRows(range.top(), range.height(), range.parent());
+  }
+
+  // Select the new current item
+  if (currentIndex().isValid())
+    selectionModel()->select(
+        QItemSelection(currentIndex().sibling(currentIndex().row(), 0),
+                       currentIndex().sibling(currentIndex().row(), model()->columnCount()-1)),
+        QItemSelectionModel::Select);
 }
