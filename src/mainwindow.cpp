@@ -592,6 +592,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   QString column_name = Playlist::column_name(column);
   QString column_value = playlist_->data(playlist_menu_index_).toString();
+  if (column_value.length() > 25)
+    column_value = column_value.left(25) + "...";
+
   ui_.action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
            .arg(column_name.toLower()).arg(column_value));
 
