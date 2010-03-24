@@ -5,6 +5,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../src)
+include_directories(${QT_QTTEST_INCLUDE_DIR})
 
 set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest.cc
@@ -42,7 +43,7 @@ set(TESTUTILS-MOC-HEADERS
 qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
 add_library(test_utils EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
-target_link_libraries(test_utils gmock ${QT_LIBRARIES})
+target_link_libraries(test_utils gmock ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
 
 add_custom_target(test
     echo "Running tests"
