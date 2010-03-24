@@ -380,7 +380,11 @@ QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
 }
 
 QVariantMap Player::GetMetadata() const {
-  return GetMetadata(*(playlist_->current_item()));
+  PlaylistItem* item = playlist_->current_item();
+  if (item) {
+    return GetMetadata(*item);
+  }
+  return QVariantMap();
 }
 
 QVariantMap Player::GetMetadata(int track) const {
