@@ -585,18 +585,22 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   ui_.action_renumber_tracks->setEnabled(editable);
   ui_.action_selection_set_value->setEnabled(editable >= 2);
 
-  Playlist::Column column = (Playlist::Column)playlist_menu_index_.column();
-  ui_.action_selection_set_value->setVisible(
-      column <= Playlist::Column_Genre &&
-      column != Playlist::Column_Length);
+  if (!index.isValid()) {
+    ui_.action_selection_set_value->setVisible(false);
+  } else {
+    Playlist::Column column = (Playlist::Column)index.column();
+    ui_.action_selection_set_value->setVisible(
+        column <= Playlist::Column_Genre &&
+        column != Playlist::Column_Length);
 
-  QString column_name = Playlist::column_name(column);
-  QString column_value = playlist_->data(playlist_menu_index_).toString();
-  if (column_value.length() > 25)
-    column_value = column_value.left(25) + "...";
+    QString column_name = Playlist::column_name(column);
+    QString column_value = playlist_->data(index).toString();
+    if (column_value.length() > 25)
+      column_value = column_value.left(25) + "...";
 
-  ui_.action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
-           .arg(column_name.toLower()).arg(column_value));
+    ui_.action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
+             .arg(column_name.toLower()).arg(column_value));
+  }
 
   playlist_menu_->popup(global_pos);
 }
