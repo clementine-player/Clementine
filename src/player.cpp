@@ -17,8 +17,12 @@
 #include "player.h"
 #include "playlist.h"
 #include "lastfmservice.h"
-#include "mpris_player.h"
-#include "mpris_tracklist.h"
+
+#ifdef Q_WS_X11
+#  include "mpris_player.h"
+#  include "mpris_tracklist.h"
+#  include <QDBusConnection>
+#endif
 
 #ifdef Q_OS_WIN32
 #  include "phononengine.h"
@@ -28,7 +32,6 @@
 
 #include <QtDebug>
 #include <QtConcurrentRun>
-#include <QDBusConnection>
 
 #include <boost/bind.hpp>
 
@@ -73,12 +76,15 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   connect(init_engine_watcher_, SIGNAL(finished()), SLOT(EngineInitFinished()));
   connect(engine_, SIGNAL(error(QString)), SIGNAL(Error(QString)));
 
+  // MPRIS DBus interface.
+#ifdef Q_WS_X11
   MprisPlayer* mpris = new MprisPlayer(this);
   // Hack so the next registerObject() doesn't override this one.
   QDBusConnection::sessionBus().registerObject(
       "/Player", mpris, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
   new MprisTrackList(this);
   QDBusConnection::sessionBus().registerObject("/TrackList", this);
+#endif
 }
 
 void Player::Init() {

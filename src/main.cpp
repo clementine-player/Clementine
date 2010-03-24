@@ -65,8 +65,6 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<SongList>("SongList");
 
-  qDBusRegisterMetaType<DBusStatus>();
-  qDBusRegisterMetaType<Version>();
 
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
@@ -92,8 +90,13 @@ int main(int argc, char *argv[]) {
 
   QNetworkAccessManager network;
 
+  // MPRIS DBus interface.
+#ifdef Q_WS_X11
+  qDBusRegisterMetaType<DBusStatus>();
+  qDBusRegisterMetaType<Version>();
   QDBusConnection::sessionBus().registerService("org.mpris.clementine");
   MPRIS mpris;
+#endif
 
   // Window
   MainWindow w(&network);;
