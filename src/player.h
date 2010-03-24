@@ -21,6 +21,7 @@
 #include <QSettings>
 #include <QFuture>
 #include <QFutureWatcher>
+#include <QDBusArgument>
 
 #include "engine_fwd.h"
 #include "playlistitem.h"
@@ -29,6 +30,17 @@
 class Playlist;
 class Settings;
 class LastFMService;
+
+struct DBusStatus {   // From Amarok.
+  int Play;           // Playing = 0, Paused = 1, Stopped = 2
+  int Random;         // Linearly = 0, Randomly = 1
+  int Repeat;         // Go_To_Next = 0, Repeat_Current = 1
+  int RepeatPlaylist; // Stop_When_Finished = 0, Never_Give_Up_Playing = 1
+};
+Q_DECLARE_METATYPE(DBusStatus);
+
+QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status);
+const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status);
 
 class Player : public QObject {
   Q_OBJECT
@@ -45,21 +57,64 @@ class Player : public QObject {
   PlaylistItem::Options GetCurrentItemOptions() const { return current_item_options_; }
   Song GetCurrentItem() const { return current_item_; }
 
+  // MPRIS
+  enum DBusCaps {
+    NONE                 = 0,
+    CAN_GO_NEXT          = 1 << 0,
+    CAN_GO_PREV          = 1 << 1,
+    CAN_PAUSE            = 1 << 2,
+    CAN_PLAY             = 1 << 3,
+    CAN_SEEK             = 1 << 4,
+    CAN_PROVIDE_METADATA = 1 << 5,
+    CAN_HAS_TRACKLIST    = 1 << 6,
+  };
+
  public slots:
   void ReloadSettings();
 
   void PlayAt(int index);
   void PlayPause();
-  void Next();
   void NextItem();
   void Previous();
-  void Stop();
   void SetVolume(int value);
   void Seek(int seconds);
 
   void TrackEnded();
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void CurrentMetadataChanged(const Song& metadata);
+
+  void PlaylistChanged();
+
+  // MPRIS /Player
+  int GetCaps() const;
+  DBusStatus GetStatus() const;
+  QVariantMap GetMetadata() const;
+  void Mute();
+  void Pause();
+  void Stop();
+  void Play();
+  void Next();
+  void Prev();
+  int PositionGet() const;
+  void PositionSet(int);
+  void Repeat(bool);
+  void ShowOSD();
+  void VolumeDown(int);
+  void VolumeUp(int);
+  int VolumeGet() const;
+  void VolumeSet(int);
+
+  // MPRIS /Tracklist
+  int AddTrack(const QString&, bool);
+  void DelTrack(int index);
+  int GetCurrentTrack() const;
+  int GetLength() const;
+  QVariantMap GetMetadata(int) const;
+  void SetLoop(bool enable);
+  void SetRandom(bool enable);
+
+  // Amarok extension.
+  void PlayTrack(int index);
 
  signals:
   void InitFinished();
@@ -70,12 +125,24 @@ class Player : public QObject {
   void VolumeChanged(int volume);
   void Error(const QString& message);
 
+  void ForceShowOSD(Song);
+
+  // MPRIS
+  // Player
+  void CapsChange(int);
+  void TrackChange(QVariantMap);
+  void StatusChange(DBusStatus);
+  // TrackList
+  void TrackListChange(int i);
+
  private slots:
   void EngineInitFinished();
   void EngineStateChanged(Engine::State);
   void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
 
  private:
+  QVariantMap GetMetadata(const PlaylistItem& item) const;
+
   Playlist* playlist_;
   LastFMService* lastfm_;
   QSettings settings_;

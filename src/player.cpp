@@ -17,6 +17,8 @@
 #include "player.h"
 #include "playlist.h"
 #include "lastfmservice.h"
+#include "mpris_player.h"
+#include "mpris_tracklist.h"
 
 #ifdef Q_OS_WIN32
 #  include "phononengine.h"
@@ -26,8 +28,29 @@
 
 #include <QtDebug>
 #include <QtConcurrentRun>
+#include <QDBusConnection>
 
 #include <boost/bind.hpp>
+
+QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
+  arg.beginStructure();
+  arg << status.Play;
+  arg << status.Random;
+  arg << status.Repeat;
+  arg << status.RepeatPlaylist;
+  arg.endStructure();
+  return arg;
+}
+
+const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
+  arg.beginStructure();
+  arg >> status.Play;
+  arg >> status.Random;
+  arg >> status.Repeat;
+  arg >> status.RepeatPlaylist;
+  arg.endStructure();
+  return arg;
+}
 
 Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   : QObject(parent),
@@ -49,6 +72,13 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 
   connect(init_engine_watcher_, SIGNAL(finished()), SLOT(EngineInitFinished()));
   connect(engine_, SIGNAL(error(QString)), SIGNAL(Error(QString)));
+
+  MprisPlayer* mpris = new MprisPlayer(this);
+  // Hack so the next registerObject() doesn't override this one.
+  QDBusConnection::sessionBus().registerObject(
+      "/Player", mpris, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
+  new MprisTrackList(this);
+  QDBusConnection::sessionBus().registerObject("/TrackList", this);
 }
 
 void Player::Init() {
@@ -168,6 +198,8 @@ void Player::EngineStateChanged(Engine::State state) {
     case Engine::Empty:
     case Engine::Idle: emit Stopped(); break;
   }
+  emit StatusChange(GetStatus());
+  emit CapsChange(GetCaps());
 }
 
 void Player::SetVolume(int value) {
@@ -202,6 +234,8 @@ void Player::PlayAt(int index) {
     if (lastfm_->IsScrobblingEnabled())
       lastfm_->NowPlaying(item->Metadata());
   }
+
+  emit CapsChange(GetCaps());
 }
 
 void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
@@ -225,6 +259,7 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
 void Player::CurrentMetadataChanged(const Song &metadata) {
   lastfm_->NowPlaying(metadata);
   current_item_ = metadata;
+  emit TrackChange(GetMetadata());
 }
 
 void Player::Seek(int seconds) {
@@ -250,4 +285,218 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
     return;
 
   playlist_->SetStreamMetadata(item->Url(), song);
+}
+
+int Player::GetCaps() const {
+  int caps = CAN_HAS_TRACKLIST;
+  if (current_item_.is_valid()) { caps |= CAN_PROVIDE_METADATA; }
+  if (GetState() == Engine::Playing && current_item_.filetype() != Song::Type_Stream) {
+    caps |= CAN_PAUSE;
+  }
+  if (GetState() == Engine::Paused) {
+    caps |= CAN_PLAY;
+  }
+  if (GetState() != Engine::Empty && current_item_.filetype() != Song::Type_Stream) {
+    caps |= CAN_SEEK;
+  }
+  if (playlist_->next_index() != -1 ||
+      playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+    caps |= CAN_GO_NEXT;
+  }
+  if (playlist_->previous_index() != -1) {
+    caps |= CAN_GO_PREV;
+  }
+  return caps;
+}
+
+DBusStatus Player::GetStatus() const {
+  DBusStatus status;
+  switch (GetState()) {
+    case Engine::Empty:
+    case Engine::Idle:
+      status.Play = 2;
+      break;
+    case Engine::Playing:
+      status.Play = 0;
+      break;
+    case Engine::Paused:
+      status.Play = 1;
+      break;
+  }
+  status.Random = playlist_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
+  PlaylistSequence::RepeatMode repeat_mode = playlist_->sequence()->repeat_mode();
+  status.Repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
+  status.RepeatPlaylist = (repeat_mode == PlaylistSequence::Repeat_Album ||
+                           repeat_mode == PlaylistSequence::Repeat_Playlist) ? 1 : 0;
+  return status;
+}
+
+namespace {
+inline void AddMetadata(const QString& key, const QString& metadata, QVariantMap* map) {
+  if (!metadata.isEmpty()) {
+    (*map)[key] = metadata;
+  }
+}
+
+inline void AddMetadata(const QString& key, int metadata, QVariantMap* map) {
+  if (metadata > 0) {
+    (*map)[key] = metadata;
+  }
+}
+
+}  // namespace
+
+QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
+  QVariantMap ret;
+  if (item.type() == PlaylistItem::Type_Song) {
+    const Song& song = item.Metadata();
+    if (song.is_valid()) {
+      AddMetadata("location", item.Url().toString(), &ret);
+      AddMetadata("title", song.PrettyTitle(), &ret);
+      AddMetadata("artist", song.artist(), &ret);
+      AddMetadata("album", song.album(), &ret);
+      AddMetadata("time", song.length(), &ret);
+      AddMetadata("tracknumber", song.track(), &ret);
+    }
+    return ret;
+  } else {
+    AddMetadata("location", item.Url().toString(), &ret);
+    const Song& song = item.Metadata();
+    AddMetadata("title", song.PrettyTitle(), &ret);
+    AddMetadata("artist", song.artist(), &ret);
+    AddMetadata("album", song.album(), &ret);
+    AddMetadata("time", song.length(), &ret);
+    AddMetadata("tracknumber", song.track(), &ret);
+    return ret;
+  }
+}
+
+QVariantMap Player::GetMetadata() const {
+  return GetMetadata(*(playlist_->current_item()));
+}
+
+QVariantMap Player::GetMetadata(int track) const {
+  if (track >= playlist_->rowCount()) {
+    return QVariantMap();
+  }
+  const PlaylistItem& item = *(playlist_->item_at(track));
+  return GetMetadata(item);
+}
+
+void Player::Mute() {
+  SetVolume(0);
+}
+
+void Player::Pause() {
+  switch (GetState()) {
+    case Engine::Playing:
+      engine_->pause();
+      break;
+    case Engine::Paused:
+      engine_->pause();
+      break;
+    default:
+      return;
+  }
+}
+
+void Player::Play() {
+  switch (GetState()) {
+    case Engine::Playing:
+      Seek(0);
+      break;
+    case Engine::Paused:
+      engine_->unpause();
+      break;
+    default:
+      Next();
+      break;
+  }
+}
+
+void Player::Prev() {
+  Previous();
+}
+
+int Player::PositionGet() const {
+  return engine_->position();
+}
+
+void Player::PositionSet(int x) {
+  Seek(x / 1000);
+}
+
+void Player::Repeat(bool enable) {
+  playlist_->sequence()->SetRepeatMode(
+      enable ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
+}
+
+void Player::ShowOSD() {
+  emit ForceShowOSD(current_item_);
+}
+
+void Player::VolumeDown(int change) {
+  SetVolume(GetVolume() - change);
+}
+
+void Player::VolumeUp(int change) {
+  SetVolume(GetVolume() + change);
+}
+
+int Player::VolumeGet() const {
+  return GetVolume();
+}
+
+void Player::VolumeSet(int volume) {
+  SetVolume(volume);
+}
+
+int Player::AddTrack(const QString& track, bool play_now) {
+  QUrl url(track);
+  QList<QUrl> list;
+  list << url;
+  QModelIndex index;
+  if (url.scheme() == "file") {
+    index = playlist_->InsertPaths(list, play_now ? playlist_->current_index() + 1 : -1);
+  } else {
+    index = playlist_->InsertStreamUrls(list, play_now ? playlist_->current_index() + 1: -1);
+  }
+
+  if (index.isValid()) {
+    if (play_now) {
+      Next();
+    }
+    return 0;
+  }
+  return -1;
+}
+
+void Player::DelTrack(int index) {
+  playlist_->removeRows(index, 1);
+}
+
+int Player::GetCurrentTrack() const {
+  return playlist_->current_index();
+}
+
+int Player::GetLength() const {
+  return playlist_->rowCount();
+}
+
+void Player::SetLoop(bool enable) {
+  playlist_->sequence()->SetRepeatMode(
+      enable ? PlaylistSequence::Repeat_Playlist : PlaylistSequence::Repeat_Off);
+}
+
+void Player::SetRandom(bool enable) {
+  playlist_->sequence()->SetShuffleMode(
+      enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
+}
+
+void Player::PlayTrack(int index) {
+  PlayAt(index);
+}
+
+void Player::PlaylistChanged() {
+  emit TrackListChange(GetLength());
 }

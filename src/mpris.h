@@ -14,34 +14,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONGPLAYLISTITEM_H
-#define SONGPLAYLISTITEM_H
+#ifndef MPRIS_H
+#define MPRIS_H
 
-#include "playlistitem.h"
-#include "song.h"
+#include <QDBusArgument>
+#include <QObject>
 
-class SongPlaylistItem : public PlaylistItem {
+struct Version {
+  quint16 minor;
+  quint16 major;
+};
+Q_DECLARE_METATYPE(Version)
+
+QDBusArgument& operator<< (QDBusArgument& arg, const Version& version);
+const QDBusArgument& operator>> (const QDBusArgument& arg, Version& version);
+
+class MPRIS : public QObject {
+  Q_OBJECT
  public:
-  SongPlaylistItem();
-  SongPlaylistItem(const Song& song);
-
-  Type type() const { return Type_Song; }
-
-  void Save(QSettings& settings) const;
-  void Restore(const QSettings& settings);
-  void Reload();
-
-  Song Metadata() const { return song_; }
-
-  QUrl Url() const;
-
- private:
-  void SaveFile(QSettings& settings) const;
-  void SaveStream(QSettings& settings) const;
-
-  void RestoreFile(const QSettings& settings);
-  void RestoreStream(const QSettings& settings);
-  Song song_;
+  MPRIS(QObject* parent = 0);
+  QString Identity();
+  void Quit();
+  Version MprisVersion();
 };
 
-#endif // SONGPLAYLISTITEM_H
+#endif // MPRIS_H

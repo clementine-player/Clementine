@@ -23,7 +23,9 @@
 #include "directory.h"
 #include "lastfmservice.h"
 #include "mainwindow.h"
+#include "player.h"
 #include "song.h"
+#include "mpris.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -31,6 +33,8 @@
 #include <QTranslator>
 #include <QDir>
 #include <QNetworkAccessManager>
+#include <QDBusConnection>
+#include <QDBusMetaType>
 
 // Load sqlite plugin on windows
 #ifdef WIN32
@@ -61,6 +65,9 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<SongList>("SongList");
 
+  qDBusRegisterMetaType<DBusStatus>();
+  qDBusRegisterMetaType<Version>();
+
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
 
@@ -84,6 +91,9 @@ int main(int argc, char *argv[]) {
   LoadTranslation("clementine", QDir::currentPath());
 
   QNetworkAccessManager network;
+
+  QDBusConnection::sessionBus().registerService("org.mpris.clementine");
+  MPRIS mpris;
 
   // Window
   MainWindow w(&network);;

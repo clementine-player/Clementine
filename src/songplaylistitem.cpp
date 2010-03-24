@@ -84,7 +84,7 @@ void SongPlaylistItem::RestoreStream(const QSettings& settings) {
              settings.value("length", -1).toInt());
 }
 
-QUrl SongPlaylistItem::Url() {
+QUrl SongPlaylistItem::Url() const {
   if (QFile::exists(song_.filename())) {
     return QUrl::fromLocalFile(song_.filename());
   } else {

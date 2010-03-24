@@ -62,7 +62,7 @@ class PlaylistItem {
   // return true.  If it returns false then the URL from Url() will be passed
   // directly to xine instead.
   virtual void StartLoading() {}
-  virtual QUrl Url() = 0;
+  virtual QUrl Url() const = 0;
 
   // If the item is a radio station that can play another song after one has
   // finished then it should do so and return true

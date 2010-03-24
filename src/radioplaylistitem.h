@@ -39,7 +39,7 @@ class RadioPlaylistItem : public PlaylistItem {
   Song Metadata() const;
 
   void StartLoading();
-  QUrl Url();
+  QUrl Url() const;
 
   void LoadNext();
 

@@ -64,6 +64,7 @@ set(CLEMENTINE-SOURCES
     globalshortcuts/globalshortcuts.cpp
     fixlastfm.cpp
     backgroundthread.cpp
+    mpris.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -120,6 +121,7 @@ set(CLEMENTINE-MOC-HEADERS
     analyzers/sonogram.h
     analyzers/turbine.h
     globalshortcuts/globalshortcuts.h
+    mpris.h
 )
 
 # UI files
@@ -184,6 +186,15 @@ else(APPLE)
     set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_win.cpp)
   else(WIN32)
     set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_x11.cpp)
+    qt4_add_dbus_adaptor(MPRIS-PLAYER-SOURCES
+        ../data/org.freedesktop.MediaPlayer.player.xml
+        player.h Player mpris_player MprisPlayer)
+    qt4_add_dbus_adaptor(MPRIS-ROOT-SOURCES
+        ../data/org.freedesktop.MediaPlayer.root.xml
+        mpris.h MPRIS mpris_root MprisRoot)
+    qt4_add_dbus_adaptor(MPRIS-TRACKLIST-SOURCES
+        ../data/org.freedesktop.MediaPlayer.tracklist.xml
+        player.h Player mpris_tracklist MprisTrackList)
   endif(WIN32)
 endif(APPLE)
 
@@ -209,6 +220,9 @@ add_library(clementine_lib
    ${CLEMENTINE-SOURCES-UI}
    ${CLEMENTINE-SOURCES-RESOURCE}
    ${CLEMENTINE-QM-FILES}
+   ${MPRIS-ROOT-SOURCES}
+   ${MPRIS-PLAYER-SOURCES}
+   ${MPRIS-TRACKLIST-SOURCES}
 )
 target_link_libraries(clementine_lib
     qtsingleapplication

@@ -80,7 +80,7 @@ void RadioPlaylistItem::LoadNext() {
     service_->LoadNext(url_);
 }
 
-QUrl RadioPlaylistItem::Url() {
+QUrl RadioPlaylistItem::Url() const {
   return url_;
 }
 
