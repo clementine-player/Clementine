@@ -211,7 +211,7 @@ void Player::EngineStateChanged(Engine::State state) {
 }
 
 void Player::SetVolume(int value) {
-  int volume = qMin(100, qMax(0, value));
+  int volume = qBound(0, value, 100);
   settings_.setValue("volume", volume);
   engine_->setVolume(volume);
   emit VolumeChanged(volume);
