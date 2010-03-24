@@ -27,4 +27,9 @@ std::ostream& operator <<(std::ostream& stream, const QString& str);
 std::ostream& operator <<(std::ostream& stream, const QUrl& url);
 std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req);
 
+#define EXPOSE_SIGNAL0(n) \
+    void Emit##n() { emit n(); }
+#define EXPOSE_SIGNAL1(n, t1) \
+    void Emit##n(const t1& a1) { emit n(a1); }
+
 #endif  // TEST_UTILS_H

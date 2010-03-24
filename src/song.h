@@ -162,6 +162,8 @@ class Song {
   void set_art_automatic(const QString& v) { d->art_automatic_ = v; }
   void set_art_manual(const QString& v) { d->art_manual_ = v; }
   void set_image(const QImage& i) { d->image_ = i; }
+  void set_forced_compilation_on(bool v) { d->forced_compilation_on_ = v; }
+  void set_forced_compilation_off(bool v) { d->forced_compilation_off_ = v; }
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }

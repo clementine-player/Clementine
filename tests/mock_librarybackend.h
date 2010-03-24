@@ -18,6 +18,7 @@
 #define MOCK_LIBRARYBACKEND_H
 
 #include "librarybackend.h"
+#include "test_utils.h"
 
 #include <gmock/gmock.h>
 
@@ -77,6 +78,14 @@ class MockLibraryBackend : public LibraryBackendInterface {
 
   void ExpectSetup(bool has_compilations = false,
                    const QStringList& artists = QStringList());
+
+  EXPOSE_SIGNAL1(DirectoriesDiscovered, DirectoryList);
+  EXPOSE_SIGNAL1(DirectoriesDeleted, DirectoryList);
+
+  EXPOSE_SIGNAL1(SongsDiscovered, SongList);
+  EXPOSE_SIGNAL1(SongsDeleted, SongList);
+
+  EXPOSE_SIGNAL1(TotalSongCountUpdated, int);
 };
 
 #endif

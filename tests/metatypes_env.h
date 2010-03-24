@@ -20,6 +20,7 @@
 #include <gtest/gtest.h>
 
 #include <QMetaType>
+#include <QModelIndex>
 
 #include "directory.h"
 #include "song.h"
@@ -29,6 +30,7 @@ public:
   void SetUp() {
     qRegisterMetaType<DirectoryList>("DirectoryList");
     qRegisterMetaType<SongList>("SongList");
+    qRegisterMetaType<QModelIndex>("QModelIndex");
   }
 };
 
