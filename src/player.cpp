@@ -211,9 +211,10 @@ void Player::EngineStateChanged(Engine::State state) {
 }
 
 void Player::SetVolume(int value) {
-  settings_.setValue("volume", value);
-  engine_->setVolume(value);
-  emit VolumeChanged(value);
+  int volume = qMin(100, qMax(0, value));
+  settings_.setValue("volume", volume);
+  engine_->setVolume(volume);
+  emit VolumeChanged(volume);
 }
 
 int Player::GetVolume() const {
@@ -388,7 +389,7 @@ QVariantMap Player::GetMetadata() const {
 }
 
 QVariantMap Player::GetMetadata(int track) const {
-  if (track >= playlist_->rowCount()) {
+  if (track >= playlist_->rowCount() || track < 0) {
     return QVariantMap();
   }
   const PlaylistItem& item = *(playlist_->item_at(track));
