@@ -189,7 +189,7 @@ class LibraryBackend : public LibraryBackendInterface {
   FRIEND_TEST(LibraryBackendTest, LikeUnicodeCaseInsensitive);
 
   // Do static initialisation like loading sqlite functions.
-  static bool StaticInit();
+  static void StaticInit();
   // Custom LIKE() function for sqlite.
   static bool Like(const char* needle, const char* haystack);
   static void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv);
@@ -205,6 +205,9 @@ class LibraryBackend : public LibraryBackendInterface {
   static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
+
+  static bool sStaticInitDone;
+  static bool sLoadedSqliteSymbols;
 };
 
 #endif // LIBRARYBACKEND_H

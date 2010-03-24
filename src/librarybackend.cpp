@@ -44,11 +44,15 @@ sqlite_int64 (*LibraryBackend::_sqlite3_value_int64) (sqlite3_value*) = NULL;
 const uchar* (*LibraryBackend::_sqlite3_value_text) (sqlite3_value*) = NULL;
 void (*LibraryBackend::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
 
+bool LibraryBackend::sStaticInitDone = false;
+bool LibraryBackend::sLoadedSqliteSymbols = false;
 
-bool LibraryBackend::StaticInit() {
-  if (_sqlite3_create_function) {
-    return true;
+
+void LibraryBackend::StaticInit() {
+  if (sStaticInitDone) {
+    return;
   }
+  sStaticInitDone = true;
 
 #ifdef Q_OS_WIN32
   // We statically link libqsqlite.dll on windows so these symbols are already
@@ -65,7 +69,7 @@ bool LibraryBackend::StaticInit() {
   QLibrary library(plugin_path);
   if (!library.load()) {
     qDebug() << "QLibrary::load() failed for " << plugin_path;
-    return false;
+    return;
   }
 
   _sqlite3_create_function = reinterpret_cast<Sqlite3CreateFunc>(
@@ -79,15 +83,16 @@ bool LibraryBackend::StaticInit() {
   _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, sqlite_int64)>(
       library.resolve("sqlite3_result_int64"));
 
-  if (_sqlite3_create_function &&
-      _sqlite3_value_type &&
-      _sqlite3_value_int64 &&
-      _sqlite3_value_text &&
-      _sqlite3_result_int64) {
-    return true;
+  if (!_sqlite3_create_function ||
+      !_sqlite3_value_type ||
+      !_sqlite3_value_int64 ||
+      !_sqlite3_value_text ||
+      !_sqlite3_result_int64) {
+    qDebug() << "Couldn't resolve sqlite symbols";
+    sLoadedSqliteSymbols = false;
+  } else {
+    sLoadedSqliteSymbols = true;
   }
-  qDebug() << "Couldn't resolve sqlite symbols";
-  return false;
 #endif
 }
 
@@ -169,24 +174,23 @@ QSqlDatabase LibraryBackend::Connect() {
   }
 
   // Find Sqlite3 functions in the Qt plugin.
-  if (!StaticInit()) {
-    emit Error("LibraryBackend: StaticInit() failed.");
-    return db;
-  }
+  StaticInit();
 
-  // We want Unicode aware LIKE clauses.
-  QVariant v = db.driver()->handle();
-  if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
-    sqlite3* handle = *static_cast<sqlite3**>(v.data());
-    if (handle) {
-      _sqlite3_create_function(
-          handle,       // Sqlite3 handle.
-          "LIKE",       // Function name (either override or new).
-          2,            // Number of args.
-          SQLITE_ANY,   // What types this function accepts.
-          NULL,         // Custom data available via sqlite3_user_data().
-          &LibraryBackend::SqliteLike,  // Our function :-)
-          NULL, NULL);
+  // We want Unicode aware LIKE clauses if possible
+  if (sLoadedSqliteSymbols) {
+    QVariant v = db.driver()->handle();
+    if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
+      sqlite3* handle = *static_cast<sqlite3**>(v.data());
+      if (handle) {
+        _sqlite3_create_function(
+            handle,       // Sqlite3 handle.
+            "LIKE",       // Function name (either override or new).
+            2,            // Number of args.
+            SQLITE_ANY,   // What types this function accepts.
+            NULL,         // Custom data available via sqlite3_user_data().
+            &LibraryBackend::SqliteLike,  // Our function :-)
+            NULL, NULL);
+      }
     }
   }
 
