@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 
+set(CMAKE_C_FLAGS "-Wall")
+set(CMAKE_CXX_FLAGS "-Wnon-virtual-dtor -Woverloaded-virtual -Wall")
+
 # Source files
 set(CLEMENTINE-SOURCES
     mainwindow.cpp
@@ -237,11 +240,6 @@ add_executable(clementine
    main.cpp
 )
 target_link_libraries(clementine clementine_lib)
-
-set_property(TARGET clementine clementine_lib
-    PROPERTY COMPILE_FLAGS
-    "-Wnon-virtual-dtor -Woverloaded-virtual -Wall"
-)
 
 set_target_properties(clementine PROPERTIES
     MACOSX_BUNDLE_INFO_STRING "Clementine 0.2"
