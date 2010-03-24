@@ -701,6 +701,8 @@ void MainWindow::SelectionSetValue() {
         case Playlist::Column_Genre:
           song.set_genre(column_value.toString());
           break;
+        default:
+          break;
       }
       song.Save();
       playlist_->item_at(row)->Reload();

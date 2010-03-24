@@ -238,7 +238,7 @@ add_executable(clementine
 )
 target_link_libraries(clementine clementine_lib)
 
-set_property(TARGET clementine
+set_property(TARGET clementine clementine_lib
     PROPERTY COMPILE_FLAGS
     "-Wnon-virtual-dtor -Woverloaded-virtual -Wall"
 )

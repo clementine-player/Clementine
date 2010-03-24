@@ -137,7 +137,7 @@ int Playlist::NextVirtualIndex(int i) const {
   Song last_song = current_item_metadata();
   for (int j=i+1 ; j<virtual_items_.count(); ++j) {
     Song this_song = item_at(virtual_items_[j])->Metadata();
-    if ((last_song.is_compilation() && this_song.is_compilation() ||
+    if (((last_song.is_compilation() && this_song.is_compilation()) ||
          last_song.artist() == this_song.artist()) &&
         last_song.album() == this_song.album()) {
       return j; // Found one
@@ -471,6 +471,7 @@ QString Playlist::column_name(Column column) {
     case Column_Filetype: return tr("File type");
     case Column_DateModified: return tr("Date modified");
     case Column_DateCreated: return tr("Date created");
+    default: return QString();
   }
   return "";
 }

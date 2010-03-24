@@ -142,25 +142,26 @@ class Playlist : public QAbstractListModel {
   void UpdateScrobblePoint();
   void ReshuffleIndices();
   int NextVirtualIndex(int i) const;
-  
+
  private:
   QList<PlaylistItem*> items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order
                              // that they will be played.
-  bool is_shuffled_;
 
   QPersistentModelIndex current_item_;
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;
 
+  bool is_shuffled_;
+
   int scrobble_point_;
   bool has_scrobbled_;
 
+  PlaylistSequence* playlist_sequence_;
+
   // Hack to stop QTreeView::setModel sorting the playlist
   bool ignore_sorting_;
-
-  PlaylistSequence* playlist_sequence_;
 };
 
 #endif // PLAYLIST_H
