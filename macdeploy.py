@@ -20,7 +20,12 @@ import re
 import subprocess
 import sys
 
-FRAMEWORK_SEARCH_PATH=['/Library/Frameworks', os.path.join(os.environ['HOME'], 'Library/Frameworks')]
+FRAMEWORK_SEARCH_PATH=[
+#    '/usr/local/Trolltech/Qt-4.7.0/lib',
+    '/Library/Frameworks',
+    os.path.join(os.environ['HOME'], 'Library/Frameworks')
+]
+
 LIBRARY_SEARCH_PATH=['/usr/local/lib', '/sw/lib']
 
 XINE_PLUGINS = [
@@ -64,6 +69,7 @@ QT_PLUGINS = [
     'sqldrivers/libqsqlite.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
+#    '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
@@ -121,13 +127,13 @@ def GetBrokenLibraries(binary):
       continue  # System framework
     elif re.match(r'^\s*/usr/lib/', line):
       continue  # unix style system library
-    elif re.match(r'^\s*\w+\.framework', line):
-      broken_libs['frameworks'].append(line)
     elif re.match(r'^\s*@executable_path', line):
       # Potentially already fixed library
       relative_path = os.path.join(*line.split('/')[3:])
       if not os.path.exists(os.path.join(frameworks_dir, relative_path)):
         broken_libs['frameworks'].append(relative_path)
+    elif re.search(r'\w+\.framework', line):
+      broken_libs['frameworks'].append(line)
     else:
       broken_libs['libs'].append(line)
 
@@ -167,7 +173,8 @@ def FixFramework(path):
   FixAllLibraries(broken_libs)
 
   new_path = CopyFramework(abs_path)
-  FixFrameworkId(new_path, path)
+  id = os.sep.join(new_path.split(os.sep)[3:])
+  FixFrameworkId(new_path, id)
   for framework in broken_libs['frameworks']:
     FixFrameworkInstallPath(framework, new_path)
   for library in broken_libs['libs']:
@@ -231,7 +238,7 @@ def CopyFramework(path):
   commands.append(args)
   args = ['cp', '-f', path, full_path]
   commands.append(args)
-  return os.path.join(frameworks_dir, path)
+  return os.path.join(full_path, parts[-1])
 
 def FixId(path, library_name):
   id = '@executable_path/../Frameworks/%s' % library_name
@@ -254,7 +261,12 @@ def FixLibraryInstallPath(library_path, library):
   FixInstallPath(library_path, library, new_path)
 
 def FixFrameworkInstallPath(library_path, library):
-  new_path = '@executable_path/../Frameworks/%s' % library_path
+  parts = library_path.split(os.sep)
+  for i, part in enumerate(parts):
+    if re.match(r'\w+\.framework', part):
+      full_path = os.path.join(*parts[i:])
+      break
+  new_path = '@executable_path/../Frameworks/%s' % full_path
   FixInstallPath(library_path, library, new_path)
 
 def FindXinePlugin(name):
