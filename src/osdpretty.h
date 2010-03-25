@@ -21,6 +21,8 @@
 
 #include "ui_osdpretty.h"
 
+class QTimeLine;
+
 class OSDPretty : public QWidget {
   Q_OBJECT
 
@@ -48,6 +50,9 @@ class OSDPretty : public QWidget {
                   const QString& message,
                   const QImage& image);
 
+  // Controls the fader.  This is enabled by default on Windows.
+  void set_fading_enabled(bool enabled) { fading_enabled_ = enabled; }
+
   // Popup duration in seconds.  Only used in Mode_Popup.
   void set_popup_duration(int msec);
 
@@ -64,6 +69,9 @@ class OSDPretty : public QWidget {
   // position and screen
   int current_display() const;
   QPoint current_pos() const;
+
+  // QWidget
+  void setVisible(bool visible);
 
  public slots:
   void ReloadSettings();
@@ -82,6 +90,10 @@ class OSDPretty : public QWidget {
   void Load();
 
   QRect BoxBorder() const;
+
+ private slots:
+  void FaderValueChanged(qreal value);
+  void FaderFinished();
 
  private:
   Ui::OSDPretty ui_;
@@ -105,6 +117,10 @@ class OSDPretty : public QWidget {
 
   // For timeout of notification
   QTimer* timeout_;
+
+  // For fading
+  bool fading_enabled_;
+  QTimeLine* fader_;
 };
 
 #endif // OSDPRETTY_H

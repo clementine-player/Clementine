@@ -25,6 +25,7 @@
 #include <QMouseEvent>
 #include <QTimer>
 #include <QBitmap>
+#include <QTimeLine>
 
 #include <QtDebug>
 
@@ -45,10 +46,12 @@ const QRgb OSDPretty::kPresetOrange = qRgb(254, 156, 67);
 OSDPretty::OSDPretty(QWidget *parent)
   : QWidget(parent),
     mode_(Mode_Popup),
-    background_color_(kPresetOrange),
+    background_color_(kPresetBlue),
     background_opacity_(0.85),
     popup_display_(0),
-    timeout_(new QTimer(this))
+    timeout_(new QTimer(this)),
+    fading_enabled_(false),
+    fader_(new QTimeLine(300, this))
 {
   setWindowFlags(Qt::ToolTip |
                  Qt::FramelessWindowHint |
@@ -57,11 +60,20 @@ OSDPretty::OSDPretty(QWidget *parent)
   ui_.setupUi(this);
   SetMode(mode_);
 
+  // Timeout
   timeout_->setSingleShot(true);
   timeout_->setInterval(5000);
   connect(timeout_, SIGNAL(timeout()), SLOT(hide()));
 
   ui_.icon->setMaximumSize(kMaxIconSize, kMaxIconSize);
+
+  // Fader
+  connect(fader_, SIGNAL(valueChanged(qreal)), SLOT(FaderValueChanged(qreal)));
+  connect(fader_, SIGNAL(finished()), SLOT(FaderFinished()));
+
+#ifdef Q_OS_WIN32
+  set_fading_enabled(true);
+#endif
 
   // Load the show edges and corners
   QImage shadow_edge(":osd_shadow_edge.png");
@@ -197,13 +209,38 @@ void OSDPretty::SetMessage(const QString& summary, const QString& message,
 }
 
 void OSDPretty::showEvent(QShowEvent* e) {
+  setWindowOpacity(fading_enabled_ ? 0.0 : 1.0);
+
   QWidget::showEvent(e);
 
   Reposition();
-  setWindowOpacity(1.0);
 
-  if (mode_ == Mode_Popup)
+  if (fading_enabled_) {
+    fader_->setDirection(QTimeLine::Forward);
+    fader_->start(); // Timeout will be started in FaderFinished
+  }
+  else if (mode_ == Mode_Popup)
     timeout_->start();
+}
+
+void OSDPretty::setVisible(bool visible) {
+  if (!visible && fading_enabled_ && fader_->direction() == QTimeLine::Forward) {
+    fader_->setDirection(QTimeLine::Backward);
+    fader_->start();
+  } else {
+    QWidget::setVisible(visible);
+  }
+}
+
+void OSDPretty::FaderFinished() {
+  if (fader_->direction() == QTimeLine::Backward)
+    hide();
+  else if (mode_ == Mode_Popup)
+    timeout_->start();
+}
+
+void OSDPretty::FaderValueChanged(qreal value) {
+  setWindowOpacity(value);
 }
 
 void OSDPretty::Reposition() {
