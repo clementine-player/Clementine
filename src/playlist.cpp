@@ -83,7 +83,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
 
       // Don't forget to change Playlist::CompareItems when adding new columns
       switch (index.column()) {
-        case Column_Title:    return song.title();
+        case Column_Title:
+          return song.title().isEmpty() ? song.basefilename() : song.title();
         case Column_Artist:   return song.artist();
         case Column_Album:    return song.album();
         case Column_Length:   return song.length();
