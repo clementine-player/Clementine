@@ -197,6 +197,8 @@ PlaylistView::PlaylistView(QWidget *parent)
 
   glow_timer_->setInterval(1500 / kGlowIntensitySteps);
   connect(glow_timer_, SIGNAL(timeout()), SLOT(GlowIntensityChanged()));
+
+  setAlternatingRowColors(true);
 }
 
 void PlaylistView::setModel(QAbstractItemModel *model) {
