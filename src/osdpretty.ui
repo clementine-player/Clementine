@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
-    <height>89</height>
+    <width>410</width>
+    <height>94</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>200</width>
-    <height>0</height>
-   </size>
   </property>
   <property name="styleSheet">
    <string notr="true">#summary {
@@ -37,9 +31,15 @@
      </property>
      <item>
       <widget class="QLabel" name="summary">
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="maximumSize">
         <size>
-         <width>400</width>
+         <width>300</width>
          <height>16777215</height>
         </size>
        </property>
