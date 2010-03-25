@@ -24,8 +24,13 @@
 #include <QSettings>
 #include <QMouseEvent>
 #include <QTimer>
+#include <QBitmap>
 
 #include <QtDebug>
+
+#ifdef Q_WS_X11
+#  include <QX11Info>
+#endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
 
@@ -35,6 +40,7 @@ const int OSDPretty::kMaxIconSize = 100;
 
 const QRgb OSDPretty::kPresetBlue = qRgb(102, 150, 227);
 const QRgb OSDPretty::kPresetOrange = qRgb(254, 156, 67);
+
 
 OSDPretty::OSDPretty(QWidget *parent)
   : QWidget(parent),
@@ -74,6 +80,13 @@ OSDPretty::OSDPretty(QWidget *parent)
   Load();
 }
 
+bool OSDPretty::IsTransparencyAvailable() {
+#ifdef Q_WS_X11
+  return QX11Info::isCompositingManagerRunning();
+#endif
+  return true;
+}
+
 void OSDPretty::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -107,12 +120,17 @@ void OSDPretty::SetMode(Mode mode) {
   }
 }
 
+QRect OSDPretty::BoxBorder() const {
+  return rect().adjusted(kDropShadowSize, kDropShadowSize,
+                         -kDropShadowSize, -kDropShadowSize);
+}
+
 void OSDPretty::paintEvent(QPaintEvent *) {
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
   p.setRenderHint(QPainter::HighQualityAntialiasing);
 
-  QRect box(rect().adjusted(kDropShadowSize, kDropShadowSize, -kDropShadowSize, -kDropShadowSize));
+  QRect box(BoxBorder());
 
   // Shadow corners
   const int kShadowCornerSize = kDropShadowSize + kBorderRadius;
@@ -201,6 +219,20 @@ void OSDPretty::Reposition() {
 
   move(qBound(0, x, geometry.right() - width()),
        qBound(0, y, geometry.bottom() - height()));
+
+  if (IsTransparencyAvailable())
+    clearMask();
+  else {
+    QBitmap mask(size());
+    mask.clear();
+
+    QPainter p(&mask);
+    p.setBrush(Qt::color1);
+    p.drawRoundedRect(BoxBorder().adjusted(-1, -1, 0, 0), kBorderRadius, kBorderRadius);
+    p.end();
+
+    setMask(mask);
+  }
 }
 
 void OSDPretty::enterEvent(QEvent *) {

@@ -41,6 +41,8 @@ class OSDPretty : public QWidget {
     Mode_Draggable,
   };
 
+  static bool IsTransparencyAvailable();
+
   void SetMode(Mode mode);
   void SetMessage(const QString& summary,
                   const QString& message,
@@ -77,6 +79,8 @@ class OSDPretty : public QWidget {
  private:
   void Reposition();
   void Load();
+
+  QRect BoxBorder() const;
 
  private:
   Ui::OSDPretty ui_;
