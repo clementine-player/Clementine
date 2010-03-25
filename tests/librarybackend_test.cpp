@@ -224,8 +224,8 @@ TEST_F(LibraryBackendTest, LikeCacheInvalidated) {
 
 TEST_F(LibraryBackendTest, LikeQuerySplit) {
   EXPECT_TRUE(backend_->Like("%foo bar%", "foobar"));
-  EXPECT_TRUE(backend_->Like("%foo bar%", "barbaz"));
-  EXPECT_TRUE(backend_->Like("%foo bar%", "foobaz"));
+  EXPECT_FALSE(backend_->Like("%foo bar%", "barbaz"));
+  EXPECT_FALSE(backend_->Like("%foo bar%", "foobaz"));
   EXPECT_FALSE(backend_->Like("%foo bar%", "baz"));
 }
 

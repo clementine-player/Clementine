@@ -111,11 +111,11 @@ bool LibraryBackend::Like(const char* needle, const char* haystack) {
   }
   QString b = QString::fromUtf8(haystack);
   foreach (const QString& query, query_cache_) {
-    if (b.contains(query, Qt::CaseInsensitive)) {
-      return true;
+    if (!b.contains(query, Qt::CaseInsensitive)) {
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 // Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
