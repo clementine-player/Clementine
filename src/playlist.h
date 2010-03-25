@@ -72,6 +72,8 @@ class Playlist : public QAbstractListModel {
                            const PlaylistItem* a, const PlaylistItem* b);
 
   static QString column_name(Column column);
+  static bool column_is_editable(Playlist::Column column);
+  static bool set_column_value(Song& song, Column column, const QVariant& value);
 
   // Persistence
   void Save() const;
@@ -110,6 +112,7 @@ class Playlist : public QAbstractListModel {
   int rowCount(const QModelIndex& = QModelIndex()) const { return items_.count(); }
   int columnCount(const QModelIndex& = QModelIndex()) const { return ColumnCount; }
   QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+  bool setData(const QModelIndex &index, const QVariant &value, int role);
   QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
   Qt::ItemFlags flags(const QModelIndex &index) const;
   QStringList mimeTypes() const;

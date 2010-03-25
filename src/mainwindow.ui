@@ -40,6 +40,9 @@
       <property name="acceptDrops">
        <bool>true</bool>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::SelectedClicked|QAbstractItemView::EditKeyPressed</set>
+      </property>
       <property name="dragEnabled">
        <bool>true</bool>
       </property>
@@ -663,6 +666,11 @@
   <action name="action_selection_set_value">
    <property name="text">
     <string>Set value for all selected tracks...</string>
+   </property>
+  </action>
+  <action name="action_edit_value">
+   <property name="text">
+    <string>Edit tag...</string>
    </property>
   </action>
   <action name="action_configure">

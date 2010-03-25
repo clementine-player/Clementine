@@ -133,6 +133,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_.action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
   connect(ui_.action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
+  connect(ui_.action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
   connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
   connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
   connect(ui_.action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
@@ -244,6 +245,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   playlist_menu_->addAction(ui_.action_remove_from_playlist);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_edit_track);
+  playlist_menu_->addAction(ui_.action_edit_value);
   playlist_menu_->addAction(ui_.action_renumber_tracks);
   playlist_menu_->addAction(ui_.action_selection_set_value);
   playlist_menu_->addSeparator();
@@ -587,17 +589,22 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     }
   }
   ui_.action_edit_track->setEnabled(editable);
-  ui_.action_renumber_tracks->setEnabled(editable);
-  ui_.action_selection_set_value->setEnabled(editable >= 2);
+  ui_.action_renumber_tracks->setVisible(editable);
+  ui_.action_selection_set_value->setVisible(editable >= 2);
+  ui_.action_edit_value->setVisible(editable);
   ui_.action_remove_from_playlist->setEnabled(!selection.isEmpty());
 
   if (!index.isValid()) {
     ui_.action_selection_set_value->setVisible(false);
+    ui_.action_edit_value->setVisible(false);
   } else {
     Playlist::Column column = (Playlist::Column)index.column();
+    bool editable = Playlist::column_is_editable(column);
+
     ui_.action_selection_set_value->setVisible(
-        column <= Playlist::Column_Genre &&
-        column != Playlist::Column_Length);
+        ui_.action_selection_set_value->isVisible() && editable);
+    ui_.action_edit_value->setVisible(
+        ui_.action_edit_value->isVisible() && editable);
 
     QString column_name = Playlist::column_name(column);
     QString column_value = playlist_->data(index).toString();
@@ -606,6 +613,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
     ui_.action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
              .arg(column_name.toLower()).arg(column_value));
+    ui_.action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
   }
 
   playlist_menu_->popup(global_pos);
@@ -685,42 +693,15 @@ void MainWindow::SelectionSetValue() {
     int row = index.row();
     Song song = playlist_->item_at(row)->Metadata();
 
-    if (song.IsEditable()) {
-      switch(column) {
-        case Playlist::Column_Title:
-          song.set_title(column_value.toString());
-          break;
-        case Playlist::Column_Artist:
-          song.set_artist(column_value.toString());
-          break;
-        case Playlist::Column_Album:
-          song.set_album(column_value.toString());
-          break;
-        case Playlist::Column_AlbumArtist:
-          song.set_albumartist(column_value.toString());
-          break;
-        case Playlist::Column_Composer:
-          song.set_composer(column_value.toString());
-          break;
-        case Playlist::Column_Track:
-          song.set_track(column_value.toInt());
-          break;
-        case Playlist::Column_Disc:
-          song.set_disc(column_value.toInt());
-          break;
-        case Playlist::Column_Year:
-          song.set_year(column_value.toInt());
-          break;
-        case Playlist::Column_Genre:
-          song.set_genre(column_value.toString());
-          break;
-        default:
-          break;
-      }
+    if(Playlist::set_column_value(song, column, column_value)) {
       song.Save();
       playlist_->item_at(row)->Reload();
     }
   }
+}
+
+void MainWindow::EditValue() {
+  ui_.playlist->edit(playlist_menu_index_);
 }
 
 void MainWindow::LibraryScanStarted() {

@@ -75,6 +75,7 @@ class MainWindow : public QMainWindow {
   void EditTracks();
   void RenumberTracks();
   void SelectionSetValue();
+  void EditValue();
 
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();

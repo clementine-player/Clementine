@@ -349,10 +349,9 @@ bool CompareSelectionRanges(const QItemSelectionRange& a, const QItemSelectionRa
 void PlaylistView::keyPressEvent(QKeyEvent* event) {
   if (!model()) {
     QTreeView::keyPressEvent(event);
-    return;
-  }
-
-  if (event->matches(QKeySequence::Delete) ||
+  } else if (state() == QAbstractItemView::EditingState) {
+    QTreeView::keyPressEvent(event);
+  } else if (event->matches(QKeySequence::Delete) ||
       event->key() == Qt::Key_Backspace) {
     RemoveSelected();
     event->accept();
@@ -389,4 +388,72 @@ void PlaylistView::RemoveSelected() {
         QItemSelection(currentIndex().sibling(currentIndex().row(), 0),
                        currentIndex().sibling(currentIndex().row(), model()->columnCount()-1)),
         QItemSelectionModel::Select);
+}
+
+QList<int> PlaylistView::GetEditableColumns() {
+  QList<int> columns;
+  QHeaderView* h = header();
+  for (int col=0; col<h->count(); col++) {
+    if (h->isSectionHidden(col))
+      continue;
+    QModelIndex index = model()->index(0, col);
+    if (index.flags() & Qt::ItemIsEditable)
+      columns << h->visualIndex(col);
+  }
+  qSort(columns);
+  return columns;
+}
+
+QModelIndex PlaylistView::NextEditableIndex(const QModelIndex& current) {
+  QList<int> columns = GetEditableColumns();
+  QHeaderView* h = header();
+  int col = h->visualIndex(current.column());
+  QList<int> columns_left = columns.mid(columns.indexOf(col)+1);
+
+  QModelIndex index;
+  if(columns_left.empty())
+    index = model()->index(current.row()+1,  h->logicalIndex(columns.first()));
+  else
+    index = model()->index(current.row(),  h->logicalIndex(columns_left.first()));
+
+  return index;
+}
+
+QModelIndex PlaylistView::PrevEditableIndex(const QModelIndex& current) {
+  QList<int> columns = GetEditableColumns();
+  QHeaderView* h = header();
+  int col = h->visualIndex(current.column());
+  QList<int> columns_left = columns.mid(0, columns.indexOf(col));
+
+  QModelIndex index;
+  if(columns_left.empty())
+    index = model()->index(current.row()-1, h->logicalIndex(columns.last()));
+  else
+    index = model()->index(current.row(), h->logicalIndex(columns_left.last()));
+
+  return index;
+}
+
+void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
+  if (hint == QAbstractItemDelegate::NoHint) {
+    QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
+  } else if (hint == QAbstractItemDelegate::EditNextItem ||
+             hint == QAbstractItemDelegate::EditPreviousItem) {
+
+    QModelIndex index;
+    if (hint == QAbstractItemDelegate::EditNextItem)
+      index = NextEditableIndex(currentIndex());
+    else
+      index = PrevEditableIndex(currentIndex());
+
+    if (!index.isValid()) {
+        QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
+    } else {
+        QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
+        setCurrentIndex(index);
+        edit(index);
+    }
+  } else {
+    QTreeView::closeEditor(editor, hint);
+  }
 }

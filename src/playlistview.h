@@ -23,6 +23,7 @@
 class RadioLoadingIndicator;
 
 class PlaylistDelegateBase : public QStyledItemDelegate {
+  Q_OBJECT
  public:
   PlaylistDelegateBase(QTreeView* view);
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -78,6 +79,7 @@ class PlaylistView : public QTreeView {
  public slots:
   void StopGlowing();
   void StartGlowing();
+  void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint);
 
  signals:
   void PlayPauseItem(const QModelIndex& index);
@@ -99,6 +101,10 @@ class PlaylistView : public QTreeView {
  private:
   static const char* kSettingsGroup;
   static const int kGlowIntensitySteps;
+
+  QList<int> GetEditableColumns();
+  QModelIndex NextEditableIndex(const QModelIndex& current);
+  QModelIndex PrevEditableIndex(const QModelIndex& current);
 
   bool glow_enabled_;
   QTimer* glow_timer_;

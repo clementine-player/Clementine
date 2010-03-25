@@ -66,6 +66,64 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
   return QVariant();
 }
 
+bool Playlist::column_is_editable(Playlist::Column column) {
+  switch(column) {
+    case Column_Title:
+    case Column_Artist:
+    case Column_Album:
+    case Column_AlbumArtist:
+    case Column_Composer:
+    case Column_Track:
+    case Column_Disc:
+    case Column_Year:
+    case Column_Genre:
+      return true;
+    default:
+      break;
+  }
+  return false;
+}
+
+bool Playlist::set_column_value(Song& song, Playlist::Column column,
+                                const QVariant& value) {
+
+  if (!song.IsEditable())
+    return false;
+
+  switch(column) {
+    case Playlist::Column_Title:
+      song.set_title(value.toString());
+      break;
+    case Playlist::Column_Artist:
+      song.set_artist(value.toString());
+      break;
+    case Playlist::Column_Album:
+      song.set_album(value.toString());
+      break;
+    case Playlist::Column_AlbumArtist:
+      song.set_albumartist(value.toString());
+      break;
+    case Playlist::Column_Composer:
+      song.set_composer(value.toString());
+      break;
+    case Playlist::Column_Track:
+      song.set_track(value.toInt());
+      break;
+    case Playlist::Column_Disc:
+      song.set_disc(value.toInt());
+      break;
+    case Playlist::Column_Year:
+      song.set_year(value.toInt());
+      break;
+    case Playlist::Column_Genre:
+      song.set_genre(value.toString());
+      break;
+    default:
+      break;
+  }
+  return true;
+}
+
 QVariant Playlist::data(const QModelIndex& index, int role) const {
   switch (role) {
     case Role_IsCurrent:
@@ -77,6 +135,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
     case Role_StopAfter:
       return stop_after_.isValid() && stop_after_.row() == index.row();
 
+    case Qt::EditRole:
     case Qt::DisplayRole: {
       PlaylistItem* item = items_[index.row()];
       Song song = item->Metadata();
@@ -110,6 +169,18 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
     default:
       return QVariant();
   }
+}
+
+bool Playlist::setData(const QModelIndex &index, const QVariant &value, int role) {
+  int row = index.row();
+  Song song = item_at(row)->Metadata();
+
+  if(!set_column_value(song, (Column)index.column(), value))
+    return false;
+
+  song.Save();
+  item_at(row)->Reload();
+  return true;
 }
 
 int Playlist::current_index() const {
@@ -222,9 +293,16 @@ void Playlist::set_current_index(int i) {
 }
 
 Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
+
+  Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+
+  if(column_is_editable((Column)index.column()))
+    flags |= Qt::ItemIsEditable;
+
   if (index.isValid())
-    return Qt::ItemIsDragEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable;
-  return Qt::ItemIsDropEnabled | Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    return flags | Qt::ItemIsDragEnabled;
+
+  return Qt::ItemIsDropEnabled;
 }
 
 QStringList Playlist::mimeTypes() const {
