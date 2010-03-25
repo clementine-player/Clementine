@@ -30,15 +30,15 @@ if(WIN32)
 else(WIN32)
   pkg_check_modules(TAGLIB taglib)
   pkg_check_modules(XINE libxine)
+
+  if (TAGLIB_VERSION VERSION_LESS 1.6)
+    message(FATAL_ERROR "Taglib version 1.6 or greater is required")
+  endif (TAGLIB_VERSION VERSION_LESS 1.6)
 endif(WIN32)
 
 if (NOT Boost_FOUND)
   message(FATAL_ERROR "Boost not found")
 endif (NOT Boost_FOUND)
-
-if (TAGLIB_VERSION VERSION_LESS 1.6)
-  message(FATAL_ERROR "Taglib version 1.6 or greater is required")
-endif (TAGLIB_VERSION VERSION_LESS 1.6)
 
 find_library(LASTFM_LIBRARY_DIRS lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
