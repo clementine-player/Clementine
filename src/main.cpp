@@ -46,11 +46,14 @@
 #endif
 
 void LoadTranslation(const QString& prefix, const QString& path) {
+#if QT_VERSION < 0x040700
   // QTranslator::load will try to open and read "clementine" if it exists,
   // without checking if it's a file first.
+  // This was fixed in Qt 4.7
   QFileInfo maybe_clementine_directory(path + "/clementine");
   if (maybe_clementine_directory.exists() && !maybe_clementine_directory.isFile())
     return;
+#endif
 
   QTranslator* t = new QTranslator;
   if (t->load(prefix + "_" + QLocale::system().name(), path))
