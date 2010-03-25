@@ -64,6 +64,7 @@ void LibraryBackend::StaticInit() {
   _sqlite3_value_text = sqlite3_value_text;
   _sqlite3_result_int64 = sqlite3_result_int64;
   _sqlite3_user_data = sqlite3_user_data;
+  sLoadedSqliteSymbols = true;
 #else // Q_OS_WIN32
   QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
                         "/sqldrivers/libqsqlite";
