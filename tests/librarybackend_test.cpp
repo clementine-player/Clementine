@@ -68,6 +68,48 @@ class LibraryBackendTest : public ::testing::Test {
   QSqlDatabase database_;
 };
 
+#ifdef Q_OS_LINUX
+
+#include <sys/time.h>
+#include <time.h>
+
+struct PerfTimer {
+  PerfTimer(int iterations) : iterations_(iterations) {
+    gettimeofday(&start_time_, NULL);
+  }
+
+  ~PerfTimer() {
+    gettimeofday(&end_time_, NULL);
+
+    timeval elapsed_time;
+    timersub(&end_time_, &start_time_, &elapsed_time);
+    int elapsed_us = elapsed_time.tv_usec + elapsed_time.tv_sec * 1000000;
+
+    qDebug() << "Elapsed:" << elapsed_us << "us";
+    qDebug() << "Time per iteration:" << float(elapsed_us) / iterations_ << "us";
+  }
+
+  timeval start_time_;
+  timeval end_time_;
+  int iterations_;
+};
+
+TEST_F(LibraryBackendTest, LikePerformance) {
+  const int iterations = 1000000;
+
+  const char* needle = "foo";
+  const char* haystack = "foobarbaz foobarbaz";
+  qDebug() << "Simple query";
+  {
+    PerfTimer perf(iterations);
+    for (int i = 0; i < iterations; ++i) {
+      backend_->Like(needle, haystack);
+    }
+  }
+}
+
+#endif
+
 TEST_F(LibraryBackendTest, DatabaseInitialises) {
   // Check that these tables exist
   QStringList tables = database_.tables();
@@ -157,22 +199,34 @@ TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
 }
 
 TEST_F(LibraryBackendTest, LikeWorksWithAllAscii) {
-  EXPECT_TRUE(LibraryBackend::Like("%ar%", "bar"));
-  EXPECT_FALSE(LibraryBackend::Like("%ar%", "foo"));
+  EXPECT_TRUE(backend_->Like("%ar%", "bar"));
+  EXPECT_FALSE(backend_->Like("%ar%", "foo"));
 }
 
 TEST_F(LibraryBackendTest, LikeWorksWithUnicode) {
-  EXPECT_TRUE(LibraryBackend::Like("%Снег%", "Снег"));
-  EXPECT_FALSE(LibraryBackend::Like("%Снег%", "foo"));
+  EXPECT_TRUE(backend_->Like("%Снег%", "Снег"));
+  EXPECT_FALSE(backend_->Like("%Снег%", "foo"));
 }
 
 TEST_F(LibraryBackendTest, LikeAsciiCaseInsensitive) {
-  EXPECT_TRUE(LibraryBackend::Like("%ar%", "BAR"));
-  EXPECT_FALSE(LibraryBackend::Like("%ar%", "FOO"));
+  EXPECT_TRUE(backend_->Like("%ar%", "BAR"));
+  EXPECT_FALSE(backend_->Like("%ar%", "FOO"));
 }
 
 TEST_F(LibraryBackendTest, LikeUnicodeCaseInsensitive) {
-  EXPECT_TRUE(LibraryBackend::Like("%снег%", "Снег"));
+  EXPECT_TRUE(backend_->Like("%снег%", "Снег"));
+}
+
+TEST_F(LibraryBackendTest, LikeCacheInvalidated) {
+  EXPECT_TRUE(backend_->Like("%foo%", "foobar"));
+  EXPECT_FALSE(backend_->Like("%baz%", "foobar"));
+}
+
+TEST_F(LibraryBackendTest, LikeQuerySplit) {
+  EXPECT_TRUE(backend_->Like("%foo bar%", "foobar"));
+  EXPECT_TRUE(backend_->Like("%foo bar%", "barbaz"));
+  EXPECT_TRUE(backend_->Like("%foo bar%", "foobaz"));
+  EXPECT_FALSE(backend_->Like("%foo bar%", "baz"));
 }
 
 // Test adding a single song to the database, then getting various information

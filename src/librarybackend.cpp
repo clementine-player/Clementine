@@ -43,6 +43,7 @@ int (*LibraryBackend::_sqlite3_value_type) (sqlite3_value*) = NULL;
 sqlite_int64 (*LibraryBackend::_sqlite3_value_int64) (sqlite3_value*) = NULL;
 const uchar* (*LibraryBackend::_sqlite3_value_text) (sqlite3_value*) = NULL;
 void (*LibraryBackend::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
+void* (*LibraryBackend::_sqlite3_user_data) (sqlite3_context*) = NULL;
 
 bool LibraryBackend::sStaticInitDone = false;
 bool LibraryBackend::sLoadedSqliteSymbols = false;
@@ -82,12 +83,15 @@ void LibraryBackend::StaticInit() {
       library.resolve("sqlite3_value_text"));
   _sqlite3_result_int64 = reinterpret_cast<void (*) (sqlite3_context*, sqlite_int64)>(
       library.resolve("sqlite3_result_int64"));
+  _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
+      library.resolve("sqlite3_user_data"));
 
   if (!_sqlite3_create_function ||
       !_sqlite3_value_type ||
       !_sqlite3_value_int64 ||
       !_sqlite3_value_text ||
-      !_sqlite3_result_int64) {
+      !_sqlite3_result_int64 ||
+      !_sqlite3_user_data) {
     qDebug() << "Couldn't resolve sqlite symbols";
     sLoadedSqliteSymbols = false;
   } else {
@@ -97,15 +101,29 @@ void LibraryBackend::StaticInit() {
 }
 
 bool LibraryBackend::Like(const char* needle, const char* haystack) {
-  QString a = QString::fromUtf8(needle).section('%', 1, 1);
+  uint hash = qHash(needle);
+  if (!query_hash_ || hash != query_hash_) {
+    // New query, parse and cache.
+    query_cache_ = QString::fromUtf8(needle).section('%', 1, 1).split(' ');
+    query_hash_ = hash;
+  }
   QString b = QString::fromUtf8(haystack);
-  return b.contains(a, Qt::CaseInsensitive);
+  foreach (const QString& query, query_cache_) {
+    if (b.contains(query, Qt::CaseInsensitive)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
 void LibraryBackend::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
   Q_ASSERT(argc == 2 || argc == 3);
   Q_ASSERT(_sqlite3_value_type(argv[0]) == _sqlite3_value_type(argv[1]));
+
+  LibraryBackend* library = reinterpret_cast<LibraryBackend*>(_sqlite3_user_data(context));
+  Q_ASSERT(library);
+
   switch (_sqlite3_value_type(argv[0])) {
     case SQLITE_INTEGER: {
       qint64 result = _sqlite3_value_int64(argv[0]) - _sqlite3_value_int64(argv[1]);
@@ -115,7 +133,7 @@ void LibraryBackend::SqliteLike(sqlite3_context* context, int argc, sqlite3_valu
     case SQLITE_TEXT: {
       const char* data_a = reinterpret_cast<const char*>(_sqlite3_value_text(argv[0]));
       const char* data_b = reinterpret_cast<const char*>(_sqlite3_value_text(argv[1]));
-      _sqlite3_result_int64(context, Like(data_a, data_b) ? 1 : 0);
+      _sqlite3_result_int64(context, library->Like(data_a, data_b) ? 1 : 0);
       break;
     }
   }
@@ -128,7 +146,8 @@ LibraryBackendInterface::LibraryBackendInterface(QObject *parent)
 
 LibraryBackend::LibraryBackend(QObject* parent, const QString& database_name)
   : LibraryBackendInterface(parent),
-    injected_database_name_(database_name)
+    injected_database_name_(database_name),
+    query_hash_(0)
 {
   QSettings s;
   s.beginGroup("Library");
@@ -187,7 +206,7 @@ QSqlDatabase LibraryBackend::Connect() {
             "LIKE",       // Function name (either override or new).
             2,            // Number of args.
             SQLITE_ANY,   // What types this function accepts.
-            NULL,         // Custom data available via sqlite3_user_data().
+            this,         // Custom data available via sqlite3_user_data().
             &LibraryBackend::SqliteLike,  // Our function :-)
             NULL, NULL);
       }

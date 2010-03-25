@@ -183,15 +183,21 @@ class LibraryBackend : public LibraryBackendInterface {
   QString injected_database_name_;
 
 
+  uint query_hash_;
+  QStringList query_cache_;
+
   FRIEND_TEST(LibraryBackendTest, LikeWorksWithAllAscii);
   FRIEND_TEST(LibraryBackendTest, LikeWorksWithUnicode);
   FRIEND_TEST(LibraryBackendTest, LikeAsciiCaseInsensitive);
   FRIEND_TEST(LibraryBackendTest, LikeUnicodeCaseInsensitive);
+  FRIEND_TEST(LibraryBackendTest, LikePerformance);
+  FRIEND_TEST(LibraryBackendTest, LikeCacheInvalidated);
+  FRIEND_TEST(LibraryBackendTest, LikeQuerySplit);
 
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
   // Custom LIKE() function for sqlite.
-  static bool Like(const char* needle, const char* haystack);
+  bool Like(const char* needle, const char* haystack);
   static void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv);
   typedef int (*Sqlite3CreateFunc) (
       sqlite3*, const char*, int, int, void*,
@@ -205,6 +211,7 @@ class LibraryBackend : public LibraryBackendInterface {
   static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
+  static void* (*_sqlite3_user_data) (sqlite3_context*);
 
   static bool sStaticInitDone;
   static bool sLoadedSqliteSymbols;
