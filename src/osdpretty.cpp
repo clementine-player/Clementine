@@ -67,8 +67,9 @@ OSDPretty::OSDPretty(QWidget *parent)
   }
 
   // Set the margins to allow for the drop shadow
-  int margin = layout()->contentsMargins().left() + kDropShadowSize;
-  layout()->setContentsMargins(margin, margin, margin, margin);
+  QBoxLayout* l = static_cast<QBoxLayout*>(layout());
+  int margin = l->margin() + kDropShadowSize;
+  l->setMargin(margin);
 
   Load();
 }
@@ -79,7 +80,7 @@ void OSDPretty::Load() {
 
   foreground_color_ = QColor(s.value("foreground_color", 0).toInt());
   background_color_ = QColor(s.value("background_color", kPresetBlue).toInt());
-  background_opacity_ = s.value("background_opacity", 0.85).toReal();
+  background_opacity_ = s.value("background_opacity", 0.85).toDouble();
   popup_display_ = s.value("popup_display", -1).toInt();
   popup_pos_ = s.value("popup_pos", QPoint(0, 0)).toPoint();
 
@@ -193,8 +194,7 @@ void OSDPretty::Reposition() {
   layout()->activate();
   resize(sizeHint());
 
-  int screen = popup_display_ >= desktop->screenCount() ? -1 : popup_display_;
-  QRect geometry(desktop->availableGeometry(screen));
+  QRect geometry(desktop->availableGeometry(popup_display_));
 
   int x = popup_pos_.x() + geometry.left();
   int y = popup_pos_.y() + geometry.top();
