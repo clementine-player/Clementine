@@ -45,12 +45,12 @@ void StyleSheetLoader::UpdateStyleSheet(QWidget *widget) {
 
   // Replace %palette-role with actual colours
   QPalette p(widget->palette());
-  // HACK
+
   QColor alt = p.color(QPalette::AlternateBase);
   alt.setAlpha(50);
-  QString name = QString(
-      "qrgba(%1,%2,%3,%4)").arg(alt.red()).arg(alt.green()).arg(alt.blue()).arg(alt.alpha());
-  contents.replace("%palette-alternate-base", name);
+  contents.replace("%palette-alternate-base", QString("rgba(%1,%2,%3,%4%)")
+      .arg(alt.red()).arg(alt.green()).arg(alt.blue()).arg(alt.alpha()));
+
   ReplaceColor(&contents, "Window", p, QPalette::Window);
   ReplaceColor(&contents, "Background", p, QPalette::Background);
   ReplaceColor(&contents, "WindowText", p, QPalette::WindowText);
