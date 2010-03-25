@@ -75,6 +75,7 @@ class OSDPretty : public QWidget {
   void mousePressEvent(QMouseEvent *);
   void showEvent(QShowEvent *);
   void mouseMoveEvent(QMouseEvent *);
+  void mouseReleaseEvent(QMouseEvent *);
 
  private:
   void Reposition();

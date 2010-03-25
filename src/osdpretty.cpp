@@ -307,3 +307,10 @@ void OSDPretty::set_foreground_color(QRgb color) {
 void OSDPretty::set_popup_duration(int msec) {
   timeout_->setInterval(msec);
 }
+
+void OSDPretty::mouseReleaseEvent(QMouseEvent *) {
+  if (mode_ == Mode_Draggable) {
+    popup_display_ = current_display();
+    popup_pos_ = current_pos();
+  }
+}
