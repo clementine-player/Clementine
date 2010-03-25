@@ -137,8 +137,8 @@ BackgroundThread<InterfaceType>::BackgroundThread(QObject *parent)
 template <typename InterfaceType>
 BackgroundThread<InterfaceType>::~BackgroundThread() {
   if (isRunning()) {
-    if (worker_) // Possible race condition here
-      worker_->Stop();
+    if (boost::shared_ptr<InterfaceType> w = worker_)
+      w->Stop();
 
     quit();
     if (wait(10000))

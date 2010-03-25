@@ -58,9 +58,7 @@ quint64 AlbumCoverLoader::LoadImageAsync(const QString& art_automatic,
 }
 
 void AlbumCoverLoader::ProcessTasks() {
-  forever {
-    if (stop_requested_) return;
-
+  while (!stop_requested_) {
     // Get the next task
     Task task;
     {
