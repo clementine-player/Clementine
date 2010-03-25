@@ -50,7 +50,6 @@ void StyleSheetLoader::UpdateStyleSheet(QWidget *widget) {
   alt.setAlpha(50);
   QString name = QString(
       "qrgba(%1,%2,%3,%4)").arg(alt.red()).arg(alt.green()).arg(alt.blue()).arg(alt.alpha());
-  qDebug() << name;
   contents.replace("%palette-alternate-base", name);
   ReplaceColor(&contents, "Window", p, QPalette::Window);
   ReplaceColor(&contents, "Background", p, QPalette::Background);
