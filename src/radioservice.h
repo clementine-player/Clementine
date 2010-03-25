@@ -53,6 +53,8 @@ class RadioService : public QObject {
 
   virtual void ReloadSettings() {}
 
+  virtual QString Icon() { return QString(); }
+
  signals:
   void TaskStarted(MultiLoadingIndicator::TaskType);
   void TaskFinished(MultiLoadingIndicator::TaskType);

@@ -90,6 +90,8 @@ class LastFMService : public RadioService {
 
   void ReloadSettings();
 
+  virtual QString Icon() { return ":last.fm/lastfm.png"; }
+
   // Last.fm specific stuff
   bool IsAuthenticated() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }

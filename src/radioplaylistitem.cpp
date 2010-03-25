@@ -62,6 +62,13 @@ void RadioPlaylistItem::InitMetadata() {
 
   metadata_.set_artist(artist_);
   metadata_.set_filetype(Song::Type_Stream);
+
+  if (service_) {
+    QString icon = service_->Icon();
+    if (!icon.isEmpty()) {
+      metadata_.set_art_manual(icon);
+    }
+  }
 }
 
 Song RadioPlaylistItem::Metadata() const {
