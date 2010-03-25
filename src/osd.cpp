@@ -116,3 +116,7 @@ void OSD::ShowMessage(const QString& summary,
       break;
   }
 }
+
+#ifndef Q_WS_X11
+void OSD::CallFinished(QDBusPendingCallWatcher*) {}
+#endif

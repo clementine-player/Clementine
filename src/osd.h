@@ -26,6 +26,8 @@
 
 class OSDPretty;
 
+class QDBusPendingCallWatcher;
+
 #ifdef Q_WS_X11
 #include <QDBusArgument>
 #include <boost/scoped_ptr.hpp>
@@ -95,9 +97,9 @@ class OSD : public QObject {
 
 #ifdef Q_WS_X11
   boost::scoped_ptr<org::freedesktop::Notifications> interface_;
+#endif
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
-#endif
 };
 
 #endif // OSD_H
