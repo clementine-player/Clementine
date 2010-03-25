@@ -31,6 +31,7 @@
 
 LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
+    stop_requested_(false),
     fs_watcher_(new QFileSystemWatcher(this)),
     rescan_timer_(new QTimer(this)),
     total_watches_(0)
@@ -47,8 +48,10 @@ void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
   // could be music.
 
   foreach (const Directory& dir, directories) {
+    if (stop_requested_) return;
     paths_watched_[dir.path] = dir;
     ScanDirectory(dir.path);
+    if (stop_requested_) return;
 
     // Start monitoring this directory for more changes
     fs_watcher_->addPath(dir.path);
@@ -118,6 +121,8 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
       album_art[dir] << path;
     else if (engine_->canDecode(QUrl::fromLocalFile(path)))
       files_on_disk << path;
+
+    if (stop_requested_) return;
   }
 
   // Ask the database for a list of files in this directory
@@ -127,6 +132,8 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
   SongList new_songs;
   SongList touched_songs;
   foreach (const QString& file, files_on_disk) {
+    if (stop_requested_) return;
+
     Song matching_song;
     if (FindSongByPath(songs_in_db, file, &matching_song)) {
       // The song is in the database and still on disk.
@@ -185,6 +192,8 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
     }
   }
 
+  if (stop_requested_) return;
+
   if (!new_songs.isEmpty())
     emit NewOrUpdatedSongs(new_songs);
 
@@ -199,6 +208,8 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
       deleted_songs << song;
     }
   }
+
+  if (stop_requested_) return;
 
   if (!deleted_songs.isEmpty())
     emit SongsDeleted(deleted_songs);
@@ -226,8 +237,11 @@ void LibraryWatcher::DirectoryChanged(const QString &path) {
 }
 
 void LibraryWatcher::RescanPathsNow() {
-  foreach (const QString& path, paths_needing_rescan_)
+  foreach (const QString& path, paths_needing_rescan_) {
+    if (stop_requested_) return;
     ScanDirectory(path);
+  }
+
   paths_needing_rescan_.clear();
 
   qDebug() << "Updating compilations...";

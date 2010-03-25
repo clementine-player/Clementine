@@ -24,6 +24,7 @@ const char* AlbumCoverLoader::kManuallyUnsetCover = "(unset)";
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
+    stop_requested_(false),
     height_(120),
     next_id_(0)
 {
@@ -58,6 +59,8 @@ quint64 AlbumCoverLoader::LoadImageAsync(const QString& art_automatic,
 
 void AlbumCoverLoader::ProcessTasks() {
   forever {
+    if (stop_requested_) return;
+
     // Get the next task
     Task task;
     {

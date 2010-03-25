@@ -52,6 +52,8 @@ class LibraryBackendInterface : public QObject {
   };
   typedef QList<Album> AlbumList;
 
+  virtual void Stop() {};
+
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
   virtual void LoadDirectoriesAsync() = 0;
 

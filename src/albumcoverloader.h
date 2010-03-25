@@ -29,6 +29,8 @@ class AlbumCoverLoader : public QObject {
 
  public:
   AlbumCoverLoader(QObject* parent = 0);
+  
+  void Stop() { stop_requested_ = true; }
 
   static QString ImageCacheDir();
 
@@ -54,6 +56,8 @@ class AlbumCoverLoader : public QObject {
     QString art_automatic;
     QString art_manual;
   };
+
+  bool stop_requested_;
 
   int height_;
 

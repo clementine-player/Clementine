@@ -41,6 +41,8 @@ class LibraryWatcher : public QObject {
   void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) { backend_ = backend; }
   void SetEngine(EngineBase* engine) { engine_ = engine; } // TODO: shared_ptr
 
+  void Stop() { stop_requested_ = true; }
+
  signals:
   void NewOrUpdatedSongs(const SongList& songs);
   void SongsMTimeUpdated(const SongList& songs);
@@ -68,6 +70,7 @@ class LibraryWatcher : public QObject {
  private:
   EngineBase* engine_;
   boost::shared_ptr<LibraryBackendInterface> backend_;
+  bool stop_requested_;
 
   QFileSystemWatcher* fs_watcher_;
   QTimer* rescan_timer_;
