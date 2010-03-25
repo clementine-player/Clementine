@@ -97,7 +97,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
         <number>1</number>
        </property>
@@ -192,13 +192,9 @@
           </spacer>
          </item>
         </layout>
-        <zorder>groupBox</zorder>
        </widget>
        <widget class="QWidget" name="notifications_page">
         <layout class="QVBoxLayout" name="verticalLayout_4">
-         <property name="margin">
-          <number>0</number>
-         </property>
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -207,65 +203,36 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="notifications_none">
-           <property name="text">
-            <string>Don't show notifications</string>
+          <widget class="QGroupBox" name="groupBox_4">
+           <property name="title">
+            <string>Notification type</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="notifications_native">
-           <property name="text">
-            <string>Show a native desktop notification</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="notifications_tray">
-           <property name="text">
-            <string>Show a popup from the system tray</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>4</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QWidget" name="notifications_options" native="true">
-           <layout class="QFormLayout" name="formLayout">
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_3">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QRadioButton" name="notifications_none">
               <property name="text">
-               <string>Popup duration</string>
+               <string>Disabled</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QSpinBox" name="notifications_duration">
-              <property name="suffix">
-               <string> seconds</string>
+            <item>
+             <widget class="QRadioButton" name="notifications_native">
+              <property name="text">
+               <string>Show a native desktop notification</string>
               </property>
-              <property name="minimum">
-               <number>1</number>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="notifications_pretty">
+              <property name="text">
+               <string>Show a pretty OSD</string>
               </property>
-              <property name="maximum">
-               <number>20</number>
-              </property>
-              <property name="value">
-               <number>5</number>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="notifications_tray">
+              <property name="text">
+               <string>Show a popup from the system tray</string>
               </property>
              </widget>
             </item>
@@ -273,17 +240,121 @@
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="notifications_volume">
-           <property name="text">
-            <string>Show a notification when I change the volume</string>
+          <widget class="QGroupBox" name="notifications_general">
+           <property name="title">
+            <string>General settings</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QWidget" name="notifications_options" native="true">
+              <layout class="QFormLayout" name="formLayout">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Popup duration</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QSpinBox" name="notifications_duration">
+                 <property name="suffix">
+                  <string> seconds</string>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>20</number>
+                 </property>
+                 <property name="value">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="notifications_volume">
+              <property name="text">
+               <string>Show a notification when I change the volume</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="notifications_art">
+              <property name="text">
+               <string>Include album art in the notification</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="notifications_art">
-           <property name="text">
-            <string>Include album art in the notification</string>
+          <widget class="QGroupBox" name="notifications_pretty_group">
+           <property name="title">
+            <string>Pretty OSD options</string>
            </property>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Background opacity</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSlider" name="notifications_opacity">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Background color</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="notifications_bg_preset">
+              <item>
+               <property name="text">
+                <string>Basic Blue</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Clementine Orange</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Custom...</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Text color</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="notifications_fg_choose">
+              <property name="text">
+               <string>Choose color...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
@@ -360,6 +431,16 @@
   <tabstop>no_fadeout</tabstop>
   <tabstop>fadeout</tabstop>
   <tabstop>fadeout_duration</tabstop>
+  <tabstop>notifications_none</tabstop>
+  <tabstop>notifications_native</tabstop>
+  <tabstop>notifications_pretty</tabstop>
+  <tabstop>notifications_tray</tabstop>
+  <tabstop>notifications_duration</tabstop>
+  <tabstop>notifications_volume</tabstop>
+  <tabstop>notifications_art</tabstop>
+  <tabstop>notifications_opacity</tabstop>
+  <tabstop>notifications_bg_preset</tabstop>
+  <tabstop>notifications_fg_choose</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
@@ -367,7 +448,7 @@
   <connection>
    <sender>list</sender>
    <signal>currentRowChanged(int)</signal>
-   <receiver>stackedWidget</receiver>
+   <receiver>stacked_widget</receiver>
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">

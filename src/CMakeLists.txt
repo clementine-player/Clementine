@@ -64,6 +64,7 @@ set(CLEMENTINE-SOURCES
     globalshortcuts/globalshortcuts.cpp
     fixlastfm.cpp
     backgroundthread.cpp
+    osdpretty.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -120,6 +121,7 @@ set(CLEMENTINE-MOC-HEADERS
     analyzers/sonogram.h
     analyzers/turbine.h
     globalshortcuts/globalshortcuts.h
+    osdpretty.h
 )
 
 # UI files
@@ -139,6 +141,7 @@ set(CLEMENTINE-UI
     addstreamdialog.ui
     albumcovermanager.ui
     playlistsequence.ui
+    osdpretty.ui
 )
 
 # Resource files

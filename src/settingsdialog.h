@@ -22,12 +22,14 @@
 #include "ui_settingsdialog.h"
 
 class LibraryDirectoryModel;
+class OSDPretty;
 
 class SettingsDialog : public QDialog {
   Q_OBJECT
 
  public:
   SettingsDialog(QWidget* parent = 0);
+  ~SettingsDialog();
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
 
@@ -36,14 +38,25 @@ class SettingsDialog : public QDialog {
 
   // QWidget
   void showEvent(QShowEvent* e);
+  void hideEvent(QHideEvent *);
 
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
   void LastFMValidationComplete(bool success);
 
+  void PrettyOpacityChanged(int value);
+  void PrettyColorPresetChanged(int index);
+  void ChooseBgColor();
+  void ChooseFgColor();
+
+  void UpdatePopupVisible();
+
  private:
   Ui::SettingsDialog ui_;
+  bool loading_settings_;
+
+  OSDPretty* pretty_popup_;
 };
 
 #endif // SETTINGSDIALOG_H

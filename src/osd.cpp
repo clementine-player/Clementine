@@ -15,6 +15,7 @@
 */
 
 #include "osd.h"
+#include "osdpretty.h"
 
 #include <QCoreApplication>
 #include <QtDebug>
@@ -28,10 +29,15 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
     timeout_(5000),
     behaviour_(Native),
     show_on_volume_change_(false),
-    show_art_(true)
+    show_art_(true),
+    pretty_popup_(new OSDPretty)
 {
   ReloadSettings();
   Init();
+}
+
+OSD::~OSD() {
+  delete pretty_popup_;
 }
 
 void OSD::ReloadSettings() {
@@ -46,10 +52,12 @@ void OSD::ReloadSettings() {
     behaviour_ = TrayPopup;
   if (!SupportsTrayPopups() && behaviour_ == TrayPopup)
     behaviour_ = Disabled;
+
+  pretty_popup_->set_popup_duration(timeout_);
+  pretty_popup_->ReloadSettings();
 }
 
 void OSD::SongChanged(const Song &song) {
-  qDebug() << __PRETTY_FUNCTION__;
   QString summary(song.PrettyTitle());
   if (!song.artist().isEmpty())
     summary = QString("%1 - %2").arg(song.artist(), summary);
@@ -96,6 +104,11 @@ void OSD::ShowMessage(const QString& summary,
 
     case TrayPopup:
       tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_);
+      break;
+
+    case Pretty:
+      pretty_popup_->SetMessage(summary, message, image);
+      pretty_popup_->show();
       break;
 
     case Disabled:

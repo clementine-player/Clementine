@@ -24,6 +24,8 @@
 #include "engine_fwd.h"
 #include "song.h"
 
+class OSDPretty;
+
 #ifdef Q_WS_X11
 #include <QDBusArgument>
 #include <boost/scoped_ptr.hpp>
@@ -39,6 +41,7 @@ class OSD : public QObject {
 
  public:
   OSD(QSystemTrayIcon* tray_icon, QObject* parent = 0);
+  ~OSD();
 
   static const char* kSettingsGroup;
 
@@ -46,6 +49,7 @@ class OSD : public QObject {
     Disabled = 0,
     Native,
     TrayPopup,
+    Pretty,
   };
 
   // Implemented in the OS-specific files
@@ -81,6 +85,8 @@ class OSD : public QObject {
   Behaviour behaviour_;
   bool show_on_volume_change_;
   bool show_art_;
+
+  OSDPretty* pretty_popup_;
 
 #ifdef Q_OS_DARWIN
   class GrowlNotificationWrapper;
