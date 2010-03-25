@@ -14,34 +14,55 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Libnotify headers need to go before Qt ones because they use "signals" as
-// a variable name
-#ifdef HAVE_LIBNOTIFY
-#  include <libnotify/notify.h>
-#  include <gdk-pixbuf/gdk-pixbuf.h>
-#  include <glib.h>
-#endif // HAVE_LIBNOTIFY
-
 #include "osd.h"
 
 #include <QCoreApplication>
 #include <QtDebug>
 #include <QTextDocument>
 
+using boost::scoped_ptr;
+
+QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image) {
+  if (image.isNull()) {
+    // Sometimes this gets called with a null QImage for no obvious reason.
+    arg.beginStructure();
+    arg << 0 << 0 << 0 << false << 0 << 0 << QByteArray();
+    arg.endStructure();
+    return arg;
+  }
+  QImage scaled = image.scaledToHeight(100, Qt::SmoothTransformation);
+  QImage i = scaled.convertToFormat(QImage::Format_ARGB32).rgbSwapped();
+  arg.beginStructure();
+  arg << i.width();
+  arg << i.height();
+  arg << i.bytesPerLine();
+  arg << i.hasAlphaChannel();
+  int channels = i.isGrayscale() ? 1 : (i.hasAlphaChannel() ? 4 : 3);
+  arg << i.depth() / channels;
+  arg << channels;
+  arg << QByteArray(reinterpret_cast<const char*>(i.bits()), i.numBytes());
+  arg.endStructure();
+  return arg;
+}
+
+const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
+  // This is needed to link but shouldn't be called.
+  Q_ASSERT(0);
+  return arg;
+}
+
 void OSD::Init() {
-  notification_ = NULL;
-  pixbuf_ = NULL;
-#ifdef HAVE_LIBNOTIFY
-  notify_init(QCoreApplication::applicationName().toUtf8().constData());
-#endif
+  interface_.reset(new org::freedesktop::Notifications(
+      "org.freedesktop.Notifications",
+      "/org/freedesktop/Notifications",
+      QDBusConnection::sessionBus()));
+  if (!interface_->isValid()) {
+    qWarning() << "Error connecting to notifications service.";
+  }
 }
 
 bool OSD::SupportsNativeNotifications() {
-#ifdef HAVE_LIBNOTIFY
   return true;
-#else
-  return false;
-#endif
 }
 
 bool OSD::SupportsTrayPopups() {
@@ -50,50 +71,45 @@ bool OSD::SupportsTrayPopups() {
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon) {
-#ifdef HAVE_LIBNOTIFY
-  if (summary.isNull())
-    return;
-
-  #define STR(x) (x.isNull() ? NULL : x.toUtf8().constData())
-
-  notification_ = notify_notification_new(
-      STR(summary), STR(Qt::escape(message)), STR(icon), NULL);
-
-  #undef STR
-
-  notify_notification_set_urgency(notification_, NOTIFY_URGENCY_LOW);
-  notify_notification_set_timeout(notification_, timeout_);
-
-  if (pixbuf_) {
-    notify_notification_set_icon_from_pixbuf(notification_, pixbuf_);
-  }
-
-  GError* error = NULL;
-  notify_notification_show(notification_, &error);
-  if (error) {
-    qDebug() << "Error from notify_notification_show:" << error->message;
-    g_error_free(error);
-  }
-
-  pixbuf_ = NULL;
-#endif // HAVE_LIBNOTIFY
+  QDBusPendingReply<uint> reply = interface_->Notify(
+      QCoreApplication::applicationName(),
+      0,
+      icon,
+      summary,
+      message,
+      QStringList(),
+      QVariantMap(),
+      timeout_);
+  QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
+  connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+      SLOT(CallFinished(QDBusPendingCallWatcher*)));
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QImage& image) {
-#ifdef HAVE_LIBNOTIFY
-  QImage happy_gdk_image = image.scaledToHeight(100, Qt::SmoothTransformation)
-                           .convertToFormat(QImage::Format_RGB888);
-  pixbuf_ = gdk_pixbuf_new_from_data(
-      happy_gdk_image.bits(),
-      GDK_COLORSPACE_RGB,
-      false,  // has_alpha
-      8,      // bits_per_sample
-      happy_gdk_image.width(),
-      happy_gdk_image.height(),
-      happy_gdk_image.bytesPerLine(),
-      NULL, NULL);
+  QVariantMap hints;
+  if (!image.isNull()) {
+    hints["image_data"] = QVariant(image);
+  }
+  QDBusPendingReply<uint> reply = interface_->Notify(
+      QCoreApplication::applicationName(),
+      0,
+      QString(),
+      summary,
+      message,
+      QStringList(),
+      hints,
+      timeout_);
+  QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
+  connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+      SLOT(CallFinished(QDBusPendingCallWatcher*)));
+}
 
-  ShowMessageNative(summary, message, QString());
-#endif // HAVE_LIBNOTIFY
+void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
+  scoped_ptr<QDBusPendingCallWatcher> w(watcher);
+
+  QDBusPendingReply<uint> reply = *watcher;
+  if (reply.isError()) {
+    qWarning() << "Error sending notification" << reply.error();
+  }
 }

@@ -37,6 +37,7 @@
 #  include <QDBusConnection>
 #  include <QDBusMetaType>
 #  include "mpris.h"
+#  include "osd.h"
 #endif
 
 // Load sqlite plugin on windows
@@ -100,6 +101,7 @@ int main(int argc, char *argv[]) {
 #ifdef Q_WS_X11
   qDBusRegisterMetaType<DBusStatus>();
   qDBusRegisterMetaType<Version>();
+  qDBusRegisterMetaType<QImage>();
   QDBusConnection::sessionBus().registerService("org.mpris.clementine");
   MPRIS mpris;
 #endif

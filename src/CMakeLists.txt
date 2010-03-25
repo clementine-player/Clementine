@@ -184,6 +184,7 @@ else(APPLE)
     set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_win.cpp)
   else(WIN32)
     set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_x11.cpp)
+    # MPRIS
     qt4_add_dbus_adaptor(MPRIS-PLAYER-SOURCES
         ../data/org.freedesktop.MediaPlayer.player.xml
         player.h Player mpris_player MprisPlayer)
@@ -193,10 +194,16 @@ else(APPLE)
     qt4_add_dbus_adaptor(MPRIS-TRACKLIST-SOURCES
         ../data/org.freedesktop.MediaPlayer.tracklist.xml
         player.h Player mpris_tracklist MprisTrackList)
+
+    # org.freedesktop.Notifications
+    qt4_add_dbus_interface(NOTIFICATION-SOURCES
+        ../data/org.freedesktop.Notifications.xml
+        notification)
     set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES}
         ${MPRIS-PLAYER-SOURCES}
         ${MPRIS-ROOT-SOURCES}
         ${MPRIS-TRACKLIST-SOURCES}
+        ${NOTIFICATION-SOURCES}
         mpris.cpp
         )
     set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} mpris.h)
@@ -231,7 +238,6 @@ target_link_libraries(clementine_lib
     qxt
     lastfm
     ${XINE_LIBRARIES}
-    ${LIBNOTIFY_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${QT_LIBRARIES}
 )

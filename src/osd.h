@@ -25,10 +25,13 @@
 #include "song.h"
 
 #ifdef Q_WS_X11
-# ifndef _NOTIFY_NOTIFICATION_H_
-    struct GdkPixbuf;
-    struct NotifyNotification;
-# endif
+#include <QDBusArgument>
+#include <boost/scoped_ptr.hpp>
+#include "notification.h"
+
+QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
+const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
+
 #endif
 
 class OSD : public QObject {
@@ -79,15 +82,16 @@ class OSD : public QObject {
   bool show_on_volume_change_;
   bool show_art_;
 
-#ifdef Q_WS_X11
-  NotifyNotification* notification_;
-  GdkPixbuf* pixbuf_;
-#endif
-
 #ifdef Q_OS_DARWIN
   class GrowlNotificationWrapper;
   GrowlNotificationWrapper* wrapper_;
 #endif  // Q_OS_DARWIN
+
+#ifdef Q_WS_X11
+  boost::scoped_ptr<org::freedesktop::Notifications> interface_;
+ private slots:
+  void CallFinished(QDBusPendingCallWatcher* watcher);
+#endif
 };
 
 #endif // OSD_H

@@ -30,18 +30,11 @@ if(WIN32)
 else(WIN32)
   pkg_check_modules(TAGLIB taglib)
   pkg_check_modules(XINE libxine)
-  pkg_check_modules(LIBNOTIFY libnotify)
 endif(WIN32)
 
 if (NOT Boost_FOUND)
   message(FATAL_ERROR "Boost not found")
 endif (NOT Boost_FOUND)
-
-if (LIBNOTIFY_FOUND)
-  add_definitions(-DHAVE_LIBNOTIFY)
-  link_directories(${LIBNOTIFY_LIBRARY_DIRS})
-  include_directories(${LIBNOTIFY_INCLUDE_DIRS})
-endif (LIBNOTIFY_FOUND)
 
 if (TAGLIB_VERSION VERSION_LESS 1.6)
   message(FATAL_ERROR "Taglib version 1.6 or greater is required")
