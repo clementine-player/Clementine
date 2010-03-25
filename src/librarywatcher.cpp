@@ -131,7 +131,16 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
     if (FindSongByPath(songs_in_db, file, &matching_song)) {
       // The song is in the database and still on disk.
       // Check the mtime to see if it's been changed since it was added.
-      bool changed = matching_song.mtime() != QFileInfo(file).lastModified().toTime_t();
+      QFileInfo file_info(file);
+
+      if (!file_info.exists()) {
+        // Partially fixes race condition - if file was removed between being
+        // added to the list and now.
+        files_on_disk.removeAll(file);
+        continue;
+      }
+
+      bool changed = matching_song.mtime() != file_info.lastModified().toTime_t();
 
       // Also want to look to see whether the album art has changed
       QString image = ImageForSong(file, album_art);
@@ -146,6 +155,8 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
         // It's changed - reread the metadata from the file
         Song song_on_disk;
         song_on_disk.InitFromFile(file, dir.id);
+        if (!song_on_disk.is_valid())
+          continue;
         song_on_disk.set_id(matching_song.id());
         song_on_disk.set_art_automatic(image);
 
