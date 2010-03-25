@@ -17,6 +17,8 @@
 #include "globalshortcuts.h"
 #include "qxtglobalshortcut.h"
 
+#include <QtDebug>
+
 #ifdef QT_DBUS_LIB
 #  include <QtDBus>
 #endif
@@ -33,10 +35,7 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
 
 void GlobalShortcuts::Init() {
   if (RegisterGnome()) return;
-
-#ifdef Q_WS_X11
-  if (RegisterX11()) return;
-#endif
+  if (RegisterQxt()) return;
 }
 
 bool GlobalShortcuts::RegisterGnome() {
@@ -57,8 +56,7 @@ bool GlobalShortcuts::RegisterGnome() {
 #endif
 }
 
-bool GlobalShortcuts::RegisterX11() {
-#ifdef Q_WS_X11
+bool GlobalShortcuts::RegisterQxt() {
   QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
   QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
   QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
@@ -70,9 +68,6 @@ bool GlobalShortcuts::RegisterX11() {
   connect(prev, SIGNAL(activated()), SIGNAL(Previous()));
 
   return true;
-#else // Q_WS_X11
-  return false;
-#endif
 }
 
 void GlobalShortcuts::GnomeMediaKeyPressed(const QString&, const QString& key) {

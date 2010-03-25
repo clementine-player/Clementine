@@ -156,6 +156,21 @@ quint32 QxtGlobalShortcutPrivate::nativeKeycode(Qt::Key key)
     case Qt::Key_Slash:
         return VK_DIVIDE;
 
+    case Qt::Key_MediaNext:
+        return VK_MEDIA_NEXT_TRACK;
+    case Qt::Key_MediaPrevious:
+        return VK_MEDIA_PREV_TRACK;
+    case Qt::Key_MediaStop:
+        return VK_MEDIA_STOP;
+    case Qt::Key_MediaPlay:
+        return VK_MEDIA_PLAY_PAUSE;
+    case Qt::Key_VolumeDown:
+        return VK_VOLUME_DOWN;
+    case Qt::Key_VolumeUp:
+        return VK_VOLUME_UP;
+    case Qt::Key_VolumeMute:
+        return VK_VOLUME_MUTE;
+
         // numbers
     case Qt::Key_0:
     case Qt::Key_1:

@@ -38,7 +38,7 @@ signals:
 private:
   void Init();
   bool RegisterGnome();
-  bool RegisterX11();
+  bool RegisterQxt();
 
 private slots:
   void GnomeMediaKeyPressed(const QString& application, const QString& key);

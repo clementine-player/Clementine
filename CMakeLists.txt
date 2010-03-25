@@ -76,6 +76,8 @@ if (WIN32)
   SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE>")
 endif(WIN32)
 
+add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
+
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
 add_subdirectory(3rdparty/qxt)
