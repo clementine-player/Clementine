@@ -49,7 +49,7 @@ void OSD::ReloadSettings() {
   show_art_ = s.value("ShowArt", true).toBool();
 
   if (!SupportsNativeNotifications() && behaviour_ == Native)
-    behaviour_ = TrayPopup;
+    behaviour_ = Pretty;
   if (!SupportsTrayPopups() && behaviour_ == TrayPopup)
     behaviour_ = Disabled;
 
