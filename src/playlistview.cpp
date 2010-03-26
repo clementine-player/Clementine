@@ -407,31 +407,23 @@ QList<int> PlaylistView::GetEditableColumns() {
 QModelIndex PlaylistView::NextEditableIndex(const QModelIndex& current) {
   QList<int> columns = GetEditableColumns();
   QHeaderView* h = header();
-  int col = h->visualIndex(current.column());
-  QList<int> columns_left = columns.mid(columns.indexOf(col)+1);
+  int index = columns.indexOf(h->visualIndex(current.column()));
 
-  QModelIndex index;
-  if(columns_left.empty())
-    index = model()->index(current.row()+1,  h->logicalIndex(columns.first()));
-  else
-    index = model()->index(current.row(),  h->logicalIndex(columns_left.first()));
+  if(index+1 >= columns.size())
+    return model()->index(current.row()+1, h->logicalIndex(columns.first()));
 
-  return index;
+  return model()->index(current.row(), h->logicalIndex(columns[index+1]));
 }
 
 QModelIndex PlaylistView::PrevEditableIndex(const QModelIndex& current) {
   QList<int> columns = GetEditableColumns();
   QHeaderView* h = header();
-  int col = h->visualIndex(current.column());
-  QList<int> columns_left = columns.mid(0, columns.indexOf(col));
+  int index = columns.indexOf(h->visualIndex(current.column()));
 
-  QModelIndex index;
-  if(columns_left.empty())
-    index = model()->index(current.row()-1, h->logicalIndex(columns.last()));
-  else
-    index = model()->index(current.row(), h->logicalIndex(columns_left.last()));
+  if(index-1 < 0)
+    return model()->index(current.row()-1, h->logicalIndex(columns.last()));
 
-  return index;
+  return model()->index(current.row(), h->logicalIndex(columns[index-1]));
 }
 
 void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
