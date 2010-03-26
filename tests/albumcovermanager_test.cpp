@@ -38,5 +38,6 @@ TEST_F(AlbumCoverManagerTest, HidesItemsWithFilter) {
   QListWidgetItem shown_item;
   shown_item.setText("foobar");
   EXPECT_FALSE(manager_.ShouldHide(shown_item, "foo", AlbumCoverManager::Hide_None));
-  EXPECT_FALSE(manager_.ShouldHide(shown_item, "abc bar", AlbumCoverManager::Hide_None));
+  EXPECT_TRUE(manager_.ShouldHide(shown_item, "abc bar", AlbumCoverManager::Hide_None));
+  EXPECT_FALSE(manager_.ShouldHide(shown_item, "bar foo", AlbumCoverManager::Hide_None));
 }

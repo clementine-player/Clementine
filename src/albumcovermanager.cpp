@@ -260,12 +260,12 @@ bool AlbumCoverManager::ShouldHide(
 
   QStringList query = filter.split(' ');
   foreach (const QString& s, query) {
-    if (item.text().contains(s, Qt::CaseInsensitive)) {
-      return false;
+    if (!item.text().contains(s, Qt::CaseInsensitive)) {
+      return true;
     }
   }
 
-  return true;
+  return false;
 }
 
 void AlbumCoverManager::FetchAlbumCovers() {
