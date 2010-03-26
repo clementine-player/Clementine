@@ -22,6 +22,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "gtest/gtest_prod.h"
+
 #include "ui_albumcovermanager.h"
 #include "backgroundthread.h"
 #include "albumcoverloader.h"
@@ -40,6 +42,8 @@ class AlbumCoverManager : public QDialog {
   static const char* kSettingsGroup;
 
   void Reset();
+
+  void Init();
 
  public slots:
   void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend);
@@ -80,7 +84,15 @@ class AlbumCoverManager : public QDialog {
     Role_PathManual,
   };
 
+  enum HideCovers {
+    Hide_None,
+    Hide_WithCovers,
+    Hide_WithoutCovers,
+  };
+
   void CancelRequests();
+
+  bool ShouldHide(const QListWidgetItem& item, const QString& filter, HideCovers hide) const;
 
  private:
   bool constructed_;
@@ -104,6 +116,10 @@ class AlbumCoverManager : public QDialog {
 
   QMenu* context_menu_;
   QList<QListWidgetItem*> context_menu_items_;
+
+  FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
+  FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);
+  FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithFilter);
 };
 
 #endif // ALBUMCOVERMANAGER_H

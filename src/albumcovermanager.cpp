@@ -42,8 +42,7 @@ AlbumCoverManager::AlbumCoverManager(QNetworkAccessManager* network, QWidget *pa
     cover_fetcher_(new AlbumCoverFetcher(network, this)),
     artist_icon_(":/artist.png"),
     all_artists_icon_(":/album.png"),
-    context_menu_(new QMenu(this))
-{
+    context_menu_(new QMenu(this)) {
   ui_.setupUi(this);
 
   // Get a square version of nocover.png
@@ -55,7 +54,13 @@ AlbumCoverManager::AlbumCoverManager(QNetworkAccessManager* network, QWidget *pa
   p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2, nocover);
   p.end();
   no_cover_icon_ = QPixmap::fromImage(square_nocover);
+}
 
+AlbumCoverManager::~AlbumCoverManager() {
+  CancelRequests();
+}
+
+void AlbumCoverManager::Init() {
   // View menu
   QActionGroup* filter_group = new QActionGroup(this);
   filter_all_ = filter_group->addAction(tr("All albums"));
@@ -109,10 +114,6 @@ AlbumCoverManager::AlbumCoverManager(QNetworkAccessManager* network, QWidget *pa
   constructed_ = true;
 }
 
-AlbumCoverManager::~AlbumCoverManager() {
-  CancelRequests();
-}
-
 void AlbumCoverManager::CoverLoaderInitialised() {
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(CoverImageLoaded(quint64,QImage)));
@@ -143,7 +144,9 @@ void AlbumCoverManager::closeEvent(QCloseEvent *) {
 
 void AlbumCoverManager::CancelRequests() {
   cover_loading_tasks_.clear();
-  cover_loader_->Worker()->Clear();
+  if (cover_loader_ && cover_loader_->Worker()) {
+    cover_loader_->Worker()->Clear();
+  }
 
   cover_fetching_tasks_.clear();
   cover_fetcher_->Clear();
@@ -229,15 +232,40 @@ void AlbumCoverManager::UpdateFilter() {
   const bool hide_with_covers = filter_without_covers_->isChecked();
   const bool hide_without_covers = filter_with_covers_->isChecked();
 
-  for (int i=0 ; i<ui_.albums->count() ; ++i) {
-    QListWidgetItem* item = ui_.albums->item(i);
-    QString text = item->text();
-    bool has_cover = item->icon().cacheKey() != no_cover_icon_.cacheKey();
-
-    item->setHidden((!filter.isEmpty() && !text.toLower().contains(filter)) ||
-                    (has_cover && hide_with_covers) ||
-                    (!has_cover && hide_without_covers));
+  HideCovers hide = Hide_None;
+  if (hide_with_covers) {
+    hide = Hide_WithCovers;
+  } else if (hide_without_covers) {
+    hide = Hide_WithoutCovers;
   }
+
+  for (int i = 0; i < ui_.albums->count(); ++i) {
+    QListWidgetItem* item = ui_.albums->item(i);
+    item->setHidden(ShouldHide(*item, filter, hide));
+  }
+}
+
+bool AlbumCoverManager::ShouldHide(
+    const QListWidgetItem& item, const QString& filter, HideCovers hide) const {
+  bool has_cover = item.icon().cacheKey() != no_cover_icon_.cacheKey();
+  if (hide == Hide_WithCovers && has_cover) {
+    return true;
+  } else if (hide == Hide_WithoutCovers && !has_cover) {
+    return true;
+  }
+
+  if (filter.isEmpty()) {
+    return false;
+  }
+
+  QStringList query = filter.split(' ');
+  foreach (const QString& s, query) {
+    if (item.text().contains(s, Qt::CaseInsensitive)) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 void AlbumCoverManager::FetchAlbumCovers() {

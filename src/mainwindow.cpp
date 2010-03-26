@@ -114,6 +114,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   ui_.radio_view->setModel(radio_model_);
 
+  cover_manager_->Init();
+
   // File view connections
   connect(ui_.file_view, SIGNAL(Queue(QList<QUrl>)), SLOT(QueueFiles(QList<QUrl>)));
   connect(ui_.file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));

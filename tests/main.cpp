@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
   testing::InitGoogleMock(&argc, argv);
 
   testing::AddGlobalTestEnvironment(new MetatypesEnvironment);
-  QCoreApplication a(argc, argv);
+  QApplication a(argc, argv);
   testing::AddGlobalTestEnvironment(new ResourcesEnvironment);
 
   return RUN_ALL_TESTS();
