@@ -55,7 +55,7 @@ add_custom_target(build_tests
 add_dependencies(test build_tests)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
-macro(add_test_file test_source)
+macro(add_test_file test_source gui_required)
     get_filename_component(TEST_NAME ${test_source} NAME_WE)
     add_executable(${TEST_NAME}
       EXCLUDE_FROM_ALL
@@ -63,16 +63,22 @@ macro(add_test_file test_source)
       main.cpp
     )
     target_link_libraries(${TEST_NAME} gmock clementine_lib test_utils)
+    set(GUI_REQUIRED ${gui_required})
+    if (GUI_REQUIRED)
+      set_target_properties(${TEST_NAME} PROPERTIES
+          COMPILE_DEFINITIONS GUI)
+    endif (GUI_REQUIRED)
+
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME})
     add_dependencies(build_tests ${TEST_NAME})
 endmacro (add_test_file)
 
 
-add_test_file(m3uparser_test.cpp)
-add_test_file(song_test.cpp)
-add_test_file(librarybackend_test.cpp)
-add_test_file(albumcoverfetcher_test.cpp)
-add_test_file(xspfparser_test.cpp)
-add_test_file(library_test.cpp)
-add_test_file(albumcovermanager_test.cpp)
+add_test_file(m3uparser_test.cpp false)
+add_test_file(song_test.cpp false)
+add_test_file(librarybackend_test.cpp false)
+add_test_file(albumcoverfetcher_test.cpp false)
+add_test_file(xspfparser_test.cpp false)
+add_test_file(library_test.cpp false)
+add_test_file(albumcovermanager_test.cpp true)
