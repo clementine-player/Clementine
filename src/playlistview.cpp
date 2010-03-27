@@ -223,6 +223,8 @@ void PlaylistView::LoadGeometry() {
     header()->hideSection(Playlist::Column_Filetype);
     header()->hideSection(Playlist::Column_DateCreated);
     header()->hideSection(Playlist::Column_DateModified);
+    header()->hideSection(Playlist::Column_AlbumArtist);
+    header()->hideSection(Playlist::Column_Composer);
   }
 }
 
