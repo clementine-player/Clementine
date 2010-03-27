@@ -254,7 +254,7 @@ XineEngine::load( const QUrl &url, bool isStream )
 
   qDebug() << "Before xine_open() *****";
 
-  if( xine_open( m_stream, QFile::encodeName( url.toString() ) ) )
+  if( xine_open( m_stream, url.toEncoded() ) )
   {
     qDebug() << "After xine_open() *****";
 
