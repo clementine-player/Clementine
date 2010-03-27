@@ -17,6 +17,9 @@
 #ifndef PLAYLISTVIEW_H
 #define PLAYLISTVIEW_H
 
+#include "playlist.h"
+#include "library.h"
+
 #include <QStyledItemDelegate>
 #include <QTreeView>
 
@@ -59,6 +62,26 @@ class FileTypeItemDelegate : public PlaylistDelegateBase {
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
+class TextItemDelegate : public PlaylistDelegateBase {
+ public:
+  TextItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {};
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+      const QModelIndex& index) const;
+};
+
+class TagCompletionItemDelegate : public PlaylistDelegateBase {
+ public:
+  TagCompletionItemDelegate(QTreeView* view, Library* library, Playlist::Column column) :
+    PlaylistDelegateBase(view), library_(library), column_(column) {};
+
+  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+      const QModelIndex& index) const;
+
+ private:
+  Library* library_;
+  Playlist::Column column_;
+};
+
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
@@ -66,6 +89,7 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
+  void setItemDelegates(Library* library);
   void RemoveSelected();
 
   // QTreeView

@@ -56,6 +56,11 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value) {
   }
 }
 
+void LibraryQuery::AddWhereLike(const QString& column, const QVariant& value) {
+  where_clauses_ << QString("%1 LIKE ?").arg(column);
+  bound_values_ << value;
+}
+
 void LibraryQuery::AddCompilationRequirement(bool compilation) {
   where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
 }

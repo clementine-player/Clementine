@@ -91,31 +91,31 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
     return false;
 
   switch(column) {
-    case Playlist::Column_Title:
+    case Column_Title:
       song.set_title(value.toString());
       break;
-    case Playlist::Column_Artist:
+    case Column_Artist:
       song.set_artist(value.toString());
       break;
-    case Playlist::Column_Album:
+    case Column_Album:
       song.set_album(value.toString());
       break;
-    case Playlist::Column_AlbumArtist:
+    case Column_AlbumArtist:
       song.set_albumartist(value.toString());
       break;
-    case Playlist::Column_Composer:
+    case Column_Composer:
       song.set_composer(value.toString());
       break;
-    case Playlist::Column_Track:
+    case Column_Track:
       song.set_track(value.toInt());
       break;
-    case Playlist::Column_Disc:
+    case Column_Disc:
       song.set_disc(value.toInt());
       break;
-    case Playlist::Column_Year:
+    case Column_Year:
       song.set_year(value.toInt());
       break;
-    case Playlist::Column_Genre:
+    case Column_Genre:
       song.set_genre(value.toString());
       break;
     default:

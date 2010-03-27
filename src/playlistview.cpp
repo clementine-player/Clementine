@@ -28,6 +28,8 @@
 #include <QMenu>
 #include <QScrollBar>
 #include <QDateTime>
+#include <QLineEdit>
+#include <QCompleter>
 
 #include <math.h>
 
@@ -172,6 +174,46 @@ QString FileTypeItemDelegate::displayText(const QVariant &value, const QLocale &
   }
 }
 
+QWidget* TextItemDelegate::createEditor(
+    QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  return new QLineEdit(parent);
+}
+
+QWidget* TagCompletionItemDelegate::createEditor(
+    QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  QStringList choices;
+
+  switch(column_) {
+    case Playlist::Column_Artist: {
+      choices = library_->GetBackend()->GetAllArtists();
+      break;
+    }
+    case Playlist::Column_Album: {
+      // TODO: add optimised query to library backend?
+      LibraryBackend::AlbumList albums = library_->GetBackend()->GetAllAlbums();
+      foreach(const LibraryBackend::Album& album, albums)
+        choices << album.album_name;
+      break;
+    }
+    case Playlist::Column_AlbumArtist: {
+      // TODO: get all albumartists?
+      break;
+    }
+    default:
+      break;
+  }
+
+  QLineEdit* editor = new QLineEdit(parent);
+
+  if(!choices.isEmpty()) {
+    QCompleter* completer = new QCompleter(choices, editor);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    editor->setCompleter(completer);
+  }
+
+  return editor;
+}
+
 
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
@@ -182,13 +224,6 @@ PlaylistView::PlaylistView(QWidget *parent)
     currenttrack_play_(":currenttrack_play.png"),
     currenttrack_pause_(":currenttrack_pause.png")
 {
-  setItemDelegate(new PlaylistDelegateBase(this));
-  setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_DateCreated, new DateItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
-
   setHeader(new PlaylistHeader(Qt::Horizontal, this));
   header()->setMovable(true);
 
@@ -199,6 +234,22 @@ PlaylistView::PlaylistView(QWidget *parent)
   connect(glow_timer_, SIGNAL(timeout()), SLOT(GlowIntensityChanged()));
 
   setAlternatingRowColors(true);
+}
+
+void PlaylistView::setItemDelegates(Library* library) {
+  setItemDelegate(new PlaylistDelegateBase(this));
+  setItemDelegateForColumn(Playlist::Column_Title, new TextItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Album,
+      new TagCompletionItemDelegate(this, library, Playlist::Column_Album));
+  setItemDelegateForColumn(Playlist::Column_Artist,
+      new TagCompletionItemDelegate(this, library, Playlist::Column_Artist));
+  setItemDelegateForColumn(Playlist::Column_AlbumArtist,
+      new TagCompletionItemDelegate(this, library, Playlist::Column_AlbumArtist));
+  setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_DateCreated, new DateItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
 }
 
 void PlaylistView::setModel(QAbstractItemModel *model) {

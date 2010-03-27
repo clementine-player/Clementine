@@ -105,6 +105,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   playlist_->IgnoreSorting(true);
   ui_.playlist->setModel(playlist_);
+  ui_.playlist->setItemDelegates(library_);
   playlist_->IgnoreSorting(false);
 
   ui_.library_view->setModel(library_sort_model_);
