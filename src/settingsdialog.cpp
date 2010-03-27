@@ -150,16 +150,16 @@ void SettingsDialog::showEvent(QShowEvent*) {
       }
       // Fallthrough
 
+    case OSD::Pretty:
+      ui_.notifications_pretty->setChecked(true);
+      break;
+
     case OSD::TrayPopup:
       if (OSD::SupportsTrayPopups()) {
         ui_.notifications_tray->setChecked(true);
         break;
       }
       // Fallthrough
-
-    case OSD::Pretty:
-      ui_.notifications_pretty->setChecked(true);
-      break;
 
     case OSD::Disabled:
     default:
