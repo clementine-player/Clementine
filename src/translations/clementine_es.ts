@@ -736,23 +736,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Set value for all selected tracks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar valor para todas las pistas seleccionadas...</translation>
     </message>
     <message>
         <source>Set %1 to &quot;%2&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribir &quot;%2&quot; en la etiqueta &quot;%1&quot;...</translation>
     </message>
     <message>
         <source>Edit tag &quot;%1&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar etiqueta &quot;%1&quot;...</translation>
     </message>
     <message>
         <source>Edit tag...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar etiqueta...</translation>
     </message>
     <message>
         <source>Remove from playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar de la lista de reproducción</translation>
     </message>
 </context>
 <context>
@@ -798,11 +798,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>disc %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco %1</translation>
     </message>
     <message>
         <source>track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pista %1</translation>
     </message>
 </context>
 <context>
@@ -1043,59 +1043,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>OSD Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>OSD Previsualización</translation>
     </message>
     <message>
         <source>Drag to reposition</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrastre para recolocar</translation>
     </message>
     <message>
         <source>Notification type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de notifcación</translation>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Deshabilitada</translation>
     </message>
     <message>
         <source>Show a pretty OSD</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Pretty OSD</translation>
     </message>
     <message>
         <source>General settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferencias generales</translation>
     </message>
     <message>
         <source>Pretty OSD options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de Pretty OSD </translation>
     </message>
     <message>
         <source>Background opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacidad de fondo</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color de fondo</translation>
     </message>
     <message>
         <source>Basic Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul basico</translation>
     </message>
     <message>
         <source>Clementine Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Naranaja Clementine</translation>
     </message>
     <message>
         <source>Custom...</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado...</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color del texto</translation>
     </message>
     <message>
         <source>Choose color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Elegir color...</translation>
     </message>
 </context>
 <context>
