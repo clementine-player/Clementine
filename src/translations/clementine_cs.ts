@@ -223,12 +223,12 @@ p, li { white-space: pre-wrap; }
         <translation>Komentář</translation>
     </message>
     <message>
-        <location filename="../edittagdialog.cpp" line="27"/>
+        <location filename="../edittagdialog.cpp" line="28"/>
         <source>[click to edit]</source>
         <translation>[pro úpravy klikněte]</translation>
     </message>
     <message numerus="yes">
-        <location filename="../edittagdialog.cpp" line="89"/>
+        <location filename="../edittagdialog.cpp" line="90"/>
         <source>Editing %n tracks</source>
         <translation>
             <numerusform>Upravuji %n skladbu</numerusform>
@@ -240,68 +240,68 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileTypeItemDelegate</name>
     <message>
-        <location filename="../playlistview.cpp" line="154"/>
-        <location filename="../playlistview.cpp" line="173"/>
+        <location filename="../playlistdelegates.cpp" line="138"/>
+        <location filename="../playlistdelegates.cpp" line="157"/>
         <source>Unknown</source>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="157"/>
+        <location filename="../playlistdelegates.cpp" line="141"/>
         <source>ASF</source>
         <translation>ASF</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="158"/>
+        <location filename="../playlistdelegates.cpp" line="142"/>
         <source>FLAC</source>
         <translation>FLAC</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="159"/>
+        <location filename="../playlistdelegates.cpp" line="143"/>
         <source>MP4</source>
         <translation>MP4</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="160"/>
+        <location filename="../playlistdelegates.cpp" line="144"/>
         <source>MPC</source>
         <translation>MPC</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="161"/>
+        <location filename="../playlistdelegates.cpp" line="145"/>
         <source>MP3</source>
         <translation>MP3</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="162"/>
+        <location filename="../playlistdelegates.cpp" line="146"/>
         <source>Ogg FLAC</source>
         <translation>Ogg FLAC</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="163"/>
+        <location filename="../playlistdelegates.cpp" line="147"/>
         <source>Ogg Speex</source>
         <translation>Ogg Speex</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="164"/>
+        <location filename="../playlistdelegates.cpp" line="148"/>
         <source>Ogg Vorbis</source>
         <translation>Ogg Vorbis</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="165"/>
+        <location filename="../playlistdelegates.cpp" line="149"/>
         <source>AIFF</source>
         <translation>AIFF</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="166"/>
+        <location filename="../playlistdelegates.cpp" line="150"/>
         <source>WAV</source>
         <translation>WAV</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="167"/>
+        <location filename="../playlistdelegates.cpp" line="151"/>
         <source>TrueAudio</source>
         <translation>TrueAudio</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="169"/>
+        <location filename="../playlistdelegates.cpp" line="153"/>
         <source>Stream</source>
         <translation>Proud</translation>
     </message>
