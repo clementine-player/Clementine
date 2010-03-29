@@ -31,6 +31,8 @@
 #include <QLocale>
 #include <QTimer>
 
+#include <boost/scoped_ptr.hpp>
+
 extern "C"
 {
 #include <unistd.h>
@@ -259,9 +261,6 @@ XineEngine::load( const QUrl &url, bool isStream )
     qDebug() << "After xine_open() *****";
 
 #ifndef XINE_SAFE_MODE
-    //we must ensure the scope is pruned of old buffers
-    PruneScope();
-
     xine_post_out_t *source = xine_get_audio_source( m_stream );
     xine_post_in_t  *target = (xine_post_in_t*)xine_post_input( m_post, const_cast<char*>("audio in") );
     xine_post_wire( source, target );
@@ -691,9 +690,6 @@ XineEngine::scope()
 
   if (myChannels > 2)
     return m_scope;
-
-  //prune the buffer list and update m_currentVpts
-  PruneScope();
 
   for( int n, frame = 0; frame < 512; )
   {
@@ -1307,11 +1303,9 @@ PruneScopeThread::PruneScopeThread(XineEngine *parent)
 }
 
 void PruneScopeThread::run() {
-  QTimer* timer = new QTimer;
-  connect(timer, SIGNAL(timeout()), engine_, SLOT(PruneScope()), Qt::DirectConnection);
+  boost::scoped_ptr<QTimer> timer(new QTimer);
+  connect(timer.get(), SIGNAL(timeout()), engine_, SLOT(PruneScope()), Qt::DirectConnection);
   timer->start(1000);
 
   exec();
-
-  delete timer;
 }
