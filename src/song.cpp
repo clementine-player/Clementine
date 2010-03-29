@@ -34,6 +34,8 @@
 #include <taglib/wavfile.h>
 #include <taglib/speexfile.h>
 #include <taglib/trueaudiofile.h>
+#include <taglib/textidentificationframe.h>
+#include <taglib/xiphcomment.h>
 
 #include "fixlastfm.h"
 #include <lastfm/Track>
@@ -80,6 +82,8 @@ const char* Song::kUpdateSpec =
     "rating = :rating, forced_compilation_on = :forced_compilation_on, "
     "forced_compilation_off = :forced_compilation_off, "
     "effective_compilation = :effective_compilation";
+
+static TagLib::String QStringToTaglibString(const QString& s);
 
 TagLibFileRefFactory Song::kDefaultFactory;
 
@@ -458,24 +462,66 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->art_manual_ == other.d->art_manual_;
 }
 
+void Song::SetTextFrame(TagLib::ID3v2::Tag* tag, const QString& id,
+                        const QString& value) {
+  TagLib::ByteVector id_vector = id.toUtf8().constData();
+
+  // Remove the frame if it already exists
+  while (tag->frameListMap().contains(id_vector) &&
+         tag->frameListMap()[id_vector].size() != 0) {
+    tag->removeFrame(tag->frameListMap()[id_vector].front());
+  }
+
+  // Create and add a new frame
+  TagLib::ID3v2::TextIdentificationFrame* frame =
+      new TagLib::ID3v2::TextIdentificationFrame(id.toUtf8().constData(),
+                                                 TagLib::String::UTF8);
+  frame->setText(QStringToTaglibString(value));
+  tag->addFrame(frame);
+}
+
+TagLib::String QStringToTaglibString(const QString& s) {
+  return TagLib::String(s.toUtf8().constData(), TagLib::String::UTF8);
+}
+
 bool Song::Save() const {
   if (d->filename_.isNull())
     return false;
 
-# define str(x) TagLib::String(x.toUtf8().constData(), TagLib::String::UTF8)
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
 
-  TagLib::FileRef ref(QFile::encodeName(d->filename_).constData());
-  ref.tag()->setTitle(str(d->title_));
-  ref.tag()->setArtist(str(d->artist_));
-  ref.tag()->setAlbum(str(d->album_));
-  ref.tag()->setGenre(str(d->genre_));
-  ref.tag()->setComment(str(d->comment_));
-  ref.tag()->setYear(d->year_);
-  ref.tag()->setTrack(d->track_);
+  fileref->tag()->setTitle(QStringToTaglibString(d->title_));
+  fileref->tag()->setArtist(QStringToTaglibString(d->artist_));
+  fileref->tag()->setAlbum(QStringToTaglibString(d->album_));
+  fileref->tag()->setGenre(QStringToTaglibString(d->genre_));
+  fileref->tag()->setComment(QStringToTaglibString(d->comment_));
+  fileref->tag()->setYear(d->year_);
+  fileref->tag()->setTrack(d->track_);
 
-# undef str
+  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
+    TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
+    SetTextFrame(tag, "TPOS", d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_));
+    SetTextFrame(tag, "TBPM", d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_));
+    SetTextFrame(tag, "TCOM", d->composer_);
+    SetTextFrame(tag, "TPE2", d->albumartist_);
+    SetTextFrame(tag, "TCMP", d->compilation_ ? "1" : "0");
+  }
+  else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
+    TagLib::Ogg::XiphComment* tag = file->tag();
+    tag->addField("COMPOSER", QStringToTaglibString(d->composer_), true);
+    tag->addField("BPM", QStringToTaglibString(d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_)), true);
+    tag->addField("DISCNUMBER", QStringToTaglibString(d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_)), true);
+    tag->addField("COMPILATION", QStringToTaglibString(d->compilation_ ? "1" : "0"), true);
+  }
+  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+    TagLib::Ogg::XiphComment* tag = file->xiphComment();
+    tag->addField("COMPOSER", QStringToTaglibString(d->composer_), true);
+    tag->addField("BPM", QStringToTaglibString(d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_)), true);
+    tag->addField("DISCNUMBER", QStringToTaglibString(d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_)), true);
+    tag->addField("COMPILATION", QStringToTaglibString(d->compilation_ ? "1" : "0"), true);
+  }
 
-  bool ret = ref.save();
+  bool ret = fileref->save();
   #ifdef Q_OS_LINUX
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
