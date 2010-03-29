@@ -31,8 +31,6 @@
 #include <QLocale>
 #include <QTimer>
 
-#include <boost/scoped_ptr.hpp>
-
 extern "C"
 {
 #include <unistd.h>
@@ -1303,9 +1301,9 @@ PruneScopeThread::PruneScopeThread(XineEngine *parent)
 }
 
 void PruneScopeThread::run() {
-  boost::scoped_ptr<QTimer> timer(new QTimer);
-  connect(timer.get(), SIGNAL(timeout()), engine_, SLOT(PruneScope()), Qt::DirectConnection);
-  timer->start(1000);
+  QTimer timer;
+  connect(&timer, SIGNAL(timeout()), engine_, SLOT(PruneScope()), Qt::DirectConnection);
+  timer.start(1000);
 
   exec();
 }
