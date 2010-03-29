@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../albumcovermanager.cpp" line="162"/>
         <source>Various artists</source>
-        <translation>Rôzny interpréti</translation>
+        <translation>Rôzni interpréti</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="399"/>
@@ -124,17 +124,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../analyzers/boomanalyzer.cpp" line="8"/>
         <source>Boom analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Boom analyzér</translation>
     </message>
     <message>
         <location filename="../analyzers/sonogram.cpp" line="18"/>
         <source>Sonogram</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../analyzers/turbine.cpp" line="15"/>
         <source>Turbine</source>
-        <translation type="unfinished"></translation>
+        <translation>Turbína</translation>
     </message>
 </context>
 <context>
@@ -183,12 +183,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>EditTagDialog</name>
     <message>
-        <location filename="../edittagdialog.cpp" line="27"/>
+        <location filename="../edittagdialog.cpp" line="28"/>
         <source>[click to edit]</source>
         <translation>[kliknite pre úpravu]</translation>
     </message>
     <message numerus="yes">
-        <location filename="../edittagdialog.cpp" line="89"/>
+        <location filename="../edittagdialog.cpp" line="90"/>
         <source>Editing %n tracks</source>
         <translation>
             <numerusform>Upravovanie %n skladby</numerusform>
@@ -240,68 +240,68 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileTypeItemDelegate</name>
     <message>
-        <location filename="../playlistview.cpp" line="154"/>
-        <location filename="../playlistview.cpp" line="173"/>
+        <location filename="../playlistdelegates.cpp" line="138"/>
+        <location filename="../playlistdelegates.cpp" line="157"/>
         <source>Unknown</source>
         <translation>neznámy</translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="157"/>
+        <location filename="../playlistdelegates.cpp" line="141"/>
         <source>ASF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="158"/>
+        <location filename="../playlistdelegates.cpp" line="142"/>
         <source>FLAC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="159"/>
+        <location filename="../playlistdelegates.cpp" line="143"/>
         <source>MP4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="160"/>
+        <location filename="../playlistdelegates.cpp" line="144"/>
         <source>MPC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="161"/>
+        <location filename="../playlistdelegates.cpp" line="145"/>
         <source>MP3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="162"/>
+        <location filename="../playlistdelegates.cpp" line="146"/>
         <source>Ogg FLAC</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="163"/>
+        <location filename="../playlistdelegates.cpp" line="147"/>
         <source>Ogg Speex</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="164"/>
+        <location filename="../playlistdelegates.cpp" line="148"/>
         <source>Ogg Vorbis</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="165"/>
+        <location filename="../playlistdelegates.cpp" line="149"/>
         <source>AIFF</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="166"/>
+        <location filename="../playlistdelegates.cpp" line="150"/>
         <source>WAV</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="167"/>
+        <location filename="../playlistdelegates.cpp" line="151"/>
         <source>TrueAudio</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlistview.cpp" line="169"/>
+        <location filename="../playlistdelegates.cpp" line="153"/>
         <source>Stream</source>
         <translation></translation>
     </message>
@@ -374,7 +374,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmconfig.ui" line="72"/>
         <source>Note that you must be a &lt;span style=&quot; font-weight:600;&quot;&gt;paid subscriber&lt;/span&gt; to listen to Last.fm radio from within Clementine.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pam§tajte, že musíte byť &lt;span style=&quot; font-weight:600;&quot;&gt;platiaci odberateľ&lt;/span&gt; aby ste mohli počúvať Last.fm rádio v Clementine.</translation>
     </message>
     <message>
         <location filename="../lastfmconfig.ui" line="98"/>
@@ -430,7 +430,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="118"/>
         <source>My Loved Tracks</source>
-        <translation>Moje milované skladby</translation>
+        <translation>Moje obľúbené skladby</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="119"/>
@@ -467,7 +467,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../lastfmservice.cpp" line="260"/>
         <location filename="../lastfmservice.cpp" line="265"/>
         <source>%1&apos;s Loved Tracks</source>
-        <translation>%1 milované skladby</translation>
+        <translation>%1 obľúbené skladby</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="160"/>
@@ -559,7 +559,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="352"/>
         <source>Last.fm is currently busy, please try again in a few minutes</source>
-        <translation>Last.fm je akurát zaneprázdnené, prosím skúste za pár sekúnd</translation>
+        <translation>Last.fm je práve zaneprázdnené, prosím skúste za pár minút</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="354"/>
@@ -597,7 +597,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmstationdialog.ui" line="14"/>
         <source>Play Artist or Tag</source>
-        <translation>Hrať Interpréta alebo tag</translation>
+        <translation>Hrať interpréta alebo tag</translation>
     </message>
     <message>
         <location filename="../lastfmstationdialog.ui" line="20"/>
@@ -620,7 +620,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../library.cpp" line="161"/>
         <source>Various Artists</source>
-        <translation>Rôzny interpréti</translation>
+        <translation>Rôzni interpréti</translation>
     </message>
     <message>
         <location filename="../library.cpp" line="464"/>
@@ -649,7 +649,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../libraryconfig.ui" line="64"/>
         <source>Remove folder</source>
-        <translation>Odstrániť priečinok</translation>
+        <translation>Odobrať priečinok</translation>
     </message>
 </context>
 <context>
@@ -720,12 +720,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="623"/>
         <source>Set %1 to &quot;%2&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť %1 do &quot;%2&quot;...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="625"/>
         <source>Edit tag &quot;%1&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť tag &quot;%1&quot;...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -836,18 +836,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="625"/>
         <source>Love</source>
-        <translation>Milujem</translation>
+        <translation>Obľúbené</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="637"/>
         <source>Ban</source>
-        <translation>Neznášam</translation>
+        <translation>Neznášané</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <location filename="../mainwindow.ui" line="649"/>
         <source>Clear playlist</source>
-        <translation>Vyčistiť playlist</translation>
+        <translation>Vyprázdniť playlist</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="658"/>
@@ -857,17 +857,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="663"/>
         <source>Renumber tracks in this order...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prečíslovať skladby v tomto poradí...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="668"/>
         <source>Set value for all selected tracks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť hodnotu pre vybraté skladby...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="673"/>
         <source>Edit tag...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť tag...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="682"/>
@@ -902,13 +902,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="756"/>
         <source>Remove from playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť z playlistu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="728"/>
         <location filename="../mainwindow.cpp" line="358"/>
         <source>&amp;Hide tray icon</source>
-        <translation>&amp;Schovať tray ikonu</translation>
+        <translation>&amp;Skryť tray ikonu</translation>
     </message>
     <message>
         <source>Configure &amp;Global Shortcuts...</source>
@@ -972,17 +972,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../osd.cpp" line="69"/>
         <source>disc %1</source>
-        <translation type="unfinished"></translation>
+        <translation>disk %1</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="71"/>
         <source>track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>skladba %1</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="78"/>
         <source>Paused</source>
-        <translation>Pauza</translation>
+        <translation>Pozastavené</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="82"/>
@@ -1108,7 +1108,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlistheader.cpp" line="47"/>
         <source>Hide %1</source>
-        <translation>Schovať %1</translation>
+        <translation>Skryť %1</translation>
     </message>
 </context>
 <context>
@@ -1128,7 +1128,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlistsequence.ui" line="57"/>
         <source>Shuffle</source>
-        <translation>Zmiešať</translation>
+        <translation>Zamiešať</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="94"/>
@@ -1243,7 +1243,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.ui" line="150"/>
         <source> ms</source>
-        <translation>milisekúnd</translation>
+        <translation> milisekúnd</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="201"/>
@@ -1253,52 +1253,52 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.ui" line="208"/>
         <source>Notification type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ notifikácií</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="214"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakázané</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="300"/>
         <source>Pretty OSD options</source>
-        <translation type="unfinished"></translation>
+        <translation>Krásne OSD možnosti</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="306"/>
         <source>Background opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Priehľadnosť pozadia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="320"/>
         <source>Background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba pozadia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="328"/>
         <source>Basic Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Základná modrá</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="333"/>
         <source>Clementine Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Klementínková oranžová</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="338"/>
         <source>Custom...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastná...</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="346"/>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba písma</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="353"/>
         <source>Choose color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať farbu...</translation>
     </message>
     <message>
         <source>Don&apos;t show notifications</source>
@@ -1312,7 +1312,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.ui" line="228"/>
         <source>Show a pretty OSD</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazovať krásne OSD</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="235"/>
@@ -1322,7 +1322,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.ui" line="245"/>
         <source>General settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Všeobecné nastavenia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="257"/>
@@ -1347,12 +1347,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.cpp" line="34"/>
         <source>OSD Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>OSD náhľad</translation>
     </message>
     <message>
         <location filename="../settingsdialog.cpp" line="34"/>
         <source>Drag to reposition</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretiahnite na iné miesto</translation>
     </message>
 </context>
 <context>

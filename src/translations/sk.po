@@ -150,7 +150,7 @@ msgstr "Všetci interpréti"
 #. ts-context AlbumCoverManager
 #: ../albumcovermanager.cpp:162
 msgid "Various artists"
-msgstr "Rôzny interpréti"
+msgstr "Rôzni interpréti"
 
 #. ts-context AlbumCoverManager
 #: ../albumcovermanager.cpp:399
@@ -174,21 +174,18 @@ msgstr "blokový analyzér"
 
 #. ts-context AnalyzerContainer
 #: ../analyzers/boomanalyzer.cpp:8
-#, fuzzy
 msgid "Boom analyzer"
-msgstr ""
+msgstr "Boom analyzér"
 
 #. ts-context AnalyzerContainer
 #: ../analyzers/sonogram.cpp:18
-#, fuzzy
 msgid "Sonogram"
 msgstr ""
 
 #. ts-context AnalyzerContainer
 #: ../analyzers/turbine.cpp:15
-#, fuzzy
 msgid "Turbine"
-msgstr ""
+msgstr "Turbína"
 
 #. ts-context CoverManager
 #: ../albumcovermanager.ui:14
@@ -231,12 +228,12 @@ msgid "Unset cover"
 msgstr "Nenastavený obal"
 
 #. ts-context EditTagDialog
-#: ../edittagdialog.cpp:27
+#: ../edittagdialog.cpp:28
 msgid "[click to edit]"
 msgstr "[kliknite pre úpravu]"
 
 #. ts-context EditTagDialog
-#: ../edittagdialog.cpp:89
+#: ../edittagdialog.cpp:90
 msgid "Editing %n tracks"
 msgid_plural "Editing %n tracks"
 msgstr[0] "Upravovanie %n skladby"
@@ -284,67 +281,67 @@ msgid "Comment"
 msgstr "Komentár"
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:154 ../playlistview.cpp:173
+#: ../playlistdelegates.cpp:138 ../playlistdelegates.cpp:157
 msgid "Unknown"
 msgstr "neznámy"
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:157
+#: ../playlistdelegates.cpp:141
 msgid "ASF"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:158
+#: ../playlistdelegates.cpp:142
 msgid "FLAC"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:159
+#: ../playlistdelegates.cpp:143
 msgid "MP4"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:160
+#: ../playlistdelegates.cpp:144
 msgid "MPC"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:161
+#: ../playlistdelegates.cpp:145
 msgid "MP3"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:162
+#: ../playlistdelegates.cpp:146
 msgid "Ogg FLAC"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:163
+#: ../playlistdelegates.cpp:147
 msgid "Ogg Speex"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:164
+#: ../playlistdelegates.cpp:148
 msgid "Ogg Vorbis"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:165
+#: ../playlistdelegates.cpp:149
 msgid "AIFF"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:166
+#: ../playlistdelegates.cpp:150
 msgid "WAV"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:167
+#: ../playlistdelegates.cpp:151
 msgid "TrueAudio"
 msgstr ""
 
 #. ts-context FileTypeItemDelegate
-#: ../playlistview.cpp:169
+#: ../playlistdelegates.cpp:153
 msgid "Stream"
 msgstr ""
 
@@ -406,11 +403,12 @@ msgstr ""
 
 #. ts-context LastFMConfig
 #: ../lastfmconfig.ui:72
-#, fuzzy
 msgid ""
 "Note that you must be a <span style=\" font-weight:600;\">paid "
 "subscriber</span> to listen to Last.fm radio from within Clementine."
 msgstr ""
+"Pam§tajte, že musíte byť <span style=\" font-weight:600;\">platiaci "
+"odberateľ</span> aby ste mohli počúvať Last.fm rádio v Clementine."
 
 #. ts-context LastFMConfig
 #: ../lastfmconfig.ui:98
@@ -460,7 +458,7 @@ msgstr "Moje rádio stanice"
 #. ts-context LastFMService
 #: ../lastfmservice.cpp:118
 msgid "My Loved Tracks"
-msgstr "Moje milované skladby"
+msgstr "Moje obľúbené skladby"
 
 #. ts-context LastFMService
 #: ../lastfmservice.cpp:119
@@ -495,7 +493,7 @@ msgstr "%1 rádio stanica"
 #. ts-context LastFMService
 #: ../lastfmservice.cpp:158 ../lastfmservice.cpp:260 ../lastfmservice.cpp:265
 msgid "%1's Loved Tracks"
-msgstr "%1 milované skladby"
+msgstr "%1 obľúbené skladby"
 
 #. ts-context LastFMService
 #: ../lastfmservice.cpp:160
@@ -586,7 +584,7 @@ msgstr "Tento stream je len pre platiacich odoberateľov"
 #. ts-context LastFMService
 #: ../lastfmservice.cpp:352
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr "Last.fm je akurát zaneprázdnené, prosím skúste za pár sekúnd"
+msgstr "Last.fm je práve zaneprázdnené, prosím skúste za pár minút"
 
 #. ts-context LastFMService
 #: ../lastfmservice.cpp:354
@@ -622,7 +620,7 @@ msgstr "Neznáma chyba"
 #. ts-context LastFMStationDialog
 #: ../lastfmstationdialog.ui:14
 msgid "Play Artist or Tag"
-msgstr "Hrať Interpréta alebo tag"
+msgstr "Hrať interpréta alebo tag"
 
 #. ts-context LastFMStationDialog
 #: ../lastfmstationdialog.ui:20
@@ -645,7 +643,7 @@ msgstr ""
 #. ts-context Library
 #: ../library.cpp:161
 msgid "Various Artists"
-msgstr "Rôzny interpréti"
+msgstr "Rôzni interpréti"
 
 #. ts-context Library
 #: ../library.cpp:464 ../library.cpp:482
@@ -670,7 +668,7 @@ msgstr "Pridať nový priečinok..."
 #. ts-context LibraryConfig
 #: ../libraryconfig.ui:64
 msgid "Remove folder"
-msgstr "Odstrániť priečinok"
+msgstr "Odobrať priečinok"
 
 #. ts-context LibraryConfigDialog
 #: ../libraryconfigdialog.ui:14
@@ -725,15 +723,13 @@ msgstr "Pauza"
 
 #. ts-context MainWindow
 #: ../mainwindow.cpp:623
-#, fuzzy
 msgid "Set %1 to \"%2\"..."
-msgstr ""
+msgstr "Nastaviť %1 do \"%2\"..."
 
 #. ts-context MainWindow
 #: ../mainwindow.cpp:625
-#, fuzzy
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Upraviť tag \"%1\"..."
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:14
@@ -843,17 +839,17 @@ msgstr "Prudané tento mesiac"
 #. ts-context MainWindow
 #: ../mainwindow.ui:625
 msgid "Love"
-msgstr "Milujem"
+msgstr "Obľúbené"
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:637
 msgid "Ban"
-msgstr "Neznášam"
+msgstr "Neznášané"
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:646 ../mainwindow.ui:649
 msgid "Clear playlist"
-msgstr "Vyčistiť playlist"
+msgstr "Vyprázdniť playlist"
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:658
@@ -862,21 +858,18 @@ msgstr "Upravť informácie o skladbe..."
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:663
-#, fuzzy
 msgid "Renumber tracks in this order..."
-msgstr ""
+msgstr "Prečíslovať skladby v tomto poradí..."
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:668
-#, fuzzy
 msgid "Set value for all selected tracks..."
-msgstr ""
+msgstr "Nastaviť hodnotu pre vybraté skladby..."
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:673
-#, fuzzy
 msgid "Edit tag..."
-msgstr ""
+msgstr "Upraviť tag..."
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:682
@@ -910,14 +903,13 @@ msgstr "Otvoriť médium..."
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:756
-#, fuzzy
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Odstrániť z playlistu"
 
 #. ts-context MainWindow
 #: ../mainwindow.ui:728 ../mainwindow.cpp:358
 msgid "&Hide tray icon"
-msgstr "&Schovať tray ikonu"
+msgstr "&Skryť tray ikonu"
 
 #. ts-context MainWindow
 #~ msgid "Configure &Global Shortcuts..."
@@ -974,20 +966,18 @@ msgstr "Forma"
 
 #. ts-context OSD
 #: ../osd.cpp:69
-#, fuzzy
 msgid "disc %1"
-msgstr ""
+msgstr "disk %1"
 
 #. ts-context OSD
 #: ../osd.cpp:71
-#, fuzzy
 msgid "track %1"
-msgstr ""
+msgstr "skladba %1"
 
 #. ts-context OSD
 #: ../osd.cpp:78
 msgid "Paused"
-msgstr "Pauza"
+msgstr "Pozastavené"
 
 #. ts-context OSD
 #: ../osd.cpp:82
@@ -1107,7 +1097,7 @@ msgstr "Zobraziť stĺpec"
 #. ts-context PlaylistHeader
 #: ../playlistheader.cpp:47
 msgid "Hide %1"
-msgstr "Schovať %1"
+msgstr "Skryť %1"
 
 #. ts-context PlaylistManager
 #~ msgid "New playlist"
@@ -1121,7 +1111,7 @@ msgstr "Opakovať"
 #. ts-context PlaylistSequence
 #: ../playlistsequence.ui:57
 msgid "Shuffle"
-msgstr "Zmiešať"
+msgstr "Zamiešať"
 
 #. ts-context PlaylistSequence
 #: ../playlistsequence.ui:94
@@ -1226,7 +1216,7 @@ msgstr "Trvanie zoslabovania"
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:150
 msgid " ms"
-msgstr "milisekúnd"
+msgstr " milisekúnd"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:201
@@ -1235,63 +1225,53 @@ msgstr "Clementine môže zobraziť správu keď sa zmení skladba."
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:208
-#, fuzzy
 msgid "Notification type"
-msgstr ""
+msgstr "Typ notifikácií"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:214
-#, fuzzy
 msgid "Disabled"
-msgstr ""
+msgstr "Zakázané"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:300
-#, fuzzy
 msgid "Pretty OSD options"
-msgstr ""
+msgstr "Krásne OSD možnosti"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:306
-#, fuzzy
 msgid "Background opacity"
-msgstr ""
+msgstr "Priehľadnosť pozadia"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:320
-#, fuzzy
 msgid "Background color"
-msgstr ""
+msgstr "Farba pozadia"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:328
-#, fuzzy
 msgid "Basic Blue"
-msgstr ""
+msgstr "Základná modrá"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:333
-#, fuzzy
 msgid "Clementine Orange"
-msgstr ""
+msgstr "Klementínková oranžová"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:338
-#, fuzzy
 msgid "Custom..."
-msgstr ""
+msgstr "Vlastná..."
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:346
-#, fuzzy
 msgid "Text color"
-msgstr ""
+msgstr "Farba písma"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:353
-#, fuzzy
 msgid "Choose color..."
-msgstr ""
+msgstr "Vybrať farbu..."
 
 #. ts-context SettingsDialog
 #~ msgid "Don't show notifications"
@@ -1304,9 +1284,8 @@ msgstr "Zobrazovať natívne desktopové notifikácie"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:228
-#, fuzzy
 msgid "Show a pretty OSD"
-msgstr ""
+msgstr "Zobrazovať krásne OSD"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:235
@@ -1315,9 +1294,8 @@ msgstr "Zobrazovať notifikácie z tray lišty"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:245
-#, fuzzy
 msgid "General settings"
-msgstr ""
+msgstr "Všeobecné nastavenia"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.ui:257
@@ -1341,15 +1319,13 @@ msgstr "Zahrnúť obal do notifikácie"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.cpp:34
-#, fuzzy
 msgid "OSD Preview"
-msgstr ""
+msgstr "OSD náhľad"
 
 #. ts-context SettingsDialog
 #: ../settingsdialog.cpp:34
-#, fuzzy
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Pretiahnite na iné miesto"
 
 #. ts-context ShortcutsDialog
 #~ msgid "Configure Shortcuts"
