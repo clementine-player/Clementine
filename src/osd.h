@@ -29,13 +29,12 @@ class OSDPretty;
 class QDBusPendingCallWatcher;
 
 #ifdef Q_WS_X11
-#include <QDBusArgument>
-#include <boost/scoped_ptr.hpp>
-#include "notification.h"
+# include <QDBusArgument>
+# include <boost/scoped_ptr.hpp>
+# include "notification.h"
 
-QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
-const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
-
+  QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
+  const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
 #endif
 
 class OSD : public QObject {
@@ -97,6 +96,7 @@ class OSD : public QObject {
 
 #ifdef Q_WS_X11
   boost::scoped_ptr<org::freedesktop::Notifications> interface_;
+  uint notification_id_;
 #endif
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);

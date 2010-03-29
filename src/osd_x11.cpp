@@ -59,6 +59,8 @@ void OSD::Init() {
   if (!interface_->isValid()) {
     qWarning() << "Error connecting to notifications service.";
   }
+
+  notification_id_ = 0;
 }
 
 bool OSD::SupportsNativeNotifications() {
@@ -73,7 +75,7 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon) {
   QDBusPendingReply<uint> reply = interface_->Notify(
       QCoreApplication::applicationName(),
-      0,
+      notification_id_,
       icon,
       summary,
       message,
@@ -93,7 +95,7 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   }
   QDBusPendingReply<uint> reply = interface_->Notify(
       QCoreApplication::applicationName(),
-      0,
+      notification_id_,
       QString(),
       summary,
       message,
@@ -111,5 +113,11 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
   QDBusPendingReply<uint> reply = *watcher;
   if (reply.isError()) {
     qWarning() << "Error sending notification" << reply.error();
+    return;
+  }
+
+  uint id = reply.value();
+  if (id != 0) {
+    notification_id_ = id;
   }
 }
