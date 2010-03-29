@@ -66,9 +66,9 @@ void OSD::SongChanged(const Song &song) {
   if (!song.album().isEmpty())
     message_parts << song.album();
   if (song.disc() > 0)
-    message_parts << QString("disc %1").arg(song.disc());
+    message_parts << tr("disc %1").arg(song.disc());
   if (song.track() > 0)
-    message_parts << QString("track %1").arg(song.track());
+    message_parts << tr("track %1").arg(song.track());
 
   ShowMessage(summary, message_parts.join(", "), "notification-audio-play",
               show_art_ ? song.GetBestImage() : QImage());

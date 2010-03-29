@@ -239,68 +239,68 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileTypeItemDelegate</name>
     <message>
-        <location filename="playlistview.cpp" line="152"/>
-        <location filename="playlistview.cpp" line="171"/>
+        <location filename="playlistview.cpp" line="154"/>
+        <location filename="playlistview.cpp" line="173"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="155"/>
+        <location filename="playlistview.cpp" line="157"/>
         <source>ASF</source>
         <translation>ASF</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="156"/>
+        <location filename="playlistview.cpp" line="158"/>
         <source>FLAC</source>
         <translation>FLAC</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="157"/>
+        <location filename="playlistview.cpp" line="159"/>
         <source>MP4</source>
         <translation>MP4</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="158"/>
+        <location filename="playlistview.cpp" line="160"/>
         <source>MPC</source>
         <translation>MPC</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="159"/>
+        <location filename="playlistview.cpp" line="161"/>
         <source>MP3</source>
         <translation>MP3</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="160"/>
+        <location filename="playlistview.cpp" line="162"/>
         <source>Ogg FLAC</source>
         <translation>Ogg FLAC</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="161"/>
+        <location filename="playlistview.cpp" line="163"/>
         <source>Ogg Speex</source>
         <translation>Ogg Speex</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="162"/>
+        <location filename="playlistview.cpp" line="164"/>
         <source>Ogg Vorbis</source>
         <translation>Ogg Vorbis</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="163"/>
+        <location filename="playlistview.cpp" line="165"/>
         <source>AIFF</source>
         <translation>AIFF</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="164"/>
+        <location filename="playlistview.cpp" line="166"/>
         <source>WAV</source>
         <translation>WAV</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="165"/>
+        <location filename="playlistview.cpp" line="167"/>
         <source>TrueAudio</source>
         <translation>TrueAudio</translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="167"/>
+        <location filename="playlistview.cpp" line="169"/>
         <source>Stream</source>
         <translation>Flux</translation>
     </message>
@@ -740,11 +740,11 @@ p, li { white-space: pre-wrap; }
         <translation>Piste précédente</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="244"/>
+        <location filename="mainwindow.cpp" line="379"/>
+        <location filename="mainwindow.cpp" line="395"/>
+        <location filename="mainwindow.cpp" line="570"/>
         <location filename="mainwindow.ui" line="517"/>
-        <location filename="mainwindow.cpp" line="243"/>
-        <location filename="mainwindow.cpp" line="378"/>
-        <location filename="mainwindow.cpp" line="394"/>
-        <location filename="mainwindow.cpp" line="569"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -769,8 +769,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+Q</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="246"/>
         <location filename="mainwindow.ui" line="559"/>
-        <location filename="mainwindow.cpp" line="245"/>
         <source>Stop after this track</source>
         <translation>Arrêter la lecture après cette piste</translation>
     </message>
@@ -872,8 +872,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ouvrir un media...</translation>
     </message>
     <message>
+        <location filename="mainwindow.cpp" line="358"/>
         <location filename="mainwindow.ui" line="728"/>
-        <location filename="mainwindow.cpp" line="357"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Masquer l&apos;icône</translation>
     </message>
@@ -898,29 +898,29 @@ p, li { white-space: pre-wrap; }
         <translation>Supprimer de la liste de lecture</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="239"/>
+        <location filename="mainwindow.cpp" line="240"/>
         <source>Configure library...</source>
         <translation>Configurer votre bibliothèque...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="332"/>
-        <location filename="mainwindow.cpp" line="353"/>
+        <location filename="mainwindow.cpp" line="333"/>
+        <location filename="mainwindow.cpp" line="354"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Afficher l&apos;icône</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="405"/>
-        <location filename="mainwindow.cpp" line="566"/>
+        <location filename="mainwindow.cpp" line="406"/>
+        <location filename="mainwindow.cpp" line="567"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="616"/>
+        <location filename="mainwindow.cpp" line="617"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Définir %1 à la valeur &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="618"/>
+        <location filename="mainwindow.cpp" line="619"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Modifer le tag &quot;%1&quot;...</translation>
     </message>
@@ -960,6 +960,16 @@ p, li { white-space: pre-wrap; }
 </context>
 <context>
     <name>OSD</name>
+    <message>
+        <location filename="osd.cpp" line="69"/>
+        <source>disc %1</source>
+        <translation>CD %1</translation>
+    </message>
+    <message>
+        <location filename="osd.cpp" line="71"/>
+        <source>track %1</source>
+        <translation>piste %1</translation>
+    </message>
     <message>
         <location filename="osd.cpp" line="78"/>
         <source>Paused</source>

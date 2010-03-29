@@ -742,6 +742,18 @@ p, li { white-space: pre-wrap; }
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Edit tag &quot;%1&quot;...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit tag...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove from playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
@@ -783,6 +795,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Volume %1%</source>
         <translation>Volumen %1%</translation>
+    </message>
+    <message>
+        <source>disc %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>track %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -995,7 +1015,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Don&apos;t show notifications</source>
-        <translation>No mostrar notificaciones</translation>
+        <translation type="obsolete">No mostrar notificaciones</translation>
     </message>
     <message>
         <source>Show a native desktop notification</source>
@@ -1020,6 +1040,62 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Include album art in the notification</source>
         <translation>Incluir arte del disco en la notificación</translation>
+    </message>
+    <message>
+        <source>OSD Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Drag to reposition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notification type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show a pretty OSD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pretty OSD options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Basic Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clementine Orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose color...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -62,32 +62,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>AlbumCoverManager</name>
     <message>
-        <location filename="albumcovermanager.cpp" line="61"/>
+        <location filename="albumcovermanager.cpp" line="66"/>
         <source>All albums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="albumcovermanager.cpp" line="62"/>
+        <location filename="albumcovermanager.cpp" line="67"/>
         <source>Albums with covers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="albumcovermanager.cpp" line="63"/>
+        <location filename="albumcovermanager.cpp" line="68"/>
         <source>Albums without covers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="albumcovermanager.cpp" line="158"/>
+        <location filename="albumcovermanager.cpp" line="161"/>
         <source>All artists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="albumcovermanager.cpp" line="159"/>
+        <location filename="albumcovermanager.cpp" line="162"/>
         <source>Various artists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="albumcovermanager.cpp" line="371"/>
+        <location filename="albumcovermanager.cpp" line="399"/>
         <source>Choose manual cover</source>
         <translation type="unfinished"></translation>
     </message>
@@ -226,68 +226,68 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>FileTypeItemDelegate</name>
     <message>
-        <location filename="playlistview.cpp" line="152"/>
-        <location filename="playlistview.cpp" line="171"/>
+        <location filename="playlistview.cpp" line="154"/>
+        <location filename="playlistview.cpp" line="173"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="155"/>
+        <location filename="playlistview.cpp" line="157"/>
         <source>ASF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="156"/>
+        <location filename="playlistview.cpp" line="158"/>
         <source>FLAC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="157"/>
+        <location filename="playlistview.cpp" line="159"/>
         <source>MP4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="158"/>
+        <location filename="playlistview.cpp" line="160"/>
         <source>MPC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="159"/>
+        <location filename="playlistview.cpp" line="161"/>
         <source>MP3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="160"/>
+        <location filename="playlistview.cpp" line="162"/>
         <source>Ogg FLAC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="161"/>
+        <location filename="playlistview.cpp" line="163"/>
         <source>Ogg Speex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="162"/>
+        <location filename="playlistview.cpp" line="164"/>
         <source>Ogg Vorbis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="163"/>
+        <location filename="playlistview.cpp" line="165"/>
         <source>AIFF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="164"/>
+        <location filename="playlistview.cpp" line="166"/>
         <source>WAV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="165"/>
+        <location filename="playlistview.cpp" line="167"/>
         <source>TrueAudio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlistview.cpp" line="167"/>
+        <location filename="playlistview.cpp" line="169"/>
         <source>Stream</source>
         <translation type="unfinished"></translation>
     </message>
@@ -677,223 +677,238 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="276"/>
+        <location filename="mainwindow.ui" line="279"/>
         <source>Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="314"/>
+        <location filename="mainwindow.ui" line="317"/>
         <source>Enter search terms here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="370"/>
+        <location filename="mainwindow.ui" line="373"/>
         <source>Radio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="416"/>
+        <location filename="mainwindow.ui" line="419"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="446"/>
+        <location filename="mainwindow.ui" line="449"/>
         <source>Music</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="462"/>
+        <location filename="mainwindow.ui" line="465"/>
         <source>Playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="475"/>
+        <location filename="mainwindow.ui" line="478"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="483"/>
+        <location filename="mainwindow.ui" line="486"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="489"/>
+        <location filename="mainwindow.ui" line="492"/>
         <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="505"/>
+        <location filename="mainwindow.ui" line="508"/>
         <source>Previous track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="514"/>
-        <location filename="mainwindow.cpp" line="237"/>
-        <location filename="mainwindow.cpp" line="369"/>
-        <location filename="mainwindow.cpp" line="385"/>
-        <location filename="mainwindow.cpp" line="560"/>
+        <location filename="mainwindow.cpp" line="244"/>
+        <location filename="mainwindow.cpp" line="379"/>
+        <location filename="mainwindow.cpp" line="395"/>
+        <location filename="mainwindow.cpp" line="570"/>
+        <location filename="mainwindow.ui" line="517"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="526"/>
+        <location filename="mainwindow.ui" line="529"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="535"/>
+        <location filename="mainwindow.ui" line="538"/>
         <source>Next track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="544"/>
+        <location filename="mainwindow.ui" line="547"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="547"/>
+        <location filename="mainwindow.ui" line="550"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="556"/>
-        <location filename="mainwindow.cpp" line="239"/>
+        <location filename="mainwindow.cpp" line="246"/>
+        <location filename="mainwindow.ui" line="559"/>
         <source>Stop after this track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="567"/>
+        <location filename="mainwindow.ui" line="570"/>
         <source>Entire collection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="575"/>
+        <location filename="mainwindow.ui" line="578"/>
         <source>Added today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="583"/>
+        <location filename="mainwindow.ui" line="586"/>
         <source>Added this week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="591"/>
         <location filename="mainwindow.ui" line="594"/>
+        <location filename="mainwindow.ui" line="597"/>
         <source>Added within three months</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="602"/>
+        <location filename="mainwindow.ui" line="605"/>
         <source>Added this year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="610"/>
+        <location filename="mainwindow.ui" line="613"/>
         <source>Added this month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="622"/>
+        <location filename="mainwindow.ui" line="625"/>
         <source>Love</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="634"/>
+        <location filename="mainwindow.ui" line="637"/>
         <source>Ban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="643"/>
         <location filename="mainwindow.ui" line="646"/>
+        <location filename="mainwindow.ui" line="649"/>
         <source>Clear playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="655"/>
+        <location filename="mainwindow.ui" line="658"/>
         <source>Edit track information...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="660"/>
+        <location filename="mainwindow.ui" line="663"/>
         <source>Renumber tracks in this order...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="665"/>
+        <location filename="mainwindow.ui" line="668"/>
         <source>Set value for all selected tracks...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="674"/>
+        <location filename="mainwindow.ui" line="673"/>
+        <source>Edit tag...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="682"/>
         <source>Configure Clementine...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="679"/>
+        <location filename="mainwindow.ui" line="687"/>
         <source>About Clementine...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="688"/>
+        <location filename="mainwindow.ui" line="696"/>
         <source>Shuffle playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="697"/>
+        <location filename="mainwindow.ui" line="705"/>
         <source>Add media...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="706"/>
+        <location filename="mainwindow.ui" line="714"/>
         <source>Add stream...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="715"/>
+        <location filename="mainwindow.ui" line="723"/>
         <source>Open media...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="720"/>
-        <location filename="mainwindow.cpp" line="348"/>
+        <location filename="mainwindow.ui" line="756"/>
+        <source>Remove from playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="358"/>
+        <location filename="mainwindow.ui" line="728"/>
         <source>&amp;Hide tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="729"/>
+        <location filename="mainwindow.ui" line="737"/>
         <source>Cover Manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="734"/>
+        <location filename="mainwindow.ui" line="742"/>
         <source>Shuffle mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="739"/>
+        <location filename="mainwindow.ui" line="747"/>
         <source>Repeat mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.cpp" line="240"/>
         <source>Configure library...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="323"/>
-        <location filename="mainwindow.cpp" line="344"/>
+        <location filename="mainwindow.cpp" line="333"/>
+        <location filename="mainwindow.cpp" line="354"/>
         <source>&amp;Show tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="396"/>
-        <location filename="mainwindow.cpp" line="557"/>
+        <location filename="mainwindow.cpp" line="406"/>
+        <location filename="mainwindow.cpp" line="567"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="595"/>
+        <location filename="mainwindow.cpp" line="617"/>
         <source>Set %1 to &quot;%2&quot;...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="619"/>
+        <source>Edit tag &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -933,17 +948,27 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>OSD</name>
     <message>
-        <location filename="osd.cpp" line="70"/>
+        <location filename="osd.cpp" line="69"/>
+        <source>disc %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="osd.cpp" line="71"/>
+        <source>track %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="osd.cpp" line="78"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="osd.cpp" line="74"/>
+        <location filename="osd.cpp" line="82"/>
         <source>Playlist finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="osd.cpp" line="81"/>
+        <location filename="osd.cpp" line="89"/>
         <source>Volume %1%</source>
         <translation type="unfinished"></translation>
     </message>
@@ -951,97 +976,97 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Playlist</name>
     <message>
-        <location filename="playlist.cpp" line="454"/>
+        <location filename="playlist.cpp" line="535"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="455"/>
+        <location filename="playlist.cpp" line="536"/>
         <source>Artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="456"/>
+        <location filename="playlist.cpp" line="537"/>
         <source>Album</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="457"/>
+        <location filename="playlist.cpp" line="538"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="458"/>
+        <location filename="playlist.cpp" line="539"/>
         <source>Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="459"/>
+        <location filename="playlist.cpp" line="540"/>
         <source>Disc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="460"/>
+        <location filename="playlist.cpp" line="541"/>
         <source>Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="461"/>
+        <location filename="playlist.cpp" line="542"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="462"/>
+        <location filename="playlist.cpp" line="543"/>
         <source>Album artist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="463"/>
+        <location filename="playlist.cpp" line="544"/>
         <source>Composer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="465"/>
+        <location filename="playlist.cpp" line="546"/>
         <source>BPM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="466"/>
+        <location filename="playlist.cpp" line="547"/>
         <source>Bit rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="467"/>
+        <location filename="playlist.cpp" line="548"/>
         <source>Sample rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="468"/>
+        <location filename="playlist.cpp" line="549"/>
         <source>File name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="469"/>
+        <location filename="playlist.cpp" line="550"/>
         <source>File name (without path)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="470"/>
+        <location filename="playlist.cpp" line="551"/>
         <source>File size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="471"/>
+        <location filename="playlist.cpp" line="552"/>
         <source>File type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="472"/>
+        <location filename="playlist.cpp" line="553"/>
         <source>Date modified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="playlist.cpp" line="473"/>
+        <location filename="playlist.cpp" line="554"/>
         <source>Date created</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1192,43 +1217,108 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="206"/>
+        <location filename="settingsdialog.ui" line="201"/>
         <source>Clementine can show a message when the track changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="213"/>
-        <source>Don&apos;t show notifications</source>
+        <location filename="settingsdialog.ui" line="208"/>
+        <source>Notification type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="220"/>
+        <location filename="settingsdialog.ui" line="214"/>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="300"/>
+        <source>Pretty OSD options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="306"/>
+        <source>Background opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="320"/>
+        <source>Background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="328"/>
+        <source>Basic Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="333"/>
+        <source>Clementine Orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="338"/>
+        <source>Custom...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="346"/>
+        <source>Text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="353"/>
+        <source>Choose color...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="221"/>
         <source>Show a native desktop notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="227"/>
+        <location filename="settingsdialog.ui" line="228"/>
+        <source>Show a pretty OSD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="235"/>
         <source>Show a popup from the system tray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="253"/>
+        <location filename="settingsdialog.ui" line="245"/>
+        <source>General settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.ui" line="257"/>
         <source>Popup duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="260"/>
+        <location filename="settingsdialog.ui" line="264"/>
         <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="279"/>
+        <location filename="settingsdialog.ui" line="283"/>
         <source>Show a notification when I change the volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingsdialog.ui" line="286"/>
+        <location filename="settingsdialog.ui" line="290"/>
         <source>Include album art in the notification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.cpp" line="34"/>
+        <source>OSD Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingsdialog.cpp" line="34"/>
+        <source>Drag to reposition</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
