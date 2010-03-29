@@ -54,12 +54,12 @@ add_custom_target(build_tests
 )
 add_dependencies(test build_tests)
 
-add_library(gui_main EXCLUDE_FROM_ALL main.cpp)
-target_link_libraries(gui_main clementine_lib)
-set_target_properties(gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
+add_library(test_gui_main EXCLUDE_FROM_ALL main.cpp)
+target_link_libraries(test_gui_main clementine_lib)
+set_target_properties(test_gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
 
-add_library(main EXCLUDE_FROM_ALL main.cpp)
-target_link_libraries(main clementine_lib)
+add_library(test_main EXCLUDE_FROM_ALL main.cpp)
+target_link_libraries(test_main clementine_lib)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
 macro(add_test_file test_source gui_required)
@@ -71,9 +71,9 @@ macro(add_test_file test_source gui_required)
     target_link_libraries(${TEST_NAME} gmock clementine_lib test_utils)
     set(GUI_REQUIRED ${gui_required})
     if (GUI_REQUIRED)
-      target_link_libraries(${TEST_NAME} gui_main)
+      target_link_libraries(${TEST_NAME} test_gui_main)
     else (GUI_REQUIRED)
-      target_link_libraries(${TEST_NAME} main)
+      target_link_libraries(${TEST_NAME} test_main)
     endif (GUI_REQUIRED)
 
     add_custom_command(TARGET test POST_BUILD
