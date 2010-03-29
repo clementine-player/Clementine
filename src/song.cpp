@@ -462,8 +462,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->art_manual_ == other.d->art_manual_;
 }
 
-void Song::SetTextFrame(TagLib::ID3v2::Tag* tag, const QString& id,
-                        const QString& value) {
+void Song::SetTextFrame(const QString& id, const QString& value,
+                        TagLib::ID3v2::Tag* tag) {
   TagLib::ByteVector id_vector = id.toUtf8().constData();
 
   // Remove the frame if it already exists
@@ -500,11 +500,11 @@ bool Song::Save() const {
 
   if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
-    SetTextFrame(tag, "TPOS", d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_));
-    SetTextFrame(tag, "TBPM", d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_));
-    SetTextFrame(tag, "TCOM", d->composer_);
-    SetTextFrame(tag, "TPE2", d->albumartist_);
-    SetTextFrame(tag, "TCMP", d->compilation_ ? "1" : "0");
+    SetTextFrame("TPOS", d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_), tag);
+    SetTextFrame("TBPM", d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_), tag);
+    SetTextFrame("TCOM", d->composer_, tag);
+    SetTextFrame("TPE2", d->albumartist_, tag);
+    SetTextFrame("TCMP", d->compilation_ ? "1" : "0", tag);
   }
   else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* tag = file->tag();

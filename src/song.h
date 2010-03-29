@@ -181,8 +181,8 @@ class Song {
   void GuessFileType(TagLib::FileRef* fileref);
 
   // Helper methods for taglib
-  static void SetTextFrame(TagLib::ID3v2::Tag* tag, const QString& id,
-                           const QString& value);
+  static void SetTextFrame(const QString& id, const QString& value,
+                           TagLib::ID3v2::Tag* tag);
 
  private:
   struct Private : public QSharedData {
