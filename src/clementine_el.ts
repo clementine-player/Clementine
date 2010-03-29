@@ -105,34 +105,34 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάφοροι καλλιτέχνες</translation>
     </message>
 </context>
 <context>
     <name>AnalyzerContainer</name>
     <message>
         <source>No analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς αναλυτή</translation>
     </message>
     <message>
         <source>Bar analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Μπάρες</translation>
     </message>
     <message>
         <source>Block analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Block</translation>
     </message>
     <message>
         <source>Boom analyzer</source>
-        <translation type="unfinished"></translation>
+        <translation>Boom</translation>
     </message>
     <message>
         <source>Sonogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonogram</translation>
     </message>
     <message>
         <source>Turbine</source>
-        <translation type="unfinished"></translation>
+        <translation>Turbine</translation>
     </message>
 </context>
 <context>
@@ -570,11 +570,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show in various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Δείξε διάφορους καλλιτέχνες</translation>
     </message>
     <message>
         <source>Don&apos;t show in various artists</source>
-        <translation type="unfinished"></translation>
+        <translation>Μη δείχνεις διάφορους καλλιτέχνες</translation>
     </message>
 </context>
 <context>
@@ -741,35 +741,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Shuffle mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία ανάμιξης</translation>
     </message>
     <message>
         <source>Repeat mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία επανάληψης</translation>
     </message>
     <message>
         <source>Renumber tracks in this order...</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναρίθμησε τα κομμάτια σε αυτή την σειρά...</translation>
     </message>
     <message>
         <source>Set value for all selected tracks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Δώσε τιμή σε όλα τα επιλεγμένα κομμάτια...</translation>
     </message>
     <message>
         <source>Set %1 to &quot;%2&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Δώσε %1 στο &quot;%2&quot;...</translation>
     </message>
     <message>
         <source>Edit tag &quot;%1&quot;...</source>
-        <translation type="unfinished"></translation>
+        <translation>Τροποποίηση ετικέτας &quot;%1&quot;...</translation>
     </message>
     <message>
         <source>Edit tag...</source>
-        <translation type="unfinished"></translation>
+        <translation>Τροποποίησησ ετικέτας...</translation>
     </message>
     <message>
         <source>Remove from playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση από την λίστα</translation>
     </message>
 </context>
 <context>
@@ -815,11 +815,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>disc %1</source>
-        <translation type="unfinished"></translation>
+        <translation>δίσκος %1</translation>
     </message>
     <message>
         <source>track %1</source>
-        <translation type="unfinished"></translation>
+        <translation>κομμάτι %1</translation>
     </message>
 </context>
 <context>
@@ -898,7 +898,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File name (without path)</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα αρχείου (χωρίς διαδρομή)</translation>
     </message>
 </context>
 <context>
@@ -985,7 +985,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Your radio streams</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι ροές ραδιοφώνου σας</translation>
     </message>
 </context>
 <context>
@@ -1060,59 +1060,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>OSD Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπισκόπηση OSD </translation>
     </message>
     <message>
         <source>Drag to reposition</source>
-        <translation type="unfinished"></translation>
+        <translation>Σύρετε για τοποθέτηση</translation>
     </message>
     <message>
         <source>Notification type</source>
-        <translation type="unfinished"></translation>
+        <translation>Τύπος ειδοποίησης</translation>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Απενεργοποιημένο</translation>
     </message>
     <message>
         <source>Show a pretty OSD</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνισε ένα όμορφο OSD</translation>
     </message>
     <message>
         <source>General settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Γενικές ρυθμίσεις</translation>
     </message>
     <message>
         <source>Pretty OSD options</source>
-        <translation type="unfinished"></translation>
+        <translation>Όμορφες OSD επιλογές</translation>
     </message>
     <message>
         <source>Background opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαφάνεια φόντου</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρώμα φόντου</translation>
     </message>
     <message>
         <source>Basic Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Βασικό μπλε</translation>
     </message>
     <message>
         <source>Clementine Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Clementine πορτοκαλί</translation>
     </message>
     <message>
         <source>Custom...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσωπική...</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρώμα κειμένου</translation>
     </message>
     <message>
         <source>Choose color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Επέλεξε χρώμα...</translation>
     </message>
 </context>
 <context>
