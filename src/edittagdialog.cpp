@@ -14,8 +14,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "playlistdelegates.h"
 #include "edittagdialog.h"
-#include "ui_edittagdialog.h"
+#include "library.h"
 
 #include <QtDebug>
 
@@ -90,6 +91,11 @@ bool EditTagDialog::SetSongs(const SongList &s) {
   }
 
   return true;
+}
+
+void EditTagDialog::SetTagCompleter(Library* library) {
+  new TagCompleter(library, Playlist::Column_Artist, ui_.artist);
+  new TagCompleter(library, Playlist::Column_Album, ui_.album);
 }
 
 void EditTagDialog::accept() {

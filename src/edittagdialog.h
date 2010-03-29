@@ -22,6 +22,8 @@
 #include "ui_edittagdialog.h"
 #include "song.h"
 
+class Library;
+
 class EditTagDialog : public QDialog {
   Q_OBJECT
 
@@ -29,6 +31,7 @@ class EditTagDialog : public QDialog {
   EditTagDialog(QWidget* parent = 0);
 
   bool SetSongs(const SongList& songs);
+  void SetTagCompleter(Library* library);
 
  public slots:
   void accept();

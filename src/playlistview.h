@@ -20,68 +20,9 @@
 #include "playlist.h"
 #include "library.h"
 
-#include <QStyledItemDelegate>
 #include <QTreeView>
 
 class RadioLoadingIndicator;
-
-class PlaylistDelegateBase : public QStyledItemDelegate {
-  Q_OBJECT
- public:
-  PlaylistDelegateBase(QTreeView* view);
-  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  QString displayText(const QVariant& value, const QLocale& locale) const;
-
-  QStyleOptionViewItemV4 Adjusted(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-
- protected:
-  QTreeView* view_;
-};
-
-class LengthItemDelegate : public PlaylistDelegateBase {
- public:
-  LengthItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
-  QString displayText(const QVariant& value, const QLocale& locale) const;
-};
-
-class SizeItemDelegate : public PlaylistDelegateBase {
- public:
-  SizeItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
-  QString displayText(const QVariant& value, const QLocale& locale) const;
-};
-
-class DateItemDelegate : public PlaylistDelegateBase {
- public:
-  DateItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
-  QString displayText(const QVariant& value, const QLocale& locale) const;
-};
-
-class FileTypeItemDelegate : public PlaylistDelegateBase {
- public:
-  FileTypeItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
-  QString displayText(const QVariant& value, const QLocale& locale) const;
-};
-
-class TextItemDelegate : public PlaylistDelegateBase {
- public:
-  TextItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {};
-  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-      const QModelIndex& index) const;
-};
-
-class TagCompletionItemDelegate : public PlaylistDelegateBase {
- public:
-  TagCompletionItemDelegate(QTreeView* view, Library* library, Playlist::Column column) :
-    PlaylistDelegateBase(view), library_(library), column_(column) {};
-
-  QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-      const QModelIndex& index) const;
-
- private:
-  Library* library_;
-  Playlist::Column column_;
-};
-
 
 class PlaylistView : public QTreeView {
   Q_OBJECT

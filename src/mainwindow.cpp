@@ -657,6 +657,8 @@ void MainWindow::EditTracks() {
   }
 
   edit_tag_dialog_->SetSongs(songs);
+  edit_tag_dialog_->SetTagCompleter(library_);
+
   if (edit_tag_dialog_->exec() == QDialog::Rejected)
     return;
 
