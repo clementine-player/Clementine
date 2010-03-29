@@ -186,7 +186,7 @@ endif (UPDATE_TRANSLATIONS)
 
 # Generate a qrc file for the translations
 set(CLEMENTINE-QM-RESOURCE ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
-file(WRITE ${CLEMENTINE-QM-RESOURCE} "<RCC><qresource prefix=\"/\">")
+file(WRITE ${CLEMENTINE-QM-RESOURCE} "<RCC><qresource prefix=\"/translations\">")
 foreach(QM-FILE ${CLEMENTINE-QM-FILES})
   file(RELATIVE_PATH QM-RELATIVE-PATH ${CMAKE_CURRENT_BINARY_DIR} ${QM-FILE})
   file(APPEND ${CLEMENTINE-QM-RESOURCE} "<file>" ${QM-RELATIVE-PATH} "</file>")
