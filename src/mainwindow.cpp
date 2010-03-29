@@ -462,7 +462,13 @@ void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {
   switch (reason) {
     case QSystemTrayIcon::DoubleClick:
     case QSystemTrayIcon::Trigger:
-      SetHiddenInTray(isVisible());
+      if(isMinimized()) {
+        hide();
+        setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+        SetHiddenInTray(false);
+      } else {
+        SetHiddenInTray(isVisible());
+      }
       break;
 
     case QSystemTrayIcon::MiddleClick:
