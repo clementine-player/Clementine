@@ -133,7 +133,7 @@ void Player::NextItem() {
     return;
   }
 
-  PlayAt(i);
+  PlayAt(i, false);
 }
 
 void Player::TrackEnded() {
@@ -173,7 +173,7 @@ void Player::PlayPause() {
         break;
       i = 0;
     }
-    PlayAt(i);
+    PlayAt(i, false);
     break;
   }
   }
@@ -196,7 +196,7 @@ void Player::Previous() {
     return;
   }
 
-  PlayAt(i);
+  PlayAt(i, false);
 }
 
 void Player::EngineStateChanged(Engine::State state) {
@@ -225,10 +225,12 @@ Engine::State Player::GetState() const {
   return engine_->state();
 }
 
-void Player::PlayAt(int index) {
+void Player::PlayAt(int index, bool manual_change) {
   if (!init_engine_.isFinished())
     return;
 
+  if (manual_change)
+    playlist_->set_current_index(-1); // to reshuffle
   playlist_->set_current_index(index);
 
   PlaylistItem* item = playlist_->item_at(index);
@@ -507,7 +509,7 @@ void Player::SetRandom(bool enable) {
 }
 
 void Player::PlayTrack(int index) {
-  PlayAt(index);
+  PlayAt(index, true);
 }
 
 void Player::PlaylistChanged() {

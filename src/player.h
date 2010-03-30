@@ -80,7 +80,7 @@ class Player : public QObject {
  public slots:
   void ReloadSettings();
 
-  void PlayAt(int index);
+  void PlayAt(int index, bool manual_change);
   void PlayPause();
   void NextItem();
   void Previous();
