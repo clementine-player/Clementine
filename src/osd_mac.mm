@@ -119,15 +119,7 @@ bool OSD::SupportsTrayPopups() {
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
-                            const QString& icon) {
+                            const QString& icon, const QImage& image) {
   Q_UNUSED(icon);
-  wrapper_->ShowMessage(summary, message, QImage());
-}
-
-void OSD::ShowMessageNative(const QString& summary,
-                            const QString& message,
-                            const QImage& image) {
   wrapper_->ShowMessage(summary, message, image);
 }
-
-

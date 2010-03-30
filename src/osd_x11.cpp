@@ -72,36 +72,30 @@ bool OSD::SupportsTrayPopups() {
 }
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
-                            const QString& icon) {
-  QDBusPendingReply<uint> reply = interface_->Notify(
-      QCoreApplication::applicationName(),
-      notification_id_,
-      icon,
-      summary,
-      message,
-      QStringList(),
-      QVariantMap(),
-      timeout_);
-  QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
-  connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-      SLOT(CallFinished(QDBusPendingCallWatcher*)));
-}
-
-void OSD::ShowMessageNative(const QString& summary, const QString& message,
-                            const QImage& image) {
+                            const QString& icon, const QImage& image) {
   QVariantMap hints;
   if (!image.isNull()) {
     hints["image_data"] = QVariant(image);
   }
+
+  int id = 0;
+  if (last_notification_time_.secsTo(QDateTime::currentDateTime()) * 1000
+      < timeout_msec_) {
+    // Reuse the existing popup if it's still open.  The reason we don't always
+    // reuse the popup is because the notification daemon on KDE4 won't re-show
+    // the bubble if it's already gone to the tray.  See issue #118
+    id = notification_id_;
+  }
+
   QDBusPendingReply<uint> reply = interface_->Notify(
       QCoreApplication::applicationName(),
-      notification_id_,
-      QString(),
+      id,
+      icon,
       summary,
       message,
       QStringList(),
       hints,
-      timeout_);
+      timeout_msec_);
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
   connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
       SLOT(CallFinished(QDBusPendingCallWatcher*)));
@@ -119,5 +113,6 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
   uint id = reply.value();
   if (id != 0) {
     notification_id_ = id;
+    last_notification_time_ = QDateTime::currentDateTime();
   }
 }

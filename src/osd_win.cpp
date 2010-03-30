@@ -30,11 +30,6 @@ bool OSD::SupportsTrayPopups() {
 }
 
 void OSD::ShowMessageNative(const QString&, const QString&,
-                            const QString&) {
-  qWarning() << __PRETTY_FUNCTION__ << ": NOT IMPLEMENTED";
-}
-
-void OSD::ShowMessageNative(const QString& summary, const QString& message,
-                            const QImage& image) {
+                            const QString&, const QImage&) {
   qWarning() << __PRETTY_FUNCTION__ << ": NOT IMPLEMENTED";
 }

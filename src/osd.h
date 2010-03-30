@@ -74,15 +74,13 @@ class OSD : public QObject {
   // These are implemented in the OS-specific files
   void Init();
   void ShowMessageNative(const QString& summary,
-                         const QString& message = QString(),
-                         const QString& icon = QString());
-  void ShowMessageNative(const QString& summary,
                          const QString& message,
-                         const QImage& image);
+                         const QString& icon = QString(),
+                         const QImage& image = QImage());
 
  private:
   QSystemTrayIcon* tray_icon_;
-  int timeout_;
+  int timeout_msec_;
   Behaviour behaviour_;
   bool show_on_volume_change_;
   bool show_art_;
@@ -97,6 +95,7 @@ class OSD : public QObject {
 #ifdef Q_WS_X11
   boost::scoped_ptr<org::freedesktop::Notifications> interface_;
   uint notification_id_;
+  QDateTime last_notification_time_;
 #endif
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);

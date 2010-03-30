@@ -26,7 +26,7 @@ const char* OSD::kSettingsGroup = "OSD";
 OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
-    timeout_(5000),
+    timeout_msec_(5000),
     behaviour_(Native),
     show_on_volume_change_(false),
     show_art_(true),
@@ -44,7 +44,7 @@ void OSD::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   behaviour_ = OSD::Behaviour(s.value("Behaviour", Native).toInt());
-  timeout_ = s.value("Timeout", 5000).toInt();
+  timeout_msec_ = s.value("Timeout", 5000).toInt();
   show_on_volume_change_ = s.value("ShowOnVolumeChange", false).toBool();
   show_art_ = s.value("ShowArt", true).toBool();
 
@@ -53,7 +53,7 @@ void OSD::ReloadSettings() {
   if (!SupportsTrayPopups() && behaviour_ == TrayPopup)
     behaviour_ = Disabled;
 
-  pretty_popup_->set_popup_duration(timeout_);
+  pretty_popup_->set_popup_duration(timeout_msec_);
   pretty_popup_->ReloadSettings();
 }
 
@@ -96,14 +96,14 @@ void OSD::ShowMessage(const QString& summary,
   switch (behaviour_) {
     case Native:
       if (image.isNull()) {
-        ShowMessageNative(summary, message, icon);
+        ShowMessageNative(summary, message, icon, QImage());
       } else {
-        ShowMessageNative(summary, message, image);
+        ShowMessageNative(summary, message, QString(), image);
       }
       break;
 
     case TrayPopup:
-      tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_);
+      tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_msec_);
       break;
 
     case Pretty:
