@@ -171,9 +171,6 @@ if (UPDATE_TRANSLATIONS)
       set(_po "${_path}/${_lang}.po")
     endif (_lang STREQUAL "empty")
     
-    MESSAGE(STATUS ${_po})
-    MESSAGE(STATUS ${_ts})
-    MESSAGE(STATUS ${TS_FILE})
     add_custom_command(OUTPUT ${_po}
       COMMAND lconvert ARGS ${_ts} -o ${_po} -of po
       MAIN_DEPENDENCY ${_ts}
