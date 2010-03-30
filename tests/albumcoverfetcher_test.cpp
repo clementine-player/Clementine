@@ -39,8 +39,14 @@ class AlbumCoverFetcherTest : public ::testing::Test {
     lastfm::setNetworkAccessManager(network_);
   }
 
-  MockNetworkAccessManager* network_;
+  static void TearDownTestCase() {
+    delete network_;
+  }
+
+  static MockNetworkAccessManager* network_;
 };
+
+MockNetworkAccessManager* AlbumCoverFetcherTest::network_;
 
 
 TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {

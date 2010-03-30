@@ -36,6 +36,8 @@
       @"AllNotifications",
       array,
       @"DefaultNotifications",
+      @"com.davidsansome.clementine",
+      @"ApplicationId",
       nil];
   return dict;
 }

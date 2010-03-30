@@ -68,7 +68,7 @@ class LibraryBackendTest : public ::testing::Test {
   QSqlDatabase database_;
 };
 
-#ifdef Q_OS_LINUX
+#ifdef Q_OS_UNIX
 
 #include <sys/time.h>
 #include <time.h>
