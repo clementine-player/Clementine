@@ -60,6 +60,8 @@ class PhononEngine : public Engine::Base {
   Phonon::AudioOutput* audio_output_;
 
   QTimer* state_timer_;
+
+  qint64 seek_offset_;
 };
 
 #endif // PHONONENGINE_H

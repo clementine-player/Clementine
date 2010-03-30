@@ -21,7 +21,8 @@
 PhononEngine::PhononEngine()
   : media_object_(new Phonon::MediaObject(this)),
     audio_output_(new Phonon::AudioOutput(Phonon::MusicCategory, this)),
-    state_timer_(new QTimer(this))
+    state_timer_(new QTimer(this)),
+    seek_offset_(-1)
 {
   Phonon::createPath(media_object_, audio_output_);
 
@@ -52,6 +53,10 @@ bool PhononEngine::load(const QUrl &url, bool stream) {
 }
 
 bool PhononEngine::play(uint offset) {
+  // The seek happens in PhononStateChanged - phonon doesn't seem to change
+  // currentTime() if we seek before we start playing :S
+  seek_offset_ = offset;
+
   media_object_->play();
   return true;
 }
@@ -109,12 +114,15 @@ void PhononEngine::PhononStateChanged(Phonon::State new_state) {
   if (new_state == Phonon::ErrorState) {
     emit error(media_object_->errorString());
   }
+  if (new_state == Phonon::PlayingState && seek_offset_ != -1) {
+    media_object_->seek(seek_offset_);
+    seek_offset_ = -1;
+  }
 
   // Don't emit the state change straight away
   state_timer_->start(100);
 }
 
 void PhononEngine::StateTimeoutExpired() {
-  qDebug() << state();
   emit stateChanged(state());
 }

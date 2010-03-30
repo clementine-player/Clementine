@@ -24,7 +24,7 @@
 #  include <QDBusConnection>
 #endif
 
-#ifdef Q_OS_WIN32
+#ifdef USE_PHONON
 #  include "phononengine.h"
 #else
 #  include "xine-engine.h"
@@ -65,7 +65,7 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
     engine_(NULL),
     init_engine_watcher_(new QFutureWatcher<bool>(this))
 {
-#ifdef Q_OS_WIN32
+#ifdef USE_PHONON
   engine_ = new PhononEngine;
 #else
   engine_ = new XineEngine;

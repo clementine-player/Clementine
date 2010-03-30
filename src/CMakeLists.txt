@@ -191,13 +191,13 @@ endforeach(QM-FILE)
 file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
 
 # Audio engine - phonon on windows, xine elsewhere
-if(WIN32)
+if(USE_PHONON)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} phononengine.cpp)
   set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} phononengine.h)
-else(WIN32)
+else(USE_PHONON)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} xine-engine.cpp xine-scope.c)
   set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} xine-engine.h)
-endif(WIN32)
+endif(USE_PHONON)
 
 # OSD and DBus.
 if(APPLE)
