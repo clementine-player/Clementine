@@ -251,11 +251,11 @@ QString Library::DividerDisplayText(GroupBy type, const QString& key) const {
       return "0-9";
     // fallthrough
 
-  case GroupBy_Year:
-    return QString::number(key.toInt()); // To remove leading 0s
-
   case GroupBy_YearAlbum:
     return key;
+
+  case GroupBy_Year:
+    return QString::number(key.toInt()); // To remove leading 0s
 
   case GroupBy_None:
   default:
