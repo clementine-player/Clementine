@@ -107,7 +107,7 @@ class MainWindow : public QMainWindow {
 
  private:
   void SaveGeometry();
-  void UpdateGroupBySelection(QueryOptions::GroupBy g[3]);
+  void UpdateGroupBySelection(Library::GroupBy g[Library::kMaxLevels]);
 
  private:
   static const int kStateVersion;
@@ -138,6 +138,7 @@ class MainWindow : public QMainWindow {
   QAction* playlist_play_pause_;
   QAction* playlist_stop_after_;
   QModelIndex playlist_menu_index_;
+  QActionGroup* group_by_group_;
 
   QSortFilterProxyModel* library_sort_model_;
 

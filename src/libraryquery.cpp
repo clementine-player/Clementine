@@ -24,9 +24,6 @@
 QueryOptions::QueryOptions()
   : max_age(-1)
 {
-  group_by[0] = GroupBy_Artist;
-  group_by[1] = GroupBy_Album;
-  group_by[2] = GroupBy_None;
 }
 
 

@@ -234,21 +234,21 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.library_filter_clear, SIGNAL(clicked()), SLOT(ClearLibraryFilter()));
 
   // "Group by ..."
-  QActionGroup* group_by_group = new QActionGroup(this);
-  group_by_group->addAction(ui_.group_by_artist);
-  group_by_group->addAction(ui_.group_by_artist_album);
-  group_by_group->addAction(ui_.group_by_artist_yearalbum);
-  group_by_group->addAction(ui_.group_by_album);
-  group_by_group->addAction(ui_.group_by_genre_album);
-  group_by_group->addAction(ui_.group_by_genre_artist_album);
-  group_by_group->addAction(ui_.group_by_advanced);
-  connect(group_by_group, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
+  group_by_group_ = new QActionGroup(this);
+  group_by_group_->addAction(ui_.group_by_artist);
+  group_by_group_->addAction(ui_.group_by_artist_album);
+  group_by_group_->addAction(ui_.group_by_artist_yearalbum);
+  group_by_group_->addAction(ui_.group_by_album);
+  group_by_group_->addAction(ui_.group_by_genre_album);
+  group_by_group_->addAction(ui_.group_by_genre_artist_album);
+  group_by_group_->addAction(ui_.group_by_advanced);
+  connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
 
   // Library config menu
   QMenu* library_menu = new QMenu(this);
   library_menu->addActions(filter_age_group->actions());
   library_menu->addSeparator();
-  library_menu->addActions(group_by_group->actions());
+  library_menu->addActions(group_by_group_->actions());
   library_menu->addSeparator();
   library_menu->addAction(tr("Configure library..."), library_config_dialog_, SLOT(show()));
   ui_.library_options->setMenu(library_menu);
@@ -335,10 +335,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   ui_.file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
-  QueryOptions::GroupBy g[3];
-  g[0] = QueryOptions::GroupBy(settings_.value("group_by1", int(QueryOptions::GroupBy_Artist)).toInt());
-  g[1] = QueryOptions::GroupBy(settings_.value("group_by2", int(QueryOptions::GroupBy_Album)).toInt());
-  g[2] = QueryOptions::GroupBy(settings_.value("group_by3", int(QueryOptions::GroupBy_None)).toInt());
+  Library::GroupBy g[Library::kMaxLevels];
+  g[0] = Library::GroupBy(settings_.value("group_by1", int(Library::GroupBy_Artist)).toInt());
+  g[1] = Library::GroupBy(settings_.value("group_by2", int(Library::GroupBy_Album)).toInt());
+  g[2] = Library::GroupBy(settings_.value("group_by3", int(Library::GroupBy_None)).toInt());
   library_->SetGroupBy(g);
   UpdateGroupBySelection(g);
 
@@ -799,31 +799,19 @@ void MainWindow::PlaylistRemoveCurrent() {
 }
 
 void MainWindow::GroupByClicked(QAction* action) {
-  QueryOptions::GroupBy g[3];
-  g[0] = QueryOptions::GroupBy_None;
-  g[1] = QueryOptions::GroupBy_None;
-  g[2] = QueryOptions::GroupBy_None;
+  Library::GroupBy g[Library::kMaxLevels];
+  for (int i=0 ; i<Library::kMaxLevels ; ++i)
+    g[i] = Library::GroupBy_None;
 
-  if (action == ui_.group_by_album) {
-    g[0] = QueryOptions::GroupBy_Album;
-  } else if (action == ui_.group_by_artist) {
-    g[0] = QueryOptions::GroupBy_Artist;
-  } else if (action == ui_.group_by_artist_album) {
-    g[0] = QueryOptions::GroupBy_Artist;
-    g[1] = QueryOptions::GroupBy_Album;
-  } else if (action == ui_.group_by_artist_yearalbum) {
-    g[0] = QueryOptions::GroupBy_Artist;
-    g[1] = QueryOptions::GroupBy_YearAlbum;
-  } else if (action == ui_.group_by_genre_album) {
-    g[0] = QueryOptions::GroupBy_Genre;
-    g[1] = QueryOptions::GroupBy_Album;
-  } else if (action == ui_.group_by_genre_artist_album) {
-    g[0] = QueryOptions::GroupBy_Genre;
-    g[1] = QueryOptions::GroupBy_Artist;
-    g[2] = QueryOptions::GroupBy_Album;
-  } else {
-    qWarning() << "Unknown action in" << __PRETTY_FUNCTION__;
+  QStringList group_by = action->property("group_by").toStringList();
+  if (group_by.isEmpty()) {
+    qWarning() << __PRETTY_FUNCTION__ << ": Unknown action";
     return;
+  }
+
+  for (int i=0 ; i<group_by.size() && i<Library::kMaxLevels ; ++i) {
+    g[i] = Library::GroupBy(
+        library_->GroupByEnum().keyToValue(group_by[i].toUtf8().constData()));
   }
 
   library_->SetGroupBy(g);
@@ -833,31 +821,21 @@ void MainWindow::GroupByClicked(QAction* action) {
   settings_.setValue("group_by3", int(g[2]));
 }
 
-void MainWindow::UpdateGroupBySelection(QueryOptions::GroupBy g[3]) {
-  if (g[0] == QueryOptions::GroupBy_Album &&
-      g[1] == QueryOptions::GroupBy_None &&
-      g[2] == QueryOptions::GroupBy_None)
-    ui_.group_by_album->setChecked(true);
-  else if (g[0] == QueryOptions::GroupBy_Artist &&
-           g[1] == QueryOptions::GroupBy_None &&
-           g[2] == QueryOptions::GroupBy_None)
-    ui_.group_by_artist->setChecked(true);
-  else if (g[0] == QueryOptions::GroupBy_Artist &&
-           g[1] == QueryOptions::GroupBy_Album &&
-           g[2] == QueryOptions::GroupBy_None)
-    ui_.group_by_artist_album->setChecked(true);
-  else if (g[0] == QueryOptions::GroupBy_Artist &&
-           g[1] == QueryOptions::GroupBy_YearAlbum &&
-           g[2] == QueryOptions::GroupBy_None)
-    ui_.group_by_artist_yearalbum->setChecked(true);
-  else if (g[0] == QueryOptions::GroupBy_Genre &&
-           g[1] == QueryOptions::GroupBy_Album &&
-           g[2] == QueryOptions::GroupBy_None)
-    ui_.group_by_genre_album->setChecked(true);
-  else if (g[0] == QueryOptions::GroupBy_Genre &&
-           g[1] == QueryOptions::GroupBy_Artist &&
-           g[2] == QueryOptions::GroupBy_Album)
-    ui_.group_by_genre_artist_album->setChecked(true);
-  else
-    ui_.group_by_advanced->setChecked(true);
+void MainWindow::UpdateGroupBySelection(Library::GroupBy g[Library::kMaxLevels]) {
+  foreach (QAction* action, group_by_group_->actions()) {
+    QStringList group_by = action->property("group_by").toStringList();
+    bool match = true;
+    for (int i=0 ; i<group_by.size() && i<Library::kMaxLevels ; ++i) {
+      if (g[i] != library_->GroupByEnum().keyToValue(group_by[i].toUtf8().constData())) {
+        match = false;
+        break;
+      }
+    }
+
+    if (match) {
+      action->setChecked(true);
+      return;
+    }
+  }
+  ui_.group_by_advanced->setChecked(true);
 }

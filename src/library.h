@@ -35,6 +35,7 @@ class LibraryDirectoryModel;
 
 class Library : public SimpleTreeModel<LibraryItem> {
   Q_OBJECT
+  Q_ENUMS(GroupBy);
 
  public:
   Library(EngineBase* engine, QObject* parent = 0);
@@ -47,6 +48,20 @@ class Library : public SimpleTreeModel<LibraryItem> {
     Role_Key,
     Role_Artist,
   };
+
+  // These values get saved in QSettings - don't change them
+  enum GroupBy {
+    GroupBy_None = 0,
+    GroupBy_Artist = 1,
+    GroupBy_Album = 2,
+    GroupBy_YearAlbum = 3,
+    GroupBy_Year = 4,
+    GroupBy_Composer = 5,
+    GroupBy_Genre = 6,
+  };
+  QMetaEnum GroupByEnum() const;
+
+  static const int kMaxLevels = 3;
 
   // Useful for tests.  The library takes ownership.
   void set_backend_factory(BackgroundThreadFactory<LibraryBackendInterface>* factory);
@@ -81,7 +96,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
  public slots:
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);
-  void SetGroupBy(QueryOptions::GroupBy g[3]);
+  void SetGroupBy(GroupBy g[kMaxLevels]);
 
  protected:
   void LazyPopulate(LibraryItem* item) { LazyPopulate(item, false); }
@@ -101,20 +116,17 @@ class Library : public SimpleTreeModel<LibraryItem> {
   void Initialise();
 
   // Functions for working with queries and creating items
-  void InitQuery(QueryOptions::GroupBy type, LibraryQuery* q);
-  void FilterQuery(QueryOptions::GroupBy type,
-                   LibraryItem* item,LibraryQuery* q);
-  LibraryItem* ItemFromQuery(QueryOptions::GroupBy type,
-                             bool signal, bool create_divider,
+  void InitQuery(GroupBy type, LibraryQuery* q);
+  void FilterQuery(GroupBy type, LibraryItem* item,LibraryQuery* q);
+  LibraryItem* ItemFromQuery(GroupBy type, bool signal, bool create_divider,
                              LibraryItem* parent, const LibraryQuery& q);
-  LibraryItem* ItemFromSong(QueryOptions::GroupBy type,
-                            bool signal, bool create_divider,
+  LibraryItem* ItemFromSong(GroupBy type, bool signal, bool create_divider,
                             LibraryItem* parent, const Song& s);
   LibraryItem* CreateCompilationArtistNode(bool signal, LibraryItem* parent);
 
   // Helpers for ItemFromQuery and ItemFromSong
-  LibraryItem* InitItem(QueryOptions::GroupBy type, bool signal, LibraryItem* parent);
-  void FinishItem(QueryOptions::GroupBy type, bool signal, bool create_divider,
+  LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent);
+  void FinishItem(GroupBy type, bool signal, bool create_divider,
                   LibraryItem* parent, LibraryItem* item);
 
   // Functions for manipulating text
@@ -125,8 +137,8 @@ class Library : public SimpleTreeModel<LibraryItem> {
   QString SortTextForArtist(QString artist) const;
   QString SortTextForYear(int year) const;
 
-  QString DividerKey(QueryOptions::GroupBy type, LibraryItem* item) const;
-  QString DividerDisplayText(QueryOptions::GroupBy type, const QString& key) const;
+  QString DividerKey(GroupBy type, LibraryItem* item) const;
+  QString DividerDisplayText(GroupBy type, const QString& key) const;
 
   // Helpers
   QVariant data(const LibraryItem* item, int role) const;
@@ -143,12 +155,13 @@ class Library : public SimpleTreeModel<LibraryItem> {
   int waiting_for_threads_;
 
   QueryOptions query_options_;
+  GroupBy group_by_[kMaxLevels];
 
   // Keyed on database ID
   QMap<int, LibraryItem*> song_nodes_;
 
   // Keyed on whatever the key is for that level - artist, album, year, etc.
-  QMap<QString, LibraryItem*> container_nodes_[3];
+  QMap<QString, LibraryItem*> container_nodes_[kMaxLevels];
 
   // Keyed on a letter, a year, a century, etc.
   QMap<QString, LibraryItem*> divider_nodes_;

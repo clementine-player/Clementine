@@ -28,20 +28,7 @@ class Song;
 struct QueryOptions {
   QueryOptions();
 
-  // These values get saved in QSettings - don't change them
-  enum GroupBy {
-    GroupBy_None = 0,
-    GroupBy_Artist = 1,
-    GroupBy_Album = 2,
-    GroupBy_YearAlbum = 3,
-    GroupBy_Year = 4,
-    GroupBy_Composer = 5,
-    GroupBy_Genre = 6,
-  };
-
   bool Matches(const Song& song) const;
-
-  GroupBy group_by[3];
   QString filter;
   int max_age;
 };
