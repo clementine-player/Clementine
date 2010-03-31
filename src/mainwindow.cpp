@@ -479,7 +479,7 @@ void MainWindow::LibraryDoubleClick(const QModelIndex& index) {
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
-  ui_.volume->setValue(ui_.volume->value() + delta / 20);
+  ui_.volume->setValue(ui_.volume->value() + delta / 30);
 }
 
 void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {

@@ -315,7 +315,7 @@ Amarok::VolumeSlider::slideEvent( QMouseEvent *e )
 void
 Amarok::VolumeSlider::wheelEvent( QWheelEvent *e )
 {
-    const uint step = e->delta() / 10;
+    const uint step = e->delta() / 30;
     QSlider::setValue( QSlider::value() + step );
 
     emit sliderReleased( value() );
