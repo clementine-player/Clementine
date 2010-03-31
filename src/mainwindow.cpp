@@ -615,8 +615,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     }
   }
   ui_.action_edit_track->setEnabled(editable);
-  ui_.action_renumber_tracks->setVisible(editable);
-  ui_.action_selection_set_value->setVisible(editable >= 2);
+
+  bool track_column = (index.column() == Playlist::Column_Track);
+  ui_.action_renumber_tracks->setVisible(editable >= 2 && track_column);
+  ui_.action_selection_set_value->setVisible(editable >= 2 && !track_column);
   ui_.action_edit_value->setVisible(editable);
   ui_.action_remove_from_playlist->setEnabled(!selection.isEmpty());
 
@@ -730,6 +732,7 @@ void MainWindow::SelectionSetValue() {
 
 void MainWindow::EditValue() {
   ui_.playlist->edit(playlist_menu_index_);
+  connect(playlist_, SIGNAL(dataChanged(QModelIndex, QModelIndex)), SLOT(SelectionSetValue()));
 }
 
 void MainWindow::LibraryScanStarted() {

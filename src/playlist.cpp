@@ -180,6 +180,7 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int role
 
   song.Save();
   item_at(row)->Reload();
+  emit dataChanged(index, index);
   return true;
 }
 
