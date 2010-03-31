@@ -125,41 +125,67 @@ void Library::SongsDiscovered(const SongList& songs) {
     if (!query_options_.Matches(song))
       continue;
 
-    LibraryItem* artist = NULL;
-    LibraryItem* album = NULL;
+    // Find parent containers in the tree
+    LibraryItem* container = root_;
+    for (int i=0 ; i<3 ; ++i) {
+      QueryOptions::GroupBy type = query_options_.group_by[i];
+      if (type == QueryOptions::GroupBy_None) break;
 
-    if (song.is_compilation()) {
-      if (compilation_artist_node_ == NULL)
-        CreateCompilationArtistNode(true);
-      artist = compilation_artist_node_;
-    } else {
-      if (artist_nodes_.contains(song.artist()))
-        artist = artist_nodes_[song.artist()];
-      else {
-        artist = CreateArtistNode(true, song.artist());
+      // Special case: if we're at the top level and the song is a compilation
+      // and the top level is Artists, then we want the Various Artists node :(
+      if (i == 0 && type == QueryOptions::GroupBy_Artist && song.is_compilation()) {
+        if (compilation_artist_node_ == NULL)
+          CreateCompilationArtistNode(true, root_);
+        container = compilation_artist_node_;
+      } else {
+        // Otherwise find the proper container based on the item's key
+        QString key;
+        switch (type) {
+          case QueryOptions::GroupBy_Album:    key = song.album(); break;
+          case QueryOptions::GroupBy_Artist:   key = song.artist(); break;
+          case QueryOptions::GroupBy_Composer: key = song.composer(); break;
+          case QueryOptions::GroupBy_Genre:    key = song.genre(); break;
+          case QueryOptions::GroupBy_Year:
+            key = QString::number(qMax(0, song.year())); break;
+          case QueryOptions::GroupBy_YearAlbum:
+            key = PrettyYearAlbum(qMax(0, song.year()), song.album()); break;
+          case QueryOptions::GroupBy_None: Q_ASSERT(0); break;
+        }
+
+        if (!container_nodes_[i].contains(key)) {
+          // Create the container
+          container_nodes_[i][key] =
+              ItemFromSong(type, true, i == 0, container, song);
+          container_nodes_[i][key]->container_level = i;
+        }
+        container = container_nodes_[i][key];
       }
+
+      // If we just created the damn thing then we don't need to continue into
+      // it any further.
+      if (!container->lazy_loaded)
+        break;
     }
 
-    if (artist->lazy_loaded) {
-      album = artist->ChildByKey(song.album());
-      if (album == NULL)
-        album = CreateAlbumNode(true, song.album(), artist, song.is_compilation(),
-                                song.art_automatic(), song.art_manual(), artist->key);
+    if (!container->lazy_loaded)
+      continue;
 
-      if (album->lazy_loaded)
-        CreateSongNode(true, song, album);
-    }
+    // We've gone all the way down to the lowest level, so now we have to
+    // create the song in the container.
+    song_nodes_[song.id()] =
+        ItemFromSong(QueryOptions::GroupBy_None, true, false, container, song);
   }
 }
 
-LibraryItem* Library::CreateCompilationArtistNode(bool signal) {
-  LibraryItem* parent = root_;
+LibraryItem* Library::CreateCompilationArtistNode(bool signal, LibraryItem* parent) {
   if (signal)
     beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
   compilation_artist_node_ =
-      new LibraryItem(LibraryItem::Type_CompilationArtist, tr("Various Artists"), parent);
+      new LibraryItem(LibraryItem::Type_Container, parent);
+  compilation_artist_node_->key = tr("Various Artists");
   compilation_artist_node_->sort_text = " various";
+  compilation_artist_node_->container_level = parent->container_level + 1;
 
   if (signal)
     endInsertRows();
@@ -167,191 +193,133 @@ LibraryItem* Library::CreateCompilationArtistNode(bool signal) {
   return compilation_artist_node_;
 }
 
-LibraryItem* Library::CreateArtistNode(bool signal, const QString& name) {
-  LibraryItem* parent = root_;
-  if (signal)
-    beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
+QString Library::DividerKey(QueryOptions::GroupBy type,
+                            LibraryItem* item) const {
+  if (item->sort_text.isEmpty())
+    return QString();
 
-  LibraryItem* ret = new LibraryItem(LibraryItem::Type_Artist, name, parent);
-  ret->display_text = PrettyArtist(name);
-  ret->sort_text = SortTextForArtist(name);
+  switch (type) {
+  case QueryOptions::GroupBy_Album:
+  case QueryOptions::GroupBy_Artist:
+  case QueryOptions::GroupBy_Composer:
+  case QueryOptions::GroupBy_Genre:
+    if (item->sort_text[0].isDigit())
+      return "0";
+    if (item->sort_text[0] == ' ')
+      return QString();
+    return QString(item->sort_text[0]);
 
-  artist_nodes_[name] = ret;
+  case QueryOptions::GroupBy_Year:
+    return QString::number(item->sort_text.toInt() / 10 * 10);
 
-  if (signal)
-    endInsertRows();
+  case QueryOptions::GroupBy_YearAlbum:
+    return QString::number(item->metadata.year());
 
-  if (!name.isEmpty()) {
-    QChar divider_char = DividerChar(ret->sort_text);
-
-    if (!divider_char.isNull() && !divider_nodes_.contains(divider_char)) {
-      if (signal)
-        beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
-
-      LibraryItem* divider =
-          new LibraryItem(LibraryItem::Type_Divider, QString(divider_char), root_);
-      divider->lazy_loaded = true;
-
-      if (divider_char == '0')
-        divider->display_text = "0-9";
-
-      divider_nodes_[divider_char] = divider;
-
-      if (signal)
-        endInsertRows();
-    }
+  case QueryOptions::GroupBy_None:
+  default:
+    Q_ASSERT(0);
+    return QString();
   }
-
-  return ret;
 }
 
-QChar Library::DividerChar(const QString& sort_text) const {
-  if (sort_text.isEmpty())
-    return QChar();
+QString Library::DividerDisplayText(QueryOptions::GroupBy type,
+                                    const QString& key) const {
+  switch (type) {
+  case QueryOptions::GroupBy_Album:
+  case QueryOptions::GroupBy_Artist:
+  case QueryOptions::GroupBy_Composer:
+  case QueryOptions::GroupBy_Genre:
+    if (key == "0")
+      return "0-9";
+    // fallthrough
 
-  QChar ret = sort_text[0];
-  if (ret.isDigit())
-    return '0';
+  case QueryOptions::GroupBy_Year:
+  case QueryOptions::GroupBy_YearAlbum:
+    return key;
 
-  return ret;
-}
-
-LibraryItem* Library::CreateAlbumNode(bool signal, const QString& name,
-                                      LibraryItem* parent, bool compilation,
-                                      const QString& art_automatic,
-                                      const QString& art_manual,
-                                      const QString& artist) {
-  if (signal)
-    beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
-
-  LibraryItem* ret = new LibraryItem(
-      compilation ? LibraryItem::Type_CompilationAlbum
-                  : LibraryItem::Type_Album,
-      name, parent);
-
-  ret->display_text = PrettyAlbum(name);
-  ret->sort_text = SortTextForAlbum(name);
-
-  // TODO: These should be async
-  /*if (!art_manual.isNull())
-    ret->cover_art.load(art_manual);
-  if (!art_automatic.isNull() && ret->cover_art.isNull())
-    ret->cover_art.load(art_automatic);*/
-
-  ret->artist = compilation ? QString() : artist;
-
-  if (signal)
-    endInsertRows();
-
-  return ret;
-}
-
-LibraryItem* Library::CreateSongNode(bool signal, const Song& song, LibraryItem* parent) {
-  if (signal)
-    beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
-
-  LibraryItem* ret = new LibraryItem(LibraryItem::Type_Song, song.title(), parent);
-  ret->lazy_loaded = true;
-  ret->display_text = song.PrettyTitleWithArtist();
-  ret->song = song;
-
-  song_nodes_[song.id()] = ret;
-
-  if (signal)
-    endInsertRows();
-
-  return ret;
+  case QueryOptions::GroupBy_None:
+  default:
+    Q_ASSERT(0);
+    return QString();
+  }
 }
 
 void Library::SongsDeleted(const SongList& songs) {
   // Delete song nodes
+  QSet<LibraryItem*> parents;
   foreach (const Song& song, songs) {
     if (song_nodes_.contains(song.id())) {
       LibraryItem* node = song_nodes_[song.id()];
+
+      if (node->parent != root_)
+        parents << node->parent;
 
       beginRemoveRows(ItemToIndex(node->parent), node->row, node->row);
       node->parent->Delete(node->row);
       song_nodes_.remove(song.id());
       endRemoveRows();
+    } else {
+      // If we get here it means some of the songs we want to delete haven't
+      // been lazy-loaded yet.  This is bad, because it would mean that to
+      // clean up empty parents we would need to lazy-load them all
+      // individually.  This can take a very long time, so better to just
+      // reset the model.
+      Reset();
+      return;
     }
   }
 
-  // Delete now-empty album nodes
-  foreach (const Song& song, songs) {
-    LibraryItem* artist = NULL;
+  // Now delete empty parents
+  QSet<QString> divider_keys;
+  while (!parents.isEmpty()) {
+    foreach (LibraryItem* node, parents) {
+      parents.remove(node);
+      if (node->children.count() != 0)
+        continue;
 
-    if (song.is_compilation() && compilation_artist_node_ &&
-        compilation_artist_node_->lazy_loaded)
-      artist = compilation_artist_node_;
-    else if (!song.is_compilation() &&
-             artist_nodes_.contains(song.artist()) &&
-             artist_nodes_[song.artist()]->lazy_loaded)
-      artist = artist_nodes_[song.artist()];
+      // Consider its parent for the next round
+      if (node->parent != root_)
+        parents << node->parent;
 
-    if (artist == NULL)
-      continue;
+      // Maybe consider its divider node
+      if (node->container_level == 0)
+        divider_keys << DividerKey(query_options_.group_by[0], node);
 
-    LibraryItem* node = artist->ChildByKey(song.album());
-    if (!node)
-      continue;
+      // Special case the Various Artists node
+      if (node == compilation_artist_node_)
+        compilation_artist_node_ = NULL;
+      else
+        container_nodes_[node->container_level].remove(node->key);
 
-    LazyPopulate(node);
-
-    if (node->children.count() == 0) {
+      // It was empty - delete it
       beginRemoveRows(ItemToIndex(node->parent), node->row, node->row);
       node->parent->Delete(node->row);
       endRemoveRows();
     }
   }
 
-  // Delete now-empty artist nodes
-  foreach (const Song& song, songs) {
-    // Was it a compilation?
-    LibraryItem* node = NULL;
-    if (song.is_compilation())
-      node = compilation_artist_node_;
-    else
-      node = artist_nodes_.contains(song.artist()) ? artist_nodes_[song.artist()] : NULL;
+  // Delete empty dividers
+  foreach (const QString& divider_key, divider_keys) {
+    if (!divider_nodes_.contains(divider_key))
+      continue;
 
-    if (node) {
-      LazyPopulate(node);
-
-      if (node->children.count() == 0) {
-        beginRemoveRows(ItemToIndex(node->parent), node->row, node->row);
-        node->parent->Delete(node->row);
-
-        if (song.is_compilation())
-          compilation_artist_node_ = NULL;
-        else
-          artist_nodes_.remove(song.artist());
-
-        endRemoveRows();
+    bool found = false;
+    foreach (LibraryItem* node, container_nodes_[0].values()) {
+      if (DividerKey(query_options_.group_by[0], node) == divider_key) {
+        found = true;
+        break;
       }
     }
-  }
 
-  // Delete now-empty dividers
-  foreach (const Song& song, songs) {
-    QString sort_text(SortTextForArtist(song.artist()));
-    QChar divider_char(DividerChar(sort_text));
-    if (!divider_char.isNull() && !sort_text.isEmpty() &&
-        divider_nodes_.contains(divider_char)) {
-      bool found = false;
-      foreach (LibraryItem* artist_node, artist_nodes_.values()) {
-        if (artist_node->sort_text.startsWith(divider_char)) {
-          found = true;
-          break;
-        }
-      }
+    if (found)
+      continue;
 
-      if (!found) {
-        int row = divider_nodes_[divider_char]->row;
-        beginRemoveRows(ItemToIndex(root_), row, row);
-        root_->Delete(row);
-        endRemoveRows();
-        divider_nodes_.remove(divider_char);
-      }
-    }
+    // Remove the divider
+    int row = divider_nodes_[divider_key]->row;
+    beginRemoveRows(ItemToIndex(root_), row, row);
+    root_->Delete(row);
+    endRemoveRows();
+    divider_nodes_.remove(divider_key);
   }
 }
 
@@ -362,113 +330,337 @@ QVariant Library::data(const QModelIndex& index, int role) const {
 }
 
 QVariant Library::data(const LibraryItem* item, int role) const {
+  QueryOptions::GroupBy container_type =
+      item->type == LibraryItem::Type_Container ?
+      query_options_.group_by[item->container_level] : QueryOptions::GroupBy_None;
+
   switch (role) {
     case Qt::DisplayRole:
       return item->DisplayText();
 
     case Qt::DecorationRole:
-      switch (item->type) {
-        case LibraryItem::Type_Album:
-        case LibraryItem::Type_CompilationAlbum: {
-          // TODO
-          /*if (item->cover_art.isNull())
-            return no_cover_icon_;
-          else
-            return QIcon(item->cover_art);*/
-
-          return album_icon_;
-        }
-        case LibraryItem::Type_Artist:
-        case LibraryItem::Type_CompilationArtist:
-          return artist_icon_;
+      switch (item->type)
+        case LibraryItem::Type_Container:
+          switch (container_type) {
+            case QueryOptions::GroupBy_Album:
+              return album_icon_;
+            case QueryOptions::GroupBy_Artist:
+              return artist_icon_;
+            default:
+              break;
+          }
         default:
           break;
-      }
       break;
 
     case Role_Type:
       return item->type;
 
+    case Role_ContainerType:
+      return container_type;
+
     case Role_Key:
       return item->key;
 
     case Role_Artist:
-      return item->artist;
+      return item->metadata.artist();
 
     case Role_SortText:
       if (item->type == LibraryItem::Type_Song)
-        return item->song.disc() * 1000 + item->song.track();
+        return item->metadata.disc() * 1000 + item->metadata.track();
       return item->SortText();
   }
   return QVariant();
 }
 
-void Library::LazyPopulate(LibraryItem* item) {
-  if (item->lazy_loaded)
+void Library::LazyPopulate(LibraryItem* parent, bool signal) {
+  if (parent->lazy_loaded)
     return;
+  parent->lazy_loaded = true;
 
-  switch (item->type) {
-    case LibraryItem::Type_CompilationArtist:
-      foreach (const LibraryBackendInterface::Album& album,
-               backend_->Worker()->GetCompilationAlbums(query_options_))
-        CreateAlbumNode(false, album.album_name, item, true, album.art_automatic, album.art_manual, album.artist);
-      break;
+  // Information about what we want the children to be
+  int child_level = parent->container_level + 1;
+  QueryOptions::GroupBy child_type = query_options_.group_by[child_level];
 
-    case LibraryItem::Type_CompilationAlbum:
-      foreach (const Song& song, backend_->Worker()->GetCompilationSongs(item->key, query_options_))
-        CreateSongNode(false, song, item);
-      break;
+  // Initialise the query
+  LibraryQuery q(query_options_);
+  InitQuery(child_type, &q);
 
-    case LibraryItem::Type_Artist:
-      foreach (const LibraryBackendInterface::Album& album,
-               backend_->Worker()->GetAlbumsByArtist(item->key, query_options_))
-        CreateAlbumNode(false, album.album_name, item, false, album.art_automatic, album.art_manual, album.artist);
-      break;
-
-    case LibraryItem::Type_Album:
-      foreach (const Song& song, backend_->Worker()->GetSongs(item->parent->key, item->key, query_options_))
-        CreateSongNode(false, song, item);
-      break;
-
-    default:
-      qWarning("Tried to LazyPopulate a bad item type");
-      break;
+  // Top-level artists is special - we don't want compilation albums appearing
+  if (child_level == 0 && child_type == QueryOptions::GroupBy_Artist) {
+    q.AddCompilationRequirement(false);
   }
 
-  item->lazy_loaded = true;
+  // Walk up through the item's parents adding filters as necessary
+  LibraryItem* p = parent;
+  while (p != root_) {
+    FilterQuery(query_options_.group_by[p->container_level], p, &q);
+    p = p->parent;
+  }
+
+  // Execute the query
+  if (!backend_->Worker()->ExecQuery(&q))
+    return;
+
+  // Step through the results
+  while (q.Next()) {
+    // Create the item - it will get inserted into the model here
+    LibraryItem* item =
+        ItemFromQuery(child_type, signal, child_level == 0, parent, q);
+    item->container_level = child_level;
+
+    // Save a pointer to it for later
+    if (child_type == QueryOptions::GroupBy_None)
+      song_nodes_[item->metadata.id()] = item;
+    else
+      container_nodes_[child_level][item->key] = item;
+  }
 }
 
 void Library::Reset() {
   delete root_;
-  artist_nodes_.clear();
   song_nodes_.clear();
+  container_nodes_[0].clear();
+  container_nodes_[1].clear();
+  container_nodes_[2].clear();
   divider_nodes_.clear();
   compilation_artist_node_ = NULL;
 
   root_ = new LibraryItem(this);
-  root_->lazy_loaded = true;
+  root_->lazy_loaded = false;
 
   // Various artists?
-  if (backend_->Worker()->HasCompilations(query_options_))
-    CreateCompilationArtistNode(false);
+  if (query_options_.group_by[0] == QueryOptions::GroupBy_Artist &&
+      backend_->Worker()->HasCompilations(query_options_))
+    CreateCompilationArtistNode(false, root_);
 
-  // Populate artists
-  foreach (const QString& artist, backend_->Worker()->GetAllArtists(query_options_))
-    CreateArtistNode(false, artist);
+  // Populate top level
+  LazyPopulate(root_, false);
 
   reset();
 }
 
-QString Library::PrettyArtist(QString artist) const {
-  if (artist.isEmpty()) {
-    artist = tr("Unknown");
+void Library::InitQuery(QueryOptions::GroupBy type, LibraryQuery* q) {
+  switch (type) {
+  case QueryOptions::GroupBy_Artist:
+    q->SetColumnSpec("DISTINCT artist");
+    break;
+  case QueryOptions::GroupBy_Album:
+    q->SetColumnSpec("DISTINCT album");
+    break;
+  case QueryOptions::GroupBy_Composer:
+    q->SetColumnSpec("DISTINCT composer");
+    break;
+  case QueryOptions::GroupBy_YearAlbum:
+    q->SetColumnSpec("DISTINCT year, album");
+    break;
+  case QueryOptions::GroupBy_Year:
+    q->SetColumnSpec("DISTINCT year");
+    break;
+  case QueryOptions::GroupBy_Genre:
+    q->SetColumnSpec("DISTINCT genre");
+    break;
+  case QueryOptions::GroupBy_None:
+    q->SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
+    break;
+  }
+}
+
+void Library::FilterQuery(QueryOptions::GroupBy type, LibraryItem* item,
+                          LibraryQuery* q) {
+  switch (type) {
+  case QueryOptions::GroupBy_Artist:
+    if (item == compilation_artist_node_)
+      q->AddCompilationRequirement(true);
+    else {
+      if (item->container_level == 0) // Stupid hack
+        q->AddCompilationRequirement(false);
+      q->AddWhere("artist", item->key);
+    }
+    break;
+  case QueryOptions::GroupBy_Album:
+    q->AddWhere("album", item->key);
+    break;
+  case QueryOptions::GroupBy_YearAlbum:
+    q->AddWhere("year", item->metadata.year());
+    q->AddWhere("album", item->metadata.album());
+    break;
+  case QueryOptions::GroupBy_Year:
+    q->AddWhere("year", item->key);
+    break;
+  case QueryOptions::GroupBy_Composer:
+    q->AddWhere("composer", item->key);
+    break;
+  case QueryOptions::GroupBy_Genre:
+    q->AddWhere("genre", item->key);
+    break;
+  case QueryOptions::GroupBy_None:
+    Q_ASSERT(0);
+    break;
+  }
+}
+
+LibraryItem* Library::InitItem(QueryOptions::GroupBy type,
+                               bool signal, LibraryItem *parent) {
+  LibraryItem::Type item_type =
+      type == QueryOptions::GroupBy_None ? LibraryItem::Type_Song :
+      LibraryItem::Type_Container;
+
+  if (signal)
+    beginInsertRows(ItemToIndex(parent),
+                    parent->children.count(),parent->children.count());
+
+  // Initialise the item depending on what type it's meant to be
+  return new LibraryItem(item_type, parent);
+}
+
+LibraryItem* Library::ItemFromQuery(QueryOptions::GroupBy type,
+                                    bool signal, bool create_divider,
+                                    LibraryItem* parent, const LibraryQuery& q) {
+  LibraryItem* item = InitItem(type, signal, parent);
+  int year = 0;
+
+  switch (type) {
+  case QueryOptions::GroupBy_Artist:
+    item->key = q.Value(0).toString();
+    item->display_text = TextOrUnknown(item->key);
+    item->sort_text = SortTextForArtist(item->key);
+    break;
+
+  case QueryOptions::GroupBy_YearAlbum:
+    year = qMax(0, q.Value(0).toInt());
+    item->metadata.set_year(year);
+    item->metadata.set_album(q.Value(1).toString());
+    item->key = PrettyYearAlbum(year, item->metadata.album());
+    item->sort_text = SortTextForYear(year) + item->metadata.album();
+    break;
+
+  case QueryOptions::GroupBy_Year:
+    year = qMax(0, q.Value(0).toInt());
+    item->key = QString::number(year);
+    item->sort_text = SortTextForYear(year);
+    break;
+
+  case QueryOptions::GroupBy_Composer:
+  case QueryOptions::GroupBy_Genre:
+  case QueryOptions::GroupBy_Album:
+    item->key = q.Value(0).toString();
+    item->display_text = TextOrUnknown(item->key);
+    item->sort_text = SortText(item->key);
+    break;
+
+  case QueryOptions::GroupBy_None:
+    item->metadata.InitFromQuery(q);
+    item->key = item->metadata.title();
+    item->display_text = item->metadata.PrettyTitleWithArtist();
+    break;
   }
 
-  return artist;
+  FinishItem(type, signal, create_divider, parent, item);
+  return item;
+}
+
+LibraryItem* Library::ItemFromSong(QueryOptions::GroupBy type,
+                                   bool signal, bool create_divider,
+                                   LibraryItem* parent, const Song& s) {
+  LibraryItem* item = InitItem(type, signal, parent);
+  int year = 0;
+
+  switch (type) {
+  case QueryOptions::GroupBy_Artist:
+    item->key = s.artist();
+    item->display_text = TextOrUnknown(item->key);
+    item->sort_text = SortTextForArtist(item->key);
+    break;
+
+  case QueryOptions::GroupBy_YearAlbum:
+    year = qMax(0, s.year());
+    item->metadata.set_year(year);
+    item->metadata.set_album(s.album());
+    item->key = PrettyYearAlbum(year, s.album());
+    item->sort_text = SortTextForYear(year) + s.album();
+    break;
+
+  case QueryOptions::GroupBy_Year:
+    year = qMax(0, s.year());
+    item->key = QString::number(year);
+    item->sort_text = SortTextForYear(year);
+    break;
+
+  case QueryOptions::GroupBy_Composer:                      item->key = s.composer();
+  case QueryOptions::GroupBy_Genre: if (item->key.isNull()) item->key = s.genre();
+  case QueryOptions::GroupBy_Album: if (item->key.isNull()) item->key = s.album();
+    item->display_text = TextOrUnknown(item->key);
+    item->sort_text = SortText(item->key);
+    break;
+
+  case QueryOptions::GroupBy_None:
+    item->metadata = s;
+    item->key = s.title();
+    item->display_text = s.PrettyTitleWithArtist();
+    break;
+  }
+
+  FinishItem(type, signal, create_divider, parent, item);
+  return item;
+}
+
+void Library::FinishItem(QueryOptions::GroupBy type,
+                         bool signal, bool create_divider,
+                         LibraryItem *parent, LibraryItem *item) {
+  if (type == QueryOptions::GroupBy_None)
+    item->lazy_loaded = true;
+
+  if (signal)
+    endInsertRows();
+
+  // Create the divider entry if we're supposed to
+  if (create_divider) {
+    QString divider_key = DividerKey(type, item);
+
+    if (!divider_key.isEmpty() && !divider_nodes_.contains(divider_key)) {
+      if (signal)
+        beginInsertRows(ItemToIndex(parent), parent->children.count(),
+                        parent->children.count());
+
+      LibraryItem* divider =
+          new LibraryItem(LibraryItem::Type_Divider, root_);
+      divider->key = divider_key;
+      divider->display_text = DividerDisplayText(type, divider_key);
+      divider->lazy_loaded = true;
+
+      divider_nodes_[divider_key] = divider;
+
+      if (signal)
+        endInsertRows();
+    }
+  }
+}
+
+QString Library::TextOrUnknown(const QString& text) const {
+  if (text.isEmpty()) {
+    return tr("Unknown");
+  }
+  return text;
+}
+
+QString Library::PrettyYearAlbum(int year, const QString& album) const {
+  return QString::number(year) + " - " + TextOrUnknown(album);
+}
+
+QString Library::SortText(QString text) const {
+  if (text.isEmpty()) {
+    text = " unknown";
+  } else {
+    text = text.toLower();
+  }
+  text = text.remove(QRegExp("[^\\w ]"));
+
+  return text;
 }
 
 QString Library::SortTextForArtist(QString artist) const {
-  artist = SortTextForAlbum(artist);
+  artist = SortText(artist);
 
   if (artist.startsWith("the ")) {
     artist = artist.right(artist.length() - 4) + ", the";
@@ -477,32 +669,15 @@ QString Library::SortTextForArtist(QString artist) const {
   return artist;
 }
 
-QString Library::PrettyAlbum(QString album) const {
-  if (album.isEmpty()) {
-    album = tr("Unknown");
-  }
-
-  return album;
-}
-
-QString Library::SortTextForAlbum(QString album) const {
-  if (album.isEmpty()) {
-    album = " unknown";
-  } else {
-    album = album.toLower();
-  }
-  album = album.remove(QRegExp("[^\\w ]"));
-
-  return album;
+QString Library::SortTextForYear(int year) const {
+  QString str = QString::number(year);
+  return QString("0").repeated(qMax(0, 4 - str.length())) + str;
 }
 
 Qt::ItemFlags Library::flags(const QModelIndex& index) const {
   switch (IndexToItem(index)->type) {
-  case LibraryItem::Type_Album:
-  case LibraryItem::Type_Artist:
   case LibraryItem::Type_Song:
-  case LibraryItem::Type_CompilationAlbum:
-  case LibraryItem::Type_CompilationArtist:
+  case LibraryItem::Type_Container:
     return Qt::ItemIsSelectable |
            Qt::ItemIsEnabled |
            Qt::ItemIsDragEnabled;
@@ -541,10 +716,7 @@ bool Library::CompareItems(const LibraryItem* a, const LibraryItem* b) const {
 
 void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const {
   switch (item->type) {
-    case LibraryItem::Type_Album:
-    case LibraryItem::Type_Artist:
-    case LibraryItem::Type_CompilationAlbum:
-    case LibraryItem::Type_CompilationArtist: {
+    case LibraryItem::Type_Container: {
       const_cast<Library*>(this)->LazyPopulate(item);
 
       QList<LibraryItem*> children = item->children;
@@ -557,8 +729,8 @@ void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* song
     }
 
     case LibraryItem::Type_Song:
-      urls->append(QUrl::fromLocalFile(item->song.filename()));
-      songs->append(item->song);
+      urls->append(QUrl::fromLocalFile(item->metadata.filename()));
+      songs->append(item->metadata);
       break;
 
     default:
@@ -593,4 +765,13 @@ bool Library::canFetchMore(const QModelIndex &parent) const {
 
   LibraryItem* item = IndexToItem(parent);
   return !item->lazy_loaded;
+}
+
+void Library::SetGroupBy(QueryOptions::GroupBy g[3]) {
+  query_options_.group_by[0] = g[0];
+  query_options_.group_by[1] = g[1];
+  query_options_.group_by[2] = g[2];
+
+  if (!waiting_for_threads_)
+    Reset();
 }

@@ -467,13 +467,11 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
   query.SetColumnSpec("DISTINCT artist");
   query.AddCompilationRequirement(false);
 
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return QStringList();
+  if (!ExecQuery(&query)) return QStringList();
 
   QStringList ret;
-  while (q.next()) {
-    ret << q.value(0).toString();
+  while (query.Next()) {
+    ret << query.Value(0).toString();
   }
   return ret;
 }
@@ -494,14 +492,12 @@ SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, c
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
 
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return SongList();
+  if (!ExecQuery(&query)) return SongList();
 
   SongList ret;
-  while (q.next()) {
+  while (query.Next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(query);
     ret << song;
   }
   return ret;
@@ -528,11 +524,9 @@ bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
   query.SetColumnSpec("ROWID");
   query.AddCompilationRequirement(true);
 
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return false;
+  if (!ExecQuery(&query)) return false;
 
-  return q.next();
+  return query.Next();
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
@@ -545,14 +539,12 @@ SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOp
   query.AddCompilationRequirement(true);
   query.AddWhere("album", album);
 
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return SongList();
+  if (!ExecQuery(&query)) return SongList();
 
   SongList ret;
-  while (q.next()) {
+  while (query.Next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(query);
     ret << song;
   }
   return ret;
@@ -673,20 +665,18 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     query.AddWhere("artist", artist);
   }
 
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return ret;
+  if (!ExecQuery(&query)) return ret;
 
   QString last_album;
   QString last_artist;
-  while (q.next()) {
-    bool compilation = q.value(2).toBool() | q.value(3).toBool();
+  while (query.Next()) {
+    bool compilation = query.Value(2).toBool() | query.Value(3).toBool();
 
     Album info;
-    info.artist = compilation ? QString() : q.value(1).toString();
-    info.album_name = q.value(0).toString();
-    info.art_automatic = q.value(4).toString();
-    info.art_manual = q.value(5).toString();
+    info.artist = compilation ? QString() : query.Value(1).toString();
+    info.album_name = query.Value(0).toString();
+    info.art_automatic = query.Value(4).toString();
+    info.art_manual = query.Value(5).toString();
 
     if (info.artist == last_artist && info.album_name == last_album)
       continue;
@@ -710,13 +700,11 @@ LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const Q
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
 
-  QSqlQuery q(query.Query(Connect()));
-  q.exec();
-  if (CheckErrors(q.lastError())) return ret;
+   if (!ExecQuery(&query)) return ret;
 
-  if (q.next()) {
-    ret.art_automatic = q.value(0).toString();
-    ret.art_manual = q.value(1).toString();
+  if (query.Next()) {
+    ret.art_automatic = query.Value(0).toString();
+    ret.art_manual = query.Value(1).toString();
   }
 
   return ret;
@@ -761,14 +749,12 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
   if (!artist.isNull())
     query.AddWhere("artist", artist);
 
-  QSqlQuery q(query.Query(db));
-  q.exec();
-  CheckErrors(q.lastError());
+  if (!ExecQuery(&query)) return;
 
   SongList deleted_songs;
-  while (q.next()) {
+  while (query.Next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(query);
     deleted_songs << song;
   }
 
@@ -780,7 +766,7 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
   if (!artist.isEmpty())
     sql += " AND artist = :artist";
 
-  q = QSqlQuery(sql, db);
+  QSqlQuery q(sql, db);
   q.bindValue(":forced_compilation_on", on ? 1 : 0);
   q.bindValue(":forced_compilation_off", on ? 0 : 1);
   q.bindValue(":album", album);
@@ -791,14 +777,12 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
   CheckErrors(q.lastError());
 
   // Now get the updated songs
-  q = QSqlQuery(query.Query(db));
-  q.exec();
-  CheckErrors(q.lastError());
+  if (!ExecQuery(&query)) return;
 
   SongList added_songs;
-  while (q.next()) {
+  while (query.Next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(query);
     added_songs << song;
   }
 
@@ -806,4 +790,8 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
     emit SongsDeleted(deleted_songs);
     emit SongsDiscovered(added_songs);
   }
+}
+
+bool LibraryBackend::ExecQuery(LibraryQuery *q) {
+  return !CheckErrors(q->Exec(Connect()));
 }

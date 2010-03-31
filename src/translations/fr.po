@@ -639,12 +639,12 @@ msgid "Tag"
 msgstr "Tag"
 
 #. ts-context Library
-#: ../library.cpp:161
+#: ../library.cpp:186
 msgid "Various Artists"
 msgstr "Compilations d'artistes"
 
 #. ts-context Library
-#: ../library.cpp:464 ../library.cpp:482
+#: ../library.cpp:642
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -751,8 +751,8 @@ msgid "Previous track"
 msgstr "Piste précédente"
 
 #. ts-context MainWindow
-#: ../mainwindow.ui:517 ../mainwindow.cpp:244 ../mainwindow.cpp:379
-#: ../mainwindow.cpp:395 ../mainwindow.cpp:576
+#: ../mainwindow.ui:517 ../mainwindow.cpp:257 ../mainwindow.cpp:399
+#: ../mainwindow.cpp:415 ../mainwindow.cpp:596
 msgid "Play"
 msgstr "Lecture"
 
@@ -777,7 +777,7 @@ msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
 #. ts-context MainWindow
-#: ../mainwindow.ui:559 ../mainwindow.cpp:246
+#: ../mainwindow.ui:559 ../mainwindow.cpp:259
 msgid "Stop after this track"
 msgstr "Arrêter la lecture après cette piste"
 
@@ -877,7 +877,7 @@ msgid "Open media..."
 msgstr "Ouvrir un media..."
 
 #. ts-context MainWindow
-#: ../mainwindow.ui:728 ../mainwindow.cpp:358
+#: ../mainwindow.ui:728 ../mainwindow.cpp:378
 msgid "&Hide tray icon"
 msgstr "&Masquer l'icône"
 
@@ -902,27 +902,69 @@ msgid "Remove from playlist"
 msgstr "Supprimer de la liste de lecture"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:240
+#: ../mainwindow.ui:764
+#, fuzzy
+msgid "Group by Artist"
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.ui:772
+#, fuzzy
+msgid "Group by Artist/Album"
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.ui:780
+#, fuzzy
+msgid "Group by Artist/Year - Album"
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.ui:788
+#, fuzzy
+msgid "Group by Album"
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.ui:796
+#, fuzzy
+msgid "Group by Genre/Album"
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.ui:804
+#, fuzzy
+msgid "Group by Genre/Artist/Album"
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.ui:812
+#, fuzzy
+msgid "Advanced grouping..."
+msgstr ""
+
+#. ts-context MainWindow
+#: ../mainwindow.cpp:253
 msgid "Configure library..."
 msgstr "Configurer votre bibliothèque..."
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:333 ../mainwindow.cpp:354
+#: ../mainwindow.cpp:353 ../mainwindow.cpp:374
 msgid "&Show tray icon"
 msgstr "&Afficher l'icône"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:406 ../mainwindow.cpp:573
+#: ../mainwindow.cpp:426 ../mainwindow.cpp:593
 msgid "Pause"
 msgstr "Pause"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:623
+#: ../mainwindow.cpp:643
 msgid "Set %1 to \"%2\"..."
 msgstr "Définir %1 à la valeur \"%2\"..."
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:625
+#: ../mainwindow.cpp:645
 msgid "Edit tag \"%1\"..."
 msgstr "Modifer le tag \"%1\"..."
 

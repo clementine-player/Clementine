@@ -178,9 +178,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
                         ->mapToSource(context_menu_index_);
 
-  int type = library_->data(context_menu_index_, Library::Role_Type).toInt();
-  bool enable_various = type == LibraryItem::Type_Album ||
-                        type == LibraryItem::Type_CompilationAlbum;
+  int type = library_->data(context_menu_index_, Library::Role_ContainerType).toInt();
+  bool enable_various = type == QueryOptions::GroupBy_Album;
 
   show_in_various_->setEnabled(enable_various);
   no_show_in_various_->setEnabled(enable_various);

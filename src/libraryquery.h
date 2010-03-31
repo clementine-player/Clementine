@@ -26,10 +26,22 @@
 class Song;
 
 struct QueryOptions {
-  QueryOptions() : max_age(-1) {}
+  QueryOptions();
+
+  // These values get saved in QSettings - don't change them
+  enum GroupBy {
+    GroupBy_None = 0,
+    GroupBy_Artist = 1,
+    GroupBy_Album = 2,
+    GroupBy_YearAlbum = 3,
+    GroupBy_Year = 4,
+    GroupBy_Composer = 5,
+    GroupBy_Genre = 6,
+  };
 
   bool Matches(const Song& song) const;
 
+  GroupBy group_by[3];
   QString filter;
   int max_age;
 };
@@ -45,13 +57,19 @@ class LibraryQuery {
   void AddWhereLike(const QString& column, const QVariant& value);
   void AddCompilationRequirement(bool compilation);
 
-  QSqlQuery Query(QSqlDatabase db) const;
+  QSqlError Exec(QSqlDatabase db);
+  bool Next();
+  QVariant Value(int column) const;
+
+  operator const QSqlQuery& () const { return query_; }
 
  private:
   QString column_spec_;
   QString order_by_;
   QStringList where_clauses_;
   QVariantList bound_values_;
+
+  QSqlQuery query_;
 };
 
 #endif // LIBRARYQUERY_H

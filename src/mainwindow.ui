@@ -41,7 +41,7 @@
        <bool>true</bool>
       </property>
       <property name="editTriggers">
-       <set>QAbstractItemView::SelectedClicked|QAbstractItemView::EditKeyPressed</set>
+       <set>QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
       </property>
       <property name="dragEnabled">
        <bool>true</bool>
@@ -754,6 +754,62 @@
    </property>
    <property name="text">
     <string>Remove from playlist</string>
+   </property>
+  </action>
+  <action name="group_by_artist">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Group by Artist</string>
+   </property>
+  </action>
+  <action name="group_by_artist_album">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Group by Artist/Album</string>
+   </property>
+  </action>
+  <action name="group_by_artist_yearalbum">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Group by Artist/Year - Album</string>
+   </property>
+  </action>
+  <action name="group_by_album">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Group by Album</string>
+   </property>
+  </action>
+  <action name="group_by_genre_album">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Group by Genre/Album</string>
+   </property>
+  </action>
+  <action name="group_by_genre_artist_album">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Group by Genre/Artist/Album</string>
+   </property>
+  </action>
+  <action name="group_by_advanced">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Advanced grouping...</string>
    </property>
   </action>
  </widget>

@@ -617,13 +617,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Library</name>
     <message>
-        <location filename="../library.cpp" line="161"/>
+        <location filename="../library.cpp" line="186"/>
         <source>Various Artists</source>
         <translation>Compilations d&apos;artistes</translation>
     </message>
     <message>
-        <location filename="../library.cpp" line="464"/>
-        <location filename="../library.cpp" line="482"/>
+        <location filename="../library.cpp" line="642"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
@@ -741,10 +740,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="517"/>
-        <location filename="../mainwindow.cpp" line="244"/>
-        <location filename="../mainwindow.cpp" line="379"/>
-        <location filename="../mainwindow.cpp" line="395"/>
-        <location filename="../mainwindow.cpp" line="576"/>
+        <location filename="../mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="596"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -770,7 +769,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="559"/>
-        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="259"/>
         <source>Stop after this track</source>
         <translation>Arrêter la lecture après cette piste</translation>
     </message>
@@ -873,7 +872,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="728"/>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Masquer l&apos;icône</translation>
     </message>
@@ -898,29 +897,64 @@ p, li { white-space: pre-wrap; }
         <translation>Supprimer de la liste de lecture</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="240"/>
+        <location filename="../mainwindow.ui" line="764"/>
+        <source>Group by Artist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="772"/>
+        <source>Group by Artist/Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="780"/>
+        <source>Group by Artist/Year - Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="788"/>
+        <source>Group by Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="796"/>
+        <source>Group by Genre/Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="804"/>
+        <source>Group by Genre/Artist/Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="812"/>
+        <source>Advanced grouping...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="253"/>
         <source>Configure library...</source>
         <translation>Configurer votre bibliothèque...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="333"/>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="353"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Afficher l&apos;icône</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
-        <location filename="../mainwindow.cpp" line="573"/>
+        <location filename="../mainwindow.cpp" line="426"/>
+        <location filename="../mainwindow.cpp" line="593"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="623"/>
+        <location filename="../mainwindow.cpp" line="643"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Définir %1 à la valeur &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="625"/>
+        <location filename="../mainwindow.cpp" line="645"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Modifer le tag &quot;%1&quot;...</translation>
     </message>

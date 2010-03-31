@@ -82,6 +82,7 @@ class MainWindow : public QMainWindow {
 
   void LibraryDoubleClick(const QModelIndex& index);
   void ClearLibraryFilter();
+  void GroupByClicked(QAction*);
 
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
@@ -106,6 +107,7 @@ class MainWindow : public QMainWindow {
 
  private:
   void SaveGeometry();
+  void UpdateGroupBySelection(QueryOptions::GroupBy g[3]);
 
  private:
   static const int kStateVersion;

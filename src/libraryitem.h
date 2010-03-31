@@ -28,25 +28,17 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
   enum Type {
     Type_Root,
     Type_Divider,
-    Type_CompilationArtist,
-    Type_CompilationAlbum,
-    Type_Artist,
-    Type_Album,
+    Type_Container,
     Type_Song,
   };
 
   LibraryItem(SimpleTreeModel<LibraryItem>* model)
-    : SimpleTreeItem<LibraryItem>(Type_Root, model) {}
-  LibraryItem(Type type, const QString& key = QString::null, LibraryItem* parent = NULL)
-    : SimpleTreeItem<LibraryItem>(type, key, parent) {}
+    : SimpleTreeItem<LibraryItem>(Type_Root, model), container_level(-1) {}
+  LibraryItem(Type type, LibraryItem* parent = NULL)
+    : SimpleTreeItem<LibraryItem>(type, parent), container_level(-1) {}
 
-  Song song;
-
-  // Maybe stores album cover art
-  QPixmap cover_art;
-
-  // Stores the artist of an album
-  QString artist;
+  int container_level;
+  Song metadata;
 };
 
 #endif // LIBRARYITEM_H

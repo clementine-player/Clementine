@@ -82,6 +82,8 @@ class LibraryBackendInterface : public QObject {
 
   virtual void UpdateCompilationsAsync() = 0;
 
+  virtual bool ExecQuery(LibraryQuery* q) = 0;
+
  public slots:
   virtual void LoadDirectories() = 0;
   virtual void UpdateTotalSongCount() = 0;
@@ -143,6 +145,8 @@ class LibraryBackend : public LibraryBackendInterface {
   void RemoveDirectory(const Directory& dir);
 
   void UpdateCompilationsAsync();
+
+  bool ExecQuery(LibraryQuery* q);
 
  public slots:
   void LoadDirectories();

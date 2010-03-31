@@ -741,6 +741,34 @@ p, li { white-space: pre-wrap; }
         <source>Remove from playlist</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Group by Artist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group by Artist/Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group by Artist/Year - Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group by Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group by Genre/Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group by Genre/Artist/Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced grouping...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>

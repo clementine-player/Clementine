@@ -19,6 +19,16 @@
 
 #include <QtDebug>
 #include <QDateTime>
+#include <QSqlError>
+
+QueryOptions::QueryOptions()
+  : max_age(-1)
+{
+  group_by[0] = GroupBy_Artist;
+  group_by[1] = GroupBy_Album;
+  group_by[2] = GroupBy_None;
+}
+
 
 LibraryQuery::LibraryQuery()
 {
@@ -65,7 +75,7 @@ void LibraryQuery::AddCompilationRequirement(bool compilation) {
   where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
 }
 
-QSqlQuery LibraryQuery::Query(QSqlDatabase db) const {
+QSqlError LibraryQuery::Exec(QSqlDatabase db) {
   QString sql = QString("SELECT %1 FROM songs").arg(column_spec_);
 
   if (!where_clauses_.isEmpty())
@@ -74,14 +84,23 @@ QSqlQuery LibraryQuery::Query(QSqlDatabase db) const {
   if (!order_by_.isEmpty())
     sql += " ORDER BY " + order_by_;
 
-  QSqlQuery q(sql, db);
+  query_ = QSqlQuery(sql, db);
 
   // Bind values
   foreach (const QVariant& value, bound_values_) {
-    q.addBindValue(value);
+    query_.addBindValue(value);
   }
 
-  return q;
+  query_.exec();
+  return query_.lastError();
+}
+
+bool LibraryQuery::Next() {
+  return query_.next();
+}
+
+QVariant LibraryQuery::Value(int column) const {
+  return query_.value(column);
 }
 
 bool QueryOptions::Matches(const Song& song) const {

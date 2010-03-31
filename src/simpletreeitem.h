@@ -26,7 +26,8 @@ template <typename T>
 class SimpleTreeItem {
  public:
   SimpleTreeItem(int _type, SimpleTreeModel<T>* _model); // For the root item
-  SimpleTreeItem(int _type, const QString& _key = QString::null, T* _parent = NULL);
+  SimpleTreeItem(int _type, const QString& _key, T* _parent = NULL);
+  SimpleTreeItem(int _type, T* _parent = NULL);
   virtual ~SimpleTreeItem();
 
   void InsertNotify(T* _parent);
@@ -67,6 +68,19 @@ template <typename T>
 SimpleTreeItem<T>::SimpleTreeItem(int _type, const QString& _key, T* _parent)
   : type(_type),
     key(_key),
+    lazy_loaded(false),
+    parent(_parent),
+    model(_parent ? _parent->model : NULL)
+{
+  if (parent) {
+    row = parent->children.count();
+    parent->children << static_cast<T*>(this);
+  }
+}
+
+template <typename T>
+SimpleTreeItem<T>::SimpleTreeItem(int _type, T* _parent)
+  : type(_type),
     lazy_loaded(false),
     parent(_parent),
     model(_parent ? _parent->model : NULL)

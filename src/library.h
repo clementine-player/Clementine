@@ -42,6 +42,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
   enum {
     Role_Type = Qt::UserRole + 1,
+    Role_ContainerType,
     Role_SortText,
     Role_Key,
     Role_Artist,
@@ -80,9 +81,11 @@ class Library : public SimpleTreeModel<LibraryItem> {
  public slots:
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);
+  void SetGroupBy(QueryOptions::GroupBy g[3]);
 
  protected:
-  void LazyPopulate(LibraryItem* item);
+  void LazyPopulate(LibraryItem* item) { LazyPopulate(item, false); }
+  void LazyPopulate(LibraryItem* item, bool signal);
 
  private slots:
   // From LibraryBackend
@@ -97,25 +100,37 @@ class Library : public SimpleTreeModel<LibraryItem> {
  private:
   void Initialise();
 
-  LibraryItem* CreateCompilationArtistNode(bool signal);
-  LibraryItem* CreateArtistNode(bool signal, const QString& name);
-  LibraryItem* CreateAlbumNode(bool signal, const QString& name,
-                               LibraryItem* parent, bool compilation,
-                               const QString& art_automatic,
-                               const QString& art_manual,
-                               const QString& artist);
-  LibraryItem* CreateSongNode(bool signal, const Song& song, LibraryItem* parent);
+  // Functions for working with queries and creating items
+  void InitQuery(QueryOptions::GroupBy type, LibraryQuery* q);
+  void FilterQuery(QueryOptions::GroupBy type,
+                   LibraryItem* item,LibraryQuery* q);
+  LibraryItem* ItemFromQuery(QueryOptions::GroupBy type,
+                             bool signal, bool create_divider,
+                             LibraryItem* parent, const LibraryQuery& q);
+  LibraryItem* ItemFromSong(QueryOptions::GroupBy type,
+                            bool signal, bool create_divider,
+                            LibraryItem* parent, const Song& s);
+  LibraryItem* CreateCompilationArtistNode(bool signal, LibraryItem* parent);
 
-  QString PrettyArtist(QString artist) const;
-  QString PrettyAlbum(QString album) const;
+  // Helpers for ItemFromQuery and ItemFromSong
+  LibraryItem* InitItem(QueryOptions::GroupBy type, bool signal, LibraryItem* parent);
+  void FinishItem(QueryOptions::GroupBy type, bool signal, bool create_divider,
+                  LibraryItem* parent, LibraryItem* item);
 
+  // Functions for manipulating text
+  QString TextOrUnknown(const QString& text) const;
+  QString PrettyYearAlbum(int year, const QString& album) const;
+
+  QString SortText(QString text) const;
   QString SortTextForArtist(QString artist) const;
-  QString SortTextForAlbum(QString album) const;
+  QString SortTextForYear(int year) const;
 
+  QString DividerKey(QueryOptions::GroupBy type, LibraryItem* item) const;
+  QString DividerDisplayText(QueryOptions::GroupBy type, const QString& key) const;
+
+  // Helpers
   QVariant data(const LibraryItem* item, int role) const;
-
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
-  QChar DividerChar(const QString& sort_text) const;
 
  private:
   EngineBase* engine_;
@@ -129,9 +144,16 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
   QueryOptions query_options_;
 
+  // Keyed on database ID
   QMap<int, LibraryItem*> song_nodes_;
-  QMap<QString, LibraryItem*> artist_nodes_;
-  QMap<QChar, LibraryItem*> divider_nodes_;
+
+  // Keyed on whatever the key is for that level - artist, album, year, etc.
+  QMap<QString, LibraryItem*> container_nodes_[3];
+
+  // Keyed on a letter, a year, a century, etc.
+  QMap<QString, LibraryItem*> divider_nodes_;
+
+  // Only applies if the first level is "artist"
   LibraryItem* compilation_artist_node_;
 
   QIcon artist_icon_;
