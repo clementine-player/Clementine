@@ -40,6 +40,7 @@ class AddStreamDialog;
 class AlbumCoverManager;
 class PlaylistSequence;
 class GlobalShortcuts;
+class GroupByDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -83,6 +84,7 @@ class MainWindow : public QMainWindow {
   void LibraryDoubleClick(const QModelIndex& index);
   void ClearLibraryFilter();
   void GroupByClicked(QAction*);
+  void LibraryGroupingChanged(const Library::Grouping& g);
 
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
@@ -107,7 +109,6 @@ class MainWindow : public QMainWindow {
 
  private:
   void SaveGeometry();
-  void UpdateGroupBySelection(Library::GroupBy g[Library::kMaxLevels]);
 
  private:
   static const int kStateVersion;
@@ -133,6 +134,7 @@ class MainWindow : public QMainWindow {
   SettingsDialog* settings_dialog_;
   AddStreamDialog* add_stream_dialog_;
   AlbumCoverManager* cover_manager_;
+  GroupByDialog* group_by_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

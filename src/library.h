@@ -61,9 +61,17 @@ class Library : public SimpleTreeModel<LibraryItem> {
   };
   QMetaEnum GroupByEnum() const;
 
-  // The tree has a maximum depth of 4 (not including the root) - 3 grouping
-  // levels like artist or album, and one final one for songs.
-  static const int kMaxLevels = 3;
+  struct Grouping {
+    Grouping() : first(GroupBy_None), second(GroupBy_None), third(GroupBy_None) {}
+    Grouping(GroupBy f, GroupBy s, GroupBy t) : first(f), second(s), third(t) {}
+
+    GroupBy first;
+    GroupBy second;
+    GroupBy third;
+
+    const GroupBy& operator [](int i) const;
+    GroupBy& operator [](int i);
+  };
 
   // Useful for tests.  The library takes ownership.
   void set_backend_factory(BackgroundThreadFactory<LibraryBackendInterface>* factory);
@@ -89,6 +97,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
  signals:
   void Error(const QString& message);
   void TotalSongCountUpdated(int count);
+  void GroupingChanged(const Library::Grouping& g);
 
   void ScanStarted();
   void ScanFinished();
@@ -98,7 +107,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
  public slots:
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);
-  void SetGroupBy(GroupBy g[kMaxLevels]);
+  void SetGroupBy(const Library::Grouping& g);
 
  protected:
   void LazyPopulate(LibraryItem* item) { LazyPopulate(item, false); }
@@ -166,13 +175,13 @@ class Library : public SimpleTreeModel<LibraryItem> {
   int waiting_for_threads_;
 
   QueryOptions query_options_;
-  GroupBy group_by_[kMaxLevels];
+  Grouping group_by_;
 
   // Keyed on database ID
   QMap<int, LibraryItem*> song_nodes_;
 
   // Keyed on whatever the key is for that level - artist, album, year, etc.
-  QMap<QString, LibraryItem*> container_nodes_[kMaxLevels];
+  QMap<QString, LibraryItem*> container_nodes_[3];
 
   // Keyed on a letter, a year, a century, etc.
   QMap<QString, LibraryItem*> divider_nodes_;

@@ -37,6 +37,7 @@
 #include "m3uparser.h"
 #include "xspfparser.h"
 #include "playlistsequence.h"
+#include "groupbydialog.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -78,6 +79,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     settings_dialog_(new SettingsDialog(this)),
     add_stream_dialog_(new AddStreamDialog(this)),
     cover_manager_(new AlbumCoverManager(network, this)),
+    group_by_dialog_(new GroupByDialog(this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))
@@ -242,7 +244,14 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   group_by_group_->addAction(ui_.group_by_genre_album);
   group_by_group_->addAction(ui_.group_by_genre_artist_album);
   group_by_group_->addAction(ui_.group_by_advanced);
+
   connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
+  connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
+          group_by_dialog_, SLOT(LibraryGroupingChanged(Library::Grouping)));
+  connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
+          SLOT(LibraryGroupingChanged(Library::Grouping)));
+  connect(group_by_dialog_, SIGNAL(Accepted(Library::Grouping)),
+          library_, SLOT(SetGroupBy(Library::Grouping)));
 
   // Library config menu
   QMenu* library_menu = new QMenu(this);
@@ -335,12 +344,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   ui_.file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
-  Library::GroupBy g[Library::kMaxLevels];
-  g[0] = Library::GroupBy(settings_.value("group_by1", int(Library::GroupBy_Artist)).toInt());
-  g[1] = Library::GroupBy(settings_.value("group_by2", int(Library::GroupBy_Album)).toInt());
-  g[2] = Library::GroupBy(settings_.value("group_by3", int(Library::GroupBy_None)).toInt());
-  library_->SetGroupBy(g);
-  UpdateGroupBySelection(g);
+  library_->SetGroupBy(Library::Grouping(
+      Library::GroupBy(settings_.value("group_by1", int(Library::GroupBy_Artist)).toInt()),
+      Library::GroupBy(settings_.value("group_by2", int(Library::GroupBy_Album)).toInt()),
+      Library::GroupBy(settings_.value("group_by3", int(Library::GroupBy_None)).toInt())));
 
   bool hidden = settings_.value("hidden", false).toBool();
   bool show_tray = settings_.value("showtray", true).toBool();
@@ -802,33 +809,33 @@ void MainWindow::PlaylistRemoveCurrent() {
 }
 
 void MainWindow::GroupByClicked(QAction* action) {
-  Library::GroupBy g[Library::kMaxLevels];
-  for (int i=0 ; i<Library::kMaxLevels ; ++i)
-    g[i] = Library::GroupBy_None;
+  Library::Grouping g;
 
   QStringList group_by = action->property("group_by").toStringList();
   if (group_by.isEmpty()) {
-    qWarning() << __PRETTY_FUNCTION__ << ": Unknown action";
+    group_by_dialog_->show();
     return;
   }
 
-  for (int i=0 ; i<group_by.size() && i<Library::kMaxLevels ; ++i) {
+  for (int i=0 ; i<group_by.size() ; ++i) {
     g[i] = Library::GroupBy(
         library_->GroupByEnum().keyToValue(group_by[i].toUtf8().constData()));
   }
 
   library_->SetGroupBy(g);
+}
 
+void MainWindow::LibraryGroupingChanged(const Library::Grouping& g) {
+  // Save the settings
   settings_.setValue("group_by1", int(g[0]));
   settings_.setValue("group_by2", int(g[1]));
   settings_.setValue("group_by3", int(g[2]));
-}
 
-void MainWindow::UpdateGroupBySelection(Library::GroupBy g[Library::kMaxLevels]) {
+  // Now make sure the correct action is checked
   foreach (QAction* action, group_by_group_->actions()) {
     QStringList group_by = action->property("group_by").toStringList();
     bool match = true;
-    for (int i=0 ; i<group_by.size() && i<Library::kMaxLevels ; ++i) {
+    for (int i=0 ; i<group_by.size() ; ++i) {
       if (g[i] != library_->GroupByEnum().keyToValue(group_by[i].toUtf8().constData())) {
         match = false;
         break;

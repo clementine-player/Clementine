@@ -66,6 +66,7 @@ set(CLEMENTINE-SOURCES
     backgroundthread.cpp
     osdpretty.cpp
     playlistdelegates.cpp
+    groupbydialog.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -124,6 +125,7 @@ set(CLEMENTINE-MOC-HEADERS
     globalshortcuts/globalshortcuts.h
     osdpretty.h
     playlistdelegates.h
+    groupbydialog.h
 )
 
 # UI files
@@ -144,6 +146,7 @@ set(CLEMENTINE-UI
     albumcovermanager.ui
     playlistsequence.ui
     osdpretty.ui
+    groupbydialog.ui
 )
 
 # Resource files

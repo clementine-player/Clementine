@@ -140,7 +140,7 @@ void Library::SongsDiscovered(const SongList& songs) {
 
     // Find parent containers in the tree
     LibraryItem* container = root_;
-    for (int i=0 ; i<kMaxLevels ; ++i) {
+    for (int i=0 ; i<3 ; ++i) {
       GroupBy type = group_by_[i];
       if (type == GroupBy_None) break;
 
@@ -227,7 +227,7 @@ QString Library::DividerKey(GroupBy type, LibraryItem* item) const {
     return QString(item->sort_text[0]);
 
   case GroupBy_Year:
-    return QString::number(item->sort_text.toInt() / 10 * 10);
+    return SortTextForYear(item->sort_text.toInt() / 10 * 10);
 
   case GroupBy_YearAlbum:
     return QString::number(item->metadata.year());
@@ -252,6 +252,8 @@ QString Library::DividerDisplayText(GroupBy type, const QString& key) const {
     // fallthrough
 
   case GroupBy_Year:
+    return QString::number(key.toInt()); // To remove leading 0s
+
   case GroupBy_YearAlbum:
     return key;
 
@@ -400,7 +402,7 @@ void Library::LazyPopulate(LibraryItem* parent, bool signal) {
 
   // Information about what we want the children to be
   int child_level = parent->container_level + 1;
-  GroupBy child_type = group_by_[child_level];
+  GroupBy child_type = child_level >= 3 ? GroupBy_None : group_by_[child_level];
 
   // Initialise the query.  child_type says what type of thing we want (artists,
   // songs, etc.)
@@ -561,7 +563,7 @@ LibraryItem* Library::ItemFromQuery(GroupBy type,
   case GroupBy_Year:
     year = qMax(0, q.Value(0).toInt());
     item->key = QString::number(year);
-    item->sort_text = SortTextForYear(year);
+    item->sort_text = SortTextForYear(year) + " ";
     break;
 
   case GroupBy_Composer:
@@ -607,7 +609,7 @@ LibraryItem* Library::ItemFromSong(GroupBy type,
   case GroupBy_Year:
     year = qMax(0, s.year());
     item->key = QString::number(year);
-    item->sort_text = SortTextForYear(year);
+    item->sort_text = SortTextForYear(year) + " ";
     break;
 
   case GroupBy_Composer:                      item->key = s.composer();
@@ -790,13 +792,13 @@ bool Library::canFetchMore(const QModelIndex &parent) const {
   return !item->lazy_loaded;
 }
 
-void Library::SetGroupBy(GroupBy g[kMaxLevels]) {
-  group_by_[0] = g[0];
-  group_by_[1] = g[1];
-  group_by_[2] = g[2];
+void Library::SetGroupBy(const Grouping& g) {
+  group_by_ = g;
 
   if (!waiting_for_threads_)
     Reset();
+
+  emit GroupingChanged(g);
 }
 
 QMetaEnum Library::GroupByEnum() const {
@@ -806,4 +808,24 @@ QMetaEnum Library::GroupByEnum() const {
       return o->enumerator(i);
   }
   return QMetaEnum();
+}
+
+const Library::GroupBy& Library::Grouping::operator [](int i) const {
+  switch (i) {
+    case 0: return first;
+    case 1: return second;
+    case 2: return third;
+  }
+  Q_ASSERT(0);
+  return first;
+}
+
+Library::GroupBy& Library::Grouping::operator [](int i) {
+  switch (i) {
+    case 0: return first;
+    case 1: return second;
+    case 2: return third;
+  }
+  Q_ASSERT(0);
+  return first;
 }
