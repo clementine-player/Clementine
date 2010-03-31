@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sk_SK">
+<TS version="2.0" language="pl_PL">
 <context>
     <name>About</name>
     <message>
-        <location filename="../about.cpp" line="27"/>
-        <source>About %1</source>
-        <translation>O programe %1</translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="29"/>
-        <source>Version %1</source>
-        <translation>Verzia %1</translation>
-    </message>
-    <message>
         <location filename="../about.ui" line="99"/>
         <source>Title</source>
-        <translation>Názov</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../about.ui" line="106"/>
         <source>Version</source>
-        <translation>Verzia</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <location filename="../about.ui" line="116"/>
@@ -44,13 +34,23 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://code.google.com/p/clementine-player/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;http://code.google.com/p/clementine-player/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Autori:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Autorzy:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;David Sansome &amp;lt;&lt;a href=&quot;mailto:me@davidsansome.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;me@davidsansome.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Poďakovanie:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Podziękowania dla:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mark Kretschmann &amp;lt;&lt;a href=&quot;mailto:markey@web.de&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;markey@web.de&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Max Howell &amp;lt;&lt;a href=&quot;mailto:max.howell@methylblue.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;max.howell@methylblue.com&lt;/span&gt;&lt;/a&gt;&amp;gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;... a všetkým prispievateľom Amarok-u.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;...oraz dla wszystkich zaangażowanych w rozwój Amaroka.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="27"/>
+        <source>About %1</source>
+        <translation>O programie %1</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="29"/>
+        <source>Version %1</source>
+        <translation>Wersja %1</translation>
     </message>
 </context>
 <context>
@@ -58,17 +58,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../addstreamdialog.ui" line="14"/>
         <source>Add Stream</source>
-        <translation>Pridať stream</translation>
+        <translation>Dodaj URL</translation>
     </message>
     <message>
         <location filename="../addstreamdialog.ui" line="20"/>
         <source>Enter the URL of an internet radio stream:</source>
-        <translation>Vložte URL internetového rádio streamu:</translation>
+        <translation>Dodaj URL radia internetowego:</translation>
     </message>
     <message>
         <location filename="../addstreamdialog.ui" line="30"/>
         <source>Save this stream in the Radio tab</source>
-        <translation>Uložiť tento stream na karte Rádio</translation>
+        <translation>Zapisz URL na karcie Radio</translation>
     </message>
 </context>
 <context>
@@ -76,32 +76,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../albumcovermanager.cpp" line="66"/>
         <source>All albums</source>
-        <translation>Všetky albumy</translation>
+        <translation>Wszystkie albumy</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="67"/>
         <source>Albums with covers</source>
-        <translation>Albumy s obalmi</translation>
+        <translation>Albumy z okładkami</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="68"/>
         <source>Albums without covers</source>
-        <translation>Albumy bez obalov</translation>
+        <translation>Albumy bez okładek</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="161"/>
         <source>All artists</source>
-        <translation>Všetci interpréti</translation>
+        <translation>Wszyscy wykonawcy</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="162"/>
         <source>Various artists</source>
-        <translation>Rôzni interpréti</translation>
+        <translation>Różni wykonawcy</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="399"/>
         <source>Choose manual cover</source>
-        <translation>Vybrať obal ručne</translation>
+        <translation>Wybierz okładkę ręcznie</translation>
     </message>
 </context>
 <context>
@@ -109,32 +109,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../analyzers/analyzercontainer.cpp" line="53"/>
         <source>No analyzer</source>
-        <translation>bez analyzéru</translation>
+        <translation>Bez analizatora</translation>
     </message>
     <message>
         <location filename="../analyzers/baranalyzer.cpp" line="19"/>
         <source>Bar analyzer</source>
-        <translation>prúžkový analyzér</translation>
+        <translation>Analizator słupkowy</translation>
     </message>
     <message>
         <location filename="../analyzers/blockanalyzer.cpp" line="24"/>
         <source>Block analyzer</source>
-        <translation>blokový analyzér</translation>
+        <translation>Analizator blokowy</translation>
     </message>
     <message>
         <location filename="../analyzers/boomanalyzer.cpp" line="8"/>
         <source>Boom analyzer</source>
-        <translation>Boom analyzér</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../analyzers/sonogram.cpp" line="18"/>
         <source>Sonogram</source>
-        <translation></translation>
+        <translation>Sonogram</translation>
     </message>
     <message>
         <location filename="../analyzers/turbine.cpp" line="15"/>
         <source>Turbine</source>
-        <translation>Turbína</translation>
+        <translation>Turbina</translation>
     </message>
 </context>
 <context>
@@ -142,69 +142,55 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../albumcovermanager.ui" line="14"/>
         <source>Cover Manager</source>
-        <translation>Správca obalov</translation>
+        <translation>Menadżer okładek</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="51"/>
         <source>Enter search terms here</source>
-        <translation>Sem napíšte výrazy na hľadanie</translation>
+        <translation>Wpisz szukane wyrażenie</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="58"/>
         <source>View</source>
-        <translation>Zobraziť</translation>
+        <translation>Pokaż</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="78"/>
         <source>Fetch Missing Covers</source>
-        <translation>Získať chýbajúce obaly</translation>
+        <translation>Pobierz brakujące okładki</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="136"/>
         <source>Show fullsize...</source>
-        <translation>Ukázať celú veľkosť...</translation>
+        <translation>Pokaż w pełnej wielkości...</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="145"/>
         <source>Fetch automatically</source>
-        <translation>Získavať automaticky</translation>
+        <translation>Pobierz automatycznie</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="154"/>
         <source>Choose manual cover...</source>
-        <translation>Vybrať obal ručne...</translation>
+        <translation>Wybierz okładkę ręcznie...</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.ui" line="163"/>
         <source>Unset cover</source>
-        <translation>Nenastavený obal</translation>
+        <translation>Usuń okładkę</translation>
     </message>
 </context>
 <context>
     <name>EditTagDialog</name>
     <message>
-        <location filename="../edittagdialog.cpp" line="28"/>
-        <source>[click to edit]</source>
-        <translation>[kliknite pre úpravu]</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../edittagdialog.cpp" line="90"/>
-        <source>Editing %n tracks</source>
-        <translation>
-            <numerusform>Upravovanie %n skladby</numerusform>
-            <numerusform>Upravovanie %n skladieb</numerusform>
-            <numerusform>Upravovanie %n skladieb</numerusform>
-        </translation>
-    </message>
-    <message>
         <location filename="../edittagdialog.ui" line="14"/>
         <source>Edit track information</source>
-        <translation>Upravť informácie o skladbe</translation>
+        <translation>Edytuj informacje o utworze</translation>
     </message>
     <message>
         <location filename="../edittagdialog.ui" line="28"/>
         <source>Title</source>
-        <translation>Názov</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <location filename="../edittagdialog.ui" line="41"/>
@@ -214,17 +200,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../edittagdialog.ui" line="54"/>
         <source>Artist</source>
-        <translation>Interprét</translation>
+        <translation>Wykonawca</translation>
     </message>
     <message>
         <location filename="../edittagdialog.ui" line="67"/>
         <source>Genre</source>
-        <translation>Žáner</translation>
+        <translation>Rodzaj</translation>
     </message>
     <message>
         <location filename="../edittagdialog.ui" line="80"/>
         <source>Track</source>
-        <translation>Skladba</translation>
+        <translation>Utwór</translation>
     </message>
     <message>
         <location filename="../edittagdialog.ui" line="111"/>
@@ -234,7 +220,21 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../edittagdialog.ui" line="142"/>
         <source>Comment</source>
-        <translation>Komentár</translation>
+        <translation>Komentarz</translation>
+    </message>
+    <message>
+        <location filename="../edittagdialog.cpp" line="28"/>
+        <source>[click to edit]</source>
+        <translation>[kliknij aby edytować]</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../edittagdialog.cpp" line="90"/>
+        <source>Editing %n tracks</source>
+        <translation>
+            <numerusform>Edytowanie %n utworu</numerusform>
+            <numerusform>Edytowanie %n utworów</numerusform>
+            <numerusform>Edytowanie %n utworów</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -243,7 +243,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../playlistdelegates.cpp" line="138"/>
         <location filename="../playlistdelegates.cpp" line="157"/>
         <source>Unknown</source>
-        <translation>neznámy</translation>
+        <translation>nieznany</translation>
     </message>
     <message>
         <location filename="../playlistdelegates.cpp" line="141"/>
@@ -318,7 +318,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../fileview.ui" line="62"/>
         <location filename="../fileview.ui" line="76"/>
         <source>...</source>
-        <translation></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -326,60 +326,60 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../fileviewlist.cpp" line="28"/>
         <source>Add to playlist</source>
-        <translation>Pridať do playlistu</translation>
+        <translation>Dodaj do playlisty</translation>
     </message>
     <message>
         <location filename="../fileviewlist.cpp" line="31"/>
         <source>Copy to library...</source>
-        <translation>Skopírovať do zbierky...</translation>
+        <translation>Skopiuj do biblioteki...</translation>
     </message>
     <message>
         <location filename="../fileviewlist.cpp" line="33"/>
         <source>Move to library...</source>
-        <translation>Presunúť do zbierky...</translation>
+        <translation>Przenieś do biblioteki...</translation>
     </message>
 </context>
 <context>
     <name>LastFMConfig</name>
     <message>
-        <location filename="../lastfmconfig.cpp" line="56"/>
-        <source>Authentication failed</source>
-        <translation>Autentifikácia zlyhala</translation>
-    </message>
-    <message>
-        <location filename="../lastfmconfig.cpp" line="56"/>
-        <source>Your Last.fm credentials were incorrect</source>
-        <translation>Vaše Last.fm poverenie bolo nekorektné</translation>
-    </message>
-    <message>
         <location filename="../lastfmconfig.ui" line="20"/>
         <source>Enter your Last.fm details below:</source>
-        <translation>Vložte svoje Last.fm detaily nižšie:</translation>
+        <translation>Podaj swoje dane dla Last.fm:</translation>
     </message>
     <message>
         <location filename="../lastfmconfig.ui" line="29"/>
         <source>Last.fm username</source>
-        <translation>Last.fm použ. meno</translation>
+        <translation>Użytkownik Last.fm</translation>
     </message>
     <message>
         <location filename="../lastfmconfig.ui" line="39"/>
         <source>Last.fm password</source>
-        <translation>Last.fm heslo</translation>
+        <translation>Hasło Last.fm</translation>
     </message>
     <message>
         <location filename="../lastfmconfig.ui" line="53"/>
         <source>Scrobble tracks that I listen to</source>
-        <translation type="unfinished"></translation>
+        <translation>Wysyłaj informacje o utworach których słucham</translation>
     </message>
     <message>
         <location filename="../lastfmconfig.ui" line="72"/>
         <source>Note that you must be a &lt;span style=&quot; font-weight:600;&quot;&gt;paid subscriber&lt;/span&gt; to listen to Last.fm radio from within Clementine.</source>
-        <translation>Pam§tajte, že musíte byť &lt;span style=&quot; font-weight:600;&quot;&gt;platiaci odberateľ&lt;/span&gt; aby ste mohli počúvať Last.fm rádio v Clementine.</translation>
+        <translation>Musisz posiadać &lt;span style=&quot; font-weight:600;&quot;&gt;opłacone konto&lt;/span&gt; aby słuchać radia Last.fm w Clementine.</translation>
     </message>
     <message>
         <location filename="../lastfmconfig.ui" line="98"/>
         <source>Authenticating...</source>
-        <translation>Autentifikácia...</translation>
+        <translation>Uwierzytelnianie...</translation>
+    </message>
+    <message>
+        <location filename="../lastfmconfig.cpp" line="56"/>
+        <source>Authentication failed</source>
+        <translation>Błąd uwierzytelniania</translation>
+    </message>
+    <message>
+        <location filename="../lastfmconfig.cpp" line="56"/>
+        <source>Your Last.fm credentials were incorrect</source>
+        <translation>Twoje dane dla Last.fm są niepoprawne </translation>
     </message>
 </context>
 <context>
@@ -387,7 +387,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmconfigdialog.ui" line="14"/>
         <source>Last.fm</source>
-        <translation></translation>
+        <translation>Last.fm</translation>
     </message>
 </context>
 <context>
@@ -395,136 +395,136 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="65"/>
         <source>Add to playlist</source>
-        <translation>Pridať do playlistu</translation>
+        <translation>Dodaj do playlisty</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="67"/>
         <source>Remove</source>
-        <translation>Odstrániť</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="70"/>
         <source>Play artist radio...</source>
-        <translation>Hrať rádio interpréta...</translation>
+        <translation>Odtwarzaj radio wykonawcy...</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="72"/>
         <source>Play tag radio...</source>
-        <translation>Hrať rádio tagu...</translation>
+        <translation>Odtwarzaj radio tagu...</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="74"/>
         <source>Configure Last.fm...</source>
-        <translation>Konfigurovať Last.fm...</translation>
+        <translation>Konfiguruj Last.fm...</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="116"/>
         <source>My Recommendations</source>
-        <translation>Moje odporúčania</translation>
+        <translation>Moje rekomendacje</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="117"/>
         <source>My Radio Station</source>
-        <translation>Moje rádio stanice</translation>
+        <translation>Moje stacje radiowe</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="118"/>
         <source>My Loved Tracks</source>
-        <translation>Moje obľúbené skladby</translation>
+        <translation>Moje ulubione utwory</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="119"/>
         <source>My Neighbourhood</source>
-        <translation>Moji susedia</translation>
+        <translation>Moi sąsiedzi</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="122"/>
         <source>Artist radio</source>
-        <translation>Rádio interpréta</translation>
+        <translation>Radio wykonawcy</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="126"/>
         <source>Tag radio</source>
-        <translation>Rádio tagu</translation>
+        <translation>Radio tagu</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="133"/>
         <source>Friends</source>
-        <translation>Priatelia</translation>
+        <translation>Przyjaciele</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="136"/>
         <source>Neighbours</source>
-        <translation>Susedia</translation>
+        <translation>Sąsiedzi</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="156"/>
         <source>%1&apos;s Radio Station</source>
-        <translation>%1 rádio stanica</translation>
+        <translation>%1 stacja radiowa</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="158"/>
         <location filename="../lastfmservice.cpp" line="260"/>
         <location filename="../lastfmservice.cpp" line="265"/>
         <source>%1&apos;s Loved Tracks</source>
-        <translation>%1 obľúbené skladby</translation>
+        <translation>%1 ulubione utwory</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="160"/>
         <source>%1&apos;s Neighborhood</source>
-        <translation>%1 susedia</translation>
+        <translation>%1 sąsiada</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="259"/>
         <source>%1&apos;s Recommended Radio</source>
-        <translation>%1 odporúčané rádio</translation>
+        <translation>%1 rekomendowane radio</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="261"/>
         <location filename="../lastfmservice.cpp" line="266"/>
         <source>%1&apos;s Neighbour Radio</source>
-        <translation>%1 rádio suseda</translation>
+        <translation>%1 radio sąsiada</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="262"/>
         <location filename="../lastfmservice.cpp" line="264"/>
         <source>%1&apos;s Library</source>
-        <translation>%1 zbierka</translation>
+        <translation>%1 biblioteka</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="267"/>
         <source>Similar Artists to %1</source>
-        <translation>Podobný interprét ako %1</translation>
+        <translation>Wykonawcy podobni do %1</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="268"/>
         <source>Tag Radio: %1</source>
-        <translation>Rádio tagu: %1</translation>
+        <translation>Radio tagu: %1</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="340"/>
         <source>Invalid service</source>
-        <translation>Nefunkčná služba</translation>
+        <translation>Błędna usługa</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="341"/>
         <source>Invalid method</source>
-        <translation>Nefunkčná metóda</translation>
+        <translation>Błędna metoda</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="342"/>
         <source>Authentication failed</source>
-        <translation>Autentifikácia zlyhala</translation>
+        <translation>Uwierzytelnianie nie powiodło się</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="343"/>
         <source>Invalid format</source>
-        <translation>Nefunkčný formát</translation>
+        <translation>Błędny format</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="344"/>
         <source>Invalid parameters</source>
-        <translation>Nefunkčné parametre</translation>
+        <translation>Błędne parametry</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="345"/>
@@ -534,52 +534,52 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="346"/>
         <source>Operation failed</source>
-        <translation>Operácia zlyhala</translation>
+        <translation>Operacja zakończona niepowodzeniem</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="347"/>
         <source>Invalid session key</source>
-        <translation>nefunkčný kľúč sedenia</translation>
+        <translation>Zły klucz sesji</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="348"/>
         <source>Invalid API key</source>
-        <translation>Nefiunkčný API kľúč</translation>
+        <translation>Zły klucz API</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="349"/>
         <source>Service offline</source>
-        <translation>Služba je offline</translation>
+        <translation>Usługa niedostępna</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="350"/>
         <source>This stream is for paid subscribers only</source>
-        <translation>Tento stream je len pre platiacich odoberateľov</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="352"/>
         <source>Last.fm is currently busy, please try again in a few minutes</source>
-        <translation>Last.fm je práve zaneprázdnené, prosím skúste za pár minút</translation>
+        <translation>Last.fm jest przeciążony, prosimy spróbować za chwilę</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="354"/>
         <source>Not enough content</source>
-        <translation>Nedostatok obsahu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="355"/>
         <source>Not enough members</source>
-        <translation>Nedostatok členov</translation>
+        <translation>Za mało użytkowników</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="356"/>
         <source>Not enough fans</source>
-        <translation>Nedostatok fanúšikov</translation>
+        <translation>Za mało fanów</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="357"/>
         <source>Not enough neighbours</source>
-        <translation>Nedostatok susedov</translation>
+        <translation>Za mało sąsiadów</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="359"/>
@@ -589,7 +589,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="363"/>
         <source>Unknown error</source>
-        <translation>Neznáma chyba</translation>
+        <translation>Nieznany błąd</translation>
     </message>
 </context>
 <context>
@@ -597,22 +597,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmstationdialog.ui" line="14"/>
         <source>Play Artist or Tag</source>
-        <translation>Hrať interpréta alebo tag</translation>
+        <translation>Odtwarzaj Wykonawcę lub Tag</translation>
     </message>
     <message>
         <location filename="../lastfmstationdialog.ui" line="20"/>
         <source>Enter an &lt;b&gt;artist&lt;/b&gt; or &lt;b&gt;tag&lt;/b&gt; to start listening to Last.fm radio.</source>
-        <translation>Napíšte &lt;b&gt;interpréta&lt;/b&gt; alebo &lt;b&gt;tag&lt;/b&gt; aby ste začali počúvať Last.fm rádio.</translation>
+        <translation>Wpisz &lt;b&gt;wykonawcę&lt;/b&gt; lub &lt;b&gt;tag&lt;/b&gt; aby słuchać radia Last.fm.</translation>
     </message>
     <message>
         <location filename="../lastfmstationdialog.ui" line="33"/>
         <source>Artist</source>
-        <translation>Interprét</translation>
+        <translation>Wykonawca</translation>
     </message>
     <message>
         <location filename="../lastfmstationdialog.ui" line="38"/>
         <source>Tag</source>
-        <translation></translation>
+        <translation>Tag</translation>
     </message>
 </context>
 <context>
@@ -620,35 +620,35 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../library.cpp" line="186"/>
         <source>Various Artists</source>
-        <translation>Rôzni interpréti</translation>
+        <translation>Różni wykonawcy</translation>
     </message>
     <message>
         <location filename="../library.cpp" line="642"/>
         <source>Unknown</source>
-        <translation>Neznámi</translation>
+        <translation>Nieznany</translation>
     </message>
 </context>
 <context>
     <name>LibraryConfig</name>
     <message>
-        <location filename="../libraryconfig.cpp" line="56"/>
-        <source>Add directory...</source>
-        <translation>Pridať priečinok...</translation>
-    </message>
-    <message>
         <location filename="../libraryconfig.ui" line="20"/>
         <source>These folders will be scanned for music to make up your library</source>
-        <translation>Tieto priečinky budú prehľadané pre vytvorenie vyšej zbierky</translation>
+        <translation>Te katalogi będą skanowane w poszukiwaniu muzyki</translation>
     </message>
     <message>
         <location filename="../libraryconfig.ui" line="41"/>
         <source>Add new folder...</source>
-        <translation>Pridať nový priečinok...</translation>
+        <translation>Dodaj nowy katalog...</translation>
     </message>
     <message>
         <location filename="../libraryconfig.ui" line="64"/>
         <source>Remove folder</source>
-        <translation>Odobrať priečinok</translation>
+        <translation>Usuń katalog</translation>
+    </message>
+    <message>
+        <location filename="../libraryconfig.cpp" line="56"/>
+        <source>Add directory...</source>
+        <translation>Dodaj katalog...</translation>
     </message>
 </context>
 <context>
@@ -656,7 +656,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../libraryconfigdialog.ui" line="14"/>
         <source>Music Library</source>
-        <translation>Hudobná zbierka</translation>
+        <translation>Biblioteka muzyki</translation>
     </message>
 </context>
 <context>
@@ -664,68 +664,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../libraryview.cpp" line="86"/>
         <source>Show in various artists</source>
-        <translation>Zobrazovať v rôznich interprétoch</translation>
+        <translation>Pokaż w różni wykonawcy</translation>
     </message>
     <message>
         <location filename="../libraryview.cpp" line="88"/>
         <source>Don&apos;t show in various artists</source>
-        <translation>Nzobrazovať v rôznich interprétoch</translation>
+        <translation>Nie pokazuj w różni wykonawcy</translation>
     </message>
     <message>
         <location filename="../libraryview.cpp" line="134"/>
         <source>Your library is empty!</source>
-        <translation>Vaša zbierka je prázdna!</translation>
+        <translation>Biblioteka jest pusta!</translation>
     </message>
     <message>
         <location filename="../libraryview.cpp" line="140"/>
         <source>Click here to add some music</source>
-        <translation>Kliknite sem aby ste pridali nejakú hudbu</translation>
+        <translation>Kliknij aby dodać jakąś muzykę</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <location filename="../mainwindow.cpp" line="253"/>
-        <source>Configure library...</source>
-        <translation>Nastaviť zbierku...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="257"/>
-        <location filename="../mainwindow.cpp" line="396"/>
-        <location filename="../mainwindow.cpp" line="412"/>
-        <location filename="../mainwindow.cpp" line="593"/>
-        <location filename="../mainwindow.ui" line="517"/>
-        <source>Play</source>
-        <translation>Hrať</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="259"/>
-        <location filename="../mainwindow.ui" line="559"/>
-        <source>Stop after this track</source>
-        <translation>Zastaviť po tejto skladbe</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="352"/>
-        <location filename="../mainwindow.cpp" line="371"/>
-        <source>&amp;Show tray icon</source>
-        <translation>&amp;Zobraziť tray ikonu</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="423"/>
-        <location filename="../mainwindow.cpp" line="590"/>
-        <source>Pause</source>
-        <translation>Pauza</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="640"/>
-        <source>Set %1 to &quot;%2&quot;...</source>
-        <translation>Nastaviť %1 do &quot;%2&quot;...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="642"/>
-        <source>Edit tag &quot;%1&quot;...</source>
-        <translation>Upraviť tag &quot;%1&quot;...</translation>
-    </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Clementine</source>
@@ -734,144 +692,159 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="279"/>
         <source>Library</source>
-        <translation>Zbierka</translation>
+        <translation>Biblioteka</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="317"/>
         <source>Enter search terms here</source>
-        <translation>Sem napíšte výrazy na hľadanie</translation>
+        <translation>Wpisz szukane wyrażenie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="373"/>
         <source>Radio</source>
-        <translation>Rádio</translation>
+        <translation>Radio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
         <source>Files</source>
-        <translation>Súbory</translation>
+        <translation>Pliki</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="449"/>
         <source>Music</source>
-        <translation>Hudba</translation>
+        <translation>Muzyka</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>Playlist</source>
-        <translation>Playlist</translation>
+        <translation>Playlista</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="478"/>
         <source>Settings</source>
-        <translation>Nastavenia</translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="486"/>
         <source>Help</source>
-        <translation>Nápoveda</translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="492"/>
         <source>Tools</source>
-        <translation>Nástroje</translation>
+        <translation>Narzędzia</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="508"/>
         <source>Previous track</source>
-        <translation>Predchádzajúca skladba</translation>
+        <translation>Poprzedni utwór</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="396"/>
+        <location filename="../mainwindow.cpp" line="412"/>
+        <location filename="../mainwindow.cpp" line="593"/>
+        <location filename="../mainwindow.ui" line="517"/>
+        <source>Play</source>
+        <translation>Odtwarzaj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="529"/>
         <source>Stop</source>
-        <translation>Zastaviť</translation>
+        <translation>Zatrzymaj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="538"/>
         <source>Next track</source>
-        <translation>Nesledujca skladba</translation>
+        <translation>Następny utwór</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="547"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Zavrieť</translation>
+        <translation>&amp;Zakończ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="550"/>
         <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation>Ctrl+Q</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="259"/>
+        <location filename="../mainwindow.ui" line="559"/>
+        <source>Stop after this track</source>
+        <translation>Zatrzymaj po tym utworze</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="570"/>
         <source>Entire collection</source>
-        <translation>Celá zbierka</translation>
+        <translation>Cała kolekcja</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="578"/>
         <source>Added today</source>
-        <translation>Dnes pridané</translation>
+        <translation>Dodane dzisiaj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="586"/>
         <source>Added this week</source>
-        <translation>Pridané tento týždeň</translation>
+        <translation>Dodane w tym tygodniu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="594"/>
         <location filename="../mainwindow.ui" line="597"/>
         <source>Added within three months</source>
-        <translation>Pridané posledný štvrťrok</translation>
+        <translation>Dodane przez trzy ostatnie miesiące</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="605"/>
         <source>Added this year</source>
-        <translation>Pridané tento rok</translation>
+        <translation>Dodane w tym roku</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
         <source>Added this month</source>
-        <translation>Prudané tento mesiac</translation>
+        <translation>Dodane w tym miesiącu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="625"/>
         <source>Love</source>
-        <translation>Obľúbené</translation>
+        <translation>Dodaj do ulubionych</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="637"/>
         <source>Ban</source>
-        <translation>Neznášané</translation>
+        <translation>Zbanuj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <location filename="../mainwindow.ui" line="649"/>
         <source>Clear playlist</source>
-        <translation>Vyprázdniť playlist</translation>
+        <translation>Wyczyść playlistę</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="658"/>
         <source>Edit track information...</source>
-        <translation>Upravť informácie o skladbe...</translation>
+        <translation>Edytuj informacje o utworze...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="663"/>
         <source>Renumber tracks in this order...</source>
-        <translation>Prečíslovať skladby v tomto poradí...</translation>
+        <translation>Ponumeruj utwory według tej kolejności...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="668"/>
         <source>Set value for all selected tracks...</source>
-        <translation>Nastaviť hodnotu pre vybraté skladby...</translation>
+        <translation>Ustaw wartość dla wszystkich zaznaczonych utworów...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="673"/>
         <source>Edit tag...</source>
-        <translation>Upraviť tag...</translation>
+        <translation>Edytuj tag...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="682"/>
         <source>Configure Clementine...</source>
-        <translation>Nastaviť Clementine...</translation>
+        <translation>Konfiguruj Clementine...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="687"/>
@@ -881,27 +854,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="696"/>
         <source>Shuffle playlist</source>
-        <translation>Zamiešať playlist</translation>
+        <translation>Zamieszaj playlistę</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="705"/>
         <source>Add media...</source>
-        <translation>Pridať médiá...</translation>
+        <translation>Dodaj media...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="714"/>
         <source>Add stream...</source>
-        <translation>Pridať stream...</translation>
+        <translation>Dodaj strumień...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="723"/>
         <source>Open media...</source>
-        <translation>Otvoriť médium...</translation>
+        <translation>Otwórz media...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="756"/>
         <source>Remove from playlist</source>
-        <translation>Odstrániť z playlistu</translation>
+        <translation>Usuń z playlisty</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="764"/>
@@ -942,63 +915,82 @@ p, li { white-space: pre-wrap; }
         <location filename="../mainwindow.cpp" line="375"/>
         <location filename="../mainwindow.ui" line="728"/>
         <source>&amp;Hide tray icon</source>
-        <translation>&amp;Skryť tray ikonu</translation>
-    </message>
-    <message>
-        <source>Configure &amp;Global Shortcuts...</source>
-        <translation type="obsolete">Nastaviť &amp;Globálne skratky...</translation>
+        <translation>&amp;Ukryj ikonę w trayu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="737"/>
         <source>Cover Manager</source>
-        <translation>Správca obalov</translation>
+        <translation>Menadżer okładek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="742"/>
         <source>Shuffle mode</source>
-        <translation>Zamiešavací mód</translation>
+        <translation>Tryb losowy</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="747"/>
         <source>Repeat mode</source>
-        <translation>Opakovací mód</translation>
+        <translation>Tryb powtarzania</translation>
     </message>
     <message>
-        <source>New playlist</source>
-        <translation type="obsolete">Nový playlist</translation>
+        <location filename="../mainwindow.cpp" line="253"/>
+        <source>Configure library...</source>
+        <translation>Konfiguruj bibliotekę...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="371"/>
+        <source>&amp;Show tray icon</source>
+        <translation>&amp;Pokaż ikonę w trayu</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="423"/>
+        <location filename="../mainwindow.cpp" line="590"/>
+        <source>Pause</source>
+        <translation>Pauza</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="640"/>
+        <source>Set %1 to &quot;%2&quot;...</source>
+        <translation>Ustaw %1 na &quot;%2&quot;...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="642"/>
+        <source>Edit tag &quot;%1&quot;...</source>
+        <translation>Edytuj tag &quot;%1&quot;...</translation>
     </message>
 </context>
 <context>
     <name>MultiLoadingIndicator</name>
     <message>
+        <location filename="../multiloadingindicator.ui" line="14"/>
+        <source>Form</source>
+        <translation>Forma</translation>
+    </message>
+    <message>
         <location filename="../multiloadingindicator.cpp" line="61"/>
         <source>Loading audio engine</source>
-        <translation>Načítava sa zvukový engine</translation>
+        <translation>Ładowanie silnika dźwięku</translation>
     </message>
     <message>
         <location filename="../multiloadingindicator.cpp" line="62"/>
         <source>Updating library</source>
-        <translation>Aktualizovanie zbierky</translation>
+        <translation>Aktualizowanie biblioteki</translation>
     </message>
     <message>
         <location filename="../multiloadingindicator.cpp" line="63"/>
         <source>Getting channels</source>
-        <translation>Preberanie kanálov</translation>
+        <translation>Pobieranie kanałów</translation>
     </message>
     <message>
         <location filename="../multiloadingindicator.cpp" line="64"/>
         <source>Loading stream</source>
-        <translation>Načítava sa stream</translation>
+        <translation>Ładowanie strumienia</translation>
     </message>
     <message>
         <location filename="../multiloadingindicator.cpp" line="65"/>
         <source>Loading Last.fm radio</source>
-        <translation>Načítava sa Last.fm rádio</translation>
-    </message>
-    <message>
-        <location filename="../multiloadingindicator.ui" line="14"/>
-        <source>Form</source>
-        <translation>Forma</translation>
+        <translation>Ładowanie radia Last.fm</translation>
     </message>
 </context>
 <context>
@@ -1006,27 +998,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../osd.cpp" line="69"/>
         <source>disc %1</source>
-        <translation>disk %1</translation>
+        <translation>dysk %1</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="71"/>
         <source>track %1</source>
-        <translation>skladba %1</translation>
+        <translation>utwór %1</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="78"/>
         <source>Paused</source>
-        <translation>Pozastavené</translation>
+        <translation>Zatrzymane</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="82"/>
         <source>Playlist finished</source>
-        <translation>Playlist skončený</translation>
+        <translation>Zakończono playlistę</translation>
     </message>
     <message>
         <location filename="../osd.cpp" line="89"/>
         <source>Volume %1%</source>
-        <translation>Hlasitosť %1%</translation>
+        <translation>Głośność %1%</translation>
     </message>
 </context>
 <context>
@@ -1034,12 +1026,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlist.cpp" line="535"/>
         <source>Title</source>
-        <translation>Názov</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="536"/>
         <source>Artist</source>
-        <translation>Interprét</translation>
+        <translation>Wykonawca</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="537"/>
@@ -1049,17 +1041,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlist.cpp" line="538"/>
         <source>Length</source>
-        <translation>Dĺžka</translation>
+        <translation>Długość</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="539"/>
         <source>Track</source>
-        <translation>Č.</translation>
+        <translation>Utwór</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="540"/>
         <source>Disc</source>
-        <translation>Disk</translation>
+        <translation>Płyta</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="541"/>
@@ -1069,62 +1061,62 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlist.cpp" line="542"/>
         <source>Genre</source>
-        <translation>Žáner</translation>
+        <translation>Rodzaj</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="543"/>
         <source>Album artist</source>
-        <translation>Interprét albumu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="544"/>
         <source>Composer</source>
-        <translation>Skladateľ</translation>
+        <translation>Kompozytor</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="546"/>
         <source>BPM</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="547"/>
         <source>Bit rate</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="548"/>
         <source>Sample rate</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="549"/>
         <source>File name</source>
-        <translation>Názov súboru</translation>
+        <translation>Nazwa pliku</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="550"/>
         <source>File name (without path)</source>
-        <translation>Názov súboru (bez cesty)</translation>
+        <translation>nazwa pliku (bez ścieżki)</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="551"/>
         <source>File size</source>
-        <translation>Veľkosť súboru</translation>
+        <translation>Wielkość pliku</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="552"/>
         <source>File type</source>
-        <translation>Typ súboru</translation>
+        <translation>Typ pliku</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="553"/>
         <source>Date modified</source>
-        <translation>Dátum zmeny</translation>
+        <translation>Data modyfikacji</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="554"/>
         <source>Date created</source>
-        <translation>Dátum vytvorenia</translation>
+        <translation>Data utworzenia</translation>
     </message>
 </context>
 <context>
@@ -1132,24 +1124,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlistheader.cpp" line="30"/>
         <source>Hide...</source>
-        <translation>Skryť...</translation>
+        <translation>Ukryj...</translation>
     </message>
     <message>
         <location filename="../playlistheader.cpp" line="31"/>
         <source>Show section</source>
-        <translation>Zobraziť stĺpec</translation>
+        <translation>Pokaż sekcję</translation>
     </message>
     <message>
         <location filename="../playlistheader.cpp" line="47"/>
         <source>Hide %1</source>
-        <translation>Skryť %1</translation>
-    </message>
-</context>
-<context>
-    <name>PlaylistManager</name>
-    <message>
-        <source>New playlist</source>
-        <translation type="obsolete">Nový playlist</translation>
+        <translation>Ukryj %1</translation>
     </message>
 </context>
 <context>
@@ -1157,47 +1142,47 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlistsequence.ui" line="33"/>
         <source>Repeat</source>
-        <translation>Opakovať</translation>
+        <translation>Powtarzaj</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="57"/>
         <source>Shuffle</source>
-        <translation>Zamiešať</translation>
+        <translation>Losuj</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="94"/>
         <source>Don&apos;t repeat</source>
-        <translation>Neopakovať</translation>
+        <translation>Nie powtarzaj</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="102"/>
         <source>Repeat track</source>
-        <translation>Opakovať skladbu</translation>
+        <translation>Powtarzaj utwór</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="110"/>
         <source>Repeat album</source>
-        <translation>Opakovať album</translation>
+        <translation>Powtarzaj album</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="118"/>
         <source>Repeat playlist</source>
-        <translation>Opakovať playlist</translation>
+        <translation>Powtarzaj playlistę</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="129"/>
         <source>Don&apos;t shuffle</source>
-        <translation>Nezamiešavať</translation>
+        <translation>Nie losuj</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="137"/>
         <source>Shuffle by album</source>
-        <translation>Zamiešať podľa albumov</translation>
+        <translation>Losuj według albumów</translation>
     </message>
     <message>
         <location filename="../playlistsequence.ui" line="145"/>
         <source>Shuffle all</source>
-        <translation>Zamiešať všetko</translation>
+        <translation>Losuj wszystko</translation>
     </message>
 </context>
 <context>
@@ -1205,7 +1190,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../radioplaylistitem.cpp" line="57"/>
         <source>Radio service couldn&apos;t be loaded :-(</source>
-        <translation>Služba rádia sa nedá načítať :-(</translation>
+        <translation>Usługa radio nie może być załadowana :-(</translation>
     </message>
 </context>
 <context>
@@ -1213,22 +1198,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../savedradio.cpp" line="30"/>
         <source>Add to playlist</source>
-        <translation>Pridať do playlistu</translation>
+        <translation>Dodaj do playlisty</translation>
     </message>
     <message>
         <location filename="../savedradio.cpp" line="31"/>
         <source>Remove</source>
-        <translation>Odstrániť</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <location filename="../savedradio.cpp" line="33"/>
         <source>Add another stream...</source>
-        <translation>Pridať ďalší stream...</translation>
+        <translation>Dodaj następny strumień...</translation>
     </message>
     <message>
         <location filename="../savedradio.cpp" line="43"/>
         <source>Your radio streams</source>
-        <translation>Vaše rádio streamy</translation>
+        <translation>Twoje strumienie radiowe</translation>
     </message>
 </context>
 <context>
@@ -1236,264 +1221,153 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.ui" line="14"/>
         <source>Settings</source>
-        <translation>Nastavenia</translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="51"/>
         <source>Playback</source>
-        <translation></translation>
+        <translation>Odtwarzanie</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="60"/>
         <source>Notifications</source>
-        <translation>Notifikácie</translation>
+        <translation>Powiadomienia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="69"/>
         <source>Music Library</source>
-        <translation>Hudobná zbierka</translation>
+        <translation>Biblioteka</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="78"/>
         <source>Last.fm</source>
-        <translation></translation>
+        <translation>Last.fm</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="112"/>
         <location filename="../settingsdialog.ui" line="125"/>
         <source>Fadeout</source>
-        <translation>Zoslabovanie</translation>
+        <translation>Zanikanie</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="118"/>
         <source>No fadeout</source>
-        <translation>Bez zoslabovania</translation>
+        <translation>Bez zanikania</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="137"/>
         <source>Fadeout duration</source>
-        <translation>Trvanie zoslabovania</translation>
+        <translation>Czas zanikania</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="150"/>
         <source> ms</source>
-        <translation> milisekúnd</translation>
+        <translation>milisekund</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="201"/>
         <source>Clementine can show a message when the track changes.</source>
-        <translation>Clementine môže zobraziť správu keď sa zmení skladba.</translation>
+        <translation>Clementine może pokazywać powiadomienia gdy zmienia się utwór.</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="208"/>
         <source>Notification type</source>
-        <translation>Typ notifikácií</translation>
+        <translation>Typ powiadomień</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="214"/>
         <source>Disabled</source>
-        <translation>Zakázané</translation>
+        <translation>Wyłączone</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="300"/>
         <source>Pretty OSD options</source>
-        <translation>Krásne OSD možnosti</translation>
+        <translation>Opcje ładnych OSD (wyświetlanie-na-ekranie)</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="306"/>
         <source>Background opacity</source>
-        <translation>Priehľadnosť pozadia</translation>
+        <translation>Przezroczystość tła</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="320"/>
         <source>Background color</source>
-        <translation>Farba pozadia</translation>
+        <translation>Kolor tła</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="328"/>
         <source>Basic Blue</source>
-        <translation>Základná modrá</translation>
+        <translation>Prosty niebieski</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="333"/>
         <source>Clementine Orange</source>
-        <translation>Klementínková oranžová</translation>
+        <translation>Pomarańczowy Clementine</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="338"/>
         <source>Custom...</source>
-        <translation>Vlastná...</translation>
+        <translation>Własny...</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="346"/>
         <source>Text color</source>
-        <translation>Farba písma</translation>
+        <translation>Kolor tekstu</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="353"/>
         <source>Choose color...</source>
-        <translation>Vybrať farbu...</translation>
-    </message>
-    <message>
-        <source>Don&apos;t show notifications</source>
-        <translation type="obsolete">Nezobrazovať notifikácie</translation>
+        <translation>Wybierz kolor...</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="221"/>
         <source>Show a native desktop notification</source>
-        <translation>Zobrazovať natívne desktopové notifikácie</translation>
+        <translation>Pokaż natywne powiadomienia  srodowiska graficznego</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="228"/>
         <source>Show a pretty OSD</source>
-        <translation>Zobrazovať krásne OSD</translation>
+        <translation>Pokazuj ładne OSD (wyświetlanie-na-ekranie)</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="235"/>
         <source>Show a popup from the system tray</source>
-        <translation>Zobrazovať notifikácie z tray lišty</translation>
+        <translation>Pokaż popup z ikony w trayu</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="245"/>
         <source>General settings</source>
-        <translation>Všeobecné nastavenia</translation>
+        <translation>Podstawowe ustawienia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="257"/>
         <source>Popup duration</source>
-        <translation>Trvanie notifikácie</translation>
+        <translation>Czas powiadomienia</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="264"/>
         <source> seconds</source>
-        <translation>sekúnd</translation>
+        <translation>sekund</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="283"/>
         <source>Show a notification when I change the volume</source>
-        <translation>Zobraziť notifikáciu keď zmením hlasitosť</translation>
+        <translation>Pokaż powiadomienie gdy zmieniam głośność</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="290"/>
         <source>Include album art in the notification</source>
-        <translation>Zahrnúť obal do notifikácie</translation>
+        <translation>Dołącz okładkę albumu</translation>
     </message>
     <message>
         <location filename="../settingsdialog.cpp" line="34"/>
         <source>OSD Preview</source>
-        <translation>OSD náhľad</translation>
+        <translation>Podgląd OSD</translation>
     </message>
     <message>
         <location filename="../settingsdialog.cpp" line="34"/>
         <source>Drag to reposition</source>
-        <translation>Pretiahnite na iné miesto</translation>
-    </message>
-</context>
-<context>
-    <name>ShortcutsDialog</name>
-    <message>
-        <source>Configure Shortcuts</source>
-        <translation type="obsolete">Nastaviť skratky</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="obsolete">Hrať</translation>
-    </message>
-    <message>
-        <source>Pause</source>
-        <translation type="obsolete">Pauza</translation>
-    </message>
-    <message>
-        <source>Play/Pause</source>
-        <translation type="obsolete">Hrať/Pauza</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="obsolete">Zastaviť</translation>
-    </message>
-    <message>
-        <source>Stop Playing After Current Track</source>
-        <translation type="obsolete">Zastaviť po tejto skladbe</translation>
-    </message>
-    <message>
-        <source>Next Track</source>
-        <translation type="obsolete">Nesledujca skladba</translation>
-    </message>
-    <message>
-        <source>Previous Track</source>
-        <translation type="obsolete">Predchádzajúca skladba</translation>
-    </message>
-    <message>
-        <source>Increase Volume</source>
-        <translation type="obsolete">Zvýšenie hlasitosti</translation>
-    </message>
-    <message>
-        <source>Decrease Volume</source>
-        <translation type="obsolete">Zníženie hlasitosti</translation>
-    </message>
-    <message>
-        <source>Mute Volume</source>
-        <translation type="obsolete">Umlčanie hlasitosti</translation>
-    </message>
-    <message>
-        <source>Seek Forwards</source>
-        <translation type="obsolete">pretočiť dopredu</translation>
-    </message>
-    <message>
-        <source>Seek Backwards</source>
-        <translation type="obsolete">pretočiť dozadu</translation>
-    </message>
-    <message>
-        <source>Shortcut</source>
-        <translation type="obsolete">Skratka</translation>
-    </message>
-    <message>
-        <source>Alternate</source>
-        <translation type="obsolete">Striedať</translation>
-    </message>
-    <message>
-        <source>&amp;Defaults</source>
-        <translation type="obsolete">&amp;Pôvodné</translation>
-    </message>
-    <message>
-        <source>Shortcut for Selected Action</source>
-        <translation type="obsolete">Skratka pre vybranú akciu</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="obsolete">&amp;Nijaká</translation>
-    </message>
-    <message>
-        <source>De&amp;fault</source>
-        <translation type="obsolete">Pôvo&amp;dná</translation>
-    </message>
-    <message>
-        <source>&amp;Custom</source>
-        <translation type="obsolete">&amp;Užívateľská</translation>
-    </message>
-    <message>
-        <source>Non&amp;e</source>
-        <translation type="obsolete">Nij&amp;aká</translation>
-    </message>
-    <message>
-        <source>Default key:</source>
-        <translation type="obsolete">Pôvodný kľúč</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Varovanie</translation>
-    </message>
-    <message>
-        <source>You are about to reset to global shortcuts default values. Are you sure you want to continue?</source>
-        <translation type="obsolete">Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete pokračovať?</translation>
-    </message>
-    <message>
-        <source>Default: %1</source>
-        <translation type="obsolete">Pôvodné: %1</translation>
-    </message>
-    <message>
-        <source>Default: None</source>
-        <translation type="obsolete">Pôvodné: žiadna</translation>
+        <translation>Przeciągnij aby zmienić pozycję</translation>
     </message>
 </context>
 <context>
@@ -1501,17 +1375,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../somafmservice.cpp" line="40"/>
         <source>Add to playlist</source>
-        <translation>Pridať do playlistu</translation>
+        <translation>Dodaj do playlisty</translation>
     </message>
     <message>
         <location filename="../somafmservice.cpp" line="42"/>
         <source>Open somafm.com in browser</source>
-        <translation>Otvoriť somafm.com v prehliadači</translation>
+        <translation>Otwórz somafm.com w przeglądarce</translation>
     </message>
     <message>
         <location filename="../somafmservice.cpp" line="43"/>
         <source>Refresh channels</source>
-        <translation>Obnoviť kanály</translation>
+        <translation>Odśwież kanały</translation>
     </message>
 </context>
 <context>

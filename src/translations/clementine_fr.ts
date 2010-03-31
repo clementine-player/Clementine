@@ -739,11 +739,11 @@ p, li { white-space: pre-wrap; }
         <translation>Piste précédente</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="517"/>
         <location filename="../mainwindow.cpp" line="257"/>
-        <location filename="../mainwindow.cpp" line="399"/>
-        <location filename="../mainwindow.cpp" line="415"/>
-        <location filename="../mainwindow.cpp" line="596"/>
+        <location filename="../mainwindow.cpp" line="396"/>
+        <location filename="../mainwindow.cpp" line="412"/>
+        <location filename="../mainwindow.cpp" line="593"/>
+        <location filename="../mainwindow.ui" line="517"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -768,8 +768,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="559"/>
         <location filename="../mainwindow.cpp" line="259"/>
+        <location filename="../mainwindow.ui" line="559"/>
         <source>Stop after this track</source>
         <translation>Arrêter la lecture après cette piste</translation>
     </message>
@@ -871,8 +871,8 @@ p, li { white-space: pre-wrap; }
         <translation>Ouvrir un media...</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="375"/>
         <location filename="../mainwindow.ui" line="728"/>
-        <location filename="../mainwindow.cpp" line="378"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Masquer l&apos;icône</translation>
     </message>
@@ -937,24 +937,24 @@ p, li { white-space: pre-wrap; }
         <translation>Configurer votre bibliothèque...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="353"/>
-        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Afficher l&apos;icône</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="426"/>
-        <location filename="../mainwindow.cpp" line="593"/>
+        <location filename="../mainwindow.cpp" line="423"/>
+        <location filename="../mainwindow.cpp" line="590"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="643"/>
+        <location filename="../mainwindow.cpp" line="640"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Définir %1 à la valeur &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="645"/>
+        <location filename="../mainwindow.cpp" line="642"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Modifer le tag &quot;%1&quot;...</translation>
     </message>
