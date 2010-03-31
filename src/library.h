@@ -61,6 +61,8 @@ class Library : public SimpleTreeModel<LibraryItem> {
   };
   QMetaEnum GroupByEnum() const;
 
+  // The tree has a maximum depth of 4 (not including the root) - 3 grouping
+  // levels like artist or album, and one final one for songs.
   static const int kMaxLevels = 3;
 
   // Useful for tests.  The library takes ownership.
@@ -115,13 +117,22 @@ class Library : public SimpleTreeModel<LibraryItem> {
  private:
   void Initialise();
 
-  // Functions for working with queries and creating items
+  // Functions for working with queries and creating items.
+  // When the model is reset or when a node is lazy-loaded the Library
+  // constructs a database query to populate the items.  Filters are added
+  // for each parent item, restricting the songs returned to a particular
+  // album or artist for example.
   void InitQuery(GroupBy type, LibraryQuery* q);
   void FilterQuery(GroupBy type, LibraryItem* item,LibraryQuery* q);
+
+  // Items can be created either from a query that's been run to populate a
+  // node, or by a spontaneous SongsDiscovered emission from the backend.
   LibraryItem* ItemFromQuery(GroupBy type, bool signal, bool create_divider,
                              LibraryItem* parent, const LibraryQuery& q);
   LibraryItem* ItemFromSong(GroupBy type, bool signal, bool create_divider,
                             LibraryItem* parent, const Song& s);
+
+  // The "Various Artists" node is an annoying special case.
   LibraryItem* CreateCompilationArtistNode(bool signal, LibraryItem* parent);
 
   // Helpers for ItemFromQuery and ItemFromSong

@@ -127,8 +127,16 @@ void Library::Initialise() {
 
 void Library::SongsDiscovered(const SongList& songs) {
   foreach (const Song& song, songs) {
+    // Sanity check to make sure we don't add songs that are outside the user's
+    // filter
     if (!query_options_.Matches(song))
       continue;
+
+    // Before we can add each song we need to make sure the required container
+    // items already exist in the tree.  These depend on which "group by"
+    // settings the user has on the library.  Eg. if the user grouped by
+    // artist and album, we would need to make sure nodes for the song's artist
+    // and album were already in the tree.
 
     // Find parent containers in the tree
     LibraryItem* container = root_;
@@ -143,7 +151,8 @@ void Library::SongsDiscovered(const SongList& songs) {
           CreateCompilationArtistNode(true, root_);
         container = compilation_artist_node_;
       } else {
-        // Otherwise find the proper container based on the item's key
+        // Otherwise find the proper container at this level based on the
+        // item's key
         QString key;
         switch (type) {
           case GroupBy_Album:    key = song.album(); break;
@@ -157,6 +166,7 @@ void Library::SongsDiscovered(const SongList& songs) {
           case GroupBy_None: Q_ASSERT(0); break;
         }
 
+        // Does it exist already?
         if (!container_nodes_[i].contains(key)) {
           // Create the container
           container_nodes_[i][key] =
@@ -167,7 +177,7 @@ void Library::SongsDiscovered(const SongList& songs) {
       }
 
       // If we just created the damn thing then we don't need to continue into
-      // it any further.
+      // it any further because it'll get lazy-loaded properly later.
       if (!container->lazy_loaded)
         break;
     }
@@ -175,8 +185,8 @@ void Library::SongsDiscovered(const SongList& songs) {
     if (!container->lazy_loaded)
       continue;
 
-    // We've gone all the way down to the lowest level, so now we have to
-    // create the song in the container.
+    // We've gone all the way down to the deepest level and everything was
+    // already lazy loaded, so now we have to create the song in the container.
     song_nodes_[song.id()] =
         ItemFromSong(GroupBy_None, true, false, container, song);
   }
@@ -198,8 +208,10 @@ LibraryItem* Library::CreateCompilationArtistNode(bool signal, LibraryItem* pare
   return compilation_artist_node_;
 }
 
-QString Library::DividerKey(GroupBy type,
-                            LibraryItem* item) const {
+QString Library::DividerKey(GroupBy type, LibraryItem* item) const {
+  // Items which are to be grouped under the same divider must produce the
+  // same divider key.  This will only get called for top-level items.
+
   if (item->sort_text.isEmpty())
     return QString();
 
@@ -227,8 +239,9 @@ QString Library::DividerKey(GroupBy type,
   }
 }
 
-QString Library::DividerDisplayText(GroupBy type,
-                                    const QString& key) const {
+QString Library::DividerDisplayText(GroupBy type, const QString& key) const {
+  // Pretty display text for the dividers.
+
   switch (type) {
   case GroupBy_Album:
   case GroupBy_Artist:
@@ -250,7 +263,8 @@ QString Library::DividerDisplayText(GroupBy type,
 }
 
 void Library::SongsDeleted(const SongList& songs) {
-  // Delete song nodes
+  // Delete the actual song nodes first, keeping track of each parent so we
+  // might check to see if they're empty later.
   QSet<LibraryItem*> parents;
   foreach (const Song& song, songs) {
     if (song_nodes_.contains(song.id())) {
@@ -267,8 +281,8 @@ void Library::SongsDeleted(const SongList& songs) {
       // If we get here it means some of the songs we want to delete haven't
       // been lazy-loaded yet.  This is bad, because it would mean that to
       // clean up empty parents we would need to lazy-load them all
-      // individually.  This can take a very long time, so better to just
-      // reset the model.
+      // individually to see if they're empty.  This can take a very long time,
+      // so better to just reset the model and be done with it.
       Reset();
       return;
     }
@@ -308,6 +322,7 @@ void Library::SongsDeleted(const SongList& songs) {
     if (!divider_nodes_.contains(divider_key))
       continue;
 
+    // Look to see if there are any other items still under this divider
     bool found = false;
     foreach (LibraryItem* node, container_nodes_[0].values()) {
       if (DividerKey(group_by_[0], node) == divider_key) {
@@ -387,7 +402,8 @@ void Library::LazyPopulate(LibraryItem* parent, bool signal) {
   int child_level = parent->container_level + 1;
   GroupBy child_type = group_by_[child_level];
 
-  // Initialise the query
+  // Initialise the query.  child_type says what type of thing we want (artists,
+  // songs, etc.)
   LibraryQuery q(query_options_);
   InitQuery(child_type, &q);
 
@@ -446,6 +462,7 @@ void Library::Reset() {
 }
 
 void Library::InitQuery(GroupBy type, LibraryQuery* q) {
+  // Say what type of thing we want to get back from the database.
   switch (type) {
   case GroupBy_Artist:
     q->SetColumnSpec("DISTINCT artist");
@@ -471,8 +488,10 @@ void Library::InitQuery(GroupBy type, LibraryQuery* q) {
   }
 }
 
-void Library::FilterQuery(GroupBy type, LibraryItem* item,
-                          LibraryQuery* q) {
+void Library::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q) {
+  // Say how we want the query to be filtered.  This is done once for each
+  // parent going up the tree.
+
   switch (type) {
   case GroupBy_Artist:
     if (item == compilation_artist_node_)
@@ -505,8 +524,7 @@ void Library::FilterQuery(GroupBy type, LibraryItem* item,
   }
 }
 
-LibraryItem* Library::InitItem(GroupBy type,
-                               bool signal, LibraryItem *parent) {
+LibraryItem* Library::InitItem(GroupBy type, bool signal, LibraryItem *parent) {
   LibraryItem::Type item_type =
       type == GroupBy_None ? LibraryItem::Type_Song :
       LibraryItem::Type_Container;
