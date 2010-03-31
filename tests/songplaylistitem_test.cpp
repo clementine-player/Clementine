@@ -40,6 +40,9 @@ class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
     song_.set_filename(absolute_file_name_);
 
     item_.reset(new SongPlaylistItem(song_));
+
+    if (!absolute_file_name_.startsWith('/'))
+      absolute_file_name_.prepend('/');
   }
 
   Song song_;

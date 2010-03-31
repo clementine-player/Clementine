@@ -21,6 +21,11 @@
 #include "resources_env.h"
 #include "metatypes_env.h"
 
+#ifdef WIN32
+# include <QtPlugin>
+  Q_IMPORT_PLUGIN(qsqlite)
+#endif
+
 int main(int argc, char** argv) {
   testing::InitGoogleMock(&argc, argv);
 
