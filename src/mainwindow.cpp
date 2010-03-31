@@ -342,20 +342,17 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   library_->SetGroupBy(g);
   UpdateGroupBySelection(g);
 
-  if (!settings_.value("hidden", false).toBool()) {
-    show();
-  }
+  bool hidden = settings_.value("hidden", false).toBool();
+  bool show_tray = settings_.value("showtray", true).toBool();
+  setVisible(!hidden);
 
-  if (settings_.value("showtray", true).toBool()) {
+  if (show_tray)
     tray_icon_->show();
-  }
-  else {
+  else
     ui_.action_hide_tray_icon->setText(tr("&Show tray icon"));
-  }
 
   // Force the window to show in case somehow the config has tray and window set to hide
-  // Why doesn't .toBool() work? This might be the case for any combinations with .toBool(); use .toInt()
-  if (!settings_.value("hidden", true).toInt() && !settings_.value("showtray", false).toInt()) {
+  if (hidden && !show_tray) {
     settings_.setValue("hidden", false);
     show();
   }
