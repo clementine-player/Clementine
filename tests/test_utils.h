@@ -31,5 +31,7 @@ std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req);
     void Emit##n() { emit n(); }
 #define EXPOSE_SIGNAL1(n, t1) \
     void Emit##n(const t1& a1) { emit n(a1); }
+#define EXPOSE_SIGNAL2(n, t1, t2) \
+    void Emit##n(const t1& a1, const t2& a2) { emit n(a1, a2); }
 
 #endif  // TEST_UTILS_H
