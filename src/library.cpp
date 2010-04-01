@@ -814,15 +814,6 @@ void Library::SetGroupBy(const Grouping& g) {
   emit GroupingChanged(g);
 }
 
-QMetaEnum Library::GroupByEnum() const {
-  const QMetaObject* o = metaObject();
-  for (int i=0 ; i<o->enumeratorCount() ; ++i) {
-    if (o->enumerator(i).name() == QString("GroupBy"))
-      return o->enumerator(i);
-  }
-  return QMetaEnum();
-}
-
 const Library::GroupBy& Library::Grouping::operator [](int i) const {
   switch (i) {
     case 0: return first;

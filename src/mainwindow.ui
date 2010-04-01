@@ -763,13 +763,6 @@
    <property name="text">
     <string>Group by Artist</string>
    </property>
-   <property name="group_by" stdset="0">
-    <stringlist>
-     <string>GroupBy_Artist</string>
-     <string>GroupBy_None</string>
-     <string>GroupBy_None</string>
-    </stringlist>
-   </property>
   </action>
   <action name="group_by_artist_album">
    <property name="checkable">
@@ -777,13 +770,6 @@
    </property>
    <property name="text">
     <string>Group by Artist/Album</string>
-   </property>
-   <property name="group_by" stdset="0">
-    <stringlist>
-     <string>GroupBy_Artist</string>
-     <string>GroupBy_Album</string>
-     <string>GroupBy_None</string>
-    </stringlist>
    </property>
   </action>
   <action name="group_by_artist_yearalbum">
@@ -793,13 +779,6 @@
    <property name="text">
     <string>Group by Artist/Year - Album</string>
    </property>
-   <property name="group_by" stdset="0">
-    <stringlist>
-     <string>GroupBy_Artist</string>
-     <string>GroupBy_YearAlbum</string>
-     <string>GroupBy_None</string>
-    </stringlist>
-   </property>
   </action>
   <action name="group_by_album">
    <property name="checkable">
@@ -807,13 +786,6 @@
    </property>
    <property name="text">
     <string>Group by Album</string>
-   </property>
-   <property name="group_by" stdset="0">
-    <stringlist>
-     <string>GroupBy_Album</string>
-     <string>GroupBy_None</string>
-     <string>GroupBy_None</string>
-    </stringlist>
    </property>
   </action>
   <action name="group_by_genre_album">
@@ -823,13 +795,6 @@
    <property name="text">
     <string>Group by Genre/Album</string>
    </property>
-   <property name="group_by" stdset="0">
-    <stringlist>
-     <string>GroupBy_Genre</string>
-     <string>GroupBy_Album</string>
-     <string>GroupBy_None</string>
-    </stringlist>
-   </property>
   </action>
   <action name="group_by_genre_artist_album">
    <property name="checkable">
@@ -837,13 +802,6 @@
    </property>
    <property name="text">
     <string>Group by Genre/Artist/Album</string>
-   </property>
-   <property name="group_by" stdset="0">
-    <stringlist>
-     <string>GroupBy_Genre</string>
-     <string>GroupBy_Artist</string>
-     <string>GroupBy_Album</string>
-    </stringlist>
    </property>
   </action>
   <action name="group_by_advanced">

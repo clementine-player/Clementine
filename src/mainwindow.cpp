@@ -236,6 +236,19 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.library_filter_clear, SIGNAL(clicked()), SLOT(ClearLibraryFilter()));
 
   // "Group by ..."
+  ui_.group_by_artist->setProperty("group_by", QVariant::fromValue(
+      Library::Grouping(Library::GroupBy_Artist)));
+  ui_.group_by_artist_album->setProperty("group_by", QVariant::fromValue(
+      Library::Grouping(Library::GroupBy_Artist, Library::GroupBy_Album)));
+  ui_.group_by_artist_yearalbum->setProperty("group_by", QVariant::fromValue(
+      Library::Grouping(Library::GroupBy_Artist, Library::GroupBy_YearAlbum)));
+  ui_.group_by_album->setProperty("group_by", QVariant::fromValue(
+      Library::Grouping(Library::GroupBy_Album)));
+  ui_.group_by_genre_album->setProperty("group_by", QVariant::fromValue(
+      Library::Grouping(Library::GroupBy_Genre, Library::GroupBy_Album)));
+  ui_.group_by_genre_artist_album->setProperty("group_by", QVariant::fromValue(
+      Library::Grouping(Library::GroupBy_Genre, Library::GroupBy_Artist, Library::GroupBy_Album)));
+
   group_by_group_ = new QActionGroup(this);
   group_by_group_->addAction(ui_.group_by_artist);
   group_by_group_->addAction(ui_.group_by_artist_album);
@@ -812,19 +825,12 @@ void MainWindow::PlaylistRemoveCurrent() {
 }
 
 void MainWindow::GroupByClicked(QAction* action) {
-  Library::Grouping g;
-
-  QStringList group_by = action->property("group_by").toStringList();
-  if (group_by.isEmpty()) {
+  if (action->property("group_by").isNull()) {
     group_by_dialog_->show();
     return;
   }
 
-  for (int i=0 ; i<group_by.size() ; ++i) {
-    g[i] = Library::GroupBy(
-        library_->GroupByEnum().keyToValue(group_by[i].toUtf8().constData()));
-  }
-
+  Library::Grouping g = action->property("group_by").value<Library::Grouping>();
   library_->SetGroupBy(g);
 }
 
@@ -836,16 +842,10 @@ void MainWindow::LibraryGroupingChanged(const Library::Grouping& g) {
 
   // Now make sure the correct action is checked
   foreach (QAction* action, group_by_group_->actions()) {
-    QStringList group_by = action->property("group_by").toStringList();
-    bool match = true;
-    for (int i=0 ; i<group_by.size() ; ++i) {
-      if (g[i] != library_->GroupByEnum().keyToValue(group_by[i].toUtf8().constData())) {
-        match = false;
-        break;
-      }
-    }
+    if (action->property("group_by").isNull())
+      continue;
 
-    if (match) {
+    if (g == action->property("group_by").value<Library::Grouping>()) {
       action->setChecked(true);
       return;
     }

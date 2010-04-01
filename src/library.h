@@ -59,11 +59,12 @@ class Library : public SimpleTreeModel<LibraryItem> {
     GroupBy_Composer = 5,
     GroupBy_Genre = 6,
   };
-  QMetaEnum GroupByEnum() const;
 
   struct Grouping {
-    Grouping() : first(GroupBy_None), second(GroupBy_None), third(GroupBy_None) {}
-    Grouping(GroupBy f, GroupBy s, GroupBy t) : first(f), second(s), third(t) {}
+    Grouping(GroupBy f = GroupBy_None,
+             GroupBy s = GroupBy_None,
+             GroupBy t = GroupBy_None)
+               : first(f), second(s), third(t) {}
 
     GroupBy first;
     GroupBy second;
@@ -71,6 +72,11 @@ class Library : public SimpleTreeModel<LibraryItem> {
 
     const GroupBy& operator [](int i) const;
     GroupBy& operator [](int i);
+    bool operator ==(const Grouping& other) const {
+      return first == other.first &&
+             second == other.second &&
+             third == other.third;
+    }
   };
 
   // Useful for tests.  The library takes ownership.
@@ -196,5 +202,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
   QIcon album_icon_;
   QIcon no_cover_icon_;
 };
+
+Q_DECLARE_METATYPE(Library::Grouping);
 
 #endif // LIBRARY_H
