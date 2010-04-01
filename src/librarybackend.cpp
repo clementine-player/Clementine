@@ -32,7 +32,7 @@
 
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
-const int LibraryBackend::kSchemaVersion = 5;
+const int LibraryBackend::kSchemaVersion = 6;
 
 int (*LibraryBackend::_sqlite3_create_function) (
     sqlite3*, const char*, int, int, void*,
@@ -288,19 +288,36 @@ void LibraryBackend::UpdateCompilationsAsync() {
 void LibraryBackend::LoadDirectories() {
   QSqlDatabase db(Connect());
 
-  QSqlQuery q("SELECT ROWID, path"
-              " FROM directories", db);
+  QSqlQuery q("SELECT ROWID, path FROM directories", db);
   q.exec();
   if (CheckErrors(q.lastError())) return;
 
-  DirectoryList directories;
   while (q.next()) {
     Directory dir;
     dir.id = q.value(0).toInt();
     dir.path = q.value(1).toString();
-    directories << dir;
+
+    emit DirectoryDiscovered(dir, SubdirsInDirectory(dir.id, db));
   }
-  emit DirectoriesDiscovered(directories);
+}
+
+SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase &db) {
+  QSqlQuery q("SELECT path, mtime FROM subdirectories"
+              " WHERE directory = :dir", db);
+  q.bindValue(":dir", id);
+  q.exec();
+  if (CheckErrors(q.lastError())) return SubdirectoryList();
+
+  SubdirectoryList subdirs;
+  while (q.next()) {
+    Subdirectory subdir;
+    subdir.directory_id = id;
+    subdir.path = q.value(0).toString();
+    subdir.mtime = q.value(1).toUInt();
+    subdirs << subdir;
+  }
+
+  return subdirs;
 }
 
 void LibraryBackend::UpdateTotalSongCount() {
@@ -327,7 +344,7 @@ void LibraryBackend::AddDirectory(const QString &path) {
   dir.path = path;
   dir.id = q.lastInsertId().toInt();
 
-  emit DirectoriesDiscovered(DirectoryList() << dir);
+  emit DirectoryDiscovered(dir, SubdirectoryList());
 }
 
 void LibraryBackend::RemoveDirectory(const Directory& dir) {
@@ -336,13 +353,23 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
   // Remove songs first
   DeleteSongs(FindSongsInDirectory(dir.id));
 
-  // Now remove the directory
-  QSqlQuery q("DELETE FROM directories WHERE ROWID = :id", db);
+  db.transaction();
+
+  // Delete the subdirs that were in this directory
+  QSqlQuery q("DELETE FROM subdirectories WHERE directory = :id", db);
   q.bindValue(":id", dir.id);
   q.exec();
   if (CheckErrors(q.lastError())) return;
 
-  emit DirectoriesDeleted(DirectoryList() << dir);
+  // Now remove the directory itself
+  q = QSqlQuery("DELETE FROM directories WHERE ROWID = :id", db);
+  q.bindValue(":id", dir.id);
+  q.exec();
+  if (CheckErrors(q.lastError())) return;
+
+  emit DirectoryDeleted(dir);
+
+  db.commit();
 }
 
 SongList LibraryBackend::FindSongsInDirectory(int id) {
@@ -361,6 +388,38 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
     ret << song;
   }
   return ret;
+}
+
+void LibraryBackend::AddSubdirs(const SubdirectoryList& subdirs) {
+  QSqlDatabase db(Connect());
+  QSqlQuery q("INSERT INTO subdirectories (directory, path, mtime)"
+              " VALUES (:id, :path, :mtime)", db);
+
+  db.transaction();
+  foreach (const Subdirectory& subdir, subdirs) {
+    q.bindValue(":id", subdir.directory_id);
+    q.bindValue(":path", subdir.path);
+    q.bindValue(":mtime", subdir.mtime);
+    q.exec();
+    if (CheckErrors(q.lastError())) continue;
+  }
+  db.commit();
+}
+
+void LibraryBackend::UpdateSubdirMTimes(const SubdirectoryList& subdirs) {
+  QSqlDatabase db(Connect());
+  QSqlQuery q("UPDATE subdirectories SET mtime = :mtime"
+              " WHERE directory = :id AND path = :path", db);
+
+  db.transaction();
+  foreach (const Subdirectory& subdir, subdirs) {
+    q.bindValue(":mtime", subdir.mtime);
+    q.bindValue(":id", subdir.directory_id);
+    q.bindValue(":path", subdir.path);
+    q.exec();
+    CheckErrors(q.lastError());
+  }
+  db.commit();
 }
 
 void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {

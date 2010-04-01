@@ -69,7 +69,10 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 
+  qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
+  qRegisterMetaType<Subdirectory>("Subdirectory");
+  qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<SongList>("SongList");
 
 

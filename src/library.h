@@ -132,20 +132,23 @@ class Library : public SimpleTreeModel<LibraryItem> {
   // for each parent item, restricting the songs returned to a particular
   // album or artist for example.
   void InitQuery(GroupBy type, LibraryQuery* q);
-  void FilterQuery(GroupBy type, LibraryItem* item,LibraryQuery* q);
+  void FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q);
 
   // Items can be created either from a query that's been run to populate a
   // node, or by a spontaneous SongsDiscovered emission from the backend.
   LibraryItem* ItemFromQuery(GroupBy type, bool signal, bool create_divider,
-                             LibraryItem* parent, const LibraryQuery& q);
+                             LibraryItem* parent, const LibraryQuery& q,
+                             int container_level);
   LibraryItem* ItemFromSong(GroupBy type, bool signal, bool create_divider,
-                            LibraryItem* parent, const Song& s);
+                            LibraryItem* parent, const Song& s,
+                            int container_level);
 
   // The "Various Artists" node is an annoying special case.
   LibraryItem* CreateCompilationArtistNode(bool signal, LibraryItem* parent);
 
   // Helpers for ItemFromQuery and ItemFromSong
-  LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent);
+  LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent,
+                        int container_level);
   void FinishItem(GroupBy type, bool signal, bool create_divider,
                   LibraryItem* parent, LibraryItem* item);
 

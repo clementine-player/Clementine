@@ -44,8 +44,8 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
  private slots:
   // To be called by the backend
-  void DirectoriesDiscovered(const DirectoryList& directories);
-  void DirectoriesDeleted(const DirectoryList& directories);
+  void DirectoryDiscovered(const Directory& directories);
+  void DirectoryDeleted(const Directory& directories);
 
  private:
   static const int kIdRole = Qt::UserRole + 1;

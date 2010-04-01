@@ -108,14 +108,20 @@ void Library::Initialise() {
   // connect them together and start everything off.
   watcher_->Worker()->SetBackend(backend_->Worker());
 
-  connect(backend_->Worker().get(), SIGNAL(DirectoriesDiscovered(DirectoryList)),
-          watcher_->Worker().get(), SLOT(AddDirectories(DirectoryList)));
+  connect(backend_->Worker().get(), SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
+          watcher_->Worker().get(), SLOT(AddDirectory(Directory,SubdirectoryList)));
+  connect(backend_->Worker().get(), SIGNAL(DirectoryDeleted(Directory)),
+          watcher_->Worker().get(), SLOT(RemoveDirectory(Directory)));
   connect(watcher_->Worker().get(), SIGNAL(NewOrUpdatedSongs(SongList)),
           backend_->Worker().get(), SLOT(AddOrUpdateSongs(SongList)));
   connect(watcher_->Worker().get(), SIGNAL(SongsMTimeUpdated(SongList)),
           backend_->Worker().get(), SLOT(UpdateMTimesOnly(SongList)));
   connect(watcher_->Worker().get(), SIGNAL(SongsDeleted(SongList)),
           backend_->Worker().get(), SLOT(DeleteSongs(SongList)));
+  connect(watcher_->Worker().get(), SIGNAL(SubdirsDiscovered(SubdirectoryList)),
+          backend_->Worker().get(), SLOT(AddSubdirs(SubdirectoryList)));
+  connect(watcher_->Worker().get(), SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
+          backend_->Worker().get(), SLOT(UpdateSubdirMTimes(SubdirectoryList)));
 
   // This will start the watcher checking for updates
   backend_->Worker()->LoadDirectoriesAsync();
@@ -130,6 +136,10 @@ void Library::SongsDiscovered(const SongList& songs) {
     // Sanity check to make sure we don't add songs that are outside the user's
     // filter
     if (!query_options_.Matches(song))
+      continue;
+
+    // Hey, we've already got that one!
+    if (song_nodes_.contains(song.id()))
       continue;
 
     // Before we can add each song we need to make sure the required container
@@ -170,8 +180,7 @@ void Library::SongsDiscovered(const SongList& songs) {
         if (!container_nodes_[i].contains(key)) {
           // Create the container
           container_nodes_[i][key] =
-              ItemFromSong(type, true, i == 0, container, song);
-          container_nodes_[i][key]->container_level = i;
+              ItemFromSong(type, true, i == 0, container, song, i);
         }
         container = container_nodes_[i][key];
       }
@@ -188,7 +197,7 @@ void Library::SongsDiscovered(const SongList& songs) {
     // We've gone all the way down to the deepest level and everything was
     // already lazy loaded, so now we have to create the song in the container.
     song_nodes_[song.id()] =
-        ItemFromSong(GroupBy_None, true, false, container, song);
+        ItemFromSong(GroupBy_None, true, false, container, song, -1);
   }
 }
 
@@ -429,8 +438,7 @@ void Library::LazyPopulate(LibraryItem* parent, bool signal) {
   while (q.Next()) {
     // Create the item - it will get inserted into the model here
     LibraryItem* item =
-        ItemFromQuery(child_type, signal, child_level == 0, parent, q);
-    item->container_level = child_level;
+        ItemFromQuery(child_type, signal, child_level == 0, parent, q, child_level);
 
     // Save a pointer to it for later
     if (child_type == GroupBy_None)
@@ -526,7 +534,8 @@ void Library::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q) {
   }
 }
 
-LibraryItem* Library::InitItem(GroupBy type, bool signal, LibraryItem *parent) {
+LibraryItem* Library::InitItem(GroupBy type, bool signal, LibraryItem *parent,
+                               int container_level) {
   LibraryItem::Type item_type =
       type == GroupBy_None ? LibraryItem::Type_Song :
       LibraryItem::Type_Container;
@@ -536,13 +545,16 @@ LibraryItem* Library::InitItem(GroupBy type, bool signal, LibraryItem *parent) {
                     parent->children.count(),parent->children.count());
 
   // Initialise the item depending on what type it's meant to be
-  return new LibraryItem(item_type, parent);
+  LibraryItem* item = new LibraryItem(item_type, parent);
+  item->container_level = container_level;
+  return item;
 }
 
 LibraryItem* Library::ItemFromQuery(GroupBy type,
                                     bool signal, bool create_divider,
-                                    LibraryItem* parent, const LibraryQuery& q) {
-  LibraryItem* item = InitItem(type, signal, parent);
+                                    LibraryItem* parent, const LibraryQuery& q,
+                                    int container_level) {
+  LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
 
   switch (type) {
@@ -587,8 +599,9 @@ LibraryItem* Library::ItemFromQuery(GroupBy type,
 
 LibraryItem* Library::ItemFromSong(GroupBy type,
                                    bool signal, bool create_divider,
-                                   LibraryItem* parent, const Song& s) {
-  LibraryItem* item = InitItem(type, signal, parent);
+                                   LibraryItem* parent, const Song& s,
+                                   int container_level) {
+  LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
 
   switch (type) {

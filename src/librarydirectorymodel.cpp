@@ -29,28 +29,24 @@ void LibraryDirectoryModel::SetBackend(boost::shared_ptr<LibraryBackendInterface
 
   backend_ = backend;
 
-  connect(backend_.get(), SIGNAL(DirectoriesDiscovered(DirectoryList)), SLOT(DirectoriesDiscovered(DirectoryList)));
-  connect(backend_.get(), SIGNAL(DirectoriesDeleted(DirectoryList)), SLOT(DirectoriesDeleted(DirectoryList)));
+  connect(backend_.get(), SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), SLOT(DirectoryDiscovered(Directory)));
+  connect(backend_.get(), SIGNAL(DirectoryDeleted(Directory)), SLOT(DirectoryDeleted(Directory)));
 
   emit BackendReady();
 }
 
-void LibraryDirectoryModel::DirectoriesDiscovered(const DirectoryList &directories) {
-  foreach (const Directory& dir, directories) {
-    QStandardItem* item = new QStandardItem(dir.path);
-    item->setData(dir.id, kIdRole);
-    item->setIcon(dir_icon_);
-    appendRow(item);
-  }
+void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {
+  QStandardItem* item = new QStandardItem(dir.path);
+  item->setData(dir.id, kIdRole);
+  item->setIcon(dir_icon_);
+  appendRow(item);
 }
 
-void LibraryDirectoryModel::DirectoriesDeleted(const DirectoryList &directories) {
-  foreach (const Directory& dir, directories) {
-    for (int i=0 ; i<rowCount() ; ++i) {
-      if (item(i, 0)->data(kIdRole).toInt() == dir.id) {
-        removeRow(i);
-        break;
-      }
+void LibraryDirectoryModel::DirectoryDeleted(const Directory &dir) {
+  for (int i=0 ; i<rowCount() ; ++i) {
+    if (item(i, 0)->data(kIdRole).toInt() == dir.id) {
+      removeRow(i);
+      break;
     }
   }
 }

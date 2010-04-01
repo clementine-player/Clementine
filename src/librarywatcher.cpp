@@ -28,109 +28,154 @@
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
 
+QStringList LibraryWatcher::sValidImages;
+QStringList LibraryWatcher::sValidPlaylists;
+
 
 LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
-    fs_watcher_(new QFileSystemWatcher(this)),
     rescan_timer_(new QTimer(this)),
     total_watches_(0)
 {
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 
-  connect(fs_watcher_, SIGNAL(directoryChanged(QString)), SLOT(DirectoryChanged(QString)));
+  if (sValidImages.isEmpty()) {
+    sValidImages << "jpg" << "png" << "gif" << "jpeg";
+    sValidPlaylists << "m3u" << "pls";
+  }
+
+  //connect(fs_watcher_, SIGNAL(directoryChanged(QString)), SLOT(DirectoryChanged(QString)));
   connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanPathsNow()));
 }
 
-void LibraryWatcher::AddDirectories(const DirectoryList& directories) {
-  // Iterate through each directory to find a list of files that look like they
-  // could be music.
+LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
+                                                 int dir, bool incremental)
+  : dir_(dir),
+    incremental_(incremental),
+    watcher_(watcher),
+    cached_songs_dirty_(true)
+{
+  emit watcher_->ScanStarted();
+}
 
-  foreach (const Directory& dir, directories) {
-    if (stop_requested_) return;
-    paths_watched_[dir.path] = dir;
-    ScanDirectory(dir.path);
-    if (stop_requested_) return;
+LibraryWatcher::ScanTransaction::~ScanTransaction() {
+  if (!new_songs.isEmpty())
+    emit watcher_->NewOrUpdatedSongs(new_songs);
 
-    // Start monitoring this directory for more changes
-    fs_watcher_->addPath(dir.path);
-    ++total_watches_;
+  if (!touched_songs.isEmpty())
+    emit watcher_->SongsMTimeUpdated(touched_songs);
 
-    // And all the subdirectories
-    QDirIterator it(dir.path,
-                    QDir::NoDotAndDotDot | QDir::Dirs,
-                    QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-      QString subdir(it.next());
-      fs_watcher_->addPath(subdir);
-      paths_watched_[subdir] = dir;
-      #ifdef Q_OS_DARWIN
-      if (++total_watches_ > kMaxWatches) {
-        qWarning() << "Trying to watch more files than we can manage";
-        return;
-      }
-      #endif
+  if (!deleted_songs.isEmpty())
+    emit watcher_->SongsDeleted(deleted_songs);
+
+  if (!new_subdirs.isEmpty())
+    emit watcher_->SubdirsDiscovered(new_subdirs);
+
+  if (!touched_subdirs.isEmpty())
+    emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
+
+  emit watcher_->ScanFinished();
+}
+
+SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(const QString &path) {
+  if (cached_songs_dirty_) {
+    cached_songs_ = watcher_->backend_->FindSongsInDirectory(dir_);
+    cached_songs_dirty_ = false;
+  }
+
+  // TODO: Make this faster
+  SongList ret;
+  foreach (const Song& song, cached_songs_) {
+    if (song.filename().section('/', 0, -2) == path)
+      ret << song;
+  }
+  return ret;
+}
+
+void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& subdirs) {
+  DirData data;
+  data.dir = dir;
+  data.known_subdirs = subdirs;
+  data.watcher = new QFileSystemWatcher(this);
+  connect(data.watcher, SIGNAL(directoryChanged(QString)), SLOT(DirectoryChanged(QString)));
+  watched_dirs_[dir.id] = data;
+
+  if (subdirs.isEmpty()) {
+    // This is a new directory that we've never seen before.
+    // Scan it fully.
+    ScanTransaction transaction(this, dir.id, false);
+    ScanSubdirectory(dir.path, Subdirectory(), &transaction);
+    AddWatch(data.watcher, dir.path);
+  } else {
+    // We can do an incremental scan - looking at the mtimes of each
+    // subdirectory and only rescan if the directory has changed.
+    ScanTransaction transaction(this, dir.id, true);
+    foreach (const Subdirectory& subdir, subdirs) {
+      ScanSubdirectory(subdir.path, subdir, &transaction);
+      AddWatch(data.watcher, subdir.path);
     }
   }
 
-  qDebug() << "Updating compilations...";
-  backend_.get()->UpdateCompilationsAsync();
+  backend_->UpdateCompilationsAsync();
 }
 
-void LibraryWatcher::RemoveDirectories(const DirectoryList &directories) {
-  foreach (const Directory& dir, directories) {
-    fs_watcher_->removePath(dir.path);
-    paths_watched_.remove(dir.path);
-    paths_needing_rescan_.removeAll(dir.path);
-
-    // And all the subdirectories
-    QDirIterator it(dir.path,
-                    QDir::NoDotAndDotDot | QDir::Dirs,
-                    QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-      QString subdir(it.next());
-      fs_watcher_->removePath(subdir);
-      paths_watched_.remove(subdir);
-    }
+bool LibraryWatcher::HasSeenSubdir(int id, const QString& path) const {
+  foreach (const Subdirectory& subdir, watched_dirs_[id].known_subdirs) {
+    if (subdir.path == path)
+      return true;
   }
+  return false;
 }
 
-void LibraryWatcher::ScanDirectory(const QString& path) {
-  const Directory& dir = paths_watched_[path];
-  qDebug() << "Scanning" << path;
-  emit ScanStarted();
+void LibraryWatcher::ScanSubdirectory(
+    const QString& path, const Subdirectory& subdir, ScanTransaction* t) {
+  QFileInfo path_info(path);
+  if (t->is_incremental() && subdir.mtime == path_info.lastModified().toTime_t()) {
+    // The directory hasn't changed since last time
+    return;
+  }
 
-  QStringList valid_images = QStringList() << "jpg" << "png" << "gif" << "jpeg";
-  QStringList valid_playlists = QStringList() << "m3u" << "pls";
-
-  // Map from canonical directory name to list of possible filenames for cover
-  // art
   QMap<QString, QStringList> album_art;
-
   QStringList files_on_disk;
-  QDirIterator it(dir.path,
-                  QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
-                  QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
+  SubdirectoryList my_new_subdirs;
+
+  // First we "quickly" get a list of the files in the directory that we
+  // think might be music.  While we're here, we also look for new subdirectories
+  // and possible album artwork.
+  QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
   while (it.hasNext()) {
-    QString path(it.next());
-    QString ext(ExtensionPart(path));
-    QString dir(DirectoryPart(path));
+    QString child(it.next());
+    QFileInfo child_info(child);
 
-    if (valid_images.contains(ext))
-      album_art[dir] << path;
-    else if (engine_->canDecode(QUrl::fromLocalFile(path)))
-      files_on_disk << path;
+    if (child_info.isDir()) {
+      if (!HasSeenSubdir(t->dir(), child)) {
+        // We haven't seen this subdirectory before - add it to a list and
+        // later we'll tell the backend about it and scan it.
+        Subdirectory new_subdir;
+        new_subdir.directory_id = t->dir();
+        new_subdir.path = child;
+        new_subdir.mtime = child_info.lastModified().toTime_t();
+        my_new_subdirs << new_subdir;
+      }
+    } else {
+      QString ext_part(ExtensionPart(child));
+      QString dir_part(DirectoryPart(child));
 
-    if (stop_requested_) return;
+      if (sValidImages.contains(ext_part))
+        album_art[dir_part] << child;
+      else if (engine_->canDecode(QUrl::fromLocalFile(child)))
+        files_on_disk << child;
+    }
   }
+
+  if (stop_requested_) return;
 
   // Ask the database for a list of files in this directory
-  SongList songs_in_db = backend_->FindSongsInDirectory(dir.id);
+  SongList songs_in_db = t->FindSongsInSubdirectory(path);
 
   // Now compare the list from the database with the list of files on disk
-  SongList new_songs;
-  SongList touched_songs;
   foreach (const QString& file, files_on_disk) {
     if (stop_requested_) return;
 
@@ -161,7 +206,7 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
 
         // It's changed - reread the metadata from the file
         Song song_on_disk;
-        song_on_disk.InitFromFile(file, dir.id);
+        song_on_disk.InitFromFile(file, t->dir());
         if (!song_on_disk.is_valid())
           continue;
         song_on_disk.set_id(matching_song.id());
@@ -170,17 +215,17 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
         if (!matching_song.IsMetadataEqual(song_on_disk)) {
           qDebug() << file << "metadata changed";
           // Update the song in the DB
-          new_songs << song_on_disk;
+          t->new_songs << song_on_disk;
         } else {
           // Only the metadata changed
-          touched_songs << song_on_disk;
+          t->touched_songs << song_on_disk;
         }
       }
     } else {
       // The song is on disk but not in the DB
 
       Song song;
-      song.InitFromFile(file, dir.id);
+      song.InitFromFile(file, t->dir());
       if (!song.is_valid())
         continue;
       qDebug() << file << "created";
@@ -188,37 +233,57 @@ void LibraryWatcher::ScanDirectory(const QString& path) {
       // Choose an image for the song
       song.set_art_automatic(ImageForSong(file, album_art));
 
-      new_songs << song;
+      t->new_songs << song;
     }
   }
 
-  if (stop_requested_) return;
-
-  if (!new_songs.isEmpty())
-    emit NewOrUpdatedSongs(new_songs);
-
-  if (!touched_songs.isEmpty())
-    emit SongsMTimeUpdated(touched_songs);
-
   // Look for deleted songs
-  SongList deleted_songs;
   foreach (const Song& song, songs_in_db) {
     if (!files_on_disk.contains(song.filename())) {
       qDebug() << "Song deleted from disk:" << song.filename();
-      deleted_songs << song;
+      t->deleted_songs << song;
     }
   }
 
-  if (stop_requested_) return;
+  // Add this subdir to the new or touched list
+  Subdirectory updated_subdir;
+  updated_subdir.directory_id = t->dir();
+  updated_subdir.mtime = path_info.lastModified().toTime_t();
+  updated_subdir.path = path;
 
-  if (!deleted_songs.isEmpty())
-    emit SongsDeleted(deleted_songs);
+  if (subdir.directory_id == -1)
+    t->new_subdirs << updated_subdir;
+  else
+    t->touched_subdirs << updated_subdir;
 
-  qDebug() << "Finished scanning" << path;
-  emit ScanFinished();
+  // Recurse into the new subdirs that we found
+  foreach (const Subdirectory& my_new_subdir, my_new_subdirs) {
+    ScanSubdirectory(my_new_subdir.path, my_new_subdir, t);
+  }
+  t->new_subdirs << my_new_subdirs;
+}
+
+void LibraryWatcher::AddWatch(QFileSystemWatcher* w, const QString& path) {
+#ifdef Q_OS_DARWIN
+  if (++total_watches_ > kMaxWatches) {
+    qWarning() << "Trying to watch more files than we can manage";
+    return;
+  }
+#endif
+  w->addPath(path);
+}
+
+void LibraryWatcher::RemoveDirectory(const Directory& dir) {
+  if (watched_dirs_.contains(dir.id)) {
+    delete watched_dirs_[dir.id].watcher;
+  }
+
+  rescan_queue_.remove(dir.id);
+  watched_dirs_.remove(dir.id);
 }
 
 bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, Song* out) {
+  // TODO: Make this faster
   foreach (const Song& song, list) {
     if (song.filename() == path) {
       *out = song;
@@ -228,24 +293,45 @@ bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, S
   return false;
 }
 
-void LibraryWatcher::DirectoryChanged(const QString &path) {
-  qDebug() << path;
-  if (!paths_needing_rescan_.contains(path))
-    paths_needing_rescan_ << path;
+void LibraryWatcher::DirectoryChanged(const QString &subdir) {
+  // Find what dir it was in
+  QFileSystemWatcher* watcher = qobject_cast<QFileSystemWatcher*>(sender());
+  if (!watcher)
+    return;
+
+  Directory dir;
+  foreach (const DirData& info, watched_dirs_) {
+    if (info.watcher == watcher)
+      dir = info.dir;
+  }
+
+  qDebug() << "Subdir" << subdir << "changed under directory" << dir.path << "id" << dir.id;
+
+  // Queue the subdir for rescanning
+  if (!rescan_queue_[dir.id].contains(subdir))
+    rescan_queue_[dir.id] << subdir;
 
   rescan_timer_->start();
 }
 
 void LibraryWatcher::RescanPathsNow() {
-  foreach (const QString& path, paths_needing_rescan_) {
+  foreach (int dir, rescan_queue_.keys()) {
     if (stop_requested_) return;
-    ScanDirectory(path);
+    ScanTransaction transaction(this, dir, false);
+
+    foreach (const QString& path, rescan_queue_[dir]) {
+      if (stop_requested_) return;
+      Subdirectory subdir;
+      subdir.directory_id = dir;
+      subdir.mtime = 0;
+      subdir.path = path;
+      ScanSubdirectory(path, subdir, &transaction);
+    }
   }
 
-  paths_needing_rescan_.clear();
+  rescan_queue_.clear();
 
-  qDebug() << "Updating compilations...";
-  backend_.get()->UpdateCompilationsAsync();
+  backend_->UpdateCompilationsAsync();
 }
 
 QString LibraryWatcher::PickBestImage(const QStringList& images) {

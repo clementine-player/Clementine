@@ -395,6 +395,7 @@ void MainWindow::QueueFiles(const QList<QUrl>& urls) {
 }
 
 void MainWindow::ReportError(const QString& message) {
+  // TODO: rate limiting
   QMessageBox::warning(this, "Error", message);
 }
 

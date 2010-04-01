@@ -90,6 +90,8 @@ class LibraryBackendInterface : public QObject {
   virtual void AddOrUpdateSongs(const SongList& songs) = 0;
   virtual void UpdateMTimesOnly(const SongList& songs) = 0;
   virtual void DeleteSongs(const SongList& songs) = 0;
+  virtual void AddSubdirs(const SubdirectoryList& subdirs) = 0;
+  virtual void UpdateSubdirMTimes(const SubdirectoryList& subdirs) = 0;
   virtual void UpdateCompilations() = 0;
   virtual void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art) = 0;
   virtual void ForceCompilation(const QString& artist, const QString& album, bool on) = 0;
@@ -97,8 +99,8 @@ class LibraryBackendInterface : public QObject {
  signals:
   void Error(const QString& message);
 
-  void DirectoriesDiscovered(const DirectoryList& directories);
-  void DirectoriesDeleted(const DirectoryList& directories);
+  void DirectoryDiscovered(const Directory& dir, const SubdirectoryList& subdirs);
+  void DirectoryDeleted(const Directory& dir);
 
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
@@ -154,6 +156,8 @@ class LibraryBackend : public LibraryBackendInterface {
   void AddOrUpdateSongs(const SongList& songs);
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
+  void AddSubdirs(const SubdirectoryList& subdirs);
+  void UpdateSubdirMTimes(const SubdirectoryList& subdirs);
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
   void ForceCompilation(const QString& artist, const QString& album, bool on);
@@ -178,6 +182,7 @@ class LibraryBackend : public LibraryBackendInterface {
                           const QString& album, int sampler);
   AlbumList GetAlbums(const QString& artist, bool compilation = false,
                       const QueryOptions& opt = QueryOptions());
+  SubdirectoryList SubdirsInDirectory(int id, QSqlDatabase& db);
 
  private:
   static const char* kDatabaseName;

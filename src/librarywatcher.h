@@ -47,18 +47,58 @@ class LibraryWatcher : public QObject {
   void NewOrUpdatedSongs(const SongList& songs);
   void SongsMTimeUpdated(const SongList& songs);
   void SongsDeleted(const SongList& songs);
+  void SubdirsDiscovered(const SubdirectoryList& subdirs);
+  void SubdirsMTimeUpdated(const SubdirectoryList& subdirs);
 
   void ScanStarted();
   void ScanFinished();
 
  public slots:
-  void AddDirectories(const DirectoryList& directories);
-  void RemoveDirectories(const DirectoryList& directories);
+  void AddDirectory(const Directory& dir, const SubdirectoryList& subdirs);
+  void RemoveDirectory(const Directory& dir);
+
+ private:
+  // This class encapsulates a full or partial scan of a directory.
+  // Each directory has one or more subdirectories, and any number of
+  // subdirectories can be scanned during one transaction.  ScanSubdirectory()
+  // adds its results to the members of this transaction class, and they are
+  // "committed" through calls to the LibraryBackend in the transaction's dtor.
+  // The transaction also caches the list of songs in this directory according
+  // to the library.  Multiple calls to FindSongsInSubdirectory during one
+  // transaction will only result in one call to
+  // LibraryBackend::FindSongsInDirectory.
+  class ScanTransaction {
+   public:
+    ScanTransaction(LibraryWatcher* watcher, int dir, bool incremental);
+    ~ScanTransaction();
+
+    SongList FindSongsInSubdirectory(const QString& path);
+
+    int dir() const { return dir_; }
+    bool is_incremental() const { return incremental_; }
+
+    SongList deleted_songs;
+    SongList new_songs;
+    SongList touched_songs;
+    SubdirectoryList new_subdirs;
+    SubdirectoryList touched_subdirs;
+
+   private:
+    ScanTransaction(const ScanTransaction&) {}
+    ScanTransaction& operator =(const ScanTransaction&) { return *this; }
+
+    int dir_;
+    bool incremental_;
+    LibraryWatcher* watcher_;
+    SongList cached_songs_;
+    bool cached_songs_dirty_;
+  };
 
  private slots:
   void DirectoryChanged(const QString& path);
   void RescanPathsNow();
-  void ScanDirectory(const QString& path);
+  void ScanSubdirectory(const QString& path, const Subdirectory& subdir,
+                        ScanTransaction* t);
 
  private:
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
@@ -66,19 +106,29 @@ class LibraryWatcher : public QObject {
   inline static QString DirectoryPart( const QString &fileName );
   static QString PickBestImage(const QStringList& images);
   static QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
+  void AddWatch(QFileSystemWatcher* w, const QString& path);
+  bool HasSeenSubdir(int id, const QString& path) const;
 
  private:
+  // One of these gets stored for each Directory we're watching
+  struct DirData {
+    Directory dir;
+    SubdirectoryList known_subdirs;
+    QFileSystemWatcher* watcher;
+  };
+
   EngineBase* engine_;
   boost::shared_ptr<LibraryBackendInterface> backend_;
   bool stop_requested_;
 
-  QFileSystemWatcher* fs_watcher_;
+  QMap<int, DirData> watched_dirs_;
   QTimer* rescan_timer_;
-
-  QMap<QString, Directory> paths_watched_;
-  QStringList paths_needing_rescan_;
+  QMap<int, QStringList> rescan_queue_; // dir id -> list of subdirs to be scanned
 
   int total_watches_;
+
+  static QStringList sValidImages;
+  static QStringList sValidPlaylists;
 
   #ifdef Q_OS_DARWIN
   static const int kMaxWatches = 100;

@@ -24,6 +24,8 @@
 class QSqlQuery;
 
 struct Directory {
+  Directory() : id(-1) {}
+
   QString path;
   int id;
 };
@@ -31,5 +33,18 @@ Q_DECLARE_METATYPE(Directory);
 
 typedef QList<Directory> DirectoryList;
 Q_DECLARE_METATYPE(DirectoryList);
+
+
+struct Subdirectory {
+  Subdirectory() : directory_id(-1), mtime(0) {}
+
+  int directory_id;
+  QString path;
+  uint mtime;
+};
+Q_DECLARE_METATYPE(Subdirectory);
+
+typedef QList<Subdirectory> SubdirectoryList;
+Q_DECLARE_METATYPE(SubdirectoryList);
 
 #endif // DIRECTORY_H
