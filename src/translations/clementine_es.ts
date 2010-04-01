@@ -281,6 +281,61 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>GroupByDialog</name>
+    <message>
+        <source>Library advanced grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can change the way the songs in the library are organised.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group Library by...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album</source>
+        <translation type="unfinished">Álbum</translation>
+    </message>
+    <message>
+        <source>Artist</source>
+        <translation type="unfinished">Artista</translation>
+    </message>
+    <message>
+        <source>Composer</source>
+        <translation type="unfinished">Compositor</translation>
+    </message>
+    <message>
+        <source>Genre</source>
+        <translation type="unfinished">Género</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="unfinished">Año</translation>
+    </message>
+    <message>
+        <source>Year - Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third level</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LastFMConfig</name>
     <message>
         <source>Enter your Last.fm details below:</source>
@@ -532,6 +587,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Add directory...</source>
         <translation>Añadir directorio...</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically open single categories in the library tree</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

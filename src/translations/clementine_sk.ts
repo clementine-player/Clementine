@@ -340,6 +340,88 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>GroupByDialog</name>
+    <message>
+        <location filename="../groupbydialog.ui" line="14"/>
+        <source>Library advanced grouping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="20"/>
+        <source>You can change the way the songs in the library are organised.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="30"/>
+        <source>Group Library by...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="36"/>
+        <source>First level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="44"/>
+        <location filename="../groupbydialog.ui" line="90"/>
+        <location filename="../groupbydialog.ui" line="136"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="49"/>
+        <location filename="../groupbydialog.ui" line="95"/>
+        <location filename="../groupbydialog.ui" line="141"/>
+        <source>Album</source>
+        <translation type="unfinished">Album</translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="54"/>
+        <location filename="../groupbydialog.ui" line="100"/>
+        <location filename="../groupbydialog.ui" line="146"/>
+        <source>Artist</source>
+        <translation type="unfinished">Interprét</translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="59"/>
+        <location filename="../groupbydialog.ui" line="105"/>
+        <location filename="../groupbydialog.ui" line="151"/>
+        <source>Composer</source>
+        <translation type="unfinished">Skladateľ</translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="64"/>
+        <location filename="../groupbydialog.ui" line="110"/>
+        <location filename="../groupbydialog.ui" line="156"/>
+        <source>Genre</source>
+        <translation type="unfinished">Žáner</translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="69"/>
+        <location filename="../groupbydialog.ui" line="115"/>
+        <location filename="../groupbydialog.ui" line="161"/>
+        <source>Year</source>
+        <translation type="unfinished">Rok</translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="74"/>
+        <location filename="../groupbydialog.ui" line="120"/>
+        <location filename="../groupbydialog.ui" line="166"/>
+        <source>Year - Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="82"/>
+        <source>Second level</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../groupbydialog.ui" line="128"/>
+        <source>Third level</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LastFMConfig</name>
     <message>
         <location filename="../lastfmconfig.cpp" line="56"/>
@@ -618,12 +700,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Library</name>
     <message>
-        <location filename="../library.cpp" line="186"/>
+        <location filename="../library.cpp" line="210"/>
         <source>Various Artists</source>
         <translation>Rôzni interpréti</translation>
     </message>
     <message>
-        <location filename="../library.cpp" line="642"/>
+        <location filename="../library.cpp" line="680"/>
         <source>Unknown</source>
         <translation>Neznámi</translation>
     </message>
@@ -631,7 +713,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>LibraryConfig</name>
     <message>
-        <location filename="../libraryconfig.cpp" line="56"/>
+        <location filename="../libraryconfig.cpp" line="57"/>
         <source>Add directory...</source>
         <translation>Pridať priečinok...</translation>
     </message>
@@ -650,6 +732,16 @@ p, li { white-space: pre-wrap; }
         <source>Remove folder</source>
         <translation>Odobrať priečinok</translation>
     </message>
+    <message>
+        <location filename="../libraryconfig.ui" line="94"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../libraryconfig.ui" line="100"/>
+        <source>Automatically open single categories in the library tree</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LibraryConfigDialog</name>
@@ -662,22 +754,22 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>LibraryView</name>
     <message>
-        <location filename="../libraryview.cpp" line="86"/>
+        <location filename="../libraryview.cpp" line="89"/>
         <source>Show in various artists</source>
         <translation>Zobrazovať v rôznich interprétoch</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="88"/>
+        <location filename="../libraryview.cpp" line="91"/>
         <source>Don&apos;t show in various artists</source>
         <translation>Nzobrazovať v rôznich interprétoch</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="134"/>
+        <location filename="../libraryview.cpp" line="148"/>
         <source>Your library is empty!</source>
         <translation>Vaša zbierka je prázdna!</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="140"/>
+        <location filename="../libraryview.cpp" line="154"/>
         <source>Click here to add some music</source>
         <translation>Kliknite sem aby ste pridali nejakú hudbu</translation>
     </message>
@@ -685,44 +777,44 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="253"/>
+        <location filename="../mainwindow.cpp" line="275"/>
         <source>Configure library...</source>
         <translation>Nastaviť zbierku...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="257"/>
-        <location filename="../mainwindow.cpp" line="396"/>
-        <location filename="../mainwindow.cpp" line="412"/>
-        <location filename="../mainwindow.cpp" line="593"/>
         <location filename="../mainwindow.ui" line="517"/>
+        <location filename="../mainwindow.cpp" line="280"/>
+        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="435"/>
+        <location filename="../mainwindow.cpp" line="616"/>
         <source>Play</source>
         <translation>Hrať</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="259"/>
         <location filename="../mainwindow.ui" line="559"/>
+        <location filename="../mainwindow.cpp" line="282"/>
         <source>Stop after this track</source>
         <translation>Zastaviť po tejto skladbe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="352"/>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="393"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Zobraziť tray ikonu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="423"/>
-        <location filename="../mainwindow.cpp" line="590"/>
+        <location filename="../mainwindow.cpp" line="446"/>
+        <location filename="../mainwindow.cpp" line="613"/>
         <source>Pause</source>
         <translation>Pauza</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="665"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Nastaviť %1 do &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="642"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Upraviť tag &quot;%1&quot;...</translation>
     </message>
@@ -939,8 +1031,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
         <location filename="../mainwindow.ui" line="728"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Skryť tray ikonu</translation>
     </message>
@@ -1032,97 +1124,97 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Playlist</name>
     <message>
-        <location filename="../playlist.cpp" line="535"/>
+        <location filename="../playlist.cpp" line="536"/>
         <source>Title</source>
         <translation>Názov</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="536"/>
+        <location filename="../playlist.cpp" line="537"/>
         <source>Artist</source>
         <translation>Interprét</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="537"/>
+        <location filename="../playlist.cpp" line="538"/>
         <source>Album</source>
         <translation>Album</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="538"/>
+        <location filename="../playlist.cpp" line="539"/>
         <source>Length</source>
         <translation>Dĺžka</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="539"/>
+        <location filename="../playlist.cpp" line="540"/>
         <source>Track</source>
         <translation>Č.</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="540"/>
+        <location filename="../playlist.cpp" line="541"/>
         <source>Disc</source>
         <translation>Disk</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="541"/>
+        <location filename="../playlist.cpp" line="542"/>
         <source>Year</source>
         <translation>Rok</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="542"/>
+        <location filename="../playlist.cpp" line="543"/>
         <source>Genre</source>
         <translation>Žáner</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="543"/>
+        <location filename="../playlist.cpp" line="544"/>
         <source>Album artist</source>
         <translation>Interprét albumu</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="544"/>
+        <location filename="../playlist.cpp" line="545"/>
         <source>Composer</source>
         <translation>Skladateľ</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="546"/>
+        <location filename="../playlist.cpp" line="547"/>
         <source>BPM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="547"/>
+        <location filename="../playlist.cpp" line="548"/>
         <source>Bit rate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="548"/>
+        <location filename="../playlist.cpp" line="549"/>
         <source>Sample rate</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="549"/>
+        <location filename="../playlist.cpp" line="550"/>
         <source>File name</source>
         <translation>Názov súboru</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="550"/>
+        <location filename="../playlist.cpp" line="551"/>
         <source>File name (without path)</source>
         <translation>Názov súboru (bez cesty)</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="551"/>
+        <location filename="../playlist.cpp" line="552"/>
         <source>File size</source>
         <translation>Veľkosť súboru</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="552"/>
+        <location filename="../playlist.cpp" line="553"/>
         <source>File type</source>
         <translation>Typ súboru</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="553"/>
+        <location filename="../playlist.cpp" line="554"/>
         <source>Date modified</source>
         <translation>Dátum zmeny</translation>
     </message>
     <message>
-        <location filename="../playlist.cpp" line="554"/>
+        <location filename="../playlist.cpp" line="555"/>
         <source>Date created</source>
         <translation>Dátum vytvorenia</translation>
     </message>

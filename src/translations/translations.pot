@@ -384,6 +384,84 @@ msgstr ""
 msgid "Move to library..."
 msgstr ""
 
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:14
+#, fuzzy
+msgid "Library advanced grouping"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:20
+#, fuzzy
+msgid "You can change the way the songs in the library are organised."
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:30
+#, fuzzy
+msgid "Group Library by..."
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:36
+#, fuzzy
+msgid "First level"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:44 ../groupbydialog.ui:90 ../groupbydialog.ui:136
+#, fuzzy
+msgid "None"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:49 ../groupbydialog.ui:95 ../groupbydialog.ui:141
+#, fuzzy
+msgid "Album"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:54 ../groupbydialog.ui:100 ../groupbydialog.ui:146
+#, fuzzy
+msgid "Artist"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:59 ../groupbydialog.ui:105 ../groupbydialog.ui:151
+#, fuzzy
+msgid "Composer"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:64 ../groupbydialog.ui:110 ../groupbydialog.ui:156
+#, fuzzy
+msgid "Genre"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:69 ../groupbydialog.ui:115 ../groupbydialog.ui:161
+#, fuzzy
+msgid "Year"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:74 ../groupbydialog.ui:120 ../groupbydialog.ui:166
+#, fuzzy
+msgid "Year - Album"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:82
+#, fuzzy
+msgid "Second level"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:128
+#, fuzzy
+msgid "Third level"
+msgstr ""
+
 #. ts-context LastFMConfig
 #: ../lastfmconfig.ui:20
 #, fuzzy
@@ -700,13 +778,13 @@ msgid "Tag"
 msgstr ""
 
 #. ts-context Library
-#: ../library.cpp:186
+#: ../library.cpp:210
 #, fuzzy
 msgid "Various Artists"
 msgstr ""
 
 #. ts-context Library
-#: ../library.cpp:642
+#: ../library.cpp:680
 #, fuzzy
 msgid "Unknown"
 msgstr ""
@@ -730,7 +808,19 @@ msgid "Remove folder"
 msgstr ""
 
 #. ts-context LibraryConfig
-#: ../libraryconfig.cpp:56
+#: ../libraryconfig.ui:94
+#, fuzzy
+msgid "Options"
+msgstr ""
+
+#. ts-context LibraryConfig
+#: ../libraryconfig.ui:100
+#, fuzzy
+msgid "Automatically open single categories in the library tree"
+msgstr ""
+
+#. ts-context LibraryConfig
+#: ../libraryconfig.cpp:57
 #, fuzzy
 msgid "Add directory..."
 msgstr ""
@@ -742,25 +832,25 @@ msgid "Music Library"
 msgstr ""
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:86
+#: ../libraryview.cpp:89
 #, fuzzy
 msgid "Show in various artists"
 msgstr ""
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:88
+#: ../libraryview.cpp:91
 #, fuzzy
 msgid "Don't show in various artists"
 msgstr ""
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:134
+#: ../libraryview.cpp:148
 #, fuzzy
 msgid "Your library is empty!"
 msgstr ""
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:140
+#: ../libraryview.cpp:154
 #, fuzzy
 msgid "Click here to add some music"
 msgstr ""
@@ -832,8 +922,8 @@ msgid "Previous track"
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:257 ../mainwindow.cpp:396 ../mainwindow.cpp:412
-#: ../mainwindow.cpp:593 ../mainwindow.ui:517
+#: ../mainwindow.ui:517 ../mainwindow.cpp:280 ../mainwindow.cpp:419
+#: ../mainwindow.cpp:435 ../mainwindow.cpp:616
 #, fuzzy
 msgid "Play"
 msgstr ""
@@ -863,7 +953,7 @@ msgid "Ctrl+Q"
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:259 ../mainwindow.ui:559
+#: ../mainwindow.ui:559 ../mainwindow.cpp:282
 #, fuzzy
 msgid "Stop after this track"
 msgstr ""
@@ -1031,7 +1121,7 @@ msgid "Advanced grouping..."
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:375 ../mainwindow.ui:728
+#: ../mainwindow.ui:728 ../mainwindow.cpp:397
 #, fuzzy
 msgid "&Hide tray icon"
 msgstr ""
@@ -1055,31 +1145,31 @@ msgid "Repeat mode"
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:253
+#: ../mainwindow.cpp:275
 #, fuzzy
 msgid "Configure library..."
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:352 ../mainwindow.cpp:371
+#: ../mainwindow.cpp:374 ../mainwindow.cpp:393
 #, fuzzy
 msgid "&Show tray icon"
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:423 ../mainwindow.cpp:590
+#: ../mainwindow.cpp:446 ../mainwindow.cpp:613
 #, fuzzy
 msgid "Pause"
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:640
+#: ../mainwindow.cpp:665
 #, fuzzy
 msgid "Set %1 to \"%2\"..."
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:642
+#: ../mainwindow.cpp:667
 #, fuzzy
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1151,115 +1241,115 @@ msgid "Volume %1%"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:535
+#: ../playlist.cpp:536
 #, fuzzy
 msgid "Title"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:536
+#: ../playlist.cpp:537
 #, fuzzy
 msgid "Artist"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:537
+#: ../playlist.cpp:538
 #, fuzzy
 msgid "Album"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:538
+#: ../playlist.cpp:539
 #, fuzzy
 msgid "Length"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:539
+#: ../playlist.cpp:540
 #, fuzzy
 msgid "Track"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:540
+#: ../playlist.cpp:541
 #, fuzzy
 msgid "Disc"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:541
+#: ../playlist.cpp:542
 #, fuzzy
 msgid "Year"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:542
+#: ../playlist.cpp:543
 #, fuzzy
 msgid "Genre"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:543
+#: ../playlist.cpp:544
 #, fuzzy
 msgid "Album artist"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:544
+#: ../playlist.cpp:545
 #, fuzzy
 msgid "Composer"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:546
+#: ../playlist.cpp:547
 #, fuzzy
 msgid "BPM"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:547
+#: ../playlist.cpp:548
 #, fuzzy
 msgid "Bit rate"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:548
+#: ../playlist.cpp:549
 #, fuzzy
 msgid "Sample rate"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:549
+#: ../playlist.cpp:550
 #, fuzzy
 msgid "File name"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:550
+#: ../playlist.cpp:551
 #, fuzzy
 msgid "File name (without path)"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:551
+#: ../playlist.cpp:552
 #, fuzzy
 msgid "File size"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:552
+#: ../playlist.cpp:553
 #, fuzzy
 msgid "File type"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:553
+#: ../playlist.cpp:554
 #, fuzzy
 msgid "Date modified"
 msgstr ""
 
 #. ts-context Playlist
-#: ../playlist.cpp:554
+#: ../playlist.cpp:555
 #, fuzzy
 msgid "Date created"
 msgstr ""

@@ -371,6 +371,84 @@ msgstr "Zkopírovat do knihovny..."
 msgid "Move to library..."
 msgstr "Přesunout do knihovny..."
 
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:14
+#, fuzzy
+msgid "Library advanced grouping"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:20
+#, fuzzy
+msgid "You can change the way the songs in the library are organised."
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:30
+#, fuzzy
+msgid "Group Library by..."
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:36
+#, fuzzy
+msgid "First level"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:44 ../groupbydialog.ui:90 ../groupbydialog.ui:136
+#, fuzzy
+msgid "None"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:49 ../groupbydialog.ui:95 ../groupbydialog.ui:141
+#, fuzzy
+msgid "Album"
+msgstr "Album"
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:54 ../groupbydialog.ui:100 ../groupbydialog.ui:146
+#, fuzzy
+msgid "Artist"
+msgstr "Umělec"
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:59 ../groupbydialog.ui:105 ../groupbydialog.ui:151
+#, fuzzy
+msgid "Composer"
+msgstr "Skladatel"
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:64 ../groupbydialog.ui:110 ../groupbydialog.ui:156
+#, fuzzy
+msgid "Genre"
+msgstr "Žánr"
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:69 ../groupbydialog.ui:115 ../groupbydialog.ui:161
+#, fuzzy
+msgid "Year"
+msgstr "Rok"
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:74 ../groupbydialog.ui:120 ../groupbydialog.ui:166
+#, fuzzy
+msgid "Year - Album"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:82
+#, fuzzy
+msgid "Second level"
+msgstr ""
+
+#. ts-context GroupByDialog
+#: ../groupbydialog.ui:128
+#, fuzzy
+msgid "Third level"
+msgstr ""
+
 #. ts-context LastFMConfig
 #: ../lastfmconfig.ui:20
 msgid "Enter your Last.fm details below:"
@@ -639,12 +717,12 @@ msgid "Tag"
 msgstr "Značka"
 
 #. ts-context Library
-#: ../library.cpp:186
+#: ../library.cpp:210
 msgid "Various Artists"
 msgstr "Různí umělci"
 
 #. ts-context Library
-#: ../library.cpp:642
+#: ../library.cpp:680
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -664,7 +742,19 @@ msgid "Remove folder"
 msgstr "Odstranit složku"
 
 #. ts-context LibraryConfig
-#: ../libraryconfig.cpp:56
+#: ../libraryconfig.ui:94
+#, fuzzy
+msgid "Options"
+msgstr ""
+
+#. ts-context LibraryConfig
+#: ../libraryconfig.ui:100
+#, fuzzy
+msgid "Automatically open single categories in the library tree"
+msgstr ""
+
+#. ts-context LibraryConfig
+#: ../libraryconfig.cpp:57
 msgid "Add directory..."
 msgstr "Přidat adresář..."
 
@@ -674,22 +764,22 @@ msgid "Music Library"
 msgstr "Knihovna hudby"
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:86
+#: ../libraryview.cpp:89
 msgid "Show in various artists"
 msgstr "Zobrazovat různé umělce"
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:88
+#: ../libraryview.cpp:91
 msgid "Don't show in various artists"
 msgstr "Nezobrazovat různé umělce"
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:134
+#: ../libraryview.cpp:148
 msgid "Your library is empty!"
 msgstr "Vaše knihovna je prázdná!"
 
 #. ts-context LibraryView
-#: ../libraryview.cpp:140
+#: ../libraryview.cpp:154
 msgid "Click here to add some music"
 msgstr "Zde klikněte pro řidání hudby"
 
@@ -749,8 +839,8 @@ msgid "Previous track"
 msgstr "Předchozí skladba"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:257 ../mainwindow.cpp:396 ../mainwindow.cpp:412
-#: ../mainwindow.cpp:593 ../mainwindow.ui:517
+#: ../mainwindow.ui:517 ../mainwindow.cpp:280 ../mainwindow.cpp:419
+#: ../mainwindow.cpp:435 ../mainwindow.cpp:616
 msgid "Play"
 msgstr "Přehrát"
 
@@ -775,7 +865,7 @@ msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:259 ../mainwindow.ui:559
+#: ../mainwindow.ui:559 ../mainwindow.cpp:282
 msgid "Stop after this track"
 msgstr "Zastavit po této skladbě"
 
@@ -876,7 +966,7 @@ msgid "Open media..."
 msgstr "Otevřít média..."
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:375 ../mainwindow.ui:728
+#: ../mainwindow.ui:728 ../mainwindow.cpp:397
 msgid "&Hide tray icon"
 msgstr "S&krýt ikonu v systémovém panelu"
 
@@ -944,27 +1034,27 @@ msgid "Advanced grouping..."
 msgstr ""
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:253
+#: ../mainwindow.cpp:275
 msgid "Configure library..."
 msgstr "Nastavit knihovnu..."
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:352 ../mainwindow.cpp:371
+#: ../mainwindow.cpp:374 ../mainwindow.cpp:393
 msgid "&Show tray icon"
 msgstr "Zobrazit ikonu v &systémovém panelu"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:423 ../mainwindow.cpp:590
+#: ../mainwindow.cpp:446 ../mainwindow.cpp:613
 msgid "Pause"
 msgstr "Pozastavit"
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:640
+#: ../mainwindow.cpp:665
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastavit %1 na \"%2\"..."
 
 #. ts-context MainWindow
-#: ../mainwindow.cpp:642
+#: ../mainwindow.cpp:667
 #, fuzzy
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1027,97 +1117,97 @@ msgid "Volume %1%"
 msgstr "Hlasitost %1%"
 
 #. ts-context Playlist
-#: ../playlist.cpp:535
+#: ../playlist.cpp:536
 msgid "Title"
 msgstr "Titulek"
 
 #. ts-context Playlist
-#: ../playlist.cpp:536
+#: ../playlist.cpp:537
 msgid "Artist"
 msgstr "Umělec"
 
 #. ts-context Playlist
-#: ../playlist.cpp:537
+#: ../playlist.cpp:538
 msgid "Album"
 msgstr "Album"
 
 #. ts-context Playlist
-#: ../playlist.cpp:538
+#: ../playlist.cpp:539
 msgid "Length"
 msgstr "Délka"
 
 #. ts-context Playlist
-#: ../playlist.cpp:539
+#: ../playlist.cpp:540
 msgid "Track"
 msgstr "Skladba"
 
 #. ts-context Playlist
-#: ../playlist.cpp:540
+#: ../playlist.cpp:541
 msgid "Disc"
 msgstr "Disk"
 
 #. ts-context Playlist
-#: ../playlist.cpp:541
+#: ../playlist.cpp:542
 msgid "Year"
 msgstr "Rok"
 
 #. ts-context Playlist
-#: ../playlist.cpp:542
+#: ../playlist.cpp:543
 msgid "Genre"
 msgstr "Žánr"
 
 #. ts-context Playlist
-#: ../playlist.cpp:543
+#: ../playlist.cpp:544
 msgid "Album artist"
 msgstr "Umělec alba"
 
 #. ts-context Playlist
-#: ../playlist.cpp:544
+#: ../playlist.cpp:545
 msgid "Composer"
 msgstr "Skladatel"
 
 #. ts-context Playlist
-#: ../playlist.cpp:546
+#: ../playlist.cpp:547
 msgid "BPM"
 msgstr "BPM"
 
 #. ts-context Playlist
-#: ../playlist.cpp:547
+#: ../playlist.cpp:548
 msgid "Bit rate"
 msgstr "Datový tok"
 
 #. ts-context Playlist
-#: ../playlist.cpp:548
+#: ../playlist.cpp:549
 msgid "Sample rate"
 msgstr "Vzorkovací frekvence"
 
 #. ts-context Playlist
-#: ../playlist.cpp:549
+#: ../playlist.cpp:550
 msgid "File name"
 msgstr "Název souboru"
 
 #. ts-context Playlist
-#: ../playlist.cpp:550
+#: ../playlist.cpp:551
 msgid "File name (without path)"
 msgstr "Název souboru (bez cesty)"
 
 #. ts-context Playlist
-#: ../playlist.cpp:551
+#: ../playlist.cpp:552
 msgid "File size"
 msgstr "Velikost souboru"
 
 #. ts-context Playlist
-#: ../playlist.cpp:552
+#: ../playlist.cpp:553
 msgid "File type"
 msgstr "Typ souboru"
 
 #. ts-context Playlist
-#: ../playlist.cpp:553
+#: ../playlist.cpp:554
 msgid "Date modified"
 msgstr "Datum úprav"
 
 #. ts-context Playlist
-#: ../playlist.cpp:554
+#: ../playlist.cpp:555
 msgid "Date created"
 msgstr "Datum vytvoření"
 
