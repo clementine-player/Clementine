@@ -22,8 +22,10 @@
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QSortFilterProxyModel>
+#include <QSettings>
 
 const int LibraryView::kRowsToShow = 50;
+const char* LibraryView::kSettingsGroup = "LibraryView";
 
 LibraryItemDelegate::LibraryItemDelegate(QObject *parent)
   : QStyledItemDelegate(parent)
@@ -75,6 +77,7 @@ LibraryView::LibraryView(QWidget* parent)
   : QTreeView(parent),
     library_(NULL),
     total_song_count_(-1),
+    auto_open_(true),
     nomusic_(":nomusic.png"),
     context_menu_(new QMenu(this))
 {
@@ -86,6 +89,15 @@ LibraryView::LibraryView(QWidget* parent)
       tr("Show in various artists"), this, SLOT(ShowInVarious()));
   no_show_in_various_ = context_menu_->addAction(
       tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
+
+  ReloadSettings();
+}
+
+void LibraryView::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  auto_open_ = s.value("auto_open", true).toBool();
 }
 
 void LibraryView::SetLibrary(Library *library) {
@@ -108,8 +120,10 @@ void LibraryView::reset() {
   QTreeView::reset();
 
   // Expand nodes in the tree until we have about 50 rows visible in the view
-  int rows = model()->rowCount(rootIndex());
-  RecursivelyExpand(rootIndex(), &rows);
+  if (auto_open_) {
+    int rows = model()->rowCount(rootIndex());
+    RecursivelyExpand(rootIndex(), &rows);
+  }
 }
 
 void LibraryView::paintEvent(QPaintEvent* event) {
@@ -166,7 +180,7 @@ bool LibraryView::RecursivelyExpand(const QModelIndex& index, int* count) {
 }
 
 void LibraryView::ItemExpanded(const QModelIndex& index) {
-  if (model()->rowCount(index) == 1)
+  if (model()->rowCount(index) == 1 && auto_open_)
     expand(model()->index(0, 0, index));
 }
 

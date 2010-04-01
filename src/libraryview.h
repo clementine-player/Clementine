@@ -34,10 +34,13 @@ class LibraryView : public QTreeView {
  public:
   LibraryView(QWidget* parent = 0);
 
+  static const char* kSettingsGroup;
+
   void SetLibrary(Library* library);
 
  public slots:
   void TotalSongCountUpdated(int count);
+  void ReloadSettings();
 
  signals:
   void ShowConfigDialog();
@@ -66,6 +69,7 @@ class LibraryView : public QTreeView {
 
   Library* library_;
   int total_song_count_;
+  bool auto_open_;
 
   QPixmap nomusic_;
 

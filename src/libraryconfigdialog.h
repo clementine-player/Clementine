@@ -30,6 +30,9 @@ class LibraryConfigDialog : public QDialog {
 
   void SetModel(LibraryDirectoryModel* model);
 
+ public slots:
+  void accept();
+
  private:
   Ui::LibraryConfigDialog ui_;
 };

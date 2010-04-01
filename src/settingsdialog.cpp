@@ -120,6 +120,8 @@ void SettingsDialog::accept() {
   s.setValue("popup_pos", pretty_popup_->current_pos());
   s.endGroup();
 
+  ui_.library_config->Save();
+
   QDialog::accept();
 }
 

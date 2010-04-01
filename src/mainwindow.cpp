@@ -261,6 +261,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   library_menu->addSeparator();
   library_menu->addAction(tr("Configure library..."), library_config_dialog_, SLOT(show()));
   ui_.library_options->setMenu(library_menu);
+  connect(library_config_dialog_, SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
 
   // Playlist menu
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
@@ -315,6 +316,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   // Settings
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
+  connect(settings_dialog_, SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
 
   // Add stream dialog
   connect(add_stream_dialog_, SIGNAL(accepted()), SLOT(AddStreamAccepted()));

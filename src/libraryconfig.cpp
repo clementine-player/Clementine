@@ -16,6 +16,7 @@
 
 #include "libraryconfig.h"
 #include "librarydirectorymodel.h"
+#include "libraryview.h"
 
 #include <QFileDialog>
 #include <QSettings>
@@ -74,4 +75,18 @@ void LibraryConfig::BackendReady() {
   ui_.list->setEnabled(true);
   ui_.add->setEnabled(true);
   ui_.remove->setEnabled(true);
+}
+
+void LibraryConfig::Save() {
+  QSettings s;
+  s.beginGroup(LibraryView::kSettingsGroup);
+
+  s.setValue("auto_open", ui_.auto_open->isChecked());
+}
+
+void LibraryConfig::showEvent(QShowEvent *) {
+  QSettings s;
+  s.beginGroup(LibraryView::kSettingsGroup);
+
+  ui_.auto_open->setChecked(s.value("auto_open", true).toBool());
 }

@@ -25,3 +25,8 @@ LibraryConfigDialog::LibraryConfigDialog(QWidget *parent)
 void LibraryConfigDialog::SetModel(LibraryDirectoryModel* model) {
   ui_.config->SetModel(model);
 }
+
+void LibraryConfigDialog::accept() {
+  ui_.config->Save();
+  QDialog::accept();
+}
