@@ -622,6 +622,10 @@ p, li { white-space: pre-wrap; }
         <source>Don&apos;t show in various artists</source>
         <translation>No mostrar en Varios artistas</translation>
     </message>
+    <message>
+        <source>Add to playlist</source>
+        <translation type="unfinished">Añadir a la lista de reproducción</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

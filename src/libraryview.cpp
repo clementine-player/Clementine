@@ -85,6 +85,9 @@ LibraryView::LibraryView(QWidget* parent)
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
 
+  add_to_playlist_ = context_menu_->addAction(
+      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  context_menu_->addSeparator();
   show_in_various_ = context_menu_->addAction(
       tr("Show in various artists"), this, SLOT(ShowInVarious()));
   no_show_in_various_ = context_menu_->addAction(
@@ -192,9 +195,13 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
                         ->mapToSource(context_menu_index_);
 
-  int type = library_->data(context_menu_index_, Library::Role_ContainerType).toInt();
-  bool enable_various = type == Library::GroupBy_Album;
+  int type = library_->data(context_menu_index_, Library::Role_Type).toInt();
+  int container_type = library_->data(context_menu_index_, Library::Role_ContainerType).toInt();
+  bool enable_various = container_type == Library::GroupBy_Album;
+  bool enable_add = type == LibraryItem::Type_Container ||
+                    type == LibraryItem::Type_Song;
 
+  add_to_playlist_->setEnabled(enable_add);
   show_in_various_->setEnabled(enable_various);
   no_show_in_various_->setEnabled(enable_various);
 
@@ -216,4 +223,11 @@ void LibraryView::ShowInVarious(bool on) {
   QString artist = library_->data(context_menu_index_, Library::Role_Artist).toString();
   QString album = library_->data(context_menu_index_, Library::Role_Key).toString();
   library_->GetBackend()->ForceCompilation(artist, album, on);
+}
+
+void LibraryView::AddToPlaylist() {
+  if (!context_menu_index_.isValid())
+    return;
+
+  emit AddToPlaylist(context_menu_index_);
 }

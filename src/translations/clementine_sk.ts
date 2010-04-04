@@ -755,21 +755,26 @@ p, li { white-space: pre-wrap; }
     <name>LibraryView</name>
     <message>
         <location filename="../libraryview.cpp" line="89"/>
+        <source>Add to playlist</source>
+        <translation type="unfinished">Pridať do playlistu</translation>
+    </message>
+    <message>
+        <location filename="../libraryview.cpp" line="92"/>
         <source>Show in various artists</source>
         <translation>Zobrazovať v rôznich interprétoch</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="91"/>
+        <location filename="../libraryview.cpp" line="94"/>
         <source>Don&apos;t show in various artists</source>
         <translation>Nzobrazovať v rôznich interprétoch</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="148"/>
+        <location filename="../libraryview.cpp" line="151"/>
         <source>Your library is empty!</source>
         <translation>Vaša zbierka je prázdna!</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="154"/>
+        <location filename="../libraryview.cpp" line="157"/>
         <source>Click here to add some music</source>
         <translation>Kliknite sem aby ste pridali nejakú hudbu</translation>
     </message>
@@ -777,44 +782,44 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="275"/>
+        <location filename="../mainwindow.cpp" line="276"/>
         <source>Configure library...</source>
         <translation>Nastaviť zbierku...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="517"/>
-        <location filename="../mainwindow.cpp" line="280"/>
-        <location filename="../mainwindow.cpp" line="419"/>
-        <location filename="../mainwindow.cpp" line="435"/>
-        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="420"/>
+        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Play</source>
         <translation>Hrať</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="559"/>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Stop after this track</source>
         <translation>Zastaviť po tejto skladbe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="374"/>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="394"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Zobraziť tray ikonu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="446"/>
-        <location filename="../mainwindow.cpp" line="613"/>
+        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="614"/>
         <source>Pause</source>
         <translation>Pauza</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="665"/>
+        <location filename="../mainwindow.cpp" line="666"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Nastaviť %1 do &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="667"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Upraviť tag &quot;%1&quot;...</translation>
     </message>
@@ -1032,7 +1037,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="728"/>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="398"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Skryť tray ikonu</translation>
     </message>

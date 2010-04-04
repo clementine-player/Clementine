@@ -754,21 +754,26 @@ p, li { white-space: pre-wrap; }
     <name>LibraryView</name>
     <message>
         <location filename="../libraryview.cpp" line="89"/>
+        <source>Add to playlist</source>
+        <translation type="unfinished">Ajouter à la liste de lecture</translation>
+    </message>
+    <message>
+        <location filename="../libraryview.cpp" line="92"/>
         <source>Show in various artists</source>
         <translation>Classer dans la catégorie &quot;Compilations d&apos;artistes&quot;</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="91"/>
+        <location filename="../libraryview.cpp" line="94"/>
         <source>Don&apos;t show in various artists</source>
         <translation>Ne pas classer dans la catégorie &quot;Compilations d&apos;artistes&quot;</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="148"/>
+        <location filename="../libraryview.cpp" line="151"/>
         <source>Your library is empty!</source>
         <translation>Votre bibliothèque est vide !</translation>
     </message>
     <message>
-        <location filename="../libraryview.cpp" line="154"/>
+        <location filename="../libraryview.cpp" line="157"/>
         <source>Click here to add some music</source>
         <translation>Cliquez ici pour créer votre bibliothèque musicale</translation>
     </message>
@@ -832,10 +837,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="517"/>
-        <location filename="../mainwindow.cpp" line="280"/>
-        <location filename="../mainwindow.cpp" line="419"/>
-        <location filename="../mainwindow.cpp" line="435"/>
-        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="420"/>
+        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Play</source>
         <translation>Lecture</translation>
     </message>
@@ -861,7 +866,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="559"/>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Stop after this track</source>
         <translation>Arrêter la lecture après cette piste</translation>
     </message>
@@ -964,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.ui" line="728"/>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="398"/>
         <source>&amp;Hide tray icon</source>
         <translation>&amp;Masquer l&apos;icône</translation>
     </message>
@@ -1024,29 +1029,29 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="275"/>
+        <location filename="../mainwindow.cpp" line="276"/>
         <source>Configure library...</source>
         <translation>Configurer votre bibliothèque...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="374"/>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="394"/>
         <source>&amp;Show tray icon</source>
         <translation>&amp;Afficher l&apos;icône</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="446"/>
-        <location filename="../mainwindow.cpp" line="613"/>
+        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="614"/>
         <source>Pause</source>
         <translation>Pause</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="665"/>
+        <location filename="../mainwindow.cpp" line="666"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Définir %1 à la valeur &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="667"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Modifer le tag &quot;%1&quot;...</translation>
     </message>

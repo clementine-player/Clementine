@@ -81,7 +81,7 @@ class MainWindow : public QMainWindow {
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
-  void LibraryDoubleClick(const QModelIndex& index);
+  void AddLibraryItemToPlaylist(const QModelIndex& index);
   void ClearLibraryFilter();
   void GroupByClicked(QAction*);
   void LibraryGroupingChanged(const Library::Grouping& g);

@@ -200,7 +200,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   // Library connections
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
-  connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryDoubleClick(QModelIndex)));
+  connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
+  connect(ui_.library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
   connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_config_dialog_, SLOT(show()));
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
@@ -485,10 +486,13 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   player_->PlayAt(index.row(), true);
 }
 
-void MainWindow::LibraryDoubleClick(const QModelIndex& index) {
+void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
+  QModelIndex idx = index;
+  if (idx.model() == library_sort_model_)
+    idx = library_sort_model_->mapToSource(idx);
+
   QModelIndex first_song =
-      playlist_->InsertSongs(library_->GetChildSongs(
-          library_sort_model_->mapToSource(index)));
+      playlist_->InsertSongs(library_->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), true);
