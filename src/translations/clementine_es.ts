@@ -292,55 +292,55 @@ p, li { white-space: pre-wrap; }
     <name>GroupByDialog</name>
     <message>
         <source>Library advanced grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupamiento avanzado de la colección</translation>
     </message>
     <message>
         <source>You can change the way the songs in the library are organised.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu puedes cambiar el modo en que las canciones de la colección son organizadas.</translation>
     </message>
     <message>
         <source>Group Library by...</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar Colección por...</translation>
     </message>
     <message>
         <source>First level</source>
-        <translation type="unfinished"></translation>
+        <translation>Primer nivel</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished">Álbum</translation>
+        <translation>Álbum</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished">Artista</translation>
+        <translation>Artista</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished">Compositor</translation>
+        <translation>Compositor</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished">Género</translation>
+        <translation>Género</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Año</translation>
+        <translation>Año</translation>
     </message>
     <message>
         <source>Year - Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Año - Álbum</translation>
     </message>
     <message>
         <source>Second level</source>
-        <translation type="unfinished"></translation>
+        <translation>Segundo nivel</translation>
     </message>
     <message>
         <source>Third level</source>
-        <translation type="unfinished"></translation>
+        <translation>Tercer nivel</translation>
     </message>
 </context>
 <context>
@@ -598,11 +598,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Automatically open single categories in the library tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticamente expandir los artitas con un solo disco en el arbol de la colección</translation>
     </message>
 </context>
 <context>
@@ -632,7 +632,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished">Añadir a la lista de reproducción</translation>
+        <translation>Añadir a la lista de reproducción</translation>
     </message>
 </context>
 <context>
@@ -831,31 +831,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Group by Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar por Artista</translation>
     </message>
     <message>
         <source>Group by Artist/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar por Artista/Álbum</translation>
     </message>
     <message>
         <source>Group by Artist/Year - Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar por Ártista/Año - Álbum</translation>
     </message>
     <message>
         <source>Group by Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar por Álbum</translation>
     </message>
     <message>
         <source>Group by Genre/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar por Género/Álbum</translation>
     </message>
     <message>
         <source>Group by Genre/Artist/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupar por Género/Artista/Álbum</translation>
     </message>
     <message>
         <source>Advanced grouping...</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupamiento avanzado...</translation>
     </message>
 </context>
 <context>
