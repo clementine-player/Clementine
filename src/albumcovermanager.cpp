@@ -396,7 +396,9 @@ void AlbumCoverManager::ChooseManualCover() {
   QListWidgetItem* item = context_menu_items_[0];
 
   QString cover = QFileDialog::getOpenFileName(
-      this, tr("Choose manual cover"), item->data(Role_PathAutomatic).toString());
+      this, tr("Choose manual cover"), item->data(Role_PathAutomatic).toString(),
+      tr("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)") + ";;" +
+      tr("All files (*)"));
   if (cover.isNull())
     return;
 
