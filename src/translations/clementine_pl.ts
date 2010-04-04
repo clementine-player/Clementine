@@ -205,7 +205,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../edittagdialog.ui" line="67"/>
         <source>Genre</source>
-        <translation>Rodzaj</translation>
+        <translation>Gatunek</translation>
     </message>
     <message>
         <location filename="../edittagdialog.ui" line="80"/>
@@ -344,81 +344,81 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../groupbydialog.ui" line="14"/>
         <source>Library advanced grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowanie grupowanie Biblioteki</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="20"/>
         <source>You can change the way the songs in the library are organised.</source>
-        <translation type="unfinished"></translation>
+        <translation>Możesz zmienić sposób w jaki prezentowane są utwory w Bibliotece.</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="30"/>
         <source>Group Library by...</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj Bibliotekę według...</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="36"/>
         <source>First level</source>
-        <translation type="unfinished"></translation>
+        <translation>Pierwszy poziom</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="44"/>
         <location filename="../groupbydialog.ui" line="90"/>
         <location filename="../groupbydialog.ui" line="136"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="49"/>
         <location filename="../groupbydialog.ui" line="95"/>
         <location filename="../groupbydialog.ui" line="141"/>
         <source>Album</source>
-        <translation type="unfinished">Album</translation>
+        <translation>Album</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="54"/>
         <location filename="../groupbydialog.ui" line="100"/>
         <location filename="../groupbydialog.ui" line="146"/>
         <source>Artist</source>
-        <translation type="unfinished">Wykonawca</translation>
+        <translation>Wykonawca</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="59"/>
         <location filename="../groupbydialog.ui" line="105"/>
         <location filename="../groupbydialog.ui" line="151"/>
         <source>Composer</source>
-        <translation type="unfinished">Kompozytor</translation>
+        <translation>Kompozytor</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="64"/>
         <location filename="../groupbydialog.ui" line="110"/>
         <location filename="../groupbydialog.ui" line="156"/>
         <source>Genre</source>
-        <translation type="unfinished">Rodzaj</translation>
+        <translation>Gatunek</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="69"/>
         <location filename="../groupbydialog.ui" line="115"/>
         <location filename="../groupbydialog.ui" line="161"/>
         <source>Year</source>
-        <translation type="unfinished">Rok</translation>
+        <translation>Rok</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="74"/>
         <location filename="../groupbydialog.ui" line="120"/>
         <location filename="../groupbydialog.ui" line="166"/>
         <source>Year - Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Rok - Album</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="82"/>
         <source>Second level</source>
-        <translation type="unfinished"></translation>
+        <translation>Drugi poziom</translation>
     </message>
     <message>
         <location filename="../groupbydialog.ui" line="128"/>
         <source>Third level</source>
-        <translation type="unfinished"></translation>
+        <translation>Trzeci poziom</translation>
     </message>
 </context>
 <context>
@@ -492,7 +492,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="72"/>
         <source>Play tag radio...</source>
-        <translation>Odtwarzaj radio tagu...</translation>
+        <translation>Odtwarzaj radio znacznika...</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="74"/>
@@ -527,7 +527,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="126"/>
         <source>Tag radio</source>
-        <translation>Radio tagu</translation>
+        <translation>Radio znacznika</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="133"/>
@@ -581,7 +581,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmservice.cpp" line="268"/>
         <source>Tag Radio: %1</source>
-        <translation>Radio tagu: %1</translation>
+        <translation>Radio znacznika: %1</translation>
     </message>
     <message>
         <location filename="../lastfmservice.cpp" line="340"/>
@@ -679,12 +679,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmstationdialog.ui" line="14"/>
         <source>Play Artist or Tag</source>
-        <translation>Odtwarzaj Wykonawcę lub Tag</translation>
+        <translation>Odtwarzaj Wykonawcę lub Znacznik</translation>
     </message>
     <message>
         <location filename="../lastfmstationdialog.ui" line="20"/>
         <source>Enter an &lt;b&gt;artist&lt;/b&gt; or &lt;b&gt;tag&lt;/b&gt; to start listening to Last.fm radio.</source>
-        <translation>Wpisz &lt;b&gt;wykonawcę&lt;/b&gt; lub &lt;b&gt;tag&lt;/b&gt; aby słuchać radia Last.fm.</translation>
+        <translation>Wpisz &lt;b&gt;wykonawcę&lt;/b&gt; lub &lt;b&gt;znacznik&lt;/b&gt; aby słuchać radia Last.fm.</translation>
     </message>
     <message>
         <location filename="../lastfmstationdialog.ui" line="33"/>
@@ -694,7 +694,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../lastfmstationdialog.ui" line="38"/>
         <source>Tag</source>
-        <translation>Tag</translation>
+        <translation>Znacznik</translation>
     </message>
 </context>
 <context>
@@ -730,12 +730,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../libraryconfig.ui" line="94"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <location filename="../libraryconfig.ui" line="100"/>
         <source>Automatically open single categories in the library tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatycznie otwieraj pojedyńcze kategorie w drzewie Biblioteki</translation>
     </message>
     <message>
         <location filename="../libraryconfig.cpp" line="57"/>
@@ -931,7 +931,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="673"/>
         <source>Edit tag...</source>
-        <translation>Edytuj tag...</translation>
+        <translation>Edytuj znacznik...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="682"/>
@@ -971,37 +971,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.ui" line="764"/>
         <source>Group by Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj według Artysta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="772"/>
         <source>Group by Artist/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj według Artysta/Album</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="780"/>
         <source>Group by Artist/Year - Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj według Artysta/Rok - Album</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="788"/>
         <source>Group by Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj według Album</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="796"/>
         <source>Group by Genre/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj według Gatunek/Artysta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="804"/>
         <source>Group by Genre/Artist/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupuj według Gatunek/Artysta/Album</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="812"/>
         <source>Advanced grouping...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowane grupowanie...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="728"/>
@@ -1049,7 +1049,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
         <source>Edit tag &quot;%1&quot;...</source>
-        <translation>Edytuj tag &quot;%1&quot;...</translation>
+        <translation>Edytuj znacznik &quot;%1&quot;...</translation>
     </message>
 </context>
 <context>
@@ -1153,7 +1153,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../playlist.cpp" line="543"/>
         <source>Genre</source>
-        <translation>Rodzaj</translation>
+        <translation>Gatunek</translation>
     </message>
     <message>
         <location filename="../playlist.cpp" line="544"/>
