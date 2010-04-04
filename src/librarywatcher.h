@@ -19,7 +19,7 @@
 
 #include "directory.h"
 #include "song.h"
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 
 #include <QObject>
 #include <QStringList>

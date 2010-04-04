@@ -21,7 +21,7 @@
 #include <QObject>
 #include <QSystemTrayIcon>
 
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 #include "song.h"
 
 class OSDPretty;

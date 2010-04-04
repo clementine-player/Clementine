@@ -25,7 +25,7 @@
 #include <QString>
 #include <QMetaType>
 
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 
 namespace lastfm {
   class Track;

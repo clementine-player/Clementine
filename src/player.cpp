@@ -25,9 +25,9 @@
 #endif
 
 #ifdef USE_PHONON
-#  include "phononengine.h"
+#  include "engines/phononengine.h"
 #else
-#  include "xine-engine.h"
+#  include "engines/xine-engine.h"
 #endif
 
 #include <QtDebug>

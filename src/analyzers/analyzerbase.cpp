@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 #include "analyzerbase.h"
-#include "enginebase.h"
+#include "engines/enginebase.h"
 #include <cmath>        //interpolate()
 #include <QEvent>     //event()
 #include <QPainter>

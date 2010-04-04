@@ -11,7 +11,7 @@ set(CLEMENTINE-SOURCES
     librarybackend.cpp
     playlist.cpp
     playlistitem.cpp
-    enginebase.cpp
+    engines/enginebase.cpp
     analyzers/baranalyzer.cpp
     analyzers/analyzerbase.cpp
     fht.cpp
@@ -76,7 +76,7 @@ set(CLEMENTINE-MOC-HEADERS
     library.h
     librarybackend.h
     playlist.h
-    enginebase.h
+    engines/enginebase.h
     sliderwidget.h
     playlistview.h
     backgroundthread.h
@@ -195,11 +195,11 @@ file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
 
 # Audio engine - phonon on windows, xine elsewhere
 if(USE_PHONON)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} phononengine.cpp)
-  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} phononengine.h)
+  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/phononengine.cpp)
+  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/phononengine.h)
 else(USE_PHONON)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} xine-engine.cpp xine-scope.c)
-  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} xine-engine.h)
+  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/xine-engine.cpp engines/xine-scope.c)
+  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/xine-engine.h)
 endif(USE_PHONON)
 
 # OSD and DBus.

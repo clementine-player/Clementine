@@ -22,7 +22,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 #include "playlistitem.h"
 #include "song.h"
 

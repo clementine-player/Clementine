@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #endif
 
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 #include "fht.h"     //stack allocated and convenience
 #include <QPixmap> //stack allocated and convenience
 #include <QTimer>  //stack allocated

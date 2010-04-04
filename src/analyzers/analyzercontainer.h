@@ -22,7 +22,7 @@
 #include <QSignalMapper>
 
 #include "analyzerbase.h"
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 
 class AnalyzerContainer : public QWidget {
   Q_OBJECT

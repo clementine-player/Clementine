@@ -22,7 +22,7 @@
 #include "songplaylistitem.h"
 #include "systemtrayicon.h"
 #include "radiomodel.h"
-#include "enginebase.h"
+#include "engines/enginebase.h"
 #include "lastfmservice.h"
 #include "osd.h"
 #include "trackslider.h"

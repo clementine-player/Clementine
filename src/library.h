@@ -24,7 +24,7 @@
 #include "librarybackend.h"
 #include "librarywatcher.h"
 #include "libraryquery.h"
-#include "engine_fwd.h"
+#include "engines/engine_fwd.h"
 #include "song.h"
 #include "libraryitem.h"
 #include "simpletreemodel.h"

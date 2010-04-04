@@ -50,7 +50,7 @@
 using boost::scoped_ptr;
 
 #include "trackslider.h"
-#include "enginebase.h"
+#include "engines/enginebase.h"
 #include "albumcoverloader.h"
 
 const char* Song::kColumnSpec =
