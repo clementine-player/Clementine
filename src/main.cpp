@@ -74,6 +74,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<SongList>("SongList");
+  qRegisterMetaType<Engine::State>("Engine::State");
 
 
   lastfm::ws::ApiKey = LastFMService::kApiKey;

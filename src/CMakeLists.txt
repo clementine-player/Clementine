@@ -198,8 +198,8 @@ if(USE_PHONON)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/phononengine.cpp)
   set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/phononengine.h)
 else(USE_PHONON)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/xine-engine.cpp engines/xine-scope.c)
-  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/xine-engine.h)
+  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/vlcengine.cpp)
+  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/vlcengine.h)
 endif(USE_PHONON)
 
 # OSD and DBus.
@@ -264,7 +264,7 @@ target_link_libraries(clementine_lib
     qtsingleapplication
     qxt
     lastfm
-    ${XINE_LIBRARIES}
+    ${LIBVLC_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${QT_LIBRARIES}
 )

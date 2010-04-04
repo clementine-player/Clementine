@@ -27,7 +27,7 @@
 #ifdef USE_PHONON
 #  include "engines/phononengine.h"
 #else
-#  include "engines/xine-engine.h"
+#  include "engines/vlcengine.h"
 #endif
 
 #include <QtDebug>
@@ -68,7 +68,7 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 #ifdef USE_PHONON
   engine_ = new PhononEngine;
 #else
-  engine_ = new XineEngine;
+  engine_ = new VlcEngine;
 #endif
 
   settings_.beginGroup("Player");
