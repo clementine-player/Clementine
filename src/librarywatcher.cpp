@@ -46,7 +46,6 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     sValidPlaylists << "m3u" << "pls";
   }
 
-  //connect(fs_watcher_, SIGNAL(directoryChanged(QString)), SLOT(DirectoryChanged(QString)));
   connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanPathsNow()));
 }
 
@@ -77,6 +76,11 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
     emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
 
   emit watcher_->ScanFinished();
+
+  // Watch the new subdirectories
+  foreach (const Subdirectory& subdir, new_subdirs) {
+    watcher_->AddWatch(watcher_->watched_dirs_[dir_].watcher, subdir.path);
+  }
 }
 
 SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(const QString &path) {
@@ -107,7 +111,6 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
     // Scan it fully.
     ScanTransaction transaction(this, dir.id, false);
     ScanSubdirectory(dir.path, Subdirectory(), &transaction);
-    AddWatch(data.watcher, dir.path);
   } else {
     // We can do an incremental scan - looking at the mtimes of each
     // subdirectory and only rescan if the directory has changed.
@@ -130,9 +133,11 @@ bool LibraryWatcher::HasSeenSubdir(int id, const QString& path) const {
 }
 
 void LibraryWatcher::ScanSubdirectory(
-    const QString& path, const Subdirectory& subdir, ScanTransaction* t) {
+    const QString& path, const Subdirectory& subdir, ScanTransaction* t,
+    bool force_noincremental) {
   QFileInfo path_info(path);
-  if (t->is_incremental() && subdir.mtime == path_info.lastModified().toTime_t()) {
+  if (!force_noincremental && t->is_incremental() &&
+      subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
     return;
   }
@@ -258,7 +263,7 @@ void LibraryWatcher::ScanSubdirectory(
 
   // Recurse into the new subdirs that we found
   foreach (const Subdirectory& my_new_subdir, my_new_subdirs) {
-    ScanSubdirectory(my_new_subdir.path, my_new_subdir, t);
+    ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
   }
   t->new_subdirs << my_new_subdirs;
 }

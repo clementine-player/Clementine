@@ -98,7 +98,7 @@ class LibraryWatcher : public QObject {
   void DirectoryChanged(const QString& path);
   void RescanPathsNow();
   void ScanSubdirectory(const QString& path, const Subdirectory& subdir,
-                        ScanTransaction* t);
+                        ScanTransaction* t, bool force_noincremental = false);
 
  private:
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
