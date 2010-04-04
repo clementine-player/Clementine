@@ -73,6 +73,8 @@ class LibraryWatcher : public QObject {
     ~ScanTransaction();
 
     SongList FindSongsInSubdirectory(const QString& path);
+    bool HasSeenSubdir(const QString& path);
+    void SetKnownSubdirs(const SubdirectoryList& subdirs);
 
     int dir() const { return dir_; }
     bool is_incremental() const { return incremental_; }
@@ -90,8 +92,12 @@ class LibraryWatcher : public QObject {
     int dir_;
     bool incremental_;
     LibraryWatcher* watcher_;
+
     SongList cached_songs_;
     bool cached_songs_dirty_;
+
+    SubdirectoryList known_subdirs_;
+    bool known_subdirs_dirty_;
   };
 
  private slots:
@@ -107,13 +113,11 @@ class LibraryWatcher : public QObject {
   static QString PickBestImage(const QStringList& images);
   static QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
   void AddWatch(QFileSystemWatcher* w, const QString& path);
-  bool HasSeenSubdir(int id, const QString& path) const;
 
  private:
   // One of these gets stored for each Directory we're watching
   struct DirData {
     Directory dir;
-    SubdirectoryList known_subdirs;
     QFileSystemWatcher* watcher;
   };
 

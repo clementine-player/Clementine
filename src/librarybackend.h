@@ -61,6 +61,7 @@ class LibraryBackendInterface : public QObject {
   virtual void UpdateTotalSongCountAsync() = 0;
 
   virtual SongList FindSongsInDirectory(int id) = 0;
+  virtual SubdirectoryList SubdirsInDirectory(int id) = 0;
 
   virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
   virtual SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
@@ -90,8 +91,7 @@ class LibraryBackendInterface : public QObject {
   virtual void AddOrUpdateSongs(const SongList& songs) = 0;
   virtual void UpdateMTimesOnly(const SongList& songs) = 0;
   virtual void DeleteSongs(const SongList& songs) = 0;
-  virtual void AddSubdirs(const SubdirectoryList& subdirs) = 0;
-  virtual void UpdateSubdirMTimes(const SubdirectoryList& subdirs) = 0;
+  virtual void AddOrUpdateSubdirs(const SubdirectoryList& subdirs) = 0;
   virtual void UpdateCompilations() = 0;
   virtual void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art) = 0;
   virtual void ForceCompilation(const QString& artist, const QString& album, bool on) = 0;
@@ -127,6 +127,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateTotalSongCountAsync();
 
   SongList FindSongsInDirectory(int id);
+  SubdirectoryList SubdirsInDirectory(int id);
 
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
@@ -156,8 +157,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void AddOrUpdateSongs(const SongList& songs);
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
-  void AddSubdirs(const SubdirectoryList& subdirs);
-  void UpdateSubdirMTimes(const SubdirectoryList& subdirs);
+  void AddOrUpdateSubdirs(const SubdirectoryList& subdirs);
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
   void ForceCompilation(const QString& artist, const QString& album, bool on);

@@ -54,7 +54,8 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
   : dir_(dir),
     incremental_(incremental),
     watcher_(watcher),
-    cached_songs_dirty_(true)
+    cached_songs_dirty_(true),
+    known_subdirs_dirty_(true)
 {
   emit watcher_->ScanStarted();
 }
@@ -98,10 +99,25 @@ SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(const QString 
   return ret;
 }
 
+void LibraryWatcher::ScanTransaction::SetKnownSubdirs(const SubdirectoryList &subdirs) {
+  known_subdirs_ = subdirs;
+  known_subdirs_dirty_ = false;
+}
+
+bool LibraryWatcher::ScanTransaction::HasSeenSubdir(const QString &path) {
+  if (known_subdirs_dirty_)
+    SetKnownSubdirs(watcher_->backend_->SubdirsInDirectory(dir_));
+
+  foreach (const Subdirectory& subdir, known_subdirs_) {
+    if (subdir.path == path && subdir.mtime != 0)
+      return true;
+  }
+  return false;
+}
+
 void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& subdirs) {
   DirData data;
   data.dir = dir;
-  data.known_subdirs = subdirs;
   data.watcher = new QFileSystemWatcher(this);
   connect(data.watcher, SIGNAL(directoryChanged(QString)), SLOT(DirectoryChanged(QString)));
   watched_dirs_[dir.id] = data;
@@ -110,11 +126,13 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
     // This is a new directory that we've never seen before.
     // Scan it fully.
     ScanTransaction transaction(this, dir.id, false);
+    transaction.SetKnownSubdirs(subdirs);
     ScanSubdirectory(dir.path, Subdirectory(), &transaction);
   } else {
     // We can do an incremental scan - looking at the mtimes of each
     // subdirectory and only rescan if the directory has changed.
     ScanTransaction transaction(this, dir.id, true);
+    transaction.SetKnownSubdirs(subdirs);
     foreach (const Subdirectory& subdir, subdirs) {
       ScanSubdirectory(subdir.path, subdir, &transaction);
       AddWatch(data.watcher, subdir.path);
@@ -122,14 +140,6 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
   }
 
   backend_->UpdateCompilationsAsync();
-}
-
-bool LibraryWatcher::HasSeenSubdir(int id, const QString& path) const {
-  foreach (const Subdirectory& subdir, watched_dirs_[id].known_subdirs) {
-    if (subdir.path == path)
-      return true;
-  }
-  return false;
 }
 
 void LibraryWatcher::ScanSubdirectory(
@@ -155,11 +165,11 @@ void LibraryWatcher::ScanSubdirectory(
     QFileInfo child_info(child);
 
     if (child_info.isDir()) {
-      if (!HasSeenSubdir(t->dir(), child)) {
+      if (!t->HasSeenSubdir(child)) {
         // We haven't seen this subdirectory before - add it to a list and
         // later we'll tell the backend about it and scan it.
         Subdirectory new_subdir;
-        new_subdir.directory_id = t->dir();
+        new_subdir.directory_id = -1;
         new_subdir.path = child;
         new_subdir.mtime = child_info.lastModified().toTime_t();
         my_new_subdirs << new_subdir;
@@ -253,7 +263,8 @@ void LibraryWatcher::ScanSubdirectory(
   // Add this subdir to the new or touched list
   Subdirectory updated_subdir;
   updated_subdir.directory_id = t->dir();
-  updated_subdir.mtime = path_info.lastModified().toTime_t();
+  updated_subdir.mtime = path_info.exists() ?
+                         path_info.lastModified().toTime_t() : 0;
   updated_subdir.path = path;
 
   if (subdir.directory_id == -1)
@@ -265,7 +276,6 @@ void LibraryWatcher::ScanSubdirectory(
   foreach (const Subdirectory& my_new_subdir, my_new_subdirs) {
     ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
   }
-  t->new_subdirs << my_new_subdirs;
 }
 
 void LibraryWatcher::AddWatch(QFileSystemWatcher* w, const QString& path) {
@@ -275,6 +285,10 @@ void LibraryWatcher::AddWatch(QFileSystemWatcher* w, const QString& path) {
     return;
   }
 #endif
+
+  if (!QFile::exists(path))
+    return;
+
   w->addPath(path);
 }
 

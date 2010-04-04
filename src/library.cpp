@@ -119,9 +119,9 @@ void Library::Initialise() {
   connect(watcher_->Worker().get(), SIGNAL(SongsDeleted(SongList)),
           backend_->Worker().get(), SLOT(DeleteSongs(SongList)));
   connect(watcher_->Worker().get(), SIGNAL(SubdirsDiscovered(SubdirectoryList)),
-          backend_->Worker().get(), SLOT(AddSubdirs(SubdirectoryList)));
+          backend_->Worker().get(), SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher_->Worker().get(), SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
-          backend_->Worker().get(), SLOT(UpdateSubdirMTimes(SubdirectoryList)));
+          backend_->Worker().get(), SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
 
   // This will start the watcher checking for updates
   backend_->Worker()->LoadDirectoriesAsync();

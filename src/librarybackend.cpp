@@ -301,6 +301,11 @@ void LibraryBackend::LoadDirectories() {
   }
 }
 
+SubdirectoryList LibraryBackend::SubdirsInDirectory(int id) {
+  QSqlDatabase db = Connect();
+  return SubdirsInDirectory(id, db);
+}
+
 SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase &db) {
   QSqlQuery q("SELECT path, mtime FROM subdirectories"
               " WHERE directory = :dir", db);
@@ -390,34 +395,46 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
   return ret;
 }
 
-void LibraryBackend::AddSubdirs(const SubdirectoryList& subdirs) {
+void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   QSqlDatabase db(Connect());
-  QSqlQuery q("INSERT INTO subdirectories (directory, path, mtime)"
-              " VALUES (:id, :path, :mtime)", db);
+  QSqlQuery find_query("SELECT ROWID FROM subdirectories"
+                       " WHERE directory = :id AND path = :path", db);
+  QSqlQuery add_query("INSERT INTO subdirectories (directory, path, mtime)"
+                      " VALUES (:id, :path, :mtime)", db);
+  QSqlQuery update_query("UPDATE subdirectories SET mtime = :mtime"
+                         " WHERE directory = :id AND path = :path", db);
+  QSqlQuery delete_query("DELETE FROM subdirectories"
+                         " WHERE directory = :id AND path = :path", db);
 
   db.transaction();
   foreach (const Subdirectory& subdir, subdirs) {
-    q.bindValue(":id", subdir.directory_id);
-    q.bindValue(":path", subdir.path);
-    q.bindValue(":mtime", subdir.mtime);
-    q.exec();
-    if (CheckErrors(q.lastError())) continue;
-  }
-  db.commit();
-}
+    if (subdir.mtime == 0) {
+      // Delete the subdirectory
+      delete_query.bindValue(":id", subdir.directory_id);
+      delete_query.bindValue(":path", subdir.path);
+      delete_query.exec();
+      CheckErrors(delete_query.lastError());
+    } else {
+      // See if this subdirectory already exists in the database
+      find_query.bindValue(":id", subdir.directory_id);
+      find_query.bindValue(":path", subdir.path);
+      find_query.exec();
+      if (CheckErrors(find_query.lastError())) continue;
 
-void LibraryBackend::UpdateSubdirMTimes(const SubdirectoryList& subdirs) {
-  QSqlDatabase db(Connect());
-  QSqlQuery q("UPDATE subdirectories SET mtime = :mtime"
-              " WHERE directory = :id AND path = :path", db);
-
-  db.transaction();
-  foreach (const Subdirectory& subdir, subdirs) {
-    q.bindValue(":mtime", subdir.mtime);
-    q.bindValue(":id", subdir.directory_id);
-    q.bindValue(":path", subdir.path);
-    q.exec();
-    CheckErrors(q.lastError());
+      if (find_query.next()) {
+        update_query.bindValue(":mtime", subdir.mtime);
+        update_query.bindValue(":id", subdir.directory_id);
+        update_query.bindValue(":path", subdir.path);
+        update_query.exec();
+        CheckErrors(update_query.lastError());
+      } else {
+        add_query.bindValue(":id", subdir.directory_id);
+        add_query.bindValue(":path", subdir.path);
+        add_query.bindValue(":mtime", subdir.mtime);
+        add_query.exec();
+        CheckErrors(add_query.lastError());
+      }
+    }
   }
   db.commit();
 }
