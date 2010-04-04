@@ -107,6 +107,14 @@ p, li { white-space: pre-wrap; }
         <source>Various artists</source>
         <translation>Διάφοροι καλλιτέχνες</translation>
     </message>
+    <message>
+        <source>Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AnalyzerContainer</name>

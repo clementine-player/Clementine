@@ -103,6 +103,16 @@ p, li { white-space: pre-wrap; }
         <source>Choose manual cover</source>
         <translation>Vybrať obal ručne</translation>
     </message>
+    <message>
+        <location filename="../albumcovermanager.cpp" line="400"/>
+        <source>Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../albumcovermanager.cpp" line="401"/>
+        <source>All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AnalyzerContainer</name>
@@ -791,7 +801,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../mainwindow.cpp" line="281"/>
         <location filename="../mainwindow.cpp" line="420"/>
         <location filename="../mainwindow.cpp" line="436"/>
-        <location filename="../mainwindow.cpp" line="617"/>
+        <location filename="../mainwindow.cpp" line="620"/>
         <source>Play</source>
         <translation>Hrať</translation>
     </message>
@@ -809,17 +819,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="447"/>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Pause</source>
         <translation>Pauza</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="666"/>
+        <location filename="../mainwindow.cpp" line="669"/>
         <source>Set %1 to &quot;%2&quot;...</source>
         <translation>Nastaviť %1 do &quot;%2&quot;...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="668"/>
+        <location filename="../mainwindow.cpp" line="671"/>
         <source>Edit tag &quot;%1&quot;...</source>
         <translation>Upraviť tag &quot;%1&quot;...</translation>
     </message>
