@@ -28,7 +28,10 @@
 class MetatypesEnvironment : public ::testing::Environment {
 public:
   void SetUp() {
+    qRegisterMetaType<Directory>("Directory");
     qRegisterMetaType<DirectoryList>("DirectoryList");
+    qRegisterMetaType<Subdirectory>("Subdirectory");
+    qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
     qRegisterMetaType<SongList>("SongList");
     qRegisterMetaType<QModelIndex>("QModelIndex");
   }

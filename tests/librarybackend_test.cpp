@@ -135,16 +135,16 @@ TEST_F(LibraryBackendTest, EmptyDatabase) {
 }
 
 TEST_F(LibraryBackendTest, AddDirectory) {
-  QSignalSpy spy(backend_.get(), SIGNAL(DirectoriesDiscovered(DirectoryList)));
+  QSignalSpy spy(backend_.get(), SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)));
 
   backend_->AddDirectory("/test");
 
   // Check the signal was emitted correctly
   ASSERT_EQ(1, spy.count());
-  DirectoryList list = spy[0][0].value<DirectoryList>();
-  ASSERT_EQ(1, list.size());
-  EXPECT_EQ("/test", list[0].path);
-  EXPECT_EQ(1, list[0].id);
+  Directory dir = spy[0][0].value<Directory>();
+  EXPECT_EQ("/test", dir.path);
+  EXPECT_EQ(1, dir.id);
+  EXPECT_EQ(0, spy[0][1].value<SubdirectoryList>().size());
 }
 
 TEST_F(LibraryBackendTest, RemoveDirectory) {
@@ -154,17 +154,16 @@ TEST_F(LibraryBackendTest, RemoveDirectory) {
   dir.path = "/test";
   backend_->AddDirectory(dir.path);
 
-  QSignalSpy spy(backend_.get(), SIGNAL(DirectoriesDeleted(DirectoryList)));
+  QSignalSpy spy(backend_.get(), SIGNAL(DirectoryDeleted(Directory)));
 
   // Remove the directory again
   backend_->RemoveDirectory(dir);
 
   // Check the signal was emitted correctly
   ASSERT_EQ(1, spy.count());
-  DirectoryList list = spy[0][0].value<DirectoryList>();
-  ASSERT_EQ(1, list.size());
-  EXPECT_EQ("/test", list[0].path);
-  EXPECT_EQ(1, list[0].id);
+  dir = spy[0][0].value<Directory>();
+  EXPECT_EQ("/test", dir.path);
+  EXPECT_EQ(1, dir.id);
 }
 
 TEST_F(LibraryBackendTest, AddInvalidSong) {
