@@ -39,7 +39,7 @@ void PrintTo(const ::QString& str, std::ostream& os) {
 class LibraryBackendTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    backend_.reset(new LibraryBackend(NULL, ":memory:"));
+    backend_.reset(new MemoryLibraryBackend(NULL));
 
     connection_name_ = "thread_" + QString::number(
         reinterpret_cast<quint64>(QThread::currentThread()));

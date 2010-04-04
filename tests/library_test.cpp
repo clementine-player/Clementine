@@ -16,21 +16,15 @@
 
 #include "test_utils.h"
 #include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
 #include "library.h"
 #include "backgroundthread.h"
 #include "mock_backgroundthread.h"
-#include "mock_librarybackend.h"
 
 #include <QtDebug>
 #include <QThread>
 #include <QSignalSpy>
 #include <QSortFilterProxyModel>
-
-using ::testing::_;
-using ::testing::Return;
-using ::testing::StrictMock;
 
 void PrintTo(const ::QString& str, std::ostream& os) {
   os << str.toStdString();
@@ -41,16 +35,20 @@ namespace {
 class LibraryTest : public ::testing::Test {
  protected:
   void SetUp() {
-    library_ = new StrictMock<Library>(
+    library_ = new Library(
         static_cast<EngineBase*>(NULL), static_cast<QObject*>(NULL));
     library_->set_backend_factory(
-        new FakeBackgroundThreadFactory<LibraryBackendInterface, MockLibraryBackend>);
+        new FakeBackgroundThreadFactory<LibraryBackendInterface, MemoryLibraryBackend>);
     library_->set_watcher_factory(
         new FakeBackgroundThreadFactory<LibraryWatcher, LibraryWatcher>);
 
     library_->Init();
 
-    backend_ = static_cast<MockLibraryBackend*>(library_->GetBackend().get());
+    added_dir_ = false;
+    backend_ = library_->GetBackend().get();
+    connection_name_ = "thread_" + QString::number(
+        reinterpret_cast<quint64>(QThread::currentThread()));
+    database_ = QSqlDatabase::database(connection_name_);
 
     library_sorted_ = new QSortFilterProxyModel;
     library_sorted_->setSourceModel(library_);
@@ -60,36 +58,55 @@ class LibraryTest : public ::testing::Test {
   }
 
   void TearDown() {
-    EXPECT_CALL(*backend_, Die());
+    // Make sure Qt does not re-use the connection.
+    database_ = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connection_name_);
+
     delete library_;
     delete library_sorted_;
   }
 
+  Song AddSong(Song& song) {
+    song.set_directory_id(1);
+    if (song.mtime() == -1) song.set_mtime(0);
+    if (song.ctime() == -1) song.set_ctime(0);
+    if (song.filename().isNull()) song.set_filename("/test/foo");
+    if (song.filesize() == -1) song.set_filesize(0);
+
+    if (!added_dir_) {
+      backend_->AddDirectory("/test");
+      added_dir_ = true;
+    }
+
+    backend_->AddOrUpdateSongs(SongList() << song);
+    return song;
+  }
+
+  Song AddSong(const QString& title, const QString& artist, const QString& album, int length) {
+    Song song;
+    song.Init(title, artist, album, length);
+    return AddSong(song);
+  }
+
   Library* library_;
-  MockLibraryBackend* backend_;
+  LibraryBackendInterface* backend_;
   QSortFilterProxyModel* library_sorted_;
+
+  bool added_dir_;
+  QString connection_name_;
+  QSqlDatabase database_;
 };
 
 TEST_F(LibraryTest, Initialisation) {
-  backend_->ExpectSetup();
   library_->StartThreads();
 
   EXPECT_EQ(0, library_->rowCount(QModelIndex()));
 }
 
-TEST_F(LibraryTest, WithInitialCompilations) {
-  backend_->ExpectSetup(true);
-  library_->StartThreads();
-
-  ASSERT_EQ(1, library_->rowCount(QModelIndex()));
-
-  QModelIndex va_index = library_->index(0, 0, QModelIndex());
-  EXPECT_EQ("Various Artists", va_index.data().toString());
-  EXPECT_TRUE(library_->hasChildren(va_index));
-}
-
 TEST_F(LibraryTest, WithInitialArtists) {
-  backend_->ExpectSetup(false, QStringList() << "Artist 1" << "Artist 2" << "Foo");
+  AddSong("Title", "Artist 1", "Album", 123);
+  AddSong("Title", "Artist 2", "Album", 123);
+  AddSong("Title", "Foo", "Album", 123);
   library_->StartThreads();
 
   ASSERT_EQ(5, library_sorted_->rowCount(QModelIndex()));
@@ -101,24 +118,30 @@ TEST_F(LibraryTest, WithInitialArtists) {
 }
 
 TEST_F(LibraryTest, CompilationAlbums) {
-  backend_->ExpectSetup(true);
+  Song song;
+  song.Init("Title", "Artist", "Album", 123);
+  song.set_compilation(true);
+
+  AddSong(song);
   library_->StartThreads();
 
+  ASSERT_EQ(1, library_->rowCount(QModelIndex()));
+
   QModelIndex va_index = library_->index(0, 0, QModelIndex());
-
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
-  EXPECT_CALL(*backend_, GetCompilationAlbums(_))
-      .WillOnce(Return(albums));
-
+  EXPECT_EQ("Various Artists", va_index.data().toString());
+  EXPECT_TRUE(library_->hasChildren(va_index));
   ASSERT_EQ(library_->rowCount(va_index), 1);
+
   QModelIndex album_index = library_->index(0, 0, va_index);
   EXPECT_EQ(library_->data(album_index).toString(), "Album");
   EXPECT_TRUE(library_->hasChildren(album_index));
 }
 
 TEST_F(LibraryTest, NumericHeaders) {
-  backend_->ExpectSetup(false, QStringList() << "1artist" << "2artist" << "0artist" << "zartist");
+  AddSong("Title", "1artist", "Album", 123);
+  AddSong("Title", "2artist", "Album", 123);
+  AddSong("Title", "0artist", "Album", 123);
+  AddSong("Title", "zartist", "Album", 123);
   library_->StartThreads();
 
   ASSERT_EQ(6, library_sorted_->rowCount(QModelIndex()));
@@ -131,7 +154,8 @@ TEST_F(LibraryTest, NumericHeaders) {
 }
 
 TEST_F(LibraryTest, MixedCaseHeaders) {
-  backend_->ExpectSetup(false, QStringList() << "Artist" << "artist");
+  AddSong("Title", "Artist", "Album", 123);
+  AddSong("Title", "artist", "Album", 123);
   library_->StartThreads();
 
   ASSERT_EQ(3, library_sorted_->rowCount(QModelIndex()));
@@ -141,31 +165,21 @@ TEST_F(LibraryTest, MixedCaseHeaders) {
 }
 
 TEST_F(LibraryTest, UnknownArtists) {
-  backend_->ExpectSetup(false, QStringList() << "");
+  AddSong("Title", "", "Album", 123);
   library_->StartThreads();
 
   ASSERT_EQ(1, library_->rowCount(QModelIndex()));
   QModelIndex unknown_index = library_->index(0, 0, QModelIndex());
   EXPECT_EQ("Unknown", unknown_index.data().toString());
 
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("", "Album", "", "");
-  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString(""), _))
-      .WillOnce(Return(albums));
-
   ASSERT_EQ(1, library_->rowCount(unknown_index));
   EXPECT_EQ("Album", library_->index(0, 0, unknown_index).data().toString());
 }
 
 TEST_F(LibraryTest, UnknownAlbums) {
-  backend_->ExpectSetup(false, QStringList() << "Artist");
+  AddSong("Title", "Artist", "", 123);
+  AddSong("Title", "Artist", "Album", 123);
   library_->StartThreads();
-
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("Artist", "", "", "");
-  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
-  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
-      .WillOnce(Return(albums));
 
   QModelIndex artist_index = library_->index(0, 0, QModelIndex());
   ASSERT_EQ(2, library_->rowCount(artist_index));
@@ -178,29 +192,23 @@ TEST_F(LibraryTest, UnknownAlbums) {
 }
 
 TEST_F(LibraryTest, VariousArtistSongs) {
-  backend_->ExpectSetup(true);
-  library_->StartThreads();
-
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("", "Album", "", "");
-
   SongList songs;
-  songs << Song() << Song() << Song() << Song();
-  songs[0].Init("Title 1", "Artist 1", "Album", 0);
-  songs[1].Init("Title 2", "Artist 2", "Album", 0);
-  songs[2].Init("Title 3", "Artist 3", "Album", 0);
-  songs[3].Init("Title 4", "Various Artists", "Album", 0);
+  for (int i=0 ; i<4 ; ++i) {
+    QString n = QString::number(i+1);
+    Song song;
+    song.Init("Title " + n, "Artist " + n, "Album", 0);
+    songs << song;
+  }
 
   // Different ways of putting songs in "Various Artist".  Make sure they all work
   songs[0].set_sampler(true);
   songs[1].set_compilation(true);
   songs[2].set_forced_compilation_on(true);
-  songs[3].set_sampler(true);
+  songs[3].set_sampler(true); songs[3].set_artist("Various Artists");
 
-  EXPECT_CALL(*backend_, GetCompilationAlbums(_))
-      .WillOnce(Return(albums));
-  EXPECT_CALL(*backend_, GetCompilationSongs(QString("Album"), _))
-      .WillOnce(Return(songs));
+  for (int i=0 ; i<4 ; ++i)
+    AddSong(songs[i]);
+  library_->StartThreads();
 
   QModelIndex artist_index = library_->index(0, 0, QModelIndex());
   ASSERT_EQ(1, library_->rowCount(artist_index));
@@ -215,22 +223,10 @@ TEST_F(LibraryTest, VariousArtistSongs) {
 }
 
 TEST_F(LibraryTest, RemoveSongsLazyLoaded) {
-  backend_->ExpectSetup(false, QStringList() << "Artist");
+  Song one = AddSong("Title 1", "Artist", "Album", 123); one.set_id(1);
+  Song two = AddSong("Title 2", "Artist", "Album", 123); two.set_id(2);
+  AddSong("Title 3", "Artist", "Album", 123);
   library_->StartThreads();
-
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
-
-  SongList songs;
-  songs << Song() << Song() << Song();
-  songs[0].Init("Title 1", "Artist", "Album", 0); songs[0].set_id(0);
-  songs[1].Init("Title 2", "Artist", "Album", 0); songs[1].set_id(1);
-  songs[2].Init("Title 3", "Artist", "Album", 0); songs[2].set_id(2);
-
-  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
-      .WillOnce(Return(albums));
-  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album"), _))
-      .WillOnce(Return(songs));
 
   // Lazy load the items
   QModelIndex artist_index = library_->index(0, 0, QModelIndex());
@@ -239,83 +235,54 @@ TEST_F(LibraryTest, RemoveSongsLazyLoaded) {
   ASSERT_EQ(3, library_->rowCount(album_index));
 
   // Remove the first two songs
-  QSignalSpy spy1(library_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
-  QSignalSpy spy2(library_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_preremove(library_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_remove(library_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_reset(library_, SIGNAL(modelReset()));
 
-  SongList songs_to_delete = SongList() << songs[0] << songs[1];
-  backend_->EmitSongsDeleted(songs_to_delete);
+  backend_->DeleteSongs(SongList() << one << two);
 
-  ASSERT_EQ(2, spy1.count());
-  ASSERT_EQ(2, spy2.count());
-  for (int call=0 ; call<=1 ; ++call) {
-    for (int arg=1 ; arg<=2 ; ++arg) {
-      EXPECT_EQ(0, spy1[call][arg].toInt()) << "Call " << call << " arg " << arg;
-      EXPECT_EQ(0, spy2[call][arg].toInt()) << "Call " << call << " arg " << arg;
-    }
-  }
+  ASSERT_EQ(2, spy_preremove.count());
+  ASSERT_EQ(2, spy_remove.count());
+  ASSERT_EQ(0, spy_reset.count());
 
+  artist_index = library_->index(0, 0, QModelIndex());
+  ASSERT_EQ(1, library_->rowCount(artist_index));
+  album_index = library_->index(0, 0, artist_index);
   ASSERT_EQ(1, library_->rowCount(album_index));
   EXPECT_EQ("Title 3", library_->index(0, 0, album_index).data().toString());
 }
 
 TEST_F(LibraryTest, RemoveSongsNotLazyLoaded) {
-  backend_->ExpectSetup(false, QStringList() << "Artist");
+  Song one = AddSong("Title 1", "Artist", "Album", 123); one.set_id(1);
+  Song two = AddSong("Title 2", "Artist", "Album", 123); two.set_id(2);
   library_->StartThreads();
 
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
-
-  SongList songs;
-  songs << Song() << Song() << Song();
-  songs[0].Init("Title 1", "Artist", "Album", 0); songs[0].set_id(0);
-  songs[1].Init("Title 2", "Artist", "Album", 0); songs[1].set_id(1);
-
-  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
-      .WillOnce(Return(albums));
-
   // Remove the first two songs
-  QSignalSpy spy1(library_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
-  QSignalSpy spy2(library_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_preremove(library_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_remove(library_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+  QSignalSpy spy_reset(library_, SIGNAL(modelReset()));
 
-  backend_->EmitSongsDeleted(songs);
+  backend_->DeleteSongs(SongList() << one << two);
 
-  ASSERT_EQ(0, spy1.count());
-  ASSERT_EQ(0, spy2.count());
+  ASSERT_EQ(0, spy_preremove.count());
+  ASSERT_EQ(0, spy_remove.count());
+  ASSERT_EQ(1, spy_reset.count());
 }
 
 TEST_F(LibraryTest, RemoveEmptyAlbums) {
-  backend_->ExpectSetup(false, QStringList() << "Artist");
+  Song one = AddSong("Title 1", "Artist", "Album 1", 123); one.set_id(1);
+  Song two = AddSong("Title 2", "Artist", "Album 2", 123); two.set_id(2);
+  Song three = AddSong("Title 3", "Artist", "Album 2", 123); three.set_id(3);
   library_->StartThreads();
-
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("Artist", "Album 1", "", "");
-  albums << LibraryBackendInterface::Album("Artist", "Album 2", "", "");
-
-  SongList songs_one; songs_one << Song();
-  SongList songs_two; songs_two << Song() << Song();
-  songs_one[0].Init("Title 1", "Artist", "Album 1", 0); songs_one[0].set_id(0);
-  songs_two[0].Init("Title 2", "Artist", "Album 2", 0); songs_two[0].set_id(1);
-  songs_two[1].Init("Title 3", "Artist", "Album 2", 0); songs_two[1].set_id(2);
-
-  // Lazy load the album
-  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
-      .WillOnce(Return(albums));
 
   QModelIndex artist_index = library_->index(0, 0, QModelIndex());
   ASSERT_EQ(2, library_->rowCount(artist_index));
 
   // Remove one song from each album
-  SongList songs_to_delete;
-  songs_to_delete << songs_one.takeFirst() << songs_two.takeFirst();
-
-  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album 1"), _))
-      .WillOnce(Return(songs_one));
-  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album 2"), _))
-      .WillOnce(Return(songs_two));
-
-  backend_->EmitSongsDeleted(songs_to_delete);
+  backend_->DeleteSongs(SongList() << one << two);
 
   // Check the model
+  artist_index = library_->index(0, 0, QModelIndex());
   ASSERT_EQ(1, library_->rowCount(artist_index));
   QModelIndex album_index = library_->index(0, 0, artist_index);
   EXPECT_EQ("Album 2", album_index.data().toString());
@@ -325,19 +292,8 @@ TEST_F(LibraryTest, RemoveEmptyAlbums) {
 }
 
 TEST_F(LibraryTest, RemoveEmptyArtists) {
-  backend_->ExpectSetup(false, QStringList() << "Artist");
+  Song one = AddSong("Title", "Artist", "Album", 123); one.set_id(1);
   library_->StartThreads();
-
-  LibraryBackendInterface::AlbumList albums;
-  albums << LibraryBackendInterface::Album("Artist", "Album", "", "");
-
-  SongList songs = SongList() << Song();
-  songs[0].Init("Title 1", "Artist", "Album", 0); songs[0].set_id(0);
-
-  EXPECT_CALL(*backend_, GetAlbumsByArtist(QString("Artist"), _))
-      .WillOnce(Return(albums));
-  EXPECT_CALL(*backend_, GetSongs(QString("Artist"), QString("Album"), _))
-      .WillOnce(Return(songs));
 
   // Lazy load the items
   QModelIndex artist_index = library_->index(0, 0, QModelIndex());
@@ -349,11 +305,10 @@ TEST_F(LibraryTest, RemoveEmptyArtists) {
   ASSERT_EQ(2, library_->rowCount(QModelIndex()));
 
   // Remove the song
-  backend_->EmitSongsDeleted(songs);
+  backend_->DeleteSongs(SongList() << one);
 
   // Everything should be gone - even the artist header
   ASSERT_EQ(0, library_->rowCount(QModelIndex()));
 }
-
 
 } // namespace

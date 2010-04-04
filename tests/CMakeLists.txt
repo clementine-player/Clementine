@@ -33,7 +33,6 @@ set(TESTUTILS-SOURCES
     test_utils.cpp
     mock_networkaccessmanager.cpp
     mock_taglib.cpp
-    mock_librarybackend.cpp
 )
 
 set(TESTUTILS-MOC-HEADERS
@@ -92,7 +91,7 @@ add_test_file(song_test.cpp false)
 add_test_file(librarybackend_test.cpp false)
 add_test_file(albumcoverfetcher_test.cpp false)
 add_test_file(xspfparser_test.cpp false)
-#add_test_file(library_test.cpp false)
+add_test_file(library_test.cpp false)
 add_test_file(albumcovermanager_test.cpp true)
 add_test_file(songplaylistitem_test.cpp false)
 add_test_file(translations_test.cpp false)

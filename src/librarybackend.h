@@ -228,4 +228,10 @@ class LibraryBackend : public LibraryBackendInterface {
   static bool sLoadedSqliteSymbols;
 };
 
+class MemoryLibraryBackend : public LibraryBackend {
+ public:
+  MemoryLibraryBackend(QObject* parent = 0)
+    : LibraryBackend(parent, ":memory:") {}
+};
+
 #endif // LIBRARYBACKEND_H
