@@ -42,6 +42,10 @@ VlcEngine::VlcEngine()
     "--audio-filter=clementine_scope",
     "--no-plugins-cache",
 
+    // Try to stop audio stuttering
+    "--file-caching=500", // msec
+    "--http-caching=500",
+
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
     "--aout=alsa",        // The default, pulseaudio, is buggy
 #endif
