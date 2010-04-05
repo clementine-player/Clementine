@@ -7,15 +7,7 @@ if (CMAKE_FIND_ROOT_PATH)
   # CMAKE_FIND_ROOT_PATH should get set by your cmake toolchain file
   set(QT_HEADERS_DIR ${CMAKE_FIND_ROOT_PATH}/include)
   set(QT_LIBRARY_DIR ${CMAKE_FIND_ROOT_PATH}/lib)
-  set(QT_PHONON_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/include/phonon)
 endif (CMAKE_FIND_ROOT_PATH)
-
-option(FORCE_PHONON "Use the Phonon audio backend even on Unix")
-
-if (FORCE_PHONON OR WIN32)
-  set(USE_PHONON 1)
-  add_definitions(-DUSE_PHONON)
-endif (FORCE_PHONON OR WIN32)
 
 find_package(Qt4 REQUIRED)
 set(QT_USE_QTOPENGL 1)
@@ -25,15 +17,16 @@ set(QT_USE_QTXML 1)
 if(UNIX AND NOT APPLE)
   set(QT_USE_QTDBUS 1)
 endif(UNIX AND NOT APPLE)
-if(USE_PHONON)
-  set(QT_USE_PHONON 1)
-endif(USE_PHONON)
 
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 
 if(WIN32)
   find_library(TAGLIB_LIBRARIES tag)
+  find_path(VLC_PLUGIN_INCLUDE_DIRS vlc_arrays.h
+    PATH_SUFFIXES vlc vlc/plugins)
+  find_library(VLC_PLUGIN_LIBRARIES vlccore)
+  find_library(LIBVLC_LIBRARIES vlc)
 else(WIN32)
   pkg_check_modules(TAGLIB taglib)
   pkg_check_modules(LIBVLC libvlc)

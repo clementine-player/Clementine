@@ -12,6 +12,7 @@ set(CLEMENTINE-SOURCES
     playlist.cpp
     playlistitem.cpp
     engines/enginebase.cpp
+    engines/vlcengine.cpp
     analyzers/baranalyzer.cpp
     analyzers/analyzerbase.cpp
     fht.cpp
@@ -77,6 +78,7 @@ set(CLEMENTINE-MOC-HEADERS
     librarybackend.h
     playlist.h
     engines/enginebase.h
+    engines/vlcengine.h
     sliderwidget.h
     playlistview.h
     backgroundthread.h
@@ -192,15 +194,6 @@ foreach(QM-FILE ${CLEMENTINE-QM-FILES})
   file(APPEND ${CLEMENTINE-QM-RESOURCE} "<file>" ${QM-RELATIVE-PATH} "</file>")
 endforeach(QM-FILE)
 file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
-
-# Audio engine - phonon on windows, xine elsewhere
-if(USE_PHONON)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/phononengine.cpp)
-  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/phononengine.h)
-else(USE_PHONON)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} engines/vlcengine.cpp)
-  set(CLEMENTINE-MOC-HEADERS ${CLEMENTINE-MOC-HEADERS} engines/vlcengine.h)
-endif(USE_PHONON)
 
 # OSD and DBus.
 if(APPLE)
