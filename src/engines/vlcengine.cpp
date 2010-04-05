@@ -19,12 +19,17 @@
 
 #include <QTimer>
 #include <QtDebug>
+#include <QMutexLocker>
+#include <QTime>
 
 #include <boost/bind.hpp>
+
+VlcEngine* VlcEngine::sInstance = NULL;
 
 VlcEngine::VlcEngine()
   : instance_(NULL),
     player_(NULL),
+    scope_data_(4096),
     state_(Engine::Empty)
 {
   static const char * const args[] = {
@@ -32,7 +37,10 @@ VlcEngine::VlcEngine()
     "--ignore-config",    // Don't use VLC's config
     "--extraintf=logger", // log anything
     "--verbose=2",        // be much more verbose then normal for debugging purpose
-    //"--plugin-path=C:\\vlc-0.9.9-win32\\plugins\\"
+
+    // Our scope plugin
+    "--audio-filter=clementine_scope",
+    "--no-plugins-cache",
 
 #if defined(Q_OS_UNIX) && !defined(Q_OS_MAC)
     "--aout=alsa",        // The default, pulseaudio, is buggy
@@ -62,6 +70,8 @@ VlcEngine::VlcEngine()
   AttachCallback(player_em, libvlc_MediaPlayerStopped, StateChangedCallback);
   AttachCallback(player_em, libvlc_MediaPlayerEndReached, StateChangedCallback);
   HandleErrors();
+
+  sInstance = this;
 }
 
 VlcEngine::~VlcEngine() {
@@ -203,4 +213,34 @@ void VlcEngine::HandleErrors() const {
   if (libvlc_exception_raised(&exception_)) {
     qFatal("libvlc error: %s", libvlc_exception_get_message(&exception_));
   }
+}
+
+void VlcEngine::SetScopeData(float* data, int size) {
+  if (!sInstance)
+    return;
+
+  QMutexLocker l(&sInstance->scope_mutex_);
+
+  // This gets called by our VLC plugin.  Just push the data on to the end of
+  // the circular buffer and let it get consumed by scope()
+  for (int i=0 ; i<size ; ++i) {
+    sInstance->scope_data_.push_back(data[i]);
+  }
+}
+
+const Engine::Scope& VlcEngine::scope() {
+  QMutexLocker l(&scope_mutex_);
+
+  // Leave the scope unchanged if there's not enough data
+  if (scope_data_.size() < SCOPESIZE)
+    return m_scope;
+
+  // Take the samples off the front of the circular buffer
+  for (uint i=0 ; i<SCOPESIZE ; ++i)
+    m_scope[i] = scope_data_[i] * (1 << 15);
+
+  // Remove the samples from the buffer.  Unfortunately I think this is O(n) :(
+  scope_data_.rresize(qMax(0, int(scope_data_.size()) - SCOPESIZE*2));
+
+  return m_scope;
 }

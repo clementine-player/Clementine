@@ -20,6 +20,9 @@
 #include "enginebase.h"
 
 #include <vlc/vlc.h>
+#include <boost/circular_buffer.hpp>
+
+#include <QMutex>
 
 class QTimer;
 
@@ -46,6 +49,9 @@ class VlcEngine : public Engine::Base {
 
   void seek( uint ms );
 
+  static void SetScopeData(float* data, int size);
+  const Engine::Scope& scope();
+
  protected:
   void setVolumeSW( uint percent );
 
@@ -56,9 +62,14 @@ class VlcEngine : public Engine::Base {
   static void StateChangedCallback(const libvlc_event_t* e, void* data);
 
  private:
+  static VlcEngine* sInstance;
+
   libvlc_exception_t exception_;
   libvlc_instance_t* instance_;
   libvlc_media_player_t* player_;
+
+  QMutex scope_mutex_;
+  boost::circular_buffer<float> scope_data_;
 
   Engine::State state_;
 };

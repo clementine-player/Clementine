@@ -37,6 +37,7 @@ if(WIN32)
 else(WIN32)
   pkg_check_modules(TAGLIB taglib)
   pkg_check_modules(LIBVLC libvlc)
+  pkg_check_modules(VLC_PLUGIN vlc-plugin)
 
   if (TAGLIB_VERSION VERSION_LESS 1.6)
     message(FATAL_ERROR "Taglib version 1.6 or greater is required")
@@ -69,6 +70,7 @@ include(${QT_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${LIBVLC_INCLUDE_DIRS})
+include_directories(${VLC_PLUGIN_INCLUDE_DIRS})
 include_directories(${LASTFM_INCLUDE_DIRS})
 include_directories("3rdparty/qsqlite")
 
@@ -88,6 +90,7 @@ add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
 add_subdirectory(3rdparty/qxt)
+add_subdirectory(vlcplugins)
 add_subdirectory(src)
 
 add_subdirectory(tests)
@@ -96,6 +99,14 @@ if (WIN32)
   add_definitions(-DQT_STATICPLUGIN)
   add_subdirectory(3rdparty/qsqlite)
 endif(WIN32)
+
+# Install libraries to the right place
+set (LIBRARY_INSTALL_DIR lib)
+if (EXISTS "${CMAKE_INSTALL_PREFIX}/lib32/" AND CMAKE_SIZEOF_VOID_P EQUAL 4)
+  set (LIBRARY_INSTALL_DIR lib32)
+elif (EXISTS "${CMAKE_INSTALL_PREFIX}/lib64/" AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+  set (LIBRARY_INSTALL_DIR lib64)
+endif ()
 
 # Uninstall support
 configure_file(
