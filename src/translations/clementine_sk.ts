@@ -106,12 +106,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../albumcovermanager.cpp" line="400"/>
         <source>Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)</translation>
     </message>
     <message>
         <location filename="../albumcovermanager.cpp" line="401"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky súbory (*)</translation>
     </message>
 </context>
 <context>
@@ -766,7 +766,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../libraryview.cpp" line="89"/>
         <source>Add to playlist</source>
-        <translation type="unfinished">Pridať do playlistu</translation>
+        <translation>Pridať do playlistu</translation>
     </message>
     <message>
         <location filename="../libraryview.cpp" line="92"/>
@@ -1473,7 +1473,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../settingsdialog.ui" line="264"/>
         <source> seconds</source>
-        <translation>sekúnd</translation>
+        <translation>.sekúnd</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="283"/>
