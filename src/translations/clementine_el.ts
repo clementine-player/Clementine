@@ -109,11 +109,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικόνες (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)</translation>
     </message>
     <message>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλα τα αρχεία (*)</translation>
     </message>
 </context>
 <context>
@@ -309,55 +309,55 @@ p, li { white-space: pre-wrap; }
     <name>GroupByDialog</name>
     <message>
         <source>Library advanced grouping</source>
-        <translation type="unfinished"></translation>
+        <translation>Προχωρημένη ομαδοποίηση βιβλιοθήκης</translation>
     </message>
     <message>
         <source>You can change the way the songs in the library are organised.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μπορείς να αλλάξεις τον τρόπο οργάνωσης των τραγουδιών στην βιβλιοθήκη.</translation>
     </message>
     <message>
         <source>Group Library by...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση βιβλιοθήκης κατά...</translation>
     </message>
     <message>
         <source>First level</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρώτο επίπεδο</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανένα</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished">Άλμπουμ</translation>
+        <translation>Άλμπουμ</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished">Καλλιτέχνης</translation>
+        <translation>Καλλιτέχνης</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished">Συνθέτης</translation>
+        <translation>Συνθέτης</translation>
     </message>
     <message>
         <source>Genre</source>
-        <translation type="unfinished">Είδος</translation>
+        <translation>Είδος</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Έτος</translation>
+        <translation>Έτος</translation>
     </message>
     <message>
         <source>Year - Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Έτος - Άλμπουμ</translation>
     </message>
     <message>
         <source>Second level</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεύτερο επίπεδο</translation>
     </message>
     <message>
         <source>Third level</source>
-        <translation type="unfinished"></translation>
+        <translation>Τρίτο επίπεδο</translation>
     </message>
 </context>
 <context>
@@ -615,11 +615,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογές</translation>
     </message>
     <message>
         <source>Automatically open single categories in the library tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιξε αυτόμα τις μόνες κατηγορίες του δέντρου της βιβλιοθήκης</translation>
     </message>
 </context>
 <context>
@@ -649,7 +649,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add to playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη στην λίστα</translation>
     </message>
 </context>
 <context>
@@ -848,31 +848,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Group by Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κατά Καλλιτέχνη</translation>
     </message>
     <message>
         <source>Group by Artist/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κατά Καλλιτέχνη/Άλμπουμ</translation>
     </message>
     <message>
         <source>Group by Artist/Year - Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κατά Καλλιτέχνη/Έτος - Άλμπουμ</translation>
     </message>
     <message>
         <source>Group by Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κατά Άλμπουμ</translation>
     </message>
     <message>
         <source>Group by Genre/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κατά Είδος/Άλμπουμ</translation>
     </message>
     <message>
         <source>Group by Genre/Artist/Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κατά Είδος/Καλλιντέχνη/Άλμπουμ</translation>
     </message>
     <message>
         <source>Advanced grouping...</source>
-        <translation type="unfinished"></translation>
+        <translation>Προχωρημένη ομαδοποίηση...</translation>
     </message>
 </context>
 <context>
