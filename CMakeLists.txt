@@ -100,14 +100,6 @@ if (WIN32)
   add_subdirectory(3rdparty/qsqlite)
 endif(WIN32)
 
-# Install libraries to the right place
-set (LIBRARY_INSTALL_DIR lib)
-if (EXISTS "${CMAKE_INSTALL_PREFIX}/lib32/" AND CMAKE_SIZEOF_VOID_P EQUAL 4)
-  set (LIBRARY_INSTALL_DIR lib32)
-elif (EXISTS "${CMAKE_INSTALL_PREFIX}/lib64/" AND CMAKE_SIZEOF_VOID_P EQUAL 8)
-  set (LIBRARY_INSTALL_DIR lib64)
-endif ()
-
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
