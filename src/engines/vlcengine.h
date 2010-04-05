@@ -53,7 +53,7 @@ class VlcEngine : public Engine::Base {
   const Engine::Scope& scope();
 
  protected:
-  void setVolumeSW( uint percent );
+  void setVolumeSW( uint percent ); 
 
  private:
   void HandleErrors() const;
@@ -62,12 +62,15 @@ class VlcEngine : public Engine::Base {
   static void StateChangedCallback(const libvlc_event_t* e, void* data);
 
  private:
+  // The callbacks need access to this
   static VlcEngine* sInstance;
 
+  // VLC bits and pieces
   libvlc_exception_t exception_;
   libvlc_instance_t* instance_;
   libvlc_media_player_t* player_;
 
+  // Our clementine_scope VLC plugin puts data in here
   QMutex scope_mutex_;
   boost::circular_buffer<float> scope_data_;
 

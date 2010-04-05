@@ -130,9 +130,9 @@ bool VlcEngine::canDecode(const QUrl &url) const {
 }
 
 bool VlcEngine::load(const QUrl &url, bool stream) {
+  // Create the media object
   VlcScopedRef<libvlc_media_t> media(
       libvlc_media_new(instance_, url.toEncoded().constData(), &exception_));
-
   if (libvlc_exception_raised(&exception_))
     return false;
 
@@ -237,11 +237,11 @@ const Engine::Scope& VlcEngine::scope() {
   QMutexLocker l(&scope_mutex_);
 
   // Leave the scope unchanged if there's not enough data
-  if (scope_data_.size() < SCOPESIZE)
+  if (scope_data_.size() < uint(SCOPESIZE))
     return m_scope;
 
   // Take the samples off the front of the circular buffer
-  for (uint i=0 ; i<SCOPESIZE ; ++i)
+  for (uint i=0 ; i<uint(SCOPESIZE) ; ++i)
     m_scope[i] = scope_data_[i] * (1 << 15);
 
   // Remove the samples from the buffer.  Unfortunately I think this is O(n) :(

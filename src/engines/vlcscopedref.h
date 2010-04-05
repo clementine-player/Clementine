@@ -26,6 +26,7 @@ class VlcScopedRef {
   ~VlcScopedRef();
 
   operator T* () const { return ptr_; }
+  operator bool () const { return ptr_; }
   T* operator ->() const { return ptr_; }
 
  private:
@@ -49,6 +50,7 @@ VLCSCOPEDREF_DEFINE2(instance, libvlc_release);
 VLCSCOPEDREF_DEFINE(media_player);
 VLCSCOPEDREF_DEFINE(media);
 
+template <> void VlcScopedRef_Release<char>(char* ptr) { free(ptr); }
 
 template <typename T>
 VlcScopedRef<T>::VlcScopedRef(T* ptr)
