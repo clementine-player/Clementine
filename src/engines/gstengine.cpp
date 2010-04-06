@@ -150,7 +150,8 @@ GstEngine::event_cb( GstPad*, GstEvent* event, gpointer /*arg*/) //static
    {
       case GST_EVENT_EOS:
          qDebug() << "EOS reached";
-         QTimer::singleShot( 0, instance(), SLOT( endOfStreamReached() ) );
+         QMetaObject::invokeMethod(instance(), "endOfStreamReached",
+                                   Qt::QueuedConnection);
          break;
       case GST_EVENT_TAG:
       {
