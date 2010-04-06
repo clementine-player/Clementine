@@ -240,7 +240,7 @@ bool GstEngine::canDecode( const QUrl &url ) const {
 
   gst_element_link( giosrc, decodebin );
 
-  g_object_set( G_OBJECT( giosrc ), "location", (const char*) QFile::encodeName( url.path() ), NULL );
+  g_object_set( G_OBJECT( giosrc ), "location", (const char*) url.toEncoded().constData(), NULL );
   g_signal_connect( G_OBJECT( decodebin ), "new-decoded-pad", G_CALLBACK( CanDecodeNewPadCallback ), NULL );
   g_signal_connect( G_OBJECT( decodebin ), "no-more-pads", G_CALLBACK( CanDecodeLastCallback ), NULL );
 
