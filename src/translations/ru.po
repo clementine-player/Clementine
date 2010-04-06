@@ -5,1340 +5,1106 @@
 #
 #, fuzzy
 msgid ""
-msgstr ""
-"X-Virgin-Header: remove this line if you change anything in the header.\n"
+msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-#. ts-context About
+#: mainwindow.cpp:274
+msgid "Configure library..."
+msgstr "Настройки коллекции..."
+
+#: mainwindow.cpp:279 mainwindow.cpp:418 mainwindow.cpp:434 mainwindow.cpp:618
+#: ../bin/src/ui_mainwindow.h:565
+msgid "Play"
+msgstr "Воспроизвести"
+
+#: mainwindow.cpp:281 ../bin/src/ui_mainwindow.h:570
+msgid "Stop after this track"
+msgstr "Остановить после этой дорожки"
+
+#: mainwindow.cpp:373 mainwindow.cpp:392
+msgid "&Show tray icon"
+msgstr ""
+
+#: mainwindow.cpp:396 ../bin/src/ui_mainwindow.h:596
+msgid "&Hide tray icon"
+msgstr ""
+
+#: mainwindow.cpp:445 mainwindow.cpp:615
+msgid "Pause"
+msgstr "Пауза"
+
+#: mainwindow.cpp:667
+#, qt-format
+msgid "Set %1 to \"%2\"..."
+msgstr ""
+
+#: mainwindow.cpp:669
+#, qt-format
+msgid "Edit tag \"%1\"..."
+msgstr ""
+
+#: library.cpp:210
+msgid "Various Artists"
+msgstr "Разные исполнители"
+
+#: library.cpp:680 playlistdelegates.cpp:138 playlistdelegates.cpp:157
+#, fuzzy
+msgid "Unknown"
+msgstr "Неизвестный"
+
+#: playlist.cpp:536 ../bin/src/ui_edittagdialog.h:210
+#: ../bin/src/ui_about.h:148
 msgid "Title"
 msgstr "Название"
 
-#. ts-context About
-msgid "Version"
-msgstr "Версия"
+#: playlist.cpp:537 ../bin/src/ui_lastfmstationdialog.h:93
+#: ../bin/src/ui_edittagdialog.h:212 ../bin/src/ui_groupbydialog.h:127
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:149
+msgid "Artist"
+msgstr "Исполнитель"
 
-#. ts-context About
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-"type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-"href=\"http://code.google.com/p/clementine-player/\"><span style=\" "
-"text-decoration: underline; "
-"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Authors:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome "
-"&lt;<a href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Thanks to:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann "
-"&lt;<a href=\"mailto:markey@web.de\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-"href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the "
-"Amarok contributors</p></body></html>"
+#: playlist.cpp:538 ../bin/src/ui_edittagdialog.h:211
+#: ../bin/src/ui_groupbydialog.h:126 ../bin/src/ui_groupbydialog.h:137
+#: ../bin/src/ui_groupbydialog.h:148
+msgid "Album"
+msgstr "Альбом"
+
+#: playlist.cpp:539
+msgid "Length"
+msgstr "Длительность"
+
+#: playlist.cpp:540 ../bin/src/ui_edittagdialog.h:214
+msgid "Track"
+msgstr "Дорожка"
+
+#: playlist.cpp:541
+msgid "Disc"
+msgstr "Диск"
+
+#: playlist.cpp:542 ../bin/src/ui_edittagdialog.h:215
+#: ../bin/src/ui_groupbydialog.h:130 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:152
+msgid "Year"
+msgstr "Год"
+
+#: playlist.cpp:543 ../bin/src/ui_edittagdialog.h:213
+#: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:151
+msgid "Genre"
+msgstr "Жанр"
+
+#: playlist.cpp:544
+msgid "Album artist"
 msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-"type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-"href=\"http://code.google.com/p/clementine-player/\"><span style=\" "
-"text-decoration: underline; "
-"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Авторы:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome "
-"&lt;<a href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Выражаем благодарность:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann "
-"&lt;<a href=\"mailto:markey@web.de\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-"href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">... и всем "
-"создателям Amarok</p></body></html>"
 
-#. ts-context About
+#: playlist.cpp:545 ../bin/src/ui_groupbydialog.h:128
+#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:150
+msgid "Composer"
+msgstr ""
+
+#: playlist.cpp:547
+msgid "BPM"
+msgstr "BPM"
+
+#: playlist.cpp:548
+msgid "Bit rate"
+msgstr "Битрейт"
+
+#: playlist.cpp:549
+msgid "Sample rate"
+msgstr "Частота"
+
+#: playlist.cpp:550
+msgid "File name"
+msgstr "Имя файла"
+
+#: playlist.cpp:551
+msgid "File name (without path)"
+msgstr ""
+
+#: playlist.cpp:552
+msgid "File size"
+msgstr "Размер"
+
+#: playlist.cpp:553
+msgid "File type"
+msgstr ""
+
+#: playlist.cpp:554
+msgid "Date modified"
+msgstr ""
+
+#: playlist.cpp:555
+msgid "Date created"
+msgstr ""
+
+#: analyzers/baranalyzer.cpp:19
+msgid "Bar analyzer"
+msgstr ""
+
+#: analyzers/blockanalyzer.cpp:24
+msgid "Block analyzer"
+msgstr ""
+
+#: analyzers/analyzercontainer.cpp:53
+msgid "No analyzer"
+msgstr ""
+
+#: analyzers/boomanalyzer.cpp:8
+msgid "Boom analyzer"
+msgstr ""
+
+#: analyzers/sonogram.cpp:18
+msgid "Sonogram"
+msgstr ""
+
+#: analyzers/turbine.cpp:15
+msgid "Turbine"
+msgstr ""
+
+#: libraryview.cpp:89 fileviewlist.cpp:28 lastfmservice.cpp:65
+#: somafmservice.cpp:40 savedradio.cpp:30
+msgid "Add to playlist"
+msgstr "Добавить в плейлист"
+
+#: libraryview.cpp:92
+msgid "Show in various artists"
+msgstr ""
+
+#: libraryview.cpp:94
+msgid "Don't show in various artists"
+msgstr ""
+
+#: libraryview.cpp:151
+msgid "Your library is empty!"
+msgstr "Ваша коллекция пуста!"
+
+#: libraryview.cpp:157
+msgid "Click here to add some music"
+msgstr "Щелкните здесь, что бы добавить музыку"
+
+#: libraryconfig.cpp:57
+msgid "Add directory..."
+msgstr "Добавить каталог..."
+
+#: fileviewlist.cpp:31
+msgid "Copy to library..."
+msgstr "Копировать в коллекцию..."
+
+#: fileviewlist.cpp:33
+msgid "Move to library..."
+msgstr "Преместить в коллекцию..."
+
+#: playlistheader.cpp:30
+msgid "Hide..."
+msgstr "Скрыть..."
+
+#: playlistheader.cpp:31
+msgid "Show section"
+msgstr "Показать секцию"
+
+#: playlistheader.cpp:47
+#, qt-format
+msgid "Hide %1"
+msgstr "Скрыть %1"
+
+#: lastfmservice.cpp:67 savedradio.cpp:31
+msgid "Remove"
+msgstr "Удалить"
+
+#: lastfmservice.cpp:70
+msgid "Play artist radio..."
+msgstr "Проиграть радио артиста..."
+
+#: lastfmservice.cpp:72
+msgid "Play tag radio..."
+msgstr "Проиграть радио тега..."
+
+#: lastfmservice.cpp:74
+msgid "Configure Last.fm..."
+msgstr "Настройки Last.fm..."
+
+#: lastfmservice.cpp:116
+msgid "My Recommendations"
+msgstr ""
+
+#: lastfmservice.cpp:117
+msgid "My Radio Station"
+msgstr ""
+
+#: lastfmservice.cpp:118
+msgid "My Loved Tracks"
+msgstr ""
+
+#: lastfmservice.cpp:119
+msgid "My Neighbourhood"
+msgstr ""
+
+#: lastfmservice.cpp:122
+msgid "Artist radio"
+msgstr ""
+
+#: lastfmservice.cpp:126
+msgid "Tag radio"
+msgstr ""
+
+#: lastfmservice.cpp:133
+msgid "Friends"
+msgstr ""
+
+#: lastfmservice.cpp:136
+msgid "Neighbours"
+msgstr ""
+
+#: lastfmservice.cpp:156
+#, qt-format
+msgid "%1's Radio Station"
+msgstr ""
+
+#: lastfmservice.cpp:158 lastfmservice.cpp:260 lastfmservice.cpp:265
+#, qt-format
+msgid "%1's Loved Tracks"
+msgstr ""
+
+#: lastfmservice.cpp:160
+#, qt-format
+msgid "%1's Neighborhood"
+msgstr ""
+
+#: lastfmservice.cpp:259
+#, qt-format
+msgid "%1's Recommended Radio"
+msgstr ""
+
+#: lastfmservice.cpp:261 lastfmservice.cpp:266
+#, qt-format
+msgid "%1's Neighbour Radio"
+msgstr ""
+
+#: lastfmservice.cpp:262 lastfmservice.cpp:264
+#, qt-format
+msgid "%1's Library"
+msgstr ""
+
+#: lastfmservice.cpp:267
+#, qt-format
+msgid "Similar Artists to %1"
+msgstr ""
+
+#: lastfmservice.cpp:268
+#, qt-format
+msgid "Tag Radio: %1"
+msgstr ""
+
+#: lastfmservice.cpp:340
+msgid "Invalid service"
+msgstr ""
+
+#: lastfmservice.cpp:341
+msgid "Invalid method"
+msgstr ""
+
+#: lastfmservice.cpp:342 lastfmconfig.cpp:56
+msgid "Authentication failed"
+msgstr "Ошибка аутентификации"
+
+#: lastfmservice.cpp:343
+msgid "Invalid format"
+msgstr ""
+
+#: lastfmservice.cpp:344
+msgid "Invalid parameters"
+msgstr ""
+
+#: lastfmservice.cpp:345
+msgid "Invalid resource specified"
+msgstr ""
+
+#: lastfmservice.cpp:346
+msgid "Operation failed"
+msgstr ""
+
+#: lastfmservice.cpp:347
+msgid "Invalid session key"
+msgstr ""
+
+#: lastfmservice.cpp:348
+msgid "Invalid API key"
+msgstr ""
+
+#: lastfmservice.cpp:349
+msgid "Service offline"
+msgstr ""
+
+#: lastfmservice.cpp:350
+msgid "This stream is for paid subscribers only"
+msgstr ""
+
+#: lastfmservice.cpp:352
+msgid "Last.fm is currently busy, please try again in a few minutes"
+msgstr ""
+
+#: lastfmservice.cpp:354
+msgid "Not enough content"
+msgstr ""
+
+#: lastfmservice.cpp:355
+msgid "Not enough members"
+msgstr ""
+
+#: lastfmservice.cpp:356
+msgid "Not enough fans"
+msgstr ""
+
+#: lastfmservice.cpp:357
+msgid "Not enough neighbours"
+msgstr ""
+
+#: lastfmservice.cpp:359
+msgid "Malformed response"
+msgstr ""
+
+#: lastfmservice.cpp:363
+msgid "Unknown error"
+msgstr ""
+
+#: lastfmconfig.cpp:56
+msgid "Your Last.fm credentials were incorrect"
+msgstr "Ваши данные Last.fm некорректны"
+
+#: radioplaylistitem.cpp:57
+msgid "Radio service couldn't be loaded :-("
+msgstr "Сервис радио не запустился =("
+
+#: osd.cpp:69
+#, qt-format
+msgid "disc %1"
+msgstr ""
+
+#: osd.cpp:71
+#, qt-format
+msgid "track %1"
+msgstr ""
+
+#: osd.cpp:78
+msgid "Paused"
+msgstr "Пауза"
+
+#: osd.cpp:82
+msgid "Playlist finished"
+msgstr "Плейлист закончен"
+
+#: osd.cpp:89
+#, qt-format
+msgid "Volume %1%"
+msgstr "Громкость %1%"
+
+#: edittagdialog.cpp:28
+msgid "[click to edit]"
+msgstr "[щелкните, чтобы изменить]"
+
+#: edittagdialog.cpp:90
+#, fuzzy, c-format
+msgid "Editing %n tracks"
+msgstr ""
+"Редактирую %n треков\n"
+"        "
+
+#: multiloadingindicator.cpp:61
+msgid "Loading audio engine"
+msgstr "Загрузка движка аудио"
+
+#: multiloadingindicator.cpp:62
+msgid "Updating library"
+msgstr "Обновление библиотеки"
+
+#: multiloadingindicator.cpp:63
+msgid "Getting channels"
+msgstr "Получение каналов"
+
+#: multiloadingindicator.cpp:64
+msgid "Loading stream"
+msgstr "Загрузка потока"
+
+#: multiloadingindicator.cpp:65
+msgid "Loading Last.fm radio"
+msgstr "Загрузка радио Last.fm"
+
+#: somafmservice.cpp:42
+msgid "Open somafm.com in browser"
+msgstr "Открыть somafm.com в браузере"
+
+#: somafmservice.cpp:43
+msgid "Refresh channels"
+msgstr "Обновить каналы"
+
+#: settingsdialog.cpp:34
+msgid "OSD Preview"
+msgstr ""
+
+#: settingsdialog.cpp:34
+msgid "Drag to reposition"
+msgstr ""
+
+#: about.cpp:27
+#, qt-format
 msgid "About %1"
 msgstr "О программе %1"
 
-#. ts-context About
+#: about.cpp:29
+#, qt-format
 msgid "Version %1"
 msgstr "Версия %1"
 
-#. ts-context AddStreamDialog
-msgid "Add Stream"
-msgstr "Добавить поток"
+#: savedradio.cpp:33
+msgid "Add another stream..."
+msgstr "Добавить другой поток..."
 
-#. ts-context AddStreamDialog
-msgid "Enter the URL of an internet radio stream:"
-msgstr "Введите адрес радиопотока:"
+#: savedradio.cpp:43
+msgid "Your radio streams"
+msgstr ""
 
-#. ts-context AddStreamDialog
-msgid "Save this stream in the Radio tab"
-msgstr "Сохранить поток на вкладке Радио"
-
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:66
 msgid "All albums"
 msgstr ""
 
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:67
 msgid "Albums with covers"
 msgstr ""
 
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:68
 msgid "Albums without covers"
 msgstr ""
 
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:161
 msgid "All artists"
 msgstr ""
 
-#. ts-context AlbumCoverManager
-#, fuzzy
-msgid "Choose manual cover"
-msgstr ""
-
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:162
 msgid "Various artists"
 msgstr ""
 
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:399
+msgid "Choose manual cover"
+msgstr ""
+
+#: albumcovermanager.cpp:400
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
 
-#. ts-context AlbumCoverManager
-#, fuzzy
+#: albumcovermanager.cpp:401
 msgid "All files (*)"
 msgstr ""
 
-#. ts-context AnalyzerContainer
-#, fuzzy
-msgid "No analyzer"
-msgstr ""
-
-#. ts-context AnalyzerContainer
-#, fuzzy
-msgid "Bar analyzer"
-msgstr ""
-
-#. ts-context AnalyzerContainer
-#, fuzzy
-msgid "Block analyzer"
-msgstr ""
-
-#. ts-context AnalyzerContainer
-#, fuzzy
-msgid "Boom analyzer"
-msgstr ""
-
-#. ts-context AnalyzerContainer
-#, fuzzy
-msgid "Sonogram"
-msgstr ""
-
-#. ts-context AnalyzerContainer
-#, fuzzy
-msgid "Turbine"
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Cover Manager"
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Enter search terms here"
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "View"
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Fetch Missing Covers"
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Show fullsize..."
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Fetch automatically"
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Choose manual cover..."
-msgstr ""
-
-#. ts-context CoverManager
-#, fuzzy
-msgid "Unset cover"
-msgstr ""
-
-#. ts-context EditTagDialog
-msgid "Edit track information"
-msgstr "Редактировать информацию"
-
-#. ts-context EditTagDialog
-msgid "Title"
-msgstr "Название"
-
-#. ts-context EditTagDialog
-msgid "Album"
-msgstr "Альбом"
-
-#. ts-context EditTagDialog
-msgid "Artist"
-msgstr "Исполнитель"
-
-#. ts-context EditTagDialog
-msgid "Genre"
-msgstr "Жанр"
-
-#. ts-context EditTagDialog
-msgid "Track"
-msgstr "Дорожка"
-
-#. ts-context EditTagDialog
-msgid "Year"
-msgstr "Год"
-
-#. ts-context EditTagDialog
-msgid "Comment"
-msgstr "Комментарий"
-
-#. ts-context EditTagDialog
-msgid "[click to edit]"
-msgstr "[щелкните, чтобы изменить]"
-
-#. ts-context EditTagDialog
-#, fuzzy
-msgid "Editing %n tracks"
-msgid_plural "Editing %n tracks"
-msgstr[0] ""
-"Редактирую %n треков\n"
-"        "
-
-#. ts-context FileTypeItemDelegate
-#, fuzzy
-msgid "Unknown"
-msgstr "Неизвестный"
-
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:141
 msgid "ASF"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:142
 msgid "FLAC"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:143
 msgid "MP4"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:144
 msgid "MPC"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:145
 msgid "MP3"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:146
 msgid "Ogg FLAC"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:147
 msgid "Ogg Speex"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:148
 msgid "Ogg Vorbis"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:149
 msgid "AIFF"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:150
 msgid "WAV"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:151
 msgid "TrueAudio"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#, fuzzy
+#: playlistdelegates.cpp:153
 msgid "Stream"
 msgstr ""
 
-#. ts-context FileView
-msgid "Form"
-msgstr "Форма"
+#: ../bin/src/ui_mainwindow.h:563
+msgid "Clementine"
+msgstr "Clementine"
 
-#. ts-context FileView
-msgid "..."
-msgstr "..."
+#: ../bin/src/ui_mainwindow.h:564
+msgid "Previous track"
+msgstr "Предыдущая"
 
-#. ts-context FileViewList
-msgid "Add to playlist"
-msgstr "Добавить в плейлист"
+#: ../bin/src/ui_mainwindow.h:566
+msgid "Stop"
+msgstr "Стоп"
 
-#. ts-context FileViewList
-msgid "Copy to library..."
-msgstr "Копировать в коллекцию..."
+#: ../bin/src/ui_mainwindow.h:567
+msgid "Next track"
+msgstr "Следующая"
 
-#. ts-context FileViewList
-msgid "Move to library..."
-msgstr "Преместить в коллекцию..."
+#: ../bin/src/ui_mainwindow.h:568
+msgid "&Quit"
+msgstr "Выход"
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Library advanced grouping"
+#: ../bin/src/ui_mainwindow.h:569
+msgid "Ctrl+Q"
+msgstr "Ctrl+Й"
+
+#: ../bin/src/ui_mainwindow.h:571
+msgid "Entire collection"
+msgstr "Вся коллекция"
+
+#: ../bin/src/ui_mainwindow.h:572
+msgid "Added today"
+msgstr "Добавлено сегодня"
+
+#: ../bin/src/ui_mainwindow.h:573
+msgid "Added this week"
+msgstr "Добавлено за неделю"
+
+#: ../bin/src/ui_mainwindow.h:574 ../bin/src/ui_mainwindow.h:576
+msgid "Added within three months"
+msgstr "Добавлено за три месяца"
+
+#: ../bin/src/ui_mainwindow.h:578
+msgid "Added this year"
+msgstr "Добавлено за год"
+
+#: ../bin/src/ui_mainwindow.h:579
+msgid "Added this month"
+msgstr "Добавлено за месяц"
+
+#: ../bin/src/ui_mainwindow.h:580
+msgid "Love"
+msgstr "Полюбить"
+
+#: ../bin/src/ui_mainwindow.h:581
+msgid "Ban"
+msgstr "Запретить"
+
+#: ../bin/src/ui_mainwindow.h:582 ../bin/src/ui_mainwindow.h:584
+msgid "Clear playlist"
+msgstr "Очистить плейлист"
+
+#: ../bin/src/ui_mainwindow.h:586
+msgid "Edit track information..."
+msgstr "Информация о песне..."
+
+#: ../bin/src/ui_mainwindow.h:587
+msgid "Renumber tracks in this order..."
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "You can change the way the songs in the library are organised."
+#: ../bin/src/ui_mainwindow.h:588
+msgid "Set value for all selected tracks..."
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Group Library by..."
+#: ../bin/src/ui_mainwindow.h:589
+msgid "Edit tag..."
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "First level"
+#: ../bin/src/ui_mainwindow.h:590
+msgid "Configure Clementine..."
+msgstr "Настроить Clementine..."
+
+#: ../bin/src/ui_mainwindow.h:591
+msgid "About Clementine..."
+msgstr "О программе Clementine..."
+
+#: ../bin/src/ui_mainwindow.h:592
+msgid "Shuffle playlist"
+msgstr "Премешать плейлист"
+
+#: ../bin/src/ui_mainwindow.h:593
+msgid "Add media..."
+msgstr "Добавить..."
+
+#: ../bin/src/ui_mainwindow.h:594
+msgid "Add stream..."
+msgstr "Добавить поток..."
+
+#: ../bin/src/ui_mainwindow.h:595
+msgid "Open media..."
+msgstr "Открыть..."
+
+#: ../bin/src/ui_mainwindow.h:597 ../bin/src/ui_albumcovermanager.h:160
+msgid "Cover Manager"
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "None"
+#: ../bin/src/ui_mainwindow.h:598
+msgid "Shuffle mode"
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Album"
-msgstr "Альбом"
-
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Artist"
-msgstr "Исполнитель"
-
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Composer"
+#: ../bin/src/ui_mainwindow.h:599
+msgid "Repeat mode"
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Genre"
-msgstr "Жанр"
-
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Year"
-msgstr "Год"
-
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Year - Album"
+#: ../bin/src/ui_mainwindow.h:600
+msgid "Remove from playlist"
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Second level"
+#: ../bin/src/ui_mainwindow.h:601
+msgid "Group by Artist"
 msgstr ""
 
-#. ts-context GroupByDialog
-#, fuzzy
-msgid "Third level"
+#: ../bin/src/ui_mainwindow.h:602
+msgid "Group by Artist/Album"
 msgstr ""
 
-#. ts-context LastFMConfig
-msgid "Enter your Last.fm details below:"
-msgstr "Введите ваши данные Last.fm:"
-
-#. ts-context LastFMConfig
-msgid "Last.fm username"
-msgstr "Логин Last.fm"
-
-#. ts-context LastFMConfig
-msgid "Last.fm password"
-msgstr "Пароль Last.fm"
-
-#. ts-context LastFMConfig
-msgid "Scrobble tracks that I listen to"
-msgstr "Скробблить треки, которые я слушаю"
-
-#. ts-context LastFMConfig
-msgid ""
-"Note that you must be a <span style=\" font-weight:600;\">paid "
-"subscriber</span> to listen to Last.fm radio from within Clementine."
-msgstr ""
-"Обратите внимание, что вы должны быть <span "
-"style=\"font-weight:600;\">платным подписчиком</span> ,чтобы слушать радио "
-"Last.fm из Clementine."
-
-#. ts-context LastFMConfig
-msgid "Authenticating..."
-msgstr "Аутентификация..."
-
-#. ts-context LastFMConfig
-msgid "Authentication failed"
-msgstr "Ошибка аутентификации"
-
-#. ts-context LastFMConfig
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Ваши данные Last.fm некорректны"
-
-#. ts-context LastFMConfigDialog
-msgid "Last.fm"
-msgstr "Last.fm"
-
-#. ts-context LastFMService
-msgid "Add to playlist"
-msgstr "Добавить в плейлист"
-
-#. ts-context LastFMService
-msgid "Remove"
-msgstr "Удалить"
-
-#. ts-context LastFMService
-msgid "Play artist radio..."
-msgstr "Проиграть радио артиста..."
-
-#. ts-context LastFMService
-msgid "Play tag radio..."
-msgstr "Проиграть радио тега..."
-
-#. ts-context LastFMService
-msgid "Configure Last.fm..."
-msgstr "Настройки Last.fm..."
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "My Recommendations"
+#: ../bin/src/ui_mainwindow.h:603
+msgid "Group by Artist/Year - Album"
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "My Radio Station"
+#: ../bin/src/ui_mainwindow.h:604
+msgid "Group by Album"
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "My Loved Tracks"
+#: ../bin/src/ui_mainwindow.h:605
+msgid "Group by Genre/Album"
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "My Neighbourhood"
+#: ../bin/src/ui_mainwindow.h:606
+msgid "Group by Genre/Artist/Album"
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "Artist radio"
+#: ../bin/src/ui_mainwindow.h:607
+msgid "Advanced grouping..."
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "Tag radio"
+#: ../bin/src/ui_mainwindow.h:608
+msgid "Library"
+msgstr "Коллекция"
+
+#: ../bin/src/ui_mainwindow.h:609 ../bin/src/ui_albumcovermanager.h:165
+msgid "Enter search terms here"
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "Friends"
+#: ../bin/src/ui_mainwindow.h:610
+msgid "Radio"
+msgstr "Радио"
+
+#: ../bin/src/ui_mainwindow.h:611
+msgid "Files"
+msgstr "Файлы"
+
+#: ../bin/src/ui_mainwindow.h:612
+msgid "Music"
+msgstr "Песня"
+
+#: ../bin/src/ui_mainwindow.h:613
+msgid "Playlist"
+msgstr "Плейлист"
+
+#: ../bin/src/ui_mainwindow.h:614 ../bin/src/ui_settingsdialog.h:388
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../bin/src/ui_mainwindow.h:615
+msgid "Help"
+msgstr "Помощь"
+
+#: ../bin/src/ui_mainwindow.h:616
+msgid "Tools"
 msgstr ""
 
-#. ts-context LastFMService
-#, fuzzy
-msgid "Neighbours"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "%1's Radio Station"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "%1's Loved Tracks"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "%1's Neighborhood"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "%1's Recommended Radio"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "%1's Neighbour Radio"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "%1's Library"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Similar Artists to %1"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Tag Radio: %1"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid service"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid method"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Authentication failed"
-msgstr "Ошибка аутентификации"
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid format"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid parameters"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid resource specified"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Operation failed"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid session key"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Invalid API key"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Service offline"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "This stream is for paid subscribers only"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Not enough content"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Not enough members"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Not enough fans"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Not enough neighbours"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Malformed response"
-msgstr ""
-
-#. ts-context LastFMService
-#, fuzzy
-msgid "Unknown error"
-msgstr ""
-
-#. ts-context LastFMStationDialog
-msgid "Play Artist or Tag"
-msgstr "Проиграть исполнителя или тег"
-
-#. ts-context LastFMStationDialog
-msgid ""
-"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
-
-#. ts-context LastFMStationDialog
-msgid "Artist"
-msgstr "Исполнитель"
-
-#. ts-context LastFMStationDialog
-msgid "Tag"
-msgstr "Тег"
-
-#. ts-context Library
-msgid "Various Artists"
-msgstr "Разные исполнители"
-
-#. ts-context Library
-msgid "Unknown"
-msgstr "Неизвестный"
-
-#. ts-context LibraryConfig
+#: ../bin/src/ui_libraryconfig.h:118
 msgid "These folders will be scanned for music to make up your library"
 msgstr ""
 "В этих каталогах будет выполнен поиск музыки для создания вашей коллекции"
 
-#. ts-context LibraryConfig
+#: ../bin/src/ui_libraryconfig.h:119
 msgid "Add new folder..."
 msgstr "Добавить каталог..."
 
-#. ts-context LibraryConfig
+#: ../bin/src/ui_libraryconfig.h:120
 msgid "Remove folder"
 msgstr "Удалить каталог"
 
-#. ts-context LibraryConfig
-msgid "Add directory..."
-msgstr "Добавить каталог..."
-
-#. ts-context LibraryConfig
-#, fuzzy
+#: ../bin/src/ui_libraryconfig.h:121
 msgid "Options"
 msgstr ""
 
-#. ts-context LibraryConfig
-#, fuzzy
+#: ../bin/src/ui_libraryconfig.h:122
 msgid "Automatically open single categories in the library tree"
 msgstr ""
 
-#. ts-context LibraryConfigDialog
-msgid "Music Library"
-msgstr "Музыкальная коллекция"
-
-#. ts-context LibraryView
-msgid "Your library is empty!"
-msgstr "Ваша коллекция пуста!"
-
-#. ts-context LibraryView
-msgid "Click here to add some music"
-msgstr "Щелкните здесь, что бы добавить музыку"
-
-#. ts-context LibraryView
-#, fuzzy
-msgid "Show in various artists"
-msgstr ""
-
-#. ts-context LibraryView
-#, fuzzy
-msgid "Don't show in various artists"
-msgstr ""
-
-#. ts-context LibraryView
-#, fuzzy
-msgid "Add to playlist"
-msgstr "Добавить в плейлист"
-
-#. ts-context MainWindow
-msgid "Clementine"
-msgstr "Clementine"
-
-#. ts-context MainWindow
-msgid "Library"
-msgstr "Коллекция"
-
-#. ts-context MainWindow
-msgid "Radio"
-msgstr "Радио"
-
-#. ts-context MainWindow
-msgid "Files"
-msgstr "Файлы"
-
-#. ts-context MainWindow
-msgid "Music"
-msgstr "Песня"
-
-#. ts-context MainWindow
-msgid "Playlist"
-msgstr "Плейлист"
-
-#. ts-context MainWindow
-msgid "Settings"
-msgstr "Настройки"
-
-#. ts-context MainWindow
-msgid "Help"
-msgstr "Помощь"
-
-#. ts-context MainWindow
-msgid "Previous track"
-msgstr "Предыдущая"
-
-#. ts-context MainWindow
-msgid "Play"
-msgstr "Воспроизвести"
-
-#. ts-context MainWindow
-msgid "Stop"
-msgstr "Стоп"
-
-#. ts-context MainWindow
-msgid "Next track"
-msgstr "Следующая"
-
-#. ts-context MainWindow
-msgid "&Quit"
-msgstr "Выход"
-
-#. ts-context MainWindow
-msgid "Ctrl+Q"
-msgstr "Ctrl+Й"
-
-#. ts-context MainWindow
-msgid "Stop after this track"
-msgstr "Остановить после этой дорожки"
-
-#. ts-context MainWindow
-msgid "Entire collection"
-msgstr "Вся коллекция"
-
-#. ts-context MainWindow
-msgid "Added today"
-msgstr "Добавлено сегодня"
-
-#. ts-context MainWindow
-msgid "Added this week"
-msgstr "Добавлено за неделю"
-
-#. ts-context MainWindow
-msgid "Added within three months"
-msgstr "Добавлено за три месяца"
-
-#. ts-context MainWindow
-msgid "Added this year"
-msgstr "Добавлено за год"
-
-#. ts-context MainWindow
-msgid "Added this month"
-msgstr "Добавлено за месяц"
-
-#. ts-context MainWindow
-msgid "Love"
-msgstr "Полюбить"
-
-#. ts-context MainWindow
-msgid "Ban"
-msgstr "Запретить"
-
-#. ts-context MainWindow
-msgid "Clear playlist"
-msgstr "Очистить плейлист"
-
-#. ts-context MainWindow
-msgid "Edit track information..."
-msgstr "Информация о песне..."
-
-#. ts-context MainWindow
-msgid "Configure Clementine..."
-msgstr "Настроить Clementine..."
-
-#. ts-context MainWindow
-msgid "About Clementine..."
-msgstr "О программе Clementine..."
-
-#. ts-context MainWindow
-msgid "Shuffle playlist"
-msgstr "Премешать плейлист"
-
-#. ts-context MainWindow
-msgid "Configure library..."
-msgstr "Настройки коллекции..."
-
-#. ts-context MainWindow
-msgid "Pause"
-msgstr "Пауза"
-
-#. ts-context MainWindow
-msgid "Add media..."
-msgstr "Добавить..."
-
-#. ts-context MainWindow
-msgid "Add stream..."
-msgstr "Добавить поток..."
-
-#. ts-context MainWindow
-msgid "Open media..."
-msgstr "Открыть..."
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "&Show tray icon"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "&Hide tray icon"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Enter search terms here"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Tools"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Cover Manager"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Shuffle mode"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Repeat mode"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Renumber tracks in this order..."
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Set value for all selected tracks..."
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Set %1 to \"%2\"..."
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Edit tag \"%1\"..."
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Edit tag..."
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Remove from playlist"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Group by Artist"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Group by Artist/Album"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Group by Artist/Year - Album"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Group by Album"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Group by Genre/Album"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Group by Genre/Artist/Album"
-msgstr ""
-
-#. ts-context MainWindow
-#, fuzzy
-msgid "Advanced grouping..."
-msgstr ""
-
-#. ts-context MultiLoadingIndicator
+#: ../bin/src/ui_fileview.h:114 ../bin/src/ui_trackslider.h:68
+#: ../bin/src/ui_multiloadingindicator.h:64
 msgid "Form"
 msgstr "Форма"
 
-#. ts-context MultiLoadingIndicator
-msgid "Loading audio engine"
-msgstr "Загрузка движка аудио"
+#: ../bin/src/ui_fileview.h:115 ../bin/src/ui_fileview.h:116
+#: ../bin/src/ui_fileview.h:117
+msgid "..."
+msgstr "..."
 
-#. ts-context MultiLoadingIndicator
-msgid "Updating library"
-msgstr "Обновление библиотеки"
+#: ../bin/src/ui_lastfmconfig.h:143
+msgid "Enter your Last.fm details below:"
+msgstr "Введите ваши данные Last.fm:"
 
-#. ts-context MultiLoadingIndicator
-msgid "Getting channels"
-msgstr "Получение каналов"
+#: ../bin/src/ui_lastfmconfig.h:144
+msgid "Last.fm username"
+msgstr "Логин Last.fm"
 
-#. ts-context MultiLoadingIndicator
-msgid "Loading stream"
-msgstr "Загрузка потока"
+#: ../bin/src/ui_lastfmconfig.h:145
+msgid "Last.fm password"
+msgstr "Пароль Last.fm"
 
-#. ts-context MultiLoadingIndicator
-msgid "Loading Last.fm radio"
-msgstr "Загрузка радио Last.fm"
+#: ../bin/src/ui_lastfmconfig.h:146
+msgid "Scrobble tracks that I listen to"
+msgstr "Скробблить треки, которые я слушаю"
 
-#. ts-context OSD
-msgid "Paused"
-msgstr "Пауза"
-
-#. ts-context OSD
-msgid "Playlist finished"
-msgstr "Плейлист закончен"
-
-#. ts-context OSD
-msgid "Volume %1%"
-msgstr "Громкость %1%"
-
-#. ts-context OSD
-#, fuzzy
-msgid "disc %1"
+#: ../bin/src/ui_lastfmconfig.h:147
+msgid ""
+"Note that you must be a <span style=\" font-weight:600;\">paid subscriber</"
+"span> to listen to Last.fm radio from within Clementine."
 msgstr ""
+"Обратите внимание, что вы должны быть <span style=\"font-weight:600;"
+"\">платным подписчиком</span> ,чтобы слушать радио Last.fm из Clementine."
 
-#. ts-context OSD
-#, fuzzy
-msgid "track %1"
-msgstr ""
+#: ../bin/src/ui_lastfmconfig.h:148
+msgid "Authenticating..."
+msgstr "Аутентификация..."
 
-#. ts-context Playlist
-msgid "Title"
-msgstr "Название"
+#: ../bin/src/ui_lastfmstationdialog.h:89
+msgid "Play Artist or Tag"
+msgstr "Проиграть исполнителя или тег"
 
-#. ts-context Playlist
-msgid "Artist"
-msgstr "Исполнитель"
+#: ../bin/src/ui_lastfmstationdialog.h:90
+msgid ""
+"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
+msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
 
-#. ts-context Playlist
-msgid "Album"
-msgstr "Альбом"
+#: ../bin/src/ui_lastfmstationdialog.h:94
+msgid "Tag"
+msgstr "Тег"
 
-#. ts-context Playlist
-msgid "Length"
-msgstr "Длительность"
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_trackslider.h:70
+msgid "0:00:00"
+msgstr "0:00:00"
 
-#. ts-context Playlist
-msgid "Track"
-msgstr "Дорожка"
+#: ../bin/src/ui_edittagdialog.h:209
+msgid "Edit track information"
+msgstr "Редактировать информацию"
 
-#. ts-context Playlist
-msgid "Disc"
-msgstr "Диск"
+#: ../bin/src/ui_edittagdialog.h:216
+msgid "Comment"
+msgstr "Комментарий"
 
-#. ts-context Playlist
-msgid "Year"
-msgstr "Год"
-
-#. ts-context Playlist
-msgid "Genre"
-msgstr "Жанр"
-
-#. ts-context Playlist
-msgid "BPM"
-msgstr "BPM"
-
-#. ts-context Playlist
-msgid "Bit rate"
-msgstr "Битрейт"
-
-#. ts-context Playlist
-msgid "Sample rate"
-msgstr "Частота"
-
-#. ts-context Playlist
-msgid "File name"
-msgstr "Имя файла"
-
-#. ts-context Playlist
-msgid "File size"
-msgstr "Размер"
-
-#. ts-context Playlist
-#, fuzzy
-msgid "Album artist"
-msgstr ""
-
-#. ts-context Playlist
-#, fuzzy
-msgid "Composer"
-msgstr ""
-
-#. ts-context Playlist
-#, fuzzy
-msgid "File type"
-msgstr ""
-
-#. ts-context Playlist
-#, fuzzy
-msgid "Date modified"
-msgstr ""
-
-#. ts-context Playlist
-#, fuzzy
-msgid "Date created"
-msgstr ""
-
-#. ts-context Playlist
-#, fuzzy
-msgid "File name (without path)"
-msgstr ""
-
-#. ts-context PlaylistHeader
-msgid "Hide..."
-msgstr "Скрыть..."
-
-#. ts-context PlaylistHeader
-msgid "Show section"
-msgstr "Показать секцию"
-
-#. ts-context PlaylistHeader
-msgid "Hide %1"
-msgstr "Скрыть %1"
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Repeat"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Shuffle"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Don't repeat"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Repeat track"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Repeat album"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Repeat playlist"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Don't shuffle"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Shuffle by album"
-msgstr ""
-
-#. ts-context PlaylistSequence
-#, fuzzy
-msgid "Shuffle all"
-msgstr ""
-
-#. ts-context RadioPlaylistItem
-msgid "Radio service couldn't be loaded :-("
-msgstr "Сервис радио не запустился =("
-
-#. ts-context SavedRadio
-msgid "Add to playlist"
-msgstr "Добавить в плейлист"
-
-#. ts-context SavedRadio
-msgid "Remove"
-msgstr "Удалить"
-
-#. ts-context SavedRadio
-msgid "Add another stream..."
-msgstr "Добавить другой поток..."
-
-#. ts-context SavedRadio
-#, fuzzy
-msgid "Your radio streams"
-msgstr ""
-
-#. ts-context SettingsDialog
-msgid "Settings"
-msgstr "Настройки"
-
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:393
 msgid "Playback"
 msgstr "Воспроизведение"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:395
 msgid "Notifications"
 msgstr "Уведомления"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:397 ../bin/src/ui_libraryconfigdialog.h:73
 msgid "Music Library"
 msgstr "Музыкальная коллекция"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:399 ../bin/src/ui_lastfmconfigdialog.h:73
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:402 ../bin/src/ui_settingsdialog.h:404
 msgid "Fadeout"
 msgstr "Затихание"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:403
 msgid "No fadeout"
 msgstr "Отключить"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:405
 msgid "Fadeout duration"
 msgstr "Длительность затихания"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:406
 msgid " ms"
 msgstr " ms"
 
-#. ts-context SettingsDialog
+#: ../bin/src/ui_settingsdialog.h:407
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine может показывать сообщения при смене дорожки."
 
-#. ts-context SettingsDialog
-#~ msgid "Don't show notifications"
-#~ msgstr "Не показывать"
-
-#. ts-context SettingsDialog
-msgid "Show a native desktop notification"
-msgstr "Показывать системные сообщения"
-
-#. ts-context SettingsDialog
-msgid "Show a popup from the system tray"
-msgstr "Показывать всплывающие сообщения"
-
-#. ts-context SettingsDialog
-msgid "Popup duration"
-msgstr "Длительность всплывающего сообщения"
-
-#. ts-context SettingsDialog
-msgid " seconds"
-msgstr " секунд"
-
-#. ts-context SettingsDialog
-#, fuzzy
-msgid "Show a notification when I change the volume"
-msgstr ""
-
-#. ts-context SettingsDialog
-#, fuzzy
-msgid "Include album art in the notification"
-msgstr ""
-
-#. ts-context SettingsDialog
-#, fuzzy
-msgid "OSD Preview"
-msgstr ""
-
-#. ts-context SettingsDialog
-#, fuzzy
-msgid "Drag to reposition"
-msgstr ""
-
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:408
 msgid "Notification type"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:409
 msgid "Disabled"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:410
+msgid "Show a native desktop notification"
+msgstr "Показывать системные сообщения"
+
+#: ../bin/src/ui_settingsdialog.h:411
 msgid "Show a pretty OSD"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:412
+msgid "Show a popup from the system tray"
+msgstr "Показывать всплывающие сообщения"
+
+#: ../bin/src/ui_settingsdialog.h:413
 msgid "General settings"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:414
+msgid "Popup duration"
+msgstr "Длительность всплывающего сообщения"
+
+#: ../bin/src/ui_settingsdialog.h:415
+msgid " seconds"
+msgstr " секунд"
+
+#: ../bin/src/ui_settingsdialog.h:416
+msgid "Show a notification when I change the volume"
+msgstr ""
+
+#: ../bin/src/ui_settingsdialog.h:417
+msgid "Include album art in the notification"
+msgstr ""
+
+#: ../bin/src/ui_settingsdialog.h:418
 msgid "Pretty OSD options"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:419
 msgid "Background opacity"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:420
 msgid "Background color"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:423
 msgid "Basic Blue"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:424
 msgid "Clementine Orange"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:425
 msgid "Custom..."
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:427
 msgid "Text color"
 msgstr ""
 
-#. ts-context SettingsDialog
-#, fuzzy
+#: ../bin/src/ui_settingsdialog.h:428
 msgid "Choose color..."
 msgstr ""
 
-#. ts-context ShortcutsDialog
-#~ msgid "Play"
-#~ msgstr "Воспроизвести"
+#: ../bin/src/ui_about.h:149
+msgid "Version"
+msgstr "Версия"
 
-#. ts-context ShortcutsDialog
-#~ msgid "Pause"
-#~ msgstr "Пауза"
+#: ../bin/src/ui_about.h:150
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+"google.com/p/clementine-player/\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Authors:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a href="
+"\"mailto:me@davidsansome.com\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Thanks to:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
+"href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+"\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
+"contributors</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+"google.com/p/clementine-player/\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Авторы:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a href="
+"\"mailto:me@davidsansome.com\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Выражаем благодарность:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
+"href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+"\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">... и всем создателям "
+"Amarok</p></body></html>"
 
-#. ts-context ShortcutsDialog
-#~ msgid "Stop"
-#~ msgstr "Стоп"
+#: ../bin/src/ui_addstreamdialog.h:82
+msgid "Add Stream"
+msgstr "Добавить поток"
 
-#. ts-context SomaFMService
-msgid "Add to playlist"
-msgstr "Добавить в плейлист"
+#: ../bin/src/ui_addstreamdialog.h:83
+msgid "Enter the URL of an internet radio stream:"
+msgstr "Введите адрес радиопотока:"
 
-#. ts-context SomaFMService
-msgid "Open somafm.com in browser"
-msgstr "Открыть somafm.com в браузере"
+#: ../bin/src/ui_addstreamdialog.h:84
+msgid "Save this stream in the Radio tab"
+msgstr "Сохранить поток на вкладке Радио"
 
-#. ts-context SomaFMService
-msgid "Refresh channels"
-msgstr "Обновить каналы"
+#: ../bin/src/ui_albumcovermanager.h:161
+msgid "Show fullsize..."
+msgstr ""
 
-#. ts-context TrackSlider
-msgid "Form"
-msgstr "Форма"
+#: ../bin/src/ui_albumcovermanager.h:162
+msgid "Fetch automatically"
+msgstr ""
 
-#. ts-context TrackSlider
-msgid "0:00:00"
-msgstr "0:00:00"
+#: ../bin/src/ui_albumcovermanager.h:163
+msgid "Choose manual cover..."
+msgstr ""
+
+#: ../bin/src/ui_albumcovermanager.h:164
+msgid "Unset cover"
+msgstr ""
+
+#: ../bin/src/ui_albumcovermanager.h:166
+msgid "View"
+msgstr ""
+
+#: ../bin/src/ui_albumcovermanager.h:167
+msgid "Fetch Missing Covers"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:119
+msgid "Don't repeat"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:120
+msgid "Repeat track"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:121
+msgid "Repeat album"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:122
+msgid "Repeat playlist"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:123
+msgid "Don't shuffle"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:124
+msgid "Shuffle by album"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:125
+msgid "Shuffle all"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:127
+msgid "Repeat"
+msgstr ""
+
+#: ../bin/src/ui_playlistsequence.h:130
+msgid "Shuffle"
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:119
+msgid "Library advanced grouping"
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:120
+msgid "You can change the way the songs in the library are organised."
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:121
+msgid "Group Library by..."
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:122
+msgid "First level"
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:125 ../bin/src/ui_groupbydialog.h:136
+#: ../bin/src/ui_groupbydialog.h:147
+msgid "None"
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:142
+#: ../bin/src/ui_groupbydialog.h:153
+msgid "Year - Album"
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:133
+msgid "Second level"
+msgstr ""
+
+#: ../bin/src/ui_groupbydialog.h:144
+msgid "Third level"
+msgstr ""
+
+#~ msgid "Don't show notifications"
+#~ msgstr "Не показывать"

@@ -20,6 +20,7 @@ endif(UNIX AND NOT APPLE)
 
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
+find_package(Gettext REQUIRED)
 
 if(WIN32)
   find_library(TAGLIB_LIBRARIES tag)
@@ -85,6 +86,9 @@ if (WIN32)
 endif(WIN32)
 
 add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
+
+# Translations stuff
+find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
 
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)

@@ -156,44 +156,15 @@ set(CLEMENTINE-RESOURCES
   ../data/data.qrc
 )
 
-# Translations
-file (GLOB TRANSLATIONS_FILES translations/*.ts)
-set (FILES_TO_TRANSLATE ${CLEMENTINE-SOURCES} ${CLEMENTINE-UI} ${CLEMENTINE-MOC-HEADERS})
-
-option (UPDATE_TRANSLATIONS "Update source translation translations/*.ts files
-    (WARNING: make clean will delete the source .ts files! Danger!)")
-if (UPDATE_TRANSLATIONS)
-  qt4_create_translation(CLEMENTINE-QM-FILES ${FILES_TO_TRANSLATE} ${TRANSLATIONS_FILES})
-  
-  foreach (_ts ${TRANSLATIONS_FILES})
-    get_filename_component(_basename ${_ts} NAME_WE)
-    get_filename_component(_path ${_ts} PATH)
-    string(REPLACE "clementine_" "" _lang "${_basename}")
-    
-    if (_lang STREQUAL "empty")
-      set(_po "${_path}/translations.pot")
-    else (_lang STREQUAL "empty")
-      set(_po "${_path}/${_lang}.po")
-    endif (_lang STREQUAL "empty")
-    
-    add_custom_command(OUTPUT ${_po}
-      COMMAND lconvert ARGS ${_ts} -o ${_po} -of po
-      MAIN_DEPENDENCY ${_ts}
-    )
-    SET(CLEMENTINE-PO-FILES ${CLEMENTINE-PO-FILES} ${_po})
-  endforeach (_ts)
-else (UPDATE_TRANSLATIONS)
-  qt4_add_translation(CLEMENTINE-QM-FILES ${TRANSLATIONS_FILES})
-endif (UPDATE_TRANSLATIONS)
-
-# Generate a qrc file for the translations
-set(CLEMENTINE-QM-RESOURCE ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
-file(WRITE ${CLEMENTINE-QM-RESOURCE} "<RCC><qresource prefix=\"/translations\">")
-foreach(QM-FILE ${CLEMENTINE-QM-FILES})
-  file(RELATIVE_PATH QM-RELATIVE-PATH ${CMAKE_CURRENT_BINARY_DIR} ${QM-FILE})
-  file(APPEND ${CLEMENTINE-QM-RESOURCE} "<file>" ${QM-RELATIVE-PATH} "</file>")
-endforeach(QM-FILE)
-file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
+set(CLEMENTINE-LANGUAGES
+  cs
+  el
+  es
+  fr
+  pl
+  ru
+  sk
+)
 
 # OSD and DBus.
 if(APPLE)
@@ -236,7 +207,71 @@ endif(WIN32)
 
 qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})
 qt4_wrap_ui(CLEMENTINE-SOURCES-UI ${CLEMENTINE-UI})
-qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-RESOURCES} ${CLEMENTINE-QM-RESOURCE})
+qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-RESOURCES})
+
+# Translations
+set (FILES_TO_TRANSLATE ${CLEMENTINE-SOURCES} ${CLEMENTINE-SOURCES-UI} ${CLEMENTINE-SOURCES-MOC})
+
+# Make all the filenames relative
+foreach (_file ${FILES_TO_TRANSLATE})
+  if (IS_ABSOLUTE ${_file})
+    file(RELATIVE_PATH _rel ${CMAKE_CURRENT_SOURCE_DIR} ${_file})
+  else (IS_ABSOLUTE ${_file})
+    set(_rel ${_file})
+  endif (IS_ABSOLUTE ${_file})
+  set(FILES_TO_TRANSLATE_REL ${FILES_TO_TRANSLATE_REL} ${_rel})
+endforeach (_file)
+
+set (XGETTEXT_OPTIONS --qt --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pass-qt-format
+    --keyword=trUtf8 --flag=tr:1:pass-c-format --flag=tr:1:pass-qt-format
+    --keyword=translate:2 --flag=translate:2:pass-c-format --flag=translate:2:pass-qt-format
+    --keyword=QT_TR_NOOP --flag=QT_TR_NOOP:1:pass-c-format --flag=QT_TR_NOOP:1:pass-qt-format
+    --keyword=QT_TRANSLATE_NOOP:2 --flag=QT_TRANSLATE_NOOP:2:pass-c-format --flag=QT_TRANSLATE_NOOP:2:pass-qt-format
+    --keyword=_ --flag=_:1:pass-c-format --flag=_:1:pass-qt-format
+    --keyword=N_ --flag=N_:1:pass-c-format --flag=N_:1:pass-qt-format
+    --from-code=utf-8)
+
+# Generate the .pot
+set (CLEMENTINE-POT "${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot")
+add_custom_target(pot ALL
+  COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} 
+      ${XGETTEXT_OPTIONS} -C --omit-header
+      --directory=${CMAKE_CURRENT_SOURCE_DIR}
+      --output=${CLEMENTINE-POT}
+      ${FILES_TO_TRANSLATE_REL}
+  DEPENDS ${FILES_TO_TRANSLATE})
+
+# Merge the .pot into .po files
+foreach (_lang ${CLEMENTINE-LANGUAGES})
+  set(_po ${CMAKE_CURRENT_SOURCE_DIR}/translations/${_lang}.po)
+  add_custom_target("po_${_lang}" ALL
+    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U ${_po} ${CLEMENTINE-POT}
+    DEPENDS ${_po} ${CLEMENTINE-POT})
+endforeach (_lang)
+
+# Convert the .po files to .qm files
+foreach (_lang ${CLEMENTINE-LANGUAGES})
+  set(_po_filename "${_lang}.po")
+  set(_po_filepath "${CMAKE_CURRENT_SOURCE_DIR}/translations/${_po_filename}")
+  set(_qm_filename "clementine_${_lang}.qm")
+  set(_qm_filepath "${CMAKE_CURRENT_BINARY_DIR}/${_qm_filename}")
+  
+  add_custom_command(OUTPUT ${_qm_filepath}
+    COMMAND lconvert ARGS ${_po_filepath} -o ${_qm_filepath} -of qm
+    MAIN_DEPENDENCY ${_po_filepath}
+  )
+  set(CLEMENTINE-QM-FILES ${CLEMENTINE-QM-FILES} ${_qm_filepath})
+endforeach (_lang)
+
+# Generate a qrc file for the translations
+set(CLEMENTINE-QM-RESOURCE ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
+file(WRITE ${CLEMENTINE-QM-RESOURCE} "<RCC><qresource prefix=\"/translations\">")
+foreach(QM-FILE ${CLEMENTINE-QM-FILES})
+  file(RELATIVE_PATH QM-RELATIVE-PATH ${CMAKE_CURRENT_BINARY_DIR} ${QM-FILE})
+  file(APPEND ${CLEMENTINE-QM-RESOURCE} "<file>" ${QM-RELATIVE-PATH} "</file>")
+endforeach(QM-FILE)
+file(APPEND ${CLEMENTINE-QM-RESOURCE} "</qresource></RCC>")
+qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-QM-RESOURCE})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -250,8 +285,6 @@ add_library(clementine_lib
    ${CLEMENTINE-SOURCES-MOC}
    ${CLEMENTINE-SOURCES-UI}
    ${CLEMENTINE-SOURCES-RESOURCE}
-   ${CLEMENTINE-QM-FILES}
-   ${CLEMENTINE-PO-FILES}
 )
 target_link_libraries(clementine_lib
     qtsingleapplication

@@ -6,11 +6,1071 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"X-Virgin-Header: remove this line if you change anything in the header.\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "X-Language: el_GR\n"
 "X-Source-Language: en\n"
 
-#. ts-context About
+#: mainwindow.cpp:274
+msgid "Configure library..."
+msgstr "Παραμετροποίηση της λίστας..."
+
+#: mainwindow.cpp:279 mainwindow.cpp:418 mainwindow.cpp:434 mainwindow.cpp:618
+#: ../bin/src/ui_mainwindow.h:565
+msgid "Play"
+msgstr "Αναπαραγωγή"
+
+#: mainwindow.cpp:281 ../bin/src/ui_mainwindow.h:570
+msgid "Stop after this track"
+msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
+
+#: mainwindow.cpp:373 mainwindow.cpp:392
+msgid "&Show tray icon"
+msgstr "&Εμφάνιση εικονιδίου συστήματος"
+
+#: mainwindow.cpp:396 ../bin/src/ui_mainwindow.h:596
+msgid "&Hide tray icon"
+msgstr "&Απόκρυψη εικονιδίου συστήματος"
+
+#: mainwindow.cpp:445 mainwindow.cpp:615
+msgid "Pause"
+msgstr "Παύση"
+
+#: mainwindow.cpp:667
+#, qt-format
+msgid "Set %1 to \"%2\"..."
+msgstr "Δώσε %1 στο \"%2\"..."
+
+#: mainwindow.cpp:669
+#, qt-format
+msgid "Edit tag \"%1\"..."
+msgstr "Τροποποίηση ετικέτας \"%1\"..."
+
+#: library.cpp:210
+msgid "Various Artists"
+msgstr "Διάφοροι καλλιτέχνες"
+
+#: library.cpp:680 playlistdelegates.cpp:138 playlistdelegates.cpp:157
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: playlist.cpp:536 ../bin/src/ui_edittagdialog.h:210
+#: ../bin/src/ui_about.h:148
+msgid "Title"
+msgstr "Τίτλος"
+
+#: playlist.cpp:537 ../bin/src/ui_lastfmstationdialog.h:93
+#: ../bin/src/ui_edittagdialog.h:212 ../bin/src/ui_groupbydialog.h:127
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:149
+msgid "Artist"
+msgstr "Καλλιτέχνης"
+
+#: playlist.cpp:538 ../bin/src/ui_edittagdialog.h:211
+#: ../bin/src/ui_groupbydialog.h:126 ../bin/src/ui_groupbydialog.h:137
+#: ../bin/src/ui_groupbydialog.h:148
+msgid "Album"
+msgstr "Άλμπουμ"
+
+#: playlist.cpp:539
+msgid "Length"
+msgstr "Μήκος"
+
+#: playlist.cpp:540 ../bin/src/ui_edittagdialog.h:214
+msgid "Track"
+msgstr "Κομμάτι"
+
+#: playlist.cpp:541
+msgid "Disc"
+msgstr "Δίσκος"
+
+#: playlist.cpp:542 ../bin/src/ui_edittagdialog.h:215
+#: ../bin/src/ui_groupbydialog.h:130 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:152
+msgid "Year"
+msgstr "Έτος"
+
+#: playlist.cpp:543 ../bin/src/ui_edittagdialog.h:213
+#: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:151
+msgid "Genre"
+msgstr "Είδος"
+
+#: playlist.cpp:544
+msgid "Album artist"
+msgstr "Άλμπουμ καλλιτέχνη"
+
+#: playlist.cpp:545 ../bin/src/ui_groupbydialog.h:128
+#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:150
+msgid "Composer"
+msgstr "Συνθέτης"
+
+#: playlist.cpp:547
+msgid "BPM"
+msgstr "BPM"
+
+#: playlist.cpp:548
+msgid "Bit rate"
+msgstr "Ρυθμός bit"
+
+#: playlist.cpp:549
+msgid "Sample rate"
+msgstr "Ρυθμός δειγματοληψίας"
+
+#: playlist.cpp:550
+msgid "File name"
+msgstr "Όνομα αρχείου"
+
+#: playlist.cpp:551
+msgid "File name (without path)"
+msgstr "Όνομα αρχείου (χωρίς διαδρομή)"
+
+#: playlist.cpp:552
+msgid "File size"
+msgstr "Μέγεθος αρχείου"
+
+#: playlist.cpp:553
+msgid "File type"
+msgstr "Τύπος αρχείου"
+
+#: playlist.cpp:554
+msgid "Date modified"
+msgstr "Ημερομηνία τροποποίησης"
+
+#: playlist.cpp:555
+msgid "Date created"
+msgstr "Ημερομηνία δημιουργίας"
+
+#: analyzers/baranalyzer.cpp:19
+msgid "Bar analyzer"
+msgstr "Μπάρες"
+
+#: analyzers/blockanalyzer.cpp:24
+msgid "Block analyzer"
+msgstr "Block"
+
+#: analyzers/analyzercontainer.cpp:53
+msgid "No analyzer"
+msgstr "Χωρίς αναλυτή"
+
+#: analyzers/boomanalyzer.cpp:8
+msgid "Boom analyzer"
+msgstr "Boom"
+
+#: analyzers/sonogram.cpp:18
+msgid "Sonogram"
+msgstr "Sonogram"
+
+#: analyzers/turbine.cpp:15
+msgid "Turbine"
+msgstr "Turbine"
+
+#: libraryview.cpp:89 fileviewlist.cpp:28 lastfmservice.cpp:65
+#: somafmservice.cpp:40 savedradio.cpp:30
+msgid "Add to playlist"
+msgstr "Προσθήκη στη λίστα"
+
+#: libraryview.cpp:92
+msgid "Show in various artists"
+msgstr "Δείξε διάφορους καλλιτέχνες"
+
+#: libraryview.cpp:94
+msgid "Don't show in various artists"
+msgstr "Μη δείχνεις διάφορους καλλιτέχνες"
+
+#: libraryview.cpp:151
+msgid "Your library is empty!"
+msgstr "Η βιβλιοθήκη σας είναι άδεια!"
+
+#: libraryview.cpp:157
+msgid "Click here to add some music"
+msgstr "Κλικ εδώ για την προσθήκη μουσικής"
+
+#: libraryconfig.cpp:57
+msgid "Add directory..."
+msgstr "Προσθήκη καταλόγου..."
+
+#: fileviewlist.cpp:31
+msgid "Copy to library..."
+msgstr "Αντιγραφή στην βιβλιοθήκη..."
+
+#: fileviewlist.cpp:33
+msgid "Move to library..."
+msgstr "Μετακίνηση στην βιβλιοθήκη..."
+
+#: playlistheader.cpp:30
+msgid "Hide..."
+msgstr "Απόκρυψη..."
+
+#: playlistheader.cpp:31
+msgid "Show section"
+msgstr "Εμφάνισε το τμήμα"
+
+#: playlistheader.cpp:47
+#, qt-format
+msgid "Hide %1"
+msgstr "Απόκρυψη %1"
+
+#: lastfmservice.cpp:67 savedradio.cpp:31
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: lastfmservice.cpp:70
+msgid "Play artist radio..."
+msgstr "Αναπαραγωγή ραδιόφωνο καλλιτέχνη..."
+
+#: lastfmservice.cpp:72
+msgid "Play tag radio..."
+msgstr "Αναπαραγωγή ραδιόφωνο ετικετών..."
+
+#: lastfmservice.cpp:74
+msgid "Configure Last.fm..."
+msgstr "Παραμετροποίηση Last.fm..."
+
+#: lastfmservice.cpp:116
+msgid "My Recommendations"
+msgstr "Οι Προτάσεις μου"
+
+#: lastfmservice.cpp:117
+msgid "My Radio Station"
+msgstr "Οι Σταθμοί μου"
+
+#: lastfmservice.cpp:118
+msgid "My Loved Tracks"
+msgstr "Τα αγαπημένα μου κομμάτια"
+
+#: lastfmservice.cpp:119
+msgid "My Neighbourhood"
+msgstr "Η Γειτονιά μου"
+
+#: lastfmservice.cpp:122
+msgid "Artist radio"
+msgstr "Ραδιόφωνο καλλιτέχνη"
+
+#: lastfmservice.cpp:126
+msgid "Tag radio"
+msgstr "Ραδιόφωνο ετικετών"
+
+#: lastfmservice.cpp:133
+msgid "Friends"
+msgstr "Φίλοι"
+
+#: lastfmservice.cpp:136
+msgid "Neighbours"
+msgstr "Γείτονες"
+
+#: lastfmservice.cpp:156
+#, qt-format
+msgid "%1's Radio Station"
+msgstr "%1's Ραδιοσταθμοί"
+
+#: lastfmservice.cpp:158 lastfmservice.cpp:260 lastfmservice.cpp:265
+#, qt-format
+msgid "%1's Loved Tracks"
+msgstr "%1's Αγαπημένα κομμάτια"
+
+#: lastfmservice.cpp:160
+#, qt-format
+msgid "%1's Neighborhood"
+msgstr "%1's Συνοικιακά"
+
+#: lastfmservice.cpp:259
+#, qt-format
+msgid "%1's Recommended Radio"
+msgstr "%1's Προτεινόμενα ραδιόφωνα"
+
+#: lastfmservice.cpp:261 lastfmservice.cpp:266
+#, qt-format
+msgid "%1's Neighbour Radio"
+msgstr "%1's Συνοικιακά ραδιόφωνα"
+
+#: lastfmservice.cpp:262 lastfmservice.cpp:264
+#, qt-format
+msgid "%1's Library"
+msgstr "%1's Βιβλιοθήκη"
+
+#: lastfmservice.cpp:267
+#, qt-format
+msgid "Similar Artists to %1"
+msgstr "Παρόμοιοι καλλιτέχνες σε %1"
+
+#: lastfmservice.cpp:268
+#, qt-format
+msgid "Tag Radio: %1"
+msgstr "Ραδιόφωνο ετικετών: %1"
+
+#: lastfmservice.cpp:340
+msgid "Invalid service"
+msgstr "Εσφαλμένη υπηρεσία"
+
+#: lastfmservice.cpp:341
+msgid "Invalid method"
+msgstr "Εσφαλμένη μέθοδος"
+
+#: lastfmservice.cpp:342 lastfmconfig.cpp:56
+msgid "Authentication failed"
+msgstr "Η πιστοποίηση απέτυχε"
+
+#: lastfmservice.cpp:343
+msgid "Invalid format"
+msgstr "Εσφαλμένη διαμόρφωση"
+
+#: lastfmservice.cpp:344
+msgid "Invalid parameters"
+msgstr "Εσφαλμένοι παράμετροι"
+
+#: lastfmservice.cpp:345
+msgid "Invalid resource specified"
+msgstr "Καθορίστηκε εσφαλμένος πόρος"
+
+#: lastfmservice.cpp:346
+msgid "Operation failed"
+msgstr "Η λειτουργία απέτυχε"
+
+#: lastfmservice.cpp:347
+msgid "Invalid session key"
+msgstr "Εσφαλμένο κλειδί συνεδρίας"
+
+#: lastfmservice.cpp:348
+msgid "Invalid API key"
+msgstr "Εσφαλμένο κλειδί API"
+
+#: lastfmservice.cpp:349
+msgid "Service offline"
+msgstr "Υπηρεσία εκτός σύνδεσης"
+
+#: lastfmservice.cpp:350
+msgid "This stream is for paid subscribers only"
+msgstr "Η ροή (stream) αυτή είναι για συνδρομητές μόνο"
+
+#: lastfmservice.cpp:352
+msgid "Last.fm is currently busy, please try again in a few minutes"
+msgstr "Το Last.fm είναι απασχολημένο, παρακαλώ δοκιμάστε σε λίγα λεπτά"
+
+#: lastfmservice.cpp:354
+msgid "Not enough content"
+msgstr "Δεν υπάρχει αρκετό περιεχόμενο"
+
+#: lastfmservice.cpp:355
+msgid "Not enough members"
+msgstr "Δεν υπάρχουν αρκετά μέλη"
+
+#: lastfmservice.cpp:356
+msgid "Not enough fans"
+msgstr "Δεν υπάρχουν αρκετοί οπαδοί"
+
+#: lastfmservice.cpp:357
+msgid "Not enough neighbours"
+msgstr "Δεν υπάρχουν αρκετοί γείτονες"
+
+#: lastfmservice.cpp:359
+msgid "Malformed response"
+msgstr "Παραμορφωμένη απάντηση"
+
+#: lastfmservice.cpp:363
+msgid "Unknown error"
+msgstr "Άγνωστο σφάλμα"
+
+#: lastfmconfig.cpp:56
+msgid "Your Last.fm credentials were incorrect"
+msgstr "Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα"
+
+#: radioplaylistitem.cpp:57
+msgid "Radio service couldn't be loaded :-("
+msgstr "Η υπηρεσίες ραδιοφώνου απέτυχαν να φορτωθούν :-("
+
+#: osd.cpp:69
+#, qt-format
+msgid "disc %1"
+msgstr "δίσκος %1"
+
+#: osd.cpp:71
+#, qt-format
+msgid "track %1"
+msgstr "κομμάτι %1"
+
+#: osd.cpp:78
+msgid "Paused"
+msgstr "Σταματημένο"
+
+#: osd.cpp:82
+msgid "Playlist finished"
+msgstr "Η λίστα τελείωσε"
+
+#: osd.cpp:89
+#, qt-format
+msgid "Volume %1%"
+msgstr "Ένταση %1%"
+
+#: edittagdialog.cpp:28
+msgid "[click to edit]"
+msgstr "[κλικ για τροποποίηση]"
+
+#: edittagdialog.cpp:90
+#, fuzzy, c-format
+msgid "Editing %n tracks"
+msgstr "Τροποποίηση %n κομματιών"
+
+#: multiloadingindicator.cpp:61
+msgid "Loading audio engine"
+msgstr "Φόρτωμα της μηχανής ήχου"
+
+#: multiloadingindicator.cpp:62
+msgid "Updating library"
+msgstr "Ενημέρωση λίστας"
+
+#: multiloadingindicator.cpp:63
+msgid "Getting channels"
+msgstr "Λήψη καναλιών"
+
+#: multiloadingindicator.cpp:64
+msgid "Loading stream"
+msgstr "Φόρτωμα ροής (stream)"
+
+#: multiloadingindicator.cpp:65
+msgid "Loading Last.fm radio"
+msgstr "Φόρτωμα Last.fm"
+
+#: somafmservice.cpp:42
+msgid "Open somafm.com in browser"
+msgstr "Άνοιγμα του somafm.com στον περιηγητή"
+
+#: somafmservice.cpp:43
+msgid "Refresh channels"
+msgstr "Ανανέωση καναλιών"
+
+#: settingsdialog.cpp:34
+msgid "OSD Preview"
+msgstr "Προεπισκόπηση OSD "
+
+#: settingsdialog.cpp:34
+msgid "Drag to reposition"
+msgstr "Σύρετε για τοποθέτηση"
+
+#: about.cpp:27
+#, qt-format
+msgid "About %1"
+msgstr "Περί %1"
+
+#: about.cpp:29
+#, qt-format
+msgid "Version %1"
+msgstr "Έκδοση %1"
+
+#: savedradio.cpp:33
+msgid "Add another stream..."
+msgstr "Προσθήκη άλλης ροής..."
+
+#: savedradio.cpp:43
+msgid "Your radio streams"
+msgstr "Οι ροές ραδιοφώνου σας"
+
+#: albumcovermanager.cpp:66
+msgid "All albums"
+msgstr "Όλα τα άλμπουμ"
+
+#: albumcovermanager.cpp:67
+msgid "Albums with covers"
+msgstr "Άλμπουμ με εξώφυλλα"
+
+#: albumcovermanager.cpp:68
+msgid "Albums without covers"
+msgstr "Άλμπουμ χωρίς εξώφυλλα"
+
+#: albumcovermanager.cpp:161
+msgid "All artists"
+msgstr "Όλοι οι καλλιτέχνες"
+
+#: albumcovermanager.cpp:162
+msgid "Various artists"
+msgstr "Διάφοροι καλλιτέχνες"
+
+#: albumcovermanager.cpp:399
+msgid "Choose manual cover"
+msgstr "Επιλογή εξώφυλλου χειροκίνητα"
+
+#: albumcovermanager.cpp:400
+msgid ""
+"Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+msgstr ""
+"Εικόνες (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+
+#: albumcovermanager.cpp:401
+msgid "All files (*)"
+msgstr "Όλα τα αρχεία (*)"
+
+#: playlistdelegates.cpp:141
+msgid "ASF"
+msgstr "ASF"
+
+#: playlistdelegates.cpp:142
+msgid "FLAC"
+msgstr "FLAC"
+
+#: playlistdelegates.cpp:143
+msgid "MP4"
+msgstr "MP4"
+
+#: playlistdelegates.cpp:144
+msgid "MPC"
+msgstr "MPC"
+
+#: playlistdelegates.cpp:145
+msgid "MP3"
+msgstr "MP3"
+
+#: playlistdelegates.cpp:146
+msgid "Ogg FLAC"
+msgstr "Ogg FLAC"
+
+#: playlistdelegates.cpp:147
+msgid "Ogg Speex"
+msgstr "Ogg Speex"
+
+#: playlistdelegates.cpp:148
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: playlistdelegates.cpp:149
+msgid "AIFF"
+msgstr "AIFF"
+
+#: playlistdelegates.cpp:150
+msgid "WAV"
+msgstr "WAV"
+
+#: playlistdelegates.cpp:151
+msgid "TrueAudio"
+msgstr "TrueAudio"
+
+#: playlistdelegates.cpp:153
+msgid "Stream"
+msgstr "Stream"
+
+#: ../bin/src/ui_mainwindow.h:563
+msgid "Clementine"
+msgstr "Clementine"
+
+#: ../bin/src/ui_mainwindow.h:564
+msgid "Previous track"
+msgstr "Προηγούμενο κομμάτι"
+
+#: ../bin/src/ui_mainwindow.h:566
+msgid "Stop"
+msgstr "Σταμάτημα"
+
+#: ../bin/src/ui_mainwindow.h:567
+msgid "Next track"
+msgstr "Επόμενο κομμάτι"
+
+#: ../bin/src/ui_mainwindow.h:568
+msgid "&Quit"
+msgstr "&Έξοδος"
+
+#: ../bin/src/ui_mainwindow.h:569
+msgid "Ctrl+Q"
+msgstr "Ctrl+Q"
+
+#: ../bin/src/ui_mainwindow.h:571
+msgid "Entire collection"
+msgstr "Ολόκληρη η συλλογή"
+
+#: ../bin/src/ui_mainwindow.h:572
+msgid "Added today"
+msgstr "Προστέθηκε σήμερα"
+
+#: ../bin/src/ui_mainwindow.h:573
+msgid "Added this week"
+msgstr "Προστέθηκε αυτή την εβδομάδα"
+
+#: ../bin/src/ui_mainwindow.h:574 ../bin/src/ui_mainwindow.h:576
+msgid "Added within three months"
+msgstr "Προστέθηκε μέσα τρεις μήνες"
+
+#: ../bin/src/ui_mainwindow.h:578
+msgid "Added this year"
+msgstr "Προστέθηκε φέτος"
+
+#: ../bin/src/ui_mainwindow.h:579
+msgid "Added this month"
+msgstr "Προστέθηκε αυτόν τον μήνα"
+
+#: ../bin/src/ui_mainwindow.h:580
+msgid "Love"
+msgstr "Αγάπη"
+
+#: ../bin/src/ui_mainwindow.h:581
+msgid "Ban"
+msgstr "Απαγόρευση"
+
+#: ../bin/src/ui_mainwindow.h:582 ../bin/src/ui_mainwindow.h:584
+msgid "Clear playlist"
+msgstr "Καθαρισμός λίστας"
+
+#: ../bin/src/ui_mainwindow.h:586
+msgid "Edit track information..."
+msgstr "Τροποποίηση πληροφοριών κομματιού..."
+
+#: ../bin/src/ui_mainwindow.h:587
+msgid "Renumber tracks in this order..."
+msgstr "Επαναρίθμησε τα κομμάτια σε αυτή την σειρά..."
+
+#: ../bin/src/ui_mainwindow.h:588
+msgid "Set value for all selected tracks..."
+msgstr "Δώσε τιμή σε όλα τα επιλεγμένα κομμάτια..."
+
+#: ../bin/src/ui_mainwindow.h:589
+msgid "Edit tag..."
+msgstr "Τροποποίησησ ετικέτας..."
+
+#: ../bin/src/ui_mainwindow.h:590
+msgid "Configure Clementine..."
+msgstr "Παραμετροποίηση του Clementine..."
+
+#: ../bin/src/ui_mainwindow.h:591
+msgid "About Clementine..."
+msgstr "Περί του Clementine..."
+
+#: ../bin/src/ui_mainwindow.h:592
+msgid "Shuffle playlist"
+msgstr "Ανάμιξη λίστας"
+
+#: ../bin/src/ui_mainwindow.h:593
+msgid "Add media..."
+msgstr "Προσθήκη πολυμέσων..."
+
+#: ../bin/src/ui_mainwindow.h:594
+msgid "Add stream..."
+msgstr "Προσθήκη ροής..."
+
+#: ../bin/src/ui_mainwindow.h:595
+msgid "Open media..."
+msgstr "Άνοιγμα πολυμέσων..."
+
+#: ../bin/src/ui_mainwindow.h:597 ../bin/src/ui_albumcovermanager.h:160
+msgid "Cover Manager"
+msgstr "Διαχείριση εξώφυλλων"
+
+#: ../bin/src/ui_mainwindow.h:598
+msgid "Shuffle mode"
+msgstr "Λειτουργία ανάμιξης"
+
+#: ../bin/src/ui_mainwindow.h:599
+msgid "Repeat mode"
+msgstr "Λειτουργία επανάληψης"
+
+#: ../bin/src/ui_mainwindow.h:600
+msgid "Remove from playlist"
+msgstr "Αφαίρεση από την λίστα"
+
+#: ../bin/src/ui_mainwindow.h:601
+msgid "Group by Artist"
+msgstr "Ομαδοποίηση κατά Καλλιτέχνη"
+
+#: ../bin/src/ui_mainwindow.h:602
+msgid "Group by Artist/Album"
+msgstr "Ομαδοποίηση κατά Καλλιτέχνη/Άλμπουμ"
+
+#: ../bin/src/ui_mainwindow.h:603
+msgid "Group by Artist/Year - Album"
+msgstr "Ομαδοποίηση κατά Καλλιτέχνη/Έτος - Άλμπουμ"
+
+#: ../bin/src/ui_mainwindow.h:604
+msgid "Group by Album"
+msgstr "Ομαδοποίηση κατά Άλμπουμ"
+
+#: ../bin/src/ui_mainwindow.h:605
+msgid "Group by Genre/Album"
+msgstr "Ομαδοποίηση κατά Είδος/Άλμπουμ"
+
+#: ../bin/src/ui_mainwindow.h:606
+msgid "Group by Genre/Artist/Album"
+msgstr "Ομαδοποίηση κατά Είδος/Καλλιντέχνη/Άλμπουμ"
+
+#: ../bin/src/ui_mainwindow.h:607
+msgid "Advanced grouping..."
+msgstr "Προχωρημένη ομαδοποίηση..."
+
+#: ../bin/src/ui_mainwindow.h:608
+msgid "Library"
+msgstr "Βιβλιοθήκη"
+
+#: ../bin/src/ui_mainwindow.h:609 ../bin/src/ui_albumcovermanager.h:165
+msgid "Enter search terms here"
+msgstr "Εισάγετε όρους αναζήτησης εδώ"
+
+#: ../bin/src/ui_mainwindow.h:610
+msgid "Radio"
+msgstr "Ραδιόφωνο"
+
+#: ../bin/src/ui_mainwindow.h:611
+msgid "Files"
+msgstr "Αρχεία"
+
+#: ../bin/src/ui_mainwindow.h:612
+msgid "Music"
+msgstr "Μουσική"
+
+#: ../bin/src/ui_mainwindow.h:613
+msgid "Playlist"
+msgstr "Λίστα"
+
+#: ../bin/src/ui_mainwindow.h:614 ../bin/src/ui_settingsdialog.h:388
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: ../bin/src/ui_mainwindow.h:615
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: ../bin/src/ui_mainwindow.h:616
+msgid "Tools"
+msgstr "Εργαλεία"
+
+#: ../bin/src/ui_libraryconfig.h:118
+msgid "These folders will be scanned for music to make up your library"
+msgstr "Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας"
+
+#: ../bin/src/ui_libraryconfig.h:119
+msgid "Add new folder..."
+msgstr "Προσθήκη νέου φακέλου..."
+
+#: ../bin/src/ui_libraryconfig.h:120
+msgid "Remove folder"
+msgstr "Αφαίρεση φακέλου"
+
+#: ../bin/src/ui_libraryconfig.h:121
+msgid "Options"
+msgstr "Επιλογές"
+
+#: ../bin/src/ui_libraryconfig.h:122
+msgid "Automatically open single categories in the library tree"
+msgstr "Άνοιξε αυτόμα τις μόνες κατηγορίες του δέντρου της βιβλιοθήκης"
+
+#: ../bin/src/ui_fileview.h:114 ../bin/src/ui_trackslider.h:68
+#: ../bin/src/ui_multiloadingindicator.h:64
+msgid "Form"
+msgstr "Μορφή"
+
+#: ../bin/src/ui_fileview.h:115 ../bin/src/ui_fileview.h:116
+#: ../bin/src/ui_fileview.h:117
+msgid "..."
+msgstr "..."
+
+#: ../bin/src/ui_lastfmconfig.h:143
+msgid "Enter your Last.fm details below:"
+msgstr "Εισάγετε τις λεπτομέρειες για το Last.fm:"
+
+#: ../bin/src/ui_lastfmconfig.h:144
+msgid "Last.fm username"
+msgstr "Last.fm όνομα χρήστη"
+
+#: ../bin/src/ui_lastfmconfig.h:145
+msgid "Last.fm password"
+msgstr "Last.fm συνθηματικό"
+
+#: ../bin/src/ui_lastfmconfig.h:146
+msgid "Scrobble tracks that I listen to"
+msgstr "Κάνε \"srobble\" τα κομμάτια που ακούω"
+
+#: ../bin/src/ui_lastfmconfig.h:147
+msgid ""
+"Note that you must be a <span style=\" font-weight:600;\">paid subscriber</"
+"span> to listen to Last.fm radio from within Clementine."
+msgstr ""
+"Σημείωσε πως πρέπει να είσαι <span style=\" font-weight:600;\">συνδρομητής</"
+"span> για να ακούσεις Last.fm από το Clementine."
+
+#: ../bin/src/ui_lastfmconfig.h:148
+msgid "Authenticating..."
+msgstr "Πιστοποίηση..."
+
+#: ../bin/src/ui_lastfmstationdialog.h:89
+msgid "Play Artist or Tag"
+msgstr "Αναπαραγωγή καλλιτέχνη ή ετικέτας"
+
+#: ../bin/src/ui_lastfmstationdialog.h:90
+msgid ""
+"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
+msgstr ""
+"Εισάγετε έναν <b>καλλιτέχνη</b> ή <b>ετικέτα</b> για να ξεκινήσετε να ακούτε "
+"Last.fm."
+
+#: ../bin/src/ui_lastfmstationdialog.h:94
+msgid "Tag"
+msgstr "Ετικέτα"
+
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_trackslider.h:70
+msgid "0:00:00"
+msgstr "0:00:00"
+
+#: ../bin/src/ui_edittagdialog.h:209
+msgid "Edit track information"
+msgstr "Τροποποίηση πληροφοριών κομματιού"
+
+#: ../bin/src/ui_edittagdialog.h:216
+msgid "Comment"
+msgstr "Σχόλια"
+
+#: ../bin/src/ui_settingsdialog.h:393
+msgid "Playback"
+msgstr "Αναπαραγωγή"
+
+#: ../bin/src/ui_settingsdialog.h:395
+msgid "Notifications"
+msgstr "Ειδοποιήσεις"
+
+#: ../bin/src/ui_settingsdialog.h:397 ../bin/src/ui_libraryconfigdialog.h:73
+msgid "Music Library"
+msgstr "Μουσική βιβλιοθήκη"
+
+#: ../bin/src/ui_settingsdialog.h:399 ../bin/src/ui_lastfmconfigdialog.h:73
+msgid "Last.fm"
+msgstr "Last.fm"
+
+#: ../bin/src/ui_settingsdialog.h:402 ../bin/src/ui_settingsdialog.h:404
+msgid "Fadeout"
+msgstr "Ομαλό σβήσιμο"
+
+#: ../bin/src/ui_settingsdialog.h:403
+msgid "No fadeout"
+msgstr "Χωρίς ομαλό σβήσιμο"
+
+#: ../bin/src/ui_settingsdialog.h:405
+msgid "Fadeout duration"
+msgstr "Διάρκεια σβησίματος"
+
+#: ../bin/src/ui_settingsdialog.h:406
+msgid " ms"
+msgstr " ms"
+
+#: ../bin/src/ui_settingsdialog.h:407
+msgid "Clementine can show a message when the track changes."
+msgstr "Το Clementine μπορεί να δείχνει ένα μήνυμα όταν το κομμάτι αλλάζει."
+
+#: ../bin/src/ui_settingsdialog.h:408
+msgid "Notification type"
+msgstr "Τύπος ειδοποίησης"
+
+#: ../bin/src/ui_settingsdialog.h:409
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+#: ../bin/src/ui_settingsdialog.h:410
+msgid "Show a native desktop notification"
+msgstr "Εμφάνισε εγγενής ειδοποιήσεις"
+
+#: ../bin/src/ui_settingsdialog.h:411
+msgid "Show a pretty OSD"
+msgstr "Εμφάνισε ένα όμορφο OSD"
+
+#: ../bin/src/ui_settingsdialog.h:412
+msgid "Show a popup from the system tray"
+msgstr "Εμφάνισε αναδυόμενα μηνύματα από το εικονίδιο συστήματος"
+
+#: ../bin/src/ui_settingsdialog.h:413
+msgid "General settings"
+msgstr "Γενικές ρυθμίσεις"
+
+#: ../bin/src/ui_settingsdialog.h:414
+msgid "Popup duration"
+msgstr "Διάρκεια αναδυόμενου μηνύματος"
+
+#: ../bin/src/ui_settingsdialog.h:415
+msgid " seconds"
+msgstr " δευτερόλεπτα"
+
+#: ../bin/src/ui_settingsdialog.h:416
+msgid "Show a notification when I change the volume"
+msgstr "Εμφάνιση ειδοποίησης κατα την αλλαγή του ήχου"
+
+#: ../bin/src/ui_settingsdialog.h:417
+msgid "Include album art in the notification"
+msgstr "Εμφάνιση του άλμπουμ (εικόνα) στην ειδοποίηση"
+
+#: ../bin/src/ui_settingsdialog.h:418
+msgid "Pretty OSD options"
+msgstr "Όμορφες OSD επιλογές"
+
+#: ../bin/src/ui_settingsdialog.h:419
+msgid "Background opacity"
+msgstr "Διαφάνεια φόντου"
+
+#: ../bin/src/ui_settingsdialog.h:420
+msgid "Background color"
+msgstr "Χρώμα φόντου"
+
+#: ../bin/src/ui_settingsdialog.h:423
+msgid "Basic Blue"
+msgstr "Βασικό μπλε"
+
+#: ../bin/src/ui_settingsdialog.h:424
+msgid "Clementine Orange"
+msgstr "Clementine πορτοκαλί"
+
+#: ../bin/src/ui_settingsdialog.h:425
+msgid "Custom..."
+msgstr "Προσωπική..."
+
+#: ../bin/src/ui_settingsdialog.h:427
+msgid "Text color"
+msgstr "Χρώμα κειμένου"
+
+#: ../bin/src/ui_settingsdialog.h:428
+msgid "Choose color..."
+msgstr "Επέλεξε χρώμα..."
+
+#: ../bin/src/ui_about.h:149
+msgid "Version"
+msgstr "Έκδοση"
+
+#: ../bin/src/ui_about.h:150
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+"google.com/p/clementine-player/\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Authors:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a href="
+"\"mailto:me@davidsansome.com\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Thanks to:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
+"href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+"\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
+"contributors</p></body></html>"
+msgstr ""
+
+#: ../bin/src/ui_addstreamdialog.h:82
+msgid "Add Stream"
+msgstr "Προσθήκη ροής"
+
+#: ../bin/src/ui_addstreamdialog.h:83
+msgid "Enter the URL of an internet radio stream:"
+msgstr "Εισαγωγή της διεύθυνσης της ροης ραδιοφώνου:"
+
+#: ../bin/src/ui_addstreamdialog.h:84
+msgid "Save this stream in the Radio tab"
+msgstr "Αποθήκευση της ροής αυτής στην πινακίδα του ραδιοφώνου"
+
+#: ../bin/src/ui_albumcovermanager.h:161
+msgid "Show fullsize..."
+msgstr "Εμφάνισε σε πλήρες μέγεθος..."
+
+#: ../bin/src/ui_albumcovermanager.h:162
+msgid "Fetch automatically"
+msgstr "Αυτόματο κατέβασμα"
+
+#: ../bin/src/ui_albumcovermanager.h:163
+msgid "Choose manual cover..."
+msgstr "Επιλογή εξώφυλλου χειροκίνητα..."
+
+#: ../bin/src/ui_albumcovermanager.h:164
+msgid "Unset cover"
+msgstr "Αφαίρεση εξώφυλλου"
+
+#: ../bin/src/ui_albumcovermanager.h:166
+msgid "View"
+msgstr "Προβολή"
+
+#: ../bin/src/ui_albumcovermanager.h:167
+msgid "Fetch Missing Covers"
+msgstr "Κατέβασμα εξώφυλλων που λείπουν"
+
+#: ../bin/src/ui_playlistsequence.h:119
+msgid "Don't repeat"
+msgstr "Χωρίς επανάληψη"
+
+#: ../bin/src/ui_playlistsequence.h:120
+msgid "Repeat track"
+msgstr "Επανάληψη κομματιού"
+
+#: ../bin/src/ui_playlistsequence.h:121
+msgid "Repeat album"
+msgstr "Επανάληψη άλμπουμ"
+
+#: ../bin/src/ui_playlistsequence.h:122
+msgid "Repeat playlist"
+msgstr "Επανάληψη λίστας"
+
+#: ../bin/src/ui_playlistsequence.h:123
+msgid "Don't shuffle"
+msgstr "Χωρίς ανακάτεμα"
+
+#: ../bin/src/ui_playlistsequence.h:124
+msgid "Shuffle by album"
+msgstr "Ανακάτεμα κατα άλμπουμ"
+
+#: ../bin/src/ui_playlistsequence.h:125
+msgid "Shuffle all"
+msgstr "Ανακάτεμα όλων"
+
+#: ../bin/src/ui_playlistsequence.h:127
+msgid "Repeat"
+msgstr "Επανάληψη"
+
+#: ../bin/src/ui_playlistsequence.h:130
+msgid "Shuffle"
+msgstr "Ανακάτεμα"
+
+#: ../bin/src/ui_groupbydialog.h:119
+msgid "Library advanced grouping"
+msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
+
+#: ../bin/src/ui_groupbydialog.h:120
+msgid "You can change the way the songs in the library are organised."
+msgstr ""
+"Μπορείς να αλλάξεις τον τρόπο οργάνωσης των τραγουδιών στην βιβλιοθήκη."
+
+#: ../bin/src/ui_groupbydialog.h:121
+msgid "Group Library by..."
+msgstr "Ομαδοποίηση βιβλιοθήκης κατά..."
+
+#: ../bin/src/ui_groupbydialog.h:122
+msgid "First level"
+msgstr "Πρώτο επίπεδο"
+
+#: ../bin/src/ui_groupbydialog.h:125 ../bin/src/ui_groupbydialog.h:136
+#: ../bin/src/ui_groupbydialog.h:147
+msgid "None"
+msgstr "Κανένα"
+
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:142
+#: ../bin/src/ui_groupbydialog.h:153
+msgid "Year - Album"
+msgstr "Έτος - Άλμπουμ"
+
+#: ../bin/src/ui_groupbydialog.h:133
+msgid "Second level"
+msgstr "Δεύτερο επίπεδο"
+
+#: ../bin/src/ui_groupbydialog.h:144
+msgid "Third level"
+msgstr "Τρίτο επίπεδο"
+
 #~ msgid ""
 #~ "#line {\n"
 #~ "  color: lightgrey;\n"
@@ -40,1250 +1100,71 @@ msgstr ""
 #~ "  font-size: 10px;\n"
 #~ "}\n"
 
-#. ts-context About
-msgid "Title"
-msgstr "Τίτλος"
-
-#. ts-context About
-msgid "Version"
-msgstr "Έκδοση"
-
-#. ts-context About
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-"type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-"href=\"http://code.google.com/p/clementine-player/\"><span style=\" "
-"text-decoration: underline; "
-"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Authors:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome "
-"&lt;<a href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Thanks to:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann "
-"&lt;<a href=\"mailto:markey@web.de\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-"href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the "
-"Amarok contributors</p></body></html>"
-msgstr ""
-
-#. ts-context About
-msgid "About %1"
-msgstr "Περί %1"
-
-#. ts-context About
-msgid "Version %1"
-msgstr "Έκδοση %1"
-
-#. ts-context AddStreamDialog
-msgid "Add Stream"
-msgstr "Προσθήκη ροής"
-
-#. ts-context AddStreamDialog
-msgid "Enter the URL of an internet radio stream:"
-msgstr "Εισαγωγή της διεύθυνσης της ροης ραδιοφώνου:"
-
-#. ts-context AddStreamDialog
-msgid "Save this stream in the Radio tab"
-msgstr "Αποθήκευση της ροής αυτής στην πινακίδα του ραδιοφώνου"
-
-#. ts-context AlbumCoverManager
-msgid "All albums"
-msgstr "Όλα τα άλμπουμ"
-
-#. ts-context AlbumCoverManager
-msgid "Albums with covers"
-msgstr "Άλμπουμ με εξώφυλλα"
-
-#. ts-context AlbumCoverManager
-msgid "Albums without covers"
-msgstr "Άλμπουμ χωρίς εξώφυλλα"
-
-#. ts-context AlbumCoverManager
-msgid "All artists"
-msgstr "Όλοι οι καλλιτέχνες"
-
-#. ts-context AlbumCoverManager
-msgid "Choose manual cover"
-msgstr "Επιλογή εξώφυλλου χειροκίνητα"
-
-#. ts-context AlbumCoverManager
-msgid "Various artists"
-msgstr "Διάφοροι καλλιτέχνες"
-
-#. ts-context AlbumCoverManager
-msgid ""
-"Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
-msgstr ""
-"Εικόνες (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
-
-#. ts-context AlbumCoverManager
-msgid "All files (*)"
-msgstr "Όλα τα αρχεία (*)"
-
-#. ts-context AnalyzerContainer
-msgid "No analyzer"
-msgstr "Χωρίς αναλυτή"
-
-#. ts-context AnalyzerContainer
-msgid "Bar analyzer"
-msgstr "Μπάρες"
-
-#. ts-context AnalyzerContainer
-msgid "Block analyzer"
-msgstr "Block"
-
-#. ts-context AnalyzerContainer
-msgid "Boom analyzer"
-msgstr "Boom"
-
-#. ts-context AnalyzerContainer
-msgid "Sonogram"
-msgstr "Sonogram"
-
-#. ts-context AnalyzerContainer
-msgid "Turbine"
-msgstr "Turbine"
-
-#. ts-context CoverManager
-msgid "Cover Manager"
-msgstr "Διαχείριση εξώφυλλων"
-
-#. ts-context CoverManager
-msgid "Enter search terms here"
-msgstr "Εισάγετε όρους αναζήτησης εδώ"
-
-#. ts-context CoverManager
-msgid "View"
-msgstr "Προβολή"
-
-#. ts-context CoverManager
-msgid "Fetch Missing Covers"
-msgstr "Κατέβασμα εξώφυλλων που λείπουν"
-
-#. ts-context CoverManager
-msgid "Show fullsize..."
-msgstr "Εμφάνισε σε πλήρες μέγεθος..."
-
-#. ts-context CoverManager
-msgid "Fetch automatically"
-msgstr "Αυτόματο κατέβασμα"
-
-#. ts-context CoverManager
-msgid "Choose manual cover..."
-msgstr "Επιλογή εξώφυλλου χειροκίνητα..."
-
-#. ts-context CoverManager
-msgid "Unset cover"
-msgstr "Αφαίρεση εξώφυλλου"
-
-#. ts-context EditTagDialog
-msgid "Edit track information"
-msgstr "Τροποποίηση πληροφοριών κομματιού"
-
-#. ts-context EditTagDialog
-msgid "Title"
-msgstr "Τίτλος"
-
-#. ts-context EditTagDialog
-msgid "Album"
-msgstr "Άλμπουμ"
-
-#. ts-context EditTagDialog
-msgid "Artist"
-msgstr "Καλλιτέχνης"
-
-#. ts-context EditTagDialog
-msgid "Genre"
-msgstr "Είδος"
-
-#. ts-context EditTagDialog
-msgid "Track"
-msgstr "Κομμάτι"
-
-#. ts-context EditTagDialog
-msgid "Year"
-msgstr "Έτος"
-
-#. ts-context EditTagDialog
-msgid "Comment"
-msgstr "Σχόλια"
-
-#. ts-context EditTagDialog
-msgid "[click to edit]"
-msgstr "[κλικ για τροποποίηση]"
-
-#. ts-context EditTagDialog
-msgid "Editing %n tracks"
-msgid_plural "Editing %n tracks"
-msgstr[0] "Τροποποίηση %n κομματιών"
-msgstr[1] ""
-
-#. ts-context FileTypeItemDelegate
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#. ts-context FileTypeItemDelegate
-msgid "ASF"
-msgstr "ASF"
-
-#. ts-context FileTypeItemDelegate
-msgid "FLAC"
-msgstr "FLAC"
-
-#. ts-context FileTypeItemDelegate
-msgid "MP4"
-msgstr "MP4"
-
-#. ts-context FileTypeItemDelegate
-msgid "MPC"
-msgstr "MPC"
-
-#. ts-context FileTypeItemDelegate
-msgid "MP3"
-msgstr "MP3"
-
-#. ts-context FileTypeItemDelegate
-msgid "Ogg FLAC"
-msgstr "Ogg FLAC"
-
-#. ts-context FileTypeItemDelegate
-msgid "Ogg Speex"
-msgstr "Ogg Speex"
-
-#. ts-context FileTypeItemDelegate
-msgid "Ogg Vorbis"
-msgstr "Ogg Vorbis"
-
-#. ts-context FileTypeItemDelegate
-msgid "AIFF"
-msgstr "AIFF"
-
-#. ts-context FileTypeItemDelegate
-msgid "WAV"
-msgstr "WAV"
-
-#. ts-context FileTypeItemDelegate
-msgid "TrueAudio"
-msgstr "TrueAudio"
-
-#. ts-context FileTypeItemDelegate
-msgid "Stream"
-msgstr "Stream"
-
-#. ts-context FileView
-msgid "Form"
-msgstr "Μορφή"
-
-#. ts-context FileView
-msgid "..."
-msgstr "..."
-
-#. ts-context FileViewList
-msgid "Add to playlist"
-msgstr "Προσθήκη στη λίστα"
-
-#. ts-context FileViewList
-msgid "Copy to library..."
-msgstr "Αντιγραφή στην βιβλιοθήκη..."
-
-#. ts-context FileViewList
-msgid "Move to library..."
-msgstr "Μετακίνηση στην βιβλιοθήκη..."
-
-#. ts-context GroupByDialog
-msgid "Library advanced grouping"
-msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
-
-#. ts-context GroupByDialog
-msgid "You can change the way the songs in the library are organised."
-msgstr ""
-"Μπορείς να αλλάξεις τον τρόπο οργάνωσης των τραγουδιών στην βιβλιοθήκη."
-
-#. ts-context GroupByDialog
-msgid "Group Library by..."
-msgstr "Ομαδοποίηση βιβλιοθήκης κατά..."
-
-#. ts-context GroupByDialog
-msgid "First level"
-msgstr "Πρώτο επίπεδο"
-
-#. ts-context GroupByDialog
-msgid "None"
-msgstr "Κανένα"
-
-#. ts-context GroupByDialog
-msgid "Album"
-msgstr "Άλμπουμ"
-
-#. ts-context GroupByDialog
-msgid "Artist"
-msgstr "Καλλιτέχνης"
-
-#. ts-context GroupByDialog
-msgid "Composer"
-msgstr "Συνθέτης"
-
-#. ts-context GroupByDialog
-msgid "Genre"
-msgstr "Είδος"
-
-#. ts-context GroupByDialog
-msgid "Year"
-msgstr "Έτος"
-
-#. ts-context GroupByDialog
-msgid "Year - Album"
-msgstr "Έτος - Άλμπουμ"
-
-#. ts-context GroupByDialog
-msgid "Second level"
-msgstr "Δεύτερο επίπεδο"
-
-#. ts-context GroupByDialog
-msgid "Third level"
-msgstr "Τρίτο επίπεδο"
-
-#. ts-context LastFMConfig
-msgid "Enter your Last.fm details below:"
-msgstr "Εισάγετε τις λεπτομέρειες για το Last.fm:"
-
-#. ts-context LastFMConfig
-msgid "Last.fm username"
-msgstr "Last.fm όνομα χρήστη"
-
-#. ts-context LastFMConfig
-msgid "Last.fm password"
-msgstr "Last.fm συνθηματικό"
-
-#. ts-context LastFMConfig
-msgid "Scrobble tracks that I listen to"
-msgstr "Κάνε \"srobble\" τα κομμάτια που ακούω"
-
-#. ts-context LastFMConfig
-msgid ""
-"Note that you must be a <span style=\" font-weight:600;\">paid "
-"subscriber</span> to listen to Last.fm radio from within Clementine."
-msgstr ""
-"Σημείωσε πως πρέπει να είσαι <span style=\" "
-"font-weight:600;\">συνδρομητής</span> για να ακούσεις Last.fm από το "
-"Clementine."
-
-#. ts-context LastFMConfig
-msgid "Authenticating..."
-msgstr "Πιστοποίηση..."
-
-#. ts-context LastFMConfig
-msgid "Authentication failed"
-msgstr "Η πιστοποίηση απέτυχε"
-
-#. ts-context LastFMConfig
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα"
-
-#. ts-context LastFMConfigDialog
 #~ msgid "Last,fm"
 #~ msgstr "Last,fm"
 
-#. ts-context LastFMConfigDialog
-msgid "Last.fm"
-msgstr "Last.fm"
-
-#. ts-context LastFMService
-msgid "Add to playlist"
-msgstr "Προσθήκη στην λίστα"
-
-#. ts-context LastFMService
-msgid "Remove"
-msgstr "Αφαίρεση"
-
-#. ts-context LastFMService
-msgid "Play artist radio..."
-msgstr "Αναπαραγωγή ραδιόφωνο καλλιτέχνη..."
-
-#. ts-context LastFMService
-msgid "Play tag radio..."
-msgstr "Αναπαραγωγή ραδιόφωνο ετικετών..."
-
-#. ts-context LastFMService
-msgid "Configure Last.fm..."
-msgstr "Παραμετροποίηση Last.fm..."
-
-#. ts-context LastFMService
-msgid "My Recommendations"
-msgstr "Οι Προτάσεις μου"
-
-#. ts-context LastFMService
-msgid "My Radio Station"
-msgstr "Οι Σταθμοί μου"
-
-#. ts-context LastFMService
-msgid "My Loved Tracks"
-msgstr "Τα αγαπημένα μου κομμάτια"
-
-#. ts-context LastFMService
-msgid "My Neighbourhood"
-msgstr "Η Γειτονιά μου"
-
-#. ts-context LastFMService
-msgid "Artist radio"
-msgstr "Ραδιόφωνο καλλιτέχνη"
-
-#. ts-context LastFMService
-msgid "Tag radio"
-msgstr "Ραδιόφωνο ετικετών"
-
-#. ts-context LastFMService
-msgid "Friends"
-msgstr "Φίλοι"
-
-#. ts-context LastFMService
-msgid "Neighbours"
-msgstr "Γείτονες"
-
-#. ts-context LastFMService
-msgid "%1's Radio Station"
-msgstr "%1's Ραδιοσταθμοί"
-
-#. ts-context LastFMService
-msgid "%1's Loved Tracks"
-msgstr "%1's Αγαπημένα κομμάτια"
-
-#. ts-context LastFMService
-msgid "%1's Neighborhood"
-msgstr "%1's Συνοικιακά"
-
-#. ts-context LastFMService
-msgid "%1's Recommended Radio"
-msgstr "%1's Προτεινόμενα ραδιόφωνα"
-
-#. ts-context LastFMService
-msgid "%1's Neighbour Radio"
-msgstr "%1's Συνοικιακά ραδιόφωνα"
-
-#. ts-context LastFMService
-msgid "%1's Library"
-msgstr "%1's Βιβλιοθήκη"
-
-#. ts-context LastFMService
-msgid "Similar Artists to %1"
-msgstr "Παρόμοιοι καλλιτέχνες σε %1"
-
-#. ts-context LastFMService
-msgid "Tag Radio: %1"
-msgstr "Ραδιόφωνο ετικετών: %1"
-
-#. ts-context LastFMService
-msgid "Invalid service"
-msgstr "Εσφαλμένη υπηρεσία"
-
-#. ts-context LastFMService
-msgid "Invalid method"
-msgstr "Εσφαλμένη μέθοδος"
-
-#. ts-context LastFMService
-msgid "Authentication failed"
-msgstr "Η πιστοποίηση απέτυχε"
-
-#. ts-context LastFMService
-msgid "Invalid format"
-msgstr "Εσφαλμένη διαμόρφωση"
-
-#. ts-context LastFMService
-msgid "Invalid parameters"
-msgstr "Εσφαλμένοι παράμετροι"
-
-#. ts-context LastFMService
-msgid "Invalid resource specified"
-msgstr "Καθορίστηκε εσφαλμένος πόρος"
-
-#. ts-context LastFMService
-msgid "Operation failed"
-msgstr "Η λειτουργία απέτυχε"
-
-#. ts-context LastFMService
-msgid "Invalid session key"
-msgstr "Εσφαλμένο κλειδί συνεδρίας"
-
-#. ts-context LastFMService
-msgid "Invalid API key"
-msgstr "Εσφαλμένο κλειδί API"
-
-#. ts-context LastFMService
-msgid "Service offline"
-msgstr "Υπηρεσία εκτός σύνδεσης"
-
-#. ts-context LastFMService
-msgid "This stream is for paid subscribers only"
-msgstr "Η ροή (stream) αυτή είναι για συνδρομητές μόνο"
-
-#. ts-context LastFMService
-msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr "Το Last.fm είναι απασχολημένο, παρακαλώ δοκιμάστε σε λίγα λεπτά"
-
-#. ts-context LastFMService
-msgid "Not enough content"
-msgstr "Δεν υπάρχει αρκετό περιεχόμενο"
-
-#. ts-context LastFMService
-msgid "Not enough members"
-msgstr "Δεν υπάρχουν αρκετά μέλη"
-
-#. ts-context LastFMService
-msgid "Not enough fans"
-msgstr "Δεν υπάρχουν αρκετοί οπαδοί"
-
-#. ts-context LastFMService
-msgid "Not enough neighbours"
-msgstr "Δεν υπάρχουν αρκετοί γείτονες"
-
-#. ts-context LastFMService
-msgid "Malformed response"
-msgstr "Παραμορφωμένη απάντηση"
-
-#. ts-context LastFMService
-msgid "Unknown error"
-msgstr "Άγνωστο σφάλμα"
-
-#. ts-context LastFMStationDialog
-msgid "Play Artist or Tag"
-msgstr "Αναπαραγωγή καλλιτέχνη ή ετικέτας"
-
-#. ts-context LastFMStationDialog
-msgid ""
-"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-"Εισάγετε έναν <b>καλλιτέχνη</b> ή <b>ετικέτα</b> για να ξεκινήσετε να ακούτε "
-"Last.fm."
-
-#. ts-context LastFMStationDialog
-msgid "Artist"
-msgstr "Καλλιτέχνης"
-
-#. ts-context LastFMStationDialog
-msgid "Tag"
-msgstr "Ετικέτα"
-
-#. ts-context Library
-msgid "Various Artists"
-msgstr "Διάφοροι καλλιτέχνες"
-
-#. ts-context Library
-msgid "Unknown"
-msgstr "Άγνωστο"
-
-#. ts-context LibraryConfig
-msgid "These folders will be scanned for music to make up your library"
-msgstr "Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας"
-
-#. ts-context LibraryConfig
-msgid "Add new folder..."
-msgstr "Προσθήκη νέου φακέλου..."
-
-#. ts-context LibraryConfig
-msgid "Remove folder"
-msgstr "Αφαίρεση φακέλου"
-
-#. ts-context LibraryConfig
-msgid "Add directory..."
-msgstr "Προσθήκη καταλόγου..."
-
-#. ts-context LibraryConfig
-msgid "Options"
-msgstr "Επιλογές"
-
-#. ts-context LibraryConfig
-msgid "Automatically open single categories in the library tree"
-msgstr "Άνοιξε αυτόμα τις μόνες κατηγορίες του δέντρου της βιβλιοθήκης"
-
-#. ts-context LibraryConfigDialog
-msgid "Music Library"
-msgstr "Μουσική βιβλιοθήκη"
-
-#. ts-context LibraryView
-msgid "Your library is empty!"
-msgstr "Η βιβλιοθήκη σας είναι άδεια!"
-
-#. ts-context LibraryView
-msgid "Click here to add some music"
-msgstr "Κλικ εδώ για την προσθήκη μουσικής"
-
-#. ts-context LibraryView
-msgid "Show in various artists"
-msgstr "Δείξε διάφορους καλλιτέχνες"
-
-#. ts-context LibraryView
-msgid "Don't show in various artists"
-msgstr "Μη δείχνεις διάφορους καλλιτέχνες"
-
-#. ts-context LibraryView
-msgid "Add to playlist"
-msgstr "Προσθήκη στην λίστα"
-
-#. ts-context MainWindow
-msgid "Clementine"
-msgstr "Clementine"
-
-#. ts-context MainWindow
-msgid "Library"
-msgstr "Βιβλιοθήκη"
-
-#. ts-context MainWindow
-msgid "Radio"
-msgstr "Ραδιόφωνο"
-
-#. ts-context MainWindow
-msgid "Files"
-msgstr "Αρχεία"
-
-#. ts-context MainWindow
-msgid "Music"
-msgstr "Μουσική"
-
-#. ts-context MainWindow
-msgid "Playlist"
-msgstr "Λίστα"
-
-#. ts-context MainWindow
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
-#. ts-context MainWindow
-msgid "Help"
-msgstr "Βοήθεια"
-
-#. ts-context MainWindow
-msgid "Previous track"
-msgstr "Προηγούμενο κομμάτι"
-
-#. ts-context MainWindow
-msgid "Play"
-msgstr "Αναπαραγωγή"
-
-#. ts-context MainWindow
-msgid "Stop"
-msgstr "Σταμάτημα"
-
-#. ts-context MainWindow
-msgid "Next track"
-msgstr "Επόμενο κομμάτι"
-
-#. ts-context MainWindow
-msgid "&Quit"
-msgstr "&Έξοδος"
-
-#. ts-context MainWindow
-msgid "Ctrl+Q"
-msgstr "Ctrl+Q"
-
-#. ts-context MainWindow
-msgid "Stop after this track"
-msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
-
-#. ts-context MainWindow
-msgid "Entire collection"
-msgstr "Ολόκληρη η συλλογή"
-
-#. ts-context MainWindow
-msgid "Added today"
-msgstr "Προστέθηκε σήμερα"
-
-#. ts-context MainWindow
-msgid "Added this week"
-msgstr "Προστέθηκε αυτή την εβδομάδα"
-
-#. ts-context MainWindow
-msgid "Added within three months"
-msgstr "Προστέθηκε μέσα τρεις μήνες"
-
-#. ts-context MainWindow
-msgid "Added this year"
-msgstr "Προστέθηκε φέτος"
-
-#. ts-context MainWindow
-msgid "Added this month"
-msgstr "Προστέθηκε αυτόν τον μήνα"
-
-#. ts-context MainWindow
-msgid "Love"
-msgstr "Αγάπη"
-
-#. ts-context MainWindow
-msgid "Ban"
-msgstr "Απαγόρευση"
-
-#. ts-context MainWindow
-msgid "Clear playlist"
-msgstr "Καθαρισμός λίστας"
-
-#. ts-context MainWindow
-msgid "Edit track information..."
-msgstr "Τροποποίηση πληροφοριών κομματιού..."
-
-#. ts-context MainWindow
-msgid "Configure Clementine..."
-msgstr "Παραμετροποίηση του Clementine..."
-
-#. ts-context MainWindow
-msgid "About Clementine..."
-msgstr "Περί του Clementine..."
-
-#. ts-context MainWindow
-msgid "Shuffle playlist"
-msgstr "Ανάμιξη λίστας"
-
-#. ts-context MainWindow
-msgid "Configure library..."
-msgstr "Παραμετροποίηση της λίστας..."
-
-#. ts-context MainWindow
-msgid "Pause"
-msgstr "Παύση"
-
-#. ts-context MainWindow
-msgid "Add media..."
-msgstr "Προσθήκη πολυμέσων..."
-
-#. ts-context MainWindow
-msgid "Add stream..."
-msgstr "Προσθήκη ροής..."
-
-#. ts-context MainWindow
-msgid "Open media..."
-msgstr "Άνοιγμα πολυμέσων..."
-
-#. ts-context MainWindow
-msgid "&Show tray icon"
-msgstr "&Εμφάνιση εικονιδίου συστήματος"
-
-#. ts-context MainWindow
-msgid "&Hide tray icon"
-msgstr "&Απόκρυψη εικονιδίου συστήματος"
-
-#. ts-context MainWindow
 #~ msgid "Configure &Global Shortcuts..."
 #~ msgstr "Ρύθμιση &καθολικών συντομεύσεων..."
 
-#. ts-context MainWindow
-msgid "Enter search terms here"
-msgstr "Εισάγετε όρους αναζήτησης εδώ"
-
-#. ts-context MainWindow
-msgid "Tools"
-msgstr "Εργαλεία"
-
-#. ts-context MainWindow
-msgid "Cover Manager"
-msgstr "Διαχείριση εξώφυλλων"
-
-#. ts-context MainWindow
 #~ msgid "New playlist"
 #~ msgstr "Νέα λίστα"
 
-#. ts-context MainWindow
-msgid "Shuffle mode"
-msgstr "Λειτουργία ανάμιξης"
-
-#. ts-context MainWindow
-msgid "Repeat mode"
-msgstr "Λειτουργία επανάληψης"
-
-#. ts-context MainWindow
-msgid "Renumber tracks in this order..."
-msgstr "Επαναρίθμησε τα κομμάτια σε αυτή την σειρά..."
-
-#. ts-context MainWindow
-msgid "Set value for all selected tracks..."
-msgstr "Δώσε τιμή σε όλα τα επιλεγμένα κομμάτια..."
-
-#. ts-context MainWindow
-msgid "Set %1 to \"%2\"..."
-msgstr "Δώσε %1 στο \"%2\"..."
-
-#. ts-context MainWindow
-msgid "Edit tag \"%1\"..."
-msgstr "Τροποποίηση ετικέτας \"%1\"..."
-
-#. ts-context MainWindow
-msgid "Edit tag..."
-msgstr "Τροποποίησησ ετικέτας..."
-
-#. ts-context MainWindow
-msgid "Remove from playlist"
-msgstr "Αφαίρεση από την λίστα"
-
-#. ts-context MainWindow
-msgid "Group by Artist"
-msgstr "Ομαδοποίηση κατά Καλλιτέχνη"
-
-#. ts-context MainWindow
-msgid "Group by Artist/Album"
-msgstr "Ομαδοποίηση κατά Καλλιτέχνη/Άλμπουμ"
-
-#. ts-context MainWindow
-msgid "Group by Artist/Year - Album"
-msgstr "Ομαδοποίηση κατά Καλλιτέχνη/Έτος - Άλμπουμ"
-
-#. ts-context MainWindow
-msgid "Group by Album"
-msgstr "Ομαδοποίηση κατά Άλμπουμ"
-
-#. ts-context MainWindow
-msgid "Group by Genre/Album"
-msgstr "Ομαδοποίηση κατά Είδος/Άλμπουμ"
-
-#. ts-context MainWindow
-msgid "Group by Genre/Artist/Album"
-msgstr "Ομαδοποίηση κατά Είδος/Καλλιντέχνη/Άλμπουμ"
-
-#. ts-context MainWindow
-msgid "Advanced grouping..."
-msgstr "Προχωρημένη ομαδοποίηση..."
-
-#. ts-context MultiLoadingIndicator
-msgid "Form"
-msgstr "Μορφή"
-
-#. ts-context MultiLoadingIndicator
-msgid "Loading audio engine"
-msgstr "Φόρτωμα της μηχανής ήχου"
-
-#. ts-context MultiLoadingIndicator
-msgid "Updating library"
-msgstr "Ενημέρωση λίστας"
-
-#. ts-context MultiLoadingIndicator
-msgid "Getting channels"
-msgstr "Λήψη καναλιών"
-
-#. ts-context MultiLoadingIndicator
-msgid "Loading stream"
-msgstr "Φόρτωμα ροής (stream)"
-
-#. ts-context MultiLoadingIndicator
-msgid "Loading Last.fm radio"
-msgstr "Φόρτωμα Last.fm"
-
-#. ts-context OSD
-msgid "Paused"
-msgstr "Σταματημένο"
-
-#. ts-context OSD
-msgid "Playlist finished"
-msgstr "Η λίστα τελείωσε"
-
-#. ts-context OSD
-msgid "Volume %1%"
-msgstr "Ένταση %1%"
-
-#. ts-context OSD
-msgid "disc %1"
-msgstr "δίσκος %1"
-
-#. ts-context OSD
-msgid "track %1"
-msgstr "κομμάτι %1"
-
-#. ts-context Playlist
-msgid "Title"
-msgstr "Τίτλος"
-
-#. ts-context Playlist
-msgid "Artist"
-msgstr "Καλλιτέχνης"
-
-#. ts-context Playlist
-msgid "Album"
-msgstr "Άλμπουμ"
-
-#. ts-context Playlist
-msgid "Length"
-msgstr "Μήκος"
-
-#. ts-context Playlist
-msgid "Track"
-msgstr "Κομμάτι"
-
-#. ts-context Playlist
-msgid "Disc"
-msgstr "Δίσκος"
-
-#. ts-context Playlist
-msgid "Year"
-msgstr "Έτος"
-
-#. ts-context Playlist
-msgid "Genre"
-msgstr "Είδος"
-
-#. ts-context Playlist
-msgid "BPM"
-msgstr "BPM"
-
-#. ts-context Playlist
-msgid "Bit rate"
-msgstr "Ρυθμός bit"
-
-#. ts-context Playlist
-msgid "Sample rate"
-msgstr "Ρυθμός δειγματοληψίας"
-
-#. ts-context Playlist
-msgid "File name"
-msgstr "Όνομα αρχείου"
-
-#. ts-context Playlist
-msgid "File size"
-msgstr "Μέγεθος αρχείου"
-
-#. ts-context Playlist
-msgid "Album artist"
-msgstr "Άλμπουμ καλλιτέχνη"
-
-#. ts-context Playlist
-msgid "Composer"
-msgstr "Συνθέτης"
-
-#. ts-context Playlist
-msgid "File type"
-msgstr "Τύπος αρχείου"
-
-#. ts-context Playlist
-msgid "Date modified"
-msgstr "Ημερομηνία τροποποίησης"
-
-#. ts-context Playlist
-msgid "Date created"
-msgstr "Ημερομηνία δημιουργίας"
-
-#. ts-context Playlist
-msgid "File name (without path)"
-msgstr "Όνομα αρχείου (χωρίς διαδρομή)"
-
-#. ts-context PlaylistHeader
-msgid "Hide..."
-msgstr "Απόκρυψη..."
-
-#. ts-context PlaylistHeader
-msgid "Show section"
-msgstr "Εμφάνισε το τμήμα"
-
-#. ts-context PlaylistHeader
-msgid "Hide %1"
-msgstr "Απόκρυψη %1"
-
-#. ts-context PlaylistManager
-#~ msgid "New playlist"
-#~ msgstr "Νέα λίστα"
-
-#. ts-context PlaylistSequence
-msgid "Repeat"
-msgstr "Επανάληψη"
-
-#. ts-context PlaylistSequence
-msgid "Shuffle"
-msgstr "Ανακάτεμα"
-
-#. ts-context PlaylistSequence
-msgid "Don't repeat"
-msgstr "Χωρίς επανάληψη"
-
-#. ts-context PlaylistSequence
-msgid "Repeat track"
-msgstr "Επανάληψη κομματιού"
-
-#. ts-context PlaylistSequence
-msgid "Repeat album"
-msgstr "Επανάληψη άλμπουμ"
-
-#. ts-context PlaylistSequence
-msgid "Repeat playlist"
-msgstr "Επανάληψη λίστας"
-
-#. ts-context PlaylistSequence
-msgid "Don't shuffle"
-msgstr "Χωρίς ανακάτεμα"
-
-#. ts-context PlaylistSequence
-msgid "Shuffle by album"
-msgstr "Ανακάτεμα κατα άλμπουμ"
-
-#. ts-context PlaylistSequence
-msgid "Shuffle all"
-msgstr "Ανακάτεμα όλων"
-
-#. ts-context RadioPlaylistItem
-msgid "Radio service couldn't be loaded :-("
-msgstr "Η υπηρεσίες ραδιοφώνου απέτυχαν να φορτωθούν :-("
-
-#. ts-context SavedRadio
-msgid "Add to playlist"
-msgstr "Προσθήκη στη λίστα"
-
-#. ts-context SavedRadio
-msgid "Remove"
-msgstr "Αφαίρεση"
-
-#. ts-context SavedRadio
-msgid "Add another stream..."
-msgstr "Προσθήκη άλλης ροής..."
-
-#. ts-context SavedRadio
-msgid "Your radio streams"
-msgstr "Οι ροές ραδιοφώνου σας"
-
-#. ts-context SettingsDialog
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
-#. ts-context SettingsDialog
-msgid "Playback"
-msgstr "Αναπαραγωγή"
-
-#. ts-context SettingsDialog
-msgid "Notifications"
-msgstr "Ειδοποιήσεις"
-
-#. ts-context SettingsDialog
-msgid "Music Library"
-msgstr "Μουσική βιβλιοθήκη"
-
-#. ts-context SettingsDialog
-msgid "Last.fm"
-msgstr "Last.fm"
-
-#. ts-context SettingsDialog
-msgid "Fadeout"
-msgstr "Ομαλό σβήσιμο"
-
-#. ts-context SettingsDialog
-msgid "No fadeout"
-msgstr "Χωρίς ομαλό σβήσιμο"
-
-#. ts-context SettingsDialog
-msgid "Fadeout duration"
-msgstr "Διάρκεια σβησίματος"
-
-#. ts-context SettingsDialog
-msgid " ms"
-msgstr " ms"
-
-#. ts-context SettingsDialog
-msgid "Clementine can show a message when the track changes."
-msgstr "Το Clementine μπορεί να δείχνει ένα μήνυμα όταν το κομμάτι αλλάζει."
-
-#. ts-context SettingsDialog
 #~ msgid "Don't show notifications"
 #~ msgstr "Μην εμφανίζεις ειδοποιήσεις"
 
-#. ts-context SettingsDialog
-msgid "Show a native desktop notification"
-msgstr "Εμφάνισε εγγενής ειδοποιήσεις"
-
-#. ts-context SettingsDialog
-msgid "Show a popup from the system tray"
-msgstr "Εμφάνισε αναδυόμενα μηνύματα από το εικονίδιο συστήματος"
-
-#. ts-context SettingsDialog
-msgid "Popup duration"
-msgstr "Διάρκεια αναδυόμενου μηνύματος"
-
-#. ts-context SettingsDialog
-msgid " seconds"
-msgstr " δευτερόλεπτα"
-
-#. ts-context SettingsDialog
-msgid "Show a notification when I change the volume"
-msgstr "Εμφάνιση ειδοποίησης κατα την αλλαγή του ήχου"
-
-#. ts-context SettingsDialog
-msgid "Include album art in the notification"
-msgstr "Εμφάνιση του άλμπουμ (εικόνα) στην ειδοποίηση"
-
-#. ts-context SettingsDialog
-msgid "OSD Preview"
-msgstr "Προεπισκόπηση OSD "
-
-#. ts-context SettingsDialog
-msgid "Drag to reposition"
-msgstr "Σύρετε για τοποθέτηση"
-
-#. ts-context SettingsDialog
-msgid "Notification type"
-msgstr "Τύπος ειδοποίησης"
-
-#. ts-context SettingsDialog
-msgid "Disabled"
-msgstr "Απενεργοποιημένο"
-
-#. ts-context SettingsDialog
-msgid "Show a pretty OSD"
-msgstr "Εμφάνισε ένα όμορφο OSD"
-
-#. ts-context SettingsDialog
-msgid "General settings"
-msgstr "Γενικές ρυθμίσεις"
-
-#. ts-context SettingsDialog
-msgid "Pretty OSD options"
-msgstr "Όμορφες OSD επιλογές"
-
-#. ts-context SettingsDialog
-msgid "Background opacity"
-msgstr "Διαφάνεια φόντου"
-
-#. ts-context SettingsDialog
-msgid "Background color"
-msgstr "Χρώμα φόντου"
-
-#. ts-context SettingsDialog
-msgid "Basic Blue"
-msgstr "Βασικό μπλε"
-
-#. ts-context SettingsDialog
-msgid "Clementine Orange"
-msgstr "Clementine πορτοκαλί"
-
-#. ts-context SettingsDialog
-msgid "Custom..."
-msgstr "Προσωπική..."
-
-#. ts-context SettingsDialog
-msgid "Text color"
-msgstr "Χρώμα κειμένου"
-
-#. ts-context SettingsDialog
-msgid "Choose color..."
-msgstr "Επέλεξε χρώμα..."
-
-#. ts-context ShortcutsDialog
 #~ msgid "Configure Shortcuts"
 #~ msgstr "Ρύθμιση συντομεύσεων"
 
-#. ts-context ShortcutsDialog
-#~ msgid "Play"
-#~ msgstr "Αναπαραγωγή"
-
-#. ts-context ShortcutsDialog
-#~ msgid "Pause"
-#~ msgstr "Παύση"
-
-#. ts-context ShortcutsDialog
 #~ msgid "Play/Pause"
 #~ msgstr "Αναπαραγωγή/Παύση"
 
-#. ts-context ShortcutsDialog
-#~ msgid "Stop"
-#~ msgstr "Σταμάτημα"
-
-#. ts-context ShortcutsDialog
 #~ msgid "Stop Playing After Current Track"
 #~ msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Next Track"
 #~ msgstr "Επόμενο κομμάτι"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Previous Track"
 #~ msgstr "Προηγούμενο κομμάτι"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Increase Volume"
 #~ msgstr "Αύξηση ήχου"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Decrease Volume"
 #~ msgstr "Μείωση ήχου"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Mute Volume"
 #~ msgstr "Σίγαση"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Seek Forwards"
 #~ msgstr "Αναζήτηση εμπρός"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Seek Backwards"
 #~ msgstr "Αναζήτηση πίσω"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Shortcut"
 #~ msgstr "Συντόμευση"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Alternate"
 #~ msgstr "Εναλλακτική"
 
-#. ts-context ShortcutsDialog
 #~ msgid "&Defaults"
 #~ msgstr "&Προεπιλογή"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Shortcut for Selected Action"
 #~ msgstr "Συντόμευση για την επιλεγμένη ενέργεια"
 
-#. ts-context ShortcutsDialog
 #~ msgid "&None"
 #~ msgstr "&Καμιά"
 
-#. ts-context ShortcutsDialog
 #~ msgid "De&fault"
 #~ msgstr "Προ&επιλογή"
 
-#. ts-context ShortcutsDialog
 #~ msgid "&Custom"
 #~ msgstr "&Προσωπική"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Non&e"
 #~ msgstr "Καμ&ία"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Default key:"
 #~ msgstr "Προεπιλεγμένο κλειδί:"
-
-#. ts-context SomaFMService
-msgid "Add to playlist"
-msgstr "Προσθήκη στην λίστα"
-
-#. ts-context SomaFMService
-msgid "Open somafm.com in browser"
-msgstr "Άνοιγμα του somafm.com στον περιηγητή"
-
-#. ts-context SomaFMService
-msgid "Refresh channels"
-msgstr "Ανανέωση καναλιών"
-
-#. ts-context TrackSlider
-msgid "Form"
-msgstr "Μορφή"
-
-#. ts-context TrackSlider
-msgid "0:00:00"
-msgstr "0:00:00"

@@ -6,1547 +6,1176 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"X-Virgin-Header: remove this line if you change anything in the header.\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "X-Language: sk_SK\n"
 
-#. ts-context About
-#: ../about.cpp:27
-msgid "About %1"
-msgstr "O programe %1"
+#: mainwindow.cpp:274
+msgid "Configure library..."
+msgstr "Nastaviť zbierku..."
 
-#. ts-context About
-#: ../about.cpp:29
-msgid "Version %1"
-msgstr "Verzia %1"
+#: mainwindow.cpp:279 mainwindow.cpp:418 mainwindow.cpp:434 mainwindow.cpp:618
+#: ../bin/src/ui_mainwindow.h:565
+msgid "Play"
+msgstr "Hrať"
 
-#. ts-context About
-#: ../about.ui:99
+#: mainwindow.cpp:281 ../bin/src/ui_mainwindow.h:570
+msgid "Stop after this track"
+msgstr "Zastaviť po tejto skladbe"
+
+#: mainwindow.cpp:373 mainwindow.cpp:392
+msgid "&Show tray icon"
+msgstr "&Zobraziť tray ikonu"
+
+#: mainwindow.cpp:396 ../bin/src/ui_mainwindow.h:596
+msgid "&Hide tray icon"
+msgstr "&Skryť tray ikonu"
+
+#: mainwindow.cpp:445 mainwindow.cpp:615
+msgid "Pause"
+msgstr "Pauza"
+
+#: mainwindow.cpp:667
+#, qt-format
+msgid "Set %1 to \"%2\"..."
+msgstr "Nastaviť %1 do \"%2\"..."
+
+#: mainwindow.cpp:669
+#, qt-format
+msgid "Edit tag \"%1\"..."
+msgstr "Upraviť tag \"%1\"..."
+
+#: library.cpp:210
+msgid "Various Artists"
+msgstr "Rôzni interpréti"
+
+#: library.cpp:680 playlistdelegates.cpp:138 playlistdelegates.cpp:157
+msgid "Unknown"
+msgstr "neznámy"
+
+#: playlist.cpp:536 ../bin/src/ui_edittagdialog.h:210
+#: ../bin/src/ui_about.h:148
 msgid "Title"
 msgstr "Názov"
 
-#. ts-context About
-#: ../about.ui:106
-msgid "Version"
-msgstr "Verzia"
+#: playlist.cpp:537 ../bin/src/ui_lastfmstationdialog.h:93
+#: ../bin/src/ui_edittagdialog.h:212 ../bin/src/ui_groupbydialog.h:127
+#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:149
+msgid "Artist"
+msgstr "Interprét"
 
-#. ts-context About
-#: ../about.ui:116
-msgid ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-"type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-"href=\"http://code.google.com/p/clementine-player/\"><span style=\" "
-"text-decoration: underline; "
-"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Authors:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome "
-"&lt;<a href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Thanks to:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann "
-"&lt;<a href=\"mailto:markey@web.de\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-"href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the "
-"Amarok contributors</p></body></html>"
+#: playlist.cpp:538 ../bin/src/ui_edittagdialog.h:211
+#: ../bin/src/ui_groupbydialog.h:126 ../bin/src/ui_groupbydialog.h:137
+#: ../bin/src/ui_groupbydialog.h:148
+msgid "Album"
+msgstr "Album"
+
+#: playlist.cpp:539
+msgid "Length"
+msgstr "Dĺžka"
+
+#: playlist.cpp:540 ../bin/src/ui_edittagdialog.h:214
+msgid "Track"
+msgstr "Skladba"
+
+#: playlist.cpp:541
+msgid "Disc"
+msgstr "Disk"
+
+#: playlist.cpp:542 ../bin/src/ui_edittagdialog.h:215
+#: ../bin/src/ui_groupbydialog.h:130 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:152
+msgid "Year"
+msgstr "Rok"
+
+#: playlist.cpp:543 ../bin/src/ui_edittagdialog.h:213
+#: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:140
+#: ../bin/src/ui_groupbydialog.h:151
+msgid "Genre"
+msgstr "Žáner"
+
+#: playlist.cpp:544
+msgid "Album artist"
+msgstr "Interprét albumu"
+
+#: playlist.cpp:545 ../bin/src/ui_groupbydialog.h:128
+#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:150
+msgid "Composer"
+msgstr "Skladateľ"
+
+#: playlist.cpp:547
+msgid "BPM"
 msgstr ""
-"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-"type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-"font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-"href=\"http://code.google.com/p/clementine-player/\"><span style=\" "
-"text-decoration: underline; "
-"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Autori:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome "
-"&lt;<a href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-"text-indent:0px;\"></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" "
-"font-weight:600;\">Poďakovanie:</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann "
-"&lt;<a href=\"mailto:markey@web.de\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-"href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
-"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">... a všetkým "
-"prispievateľom Amarok-u.</p></body></html>"
 
-#. ts-context AddStreamDialog
-#: ../addstreamdialog.ui:14
-msgid "Add Stream"
-msgstr "Pridať stream"
+#: playlist.cpp:548
+msgid "Bit rate"
+msgstr ""
 
-#. ts-context AddStreamDialog
-#: ../addstreamdialog.ui:20
-msgid "Enter the URL of an internet radio stream:"
-msgstr "Vložte URL internetového rádio streamu:"
+#: playlist.cpp:549
+msgid "Sample rate"
+msgstr ""
 
-#. ts-context AddStreamDialog
-#: ../addstreamdialog.ui:30
-msgid "Save this stream in the Radio tab"
-msgstr "Uložiť tento stream na karte Rádio"
+#: playlist.cpp:550
+msgid "File name"
+msgstr "Názov súboru"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:66
+#: playlist.cpp:551
+msgid "File name (without path)"
+msgstr "Názov súboru (bez cesty)"
+
+#: playlist.cpp:552
+msgid "File size"
+msgstr "Veľkosť súboru"
+
+#: playlist.cpp:553
+msgid "File type"
+msgstr "Typ súboru"
+
+#: playlist.cpp:554
+msgid "Date modified"
+msgstr "Dátum zmeny"
+
+#: playlist.cpp:555
+msgid "Date created"
+msgstr "Dátum vytvorenia"
+
+#: analyzers/baranalyzer.cpp:19
+msgid "Bar analyzer"
+msgstr "prúžkový analyzér"
+
+#: analyzers/blockanalyzer.cpp:24
+msgid "Block analyzer"
+msgstr "blokový analyzér"
+
+#: analyzers/analyzercontainer.cpp:53
+msgid "No analyzer"
+msgstr "bez analyzéru"
+
+#: analyzers/boomanalyzer.cpp:8
+msgid "Boom analyzer"
+msgstr "Boom analyzér"
+
+#: analyzers/sonogram.cpp:18
+msgid "Sonogram"
+msgstr ""
+
+#: analyzers/turbine.cpp:15
+msgid "Turbine"
+msgstr "Turbína"
+
+#: libraryview.cpp:89 fileviewlist.cpp:28 lastfmservice.cpp:65
+#: somafmservice.cpp:40 savedradio.cpp:30
+msgid "Add to playlist"
+msgstr "Pridať do playlistu"
+
+#: libraryview.cpp:92
+msgid "Show in various artists"
+msgstr "Zobrazovať v rôznich interprétoch"
+
+#: libraryview.cpp:94
+msgid "Don't show in various artists"
+msgstr "Nzobrazovať v rôznich interprétoch"
+
+#: libraryview.cpp:151
+msgid "Your library is empty!"
+msgstr "Vaša zbierka je prázdna!"
+
+#: libraryview.cpp:157
+msgid "Click here to add some music"
+msgstr "Kliknite sem aby ste pridali nejakú hudbu"
+
+#: libraryconfig.cpp:57
+msgid "Add directory..."
+msgstr "Pridať priečinok..."
+
+#: fileviewlist.cpp:31
+msgid "Copy to library..."
+msgstr "Skopírovať do zbierky..."
+
+#: fileviewlist.cpp:33
+msgid "Move to library..."
+msgstr "Presunúť do zbierky..."
+
+#: playlistheader.cpp:30
+msgid "Hide..."
+msgstr "Skryť..."
+
+#: playlistheader.cpp:31
+msgid "Show section"
+msgstr "Zobraziť stĺpec"
+
+#: playlistheader.cpp:47
+#, qt-format
+msgid "Hide %1"
+msgstr "Skryť %1"
+
+#: lastfmservice.cpp:67 savedradio.cpp:31
+msgid "Remove"
+msgstr "Odstrániť"
+
+#: lastfmservice.cpp:70
+msgid "Play artist radio..."
+msgstr "Hrať rádio interpréta..."
+
+#: lastfmservice.cpp:72
+msgid "Play tag radio..."
+msgstr "Hrať rádio tagu..."
+
+#: lastfmservice.cpp:74
+msgid "Configure Last.fm..."
+msgstr "Konfigurovať Last.fm..."
+
+#: lastfmservice.cpp:116
+msgid "My Recommendations"
+msgstr "Moje odporúčania"
+
+#: lastfmservice.cpp:117
+msgid "My Radio Station"
+msgstr "Moje rádio stanice"
+
+#: lastfmservice.cpp:118
+msgid "My Loved Tracks"
+msgstr "Moje obľúbené skladby"
+
+#: lastfmservice.cpp:119
+msgid "My Neighbourhood"
+msgstr "Moji susedia"
+
+#: lastfmservice.cpp:122
+msgid "Artist radio"
+msgstr "Rádio interpréta"
+
+#: lastfmservice.cpp:126
+msgid "Tag radio"
+msgstr "Rádio tagu"
+
+#: lastfmservice.cpp:133
+msgid "Friends"
+msgstr "Priatelia"
+
+#: lastfmservice.cpp:136
+msgid "Neighbours"
+msgstr "Susedia"
+
+#: lastfmservice.cpp:156
+#, qt-format
+msgid "%1's Radio Station"
+msgstr "%1 rádio stanica"
+
+#: lastfmservice.cpp:158 lastfmservice.cpp:260 lastfmservice.cpp:265
+#, qt-format
+msgid "%1's Loved Tracks"
+msgstr "%1 obľúbené skladby"
+
+#: lastfmservice.cpp:160
+#, qt-format
+msgid "%1's Neighborhood"
+msgstr "%1 susedia"
+
+#: lastfmservice.cpp:259
+#, qt-format
+msgid "%1's Recommended Radio"
+msgstr "%1 odporúčané rádio"
+
+#: lastfmservice.cpp:261 lastfmservice.cpp:266
+#, qt-format
+msgid "%1's Neighbour Radio"
+msgstr "%1 rádio suseda"
+
+#: lastfmservice.cpp:262 lastfmservice.cpp:264
+#, qt-format
+msgid "%1's Library"
+msgstr "%1 zbierka"
+
+#: lastfmservice.cpp:267
+#, qt-format
+msgid "Similar Artists to %1"
+msgstr "Podobný interprét ako %1"
+
+#: lastfmservice.cpp:268
+#, qt-format
+msgid "Tag Radio: %1"
+msgstr "Rádio tagu: %1"
+
+#: lastfmservice.cpp:340
+msgid "Invalid service"
+msgstr "Nefunkčná služba"
+
+#: lastfmservice.cpp:341
+msgid "Invalid method"
+msgstr "Nefunkčná metóda"
+
+#: lastfmservice.cpp:342 lastfmconfig.cpp:56
+msgid "Authentication failed"
+msgstr "Autentifikácia zlyhala"
+
+#: lastfmservice.cpp:343
+msgid "Invalid format"
+msgstr "Nefunkčný formát"
+
+#: lastfmservice.cpp:344
+msgid "Invalid parameters"
+msgstr "Nefunkčné parametre"
+
+#: lastfmservice.cpp:345
+msgid "Invalid resource specified"
+msgstr ""
+
+#: lastfmservice.cpp:346
+msgid "Operation failed"
+msgstr "Operácia zlyhala"
+
+#: lastfmservice.cpp:347
+msgid "Invalid session key"
+msgstr "nefunkčný kľúč sedenia"
+
+#: lastfmservice.cpp:348
+msgid "Invalid API key"
+msgstr "Nefiunkčný API kľúč"
+
+#: lastfmservice.cpp:349
+msgid "Service offline"
+msgstr "Služba je offline"
+
+#: lastfmservice.cpp:350
+msgid "This stream is for paid subscribers only"
+msgstr "Tento stream je len pre platiacich odoberateľov"
+
+#: lastfmservice.cpp:352
+msgid "Last.fm is currently busy, please try again in a few minutes"
+msgstr "Last.fm je práve zaneprázdnené, prosím skúste za pár minút"
+
+#: lastfmservice.cpp:354
+msgid "Not enough content"
+msgstr "Nedostatok obsahu"
+
+#: lastfmservice.cpp:355
+msgid "Not enough members"
+msgstr "Nedostatok členov"
+
+#: lastfmservice.cpp:356
+msgid "Not enough fans"
+msgstr "Nedostatok fanúšikov"
+
+#: lastfmservice.cpp:357
+msgid "Not enough neighbours"
+msgstr "Nedostatok susedov"
+
+#: lastfmservice.cpp:359
+msgid "Malformed response"
+msgstr ""
+
+#: lastfmservice.cpp:363
+msgid "Unknown error"
+msgstr "Neznáma chyba"
+
+#: lastfmconfig.cpp:56
+msgid "Your Last.fm credentials were incorrect"
+msgstr "Vaše Last.fm poverenie bolo nekorektné"
+
+#: radioplaylistitem.cpp:57
+msgid "Radio service couldn't be loaded :-("
+msgstr "Služba rádia sa nedá načítať :-("
+
+#: osd.cpp:69
+#, qt-format
+msgid "disc %1"
+msgstr "disk %1"
+
+#: osd.cpp:71
+#, qt-format
+msgid "track %1"
+msgstr "skladba %1"
+
+#: osd.cpp:78
+msgid "Paused"
+msgstr "Pozastavené"
+
+#: osd.cpp:82
+msgid "Playlist finished"
+msgstr "Playlist skončený"
+
+#: osd.cpp:89
+#, qt-format
+msgid "Volume %1%"
+msgstr "Hlasitosť %1%"
+
+#: edittagdialog.cpp:28
+msgid "[click to edit]"
+msgstr "[kliknite pre úpravu]"
+
+#: edittagdialog.cpp:90
+#, fuzzy, c-format
+msgid "Editing %n tracks"
+msgstr "Upravovanie %n skladby"
+
+#: multiloadingindicator.cpp:61
+msgid "Loading audio engine"
+msgstr "Načítava sa zvukový engine"
+
+#: multiloadingindicator.cpp:62
+msgid "Updating library"
+msgstr "Aktualizovanie zbierky"
+
+#: multiloadingindicator.cpp:63
+msgid "Getting channels"
+msgstr "Preberanie kanálov"
+
+#: multiloadingindicator.cpp:64
+msgid "Loading stream"
+msgstr "Načítava sa stream"
+
+#: multiloadingindicator.cpp:65
+msgid "Loading Last.fm radio"
+msgstr "Načítava sa Last.fm rádio"
+
+#: somafmservice.cpp:42
+msgid "Open somafm.com in browser"
+msgstr "Otvoriť somafm.com v prehliadači"
+
+#: somafmservice.cpp:43
+msgid "Refresh channels"
+msgstr "Obnoviť kanály"
+
+#: settingsdialog.cpp:34
+msgid "OSD Preview"
+msgstr "OSD náhľad"
+
+#: settingsdialog.cpp:34
+msgid "Drag to reposition"
+msgstr "Pretiahnite na iné miesto"
+
+#: about.cpp:27
+#, qt-format
+msgid "About %1"
+msgstr "O programe %1"
+
+#: about.cpp:29
+#, qt-format
+msgid "Version %1"
+msgstr "Verzia %1"
+
+#: savedradio.cpp:33
+msgid "Add another stream..."
+msgstr "Pridať ďalší stream..."
+
+#: savedradio.cpp:43
+msgid "Your radio streams"
+msgstr "Vaše rádio streamy"
+
+#: albumcovermanager.cpp:66
 msgid "All albums"
 msgstr "Všetky albumy"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:67
+#: albumcovermanager.cpp:67
 msgid "Albums with covers"
 msgstr "Albumy s obalmi"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:68
+#: albumcovermanager.cpp:68
 msgid "Albums without covers"
 msgstr "Albumy bez obalov"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:161
+#: albumcovermanager.cpp:161
 msgid "All artists"
 msgstr "Všetci interpréti"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:162
+#: albumcovermanager.cpp:162
 msgid "Various artists"
 msgstr "Rôzni interpréti"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:399
+#: albumcovermanager.cpp:399
 msgid "Choose manual cover"
 msgstr "Vybrať obal ručne"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:400
+#: albumcovermanager.cpp:400
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
 "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 
-#. ts-context AlbumCoverManager
-#: ../albumcovermanager.cpp:401
+#: albumcovermanager.cpp:401
 msgid "All files (*)"
 msgstr "Všetky súbory (*)"
 
-#. ts-context AnalyzerContainer
-#: ../analyzers/analyzercontainer.cpp:53
-msgid "No analyzer"
-msgstr "bez analyzéru"
-
-#. ts-context AnalyzerContainer
-#: ../analyzers/baranalyzer.cpp:19
-msgid "Bar analyzer"
-msgstr "prúžkový analyzér"
-
-#. ts-context AnalyzerContainer
-#: ../analyzers/blockanalyzer.cpp:24
-msgid "Block analyzer"
-msgstr "blokový analyzér"
-
-#. ts-context AnalyzerContainer
-#: ../analyzers/boomanalyzer.cpp:8
-msgid "Boom analyzer"
-msgstr "Boom analyzér"
-
-#. ts-context AnalyzerContainer
-#: ../analyzers/sonogram.cpp:18
-msgid "Sonogram"
-msgstr ""
-
-#. ts-context AnalyzerContainer
-#: ../analyzers/turbine.cpp:15
-msgid "Turbine"
-msgstr "Turbína"
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:14
-msgid "Cover Manager"
-msgstr "Správca obalov"
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:51
-msgid "Enter search terms here"
-msgstr "Sem napíšte výrazy na hľadanie"
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:58
-msgid "View"
-msgstr "Zobraziť"
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:78
-msgid "Fetch Missing Covers"
-msgstr "Získať chýbajúce obaly"
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:136
-msgid "Show fullsize..."
-msgstr "Ukázať celú veľkosť..."
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:145
-msgid "Fetch automatically"
-msgstr "Získavať automaticky"
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:154
-msgid "Choose manual cover..."
-msgstr "Vybrať obal ručne..."
-
-#. ts-context CoverManager
-#: ../albumcovermanager.ui:163
-msgid "Unset cover"
-msgstr "Nenastavený obal"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.cpp:28
-msgid "[click to edit]"
-msgstr "[kliknite pre úpravu]"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.cpp:90
-msgid "Editing %n tracks"
-msgid_plural "Editing %n tracks"
-msgstr[0] "Upravovanie %n skladby"
-msgstr[1] "Upravovanie %n skladieb"
-msgstr[2] "Upravovanie %n skladieb"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:14
-msgid "Edit track information"
-msgstr "Upravť informácie o skladbe"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:28
-msgid "Title"
-msgstr "Názov"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:41
-msgid "Album"
-msgstr "Album"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:54
-msgid "Artist"
-msgstr "Interprét"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:67
-msgid "Genre"
-msgstr "Žáner"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:80
-msgid "Track"
-msgstr "Skladba"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:111
-msgid "Year"
-msgstr "Rok"
-
-#. ts-context EditTagDialog
-#: ../edittagdialog.ui:142
-msgid "Comment"
-msgstr "Komentár"
-
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:138 ../playlistdelegates.cpp:157
-msgid "Unknown"
-msgstr "neznámy"
-
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:141
+#: playlistdelegates.cpp:141
 msgid "ASF"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:142
+#: playlistdelegates.cpp:142
 msgid "FLAC"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:143
+#: playlistdelegates.cpp:143
 msgid "MP4"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:144
+#: playlistdelegates.cpp:144
 msgid "MPC"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:145
+#: playlistdelegates.cpp:145
 msgid "MP3"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:146
+#: playlistdelegates.cpp:146
 msgid "Ogg FLAC"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:147
+#: playlistdelegates.cpp:147
 msgid "Ogg Speex"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:148
+#: playlistdelegates.cpp:148
 msgid "Ogg Vorbis"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:149
+#: playlistdelegates.cpp:149
 msgid "AIFF"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:150
+#: playlistdelegates.cpp:150
 msgid "WAV"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:151
+#: playlistdelegates.cpp:151
 msgid "TrueAudio"
 msgstr ""
 
-#. ts-context FileTypeItemDelegate
-#: ../playlistdelegates.cpp:153
+#: playlistdelegates.cpp:153
 msgid "Stream"
 msgstr ""
 
-#. ts-context FileView
-#: ../fileview.ui:14
+#: ../bin/src/ui_mainwindow.h:563
+msgid "Clementine"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:564
+msgid "Previous track"
+msgstr "Predchádzajúca skladba"
+
+#: ../bin/src/ui_mainwindow.h:566
+msgid "Stop"
+msgstr "Zastaviť"
+
+#: ../bin/src/ui_mainwindow.h:567
+msgid "Next track"
+msgstr "Nesledujca skladba"
+
+#: ../bin/src/ui_mainwindow.h:568
+msgid "&Quit"
+msgstr "&Zavrieť"
+
+#: ../bin/src/ui_mainwindow.h:569
+msgid "Ctrl+Q"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:571
+msgid "Entire collection"
+msgstr "Celá zbierka"
+
+#: ../bin/src/ui_mainwindow.h:572
+msgid "Added today"
+msgstr "Dnes pridané"
+
+#: ../bin/src/ui_mainwindow.h:573
+msgid "Added this week"
+msgstr "Pridané tento týždeň"
+
+#: ../bin/src/ui_mainwindow.h:574 ../bin/src/ui_mainwindow.h:576
+msgid "Added within three months"
+msgstr "Pridané posledný štvrťrok"
+
+#: ../bin/src/ui_mainwindow.h:578
+msgid "Added this year"
+msgstr "Pridané tento rok"
+
+#: ../bin/src/ui_mainwindow.h:579
+msgid "Added this month"
+msgstr "Prudané tento mesiac"
+
+#: ../bin/src/ui_mainwindow.h:580
+msgid "Love"
+msgstr "Obľúbené"
+
+#: ../bin/src/ui_mainwindow.h:581
+msgid "Ban"
+msgstr "Neznášané"
+
+#: ../bin/src/ui_mainwindow.h:582 ../bin/src/ui_mainwindow.h:584
+msgid "Clear playlist"
+msgstr "Vyprázdniť playlist"
+
+#: ../bin/src/ui_mainwindow.h:586
+msgid "Edit track information..."
+msgstr "Upravť informácie o skladbe..."
+
+#: ../bin/src/ui_mainwindow.h:587
+msgid "Renumber tracks in this order..."
+msgstr "Prečíslovať skladby v tomto poradí..."
+
+#: ../bin/src/ui_mainwindow.h:588
+msgid "Set value for all selected tracks..."
+msgstr "Nastaviť hodnotu pre vybraté skladby..."
+
+#: ../bin/src/ui_mainwindow.h:589
+msgid "Edit tag..."
+msgstr "Upraviť tag..."
+
+#: ../bin/src/ui_mainwindow.h:590
+msgid "Configure Clementine..."
+msgstr "Nastaviť Clementine..."
+
+#: ../bin/src/ui_mainwindow.h:591
+msgid "About Clementine..."
+msgstr "O Clemetine..."
+
+#: ../bin/src/ui_mainwindow.h:592
+msgid "Shuffle playlist"
+msgstr "Zamiešať playlist"
+
+#: ../bin/src/ui_mainwindow.h:593
+msgid "Add media..."
+msgstr "Pridať médiá..."
+
+#: ../bin/src/ui_mainwindow.h:594
+msgid "Add stream..."
+msgstr "Pridať stream..."
+
+#: ../bin/src/ui_mainwindow.h:595
+msgid "Open media..."
+msgstr "Otvoriť médium..."
+
+#: ../bin/src/ui_mainwindow.h:597 ../bin/src/ui_albumcovermanager.h:160
+msgid "Cover Manager"
+msgstr "Správca obalov"
+
+#: ../bin/src/ui_mainwindow.h:598
+msgid "Shuffle mode"
+msgstr "Zamiešavací mód"
+
+#: ../bin/src/ui_mainwindow.h:599
+msgid "Repeat mode"
+msgstr "Opakovací mód"
+
+#: ../bin/src/ui_mainwindow.h:600
+msgid "Remove from playlist"
+msgstr "Odstrániť z playlistu"
+
+#: ../bin/src/ui_mainwindow.h:601
+msgid "Group by Artist"
+msgstr "Zoradiť podľa interpréta"
+
+#: ../bin/src/ui_mainwindow.h:602
+msgid "Group by Artist/Album"
+msgstr "Zoradiť podľa interprét/album"
+
+#: ../bin/src/ui_mainwindow.h:603
+msgid "Group by Artist/Year - Album"
+msgstr "Zoradiť podľa interprét/rok - album"
+
+#: ../bin/src/ui_mainwindow.h:604
+msgid "Group by Album"
+msgstr "Zoradiť podľa albumu"
+
+#: ../bin/src/ui_mainwindow.h:605
+msgid "Group by Genre/Album"
+msgstr "Zoradiť podľa žáner/album"
+
+#: ../bin/src/ui_mainwindow.h:606
+msgid "Group by Genre/Artist/Album"
+msgstr "Zoradiť podľa žáner/interprét/album"
+
+#: ../bin/src/ui_mainwindow.h:607
+msgid "Advanced grouping..."
+msgstr "Pokročilé zoraďovanie..."
+
+#: ../bin/src/ui_mainwindow.h:608
+msgid "Library"
+msgstr "Zbierka"
+
+#: ../bin/src/ui_mainwindow.h:609 ../bin/src/ui_albumcovermanager.h:165
+msgid "Enter search terms here"
+msgstr "Sem napíšte výrazy na hľadanie"
+
+#: ../bin/src/ui_mainwindow.h:610
+msgid "Radio"
+msgstr "Rádio"
+
+#: ../bin/src/ui_mainwindow.h:611
+msgid "Files"
+msgstr "Súbory"
+
+#: ../bin/src/ui_mainwindow.h:612
+msgid "Music"
+msgstr "Hudba"
+
+#: ../bin/src/ui_mainwindow.h:613
+msgid "Playlist"
+msgstr "Playlist"
+
+#: ../bin/src/ui_mainwindow.h:614 ../bin/src/ui_settingsdialog.h:388
+msgid "Settings"
+msgstr "Nastavenia"
+
+#: ../bin/src/ui_mainwindow.h:615
+msgid "Help"
+msgstr "Nápoveda"
+
+#: ../bin/src/ui_mainwindow.h:616
+msgid "Tools"
+msgstr "Nástroje"
+
+#: ../bin/src/ui_libraryconfig.h:118
+msgid "These folders will be scanned for music to make up your library"
+msgstr "Tieto priečinky budú prehľadané pre vytvorenie vyšej zbierky"
+
+#: ../bin/src/ui_libraryconfig.h:119
+msgid "Add new folder..."
+msgstr "Pridať nový priečinok..."
+
+#: ../bin/src/ui_libraryconfig.h:120
+msgid "Remove folder"
+msgstr "Odobrať priečinok"
+
+#: ../bin/src/ui_libraryconfig.h:121
+msgid "Options"
+msgstr "Možnosti"
+
+#: ../bin/src/ui_libraryconfig.h:122
+msgid "Automatically open single categories in the library tree"
+msgstr "Automaticky otvoriť jednotlivé kategórie v strome zbierky"
+
+#: ../bin/src/ui_fileview.h:114 ../bin/src/ui_trackslider.h:68
+#: ../bin/src/ui_multiloadingindicator.h:64
 msgid "Form"
 msgstr "Forma"
 
-#. ts-context FileView
-#: ../fileview.ui:48 ../fileview.ui:62 ../fileview.ui:76
+#: ../bin/src/ui_fileview.h:115 ../bin/src/ui_fileview.h:116
+#: ../bin/src/ui_fileview.h:117
 msgid "..."
-msgstr ""
+msgstr "..."
 
-#. ts-context FileViewList
-#: ../fileviewlist.cpp:28
-msgid "Add to playlist"
-msgstr "Pridať do playlistu"
-
-#. ts-context FileViewList
-#: ../fileviewlist.cpp:31
-msgid "Copy to library..."
-msgstr "Skopírovať do zbierky..."
-
-#. ts-context FileViewList
-#: ../fileviewlist.cpp:33
-msgid "Move to library..."
-msgstr "Presunúť do zbierky..."
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:14
-msgid "Library advanced grouping"
-msgstr "Pokročilé zoraďovanie zbierky"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:20
-msgid "You can change the way the songs in the library are organised."
-msgstr "Môžte zmeniť spôsob, ktorým sú piesne v zbierke organizované."
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:30
-msgid "Group Library by..."
-msgstr "Zoraďovanie zbierky podľa..."
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:36
-msgid "First level"
-msgstr "Prvá úroveň"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:44 ../groupbydialog.ui:90 ../groupbydialog.ui:136
-msgid "None"
-msgstr "Nijako"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:49 ../groupbydialog.ui:95 ../groupbydialog.ui:141
-msgid "Album"
-msgstr "Album"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:54 ../groupbydialog.ui:100 ../groupbydialog.ui:146
-msgid "Artist"
-msgstr "Interprét"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:59 ../groupbydialog.ui:105 ../groupbydialog.ui:151
-msgid "Composer"
-msgstr "Skladateľ"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:64 ../groupbydialog.ui:110 ../groupbydialog.ui:156
-msgid "Genre"
-msgstr "Žáner"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:69 ../groupbydialog.ui:115 ../groupbydialog.ui:161
-msgid "Year"
-msgstr "Rok"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:74 ../groupbydialog.ui:120 ../groupbydialog.ui:166
-msgid "Year - Album"
-msgstr "Rok - Album"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:82
-msgid "Second level"
-msgstr "Druhá úroveň"
-
-#. ts-context GroupByDialog
-#: ../groupbydialog.ui:128
-msgid "Third level"
-msgstr "Tretia úroveň"
-
-#. ts-context LastFMConfig
-#: ../lastfmconfig.cpp:56
-msgid "Authentication failed"
-msgstr "Autentifikácia zlyhala"
-
-#. ts-context LastFMConfig
-#: ../lastfmconfig.cpp:56
-msgid "Your Last.fm credentials were incorrect"
-msgstr "Vaše Last.fm poverenie bolo nekorektné"
-
-#. ts-context LastFMConfig
-#: ../lastfmconfig.ui:20
+#: ../bin/src/ui_lastfmconfig.h:143
 msgid "Enter your Last.fm details below:"
 msgstr "Vložte svoje Last.fm detaily nižšie:"
 
-#. ts-context LastFMConfig
-#: ../lastfmconfig.ui:29
+#: ../bin/src/ui_lastfmconfig.h:144
 msgid "Last.fm username"
 msgstr "Last.fm použ. meno"
 
-#. ts-context LastFMConfig
-#: ../lastfmconfig.ui:39
+#: ../bin/src/ui_lastfmconfig.h:145
 msgid "Last.fm password"
 msgstr "Last.fm heslo"
 
-#. ts-context LastFMConfig
-#: ../lastfmconfig.ui:53
-#, fuzzy
+#: ../bin/src/ui_lastfmconfig.h:146
 msgid "Scrobble tracks that I listen to"
 msgstr ""
 
-#. ts-context LastFMConfig
-#: ../lastfmconfig.ui:72
+#: ../bin/src/ui_lastfmconfig.h:147
 msgid ""
-"Note that you must be a <span style=\" font-weight:600;\">paid "
-"subscriber</span> to listen to Last.fm radio from within Clementine."
+"Note that you must be a <span style=\" font-weight:600;\">paid subscriber</"
+"span> to listen to Last.fm radio from within Clementine."
 msgstr ""
 "Pam§tajte, že musíte byť <span style=\" font-weight:600;\">platiaci "
 "odberateľ</span> aby ste mohli počúvať Last.fm rádio v Clementine."
 
-#. ts-context LastFMConfig
-#: ../lastfmconfig.ui:98
+#: ../bin/src/ui_lastfmconfig.h:148
 msgid "Authenticating..."
 msgstr "Autentifikácia..."
 
-#. ts-context LastFMConfigDialog
-#: ../lastfmconfigdialog.ui:14
-msgid "Last.fm"
-msgstr ""
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:65
-msgid "Add to playlist"
-msgstr "Pridať do playlistu"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:67
-msgid "Remove"
-msgstr "Odstrániť"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:70
-msgid "Play artist radio..."
-msgstr "Hrať rádio interpréta..."
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:72
-msgid "Play tag radio..."
-msgstr "Hrať rádio tagu..."
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:74
-msgid "Configure Last.fm..."
-msgstr "Konfigurovať Last.fm..."
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:116
-msgid "My Recommendations"
-msgstr "Moje odporúčania"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:117
-msgid "My Radio Station"
-msgstr "Moje rádio stanice"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:118
-msgid "My Loved Tracks"
-msgstr "Moje obľúbené skladby"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:119
-msgid "My Neighbourhood"
-msgstr "Moji susedia"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:122
-msgid "Artist radio"
-msgstr "Rádio interpréta"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:126
-msgid "Tag radio"
-msgstr "Rádio tagu"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:133
-msgid "Friends"
-msgstr "Priatelia"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:136
-msgid "Neighbours"
-msgstr "Susedia"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:156
-msgid "%1's Radio Station"
-msgstr "%1 rádio stanica"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:158 ../lastfmservice.cpp:260 ../lastfmservice.cpp:265
-msgid "%1's Loved Tracks"
-msgstr "%1 obľúbené skladby"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:160
-msgid "%1's Neighborhood"
-msgstr "%1 susedia"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:259
-msgid "%1's Recommended Radio"
-msgstr "%1 odporúčané rádio"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:261 ../lastfmservice.cpp:266
-msgid "%1's Neighbour Radio"
-msgstr "%1 rádio suseda"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:262 ../lastfmservice.cpp:264
-msgid "%1's Library"
-msgstr "%1 zbierka"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:267
-msgid "Similar Artists to %1"
-msgstr "Podobný interprét ako %1"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:268
-msgid "Tag Radio: %1"
-msgstr "Rádio tagu: %1"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:340
-msgid "Invalid service"
-msgstr "Nefunkčná služba"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:341
-msgid "Invalid method"
-msgstr "Nefunkčná metóda"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:342
-msgid "Authentication failed"
-msgstr "Autentifikácia zlyhala"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:343
-msgid "Invalid format"
-msgstr "Nefunkčný formát"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:344
-msgid "Invalid parameters"
-msgstr "Nefunkčné parametre"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:345
-#, fuzzy
-msgid "Invalid resource specified"
-msgstr ""
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:346
-msgid "Operation failed"
-msgstr "Operácia zlyhala"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:347
-msgid "Invalid session key"
-msgstr "nefunkčný kľúč sedenia"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:348
-msgid "Invalid API key"
-msgstr "Nefiunkčný API kľúč"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:349
-msgid "Service offline"
-msgstr "Služba je offline"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:350
-msgid "This stream is for paid subscribers only"
-msgstr "Tento stream je len pre platiacich odoberateľov"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:352
-msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr "Last.fm je práve zaneprázdnené, prosím skúste za pár minút"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:354
-msgid "Not enough content"
-msgstr "Nedostatok obsahu"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:355
-msgid "Not enough members"
-msgstr "Nedostatok členov"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:356
-msgid "Not enough fans"
-msgstr "Nedostatok fanúšikov"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:357
-msgid "Not enough neighbours"
-msgstr "Nedostatok susedov"
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:359
-#, fuzzy
-msgid "Malformed response"
-msgstr ""
-
-#. ts-context LastFMService
-#: ../lastfmservice.cpp:363
-msgid "Unknown error"
-msgstr "Neznáma chyba"
-
-#. ts-context LastFMStationDialog
-#: ../lastfmstationdialog.ui:14
+#: ../bin/src/ui_lastfmstationdialog.h:89
 msgid "Play Artist or Tag"
 msgstr "Hrať interpréta alebo tag"
 
-#. ts-context LastFMStationDialog
-#: ../lastfmstationdialog.ui:20
+#: ../bin/src/ui_lastfmstationdialog.h:90
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
 "Napíšte <b>interpréta</b> alebo <b>tag</b> aby ste začali počúvať Last.fm "
 "rádio."
 
-#. ts-context LastFMStationDialog
-#: ../lastfmstationdialog.ui:33
-msgid "Artist"
-msgstr "Interprét"
-
-#. ts-context LastFMStationDialog
-#: ../lastfmstationdialog.ui:38
+#: ../bin/src/ui_lastfmstationdialog.h:94
 msgid "Tag"
 msgstr ""
 
-#. ts-context Library
-#: ../library.cpp:210
-msgid "Various Artists"
-msgstr "Rôzni interpréti"
-
-#. ts-context Library
-#: ../library.cpp:680
-msgid "Unknown"
-msgstr "Neznámi"
-
-#. ts-context LibraryConfig
-#: ../libraryconfig.cpp:57
-msgid "Add directory..."
-msgstr "Pridať priečinok..."
-
-#. ts-context LibraryConfig
-#: ../libraryconfig.ui:20
-msgid "These folders will be scanned for music to make up your library"
-msgstr "Tieto priečinky budú prehľadané pre vytvorenie vyšej zbierky"
-
-#. ts-context LibraryConfig
-#: ../libraryconfig.ui:41
-msgid "Add new folder..."
-msgstr "Pridať nový priečinok..."
-
-#. ts-context LibraryConfig
-#: ../libraryconfig.ui:64
-msgid "Remove folder"
-msgstr "Odobrať priečinok"
-
-#. ts-context LibraryConfig
-#: ../libraryconfig.ui:94
-msgid "Options"
-msgstr "Možnosti"
-
-#. ts-context LibraryConfig
-#: ../libraryconfig.ui:100
-msgid "Automatically open single categories in the library tree"
-msgstr "Automaticky otvoriť jednotlivé kategórie v strome zbierky"
-
-#. ts-context LibraryConfigDialog
-#: ../libraryconfigdialog.ui:14
-msgid "Music Library"
-msgstr "Hudobná zbierka"
-
-#. ts-context LibraryView
-#: ../libraryview.cpp:89
-msgid "Add to playlist"
-msgstr "Pridať do playlistu"
-
-#. ts-context LibraryView
-#: ../libraryview.cpp:92
-msgid "Show in various artists"
-msgstr "Zobrazovať v rôznich interprétoch"
-
-#. ts-context LibraryView
-#: ../libraryview.cpp:94
-msgid "Don't show in various artists"
-msgstr "Nzobrazovať v rôznich interprétoch"
-
-#. ts-context LibraryView
-#: ../libraryview.cpp:151
-msgid "Your library is empty!"
-msgstr "Vaša zbierka je prázdna!"
-
-#. ts-context LibraryView
-#: ../libraryview.cpp:157
-msgid "Click here to add some music"
-msgstr "Kliknite sem aby ste pridali nejakú hudbu"
-
-#. ts-context MainWindow
-#: ../mainwindow.cpp:276
-msgid "Configure library..."
-msgstr "Nastaviť zbierku..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:517 ../mainwindow.cpp:281 ../mainwindow.cpp:420
-#: ../mainwindow.cpp:436 ../mainwindow.cpp:620
-msgid "Play"
-msgstr "Hrať"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:559 ../mainwindow.cpp:283
-msgid "Stop after this track"
-msgstr "Zastaviť po tejto skladbe"
-
-#. ts-context MainWindow
-#: ../mainwindow.cpp:375 ../mainwindow.cpp:394
-msgid "&Show tray icon"
-msgstr "&Zobraziť tray ikonu"
-
-#. ts-context MainWindow
-#: ../mainwindow.cpp:447 ../mainwindow.cpp:617
-msgid "Pause"
-msgstr "Pauza"
-
-#. ts-context MainWindow
-#: ../mainwindow.cpp:669
-msgid "Set %1 to \"%2\"..."
-msgstr "Nastaviť %1 do \"%2\"..."
-
-#. ts-context MainWindow
-#: ../mainwindow.cpp:671
-msgid "Edit tag \"%1\"..."
-msgstr "Upraviť tag \"%1\"..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:14
-msgid "Clementine"
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_trackslider.h:70
+msgid "0:00:00"
 msgstr ""
 
-#. ts-context MainWindow
-#: ../mainwindow.ui:279
-msgid "Library"
-msgstr "Zbierka"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:317
-msgid "Enter search terms here"
-msgstr "Sem napíšte výrazy na hľadanie"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:373
-msgid "Radio"
-msgstr "Rádio"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:419
-msgid "Files"
-msgstr "Súbory"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:449
-msgid "Music"
-msgstr "Hudba"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:465
-msgid "Playlist"
-msgstr "Playlist"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:478
-msgid "Settings"
-msgstr "Nastavenia"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:486
-msgid "Help"
-msgstr "Nápoveda"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:492
-msgid "Tools"
-msgstr "Nástroje"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:508
-msgid "Previous track"
-msgstr "Predchádzajúca skladba"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:529
-msgid "Stop"
-msgstr "Zastaviť"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:538
-msgid "Next track"
-msgstr "Nesledujca skladba"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:547
-msgid "&Quit"
-msgstr "&Zavrieť"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:550
-msgid "Ctrl+Q"
-msgstr ""
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:570
-msgid "Entire collection"
-msgstr "Celá zbierka"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:578
-msgid "Added today"
-msgstr "Dnes pridané"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:586
-msgid "Added this week"
-msgstr "Pridané tento týždeň"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:594 ../mainwindow.ui:597
-msgid "Added within three months"
-msgstr "Pridané posledný štvrťrok"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:605
-msgid "Added this year"
-msgstr "Pridané tento rok"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:613
-msgid "Added this month"
-msgstr "Prudané tento mesiac"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:625
-msgid "Love"
-msgstr "Obľúbené"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:637
-msgid "Ban"
-msgstr "Neznášané"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:646 ../mainwindow.ui:649
-msgid "Clear playlist"
-msgstr "Vyprázdniť playlist"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:658
-msgid "Edit track information..."
-msgstr "Upravť informácie o skladbe..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:663
-msgid "Renumber tracks in this order..."
-msgstr "Prečíslovať skladby v tomto poradí..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:668
-msgid "Set value for all selected tracks..."
-msgstr "Nastaviť hodnotu pre vybraté skladby..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:673
-msgid "Edit tag..."
-msgstr "Upraviť tag..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:682
-msgid "Configure Clementine..."
-msgstr "Nastaviť Clementine..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:687
-msgid "About Clementine..."
-msgstr "O Clemetine..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:696
-msgid "Shuffle playlist"
-msgstr "Zamiešať playlist"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:705
-msgid "Add media..."
-msgstr "Pridať médiá..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:714
-msgid "Add stream..."
-msgstr "Pridať stream..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:723
-msgid "Open media..."
-msgstr "Otvoriť médium..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:756
-msgid "Remove from playlist"
-msgstr "Odstrániť z playlistu"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:764
-msgid "Group by Artist"
-msgstr "Zoradiť podľa interpréta"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:772
-msgid "Group by Artist/Album"
-msgstr "Zoradiť podľa interprét/album"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:780
-msgid "Group by Artist/Year - Album"
-msgstr "Zoradiť podľa interprét/rok - album"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:788
-msgid "Group by Album"
-msgstr "Zoradiť podľa albumu"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:796
-msgid "Group by Genre/Album"
-msgstr "Zoradiť podľa žáner/album"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:804
-msgid "Group by Genre/Artist/Album"
-msgstr "Zoradiť podľa žáner/interprét/album"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:812
-msgid "Advanced grouping..."
-msgstr "Pokročilé zoraďovanie..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:728 ../mainwindow.cpp:398
-msgid "&Hide tray icon"
-msgstr "&Skryť tray ikonu"
-
-#. ts-context MainWindow
-#~ msgid "Configure &Global Shortcuts..."
-#~ msgstr "Nastaviť &Globálne skratky..."
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:737
-msgid "Cover Manager"
-msgstr "Správca obalov"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:742
-msgid "Shuffle mode"
-msgstr "Zamiešavací mód"
-
-#. ts-context MainWindow
-#: ../mainwindow.ui:747
-msgid "Repeat mode"
-msgstr "Opakovací mód"
-
-#. ts-context MainWindow
-#~ msgid "New playlist"
-#~ msgstr "Nový playlist"
-
-#. ts-context MultiLoadingIndicator
-#: ../multiloadingindicator.cpp:61
-msgid "Loading audio engine"
-msgstr "Načítava sa zvukový engine"
-
-#. ts-context MultiLoadingIndicator
-#: ../multiloadingindicator.cpp:62
-msgid "Updating library"
-msgstr "Aktualizovanie zbierky"
-
-#. ts-context MultiLoadingIndicator
-#: ../multiloadingindicator.cpp:63
-msgid "Getting channels"
-msgstr "Preberanie kanálov"
-
-#. ts-context MultiLoadingIndicator
-#: ../multiloadingindicator.cpp:64
-msgid "Loading stream"
-msgstr "Načítava sa stream"
-
-#. ts-context MultiLoadingIndicator
-#: ../multiloadingindicator.cpp:65
-msgid "Loading Last.fm radio"
-msgstr "Načítava sa Last.fm rádio"
-
-#. ts-context MultiLoadingIndicator
-#: ../multiloadingindicator.ui:14
-msgid "Form"
-msgstr "Forma"
-
-#. ts-context OSD
-#: ../osd.cpp:69
-msgid "disc %1"
-msgstr "disk %1"
-
-#. ts-context OSD
-#: ../osd.cpp:71
-msgid "track %1"
-msgstr "skladba %1"
-
-#. ts-context OSD
-#: ../osd.cpp:78
-msgid "Paused"
-msgstr "Pozastavené"
-
-#. ts-context OSD
-#: ../osd.cpp:82
-msgid "Playlist finished"
-msgstr "Playlist skončený"
-
-#. ts-context OSD
-#: ../osd.cpp:89
-msgid "Volume %1%"
-msgstr "Hlasitosť %1%"
-
-#. ts-context Playlist
-#: ../playlist.cpp:536
-msgid "Title"
-msgstr "Názov"
-
-#. ts-context Playlist
-#: ../playlist.cpp:537
-msgid "Artist"
-msgstr "Interprét"
-
-#. ts-context Playlist
-#: ../playlist.cpp:538
-msgid "Album"
-msgstr "Album"
-
-#. ts-context Playlist
-#: ../playlist.cpp:539
-msgid "Length"
-msgstr "Dĺžka"
-
-#. ts-context Playlist
-#: ../playlist.cpp:540
-msgid "Track"
-msgstr "Č."
-
-#. ts-context Playlist
-#: ../playlist.cpp:541
-msgid "Disc"
-msgstr "Disk"
-
-#. ts-context Playlist
-#: ../playlist.cpp:542
-msgid "Year"
-msgstr "Rok"
-
-#. ts-context Playlist
-#: ../playlist.cpp:543
-msgid "Genre"
-msgstr "Žáner"
-
-#. ts-context Playlist
-#: ../playlist.cpp:544
-msgid "Album artist"
-msgstr "Interprét albumu"
-
-#. ts-context Playlist
-#: ../playlist.cpp:545
-msgid "Composer"
-msgstr "Skladateľ"
-
-#. ts-context Playlist
-#: ../playlist.cpp:547
-msgid "BPM"
-msgstr ""
-
-#. ts-context Playlist
-#: ../playlist.cpp:548
-msgid "Bit rate"
-msgstr ""
-
-#. ts-context Playlist
-#: ../playlist.cpp:549
-msgid "Sample rate"
-msgstr ""
-
-#. ts-context Playlist
-#: ../playlist.cpp:550
-msgid "File name"
-msgstr "Názov súboru"
-
-#. ts-context Playlist
-#: ../playlist.cpp:551
-msgid "File name (without path)"
-msgstr "Názov súboru (bez cesty)"
-
-#. ts-context Playlist
-#: ../playlist.cpp:552
-msgid "File size"
-msgstr "Veľkosť súboru"
-
-#. ts-context Playlist
-#: ../playlist.cpp:553
-msgid "File type"
-msgstr "Typ súboru"
-
-#. ts-context Playlist
-#: ../playlist.cpp:554
-msgid "Date modified"
-msgstr "Dátum zmeny"
-
-#. ts-context Playlist
-#: ../playlist.cpp:555
-msgid "Date created"
-msgstr "Dátum vytvorenia"
-
-#. ts-context PlaylistHeader
-#: ../playlistheader.cpp:30
-msgid "Hide..."
-msgstr "Skryť..."
-
-#. ts-context PlaylistHeader
-#: ../playlistheader.cpp:31
-msgid "Show section"
-msgstr "Zobraziť stĺpec"
-
-#. ts-context PlaylistHeader
-#: ../playlistheader.cpp:47
-msgid "Hide %1"
-msgstr "Skryť %1"
-
-#. ts-context PlaylistManager
-#~ msgid "New playlist"
-#~ msgstr "Nový playlist"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:33
-msgid "Repeat"
-msgstr "Opakovať"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:57
-msgid "Shuffle"
-msgstr "Zamiešať"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:94
-msgid "Don't repeat"
-msgstr "Neopakovať"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:102
-msgid "Repeat track"
-msgstr "Opakovať skladbu"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:110
-msgid "Repeat album"
-msgstr "Opakovať album"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:118
-msgid "Repeat playlist"
-msgstr "Opakovať playlist"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:129
-msgid "Don't shuffle"
-msgstr "Nezamiešavať"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:137
-msgid "Shuffle by album"
-msgstr "Zamiešať podľa albumov"
-
-#. ts-context PlaylistSequence
-#: ../playlistsequence.ui:145
-msgid "Shuffle all"
-msgstr "Zamiešať všetko"
-
-#. ts-context RadioPlaylistItem
-#: ../radioplaylistitem.cpp:57
-msgid "Radio service couldn't be loaded :-("
-msgstr "Služba rádia sa nedá načítať :-("
-
-#. ts-context SavedRadio
-#: ../savedradio.cpp:30
-msgid "Add to playlist"
-msgstr "Pridať do playlistu"
-
-#. ts-context SavedRadio
-#: ../savedradio.cpp:31
-msgid "Remove"
-msgstr "Odstrániť"
-
-#. ts-context SavedRadio
-#: ../savedradio.cpp:33
-msgid "Add another stream..."
-msgstr "Pridať ďalší stream..."
-
-#. ts-context SavedRadio
-#: ../savedradio.cpp:43
-msgid "Your radio streams"
-msgstr "Vaše rádio streamy"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:14
-msgid "Settings"
-msgstr "Nastavenia"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:51
+#: ../bin/src/ui_edittagdialog.h:209
+msgid "Edit track information"
+msgstr "Upravť informácie o skladbe"
+
+#: ../bin/src/ui_edittagdialog.h:216
+msgid "Comment"
+msgstr "Komentár"
+
+#: ../bin/src/ui_settingsdialog.h:393
 msgid "Playback"
 msgstr ""
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:60
+#: ../bin/src/ui_settingsdialog.h:395
 msgid "Notifications"
 msgstr "Notifikácie"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:69
+#: ../bin/src/ui_settingsdialog.h:397 ../bin/src/ui_libraryconfigdialog.h:73
 msgid "Music Library"
 msgstr "Hudobná zbierka"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:78
+#: ../bin/src/ui_settingsdialog.h:399 ../bin/src/ui_lastfmconfigdialog.h:73
 msgid "Last.fm"
 msgstr ""
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:112 ../settingsdialog.ui:125
+#: ../bin/src/ui_settingsdialog.h:402 ../bin/src/ui_settingsdialog.h:404
 msgid "Fadeout"
 msgstr "Zoslabovanie"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:118
+#: ../bin/src/ui_settingsdialog.h:403
 msgid "No fadeout"
 msgstr "Bez zoslabovania"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:137
+#: ../bin/src/ui_settingsdialog.h:405
 msgid "Fadeout duration"
 msgstr "Trvanie zoslabovania"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:150
+#: ../bin/src/ui_settingsdialog.h:406
 msgid " ms"
 msgstr " milisekúnd"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:201
+#: ../bin/src/ui_settingsdialog.h:407
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine môže zobraziť správu keď sa zmení skladba."
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:208
+#: ../bin/src/ui_settingsdialog.h:408
 msgid "Notification type"
 msgstr "Typ notifikácií"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:214
+#: ../bin/src/ui_settingsdialog.h:409
 msgid "Disabled"
 msgstr "Zakázané"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:300
-msgid "Pretty OSD options"
-msgstr "Krásne OSD možnosti"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:306
-msgid "Background opacity"
-msgstr "Priehľadnosť pozadia"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:320
-msgid "Background color"
-msgstr "Farba pozadia"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:328
-msgid "Basic Blue"
-msgstr "Základná modrá"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:333
-msgid "Clementine Orange"
-msgstr "Klementínková oranžová"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:338
-msgid "Custom..."
-msgstr "Vlastná..."
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:346
-msgid "Text color"
-msgstr "Farba písma"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:353
-msgid "Choose color..."
-msgstr "Vybrať farbu..."
-
-#. ts-context SettingsDialog
-#~ msgid "Don't show notifications"
-#~ msgstr "Nezobrazovať notifikácie"
-
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:221
+#: ../bin/src/ui_settingsdialog.h:410
 msgid "Show a native desktop notification"
 msgstr "Zobrazovať natívne desktopové notifikácie"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:228
+#: ../bin/src/ui_settingsdialog.h:411
 msgid "Show a pretty OSD"
 msgstr "Zobrazovať krásne OSD"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:235
+#: ../bin/src/ui_settingsdialog.h:412
 msgid "Show a popup from the system tray"
 msgstr "Zobrazovať notifikácie z tray lišty"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:245
+#: ../bin/src/ui_settingsdialog.h:413
 msgid "General settings"
 msgstr "Všeobecné nastavenia"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:257
+#: ../bin/src/ui_settingsdialog.h:414
 msgid "Popup duration"
 msgstr "Trvanie notifikácie"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:264
+#: ../bin/src/ui_settingsdialog.h:415
 msgid " seconds"
 msgstr ".sekúnd"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:283
+#: ../bin/src/ui_settingsdialog.h:416
 msgid "Show a notification when I change the volume"
 msgstr "Zobraziť notifikáciu keď zmením hlasitosť"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.ui:290
+#: ../bin/src/ui_settingsdialog.h:417
 msgid "Include album art in the notification"
 msgstr "Zahrnúť obal do notifikácie"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.cpp:34
-msgid "OSD Preview"
-msgstr "OSD náhľad"
+#: ../bin/src/ui_settingsdialog.h:418
+msgid "Pretty OSD options"
+msgstr "Krásne OSD možnosti"
 
-#. ts-context SettingsDialog
-#: ../settingsdialog.cpp:34
-msgid "Drag to reposition"
-msgstr "Pretiahnite na iné miesto"
+#: ../bin/src/ui_settingsdialog.h:419
+msgid "Background opacity"
+msgstr "Priehľadnosť pozadia"
 
-#. ts-context ShortcutsDialog
+#: ../bin/src/ui_settingsdialog.h:420
+msgid "Background color"
+msgstr "Farba pozadia"
+
+#: ../bin/src/ui_settingsdialog.h:423
+msgid "Basic Blue"
+msgstr "Základná modrá"
+
+#: ../bin/src/ui_settingsdialog.h:424
+msgid "Clementine Orange"
+msgstr "Klementínková oranžová"
+
+#: ../bin/src/ui_settingsdialog.h:425
+msgid "Custom..."
+msgstr "Vlastná..."
+
+#: ../bin/src/ui_settingsdialog.h:427
+msgid "Text color"
+msgstr "Farba písma"
+
+#: ../bin/src/ui_settingsdialog.h:428
+msgid "Choose color..."
+msgstr "Vybrať farbu..."
+
+#: ../bin/src/ui_about.h:149
+msgid "Version"
+msgstr "Verzia"
+
+#: ../bin/src/ui_about.h:150
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+"google.com/p/clementine-player/\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Authors:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a href="
+"\"mailto:me@davidsansome.com\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Thanks to:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
+"href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+"\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
+"contributors</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+"google.com/p/clementine-player/\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">http://code.google.com/p/clementine-player/</span></a></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Autori:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a href="
+"\"mailto:me@davidsansome.com\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Poďakovanie:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
+"href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
+"color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+"\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+"underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">... a všetkým "
+"prispievateľom Amarok-u.</p></body></html>"
+
+#: ../bin/src/ui_addstreamdialog.h:82
+msgid "Add Stream"
+msgstr "Pridať stream"
+
+#: ../bin/src/ui_addstreamdialog.h:83
+msgid "Enter the URL of an internet radio stream:"
+msgstr "Vložte URL internetového rádio streamu:"
+
+#: ../bin/src/ui_addstreamdialog.h:84
+msgid "Save this stream in the Radio tab"
+msgstr "Uložiť tento stream na karte Rádio"
+
+#: ../bin/src/ui_albumcovermanager.h:161
+msgid "Show fullsize..."
+msgstr "Ukázať celú veľkosť..."
+
+#: ../bin/src/ui_albumcovermanager.h:162
+msgid "Fetch automatically"
+msgstr "Získavať automaticky"
+
+#: ../bin/src/ui_albumcovermanager.h:163
+msgid "Choose manual cover..."
+msgstr "Vybrať obal ručne..."
+
+#: ../bin/src/ui_albumcovermanager.h:164
+msgid "Unset cover"
+msgstr "Nenastavený obal"
+
+#: ../bin/src/ui_albumcovermanager.h:166
+msgid "View"
+msgstr "Zobraziť"
+
+#: ../bin/src/ui_albumcovermanager.h:167
+msgid "Fetch Missing Covers"
+msgstr "Získať chýbajúce obaly"
+
+#: ../bin/src/ui_playlistsequence.h:119
+msgid "Don't repeat"
+msgstr "Neopakovať"
+
+#: ../bin/src/ui_playlistsequence.h:120
+msgid "Repeat track"
+msgstr "Opakovať skladbu"
+
+#: ../bin/src/ui_playlistsequence.h:121
+msgid "Repeat album"
+msgstr "Opakovať album"
+
+#: ../bin/src/ui_playlistsequence.h:122
+msgid "Repeat playlist"
+msgstr "Opakovať playlist"
+
+#: ../bin/src/ui_playlistsequence.h:123
+msgid "Don't shuffle"
+msgstr "Nezamiešavať"
+
+#: ../bin/src/ui_playlistsequence.h:124
+msgid "Shuffle by album"
+msgstr "Zamiešať podľa albumov"
+
+#: ../bin/src/ui_playlistsequence.h:125
+msgid "Shuffle all"
+msgstr "Zamiešať všetko"
+
+#: ../bin/src/ui_playlistsequence.h:127
+msgid "Repeat"
+msgstr "Opakovať"
+
+#: ../bin/src/ui_playlistsequence.h:130
+msgid "Shuffle"
+msgstr "Zamiešať"
+
+#: ../bin/src/ui_groupbydialog.h:119
+msgid "Library advanced grouping"
+msgstr "Pokročilé zoraďovanie zbierky"
+
+#: ../bin/src/ui_groupbydialog.h:120
+msgid "You can change the way the songs in the library are organised."
+msgstr "Môžte zmeniť spôsob, ktorým sú piesne v zbierke organizované."
+
+#: ../bin/src/ui_groupbydialog.h:121
+msgid "Group Library by..."
+msgstr "Zoraďovanie zbierky podľa..."
+
+#: ../bin/src/ui_groupbydialog.h:122
+msgid "First level"
+msgstr "Prvá úroveň"
+
+#: ../bin/src/ui_groupbydialog.h:125 ../bin/src/ui_groupbydialog.h:136
+#: ../bin/src/ui_groupbydialog.h:147
+msgid "None"
+msgstr "Nijako"
+
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:142
+#: ../bin/src/ui_groupbydialog.h:153
+msgid "Year - Album"
+msgstr "Rok - Album"
+
+#: ../bin/src/ui_groupbydialog.h:133
+msgid "Second level"
+msgstr "Druhá úroveň"
+
+#: ../bin/src/ui_groupbydialog.h:144
+msgid "Third level"
+msgstr "Tretia úroveň"
+
+#~ msgid "Configure &Global Shortcuts..."
+#~ msgstr "Nastaviť &Globálne skratky..."
+
+#~ msgid "New playlist"
+#~ msgstr "Nový playlist"
+
+#~ msgid "Don't show notifications"
+#~ msgstr "Nezobrazovať notifikácie"
+
 #~ msgid "Configure Shortcuts"
 #~ msgstr "Nastaviť skratky"
 
-#. ts-context ShortcutsDialog
-#~ msgid "Play"
-#~ msgstr "Hrať"
-
-#. ts-context ShortcutsDialog
-#~ msgid "Pause"
-#~ msgstr "Pauza"
-
-#. ts-context ShortcutsDialog
 #~ msgid "Play/Pause"
 #~ msgstr "Hrať/Pauza"
 
-#. ts-context ShortcutsDialog
-#~ msgid "Stop"
-#~ msgstr "Zastaviť"
-
-#. ts-context ShortcutsDialog
 #~ msgid "Stop Playing After Current Track"
 #~ msgstr "Zastaviť po tejto skladbe"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Next Track"
 #~ msgstr "Nesledujca skladba"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Previous Track"
 #~ msgstr "Predchádzajúca skladba"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Increase Volume"
 #~ msgstr "Zvýšenie hlasitosti"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Decrease Volume"
 #~ msgstr "Zníženie hlasitosti"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Mute Volume"
 #~ msgstr "Umlčanie hlasitosti"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Seek Forwards"
 #~ msgstr "pretočiť dopredu"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Seek Backwards"
 #~ msgstr "pretočiť dozadu"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Shortcut"
 #~ msgstr "Skratka"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Alternate"
 #~ msgstr "Striedať"
 
-#. ts-context ShortcutsDialog
 #~ msgid "&Defaults"
 #~ msgstr "&Pôvodné"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Shortcut for Selected Action"
 #~ msgstr "Skratka pre vybranú akciu"
 
-#. ts-context ShortcutsDialog
 #~ msgid "&None"
 #~ msgstr "&Nijaká"
 
-#. ts-context ShortcutsDialog
 #~ msgid "De&fault"
 #~ msgstr "Pôvo&dná"
 
-#. ts-context ShortcutsDialog
 #~ msgid "&Custom"
 #~ msgstr "&Užívateľská"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Non&e"
 #~ msgstr "Nij&aká"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Default key:"
 #~ msgstr "Pôvodný kľúč"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Warning"
 #~ msgstr "Varovanie"
 
-#. ts-context ShortcutsDialog
 #~ msgid ""
 #~ "You are about to reset to global shortcuts default values. Are you sure "
 #~ "you want to continue?"
@@ -1554,35 +1183,8 @@ msgstr "Pretiahnite na iné miesto"
 #~ "Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete "
 #~ "pokračovať?"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Default: %1"
 #~ msgstr "Pôvodné: %1"
 
-#. ts-context ShortcutsDialog
 #~ msgid "Default: None"
 #~ msgstr "Pôvodné: žiadna"
-
-#. ts-context SomaFMService
-#: ../somafmservice.cpp:40
-msgid "Add to playlist"
-msgstr "Pridať do playlistu"
-
-#. ts-context SomaFMService
-#: ../somafmservice.cpp:42
-msgid "Open somafm.com in browser"
-msgstr "Otvoriť somafm.com v prehliadači"
-
-#. ts-context SomaFMService
-#: ../somafmservice.cpp:43
-msgid "Refresh channels"
-msgstr "Obnoviť kanály"
-
-#. ts-context TrackSlider
-#: ../trackslider.ui:17
-msgid "Form"
-msgstr "Forma"
-
-#. ts-context TrackSlider
-#: ../trackslider.ui:26 ../trackslider.ui:46
-msgid "0:00:00"
-msgstr ""
