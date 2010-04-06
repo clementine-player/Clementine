@@ -43,188 +43,163 @@ class QTimerEvent;
  * { filesrc location=file.ext ! decodebin ! audioconvert ! audioscale ! volume
  * ! adder } ! { queue ! equalizer ! identity ! volume ! audiosink }
  */
-class GstEngine : public Engine::Base
-{
-        friend class GstConfigDialog;
+class GstEngine : public Engine::Base {
+  Q_OBJECT
 
-        Q_OBJECT
+ public:
+  GstEngine();
+  ~GstEngine();
 
-    public:
-        GstEngine();
-        ~GstEngine();
+  bool init();
 
-        bool init();
+  bool canDecode(const QUrl& url) const;
+  uint position() const;
+  uint length() const;
+  Engine::State state() const;
+  const Engine::Scope& scope();
 
-        bool canDecode( const QUrl &url ) const;
-        uint position() const;
-        uint length() const;
-        Engine::State state() const;
-        const Engine::Scope& scope();
+  virtual bool metaDataForUrl(const QUrl &url, Engine::SimpleMetaBundle &b);
+  virtual bool getAudioCDContents(const QString &device, QList<QUrl> &urls);
 
-        virtual bool metaDataForUrl(const QUrl &url, Engine::SimpleMetaBundle &b);
-        virtual bool getAudioCDContents(const QString &device, QList<QUrl> &urls);
+  void gstStatusText(const QString& str) { emit statusText( str ); }
+  void gstMetaData(Engine::SimpleMetaBundle &bundle) { emit metaData( bundle ); }
 
-        void gstStatusText( const QString& str ) { emit statusText( str ); }
-        void gstMetaData( Engine::SimpleMetaBundle &bundle ) { emit metaData( bundle ); }
+ public slots:
+  bool load(const QUrl&, bool stream);
+  bool play(uint offset);
+  void stop();
+  void pause();
+  void unpause();
+  void seek(uint ms);
 
-    public slots:
-        bool load( const QUrl&, bool stream );
-        bool play( uint offset );
-        void stop();
-        void pause();
-        void unpause();
-        void seek( uint ms );
+  /** Set whether equalizer is enabled */
+  void setEqualizerEnabled(bool);
 
-        /** Copies incoming radio stream data from StreamProvider into StreamSrc's buffer */
-        void newStreamData( char* data, int size );
+  /** Set equalizer preamp and gains, range -100..100. Gains are 10 values. */
+  void setEqualizerParameters(int preamp, const QList<int>& bandGains);
 
-        /** Set whether equalizer is enabled */
-        void setEqualizerEnabled( bool );
+ protected:
+  void setVolumeSW(uint percent);
+  void timerEvent(QTimerEvent*);
 
-        /** Set equalizer preamp and gains, range -100..100. Gains are 10 values. */
-        void setEqualizerParameters( int preamp, const QList<int>& bandGains );
+ private slots:
+  void HandlePipelineError();
+  void EndOfStreamReached();
 
-    protected:
-        void setVolumeSW( uint percent );
-        void timerEvent( QTimerEvent* );
+  /** Called when no output sink was selected. Shows the GStreamer engine settings dialog. */
+  void ErrorNoOutput();
 
-    private slots:
-        void handlePipelineError();
-        void endOfStreamReached();
+  /** Transmits new decoded metadata to the application */
+  void NewMetaData();
 
-        /** Called when no output sink was selected. Shows the GStreamer engine settings dialog. */
-        void errorNoOutput();
+ private:
+  static GstEngine* instance() { return sInstance; }
 
-        /** Transmits new decoded metadata to the application */
-        void newMetaData();
+  /**
+   * Creates a GStreamer element and puts it into pipeline.
+   * @param factoryName Name of the element class to create.
+   * @param bin Container into which the element is put.
+   * @param name Identifier for the element.
+   * @return Pointer to the created element, or NULL for failure.
+   */
+  static GstElement* CreateElement(
+      const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
-    private:
-        static GstEngine* instance() { return s_instance; }
+  /**
+   * Fetches a list of available output sink plugins
+   * @return List of output sinks
+   */
+  QStringList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
 
-        /**
-         * Creates a GStreamer element and puts it into pipeline.
-         * @param factoryName Name of the element class to create.
-         * @param bin Container into which the element is put.
-         * @param name Identifier for the element.
-         * @return Pointer to the created element, or NULL for failure.
-         */
-        static GstElement* createElement( const QString& factoryName, GstElement* bin = 0, const QString& name = 0 );
+  // CALLBACKS:
+  /** Bus message */
+  //static GstBusSyncReply bus_cb( GstBus*, GstMessage*, gpointer );
+  static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
+  /** Called when decodebin has generated a new pad */
+  static void NewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
+  /** Used by canDecode(). When called, the format probably can be decoded */
+  static void CanDecodeNewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
+  /** Used by canDecode(). Called after last pad so it makes no sense to wait anymore */
+  static void CanDecodeLastCallback(GstElement*, gpointer);
+  /** Called when new metadata tags have been found */
+  static void EventCallback( GstPad*, GstEvent* event, gpointer arg);
+  /** Duplicates audio data for application side processing */
+  static void HandoffCallback( GstPad*, GstBuffer*, gpointer );
 
-        /**
-         * Fetches a list of available output sink plugins
-         * @return List of output sinks
-         */
-        QStringList getOutputsList() { return getPluginList( "Sink/Audio" ); }
+  /** Get a list of available plugins from a specified Class */
+  QStringList GetPluginList(const QString& classname) const;
 
-        // CALLBACKS:
-        /** Bus message */
-        //static GstBusSyncReply bus_cb( GstBus*, GstMessage*, gpointer );
-        static gboolean bus_cb( GstBus*, GstMessage*, gpointer );
-        /** Called at end of track */
-        static void eos_cb( GstElement*, gpointer );
-        /** Called when decodebin has generated a new pad */
-        static void newPad_cb( GstElement*, GstPad*, gboolean, gpointer );
-        /** Used by canDecode(). When called, the format probably can be decoded */
-        static void candecode_newPad_cb( GstElement*, GstPad*, gboolean, gpointer );
-        /** Used by canDecode(). Called after last pad so it makes no sense to wait anymore */
-        static void candecode_last_cb( GstElement*, gpointer );
-        /** Called when new metadata tags have been found */
-        static void event_cb( GstPad*, GstEvent* event, gpointer arg);
-        //static void found_tag_cb( GstElement*, GstElement*, GstTagList*, gpointer );
-        /** Duplicates audio data for application side processing */
-        static void handoff_cb( GstPad*, GstBuffer*, gpointer );
-        /** Called when the KIO buffer is empty */
-        static void kio_resume_cb();
+  /** Construct the output pipeline */
+  bool CreatePipeline();
 
-        /** Get a list of available plugins from a specified Class */
-        QStringList getPluginList( const QString& classname ) const;
+  /** Stops playback, destroys all input pipelines, destroys output pipeline, and frees resources */
+  void DestroyPipeline();
 
-        /** Construct the output pipeline */
-        bool createPipeline();
+  /* Constructs the pipeline for audio CDs, optionally selecting a device and/or track and/or setting the state to paused */
+  bool SetupAudioCD( const QString& device, unsigned track, bool pause );
 
-        /** Stops playback, destroys all input pipelines, destroys output pipeline, and frees resources */
-        void destroyPipeline();
+  /** Beams the streaming buffer status to Amarok */
+  void SendBufferStatus();
 
-        /* Constructs the pipeline for audio CDs, optionally selecting a device and/or track and/or setting the state to paused */
-        bool setupAudioCD( const QString& device, unsigned track, bool pause );
+  /////////////////////////////////////////////////////////////////////////////////////
+  // DATA MEMBERS
+  /////////////////////////////////////////////////////////////////////////////////////
+  // Interval of main timer, handles the volume fading
+  static const int kTimerInterval = 40; //msec
+  static const int kGstStateTimeout = 10000000;
 
-        /** Beams the streaming buffer status to Amarok */
-        void sendBufferStatus();
+  static GstEngine* sInstance;
 
-        /////////////////////////////////////////////////////////////////////////////////////
-        // DATA MEMBERS
-        /////////////////////////////////////////////////////////////////////////////////////
-        // Interval of main timer, handles the volume fading
-        static const int  TIMER_INTERVAL = 40; //msec
+  GstElement* gst_pipeline_;
 
-        #define KB 1000
-        static const uint SCOPEBUF_SIZE  = 600*KB;
-        static const int  SCOPE_VALUES   = 512;
-        static const int  STREAMBUF_SIZE = 600*KB;
-        static const uint STREAMBUF_MIN  = 100*KB;
-        static const int  STREAMBUF_MAX  = STREAMBUF_SIZE - 50*KB;
-        #undef KB
+  GstElement* gst_src_;
+  GstElement* gst_decodebin_;
 
+  GstElement* gst_audiobin_;
 
-        static GstEngine* s_instance;
+  GstElement* gst_audioconvert_;
+  //GstElement* gst_equalizer_;
+  GstElement* gst_identity_;
+  GstElement* gst_volume_;
+  GstElement* gst_audioscale_;
+  GstElement* gst_audiosink_;
 
-        GstElement* m_gst_pipeline;
+  QString gst_error_;
+  QString gst_debug_;
 
-        GstElement* m_gst_src;
-        GstElement* m_gst_decodebin;
+  int metacount_;
 
-        GstElement* m_gst_audiobin;
+  uint event_cb_id_;
 
-        GstElement* m_gst_audioconvert;
-        //GstElement* m_gst_equalizer;
-        GstElement* m_gst_identity;
-        GstElement* m_gst_volume;
-        GstElement* m_gst_audioscale;
-        GstElement* m_gst_audiosink;
+  //////////
+  // scope
+  //////////
+  // delay queue for synchronizing samples to where the audio device is playing
+  GQueue* delayq_;
+  // the current set of samples for the scope, in case we don't have enough buffers yet
+  // and end up with an incomplete buffer
+  float current_scope_[SCOPESIZE];
+  // the sample in m_currentScope we are working on
+  int current_sample_;
 
-        QString m_gst_error;
-        QString m_gst_debug;
+  void UpdateScope();
+  qint64 PruneScope();
+  void ClearScopeQ();
 
-        int m_metacount;
+  QMutex            scope_mutex_;
 
-        uint event_cb_id_;
+  bool              pipeline_filled_;
+  float             fade_value_;
 
-        //////////
-        // scope
-        //////////
-        // delay queue for synchronizing samples to where the audio device is playing
-        GQueue    *m_delayq;
-        // the current set of samples for the scope, in case we don't have enough buffers yet
-        // and end up with an incomplete buffer
-        float    m_currentScope[SCOPESIZE];
-        // the sample in m_currentScope we are working on
-        gint       m_current;
-        // function to remove buffers that are no longer relevant
-        // returns the position currently playing in the audio device
-        gint64 pruneScope();
-        // free all the buffers in the delay queue
-        void clearScopeQ();
+  bool              equalizer_enabled_;
+  int               equalizer_preamp_;
+  QList<int>        equalizer_gains_;
 
-        // These variables are shared between gst-engine and streamsrc
-        char*    m_streamBuf;
-        int      m_streamBufIndex;
-        bool     m_streamBufStop;
-        bool     m_streamBuffering;
+  Engine::SimpleMetaBundle meta_bundle_;
 
-        QMutex            m_mutexScope;
-
-        bool              m_pipelineFilled;
-        float             m_fadeValue;
-
-        bool              m_equalizerEnabled;
-        int               m_equalizerPreamp;
-        QList<int>        m_equalizerGains;
-
-        Engine::SimpleMetaBundle m_metaBundle;
-
-        bool m_shutdown;
-        mutable bool m_canDecodeSuccess;
-        mutable bool m_canDecodeLast;
+  bool shutdown_;
+  mutable bool can_decode_success_;
+  mutable bool can_decode_last_;
 };
 
 
