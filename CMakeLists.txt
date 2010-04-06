@@ -23,14 +23,18 @@ find_package(Boost REQUIRED)
 
 if(WIN32)
   find_library(TAGLIB_LIBRARIES tag)
-  find_path(VLC_PLUGIN_INCLUDE_DIRS vlc_arrays.h
-    PATH_SUFFIXES vlc vlc/plugins)
-  find_library(VLC_PLUGIN_LIBRARIES vlccore)
-  find_library(LIBVLC_LIBRARIES vlc)
+  find_path(GLIB_INCLUDE_DIRS glib.h
+    PATH_SUFFIXES glib glib-2.0)
+  find_path(GLIBCONFIG_INCLUDE_DIRS glibconfig.h
+    PATH_SUFFIXES ../lib/glib/include ../lib/glib-2.0/include)
+  find_path(LIBXML_INCLUDE_DIRS libxml/parser.h
+    PATH_SUFFIXES libxml libxml2)
+  find_library(GSTREAMER_LIBRARIES gstreamer-0.10)
+  find_library(GLIB_LIBRARIES glib-2.0)
+  find_library(GOBJECT_LIBRARIES gobject-2.0)
 else(WIN32)
   pkg_check_modules(TAGLIB taglib)
-  pkg_check_modules(LIBVLC libvlc)
-  pkg_check_modules(VLC_PLUGIN vlc-plugin)
+  pkg_check_modules(GSTREAMER gstreamer-0.10)
 
   if (TAGLIB_VERSION VERSION_LESS 1.6)
     message(FATAL_ERROR "Taglib version 1.6 or greater is required")
@@ -56,14 +60,16 @@ endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
-link_directories(${LIBVLC_LIBRARY_DIRS})
+link_directories(${GSTREAMER_LIBRARY_DIRS})
 link_directories(${LASTFM_LIBRARY_DIRS})
 
 include(${QT_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
-include_directories(${LIBVLC_INCLUDE_DIRS})
-include_directories(${VLC_PLUGIN_INCLUDE_DIRS})
+include_directories(${GSTREAMER_INCLUDE_DIRS})
+include_directories(${GLIB_INCLUDE_DIRS})
+include_directories(${GLIBCONFIG_INCLUDE_DIRS})
+include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${LASTFM_INCLUDE_DIRS})
 include_directories("3rdparty/qsqlite")
 
@@ -83,7 +89,6 @@ add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
 add_subdirectory(3rdparty/qxt)
-add_subdirectory(vlcplugins)
 add_subdirectory(src)
 
 add_subdirectory(tests)

@@ -19,8 +19,6 @@
 
 #include <QObject>
 #include <QSettings>
-#include <QFuture>
-#include <QFutureWatcher>
 
 #include "engines/engine_fwd.h"
 #include "playlistitem.h"
@@ -125,8 +123,6 @@ class Player : public QObject {
   void PlayTrack(int index);
 
  signals:
-  void InitFinished();
-
   void Playing();
   void Paused();
   void Stopped();
@@ -144,7 +140,6 @@ class Player : public QObject {
   void TrackListChange(int i);
 
  private slots:
-  void EngineInitFinished();
   void EngineStateChanged(Engine::State);
   void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
 
@@ -159,8 +154,6 @@ class Player : public QObject {
   Song current_item_;
 
   EngineBase* engine_;
-  QFuture<bool> init_engine_;
-  QFutureWatcher<bool>* init_engine_watcher_;
 };
 
 #endif // PLAYER_H

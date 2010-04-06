@@ -17,7 +17,7 @@
 #include "player.h"
 #include "playlist.h"
 #include "lastfmservice.h"
-#include "engines/vlcengine.h"
+#include "engines/gstengine.h"
 
 #ifdef Q_WS_X11
 #  include "mpris_player.h"
@@ -57,14 +57,12 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
     playlist_(playlist),
     lastfm_(lastfm),
     current_item_options_(PlaylistItem::Default),
-    engine_(new VlcEngine),
-    init_engine_watcher_(new QFutureWatcher<bool>(this))
+    engine_(new GstEngine)
 {
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
 
-  connect(init_engine_watcher_, SIGNAL(finished()), SLOT(EngineInitFinished()));
   connect(engine_, SIGNAL(error(QString)), SIGNAL(Error(QString)));
 
   // MPRIS DBus interface.
@@ -79,14 +77,8 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 }
 
 void Player::Init() {
-  init_engine_ = QtConcurrent::run(boost::bind(&EngineBase::init, engine_));
-  init_engine_watcher_->setFuture(init_engine_);
-}
-
-void Player::EngineInitFinished() {
-  if (init_engine_.result() == false) {
+  if (!engine_->init())
     qFatal("Error initialising audio engine");
-  }
 
   connect(engine_, SIGNAL(stateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
@@ -94,14 +86,9 @@ void Player::EngineInitFinished() {
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
   engine_->setVolume(settings_.value("volume", 50).toInt());
-
-  emit InitFinished();
 }
 
 void Player::ReloadSettings() {
-  if (!init_engine_.isFinished())
-    return;
-
   engine_->reloadSettings();
 }
 
@@ -136,9 +123,6 @@ void Player::TrackEnded() {
 }
 
 void Player::PlayPause() {
-  if (!init_engine_.isFinished())
-    return;
-
   switch (engine_->state()) {
   case Engine::Paused:
     qDebug() << "Unpausing";
@@ -169,10 +153,6 @@ void Player::PlayPause() {
 }
 
 void Player::Stop() {
-  if (!init_engine_.isFinished())
-    return;
-
-  qDebug() << "Stopping";
   engine_->stop();
   playlist_->set_current_index(-1);
 }
@@ -215,9 +195,6 @@ Engine::State Player::GetState() const {
 }
 
 void Player::PlayAt(int index, bool manual_change) {
-  if (!init_engine_.isFinished())
-    return;
-
   if (manual_change)
     playlist_->set_current_index(-1); // to reshuffle
   playlist_->set_current_index(index);
@@ -239,9 +216,6 @@ void Player::PlayAt(int index, bool manual_change) {
 }
 
 void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
-  if (!init_engine_.isFinished())
-    return;
-
   int current_index = playlist_->current_index();
   if (current_index == -1)
     return;
@@ -263,9 +237,6 @@ void Player::CurrentMetadataChanged(const Song &metadata) {
 }
 
 void Player::Seek(int seconds) {
-  if (!init_engine_.isFinished())
-    return;
-
   engine_->seek(seconds * 1000);
 
   // If we seek the track we don't want to submit it to last.fm

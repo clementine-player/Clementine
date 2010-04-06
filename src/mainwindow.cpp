@@ -94,7 +94,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
 
   // Start initialising the player
-  multi_loading_indicator_->TaskStarted(MultiLoadingIndicator::LoadingAudioEngine);
   player_->Init();
 
   // Models
@@ -170,7 +169,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   // Player connections
   connect(ui_.volume, SIGNAL(valueChanged(int)), player_, SLOT(SetVolume(int)));
 
-  connect(player_, SIGNAL(InitFinished()), SLOT(PlayerInitFinished()));
   connect(player_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
@@ -768,10 +766,6 @@ void MainWindow::LibraryScanStarted() {
 
 void MainWindow::LibraryScanFinished() {
   multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::UpdatingLibrary);
-}
-
-void MainWindow::PlayerInitFinished() {
-  multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::LoadingAudioEngine);
 }
 
 void MainWindow::AddMedia() {

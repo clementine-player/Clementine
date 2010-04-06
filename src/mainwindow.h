@@ -99,8 +99,6 @@ class MainWindow : public QMainWindow {
   void LibraryScanStarted();
   void LibraryScanFinished();
 
-  void PlayerInitFinished();
-
   void HideShowTrayIcon();
 
   void AddMedia();

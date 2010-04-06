@@ -12,7 +12,7 @@ set(CLEMENTINE-SOURCES
     playlist.cpp
     playlistitem.cpp
     engines/enginebase.cpp
-    engines/vlcengine.cpp
+    engines/gstengine.cpp
     analyzers/baranalyzer.cpp
     analyzers/analyzerbase.cpp
     fht.cpp
@@ -78,7 +78,7 @@ set(CLEMENTINE-MOC-HEADERS
     librarybackend.h
     playlist.h
     engines/enginebase.h
-    engines/vlcengine.h
+    engines/gstengine.h
     sliderwidget.h
     playlistview.h
     backgroundthread.h
@@ -257,7 +257,9 @@ target_link_libraries(clementine_lib
     qtsingleapplication
     qxt
     lastfm
-    ${LIBVLC_LIBRARIES}
+    ${GOBJECT_LIBRARIES}
+    ${GLIB_LIBRARIES}
+    ${GSTREAMER_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${QT_LIBRARIES}
 )
