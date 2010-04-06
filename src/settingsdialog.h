@@ -52,6 +52,8 @@ class SettingsDialog : public QDialog {
 
   void UpdatePopupVisible();
 
+  void ShowTrayIconToggled(bool on);
+
  private:
   Ui::SettingsDialog ui_;
   bool loading_settings_;

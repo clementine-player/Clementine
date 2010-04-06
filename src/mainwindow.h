@@ -54,6 +54,15 @@ class MainWindow : public QMainWindow {
   MainWindow(QNetworkAccessManager* network, QWidget *parent = 0);
   ~MainWindow();
 
+  static const char* kSettingsGroup;
+
+  // Don't change the values
+  enum StartupBehaviour {
+    Startup_Remember = 1,
+    Startup_AlwaysShow = 2,
+    Startup_AlwaysHide = 3,
+  };
+
   void SetHiddenInTray(bool hidden);
 
  protected:
@@ -99,7 +108,7 @@ class MainWindow : public QMainWindow {
   void LibraryScanStarted();
   void LibraryScanFinished();
 
-  void HideShowTrayIcon();
+  void ReloadSettings();
 
   void AddMedia();
   void AddStream();
@@ -110,7 +119,6 @@ class MainWindow : public QMainWindow {
 
  private:
   static const int kStateVersion;
-  static const char* kSettingsGroup;
   static const char* kMediaFilterSpec;
 
   Ui::MainWindow ui_;

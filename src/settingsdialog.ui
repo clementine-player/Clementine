@@ -57,6 +57,15 @@
      </item>
      <item>
       <property name="text">
+       <string>Behaviour</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Notifications</string>
       </property>
       <property name="icon">
@@ -187,6 +196,66 @@
             <size>
              <width>20</width>
              <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page">
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <item>
+          <widget class="QCheckBox" name="b_show_tray_icon_">
+           <property name="text">
+            <string>Show tray icon</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>When Clementine starts</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QRadioButton" name="b_always_show_">
+              <property name="text">
+               <string>Always show the main window</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="b_always_hide_">
+              <property name="text">
+               <string>Always hide the main window</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="b_remember_">
+              <property name="text">
+               <string>Remember from last time</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>290</height>
             </size>
            </property>
           </spacer>

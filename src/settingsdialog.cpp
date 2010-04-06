@@ -18,6 +18,7 @@
 #include "engines/enginebase.h"
 #include "osd.h"
 #include "osdpretty.h"
+#include "mainwindow.h"
 
 #include <QSettings>
 #include <QColorDialog>
@@ -36,6 +37,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
   ui_.notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue), Qt::DecorationRole);
   ui_.notifications_bg_preset->setItemData(1, QColor(OSDPretty::kPresetOrange), Qt::DecorationRole);
+
+  // Behaviour
+  connect(ui_.b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
 
   // Last.fm
   connect(ui_.lastfm, SIGNAL(ValidationComplete(bool)), SLOT(LastFMValidationComplete(bool)));
@@ -92,6 +96,17 @@ void SettingsDialog::accept() {
 
   QSettings s;
 
+  // Behaviour
+  MainWindow::StartupBehaviour behaviour;
+  if (ui_.b_always_hide_->isChecked()) behaviour = MainWindow::Startup_AlwaysHide;
+  if (ui_.b_always_show_->isChecked()) behaviour = MainWindow::Startup_AlwaysShow;
+  if (ui_.b_remember_->isChecked())    behaviour = MainWindow::Startup_Remember;
+
+  s.beginGroup(MainWindow::kSettingsGroup);
+  s.setValue("showtray", ui_.b_show_tray_icon_->isChecked());
+  s.setValue("startupbehaviour", int(behaviour));
+  s.endGroup();
+
   // Playback
   s.beginGroup(Engine::Base::kSettingsGroup);
   s.setValue("FadeoutEnabled", ui_.fadeout->isChecked());
@@ -128,6 +143,18 @@ void SettingsDialog::accept() {
 void SettingsDialog::showEvent(QShowEvent*) {
   QSettings s;
   loading_settings_ = true;
+
+  // Behaviour
+  s.beginGroup(MainWindow::kSettingsGroup);
+  ui_.b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
+  MainWindow::StartupBehaviour behaviour = MainWindow::StartupBehaviour(
+      s.value("startupbehaviour", MainWindow::Startup_Remember).toInt());
+  switch (behaviour) {
+    case MainWindow::Startup_AlwaysHide: ui_.b_always_hide_->setChecked(true); break;
+    case MainWindow::Startup_AlwaysShow: ui_.b_always_show_->setChecked(true); break;
+    case MainWindow::Startup_Remember:   ui_.b_remember_->setChecked(true);    break;
+  }
+  s.endGroup();
 
   // Last.fm
   ui_.lastfm->Load();
@@ -248,4 +275,10 @@ void SettingsDialog::ChooseFgColor() {
     return;
 
   pretty_popup_->set_foreground_color(color.rgb());
+}
+
+void SettingsDialog::ShowTrayIconToggled(bool on) {
+  ui_.b_always_hide_->setEnabled(on);
+  if (!on && ui_.b_always_hide_->isChecked())
+    ui_.b_remember_->setChecked(true);
 }

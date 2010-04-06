@@ -144,7 +144,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_open_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
-  connect(ui_.action_hide_tray_icon, SIGNAL(triggered()), SLOT(HideShowTrayIcon()));
   connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_, SLOT(show()));
 
   // Give actions to buttons
@@ -311,8 +310,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   tray_menu->addAction(ui_.action_love);
   tray_menu->addAction(ui_.action_ban);
   tray_menu->addSeparator();
-  tray_menu->addAction(ui_.action_hide_tray_icon);
-  tray_menu->addSeparator();
   tray_menu->addAction(ui_.action_quit);
   tray_icon_->setContextMenu(tray_menu);
 
@@ -326,6 +323,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(global_shortcuts_, SIGNAL(Previous()), ui_.action_previous_track, SLOT(trigger()));
 
   // Settings
+  connect(settings_dialog_, SIGNAL(accepted()), SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
@@ -363,14 +361,20 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
       Library::GroupBy(settings_.value("group_by2", int(Library::GroupBy_Album)).toInt()),
       Library::GroupBy(settings_.value("group_by3", int(Library::GroupBy_None)).toInt())));
 
+  StartupBehaviour behaviour =
+      StartupBehaviour(settings_.value("startupbehaviour", Startup_Remember).toInt());
+  qDebug() << "onload" << behaviour;
   bool hidden = settings_.value("hidden", false).toBool();
   bool show_tray = settings_.value("showtray", true).toBool();
-  setVisible(!hidden);
+
+  switch (behaviour) {
+    case Startup_AlwaysHide: hide(); break;
+    case Startup_AlwaysShow: show(); break;
+    case Startup_Remember:   setVisible(!hidden); break;
+  }
 
   if (show_tray)
     tray_icon_->show();
-  else
-    ui_.action_hide_tray_icon->setText(tr("&Show tray icon"));
 
   // Force the window to show in case somehow the config has tray and window set to hide
   if (hidden && !show_tray) {
@@ -386,17 +390,12 @@ MainWindow::~MainWindow() {
   SaveGeometry();
 }
 
-void MainWindow::HideShowTrayIcon() {
-  if (!isHidden() && tray_icon_->isVisible()) {
-    tray_icon_->setVisible(false);
-    ui_.action_hide_tray_icon->setText(tr("&Show tray icon"));
-  }
-  else if (!isHidden()) {
-    tray_icon_->setVisible(true);
-    ui_.action_hide_tray_icon->setText(tr("&Hide tray icon"));
-  }
+void MainWindow::ReloadSettings() {
+  bool show_tray = settings_.value("showtray", true).toBool();
 
-  settings_.setValue("showtray", tray_icon_->isVisible());
+  tray_icon_->setVisible(show_tray);
+  if (!show_tray && !isVisible())
+    show();
 }
 
 void MainWindow::QueueFiles(const QList<QUrl>& urls) {
@@ -541,15 +540,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
 
 void MainWindow::SetHiddenInTray(bool hidden) {
   settings_.setValue("hidden", hidden);
-
-  if (hidden) {
-    hide();
-    ui_.action_hide_tray_icon->setEnabled(false); // Disable hiding tray icon if window is hidden
-  }
-  else {
-    show();
-    ui_.action_hide_tray_icon->setEnabled(true);
-  }
+  setVisible(!hidden);
 }
 
 void MainWindow::ClearLibraryFilter() {
