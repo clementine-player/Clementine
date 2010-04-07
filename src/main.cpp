@@ -25,6 +25,7 @@
 #include "mainwindow.h"
 #include "player.h"
 #include "song.h"
+#include "equalizer.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -75,6 +76,8 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<Engine::State>("Engine::State");
+  qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
+  qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
 
 
   lastfm::ws::ApiKey = LastFMService::kApiKey;
