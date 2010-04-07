@@ -13,6 +13,7 @@ set(CLEMENTINE-SOURCES
     playlistitem.cpp
     engines/enginebase.cpp
     engines/gstengine.cpp
+    engines/gstequalizer.cpp
     analyzers/baranalyzer.cpp
     analyzers/analyzerbase.cpp
     fht.cpp
@@ -68,6 +69,8 @@ set(CLEMENTINE-SOURCES
     osdpretty.cpp
     playlistdelegates.cpp
     groupbydialog.cpp
+    equalizer.cpp
+    equalizerslider.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -128,6 +131,8 @@ set(CLEMENTINE-MOC-HEADERS
     osdpretty.h
     playlistdelegates.h
     groupbydialog.h
+    equalizer.h
+    equalizerslider.h
 )
 
 # UI files
@@ -149,6 +154,8 @@ set(CLEMENTINE-UI
     playlistsequence.ui
     osdpretty.ui
     groupbydialog.ui
+    equalizer.ui
+    equalizerslider.ui
 )
 
 # Resource files
@@ -296,6 +303,7 @@ target_link_libraries(clementine_lib
     ${GOBJECT_LIBRARIES}
     ${GLIB_LIBRARIES}
     ${GSTREAMER_LIBRARIES}
+    ${GSTREAMER_BASE_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${QT_LIBRARIES}
 )

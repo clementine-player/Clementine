@@ -21,8 +21,8 @@
 
 #define DEBUG_PREFIX "Gst-Engine"
 
-#include "enginebase.h"
 #include "gstengine.h"
+#include "gstequalizer.h"
 
 #include <math.h>
 #include <unistd.h>
@@ -536,8 +536,7 @@ bool GstEngine::load(const QUrl& url, bool stream) {
 
   setVolume(m_volume);
   setEqualizerEnabled(equalizer_enabled_);
-  if (equalizer_enabled_)
-    setEqualizerParameters(equalizer_preamp_, equalizer_gains_);
+  setEqualizerParameters(equalizer_preamp_, equalizer_gains_);
   return true;
 }
 
@@ -602,33 +601,31 @@ void GstEngine::seek( uint ms ) {
   gst_element_get_state(gst_pipeline_, NULL, NULL, 100*GST_MSECOND);
 }
 
-void GstEngine::setEqualizerEnabled( bool enabled ) {
+void GstEngine::setEqualizerEnabled(bool enabled) {
   equalizer_enabled_= enabled;
 
   RETURN_IF_PIPELINE_EMPTY;
 
-  //g_object_set( G_OBJECT( m_gst_equalizer ), "active", enabled, NULL );
+  g_object_set(G_OBJECT(gst_equalizer_), "active", enabled, NULL);
 }
 
 
-void GstEngine::setEqualizerParameters( int preamp, const QList<int>& bandGains ) {
+void GstEngine::setEqualizerParameters( int preamp, const QList<int>& band_gains ) {
   equalizer_preamp_ = preamp;
-  equalizer_gains_ = bandGains;
+  equalizer_gains_ = band_gains;
 
   RETURN_IF_PIPELINE_EMPTY;
 
-  // BEGIN Preamp
-  //g_object_set( G_OBJECT( m_gst_equalizer ) , "preamp", ( preamp + 100 ) / 2 , NULL );
-  // END
+  // Preamp
+  g_object_set(G_OBJECT(gst_equalizer_), "preamp", ( preamp + 100 ) / 2, NULL);
 
-  // BEGIN Gains
+  // Gains
   vector<int> gains_temp;
-  gains_temp.resize( bandGains.count() );
-  for ( int i = 0; i < bandGains.count(); i++ )
-    gains_temp[i] = ( bandGains.at( i ) + 100 ) / 2;
+  gains_temp.resize( band_gains.count() );
+  for ( int i = 0; i < band_gains.count(); i++ )
+    gains_temp[i] = band_gains.at( i ) + 100;
 
-  //g_object_set( G_OBJECT( m_gst_equalizer ), "gain", &gainsTemp, NULL );
-  // END
+  g_object_set(G_OBJECT(gst_equalizer_), "gain", &gains_temp, NULL);
 }
 
 void GstEngine::setVolumeSW( uint percent ) {
@@ -763,8 +760,9 @@ bool GstEngine::CreatePipeline() {
     return false;
   }
 
-  /*m_gst_equalizer = GST_ELEMENT( gst_equalizer_new() );
-    gst_bin_add( GST_BIN( gst_audiobin_ ), m_gst_equalizer );*/
+  gst_equalizer_ = GST_ELEMENT(gst_equalizer_new());
+  gst_bin_add(GST_BIN(gst_audiobin_), gst_equalizer_);
+
   if ( !( gst_audioconvert_ = CreateElement( "audioconvert", gst_audiobin_ ) ) ) { return false; }
   if ( !( gst_identity_ = CreateElement( "identity", gst_audiobin_ ) ) ) { return false; }
   if ( !( gst_volume_ = CreateElement( "volume", gst_audiobin_ ) ) ) { return false; }
@@ -787,12 +785,12 @@ bool GstEngine::CreatePipeline() {
       "width", G_TYPE_INT, 16,
       "signed", G_TYPE_BOOLEAN, true,
       NULL);
-  gst_element_link_filtered(gst_audioconvert_, gst_identity_, caps);
+  gst_element_link_filtered(gst_audioconvert_, gst_equalizer_, caps);
   gst_caps_unref(caps);
 
   /* link elements */
-  gst_element_link_many( gst_identity_, gst_volume_, gst_audioscale_,
-                         gst_audiosink_, NULL );
+  gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
+                         gst_audioscale_, gst_audiosink_, NULL );
 
   gst_bin_add( GST_BIN(gst_pipeline_), gst_audiobin_);
   //gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), bus_cb, NULL);

@@ -31,11 +31,13 @@ if(WIN32)
   find_path(LIBXML_INCLUDE_DIRS libxml/parser.h
     PATH_SUFFIXES libxml libxml2)
   find_library(GSTREAMER_LIBRARIES gstreamer-0.10)
+  find_library(GSTREAMER_BASE_LIBRARIES gstbase-0.10)
   find_library(GLIB_LIBRARIES glib-2.0)
   find_library(GOBJECT_LIBRARIES gobject-2.0)
 else(WIN32)
   pkg_check_modules(TAGLIB taglib)
   pkg_check_modules(GSTREAMER gstreamer-0.10)
+  pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
 
   if (TAGLIB_VERSION VERSION_LESS 1.6)
     message(FATAL_ERROR "Taglib version 1.6 or greater is required")

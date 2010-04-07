@@ -81,6 +81,7 @@ int main(int argc, char *argv[]) {
   lastfm::ws::SharedSecret = LastFMService::kSecret;
 
   QtSingleApplication a(argc, argv);
+  a.setQuitOnLastWindowClosed(false);
 
   if (a.isRunning()) {
     qDebug() << "Clementine is already running - activating existing window";

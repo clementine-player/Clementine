@@ -169,7 +169,7 @@ class GstEngine : public Engine::Base {
   GstElement* gst_audiobin_;
 
   GstElement* gst_audioconvert_;
-  //GstElement* gst_equalizer_;
+  GstElement* gst_equalizer_;
   GstElement* gst_identity_;
   GstElement* gst_volume_;
   GstElement* gst_audioscale_;

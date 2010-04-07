@@ -41,6 +41,7 @@ class AlbumCoverManager;
 class PlaylistSequence;
 class GlobalShortcuts;
 class GroupByDialog;
+class Equalizer;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -141,6 +142,7 @@ class MainWindow : public QMainWindow {
   AddStreamDialog* add_stream_dialog_;
   AlbumCoverManager* cover_manager_;
   GroupByDialog* group_by_dialog_;
+  Equalizer* equalizer_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

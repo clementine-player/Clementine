@@ -204,20 +204,6 @@ namespace Engine
           */
         void setXFadeNextTrack( bool enable ) { m_xfadeNextTrack = enable; }
 
-        /** Set whether equalizer is enabled
-          * You don't need to cache the parameters, setEqualizerParameters is called straight after this
-          * function, _always_.
-          */
-        virtual void setEqualizerEnabled( bool ) {};
-
-        /** Set equalizer parameters, all in range -100..100, where 0 = no adjustment
-          * @param preamp the preamplification value
-          * @param bandGains a list of 10 integers, ascending in frequency, the exact frequencies you amplify
-          *                  are not too-important at this time
-          */
-        virtual void setEqualizerParameters( int /*preamp*/, const QList<int> &/*bandGains*/ ) {};
-
-
         /** Tries to retrieve metadata for the given url (called only if url
          * is not in the collection).  The intended usage is to retrieve
          * information for AudiCD tracks when they are added to the playlist
@@ -259,6 +245,19 @@ namespace Engine
 
     public slots:
         virtual void ReloadSettings() {}
+
+        /** Set whether equalizer is enabled
+          * You don't need to cache the parameters, setEqualizerParameters is called straight after this
+          * function, _always_.
+          */
+        virtual void setEqualizerEnabled( bool ) {};
+
+        /** Set equalizer parameters, all in range -100..100, where 0 = no adjustment
+          * @param preamp the preamplification value
+          * @param bandGains a list of 10 integers, ascending in frequency, the exact frequencies you amplify
+          *                  are not too-important at this time
+          */
+        virtual void setEqualizerParameters( int /*preamp*/, const QList<int> &/*bandGains*/ ) {};
 
     protected:
         Base();

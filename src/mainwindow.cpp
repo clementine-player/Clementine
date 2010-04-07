@@ -39,6 +39,7 @@
 #include "playlistsequence.h"
 #include "groupbydialog.h"
 #include "engines/gstengine.h"
+#include "equalizer.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -81,6 +82,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     add_stream_dialog_(new AddStreamDialog(this)),
     cover_manager_(new AlbumCoverManager(network, this)),
     group_by_dialog_(new GroupByDialog(this)),
+    equalizer_(new Equalizer(this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))
@@ -149,6 +151,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
   connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_, SLOT(show()));
+  connect(ui_.action_equalizer, SIGNAL(triggered()), equalizer_, SLOT(show()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -338,6 +341,13 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());
+
+  // Equalizer
+  connect(equalizer_, SIGNAL(ParametersChanged(int,QList<int>)),
+          player_->GetEngine(), SLOT(setEqualizerParameters(int,QList<int>)));
+  connect(equalizer_, SIGNAL(EnabledChanged(bool)),
+          player_->GetEngine(), SLOT(setEqualizerEnabled(bool)));
+  equalizer_->ReloadSettings();
 
   // Statusbar widgets
   playlist_->set_sequence(playlist_sequence_);
@@ -536,9 +546,8 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   if (tray_icon_->isVisible()) {
     event->ignore();
     SetHiddenInTray(true);
-  }
-  else {
-    settings_.setValue("showtray", tray_icon_->isVisible());
+  } else {
+    QApplication::quit();
   }
 }
 
