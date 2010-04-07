@@ -235,7 +235,7 @@ set (XGETTEXT_OPTIONS --qt --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pa
 set (CLEMENTINE-POT "${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot")
 add_custom_target(pot ALL
   COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} 
-      ${XGETTEXT_OPTIONS} -C --omit-header
+      ${XGETTEXT_OPTIONS} -C --omit-header --no-location
       --directory=${CMAKE_CURRENT_SOURCE_DIR}
       --output=${CMAKE_CURRENT_BINARY_DIR}/translations.pot
       ${FILES_TO_TRANSLATE_REL}
@@ -246,7 +246,8 @@ add_custom_target(pot ALL
 foreach (_lang ${CLEMENTINE-LANGUAGES})
   set(_po ${CMAKE_CURRENT_SOURCE_DIR}/translations/${_lang}.po)
   add_custom_target("po_${_lang}" ALL
-    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U ${_po} ${CLEMENTINE-POT}
+    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location
+        ${_po} ${CLEMENTINE-POT}
     DEPENDS ${_po})
   add_dependencies("po_${_lang}" pot)
 endforeach (_lang)
