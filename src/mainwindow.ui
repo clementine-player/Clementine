@@ -14,7 +14,7 @@
    <string>Clementine</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -206,12 +206,6 @@
        </item>
        <item>
         <widget class="Line" name="line">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>30</height>
-          </size>
-         </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -304,7 +298,7 @@
        <item>
         <widget class="QToolButton" name="library_filter_clear">
          <property name="icon">
-          <iconset>
+          <iconset resource="../data/data.qrc">
            <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
          </property>
          <property name="iconSize">
@@ -328,7 +322,7 @@
        <item>
         <widget class="QToolButton" name="library_options">
          <property name="icon">
-          <iconset>
+          <iconset resource="../data/data.qrc">
            <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
          </property>
          <property name="iconSize">
@@ -507,7 +501,7 @@
   </widget>
   <action name="action_previous_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-skip-backward.png</normaloff>:/media-skip-backward.png</iconset>
    </property>
    <property name="text">
@@ -516,7 +510,7 @@
   </action>
   <action name="action_play_pause">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-start.png</normaloff>:/media-playback-start.png</iconset>
    </property>
    <property name="text">
@@ -528,7 +522,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -537,7 +531,7 @@
   </action>
   <action name="action_next_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-skip-forward.png</normaloff>:/media-skip-forward.png</iconset>
    </property>
    <property name="text">
@@ -546,7 +540,7 @@
   </action>
   <action name="action_quit">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/exit.png</normaloff>:/exit.png</iconset>
    </property>
    <property name="text">
@@ -558,7 +552,7 @@
   </action>
   <action name="action_stop_after_this_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -624,7 +618,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
    </property>
    <property name="text">
@@ -636,7 +630,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
    </property>
    <property name="text">
@@ -645,7 +639,7 @@
   </action>
   <action name="action_clear_playlist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/clear-list.png</normaloff>:/clear-list.png</iconset>
    </property>
    <property name="text">
@@ -657,7 +651,7 @@
   </action>
   <action name="action_edit_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/edit-track.png</normaloff>:/edit-track.png</iconset>
    </property>
    <property name="text">
@@ -681,7 +675,7 @@
   </action>
   <action name="action_configure">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
    </property>
    <property name="text">
@@ -695,7 +689,7 @@
   </action>
   <action name="action_shuffle">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/shuffle.png</normaloff>:/shuffle.png</iconset>
    </property>
    <property name="text">
@@ -704,7 +698,7 @@
   </action>
   <action name="action_add_media">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -713,7 +707,7 @@
   </action>
   <action name="action_add_stream">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_stream.png</normaloff>:/open_stream.png</iconset>
    </property>
    <property name="text">
@@ -722,7 +716,7 @@
   </action>
   <action name="action_open_media">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -731,7 +725,7 @@
   </action>
   <action name="action_cover_manager">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/download.png</normaloff>:/download.png</iconset>
    </property>
    <property name="text">
@@ -750,7 +744,7 @@
   </action>
   <action name="action_remove_from_playlist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
    </property>
    <property name="text">
@@ -854,6 +848,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections/>
 </ui>
