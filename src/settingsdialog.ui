@@ -51,7 +51,7 @@
        <string>Playback</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/media-playback-start-32.png</normaloff>:/media-playback-start-32.png</iconset>
       </property>
      </item>
@@ -60,7 +60,7 @@
        <string>Behaviour</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
       </property>
      </item>
@@ -69,7 +69,7 @@
        <string>Notifications</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/lightbulb.png</normaloff>:/lightbulb.png</iconset>
       </property>
      </item>
@@ -78,7 +78,7 @@
        <string>Music Library</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/library.png</normaloff>:/library.png</iconset>
       </property>
      </item>
@@ -87,7 +87,7 @@
        <string>Last.fm</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
@@ -108,7 +108,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -232,6 +232,9 @@
        </widget>
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout_9">
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QCheckBox" name="b_show_tray_icon_">
            <property name="text">
@@ -292,6 +295,9 @@
        </widget>
        <widget class="QWidget" name="notifications_page">
         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="margin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -511,15 +517,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LibraryConfig</class>
-   <extends>QWidget</extends>
-   <header>libraryconfig.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>LastFMConfig</class>
    <extends>QWidget</extends>
    <header>lastfmconfig.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LibraryConfig</class>
+   <extends>QWidget</extends>
+   <header>libraryconfig.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -540,7 +546,9 @@
   <tabstop>notifications_fg_choose</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>list</sender>
