@@ -733,11 +733,19 @@
    </property>
   </action>
   <action name="action_shuffle_mode">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/media-playlist-shuffle.png</normaloff>:/media-playlist-shuffle.png</iconset>
+   </property>
    <property name="text">
     <string>Shuffle mode</string>
    </property>
   </action>
   <action name="action_repeat_mode">
+   <property name="icon">
+    <iconset resource="../data/data.qrc">
+     <normaloff>:/media-playlist-repeat.png</normaloff>:/media-playlist-repeat.png</iconset>
+   </property>
    <property name="text">
     <string>Repeat mode</string>
    </property>
