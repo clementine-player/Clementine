@@ -122,7 +122,7 @@ class GstEngine : public Engine::Base {
 
   // CALLBACKS:
   /** Bus message */
-  //static GstBusSyncReply bus_cb( GstBus*, GstMessage*, gpointer );
+  static GstBusSyncReply BusCallbackSync( GstBus*, GstMessage*, gpointer );
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
   /** Called when decodebin has generated a new pad */
   static void NewPadCallback(GstElement*, GstPad*, gboolean, gpointer);

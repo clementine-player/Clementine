@@ -103,10 +103,25 @@ gboolean GstEngine::BusCallback(GstBus*, GstMessage* msg, gpointer) {
       }
       break;
     }
+
     default:
       break;
   }
   return GST_BUS_DROP;
+}
+
+GstBusSyncReply GstEngine::BusCallbackSync(GstBus*, GstMessage* msg, gpointer) {
+  switch (GST_MESSAGE_TYPE(msg)) {
+    case GST_MESSAGE_EOS:
+      QMetaObject::invokeMethod(instance(), "EndOfStreamReached",
+                                Qt::QueuedConnection);
+      break;
+
+    default:
+      break;
+  }
+
+  return GST_BUS_PASS;
 }
 
 
@@ -133,6 +148,7 @@ void GstEngine::HandoffCallback(GstPad*, GstBuffer* buf, gpointer arg) {
 }
 
 void GstEngine::EventCallback(GstPad*, GstEvent* event, gpointer) {
+  
   switch ( static_cast<int>(event->type) )
   {
     case GST_EVENT_EOS:
@@ -793,7 +809,7 @@ bool GstEngine::CreatePipeline() {
                          gst_audioscale_, gst_audiosink_, NULL );
 
   gst_bin_add( GST_BIN(gst_pipeline_), gst_audiobin_);
-  //gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), bus_cb, NULL);
+  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), BusCallbackSync, NULL);
   gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), BusCallback, NULL);
 
   pipeline_filled_ = true;
