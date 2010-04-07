@@ -50,6 +50,17 @@ class GstEngine : public Engine::Base {
   GstEngine();
   ~GstEngine();
 
+  struct PluginDetails {
+    QString name;
+    QString long_name;
+    QString author;
+    QString description;
+  };
+  typedef QList<PluginDetails> PluginDetailsList;
+
+  static const char* kSettingsGroup;
+  static const char* kAutoSink;
+
   bool init();
 
   bool canDecode(const QUrl& url);
@@ -64,6 +75,8 @@ class GstEngine : public Engine::Base {
   void gstStatusText(const QString& str) { emit statusText( str ); }
   void gstMetaData(Engine::SimpleMetaBundle &bundle) { emit metaData( bundle ); }
 
+  PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
+
  public slots:
   bool load(const QUrl&, bool stream);
   bool play(uint offset);
@@ -77,6 +90,8 @@ class GstEngine : public Engine::Base {
 
   /** Set equalizer preamp and gains, range -100..100. Gains are 10 values. */
   void setEqualizerParameters(int preamp, const QList<int>& bandGains);
+
+  void ReloadSettings();
 
  protected:
   void setVolumeSW(uint percent);
@@ -105,12 +120,6 @@ class GstEngine : public Engine::Base {
   static GstElement* CreateElement(
       const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
-  /**
-   * Fetches a list of available output sink plugins
-   * @return List of output sinks
-   */
-  QStringList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
-
   // CALLBACKS:
   /** Bus message */
   //static GstBusSyncReply bus_cb( GstBus*, GstMessage*, gpointer );
@@ -127,7 +136,7 @@ class GstEngine : public Engine::Base {
   static void HandoffCallback( GstPad*, GstBuffer*, gpointer );
 
   /** Get a list of available plugins from a specified Class */
-  QStringList GetPluginList(const QString& classname) const;
+  PluginDetailsList GetPluginList(const QString& classname) const;
 
   /** Construct the output pipeline */
   bool CreatePipeline();
@@ -147,6 +156,8 @@ class GstEngine : public Engine::Base {
   // Interval of main timer, handles the volume fading
   static const int kTimerInterval = 40; //msec
   static const int kGstStateTimeout = 10000000;
+
+  QString sink_;
 
   static GstEngine* sInstance;
 

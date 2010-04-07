@@ -257,6 +257,9 @@ namespace Engine
 
         static const char* kSettingsGroup;
 
+    public slots:
+        virtual void ReloadSettings() {}
+
     protected:
         Base();
 

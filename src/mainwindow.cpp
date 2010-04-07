@@ -38,6 +38,7 @@
 #include "xspfparser.h"
 #include "playlistsequence.h"
 #include "groupbydialog.h"
+#include "engines/gstengine.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -95,6 +96,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   // Start initialising the player
   player_->Init();
+
+  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine()))
+    settings_dialog_->SetGstEngine(engine);
 
   // Models
   library_sort_model_->setSourceModel(library_);
@@ -327,6 +331,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
   connect(settings_dialog_, SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
+  connect(settings_dialog_, SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
 
   // Add stream dialog
   connect(add_stream_dialog_, SIGNAL(accepted()), SLOT(AddStreamAccepted()));

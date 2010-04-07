@@ -32,6 +32,7 @@
 #include <QRegExp>
 #include <QFile>
 #include <QMessageBox>
+#include <QSettings>
 #include <QtDebug>
 
 #include <gst/gst.h>
@@ -42,7 +43,9 @@
 
 using std::vector;
 
-GstEngine* GstEngine::sInstance;
+GstEngine* GstEngine::sInstance = NULL;
+const char* GstEngine::kSettingsGroup = "GstEngine";
+const char* GstEngine::kAutoSink = "autoaudiosink";
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +64,7 @@ gboolean GstEngine::BusCallback(GstBus*, GstMessage* msg, gpointer) {
 
       instance()->gst_error_ = QString::fromAscii( error->message );
       instance()->gst_debug_ = QString::fromAscii( debugs );
-      QTimer::singleShot( 0, instance(), SLOT( handlePipelineError() ) );
+      QMetaObject::invokeMethod(instance(), "HandlePipelineError", Qt::QueuedConnection);
       break;
     }
 
@@ -176,6 +179,7 @@ GstEngine::GstEngine()
     can_decode_src_(NULL),
     can_decode_bin_(NULL)
 {
+  ReloadSettings();
 }
 
 GstEngine::~GstEngine() {
@@ -218,6 +222,13 @@ bool GstEngine::init() {
   gst_object_unref(dummy);
 
   return true;
+}
+
+void GstEngine::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  sink_ = s.value("sink", kAutoSink).toString();
 }
 
 
@@ -714,38 +725,41 @@ GstElement* GstEngine::CreateElement(
 }
 
 
-QStringList GstEngine::GetPluginList( const QString& classname ) const {
-  GList* features = NULL;
-  QString name;
-  QStringList results;
+GstEngine::PluginDetailsList
+    GstEngine::GetPluginList(const QString& classname) const {
+  PluginDetailsList ret;
 
   GstRegistry* registry = gst_registry_get_default();
-  features = gst_registry_get_feature_list(registry,GST_TYPE_ELEMENT_FACTORY);
-  while ( features ) {
-    GstElementFactory * factory = GST_ELEMENT_FACTORY ( features->data );
-    if ( g_strrstr ( factory->details.klass, classname.toAscii().constData() ) ) {
-      name = g_strdup ( GST_PLUGIN_FEATURE_NAME ( features->data ) );
-      if ( name != "autoaudiosink" )
-        results << name;
+  GList* features =
+      gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
+
+  while (features) {
+    GstElementFactory* factory = GST_ELEMENT_FACTORY(features->data);
+    if (QString(factory->details.klass).contains(classname)) {
+      PluginDetails details;
+      details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(features->data));
+      details.long_name = QString::fromUtf8(factory->details.longname);
+      details.description = QString::fromUtf8(factory->details.description);
+      details.author = QString::fromUtf8(factory->details.author);
+      ret << details;
     }
     features = g_list_next ( features );
   }
+
   gst_plugin_feature_list_free(features);
-  return results;
+  return ret;
 }
 
 
 bool GstEngine::CreatePipeline() {
   DestroyPipeline();
 
-  QString output = "autoaudiosink";
-
   gst_pipeline_ = gst_pipeline_new( "pipeline" );
   gst_audiobin_ = gst_bin_new( "audiobin" );
 
 
-  if ( !( gst_audiosink_ = CreateElement( output, gst_audiobin_ ) ) ) {
-    QTimer::singleShot( 0, this, SLOT( errorNoOutput() ) );
+  if ( !( gst_audiosink_ = CreateElement( sink_, gst_audiobin_ ) ) ) {
+    QMetaObject::invokeMethod(this, "ErrorNoOutput", Qt::QueuedConnection);
     return false;
   }
 

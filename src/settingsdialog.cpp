@@ -19,6 +19,7 @@
 #include "osd.h"
 #include "osdpretty.h"
 #include "mainwindow.h"
+#include "engines/gstengine.h"
 
 #include <QSettings>
 #include <QColorDialog>
@@ -113,6 +114,10 @@ void SettingsDialog::accept() {
   s.setValue("FadeoutDuration", ui_.fadeout_duration->value());
   s.endGroup();
 
+  s.beginGroup(GstEngine::kSettingsGroup);
+  s.setValue("sink", ui_.gst_plugin->itemData(ui_.gst_plugin->currentIndex()).toString());
+  s.endGroup();
+
   // Notifications
   OSD::Behaviour osd_behaviour;
   if      (ui_.notifications_none->isChecked())   osd_behaviour = OSD::Disabled;
@@ -166,6 +171,17 @@ void SettingsDialog::showEvent(QShowEvent*) {
   else
     ui_.no_fadeout->setChecked(true);
   ui_.fadeout_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
+  s.endGroup();
+
+  s.beginGroup(GstEngine::kSettingsGroup);
+  QString sink = s.value("sink", GstEngine::kAutoSink).toString();
+  ui_.gst_plugin->setCurrentIndex(0);
+  for (int i=0 ; i<ui_.gst_plugin->count() ; ++i) {
+    if (ui_.gst_plugin->itemData(i).toString() == sink) {
+      ui_.gst_plugin->setCurrentIndex(i);
+      break;
+    }
+  }
   s.endGroup();
 
   // Notifications
@@ -281,4 +297,17 @@ void SettingsDialog::ShowTrayIconToggled(bool on) {
   ui_.b_always_hide_->setEnabled(on);
   if (!on && ui_.b_always_hide_->isChecked())
     ui_.b_remember_->setChecked(true);
+}
+
+void SettingsDialog::SetGstEngine(const GstEngine *engine) {
+  GstEngine::PluginDetailsList list = engine->GetOutputsList();
+
+  ui_.gst_plugin->setItemData(0, GstEngine::kAutoSink);
+  foreach (const GstEngine::PluginDetails& details, list) {
+    if (details.name == "autoaudiosink")
+      continue;
+
+    ui_.gst_plugin->addItem(details.long_name, details.name);
+  }
+  ui_.gst_group->setEnabled(true);
 }

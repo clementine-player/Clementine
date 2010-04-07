@@ -23,6 +23,7 @@
 
 class LibraryDirectoryModel;
 class OSDPretty;
+class GstEngine;
 
 class SettingsDialog : public QDialog {
   Q_OBJECT
@@ -32,6 +33,7 @@ class SettingsDialog : public QDialog {
   ~SettingsDialog();
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
+  void SetGstEngine(const GstEngine* engine);
 
   // QDialog
   void accept();

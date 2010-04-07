@@ -9,764 +9,569 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "X-Language: es_ES\n"
 
-#: mainwindow.cpp:273
 msgid "Configure library..."
 msgstr "Configurar colección..."
 
-#: mainwindow.cpp:278 mainwindow.cpp:416 mainwindow.cpp:432 mainwindow.cpp:608
-#: ../bin/src/ui_mainwindow.h:574
 msgid "Play"
 msgstr "Reproducir"
 
-#: mainwindow.cpp:280 ../bin/src/ui_mainwindow.h:579
 msgid "Stop after this track"
 msgstr "Detener reproducción al finalizar la pista"
 
-#: mainwindow.cpp:443 mainwindow.cpp:605
 msgid "Pause"
 msgstr "Pausa"
 
-#: mainwindow.cpp:657
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Escribir \"%2\" en la etiqueta \"%1\"..."
 
-#: mainwindow.cpp:659
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editar etiqueta \"%1\"..."
 
-#: library.cpp:210
 msgid "Various Artists"
 msgstr "Varios Artistas"
 
-#: library.cpp:680 playlistdelegates.cpp:138 playlistdelegates.cpp:157
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: playlist.cpp:536 ../bin/src/ui_edittagdialog.h:210
-#: ../bin/src/ui_about.h:148
 msgid "Title"
 msgstr "Título"
 
-#: playlist.cpp:537 ../bin/src/ui_lastfmstationdialog.h:93
-#: ../bin/src/ui_edittagdialog.h:212 ../bin/src/ui_groupbydialog.h:127
-#: ../bin/src/ui_groupbydialog.h:138 ../bin/src/ui_groupbydialog.h:149
 msgid "Artist"
 msgstr "Artista"
 
-#: playlist.cpp:538 ../bin/src/ui_edittagdialog.h:211
-#: ../bin/src/ui_groupbydialog.h:126 ../bin/src/ui_groupbydialog.h:137
-#: ../bin/src/ui_groupbydialog.h:148
 msgid "Album"
 msgstr "Álbum"
 
-#: playlist.cpp:539
 msgid "Length"
 msgstr "Duración"
 
-#: playlist.cpp:540 ../bin/src/ui_edittagdialog.h:214
 msgid "Track"
 msgstr "Pista"
 
-#: playlist.cpp:541
 msgid "Disc"
 msgstr "Disco"
 
-#: playlist.cpp:542 ../bin/src/ui_edittagdialog.h:215
-#: ../bin/src/ui_groupbydialog.h:130 ../bin/src/ui_groupbydialog.h:141
-#: ../bin/src/ui_groupbydialog.h:152
 msgid "Year"
 msgstr "Año"
 
-#: playlist.cpp:543 ../bin/src/ui_edittagdialog.h:213
-#: ../bin/src/ui_groupbydialog.h:129 ../bin/src/ui_groupbydialog.h:140
-#: ../bin/src/ui_groupbydialog.h:151
 msgid "Genre"
 msgstr "Género"
 
-#: playlist.cpp:544
 msgid "Album artist"
 msgstr "Álbum Artista"
 
-#: playlist.cpp:545 ../bin/src/ui_groupbydialog.h:128
-#: ../bin/src/ui_groupbydialog.h:139 ../bin/src/ui_groupbydialog.h:150
 msgid "Composer"
 msgstr "Compositor"
 
-#: playlist.cpp:547
 msgid "BPM"
 msgstr "BPM"
 
-#: playlist.cpp:548
 msgid "Bit rate"
 msgstr "Tasa de bits"
 
-#: playlist.cpp:549
 msgid "Sample rate"
 msgstr "Tasa de muestreo"
 
-#: playlist.cpp:550
 msgid "File name"
 msgstr "Nombre del archivo"
 
-#: playlist.cpp:551
 msgid "File name (without path)"
 msgstr "Nombre del archivo (sin ruta)"
 
-#: playlist.cpp:552
 msgid "File size"
 msgstr "Tamaño del archivo"
 
-#: playlist.cpp:553
 msgid "File type"
 msgstr "Tipo"
 
-#: playlist.cpp:554
 msgid "Date modified"
 msgstr "Fecha modificado"
 
-#: playlist.cpp:555
 msgid "Date created"
 msgstr "Fecha creado"
 
-#: analyzers/baranalyzer.cpp:19
 msgid "Bar analyzer"
 msgstr "Barras"
 
-#: analyzers/blockanalyzer.cpp:24
 msgid "Block analyzer"
 msgstr "Bloques"
 
-#: analyzers/analyzercontainer.cpp:53
 msgid "No analyzer"
 msgstr "Sin Analizador"
 
-#: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
 msgstr "Boom"
 
-#: analyzers/sonogram.cpp:18
 msgid "Sonogram"
 msgstr "Sonograma"
 
-#: analyzers/turbine.cpp:15
 msgid "Turbine"
 msgstr "Turbina"
 
-#: libraryview.cpp:89 fileviewlist.cpp:28 lastfmservice.cpp:65
-#: somafmservice.cpp:40 savedradio.cpp:30
 msgid "Add to playlist"
 msgstr "Añadir a la lista de reproducción"
 
-#: libraryview.cpp:92
 msgid "Show in various artists"
 msgstr "Mostrar en Varios artistas"
 
-#: libraryview.cpp:94
 msgid "Don't show in various artists"
 msgstr "No mostrar en Varios artistas"
 
-#: libraryview.cpp:151
 msgid "Your library is empty!"
 msgstr "Tu colección está vacia!"
 
-#: libraryview.cpp:157
 msgid "Click here to add some music"
 msgstr "Click aqui para añadir música"
 
-#: libraryconfig.cpp:57
 msgid "Add directory..."
 msgstr "Añadir directorio..."
 
-#: fileviewlist.cpp:31
 msgid "Copy to library..."
 msgstr "Copiar a la colección..."
 
-#: fileviewlist.cpp:33
 msgid "Move to library..."
 msgstr "Mover a la colección..."
 
-#: playlistheader.cpp:30
 msgid "Hide..."
 msgstr "Ocultar..."
 
-#: playlistheader.cpp:31
 msgid "Show section"
 msgstr "Mostrar columna"
 
-#: playlistheader.cpp:47
 #, qt-format
 msgid "Hide %1"
 msgstr "Ocultar %1"
 
-#: lastfmservice.cpp:67 savedradio.cpp:31
 msgid "Remove"
 msgstr "Quitar"
 
-#: lastfmservice.cpp:70
 msgid "Play artist radio..."
 msgstr "Reproducir radio del artista..."
 
-#: lastfmservice.cpp:72
 msgid "Play tag radio..."
 msgstr "Reproducir radio de la etiqueta..."
 
-#: lastfmservice.cpp:74
 msgid "Configure Last.fm..."
 msgstr "Configurar Last.fm..."
 
-#: lastfmservice.cpp:116
 msgid "My Recommendations"
 msgstr "Mis Recomendaciones"
 
-#: lastfmservice.cpp:117
 msgid "My Radio Station"
 msgstr "Mis Estaciones de Radio"
 
-#: lastfmservice.cpp:118
 msgid "My Loved Tracks"
 msgstr "Mis Pistas Favoritas"
 
-#: lastfmservice.cpp:119
 msgid "My Neighbourhood"
 msgstr "Mi barrio (vecinos)"
 
-#: lastfmservice.cpp:122
 msgid "Artist radio"
 msgstr "Radio del artista"
 
-#: lastfmservice.cpp:126
 msgid "Tag radio"
 msgstr "Radio de la etiqueta"
 
-#: lastfmservice.cpp:133
 msgid "Friends"
 msgstr "Amigos"
 
-#: lastfmservice.cpp:136
 msgid "Neighbours"
 msgstr "Vecinos"
 
-#: lastfmservice.cpp:156
 #, qt-format
 msgid "%1's Radio Station"
 msgstr "Estaciones de radio de %1"
 
-#: lastfmservice.cpp:158 lastfmservice.cpp:260 lastfmservice.cpp:265
 #, qt-format
 msgid "%1's Loved Tracks"
 msgstr "Pistas favoritas de %1"
 
-#: lastfmservice.cpp:160
 #, qt-format
 msgid "%1's Neighborhood"
 msgstr "Vecinos de %1"
 
-#: lastfmservice.cpp:259
 #, qt-format
 msgid "%1's Recommended Radio"
 msgstr "Radio recomendada de %1"
 
-#: lastfmservice.cpp:261 lastfmservice.cpp:266
 #, qt-format
 msgid "%1's Neighbour Radio"
 msgstr "Radio de los vecinos de %1"
 
-#: lastfmservice.cpp:262 lastfmservice.cpp:264
 #, qt-format
 msgid "%1's Library"
 msgstr "Colección de %1"
 
-#: lastfmservice.cpp:267
 #, qt-format
 msgid "Similar Artists to %1"
 msgstr "Artistas similares a %1"
 
-#: lastfmservice.cpp:268
 #, qt-format
 msgid "Tag Radio: %1"
 msgstr "Radio de tag: %1"
 
-#: lastfmservice.cpp:340
 msgid "Invalid service"
 msgstr "Servicio invalido"
 
-#: lastfmservice.cpp:341
 msgid "Invalid method"
 msgstr "Metodo invalido"
 
-#: lastfmservice.cpp:342 lastfmconfig.cpp:56
 msgid "Authentication failed"
 msgstr "Autenticación fallida"
 
-#: lastfmservice.cpp:343
 msgid "Invalid format"
 msgstr "Formato invalido"
 
-#: lastfmservice.cpp:344
 msgid "Invalid parameters"
 msgstr "Parametros invalidos"
 
-#: lastfmservice.cpp:345
 msgid "Invalid resource specified"
 msgstr "Recurso especificado invalido"
 
-#: lastfmservice.cpp:346
 msgid "Operation failed"
 msgstr "Falló la operación"
 
-#: lastfmservice.cpp:347
 msgid "Invalid session key"
 msgstr "Clave de session invalida"
 
-#: lastfmservice.cpp:348
 msgid "Invalid API key"
 msgstr "Clave API invalida"
 
-#: lastfmservice.cpp:349
 msgid "Service offline"
 msgstr "Servicio fuera de linea"
 
-#: lastfmservice.cpp:350
 msgid "This stream is for paid subscribers only"
 msgstr "Este flujo es solo para suscriptores pagos"
 
-#: lastfmservice.cpp:352
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm esta actualmente ocupado, por favor intente en unos minutos"
 
-#: lastfmservice.cpp:354
 msgid "Not enough content"
 msgstr "No hay suficiente contenido"
 
-#: lastfmservice.cpp:355
 msgid "Not enough members"
 msgstr "No hay suficientes miembros"
 
-#: lastfmservice.cpp:356
 msgid "Not enough fans"
 msgstr "No hay suficientes fans"
 
-#: lastfmservice.cpp:357
 msgid "Not enough neighbours"
 msgstr "No hay suficientes vecinos"
 
-#: lastfmservice.cpp:359
 msgid "Malformed response"
 msgstr ""
 
-#: lastfmservice.cpp:363
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: lastfmconfig.cpp:56
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Sus credenciales de Last.fm fueron incorrectas"
 
-#: radioplaylistitem.cpp:57
 msgid "Radio service couldn't be loaded :-("
 msgstr "Servicio de radio no pudo ser cargado :-("
 
-#: osd.cpp:69
 #, qt-format
 msgid "disc %1"
 msgstr "Disco %1"
 
-#: osd.cpp:71
 #, qt-format
 msgid "track %1"
 msgstr "Pista %1"
 
-#: osd.cpp:78
 msgid "Paused"
 msgstr "Detenido"
 
-#: osd.cpp:82
 msgid "Playlist finished"
 msgstr "Lista de reproducción finalizada"
 
-#: osd.cpp:89
 #, qt-format
 msgid "Volume %1%"
 msgstr "Volumen %1%"
 
-#: edittagdialog.cpp:28
 msgid "[click to edit]"
 msgstr "[click para editar]"
 
-#: edittagdialog.cpp:90
 #, fuzzy, c-format
 msgid "Editing %n tracks"
 msgstr "Editando %n pista"
 
-#: multiloadingindicator.cpp:61
 msgid "Loading audio engine"
 msgstr "Cargando motor de sonido"
 
-#: multiloadingindicator.cpp:62
 msgid "Updating library"
 msgstr "Actualizando colección"
 
-#: multiloadingindicator.cpp:63
 msgid "Getting channels"
 msgstr "Obteniendo canales"
 
-#: multiloadingindicator.cpp:64
 msgid "Loading stream"
 msgstr "Cargando flujo"
 
-#: multiloadingindicator.cpp:65
 msgid "Loading Last.fm radio"
 msgstr "Cargando radio de Last.fm"
 
-#: somafmservice.cpp:42
 msgid "Open somafm.com in browser"
 msgstr "Abrir somafm.com en el navegador"
 
-#: somafmservice.cpp:43
 msgid "Refresh channels"
 msgstr "Actualizar canales"
 
-#: settingsdialog.cpp:35
 msgid "OSD Preview"
 msgstr "OSD Previsualización"
 
-#: settingsdialog.cpp:35
 msgid "Drag to reposition"
 msgstr "Arrastre para recolocar"
 
-#: about.cpp:27
 #, qt-format
 msgid "About %1"
 msgstr "Sobre %1"
 
-#: about.cpp:29
 #, qt-format
 msgid "Version %1"
 msgstr "Versión %1"
 
-#: savedradio.cpp:33
 msgid "Add another stream..."
 msgstr "Añadir un flujo de radio..."
 
-#: savedradio.cpp:43
 msgid "Your radio streams"
 msgstr "Tus flujos de radio"
 
-#: albumcovermanager.cpp:66
 msgid "All albums"
 msgstr "Todos los álbumes"
 
-#: albumcovermanager.cpp:67
 msgid "Albums with covers"
 msgstr "Álbumes con carátula"
 
-#: albumcovermanager.cpp:68
 msgid "Albums without covers"
 msgstr "Álbumes sin carátula"
 
-#: albumcovermanager.cpp:161
 msgid "All artists"
 msgstr "Todos los artistas"
 
-#: albumcovermanager.cpp:162
 msgid "Various artists"
 msgstr "Varios artistas"
 
-#: albumcovermanager.cpp:399
 msgid "Choose manual cover"
 msgstr "Establecer carátula personalizada"
 
-#: albumcovermanager.cpp:400
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
 "Imagenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
 "tiff)"
 
-#: albumcovermanager.cpp:401
 msgid "All files (*)"
 msgstr "Todos los archivos (*)"
 
-#: playlistdelegates.cpp:141
 msgid "ASF"
 msgstr ""
 
-#: playlistdelegates.cpp:142
 msgid "FLAC"
 msgstr ""
 
-#: playlistdelegates.cpp:143
 msgid "MP4"
 msgstr ""
 
-#: playlistdelegates.cpp:144
 msgid "MPC"
 msgstr ""
 
-#: playlistdelegates.cpp:145
 msgid "MP3"
 msgstr ""
 
-#: playlistdelegates.cpp:146
 msgid "Ogg FLAC"
 msgstr ""
 
-#: playlistdelegates.cpp:147
 msgid "Ogg Speex"
 msgstr ""
 
-#: playlistdelegates.cpp:148
 msgid "Ogg Vorbis"
 msgstr ""
 
-#: playlistdelegates.cpp:149
 msgid "AIFF"
 msgstr ""
 
-#: playlistdelegates.cpp:150
 msgid "WAV"
 msgstr ""
 
-#: playlistdelegates.cpp:151
 msgid "TrueAudio"
 msgstr ""
 
-#: playlistdelegates.cpp:153
 msgid "Stream"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:572
 msgid "Clementine"
 msgstr "Clementine"
 
-#: ../bin/src/ui_mainwindow.h:573
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: ../bin/src/ui_mainwindow.h:575
 msgid "Stop"
 msgstr "Detener"
 
-#: ../bin/src/ui_mainwindow.h:576
 msgid "Next track"
 msgstr "Pista siguiente"
 
-#: ../bin/src/ui_mainwindow.h:577
 msgid "&Quit"
 msgstr "&Salir"
 
-#: ../bin/src/ui_mainwindow.h:578
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:580
 msgid "Entire collection"
 msgstr "Colección completa"
 
-#: ../bin/src/ui_mainwindow.h:581
 msgid "Added today"
 msgstr "Añadido hoy"
 
-#: ../bin/src/ui_mainwindow.h:582
 msgid "Added this week"
 msgstr "Añadido la última semana"
 
-#: ../bin/src/ui_mainwindow.h:583 ../bin/src/ui_mainwindow.h:585
 msgid "Added within three months"
 msgstr "Añadido los últimos tres meses"
 
-#: ../bin/src/ui_mainwindow.h:587
 msgid "Added this year"
 msgstr "Añadido el último año"
 
-#: ../bin/src/ui_mainwindow.h:588
 msgid "Added this month"
 msgstr "Añadido el último mes"
 
-#: ../bin/src/ui_mainwindow.h:589
 msgid "Love"
 msgstr "Me encanta"
 
-#: ../bin/src/ui_mainwindow.h:590
 msgid "Ban"
 msgstr "Prohibir"
 
-#: ../bin/src/ui_mainwindow.h:591 ../bin/src/ui_mainwindow.h:593
 msgid "Clear playlist"
 msgstr "Limpiar lista de reproducción"
 
-#: ../bin/src/ui_mainwindow.h:595
 msgid "Edit track information..."
 msgstr "Editar información de la pista..."
 
-#: ../bin/src/ui_mainwindow.h:596
 msgid "Renumber tracks in this order..."
 msgstr "Renumerar pistas en este orden..."
 
-#: ../bin/src/ui_mainwindow.h:597
 msgid "Set value for all selected tracks..."
 msgstr "Cambiar valor para todas las pistas seleccionadas..."
 
-#: ../bin/src/ui_mainwindow.h:598
 msgid "Edit tag..."
 msgstr "Editar etiqueta..."
 
-#: ../bin/src/ui_mainwindow.h:599
 msgid "Configure Clementine..."
 msgstr "Configurar Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:600
 msgid "About Clementine..."
 msgstr "Sobre Clementine..."
 
-#: ../bin/src/ui_mainwindow.h:601
 msgid "Shuffle playlist"
 msgstr "Barajar lista de reproducción"
 
-#: ../bin/src/ui_mainwindow.h:602
 msgid "Add media..."
 msgstr "Añadir medio..."
 
-#: ../bin/src/ui_mainwindow.h:603
 msgid "Add stream..."
 msgstr "Añadir flujo..."
 
-#: ../bin/src/ui_mainwindow.h:604
 msgid "Open media..."
 msgstr "Reproducir medio..."
 
-#: ../bin/src/ui_mainwindow.h:605 ../bin/src/ui_albumcovermanager.h:161
 msgid "Cover Manager"
 msgstr "Gestor de carátulas"
 
-#: ../bin/src/ui_mainwindow.h:606
 msgid "Shuffle mode"
 msgstr "Modo Aleatorio"
 
-#: ../bin/src/ui_mainwindow.h:607
 msgid "Repeat mode"
 msgstr "Modo Repetir"
 
-#: ../bin/src/ui_mainwindow.h:608
 msgid "Remove from playlist"
 msgstr "Eliminar de la lista de reproducción"
 
-#: ../bin/src/ui_mainwindow.h:609
 msgid "Group by Artist"
 msgstr "Agrupar por Artista"
 
-#: ../bin/src/ui_mainwindow.h:610
 msgid "Group by Artist/Album"
 msgstr "Agrupar por Artista/Álbum"
 
-#: ../bin/src/ui_mainwindow.h:611
 msgid "Group by Artist/Year - Album"
 msgstr "Agrupar por Ártista/Año - Álbum"
 
-#: ../bin/src/ui_mainwindow.h:612
 msgid "Group by Album"
 msgstr "Agrupar por Álbum"
 
-#: ../bin/src/ui_mainwindow.h:613
 msgid "Group by Genre/Album"
 msgstr "Agrupar por Género/Álbum"
 
-#: ../bin/src/ui_mainwindow.h:614
 msgid "Group by Genre/Artist/Album"
 msgstr "Agrupar por Género/Artista/Álbum"
 
-#: ../bin/src/ui_mainwindow.h:615
 msgid "Advanced grouping..."
 msgstr "Agrupamiento avanzado..."
 
-#: ../bin/src/ui_mainwindow.h:616
 msgid "Library"
 msgstr "Colección"
 
-#: ../bin/src/ui_mainwindow.h:617 ../bin/src/ui_albumcovermanager.h:166
 msgid "Enter search terms here"
 msgstr "Introduzca aqúi los términos de búsqueda"
 
-#: ../bin/src/ui_mainwindow.h:618
 msgid "Radio"
 msgstr "Radio"
 
-#: ../bin/src/ui_mainwindow.h:619
 msgid "Files"
 msgstr "Archivos"
 
-#: ../bin/src/ui_mainwindow.h:620
 msgid "Music"
 msgstr "Música"
 
-#: ../bin/src/ui_mainwindow.h:621
 msgid "Playlist"
 msgstr "Lista de reproducción"
 
-#: ../bin/src/ui_mainwindow.h:622 ../bin/src/ui_settingsdialog.h:439
 msgid "Settings"
 msgstr "Preferencias"
 
-#: ../bin/src/ui_mainwindow.h:623
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../bin/src/ui_mainwindow.h:624
 msgid "Tools"
 msgstr "Herramientas"
 
-#: ../bin/src/ui_libraryconfig.h:118
 msgid "These folders will be scanned for music to make up your library"
 msgstr ""
 "Estas carpetas seran analizadas en busca de medios para crear su colección"
 
-#: ../bin/src/ui_libraryconfig.h:119
 msgid "Add new folder..."
 msgstr "Añadir nueva carpeta..."
 
-#: ../bin/src/ui_libraryconfig.h:120
 msgid "Remove folder"
 msgstr "Remover carpeta"
 
-#: ../bin/src/ui_libraryconfig.h:121
 msgid "Options"
 msgstr "Opciones"
 
-#: ../bin/src/ui_libraryconfig.h:122
 msgid "Automatically open single categories in the library tree"
 msgstr ""
 "Automaticamente expandir los artitas con un solo disco en el arbol de la "
 "colección"
 
-#: ../bin/src/ui_fileview.h:114 ../bin/src/ui_trackslider.h:68
-#: ../bin/src/ui_multiloadingindicator.h:64
 msgid "Form"
 msgstr "Form"
 
-#: ../bin/src/ui_fileview.h:115 ../bin/src/ui_fileview.h:116
-#: ../bin/src/ui_fileview.h:117
 msgid "..."
 msgstr "..."
 
-#: ../bin/src/ui_lastfmconfig.h:143
 msgid "Enter your Last.fm details below:"
 msgstr "Ingrese su información de Last.fm debajo:"
 
-#: ../bin/src/ui_lastfmconfig.h:144
 msgid "Last.fm username"
 msgstr "Usuario"
 
-#: ../bin/src/ui_lastfmconfig.h:145
 msgid "Last.fm password"
 msgstr "Contraseña"
 
-#: ../bin/src/ui_lastfmconfig.h:146
 msgid "Scrobble tracks that I listen to"
 msgstr "Enviar las pistas que reproduzco"
 
-#: ../bin/src/ui_lastfmconfig.h:147
 msgid ""
 "Note that you must be a <span style=\" font-weight:600;\">paid subscriber</"
 "span> to listen to Last.fm radio from within Clementine."
@@ -775,177 +580,146 @@ msgstr ""
 "\">suscripcion paga</span> para escuchar la radio de Last.fm desde "
 "Clementine."
 
-#: ../bin/src/ui_lastfmconfig.h:148
 msgid "Authenticating..."
 msgstr "Autenticando..."
 
-#: ../bin/src/ui_lastfmstationdialog.h:89
 msgid "Play Artist or Tag"
 msgstr "Reproducir Artista o Etiqueta"
 
-#: ../bin/src/ui_lastfmstationdialog.h:90
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
 "Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de Last."
 "fm."
 
-#: ../bin/src/ui_lastfmstationdialog.h:94
 msgid "Tag"
 msgstr "Etiqueta"
 
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_trackslider.h:70
 msgid "0:00:00"
 msgstr ""
 
-#: ../bin/src/ui_edittagdialog.h:209
 msgid "Edit track information"
 msgstr "Editar información de la pista"
 
-#: ../bin/src/ui_edittagdialog.h:216
 msgid "Comment"
 msgstr "Comentario"
 
-#: ../bin/src/ui_settingsdialog.h:444
 msgid "Playback"
 msgstr "Reproducción"
 
-#: ../bin/src/ui_settingsdialog.h:446
 msgid "Behaviour"
 msgstr ""
 
-#: ../bin/src/ui_settingsdialog.h:448
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: ../bin/src/ui_settingsdialog.h:450 ../bin/src/ui_libraryconfigdialog.h:73
 msgid "Music Library"
 msgstr "Colección de Música"
 
-#: ../bin/src/ui_settingsdialog.h:452 ../bin/src/ui_lastfmconfigdialog.h:73
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: ../bin/src/ui_settingsdialog.h:455 ../bin/src/ui_settingsdialog.h:457
 msgid "Fadeout"
 msgstr "Fundido"
 
-#: ../bin/src/ui_settingsdialog.h:456
 msgid "No fadeout"
 msgstr "Sin fundido"
 
-#: ../bin/src/ui_settingsdialog.h:458
 msgid "Fadeout duration"
 msgstr "Duración del fundido"
 
-#: ../bin/src/ui_settingsdialog.h:459
 msgid " ms"
 msgstr " ms"
 
-#: ../bin/src/ui_settingsdialog.h:460
+#, fuzzy
+msgid "GStreamer audio engine"
+msgstr "Cargando motor de sonido"
+
+msgid "Output plugin"
+msgstr ""
+
+#, fuzzy
+msgid "Choose automatically"
+msgstr "Obtener carátula"
+
 #, fuzzy
 msgid "Show tray icon"
 msgstr "&Mostrar icono de la bandeja"
 
-#: ../bin/src/ui_settingsdialog.h:461
 #, fuzzy
 msgid "When Clementine starts"
 msgstr "Clementine"
 
-#: ../bin/src/ui_settingsdialog.h:462
 msgid "Always show the main window"
 msgstr ""
 
-#: ../bin/src/ui_settingsdialog.h:463
 msgid "Always hide the main window"
 msgstr ""
 
-#: ../bin/src/ui_settingsdialog.h:464
 #, fuzzy
 msgid "Remember from last time"
 msgstr "Eliminar de la lista de reproducción"
 
-#: ../bin/src/ui_settingsdialog.h:465
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine puede mostrar un mensaje cuando la pista cambia."
 
-#: ../bin/src/ui_settingsdialog.h:466
 msgid "Notification type"
 msgstr "Tipo de notifcación"
 
-#: ../bin/src/ui_settingsdialog.h:467
 msgid "Disabled"
 msgstr "Deshabilitada"
 
-#: ../bin/src/ui_settingsdialog.h:468
 msgid "Show a native desktop notification"
 msgstr "Mostrar la notificacion propia del escritorio"
 
-#: ../bin/src/ui_settingsdialog.h:469
 msgid "Show a pretty OSD"
 msgstr "Mostrar Pretty OSD"
 
-#: ../bin/src/ui_settingsdialog.h:470
 msgid "Show a popup from the system tray"
 msgstr "Mostrar la notificación en la bandeja de sistema"
 
-#: ../bin/src/ui_settingsdialog.h:471
 msgid "General settings"
 msgstr "Preferencias generales"
 
-#: ../bin/src/ui_settingsdialog.h:472
 msgid "Popup duration"
 msgstr "Duracion de la notificación"
 
-#: ../bin/src/ui_settingsdialog.h:473
 msgid " seconds"
 msgstr " segundos"
 
-#: ../bin/src/ui_settingsdialog.h:474
 msgid "Show a notification when I change the volume"
 msgstr "Mostrar una notificación cuando cambio el volúmen"
 
-#: ../bin/src/ui_settingsdialog.h:475
 msgid "Include album art in the notification"
 msgstr "Incluir arte del disco en la notificación"
 
-#: ../bin/src/ui_settingsdialog.h:476
 msgid "Pretty OSD options"
 msgstr "Opciones de Pretty OSD "
 
-#: ../bin/src/ui_settingsdialog.h:477
 msgid "Background opacity"
 msgstr "Opacidad de fondo"
 
-#: ../bin/src/ui_settingsdialog.h:478
 msgid "Background color"
 msgstr "Color de fondo"
 
-#: ../bin/src/ui_settingsdialog.h:481
 msgid "Basic Blue"
 msgstr "Azul basico"
 
-#: ../bin/src/ui_settingsdialog.h:482
 msgid "Clementine Orange"
 msgstr "Naranaja Clementine"
 
-#: ../bin/src/ui_settingsdialog.h:483
 msgid "Custom..."
 msgstr "Personalizado..."
 
-#: ../bin/src/ui_settingsdialog.h:485
 msgid "Text color"
 msgstr "Color del texto"
 
-#: ../bin/src/ui_settingsdialog.h:486
 msgid "Choose color..."
 msgstr "Elegir color..."
 
-#: ../bin/src/ui_about.h:149
 msgid "Version"
 msgstr "Versión"
 
-#: ../bin/src/ui_about.h:150
 msgid ""
 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
 "REC-html40/strict.dtd\">\n"
@@ -1025,111 +799,83 @@ msgstr ""
 "right:0px; -qt-block-indent:0; text-indent:0px;\">... y a todos los que "
 "contribuyeron con Amarok</p></body></html>"
 
-#: ../bin/src/ui_addstreamdialog.h:82
 msgid "Add Stream"
 msgstr "Añadir Flujo de Radio"
 
-#: ../bin/src/ui_addstreamdialog.h:83
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Ingrese la URL de un flujo de radio por internet:"
 
-#: ../bin/src/ui_addstreamdialog.h:84
 msgid "Save this stream in the Radio tab"
 msgstr "Guardar este flujo en la seccion de Radios"
 
-#: ../bin/src/ui_albumcovermanager.h:162
 msgid "Show fullsize..."
 msgstr "Mostrar carátula..."
 
-#: ../bin/src/ui_albumcovermanager.h:163
 msgid "Fetch automatically"
 msgstr "Obtener carátula"
 
-#: ../bin/src/ui_albumcovermanager.h:164
 msgid "Choose manual cover..."
 msgstr "Establecer carátula personalizada..."
 
-#: ../bin/src/ui_albumcovermanager.h:165
 msgid "Unset cover"
 msgstr "Quitar carátula"
 
-#: ../bin/src/ui_albumcovermanager.h:167
 msgid "View"
 msgstr "Vista"
 
-#: ../bin/src/ui_albumcovermanager.h:168
 msgid "Fetch Missing Covers"
 msgstr "Descargar las carátulas que faltan"
 
-#: ../bin/src/ui_playlistsequence.h:119
 msgid "Don't repeat"
 msgstr "No repetir"
 
-#: ../bin/src/ui_playlistsequence.h:120
 msgid "Repeat track"
 msgstr "Repetir pista"
 
-#: ../bin/src/ui_playlistsequence.h:121
 msgid "Repeat album"
 msgstr "Repetir álbum"
 
-#: ../bin/src/ui_playlistsequence.h:122
 msgid "Repeat playlist"
 msgstr "Repetir lista de reproducción"
 
-#: ../bin/src/ui_playlistsequence.h:123
 msgid "Don't shuffle"
 msgstr "No barajar"
 
-#: ../bin/src/ui_playlistsequence.h:124
 msgid "Shuffle by album"
 msgstr "Barajar por álbum"
 
-#: ../bin/src/ui_playlistsequence.h:125
 msgid "Shuffle all"
 msgstr "Barajar todo"
 
-#: ../bin/src/ui_playlistsequence.h:127
 msgid "Repeat"
 msgstr "Repetir"
 
-#: ../bin/src/ui_playlistsequence.h:130
 msgid "Shuffle"
 msgstr "Aleatorio"
 
-#: ../bin/src/ui_groupbydialog.h:119
 msgid "Library advanced grouping"
 msgstr "Agrupamiento avanzado de la colección"
 
-#: ../bin/src/ui_groupbydialog.h:120
 msgid "You can change the way the songs in the library are organised."
 msgstr ""
 "Tu puedes cambiar el modo en que las canciones de la colección son "
 "organizadas."
 
-#: ../bin/src/ui_groupbydialog.h:121
 msgid "Group Library by..."
 msgstr "Agrupar Colección por..."
 
-#: ../bin/src/ui_groupbydialog.h:122
 msgid "First level"
 msgstr "Primer nivel"
 
-#: ../bin/src/ui_groupbydialog.h:125 ../bin/src/ui_groupbydialog.h:136
-#: ../bin/src/ui_groupbydialog.h:147
 msgid "None"
 msgstr "Ninguno"
 
-#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:142
-#: ../bin/src/ui_groupbydialog.h:153
 msgid "Year - Album"
 msgstr "Año - Álbum"
 
-#: ../bin/src/ui_groupbydialog.h:133
 msgid "Second level"
 msgstr "Segundo nivel"
 
-#: ../bin/src/ui_groupbydialog.h:144
 msgid "Third level"
 msgstr "Tercer nivel"
 
