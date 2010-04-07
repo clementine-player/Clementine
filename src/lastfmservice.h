@@ -95,8 +95,10 @@ class LastFMService : public RadioService {
   // Last.fm specific stuff
   bool IsAuthenticated() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
+  bool AreButtonsVisible() const { return buttons_visible_; }
 
   void Authenticate(const QString& username, const QString& password);
+  void SignOut();
 
   void FetchMoreTracks();
 
@@ -109,6 +111,7 @@ class LastFMService : public RadioService {
  signals:
   void AuthenticationComplete(bool success);
   void ScrobblingEnabledChanged(bool value);
+  void ButtonVisibilityChanged(bool value);
 
  private slots:
   void AuthenticateReplyFinished();
@@ -169,6 +172,7 @@ class LastFMService : public RadioService {
   bool initial_tune_;
 
   bool scrobbling_enabled_;
+  bool buttons_visible_;
 
   RadioItem* artist_list_;
   RadioItem* tag_list_;

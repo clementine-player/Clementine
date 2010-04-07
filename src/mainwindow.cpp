@@ -305,7 +305,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
+  connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
   connect(ui_.radio_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
+
+  LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
 
   // Tray icon
   QMenu* tray_menu = new QMenu(this);
@@ -479,6 +482,12 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   bool is_lastfm = (player_->GetCurrentItemOptions() & PlaylistItem::LastFMControls);
   ui_.action_ban->setEnabled(value && is_lastfm);
   ui_.action_love->setEnabled(value);
+}
+
+void MainWindow::LastFMButtonVisibilityChanged(bool value) {
+  ui_.action_ban->setVisible(value);
+  ui_.action_love->setVisible(value);
+  ui_.last_fm_controls->setVisible(value);
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {

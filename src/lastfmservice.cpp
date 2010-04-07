@@ -87,8 +87,10 @@ void LastFMService::ReloadSettings() {
   lastfm::ws::Username = settings.value("Username").toString();
   lastfm::ws::SessionKey = settings.value("Session").toString();
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
+  buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
 
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
+  emit ButtonVisibilityChanged(buttons_visible_);
 }
 
 void LastFMService::ShowConfig() {
@@ -185,6 +187,16 @@ void LastFMService::Authenticate(const QString& username, const QString& passwor
 
   QNetworkReply* reply = lastfm::ws::post(params);
   connect(reply, SIGNAL(finished()), SLOT(AuthenticateReplyFinished()));
+}
+
+void LastFMService::SignOut() {
+  lastfm::ws::Username.clear();
+  lastfm::ws::SessionKey.clear();
+
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("Username", QString());
+  settings.setValue("Session", QString());
 }
 
 void LastFMService::AuthenticateReplyFinished() {

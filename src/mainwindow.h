@@ -104,6 +104,7 @@ class MainWindow : public QMainWindow {
   void RadioDoubleClick(const QModelIndex& index);
   void InsertRadioItem(RadioItem*);
   void ScrobblingEnabledChanged(bool value);
+  void LastFMButtonVisibilityChanged(bool value);
   void Love();
 
   void LibraryScanStarted();

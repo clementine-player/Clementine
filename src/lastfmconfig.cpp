@@ -31,6 +31,7 @@ LastFMConfig::LastFMConfig(QWidget *parent)
   ui_.busy->hide();
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
+  connect(ui_.sign_out, SIGNAL(clicked()), SLOT(SignOut()));
 }
 
 bool LastFMConfig::NeedsValidation() const {
@@ -62,13 +63,23 @@ void LastFMConfig::AuthenticationComplete(bool success) {
 void LastFMConfig::Load() {
   ui_.username->setText(lastfm::ws::Username);
   ui_.scrobble->setChecked(service_->IsScrobblingEnabled());
+  ui_.love_ban_->setChecked(service_->AreButtonsVisible());
+  ui_.sign_out->setEnabled(!lastfm::ws::SessionKey.isEmpty());
 }
 
 void LastFMConfig::Save() {
   QSettings s;
   s.beginGroup(LastFMService::kSettingsGroup);
   s.setValue("ScrobblingEnabled", ui_.scrobble->isChecked());
+  s.setValue("ShowLoveBanButtons", ui_.love_ban_->isChecked());
   s.endGroup();
 
   service_->ReloadSettings();
+}
+
+void LastFMConfig::SignOut() {
+  ui_.username->clear();
+  ui_.password->clear();
+  ui_.sign_out->setEnabled(false);
+  service_->SignOut();
 }

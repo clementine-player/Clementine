@@ -41,6 +41,7 @@ class LastFMConfig : public QWidget {
 
  private slots:
   void AuthenticationComplete(bool success);
+  void SignOut();
 
  private:
   LastFMService* service_;
