@@ -325,7 +325,7 @@ const Engine::Scope& GstEngine::scope() {
 }
 
 void GstEngine::UpdateScope() {
-  typedef float sampletype;
+  typedef int16_t sampletype;
 
   // prune the scope and get the current pos of the audio device
   quint64 pos = PruneScope();
@@ -771,9 +771,17 @@ bool GstEngine::CreatePipeline() {
   gst_pad_add_buffer_probe (p, G_CALLBACK(HandoffCallback), this);
   gst_object_unref (p);
 
+  // Ensure we get the right type out of audioconvert for our scope
+  GstCaps* caps = gst_caps_new_simple ("audio/x-raw-int",
+      "width", G_TYPE_INT, 16,
+      "signed", G_TYPE_BOOLEAN, true,
+      NULL);
+  gst_element_link_filtered(gst_audioconvert_, gst_identity_, caps);
+  gst_caps_unref(caps);
+
   /* link elements */
-  gst_element_link_many( gst_audioconvert_, /*m_gst_equalizer,*/ gst_identity_,
-                         gst_volume_, gst_audioscale_, gst_audiosink_, NULL );
+  gst_element_link_many( gst_identity_, gst_volume_, gst_audioscale_,
+                         gst_audiosink_, NULL );
 
   gst_bin_add( GST_BIN(gst_pipeline_), gst_audiobin_);
   //gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), bus_cb, NULL);
