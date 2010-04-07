@@ -52,7 +52,7 @@ class GstEngine : public Engine::Base {
 
   bool init();
 
-  bool canDecode(const QUrl& url) const;
+  bool canDecode(const QUrl& url);
   uint position() const;
   uint length() const;
   Engine::State state() const;
@@ -200,6 +200,10 @@ class GstEngine : public Engine::Base {
   bool shutdown_;
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
+
+  GstElement* can_decode_pipeline_;
+  GstElement* can_decode_src_;
+  GstElement* can_decode_bin_;
 };
 
 

@@ -171,12 +171,18 @@ GstEngine::GstEngine()
     pipeline_filled_(false),
     fade_value_(0.0),
     equalizer_enabled_(false),
-    shutdown_(false)
+    shutdown_(false),
+    can_decode_pipeline_(NULL),
+    can_decode_src_(NULL),
+    can_decode_bin_(NULL)
 {
 }
 
 GstEngine::~GstEngine() {
   DestroyPipeline();
+
+  if (can_decode_pipeline_)
+    gst_object_unref(GST_OBJECT(can_decode_pipeline_));
 
 #ifdef GST_KIOSTREAMS
   delete[] m_streamBuf;
@@ -215,9 +221,7 @@ bool GstEngine::init() {
 }
 
 
-bool GstEngine::canDecode( const QUrl &url ) const {
-  bool ismp3 = false;
-
+bool GstEngine::canDecode(const QUrl &url) {
   // We had some bug reports claiming that video files cause crashes in canDecode(),
   // so don't try to decode them
   if ( url.path().toLower().endsWith( ".mov" ) ||
@@ -225,42 +229,35 @@ bool GstEngine::canDecode( const QUrl &url ) const {
        url.path().toLower().endsWith( ".wmv" ) )
     return false;
 
-  if ( url.path().toLower().endsWith( ".mp3" ) )
-    ismp3 = true;
-
-  qDebug() << "Can decode for " << url.toString();
-  int count = 0;
   can_decode_success_ = false;
   can_decode_last_ = false;
-  GstElement *pipeline, *giosrc, *decodebin;
 
-  if ( !( pipeline = CreateElement( "pipeline" ) ) ) return false;
-  if ( !( giosrc = CreateElement( "giosrc", pipeline ) ) ) return false;
-  if ( !( decodebin = CreateElement( "decodebin", pipeline ) ) ) return false;
+  // Create the pipeline
+  if (!can_decode_pipeline_) {
+    can_decode_pipeline_ = CreateElement("pipeline");
+    can_decode_src_ = CreateElement("giosrc", can_decode_pipeline_);
+    can_decode_bin_ = CreateElement("decodebin", can_decode_pipeline_);
 
-  gst_element_link( giosrc, decodebin );
+    gst_element_link(can_decode_src_, can_decode_bin_);
+    g_signal_connect(G_OBJECT(can_decode_bin_), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), NULL);
+    g_signal_connect(G_OBJECT(can_decode_bin_), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), NULL);
+  }
 
-  g_object_set( G_OBJECT( giosrc ), "location", (const char*) url.toEncoded().constData(), NULL );
-  g_signal_connect( G_OBJECT( decodebin ), "new-decoded-pad", G_CALLBACK( CanDecodeNewPadCallback ), NULL );
-  g_signal_connect( G_OBJECT( decodebin ), "no-more-pads", G_CALLBACK( CanDecodeLastCallback ), NULL );
+  // Set the file we're testing
+  g_object_set(G_OBJECT(can_decode_src_), "location", (const char*) url.toEncoded().constData(), NULL);
 
-  GstStateChangeReturn sret;
-  sret = gst_element_set_state( pipeline, GST_STATE_PLAYING );
-  if (sret == GST_STATE_CHANGE_ASYNC)
-    qDebug() << "gst set state returns ASYNC";
-  else
-    qDebug() << "gst set state does not return ASYNC";
+  // Start the pipeline playing
+  gst_element_set_state(can_decode_pipeline_, GST_STATE_PLAYING);
 
   // Wait until found audio stream
-
-  while ( !can_decode_success_ && !can_decode_last_ && count < 100 ) {
+  int count = 0;
+  while (!can_decode_success_ && !can_decode_last_ && count < 100) {
     count++;
     usleep(1000);
   }
 
-  qDebug() << "Got " << can_decode_success_ << " after " << count << " sleeps" ;
-  gst_element_set_state( pipeline, GST_STATE_NULL );
-  gst_object_unref( GST_OBJECT( pipeline ) );
+  // Stop playing
+  gst_element_set_state(can_decode_pipeline_, GST_STATE_NULL);
 
   return can_decode_success_;
 }

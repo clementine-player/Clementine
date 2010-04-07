@@ -117,7 +117,7 @@ namespace Engine
          * @param url The URL of the file/stream.
          * @return True if we can play the URL.
          */
-        virtual bool canDecode( const QUrl &url ) const = 0;
+        virtual bool canDecode( const QUrl &url ) = 0;
 
         /**
          * Determines if current track is a stream.
