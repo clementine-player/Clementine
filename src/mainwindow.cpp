@@ -363,7 +363,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   StartupBehaviour behaviour =
       StartupBehaviour(settings_.value("startupbehaviour", Startup_Remember).toInt());
-  qDebug() << "onload" << behaviour;
   bool hidden = settings_.value("hidden", false).toBool();
   bool show_tray = settings_.value("showtray", true).toBool();
 
