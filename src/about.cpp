@@ -53,7 +53,7 @@ QString About::MakeHtml() const {
   foreach (const Person& person, thanks_to_)
     ret += "<br />" + MakeHtml(person);
 
-  ret += "</p>";
+  ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
 
   return ret;
 }
