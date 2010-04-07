@@ -134,7 +134,7 @@ void GstEngine::EventCallback(GstPad*, GstEvent* event, gpointer) {
   {
     case GST_EVENT_EOS:
       qDebug() << "EOS reached";
-      QMetaObject::invokeMethod(instance(), "endOfStreamReached",
+      QMetaObject::invokeMethod(instance(), "EndOfStreamReached",
                                 Qt::QueuedConnection);
       break;
 
