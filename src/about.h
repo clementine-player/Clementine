@@ -26,8 +26,24 @@ class About : public QDialog {
  public:
   About(QWidget* parent = 0);
 
+  static const char* kUrl;
+
+  struct Person {
+    Person(const QString& n, const QString& e) : name(n), email(e) {}
+
+    QString name;
+    QString email;
+  };
+
+ private:
+  QString MakeHtml() const;
+  QString MakeHtml(const Person& person) const;
+
  private:
   Ui::About ui_;
+
+  QList<Person> authors_;
+  QList<Person> thanks_to_;
 };
 
 #endif // ABOUT_H
