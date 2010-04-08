@@ -740,9 +740,10 @@ QStringList Library::mimeTypes() const {
 QMimeData* Library::mimeData(const QModelIndexList& indexes) const {
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
+  QSet<int> song_ids;
 
   foreach (const QModelIndex& index, indexes) {
-    GetChildSongs(IndexToItem(index), &urls, &data->songs);
+    GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);
   }
 
   data->setUrls(urls);
@@ -759,7 +760,8 @@ bool Library::CompareItems(const LibraryItem* a, const LibraryItem* b) const {
   return left.toString() < right.toString();
 }
 
-void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const {
+void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls,
+                            SongList* songs, QSet<int>* song_ids) const {
   switch (item->type) {
     case LibraryItem::Type_Container: {
       const_cast<Library*>(this)->LazyPopulate(item);
@@ -769,13 +771,16 @@ void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* song
           &Library::CompareItems, this, _1, _2));
 
       foreach (LibraryItem* child, children)
-        GetChildSongs(child, urls, songs);
+        GetChildSongs(child, urls, songs, song_ids);
       break;
     }
 
     case LibraryItem::Type_Song:
       urls->append(QUrl::fromLocalFile(item->metadata.filename()));
-      songs->append(item->metadata);
+      if (!song_ids->contains(item->metadata.id())) {
+        songs->append(item->metadata);
+        song_ids->insert(item->metadata.id());
+      }
       break;
 
     default:
@@ -786,11 +791,12 @@ void Library::GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* song
 SongList Library::GetChildSongs(const QModelIndex& index) const {
   QList<QUrl> dontcare;
   SongList ret;
+  QSet<int> song_ids;
 
   if (!index.isValid())
     return SongList();
 
-  GetChildSongs(IndexToItem(index), &dontcare, &ret);
+  GetChildSongs(IndexToItem(index), &dontcare, &ret, &song_ids);
   return ret;
 }
 

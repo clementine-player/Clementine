@@ -90,7 +90,8 @@ class Library : public SimpleTreeModel<LibraryItem> {
   boost::shared_ptr<LibraryBackendInterface> GetBackend() const { return backend_->Worker(); }
 
   // Get information about the library
-  void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs) const;
+  void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
+                     QSet<int>* song_ids) const;
   SongList GetChildSongs(const QModelIndex& index) const;
 
   // QAbstractItemModel
