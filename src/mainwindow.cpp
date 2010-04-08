@@ -558,7 +558,7 @@ void MainWindow::StopAfterCurrent() {
   * Exit if the tray icon is not visible, otherwise ignore and set hidden in tray.
   */
 void MainWindow::closeEvent(QCloseEvent* event) {
-  if (tray_icon_->isVisible()) {
+  if (tray_icon_->isVisible() && event->spontaneous()) {
     event->ignore();
     SetHiddenInTray(true);
   } else {
