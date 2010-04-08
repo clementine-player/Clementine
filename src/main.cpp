@@ -26,6 +26,7 @@
 #include "player.h"
 #include "song.h"
 #include "equalizer.h"
+#include "potranslator.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -57,7 +58,7 @@ void LoadTranslation(const QString& prefix, const QString& path) {
     return;
 #endif
 
-  QTranslator* t = new QTranslator;
+  QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + QLocale::system().name(), path))
     QCoreApplication::installTranslator(t);
   else

@@ -14,22 +14,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <gtest/gtest.h>
+#ifndef POTRANSLATOR_H
+#define POTRANSLATOR_H
 
-#include <QFile>
+#include <QTranslator>
 
-#include "potranslator.h"
-#include "test_utils.h"
+// We convert from .po files to .qm files, which loses context information.
+// This translator tries loading strings with an empty context if it can't
+// find any others.
 
-TEST(Translations, Basic) {
-  ASSERT_TRUE(QFile::exists(":/translations"));
-  ASSERT_TRUE(QFile::exists(":/translations/clementine_es.qm"));
+class PoTranslator : public QTranslator {
+ public:
+  QString translate(const char* context, const char* source_text, const char* disambiguation = 0) const {
+    QString ret = QTranslator::translate(context, source_text, disambiguation);
+    if (!ret.isEmpty()) return ret;
+    return QTranslator::translate(NULL, source_text, disambiguation);
+  }
+};
 
-  PoTranslator t;
-  t.load("clementine_es.qm", ":/translations");
-
-  EXPECT_EQ(QString::fromUtf8("Colección"),
-            t.translate("MainWindow", "Library"));
-  EXPECT_EQ(QString::fromUtf8("Colección"),
-            t.translate("", "Library"));
-}
+#endif // POTRANSLATOR_H
