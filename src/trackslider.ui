@@ -31,7 +31,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QSlider" name="slider">
+    <widget class="TrackSliderSlider" name="slider">
      <property name="singleStep">
       <number>10</number>
      </property>
@@ -49,6 +49,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TrackSliderSlider</class>
+   <extends>QSlider</extends>
+   <header>tracksliderslider.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

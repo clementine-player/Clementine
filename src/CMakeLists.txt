@@ -71,6 +71,7 @@ set(CLEMENTINE-SOURCES
     groupbydialog.cpp
     equalizer.cpp
     equalizerslider.cpp
+    tracksliderslider.cpp
 )
 
 # Header files that have Q_OBJECT in
