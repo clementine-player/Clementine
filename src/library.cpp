@@ -378,6 +378,7 @@ QVariant Library::data(const LibraryItem* item, int role) const {
         case LibraryItem::Type_Container:
           switch (container_type) {
             case GroupBy_Album:
+            case GroupBy_YearAlbum:
               return album_icon_;
             case GroupBy_Artist:
               return artist_icon_;
