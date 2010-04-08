@@ -38,7 +38,7 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
   switch (type) {
     case LibraryItem::Type_Divider: {
-      QString text(index.data().toString().toUpper());
+      QString text(index.data().toString());
 
       // Draw the background
       //QStyledItemDelegate::paint(painter, opt, QModelIndex());

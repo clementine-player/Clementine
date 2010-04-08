@@ -239,7 +239,7 @@ QString Library::DividerKey(GroupBy type, LibraryItem* item) const {
     return SortTextForYear(item->sort_text.toInt() / 10 * 10);
 
   case GroupBy_YearAlbum:
-    return QString::number(item->metadata.year());
+    return SortTextForYear(item->metadata.year());
 
   case GroupBy_None:
   default:
@@ -258,12 +258,16 @@ QString Library::DividerDisplayText(GroupBy type, const QString& key) const {
   case GroupBy_Genre:
     if (key == "0")
       return "0-9";
-    // fallthrough
+    return key.toUpper();
 
   case GroupBy_YearAlbum:
-    return key;
+    if (key == "0000")
+      return tr("Unknown");
+    return key.toUpper();
 
   case GroupBy_Year:
+    if (key == "0000")
+      return tr("Unknown");
     return QString::number(key.toInt()); // To remove leading 0s
 
   case GroupBy_None:
@@ -683,6 +687,8 @@ QString Library::TextOrUnknown(const QString& text) const {
 }
 
 QString Library::PrettyYearAlbum(int year, const QString& album) const {
+  if (year <= 0)
+    return TextOrUnknown(album);
   return QString::number(year) + " - " + TextOrUnknown(album);
 }
 
