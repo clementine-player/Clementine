@@ -53,19 +53,27 @@ class PlaylistView : public QTreeView {
  protected:
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);
+  void mousePressEvent(QMouseEvent *event);
+  void scrollContentsBy(int dx, int dy);
+
+ protected slots:
+  void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
 
  private slots:
   void LoadGeometry();
   void SaveGeometry();
   void GlowIntensityChanged();
+  void InhibitAutoscrollTimeout();
 
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
+  void MaybeAutoscroll();
 
  private:
   static const char* kSettingsGroup;
   static const int kGlowIntensitySteps;
+  static const int kAutoscrollGraceTimeout;
 
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
@@ -76,6 +84,9 @@ class PlaylistView : public QTreeView {
   int glow_intensity_step_;
   QModelIndex last_current_item_;
   QRect last_glow_rect_;
+
+  QTimer* inhibit_autoscroll_timer_;
+  bool inhibit_autoscroll_;
 
   int row_height_; // Used to invalidate the currenttrack_bar pixmaps
   QList<QPixmap> currenttrack_bar_left_;

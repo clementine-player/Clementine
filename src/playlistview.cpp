@@ -31,6 +31,7 @@
 
 const char* PlaylistView::kSettingsGroup = "Playlist";
 const int PlaylistView::kGlowIntensitySteps = 32;
+const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 
 
 PlaylistView::PlaylistView(QWidget *parent)
@@ -38,6 +39,8 @@ PlaylistView::PlaylistView(QWidget *parent)
     glow_enabled_(false),
     glow_timer_(new QTimer(this)),
     glow_intensity_step_(0),
+    inhibit_autoscroll_timer_(new QTimer(this)),
+    inhibit_autoscroll_(false),
     row_height_(-1),
     currenttrack_play_(":currenttrack_play.png"),
     currenttrack_pause_(":currenttrack_pause.png")
@@ -47,6 +50,10 @@ PlaylistView::PlaylistView(QWidget *parent)
 
   connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
   connect(header(), SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
+
+  inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
+  inhibit_autoscroll_timer_->setSingleShot(true);
+  connect(inhibit_autoscroll_timer_, SIGNAL(timeout()), SLOT(InhibitAutoscrollTimeout()));
 
   glow_timer_->setInterval(1500 / kGlowIntensitySteps);
   connect(glow_timer_, SIGNAL(timeout()), SLOT(GlowIntensityChanged()));
@@ -211,6 +218,7 @@ void PlaylistView::hideEvent(QHideEvent*) {
 void PlaylistView::showEvent(QShowEvent*) {
   if (glow_enabled_)
     glow_timer_->start();
+  MaybeAutoscroll();
 }
 
 bool CompareSelectionRanges(const QItemSelectionRange& a, const QItemSelectionRange& b) {
@@ -319,4 +327,40 @@ void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHi
   } else {
     QTreeView::closeEditor(editor, hint);
   }
+}
+
+void PlaylistView::mousePressEvent(QMouseEvent *event) {
+  QTreeView::mousePressEvent(event);
+  inhibit_autoscroll_ = true;
+  inhibit_autoscroll_timer_->start();
+}
+
+void PlaylistView::scrollContentsBy(int dx, int dy) {
+  QTreeView::scrollContentsBy(dx, dy);
+  inhibit_autoscroll_ = true;
+  inhibit_autoscroll_timer_->start();
+}
+
+void PlaylistView::InhibitAutoscrollTimeout() {
+  // For 1 minute after the user clicks on or scrolls the playlist we promise
+  // not to automatically scroll the view to keep up with a track change.
+  inhibit_autoscroll_ = false;
+}
+
+void PlaylistView::dataChanged(const QModelIndex&, const QModelIndex&) {
+  MaybeAutoscroll();
+}
+
+void PlaylistView::MaybeAutoscroll() {
+  Playlist* playlist = qobject_cast<Playlist*>(model());
+  Q_ASSERT(playlist);
+
+  if (inhibit_autoscroll_)
+    return;
+
+  if (playlist->current_index() == -1)
+    return;
+
+  QModelIndex current = playlist->index(playlist->current_index(), 0);
+  scrollTo(current, QAbstractItemView::PositionAtCenter);
 }
