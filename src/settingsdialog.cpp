@@ -320,7 +320,7 @@ void SettingsDialog::SetGstEngine(const GstEngine *engine) {
 void SettingsDialog::GstPluginChanged(int index) {
   QString name = ui_.gst_plugin->itemData(index).toString();
 
-  bool enabled = GstEngine::SinkSupportsDevice(name);
+  bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
 
   ui_.gst_device->setEnabled(enabled);
   ui_.gst_device_label->setEnabled(enabled);

@@ -76,7 +76,7 @@ class GstEngine : public Engine::Base {
   void gstMetaData(Engine::SimpleMetaBundle &bundle) { emit metaData( bundle ); }
 
   PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
-  static bool SinkSupportsDevice(const QString& name);
+  static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString& name);
 
  public slots:
   bool load(const QUrl&, bool stream);

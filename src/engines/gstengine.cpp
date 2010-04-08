@@ -777,7 +777,7 @@ bool GstEngine::CreatePipeline() {
     return false;
   }
 
-  if (SinkSupportsDevice(sink_) && !device_.isEmpty()) {
+  if (DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty()) {
     g_object_set(G_OBJECT(gst_audiosink_), "device", device_.toUtf8().constData(), NULL);
   }
 
@@ -907,6 +907,6 @@ void GstEngine::ClearScopeQ() {
   }
 }
 
-bool GstEngine::SinkSupportsDevice(const QString &name) {
+bool GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString &name) {
   return (name == "alsasink" || name == "osssink" || name == "pulsesink");
 }
