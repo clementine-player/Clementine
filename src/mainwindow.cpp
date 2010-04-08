@@ -221,7 +221,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   filter_age_group->addAction(ui_.filter_age_month);
   filter_age_group->addAction(ui_.filter_age_three_months);
   filter_age_group->addAction(ui_.filter_age_year);
-  filter_age_group->setExclusive(true);
+
+  QMenu* filter_age_menu = new QMenu("Show", this);
+  filter_age_menu->addActions(filter_age_group->actions());
 
   QSignalMapper* filter_age_mapper = new QSignalMapper(this);
   filter_age_mapper->setMapping(ui_.filter_age_all, -1);
@@ -263,6 +265,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   group_by_group_->addAction(ui_.group_by_genre_artist_album);
   group_by_group_->addAction(ui_.group_by_advanced);
 
+  QMenu* group_by_menu = new QMenu("Group by", this);
+  group_by_menu->addActions(group_by_group_->actions());
+
   connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
   connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
           group_by_dialog_, SLOT(LibraryGroupingChanged(Library::Grouping)));
@@ -273,9 +278,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   // Library config menu
   QMenu* library_menu = new QMenu(this);
-  library_menu->addActions(filter_age_group->actions());
-  library_menu->addSeparator();
-  library_menu->addActions(group_by_group_->actions());
+  library_menu->addMenu(filter_age_menu);
+  library_menu->addMenu(group_by_menu);
   library_menu->addSeparator();
   library_menu->addAction(tr("Configure library..."), library_config_dialog_, SLOT(show()));
   ui_.library_options->setMenu(library_menu);
