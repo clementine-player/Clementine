@@ -76,6 +76,7 @@ class GstEngine : public Engine::Base {
   void gstMetaData(Engine::SimpleMetaBundle &bundle) { emit metaData( bundle ); }
 
   PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
+  static bool SinkSupportsDevice(const QString& name);
 
  public slots:
   bool load(const QUrl&, bool stream);
@@ -158,6 +159,7 @@ class GstEngine : public Engine::Base {
   static const int kGstStateTimeout = 10000000;
 
   QString sink_;
+  QString device_;
 
   static GstEngine* sInstance;
 

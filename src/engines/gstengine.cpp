@@ -245,6 +245,7 @@ void GstEngine::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   sink_ = s.value("sink", kAutoSink).toString();
+  device_ = s.value("device").toString();
 }
 
 
@@ -271,7 +272,7 @@ bool GstEngine::canDecode(const QUrl &url) {
   }
 
   // Set the file we're testing
-  g_object_set(G_OBJECT(can_decode_src_), "location", (const char*) url.toEncoded().constData(), NULL);
+  g_object_set(G_OBJECT(can_decode_src_), "location", url.toEncoded().constData(), NULL);
 
   // Start the pipeline playing
   gst_element_set_state(can_decode_pipeline_, GST_STATE_PLAYING);
@@ -776,6 +777,10 @@ bool GstEngine::CreatePipeline() {
     return false;
   }
 
+  if (SinkSupportsDevice(sink_) && !device_.isEmpty()) {
+    g_object_set(G_OBJECT(gst_audiosink_), "device", device_.toUtf8().constData(), NULL);
+  }
+
   gst_equalizer_ = GST_ELEMENT(gst_equalizer_new());
   gst_bin_add(GST_BIN(gst_audiobin_), gst_equalizer_);
 
@@ -900,4 +905,8 @@ void GstEngine::ClearScopeQ() {
     GstBuffer* buf = reinterpret_cast<GstBuffer *>( g_queue_pop_head(delayq_) );
     gst_buffer_unref(buf);
   }
+}
+
+bool GstEngine::SinkSupportsDevice(const QString &name) {
+  return (name == "alsasink" || name == "osssink" || name == "pulsesink");
 }

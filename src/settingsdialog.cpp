@@ -36,8 +36,8 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
 
-  ui_.notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue), Qt::DecorationRole);
-  ui_.notifications_bg_preset->setItemData(1, QColor(OSDPretty::kPresetOrange), Qt::DecorationRole);
+  // Playback
+  connect(ui_.gst_plugin, SIGNAL(currentIndexChanged(int)), SLOT(GstPluginChanged(int)));
 
   // Behaviour
   connect(ui_.b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
@@ -50,6 +50,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_.list->setCurrentRow(0);
 
   // Notifications
+  ui_.notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue), Qt::DecorationRole);
+  ui_.notifications_bg_preset->setItemData(1, QColor(OSDPretty::kPresetOrange), Qt::DecorationRole);
+
   connect(ui_.notifications_none, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
   connect(ui_.notifications_native, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
   connect(ui_.notifications_tray, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
@@ -116,6 +119,7 @@ void SettingsDialog::accept() {
 
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", ui_.gst_plugin->itemData(ui_.gst_plugin->currentIndex()).toString());
+  s.setValue("device", ui_.gst_device->text());
   s.endGroup();
 
   // Notifications
@@ -182,6 +186,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
       break;
     }
   }
+  ui_.gst_device->setText(s.value("device").toString());
   s.endGroup();
 
   // Notifications
@@ -310,4 +315,13 @@ void SettingsDialog::SetGstEngine(const GstEngine *engine) {
     ui_.gst_plugin->addItem(details.long_name, details.name);
   }
   ui_.gst_group->setEnabled(true);
+}
+
+void SettingsDialog::GstPluginChanged(int index) {
+  QString name = ui_.gst_plugin->itemData(index).toString();
+
+  bool enabled = GstEngine::SinkSupportsDevice(name);
+
+  ui_.gst_device->setEnabled(enabled);
+  ui_.gst_device_label->setEnabled(enabled);
 }

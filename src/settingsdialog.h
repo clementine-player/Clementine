@@ -56,6 +56,8 @@ class SettingsDialog : public QDialog {
 
   void ShowTrayIconToggled(bool on);
 
+  void GstPluginChanged(int index);
+
  private:
   Ui::SettingsDialog ui_;
   bool loading_settings_;
