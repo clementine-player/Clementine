@@ -33,11 +33,6 @@ Equalizer::Equalizer(QWidget *parent)
     loading_(false)
 {
   ui_.setupUi(this);
-  connect(ui_.enable, SIGNAL(toggled(bool)), SIGNAL(EnabledChanged(bool)));
-  connect(ui_.enable, SIGNAL(toggled(bool)), ui_.slider_container, SLOT(setEnabled(bool)));
-  connect(ui_.preset, SIGNAL(currentIndexChanged(QString)), SLOT(PresetChanged(QString)));
-  connect(ui_.preset_add, SIGNAL(clicked()), SLOT(AddPreset()));
-  connect(ui_.preset_del, SIGNAL(clicked()), SLOT(DelPreset()));
 
   preamp_ = AddSlider(tr("Pre-amp"));
 
@@ -48,10 +43,19 @@ Equalizer::Equalizer(QWidget *parent)
 
   for (int i=0 ; i<kBands ; ++i)
     gain_[i] = AddSlider(kGainText[i]);
+
+  // Must be done before the signals are connected
+  ReloadSettings();
+
+  connect(ui_.enable, SIGNAL(toggled(bool)), SIGNAL(EnabledChanged(bool)));
+  connect(ui_.enable, SIGNAL(toggled(bool)), ui_.slider_container, SLOT(setEnabled(bool)));
+  connect(ui_.enable, SIGNAL(toggled(bool)), SLOT(Save()));
+  connect(ui_.preset, SIGNAL(currentIndexChanged(QString)), SLOT(PresetChanged(QString)));
+  connect(ui_.preset_add, SIGNAL(clicked()), SLOT(AddPreset()));
+  connect(ui_.preset_del, SIGNAL(clicked()), SLOT(DelPreset()));
 }
 
 void Equalizer::ReloadSettings() {
-  loading_ = true;
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
@@ -73,18 +77,13 @@ void Equalizer::ReloadSettings() {
   // Selected preset
   QString selected_preset = s.value("selected_preset", "Custom").toString();
   int selected_index = ui_.preset->findText(selected_preset);
-  if (selected_index != -1) {
+  if (selected_index != -1)
     ui_.preset->setCurrentIndex(selected_index);
-    PresetChanged(selected_preset);
-  }
 
   // Enabled?
   ui_.enable->setChecked(s.value("enabled", false).toBool());
 
-  emit EnabledChanged(ui_.enable->isChecked());
-  ParametersChanged();
-
-  loading_ = false;
+  PresetChanged(selected_preset);
 }
 
 void Equalizer::LoadDefaultPresets() {
@@ -174,6 +173,10 @@ EqualizerSlider* Equalizer::AddSlider(const QString &label) {
   return ret;
 }
 
+bool Equalizer::is_enabled() const {
+  return ui_.enable->isChecked();
+}
+
 int Equalizer::preamp_value() const {
   return preamp_->value();
 }
@@ -187,27 +190,25 @@ QList<int> Equalizer::gain_values() const {
 }
 
 void Equalizer::ParametersChanged() {
-  emit ParametersChanged(preamp_value(), gain_values());
-
-  // Update the preset
-  if (!loading_) {
-    QString name = ui_.preset->currentText();
-    if (!presets_.contains(name) || name.isEmpty())
-      return;
-
-    Params& p = presets_[name];
-    p.preamp = preamp_->value();
-    for (int i=0 ; i<kBands ; ++i)
-      p.gain[i] = gain_[i]->value();
-
-    Save();
-  }
-}
-
-void Equalizer::Save() {
   if (loading_)
     return;
 
+  emit ParametersChanged(preamp_value(), gain_values());
+
+  // Update the preset
+  QString name = ui_.preset->currentText();
+  if (!presets_.contains(name) || name.isEmpty())
+    return;
+
+  Params& p = presets_[name];
+  p.preamp = preamp_->value();
+  for (int i=0 ; i<kBands ; ++i)
+    p.gain[i] = gain_[i]->value();
+
+  Save();
+}
+
+void Equalizer::Save() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 

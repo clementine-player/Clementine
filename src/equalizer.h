@@ -43,11 +43,9 @@ class Equalizer : public QDialog {
     int gain[kBands];
   };
 
+  bool is_enabled() const;
   int preamp_value() const;
   QList<int> gain_values() const;
-
- public slots:
-  void ReloadSettings();
 
  signals:
   void EnabledChanged(bool enabled);
@@ -58,12 +56,13 @@ class Equalizer : public QDialog {
   void PresetChanged(const QString& name);
   void AddPreset();
   void DelPreset();
+  void Save();
 
  private:
   EqualizerSlider* AddSlider(const QString& label);
   void LoadDefaultPresets();
   void AddPreset(const QString& name, const Params& params);
-  void Save();
+  void ReloadSettings();
 
  private:
   Ui::Equalizer ui_;

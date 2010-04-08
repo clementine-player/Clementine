@@ -350,7 +350,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
           player_->GetEngine(), SLOT(setEqualizerParameters(int,QList<int>)));
   connect(equalizer_, SIGNAL(EnabledChanged(bool)),
           player_->GetEngine(), SLOT(setEqualizerEnabled(bool)));
-  equalizer_->ReloadSettings();
+  player_->GetEngine()->setEqualizerEnabled(equalizer_->is_enabled());
+  player_->GetEngine()->setEqualizerParameters(
+      equalizer_->preamp_value(), equalizer_->gain_values());
 
   // Statusbar widgets
   playlist_->set_sequence(playlist_sequence_);
