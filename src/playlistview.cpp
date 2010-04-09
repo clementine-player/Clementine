@@ -347,7 +347,9 @@ void PlaylistView::InhibitAutoscrollTimeout() {
   inhibit_autoscroll_ = false;
 }
 
-void PlaylistView::dataChanged(const QModelIndex&, const QModelIndex&) {
+void PlaylistView::dataChanged(const QModelIndex& topleft,
+                               const QModelIndex& bottomright) {
+  QTreeView::dataChanged(topleft, bottomright);
   MaybeAutoscroll();
 }
 
