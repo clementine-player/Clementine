@@ -405,12 +405,10 @@ void GstEngine::UpdateScope() {
   while (buf && current_sample_ < SCOPESIZE && i < sz) {
     for (int j = 0; j < channels && current_sample_ < SCOPESIZE; j++) {
       current_scope_[current_sample_ ++] = data[i + j];
-      if (channels == 1)
-        current_scope_[current_sample_ ++] = data[i];
     }
     i+=channels; // advance to the next frame
 
-    if (i >= sz) {
+    if (i >= sz - 1) {
       // here we are out of samples in the current buffer, so we get another one
       buf = reinterpret_cast<GstBuffer *>( g_queue_pop_head(delayq_) );
       gst_buffer_unref(buf);
@@ -796,7 +794,6 @@ bool GstEngine::CreatePipeline() {
   // add a data probe on the src pad if the audioconvert element for our scope
   // we do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not affected by them
-  #ifndef Q_OS_DARWIN
   p = gst_element_get_pad (gst_audioconvert_, "src");
   gst_pad_add_buffer_probe (p, G_CALLBACK(HandoffCallback), this);
   gst_object_unref (p);
@@ -806,9 +803,10 @@ bool GstEngine::CreatePipeline() {
       "width", G_TYPE_INT, 16,
       "signed", G_TYPE_BOOLEAN, true,
       NULL);
-  gst_element_link_filtered(gst_audioconvert_, gst_equalizer_, caps);
   gst_caps_unref(caps);
 
+  // Disable equalizer on Mac.
+  #ifndef Q_OS_DARWIN
   /* link elements */
   gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
                          gst_audioscale_, gst_audiosink_, NULL );
