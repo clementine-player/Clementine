@@ -803,17 +803,19 @@ bool GstEngine::CreatePipeline() {
       "width", G_TYPE_INT, 16,
       "signed", G_TYPE_BOOLEAN, true,
       NULL);
+  gst_element_link_filtered(gst_audioconvert_, gst_equalizer_, caps);
   gst_caps_unref(caps);
 
-  // Disable equalizer on Mac.
-  #ifndef Q_OS_DARWIN
   /* link elements */
+  #ifndef Q_OS_DARWIN
   gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
                          gst_audioscale_, gst_audiosink_, NULL );
   #else
-  /* link elements */
-  gst_element_link_many( gst_audioconvert_, gst_identity_, gst_volume_,
-                         gst_audioscale_, gst_audiosink_, NULL );
+  // Add an extra audioconvert at the end as osxaudiosink supports only one format.
+  GstElement* convert = CreateElement( "audioconvert", gst_audiobin_, "FFFUUUU" );
+  if (!convert) { return false; }
+  gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
+                         gst_audioscale_, convert, gst_audiosink_, NULL );
   #endif
 
 
