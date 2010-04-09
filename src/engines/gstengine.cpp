@@ -771,7 +771,6 @@ bool GstEngine::CreatePipeline() {
   gst_pipeline_ = gst_pipeline_new( "pipeline" );
   gst_audiobin_ = gst_bin_new( "audiobin" );
 
-
   if ( !( gst_audiosink_ = CreateElement( sink_, gst_audiobin_ ) ) ) {
     QMetaObject::invokeMethod(this, "ErrorNoOutput", Qt::QueuedConnection);
     return false;
@@ -797,6 +796,7 @@ bool GstEngine::CreatePipeline() {
   // add a data probe on the src pad if the audioconvert element for our scope
   // we do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not affected by them
+  #ifndef Q_OS_DARWIN
   p = gst_element_get_pad (gst_audioconvert_, "src");
   gst_pad_add_buffer_probe (p, G_CALLBACK(HandoffCallback), this);
   gst_object_unref (p);
@@ -812,6 +812,12 @@ bool GstEngine::CreatePipeline() {
   /* link elements */
   gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
                          gst_audioscale_, gst_audiosink_, NULL );
+  #else
+  /* link elements */
+  gst_element_link_many( gst_audioconvert_, gst_identity_, gst_volume_,
+                         gst_audioscale_, gst_audiosink_, NULL );
+  #endif
+
 
   gst_bin_add( GST_BIN(gst_pipeline_), gst_audiobin_);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), BusCallbackSync, NULL);
