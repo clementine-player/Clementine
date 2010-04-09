@@ -34,10 +34,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="preset_add">
+      <widget class="QToolButton" name="preset_save">
+       <property name="toolTip">
+        <string>Save preset</string>
+       </property>
        <property name="icon">
-        <iconset resource="../data/data.qrc">
-         <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
+        <iconset>
+         <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -49,8 +52,11 @@
      </item>
      <item>
       <widget class="QToolButton" name="preset_del">
+       <property name="toolTip">
+        <string>Delete preset</string>
+       </property>
        <property name="icon">
-        <iconset resource="../data/data.qrc">
+        <iconset>
          <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
        </property>
        <property name="iconSize">
@@ -95,10 +101,8 @@
  </widget>
  <tabstops>
   <tabstop>preset</tabstop>
-  <tabstop>preset_add</tabstop>
+  <tabstop>preset_save</tabstop>
  </tabstops>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

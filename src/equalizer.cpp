@@ -51,7 +51,7 @@ Equalizer::Equalizer(QWidget *parent)
   connect(ui_.enable, SIGNAL(toggled(bool)), ui_.slider_container, SLOT(setEnabled(bool)));
   connect(ui_.enable, SIGNAL(toggled(bool)), SLOT(Save()));
   connect(ui_.preset, SIGNAL(currentIndexChanged(QString)), SLOT(PresetChanged(QString)));
-  connect(ui_.preset_add, SIGNAL(clicked()), SLOT(AddPreset()));
+  connect(ui_.preset_save, SIGNAL(clicked()), SLOT(SavePreset()));
   connect(ui_.preset_del, SIGNAL(clicked()), SLOT(DelPreset()));
 }
 
@@ -82,6 +82,7 @@ void Equalizer::ReloadSettings() {
 
   // Enabled?
   ui_.enable->setChecked(s.value("enabled", false).toBool());
+  ui_.slider_container->setEnabled(ui_.enable->isChecked());
 
   PresetChanged(selected_preset);
 }
@@ -110,10 +111,18 @@ void Equalizer::LoadDefaultPresets() {
 
 void Equalizer::AddPreset(const QString& name, const Params& params) {
   presets_[name] = params;
-  ui_.preset->addItem(name);
+  if (ui_.preset->findText(name) == -1)
+    ui_.preset->addItem(name);
 }
 
 void Equalizer::PresetChanged(const QString& name) {
+  if (presets_.contains(last_preset_)) {
+    if (presets_[last_preset_] != current_params()) {
+      SaveCurrentPreset();
+    }
+  }
+  last_preset_ = name;
+
   Params& p = presets_[name];
 
   loading_ = true;
@@ -123,28 +132,26 @@ void Equalizer::PresetChanged(const QString& name) {
   loading_ = false;
 
   ParametersChanged();
+  Save();
 }
 
-void Equalizer::AddPreset() {
-  QString name;
-  forever {
-    name = QInputDialog::getText(this, tr("New preset"), tr("Name"),
-                                 QLineEdit::Normal, name);
-    if (name.isEmpty())
-      return;
-
-    if (presets_.contains(name)) {
-      QMessageBox::information(this, tr("New preset"), tr("There is already a preset with that name"),
-                               QMessageBox::Ok);
-      continue;
-    }
-
-    break;
+void Equalizer::SavePreset() {
+  QString name = SaveCurrentPreset();
+  if (!name.isEmpty()) {
+    last_preset_ = name;
+    ui_.preset->setCurrentIndex(ui_.preset->findText(name));
   }
+}
 
-  AddPreset(name, Params());
-  ui_.preset->setCurrentIndex(ui_.preset->findText(name));
+QString Equalizer::SaveCurrentPreset() {
+  QString name = QInputDialog::getText(this, tr("Save preset"), tr("Name"),
+                                       QLineEdit::Normal, last_preset_);
+  if (name.isEmpty())
+    return QString();
+
+  AddPreset(name, current_params());
   Save();
+  return name;
 }
 
 void Equalizer::DelPreset() {
@@ -189,23 +196,20 @@ QList<int> Equalizer::gain_values() const {
   return ret;
 }
 
+Equalizer::Params Equalizer::current_params() const {
+  QList<int> gains = gain_values();
+
+  Params ret;
+  ret.preamp = preamp_value();
+  std::copy(gains.begin(), gains.end(), ret.gain);
+  return ret;
+}
+
 void Equalizer::ParametersChanged() {
   if (loading_)
     return;
 
   emit ParametersChanged(preamp_value(), gain_values());
-
-  // Update the preset
-  QString name = ui_.preset->currentText();
-  if (!presets_.contains(name) || name.isEmpty())
-    return;
-
-  Params& p = presets_[name];
-  p.preamp = preamp_->value();
-  for (int i=0 ; i<kBands ; ++i)
-    p.gain[i] = gain_[i]->value();
-
-  Save();
 }
 
 void Equalizer::Save() {
@@ -229,6 +233,17 @@ void Equalizer::Save() {
   s.setValue("enabled", ui_.enable->isChecked());
 }
 
+void Equalizer::closeEvent(QCloseEvent* e) {
+  QString name = ui_.preset->currentText();
+  if (!presets_.contains(name))
+    return;
+
+  if (presets_[name] == current_params())
+    return;
+
+  SavePreset();
+}
+
 
 Equalizer::Params::Params()
   : preamp(0)
@@ -245,6 +260,18 @@ Equalizer::Params::Params(int g0, int g1, int g2, int g3, int g4, int g5,
   gain[5] = g5;  gain[6] = g6; gain[7] = g7;  gain[8] = g8; gain[9] = g9;
 }
 
+bool Equalizer::Params::operator ==(const Equalizer::Params& other) const {
+  if (preamp != other.preamp) return false;
+  for (int i=0 ; i<Equalizer::kBands ; ++i) {
+    if (gain[i] != other.gain[i]) return false;
+  }
+  return true;
+}
+
+bool Equalizer::Params::operator !=(const Equalizer::Params& other) const {
+  return ! (*this == other);
+}
+
 QDataStream &operator<<(QDataStream& s, const Equalizer::Params& p) {
   s << p.preamp;
   for (int i=0 ; i<Equalizer::kBands ; ++i)
@@ -258,5 +285,3 @@ QDataStream &operator>>(QDataStream& s, Equalizer::Params& p) {
     s >> p.gain[i];
   return s;
 }
-
-
