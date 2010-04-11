@@ -39,6 +39,7 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   // Playback
   connect(ui_.fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
   connect(ui_.fading_out, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
+  connect(ui_.fading_auto, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
   connect(ui_.gst_plugin, SIGNAL(currentIndexChanged(int)), SLOT(GstPluginChanged(int)));
 
   // Behaviour
@@ -118,6 +119,7 @@ void SettingsDialog::accept() {
   s.setValue("FadeoutEnabled", ui_.fading_out->isChecked());
   s.setValue("FadeoutDuration", ui_.fading_duration->value());
   s.setValue("CrossfadeEnabled", ui_.fading_cross->isChecked());
+  s.setValue("AutoCrossfadeEnabled", ui_.fading_auto->isChecked());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);
@@ -175,6 +177,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   s.beginGroup(Engine::Base::kSettingsGroup);
   ui_.fading_out->setChecked(s.value("FadeoutEnabled", true).toBool());
   ui_.fading_cross->setChecked(s.value("CrossfadeEnabled", true).toBool());
+  ui_.fading_auto->setChecked(s.value("AutoCrossfadeEnabled", false).toBool());
   ui_.fading_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
   s.endGroup();
 
@@ -329,5 +332,6 @@ void SettingsDialog::GstPluginChanged(int index) {
 
 void SettingsDialog::FadingOptionsChanged() {
   ui_.fading_options->setEnabled(
-      ui_.fading_out->isChecked() || ui_.fading_cross->isChecked());
+      ui_.fading_out->isChecked() || ui_.fading_cross->isChecked() ||
+      ui_.fading_auto->isChecked());
 }

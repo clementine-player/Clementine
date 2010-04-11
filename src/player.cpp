@@ -81,6 +81,7 @@ void Player::Init() {
     qFatal("Error initialising audio engine");
 
   connect(engine_, SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(engine_, SIGNAL(TrackAboutToEnd()), SLOT(Next()));
   connect(engine_, SIGNAL(TrackEnded()), SLOT(TrackEnded()));
   connect(engine_, SIGNAL(MetaData(Engine::SimpleMetaBundle)),
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));

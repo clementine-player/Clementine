@@ -412,6 +412,17 @@ void GstEngine::timerEvent( QTimerEvent* ) {
   // this is why the timer must run as long as we are playing, and not just when
   // we are fading
   PruneScope();
+
+  // Emit TrackAboutToEnd when we're a few seconds away from finishing
+  if (current_pipeline_ && autocrossfade_enabled_) {
+    const qint64 position = current_pipeline_->position();
+    const qint64 length = current_pipeline_->length();
+    const qint64 msec_remaining = (length - position) / 1000000;
+    const qint64 fudge = 100; // Mmm fudge
+
+    if (length > 0 && msec_remaining < fadeout_duration_ + fudge)
+      EmitAboutToEnd();
+  }
 }
 
 void GstEngine::HandlePipelineError(const QString& message) {

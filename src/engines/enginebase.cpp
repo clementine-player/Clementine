@@ -32,7 +32,8 @@ Engine::Base::Base()
     fadeout_enabled_(true),
     fadeout_duration_(2000),
     crossfade_enabled_(true),
-    crossfade_next_track_(false)
+    crossfade_next_track_(false),
+    about_to_end_emitted_(false)
 {
 }
 
@@ -41,6 +42,7 @@ Engine::Base::~Base() {
 
 bool Engine::Base::Load(const QUrl &url) {
   url_ = url;
+  about_to_end_emitted_ = false;
   return true;
 }
 
@@ -62,4 +64,13 @@ void Engine::Base::ReloadSettings() {
   fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
   fadeout_duration_ = s.value("FadeoutDuration", 2000).toInt();
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
+  autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
+}
+
+void Engine::Base::EmitAboutToEnd() {
+  if (about_to_end_emitted_)
+    return;
+
+  about_to_end_emitted_ = true;
+  emit TrackAboutToEnd();
 }

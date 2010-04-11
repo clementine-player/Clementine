@@ -72,6 +72,10 @@ class Base : public QObject {
   virtual void SetEqualizerParameters(int preamp, const QList<int>& bandGains) {}
 
  signals:
+  // Emitted when crossfading is enabled and the track is crossfade_duration_
+  // away from finishing
+  void TrackAboutToEnd();
+
   void TrackEnded();
 
   void StatusText(const QString&);
@@ -86,11 +90,12 @@ class Base : public QObject {
 
   virtual void SetVolumeSW( uint percent ) = 0;
   static uint MakeVolumeLogarithmic( uint volume );
+  void EmitAboutToEnd();
 
   Base( const Base& );
   const Base &operator=( const Base& );
 
-protected:
+ protected:
   uint  volume_;
   QUrl  url_;
   Scope scope_;
@@ -98,7 +103,11 @@ protected:
   bool fadeout_enabled_;
   int fadeout_duration_;
   bool crossfade_enabled_;
+  bool autocrossfade_enabled_;
   bool crossfade_next_track_;
+
+ private:
+  bool about_to_end_emitted_;
 };
 
 
