@@ -85,10 +85,9 @@ class GstEnginePipeline : public QObject {
   GstElement* audiobin_;
 
   // Elements in the audiobin
-  // audioconvert ! equalizer ! identity ! volume ! audioscale ! audioconvert ! audiosink
+  // audioconvert ! equalizer ! volume ! audioscale ! audioconvert ! audiosink
   GstElement* audioconvert_;
   GstElement* equalizer_;
-  GstElement* identity_;
   GstElement* volume_;
   GstElement* audioscale_;
   GstElement* audiosink_;

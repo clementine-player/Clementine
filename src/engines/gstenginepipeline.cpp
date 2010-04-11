@@ -30,7 +30,6 @@ GstEnginePipeline::GstEnginePipeline()
     audiobin_(NULL),
     audioconvert_(NULL),
     equalizer_(NULL),
-    identity_(NULL),
     volume_(NULL),
     audioscale_(NULL),
     audiosink_(NULL),
@@ -81,7 +80,6 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   gst_bin_add(GST_BIN(audiobin_), equalizer_);
 
   if (!(audioconvert_ = GstEngine::CreateElement("audioconvert", audiobin_))) { return false; }
-  if (!(identity_ = GstEngine::CreateElement("identity", audiobin_))) { return false; }
   if (!(volume_ = GstEngine::CreateElement("volume", audiobin_))) { return false; }
   if (!(audioscale_ = GstEngine::CreateElement("audioresample", audiobin_))) { return false; }
 
@@ -107,7 +105,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
   GstElement* convert = GstEngine::CreateElement("audioconvert", audiobin_, "FFFUUUU");
   if (!convert) { return false; }
-  gst_element_link_many(equalizer_, identity_, volume_,
+  gst_element_link_many(equalizer_, volume_,
                         audioscale_, convert, audiosink_, NULL);
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
