@@ -352,11 +352,11 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   // Equalizer
   connect(equalizer_, SIGNAL(ParametersChanged(int,QList<int>)),
-          player_->GetEngine(), SLOT(setEqualizerParameters(int,QList<int>)));
+          player_->GetEngine(), SLOT(SetEqualizerParameters(int,QList<int>)));
   connect(equalizer_, SIGNAL(EnabledChanged(bool)),
-          player_->GetEngine(), SLOT(setEqualizerEnabled(bool)));
-  player_->GetEngine()->setEqualizerEnabled(equalizer_->is_enabled());
-  player_->GetEngine()->setEqualizerParameters(
+          player_->GetEngine(), SLOT(SetEqualizerEnabled(bool)));
+  player_->GetEngine()->SetEqualizerEnabled(equalizer_->is_enabled());
+  player_->GetEngine()->SetEqualizerParameters(
       equalizer_->preamp_value(), equalizer_->gain_values());
 
   // Statusbar widgets

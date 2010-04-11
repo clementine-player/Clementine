@@ -54,7 +54,6 @@ GstEngine::GstEngine()
     delayq_(g_queue_new()),
     current_sample_(0),
     equalizer_enabled_(false),
-    shutdown_(false),
     can_decode_pipeline_(NULL),
     can_decode_src_(NULL),
     can_decode_bin_(NULL)
@@ -77,7 +76,7 @@ GstEngine::~GstEngine() {
 }
 
 
-bool GstEngine::init() {
+bool GstEngine::Init() {
   // GStreamer initialization
   GError *err;
   if ( !gst_init_check( NULL, NULL, &err ) ) {
@@ -106,7 +105,7 @@ void GstEngine::ReloadSettings() {
 }
 
 
-bool GstEngine::canDecode(const QUrl &url) {
+bool GstEngine::CanDecode(const QUrl &url) {
   // We had some bug reports claiming that video files cause crashes in canDecode(),
   // so don't try to decode them
   if ( url.path().toLower().endsWith( ".mov" ) ||
@@ -182,7 +181,7 @@ uint GstEngine::length() const {
 
 Engine::State GstEngine::state() const {
   if (!current_pipeline_)
-    return m_url.isEmpty() ? Engine::Empty : Engine::Idle;
+    return url_.isEmpty() ? Engine::Empty : Engine::Idle;
 
   switch (current_pipeline_->state()) {
     case GST_STATE_NULL:    return Engine::Empty;
@@ -200,14 +199,14 @@ void GstEngine::NewBuffer(GstBuffer* buf) {
 const Engine::Scope& GstEngine::scope() {
   UpdateScope();
 
-  if (current_sample_ >= SCOPESIZE) {
+  if (current_sample_ >= kScopeSize) {
     // ok, we have a full buffer now, so give it to the scope
-    for (int i=0; i< SCOPESIZE; i++)
-      m_scope[i] = current_scope_[i];
+    for (int i=0; i< kScopeSize; i++)
+      scope_[i] = current_scope_[i];
     current_sample_ = 0;
   }
 
-  return m_scope;
+  return scope_;
 }
 
 void GstEngine::UpdateScope() {
@@ -263,8 +262,8 @@ void GstEngine::UpdateScope() {
   // loop while we fill the current buffer.  If we need another buffer and one is available,
   // get it and keep filling.  If there are no more buffers available (not too likely)
   // then leave everything in this state and wait until the next time the scope updates
-  while (buf && current_sample_ < SCOPESIZE && i < sz) {
-    for (int j = 0; j < channels && current_sample_ < SCOPESIZE; j++) {
+  while (buf && current_sample_ < kScopeSize && i < sz) {
+    for (int j = 0; j < channels && current_sample_ < kScopeSize; j++) {
       current_scope_[current_sample_ ++] = data[i + j];
     }
     i+=channels; // advance to the next frame
@@ -286,10 +285,10 @@ void GstEngine::UpdateScope() {
   }
 }
 
-bool GstEngine::load(const QUrl& url, bool stream) {
-  Engine::Base::load( url, stream );
+bool GstEngine::Load(const QUrl& url) {
+  Engine::Base::Load(url);
 
-  bool crossfade = current_pipeline_ && crossfade_enabled_ && m_xfadeNextTrack;
+  bool crossfade = current_pipeline_ && crossfade_enabled_ && crossfade_next_track_;
 
   shared_ptr<GstEnginePipeline> pipeline(CreatePipeline(url));
   if (!pipeline)
@@ -300,14 +299,14 @@ bool GstEngine::load(const QUrl& url, bool stream) {
 
   current_pipeline_ = pipeline;
 
-  setVolume(m_volume);
-  setEqualizerEnabled(equalizer_enabled_);
-  setEqualizerParameters(equalizer_preamp_, equalizer_gains_);
+  SetVolume(volume_);
+  SetEqualizerEnabled(equalizer_enabled_);
+  SetEqualizerParameters(equalizer_preamp_, equalizer_gains_);
 
   // Maybe fade in this track
   if (crossfade) {
     current_pipeline_->StartFader(fadeout_duration_, QTimeLine::Forward);
-    m_xfadeNextTrack = false;
+    crossfade_next_track_ = false;
   }
 
   return true;
@@ -323,7 +322,7 @@ void GstEngine::StartFadeout() {
 }
 
 
-bool GstEngine::play( uint offset ) {
+bool GstEngine::Play( uint offset ) {
   // Try to play input pipeline; if fails, destroy input bin
   if (!current_pipeline_->SetState(GST_STATE_PLAYING)) {
     qWarning() << "Could not set thread to PLAYING.";
@@ -332,50 +331,50 @@ bool GstEngine::play( uint offset ) {
   }
 
   // If "Resume playback on start" is enabled, we must seek to the last position
-  if (offset) seek(offset);
+  if (offset) Seek(offset);
 
   current_sample_ = 0;
   startTimer(kTimerInterval);
-  emit stateChanged(Engine::Playing);
+  emit StateChanged(Engine::Playing);
   return true;
 }
 
 
-void GstEngine::stop() {
-  m_url = QUrl(); // To ensure we return Empty from state()
+void GstEngine::Stop() {
+  url_ = QUrl(); // To ensure we return Empty from state()
 
   if (fadeout_enabled_)
     StartFadeout();
 
   current_pipeline_.reset();
-  emit stateChanged(Engine::Empty);
+  emit StateChanged(Engine::Empty);
 }
 
 void GstEngine::FadeoutFinished() {
   fadeout_pipeline_.reset();
 }
 
-void GstEngine::pause() {
+void GstEngine::Pause() {
   if (!current_pipeline_)
     return;
 
   if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
     current_pipeline_->SetState(GST_STATE_PAUSED);
-    emit stateChanged(Engine::Paused);
+    emit StateChanged(Engine::Paused);
   }
 }
 
-void GstEngine::unpause() {
+void GstEngine::Unpause() {
   if (!current_pipeline_)
     return;
 
   if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
     current_pipeline_->SetState(GST_STATE_PLAYING);
-    emit stateChanged(Engine::Playing);
+    emit StateChanged(Engine::Playing);
   }
 }
 
-void GstEngine::seek( uint ms ) {
+void GstEngine::Seek(uint ms) {
   if (!current_pipeline_)
     return;
 
@@ -383,12 +382,9 @@ void GstEngine::seek( uint ms ) {
     ClearScopeQ();
   else
     qDebug() << "Seek failed";
-
-  // ??
-  //gst_element_get_state(gst_pipeline_, NULL, NULL, 100*GST_MSECOND);
 }
 
-void GstEngine::setEqualizerEnabled(bool enabled) {
+void GstEngine::SetEqualizerEnabled(bool enabled) {
   equalizer_enabled_= enabled;
 
   if (current_pipeline_)
@@ -396,7 +392,7 @@ void GstEngine::setEqualizerEnabled(bool enabled) {
 }
 
 
-void GstEngine::setEqualizerParameters( int preamp, const QList<int>& band_gains ) {
+void GstEngine::SetEqualizerParameters( int preamp, const QList<int>& band_gains ) {
   equalizer_preamp_ = preamp;
   equalizer_gains_ = band_gains;
 
@@ -404,7 +400,7 @@ void GstEngine::setEqualizerParameters( int preamp, const QList<int>& band_gains
     current_pipeline_->SetEqualizerParams(preamp, band_gains);
 }
 
-void GstEngine::setVolumeSW( uint percent ) {
+void GstEngine::SetVolumeSW( uint percent ) {
   if (current_pipeline_)
     current_pipeline_->SetVolume(percent);
 }
@@ -415,30 +411,7 @@ void GstEngine::timerEvent( QTimerEvent* ) {
   // this is why the timer must run as long as we are playing, and not just when
   // we are fading
   PruneScope();
-
-  // *** Volume fading ***
-
-  // Are we currently fading?
-  /*if ( fade_value_ > 0.0 ) {
-    // TODO
-    //m_fadeValue -= ( AmarokConfig::fadeoutLength() ) ?  1.0 / AmarokConfig::fadeoutLength() * TIMER_INTERVAL : 1.0;
-    fade_value_ -= 1.0;
-
-    // Fade finished?
-    if ( fade_value_ <= 0.0 ) {
-      // Fade transition has finished, stop playback
-      qDebug() << "[Gst-Engine] Fade-out finished.";
-      DestroyPipeline();
-      //killTimers();
-    }
-    setVolume( volume() );
-  }*/
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE SLOTS
-/////////////////////////////////////////////////////////////////////////////////////
 
 void GstEngine::HandlePipelineError(const QString& message) {
   qDebug() << "Gstreamer error:" << message;
@@ -449,11 +422,11 @@ void GstEngine::HandlePipelineError(const QString& message) {
 
 void GstEngine::EndOfStreamReached() {
   current_pipeline_.reset();
-  emit trackEnded();
+  emit TrackEnded();
 }
 
 void GstEngine::NewMetaData(const Engine::SimpleMetaBundle& bundle) {
-  emit metaData(bundle);
+  emit MetaData(bundle);
 }
 
 GstElement* GstEngine::CreateElement(

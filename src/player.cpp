@@ -63,7 +63,7 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 
   SetVolume(settings_.value("volume", 50).toInt());
 
-  connect(engine_, SIGNAL(error(QString)), SIGNAL(Error(QString)));
+  connect(engine_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   // MPRIS DBus interface.
 #ifdef Q_WS_X11
@@ -77,15 +77,15 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
 }
 
 void Player::Init() {
-  if (!engine_->init())
+  if (!engine_->Init())
     qFatal("Error initialising audio engine");
 
-  connect(engine_, SIGNAL(stateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(engine_, SIGNAL(trackEnded()), SLOT(TrackEnded()));
-  connect(engine_, SIGNAL(metaData(Engine::SimpleMetaBundle)),
+  connect(engine_, SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(engine_, SIGNAL(TrackEnded()), SLOT(TrackEnded()));
+  connect(engine_, SIGNAL(MetaData(Engine::SimpleMetaBundle)),
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
-  engine_->setVolume(settings_.value("volume", 50).toInt());
+  engine_->SetVolume(settings_.value("volume", 50).toInt());
 }
 
 void Player::ReloadSettings() {
@@ -109,7 +109,7 @@ void Player::NextItem() {
     return;
   }
 
-  engine_->setXFadeNextTrack(true);
+  engine_->SetCrossfadeNextTrack(true);
   PlayAt(i, false);
 }
 
@@ -126,7 +126,7 @@ void Player::PlayPause() {
   switch (engine_->state()) {
   case Engine::Paused:
     qDebug() << "Unpausing";
-    engine_->unpause();
+    engine_->Unpause();
     break;
 
   case Engine::Playing:
@@ -135,7 +135,7 @@ void Player::PlayPause() {
       break;
 
     qDebug() << "Pausing";
-    engine_->pause();
+    engine_->Pause();
     break;
 
   case Engine::Empty:
@@ -153,7 +153,7 @@ void Player::PlayPause() {
 }
 
 void Player::Stop() {
-  engine_->stop();
+  engine_->Stop();
   playlist_->set_current_index(-1);
 }
 
@@ -182,7 +182,7 @@ void Player::EngineStateChanged(Engine::State state) {
 void Player::SetVolume(int value) {
   int volume = qBound(0, value, 100);
   settings_.setValue("volume", volume);
-  engine_->setVolume(volume);
+  engine_->SetVolume(volume);
   emit VolumeChanged(volume);
 }
 
@@ -206,7 +206,7 @@ void Player::PlayAt(int index, bool manual_change) {
   if (item->options() & PlaylistItem::SpecialPlayBehaviour)
     item->StartLoading();
   else {
-    engine_->play(item->Url());
+    engine_->Play(item->Url());
 
     if (lastfm_->IsScrobblingEnabled())
       lastfm_->NowPlaying(item->Metadata());
@@ -224,7 +224,7 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
   if (!item || item->Url() != original_url)
     return;
 
-  engine_->play(media_url);
+  engine_->Play(media_url);
 
   current_item_ = item->Metadata();
   current_item_options_ = item->options();
@@ -237,7 +237,7 @@ void Player::CurrentMetadataChanged(const Song &metadata) {
 }
 
 void Player::Seek(int seconds) {
-  engine_->seek(seconds * 1000);
+  engine_->Seek(seconds * 1000);
 
   // If we seek the track we don't want to submit it to last.fm
   playlist_->set_scrobbled(true);
@@ -365,10 +365,10 @@ void Player::Mute() {
 void Player::Pause() {
   switch (GetState()) {
     case Engine::Playing:
-      engine_->pause();
+      engine_->Pause();
       break;
     case Engine::Paused:
-      engine_->pause();
+      engine_->Pause();
       break;
     default:
       return;
@@ -381,7 +381,7 @@ void Player::Play() {
       Seek(0);
       break;
     case Engine::Paused:
-      engine_->unpause();
+      engine_->Unpause();
       break;
     default:
       Next();

@@ -60,16 +60,14 @@ class GstEngine : public Engine::Base {
   static const char* kSettingsGroup;
   static const char* kAutoSink;
 
-  bool init();
+  bool Init();
 
-  bool canDecode(const QUrl& url);
+  bool CanDecode(const QUrl& url);
+
   uint position() const;
   uint length() const;
   Engine::State state() const;
   const Engine::Scope& scope();
-
-  void gstStatusText(const QString& str) { emit statusText( str ); }
-  void gstMetaData(Engine::SimpleMetaBundle &bundle) { emit metaData( bundle ); }
 
   PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
   static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString& name);
@@ -78,23 +76,23 @@ class GstEngine : public Engine::Base {
       const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
  public slots:
-  bool load(const QUrl&, bool stream);
-  bool play(uint offset);
-  void stop();
-  void pause();
-  void unpause();
-  void seek(uint ms);
+  bool Load(const QUrl&);
+  bool Play(uint offset);
+  void Stop();
+  void Pause();
+  void Unpause();
+  void Seek(uint ms);
 
   /** Set whether equalizer is enabled */
-  void setEqualizerEnabled(bool);
+  void SetEqualizerEnabled(bool);
 
   /** Set equalizer preamp and gains, range -100..100. Gains are 10 values. */
-  void setEqualizerParameters(int preamp, const QList<int>& bandGains);
+  void SetEqualizerParameters(int preamp, const QList<int>& bandGains);
 
   void ReloadSettings();
 
  protected:
-  void setVolumeSW(uint percent);
+  void SetVolumeSW(uint percent);
   void timerEvent(QTimerEvent*);
 
  private slots:
@@ -110,20 +108,16 @@ class GstEngine : public Engine::Base {
   static void CanDecodeNewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
   static void CanDecodeLastCallback(GstElement*, gpointer);
 
-  /** Get a list of available plugins from a specified Class */
   PluginDetailsList GetPluginList(const QString& classname) const;
-
-  /** Construct the output pipeline */
-  boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url);
-
-  /** Beams the streaming buffer status to Amarok */
-  void SendBufferStatus();
 
   void StartFadeout();
 
-  /////////////////////////////////////////////////////////////////////////////////////
-  // DATA MEMBERS
-  /////////////////////////////////////////////////////////////////////////////////////
+  boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url);
+
+  void UpdateScope();
+  qint64 PruneScope();
+
+ private:
   // Interval of main timer, handles the volume fading
   static const int kTimerInterval = 40; //msec
 
@@ -133,29 +127,16 @@ class GstEngine : public Engine::Base {
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
 
-  //////////
-  // scope
-  //////////
-  // delay queue for synchronizing samples to where the audio device is playing
   GQueue* delayq_;
-  // the current set of samples for the scope, in case we don't have enough buffers yet
-  // and end up with an incomplete buffer
-  float current_scope_[SCOPESIZE];
-  // the sample in m_currentScope we are working on
+  float current_scope_[kScopeSize];
   int current_sample_;
 
-  void UpdateScope();
-  qint64 PruneScope();
+  QMutex scope_mutex_;
 
-  QMutex            scope_mutex_;
+  bool equalizer_enabled_;
+  int equalizer_preamp_;
+  QList<int> equalizer_gains_;
 
-  float             fade_value_;
-
-  bool              equalizer_enabled_;
-  int               equalizer_preamp_;
-  QList<int>        equalizer_gains_;
-
-  bool shutdown_;
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
 

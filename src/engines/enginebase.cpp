@@ -27,44 +27,32 @@
 const char* Engine::Base::kSettingsGroup = "Player";
 
 Engine::Base::Base()
-  : m_xfadeLength( 0 )
-        , m_xfadeNextTrack( false )
-        , m_volume( 50 )
-        , m_scope( SCOPESIZE )
-        , m_isStream( false )
-{}
-
-
-Engine::Base::~Base()
+  : volume_(50),
+    scope_(kScopeSize),
+    fadeout_enabled_(true),
+    fadeout_duration_(2000),
+    crossfade_enabled_(true),
+    crossfade_next_track_(false)
 {
 }
 
-//////////////////////////////////////////////////////////////////////
-
-
-bool
-Engine::Base::load( const QUrl &url, bool stream )
-{
-    m_url = url;
-    m_isStream = stream;
-
-    return true;
+Engine::Base::~Base() {
 }
 
-
-void Engine::Base::setVolume( uint value )
-{
-    m_volume = value;
-
-    setVolumeSW( makeVolumeLogarithmic( value ) );
+bool Engine::Base::Load(const QUrl &url) {
+  url_ = url;
+  return true;
 }
 
+void Engine::Base::SetVolume(uint value) {
+  volume_ = value;
 
-uint
-Engine::Base::makeVolumeLogarithmic( uint volume ) // static
-{
-    // We're using a logarithmic function to make the volume ramp more natural.
-    return static_cast<uint>( 100 - 100.0 * std::log10( ( 100 - volume ) * 0.09 + 1.0 ) );
+  SetVolumeSW(MakeVolumeLogarithmic(value));
+}
+
+uint Engine::Base::MakeVolumeLogarithmic(uint volume) {
+  // We're using a logarithmic function to make the volume ramp more natural.
+  return static_cast<uint>( 100 - 100.0 * std::log10( ( 100 - volume ) * 0.09 + 1.0 ) );
 }
 
 void Engine::Base::ReloadSettings() {

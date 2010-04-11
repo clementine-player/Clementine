@@ -180,7 +180,7 @@ void LibraryWatcher::ScanSubdirectory(
 
       if (sValidImages.contains(ext_part))
         album_art[dir_part] << child;
-      else if (engine_->canDecode(QUrl::fromLocalFile(child)))
+      else if (engine_->CanDecode(QUrl::fromLocalFile(child)))
         files_on_disk << child;
     }
   }
