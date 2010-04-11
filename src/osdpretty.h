@@ -64,9 +64,12 @@ class OSDPretty : public QWidget {
   QRgb foreground_color() const { return foreground_color_.rgb(); }
   QRgb background_color() const { return background_color_.rgb(); }
   qreal background_opacity() const { return background_opacity_; }
+  int popup_display() const { return popup_display_; }
+  QPoint popup_pos() const { return popup_pos_; }
 
   // When the user has been moving the popup, use these to get its current
-  // position and screen
+  // position and screen.  Note that these return invalid values if the popup
+  // is hidden.
   int current_display() const;
   QPoint current_pos() const;
 

@@ -303,6 +303,9 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
     new_pos.setY(qBound(geometry.top(), new_pos.y(), geometry.bottom() - height()));
 
     move(new_pos);
+
+    popup_display_ = current_display();
+    popup_pos_ = current_pos();
   }
 }
 

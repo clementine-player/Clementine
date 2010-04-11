@@ -140,8 +140,8 @@ void SettingsDialog::accept() {
   s.setValue("foreground_color", pretty_popup_->foreground_color());
   s.setValue("background_color", pretty_popup_->background_color());
   s.setValue("background_opacity", pretty_popup_->background_opacity());
-  s.setValue("popup_display", pretty_popup_->current_display());
-  s.setValue("popup_pos", pretty_popup_->current_pos());
+  s.setValue("popup_display", pretty_popup_->popup_display());
+  s.setValue("popup_pos", pretty_popup_->popup_pos());
   s.endGroup();
 
   ui_.library_config->Save();
