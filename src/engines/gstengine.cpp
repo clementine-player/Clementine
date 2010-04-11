@@ -288,7 +288,8 @@ void GstEngine::UpdateScope() {
 bool GstEngine::Load(const QUrl& url) {
   Engine::Base::Load(url);
 
-  bool crossfade = current_pipeline_ && crossfade_enabled_ && crossfade_next_track_;
+  const bool crossfade = current_pipeline_ && crossfade_enabled_ &&
+                         crossfade_next_track_;
 
   shared_ptr<GstEnginePipeline> pipeline(CreatePipeline(url));
   if (!pipeline)
