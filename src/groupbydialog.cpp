@@ -27,10 +27,11 @@ GroupByDialog::GroupByDialog(QWidget *parent)
   mapping_.insert(Mapping(Library::GroupBy_None, 0));
   mapping_.insert(Mapping(Library::GroupBy_Album, 1));
   mapping_.insert(Mapping(Library::GroupBy_Artist, 2));
-  mapping_.insert(Mapping(Library::GroupBy_Composer, 3));
-  mapping_.insert(Mapping(Library::GroupBy_Genre, 4));
-  mapping_.insert(Mapping(Library::GroupBy_Year, 5));
-  mapping_.insert(Mapping(Library::GroupBy_YearAlbum, 6));
+  mapping_.insert(Mapping(Library::GroupBy_AlbumArtist, 3));
+  mapping_.insert(Mapping(Library::GroupBy_Composer, 4));
+  mapping_.insert(Mapping(Library::GroupBy_Genre, 5));
+  mapping_.insert(Mapping(Library::GroupBy_Year, 6));
+  mapping_.insert(Mapping(Library::GroupBy_YearAlbum, 7));
 
   connect(ui_.button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));

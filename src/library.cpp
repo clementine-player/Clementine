@@ -165,10 +165,11 @@ void Library::SongsDiscovered(const SongList& songs) {
         // item's key
         QString key;
         switch (type) {
-          case GroupBy_Album:    key = song.album(); break;
-          case GroupBy_Artist:   key = song.artist(); break;
-          case GroupBy_Composer: key = song.composer(); break;
-          case GroupBy_Genre:    key = song.genre(); break;
+          case GroupBy_Album:       key = song.album(); break;
+          case GroupBy_Artist:      key = song.artist(); break;
+          case GroupBy_Composer:    key = song.composer(); break;
+          case GroupBy_Genre:       key = song.genre(); break;
+          case GroupBy_AlbumArtist: key = song.albumartist(); break;
           case GroupBy_Year:
             key = QString::number(qMax(0, song.year())); break;
           case GroupBy_YearAlbum:
@@ -229,6 +230,7 @@ QString Library::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_Artist:
   case GroupBy_Composer:
   case GroupBy_Genre:
+  case GroupBy_AlbumArtist:
     if (item->sort_text[0].isDigit())
       return "0";
     if (item->sort_text[0] == ' ')
@@ -256,6 +258,7 @@ QString Library::DividerDisplayText(GroupBy type, const QString& key) const {
   case GroupBy_Artist:
   case GroupBy_Composer:
   case GroupBy_Genre:
+  case GroupBy_AlbumArtist:
     if (key == "0")
       return "0-9";
     return key.toUpper();
@@ -498,6 +501,9 @@ void Library::InitQuery(GroupBy type, LibraryQuery* q) {
   case GroupBy_Genre:
     q->SetColumnSpec("DISTINCT genre");
     break;
+  case GroupBy_AlbumArtist:
+    q->SetColumnSpec("DISTINCT albumartist");
+    break;
   case GroupBy_None:
     q->SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
     break;
@@ -533,6 +539,9 @@ void Library::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q) {
     break;
   case GroupBy_Genre:
     q->AddWhere("genre", item->key);
+    break;
+  case GroupBy_AlbumArtist:
+    q->AddWhere("albumartist", item->key);
     break;
   case GroupBy_None:
     Q_ASSERT(0);
@@ -587,6 +596,7 @@ LibraryItem* Library::ItemFromQuery(GroupBy type,
   case GroupBy_Composer:
   case GroupBy_Genre:
   case GroupBy_Album:
+  case GroupBy_AlbumArtist:
     item->key = q.Value(0).toString();
     item->display_text = TextOrUnknown(item->key);
     item->sort_text = SortText(item->key);
@@ -634,6 +644,7 @@ LibraryItem* Library::ItemFromSong(GroupBy type,
   case GroupBy_Composer:                      item->key = s.composer();
   case GroupBy_Genre: if (item->key.isNull()) item->key = s.genre();
   case GroupBy_Album: if (item->key.isNull()) item->key = s.album();
+  case GroupBy_AlbumArtist: if (item->key.isNull()) item->key = s.albumartist();
     item->display_text = TextOrUnknown(item->key);
     item->sort_text = SortText(item->key);
     break;

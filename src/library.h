@@ -58,6 +58,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
     GroupBy_Year = 4,
     GroupBy_Composer = 5,
     GroupBy_Genre = 6,
+    GroupBy_AlbumArtist = 7,
   };
 
   struct Grouping {
