@@ -83,6 +83,7 @@ class MainWindow : public QMainWindow {
   void PlaylistPlay();
   void PlaylistStopAfter();
   void PlaylistRemoveCurrent();
+  void PlaylistEditFinished(const QModelIndex& index);
   void EditTracks();
   void RenumberTracks();
   void SelectionSetValue();

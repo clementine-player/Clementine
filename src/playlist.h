@@ -140,6 +140,7 @@ class Playlist : public QAbstractListModel {
 
  signals:
   void CurrentSongChanged(const Song& metadata);
+  void EditingFinished(const QModelIndex& index);
 
   void PlaylistChanged();
 

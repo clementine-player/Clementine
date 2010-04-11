@@ -171,7 +171,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
   }
 }
 
-bool Playlist::setData(const QModelIndex &index, const QVariant &value, int role) {
+bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
   int row = index.row();
   Song song = item_at(row)->Metadata();
 
@@ -181,6 +181,7 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int role
   song.Save();
   item_at(row)->Reload();
   emit dataChanged(index, index);
+  emit EditingFinished(index);
   return true;
 }
 

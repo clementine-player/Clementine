@@ -195,6 +195,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
   connect(playlist_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
+  connect(playlist_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
 
   connect(ui_.playlist, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_.playlist, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -776,7 +777,6 @@ void MainWindow::SelectionSetValue() {
 
 void MainWindow::EditValue() {
   ui_.playlist->edit(playlist_menu_index_);
-  connect(playlist_, SIGNAL(dataChanged(QModelIndex, QModelIndex)), SLOT(SelectionSetValue()));
 }
 
 void MainWindow::LibraryScanStarted() {
@@ -868,4 +868,9 @@ void MainWindow::LibraryGroupingChanged(const Library::Grouping& g) {
     }
   }
   ui_.group_by_advanced->setChecked(true);
+}
+
+void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
+  if (index == playlist_menu_index_)
+    SelectionSetValue();
 }
