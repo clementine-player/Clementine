@@ -56,12 +56,12 @@ Playlist::~Playlist() {
 }
 
 QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
-  if (role != Qt::DisplayRole)
+  if (role != Qt::DisplayRole && role != Qt::ToolTipRole)
     return QVariant();
 
   QString name = column_name((Playlist::Column)section);
   if(name.size())
-      return name;
+    return name;
 
   return QVariant();
 }
