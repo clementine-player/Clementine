@@ -136,6 +136,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
       return stop_after_.isValid() && stop_after_.row() == index.row();
 
     case Qt::EditRole:
+    case Qt::ToolTipRole:
     case Qt::DisplayRole: {
       PlaylistItem* item = items_[index.row()];
       Song song = item->Metadata();

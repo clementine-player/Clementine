@@ -371,6 +371,7 @@ QVariant Library::data(const LibraryItem* item, int role) const {
 
   switch (role) {
     case Qt::DisplayRole:
+    case Qt::ToolTipRole:
       return item->DisplayText();
 
     case Qt::DecorationRole:
