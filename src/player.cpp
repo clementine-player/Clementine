@@ -113,8 +113,7 @@ void Player::NextItem() {
 }
 
 void Player::TrackEnded() {
-  int i = playlist_->current_index();
-  if (i == -1 || playlist_->stop_after_current()) {
+  if (playlist_->stop_after_current()) {
     Stop();
     return;
   }
