@@ -34,6 +34,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QtDebug>
+#include <QCoreApplication>
 
 #include <gst/gst.h>
 #include <iostream>
@@ -226,16 +227,12 @@ bool GstEngine::init() {
     return false;
   }
 
-  // Check if registry exists
-  GstElement* dummy = gst_element_factory_make ( "fakesink", "fakesink" );
-  if ( !dummy ) {
-    qWarning("GStreamer is missing a registry.  Please make sure that you"
-             " have installed all necessary GStreamer plugins (e.g. OGG"
-             " and MP3), and run 'gst-register' afterwards.");
-    return false;
-  }
-
-  gst_object_unref(dummy);
+#ifdef Q_OS_WIN32
+  // Set the plugin path on windows
+  GstRegistry* registry = gst_registry_get_default();
+  gst_registry_add_path(registry, QString(
+      QCoreApplication::applicationDirPath() + "/gstreamer-plugins").toLocal8Bit().constData());
+#endif
 
   return true;
 }
