@@ -53,6 +53,9 @@ class GstEnginePipeline : public QObject {
   qint64 length() const;
   GstState state() const;
 
+ public slots:
+  void SetVolumeModifier(qreal mod);
+
  signals:
   void EndOfStreamReached();
   void MetadataFound(const Engine::SimpleMetaBundle& bundle);
@@ -68,6 +71,8 @@ class GstEnginePipeline : public QObject {
   static void HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static void EventCallback(GstPad*, GstEvent*, gpointer);
 
+  void UpdateVolume();
+
  private:
   static const int kGstStateTimeout = 10000000;
 
@@ -75,6 +80,9 @@ class GstEnginePipeline : public QObject {
   QString sink_;
   QString device_;
   bool forwards_buffers_;
+
+  int volume_percent_;
+  qreal volume_modifier_;
 
   GstElement* pipeline_;
 

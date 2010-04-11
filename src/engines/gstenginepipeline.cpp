@@ -24,6 +24,8 @@ GstEnginePipeline::GstEnginePipeline()
   : QObject(NULL),
     valid_(false),
     sink_(GstEngine::kAutoSink),
+    volume_percent_(100),
+    volume_modifier_(1.0),
     pipeline_(NULL),
     src_(NULL),
     decodebin_(NULL),
@@ -293,5 +295,16 @@ void GstEnginePipeline::SetEqualizerParams(int preamp, const QList<int>& band_ga
 }
 
 void GstEnginePipeline::SetVolume(int percent) {
-  g_object_set(G_OBJECT(volume_), "volume", double(percent) * 0.01, NULL);
+  volume_percent_ = percent;
+  UpdateVolume();
+}
+
+void GstEnginePipeline::SetVolumeModifier(qreal mod) {
+  volume_modifier_ = mod;
+  UpdateVolume();
+}
+
+void GstEnginePipeline::UpdateVolume() {
+  float vol = double(volume_percent_) * 0.01 * volume_modifier_;
+  g_object_set(G_OBJECT(volume_), "volume", vol, NULL);
 }

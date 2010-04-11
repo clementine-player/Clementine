@@ -103,6 +103,7 @@ class GstEngine : public Engine::Base {
   void NewMetaData(const Engine::SimpleMetaBundle& bundle);
   void NewBuffer(GstBuffer* buf);
   void ClearScopeQ();
+  void FadeoutFinished();
 
  private:
   // Callbacks
@@ -127,7 +128,11 @@ class GstEngine : public Engine::Base {
   QString sink_;
   QString device_;
 
+  bool fadeout_enabled_;
+  int fadeout_duration_;
+
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
+  boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
 
   //////////
   // scope

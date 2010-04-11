@@ -36,6 +36,7 @@
 #include <QSettings>
 #include <QtDebug>
 #include <QCoreApplication>
+#include <QTimeLine>
 
 #include <gst/gst.h>
 #include <iostream>
@@ -100,6 +101,8 @@ void GstEngine::ReloadSettings() {
 
   sink_ = s.value("sink", kAutoSink).toString();
   device_ = s.value("device").toString();
+  fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
+  fadeout_duration_ = s.value("FadeoutDuration", 2000).toInt();
 }
 
 
@@ -307,6 +310,9 @@ bool GstEngine::play( uint offset ) {
     return false;
   }
 
+  // Stop any active fadeout
+  fadeout_pipeline_.reset();
+
   // If "Resume playback on start" is enabled, we must seek to the last position
   if (offset) seek(offset);
 
@@ -320,8 +326,25 @@ bool GstEngine::play( uint offset ) {
 void GstEngine::stop() {
   m_url = QUrl(); // To ensure we return Empty from state()
 
+  if (fadeout_enabled_) {
+    fadeout_pipeline_ = current_pipeline_;
+    disconnect(fadeout_pipeline_.get(), 0, 0, 0);
+    ClearScopeQ();
+
+    QTimeLine* fadeout = new QTimeLine(fadeout_duration_, this);
+    connect(fadeout, SIGNAL(valueChanged(qreal)), fadeout_pipeline_.get(), SLOT(SetVolumeModifier(qreal)));
+    connect(fadeout, SIGNAL(finished()), SLOT(FadeoutFinished()));
+    connect(fadeout_pipeline_.get(), SIGNAL(destroyed()), fadeout, SLOT(deleteLater()));
+    fadeout->setDirection(QTimeLine::Backward);
+    fadeout->start();
+  }
+
   current_pipeline_.reset();
   emit stateChanged(Engine::Empty);
+}
+
+void GstEngine::FadeoutFinished() {
+  fadeout_pipeline_.reset();
 }
 
 void GstEngine::pause() {
