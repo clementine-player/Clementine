@@ -14,6 +14,7 @@ set(CLEMENTINE-SOURCES
     engines/enginebase.cpp
     engines/gstengine.cpp
     engines/gstequalizer.cpp
+    engines/gstenginepipeline.cpp
     analyzers/baranalyzer.cpp
     analyzers/analyzerbase.cpp
     fht.cpp
@@ -84,6 +85,7 @@ set(CLEMENTINE-MOC-HEADERS
     playlist.h
     engines/enginebase.h
     engines/gstengine.h
+    engines/gstenginepipeline.h
     sliderwidget.h
     playlistview.h
     backgroundthread.h

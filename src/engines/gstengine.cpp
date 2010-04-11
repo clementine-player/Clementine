@@ -23,6 +23,7 @@
 
 #include "gstengine.h"
 #include "gstequalizer.h"
+#include "gstenginepipeline.h"
 
 #include <math.h>
 #include <unistd.h>
@@ -39,157 +40,18 @@
 #include <gst/gst.h>
 #include <iostream>
 
-#define RETURN_IF_PIPELINE_EMPTY if ( !pipeline_filled_ ) return
-
 
 using std::vector;
+using boost::shared_ptr;
 
-GstEngine* GstEngine::sInstance = NULL;
 const char* GstEngine::kSettingsGroup = "GstEngine";
 const char* GstEngine::kAutoSink = "autoaudiosink";
 
 
-/////////////////////////////////////////////////////////////////////////////////////
-// CALLBACKS
-/////////////////////////////////////////////////////////////////////////////////////
-
-//GstBusSyncReply
-gboolean GstEngine::BusCallback(GstBus*, GstMessage* msg, gpointer) {
-  switch ( GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR: {
-      GError* error;
-      gchar* debugs;
-
-      gst_message_parse_error(msg,&error,&debugs);
-      qDebug() << "ERROR RECEIVED IN BUS_CB <" << error->message << ">" ;;
-
-      instance()->gst_error_ = QString::fromAscii( error->message );
-      instance()->gst_debug_ = QString::fromAscii( debugs );
-      QMetaObject::invokeMethod(instance(), "HandlePipelineError", Qt::QueuedConnection);
-      break;
-    }
-
-    case GST_MESSAGE_TAG: {
-      gchar* string=NULL;
-      Engine::SimpleMetaBundle bundle;
-      GstTagList* taglist;
-      gst_message_parse_tag(msg,&taglist);
-      bool success = false;
-
-      if ( gst_tag_list_get_string( taglist, GST_TAG_TITLE, &string ) && string ) {
-        qDebug() << "received tag 'Title': " << QString( string ) ;
-        bundle.title = string;
-        success = true;
-      }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_ARTIST, &string ) && string ) {
-        qDebug() << "received tag 'Artist': " << QString( string ) ;
-        bundle.artist = string;
-        success = true;
-      }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_COMMENT, &string ) && string ) {
-        qDebug() << "received tag 'Comment': " << QString( string ) ;
-        bundle.comment = string;
-        success = true;
-      }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_ALBUM, &string ) && string ) {
-        qDebug() << "received tag 'Album': " << QString( string ) ;
-        bundle.album = string;
-        success = true;
-      }
-      g_free(string);
-      gst_tag_list_free(taglist);
-      if (success) {
-        instance()->meta_bundle_ = bundle;
-        QMetaObject::invokeMethod(instance(), "NewMetaData", Qt::QueuedConnection);
-      }
-      break;
-    }
-
-    default:
-      break;
-  }
-  return GST_BUS_DROP;
-}
-
-GstBusSyncReply GstEngine::BusCallbackSync(GstBus*, GstMessage* msg, gpointer) {
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_EOS:
-      QMetaObject::invokeMethod(instance(), "EndOfStreamReached",
-                                Qt::QueuedConnection);
-      break;
-
-    default:
-      break;
-  }
-
-  return GST_BUS_PASS;
-}
-
-
-void GstEngine::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer) {
-  GstPad* const audiopad = gst_element_get_pad( instance()->gst_audiobin_, "sink" );
-
-  if ( GST_PAD_IS_LINKED( audiopad ) ) {
-    qDebug() << "audiopad is already linked. Unlinking old pad." ;
-    gst_pad_unlink( audiopad, GST_PAD_PEER( audiopad ) );
-  }
-
-  gst_pad_link( pad, audiopad );
-
-  gst_object_unref( audiopad );
-}
-
-
-void GstEngine::HandoffCallback(GstPad*, GstBuffer* buf, gpointer arg) {
-  GstEngine *thisObj = static_cast<GstEngine *>( arg );
-
-  // push the buffer onto the delay queue
-  gst_buffer_ref(buf);
-  g_queue_push_tail(thisObj->delayq_, buf);
-}
-
-void GstEngine::EventCallback(GstPad*, GstEvent* event, gpointer) {
-  
-  switch ( static_cast<int>(event->type) )
-  {
-    case GST_EVENT_EOS:
-      qDebug() << "EOS reached";
-      QMetaObject::invokeMethod(instance(), "EndOfStreamReached",
-                                Qt::QueuedConnection);
-      break;
-
-    case GST_EVENT_TAG:
-      qDebug() << "GOT NEW TAG";
-      break;
-
-    default:
-      break;
-  }
-}
-
-
-void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer) {
-  GstCaps* caps = gst_pad_get_caps(pad);
-  if (gst_caps_get_size(caps) > 0) {
-    GstStructure* str = gst_caps_get_structure(caps, 0);
-    if (g_strrstr(gst_structure_get_name( str ), "audio" ))
-      instance()->can_decode_success_ = true;
-  }
-  gst_caps_unref(caps);
-}
-
-void GstEngine::CanDecodeLastCallback(GstElement*, gpointer) {
-  instance()->can_decode_last_ = true;
-}
-
-
 GstEngine::GstEngine()
   : Engine::Base(),
-    event_cb_id_(0),
     delayq_(g_queue_new()),
     current_sample_(0),
-    pipeline_filled_(false),
-    fade_value_(0.0),
     equalizer_enabled_(false),
     shutdown_(false),
     can_decode_pipeline_(NULL),
@@ -200,16 +62,13 @@ GstEngine::GstEngine()
 }
 
 GstEngine::~GstEngine() {
-  DestroyPipeline();
+  current_pipeline_.reset();
 
   if (can_decode_pipeline_)
     gst_object_unref(GST_OBJECT(can_decode_pipeline_));
 
-#ifdef GST_KIOSTREAMS
-  delete[] m_streamBuf;
-#endif
-
   // Destroy scope delay queue
+  ClearScopeQ();
   g_queue_free(delayq_);
 
   // Save configuration
@@ -218,8 +77,6 @@ GstEngine::~GstEngine() {
 
 
 bool GstEngine::init() {
-  sInstance = this;
-
   // GStreamer initialization
   GError *err;
   if ( !gst_init_check( NULL, NULL, &err ) ) {
@@ -264,8 +121,8 @@ bool GstEngine::canDecode(const QUrl &url) {
     can_decode_bin_ = CreateElement("decodebin", can_decode_pipeline_);
 
     gst_element_link(can_decode_src_, can_decode_bin_);
-    g_signal_connect(G_OBJECT(can_decode_bin_), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), NULL);
-    g_signal_connect(G_OBJECT(can_decode_bin_), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), NULL);
+    g_signal_connect(G_OBJECT(can_decode_bin_), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), this);
+    g_signal_connect(G_OBJECT(can_decode_bin_), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), this);
   }
 
   // Set the file we're testing
@@ -287,43 +144,44 @@ bool GstEngine::canDecode(const QUrl &url) {
   return can_decode_success_;
 }
 
+void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer self) {
+  GstEngine* instance = static_cast<GstEngine*>(self);
 
-uint GstEngine::position() const {
-  RETURN_IF_PIPELINE_EMPTY 0;
+  GstCaps* caps = gst_pad_get_caps(pad);
+  if (gst_caps_get_size(caps) > 0) {
+    GstStructure* str = gst_caps_get_structure(caps, 0);
+    if (g_strrstr(gst_structure_get_name( str ), "audio" ))
+      instance->can_decode_success_ = true;
+  }
+  gst_caps_unref(caps);
+}
 
-  GstFormat fmt = GST_FORMAT_TIME;
-  // Value will hold the current time position in nanoseconds. Must be initialized!
-  gint64 value = 0;
-  gst_element_query_position( gst_pipeline_, &fmt, &value );
-
-  return static_cast<uint>( ( value / GST_MSECOND ) ); // nanosec -> msec
+void GstEngine::CanDecodeLastCallback(GstElement*, gpointer self) {
+  GstEngine* instance = static_cast<GstEngine*>(self);
+  instance->can_decode_last_ = true;
 }
 
 
+uint GstEngine::position() const {
+  if (!current_pipeline_)
+    return 0;
+
+  return uint(current_pipeline_->position() / GST_MSECOND);
+}
+
 uint GstEngine::length() const {
-  RETURN_IF_PIPELINE_EMPTY 0;
+  if (!current_pipeline_)
+    return 0;
 
-  GstFormat fmt = GST_FORMAT_TIME;
-  // Value will hold the track length in nanoseconds. Must be initialized!
-  gint64 value = 0;
-  gst_element_query_duration(gst_pipeline_,  &fmt, &value);
-
-  return uint( value / GST_MSECOND ); // nanosec -> msec
+  return uint(current_pipeline_->length() / GST_MSECOND);
 }
 
 
 Engine::State GstEngine::state() const {
-  RETURN_IF_PIPELINE_EMPTY m_url.isEmpty() ? Engine::Empty : Engine::Idle;
+  if (!current_pipeline_)
+    return m_url.isEmpty() ? Engine::Empty : Engine::Idle;
 
-  GstState s, sp;
-  GstStateChangeReturn sret = gst_element_get_state( gst_pipeline_, &s, &sp, kGstStateTimeout);
-
-  if (sret == GST_STATE_CHANGE_FAILURE) {
-    qDebug() << "Gst get state fails";
-    return Engine::Empty;
-  }
-
-  switch (s) {
+  switch (current_pipeline_->state()) {
     case GST_STATE_NULL:    return Engine::Empty;
     case GST_STATE_READY:   return Engine::Idle;
     case GST_STATE_PLAYING: return Engine::Playing;
@@ -332,6 +190,9 @@ Engine::State GstEngine::state() const {
   }
 }
 
+void GstEngine::NewBuffer(GstBuffer* buf) {
+  g_queue_push_tail(delayq_, buf);
+}
 
 const Engine::Scope& GstEngine::scope() {
   UpdateScope();
@@ -422,129 +283,14 @@ void GstEngine::UpdateScope() {
   }
 }
 
-
-bool GstEngine::metaDataForUrl(const QUrl &url, Engine::SimpleMetaBundle& b) {
-  qDebug() << "GstEngine::metaDataForUrl " << url ;
-  // TODO
-  /*if ( url.scheme() == "cdda" )
-    {
-        // TODO: gstreamer doesn't support cddb natively, but could perhaps use libkcddb?
-        b.title = QString(  "Track %1"  ).arg( url.host() );
-        b.album = "AudioCD";
-
-        if ( setupAudioCD( url.encodedQuery().remove( QRegExp( "^\\?" ) ), url.host().toUInt(), true ) )
-        {
-            GstPad *pad;
-            if ( ( pad = gst_element_get_pad( gst_src_, "src" ) ) )
-            {
-                GstCaps *caps;
-                if ( ( caps = gst_pad_get_caps( pad ) ) )
-                {
-                    GstStructure *structure;
-                    if ( ( structure = gst_caps_get_structure( GST_CAPS(caps), 0 ) ) )
-                    {
-                        gint channels, rate, width;
-                        gst_structure_get_int( structure, "channels", &channels );
-                        gst_structure_get_int( structure, "rate", &rate );
-                        gst_structure_get_int( structure, "width", &width );
-                        b.bitrate = ( rate * width * channels ) / 1000;
-                        b.samplerate = rate;
-                    }
-                    gst_caps_unref( caps );
-                }
-
-                GstQuery *query;
-                if ( ( query = gst_query_new_duration( GST_FORMAT_TIME ) ) )
-                {
-                    if ( gst_pad_query( pad, query )) {
-                        gint64 time;
-
-                        gst_query_parse_duration( query, NULL, &time );
-                        b.length = QString::number( time / GST_SECOND );
-                    }
-                    gst_query_unref( query );
-                }
-            }
-            gst_object_unref( GST_OBJECT( pad ) );
-            if ( !gst_element_set_state( gst_pipeline_, GST_STATE_NULL ) ) {
-                qWarning() << "Could not set thread to NULL.";
-                DestroyPipeline();
-            }
-        }
-        return true;
-    }*/
-  return false;
-}
-
-
-bool GstEngine::getAudioCDContents(const QString &device, QList<QUrl> &urls) {
-  // TODO
-  /*qDebug() << "GstEngine::getAudioCDContents " << device ;
-
-    bool result = false;
-    if ( setupAudioCD( device, 0, true ) )
-    {
-        GstFormat format;
-        if ( ( format = gst_format_get_by_nick("track") ) != GST_FORMAT_UNDEFINED )
-        {
-            gint64 tracks = 0;
-            if ( gst_element_query_duration( gst_pipeline_, &format, &tracks ) )
-            {
-                qDebug() << "Found " << tracks << " cdda tracks" ;
-                for ( int i = 1; i <= tracks; ++i )
-                {
-                    QUrl temp( QString( "cdda://%1" ).arg( i ) );
-                    if ( !device.isNull() )
-                        temp.setQuery( device );
-                    urls << temp;
-                }
-                result = true;
-            }
-        }
-        if ( !gst_element_set_state( gst_pipeline_, GST_STATE_NULL ) ) {
-            qWarning() << "Could not set thread to NULL.";
-            DestroyPipeline();
-        }
-    }
-    return result;*/
-  return false;
-}
-
 bool GstEngine::load(const QUrl& url, bool stream) {
   Engine::Base::load( url, stream );
 
-  qDebug() << "Loading url: " << url.toEncoded() ;
-
-  if ( url.scheme() == "cdda" ) {
-    /*if ( !setupAudioCD( url.encodedQuery().remove( QRegExp( "^\\?" ) ), url.host().toUInt(), false ) )*/
+  shared_ptr<GstEnginePipeline> pipeline(CreatePipeline(url));
+  if (!pipeline)
     return false;
-  } else {
-    if ( !CreatePipeline() )
-      return false;
 
-    gst_src_ = CreateElement("giosrc");
-    if (!gst_src_) {
-      qDebug() << "******* cannot get stream src " ;
-
-      DestroyPipeline();
-      return false;
-    }
-
-    g_object_set (G_OBJECT (gst_src_), "location", url.toEncoded().constData(), NULL);
-    gst_bin_add( GST_BIN( gst_pipeline_ ), gst_src_ );
-
-    if ( !( gst_decodebin_ = CreateElement( "decodebin", gst_pipeline_ ) ) ) { DestroyPipeline(); return false; }
-    g_signal_connect( G_OBJECT( gst_decodebin_ ), "new-decoded-pad", G_CALLBACK( NewPadCallback ), NULL );
-
-    GstPad* p = gst_element_get_pad (gst_decodebin_, "sink");
-    if (p) {
-      event_cb_id_ = gst_pad_add_event_probe (p, G_CALLBACK(EventCallback), this);
-      gst_object_unref (p);
-    }
-
-    // Link elements. The link from decodebin to audioconvert will be made in the newPad-callback
-    gst_element_link( gst_src_, gst_decodebin_ );
-  }
+  current_pipeline_ = pipeline;
 
   setVolume(m_volume);
   setEqualizerEnabled(equalizer_enabled_);
@@ -555,10 +301,9 @@ bool GstEngine::load(const QUrl& url, bool stream) {
 
 bool GstEngine::play( uint offset ) {
   // Try to play input pipeline; if fails, destroy input bin
-  GstStateChangeReturn sret;
-  if ( !(sret = gst_element_set_state( gst_pipeline_, GST_STATE_PLAYING )) ) {
+  if (!current_pipeline_->SetState(GST_STATE_PLAYING)) {
     qWarning() << "Could not set thread to PLAYING.";
-    DestroyPipeline();
+    current_pipeline_.reset();
     return false;
   }
 
@@ -575,50 +320,48 @@ bool GstEngine::play( uint offset ) {
 void GstEngine::stop() {
   m_url = QUrl(); // To ensure we return Empty from state()
 
-  if (pipeline_filled_) {
-    // Is a fade running?
-    if ( fade_value_ == 0.0 )
-      fade_value_ = 1.0;
-    else
-      DestroyPipeline();
-  }
-
+  current_pipeline_.reset();
   emit stateChanged(Engine::Empty);
 }
 
 void GstEngine::pause() {
-  RETURN_IF_PIPELINE_EMPTY;
+  if (!current_pipeline_)
+    return;
 
-  if ( GST_STATE( gst_pipeline_ ) == GST_STATE_PLAYING ) {
-    gst_element_set_state( gst_pipeline_, GST_STATE_PAUSED );
-    emit stateChanged( Engine::Paused );
+  if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
+    current_pipeline_->SetState(GST_STATE_PAUSED);
+    emit stateChanged(Engine::Paused);
   }
 }
 
 void GstEngine::unpause() {
-  RETURN_IF_PIPELINE_EMPTY;
+  if (!current_pipeline_)
+    return;
 
-  if ( GST_STATE( gst_pipeline_ ) == GST_STATE_PAUSED ) {
-    gst_element_set_state( gst_pipeline_, GST_STATE_PLAYING );
-    emit stateChanged( Engine::Playing );
+  if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
+    current_pipeline_->SetState(GST_STATE_PLAYING);
+    emit stateChanged(Engine::Playing);
   }
 }
 
 void GstEngine::seek( uint ms ) {
-  RETURN_IF_PIPELINE_EMPTY;
+  if (!current_pipeline_)
+    return;
 
-  if (!gst_element_seek(gst_pipeline_, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, GST_SEEK_TYPE_SET, ms*GST_MSECOND,
-                            GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE)) qDebug() << "Seek failed" ;
-  else ClearScopeQ();
-  gst_element_get_state(gst_pipeline_, NULL, NULL, 100*GST_MSECOND);
+  if (current_pipeline_->Seek(ms * GST_MSECOND))
+    ClearScopeQ();
+  else
+    qDebug() << "Seek failed";
+
+  // ??
+  //gst_element_get_state(gst_pipeline_, NULL, NULL, 100*GST_MSECOND);
 }
 
 void GstEngine::setEqualizerEnabled(bool enabled) {
   equalizer_enabled_= enabled;
 
-  RETURN_IF_PIPELINE_EMPTY;
-
-  g_object_set(G_OBJECT(gst_equalizer_), "active", enabled, NULL);
+  if (current_pipeline_)
+    current_pipeline_->SetEqualizerEnabled(enabled);
 }
 
 
@@ -626,30 +369,13 @@ void GstEngine::setEqualizerParameters( int preamp, const QList<int>& band_gains
   equalizer_preamp_ = preamp;
   equalizer_gains_ = band_gains;
 
-  RETURN_IF_PIPELINE_EMPTY;
-
-  // Preamp
-  g_object_set(G_OBJECT(gst_equalizer_), "preamp", ( preamp + 100 ) / 2, NULL);
-
-  // Gains
-  vector<int> gains_temp;
-  gains_temp.resize( band_gains.count() );
-  for ( int i = 0; i < band_gains.count(); i++ )
-    gains_temp[i] = band_gains.at( i ) + 100;
-
-  g_object_set(G_OBJECT(gst_equalizer_), "gain", &gains_temp, NULL);
+  if (current_pipeline_)
+    current_pipeline_->SetEqualizerParams(preamp, band_gains);
 }
 
 void GstEngine::setVolumeSW( uint percent ) {
-  RETURN_IF_PIPELINE_EMPTY;
-
-  double fade;
-  if ( fade_value_ > 0.0 )
-    fade = 1.0 - log10( ( 1.0 - fade_value_ ) * 9.0 + 1.0 );
-  else
-    fade = 1.0;
-
-  g_object_set( G_OBJECT(gst_volume_), "volume", (double) percent * fade * 0.01, NULL );
+  if (current_pipeline_)
+    current_pipeline_->SetVolume(percent);
 }
 
 
@@ -662,7 +388,7 @@ void GstEngine::timerEvent( QTimerEvent* ) {
   // *** Volume fading ***
 
   // Are we currently fading?
-  if ( fade_value_ > 0.0 ) {
+  /*if ( fade_value_ > 0.0 ) {
     // TODO
     //m_fadeValue -= ( AmarokConfig::fadeoutLength() ) ?  1.0 / AmarokConfig::fadeoutLength() * TIMER_INTERVAL : 1.0;
     fade_value_ -= 1.0;
@@ -675,7 +401,7 @@ void GstEngine::timerEvent( QTimerEvent* ) {
       //killTimers();
     }
     setVolume( volume() );
-  }
+  }*/
 }
 
 
@@ -683,34 +409,20 @@ void GstEngine::timerEvent( QTimerEvent* ) {
 // PRIVATE SLOTS
 /////////////////////////////////////////////////////////////////////////////////////
 
-void GstEngine::HandlePipelineError() {
-  QString text = "[GStreamer Error] ";
-  text += gst_error_;
+void GstEngine::HandlePipelineError(const QString& message) {
+  qDebug() << "Gstreamer error:" << message;
 
-  if ( !gst_debug_.isEmpty() ) {
-    text += " ** ";
-    text += gst_debug_;
-  }
-
-  gst_error_ = QString();
-  emit statusText( text );
-  qWarning() << text ;
-
-  DestroyPipeline();
+  current_pipeline_.reset();
 }
 
 
 void GstEngine::EndOfStreamReached() {
-  DestroyPipeline();
+  current_pipeline_.reset();
   emit trackEnded();
 }
 
-void GstEngine::NewMetaData() {
-  emit metaData( meta_bundle_ );
-}
-
-void GstEngine::ErrorNoOutput() {
-  QMessageBox::information( 0, "Error", "<p>Please select a GStreamer <u>output plugin</u> in the engine settings dialog.</p>" );
+void GstEngine::NewMetaData(const Engine::SimpleMetaBundle& bundle) {
+  emit metaData(bundle);
 }
 
 GstElement* GstEngine::CreateElement(
@@ -759,116 +471,30 @@ GstEngine::PluginDetailsList
   return ret;
 }
 
+shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
+  shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline);
+  ret->set_forwards_buffers(true);
+  ret->set_output_device(sink_, device_);
 
-bool GstEngine::CreatePipeline() {
-  DestroyPipeline();
+  connect(ret.get(), SIGNAL(EndOfStreamReached()), SLOT(EndOfStreamReached()));
+  connect(ret.get(), SIGNAL(BufferFound(GstBuffer*)), SLOT(NewBuffer(GstBuffer*)));
+  connect(ret.get(), SIGNAL(Error(QString)), SLOT(HandlePipelineError(QString)));
+  connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
+          SLOT(NewMetaData(Engine::SimpleMetaBundle)));
+  connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeQ()));
 
-  gst_pipeline_ = gst_pipeline_new( "pipeline" );
-  gst_audiobin_ = gst_bin_new( "audiobin" );
+  if (!ret->Init(url))
+    ret.reset();
 
-  if ( !( gst_audiosink_ = CreateElement( sink_, gst_audiobin_ ) ) ) {
-    QMetaObject::invokeMethod(this, "ErrorNoOutput", Qt::QueuedConnection);
-    return false;
-  }
-
-  if (DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty()) {
-    g_object_set(G_OBJECT(gst_audiosink_), "device", device_.toUtf8().constData(), NULL);
-  }
-
-  gst_equalizer_ = GST_ELEMENT(gst_equalizer_new());
-  gst_bin_add(GST_BIN(gst_audiobin_), gst_equalizer_);
-
-  if ( !( gst_audioconvert_ = CreateElement( "audioconvert", gst_audiobin_ ) ) ) { return false; }
-  if ( !( gst_identity_ = CreateElement( "identity", gst_audiobin_ ) ) ) { return false; }
-  if ( !( gst_volume_ = CreateElement( "volume", gst_audiobin_ ) ) ) { return false; }
-  if ( !( gst_audioscale_ = CreateElement( "audioresample", gst_audiobin_ ) ) ) { return false; }
-
-  GstPad* p;
-  p = gst_element_get_pad(gst_audioconvert_, "sink");
-  gst_element_add_pad(gst_audiobin_,gst_ghost_pad_new("sink",p));
-  gst_object_unref(p);
-
-  // add a data probe on the src pad if the audioconvert element for our scope
-  // we do it here because we want pre-equalized and pre-volume samples
-  // so that our visualization are not affected by them
-  p = gst_element_get_pad (gst_audioconvert_, "src");
-  gst_pad_add_buffer_probe (p, G_CALLBACK(HandoffCallback), this);
-  gst_object_unref (p);
-
-  // Ensure we get the right type out of audioconvert for our scope
-  GstCaps* caps = gst_caps_new_simple ("audio/x-raw-int",
-      "width", G_TYPE_INT, 16,
-      "signed", G_TYPE_BOOLEAN, true,
-      NULL);
-  gst_element_link_filtered(gst_audioconvert_, gst_equalizer_, caps);
-  gst_caps_unref(caps);
-
-  // Add an extra audioconvert at the end as osxaudiosink supports only one format.
-  GstElement* convert = CreateElement( "audioconvert", gst_audiobin_, "FFFUUUU" );
-  if (!convert) { return false; }
-  gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
-                         gst_audioscale_, convert, gst_audiosink_, NULL );
-
-
-  gst_bin_add( GST_BIN(gst_pipeline_), gst_audiobin_);
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), BusCallbackSync, NULL);
-  gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(gst_pipeline_)), BusCallback, NULL);
-
-  pipeline_filled_ = true;
-  return true;
+  return ret;
 }
-
-
-void GstEngine::DestroyPipeline() {
-  fade_value_ = 0.0;
-
-  ClearScopeQ();
-
-  if ( pipeline_filled_ ) {
-    // Remove the event handler while we destroy the pipeline
-    GstPad *p = gst_element_get_pad (gst_decodebin_, "sink");
-    if (p)
-      gst_pad_remove_event_probe(p, event_cb_id_);
-
-    gst_element_set_state( gst_pipeline_, GST_STATE_NULL );
-    gst_object_unref( GST_OBJECT( gst_pipeline_ ) );
-
-    pipeline_filled_ = false;
-  }
-}
-
-
-bool GstEngine::SetupAudioCD( const QString& device, unsigned track, bool pause) {
-  qDebug() << "setupAudioCD: device = " << device << ", track = " << track << ", pause = " << pause ;
-  bool filled = pipeline_filled_ && gst_src_ && strcmp( gst_element_get_name( gst_src_ ), "cdiocddasrc" ) == 0;
-  if ( filled || CreatePipeline() ) {
-    if ( filled || ( gst_src_ = CreateElement( "cdiocddasrc", gst_pipeline_, "cdiocddasrc" ) ) ) {
-      // TODO: allow user to configure default device rather than falling back to gstreamer default when no device passed in
-      if ( !device.isNull() )
-        g_object_set( G_OBJECT(gst_src_), "device", device.toAscii().constData(), NULL );
-      if ( track )
-        g_object_set (G_OBJECT (gst_src_), "track", track, NULL);
-      if ( filled || gst_element_link( gst_src_, gst_audiobin_ ) ) {
-        // the doco says we should only have to go to READY to read metadata, but that doesn't actually work
-        if ( gst_element_set_state( gst_pipeline_, pause ? GST_STATE_PAUSED : GST_STATE_READY ) != GST_STATE_CHANGE_FAILURE && gst_element_get_state( gst_pipeline_, NULL, NULL, GST_CLOCK_TIME_NONE ) == GST_STATE_CHANGE_SUCCESS )
-        {
-          return true;
-        }
-      }
-    }
-    DestroyPipeline();
-  }
-  return false;
-}
-
 
 qint64 GstEngine::PruneScope() {
-  if ( !pipeline_filled_ ) return 0; // don't prune if we aren't playing
+  if (!current_pipeline_)
+    return 0;
 
   // get the position playing in the audio device
-  GstFormat fmt = GST_FORMAT_TIME;
-  gint64 pos = 0;
-  gst_element_query_position( gst_pipeline_, &fmt, &pos );
+  gint64 pos = current_pipeline_->position();
 
   GstBuffer *buf = 0;
   quint64 etime;
