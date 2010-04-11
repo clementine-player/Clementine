@@ -72,6 +72,7 @@ set(CLEMENTINE-SOURCES
     equalizer.cpp
     equalizerslider.cpp
     tracksliderslider.cpp
+    stickyslider.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -134,6 +135,7 @@ set(CLEMENTINE-MOC-HEADERS
     groupbydialog.h
     equalizer.h
     equalizerslider.h
+    stickyslider.h
 )
 
 # UI files

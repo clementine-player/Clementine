@@ -14,28 +14,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EQUALISERSLIDER_H
-#define EQUALISERSLIDER_H
+#include "stickyslider.h"
 
-#include <QWidget>
+StickySlider::StickySlider(QWidget *parent)
+  : QSlider(parent),
+    sticky_center_(-1),
+    sticky_threshold_(10)
+{
+}
 
-#include "ui_equalizerslider.h"
+void StickySlider::mouseMoveEvent(QMouseEvent *e) {
+  QSlider::mouseMoveEvent(e);
 
-// Contains the slider and the label
-class EqualizerSlider : public QWidget {
-  Q_OBJECT
+  if (sticky_center_ == -1)
+    return;
 
- public:
-  EqualizerSlider(const QString& label, QWidget *parent = 0);
-
-  int value() const;
-  void set_value(int value);
-
- signals:
-  void ValueChanged(int value);
-
- private:
-  Ui::EqualizerSlider ui_;
-};
-
-#endif // EQUALISERSLIDER_H
+  const int v = value();
+  if (v <= sticky_center_ + sticky_threshold_ &&
+      v >= sticky_center_ - sticky_threshold_)
+    setValue(sticky_center_);
+}
