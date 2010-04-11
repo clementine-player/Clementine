@@ -110,10 +110,10 @@ TEST_F(LibraryTest, WithInitialArtists) {
   library_->StartThreads();
 
   ASSERT_EQ(5, library_sorted_->rowCount(QModelIndex()));
-  EXPECT_EQ("a", library_sorted_->index(0, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("A", library_sorted_->index(0, 0, QModelIndex()).data().toString());
   EXPECT_EQ("Artist 1", library_sorted_->index(1, 0, QModelIndex()).data().toString());
   EXPECT_EQ("Artist 2", library_sorted_->index(2, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("f", library_sorted_->index(3, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("F", library_sorted_->index(3, 0, QModelIndex()).data().toString());
   EXPECT_EQ("Foo", library_sorted_->index(4, 0, QModelIndex()).data().toString());
 }
 
@@ -149,7 +149,7 @@ TEST_F(LibraryTest, NumericHeaders) {
   EXPECT_EQ("0artist", library_sorted_->index(1, 0, QModelIndex()).data().toString());
   EXPECT_EQ("1artist", library_sorted_->index(2, 0, QModelIndex()).data().toString());
   EXPECT_EQ("2artist", library_sorted_->index(3, 0, QModelIndex()).data().toString());
-  EXPECT_EQ("z", library_sorted_->index(4, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("Z", library_sorted_->index(4, 0, QModelIndex()).data().toString());
   EXPECT_EQ("zartist", library_sorted_->index(5, 0, QModelIndex()).data().toString());
 }
 
@@ -159,7 +159,7 @@ TEST_F(LibraryTest, MixedCaseHeaders) {
   library_->StartThreads();
 
   ASSERT_EQ(3, library_sorted_->rowCount(QModelIndex()));
-  EXPECT_EQ("a", library_sorted_->index(0, 0, QModelIndex()).data().toString());
+  EXPECT_EQ("A", library_sorted_->index(0, 0, QModelIndex()).data().toString());
   EXPECT_EQ("Artist", library_sorted_->index(1, 0, QModelIndex()).data().toString());
   EXPECT_EQ("artist", library_sorted_->index(2, 0, QModelIndex()).data().toString());
 }
