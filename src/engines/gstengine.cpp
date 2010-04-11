@@ -806,17 +806,11 @@ bool GstEngine::CreatePipeline() {
   gst_element_link_filtered(gst_audioconvert_, gst_equalizer_, caps);
   gst_caps_unref(caps);
 
-  /* link elements */
-  #ifndef Q_OS_DARWIN
-  gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
-                         gst_audioscale_, gst_audiosink_, NULL );
-  #else
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
   GstElement* convert = CreateElement( "audioconvert", gst_audiobin_, "FFFUUUU" );
   if (!convert) { return false; }
   gst_element_link_many( gst_equalizer_, gst_identity_, gst_volume_,
                          gst_audioscale_, convert, gst_audiosink_, NULL );
-  #endif
 
 
   gst_bin_add( GST_BIN(gst_pipeline_), gst_audiobin_);
