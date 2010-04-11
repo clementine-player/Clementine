@@ -22,6 +22,8 @@
 
 #include <cmath>
 
+#include <QSettings>
+
 const char* Engine::Base::kSettingsGroup = "Player";
 
 Engine::Base::Base()
@@ -63,4 +65,13 @@ Engine::Base::makeVolumeLogarithmic( uint volume ) // static
 {
     // We're using a logarithmic function to make the volume ramp more natural.
     return static_cast<uint>( 100 - 100.0 * std::log10( ( 100 - volume ) * 0.09 + 1.0 ) );
+}
+
+void Engine::Base::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
+  fadeout_duration_ = s.value("FadeoutDuration", 2000).toInt();
+  crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
 }

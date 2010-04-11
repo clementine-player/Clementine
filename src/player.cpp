@@ -89,7 +89,7 @@ void Player::Init() {
 }
 
 void Player::ReloadSettings() {
-  engine_->reloadSettings();
+  engine_->ReloadSettings();
 }
 
 void Player::Next() {
@@ -109,6 +109,7 @@ void Player::NextItem() {
     return;
   }
 
+  engine_->setXFadeNextTrack(true);
   PlayAt(i, false);
 }
 

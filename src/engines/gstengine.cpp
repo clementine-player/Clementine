@@ -96,13 +96,13 @@ bool GstEngine::init() {
 }
 
 void GstEngine::ReloadSettings() {
+  Engine::Base::ReloadSettings();
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
   sink_ = s.value("sink", kAutoSink).toString();
   device_ = s.value("device").toString();
-  fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
-  fadeout_duration_ = s.value("FadeoutDuration", 2000).toInt();
 }
 
 
@@ -289,16 +289,37 @@ void GstEngine::UpdateScope() {
 bool GstEngine::load(const QUrl& url, bool stream) {
   Engine::Base::load( url, stream );
 
+  bool crossfade = current_pipeline_ && crossfade_enabled_ && m_xfadeNextTrack;
+
   shared_ptr<GstEnginePipeline> pipeline(CreatePipeline(url));
   if (!pipeline)
     return false;
+
+  if (crossfade)
+    StartFadeout();
 
   current_pipeline_ = pipeline;
 
   setVolume(m_volume);
   setEqualizerEnabled(equalizer_enabled_);
   setEqualizerParameters(equalizer_preamp_, equalizer_gains_);
+
+  // Maybe fade in this track
+  if (crossfade) {
+    current_pipeline_->StartFader(fadeout_duration_, QTimeLine::Forward);
+    m_xfadeNextTrack = false;
+  }
+
   return true;
+}
+
+void GstEngine::StartFadeout() {
+  fadeout_pipeline_ = current_pipeline_;
+  disconnect(fadeout_pipeline_.get(), 0, 0, 0);
+  ClearScopeQ();
+
+  fadeout_pipeline_->StartFader(fadeout_duration_, QTimeLine::Backward);
+  connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutFinished()));
 }
 
 
@@ -309,9 +330,6 @@ bool GstEngine::play( uint offset ) {
     current_pipeline_.reset();
     return false;
   }
-
-  // Stop any active fadeout
-  fadeout_pipeline_.reset();
 
   // If "Resume playback on start" is enabled, we must seek to the last position
   if (offset) seek(offset);
@@ -326,18 +344,8 @@ bool GstEngine::play( uint offset ) {
 void GstEngine::stop() {
   m_url = QUrl(); // To ensure we return Empty from state()
 
-  if (fadeout_enabled_) {
-    fadeout_pipeline_ = current_pipeline_;
-    disconnect(fadeout_pipeline_.get(), 0, 0, 0);
-    ClearScopeQ();
-
-    QTimeLine* fadeout = new QTimeLine(fadeout_duration_, this);
-    connect(fadeout, SIGNAL(valueChanged(qreal)), fadeout_pipeline_.get(), SLOT(SetVolumeModifier(qreal)));
-    connect(fadeout, SIGNAL(finished()), SLOT(FadeoutFinished()));
-    connect(fadeout_pipeline_.get(), SIGNAL(destroyed()), fadeout, SLOT(deleteLater()));
-    fadeout->setDirection(QTimeLine::Backward);
-    fadeout->start();
-  }
+  if (fadeout_enabled_)
+    StartFadeout();
 
   current_pipeline_.reset();
   emit stateChanged(Engine::Empty);

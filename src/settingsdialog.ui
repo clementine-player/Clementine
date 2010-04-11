@@ -51,7 +51,7 @@
        <string>Playback</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/media-playback-start-32.png</normaloff>:/media-playback-start-32.png</iconset>
       </property>
      </item>
@@ -60,7 +60,7 @@
        <string>Behaviour</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
       </property>
      </item>
@@ -69,7 +69,7 @@
        <string>Notifications</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/lightbulb.png</normaloff>:/lightbulb.png</iconset>
       </property>
      </item>
@@ -78,7 +78,7 @@
        <string>Music Library</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/library.png</normaloff>:/library.png</iconset>
       </property>
      </item>
@@ -87,7 +87,7 @@
        <string>Last.fm</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../data/data.qrc">
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
@@ -118,71 +118,76 @@
          <item>
           <widget class="QGroupBox" name="groupBox">
            <property name="title">
-            <string>Fadeout</string>
+            <string>Fading</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
-             <widget class="QRadioButton" name="no_fadeout">
+             <widget class="QCheckBox" name="fading_out">
               <property name="text">
-               <string>No fadeout</string>
+               <string>Fade out when stopping a track</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="fadeout">
+             <widget class="QCheckBox" name="fading_cross">
               <property name="text">
-               <string>Fadeout</string>
+               <string>Cross-fade between tracks</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="text">
-                 <string>Fadeout duration</string>
-                </property>
-                <property name="indent">
-                 <number>22</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="fadeout_duration">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="suffix">
-                 <string> ms</string>
-                </property>
-                <property name="maximum">
-                 <number>10000</number>
-                </property>
-                <property name="singleStep">
-                 <number>1000</number>
-                </property>
-                <property name="value">
-                 <number>2000</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
+             <widget class="QWidget" name="fading_options" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Fading duration</string>
+                 </property>
+                 <property name="indent">
+                  <number>22</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="fading_duration">
+                 <property name="suffix">
+                  <string> ms</string>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>1000</number>
+                 </property>
+                 <property name="value">
+                  <number>2000</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>257</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -556,9 +561,15 @@
  </customwidgets>
  <tabstops>
   <tabstop>list</tabstop>
-  <tabstop>no_fadeout</tabstop>
-  <tabstop>fadeout</tabstop>
-  <tabstop>fadeout_duration</tabstop>
+  <tabstop>fading_out</tabstop>
+  <tabstop>fading_cross</tabstop>
+  <tabstop>fading_duration</tabstop>
+  <tabstop>gst_plugin</tabstop>
+  <tabstop>gst_device</tabstop>
+  <tabstop>b_show_tray_icon_</tabstop>
+  <tabstop>b_always_show_</tabstop>
+  <tabstop>b_always_hide_</tabstop>
+  <tabstop>b_remember_</tabstop>
   <tabstop>notifications_none</tabstop>
   <tabstop>notifications_native</tabstop>
   <tabstop>notifications_pretty</tabstop>
@@ -571,7 +582,9 @@
   <tabstop>notifications_fg_choose</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>list</sender>
@@ -586,38 +599,6 @@
     <hint type="destinationlabel">
      <x>307</x>
      <y>96</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>fadeout</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>fadeout_duration</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>272</x>
-     <y>108</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>369</x>
-     <y>132</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>fadeout</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>label</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>108</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>264</x>
-     <y>131</y>
     </hint>
    </hints>
   </connection>

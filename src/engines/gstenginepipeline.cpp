@@ -26,6 +26,7 @@ GstEnginePipeline::GstEnginePipeline()
     sink_(GstEngine::kAutoSink),
     volume_percent_(100),
     volume_modifier_(1.0),
+    fader_(NULL),
     pipeline_(NULL),
     src_(NULL),
     decodebin_(NULL),
@@ -307,4 +308,19 @@ void GstEnginePipeline::SetVolumeModifier(qreal mod) {
 void GstEnginePipeline::UpdateVolume() {
   float vol = double(volume_percent_) * 0.01 * volume_modifier_;
   g_object_set(G_OBJECT(volume_), "volume", vol, NULL);
+}
+
+void GstEnginePipeline::StartFader(int duration_msec,
+                                   QTimeLine::Direction direction,
+                                   QTimeLine::CurveShape shape) {
+  delete fader_;
+
+  fader_ = new QTimeLine(duration_msec, this);
+  connect(fader_, SIGNAL(valueChanged(qreal)), SLOT(SetVolumeModifier(qreal)));
+  connect(fader_, SIGNAL(finished()), SIGNAL(FaderFinished()));
+  fader_->setDirection(direction);
+  fader_->setCurveShape(shape);
+  fader_->start();
+
+  SetVolumeModifier(fader_->currentValue());
 }

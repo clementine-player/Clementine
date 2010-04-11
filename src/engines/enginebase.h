@@ -239,12 +239,10 @@ namespace Engine
         /** allow the engine to perform necessary work on changes in the playlist **/
         virtual void playlistChanged() { };
 
-        virtual void reloadSettings() {};
-
         static const char* kSettingsGroup;
 
     public slots:
-        virtual void ReloadSettings() {}
+        virtual void ReloadSettings();
 
         /** Set whether equalizer is enabled
           * You don't need to cache the parameters, setEqualizerParameters is called straight after this
@@ -282,6 +280,10 @@ namespace Engine
         QUrl  m_url;
         Scope m_scope;
         bool  m_isStream;
+
+        bool fadeout_enabled_;
+        int fadeout_duration_;
+        bool crossfade_enabled_;
     };
 
 

@@ -53,10 +53,9 @@ class SettingsDialog : public QDialog {
   void ChooseFgColor();
 
   void UpdatePopupVisible();
-
   void ShowTrayIconToggled(bool on);
-
   void GstPluginChanged(int index);
+  void FadingOptionsChanged();
 
  private:
   Ui::SettingsDialog ui_;

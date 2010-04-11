@@ -119,6 +119,8 @@ class GstEngine : public Engine::Base {
   /** Beams the streaming buffer status to Amarok */
   void SendBufferStatus();
 
+  void StartFadeout();
+
   /////////////////////////////////////////////////////////////////////////////////////
   // DATA MEMBERS
   /////////////////////////////////////////////////////////////////////////////////////
@@ -127,9 +129,6 @@ class GstEngine : public Engine::Base {
 
   QString sink_;
   QString device_;
-
-  bool fadeout_enabled_;
-  int fadeout_duration_;
 
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;

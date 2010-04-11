@@ -19,6 +19,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QTimeLine>
 
 #include <gst/gst.h>
 
@@ -46,6 +47,9 @@ class GstEnginePipeline : public QObject {
   void SetEqualizerEnabled(bool enabled);
   void SetEqualizerParams(int preamp, const QList<int>& band_gains);
   void SetVolume(int percent);
+  void StartFader(int duration_msec,
+                  QTimeLine::Direction direction = QTimeLine::Forward,
+                  QTimeLine::CurveShape shape = QTimeLine::LinearCurve);
 
   // Get information about the music playback
   bool is_valid() const { return valid_; }
@@ -61,6 +65,7 @@ class GstEnginePipeline : public QObject {
   void MetadataFound(const Engine::SimpleMetaBundle& bundle);
   void BufferFound(GstBuffer* buf);
   void Error(const QString& message);
+  void FaderFinished();
 
  private:
   // Static callbacks.  The GstEnginePipeline instance is passed in the last
@@ -83,6 +88,8 @@ class GstEnginePipeline : public QObject {
 
   int volume_percent_;
   qreal volume_modifier_;
+
+  QTimeLine* fader_;
 
   GstElement* pipeline_;
 
