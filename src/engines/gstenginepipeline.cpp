@@ -67,7 +67,11 @@ bool GstEnginePipeline::Init(const QUrl &url) {
     src_ = GstEngine::CreateElement("giosrc");
   }
   #else
-  src_ = GstEngine::CreateElement("giosrc");
+  if (url.scheme() == "http") {
+    src_ = GstEngine::CreateElement("souphttpsrc");
+  } else {
+    src_ = GstEngine::CreateElement("giosrc");
+  }
   #endif
   if (!src_)
     return false;
