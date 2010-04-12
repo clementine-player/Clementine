@@ -123,8 +123,8 @@ QList<QPixmap> PlaylistView::LoadBarPixmap(const QString& filename) {
   // Colour the bar with the palette colour
   QPainter p(&image);
   p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
-  p.setOpacity(0.4);
-  p.fillRect(image.rect(), palette().color(QPalette::Highlight).lighter(125));
+  p.setOpacity(0.7);
+  p.fillRect(image.rect(), palette().color(QPalette::Highlight));
   p.end();
 
   // Animation steps
@@ -186,6 +186,7 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
     opt.palette.setColor(QPalette::Text, Qt::white);
     opt.palette.setColor(QPalette::HighlightedText, Qt::white);
     opt.palette.setColor(QPalette::Highlight, Qt::transparent);
+    opt.palette.setColor(QPalette::AlternateBase, Qt::transparent);
     opt.font.setItalic(true);
     opt.decorationSize = QSize(20,20);
   }

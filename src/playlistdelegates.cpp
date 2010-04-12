@@ -21,6 +21,8 @@
 #include <QLineEdit>
 #include <QPainter>
 
+const int PlaylistDelegateBase::kMinHeight = 19;
+
 PlaylistDelegateBase::PlaylistDelegateBase(QTreeView* view)
   : QStyledItemDelegate(view),
     view_(view)
@@ -46,6 +48,13 @@ QString PlaylistDelegateBase::displayText(const QVariant& value, const QLocale&)
     default:
       return value.toString();
   }
+}
+
+QSize PlaylistDelegateBase::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const {
+  QSize size = QStyledItemDelegate::sizeHint(option, index);
+  if (size.height() < kMinHeight)
+    size.setHeight(kMinHeight);
+  return size;
 }
 
 void PlaylistDelegateBase::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {

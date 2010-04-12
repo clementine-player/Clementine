@@ -31,8 +31,11 @@ class PlaylistDelegateBase : public QStyledItemDelegate {
   PlaylistDelegateBase(QTreeView* view);
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
+  QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
   QStyleOptionViewItemV4 Adjusted(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+
+  static const int kMinHeight;
 
  protected:
   QTreeView* view_;
