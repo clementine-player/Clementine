@@ -295,7 +295,7 @@ bool GstEngine::Load(const QUrl& url) {
   if (!pipeline)
     return false;
 
-  if (crossfade)
+  if (crossfade && current_pipeline_)
     StartFadeout();
 
   current_pipeline_ = pipeline;
@@ -344,7 +344,7 @@ bool GstEngine::Play( uint offset ) {
 void GstEngine::Stop() {
   url_ = QUrl(); // To ensure we return Empty from state()
 
-  if (fadeout_enabled_)
+  if (fadeout_enabled_ && current_pipeline_)
     StartFadeout();
 
   current_pipeline_.reset();
