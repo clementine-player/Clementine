@@ -48,14 +48,27 @@ class CommandlineOptions {
 
   bool Parse();
 
+  bool is_empty() const;
+
   UrlListAction url_list_action() const { return url_list_action_; }
   PlayerAction player_action() const { return player_action_; }
+  int set_volume() const { return set_volume_; }
+  int volume_modifier() const { return volume_modifier_; }
+  int seek_to() const { return seek_to_; }
+  int play_track_at() const { return play_track_at_; }
+  bool show_osd() const { return show_osd_; }
   QList<QUrl> urls() const { return urls_; }
 
   QByteArray Serialize() const;
   void Load(const QByteArray& serialized);
 
  private:
+  enum LongOptions {
+    VolumeUp = 256,
+    VolumeDown,
+    SeekTo,
+  };
+
   QString tr(const char* source_text);
 
  private:
@@ -64,6 +77,13 @@ class CommandlineOptions {
 
   UrlListAction url_list_action_;
   PlayerAction player_action_;
+
+  // Don't change the type of these.
+  int set_volume_;
+  int volume_modifier_;
+  int seek_to_;
+  int play_track_at_;
+  bool show_osd_;
 
   QList<QUrl> urls_;
 };

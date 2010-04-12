@@ -187,10 +187,14 @@ void Player::EngineStateChanged(Engine::State state) {
 }
 
 void Player::SetVolume(int value) {
+  int old_volume = engine_->volume();
+
   int volume = qBound(0, value, 100);
   settings_.setValue("volume", volume);
   engine_->SetVolume(volume);
-  emit VolumeChanged(volume);
+
+  if (volume != old_volume)
+    emit VolumeChanged(volume);
 }
 
 int Player::GetVolume() const {

@@ -192,6 +192,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
+  connect(player_, SIGNAL(VolumeChanged(int)), ui_.volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
@@ -885,7 +886,12 @@ void MainWindow::CommandlineOptionsReceived(const QByteArray& serialized_options
   CommandlineOptions options;
   options.Load(serialized_options);
 
-  CommandlineOptionsReceived(options);
+  if (options.is_empty()) {
+    show();
+    activateWindow();
+  }
+  else
+    CommandlineOptionsReceived(options);
 }
 
 void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
@@ -922,4 +928,19 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
       playlist_->InsertPaths(options.urls(), -1);
       break;
   }
+
+  if (options.set_volume() != -1)
+    player_->SetVolume(options.set_volume());
+
+  if (options.volume_modifier() != 0)
+    player_->SetVolume(player_->GetVolume() + options.volume_modifier());
+
+  if (options.seek_to() != -1)
+    player_->Seek(options.seek_to());
+
+  if (options.play_track_at() != -1)
+    player_->PlayAt(options.play_track_at(), Engine::Manual);
+
+  if (options.show_osd())
+    player_->ShowOSD();
 }

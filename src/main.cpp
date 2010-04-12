@@ -104,7 +104,8 @@ int main(int argc, char *argv[]) {
     return 1;
 
   if (a.isRunning()) {
-    qDebug() << "Clementine is already running - activating existing window";
+    if (options.is_empty())
+      qDebug() << "Clementine is already running - activating existing window";
     if (a.sendMessage(options.Serialize()))
       return 0;
     // Couldn't send the message so start anyway
@@ -130,11 +131,8 @@ int main(int argc, char *argv[]) {
 
   // Window
   MainWindow w(&network);
-  a.setActivationWindow(&w);
 
-  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(show()));
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
-
   w.CommandlineOptionsReceived(options);
 
   return a.exec();
