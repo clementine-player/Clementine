@@ -28,7 +28,6 @@
 #include <QTimerEvent>
 #include <QList>
 #include <QStringList>
-#include <QMutex>
 
 #include <gst/gst.h>
 #include <boost/shared_ptr.hpp>
@@ -130,8 +129,6 @@ class GstEngine : public Engine::Base {
   GQueue* delayq_;
   float current_scope_[kScopeSize];
   int current_sample_;
-
-  QMutex scope_mutex_;
 
   bool equalizer_enabled_;
   int equalizer_preamp_;
