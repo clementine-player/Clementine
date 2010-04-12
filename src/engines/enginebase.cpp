@@ -32,7 +32,6 @@ Engine::Base::Base()
     fadeout_enabled_(true),
     fadeout_duration_(2000),
     crossfade_enabled_(true),
-    crossfade_next_track_(false),
     about_to_end_emitted_(false)
 {
 }
@@ -40,7 +39,7 @@ Engine::Base::Base()
 Engine::Base::~Base() {
 }
 
-bool Engine::Base::Load(const QUrl &url) {
+bool Engine::Base::Load(const QUrl &url, TrackChangeType) {
   url_ = url;
   about_to_end_emitted_ = false;
   return true;

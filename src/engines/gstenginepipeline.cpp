@@ -24,6 +24,7 @@ GstEnginePipeline::GstEnginePipeline()
   : QObject(NULL),
     valid_(false),
     sink_(GstEngine::kAutoSink),
+    forwards_buffers_(false),
     volume_percent_(100),
     volume_modifier_(1.0),
     fader_(NULL),
@@ -228,13 +229,15 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpoin
 }
 
 
-void GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) {
+bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
   if (instance->forwards_buffers_) {
     gst_buffer_ref(buf);
     emit instance->BufferFound(buf);
   }
+
+  return true;
 }
 
 void GstEnginePipeline::EventCallback(GstPad*, GstEvent* event, gpointer self) {

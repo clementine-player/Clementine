@@ -55,10 +55,9 @@ class Base : public QObject, boost::noncopyable {
   virtual uint length() const { return 0; }
 
   // Helpers
-  virtual bool Load(const QUrl &url);
-  bool Play(const QUrl &u) { return Load(u) && Play(); }
+  virtual bool Load(const QUrl &url, TrackChangeType change);
+  bool Play(const QUrl &u, TrackChangeType c) { return Load(u, c) && Play(); }
   void SetVolume( uint value );
-  void SetCrossfadeNextTrack(bool enable) { crossfade_next_track_ = enable; }
 
   inline uint volume() const { return volume_; }
   virtual const Scope &scope() { return scope_; }
@@ -102,7 +101,6 @@ class Base : public QObject, boost::noncopyable {
   int fadeout_duration_;
   bool crossfade_enabled_;
   bool autocrossfade_enabled_;
-  bool crossfade_next_track_;
 
  private:
   bool about_to_end_emitted_;

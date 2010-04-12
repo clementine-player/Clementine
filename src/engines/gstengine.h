@@ -76,7 +76,7 @@ class GstEngine : public Engine::Base {
       const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
  public slots:
-  bool Load(const QUrl&);
+  bool Load(const QUrl&, Engine::TrackChangeType change);
   bool Play(uint offset);
   void Stop();
   void Pause();

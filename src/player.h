@@ -78,9 +78,9 @@ class Player : public QObject {
  public slots:
   void ReloadSettings();
 
-  void PlayAt(int index, bool manual_change);
+  void PlayAt(int index, Engine::TrackChangeType change);
   void PlayPause();
-  void NextItem();
+  void NextItem(Engine::TrackChangeType change = Engine::Auto);
   void Previous();
   void SetVolume(int value);
   void Seek(int seconds);
@@ -99,7 +99,7 @@ class Player : public QObject {
   void Pause();
   void Stop();
   void Play();
-  void Next();
+  void Next(Engine::TrackChangeType change = Engine::Manual);
   void Prev();
   int PositionGet() const;
   void PositionSet(int);
@@ -142,6 +142,7 @@ class Player : public QObject {
  private slots:
   void EngineStateChanged(Engine::State);
   void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
+  void NextAuto();
 
  private:
   QVariantMap GetMetadata(const PlaylistItem& item) const;
@@ -154,6 +155,7 @@ class Player : public QObject {
   Song current_item_;
 
   EngineBase* engine_;
+  Engine::TrackChangeType stream_change_type_;
 };
 
 #endif // PLAYER_H

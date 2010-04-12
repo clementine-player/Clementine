@@ -57,7 +57,8 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
     playlist_(playlist),
     lastfm_(lastfm),
     current_item_options_(PlaylistItem::Default),
-    engine_(new GstEngine)
+    engine_(new GstEngine),
+    stream_change_type_(Engine::First)
 {
   settings_.beginGroup("Player");
 
@@ -81,7 +82,7 @@ void Player::Init() {
     qFatal("Error initialising audio engine");
 
   connect(engine_, SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(engine_, SIGNAL(TrackAboutToEnd()), SLOT(Next()));
+  connect(engine_, SIGNAL(TrackAboutToEnd()), SLOT(NextAuto()));
   connect(engine_, SIGNAL(TrackEnded()), SLOT(TrackEnded()));
   connect(engine_, SIGNAL(MetaData(Engine::SimpleMetaBundle)),
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
@@ -93,16 +94,21 @@ void Player::ReloadSettings() {
   engine_->ReloadSettings();
 }
 
-void Player::Next() {
+void Player::NextAuto() {
+  Next(Engine::Auto);
+}
+
+void Player::Next(Engine::TrackChangeType change) {
   if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+    stream_change_type_ = change;
     playlist_->current_item()->LoadNext();
     return;
   }
 
-  NextItem();
+  NextItem(change);
 }
 
-void Player::NextItem() {
+void Player::NextItem(Engine::TrackChangeType change) {
   int i = playlist_->next_index();
   playlist_->set_current_index(i);
   if (i == -1) {
@@ -110,8 +116,7 @@ void Player::NextItem() {
     return;
   }
 
-  engine_->SetCrossfadeNextTrack(true);
-  PlayAt(i, false);
+  PlayAt(i, change);
 }
 
 void Player::TrackEnded() {
@@ -120,7 +125,7 @@ void Player::TrackEnded() {
     return;
   }
 
-  Next();
+  Next(Engine::Auto);
 }
 
 void Player::PlayPause() {
@@ -148,7 +153,7 @@ void Player::PlayPause() {
     if (i == -1) i = playlist_->last_played_index();
     if (i == -1) i = 0;
 
-    PlayAt(i, false);
+    PlayAt(i, Engine::First);
     break;
   }
   }
@@ -167,7 +172,7 @@ void Player::Previous() {
     return;
   }
 
-  PlayAt(i, false);
+  PlayAt(i, Engine::Manual);
 }
 
 void Player::EngineStateChanged(Engine::State state) {
@@ -196,8 +201,8 @@ Engine::State Player::GetState() const {
   return engine_->state();
 }
 
-void Player::PlayAt(int index, bool manual_change) {
-  if (manual_change)
+void Player::PlayAt(int index, Engine::TrackChangeType change) {
+  if (change != Engine::Auto)
     playlist_->set_current_index(-1); // to reshuffle
   playlist_->set_current_index(index);
 
@@ -208,7 +213,7 @@ void Player::PlayAt(int index, bool manual_change) {
   if (item->options() & PlaylistItem::SpecialPlayBehaviour)
     item->StartLoading();
   else {
-    engine_->Play(item->Url());
+    engine_->Play(item->Url(), change);
 
     if (lastfm_->IsScrobblingEnabled())
       lastfm_->NowPlaying(item->Metadata());
@@ -226,7 +231,7 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
   if (!item || item->Url() != original_url)
     return;
 
-  engine_->Play(media_url);
+  engine_->Play(media_url, stream_change_type_);
 
   current_item_ = item->Metadata();
   current_item_options_ = item->options();
@@ -386,7 +391,7 @@ void Player::Play() {
       engine_->Unpause();
       break;
     default:
-      Next();
+      Next(Engine::Manual);
       break;
   }
 }
@@ -441,7 +446,7 @@ int Player::AddTrack(const QString& track, bool play_now) {
 
   if (index.isValid()) {
     if (play_now) {
-      Next();
+      Next(Engine::First);
     }
     return 0;  // Success.
   }
@@ -471,7 +476,7 @@ void Player::SetRandom(bool enable) {
 }
 
 void Player::PlayTrack(int index) {
-  PlayAt(index, true);
+  PlayAt(index, Engine::Manual);
 }
 
 void Player::PlaylistChanged() {

@@ -426,7 +426,7 @@ void MainWindow::QueueFiles(const QList<QUrl>& urls) {
   QModelIndex playlist_index = playlist_->InsertPaths(urls);
 
   if (playlist_index.isValid() && player_->GetState() != Engine::Playing)
-    player_->PlayAt(playlist_index.row(), true);
+    player_->PlayAt(playlist_index.row(), Engine::First);
 }
 
 void MainWindow::ReportError(const QString& message) {
@@ -510,7 +510,7 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   if (!index.isValid())
     return;
 
-  player_->PlayAt(index.row(), true);
+  player_->PlayAt(index.row(), Engine::Manual);
 }
 
 void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
@@ -522,7 +522,7 @@ void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
       playlist_->InsertSongs(library_->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
-    player_->PlayAt(first_song.row(), true);
+    player_->PlayAt(first_song.row(), Engine::First);
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
@@ -625,7 +625,7 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
       QList<RadioItem*>() << item);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
-    player_->PlayAt(first_song.row(), true);
+    player_->PlayAt(first_song.row(), Engine::Manual);
 }
 
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
@@ -696,7 +696,7 @@ void MainWindow::PlaylistPlay() {
   if (playlist_->current_index() == playlist_menu_index_.row()) {
     player_->PlayPause();
   } else {
-    player_->PlayAt(playlist_menu_index_.row(), true);
+    player_->PlayAt(playlist_menu_index_.row(), Engine::Manual);
   }
 }
 

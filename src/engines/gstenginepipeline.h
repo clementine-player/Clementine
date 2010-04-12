@@ -73,7 +73,7 @@ class GstEnginePipeline : public QObject {
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
   static void NewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
-  static void HandoffCallback(GstPad*, GstBuffer*, gpointer);
+  static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static void EventCallback(GstPad*, GstEvent*, gpointer);
 
   void UpdateVolume();

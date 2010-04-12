@@ -285,17 +285,18 @@ void GstEngine::UpdateScope() {
   }
 }
 
-bool GstEngine::Load(const QUrl& url) {
-  Engine::Base::Load(url);
+bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
+  Engine::Base::Load(url, change);
 
-  const bool crossfade = current_pipeline_ && crossfade_enabled_ &&
-                         crossfade_next_track_;
+  const bool crossfade = current_pipeline_ &&
+                         ((crossfade_enabled_ && change == Engine::Manual) ||
+                          (autocrossfade_enabled_ && change == Engine::Auto));
 
   shared_ptr<GstEnginePipeline> pipeline(CreatePipeline(url));
   if (!pipeline)
     return false;
 
-  if (crossfade && current_pipeline_)
+  if (crossfade)
     StartFadeout();
 
   current_pipeline_ = pipeline;
@@ -305,10 +306,8 @@ bool GstEngine::Load(const QUrl& url) {
   SetEqualizerParameters(equalizer_preamp_, equalizer_gains_);
 
   // Maybe fade in this track
-  if (crossfade) {
+  if (crossfade)
     current_pipeline_->StartFader(fadeout_duration_, QTimeLine::Forward);
-    crossfade_next_track_ = false;
-  }
 
   return true;
 }
@@ -316,6 +315,7 @@ bool GstEngine::Load(const QUrl& url) {
 void GstEngine::StartFadeout() {
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
+  fadeout_pipeline_->set_forwards_buffers(false);
   ClearScopeBuffers();
 
   fadeout_pipeline_->StartFader(fadeout_duration_, QTimeLine::Backward);

@@ -20,6 +20,8 @@ namespace Engine
      * It is vital to be Idle just after the track has ended!
      */
     enum State { Empty, Idle, Playing, Paused };
+
+    enum TrackChangeType { First, Manual, Auto };
 }
 
 typedef Engine::Base EngineBase;
