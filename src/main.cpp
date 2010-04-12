@@ -115,6 +115,14 @@ int main(int argc, char *argv[]) {
   MPRIS mpris;
 #endif
 
+  #ifdef Q_OS_DARWIN
+  QString scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
+  QString plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
+  setenv("GST_PLUGIN_SCANNER", scanner_path.toAscii().constData(), 1);
+  setenv("GST_PLUGIN_PATH", plugin_path.toAscii().constData(), 1);
+  #endif
+
+
   // Window
   MainWindow w(&network);;
   a.setActivationWindow(&w);

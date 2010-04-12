@@ -57,6 +57,7 @@ bool GlobalShortcuts::RegisterGnome() {
 }
 
 bool GlobalShortcuts::RegisterQxt() {
+#ifndef Q_OS_DARWIN
   QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
   QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
   QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
@@ -66,6 +67,7 @@ bool GlobalShortcuts::RegisterQxt() {
   connect(stop, SIGNAL(activated()), SIGNAL(Stop()));
   connect(next, SIGNAL(activated()), SIGNAL(Next()));
   connect(prev, SIGNAL(activated()), SIGNAL(Previous()));
+#endif
 
   return true;
 }

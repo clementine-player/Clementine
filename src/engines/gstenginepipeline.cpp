@@ -59,7 +59,16 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   //   audiosink
 
   // Source
+  #ifdef Q_OS_DARWIN
+  // giosrc from Fink does not support HTTP.
+  if (url.scheme() == "http") {
+    src_ = GstEngine::CreateElement("neonhttpsrc");
+  } else {
+    src_ = GstEngine::CreateElement("giosrc");
+  }
+  #else
   src_ = GstEngine::CreateElement("giosrc");
+  #endif
   if (!src_)
     return false;
 

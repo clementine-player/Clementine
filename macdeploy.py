@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 FRAMEWORK_SEARCH_PATH=[
-#    '/usr/local/Trolltech/Qt-4.7.0/lib',
+    '/usr/local/Trolltech/Qt-4.7.0/lib',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
@@ -53,6 +53,45 @@ XINEPLUGIN_SEARCH_PATH=[
     '/sw/lib/xine/plugins',
 ]
 
+GSTREAMER_PLUGINS=[
+    # Core plugins
+    'libgstaudioconvert.so',
+    'libgstaudioresample.so',
+    'libgstautodetect.so',
+    'libgstcoreelements.so',
+    'libgstdecodebin.so',
+    'libgstgio.so',
+    'libgstladspa.so',
+    'libgstosxaudio.so',
+    'libgsttypefindfunctions.so',
+    'libgstvolume.so',
+
+    # Codecs
+    'libgstaacparse.so',
+    'libgstaiff.so',
+    'libgstequalizer.so',
+    'libgstfaac.so',
+    'libgstfaad.so',
+    'libgstflac.so',
+    'libgstid3demux.so',
+    'libgstmad.so',
+    'libgstmpegaudioparse.so',
+    'libgstmusepack.so',
+    'libgstogg.so',
+    'libgstpnm.so',
+    'libgstvorbis.so',
+
+    # HTTP src support
+    'libgstneonhttpsrc.so',
+]
+
+GSTREAMER_SEARCH_PATH=[
+    '/usr/local/gstreamer-0.10',
+    '/usr/local/gstreamer-0.10/gstreamer-0.10',
+    '/sw/lib/gstreamer-0.10',
+    '/sw/lib/gstreamer-0.10/gstreamer-0.10',
+]
+
 QT_PLUGINS = [
     'accessible/libqtaccessiblewidgets.dylib',
     'codecs/libqcncodecs.dylib',
@@ -69,7 +108,7 @@ QT_PLUGINS = [
     'sqldrivers/libqsqlite.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
-#    '/usr/local/Trolltech/Qt-4.7.0/plugins',
+    '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
@@ -91,6 +130,10 @@ class CouldNotFindXinePluginError(Error):
 
 
 class CouldNotFindQtPluginError(Error):
+  pass
+
+
+class CouldNotFindGstreamerPluginError(Error):
   pass
 
 
@@ -286,10 +329,21 @@ def FindQtPlugin(name):
   raise CouldNotFindQtPluginError(name)
 
 
+def FindGstreamerPlugin(name):
+  for path in GSTREAMER_SEARCH_PATH:
+    if os.path.exists(path):
+      for dir, dirs, files in os.walk(path):
+        if name in files:
+          return os.path.join(dir, name)
+  raise CouldNotFindGstreamerPluginError(name)
+
+
 FixBinary(binary)
 
-for plugin in XINE_PLUGINS:
-  FixPlugin(FindXinePlugin(plugin), 'xine')
+for plugin in GSTREAMER_PLUGINS:
+  FixPlugin(FindGstreamerPlugin(plugin), 'gstreamer')
+
+FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
