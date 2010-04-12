@@ -270,8 +270,11 @@ void Playlist::set_current_index(int i) {
   ClearStreamMetadata();
 
   current_item_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
-  last_played_item_ = old_current;
-  Save();
+
+  if (current_item_.isValid()) {
+    last_played_item_ = current_item_;
+    Save();
+  }
 
   if (old_current.isValid())
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount));
