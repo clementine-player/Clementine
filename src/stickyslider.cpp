@@ -29,8 +29,8 @@ void StickySlider::mouseMoveEvent(QMouseEvent *e) {
   if (sticky_center_ == -1)
     return;
 
-  const int v = value();
+  const int v = sliderPosition();
   if (v <= sticky_center_ + sticky_threshold_ &&
       v >= sticky_center_ - sticky_threshold_)
-    setValue(sticky_center_);
+    setSliderPosition(sticky_center_);
 }
