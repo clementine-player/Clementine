@@ -27,6 +27,7 @@
 
 #include <sys/types.h>
 #include <vector>
+#include <boost/noncopyable.hpp>
 
 #include "engine_fwd.h"
 
@@ -34,7 +35,7 @@ namespace Engine {
 
 typedef std::vector<int16_t> Scope;
 
-class Base : public QObject {
+class Base : public QObject, boost::noncopyable {
   Q_OBJECT
 
  public:
@@ -92,9 +93,6 @@ class Base : public QObject {
   static uint MakeVolumeLogarithmic( uint volume );
   void EmitAboutToEnd();
 
-  Base( const Base& );
-  const Base &operator=( const Base& );
-
  protected:
   uint  volume_;
   QUrl  url_;
@@ -111,8 +109,7 @@ class Base : public QObject {
 };
 
 
-class SimpleMetaBundle {
- public:
+struct SimpleMetaBundle {
   QString title;
   QString artist;
   QString album;
