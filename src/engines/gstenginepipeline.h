@@ -79,7 +79,7 @@ class GstEnginePipeline : public QObject {
   void UpdateVolume();
 
  private:
-  static const int kGstStateTimeout = 10000000;
+  static const int kGstStateTimeoutNanosecs = 10000000;
 
   bool valid_;
   QString sink_;

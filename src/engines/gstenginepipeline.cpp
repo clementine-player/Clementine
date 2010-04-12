@@ -48,6 +48,15 @@ void GstEnginePipeline::set_output_device(const QString &sink, const QString &de
 bool GstEnginePipeline::Init(const QUrl &url) {
   pipeline_ = gst_pipeline_new("pipeline");
 
+  // Here we create all the parts of the gstreamer pipeline - from the source
+  // to the sink.  The parts of the pipeline are split up into bins:
+  //   source -> decode bin -> audio bin
+  // The decode bin is a gstreamer builtin that automatically picks the right
+  // decoder for the file.
+  // The audio bin gets created here and contains:
+  //   audioconvert -> equalizer -> volume -> audioscale -> audioconvert ->
+  //   audiosink
+
   // Source
   src_ = GstEngine::CreateElement("giosrc");
   if (!src_)
@@ -60,13 +69,14 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   if (!(decodebin_ = GstEngine::CreateElement("decodebin", pipeline_))) { return false; }
   g_signal_connect(G_OBJECT(decodebin_), "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
 
+  // Does some stuff with ghost pads
   GstPad* pad = gst_element_get_pad(decodebin_, "sink");
   if (pad) {
     event_cb_id_ = gst_pad_add_event_probe (pad, G_CALLBACK(EventCallback), this);
     gst_object_unref(pad);
   }
 
-  // The link from decodebin to audioconvert will be made in the newPad-callback
+  // The link from decodebin to audioconvert will be made in NewPadCallback
   gst_element_link(src_, decodebin_);
 
   // Audio bin
@@ -90,8 +100,8 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
 
-  // add a data probe on the src pad if the audioconvert element for our scope
-  // we do it here because we want pre-equalized and pre-volume samples
+  // Add a data probe on the src pad of the audioconvert element for our scope.
+  // We do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not affected by them
   pad = gst_element_get_pad(audioconvert_, "src");
   gst_pad_add_buffer_probe(pad, G_CALLBACK(HandoffCallback), this);
@@ -134,7 +144,7 @@ GstEnginePipeline::~GstEnginePipeline() {
 
 
 gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
-  GstEnginePipeline* instance = static_cast<GstEnginePipeline*>(self);
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
   switch ( GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR: {
@@ -142,40 +152,40 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
       gchar* debugs;
 
       gst_message_parse_error(msg, &error, &debugs);
-      qDebug() << "ERROR RECEIVED IN BUS_CB <" << error->message << ">" ;
+      qWarning() << "ERROR RECEIVED IN BUS_CB <" << error->message << ">" ;
 
       emit instance->Error(QString::fromAscii(error->message));
       break;
     }
 
     case GST_MESSAGE_TAG: {
-      gchar* string=NULL;
+      gchar* data = NULL;
       Engine::SimpleMetaBundle bundle;
       GstTagList* taglist;
       gst_message_parse_tag(msg,&taglist);
       bool success = false;
 
-      if ( gst_tag_list_get_string( taglist, GST_TAG_TITLE, &string ) && string ) {
-        qDebug() << "received tag 'Title': " << QString( string ) ;
-        bundle.title = string;
+      if ( gst_tag_list_get_string( taglist, GST_TAG_TITLE, &data ) && data ) {
+        qDebug() << "received tag 'Title': " << QString( data ) ;
+        bundle.title = data;
         success = true;
       }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_ARTIST, &string ) && string ) {
-        qDebug() << "received tag 'Artist': " << QString( string ) ;
-        bundle.artist = string;
+      if ( gst_tag_list_get_string( taglist, GST_TAG_ARTIST, &data ) && data ) {
+        qDebug() << "received tag 'Artist': " << QString( data ) ;
+        bundle.artist = data;
         success = true;
       }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_COMMENT, &string ) && string ) {
-        qDebug() << "received tag 'Comment': " << QString( string ) ;
-        bundle.comment = string;
+      if ( gst_tag_list_get_string( taglist, GST_TAG_COMMENT, &data  ) && data ) {
+        qDebug() << "received tag 'Comment': " << QString( data  ) ;
+        bundle.comment = data;
         success = true;
       }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_ALBUM, &string ) && string ) {
-        qDebug() << "received tag 'Album': " << QString( string ) ;
-        bundle.album = string;
+      if ( gst_tag_list_get_string( taglist, GST_TAG_ALBUM, &data ) && data ) {
+        qDebug() << "received tag 'Album': " << QString( data ) ;
+        bundle.album = data;
         success = true;
       }
-      g_free(string);
+      g_free(data);
       gst_tag_list_free(taglist);
       if (success)
         emit instance->MetadataFound(bundle);
@@ -189,7 +199,7 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
 }
 
 GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpointer self) {
-  GstEnginePipeline* instance = static_cast<GstEnginePipeline*>(self);
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
       emit instance->EndOfStreamReached();
@@ -204,7 +214,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
 
 
 void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer self) {
-  GstEnginePipeline* instance = static_cast<GstEnginePipeline*>(self);
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
@@ -219,7 +229,7 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpoin
 
 
 void GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) {
-  GstEnginePipeline* instance = static_cast<GstEnginePipeline*>(self);
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
   if (instance->forwards_buffers_) {
     gst_buffer_ref(buf);
@@ -228,9 +238,9 @@ void GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
 }
 
 void GstEnginePipeline::EventCallback(GstPad*, GstEvent* event, gpointer self) {
-  GstEnginePipeline* instance = static_cast<GstEnginePipeline*>(self);
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  switch(static_cast<int>(event->type)) {
+  switch(event->type) {
     case GST_EVENT_EOS:
       emit instance->EndOfStreamReached();
       break;
@@ -260,7 +270,7 @@ qint64 GstEnginePipeline::length() const {
 
 GstState GstEnginePipeline::state() const {
   GstState s, sp;
-  if (gst_element_get_state(pipeline_, &s, &sp, kGstStateTimeout) ==
+  if (gst_element_get_state(pipeline_, &s, &sp, kGstStateTimeoutNanosecs) ==
       GST_STATE_CHANGE_FAILURE)
     return GST_STATE_NULL;
 

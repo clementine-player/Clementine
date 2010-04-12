@@ -68,7 +68,7 @@ GstEngine::~GstEngine() {
     gst_object_unref(GST_OBJECT(can_decode_pipeline_));
 
   // Destroy scope delay queue
-  ClearScopeQ();
+  ClearScopeBuffers();
   g_queue_free(delayq_);
 
   // Save configuration
@@ -147,7 +147,7 @@ bool GstEngine::CanDecode(const QUrl &url) {
 }
 
 void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer self) {
-  GstEngine* instance = static_cast<GstEngine*>(self);
+  GstEngine* instance = reinterpret_cast<GstEngine*>(self);
 
   GstCaps* caps = gst_pad_get_caps(pad);
   if (gst_caps_get_size(caps) > 0) {
@@ -159,7 +159,7 @@ void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpoi
 }
 
 void GstEngine::CanDecodeLastCallback(GstElement*, gpointer self) {
-  GstEngine* instance = static_cast<GstEngine*>(self);
+  GstEngine* instance = reinterpret_cast<GstEngine*>(self);
   instance->can_decode_last_ = true;
 }
 
@@ -192,7 +192,7 @@ Engine::State GstEngine::state() const {
   }
 }
 
-void GstEngine::NewBuffer(GstBuffer* buf) {
+void GstEngine::AddBufferToScope(GstBuffer* buf) {
   g_queue_push_tail(delayq_, buf);
 }
 
@@ -316,7 +316,7 @@ bool GstEngine::Load(const QUrl& url) {
 void GstEngine::StartFadeout() {
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
-  ClearScopeQ();
+  ClearScopeBuffers();
 
   fadeout_pipeline_->StartFader(fadeout_duration_, QTimeLine::Backward);
   connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutFinished()));
@@ -380,7 +380,7 @@ void GstEngine::Seek(uint ms) {
     return;
 
   if (current_pipeline_->Seek(ms * GST_MSECOND))
-    ClearScopeQ();
+    ClearScopeBuffers();
   else
     qDebug() << "Seek failed";
 }
@@ -426,7 +426,7 @@ void GstEngine::timerEvent( QTimerEvent* ) {
 }
 
 void GstEngine::HandlePipelineError(const QString& message) {
-  qDebug() << "Gstreamer error:" << message;
+  qWarning() << "Gstreamer error:" << message;
 
   current_pipeline_.reset();
 }
@@ -493,11 +493,11 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
   ret->set_output_device(sink_, device_);
 
   connect(ret.get(), SIGNAL(EndOfStreamReached()), SLOT(EndOfStreamReached()));
-  connect(ret.get(), SIGNAL(BufferFound(GstBuffer*)), SLOT(NewBuffer(GstBuffer*)));
+  connect(ret.get(), SIGNAL(BufferFound(GstBuffer*)), SLOT(AddBufferToScope(GstBuffer*)));
   connect(ret.get(), SIGNAL(Error(QString)), SLOT(HandlePipelineError(QString)));
   connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(Engine::SimpleMetaBundle)));
-  connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeQ()));
+  connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
 
   if (!ret->Init(url))
     ret.reset();
@@ -510,7 +510,7 @@ qint64 GstEngine::PruneScope() {
     return 0;
 
   // get the position playing in the audio device
-  gint64 pos = current_pipeline_->position();
+  qint64 pos = current_pipeline_->position();
 
   GstBuffer *buf = 0;
   quint64 etime;
@@ -538,7 +538,7 @@ qint64 GstEngine::PruneScope() {
   return pos;
 }
 
-void GstEngine::ClearScopeQ() {
+void GstEngine::ClearScopeBuffers() {
   // just free them all
   while (g_queue_get_length(delayq_)) {
     GstBuffer* buf = reinterpret_cast<GstBuffer *>( g_queue_pop_head(delayq_) );

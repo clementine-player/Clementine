@@ -99,8 +99,8 @@ class GstEngine : public Engine::Base {
   void EndOfStreamReached();
   void HandlePipelineError(const QString& message);
   void NewMetaData(const Engine::SimpleMetaBundle& bundle);
-  void NewBuffer(GstBuffer* buf);
-  void ClearScopeQ();
+  void AddBufferToScope(GstBuffer* buf);
+  void ClearScopeBuffers();
   void FadeoutFinished();
 
  private:
