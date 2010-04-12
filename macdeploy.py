@@ -224,7 +224,7 @@ def FixFramework(path):
     FixLibraryInstallPath(library, new_path)
 
 def FixLibrary(path):
-  if path in fixed_libraries:
+  if path in fixed_libraries or FindSystemLibrary(os.path.basename(path)) is not None:
     return
   else:
     fixed_libraries.append(path)
@@ -299,9 +299,20 @@ def FixInstallPath(library_path, library, new_path):
   args = ['install_name_tool', '-change', library_path, new_path, library]
   commands.append(args)
 
+def FindSystemLibrary(library_name):
+  for path in ['/lib', '/usr/lib']:
+    full_path = os.path.join(path, library_name)
+    if os.path.exists(full_path):
+      return full_path
+  return None
+
 def FixLibraryInstallPath(library_path, library):
-  new_path = '@executable_path/../Frameworks/%s' % os.path.basename(library_path)
-  FixInstallPath(library_path, library, new_path)
+  system_library = FindSystemLibrary(os.path.basename(library_path))
+  if system_library is None:
+    new_path = '@executable_path/../Frameworks/%s' % os.path.basename(library_path)
+    FixInstallPath(library_path, library, new_path)
+  else:
+    FixInstallPath(library_path, library, system_library)
 
 def FixFrameworkInstallPath(library_path, library):
   parts = library_path.split(os.sep)
