@@ -197,8 +197,8 @@ void gst_equalizer_get_property(GObject* object, guint prop_id, GValue* value,
 
 
 void set_filters(GstEqualizer* obj) {
-  Q_UNUSED(iir_cforiginal10_44100);
-  Q_UNUSED(iir_cforiginal10_48000);
+  Q_UNUSED(iir_cf10_44100);
+  Q_UNUSED(iir_cf10_48000);
   Q_UNUSED(iir_cf15_44100);
   Q_UNUSED(iir_cf15_48000);
   Q_UNUSED(iir_cf25_44100);
@@ -216,11 +216,11 @@ void set_filters(GstEqualizer* obj) {
     break;
 
   case 48000:
-    obj->iir_cf = iir_cf10_48000;
+    obj->iir_cf = iir_cforiginal10_48000;
     break;
 
   default:
-    obj->iir_cf = iir_cf10_44100;
+    obj->iir_cf = iir_cforiginal10_44100;
     break;
   }
 }

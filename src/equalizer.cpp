@@ -24,7 +24,7 @@
 
 // We probably don't need to translate these, right?
 const char* Equalizer::kGainText[] = {
-  "30", "60", "125", "250", "500", "1k", "2k", "4k", "8k", "16k"};
+  "60", "170", "310", "600", "1k", "3k", "6k", "12k", "14k", "16k"};
 
 const char* Equalizer::kSettingsGroup = "Equalizer";
 
