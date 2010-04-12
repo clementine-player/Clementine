@@ -110,6 +110,9 @@ void gst_equalizer_class_init(GstEqualizerClass* klass) {
 void gst_equalizer_init(GstEqualizer* obj, GstEqualizerClass* klass) {
   // Properties
   obj->active = false;
+  obj->i = 0;
+  obj->j = 2;
+  obj->k = 1;
 }
 
 
@@ -233,8 +236,10 @@ static GstFlowReturn gst_equalizer_transform_ip(GstBaseTransform* base,
 
   /* Indexes for the history arrays
      * These have to be kept between calls to this function
-     * hence they are static */
-  static gint i = 0, j = 2, k = 1;
+     * hence they are members of the equalizer object */
+  int& i = obj->i;
+  int& j = obj->j;
+  int& k = obj->k;
 
   gint index, band, channel;
   gint halflength;

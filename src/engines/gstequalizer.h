@@ -66,6 +66,8 @@ struct _GstEqualizer {
   sIIRCoefficients* iir_cf;
 
   sXYData data_history[EQ_MAX_BANDS][EQ_CHANNELS] __attribute__((aligned));
+
+  int i, j, k;
 };
 
 struct _GstEqualizerClass {

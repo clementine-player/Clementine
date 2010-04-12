@@ -399,7 +399,7 @@ void GstEngine::SetEqualizerEnabled(bool enabled) {
 }
 
 
-void GstEngine::SetEqualizerParameters( int preamp, const QList<int>& band_gains ) {
+void GstEngine::SetEqualizerParameters(int preamp, const QList<int>& band_gains) {
   equalizer_preamp_ = preamp;
   equalizer_gains_ = band_gains;
 
