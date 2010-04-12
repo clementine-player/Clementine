@@ -190,6 +190,10 @@ int Playlist::current_index() const {
   return current_item_.isValid() ? current_item_.row() : -1;
 }
 
+int Playlist::last_played_index() const {
+  return last_played_item_.isValid() ? last_played_item_.row() : -1;
+}
+
 void Playlist::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
   is_shuffled_ = (mode != PlaylistSequence::Shuffle_Off);
   ReshuffleIndices();
@@ -266,6 +270,8 @@ void Playlist::set_current_index(int i) {
   ClearStreamMetadata();
 
   current_item_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
+  last_played_item_ = old_current;
+  Save();
 
   if (old_current.isValid())
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount));
@@ -624,6 +630,8 @@ void Playlist::Save() const {
     items_.at(i)->Save(s);
   }
   s.endArray();
+
+  s.setValue("last_index", last_played_index());
 }
 
 void Playlist::Restore() {
@@ -650,6 +658,8 @@ void Playlist::Restore() {
   s.endArray();
 
   reset();
+
+  last_played_item_ = index(s.value("last_index", -1).toInt(), 0, QModelIndex());
 }
 
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {

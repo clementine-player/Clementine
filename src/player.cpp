@@ -141,12 +141,13 @@ void Player::PlayPause() {
 
   case Engine::Empty:
   case Engine::Idle: {
-    int i = playlist_->current_index();
-    if (i == -1) {
-      if (playlist_->rowCount() == 0)
-        break;
-      i = 0;
-    }
+    if (playlist_->rowCount() == 0)
+      break;
+
+             int i = playlist_->current_index();
+    if (i == -1) i = playlist_->last_played_index();
+    if (i == -1) i = 0;
+
     PlayAt(i, false);
     break;
   }

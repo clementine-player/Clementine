@@ -77,10 +77,12 @@ class Playlist : public QAbstractListModel {
 
   // Persistence
   void Save() const;
+  void SaveLast() const;
   void Restore();
 
   // Accessors
   int current_index() const;
+  int last_played_index() const;
   int next_index() const;
   int previous_index() const;
   bool stop_after_current() const;
@@ -156,6 +158,7 @@ class Playlist : public QAbstractListModel {
                              // that they will be played.
 
   QPersistentModelIndex current_item_;
+  QPersistentModelIndex last_played_item_;
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;
