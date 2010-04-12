@@ -193,6 +193,10 @@ Engine::State GstEngine::state() const {
 }
 
 void GstEngine::AddBufferToScope(GstBuffer* buf) {
+  GstEnginePipeline* pipeline = qobject_cast<GstEnginePipeline*>(sender());
+  if (!pipeline || pipeline != current_pipeline_.get())
+    return;
+
   g_queue_push_tail(delayq_, buf);
 }
 
