@@ -27,6 +27,7 @@
 #include "song.h"
 #include "equalizer.h"
 #include "potranslator.h"
+#include "commandlineoptions.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -87,13 +88,6 @@ int main(int argc, char *argv[]) {
   QtSingleApplication a(argc, argv);
   a.setQuitOnLastWindowClosed(false);
 
-  if (a.isRunning()) {
-    qDebug() << "Clementine is already running - activating existing window";
-    if (a.sendMessage("wake up!"))
-      return 0;
-    // Couldn't send the message so start anyway
-  }
-
   // Resources
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
@@ -103,6 +97,18 @@ int main(int argc, char *argv[]) {
   LoadTranslation("clementine", ":/translations");
   LoadTranslation("clementine", a.applicationDirPath());
   LoadTranslation("clementine", QDir::currentPath());
+
+
+  CommandlineOptions options(argc, argv);
+  if (!options.Parse())
+    return 1;
+
+  if (a.isRunning()) {
+    qDebug() << "Clementine is already running - activating existing window";
+    if (a.sendMessage(options.Serialize()))
+      return 0;
+    // Couldn't send the message so start anyway
+  }
 
   QNetworkAccessManager network;
 
@@ -122,12 +128,14 @@ int main(int argc, char *argv[]) {
   setenv("GST_PLUGIN_PATH", plugin_path.toAscii().constData(), 1);
   #endif
 
-
   // Window
-  MainWindow w(&network);;
+  MainWindow w(&network);
   a.setActivationWindow(&w);
 
-  QObject::connect(&a, SIGNAL(messageReceived(QString)), &w, SLOT(show()));
+  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(show()));
+  QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
+
+  w.CommandlineOptionsReceived(options);
 
   return a.exec();
 }

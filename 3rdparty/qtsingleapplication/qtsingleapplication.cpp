@@ -143,7 +143,7 @@ void QtSingleApplication::sysInit(const QString &appId)
 {
     actWin = 0;
     peer = new QtLocalPeer(this, appId);
-    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
+    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
 }
 
 
@@ -260,7 +260,7 @@ bool QtSingleApplication::isRunning()
 
     \sa isRunning(), messageReceived()
 */
-bool QtSingleApplication::sendMessage(const QString &message, int timeout)
+bool QtSingleApplication::sendMessage(const QByteArray &message, int timeout)
 {
     return peer->sendMessage(message, timeout);
 }
@@ -292,9 +292,9 @@ void QtSingleApplication::setActivationWindow(QWidget* aw, bool activateOnMessag
 {
     actWin = aw;
     if (activateOnMessage)
-        connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
+        connect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
     else
-        disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
+        disconnect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
 }
 
 

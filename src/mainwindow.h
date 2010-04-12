@@ -42,6 +42,7 @@ class PlaylistSequence;
 class GlobalShortcuts;
 class GroupByDialog;
 class Equalizer;
+class CommandlineOptions;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -65,6 +66,7 @@ class MainWindow : public QMainWindow {
   };
 
   void SetHiddenInTray(bool hidden);
+  void CommandlineOptionsReceived(const CommandlineOptions& options);
 
  protected:
   void resizeEvent(QResizeEvent* event);
@@ -116,6 +118,8 @@ class MainWindow : public QMainWindow {
   void AddMedia();
   void AddStream();
   void AddStreamAccepted();
+
+  void CommandlineOptionsReceived(const QByteArray& serialized_options);
 
  private:
   void SaveGeometry();

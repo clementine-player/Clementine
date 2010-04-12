@@ -136,7 +136,7 @@ bool QtLocalPeer::isClient()
 }
 
 
-bool QtLocalPeer::sendMessage(const QString &message, int timeout)
+bool QtLocalPeer::sendMessage(const QByteArray &message, int timeout)
 {
     if (!isClient())
         return false;
@@ -160,9 +160,8 @@ bool QtLocalPeer::sendMessage(const QString &message, int timeout)
     if (!connOk)
         return false;
 
-    QByteArray uMsg(message.toUtf8());
     QDataStream ds(&socket);
-    ds.writeBytes(uMsg.constData(), uMsg.size());
+    ds.writeBytes(message.constData(), message.size());
     bool res = socket.waitForBytesWritten(timeout);
     res &= socket.waitForReadyRead(timeout);   // wait for ack
     res &= (socket.read(qstrlen(ack)) == ack);
@@ -195,9 +194,8 @@ void QtLocalPeer::receiveConnection()
         delete socket;
         return;
     }
-    QString message(QString::fromUtf8(uMsg));
     socket->write(ack, qstrlen(ack));
     socket->waitForBytesWritten(1000);
     delete socket;
-    emit messageReceived(message); //### (might take a long time to return)
+    emit messageReceived(uMsg); //### (might take a long time to return)
 }

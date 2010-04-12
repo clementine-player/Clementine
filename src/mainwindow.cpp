@@ -40,6 +40,7 @@
 #include "groupbydialog.h"
 #include "engines/gstengine.h"
 #include "equalizer.h"
+#include "commandlineoptions.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -873,4 +874,52 @@ void MainWindow::LibraryGroupingChanged(const Library::Grouping& g) {
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_)
     SelectionSetValue();
+}
+
+void MainWindow::CommandlineOptionsReceived(const QByteArray& serialized_options) {
+  if (serialized_options == "wake up!") {
+    // Old versions of Clementine sent this - just ignore it
+    return;
+  }
+
+  CommandlineOptions options;
+  options.Load(serialized_options);
+
+  CommandlineOptionsReceived(options);
+}
+
+void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
+  switch (options.player_action()) {
+    case CommandlineOptions::Player_Play:
+      player_->Play();
+      break;
+    case CommandlineOptions::Player_PlayPause:
+      player_->PlayPause();
+      break;
+    case CommandlineOptions::Player_Pause:
+      player_->Pause();
+      break;
+    case CommandlineOptions::Player_Stop:
+      player_->Stop();
+      break;
+    case CommandlineOptions::Player_Previous:
+      player_->Previous();
+      break;
+    case CommandlineOptions::Player_Next:
+      player_->Next(Engine::Manual);
+      break;
+
+    case CommandlineOptions::Player_None:
+      break;
+  }
+
+  switch (options.url_list_action()) {
+    case CommandlineOptions::UrlList_Load:
+      playlist_->Clear();
+
+      // fallthrough
+    case CommandlineOptions::UrlList_Append:
+      playlist_->InsertPaths(options.urls(), -1);
+      break;
+  }
 }
