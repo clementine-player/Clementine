@@ -279,13 +279,6 @@ void LibraryWatcher::ScanSubdirectory(
 }
 
 void LibraryWatcher::AddWatch(QFileSystemWatcher* w, const QString& path) {
-#ifdef Q_OS_DARWIN
-  if (++total_watches_ > kMaxWatches) {
-    qWarning() << "Trying to watch more files than we can manage";
-    return;
-  }
-#endif
-
   if (!QFile::exists(path))
     return;
 

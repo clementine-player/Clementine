@@ -21,7 +21,7 @@
 #include "resources_env.h"
 #include "metatypes_env.h"
 
-#ifdef WIN32
+#ifndef Q_WS_X11
 # include <QtPlugin>
   Q_IMPORT_PLUGIN(qsqlite)
 #endif

@@ -55,8 +55,8 @@ void LibraryBackend::StaticInit() {
   }
   sStaticInitDone = true;
 
-#ifdef Q_OS_WIN32
-  // We statically link libqsqlite.dll on windows so these symbols are already
+#ifndef Q_WS_X11
+  // We statically link libqsqlite.dll on windows and mac so these symbols are already
   // available
   _sqlite3_create_function = sqlite3_create_function;
   _sqlite3_value_type = sqlite3_value_type;
@@ -65,7 +65,8 @@ void LibraryBackend::StaticInit() {
   _sqlite3_result_int64 = sqlite3_result_int64;
   _sqlite3_user_data = sqlite3_user_data;
   sLoadedSqliteSymbols = true;
-#else // Q_OS_WIN32
+  return;
+#else // Q_WS_X11
   QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
                         "/sqldrivers/libqsqlite";
 

@@ -42,9 +42,9 @@
 #ifndef QSQL_SQLITE_H
 #define QSQL_SQLITE_H
 
-#include <QtSql/qsqldriver.h>
-#include <QtSql/qsqlresult.h>
-#include <QtSql/private/qsqlcachedresult_p.h>
+#include <QSqlDriver>
+#include <QSqlResult>
+#include "clementinesqlcachedresult.h"
 
 struct sqlite3;
 
@@ -61,7 +61,7 @@ class QSQLiteDriverPrivate;
 class QSQLiteResultPrivate;
 class QSQLiteDriver;
 
-class QSQLiteResult : public QSqlCachedResult
+class QSQLiteResult : public ClementineSqlCachedResult
 {
     friend class QSQLiteDriver;
     friend class QSQLiteResultPrivate;
@@ -71,7 +71,7 @@ public:
     QVariant handle() const;
 
 protected:
-    bool gotoNext(QSqlCachedResult::ValueCache& row, int idx);
+    bool gotoNext(ClementineSqlCachedResult::ValueCache& row, int idx);
     bool reset(const QString &query);
     bool prepare(const QString &query);
     bool exec();

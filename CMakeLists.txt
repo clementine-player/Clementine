@@ -94,15 +94,18 @@ find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
 
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
-add_subdirectory(3rdparty/qxt)
 add_subdirectory(src)
+if (NOT APPLE)
+  add_subdirectory(3rdparty/qxt)
+endif (NOT APPLE)
 
 add_subdirectory(tests)
 
-if (WIN32)
+if (WIN32 OR APPLE)
+  message("Building static qsqlite plugin")
   add_definitions(-DQT_STATICPLUGIN)
   add_subdirectory(3rdparty/qsqlite)
-endif(WIN32)
+endif(WIN32 OR APPLE)
 
 # Uninstall support
 configure_file(

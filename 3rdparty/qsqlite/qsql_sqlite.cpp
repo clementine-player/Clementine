@@ -112,7 +112,7 @@ class QSQLiteResultPrivate
 public:
     QSQLiteResultPrivate(QSQLiteResult *res);
     void cleanup();
-    bool fetchNext(QSqlCachedResult::ValueCache &values, int idx, bool initialFetch);
+    bool fetchNext(ClementineSqlCachedResult::ValueCache &values, int idx, bool initialFetch);
     // initializes the recordInfo and the cache
     void initColumns(bool emptyResultset);
     void finalize();
@@ -180,7 +180,7 @@ void QSQLiteResultPrivate::initColumns(bool emptyResultset)
     }
 }
 
-bool QSQLiteResultPrivate::fetchNext(QSqlCachedResult::ValueCache &values, int idx, bool initialFetch)
+bool QSQLiteResultPrivate::fetchNext(ClementineSqlCachedResult::ValueCache &values, int idx, bool initialFetch)
 {
     int res;
     int i;
@@ -281,7 +281,7 @@ bool QSQLiteResultPrivate::fetchNext(QSqlCachedResult::ValueCache &values, int i
 }
 
 QSQLiteResult::QSQLiteResult(const QSQLiteDriver* db)
-    : QSqlCachedResult(db)
+    : ClementineSqlCachedResult(db)
 {
     d = new QSQLiteResultPrivate(this);
     d->access = db->d->access;
@@ -301,7 +301,7 @@ void QSQLiteResult::virtual_hook(int id, void *data)
             sqlite3_reset(d->stmt);
         break;
     default:
-        QSqlCachedResult::virtual_hook(id, data);
+        ClementineSqlCachedResult::virtual_hook(id, data);
     }
 }
 
@@ -417,7 +417,7 @@ bool QSQLiteResult::exec()
     return true;
 }
 
-bool QSQLiteResult::gotoNext(QSqlCachedResult::ValueCache& row, int idx)
+bool QSQLiteResult::gotoNext(ClementineSqlCachedResult::ValueCache& row, int idx)
 {
     return d->fetchNext(row, idx, false);
 }

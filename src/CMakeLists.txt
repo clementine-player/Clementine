@@ -304,7 +304,6 @@ add_library(clementine_lib
 )
 target_link_libraries(clementine_lib
     qtsingleapplication
-    qxt
     lastfm
     ${GOBJECT_LIBRARIES}
     ${GLIB_LIBRARIES}
@@ -321,14 +320,16 @@ if (APPLE)
       /System/Library/Frameworks/AppKit.framework
   )
   include_directories(${GROWL}/Headers)
+else (APPLE)
+  target_link_libraries(clementine_lib qxt)
 endif (APPLE)
-add_dependencies(clementine_lib qtsingleapplication qxt)
+add_dependencies(clementine_lib qtsingleapplication)
 
 # Link against the qsqlite plugin on windows
-if(WIN32)
+if(WIN32 OR APPLE)
   set(3RDPARTY_SQLITE_LIBRARY qsqlite)
   target_link_libraries(clementine_lib qsqlite)
-endif(WIN32)
+endif(WIN32 OR APPLE)
 
 add_executable(clementine
    MACOSX_BUNDLE

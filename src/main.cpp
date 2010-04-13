@@ -45,8 +45,8 @@
 
 #include "mac_startup.h"
 
-// Load sqlite plugin on windows
-#ifdef WIN32
+// Load sqlite plugin on windows and mac.
+#ifndef Q_WS_X11
 # include <QtPlugin>
   Q_IMPORT_PLUGIN(qsqlite)
 #endif

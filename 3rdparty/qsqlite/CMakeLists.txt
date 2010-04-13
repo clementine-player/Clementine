@@ -5,6 +5,7 @@ set(SQLITE-SOURCES
     sqlite3.c
     qsql_sqlite.cpp
     smain.cpp
+    clementinesqlcachedresult.cpp
 )
 
 # Header files that have Q_OBJECT in
