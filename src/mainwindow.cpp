@@ -193,7 +193,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_.volume, SLOT(setValue(int)));
-  connect(player_, SIGNAL(ForceShowOSD(Song)), osd_, SLOT(SongChanged(Song)));
+  connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
   connect(playlist_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
@@ -945,4 +945,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   if (options.show_osd())
     player_->ShowOSD();
+}
+
+void MainWindow::ForceShowOSD(const Song &song) {
+  osd_->ForceShowNextNotification();
+  osd_->SongChanged(song);
 }

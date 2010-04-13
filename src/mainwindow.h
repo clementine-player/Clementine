@@ -80,6 +80,7 @@ class MainWindow : public QMainWindow {
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
+  void ForceShowOSD(const Song& song);
 
   void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);
   void PlaylistPlay();

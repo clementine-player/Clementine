@@ -60,6 +60,7 @@ class OSD : public QObject {
  public slots:
   void ReloadSettings();
 
+  void ForceShowNextNotification() { force_show_next_ = true; }
   void SongChanged(const Song& song);
   void Paused();
   void Stopped();
@@ -78,12 +79,17 @@ class OSD : public QObject {
                          const QString& icon = QString(),
                          const QImage& image = QImage());
 
+ private slots:
+  void CallFinished(QDBusPendingCallWatcher* watcher);
+
  private:
   QSystemTrayIcon* tray_icon_;
   int timeout_msec_;
   Behaviour behaviour_;
   bool show_on_volume_change_;
   bool show_art_;
+
+  bool force_show_next_;
 
   OSDPretty* pretty_popup_;
 
@@ -97,8 +103,6 @@ class OSD : public QObject {
   uint notification_id_;
   QDateTime last_notification_time_;
 #endif
- private slots:
-  void CallFinished(QDBusPendingCallWatcher* watcher);
 };
 
 #endif // OSD_H

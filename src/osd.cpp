@@ -30,6 +30,7 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
     behaviour_(Native),
     show_on_volume_change_(false),
     show_art_(true),
+    force_show_next_(false),
     pretty_popup_(new OSDPretty)
 {
   ReloadSettings();
@@ -106,12 +107,16 @@ void OSD::ShowMessage(const QString& summary,
       tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_msec_);
       break;
 
+    case Disabled:
+      if (!force_show_next_)
+        break;
+      force_show_next_ = false;
+      // fallthrough
     case Pretty:
       pretty_popup_->SetMessage(summary, message, image);
       pretty_popup_->show();
       break;
 
-    case Disabled:
     default:
       break;
   }
