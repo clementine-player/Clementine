@@ -43,6 +43,8 @@
 #  include "osd.h"
 #endif
 
+#include "mac_startup.h"
+
 // Load sqlite plugin on windows
 #ifdef WIN32
 # include <QtPlugin>
@@ -67,6 +69,12 @@ void LoadTranslation(const QString& prefix, const QString& path) {
 }
 
 int main(int argc, char *argv[]) {
+#ifdef Q_OS_DARWIN
+  // Do Mac specific startup to get media keys working.
+  // This must go before QApplication initialisation.
+  mac::MacMain();
+#endif
+
   QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion("0.2");
   QCoreApplication::setOrganizationName("Clementine");

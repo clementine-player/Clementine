@@ -17,6 +17,8 @@
 #include "globalshortcuts.h"
 #include "qxtglobalshortcut.h"
 
+#include "mac_startup.h"
+
 #include <QtDebug>
 
 #ifdef QT_DBUS_LIB
@@ -34,6 +36,10 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
 }
 
 void GlobalShortcuts::Init() {
+#ifdef Q_OS_DARWIN
+  mac::SetShortcutHandler(this);
+  return;
+#endif
   if (RegisterGnome()) return;
   if (RegisterQxt()) return;
 }
@@ -75,6 +81,13 @@ bool GlobalShortcuts::RegisterQxt() {
 void GlobalShortcuts::GnomeMediaKeyPressed(const QString&, const QString& key) {
   if (key == "Play")     emit PlayPause();
   if (key == "Stop")     emit Stop();
+  if (key == "Next")     emit Next();
+  if (key == "Previous") emit Previous();
+}
+
+void GlobalShortcuts::MacMediaKeyPressed(const QString& key) {
+  if (key == "Play")     emit PlayPause();
+  // Stop doesn't exist on a mac keyboard.
   if (key == "Next")     emit Next();
   if (key == "Previous") emit Previous();
 }

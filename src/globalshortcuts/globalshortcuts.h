@@ -29,6 +29,8 @@ public:
   static const char* kGsdPath;
   static const char* kGsdInterface;
 
+  void MacMediaKeyPressed(const QString& key);
+
 signals:
   void PlayPause();
   void Stop();

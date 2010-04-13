@@ -181,7 +181,7 @@ set(CLEMENTINE-LANGUAGES
 
 # OSD and DBus.
 if(APPLE)
-  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_mac.mm)
+  set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_mac.mm mac_startup.mm)
 else(APPLE)
   if(WIN32)
     set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_win.cpp)
@@ -318,6 +318,7 @@ if (APPLE)
       ${GROWL}
       /System/Library/Frameworks/Carbon.framework
       /System/Library/Frameworks/Foundation.framework
+      /System/Library/Frameworks/AppKit.framework
   )
   include_directories(${GROWL}/Headers)
 endif (APPLE)
