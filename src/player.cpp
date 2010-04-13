@@ -395,7 +395,7 @@ void Player::Play() {
       engine_->Unpause();
       break;
     default:
-      Next(Engine::Manual);
+      PlayPause();
       break;
   }
 }

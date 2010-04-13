@@ -55,6 +55,7 @@ class CommandlineOptions {
   int set_volume() const { return set_volume_; }
   int volume_modifier() const { return volume_modifier_; }
   int seek_to() const { return seek_to_; }
+  int seek_by() const { return seek_by_; }
   int play_track_at() const { return play_track_at_; }
   bool show_osd() const { return show_osd_; }
   QList<QUrl> urls() const { return urls_; }
@@ -63,10 +64,13 @@ class CommandlineOptions {
   void Load(const QByteArray& serialized);
 
  private:
+  // These are "invalid" characters to pass to getopt_long for options that
+  // shouldn't have a short (single character) option.
   enum LongOptions {
     VolumeUp = 256,
     VolumeDown,
     SeekTo,
+    SeekBy,
   };
 
   QString tr(const char* source_text);
@@ -82,6 +86,7 @@ class CommandlineOptions {
   int set_volume_;
   int volume_modifier_;
   int seek_to_;
+  int seek_by_;
   int play_track_at_;
   bool show_osd_;
 

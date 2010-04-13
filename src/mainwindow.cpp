@@ -937,6 +937,8 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   if (options.seek_to() != -1)
     player_->Seek(options.seek_to());
+  else if (options.seek_by() != 0)
+    player_->Seek(player_->PositionGet() / 1000 + options.seek_by());
 
   if (options.play_track_at() != -1)
     player_->PlayAt(options.play_track_at(), Engine::Manual);

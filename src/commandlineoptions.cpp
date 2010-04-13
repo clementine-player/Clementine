@@ -37,14 +37,15 @@ const char* CommandlineOptions::kHelpText =
     "  --volume-up               %12\n"
     "  --volume-down             %13\n"
     "  --seek-to <seconds>       %14\n"
+    "  --seek-by <seconds>       %15\n"
     "\n"
-    "%15:\n"
-    "  -a, --append              %16\n"
-    "  -l, --load                %17\n"
-    "  -k, --play-track <n>      %18\n"
+    "%16:\n"
+    "  -a, --append              %17\n"
+    "  -l, --load                %18\n"
+    "  -k, --play-track <n>      %19\n"
     "\n"
-    "%19:\n"
-    "  -o, --show-osd            %20\n";
+    "%20:\n"
+    "  -o, --show-osd            %21\n";
 
 
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
@@ -55,6 +56,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     set_volume_(-1),
     volume_modifier_(0),
     seek_to_(-1),
+    seek_by_(0),
     play_track_at_(-1),
     show_osd_(false)
 {
@@ -62,24 +64,25 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
 
 bool CommandlineOptions::Parse() {
   static const struct option kOptions[] = {
-    {"help",       no_argument, 0, 'h'},
+    {"help",        no_argument,       0, 'h'},
 
-    {"play",       no_argument, 0, 'p'},
-    {"play-pause", no_argument, 0, 't'},
-    {"pause",      no_argument, 0, 'u'},
-    {"stop",       no_argument, 0, 's'},
-    {"previous",   no_argument, 0, 'r'},
-    {"next",       no_argument, 0, 'f'},
-    {"volume",     required_argument, 0, 'v'},
-    {"volume-up",  no_argument, 0, VolumeUp},
-    {"volume-down", no_argument, 0, VolumeDown},
-    {"seek-to",    required_argument, 0, SeekTo},
+    {"play",        no_argument,       0, 'p'},
+    {"play-pause",  no_argument,       0, 't'},
+    {"pause",       no_argument,       0, 'u'},
+    {"stop",        no_argument,       0, 's'},
+    {"previous",    no_argument,       0, 'r'},
+    {"next",        no_argument,       0, 'f'},
+    {"volume",      required_argument, 0, 'v'},
+    {"volume-up",   no_argument,       0, VolumeUp},
+    {"volume-down", no_argument,       0, VolumeDown},
+    {"seek-to",     required_argument, 0, SeekTo},
+    {"seek-by",     required_argument, 0, SeekBy},
 
-    {"append",     no_argument, 0, 'a'},
-    {"load",       no_argument, 0, 'l'},
-    {"play-track", required_argument, 0, 'k'},
+    {"append",      no_argument,       0, 'a'},
+    {"load",        no_argument,       0, 'l'},
+    {"play-track",  required_argument, 0, 'k'},
 
-    {"show-osd",   no_argument, 0, 'o'},
+    {"show-osd",    no_argument,       0, 'o'},
 
     {0, 0, 0, 0}
   };
@@ -107,11 +110,12 @@ bool CommandlineOptions::Parse() {
             tr("Set the volume to <value> percent"),
             tr("Increase the volume by 4%"),
             tr("Decrease the volume by 4%"),
-            tr("Seek the currently playing track"),
+            tr("Seek the currently playing track to an absolute position"),
+            tr("Seek the currently playing track by a relative amount"),
             tr("Playlist options"),
             tr("Append files/URLs to the playlist"),
-            tr("Loads files/URLs, replacing current playlist"),
-            tr("Play the <n>th track in the playlist")).arg(
+            tr("Loads files/URLs, replacing current playlist")).arg(
+            tr("Play the <n>th track in the playlist"),
             tr("Other options"),
             tr("Display the on-screen-display"));
 
@@ -139,6 +143,11 @@ bool CommandlineOptions::Parse() {
       case SeekTo:
         seek_to_ = QString(optarg).toInt(&ok);
         if (!ok) seek_to_ = -1;
+        break;
+
+      case SeekBy:
+        seek_by_ = QString(optarg).toInt(&ok);
+        if (!ok) seek_by_ = 0;
         break;
 
       case 'k':
@@ -169,6 +178,7 @@ bool CommandlineOptions::is_empty() const {
          set_volume_ == -1 &&
          volume_modifier_ == 0 &&
          seek_to_ == -1 &&
+         seek_by_ == 0 &&
          play_track_at_ == -1 &&
          show_osd_ == false &&
          urls_.isEmpty();
@@ -204,6 +214,7 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
     << a.set_volume_
     << a.volume_modifier_
     << a.seek_to_
+    << a.seek_by_
     << a.play_track_at_
     << a.show_osd_
     << a.urls_;
@@ -217,6 +228,7 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
     >> a.set_volume_
     >> a.volume_modifier_
     >> a.seek_to_
+    >> a.seek_by_
     >> a.play_track_at_
     >> a.show_osd_
     >> a.urls_;
