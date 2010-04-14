@@ -37,11 +37,11 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
   InitMetadata();
 }
 
-void RadioPlaylistItem::Save(SettingsProvider& settings) const {
-  settings.setValue("service", service_->name());
-  settings.setValue("url", url_.toString());
-  settings.setValue("title", title_);
-  settings.setValue("artist", artist_);
+void RadioPlaylistItem::Save(SettingsProvider* settings) const {
+  settings->setValue("service", service_->name());
+  settings->setValue("url", url_.toString());
+  settings->setValue("title", title_);
+  settings->setValue("artist", artist_);
 }
 
 void RadioPlaylistItem::Restore(const SettingsProvider& settings) {

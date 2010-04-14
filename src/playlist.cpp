@@ -630,7 +630,7 @@ void Playlist::Save() const {
   for (int i=0 ; i<items_.count() ; ++i) {
     settings_->setArrayIndex(i);
     settings_->setValue("type", items_.at(i)->type_string());
-    items_.at(i)->Save(*settings_.get());
+    items_.at(i)->Save(settings_.get());
   }
   settings_->endArray();
 

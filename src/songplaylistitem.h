@@ -27,7 +27,7 @@ class SongPlaylistItem : public PlaylistItem {
 
   Type type() const { return Type_Song; }
 
-  void Save(SettingsProvider& settings) const;
+  void Save(SettingsProvider* settings) const;
   void Restore(const SettingsProvider& settings);
   void Reload();
 
@@ -36,8 +36,8 @@ class SongPlaylistItem : public PlaylistItem {
   QUrl Url() const;
 
  private:
-  void SaveFile(SettingsProvider& settings) const;
-  void SaveStream(SettingsProvider& settings) const;
+  void SaveFile(SettingsProvider* settings) const;
+  void SaveStream(SettingsProvider* settings) const;
 
   void RestoreFile(const SettingsProvider& settings);
   void RestoreStream(const SettingsProvider& settings);

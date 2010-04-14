@@ -30,10 +30,10 @@ SongPlaylistItem::SongPlaylistItem(const Song& song)
 {
 }
 
-void SongPlaylistItem::Save(SettingsProvider& settings) const {
-  settings.setValue("filename", song_.filename());
-  settings.setValue("art_automatic", song_.art_automatic());
-  settings.setValue("art_manual", song_.art_manual());
+void SongPlaylistItem::Save(SettingsProvider* settings) const {
+  settings->setValue("filename", song_.filename());
+  settings->setValue("art_automatic", song_.art_automatic());
+  settings->setValue("art_manual", song_.art_manual());
 
   if (song_.filetype() == Song::Type_Stream) {
     SaveStream(settings);
@@ -42,17 +42,17 @@ void SongPlaylistItem::Save(SettingsProvider& settings) const {
   }
 }
 
-void SongPlaylistItem::SaveFile(SettingsProvider& settings) const {
-  settings.setValue("stream", false);
-  settings.setValue("library_directory", song_.directory_id());
+void SongPlaylistItem::SaveFile(SettingsProvider* settings) const {
+  settings->setValue("stream", false);
+  settings->setValue("library_directory", song_.directory_id());
 }
 
-void SongPlaylistItem::SaveStream(SettingsProvider& settings) const {
-  settings.setValue("stream", true);
-  settings.setValue("title", song_.title());
-  settings.setValue("artist", song_.artist());
-  settings.setValue("album", song_.album());
-  settings.setValue("length", song_.length());
+void SongPlaylistItem::SaveStream(SettingsProvider* settings) const {
+  settings->setValue("stream", true);
+  settings->setValue("title", song_.title());
+  settings->setValue("artist", song_.artist());
+  settings->setValue("album", song_.album());
+  settings->setValue("length", song_.length());
 }
 
 void SongPlaylistItem::Restore(const SettingsProvider& settings) {

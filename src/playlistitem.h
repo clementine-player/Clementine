@@ -50,7 +50,7 @@ class PlaylistItem {
 
   virtual Options options() const { return Default; }
 
-  virtual void Save(SettingsProvider& settings) const = 0;
+  virtual void Save(SettingsProvider* settings) const = 0;
   virtual void Restore(const SettingsProvider& settings) = 0;
   virtual void Reload() {}
 

@@ -32,7 +32,7 @@ class MockPlaylistItem : public PlaylistItem {
   MOCK_CONST_METHOD0(options,
       Options());
   MOCK_CONST_METHOD1(Save,
-      void(SettingsProvider& settings));
+      void(SettingsProvider* settings));
   MOCK_METHOD1(Restore,
       void(const SettingsProvider& settings));
   MOCK_METHOD0(Reload,
