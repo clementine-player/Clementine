@@ -84,6 +84,7 @@ class PlaylistView : public QTreeView {
 
   QTimer* inhibit_autoscroll_timer_;
   bool inhibit_autoscroll_;
+  bool currently_autoscrolling_;
 
   int row_height_; // Used to invalidate the currenttrack_bar pixmaps
   QList<QPixmap> currenttrack_bar_left_;

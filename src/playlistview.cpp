@@ -41,6 +41,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     glow_intensity_step_(0),
     inhibit_autoscroll_timer_(new QTimer(this)),
     inhibit_autoscroll_(false),
+    currently_autoscrolling_(false),
     row_height_(-1),
     currenttrack_play_(":currenttrack_play.png"),
     currenttrack_pause_(":currenttrack_pause.png")
@@ -344,8 +345,12 @@ void PlaylistView::mousePressEvent(QMouseEvent *event) {
 
 void PlaylistView::scrollContentsBy(int dx, int dy) {
   QTreeView::scrollContentsBy(dx, dy);
-  inhibit_autoscroll_ = true;
-  inhibit_autoscroll_timer_->start();
+
+  if (!currently_autoscrolling_) {
+    // We only want to do this if the scroll was initiated by the user
+    inhibit_autoscroll_ = true;
+    inhibit_autoscroll_timer_->start();
+  }
 }
 
 void PlaylistView::InhibitAutoscrollTimeout() {
@@ -365,5 +370,7 @@ void PlaylistView::MaybeAutoscroll() {
     return;
 
   QModelIndex current = playlist->index(playlist->current_index(), 0);
+  currently_autoscrolling_ = true;
   scrollTo(current, QAbstractItemView::PositionAtCenter);
+  currently_autoscrolling_ = false;
 }
