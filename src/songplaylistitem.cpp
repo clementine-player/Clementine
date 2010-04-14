@@ -15,6 +15,7 @@
 */
 
 #include "songplaylistitem.h"
+#include "settingsprovider.h"
 
 #include <QtDebug>
 #include <QFile>
@@ -29,7 +30,7 @@ SongPlaylistItem::SongPlaylistItem(const Song& song)
 {
 }
 
-void SongPlaylistItem::Save(QSettings& settings) const {
+void SongPlaylistItem::Save(SettingsProvider& settings) const {
   settings.setValue("filename", song_.filename());
   settings.setValue("art_automatic", song_.art_automatic());
   settings.setValue("art_manual", song_.art_manual());
@@ -41,12 +42,12 @@ void SongPlaylistItem::Save(QSettings& settings) const {
   }
 }
 
-void SongPlaylistItem::SaveFile(QSettings& settings) const {
+void SongPlaylistItem::SaveFile(SettingsProvider& settings) const {
   settings.setValue("stream", false);
   settings.setValue("library_directory", song_.directory_id());
 }
 
-void SongPlaylistItem::SaveStream(QSettings& settings) const {
+void SongPlaylistItem::SaveStream(SettingsProvider& settings) const {
   settings.setValue("stream", true);
   settings.setValue("title", song_.title());
   settings.setValue("artist", song_.artist());
@@ -54,7 +55,7 @@ void SongPlaylistItem::SaveStream(QSettings& settings) const {
   settings.setValue("length", song_.length());
 }
 
-void SongPlaylistItem::Restore(const QSettings& settings) {
+void SongPlaylistItem::Restore(const SettingsProvider& settings) {
   song_.set_art_automatic(settings.value("art_automatic").toString());
   song_.set_art_manual(settings.value("art_manual").toString());
 
@@ -66,14 +67,14 @@ void SongPlaylistItem::Restore(const QSettings& settings) {
   }
 }
 
-void SongPlaylistItem::RestoreFile(const QSettings& settings) {
+void SongPlaylistItem::RestoreFile(const SettingsProvider& settings) {
   QString filename(settings.value("filename").toString());
 
   int directory_id(settings.value("library_directory", -1).toInt());
   song_.InitFromFile(filename, directory_id);
 }
 
-void SongPlaylistItem::RestoreStream(const QSettings& settings) {
+void SongPlaylistItem::RestoreStream(const SettingsProvider& settings) {
   QString filename(settings.value("filename").toString());
   song_.set_filename(filename);
   song_.set_filetype(Song::Type_Stream);

@@ -24,6 +24,7 @@
 #include "song.h"
 #include "radioitem.h"
 #include "playlistsequence.h"
+#include "settingsprovider.h"
 
 class RadioService;
 
@@ -31,7 +32,7 @@ class Playlist : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  Playlist(QObject* parent = 0);
+  Playlist(QObject* parent = 0, SettingsProvider* settings = NULL);
   ~Playlist();
 
   enum Column {
@@ -77,7 +78,6 @@ class Playlist : public QAbstractListModel {
 
   // Persistence
   void Save() const;
-  void SaveLast() const;
   void Restore();
 
   // Accessors
@@ -153,6 +153,8 @@ class Playlist : public QAbstractListModel {
   int NextVirtualIndex(int i) const;
 
  private:
+  boost::scoped_ptr<SettingsProvider> settings_;
+
   QList<PlaylistItem*> items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order
                              // that they will be played.

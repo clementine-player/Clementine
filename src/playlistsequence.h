@@ -20,6 +20,7 @@
 #include <QWidget>
 
 #include "ui_playlistsequence.h"
+#include "settingsprovider.h"
 
 class QMenu;
 
@@ -27,7 +28,7 @@ class PlaylistSequence : public QWidget {
   Q_OBJECT
 
  public:
-  PlaylistSequence(QWidget *parent = 0);
+  PlaylistSequence(QWidget *parent = 0, SettingsProvider* settings = 0);
 
   enum RepeatMode {
     Repeat_Off = 0,
@@ -67,6 +68,7 @@ class PlaylistSequence : public QWidget {
 
  private:
   Ui::PlaylistSequence ui_;
+  boost::scoped_ptr<SettingsProvider> settings_;
 
   QMenu* repeat_menu_;
   QMenu* shuffle_menu_;

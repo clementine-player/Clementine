@@ -17,6 +17,7 @@
 #include "radioplaylistitem.h"
 #include "radioservice.h"
 #include "radiomodel.h"
+#include "settingsprovider.h"
 
 #include <QSettings>
 #include <QApplication>
@@ -36,14 +37,14 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
   InitMetadata();
 }
 
-void RadioPlaylistItem::Save(QSettings& settings) const {
+void RadioPlaylistItem::Save(SettingsProvider& settings) const {
   settings.setValue("service", service_->name());
   settings.setValue("url", url_.toString());
   settings.setValue("title", title_);
   settings.setValue("artist", artist_);
 }
 
-void RadioPlaylistItem::Restore(const QSettings& settings) {
+void RadioPlaylistItem::Restore(const SettingsProvider& settings) {
   service_ = RadioModel::ServiceByName(settings.value("service").toString());
   url_ = settings.value("url").toString();
   title_ = settings.value("title").toString();

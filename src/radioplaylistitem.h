@@ -33,8 +33,8 @@ class RadioPlaylistItem : public PlaylistItem {
   Type type() const { return Type_Radio; }
   Options options() const;
 
-  void Save(QSettings& settings) const;
-  void Restore(const QSettings& settings);
+  void Save(SettingsProvider& settings) const;
+  void Restore(const SettingsProvider& settings);
 
   Song Metadata() const;
 

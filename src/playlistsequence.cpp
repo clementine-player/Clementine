@@ -23,8 +23,9 @@
 
 const char* PlaylistSequence::kSettingsGroup = "PlaylistSequence";
 
-PlaylistSequence::PlaylistSequence(QWidget *parent)
+PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
   : QWidget(parent),
+    settings_(settings ? settings : new DefaultSettingsProvider),
     repeat_menu_(new QMenu(this)),
     shuffle_menu_(new QMenu(this)),
     loading_(false),
@@ -32,6 +33,8 @@ PlaylistSequence::PlaylistSequence(QWidget *parent)
     shuffle_mode_(Shuffle_Off)
 {
   ui_.setupUi(this);
+
+  settings_->set_group(kSettingsGroup);
 
   QActionGroup* repeat_group = new QActionGroup(this);
   repeat_group->addAction(ui_.action_repeat_off);
@@ -55,23 +58,17 @@ PlaylistSequence::PlaylistSequence(QWidget *parent)
 }
 
 void PlaylistSequence::Load() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
   loading_ = true; // Stops these setter functions calling Save()
-  SetShuffleMode(ShuffleMode(s.value("shuffle_mode", Shuffle_Off).toInt()));
-  SetRepeatMode(RepeatMode(s.value("repeat_mode", Repeat_Off).toInt()));
+  SetShuffleMode(ShuffleMode(settings_->value("shuffle_mode", Shuffle_Off).toInt()));
+  SetRepeatMode(RepeatMode(settings_->value("repeat_mode", Repeat_Off).toInt()));
   loading_ = false;
 }
 
 void PlaylistSequence::Save() {
   if (loading_) return;
 
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  s.setValue("shuffle_mode", shuffle_mode_);
-  s.setValue("repeat_mode", repeat_mode_);
+  settings_->setValue("shuffle_mode", shuffle_mode_);
+  settings_->setValue("repeat_mode", repeat_mode_);
 }
 
 void PlaylistSequence::RepeatActionTriggered(QAction* action) {

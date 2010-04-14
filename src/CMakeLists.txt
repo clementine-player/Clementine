@@ -75,6 +75,7 @@ set(CLEMENTINE-SOURCES
     tracksliderslider.cpp
     stickyslider.cpp
     commandlineoptions.cpp
+    settingsprovider.cpp
 )
 
 # Header files that have Q_OBJECT in

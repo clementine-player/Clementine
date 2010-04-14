@@ -20,9 +20,8 @@
 #include <QStandardItem>
 #include <QUrl>
 
-class QSettings;
-
 class Song;
+class SettingsProvider;
 
 class PlaylistItem {
  public:
@@ -51,8 +50,8 @@ class PlaylistItem {
 
   virtual Options options() const { return Default; }
 
-  virtual void Save(QSettings& settings) const = 0;
-  virtual void Restore(const QSettings& settings) = 0;
+  virtual void Save(SettingsProvider& settings) const = 0;
+  virtual void Restore(const SettingsProvider& settings) = 0;
   virtual void Reload() {}
 
   virtual Song Metadata() const = 0;

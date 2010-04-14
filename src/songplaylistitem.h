@@ -27,8 +27,8 @@ class SongPlaylistItem : public PlaylistItem {
 
   Type type() const { return Type_Song; }
 
-  void Save(QSettings& settings) const;
-  void Restore(const QSettings& settings);
+  void Save(SettingsProvider& settings) const;
+  void Restore(const SettingsProvider& settings);
   void Reload();
 
   Song Metadata() const { return song_; }
@@ -36,11 +36,11 @@ class SongPlaylistItem : public PlaylistItem {
   QUrl Url() const;
 
  private:
-  void SaveFile(QSettings& settings) const;
-  void SaveStream(QSettings& settings) const;
+  void SaveFile(SettingsProvider& settings) const;
+  void SaveStream(SettingsProvider& settings) const;
 
-  void RestoreFile(const QSettings& settings);
-  void RestoreStream(const QSettings& settings);
+  void RestoreFile(const SettingsProvider& settings);
+  void RestoreStream(const SettingsProvider& settings);
   Song song_;
 };
 

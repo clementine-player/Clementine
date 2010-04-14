@@ -37,8 +37,9 @@
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kSettingsGroup = "Playlist";
 
-Playlist::Playlist(QObject *parent) :
-    QAbstractListModel(parent),
+Playlist::Playlist(QObject *parent, SettingsProvider* settings)
+  : QAbstractListModel(parent),
+    settings_(settings ? settings : new DefaultSettingsProvider),
     current_is_paused_(false),
     current_virtual_index_(-1),
     is_shuffled_(false),
@@ -47,6 +48,8 @@ Playlist::Playlist(QObject *parent) :
     playlist_sequence_(NULL),
     ignore_sorting_(false)
 {
+  settings_->set_group(kSettingsGroup);
+
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
 }
@@ -623,18 +626,15 @@ void Playlist::SetCurrentIsPaused(bool paused) {
 }
 
 void Playlist::Save() const {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  s.beginWriteArray("items", items_.count());
+  settings_->beginWriteArray("items", items_.count());
   for (int i=0 ; i<items_.count() ; ++i) {
-    s.setArrayIndex(i);
-    s.setValue("type", items_.at(i)->type_string());
-    items_.at(i)->Save(s);
+    settings_->setArrayIndex(i);
+    settings_->setValue("type", items_.at(i)->type_string());
+    items_.at(i)->Save(*settings_.get());
   }
-  s.endArray();
+  settings_->endArray();
 
-  s.setValue("last_index", last_played_index());
+  settings_->setValue("last_index", last_played_index());
 }
 
 void Playlist::Restore() {
@@ -642,27 +642,24 @@ void Playlist::Restore() {
   items_.clear();
   virtual_items_.clear();
 
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  int count = s.beginReadArray("items");
+  int count = settings_->beginReadArray("items");
   for (int i=0 ; i<count ; ++i) {
-    s.setArrayIndex(i);
-    QString type(s.value("type").toString());
+    settings_->setArrayIndex(i);
+    QString type(settings_->value("type").toString());
 
     PlaylistItem* item = PlaylistItem::NewFromType(type);
     if (!item)
       continue;
 
-    item->Restore(s);
+    item->Restore(*settings_.get());
     items_ << item;
     virtual_items_ << virtual_items_.count();
   }
-  s.endArray();
+  settings_->endArray();
 
   reset();
 
-  last_played_item_ = index(s.value("last_index", -1).toInt(), 0, QModelIndex());
+  last_played_item_ = index(settings_->value("last_index", -1).toInt(), 0, QModelIndex());
 }
 
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
