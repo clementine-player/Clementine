@@ -32,10 +32,6 @@ using ::testing::AtMost;
 using ::testing::Invoke;
 using ::testing::Return;
 
-void PrintTo(const ::QString& str, std::ostream& os) {
-  os << str.toStdString();
-}
-
 class LibraryBackendTest : public ::testing::Test {
  protected:
   virtual void SetUp() {

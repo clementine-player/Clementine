@@ -33,6 +33,7 @@ set(TESTUTILS-SOURCES
     test_utils.cpp
     mock_networkaccessmanager.cpp
     mock_taglib.cpp
+    mock_playlistitem.cpp
 )
 
 set(TESTUTILS-MOC-HEADERS

@@ -26,10 +26,6 @@
 #include <QSignalSpy>
 #include <QSortFilterProxyModel>
 
-void PrintTo(const ::QString& str, std::ostream& os) {
-  os << str.toStdString();
-}
-
 namespace {
 
 class LibraryTest : public ::testing::Test {

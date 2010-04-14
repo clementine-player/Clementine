@@ -34,3 +34,16 @@ std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req) {
   stream << req.url().toString().toStdString();
   return stream;
 }
+
+std::ostream& operator <<(std::ostream& stream, const QVariant& var) {
+  stream << var.toString().toStdString();
+  return stream;
+}
+
+void PrintTo(const ::QString& str, std::ostream& os) {
+  os << str.toStdString();
+}
+
+void PrintTo(const ::QVariant& var, std::ostream& os) {
+  os << var.toString().toStdString();
+}
