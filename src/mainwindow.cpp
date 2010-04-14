@@ -56,6 +56,7 @@
 #include <QSignalMapper>
 #include <QFileDialog>
 #include <QTimer>
+#include <QShortcut>
 
 #include <cmath>
 
@@ -79,19 +80,19 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     osd_(new OSD(tray_icon_, this)),
     track_slider_(new TrackSlider(this)),
     playlist_sequence_(new PlaylistSequence(this)),
-    edit_tag_dialog_(new EditTagDialog(this)),
+    edit_tag_dialog_(new EditTagDialog),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
-    library_config_dialog_(new LibraryConfigDialog(this)),
-    about_dialog_(new About(this)),
+    library_config_dialog_(new LibraryConfigDialog),
+    about_dialog_(new About),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
     library_(new Library(player_->GetEngine(), this)),
     global_shortcuts_(new GlobalShortcuts(this)),
-    settings_dialog_(new SettingsDialog(this)),
-    add_stream_dialog_(new AddStreamDialog(this)),
+    settings_dialog_(new SettingsDialog),
+    add_stream_dialog_(new AddStreamDialog),
     cover_manager_(new AlbumCoverManager(network, this)),
-    group_by_dialog_(new GroupByDialog(this)),
+    group_by_dialog_(new GroupByDialog),
     equalizer_(new Equalizer(this)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
@@ -154,8 +155,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
   connect(ui_.action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
   connect(ui_.action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
-  connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_, SLOT(show()));
-  connect(ui_.action_about, SIGNAL(triggered()), about_dialog_, SLOT(show()));
+  connect(ui_.action_configure, SIGNAL(triggered()), settings_dialog_.get(), SLOT(show()));
+  connect(ui_.action_about, SIGNAL(triggered()), about_dialog_.get(), SLOT(show()));
   connect(ui_.action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
   connect(ui_.action_open_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
@@ -218,7 +219,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
   connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
   connect(ui_.library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
-  connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_config_dialog_, SLOT(show()));
+  connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_config_dialog_.get(), SLOT(show()));
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
@@ -284,10 +285,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
 
   connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
   connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
-          group_by_dialog_, SLOT(LibraryGroupingChanged(Library::Grouping)));
+          group_by_dialog_.get(), SLOT(LibraryGroupingChanged(Library::Grouping)));
   connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
           SLOT(LibraryGroupingChanged(Library::Grouping)));
-  connect(group_by_dialog_, SIGNAL(Accepted(Library::Grouping)),
+  connect(group_by_dialog_.get(), SIGNAL(Accepted(Library::Grouping)),
           library_, SLOT(SetGroupBy(Library::Grouping)));
 
   // Library config menu
@@ -295,9 +296,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   library_menu->addMenu(filter_age_menu);
   library_menu->addMenu(group_by_menu);
   library_menu->addSeparator();
-  library_menu->addAction(tr("Configure library..."), library_config_dialog_, SLOT(show()));
+  library_menu->addAction(tr("Configure library..."), library_config_dialog_.get(), SLOT(show()));
   ui_.library_options->setMenu(library_menu);
-  connect(library_config_dialog_, SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
+  connect(library_config_dialog_.get(), SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
 
   // Playlist menu
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
@@ -356,14 +357,14 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(global_shortcuts_, SIGNAL(Previous()), ui_.action_previous_track, SLOT(trigger()));
 
   // Settings
-  connect(settings_dialog_, SIGNAL(accepted()), SLOT(ReloadSettings()));
-  connect(settings_dialog_, SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
-  connect(settings_dialog_, SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
-  connect(settings_dialog_, SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
-  connect(settings_dialog_, SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
 
   // Add stream dialog
-  connect(add_stream_dialog_, SIGNAL(accepted()), SLOT(AddStreamAccepted()));
+  connect(add_stream_dialog_.get(), SIGNAL(accepted()), SLOT(AddStreamAccepted()));
 
   // Analyzer
   ui_.analyzer->set_engine(player_->GetEngine());
@@ -404,6 +405,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
       Library::GroupBy(settings_.value("group_by2", int(Library::GroupBy_Album)).toInt()),
       Library::GroupBy(settings_.value("group_by3", int(Library::GroupBy_None)).toInt())));
 
+#ifndef Q_OS_DARWIN
   StartupBehaviour behaviour =
       StartupBehaviour(settings_.value("startupbehaviour", Startup_Remember).toInt());
   bool hidden = settings_.value("hidden", false).toBool();
@@ -415,7 +417,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     case Startup_Remember:   setVisible(!hidden); break;
   }
 
-#ifndef Q_OS_DARWIN
   if (show_tray)
     tray_icon_->show();
 
@@ -428,6 +429,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   // Always show mainwindow on startup on OS X.
   show();
 #endif
+
+  QShortcut* close_window_shortcut = new QShortcut(this);
+  close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
+  connect(close_window_shortcut, SIGNAL(activated()), SLOT(hide()));
 
   library_->Init();
   library_->StartThreads();
@@ -982,4 +987,12 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 void MainWindow::ForceShowOSD(const Song &song) {
   osd_->ForceShowNextNotification();
   osd_->SongChanged(song);
+}
+
+bool MainWindow::event(QEvent* event) {
+  if (event->type() == QEvent::User) {
+    show();
+    return true;
+  }
+  return QMainWindow::event(event);
 }

@@ -17,6 +17,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include <QMainWindow>
 #include <QSettings>
 #include <QSystemTrayIcon>
@@ -71,6 +73,8 @@ class MainWindow : public QMainWindow {
  protected:
   void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
+
+  bool event(QEvent* event);
 
  private slots:
   void QueueFiles(const QList<QUrl>& urls);
@@ -134,10 +138,10 @@ class MainWindow : public QMainWindow {
   OSD* osd_;
   TrackSlider* track_slider_;
   PlaylistSequence* playlist_sequence_;
-  EditTagDialog* edit_tag_dialog_;
+  boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
-  LibraryConfigDialog* library_config_dialog_;
-  About* about_dialog_;
+  boost::scoped_ptr<LibraryConfigDialog> library_config_dialog_;
+  boost::scoped_ptr<About> about_dialog_;
 
   RadioModel* radio_model_;
   Playlist* playlist_;
@@ -145,10 +149,10 @@ class MainWindow : public QMainWindow {
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
 
-  SettingsDialog* settings_dialog_;
-  AddStreamDialog* add_stream_dialog_;
+  boost::scoped_ptr<SettingsDialog> settings_dialog_;
+  boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
   AlbumCoverManager* cover_manager_;
-  GroupByDialog* group_by_dialog_;
+  boost::scoped_ptr<GroupByDialog> group_by_dialog_;
   Equalizer* equalizer_;
 
   QMenu* playlist_menu_;

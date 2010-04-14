@@ -5,35 +5,64 @@
 #include "globalshortcuts/globalshortcuts.h"
 #include "mac_startup.h"
 
+#include <QCoreApplication>
+#include <QEvent>
+#include <QObject>
+
 // Capture global media keys on Mac (Cocoa only!)
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
-@interface MacApplication :NSApplication {
-  GlobalShortcuts* handler_;
+@interface MacApplication :NSApplication <NSApplicationDelegate> {
+  GlobalShortcuts* shortcut_handler_;
+  QObject* application_handler_;
 }
 
-- (GlobalShortcuts*) handler;
-- (void) SetHandler: (GlobalShortcuts*)handler;
+- (GlobalShortcuts*) shortcut_handler;
+- (void) SetShortcutHandler: (GlobalShortcuts*)handler;
 
--(void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
+- (QObject*) application_handler;
+- (void) SetApplicationHandler: (QObject*)handler;
+
+- (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
+
+// NSApplicationDelegate
+- (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
 @end
 
 @implementation MacApplication
 
 - (id) init {
   if ((self = [super init])) {
-    [self SetHandler:nil];
+    [self SetShortcutHandler:nil];
+    [self SetApplicationHandler:nil];
+    [self setDelegate:self];
   }
   return self;
 }
 
-- (GlobalShortcuts*) handler {
-  return handler_;
+- (GlobalShortcuts*) shortcut_handler {
+  return shortcut_handler_;
 }
 
-- (void) SetHandler: (GlobalShortcuts*)handler {
-  handler_ = handler;
+- (void) SetShortcutHandler: (GlobalShortcuts*)handler {
+  shortcut_handler_ = handler;
 }
+
+- (QObject*) application_handler {
+  return application_handler_;
+}
+
+- (void) SetApplicationHandler: (QObject*)handler {
+  application_handler_ = handler;
+}
+
+- (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag {
+  if (application_handler_) {
+    qApp->postEvent(application_handler_, new QEvent(QEvent::User));
+  }
+  return YES;
+}
+
 
 -(void) sendEvent: (NSEvent*)event {
   if ([event type] == NSSystemDefined && [event subtype] == 8) {
@@ -49,21 +78,21 @@
 }
 
 -(void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat {
-  if (!handler_) {
+  if (!shortcut_handler_) {
     return;
   }
   if (state == 0) {
     switch (key) {
       case NX_KEYTYPE_PLAY:
         // Play pressed.
-        handler_->MacMediaKeyPressed("Play");
+        shortcut_handler_->MacMediaKeyPressed("Play");
         break;
       case NX_KEYTYPE_FAST:
         // Next pressed.
-        handler_->MacMediaKeyPressed("Next");
+        shortcut_handler_->MacMediaKeyPressed("Next");
         break;
       case NX_KEYTYPE_REWIND:
-        handler_->MacMediaKeyPressed("Previous");
+        shortcut_handler_->MacMediaKeyPressed("Previous");
         break;
       default:
         break;
@@ -81,7 +110,11 @@ void MacMain() {
 }
 
 void SetShortcutHandler(GlobalShortcuts* handler) {
-  [NSApp SetHandler: handler];
+  [NSApp SetShortcutHandler: handler];
+}
+
+void SetApplicationHandler(QObject* handler) {
+  [NSApp SetApplicationHandler: handler];
 }
 
 }  // namespace mac
