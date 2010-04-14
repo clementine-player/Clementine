@@ -111,6 +111,9 @@ TEST_F(LibraryBackendTest, DatabaseInitialises) {
   QStringList tables = database_.tables();
   EXPECT_TRUE(tables.contains("songs"));
   EXPECT_TRUE(tables.contains("directories"));
+  EXPECT_TRUE(tables.contains("subdirectories"));
+  EXPECT_TRUE(tables.contains("playlists"));
+  EXPECT_TRUE(tables.contains("playlist_items"));
   ASSERT_TRUE(tables.contains("schema_version"));
 
   // Check the schema version is correct
