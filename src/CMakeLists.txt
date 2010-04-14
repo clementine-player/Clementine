@@ -256,14 +256,17 @@ add_custom_target(pot ALL
   COMMAND cat ${CMAKE_CURRENT_SOURCE_DIR}/translations/header ${CMAKE_CURRENT_BINARY_DIR}/translations.pot > ${CLEMENTINE-POT}
   DEPENDS ${FILES_TO_TRANSLATE})
 
+add_custom_target(po_all ALL)
+
 # Merge the .pot into .po files
 foreach (_lang ${CLEMENTINE-LANGUAGES})
   set(_po ${CMAKE_CURRENT_SOURCE_DIR}/translations/${_lang}.po)
-  add_custom_target("po_${_lang}" ALL
+  add_custom_target("po_${_lang}"
     COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location
         ${_po} ${CLEMENTINE-POT}
     DEPENDS ${_po})
   add_dependencies("po_${_lang}" pot)
+  add_dependencies(po_all "po_${_lang}")
 endforeach (_lang)
 
 # Convert the .po files to .qm files
