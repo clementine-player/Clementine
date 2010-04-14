@@ -23,6 +23,7 @@ ScopedTransaction::ScopedTransaction(QSqlDatabase* db)
   : db_(db),
     pending_(true)
 {
+  db->transaction();
 }
 
 ScopedTransaction::~ScopedTransaction() {
