@@ -172,12 +172,18 @@ set(CLEMENTINE-RESOURCES
 
 set(CLEMENTINE-LANGUAGES
   cs
+  de
   el
   es
   fr
+  nb
   pl
+  pt
+  pt_BR
   ru
   sk
+  sv
+  tr
 )
 
 # OSD and DBus.
