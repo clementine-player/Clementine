@@ -28,6 +28,7 @@
 #include "equalizer.h"
 #include "potranslator.h"
 #include "commandlineoptions.h"
+#include "engines/enginebase.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -87,6 +88,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<Engine::State>("Engine::State");
+  qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
 

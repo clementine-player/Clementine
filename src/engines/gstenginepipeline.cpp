@@ -68,6 +68,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // Source
   if (url.scheme() == "http") {
     src_ = GstEngine::CreateElement(kHttpGstreamerSource);
+    g_object_set(G_OBJECT(src_), "iradio-mode", true, NULL);
   } else {
     src_ = GstEngine::CreateElement("giosrc");
   }
@@ -170,39 +171,9 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
       break;
     }
 
-    case GST_MESSAGE_TAG: {
-      gchar* data = NULL;
-      Engine::SimpleMetaBundle bundle;
-      GstTagList* taglist;
-      gst_message_parse_tag(msg,&taglist);
-      bool success = false;
-
-      if ( gst_tag_list_get_string( taglist, GST_TAG_TITLE, &data ) && data ) {
-        qDebug() << "received tag 'Title': " << QString( data ) ;
-        bundle.title = data;
-        success = true;
-      }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_ARTIST, &data ) && data ) {
-        qDebug() << "received tag 'Artist': " << QString( data ) ;
-        bundle.artist = data;
-        success = true;
-      }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_COMMENT, &data  ) && data ) {
-        qDebug() << "received tag 'Comment': " << QString( data  ) ;
-        bundle.comment = data;
-        success = true;
-      }
-      if ( gst_tag_list_get_string( taglist, GST_TAG_ALBUM, &data ) && data ) {
-        qDebug() << "received tag 'Album': " << QString( data ) ;
-        bundle.album = data;
-        success = true;
-      }
-      g_free(data);
-      gst_tag_list_free(taglist);
-      if (success)
-        emit instance->MetadataFound(bundle);
+    case GST_MESSAGE_TAG:
+      instance->TagMessageReceived(msg);
       break;
-    }
 
     default:
       break;
@@ -217,11 +188,44 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       emit instance->EndOfStreamReached();
       break;
 
+    case GST_MESSAGE_TAG:
+      instance->TagMessageReceived(msg);
+      break;
+
     default:
       break;
   }
 
   return GST_BUS_PASS;
+}
+
+void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
+  GstTagList* taglist = NULL;
+  gst_message_parse_tag(msg, &taglist);
+
+  Engine::SimpleMetaBundle bundle;
+  bundle.title = ParseTag(taglist, GST_TAG_TITLE);
+  bundle.artist = ParseTag(taglist, GST_TAG_ARTIST);
+  bundle.comment = ParseTag(taglist, GST_TAG_COMMENT);
+  bundle.album = ParseTag(taglist, GST_TAG_ALBUM);
+
+  gst_tag_list_free(taglist);
+
+  if (!bundle.title.isEmpty() || !bundle.artist.isEmpty() ||
+      !bundle.comment.isEmpty() || !bundle.album.isEmpty())
+    emit MetadataFound(bundle);
+}
+
+QString GstEnginePipeline::ParseTag(GstTagList* list, const char* tag) const {
+  gchar* data = NULL;
+  bool success = gst_tag_list_get_string(list, tag, &data);
+
+  QString ret;
+  if (success && data) {
+    ret = data;
+    g_free(data);
+  }
+  return ret;
 }
 
 

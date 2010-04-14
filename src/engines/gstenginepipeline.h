@@ -75,6 +75,8 @@ class GstEnginePipeline : public QObject {
   static void NewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static void EventCallback(GstPad*, GstEvent*, gpointer);
+  void TagMessageReceived(GstMessage*);
+  QString ParseTag(GstTagList* list, const char* tag) const;
 
   void UpdateVolume();
 
