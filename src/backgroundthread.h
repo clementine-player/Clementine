@@ -141,10 +141,10 @@ BackgroundThread<InterfaceType>::~BackgroundThread() {
       w->Stop();
 
     quit();
-    if (wait(10000))
+    if (wait(1000))
       return;
     terminate();
-    wait(10000);
+    wait(1000);
   }
 }
 
