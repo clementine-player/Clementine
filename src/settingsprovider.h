@@ -20,8 +20,6 @@
 #include <QVariant>
 #include <QSettings>
 
-#include <boost/scoped_ptr.hpp>
-
 class SettingsProvider {
  public:
   SettingsProvider();

@@ -22,6 +22,8 @@
 #include "ui_playlistsequence.h"
 #include "settingsprovider.h"
 
+#include <boost/scoped_ptr.hpp>
+
 class QMenu;
 
 class PlaylistSequence : public QWidget {
