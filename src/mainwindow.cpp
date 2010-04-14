@@ -91,9 +91,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog),
     add_stream_dialog_(new AddStreamDialog),
-    cover_manager_(new AlbumCoverManager(network, this)),
+    cover_manager_(new AlbumCoverManager(network)),
     group_by_dialog_(new GroupByDialog),
-    equalizer_(new Equalizer(this)),
+    equalizer_(new Equalizer),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this))
@@ -161,8 +161,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(ui_.action_open_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
-  connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_, SLOT(show()));
-  connect(ui_.action_equalizer, SIGNAL(triggered()), equalizer_, SLOT(show()));
+  connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
+  connect(ui_.action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -224,7 +224,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
   connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
-          cover_manager_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
+          cover_manager_.get(), SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
   connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
           playlist_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
 
@@ -370,9 +370,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   ui_.analyzer->set_engine(player_->GetEngine());
 
   // Equalizer
-  connect(equalizer_, SIGNAL(ParametersChanged(int,QList<int>)),
+  connect(equalizer_.get(), SIGNAL(ParametersChanged(int,QList<int>)),
           player_->GetEngine(), SLOT(SetEqualizerParameters(int,QList<int>)));
-  connect(equalizer_, SIGNAL(EnabledChanged(bool)),
+  connect(equalizer_.get(), SIGNAL(EnabledChanged(bool)),
           player_->GetEngine(), SLOT(SetEqualizerEnabled(bool)));
   player_->GetEngine()->SetEqualizerEnabled(equalizer_->is_enabled());
   player_->GetEngine()->SetEqualizerParameters(
@@ -425,7 +425,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     settings_.setValue("hidden", false);
     show();
   }
-#else
+#else  // Q_OS_DARWIN
   // Always show mainwindow on startup on OS X.
   show();
 #endif
@@ -990,7 +990,8 @@ void MainWindow::ForceShowOSD(const Song &song) {
 }
 
 bool MainWindow::event(QEvent* event) {
-  if (event->type() == QEvent::User) {
+  // ApplicationActivate is received when the dock is clicked on OS X.
+  if (event->type() == QEvent::ApplicationActivate) {
     show();
     return true;
   }

@@ -151,9 +151,9 @@ class MainWindow : public QMainWindow {
 
   boost::scoped_ptr<SettingsDialog> settings_dialog_;
   boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
-  AlbumCoverManager* cover_manager_;
+  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
   boost::scoped_ptr<GroupByDialog> group_by_dialog_;
-  Equalizer* equalizer_;
+  boost::scoped_ptr<Equalizer> equalizer_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

@@ -58,7 +58,7 @@
 
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag {
   if (application_handler_) {
-    qApp->postEvent(application_handler_, new QEvent(QEvent::User));
+    qApp->postEvent(application_handler_, new QEvent(QEvent::ApplicationActivate));
   }
   return YES;
 }
