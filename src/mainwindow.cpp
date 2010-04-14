@@ -59,6 +59,11 @@
 
 #include <cmath>
 
+#ifdef Q_OS_DARWIN
+// Non exported mac-specific function.
+void qt_mac_set_dock_menu(QMenu*);
+#endif
+
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kMediaFilterSpec =
@@ -66,7 +71,11 @@ const char* MainWindow::kMediaFilterSpec =
 
 MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   : QMainWindow(parent),
+#ifdef Q_OS_DARWIN
+    tray_icon_(NULL),
+#else
     tray_icon_(new SystemTrayIcon(this)),
+#endif
     osd_(new OSD(tray_icon_, this)),
     track_slider_(new TrackSlider(this)),
     playlist_sequence_(new PlaylistSequence(this)),
@@ -89,8 +98,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     track_position_timer_(new QTimer(this))
 {
   ui_.setupUi(this);
+#ifndef Q_OS_DARWIN
   tray_icon_->setIcon(windowIcon());
   tray_icon_->setToolTip(QCoreApplication::applicationName());
+#endif
 
   ui_.volume->setValue(player_->GetVolume());
 
@@ -328,10 +339,15 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   tray_menu->addAction(ui_.action_ban);
   tray_menu->addSeparator();
   tray_menu->addAction(ui_.action_quit);
+  
+  // We use the dock instead of the system tray on mac.
+#ifdef Q_OS_DARWIN
+  qt_mac_set_dock_menu(tray_menu);
+#else
   tray_icon_->setContextMenu(tray_menu);
-
   connect(tray_icon_, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
   connect(tray_icon_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(TrayClicked(QSystemTrayIcon::ActivationReason)));
+#endif
 
   // Global shortcuts
   connect(global_shortcuts_, SIGNAL(PlayPause()), ui_.action_play_pause, SLOT(trigger()));
@@ -399,6 +415,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     case Startup_Remember:   setVisible(!hidden); break;
   }
 
+#ifndef Q_OS_DARWIN
   if (show_tray)
     tray_icon_->show();
 
@@ -407,6 +424,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     settings_.setValue("hidden", false);
     show();
   }
+#else
+  // Always show mainwindow on startup on OS X.
+  show();
+#endif
 
   library_->Init();
   library_->StartThreads();
@@ -417,11 +438,13 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::ReloadSettings() {
+#ifndef Q_OS_DARWIN
   bool show_tray = settings_.value("showtray", true).toBool();
 
   tray_icon_->setVisible(show_tray);
   if (!show_tray && !isVisible())
     show();
+#endif
 }
 
 void MainWindow::QueueFiles(const QList<QUrl>& urls) {
@@ -449,7 +472,9 @@ void MainWindow::MediaStopped() {
 
   track_position_timer_->stop();
   track_slider_->SetStopped();
+#ifndef Q_OS_DARWIN
   tray_icon_->SetProgress(0);
+#endif
 }
 
 void MainWindow::MediaPaused() {
@@ -559,14 +584,17 @@ void MainWindow::StopAfterCurrent() {
 
 /**
   * Exit if the tray icon is not visible, otherwise ignore and set hidden in tray.
+  * On OS X, never quit when the main window is closed. This is equivalent to hiding in the tray.
   */
 void MainWindow::closeEvent(QCloseEvent* event) {
+#ifndef Q_OS_DARWIN
   if (tray_icon_->isVisible() && event->spontaneous()) {
     event->ignore();
     SetHiddenInTray(true);
   } else {
     QApplication::quit();
   }
+#endif
 }
 
 void MainWindow::SetHiddenInTray(bool hidden) {
@@ -591,7 +619,9 @@ void MainWindow::UpdateTrackPosition() {
   if (length <= 0) {
     // Probably a stream that we don't know the length of
     track_slider_->SetStopped();
+#ifndef Q_OS_DARWIN
     tray_icon_->SetProgress(0);
+#endif
     return;
   }
 
@@ -607,10 +637,12 @@ void MainWindow::UpdateTrackPosition() {
   // Update the slider
   track_slider_->SetValue(position, length);
 
+#ifndef Q_OS_DARWIN
   // Update the tray icon every 10 seconds
   if (position % 10 == 1) {
     tray_icon_->SetProgress(double(position) / length * 100);
   }
+#endif
 }
 
 void MainWindow::Love() {

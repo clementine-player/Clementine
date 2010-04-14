@@ -105,7 +105,6 @@ QT_PLUGINS = [
     'imageformats/libqmng.dylib',
     'imageformats/libqsvg.dylib',
     'imageformats/libqtiff.dylib',
-    'sqldrivers/libqsqlite.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
     '/usr/local/Trolltech/Qt-4.7.0/plugins',

@@ -103,9 +103,11 @@ void OSD::ShowMessage(const QString& summary,
       }
       break;
 
+#ifndef Q_OS_DARWIN
     case TrayPopup:
       tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_msec_);
       break;
+#endif
 
     case Disabled:
       if (!force_show_next_)
