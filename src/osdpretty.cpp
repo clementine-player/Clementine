@@ -53,7 +53,7 @@ OSDPretty::OSDPretty(QWidget *parent)
     fading_enabled_(false),
     fader_(new QTimeLine(300, this))
 {
-  setWindowFlags(Qt::ToolTip |
+  setWindowFlags(Qt::SplashScreen |
                  Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
   setAttribute(Qt::WA_TranslucentBackground, true);
