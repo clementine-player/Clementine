@@ -77,9 +77,15 @@ void PlaylistView::setItemDelegates(Library* library) {
   setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
 }
 
-void PlaylistView::setModel(QAbstractItemModel *model) {
-  QTreeView::setModel(model);
+void PlaylistView::setModel(QAbstractItemModel *m) {
+  if (model())
+    disconnect(model(), 0, this, 0);
+
+  QTreeView::setModel(m);
   LoadGeometry();
+
+  Playlist* playlist = qobject_cast<Playlist*>(m);
+  connect(playlist, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
 }
 
 void PlaylistView::LoadGeometry() {
@@ -346,12 +352,6 @@ void PlaylistView::InhibitAutoscrollTimeout() {
   // For 1 minute after the user clicks on or scrolls the playlist we promise
   // not to automatically scroll the view to keep up with a track change.
   inhibit_autoscroll_ = false;
-}
-
-void PlaylistView::dataChanged(const QModelIndex& topleft,
-                               const QModelIndex& bottomright) {
-  QTreeView::dataChanged(topleft, bottomright);
-  MaybeAutoscroll();
 }
 
 void PlaylistView::MaybeAutoscroll() {

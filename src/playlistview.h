@@ -56,19 +56,16 @@ class PlaylistView : public QTreeView {
   void mousePressEvent(QMouseEvent *event);
   void scrollContentsBy(int dx, int dy);
 
- protected slots:
-  void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
-
  private slots:
   void LoadGeometry();
   void SaveGeometry();
   void GlowIntensityChanged();
   void InhibitAutoscrollTimeout();
+  void MaybeAutoscroll();
 
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
-  void MaybeAutoscroll();
 
  private:
   static const char* kSettingsGroup;
