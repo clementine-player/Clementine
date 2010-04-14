@@ -157,6 +157,108 @@ TEST_F(PlaylistTest, RepeatAlbum) {
   EXPECT_EQ(0, playlist_->next_index());
 }
 
+TEST_F(PlaylistTest, RemoveBeforeCurrent) {
+  playlist_->InsertItems(QList<PlaylistItem*>()
+      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  ASSERT_EQ(3, playlist_->rowCount(QModelIndex()));
+
+  // Remove a row before the currently playing track
+  playlist_->set_current_index(2);
+  EXPECT_EQ(2, playlist_->current_index());
+  playlist_->removeRow(1, QModelIndex());
+  EXPECT_EQ(1, playlist_->current_index());
+  EXPECT_EQ(1, playlist_->last_played_index());
+  EXPECT_EQ(0, playlist_->previous_index());
+  EXPECT_EQ(-1, playlist_->next_index());
+}
+
+TEST_F(PlaylistTest, RemoveAfterCurrent) {
+  playlist_->InsertItems(QList<PlaylistItem*>()
+      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  ASSERT_EQ(3, playlist_->rowCount(QModelIndex()));
+
+  // Remove a row after the currently playing track
+  playlist_->set_current_index(0);
+  EXPECT_EQ(0, playlist_->current_index());
+  playlist_->removeRow(1, QModelIndex());
+  EXPECT_EQ(0, playlist_->current_index());
+  EXPECT_EQ(0, playlist_->last_played_index());
+  EXPECT_EQ(-1, playlist_->previous_index());
+  EXPECT_EQ(1, playlist_->next_index());
+
+  playlist_->set_current_index(1);
+  EXPECT_EQ(-1, playlist_->next_index());
+}
+
+TEST_F(PlaylistTest, RemoveCurrent) {
+  playlist_->InsertItems(QList<PlaylistItem*>()
+      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  ASSERT_EQ(3, playlist_->rowCount(QModelIndex()));
+
+  // Remove the currently playing track's row
+  playlist_->set_current_index(1);
+  EXPECT_EQ(1, playlist_->current_index());
+  playlist_->removeRow(1, QModelIndex());
+  EXPECT_EQ(-1, playlist_->current_index());
+  EXPECT_EQ(-1, playlist_->last_played_index());
+  EXPECT_EQ(-1, playlist_->previous_index());
+  EXPECT_EQ(0, playlist_->next_index());
+}
+
+TEST_F(PlaylistTest, InsertBeforeCurrent) {
+  playlist_->InsertItems(QList<PlaylistItem*>()
+      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  ASSERT_EQ(3, playlist_->rowCount(QModelIndex()));
+
+  playlist_->set_current_index(1);
+  EXPECT_EQ(1, playlist_->current_index());
+  playlist_->InsertItems(QList<PlaylistItem*>() << MakeMockItem("Four"), 0);
+  ASSERT_EQ(4, playlist_->rowCount(QModelIndex()));
+
+  EXPECT_EQ(2, playlist_->current_index());
+  EXPECT_EQ(2, playlist_->last_played_index());
+  EXPECT_EQ(1, playlist_->previous_index());
+  EXPECT_EQ(3, playlist_->next_index());
+
+  EXPECT_EQ("Four", playlist_->data(playlist_->index(0, Playlist::Column_Title)));
+  EXPECT_EQ("One", playlist_->data(playlist_->index(1, Playlist::Column_Title)));
+}
+
+TEST_F(PlaylistTest, InsertAfterCurrent) {
+  playlist_->InsertItems(QList<PlaylistItem*>()
+      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  ASSERT_EQ(3, playlist_->rowCount(QModelIndex()));
+
+  playlist_->set_current_index(1);
+  EXPECT_EQ(1, playlist_->current_index());
+  playlist_->InsertItems(QList<PlaylistItem*>() << MakeMockItem("Four"), 2);
+  ASSERT_EQ(4, playlist_->rowCount(QModelIndex()));
+
+  EXPECT_EQ(1, playlist_->current_index());
+  EXPECT_EQ(1, playlist_->last_played_index());
+  EXPECT_EQ(0, playlist_->previous_index());
+  EXPECT_EQ(2, playlist_->next_index());
+
+  EXPECT_EQ("Two", playlist_->data(playlist_->index(1, Playlist::Column_Title)));
+  EXPECT_EQ("Four", playlist_->data(playlist_->index(2, Playlist::Column_Title)));
+  EXPECT_EQ("Three", playlist_->data(playlist_->index(3, Playlist::Column_Title)));
+}
+
+TEST_F(PlaylistTest, Clear) {
+  playlist_->InsertItems(QList<PlaylistItem*>()
+      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  ASSERT_EQ(3, playlist_->rowCount(QModelIndex()));
+
+  playlist_->set_current_index(1);
+  EXPECT_EQ(1, playlist_->current_index());
+  playlist_->Clear();
+
+  EXPECT_EQ(0, playlist_->rowCount(QModelIndex()));
+  EXPECT_EQ(-1, playlist_->current_index());
+  EXPECT_EQ(-1, playlist_->last_played_index());
+  EXPECT_EQ(-1, playlist_->previous_index());
+  EXPECT_EQ(-1, playlist_->next_index());
+}
 
 
 } // namespace
