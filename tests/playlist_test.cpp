@@ -53,6 +53,12 @@ class PlaylistTest : public ::testing::Test {
     return ret;
   }
 
+  boost::shared_ptr<PlaylistItem> MakeMockItemP(
+      const QString& title, const QString& artist = QString(),
+      const QString& album = QString(), int length = 123) const {
+    return boost::shared_ptr<PlaylistItem>(MakeMockItem(title, artist, album, length));
+  }
+
   Playlist playlist_;
   PlaylistSequence sequence_;
 };
@@ -63,10 +69,11 @@ TEST_F(PlaylistTest, Basic) {
 
 TEST_F(PlaylistTest, InsertItems) {
   MockPlaylistItem* item = MakeMockItem("Title", "Artist", "Album", 123);
+  boost::shared_ptr<PlaylistItem> item_ptr(item);
 
   // Insert the item
   EXPECT_EQ(0, playlist_.rowCount(QModelIndex()));
-  playlist_.InsertItems(QList<PlaylistItem*>() << item, -1);
+  playlist_.InsertItems(PlaylistItemList() << item_ptr, -1);
   ASSERT_EQ(1, playlist_.rowCount(QModelIndex()));
 
   // Get the metadata
@@ -77,8 +84,8 @@ TEST_F(PlaylistTest, InsertItems) {
 }
 
 TEST_F(PlaylistTest, Indexes) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   // Start "playing" track 1
@@ -110,8 +117,8 @@ TEST_F(PlaylistTest, Indexes) {
 }
 
 TEST_F(PlaylistTest, RepeatPlaylist) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   playlist_.sequence()->SetRepeatMode(PlaylistSequence::Repeat_Playlist);
@@ -127,8 +134,8 @@ TEST_F(PlaylistTest, RepeatPlaylist) {
 }
 
 TEST_F(PlaylistTest, RepeatTrack) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   playlist_.sequence()->SetRepeatMode(PlaylistSequence::Repeat_Track);
@@ -138,10 +145,10 @@ TEST_F(PlaylistTest, RepeatTrack) {
 }
 
 TEST_F(PlaylistTest, RepeatAlbum) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One", "Album one")
-      << MakeMockItem("Two", "Album two")
-      << MakeMockItem("Three", "Album one"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One", "Album one")
+      << MakeMockItemP("Two", "Album two")
+      << MakeMockItemP("Three", "Album one"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   playlist_.sequence()->SetRepeatMode(PlaylistSequence::Repeat_Album);
@@ -154,8 +161,8 @@ TEST_F(PlaylistTest, RepeatAlbum) {
 }
 
 TEST_F(PlaylistTest, RemoveBeforeCurrent) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   // Remove a row before the currently playing track
@@ -169,8 +176,8 @@ TEST_F(PlaylistTest, RemoveBeforeCurrent) {
 }
 
 TEST_F(PlaylistTest, RemoveAfterCurrent) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   // Remove a row after the currently playing track
@@ -187,8 +194,8 @@ TEST_F(PlaylistTest, RemoveAfterCurrent) {
 }
 
 TEST_F(PlaylistTest, RemoveCurrent) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   // Remove the currently playing track's row
@@ -202,13 +209,13 @@ TEST_F(PlaylistTest, RemoveCurrent) {
 }
 
 TEST_F(PlaylistTest, InsertBeforeCurrent) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   playlist_.set_current_index(1);
   EXPECT_EQ(1, playlist_.current_index());
-  playlist_.InsertItems(QList<PlaylistItem*>() << MakeMockItem("Four"), 0);
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Four"), 0);
   ASSERT_EQ(4, playlist_.rowCount(QModelIndex()));
 
   EXPECT_EQ(2, playlist_.current_index());
@@ -221,13 +228,13 @@ TEST_F(PlaylistTest, InsertBeforeCurrent) {
 }
 
 TEST_F(PlaylistTest, InsertAfterCurrent) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   playlist_.set_current_index(1);
   EXPECT_EQ(1, playlist_.current_index());
-  playlist_.InsertItems(QList<PlaylistItem*>() << MakeMockItem("Four"), 2);
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Four"), 2);
   ASSERT_EQ(4, playlist_.rowCount(QModelIndex()));
 
   EXPECT_EQ(1, playlist_.current_index());
@@ -241,8 +248,8 @@ TEST_F(PlaylistTest, InsertAfterCurrent) {
 }
 
 TEST_F(PlaylistTest, Clear) {
-  playlist_.InsertItems(QList<PlaylistItem*>()
-      << MakeMockItem("One") << MakeMockItem("Two") << MakeMockItem("Three"));
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 
   playlist_.set_current_index(1);
