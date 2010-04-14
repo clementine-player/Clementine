@@ -60,6 +60,8 @@
 
 #include <cmath>
 
+using boost::shared_ptr;
+
 #ifdef Q_OS_DARWIN
 // Non exported mac-specific function.
 void qt_mac_set_dock_menu(QMenu*);
@@ -223,10 +225,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
-  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
-          cover_manager_.get(), SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
-  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
-          playlist_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
+  connect(library_, SIGNAL(BackendReady(shared_ptr<LibraryBackendInterface>)),
+          cover_manager_.get(), SLOT(SetBackend(shared_ptr<LibraryBackendInterface>)));
+  connect(library_, SIGNAL(BackendReady(shared_ptr<LibraryBackendInterface>)),
+          playlist_, SLOT(SetBackend(shared_ptr<LibraryBackendInterface>)));
 
   // Age filters
   QActionGroup* filter_age_group = new QActionGroup(this);

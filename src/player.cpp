@@ -30,6 +30,8 @@
 
 #include <boost/bind.hpp>
 
+using boost::shared_ptr;
+
 #ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
   arg.beginStructure();
@@ -210,7 +212,7 @@ void Player::PlayAt(int index, Engine::TrackChangeType change) {
     playlist_->set_current_index(-1); // to reshuffle
   playlist_->set_current_index(index);
 
-  boost::shared_ptr<PlaylistItem> item = playlist_->item_at(index);
+  shared_ptr<PlaylistItem> item = playlist_->item_at(index);
   current_item_options_ = item->options();
   current_item_ = item->Metadata();
 
@@ -231,7 +233,7 @@ void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
   if (current_index == -1)
     return;
 
-  boost::shared_ptr<PlaylistItem> item = playlist_->item_at(current_index);
+  shared_ptr<PlaylistItem> item = playlist_->item_at(current_index);
   if (!item || item->Url() != original_url)
     return;
 
@@ -256,7 +258,7 @@ void Player::Seek(int seconds) {
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
-  boost::shared_ptr<PlaylistItem> item = playlist_->current_item();
+  shared_ptr<PlaylistItem> item = playlist_->current_item();
   if (item == NULL)
     return;
 
@@ -344,7 +346,7 @@ QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
 }
 
 QVariantMap Player::GetMetadata() const {
-  boost::shared_ptr<PlaylistItem> item = playlist_->current_item();
+  shared_ptr<PlaylistItem> item = playlist_->current_item();
   if (item) {
     return GetMetadata(*item);
   }

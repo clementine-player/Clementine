@@ -23,6 +23,7 @@
 
 #include <QtDebug>
 
+using boost::shared_ptr;
 using ::testing::Return;
 
 namespace {
@@ -53,10 +54,10 @@ class PlaylistTest : public ::testing::Test {
     return ret;
   }
 
-  boost::shared_ptr<PlaylistItem> MakeMockItemP(
+  shared_ptr<PlaylistItem> MakeMockItemP(
       const QString& title, const QString& artist = QString(),
       const QString& album = QString(), int length = 123) const {
-    return boost::shared_ptr<PlaylistItem>(MakeMockItem(title, artist, album, length));
+    return shared_ptr<PlaylistItem>(MakeMockItem(title, artist, album, length));
   }
 
   Playlist playlist_;
@@ -69,7 +70,7 @@ TEST_F(PlaylistTest, Basic) {
 
 TEST_F(PlaylistTest, InsertItems) {
   MockPlaylistItem* item = MakeMockItem("Title", "Artist", "Album", 123);
-  boost::shared_ptr<PlaylistItem> item_ptr(item);
+  shared_ptr<PlaylistItem> item_ptr(item);
 
   // Insert the item
   EXPECT_EQ(0, playlist_.rowCount(QModelIndex()));

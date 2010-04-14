@@ -36,6 +36,8 @@
 
 #include <lastfm/ScrobblePoint>
 
+using boost::shared_ptr;
+
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kSettingsGroup = "Playlist";
 
@@ -143,7 +145,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
     case Qt::EditRole:
     case Qt::ToolTipRole:
     case Qt::DisplayRole: {
-      const boost::shared_ptr<PlaylistItem>& item = items_[index.row()];
+      shared_ptr<PlaylistItem> item = items_[index.row()];
       Song song = item->Metadata();
 
       // Don't forget to change Playlist::CompareItems when adding new columns
@@ -462,7 +464,7 @@ QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int after) {
 QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int after) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
-    items << boost::shared_ptr<PlaylistItem>(new LibraryPlaylistItem(song));
+    items << shared_ptr<PlaylistItem>(new LibraryPlaylistItem(song));
   }
   return InsertItems(items, after);
 }
@@ -470,7 +472,7 @@ QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int after) {
 QModelIndex Playlist::InsertSongs(const SongList& songs, int after) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
-    items << boost::shared_ptr<PlaylistItem>(new SongPlaylistItem(song));
+    items << shared_ptr<PlaylistItem>(new SongPlaylistItem(song));
   }
   return InsertItems(items, after);
 }
@@ -481,7 +483,7 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int af
     if (!item->playable)
       continue;
 
-    playlist_items << boost::shared_ptr<PlaylistItem>(
+    playlist_items << shared_ptr<PlaylistItem>(
         new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist()));
   }
   return InsertItems(playlist_items, after);
@@ -490,7 +492,7 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int af
 QModelIndex Playlist::InsertStreamUrls(const QList<QUrl>& urls, int after) {
   PlaylistItemList playlist_items;
   foreach (const QUrl& url, urls) {
-    playlist_items << boost::shared_ptr<PlaylistItem>(new RadioPlaylistItem(
+    playlist_items << shared_ptr<PlaylistItem>(new RadioPlaylistItem(
         RadioModel::ServiceByName(SavedRadio::kServiceName), url.toString(), url.toString(), QString()));
   }
   return InsertItems(playlist_items, after);
@@ -522,10 +524,10 @@ QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
 }
 
 bool Playlist::CompareItems(int column, Qt::SortOrder order,
-                            boost::shared_ptr<PlaylistItem> _a,
-                            boost::shared_ptr<PlaylistItem> _b) {
-  boost::shared_ptr<PlaylistItem> a = order == Qt::AscendingOrder ? _a : _b;
-  boost::shared_ptr<PlaylistItem> b = order == Qt::AscendingOrder ? _b : _a;
+                            shared_ptr<PlaylistItem> _a,
+                            shared_ptr<PlaylistItem> _b) {
+  shared_ptr<PlaylistItem> a = order == Qt::AscendingOrder ? _a : _b;
+  shared_ptr<PlaylistItem> b = order == Qt::AscendingOrder ? _b : _a;
 
 #define cmp(field) return a->Metadata().field() < b->Metadata().field()
 
@@ -591,7 +593,7 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   layoutAboutToBeChanged();
 
   // This is a slow and nasty way to keep the persistent indices
-  QMap<int, boost::shared_ptr<PlaylistItem> > old_persistent_mappings;
+  QMap<int, shared_ptr<PlaylistItem> > old_persistent_mappings;
   foreach (const QModelIndex& index, persistentIndexList()) {
     old_persistent_mappings[index.row()] = items_[index.row()];
   }
@@ -599,7 +601,7 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   qStableSort(items_.begin(), items_.end(),
               boost::bind(&Playlist::CompareItems, column, order, _1, _2));
 
-  QMapIterator<int, boost::shared_ptr<PlaylistItem> > it(old_persistent_mappings);
+  QMapIterator<int, shared_ptr<PlaylistItem> > it(old_persistent_mappings);
   while (it.hasNext()) {
     it.next();
     for (int col=0 ; col<ColumnCount ; ++col) {
@@ -637,7 +639,7 @@ void Playlist::SetCurrentIsPaused(bool paused) {
                 index(current_item_.row(), ColumnCount));
 }
 
-void Playlist::SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) {
+void Playlist::SetBackend(shared_ptr<LibraryBackendInterface> backend) {
   backend_ = backend;
 
   Restore();
@@ -720,7 +722,7 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
   if (!current_item_.isValid())
     return;
 
-  boost::shared_ptr<PlaylistItem> item = items_[current_item_.row()];
+  shared_ptr<PlaylistItem> item = items_[current_item_.row()];
   if (item->Url() != url)
     return;
 
@@ -740,7 +742,7 @@ void Playlist::ClearStreamMetadata() {
   if (!current_item_.isValid())
     return;
 
-  boost::shared_ptr<PlaylistItem> item = items_[current_item_.row()];
+  shared_ptr<PlaylistItem> item = items_[current_item_.row()];
   item->ClearTemporaryMetadata();
   UpdateScrobblePoint();
 
@@ -752,16 +754,16 @@ bool Playlist::stop_after_current() const {
          stop_after_.row() == current_item_.row();
 }
 
-boost::shared_ptr<PlaylistItem> Playlist::current_item() const {
+shared_ptr<PlaylistItem> Playlist::current_item() const {
   int i = current_index();
   if (i == -1)
-    return boost::shared_ptr<PlaylistItem>();
+    return shared_ptr<PlaylistItem>();
 
   return item_at(i);
 }
 
 PlaylistItem::Options Playlist::current_item_options() const {
-  boost::shared_ptr<PlaylistItem> item = current_item();
+  shared_ptr<PlaylistItem> item = current_item();
   if (!item)
     return PlaylistItem::Default;
 
@@ -769,7 +771,7 @@ PlaylistItem::Options Playlist::current_item_options() const {
 }
 
 Song Playlist::current_item_metadata() const {
-  boost::shared_ptr<PlaylistItem> item = current_item();
+  shared_ptr<PlaylistItem> item = current_item();
   if (!item)
     return Song();
 

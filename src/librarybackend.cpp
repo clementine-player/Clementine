@@ -31,6 +31,7 @@
 #include <QLibrary>
 #include <QLibraryInfo>
 
+using boost::shared_ptr;
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
 const int LibraryBackend::kSchemaVersion = 7;
@@ -900,7 +901,7 @@ PlaylistItemList LibraryBackend::GetPlaylistItems(int playlist) {
     // The song table gets joined first, plus one for the song ROWID
     const int row = Song::kColumns.count() + 1;
 
-    boost::shared_ptr<PlaylistItem> item(
+    shared_ptr<PlaylistItem> item(
         PlaylistItem::NewFromType(q.value(row + 0).toString()));
     if (!item)
       continue;
@@ -936,7 +937,7 @@ void LibraryBackend::SavePlaylist(int playlist, const PlaylistItemList& items) {
     return;
 
   // Save the new ones
-  foreach (boost::shared_ptr<PlaylistItem> item, items) {
+  foreach (shared_ptr<PlaylistItem> item, items) {
     insert.bindValue(0, playlist);
     item->BindToQuery(&insert);
 
