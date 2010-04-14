@@ -248,7 +248,8 @@ void Player::CurrentMetadataChanged(const Song &metadata) {
 }
 
 void Player::Seek(int seconds) {
-  engine_->Seek(seconds * 1000);
+  int msec = qBound(0, seconds * 1000, int(engine_->length()));
+  engine_->Seek(msec);
 
   // If we seek the track we don't want to submit it to last.fm
   playlist_->set_scrobbled(true);
