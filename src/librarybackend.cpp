@@ -900,7 +900,8 @@ PlaylistItemList LibraryBackend::GetPlaylistItems(int playlist) {
     // The song table gets joined first, plus one for the song ROWID
     const int row = Song::kColumns.count() + 1;
 
-    PlaylistItem* item = PlaylistItem::NewFromType(q.value(row + 0).toString());
+    boost::shared_ptr<PlaylistItem> item(
+        PlaylistItem::NewFromType(q.value(row + 0).toString()));
     if (!item)
       continue;
 
@@ -911,6 +912,12 @@ PlaylistItemList LibraryBackend::GetPlaylistItems(int playlist) {
   return ret;
 }
 
+void LibraryBackend::SavePlaylistAsync(int playlist, const PlaylistItemList &items) {
+  metaObject()->invokeMethod(this, "SavePlaylist", Qt::QueuedConnection,
+                             Q_ARG(int, playlist),
+                             Q_ARG(PlaylistItemList, items));
+}
+
 void LibraryBackend::SavePlaylist(int playlist, const PlaylistItemList& items) {
   QSqlDatabase db(Connect());
 
@@ -918,21 +925,19 @@ void LibraryBackend::SavePlaylist(int playlist, const PlaylistItemList& items) {
   QSqlQuery insert("INSERT INTO playlist_items"
                    " (playlist, type, library_id, url, title, artist, album,"
                    "  length, radio_service)"
-                   " VALUES (:playlist, :type, :library_id, :url, :title,"
-                   "         :artist, :album, :length, :radio_service)", db);
-
-  clear.bindValue(":playlist", playlist);
+                   " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", db);
 
   ScopedTransaction transaction(&db);
 
   // Clear the existing items in the playlist
+  clear.bindValue(":playlist", playlist);
   clear.exec();
   if (CheckErrors(clear.lastError()))
     return;
 
   // Save the new ones
-  foreach (const PlaylistItem* item, items) {
-    insert.bindValue(":playlist", playlist);
+  foreach (boost::shared_ptr<PlaylistItem> item, items) {
+    insert.bindValue(0, playlist);
     item->BindToQuery(&insert);
 
     insert.exec();

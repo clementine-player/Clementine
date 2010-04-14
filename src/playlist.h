@@ -73,7 +73,8 @@ class Playlist : public QAbstractListModel {
   static const char* kSettingsGroup;
 
   static bool CompareItems(int column, Qt::SortOrder order,
-                           const PlaylistItem* a, const PlaylistItem* b);
+                           boost::shared_ptr<PlaylistItem> a,
+                           boost::shared_ptr<PlaylistItem> b);
 
   static QString column_name(Column column);
   static bool column_is_editable(Playlist::Column column);
@@ -90,8 +91,8 @@ class Playlist : public QAbstractListModel {
   int previous_index() const;
   bool stop_after_current() const;
 
-  PlaylistItem* item_at(int index) const { return items_[index]; }
-  PlaylistItem* current_item() const;
+  const boost::shared_ptr<PlaylistItem>& item_at(int index) const { return items_[index]; }
+  boost::shared_ptr<PlaylistItem> current_item() const;
 
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;

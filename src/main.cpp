@@ -85,6 +85,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<SongList>("SongList");
+  qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");

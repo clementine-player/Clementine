@@ -98,7 +98,7 @@ class LibraryBackendInterface : public QObject {
   // Functions for getting playlists
   virtual PlaylistList GetAllPlaylists() = 0;
   virtual PlaylistItemList GetPlaylistItems(int playlist) = 0;
-  virtual void SavePlaylist(int playlist, const PlaylistItemList& items) = 0;
+  virtual void SavePlaylistAsync(int playlist, const PlaylistItemList& items) = 0;
 
  public slots:
   virtual void LoadDirectories() = 0;
@@ -110,6 +110,7 @@ class LibraryBackendInterface : public QObject {
   virtual void UpdateCompilations() = 0;
   virtual void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art) = 0;
   virtual void ForceCompilation(const QString& artist, const QString& album, bool on) = 0;
+  virtual void SavePlaylist(int playlist, const PlaylistItemList& items) = 0;
 
  signals:
   void Error(const QString& message);
@@ -168,7 +169,7 @@ class LibraryBackend : public LibraryBackendInterface {
 
   PlaylistList GetAllPlaylists();
   PlaylistItemList GetPlaylistItems(int playlist);
-  void SavePlaylist(int playlist, const PlaylistItemList& items);
+  void SavePlaylistAsync(int playlist, const PlaylistItemList& items);
 
  public slots:
   void LoadDirectories();
@@ -180,6 +181,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
   void ForceCompilation(const QString& artist, const QString& album, bool on);
+  void SavePlaylist(int playlist, const PlaylistItemList& items);
 
  private:
   struct CompilationInfo {

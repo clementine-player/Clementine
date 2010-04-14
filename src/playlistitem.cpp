@@ -34,14 +34,14 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
 }
 
 void PlaylistItem::BindToQuery(QSqlQuery* query) const {
-  query->bindValue(":type", type());
-  query->bindValue(":library_id", DatabaseValue(Column_LibraryId));
-  query->bindValue(":url", DatabaseValue(Column_Url));
-  query->bindValue(":title", DatabaseValue(Column_Title));
-  query->bindValue(":artist", DatabaseValue(Column_Artist));
-  query->bindValue(":album", DatabaseValue(Column_Album));
-  query->bindValue(":length", DatabaseValue(Column_Length));
-  query->bindValue(":radio_service", DatabaseValue(Column_RadioService));
+  query->bindValue(1, type());
+  query->bindValue(2, DatabaseValue(Column_LibraryId));
+  query->bindValue(3, DatabaseValue(Column_Url));
+  query->bindValue(4, DatabaseValue(Column_Title));
+  query->bindValue(5, DatabaseValue(Column_Artist));
+  query->bindValue(6, DatabaseValue(Column_Album));
+  query->bindValue(7, DatabaseValue(Column_Length));
+  query->bindValue(8, DatabaseValue(Column_RadioService));
 }
 
 

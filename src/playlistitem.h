@@ -20,6 +20,8 @@
 #include <QStandardItem>
 #include <QUrl>
 
+#include <boost/shared_ptr.hpp>
+
 class Song;
 
 class QSqlQuery;
@@ -81,7 +83,7 @@ class PlaylistItem {
 
   QString type_;
 };
-typedef QList<PlaylistItem*> PlaylistItemList;
+typedef QList<boost::shared_ptr<PlaylistItem> > PlaylistItemList;
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options);
 
