@@ -19,7 +19,7 @@
 using ::testing::_;
 using ::testing::Return;
 
-MockPlaylistItem::MockPlaylistItem() {
-  EXPECT_CALL(*this, Save(_))
-      .WillRepeatedly(Return());
+MockPlaylistItem::MockPlaylistItem()
+  : PlaylistItem("DummyType")
+{
 }

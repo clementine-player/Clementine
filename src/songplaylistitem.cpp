@@ -15,74 +15,56 @@
 */
 
 #include "songplaylistitem.h"
-#include "settingsprovider.h"
 
 #include <QtDebug>
 #include <QFile>
 #include <QSettings>
 
-SongPlaylistItem::SongPlaylistItem()
+SongPlaylistItem::SongPlaylistItem(const QString& type)
+  : PlaylistItem(type)
 {
 }
 
 SongPlaylistItem::SongPlaylistItem(const Song& song)
-  : song_(song)
+  : PlaylistItem(song.filetype() == Song::Type_Stream ? "Stream" : "File"),
+    song_(song)
 {
 }
 
-void SongPlaylistItem::Save(SettingsProvider* settings) const {
-  settings->setValue("filename", song_.filename());
-  settings->setValue("art_automatic", song_.art_automatic());
-  settings->setValue("art_manual", song_.art_manual());
+void SongPlaylistItem::InitFromQuery(const QSqlQuery &query) {
+  // The song table gets joined first, plus one for the song ROWID
+  const int row = Song::kColumns.count() + 1;
 
-  if (song_.filetype() == Song::Type_Stream) {
-    SaveStream(settings);
+  QString filename(query.value(row + 1).toString());
+
+  if (type() == "Stream") {
+    QString title(query.value(row + 2).toString());
+    QString artist(query.value(row + 3).toString());
+    QString album(query.value(row + 4).toString());
+    int length(query.value(row + 5).toInt());
+    if (title.isEmpty())  title = "Unknown";
+    if (artist.isEmpty()) artist = "Unknown";
+    if (album.isEmpty())  album = "Unknown";
+    if (length == 0)      length = -1;
+
+    song_.set_filename(filename);
+    song_.set_filetype(Song::Type_Stream);
+
+    song_.Init(title, artist, album, length);
   } else {
-    SaveFile(settings);
+    song_.InitFromFile(filename, -1);
   }
 }
 
-void SongPlaylistItem::SaveFile(SettingsProvider* settings) const {
-  settings->setValue("stream", false);
-  settings->setValue("library_directory", song_.directory_id());
-}
-
-void SongPlaylistItem::SaveStream(SettingsProvider* settings) const {
-  settings->setValue("stream", true);
-  settings->setValue("title", song_.title());
-  settings->setValue("artist", song_.artist());
-  settings->setValue("album", song_.album());
-  settings->setValue("length", song_.length());
-}
-
-void SongPlaylistItem::Restore(const SettingsProvider& settings) {
-  song_.set_art_automatic(settings.value("art_automatic").toString());
-  song_.set_art_manual(settings.value("art_manual").toString());
-
-  const bool stream = settings.value("stream", false).toBool();
-  if (stream) {
-    RestoreStream(settings);
-  } else {
-    RestoreFile(settings);
+QVariant SongPlaylistItem::DatabaseValue(DatabaseColumn column) const {
+  switch (column) {
+    case Column_Url:    return song_.filename();
+    case Column_Title:  return song_.title();
+    case Column_Artist: return song_.artist();
+    case Column_Album:  return song_.album();
+    case Column_Length: return song_.length();
+    default:            return PlaylistItem::DatabaseValue(column);
   }
-}
-
-void SongPlaylistItem::RestoreFile(const SettingsProvider& settings) {
-  QString filename(settings.value("filename").toString());
-
-  int directory_id(settings.value("library_directory", -1).toInt());
-  song_.InitFromFile(filename, directory_id);
-}
-
-void SongPlaylistItem::RestoreStream(const SettingsProvider& settings) {
-  QString filename(settings.value("filename").toString());
-  song_.set_filename(filename);
-  song_.set_filetype(Song::Type_Stream);
-
-  song_.Init(settings.value("title", "Unknown").toString(),
-             settings.value("artist", "Unknown").toString(),
-             settings.value("album", "Unknown").toString(),
-             settings.value("length", -1).toInt());
 }
 
 QUrl SongPlaylistItem::Url() const {

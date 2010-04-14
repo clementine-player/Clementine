@@ -505,7 +505,7 @@ void Library::InitQuery(GroupBy type, LibraryQuery* q) {
     q->SetColumnSpec("DISTINCT albumartist");
     break;
   case GroupBy_None:
-    q->SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
+    q->SetColumnSpec("ROWID, " + Song::kColumnSpec);
     break;
   }
 }

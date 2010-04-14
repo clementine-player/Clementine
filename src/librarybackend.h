@@ -26,6 +26,7 @@
 #include "directory.h"
 #include "song.h"
 #include "libraryquery.h"
+#include "playlistitem.h"
 
 #include <sqlite3.h>
 
@@ -52,6 +53,12 @@ class LibraryBackendInterface : public QObject {
   };
   typedef QList<Album> AlbumList;
 
+  struct Playlist {
+    int id;
+    QString name;
+  };
+  typedef QList<Playlist> PlaylistList;
+
   virtual void Stop() {};
 
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
@@ -60,6 +67,7 @@ class LibraryBackendInterface : public QObject {
   // Counts the songs in the library.  Emits TotalSongCountUpdated
   virtual void UpdateTotalSongCountAsync() = 0;
 
+  // Functions for getting songs
   virtual SongList FindSongsInDirectory(int id) = 0;
   virtual SubdirectoryList SubdirsInDirectory(int id) = 0;
 
@@ -78,12 +86,19 @@ class LibraryBackendInterface : public QObject {
 
   virtual Song GetSongById(int id) = 0;
 
+  virtual bool ExecQuery(LibraryQuery* q) = 0;
+
+  // Add or remove directories to the library
   virtual void AddDirectory(const QString& path) = 0;
   virtual void RemoveDirectory(const Directory& dir) = 0;
 
+  // Update compilation flags on songs
   virtual void UpdateCompilationsAsync() = 0;
 
-  virtual bool ExecQuery(LibraryQuery* q) = 0;
+  // Functions for getting playlists
+  virtual PlaylistList GetAllPlaylists() = 0;
+  virtual PlaylistItemList GetPlaylistItems(int playlist) = 0;
+  virtual void SavePlaylist(int playlist, const PlaylistItemList& items) = 0;
 
  public slots:
   virtual void LoadDirectories() = 0;
@@ -150,6 +165,10 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateCompilationsAsync();
 
   bool ExecQuery(LibraryQuery* q);
+
+  PlaylistList GetAllPlaylists();
+  PlaylistItemList GetPlaylistItems(int playlist);
+  void SavePlaylist(int playlist, const PlaylistItemList& items);
 
  public slots:
   void LoadDirectories();

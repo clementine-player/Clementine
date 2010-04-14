@@ -56,9 +56,11 @@ class Song {
   Song(const Song& other);
   Song(FileRefFactory* factory);
 
-  static const char* kColumnSpec;
-  static const char* kBindSpec;
-  static const char* kUpdateSpec;
+  static const QStringList kColumns;
+  static const QString kColumnSpec;
+  static const QString kJoinSpec;
+  static const QString kBindSpec;
+  static const QString kUpdateSpec;
 
   // Don't change these values - they're stored in the database
   enum FileType {

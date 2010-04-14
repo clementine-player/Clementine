@@ -14,29 +14,30 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONGPLAYLISTITEM_H
-#define SONGPLAYLISTITEM_H
+#include "scopedtransaction.h"
 
-#include "playlistitem.h"
-#include "song.h"
+#include <QSqlDatabase>
+#include <QtDebug>
 
-class SongPlaylistItem : public PlaylistItem {
- public:
-  SongPlaylistItem(const QString& type);
-  SongPlaylistItem(const Song& song);
+ScopedTransaction::ScopedTransaction(QSqlDatabase* db)
+  : db_(db),
+    pending_(true)
+{
+}
 
-  void InitFromQuery(const QSqlQuery &query);
-  void Reload();
+ScopedTransaction::~ScopedTransaction() {
+  if (pending_) {
+    qDebug() << __PRETTY_FUNCTION__ << "Rolling back transaction";
+    db_->rollback();
+  }
+}
 
-  Song Metadata() const { return song_; }
+void ScopedTransaction::Commit() {
+  if (!pending_) {
+    qWarning() << "Tried to commit a ScopedTransaction twice";
+    return;
+  }
 
-  QUrl Url() const;
-
- protected:
-  QVariant DatabaseValue(DatabaseColumn) const;
-
- private:
-  Song song_;
-};
-
-#endif // SONGPLAYLISTITEM_H
+  db_->commit();
+  pending_ = false;
+}

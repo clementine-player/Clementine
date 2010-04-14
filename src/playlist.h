@@ -20,6 +20,8 @@
 #include <QAbstractItemModel>
 #include <QList>
 
+#include <boost/shared_ptr.hpp>
+
 #include "playlistitem.h"
 #include "song.h"
 #include "radioitem.h"
@@ -27,6 +29,7 @@
 #include "settingsprovider.h"
 
 class RadioService;
+class LibraryBackendInterface;
 
 class Playlist : public QAbstractListModel {
   Q_OBJECT
@@ -102,7 +105,8 @@ class Playlist : public QAbstractListModel {
   void set_scrobbled(bool v) { has_scrobbled_ = v; }
 
   // Changing the playlist
-  QModelIndex InsertItems(const QList<PlaylistItem*>& items, int after = -1);
+  QModelIndex InsertItems(const PlaylistItemList& items, int after = -1);
+  QModelIndex InsertLibraryItems(const SongList& items, int after = -1);
   QModelIndex InsertSongs(const SongList& items, int after = -1);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int after = -1);
   QModelIndex InsertStreamUrls(const QList<QUrl>& urls, int after = -1);
@@ -126,6 +130,8 @@ class Playlist : public QAbstractListModel {
 
 
  public slots:
+  void SetBackend(boost::shared_ptr<LibraryBackendInterface>);
+
   void set_current_index(int index);
   void Paused();
   void Playing();
@@ -155,7 +161,9 @@ class Playlist : public QAbstractListModel {
  private:
   boost::scoped_ptr<SettingsProvider> settings_;
 
-  QList<PlaylistItem*> items_;
+  boost::shared_ptr<LibraryBackendInterface> backend_;
+
+  PlaylistItemList items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order
                              // that they will be played.
 

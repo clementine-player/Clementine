@@ -53,35 +53,35 @@ using boost::scoped_ptr;
 #include "engines/enginebase.h"
 #include "albumcoverloader.h"
 
-const char* Song::kColumnSpec =
-    "title, album, artist, albumartist, composer, "
-    "track, disc, bpm, year, genre, comment, compilation, "
-    "length, bitrate, samplerate, directory, filename, "
-    "mtime, ctime, filesize, sampler, art_automatic, art_manual, "
-    "filetype, playcount, lastplayed, rating, forced_compilation_on, "
-    "forced_compilation_off, effective_compilation";
+static QStringList Prepend(const QString& text, const QStringList& list) {
+  QStringList ret(list);
+  for (int i=0 ; i<ret.count() ; ++i)
+    ret[i].prepend(text);
+  return ret;
+}
 
-const char* Song::kBindSpec =
-    ":title, :album, :artist, :albumartist, :composer, "
-    ":track, :disc, :bpm, :year, :genre, :comment, :compilation, "
-    ":length, :bitrate, :samplerate, :directory_id, :filename, "
-    ":mtime, :ctime, :filesize, :sampler, :art_automatic, :art_manual, "
-    ":filetype, :playcount, :lastplayed, :rating, :forced_compilation_on, "
-    ":forced_compilation_off, :effective_compilation";
+static QStringList Updateify(const QStringList& list) {
+  QStringList ret(list);
+  for (int i=0 ; i<ret.count() ; ++i)
+    ret[i].prepend(ret[i] + " = :");
+  return ret;
+}
 
-const char* Song::kUpdateSpec =
-    "title = :title, album = :album, artist = :artist, "
-    "albumartist = :albumartist, composer = :composer, track = :track, "
-    "disc = :disc, bpm = :bpm, year = :year, genre = :genre, "
-    "comment = :comment, compilation = :compilation, length = :length, "
-    "bitrate = :bitrate, samplerate = :samplerate, "
-    "directory = :directory_id, filename = :filename, mtime = :mtime, "
-    "ctime = :ctime, filesize = :filesize, sampler = :sampler, "
-    "art_automatic = :art_automatic, art_manual = :art_manual, "
-    "filetype = :filetype, playcount = :playcount, lastplayed = :lastplayed, "
-    "rating = :rating, forced_compilation_on = :forced_compilation_on, "
-    "forced_compilation_off = :forced_compilation_off, "
-    "effective_compilation = :effective_compilation";
+const QStringList Song::kColumns = QStringList()
+    << "title" << "album" << "artist" << "albumartist" << "composer" << "track"
+    << "disc" << "bpm" << "year" << "genre" << "comment" << "compilation"
+    << "length" << "bitrate" << "samplerate" << "directory" << "filename"
+    << "mtime" << "ctime" << "filesize" << "sampler" << "art_automatic"
+    << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
+    << "forced_compilation_on" << "forced_compilation_off"
+    << "effective_compilation";
+
+const QString Song::kColumnSpec = Song::kColumns.join(", ");
+const QString Song::kJoinSpec = Prepend("songs.", Song::kColumns).join(", ");
+const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
+const QString Song::kUpdateSpec = Updateify(Song::kColumns).join(", ");
+
+
 
 static TagLib::String QStringToTaglibString(const QString& s);
 

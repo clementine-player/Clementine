@@ -21,6 +21,8 @@
 #include "radioplaylistitem.h"
 #include "radiomodel.h"
 #include "savedradio.h"
+#include "librarybackend.h"
+#include "libraryplaylistitem.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -334,7 +336,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 
   if (const SongMimeData* song_data = qobject_cast<const SongMimeData*>(data)) {
     // Dragged from the library
-    InsertSongs(song_data->songs, row);
+    InsertLibraryItems(song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
     InsertRadioStations(radio_data->items, row);
@@ -455,6 +457,14 @@ QModelIndex Playlist::InsertItems(const QList<PlaylistItem*>& items, int after) 
   ReshuffleIndices();
 
   return index(start, 0);
+}
+
+QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int after) {
+  QList<PlaylistItem*> items;
+  foreach (const Song& song, songs) {
+    items << new LibraryPlaylistItem(song);
+  }
+  return InsertItems(items, after);
 }
 
 QModelIndex Playlist::InsertSongs(const SongList& songs, int after) {
@@ -625,37 +635,34 @@ void Playlist::SetCurrentIsPaused(bool paused) {
                 index(current_item_.row(), ColumnCount));
 }
 
+void Playlist::SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) {
+  backend_ = backend;
+
+  Restore();
+}
+
 void Playlist::Save() const {
-  settings_->beginWriteArray("items", items_.count());
-  for (int i=0 ; i<items_.count() ; ++i) {
-    settings_->setArrayIndex(i);
-    settings_->setValue("type", items_.at(i)->type_string());
-    items_.at(i)->Save(settings_.get());
-  }
-  settings_->endArray();
+  if (!backend_)
+    return;
+
+  backend_->SavePlaylist(1, items_);
 
   settings_->setValue("last_index", last_played_index());
 }
 
 void Playlist::Restore() {
+  if (!backend_)
+    return;
+
   qDeleteAll(items_);
   items_.clear();
   virtual_items_.clear();
 
-  int count = settings_->beginReadArray("items");
-  for (int i=0 ; i<count ; ++i) {
-    settings_->setArrayIndex(i);
-    QString type(settings_->value("type").toString());
+  items_ = backend_->GetPlaylistItems(1);
 
-    PlaylistItem* item = PlaylistItem::NewFromType(type);
-    if (!item)
-      continue;
-
-    item->Restore(*settings_.get());
-    items_ << item;
-    virtual_items_ << virtual_items_.count();
-  }
-  settings_->endArray();
+  for (int i=0 ; i<items_.count() ; ++i) {
+    virtual_items_ << i;
+  };
 
   reset();
 

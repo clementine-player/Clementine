@@ -26,15 +26,14 @@ class RadioService;
 
 class RadioPlaylistItem : public PlaylistItem {
  public:
-  RadioPlaylistItem();
+  RadioPlaylistItem(const QString& type);
   RadioPlaylistItem(RadioService* service, const QUrl& url,
                     const QString& title, const QString& artist);
 
-  Type type() const { return Type_Radio; }
   Options options() const;
 
-  void Save(SettingsProvider* settings) const;
-  void Restore(const SettingsProvider& settings);
+  void InitFromQuery(const QSqlQuery &query);
+  void BindToQuery(QSqlQuery *query) const;
 
   Song Metadata() const;
 
@@ -45,6 +44,9 @@ class RadioPlaylistItem : public PlaylistItem {
 
   void SetTemporaryMetadata(const Song& metadata);
   void ClearTemporaryMetadata();
+
+ protected:
+  QVariant DatabaseValue(DatabaseColumn) const;
 
  private:
   void InitMetadata();

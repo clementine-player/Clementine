@@ -120,8 +120,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
-  playlist_->Restore();
-
   playlist_->IgnoreSorting(true);
   ui_.playlist->setModel(playlist_);
   ui_.playlist->setItemDelegates(library_);
@@ -226,6 +224,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
   connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
           cover_manager_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
+  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
+          playlist_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
 
   // Age filters
   QActionGroup* filter_age_group = new QActionGroup(this);
@@ -546,7 +546,7 @@ void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
     idx = library_sort_model_->mapToSource(idx);
 
   QModelIndex first_song =
-      playlist_->InsertSongs(library_->GetChildSongs(idx));
+      playlist_->InsertLibraryItems(library_->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), Engine::First);

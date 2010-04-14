@@ -27,14 +27,10 @@ class MockPlaylistItem : public PlaylistItem {
  public:
   MockPlaylistItem();
 
-  MOCK_CONST_METHOD0(type,
-      Type());
   MOCK_CONST_METHOD0(options,
       Options());
-  MOCK_CONST_METHOD1(Save,
-      void(SettingsProvider* settings));
-  MOCK_METHOD1(Restore,
-      void(const SettingsProvider& settings));
+  MOCK_METHOD1(InitFromQuery,
+      void(const QSqlQuery& settings));
   MOCK_METHOD0(Reload,
       void());
   MOCK_CONST_METHOD0(Metadata,
@@ -49,6 +45,8 @@ class MockPlaylistItem : public PlaylistItem {
       void(const Song& metadata));
   MOCK_METHOD0(ClearTemporaryMetadata,
       void());
+  MOCK_METHOD1(DatabaseValue,
+      QVariant(DatabaseColumn));
 };
 
 #endif // MOCK_PLAYLISTITEM_H

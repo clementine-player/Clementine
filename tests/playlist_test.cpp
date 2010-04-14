@@ -47,8 +47,6 @@ class PlaylistTest : public ::testing::Test {
     metadata.Init(title, artist, album, length);
 
     MockPlaylistItem* ret = new MockPlaylistItem;
-    EXPECT_CALL(*ret, type())
-        .WillRepeatedly(Return(PlaylistItem::Type_Song));
     EXPECT_CALL(*ret, Metadata())
         .WillRepeatedly(Return(metadata));
 

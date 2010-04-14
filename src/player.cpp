@@ -331,27 +331,16 @@ inline void AddMetadata(const QString& key, int metadata, QVariantMap* map) {
 
 QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
   QVariantMap ret;
-  if (item.type() == PlaylistItem::Type_Song) {
-    const Song& song = item.Metadata();
-    if (song.is_valid()) {
-      AddMetadata("location", item.Url().toString(), &ret);
-      AddMetadata("title", song.PrettyTitle(), &ret);
-      AddMetadata("artist", song.artist(), &ret);
-      AddMetadata("album", song.album(), &ret);
-      AddMetadata("time", song.length(), &ret);
-      AddMetadata("tracknumber", song.track(), &ret);
-    }
-    return ret;
-  } else {
-    AddMetadata("location", item.Url().toString(), &ret);
-    const Song& song = item.Metadata();
-    AddMetadata("title", song.PrettyTitle(), &ret);
-    AddMetadata("artist", song.artist(), &ret);
-    AddMetadata("album", song.album(), &ret);
-    AddMetadata("time", song.length(), &ret);
-    AddMetadata("tracknumber", song.track(), &ret);
-    return ret;
-  }
+
+  const Song& song = item.Metadata();
+  AddMetadata("location", item.Url().toString(), &ret);
+  AddMetadata("title", song.PrettyTitle(), &ret);
+  AddMetadata("artist", song.artist(), &ret);
+  AddMetadata("album", song.album(), &ret);
+  AddMetadata("time", song.length(), &ret);
+  AddMetadata("tracknumber", song.track(), &ret);
+
+  return ret;
 }
 
 QVariantMap Player::GetMetadata() const {

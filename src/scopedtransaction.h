@@ -14,29 +14,26 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONGPLAYLISTITEM_H
-#define SONGPLAYLISTITEM_H
+#ifndef SCOPEDTRANSACTION_H
+#define SCOPEDTRANSACTION_H
 
-#include "playlistitem.h"
-#include "song.h"
+#include <boost/noncopyable.hpp>
 
-class SongPlaylistItem : public PlaylistItem {
+class QSqlDatabase;
+
+// Opens a transaction on a database.
+// Rolls back the transaction if the object goes out of scope before Commit()
+// is called.
+class ScopedTransaction : boost::noncopyable {
  public:
-  SongPlaylistItem(const QString& type);
-  SongPlaylistItem(const Song& song);
+  ScopedTransaction(QSqlDatabase* db);
+  ~ScopedTransaction();
 
-  void InitFromQuery(const QSqlQuery &query);
-  void Reload();
-
-  Song Metadata() const { return song_; }
-
-  QUrl Url() const;
-
- protected:
-  QVariant DatabaseValue(DatabaseColumn) const;
+  void Commit();
 
  private:
-  Song song_;
+  QSqlDatabase* db_;
+  bool pending_;
 };
 
-#endif // SONGPLAYLISTITEM_H
+#endif // SCOPEDTRANSACTION_H

@@ -17,25 +17,31 @@
 #include "playlistitem.h"
 #include "songplaylistitem.h"
 #include "radioplaylistitem.h"
+#include "libraryplaylistitem.h"
 
 #include <QtDebug>
 
-QString PlaylistItem::type_string() const {
-  switch (type()) {
-    case Type_Song: return "Song";
-    case Type_Radio: return "Radio";
-    default:
-      qWarning() << "Invalid PlaylistItem type:" << type();
-      return QString::null;
-  }
-}
-
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
-  if (type == "Song")
-    return new SongPlaylistItem;
+  if (type == "Library")
+    return new LibraryPlaylistItem(type);
+  if (type == "Stream" || type == "File")
+    return new SongPlaylistItem(type);
   if (type == "Radio")
-    return new RadioPlaylistItem;
+    return new RadioPlaylistItem(type);
 
   qWarning() << "Invalid PlaylistItem type:" << type;
   return NULL;
 }
+
+void PlaylistItem::BindToQuery(QSqlQuery* query) const {
+  query->bindValue(":type", type());
+  query->bindValue(":library_id", DatabaseValue(Column_LibraryId));
+  query->bindValue(":url", DatabaseValue(Column_Url));
+  query->bindValue(":title", DatabaseValue(Column_Title));
+  query->bindValue(":artist", DatabaseValue(Column_Artist));
+  query->bindValue(":album", DatabaseValue(Column_Album));
+  query->bindValue(":length", DatabaseValue(Column_Length));
+  query->bindValue(":radio_service", DatabaseValue(Column_RadioService));
+}
+
+

@@ -14,18 +14,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SONGPLAYLISTITEM_H
-#define SONGPLAYLISTITEM_H
+#ifndef LIBRARYPLAYLISTITEM_H
+#define LIBRARYPLAYLISTITEM_H
 
 #include "playlistitem.h"
 #include "song.h"
 
-class SongPlaylistItem : public PlaylistItem {
+class LibraryPlaylistItem : public PlaylistItem {
  public:
-  SongPlaylistItem(const QString& type);
-  SongPlaylistItem(const Song& song);
+  LibraryPlaylistItem(const QString& type);
+  LibraryPlaylistItem(const Song& song);
 
   void InitFromQuery(const QSqlQuery &query);
+  void BindToQuery(QSqlQuery *query) const;
   void Reload();
 
   Song Metadata() const { return song_; }
@@ -33,10 +34,10 @@ class SongPlaylistItem : public PlaylistItem {
   QUrl Url() const;
 
  protected:
-  QVariant DatabaseValue(DatabaseColumn) const;
+  QVariant DatabaseValue(DatabaseColumn column) const;
 
  private:
   Song song_;
 };
 
-#endif // SONGPLAYLISTITEM_H
+#endif // LIBRARYPLAYLISTITEM_H

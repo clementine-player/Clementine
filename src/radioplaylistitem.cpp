@@ -21,15 +21,18 @@
 
 #include <QSettings>
 #include <QApplication>
+#include <QtDebug>
 
-RadioPlaylistItem::RadioPlaylistItem()
-  : service_(NULL)
+RadioPlaylistItem::RadioPlaylistItem(const QString& type)
+  : PlaylistItem(type),
+    service_(NULL)
 {
 }
 
 RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
                                      const QString& title, const QString& artist)
-  : service_(service),
+  : PlaylistItem("Radio"),
+    service_(service),
     url_(url),
     title_(title),
     artist_(artist)
@@ -37,20 +40,28 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
   InitMetadata();
 }
 
-void RadioPlaylistItem::Save(SettingsProvider* settings) const {
-  settings->setValue("service", service_->name());
-  settings->setValue("url", url_.toString());
-  settings->setValue("title", title_);
-  settings->setValue("artist", artist_);
-}
+void RadioPlaylistItem::InitFromQuery(const QSqlQuery &query) {
+  // The song table gets joined first, plus one for the song ROWID
+  const int row = Song::kColumns.count() + 1;
 
-void RadioPlaylistItem::Restore(const SettingsProvider& settings) {
-  service_ = RadioModel::ServiceByName(settings.value("service").toString());
-  url_ = settings.value("url").toString();
-  title_ = settings.value("title").toString();
-  artist_ = settings.value("artist").toString();
+  url_ = query.value(row + 1).toString();
+  title_ = query.value(row + 2).toString();
+  artist_ = query.value(row + 3).toString();
+  QString service(query.value(row + 6).toString());
+
+  service_ = RadioModel::ServiceByName(service);
 
   InitMetadata();
+}
+
+QVariant RadioPlaylistItem::DatabaseValue(DatabaseColumn column) const {
+  switch (column) {
+    case Column_Url:          return url_.toString();
+    case Column_Title:        return title_;
+    case Column_Artist:       return artist_;
+    case Column_RadioService: return service_->name();
+    default:                  return PlaylistItem::DatabaseValue(column);
+  }
 }
 
 void RadioPlaylistItem::InitMetadata() {

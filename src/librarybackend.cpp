@@ -16,6 +16,7 @@
 
 #include "librarybackend.h"
 #include "libraryquery.h"
+#include "scopedtransaction.h"
 
 #include <QFile>
 #include <QDir>
@@ -32,7 +33,7 @@
 
 
 const char* LibraryBackend::kDatabaseName = "clementine.db";
-const int LibraryBackend::kSchemaVersion = 6;
+const int LibraryBackend::kSchemaVersion = 7;
 
 int (*LibraryBackend::_sqlite3_create_function) (
     sqlite3*, const char*, int, int, void*,
@@ -359,7 +360,7 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
   // Remove songs first
   DeleteSongs(FindSongsInDirectory(dir.id));
 
-  db.transaction();
+  ScopedTransaction transaction(&db);
 
   // Delete the subdirs that were in this directory
   QSqlQuery q("DELETE FROM subdirectories WHERE directory = :id", db);
@@ -375,13 +376,13 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
 
   emit DirectoryDeleted(dir);
 
-  db.commit();
+  transaction.Commit();
 }
 
 SongList LibraryBackend::FindSongsInDirectory(int id) {
   QSqlDatabase db(Connect());
 
-  QSqlQuery q("SELECT ROWID, " + QString(Song::kColumnSpec) +
+  QSqlQuery q("SELECT ROWID, " + Song::kColumnSpec +
               " FROM songs WHERE directory = :directory", db);
   q.bindValue(":directory", id);
   q.exec();
@@ -407,7 +408,7 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   QSqlQuery delete_query("DELETE FROM subdirectories"
                          " WHERE directory = :id AND path = :path", db);
 
-  db.transaction();
+  ScopedTransaction transaction(&db);
   foreach (const Subdirectory& subdir, subdirs) {
     if (subdir.mtime == 0) {
       // Delete the subdirectory
@@ -437,7 +438,7 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
       }
     }
   }
-  db.commit();
+  transaction.Commit();
 }
 
 void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
@@ -446,13 +447,13 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
   QSqlQuery check_dir(
       "SELECT ROWID FROM directories WHERE ROWID = :id", db);
   QSqlQuery add_song(
-      "INSERT INTO songs (" + QString(Song::kColumnSpec) + ")"
-      " VALUES (" + QString(Song::kBindSpec) + ")", db);
+      "INSERT INTO songs (" + Song::kColumnSpec + ")"
+      " VALUES (" + Song::kBindSpec + ")", db);
   QSqlQuery update_song(
-      "UPDATE songs SET " + QString(Song::kUpdateSpec) +
+      "UPDATE songs SET " + Song::kUpdateSpec +
       " WHERE ROWID = :id", db);
 
-  db.transaction();
+  ScopedTransaction transaction(&db);
 
   SongList added_songs;
   SongList deleted_songs;
@@ -495,7 +496,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
     }
   }
 
-  db.commit();
+  transaction.Commit();
 
   if (!deleted_songs.isEmpty())
     emit SongsDeleted(deleted_songs);
@@ -511,14 +512,14 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
 
   QSqlQuery q("UPDATE songs SET mtime = :mtime WHERE ROWID = :id", db);
 
-  db.transaction();
+  ScopedTransaction transaction(&db);
   foreach (const Song& song, songs) {
     q.bindValue(":mtime", song.mtime());
     q.bindValue(":id", song.id());
     q.exec();
     CheckErrors(q.lastError());
   }
-  db.commit();
+  transaction.Commit();
 }
 
 void LibraryBackend::DeleteSongs(const SongList &songs) {
@@ -526,13 +527,13 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
 
   QSqlQuery q("DELETE FROM songs WHERE ROWID = :id", db);
 
-  db.transaction();
+  ScopedTransaction transaction(&db);
   foreach (const Song& song, songs) {
     q.bindValue(":id", song.id());
     q.exec();
     CheckErrors(q.lastError());
   }
-  db.commit();
+  transaction.Commit();
 
   emit SongsDeleted(songs);
 
@@ -564,7 +565,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbumsByArtist(const QString& artis
 
 SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, const QueryOptions& opt) {
   LibraryQuery query(opt);
-  query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
+  query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
   query.AddCompilationRequirement(false);
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
@@ -583,7 +584,7 @@ SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, c
 Song LibraryBackend::GetSongById(int id) {
   QSqlDatabase db(Connect());
 
-  QSqlQuery q("SELECT ROWID, " + QString(Song::kColumnSpec) + " FROM songs"
+  QSqlQuery q("SELECT ROWID, " + Song::kColumnSpec + " FROM songs"
               " WHERE ROWID = :id", db);
   q.bindValue(":id", id);
   q.exec();
@@ -612,7 +613,7 @@ LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(const QueryOption
 
 SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOptions& opt) {
   LibraryQuery query(opt);
-  query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
+  query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
   query.AddCompilationRequirement(true);
   query.AddWhere("album", album);
 
@@ -670,13 +671,13 @@ void LibraryBackend::UpdateCompilations() {
                    " SET sampler = :sampler,"
                    "     effective_compilation = ((compilation OR :sampler OR forced_compilation_on) AND NOT forced_compilation_off) + 0"
                    " WHERE album = :album", db);
-  QSqlQuery find_songs("SELECT ROWID, " + QString(Song::kColumnSpec) + " FROM songs"
+  QSqlQuery find_songs("SELECT ROWID, " + Song::kColumnSpec + " FROM songs"
                        " WHERE album = :album AND sampler = :sampler", db);
 
   SongList deleted_songs;
   SongList added_songs;
 
-  db.transaction();
+  ScopedTransaction transaction(&db);
 
   QMap<QString, CompilationInfo>::const_iterator it = compilation_info.constBegin();
   for ( ; it != compilation_info.constEnd() ; ++it) {
@@ -695,7 +696,7 @@ void LibraryBackend::UpdateCompilations() {
     }
   }
 
-  db.commit();
+  transaction.Commit();
 
   if (!deleted_songs.isEmpty()) {
     emit SongsDeleted(deleted_songs);
@@ -821,7 +822,7 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
 
   // Get the songs before they're updated
   LibraryQuery query;
-  query.SetColumnSpec("ROWID, " + QString(Song::kColumnSpec));
+  query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
   query.AddWhere("album", album);
   if (!artist.isNull())
     query.AddWhere("artist", artist);
@@ -871,4 +872,72 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
 
 bool LibraryBackend::ExecQuery(LibraryQuery *q) {
   return !CheckErrors(q->Exec(Connect()));
+}
+
+LibraryBackendInterface::PlaylistList LibraryBackend::GetAllPlaylists() {
+  qWarning() << "Not implemented:" << __PRETTY_FUNCTION__;
+  return PlaylistList();
+}
+
+PlaylistItemList LibraryBackend::GetPlaylistItems(int playlist) {
+  QSqlDatabase db(Connect());
+
+  PlaylistItemList ret;
+
+  QSqlQuery q("SELECT songs.ROWID, " + Song::kJoinSpec + ","
+              "       p.type, p.url, p.title, p.artist, p.album, p.length,"
+              "       p.radio_service"
+              " FROM playlist_items AS p"
+              " LEFT JOIN songs"
+              "    ON p.library_id = songs.ROWID"
+              " WHERE p.playlist = :playlist", db);
+  q.bindValue(":playlist", playlist);
+  q.exec();
+  if (CheckErrors(q.lastError()))
+    return ret;
+
+  while (q.next()) {
+    // The song table gets joined first, plus one for the song ROWID
+    const int row = Song::kColumns.count() + 1;
+
+    PlaylistItem* item = PlaylistItem::NewFromType(q.value(row + 0).toString());
+    if (!item)
+      continue;
+
+    item->InitFromQuery(q);
+    ret << item;
+  }
+
+  return ret;
+}
+
+void LibraryBackend::SavePlaylist(int playlist, const PlaylistItemList& items) {
+  QSqlDatabase db(Connect());
+
+  QSqlQuery clear("DELETE FROM playlist_items WHERE playlist = :playlist", db);
+  QSqlQuery insert("INSERT INTO playlist_items"
+                   " (playlist, type, library_id, url, title, artist, album,"
+                   "  length, radio_service)"
+                   " VALUES (:playlist, :type, :library_id, :url, :title,"
+                   "         :artist, :album, :length, :radio_service)", db);
+
+  clear.bindValue(":playlist", playlist);
+
+  ScopedTransaction transaction(&db);
+
+  // Clear the existing items in the playlist
+  clear.exec();
+  if (CheckErrors(clear.lastError()))
+    return;
+
+  // Save the new ones
+  foreach (const PlaylistItem* item, items) {
+    insert.bindValue(":playlist", playlist);
+    item->BindToQuery(&insert);
+
+    insert.exec();
+    CheckErrors(insert.lastError());
+  }
+
+  transaction.Commit();
 }

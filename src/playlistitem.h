@@ -21,19 +21,15 @@
 #include <QUrl>
 
 class Song;
-class SettingsProvider;
+
+class QSqlQuery;
 
 class PlaylistItem {
  public:
-  PlaylistItem() {}
+  PlaylistItem(const QString& type) : type_(type) {}
   virtual ~PlaylistItem() {}
 
   static PlaylistItem* NewFromType(const QString& type);
-
-  enum Type {
-    Type_Song,
-    Type_Radio,
-  };
 
   enum Option {
     Default = 0x00,
@@ -45,13 +41,12 @@ class PlaylistItem {
   };
   Q_DECLARE_FLAGS(Options, Option);
 
-  virtual Type type() const = 0;
-  QString type_string() const;
+  virtual QString type() const { return type_; }
 
   virtual Options options() const { return Default; }
 
-  virtual void Save(SettingsProvider* settings) const = 0;
-  virtual void Restore(const SettingsProvider& settings) = 0;
+  virtual void InitFromQuery(const QSqlQuery& query) = 0;
+  void BindToQuery(QSqlQuery* query) const;
   virtual void Reload() {}
 
   virtual Song Metadata() const = 0;
@@ -69,7 +64,24 @@ class PlaylistItem {
 
   virtual void SetTemporaryMetadata(const Song& metadata) {Q_UNUSED(metadata)}
   virtual void ClearTemporaryMetadata() {}
+
+ protected:
+  enum DatabaseColumn {
+    Column_LibraryId,
+    Column_Url,
+    Column_Title,
+    Column_Artist,
+    Column_Album,
+    Column_Length,
+    Column_RadioService,
+  };
+
+  virtual QVariant DatabaseValue(DatabaseColumn) const {
+    return QVariant(QVariant::String); }
+
+  QString type_;
 };
+typedef QList<PlaylistItem*> PlaylistItemList;
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options);
 
