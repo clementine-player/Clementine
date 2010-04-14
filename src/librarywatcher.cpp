@@ -61,6 +61,9 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
 }
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {
+  // If we're stopping then don't commit the transaction
+  if (watcher_->stop_requested_) return;
+
   if (!new_songs.isEmpty())
     emit watcher_->NewOrUpdatedSongs(new_songs);
 
@@ -134,6 +137,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
     ScanTransaction transaction(this, dir.id, true);
     transaction.SetKnownSubdirs(subdirs);
     foreach (const Subdirectory& subdir, subdirs) {
+      if (stop_requested_) return;
       ScanSubdirectory(subdir.path, subdir, &transaction);
       AddWatch(data.watcher, subdir.path);
     }
@@ -161,6 +165,8 @@ void LibraryWatcher::ScanSubdirectory(
   // and possible album artwork.
   QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
   while (it.hasNext()) {
+    if (stop_requested_) return;
+
     QString child(it.next());
     QFileInfo child_info(child);
 
@@ -274,6 +280,7 @@ void LibraryWatcher::ScanSubdirectory(
 
   // Recurse into the new subdirs that we found
   foreach (const Subdirectory& my_new_subdir, my_new_subdirs) {
+    if (stop_requested_) return;
     ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
   }
 }
