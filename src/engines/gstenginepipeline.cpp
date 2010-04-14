@@ -20,6 +20,13 @@
 
 #include <QDebug>
 
+const char* GstEnginePipeline::kHttpGstreamerSource =
+#ifdef Q_OS_DARWIN
+    "neonhttpsrc";
+#else
+    "souphttpsrc";  // Does not exist on mac/fink.
+#endif
+
 GstEnginePipeline::GstEnginePipeline()
   : QObject(NULL),
     valid_(false),
@@ -59,20 +66,11 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   //   audiosink
 
   // Source
-  #ifdef Q_OS_DARWIN
-  // giosrc from Fink does not support HTTP.
   if (url.scheme() == "http") {
-    src_ = GstEngine::CreateElement("neonhttpsrc");
+    src_ = GstEngine::CreateElement(kHttpGstreamerSource);
   } else {
     src_ = GstEngine::CreateElement("giosrc");
   }
-  #else
-  if (url.scheme() == "http") {
-    src_ = GstEngine::CreateElement("souphttpsrc");
-  } else {
-    src_ = GstEngine::CreateElement("giosrc");
-  }
-  #endif
   if (!src_)
     return false;
 

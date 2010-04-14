@@ -81,6 +81,8 @@ class GstEnginePipeline : public QObject {
  private:
   static const int kGstStateTimeoutNanosecs = 10000000;
 
+  static const char* kHttpGstreamerSource;
+
   bool valid_;
   QString sink_;
   QString device_;
