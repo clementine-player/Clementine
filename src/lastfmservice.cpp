@@ -118,7 +118,7 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       CreateStationItem(Type_MyRecommendations, tr("My Recommendations"), ":last.fm/recommended_radio.png", item);
       CreateStationItem(Type_MyRadio, tr("My Radio Station"), ":last.fm/personal_radio.png", item);
       CreateStationItem(Type_MyLoved, tr("My Loved Tracks"), ":last.fm/loved_radio.png", item);
-      CreateStationItem(Type_MyNeighbourhood, tr("My Neighbourhood"), ":last.fm/neighbour_radio.png", item);
+      CreateStationItem(Type_MyNeighbourhood, tr("My Neighborhood"), ":last.fm/neighbour_radio.png", item);
 
       // Types that have children
       artist_list_ = new RadioItem(this, Type_ArtistRadio, tr("Artist radio"), item);
@@ -135,7 +135,7 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       friends_list_ = new RadioItem(this, Type_MyFriends, tr("Friends"), item);
       friends_list_->icon = QIcon(":last.fm/my_friends.png");
 
-      neighbours_list_ = new RadioItem(this, Type_MyNeighbours, tr("Neighbours"), item);
+      neighbours_list_ = new RadioItem(this, Type_MyNeighbours, tr("Neighbors"), item);
       neighbours_list_->icon = QIcon(":last.fm/my_neighbours.png");
 
       if (!IsAuthenticated())
@@ -155,11 +155,11 @@ void LastFMService::LazyPopulate(RadioItem *item) {
 
     case Type_OtherUser:
       CreateStationItem(Type_OtherUserRadio, item->key, ":last.fm/recommended_radio.png", item)
-          ->display_text = tr("%1's Radio Station").arg(item->key);
+          ->display_text = tr("Last.fm Radio Station - %1").arg(item->key);
       CreateStationItem(Type_OtherUserLoved, item->key, ":last.fm/loved_radio.png", item)
-          ->display_text = tr("%1's Loved Tracks").arg(item->key);
+          ->display_text = tr("Last.fm Loved Tracks - %1").arg(item->key);
       CreateStationItem(Type_OtherUserNeighbourhood, item->key, ":last.fm/neighbour_radio.png", item)
-          ->display_text = tr("%1's Neighborhood").arg(item->key);
+          ->display_text = tr("Last.fm Neighbor Radio - %1").arg(item->key);
       break;
 
     default:
@@ -268,16 +268,16 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
   const QString me(lastfm::ws::Username);
 
   switch (item->type) {
-    case Type_MyRecommendations: return tr("%1's Recommended Radio").arg(me);
-    case Type_MyLoved:           return tr("%1's Loved Tracks").arg(me);
-    case Type_MyNeighbourhood:   return tr("%1's Neighbour Radio").arg(me);
-    case Type_MyRadio:           return tr("%1's Library").arg(me);
+    case Type_MyRecommendations: return tr("Last.fm Recommended Radio - %1").arg(me);
+    case Type_MyLoved:           return tr("Last.fm Loved Tracks - %1").arg(me);
+    case Type_MyNeighbourhood:   return tr("Last.fm Neighbor Radio - %1").arg(me);
+    case Type_MyRadio:           return tr("Last.fm Library - %1").arg(me);
     case Type_OtherUser:
-    case Type_OtherUserRadio:    return tr("%1's Library").arg(item->key);
-    case Type_OtherUserLoved:    return tr("%1's Loved Tracks").arg(item->key);
-    case Type_OtherUserNeighbourhood: return tr("%1's Neighbour Radio").arg(item->key);
-    case Type_Artist:            return tr("Similar Artists to %1").arg(item->key);
-    case Type_Tag:               return tr("Tag Radio: %1").arg(item->key);
+    case Type_OtherUserRadio:    return tr("Last.fm Library - %1").arg(item->key);
+    case Type_OtherUserLoved:    return tr("Last.fm Loved Tracks - %1").arg(item->key);
+    case Type_OtherUserNeighbourhood: return tr("Last.fm Neighbor Radio - %1").arg(item->key);
+    case Type_Artist:            return tr("Last.fm Similar Artists to %1").arg(item->key);
+    case Type_Tag:               return tr("Last.fm Tag Radio: %1").arg(item->key);
   }
   return QString();
 }
@@ -366,7 +366,7 @@ QString LastFMService::ErrorString(lastfm::ws::Error error) const {
     case lastfm::ws::NotEnoughContent: return tr("Not enough content");
     case lastfm::ws::NotEnoughMembers: return tr("Not enough members");
     case lastfm::ws::NotEnoughFans: return tr("Not enough fans");
-    case lastfm::ws::NotEnoughNeighbours: return tr("Not enough neighbours");
+    case lastfm::ws::NotEnoughNeighbours: return tr("Not enough neighbors");
 
     case lastfm::ws::MalformedResponse: return tr("Malformed response");
 
