@@ -356,11 +356,13 @@ target_link_libraries(clementine_lib
 if (APPLE)
   target_link_libraries(clementine_lib
       ${GROWL}
+      ${SPARKLE}
       /System/Library/Frameworks/Carbon.framework
       /System/Library/Frameworks/Foundation.framework
       /System/Library/Frameworks/AppKit.framework
   )
   include_directories(${GROWL}/Headers)
+  include_directories(${SPARKLE}/Headers)
 else (APPLE)
   target_link_libraries(clementine_lib qxt)
 endif (APPLE)

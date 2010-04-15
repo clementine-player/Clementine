@@ -9,6 +9,7 @@ namespace mac {
 void MacMain();
 void SetShortcutHandler(GlobalShortcuts* handler);
 void SetApplicationHandler(QObject* handler);
+void CheckForUpdates();
 
 }  // namespace mac
 

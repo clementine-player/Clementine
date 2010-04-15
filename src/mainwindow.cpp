@@ -41,6 +41,7 @@
 #include "engines/gstengine.h"
 #include "equalizer.h"
 #include "commandlineoptions.h"
+#include "mac_startup.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -343,8 +344,12 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   tray_menu->addSeparator();
   tray_menu->addAction(ui_.action_quit);
   
-  // We use the dock instead of the system tray on mac.
 #ifdef Q_OS_DARWIN
+  // Add check for updates item to application menu.
+  QAction* check_updates = ui_.menuSettings->addAction(tr("Check for updates..."));
+  check_updates->setMenuRole(QAction::ApplicationSpecificRole);
+  connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
+  // We use the dock instead of the system tray on mac.
   qt_mac_set_dock_menu(tray_menu);
 #else
   tray_icon_->setContextMenu(tray_menu);
@@ -998,4 +1003,10 @@ bool MainWindow::event(QEvent* event) {
     return true;
   }
   return QMainWindow::event(event);
+}
+
+void MainWindow::CheckForUpdates() {
+#ifdef Q_OS_DARWIN
+  mac::CheckForUpdates();
+#endif
 }

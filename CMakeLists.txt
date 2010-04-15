@@ -44,6 +44,7 @@ find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
 if (APPLE)
   find_library(GROWL Growl)
+  find_library(SPARKLE Sparkle)
 endif (APPLE)
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")

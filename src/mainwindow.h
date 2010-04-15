@@ -127,6 +127,8 @@ class MainWindow : public QMainWindow {
 
   void CommandlineOptionsReceived(const QByteArray& serialized_options);
 
+  void CheckForUpdates();
+
  private:
   void SaveGeometry();
 

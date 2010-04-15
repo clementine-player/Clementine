@@ -1,6 +1,11 @@
 #import <IOKit/hidsystem/ev_keymap.h>
-#import <AppKit/NSApplication.h>
 #import <AppKit/NSEvent.h>
+
+#import <Foundation/NSBundle.h>
+#import <Foundation/NSTimer.h>
+#import <Foundation/NSURL.h>
+#import <AppKit/NSNibDeclarations.h>
+#import <Sparkle/SUUpdater.h>
 
 #include "globalshortcuts/globalshortcuts.h"
 #include "mac_startup.h"
@@ -8,11 +13,12 @@
 #include <QCoreApplication>
 #include <QEvent>
 #include <QObject>
+#import <AppKit/NSApplication.h>
 
 // Capture global media keys on Mac (Cocoa only!)
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
-@interface MacApplication :NSApplication <NSApplicationDelegate> {
+@interface MacApplication :NSApplication { //<NSApplicationDelegate> { //, SUUpdaterDelegateInformalProtocol> {
   GlobalShortcuts* shortcut_handler_;
   QObject* application_handler_;
 }
@@ -107,6 +113,8 @@ namespace mac {
 void MacMain() {
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
+  // Creates and sets the magic global variable for Sparkle.
+  [[SUUpdater sharedUpdater] setDelegate: NSApp];
 }
 
 void SetShortcutHandler(GlobalShortcuts* handler) {
@@ -115,6 +123,10 @@ void SetShortcutHandler(GlobalShortcuts* handler) {
 
 void SetApplicationHandler(QObject* handler) {
   [NSApp SetApplicationHandler: handler];
+}
+
+void CheckForUpdates() {
+  [[SUUpdater sharedUpdater] checkForUpdates: NSApp];
 }
 
 }  // namespace mac
