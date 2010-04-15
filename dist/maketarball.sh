@@ -8,6 +8,7 @@ echo "Checking out $url into $name-$version..."
 
 rm -rf $name-$version
 svn export $url $name-$version
-tar -cvzf $name-$version.tar.gz $name-$version
-tar -cvjf $name-$version.tar.bz2 $name-$version
-rm -rf $name-$version
+rm -rfv $name-$version/debian
+tar -czf $name-$version.tar.gz $name-$version
+cp $name-$version.tar.gz ${name}_${version}.orig.tar.gz
+svn export $url/debian $name-$version/debian
