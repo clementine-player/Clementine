@@ -206,6 +206,7 @@ set(CLEMENTINE-LANGUAGES
   cs
   de
   el
+  en_GB
   es
   fr
   nb
