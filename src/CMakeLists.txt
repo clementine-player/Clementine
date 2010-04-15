@@ -384,10 +384,29 @@ add_executable(clementine
 target_link_libraries(clementine clementine_lib)
 
 set_target_properties(clementine PROPERTIES
-    MACOSX_BUNDLE_INFO_STRING "Clementine 0.2"
-    MACOSX_BUNDLE_ICON_FILE "clementine"
-    MACOSX_BUNDLE_SHORT_VERSION_STRING "0.2"
+    MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
 )
+if (APPLE)
+  configure_file(
+      ../dist/clementine.icns
+      ${PROJECT_BINARY_DIR}/clementine.app/Contents/Resources/clementine.icns
+      COPY_ONLY)
+  configure_file(
+      ../dist/qt.conf
+      ${PROJECT_BINARY_DIR}/clementine.app/Contents/Resources/qt.conf
+      COPY_ONLY)
+  configure_file(
+      ../dist/sparkle_pub.pem
+      ${PROJECT_BINARY_DIR}/clementine.app/Contents/Resources/sparkle_pub.pem
+      COPY_ONLY)
+  add_custom_target(bundle
+      ${CMAKE_CURRENT_SOURCE_DIR}/../macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
+      DEPENDS clementine
+      )
+  add_custom_target(dmg
+      macdeployqt ${PROJECT_BINARY_DIR}/clementine.app -dmg
+      DEPENDS clementine)
+endif (APPLE)
 
 install(TARGETS clementine
   BUNDLE DESTINATION bin
@@ -402,3 +421,4 @@ install(FILES ../dist/clementine_64.png
 install(FILES ../dist/clementine.desktop
   DESTINATION share/applications
 )
+

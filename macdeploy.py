@@ -141,7 +141,7 @@ if len(sys.argv) < 2:
 
 bundle_dir = sys.argv[1]
 
-bundle_name = bundle_dir.split('.')[0]
+bundle_name = os.path.basename(bundle_dir).split('.')[0]
 
 commands = []
 
@@ -362,15 +362,10 @@ print 'Would run %d commands:' % len(commands)
 for command in commands:
   print ' '.join(command)
 
-print 'OK?'
-raw_input()
+if len(sys.argv) <= 2:
+  print 'OK?'
+  raw_input()
 
 for command in commands:
   p = subprocess.Popen(command)
   os.waitpid(p.pid, 0)
-
-qtconf = open(os.path.join(resources_dir, 'qt.conf'), 'w')
-qtconf.write('''[Paths]
-Plugins = PlugIns
-''')
-qtconf.close()
