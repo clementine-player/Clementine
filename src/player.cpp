@@ -17,7 +17,20 @@
 #include "player.h"
 #include "playlist.h"
 #include "lastfmservice.h"
-#include "engines/gstengine.h"
+#include "engines/enginebase.h"
+
+#ifdef HAVE_GSTREAMER
+#  include "engines/gstengine.h"
+#endif
+#ifdef HAVE_VLC
+#  include "engines/vlcengine.h"
+#endif
+#ifdef HAVE_XINE
+#  include "engines/xine-engine.h"
+#endif
+#ifdef HAVE_QT_PHONON
+#  include "engines/phononengine.h"
+#endif
 
 #ifdef Q_WS_X11
 #  include "mpris_player.h"
@@ -54,14 +67,15 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
 }
 #endif
 
-Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
+Player::Player(Playlist* playlist, LastFMService* lastfm, Engine::Type engine, QObject* parent)
   : QObject(parent),
     playlist_(playlist),
     lastfm_(lastfm),
     current_item_options_(PlaylistItem::Default),
-    engine_(new GstEngine),
     stream_change_type_(Engine::First)
 {
+  engine_ = createEngine(engine);
+
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
@@ -77,6 +91,37 @@ Player::Player(Playlist* playlist, LastFMService* lastfm, QObject* parent)
   new MprisTrackList(this);
   QDBusConnection::sessionBus().registerObject("/TrackList", this);
 #endif
+}
+
+EngineBase* Player::createEngine(Engine::Type engine) {
+
+  switch(engine) {
+#ifdef HAVE_GSTREAMER
+    case Engine::gstreamer:
+      return new GstEngine();
+      break;
+#endif
+#ifdef HAVE_VLC
+    case Engine::vlc:
+      return new VlcEngine();
+      break;
+#endif
+#ifdef HAVE_XINE
+    case Engine::xine:
+      return new XineEngine();
+      break;
+#endif
+#ifdef HAVE_QT_PHONON
+    case Engine::qt_phonon:
+      return new PhononEngine();
+      break;
+#endif
+    default:
+      qFatal("Selected engine not compiled in");
+      break;
+  }
+  /* NOT REACHED */
+  return NULL;
 }
 
 void Player::Init() {

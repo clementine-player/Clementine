@@ -113,23 +113,23 @@ void VlcEngine::StateChangedCallback(const libvlc_event_t* e, void* data) {
 
     case libvlc_MediaPlayerEndReached:
       engine->state_ = Engine::Idle;
-      emit engine->trackEnded();
+      emit engine->TrackEnded();
       return; // Don't emit state changed here
   }
 
-  emit engine->stateChanged(engine->state_);
+  emit engine->StateChanged(engine->state_);
 }
 
-bool VlcEngine::init() {
+bool VlcEngine::Init() {
   return true;
 }
 
-bool VlcEngine::canDecode(const QUrl &url) const {
+bool VlcEngine::CanDecode(const QUrl &url) {
   // TODO
   return true;
 }
 
-bool VlcEngine::load(const QUrl &url, bool stream) {
+bool VlcEngine::Load(const QUrl &url, Engine::TrackChangeType change) {
   // Create the media object
   VlcScopedRef<libvlc_media_t> media(
       libvlc_media_new(instance_, url.toEncoded().constData(), &exception_));
@@ -143,27 +143,27 @@ bool VlcEngine::load(const QUrl &url, bool stream) {
   return true;
 }
 
-bool VlcEngine::play(uint offset) {
+bool VlcEngine::Play(uint offset) {
   libvlc_media_player_play(player_, &exception_);
   if (libvlc_exception_raised(&exception_))
     return false;
 
-  seek(offset);
+  Seek(offset);
 
   return true;
 }
 
-void VlcEngine::stop() {
+void VlcEngine::Stop() {
   libvlc_media_player_stop(player_, &exception_);
   HandleErrors();
 }
 
-void VlcEngine::pause() {
+void VlcEngine::Pause() {
   libvlc_media_player_pause(player_, &exception_);
   HandleErrors();
 }
 
-void VlcEngine::unpause() {
+void VlcEngine::Unpause() {
   libvlc_media_player_play(player_, &exception_);
   HandleErrors();
 }
@@ -198,7 +198,7 @@ uint VlcEngine::length() const {
   return len;
 }
 
-void VlcEngine::seek(uint ms) {
+void VlcEngine::Seek(uint ms) {
   uint len = length();
   if (len == 0)
     return;
@@ -209,7 +209,7 @@ void VlcEngine::seek(uint ms) {
   HandleErrors();
 }
 
-void VlcEngine::setVolumeSW(uint volume) {
+void VlcEngine::SetVolumeSW(uint volume) {
   libvlc_audio_set_volume(instance_, volume, &exception_);
   HandleErrors();
 }
@@ -233,19 +233,19 @@ void VlcEngine::SetScopeData(float* data, int size) {
   }
 }
 
-const Engine::Scope& VlcEngine::scope() {
+const Engine::Scope& VlcEngine::Scope() {
   QMutexLocker l(&scope_mutex_);
 
   // Leave the scope unchanged if there's not enough data
-  if (scope_data_.size() < uint(SCOPESIZE))
-    return m_scope;
+  if (scope_data_.size() < uint(kScopeSize))
+    return scope_;
 
   // Take the samples off the front of the circular buffer
-  for (uint i=0 ; i<uint(SCOPESIZE) ; ++i)
-    m_scope[i] = scope_data_[i] * (1 << 15);
+  for (uint i=0 ; i<uint(kScopeSize) ; ++i)
+    scope_[i] = scope_data_[i] * (1 << 15);
 
   // Remove the samples from the buffer.  Unfortunately I think this is O(n) :(
-  scope_data_.rresize(qMax(0, int(scope_data_.size()) - SCOPESIZE*2));
+  scope_data_.rresize(qMax(0, int(scope_data_.size()) - kScopeSize*2));
 
-  return m_scope;
+  return scope_;
 }

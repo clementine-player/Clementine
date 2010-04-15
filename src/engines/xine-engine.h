@@ -57,16 +57,16 @@ class XineEngine : public Engine::Base
 
    ~XineEngine();
 
-    virtual bool init();
-    virtual bool canDecode( const QUrl& ) const;
-    virtual bool load( const QUrl &url, bool stream );
-    virtual bool play( uint = 0 );
-    virtual void stop();
-    virtual void pause();
-    virtual void unpause();
+    virtual bool Init();
+    virtual bool CanDecode( const QUrl& );
+    virtual bool Load( const QUrl &url, Engine::TrackChangeType change );
+    virtual bool Play( uint = 0 );
+    virtual void Stop();
+    virtual void Pause();
+    virtual void Unpause();
     virtual uint position() const;
     virtual uint length() const;
-    virtual void seek( uint );
+    virtual void Seek( uint );
 
     virtual bool metaDataForUrl(const QUrl &url, Engine::SimpleMetaBundle &b);
     virtual bool getAudioCDContents(const QString &device, QList<QUrl> &urls);
@@ -77,7 +77,7 @@ class XineEngine : public Engine::Base
 
     virtual void setEqualizerEnabled( bool );
     virtual void setEqualizerParameters( int preamp, const QList<int>& );
-    virtual void setVolumeSW( uint );
+    virtual void SetVolumeSW( uint );
     virtual void fadeOut( uint fadeLength, bool* terminate, bool exiting = false );
 
     static  void XineEventListener( void*, const xine_event_t* );
@@ -95,35 +95,38 @@ class XineEngine : public Engine::Base
 
     void determineAndShowErrorMessage(); //call after failure to load/play
 
-    xine_t             *m_xine;
-    xine_stream_t      *m_stream;
-    xine_audio_port_t  *m_audioPort;
-    xine_event_queue_t *m_eventQueue;
-    xine_post_t        *m_post;
+    xine_t             *xine_;
+    xine_stream_t      *stream_;
+    xine_audio_port_t  *audioPort_;
+    xine_event_queue_t *eventQueue_;
+    xine_post_t        *post_;
 
-    int64_t             m_currentVpts;
-    float               m_preamp;
+    int64_t             currentVpts_;
+    float               preamp_;
 
-    bool                m_stopFader;
-    bool                m_fadeOutRunning;
+    bool                stopFader_;
+    bool                fadeOutRunning_;
 
-    QString             m_currentAudioPlugin; //to see if audio plugin has been changed
+    QString             currentAudioPlugin_; //to see if audio plugin has been changed
     //need to save these for when the audio plugin is changed and xine reloaded
-    bool                m_equalizerEnabled;
-    int                 m_intPreamp;
-    QList<int>     m_equalizerGains;
+    bool                equalizerEnabled_;
+    int                 intPreamp_;
+    QList<int>     equalizerGains_;
 
-    QMutex m_initMutex;
+    QMutex initMutex_;
 
-    QSettings m_settings;
-    bool m_fadeoutOnExit;
-    bool m_fadeoutEnabled;
-    bool m_crossfadeEnabled;
-    int m_fadeoutDuration;
+    QSettings settings_;
+    bool fadeoutOnExit_;
+    bool fadeoutEnabled_;
+    bool crossfadeEnabled_;
+    int fadeoutDuration_;
+    int xfadeLength_;
+    bool xfadeNextTrack_;
+    QUrl url_;
 
     PruneScopeThread* prune_;
 
-    mutable Engine::SimpleMetaBundle m_currentBundle;
+    mutable Engine::SimpleMetaBundle currentBundle_;
 
 public:
     XineEngine();
@@ -133,19 +136,21 @@ public:
 
 signals:
     void resetConfig(xine_t *xine);
+    void InfoMessage(const QString&);
+    void LastFmTrackChange();
 };
 
 class Fader : public QThread
 {
-    XineEngine         *m_engine;
-    xine_t             *m_xine;
-    xine_stream_t      *m_decrease;
-    xine_stream_t      *m_increase;
-    xine_audio_port_t  *m_port;
-    xine_post_t        *m_post;
-    uint               m_fadeLength;
-    bool               m_paused;
-    bool               m_terminated;
+    XineEngine         *engine_;
+    xine_t             *xine_;
+    xine_stream_t      *decrease_;
+    xine_stream_t      *increase_;
+    xine_audio_port_t  *port_;
+    xine_post_t        *post_;
+    uint               fadeLength_;
+    bool               paused_;
+    bool               terminated_;
 
     virtual void run();
 
@@ -159,9 +164,9 @@ public:
 
 class OutFader : public QThread
 {
-    XineEngine *m_engine;
-    bool        m_terminated;
-    uint        m_fadeLength;
+    XineEngine *engine_;
+    bool        terminated_;
+    uint        fadeLength_;
 
     virtual void run();
 

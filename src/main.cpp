@@ -141,7 +141,7 @@ int main(int argc, char *argv[]) {
   #endif
 
   // Window
-  MainWindow w(&network);
+  MainWindow w(&network, options.engine());
 
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(&w);

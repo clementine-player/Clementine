@@ -31,24 +31,24 @@ class PhononEngine : public Engine::Base {
   PhononEngine();
   ~PhononEngine();
 
-  bool init();
+  bool Init();
 
-  bool canDecode( const QUrl &url ) const;
+  bool CanDecode( const QUrl &url );
 
-  bool load( const QUrl &url, bool stream = false );
-  bool play( uint offset = 0 );
-  void stop();
-  void pause();
-  void unpause();
+  bool Load( const QUrl &url, Engine::TrackChangeType change );
+  bool Play( uint offset = 0 );
+  void Stop();
+  void Pause();
+  void Unpause();
 
   Engine::State state() const;
   uint position() const;
   uint length() const;
 
-  void seek( uint ms );
+  void Seek( uint ms );
 
  protected:
-  void setVolumeSW( uint percent );
+  void SetVolumeSW( uint percent );
 
  private slots:
   void PhononFinished();

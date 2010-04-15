@@ -45,7 +45,8 @@ const char* CommandlineOptions::kHelpText =
     "  -k, --play-track <n>      %19\n"
     "\n"
     "%20:\n"
-    "  -o, --show-osd            %21\n";
+    "  -o, --show-osd            %21\n"
+    "  -e, --engine              %22\n";
 
 
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
@@ -58,7 +59,8 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     seek_to_(-1),
     seek_by_(0),
     play_track_at_(-1),
-    show_osd_(false)
+    show_osd_(false),
+    engine_(Engine::gstreamer)
 {
 }
 
@@ -83,6 +85,7 @@ bool CommandlineOptions::Parse() {
     {"play-track",  required_argument, 0, 'k'},
 
     {"show-osd",    no_argument,       0, 'o'},
+    {"engine",      required_argument, 0, 'e'},
 
     {0, 0, 0, 0}
   };
@@ -91,7 +94,7 @@ bool CommandlineOptions::Parse() {
   int option_index = 0;
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:o", kOptions, &option_index);
+    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oe:", kOptions, &option_index);
 
     // End of the options
     if (c == -1)
@@ -117,7 +120,8 @@ bool CommandlineOptions::Parse() {
             tr("Loads files/URLs, replacing current playlist")).arg(
             tr("Play the <n>th track in the playlist"),
             tr("Other options"),
-            tr("Display the on-screen-display"));
+            tr("Display the on-screen-display"),
+            tr("Select engine"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
         return false;
@@ -153,6 +157,27 @@ bool CommandlineOptions::Parse() {
       case 'k':
         play_track_at_ = QString(optarg).toInt(&ok);
         if (!ok) play_track_at_ = -1;
+        break;
+
+      case 'e':
+        {
+          ok = true;
+          QString engine = optarg;
+          if(engine == "gst")
+            engine_ = Engine::gstreamer;
+          else if(engine == "vlc")
+            engine_ = Engine::vlc;
+          else if(engine == "xine")
+            engine_ = Engine::xine;
+          else if(engine == "qt-phonon")
+            engine_ = Engine::qt_phonon;
+          else
+          {
+            qFatal("%s %s",
+                tr("Unknown audio engine \"%1\". Choices are:").arg(engine).toAscii().data(),
+                "gst vlc xine qt-phonon");
+          }
+        }
         break;
 
       case '?':

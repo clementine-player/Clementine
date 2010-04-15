@@ -24,6 +24,7 @@
 #include <QSystemTrayIcon>
 
 #include "ui_mainwindow.h"
+#include "engines/engine_fwd.h"
 
 class Playlist;
 class Player;
@@ -55,7 +56,7 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QNetworkAccessManager* network, QWidget *parent = 0);
+  MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWidget *parent = 0);
   ~MainWindow();
 
   static const char* kSettingsGroup;

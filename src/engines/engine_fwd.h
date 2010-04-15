@@ -10,6 +10,8 @@ namespace Engine
     class SimpleMetaBundle;
     class Base;
 
+    enum Type { gstreamer, vlc, xine, qt_phonon };
+
     /**
      * You should return:
      * Playing when playing,

@@ -12,9 +12,6 @@ set(CLEMENTINE-SOURCES
     playlist.cpp
     playlistitem.cpp
     engines/enginebase.cpp
-    engines/gstengine.cpp
-    engines/gstequalizer.cpp
-    engines/gstenginepipeline.cpp
     analyzers/baranalyzer.cpp
     analyzers/analyzerbase.cpp
     fht.cpp
@@ -88,8 +85,6 @@ set(CLEMENTINE-MOC-HEADERS
     librarybackend.h
     playlist.h
     engines/enginebase.h
-    engines/gstengine.h
-    engines/gstenginepipeline.h
     sliderwidget.h
     playlistview.h
     backgroundthread.h
@@ -143,6 +138,41 @@ set(CLEMENTINE-MOC-HEADERS
     equalizerslider.h
     stickyslider.h
 )
+
+# lists of engine source files
+set(GST_ENGINE_SRC
+  engines/gstengine.cpp
+  engines/gstequalizer.cpp
+  engines/gstenginepipeline.cpp
+)
+set(GST_ENGINE_MOC
+  engines/gstengine.h
+  engines/gstenginepipeline.h
+)
+set(GST_ENGINE_LIB
+  GSTREAMER
+  GSTREAMER_BASE
+)
+set(XINE_ENGINE_SRC
+  engines/xine-engine.cpp
+  engines/xine-scope.c
+)
+set(XINE_ENGINE_MOC
+  engines/xine-engine.h
+)
+
+# try to add engines
+include(AddEngine.cmake)
+add_engine(gst "${GST_ENGINE_LIB}" "${GST_ENGINE_SRC}" "${GST_ENGINE_MOC}" ON)
+add_engine(vlc VLC engines/vlcengine.cpp engines/vlcengine.h OFF)
+add_engine(xine XINE "${XINE_ENGINE_SRC}" "${XINE_ENGINE_MOC}" OFF)
+add_engine(qt-phonon QT_PHONON engines/phononengine.cpp engines/phononengine.h OFF)
+print_engines()
+
+# need at least 1 engine
+if(NOT ENGINES_ENABLED)
+  message(FATAL_ERROR "no engine enabled!")
+endif(NOT ENGINES_ENABLED)
 
 # UI files
 set(CLEMENTINE-UI
@@ -319,10 +349,9 @@ target_link_libraries(clementine_lib
     lastfm
     ${GOBJECT_LIBRARIES}
     ${GLIB_LIBRARIES}
-    ${GSTREAMER_LIBRARIES}
-    ${GSTREAMER_BASE_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${QT_LIBRARIES}
+    ${ENGINE_LIBRARIES}
 )
 if (APPLE)
   target_link_libraries(clementine_lib

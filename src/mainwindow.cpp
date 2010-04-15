@@ -72,7 +72,7 @@ const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kMediaFilterSpec =
     "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma);;Playlists (*.m3u *.xspf *.xml)";
 
-MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
+MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
 #ifdef Q_OS_DARWIN
     tray_icon_(NULL),
@@ -88,7 +88,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, QWidget *parent)
     about_dialog_(new About),
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
-    player_(new Player(playlist_, radio_model_->GetLastFMService(), this)),
+    player_(new Player(playlist_, radio_model_->GetLastFMService(), engine, this)),
     library_(new Library(player_->GetEngine(), this)),
     global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog),

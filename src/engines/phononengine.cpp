@@ -38,21 +38,21 @@ PhononEngine::~PhononEngine() {
   delete audio_output_;
 }
 
-bool PhononEngine::init() {
+bool PhononEngine::Init() {
   return true;
 }
 
-bool PhononEngine::canDecode(const QUrl &url) const {
+bool PhononEngine::CanDecode(const QUrl &url) {
   // TODO
   return true;
 }
 
-bool PhononEngine::load(const QUrl &url, bool stream) {
+bool PhononEngine::Load(const QUrl &url, Engine::TrackChangeType change ) {
   media_object_->setCurrentSource(Phonon::MediaSource(url));
   return true;
 }
 
-bool PhononEngine::play(uint offset) {
+bool PhononEngine::Play(uint offset) {
   // The seek happens in PhononStateChanged - phonon doesn't seem to change
   // currentTime() if we seek before we start playing :S
   seek_offset_ = offset;
@@ -61,15 +61,15 @@ bool PhononEngine::play(uint offset) {
   return true;
 }
 
-void PhononEngine::stop() {
+void PhononEngine::Stop() {
   media_object_->stop();
 }
 
-void PhononEngine::pause() {
+void PhononEngine::Pause() {
   media_object_->pause();
 }
 
-void PhononEngine::unpause() {
+void PhononEngine::Unpause() {
   media_object_->play();
 }
 
@@ -98,21 +98,21 @@ uint PhononEngine::length() const {
   return media_object_->totalTime();
 }
 
-void PhononEngine::seek(uint ms) {
+void PhononEngine::Seek(uint ms) {
   media_object_->seek(ms);
 }
 
-void PhononEngine::setVolumeSW(uint) {
-  audio_output_->setVolume(qreal(m_volume) / 100.0);
+void PhononEngine::SetVolumeSW(uint volume) {
+  audio_output_->setVolume(volume);
 }
 
 void PhononEngine::PhononFinished() {
-  emit trackEnded();
+  emit TrackEnded();
 }
 
 void PhononEngine::PhononStateChanged(Phonon::State new_state) {
   if (new_state == Phonon::ErrorState) {
-    emit error(media_object_->errorString());
+    emit Error(media_object_->errorString());
   }
   if (new_state == Phonon::PlayingState && seek_offset_ != -1) {
     media_object_->seek(seek_offset_);
@@ -124,5 +124,5 @@ void PhononEngine::PhononStateChanged(Phonon::State new_state) {
 }
 
 void PhononEngine::StateTimeoutExpired() {
-  emit stateChanged(state());
+  emit StateChanged(state());
 }

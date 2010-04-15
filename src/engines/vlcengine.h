@@ -33,27 +33,27 @@ class VlcEngine : public Engine::Base {
   VlcEngine();
   ~VlcEngine();
 
-  bool init();
+  bool Init();
 
-  bool canDecode( const QUrl &url ) const;
+  bool CanDecode( const QUrl &url );
 
-  bool load( const QUrl &url, bool stream = false );
-  bool play( uint offset = 0 );
-  void stop();
-  void pause();
-  void unpause();
+  bool Load( const QUrl &url, Engine::TrackChangeType change );
+  bool Play( uint offset = 0 );
+  void Stop();
+  void Pause();
+  void Unpause();
 
   Engine::State state() const { return state_; }
   uint position() const;
   uint length() const;
 
-  void seek( uint ms );
+  void Seek( uint ms );
 
   static void SetScopeData(float* data, int size);
-  const Engine::Scope& scope();
+  const Engine::Scope& Scope();
 
  protected:
-  void setVolumeSW( uint percent ); 
+  void SetVolumeSW( uint percent ); 
 
  private:
   void HandleErrors() const;
