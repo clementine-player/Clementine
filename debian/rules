@@ -16,7 +16,7 @@
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	cd bin && cmake ..
+	cd bin && cmake .. -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/clementine/usr
 	touch configure-stamp
 
 
@@ -42,15 +42,8 @@ install: build
 	dh_testroot
 	dh_prep  
 	dh_installdirs
-
-	# Add here commands to install the package into debian/clementine.
-	install -d $(CURDIR)/debian/clementine/usr/bin
-	install -d $(CURDIR)/debian/clementine/usr/share/applications
-	install -d $(CURDIR)/debian/clementine/usr/share/icons/hicolor/64x64/apps
-
-	install -m 0755 bin/clementine $(CURDIR)/debian/clementine/usr/bin/clementine
-	install -m 0644 dist/clementine.desktop $(CURDIR)/debian/clementine/usr/share/applications/clementine.desktop
-	install -m 0644 dist/clementine_64.png $(CURDIR)/debian/clementine/usr/share/icons/hicolor/64x64/apps/application-x-clementine.png
+	
+	make install
 
 
 # Build architecture-independent files here.

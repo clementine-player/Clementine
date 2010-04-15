@@ -2,13 +2,31 @@ Source: clementine
 Section: sound
 Priority: optional
 Maintainer: David Sansome <me@davidsansome.com>
-Build-Depends: debhelper (>= 7), liblastfm-dev, libtag1-dev, libxine-dev, libnotify-dev, libboost-dev, libqt4-dev, qt4-dev-tools, libqt4-opengl-dev, cmake
+Build-Depends: debhelper (>= 7),
+               liblastfm-dev,
+               libtag1-dev,
+               libnotify-dev,
+               libboost-dev,
+               libboost-serialization1.38-dev |
+               libboost-serialization1.40-dev |
+               libboost-serialization-dev,
+               libqt4-dev,
+               qt4-dev-tools,
+               libqt4-opengl-dev,
+               cmake,
+               libgstreamer0.10-dev,
+               libgstreamer-plugins-base0.10-dev
 Standards-Version: 3.8.1
 Homepage: http://code.google.com/p/clementine-player/
 
 Package: clementine
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libxine1-all-plugins, libqt4-sql-sqlite
+Depends: ${shlibs:Depends}, ${misc:Depends},
+         libqt4-sql-sqlite,
+         gstreamer0.10-plugins-base,
+         gstreamer0.10-plugins-good,
+         gstreamer0.10-alsa | gstreamer0.10-audiosink,
+         gstreamer0.10-ffmpeg
 Description: Clementine is a modern music player and library organiser.
   It is largely a port of Amarok 1.4, with some features rewritten to take
   advantage of Qt4.
