@@ -60,7 +60,15 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     seek_by_(0),
     play_track_at_(-1),
     show_osd_(false),
+#ifdef HAVE_GSTREAMER
     engine_(Engine::gstreamer)
+#elif defined(HAVE_LIBVLC)
+    engine_(Engine::vlc)
+#elif defined(HAVE_LIBXINE)
+    engine_(Engine::xine)
+#elif defined(HAVE_QT_PHONON)
+    engine_(Engine::qt_phonon)
+#endif
 {
 }
 
@@ -173,9 +181,21 @@ bool CommandlineOptions::Parse() {
             engine_ = Engine::qt_phonon;
           else
           {
-            qFatal("%s %s",
+            qFatal("%s%s",
                 tr("Unknown audio engine \"%1\". Choices are:").arg(engine).toAscii().data(),
-                "gst vlc xine qt-phonon");
+#ifdef HAVE_GSTREAMER
+                " gst"
+#endif
+#ifdef HAVE_LIBVLC
+                " vlc"
+#endif
+#ifdef HAVE_LIBXINE
+                " xine"
+#endif
+#ifdef HAVE_QT_PHONON
+                " qt-phonon"
+#endif
+            );
           }
         }
         break;

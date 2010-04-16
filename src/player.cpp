@@ -22,10 +22,10 @@
 #ifdef HAVE_GSTREAMER
 #  include "engines/gstengine.h"
 #endif
-#ifdef HAVE_VLC
+#ifdef HAVE_LIBVLC
 #  include "engines/vlcengine.h"
 #endif
-#ifdef HAVE_XINE
+#ifdef HAVE_LIBXINE
 #  include "engines/xine-engine.h"
 #endif
 #ifdef HAVE_QT_PHONON
@@ -101,12 +101,12 @@ EngineBase* Player::createEngine(Engine::Type engine) {
       return new GstEngine();
       break;
 #endif
-#ifdef HAVE_VLC
+#ifdef HAVE_LIBVLC
     case Engine::vlc:
       return new VlcEngine();
       break;
 #endif
-#ifdef HAVE_XINE
+#ifdef HAVE_LIBXINE
     case Engine::xine:
       return new XineEngine();
       break;

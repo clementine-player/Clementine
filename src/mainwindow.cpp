@@ -38,7 +38,9 @@
 #include "xspfparser.h"
 #include "playlistsequence.h"
 #include "groupbydialog.h"
-#include "engines/gstengine.h"
+#ifdef HAVE_GSTREAMER
+# include "engines/gstengine.h"
+#endif
 #include "equalizer.h"
 #include "commandlineoptions.h"
 #include "mac_startup.h"
@@ -115,8 +117,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   // Start initialising the player
   player_->Init();
 
+#ifdef HAVE_GSTREAMER
   if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine()))
     settings_dialog_->SetGstEngine(engine);
+#endif
 
   // Models
   library_sort_model_->setSourceModel(library_);

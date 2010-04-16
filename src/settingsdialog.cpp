@@ -19,7 +19,9 @@
 #include "osd.h"
 #include "osdpretty.h"
 #include "mainwindow.h"
-#include "engines/gstengine.h"
+#ifdef HAVE_GSTREAMER
+# include "engines/gstengine.h"
+#endif
 
 #include <QSettings>
 #include <QColorDialog>
@@ -40,7 +42,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   connect(ui_.fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
   connect(ui_.fading_out, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
   connect(ui_.fading_auto, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
+#ifdef HAVE_GSTREAMER
   connect(ui_.gst_plugin, SIGNAL(currentIndexChanged(int)), SLOT(GstPluginChanged(int)));
+#endif
 
   // Behaviour
   connect(ui_.b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
@@ -122,10 +126,12 @@ void SettingsDialog::accept() {
   s.setValue("AutoCrossfadeEnabled", ui_.fading_auto->isChecked());
   s.endGroup();
 
+#ifdef HAVE_GSTREAMER
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", ui_.gst_plugin->itemData(ui_.gst_plugin->currentIndex()).toString());
   s.setValue("device", ui_.gst_device->text());
   s.endGroup();
+#endif
 
   // Notifications
   OSD::Behaviour osd_behaviour;
@@ -181,6 +187,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_.fading_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
   s.endGroup();
 
+#ifdef HAVE_GSTREAMER
   s.beginGroup(GstEngine::kSettingsGroup);
   QString sink = s.value("sink", GstEngine::kAutoSink).toString();
   ui_.gst_plugin->setCurrentIndex(0);
@@ -192,6 +199,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   }
   ui_.gst_device->setText(s.value("device").toString());
   s.endGroup();
+#endif
 
   // Notifications
   s.beginGroup(OSD::kSettingsGroup);
@@ -308,6 +316,7 @@ void SettingsDialog::ShowTrayIconToggled(bool on) {
     ui_.b_remember_->setChecked(true);
 }
 
+#ifdef HAVE_GSTREAMER
 void SettingsDialog::SetGstEngine(const GstEngine *engine) {
   GstEngine::PluginDetailsList list = engine->GetOutputsList();
 
@@ -329,6 +338,7 @@ void SettingsDialog::GstPluginChanged(int index) {
   ui_.gst_device->setEnabled(enabled);
   ui_.gst_device_label->setEnabled(enabled);
 }
+#endif
 
 void SettingsDialog::FadingOptionsChanged() {
   ui_.fading_options->setEnabled(

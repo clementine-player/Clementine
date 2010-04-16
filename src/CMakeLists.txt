@@ -164,8 +164,8 @@ set(XINE_ENGINE_MOC
 # try to add engines
 include(AddEngine.cmake)
 add_engine(gst "${GST_ENGINE_LIB}" "${GST_ENGINE_SRC}" "${GST_ENGINE_MOC}" ON)
-add_engine(vlc VLC engines/vlcengine.cpp engines/vlcengine.h OFF)
-add_engine(xine XINE "${XINE_ENGINE_SRC}" "${XINE_ENGINE_MOC}" OFF)
+add_engine(vlc LIBVLC engines/vlcengine.cpp engines/vlcengine.h OFF)
+add_engine(xine LIBXINE "${XINE_ENGINE_SRC}" "${XINE_ENGINE_MOC}" OFF)
 add_engine(qt-phonon QT_PHONON engines/phononengine.cpp engines/phononengine.h OFF)
 print_engines()
 

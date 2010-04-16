@@ -23,7 +23,9 @@
 
 class LibraryDirectoryModel;
 class OSDPretty;
+#ifdef HAVE_GSTREAMER
 class GstEngine;
+#endif
 
 class SettingsDialog : public QDialog {
   Q_OBJECT
@@ -33,7 +35,9 @@ class SettingsDialog : public QDialog {
   ~SettingsDialog();
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
+#ifdef HAVE_GSTREAMER
   void SetGstEngine(const GstEngine* engine);
+#endif
 
   // QDialog
   void accept();
@@ -54,7 +58,9 @@ class SettingsDialog : public QDialog {
 
   void UpdatePopupVisible();
   void ShowTrayIconToggled(bool on);
+#ifdef HAVE_GSTREAMER
   void GstPluginChanged(int index);
+#endif
   void FadingOptionsChanged();
 
  private:
