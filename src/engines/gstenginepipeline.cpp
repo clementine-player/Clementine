@@ -203,8 +203,12 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   gchar* debugs;
 
   gst_message_parse_error(msg, &error, &debugs);
+  QString message(error->message);
 
-  emit Error(QString::fromAscii(error->message));
+  g_error_free(error);
+  free(debugs);
+
+  emit Error(message);
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
