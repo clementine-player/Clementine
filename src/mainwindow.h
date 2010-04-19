@@ -168,6 +168,8 @@ class MainWindow : public QMainWindow {
 
   QTimer* track_position_timer_;
   QSettings settings_;
+
+  bool was_maximized_;
 };
 
 #endif // MAINWINDOW_H

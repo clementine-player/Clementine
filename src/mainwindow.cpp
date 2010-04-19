@@ -101,7 +101,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     equalizer_(new Equalizer),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
-    track_position_timer_(new QTimer(this))
+    track_position_timer_(new QTimer(this)),
+    was_maximized_(false)
 {
   ui_.setupUi(this);
 #ifndef Q_OS_DARWIN
@@ -625,7 +626,16 @@ void MainWindow::closeEvent(QCloseEvent* event) {
 
 void MainWindow::SetHiddenInTray(bool hidden) {
   settings_.setValue("hidden", hidden);
-  setVisible(!hidden);
+
+  if (hidden) {
+    was_maximized_ = isMaximized();
+    hide();
+  } else {
+    if (was_maximized_)
+      showMaximized();
+    else
+      show();
+  }
 }
 
 void MainWindow::ClearLibraryFilter() {
