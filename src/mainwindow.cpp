@@ -77,11 +77,7 @@ const char* MainWindow::kMediaFilterSpec =
 
 MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
-#ifdef Q_OS_DARWIN
-    tray_icon_(NULL),
-#else
     tray_icon_(new SystemTrayIcon(this)),
-#endif
     osd_(new OSD(tray_icon_, this)),
     track_slider_(new TrackSlider(this)),
     playlist_sequence_(new PlaylistSequence(this)),
@@ -105,10 +101,8 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     was_maximized_(false)
 {
   ui_.setupUi(this);
-#ifndef Q_OS_DARWIN
   tray_icon_->setIcon(windowIcon());
   tray_icon_->setToolTip(QCoreApplication::applicationName());
-#endif
 
   ui_.volume->setValue(player_->GetVolume());
 
@@ -501,10 +495,8 @@ void MainWindow::MediaStopped() {
 
   track_position_timer_->stop();
   track_slider_->SetStopped();
-#ifndef Q_OS_DARWIN
   tray_icon_->SetProgress(0);
   tray_icon_->SetStopped();
-#endif
 }
 
 void MainWindow::MediaPaused() {
@@ -517,9 +509,7 @@ void MainWindow::MediaPaused() {
 
   track_position_timer_->stop();
 
-#ifndef Q_OS_DARWIN
   tray_icon_->SetPaused();
-#endif
 }
 
 void MainWindow::MediaPlaying() {
@@ -542,9 +532,7 @@ void MainWindow::MediaPlaying() {
   track_position_timer_->start();
   UpdateTrackPosition();
 
-#ifndef Q_OS_DARWIN
   tray_icon_->SetPlaying();
-#endif
 }
 
 void MainWindow::ScrobblingEnabledChanged(bool value) {
@@ -668,9 +656,7 @@ void MainWindow::UpdateTrackPosition() {
   if (length <= 0) {
     // Probably a stream that we don't know the length of
     track_slider_->SetStopped();
-#ifndef Q_OS_DARWIN
     tray_icon_->SetProgress(0);
-#endif
     return;
   }
 
@@ -686,12 +672,10 @@ void MainWindow::UpdateTrackPosition() {
   // Update the slider
   track_slider_->SetValue(position, length);
 
-#ifndef Q_OS_DARWIN
   // Update the tray icon every 10 seconds
   if (position % 10 == 1) {
     tray_icon_->SetProgress(double(position) / length * 100);
   }
-#endif
 }
 
 void MainWindow::Love() {

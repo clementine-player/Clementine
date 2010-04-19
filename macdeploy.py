@@ -78,7 +78,6 @@ GSTREAMER_PLUGINS=[
     'libgstmpegaudioparse.so',
     'libgstmusepack.so',
     'libgstogg.so',
-    'libgstpnm.so',
     'libgstvorbis.so',
 
     # HTTP src support

@@ -16,9 +16,11 @@
 
 #include "systemtrayicon.h"
 
+#include <QApplication>
 #include <QEvent>
 #include <QWheelEvent>
 #include <QPainter>
+#include <QWidget>
 #include <QtDebug>
 
 #include <cmath>
@@ -29,6 +31,9 @@ SystemTrayIcon::SystemTrayIcon(QObject* parent)
     paused_icon_(":/tiny-pause.png"),
     percentage_(0)
 {
+#ifdef Q_OS_DARWIN
+  hide();
+#endif
 }
 
 SystemTrayIcon::~SystemTrayIcon() {}
@@ -48,8 +53,16 @@ void SystemTrayIcon::SetProgress(int percentage) {
 
 void SystemTrayIcon::Update() {
   if (icon_.isNull()) {
+#ifdef Q_OS_DARWIN
+    QIcon big_icon(":icon_large.png");
+    icon_ = big_icon.pixmap(128, 128, QIcon::Normal);
+    QIcon big_grey_icon(":icon_large_grey.png");
+    grey_icon_ = big_grey_icon.pixmap(128, 128, QIcon::Normal);
+    grey_icon_.save("grey.png");
+#else
     icon_ = icon().pixmap(geometry().size(), QIcon::Normal);
     grey_icon_ = icon().pixmap(geometry().size(), QIcon::Disabled);
+#endif
 
     if (icon_.isNull())
       return;
@@ -93,7 +106,13 @@ void SystemTrayIcon::Update() {
 
   p.end();
 
+#ifdef Q_OS_DARWIN
+  // Setting main window icon.
+  QApplication::setWindowIcon(icon);
+  icon.save("icon.png");
+#else
   setIcon(icon);
+#endif
 }
 
 void SystemTrayIcon::SetPaused() {
