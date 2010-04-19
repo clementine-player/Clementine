@@ -205,6 +205,7 @@ set(CLEMENTINE-RESOURCES
 
 set(CLEMENTINE-LANGUAGES
   cs
+  da_DK
   de
   el
   en_GB
