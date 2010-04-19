@@ -246,17 +246,24 @@ void OSDPretty::FaderValueChanged(qreal value) {
 void OSDPretty::Reposition() {
   QDesktopWidget* desktop = QApplication::desktop();
 
+  // Make the OSD the proper size
   layout()->activate();
   resize(sizeHint());
 
+  // Work out where to place the OSD.  -1 for x or y means "on the right or
+  // bottom edge".
   QRect geometry(desktop->availableGeometry(popup_display_));
 
-  int x = popup_pos_.x() + geometry.left();
-  int y = popup_pos_.y() + geometry.top();
+  int x = popup_pos_.x() < 0 ? geometry.right() - width()
+                             : geometry.left() + popup_pos_.x();
+  int y = popup_pos_.y() < 0 ? geometry.bottom() - height()
+                             : geometry.top() + popup_pos_.y();
 
   move(qBound(0, x, geometry.right() - width()),
        qBound(0, y, geometry.bottom() - height()));
 
+  // If there's no compositing window manager running then we have to set an
+  // XShape mask.
   if (IsTransparencyAvailable())
     clearMask();
   else {
@@ -313,8 +320,12 @@ QPoint OSDPretty::current_pos() const {
   QDesktopWidget* desktop = QApplication::desktop();
   QRect geometry(desktop->availableGeometry(current_display()));
 
-  return QPoint(pos().x() - geometry.left(),
-                pos().y() - geometry.top());
+  int x = pos().x() >= geometry.right() - width()
+          ? -1 : pos().x() - geometry.left();
+  int y = pos().y() >= geometry.bottom() - height()
+          ? -1 : pos().y() - geometry.top();
+
+  return QPoint(x, y);
 }
 
 int OSDPretty::current_display() const {
