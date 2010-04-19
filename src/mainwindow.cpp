@@ -310,11 +310,22 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(library_config_dialog_.get(), SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
 
   // Playlist menu
+  QAction* playlist_undo = playlist_->undo_stack()->createUndoAction(this);
+  QAction* playlist_redo = playlist_->undo_stack()->createRedoAction(this);
+  playlist_undo->setIcon(QIcon(":edit-undo.png"));
+  playlist_undo->setShortcut(QKeySequence::Undo);
+  playlist_redo->setIcon(QIcon(":edit-redo.png"));
+  playlist_redo->setShortcut(QKeySequence::Redo);
+  addAction(playlist_undo); // These seem to be required to get the keyboard
+  addAction(playlist_redo); // shortcuts to work
+
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_.action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_remove_from_playlist);
+  playlist_menu_->addAction(playlist_undo);
+  playlist_menu_->addAction(playlist_redo);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_.action_edit_track);
   playlist_menu_->addAction(ui_.action_edit_value);

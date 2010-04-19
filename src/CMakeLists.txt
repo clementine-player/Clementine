@@ -75,6 +75,7 @@ set(CLEMENTINE-SOURCES
     settingsprovider.cpp
     libraryplaylistitem.cpp
     scopedtransaction.cpp
+    playlistundocommands.cpp
 )
 
 # Header files that have Q_OBJECT in

@@ -23,6 +23,7 @@
 #include "savedradio.h"
 #include "librarybackend.h"
 #include "libraryplaylistitem.h"
+#include "playlistundocommands.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -30,6 +31,7 @@
 #include <QSettings>
 #include <QFileInfo>
 #include <QDirIterator>
+#include <QUndoStack>
 
 #include <boost/bind.hpp>
 #include <algorithm>
@@ -50,7 +52,8 @@ Playlist::Playlist(QObject *parent, SettingsProvider* settings)
     scrobble_point_(-1),
     has_scrobbled_(false),
     playlist_sequence_(NULL),
-    ignore_sorting_(false)
+    ignore_sorting_(false),
+    undo_stack_(new QUndoStack(this))
 {
   settings_->set_group(kSettingsGroup);
 
@@ -352,48 +355,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     stream >> source_rows;
     qStableSort(source_rows); // Make sure we take them in order
 
-    layoutAboutToBeChanged();
-    PlaylistItemList moved_items;
-
-    // Take the items out of the list first, keeping track of whether the
-    // insertion point changes
-    int offset = 0;
-    foreach (int source_row, source_rows) {
-      moved_items << items_.takeAt(source_row-offset);
-      if (row != -1 && row >= source_row)
-        row --;
-      offset++;
-    }
-
-    // Put the items back in
-    const int start = row == -1 ? items_.count() : row;
-    for (int i=start ; i<start+moved_items.count() ; ++i) {
-      items_.insert(i, moved_items[i - start]);
-    }
-
-    // Update persistent indexes
-    foreach (const QModelIndex& pidx, persistentIndexList()) {
-      const int dest_offset = source_rows.indexOf(pidx.row());
-      if (dest_offset != -1) {
-        // This index was moved
-        changePersistentIndex(pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
-      } else {
-        int d = 0;
-        foreach (int source_row, source_rows) {
-          if (pidx.row() > source_row)
-            d --;
-        }
-        if (pidx.row() + d >= start)
-          d += source_rows.count();
-
-        changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
-      }
-    }
-    current_virtual_index_ = virtual_items_.indexOf(current_index());
-
-    layoutChanged();
-    Save();
-
+    undo_stack_->push(new PlaylistUndoCommands::MoveItems(this, source_rows, row));
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
     InsertPaths(data->urls(), row);
@@ -402,7 +364,95 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
   return true;
 }
 
-QModelIndex Playlist::InsertPaths(QList<QUrl> urls, int after) {
+void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
+  layoutAboutToBeChanged();
+  PlaylistItemList moved_items;
+
+  // Take the items out of the list first, keeping track of whether the
+  // insertion point changes
+  int offset = 0;
+  foreach (int source_row, source_rows) {
+    moved_items << items_.takeAt(source_row-offset);
+    if (pos != -1 && pos >= source_row)
+      pos --;
+    offset++;
+  }
+
+  // Put the items back in
+  const int start = pos == -1 ? items_.count() : pos;
+  for (int i=start ; i<start+moved_items.count() ; ++i) {
+    items_.insert(i, moved_items[i - start]);
+  }
+
+  // Update persistent indexes
+  foreach (const QModelIndex& pidx, persistentIndexList()) {
+    const int dest_offset = source_rows.indexOf(pidx.row());
+    if (dest_offset != -1) {
+      // This index was moved
+      changePersistentIndex(pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
+    } else {
+      int d = 0;
+      foreach (int source_row, source_rows) {
+        if (pidx.row() > source_row)
+          d --;
+      }
+      if (pidx.row() + d >= start)
+        d += source_rows.count();
+
+      changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
+    }
+  }
+  current_virtual_index_ = virtual_items_.indexOf(current_index());
+
+  layoutChanged();
+  Save();
+}
+
+void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
+  layoutAboutToBeChanged();
+  PlaylistItemList moved_items;
+
+  if (start == -1)
+    start = items_.count() - dest_rows.count();
+
+  // Take the items out of the list first, keeping track of whether the
+  // insertion point changes
+  for (int i=start ; i<start + dest_rows.count() ; ++i)
+    moved_items << items_.takeAt(start);
+
+  // Put the items back in
+  int offset = 0;
+  foreach (int dest_row, dest_rows) {
+    items_.insert(dest_row, moved_items[offset]);
+    offset ++;
+  }
+
+  // Update persistent indexes
+  foreach (const QModelIndex& pidx, persistentIndexList()) {
+    if (pidx.row() >= start && pidx.row() < start + dest_rows.count()) {
+      // This index was moved
+      const int i = pidx.row() - start;
+      changePersistentIndex(pidx, index(dest_rows[i], pidx.column(), QModelIndex()));
+    } else {
+      int d = 0;
+      if (pidx.row() >= start + dest_rows.count())
+        d -= dest_rows.count();
+
+      foreach (int dest_row, dest_rows) {
+        if (pidx.row() + d > dest_row)
+          d ++;
+      }
+
+      changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
+    }
+  }
+  current_virtual_index_ = virtual_items_.indexOf(current_index());
+
+  layoutChanged();
+  Save();
+}
+
+QModelIndex Playlist::InsertPaths(QList<QUrl> urls, int pos) {
   SongList songs;
   for (int i=0 ; i<urls.count() ; ++i) {
     QUrl url(urls[i]);
@@ -438,14 +488,25 @@ QModelIndex Playlist::InsertPaths(QList<QUrl> urls, int after) {
     }
   }
 
-  return InsertSongs(songs, after);
+  return InsertSongs(songs, pos);
 }
 
-QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int after) {
+QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int pos) {
   if (items.isEmpty())
     return QModelIndex();
 
-  const int start = after == -1 ? items_.count() : after;
+  const int start = pos == -1 ? items_.count() : pos;
+  undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos));
+
+  return index(start, 0);
+}
+
+QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
+                                             int pos) {
+  if (items.isEmpty())
+    return QModelIndex();
+
+  const int start = pos == -1 ? items_.count() : pos;
   const int end = start + items.count() - 1;
 
   beginInsertRows(QModelIndex(), start, end);
@@ -461,23 +522,23 @@ QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int after) {
   return index(start, 0);
 }
 
-QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int after) {
+QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     items << shared_ptr<PlaylistItem>(new LibraryPlaylistItem(song));
   }
-  return InsertItems(items, after);
+  return InsertItems(items, pos);
 }
 
-QModelIndex Playlist::InsertSongs(const SongList& songs, int after) {
+QModelIndex Playlist::InsertSongs(const SongList& songs, int pos) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     items << shared_ptr<PlaylistItem>(new SongPlaylistItem(song));
   }
-  return InsertItems(items, after);
+  return InsertItems(items, pos);
 }
 
-QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int after) {
+QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos) {
   PlaylistItemList playlist_items;
   foreach (RadioItem* item, items) {
     if (!item->playable)
@@ -486,16 +547,16 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int af
     playlist_items << shared_ptr<PlaylistItem>(
         new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist()));
   }
-  return InsertItems(playlist_items, after);
+  return InsertItems(playlist_items, pos);
 }
 
-QModelIndex Playlist::InsertStreamUrls(const QList<QUrl>& urls, int after) {
+QModelIndex Playlist::InsertStreamUrls(const QList<QUrl>& urls, int pos) {
   PlaylistItemList playlist_items;
   foreach (const QUrl& url, urls) {
     playlist_items << shared_ptr<PlaylistItem>(new RadioPlaylistItem(
         RadioModel::ServiceByName(SavedRadio::kServiceName), url.toString(), url.toString(), QString()));
   }
-  return InsertItems(playlist_items, after);
+  return InsertItems(playlist_items, pos);
 }
 
 QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
@@ -613,6 +674,9 @@ void Playlist::sort(int column, Qt::SortOrder order) {
 
   layoutChanged();
 
+  // TODO
+  undo_stack_->clear();
+
   Save();
 }
 
@@ -676,11 +740,21 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
   if (row < 0 || row >= items_.size() || row + count > items_.size()) {
     return false;
   }
-  beginRemoveRows(parent, row, row+count-1);
+
+  undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, row, count));
+  return true;
+}
+
+PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
+  if (row < 0 || row >= items_.size() || row + count > items_.size()) {
+    return PlaylistItemList();
+  }
+  beginRemoveRows(QModelIndex(), row, row+count-1);
 
   // Remove items
+  PlaylistItemList ret;
   for (int i=0 ; i<count ; ++i)
-    items_.removeAt(row);
+    ret << items_.takeAt(row);
 
   endRemoveRows();
 
@@ -701,7 +775,7 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
     current_virtual_index_ = virtual_items_.indexOf(current_index());
 
   Save();
-  return true;
+  return ret;
 }
 
 void Playlist::StopAfter(int row) {
@@ -787,11 +861,7 @@ void Playlist::UpdateScrobblePoint() {
 }
 
 void Playlist::Clear() {
-  items_.clear();
-  virtual_items_.clear();
-  reset();
-
-  current_virtual_index_ = -1;
+  undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, 0, items_.count()));
 
   Save();
 }
@@ -821,6 +891,9 @@ void Playlist::Shuffle() {
   }
 
   layoutChanged();
+
+  // TODO
+  undo_stack_->clear();
 
   Save();
 }

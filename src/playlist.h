@@ -31,8 +31,20 @@
 class RadioService;
 class LibraryBackendInterface;
 
+class QUndoStack;
+
+namespace PlaylistUndoCommands {
+  class InsertItems;
+  class RemoveItems;
+  class MoveItems;
+}
+
 class Playlist : public QAbstractListModel {
   Q_OBJECT
+
+  friend class PlaylistUndoCommands::InsertItems;
+  friend class PlaylistUndoCommands::RemoveItems;
+  friend class PlaylistUndoCommands::MoveItems;
 
  public:
   Playlist(QObject* parent = 0, SettingsProvider* settings = NULL);
@@ -100,18 +112,20 @@ class Playlist : public QAbstractListModel {
   void set_sequence(PlaylistSequence* v);
   PlaylistSequence* sequence() const { return playlist_sequence_; }
 
+  QUndoStack* undo_stack() const { return undo_stack_; }
+
   // Scrobbling
   int scrobble_point() const { return scrobble_point_; }
   bool has_scrobbled() const { return has_scrobbled_; }
   void set_scrobbled(bool v) { has_scrobbled_ = v; }
 
   // Changing the playlist
-  QModelIndex InsertItems(const PlaylistItemList& items, int after = -1);
-  QModelIndex InsertLibraryItems(const SongList& items, int after = -1);
-  QModelIndex InsertSongs(const SongList& items, int after = -1);
-  QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int after = -1);
-  QModelIndex InsertStreamUrls(const QList<QUrl>& urls, int after = -1);
-  QModelIndex InsertPaths(QList<QUrl> urls, int after = -1);
+  QModelIndex InsertItems(const PlaylistItemList& items, int pos = -1);
+  QModelIndex InsertLibraryItems(const SongList& items, int pos = -1);
+  QModelIndex InsertSongs(const SongList& items, int pos = -1);
+  QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1);
+  QModelIndex InsertStreamUrls(const QList<QUrl>& urls, int pos = -1);
+  QModelIndex InsertPaths(QList<QUrl> urls, int pos = -1);
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 
@@ -159,6 +173,13 @@ class Playlist : public QAbstractListModel {
   void ReshuffleIndices();
   int NextVirtualIndex(int i) const;
 
+  // Modify the playlist without changing the undo stack.  These are used by
+  // our friends in PlaylistUndoCommands
+  QModelIndex InsertItemsWithoutUndo(const PlaylistItemList& items, int pos);
+  PlaylistItemList RemoveItemsWithoutUndo(int pos, int count);
+  void MoveItemsWithoutUndo(const QList<int>& source_rows, int pos);
+  void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
+
  private:
   boost::scoped_ptr<SettingsProvider> settings_;
 
@@ -183,6 +204,8 @@ class Playlist : public QAbstractListModel {
 
   // Hack to stop QTreeView::setModel sorting the playlist
   bool ignore_sorting_;
+
+  QUndoStack* undo_stack_;
 };
 
 #endif // PLAYLIST_H
