@@ -208,6 +208,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
 
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
+  connect(player_, SIGNAL(PlaylistFinished()), osd_, SLOT(PlaylistFinished()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_.volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));

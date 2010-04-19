@@ -159,6 +159,7 @@ void Player::NextItem(Engine::TrackChangeType change) {
   int i = playlist_->next_index();
   playlist_->set_current_index(i);
   if (i == -1) {
+    emit PlaylistFinished();
     Stop();
     return;
   }

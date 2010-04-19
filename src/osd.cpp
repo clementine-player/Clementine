@@ -31,6 +31,7 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
     show_on_volume_change_(false),
     show_art_(true),
     force_show_next_(false),
+    ignore_next_stopped_(false),
     pretty_popup_(new OSDPretty)
 {
   ReloadSettings();
@@ -80,6 +81,18 @@ void OSD::Paused() {
 }
 
 void OSD::Stopped() {
+  if (ignore_next_stopped_) {
+    ignore_next_stopped_ = false;
+    return;
+  }
+
+  ShowMessage(QCoreApplication::applicationName(), tr("Stopped"));
+}
+
+void OSD::PlaylistFinished() {
+  // We get a PlaylistFinished followed by a Stopped from the player
+  ignore_next_stopped_ = true;
+
   ShowMessage(QCoreApplication::applicationName(), tr("Playlist finished"));
 }
 

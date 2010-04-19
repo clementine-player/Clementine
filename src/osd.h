@@ -64,6 +64,7 @@ class OSD : public QObject {
   void SongChanged(const Song& song);
   void Paused();
   void Stopped();
+  void PlaylistFinished();
   void VolumeChanged(int value);
 
  private:
@@ -90,6 +91,7 @@ class OSD : public QObject {
   bool show_art_;
 
   bool force_show_next_;
+  bool ignore_next_stopped_;
 
   OSDPretty* pretty_popup_;
 

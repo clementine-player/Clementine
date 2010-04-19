@@ -127,6 +127,7 @@ class Player : public QObject {
   void Playing();
   void Paused();
   void Stopped();
+  void PlaylistFinished();
   void VolumeChanged(int volume);
   void Error(const QString& message);
 
