@@ -24,7 +24,10 @@
 #include <cmath>
 
 SystemTrayIcon::SystemTrayIcon(QObject* parent)
-  : QSystemTrayIcon(parent)
+  : QSystemTrayIcon(parent),
+    playing_icon_(":/tiny-start.png"),
+    paused_icon_(":/tiny-pause.png"),
+    percentage_(0)
 {
 }
 
@@ -39,6 +42,11 @@ bool SystemTrayIcon::event(QEvent* event) {
 }
 
 void SystemTrayIcon::SetProgress(int percentage) {
+  percentage_ = percentage;
+  Update();
+}
+
+void SystemTrayIcon::Update() {
   if (icon_.isNull()) {
     icon_ = icon().pixmap(geometry().size(), QIcon::Normal);
     grey_icon_ = icon().pixmap(geometry().size(), QIcon::Disabled);
@@ -51,7 +59,7 @@ void SystemTrayIcon::SetProgress(int percentage) {
 
   // The angle of the line that's used to cover the icon.
   // Centered on rect.topRight()
-  double angle = double(100 - percentage) / 100.0 * M_PI_2 + M_PI;
+  double angle = double(100 - percentage_) / 100.0 * M_PI_2 + M_PI;
   double length = sqrt(pow(rect.width(), 2.0) + pow(rect.height(), 2.0));
 
   QPolygon mask;
@@ -60,7 +68,7 @@ void SystemTrayIcon::SetProgress(int percentage) {
       length * sin(angle),
       - length * cos(angle));
 
-  if (percentage > 50)
+  if (percentage_ > 50)
     mask << rect.bottomLeft();
 
   mask << rect.topLeft();
@@ -68,9 +76,37 @@ void SystemTrayIcon::SetProgress(int percentage) {
 
   QPixmap icon(icon_);
   QPainter p(&icon);
+
+  // Draw the grey bit over the orange icon
   p.setClipRegion(mask);
   p.drawPixmap(0, 0, grey_icon_);
+  p.setClipping(false);
+
+  // Draw the playing or paused icon in the top-right
+  if (!current_state_icon_.isNull()) {
+    int height = rect.height() / 2;
+    QPixmap scaled(current_state_icon_.scaledToHeight(height, Qt::SmoothTransformation));
+
+    QRect state_rect(rect.width() - scaled.width(), 0, scaled.width(), scaled.height());
+    p.drawPixmap(state_rect, scaled);
+  }
+
   p.end();
 
   setIcon(icon);
+}
+
+void SystemTrayIcon::SetPaused() {
+  current_state_icon_ = paused_icon_;
+  Update();
+}
+
+void SystemTrayIcon::SetPlaying() {
+  current_state_icon_ = playing_icon_;
+  Update();
+}
+
+void SystemTrayIcon::SetStopped() {
+  current_state_icon_ = QPixmap();
+  Update();
 }

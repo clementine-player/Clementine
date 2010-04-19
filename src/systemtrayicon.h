@@ -30,13 +30,23 @@ class SystemTrayIcon : public QSystemTrayIcon {
 
  public slots:
   void SetProgress(int percentage);
+  void SetPaused();
+  void SetPlaying();
+  void SetStopped();
 
  signals:
   void WheelEvent(int delta);
 
  private:
+  void Update();
+
   QPixmap icon_;
   QPixmap grey_icon_;
+  QPixmap playing_icon_;
+  QPixmap paused_icon_;
+
+  int percentage_;
+  QPixmap current_state_icon_;
 };
 
 #endif // SYSTEMTRAYICON_H

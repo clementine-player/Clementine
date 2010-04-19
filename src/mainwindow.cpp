@@ -491,6 +491,7 @@ void MainWindow::MediaStopped() {
   track_slider_->SetStopped();
 #ifndef Q_OS_DARWIN
   tray_icon_->SetProgress(0);
+  tray_icon_->SetStopped();
 #endif
 }
 
@@ -503,6 +504,10 @@ void MainWindow::MediaPaused() {
   ui_.action_play_pause->setEnabled(true);
 
   track_position_timer_->stop();
+
+#ifndef Q_OS_DARWIN
+  tray_icon_->SetPaused();
+#endif
 }
 
 void MainWindow::MediaPlaying() {
@@ -524,6 +529,10 @@ void MainWindow::MediaPlaying() {
 
   track_position_timer_->start();
   UpdateTrackPosition();
+
+#ifndef Q_OS_DARWIN
+  tray_icon_->SetPlaying();
+#endif
 }
 
 void MainWindow::ScrobblingEnabledChanged(bool value) {
