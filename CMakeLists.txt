@@ -33,6 +33,8 @@ if(WIN32)
     PATH_SUFFIXES ../lib/glib/include ../lib/glib-2.0/include)
   find_path(LIBXML_INCLUDE_DIRS libxml/parser.h
     PATH_SUFFIXES libxml libxml2)
+  find_path(GSTREAMER_INCLUDE_DIRS gst/gst.h
+    PATH_SUFFIXES gstreamer-0.10)
   find_library(GSTREAMER_LIBRARIES gstreamer-0.10)
   find_library(GSTREAMER_BASE_LIBRARIES gstbase-0.10)
   find_library(GLIB_LIBRARIES glib-2.0)
