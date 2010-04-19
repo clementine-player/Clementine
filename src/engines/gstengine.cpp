@@ -435,6 +435,8 @@ void GstEngine::HandlePipelineError(const QString& message) {
   qWarning() << "Gstreamer error:" << message;
 
   current_pipeline_.reset();
+  emit Error(message);
+  emit StateChanged(Engine::Empty);
 }
 
 

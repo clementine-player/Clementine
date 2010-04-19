@@ -77,6 +77,7 @@ class GstEnginePipeline : public QObject {
   static void EventCallback(GstPad*, GstEvent*, gpointer);
   void TagMessageReceived(GstMessage*);
   QString ParseTag(GstTagList* list, const char* tag) const;
+  void ErrorMessageReceived(GstMessage*);
 
   void UpdateVolume();
 
@@ -112,6 +113,7 @@ class GstEnginePipeline : public QObject {
   GstElement* audiosink_;
 
   uint event_cb_id_;
+  uint bus_cb_id_;
 };
 
 #endif // GSTENGINEPIPELINE_H

@@ -72,8 +72,8 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   } else {
     src_ = GstEngine::CreateElement("giosrc");
   }
-  if (!src_)
-    return false;
+  if (!src_)      // CreateElement will have shown an error dialog, so no need
+    return false; // one of our own.
 
   g_object_set(G_OBJECT(src_), "location", url.toEncoded().constData(), NULL);
   gst_bin_add(GST_BIN(pipeline_), src_);
@@ -135,7 +135,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
                         audioscale_, convert, audiosink_, NULL);
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
-  gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
+  bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
 
   return true;
 }
@@ -149,6 +149,8 @@ GstEnginePipeline::~GstEnginePipeline() {
   }
 
   if (pipeline_) {
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
+    g_source_remove(bus_cb_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(pipeline_));
   }
@@ -160,16 +162,9 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
   switch ( GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR: {
-      GError* error;
-      gchar* debugs;
-
-      gst_message_parse_error(msg, &error, &debugs);
-      qWarning() << "ERROR RECEIVED IN BUS_CB <" << error->message << ">" ;
-
-      emit instance->Error(QString::fromAscii(error->message));
+    case GST_MESSAGE_ERROR:
+      instance->ErrorMessageReceived(msg);
       break;
-    }
 
     case GST_MESSAGE_TAG:
       instance->TagMessageReceived(msg);
@@ -192,11 +187,24 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       instance->TagMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_ERROR:
+      instance->ErrorMessageReceived(msg);
+      break;
+
     default:
       break;
   }
 
   return GST_BUS_PASS;
+}
+
+void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
+  GError* error;
+  gchar* debugs;
+
+  gst_message_parse_error(msg, &error, &debugs);
+
+  emit Error(QString::fromAscii(error->message));
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
