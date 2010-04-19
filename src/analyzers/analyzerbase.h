@@ -46,7 +46,7 @@ public:
     void set_engine(EngineBase* engine) { m_engine = engine; }
 
 protected:
-    Base( QWidget*, uint timeout, uint scopeSize = 7 );
+    Base( QWidget*, uint scopeSize = 7 );
 
     void hideEvent(QHideEvent *);
     void showEvent(QShowEvent *);

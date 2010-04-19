@@ -8,7 +8,7 @@
 const char* BoomAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
 
 BoomAnalyzer::BoomAnalyzer( QWidget *parent )
-    : Analyzer::Base( parent, 10, 9 )
+    : Analyzer::Base( parent, 9 )
     , K_barHeight( 1.271 )//1.471
     , F_peakSpeed( 1.103 )//1.122
     , F( 1.0 )

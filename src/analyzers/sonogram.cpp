@@ -18,7 +18,7 @@
 const char* Sonogram::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Sonogram");
 
 Sonogram::Sonogram(QWidget *parent) :
-    Analyzer::Base(parent, 16, 9)
+    Analyzer::Base(parent, 9)
 {
 }
 

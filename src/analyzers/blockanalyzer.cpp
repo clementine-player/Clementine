@@ -24,7 +24,7 @@ const uint BlockAnalyzer::FADE_SIZE   = 90;
 const char* BlockAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Block analyzer");
 
 BlockAnalyzer::BlockAnalyzer( QWidget *parent )
-        : Analyzer::Base( parent, 20, 9 )
+        : Analyzer::Base( parent, 9 )
         , m_columns( 0 )         //uint
         , m_rows( 0 )            //uint
         , m_y( 0 )               //uint
