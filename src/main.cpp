@@ -138,6 +138,8 @@ int main(int argc, char *argv[]) {
   QString plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
   setenv("GST_PLUGIN_SCANNER", scanner_path.toAscii().constData(), 1);
   setenv("GST_PLUGIN_PATH", plugin_path.toAscii().constData(), 1);
+  // Never load plugins from anywhere else.
+  setenv("GST_PLUGIN_SYSTEM_PATH", plugin_path.toAscii().constData(), 1);
   #endif
 
   // Window
