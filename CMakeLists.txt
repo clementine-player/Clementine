@@ -15,6 +15,12 @@ if(UNIX AND NOT APPLE)
 endif(UNIX AND NOT APPLE)
 find_package(Qt4 COMPONENTS Phonon)
 
+if(APPLE)
+  if(NOT QT_MAC_USE_COCOA)
+    message(FATAL_ERROR "Cocoa support is required")
+  endif(NOT QT_MAC_USE_COCOA)
+endif(APPLE)
+
 find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
