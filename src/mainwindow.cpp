@@ -627,6 +627,8 @@ void MainWindow::closeEvent(QCloseEvent* event) {
 void MainWindow::SetHiddenInTray(bool hidden) {
   settings_.setValue("hidden", hidden);
 
+  // Some window managers don't remember maximized state between calls to
+  // hide() and show(), so we have to remember it ourself.
   if (hidden) {
     was_maximized_ = isMaximized();
     hide();
