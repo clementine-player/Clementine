@@ -109,7 +109,6 @@ void SystemTrayIcon::Update() {
 #ifdef Q_OS_DARWIN
   // Setting main window icon.
   QApplication::setWindowIcon(icon);
-  icon.save("icon.png");
 #else
   setIcon(icon);
 #endif
