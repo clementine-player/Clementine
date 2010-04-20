@@ -22,6 +22,7 @@
 #include "mock_playlistitem.h"
 
 #include <QtDebug>
+#include <QUndoStack>
 
 using boost::shared_ptr;
 using ::testing::Return;
@@ -262,6 +263,112 @@ TEST_F(PlaylistTest, Clear) {
   EXPECT_EQ(-1, playlist_.last_played_index());
   EXPECT_EQ(-1, playlist_.previous_index());
   EXPECT_EQ(-1, playlist_.next_index());
+}
+
+TEST_F(PlaylistTest, UndoAdd) {
+  EXPECT_FALSE(playlist_.undo_stack()->canUndo());
+  EXPECT_FALSE(playlist_.undo_stack()->canRedo());
+
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Title"));
+  EXPECT_EQ(1, playlist_.rowCount(QModelIndex()));
+  EXPECT_FALSE(playlist_.undo_stack()->canRedo());
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+
+  playlist_.undo_stack()->undo();
+  EXPECT_EQ(0, playlist_.rowCount(QModelIndex()));
+  EXPECT_FALSE(playlist_.undo_stack()->canUndo());
+  ASSERT_TRUE(playlist_.undo_stack()->canRedo());
+
+  playlist_.undo_stack()->redo();
+  EXPECT_EQ(1, playlist_.rowCount(QModelIndex()));
+  EXPECT_FALSE(playlist_.undo_stack()->canRedo());
+  EXPECT_TRUE(playlist_.undo_stack()->canUndo());
+
+  EXPECT_EQ("Title", playlist_.data(playlist_.index(0, Playlist::Column_Title)));
+}
+
+TEST_F(PlaylistTest, UndoMultiAdd) {
+  // Add 1 item
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("One"));
+
+  // Add 2 items
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Two") << MakeMockItemP("Three"));
+
+  // Undo adding 2 items
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+  EXPECT_EQ("add 2 songs", playlist_.undo_stack()->undoText());
+  playlist_.undo_stack()->undo();
+
+  // Undo adding 1 item
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+  EXPECT_EQ("add 1 songs", playlist_.undo_stack()->undoText());
+  playlist_.undo_stack()->undo();
+
+  EXPECT_FALSE(playlist_.undo_stack()->canUndo());
+}
+
+TEST_F(PlaylistTest, UndoRemove) {
+  EXPECT_FALSE(playlist_.undo_stack()->canUndo());
+  EXPECT_FALSE(playlist_.undo_stack()->canRedo());
+
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Title"));
+  playlist_.removeRow(0);
+
+  EXPECT_EQ(0, playlist_.rowCount(QModelIndex()));
+  EXPECT_FALSE(playlist_.undo_stack()->canRedo());
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+
+  playlist_.undo_stack()->undo();
+  EXPECT_EQ(1, playlist_.rowCount(QModelIndex()));
+  ASSERT_TRUE(playlist_.undo_stack()->canRedo());
+
+  EXPECT_EQ("Title", playlist_.data(playlist_.index(0, Playlist::Column_Title)));
+
+  playlist_.undo_stack()->redo();
+  EXPECT_EQ(0, playlist_.rowCount(QModelIndex()));
+  EXPECT_FALSE(playlist_.undo_stack()->canRedo());
+  EXPECT_TRUE(playlist_.undo_stack()->canUndo());
+}
+
+TEST_F(PlaylistTest, UndoMultiRemove) {
+  // Add 3 items
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
+  ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
+
+  // Remove 1 item
+  playlist_.removeRow(1); // Item "Two"
+
+  // Remove 2 items
+  playlist_.removeRows(0, 2); // "One" and "Three"
+
+  ASSERT_EQ(0, playlist_.rowCount(QModelIndex()));
+
+  // Undo removing 2 items
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+  EXPECT_EQ("remove 2 songs", playlist_.undo_stack()->undoText());
+  playlist_.undo_stack()->undo();
+  ASSERT_EQ(2, playlist_.rowCount(QModelIndex()));
+
+  // Undo removing 1 item
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+  EXPECT_EQ("remove 1 songs", playlist_.undo_stack()->undoText());
+  playlist_.undo_stack()->undo();
+  ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
+}
+
+TEST_F(PlaylistTest, UndoClear) {
+  playlist_.InsertItems(PlaylistItemList()
+      << MakeMockItemP("One") << MakeMockItemP("Two") << MakeMockItemP("Three"));
+  ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
+
+  playlist_.Clear();
+  ASSERT_EQ(0, playlist_.rowCount(QModelIndex()));
+  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
+  EXPECT_EQ("remove 3 songs", playlist_.undo_stack()->undoText());
+  playlist_.undo_stack()->undo();
+
+  ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 }
 
 
