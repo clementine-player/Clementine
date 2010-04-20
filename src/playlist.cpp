@@ -137,7 +137,7 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
 QVariant Playlist::data(const QModelIndex& index, int role) const {
   switch (role) {
     case Role_IsCurrent:
-      return current_item_.isValid() && index.row() == current_item_.row();
+      return current_item_index_.isValid() && index.row() == current_item_index_.row();
 
     case Role_IsPaused:
       return current_is_paused_;
@@ -197,11 +197,11 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
 }
 
 int Playlist::current_index() const {
-  return current_item_.isValid() ? current_item_.row() : -1;
+  return current_item_index_.isValid() ? current_item_index_.row() : -1;
 }
 
 int Playlist::last_played_index() const {
-  return last_played_item_.isValid() ? last_played_item_.row() : -1;
+  return last_played_item_index_.isValid() ? last_played_item_index_.row() : -1;
 }
 
 void Playlist::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
@@ -276,21 +276,24 @@ int Playlist::previous_index() const {
 }
 
 void Playlist::set_current_index(int i) {
-  QModelIndex old_current = current_item_;
+  QModelIndex old_current = current_item_index_;
   ClearStreamMetadata();
 
-  current_item_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
+  current_item_index_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
 
-  if (current_item_.isValid()) {
-    last_played_item_ = current_item_;
+  if (current_item_index_.isValid()) {
+    last_played_item_index_ = current_item_index_;
+    current_item_ = items_[current_item_index_.row()];
     Save();
+  } else {
+    current_item_.reset();
   }
 
   if (old_current.isValid())
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount));
 
-  if (current_item_.isValid() && current_item_ != old_current) {
-    emit dataChanged(current_item_, current_item_.sibling(current_item_.row(), ColumnCount));
+  if (current_item_index_.isValid() && current_item_index_ != old_current) {
+    emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount));
     emit CurrentSongChanged(current_item_metadata());
   }
 
@@ -511,8 +514,15 @@ QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
 
   beginInsertRows(QModelIndex(), start, end);
   for (int i=start ; i<=end ; ++i) {
-    items_.insert(i, items[i - start]);
+    boost::shared_ptr<PlaylistItem> item = items[i - start];
+    items_.insert(i, item);
     virtual_items_ << virtual_items_.count();
+
+    if (item == current_item_) {
+      // It's one we removed before that got re-added through an undo
+      current_item_index_ = index(i, 0);
+      last_played_item_index_ = current_item_index_;
+    }
   }
   endInsertRows();
 
@@ -698,9 +708,9 @@ void Playlist::SetCurrentIsPaused(bool paused) {
 
   current_is_paused_ = paused;
 
-  if (current_item_.isValid())
-    dataChanged(index(current_item_.row(), 0),
-                index(current_item_.row(), ColumnCount));
+  if (current_item_index_.isValid())
+    dataChanged(index(current_item_index_.row(), 0),
+                index(current_item_index_.row(), ColumnCount));
 }
 
 void Playlist::SetBackend(shared_ptr<LibraryBackendInterface> backend) {
@@ -733,7 +743,7 @@ void Playlist::Restore() {
 
   reset();
 
-  last_played_item_ = index(settings_->value("last_index", -1).toInt(), 0, QModelIndex());
+  last_played_item_index_ = index(settings_->value("last_index", -1).toInt(), 0, QModelIndex());
 }
 
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
@@ -793,63 +803,51 @@ void Playlist::StopAfter(int row) {
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
-  if (!current_item_.isValid())
+  if (!current_item_)
     return;
 
-  shared_ptr<PlaylistItem> item = items_[current_item_.row()];
-  if (item->Url() != url)
+  if (current_item_->Url() != url)
     return;
 
   // Don't update the metadata if it's only a minor change from before
-  if (item->Metadata().artist() == song.artist() &&
-      item->Metadata().title() == song.title())
+  if (current_item_->Metadata().artist() == song.artist() &&
+      current_item_->Metadata().title() == song.title())
     return;
 
-  item->SetTemporaryMetadata(song);
+  current_item_->SetTemporaryMetadata(song);
   UpdateScrobblePoint();
 
-  emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
+  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount));
   emit CurrentSongChanged(song);
 }
 
 void Playlist::ClearStreamMetadata() {
-  if (!current_item_.isValid())
+  if (!current_item_)
     return;
 
-  shared_ptr<PlaylistItem> item = items_[current_item_.row()];
-  item->ClearTemporaryMetadata();
+  current_item_->ClearTemporaryMetadata();
   UpdateScrobblePoint();
 
-  emit dataChanged(index(current_item_.row(), 0), index(current_item_.row(), ColumnCount));
+  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount));
 }
 
 bool Playlist::stop_after_current() const {
-  return stop_after_.isValid() && current_item_.isValid() &&
-         stop_after_.row() == current_item_.row();
-}
-
-shared_ptr<PlaylistItem> Playlist::current_item() const {
-  int i = current_index();
-  if (i == -1)
-    return shared_ptr<PlaylistItem>();
-
-  return item_at(i);
+  return stop_after_.isValid() && current_item_index_.isValid() &&
+         stop_after_.row() == current_item_index_.row();
 }
 
 PlaylistItem::Options Playlist::current_item_options() const {
-  shared_ptr<PlaylistItem> item = current_item();
-  if (!item)
+  if (!current_item_)
     return PlaylistItem::Default;
 
-  return item->options();
+  return current_item_->options();
 }
 
 Song Playlist::current_item_metadata() const {
-  shared_ptr<PlaylistItem> item = current_item();
-  if (!item)
+  if (!current_item_)
     return Song();
 
-  return item->Metadata();
+  return current_item_->Metadata();
 }
 
 void Playlist::UpdateScrobblePoint() {

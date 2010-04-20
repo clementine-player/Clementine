@@ -371,6 +371,38 @@ TEST_F(PlaylistTest, UndoClear) {
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 }
 
+TEST_F(PlaylistTest, UndoRemoveCurrent) {
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Title"));
+  playlist_.set_current_index(0);
+  EXPECT_EQ(0, playlist_.current_index());
+  EXPECT_EQ(0, playlist_.last_played_index());
+
+  playlist_.removeRow(0);
+  EXPECT_EQ(-1, playlist_.current_index());
+  EXPECT_EQ(-1, playlist_.last_played_index());
+
+  playlist_.undo_stack()->undo();
+  EXPECT_EQ(0, playlist_.current_index());
+  EXPECT_EQ(0, playlist_.last_played_index());
+}
+
+TEST_F(PlaylistTest, UndoRemoveOldCurrent) {
+  playlist_.InsertItems(PlaylistItemList() << MakeMockItemP("Title"));
+  playlist_.set_current_index(0);
+  EXPECT_EQ(0, playlist_.current_index());
+  EXPECT_EQ(0, playlist_.last_played_index());
+
+  playlist_.removeRow(0);
+  EXPECT_EQ(-1, playlist_.current_index());
+  EXPECT_EQ(-1, playlist_.last_played_index());
+
+  playlist_.set_current_index(-1);
+
+  playlist_.undo_stack()->undo();
+  EXPECT_EQ(-1, playlist_.current_index());
+  EXPECT_EQ(-1, playlist_.last_played_index());
+}
+
 
 } // namespace
 

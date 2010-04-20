@@ -104,7 +104,7 @@ class Playlist : public QAbstractListModel {
   bool stop_after_current() const;
 
   const boost::shared_ptr<PlaylistItem>& item_at(int index) const { return items_[index]; }
-  boost::shared_ptr<PlaylistItem> current_item() const;
+  boost::shared_ptr<PlaylistItem> current_item() const { return current_item_; }
 
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
@@ -189,11 +189,13 @@ class Playlist : public QAbstractListModel {
   QList<int> virtual_items_; // Contains the indices into items_ in the order
                              // that they will be played.
 
-  QPersistentModelIndex current_item_;
-  QPersistentModelIndex last_played_item_;
+  QPersistentModelIndex current_item_index_;
+  QPersistentModelIndex last_played_item_index_;
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;
+
+  boost::shared_ptr<PlaylistItem> current_item_;
 
   bool is_shuffled_;
 
