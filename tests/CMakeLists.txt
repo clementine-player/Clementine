@@ -54,11 +54,13 @@ add_custom_target(build_tests
 )
 add_dependencies(test build_tests)
 
-add_library(test_gui_main EXCLUDE_FROM_ALL main.cpp)
+qt4_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
+
+add_library(test_gui_main EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_gui_main clementine_lib)
 set_target_properties(test_gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
 
-add_library(test_main EXCLUDE_FROM_ALL main.cpp)
+add_library(test_main EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_main clementine_lib)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
@@ -98,3 +100,4 @@ add_test_file(songplaylistitem_test.cpp false)
 add_test_file(translations_test.cpp false)
 add_test_file(playlist_test.cpp true)
 add_test_file(scopedtransaction_test.cpp true)
+add_test_file(fileformats_test.cpp true)

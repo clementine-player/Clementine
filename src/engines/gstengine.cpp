@@ -53,19 +53,13 @@ GstEngine::GstEngine()
   : Engine::Base(),
     delayq_(g_queue_new()),
     current_sample_(0),
-    equalizer_enabled_(false),
-    can_decode_pipeline_(NULL),
-    can_decode_src_(NULL),
-    can_decode_bin_(NULL)
+    equalizer_enabled_(false)
 {
   ReloadSettings();
 }
 
 GstEngine::~GstEngine() {
   current_pipeline_.reset();
-
-  if (can_decode_pipeline_)
-    gst_object_unref(GST_OBJECT(can_decode_pipeline_));
 
   // Destroy scope delay queue
   ClearScopeBuffers();
@@ -117,21 +111,19 @@ bool GstEngine::CanDecode(const QUrl &url) {
   can_decode_last_ = false;
 
   // Create the pipeline
-  if (!can_decode_pipeline_) {
-    can_decode_pipeline_ = CreateElement("pipeline");
-    can_decode_src_ = CreateElement("giosrc", can_decode_pipeline_);
-    can_decode_bin_ = CreateElement("decodebin", can_decode_pipeline_);
+  GstElement* pipeline = CreateElement("pipeline");
+  GstElement* src = CreateElement("giosrc", pipeline);
+  GstElement* bin = CreateElement("decodebin", pipeline);
 
-    gst_element_link(can_decode_src_, can_decode_bin_);
-    g_signal_connect(G_OBJECT(can_decode_bin_), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), this);
-    g_signal_connect(G_OBJECT(can_decode_bin_), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), this);
-  }
+  gst_element_link(src, bin);
+  g_signal_connect(G_OBJECT(bin), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), this);
+  g_signal_connect(G_OBJECT(bin), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), this);
 
   // Set the file we're testing
-  g_object_set(G_OBJECT(can_decode_src_), "location", url.toEncoded().constData(), NULL);
+  g_object_set(G_OBJECT(src), "location", url.toEncoded().constData(), NULL);
 
   // Start the pipeline playing
-  gst_element_set_state(can_decode_pipeline_, GST_STATE_PLAYING);
+  gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
   // Wait until found audio stream
   int count = 0;
@@ -141,7 +133,8 @@ bool GstEngine::CanDecode(const QUrl &url) {
   }
 
   // Stop playing
-  gst_element_set_state(can_decode_pipeline_, GST_STATE_NULL);
+  gst_element_set_state(pipeline, GST_STATE_NULL);
+  gst_object_unref(pipeline);
 
   return can_decode_success_;
 }

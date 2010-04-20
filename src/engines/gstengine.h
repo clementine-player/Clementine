@@ -136,10 +136,6 @@ class GstEngine : public Engine::Base {
 
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
-
-  GstElement* can_decode_pipeline_;
-  GstElement* can_decode_src_;
-  GstElement* can_decode_bin_;
 };
 
 

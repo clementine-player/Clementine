@@ -26,6 +26,7 @@ public:
   void SetUp() {
     Q_INIT_RESOURCE(data);
     Q_INIT_RESOURCE(translations);
+    Q_INIT_RESOURCE(testdata);
   }
 };
 
