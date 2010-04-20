@@ -27,7 +27,12 @@ class OSDPretty : public QWidget {
   Q_OBJECT
 
  public:
-  OSDPretty(QWidget *parent = 0);
+  enum Mode {
+    Mode_Popup,
+    Mode_Draggable,
+  };
+
+  OSDPretty(Mode mode, QWidget *parent = 0);
 
   static const char* kSettingsGroup;
 
@@ -38,14 +43,8 @@ class OSDPretty : public QWidget {
   static const QRgb kPresetBlue;
   static const QRgb kPresetOrange;
 
-  enum Mode {
-    Mode_Popup,
-    Mode_Draggable,
-  };
-
   static bool IsTransparencyAvailable();
 
-  void SetMode(Mode mode);
   void SetMessage(const QString& summary,
                   const QString& message,
                   const QImage& image);

@@ -32,7 +32,7 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
     show_art_(true),
     force_show_next_(false),
     ignore_next_stopped_(false),
-    pretty_popup_(new OSDPretty)
+    pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup))
 {
   ReloadSettings();
   Init();

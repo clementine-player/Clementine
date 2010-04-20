@@ -31,10 +31,9 @@
 SettingsDialog::SettingsDialog(QWidget* parent)
   : QDialog(parent),
     loading_settings_(false),
-    pretty_popup_(new OSDPretty)
+    pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable))
 {
   ui_.setupUi(this);
-  pretty_popup_->SetMode(OSDPretty::Mode_Draggable);
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
 

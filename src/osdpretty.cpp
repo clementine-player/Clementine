@@ -43,9 +43,9 @@ const QRgb OSDPretty::kPresetBlue = qRgb(102, 150, 227);
 const QRgb OSDPretty::kPresetOrange = qRgb(254, 156, 67);
 
 
-OSDPretty::OSDPretty(QWidget *parent)
+OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   : QWidget(parent),
-    mode_(Mode_Popup),
+    mode_(mode),
     background_color_(kPresetBlue),
     background_opacity_(0.85),
     popup_display_(0),
@@ -53,12 +53,24 @@ OSDPretty::OSDPretty(QWidget *parent)
     fading_enabled_(false),
     fader_(new QTimeLine(300, this))
 {
-  setWindowFlags(Qt::SplashScreen |
-                 Qt::FramelessWindowHint |
-                 Qt::WindowStaysOnTopHint);
+  Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
+  if (mode == Mode_Popup)
+    flags |= Qt::SplashScreen;
+
+  setWindowFlags(flags);
   setAttribute(Qt::WA_TranslucentBackground, true);
   ui_.setupUi(this);
-  SetMode(mode_);
+
+  // Mode settings
+  switch (mode_) {
+  case Mode_Popup:
+    setCursor(QCursor(Qt::ArrowCursor));
+    break;
+
+  case Mode_Draggable:
+    setCursor(QCursor(Qt::OpenHandCursor));
+    break;
+  }
 
   // Timeout
   timeout_->setSingleShot(true);
@@ -116,20 +128,6 @@ void OSDPretty::ReloadSettings() {
   Load();
   if (isVisible())
     update();
-}
-
-void OSDPretty::SetMode(Mode mode) {
-  mode_ = mode;
-
-  switch (mode_) {
-  case Mode_Popup:
-    setCursor(QCursor(Qt::ArrowCursor));
-    break;
-
-  case Mode_Draggable:
-    setCursor(QCursor(Qt::OpenHandCursor));
-    break;
-  }
 }
 
 QRect OSDPretty::BoxBorder() const {
