@@ -32,6 +32,7 @@ class LibraryConfig : public QWidget {
   void SetModel(LibraryDirectoryModel* model);
 
  public slots:
+  void Load();
   void Save();
 
  protected:

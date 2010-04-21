@@ -246,6 +246,8 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_.notifications_bg_preset->setItemData(2, QColor(color), Qt::DecorationRole);
   UpdatePopupVisible();
 
+  ui_.library_config->Load();
+
   loading_settings_ = false;
 }
 

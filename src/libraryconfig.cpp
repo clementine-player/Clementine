@@ -85,6 +85,10 @@ void LibraryConfig::Save() {
 }
 
 void LibraryConfig::showEvent(QShowEvent *) {
+  Load();
+}
+
+void LibraryConfig::Load() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
 
