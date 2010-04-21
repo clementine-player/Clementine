@@ -55,6 +55,8 @@ class FileView : public QWidget {
    public:
     UndoCommand(FileView* view, const QString& new_path);
 
+    QString undo_path() const { return old_state_.path; }
+
     void undo();
     void redo();
 
