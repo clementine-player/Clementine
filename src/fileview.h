@@ -18,6 +18,7 @@
 #define FILEVIEW_H
 
 #include <QWidget>
+#include <QUndoCommand>
 
 #include "ui_fileview.h"
 
@@ -41,8 +42,6 @@ class FileView : public QWidget {
 
  private slots:
   void FileUp();
-  void FileBack();
-  void FileForward();
   void FileHome();
   void ChangeFilePath(const QString& new_path);
   void ItemActivated(const QModelIndex& index);
@@ -52,6 +51,27 @@ class FileView : public QWidget {
   void ChangeFilePathWithoutUndo(const QString& new_path);
 
  private:
+  class UndoCommand : public QUndoCommand {
+   public:
+    UndoCommand(FileView* view, const QString& new_path);
+
+    void undo();
+    void redo();
+
+   private:
+    struct State {
+      State() : scroll_pos(-1) {}
+
+      QString path;
+      QModelIndex index;
+      int scroll_pos;
+    };
+
+    FileView* view_;
+    State old_state_;
+    State new_state_;
+  };
+
   Ui::FileView ui_;
 
   QFileSystemModel* model_;

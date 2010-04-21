@@ -17,7 +17,7 @@
 #include "fileview.h"
 
 #include <QFileSystemModel>
-#include <QUndoStack>
+#include <QScrollBar>
 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
@@ -29,8 +29,8 @@ FileView::FileView(QWidget* parent)
   ui_.list->setModel(model_);
   ChangeFilePathWithoutUndo(QDir::homePath());
 
-  connect(ui_.back, SIGNAL(clicked()), SLOT(FileBack()));
-  connect(ui_.forward, SIGNAL(clicked()), SLOT(FileForward()));
+  connect(ui_.back, SIGNAL(clicked()), undo_stack_, SLOT(undo()));
+  connect(ui_.forward, SIGNAL(clicked()), undo_stack_, SLOT(redo()));
   connect(ui_.home, SIGNAL(clicked()), SLOT(FileHome()));
   connect(ui_.up, SIGNAL(clicked()), SLOT(FileUp()));
   connect(ui_.path, SIGNAL(textChanged(QString)), SLOT(ChangeFilePath(QString)));
@@ -56,18 +56,6 @@ void FileView::FileUp() {
   ChangeFilePath(dir.path());
 }
 
-void FileView::FileBack() {
-  QString new_path(undo_stack_->command(undo_stack_->index()-1)->text());
-  undo_stack_->undo();
-  ChangeFilePathWithoutUndo(new_path);
-}
-
-void FileView::FileForward() {
-  QString new_path(undo_stack_->command(undo_stack_->index()+1)->text());
-  undo_stack_->redo();
-  ChangeFilePathWithoutUndo(new_path);
-}
-
 void FileView::FileHome() {
   ChangeFilePath(QDir::homePath());
 }
@@ -78,9 +66,10 @@ void FileView::ChangeFilePath(const QString& new_path) {
     return;
 
   QString old_path(model_->rootPath());
+  if (old_path == new_path)
+    return;
 
-  ChangeFilePathWithoutUndo(new_path);
-  undo_stack_->push(new QUndoCommand(old_path));
+  undo_stack_->push(new UndoCommand(this, new_path));
 }
 
 void FileView::ChangeFilePathWithoutUndo(const QString& new_path) {
@@ -103,4 +92,32 @@ void FileView::ItemDoubleClick(const QModelIndex& index) {
     return;
 
   emit Queue(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
+}
+
+
+FileView::UndoCommand::UndoCommand(FileView* view, const QString& new_path)
+  : view_(view)
+{
+  old_state_.path = view->model_->rootPath();
+  old_state_.scroll_pos = view_->ui_.list->verticalScrollBar()->value();
+  old_state_.index = view_->ui_.list->currentIndex();
+
+  new_state_.path = new_path;
+}
+
+void FileView::UndoCommand::redo() {
+  view_->ChangeFilePathWithoutUndo(new_state_.path);
+  if (new_state_.scroll_pos != -1) {
+    view_->ui_.list->setCurrentIndex(new_state_.index);
+    view_->ui_.list->verticalScrollBar()->setValue(new_state_.scroll_pos);
+  }
+}
+
+void FileView::UndoCommand::undo() {
+  new_state_.scroll_pos = view_->ui_.list->verticalScrollBar()->value();
+  new_state_.index = view_->ui_.list->currentIndex();
+
+  view_->ChangeFilePathWithoutUndo(old_state_.path);
+  view_->ui_.list->setCurrentIndex(old_state_.index);
+  view_->ui_.list->verticalScrollBar()->setValue(old_state_.scroll_pos);
 }
