@@ -107,6 +107,9 @@ class GstEngine : public Engine::Base {
   // Callbacks
   static void CanDecodeNewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
   static void CanDecodeLastCallback(GstElement*, gpointer);
+  static GstBusSyncReply CanDecodeBusCallbackSync(GstBus*, GstMessage*, gpointer);
+  static gboolean CanDecodeBusCallback(GstBus*, GstMessage*, gpointer);
+  static void PrintGstError(GstMessage* msg);
 
   PluginDetailsList GetPluginList(const QString& classname) const;
 

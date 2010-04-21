@@ -28,6 +28,9 @@
 #include <math.h>
 #include <unistd.h>
 #include <vector>
+#include <iostream>
+
+#include <boost/bind.hpp>
 
 #include <QTimer>
 #include <QRegExp>
@@ -38,7 +41,6 @@
 #include <QTimeLine>
 
 #include <gst/gst.h>
-#include <iostream>
 
 
 using std::vector;
@@ -70,19 +72,33 @@ GstEngine::~GstEngine() {
 
 
 bool GstEngine::Init() {
+  QString scanner_path;
+  QString plugin_path;
+
+#if defined(Q_OS_DARWIN)
+  scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
+  plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
+#elif defined(Q_OS_WIN32)
+  plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
+#endif
+
+  // Use putenv instead of setenv because windows doesn't have setenv.
+  // Use data() instead of constData() because linux's putenv takes non-const char*.
+  // :-(
+  if (!scanner_path.isEmpty())
+    putenv(QString("GST_PLUGIN_SCANNER=%1").arg(scanner_path).toAscii().data());
+  if (!plugin_path.isEmpty()) {
+    putenv(QString("GST_PLUGIN_PATH=%1").arg(plugin_path).toAscii().data());
+    // Never load plugins from anywhere else.
+    putenv(QString("GST_PLUGIN_SYSTEM_PATH=%1").arg(plugin_path).toAscii().data());
+  }
+
   // GStreamer initialization
   GError *err;
   if ( !gst_init_check( NULL, NULL, &err ) ) {
     qWarning("GStreamer could not be initialized");
     return false;
   }
-
-#ifdef Q_OS_WIN32
-  // Set the plugin path on windows
-  GstRegistry* registry = gst_registry_get_default();
-  gst_registry_add_path(registry, QString(
-      QCoreApplication::applicationDirPath() + "/gstreamer-plugins").toLocal8Bit().constData());
-#endif
 
   return true;
 }
@@ -110,19 +126,25 @@ bool GstEngine::CanDecode(const QUrl &url) {
   can_decode_last_ = false;
 
   // Create the pipeline
-  GstElement* pipeline = CreateElement("pipeline");
-  GstElement* src = CreateElement("giosrc", pipeline);
-  GstElement* bin = CreateElement("decodebin", pipeline);
+  shared_ptr<GstElement> pipeline(gst_pipeline_new("pipeline"),
+                                  boost::bind(gst_object_unref, _1));
+  if (!pipeline) return false;
+  GstElement* src = CreateElement("giosrc", pipeline.get());    if (!src) return false;
+  GstElement* bin = CreateElement("decodebin", pipeline.get()); if (!bin) return false;
 
   gst_element_link(src, bin);
   g_signal_connect(G_OBJECT(bin), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), this);
   g_signal_connect(G_OBJECT(bin), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), this);
 
+  // These handlers just print out errors to stderr
+  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline.get())), CanDecodeBusCallbackSync, 0);
+  gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline.get())), CanDecodeBusCallback, 0);
+
   // Set the file we're testing
   g_object_set(G_OBJECT(src), "location", url.toEncoded().constData(), NULL);
 
   // Start the pipeline playing
-  gst_element_set_state(pipeline, GST_STATE_PLAYING);
+  gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
 
   // Wait until found audio stream
   int count = 0;
@@ -132,11 +154,12 @@ bool GstEngine::CanDecode(const QUrl &url) {
   }
 
   // Stop playing
-  gst_element_set_state(pipeline, GST_STATE_NULL);
-  gst_object_unref(pipeline);
+  gst_element_set_state(pipeline.get(), GST_STATE_NULL);
 
   return can_decode_success_;
 }
+
+
 
 void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer self) {
   GstEngine* instance = reinterpret_cast<GstEngine*>(self);
@@ -153,6 +176,30 @@ void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpoi
 void GstEngine::CanDecodeLastCallback(GstElement*, gpointer self) {
   GstEngine* instance = reinterpret_cast<GstEngine*>(self);
   instance->can_decode_last_ = true;
+}
+
+void GstEngine::PrintGstError(GstMessage *msg) {
+  GError* error;
+  gchar* debugs;
+
+  gst_message_parse_error(msg, &error, &debugs);
+  qDebug() << error->message;
+  qDebug() << debugs;
+
+  g_error_free(error);
+  free(debugs);
+}
+
+GstBusSyncReply GstEngine::CanDecodeBusCallbackSync(GstBus*, GstMessage* msg, gpointer) {
+  if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
+    PrintGstError(msg);
+  return GST_BUS_PASS;
+}
+
+gboolean GstEngine::CanDecodeBusCallback(GstBus*, GstMessage* msg, gpointer) {
+  if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
+    PrintGstError(msg);
+  return GST_BUS_DROP;
 }
 
 
