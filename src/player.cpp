@@ -308,8 +308,8 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   if (item == NULL)
     return;
 
-  Song song;
-  song.InitFromSimpleMetaBundle(bundle);
+  Song song = item->Metadata();
+  song.MergeFromSimpleMetaBundle(bundle);
 
   // Ignore useless metadata
   if (song.title().isEmpty() && song.artist().isEmpty())

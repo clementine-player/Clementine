@@ -342,19 +342,19 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->length_ = track.duration();
 }
 
-void Song::InitFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
+void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   d->valid_ = true;
 
-  d->title_ = bundle.title;
-  d->artist_ = bundle.artist;
-  d->album_ = bundle.album;
-  d->comment_ = bundle.comment;
-  d->genre_ = bundle.genre;
-  d->bitrate_ = bundle.bitrate.toInt();
-  d->samplerate_ = bundle.samplerate.toInt();
-  d->length_ = bundle.length.toInt();
-  d->year_ = bundle.year.toInt();
-  d->track_ = bundle.tracknr.toInt();
+  if (!bundle.title.isEmpty()) d->title_ = bundle.title;
+  if (!bundle.artist.isEmpty()) d->artist_ = bundle.artist;
+  if (!bundle.album.isEmpty()) d->album_ = bundle.album;
+  if (!bundle.comment.isEmpty()) d->comment_ = bundle.comment;
+  if (!bundle.genre.isEmpty()) d->genre_ = bundle.genre;
+  if (!bundle.bitrate.isEmpty()) d->bitrate_ = bundle.bitrate.toInt();
+  if (!bundle.samplerate.isEmpty()) d->samplerate_ = bundle.samplerate.toInt();
+  if (!bundle.length.isEmpty()) d->length_ = bundle.length.toInt();
+  if (!bundle.year.isEmpty()) d->year_ = bundle.year.toInt();
+  if (!bundle.tracknr.isEmpty()) d->track_ = bundle.tracknr.toInt();
 }
 
 void Song::BindToQuery(QSqlQuery *query) const {

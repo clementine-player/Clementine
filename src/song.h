@@ -85,7 +85,7 @@ class Song {
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const QSqlQuery& query);
   void InitFromLastFM(const lastfm::Track& track);
-  void InitFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
+  void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

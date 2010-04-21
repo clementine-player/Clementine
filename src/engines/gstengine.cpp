@@ -288,6 +288,10 @@ void GstEngine::StartPreloading(const QUrl& url) {
   if (!preload_pipeline_)
     return;
 
+  // We don't want to get metadata messages before the track starts playing -
+  // we reconnect this in GstEngine::Load
+  disconnect(preload_pipeline_.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
+
   preloaded_url_ = url;
   preload_pipeline_->SetState(GST_STATE_PAUSED);
 }
@@ -302,6 +306,9 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   shared_ptr<GstEnginePipeline> pipeline;
   if (preload_pipeline_ && preloaded_url_ == url) {
     pipeline = preload_pipeline_;
+    connect(preload_pipeline_.get(),
+            SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
+            SLOT(NewMetaData(Engine::SimpleMetaBundle)));
   } else {
     pipeline = CreatePipeline(url);
     if (!pipeline)
