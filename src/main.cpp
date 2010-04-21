@@ -115,10 +115,12 @@ int main(int argc, char *argv[]) {
     return 1;
 
   if (a.isRunning()) {
-    if (options.is_empty())
+    if (options.is_empty()) {
       qDebug() << "Clementine is already running - activating existing window";
-    if (a.sendMessage(options.Serialize()))
+    }
+    if (a.sendMessage(options.Serialize())) {
       return 0;
+    }
     // Couldn't send the message so start anyway
   }
 

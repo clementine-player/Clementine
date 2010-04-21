@@ -133,7 +133,7 @@ void SettingsDialog::accept() {
 #endif
 
   // Notifications
-  OSD::Behaviour osd_behaviour;
+  OSD::Behaviour osd_behaviour = OSD::Disabled;
   if      (ui_.notifications_none->isChecked())   osd_behaviour = OSD::Disabled;
   else if (ui_.notifications_native->isChecked()) osd_behaviour = OSD::Native;
   else if (ui_.notifications_tray->isChecked())   osd_behaviour = OSD::TrayPopup;
