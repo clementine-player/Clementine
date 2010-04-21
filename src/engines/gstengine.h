@@ -75,6 +75,7 @@ class GstEngine : public Engine::Base {
       const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
  public slots:
+  void StartPreloading(const QUrl &);
   bool Load(const QUrl&, Engine::TrackChangeType change);
   bool Play(uint offset);
   void Stop();
@@ -118,13 +119,16 @@ class GstEngine : public Engine::Base {
 
  private:
   // Interval of main timer, handles the volume fading
-  static const int kTimerInterval = 40; //msec
+  static const int kTimerInterval = 40; // msec
+  static const int kPreloadGap = 1000; // msec
 
   QString sink_;
   QString device_;
 
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
+  boost::shared_ptr<GstEnginePipeline> preload_pipeline_;
+  QUrl preloaded_url_;
 
   GQueue* delayq_;
   float current_scope_[kScopeSize];

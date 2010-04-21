@@ -145,6 +145,7 @@ class Player : public QObject {
   void EngineStateChanged(Engine::State);
   void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
   void NextAuto();
+  void TrackAboutToEnd();
 
  private:
   QVariantMap GetMetadata(const PlaylistItem& item) const;

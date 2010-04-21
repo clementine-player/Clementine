@@ -129,7 +129,7 @@ void Player::Init() {
     qFatal("Error initialising audio engine");
 
   connect(engine_, SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(engine_, SIGNAL(TrackAboutToEnd()), SLOT(NextAuto()));
+  connect(engine_, SIGNAL(TrackAboutToEnd()), SLOT(TrackAboutToEnd()));
   connect(engine_, SIGNAL(TrackEnded()), SLOT(TrackEnded()));
   connect(engine_, SIGNAL(MetaData(Engine::SimpleMetaBundle)),
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
@@ -523,4 +523,23 @@ void Player::PlayTrack(int index) {
 
 void Player::PlaylistChanged() {
   emit TrackListChange(GetLength());
+}
+
+void Player::TrackAboutToEnd() {
+  if (engine_->is_autocrossfade_enabled()) {
+    // Crossfade is on, so just start playing the next track.  The current one
+    // will fade out, and the new one will fade in
+    NextAuto();
+  } else {
+    // Crossfade is off, so start preloading the next track so we don't get a
+    // gap between songs.
+    if (current_item_options_ & PlaylistItem::ContainsMultipleTracks)
+      return;
+
+    shared_ptr<PlaylistItem> item = playlist_->item_at(playlist_->next_index());
+    if (!item)
+      return;
+
+    engine_->StartPreloading(item->Url());
+  }
 }

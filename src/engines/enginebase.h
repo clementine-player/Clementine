@@ -44,6 +44,7 @@ class Base : public QObject, boost::noncopyable {
   virtual bool Init() = 0;
   virtual bool CanDecode(const QUrl &url) = 0;
 
+  virtual void StartPreloading(const QUrl&) {}
   virtual bool Play(uint offset = 0) = 0;
   virtual void Stop() = 0;
   virtual void Pause() = 0;
@@ -59,8 +60,11 @@ class Base : public QObject, boost::noncopyable {
   bool Play(const QUrl &u, TrackChangeType c) { return Load(u, c) && Play(); }
   void SetVolume( uint value );
 
+  // Simple accessors
   inline uint volume() const { return volume_; }
   virtual const Scope &scope() { return scope_; }
+  bool is_crossfade_enabled() const { return crossfade_enabled_; }
+  bool is_autocrossfade_enabled() const { return autocrossfade_enabled_; }
 
   static const char* kSettingsGroup;
   static const int kScopeSize = 1024;

@@ -283,6 +283,15 @@ void GstEngine::UpdateScope() {
   }
 }
 
+void GstEngine::StartPreloading(const QUrl& url) {
+  preload_pipeline_ = CreatePipeline(url);
+  if (!preload_pipeline_)
+    return;
+
+  preloaded_url_ = url;
+  preload_pipeline_->SetState(GST_STATE_PAUSED);
+}
+
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   Engine::Base::Load(url, change);
 
@@ -290,14 +299,20 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
                          ((crossfade_enabled_ && change == Engine::Manual) ||
                           (autocrossfade_enabled_ && change == Engine::Auto));
 
-  shared_ptr<GstEnginePipeline> pipeline(CreatePipeline(url));
-  if (!pipeline)
-    return false;
+  shared_ptr<GstEnginePipeline> pipeline;
+  if (preload_pipeline_ && preloaded_url_ == url) {
+    pipeline = preload_pipeline_;
+  } else {
+    pipeline = CreatePipeline(url);
+    if (!pipeline)
+      return false;
+  }
 
   if (crossfade)
     StartFadeout();
 
   current_pipeline_ = pipeline;
+  preload_pipeline_.reset();
 
   SetVolume(volume_);
   SetEqualizerEnabled(equalizer_enabled_);
@@ -412,13 +427,14 @@ void GstEngine::timerEvent( QTimerEvent* ) {
   PruneScope();
 
   // Emit TrackAboutToEnd when we're a few seconds away from finishing
-  if (current_pipeline_ && autocrossfade_enabled_) {
-    const qint64 position = current_pipeline_->position();
-    const qint64 length = current_pipeline_->length();
-    const qint64 msec_remaining = (length - position) / 1000000;
+  if (current_pipeline_) {
+    const qint64 nanosec_position = current_pipeline_->position();
+    const qint64 nanosec_length = current_pipeline_->length();
+    const qint64 remaining = (nanosec_length - nanosec_position) / 1000000;
     const qint64 fudge = 100; // Mmm fudge
+    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
 
-    if (length > 0 && msec_remaining < fadeout_duration_ + fudge)
+    if (nanosec_length > 0 && remaining < gap + fudge)
       EmitAboutToEnd();
   }
 }
