@@ -535,6 +535,8 @@ void Player::TrackAboutToEnd() {
     // gap between songs.
     if (current_item_options_ & PlaylistItem::ContainsMultipleTracks)
       return;
+    if (playlist_->next_index() == -1)
+      return;
 
     shared_ptr<PlaylistItem> item = playlist_->item_at(playlist_->next_index());
     if (!item)
