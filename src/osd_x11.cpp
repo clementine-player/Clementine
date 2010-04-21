@@ -106,7 +106,7 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
 
   QDBusPendingReply<uint> reply = *watcher;
   if (reply.isError()) {
-    qWarning() << "Error sending notification" << reply.error();
+    qWarning() << "Error sending notification" << reply.error().name();
     return;
   }
 
