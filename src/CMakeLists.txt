@@ -318,7 +318,7 @@ foreach (_lang ${CLEMENTINE-LANGUAGES})
   set(_qm_filepath "${CMAKE_CURRENT_BINARY_DIR}/${_qm_filename}")
   
   add_custom_command(OUTPUT ${_qm_filepath}
-    COMMAND lconvert ARGS ${_po_filepath} -o ${_qm_filepath} -of qm
+    COMMAND ${QT_LCONVERT_EXECUTABLE} ARGS ${_po_filepath} -o ${_qm_filepath} -of qm
     MAIN_DEPENDENCY ${_po_filepath}
   )
   set(CLEMENTINE-QM-FILES ${CLEMENTINE-QM-FILES} ${_qm_filepath})

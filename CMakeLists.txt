@@ -15,6 +15,10 @@ if(UNIX AND NOT APPLE)
 endif(UNIX AND NOT APPLE)
 find_package(Qt4 COMPONENTS Phonon)
 
+# Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
+find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4)
+
 if(APPLE)
   if(NOT QT_MAC_USE_COCOA)
     message(FATAL_ERROR "Cocoa support is required")
