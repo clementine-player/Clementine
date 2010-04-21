@@ -71,7 +71,7 @@ class GstEngine : public Engine::Base {
   PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
   static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString& name);
 
-  static GstElement* CreateElement(
+  GstElement* CreateElement(
       const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
  public slots:

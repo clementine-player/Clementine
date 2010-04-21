@@ -32,7 +32,6 @@
 #include <QTimer>
 #include <QRegExp>
 #include <QFile>
-#include <QMessageBox>
 #include <QSettings>
 #include <QtDebug>
 #include <QCoreApplication>
@@ -452,10 +451,8 @@ GstElement* GstEngine::CreateElement(
   if ( element ) {
     if ( bin ) gst_bin_add( GST_BIN( bin ), element );
   } else {
-    QMessageBox::critical( 0, "Error",
-                           QString("<h3>GStreamer could not create the element: <i>%1</i></h3> "
-                                   "<p>Please make sure that you have installed all necessary GStreamer plugins (e.g. OGG and MP3), and run <i>'gst-register'</i> afterwards.</p>"
-                                   "<p>For further assistance consult the GStreamer manual, and join #gstreamer on irc.freenode.net.</p>" ).arg( factoryName ) );
+    emit Error(QString("GStreamer could not create the element: %1.  "
+                       "Please make sure that you have installed all necessary GStreamer plugins (e.g. OGG and MP3)").arg( factoryName ) );
     gst_object_unref( GST_OBJECT( bin ) );
   }
 
@@ -489,7 +486,7 @@ GstEngine::PluginDetailsList
 }
 
 shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
-  shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline);
+  shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
   ret->set_forwards_buffers(true);
   ret->set_output_device(sink_, device_);
 

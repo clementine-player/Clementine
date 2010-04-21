@@ -31,7 +31,7 @@ class GstEnginePipeline : public QObject {
   Q_OBJECT
 
  public:
-  GstEnginePipeline();
+  GstEnginePipeline(GstEngine* engine);
   ~GstEnginePipeline();
 
   // Call these setters before Init
@@ -85,6 +85,8 @@ class GstEnginePipeline : public QObject {
   static const int kGstStateTimeoutNanosecs = 10000000;
 
   static const char* kHttpGstreamerSource;
+
+  GstEngine* engine_;
 
   bool valid_;
   QString sink_;

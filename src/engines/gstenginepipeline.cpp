@@ -27,8 +27,9 @@ const char* GstEnginePipeline::kHttpGstreamerSource =
     "souphttpsrc";  // Does not exist on mac/fink.
 #endif
 
-GstEnginePipeline::GstEnginePipeline()
+GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
+    engine_(engine),
     valid_(false),
     sink_(GstEngine::kAutoSink),
     forwards_buffers_(false),
@@ -67,10 +68,10 @@ bool GstEnginePipeline::Init(const QUrl &url) {
 
   // Source
   if (url.scheme() == "http") {
-    src_ = GstEngine::CreateElement(kHttpGstreamerSource);
+    src_ = engine_->CreateElement(kHttpGstreamerSource);
     g_object_set(G_OBJECT(src_), "iradio-mode", true, NULL);
   } else {
-    src_ = GstEngine::CreateElement("giosrc");
+    src_ = engine_->CreateElement("giosrc");
   }
   if (!src_)      // CreateElement will have shown an error dialog, so no need
     return false; // one of our own.
@@ -79,7 +80,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   gst_bin_add(GST_BIN(pipeline_), src_);
 
   // Decode bin
-  if (!(decodebin_ = GstEngine::CreateElement("decodebin", pipeline_))) { return false; }
+  if (!(decodebin_ = engine_->CreateElement("decodebin", pipeline_))) { return false; }
   g_signal_connect(G_OBJECT(decodebin_), "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
 
   // Does some stuff with ghost pads
@@ -96,7 +97,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   audiobin_ = gst_bin_new("audiobin");
   gst_bin_add(GST_BIN(pipeline_), audiobin_);
 
-  if (!(audiosink_ = GstEngine::CreateElement(sink_, audiobin_)))
+  if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_)))
     return false;
 
   if (GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty())
@@ -105,9 +106,9 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   equalizer_ = GST_ELEMENT(gst_equalizer_new());
   gst_bin_add(GST_BIN(audiobin_), equalizer_);
 
-  if (!(audioconvert_ = GstEngine::CreateElement("audioconvert", audiobin_))) { return false; }
-  if (!(volume_ = GstEngine::CreateElement("volume", audiobin_))) { return false; }
-  if (!(audioscale_ = GstEngine::CreateElement("audioresample", audiobin_))) { return false; }
+  if (!(audioconvert_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
+  if (!(volume_ = engine_->CreateElement("volume", audiobin_))) { return false; }
+  if (!(audioscale_ = engine_->CreateElement("audioresample", audiobin_))) { return false; }
 
   pad = gst_element_get_pad(audioconvert_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
@@ -129,7 +130,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   gst_caps_unref(caps);
 
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
-  GstElement* convert = GstEngine::CreateElement("audioconvert", audiobin_, "FFFUUUU");
+  GstElement* convert = engine_->CreateElement("audioconvert", audiobin_, "FFFUUUU");
   if (!convert) { return false; }
   gst_element_link_many(equalizer_, volume_,
                         audioscale_, convert, audiosink_, NULL);
