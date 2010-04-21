@@ -55,9 +55,13 @@ class FileformatsTest : public ::testing::TestWithParam<const char*> {
   }
 
   void SaveToTempFile(QTemporaryFile* file) {
-    QResource resource(resource_filename_);
+    QFile resource(resource_filename_);
+    resource.open(QIODevice::ReadOnly);
+    QByteArray data(resource.readAll());
+    resource.close();
+
     file->open();
-    file->write(reinterpret_cast<const char*>(resource.data()), resource.size());
+    file->write(data);
     file->flush();
   }
 
@@ -104,6 +108,6 @@ TEST_P(FileformatsTest, GstCanDecode) {
 }
 
 INSTANTIATE_TEST_CASE_P(Formats, FileformatsTest, ::testing::Values(
-    "flac", "mp3", "ogg", "spx", "wav"));
+    "flac", "mp3", "ogg", "spx", "wav", "wma"));
 
 }  // namespace
