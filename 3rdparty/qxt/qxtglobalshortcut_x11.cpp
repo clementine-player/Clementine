@@ -23,7 +23,6 @@
  **
  ****************************************************************************/
 #include "qxtglobalshortcut_p.h"
-#include <QtDebug>
 #include <QX11Info>
 #include <X11/Xlib.h>
 
