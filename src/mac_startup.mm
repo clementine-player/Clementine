@@ -1,6 +1,7 @@
 #import <IOKit/hidsystem/ev_keymap.h>
 #import <AppKit/NSEvent.h>
 
+#import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSTimer.h>
 #import <Foundation/NSURL.h>
@@ -111,6 +112,7 @@
 namespace mac {
 
 void MacMain() {
+  [[NSAutoreleasePool alloc] init];
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
   // Creates and sets the magic global variable for Sparkle.
