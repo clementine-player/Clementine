@@ -467,13 +467,15 @@ void GstEngine::Seek(uint ms) {
 
 void GstEngine::SeekNow() {
   if (!waiting_to_seek_) return;
+  waiting_to_seek_ = false;
+
+  if (!current_pipeline_)
+    return;
 
   if (current_pipeline_->Seek(seek_pos_ * GST_MSECOND))
     ClearScopeBuffers();
   else
     qDebug() << "Seek failed";
-
-  waiting_to_seek_ = false;
 }
 
 void GstEngine::SetEqualizerEnabled(bool enabled) {
