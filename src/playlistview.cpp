@@ -131,7 +131,7 @@ QList<QPixmap> PlaylistView::LoadBarPixmap(const QString& filename) {
   QPainter p(&image);
   p.setCompositionMode(QPainter::CompositionMode_SourceAtop);
   p.setOpacity(0.7);
-  p.fillRect(image.rect(), palette().color(QPalette::Highlight));
+  p.fillRect(image.rect(), QApplication::palette().color(QPalette::Highlight));
   p.end();
 
   // Animation steps
