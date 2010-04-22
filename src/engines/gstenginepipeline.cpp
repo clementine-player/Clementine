@@ -234,7 +234,7 @@ QString GstEnginePipeline::ParseTag(GstTagList* list, const char* tag) const {
 
   QString ret;
   if (success && data) {
-    ret = data;
+    ret = QString::fromUtf8(data);
     g_free(data);
   }
   return ret.trimmed();
