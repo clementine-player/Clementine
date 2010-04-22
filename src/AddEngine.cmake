@@ -66,8 +66,8 @@ macro(print_engines)
     message("")
   endif(ENGINES_UNSUPPORTED)
 
-  message("building engines:${ENGINES_ENABLED}")
-  message("skipping engines:${ENGINES_DISABLED}")
+  message(STATUS "Building engines:${ENGINES_ENABLED}")
+  message(STATUS "Skipping engines:${ENGINES_DISABLED}")
 endmacro(print_engines)
 
 # print the pig :)

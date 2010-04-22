@@ -106,7 +106,7 @@ endif (NOT APPLE)
 add_subdirectory(tests)
 
 if (WIN32 OR APPLE)
-  message("Building static qsqlite plugin")
+  message(STATUS "Building static qsqlite plugin")
   add_definitions(-DQT_STATICPLUGIN)
   add_subdirectory(3rdparty/qsqlite)
 endif(WIN32 OR APPLE)
