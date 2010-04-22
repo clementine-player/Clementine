@@ -53,9 +53,8 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
     fading_enabled_(false),
     fader_(new QTimeLine(300, this))
 {
-  Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
-  if (mode == Mode_Popup)
-    flags |= Qt::SplashScreen;
+  Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint |
+                          Qt::X11BypassWindowManagerHint;
 
   setWindowFlags(flags);
   setAttribute(Qt::WA_TranslucentBackground, true);
