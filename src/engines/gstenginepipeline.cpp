@@ -195,7 +195,6 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
     default:
       break;
   }
-
   return GST_BUS_PASS;
 }
 
@@ -313,9 +312,8 @@ bool GstEnginePipeline::SetState(GstState state) {
 }
 
 bool GstEnginePipeline::Seek(qint64 nanosec) {
-  return gst_element_seek(pipeline_, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
-                          GST_SEEK_TYPE_SET, nanosec, GST_SEEK_TYPE_NONE,
-                          GST_CLOCK_TIME_NONE);
+  return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
+                                 GST_SEEK_FLAG_FLUSH, nanosec);
 }
 
 void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {

@@ -54,8 +54,13 @@ GstEngine::GstEngine()
   : Engine::Base(),
     delayq_(g_queue_new()),
     current_sample_(0),
-    equalizer_enabled_(false)
+    equalizer_enabled_(false),
+    seek_timer_(new QTimer(this))
 {
+  seek_timer_->setSingleShot(true);
+  seek_timer_->setInterval(kSeekDelay);
+  connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
+
   ReloadSettings();
 }
 
@@ -451,10 +456,24 @@ void GstEngine::Seek(uint ms) {
   if (!current_pipeline_)
     return;
 
-  if (current_pipeline_->Seek(ms * GST_MSECOND))
+  seek_pos_ = ms;
+  waiting_to_seek_ = true;
+
+  if (!seek_timer_->isActive()) {
+    SeekNow();
+    seek_timer_->start(); // Stop us from seeking again for a little while
+  }
+}
+
+void GstEngine::SeekNow() {
+  if (!waiting_to_seek_) return;
+
+  if (current_pipeline_->Seek(seek_pos_ * GST_MSECOND))
     ClearScopeBuffers();
   else
     qDebug() << "Seek failed";
+
+  waiting_to_seek_ = false;
 }
 
 void GstEngine::SetEqualizerEnabled(bool enabled) {

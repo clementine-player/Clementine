@@ -32,6 +32,7 @@
 #include <gst/gst.h>
 #include <boost/shared_ptr.hpp>
 
+class QTimer;
 class QTimerEvent;
 
 class GstEnginePipeline;
@@ -102,6 +103,7 @@ class GstEngine : public Engine::Base {
   void AddBufferToScope(GstBuffer* buf);
   void ClearScopeBuffers();
   void FadeoutFinished();
+  void SeekNow();
 
  private:
   // Callbacks
@@ -125,6 +127,7 @@ class GstEngine : public Engine::Base {
   // Interval of main timer, handles the volume fading
   static const int kTimerInterval = 40; // msec
   static const int kPreloadGap = 1000; // msec
+  static const int kSeekDelay = 100; // msec
 
   QString sink_;
   QString device_;
@@ -144,6 +147,11 @@ class GstEngine : public Engine::Base {
 
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
+
+  // Hack to stop seeks happening too often
+  QTimer* seek_timer_;
+  bool waiting_to_seek_;
+  uint seek_pos_;
 };
 
 
