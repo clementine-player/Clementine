@@ -70,11 +70,19 @@ GstEngine::~GstEngine() {
   gst_deinit();
 }
 
+void GstEngine::SetEnv(const char *key, const QString &value) {
+#ifdef Q_OS_WIN32
+  putenv(QString("%1=%2").arg(key, value).toLocal8Bit().constData());
+#else
+  setenv(key, value.toLocal8Bit().constData(), 1);
+#endif
+}
 
 bool GstEngine::Init() {
   QString scanner_path;
   QString plugin_path;
 
+  // On windows and mac we bundle the gstreamer plugins with clementine
 #if defined(Q_OS_DARWIN)
   scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
   plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
@@ -82,15 +90,12 @@ bool GstEngine::Init() {
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
 #endif
 
-  // Use putenv instead of setenv because windows doesn't have setenv.
-  // Use data() instead of constData() because linux's putenv takes non-const char*.
-  // :-(
   if (!scanner_path.isEmpty())
-    putenv(QString("GST_PLUGIN_SCANNER=%1").arg(scanner_path).toAscii().data());
+    SetEnv("GST_PLUGIN_SCANNER", scanner_path);
   if (!plugin_path.isEmpty()) {
-    putenv(QString("GST_PLUGIN_PATH=%1").arg(plugin_path).toAscii().data());
+    SetEnv("GST_PLUGIN_PATH", plugin_path);
     // Never load plugins from anywhere else.
-    putenv(QString("GST_PLUGIN_SYSTEM_PATH=%1").arg(plugin_path).toAscii().data());
+    SetEnv("GST_PLUGIN_SYSTEM_PATH", plugin_path);
   }
 
   // GStreamer initialization

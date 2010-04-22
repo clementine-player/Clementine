@@ -111,6 +111,7 @@ class GstEngine : public Engine::Base {
   static gboolean CanDecodeBusCallback(GstBus*, GstMessage*, gpointer);
   static void PrintGstError(GstMessage* msg);
 
+  static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
 
   void StartFadeout();
