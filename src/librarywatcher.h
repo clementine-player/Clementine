@@ -75,6 +75,7 @@ class LibraryWatcher : public QObject {
     SongList FindSongsInSubdirectory(const QString& path);
     bool HasSeenSubdir(const QString& path);
     void SetKnownSubdirs(const SubdirectoryList& subdirs);
+    SubdirectoryList GetImmediateSubdirs(const QString& path);
 
     int dir() const { return dir_; }
     bool is_incremental() const { return incremental_; }

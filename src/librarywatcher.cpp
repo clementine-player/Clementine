@@ -118,6 +118,21 @@ bool LibraryWatcher::ScanTransaction::HasSeenSubdir(const QString &path) {
   return false;
 }
 
+SubdirectoryList LibraryWatcher::ScanTransaction::GetImmediateSubdirs(const QString &path) {
+  if (known_subdirs_dirty_)
+    SetKnownSubdirs(watcher_->backend_->SubdirsInDirectory(dir_));
+
+  SubdirectoryList ret;
+  foreach (const Subdirectory& subdir, known_subdirs_) {
+    if (subdir.path.left(subdir.path.lastIndexOf(QDir::separator())) == path &&
+        subdir.mtime != 0) {
+      ret << subdir;
+    }
+  }
+
+  return ret;
+}
+
 void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& subdirs) {
   DirData data;
   data.dir = dir;
@@ -159,6 +174,16 @@ void LibraryWatcher::ScanSubdirectory(
   QMap<QString, QStringList> album_art;
   QStringList files_on_disk;
   SubdirectoryList my_new_subdirs;
+
+  // If a directory is moved then only its parent gets a changed notification,
+  // so we need to look and see if any of our children don't exist any more.
+  // If one has been removed, "rescan" it to get the deleted songs
+  SubdirectoryList previous_subdirs = t->GetImmediateSubdirs(path);
+  foreach (const Subdirectory& subdir, previous_subdirs) {
+    if (!QFile::exists(subdir.path)) {
+      ScanSubdirectory(subdir.path, subdir, t, true);
+    }
+  }
 
   // First we "quickly" get a list of the files in the directory that we
   // think might be music.  While we're here, we also look for new subdirectories
