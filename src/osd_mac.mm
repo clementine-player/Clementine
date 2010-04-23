@@ -69,13 +69,11 @@
 class OSD::GrowlNotificationWrapper {
  public:
   GrowlNotificationWrapper() {
-    pool_ = [[NSAutoreleasePool alloc] init];
     growl_interface_ = [[GrowlInterface alloc] init];
   }
 
   ~GrowlNotificationWrapper() {
     [growl_interface_ release];
-    [pool_ release];
   }
 
   void ShowMessage(const QString& summary,
