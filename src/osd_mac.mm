@@ -103,7 +103,6 @@ class OSD::GrowlNotificationWrapper {
 
  private:
   GrowlInterface* growl_interface_;
-  NSAutoreleasePool* pool_;
 };
 
 void OSD::Init() {
