@@ -44,7 +44,8 @@ PlaylistView::PlaylistView(QWidget *parent)
     currently_autoscrolling_(false),
     row_height_(-1),
     currenttrack_play_(":currenttrack_play.png"),
-    currenttrack_pause_(":currenttrack_pause.png")
+    currenttrack_pause_(":currenttrack_pause.png"),
+    drop_indicator_row_(-1)
 {
   setHeader(new PlaylistHeader(Qt::Horizontal, this));
   header()->setMovable(true);
@@ -373,4 +374,74 @@ void PlaylistView::MaybeAutoscroll() {
   currently_autoscrolling_ = true;
   scrollTo(current, QAbstractItemView::PositionAtCenter);
   currently_autoscrolling_ = false;
+}
+
+void PlaylistView::paintEvent(QPaintEvent* event) {
+  // Reimplemented to draw the drop indicator
+  QPainter p(viewport());
+  drawTree(&p, event->region());
+
+  if (drop_indicator_row_ == -1)
+    return;
+
+  // Find the y position of the drop indicator
+  QModelIndex drop_index = model()->index(drop_indicator_row_, 0);
+  int drop_pos = -1;
+  switch (dropIndicatorPosition()) {
+    case QAbstractItemView::OnItem:
+      return; // Don't draw anything
+
+    case QAbstractItemView::AboveItem:
+      drop_pos = visualRect(drop_index).top();
+      break;
+
+    case QAbstractItemView::BelowItem:
+      drop_pos = visualRect(drop_index).bottom() + 1;
+      break;
+
+    case QAbstractItemView::OnViewport:
+      drop_pos = visualRect(model()->index(model()->rowCount() - 1, 0)).bottom() + 1;
+      break;
+  }
+
+  // Draw a nice gradient first
+  static const int kGradientWidth = 5;
+  QColor line_color(QApplication::palette().color(QPalette::Highlight));
+  QColor shadow_color(line_color.lighter(140));
+  QColor shadow_fadeout_color(shadow_color);
+  shadow_color.setAlpha(200);
+  shadow_fadeout_color.setAlpha(50);
+
+  QLinearGradient gradient(QPoint(0, drop_pos - kGradientWidth),
+                           QPoint(0, drop_pos + kGradientWidth));
+  gradient.setColorAt(0.0, shadow_fadeout_color);
+  gradient.setColorAt(0.5, shadow_color);
+  gradient.setColorAt(1.0, shadow_fadeout_color);
+  QPen gradient_pen(QBrush(gradient), kGradientWidth * 2);
+  p.setPen(gradient_pen);
+  p.drawLine(QPoint(0, drop_pos),
+             QPoint(width(), drop_pos));
+
+  // Now draw the line on top
+  QPen line_pen(line_color, 2);
+  p.setPen(line_pen);
+  p.drawLine(QPoint(0, drop_pos),
+             QPoint(width(), drop_pos));
+}
+
+void PlaylistView::dragMoveEvent(QDragMoveEvent *event) {
+  QTreeView::dragMoveEvent(event);
+
+  QModelIndex index(indexAt(event->pos()));
+  drop_indicator_row_ = index.isValid() ? index.row() : -1;
+}
+
+void PlaylistView::dragLeaveEvent(QDragLeaveEvent *event) {
+  QTreeView::dragLeaveEvent(event);
+  drop_indicator_row_ = -1;
+}
+
+void PlaylistView::dropEvent(QDropEvent *event) {
+  QTreeView::dropEvent(event);
+  drop_indicator_row_ = -1;
 }

@@ -55,6 +55,10 @@ class PlaylistView : public QTreeView {
   void showEvent(QShowEvent* event);
   void mousePressEvent(QMouseEvent *event);
   void scrollContentsBy(int dx, int dy);
+  void paintEvent(QPaintEvent *event);
+  void dragMoveEvent(QDragMoveEvent *event);
+  void dragLeaveEvent(QDragLeaveEvent *event);
+  void dropEvent(QDropEvent *event);
 
  private slots:
   void LoadGeometry();
@@ -92,6 +96,8 @@ class PlaylistView : public QTreeView {
   QList<QPixmap> currenttrack_bar_right_;
   QPixmap currenttrack_play_;
   QPixmap currenttrack_pause_;
+
+  int drop_indicator_row_;
 };
 
 #endif // PLAYLISTVIEW_H
