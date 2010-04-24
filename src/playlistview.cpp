@@ -32,6 +32,8 @@
 const char* PlaylistView::kSettingsGroup = "Playlist";
 const int PlaylistView::kGlowIntensitySteps = 32;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
+const int PlaylistView::kDropIndicatorWidth = 2;
+const int PlaylistView::kDropIndicatorGradientWidth = 5;
 
 
 PlaylistView::PlaylistView(QWidget *parent)
@@ -400,30 +402,32 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       break;
 
     case QAbstractItemView::OnViewport:
-      drop_pos = visualRect(model()->index(model()->rowCount() - 1, 0)).bottom() + 1;
+      if (model()->rowCount() == 0)
+        drop_pos = 1;
+      else
+        drop_pos = visualRect(model()->index(model()->rowCount() - 1, 0)).bottom() + 1;
       break;
   }
 
   // Draw a nice gradient first
-  static const int kGradientWidth = 5;
   QColor line_color(QApplication::palette().color(QPalette::Highlight));
   QColor shadow_color(line_color.lighter(140));
   QColor shadow_fadeout_color(shadow_color);
-  shadow_color.setAlpha(200);
-  shadow_fadeout_color.setAlpha(50);
+  shadow_color.setAlpha(255);
+  shadow_fadeout_color.setAlpha(0);
 
-  QLinearGradient gradient(QPoint(0, drop_pos - kGradientWidth),
-                           QPoint(0, drop_pos + kGradientWidth));
+  QLinearGradient gradient(QPoint(0, drop_pos - kDropIndicatorGradientWidth),
+                           QPoint(0, drop_pos + kDropIndicatorGradientWidth));
   gradient.setColorAt(0.0, shadow_fadeout_color);
   gradient.setColorAt(0.5, shadow_color);
   gradient.setColorAt(1.0, shadow_fadeout_color);
-  QPen gradient_pen(QBrush(gradient), kGradientWidth * 2);
+  QPen gradient_pen(QBrush(gradient), kDropIndicatorGradientWidth * 2);
   p.setPen(gradient_pen);
   p.drawLine(QPoint(0, drop_pos),
              QPoint(width(), drop_pos));
 
   // Now draw the line on top
-  QPen line_pen(line_color, 2);
+  QPen line_pen(line_color, kDropIndicatorWidth);
   p.setPen(line_pen);
   p.drawLine(QPoint(0, drop_pos),
              QPoint(width(), drop_pos));
@@ -433,7 +437,7 @@ void PlaylistView::dragMoveEvent(QDragMoveEvent *event) {
   QTreeView::dragMoveEvent(event);
 
   QModelIndex index(indexAt(event->pos()));
-  drop_indicator_row_ = index.isValid() ? index.row() : -1;
+  drop_indicator_row_ = index.isValid() ? index.row() : 0;
 }
 
 void PlaylistView::dragLeaveEvent(QDragLeaveEvent *event) {

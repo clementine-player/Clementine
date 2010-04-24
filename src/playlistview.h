@@ -75,6 +75,8 @@ class PlaylistView : public QTreeView {
   static const char* kSettingsGroup;
   static const int kGlowIntensitySteps;
   static const int kAutoscrollGraceTimeout;
+  static const int kDropIndicatorWidth;
+  static const int kDropIndicatorGradientWidth;
 
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
