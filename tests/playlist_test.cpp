@@ -403,6 +403,43 @@ TEST_F(PlaylistTest, UndoRemoveOldCurrent) {
   EXPECT_EQ(-1, playlist_.last_played_index());
 }
 
+TEST_F(PlaylistTest, ShuffleThenNext) {
+  // Add 100 items
+  PlaylistItemList items;
+  for (int i=0 ; i<100 ; ++i)
+    items << MakeMockItemP("Item " + QString::number(i));
+  playlist_.InsertItems(items);
+
+  playlist_.set_current_index(0);
+
+  // Shuffle until the current index is not at the end
+  forever {
+    playlist_.Shuffle();
+    if (playlist_.current_index() != items.count()-1)
+      break;
+  }
+
+  int index = playlist_.current_index();
+  EXPECT_EQ("Item 0", playlist_.current_item()->Metadata().title());
+  EXPECT_EQ("Item 0", playlist_.data(playlist_.index(index, Playlist::Column_Title)));
+  EXPECT_EQ(index, playlist_.last_played_index());
+  EXPECT_EQ(index + 1, playlist_.next_index());
+
+  // Shuffle until the current index *is* at the end
+  forever {
+    playlist_.Shuffle();
+    if (playlist_.current_index() == items.count()-1)
+      break;
+  }
+
+  index = playlist_.current_index();
+  EXPECT_EQ("Item 0", playlist_.current_item()->Metadata().title());
+  EXPECT_EQ("Item 0", playlist_.data(playlist_.index(index, Playlist::Column_Title)));
+  EXPECT_EQ(index, playlist_.last_played_index());
+  EXPECT_EQ(-1, playlist_.next_index());
+  EXPECT_EQ(index-1, playlist_.previous_index());
+}
+
 
 } // namespace
 

@@ -887,6 +887,7 @@ void Playlist::Shuffle() {
         changePersistentIndex(pidx, index(i, pidx.column(), QModelIndex()));
     }
   }
+  current_virtual_index_ = virtual_items_.indexOf(current_index());
 
   layoutChanged();
 
