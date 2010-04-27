@@ -12,7 +12,7 @@
 #include "engines/engine_fwd.h"
 #include "fht.h"     //stack allocated and convenience
 #include <QPixmap> //stack allocated and convenience
-#include <QTimer>  //stack allocated
+#include <QBasicTimer>  //stack allocated
 #include <QWidget> //baseclass
 #include <vector>    //included for convenience
 
@@ -51,6 +51,7 @@ protected:
     void hideEvent(QHideEvent *);
     void showEvent(QShowEvent *);
     void paintEvent( QPaintEvent* );
+    void timerEvent(QTimerEvent *);
 
     void polishEvent();
 
@@ -62,14 +63,16 @@ protected:
     virtual void paused(QPainter& p);
     virtual void demo(QPainter& p);
 
-    void changeTimeout( uint newTimeout )
-    {
-        m_timer.setInterval( newTimeout );
-        m_timeout = newTimeout;
+    void changeTimeout( uint newTimeout ) {
+      m_timeout = newTimeout;
+      if (m_timer.isActive()) {
+        m_timer.stop();
+        m_timer.start(m_timeout, this);
+      }
     }
 
 protected:
-    QTimer m_timer;
+    QBasicTimer m_timer;
     uint   m_timeout;
     FHT    *m_fht;
     EngineBase* m_engine;

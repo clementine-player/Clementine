@@ -49,7 +49,6 @@ Analyzer::Base::Base( QWidget *parent, uint scopeSize )
         , m_engine(NULL)
         , m_lastScope(512)
 {
-  connect( &m_timer, SIGNAL( timeout() ), SLOT( update() ) );
 }
 
 void Analyzer::Base::hideEvent(QHideEvent *) {
@@ -57,7 +56,7 @@ void Analyzer::Base::hideEvent(QHideEvent *) {
 }
 
 void Analyzer::Base::showEvent(QShowEvent *) {
-  m_timer.start(timeout());
+  m_timer.start(timeout(), this);
 }
 
 void Analyzer::Base::transform( Scope &scope ) //virtual
@@ -216,4 +215,11 @@ Analyzer::initSin( Scope &v, const uint size ) //static
         v.push_back( sin( radian ) );
         radian += step;
     }
+}
+
+void Analyzer::Base::timerEvent(QTimerEvent* e) {
+  if (e->timerId() != m_timer.timerId())
+    return;
+
+  update();
 }
