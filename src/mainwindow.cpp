@@ -800,6 +800,9 @@ void MainWindow::RenumberTracks() {
   QModelIndexList indexes=ui_.playlist->selectionModel()->selection().indexes();
   int track=1;
 
+  // Get the index list in order
+  qStableSort(indexes);
+
   // if first selected song has a track number set, start from that offset
   if (indexes.size()) {
     Song first_song=playlist_->item_at(indexes[0].row())->Metadata();
