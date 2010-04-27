@@ -28,6 +28,7 @@ class LineEdit : public QLineEdit {
 
   QString GetHint() const { return hint_; }
   void SetHint(const QString& hint);
+  void ClearHint() { SetHint(QString()); }
 
   void paintEvent(QPaintEvent* e);
 

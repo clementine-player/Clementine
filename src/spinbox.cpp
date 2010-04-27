@@ -14,42 +14,36 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EDITTAGDIALOG_H
-#define EDITTAGDIALOG_H
+#include "spinbox.h"
 
-#include <QDialog>
+#include <QtDebug>
 
-#include "ui_edittagdialog.h"
-#include "song.h"
+SpinBox::SpinBox(QWidget *parent)
+  : QSpinBox(parent),
+    empty_value_(0)
+{
+}
 
-class Library;
+int SpinBox::valueFromText(const QString &text) const {
+  if (text.isEmpty())
+    return empty_value_;
+  return QSpinBox::valueFromText(text);
+}
 
-class EditTagDialog : public QDialog {
-  Q_OBJECT
+QString SpinBox::textFromValue(int val) const {
+  if (val == empty_value_)
+    return "";
+  return QSpinBox::textFromValue(val);
+}
 
- public:
-  EditTagDialog(QWidget* parent = 0);
+void SpinBox::fixup(QString &str) const {
+  if (str.isEmpty())
+    return;
+  QSpinBox::fixup(str);
+}
 
-  static const char* kHintText;
-
-  bool SetSongs(const SongList& songs);
-  void SetTagCompleter(Library* library);
-
- public slots:
-  void accept();
-
- signals:
-  void SongEdited(const Song& old_song, const Song& new_song);
-
- private:
-  Ui::EditTagDialog ui_;
-
-  SongList songs_;
-
-  QString common_artist_;
-  QString common_album_;
-  QString common_genre_;
-  int common_year_;
-};
-
-#endif // EDITTAGDIALOG_H
+QValidator::State SpinBox::validate(QString &input, int &pos) const {
+  if (input.isEmpty())
+    return QValidator::Acceptable;
+  return QSpinBox::validate(input, pos);
+}

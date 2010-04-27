@@ -87,7 +87,7 @@
      <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QSpinBox" name="track">
+        <widget class="SpinBox" name="track">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -116,7 +116,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="year">
+        <widget class="SpinBox" name="year">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -157,7 +157,7 @@
       <widget class="QLineEdit" name="filename">
        <property name="styleSheet">
         <string notr="true">QLineEdit {
-	background-color: transparent;
+  background-color: transparent;
 }</string>
        </property>
        <property name="frame">
@@ -193,6 +193,11 @@
    <class>LineEdit</class>
    <extends>QLineEdit</extends>
    <header>lineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>spinbox.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

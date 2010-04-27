@@ -76,6 +76,7 @@ set(CLEMENTINE-SOURCES
     libraryplaylistitem.cpp
     scopedtransaction.cpp
     playlistundocommands.cpp
+    spinbox.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -138,6 +139,7 @@ set(CLEMENTINE-MOC-HEADERS
     equalizer.h
     equalizerslider.h
     stickyslider.h
+    spinbox.h
 )
 
 # lists of engine source files

@@ -20,15 +20,12 @@
 
 #include <QtDebug>
 
+const char* EditTagDialog::kHintText = QT_TR_NOOP("[click to edit]");
+
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent)
 {
   ui_.setupUi(this);
-
-  QString hint_text(tr("[click to edit]"));
-  ui_.album->SetHint(hint_text);
-  ui_.artist->SetHint(hint_text);
-  ui_.genre->SetHint(hint_text);
 }
 
 bool EditTagDialog::SetSongs(const SongList &s) {
@@ -40,14 +37,20 @@ bool EditTagDialog::SetSongs(const SongList &s) {
   }
   songs_ = songs;
 
+  if (songs.count() == 0)
+    return false;
+
   // Don't allow editing of fields that don't make sense for multiple items
   ui_.title->setEnabled(songs.count() == 1);
   ui_.track->setEnabled(songs.count() == 1);
   ui_.comment->setEnabled(songs.count() == 1);
 
-  if (songs.count() == 0)
-    return false;
-  else if (songs.count() == 1) {
+  common_artist_ = songs[0].artist();
+  common_album_ = songs[0].album();
+  common_genre_ = songs[0].genre();
+  common_year_ = songs[0].year();
+
+  if (songs.count() == 1) {
     const Song& song = songs[0];
 
     ui_.title->setText(song.title());
@@ -59,6 +62,10 @@ bool EditTagDialog::SetSongs(const SongList &s) {
     ui_.comment->setPlainText(song.comment());
 
     ui_.filename->setText(song.filename());
+
+    ui_.artist->ClearHint();
+    ui_.album->ClearHint();
+    ui_.genre->ClearHint();
   } else {
     // Find any fields that are common to all items
 
@@ -66,26 +73,30 @@ bool EditTagDialog::SetSongs(const SongList &s) {
     ui_.track->clear();
     ui_.comment->clear();
 
-    QString artist(songs[0].artist());
-    QString album(songs[0].album());
-    QString genre(songs[0].genre());
-    int year = songs[0].year();
-
     foreach (const Song& song, songs) {
-      if (artist != song.artist())
-        artist = QString::null;
-      if (album != song.album())
-        album = QString::null;
-      if (genre != song.genre())
-        genre = QString::null;
-      if (year != song.year())
-        year = -1;
+      if (common_artist_ != song.artist()) {
+        common_artist_ = QString::null;
+        ui_.artist->SetHint(kHintText);
+      }
+
+      if (common_album_ != song.album()) {
+        common_album_ = QString::null;
+        ui_.album->SetHint(kHintText);
+      }
+
+      if (common_genre_ != song.genre()) {
+        common_genre_ = QString::null;
+        ui_.genre->SetHint(kHintText);
+      }
+
+      if (common_year_ != song.year())
+        common_year_ = -1;
     }
 
-    ui_.artist->setText(artist);
-    ui_.album->setText(album);
-    ui_.genre->setText(genre);
-    ui_.year->setValue(year);
+    ui_.artist->setText(common_artist_);
+    ui_.album->setText(common_album_);
+    ui_.genre->setText(common_genre_);
+    ui_.year->setValue(common_year_);
 
     ui_.filename->setText(tr("Editing %n tracks", "", songs.count()));
   }
@@ -102,19 +113,23 @@ void EditTagDialog::accept() {
   foreach (const Song& old, songs_) {
     Song song(old);
 
-    if (ui_.title->isEnabled() && !ui_.title->text().isEmpty())
-      song.set_title(ui_.title->text());
-    if (ui_.artist->isEnabled() && !ui_.artist->text().isEmpty())
-      song.set_artist(ui_.artist->text());
-    if (ui_.album->isEnabled() && !ui_.album->text().isEmpty())
-      song.set_album(ui_.album->text());
-    if (ui_.genre->isEnabled() && !ui_.genre->text().isEmpty())
-      song.set_genre(ui_.genre->text());
+    int track = ui_.track->text().isEmpty() ? -1 : ui_.track->value();
+    int year = ui_.year->text().isEmpty() ? -1 : ui_.year->value();
 
-    if (ui_.year->isEnabled())
-      song.set_year(ui_.year->value());
+    if (ui_.title->isEnabled())
+      song.set_title(ui_.title->text());
+
+    if (ui_.artist->isEnabled() && !(common_artist_.isNull() && ui_.artist->text().isEmpty()))
+      song.set_artist(ui_.artist->text());
+    if (ui_.album->isEnabled() && !(common_album_.isNull() && ui_.album->text().isEmpty()))
+      song.set_album(ui_.album->text());
+    if (ui_.genre->isEnabled() && !(common_genre_.isNull() && ui_.genre->text().isEmpty()))
+      song.set_genre(ui_.genre->text());
+    if (ui_.year->isEnabled() && !(common_year_ == -1 && year == -1))
+      song.set_year(year);
+
     if (ui_.track->isEnabled())
-      song.set_track(ui_.track->value());
+      song.set_track(track);
 
     if (ui_.comment->isEnabled())
       song.set_comment(ui_.comment->toPlainText());
