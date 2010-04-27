@@ -329,11 +329,11 @@ void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHi
       index = PrevEditableIndex(currentIndex());
 
     if (!index.isValid()) {
-        QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
+      QTreeView::closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);
     } else {
-        QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
-        setCurrentIndex(index);
-        edit(index);
+      QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
+      setCurrentIndex(index);
+      edit(index);
     }
   } else {
     QTreeView::closeEditor(editor, hint);

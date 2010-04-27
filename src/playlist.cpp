@@ -186,6 +186,9 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
   int row = index.row();
   Song song = item_at(row)->Metadata();
 
+  if (index.data() == value)
+    return false;
+
   if(!set_column_value(song, (Column)index.column(), value))
     return false;
 
