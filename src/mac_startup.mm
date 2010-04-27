@@ -1,6 +1,8 @@
 #import <IOKit/hidsystem/ev_keymap.h>
 #import <AppKit/NSEvent.h>
 
+#import <AppKit/NSApplication.h>
+
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSTimer.h>
@@ -14,12 +16,11 @@
 #include <QCoreApplication>
 #include <QEvent>
 #include <QObject>
-#import <AppKit/NSApplication.h>
 
 // Capture global media keys on Mac (Cocoa only!)
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
-@interface MacApplication :NSApplication { //<NSApplicationDelegate> { //, SUUpdaterDelegateInformalProtocol> {
+@interface MacApplication :NSApplication {
   GlobalShortcuts* shortcut_handler_;
   QObject* application_handler_;
 }
@@ -31,9 +32,37 @@
 - (void) SetApplicationHandler: (QObject*)handler;
 
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
+@end
 
+@interface AppDelegate :NSObject <NSApplicationDelegate> {
+  QObject* application_handler_;
+}
+
+- (id) initWithHandler: (QObject*)handler;
 // NSApplicationDelegate
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
+@end
+
+@implementation AppDelegate
+
+- (id) init {
+  if ((self = [super init])) {
+    application_handler_ = nil;
+  }
+  return self;
+}
+
+- (id) initWithHandler: (QObject*)handler {
+  application_handler_ = handler;
+  return self;
+}
+
+- (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag {
+  if (application_handler_) {
+    qApp->postEvent(application_handler_, new QEvent(QEvent::ApplicationActivate));
+  }
+  return YES;
+}
 @end
 
 @implementation MacApplication
@@ -42,7 +71,6 @@
   if ((self = [super init])) {
     [self SetShortcutHandler:nil];
     [self SetApplicationHandler:nil];
-    [self setDelegate:self];
   }
   return self;
 }
@@ -60,16 +88,9 @@
 }
 
 - (void) SetApplicationHandler: (QObject*)handler {
-  application_handler_ = handler;
+  AppDelegate* delegate = [[AppDelegate alloc] initWithHandler:handler];
+  [self setDelegate:delegate];
 }
-
-- (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag {
-  if (application_handler_) {
-    qApp->postEvent(application_handler_, new QEvent(QEvent::ApplicationActivate));
-  }
-  return YES;
-}
-
 
 -(void) sendEvent: (NSEvent*)event {
   if ([event type] == NSSystemDefined && [event subtype] == 8) {
