@@ -210,7 +210,10 @@ set(CLEMENTINE-LANGUAGES
   el
   en_GB
   es
+  fi
   fr
+  gl
+  kk
   nb
   pl
   pt
