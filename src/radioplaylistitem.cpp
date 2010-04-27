@@ -40,7 +40,7 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
   InitMetadata();
 }
 
-void RadioPlaylistItem::InitFromQuery(const QSqlQuery &query) {
+bool RadioPlaylistItem::InitFromQuery(const QSqlQuery &query) {
   // The song table gets joined first, plus one for the song ROWID
   const int row = Song::kColumns.count() + 1;
 
@@ -52,6 +52,7 @@ void RadioPlaylistItem::InitFromQuery(const QSqlQuery &query) {
   service_ = RadioModel::ServiceByName(service);
 
   InitMetadata();
+  return true;
 }
 
 QVariant RadioPlaylistItem::DatabaseValue(DatabaseColumn column) const {

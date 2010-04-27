@@ -490,6 +490,9 @@ bool Song::Save() const {
 
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
 
+  if (!fileref || fileref->isNull()) // The file probably doesn't exist
+    return false;
+
   fileref->tag()->setTitle(QStringToTaglibString(d->title_));
   fileref->tag()->setArtist(QStringToTaglibString(d->artist_));
   fileref->tag()->setAlbum(QStringToTaglibString(d->album_));

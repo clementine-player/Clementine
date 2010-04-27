@@ -30,7 +30,7 @@ class MockPlaylistItem : public PlaylistItem {
   MOCK_CONST_METHOD0(options,
       Options());
   MOCK_METHOD1(InitFromQuery,
-      void(const QSqlQuery& settings));
+      bool(const QSqlQuery& settings));
   MOCK_METHOD0(Reload,
       void());
   MOCK_CONST_METHOD0(Metadata,

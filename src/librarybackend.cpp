@@ -906,8 +906,8 @@ PlaylistItemList LibraryBackend::GetPlaylistItems(int playlist) {
     if (!item)
       continue;
 
-    item->InitFromQuery(q);
-    ret << item;
+    if (item->InitFromQuery(q))
+      ret << item;
   }
 
   return ret;

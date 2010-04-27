@@ -25,7 +25,7 @@ class LibraryPlaylistItem : public PlaylistItem {
   LibraryPlaylistItem(const QString& type);
   LibraryPlaylistItem(const Song& song);
 
-  void InitFromQuery(const QSqlQuery &query);
+  bool InitFromQuery(const QSqlQuery &query);
   void BindToQuery(QSqlQuery *query) const;
   void Reload();
 

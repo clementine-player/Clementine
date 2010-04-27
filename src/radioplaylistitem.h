@@ -32,7 +32,7 @@ class RadioPlaylistItem : public PlaylistItem {
 
   Options options() const;
 
-  void InitFromQuery(const QSqlQuery &query);
+  bool InitFromQuery(const QSqlQuery &query);
   void BindToQuery(QSqlQuery *query) const;
 
   Song Metadata() const;
