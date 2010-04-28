@@ -215,6 +215,7 @@ set(CLEMENTINE-LANGUAGES
   fi
   fr
   gl
+  it
   kk
   nb
   pl
