@@ -39,7 +39,6 @@ const int PlaylistView::kDropIndicatorGradientWidth = 5;
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
     glow_enabled_(false),
-    glow_timer_(new QTimer(this)),
     glow_intensity_step_(0),
     inhibit_autoscroll_timer_(new QTimer(this)),
     inhibit_autoscroll_(false),
@@ -58,9 +57,6 @@ PlaylistView::PlaylistView(QWidget *parent)
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
   connect(inhibit_autoscroll_timer_, SIGNAL(timeout()), SLOT(InhibitAutoscrollTimeout()));
-
-  glow_timer_->setInterval(1500 / kGlowIntensitySteps);
-  connect(glow_timer_, SIGNAL(timeout()), SLOT(GlowIntensityChanged()));
 
   setAlternatingRowColors(true);
 }
@@ -204,6 +200,11 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
   QTreeView::drawRow(painter, opt, index);
 }
 
+void PlaylistView::timerEvent(QTimerEvent* event) {
+  if (event->timerId() == glow_timer_.timerId())
+    GlowIntensityChanged();
+}
+
 void PlaylistView::GlowIntensityChanged() {
   glow_intensity_step_ = (glow_intensity_step_ + 1) % (kGlowIntensitySteps * 2);
 
@@ -212,23 +213,23 @@ void PlaylistView::GlowIntensityChanged() {
 
 void PlaylistView::StopGlowing() {
   glow_enabled_ = false;
-  glow_timer_->stop();
+  glow_timer_.stop();
   glow_intensity_step_ = kGlowIntensitySteps;
 }
 
 void PlaylistView::StartGlowing() {
   glow_enabled_ = true;
   if (isVisible())
-    glow_timer_->start();
+    glow_timer_.start(1500 / kGlowIntensitySteps, this);
 }
 
 void PlaylistView::hideEvent(QHideEvent*) {
-  glow_timer_->stop();
+  glow_timer_.stop();
 }
 
 void PlaylistView::showEvent(QShowEvent*) {
   if (glow_enabled_)
-    glow_timer_->start();
+    glow_timer_.start(1500 / kGlowIntensitySteps, this);
   MaybeAutoscroll();
 }
 

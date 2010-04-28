@@ -21,6 +21,7 @@
 #include "library.h"
 
 #include <QTreeView>
+#include <QBasicTimer>
 
 class RadioLoadingIndicator;
 
@@ -53,6 +54,7 @@ class PlaylistView : public QTreeView {
  protected:
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);
+  void timerEvent(QTimerEvent *event);
   void mousePressEvent(QMouseEvent *event);
   void scrollContentsBy(int dx, int dy);
   void paintEvent(QPaintEvent *event);
@@ -83,7 +85,7 @@ class PlaylistView : public QTreeView {
   QModelIndex PrevEditableIndex(const QModelIndex& current);
 
   bool glow_enabled_;
-  QTimer* glow_timer_;
+  QBasicTimer glow_timer_;
   int glow_intensity_step_;
   QModelIndex last_current_item_;
   QRect last_glow_rect_;
