@@ -1,3 +1,62 @@
+Version 0.3:
+  Features:
+    * It is now possible to group the library by any field.
+    * Clementine now uses GStreamer to play music.
+    * There is now an equalizer in the Tools menu.
+    * Crossfading between tracks, and gapless playback.
+    * Add an OSD for operating systems that don't have native notifications.
+    * MPRIS support - you can now control Clementine using compatible remote
+      control applications.
+    * You can now control Clementine using the command line.
+    * Better tag editing.  You can now automatically renumber tracks, bulk-edit
+      fields, and edit tags directly from the playlist.
+    * Autocompletion of album and artist names when editing tags.
+    * Undo and redo in the playlist.
+    * Add a menu option to delete items from the playlist.
+    * Add options to hide/show the main window on startup.
+    * Add options to sign out of Last.fm, and hide the Last.fm buttons.
+    * Automatically scroll to the currently playing song.
+    * Automatically start playing again from the previously playing track.
+    * Show a tiny "play" or "pause" icon in the system tray.
+    * Show a nicer indicator in the playlist when drag+dropping songs.
+    * (Windows and Mac) Global shortcut support.
+    * (Windows) The analyzer now works.
+    * (Mac) Remove the system tray icon, and minimize to the dock properly.
+    * (Mac) Use Sparkle for updates.
+
+  Bugfixes:
+    * The library scanner should now be much more efficient, and won't scan
+      your entire collection on startup.
+    * Saving and loading huge playlists should now be much faster.
+    * Fix several issues with runtime linking of sqlite.
+    * It is now possible to play songs that have '#' in the name.
+    * The currently playing track animation is now a more readable colour.
+    * Fix a crash when right-clicking an empty area of the playlist.
+    * Fix a crash when starting Clementine from a directory that contained
+      another directory called "clementine".
+    * Fix a crash when deleting songs from the library while the library
+      scanner is running.
+    * Fix an occasional crash when playing music.
+    * Left clicking on the track slider will now jump to that position.
+    * Stop the user from rearranging album covers in the cover manager.
+    * (Linux) Stop Clementine from creating loads of notifications at once.
+    * (Linux) Clementine will no longer prevent KDE from logging out.
+
+  Internationalization:
+    * Added translations for Portuguese, Czech, Danish, British English,
+      Finnish, French, Galician, German, Italian, Kazakh, Bokmal, Polish,
+      Romanian, Swedish and Turkish.
+  
+  Buildsystem changes:
+    * (Linux) Use the notification daemon directly, instead of through
+      libnotify.
+    * It is now possible to select other audio backends (xine, vlc, phonon)
+      through a cmake option, although doing so is not recommended, and may
+      cause a terrible plague to wreak havok and despair upon your friends and
+      loved ones.  You have been warned.
+
+
+
 Version 0.2:
   Features:
     * Album cover art is now automatically loaded from disk for your library
