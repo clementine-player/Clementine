@@ -79,6 +79,7 @@ include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${LASTFM_INCLUDE_DIRS})
 include_directories("3rdparty/qsqlite")
+include_directories("3rdparty/universalchardet")
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -102,6 +103,8 @@ add_subdirectory(src)
 if (NOT APPLE)
   add_subdirectory(3rdparty/qxt)
 endif (NOT APPLE)
+
+add_subdirectory(3rdparty/universalchardet)
 
 add_subdirectory(tests)
 
