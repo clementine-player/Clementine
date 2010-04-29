@@ -1,5 +1,5 @@
 Name:           clementine
-Version:        0.2
+Version:        0.2.99
 Release:        1%{?dist}
 Summary:        A music player and library organiser
 
@@ -9,10 +9,16 @@ URL:            http://code.google.com/p/clementine-player
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel xine-lib-devel
-BuildRequires:  libnotify-devel qt4-devel boost-devel notification-daemon gcc-c++
-BuildRequires:  cmake
-Requires:       xine-lib-extras-freeworld
+BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
+BuildRequires:  libnotify-devel qt4-devel boost-devel gcc-c++
+BuildRequires:  cmake gstreamer-devel gstreamer-plugins-base-devel
+
+# GStreamer codec dependencies
+Requires:       gstreamer0.10(decoder-audio/mpeg)(mpegversion=1)(layer=3)
+Requires:       gstreamer0.10(decoder-audio/x-vorbis)
+Requires:       gstreamer0.10(decoder-audio/x-flac)
+Requires:       gstreamer0.10(decoder-audio/x-speex)
+Requires:       gstreamer0.10(decoder-audio/x-wav)
 
 %description
 Clementine is a modern music player and library organiser.
@@ -25,23 +31,12 @@ advantage of Qt4.
 
 %build
 cd bin
-cmake ..
+cmake .. -DCMAKE_INSTALL_PREFIX=%{buildroot}/usr/
 make %{?_smp_mflags}
 
-
 %install
-install -d %{buildroot}/%{_bindir}
-install -d %{buildroot}%{_datadir}/applications
-install -d %{buildroot}%{_datadir}/icons/hicolor/64x64/apps
-
-install -m 0755 bin/%{name} %{buildroot}/%{_bindir}/clementine
-install -m 0644 dist/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
-install -m 0644 dist/%{name}_64.png %{buildroot}/%{_datadir}/icons/hicolor/64x64/apps/application-x-clementine.png
-
-desktop-file-install \
-    --dir %{buildroot}%{_datadir}/applications \
-    --delete-original \
-    %{buildroot}%{_datadir}/applications/%{name}.desktop
+cd bin
+make install
 
 %clean
 cd bin
@@ -57,6 +52,9 @@ make clean
 
 
 %changelog
+* Thu Apr 29 2010 David Sansome <me@davidsansome.com> - 0.2.99
+- Version 0.3 rc 1
+
 * Mon Mar 22 2010 David Sansome <me@davidsansome.com> - 0.2
 - Version 0.2
 
