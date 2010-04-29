@@ -333,7 +333,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
-  connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(NextItem()));
+  connect(radio_model_, SIGNAL(StreamFinished()), player_, SLOT(RadioStreamFinished()));
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
@@ -474,7 +474,7 @@ void MainWindow::QueueFiles(const QList<QUrl>& urls) {
   QModelIndex playlist_index = playlist_->InsertPaths(urls);
 
   if (playlist_index.isValid() && player_->GetState() != Engine::Playing)
-    player_->PlayAt(playlist_index.row(), Engine::First);
+    player_->PlayAt(playlist_index.row(), Engine::First, true);
 }
 
 void MainWindow::ReportError(const QString& message) {
@@ -563,7 +563,7 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   if (!index.isValid())
     return;
 
-  player_->PlayAt(index.row(), Engine::Manual);
+  player_->PlayAt(index.row(), Engine::Manual, true);
 }
 
 void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
@@ -575,7 +575,7 @@ void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
       playlist_->InsertLibraryItems(library_->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
-    player_->PlayAt(first_song.row(), Engine::First);
+    player_->PlayAt(first_song.row(), Engine::First, true);
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
@@ -692,7 +692,7 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
       QList<RadioItem*>() << item);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
-    player_->PlayAt(first_song.row(), Engine::Manual);
+    player_->PlayAt(first_song.row(), Engine::First, true);
 }
 
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
@@ -763,7 +763,7 @@ void MainWindow::PlaylistPlay() {
   if (playlist_->current_index() == playlist_menu_index_.row()) {
     player_->PlayPause();
   } else {
-    player_->PlayAt(playlist_menu_index_.row(), Engine::Manual);
+    player_->PlayAt(playlist_menu_index_.row(), Engine::Manual, true);
   }
 }
 
@@ -980,7 +980,7 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
       player_->Previous();
       break;
     case CommandlineOptions::Player_Next:
-      player_->Next(Engine::Manual);
+      player_->Next();
       break;
 
     case CommandlineOptions::Player_None:
@@ -1009,7 +1009,7 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     player_->Seek(player_->PositionGet() / 1000 + options.seek_by());
 
   if (options.play_track_at() != -1)
-    player_->PlayAt(options.play_track_at(), Engine::Manual);
+    player_->PlayAt(options.play_track_at(), Engine::Manual, true);
 
   if (options.show_osd())
     player_->ShowOSD();

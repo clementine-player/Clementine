@@ -141,18 +141,22 @@ void Player::ReloadSettings() {
   engine_->ReloadSettings();
 }
 
-void Player::NextAuto() {
-  Next(Engine::Auto);
+void Player::RadioStreamFinished() {
+  NextInternal(Engine::Auto);
 }
 
-void Player::Next(Engine::TrackChangeType change) {
+void Player::Next() {
+  NextInternal(Engine::Manual);
+}
+
+void Player::NextInternal(Engine::TrackChangeType change) {
   if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
     stream_change_type_ = change;
     playlist_->current_item()->LoadNext();
     return;
   }
 
-  NextItem(change);
+  NextItem(Engine::Manual);
 }
 
 void Player::NextItem(Engine::TrackChangeType change) {
@@ -164,7 +168,7 @@ void Player::NextItem(Engine::TrackChangeType change) {
     return;
   }
 
-  PlayAt(i, change);
+  PlayAt(i, change, false);
 }
 
 void Player::TrackEnded() {
@@ -173,7 +177,7 @@ void Player::TrackEnded() {
     return;
   }
 
-  Next(Engine::Auto);
+  NextInternal(Engine::Auto);
 }
 
 void Player::PlayPause() {
@@ -201,7 +205,7 @@ void Player::PlayPause() {
     if (i == -1) i = playlist_->last_played_index();
     if (i == -1) i = 0;
 
-    PlayAt(i, Engine::First);
+    PlayAt(i, Engine::First, true);
     break;
   }
   }
@@ -220,7 +224,7 @@ void Player::Previous() {
     return;
   }
 
-  PlayAt(i, Engine::Manual);
+  PlayAt(i, Engine::Manual, false);
 }
 
 void Player::EngineStateChanged(Engine::State state) {
@@ -253,9 +257,9 @@ Engine::State Player::GetState() const {
   return engine_->state();
 }
 
-void Player::PlayAt(int index, Engine::TrackChangeType change) {
-  if (change != Engine::Auto)
-    playlist_->set_current_index(-1); // to reshuffle
+void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
+  if (reshuffle)
+    playlist_->set_current_index(-1);
   playlist_->set_current_index(index);
 
   shared_ptr<PlaylistItem> item = playlist_->item_at(index);
@@ -488,7 +492,7 @@ int Player::AddTrack(const QString& track, bool play_now) {
 
   if (index.isValid()) {
     if (play_now) {
-      Next(Engine::First);
+      PlayAt(index.row(), Engine::First, true);
     }
     return 0;  // Success.
   }
@@ -518,7 +522,7 @@ void Player::SetRandom(bool enable) {
 }
 
 void Player::PlayTrack(int index) {
-  PlayAt(index, Engine::Manual);
+  PlayAt(index, Engine::Manual, true);
 }
 
 void Player::PlaylistChanged() {
@@ -529,7 +533,7 @@ void Player::TrackAboutToEnd() {
   if (engine_->is_autocrossfade_enabled()) {
     // Crossfade is on, so just start playing the next track.  The current one
     // will fade out, and the new one will fade in
-    NextAuto();
+    NextInternal(Engine::Auto);
   } else {
     // Crossfade is off, so start preloading the next track so we don't get a
     // gap between songs.

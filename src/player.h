@@ -79,14 +79,23 @@ class Player : public QObject {
  public slots:
   void ReloadSettings();
 
-  void PlayAt(int index, Engine::TrackChangeType change);
+  // Manual track change to the specified track
+  void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle);
+
+  // If there's currently a song playing, pause it, otherwise play the track
+  // that was playing last, or the first one on the playlist
   void PlayPause();
-  void NextItem(Engine::TrackChangeType change = Engine::Auto);
+
+  // Skips this track.  Might load more of the current radio station.
+  void Next();
+
+  // Jumps to the next actual item on the playlist, with an automatic change
+  void RadioStreamFinished();
+
   void Previous();
   void SetVolume(int value);
   void Seek(int seconds);
 
-  void TrackEnded();
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void CurrentMetadataChanged(const Song& metadata);
 
@@ -100,7 +109,6 @@ class Player : public QObject {
   void Pause();
   void Stop();
   void Play();
-  void Next(Engine::TrackChangeType change = Engine::Manual);
   void Prev();
   int PositionGet() const;
   void PositionSet(int);
@@ -144,8 +152,14 @@ class Player : public QObject {
  private slots:
   void EngineStateChanged(Engine::State);
   void EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle);
-  void NextAuto();
   void TrackAboutToEnd();
+  void TrackEnded();
+
+  // Play the next item on the playlist - disregarding radio stations like
+  // last.fm that might have more tracks.
+  void NextItem(Engine::TrackChangeType change);
+
+  void NextInternal(Engine::TrackChangeType);
 
  private:
   QVariantMap GetMetadata(const PlaylistItem& item) const;
