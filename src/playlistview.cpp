@@ -201,6 +201,7 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
 }
 
 void PlaylistView::timerEvent(QTimerEvent* event) {
+  QTreeView::timerEvent(event);
   if (event->timerId() == glow_timer_.timerId())
     GlowIntensityChanged();
 }
