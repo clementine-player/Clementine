@@ -344,15 +344,9 @@ TEST_F(PlaylistTest, UndoMultiRemove) {
 
   ASSERT_EQ(0, playlist_.rowCount(QModelIndex()));
 
-  // Undo removing 2 items
+  // Undo removing all 3 items
   ASSERT_TRUE(playlist_.undo_stack()->canUndo());
-  EXPECT_EQ("remove 2 songs", playlist_.undo_stack()->undoText());
-  playlist_.undo_stack()->undo();
-  ASSERT_EQ(2, playlist_.rowCount(QModelIndex()));
-
-  // Undo removing 1 item
-  ASSERT_TRUE(playlist_.undo_stack()->canUndo());
-  EXPECT_EQ("remove 1 songs", playlist_.undo_stack()->undoText());
+  EXPECT_EQ("remove 3 songs", playlist_.undo_stack()->undoText());
   playlist_.undo_stack()->undo();
   ASSERT_EQ(3, playlist_.rowCount(QModelIndex()));
 }

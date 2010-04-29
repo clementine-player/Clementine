@@ -46,19 +46,34 @@ void InsertItems::undo() {
 
 
 RemoveItems::RemoveItems(Playlist *playlist, int pos, int count)
-  : Base(playlist),
-    pos_(pos),
-    count_(count)
+  : Base(playlist)
 {
-  setText(tr("remove %n songs", "", count_));
+  setText(tr("remove %n songs", "", count));
+
+  ranges_ << Range(pos, count);
 }
 
 void RemoveItems::redo() {
-  items_ = playlist_->RemoveItemsWithoutUndo(pos_, count_);
+  for (int i=0 ; i<ranges_.count() ; ++i)
+    ranges_[i].items_ = playlist_->RemoveItemsWithoutUndo(
+        ranges_[i].pos_, ranges_[i].count_);
 }
 
 void RemoveItems::undo() {
-  playlist_->InsertItemsWithoutUndo(items_, pos_);
+  for (int i=ranges_.count()-1 ; i>=0 ; --i)
+    playlist_->InsertItemsWithoutUndo(ranges_[i].items_, ranges_[i].pos_);
+}
+
+bool RemoveItems::mergeWith(const QUndoCommand *other) {
+  const RemoveItems* remove_command = static_cast<const RemoveItems*>(other);
+  ranges_.append(remove_command->ranges_);
+
+  int sum = 0;
+  foreach (const Range& range, ranges_)
+    sum += range.count_;
+  setText(tr("remove %n songs", "", sum));
+
+  return true;
 }
 
 

@@ -25,6 +25,10 @@
 class Playlist;
 
 namespace PlaylistUndoCommands {
+  enum Types {
+    Type_RemoveItems = 0,
+  };
+
   class Base : public QUndoCommand {
     Q_DECLARE_TR_FUNCTIONS(PlaylistUndoCommands);
 
@@ -51,13 +55,21 @@ namespace PlaylistUndoCommands {
    public:
     RemoveItems(Playlist* playlist, int pos, int count);
 
+    int id() const { return Type_RemoveItems; }
+
     void undo();
     void redo();
+    bool mergeWith(const QUndoCommand *other);
 
    private:
-    int pos_;
-    int count_;
-    PlaylistItemList items_;
+    struct Range {
+      Range(int pos, int count) : pos_(pos), count_(count) {}
+      int pos_;
+      int count_;
+      PlaylistItemList items_;
+    };
+
+    QList<Range> ranges_;
   };
 
   class MoveItems : public Base {
