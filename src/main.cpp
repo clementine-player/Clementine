@@ -37,6 +37,8 @@
 #include <QDir>
 #include <QNetworkAccessManager>
 
+#include <glib/gutils.h>
+
 #ifdef Q_WS_X11
 #  include <QDBusConnection>
 #  include <QDBusMetaType>
@@ -80,6 +82,9 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationVersion("0.3 rc1");
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
+
+  // This makes us show up nicely in gnome-volume-control
+  g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
