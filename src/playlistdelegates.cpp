@@ -20,6 +20,9 @@
 #include <QDateTime>
 #include <QLineEdit>
 #include <QPainter>
+#include <QToolTip>
+#include <QWhatsThis>
+#include <QHelpEvent>
 
 const int PlaylistDelegateBase::kMinHeight = 19;
 
@@ -97,6 +100,42 @@ QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(const QStyleOptionViewItem
   }
 
   return ret;
+}
+
+bool PlaylistDelegateBase::helpEvent(QHelpEvent *event, QAbstractItemView *view,
+                                     const QStyleOptionViewItem &option,
+                                     const QModelIndex &index) {
+  // This function is copied from QAbstractItemDelegate, and changed to show
+  // displayText() in the tooltip, rather than the index's naked
+  // Qt::ToolTipRole text.
+
+  Q_UNUSED(option);
+
+  if (!event || !view)
+    return false;
+
+  QHelpEvent *he = static_cast<QHelpEvent*>(event);
+  QString text = displayText(index.data(), QLocale::system());
+
+  if (text.isEmpty() || !he)
+    return false;
+
+  switch (event->type()) {
+    case QEvent::ToolTip:
+      QToolTip::showText(he->globalPos(), text, view);
+      return true;
+
+    case QEvent::QueryWhatsThis:
+      return true;
+
+    case QEvent::WhatsThis:
+      QWhatsThis::showText(he->globalPos(), text, view);
+      return true;
+
+    default:
+      break;
+  }
+  return false;
 }
 
 

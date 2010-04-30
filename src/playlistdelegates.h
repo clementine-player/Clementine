@@ -37,6 +37,10 @@ class PlaylistDelegateBase : public QStyledItemDelegate {
 
   static const int kMinHeight;
 
+ public slots:
+  bool helpEvent(QHelpEvent *event, QAbstractItemView *view,
+                 const QStyleOptionViewItem &option, const QModelIndex &index);
+
  protected:
   QTreeView* view_;
 };
