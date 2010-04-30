@@ -142,7 +142,7 @@ void Player::ReloadSettings() {
 }
 
 void Player::RadioStreamFinished() {
-  NextInternal(Engine::Auto);
+  NextItem(Engine::Auto);
 }
 
 void Player::Next() {
