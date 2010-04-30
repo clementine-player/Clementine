@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
-  QCoreApplication::setApplicationVersion("0.2");
+  QCoreApplication::setApplicationVersion("0.3 rc1");
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 

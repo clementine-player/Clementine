@@ -29,7 +29,7 @@ install: build
 	dh_prep  
 	dh_installdirs
 	
-	make install
+	cd bin && make install
 
 binary-indep: install
 
