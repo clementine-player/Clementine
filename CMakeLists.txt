@@ -70,6 +70,12 @@ link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 link_directories(${LASTFM_LIBRARY_DIRS})
 
+# Don't try to use Phonon if its include directory couldn't be found.
+# For some reason this works differently to the rest of Qt...
+if (NOT ${QT_PHONON_INCLUDE_DIR})
+  set (QT_USE_PHONON 0)
+endif (NOT ${QT_PHONON_INCLUDE_DIR})
+
 include(${QT_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
