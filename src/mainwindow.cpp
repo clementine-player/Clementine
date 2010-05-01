@@ -887,7 +887,7 @@ void MainWindow::AddMedia() {
       const SongList& songs = parser.Parse();
       playlist_->InsertSongs(songs);
     } else {
-      QUrl url(path);
+      QUrl url(QUrl::fromLocalFile(path));
       if (url.scheme().isEmpty())
         url.setScheme("file");
       urls << url;
