@@ -359,7 +359,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   // Clementine just crashes when asked to load a file that doesn't exist on
   // Windows, so check for that here.  This is definitely the wrong place for
   // this "fix"...
-  if (url.scheme() == "file" && !QFile::exists(url.path()))
+  if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
     return false;
 
   const bool crossfade = current_pipeline_ &&
