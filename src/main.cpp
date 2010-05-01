@@ -104,6 +104,10 @@ int main(int argc, char *argv[]) {
   QtSingleApplication a(argc, argv);
   a.setQuitOnLastWindowClosed(false);
 
+  // Gnome on Ubuntu has menu icons disabled by default.  I think that's a bad
+  // idea, and makes some menus in Clementine look confusing.
+  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
+
   // Resources
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
