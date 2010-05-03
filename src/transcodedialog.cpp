@@ -22,6 +22,11 @@
 #include <QFileDialog>
 #include <QSettings>
 
+// winspool.h defines this :(
+#ifdef AddJob
+#  undef AddJob
+#endif
+
 const char* TranscodeDialog::kSettingsGroup = "Transcoder";
 
 static bool CompareFormatsByName(const TranscoderFormat* left,
