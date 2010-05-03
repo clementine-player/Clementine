@@ -24,6 +24,10 @@
 #include <QFutureWatcher>
 #include <QMetaType>
 
+#include <boost/scoped_ptr.hpp>
+
+class QEventLoop;
+
 class Transcoder;
 
 class TranscoderFormat {
@@ -36,7 +40,7 @@ class TranscoderFormat {
   virtual QString file_extension() const = 0;
 
  protected:
-  virtual GstElement* CreateOutputBin() const = 0;
+  virtual GstElement* CreateEncodeBin() const = 0;
 
   GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL,
                             const QString& name = QString()) const;
@@ -65,13 +69,27 @@ class Transcoder : public QObject {
   void AllJobsComplete();
 
  private:
+  // The description of a file to transcode - lives in the main thread.
   struct Job {
     QString input;
     QString output;
     const TranscoderFormat* output_format;
   };
 
+  // State held by a job and shared across gstreamer callbacks - lives in the
+  // job's thread.
+  struct JobState {
+    GstElement* convert_element;
+    boost::scoped_ptr<QEventLoop> event_loop;
+    bool success;
+  };
+
   void RunJob(const Job& job);
+  bool Transcode(const Job& job) const;
+
+  static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
+  static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
+  static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
 
  private slots:
   void JobsFinished();

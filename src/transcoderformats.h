@@ -24,7 +24,7 @@ class OggVorbisTranscoder : public TranscoderFormat {
   QString name() const { return "Ogg Vorbis"; }
   QString file_extension() const { return "ogg"; }
 
-  GstElement* CreateOutputBin() const;
+  GstElement* CreateEncodeBin() const;
 };
 
 class OggSpeexTranscoder : public TranscoderFormat {
@@ -32,7 +32,7 @@ class OggSpeexTranscoder : public TranscoderFormat {
   QString name() const { return "Ogg Speex"; }
   QString file_extension() const { return "spx"; }
 
-  GstElement* CreateOutputBin() const;
+  GstElement* CreateEncodeBin() const;
 };
 
 class FlacTranscoder : public TranscoderFormat {
@@ -40,7 +40,7 @@ class FlacTranscoder : public TranscoderFormat {
   QString name() const { return "FLAC"; }
   QString file_extension() const { return "flac"; }
 
-  GstElement* CreateOutputBin() const;
+  GstElement* CreateEncodeBin() const;
 };
 
 class Mp3Transcoder : public TranscoderFormat {
@@ -48,7 +48,7 @@ class Mp3Transcoder : public TranscoderFormat {
   QString name() const { return "MP3"; }
   QString file_extension() const { return "mp3"; }
 
-  GstElement* CreateOutputBin() const;
+  GstElement* CreateEncodeBin() const;
 };
 
 class AacTranscoder : public TranscoderFormat {
@@ -56,7 +56,7 @@ class AacTranscoder : public TranscoderFormat {
   QString name() const { return "AAC"; }
   QString file_extension() const { return "aac"; }
 
-  GstElement* CreateOutputBin() const;
+  GstElement* CreateEncodeBin() const;
 };
 
 class WindowsMediaTranscoder : public TranscoderFormat {
@@ -64,7 +64,7 @@ class WindowsMediaTranscoder : public TranscoderFormat {
   QString name() const { return "Windows Media"; }
   QString file_extension() const { return "wma"; }
 
-  GstElement* CreateOutputBin() const;
+  GstElement* CreateEncodeBin() const;
 };
 
 #endif // TRANSCODERFORMATS_H

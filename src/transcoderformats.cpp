@@ -16,22 +16,22 @@
 
 #include "transcoderformats.h"
 
-GstElement* OggVorbisTranscoder::CreateOutputBin() const {
+GstElement* OggVorbisTranscoder::CreateEncodeBin() const {
   return CreateBin(QStringList() << "vorbisenc" << "oggmux");
 }
 
-GstElement* OggSpeexTranscoder::CreateOutputBin() const {
+GstElement* OggSpeexTranscoder::CreateEncodeBin() const {
   return CreateBin(QStringList() << "speexenc" << "oggmux");
 }
 
-GstElement* FlacTranscoder::CreateOutputBin() const {
+GstElement* FlacTranscoder::CreateEncodeBin() const {
   return CreateElement("flacenc");
 }
 
-GstElement* Mp3Transcoder::CreateOutputBin() const {
+GstElement* Mp3Transcoder::CreateEncodeBin() const {
   return CreateElement("lamemp3enc");
 }
 
-GstElement* AacTranscoder::CreateOutputBin() const {
+GstElement* AacTranscoder::CreateEncodeBin() const {
   return CreateElement("faac");
 }

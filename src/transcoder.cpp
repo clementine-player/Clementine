@@ -19,8 +19,12 @@
 
 #include <QtConcurrentMap>
 #include <QtDebug>
+#include <QEventLoop>
 
 #include <boost/bind.hpp>
+#include <boost/shared_ptr.hpp>
+
+using boost::shared_ptr;
 
 
 GstElement* TranscoderFormat::CreateElement(const QString &factory_name,
@@ -30,11 +34,8 @@ GstElement* TranscoderFormat::CreateElement(const QString &factory_name,
       factory_name.toAscii().constData(),
       name.isNull() ? factory_name.toAscii().constData() : name.toAscii().constData());
 
-  if (ret) {
-    if (bin) gst_bin_add(GST_BIN(bin), ret);
-  } else {
-    gst_object_unref(GST_OBJECT(bin));
-  }
+  if (ret && bin)
+    gst_bin_add(GST_BIN(bin), ret);
 
   return ret;
 }
@@ -45,7 +46,10 @@ GstElement* TranscoderFormat::CreateBin(const QStringList& elements) const {
   GstElement* last_element = NULL;
   for (int i=0 ; i<elements.count() ; ++i) {
     GstElement* element = CreateElement(elements[i], bin);
-    if (!element) return NULL;
+    if (!element) {
+      gst_object_unref(bin);
+      return NULL;
+    }
 
     if (i == 0) {
       // If this is the first element, make it the bin's sink
@@ -120,9 +124,103 @@ void Transcoder::Start() {
 }
 
 void Transcoder::RunJob(const Job& job) {
-  // TODO
+  bool success = Transcode(job);
 
-  emit JobComplete(job.input, true);
+  emit JobComplete(job.input, success);
+}
+
+void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
+  JobState* state = reinterpret_cast<JobState*>(data);
+  GstPad* const audiopad = gst_element_get_pad(state->convert_element, "sink");
+
+  if (GST_PAD_IS_LINKED(audiopad)) {
+    qDebug() << "audiopad is already linked. Unlinking old pad.";
+    gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
+  }
+
+  gst_pad_link(pad, audiopad);
+  gst_object_unref(audiopad);
+}
+
+gboolean Transcoder::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
+  JobState* state = reinterpret_cast<JobState*>(data);
+
+  switch (GST_MESSAGE_TYPE(msg)) {
+    case GST_MESSAGE_ERROR:
+      state->success = false;
+      state->event_loop->exit();
+      break;
+
+    default:
+      break;
+  }
+  return GST_BUS_DROP;
+}
+
+GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg, gpointer data) {
+  JobState* state = reinterpret_cast<JobState*>(data);
+  switch (GST_MESSAGE_TYPE(msg)) {
+    case GST_MESSAGE_EOS:
+      state->event_loop->exit();
+      break;
+
+    case GST_MESSAGE_ERROR:
+      state->success = false;
+      state->event_loop->exit();
+      break;
+
+    default:
+      break;
+  }
+  return GST_BUS_PASS;
+}
+
+bool Transcoder::Transcode(const Job &job) const {
+  // Create the pipeline
+  shared_ptr<GstElement> pipeline(gst_pipeline_new("pipeline"),
+                                  boost::bind(gst_object_unref, _1));
+  if (!pipeline) return false;
+
+  // Create all the elements
+  const TranscoderFormat* f = job.output_format;
+  GstElement* src     = f->CreateElement("filesrc", pipeline.get());
+  GstElement* decode  = f->CreateElement("decodebin", pipeline.get());
+  GstElement* convert = f->CreateElement("audioconvert", pipeline.get());
+  GstElement* encode  = f->CreateEncodeBin();
+  GstElement* sink    = f->CreateElement("filesink", pipeline.get());
+
+  if (!src || !decode || !convert || !encode || !sink)
+    return false;
+
+  // Join them together
+  gst_bin_add(GST_BIN(pipeline.get()), encode);
+  gst_element_link(src, decode);
+  gst_element_link_many(convert, encode, sink, NULL);
+
+  // Set properties
+  g_object_set(src, "location", job.input.toLocal8Bit().constData(), NULL);
+  g_object_set(sink, "location", job.output.toLocal8Bit().constData(), NULL);
+
+  // Set callbacks
+  JobState state;
+  state.convert_element = convert;
+  state.event_loop.reset(new QEventLoop);
+  state.success = true;
+
+  g_signal_connect(decode, "new-decoded-pad", G_CALLBACK(NewPadCallback), &state);
+  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline.get())), BusCallbackSync, &state);
+  gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline.get())), BusCallback, &state);
+
+  // Start the pipeline and wait until it finishes
+  gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
+
+  state.event_loop->exec();
+
+  // Do this explicitly so that it's guaranteed to happen before the event
+  // loop is destroyed.
+  pipeline.reset();
+
+  return state.success;
 }
 
 void Transcoder::JobsFinished() {
