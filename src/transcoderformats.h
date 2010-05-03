@@ -51,10 +51,18 @@ class Mp3Transcoder : public TranscoderFormat {
   GstElement* CreateEncodeBin() const;
 };
 
-class AacTranscoder : public TranscoderFormat {
+class M4aTranscoder : public TranscoderFormat {
  public:
-  QString name() const { return "AAC"; }
-  QString file_extension() const { return "aac"; }
+  QString name() const { return "M4A AAC"; }
+  QString file_extension() const { return "m4a"; }
+
+  GstElement* CreateEncodeBin() const;
+};
+
+class ThreeGPTranscoder : public TranscoderFormat {
+ public:
+  QString name() const { return "3GP AAC"; }
+  QString file_extension() const { return "3gp"; }
 
   GstElement* CreateEncodeBin() const;
 };

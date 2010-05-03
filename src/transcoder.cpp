@@ -83,7 +83,8 @@ Transcoder::Transcoder(QObject* parent)
   formats_ << new OggSpeexTranscoder;
   formats_ << new FlacTranscoder;
   formats_ << new Mp3Transcoder;
-  formats_ << new AacTranscoder;
+  formats_ << new M4aTranscoder;
+  formats_ << new ThreeGPTranscoder;
 
   connect(future_watcher_, SIGNAL(finished()), SLOT(JobsFinished()));
 }

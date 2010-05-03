@@ -32,6 +32,10 @@ GstElement* Mp3Transcoder::CreateEncodeBin() const {
   return CreateElement("lamemp3enc");
 }
 
-GstElement* AacTranscoder::CreateEncodeBin() const {
-  return CreateElement("faac");
+GstElement* M4aTranscoder::CreateEncodeBin() const {
+  return CreateBin(QStringList() << "faac" << "ffmux_mp4");
+}
+
+GstElement* ThreeGPTranscoder::CreateEncodeBin() const {
+  return CreateBin(QStringList() << "faac" << "ffmux_3gp");
 }
