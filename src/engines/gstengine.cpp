@@ -55,7 +55,8 @@ GstEngine::GstEngine()
     delayq_(g_queue_new()),
     current_sample_(0),
     equalizer_enabled_(false),
-    seek_timer_(new QTimer(this))
+    seek_timer_(new QTimer(this)),
+    timer_id_(-1)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelay);
