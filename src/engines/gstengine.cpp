@@ -418,13 +418,15 @@ bool GstEngine::Play( uint offset ) {
   if (offset) Seek(offset);
 
   current_sample_ = 0;
-  startTimer(kTimerInterval);
+  timer_id_ = startTimer(kTimerInterval);
   emit StateChanged(Engine::Playing);
   return true;
 }
 
 
 void GstEngine::Stop() {
+  killTimer(timer_id_);
+
   url_ = QUrl(); // To ensure we return Empty from state()
 
   if (fadeout_enabled_ && current_pipeline_)

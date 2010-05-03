@@ -152,6 +152,8 @@ class GstEngine : public Engine::Base {
   QTimer* seek_timer_;
   bool waiting_to_seek_;
   uint seek_pos_;
+
+  int timer_id_;
 };
 
 
