@@ -77,6 +77,9 @@ set(CLEMENTINE-SOURCES
     scopedtransaction.cpp
     playlistundocommands.cpp
     spinbox.cpp
+    transcoder.cpp
+    transcoderformats.cpp
+    transcodedialog.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -140,6 +143,8 @@ set(CLEMENTINE-MOC-HEADERS
     equalizerslider.h
     stickyslider.h
     spinbox.h
+    transcoder.h
+    transcodedialog.h
 )
 
 # lists of engine source files
@@ -198,6 +203,7 @@ set(CLEMENTINE-UI
     groupbydialog.ui
     equalizer.ui
     equalizerslider.ui
+    transcodedialog.ui
 )
 
 # Resource files
@@ -316,7 +322,7 @@ add_custom_target(po_all ALL)
 foreach (_lang ${CLEMENTINE-LANGUAGES})
   set(_po ${CMAKE_CURRENT_SOURCE_DIR}/translations/${_lang}.po)
   add_custom_target("po_${_lang}"
-    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location
+    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location --no-fuzzy-matching
         ${_po} ${CLEMENTINE-POT}
     DEPENDS ${_po})
   add_dependencies("po_${_lang}" pot)

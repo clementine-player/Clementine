@@ -44,6 +44,7 @@
 #include "equalizer.h"
 #include "commandlineoptions.h"
 #include "mac_startup.h"
+#include "transcodedialog.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -72,8 +73,12 @@ void qt_mac_set_dock_menu(QMenu*);
 
 const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
-const char* MainWindow::kMediaFilterSpec =
-    "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma);;Playlists (*.m3u *.xspf *.xml)";
+const char* MainWindow::kMusicFilterSpec =
+    QT_TR_NOOP("Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)");
+const char* MainWindow::kPlaylistFilterSpec =
+    QT_TR_NOOP("Playlists (*.m3u *.xspf *.xml)");
+const char* MainWindow::kAllFilesFilterSpec =
+    QT_TR_NOOP("All Files (*)");
 
 MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
@@ -95,6 +100,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     cover_manager_(new AlbumCoverManager(network)),
     group_by_dialog_(new GroupByDialog),
     equalizer_(new Equalizer),
+    transcode_dialog_(new TranscodeDialog),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
@@ -165,6 +171,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(ui_.action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
   connect(ui_.action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
   connect(ui_.action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
+  connect(ui_.action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
 
   // Give actions to buttons
   ui_.forward_button->setDefaultAction(ui_.action_next_track);
@@ -863,7 +870,9 @@ void MainWindow::AddMedia() {
 
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
-      this, "Add media", directory, kMediaFilterSpec);
+      this, tr("Add media"), directory,
+      QString("%1;;%2;;%3").arg(tr(kMusicFilterSpec), tr(kPlaylistFilterSpec),
+                                tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty())
     return;
 

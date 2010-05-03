@@ -46,6 +46,7 @@ class GlobalShortcuts;
 class GroupByDialog;
 class Equalizer;
 class CommandlineOptions;
+class TranscodeDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -60,6 +61,9 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
   static const char* kSettingsGroup;
+  static const char* kMusicFilterSpec;
+  static const char* kPlaylistFilterSpec;
+  static const char* kAllFilesFilterSpec;
 
   // Don't change the values
   enum StartupBehaviour {
@@ -134,7 +138,6 @@ class MainWindow : public QMainWindow {
 
  private:
   static const int kStateVersion;
-  static const char* kMediaFilterSpec;
 
   Ui::MainWindow ui_;
   SystemTrayIcon* tray_icon_;
@@ -157,6 +160,7 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<AlbumCoverManager> cover_manager_;
   boost::scoped_ptr<GroupByDialog> group_by_dialog_;
   boost::scoped_ptr<Equalizer> equalizer_;
+  boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;
