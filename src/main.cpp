@@ -29,6 +29,7 @@
 #include "potranslator.h"
 #include "commandlineoptions.h"
 #include "engines/enginebase.h"
+#include "config.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -79,7 +80,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
-  QCoreApplication::setApplicationVersion("0.3 rc1");
+  QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_STRING);
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 

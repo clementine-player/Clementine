@@ -2,7 +2,7 @@
 
 name=clementine
 url=`svn info | grep URL | head -n1 | awk '{print $2}' | sed 's/\/dist//'`
-version=`grep Version $name.spec | head -n1 | awk '{print $2}'`
+version="@CLEMENTINE_VERSION@"
 
 echo "Checking out $url into $name-$version..."
 

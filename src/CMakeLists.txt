@@ -228,6 +228,10 @@ set(CLEMENTINE-LANGUAGES
   tr
 )
 
+# Configured header file that contains various macros
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
+               ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+
 # OSD and DBus.
 if(APPLE)
   set(CLEMENTINE-SOURCES ${CLEMENTINE-SOURCES} osd_mac.mm mac_startup.mm)
@@ -264,7 +268,9 @@ endif(APPLE)
 
 # resource file for windows
 if(WIN32)
-  set(CLEMENTINE-WIN32-RESOURCES ../dist/windows/windres.rc)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../dist/windows/windres.rc.in
+                 ${CMAKE_CURRENT_BINARY_DIR}/windres.rc)
+  set(CLEMENTINE-WIN32-RESOURCES windres.rc)
 endif(WIN32)
 
 qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})

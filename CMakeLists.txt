@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
 include(FindPkgConfig)
+include(Version.cmake)
 
 if (CMAKE_FIND_ROOT_PATH)
   # Help find the Qt headers if we're cross compiling (since we can't run qmake.exe)
@@ -109,10 +110,9 @@ add_subdirectory(src)
 if (NOT APPLE)
   add_subdirectory(3rdparty/qxt)
 endif (NOT APPLE)
-
 add_subdirectory(3rdparty/universalchardet)
-
 add_subdirectory(tests)
+add_subdirectory(dist)
 
 if (WIN32 OR APPLE)
   message(STATUS "Building static qsqlite plugin")
