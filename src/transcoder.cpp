@@ -20,6 +20,7 @@
 #include <QtConcurrentMap>
 #include <QtDebug>
 #include <QEventLoop>
+#include <QFile>
 
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
@@ -107,10 +108,23 @@ void Transcoder::AddJob(const QString &input,
   job.input = input;
   job.output_format = output_format;
 
+  // Use the supplied filename if there was one, otherwise take the file
+  // extension off the input filename and append the correct one.
   if (!output.isEmpty())
     job.output = output;
   else
     job.output = input.section('.', 0, -2) + '.' + output_format->file_extension();
+
+  // Never overwrite existing files
+  if (QFile::exists(job.output)) {
+    for (int i=0 ; ; ++i) {
+      QString new_filename = QString("%1.%2").arg(job.output).arg(i);
+      if (!QFile::exists(new_filename)) {
+        job.output = new_filename;
+        break;
+      }
+    }
+  }
 
   jobs_ << job;
 }
