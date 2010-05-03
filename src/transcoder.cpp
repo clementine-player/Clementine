@@ -176,7 +176,9 @@ GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg, gpointer d
 }
 
 bool Transcoder::Transcode(const Job &job) const {
-  // Create the pipeline
+  // Create the pipeline.
+  // This should be a scoped_ptr, but scoped_ptr doesn't support custom
+  // destructors.
   shared_ptr<GstElement> pipeline(gst_pipeline_new("pipeline"),
                                   boost::bind(gst_object_unref, _1));
   if (!pipeline) return false;
