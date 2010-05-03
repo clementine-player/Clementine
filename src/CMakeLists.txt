@@ -221,6 +221,7 @@ set(CLEMENTINE-LANGUAGES
   pl
   pt
   pt_BR
+  ro
   ru
   sk
   sv
