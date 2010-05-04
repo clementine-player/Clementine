@@ -98,7 +98,6 @@ Section "Gstreamer plugins" gstreamer-plugins
   File "/oname=libgstautodetect.dll" "gstreamer-plugins\libgstautodetect.dll"
   File "/oname=libgstcoreelements.dll" "gstreamer-plugins\libgstcoreelements.dll"
   File "/oname=libgstdecodebin.dll" "gstreamer-plugins\libgstdecodebin.dll"
-  File "/oname=libgstdirectsound.dll" "gstreamer-plugins\libgstdirectsound.dll"
   File "/oname=libgstflac.dll" "gstreamer-plugins\libgstflac.dll"
   File "/oname=libgstgio.dll" "gstreamer-plugins\libgstgio.dll"
   File "/oname=libgsticydemux.dll" "gstreamer-plugins\libgsticydemux.dll"
@@ -110,6 +109,7 @@ Section "Gstreamer plugins" gstreamer-plugins
   File "/oname=libgsttypefindfunctions.dll" "gstreamer-plugins\libgsttypefindfunctions.dll"
   File "/oname=libgstvolume.dll" "gstreamer-plugins\libgstvolume.dll"
   File "/oname=libgstvorbis.dll" "gstreamer-plugins\libgstvorbis.dll"
+  File "/oname=libgstwaveform.dll" "gstreamer-plugins\libgstwaveform.dll"
   File "/oname=libgstwavparse.dll" "gstreamer-plugins\libgstwavparse.dll"
 SectionEnd
 
@@ -187,7 +187,6 @@ Section "Uninstall"
   Delete "$INSTDIR\gstreamer-plugins\libgstautodetect.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstcoreelements.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstdecodebin.dll"
-  Delete "$INSTDIR\gstreamer-plugins\libgstdirectsound.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstflac.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstgio.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgsticydemux.dll"
@@ -199,6 +198,7 @@ Section "Uninstall"
   Delete "$INSTDIR\gstreamer-plugins\libgsttypefindfunctions.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstvolume.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstvorbis.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstwaveform.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstwavparse.dll"
   
   ; Remove the installation folder.
