@@ -10,6 +10,7 @@
 !define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 
 SetCompressor /SOLID lzma
+!addplugindir nsisplugins
 !include "MUI2.nsh"
 
 !define MUI_ICON "clementine.ico"
@@ -136,6 +137,29 @@ Section "Uninstaller"
 SectionEnd
 
 Section "Uninstall"
+  ; Kill clementine.exe if it's running
+  ; This calling convention is retarded...
+  StrCpy $0 "clementine.exe"
+  KillProc::FindProcesses
+  StrCmp $1 "-1" wooops
+
+  StrCmp $0 "0" completed
+  
+  DetailPrint "Killing running clementine.exe..."
+
+  StrCpy $0 "clementine.exe"
+  KillProc::KillProcesses
+  StrCmp $1 "-1" wooops
+
+  Sleep 2000
+  Goto completed
+
+  wooops:
+  DetailPrint "-> Error: Something went wrong while killing running clementine.exe"
+  Abort
+
+  completed:
+  
   ; Delete all the files
   Delete "$INSTDIR\clementine.ico"
   Delete "$INSTDIR\clementine.exe"
