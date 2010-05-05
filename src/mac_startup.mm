@@ -34,7 +34,7 @@
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
-@interface AppDelegate :NSObject <NSApplicationDelegate> {
+@interface AppDelegate :NSObject { //<NSApplicationDelegate> {
   QObject* application_handler_;
 }
 

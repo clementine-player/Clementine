@@ -338,7 +338,7 @@ QStringList Playlist::mimeTypes() const {
 }
 
 Qt::DropActions Playlist::supportedDropActions() const {
-  return Qt::MoveAction | Qt::CopyAction;
+  return Qt::MoveAction | Qt::CopyAction | Qt::LinkAction;
 }
 
 bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int, const QModelIndex&) {
