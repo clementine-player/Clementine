@@ -180,7 +180,7 @@ void LibraryWatcher::ScanSubdirectory(
   // If one has been removed, "rescan" it to get the deleted songs
   SubdirectoryList previous_subdirs = t->GetImmediateSubdirs(path);
   foreach (const Subdirectory& subdir, previous_subdirs) {
-    if (!QFile::exists(subdir.path)) {
+    if (!QFile::exists(subdir.path) && subdir.path != path) {
       ScanSubdirectory(subdir.path, subdir, t, true);
     }
   }

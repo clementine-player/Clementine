@@ -10,6 +10,7 @@
 !define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 
 SetCompressor /SOLID lzma
+!addplugindir nsisplugins
 !include "MUI2.nsh"
 
 !define MUI_ICON "clementine.ico"
@@ -110,6 +111,7 @@ Section "Gstreamer plugins" gstreamer-plugins
   File "/oname=libgsttypefindfunctions.dll" "gstreamer-plugins\libgsttypefindfunctions.dll"
   File "/oname=libgstvolume.dll" "gstreamer-plugins\libgstvolume.dll"
   File "/oname=libgstvorbis.dll" "gstreamer-plugins\libgstvorbis.dll"
+  File "/oname=libgstwaveform.dll" "gstreamer-plugins\libgstwaveform.dll"
   File "/oname=libgstwavparse.dll" "gstreamer-plugins\libgstwavparse.dll"
 SectionEnd
 
@@ -135,6 +137,29 @@ Section "Uninstaller"
 SectionEnd
 
 Section "Uninstall"
+  ; Kill clementine.exe if it's running
+  ; This calling convention is retarded...
+  StrCpy $0 "clementine.exe"
+  KillProc::FindProcesses
+  StrCmp $1 "-1" wooops
+
+  StrCmp $0 "0" completed
+  
+  DetailPrint "Killing running clementine.exe..."
+
+  StrCpy $0 "clementine.exe"
+  KillProc::KillProcesses
+  StrCmp $1 "-1" wooops
+
+  Sleep 2000
+  Goto completed
+
+  wooops:
+  DetailPrint "-> Error: Something went wrong while killing running clementine.exe"
+  Abort
+
+  completed:
+  
   ; Delete all the files
   Delete "$INSTDIR\clementine.ico"
   Delete "$INSTDIR\clementine.exe"
@@ -199,7 +224,10 @@ Section "Uninstall"
   Delete "$INSTDIR\gstreamer-plugins\libgsttypefindfunctions.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstvolume.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstvorbis.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstwaveform.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstwavparse.dll"
+
+  Delete "$INSTDIR\Uninstall.exe"
   
   ; Remove the installation folder.
   RMDir "$INSTDIR\gstreamer-plugins"
