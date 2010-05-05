@@ -397,10 +397,10 @@ if(WIN32 OR APPLE)
 endif(WIN32 OR APPLE)
 
 add_executable(clementine
-   MACOSX_BUNDLE
-   WIN32
-   ${CLEMENTINE-WIN32-RESOURCES}
-   main.cpp
+  MACOSX_BUNDLE
+  WIN32
+  ${CLEMENTINE-WIN32-RESOURCES}
+  main.cpp
 )
 target_link_libraries(clementine clementine_lib)
 
