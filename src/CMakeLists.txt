@@ -396,9 +396,14 @@ if(WIN32 OR APPLE)
   target_link_libraries(clementine_lib qsqlite)
 endif(WIN32 OR APPLE)
 
+# Show the console window in debug mode on Windows
+if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(CLEMENTINE-WIN32-FLAG WIN32)
+endif (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+
 add_executable(clementine
   MACOSX_BUNDLE
-  WIN32
+  ${CLEMENTINE-WIN32-FLAG}
   ${CLEMENTINE-WIN32-RESOURCES}
   main.cpp
 )
