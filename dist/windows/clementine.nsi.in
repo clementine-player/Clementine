@@ -202,6 +202,8 @@ Section "Uninstall"
   Delete "$INSTDIR\gstreamer-plugins\libgstvorbis.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstwaveform.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstwavparse.dll"
+
+  Delete "$INSTDIR\Uninstall.exe"
   
   ; Remove the installation folder.
   RMDir "$INSTDIR\gstreamer-plugins"
