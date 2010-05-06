@@ -107,6 +107,7 @@ void TranscodeDialog::Start() {
 }
 
 void TranscodeDialog::Cancel() {
+  transcoder_->Cancel();
   SetWorking(false);
 }
 

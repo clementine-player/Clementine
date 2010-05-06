@@ -21,12 +21,11 @@
 
 #include <QObject>
 #include <QStringList>
-#include <QFutureWatcher>
+#include <QEvent>
 #include <QMetaType>
 
+#include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
-
-class QEventLoop;
 
 class Transcoder;
 
@@ -57,16 +56,23 @@ class Transcoder : public QObject {
   ~Transcoder();
 
   QList<const TranscoderFormat*> formats() const;
+  int max_threads() const { return max_threads_; }
+
+  void set_max_threads(int count) { max_threads_ = count; }
 
   void AddJob(const QString& input, const TranscoderFormat* output_format,
               const QString& output = QString());
 
  public slots:
   void Start();
+  void Cancel();
 
  signals:
   void JobComplete(const QString& filename, bool success);
   void AllJobsComplete();
+
+ protected:
+  bool event(QEvent* e);
 
  private:
   // The description of a file to transcode - lives in the main thread.
@@ -79,26 +85,49 @@ class Transcoder : public QObject {
   // State held by a job and shared across gstreamer callbacks - lives in the
   // job's thread.
   struct JobState {
-    GstElement* convert_element;
-    boost::scoped_ptr<QEventLoop> event_loop;
-    bool success;
+    JobState(const Job& job, Transcoder* parent)
+      : job_(job), parent_(parent), convert_element_(NULL) {}
+
+    void PostFinished(bool success);
+
+    Job job_;
+    Transcoder* parent_;
+    boost::shared_ptr<GstElement> pipeline_;
+    GstElement* convert_element_;
   };
 
-  void RunJob(const Job& job);
-  bool Transcode(const Job& job) const;
+  // Event passed from a GStreamer callback to the Transcoder when a job
+  // finishes.
+  struct JobFinishedEvent : public QEvent {
+    JobFinishedEvent(JobState* state, bool success);
+
+    static int sEventType;
+
+    JobState* state_;
+    bool success_;
+  };
+
+  enum StartJobStatus {
+    StartedSuccessfully,
+    FailedToStart,
+    NoMoreJobs,
+    AllThreadsBusy,
+  };
+
+  StartJobStatus MaybeStartNextJob();
+  bool StartJob(const Job& job);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
 
- private slots:
-  void JobsFinished();
-
  private:
-  QList<TranscoderFormat*> formats_;
-  QList<Job> jobs_;
+  typedef QList<boost::shared_ptr<JobState> > JobStateList;
 
-  QFutureWatcher<void>* future_watcher_;
+  int max_threads_;
+  QList<TranscoderFormat*> formats_;
+  QList<Job> queued_jobs_;
+  JobStateList current_jobs_;
 };
 
 #endif // TRANSCODER_H
