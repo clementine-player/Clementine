@@ -1,7 +1,7 @@
 # Change this file when releasing a new version.
 # You'll also need to add a new changelog entry in:
 #   debian/changelog
-#   dist/clementine.spec
+#   dist/clementine.spec.in
 
 # Version numbers.  For m.n rc, use m.(n-1).99
 set(CLEMENTINE_VERSION_MAJOR 0)
