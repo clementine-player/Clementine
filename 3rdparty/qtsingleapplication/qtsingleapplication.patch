@@ -1,0 +1,212 @@
+--- qtlocalpeer.cpp	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtlocalpeer.cpp	2010-05-03 15:15:24.000000000 +0100
+@@ -59,14 +59,12 @@
+ #include <time.h>
+ #endif
+ 
+-namespace QtLP_Private {
+ #include "qtlockedfile.cpp"
+ #if defined(Q_OS_WIN)
+ #include "qtlockedfile_win.cpp"
+ #else
+ #include "qtlockedfile_unix.cpp"
+ #endif
+-}
+ 
+ const char* QtLocalPeer::ack = "ack";
+ 
+@@ -118,7 +116,7 @@
+     if (lockFile.isLocked())
+         return false;
+ 
+-    if (!lockFile.lock(QtLP_Private::QtLockedFile::WriteLock, false))
++    if (!lockFile.lock(QtLockedFile::WriteLock, false))
+         return true;
+ 
+     bool res = server->listen(socketName);
+@@ -136,7 +134,7 @@
+ }
+ 
+ 
+-bool QtLocalPeer::sendMessage(const QString &message, int timeout)
++bool QtLocalPeer::sendMessage(const QByteArray &message, int timeout)
+ {
+     if (!isClient())
+         return false;
+@@ -160,9 +158,8 @@
+     if (!connOk)
+         return false;
+ 
+-    QByteArray uMsg(message.toUtf8());
+     QDataStream ds(&socket);
+-    ds.writeBytes(uMsg.constData(), uMsg.size());
++    ds.writeBytes(message.constData(), message.size());
+     bool res = socket.waitForBytesWritten(timeout);
+     res &= socket.waitForReadyRead(timeout);   // wait for ack
+     res &= (socket.read(qstrlen(ack)) == ack);
+@@ -191,13 +188,12 @@
+         uMsgBuf += got;
+     } while (remaining && got >= 0 && socket->waitForReadyRead(2000));
+     if (got < 0) {
+-        qWarning() << "QtLocalPeer: Message reception failed" << socket->errorString();
++        qWarning("QtLocalPeer: Message reception failed %s", socket->errorString().toUtf8().constData());
+         delete socket;
+         return;
+     }
+-    QString message(QString::fromUtf8(uMsg));
+     socket->write(ack, qstrlen(ack));
+     socket->waitForBytesWritten(1000);
+     delete socket;
+-    emit messageReceived(message); //### (might take a long time to return)
++    emit messageReceived(uMsg); //### (might take a long time to return)
+ }
+--- qtlocalpeer.h	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtlocalpeer.h	2010-05-03 15:15:17.000000000 +0100
+@@ -49,9 +49,7 @@
+ #include <QtNetwork/QLocalSocket>
+ #include <QtCore/QDir>
+ 
+-namespace QtLP_Private {
+ #include "qtlockedfile.h"
+-}
+ 
+ class QtLocalPeer : public QObject
+ {
+@@ -60,12 +58,12 @@
+ public:
+     QtLocalPeer(QObject *parent = 0, const QString &appId = QString());
+     bool isClient();
+-    bool sendMessage(const QString &message, int timeout);
++    bool sendMessage(const QByteArray &message, int timeout);
+     QString applicationId() const
+         { return id; }
+ 
+ Q_SIGNALS:
+-    void messageReceived(const QString &message);
++    void messageReceived(const QByteArray &message);
+ 
+ protected Q_SLOTS:
+     void receiveConnection();
+@@ -74,7 +72,7 @@
+     QString id;
+     QString socketName;
+     QLocalServer* server;
+-    QtLP_Private::QtLockedFile lockFile;
++    QtLockedFile lockFile;
+ 
+ private:
+     static const char* ack;
+--- qtlockedfile_win.cpp	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtlockedfile_win.cpp	2010-03-07 22:54:21.000000000 +0000
+@@ -65,7 +65,7 @@
+ 
+     Qt::HANDLE mutex;
+     if (doCreate) {
+-        QT_WA( { mutex = CreateMutexW(NULL, FALSE, (TCHAR*)mname.utf16()); },
++        QT_WA( { mutex = CreateMutexW(NULL, FALSE, (WCHAR*)mname.utf16()); },
+                { mutex = CreateMutexA(NULL, FALSE, mname.toLocal8Bit().constData()); } );
+         if (!mutex) {
+             qErrnoWarning("QtLockedFile::lock(): CreateMutex failed");
+@@ -73,7 +73,7 @@
+         }
+     }
+     else {
+-        QT_WA( { mutex = OpenMutexW(SYNCHRONIZE | MUTEX_MODIFY_STATE, FALSE, (TCHAR*)mname.utf16()); },
++        QT_WA( { mutex = OpenMutexW(SYNCHRONIZE | MUTEX_MODIFY_STATE, FALSE, (WCHAR*)mname.utf16()); },
+                { mutex = OpenMutexA(SYNCHRONIZE | MUTEX_MODIFY_STATE, FALSE, mname.toLocal8Bit().constData()); } );
+         if (!mutex) {
+             if (GetLastError() != ERROR_FILE_NOT_FOUND)
+--- qtsingleapplication.cpp	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsingleapplication.cpp	2010-04-12 23:25:15.000000000 +0100
+@@ -143,7 +143,7 @@
+ {
+     actWin = 0;
+     peer = new QtLocalPeer(this, appId);
+-    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
++    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
+ }
+ 
+ 
+@@ -260,7 +260,7 @@
+ 
+     \sa isRunning(), messageReceived()
+ */
+-bool QtSingleApplication::sendMessage(const QString &message, int timeout)
++bool QtSingleApplication::sendMessage(const QByteArray &message, int timeout)
+ {
+     return peer->sendMessage(message, timeout);
+ }
+@@ -292,9 +292,9 @@
+ {
+     actWin = aw;
+     if (activateOnMessage)
+-        connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
++        connect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
+     else
+-        disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
++        disconnect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
+ }
+ 
+ 
+--- qtsingleapplication.h	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsingleapplication.h	2010-04-12 23:25:15.000000000 +0100
+@@ -90,12 +90,12 @@
+         { isRunning(); Q_UNUSED(dummy) }
+ 
+ public Q_SLOTS:
+-    bool sendMessage(const QString &message, int timeout = 5000);
++    bool sendMessage(const QByteArray &message, int timeout = 5000);
+     void activateWindow();
+ 
+ 
+ Q_SIGNALS:
+-    void messageReceived(const QString &message);
++    void messageReceived(const QByteArray &message);
+ 
+ 
+ private:
+--- qtsinglecoreapplication.h	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsinglecoreapplication.h	2010-04-12 23:25:43.000000000 +0100
+@@ -61,11 +61,11 @@
+     QString id() const;
+ 
+ public Q_SLOTS:
+-    bool sendMessage(const QString &message, int timeout = 5000);
++    bool sendMessage(const QByteArray &message, int timeout = 5000);
+ 
+ 
+ Q_SIGNALS:
+-    void messageReceived(const QString &message);
++    void messageReceived(const QByteArray &message);
+ 
+ 
+ private:
+--- qtsinglecoreapplication.cpp	2009-12-16 10:43:33.000000000 +0000
++++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp	2010-04-12 23:25:43.000000000 +0100
+@@ -80,7 +80,7 @@
+     : QCoreApplication(argc, argv)
+ {
+     peer = new QtLocalPeer(this);
+-    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
++    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
+ }
+ 
+ 
+@@ -93,7 +93,7 @@
+     : QCoreApplication(argc, argv)
+ {
+     peer = new QtLocalPeer(this, appId);
+-    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
++    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
+ }
+ 
+ 
+@@ -128,7 +128,7 @@
+     \sa isRunning(), messageReceived()
+ */
+ 
+-bool QtSingleCoreApplication::sendMessage(const QString &message, int timeout)
++bool QtSingleCoreApplication::sendMessage(const QByteArray &message, int timeout)
+ {
+     return peer->sendMessage(message, timeout);
+ }
