@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 FRAMEWORK_SEARCH_PATH=[
-    '/usr/local/Trolltech/Qt-4.7.0/lib',
+#    '/usr/local/Trolltech/Qt-4.7.0/lib',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
@@ -106,7 +106,7 @@ QT_PLUGINS = [
     'imageformats/libqtiff.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
-    '/usr/local/Trolltech/Qt-4.7.0/plugins',
+#    '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
@@ -257,7 +257,7 @@ def FixBinary(path):
 
 def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
-  args = ['cp', '-f', path, new_path]
+  args = ['ditto', '--arch=i386', path, new_path]
   commands.append(args)
   return new_path
 
@@ -265,7 +265,7 @@ def CopyPlugin(path, subdir):
   new_path = os.path.join(plugins_dir, subdir, os.path.basename(path))
   args = ['mkdir', '-p', os.path.dirname(new_path)]
   commands.append(args)
-  args = ['cp', '-f', path, new_path]
+  args = ['ditto', '--arch=i386', path, new_path]
   commands.append(args)
   return new_path
 
@@ -277,7 +277,7 @@ def CopyFramework(path):
       break
   args = ['mkdir', '-p', full_path]
   commands.append(args)
-  args = ['cp', '-f', path, full_path]
+  args = ['ditto', '--arch=i386', path, full_path]
   commands.append(args)
   return os.path.join(full_path, parts[-1])
 
