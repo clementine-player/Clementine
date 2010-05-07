@@ -316,7 +316,7 @@ add_custom_target(po_all ALL)
 foreach (_lang ${CLEMENTINE-LANGUAGES})
   set(_po ${CMAKE_CURRENT_SOURCE_DIR}/translations/${_lang}.po)
   add_custom_target("po_${_lang}"
-    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location
+    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location --no-fuzzy-matching --backup=off
         ${_po} ${CLEMENTINE-POT}
     DEPENDS ${_po})
   add_dependencies("po_${_lang}" pot)
