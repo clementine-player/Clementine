@@ -103,6 +103,9 @@ add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
 
 # Translations stuff
 find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
+if(NOT GETTEXT_XGETTEXT_EXECUTABLE)
+  message(FATAL_ERROR "Could not find xgettext executable")
+endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
