@@ -38,7 +38,7 @@ class Library : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy);
 
  public:
-  Library(EngineBase* engine, QObject* parent = 0);
+  Library(QObject* parent = 0, const QString& table = QueryOptions::kLibraryTable);
   ~Library();
 
   enum {
@@ -176,7 +176,6 @@ class Library : public SimpleTreeModel<LibraryItem> {
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
 
  private:
-  EngineBase* engine_;
   boost::scoped_ptr<BackgroundThreadFactory<LibraryBackendInterface> > backend_factory_;
   boost::scoped_ptr<BackgroundThreadFactory<LibraryWatcher> > watcher_factory_;
   BackgroundThread<LibraryBackendInterface>* backend_;

@@ -16,7 +16,6 @@
 
 #include "librarywatcher.h"
 #include "librarybackend.h"
-#include "engines/enginebase.h"
 
 #include <QFileSystemWatcher>
 #include <QDirIterator>

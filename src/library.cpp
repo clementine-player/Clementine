@@ -27,15 +27,15 @@
 #include <boost/bind.hpp>
 
 
-Library::Library(EngineBase* engine, QObject* parent)
+Library::Library(QObject* parent, const QString& table)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
-    engine_(engine),
     backend_factory_(new BackgroundThreadFactoryImplementation<LibraryBackendInterface, LibraryBackend>),
     watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
     backend_(NULL),
     watcher_(NULL),
     dir_model_(new LibraryDirectoryModel(this)),
     waiting_for_threads_(2),
+    query_options_(table),
     artist_icon_(":artist.png"),
     album_icon_(":album.png"),
     no_cover_icon_(":nocover.png")
@@ -96,8 +96,6 @@ void Library::BackendInitialised() {
 void Library::WatcherInitialised() {
   connect(watcher_->Worker().get(), SIGNAL(ScanStarted()), SIGNAL(ScanStarted()));
   connect(watcher_->Worker().get(), SIGNAL(ScanFinished()), SIGNAL(ScanFinished()));
-
-  watcher_->Worker()->SetEngine(engine_);
 
   if (--waiting_for_threads_ == 0)
     Initialise();

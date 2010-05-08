@@ -21,17 +21,17 @@
 #include <QDateTime>
 #include <QSqlError>
 
-QueryOptions::QueryOptions()
-  : max_age(-1)
+const char* QueryOptions::kLibraryTable = "songs";
+
+QueryOptions::QueryOptions(const QString& _table)
+  : table(_table),
+    max_age(-1)
 {
 }
 
-
-LibraryQuery::LibraryQuery()
-{
-}
 
 LibraryQuery::LibraryQuery(const QueryOptions& options)
+  : table_(options.table)
 {
   if (!options.filter.isEmpty()) {
     where_clauses_ << "("
@@ -73,7 +73,7 @@ void LibraryQuery::AddCompilationRequirement(bool compilation) {
 }
 
 QSqlError LibraryQuery::Exec(QSqlDatabase db) {
-  QString sql = QString("SELECT %1 FROM songs").arg(column_spec_);
+  QString sql = QString("SELECT %1 FROM %2").arg(column_spec_, table_);
 
   if (!where_clauses_.isEmpty())
     sql += " WHERE " + where_clauses_.join(" AND ");

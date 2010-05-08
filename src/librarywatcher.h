@@ -19,7 +19,6 @@
 
 #include "directory.h"
 #include "song.h"
-#include "engines/engine_fwd.h"
 
 #include <QObject>
 #include <QStringList>
@@ -39,7 +38,6 @@ class LibraryWatcher : public QObject {
   LibraryWatcher(QObject* parent = 0);
 
   void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) { backend_ = backend; }
-  void SetEngine(EngineBase* engine) { engine_ = engine; } // TODO: shared_ptr
 
   void Stop() { stop_requested_ = true; }
 
@@ -122,7 +120,6 @@ class LibraryWatcher : public QObject {
     QFileSystemWatcher* watcher;
   };
 
-  EngineBase* engine_;
   boost::shared_ptr<LibraryBackendInterface> backend_;
   bool stop_requested_;
 

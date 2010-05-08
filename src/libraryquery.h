@@ -26,17 +26,20 @@
 class Song;
 
 struct QueryOptions {
-  QueryOptions();
+  static const char* kLibraryTable;
+
+  QueryOptions(const QString& _table = kLibraryTable);
 
   bool Matches(const Song& song) const;
+
+  QString table;
   QString filter;
   int max_age;
 };
 
 class LibraryQuery {
  public:
-  LibraryQuery();
-  LibraryQuery(const QueryOptions& options);
+  LibraryQuery(const QueryOptions& options = QueryOptions());
 
   void SetColumnSpec(const QString& spec) { column_spec_ = spec; }
   void SetOrderBy(const QString& order_by) { order_by_ = order_by; }
@@ -51,6 +54,7 @@ class LibraryQuery {
   operator const QSqlQuery& () const { return query_; }
 
  private:
+  QString table_;
   QString column_spec_;
   QString order_by_;
   QStringList where_clauses_;

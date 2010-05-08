@@ -93,7 +93,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     radio_model_(new RadioModel(this)),
     playlist_(new Playlist(this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), engine, this)),
-    library_(new Library(player_->GetEngine(), this)),
+    library_(new Library(this)),
     global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog),
     add_stream_dialog_(new AddStreamDialog),
