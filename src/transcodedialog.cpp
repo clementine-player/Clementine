@@ -56,6 +56,15 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   s.beginGroup(kSettingsGroup);
   last_add_dir_ = s.value("last_add_dir", QDir::homePath()).toString();
 
+  QString last_output_format = s.value("last_output_format", "ogg").toString();
+  for (int i=0 ; i<ui_.format->count() ; ++i) {
+    if (last_output_format ==
+        ui_.format->itemData(i).value<const TranscoderFormat*>()->file_extension()) {
+      ui_.format->setCurrentIndex(i);
+      break;
+    }
+  }
+
   // Add a start button
   start_button_ = ui_.button_box->addButton(
       tr("Start transcoding"), QDialogButtonBox::ActionRole);
@@ -93,17 +102,27 @@ void TranscodeDialog::Start() {
   const TranscoderFormat* format = ui_.format->itemData(
       ui_.format->currentIndex()).value<const TranscoderFormat*>();
 
+  // Add jobs to the transcoder
   for (int i=0 ; i<file_model->rowCount() ; ++i) {
     QString filename = file_model->index(i, 0).data(Qt::UserRole).toString();
     transcoder_->AddJob(filename, format);
   }
 
+  // Set up the progressbar
   ui_.progress_bar->setValue(0);
   ui_.progress_bar->setMaximum(file_model->rowCount());
 
+  // Reset the UI
   progress_ = 0;
   errors_ = 0;
+
+  // Start transcoding
   transcoder_->Start();
+
+  // Save the last output format
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("last_output_format", format->file_extension());
 }
 
 void TranscodeDialog::Cancel() {
