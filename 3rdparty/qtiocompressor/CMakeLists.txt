@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.6)
+
+set(IOCOMPRESSOR-SOURCES
+    qtiocompressor.cpp
+)
+
+set(IOCOMPRESSOR-MOC-HEADERS
+    qtiocompressor.h
+)
+
+QT4_WRAP_CPP(IOCOMPRESSOR-SOURCES-MOC ${IOCOMPRESSOR-MOC-HEADERS})
+
+ADD_LIBRARY(qtiocompressor
+    ${IOCOMPRESSOR-SOURCES}
+    ${IOCOMPRESSOR-SOURCES-MOC}
+)

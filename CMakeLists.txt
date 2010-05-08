@@ -109,6 +109,7 @@ endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
+add_subdirectory(3rdparty/qtiocompressor)
 add_subdirectory(src)
 if (NOT APPLE)
   add_subdirectory(3rdparty/qxt)

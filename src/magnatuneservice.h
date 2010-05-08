@@ -14,40 +14,40 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MULTILOADINGINDICATOR_H
-#define MULTILOADINGINDICATOR_H
+#ifndef MAGNATUNESERVICE_H
+#define MAGNATUNESERVICE_H
 
-#include <QWidget>
+#include <QXmlStreamReader>
 
-#include "ui_multiloadingindicator.h"
+#include "radioservice.h"
 
-class MultiLoadingIndicator : public QWidget {
+class QNetworkAccessManager;
+
+class MagnatuneService : public RadioService {
   Q_OBJECT
 
  public:
-  MultiLoadingIndicator(QWidget* parent = 0);
+  MagnatuneService(QObject* parent = 0);
 
-  enum TaskType {
-    LoadingAudioEngine,
-    UpdatingLibrary,
-    GettingChannels,
-    LoadingStream,
-    LoadingLastFM,
-    LoadingMagnatune,
-  };
+  static const char* kServiceName;
+  static const char* kDatabaseUrl;
 
- public slots:
-  void TaskStarted(MultiLoadingIndicator::TaskType type);
-  void TaskFinished(MultiLoadingIndicator::TaskType type);
+  RadioItem* CreateRootItem(RadioItem* parent);
+  void LazyPopulate(RadioItem* item);
 
- private:
-  void UpdateText();
-  static QString TaskTypeToString(TaskType type);
+  void StartLoading(const QUrl &url);
+
+ private slots:
+  void ReloadDatabase();
+  void ReloadDatabaseFinished();
 
  private:
-  Ui::MultiLoadingIndicator ui_;
+  void ReadTrack(QXmlStreamReader& reader);
 
-  QList<TaskType> tasks_;
+ private:
+  RadioItem* root_;
+
+  QNetworkAccessManager* network_;
 };
 
-#endif // MULTILOADINGINDICATOR_H
+#endif // MAGNATUNESERVICE_H

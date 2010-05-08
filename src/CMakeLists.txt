@@ -80,6 +80,7 @@ set(CLEMENTINE-SOURCES
     transcoder.cpp
     transcoderformats.cpp
     transcodedialog.cpp
+    magnatuneservice.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -145,6 +146,7 @@ set(CLEMENTINE-MOC-HEADERS
     spinbox.h
     transcoder.h
     transcodedialog.h
+    magnatuneservice.h
 )
 
 # lists of engine source files
@@ -357,6 +359,7 @@ qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-QM-RESOURCE})
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qtsingleapplication")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qtiocompressor")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qxt")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest/include")
 
@@ -369,6 +372,7 @@ add_library(clementine_lib
 )
 target_link_libraries(clementine_lib
     qtsingleapplication
+    qtiocompressor
     lastfm
     ${GOBJECT_LIBRARIES}
     ${GLIB_LIBRARIES}

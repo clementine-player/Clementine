@@ -20,6 +20,7 @@
 #include "somafmservice.h"
 #include "radiomimedata.h"
 #include "savedradio.h"
+#include "magnatuneservice.h"
 
 #include <QMimeData>
 #include <QtDebug>
@@ -35,6 +36,7 @@ RadioModel::RadioModel(QObject* parent)
 
   AddService(new LastFMService(this));
   AddService(new SomaFMService(this));
+  AddService(new MagnatuneService(this));
   AddService(new SavedRadio(this));
 }
 
