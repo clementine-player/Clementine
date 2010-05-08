@@ -97,7 +97,7 @@ class GstEngine : public Engine::Base {
   void timerEvent(QTimerEvent*);
 
  private slots:
-  void EndOfStreamReached();
+  void EndOfStreamReached(bool has_next_track);
   void HandlePipelineError(const QString& message);
   void NewMetaData(const Engine::SimpleMetaBundle& bundle);
   void AddBufferToScope(GstBuffer* buf);

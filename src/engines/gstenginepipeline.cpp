@@ -36,8 +36,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     equalizer_(NULL),
     volume_(NULL),
     audioscale_(NULL),
-    audiosink_(NULL),
-    event_cb_id_(0)
+    audiosink_(NULL)
 {
 }
 
@@ -46,8 +45,36 @@ void GstEnginePipeline::set_output_device(const QString &sink, const QString &de
   device_ = device;
 }
 
+bool GstEnginePipeline::StopUriDecodeBin(gpointer bin) {
+  gst_element_set_state(GST_ELEMENT(bin), GST_STATE_NULL);
+  return false; // So it doesn't get called again
+}
+
+bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
+  GstElement* new_bin = engine_->CreateElement("uridecodebin");
+  if (!new_bin) return false;
+
+  // Destroy the old one, if any
+  if (uridecodebin_) {
+    gst_bin_remove(GST_BIN(pipeline_), uridecodebin_);
+
+    // Set its state to NULL later in the main thread
+    g_idle_add(GSourceFunc(StopUriDecodeBin), uridecodebin_);
+  }
+
+  uridecodebin_ = new_bin;
+  gst_bin_add(GST_BIN(pipeline_), uridecodebin_);
+
+  g_object_set(G_OBJECT(uridecodebin_), "uri", url.toEncoded().constData(), NULL);
+  g_signal_connect(G_OBJECT(uridecodebin_), "pad-added", G_CALLBACK(NewPadCallback), this);
+  g_signal_connect(G_OBJECT(uridecodebin_), "drained", G_CALLBACK(SourceDrainedCallback), this);
+
+  return true;
+}
+
 bool GstEnginePipeline::Init(const QUrl &url) {
   pipeline_ = gst_pipeline_new("pipeline");
+  url_ = url;
 
   // Here we create all the parts of the gstreamer pipeline - from the source
   // to the sink.  The parts of the pipeline are split up into bins:
@@ -59,16 +86,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   //   audiosink
 
   // Decode bin
-  if (!(uridecodebin_ = engine_->CreateElement("uridecodebin", pipeline_))) { return false; }
-  g_object_set(G_OBJECT(uridecodebin_), "uri", url.toEncoded().constData(), NULL);
-  g_signal_connect(G_OBJECT(uridecodebin_), "pad-added", G_CALLBACK(NewPadCallback), this);
-
-  // Does some stuff with ghost pads
-  /*GstPad* pad = gst_element_get_pad(uridecodebin_, "sink");
-  if (pad) {
-    event_cb_id_ = gst_pad_add_event_probe (pad, G_CALLBACK(EventCallback), this);
-    gst_object_unref(pad);
-  }*/
+  if (!ReplaceDecodeBin(url)) return false;
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
@@ -119,13 +137,6 @@ bool GstEnginePipeline::Init(const QUrl &url) {
 }
 
 GstEnginePipeline::~GstEnginePipeline() {
-  // We don't want an EOS signal from the decodebin
-  if (uridecodebin_) {
-    GstPad *p = gst_element_get_pad(uridecodebin_, "sink");
-    if (p)
-      gst_pad_remove_event_probe(p, event_cb_id_);
-  }
-
   if (pipeline_) {
     gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
     g_source_remove(bus_cb_id_);
@@ -158,7 +169,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
-      emit instance->EndOfStreamReached();
+      emit instance->EndOfStreamReached(false);
       break;
 
     case GST_MESSAGE_TAG:
@@ -249,11 +260,26 @@ void GstEnginePipeline::EventCallback(GstPad*, GstEvent* event, gpointer self) {
 
   switch(event->type) {
     case GST_EVENT_EOS:
-      emit instance->EndOfStreamReached();
+      emit instance->EndOfStreamReached(false);
       break;
 
     default:
       break;
+  }
+}
+
+void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer self) {
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
+
+  if (instance->next_url_.isValid()) {
+    instance->ReplaceDecodeBin(instance->next_url_);
+    gst_element_set_state(instance->uridecodebin_, GST_STATE_PLAYING);
+
+    instance->url_ = instance->next_url_;
+    instance->next_url_ = QUrl();
+
+    // This just tells the UI that we've moved on to the next song
+    emit instance->EndOfStreamReached(true);
   }
 }
 

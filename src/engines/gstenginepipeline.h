@@ -27,6 +27,8 @@
 
 class GstEngine;
 
+struct GstURIDecodeBin;
+
 class GstEnginePipeline : public QObject {
   Q_OBJECT
 
@@ -51,7 +53,12 @@ class GstEnginePipeline : public QObject {
                   QTimeLine::Direction direction = QTimeLine::Forward,
                   QTimeLine::CurveShape shape = QTimeLine::LinearCurve);
 
+  // If this is set then it will be loaded automatically when playback finishes
+  // for gapless playback
+  void SetNextUrl(const QUrl& url) { next_url_ = url; }
+
   // Get information about the music playback
+  QUrl url() const { return url_; }
   bool is_valid() const { return valid_; }
   qint64 position() const;
   qint64 length() const;
@@ -61,7 +68,7 @@ class GstEnginePipeline : public QObject {
   void SetVolumeModifier(qreal mod);
 
  signals:
-  void EndOfStreamReached();
+  void EndOfStreamReached(bool has_next_track);
   void MetadataFound(const Engine::SimpleMetaBundle& bundle);
   void BufferFound(GstBuffer* buf);
   void Error(const QString& message);
@@ -75,11 +82,14 @@ class GstEnginePipeline : public QObject {
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static void EventCallback(GstPad*, GstEvent*, gpointer);
+  static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
+  static bool StopUriDecodeBin(gpointer bin);
   void TagMessageReceived(GstMessage*);
   QString ParseTag(GstTagList* list, const char* tag) const;
   void ErrorMessageReceived(GstMessage*);
 
   void UpdateVolume();
+  bool ReplaceDecodeBin(const QUrl& url);
 
  private:
   static const int kGstStateTimeoutNanosecs = 10000000;
@@ -90,6 +100,9 @@ class GstEnginePipeline : public QObject {
   QString sink_;
   QString device_;
   bool forwards_buffers_;
+
+  QUrl url_;
+  QUrl next_url_;
 
   int volume_percent_;
   qreal volume_modifier_;
@@ -111,7 +124,6 @@ class GstEnginePipeline : public QObject {
   GstElement* audioscale_;
   GstElement* audiosink_;
 
-  uint event_cb_id_;
   uint bus_cb_id_;
 };
 

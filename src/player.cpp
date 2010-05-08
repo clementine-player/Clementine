@@ -156,7 +156,7 @@ void Player::NextInternal(Engine::TrackChangeType change) {
     return;
   }
 
-  NextItem(Engine::Manual);
+  NextItem(change);
 }
 
 void Player::NextItem(Engine::TrackChangeType change) {

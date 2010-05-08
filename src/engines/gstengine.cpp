@@ -350,16 +350,25 @@ void GstEngine::UpdateScope() {
 }
 
 void GstEngine::StartPreloading(const QUrl& url) {
-  preload_pipeline_ = CreatePipeline(url);
-  if (!preload_pipeline_)
-    return;
+  if (autocrossfade_enabled_) {
+    // Have to create a new pipeline so we can crossfade between the two
 
-  // We don't want to get metadata messages before the track starts playing -
-  // we reconnect this in GstEngine::Load
-  disconnect(preload_pipeline_.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
+    preload_pipeline_ = CreatePipeline(url);
+    if (!preload_pipeline_)
+      return;
 
-  preloaded_url_ = url;
-  preload_pipeline_->SetState(GST_STATE_PAUSED);
+    // We don't want to get metadata messages before the track starts playing -
+    // we reconnect this in GstEngine::Load
+    disconnect(preload_pipeline_.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
+
+    preloaded_url_ = url;
+    preload_pipeline_->SetState(GST_STATE_PAUSED);
+  } else {
+    // No crossfading, so we can just queue the new URL in the existing
+    // pipeline and get gapless playback (hopefully)
+    if (current_pipeline_)
+      current_pipeline_->SetNextUrl(url);
+  }
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
@@ -374,6 +383,12 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   const bool crossfade = current_pipeline_ &&
                          ((crossfade_enabled_ && change == Engine::Manual) ||
                           (autocrossfade_enabled_ && change == Engine::Auto));
+
+  if (!crossfade && current_pipeline_ && current_pipeline_->url() == url) {
+    // We're not crossfading, and the pipeline is already playing the URI we
+    // want, so just do nothing.
+    return true;
+  }
 
   shared_ptr<GstEnginePipeline> pipeline;
   if (preload_pipeline_ && preloaded_url_ == url) {
@@ -545,8 +560,10 @@ void GstEngine::HandlePipelineError(const QString& message) {
 }
 
 
-void GstEngine::EndOfStreamReached() {
-  current_pipeline_.reset();
+void GstEngine::EndOfStreamReached(bool has_next_track) {
+  if (!has_next_track)
+    current_pipeline_.reset();
+  ClearScopeBuffers();
   emit TrackEnded();
 }
 
@@ -603,7 +620,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
   ret->set_forwards_buffers(true);
   ret->set_output_device(sink_, device_);
 
-  connect(ret.get(), SIGNAL(EndOfStreamReached()), SLOT(EndOfStreamReached()));
+  connect(ret.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(EndOfStreamReached(bool)));
   connect(ret.get(), SIGNAL(BufferFound(GstBuffer*)), SLOT(AddBufferToScope(GstBuffer*)));
   connect(ret.get(), SIGNAL(Error(QString)), SLOT(HandlePipelineError(QString)));
   connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
