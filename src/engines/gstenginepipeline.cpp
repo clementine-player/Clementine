@@ -20,13 +20,6 @@
 
 #include <QDebug>
 
-const char* GstEnginePipeline::kHttpGstreamerSource =
-#ifdef Q_OS_DARWIN
-    "neonhttpsrc";
-#else
-    "souphttpsrc";  // Does not exist on mac/fink.
-#endif
-
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
     engine_(engine),
@@ -37,8 +30,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     volume_modifier_(1.0),
     fader_(NULL),
     pipeline_(NULL),
-    src_(NULL),
-    decodebin_(NULL),
+    uridecodebin_(NULL),
     audiobin_(NULL),
     audioconvert_(NULL),
     equalizer_(NULL),
@@ -59,39 +51,24 @@ bool GstEnginePipeline::Init(const QUrl &url) {
 
   // Here we create all the parts of the gstreamer pipeline - from the source
   // to the sink.  The parts of the pipeline are split up into bins:
-  //   source -> decode bin -> audio bin
-  // The decode bin is a gstreamer builtin that automatically picks the right
-  // decoder for the file.
+  //   uri decode bin -> audio bin
+  // The uri decode bin is a gstreamer builtin that automatically picks the
+  // right type of source and decoder for the URI.
   // The audio bin gets created here and contains:
   //   audioconvert -> equalizer -> volume -> audioscale -> audioconvert ->
   //   audiosink
 
-  // Source
-  if (url.scheme() == "http") {
-    src_ = engine_->CreateElement(kHttpGstreamerSource);
-    g_object_set(G_OBJECT(src_), "iradio-mode", true, NULL);
-  } else {
-    src_ = engine_->CreateElement("giosrc");
-  }
-  if (!src_)      // CreateElement will have shown an error dialog, so no need
-    return false; // one of our own.
-
-  g_object_set(G_OBJECT(src_), "location", url.toEncoded().constData(), NULL);
-  gst_bin_add(GST_BIN(pipeline_), src_);
-
   // Decode bin
-  if (!(decodebin_ = engine_->CreateElement("decodebin", pipeline_))) { return false; }
-  g_signal_connect(G_OBJECT(decodebin_), "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
+  if (!(uridecodebin_ = engine_->CreateElement("uridecodebin", pipeline_))) { return false; }
+  g_object_set(G_OBJECT(uridecodebin_), "uri", url.toEncoded().constData(), NULL);
+  g_signal_connect(G_OBJECT(uridecodebin_), "pad-added", G_CALLBACK(NewPadCallback), this);
 
   // Does some stuff with ghost pads
-  GstPad* pad = gst_element_get_pad(decodebin_, "sink");
+  /*GstPad* pad = gst_element_get_pad(uridecodebin_, "sink");
   if (pad) {
     event_cb_id_ = gst_pad_add_event_probe (pad, G_CALLBACK(EventCallback), this);
     gst_object_unref(pad);
-  }
-
-  // The link from decodebin to audioconvert will be made in NewPadCallback
-  gst_element_link(src_, decodebin_);
+  }*/
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
@@ -110,7 +87,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   if (!(volume_ = engine_->CreateElement("volume", audiobin_))) { return false; }
   if (!(audioscale_ = engine_->CreateElement("audioresample", audiobin_))) { return false; }
 
-  pad = gst_element_get_pad(audioconvert_, "sink");
+  GstPad* pad = gst_element_get_pad(audioconvert_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
 
@@ -143,8 +120,8 @@ bool GstEnginePipeline::Init(const QUrl &url) {
 
 GstEnginePipeline::~GstEnginePipeline() {
   // We don't want an EOS signal from the decodebin
-  if (decodebin_) {
-    GstPad *p = gst_element_get_pad(decodebin_, "sink");
+  if (uridecodebin_) {
+    GstPad *p = gst_element_get_pad(uridecodebin_, "sink");
     if (p)
       gst_pad_remove_event_probe(p, event_cb_id_);
   }
@@ -241,7 +218,7 @@ QString GstEnginePipeline::ParseTag(GstTagList* list, const char* tag) const {
 }
 
 
-void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer self) {
+void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
 

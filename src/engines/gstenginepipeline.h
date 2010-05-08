@@ -72,7 +72,7 @@ class GstEnginePipeline : public QObject {
   // argument.
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
-  static void NewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
+  static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static void EventCallback(GstPad*, GstEvent*, gpointer);
   void TagMessageReceived(GstMessage*);
@@ -83,8 +83,6 @@ class GstEnginePipeline : public QObject {
 
  private:
   static const int kGstStateTimeoutNanosecs = 10000000;
-
-  static const char* kHttpGstreamerSource;
 
   GstEngine* engine_;
 
@@ -101,9 +99,8 @@ class GstEnginePipeline : public QObject {
   GstElement* pipeline_;
 
   // Bins
-  // src ! decodebin ! audiobin
-  GstElement* src_;
-  GstElement* decodebin_;
+  // uridecodebin ! audiobin
+  GstElement* uridecodebin_;
   GstElement* audiobin_;
 
   // Elements in the audiobin
