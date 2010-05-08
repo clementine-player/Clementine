@@ -142,8 +142,7 @@ void TranscodeDialog::Cancel() {
 }
 
 void TranscodeDialog::JobComplete(const QString& filename, bool success) {
-  if (success) finished_success_ ++;
-  else finished_failed_ ++;
+  (*(success ? &finished_success_ : &finished_failed_)) ++;
   queued_ --;
 
   UpdateStatusText();
@@ -154,17 +153,20 @@ void TranscodeDialog::JobComplete(const QString& filename, bool success) {
 void TranscodeDialog::UpdateStatusText() {
   QStringList sections;
 
-  if (queued_)
+  if (queued_) {
     sections << "<font color=\"#3467c8\">" +
         tr("%n remaining", "", queued_) + "</font>";
+  }
 
-  if (finished_success_)
+  if (finished_success_) {
     sections << "<font color=\"#02b600\">" +
         tr("%n finished", "", finished_success_) + "</font>";
+  }
 
-  if (finished_failed_)
+  if (finished_failed_) {
     sections << "<font color=\"#b60000\">" +
         tr("%n failed", "", finished_failed_) + "</font>";
+  }
 
   ui_.progress_text->setText(sections.join(", "));
 }
