@@ -389,8 +389,8 @@ msgstr "Укажите обложку вручную"
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
-"Изображения  (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-"*.tiff)"
+"Изображения  (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+"tiff)"
 
 msgid "All files (*)"
 msgstr "Все файлы (*)"
@@ -582,8 +582,42 @@ msgstr "удалить %n композиций"
 msgid "move songs"
 msgstr "переместить композиции"
 
+#, qt-format
+msgid ""
+"Could not create the GStreamer element \"%1\" - make sure you have all the "
+"required GStreamer plugins installed"
+msgstr ""
+
+#, qt-format
+msgid "Successfully written %1"
+msgstr ""
+
+#, qt-format
+msgid "Transcoding %1 files using %2 threads"
+msgstr ""
+
+#, qt-format
+msgid "Error processing %1: %2"
+msgstr ""
+
+#, qt-format
+msgid "Starting %1"
+msgstr ""
+
 msgid "Start transcoding"
 msgstr "Начать перекодирование"
+
+#, c-format
+msgid "%n remaining"
+msgstr ""
+
+#, c-format
+msgid "%n finished"
+msgstr ""
+
+#, c-format
+msgid "%n failed"
+msgstr ""
 
 msgid "Add files to transcode"
 msgstr "Добавить файлы для перекодирования"
@@ -773,12 +807,11 @@ msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Показывать кнопки \"Избранное\" и \"Запретить\""
 
 msgid ""
-"Note that you must be a <span style=\" font-weight:600;\">paid "
-"subscriber</span> to listen to Last.fm radio from within Clementine."
+"Note that you must be a <span style=\" font-weight:600;\">paid subscriber</"
+"span> to listen to Last.fm radio from within Clementine."
 msgstr ""
-"Обратите внимание, что вы должны быть <span style=\"font-"
-"weight:600;\">платным подписчиком</span> ,чтобы слушать радио Last.fm из "
-"Clementine."
+"Обратите внимание, что вы должны быть <span style=\"font-weight:600;"
+"\">платным подписчиком</span> ,чтобы слушать радио Last.fm из Clementine."
 
 msgid "Authenticating..."
 msgstr "Аутентификация..."
@@ -788,8 +821,7 @@ msgstr "Проиграть исполнителя или тег"
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-"Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
+msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
 
 msgid "Tag"
 msgstr "Тег"
@@ -1041,6 +1073,12 @@ msgstr "Вместе с оригиналами"
 msgid "Progress"
 msgstr "Ход выполнения"
 
+msgid "Details..."
+msgstr ""
+
+msgid "Transcoder Log"
+msgstr ""
+
 #~ msgid "Fadeout"
 #~ msgstr "Затихание"
 
@@ -1050,10 +1088,8 @@ msgstr "Ход выполнения"
 #~ msgid "Don't show notifications"
 #~ msgstr "Не показывать"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "Соседи %1"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "Коллекция %1"

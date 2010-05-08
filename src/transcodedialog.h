@@ -20,6 +20,7 @@
 #include <QDialog>
 
 #include "ui_transcodedialog.h"
+#include "ui_transcodelogdialog.h"
 
 class Transcoder;
 
@@ -39,13 +40,18 @@ class TranscodeDialog : public QDialog {
   void Start();
   void Cancel();
   void JobComplete(const QString& filename, bool success);
+  void LogLine(const QString& message);
   void AllJobsComplete();
 
  private:
   void SetWorking(bool working);
+  void UpdateStatusText();
 
  private:
   Ui::TranscodeDialog ui_;
+  Ui::TranscodeLogDialog log_ui_;
+  QDialog* log_dialog_;
+
   QPushButton* start_button_;
   QPushButton* cancel_button_;
   QPushButton* close_button_;
@@ -53,8 +59,9 @@ class TranscodeDialog : public QDialog {
   QString last_add_dir_;
 
   Transcoder* transcoder_;
-  int progress_;
-  int errors_;
+  int queued_;
+  int finished_success_;
+  int finished_failed_;
 };
 
 #endif // TRANSCODEDIALOG_H

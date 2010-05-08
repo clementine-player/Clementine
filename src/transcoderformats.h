@@ -24,7 +24,7 @@ class OggVorbisTranscoder : public TranscoderFormat {
   QString name() const { return "Ogg Vorbis"; }
   QString file_extension() const { return "ogg"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 class OggSpeexTranscoder : public TranscoderFormat {
@@ -32,7 +32,7 @@ class OggSpeexTranscoder : public TranscoderFormat {
   QString name() const { return "Ogg Speex"; }
   QString file_extension() const { return "spx"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 class FlacTranscoder : public TranscoderFormat {
@@ -40,7 +40,7 @@ class FlacTranscoder : public TranscoderFormat {
   QString name() const { return "FLAC"; }
   QString file_extension() const { return "flac"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 class Mp3Transcoder : public TranscoderFormat {
@@ -48,7 +48,7 @@ class Mp3Transcoder : public TranscoderFormat {
   QString name() const { return "MP3"; }
   QString file_extension() const { return "mp3"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 class M4aTranscoder : public TranscoderFormat {
@@ -56,7 +56,7 @@ class M4aTranscoder : public TranscoderFormat {
   QString name() const { return "M4A AAC"; }
   QString file_extension() const { return "m4a"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 class ThreeGPTranscoder : public TranscoderFormat {
@@ -64,7 +64,7 @@ class ThreeGPTranscoder : public TranscoderFormat {
   QString name() const { return "3GP AAC"; }
   QString file_extension() const { return "3gp"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 class WindowsMediaTranscoder : public TranscoderFormat {
@@ -72,7 +72,7 @@ class WindowsMediaTranscoder : public TranscoderFormat {
   QString name() const { return "Windows Media"; }
   QString file_extension() const { return "wma"; }
 
-  GstElement* CreateEncodeBin() const;
+  QStringList gst_elements() const;
 };
 
 #endif // TRANSCODERFORMATS_H

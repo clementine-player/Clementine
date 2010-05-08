@@ -21,6 +21,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QSettings>
+#include <QDateTime>
 
 // winspool.h defines this :(
 #ifdef AddJob
@@ -37,10 +38,16 @@ static bool CompareFormatsByName(const TranscoderFormat* left,
 
 TranscodeDialog::TranscodeDialog(QWidget *parent)
   : QDialog(parent),
-    transcoder_(new Transcoder(this))
+    log_dialog_(new QDialog(this)),
+    transcoder_(new Transcoder(this)),
+    queued_(0),
+    finished_success_(0),
+    finished_failed_(0)
 {
   ui_.setupUi(this);
   ui_.files->header()->setResizeMode(QHeaderView::ResizeToContents);
+
+  log_ui_.setupUi(log_dialog_);
 
   // Get formats
   QList<const TranscoderFormat*> formats = transcoder_->formats();
@@ -81,8 +88,10 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   connect(start_button_, SIGNAL(clicked()), SLOT(Start()));
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
+  connect(ui_.details, SIGNAL(clicked()), log_dialog_, SLOT(show()));
 
   connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(JobComplete(QString,bool)));
+  connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
   connect(transcoder_, SIGNAL(AllJobsComplete()), SLOT(AllJobsComplete()));
 }
 
@@ -90,9 +99,9 @@ void TranscodeDialog::SetWorking(bool working) {
   start_button_->setVisible(!working);
   cancel_button_->setVisible(working);
   close_button_->setVisible(!working);
-  ui_.progress_group->setVisible(working);
   ui_.input_group->setEnabled(!working);
   ui_.output_group->setEnabled(!working);
+  ui_.progress_group->setVisible(true);
 }
 
 void TranscodeDialog::Start() {
@@ -113,8 +122,10 @@ void TranscodeDialog::Start() {
   ui_.progress_bar->setMaximum(file_model->rowCount());
 
   // Reset the UI
-  progress_ = 0;
-  errors_ = 0;
+  queued_ = file_model->rowCount();
+  finished_success_ = 0;
+  finished_failed_ = 0;
+  UpdateStatusText();
 
   // Start transcoding
   transcoder_->Start();
@@ -131,10 +142,31 @@ void TranscodeDialog::Cancel() {
 }
 
 void TranscodeDialog::JobComplete(const QString& filename, bool success) {
-  progress_ ++;
-  if (!success) errors_ ++;
+  if (success) finished_success_ ++;
+  else finished_failed_ ++;
+  queued_ --;
 
-  ui_.progress_bar->setValue(progress_);
+  UpdateStatusText();
+
+  ui_.progress_bar->setValue(finished_success_ + finished_failed_);
+}
+
+void TranscodeDialog::UpdateStatusText() {
+  QStringList sections;
+
+  if (queued_)
+    sections << "<font color=\"#3467c8\">" +
+        tr("%n remaining", "", queued_) + "</font>";
+
+  if (finished_success_)
+    sections << "<font color=\"#02b600\">" +
+        tr("%n finished", "", finished_success_) + "</font>";
+
+  if (finished_failed_)
+    sections << "<font color=\"#b60000\">" +
+        tr("%n failed", "", finished_failed_) + "</font>";
+
+  ui_.progress_text->setText(sections.join(", "));
 }
 
 void TranscodeDialog::AllJobsComplete() {
@@ -167,4 +199,9 @@ void TranscodeDialog::Add() {
 
 void TranscodeDialog::Remove() {
   qDeleteAll(ui_.files->selectedItems());
+}
+
+void TranscodeDialog::LogLine(const QString &message) {
+  QString date(QDateTime::currentDateTime().toString(Qt::TextDate));
+  log_ui_.log->appendPlainText(QString("%1: %2").arg(date, message));
 }

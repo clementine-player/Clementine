@@ -29,9 +29,9 @@ using boost::shared_ptr;
 int Transcoder::JobFinishedEvent::sEventType = -1;
 
 
-GstElement* TranscoderFormat::CreateElement(const QString &factory_name,
-                                            GstElement *bin,
-                                            const QString &name) const {
+GstElement* Transcoder::CreateElement(const QString &factory_name,
+                                      GstElement *bin,
+                                      const QString &name) {
   GstElement* ret = gst_element_factory_make(
       factory_name.toAscii().constData(),
       name.isNull() ? factory_name.toAscii().constData() : name.toAscii().constData());
@@ -39,10 +39,17 @@ GstElement* TranscoderFormat::CreateElement(const QString &factory_name,
   if (ret && bin)
     gst_bin_add(GST_BIN(bin), ret);
 
+  if (!ret) {
+    emit LogLine(
+        tr("Could not create the GStreamer element \"%1\" -"
+           " make sure you have all the required GStreamer plugins installed")
+        .arg(factory_name));
+  }
+
   return ret;
 }
 
-GstElement* TranscoderFormat::CreateBin(const QStringList& elements) const {
+GstElement* Transcoder::CreateBin(const QStringList& elements) {
   GstElement* bin = gst_bin_new("outputbin");
 
   GstElement* last_element = NULL;
@@ -86,6 +93,11 @@ Transcoder::JobFinishedEvent::JobFinishedEvent(JobState *state, bool success)
 
 void Transcoder::JobState::PostFinished(bool success) {
   QCoreApplication::postEvent(parent_, new Transcoder::JobFinishedEvent(this, success));
+
+  if (success) {
+    emit parent_->LogLine(
+        tr("Successfully written %1").arg(job_.output));
+  }
 }
 
 
@@ -144,6 +156,9 @@ void Transcoder::AddJob(const QString &input,
 }
 
 void Transcoder::Start() {
+  emit LogLine(tr("Transcoding %1 files using %2 threads")
+               .arg(queued_jobs_.count()).arg(max_threads()));
+
   forever {
     StartJobStatus status = MaybeStartNextJob();
     if (status == AllThreadsBusy || status == NoMoreJobs)
@@ -155,8 +170,9 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
   if (current_jobs_.count() >= max_threads())
     return AllThreadsBusy;
   if (queued_jobs_.isEmpty()) {
-    if (current_jobs_.isEmpty())
+    if (current_jobs_.isEmpty()) {
       emit AllJobsComplete();
+    }
 
     return NoMoreJobs;
   }
@@ -183,6 +199,7 @@ gboolean Transcoder::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
+      state->ReportError(msg);
       state->PostFinished(false);
       break;
 
@@ -200,6 +217,7 @@ GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg, gpointer d
       break;
 
     case GST_MESSAGE_ERROR:
+      state->ReportError(msg);
       state->PostFinished(false);
       break;
 
@@ -209,8 +227,24 @@ GstBusSyncReply Transcoder::BusCallbackSync(GstBus*, GstMessage* msg, gpointer d
   return GST_BUS_PASS;
 }
 
+void Transcoder::JobState::ReportError(GstMessage* msg) {
+  GError* error;
+  gchar* debugs;
+
+  gst_message_parse_error(msg, &error, &debugs);
+  QString message = QString::fromLocal8Bit(error->message);
+
+  g_error_free(error);
+  free(debugs);
+
+  emit parent_->LogLine(
+      tr("Error processing %1: %2").arg(job_.input, message));
+}
+
 bool Transcoder::StartJob(const Job &job) {
   shared_ptr<JobState> state(new JobState(job, this));
+
+  emit LogLine(tr("Starting %1").arg(job.input));
 
   // Create the pipeline.
   // This should be a scoped_ptr, but scoped_ptr doesn't support custom
@@ -221,11 +255,11 @@ bool Transcoder::StartJob(const Job &job) {
 
   // Create all the elements
   const TranscoderFormat* f = job.output_format;
-  GstElement* src     = f->CreateElement("filesrc", state->pipeline_.get());
-  GstElement* decode  = f->CreateElement("decodebin", state->pipeline_.get());
-  GstElement* convert = f->CreateElement("audioconvert", state->pipeline_.get());
-  GstElement* encode  = f->CreateEncodeBin();
-  GstElement* sink    = f->CreateElement("filesink", state->pipeline_.get());
+  GstElement* src     = CreateElement("filesrc", state->pipeline_.get());
+  GstElement* decode  = CreateElement("decodebin", state->pipeline_.get());
+  GstElement* convert = CreateElement("audioconvert", state->pipeline_.get());
+  GstElement* encode  = CreateBin(f->gst_elements());
+  GstElement* sink    = CreateElement("filesink", state->pipeline_.get());
 
   if (!src || !decode || !convert || !encode || !sink)
     return false;
@@ -244,7 +278,7 @@ bool Transcoder::StartJob(const Job &job) {
 
   g_signal_connect(decode, "new-decoded-pad", G_CALLBACK(NewPadCallback), state.get());
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_.get())), BusCallbackSync, state.get());
-  gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_.get())), BusCallback, state.get());
+  state->bus_callback_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_.get())), BusCallback, state.get());
 
   // Start the pipeline
   gst_element_set_state(state->pipeline_.get(), GST_STATE_PLAYING);
@@ -277,6 +311,12 @@ bool Transcoder::event(QEvent* e) {
     // Emit the finished signal
     emit JobComplete((*it)->job_.input, finished_event->success_);
 
+    // Remove event handlers from the gstreamer pipeline so they don't get
+    // called after the pipeline is shutting down
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(
+        finished_event->state_->pipeline_.get())), NULL, NULL);
+    g_source_remove(finished_event->state_->bus_callback_id_);
+
     // Remove it from the list - this will also destroy the GStreamer pipeline
     current_jobs_.erase(it);
 
@@ -297,6 +337,12 @@ void Transcoder::Cancel() {
   JobStateList::iterator it = current_jobs_.begin();
   while (it != current_jobs_.end()) {
     shared_ptr<JobState> state(*it);
+
+    // Remove event handlers from the gstreamer pipeline so they don't get
+    // called after the pipeline is shutting down
+    gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(
+        state->pipeline_.get())), NULL, NULL);
+    g_source_remove(state->bus_callback_id_);
 
     // Stop the pipeline
     if (gst_element_set_state(state->pipeline_.get(), GST_STATE_NULL) == GST_STATE_CHANGE_ASYNC) {

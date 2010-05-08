@@ -204,6 +204,7 @@ set(CLEMENTINE-UI
     equalizer.ui
     equalizerslider.ui
     transcodedialog.ui
+    transcodelogdialog.ui
 )
 
 # Resource files

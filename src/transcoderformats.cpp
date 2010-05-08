@@ -16,26 +16,26 @@
 
 #include "transcoderformats.h"
 
-GstElement* OggVorbisTranscoder::CreateEncodeBin() const {
-  return CreateBin(QStringList() << "vorbisenc" << "oggmux");
+QStringList OggVorbisTranscoder::gst_elements() const {
+  return QStringList() << "vorbisenc" << "oggmux";
 }
 
-GstElement* OggSpeexTranscoder::CreateEncodeBin() const {
-  return CreateBin(QStringList() << "speexenc" << "oggmux");
+QStringList OggSpeexTranscoder::gst_elements() const {
+  return QStringList() << "speexenc" << "oggmux";
 }
 
-GstElement* FlacTranscoder::CreateEncodeBin() const {
-  return CreateElement("flacenc");
+QStringList FlacTranscoder::gst_elements() const {
+  return QStringList() << "flacenc";
 }
 
-GstElement* Mp3Transcoder::CreateEncodeBin() const {
-  return CreateElement("lamemp3enc");
+QStringList Mp3Transcoder::gst_elements() const {
+  return QStringList() << "lamemp3enc";
 }
 
-GstElement* M4aTranscoder::CreateEncodeBin() const {
-  return CreateBin(QStringList() << "faac" << "ffmux_mp4");
+QStringList M4aTranscoder::gst_elements() const {
+  return QStringList() << "faac" << "ffmux_mp4";
 }
 
-GstElement* ThreeGPTranscoder::CreateEncodeBin() const {
-  return CreateBin(QStringList() << "faac" << "ffmux_3gp");
+QStringList ThreeGPTranscoder::gst_elements() const {
+  return QStringList() << "faac" << "ffmux_3gp";
 }

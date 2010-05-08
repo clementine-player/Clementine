@@ -38,12 +38,7 @@ class TranscoderFormat {
   virtual QString name() const = 0;
   virtual QString file_extension() const = 0;
 
- protected:
-  virtual GstElement* CreateEncodeBin() const = 0;
-
-  GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL,
-                            const QString& name = QString()) const;
-  GstElement* CreateBin(const QStringList& elements) const;
+  virtual QStringList gst_elements() const = 0;
 };
 Q_DECLARE_METATYPE(const TranscoderFormat*);
 
@@ -69,6 +64,7 @@ class Transcoder : public QObject {
 
  signals:
   void JobComplete(const QString& filename, bool success);
+  void LogLine(const QString& message);
   void AllJobsComplete();
 
  protected:
@@ -86,14 +82,16 @@ class Transcoder : public QObject {
   // job's thread.
   struct JobState {
     JobState(const Job& job, Transcoder* parent)
-      : job_(job), parent_(parent), convert_element_(NULL) {}
+      : job_(job), parent_(parent), convert_element_(NULL), bus_callback_id_(0) {}
 
     void PostFinished(bool success);
+    void ReportError(GstMessage* msg);
 
     Job job_;
     Transcoder* parent_;
     boost::shared_ptr<GstElement> pipeline_;
     GstElement* convert_element_;
+    int bus_callback_id_;
   };
 
   // Event passed from a GStreamer callback to the Transcoder when a job
@@ -116,6 +114,10 @@ class Transcoder : public QObject {
 
   StartJobStatus MaybeStartNextJob();
   bool StartJob(const Job& job);
+
+  GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL,
+                            const QString& name = QString());
+  GstElement* CreateBin(const QStringList& elements);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
