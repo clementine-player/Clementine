@@ -16,6 +16,8 @@
 
 #include "mergedproxymodel.h"
 
+#include <QStringList>
+
 std::size_t hash_value(const QModelIndex& index) {
   return qHash(index);
 }
@@ -239,4 +241,61 @@ bool MergedProxyModel::hasChildren(const QModelIndex &parent) const {
 QVariant MergedProxyModel::data(const QModelIndex &proxyIndex, int role) const {
   QModelIndex source_index = mapToSource(proxyIndex);
   return source_index.model()->data(source_index, role);
+}
+
+QMap<int, QVariant> MergedProxyModel::itemData(const QModelIndex& proxy_index) const {
+  QModelIndex source_index = mapToSource(proxy_index);
+
+  if (!source_index.isValid())
+    return sourceModel()->itemData(QModelIndex());
+  return source_index.model()->itemData(source_index);
+}
+
+Qt::ItemFlags MergedProxyModel::flags(const QModelIndex &index) const {
+  QModelIndex source_index = mapToSource(index);
+
+  if (!source_index.isValid())
+    return sourceModel()->flags(QModelIndex());
+  return source_index.model()->flags(source_index);
+}
+
+bool MergedProxyModel::setData(const QModelIndex &index, const QVariant &value,
+                               int role) {
+  QModelIndex source_index = mapToSource(index);
+
+  if (!source_index.isValid())
+    return sourceModel()->setData(index, value, role);
+  return const_cast<QAbstractItemModel*>(source_index.model())->
+      setData(index, value, role);
+}
+
+QStringList MergedProxyModel::mimeTypes() const {
+  QStringList ret;
+  ret << sourceModel()->mimeTypes();
+
+  foreach (const QAbstractItemModel* model, merge_points_.keys()) {
+    ret << model->mimeTypes();
+  }
+
+  return ret;
+}
+
+QMimeData* MergedProxyModel::mimeData(const QModelIndexList &indexes) const {
+  if (indexes.isEmpty())
+    return 0;
+
+  // Only ask the first index's model
+  const QAbstractItemModel* model = mapToSource(indexes[0]).model();
+
+  // Only ask about the indexes that are actually in that model
+  QModelIndexList indexes_in_model;
+
+  foreach (const QModelIndex& proxy_index, indexes) {
+    QModelIndex source_index = mapToSource(proxy_index);
+    if (source_index.model() != model)
+      continue;
+    indexes_in_model << source_index;
+  }
+
+  return model->mimeData(indexes_in_model);
 }

@@ -50,6 +50,11 @@ class MergedProxyModel : public QAbstractProxyModel {
   int columnCount(const QModelIndex &parent) const;
   QVariant data(const QModelIndex &proxyIndex, int role = Qt::DisplayRole) const;
   bool hasChildren(const QModelIndex &parent) const;
+  QMap<int, QVariant> itemData(const QModelIndex &proxyIndex) const;
+  Qt::ItemFlags flags(const QModelIndex &index) const;
+  bool setData(const QModelIndex &index, const QVariant &value, int role);
+  QStringList mimeTypes() const;
+  QMimeData* mimeData(const QModelIndexList &indexes) const;
 
   // QAbstractProxyModel
   QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;

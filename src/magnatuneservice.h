@@ -35,6 +35,7 @@ class MagnatuneService : public RadioService {
 
   static const char* kServiceName;
   static const char* kDatabaseUrl;
+  static const char* kSongsTable;
 
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);

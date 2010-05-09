@@ -33,11 +33,13 @@
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kDatabaseUrl =
     "http://magnatune.com/info/song_info2_xml.gz";
+const char* MagnatuneService::kSongsTable = "magnatune_songs";
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
-    library_backend_(new LibraryBackend(parent->db(), "magnatune_songs", "", "", this)),
+    library_backend_(new LibraryBackend(parent->db(), kSongsTable,
+                                        QString::null, QString::null, this)),
     library_model_(new LibraryModel(library_backend_, this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     total_song_count_(0),
