@@ -307,5 +307,5 @@ QModelIndex MergedProxyModel::FindSourceParent(const QModelIndex& proxy_index) c
   QModelIndex source_index = mapToSource(proxy_index);
   if (source_index.model() == sourceModel())
     return source_index;
-  return merge_points_.value(proxy_index.model());
+  return merge_points_.value(source_index.model());
 }

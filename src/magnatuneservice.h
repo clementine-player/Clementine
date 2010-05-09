@@ -32,10 +32,12 @@ class MagnatuneService : public RadioService {
 
  public:
   MagnatuneService(RadioModel* parent);
+  ~MagnatuneService();
 
   static const char* kServiceName;
   static const char* kDatabaseUrl;
   static const char* kSongsTable;
+  static const char* kHomepage;
 
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
@@ -50,11 +52,19 @@ class MagnatuneService : public RadioService {
   void ReloadDatabase();
   void ReloadDatabaseFinished();
 
+  void AddToPlaylist();
+  void Homepage();
+
  private:
   Song ReadTrack(QXmlStreamReader& reader);
 
  private:
   RadioItem* root_;
+  QMenu* context_menu_;
+  QModelIndex context_item_;
+
+  QAction* add_to_playlist_;
+
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;

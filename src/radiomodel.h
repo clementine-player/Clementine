@@ -20,10 +20,10 @@
 #include "radioitem.h"
 #include "simpletreemodel.h"
 #include "multiloadingindicator.h"
+#include "song.h"
 
 class RadioService;
 class LastFMService;
-class Song;
 class MergedProxyModel;
 class Database;
 
@@ -67,6 +67,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
   void AddItemToPlaylist(RadioItem* item);
+  void AddItemsToPlaylist(const SongList& items);
 
  protected:
   void LazyPopulate(RadioItem* parent);

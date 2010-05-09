@@ -27,6 +27,8 @@
 #include <QXmlStreamReader>
 #include <QtIOCompressor>
 #include <QSortFilterProxyModel>
+#include <QMenu>
+#include <QDesktopServices>
 
 #include <QtDebug>
 
@@ -34,10 +36,12 @@ const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kDatabaseUrl =
     "http://magnatune.com/info/song_info2_xml.gz";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
+const char* MagnatuneService::kHomepage = "http://magnatune.com";
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
+    context_menu_(new QMenu),
     library_backend_(new LibraryBackend(parent->db(), kSongsTable,
                                         QString::null, QString::null, this)),
     library_model_(new LibraryModel(library_backend_, this)),
@@ -53,7 +57,17 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
+  add_to_playlist_ = context_menu_->addAction(
+      QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(QIcon(":web.png"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(QIcon(":refresh.png"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+
   library_model_->Init();
+}
+
+MagnatuneService::~MagnatuneService() {
+  delete context_menu_;
 }
 
 RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
@@ -154,7 +168,22 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   return song;
 }
 
-void MagnatuneService::ShowContextMenu(RadioItem* item, const QModelIndex& index,
+void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
                                        const QPoint& global_pos) {
+  if (index.model() == library_sort_model_)
+    context_item_ = index;
+  else
+    context_item_ = QModelIndex();
 
+  add_to_playlist_->setEnabled(context_item_.isValid());
+  context_menu_->popup(global_pos);
+}
+
+void MagnatuneService::AddToPlaylist() {
+  emit AddItemsToPlaylist(library_model_->GetChildSongs(
+      library_sort_model_->mapToSource(context_item_)));
+}
+
+void MagnatuneService::Homepage() {
+  QDesktopServices::openUrl(QUrl(kHomepage));
 }

@@ -23,8 +23,8 @@
 
 #include "radioitem.h"
 #include "multiloadingindicator.h"
+#include "song.h"
 
-class Song;
 class RadioModel;
 
 class RadioService : public QObject {
@@ -68,6 +68,7 @@ class RadioService : public QObject {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
   void AddItemToPlaylist(RadioItem* item);
+  void AddItemsToPlaylist(const SongList& items);
 
  private:
   RadioModel* model_;

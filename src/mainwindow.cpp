@@ -347,6 +347,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(radio_model_, SIGNAL(StreamReady(QUrl,QUrl)), player_, SLOT(StreamReady(QUrl,QUrl)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
+  connect(radio_model_, SIGNAL(AddItemsToPlaylist(SongList)), SLOT(InsertRadioItems(SongList)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
   connect(ui_.radio_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
@@ -700,6 +701,13 @@ void MainWindow::RadioDoubleClick(const QModelIndex& index) {
 void MainWindow::InsertRadioItem(RadioItem* item) {
   QModelIndex first_song = playlist_->InsertRadioStations(
       QList<RadioItem*>() << item);
+
+  if (first_song.isValid() && player_->GetState() != Engine::Playing)
+    player_->PlayAt(first_song.row(), Engine::First, true);
+}
+
+void MainWindow::InsertRadioItems(const SongList& items) {
+  QModelIndex first_song = playlist_->InsertSongs(items);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), Engine::First, true);
