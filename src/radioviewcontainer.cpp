@@ -31,6 +31,9 @@ RadioViewContainer::RadioViewContainer(QWidget *parent)
 {
   ui_.setupUi(this);
 
+  connect(ui_.tree, SIGNAL(collapsed(QModelIndex)), SLOT(Collapsed(QModelIndex)));
+  connect(ui_.tree, SIGNAL(expanded(QModelIndex)), SLOT(Expanded(QModelIndex)));
+
   filter_animation_->setFrameRange(0, ui_.filter->sizeHint().height());
   connect(filter_animation_, SIGNAL(frameChanged(int)), SLOT(SetFilterHeight(int)));
 
@@ -47,19 +50,37 @@ void RadioViewContainer::SetModel(RadioModel* model) {
           SLOT(CurrentIndexChanged(QModelIndex)));
 }
 
-void RadioViewContainer::CurrentIndexChanged(const QModelIndex& index) {
+void RadioViewContainer::ServiceChanged(const QModelIndex& index, bool changed_away) {
   RadioItem* item = model_->IndexToItem(
       model_->merged_model()->FindSourceParent(index));
   if (!item)
     return;
 
-  RadioService* service = item->service;
-  if (!service || service == current_service_)
-    return;
+  if (changed_away) {
+    SetFilterVisible(false);
+  } else {
+    RadioService* service = item->service;
+    if (!service || service == current_service_)
+      return;
+    current_service_ = service;
 
-  qDebug() << service->name();
+    SetFilterVisible(service->SetupLibraryFilter(ui_.filter));
+  }
+}
 
-  SetFilterVisible(service->SetupLibraryFilter(ui_.filter));
+void RadioViewContainer::CurrentIndexChanged(const QModelIndex& index) {
+  ServiceChanged(index);
+}
+
+void RadioViewContainer::Collapsed(const QModelIndex& index) {
+  if (model_->merged_model()->mapToSource(index).model() == model_) {
+    SetFilterVisible(false);
+    current_service_ = NULL;
+  }
+}
+
+void RadioViewContainer::Expanded(const QModelIndex& index) {
+  ServiceChanged(index);
 }
 
 void RadioViewContainer::SetFilterVisible(bool visible) {

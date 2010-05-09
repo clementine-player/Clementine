@@ -85,7 +85,9 @@ class MergedProxyModel : public QAbstractProxyModel {
   void DeleteAllMappings();
 
   struct Mapping {
-    Mapping(const QModelIndex& _source_index) : source_index(_source_index) {}
+    Mapping(const QModelIndex& _source_index)
+      : source_index(_source_index) {}
+
     QModelIndex source_index;
   };
 
@@ -103,6 +105,7 @@ class MergedProxyModel : public QAbstractProxyModel {
 
   MappingContainer mappings_;
   QMap<const QAbstractItemModel*, QModelIndex> merge_points_;
+  const QAbstractItemModel* resetting_model_;
 };
 
 #endif // MERGEDPROXYMODEL_H

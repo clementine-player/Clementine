@@ -17,13 +17,17 @@
 #include "mergedproxymodel.h"
 
 #include <QStringList>
+#include <QtDebug>
+
+#include <limits>
 
 std::size_t hash_value(const QModelIndex& index) {
   return qHash(index);
 }
 
 MergedProxyModel::MergedProxyModel(QObject* parent)
-  : QAbstractProxyModel(parent)
+  : QAbstractProxyModel(parent),
+    resetting_model_(NULL)
 {
 }
 
@@ -95,12 +99,25 @@ void MergedProxyModel::SourceModelReset() {
 void MergedProxyModel::SubModelReset() {
   const QAbstractItemModel* submodel = static_cast<const QAbstractItemModel*>(sender());
 
+  // TODO: When we require Qt 4.6, use beginResetModel() and endResetModel()
+  // in LibraryModel and catch those here - that will let us do away with this
+  // std::numeric_limits<int>::max() hack.
+
+  // Remove all the children of the item that got deleted
+  QModelIndex source_parent = merge_points_.value(submodel);
+  QModelIndex proxy_parent = mapFromSource(source_parent);
+
+  // We can't know how many children it had, since it's already disappeared...
+  resetting_model_ = submodel;
+  beginRemoveRows(proxy_parent, 0, std::numeric_limits<int>::max() - 1);
+  endRemoveRows();
+  resetting_model_ = NULL;
+
   // Delete all the mappings that reference the submodel
   MappingContainer::index<tag_by_pointer>::type::iterator it =
       mappings_.get<tag_by_pointer>().begin();
   MappingContainer::index<tag_by_pointer>::type::iterator end =
       mappings_.get<tag_by_pointer>().end();
-
   while (it != end) {
     if ((*it)->source_index.model() == submodel) {
       delete *it;
@@ -110,8 +127,12 @@ void MergedProxyModel::SubModelReset() {
     }
   }
 
-  // Reset the proxy
-  reset();
+  // "Insert" items from the newly reset submodel
+  int count = submodel->rowCount();
+  if (count) {
+    beginInsertRows(proxy_parent, 0, count-1);
+    endInsertRows();
+  }
 }
 
 QModelIndex MergedProxyModel::GetActualSourceParent(const QModelIndex& source_parent,
@@ -148,11 +169,19 @@ QModelIndex MergedProxyModel::mapToSource(const QModelIndex& proxy_index) const 
     return QModelIndex();
 
   Mapping* mapping = static_cast<Mapping*>(proxy_index.internalPointer());
+  if (mappings_.get<tag_by_pointer>().find(mapping) ==
+      mappings_.get<tag_by_pointer>().end())
+    return QModelIndex();
+  if (mapping->source_index.model() == resetting_model_)
+    return QModelIndex();
+
   return mapping->source_index;
 }
 
 QModelIndex MergedProxyModel::mapFromSource(const QModelIndex& source_index) const {
   if (!source_index.isValid())
+    return QModelIndex();
+  if (source_index.model() == resetting_model_)
     return QModelIndex();
 
   // Add a mapping if we don't have one already

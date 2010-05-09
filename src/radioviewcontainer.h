@@ -38,10 +38,13 @@ class RadioViewContainer : public QWidget {
   RadioView* tree() const { return ui_.tree; }
 
  private slots:
+  void Collapsed(const QModelIndex& index);
+  void Expanded(const QModelIndex& index);
   void CurrentIndexChanged(const QModelIndex& index);
   void SetFilterHeight(int height);
 
  private:
+  void ServiceChanged(const QModelIndex& index, bool changed_away = false);
   void SetFilterVisible(bool visible);
 
  private:
