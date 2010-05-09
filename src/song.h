@@ -144,6 +144,7 @@ class Song {
   bool Save() const;
 
   void set_id(int id) { d->id_ = id; }
+  void set_valid(bool v) { d->valid_ = v; }
   void set_title(const QString& v) { d->title_ = v; }
 
   void set_album(const QString& v) { d->album_ = v; }

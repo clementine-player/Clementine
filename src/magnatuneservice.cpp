@@ -34,7 +34,7 @@
 
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kDatabaseUrl =
-    "http://magnatune.com/info/song_info2_xml.gz";
+    "http://magnatune.com/info/song_info_xml.gz";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
 const char* MagnatuneService::kHomepage = "http://magnatune.com";
 
@@ -147,16 +147,29 @@ void MagnatuneService::ReloadDatabaseFinished() {
 }
 
 Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
-  QXmlStreamAttributes attributes = reader.attributes();
-
   Song song;
-  song.Init(attributes.value("title").toString(),
-            attributes.value("artist").toString(),
-            attributes.value("album").toString(),
-            attributes.value("seconds").toString().toInt());
-  song.set_track(attributes.value("tracknum").toString().toInt());
-  song.set_year(attributes.value("year").toString().toInt());
-  song.set_filename(attributes.value("url").toString());
+
+  while (!reader.atEnd()) {
+    reader.readNext();
+
+    if (reader.tokenType() == QXmlStreamReader::EndElement)
+      break;
+
+    if (reader.tokenType() == QXmlStreamReader::StartElement) {
+      QString value = reader.readElementText(QXmlStreamReader::SkipChildElements);
+      if (reader.name() == "artist")          song.set_artist(value);
+      if (reader.name() == "albumname")       song.set_album(value);
+      if (reader.name() == "trackname")       song.set_title(value);
+      if (reader.name() == "tracknum")        song.set_track(value.toInt());
+      if (reader.name() == "year")            song.set_year(value.toInt());
+      if (reader.name() == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
+      if (reader.name() == "seconds")         song.set_length(value.toInt());
+      if (reader.name() == "url")             song.set_filename(value);
+      if (reader.name() == "cover_small")     song.set_art_automatic(value);
+    }
+  }
+
+  song.set_valid(true);
   song.set_filetype(Song::Type_Stream);
 
   // We need to set these to satisfy the database constraints
