@@ -679,6 +679,8 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
   QSet<int> song_ids;
 
+  data->backend = backend_;
+
   foreach (const QModelIndex& index, indexes) {
     GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);
   }

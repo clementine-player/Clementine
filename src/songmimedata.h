@@ -21,10 +21,15 @@
 
 #include "song.h"
 
+class LibraryBackend;
+
 class SongMimeData : public QMimeData {
   Q_OBJECT
 
  public:
+  SongMimeData() : backend(NULL) {}
+
+  LibraryBackend* backend;
   SongList songs;
 };
 

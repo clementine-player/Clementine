@@ -49,6 +49,9 @@ class LibraryBackend : public QObject {
   };
   typedef QList<Album> AlbumList;
 
+  QString songs_table() const { return songs_table_; }
+  QString dirs_table() const { return dirs_table_; }
+  QString subdirs_table() const { return subdirs_table_; }
 
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
   void LoadDirectoriesAsync();

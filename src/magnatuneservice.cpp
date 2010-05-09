@@ -140,9 +140,10 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
             attributes.value("artist").toString(),
             attributes.value("album").toString(),
             attributes.value("seconds").toString().toInt());
-  song.set_track(attributes.value("track").toString().toInt());
+  song.set_track(attributes.value("tracknum").toString().toInt());
   song.set_year(attributes.value("year").toString().toInt());
   song.set_filename(attributes.value("url").toString());
+  song.set_filetype(Song::Type_Stream);
 
   // We need to set these to satisfy the database constraints
   song.set_directory_id(0);

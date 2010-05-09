@@ -24,6 +24,8 @@
 #include "playlistbackend.h"
 #include "libraryplaylistitem.h"
 #include "playlistundocommands.h"
+#include "library.h"
+#include "librarybackend.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -350,8 +352,13 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     return false;
 
   if (const SongMimeData* song_data = qobject_cast<const SongMimeData*>(data)) {
-    // Dragged from the library
-    InsertLibraryItems(song_data->songs, row);
+    // Dragged from a library
+    // We want to check if these songs are from the actual local file backend,
+    // if they are we treat them differently.
+    if (song_data->backend->songs_table() == Library::kSongsTable)
+      InsertLibraryItems(song_data->songs, row);
+    else
+      InsertSongs(song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
     InsertRadioStations(radio_data->items, row);
