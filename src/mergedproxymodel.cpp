@@ -25,6 +25,18 @@ MergedProxyModel::MergedProxyModel(QObject* parent)
 {
 }
 
+MergedProxyModel::~MergedProxyModel() {
+  DeleteAllMappings();
+}
+
+void MergedProxyModel::DeleteAllMappings() {
+  MappingContainer::index<tag_by_pointer>::type::iterator begin =
+      mappings_.get<tag_by_pointer>().begin();
+  MappingContainer::index<tag_by_pointer>::type::iterator end =
+      mappings_.get<tag_by_pointer>().end();
+  qDeleteAll(begin, end);
+}
+
 void MergedProxyModel::AddSubModel(const QModelIndex& source_parent,
                                    const QAbstractItemModel* submodel) {
   merge_points_.insert(submodel, source_parent);
@@ -68,11 +80,7 @@ void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {
 
 void MergedProxyModel::SourceModelReset() {
   // Delete all mappings
-  MappingContainer::index<tag_by_pointer>::type::iterator begin =
-      mappings_.get<tag_by_pointer>().begin();
-  MappingContainer::index<tag_by_pointer>::type::iterator end =
-      mappings_.get<tag_by_pointer>().end();
-  qDeleteAll(begin, end);
+  DeleteAllMappings();
 
   // Clear the containers
   mappings_.clear();

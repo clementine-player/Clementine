@@ -39,6 +39,7 @@ class MergedProxyModel : public QAbstractProxyModel {
 
  public:
   MergedProxyModel(QObject* parent = 0);
+  ~MergedProxyModel();
 
   void AddSubModel(const QModelIndex& source_parent, const QAbstractItemModel* submodel);
 
@@ -67,6 +68,7 @@ class MergedProxyModel : public QAbstractProxyModel {
  private:
   QModelIndex GetActualSourceParent(const QModelIndex& source_parent,
                                     const QAbstractItemModel* model) const;
+  void DeleteAllMappings();
 
   struct Mapping {
     Mapping(const QModelIndex& _source_index) : source_index(_source_index) {}
