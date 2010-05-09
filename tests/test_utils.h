@@ -19,6 +19,9 @@
 
 #include <iostream>
 
+#include <QMetaType>
+#include <QModelIndex>
+
 class QNetworkRequest;
 class QString;
 class QUrl;
@@ -38,5 +41,7 @@ void PrintTo(const ::QVariant& var, std::ostream& os);
     void Emit##n(const t1& a1) { emit n(a1); }
 #define EXPOSE_SIGNAL2(n, t1, t2) \
     void Emit##n(const t1& a1, const t2& a2) { emit n(a1, a2); }
+
+Q_DECLARE_METATYPE(QModelIndex);
 
 #endif  // TEST_UTILS_H

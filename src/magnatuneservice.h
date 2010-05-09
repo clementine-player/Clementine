@@ -22,6 +22,7 @@
 #include "radioservice.h"
 
 class QNetworkAccessManager;
+class QSortFilterProxyModel;
 
 class LibraryBackend;
 class LibraryModel;
@@ -41,16 +42,20 @@ class MagnatuneService : public RadioService {
   void StartLoading(const QUrl &url);
 
  private slots:
+  void UpdateTotalSongCount(int count) { total_song_count_ = count; }
   void ReloadDatabase();
   void ReloadDatabaseFinished();
 
  private:
-  void ReadTrack(QXmlStreamReader& reader);
+  Song ReadTrack(QXmlStreamReader& reader);
 
  private:
   RadioItem* root_;
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
+  QSortFilterProxyModel* library_sort_model_;
+
+  int total_song_count_;
 
   QNetworkAccessManager* network_;
 };

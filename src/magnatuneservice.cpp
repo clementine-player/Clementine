@@ -26,6 +26,7 @@
 #include <QNetworkReply>
 #include <QXmlStreamReader>
 #include <QtIOCompressor>
+#include <QSortFilterProxyModel>
 
 #include <QtDebug>
 
@@ -36,10 +37,20 @@ const char* MagnatuneService::kDatabaseUrl =
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
-    library_backend_(new LibraryBackend(parent->db(), "songs", "", "", this)),
+    library_backend_(new LibraryBackend(parent->db(), "magnatune_songs", "", "", this)),
     library_model_(new LibraryModel(library_backend_, this)),
+    library_sort_model_(new QSortFilterProxyModel(this)),
+    total_song_count_(0),
     network_(new QNetworkAccessManager(this))
 {
+  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+          SLOT(UpdateTotalSongCount(int)));
+
+  library_sort_model_->setSourceModel(library_model_);
+  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
+  library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->sort(0);
+
   library_model_->Init();
 }
 
@@ -49,7 +60,7 @@ RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
 
   model()->merged_model()->AddSubModel(
       model()->index(root_->row, 0, model()->ItemToIndex(parent)),
-      library_model_);
+      library_sort_model_);
 
   return root_;
 }
@@ -57,7 +68,8 @@ RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
 void MagnatuneService::LazyPopulate(RadioItem *item) {
   switch (item->type) {
     case RadioItem::Type_Service:
-      ReloadDatabase();
+      if (total_song_count_ == 0)
+        ReloadDatabase();
       break;
 
     default:
@@ -103,18 +115,22 @@ void MagnatuneService::ReloadDatabaseFinished() {
     return;
   }
 
+  SongList songs;
+
   QXmlStreamReader reader(&gzip);
   while (!reader.atEnd()) {
     reader.readNext();
 
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
         reader.name() == "Track") {
-      ReadTrack(reader);
+      songs << ReadTrack(reader);
     }
   }
+
+  library_backend_->AddOrUpdateSongs(songs);
 }
 
-void MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
+Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   QXmlStreamAttributes attributes = reader.attributes();
 
   Song song;
@@ -126,5 +142,11 @@ void MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   song.set_year(attributes.value("year").toString().toInt());
   song.set_filename(attributes.value("url").toString());
 
-  qDebug() << song.artist() << song.album() << song.title();
+  // We need to set these to satisfy the database constraints
+  song.set_directory_id(0);
+  song.set_mtime(0);
+  song.set_ctime(0);
+  song.set_filesize(0);
+
+  return song;
 }

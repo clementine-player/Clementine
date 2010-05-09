@@ -19,6 +19,7 @@
 #include "mergedproxymodel.h"
 
 #include <QStandardItemModel>
+#include <QSignalSpy>
 
 class MergedProxyModelTest : public ::testing::Test {
  protected:
@@ -67,7 +68,7 @@ TEST_F(MergedProxyModelTest, Merged) {
   QStandardItemModel submodel;
   submodel.appendRow(new QStandardItem("two"));
 
-  merged_.AddModel(source_.index(0, 0, QModelIndex()), &submodel);
+  merged_.AddSubModel(source_.index(0, 0, QModelIndex()), &submodel);
 
   ASSERT_EQ(1, merged_.rowCount(QModelIndex()));
   QModelIndex one_i = merged_.index(0, 0, QModelIndex());
@@ -81,4 +82,80 @@ TEST_F(MergedProxyModelTest, Merged) {
   EXPECT_EQ("two", merged_.data(two_i).toString());
   EXPECT_EQ(0, merged_.rowCount(two_i));
   EXPECT_FALSE(merged_.hasChildren(two_i));
+}
+
+TEST_F(MergedProxyModelTest, SourceInsert) {
+  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsInserted(QModelIndex,int,int)));
+
+  source_.appendRow(new QStandardItem("one"));
+
+  ASSERT_EQ(1, before_spy.count());
+  ASSERT_EQ(1, after_spy.count());
+  EXPECT_FALSE(before_spy[0][0].value<QModelIndex>().isValid());
+  EXPECT_EQ(0, before_spy[0][1].toInt());
+  EXPECT_EQ(0, before_spy[0][2].toInt());
+  EXPECT_FALSE(after_spy[0][0].value<QModelIndex>().isValid());
+  EXPECT_EQ(0, after_spy[0][1].toInt());
+  EXPECT_EQ(0, after_spy[0][2].toInt());
+}
+
+TEST_F(MergedProxyModelTest, SourceRemove) {
+  source_.appendRow(new QStandardItem("one"));
+
+  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+
+  source_.removeRow(0, QModelIndex());
+
+  ASSERT_EQ(1, before_spy.count());
+  ASSERT_EQ(1, after_spy.count());
+  EXPECT_FALSE(before_spy[0][0].value<QModelIndex>().isValid());
+  EXPECT_EQ(0, before_spy[0][1].toInt());
+  EXPECT_EQ(0, before_spy[0][2].toInt());
+  EXPECT_FALSE(after_spy[0][0].value<QModelIndex>().isValid());
+  EXPECT_EQ(0, after_spy[0][1].toInt());
+  EXPECT_EQ(0, after_spy[0][2].toInt());
+}
+
+TEST_F(MergedProxyModelTest, SubInsert) {
+  source_.appendRow(new QStandardItem("one"));
+  QStandardItemModel submodel;
+  merged_.AddSubModel(source_.index(0, 0, QModelIndex()), &submodel);
+
+  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsInserted(QModelIndex,int,int)));
+
+  submodel.appendRow(new QStandardItem("two"));
+
+  ASSERT_EQ(1, before_spy.count());
+  ASSERT_EQ(1, after_spy.count());
+  EXPECT_EQ("one", before_spy[0][0].value<QModelIndex>().data());
+  EXPECT_EQ(0, before_spy[0][1].toInt());
+  EXPECT_EQ(0, before_spy[0][2].toInt());
+  EXPECT_EQ("one", after_spy[0][0].value<QModelIndex>().data());
+  EXPECT_EQ(0, after_spy[0][1].toInt());
+  EXPECT_EQ(0, after_spy[0][2].toInt());
+}
+
+TEST_F(MergedProxyModelTest, SubRemove) {
+  source_.appendRow(new QStandardItem("one"));
+  QStandardItemModel submodel;
+  merged_.AddSubModel(source_.index(0, 0, QModelIndex()), &submodel);
+
+  submodel.appendRow(new QStandardItem("two"));
+
+  QSignalSpy before_spy(&merged_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
+  QSignalSpy after_spy(&merged_, SIGNAL(rowsRemoved(QModelIndex,int,int)));
+
+  submodel.removeRow(0, QModelIndex());
+
+  ASSERT_EQ(1, before_spy.count());
+  ASSERT_EQ(1, after_spy.count());
+  EXPECT_EQ("one", before_spy[0][0].value<QModelIndex>().data());
+  EXPECT_EQ(0, before_spy[0][1].toInt());
+  EXPECT_EQ(0, before_spy[0][2].toInt());
+  EXPECT_EQ("one", after_spy[0][0].value<QModelIndex>().data());
+  EXPECT_EQ(0, after_spy[0][1].toInt());
+  EXPECT_EQ(0, after_spy[0][2].toInt());
 }

@@ -228,12 +228,14 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
     // Do a sanity check first - make sure the song's directory still exists
     // This is to fix a possible race condition when a directory is removed
     // while LibraryWatcher is scanning it.
-    check_dir.bindValue(":id", song.directory_id());
-    check_dir.exec();
-    if (db_->CheckErrors(check_dir.lastError())) continue;
+    if (!dirs_table_.isEmpty()) {
+      check_dir.bindValue(":id", song.directory_id());
+      check_dir.exec();
+      if (db_->CheckErrors(check_dir.lastError())) continue;
 
-    if (!check_dir.next())
-      continue; // Directory didn't exist
+      if (!check_dir.next())
+        continue; // Directory didn't exist
+    }
 
 
     if (song.id() == -1) {

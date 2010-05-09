@@ -121,8 +121,8 @@ QModelIndex MergedProxyModel::GetActualSourceParent(const QModelIndex& source_pa
 
 void MergedProxyModel::RowsAboutToBeInserted(const QModelIndex& source_parent,
                                              int start, int end) {
-  beginInsertRows(GetActualSourceParent(
-      source_parent, static_cast<const QAbstractItemModel*>(sender())),
+  beginInsertRows(mapFromSource(GetActualSourceParent(
+      source_parent, static_cast<const QAbstractItemModel*>(sender()))),
       start, end);
 }
 
@@ -132,8 +132,8 @@ void MergedProxyModel::RowsInserted(const QModelIndex&, int, int) {
 
 void MergedProxyModel::RowsAboutToBeRemoved(const QModelIndex& source_parent,
                                             int start, int end) {
-  beginRemoveRows(GetActualSourceParent(
-      source_parent, static_cast<const QAbstractItemModel*>(sender())),
+  beginRemoveRows(mapFromSource(GetActualSourceParent(
+      source_parent, static_cast<const QAbstractItemModel*>(sender()))),
       start, end);
 }
 
@@ -201,8 +201,14 @@ int MergedProxyModel::rowCount(const QModelIndex &parent) const {
 
   QModelIndex source_parent = mapToSource(parent);
   const QAbstractItemModel* child_model = merge_points_.key(source_parent);
-  if (child_model)
+  if (child_model) {
+    // Query the source model but disregard what it says, so it gets a chance
+    // to lazy load
+    source_parent.model()->rowCount(source_parent);
+
     return child_model->rowCount(QModelIndex());
+  }
+
   return source_parent.model()->rowCount(source_parent);
 }
 
@@ -225,7 +231,8 @@ bool MergedProxyModel::hasChildren(const QModelIndex &parent) const {
   const QAbstractItemModel* child_model = merge_points_.key(source_parent);
 
   if (child_model)
-    return child_model->hasChildren(QModelIndex());
+    return child_model->hasChildren(QModelIndex()) ||
+           source_parent.model()->hasChildren(source_parent);
   return source_parent.model()->hasChildren(source_parent);
 }
 
