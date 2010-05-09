@@ -23,7 +23,7 @@
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index/ordered_index.hpp>
 
-#include "library.h"
+#include "librarymodel.h"
 #include "ui_groupbydialog.h"
 
 using boost::multi_index_container;
@@ -39,20 +39,20 @@ class GroupByDialog : public QDialog {
   GroupByDialog(QWidget *parent = 0);
 
  public slots:
-  void LibraryGroupingChanged(const Library::Grouping& g);
+  void LibraryGroupingChanged(const LibraryModel::Grouping& g);
   void accept();
 
  signals:
-  void Accepted(const Library::Grouping& g);
+  void Accepted(const LibraryModel::Grouping& g);
 
  private slots:
   void Reset();
 
  private:
   struct Mapping {
-    Mapping(Library::GroupBy g, int i) : group_by(g), combo_box_index(i) {}
+    Mapping(LibraryModel::GroupBy g, int i) : group_by(g), combo_box_index(i) {}
 
-    Library::GroupBy group_by;
+    LibraryModel::GroupBy group_by;
     int combo_box_index;
   };
 
@@ -64,7 +64,7 @@ class GroupByDialog : public QDialog {
       ordered_unique<tag<tag_index>,
         member<Mapping, int, &Mapping::combo_box_index> >,
       ordered_unique<tag<tag_group_by>,
-        member<Mapping, Library::GroupBy, &Mapping::group_by> >
+        member<Mapping, LibraryModel::GroupBy, &Mapping::group_by> >
     >
   > MappingContainer;
 

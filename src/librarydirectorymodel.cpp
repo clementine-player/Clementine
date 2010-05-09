@@ -17,22 +17,13 @@
 #include "librarydirectorymodel.h"
 #include "librarybackend.h"
 
-LibraryDirectoryModel::LibraryDirectoryModel(QObject* parent)
+LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* parent)
   : QStandardItemModel(parent),
-    dir_icon_(":folder.png")
+    dir_icon_(":folder.png"),
+    backend_(backend)
 {
-}
-
-void LibraryDirectoryModel::SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) {
-  if (backend_)
-    backend_->disconnect(this);
-
-  backend_ = backend;
-
-  connect(backend_.get(), SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), SLOT(DirectoryDiscovered(Directory)));
-  connect(backend_.get(), SIGNAL(DirectoryDeleted(Directory)), SLOT(DirectoryDeleted(Directory)));
-
-  emit BackendReady();
+  connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), SLOT(DirectoryDiscovered(Directory)));
+  connect(backend_, SIGNAL(DirectoryDeleted(Directory)), SLOT(DirectoryDeleted(Directory)));
 }
 
 void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {

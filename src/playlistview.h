@@ -18,12 +18,12 @@
 #define PLAYLISTVIEW_H
 
 #include "playlist.h"
-#include "library.h"
 
 #include <QTreeView>
 #include <QBasicTimer>
 
 class RadioLoadingIndicator;
+class LibraryBackend;
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
@@ -31,7 +31,7 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
-  void setItemDelegates(Library* library);
+  void SetItemDelegates(LibraryBackend* backend);
   void RemoveSelected();
 
   // QTreeView

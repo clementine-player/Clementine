@@ -20,15 +20,13 @@
 #include <QDialog>
 #include <QIcon>
 
-#include <boost/shared_ptr.hpp>
-
 #include "gtest/gtest_prod.h"
 
 #include "ui_albumcovermanager.h"
 #include "backgroundthread.h"
 #include "albumcoverloader.h"
 
-class LibraryBackendInterface;
+class LibraryBackend;
 class AlbumCoverFetcher;
 
 class QNetworkAccessManager;
@@ -36,7 +34,8 @@ class QNetworkAccessManager;
 class AlbumCoverManager : public QDialog {
   Q_OBJECT
  public:
-  AlbumCoverManager(QNetworkAccessManager* network, QWidget *parent = 0);
+  AlbumCoverManager(QNetworkAccessManager* network, LibraryBackend* backend,
+                    QWidget *parent = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
@@ -44,9 +43,6 @@ class AlbumCoverManager : public QDialog {
   void Reset();
 
   void Init();
-
- public slots:
-  void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend);
 
  protected:
   void showEvent(QShowEvent *);
@@ -98,7 +94,7 @@ class AlbumCoverManager : public QDialog {
   bool constructed_;
 
   Ui::CoverManager ui_;
-  boost::shared_ptr<LibraryBackendInterface> backend_;
+  LibraryBackend* backend_;
 
   QAction* filter_all_;
   QAction* filter_with_covers_;

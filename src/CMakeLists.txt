@@ -81,6 +81,9 @@ set(CLEMENTINE-SOURCES
     transcoderformats.cpp
     transcodedialog.cpp
     magnatuneservice.cpp
+    database.cpp
+    librarymodel.cpp
+    playlistbackend.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -147,6 +150,9 @@ set(CLEMENTINE-MOC-HEADERS
     transcoder.h
     transcodedialog.h
     magnatuneservice.h
+    librarymodel.h
+    playlistbackend.h
+    database.h
 )
 
 # lists of engine source files

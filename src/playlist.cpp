@@ -21,7 +21,7 @@
 #include "radioplaylistitem.h"
 #include "radiomodel.h"
 #include "savedradio.h"
-#include "librarybackend.h"
+#include "playlistbackend.h"
 #include "libraryplaylistitem.h"
 #include "playlistundocommands.h"
 
@@ -43,9 +43,11 @@ using boost::shared_ptr;
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kSettingsGroup = "Playlist";
 
-Playlist::Playlist(QObject *parent, SettingsProvider* settings)
+Playlist::Playlist(PlaylistBackend* backend,
+                   QObject *parent, SettingsProvider* settings)
   : QAbstractListModel(parent),
     settings_(settings ? settings : new DefaultSettingsProvider),
+    backend_(backend),
     current_is_paused_(false),
     current_virtual_index_(-1),
     is_shuffled_(false),
@@ -59,6 +61,8 @@ Playlist::Playlist(QObject *parent, SettingsProvider* settings)
 
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
+
+  Restore();
 }
 
 Playlist::~Playlist() {
@@ -714,12 +718,6 @@ void Playlist::SetCurrentIsPaused(bool paused) {
   if (current_item_index_.isValid())
     dataChanged(index(current_item_index_.row(), 0),
                 index(current_item_index_.row(), ColumnCount));
-}
-
-void Playlist::SetBackend(shared_ptr<LibraryBackendInterface> backend) {
-  backend_ = backend;
-
-  Restore();
 }
 
 void Playlist::Save() const {

@@ -78,24 +78,24 @@ class TextItemDelegate : public PlaylistDelegateBase {
 
 class TagCompletionModel : public QStringListModel {
  public:
-  TagCompletionModel(Library* library, Playlist::Column column);
+  TagCompletionModel(LibraryBackend* backend, Playlist::Column column);
 };
 
 class TagCompleter : public QCompleter {
  public:
-  TagCompleter(Library* library, Playlist::Column column, QLineEdit* editor);
+  TagCompleter(LibraryBackend* backend, Playlist::Column column, QLineEdit* editor);
 };
 
 class TagCompletionItemDelegate : public PlaylistDelegateBase {
  public:
-  TagCompletionItemDelegate(QTreeView* view, Library* library, Playlist::Column column) :
-    PlaylistDelegateBase(view), library_(library), column_(column) {};
+  TagCompletionItemDelegate(QTreeView* view,LibraryBackend* backend, Playlist::Column column) :
+    PlaylistDelegateBase(view), backend_(backend), column_(column) {};
 
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
       const QModelIndex& index) const;
 
  private:
-  Library* library_;
+  LibraryBackend* backend_;
   Playlist::Column column_;
 };
 

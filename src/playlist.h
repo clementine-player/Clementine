@@ -29,7 +29,7 @@
 #include "settingsprovider.h"
 
 class RadioService;
-class LibraryBackendInterface;
+class PlaylistBackend;
 
 class QUndoStack;
 
@@ -47,7 +47,8 @@ class Playlist : public QAbstractListModel {
   friend class PlaylistUndoCommands::MoveItems;
 
  public:
-  Playlist(QObject* parent = 0, SettingsProvider* settings = NULL);
+  Playlist(PlaylistBackend* backend,
+           QObject* parent = 0, SettingsProvider* settings = NULL);
   ~Playlist();
 
   enum Column {
@@ -145,8 +146,6 @@ class Playlist : public QAbstractListModel {
 
 
  public slots:
-  void SetBackend(boost::shared_ptr<LibraryBackendInterface>);
-
   void set_current_index(int index);
   void Paused();
   void Playing();
@@ -183,7 +182,7 @@ class Playlist : public QAbstractListModel {
  private:
   boost::scoped_ptr<SettingsProvider> settings_;
 
-  boost::shared_ptr<LibraryBackendInterface> backend_;
+  PlaylistBackend* backend_;
 
   PlaylistItemList items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order

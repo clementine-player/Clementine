@@ -41,7 +41,6 @@ class LibraryConfig : public QWidget {
  private slots:
   void Add();
   void Remove();
-  void BackendReady();
 
   void CurrentRowChanged(const QModelIndex& index);
 

@@ -24,14 +24,14 @@ GroupByDialog::GroupByDialog(QWidget *parent)
   ui_.setupUi(this);
   Reset();
 
-  mapping_.insert(Mapping(Library::GroupBy_None, 0));
-  mapping_.insert(Mapping(Library::GroupBy_Album, 1));
-  mapping_.insert(Mapping(Library::GroupBy_Artist, 2));
-  mapping_.insert(Mapping(Library::GroupBy_AlbumArtist, 3));
-  mapping_.insert(Mapping(Library::GroupBy_Composer, 4));
-  mapping_.insert(Mapping(Library::GroupBy_Genre, 5));
-  mapping_.insert(Mapping(Library::GroupBy_Year, 6));
-  mapping_.insert(Mapping(Library::GroupBy_YearAlbum, 7));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_None, 0));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_Album, 1));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_Artist, 2));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_AlbumArtist, 3));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_Composer, 4));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_Genre, 5));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_Year, 6));
+  mapping_.insert(Mapping(LibraryModel::GroupBy_YearAlbum, 7));
 
   connect(ui_.button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
@@ -44,14 +44,14 @@ void GroupByDialog::Reset() {
 }
 
 void GroupByDialog::accept() {
-  emit Accepted(Library::Grouping(
+  emit Accepted(LibraryModel::Grouping(
       mapping_.get<tag_index>().find(ui_.first->currentIndex())->group_by,
       mapping_.get<tag_index>().find(ui_.second->currentIndex())->group_by,
       mapping_.get<tag_index>().find(ui_.third->currentIndex())->group_by));
   QDialog::accept();
 }
 
-void GroupByDialog::LibraryGroupingChanged(const Library::Grouping& g) {
+void GroupByDialog::LibraryGroupingChanged(const LibraryModel::Grouping& g) {
   ui_.first->setCurrentIndex(mapping_.get<tag_group_by>().find(g[0])->combo_box_index);
   ui_.second->setCurrentIndex(mapping_.get<tag_group_by>().find(g[1])->combo_box_index);
   ui_.third->setCurrentIndex(mapping_.get<tag_group_by>().find(g[2])->combo_box_index);

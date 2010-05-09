@@ -14,42 +14,37 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EDITTAGDIALOG_H
-#define EDITTAGDIALOG_H
+#ifndef PLAYLISTBACKEND_H
+#define PLAYLISTBACKEND_H
 
-#include <QDialog>
+#include <QObject>
+#include <QList>
 
-#include "ui_edittagdialog.h"
-#include "song.h"
+#include "playlistitem.h"
 
-class LibraryBackend;
+class Database;
 
-class EditTagDialog : public QDialog {
+class PlaylistBackend : public QObject {
   Q_OBJECT
 
  public:
-  EditTagDialog(QWidget* parent = 0);
+  PlaylistBackend(Database* db, QObject* parent = 0);
 
-  static const char* kHintText;
+  struct Playlist {
+    int id;
+    QString name;
+  };
+  typedef QList<Playlist> PlaylistList;
 
-  bool SetSongs(const SongList& songs);
-  void SetTagCompleter(LibraryBackend* backend);
+  PlaylistList GetAllPlaylists();
+  PlaylistItemList GetPlaylistItems(int playlist);
+  void SavePlaylistAsync(int playlist, const PlaylistItemList& items);
 
  public slots:
-  void accept();
-
- signals:
-  void SongEdited(const Song& old_song, const Song& new_song);
+  void SavePlaylist(int playlist, const PlaylistItemList& items);
 
  private:
-  Ui::EditTagDialog ui_;
-
-  SongList songs_;
-
-  QString common_artist_;
-  QString common_album_;
-  QString common_genre_;
-  int common_year_;
+  Database* db_;
 };
 
-#endif // EDITTAGDIALOG_H
+#endif // PLAYLISTBACKEND_H

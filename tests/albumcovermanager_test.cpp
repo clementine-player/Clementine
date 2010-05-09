@@ -23,7 +23,7 @@
 class AlbumCoverManagerTest : public ::testing::Test {
  protected:
   AlbumCoverManagerTest()
-      : manager_(&network_) {
+      : manager_(&network_, NULL) {
   }
 
   MockNetworkAccessManager network_;

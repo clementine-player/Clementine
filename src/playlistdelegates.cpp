@@ -16,6 +16,7 @@
 
 #include "playlistdelegates.h"
 #include "trackslider.h"
+#include "librarybackend.h"
 
 #include <QDateTime>
 #include <QLineEdit>
@@ -212,17 +213,17 @@ QWidget* TextItemDelegate::createEditor(
 }
 
 
-TagCompletionModel::TagCompletionModel(Library* library, Playlist::Column column) :
+TagCompletionModel::TagCompletionModel(LibraryBackend* backend, Playlist::Column column) :
   QStringListModel() {
 
   switch(column) {
     case Playlist::Column_Artist: {
-      setStringList(library->GetBackend()->GetAllArtists());
+      setStringList(backend->GetAllArtists());
       break;
     }
     case Playlist::Column_Album: {
       QStringList album_names;
-      LibraryBackend::AlbumList albums = library->GetBackend()->GetAllAlbums();
+      LibraryBackend::AlbumList albums = backend->GetAllAlbums();
       foreach(const LibraryBackend::Album& album, albums)
         album_names << album.album_name;
       setStringList(album_names);
@@ -237,19 +238,19 @@ TagCompletionModel::TagCompletionModel(Library* library, Playlist::Column column
   }
 }
 
-TagCompleter::TagCompleter(Library* library, Playlist::Column column, QLineEdit* editor) :
+TagCompleter::TagCompleter(LibraryBackend* backend, Playlist::Column column, QLineEdit* editor) :
   QCompleter(editor) {
 
-  setModel(new TagCompletionModel(library, column));
+  setModel(new TagCompletionModel(backend, column));
   setCaseSensitivity(Qt::CaseInsensitive);
   editor->setCompleter(this);
 }
 
 QWidget* TagCompletionItemDelegate::createEditor(
-    QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+    QWidget* parent, const QStyleOptionViewItem&, const QModelIndex&) const {
 
   QLineEdit* editor = new QLineEdit(parent);
-  new TagCompleter(library_, column_, editor);
+  new TagCompleter(backend_, column_, editor);
 
   return editor;
 }

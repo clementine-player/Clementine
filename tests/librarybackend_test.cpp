@@ -16,10 +16,11 @@
 
 #include "test_utils.h"
 #include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
 #include "librarybackend.h"
+#include "library.h"
 #include "song.h"
+#include "database.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -27,25 +28,14 @@
 #include <QThread>
 #include <QSignalSpy>
 
-using ::testing::_;
-using ::testing::AtMost;
-using ::testing::Invoke;
-using ::testing::Return;
+namespace {
 
 class LibraryBackendTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    backend_.reset(new MemoryLibraryBackend(NULL));
-
-    connection_name_ = "thread_" + QString::number(
-        reinterpret_cast<quint64>(QThread::currentThread()));
-    database_ = QSqlDatabase::database(connection_name_);
-  }
-
-  void TearDown() {
-    // Make sure Qt does not re-use the connection.
-    database_ = QSqlDatabase();
-    QSqlDatabase::removeDatabase(connection_name_);
+    database_.reset(new MemoryDatabase);
+    backend_.reset(new LibraryBackend(database_.get(), Library::kSongsTable,
+                                      Library::kDirsTable, Library::kSubdirsTable));
   }
 
   Song MakeDummySong(int directory_id) {
@@ -59,70 +49,9 @@ class LibraryBackendTest : public ::testing::Test {
     return ret;
   }
 
+  boost::scoped_ptr<Database> database_;
   boost::scoped_ptr<LibraryBackend> backend_;
-  QString connection_name_;
-  QSqlDatabase database_;
 };
-
-#ifdef Q_OS_UNIX
-
-#include <sys/time.h>
-#include <time.h>
-
-struct PerfTimer {
-  PerfTimer(int iterations) : iterations_(iterations) {
-    gettimeofday(&start_time_, NULL);
-  }
-
-  ~PerfTimer() {
-    gettimeofday(&end_time_, NULL);
-
-    timeval elapsed_time;
-    timersub(&end_time_, &start_time_, &elapsed_time);
-    int elapsed_us = elapsed_time.tv_usec + elapsed_time.tv_sec * 1000000;
-
-    qDebug() << "Elapsed:" << elapsed_us << "us";
-    qDebug() << "Time per iteration:" << float(elapsed_us) / iterations_ << "us";
-  }
-
-  timeval start_time_;
-  timeval end_time_;
-  int iterations_;
-};
-
-TEST_F(LibraryBackendTest, LikePerformance) {
-  const int iterations = 1000000;
-
-  const char* needle = "foo";
-  const char* haystack = "foobarbaz foobarbaz";
-  qDebug() << "Simple query";
-  {
-    PerfTimer perf(iterations);
-    for (int i = 0; i < iterations; ++i) {
-      backend_->Like(needle, haystack);
-    }
-  }
-}
-
-#endif
-
-TEST_F(LibraryBackendTest, DatabaseInitialises) {
-  // Check that these tables exist
-  QStringList tables = database_.tables();
-  EXPECT_TRUE(tables.contains("songs"));
-  EXPECT_TRUE(tables.contains("directories"));
-  EXPECT_TRUE(tables.contains("subdirectories"));
-  EXPECT_TRUE(tables.contains("playlists"));
-  EXPECT_TRUE(tables.contains("playlist_items"));
-  ASSERT_TRUE(tables.contains("schema_version"));
-
-  // Check the schema version is correct
-  QSqlQuery q("SELECT version FROM schema_version", database_);
-  ASSERT_TRUE(q.exec());
-  ASSERT_TRUE(q.next());
-  EXPECT_EQ(LibraryBackend::kSchemaVersion, q.value(0).toInt());
-  EXPECT_FALSE(q.next());
-}
 
 TEST_F(LibraryBackendTest, EmptyDatabase) {
   // Check the database is empty to start with
@@ -171,7 +100,7 @@ TEST_F(LibraryBackendTest, AddInvalidSong) {
   Song s;
   s.set_directory_id(1);
 
-  QSignalSpy spy(backend_.get(), SIGNAL(Error(QString)));
+  QSignalSpy spy(database_.get(), SIGNAL(Error(QString)));
 
   backend_->AddOrUpdateSongs(SongList() << s);
   ASSERT_EQ(1, spy.count()); spy.takeFirst();
@@ -194,37 +123,6 @@ TEST_F(LibraryBackendTest, AddInvalidSong) {
 }
 
 TEST_F(LibraryBackendTest, GetAlbumArtNonExistent) {
-}
-
-TEST_F(LibraryBackendTest, LikeWorksWithAllAscii) {
-  EXPECT_TRUE(backend_->Like("%ar%", "bar"));
-  EXPECT_FALSE(backend_->Like("%ar%", "foo"));
-}
-
-TEST_F(LibraryBackendTest, LikeWorksWithUnicode) {
-  EXPECT_TRUE(backend_->Like("%Снег%", "Снег"));
-  EXPECT_FALSE(backend_->Like("%Снег%", "foo"));
-}
-
-TEST_F(LibraryBackendTest, LikeAsciiCaseInsensitive) {
-  EXPECT_TRUE(backend_->Like("%ar%", "BAR"));
-  EXPECT_FALSE(backend_->Like("%ar%", "FOO"));
-}
-
-TEST_F(LibraryBackendTest, LikeUnicodeCaseInsensitive) {
-  EXPECT_TRUE(backend_->Like("%снег%", "Снег"));
-}
-
-TEST_F(LibraryBackendTest, LikeCacheInvalidated) {
-  EXPECT_TRUE(backend_->Like("%foo%", "foobar"));
-  EXPECT_FALSE(backend_->Like("%baz%", "foobar"));
-}
-
-TEST_F(LibraryBackendTest, LikeQuerySplit) {
-  EXPECT_TRUE(backend_->Like("%foo bar%", "foobar"));
-  EXPECT_FALSE(backend_->Like("%foo bar%", "barbaz"));
-  EXPECT_FALSE(backend_->Like("%foo bar%", "foobaz"));
-  EXPECT_FALSE(backend_->Like("%foo bar%", "baz"));
 }
 
 // Test adding a single song to the database, then getting various information
@@ -398,3 +296,5 @@ TEST_F(SingleSong, DeleteSongs) {
   LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
   EXPECT_EQ(0, albums.size());
 }
+
+} // namespace

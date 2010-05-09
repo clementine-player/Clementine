@@ -41,12 +41,6 @@ void LibraryConfig::SetModel(LibraryDirectoryModel *model) {
   connect(ui_.list->selectionModel(),
           SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
           SLOT(CurrentRowChanged(QModelIndex)));
-
-
-  if (model_->IsBackendReady())
-    BackendReady();
-  else
-    connect(model_, SIGNAL(BackendReady()), SLOT(BackendReady()));
 }
 
 void LibraryConfig::Add() {
@@ -69,12 +63,6 @@ void LibraryConfig::Remove() {
 
 void LibraryConfig::CurrentRowChanged(const QModelIndex& index) {
   ui_.remove->setEnabled(index.isValid());
-}
-
-void LibraryConfig::BackendReady() {
-  ui_.list->setEnabled(true);
-  ui_.add->setEnabled(true);
-  ui_.remove->setEnabled(true);
 }
 
 void LibraryConfig::Save() {

@@ -61,15 +61,15 @@ PlaylistView::PlaylistView(QWidget *parent)
   setAlternatingRowColors(true);
 }
 
-void PlaylistView::setItemDelegates(Library* library) {
+void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Title, new TextItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Album,
-      new TagCompletionItemDelegate(this, library, Playlist::Column_Album));
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Album));
   setItemDelegateForColumn(Playlist::Column_Artist,
-      new TagCompletionItemDelegate(this, library, Playlist::Column_Artist));
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Artist));
   setItemDelegateForColumn(Playlist::Column_AlbumArtist,
-      new TagCompletionItemDelegate(this, library, Playlist::Column_AlbumArtist));
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_AlbumArtist));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));

@@ -45,6 +45,8 @@
 #include "commandlineoptions.h"
 #include "mac_startup.h"
 #include "transcodedialog.h"
+#include "playlistbackend.h"
+#include "database.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -90,14 +92,16 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
     library_config_dialog_(new LibraryConfigDialog),
     about_dialog_(new About),
+    database_(new Database(this)),
     radio_model_(new RadioModel(this)),
-    playlist_(new Playlist(this)),
+    playlist_backend_(new PlaylistBackend(database_, this)),
+    playlist_(new Playlist(playlist_backend_, this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), engine, this)),
-    library_(new Library(this)),
+    library_(new Library(database_, this)),
     global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog),
     add_stream_dialog_(new AddStreamDialog),
-    cover_manager_(new AlbumCoverManager(network)),
+    cover_manager_(new AlbumCoverManager(network, library_->model()->backend())),
     group_by_dialog_(new GroupByDialog),
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
@@ -124,20 +128,20 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
 #endif
 
   // Models
-  library_sort_model_->setSourceModel(library_);
-  library_sort_model_->setSortRole(Library::Role_SortText);
+  library_sort_model_->setSourceModel(library_->model());
+  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
   playlist_->IgnoreSorting(true);
   ui_.playlist->setModel(playlist_);
-  ui_.playlist->setItemDelegates(library_);
+  ui_.playlist->SetItemDelegates(library_->model()->backend());
   playlist_->IgnoreSorting(false);
 
   ui_.library_view->setModel(library_sort_model_);
-  ui_.library_view->SetLibrary(library_);
-  library_config_dialog_->SetModel(library_->GetDirectoryModel());
-  settings_dialog_->SetLibraryDirectoryModel(library_->GetDirectoryModel());
+  ui_.library_view->SetLibrary(library_->model());
+  library_config_dialog_->SetModel(library_->model()->directory_model());
+  settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
   ui_.radio_view->setModel(radio_model_);
 
@@ -154,7 +158,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(ui_.action_stop, SIGNAL(triggered()), player_, SLOT(Stop()));
   connect(ui_.action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
   connect(ui_.action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
-  connect(ui_.library_filter, SIGNAL(textChanged(QString)), library_, SLOT(SetFilterText(QString)));
+  connect(ui_.library_filter, SIGNAL(textChanged(QString)), library_->model(), SLOT(SetFilterText(QString)));
   connect(ui_.action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
@@ -225,18 +229,16 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
 
   connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
+  // Database connections
+  connect(database_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
+
   // Library connections
-  connect(library_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
   connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
   connect(ui_.library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
   connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_config_dialog_.get(), SLOT(show()));
-  connect(library_, SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
+  connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
-  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
-          cover_manager_.get(), SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
-  connect(library_, SIGNAL(BackendReady(boost::shared_ptr<LibraryBackendInterface>)),
-          playlist_, SLOT(SetBackend(boost::shared_ptr<LibraryBackendInterface>)));
 
   // Age filters
   QActionGroup* filter_age_group = new QActionGroup(this);
@@ -264,22 +266,22 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(ui_.filter_age_month, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
   connect(ui_.filter_age_three_months, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
   connect(ui_.filter_age_year, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(filter_age_mapper, SIGNAL(mapped(int)), library_, SLOT(SetFilterAge(int)));
+  connect(filter_age_mapper, SIGNAL(mapped(int)), library_->model(), SLOT(SetFilterAge(int)));
   connect(ui_.library_filter_clear, SIGNAL(clicked()), SLOT(ClearLibraryFilter()));
 
   // "Group by ..."
   ui_.group_by_artist->setProperty("group_by", QVariant::fromValue(
-      Library::Grouping(Library::GroupBy_Artist)));
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist)));
   ui_.group_by_artist_album->setProperty("group_by", QVariant::fromValue(
-      Library::Grouping(Library::GroupBy_Artist, Library::GroupBy_Album)));
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
   ui_.group_by_artist_yearalbum->setProperty("group_by", QVariant::fromValue(
-      Library::Grouping(Library::GroupBy_Artist, Library::GroupBy_YearAlbum)));
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_YearAlbum)));
   ui_.group_by_album->setProperty("group_by", QVariant::fromValue(
-      Library::Grouping(Library::GroupBy_Album)));
+      LibraryModel::Grouping(LibraryModel::GroupBy_Album)));
   ui_.group_by_genre_album->setProperty("group_by", QVariant::fromValue(
-      Library::Grouping(Library::GroupBy_Genre, Library::GroupBy_Album)));
+      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Album)));
   ui_.group_by_genre_artist_album->setProperty("group_by", QVariant::fromValue(
-      Library::Grouping(Library::GroupBy_Genre, Library::GroupBy_Artist, Library::GroupBy_Album)));
+      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
 
   group_by_group_ = new QActionGroup(this);
   group_by_group_->addAction(ui_.group_by_artist);
@@ -294,12 +296,12 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   group_by_menu->addActions(group_by_group_->actions());
 
   connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
-  connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
-          group_by_dialog_.get(), SLOT(LibraryGroupingChanged(Library::Grouping)));
-  connect(library_, SIGNAL(GroupingChanged(Library::Grouping)),
-          SLOT(LibraryGroupingChanged(Library::Grouping)));
-  connect(group_by_dialog_.get(), SIGNAL(Accepted(Library::Grouping)),
-          library_, SLOT(SetGroupBy(Library::Grouping)));
+  connect(library_->model(), SIGNAL(GroupingChanged(LibraryModel::Grouping)),
+          group_by_dialog_.get(), SLOT(LibraryGroupingChanged(LibraryModel::Grouping)));
+  connect(library_->model(), SIGNAL(GroupingChanged(LibraryModel::Grouping)),
+          SLOT(LibraryGroupingChanged(LibraryModel::Grouping)));
+  connect(group_by_dialog_.get(), SIGNAL(Accepted(LibraryModel::Grouping)),
+          library_->model(), SLOT(SetGroupBy(LibraryModel::Grouping)));
 
   // Library config menu
   QMenu* library_menu = new QMenu(this);
@@ -425,10 +427,10 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
 
   ui_.file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
-  library_->SetGroupBy(Library::Grouping(
-      Library::GroupBy(settings_.value("group_by1", int(Library::GroupBy_Artist)).toInt()),
-      Library::GroupBy(settings_.value("group_by2", int(Library::GroupBy_Album)).toInt()),
-      Library::GroupBy(settings_.value("group_by3", int(Library::GroupBy_None)).toInt())));
+  library_->model()->SetGroupBy(LibraryModel::Grouping(
+      LibraryModel::GroupBy(settings_.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
+      LibraryModel::GroupBy(settings_.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
+      LibraryModel::GroupBy(settings_.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
 
 #ifndef Q_OS_DARWIN
   StartupBehaviour behaviour =
@@ -579,7 +581,7 @@ void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
     idx = library_sort_model_->mapToSource(idx);
 
   QModelIndex first_song =
-      playlist_->InsertLibraryItems(library_->GetChildSongs(idx));
+      playlist_->InsertLibraryItems(library_->model()->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), Engine::First, true);
@@ -795,7 +797,7 @@ void MainWindow::EditTracks() {
   }
 
   edit_tag_dialog_->SetSongs(songs);
-  edit_tag_dialog_->SetTagCompleter(library_);
+  edit_tag_dialog_->SetTagCompleter(library_->model()->backend());
 
   if (edit_tag_dialog_->exec() == QDialog::Rejected)
     return;
@@ -926,11 +928,11 @@ void MainWindow::GroupByClicked(QAction* action) {
     return;
   }
 
-  Library::Grouping g = action->property("group_by").value<Library::Grouping>();
-  library_->SetGroupBy(g);
+  LibraryModel::Grouping g = action->property("group_by").value<LibraryModel::Grouping>();
+  library_->model()->SetGroupBy(g);
 }
 
-void MainWindow::LibraryGroupingChanged(const Library::Grouping& g) {
+void MainWindow::LibraryGroupingChanged(const LibraryModel::Grouping& g) {
   // Save the settings
   settings_.setValue("group_by1", int(g[0]));
   settings_.setValue("group_by2", int(g[1]));
@@ -941,7 +943,7 @@ void MainWindow::LibraryGroupingChanged(const Library::Grouping& g) {
     if (action->property("group_by").isNull())
       continue;
 
-    if (g == action->property("group_by").value<Library::Grouping>()) {
+    if (g == action->property("group_by").value<LibraryModel::Grouping>()) {
       action->setChecked(true);
       return;
     }

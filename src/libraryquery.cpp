@@ -21,18 +21,13 @@
 #include <QDateTime>
 #include <QSqlError>
 
-const char* QueryOptions::kLibraryTable = "songs";
-
-QueryOptions::QueryOptions(const QString& _table)
-  : table(_table),
-    max_age(-1)
+QueryOptions::QueryOptions()
+  : max_age(-1)
 {
 }
 
 
-LibraryQuery::LibraryQuery(const QueryOptions& options)
-  : table_(options.table)
-{
+LibraryQuery::LibraryQuery(const QueryOptions& options) {
   if (!options.filter.isEmpty()) {
     where_clauses_ << "("
         "artist LIKE ? OR "
@@ -72,8 +67,8 @@ void LibraryQuery::AddCompilationRequirement(bool compilation) {
   where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
 }
 
-QSqlError LibraryQuery::Exec(QSqlDatabase db) {
-  QString sql = QString("SELECT %1 FROM %2").arg(column_spec_, table_);
+QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& table) {
+  QString sql = QString("SELECT %1 FROM %2").arg(column_spec_, table);
 
   if (!where_clauses_.isEmpty())
     sql += " WHERE " + where_clauses_.join(" AND ");

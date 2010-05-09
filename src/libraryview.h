@@ -20,7 +20,7 @@
 #include <QStyledItemDelegate>
 #include <QTreeView>
 
-class Library;
+class LibraryModel;
 
 class LibraryItemDelegate : public QStyledItemDelegate {
  public:
@@ -36,7 +36,7 @@ class LibraryView : public QTreeView {
 
   static const char* kSettingsGroup;
 
-  void SetLibrary(Library* library);
+  void SetLibrary(LibraryModel* library);
 
  public slots:
   void TotalSongCountUpdated(int count);
@@ -69,7 +69,7 @@ class LibraryView : public QTreeView {
  private:
   static const int kRowsToShow;
 
-  Library* library_;
+  LibraryModel* library_;
   int total_song_count_;
   bool auto_open_;
 

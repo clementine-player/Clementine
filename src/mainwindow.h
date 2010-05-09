@@ -25,11 +25,13 @@
 
 #include "ui_mainwindow.h"
 #include "engines/engine_fwd.h"
+#include "librarymodel.h"
 
 class Playlist;
 class Player;
 class Library;
 class LibraryConfigDialog;
+class PlaylistBackend;
 class RadioModel;
 class Song;
 class RadioItem;
@@ -47,6 +49,7 @@ class GroupByDialog;
 class Equalizer;
 class CommandlineOptions;
 class TranscodeDialog;
+class Database;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -107,7 +110,7 @@ class MainWindow : public QMainWindow {
   void AddLibraryItemToPlaylist(const QModelIndex& index);
   void ClearLibraryFilter();
   void GroupByClicked(QAction*);
-  void LibraryGroupingChanged(const Library::Grouping& g);
+  void LibraryGroupingChanged(const LibraryModel::Grouping& g);
 
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
@@ -149,7 +152,9 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<LibraryConfigDialog> library_config_dialog_;
   boost::scoped_ptr<About> about_dialog_;
 
+  Database* database_;
   RadioModel* radio_model_;
+  PlaylistBackend* playlist_backend_;
   Playlist* playlist_;
   Player* player_;
   Library* library_;

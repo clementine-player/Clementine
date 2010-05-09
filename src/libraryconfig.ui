@@ -24,24 +24,17 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QListView" name="list">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-      </widget>
+      <widget class="QListView" name="list"/>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QPushButton" name="add">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
          <property name="text">
           <string>Add new folder...</string>
          </property>
          <property name="icon">
-          <iconset resource="../data/data.qrc">
+          <iconset>
            <normaloff>:/folder-new.png</normaloff>:/folder-new.png</iconset>
          </property>
          <property name="iconSize">
@@ -57,9 +50,6 @@
        </item>
        <item>
         <widget class="QPushButton" name="remove">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
          <property name="text">
           <string>Remove folder</string>
          </property>
@@ -111,8 +101,6 @@
   <tabstop>add</tabstop>
   <tabstop>remove</tabstop>
  </tabstops>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

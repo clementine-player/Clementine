@@ -24,15 +24,13 @@
 #include <QVariantList>
 
 class Song;
+class LibraryBackend;
 
 struct QueryOptions {
-  static const char* kLibraryTable;
-
-  QueryOptions(const QString& _table = kLibraryTable);
+  QueryOptions();
 
   bool Matches(const Song& song) const;
 
-  QString table;
   QString filter;
   int max_age;
 };
@@ -47,14 +45,13 @@ class LibraryQuery {
   void AddWhereLike(const QString& column, const QVariant& value);
   void AddCompilationRequirement(bool compilation);
 
-  QSqlError Exec(QSqlDatabase db);
+  QSqlError Exec(QSqlDatabase db, const QString& table);
   bool Next();
   QVariant Value(int column) const;
 
   operator const QSqlQuery& () const { return query_; }
 
  private:
-  QString table_;
   QString column_spec_;
   QString order_by_;
   QStringList where_clauses_;

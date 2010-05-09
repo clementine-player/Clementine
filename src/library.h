@@ -17,193 +17,48 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
 
-#include <QAbstractItemModel>
-#include <QIcon>
-
 #include "backgroundthread.h"
-#include "librarybackend.h"
-#include "librarywatcher.h"
-#include "libraryquery.h"
-#include "engines/engine_fwd.h"
-#include "song.h"
-#include "libraryitem.h"
-#include "simpletreemodel.h"
+
+#include <QObject>
 
 #include <boost/scoped_ptr.hpp>
 
-class LibraryDirectoryModel;
+class Database;
+class LibraryBackend;
+class LibraryModel;
+class LibraryWatcher;
 
-class Library : public SimpleTreeModel<LibraryItem> {
+class Library : public QObject {
   Q_OBJECT
-  Q_ENUMS(GroupBy);
 
  public:
-  Library(QObject* parent = 0, const QString& table = QueryOptions::kLibraryTable);
-  ~Library();
+  Library(Database* db, QObject* parent);
 
-  enum {
-    Role_Type = Qt::UserRole + 1,
-    Role_ContainerType,
-    Role_SortText,
-    Role_Key,
-    Role_Artist,
-  };
-
-  // These values get saved in QSettings - don't change them
-  enum GroupBy {
-    GroupBy_None = 0,
-    GroupBy_Artist = 1,
-    GroupBy_Album = 2,
-    GroupBy_YearAlbum = 3,
-    GroupBy_Year = 4,
-    GroupBy_Composer = 5,
-    GroupBy_Genre = 6,
-    GroupBy_AlbumArtist = 7,
-  };
-
-  struct Grouping {
-    Grouping(GroupBy f = GroupBy_None,
-             GroupBy s = GroupBy_None,
-             GroupBy t = GroupBy_None)
-               : first(f), second(s), third(t) {}
-
-    GroupBy first;
-    GroupBy second;
-    GroupBy third;
-
-    const GroupBy& operator [](int i) const;
-    GroupBy& operator [](int i);
-    bool operator ==(const Grouping& other) const {
-      return first == other.first &&
-             second == other.second &&
-             third == other.third;
-    }
-  };
+  static const char* kSongsTable;
+  static const char* kDirsTable;
+  static const char* kSubdirsTable;
 
   // Useful for tests.  The library takes ownership.
-  void set_backend_factory(BackgroundThreadFactory<LibraryBackendInterface>* factory);
   void set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory);
 
   void Init();
   void StartThreads();
 
-  LibraryDirectoryModel* GetDirectoryModel() const { return dir_model_; }
-  boost::shared_ptr<LibraryBackendInterface> GetBackend() const { return backend_->Worker(); }
-
-  // Get information about the library
-  void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
-                     QSet<int>* song_ids) const;
-  SongList GetChildSongs(const QModelIndex& index) const;
-
-  // QAbstractItemModel
-  QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-  Qt::ItemFlags flags(const QModelIndex& index) const;
-  QStringList mimeTypes() const;
-  QMimeData* mimeData(const QModelIndexList& indexes) const;
-  bool canFetchMore(const QModelIndex &parent) const;
-
- signals:
-  void Error(const QString& message);
-  void TotalSongCountUpdated(int count);
-  void GroupingChanged(const Library::Grouping& g);
-
-  void ScanStarted();
-  void ScanFinished();
-
-  void BackendReady(boost::shared_ptr<LibraryBackendInterface> backend);
-
- public slots:
-  void SetFilterAge(int age);
-  void SetFilterText(const QString& text);
-  void SetGroupBy(const Library::Grouping& g);
-
- protected:
-  void LazyPopulate(LibraryItem* item) { LazyPopulate(item, false); }
-  void LazyPopulate(LibraryItem* item, bool signal);
+  LibraryModel* model() const { return model_; }
 
  private slots:
-  // From LibraryBackend
-  void BackendInitialised();
-  void SongsDiscovered(const SongList& songs);
-  void SongsDeleted(const SongList& songs);
-  void Reset();
-
-  // From LibraryWatcher
   void WatcherInitialised();
 
  private:
-  void Initialise();
+  LibraryBackend* backend_;
+  LibraryModel* model_;
 
-  // Functions for working with queries and creating items.
-  // When the model is reset or when a node is lazy-loaded the Library
-  // constructs a database query to populate the items.  Filters are added
-  // for each parent item, restricting the songs returned to a particular
-  // album or artist for example.
-  void InitQuery(GroupBy type, LibraryQuery* q);
-  void FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q);
-
-  // Items can be created either from a query that's been run to populate a
-  // node, or by a spontaneous SongsDiscovered emission from the backend.
-  LibraryItem* ItemFromQuery(GroupBy type, bool signal, bool create_divider,
-                             LibraryItem* parent, const LibraryQuery& q,
-                             int container_level);
-  LibraryItem* ItemFromSong(GroupBy type, bool signal, bool create_divider,
-                            LibraryItem* parent, const Song& s,
-                            int container_level);
-
-  // The "Various Artists" node is an annoying special case.
-  LibraryItem* CreateCompilationArtistNode(bool signal, LibraryItem* parent);
-
-  // Helpers for ItemFromQuery and ItemFromSong
-  LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent,
-                        int container_level);
-  void FinishItem(GroupBy type, bool signal, bool create_divider,
-                  LibraryItem* parent, LibraryItem* item);
-
-  // Functions for manipulating text
-  QString TextOrUnknown(const QString& text) const;
-  QString PrettyYearAlbum(int year, const QString& album) const;
-
-  QString SortText(QString text) const;
-  QString SortTextForArtist(QString artist) const;
-  QString SortTextForYear(int year) const;
-
-  QString DividerKey(GroupBy type, LibraryItem* item) const;
-  QString DividerDisplayText(GroupBy type, const QString& key) const;
-
-  // Helpers
-  QVariant data(const LibraryItem* item, int role) const;
-  bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
-
- private:
-  boost::scoped_ptr<BackgroundThreadFactory<LibraryBackendInterface> > backend_factory_;
   boost::scoped_ptr<BackgroundThreadFactory<LibraryWatcher> > watcher_factory_;
-  BackgroundThread<LibraryBackendInterface>* backend_;
   BackgroundThread<LibraryWatcher>* watcher_;
-  LibraryDirectoryModel* dir_model_;
 
-  int waiting_for_threads_;
-
-  QueryOptions query_options_;
-  Grouping group_by_;
-
-  // Keyed on database ID
-  QMap<int, LibraryItem*> song_nodes_;
-
-  // Keyed on whatever the key is for that level - artist, album, year, etc.
-  QMap<QString, LibraryItem*> container_nodes_[3];
-
-  // Keyed on a letter, a year, a century, etc.
-  QMap<QString, LibraryItem*> divider_nodes_;
-
-  // Only applies if the first level is "artist"
-  LibraryItem* compilation_artist_node_;
-
-  QIcon artist_icon_;
-  QIcon album_icon_;
-  QIcon no_cover_icon_;
+ signals:
+  void ScanStarted();
+  void ScanFinished();
 };
 
-Q_DECLARE_METATYPE(Library::Grouping);
-
-#endif // LIBRARY_H
+#endif

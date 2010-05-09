@@ -24,12 +24,10 @@
 #include <QStringList>
 #include <QMap>
 
-#include <boost/shared_ptr.hpp>
-
 class QFileSystemWatcher;
 class QTimer;
 
-class LibraryBackendInterface;
+class LibraryBackend;
 
 class LibraryWatcher : public QObject {
   Q_OBJECT
@@ -37,7 +35,7 @@ class LibraryWatcher : public QObject {
  public:
   LibraryWatcher(QObject* parent = 0);
 
-  void SetBackend(boost::shared_ptr<LibraryBackendInterface> backend) { backend_ = backend; }
+  void SetBackend(LibraryBackend* backend) { backend_ = backend; }
 
   void Stop() { stop_requested_ = true; }
 
@@ -120,7 +118,7 @@ class LibraryWatcher : public QObject {
     QFileSystemWatcher* watcher;
   };
 
-  boost::shared_ptr<LibraryBackendInterface> backend_;
+  LibraryBackend* backend_;
   bool stop_requested_;
 
   QMap<int, DirData> watched_dirs_;

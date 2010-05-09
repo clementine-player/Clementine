@@ -14,9 +14,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "library.h"
+#include "librarymodel.h"
 #include "libraryview.h"
 #include "libraryitem.h"
+#include "librarybackend.h"
 
 #include <QPainter>
 #include <QContextMenuEvent>
@@ -34,7 +35,7 @@ LibraryItemDelegate::LibraryItemDelegate(QObject *parent)
 
 void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const {
   LibraryItem::Type type =
-      static_cast<LibraryItem::Type>(index.data(Library::Role_Type).toInt());
+      static_cast<LibraryItem::Type>(index.data(LibraryModel::Role_Type).toInt());
 
   switch (type) {
     case LibraryItem::Type_Divider: {
@@ -103,7 +104,7 @@ void LibraryView::ReloadSettings() {
   auto_open_ = s.value("auto_open", true).toBool();
 }
 
-void LibraryView::SetLibrary(Library *library) {
+void LibraryView::SetLibrary(LibraryModel *library) {
   library_ = library;
 }
 
@@ -195,9 +196,9 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
                         ->mapToSource(context_menu_index_);
 
-  int type = library_->data(context_menu_index_, Library::Role_Type).toInt();
-  int container_type = library_->data(context_menu_index_, Library::Role_ContainerType).toInt();
-  bool enable_various = container_type == Library::GroupBy_Album;
+  int type = library_->data(context_menu_index_, LibraryModel::Role_Type).toInt();
+  int container_type = library_->data(context_menu_index_, LibraryModel::Role_ContainerType).toInt();
+  bool enable_various = container_type == LibraryModel::GroupBy_Album;
   bool enable_add = type == LibraryItem::Type_Container ||
                     type == LibraryItem::Type_Song;
 
@@ -220,9 +221,9 @@ void LibraryView::ShowInVarious(bool on) {
   if (!context_menu_index_.isValid())
     return;
 
-  QString artist = library_->data(context_menu_index_, Library::Role_Artist).toString();
-  QString album = library_->data(context_menu_index_, Library::Role_Key).toString();
-  library_->GetBackend()->ForceCompilation(artist, album, on);
+  QString artist = library_->data(context_menu_index_, LibraryModel::Role_Artist).toString();
+  QString album = library_->data(context_menu_index_, LibraryModel::Role_Key).toString();
+  library_->backend()->ForceCompilation(artist, album, on);
 }
 
 void LibraryView::AddToPlaylist() {

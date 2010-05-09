@@ -104,9 +104,9 @@ bool EditTagDialog::SetSongs(const SongList &s) {
   return true;
 }
 
-void EditTagDialog::SetTagCompleter(Library* library) {
-  new TagCompleter(library, Playlist::Column_Artist, ui_.artist);
-  new TagCompleter(library, Playlist::Column_Album, ui_.album);
+void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
+  new TagCompleter(backend, Playlist::Column_Artist, ui_.artist);
+  new TagCompleter(backend, Playlist::Column_Album, ui_.album);
 }
 
 void EditTagDialog::accept() {
