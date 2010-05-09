@@ -145,8 +145,9 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
 SongList LibraryBackend::FindSongsInDirectory(int id) {
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Song::kColumnSpec +
-              " FROM songs WHERE directory = :directory", db);
+  QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec +
+                      " FROM %1 WHERE directory = :directory")
+              .arg(songs_table_), db);
   q.bindValue(":directory", id);
   q.exec();
   if (db_->CheckErrors(q.lastError())) return SongList();

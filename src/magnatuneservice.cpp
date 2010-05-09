@@ -126,6 +126,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
 
   root_->ClearNotify();
 
+  // The XML file is compressed
   QtIOCompressor gzip(reply);
   gzip.setStreamFormat(QtIOCompressor::GzipFormat);
   if (!gzip.open(QIODevice::ReadOnly)) {
@@ -133,8 +134,13 @@ void MagnatuneService::ReloadDatabaseFinished() {
     return;
   }
 
-  SongList songs;
+  // Remove all existing songs in the database
+  // FindSongsByDirectory isn't the nicest way to do it, but it's easy
+  SongList songs = library_backend_->FindSongsInDirectory(0);
+  library_backend_->DeleteSongs(songs);
+  songs.clear();
 
+  // Parse the XML we got from Magnatune
   QXmlStreamReader reader(&gzip);
   while (!reader.atEnd()) {
     reader.readNext();
@@ -145,6 +151,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
     }
   }
 
+  // Add the songs to the database
   library_backend_->AddOrUpdateSongs(songs);
 }
 
