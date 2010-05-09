@@ -28,7 +28,7 @@ class SomaFMService : public RadioService {
   Q_OBJECT
 
  public:
-  SomaFMService(QObject* parent = 0);
+  SomaFMService(RadioModel* parent);
   ~SomaFMService();
 
   enum ItemType {

@@ -25,15 +25,17 @@
 #include "multiloadingindicator.h"
 
 class Song;
+class RadioModel;
 
 class RadioService : public QObject {
   Q_OBJECT
 
  public:
-  RadioService(const QString& name, QObject* parent = 0);
+  RadioService(const QString& name, RadioModel* model);
   virtual ~RadioService() {}
 
   QString name() const { return name_; }
+  RadioModel* model() const { return model_; }
 
   virtual RadioItem* CreateRootItem(RadioItem* parent) = 0;
   virtual void LazyPopulate(RadioItem* item) = 0;
@@ -67,6 +69,7 @@ class RadioService : public QObject {
   void AddItemToPlaylist(RadioItem* item);
 
  private:
+  RadioModel* model_;
   QString name_;
 };
 

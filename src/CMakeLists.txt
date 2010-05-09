@@ -84,6 +84,7 @@ set(CLEMENTINE-SOURCES
     database.cpp
     librarymodel.cpp
     playlistbackend.cpp
+    mergedproxymodel.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -153,6 +154,7 @@ set(CLEMENTINE-MOC-HEADERS
     librarymodel.h
     playlistbackend.h
     database.h
+    mergedproxymodel.h
 )
 
 # lists of engine source files

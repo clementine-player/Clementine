@@ -21,18 +21,22 @@
 #include "radiomimedata.h"
 #include "savedradio.h"
 #include "magnatuneservice.h"
+#include "mergedproxymodel.h"
 
 #include <QMimeData>
 #include <QtDebug>
 
 QMap<QString, RadioService*> RadioModel::sServices;
 
-RadioModel::RadioModel(QObject* parent)
-  : SimpleTreeModel<RadioItem>(new RadioItem(this), parent)
+RadioModel::RadioModel(Database* db, QObject* parent)
+  : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
+    db_(db),
+    merged_model_(new MergedProxyModel(this))
 {
   Q_ASSERT(sServices.isEmpty());
 
   root_->lazy_loaded = true;
+  merged_model_->setSourceModel(this);
 
   AddService(new LastFMService(this));
   AddService(new SomaFMService(this));

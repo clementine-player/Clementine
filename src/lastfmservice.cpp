@@ -47,7 +47,7 @@ const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
 
-LastFMService::LastFMService(QObject* parent)
+LastFMService::LastFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     scrobbler_(NULL),
     station_dialog_(new LastFMStationDialog),

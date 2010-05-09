@@ -15,9 +15,11 @@
 */
 
 #include "radioservice.h"
+#include "radiomodel.h"
 
-RadioService::RadioService(const QString& name, QObject *parent)
-  : QObject(parent),
+RadioService::RadioService(const QString& name, RadioModel* model)
+  : QObject(model),
+    model_(model),
     name_(name)
 {
 }

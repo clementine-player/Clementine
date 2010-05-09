@@ -22,7 +22,7 @@
 const char* SavedRadio::kServiceName = "SavedRadio";
 const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
-SavedRadio::SavedRadio(QObject* parent)
+SavedRadio::SavedRadio(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
     context_menu_(new QMenu)

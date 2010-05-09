@@ -47,7 +47,7 @@ class LastFMService : public RadioService {
   Q_OBJECT
 
  public:
-  LastFMService(QObject* parent = 0);
+  LastFMService(RadioModel* parent);
   ~LastFMService();
 
   static const char* kServiceName;

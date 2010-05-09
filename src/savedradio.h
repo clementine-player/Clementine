@@ -25,7 +25,7 @@ class SavedRadio : public RadioService {
   Q_OBJECT
 
  public:
-  SavedRadio(QObject* parent = 0);
+  SavedRadio(RadioModel* parent);
   ~SavedRadio();
 
   enum ItemType {

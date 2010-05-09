@@ -31,7 +31,7 @@ const char* SomaFMService::kServiceName = "SomaFM";
 const char* SomaFMService::kChannelListUrl = "http://somafm.com/channels.xml";
 const char* SomaFMService::kHomepage = "http://somafm.com";
 
-SomaFMService::SomaFMService(QObject* parent)
+SomaFMService::SomaFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
     context_menu_(new QMenu),

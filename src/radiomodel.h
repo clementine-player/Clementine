@@ -24,12 +24,14 @@
 class RadioService;
 class LastFMService;
 class Song;
+class MergedProxyModel;
+class Database;
 
 class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
 
  public:
-  RadioModel(QObject* parent = 0);
+  RadioModel(Database* db, QObject* parent = 0);
 
   enum {
     Role_Type = Qt::UserRole + 1,
@@ -52,6 +54,9 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void ShowContextMenu(RadioItem* item, const QPoint& global_pos);
   void ReloadSettings();
 
+  Database* db() const { return db_; }
+  MergedProxyModel* merged_model() const { return merged_model_; }
+
  signals:
   void TaskStarted(MultiLoadingIndicator::TaskType);
   void TaskFinished(MultiLoadingIndicator::TaskType);
@@ -71,6 +76,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
 
  private:
   static QMap<QString, RadioService*> sServices;
+  Database* db_;
+  MergedProxyModel* merged_model_;
 };
 
 #endif // RADIOMODEL_H

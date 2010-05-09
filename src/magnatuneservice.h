@@ -23,11 +23,14 @@
 
 class QNetworkAccessManager;
 
+class LibraryBackend;
+class LibraryModel;
+
 class MagnatuneService : public RadioService {
   Q_OBJECT
 
  public:
-  MagnatuneService(QObject* parent = 0);
+  MagnatuneService(RadioModel* parent);
 
   static const char* kServiceName;
   static const char* kDatabaseUrl;
@@ -46,6 +49,8 @@ class MagnatuneService : public RadioService {
 
  private:
   RadioItem* root_;
+  LibraryBackend* library_backend_;
+  LibraryModel* library_model_;
 
   QNetworkAccessManager* network_;
 };

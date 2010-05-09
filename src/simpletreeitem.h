@@ -50,6 +50,7 @@ class SimpleTreeItem {
 
   T* parent;
   QList<T*> children;
+  QAbstractItemModel* child_model;
 
   SimpleTreeModel<T>* model;
 };
@@ -60,6 +61,7 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, SimpleTreeModel<T>* _model)
     row(0),
     lazy_loaded(true),
     parent(NULL),
+    child_model(NULL),
     model(_model)
 {
 }
@@ -70,6 +72,7 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, const QString& _key, T* _parent)
     key(_key),
     lazy_loaded(false),
     parent(_parent),
+    child_model(NULL),
     model(_parent ? _parent->model : NULL)
 {
   if (parent) {
@@ -83,6 +86,7 @@ SimpleTreeItem<T>::SimpleTreeItem(int _type, T* _parent)
   : type(_type),
     lazy_loaded(false),
     parent(_parent),
+    child_model(NULL),
     model(_parent ? _parent->model : NULL)
 {
   if (parent) {

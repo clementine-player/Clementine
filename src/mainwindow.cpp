@@ -47,6 +47,7 @@
 #include "transcodedialog.h"
 #include "playlistbackend.h"
 #include "database.h"
+#include "mergedproxymodel.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -93,7 +94,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     library_config_dialog_(new LibraryConfigDialog),
     about_dialog_(new About),
     database_(new Database(this)),
-    radio_model_(new RadioModel(this)),
+    radio_model_(new RadioModel(database_, this)),
     playlist_backend_(new PlaylistBackend(database_, this)),
     playlist_(new Playlist(playlist_backend_, this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), engine, this)),
@@ -143,7 +144,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   library_config_dialog_->SetModel(library_->model()->directory_model());
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
-  ui_.radio_view->setModel(radio_model_);
+  ui_.radio_view->setModel(radio_model_->merged_model());
 
   cover_manager_->Init();
 

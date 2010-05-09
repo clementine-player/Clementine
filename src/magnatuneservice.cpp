@@ -16,6 +16,10 @@
 
 #include "magnatuneservice.h"
 #include "song.h"
+#include "radiomodel.h"
+#include "mergedproxymodel.h"
+#include "librarymodel.h"
+#include "librarybackend.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -29,16 +33,24 @@ const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kDatabaseUrl =
     "http://magnatune.com/info/song_info2_xml.gz";
 
-MagnatuneService::MagnatuneService(QObject* parent)
+MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
+    library_backend_(new LibraryBackend(parent->db(), "songs", "", "", this)),
+    library_model_(new LibraryModel(library_backend_, this)),
     network_(new QNetworkAccessManager(this))
 {
+  library_model_->Init();
 }
 
 RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
   root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
   root_->icon = QIcon(":magnatune.png");
+
+  model()->merged_model()->AddSubModel(
+      model()->index(root_->row, 0, model()->ItemToIndex(parent)),
+      library_model_);
+
   return root_;
 }
 

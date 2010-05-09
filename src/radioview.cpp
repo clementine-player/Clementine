@@ -16,6 +16,7 @@
 
 #include "radioview.h"
 #include "radiomodel.h"
+#include "mergedproxymodel.h"
 
 #include <QContextMenuEvent>
 
@@ -29,6 +30,10 @@ void RadioView::contextMenuEvent(QContextMenuEvent* e) {
   if (!index.isValid())
     return;
 
-  RadioModel* radio_model = static_cast<RadioModel*>(model());
-  radio_model->ShowContextMenu(radio_model->IndexToItem(index), e->globalPos());
+  MergedProxyModel* merged_model = static_cast<MergedProxyModel*>(model());
+  RadioModel* radio_model = static_cast<RadioModel*>(merged_model->sourceModel());
+
+  radio_model->ShowContextMenu(
+      radio_model->IndexToItem(merged_model->mapToSource(index)),
+      e->globalPos());
 }
