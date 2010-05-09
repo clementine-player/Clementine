@@ -42,6 +42,9 @@ class MagnatuneService : public RadioService {
 
   void StartLoading(const QUrl &url);
 
+  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                       const QPoint& global_pos);
+
  private slots:
   void UpdateTotalSongCount(int count) { total_song_count_ = count; }
   void ReloadDatabase();

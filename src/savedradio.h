@@ -38,7 +38,8 @@ class SavedRadio : public RadioService {
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
 
-  void ShowContextMenu(RadioItem* item, const QPoint& global_pos);
+  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                       const QPoint& global_pos);
 
   void StartLoading(const QUrl& url);
 

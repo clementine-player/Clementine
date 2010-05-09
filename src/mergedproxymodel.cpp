@@ -299,3 +299,13 @@ QMimeData* MergedProxyModel::mimeData(const QModelIndexList &indexes) const {
 
   return model->mimeData(indexes_in_model);
 }
+
+QModelIndex MergedProxyModel::FindSourceParent(const QModelIndex& proxy_index) const {
+  if (!proxy_index.isValid())
+    return QModelIndex();
+
+  QModelIndex source_index = mapToSource(proxy_index);
+  if (source_index.model() == sourceModel())
+    return source_index;
+  return merge_points_.value(proxy_index.model());
+}

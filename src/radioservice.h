@@ -44,8 +44,9 @@ class RadioService : public QObject {
   virtual QString TitleForItem(const RadioItem* item) const;
   virtual QString ArtistForItem(const RadioItem* item) const;
 
-  virtual void ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
-    Q_UNUSED(item); Q_UNUSED(global_pos); }
+  virtual void ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                               const QPoint& global_pos) {
+    Q_UNUSED(item); Q_UNUSED(index); Q_UNUSED(global_pos); }
 
   virtual void StartLoading(const QUrl& url) = 0;
   virtual void LoadNext(const QUrl& url);

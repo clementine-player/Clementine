@@ -86,7 +86,8 @@ void SavedRadio::SaveStreams() {
   s.endArray();
 }
 
-void SavedRadio::ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
+void SavedRadio::ShowContextMenu(RadioItem* item, const QModelIndex&,
+                                 const QPoint& global_pos) {
   context_item_ = item;
 
   add_action_->setEnabled(item != root_);

@@ -66,7 +66,8 @@ void SomaFMService::LazyPopulate(RadioItem* item) {
   item->lazy_loaded = true;
 }
 
-void SomaFMService::ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
+void SomaFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
+                                    const QPoint& global_pos) {
   context_item_ = item;
   context_menu_->popup(global_pos);
 }

@@ -34,6 +34,7 @@ void RadioView::contextMenuEvent(QContextMenuEvent* e) {
   RadioModel* radio_model = static_cast<RadioModel*>(merged_model->sourceModel());
 
   radio_model->ShowContextMenu(
-      radio_model->IndexToItem(merged_model->mapToSource(index)),
+      radio_model->IndexToItem(merged_model->FindSourceParent(index)),
+      merged_model->mapToSource(index),
       e->globalPos());
 }

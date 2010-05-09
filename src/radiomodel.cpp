@@ -139,9 +139,10 @@ LastFMService* RadioModel::GetLastFMService() const {
   return NULL;
 }
 
-void RadioModel::ShowContextMenu(RadioItem* item, const QPoint& global_pos) {
+void RadioModel::ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                                 const QPoint& global_pos) {
   if (item->service)
-    item->service->ShowContextMenu(item, global_pos);
+    item->service->ShowContextMenu(item, index, global_pos);
 }
 
 void RadioModel::ReloadSettings() {

@@ -153,3 +153,8 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
 
   return song;
 }
+
+void MagnatuneService::ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                                       const QPoint& global_pos) {
+
+}

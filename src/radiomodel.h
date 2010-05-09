@@ -51,7 +51,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
 
-  void ShowContextMenu(RadioItem* item, const QPoint& global_pos);
+  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                       const QPoint& global_pos);
   void ReloadSettings();
 
   Database* db() const { return db_; }

@@ -41,7 +41,13 @@ class MergedProxyModel : public QAbstractProxyModel {
   MergedProxyModel(QObject* parent = 0);
   ~MergedProxyModel();
 
+  // Make another model appear as a child of the given item in the source model.
   void AddSubModel(const QModelIndex& source_parent, const QAbstractItemModel* submodel);
+
+  // Find the item in the source model that is the parent of the model
+  // containing proxy_index.  If proxy_index is in the source model, then
+  // this just returns mapToSource(proxy_index).
+  QModelIndex FindSourceParent(const QModelIndex& proxy_index) const;
 
   // QAbstractItemModel
   QModelIndex index(int row, int column, const QModelIndex &parent) const;
@@ -57,6 +63,9 @@ class MergedProxyModel : public QAbstractProxyModel {
   QMimeData* mimeData(const QModelIndexList &indexes) const;
 
   // QAbstractProxyModel
+  // Note that these implementations of map{To,From}Source will not always
+  // give you an index in sourceModel(), you might get an index in one of the
+  // child models instead.
   QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
   QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
   void setSourceModel(QAbstractItemModel *sourceModel);

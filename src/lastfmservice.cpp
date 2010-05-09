@@ -446,7 +446,8 @@ void LastFMService::Ban() {
   LoadNext(last_url_);
 }
 
-void LastFMService::ShowContextMenu(RadioItem* item, const QPoint &global_pos) {
+void LastFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
+                                    const QPoint &global_pos) {
   context_item_ = item;
 
   switch (item->type) {

@@ -44,7 +44,7 @@ class SomaFMService : public RadioService {
 
   QString TitleForItem(const RadioItem* item) const;
 
-  void ShowContextMenu(RadioItem* item, const QPoint& global_pos);
+  void ShowContextMenu(RadioItem* item, const QModelIndex& index, const QPoint& global_pos);
 
   void StartLoading(const QUrl& url);
 
