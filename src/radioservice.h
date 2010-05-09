@@ -26,6 +26,7 @@
 #include "song.h"
 
 class RadioModel;
+class LibraryFilterWidget;
 
 class RadioService : public QObject {
   Q_OBJECT
@@ -53,6 +54,8 @@ class RadioService : public QObject {
 
   virtual bool IsPauseAllowed() const { return true; }
   virtual bool ShowLastFmControls() const { return false; }
+
+  virtual bool SetupLibraryFilter(LibraryFilterWidget*) const { return false; }
 
   virtual void ReloadSettings() {}
 

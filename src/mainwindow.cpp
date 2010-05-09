@@ -48,6 +48,7 @@
 #include "playlistbackend.h"
 #include "database.h"
 #include "mergedproxymodel.h"
+#include "radioviewcontainer.h"
 
 #include "globalshortcuts/globalshortcuts.h"
 
@@ -91,7 +92,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     playlist_sequence_(new PlaylistSequence(this)),
     edit_tag_dialog_(new EditTagDialog),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
-    library_config_dialog_(new LibraryConfigDialog),
     about_dialog_(new About),
     database_(new Database(this)),
     radio_model_(new RadioModel(database_, this)),
@@ -103,7 +103,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     settings_dialog_(new SettingsDialog),
     add_stream_dialog_(new AddStreamDialog),
     cover_manager_(new AlbumCoverManager(network, library_->model()->backend())),
-    group_by_dialog_(new GroupByDialog),
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
     playlist_menu_(new QMenu(this)),
@@ -141,10 +140,9 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
 
   ui_.library_view->setModel(library_sort_model_);
   ui_.library_view->SetLibrary(library_->model());
-  library_config_dialog_->SetModel(library_->model()->directory_model());
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
-  ui_.radio_view->setModel(radio_model_->merged_model());
+  ui_.radio_view->SetModel(radio_model_);
 
   cover_manager_->Init();
 
@@ -159,7 +157,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(ui_.action_stop, SIGNAL(triggered()), player_, SLOT(Stop()));
   connect(ui_.action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
   connect(ui_.action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
-  connect(ui_.library_filter, SIGNAL(textChanged(QString)), library_->model(), SLOT(SetFilterText(QString)));
   connect(ui_.action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_.action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_.action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
@@ -236,82 +233,16 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   // Library connections
   connect(ui_.library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
   connect(ui_.library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
-  connect(ui_.library_view, SIGNAL(ShowConfigDialog()), library_config_dialog_.get(), SLOT(show()));
+  connect(ui_.library_view, SIGNAL(ShowConfigDialog()), ui_.library_filter, SLOT(ShowConfigDialog()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_.library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
 
-  // Age filters
-  QActionGroup* filter_age_group = new QActionGroup(this);
-  filter_age_group->addAction(ui_.filter_age_all);
-  filter_age_group->addAction(ui_.filter_age_today);
-  filter_age_group->addAction(ui_.filter_age_week);
-  filter_age_group->addAction(ui_.filter_age_month);
-  filter_age_group->addAction(ui_.filter_age_three_months);
-  filter_age_group->addAction(ui_.filter_age_year);
-
-  QMenu* filter_age_menu = new QMenu("Show", this);
-  filter_age_menu->addActions(filter_age_group->actions());
-
-  QSignalMapper* filter_age_mapper = new QSignalMapper(this);
-  filter_age_mapper->setMapping(ui_.filter_age_all, -1);
-  filter_age_mapper->setMapping(ui_.filter_age_today, 60*60*24);
-  filter_age_mapper->setMapping(ui_.filter_age_week, 60*60*24*7);
-  filter_age_mapper->setMapping(ui_.filter_age_month, 60*60*24*30);
-  filter_age_mapper->setMapping(ui_.filter_age_three_months, 60*60*24*30*3);
-  filter_age_mapper->setMapping(ui_.filter_age_year, 60*60*24*365);
-
-  connect(ui_.filter_age_all, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(ui_.filter_age_today, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(ui_.filter_age_week, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(ui_.filter_age_month, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(ui_.filter_age_three_months, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(ui_.filter_age_year, SIGNAL(triggered()), filter_age_mapper, SLOT(map()));
-  connect(filter_age_mapper, SIGNAL(mapped(int)), library_->model(), SLOT(SetFilterAge(int)));
-  connect(ui_.library_filter_clear, SIGNAL(clicked()), SLOT(ClearLibraryFilter()));
-
-  // "Group by ..."
-  ui_.group_by_artist->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist)));
-  ui_.group_by_artist_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
-  ui_.group_by_artist_yearalbum->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_YearAlbum)));
-  ui_.group_by_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Album)));
-  ui_.group_by_genre_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Album)));
-  ui_.group_by_genre_artist_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
-
-  group_by_group_ = new QActionGroup(this);
-  group_by_group_->addAction(ui_.group_by_artist);
-  group_by_group_->addAction(ui_.group_by_artist_album);
-  group_by_group_->addAction(ui_.group_by_artist_yearalbum);
-  group_by_group_->addAction(ui_.group_by_album);
-  group_by_group_->addAction(ui_.group_by_genre_album);
-  group_by_group_->addAction(ui_.group_by_genre_artist_album);
-  group_by_group_->addAction(ui_.group_by_advanced);
-
-  QMenu* group_by_menu = new QMenu("Group by", this);
-  group_by_menu->addActions(group_by_group_->actions());
-
-  connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
-  connect(library_->model(), SIGNAL(GroupingChanged(LibraryModel::Grouping)),
-          group_by_dialog_.get(), SLOT(LibraryGroupingChanged(LibraryModel::Grouping)));
-  connect(library_->model(), SIGNAL(GroupingChanged(LibraryModel::Grouping)),
-          SLOT(LibraryGroupingChanged(LibraryModel::Grouping)));
-  connect(group_by_dialog_.get(), SIGNAL(Accepted(LibraryModel::Grouping)),
-          library_->model(), SLOT(SetGroupBy(LibraryModel::Grouping)));
-
-  // Library config menu
-  QMenu* library_menu = new QMenu(this);
-  library_menu->addMenu(filter_age_menu);
-  library_menu->addMenu(group_by_menu);
-  library_menu->addSeparator();
-  library_menu->addAction(tr("Configure library..."), library_config_dialog_.get(), SLOT(show()));
-  ui_.library_options->setMenu(library_menu);
-  connect(library_config_dialog_.get(), SIGNAL(accepted()), ui_.library_view, SLOT(ReloadSettings()));
+  // Library filter widget
+  ui_.library_filter->SetSettingsGroup(kSettingsGroup);
+  ui_.library_filter->SetLibraryModel(library_->model());
+  connect(ui_.library_filter, SIGNAL(LibraryConfigChanged()), ui_.library_view,
+          SLOT(ReloadSettings()));
 
   // Playlist menu
   QAction* playlist_undo = playlist_->undo_stack()->createUndoAction(this);
@@ -350,7 +281,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   connect(radio_model_, SIGNAL(AddItemsToPlaylist(SongList)), SLOT(InsertRadioItems(SongList)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
-  connect(ui_.radio_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
+  connect(ui_.radio_view->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
 
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
 
@@ -428,11 +359,6 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
   }
 
   ui_.file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
-
-  library_->model()->SetGroupBy(LibraryModel::Grouping(
-      LibraryModel::GroupBy(settings_.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
-      LibraryModel::GroupBy(settings_.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
-      LibraryModel::GroupBy(settings_.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
 
 #ifndef Q_OS_DARWIN
   StartupBehaviour behaviour =
@@ -648,11 +574,6 @@ void MainWindow::SetHiddenInTray(bool hidden) {
     else
       show();
   }
-}
-
-void MainWindow::ClearLibraryFilter() {
-  ui_.library_filter->clear();
-  ui_.library_filter->setFocus();
 }
 
 void MainWindow::FilePathChanged(const QString& path) {
@@ -931,34 +852,7 @@ void MainWindow::PlaylistRemoveCurrent() {
   ui_.playlist->RemoveSelected();
 }
 
-void MainWindow::GroupByClicked(QAction* action) {
-  if (action->property("group_by").isNull()) {
-    group_by_dialog_->show();
-    return;
-  }
 
-  LibraryModel::Grouping g = action->property("group_by").value<LibraryModel::Grouping>();
-  library_->model()->SetGroupBy(g);
-}
-
-void MainWindow::LibraryGroupingChanged(const LibraryModel::Grouping& g) {
-  // Save the settings
-  settings_.setValue("group_by1", int(g[0]));
-  settings_.setValue("group_by2", int(g[1]));
-  settings_.setValue("group_by3", int(g[2]));
-
-  // Now make sure the correct action is checked
-  foreach (QAction* action, group_by_group_->actions()) {
-    if (action->property("group_by").isNull())
-      continue;
-
-    if (g == action->property("group_by").value<LibraryModel::Grouping>()) {
-      action->setChecked(true);
-      return;
-    }
-  }
-  ui_.group_by_advanced->setChecked(true);
-}
 
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_)

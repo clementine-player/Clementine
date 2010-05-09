@@ -40,3 +40,7 @@ void RadioView::contextMenuEvent(QContextMenuEvent* e) {
       merged_model->mapToSource(index),
       e->globalPos());
 }
+
+void RadioView::currentChanged(const QModelIndex &current, const QModelIndex&) {
+  emit CurrentIndexChanged(current);
+}

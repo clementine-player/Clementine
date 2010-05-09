@@ -14,25 +14,43 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RADIOVIEW_H
-#define RADIOVIEW_H
+#ifndef RADIOVIEWCONTAINER_H
+#define RADIOVIEWCONTAINER_H
 
-#include <QTreeView>
+#include <QWidget>
 
-class RadioView : public QTreeView {
+#include "ui_radioviewcontainer.h"
+
+class RadioModel;
+class RadioService;
+class RadioView;
+
+class QTimeLine;
+
+class RadioViewContainer : public QWidget {
   Q_OBJECT
 
  public:
-  RadioView(QWidget* parent = 0);
+  RadioViewContainer(QWidget* parent = 0);
 
-  // QWidget
-  void contextMenuEvent(QContextMenuEvent* e);
+  void SetModel(RadioModel* model);
 
-  // QTreeView
-  void currentChanged(const QModelIndex &current, const QModelIndex &previous);
+  RadioView* tree() const { return ui_.tree; }
 
- signals:
+ private slots:
   void CurrentIndexChanged(const QModelIndex& index);
+  void SetFilterHeight(int height);
+
+ private:
+  void SetFilterVisible(bool visible);
+
+ private:
+  Ui::RadioViewContainer ui_;
+  RadioModel* model_;
+  RadioService* current_service_;
+
+  bool filter_visible_;
+  QTimeLine* filter_animation_;
 };
 
-#endif // RADIOVIEW_H
+#endif // RADIOVIEWCONTAINER_H

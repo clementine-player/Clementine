@@ -14,7 +14,7 @@
    <string>Clementine</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -291,52 +291,7 @@
       <number>0</number>
      </property>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QToolButton" name="library_filter_clear">
-         <property name="icon">
-          <iconset>
-           <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="autoRaise">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="LineEdit" name="library_filter">
-         <property name="hint" stdset="0">
-          <string>Enter search terms here</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="library_options">
-         <property name="icon">
-          <iconset>
-           <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-         <property name="popupMode">
-          <enum>QToolButton::InstantPopup</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="LibraryFilterWidget" name="library_filter" native="true"/>
      </item>
      <item>
       <widget class="LibraryView" name="library_view">
@@ -385,29 +340,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="RadioView" name="radio_view">
-       <property name="dragEnabled">
-        <bool>true</bool>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::DragOnly</enum>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="selectionMode">
-        <enum>QAbstractItemView::ExtendedSelection</enum>
-       </property>
-       <property name="uniformRowHeights">
-        <bool>true</bool>
-       </property>
-       <property name="allColumnsShowFocus">
-        <bool>true</bool>
-       </property>
-       <property name="headerHidden">
-        <bool>true</bool>
-       </property>
-      </widget>
+      <widget class="RadioViewContainer" name="radio_view" native="true"/>
      </item>
     </layout>
    </widget>
@@ -502,7 +435,7 @@
   </widget>
   <action name="action_previous_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-skip-backward.png</normaloff>:/media-skip-backward.png</iconset>
    </property>
    <property name="text">
@@ -511,7 +444,7 @@
   </action>
   <action name="action_play_pause">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-start.png</normaloff>:/media-playback-start.png</iconset>
    </property>
    <property name="text">
@@ -523,7 +456,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
@@ -532,7 +465,7 @@
   </action>
   <action name="action_next_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-skip-forward.png</normaloff>:/media-skip-forward.png</iconset>
    </property>
    <property name="text">
@@ -541,7 +474,7 @@
   </action>
   <action name="action_quit">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/exit.png</normaloff>:/exit.png</iconset>
    </property>
    <property name="text">
@@ -553,65 +486,11 @@
   </action>
   <action name="action_stop_after_this_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
    </property>
    <property name="text">
     <string>Stop after this track</string>
-   </property>
-  </action>
-  <action name="filter_age_all">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Entire collection</string>
-   </property>
-  </action>
-  <action name="filter_age_today">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Added today</string>
-   </property>
-  </action>
-  <action name="filter_age_week">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Added this week</string>
-   </property>
-  </action>
-  <action name="filter_age_three_months">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Added within three months</string>
-   </property>
-   <property name="toolTip">
-    <string>Added within three months</string>
-   </property>
-  </action>
-  <action name="filter_age_year">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Added this year</string>
-   </property>
-  </action>
-  <action name="filter_age_month">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Added this month</string>
    </property>
   </action>
   <action name="action_love">
@@ -619,7 +498,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/love.png</normaloff>:/last.fm/love.png</iconset>
    </property>
    <property name="text">
@@ -631,7 +510,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/last.fm/ban.png</normaloff>:/last.fm/ban.png</iconset>
    </property>
    <property name="text">
@@ -640,7 +519,7 @@
   </action>
   <action name="action_clear_playlist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/clear-list.png</normaloff>:/clear-list.png</iconset>
    </property>
    <property name="text">
@@ -652,7 +531,7 @@
   </action>
   <action name="action_edit_track">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/edit-track.png</normaloff>:/edit-track.png</iconset>
    </property>
    <property name="text">
@@ -679,7 +558,7 @@
   </action>
   <action name="action_configure">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
    </property>
    <property name="text">
@@ -693,7 +572,7 @@
   </action>
   <action name="action_shuffle">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/shuffle.png</normaloff>:/shuffle.png</iconset>
    </property>
    <property name="text">
@@ -702,7 +581,7 @@
   </action>
   <action name="action_add_media">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -711,7 +590,7 @@
   </action>
   <action name="action_add_stream">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_stream.png</normaloff>:/open_stream.png</iconset>
    </property>
    <property name="text">
@@ -720,7 +599,7 @@
   </action>
   <action name="action_open_media">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
@@ -729,7 +608,7 @@
   </action>
   <action name="action_cover_manager">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/download.png</normaloff>:/download.png</iconset>
    </property>
    <property name="text">
@@ -738,7 +617,7 @@
   </action>
   <action name="action_shuffle_mode">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playlist-shuffle.png</normaloff>:/media-playlist-shuffle.png</iconset>
    </property>
    <property name="text">
@@ -747,7 +626,7 @@
   </action>
   <action name="action_repeat_mode">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/media-playlist-repeat.png</normaloff>:/media-playlist-repeat.png</iconset>
    </property>
    <property name="text">
@@ -756,67 +635,11 @@
   </action>
   <action name="action_remove_from_playlist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../data/data.qrc">
      <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
    </property>
    <property name="text">
     <string>Remove from playlist</string>
-   </property>
-  </action>
-  <action name="group_by_artist">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Artist</string>
-   </property>
-  </action>
-  <action name="group_by_artist_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Artist/Album</string>
-   </property>
-  </action>
-  <action name="group_by_artist_yearalbum">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Artist/Year - Album</string>
-   </property>
-  </action>
-  <action name="group_by_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Album</string>
-   </property>
-  </action>
-  <action name="group_by_genre_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Genre/Album</string>
-   </property>
-  </action>
-  <action name="group_by_genre_artist_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Genre/Artist/Album</string>
-   </property>
-  </action>
-  <action name="group_by_advanced">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Advanced grouping...</string>
    </property>
   </action>
   <action name="action_equalizer">
@@ -832,11 +655,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>lineedit.h</header>
-  </customwidget>
   <customwidget>
    <class>Amarok::VolumeSlider</class>
    <extends>QSlider</extends>
@@ -859,17 +677,26 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>RadioView</class>
-   <extends>QTreeView</extends>
-   <header>radioview.h</header>
-  </customwidget>
-  <customwidget>
    <class>AnalyzerContainer</class>
    <extends>QWidget</extends>
    <header>analyzers/analyzercontainer.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>LibraryFilterWidget</class>
+   <extends>QWidget</extends>
+   <header>libraryfilterwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RadioViewContainer</class>
+   <extends>QWidget</extends>
+   <header>radioviewcontainer.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../data/data.qrc"/>
+ </resources>
  <connections/>
 </ui>

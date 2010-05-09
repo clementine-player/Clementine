@@ -85,6 +85,8 @@ set(CLEMENTINE-SOURCES
     librarymodel.cpp
     playlistbackend.cpp
     mergedproxymodel.cpp
+    libraryfilterwidget.cpp
+    radioviewcontainer.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -155,6 +157,8 @@ set(CLEMENTINE-MOC-HEADERS
     playlistbackend.h
     database.h
     mergedproxymodel.h
+    libraryfilterwidget.h
+    radioviewcontainer.h
 )
 
 # lists of engine source files
@@ -215,6 +219,8 @@ set(CLEMENTINE-UI
     equalizerslider.ui
     transcodedialog.ui
     transcodelogdialog.ui
+    libraryfilterwidget.ui
+    radioviewcontainer.ui
 )
 
 # Resource files

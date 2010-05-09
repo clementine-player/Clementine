@@ -30,7 +30,6 @@
 class Playlist;
 class Player;
 class Library;
-class LibraryConfigDialog;
 class PlaylistBackend;
 class RadioModel;
 class Song;
@@ -108,9 +107,6 @@ class MainWindow : public QMainWindow {
   void StopAfterCurrent();
 
   void AddLibraryItemToPlaylist(const QModelIndex& index);
-  void ClearLibraryFilter();
-  void GroupByClicked(QAction*);
-  void LibraryGroupingChanged(const LibraryModel::Grouping& g);
 
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
@@ -150,7 +146,6 @@ class MainWindow : public QMainWindow {
   PlaylistSequence* playlist_sequence_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
-  boost::scoped_ptr<LibraryConfigDialog> library_config_dialog_;
   boost::scoped_ptr<About> about_dialog_;
 
   Database* database_;
@@ -164,7 +159,6 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<SettingsDialog> settings_dialog_;
   boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
   boost::scoped_ptr<AlbumCoverManager> cover_manager_;
-  boost::scoped_ptr<GroupByDialog> group_by_dialog_;
   boost::scoped_ptr<Equalizer> equalizer_;
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
 
@@ -172,7 +166,6 @@ class MainWindow : public QMainWindow {
   QAction* playlist_play_pause_;
   QAction* playlist_stop_after_;
   QModelIndex playlist_menu_index_;
-  QActionGroup* group_by_group_;
 
   QSortFilterProxyModel* library_sort_model_;
 

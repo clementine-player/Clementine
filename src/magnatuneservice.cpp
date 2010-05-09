@@ -20,6 +20,7 @@
 #include "mergedproxymodel.h"
 #include "librarymodel.h"
 #include "librarybackend.h"
+#include "libraryfilterwidget.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -33,6 +34,7 @@
 #include <QtDebug>
 
 const char* MagnatuneService::kServiceName = "Magnatune";
+const char* MagnatuneService::kSettingsGroup = "Magnatune";
 const char* MagnatuneService::kDatabaseUrl =
     "http://magnatune.com/info/song_info_xml.gz";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
@@ -199,4 +201,14 @@ void MagnatuneService::AddToPlaylist() {
 
 void MagnatuneService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
+}
+
+bool MagnatuneService::SetupLibraryFilter(LibraryFilterWidget* w) const {
+  w->SetSettingsGroup(kSettingsGroup);
+  w->SetLibraryModel(library_model_);
+  w->SetFilterHint(tr("Search Magnatune"));
+  w->SetAgeFilterEnabled(false);
+  w->SetConfigDialogEnabled(false);
+
+  return true;
 }

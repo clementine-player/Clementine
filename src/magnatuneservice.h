@@ -35,6 +35,7 @@ class MagnatuneService : public RadioService {
   ~MagnatuneService();
 
   static const char* kServiceName;
+  static const char* kSettingsGroup;
   static const char* kDatabaseUrl;
   static const char* kSongsTable;
   static const char* kHomepage;
@@ -46,6 +47,8 @@ class MagnatuneService : public RadioService {
 
   void ShowContextMenu(RadioItem* item, const QModelIndex& index,
                        const QPoint& global_pos);
+
+  bool SetupLibraryFilter(LibraryFilterWidget *) const;
 
  private slots:
   void UpdateTotalSongCount(int count) { total_song_count_ = count; }

@@ -35,6 +35,12 @@ LibraryConfig::LibraryConfig(QWidget* parent)
 }
 
 void LibraryConfig::SetModel(LibraryDirectoryModel *model) {
+  if (ui_.list->selectionModel()) {
+    disconnect(ui_.list->selectionModel(),
+               SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+               this, SLOT(CurrentRowChanged(QModelIndex)));
+  }
+
   model_ = model;
   ui_.list->setModel(model_);
 
