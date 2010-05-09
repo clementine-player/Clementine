@@ -17,12 +17,14 @@
 #include "radioview.h"
 #include "radiomodel.h"
 #include "mergedproxymodel.h"
+#include "libraryview.h"
 
 #include <QContextMenuEvent>
 
 RadioView::RadioView(QWidget *parent)
   : QTreeView(parent)
 {
+  setItemDelegate(new LibraryItemDelegate(this));
 }
 
 void RadioView::contextMenuEvent(QContextMenuEvent* e) {
