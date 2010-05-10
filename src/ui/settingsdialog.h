@@ -19,6 +19,7 @@
 
 #include <QDialog>
 
+#include "config.h"
 #include "ui_settingsdialog.h"
 
 class LibraryDirectoryModel;
