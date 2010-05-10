@@ -17,10 +17,10 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "database.h"
-#include "librarymodel.h"
-#include "librarybackend.h"
-#include "library.h"
+#include "core/database.h"
+#include "library/librarymodel.h"
+#include "library/librarybackend.h"
+#include "library/library.h"
 
 #include <QtDebug>
 #include <QThread>

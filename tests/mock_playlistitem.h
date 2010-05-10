@@ -17,9 +17,9 @@
 #ifndef MOCK_PLAYLISTITEM_H
 #define MOCK_PLAYLISTITEM_H
 
-#include "playlistitem.h"
-#include "song.h"
-#include "settingsprovider.h"
+#include "core/song.h"
+#include "core/settingsprovider.h"
+#include "playlist/playlistitem.h"
 
 #include <gmock/gmock.h>
 

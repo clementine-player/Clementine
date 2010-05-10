@@ -14,7 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "song.h"
+#include "core/song.h"
 #include "engines/gstengine.h"
 
 #include "gmock/gmock.h"

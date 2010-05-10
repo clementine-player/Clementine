@@ -18,7 +18,7 @@
 
 #include <QFile>
 
-#include "potranslator.h"
+#include "core/potranslator.h"
 #include "test_utils.h"
 
 TEST(Translations, Basic) {

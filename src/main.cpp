@@ -20,17 +20,18 @@
 #  include <iostream>
 #endif // Q_OS_WIN32
 
-#include "directory.h"
-#include "lastfmservice.h"
-#include "mainwindow.h"
-#include "player.h"
-#include "song.h"
-#include "equalizer.h"
-#include "potranslator.h"
-#include "commandlineoptions.h"
-#include "engines/enginebase.h"
 #include "config.h"
-#include "networkaccessmanager.h"
+#include "core/commandlineoptions.h"
+#include "core/mac_startup.h"
+#include "core/networkaccessmanager.h"
+#include "core/player.h"
+#include "core/potranslator.h"
+#include "core/song.h"
+#include "engines/enginebase.h"
+#include "library/directory.h"
+#include "radio/lastfmservice.h"
+#include "ui/equalizer.h"
+#include "ui/mainwindow.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
@@ -43,11 +44,9 @@
 #ifdef Q_WS_X11
 #  include <QDBusConnection>
 #  include <QDBusMetaType>
-#  include "mpris.h"
-#  include "osd.h"
+#  include "core/mpris.h"
+#  include "widgets/osd.h"
 #endif
-
-#include "mac_startup.h"
 
 // Load sqlite plugin on windows and mac.
 #ifndef Q_WS_X11

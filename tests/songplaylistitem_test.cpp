@@ -14,7 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "songplaylistitem.h"
+#include "playlist/songplaylistitem.h"
 #include "test_utils.h"
 
 #include <gtest/gtest.h>

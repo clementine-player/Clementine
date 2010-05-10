@@ -18,7 +18,7 @@
 #include "test_utils.h"
 #include "mock_taglib.h"
 
-#include "m3uparser.h"
+#include "core/m3uparser.h"
 
 #include <QBuffer>
 #include <QTemporaryFile>

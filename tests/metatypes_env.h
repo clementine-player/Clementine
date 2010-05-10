@@ -22,8 +22,8 @@
 #include <QMetaType>
 #include <QModelIndex>
 
-#include "directory.h"
-#include "song.h"
+#include "core/song.h"
+#include "library/directory.h"
 
 class MetatypesEnvironment : public ::testing::Environment {
 public:

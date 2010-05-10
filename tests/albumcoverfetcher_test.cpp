@@ -14,7 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcoverfetcher.h"
+#include "core/albumcoverfetcher.h"
+#include "core/networkaccessmanager.h"
 
 #include <lastfm/ws.h>
 
@@ -23,7 +24,6 @@
 #include <QSignalSpy>
 
 #include "mock_networkaccessmanager.h"
-#include "networkaccessmanager.h"
 #include "gtest/gtest.h"
 
 namespace {

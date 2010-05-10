@@ -14,8 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "song.h"
-#include "fixlastfm.h"
+#include "core/song.h"
+#include "radio/fixlastfm.h"
 #include <lastfm/Track>
 
 #include "gmock/gmock.h"

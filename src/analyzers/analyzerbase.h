@@ -9,8 +9,8 @@
 #include <sys/types.h>
 #endif
 
+#include "core/fht.h"     //stack allocated and convenience
 #include "engines/engine_fwd.h"
-#include "fht.h"     //stack allocated and convenience
 #include <QPixmap> //stack allocated and convenience
 #include <QBasicTimer>  //stack allocated
 #include <QWidget> //baseclass

@@ -14,12 +14,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcovermanager.h"
-#include "networkaccessmanager.h"
+#include "core/networkaccessmanager.h"
+#include "ui/albumcovermanager.h"
 
 #include "gtest/gtest.h"
 
 #include "mock_networkaccessmanager.h"
+
+#include <QListWidgetItem>
 
 class AlbumCoverManagerTest : public ::testing::Test {
  protected:

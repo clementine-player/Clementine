@@ -17,7 +17,7 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "scopedtransaction.h"
+#include "core/scopedtransaction.h"
 
 #include <QtDebug>
 #include <QSqlDatabase>

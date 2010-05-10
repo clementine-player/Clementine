@@ -17,7 +17,7 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "playlist.h"
+#include "playlist/playlist.h"
 #include "mock_settingsprovider.h"
 #include "mock_playlistitem.h"
 

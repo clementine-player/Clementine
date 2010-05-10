@@ -17,10 +17,10 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "librarybackend.h"
-#include "library.h"
-#include "song.h"
-#include "database.h"
+#include "library/librarybackend.h"
+#include "library/library.h"
+#include "core/song.h"
+#include "core/database.h"
 
 #include <boost/scoped_ptr.hpp>
 

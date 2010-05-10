@@ -16,7 +16,7 @@
 
 #include "gtest/gtest.h"
 #include "test_utils.h"
-#include "mergedproxymodel.h"
+#include "core/mergedproxymodel.h"
 
 #include <QStandardItemModel>
 #include <QSignalSpy>

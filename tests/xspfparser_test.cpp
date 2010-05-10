@@ -17,7 +17,7 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "xspfparser.h"
+#include "core/xspfparser.h"
 
 #include <QBuffer>
 

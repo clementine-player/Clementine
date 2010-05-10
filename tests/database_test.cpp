@@ -17,7 +17,7 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "database.h"
+#include "core/database.h"
 
 #include <boost/scoped_ptr.hpp>
 

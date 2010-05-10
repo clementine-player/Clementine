@@ -25,7 +25,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include "song.h"
+#include "core/song.h"
 
 class MockTag : public TagLib::Tag {
  public:
