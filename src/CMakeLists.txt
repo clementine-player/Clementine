@@ -390,6 +390,7 @@ target_link_libraries(clementine_lib
     qtsingleapplication
     qtiocompressor
     lastfm
+    chardet
     ${GOBJECT_LIBRARIES}
     ${GLIB_LIBRARIES}
     ${TAGLIB_LIBRARIES}

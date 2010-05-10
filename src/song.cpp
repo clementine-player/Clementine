@@ -44,6 +44,7 @@
 #include <QFileInfo>
 #include <QTime>
 #include <QSqlQuery>
+#include <QTextCodec>
 #include <QVariant>
 
 #include <boost/scoped_ptr.hpp>
@@ -86,6 +87,46 @@ const QString Song::kUpdateSpec = Updateify(Song::kColumns).join(", ");
 static TagLib::String QStringToTaglibString(const QString& s);
 
 TagLibFileRefFactory Song::kDefaultFactory;
+
+UniversalEncodingHandler::UniversalEncodingHandler()
+  : nsUniversalDetector(NS_FILTER_ALL),
+    current_codec_(NULL) {
+}
+
+TagLib::String UniversalEncodingHandler::parse(const TagLib::ByteVector& data) const {
+  const_cast<UniversalEncodingHandler*>(this)->Reset();
+  const_cast<UniversalEncodingHandler*>(this)->HandleData(data.data(), data.size());
+  const_cast<UniversalEncodingHandler*>(this)->DataEnd();
+
+  if (!current_codec_) {
+    return TagLib::String(data);  // Latin-1
+  } else {
+    // Detected codec -> QString (UTF-16) -> UTF8 -> UTF16-BE (TagLib::String)
+    // That's probably expensive.
+    QString unicode = current_codec_->toUnicode(data.data(), data.size());
+    qDebug() << "Decoded to:" << unicode;
+    return TagLib::String(unicode.toUtf8().constData(), TagLib::String::UTF8);
+  }
+}
+
+TagLib::ByteVector UniversalEncodingHandler::render(const TagLib::String& s) const {
+  // TODO: what should we do here?
+  // 1. Coerce to ASCII
+  // 2. Just write UTF8
+  // 3. Write what we read
+  // 4. Nothing and rewrite the tag as ID3v2 & UTF8
+  return TagLib::ByteVector();
+}
+
+void UniversalEncodingHandler::Report(const char* charset) {
+  qDebug() << "Detected as" << charset;
+  QTextCodec* codec = QTextCodec::codecForName(charset);
+  if (!codec) {
+    qWarning() << "Could not identify encoding in ID3v1 tag. Assuming ASCII.";
+  }
+  current_codec_ = codec;
+}
+
 
 Song::Private::Private()
   : valid_(false),

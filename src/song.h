@@ -27,6 +27,9 @@
 
 #include "engines/engine_fwd.h"
 
+#include <taglib/id3v1tag.h>
+#include "nsUniversalDetector.h"
+
 namespace lastfm {
   class Track;
 }
@@ -48,6 +51,22 @@ class FileRefFactory {
 class TagLibFileRefFactory : public FileRefFactory {
  public:
   virtual TagLib::FileRef* GetFileRef(const QString& filename);
+};
+
+class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
+                                 nsUniversalDetector {
+ public:
+  UniversalEncodingHandler();
+
+  // TagLib::ID3v1::StringHandler
+  virtual TagLib::String parse(const TagLib::ByteVector& data) const;
+  virtual TagLib::ByteVector render(const TagLib::String& s) const;
+
+ private:
+  // nsUniversalDetector
+  virtual void Report(const char* charset);
+
+  QTextCodec* current_codec_;
 };
 
 class Song {
