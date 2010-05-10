@@ -127,7 +127,6 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 }
 
 void AlbumCoverLoader::RemoteFetchFinished(quint64 id, QNetworkReply* reply) {
-  reply->deleteLater();
   Task task = remote_tasks_.take(id);
 
   if (reply->error() == QNetworkReply::NoError) {
@@ -135,10 +134,12 @@ void AlbumCoverLoader::RemoteFetchFinished(quint64 id, QNetworkReply* reply) {
     QImage image;
     if (image.load(reply, 0)) {
       emit ImageLoaded(task.id, ScaleAndPad(image));
+      reply->deleteLater();
       return;
     }
   }
 
+  reply->deleteLater();
   NextState(&task);
 }
 
