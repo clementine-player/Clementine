@@ -60,6 +60,7 @@ class MagnatuneService : public RadioService {
 
  private:
   Song ReadTrack(QXmlStreamReader& reader);
+  QString ReadElementText(QXmlStreamReader& reader);
 
  private:
   RadioItem* root_;

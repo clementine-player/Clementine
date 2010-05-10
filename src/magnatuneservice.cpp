@@ -165,7 +165,8 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       break;
 
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
-      QString value = reader.readElementText();
+      QString value = ReadElementText(reader);
+
       if (reader.name() == "artist")          song.set_artist(value);
       if (reader.name() == "albumname")       song.set_album(value);
       if (reader.name() == "trackname")       song.set_title(value);
@@ -188,6 +189,26 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
   song.set_filesize(0);
 
   return song;
+}
+
+// TODO: Replace with readElementText(SkipChildElements) in Qt 4.6
+QString MagnatuneService::ReadElementText(QXmlStreamReader& reader) {
+  int level = 1;
+  QString ret;
+  while (!reader.atEnd()) {
+    switch (reader.readNext()) {
+      case QXmlStreamReader::StartElement: level++; break;
+      case QXmlStreamReader::EndElement:   level--; break;
+      case QXmlStreamReader::Characters:
+        ret += reader.text().toString().trimmed();
+        break;
+      default: break;
+    }
+
+    if (level == 0)
+      break;
+  }
+  return ret;
 }
 
 void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
