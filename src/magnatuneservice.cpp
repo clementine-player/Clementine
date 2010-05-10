@@ -165,7 +165,7 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       break;
 
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
-      QString value = reader.readElementText(QXmlStreamReader::SkipChildElements);
+      QString value = reader.readElementText();
       if (reader.name() == "artist")          song.set_artist(value);
       if (reader.name() == "albumname")       song.set_album(value);
       if (reader.name() == "trackname")       song.set_title(value);
