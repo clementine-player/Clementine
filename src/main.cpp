@@ -37,6 +37,7 @@
 #include <QTranslator>
 #include <QDir>
 #include <QNetworkAccessManager>
+#include <QNetworkDiskCache>
 
 #include <glib/gutils.h>
 
@@ -135,6 +136,10 @@ int main(int argc, char *argv[]) {
   }
 
   QNetworkAccessManager network;
+  QNetworkDiskCache network_cache;
+  network_cache.setCacheDirectory(QString("%1/.config/%2/networkcache/")
+      .arg(QDir::homePath(), QCoreApplication::organizationName()));
+  network.setCache(&network_cache);
 
   // MPRIS DBus interface.
 #ifdef Q_WS_X11

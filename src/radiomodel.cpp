@@ -28,10 +28,11 @@
 
 QMap<QString, RadioService*> RadioModel::sServices;
 
-RadioModel::RadioModel(Database* db, QObject* parent)
+RadioModel::RadioModel(Database* db, QNetworkAccessManager* network, QObject* parent)
   : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
     db_(db),
-    merged_model_(new MergedProxyModel(this))
+    merged_model_(new MergedProxyModel(this)),
+    network_(network)
 {
   Q_ASSERT(sServices.isEmpty());
 

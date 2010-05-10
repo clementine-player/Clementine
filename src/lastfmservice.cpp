@@ -19,6 +19,7 @@
 #include "song.h"
 #include "lastfmstationdialog.h"
 #include "lastfmconfigdialog.h"
+#include "radiomodel.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -57,7 +58,8 @@ LastFMService::LastFMService(RadioModel* parent)
     artist_list_(NULL),
     tag_list_(NULL),
     friends_list_(NULL),
-    neighbours_list_(NULL)
+    neighbours_list_(NULL),
+    network_(parent->network())
 {
   ReloadSettings();
 
@@ -678,7 +680,7 @@ void LastFMService::TuneFinished() {
 
 void LastFMService::FetchImage(const lastfm::Track& track, const QString& image_url) {
   QUrl url(image_url);
-  QNetworkReply* reply = network_.get(QNetworkRequest(url));
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
   image_requests_[track] = reply;
 }
 

@@ -94,7 +94,7 @@ MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWid
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
     about_dialog_(new About),
     database_(new Database(this)),
-    radio_model_(new RadioModel(database_, this)),
+    radio_model_(new RadioModel(database_, network, this)),
     playlist_backend_(new PlaylistBackend(database_, this)),
     playlist_(new Playlist(playlist_backend_, this)),
     player_(new Player(playlist_, radio_model_->GetLastFMService(), engine, this)),

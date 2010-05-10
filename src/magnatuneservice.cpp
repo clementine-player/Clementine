@@ -49,7 +49,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     library_model_(new LibraryModel(library_backend_, this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     total_song_count_(0),
-    network_(new QNetworkAccessManager(this))
+    network_(parent->network())
 {
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));

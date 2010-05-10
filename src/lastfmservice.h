@@ -36,12 +36,12 @@ uint qHash(const lastfm::Track& track);
 
 #include <QMap>
 #include <QMenu>
-#include <QNetworkAccessManager>
 #include <QQueue>
 
 #include <boost/scoped_ptr.hpp>
 
 class QAction;
+class QNetworkAccessManager;
 
 class LastFMService : public RadioService {
   Q_OBJECT
@@ -180,7 +180,7 @@ class LastFMService : public RadioService {
   RadioItem* friends_list_;
   RadioItem* neighbours_list_;
 
-  QNetworkAccessManager network_;
+  QNetworkAccessManager* network_;
   QHash<lastfm::Track, QNetworkReply*> image_requests_;
 };
 

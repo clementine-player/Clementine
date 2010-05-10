@@ -15,6 +15,7 @@
 */
 
 #include "somafmservice.h"
+#include "radiomodel.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -35,7 +36,7 @@ SomaFMService::SomaFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
     context_menu_(new QMenu),
-    network_(new QNetworkAccessManager(this))
+    network_(parent->network())
 {
   context_menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();

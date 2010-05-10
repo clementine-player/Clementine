@@ -22,6 +22,8 @@
 #include "multiloadingindicator.h"
 #include "song.h"
 
+class QNetworkAccessManager;
+
 class RadioService;
 class LastFMService;
 class MergedProxyModel;
@@ -31,7 +33,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
 
  public:
-  RadioModel(Database* db, QObject* parent = 0);
+  RadioModel(Database* db, QNetworkAccessManager* network, QObject* parent = 0);
 
   enum {
     Role_Type = Qt::UserRole + 1,
@@ -57,6 +59,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
 
   Database* db() const { return db_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
+  QNetworkAccessManager* network() const { return network_; }
 
  signals:
   void TaskStarted(MultiLoadingIndicator::TaskType);
@@ -80,6 +83,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   static QMap<QString, RadioService*> sServices;
   Database* db_;
   MergedProxyModel* merged_model_;
+  QNetworkAccessManager* network_;
 };
 
 #endif // RADIOMODEL_H
