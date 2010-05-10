@@ -24,11 +24,16 @@
 #include <QMutex>
 #include <QQueue>
 
+class NetworkAccessManager;
+class QNetworkReply;
+
 class AlbumCoverLoader : public QObject {
   Q_OBJECT
 
  public:
   AlbumCoverLoader(QObject* parent = 0);
+
+  void SetNetwork(NetworkAccessManager* network) { network_ = network; }
   
   void Stop() { stop_requested_ = true; }
 
@@ -39,7 +44,6 @@ class AlbumCoverLoader : public QObject {
 
   void Clear();
 
-  static QImage TryLoadImage(const QString& automatic, const QString& manual);
   static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual);
 
   static const char* kManuallyUnsetCover;
@@ -49,13 +53,34 @@ class AlbumCoverLoader : public QObject {
 
  private slots:
   void ProcessTasks();
+  void RemoteFetchFinished(quint64 id, QNetworkReply* reply);
 
  private:
+  enum State {
+    State_TryingManual,
+    State_TryingAuto,
+  };
+
   struct Task {
     quint64 id;
     QString art_automatic;
     QString art_manual;
+    State state;
   };
+
+  struct TryLoadResult {
+    TryLoadResult(bool async, bool success, const QImage i)
+      : started_async(async), loaded_success(success), image(i) {}
+
+    bool started_async;
+    bool loaded_success;
+    QImage image;
+  };
+
+  void ProcessTask(Task* task);
+  void NextState(Task* task);
+  TryLoadResult TryLoadImage(const Task& task);
+  QImage ScaleAndPad(const QImage& image) const;
 
   bool stop_requested_;
 
@@ -63,7 +88,10 @@ class AlbumCoverLoader : public QObject {
 
   QMutex mutex_;
   QQueue<Task> tasks_;
+  QMap<quint64, Task> remote_tasks_;
   quint64 next_id_;
+
+  NetworkAccessManager* network_;
 };
 
 #endif // ALBUMCOVERLOADER_H

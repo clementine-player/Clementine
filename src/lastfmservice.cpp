@@ -20,6 +20,7 @@
 #include "lastfmstationdialog.h"
 #include "lastfmconfigdialog.h"
 #include "radiomodel.h"
+#include "networkaccessmanager.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -59,7 +60,7 @@ LastFMService::LastFMService(RadioModel* parent)
     tag_list_(NULL),
     friends_list_(NULL),
     neighbours_list_(NULL),
-    network_(parent->network())
+    network_(parent->network()->network())
 {
   ReloadSettings();
 

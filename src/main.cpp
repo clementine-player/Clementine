@@ -30,14 +30,13 @@
 #include "commandlineoptions.h"
 #include "engines/enginebase.h"
 #include "config.h"
+#include "networkaccessmanager.h"
 
 #include <QtSingleApplication>
 #include <QtDebug>
 #include <QLibraryInfo>
 #include <QTranslator>
 #include <QDir>
-#include <QNetworkAccessManager>
-#include <QNetworkDiskCache>
 
 #include <glib/gutils.h>
 
@@ -98,6 +97,8 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
+  qRegisterMetaType<const char*>("const char*");
+  qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
 
 
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -135,11 +136,7 @@ int main(int argc, char *argv[]) {
     // Couldn't send the message so start anyway
   }
 
-  QNetworkAccessManager network;
-  QNetworkDiskCache network_cache;
-  network_cache.setCacheDirectory(QString("%1/.config/%2/networkcache/")
-      .arg(QDir::homePath(), QCoreApplication::organizationName()));
-  network.setCache(&network_cache);
+  NetworkAccessManager network;
 
   // MPRIS DBus interface.
 #ifdef Q_WS_X11

@@ -28,7 +28,7 @@
 
 QMap<QString, RadioService*> RadioModel::sServices;
 
-RadioModel::RadioModel(Database* db, QNetworkAccessManager* network, QObject* parent)
+RadioModel::RadioModel(Database* db, NetworkAccessManager* network, QObject* parent)
   : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
     db_(db),
     merged_model_(new MergedProxyModel(this)),

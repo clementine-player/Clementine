@@ -30,11 +30,13 @@
 class QNetworkReply;
 class QString;
 
+class NetworkAccessManager;
+
 class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(QNetworkAccessManager* network, QObject* parent = 0);
+  AlbumCoverFetcher(NetworkAccessManager* network, QObject* parent = 0);
   virtual ~AlbumCoverFetcher() {}
 
   static const int kMaxConcurrentRequests;

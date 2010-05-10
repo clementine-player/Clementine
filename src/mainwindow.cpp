@@ -84,10 +84,10 @@ const char* MainWindow::kPlaylistFilterSpec =
 const char* MainWindow::kAllFilesFilterSpec =
     QT_TR_NOOP("All Files (*)");
 
-MainWindow::MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWidget *parent)
+MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
     tray_icon_(new SystemTrayIcon(this)),
-    osd_(new OSD(tray_icon_, this)),
+    osd_(new OSD(tray_icon_, network, this)),
     track_slider_(new TrackSlider(this)),
     playlist_sequence_(new PlaylistSequence(this)),
     edit_tag_dialog_(new EditTagDialog),

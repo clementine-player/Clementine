@@ -15,10 +15,13 @@
 */
 
 #include "albumcoverloader.h"
+#include "networkaccessmanager.h"
 
 #include <QPainter>
 #include <QDir>
 #include <QCoreApplication>
+#include <QUrl>
+#include <QNetworkReply>
 
 const char* AlbumCoverLoader::kManuallyUnsetCover = "(unset)";
 
@@ -26,7 +29,8 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
     height_(120),
-    next_id_(0)
+    next_id_(0),
+    network_(NULL)
 {
 }
 
@@ -41,10 +45,11 @@ void AlbumCoverLoader::Clear() {
 }
 
 quint64 AlbumCoverLoader::LoadImageAsync(const QString& art_automatic,
-                                    const QString& art_manual) {
+                                         const QString& art_manual) {
   Task task;
   task.art_automatic = art_automatic;
   task.art_manual = art_manual;
+  task.state = State_TryingManual;
 
   {
     QMutexLocker l(&mutex_);
@@ -68,38 +73,93 @@ void AlbumCoverLoader::ProcessTasks() {
       task = tasks_.dequeue();
     }
 
-    // Try to load the image
-    QImage image(TryLoadImage(task.art_automatic, task.art_manual));
-
-    if (!image.isNull()) {
-      // Scale the image down
-      image = image.scaled(QSize(height_, height_), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-      // Pad the image to height_ x height_
-      QImage bigger_image(height_, height_, QImage::Format_ARGB32);
-      bigger_image.fill(0);
-
-      QPainter p(&bigger_image);
-      p.drawImage((height_ - image.width()) / 2, (height_ - image.height()) / 2,
-                  image);
-      p.end();
-
-      image = bigger_image;
-    }
-
-    emit ImageLoaded(task.id, image);
+    ProcessTask(&task);
   }
 }
 
-QImage AlbumCoverLoader::TryLoadImage(const QString &automatic, const QString &manual) {
-  QImage ret;
-  if (manual == kManuallyUnsetCover)
-    return ret;
-  if (!manual.isEmpty())
-    ret.load(manual);
-  if (!automatic.isEmpty() && ret.isNull())
-    ret.load(automatic);
-  return ret;
+void AlbumCoverLoader::ProcessTask(Task *task) {
+  TryLoadResult result = TryLoadImage(*task);
+  if (result.started_async) {
+    // The image is being loaded from a remote URL, we'll carry on later
+    // when it's done
+    return;
+  }
+
+  if (result.loaded_success) {
+    emit ImageLoaded(task->id, ScaleAndPad(result.image));
+    return;
+  }
+
+  NextState(task);
+}
+
+void AlbumCoverLoader::NextState(Task* task) {
+  if (task->state == State_TryingManual) {
+    // Try the automatic one next
+    task->state = State_TryingAuto;
+    ProcessTask(task);
+  } else {
+    // Give up
+    emit ImageLoaded(task->id, QImage());
+  }
+}
+
+AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
+    const Task& task) {
+  QString filename;
+  switch (task.state) {
+    case State_TryingAuto:   filename = task.art_automatic; break;
+    case State_TryingManual: filename = task.art_manual;    break;
+  }
+
+  if (filename == kManuallyUnsetCover)
+    return TryLoadResult(false, true, QImage());
+
+  if (filename.toLower().startsWith("http://")) {
+    network_->Get(QUrl(filename), this, "RemoteFetchFinished", task.id, true);
+
+    remote_tasks_.insert(task.id, task);
+    return TryLoadResult(true, false, QImage());
+  }
+
+  QImage image(filename);
+  return TryLoadResult(false, !image.isNull(), image);
+}
+
+void AlbumCoverLoader::RemoteFetchFinished(quint64 id, QNetworkReply* reply) {
+  reply->deleteLater();
+  Task task = remote_tasks_.take(id);
+
+  if (reply->error() == QNetworkReply::NoError) {
+    // Try to load the image
+    QImage image;
+    if (image.load(reply, 0)) {
+      emit ImageLoaded(task.id, ScaleAndPad(image));
+      return;
+    }
+  }
+
+  NextState(&task);
+}
+
+QImage AlbumCoverLoader::ScaleAndPad(const QImage &image) const {
+  if (image.isNull())
+    return image;
+
+  // Scale the image down
+  QImage copy = image.scaled(QSize(height_, height_),
+                             Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+  // Pad the image to height_ x height_
+  QImage bigger_image(height_, height_, QImage::Format_ARGB32);
+  bigger_image.fill(0);
+
+  QPainter p(&bigger_image);
+  p.drawImage((height_ - copy.width()) / 2, (height_ - copy.height()) / 2,
+              copy);
+  p.end();
+
+  return bigger_image;
 }
 
 QPixmap AlbumCoverLoader::TryLoadPixmap(const QString &automatic, const QString &manual) {

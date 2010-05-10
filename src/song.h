@@ -133,12 +133,6 @@ class Song {
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
 
-  // Loads and returns some album art for the song.  Tries, in this order:
-  //  1) An image set explicitly with set_image (eg. last.fm radio)
-  //  2) An image set by the user with set_art_manual
-  //  3) An image found by the library scanner
-  QImage GetBestImage() const;
-
   // Setters
   bool IsEditable() const { return d->valid_ && !d->filename_.isNull(); }
   bool Save() const;

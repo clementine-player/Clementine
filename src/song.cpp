@@ -535,14 +535,3 @@ bool Song::Save() const {
 
   return ret;
 }
-
-QImage Song::GetBestImage() const {
-  if (!d->image_.isNull())
-    return d->image_;
-
-  QImage art(AlbumCoverLoader::TryLoadImage(d->art_automatic_, d->art_manual_));
-  if (!art.isNull())
-    return art;
-
-  return QImage(":/nocover.png");
-}

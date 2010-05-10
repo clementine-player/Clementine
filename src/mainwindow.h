@@ -49,17 +49,16 @@ class Equalizer;
 class CommandlineOptions;
 class TranscodeDialog;
 class Database;
+class NetworkAccessManager;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
-
-class QNetworkAccessManager;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QNetworkAccessManager* network, Engine::Type engine, QWidget *parent = 0);
+  MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent = 0);
   ~MainWindow();
 
   static const char* kSettingsGroup;

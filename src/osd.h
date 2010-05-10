@@ -23,8 +23,11 @@
 
 #include "engines/engine_fwd.h"
 #include "song.h"
+#include "backgroundthread.h"
+#include "albumcoverloader.h"
 
 class OSDPretty;
+class NetworkAccessManager;
 
 class QDBusPendingCallWatcher;
 
@@ -41,7 +44,7 @@ class OSD : public QObject {
   Q_OBJECT
 
  public:
-  OSD(QSystemTrayIcon* tray_icon, QObject* parent = 0);
+  OSD(QSystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent = 0);
   ~OSD();
 
   static const char* kSettingsGroup;
@@ -68,6 +71,12 @@ class OSD : public QObject {
   void VolumeChanged(int value);
 
  private:
+  struct WaitingForAlbumArt {
+    QString summary;
+    QString message;
+    QString icon;
+  };
+
   void ShowMessage(const QString& summary,
                    const QString& message = QString(),
                    const QString& icon = QString(),
@@ -82,6 +91,9 @@ class OSD : public QObject {
 
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
+  void CoverLoaderInitialised();
+  void AlbumArtLoaded(quint64 id, const QImage& image);
+  void AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image);
 
  private:
   QSystemTrayIcon* tray_icon_;
@@ -94,6 +106,10 @@ class OSD : public QObject {
   bool ignore_next_stopped_;
 
   OSDPretty* pretty_popup_;
+
+  NetworkAccessManager* network_;
+  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  QMap<quint64, WaitingForAlbumArt> waiting_for_album_art_;
 
 #ifdef Q_OS_DARWIN
   class GrowlNotificationWrapper;

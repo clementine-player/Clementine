@@ -41,6 +41,7 @@ uint qHash(const lastfm::Track& track);
 #include <boost/scoped_ptr.hpp>
 
 class QAction;
+
 class QNetworkAccessManager;
 
 class LastFMService : public RadioService {

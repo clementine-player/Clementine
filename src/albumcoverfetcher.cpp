@@ -15,6 +15,7 @@
 */
 
 #include "albumcoverfetcher.h"
+#include "networkaccessmanager.h"
 
 #include <QNetworkReply>
 #include <QTimer>
@@ -25,9 +26,9 @@
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
-AlbumCoverFetcher::AlbumCoverFetcher(QNetworkAccessManager* network, QObject* parent)
+AlbumCoverFetcher::AlbumCoverFetcher(NetworkAccessManager* network, QObject* parent)
     : QObject(parent),
-      network_(network),
+      network_(network->network()),
       next_id_(0),
       request_starter_(new QTimer(this))
 {

@@ -21,6 +21,7 @@
 #include "librarymodel.h"
 #include "librarybackend.h"
 #include "libraryfilterwidget.h"
+#include "networkaccessmanager.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -49,7 +50,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     library_model_(new LibraryModel(library_backend_, this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     total_song_count_(0),
-    network_(parent->network())
+    network_(parent->network()->network())
 {
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));

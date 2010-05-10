@@ -28,13 +28,12 @@
 
 class LibraryBackend;
 class AlbumCoverFetcher;
-
-class QNetworkAccessManager;
+class NetworkAccessManager;
 
 class AlbumCoverManager : public QDialog {
   Q_OBJECT
  public:
-  AlbumCoverManager(QNetworkAccessManager* network, LibraryBackend* backend,
+  AlbumCoverManager(NetworkAccessManager* network, LibraryBackend* backend,
                     QWidget *parent = 0);
   ~AlbumCoverManager();
 
@@ -100,6 +99,7 @@ class AlbumCoverManager : public QDialog {
   QAction* filter_with_covers_;
   QAction* filter_without_covers_;
 
+  NetworkAccessManager* network_;
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   QMap<quint64, QListWidgetItem*> cover_loading_tasks_;
 

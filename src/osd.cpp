@@ -23,7 +23,7 @@
 
 const char* OSD::kSettingsGroup = "OSD";
 
-OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
+OSD::OSD(QSystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
     timeout_msec_(5000),
@@ -32,14 +32,26 @@ OSD::OSD(QSystemTrayIcon* tray_icon, QObject* parent)
     show_art_(true),
     force_show_next_(false),
     ignore_next_stopped_(false),
-    pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup))
+    pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)),
+    network_(network),
+    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
+  cover_loader_->Start();
+
+  connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
+
   ReloadSettings();
   Init();
 }
 
 OSD::~OSD() {
   delete pretty_popup_;
+}
+
+void OSD::CoverLoaderInitialised() {
+  cover_loader_->Worker()->SetNetwork(network_);
+  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(AlbumArtLoaded(quint64,QImage)));
 }
 
 void OSD::ReloadSettings() {
@@ -72,8 +84,27 @@ void OSD::SongChanged(const Song &song) {
   if (song.track() > 0)
     message_parts << tr("track %1").arg(song.track());
 
-  ShowMessage(summary, message_parts.join(", "), "notification-audio-play",
-              show_art_ ? song.GetBestImage() : QImage());
+  WaitingForAlbumArt waiting;
+  waiting.icon = "notification-audio-play";
+  waiting.summary = summary;
+  waiting.message = message_parts.join(", ");
+
+  if (show_art_) {
+    quint64 id = cover_loader_->Worker()->LoadImageAsync(
+        song.art_automatic(), song.art_manual());
+    waiting_for_album_art_.insert(id, waiting);
+  } else {
+    AlbumArtLoaded(waiting, QImage());
+  }
+}
+
+void OSD::AlbumArtLoaded(quint64 id, const QImage& image) {
+  WaitingForAlbumArt info = waiting_for_album_art_.take(id);
+  AlbumArtLoaded(info, image);
+}
+
+void OSD::AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image) {
+  ShowMessage(info.summary, info.message, info.icon, image);
 }
 
 void OSD::Paused() {

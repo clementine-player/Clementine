@@ -87,6 +87,7 @@ set(CLEMENTINE-SOURCES
     mergedproxymodel.cpp
     libraryfilterwidget.cpp
     radioviewcontainer.cpp
+    networkaccessmanager.cpp
 )
 
 # Header files that have Q_OBJECT in
@@ -159,6 +160,7 @@ set(CLEMENTINE-MOC-HEADERS
     mergedproxymodel.h
     libraryfilterwidget.h
     radioviewcontainer.h
+    networkaccessmanager.h
 )
 
 # lists of engine source files
