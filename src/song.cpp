@@ -78,10 +78,12 @@ const QStringList Song::kColumns = QStringList()
     << "effective_compilation";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
-const QString Song::kJoinSpec = Prepend("songs.", Song::kColumns).join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
 const QString Song::kUpdateSpec = Updateify(Song::kColumns).join(", ");
 
+QString Song::JoinSpec(const QString& table) {
+  return Prepend(table + ".", kColumns).join(", ");
+}
 
 
 static TagLib::String QStringToTaglibString(const QString& s);
@@ -317,7 +319,7 @@ void Song::GuessFileType(TagLib::FileRef* fileref) {
     d->filetype_ = Type_TrueAudio;
 }
 
-void Song::InitFromQuery(const QSqlQuery& q) {
+void Song::InitFromQuery(const QSqlQuery& q, int col) {
   if (!q.isValid())
     return;
 
@@ -327,43 +329,43 @@ void Song::InitFromQuery(const QSqlQuery& q) {
   #define toint(n) (q.value(n).isNull() ? -1 : q.value(n).toInt())
   #define tofloat(n) (q.value(n).isNull() ? -1 : q.value(n).toDouble())
 
-  d->id_ = toint(0);
-  d->title_ = tostr(1);
-  d->album_ = tostr(2);
-  d->artist_ = tostr(3);
-  d->albumartist_ = tostr(4);
-  d->composer_ = tostr(5);
-  d->track_ = toint(6);
-  d->disc_ = toint(7);
-  d->bpm_ = tofloat(8);
-  d->year_ = toint(9);
-  d->genre_ = tostr(10);
-  d->comment_ = tostr(11);
-  d->compilation_ = q.value(12).toBool();
+  d->id_ = toint(col + 0);
+  d->title_ = tostr(col + 1);
+  d->album_ = tostr(col + 2);
+  d->artist_ = tostr(col + 3);
+  d->albumartist_ = tostr(col + 4);
+  d->composer_ = tostr(col + 5);
+  d->track_ = toint(col + 6);
+  d->disc_ = toint(col + 7);
+  d->bpm_ = tofloat(col + 8);
+  d->year_ = toint(col + 9);
+  d->genre_ = tostr(col + 10);
+  d->comment_ = tostr(col + 11);
+  d->compilation_ = q.value(col + 12).toBool();
 
-  d->length_ = toint(13);
-  d->bitrate_ = toint(14);
-  d->samplerate_ = toint(15);
+  d->length_ = toint(col + 13);
+  d->bitrate_ = toint(col + 14);
+  d->samplerate_ = toint(col + 15);
 
-  d->directory_id_ = toint(16);
-  d->filename_ = tostr(17);
+  d->directory_id_ = toint(col + 16);
+  d->filename_ = tostr(col + 17);
   d->basefilename_ = QFileInfo(d->filename_).fileName();
-  d->mtime_ = toint(18);
-  d->ctime_ = toint(19);
-  d->filesize_ = toint(20);
+  d->mtime_ = toint(col + 18);
+  d->ctime_ = toint(col + 19);
+  d->filesize_ = toint(col + 20);
 
-  d->sampler_ = q.value(21).toBool();
+  d->sampler_ = q.value(col + 21).toBool();
 
-  d->art_automatic_ = q.value(22).toString();
-  d->art_manual_ = q.value(23).toString();
+  d->art_automatic_ = q.value(col + 22).toString();
+  d->art_manual_ = q.value(col + 23).toString();
 
-  d->filetype_ = FileType(q.value(24).toInt());
+  d->filetype_ = FileType(q.value(col + 24).toInt());
   // playcount = 25
   // lastplayed = 26
   // rating = 27
 
-  d->forced_compilation_on_ = q.value(28).toBool();
-  d->forced_compilation_off_ = q.value(29).toBool();
+  d->forced_compilation_on_ = q.value(col + 28).toBool();
+  d->forced_compilation_off_ = q.value(col + 29).toBool();
 
   // effective_compilation = 30
 

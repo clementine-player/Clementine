@@ -41,8 +41,8 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
 }
 
 bool RadioPlaylistItem::InitFromQuery(const QSqlQuery &query) {
-  // The song table gets joined first, plus one for the song ROWID
-  const int row = Song::kColumns.count() + 1;
+  // The song tables gets joined first, plus one each for the song ROWIDs
+  const int row = (Song::kColumns.count() + 1) * 2;
 
   url_ = query.value(row + 1).toString();
   title_ = query.value(row + 2).toString();

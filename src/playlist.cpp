@@ -26,6 +26,8 @@
 #include "playlistundocommands.h"
 #include "library.h"
 #include "librarybackend.h"
+#include "magnatuneservice.h"
+#include "magnatuneplaylistitem.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -357,6 +359,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     // if they are we treat them differently.
     if (song_data->backend->songs_table() == Library::kSongsTable)
       InsertLibraryItems(song_data->songs, row);
+    else if (song_data->backend->songs_table() == MagnatuneService::kSongsTable)
+      InsertMagnatuneItems(song_data->songs, row);
     else
       InsertSongs(song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
@@ -550,6 +554,14 @@ QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     items << shared_ptr<PlaylistItem>(new LibraryPlaylistItem(song));
+  }
+  return InsertItems(items, pos);
+}
+
+QModelIndex Playlist::InsertMagnatuneItems(const SongList& songs, int pos) {
+  PlaylistItemList items;
+  foreach (const Song& song, songs) {
+    items << shared_ptr<PlaylistItem>(new MagnatunePlaylistItem(song));
   }
   return InsertItems(items, pos);
 }

@@ -88,6 +88,7 @@ set(CLEMENTINE-SOURCES
     libraryfilterwidget.cpp
     radioviewcontainer.cpp
     networkaccessmanager.cpp
+    magnatuneplaylistitem.cpp
 )
 
 # Header files that have Q_OBJECT in

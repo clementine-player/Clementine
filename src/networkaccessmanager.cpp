@@ -9,9 +9,10 @@
 
 #include <QtDebug>
 
-NetworkAccessManager::NetworkAccessManager(QObject* parent)
+NetworkAccessManager::NetworkAccessManager(QObject* parent,
+                                           QNetworkAccessManager* injected)
       : QObject(parent),
-        network_(new QNetworkAccessManager(this)),
+        network_(injected ? injected : new QNetworkAccessManager(this)),
         cache_(new QNetworkDiskCache(this))
 {
   cache_->setCacheDirectory(QString("%1/.config/%2/networkcache/")

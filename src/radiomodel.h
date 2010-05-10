@@ -21,6 +21,7 @@
 #include "simpletreemodel.h"
 #include "multiloadingindicator.h"
 #include "song.h"
+#include "playlistitem.h"
 
 class NetworkAccessManager;
 class RadioService;
@@ -69,7 +70,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
   void AddItemToPlaylist(RadioItem* item);
-  void AddItemsToPlaylist(const SongList& items);
+  void AddItemsToPlaylist(const PlaylistItemList& items);
 
  protected:
   void LazyPopulate(RadioItem* parent);

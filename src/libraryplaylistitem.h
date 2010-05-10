@@ -26,7 +26,6 @@ class LibraryPlaylistItem : public PlaylistItem {
   LibraryPlaylistItem(const Song& song);
 
   bool InitFromQuery(const QSqlQuery &query);
-  void BindToQuery(QSqlQuery *query) const;
   void Reload();
 
   Song Metadata() const { return song_; }
@@ -36,7 +35,7 @@ class LibraryPlaylistItem : public PlaylistItem {
  protected:
   QVariant DatabaseValue(DatabaseColumn column) const;
 
- private:
+ protected:
   Song song_;
 };
 

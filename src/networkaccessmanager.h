@@ -15,7 +15,7 @@ class NetworkAccessManager : public QObject {
   Q_OBJECT
 
  public:
-  NetworkAccessManager(QObject* parent = 0);
+  NetworkAccessManager(QObject* parent = 0, QNetworkAccessManager* injected = 0);
 
   // Only use this from the main thread
   QNetworkAccessManager* network() const { return network_; }

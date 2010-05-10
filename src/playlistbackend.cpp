@@ -40,12 +40,15 @@ PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
 
   PlaylistItemList ret;
 
-  QSqlQuery q("SELECT songs.ROWID, " + Song::kJoinSpec + ","
+  QSqlQuery q("SELECT songs.ROWID, " + Song::JoinSpec("songs") + ","
+              "       magnatune_songs.ROWID, " + Song::JoinSpec("magnatune_songs") + ","
               "       p.type, p.url, p.title, p.artist, p.album, p.length,"
               "       p.radio_service"
               " FROM playlist_items AS p"
               " LEFT JOIN songs"
               "    ON p.library_id = songs.ROWID"
+              " LEFT JOIN magnatune_songs"
+              "    ON p.library_id = magnatune_songs.ROWID"
               " WHERE p.playlist = :playlist", db);
   q.bindValue(":playlist", playlist);
   q.exec();
@@ -53,8 +56,8 @@ PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
     return ret;
 
   while (q.next()) {
-    // The song table gets joined first, plus one for the song ROWID
-    const int row = Song::kColumns.count() + 1;
+    // The song tables gets joined first, plus one each for the song ROWIDs
+    const int row = (Song::kColumns.count() + 1) * 2;
 
     shared_ptr<PlaylistItem> item(
         PlaylistItem::NewFromType(q.value(row + 0).toString()));

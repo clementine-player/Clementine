@@ -22,6 +22,7 @@
 #include "librarybackend.h"
 #include "libraryfilterwidget.h"
 #include "networkaccessmanager.h"
+#include "magnatuneplaylistitem.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -33,6 +34,8 @@
 #include <QDesktopServices>
 
 #include <QtDebug>
+
+using boost::shared_ptr;
 
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kSettingsGroup = "Magnatune";
@@ -224,8 +227,16 @@ void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
 }
 
 void MagnatuneService::AddToPlaylist() {
-  emit AddItemsToPlaylist(library_model_->GetChildSongs(
+  SongList songs(library_model_->GetChildSongs(
       library_sort_model_->mapToSource(context_item_)));
+
+  PlaylistItemList items;
+
+  foreach (const Song& song, songs) {
+    items << shared_ptr<PlaylistItem>(new MagnatunePlaylistItem(song));
+  }
+
+  emit AddItemsToPlaylist(items);
 }
 
 void MagnatuneService::Homepage() {

@@ -24,6 +24,7 @@
 #include "radioitem.h"
 #include "multiloadingindicator.h"
 #include "song.h"
+#include "playlistitem.h"
 
 class RadioModel;
 class LibraryFilterWidget;
@@ -71,7 +72,7 @@ class RadioService : public QObject {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
   void AddItemToPlaylist(RadioItem* item);
-  void AddItemsToPlaylist(const SongList& items);
+  void AddItemsToPlaylist(const PlaylistItemList& items);
 
  private:
   RadioModel* model_;

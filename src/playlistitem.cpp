@@ -18,12 +18,15 @@
 #include "songplaylistitem.h"
 #include "radioplaylistitem.h"
 #include "libraryplaylistitem.h"
+#include "magnatuneplaylistitem.h"
 
 #include <QtDebug>
 
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
   if (type == "Library")
     return new LibraryPlaylistItem(type);
+  if (type == "Magnatune")
+    return new MagnatunePlaylistItem(type);
   if (type == "Stream" || type == "File")
     return new SongPlaylistItem(type);
   if (type == "Radio")

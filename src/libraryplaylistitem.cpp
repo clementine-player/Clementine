@@ -40,7 +40,7 @@ void LibraryPlaylistItem::Reload() {
 }
 
 bool LibraryPlaylistItem::InitFromQuery(const QSqlQuery &query) {
-  // Rows from the songs table come first
+  // Rows from the songs tables come first
   song_.InitFromQuery(query);
 
   return song_.is_valid();
@@ -48,7 +48,7 @@ bool LibraryPlaylistItem::InitFromQuery(const QSqlQuery &query) {
 
 QVariant LibraryPlaylistItem::DatabaseValue(DatabaseColumn column) const {
   switch (column) {
-    case Column_LibraryId: return song_.id();
-    default:               return PlaylistItem::DatabaseValue(column);
+    case Column_LibraryId:    return song_.id();
+    default:                  return PlaylistItem::DatabaseValue(column);
   }
 }

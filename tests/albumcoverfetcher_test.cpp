@@ -23,6 +23,7 @@
 #include <QSignalSpy>
 
 #include "mock_networkaccessmanager.h"
+#include "networkaccessmanager.h"
 #include "gtest/gtest.h"
 
 namespace {
@@ -31,22 +32,29 @@ class AlbumCoverFetcherTest : public ::testing::Test {
  protected:
   static void SetUpTestCase() {
     lastfm::ws::ApiKey = "foobar";
+
+    // Lastfm takes ownership of this.
+    mock_network_ = new MockNetworkAccessManager;
+    lastfm::setNetworkAccessManager(mock_network_);
   }
 
   void SetUp() {
-    // Lastfm takes ownership of this.
-    network_ = new MockNetworkAccessManager;
-    lastfm::setNetworkAccessManager(network_);
+    network_ = new NetworkAccessManager(NULL, mock_network_);
   }
 
-  static void TearDownTestCase() {
+  void TearDown() {
     delete network_;
   }
 
-  static MockNetworkAccessManager* network_;
+  static void TearDownTestCase() {
+    delete mock_network_;
+  }
+
+  static MockNetworkAccessManager* mock_network_;
+  NetworkAccessManager* network_;
 };
 
-MockNetworkAccessManager* AlbumCoverFetcherTest::network_;
+MockNetworkAccessManager* AlbumCoverFetcherTest::mock_network_;
 
 
 TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
@@ -58,9 +66,9 @@ TEST_F(AlbumCoverFetcherTest, FetchesAlbumCover) {
   params["album"] = "Bar";
   params["api_key"] = "foobar";
   params["method"] = "album.getInfo";
-  MockNetworkReply* get_info_reply = network_->ExpectGet("audioscrobbler", params, 200, data);
+  MockNetworkReply* get_info_reply = mock_network_->ExpectGet("audioscrobbler", params, 200, data);
   params.clear();
-  MockNetworkReply* album_reply = network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
+  MockNetworkReply* album_reply = mock_network_->ExpectGet("http://example.com/image.jpg", params, 200, "");
 
   AlbumCoverFetcher fetcher(network_, NULL);
   QSignalSpy spy(&fetcher, SIGNAL(AlbumCoverFetched(quint64, const QImage&)));

@@ -81,6 +81,8 @@ class Song {
   static const QString kBindSpec;
   static const QString kUpdateSpec;
 
+  static QString JoinSpec(const QString& table);
+
   // Don't change these values - they're stored in the database
   enum FileType {
     Type_Unknown = 0,
@@ -102,7 +104,7 @@ class Song {
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, int length);
   void InitFromFile(const QString& filename, int directory_id);
-  void InitFromQuery(const QSqlQuery& query);
+  void InitFromQuery(const QSqlQuery& query, int col = 0);
   void InitFromLastFM(const lastfm::Track& track);
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 

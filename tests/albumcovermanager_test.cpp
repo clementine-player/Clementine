@@ -15,6 +15,7 @@
 */
 
 #include "albumcovermanager.h"
+#include "networkaccessmanager.h"
 
 #include "gtest/gtest.h"
 
@@ -23,10 +24,12 @@
 class AlbumCoverManagerTest : public ::testing::Test {
  protected:
   AlbumCoverManagerTest()
-      : manager_(&network_, NULL) {
+      : network_(NULL, &mock_network_),
+        manager_(&network_, NULL) {
   }
 
-  MockNetworkAccessManager network_;
+  MockNetworkAccessManager mock_network_;
+  NetworkAccessManager network_;
   AlbumCoverManager manager_;
 };
 
