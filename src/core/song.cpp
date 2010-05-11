@@ -107,11 +107,11 @@ TagLib::String UniversalEncodingHandler::parse(const TagLib::ByteVector& data) c
     // Detected codec -> QString (UTF-16) -> UTF8 -> UTF16-BE (TagLib::String)
     // That's probably expensive.
     QString unicode = current_codec_->toUnicode(data.data(), data.size());
-    qDebug() << "Decoded to:" << unicode;
     return TagLib::String(unicode.toUtf8().constData(), TagLib::String::UTF8);
   }
 }
 
+/*
 TagLib::ByteVector UniversalEncodingHandler::render(const TagLib::String& s) const {
   // TODO: what should we do here?
   // 1. Coerce to ASCII
@@ -120,12 +120,19 @@ TagLib::ByteVector UniversalEncodingHandler::render(const TagLib::String& s) con
   // 4. Nothing and rewrite the tag as ID3v2 & UTF8
   return TagLib::ByteVector();
 }
+*/
 
 void UniversalEncodingHandler::Report(const char* charset) {
-  qDebug() << "Detected as" << charset;
+  if (qstrcmp(charset, "ASCII") == 0) {
+    current_codec_ = 0;
+    return;
+  }
+
   QTextCodec* codec = QTextCodec::codecForName(charset);
   if (!codec) {
     qWarning() << "Could not identify encoding in ID3v1 tag. Assuming ASCII.";
+  } else {
+    qWarning() << "Detected non-ASCII encoding in ID3v1 tag:" << charset;
   }
   current_codec_ = codec;
 }

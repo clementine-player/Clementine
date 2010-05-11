@@ -114,7 +114,6 @@ nsresult nsUniversalDetector::HandleData(const char* aBuf, uint32_t aLen)
   {
     mStart = false;
     if (aLen > 3)
-      qDebug() << aBuf[0];
       switch (aBuf[0])
         {
         case '\xEF':
@@ -241,7 +240,6 @@ nsresult nsUniversalDetector::HandleData(const char* aBuf, uint32_t aLen)
     break;
 
   default:  //pure ascii
-    mDetectedCharset = "ASCII";
     ;//do nothing here
   }
   return NS_OK;
@@ -292,6 +290,8 @@ void nsUniversalDetector::DataEnd()
     break;
   case eEscAscii:
     break;
+  case ePureAscii:
+    Report("ASCII");
   default:
     ;
   }

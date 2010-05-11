@@ -65,4 +65,24 @@ TEST_F(SongTest, InitsFromFile) {
   EXPECT_EQ("Baz", song.album());
 }
 
+TEST_F(SongTest, DetectsWindows1251) {
+  char cp1251[] = { 0xc2, 0xfb, 0xe4, 0xfb, 0xf5, 0xe0, 0xe9, 0x00 };  // Выдыхай
+  UniversalEncodingHandler handler;
+  TagLib::ByteVector bytes(cp1251);
+  TagLib::String str = handler.parse(bytes);
+  EXPECT_FALSE(str.isAscii());
+  EXPECT_FALSE(str.isLatin1());
+  EXPECT_STREQ("Выдыхай", str.to8Bit(true).c_str());
+}
+
+TEST_F(SongTest, LeavesASCIIAlone) {
+  char* ascii = "foobar";
+  UniversalEncodingHandler handler;
+  TagLib::ByteVector bytes(ascii);
+  TagLib::String str = handler.parse(bytes);
+  EXPECT_TRUE(str.isAscii());
+  EXPECT_TRUE(str.isLatin1());
+  EXPECT_STREQ("foobar", str.to8Bit(false).c_str());
+}
+
 }  // namespace

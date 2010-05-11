@@ -103,6 +103,10 @@ int main(int argc, char *argv[]) {
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
 
+  // Detect technically invalid usage of non-ASCII in ID3v1 tags.
+  UniversalEncodingHandler handler;
+  TagLib::ID3v1::Tag::setStringHandler(&handler);
+
   QtSingleApplication a(argc, argv);
   a.setQuitOnLastWindowClosed(false);
 

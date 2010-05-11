@@ -60,7 +60,7 @@ class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
 
   // TagLib::ID3v1::StringHandler
   virtual TagLib::String parse(const TagLib::ByteVector& data) const;
-  virtual TagLib::ByteVector render(const TagLib::String& s) const;
+  //virtual TagLib::ByteVector render(const TagLib::String& s) const;
 
  private:
   // nsUniversalDetector
