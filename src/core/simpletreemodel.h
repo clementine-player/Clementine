@@ -33,6 +33,8 @@ class SimpleTreeModel : public QAbstractItemModel {
   QModelIndex parent(const QModelIndex& index) const;
   int rowCount(const QModelIndex& parent) const;
   bool hasChildren(const QModelIndex& parent) const;
+  bool canFetchMore(const QModelIndex& parent) const;
+  void fetchMore(const QModelIndex& parent);
 
   T* IndexToItem(const QModelIndex& index) const;
   QModelIndex ItemToIndex(T* item) const;
@@ -94,9 +96,6 @@ QModelIndex SimpleTreeModel<T>::parent(const QModelIndex& index) const {
 template <typename T>
 int SimpleTreeModel<T>::rowCount(const QModelIndex & parent) const {
   T* item = IndexToItem(parent);
-  if (!item->lazy_loaded)
-    const_cast<SimpleTreeModel<T>*>(this)->LazyPopulate(item); // Ahem
-
   return item->children.count();
 }
 
@@ -107,6 +106,20 @@ bool SimpleTreeModel<T>::hasChildren(const QModelIndex &parent) const {
     return !item->children.isEmpty();
   else
     return true;
+}
+
+template <typename T>
+bool SimpleTreeModel<T>::canFetchMore(const QModelIndex& parent) const {
+  T* item = IndexToItem(parent);
+  return !item->lazy_loaded;
+}
+
+template <typename T>
+void SimpleTreeModel<T>::fetchMore(const QModelIndex& parent) {
+  T* item = IndexToItem(parent);
+  if (!item->lazy_loaded) {
+    LazyPopulate(item);
+  }
 }
 
 template <typename T>
