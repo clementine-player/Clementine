@@ -68,7 +68,6 @@ target_link_libraries(clementine_lib
   qtiocompressor
   lastfm
   chardet
-  z
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
@@ -80,6 +79,7 @@ if (APPLE)
   target_link_libraries(clementine_lib
     ${GROWL}
     ${SPARKLE}
+    z
     /System/Library/Frameworks/Carbon.framework
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/AppKit.framework
