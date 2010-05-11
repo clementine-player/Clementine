@@ -101,6 +101,7 @@ TEST_F(LibraryModelTest, CompilationAlbums) {
 
   AddSong(song);
   model_->Init();
+  model_->fetchMore(model_->index(0, 0));
 
   ASSERT_EQ(1, model_->rowCount(QModelIndex()));
 
@@ -144,6 +145,7 @@ TEST_F(LibraryModelTest, MixedCaseHeaders) {
 TEST_F(LibraryModelTest, UnknownArtists) {
   AddSong("Title", "", "Album", 123);
   model_->Init();
+  model_->fetchMore(model_->index(0, 0));
 
   ASSERT_EQ(1, model_->rowCount(QModelIndex()));
   QModelIndex unknown_index = model_->index(0, 0, QModelIndex());
@@ -157,6 +159,7 @@ TEST_F(LibraryModelTest, UnknownAlbums) {
   AddSong("Title", "Artist", "", 123);
   AddSong("Title", "Artist", "Album", 123);
   model_->Init();
+  model_->fetchMore(model_->index(0, 0));
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
   ASSERT_EQ(2, model_->rowCount(artist_index));
@@ -188,9 +191,11 @@ TEST_F(LibraryModelTest, VariousArtistSongs) {
   model_->Init();
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
+  model_->fetchMore(artist_index);
   ASSERT_EQ(1, model_->rowCount(artist_index));
 
   QModelIndex album_index = model_->index(0, 0, artist_index);
+  model_->fetchMore(album_index);
   ASSERT_EQ(4, model_->rowCount(album_index));
 
   EXPECT_EQ("Artist 1 - Title 1", model_->index(0, 0, album_index).data().toString());
@@ -207,8 +212,10 @@ TEST_F(LibraryModelTest, RemoveSongsLazyLoaded) {
 
   // Lazy load the items
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
+  model_->fetchMore(artist_index);
   ASSERT_EQ(1, model_->rowCount(artist_index));
   QModelIndex album_index = model_->index(0, 0, artist_index);
+  model_->fetchMore(album_index);
   ASSERT_EQ(3, model_->rowCount(album_index));
 
   // Remove the first two songs
@@ -253,6 +260,7 @@ TEST_F(LibraryModelTest, RemoveEmptyAlbums) {
   model_->Init();
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
+  model_->fetchMore(artist_index);
   ASSERT_EQ(2, model_->rowCount(artist_index));
 
   // Remove one song from each album
@@ -260,8 +268,10 @@ TEST_F(LibraryModelTest, RemoveEmptyAlbums) {
 
   // Check the model
   artist_index = model_->index(0, 0, QModelIndex());
+  model_->fetchMore(artist_index);
   ASSERT_EQ(1, model_->rowCount(artist_index));
   QModelIndex album_index = model_->index(0, 0, artist_index);
+  model_->fetchMore(album_index);
   EXPECT_EQ("Album 2", album_index.data().toString());
 
   ASSERT_EQ(1, model_->rowCount(album_index));
@@ -274,8 +284,10 @@ TEST_F(LibraryModelTest, RemoveEmptyArtists) {
 
   // Lazy load the items
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
+  model_->fetchMore(artist_index);
   ASSERT_EQ(1, model_->rowCount(artist_index));
   QModelIndex album_index = model_->index(0, 0, artist_index);
+  model_->fetchMore(album_index);
   ASSERT_EQ(1, model_->rowCount(album_index));
 
   // The artist header is there too right?

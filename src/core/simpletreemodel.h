@@ -29,7 +29,7 @@ class SimpleTreeModel : public QAbstractItemModel {
 
   // QAbstractItemModel
   int columnCount(const QModelIndex& parent) const;
-  QModelIndex index(int row, int, const QModelIndex& parent) const;
+  QModelIndex index(int row, int, const QModelIndex& parent = QModelIndex()) const;
   QModelIndex parent(const QModelIndex& index) const;
   int rowCount(const QModelIndex& parent) const;
   bool hasChildren(const QModelIndex& parent) const;
