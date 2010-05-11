@@ -42,7 +42,8 @@ set(UI
 )
 
 if(APPLE)
-  list(APPEND SOURCES osd_mac.mm mac_startup.mm)
+  list(APPEND SOURCES osd_mac.mm)
+  include_directories(${GROWL}/Headers)
 else(APPLE)
   if(WIN32)
     list(APPEND SOURCES osd_win.cpp)

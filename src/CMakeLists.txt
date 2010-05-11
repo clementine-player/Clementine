@@ -68,6 +68,7 @@ target_link_libraries(clementine_lib
   qtiocompressor
   lastfm
   chardet
+  z
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
@@ -83,7 +84,6 @@ if (APPLE)
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/AppKit.framework
   )
-  include_directories(${GROWL}/Headers)
   include_directories(${SPARKLE}/Headers)
 else (APPLE)
   target_link_libraries(clementine_lib qxt)

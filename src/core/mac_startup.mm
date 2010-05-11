@@ -10,7 +10,7 @@
 #import <AppKit/NSNibDeclarations.h>
 #import <Sparkle/SUUpdater.h>
 
-#include "globalshortcuts/globalshortcuts.h"
+#include "globalshortcuts.h"
 #include "mac_startup.h"
 
 #include <QCoreApplication>

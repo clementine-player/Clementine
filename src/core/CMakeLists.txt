@@ -61,6 +61,10 @@ if(NOT APPLE AND NOT WIN32)
   list(APPEND HEADERS mpris.h)
 endif(NOT APPLE AND NOT WIN32)
 
+if(APPLE)
+  list(APPEND SOURCES mac_startup.mm)
+  include_directories(${SPARKLE})
+endif(APPLE)
 
 qt4_wrap_cpp(MOC ${HEADERS})
 
