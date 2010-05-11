@@ -44,7 +44,7 @@ void MergedProxyModel::DeleteAllMappings() {
 }
 
 void MergedProxyModel::AddSubModel(const QModelIndex& source_parent,
-                                   const QAbstractItemModel* submodel) {
+                                   QAbstractItemModel* submodel) {
   merge_points_.insert(submodel, source_parent);
 
   connect(submodel, SIGNAL(modelReset()), this, SLOT(SubModelReset()));
@@ -97,7 +97,7 @@ void MergedProxyModel::SourceModelReset() {
 }
 
 void MergedProxyModel::SubModelReset() {
-  const QAbstractItemModel* submodel = static_cast<const QAbstractItemModel*>(sender());
+  QAbstractItemModel* submodel = static_cast<QAbstractItemModel*>(sender());
 
   // TODO: When we require Qt 4.6, use beginResetModel() and endResetModel()
   // in LibraryModel and catch those here - that will let us do away with this
@@ -136,7 +136,7 @@ void MergedProxyModel::SubModelReset() {
 }
 
 QModelIndex MergedProxyModel::GetActualSourceParent(const QModelIndex& source_parent,
-                                                    const QAbstractItemModel* model) const {
+                                                    QAbstractItemModel* model) const {
   if (!source_parent.isValid() && model != sourceModel())
     return merge_points_.value(model);
   return source_parent;
@@ -145,7 +145,7 @@ QModelIndex MergedProxyModel::GetActualSourceParent(const QModelIndex& source_pa
 void MergedProxyModel::RowsAboutToBeInserted(const QModelIndex& source_parent,
                                              int start, int end) {
   beginInsertRows(mapFromSource(GetActualSourceParent(
-      source_parent, static_cast<const QAbstractItemModel*>(sender()))),
+      source_parent, static_cast<QAbstractItemModel*>(sender()))),
       start, end);
 }
 
@@ -156,7 +156,7 @@ void MergedProxyModel::RowsInserted(const QModelIndex&, int, int) {
 void MergedProxyModel::RowsAboutToBeRemoved(const QModelIndex& source_parent,
                                             int start, int end) {
   beginRemoveRows(mapFromSource(GetActualSourceParent(
-      source_parent, static_cast<const QAbstractItemModel*>(sender()))),
+      source_parent, static_cast<QAbstractItemModel*>(sender()))),
       start, end);
 }
 
@@ -222,7 +222,7 @@ QModelIndex MergedProxyModel::parent(const QModelIndex &child) const {
     return mapFromSource(source_child.parent());
 
   if (!source_child.parent().isValid())
-    return mapFromSource(merge_points_.value(source_child.model()));
+    return mapFromSource(merge_points_.value(GetModel(source_child)));
   return mapFromSource(source_child.parent());
 }
 
@@ -294,8 +294,7 @@ bool MergedProxyModel::setData(const QModelIndex &index, const QVariant &value,
 
   if (!source_index.isValid())
     return sourceModel()->setData(index, value, role);
-  return const_cast<QAbstractItemModel*>(source_index.model())->
-      setData(index, value, role);
+  return GetModel(index)->setData(index, value, role);
 }
 
 QStringList MergedProxyModel::mimeTypes() const {
@@ -336,5 +335,35 @@ QModelIndex MergedProxyModel::FindSourceParent(const QModelIndex& proxy_index) c
   QModelIndex source_index = mapToSource(proxy_index);
   if (source_index.model() == sourceModel())
     return source_index;
-  return merge_points_.value(source_index.model());
+  return merge_points_.value(GetModel(source_index));
+}
+
+bool MergedProxyModel::canFetchMore(const QModelIndex &parent) const {
+  QModelIndex source_index = mapToSource(parent);
+
+  if (!source_index.isValid())
+    return sourceModel()->canFetchMore(QModelIndex());
+  return source_index.model()->canFetchMore(source_index);
+}
+
+void MergedProxyModel::fetchMore(const QModelIndex& parent) {
+  QModelIndex source_index = mapToSource(parent);
+
+  if (!source_index.isValid())
+    sourceModel()->fetchMore(QModelIndex());
+  else
+    GetModel(source_index)->fetchMore(source_index);
+}
+
+QAbstractItemModel* MergedProxyModel::GetModel(const QModelIndex& source_index) const {
+  // This is essentially const_cast<QAbstractItemModel*>(source_index.model()),
+  // but without the const_cast
+  const QAbstractItemModel* const_model = source_index.model();
+  if (const_model == sourceModel())
+    return sourceModel();
+  foreach (QAbstractItemModel* submodel, merge_points_.keys()) {
+    if (submodel == const_model)
+      return submodel;
+  }
+  return NULL;
 }

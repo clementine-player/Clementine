@@ -42,7 +42,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   ~MergedProxyModel();
 
   // Make another model appear as a child of the given item in the source model.
-  void AddSubModel(const QModelIndex& source_parent, const QAbstractItemModel* submodel);
+  void AddSubModel(const QModelIndex& source_parent, QAbstractItemModel* submodel);
 
   // Find the item in the source model that is the parent of the model
   // containing proxy_index.  If proxy_index is in the source model, then
@@ -61,6 +61,8 @@ class MergedProxyModel : public QAbstractProxyModel {
   bool setData(const QModelIndex &index, const QVariant &value, int role);
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList &indexes) const;
+  bool canFetchMore(const QModelIndex &parent) const;
+  void fetchMore(const QModelIndex& parent);
 
   // QAbstractProxyModel
   // Note that these implementations of map{To,From}Source will not always
@@ -81,7 +83,8 @@ class MergedProxyModel : public QAbstractProxyModel {
 
  private:
   QModelIndex GetActualSourceParent(const QModelIndex& source_parent,
-                                    const QAbstractItemModel* model) const;
+                                    QAbstractItemModel* model) const;
+  QAbstractItemModel* GetModel(const QModelIndex& source_index) const;
   void DeleteAllMappings();
 
   struct Mapping {
@@ -104,8 +107,8 @@ class MergedProxyModel : public QAbstractProxyModel {
   > MappingContainer;
 
   MappingContainer mappings_;
-  QMap<const QAbstractItemModel*, QModelIndex> merge_points_;
-  const QAbstractItemModel* resetting_model_;
+  QMap<QAbstractItemModel*, QModelIndex> merge_points_;
+  QAbstractItemModel* resetting_model_;
 };
 
 #endif // MERGEDPROXYMODEL_H
