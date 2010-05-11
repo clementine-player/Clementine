@@ -125,7 +125,8 @@ class MainWindow : public QMainWindow {
 
   void ReloadSettings();
 
-  void AddMedia();
+  void AddFile();
+  void AddFolder();
   void AddStream();
   void AddStreamAccepted();
 

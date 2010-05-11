@@ -172,8 +172,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_configure, SIGNAL(triggered()), settings_dialog_.get(), SLOT(show()));
   connect(ui_->action_about, SIGNAL(triggered()), about_dialog_.get(), SLOT(show()));
   connect(ui_->action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
-  connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddMedia()));
-  connect(ui_->action_add_media, SIGNAL(triggered()), SLOT(AddMedia()));
+  connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
+  connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
+  connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
   connect(ui_->action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
@@ -802,7 +803,7 @@ void MainWindow::LibraryScanFinished() {
   multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::UpdatingLibrary);
 }
 
-void MainWindow::AddMedia() {
+void MainWindow::AddFile() {
   // Last used directory
   QString directory = settings_.value("add_media_path", QDir::currentPath()).toString();
 
@@ -841,6 +842,25 @@ void MainWindow::AddMedia() {
     }
   }
   playlist_->InsertPaths(urls);
+}
+
+void MainWindow::AddFolder() {
+  // Last used directory
+  QString directory = settings_.value("add_folder_path", QDir::currentPath()).toString();
+
+  // Show dialog
+  directory = QFileDialog::getExistingDirectory(this, tr("Add folder"), directory);
+  if (directory.isEmpty())
+    return;
+
+  // Save last used directory
+  settings_.setValue("add_folder_path", directory);
+
+  // Add media
+  QUrl url(QUrl::fromLocalFile(directory));
+  if (url.scheme().isEmpty())
+    url.setScheme("file");
+  playlist_->InsertPaths(QList<QUrl>() << url);
 }
 
 void MainWindow::AddStream() {

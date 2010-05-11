@@ -398,7 +398,8 @@
     <property name="title">
      <string>Playlist</string>
     </property>
-    <addaction name="action_add_media"/>
+    <addaction name="action_add_file"/>
+    <addaction name="action_add_folder"/>
     <addaction name="action_add_stream"/>
     <addaction name="separator"/>
     <addaction name="action_shuffle_mode"/>
@@ -579,13 +580,13 @@
     <string>Shuffle playlist</string>
    </property>
   </action>
-  <action name="action_add_media">
+  <action name="action_add_file">
    <property name="icon">
     <iconset resource="../../data/data.qrc">
      <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
    </property>
    <property name="text">
-    <string>Add media...</string>
+    <string>Add file...</string>
    </property>
   </action>
   <action name="action_add_stream">
@@ -650,6 +651,15 @@
   <action name="action_transcode">
    <property name="text">
     <string>Transcode Music</string>
+   </property>
+  </action>
+  <action name="action_add_folder">
+   <property name="icon">
+    <iconset resource="../../data/data.qrc">
+     <normaloff>:/folder-new.png</normaloff>:/folder-new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add folder...</string>
    </property>
   </action>
  </widget>
