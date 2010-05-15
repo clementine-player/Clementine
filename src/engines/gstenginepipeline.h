@@ -20,6 +20,7 @@
 #include <QObject>
 #include <QUrl>
 #include <QTimeLine>
+#include <QBasicTimer>
 
 #include <gst/gst.h>
 
@@ -74,6 +75,9 @@ class GstEnginePipeline : public QObject {
   void Error(const QString& message);
   void FaderFinished();
 
+ protected:
+  void timerEvent(QTimerEvent *);
+
  private:
   // Static callbacks.  The GstEnginePipeline instance is passed in the last
   // argument.
@@ -91,8 +95,12 @@ class GstEnginePipeline : public QObject {
   void UpdateVolume();
   bool ReplaceDecodeBin(const QUrl& url);
 
+ private slots:
+  void FaderTimelineFinished();
+
  private:
-  static const int kGstStateTimeoutNanosecs = 10000000;
+  static const int kGstStateTimeoutNanosecs;
+  static const int kFaderFudgeMsec;
 
   GstEngine* engine_;
 
@@ -108,6 +116,7 @@ class GstEnginePipeline : public QObject {
   qreal volume_modifier_;
 
   QTimeLine* fader_;
+  QBasicTimer fader_fudge_timer_;
 
   GstElement* pipeline_;
 

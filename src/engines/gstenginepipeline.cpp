@@ -20,6 +20,9 @@
 
 #include <QDebug>
 
+const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
+const int GstEnginePipeline::kFaderFudgeMsec = 2000;
+
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
     engine_(engine),
@@ -359,10 +362,26 @@ void GstEnginePipeline::StartFader(int duration_msec,
 
   fader_ = new QTimeLine(duration_msec, this);
   connect(fader_, SIGNAL(valueChanged(qreal)), SLOT(SetVolumeModifier(qreal)));
-  connect(fader_, SIGNAL(finished()), SIGNAL(FaderFinished()));
+  connect(fader_, SIGNAL(finished()), SLOT(FaderTimelineFinished()));
   fader_->setDirection(direction);
   fader_->setCurveShape(shape);
   fader_->start();
 
   SetVolumeModifier(fader_->currentValue());
+}
+
+void GstEnginePipeline::FaderTimelineFinished() {
+  // Wait a little while longer before emitting the finished signal (and
+  // probably distroying the pipeline) to account for delays in the audio
+  // server/driver.
+  fader_fudge_timer_.start(kFaderFudgeMsec, this);
+}
+
+void GstEnginePipeline::timerEvent(QTimerEvent* e) {
+  if (e->timerId() == fader_fudge_timer_.timerId()) {
+    emit FaderFinished();
+    return;
+  }
+
+  QObject::timerEvent(e);
 }
