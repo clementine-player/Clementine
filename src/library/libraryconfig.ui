@@ -34,7 +34,7 @@
           <string>Add new folder...</string>
          </property>
          <property name="icon">
-          <iconset>
+          <iconset resource="../../data/data.qrc">
            <normaloff>:/folder-new.png</normaloff>:/folder-new.png</iconset>
          </property>
          <property name="iconSize">
@@ -91,6 +91,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="auto_load">
+        <property name="text">
+         <string>Double-clicking a song clears the playlist first</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -101,6 +108,8 @@
   <tabstop>add</tabstop>
   <tabstop>remove</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections/>
 </ui>

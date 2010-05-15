@@ -44,6 +44,7 @@ class LibraryView : public QTreeView {
 
  signals:
   void ShowConfigDialog();
+  void Load(const QModelIndex& index);
   void AddToPlaylist(const QModelIndex& index);
 
  protected:
@@ -57,6 +58,7 @@ class LibraryView : public QTreeView {
 
  private slots:
   void ItemExpanded(const QModelIndex& index);
+  void Load();
   void AddToPlaylist();
   void ShowInVarious();
   void NoShowInVarious();
@@ -77,6 +79,7 @@ class LibraryView : public QTreeView {
 
   QMenu* context_menu_;
   QModelIndex context_menu_index_;
+  QAction* load_;
   QAction* add_to_playlist_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;

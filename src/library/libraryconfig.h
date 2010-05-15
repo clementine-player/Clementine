@@ -31,6 +31,8 @@ class LibraryConfig : public QWidget {
   LibraryConfig(QWidget* parent = 0);
   ~LibraryConfig();
 
+  static const char* kSettingsGroup;
+
   void SetModel(LibraryDirectoryModel* model);
 
  public slots:
@@ -47,8 +49,6 @@ class LibraryConfig : public QWidget {
   void CurrentRowChanged(const QModelIndex& index);
 
  private:
-  static const char* kSettingsGroup;
-
   Ui_LibraryConfig* ui_;
   LibraryDirectoryModel* model_;
 };

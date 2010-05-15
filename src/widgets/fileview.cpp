@@ -42,7 +42,8 @@ FileView::FileView(QWidget* parent)
 
   connect(ui_->list, SIGNAL(activated(QModelIndex)), SLOT(ItemActivated(QModelIndex)));
   connect(ui_->list, SIGNAL(doubleClicked(QModelIndex)), SLOT(ItemDoubleClick(QModelIndex)));
-  connect(ui_->list, SIGNAL(AddToPlaylist(QList<QUrl>)), SIGNAL(Queue(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(Load(QList<QUrl>)), SIGNAL(Load(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(AddToPlaylist(QList<QUrl>)), SIGNAL(AddToPlaylist(QList<QUrl>)));
   connect(ui_->list, SIGNAL(CopyToLibrary(QList<QUrl>)), SIGNAL(CopyToLibrary(QList<QUrl>)));
   connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)), SIGNAL(MoveToLibrary(QList<QUrl>)));
 }
@@ -108,7 +109,7 @@ void FileView::ItemDoubleClick(const QModelIndex& index) {
   if (model_->isDir(index))
     return;
 
-  emit Queue(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
+  emit DoubleClicked(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
 }
 
 

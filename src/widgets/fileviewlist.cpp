@@ -25,6 +25,8 @@ FileViewList::FileViewList(QWidget* parent)
     : QListView(parent),
       menu_(new QMenu(this))
 {
+  menu_->addAction(QIcon(":media-playback-start.png"), tr("Load"),
+                   this, SLOT(LoadSlot()));
   menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"),
                    this, SLOT(AddToPlaylistSlot()));
   menu_->addSeparator();
@@ -49,6 +51,10 @@ QList<QUrl> FileViewList::UrlListFromSelection() const {
           static_cast<QFileSystemModel*>(model())->filePath(index));
   }
   return urls;
+}
+
+void FileViewList::LoadSlot() {
+  emit Load(UrlListFromSelection());
 }
 
 void FileViewList::AddToPlaylistSlot() {

@@ -84,7 +84,6 @@ class MainWindow : public QMainWindow {
   bool event(QEvent* event);
 
  private slots:
-  void QueueFiles(const QList<QUrl>& urls);
   void FilePathChanged(const QString& path);
 
   void ReportError(const QString& message);
@@ -106,7 +105,13 @@ class MainWindow : public QMainWindow {
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
+  void LoadLibraryItemToPlaylist(const QModelIndex& index);
   void AddLibraryItemToPlaylist(const QModelIndex& index);
+  void LibraryItemDoubleClicked(const QModelIndex& index);
+
+  void LoadFilesToPlaylist(const QList<QUrl>& urls);
+  void AddFilesToPlaylist(const QList<QUrl>& urls);
+  void FilesDoubleClicked(const QList<QUrl>& urls);
 
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
@@ -136,6 +141,8 @@ class MainWindow : public QMainWindow {
 
  private:
   void SaveGeometry();
+  void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
+  void AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& index);
 
  private:
   static const int kStateVersion;
@@ -174,6 +181,7 @@ class MainWindow : public QMainWindow {
   QSettings settings_;
 
   bool was_maximized_;
+  bool autoclear_playlist_;
 };
 
 #endif // MAINWINDOW_H

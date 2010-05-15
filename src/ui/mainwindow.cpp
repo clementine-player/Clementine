@@ -72,6 +72,7 @@
 #include <cmath>
 
 using boost::shared_ptr;
+using boost::scoped_ptr;
 
 #ifdef Q_OS_DARWIN
 // Non exported mac-specific function.
@@ -151,7 +152,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   cover_manager_->Init();
 
   // File view connections
-  connect(ui_->file_view, SIGNAL(Queue(QList<QUrl>)), SLOT(QueueFiles(QList<QUrl>)));
+  connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
+  connect(ui_->file_view, SIGNAL(Load(QList<QUrl>)), SLOT(LoadFilesToPlaylist(QList<QUrl>)));
+  connect(ui_->file_view, SIGNAL(DoubleClicked(QList<QUrl>)), SLOT(FilesDoubleClicked(QList<QUrl>)));
   connect(ui_->file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
 
   // Action connections
@@ -236,7 +239,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(database_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
 
   // Library connections
-  connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
+  connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
+  connect(ui_->library_view, SIGNAL(Load(QModelIndex)), SLOT(LoadLibraryItemToPlaylist(QModelIndex)));
   connect(ui_->library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
   connect(ui_->library_view, SIGNAL(ShowConfigDialog()), ui_->library_filter, SLOT(ShowConfigDialog()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_->library_view, SLOT(TotalSongCountUpdated(int)));
@@ -248,6 +252,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->library_filter->SetLibraryModel(library_->model());
   connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), ui_->library_view,
           SLOT(ReloadSettings()));
+  connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), SLOT(ReloadSettings()));
 
   // Playlist menu
   QAction* playlist_undo = playlist_->undo_stack()->createUndoAction(this);
@@ -365,11 +370,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   ui_->file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
+  ReloadSettings();
+
 #ifndef Q_OS_DARWIN
   StartupBehaviour behaviour =
       StartupBehaviour(settings_.value("startupbehaviour", Startup_Remember).toInt());
   bool hidden = settings_.value("hidden", false).toBool();
-  bool show_tray = settings_.value("showtray", true).toBool();
 
   switch (behaviour) {
     case Startup_AlwaysHide: hide(); break;
@@ -377,11 +383,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     case Startup_Remember:   setVisible(!hidden); break;
   }
 
-  if (show_tray)
-    tray_icon_->show();
-
   // Force the window to show in case somehow the config has tray and window set to hide
-  if (hidden && !show_tray) {
+  if (hidden && !tray_icon_->isVisible()) {
     settings_.setValue("hidden", false);
     show();
   }
@@ -412,9 +415,29 @@ void MainWindow::ReloadSettings() {
   if (!show_tray && !isVisible())
     show();
 #endif
+
+  QSettings library_settings;
+  library_settings.beginGroup(LibraryView::kSettingsGroup);
+
+  autoclear_playlist_ = library_settings.value("autoclear_playlist", false).toBool();
 }
 
-void MainWindow::QueueFiles(const QList<QUrl>& urls) {
+void MainWindow::AddFilesToPlaylist(const QList<QUrl>& urls) {
+  AddFilesToPlaylist(false, urls);
+}
+
+void MainWindow::LoadFilesToPlaylist(const QList<QUrl>& urls) {
+  AddFilesToPlaylist(true, urls);
+}
+
+void MainWindow::FilesDoubleClicked(const QList<QUrl>& urls) {
+  AddFilesToPlaylist(autoclear_playlist_, urls);
+}
+
+void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
+  if (clear_first)
+    playlist_->Clear();
+
   QModelIndex playlist_index = playlist_->InsertPaths(urls);
 
   if (playlist_index.isValid() && player_->GetState() != Engine::Playing)
@@ -510,10 +533,25 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   player_->PlayAt(index.row(), Engine::Manual, true);
 }
 
+void MainWindow::LoadLibraryItemToPlaylist(const QModelIndex& index) {
+  AddLibraryItemToPlaylist(true, index);
+}
+
 void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
+  AddLibraryItemToPlaylist(false, index);
+}
+
+void MainWindow::LibraryItemDoubleClicked(const QModelIndex &index) {
+  AddLibraryItemToPlaylist(autoclear_playlist_, index);
+}
+
+void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& index) {
   QModelIndex idx = index;
   if (idx.model() == library_sort_model_)
     idx = library_sort_model_->mapToSource(idx);
+
+  if (clear_first)
+    playlist_->Clear();
 
   QModelIndex first_song =
       playlist_->InsertLibraryItems(library_->model()->GetChildSongs(idx));
@@ -623,7 +661,19 @@ void MainWindow::Love() {
 }
 
 void MainWindow::RadioDoubleClick(const QModelIndex& index) {
-  InsertRadioItem(radio_model_->IndexToItem(index));
+  if (autoclear_playlist_)
+    playlist_->Clear();
+
+  scoped_ptr<QMimeData> data(
+      radio_model_->merged_model()->mimeData(QModelIndexList() << index));
+  if (!data)
+    return;
+
+  playlist_->dropMimeData(data.get(), Qt::CopyAction, -1, 0, QModelIndex());
+
+  QModelIndex first_song = playlist_->index(0, 0);
+  if (first_song.isValid() && player_->GetState() != Engine::Playing)
+    player_->PlayAt(first_song.row(), Engine::First, true);
 }
 
 void MainWindow::InsertRadioItem(RadioItem* item) {

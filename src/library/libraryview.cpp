@@ -86,7 +86,9 @@ LibraryView::LibraryView(QWidget* parent)
 
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
 
-  add_to_playlist_ = context_menu_->addAction(
+  load_ = context_menu_->addAction(QIcon(":/media-playback-start.png"),
+      tr("Load"), this, SLOT(Load()));
+  add_to_playlist_ = context_menu_->addAction(QIcon(":/media-playback-start.png"),
       tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
   show_in_various_ = context_menu_->addAction(
@@ -202,6 +204,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   bool enable_add = type == LibraryItem::Type_Container ||
                     type == LibraryItem::Type_Song;
 
+  load_->setEnabled(enable_add);
   add_to_playlist_->setEnabled(enable_add);
   show_in_various_->setEnabled(enable_various);
   no_show_in_various_->setEnabled(enable_various);
@@ -224,6 +227,13 @@ void LibraryView::ShowInVarious(bool on) {
   QString artist = library_->data(context_menu_index_, LibraryModel::Role_Artist).toString();
   QString album = library_->data(context_menu_index_, LibraryModel::Role_Key).toString();
   library_->backend()->ForceCompilation(artist, album, on);
+}
+
+void LibraryView::Load() {
+  if (!context_menu_index_.isValid())
+    return;
+
+  emit Load(context_menu_index_);
 }
 
 void LibraryView::AddToPlaylist() {

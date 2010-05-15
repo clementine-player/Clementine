@@ -27,6 +27,7 @@ class FileViewList : public QListView {
   FileViewList(QWidget* parent = 0);
 
  signals:
+  void Load(const QList<QUrl>& urls);
   void AddToPlaylist(const QList<QUrl>& urls);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
@@ -35,6 +36,7 @@ class FileViewList : public QListView {
   void contextMenuEvent(QContextMenuEvent* e);
 
  private slots:
+  void LoadSlot();
   void AddToPlaylistSlot();
   void CopyToLibrarySlot();
   void MoveToLibrarySlot();
