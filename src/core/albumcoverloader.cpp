@@ -29,6 +29,7 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
     height_(120),
+    padding_(true),
     next_id_(0),
     network_(NULL)
 {
@@ -151,16 +152,19 @@ QImage AlbumCoverLoader::ScaleAndPad(const QImage &image) const {
   QImage copy = image.scaled(QSize(height_, height_),
                              Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-  // Pad the image to height_ x height_
-  QImage bigger_image(height_, height_, QImage::Format_ARGB32);
-  bigger_image.fill(0);
+  if (!padding_)
+    return copy;
 
-  QPainter p(&bigger_image);
+  // Pad the image to height_ x height_
+  QImage padded_image(height_, height_, QImage::Format_ARGB32);
+  padded_image.fill(0);
+
+  QPainter p(&padded_image);
   p.drawImage((height_ - copy.width()) / 2, (height_ - copy.height()) / 2,
               copy);
   p.end();
 
-  return bigger_image;
+  return padded_image;
 }
 
 QPixmap AlbumCoverLoader::TryLoadPixmap(const QString &automatic, const QString &manual) {

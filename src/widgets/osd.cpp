@@ -50,6 +50,7 @@ OSD::~OSD() {
 
 void OSD::CoverLoaderInitialised() {
   cover_loader_->Worker()->SetNetwork(network_);
+  cover_loader_->Worker()->SetPadOutputImage(false);
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 }
