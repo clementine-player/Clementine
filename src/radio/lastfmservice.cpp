@@ -372,8 +372,6 @@ QString LastFMService::ErrorString(lastfm::ws::Error error) const {
 
 void LastFMService::TunerTrackAvailable() {
   if (initial_tune_) {
-    emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
-
     LoadNext(last_url_);
     initial_tune_ = false;
   }
@@ -614,6 +612,7 @@ void LastFMService::FetchMoreTracksFinished() {
     return;
   }
   reply->deleteLater();
+  emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
 
   try {
     const XmlQuery& query = lastfm::ws::parse(reply);
@@ -631,10 +630,18 @@ void LastFMService::FetchMoreTracksFinished() {
       art_urls_[t] = q["image"].text();
       playlist_ << t;
     }
-  } catch (lastfm::ws::ParseError& e) {
-    qDebug() << "Lastfm parse error:" << e.enumValue();
   } catch (std::runtime_error& e) {
-    qDebug() << e.what();
+    // For some reason a catch block that takes a lastfm::ws::ParseError&
+    // doesn't get called, even when a lastfm::ws::ParseError is thrown...
+    // Hacks like this remind me of Java...
+    if (QString(typeid(e).name()).contains("ParseError")) {
+      // dynamic_cast throws a std::bad_cast ... *boggle*
+      lastfm::ws::ParseError& error = reinterpret_cast<lastfm::ws::ParseError&>(e);
+      emit StreamError(tr("Couldn't load the last.fm radio station: %1")
+                       .arg(ErrorString(error.enumValue())));
+    } else {
+      emit StreamError(tr("An unknown last.fm error occurred: %1").arg(e.what()));
+    }
     return;
   }
 
