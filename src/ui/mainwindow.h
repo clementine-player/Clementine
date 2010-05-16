@@ -51,6 +51,7 @@ class TranscodeDialog;
 class Database;
 class NetworkAccessManager;
 class Ui_MainWindow;
+class GlobalShortcutsDialog;
 
 class QSortFilterProxyModel;
 class SystemTrayIcon;
@@ -169,6 +170,7 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<AlbumCoverManager> cover_manager_;
   boost::scoped_ptr<Equalizer> equalizer_;
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
+  boost::scoped_ptr<GlobalShortcutsDialog> global_shortcuts_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

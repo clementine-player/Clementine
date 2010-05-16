@@ -8,6 +8,8 @@ set(SOURCES
   albumcovermanager.cpp
   edittagdialog.cpp
   equalizer.cpp
+  globalshortcutgrabber.cpp
+  globalshortcutsdialog.cpp
   mainwindow.cpp
   settingsdialog.cpp
   systemtrayicon.cpp
@@ -19,6 +21,8 @@ set(HEADERS
   albumcovermanager.h
   edittagdialog.h
   equalizer.h
+  globalshortcutgrabber.h
+  globalshortcutsdialog.h
   mainwindow.h
   settingsdialog.h
   systemtrayicon.h
@@ -30,6 +34,8 @@ set(UI
   albumcovermanager.ui
   edittagdialog.ui
   equalizer.ui
+  globalshortcutgrabber.ui
+  globalshortcutsdialog.ui
   mainwindow.ui
   settingsdialog.ui
 )

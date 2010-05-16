@@ -45,6 +45,7 @@
 #include "ui/albumcovermanager.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
+#include "ui/globalshortcutsdialog.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "widgets/multiloadingindicator.h"
@@ -110,6 +111,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     cover_manager_(new AlbumCoverManager(network, library_->model()->backend())),
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
+    global_shortcuts_dialog_(new GlobalShortcutsDialog),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
@@ -182,6 +184,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
+  connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);

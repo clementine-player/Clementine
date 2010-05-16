@@ -413,6 +413,7 @@
      <string>Settings</string>
     </property>
     <addaction name="action_configure"/>
+    <addaction name="action_configure_global_shortcuts"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -660,6 +661,11 @@
    </property>
    <property name="text">
     <string>Add folder...</string>
+   </property>
+  </action>
+  <action name="action_configure_global_shortcuts">
+   <property name="text">
+    <string>Configure global shortcuts...</string>
    </property>
   </action>
  </widget>
