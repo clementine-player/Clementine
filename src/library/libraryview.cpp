@@ -170,6 +170,9 @@ void LibraryView::mouseReleaseEvent(QMouseEvent* e) {
 }
 
 bool LibraryView::RecursivelyExpand(const QModelIndex& index, int* count) {
+  if (model()->canFetchMore(index))
+    model()->fetchMore(index);
+
   int children = model()->rowCount(index);
   if (*count + children > kRowsToShow)
     return false;
