@@ -185,6 +185,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
   connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
+  connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist, SLOT(JumpToCurrentlyPlayingTrack()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);

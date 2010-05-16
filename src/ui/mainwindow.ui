@@ -405,6 +405,7 @@
     <addaction name="action_shuffle_mode"/>
     <addaction name="action_repeat_mode"/>
     <addaction name="separator"/>
+    <addaction name="action_jump"/>
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
    </widget>
@@ -666,6 +667,18 @@
   <action name="action_configure_global_shortcuts">
    <property name="text">
     <string>Configure global shortcuts...</string>
+   </property>
+  </action>
+  <action name="action_jump">
+   <property name="icon">
+    <iconset resource="../../data/data.qrc">
+     <normaloff>:/go-jump.png</normaloff>:/go-jump.png</iconset>
+   </property>
+   <property name="text">
+    <string>Jump to the currently playing track</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+J</string>
    </property>
   </action>
  </widget>

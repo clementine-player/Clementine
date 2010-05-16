@@ -366,11 +366,13 @@ void PlaylistView::InhibitAutoscrollTimeout() {
 }
 
 void PlaylistView::MaybeAutoscroll() {
+  if (!inhibit_autoscroll_)
+    JumpToCurrentlyPlayingTrack();
+}
+
+void PlaylistView::JumpToCurrentlyPlayingTrack() {
   Playlist* playlist = qobject_cast<Playlist*>(model());
   Q_ASSERT(playlist);
-
-  if (inhibit_autoscroll_)
-    return;
 
   if (playlist->current_index() == -1)
     return;
@@ -378,6 +380,7 @@ void PlaylistView::MaybeAutoscroll() {
   QModelIndex current = playlist->index(playlist->current_index(), 0);
   currently_autoscrolling_ = true;
   scrollTo(current, QAbstractItemView::PositionAtCenter);
+  selectionModel()->setCurrentIndex(current, QItemSelectionModel::ClearAndSelect);
   currently_autoscrolling_ = false;
 }
 

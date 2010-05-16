@@ -45,6 +45,7 @@ class PlaylistView : public QTreeView {
  public slots:
   void StopGlowing();
   void StartGlowing();
+  void JumpToCurrentlyPlayingTrack();
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint);
 
  signals:
