@@ -17,8 +17,9 @@
 #ifndef LIBRARYVIEW_H
 #define LIBRARYVIEW_H
 
+#include "widgets/autoexpandingtreeview.h"
+
 #include <QStyledItemDelegate>
-#include <QTreeView>
 
 class LibraryModel;
 
@@ -28,7 +29,7 @@ class LibraryItemDelegate : public QStyledItemDelegate {
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 };
 
-class LibraryView : public QTreeView {
+class LibraryView : public AutoExpandingTreeView {
   Q_OBJECT
 
  public:
@@ -48,16 +49,12 @@ class LibraryView : public QTreeView {
   void AddToPlaylist(const QModelIndex& index);
 
  protected:
-  // QAbstractItemView
-  void reset();
-
   // QWidget
   void paintEvent(QPaintEvent* event);
   void mouseReleaseEvent(QMouseEvent* e);
   void contextMenuEvent(QContextMenuEvent* e);
 
  private slots:
-  void ItemExpanded(const QModelIndex& index);
   void Load();
   void AddToPlaylist();
   void ShowInVarious();
@@ -65,15 +62,11 @@ class LibraryView : public QTreeView {
 
  private:
   void RecheckIsEmpty();
-  bool RecursivelyExpand(const QModelIndex& index, int* count);
   void ShowInVarious(bool on);
 
  private:
-  static const int kRowsToShow;
-
   LibraryModel* library_;
   int total_song_count_;
-  bool auto_open_;
 
   QPixmap nomusic_;
 

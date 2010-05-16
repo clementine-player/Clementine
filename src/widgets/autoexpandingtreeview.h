@@ -14,26 +14,38 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RADIOVIEW_H
-#define RADIOVIEW_H
+#ifndef AUTOEXPANDINGTREEVIEW_H
+#define AUTOEXPANDINGTREEVIEW_H
 
-#include "widgets/autoexpandingtreeview.h"
+#include <QTreeView>
 
-class RadioView : public AutoExpandingTreeView {
+class AutoExpandingTreeView : public QTreeView {
   Q_OBJECT
 
  public:
-  RadioView(QWidget* parent = 0);
+  AutoExpandingTreeView(QWidget* parent = 0);
 
-  // QWidget
-  void contextMenuEvent(QContextMenuEvent* e);
+  static const int kRowsToShow;
 
-  // QTreeView
-  void currentChanged(const QModelIndex &current, const QModelIndex &previous);
-  void setModel(QAbstractItemModel *model);
+  void SetAutoOpen(bool v) { auto_open_ = v; }
+  void SetExpandOnReset(bool v) { expand_on_reset_ = v; }
 
- signals:
-  void CurrentIndexChanged(const QModelIndex& index);
+ public slots:
+  void RecursivelyExpand(const QModelIndex &index);
+
+ protected:
+  // QAbstractItemView
+  void reset();
+
+ private slots:
+  void ItemExpanded(const QModelIndex& index);
+
+ private:
+  bool RecursivelyExpand(const QModelIndex& index, int* count);
+
+ private:
+  bool auto_open_;
+  bool expand_on_reset_;
 };
 
-#endif // RADIOVIEW_H
+#endif // AUTOEXPANDINGTREEVIEW_H

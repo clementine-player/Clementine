@@ -22,9 +22,10 @@
 #include <QContextMenuEvent>
 
 RadioView::RadioView(QWidget *parent)
-  : QTreeView(parent)
+  : AutoExpandingTreeView(parent)
 {
   setItemDelegate(new LibraryItemDelegate(this));
+  SetExpandOnReset(false);
 }
 
 void RadioView::contextMenuEvent(QContextMenuEvent* e) {
@@ -43,4 +44,14 @@ void RadioView::contextMenuEvent(QContextMenuEvent* e) {
 
 void RadioView::currentChanged(const QModelIndex &current, const QModelIndex&) {
   emit CurrentIndexChanged(current);
+}
+
+void RadioView::setModel(QAbstractItemModel *model) {
+  AutoExpandingTreeView::setModel(model);
+
+  if (MergedProxyModel* merged_model = qobject_cast<MergedProxyModel*>(model)) {
+    connect(merged_model,
+            SIGNAL(SubModelReset(QModelIndex,QAbstractItemModel*)),
+            SLOT(RecursivelyExpand(QModelIndex)));
+  }
 }

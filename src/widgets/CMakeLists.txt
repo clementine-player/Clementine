@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(SOURCES
+  autoexpandingtreeview.cpp
   busyindicator.cpp
   equalizerslider.cpp
   fileview.cpp
@@ -19,6 +20,7 @@ set(SOURCES
 )
 
 set(HEADERS
+  autoexpandingtreeview.h
   busyindicator.h
   equalizerslider.h
   fileview.h

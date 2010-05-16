@@ -25,7 +25,6 @@
 #include <QSortFilterProxyModel>
 #include <QSettings>
 
-const int LibraryView::kRowsToShow = 50;
 const char* LibraryView::kSettingsGroup = "LibraryView";
 
 LibraryItemDelegate::LibraryItemDelegate(QObject *parent)
@@ -75,16 +74,13 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 }
 
 LibraryView::LibraryView(QWidget* parent)
-  : QTreeView(parent),
+  : AutoExpandingTreeView(parent),
     library_(NULL),
     total_song_count_(-1),
-    auto_open_(true),
     nomusic_(":nomusic.png"),
     context_menu_(new QMenu(this))
 {
   setItemDelegate(new LibraryItemDelegate(this));
-
-  connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
 
   load_ = context_menu_->addAction(QIcon(":/media-playback-start.png"),
       tr("Load"), this, SLOT(Load()));
@@ -103,7 +99,7 @@ void LibraryView::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  auto_open_ = s.value("auto_open", true).toBool();
+  SetAutoOpen(s.value("auto_open", true).toBool());
 }
 
 void LibraryView::SetLibrary(LibraryModel *library) {
@@ -120,16 +116,6 @@ void LibraryView::TotalSongCountUpdated(int count) {
     setCursor(Qt::PointingHandCursor);
   else
     unsetCursor();
-}
-
-void LibraryView::reset() {
-  QTreeView::reset();
-
-  // Expand nodes in the tree until we have about 50 rows visible in the view
-  if (auto_open_) {
-    int rows = model()->rowCount(rootIndex());
-    RecursivelyExpand(rootIndex(), &rows);
-  }
 }
 
 void LibraryView::paintEvent(QPaintEvent* event) {
@@ -167,30 +153,6 @@ void LibraryView::mouseReleaseEvent(QMouseEvent* e) {
   if (total_song_count_ == 0) {
     emit ShowConfigDialog();
   }
-}
-
-bool LibraryView::RecursivelyExpand(const QModelIndex& index, int* count) {
-  if (model()->canFetchMore(index))
-    model()->fetchMore(index);
-
-  int children = model()->rowCount(index);
-  if (*count + children > kRowsToShow)
-    return false;
-
-  expand(index);
-  *count += children;
-
-  for (int i=0 ; i<children ; ++i) {
-    if (!RecursivelyExpand(model()->index(i, 0, index), count))
-      return false;
-  }
-
-  return true;
-}
-
-void LibraryView::ItemExpanded(const QModelIndex& index) {
-  if (model()->rowCount(index) == 1 && auto_open_)
-    expand(model()->index(0, 0, index));
 }
 
 void LibraryView::contextMenuEvent(QContextMenuEvent *e) {

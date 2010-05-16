@@ -133,6 +133,8 @@ void MergedProxyModel::SubModelReset() {
     beginInsertRows(proxy_parent, 0, count-1);
     endInsertRows();
   }
+
+  emit SubModelReset(proxy_parent, submodel);
 }
 
 QModelIndex MergedProxyModel::GetActualSourceParent(const QModelIndex& source_parent,
