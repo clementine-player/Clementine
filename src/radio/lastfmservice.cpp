@@ -32,7 +32,6 @@
 
 #include <QMenu>
 #include <QSettings>
-#include <QTimer>
 
 using boost::scoped_ptr;
 using lastfm::XmlQuery;
@@ -313,24 +312,16 @@ void LastFMService::LoadNext(const QUrl &) {
   }
 
   next_metadata_ = track;
-  if (initial_tune_) {
-    QTimer::singleShot(5000, this,
-        SLOT(StreamMetadataReady()));
-  } else {
-    StreamMetadataReady();
-  }
+  StreamMetadataReady();
   emit StreamReady(last_url_, last_track_.url());
 }
 
 void LastFMService::StreamMetadataReady() {
   Song metadata;
   metadata.InitFromLastFM(next_metadata_);
-  QImage track_image = GetImageForTrack(next_metadata_);
-  if (!track_image.isNull()) {
-    metadata.set_image(track_image);
-  } else {
-    qDebug() << "No image ready";
-  }
+
+  if (art_urls_.contains(next_metadata_))
+    metadata.set_art_automatic(art_urls_[next_metadata_]);
 
   emit StreamMetadataFound(last_url_, metadata);
 }
@@ -636,10 +627,8 @@ void LastFMService::FetchMoreTracksFinished() {
       t.setAlbum(q["album"].text());
       t.setDuration(q["duration"].text().toInt() / 1000);
       t.setSource(lastfm::Track::LastFmRadio);
-      const QString& image = q["image"].text();
-      if (!image.isEmpty()) {
-        FetchImage(t, image);
-      }
+
+      art_urls_[t] = q["image"].text();
       playlist_ << t;
     }
   } catch (lastfm::ws::ParseError& e) {
@@ -654,12 +643,9 @@ void LastFMService::FetchMoreTracksFinished() {
 
 void LastFMService::Tune(const lastfm::RadioStation& station) {
   playlist_.clear();
-  // Remove all the old image requests.
-  QHash<lastfm::Track, QNetworkReply*>::iterator it = image_requests_.begin();
-  while (it != image_requests_.end()) {
-    it.value()->deleteLater();
-    it = image_requests_.erase(it);
-  }
+
+  // Remove all the old album art URLs
+  art_urls_.clear();
 
   QMap<QString, QString> params;
   params["method"] = "radio.tune";
@@ -677,25 +663,4 @@ void LastFMService::TuneFinished() {
 
   FetchMoreTracks();
   reply->deleteLater();
-}
-
-void LastFMService::FetchImage(const lastfm::Track& track, const QString& image_url) {
-  QUrl url(image_url);
-  QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  image_requests_[track] = reply;
-}
-
-QImage LastFMService::GetImageForTrack(const lastfm::Track& track) {
-  QNetworkReply* reply = image_requests_.take(track);
-  if (reply) {
-    // QNetworkReply::isFinished() only in Qt 4.6 :-(
-    QVariant content_length = reply->header(QNetworkRequest::ContentLengthHeader);
-    if (!content_length.isNull() && content_length.toInt() == reply->bytesAvailable()) {
-      QImage image = QImage::fromData(reply->readAll());
-      reply->deleteLater();
-      return image;
-    }
-    reply->deleteLater();
-  }
-  return QImage();
 }

@@ -151,8 +151,6 @@ class LastFMService : public RadioService {
                    const QIcon& icon, RadioItem *list);
 
   void Tune(const lastfm::RadioStation& station);
-  void FetchImage(const lastfm::Track& track, const QString& image_url);
-  QImage GetImageForTrack(const lastfm::Track& track);
 
  private:
   lastfm::Audioscrobbler* scrobbler_;
@@ -182,7 +180,7 @@ class LastFMService : public RadioService {
   RadioItem* neighbours_list_;
 
   QNetworkAccessManager* network_;
-  QHash<lastfm::Track, QNetworkReply*> image_requests_;
+  QHash<lastfm::Track, QString> art_urls_;
 };
 
 #endif // LASTFMSERVICE_H
