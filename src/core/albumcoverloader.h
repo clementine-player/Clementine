@@ -41,6 +41,7 @@ class AlbumCoverLoader : public QObject {
 
   void SetDesiredHeight(int height) { height_ = height; }
   void SetPadOutputImage(bool padding) { padding_ = padding; }
+  void SetDefaultOutputImage(const QImage& image);
   quint64 LoadImageAsync(const QString& art_automatic, const QString& art_manual);
 
   void Clear();
@@ -87,6 +88,7 @@ class AlbumCoverLoader : public QObject {
 
   int height_;
   bool padding_;
+  QImage default_;
 
   QMutex mutex_;
   QQueue<Task> tasks_;

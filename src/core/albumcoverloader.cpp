@@ -101,7 +101,7 @@ void AlbumCoverLoader::NextState(Task* task) {
     ProcessTask(task);
   } else {
     // Give up
-    emit ImageLoaded(task->id, QImage());
+    emit ImageLoaded(task->id, default_);
   }
 }
 
@@ -114,7 +114,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   if (filename == kManuallyUnsetCover)
-    return TryLoadResult(false, true, QImage());
+    return TryLoadResult(false, true, default_);
 
   if (filename.toLower().startsWith("http://")) {
     network_->Get(QUrl(filename), this, "RemoteFetchFinished", task.id, true);
@@ -124,7 +124,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   QImage image(filename);
-  return TryLoadResult(false, !image.isNull(), image);
+  return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
 }
 
 void AlbumCoverLoader::RemoteFetchFinished(quint64 id, QNetworkReply* reply) {
@@ -176,4 +176,8 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString &automatic, const QString 
   if (!automatic.isEmpty() && ret.isNull())
     ret.load(automatic);
   return ret;
+}
+
+void AlbumCoverLoader::SetDefaultOutputImage(const QImage &image) {
+  default_ = ScaleAndPad(image);
 }
