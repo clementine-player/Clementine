@@ -44,6 +44,14 @@ void GlobalShortcuts::Init() {
   if (RegisterQxt()) return;
 }
 
+bool GlobalShortcuts::IsGsdAvailable() const {
+#ifdef QT_DBUS_LIB
+  return QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService);
+#else // QT_DBUS_LIB
+  return false;
+#endif
+}
+
 bool GlobalShortcuts::RegisterGnome() {
 #ifdef QT_DBUS_LIB
   // Check if the GSD service is available

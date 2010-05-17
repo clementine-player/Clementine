@@ -27,12 +27,13 @@ class QTreeWidgetItem;
 
 class Ui_GlobalShortcutsDialog;
 class GlobalShortcutGrabber;
+class GlobalShortcuts;
 
 class GlobalShortcutsDialog : public QDialog {
  Q_OBJECT
 
  public:
-  GlobalShortcutsDialog(QWidget* parent = 0);
+  GlobalShortcutsDialog(GlobalShortcuts* manager, QWidget* parent = 0);
   ~GlobalShortcutsDialog();
 
   static const char* kSettingsGroup;
@@ -46,6 +47,8 @@ class GlobalShortcutsDialog : public QDialog {
   void NoneClicked();
   void DefaultClicked();
   void ChangeClicked();
+
+  void OpenGnomeKeybindingProperties();
 
   void Save();
 
@@ -66,6 +69,7 @@ class GlobalShortcutsDialog : public QDialog {
  private:
   Ui_GlobalShortcutsDialog* ui_;
 
+  GlobalShortcuts* manager_;
   boost::scoped_ptr<GlobalShortcutGrabber> grabber_;
 
   QSettings settings_;

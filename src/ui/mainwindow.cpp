@@ -111,7 +111,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     cover_manager_(new AlbumCoverManager(network, library_->model()->backend())),
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
-    global_shortcuts_dialog_(new GlobalShortcutsDialog),
+    global_shortcuts_dialog_(new GlobalShortcutsDialog(global_shortcuts_)),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),

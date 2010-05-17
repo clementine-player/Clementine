@@ -31,6 +31,8 @@ public:
 
   void MacMediaKeyPressed(const QString& key);
 
+  bool IsGsdAvailable() const;
+
 signals:
   void PlayPause();
   void Stop();

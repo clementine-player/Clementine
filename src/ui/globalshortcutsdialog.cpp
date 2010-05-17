@@ -17,23 +17,31 @@
 #include "globalshortcutgrabber.h"
 #include "globalshortcutsdialog.h"
 #include "ui_globalshortcutsdialog.h"
+#include "core/globalshortcuts.h"
 
 #include <QtDebug>
 #include <QSettings>
 #include <QPushButton>
 #include <QKeyEvent>
+#include <QProcess>
+#include <QMessageBox>
 
 const char* GlobalShortcutsDialog::kSettingsGroup = "Shortcuts";
 
-GlobalShortcutsDialog::GlobalShortcutsDialog(QWidget* parent)
+GlobalShortcutsDialog::GlobalShortcutsDialog(GlobalShortcuts* manager,
+                                             QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_GlobalShortcutsDialog),
+    manager_(manager),
     grabber_(new GlobalShortcutGrabber)
 {
   ui_->setupUi(this);
   ui_->shortcut_options->setEnabled(false);
-
   ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
+
+  if (!manager->IsGsdAvailable()) {
+    ui_->gnome_container->hide();
+  }
 
   settings_.beginGroup(kSettingsGroup);
 
@@ -58,6 +66,9 @@ GlobalShortcutsDialog::GlobalShortcutsDialog(QWidget* parent)
   connect(ui_->radio_default, SIGNAL(clicked()), SLOT(DefaultClicked()));
   connect(ui_->radio_custom, SIGNAL(clicked()), SLOT(ChangeClicked()));
   connect(ui_->change, SIGNAL(clicked()), SLOT(ChangeClicked()));
+  connect(ui_->gnome_open, SIGNAL(clicked()), SLOT(OpenGnomeKeybindingProperties()));
+
+  ItemClicked(ui_->list->topLevelItem(0));
 }
 
 GlobalShortcutsDialog::~GlobalShortcutsDialog() {
@@ -134,4 +145,12 @@ void GlobalShortcutsDialog::ChangeClicked() {
 
   ui_->radio_custom->setChecked(true);
   SetShortcut(current_id_, key);
+}
+
+void GlobalShortcutsDialog::OpenGnomeKeybindingProperties() {
+  if (!QProcess::startDetached("gnome-keybinding-properties")) {
+    QMessageBox::warning(this, "Error",
+        tr("The \"%1\" command could not be started.")
+        .arg("gnome-keybinding-properties"));
+  }
 }

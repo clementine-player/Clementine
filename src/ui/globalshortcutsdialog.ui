@@ -15,6 +15,35 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QWidget" name="gnome_container" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QCheckBox" name="gnome_checkbox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Use Gnome's shortcut keys</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="gnome_open">
+        <property name="text">
+         <string>Open...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QTreeWidget" name="list">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
@@ -153,6 +182,38 @@
     <hint type="destinationlabel">
      <x>440</x>
      <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gnome_checkbox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>list</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>63</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>63</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gnome_checkbox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>shortcut_options</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>244</x>
+     <y>26</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>122</x>
+     <y>298</y>
     </hint>
    </hints>
   </connection>
