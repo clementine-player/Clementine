@@ -325,10 +325,19 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #endif
 
   // Global shortcuts
+  connect(global_shortcuts_, SIGNAL(Play()), player_, SLOT(Play()));
+  connect(global_shortcuts_, SIGNAL(Pause()), player_, SLOT(Pause()));
   connect(global_shortcuts_, SIGNAL(PlayPause()), ui_->action_play_pause, SLOT(trigger()));
   connect(global_shortcuts_, SIGNAL(Stop()), ui_->action_stop, SLOT(trigger()));
+  connect(global_shortcuts_, SIGNAL(StopAfter()), ui_->action_stop_after_this_track, SLOT(trigger()));
   connect(global_shortcuts_, SIGNAL(Next()), ui_->action_next_track, SLOT(trigger()));
   connect(global_shortcuts_, SIGNAL(Previous()), ui_->action_previous_track, SLOT(trigger()));
+  connect(global_shortcuts_, SIGNAL(IncVolume()), player_, SLOT(VolumeUp()));
+  connect(global_shortcuts_, SIGNAL(DecVolume()), player_, SLOT(VolumeDown()));
+  connect(global_shortcuts_, SIGNAL(Mute()), player_, SLOT(Mute()));
+  connect(global_shortcuts_, SIGNAL(SeekForward()), player_, SLOT(SeekForward()));
+  connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
+  connect(global_shortcuts_dialog_.get(), SIGNAL(accepted()), global_shortcuts_, SLOT(ReloadSettings()));
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));

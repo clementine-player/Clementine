@@ -15,82 +15,74 @@
 */
 
 #include "globalshortcuts.h"
-#include "qxtglobalshortcut.h"
+#include "gnomeglobalshortcutbackend.h"
+#include "qxtglobalshortcutbackend.h"
 
 #include "mac_startup.h"
 
 #include <QtDebug>
+#include <QAction>
 
 #ifdef QT_DBUS_LIB
 #  include <QtDBus>
 #endif
 
-const char* GlobalShortcuts::kGsdService = "org.gnome.SettingsDaemon";
-const char* GlobalShortcuts::kGsdPath = "/org/gnome/SettingsDaemon/MediaKeys";
-const char* GlobalShortcuts::kGsdInterface = "org.gnome.SettingsDaemon.MediaKeys";
+const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
 
 GlobalShortcuts::GlobalShortcuts(QObject *parent)
-  : QObject(parent)
+  : QObject(parent),
+    gnome_backend_(NULL),
+    system_backend_(NULL)
 {
-  Init();
+  settings_.beginGroup(kSettingsGroup);
+
+  // Create actions
+  AddShortcut("play", tr("Play"), SIGNAL(Play()));
+  AddShortcut("pause", tr("Pause"), SIGNAL(Pause()));
+  AddShortcut("play_pause", tr("Play/Pause"), SIGNAL(PlayPause()), QKeySequence(Qt::Key_MediaPlay));
+  AddShortcut("stop", tr("Stop"), SIGNAL(Stop()), QKeySequence(Qt::Key_MediaStop));
+  AddShortcut("stop_after", tr("Stop playing after current track"), SIGNAL(StopAfter()));
+  AddShortcut("next_track", tr("Next track"), SIGNAL(Next()), QKeySequence(Qt::Key_MediaNext));
+  AddShortcut("prev_track", tr("Previous track"), SIGNAL(Previous()), QKeySequence(Qt::Key_MediaPrevious));
+  AddShortcut("inc_volume", tr("Increase volume"), SIGNAL(IncVolume()));
+  AddShortcut("dec_volume", tr("Decrease volume"), SIGNAL(DecVolume()));
+  AddShortcut("mute", tr("Mute"), SIGNAL(Mute()));
+  AddShortcut("seek_forward", tr("Seek forward"), SIGNAL(SeekForward()));
+  AddShortcut("seek_backward", tr("Seek backward"), SIGNAL(SeekBackward()));
+
+  // Create backends - these do the actual shortcut registration
+  if (IsGsdAvailable())
+    gnome_backend_ = new GnomeGlobalShortcutBackend(this);
+
+#ifndef Q_OS_DARWIN
+  system_backend_ = new QxtGlobalShortcutBackend(this);
+#endif
+
+  ReloadSettings();
 }
 
-void GlobalShortcuts::Init() {
-#ifdef Q_OS_DARWIN
-  mac::SetShortcutHandler(this);
-  return;
-#endif
-  if (RegisterGnome()) return;
-  if (RegisterQxt()) return;
+void GlobalShortcuts::AddShortcut(const QString &id, const QString &name,
+                                  const char* signal,
+                                  const QKeySequence &default_key) {
+  Shortcut shortcut;
+  shortcut.action = new QAction(name, this);
+  shortcut.action->setShortcut(QKeySequence::fromString(
+      settings_.value(id, default_key.toString()).toString()));
+  shortcut.id = id;
+  shortcut.default_key = default_key;
+
+  connect(shortcut.action, SIGNAL(triggered()), this, signal);
+
+  shortcuts_[id] = shortcut;
 }
 
 bool GlobalShortcuts::IsGsdAvailable() const {
 #ifdef QT_DBUS_LIB
-  return QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService);
+  return QDBusConnection::sessionBus().interface()->isServiceRegistered(
+      GnomeGlobalShortcutBackend::kGsdService);
 #else // QT_DBUS_LIB
   return false;
 #endif
-}
-
-bool GlobalShortcuts::RegisterGnome() {
-#ifdef QT_DBUS_LIB
-  // Check if the GSD service is available
-  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService))
-    return false;
-
-  QDBusInterface* interface = new QDBusInterface(
-      kGsdService, kGsdPath, kGsdInterface, QDBusConnection::sessionBus(), this);
-
-  connect(interface, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
-          this, SLOT(GnomeMediaKeyPressed(QString,QString)));
-
-  return true;
-#else // QT_DBUS_LIB
-  return false;
-#endif
-}
-
-bool GlobalShortcuts::RegisterQxt() {
-#ifndef Q_OS_DARWIN
-  QxtGlobalShortcut* play_pause = new QxtGlobalShortcut(QKeySequence("Media Play"), this);
-  QxtGlobalShortcut* stop = new QxtGlobalShortcut(QKeySequence("Media Stop"), this);
-  QxtGlobalShortcut* next = new QxtGlobalShortcut(QKeySequence("Media Next"), this);
-  QxtGlobalShortcut* prev = new QxtGlobalShortcut(QKeySequence("Media Previous"), this);
-
-  connect(play_pause, SIGNAL(activated()), SIGNAL(PlayPause()));
-  connect(stop, SIGNAL(activated()), SIGNAL(Stop()));
-  connect(next, SIGNAL(activated()), SIGNAL(Next()));
-  connect(prev, SIGNAL(activated()), SIGNAL(Previous()));
-#endif
-
-  return true;
-}
-
-void GlobalShortcuts::GnomeMediaKeyPressed(const QString&, const QString& key) {
-  if (key == "Play")     emit PlayPause();
-  if (key == "Stop")     emit Stop();
-  if (key == "Next")     emit Next();
-  if (key == "Previous") emit Previous();
 }
 
 void GlobalShortcuts::MacMediaKeyPressed(const QString& key) {
@@ -98,4 +90,20 @@ void GlobalShortcuts::MacMediaKeyPressed(const QString& key) {
   // Stop doesn't exist on a mac keyboard.
   if (key == "Next")     emit Next();
   if (key == "Previous") emit Previous();
+}
+
+void GlobalShortcuts::ReloadSettings() {
+  // The actual shortcuts have been set in our actions for us by the config
+  // dialog already - we just need to reread the gnome settings.
+  bool use_gnome = settings_.value("use_gnome", true).toBool();
+
+  if (gnome_backend_ && gnome_backend_->is_active())
+    gnome_backend_->Unregister();
+  if (system_backend_ && system_backend_->is_active())
+    system_backend_->Unregister();
+
+  if (gnome_backend_ && use_gnome)
+    gnome_backend_->Register();
+  else if (system_backend_)
+    system_backend_->Register();
 }

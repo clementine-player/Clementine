@@ -26,8 +26,6 @@
 #include <QProcess>
 #include <QMessageBox>
 
-const char* GlobalShortcutsDialog::kSettingsGroup = "Shortcuts";
-
 GlobalShortcutsDialog::GlobalShortcutsDialog(GlobalShortcuts* manager,
                                              QWidget* parent)
   : QDialog(parent),
@@ -43,20 +41,18 @@ GlobalShortcutsDialog::GlobalShortcutsDialog(GlobalShortcuts* manager,
     ui_->gnome_container->hide();
   }
 
-  settings_.beginGroup(kSettingsGroup);
+  settings_.beginGroup(GlobalShortcuts::kSettingsGroup);
 
-  AddShortcut("play", tr("Play"));
-  AddShortcut("pause", tr("Pause"));
-  AddShortcut("play_pause", tr("Play/Pause"), QKeySequence(Qt::Key_MediaPlay));
-  AddShortcut("stop", tr("Stop"), QKeySequence(Qt::Key_MediaStop));
-  AddShortcut("stop_after", tr("Stop playing after current track"));
-  AddShortcut("next_track", tr("Next track"), QKeySequence(Qt::Key_MediaNext));
-  AddShortcut("prev_track", tr("Previous track"), QKeySequence(Qt::Key_MediaPrevious));
-  AddShortcut("inc_volume", tr("Increase volume"));
-  AddShortcut("dec_volume", tr("Decrease volume"));
-  AddShortcut("mute", tr("Mute"));
-  AddShortcut("seek_forward", tr("Seek forward"));
-  AddShortcut("seek_backward", tr("Seek backward"));
+  foreach (const GlobalShortcuts::Shortcut& s, manager_->shortcuts().values()) {
+    Shortcut shortcut;
+    shortcut.s = s;
+    shortcut.key = s.action->shortcut();
+    shortcut.item = new QTreeWidgetItem(ui_->list,
+        QStringList() << s.action->text()
+                      << s.action->shortcut().toString(QKeySequence::NativeText));
+    shortcut.item->setData(0, Qt::UserRole, s.id);
+    shortcuts_[s.id] = shortcut;
+  }
 
   ui_->list->sortItems(0, Qt::AscendingOrder);
 
@@ -75,24 +71,20 @@ GlobalShortcutsDialog::~GlobalShortcutsDialog() {
   delete ui_;
 }
 
-void GlobalShortcutsDialog::AddShortcut(const QString& id, const QString& name,
-                                        const QKeySequence& default_key) {
-  Shortcut s;
-  s.id = id;
-  s.name = name;
-  s.default_key = default_key;
-  s.key = QKeySequence::fromString(settings_.value(id, default_key.toString()).toString());
+void GlobalShortcutsDialog::showEvent(QShowEvent*) {
+  foreach (const Shortcut& s, shortcuts_.values()) {
+    SetShortcut(s.s.id, s.s.action->shortcut());
+  }
 
-  s.item = new QTreeWidgetItem(ui_->list,
-      QStringList() << name << s.key.toString(QKeySequence::NativeText));
-  s.item->setData(0, Qt::UserRole, id);
-
-  shortcuts_[id] = s;
+  bool use_gnome = settings_.value("use_gnome", true).toBool();
+  if (ui_->gnome_container->isVisible()) {
+    ui_->gnome_checkbox->setChecked(use_gnome);
+  }
 }
 
 void GlobalShortcutsDialog::ResetAll() {
   foreach (const QString& id, shortcuts_.keys()) {
-    SetShortcut(id, shortcuts_[id].default_key);
+    SetShortcut(id, shortcuts_[id].s.default_key);
   }
 }
 
@@ -109,9 +101,12 @@ void GlobalShortcutsDialog::accept() {
 }
 
 void GlobalShortcutsDialog::Save() {
-  foreach (const QString& id, shortcuts_.keys()) {
-    settings_.setValue(id, shortcuts_[id].key.toString());
+  foreach (const Shortcut& s, shortcuts_.values()) {
+    s.s.action->setShortcut(s.key);
+    settings_.setValue(s.s.id, s.key.toString());
   }
+
+  settings_.setValue("use_gnome", ui_->gnome_checkbox->isChecked());
 }
 
 void GlobalShortcutsDialog::ItemClicked(QTreeWidgetItem* item) {
@@ -120,9 +115,9 @@ void GlobalShortcutsDialog::ItemClicked(QTreeWidgetItem* item) {
 
   // Enable options
   ui_->shortcut_options->setEnabled(true);
-  ui_->shortcut_options->setTitle(tr("Shortcut for %1").arg(shortcut.name));
+  ui_->shortcut_options->setTitle(tr("Shortcut for %1").arg(shortcut.s.action->text()));
 
-  if (shortcut.key == shortcut.default_key)
+  if (shortcut.key == shortcut.s.default_key)
     ui_->radio_default->setChecked(true);
   else if (shortcut.key.isEmpty())
     ui_->radio_none->setChecked(true);
@@ -135,11 +130,11 @@ void GlobalShortcutsDialog::NoneClicked() {
 }
 
 void GlobalShortcutsDialog::DefaultClicked() {
-  SetShortcut(current_id_, shortcuts_[current_id_].default_key);
+  SetShortcut(current_id_, shortcuts_[current_id_].s.default_key);
 }
 
 void GlobalShortcutsDialog::ChangeClicked() {
-  QKeySequence key = grabber_->GetKey(shortcuts_[current_id_].name);
+  QKeySequence key = grabber_->GetKey(shortcuts_[current_id_].s.action->text());
   if (key.isEmpty())
     return;
 

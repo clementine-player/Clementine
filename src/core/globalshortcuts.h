@@ -18,6 +18,13 @@
 #define GLOBALSHORTCUTS_H
 
 #include <QObject>
+#include <QKeySequence>
+#include <QMap>
+#include <QSettings>
+
+class QAction;
+
+class GlobalShortcutBackend;
 
 class GlobalShortcuts : public QObject {
   Q_OBJECT
@@ -25,27 +32,46 @@ class GlobalShortcuts : public QObject {
 public:
   GlobalShortcuts(QObject* parent = 0);
 
-  static const char* kGsdService;
-  static const char* kGsdPath;
-  static const char* kGsdInterface;
+  static const char* kSettingsGroup;
+
+  struct Shortcut {
+    QString id;
+    QKeySequence default_key;
+    QAction* action;
+  };
+
+  QMap<QString, Shortcut> shortcuts() const { return shortcuts_; }
+  bool IsGsdAvailable() const;
 
   void MacMediaKeyPressed(const QString& key);
 
-  bool IsGsdAvailable() const;
+public slots:
+  void ReloadSettings();
 
 signals:
+  void Play();
+  void Pause();
   void PlayPause();
   void Stop();
+  void StopAfter();
   void Next();
   void Previous();
+  void IncVolume();
+  void DecVolume();
+  void Mute();
+  void SeekForward();
+  void SeekBackward();
 
 private:
-  void Init();
-  bool RegisterGnome();
-  bool RegisterQxt();
+  void AddShortcut(const QString& id, const QString& name, const char* signal,
+                   const QKeySequence& default_key = QKeySequence(0));
 
-private slots:
-  void GnomeMediaKeyPressed(const QString& application, const QString& key);
+private:
+  GlobalShortcutBackend* gnome_backend_;
+  GlobalShortcutBackend* system_backend_;
+
+  QMap<QString, Shortcut> shortcuts_;
+  QSettings settings_;
 };
 
 #endif

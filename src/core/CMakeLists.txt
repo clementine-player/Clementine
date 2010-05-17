@@ -9,11 +9,14 @@ set(SOURCES
   commandlineoptions.cpp
   database.cpp
   fht.cpp
+  globalshortcutbackend.cpp
   globalshortcuts.cpp
+  gnomeglobalshortcutbackend.cpp
   m3uparser.cpp
   mergedproxymodel.cpp
   networkaccessmanager.cpp
   player.cpp
+  qxtglobalshortcutbackend.cpp
   scopedtransaction.cpp
   settingsprovider.cpp
   song.cpp
@@ -28,6 +31,7 @@ set(HEADERS
   backgroundthread.h
   database.h
   globalshortcuts.h
+  gnomeglobalshortcutbackend.h
   m3uparser.h
   mergedproxymodel.h
   networkaccessmanager.h

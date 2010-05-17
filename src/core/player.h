@@ -95,6 +95,8 @@ class Player : public QObject {
   void Previous();
   void SetVolume(int value);
   void Seek(int seconds);
+  void SeekForward() { Seek(+5); }
+  void SeekBackward() { Seek(-5); }
 
   void StreamReady(const QUrl& original_url, const QUrl& media_url);
   void CurrentMetadataChanged(const Song& metadata);
@@ -116,6 +118,8 @@ class Player : public QObject {
   void ShowOSD();
   void VolumeDown(int);
   void VolumeUp(int);
+  void VolumeDown() { VolumeDown(4); }
+  void VolumeUp() { VolumeUp(4); }
   int VolumeGet() const;
   void VolumeSet(int);
 

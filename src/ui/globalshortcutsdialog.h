@@ -23,11 +23,12 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include "core/globalshortcuts.h"
+
 class QTreeWidgetItem;
 
 class Ui_GlobalShortcutsDialog;
 class GlobalShortcutGrabber;
-class GlobalShortcuts;
 
 class GlobalShortcutsDialog : public QDialog {
  Q_OBJECT
@@ -36,7 +37,9 @@ class GlobalShortcutsDialog : public QDialog {
   GlobalShortcutsDialog(GlobalShortcuts* manager, QWidget* parent = 0);
   ~GlobalShortcutsDialog();
 
-  static const char* kSettingsGroup;
+ protected:
+  // QWidget
+  void showEvent(QShowEvent *);
 
  private slots:
   void accept();
@@ -54,16 +57,11 @@ class GlobalShortcutsDialog : public QDialog {
 
  private:
   struct Shortcut {
-    QString id;
-    QString name;
-    QTreeWidgetItem* item;
-
-    QKeySequence default_key;
+    GlobalShortcuts::Shortcut s;
     QKeySequence key;
+    QTreeWidgetItem* item;
   };
 
-  void AddShortcut(const QString& id, const QString& name,
-                   const QKeySequence& default_key = QKeySequence(0));
   void SetShortcut(const QString& id, const QKeySequence& key);
 
  private:
