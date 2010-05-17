@@ -76,6 +76,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
   connect(ui_.stacked_widget, SIGNAL(currentChanged(int)), SLOT(UpdatePopupVisible()));
   connect(ui_.notifications_pretty, SIGNAL(toggled(bool)), SLOT(UpdatePopupVisible()));
+
+  // Make sure the list is big enough to show all the items
+  ui_.list->setMinimumWidth(ui_.list->sizeHintForColumn(0));
 }
 
 SettingsDialog::~SettingsDialog() {

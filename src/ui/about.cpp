@@ -30,6 +30,11 @@ About::About(QWidget *parent)
   ui_.title->setText(QCoreApplication::applicationName());
   ui_.version->setText(tr("Version %1").arg(QCoreApplication::applicationVersion()));
 
+  QFont title_font;
+  title_font.setBold(true);
+  title_font.setPointSize(title_font.pointSize() + 4);
+  ui_.title->setFont(title_font);
+
   authors_ << Person("David Sansome", "me@davidsansome.com")
            << Person("John Maguire", "john.maguire@gmail.com");
   thanks_to_ << Person("Mark Kretschmann", "markey@web.de")

@@ -22,6 +22,8 @@ LastFMStationDialog::LastFMStationDialog(QWidget* parent)
     ui_(new Ui_LastFMStationDialog)
 {
   ui_->setupUi(this);
+
+  resize(sizeHint());
 }
 
 LastFMStationDialog::~LastFMStationDialog() {

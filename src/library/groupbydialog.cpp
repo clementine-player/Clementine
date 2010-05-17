@@ -37,6 +37,8 @@ GroupByDialog::GroupByDialog(QWidget *parent)
 
   connect(ui_->button_box->button(QDialogButtonBox::Reset), SIGNAL(clicked()),
           SLOT(Reset()));
+
+  resize(sizeHint());
 }
 
 GroupByDialog::~GroupByDialog() {

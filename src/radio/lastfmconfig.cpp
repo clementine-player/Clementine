@@ -34,6 +34,9 @@ LastFMConfig::LastFMConfig(QWidget *parent)
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));
+
+  ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
+  resize(sizeHint());
 }
 
 LastFMConfig::~LastFMConfig() {
