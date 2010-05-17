@@ -172,6 +172,7 @@ class Playlist : public QAbstractListModel {
   void UpdateScrobblePoint();
   void ReshuffleIndices();
   int NextVirtualIndex(int i) const;
+  int PreviousVirtualIndex(int i) const;
 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands

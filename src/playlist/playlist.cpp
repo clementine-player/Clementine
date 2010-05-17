@@ -250,6 +250,36 @@ int Playlist::NextVirtualIndex(int i) const {
   return virtual_items_.count();
 }
 
+int Playlist::PreviousVirtualIndex(int i) const {
+  PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
+  PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
+  bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
+                    shuffle_mode == PlaylistSequence::Shuffle_Album;
+
+  // This one's easy - if we have to repeat the current track then just return i
+  if (repeat_mode == PlaylistSequence::Repeat_Track)
+    return i;
+
+  // If we're not bothered about whether a song is on the same album then
+  // return the previous virtual index, whatever it is.
+  if (!album_only)
+    return i-1;
+
+  // We need to decrement i until we get something else on the same album
+  Song last_song = current_item_metadata();
+  for (int j=i-1 ; j>=0; --j) {
+    Song this_song = item_at(virtual_items_[j])->Metadata();
+    if (((last_song.is_compilation() && this_song.is_compilation()) ||
+         last_song.artist() == this_song.artist()) &&
+        last_song.album() == this_song.album()) {
+      return j; // Found one
+    }
+  }
+
+  // Couldn't find one - return before the start of the list
+  return -1;
+}
+
 int Playlist::next_index() const {
   // Did we want to stop after this track?
   if (stop_after_.isValid() && current_index() == stop_after_.row())
@@ -280,10 +310,28 @@ int Playlist::next_index() const {
 }
 
 int Playlist::previous_index() const {
-  int i = current_index() - 1;
-  if (i < 0)
+  int prev_virtual_index = PreviousVirtualIndex(current_virtual_index_);
+  if (prev_virtual_index < 0) {
+    // We've gone off the beginning of the playlist.
+
+    switch (playlist_sequence_->repeat_mode()) {
+      case PlaylistSequence::Repeat_Off:
+        return -1;
+      case PlaylistSequence::Repeat_Track:
+        prev_virtual_index = current_virtual_index_;
+        break;
+
+      default:
+        prev_virtual_index = PreviousVirtualIndex(virtual_items_.count());
+        break;
+    }
+  }
+
+  // Still off the beginning?  Then just give up
+  if (prev_virtual_index < 0)
     return -1;
-  return i;
+
+  return virtual_items_[prev_virtual_index];
 }
 
 void Playlist::set_current_index(int i) {
