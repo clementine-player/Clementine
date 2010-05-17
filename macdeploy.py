@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 FRAMEWORK_SEARCH_PATH=[
-#    '/usr/local/Trolltech/Qt-4.7.0/lib',
+    '/usr/local/Trolltech/Qt-4.7.0/lib',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
@@ -65,6 +65,7 @@ GSTREAMER_PLUGINS=[
     'libgstosxaudio.so',
     'libgsttypefindfunctions.so',
     'libgstvolume.so',
+    'libgstdecodebin2.so',
 
     # Codecs
     'libgstaacparse.so',
@@ -106,7 +107,7 @@ QT_PLUGINS = [
     'imageformats/libqtiff.dylib',
 ]
 QT_PLUGINS_SEARCH_PATH=[
-#    '/usr/local/Trolltech/Qt-4.7.0/plugins',
+    '/usr/local/Trolltech/Qt-4.7.0/plugins',
     '/Developer/Applications/Qt/plugins',
 ]
 
