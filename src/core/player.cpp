@@ -547,6 +547,11 @@ void Player::TrackAboutToEnd() {
     if (!item)
       return;
 
+    // Get the actual track URL rather than the stream URL.
+    if (item->options() & PlaylistItem::ContainsMultipleTracks) {
+      item->LoadNext();
+      return;
+    }
     engine_->StartPreloading(item->Url());
   }
 }
