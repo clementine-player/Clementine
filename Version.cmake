@@ -6,9 +6,9 @@
 # Version numbers.  For m.n rc, use m.(n-1).99
 set(CLEMENTINE_VERSION_MAJOR 0)
 set(CLEMENTINE_VERSION_MINOR 3)
-set(CLEMENTINE_VERSION_PATCH 0)
-set(CLEMENTINE_VERSION_STRING "0.3")       # Displayed in GUIs
-set(CLEMENTINE_VERSION_SHORT_STRING "0.3") # Used in filenames
+set(CLEMENTINE_VERSION_PATCH 1)
+set(CLEMENTINE_VERSION_STRING "0.3.1")       # Displayed in GUIs
+set(CLEMENTINE_VERSION_SHORT_STRING "0.3.1") # Used in filenames
 
 
 if (CLEMENTINE_VERSION_PATCH)
