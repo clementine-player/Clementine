@@ -17,3 +17,7 @@ bool MagnatunePlaylistItem::InitFromQuery(const QSqlQuery &query) {
 
   return song_.is_valid();
 }
+
+QUrl MagnatunePlaylistItem::Url() const {
+  return QUrl(song_.filename());
+}
