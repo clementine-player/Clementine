@@ -184,6 +184,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
+  ui_->action_transcode->setVisible(false);  // Disabled for 0.3.1
   connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist, SLOT(JumpToCurrentlyPlayingTrack()));
 
