@@ -89,16 +89,13 @@ class Player : public QObject {
   // Skips this track.  Might load more of the current radio station.
   void Next();
 
-  // Jumps to the next actual item on the playlist, with an automatic change
-  void RadioStreamFinished();
-
   void Previous();
   void SetVolume(int value);
   void Seek(int seconds);
   void SeekForward() { Seek(+5); }
   void SeekBackward() { Seek(-5); }
 
-  void StreamReady(const QUrl& original_url, const QUrl& media_url);
+  void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result);
   void CurrentMetadataChanged(const Song& metadata);
 
   void PlaylistChanged();
@@ -177,6 +174,8 @@ class Player : public QObject {
 
   EngineBase* engine_;
   Engine::TrackChangeType stream_change_type_;
+
+  QUrl loading_async_;
 };
 
 #endif // PLAYER_H

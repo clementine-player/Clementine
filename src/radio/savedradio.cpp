@@ -102,10 +102,6 @@ void SavedRadio::Remove() {
   SaveStreams();
 }
 
-void SavedRadio::StartLoading(const QUrl& url) {
-  emit StreamReady(url, url);
-}
-
 void SavedRadio::AddToPlaylist() {
   emit AddItemToPlaylist(context_item_);
 }

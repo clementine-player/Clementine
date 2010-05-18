@@ -102,10 +102,6 @@ void MagnatuneService::LazyPopulate(RadioItem *item) {
   item->lazy_loaded = true;
 }
 
-void MagnatuneService::StartLoading(const QUrl& url) {
-  emit StreamReady(url, url);
-}
-
 void MagnatuneService::ReloadDatabase() {
   QNetworkRequest request = QNetworkRequest(QUrl(kDatabaseUrl));
   request.setRawHeader("User-Agent", QString("%1 %2").arg(

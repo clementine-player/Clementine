@@ -46,7 +46,8 @@ class SomaFMService : public RadioService {
 
   void ShowContextMenu(RadioItem* item, const QModelIndex& index, const QPoint& global_pos);
 
-  void StartLoading(const QUrl& url);
+  PlaylistItem::Options playlistitem_options() const;
+  PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
 
  private slots:
   void RefreshChannels();

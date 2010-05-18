@@ -90,14 +90,16 @@ Song RadioPlaylistItem::Metadata() const {
   return metadata_;
 }
 
-void RadioPlaylistItem::StartLoading() {
-  if (service_)
-    service_->StartLoading(url_);
+PlaylistItem::SpecialLoadResult RadioPlaylistItem::StartLoading() {
+  if (!service_)
+    return SpecialLoadResult();
+  return service_->StartLoading(url_);
 }
 
-void RadioPlaylistItem::LoadNext() {
-  if (service_)
-    service_->LoadNext(url_);
+PlaylistItem::SpecialLoadResult RadioPlaylistItem::LoadNext() {
+  if (!service_)
+    return SpecialLoadResult();
+  return service_->LoadNext(url_);
 }
 
 QUrl RadioPlaylistItem::Url() const {
@@ -105,18 +107,9 @@ QUrl RadioPlaylistItem::Url() const {
 }
 
 PlaylistItem::Options RadioPlaylistItem::options() const {
-  PlaylistItem::Options ret = SpecialPlayBehaviour;
-
-  if (service_) {
-    ret |= ContainsMultipleTracks;
-
-    if (!service_->IsPauseAllowed())
-      ret |= PauseDisabled;
-    if (service_->ShowLastFmControls())
-      ret |= LastFMControls;
-  }
-
-  return ret;
+  if (!service_)
+    return Default;
+  return service_->playlistitem_options();
 }
 
 void RadioPlaylistItem::SetTemporaryMetadata(const Song& metadata) {

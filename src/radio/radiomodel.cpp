@@ -51,8 +51,7 @@ void RadioModel::AddService(RadioService *service) {
 
   connect(service, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)));
   connect(service, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)));
-  connect(service, SIGNAL(StreamReady(QUrl,QUrl)), SIGNAL(StreamReady(QUrl,QUrl)));
-  connect(service, SIGNAL(StreamFinished()), SIGNAL(StreamFinished()));
+  connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
   connect(service, SIGNAL(AddItemToPlaylist(RadioItem*)), SIGNAL(AddItemToPlaylist(RadioItem*)));

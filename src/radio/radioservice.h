@@ -50,11 +50,10 @@ class RadioService : public QObject {
                                const QPoint& global_pos) {
     Q_UNUSED(item); Q_UNUSED(index); Q_UNUSED(global_pos); }
 
-  virtual void StartLoading(const QUrl& url) = 0;
-  virtual void LoadNext(const QUrl& url);
+  virtual PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
+  virtual PlaylistItem::SpecialLoadResult LoadNext(const QUrl& url);
 
-  virtual bool IsPauseAllowed() const { return true; }
-  virtual bool ShowLastFmControls() const { return false; }
+  virtual PlaylistItem::Options playlistitem_options() const { return PlaylistItem::Default; }
 
   virtual bool SetupLibraryFilter(LibraryFilterWidget*) const { return false; }
 
@@ -66,8 +65,7 @@ class RadioService : public QObject {
   void TaskStarted(MultiLoadingIndicator::TaskType);
   void TaskFinished(MultiLoadingIndicator::TaskType);
 
-  void StreamReady(const QUrl& original_url, const QUrl& media_url);
-  void StreamFinished();
+  void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 

@@ -284,23 +284,25 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
   return QString();
 }
 
-void LastFMService::StartLoading(const QUrl& url) {
+PlaylistItem::SpecialLoadResult LastFMService::StartLoading(const QUrl& url) {
   if (url.scheme() != "lastfm")
-    return;
+    return PlaylistItem::SpecialLoadResult();
   if (!IsAuthenticated())
-    return;
+    return PlaylistItem::SpecialLoadResult();
 
   emit TaskStarted(MultiLoadingIndicator::LoadingLastFM);
 
   last_url_ = url;
   initial_tune_ = true;
   Tune(lastfm::RadioStation(url));
+
+  return PlaylistItem::SpecialLoadResult(
+      PlaylistItem::SpecialLoadResult::WillLoadAsynchronously, url);
 }
 
-void LastFMService::LoadNext(const QUrl &) {
+PlaylistItem::SpecialLoadResult LastFMService::LoadNext(const QUrl &) {
   if (playlist_.empty()) {
-    emit StreamFinished();
-    return;
+    return PlaylistItem::SpecialLoadResult();
   }
 
   lastfm::MutableTrack track = playlist_.dequeue();
@@ -313,7 +315,9 @@ void LastFMService::LoadNext(const QUrl &) {
 
   next_metadata_ = track;
   StreamMetadataReady();
-  emit StreamReady(last_url_, last_track_.url());
+
+  return PlaylistItem::SpecialLoadResult(
+      PlaylistItem::SpecialLoadResult::TrackAvailable, last_url_, last_track_.url());
 }
 
 void LastFMService::StreamMetadataReady() {
@@ -334,7 +338,8 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
 
   if (error == lastfm::ws::NotEnoughContent) {
-    emit StreamFinished();
+    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
+        PlaylistItem::SpecialLoadResult::NoMoreTracks, last_url_));
     return;
   }
 
@@ -372,7 +377,7 @@ QString LastFMService::ErrorString(lastfm::ws::Error error) const {
 
 void LastFMService::TunerTrackAvailable() {
   if (initial_tune_) {
-    LoadNext(last_url_);
+    emit AsyncLoadFinished(LoadNext(last_url_));
     initial_tune_ = false;
   }
 }
@@ -609,6 +614,8 @@ void LastFMService::FetchMoreTracksFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply) {
     qWarning() << "Invalid reply on radio.getPlaylist";
+    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
+        PlaylistItem::SpecialLoadResult::NoMoreTracks, reply->url()));
     return;
   }
   reply->deleteLater();
@@ -665,9 +672,18 @@ void LastFMService::TuneFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply) {
     qWarning() << "Invalid reply on radio.tune";
+    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
+        PlaylistItem::SpecialLoadResult::NoMoreTracks, reply->url()));
     return;
   }
 
   FetchMoreTracks();
   reply->deleteLater();
+}
+
+PlaylistItem::Options LastFMService::playlistitem_options() const {
+  return PlaylistItem::SpecialPlayBehaviour |
+         PlaylistItem::LastFMControls |
+         PlaylistItem::PauseDisabled |
+         PlaylistItem::ContainsMultipleTracks;
 }
