@@ -36,11 +36,11 @@ class MockPlaylistItem : public PlaylistItem {
   MOCK_CONST_METHOD0(Metadata,
       Song());
   MOCK_METHOD0(StartLoading,
-      void());
+      PlaylistItem::SpecialLoadResult());
   MOCK_CONST_METHOD0(Url,
       QUrl());
   MOCK_METHOD0(LoadNext,
-      void());
+      PlaylistItem::SpecialLoadResult());
   MOCK_METHOD1(SetTemporaryMetadata,
       void(const Song& metadata));
   MOCK_METHOD0(ClearTemporaryMetadata,
