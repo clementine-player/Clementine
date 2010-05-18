@@ -318,6 +318,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
   // We use the dock instead of the system tray on mac.
   qt_mac_set_dock_menu(tray_menu);
+  // Catch global media keys.
+  mac::SetShortcutHandler(global_shortcuts_);
 #else
   tray_icon_->setContextMenu(tray_menu);
   connect(tray_icon_, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
