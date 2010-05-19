@@ -32,8 +32,6 @@ QIcon IconLoader::Load(const QString &name) {
   if (!ret.isNull())
     return ret;
 
-  qWarning() << "icon" << name << "not found in theme";
-
   // Otherwise use our fallback theme
   const QString path(":/icons/%1x%2/%3.png");
   foreach (int size, sizes_) {
