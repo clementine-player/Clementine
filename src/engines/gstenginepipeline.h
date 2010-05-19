@@ -23,6 +23,7 @@
 #include <QBasicTimer>
 
 #include <gst/gst.h>
+#include <boost/scoped_ptr.hpp>
 
 #include "engine_fwd.h"
 
@@ -115,7 +116,7 @@ class GstEnginePipeline : public QObject {
   int volume_percent_;
   qreal volume_modifier_;
 
-  QTimeLine* fader_;
+  boost::scoped_ptr<QTimeLine> fader_;
   QBasicTimer fader_fudge_timer_;
 
   GstElement* pipeline_;

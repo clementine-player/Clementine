@@ -358,19 +358,28 @@ void GstEnginePipeline::UpdateVolume() {
 void GstEnginePipeline::StartFader(int duration_msec,
                                    QTimeLine::Direction direction,
                                    QTimeLine::CurveShape shape) {
-  delete fader_;
+  // If there's already another fader running then start from the same time
+  // that one was already at.
+  int start_time = direction == QTimeLine::Forward ? 0 : duration_msec;
+  if (fader_ && fader_->state() == QTimeLine::Running)
+    start_time = fader_->currentTime();
 
-  fader_ = new QTimeLine(duration_msec, this);
-  connect(fader_, SIGNAL(valueChanged(qreal)), SLOT(SetVolumeModifier(qreal)));
-  connect(fader_, SIGNAL(finished()), SLOT(FaderTimelineFinished()));
+  fader_.reset(new QTimeLine(duration_msec, this));
+  connect(fader_.get(), SIGNAL(valueChanged(qreal)), SLOT(SetVolumeModifier(qreal)));
+  connect(fader_.get(), SIGNAL(finished()), SLOT(FaderTimelineFinished()));
   fader_->setDirection(direction);
   fader_->setCurveShape(shape);
-  fader_->start();
+  fader_->setCurrentTime(start_time);
+  fader_->resume();
+
+  fader_fudge_timer_.stop();
 
   SetVolumeModifier(fader_->currentValue());
 }
 
 void GstEnginePipeline::FaderTimelineFinished() {
+  fader_.reset();
+
   // Wait a little while longer before emitting the finished signal (and
   // probably distroying the pipeline) to account for delays in the audio
   // server/driver.
@@ -379,6 +388,7 @@ void GstEnginePipeline::FaderTimelineFinished() {
 
 void GstEnginePipeline::timerEvent(QTimerEvent* e) {
   if (e->timerId() == fader_fudge_timer_.timerId()) {
+    fader_fudge_timer_.stop();
     emit FaderFinished();
     return;
   }
