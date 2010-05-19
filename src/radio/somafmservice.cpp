@@ -74,7 +74,7 @@ void SomaFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
   context_menu_->popup(global_pos);
 }
 
-void SomaFMService::StartLoading(const QUrl& url) {
+PlaylistItem::SpecialLoadResult SomaFMService::StartLoading(const QUrl& url) {
   // Load the playlist
   QNetworkRequest request = QNetworkRequest(url);
   request.setRawHeader("User-Agent", QString("%1 %2").arg(
@@ -84,15 +84,22 @@ void SomaFMService::StartLoading(const QUrl& url) {
   connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
 
   emit TaskStarted(MultiLoadingIndicator::LoadingStream);
+
+  return PlaylistItem::SpecialLoadResult(
+      PlaylistItem::SpecialLoadResult::WillLoadAsynchronously, url);
 }
 
 void SomaFMService::LoadPlaylistFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   emit TaskFinished(MultiLoadingIndicator::LoadingStream);
 
+  QUrl original_url(reply->url());
+
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
     qDebug() << reply->errorString();
+    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
+        PlaylistItem::SpecialLoadResult::NoMoreTracks, original_url));
     return;
   }
 
@@ -105,7 +112,9 @@ void SomaFMService::LoadPlaylistFinished() {
   QSettings s(temp_file.fileName(), QSettings::IniFormat);
   s.beginGroup("playlist");
 
-  emit StreamReady(reply->url().toString(), s.value("File1").toString());
+  emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
+      PlaylistItem::SpecialLoadResult::TrackAvailable,
+      original_url, s.value("File1").toString()));
 }
 
 void SomaFMService::RefreshChannels() {
@@ -205,4 +214,9 @@ void SomaFMService::Homepage() {
 
 void SomaFMService::AddToPlaylist() {
   emit AddItemToPlaylist(context_item_);
+}
+
+PlaylistItem::Options SomaFMService::playlistitem_options() const {
+  return PlaylistItem::SpecialPlayBehaviour |
+         PlaylistItem::PauseDisabled;
 }

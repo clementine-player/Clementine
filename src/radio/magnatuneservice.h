@@ -44,8 +44,6 @@ class MagnatuneService : public RadioService {
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
 
-  void StartLoading(const QUrl &url);
-
   void ShowContextMenu(RadioItem* item, const QModelIndex& index,
                        const QPoint& global_pos);
 

@@ -142,8 +142,36 @@ void Player::ReloadSettings() {
   engine_->ReloadSettings();
 }
 
-void Player::RadioStreamFinished() {
-  NextItem(Engine::Auto);
+void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
+  switch (result.type_) {
+  case PlaylistItem::SpecialLoadResult::NoMoreTracks:
+    loading_async_ = QUrl();
+    NextItem(Engine::Auto);
+    break;
+
+  case PlaylistItem::SpecialLoadResult::TrackAvailable: {
+    // Might've been an async load, so check we're still on the same item
+    int current_index = playlist_->current_index();
+    if (current_index == -1)
+      return;
+
+    shared_ptr<PlaylistItem> item = playlist_->item_at(current_index);
+    if (!item || item->Url() != result.original_url_)
+      return;
+
+    engine_->Play(result.media_url_, stream_change_type_);
+
+    current_item_ = item->Metadata();
+    current_item_options_ = item->options();
+    loading_async_ = QUrl();
+    break;
+  }
+
+  case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
+    // We'll get called again later with either NoMoreTracks or TrackAvailable
+    loading_async_ = result.original_url_;
+    break;
+  }
 }
 
 void Player::Next() {
@@ -152,8 +180,12 @@ void Player::Next() {
 
 void Player::NextInternal(Engine::TrackChangeType change) {
   if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+    // The next track is already being loaded
+    if (playlist_->current_item()->Url() == loading_async_)
+      return;
+
     stream_change_type_ = change;
-    playlist_->current_item()->LoadNext();
+    HandleSpecialLoad(playlist_->current_item()->LoadNext());
     return;
   }
 
@@ -267,9 +299,15 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
   current_item_options_ = item->options();
   current_item_ = item->Metadata();
 
-  if (item->options() & PlaylistItem::SpecialPlayBehaviour)
-    item->StartLoading();
+  if (item->options() & PlaylistItem::SpecialPlayBehaviour) {
+    // It's already loading
+    if (item->Url() == loading_async_)
+      return;
+
+    HandleSpecialLoad(item->StartLoading());
+  }
   else {
+    loading_async_ = QUrl();
     engine_->Play(item->Url(), change);
 
     if (lastfm_->IsScrobblingEnabled())
@@ -277,21 +315,6 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
   }
 
   emit CapsChange(GetCaps());
-}
-
-void Player::StreamReady(const QUrl& original_url, const QUrl& media_url) {
-  int current_index = playlist_->current_index();
-  if (current_index == -1)
-    return;
-
-  shared_ptr<PlaylistItem> item = playlist_->item_at(current_index);
-  if (!item || item->Url() != original_url)
-    return;
-
-  engine_->Play(media_url, stream_change_type_);
-
-  current_item_ = item->Metadata();
-  current_item_options_ = item->options();
 }
 
 void Player::CurrentMetadataChanged(const Song &metadata) {
@@ -547,11 +570,24 @@ void Player::TrackAboutToEnd() {
     if (!item)
       return;
 
+    QUrl url = item->Url();
+
     // Get the actual track URL rather than the stream URL.
     if (item->options() & PlaylistItem::ContainsMultipleTracks) {
-      item->LoadNext();
-      return;
+      PlaylistItem::SpecialLoadResult result = item->LoadNext();
+      switch (result.type_) {
+      case PlaylistItem::SpecialLoadResult::NoMoreTracks:
+        return;
+
+      case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
+        loading_async_ = item->Url();
+        return;
+
+      case PlaylistItem::SpecialLoadResult::TrackAvailable:
+        url = result.media_url_;
+        break;
+      }
     }
-    engine_->StartPreloading(item->Url());
+    engine_->StartPreloading(url);
   }
 }

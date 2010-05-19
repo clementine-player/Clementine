@@ -84,11 +84,10 @@ class LastFMService : public RadioService {
   void ShowContextMenu(RadioItem *item, const QModelIndex& index,
                        const QPoint &global_pos);
 
-  void StartLoading(const QUrl& url);
-  void LoadNext(const QUrl& url);
+  PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
+  PlaylistItem::SpecialLoadResult LoadNext(const QUrl& url);
 
-  bool IsPauseAllowed() const { return false; }
-  bool ShowLastFmControls() const { return true; }
+  PlaylistItem::Options playlistitem_options() const;
 
   void ReloadSettings();
 

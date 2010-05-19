@@ -36,6 +36,11 @@ QString RadioService::ArtistForItem(const RadioItem* item) const {
   return item->artist;
 }
 
-void RadioService::LoadNext(const QUrl&) {
-  emit StreamFinished();
+PlaylistItem::SpecialLoadResult RadioService::StartLoading(const QUrl &url) {
+  return PlaylistItem::SpecialLoadResult(
+      PlaylistItem::SpecialLoadResult::TrackAvailable, url, url);
+}
+
+PlaylistItem::SpecialLoadResult RadioService::LoadNext(const QUrl&) {
+  return PlaylistItem::SpecialLoadResult();
 }

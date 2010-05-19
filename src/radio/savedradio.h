@@ -41,8 +41,6 @@ class SavedRadio : public RadioService {
   void ShowContextMenu(RadioItem* item, const QModelIndex& index,
                        const QPoint& global_pos);
 
-  void StartLoading(const QUrl& url);
-
   void Add(const QUrl& url);
 
  signals:

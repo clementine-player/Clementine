@@ -22,6 +22,12 @@
 
 #include <QtDebug>
 
+PlaylistItem::SpecialLoadResult::SpecialLoadResult(
+    Type type, const QUrl& original_url, const QUrl& media_url)
+      : type_(type), original_url_(original_url), media_url_(media_url)
+{
+}
+
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
   if (type == "Library")
     return new LibraryPlaylistItem(type);

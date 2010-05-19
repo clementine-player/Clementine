@@ -36,11 +36,10 @@ class RadioPlaylistItem : public PlaylistItem {
   void BindToQuery(QSqlQuery *query) const;
 
   Song Metadata() const;
-
-  void StartLoading();
   QUrl Url() const;
 
-  void LoadNext();
+  SpecialLoadResult StartLoading();
+  SpecialLoadResult LoadNext();
 
   void SetTemporaryMetadata(const Song& metadata);
   void ClearTemporaryMetadata();

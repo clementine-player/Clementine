@@ -379,8 +379,16 @@ void PlaylistView::JumpToCurrentlyPlayingTrack() {
 
   QModelIndex current = playlist->index(playlist->current_index(), 0);
   currently_autoscrolling_ = true;
+
+  // Scroll to the item
   scrollTo(current, QAbstractItemView::PositionAtCenter);
-  selectionModel()->setCurrentIndex(current, QItemSelectionModel::ClearAndSelect);
+
+  // Replace the selection.
+  // We have to get the whole row here, not just the current cell.
+  selectionModel()->select(current,
+      QItemSelectionModel::Clear | QItemSelectionModel::Select |
+      QItemSelectionModel::Current | QItemSelectionModel::Rows);
+
   currently_autoscrolling_ = false;
 }
 

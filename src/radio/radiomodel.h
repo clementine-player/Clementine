@@ -64,8 +64,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
  signals:
   void TaskStarted(MultiLoadingIndicator::TaskType);
   void TaskFinished(MultiLoadingIndicator::TaskType);
-  void StreamReady(const QUrl& original_url, const QUrl& media_url);
-  void StreamFinished();
+  void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
