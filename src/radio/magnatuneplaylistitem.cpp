@@ -19,5 +19,5 @@ bool MagnatunePlaylistItem::InitFromQuery(const QSqlQuery &query) {
 }
 
 QUrl MagnatunePlaylistItem::Url() const {
-  return QUrl(song_.filename());
+  return QUrl::fromEncoded(song_.filename().toAscii());
 }
