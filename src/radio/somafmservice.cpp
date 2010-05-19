@@ -17,6 +17,7 @@
 #include "somafmservice.h"
 #include "radiomodel.h"
 #include "core/networkaccessmanager.h"
+#include "ui/iconloader.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -39,10 +40,10 @@ SomaFMService::SomaFMService(RadioModel* parent)
     context_menu_(new QMenu),
     network_(parent->network()->network())
 {
-  context_menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
-  context_menu_->addAction(QIcon(":web.png"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
-  context_menu_->addAction(QIcon(":refresh.png"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
 }
 
 SomaFMService::~SomaFMService() {

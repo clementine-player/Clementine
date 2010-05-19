@@ -18,6 +18,7 @@
 #include "librarydirectorymodel.h"
 #include "libraryview.h"
 #include "ui_libraryconfig.h"
+#include "ui/iconloader.h"
 
 #include <QFileDialog>
 #include <QSettings>
@@ -31,6 +32,9 @@ LibraryConfig::LibraryConfig(QWidget* parent)
     model_(NULL)
 {
   ui_->setupUi(this);
+
+  // Icons
+  ui_->add->setIcon(IconLoader::Load("document-open-folder"));
 
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));

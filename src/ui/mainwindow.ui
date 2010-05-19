@@ -375,7 +375,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -437,19 +437,11 @@
    <addaction name="menuHelp"/>
   </widget>
   <action name="action_previous_track">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-skip-backward.png</normaloff>:/media-skip-backward.png</iconset>
-   </property>
    <property name="text">
     <string>Previous track</string>
    </property>
   </action>
   <action name="action_play_pause">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-playback-start.png</normaloff>:/media-playback-start.png</iconset>
-   </property>
    <property name="text">
     <string>Play</string>
    </property>
@@ -458,28 +450,16 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
-   </property>
    <property name="text">
     <string>Stop</string>
    </property>
   </action>
   <action name="action_next_track">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-skip-forward.png</normaloff>:/media-skip-forward.png</iconset>
-   </property>
    <property name="text">
     <string>Next track</string>
    </property>
   </action>
   <action name="action_quit">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/exit.png</normaloff>:/exit.png</iconset>
-   </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
@@ -488,10 +468,6 @@
    </property>
   </action>
   <action name="action_stop_after_this_track">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-playback-stop.png</normaloff>:/media-playback-stop.png</iconset>
-   </property>
    <property name="text">
     <string>Stop after this track</string>
    </property>
@@ -521,10 +497,6 @@
    </property>
   </action>
   <action name="action_clear_playlist">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/clear-list.png</normaloff>:/clear-list.png</iconset>
-   </property>
    <property name="text">
     <string>Clear playlist</string>
    </property>
@@ -533,10 +505,6 @@
    </property>
   </action>
   <action name="action_edit_track">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/edit-track.png</normaloff>:/edit-track.png</iconset>
-   </property>
    <property name="text">
     <string>Edit track information...</string>
    </property>
@@ -560,10 +528,6 @@
    </property>
   </action>
   <action name="action_configure">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
-   </property>
    <property name="text">
     <string>Configure Clementine...</string>
    </property>
@@ -574,73 +538,41 @@
    </property>
   </action>
   <action name="action_shuffle">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/shuffle.png</normaloff>:/shuffle.png</iconset>
-   </property>
    <property name="text">
     <string>Shuffle playlist</string>
    </property>
   </action>
   <action name="action_add_file">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
-   </property>
    <property name="text">
     <string>Add file...</string>
    </property>
   </action>
   <action name="action_add_stream">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/open_stream.png</normaloff>:/open_stream.png</iconset>
-   </property>
    <property name="text">
     <string>Add stream...</string>
    </property>
   </action>
   <action name="action_open_media">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
-   </property>
    <property name="text">
     <string>Open media...</string>
    </property>
   </action>
   <action name="action_cover_manager">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/download.png</normaloff>:/download.png</iconset>
-   </property>
    <property name="text">
     <string>Cover Manager</string>
    </property>
   </action>
   <action name="action_shuffle_mode">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-playlist-shuffle.png</normaloff>:/media-playlist-shuffle.png</iconset>
-   </property>
    <property name="text">
     <string>Shuffle mode</string>
    </property>
   </action>
   <action name="action_repeat_mode">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/media-playlist-repeat.png</normaloff>:/media-playlist-repeat.png</iconset>
-   </property>
    <property name="text">
     <string>Repeat mode</string>
    </property>
   </action>
   <action name="action_remove_from_playlist">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
-   </property>
    <property name="text">
     <string>Remove from playlist</string>
    </property>
@@ -656,10 +588,6 @@
    </property>
   </action>
   <action name="action_add_folder">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/folder-new.png</normaloff>:/folder-new.png</iconset>
-   </property>
    <property name="text">
     <string>Add folder...</string>
    </property>
@@ -670,10 +598,6 @@
    </property>
   </action>
   <action name="action_jump">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/go-jump.png</normaloff>:/go-jump.png</iconset>
-   </property>
    <property name="text">
     <string>Jump to the currently playing track</string>
    </property>

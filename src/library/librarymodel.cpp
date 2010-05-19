@@ -19,6 +19,7 @@
 #include "libraryitem.h"
 #include "librarydirectorymodel.h"
 #include "playlist/songmimedata.h"
+#include "ui/iconloader.h"
 
 #include <QStringList>
 #include <QUrl>
@@ -31,8 +32,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     backend_(backend),
     dir_model_(new LibraryDirectoryModel(backend, this)),
-    artist_icon_(":artist.png"),
-    album_icon_(":album.png"),
+    artist_icon_(IconLoader::Load("x-clementine-artist")),
+    album_icon_(IconLoader::Load("x-clementine-album")),
     no_cover_icon_(":nocover.png")
 {
   root_->lazy_loaded = true;

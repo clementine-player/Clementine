@@ -24,7 +24,17 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QListView" name="list"/>
+      <widget class="QListView" name="list">
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="uniformItemSizes">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -32,16 +42,6 @@
         <widget class="QPushButton" name="add">
          <property name="text">
           <string>Add new folder...</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../data/data.qrc">
-           <normaloff>:/folder-new.png</normaloff>:/folder-new.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -52,12 +52,6 @@
         <widget class="QPushButton" name="remove">
          <property name="text">
           <string>Remove folder</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
          </property>
         </widget>
        </item>
@@ -108,8 +102,6 @@
   <tabstop>add</tabstop>
   <tabstop>remove</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

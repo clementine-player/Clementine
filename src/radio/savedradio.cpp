@@ -15,6 +15,7 @@
 */
 
 #include "savedradio.h"
+#include "ui/iconloader.h"
 
 #include <QSettings>
 #include <QMenu>
@@ -27,10 +28,10 @@ SavedRadio::SavedRadio(RadioModel* parent)
     root_(NULL),
     context_menu_(new QMenu)
 {
-  add_action_ = context_menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  remove_action_ = context_menu_->addAction(QIcon(":list-remove.png"), tr("Remove"), this, SLOT(Remove()));
+  add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  remove_action_ = context_menu_->addAction(IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
   context_menu_->addSeparator();
-  context_menu_->addAction(QIcon(":open_stream.png"), tr("Add another stream..."), this, SIGNAL(ShowAddStreamDialog()));
+  context_menu_->addAction(IconLoader::Load("document-open-remote"), tr("Add another stream..."), this, SIGNAL(ShowAddStreamDialog()));
 
   LoadStreams();
 }
@@ -41,7 +42,7 @@ SavedRadio::~SavedRadio() {
 
 RadioItem* SavedRadio::CreateRootItem(RadioItem* parent) {
   root_ = new RadioItem(this, RadioItem::Type_Service, tr("Your radio streams"), parent);
-  root_->icon = QIcon(":open_stream.png");
+  root_->icon = IconLoader::Load("document-open-remote");
   return root_;
 }
 

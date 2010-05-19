@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Music Library</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../data/data.qrc">
-    <normaloff>:/library.png</normaloff>:/library.png</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="LibraryConfig" name="config" native="true"/>
@@ -44,13 +40,11 @@
   <customwidget>
    <class>LibraryConfig</class>
    <extends>QWidget</extends>
-   <header>libraryconfig.h</header>
+   <header>library/libraryconfig.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

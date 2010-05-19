@@ -19,6 +19,7 @@
 #include "groupbydialog.h"
 #include "libraryconfigdialog.h"
 #include "ui_libraryfilterwidget.h"
+#include "ui/iconloader.h"
 
 #include <QMenu>
 #include <QActionGroup>
@@ -33,6 +34,10 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
     library_config_dialog_(new LibraryConfigDialog)
 {
   ui_->setupUi(this);
+
+  // Icons
+  ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
+  ui_->options->setIcon(IconLoader::Load("configure"));
 
   // Filter by age
   QActionGroup* filter_age_group = new QActionGroup(this);

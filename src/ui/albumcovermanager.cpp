@@ -15,6 +15,7 @@
 */
 
 #include "albumcovermanager.h"
+#include "iconloader.h"
 #include "ui_albumcovermanager.h"
 #include "core/albumcoverfetcher.h"
 #include "library/librarybackend.h"
@@ -45,10 +46,19 @@ AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
     network_(network),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(network, this)),
-    artist_icon_(":/artist.png"),
-    all_artists_icon_(":/album.png"),
+    artist_icon_(IconLoader::Load("x-clementine-artist")),
+    all_artists_icon_(IconLoader::Load("x-clementine-album")),
     context_menu_(new QMenu(this)) {
   ui_->setupUi(this);
+
+  // Icons
+  ui_->action_fetch->setIcon(IconLoader::Load("download"));
+  ui_->action_choose_manual->setIcon(IconLoader::Load("document-open"));
+  ui_->action_show_fullsize->setIcon(IconLoader::Load("zoom-in"));
+  ui_->action_unset_cover->setIcon(IconLoader::Load("list-remove"));
+  ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
+  ui_->view->setIcon(IconLoader::Load("view-choose"));
+  ui_->fetch->setIcon(IconLoader::Load("download"));
 
   // Get a square version of nocover.png
   QImage nocover(":/nocover.png");

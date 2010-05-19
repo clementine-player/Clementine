@@ -16,11 +16,13 @@
 
 #include "playlistsequence.h"
 #include "ui_playlistsequence.h"
+#include "ui/iconloader.h"
 
 #include <QMenu>
 #include <QActionGroup>
 #include <QSettings>
 #include <QtDebug>
+#include <QPainter>
 
 const char* PlaylistSequence::kSettingsGroup = "PlaylistSequence";
 
@@ -35,6 +37,10 @@ PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
     shuffle_mode_(Shuffle_Off)
 {
   ui_->setupUi(this);
+
+  // Icons
+  ui_->repeat->setIcon(AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat")));
+  ui_->shuffle->setIcon(AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle")));
 
   settings_->set_group(kSettingsGroup);
 
@@ -75,6 +81,30 @@ void PlaylistSequence::Save() {
 
   settings_->setValue("shuffle_mode", shuffle_mode_);
   settings_->setValue("repeat_mode", repeat_mode_);
+}
+
+QIcon PlaylistSequence::AddDesaturatedIcon(const QIcon& icon) {
+  QIcon ret;
+  foreach (const QSize& size, icon.availableSizes()) {
+    QPixmap on(icon.pixmap(size));
+    QPixmap off(DesaturatedPixmap(on));
+
+    ret.addPixmap(off, QIcon::Normal, QIcon::Off);
+    ret.addPixmap(on, QIcon::Normal, QIcon::On);
+  }
+  return ret;
+}
+
+QPixmap PlaylistSequence::DesaturatedPixmap(const QPixmap& pixmap) {
+  QPixmap ret(pixmap.size());
+  ret.fill(Qt::transparent);
+
+  QPainter p(&ret);
+  p.setOpacity(0.5);
+  p.drawPixmap(0, 0, pixmap);
+  p.end();
+
+  return ret;
 }
 
 void PlaylistSequence::RepeatActionTriggered(QAction* action) {

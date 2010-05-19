@@ -36,10 +36,6 @@
          </property>
          <item>
           <widget class="QToolButton" name="clear">
-           <property name="icon">
-            <iconset resource="../../data/data.qrc">
-             <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
-           </property>
            <property name="autoRaise">
             <bool>true</bool>
            </property>
@@ -57,10 +53,6 @@
            <property name="text">
             <string>View</string>
            </property>
-           <property name="icon">
-            <iconset resource="../../data/data.qrc">
-             <normaloff>:/view-choose.png</normaloff>:/view-choose.png</iconset>
-           </property>
            <property name="popupMode">
             <enum>QToolButton::MenuButtonPopup</enum>
            </property>
@@ -76,10 +68,6 @@
           <widget class="QPushButton" name="fetch">
            <property name="text">
             <string>Fetch Missing Covers</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../../data/data.qrc">
-             <normaloff>:/download.png</normaloff>:/download.png</iconset>
            </property>
           </widget>
          </item>
@@ -131,37 +119,21 @@
    </item>
   </layout>
   <action name="action_show_fullsize">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/zoom-in.png</normaloff>:/zoom-in.png</iconset>
-   </property>
    <property name="text">
     <string>Show fullsize...</string>
    </property>
   </action>
   <action name="action_fetch">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/download.png</normaloff>:/download.png</iconset>
-   </property>
    <property name="text">
     <string>Fetch automatically</string>
    </property>
   </action>
   <action name="action_choose_manual">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/open_media.png</normaloff>:/open_media.png</iconset>
-   </property>
    <property name="text">
     <string>Choose manual cover...</string>
    </property>
   </action>
   <action name="action_unset_cover">
-   <property name="icon">
-    <iconset resource="../../data/data.qrc">
-     <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
-   </property>
    <property name="text">
     <string>Unset cover</string>
    </property>
@@ -182,9 +154,7 @@
   <tabstop>fetch</tabstop>
   <tabstop>albums</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>clear</sender>

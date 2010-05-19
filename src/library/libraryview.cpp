@@ -18,6 +18,7 @@
 #include "libraryview.h"
 #include "libraryitem.h"
 #include "librarybackend.h"
+#include "ui/iconloader.h"
 
 #include <QPainter>
 #include <QContextMenuEvent>
@@ -82,9 +83,9 @@ LibraryView::LibraryView(QWidget* parent)
 {
   setItemDelegate(new LibraryItemDelegate(this));
 
-  load_ = context_menu_->addAction(QIcon(":/media-playback-start.png"),
+  load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
       tr("Load"), this, SLOT(Load()));
-  add_to_playlist_ = context_menu_->addAction(QIcon(":/media-playback-start.png"),
+  add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
       tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
   show_in_various_ = context_menu_->addAction(

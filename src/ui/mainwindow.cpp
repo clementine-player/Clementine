@@ -46,6 +46,7 @@
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
 #include "ui/globalshortcutsdialog.h"
+#include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "widgets/multiloadingindicator.h"
@@ -152,6 +153,30 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->radio_view->SetModel(radio_model_);
 
   cover_manager_->Init();
+
+  // Icons
+  ui_->action_about->setIcon(IconLoader::Load("help-about"));
+  ui_->action_add_file->setIcon(IconLoader::Load("document-open"));
+  ui_->action_add_folder->setIcon(IconLoader::Load("document-open-folder"));
+  ui_->action_add_stream->setIcon(IconLoader::Load("document-open-remote"));
+  ui_->action_clear_playlist->setIcon(IconLoader::Load("edit-clear-list"));
+  ui_->action_configure->setIcon(IconLoader::Load("configure"));
+  ui_->action_configure_global_shortcuts->setIcon(IconLoader::Load("configure-shortcuts"));
+  ui_->action_cover_manager->setIcon(IconLoader::Load("download"));
+  ui_->action_edit_track->setIcon(IconLoader::Load("edit-rename"));
+  ui_->action_equalizer->setIcon(IconLoader::Load("view-media-equalizer"));
+  ui_->action_jump->setIcon(IconLoader::Load("go-jump"));
+  ui_->action_next_track->setIcon(IconLoader::Load("media-skip-forward"));
+  ui_->action_open_media->setIcon(IconLoader::Load("document-open"));
+  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start"));
+  ui_->action_previous_track->setIcon(IconLoader::Load("media-skip-backward"));
+  ui_->action_quit->setIcon(IconLoader::Load("application-exit"));
+  ui_->action_remove_from_playlist->setIcon(IconLoader::Load("list-remove"));
+  ui_->action_repeat_mode->setIcon(IconLoader::Load("media-playlist-repeat"));
+  ui_->action_shuffle->setIcon(IconLoader::Load("x-clementine-shuffle"));
+  ui_->action_shuffle_mode->setIcon(IconLoader::Load("media-playlist-shuffle"));
+  ui_->action_stop->setIcon(IconLoader::Load("media-playback-stop"));
+  ui_->action_stop_after_this_track->setIcon(IconLoader::Load("media-playback-stop"));
 
   // File view connections
   connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
@@ -261,16 +286,16 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Playlist menu
   QAction* playlist_undo = playlist_->undo_stack()->createUndoAction(this);
   QAction* playlist_redo = playlist_->undo_stack()->createRedoAction(this);
-  playlist_undo->setIcon(QIcon(":edit-undo.png"));
+  playlist_undo->setIcon(IconLoader::Load("edit-undo"));
   playlist_undo->setShortcut(QKeySequence::Undo);
-  playlist_redo->setIcon(QIcon(":edit-redo.png"));
+  playlist_redo->setIcon(IconLoader::Load("edit-redo"));
   playlist_redo->setShortcut(QKeySequence::Redo);
   addAction(playlist_undo); // These seem to be required to get the keyboard
   addAction(playlist_redo); // shortcuts to work
 
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_->action_stop);
-  playlist_stop_after_ = playlist_menu_->addAction(QIcon(":media-playback-stop.png"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
+  playlist_stop_after_ = playlist_menu_->addAction(IconLoader::Load("media-playback-stop"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_menu_->addAction(playlist_undo);
@@ -464,7 +489,7 @@ void MainWindow::ReportError(const QString& message) {
 void MainWindow::MediaStopped() {
   ui_->action_stop->setEnabled(false);
   ui_->action_stop_after_this_track->setEnabled(false);
-  ui_->action_play_pause->setIcon(QIcon(":media-playback-start.png"));
+  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_play_pause->setText(tr("Play"));
 
   ui_->action_play_pause->setEnabled(true);
@@ -481,7 +506,7 @@ void MainWindow::MediaStopped() {
 void MainWindow::MediaPaused() {
   ui_->action_stop->setEnabled(true);
   ui_->action_stop_after_this_track->setEnabled(true);
-  ui_->action_play_pause->setIcon(QIcon(":media-playback-start.png"));
+  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_play_pause->setText(tr("Play"));
 
   ui_->action_play_pause->setEnabled(true);
@@ -494,7 +519,7 @@ void MainWindow::MediaPaused() {
 void MainWindow::MediaPlaying() {
   ui_->action_stop->setEnabled(true);
   ui_->action_stop_after_this_track->setEnabled(true);
-  ui_->action_play_pause->setIcon(QIcon(":media-playback-pause.png"));
+  ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-pause"));
   ui_->action_play_pause->setText(tr("Pause"));
 
   ui_->action_play_pause->setEnabled(
@@ -708,10 +733,10 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   if (playlist_->current_index() == index.row() && player_->GetState() == Engine::Playing) {
     playlist_play_pause_->setText(tr("Pause"));
-    playlist_play_pause_->setIcon(QIcon(":media-playback-pause.png"));
+    playlist_play_pause_->setIcon(IconLoader::Load("media-playback-pause"));
   } else {
     playlist_play_pause_->setText(tr("Play"));
-    playlist_play_pause_->setIcon(QIcon(":media-playback-start.png"));
+    playlist_play_pause_->setIcon(IconLoader::Load("media-playback-start"));
   }
 
   if (index.isValid()) {

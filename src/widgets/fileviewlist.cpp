@@ -15,6 +15,7 @@
 */
 
 #include "fileviewlist.h"
+#include "ui/iconloader.h"
 
 #include <QMenu>
 #include <QContextMenuEvent>
@@ -25,14 +26,14 @@ FileViewList::FileViewList(QWidget* parent)
     : QListView(parent),
       menu_(new QMenu(this))
 {
-  menu_->addAction(QIcon(":media-playback-start.png"), tr("Load"),
+  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Load"),
                    this, SLOT(LoadSlot()));
-  menu_->addAction(QIcon(":media-playback-start.png"), tr("Add to playlist"),
+  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"),
                    this, SLOT(AddToPlaylistSlot()));
   menu_->addSeparator();
-  menu_->addAction(QIcon(":copy.png"), tr("Copy to library..."),
+  menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."),
                    this, SLOT(CopyToLibrarySlot()));
-  menu_->addAction(QIcon(":move.png"), tr("Move to library..."),
+  menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."),
                    this, SLOT(MoveToLibrarySlot()));
 }
 

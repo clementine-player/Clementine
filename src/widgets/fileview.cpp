@@ -16,6 +16,7 @@
 
 #include "fileview.h"
 #include "ui_fileview.h"
+#include "ui/iconloader.h"
 
 #include <QFileSystemModel>
 #include <QScrollBar>
@@ -27,6 +28,12 @@ FileView::FileView(QWidget* parent)
       undo_stack_(new QUndoStack(this))
 {
   ui_->setupUi(this);
+
+  // Icons
+  ui_->back->setIcon(IconLoader::Load("go-previous"));
+  ui_->forward->setIcon(IconLoader::Load("go-next"));
+  ui_->home->setIcon(IconLoader::Load("go-home"));
+  ui_->up->setIcon(IconLoader::Load("go-up"));
 
   ui_->list->setModel(model_);
   ChangeFilePathWithoutUndo(QDir::homePath());

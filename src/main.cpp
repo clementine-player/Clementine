@@ -31,6 +31,7 @@
 #include "library/directory.h"
 #include "radio/lastfmservice.h"
 #include "ui/equalizer.h"
+#include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 
 #include <QtSingleApplication>
@@ -123,6 +124,9 @@ int main(int argc, char *argv[]) {
   LoadTranslation("clementine", ":/translations");
   LoadTranslation("clementine", a.applicationDirPath());
   LoadTranslation("clementine", QDir::currentPath());
+
+  // Icons
+  IconLoader::Init();
 
 
   CommandlineOptions options(argc, argv);

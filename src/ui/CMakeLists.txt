@@ -10,6 +10,7 @@ set(SOURCES
   equalizer.cpp
   globalshortcutgrabber.cpp
   globalshortcutsdialog.cpp
+  iconloader.cpp
   mainwindow.cpp
   settingsdialog.cpp
   systemtrayicon.cpp

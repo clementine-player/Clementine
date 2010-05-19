@@ -16,10 +16,11 @@
 
 #include "librarydirectorymodel.h"
 #include "librarybackend.h"
+#include "ui/iconloader.h"
 
 LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* parent)
   : QStandardItemModel(parent),
-    dir_icon_(":folder.png"),
+    dir_icon_(IconLoader::Load("document-open-folder")),
     backend_(backend)
 {
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)), SLOT(DirectoryDiscovered(Directory)));

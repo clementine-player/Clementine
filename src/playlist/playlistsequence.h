@@ -69,6 +69,8 @@ class PlaylistSequence : public QWidget {
  private:
   void Load();
   void Save();
+  static QIcon AddDesaturatedIcon(const QIcon& icon);
+  static QPixmap DesaturatedPixmap(const QPixmap& pixmap);
 
  private:
   Ui_PlaylistSequence* ui_;

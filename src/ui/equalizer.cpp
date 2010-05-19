@@ -17,6 +17,7 @@
 #include "equalizer.h"
 #include "ui_equalizer.h"
 #include "widgets/equalizerslider.h"
+#include "ui/iconloader.h"
 
 #include <QSettings>
 #include <QtDebug>
@@ -35,6 +36,10 @@ Equalizer::Equalizer(QWidget *parent)
     loading_(false)
 {
   ui_->setupUi(this);
+
+  // Icons
+  ui_->preset_del->setIcon(IconLoader::Load("list-remove"));
+  ui_->preset_save->setIcon(IconLoader::Load("document-save"));
 
   preamp_ = AddSlider(tr("Pre-amp"));
 

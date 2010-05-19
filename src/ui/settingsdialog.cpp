@@ -15,6 +15,7 @@
 */
 
 #include "config.h"
+#include "iconloader.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
 #include "engines/enginebase.h"
@@ -38,6 +39,11 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_.setupUi(this);
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
+
+  // Icons
+  ui_.list->item(0)->setIcon(IconLoader::Load("media-playback-start")); // Playback
+  ui_.list->item(2)->setIcon(IconLoader::Load("help-hint")); // Notifications
+  ui_.list->item(3)->setIcon(IconLoader::Load("folder-sound")); // Library
 
   // Playback
   connect(ui_.fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));

@@ -23,6 +23,7 @@
 #include "library/librarymodel.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
+#include "ui/iconloader.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -65,10 +66,10 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_sort_model_->sort(0);
 
   add_to_playlist_ = context_menu_->addAction(
-      QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
-  context_menu_->addAction(QIcon(":web.png"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
-  context_menu_->addAction(QIcon(":refresh.png"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
 
   library_model_->Init();
 }

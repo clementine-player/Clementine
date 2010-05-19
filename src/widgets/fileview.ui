@@ -30,10 +30,6 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="icon">
-        <iconset resource="../../data/data.qrc">
-         <normaloff>:/go-previous.png</normaloff>:/go-previous.png</iconset>
-       </property>
        <property name="autoRaise">
         <bool>true</bool>
        </property>
@@ -44,13 +40,6 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../data/data.qrc">
-         <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
-       </property>
        <property name="autoRaise">
         <bool>true</bool>
        </property>
@@ -58,13 +47,6 @@
      </item>
      <item>
       <widget class="QToolButton" name="up">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../data/data.qrc">
-         <normaloff>:/go-up.png</normaloff>:/go-up.png</iconset>
-       </property>
        <property name="autoRaise">
         <bool>true</bool>
        </property>
@@ -72,13 +54,6 @@
      </item>
      <item>
       <widget class="QToolButton" name="home">
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../data/data.qrc">
-         <normaloff>:/go-home.png</normaloff>:/go-home.png</iconset>
-       </property>
        <property name="autoRaise">
         <bool>true</bool>
        </property>
@@ -114,8 +89,6 @@
    <header>fileviewlist.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

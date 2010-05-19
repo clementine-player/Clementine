@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>235</height>
+    <height>273</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -42,16 +42,6 @@
          </property>
          <property name="text">
           <string>Sign out</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../../data/data.qrc">
-           <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
          </property>
         </widget>
        </item>
@@ -171,8 +161,6 @@
   <tabstop>love_ban_</tabstop>
   <tabstop>sign_out</tabstop>
  </tabstops>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

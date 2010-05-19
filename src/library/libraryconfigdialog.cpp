@@ -16,12 +16,15 @@
 
 #include "libraryconfigdialog.h"
 #include "ui_libraryconfigdialog.h"
+#include "ui/iconloader.h"
 
 LibraryConfigDialog::LibraryConfigDialog(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_LibraryConfigDialog)
 {
   ui_->setupUi(this);
+
+  setWindowIcon(IconLoader::Load("folder-sound"));
 }
 
 LibraryConfigDialog::~LibraryConfigDialog() {

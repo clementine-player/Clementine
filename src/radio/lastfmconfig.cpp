@@ -18,6 +18,7 @@
 #include "lastfmservice.h"
 #include "radiomodel.h"
 #include "ui_lastfmconfig.h"
+#include "ui/iconloader.h"
 
 #include <lastfm/ws.h>
 
@@ -31,6 +32,9 @@ LastFMConfig::LastFMConfig(QWidget *parent)
 {
   ui_->setupUi(this);
   ui_->busy->hide();
+
+  // Icons
+  ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));

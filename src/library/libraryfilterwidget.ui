@@ -22,16 +22,6 @@
    </property>
    <item>
     <widget class="QToolButton" name="clear">
-     <property name="icon">
-      <iconset resource="../../data/data.qrc">
-       <normaloff>:/clear.png</normaloff>:/clear.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>22</width>
-       <height>22</height>
-      </size>
-     </property>
      <property name="autoRaise">
       <bool>true</bool>
      </property>
@@ -46,16 +36,6 @@
    </item>
    <item>
     <widget class="QToolButton" name="options">
-     <property name="icon">
-      <iconset resource="../../data/data.qrc">
-       <normaloff>:/configure.png</normaloff>:/configure.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>16</width>
-       <height>16</height>
-      </size>
-     </property>
      <property name="popupMode">
       <enum>QToolButton::InstantPopup</enum>
      </property>
@@ -180,8 +160,6 @@
    <header>widgets/lineedit.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../data/data.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

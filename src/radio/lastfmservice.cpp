@@ -21,6 +21,7 @@
 #include "radiomodel.h"
 #include "core/networkaccessmanager.h"
 #include "core/song.h"
+#include "ui/iconloader.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -64,16 +65,16 @@ LastFMService::LastFMService(RadioModel* parent)
   ReloadSettings();
 
   play_action_ = context_menu_->addAction(
-      QIcon(":media-playback-start.png"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   remove_action_ = context_menu_->addAction(
-      QIcon(":list-remove.png"), tr("Remove"), this, SLOT(Remove()));
+      IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
   context_menu_->addSeparator();
   add_artist_action_ = context_menu_->addAction(
       QIcon(":last.fm/icon_radio.png"), tr("Play artist radio..."), this, SLOT(AddArtistRadio()));
   add_tag_action_ = context_menu_->addAction(
       QIcon(":last.fm/icon_tag.png"), tr("Play tag radio..."), this, SLOT(AddTagRadio()));
   context_menu_->addAction(
-      QIcon(":configure.png"), tr("Configure Last.fm..."), this, SLOT(ShowConfig()));
+      IconLoader::Load("configure"), tr("Configure Last.fm..."), this, SLOT(ShowConfig()));
 
   remove_action_->setEnabled(false);
   add_artist_action_->setEnabled(false);
