@@ -50,6 +50,7 @@ add_library(clementine_library
 target_link_libraries(clementine_library
   clementine_core
   clementine_playlist
+  clementine_ui
 )
 
 add_translation_source(library ${SOURCES} ${MOC} ${UIC})
