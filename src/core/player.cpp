@@ -575,10 +575,18 @@ void Player::TrackAboutToEnd() {
     // Get the actual track URL rather than the stream URL.
     if (item->options() & PlaylistItem::ContainsMultipleTracks) {
       PlaylistItem::SpecialLoadResult result = item->LoadNext();
-      if (result.type_ != PlaylistItem::SpecialLoadResult::TrackAvailable)
+      switch (result.type_) {
+      case PlaylistItem::SpecialLoadResult::NoMoreTracks:
         return;
 
-      url = result.media_url_;
+      case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
+        loading_async_ = item->Url();
+        return;
+
+      case PlaylistItem::SpecialLoadResult::TrackAvailable:
+        url = result.media_url_;
+        break;
+      }
     }
     engine_->StartPreloading(url);
   }
