@@ -18,6 +18,7 @@
 #define PLAYLISTCONTAINER_H
 
 #include <QWidget>
+#include <QSettings>
 
 class Ui_PlaylistContainer;
 
@@ -31,6 +32,8 @@ class PlaylistContainer : public QWidget {
 public:
   PlaylistContainer(QWidget *parent = 0);
   ~PlaylistContainer();
+
+  static const char* kSettingsGroup;
 
   void SetActions(QAction* new_playlist, QAction* save_playlist,
                   QAction* load_playlist);
@@ -47,9 +50,9 @@ signals:
 
 private slots:
   void ClearFilter();
-  void New();
-  void Load();
-  void Save();
+  void NewPlaylist();
+  void LoadPlaylist();
+  void SavePlaylist();
 
   void SetViewModel(Playlist* playlist);
   void PlaylistAdded(int index, const QString& name);
@@ -60,6 +63,8 @@ private slots:
   void ActivePaused();
   void ActiveStopped();
 
+  void Save();
+
 private:
   void UpdateActiveIcon(const QIcon& icon);
 
@@ -69,6 +74,9 @@ private:
   PlaylistManager* manager_;
   QAction* undo_;
   QAction* redo_;
+
+  QSettings settings_;
+  bool starting_up_;
 };
 
 #endif // PLAYLISTCONTAINER_H

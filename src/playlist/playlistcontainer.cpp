@@ -21,14 +21,20 @@
 
 #include <QUndoStack>
 #include <QInputDialog>
+#include <QSettings>
+
+const char* PlaylistContainer::kSettingsGroup = "Playlist";
 
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_PlaylistContainer),
     undo_(NULL),
-    redo_(NULL)
+    redo_(NULL),
+    starting_up_(true)
 {
   ui_->setupUi(this);
+
+  settings_.beginGroup(kSettingsGroup);
 
   // Icons
   ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
@@ -40,6 +46,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
 
   // Connections
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
+  connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
 }
 
 PlaylistContainer::~PlaylistContainer() {
@@ -58,9 +65,9 @@ void PlaylistContainer::SetActions(
 
   ui_->tab_bar->SetActions(new_playlist, save_playlist, load_playlist);
 
-  connect(new_playlist, SIGNAL(triggered()), SLOT(New()));
-  connect(save_playlist, SIGNAL(triggered()), SLOT(Save()));
-  connect(load_playlist, SIGNAL(triggered()), SLOT(Load()));
+  connect(new_playlist, SIGNAL(triggered()), SLOT(NewPlaylist()));
+  connect(save_playlist, SIGNAL(triggered()), SLOT(SavePlaylist()));
+  connect(load_playlist, SIGNAL(triggered()), SLOT(LoadPlaylist()));
 }
 
 void PlaylistContainer::ClearFilter() {
@@ -89,11 +96,13 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
 }
 
 void PlaylistContainer::SetViewModel(Playlist* playlist) {
+  // Set the view
   playlist->IgnoreSorting(true);
   view()->setModel(playlist);
   view()->SetItemDelegates(manager_->library_backend());
   playlist->IgnoreSorting(false);
 
+  // Sort out the undo/redo actions
   delete undo_;
   delete redo_;
   undo_ = playlist->undo_stack()->createUndoAction(this);
@@ -134,6 +143,12 @@ void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
 
 void PlaylistContainer::PlaylistAdded(int index, const QString &name) {
   ui_->tab_bar->insertTab(index, name);
+
+  // Are we startup up, should we select this tab?
+  if (starting_up_ && settings_.value("current_playlist", 0).toInt() == index) {
+    starting_up_ = false;
+    ui_->tab_bar->setCurrentIndex(index);
+  }
 }
 
 void PlaylistContainer::PlaylistRemoved(int index) {
@@ -144,7 +159,7 @@ void PlaylistContainer::PlaylistRenamed(int index, const QString &new_name) {
   ui_->tab_bar->setTabText(index, new_name);
 }
 
-void PlaylistContainer::New() {
+void PlaylistContainer::NewPlaylist() {
   QString name = QInputDialog::getText(this, tr("New playlist"),
                                        tr("Enter a name for the new playlist"),
                                        QLineEdit::Normal, tr("Playlist"));
@@ -154,10 +169,17 @@ void PlaylistContainer::New() {
   manager_->New(name);
 }
 
-void PlaylistContainer::Load() {
+void PlaylistContainer::LoadPlaylist() {
+
+}
+
+void PlaylistContainer::SavePlaylist() {
 
 }
 
 void PlaylistContainer::Save() {
+  if (starting_up_)
+    return;
 
+  settings_.setValue("current_playlist", ui_->tab_bar->currentIndex());
 }
