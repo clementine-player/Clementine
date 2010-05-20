@@ -40,6 +40,10 @@ class PlaylistBackend : public QObject {
   PlaylistItemList GetPlaylistItems(int playlist);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items);
 
+  int CreatePlaylist(const QString& name);
+  void RemovePlaylist(int id);
+  void RenamePlaylist(int id, const QString& new_name);
+
  public slots:
   void SavePlaylist(int playlist, const PlaylistItemList& items);
 

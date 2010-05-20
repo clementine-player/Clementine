@@ -31,8 +31,23 @@ PlaylistBackend::PlaylistBackend(Database* db, QObject* parent)
 }
 
 PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
-  qWarning() << "Not implemented:" << __PRETTY_FUNCTION__;
-  return PlaylistList();
+  QSqlDatabase db(db_->Connect());
+
+  PlaylistList ret;
+
+  QSqlQuery q("SELECT ROWID, name FROM playlists", db);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return ret;
+
+  while (q.next()) {
+    Playlist p;
+    p.id = q.value(0).toInt();
+    p.name = q.value(1).toString();
+    ret << p;
+  }
+
+  return ret;
 }
 
 PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
@@ -104,4 +119,47 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items) 
   }
 
   transaction.Commit();
+}
+
+int PlaylistBackend::CreatePlaylist(const QString &name) {
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("INSERT INTO playlists (name) VALUES (:name)", db);
+  q.bindValue(":name", name);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return -1;
+
+  return q.lastInsertId().toInt();
+}
+
+void PlaylistBackend::RemovePlaylist(int id) {
+  QSqlDatabase db(db_->Connect());
+  QSqlQuery delete_playlist("DELETE FROM playlists WHERE ROWID=:id", db);
+  QSqlQuery delete_items("DELETE FROM playlist_items WHERE playlist=:id", db);
+
+  delete_playlist.bindValue(":id", id);
+  delete_items.bindValue(":id", id);
+
+  ScopedTransaction transaction(&db);
+
+  delete_playlist.exec();
+  if (db_->CheckErrors(delete_playlist.lastError()))
+    return;
+
+  delete_items.exec();
+  if (db_->CheckErrors(delete_items.lastError()))
+    return;
+
+  transaction.Commit();
+}
+
+void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
+  QSqlDatabase db(db_->Connect());
+  QSqlQuery q("UPDATE playlists SET name=:name WHERE ROWID=:id", db);
+  q.bindValue(":name", new_name);
+  q.bindValue(":id", id);
+
+  q.exec();
+  db_->CheckErrors(q.lastError());
 }

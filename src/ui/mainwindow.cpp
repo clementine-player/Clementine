@@ -33,6 +33,7 @@
 #include "library/library.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlistview.h"
 #include "playlist/songplaylistitem.h"
@@ -104,8 +105,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     database_(new Database(this)),
     radio_model_(new RadioModel(database_, network, this)),
     playlist_backend_(new PlaylistBackend(database_, this)),
-    playlist_(new Playlist(playlist_backend_, this)),
-    player_(new Player(playlist_, radio_model_->GetLastFMService(), engine, this)),
+    playlists_(new PlaylistManager(this)),
+    player_(new Player(playlists_, radio_model_->GetLastFMService(), engine, this)),
     library_(new Library(database_, this)),
     global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog),
@@ -142,10 +143,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
-  playlist_->IgnoreSorting(true);
-  ui_->playlist->view()->setModel(playlist_);
-  ui_->playlist->view()->SetItemDelegates(library_->model()->backend());
-  playlist_->IgnoreSorting(false);
+  ui_->playlist->SetManager(playlists_);
 
   ui_->library_view->setModel(library_sort_model_);
   ui_->library_view->SetLibrary(library_->model());
@@ -197,7 +195,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
   connect(ui_->action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
-  connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlist_, SLOT(Clear()));
+  connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlists_, SLOT(ClearCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()), SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
@@ -205,7 +203,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
   connect(ui_->action_configure, SIGNAL(triggered()), settings_dialog_.get(), SLOT(show()));
   connect(ui_->action_about, SIGNAL(triggered()), about_dialog_.get(), SLOT(show()));
-  connect(ui_->action_shuffle, SIGNAL(triggered()), playlist_, SLOT(Shuffle()));
+  connect(ui_->action_shuffle, SIGNAL(triggered()), playlists_, SLOT(ShuffleCurrent()));
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
@@ -245,9 +243,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
 
-  connect(player_, SIGNAL(Paused()), playlist_, SLOT(Paused()));
-  connect(player_, SIGNAL(Playing()), playlist_, SLOT(Playing()));
-  connect(player_, SIGNAL(Stopped()), playlist_, SLOT(Stopped()));
+  connect(player_, SIGNAL(Paused()), playlists_, SLOT(SetActivePaused()));
+  connect(player_, SIGNAL(Playing()), playlists_, SLOT(SetActivePlaying()));
+  connect(player_, SIGNAL(Stopped()), playlists_, SLOT(SetActiveStopped()));
 
   connect(player_, SIGNAL(Paused()), ui_->playlist->view(), SLOT(StopGlowing()));
   connect(player_, SIGNAL(Playing()), ui_->playlist->view(), SLOT(StartGlowing()));
@@ -259,10 +257,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
-  connect(playlist_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
-  connect(playlist_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
-  connect(playlist_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
-  connect(playlist_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
+  connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
+  connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -290,23 +288,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), SLOT(ReloadSettings()));
 
   // Playlist menu
-  QAction* playlist_undo = playlist_->undo_stack()->createUndoAction(this);
-  QAction* playlist_redo = playlist_->undo_stack()->createRedoAction(this);
-  playlist_undo->setIcon(IconLoader::Load("edit-undo"));
-  playlist_undo->setShortcut(QKeySequence::Undo);
-  playlist_redo->setIcon(IconLoader::Load("edit-redo"));
-  playlist_redo->setShortcut(QKeySequence::Redo);
-  addAction(playlist_undo); // These seem to be required to get the keyboard
-  addAction(playlist_redo); // shortcuts to work
-
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_->action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(IconLoader::Load("media-playback-stop"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
-  playlist_menu_->addAction(playlist_undo);
-  playlist_menu_->addAction(playlist_redo);
-  playlist_menu_->addSeparator();
+  playlist_undoredo_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_edit_track);
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
@@ -315,12 +302,15 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
 
+  connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
+          SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
+
   // Radio connections
   connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
-  connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlist_, SLOT(SetStreamMetadata(QUrl,Song)));
+  connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
   connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList)), SLOT(InsertRadioItems(PlaylistItemList)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
@@ -392,7 +382,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
       equalizer_->preamp_value(), equalizer_->gain_values());
 
   // Statusbar widgets
-  playlist_->set_sequence(playlist_sequence_);
   ui_->statusBar->addPermanentWidget(playlist_sequence_);
   ui_->statusBar->addPermanentWidget(track_slider_);
   ui_->statusBar->addWidget(multi_loading_indicator_);
@@ -401,6 +390,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
+
+  // Load playlists
+  playlists_->Init(library_->backend(), playlist_backend_, playlist_sequence_);
 
   // Load settings
   settings_.beginGroup(kSettingsGroup);
@@ -479,9 +471,9 @@ void MainWindow::FilesDoubleClicked(const QList<QUrl>& urls) {
 
 void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
   if (clear_first)
-    playlist_->Clear();
+    playlists_->ClearCurrent();
 
-  QModelIndex playlist_index = playlist_->InsertPaths(urls);
+  QModelIndex playlist_index = playlists_->current()->InsertPaths(urls);
 
   if (playlist_index.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(playlist_index.row(), Engine::First, true);
@@ -529,9 +521,9 @@ void MainWindow::MediaPlaying() {
   ui_->action_play_pause->setText(tr("Pause"));
 
   ui_->action_play_pause->setEnabled(
-      ! (player_->GetCurrentItemOptions() & PlaylistItem::PauseDisabled));
+      ! (player_->GetCurrentItem()->options() & PlaylistItem::PauseDisabled));
 
-  bool is_lastfm = (player_->GetCurrentItemOptions() & PlaylistItem::LastFMControls);
+  bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   LastFMService* lastfm = radio_model_->GetLastFMService();
 
   ui_->action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
@@ -549,7 +541,7 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (!player_->GetState() == Engine::Idle)
     return;
 
-  bool is_lastfm = (player_->GetCurrentItemOptions() & PlaylistItem::LastFMControls);
+  bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   ui_->action_ban->setEnabled(value && is_lastfm);
   ui_->action_love->setEnabled(value);
 }
@@ -594,10 +586,10 @@ void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& i
     idx = library_sort_model_->mapToSource(idx);
 
   if (clear_first)
-    playlist_->Clear();
+    playlists_->ClearCurrent();
 
-  QModelIndex first_song =
-      playlist_->InsertLibraryItems(library_->model()->GetChildSongs(idx));
+  QModelIndex first_song = playlists_->current()->InsertLibraryItems(
+      library_->model()->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), Engine::First, true);
@@ -630,7 +622,7 @@ void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {
 }
 
 void MainWindow::StopAfterCurrent() {
-  playlist_->StopAfter(playlist_->current_index());
+  playlists_->current()->StopAfter(playlists_->current()->current_index());
 }
 
 /**
@@ -671,7 +663,7 @@ void MainWindow::FilePathChanged(const QString& path) {
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
-  const int length = player_->GetCurrentItem().length();
+  const int length = player_->GetCurrentItem()->Metadata().length();
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
@@ -683,10 +675,10 @@ void MainWindow::UpdateTrackPosition() {
   // Time to scrobble?
   LastFMService* lastfm = radio_model_->GetLastFMService();
 
-  if (!playlist_->has_scrobbled() &&
-      position >= playlist_->scrobble_point()) {
+  if (!playlists_->active()->has_scrobbled() &&
+      position >= playlists_->active()->scrobble_point()) {
     lastfm->Scrobble();
-    playlist_->set_scrobbled(true);
+    playlists_->active()->set_scrobbled(true);
   }
 
   // Update the slider
@@ -705,22 +697,22 @@ void MainWindow::Love() {
 
 void MainWindow::RadioDoubleClick(const QModelIndex& index) {
   if (autoclear_playlist_)
-    playlist_->Clear();
+    playlists_->ClearCurrent();
 
   scoped_ptr<QMimeData> data(
       radio_model_->merged_model()->mimeData(QModelIndexList() << index));
   if (!data)
     return;
 
-  playlist_->dropMimeData(data.get(), Qt::CopyAction, -1, 0, QModelIndex());
+  playlists_->current()->dropMimeData(data.get(), Qt::CopyAction, -1, 0, QModelIndex());
 
-  QModelIndex first_song = playlist_->index(0, 0);
+  QModelIndex first_song = playlists_->current()->index(0, 0);
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), Engine::First, true);
 }
 
 void MainWindow::InsertRadioItem(RadioItem* item) {
-  QModelIndex first_song = playlist_->InsertRadioStations(
+  QModelIndex first_song = playlists_->current()->InsertRadioStations(
       QList<RadioItem*>() << item);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
@@ -728,7 +720,7 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
 }
 
 void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
-  QModelIndex first_song = playlist_->InsertItems(items);
+  QModelIndex first_song = playlists_->current()->InsertItems(items);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing)
     player_->PlayAt(first_song.row(), Engine::First, true);
@@ -737,7 +729,7 @@ void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
   playlist_menu_index_ = index;
 
-  if (playlist_->current_index() == index.row() && player_->GetState() == Engine::Playing) {
+  if (playlists_->current()->current_index() == index.row() && player_->GetState() == Engine::Playing) {
     playlist_play_pause_->setText(tr("Pause"));
     playlist_play_pause_->setIcon(IconLoader::Load("media-playback-pause"));
   } else {
@@ -747,8 +739,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   if (index.isValid()) {
     playlist_play_pause_->setEnabled(
-        playlist_->current_index() != index.row() ||
-        ! (playlist_->item_at(index.row())->options() & PlaylistItem::PauseDisabled));
+        playlists_->current()->current_index() != index.row() ||
+        ! (playlists_->current()->item_at(index.row())->options() & PlaylistItem::PauseDisabled));
   } else {
     playlist_play_pause_->setEnabled(false);
   }
@@ -761,7 +753,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
       continue;
-    if (playlist_->item_at(index.row())->Metadata().IsEditable()) {
+    if (playlists_->current()->item_at(index.row())->Metadata().IsEditable()) {
       editable++;
     }
   }
@@ -786,7 +778,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
         ui_->action_edit_value->isVisible() && editable);
 
     QString column_name = Playlist::column_name(column);
-    QString column_value = playlist_->data(index).toString();
+    QString column_value = playlists_->current()->data(index).toString();
     if (column_value.length() > 25)
       column_value = column_value.left(25) + "...";
 
@@ -799,7 +791,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 }
 
 void MainWindow::PlaylistPlay() {
-  if (playlist_->current_index() == playlist_menu_index_.row()) {
+  if (playlists_->current()->current_index() == playlist_menu_index_.row()) {
     player_->PlayPause();
   } else {
     player_->PlayAt(playlist_menu_index_.row(), Engine::Manual, true);
@@ -807,7 +799,7 @@ void MainWindow::PlaylistPlay() {
 }
 
 void MainWindow::PlaylistStopAfter() {
-  playlist_->StopAfter(playlist_menu_index_.row());
+  playlists_->current()->StopAfter(playlist_menu_index_.row());
 }
 
 void MainWindow::EditTracks() {
@@ -818,7 +810,7 @@ void MainWindow::EditTracks() {
            ui_->playlist->view()->selectionModel()->selection().indexes()) {
     if (index.column() != 0)
       continue;
-    Song song = playlist_->item_at(index.row())->Metadata();
+    Song song = playlists_->current()->item_at(index.row())->Metadata();
 
     if (song.IsEditable()) {
       songs << song;
@@ -832,7 +824,7 @@ void MainWindow::EditTracks() {
   if (edit_tag_dialog_->exec() == QDialog::Rejected)
     return;
 
-  playlist_->ReloadItems(rows);
+  playlists_->current()->ReloadItems(rows);
 }
 
 void MainWindow::RenumberTracks() {
@@ -844,7 +836,7 @@ void MainWindow::RenumberTracks() {
 
   // if first selected song has a track number set, start from that offset
   if (indexes.size()) {
-    Song first_song=playlist_->item_at(indexes[0].row())->Metadata();
+    Song first_song=playlists_->current()->item_at(indexes[0].row())->Metadata();
     if (int first_track = first_song.track())
       track = first_track;
   }
@@ -854,12 +846,12 @@ void MainWindow::RenumberTracks() {
       continue;
 
     int row = index.row();
-    Song song = playlist_->item_at(row)->Metadata();
+    Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (song.IsEditable()) {
       song.set_track(track);
       song.Save();
-      playlist_->item_at(row)->Reload();
+      playlists_->current()->item_at(row)->Reload();
     }
     track++;
   }
@@ -867,7 +859,7 @@ void MainWindow::RenumberTracks() {
 
 void MainWindow::SelectionSetValue() {
   Playlist::Column column = (Playlist::Column)playlist_menu_index_.column();
-  QVariant column_value = playlist_->data(playlist_menu_index_);
+  QVariant column_value = playlists_->current()->data(playlist_menu_index_);
 
   QModelIndexList indexes=ui_->playlist->view()->selectionModel()->selection().indexes();
   foreach (const QModelIndex& index, indexes) {
@@ -875,11 +867,11 @@ void MainWindow::SelectionSetValue() {
       continue;
 
     int row = index.row();
-    Song song = playlist_->item_at(row)->Metadata();
+    Song song = playlists_->current()->item_at(row)->Metadata();
 
     if(Playlist::set_column_value(song, column, column_value)) {
       song.Save();
-      playlist_->item_at(row)->Reload();
+      playlists_->current()->item_at(row)->Reload();
     }
   }
 }
@@ -920,13 +912,13 @@ void MainWindow::AddFile() {
       file.open(QIODevice::ReadOnly);
       M3UParser parser(&file, info.dir());
       const SongList& songs = parser.Parse();
-      playlist_->InsertSongs(songs);
+      playlists_->current()->InsertSongs(songs);
     } else if (path.endsWith(".xspf") || path.endsWith(".xml")) {
       QFile file(path);
       file.open(QIODevice::ReadOnly);
       XSPFParser parser(&file);
       const SongList& songs = parser.Parse();
-      playlist_->InsertSongs(songs);
+      playlists_->current()->InsertSongs(songs);
     } else {
       QUrl url(QUrl::fromLocalFile(path));
       if (url.scheme().isEmpty())
@@ -934,7 +926,7 @@ void MainWindow::AddFile() {
       urls << url;
     }
   }
-  playlist_->InsertPaths(urls);
+  playlists_->current()->InsertPaths(urls);
 }
 
 void MainWindow::AddFolder() {
@@ -953,7 +945,7 @@ void MainWindow::AddFolder() {
   QUrl url(QUrl::fromLocalFile(directory));
   if (url.scheme().isEmpty())
     url.setScheme("file");
-  playlist_->InsertPaths(QList<QUrl>() << url);
+  playlists_->current()->InsertPaths(QList<QUrl>() << url);
 }
 
 void MainWindow::AddStream() {
@@ -964,7 +956,7 @@ void MainWindow::AddStreamAccepted() {
   QList<QUrl> urls;
   urls << add_stream_dialog_->url();
 
-  playlist_->InsertStreamUrls(urls);
+  playlists_->current()->InsertStreamUrls(urls);
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
@@ -1022,11 +1014,11 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   switch (options.url_list_action()) {
     case CommandlineOptions::UrlList_Load:
-      playlist_->Clear();
+      playlists_->ClearCurrent();
 
       // fallthrough
     case CommandlineOptions::UrlList_Append:
-      playlist_->InsertPaths(options.urls(), -1);
+      playlists_->current()->InsertPaths(options.urls(), -1);
       break;
   }
 
@@ -1066,4 +1058,9 @@ void MainWindow::CheckForUpdates() {
 #ifdef Q_OS_DARWIN
   mac::CheckForUpdates();
 #endif
+}
+
+void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
+  playlist_menu_->insertAction(playlist_undoredo_, undo);
+  playlist_menu_->insertAction(playlist_undoredo_, redo);
 }

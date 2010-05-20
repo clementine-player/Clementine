@@ -47,7 +47,7 @@ class Playlist : public QAbstractListModel {
   friend class PlaylistUndoCommands::MoveItems;
 
  public:
-  Playlist(PlaylistBackend* backend,
+  Playlist(PlaylistBackend* backend, int id,
            QObject* parent = 0, SettingsProvider* settings = NULL);
   ~Playlist();
 
@@ -98,6 +98,7 @@ class Playlist : public QAbstractListModel {
   void Restore();
 
   // Accessors
+  int id() const { return id_; }
   int current_index() const;
   int last_played_index() const;
   int next_index() const;
@@ -185,6 +186,7 @@ class Playlist : public QAbstractListModel {
   boost::scoped_ptr<SettingsProvider> settings_;
 
   PlaylistBackend* backend_;
+  int id_;
 
   PlaylistItemList items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order

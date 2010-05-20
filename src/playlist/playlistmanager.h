@@ -1,0 +1,102 @@
+/* This file is part of Clementine.
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef PLAYLISTMANAGER_H
+#define PLAYLISTMANAGER_H
+
+#include <QObject>
+
+class LibraryBackend;
+class Playlist;
+class PlaylistBackend;
+class PlaylistSequence;
+class Song;
+
+class QModelIndex;
+class QUrl;
+
+class PlaylistManager : public QObject {
+  Q_OBJECT
+
+public:
+  PlaylistManager(QObject *parent = 0);
+
+  int current_index() const { return current_; }
+  int active_index() const { return active_; }
+
+  Playlist* playlist(int index) const { return playlists_[index].p; }
+  Playlist* current() const { return playlist(current_index()); }
+  Playlist* active() const { return playlist(active_index()); }
+
+  QString name(int index) const { return playlists_[index].name; }
+
+  void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
+            PlaylistSequence* sequence);
+
+  LibraryBackend* library_backend() const { return library_backend_; }
+  PlaylistBackend* playlist_backend() const { return playlist_backend_; }
+  PlaylistSequence* sequence() const { return sequence_; }
+
+public slots:
+  void New(const QString& name);
+  void Load(const QString& filename);
+  void Save(int index, const QString& filename);
+  void Rename(int index, const QString& new_name);
+  void Remove(int index);
+
+  void SetCurrentPlaylist(int index);
+  void SetActivePlaylist(int index);
+
+  // Convenience slots that defer to either current() or active()
+  void ClearCurrent();
+  void ShuffleCurrent();
+  void SetActivePlaying();
+  void SetActivePaused();
+  void SetActiveStopped();
+  void SetActiveStreamMetadata(const QUrl& url, const Song& song);
+
+signals:
+  void PlaylistAdded(int index, const QString& name);
+  void PlaylistRemoved(int index);
+  void PlaylistRenamed(int index, const QString& new_name);
+  void CurrentChanged(Playlist* new_playlist);
+  void ActiveChanged(Playlist* new_playlist);
+
+  // Forwarded from individual playlists
+  void CurrentSongChanged(const Song& song);
+  void PlaylistChanged();
+  void EditingFinished(const QModelIndex& index);
+
+private:
+  Playlist* AddPlaylist(int id, const QString& name);
+
+private:
+  struct Data {
+    Data(Playlist* _p, const QString& _name) : p(_p), name(_name) {}
+    Playlist* p;
+    QString name;
+  };
+
+  PlaylistBackend* playlist_backend_;
+  LibraryBackend* library_backend_;
+  PlaylistSequence* sequence_;
+
+  QList<Data> playlists_;
+  int current_;
+  int active_;
+};
+
+#endif // PLAYLISTMANAGER_H

@@ -15,12 +15,18 @@
 */
 
 #include "playlistcontainer.h"
+#include "playlistmanager.h"
 #include "ui_playlistcontainer.h"
 #include "ui/iconloader.h"
 
+#include <QUndoStack>
+#include <QInputDialog>
+
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
-    ui_(new Ui_PlaylistContainer)
+    ui_(new Ui_PlaylistContainer),
+    undo_(NULL),
+    redo_(NULL)
 {
   ui_->setupUi(this);
 
@@ -31,13 +37,9 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   ui_->tab_bar->setExpanding(false);
   ui_->tab_bar->setMovable(true);
   ui_->tab_bar->setShape(QTabBar::RoundedSouth);
-  ui_->tab_bar->addTab("foo");
-  ui_->tab_bar->addTab("bar");
 
   // Connections
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
-  connect(ui_->tab_bar, SIGNAL(Rename(int,QString)), SIGNAL(Rename(int,QString)));
-  connect(ui_->tab_bar, SIGNAL(Remove(int)), SIGNAL(Remove(int)));
 }
 
 PlaylistContainer::~PlaylistContainer() {
@@ -55,9 +57,84 @@ void PlaylistContainer::SetActions(
   ui_->load->setDefaultAction(load_playlist);
 
   ui_->tab_bar->SetActions(new_playlist, save_playlist, load_playlist);
+
+  connect(new_playlist, SIGNAL(triggered()), SLOT(New()));
+  connect(save_playlist, SIGNAL(triggered()), SLOT(Save()));
+  connect(load_playlist, SIGNAL(triggered()), SLOT(Load()));
 }
 
 void PlaylistContainer::ClearFilter() {
   ui_->filter->clear();
   ui_->filter->setFocus();
+}
+
+void PlaylistContainer::SetManager(PlaylistManager *manager) {
+  manager_ = manager;
+
+  connect(ui_->tab_bar, SIGNAL(currentChanged(int)),
+          manager, SLOT(SetCurrentPlaylist(int)));
+  connect(ui_->tab_bar, SIGNAL(Rename(int,QString)),
+          manager, SLOT(Rename(int,QString)));
+  connect(ui_->tab_bar, SIGNAL(Remove(int)),
+          manager, SLOT(Remove(int)));
+
+  connect(manager, SIGNAL(CurrentChanged(Playlist*)),
+          SLOT(SetViewModel(Playlist*)));
+  connect(manager, SIGNAL(PlaylistAdded(int,QString)),
+          SLOT(PlaylistAdded(int,QString)));
+  connect(manager, SIGNAL(PlaylistRemoved(int)),
+          SLOT(PlaylistRemoved(int)));
+  connect(manager, SIGNAL(PlaylistRenamed(int,QString)),
+          SLOT(PlaylistRenamed(int,QString)));
+}
+
+void PlaylistContainer::SetViewModel(Playlist* playlist) {
+  playlist->IgnoreSorting(true);
+  view()->setModel(playlist);
+  view()->SetItemDelegates(manager_->library_backend());
+  playlist->IgnoreSorting(false);
+
+  delete undo_;
+  delete redo_;
+  undo_ = playlist->undo_stack()->createUndoAction(this);
+  redo_ = playlist->undo_stack()->createRedoAction(this);
+  undo_->setIcon(IconLoader::Load("edit-undo"));
+  undo_->setShortcut(QKeySequence::Undo);
+  redo_->setIcon(IconLoader::Load("edit-redo"));
+  redo_->setShortcut(QKeySequence::Redo);
+
+  ui_->undo->setDefaultAction(undo_);
+  ui_->redo->setDefaultAction(redo_);
+
+  emit UndoRedoActionsChanged(undo_, redo_);
+}
+
+void PlaylistContainer::PlaylistAdded(int index, const QString &name) {
+  ui_->tab_bar->insertTab(index, name);
+}
+
+void PlaylistContainer::PlaylistRemoved(int index) {
+  ui_->tab_bar->removeTab(index);
+}
+
+void PlaylistContainer::PlaylistRenamed(int index, const QString &new_name) {
+  ui_->tab_bar->setTabText(index, new_name);
+}
+
+void PlaylistContainer::New() {
+  QString name = QInputDialog::getText(this, tr("New playlist"),
+                                       tr("Enter a name for the new playlist"),
+                                       QLineEdit::Normal, tr("Playlist"));
+  if (name.isNull())
+    return;
+
+  manager_->New(name);
+}
+
+void PlaylistContainer::Load() {
+
+}
+
+void PlaylistContainer::Save() {
+
 }

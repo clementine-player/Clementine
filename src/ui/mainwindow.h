@@ -27,7 +27,7 @@
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
 
-class Playlist;
+class PlaylistManager;
 class Player;
 class Library;
 class PlaylistBackend;
@@ -102,6 +102,7 @@ class MainWindow : public QMainWindow {
   void RenumberTracks();
   void SelectionSetValue();
   void EditValue();
+  void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
 
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
@@ -160,7 +161,7 @@ class MainWindow : public QMainWindow {
   Database* database_;
   RadioModel* radio_model_;
   PlaylistBackend* playlist_backend_;
-  Playlist* playlist_;
+  PlaylistManager* playlists_;
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
@@ -175,6 +176,7 @@ class MainWindow : public QMainWindow {
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;
   QAction* playlist_stop_after_;
+  QAction* playlist_undoredo_;
   QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;

@@ -47,11 +47,12 @@ using boost::shared_ptr;
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kSettingsGroup = "Playlist";
 
-Playlist::Playlist(PlaylistBackend* backend,
+Playlist::Playlist(PlaylistBackend* backend, int id,
                    QObject *parent, SettingsProvider* settings)
   : QAbstractListModel(parent),
     settings_(settings ? settings : new DefaultSettingsProvider),
     backend_(backend),
+    id_(id),
     current_is_paused_(false),
     current_virtual_index_(-1),
     is_shuffled_(false),
@@ -791,7 +792,7 @@ void Playlist::Save() const {
   if (!backend_)
     return;
 
-  backend_->SavePlaylistAsync(1, items_);
+  backend_->SavePlaylistAsync(id_, items_);
 
   settings_->setValue("last_index", last_played_index());
 }
@@ -803,7 +804,7 @@ void Playlist::Restore() {
   items_.clear();
   virtual_items_.clear();
 
-  items_ = backend_->GetPlaylistItems(1);
+  items_ = backend_->GetPlaylistItems(id_);
 
   for (int i=0 ; i<items_.count() ; ++i) {
     virtual_items_ << i;

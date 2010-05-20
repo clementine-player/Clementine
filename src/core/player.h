@@ -24,7 +24,7 @@
 #include "engines/engine_fwd.h"
 #include "playlist/playlistitem.h"
 
-class Playlist;
+class PlaylistManager;
 class Settings;
 class LastFMService;
 
@@ -52,7 +52,8 @@ class Player : public QObject {
   Q_OBJECT
 
  public:
-  Player(Playlist* playlist, LastFMService* lastfm, Engine::Type engine, QObject* parent = 0);
+  Player(PlaylistManager* playlists, LastFMService* lastfm, Engine::Type engine,
+         QObject* parent = 0);
 
   EngineBase* createEngine(Engine::Type engine);
   void Init();
@@ -61,8 +62,7 @@ class Player : public QObject {
   Engine::State GetState() const;
   int GetVolume() const;
 
-  PlaylistItem::Options GetCurrentItemOptions() const { return current_item_options_; }
-  Song GetCurrentItem() const { return current_item_; }
+  boost::shared_ptr<PlaylistItem> GetCurrentItem() const { return current_item_; }
 
   // MPRIS
   enum DBusCaps {
@@ -165,12 +165,11 @@ class Player : public QObject {
  private:
   QVariantMap GetMetadata(const PlaylistItem& item) const;
 
-  Playlist* playlist_;
+  PlaylistManager* playlists_;
   LastFMService* lastfm_;
   QSettings settings_;
 
-  PlaylistItem::Options current_item_options_;
-  Song current_item_;
+  boost::shared_ptr<PlaylistItem> current_item_;
 
   EngineBase* engine_;
   Engine::TrackChangeType stream_change_type_;

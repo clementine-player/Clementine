@@ -21,6 +21,8 @@
 
 class Ui_PlaylistContainer;
 
+class Playlist;
+class PlaylistManager;
 class PlaylistView;
 
 class PlaylistContainer : public QWidget {
@@ -32,18 +34,34 @@ public:
 
   void SetActions(QAction* new_playlist, QAction* save_playlist,
                   QAction* load_playlist);
+  void SetManager(PlaylistManager* manager);
 
   PlaylistView* view() const;
 
 signals:
+  void TabChanged(int index);
   void Rename(int index, const QString& new_name);
   void Remove(int index);
 
+  void UndoRedoActionsChanged(QAction* undo, QAction* redo);
+
 private slots:
   void ClearFilter();
+  void New();
+  void Load();
+  void Save();
+
+  void SetViewModel(Playlist* playlist);
+  void PlaylistAdded(int index, const QString& name);
+  void PlaylistRemoved(int index);
+  void PlaylistRenamed(int index, const QString& new_name);
 
 private:
   Ui_PlaylistContainer* ui_;
+
+  PlaylistManager* manager_;
+  QAction* undo_;
+  QAction* redo_;
 };
 
 #endif // PLAYLISTCONTAINER_H

@@ -18,6 +18,8 @@
 #include "player.h"
 #include "engines/enginebase.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistitem.h"
+#include "playlist/playlistmanager.h"
 #include "radio/lastfmservice.h"
 
 #ifdef HAVE_GSTREAMER
@@ -68,11 +70,11 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
 }
 #endif
 
-Player::Player(Playlist* playlist, LastFMService* lastfm, Engine::Type engine, QObject* parent)
+Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
+               Engine::Type engine, QObject* parent)
   : QObject(parent),
-    playlist_(playlist),
+    playlists_(playlists),
     lastfm_(lastfm),
-    current_item_options_(PlaylistItem::Default),
     stream_change_type_(Engine::First)
 {
   engine_ = createEngine(engine);
@@ -151,18 +153,17 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
 
   case PlaylistItem::SpecialLoadResult::TrackAvailable: {
     // Might've been an async load, so check we're still on the same item
-    int current_index = playlist_->current_index();
+    int current_index = playlists_->active()->current_index();
     if (current_index == -1)
       return;
 
-    shared_ptr<PlaylistItem> item = playlist_->item_at(current_index);
+    shared_ptr<PlaylistItem> item = playlists_->active()->item_at(current_index);
     if (!item || item->Url() != result.original_url_)
       return;
 
     engine_->Play(result.media_url_, stream_change_type_);
 
-    current_item_ = item->Metadata();
-    current_item_options_ = item->options();
+    current_item_ = item;
     loading_async_ = QUrl();
     break;
   }
@@ -179,13 +180,13 @@ void Player::Next() {
 }
 
 void Player::NextInternal(Engine::TrackChangeType change) {
-  if (playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+  if (playlists_->active()->current_item()->options() & PlaylistItem::ContainsMultipleTracks) {
     // The next track is already being loaded
-    if (playlist_->current_item()->Url() == loading_async_)
+    if (playlists_->active()->current_item()->Url() == loading_async_)
       return;
 
     stream_change_type_ = change;
-    HandleSpecialLoad(playlist_->current_item()->LoadNext());
+    HandleSpecialLoad(playlists_->active()->current_item()->LoadNext());
     return;
   }
 
@@ -193,8 +194,8 @@ void Player::NextInternal(Engine::TrackChangeType change) {
 }
 
 void Player::NextItem(Engine::TrackChangeType change) {
-  int i = playlist_->next_index();
-  playlist_->set_current_index(i);
+  int i = playlists_->active()->next_index();
+  playlists_->active()->set_current_index(i);
   if (i == -1) {
     emit PlaylistFinished();
     Stop();
@@ -205,7 +206,7 @@ void Player::NextItem(Engine::TrackChangeType change) {
 }
 
 void Player::TrackEnded() {
-  if (playlist_->stop_after_current()) {
+  if (playlists_->active()->stop_after_current()) {
     Stop();
     return;
   }
@@ -222,7 +223,7 @@ void Player::PlayPause() {
 
   case Engine::Playing:
     // We really shouldn't pause last.fm streams
-    if (current_item_options_ & PlaylistItem::PauseDisabled)
+    if (current_item_->options() & PlaylistItem::PauseDisabled)
       break;
 
     qDebug() << "Pausing";
@@ -231,11 +232,11 @@ void Player::PlayPause() {
 
   case Engine::Empty:
   case Engine::Idle: {
-    if (playlist_->rowCount() == 0)
+    if (playlists_->active()->rowCount() == 0)
       break;
 
-             int i = playlist_->current_index();
-    if (i == -1) i = playlist_->last_played_index();
+             int i = playlists_->active()->current_index();
+    if (i == -1) i = playlists_->active()->last_played_index();
     if (i == -1) i = 0;
 
     PlayAt(i, Engine::First, true);
@@ -246,12 +247,13 @@ void Player::PlayPause() {
 
 void Player::Stop() {
   engine_->Stop();
-  playlist_->set_current_index(-1);
+  playlists_->active()->set_current_index(-1);
+  current_item_.reset();
 }
 
 void Player::Previous() {
-  int i = playlist_->previous_index();
-  playlist_->set_current_index(i);
+  int i = playlists_->active()->previous_index();
+  playlists_->active()->set_current_index(i);
   if (i == -1) {
     Stop();
     return;
@@ -292,26 +294,24 @@ Engine::State Player::GetState() const {
 
 void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
   if (reshuffle)
-    playlist_->set_current_index(-1);
-  playlist_->set_current_index(index);
+    playlists_->active()->set_current_index(-1);
+  playlists_->active()->set_current_index(index);
 
-  shared_ptr<PlaylistItem> item = playlist_->item_at(index);
-  current_item_options_ = item->options();
-  current_item_ = item->Metadata();
+  current_item_ = playlists_->active()->item_at(index);
 
-  if (item->options() & PlaylistItem::SpecialPlayBehaviour) {
+  if (current_item_->options() & PlaylistItem::SpecialPlayBehaviour) {
     // It's already loading
-    if (item->Url() == loading_async_)
+    if (current_item_->Url() == loading_async_)
       return;
 
-    HandleSpecialLoad(item->StartLoading());
+    HandleSpecialLoad(current_item_->StartLoading());
   }
   else {
     loading_async_ = QUrl();
-    engine_->Play(item->Url(), change);
+    engine_->Play(current_item_->Url(), change);
 
     if (lastfm_->IsScrobblingEnabled())
-      lastfm_->NowPlaying(item->Metadata());
+      lastfm_->NowPlaying(current_item_->Metadata());
   }
 
   emit CapsChange(GetCaps());
@@ -319,7 +319,6 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
 
 void Player::CurrentMetadataChanged(const Song &metadata) {
   lastfm_->NowPlaying(metadata);
-  current_item_ = metadata;
   emit TrackChange(GetMetadata());
 }
 
@@ -328,11 +327,11 @@ void Player::Seek(int seconds) {
   engine_->Seek(msec);
 
   // If we seek the track we don't want to submit it to last.fm
-  playlist_->set_scrobbled(true);
+  playlists_->active()->set_scrobbled(true);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
-  shared_ptr<PlaylistItem> item = playlist_->current_item();
+  shared_ptr<PlaylistItem> item = playlists_->active()->current_item();
   if (item == NULL)
     return;
 
@@ -343,26 +342,26 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   if (song.title().isEmpty() && song.artist().isEmpty())
     return;
 
-  playlist_->SetStreamMetadata(item->Url(), song);
+  playlists_->active()->SetStreamMetadata(item->Url(), song);
 }
 
 int Player::GetCaps() const {
   int caps = CAN_HAS_TRACKLIST;
-  if (current_item_.is_valid()) { caps |= CAN_PROVIDE_METADATA; }
-  if (GetState() == Engine::Playing && current_item_options_ & PlaylistItem::PauseDisabled) {
+  if (current_item_) { caps |= CAN_PROVIDE_METADATA; }
+  if (GetState() == Engine::Playing && current_item_->options() & PlaylistItem::PauseDisabled) {
     caps |= CAN_PAUSE;
   }
   if (GetState() == Engine::Paused) {
     caps |= CAN_PLAY;
   }
-  if (GetState() != Engine::Empty && current_item_.filetype() != Song::Type_Stream) {
+  if (GetState() != Engine::Empty && current_item_->Metadata().filetype() != Song::Type_Stream) {
     caps |= CAN_SEEK;
   }
-  if (playlist_->next_index() != -1 ||
-      playlist_->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+  if (playlists_->active()->next_index() != -1 ||
+      playlists_->active()->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
     caps |= CAN_GO_NEXT;
   }
-  if (playlist_->previous_index() != -1) {
+  if (playlists_->active()->previous_index() != -1) {
     caps |= CAN_GO_PREV;
   }
   return caps;
@@ -382,11 +381,11 @@ DBusStatus Player::GetStatus() const {
       status.play = DBusStatus::Mpris_Paused;
       break;
   }
-  status.random = playlist_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
-  PlaylistSequence::RepeatMode repeat_mode = playlist_->sequence()->repeat_mode();
+  status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
+  PlaylistSequence::RepeatMode repeat_mode = playlists_->sequence()->repeat_mode();
   status.repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
   status.repeat_playlist = (repeat_mode == PlaylistSequence::Repeat_Album ||
-                           repeat_mode == PlaylistSequence::Repeat_Playlist) ? 1 : 0;
+                            repeat_mode == PlaylistSequence::Repeat_Playlist) ? 1 : 0;
   return status;
 }
 
@@ -420,7 +419,7 @@ QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
 }
 
 QVariantMap Player::GetMetadata() const {
-  shared_ptr<PlaylistItem> item = playlist_->current_item();
+  shared_ptr<PlaylistItem> item = playlists_->active()->current_item();
   if (item) {
     return GetMetadata(*item);
   }
@@ -428,10 +427,10 @@ QVariantMap Player::GetMetadata() const {
 }
 
 QVariantMap Player::GetMetadata(int track) const {
-  if (track >= playlist_->rowCount() || track < 0) {
+  if (track >= playlists_->active()->rowCount() || track < 0) {
     return QVariantMap();
   }
-  const PlaylistItem& item = *(playlist_->item_at(track));
+  const PlaylistItem& item = *(playlists_->active()->item_at(track));
   return GetMetadata(item);
 }
 
@@ -479,12 +478,13 @@ void Player::PositionSet(int x) {
 }
 
 void Player::Repeat(bool enable) {
-  playlist_->sequence()->SetRepeatMode(
+  playlists_->sequence()->SetRepeatMode(
       enable ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
 }
 
 void Player::ShowOSD() {
-  emit ForceShowOSD(current_item_);
+  if (current_item_)
+    emit ForceShowOSD(current_item_->Metadata());
 }
 
 void Player::VolumeDown(int change) {
@@ -509,9 +509,9 @@ int Player::AddTrack(const QString& track, bool play_now) {
   list << url;
   QModelIndex index;
   if (url.scheme() == "file") {
-    index = playlist_->InsertPaths(list, play_now ? playlist_->current_index() + 1 : -1);
+    index = playlists_->active()->InsertPaths(list, play_now ? playlists_->active()->current_index() + 1 : -1);
   } else {
-    index = playlist_->InsertStreamUrls(list, play_now ? playlist_->current_index() + 1: -1);
+    index = playlists_->active()->InsertStreamUrls(list, play_now ? playlists_->active()->current_index() + 1: -1);
   }
 
   if (index.isValid()) {
@@ -524,24 +524,24 @@ int Player::AddTrack(const QString& track, bool play_now) {
 }
 
 void Player::DelTrack(int index) {
-  playlist_->removeRows(index, 1);
+  playlists_->active()->removeRows(index, 1);
 }
 
 int Player::GetCurrentTrack() const {
-  return playlist_->current_index();
+  return playlists_->active()->current_index();
 }
 
 int Player::GetLength() const {
-  return playlist_->rowCount();
+  return playlists_->active()->rowCount();
 }
 
 void Player::SetLoop(bool enable) {
-  playlist_->sequence()->SetRepeatMode(
+  playlists_->active()->sequence()->SetRepeatMode(
       enable ? PlaylistSequence::Repeat_Playlist : PlaylistSequence::Repeat_Off);
 }
 
 void Player::SetRandom(bool enable) {
-  playlist_->sequence()->SetShuffleMode(
+  playlists_->active()->sequence()->SetShuffleMode(
       enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
 }
 
@@ -561,12 +561,13 @@ void Player::TrackAboutToEnd() {
   } else {
     // Crossfade is off, so start preloading the next track so we don't get a
     // gap between songs.
-    if (current_item_options_ & PlaylistItem::ContainsMultipleTracks)
+    if (current_item_->options() & PlaylistItem::ContainsMultipleTracks)
       return;
-    if (playlist_->next_index() == -1)
+    if (playlists_->active()->next_index() == -1)
       return;
 
-    shared_ptr<PlaylistItem> item = playlist_->item_at(playlist_->next_index());
+    shared_ptr<PlaylistItem> item = playlists_->active()->item_at(
+        playlists_->active()->next_index());
     if (!item)
       return;
 
