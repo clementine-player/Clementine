@@ -24,7 +24,6 @@
 
 #include "playlistitem.h"
 #include "playlistsequence.h"
-#include "core/settingsprovider.h"
 #include "core/song.h"
 #include "radio/radioitem.h"
 
@@ -47,8 +46,7 @@ class Playlist : public QAbstractListModel {
   friend class PlaylistUndoCommands::MoveItems;
 
  public:
-  Playlist(PlaylistBackend* backend, int id,
-           QObject* parent = 0, SettingsProvider* settings = NULL);
+  Playlist(PlaylistBackend* backend, int id, QObject* parent = 0);
   ~Playlist();
 
   enum Column {
@@ -83,7 +81,6 @@ class Playlist : public QAbstractListModel {
   };
 
   static const char* kRowsMimetype;
-  static const char* kSettingsGroup;
 
   static bool CompareItems(int column, Qt::SortOrder order,
                            boost::shared_ptr<PlaylistItem> a,
@@ -183,8 +180,6 @@ class Playlist : public QAbstractListModel {
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
 
  private:
-  boost::scoped_ptr<SettingsProvider> settings_;
-
   PlaylistBackend* backend_;
   int id_;
 

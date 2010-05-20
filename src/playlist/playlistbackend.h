@@ -33,19 +33,22 @@ class PlaylistBackend : public QObject {
   struct Playlist {
     int id;
     QString name;
+    int last_played;
   };
   typedef QList<Playlist> PlaylistList;
 
   PlaylistList GetAllPlaylists();
+  Playlist GetPlaylist(int id);
   PlaylistItemList GetPlaylistItems(int playlist);
-  void SavePlaylistAsync(int playlist, const PlaylistItemList& items);
+  void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
+                         int last_played);
 
   int CreatePlaylist(const QString& name);
   void RemovePlaylist(int id);
   void RenamePlaylist(int id, const QString& new_name);
 
  public slots:
-  void SavePlaylist(int playlist, const PlaylistItemList& items);
+  void SavePlaylist(int playlist, const PlaylistItemList& items, int last_played);
 
  private:
   Database* db_;

@@ -35,7 +35,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
 
   PlaylistList ret;
 
-  QSqlQuery q("SELECT ROWID, name FROM playlists", db);
+  QSqlQuery q("SELECT ROWID, name, last_played FROM playlists", db);
   q.exec();
   if (db_->CheckErrors(q.lastError()))
     return ret;
@@ -44,10 +44,31 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
     Playlist p;
     p.id = q.value(0).toInt();
     p.name = q.value(1).toString();
+    p.last_played = q.value(2).toInt();
     ret << p;
   }
 
   return ret;
+}
+
+PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, name, last_played FROM playlists"
+              " WHERE ROWID=:id", db);
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return Playlist();
+
+  q.next();
+
+  Playlist p;
+  p.id = q.value(0).toInt();
+  p.name = q.value(1).toString();
+  p.last_played = q.value(2).toInt();
+
+  return p;
 }
 
 PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
@@ -86,13 +107,16 @@ PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
   return ret;
 }
 
-void PlaylistBackend::SavePlaylistAsync(int playlist, const PlaylistItemList &items) {
+void PlaylistBackend::SavePlaylistAsync(int playlist, const PlaylistItemList &items,
+                                        int last_played) {
   metaObject()->invokeMethod(this, "SavePlaylist", Qt::QueuedConnection,
                              Q_ARG(int, playlist),
-                             Q_ARG(PlaylistItemList, items));
+                             Q_ARG(PlaylistItemList, items),
+                             Q_ARG(int, last_played));
 }
 
-void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items) {
+void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
+                                   int last_played) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery clear("DELETE FROM playlist_items WHERE playlist = :playlist", db);
@@ -100,6 +124,8 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items) 
                    " (playlist, type, library_id, url, title, artist, album,"
                    "  length, radio_service)"
                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", db);
+  QSqlQuery update("UPDATE playlists SET last_played=:last_played"
+                   " WHERE ROWID=:playlist", db);
 
   ScopedTransaction transaction(&db);
 
@@ -117,6 +143,13 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items) 
     insert.exec();
     db_->CheckErrors(insert.lastError());
   }
+
+  // Update the last played track number
+  update.bindValue(":last_played", last_played);
+  update.bindValue(":id", playlist);
+  update.exec();
+  if (db_->CheckErrors(update.lastError()))
+    return;
 
   transaction.Commit();
 }

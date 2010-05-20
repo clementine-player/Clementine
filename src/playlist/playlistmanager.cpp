@@ -102,11 +102,11 @@ void PlaylistManager::Remove(int index) {
 
   playlist_backend_->RemovePlaylist(playlist(index)->id());
 
-  playlists_.takeAt(index);
   if (index == active_)
-    SetActivePlaylist(qMin(0, index-1));
+    SetActivePlaylist(qMax(0, index-1));
   if (index == current_)
-    SetCurrentPlaylist(qMin(0, index-1));
+    SetCurrentPlaylist(qMax(0, index-1));
+  playlists_.takeAt(index);
 
   emit PlaylistRemoved(index);
 }

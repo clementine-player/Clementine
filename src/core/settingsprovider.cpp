@@ -23,6 +23,9 @@ DefaultSettingsProvider::DefaultSettingsProvider() {
 }
 
 void DefaultSettingsProvider::set_group(const char *group) {
+  while (!backend_.group().isEmpty())
+    backend_.endGroup();
+
   backend_.beginGroup(group);
 }
 

@@ -180,7 +180,8 @@ void Player::Next() {
 }
 
 void Player::NextInternal(Engine::TrackChangeType change) {
-  if (playlists_->active()->current_item()->options() & PlaylistItem::ContainsMultipleTracks) {
+  if (playlists_->active()->current_item() &&
+      playlists_->active()->current_item()->options() & PlaylistItem::ContainsMultipleTracks) {
     // The next track is already being loaded
     if (playlists_->active()->current_item()->Url() == loading_async_)
       return;
@@ -232,6 +233,7 @@ void Player::PlayPause() {
 
   case Engine::Empty:
   case Engine::Idle: {
+    playlists_->SetActivePlaylist(playlists_->current_index());
     if (playlists_->active()->rowCount() == 0)
       break;
 

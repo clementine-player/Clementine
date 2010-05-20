@@ -32,7 +32,6 @@
 #include <QtDebug>
 #include <QMimeData>
 #include <QBuffer>
-#include <QSettings>
 #include <QFileInfo>
 #include <QDirIterator>
 #include <QUndoStack>
@@ -45,12 +44,9 @@
 using boost::shared_ptr;
 
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
-const char* Playlist::kSettingsGroup = "Playlist";
 
-Playlist::Playlist(PlaylistBackend* backend, int id,
-                   QObject *parent, SettingsProvider* settings)
+Playlist::Playlist(PlaylistBackend* backend, int id, QObject *parent)
   : QAbstractListModel(parent),
-    settings_(settings ? settings : new DefaultSettingsProvider),
     backend_(backend),
     id_(id),
     current_is_paused_(false),
@@ -62,8 +58,6 @@ Playlist::Playlist(PlaylistBackend* backend, int id,
     ignore_sorting_(false),
     undo_stack_(new QUndoStack(this))
 {
-  settings_->set_group(kSettingsGroup);
-
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
 
@@ -792,9 +786,7 @@ void Playlist::Save() const {
   if (!backend_)
     return;
 
-  backend_->SavePlaylistAsync(id_, items_);
-
-  settings_->setValue("last_index", last_played_index());
+  backend_->SavePlaylistAsync(id_, items_, last_played_index());
 }
 
 void Playlist::Restore() {
@@ -806,13 +798,15 @@ void Playlist::Restore() {
 
   items_ = backend_->GetPlaylistItems(id_);
 
+  PlaylistBackend::Playlist p = backend_->GetPlaylist(id_);
+  last_played_item_index_ =
+      p.last_played == -1 ? QModelIndex() : index(p.last_played);
+
   for (int i=0 ; i<items_.count() ; ++i) {
     virtual_items_ << i;
   };
 
   reset();
-
-  last_played_item_index_ = index(settings_->value("last_index", -1).toInt(), 0, QModelIndex());
 }
 
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
