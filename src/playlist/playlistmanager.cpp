@@ -119,6 +119,12 @@ void PlaylistManager::SetCurrentPlaylist(int index) {
 
 void PlaylistManager::SetActivePlaylist(int index) {
   Q_ASSERT(index >= 0 && index < playlists_.count());
+
+  // Kinda a hack: unset the current item from the old active playlist before
+  // setting the new one
+  if (active_ != -1)
+    active()->set_current_index(-1);
+
   active_ = index;
   emit ActiveChanged(current());
 }
