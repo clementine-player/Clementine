@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
 set(CLEMENTINE-LANGUAGES
+  ar
   cs
   da
   de
@@ -13,6 +14,7 @@ set(CLEMENTINE-LANGUAGES
   it
   kk
   nb
+  oc
   pl
   pt
   pt_BR
@@ -21,6 +23,7 @@ set(CLEMENTINE-LANGUAGES
   sk
   sv
   tr
+  zh_TW
 )
 
 

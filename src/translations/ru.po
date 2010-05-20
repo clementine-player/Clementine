@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-04 13:04+0000\n"
-"PO-Revision-Date: 2010-05-04 14:23+0000\n"
+"POT-Creation-Date: 2010-05-19 17:43+0000\n"
+"PO-Revision-Date: 2010-05-17 05:50+0000\n"
 "Last-Translator: Pavel Maleev <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-05 03:58+0000\n"
+"X-Launchpad-Export-Date: 2010-05-20 05:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 msgid "No analyzer"
@@ -111,13 +111,13 @@ msgid "Pause"
 msgstr "Приостановить"
 
 msgid "Play/Pause"
-msgstr ""
+msgstr "Воспроизведение/Пауза"
 
 msgid "Stop"
 msgstr "Остановить"
 
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "Остановить воспроизведение после текущей композиции"
 
 msgid "Next track"
 msgstr "Следующая композиция"
@@ -126,40 +126,40 @@ msgid "Previous track"
 msgstr "Предыдущая композиция"
 
 msgid "Increase volume"
-msgstr ""
+msgstr "Увеличить громкость"
 
 msgid "Decrease volume"
-msgstr ""
+msgstr "Уменьшить громкость"
 
 msgid "Mute"
-msgstr ""
+msgstr "Выключить звук"
 
 msgid "Seek forward"
-msgstr ""
+msgstr "Перемотка вперед"
 
 msgid "Seek backward"
-msgstr ""
+msgstr "Перемотка назад"
 
 msgid "Add directory..."
 msgstr "Добавить каталог..."
 
 msgid "Show"
-msgstr ""
+msgstr "Показать"
 
 msgid "Group by"
-msgstr ""
+msgstr "Сгруппировать по"
 
 msgid "Configure library..."
 msgstr "Настройки коллекции..."
 
 msgid "Various Artists"
-msgstr "Разные исполнители"
+msgstr "Различные исполнители"
 
 msgid "Unknown"
 msgstr "Неизвестный"
 
 msgid "Load"
-msgstr ""
+msgstr "Загрузить"
 
 msgid "Add to playlist"
 msgstr "Добавить в плейлист"
@@ -192,7 +192,7 @@ msgid "None"
 msgstr "Нет"
 
 msgid "Album"
-msgstr "Альбом"
+msgstr "%n альбом"
 
 msgid "Artist"
 msgstr "Исполнитель"
@@ -235,7 +235,7 @@ msgid "Automatically open single categories in the library tree"
 msgstr "Автоматически открывать одиночные категории в дереве коллекции"
 
 msgid "Double-clicking a song clears the playlist first"
-msgstr ""
+msgstr "Двойной щелчок мышью на композиции стирает плейлист"
 
 msgid "Music Library"
 msgstr "Музыкальная коллекция"
@@ -546,20 +546,20 @@ msgstr "Неизвестная ошибка"
 
 #, qt-format
 msgid "Couldn't load the last.fm radio station: %1"
-msgstr ""
+msgstr "Невозможно загрузить радиостанцию last.fm: %1"
 
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
-msgstr ""
+msgstr "Неизвестная ошибка last.fm: %1"
 
 msgid "Open magnatune.com in browser"
-msgstr ""
+msgstr "Открыть в браузере magnatune.com"
 
 msgid "Refresh catalogue"
-msgstr ""
+msgstr "Обновить каталог"
 
 msgid "Search Magnatune"
-msgstr ""
+msgstr "Искать на Magnatune"
 
 msgid "Radio service couldn't be loaded :-("
 msgstr "Сервис радио не запустился =("
@@ -622,15 +622,15 @@ msgstr "Начать перекодирование"
 
 #, c-format
 msgid "%n remaining"
-msgstr ""
+msgstr "%n осталось"
 
 #, c-format
 msgid "%n finished"
-msgstr ""
+msgstr "%n завершено"
 
 #, c-format
 msgid "%n failed"
-msgstr ""
+msgstr "%n с ошибкой"
 
 msgid "Add files to transcode"
 msgstr "Добавить файлы для перекодирования"
@@ -640,22 +640,24 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
+"Невозможно создать элемент \"%1\" GStreamer - убедитесь, что у вас "
+"установлены все необходимые дополнения GStreamer"
 
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "Успешно записано %1"
 
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "Перекодировано %1 файлов используя %2 тем"
 
 #, qt-format
 msgid "Error processing %1: %2"
-msgstr ""
+msgstr "Ошибка при обработке %1: %2"
 
 #, qt-format
 msgid "Starting %1"
-msgstr ""
+msgstr "Запуск %1"
 
 msgid "Transcode Music"
 msgstr "Перекодировать композиции"
@@ -688,10 +690,10 @@ msgid "Progress"
 msgstr "Ход выполнения"
 
 msgid "Details..."
-msgstr ""
+msgstr "Подробнее..."
 
 msgid "Transcoder Log"
-msgstr ""
+msgstr "Лог перекодировки"
 
 #, qt-format
 msgid "About %1"
@@ -816,15 +818,15 @@ msgstr "Вы действительно хотите удалить настро
 
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "Нажмите комбинацию клавиш для %1..."
 
 #, qt-format
 msgid "Shortcut for %1"
-msgstr ""
+msgstr "Ярлык для %1"
 
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""
+msgstr "Команда \"%1\" не может быть выполнена"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
 msgstr "Композиции (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
@@ -853,7 +855,7 @@ msgid "Add media"
 msgstr "Добавить файлы"
 
 msgid "Add folder"
-msgstr ""
+msgstr "Добавить каталог"
 
 msgid "OSD Preview"
 msgstr "Предпросмотр OSD"
@@ -907,31 +909,31 @@ msgid "Enable equalizer"
 msgstr "Включить эквалайзер"
 
 msgid "Press a key"
-msgstr ""
+msgstr "Нажмите клавишу"
 
 msgid "Configure Shortcuts"
-msgstr ""
+msgstr "Настройка горячих клавиш"
 
 msgid "Use Gnome's shortcut keys"
-msgstr ""
+msgstr "Использовать горячие клавиши Gnome"
 
 msgid "Open..."
-msgstr ""
+msgstr "Открыть..."
 
 msgid "Shortcut"
-msgstr ""
+msgstr "Горячая клавиша"
 
 msgid "&None"
-msgstr ""
+msgstr "&Нет"
 
 msgid "De&fault"
-msgstr ""
+msgstr "По &умолчанию"
 
 msgid "&Custom"
-msgstr ""
+msgstr "&Другой"
 
 msgid "Change shortcut..."
-msgstr ""
+msgstr "Изменить горячую клавишу..."
 
 msgid "Clementine"
 msgstr "Clementine"
@@ -976,7 +978,7 @@ msgid "Shuffle playlist"
 msgstr "Перемешать плейлист"
 
 msgid "Add file..."
-msgstr ""
+msgstr "Добавить файл..."
 
 msgid "Add stream..."
 msgstr "Добавить поток..."
@@ -994,16 +996,16 @@ msgid "Remove from playlist"
 msgstr "Удалить из плейлиста"
 
 msgid "Add folder..."
-msgstr ""
+msgstr "Добавить каталог..."
 
 msgid "Configure global shortcuts..."
-msgstr ""
+msgstr "Настройка глобальных горячий клавиш..."
 
 msgid "Jump to the currently playing track"
-msgstr ""
+msgstr "Перейти к текущей композиции"
 
 msgid "Ctrl+J"
-msgstr ""
+msgstr "Ctrl+J"
 
 msgid "New playlist"
 msgstr ""
@@ -1018,7 +1020,7 @@ msgid "Library"
 msgstr "Коллекция"
 
 msgid "Internet"
-msgstr ""
+msgstr "Интернет"
 
 msgid "Files"
 msgstr "Файлы"
@@ -1175,7 +1177,7 @@ msgid "Loading Last.fm radio"
 msgstr "Загрузка радио Last.fm"
 
 msgid "Downloading Magnatune catalogue"
-msgstr ""
+msgstr "Скачать каталог Magnatune"
 
 #, qt-format
 msgid "disc %1"
@@ -1201,23 +1203,23 @@ msgstr "Громкость %1%"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "Version"
-#~ msgstr "Версия"
-
 #~ msgid "Add media..."
 #~ msgstr "Добавить..."
 
 #~ msgid "Radio"
 #~ msgstr "Радио"
 
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgid "Fadeout"
 #~ msgstr "Затихание"
 
 #~ msgid "No fadeout"
 #~ msgstr "Отключить"
+
+#~ msgid "Version"
+#~ msgstr "Версия"
 
 #~ msgid "Don't show notifications"
 #~ msgstr "Не показывать"
