@@ -56,6 +56,13 @@ private slots:
   void PlaylistRemoved(int index);
   void PlaylistRenamed(int index, const QString& new_name);
 
+  void ActivePlaying();
+  void ActivePaused();
+  void ActiveStopped();
+
+private:
+  void UpdateActiveIcon(const QIcon& icon);
+
 private:
   Ui_PlaylistContainer* ui_;
 

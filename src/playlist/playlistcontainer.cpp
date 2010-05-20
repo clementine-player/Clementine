@@ -109,6 +109,29 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   emit UndoRedoActionsChanged(undo_, redo_);
 }
 
+void PlaylistContainer::ActivePlaying() {
+  UpdateActiveIcon(QIcon(":tiny-start.png"));
+}
+
+void PlaylistContainer::ActivePaused() {
+  UpdateActiveIcon(QIcon(":tiny-pause.png"));
+}
+
+void PlaylistContainer::ActiveStopped() {
+  UpdateActiveIcon(QIcon());
+}
+
+void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
+  // Unset all existing icons
+  for (int i=0 ; i<ui_->tab_bar->count() ; ++i) {
+    ui_->tab_bar->setTabIcon(i, QIcon());
+  }
+
+  // Set our icon
+  if (!icon.isNull())
+    ui_->tab_bar->setTabIcon(manager_->active_index(), icon);
+}
+
 void PlaylistContainer::PlaylistAdded(int index, const QString &name) {
   ui_->tab_bar->insertTab(index, name);
 }

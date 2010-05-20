@@ -250,6 +250,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(Paused()), ui_->playlist->view(), SLOT(StopGlowing()));
   connect(player_, SIGNAL(Playing()), ui_->playlist->view(), SLOT(StartGlowing()));
   connect(player_, SIGNAL(Stopped()), ui_->playlist->view(), SLOT(StopGlowing()));
+  connect(player_, SIGNAL(Paused()), ui_->playlist, SLOT(ActivePaused()));
+  connect(player_, SIGNAL(Playing()), ui_->playlist, SLOT(ActivePlaying()));
+  connect(player_, SIGNAL(Stopped()), ui_->playlist, SLOT(ActiveStopped()));
 
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
