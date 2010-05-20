@@ -44,10 +44,6 @@ void LibraryBackend::UpdateTotalSongCountAsync() {
   metaObject()->invokeMethod(this, "UpdateTotalSongCount", Qt::QueuedConnection);
 }
 
-void LibraryBackend::UpdateCompilationsAsync() {
-  metaObject()->invokeMethod(this, "UpdateCompilations", Qt::QueuedConnection);
-}
-
 void LibraryBackend::LoadDirectories() {
   QSqlDatabase db(db_->Connect());
 

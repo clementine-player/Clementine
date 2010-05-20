@@ -80,8 +80,6 @@ class LibraryBackend : public QObject {
   void AddDirectory(const QString& path);
   void RemoveDirectory(const Directory& dir);
 
-  void UpdateCompilationsAsync();
-
   bool ExecQuery(LibraryQuery* q);
 
  public slots:
