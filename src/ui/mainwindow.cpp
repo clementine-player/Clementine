@@ -34,6 +34,7 @@
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistsequence.h"
+#include "playlist/playlistview.h"
 #include "playlist/songplaylistitem.h"
 #include "radio/lastfmservice.h"
 #include "radio/radiomodel.h"
@@ -142,8 +143,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_sort_model_->sort(0);
 
   playlist_->IgnoreSorting(true);
-  ui_->playlist->setModel(playlist_);
-  ui_->playlist->SetItemDelegates(library_->model()->backend());
+  ui_->playlist->view()->setModel(playlist_);
+  ui_->playlist->view()->SetItemDelegates(library_->model()->backend());
   playlist_->IgnoreSorting(false);
 
   ui_->library_view->setModel(library_sort_model_);
@@ -177,6 +178,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_shuffle_mode->setIcon(IconLoader::Load("media-playlist-shuffle"));
   ui_->action_stop->setIcon(IconLoader::Load("media-playback-stop"));
   ui_->action_stop_after_this_track->setIcon(IconLoader::Load("media-playback-stop"));
+  ui_->action_new_playlist->setIcon(IconLoader::Load("document-new"));
+  ui_->action_load_playlist->setIcon(IconLoader::Load("document-open"));
+  ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
 
   // File view connections
   connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
@@ -210,7 +214,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
   connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
-  connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist, SLOT(JumpToCurrentlyPlayingTrack()));
+  connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
@@ -220,6 +224,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->love_button->setDefaultAction(ui_->action_love);
   ui_->ban_button->setDefaultAction(ui_->action_ban);
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
+  ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
+                            ui_->action_load_playlist);
 
   // Add the shuffle and repeat action groups to the menu
   ui_->action_shuffle_mode->setMenu(playlist_sequence_->shuffle_menu());
@@ -243,9 +249,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(Playing()), playlist_, SLOT(Playing()));
   connect(player_, SIGNAL(Stopped()), playlist_, SLOT(Stopped()));
 
-  connect(player_, SIGNAL(Paused()), ui_->playlist, SLOT(StopGlowing()));
-  connect(player_, SIGNAL(Playing()), ui_->playlist, SLOT(StartGlowing()));
-  connect(player_, SIGNAL(Stopped()), ui_->playlist, SLOT(StopGlowing()));
+  connect(player_, SIGNAL(Paused()), ui_->playlist->view(), SLOT(StopGlowing()));
+  connect(player_, SIGNAL(Playing()), ui_->playlist->view(), SLOT(StartGlowing()));
+  connect(player_, SIGNAL(Stopped()), ui_->playlist->view(), SLOT(StopGlowing()));
 
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
@@ -258,9 +264,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlist_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlist_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
 
-  connect(ui_->playlist, SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
-  connect(ui_->playlist, SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
-  connect(ui_->playlist, SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
+  connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+  connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+  connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
 
   connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
@@ -750,7 +756,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_stop_after_->setEnabled(index.isValid());
 
   // Are any of the selected songs editable?
-  QModelIndexList selection = ui_->playlist->selectionModel()->selection().indexes();
+  QModelIndexList selection = ui_->playlist->view()->selectionModel()->selection().indexes();
   int editable = 0;
   foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
@@ -809,7 +815,7 @@ void MainWindow::EditTracks() {
   QList<int> rows;
 
   foreach (const QModelIndex& index,
-           ui_->playlist->selectionModel()->selection().indexes()) {
+           ui_->playlist->view()->selectionModel()->selection().indexes()) {
     if (index.column() != 0)
       continue;
     Song song = playlist_->item_at(index.row())->Metadata();
@@ -830,7 +836,7 @@ void MainWindow::EditTracks() {
 }
 
 void MainWindow::RenumberTracks() {
-  QModelIndexList indexes=ui_->playlist->selectionModel()->selection().indexes();
+  QModelIndexList indexes=ui_->playlist->view()->selectionModel()->selection().indexes();
   int track=1;
 
   // Get the index list in order
@@ -863,7 +869,7 @@ void MainWindow::SelectionSetValue() {
   Playlist::Column column = (Playlist::Column)playlist_menu_index_.column();
   QVariant column_value = playlist_->data(playlist_menu_index_);
 
-  QModelIndexList indexes=ui_->playlist->selectionModel()->selection().indexes();
+  QModelIndexList indexes=ui_->playlist->view()->selectionModel()->selection().indexes();
   foreach (const QModelIndex& index, indexes) {
     if (index.column() != 0)
       continue;
@@ -879,7 +885,7 @@ void MainWindow::SelectionSetValue() {
 }
 
 void MainWindow::EditValue() {
-  ui_->playlist->edit(playlist_menu_index_);
+  ui_->playlist->view()->edit(playlist_menu_index_);
 }
 
 void MainWindow::LibraryScanStarted() {
@@ -962,7 +968,7 @@ void MainWindow::AddStreamAccepted() {
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
-  ui_->playlist->RemoveSelected();
+  ui_->playlist->view()->RemoveSelected();
 }
 
 

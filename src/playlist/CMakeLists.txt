@@ -5,10 +5,12 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 set(SOURCES
   playlist.cpp
   playlistbackend.cpp
+  playlistcontainer.cpp
   playlistdelegates.cpp
   playlistheader.cpp
   playlistitem.cpp
   playlistsequence.cpp
+  playlisttabbar.cpp
   playlistundocommands.cpp
   playlistview.cpp
   songplaylistitem.cpp
@@ -17,14 +19,17 @@ set(SOURCES
 set(HEADERS
   playlist.h
   playlistbackend.h
+  playlistcontainer.h
   playlistdelegates.h
   playlistheader.h
   playlistsequence.h
+  playlisttabbar.h
   playlistview.h
   songmimedata.h
 )
 
 set(UI
+  playlistcontainer.ui
   playlistsequence.ui
 )
 

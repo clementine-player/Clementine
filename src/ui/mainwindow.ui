@@ -26,46 +26,12 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QFrame" name="frame_2">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="PlaylistView" name="playlist">
-      <property name="acceptDrops">
-       <bool>true</bool>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
-      </property>
-      <property name="dragEnabled">
-       <bool>true</bool>
-      </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::DragDrop</enum>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::ExtendedSelection</enum>
-      </property>
-      <property name="rootIsDecorated">
-       <bool>false</bool>
-      </property>
-      <property name="uniformRowHeights">
-       <bool>true</bool>
-      </property>
-      <property name="itemsExpandable">
-       <bool>false</bool>
-      </property>
-      <property name="sortingEnabled">
-       <bool>true</bool>
-      </property>
-      <property name="allColumnsShowFocus">
-       <bool>true</bool>
+     <widget class="PlaylistContainer" name="playlist" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
      </widget>
     </item>
@@ -405,6 +371,10 @@
     <addaction name="action_shuffle_mode"/>
     <addaction name="action_repeat_mode"/>
     <addaction name="separator"/>
+    <addaction name="action_new_playlist"/>
+    <addaction name="action_save_playlist"/>
+    <addaction name="action_load_playlist"/>
+    <addaction name="separator"/>
     <addaction name="action_jump"/>
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
@@ -605,6 +575,21 @@
     <string>Ctrl+J</string>
    </property>
   </action>
+  <action name="action_new_playlist">
+   <property name="text">
+    <string>New playlist</string>
+   </property>
+  </action>
+  <action name="action_save_playlist">
+   <property name="text">
+    <string>Save playlist...</string>
+   </property>
+  </action>
+  <action name="action_load_playlist">
+   <property name="text">
+    <string>Load playlist...</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -612,11 +597,6 @@
    <class>Amarok::VolumeSlider</class>
    <extends>QSlider</extends>
    <header>widgets/sliderwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>PlaylistView</class>
-   <extends>QTreeView</extends>
-   <header>playlist/playlistview.h</header>
   </customwidget>
   <customwidget>
    <class>LibraryView</class>
@@ -645,6 +625,12 @@
    <class>RadioViewContainer</class>
    <extends>QWidget</extends>
    <header>radio/radioviewcontainer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlaylistContainer</class>
+   <extends>QWidget</extends>
+   <header>playlist/playlistcontainer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

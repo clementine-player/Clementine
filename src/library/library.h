@@ -44,6 +44,7 @@ class Library : public QObject {
   void Init();
   void StartThreads();
 
+  LibraryBackend* backend() const { return backend_; }
   LibraryModel* model() const { return model_; }
 
  private slots:
