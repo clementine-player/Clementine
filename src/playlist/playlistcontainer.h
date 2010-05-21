@@ -26,6 +26,8 @@ class Playlist;
 class PlaylistManager;
 class PlaylistView;
 
+class QTimeLine;
+
 class PlaylistContainer : public QWidget {
   Q_OBJECT
 
@@ -65,6 +67,9 @@ private slots:
 
   void Save();
 
+  void SetTabBarVisible(bool visible);
+  void SetTabBarHeight(int height);
+
 private:
   void UpdateActiveIcon(const QIcon& icon);
 
@@ -77,6 +82,9 @@ private:
 
   QSettings settings_;
   bool starting_up_;
+
+  bool tab_bar_visible_;
+  QTimeLine* tab_bar_animation_;
 };
 
 #endif // PLAYLISTCONTAINER_H

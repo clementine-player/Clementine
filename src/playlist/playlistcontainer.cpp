@@ -22,6 +22,7 @@
 #include <QUndoStack>
 #include <QInputDialog>
 #include <QSettings>
+#include <QTimeLine>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
 
@@ -30,7 +31,9 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     ui_(new Ui_PlaylistContainer),
     undo_(NULL),
     redo_(NULL),
-    starting_up_(true)
+    starting_up_(true),
+    tab_bar_visible_(false),
+    tab_bar_animation_(new QTimeLine(500, this))
 {
   ui_->setupUi(this);
 
@@ -43,6 +46,9 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   ui_->tab_bar->setExpanding(false);
   ui_->tab_bar->setMovable(true);
   ui_->tab_bar->setShape(QTabBar::RoundedSouth);
+
+  connect(tab_bar_animation_, SIGNAL(frameChanged(int)), SLOT(SetTabBarHeight(int)));
+  ui_->tab_bar->setMaximumHeight(0);
 
   // Connections
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
@@ -152,14 +158,32 @@ void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
   ui_->tab_bar->InsertTab(id, index, name);
 
   // Are we startup up, should we select this tab?
-  if (starting_up_ && settings_.value("current_playlist", 0).toInt() == id) {
+  if (starting_up_ && settings_.value("current_playlist", 1).toInt() == id) {
     starting_up_ = false;
     ui_->tab_bar->set_current_id(id);
+  }
+
+  if (ui_->tab_bar->count() > 1) {
+    // Have to do this here because sizeHint() is only valid when there's a
+    // tab in the bar.
+    tab_bar_animation_->setFrameRange(0, ui_->tab_bar->sizeHint().height());
+
+    if (!isVisible()) {
+      // Skip the animation since the window is hidden (eg. if we're still
+      // loading the UI).
+      tab_bar_visible_ = true;
+      ui_->tab_bar->setMaximumHeight(tab_bar_animation_->endFrame());
+    } else {
+      SetTabBarVisible(true);
+    }
   }
 }
 
 void PlaylistContainer::PlaylistRemoved(int id) {
   ui_->tab_bar->RemoveTab(id);
+
+  if (ui_->tab_bar->count() <= 1)
+    SetTabBarVisible(false);
 }
 
 void PlaylistContainer::PlaylistRenamed(int id, const QString &new_name) {
@@ -189,4 +213,17 @@ void PlaylistContainer::Save() {
     return;
 
   settings_.setValue("current_playlist", ui_->tab_bar->current_id());
+}
+
+void PlaylistContainer::SetTabBarVisible(bool visible) {
+  if (tab_bar_visible_ == visible)
+    return;
+  tab_bar_visible_ = visible;
+
+  tab_bar_animation_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
+  tab_bar_animation_->start();
+}
+
+void PlaylistContainer::SetTabBarHeight(int height) {
+  ui_->tab_bar->setMaximumHeight(height);
 }
