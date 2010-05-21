@@ -62,14 +62,14 @@ void PlaylistTabBar::Rename() {
   if (name.isNull())
     return;
 
-  emit Rename(menu_index_, name);
+  emit Rename(tabData(menu_index_).toInt(), name);
 }
 
 void PlaylistTabBar::Remove() {
   if (menu_index_ == -1)
     return;
 
-  emit Remove(menu_index_);
+  emit Remove(tabData(menu_index_).toInt());
 }
 
 int PlaylistTabBar::current_id() const {
