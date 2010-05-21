@@ -78,7 +78,7 @@ void PlaylistContainer::ClearFilter() {
 void PlaylistContainer::SetManager(PlaylistManager *manager) {
   manager_ = manager;
 
-  connect(ui_->tab_bar, SIGNAL(currentChanged(int)),
+  connect(ui_->tab_bar, SIGNAL(CurrentIdChanged(int)),
           manager, SLOT(SetCurrentPlaylist(int)));
   connect(ui_->tab_bar, SIGNAL(Rename(int,QString)),
           manager, SLOT(Rename(int,QString)));
@@ -103,8 +103,8 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   playlist->IgnoreSorting(false);
 
   // Ensure that tab is current
-  if (ui_->tab_bar->currentIndex() != manager_->current_index())
-    ui_->tab_bar->setCurrentIndex(manager_->current_index());
+  if (ui_->tab_bar->current_id() != manager_->current_id())
+    ui_->tab_bar->set_current_id(manager_->current_id());
 
   // Sort out the undo/redo actions
   delete undo_;
@@ -142,25 +142,26 @@ void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
 
   // Set our icon
   if (!icon.isNull())
-    ui_->tab_bar->setTabIcon(manager_->active_index(), icon);
+    ui_->tab_bar->set_icon_by_id(manager_->active_id(), icon);
 }
 
-void PlaylistContainer::PlaylistAdded(int index, const QString &name) {
-  ui_->tab_bar->insertTab(index, name);
+void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
+  int index = ui_->tab_bar->count();
+  ui_->tab_bar->InsertTab(id, index, name);
 
   // Are we startup up, should we select this tab?
-  if (starting_up_ && settings_.value("current_playlist", 0).toInt() == index) {
+  if (starting_up_ && settings_.value("current_playlist", 0).toInt() == id) {
     starting_up_ = false;
-    ui_->tab_bar->setCurrentIndex(index);
+    ui_->tab_bar->set_current_id(id);
   }
 }
 
-void PlaylistContainer::PlaylistRemoved(int index) {
-  ui_->tab_bar->removeTab(index);
+void PlaylistContainer::PlaylistRemoved(int id) {
+  ui_->tab_bar->RemoveTab(id);
 }
 
-void PlaylistContainer::PlaylistRenamed(int index, const QString &new_name) {
-  ui_->tab_bar->setTabText(index, new_name);
+void PlaylistContainer::PlaylistRenamed(int id, const QString &new_name) {
+  ui_->tab_bar->set_text_by_id(id, new_name);
 }
 
 void PlaylistContainer::NewPlaylist() {
@@ -185,5 +186,5 @@ void PlaylistContainer::Save() {
   if (starting_up_)
     return;
 
-  settings_.setValue("current_playlist", ui_->tab_bar->currentIndex());
+  settings_.setValue("current_playlist", ui_->tab_bar->current_id());
 }

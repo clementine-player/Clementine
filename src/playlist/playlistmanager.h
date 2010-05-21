@@ -18,6 +18,7 @@
 #define PLAYLISTMANAGER_H
 
 #include <QObject>
+#include <QMap>
 
 class LibraryBackend;
 class Playlist;
@@ -33,13 +34,14 @@ class PlaylistManager : public QObject {
 
 public:
   PlaylistManager(QObject *parent = 0);
+  ~PlaylistManager();
 
-  int current_index() const { return current_; }
-  int active_index() const { return active_; }
+  int current_id() const { return current_; }
+  int active_id() const { return active_; }
 
-  Playlist* playlist(int index) const { return playlists_[index].p; }
-  Playlist* current() const { return playlist(current_index()); }
-  Playlist* active() const { return playlist(active_index()); }
+  Playlist* playlist(int id) const { return playlists_[id].p; }
+  Playlist* current() const { return playlist(current_id()); }
+  Playlist* active() const { return playlist(active_id()); }
 
   QString name(int index) const { return playlists_[index].name; }
 
@@ -53,12 +55,13 @@ public:
 public slots:
   void New(const QString& name);
   void Load(const QString& filename);
-  void Save(int index, const QString& filename);
-  void Rename(int index, const QString& new_name);
-  void Remove(int index);
+  void Save(int id, const QString& filename);
+  void Rename(int id, const QString& new_name);
+  void Remove(int id);
 
-  void SetCurrentPlaylist(int index);
-  void SetActivePlaylist(int index);
+  void SetCurrentPlaylist(int id);
+  void SetActivePlaylist(int id);
+  void SetActiveToCurrent() { SetActivePlaylist(current_id()); }
 
   // Convenience slots that defer to either current() or active()
   void ClearCurrent();
@@ -69,9 +72,9 @@ public slots:
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
 
 signals:
-  void PlaylistAdded(int index, const QString& name);
-  void PlaylistRemoved(int index);
-  void PlaylistRenamed(int index, const QString& new_name);
+  void PlaylistAdded(int id, const QString& name);
+  void PlaylistRemoved(int id);
+  void PlaylistRenamed(int id, const QString& new_name);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
 
@@ -85,7 +88,7 @@ private:
 
 private:
   struct Data {
-    Data(Playlist* _p, const QString& _name) : p(_p), name(_name) {}
+    Data(Playlist* _p = NULL, const QString& _name = QString()) : p(_p), name(_name) {}
     Playlist* p;
     QString name;
   };
@@ -94,7 +97,9 @@ private:
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;
 
-  QList<Data> playlists_;
+  // key = id
+  QMap<int, Data> playlists_;
+
   int current_;
   int active_;
 };

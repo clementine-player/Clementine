@@ -479,7 +479,7 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
   QModelIndex playlist_index = playlists_->current()->InsertPaths(urls);
 
   if (playlist_index.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActiveToCurrent();
     player_->PlayAt(playlist_index.row(), Engine::First, true);
   }
 }
@@ -570,7 +570,7 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   if (!index.isValid())
     return;
 
-  playlists_->SetActivePlaylist(playlists_->current_index());
+  playlists_->SetActiveToCurrent();
   player_->PlayAt(index.row(), Engine::Manual, true);
 }
 
@@ -598,7 +598,7 @@ void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& i
       library_->model()->GetChildSongs(idx));
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
   }
 }
@@ -716,7 +716,7 @@ void MainWindow::RadioDoubleClick(const QModelIndex& index) {
 
   QModelIndex first_song = playlists_->current()->index(0, 0);
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
   }
 }
@@ -726,7 +726,7 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
       QList<RadioItem*>() << item);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
   }
 }
@@ -735,7 +735,7 @@ void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
   QModelIndex first_song = playlists_->current()->InsertItems(items);
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
   }
 }
@@ -808,7 +808,7 @@ void MainWindow::PlaylistPlay() {
   if (playlists_->current()->current_index() == playlist_menu_index_.row()) {
     player_->PlayPause();
   } else {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActiveToCurrent();
     player_->PlayAt(playlist_menu_index_.row(), Engine::Manual, true);
   }
 }

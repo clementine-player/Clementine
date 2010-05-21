@@ -233,7 +233,7 @@ void Player::PlayPause() {
 
   case Engine::Empty:
   case Engine::Idle: {
-    playlists_->SetActivePlaylist(playlists_->current_index());
+    playlists_->SetActivePlaylist(playlists_->current_id());
     if (playlists_->active()->rowCount() == 0)
       break;
 

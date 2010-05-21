@@ -30,11 +30,26 @@ public:
   void SetActions(QAction* new_playlist, QAction* save_playlist,
                   QAction* load_playlist);
 
+  // We use IDs to refer to tabs so the tabs can be moved around (and their
+  // indexes change).
+  int index_of(int id) const;
+  int current_id() const;
+
+  // Utility functions that use IDs rather than indexes
+  void set_current_id(int id);
+  void set_icon_by_id(int id, const QIcon& icon);
+  void set_text_by_id(int id, const QString& text);
+
+  void RemoveTab(int id);
+  void InsertTab(int id, int index, const QString& text);
+
 signals:
-  void Rename(int index, const QString& name);
-  void Remove(int index);
+  void CurrentIdChanged(int id);
+  void Rename(int id, const QString& name);
+  void Remove(int id);
 
 private slots:
+  void CurrentIndexChanged(int index);
   void Rename();
   void Remove();
 
@@ -46,6 +61,8 @@ private:
   int menu_index_;
   QAction* rename_;
   QAction* remove_;
+
+  bool suppress_current_changed_;
 };
 
 #endif // PLAYLISTTABBAR_H

@@ -28,6 +28,12 @@ PlaylistManager::PlaylistManager(QObject *parent)
 {
 }
 
+PlaylistManager::~PlaylistManager() {
+  foreach (const Data& data, playlists_.values()) {
+    delete data.p;
+  }
+}
+
 void PlaylistManager::Init(LibraryBackend* library_backend,
                            PlaylistBackend* playlist_backend,
                            PlaylistSequence* sequence) {
@@ -52,16 +58,15 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   connect(ret, SIGNAL(PlaylistChanged()), SIGNAL(PlaylistChanged()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
 
-  playlists_ << Data(ret, name);
+  playlists_[id] = Data(ret, name);
 
-  int index = playlists_.count() - 1;
-  emit PlaylistAdded(index, name);
+  emit PlaylistAdded(id, name);
 
   if (current_ == -1) {
-    SetCurrentPlaylist(index);
+    SetCurrentPlaylist(id);
   }
   if (active_ == -1) {
-    SetActivePlaylist(index);
+    SetActivePlaylist(id);
   }
 
   return ret;
@@ -74,60 +79,64 @@ void PlaylistManager::New(const QString& name) {
     qFatal("Couldn't create playlist");
 
   AddPlaylist(id, name);
-  SetCurrentPlaylist(playlists_.count() - 1);
+  SetCurrentPlaylist(id);
 }
 
 void PlaylistManager::Load(const QString& filename) {
 
 }
 
-void PlaylistManager::Save(int index, const QString& filename) {
-  Q_ASSERT(index >= 0 && index < playlists_.count());
+void PlaylistManager::Save(int id, const QString& filename) {
+  Q_ASSERT(playlists_.contains(id));
 }
 
-void PlaylistManager::Rename(int index, const QString& new_name) {
-  Q_ASSERT(index >= 0 && index < playlists_.count());
+void PlaylistManager::Rename(int id, const QString& new_name) {
+  Q_ASSERT(playlists_.contains(id));
 
-  playlist_backend_->RenamePlaylist(playlist(index)->id(), new_name);
-  playlists_[index].name = new_name;
+  playlist_backend_->RenamePlaylist(id, new_name);
+  playlists_[id].name = new_name;
 
-  emit PlaylistRenamed(index, new_name);
+  emit PlaylistRenamed(id, new_name);
 }
 
-void PlaylistManager::Remove(int index) {
-  Q_ASSERT(index >= 0 && index < playlists_.count());
+void PlaylistManager::Remove(int id) {
+  Q_ASSERT(playlists_.contains(id));
 
   // Won't allow removing the last playlist
   if (playlists_.count() <= 1)
     return;
 
-  playlist_backend_->RemovePlaylist(playlist(index)->id());
+  playlist_backend_->RemovePlaylist(id);
 
-  if (index == active_)
-    SetActivePlaylist(qMax(0, index-1));
-  if (index == current_)
-    SetCurrentPlaylist(qMax(0, index-1));
-  playlists_.takeAt(index);
+  int next_id = playlists_.constBegin()->p->id();
 
-  emit PlaylistRemoved(index);
+  if (id == active_)
+    SetActivePlaylist(next_id);
+  if (id == current_)
+    SetCurrentPlaylist(next_id);
+
+  Data data = playlists_.take(id);
+  delete data.p;
+
+  emit PlaylistRemoved(id);
 }
 
-void PlaylistManager::SetCurrentPlaylist(int index) {
-  Q_ASSERT(index >= 0 && index < playlists_.count());
-  current_ = index;
+void PlaylistManager::SetCurrentPlaylist(int id) {
+  Q_ASSERT(playlists_.contains(id));
+  current_ = id;
   emit CurrentChanged(current());
 }
 
-void PlaylistManager::SetActivePlaylist(int index) {
-  Q_ASSERT(index >= 0 && index < playlists_.count());
+void PlaylistManager::SetActivePlaylist(int id) {
+  Q_ASSERT(playlists_.contains(id));
 
   // Kinda a hack: unset the current item from the old active playlist before
   // setting the new one
   if (active_ != -1)
     active()->set_current_index(-1);
 
-  active_ = index;
-  emit ActiveChanged(current());
+  active_ = id;
+  emit ActiveChanged(active());
 }
 
 void PlaylistManager::ClearCurrent() {

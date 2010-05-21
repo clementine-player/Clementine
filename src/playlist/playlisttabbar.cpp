@@ -24,11 +24,14 @@
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   : QTabBar(parent),
     menu_(new QMenu(this)),
-    menu_index_(-1)
+    menu_index_(-1),
+    suppress_current_changed_(false)
 {
   rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist"), this, SLOT(Rename()));
   remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
   menu_->addSeparator();
+
+  connect(this, SIGNAL(currentChanged(int)), this, SLOT(CurrentIndexChanged(int)));
 }
 
 void PlaylistTabBar::SetActions(
@@ -66,4 +69,51 @@ void PlaylistTabBar::Remove() {
     return;
 
   emit Remove(menu_index_);
+}
+
+int PlaylistTabBar::current_id() const {
+  if (currentIndex() == -1)
+    return -1;
+  return tabData(currentIndex()).toInt();
+}
+
+
+int PlaylistTabBar::index_of(int id) const {
+  for (int i=0 ; i<count() ; ++i) {
+    if (tabData(i).toInt() == id) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+void PlaylistTabBar::set_current_id(int id) {
+  setCurrentIndex(index_of(id));
+}
+
+void PlaylistTabBar::set_icon_by_id(int id, const QIcon &icon) {
+  setTabIcon(index_of(id), icon);
+}
+
+void PlaylistTabBar::RemoveTab(int id) {
+  removeTab(index_of(id));
+}
+
+void PlaylistTabBar::set_text_by_id(int id, const QString &text) {
+  setTabText(index_of(id), text);
+}
+
+void PlaylistTabBar::CurrentIndexChanged(int index) {
+  if (!suppress_current_changed_)
+    emit CurrentIdChanged(tabData(index).toInt());
+}
+
+void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
+  suppress_current_changed_ = true;
+  insertTab(index, text);
+  setTabData(index, id);
+  suppress_current_changed_ = false;
+
+  if (currentIndex() == index)
+    emit CurrentIdChanged(id);
 }
