@@ -74,6 +74,7 @@ void PlaylistManager::New(const QString& name) {
     qFatal("Couldn't create playlist");
 
   AddPlaylist(id, name);
+  SetCurrentPlaylist(playlists_.count() - 1);
 }
 
 void PlaylistManager::Load(const QString& filename) {

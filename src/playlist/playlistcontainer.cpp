@@ -102,6 +102,10 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   view()->SetItemDelegates(manager_->library_backend());
   playlist->IgnoreSorting(false);
 
+  // Ensure that tab is current
+  if (ui_->tab_bar->currentIndex() != manager_->current_index())
+    ui_->tab_bar->setCurrentIndex(manager_->current_index());
+
   // Sort out the undo/redo actions
   delete undo_;
   delete redo_;
