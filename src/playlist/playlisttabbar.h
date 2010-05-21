@@ -47,11 +47,13 @@ signals:
   void CurrentIdChanged(int id);
   void Rename(int id, const QString& name);
   void Remove(int id);
+  void PlaylistOrderChanged(const QList<int>& ids);
 
 private slots:
   void CurrentIndexChanged(int index);
   void Rename();
   void Remove();
+  void TabMoved();
 
 protected:
   void contextMenuEvent(QContextMenuEvent *);

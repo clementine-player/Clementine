@@ -162,3 +162,7 @@ void PlaylistManager::SetActiveStopped() {
 void PlaylistManager::SetActiveStreamMetadata(const QUrl &url, const Song &song) {
   active()->SetStreamMetadata(url, song);
 }
+
+void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
+  playlist_backend_->SetPlaylistOrder(ids);
+}

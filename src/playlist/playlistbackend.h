@@ -42,6 +42,7 @@ class PlaylistBackend : public QObject {
   PlaylistItemList GetPlaylistItems(int playlist);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
                          int last_played);
+  void SetPlaylistOrder(const QList<int>& ids);
 
   int CreatePlaylist(const QString& name);
   void RemovePlaylist(int id);

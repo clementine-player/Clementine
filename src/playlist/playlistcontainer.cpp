@@ -84,6 +84,8 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
           manager, SLOT(Rename(int,QString)));
   connect(ui_->tab_bar, SIGNAL(Remove(int)),
           manager, SLOT(Remove(int)));
+  connect(ui_->tab_bar, SIGNAL(PlaylistOrderChanged(QList<int>)),
+          manager, SLOT(ChangePlaylistOrder(QList<int>)));
 
   connect(manager, SIGNAL(CurrentChanged(Playlist*)),
           SLOT(SetViewModel(Playlist*)));

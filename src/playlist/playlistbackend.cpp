@@ -35,7 +35,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
 
   PlaylistList ret;
 
-  QSqlQuery q("SELECT ROWID, name, last_played FROM playlists", db);
+  QSqlQuery q("SELECT ROWID, name, last_played FROM playlists ORDER BY ui_order", db);
   q.exec();
   if (db_->CheckErrors(q.lastError()))
     return ret;
@@ -195,4 +195,21 @@ void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
 
   q.exec();
   db_->CheckErrors(q.lastError());
+}
+
+void PlaylistBackend::SetPlaylistOrder(const QList<int>& ids) {
+  QSqlDatabase db(db_->Connect());
+  QSqlQuery q("UPDATE playlists SET ui_order=:index WHERE ROWID=:id", db);
+
+  ScopedTransaction transaction(&db);
+
+  for (int i=0 ; i<ids.count() ; ++i) {
+    q.bindValue(":index", i);
+    q.bindValue(":id", ids[i]);
+    q.exec();
+    if (db_->CheckErrors(q.lastError()))
+      return;
+  }
+
+  transaction.Commit();
 }

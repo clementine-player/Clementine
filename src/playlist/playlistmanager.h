@@ -58,6 +58,7 @@ public slots:
   void Save(int id, const QString& filename);
   void Rename(int id, const QString& new_name);
   void Remove(int id);
+  void ChangePlaylistOrder(const QList<int>& ids);
 
   void SetCurrentPlaylist(int id);
   void SetActivePlaylist(int id);

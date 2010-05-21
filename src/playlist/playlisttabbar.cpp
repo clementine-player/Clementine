@@ -32,6 +32,7 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   menu_->addSeparator();
 
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(CurrentIndexChanged(int)));
+  connect(this, SIGNAL(tabMoved(int,int)), this, SLOT(TabMoved()));
 }
 
 void PlaylistTabBar::SetActions(
@@ -116,4 +117,12 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
 
   if (currentIndex() == index)
     emit CurrentIdChanged(id);
+}
+
+void PlaylistTabBar::TabMoved() {
+  QList<int> ids;
+  for (int i=0 ; i<count() ; ++i) {
+    ids << tabData(i).toInt();
+  }
+  emit PlaylistOrderChanged(ids);
 }
