@@ -40,6 +40,8 @@ void PlaylistTabBar::SetActions(
   menu_->insertAction(0, new_playlist);
   menu_->insertAction(0, save_playlist);
   menu_->insertAction(0, load_playlist);
+
+  new_ = new_playlist;
 }
 
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
@@ -48,6 +50,26 @@ void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
   remove_->setEnabled(menu_index_ != -1 && count() > 1);
 
   menu_->popup(e->globalPos());
+}
+
+void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
+  if (e->button() == Qt::MidButton) {
+    int index = tabAt(e->pos());
+    if (index != -1) {
+      emit Remove(tabData(index).toInt());
+    }
+  }
+
+  QTabBar::mouseReleaseEvent(e);
+}
+
+void PlaylistTabBar::mouseDoubleClickEvent(QMouseEvent *e) {
+  int index = tabAt(e->pos());
+  if (index == -1) {
+    new_->activate(QAction::Trigger);
+  }
+
+  QTabBar::mouseDoubleClickEvent(e);
 }
 
 void PlaylistTabBar::Rename() {

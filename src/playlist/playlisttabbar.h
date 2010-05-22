@@ -56,11 +56,14 @@ private slots:
   void TabMoved();
 
 protected:
-  void contextMenuEvent(QContextMenuEvent *);
+  void contextMenuEvent(QContextMenuEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
+  void mouseDoubleClickEvent(QMouseEvent* e);
 
 private:
   QMenu* menu_;
   int menu_index_;
+  QAction* new_;
   QAction* rename_;
   QAction* remove_;
 
