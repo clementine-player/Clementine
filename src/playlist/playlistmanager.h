@@ -25,6 +25,7 @@
 class LibraryBackend;
 class Playlist;
 class PlaylistBackend;
+class PlaylistParser;
 class PlaylistSequence;
 
 class QModelIndex;
@@ -52,6 +53,7 @@ public:
   LibraryBackend* library_backend() const { return library_backend_; }
   PlaylistBackend* playlist_backend() const { return playlist_backend_; }
   PlaylistSequence* sequence() const { return sequence_; }
+  PlaylistParser* parser() const { return parser_; }
 
 public slots:
   void New(const QString& name, const SongList& songs = SongList());
@@ -80,6 +82,8 @@ signals:
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
 
+  void Error(const QString& message);
+
   // Forwarded from individual playlists
   void CurrentSongChanged(const Song& song);
   void PlaylistChanged();
@@ -98,6 +102,7 @@ private:
   PlaylistBackend* playlist_backend_;
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;
+  PlaylistParser* parser_;
 
   // key = id
   QMap<int, Data> playlists_;

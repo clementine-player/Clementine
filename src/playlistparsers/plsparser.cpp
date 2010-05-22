@@ -83,7 +83,7 @@ void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
 
   int n = 1;
   foreach (const Song& song, songs) {
-    s.setValue("File" + QString::number(n), song.filename());
+    s.setValue("File" + QString::number(n), MakeRelativeTo(song.filename(), dir));
     s.setValue("Title" + QString::number(n), song.title());
     s.setValue("Length" + QString::number(n), song.length());
     ++n;

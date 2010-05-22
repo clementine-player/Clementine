@@ -24,7 +24,6 @@ class Ui_PlaylistContainer;
 
 class Playlist;
 class PlaylistManager;
-class PlaylistParser;
 class PlaylistView;
 
 class QTimeLine;
@@ -46,9 +45,9 @@ public:
   PlaylistView* view() const;
 
 signals:
-  void TabChanged(int index);
-  void Rename(int index, const QString& new_name);
-  void Remove(int index);
+  void TabChanged(int id);
+  void Rename(int id, const QString& new_name);
+  void Remove(int id);
 
   void UndoRedoActionsChanged(QAction* undo, QAction* redo);
 
@@ -60,12 +59,13 @@ private slots:
   void ClearFilter();
   void NewPlaylist();
   void LoadPlaylist();
-  void SavePlaylist();
+  void SavePlaylist() { SavePlaylist(-1); }
+  void SavePlaylist(int id);
 
   void SetViewModel(Playlist* playlist);
-  void PlaylistAdded(int index, const QString& name);
-  void PlaylistRemoved(int index);
-  void PlaylistRenamed(int index, const QString& new_name);
+  void PlaylistAdded(int id, const QString& name);
+  void PlaylistRemoved(int id);
+  void PlaylistRenamed(int id, const QString& new_name);
 
   void ActivePlaying();
   void ActivePaused();
@@ -85,7 +85,6 @@ private:
 private:
   Ui_PlaylistContainer* ui_;
 
-  PlaylistParser* parser_;
   PlaylistManager* manager_;
   QAction* undo_;
   QAction* redo_;

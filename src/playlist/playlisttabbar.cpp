@@ -27,8 +27,9 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
     menu_index_(-1),
     suppress_current_changed_(false)
 {
-  rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist"), this, SLOT(Rename()));
   remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
+  rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist..."), this, SLOT(Rename()));
+  save_ = menu_->addAction(IconLoader::Load("document-save"), tr("Save playlist..."), this, SLOT(Save()));
   menu_->addSeparator();
 
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(CurrentIndexChanged(int)));
@@ -36,9 +37,8 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
 }
 
 void PlaylistTabBar::SetActions(
-    QAction* new_playlist, QAction* save_playlist, QAction* load_playlist) {
+    QAction* new_playlist, QAction* load_playlist) {
   menu_->insertAction(0, new_playlist);
-  menu_->insertAction(0, save_playlist);
   menu_->insertAction(0, load_playlist);
 
   new_ = new_playlist;
@@ -48,6 +48,7 @@ void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
   menu_index_ = tabAt(e->pos());
   rename_->setEnabled(menu_index_ != -1);
   remove_->setEnabled(menu_index_ != -1 && count() > 1);
+  save_->setEnabled(menu_index_ != -1);
 
   menu_->popup(e->globalPos());
 }
@@ -92,6 +93,13 @@ void PlaylistTabBar::Remove() {
     return;
 
   emit Remove(tabData(menu_index_).toInt());
+}
+
+void PlaylistTabBar::Save() {
+  if (menu_index_ == -1)
+    return;
+
+  emit Save(tabData(menu_index_).toInt());
 }
 
 int PlaylistTabBar::current_id() const {

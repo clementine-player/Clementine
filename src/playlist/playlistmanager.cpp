@@ -17,12 +17,16 @@
 #include "playlist.h"
 #include "playlistbackend.h"
 #include "playlistmanager.h"
+#include "playlistparsers/playlistparser.h"
+
+#include <QFileInfo>
 
 PlaylistManager::PlaylistManager(QObject *parent)
   : QObject(parent),
     playlist_backend_(NULL),
     library_backend_(NULL),
     sequence_(NULL),
+    parser_(new PlaylistParser(this)),
     current_(-1),
     active_(-1)
 {
@@ -85,11 +89,22 @@ void PlaylistManager::New(const QString& name, const SongList& songs) {
 }
 
 void PlaylistManager::Load(const QString& filename) {
+  SongList songs = parser_->Load(filename);
+  QFileInfo info(filename);
 
+  if (songs.isEmpty()) {
+    emit Error(tr("The playlist '%1' was empty or could not be loaded.").arg(
+        info.completeBaseName()));
+    return;
+  }
+
+  New(info.baseName(), songs);
 }
 
 void PlaylistManager::Save(int id, const QString& filename) {
   Q_ASSERT(playlists_.contains(id));
+
+  parser_->Save(playlist(id)->GetAllSongs(), filename);
 }
 
 void PlaylistManager::Rename(int id, const QString& new_name) {

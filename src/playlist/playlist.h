@@ -112,6 +112,8 @@ class Playlist : public QAbstractListModel {
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
 
+  SongList GetAllSongs() const;
+
   void set_sequence(PlaylistSequence* v);
   PlaylistSequence* sequence() const { return playlist_sequence_; }
 

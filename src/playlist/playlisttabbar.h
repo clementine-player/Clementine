@@ -27,8 +27,7 @@ class PlaylistTabBar : public QTabBar {
 public:
   PlaylistTabBar(QWidget *parent = 0);
 
-  void SetActions(QAction* new_playlist, QAction* save_playlist,
-                  QAction* load_playlist);
+  void SetActions(QAction* new_playlist, QAction* load_playlist);
 
   // We use IDs to refer to tabs so the tabs can be moved around (and their
   // indexes change).
@@ -47,6 +46,7 @@ signals:
   void CurrentIdChanged(int id);
   void Rename(int id, const QString& name);
   void Remove(int id);
+  void Save(int id);
   void PlaylistOrderChanged(const QList<int>& ids);
 
 private slots:
@@ -54,6 +54,7 @@ private slots:
   void Rename();
   void Remove();
   void TabMoved();
+  void Save();
 
 protected:
   void contextMenuEvent(QContextMenuEvent* e);
@@ -66,6 +67,7 @@ private:
   QAction* new_;
   QAction* rename_;
   QAction* remove_;
+  QAction* save_;
 
   bool suppress_current_changed_;
 };

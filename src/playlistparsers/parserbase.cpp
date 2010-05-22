@@ -41,11 +41,7 @@ bool ParserBase::ParseTrackLocation(const QString& filename_or_url,
   if (QDir::isAbsolutePath(filename_or_url)) {
     // Absolute path.
     // Fix windows \, eg. C:\foo -> C:/foo.
-    QString proper_path = QDir::fromNativeSeparators(filename_or_url);
-    if (!QFile::exists(proper_path)) {
-      return false;
-    }
-    song->set_filename(proper_path);
+    song->set_filename(QDir::fromNativeSeparators(filename_or_url));
   } else {
     // Relative path.
     QString proper_path = QDir::fromNativeSeparators(filename_or_url);
@@ -54,4 +50,18 @@ bool ParserBase::ParseTrackLocation(const QString& filename_or_url,
   }
   song->InitFromFile(song->filename(), -1);
   return true;
+}
+
+QString ParserBase::MakeRelativeTo(const QString& filename_or_url,
+                                   const QDir& dir) const {
+  if (filename_or_url.contains(QRegExp("^[a-z]+://")))
+    return filename_or_url;
+
+  if (QDir::isAbsolutePath(filename_or_url)) {
+    QString relative = dir.relativeFilePath(filename_or_url);
+
+    if (!relative.contains(".."))
+      return relative;
+  }
+  return filename_or_url;
 }

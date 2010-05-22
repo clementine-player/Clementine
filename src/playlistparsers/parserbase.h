@@ -34,8 +34,14 @@ public:
   virtual void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const = 0;
 
 protected:
+  // Takes a URL, relative path or absolute path, and returns an absolute path.
+  // Resolves relative paths to "dir".
   bool ParseTrackLocation(const QString& filename_or_url, const QDir& dir,
                           Song* song) const;
+
+  // Takes a URL, relative path or absolute path, and in the case of absolute
+  // paths makes them relative to dir if they are subdirectories.
+  QString MakeRelativeTo(const QString& filename_or_url, const QDir& dir) const;
 };
 
 #endif // PARSERBASE_H

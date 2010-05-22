@@ -34,7 +34,6 @@ const char* PlaylistContainer::kSettingsGroup = "Playlist";
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_PlaylistContainer),
-    parser_(new PlaylistParser(this)),
     manager_(NULL),
     undo_(NULL),
     redo_(NULL),
@@ -80,6 +79,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   // Connections
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
   connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
+  connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
   connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
 }
 
@@ -97,7 +97,7 @@ void PlaylistContainer::SetActions(
   ui_->save->setDefaultAction(save_playlist);
   ui_->load->setDefaultAction(load_playlist);
 
-  ui_->tab_bar->SetActions(new_playlist, save_playlist, load_playlist);
+  ui_->tab_bar->SetActions(new_playlist, load_playlist);
 
   connect(new_playlist, SIGNAL(triggered()), SLOT(NewPlaylist()));
   connect(save_playlist, SIGNAL(triggered()), SLOT(SavePlaylist()));
@@ -236,28 +236,28 @@ void PlaylistContainer::LoadPlaylist() {
   QString filename = settings_.value("last_load_playlist").toString();
   filename = QFileDialog::getOpenFileName(
       this, tr("Load playlist"), filename,
-      tr("Playlists (%1)").arg(parser_->filter_text()));
+      tr("Playlists (%1)").arg(manager_->parser()->filter_text()));
 
   if (filename.isNull())
     return;
 
   settings_.setValue("last_load_playlist", filename);
 
-  SongList songs = parser_->Load(filename);
-  QFileInfo info(filename);
-
-  if (songs.isEmpty()) {
-    QMessageBox::information(this, tr("Error"),
-        tr("The playlist '%1' was empty or could not be loaded.").arg(
-            info.completeBaseName()));
-    return;
-  }
-
-  manager_->New(info.baseName(), songs);
+  manager_->Load(filename);
 }
 
-void PlaylistContainer::SavePlaylist() {
+void PlaylistContainer::SavePlaylist(int id = -1) {
+  QString filename = settings_.value("last_save_playlist").toString();
+  filename = QFileDialog::getSaveFileName(
+      this, tr("Save playlist"), filename,
+      tr("Playlists (%1)").arg(manager_->parser()->filter_text()));
 
+  if (filename.isNull())
+    return;
+
+  settings_.setValue("last_save_playlist", filename);
+
+  manager_->Save(id == -1 ? manager_->current_id() : id, filename);
 }
 
 void PlaylistContainer::Save() {

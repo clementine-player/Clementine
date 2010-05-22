@@ -1017,3 +1017,11 @@ void Playlist::set_sequence(PlaylistSequence* v) {
 QSortFilterProxyModel* Playlist::proxy() const {
   return proxy_;
 }
+
+SongList Playlist::GetAllSongs() const {
+  SongList ret;
+  foreach (boost::shared_ptr<PlaylistItem> item, items_) {
+    ret << item->Metadata();
+  }
+  return ret;
+}
