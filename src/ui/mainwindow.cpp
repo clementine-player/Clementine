@@ -611,12 +611,21 @@ void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {
   switch (reason) {
     case QSystemTrayIcon::DoubleClick:
     case QSystemTrayIcon::Trigger:
-      if(isMinimized()) {
+      if (isActiveWindow()) {
+        hide();
+        setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+        SetHiddenInTray(true);
+      } else if (settings_.value("hidden").toBool()) {
+        show();
+        SetHiddenInTray(false);
+      } else if (isMinimized()) {
         hide();
         setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
         SetHiddenInTray(false);
       } else {
-        SetHiddenInTray(isVisible());
+        // Window is not hidden but does not have focus; bring it to front.
+        activateWindow();
+        raise();
       }
       break;
 
