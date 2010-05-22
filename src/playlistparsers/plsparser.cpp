@@ -41,7 +41,10 @@ SongList PLSParser::Load(QIODevice *device, const QDir &dir) const {
 
   // We try not to rely on NumberOfEntries (it might not be present), so go
   // through each key in the file and look at ones that start with "File"
-  foreach (const QString& key, s.childKeys()) {
+  QStringList keys(s.childKeys());
+  keys.sort(); // Make sure we get the tracks in order
+
+  foreach (const QString& key, keys) {
     if (!key.toLower().startsWith("file"))
       continue;
 
@@ -70,5 +73,24 @@ SongList PLSParser::Load(QIODevice *device, const QDir &dir) const {
 }
 
 void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+  QTemporaryFile temp_file;
+  temp_file.open();
 
+  QSettings s(temp_file.fileName(), QSettings::IniFormat);
+  s.beginGroup("playlist");
+  s.setValue("Version", 2);
+  s.setValue("NumberOfEntries", songs.count());
+
+  int n = 1;
+  foreach (const Song& song, songs) {
+    s.setValue("File" + QString::number(n), song.filename());
+    s.setValue("Title" + QString::number(n), song.title());
+    s.setValue("Length" + QString::number(n), song.length());
+    ++n;
+  }
+
+  s.sync();
+
+  temp_file.seek(0);
+  device->write(temp_file.readAll());
 }

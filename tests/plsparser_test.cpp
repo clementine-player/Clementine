@@ -21,6 +21,8 @@
 
 #include <QBuffer>
 #include <QFile>
+#include <QTemporaryFile>
+#include <QtDebug>
 
 #include <boost/shared_ptr.hpp>
 
@@ -59,4 +61,33 @@ TEST_F(PLSParserTest, ParseSomaFM) {
   EXPECT_EQ("http://ice.somafm.com/groovesalad", songs[3].filename());
   EXPECT_EQ(-1, songs[0].length());
   EXPECT_EQ(Song::Type_Stream, songs[0].filetype());
+}
+
+TEST_F(PLSParserTest, SaveAndLoad) {
+  Song one;
+  one.set_filename("http://www.example.com/foo.mp3");
+  one.set_title("Foo");
+
+  Song two;
+  two.set_filename("relative/bar.mp3");
+  two.set_title("Bar");
+  two.set_length(123);
+
+  SongList songs;
+  songs << one << two;
+
+  QTemporaryFile temp;
+  temp.open();
+  parser_.Save(songs, &temp);
+
+  temp.seek(0);
+  songs = parser_.Load(&temp, QDir("/meep"));
+
+  ASSERT_EQ(2, songs.count());
+  EXPECT_EQ(one.filename(), songs[0].filename());
+  EXPECT_EQ("/meep/relative/bar.mp3", songs[1].filename());
+  EXPECT_EQ(one.title(), songs[0].title());
+  EXPECT_EQ(two.title(), songs[1].title());
+  EXPECT_EQ(one.length(), songs[0].length());
+  EXPECT_EQ(two.length(), songs[1].length());
 }

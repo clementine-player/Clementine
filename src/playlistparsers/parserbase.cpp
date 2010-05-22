@@ -30,6 +30,7 @@ bool ParserBase::ParseTrackLocation(const QString& filename_or_url,
     QUrl temp(filename_or_url);
     if (temp.isValid()) {
       song->set_filename(temp.toString());
+      song->set_filetype(Song::Type_Stream);
       return true;
     } else {
       return false;
