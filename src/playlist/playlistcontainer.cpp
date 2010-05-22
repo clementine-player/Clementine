@@ -24,6 +24,7 @@
 #include <QSettings>
 #include <QTimeLine>
 #include <QSortFilterProxyModel>
+#include <QLabel>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
 
@@ -34,9 +35,29 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     redo_(NULL),
     starting_up_(true),
     tab_bar_visible_(false),
-    tab_bar_animation_(new QTimeLine(500, this))
+    tab_bar_animation_(new QTimeLine(500, this)),
+    no_matches_label_(new QLabel(this))
 {
   ui_->setupUi(this);
+
+  no_matches_label_->setText(tr("No matches found.  Clear the search box to show the whole playlist again."));
+  no_matches_label_->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+  no_matches_label_->setAttribute(Qt::WA_TransparentForMouseEvents);
+  no_matches_label_->setWordWrap(true);
+  no_matches_label_->raise();
+  no_matches_label_->hide();
+
+  // Set the colour of the no matches label to the disabled text colour
+  QPalette no_matches_palette = no_matches_label_->palette();
+  no_matches_palette.setColor(
+      QPalette::Normal, QPalette::WindowText,
+      no_matches_palette.color(QPalette::Disabled, QPalette::Text));
+  no_matches_label_->setPalette(no_matches_palette);
+
+  // Make it bold
+  QFont no_matches_font = no_matches_label_->font();
+  no_matches_font.setBold(true);
+  no_matches_label_->setFont(no_matches_font);
 
   settings_.beginGroup(kSettingsGroup);
 
@@ -236,4 +257,31 @@ void PlaylistContainer::SetTabBarHeight(int height) {
 
 void PlaylistContainer::UpdateFilter() {
   manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
+
+  bool no_matches = manager_->current()->proxy()->rowCount() == 0 &&
+                    manager_->current()->rowCount() > 0;
+
+  if (no_matches)
+    RepositionNoMatchesLabel(true);
+  no_matches_label_->setVisible(no_matches);
+}
+
+void PlaylistContainer::resizeEvent(QResizeEvent* e) {
+  QWidget::resizeEvent(e);
+  RepositionNoMatchesLabel();
+}
+
+void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
+  if (!force && !no_matches_label_->isVisible())
+    return;
+
+  const int kBorder = 10;
+
+  QPoint pos = ui_->playlist->viewport()->mapTo(this, QPoint(kBorder, kBorder));
+  QSize size = ui_->playlist->viewport()->size();
+  size.setWidth(size.width() - kBorder * 2);
+  size.setHeight(size.height() - kBorder * 2);
+
+  no_matches_label_->move(pos);
+  no_matches_label_->resize(size);
 }

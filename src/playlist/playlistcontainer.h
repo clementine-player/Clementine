@@ -27,6 +27,7 @@ class PlaylistManager;
 class PlaylistView;
 
 class QTimeLine;
+class QLabel;
 
 class PlaylistContainer : public QWidget {
   Q_OBJECT
@@ -49,6 +50,10 @@ signals:
   void Remove(int index);
 
   void UndoRedoActionsChanged(QAction* undo, QAction* redo);
+
+protected:
+  // QWidget
+  void resizeEvent(QResizeEvent *);
 
 private slots:
   void ClearFilter();
@@ -74,6 +79,7 @@ private slots:
 
 private:
   void UpdateActiveIcon(const QIcon& icon);
+  void RepositionNoMatchesLabel(bool force = false);
 
 private:
   Ui_PlaylistContainer* ui_;
@@ -87,6 +93,8 @@ private:
 
   bool tab_bar_visible_;
   QTimeLine* tab_bar_animation_;
+
+  QLabel* no_matches_label_;
 };
 
 #endif // PLAYLISTCONTAINER_H
