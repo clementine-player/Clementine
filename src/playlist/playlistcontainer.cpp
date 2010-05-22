@@ -23,6 +23,7 @@
 #include <QInputDialog>
 #include <QSettings>
 #include <QTimeLine>
+#include <QSortFilterProxyModel>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
 
@@ -53,6 +54,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   // Connections
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
   connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
 }
 
 PlaylistContainer::~PlaylistContainer() {
@@ -106,9 +108,13 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
 void PlaylistContainer::SetViewModel(Playlist* playlist) {
   // Set the view
   playlist->IgnoreSorting(true);
-  view()->setModel(playlist);
+  view()->setModel(playlist->proxy());
   view()->SetItemDelegates(manager_->library_backend());
+  view()->SetPlaylist(playlist);
   playlist->IgnoreSorting(false);
+
+  // Update filter
+  ui_->filter->setText(playlist->proxy()->filterRegExp().pattern());
 
   // Ensure that tab is current
   if (ui_->tab_bar->current_id() != manager_->current_id())
@@ -226,4 +232,8 @@ void PlaylistContainer::SetTabBarVisible(bool visible) {
 
 void PlaylistContainer::SetTabBarHeight(int height) {
   ui_->tab_bar->setMaximumHeight(height);
+}
+
+void PlaylistContainer::UpdateFilter() {
+  manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
 }

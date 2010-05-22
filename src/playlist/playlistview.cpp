@@ -27,6 +27,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QSortFilterProxyModel>
 
 #include <math.h>
 
@@ -39,6 +40,7 @@ const int PlaylistView::kDropIndicatorGradientWidth = 5;
 
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
+    playlist_(NULL),
     glow_enabled_(false),
     glow_intensity_step_(0),
     inhibit_autoscroll_timer_(new QTimer(this)),
@@ -78,17 +80,16 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
 }
 
-void PlaylistView::setModel(QAbstractItemModel *m) {
-  if (model()) {
-    disconnect(model(), SIGNAL(CurrentSongChanged(Song)),
+void PlaylistView::SetPlaylist(Playlist *playlist) {
+  if (playlist_) {
+    disconnect(playlist_, SIGNAL(CurrentSongChanged(Song)),
                this, SLOT(MaybeAutoscroll()));
   }
 
-  QTreeView::setModel(m);
+  playlist_ = playlist;
   LoadGeometry();
 
-  Playlist* playlist = qobject_cast<Playlist*>(m);
-  connect(playlist, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
+  connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
 }
 
 void PlaylistView::LoadGeometry() {
@@ -373,13 +374,12 @@ void PlaylistView::MaybeAutoscroll() {
 }
 
 void PlaylistView::JumpToCurrentlyPlayingTrack() {
-  Playlist* playlist = qobject_cast<Playlist*>(model());
-  Q_ASSERT(playlist);
+  Q_ASSERT(playlist_);
 
-  if (playlist->current_index() == -1)
+  if (playlist_->current_index() == -1)
     return;
 
-  QModelIndex current = playlist->index(playlist->current_index(), 0);
+  QModelIndex current = playlist_->index(playlist_->current_index(), 0);
   currently_autoscrolling_ = true;
 
   // Scroll to the item

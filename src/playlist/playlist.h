@@ -29,7 +29,9 @@
 
 class RadioService;
 class PlaylistBackend;
+class PlaylistFilter;
 
+class QSortFilterProxyModel;
 class QUndoStack;
 
 namespace PlaylistUndoCommands {
@@ -95,6 +97,8 @@ class Playlist : public QAbstractListModel {
   void Restore();
 
   // Accessors
+  QSortFilterProxyModel* proxy() const;
+
   int id() const { return id_; }
   int current_index() const;
   int last_played_index() const;
@@ -171,6 +175,7 @@ class Playlist : public QAbstractListModel {
   void ReshuffleIndices();
   int NextVirtualIndex(int i) const;
   int PreviousVirtualIndex(int i) const;
+  bool FilterContainsVirtualIndex(int i) const;
 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands
@@ -180,6 +185,8 @@ class Playlist : public QAbstractListModel {
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
 
  private:
+  PlaylistFilter* proxy_;
+
   PlaylistBackend* backend_;
   int id_;
 

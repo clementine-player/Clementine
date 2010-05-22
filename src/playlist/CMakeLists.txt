@@ -7,6 +7,7 @@ set(SOURCES
   playlistbackend.cpp
   playlistcontainer.cpp
   playlistdelegates.cpp
+  playlistfilter.cpp
   playlistheader.cpp
   playlistitem.cpp
   playlistmanager.cpp
@@ -22,6 +23,7 @@ set(HEADERS
   playlistbackend.h
   playlistcontainer.h
   playlistdelegates.h
+  playlistfilter.h
   playlistheader.h
   playlistmanager.h
   playlistsequence.h

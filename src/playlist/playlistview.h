@@ -32,10 +32,10 @@ class PlaylistView : public QTreeView {
   PlaylistView(QWidget* parent = 0);
 
   void SetItemDelegates(LibraryBackend* backend);
+  void SetPlaylist(Playlist* playlist);
   void RemoveSelected();
 
   // QTreeView
-  void setModel(QAbstractItemModel *model);
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   void keyPressEvent(QKeyEvent* event);
 
@@ -84,6 +84,8 @@ class PlaylistView : public QTreeView {
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
   QModelIndex PrevEditableIndex(const QModelIndex& current);
+
+  Playlist* playlist_;
 
   bool glow_enabled_;
   QBasicTimer glow_timer_;

@@ -70,6 +70,8 @@ private slots:
   void SetTabBarVisible(bool visible);
   void SetTabBarHeight(int height);
 
+  void UpdateFilter();
+
 private:
   void UpdateActiveIcon(const QIcon& icon);
 

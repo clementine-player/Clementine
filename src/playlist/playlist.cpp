@@ -15,10 +15,11 @@
 */
 
 #include "playlist.h"
+#include "playlistbackend.h"
+#include "playlistfilter.h"
+#include "playlistundocommands.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
-#include "playlistbackend.h"
-#include "playlistundocommands.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
@@ -35,6 +36,7 @@
 #include <QFileInfo>
 #include <QDirIterator>
 #include <QUndoStack>
+#include <QSortFilterProxyModel>
 
 #include <boost/bind.hpp>
 #include <algorithm>
@@ -47,6 +49,7 @@ const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 
 Playlist::Playlist(PlaylistBackend* backend, int id, QObject *parent)
   : QAbstractListModel(parent),
+    proxy_(new PlaylistFilter(this)),
     backend_(backend),
     id_(id),
     current_is_paused_(false),
@@ -62,6 +65,8 @@ Playlist::Playlist(PlaylistBackend* backend, int id, QObject *parent)
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
 
   Restore();
+
+  proxy_->setSourceModel(this);
 }
 
 Playlist::~Playlist() {
@@ -215,6 +220,13 @@ void Playlist::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
   ReshuffleIndices();
 }
 
+bool Playlist::FilterContainsVirtualIndex(int i) const {
+  if (i<0 || i>=virtual_items_.count())
+    return false;
+
+  return proxy_->filterAcceptsRow(virtual_items_[i], QModelIndex());
+}
+
 int Playlist::NextVirtualIndex(int i) const {
   PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
   PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
@@ -222,13 +234,22 @@ int Playlist::NextVirtualIndex(int i) const {
                     shuffle_mode == PlaylistSequence::Shuffle_Album;
 
   // This one's easy - if we have to repeat the current track then just return i
-  if (repeat_mode == PlaylistSequence::Repeat_Track)
+  if (repeat_mode == PlaylistSequence::Repeat_Track) {
+    if (!FilterContainsVirtualIndex(i))
+      return virtual_items_.count(); // It's not in the filter any more
     return i;
+  }
 
   // If we're not bothered about whether a song is on the same album then
   // return the next virtual index, whatever it is.
-  if (!album_only)
-    return i+1;
+  if (!album_only) {
+    ++i;
+
+    // Advance i until we find any track that is in the filter
+    while (i < virtual_items_.count() && !FilterContainsVirtualIndex(i))
+      ++i;
+    return i;
+  }
 
   // We need to advance i until we get something else on the same album
   Song last_song = current_item_metadata();
@@ -236,7 +257,8 @@ int Playlist::NextVirtualIndex(int i) const {
     Song this_song = item_at(virtual_items_[j])->Metadata();
     if (((last_song.is_compilation() && this_song.is_compilation()) ||
          last_song.artist() == this_song.artist()) &&
-        last_song.album() == this_song.album()) {
+        last_song.album() == this_song.album() &&
+        FilterContainsVirtualIndex(j)) {
       return j; // Found one
     }
   }
@@ -252,13 +274,22 @@ int Playlist::PreviousVirtualIndex(int i) const {
                     shuffle_mode == PlaylistSequence::Shuffle_Album;
 
   // This one's easy - if we have to repeat the current track then just return i
-  if (repeat_mode == PlaylistSequence::Repeat_Track)
+  if (repeat_mode == PlaylistSequence::Repeat_Track) {
+    if (!FilterContainsVirtualIndex(i))
+      return -1;
     return i;
+  }
 
   // If we're not bothered about whether a song is on the same album then
   // return the previous virtual index, whatever it is.
-  if (!album_only)
-    return i-1;
+  if (!album_only) {
+    --i;
+
+    // Decrement i until we find any track that is in the filter
+    while (i>=0 && !FilterContainsVirtualIndex(i))
+      --i;
+    return i;
+  }
 
   // We need to decrement i until we get something else on the same album
   Song last_song = current_item_metadata();
@@ -266,7 +297,8 @@ int Playlist::PreviousVirtualIndex(int i) const {
     Song this_song = item_at(virtual_items_[j])->Metadata();
     if (((last_song.is_compilation() && this_song.is_compilation()) ||
          last_song.artist() == this_song.artist()) &&
-        last_song.album() == this_song.album()) {
+        last_song.album() == this_song.album() &&
+        FilterContainsVirtualIndex(j)) {
       return j; // Found one
     }
   }
@@ -344,10 +376,10 @@ void Playlist::set_current_index(int i) {
   }
 
   if (old_current.isValid())
-    emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount));
+    emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount-1));
 
   if (current_item_index_.isValid() && current_item_index_ != old_current) {
-    emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount));
+    emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount-1));
     emit CurrentSongChanged(current_item_metadata());
   }
 
@@ -779,7 +811,7 @@ void Playlist::SetCurrentIsPaused(bool paused) {
 
   if (current_item_index_.isValid())
     dataChanged(index(current_item_index_.row(), 0),
-                index(current_item_index_.row(), ColumnCount));
+                index(current_item_index_.row(), ColumnCount-1));
 }
 
 void Playlist::Save() const {
@@ -860,9 +892,9 @@ void Playlist::StopAfter(int row) {
     stop_after_ = index(row, 0);
 
   if (old_stop_after.isValid())
-    emit dataChanged(old_stop_after, old_stop_after.sibling(old_stop_after.row(), ColumnCount));
+    emit dataChanged(old_stop_after, old_stop_after.sibling(old_stop_after.row(), ColumnCount-1));
   if (stop_after_.isValid())
-    emit dataChanged(stop_after_, stop_after_.sibling(stop_after_.row(), ColumnCount));
+    emit dataChanged(stop_after_, stop_after_.sibling(stop_after_.row(), ColumnCount-1));
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
@@ -880,7 +912,7 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
   current_item_->SetTemporaryMetadata(song);
   UpdateScrobblePoint();
 
-  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount));
+  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount-1));
   emit CurrentSongChanged(song);
 }
 
@@ -891,7 +923,7 @@ void Playlist::ClearStreamMetadata() {
   current_item_->ClearTemporaryMetadata();
   UpdateScrobblePoint();
 
-  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount));
+  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount-1));
 }
 
 bool Playlist::stop_after_current() const {
@@ -980,4 +1012,8 @@ void Playlist::set_sequence(PlaylistSequence* v) {
           SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
 
   ShuffleModeChanged(v->shuffle_mode());
+}
+
+QSortFilterProxyModel* Playlist::proxy() const {
+  return proxy_;
 }
