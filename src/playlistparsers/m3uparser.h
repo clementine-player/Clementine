@@ -17,31 +17,22 @@
 #ifndef M3UPARSER_H
 #define M3UPARSER_H
 
-#include <QDir>
-#include <QObject>
 #include <QUrl>
 
 #include "gtest/gtest_prod.h"
 
-#include "song.h"
+#include "parserbase.h"
 
-class QIODevice;
-
-class M3UParser : public QObject {
+class M3UParser : public ParserBase {
   Q_OBJECT
+
  public:
-  M3UParser(QIODevice* device, const QDir& directory = QDir(), QObject* parent = 0);
-  virtual ~M3UParser() {}
+  M3UParser(QObject* parent = 0);
 
-  // Reference valid as long as the M3UParser instance lives.
-  const SongList& Parse();
+  QStringList file_extensions() const { return QStringList() << "m3u"; }
 
-  struct Metadata {
-    Metadata() : length(-1) {}
-    QString artist;
-    QString title;
-    int length;
-  };
+  SongList Load(QIODevice* device, const QDir& dir = QDir()) const;
+  void Save(const SongList &songs, QIODevice* device, const QDir& dir = QDir()) const;
 
  private:
   enum M3UType {
@@ -50,8 +41,15 @@ class M3UParser : public QObject {
     LINK,      // Points to a directory.
   };
 
+  struct Metadata {
+    Metadata() : length(-1) {}
+    QString artist;
+    QString title;
+    int length;
+  };
+
   bool ParseMetadata(const QString& line, Metadata* metadata) const;
-  bool ParseTrackLocation(const QString& line, Song* song) const;
+  bool ParseTrackLocation(const QString& line, const QDir& dir, Song* song) const;
 
   FRIEND_TEST(M3UParserTest, ParsesMetadata);
   FRIEND_TEST(M3UParserTest, ParsesTrackLocation);
@@ -60,13 +58,6 @@ class M3UParser : public QObject {
 #ifdef Q_OS_WIN32
   FRIEND_TEST(M3UParserTest, ParsesTrackLocationAbsoluteWindows);
 #endif  // Q_OS_WIN32
-
-  QIODevice* device_;
-  M3UType type_;
-  QDir directory_;
-  Metadata current_metadata_;
-
-  SongList songs_;
 };
 
 #endif  // M3UPARSER_H

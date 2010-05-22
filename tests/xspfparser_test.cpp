@@ -17,7 +17,7 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "core/xspfparser.h"
+#include "playlistparsers/xspfparser.h"
 
 #include <QBuffer>
 
@@ -38,8 +38,8 @@ TEST_F(XSPFParserTest, ParsesOneTrackFromXML) {
       "</track></trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  XSPFParser parser(&buffer);
-  const SongList& songs = parser.Parse();
+  XSPFParser parser;
+  SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   const Song& song = songs[0];
   EXPECT_EQ("Foo", song.title());
@@ -62,8 +62,8 @@ TEST_F(XSPFParserTest, ParsesMoreThanOneTrackFromXML) {
       "</trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  XSPFParser parser(&buffer);
-  const SongList& songs = parser.Parse();
+  XSPFParser parser;
+  SongList songs = parser.Load(&buffer);
   ASSERT_EQ(2, songs.length());
   EXPECT_EQ("http://example.com/foo.mp3", songs[0].filename());
   EXPECT_EQ("http://example.com/bar.mp3", songs[1].filename());
@@ -84,8 +84,8 @@ TEST_F(XSPFParserTest, IgnoresInvalidLength) {
       "</track></trackList></playlist>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  XSPFParser parser(&buffer);
-  const SongList& songs = parser.Parse();
+  XSPFParser parser;
+  SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ(-1, songs[0].length());
 }

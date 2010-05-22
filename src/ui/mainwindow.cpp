@@ -20,12 +20,10 @@
 #include "core/commandlineoptions.h"
 #include "core/database.h"
 #include "core/globalshortcuts.h"
-#include "core/m3uparser.h"
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
 #include "core/player.h"
 #include "core/stylesheetloader.h"
-#include "core/xspfparser.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
 #include "library/libraryconfigdialog.h"
@@ -37,6 +35,7 @@
 #include "playlist/playlistsequence.h"
 #include "playlist/playlistview.h"
 #include "playlist/songplaylistitem.h"
+#include "playlistparsers/playlistparser.h"
 #include "radio/lastfmservice.h"
 #include "radio/radiomodel.h"
 #include "radio/radioview.h"
@@ -106,6 +105,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     radio_model_(new RadioModel(database_, network, this)),
     playlist_backend_(new PlaylistBackend(database_, this)),
     playlists_(new PlaylistManager(this)),
+    playlist_parser_(new PlaylistParser(this)),
     player_(new Player(playlists_, radio_model_->GetLastFMService(), engine, this)),
     library_(new Library(database_, this)),
     global_shortcuts_(new GlobalShortcuts(this)),
@@ -930,19 +930,8 @@ void MainWindow::AddFile() {
   // Add media
   QList<QUrl> urls;
   foreach (const QString& path, file_names) {
-    if (path.endsWith(".m3u")) {
-      QFile file(path);
-      QFileInfo info(file);
-      file.open(QIODevice::ReadOnly);
-      M3UParser parser(&file, info.dir());
-      const SongList& songs = parser.Parse();
-      playlists_->current()->InsertSongs(songs);
-    } else if (path.endsWith(".xspf") || path.endsWith(".xml")) {
-      QFile file(path);
-      file.open(QIODevice::ReadOnly);
-      XSPFParser parser(&file);
-      const SongList& songs = parser.Parse();
-      playlists_->current()->InsertSongs(songs);
+    if (playlist_parser_->can_load(path)) {
+      playlists_->current()->InsertSongs(playlist_parser_->Load(path));
     } else {
       QUrl url(QUrl::fromLocalFile(path));
       if (url.scheme().isEmpty())

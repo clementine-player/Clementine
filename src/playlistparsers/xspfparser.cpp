@@ -21,25 +21,27 @@
 #include <QUrl>
 #include <QXmlStreamReader>
 
-XSPFParser::XSPFParser(QIODevice* device, QObject* parent)
-    : QObject(parent),
-      device_(device) {
+XSPFParser::XSPFParser(QObject* parent)
+    : ParserBase(parent)
+{
 }
 
-const SongList& XSPFParser::Parse() {
-  QXmlStreamReader reader(device_);
+SongList XSPFParser::Load(QIODevice *device, const QDir&) const {
+  SongList ret;
+
+  QXmlStreamReader reader(device);
   if (!ParseUntilElement(&reader, "playlist") ||
       !ParseUntilElement(&reader, "trackList")) {
-    return songs_;
+    return ret;
   }
 
   while (!reader.atEnd() && ParseUntilElement(&reader, "track")) {
     Song song = ParseTrack(&reader);
     if (song.is_valid()) {
-      songs_ << song;
+      ret << song;
     }
   }
-  return songs_;
+  return ret;
 }
 
 bool XSPFParser::ParseUntilElement(QXmlStreamReader* reader, const QString& name) const {
@@ -132,4 +134,8 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
   // At least make an effort if we never find a </track>.
   song.Init(title, artist, album, length);
   return song;
+}
+
+void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+
 }

@@ -12,7 +12,6 @@ set(SOURCES
   globalshortcutbackend.cpp
   globalshortcuts.cpp
   gnomeglobalshortcutbackend.cpp
-  m3uparser.cpp
   mergedproxymodel.cpp
   networkaccessmanager.cpp
   player.cpp
@@ -22,7 +21,6 @@ set(SOURCES
   song.cpp
   stylesheetloader.cpp
   utilities.cpp
-  xspfparser.cpp
 )
 
 set(HEADERS
@@ -32,11 +30,9 @@ set(HEADERS
   database.h
   globalshortcuts.h
   gnomeglobalshortcutbackend.h
-  m3uparser.h
   mergedproxymodel.h
   networkaccessmanager.h
   player.h
-  xspfparser.h
 )
 
 if(NOT APPLE AND NOT WIN32)

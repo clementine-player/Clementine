@@ -56,6 +56,7 @@ target_link_libraries(clementine_ui
   clementine_engines
   clementine_library
   clementine_playlist
+  clementine_playlistparsers
   clementine_radio
   clementine_transcoder
 )

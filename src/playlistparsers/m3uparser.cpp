@@ -18,54 +18,57 @@
 
 #include <QtDebug>
 
-M3UParser::M3UParser(QIODevice* device, const QDir& directory, QObject* parent)
-    : QObject(parent),
-      device_(device),
-      type_(STANDARD),
-      directory_(directory) {
+M3UParser::M3UParser(QObject* parent)
+    : ParserBase(parent)
+{
 }
 
-const QList<Song>& M3UParser::Parse() {
-  QString line = QString::fromLatin1(device_->readLine()).trimmed();
+SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
+  SongList ret;
+
+  M3UType type = STANDARD;
+  Metadata current_metadata;
+
+  QString line = QString::fromLatin1(device->readLine()).trimmed();
   if (line.startsWith("#EXTM3U")) {
     // This is in extended M3U format.
-    type_ = EXTENDED;
-    line = QString::fromLatin1(device_->readLine()).trimmed();
+    type = EXTENDED;
+    line = QString::fromLatin1(device->readLine()).trimmed();
   }
 
   forever {
     if (line.startsWith('#')) {
       // Extended info or comment.
-      if (type_ == EXTENDED && line.startsWith("#EXT")) {
-        if (!ParseMetadata(line, &current_metadata_)) {
+      if (type == EXTENDED && line.startsWith("#EXT")) {
+        if (!ParseMetadata(line, &current_metadata)) {
           qWarning() << "Failed to parse metadata: " << line;
           continue;
         }
       }
     } else {
       Song song;
-      song.Init(current_metadata_.title,
-                current_metadata_.artist,
+      song.Init(current_metadata.title,
+                current_metadata.artist,
                 QString(),  // Unknown album.
-                current_metadata_.length);
+                current_metadata.length);
+
       // Track location.
-      QString location;
-      if (!ParseTrackLocation(line, &song)) {
+      if (!ParseTrackLocation(line, dir, &song)) {
         qWarning() << "Failed to parse location: " << line;
       } else {
-        songs_ << song;
-        current_metadata_.artist.clear();
-        current_metadata_.title.clear();
-        current_metadata_.length = -1;
+        ret << song;
+        current_metadata.artist.clear();
+        current_metadata.title.clear();
+        current_metadata.length = -1;
       }
     }
-    if (device_->atEnd()) {
+    if (device->atEnd()) {
       break;
     }
-    line = QString::fromLatin1(device_->readLine()).trimmed();
+    line = QString::fromLatin1(device->readLine()).trimmed();
   }
 
-  return songs_;
+  return ret;
 }
 
 bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata) const {
@@ -89,7 +92,7 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
   return true;
 }
 
-bool M3UParser::ParseTrackLocation(const QString& line, Song* song) const {
+bool M3UParser::ParseTrackLocation(const QString& line, const QDir& dir, Song* song) const {
   if (line.contains(QRegExp("^[a-z]+://"))) {
     // Looks like a url.
     QUrl temp(line);
@@ -113,7 +116,7 @@ bool M3UParser::ParseTrackLocation(const QString& line, Song* song) const {
   } else {
     // Relative path.
     QString proper_path = QDir::fromNativeSeparators(line);
-    QString absolute_path = directory_.absoluteFilePath(proper_path);
+    QString absolute_path = dir.absoluteFilePath(proper_path);
     if (!QFile::exists(absolute_path)) {
       return false;
     }
@@ -121,4 +124,8 @@ bool M3UParser::ParseTrackLocation(const QString& line, Song* song) const {
   }
   song->InitFromFile(song->filename(), -1);
   return true;
+}
+
+void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+  // TODO
 }

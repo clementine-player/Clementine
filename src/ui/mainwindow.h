@@ -27,34 +27,35 @@
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
 
-class PlaylistManager;
-class Player;
-class Library;
-class PlaylistBackend;
-class RadioModel;
-class Song;
-class RadioItem;
-class OSD;
-class TrackSlider;
-class EditTagDialog;
-class MultiLoadingIndicator;
-class SettingsDialog;
 class About;
 class AddStreamDialog;
 class AlbumCoverManager;
-class PlaylistSequence;
-class GlobalShortcuts;
-class GroupByDialog;
-class Equalizer;
 class CommandlineOptions;
-class TranscodeDialog;
 class Database;
-class NetworkAccessManager;
-class Ui_MainWindow;
+class EditTagDialog;
+class Equalizer;
+class GlobalShortcuts;
 class GlobalShortcutsDialog;
+class GroupByDialog;
+class Library;
+class MultiLoadingIndicator;
+class NetworkAccessManager;
+class OSD;
+class Player;
+class PlaylistBackend;
+class PlaylistManager;
+class PlaylistParser;
+class PlaylistSequence;
+class RadioItem;
+class RadioModel;
+class SettingsDialog;
+class Song;
+class SystemTrayIcon;
+class TrackSlider;
+class TranscodeDialog;
+class Ui_MainWindow;
 
 class QSortFilterProxyModel;
-class SystemTrayIcon;
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
@@ -162,6 +163,7 @@ class MainWindow : public QMainWindow {
   RadioModel* radio_model_;
   PlaylistBackend* playlist_backend_;
   PlaylistManager* playlists_;
+  PlaylistParser* playlist_parser_;
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;

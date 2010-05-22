@@ -18,7 +18,7 @@
 #include "test_utils.h"
 #include "mock_taglib.h"
 
-#include "core/m3uparser.h"
+#include "playlistparsers/m3uparser.h"
 
 #include <QBuffer>
 #include <QTemporaryFile>
@@ -52,7 +52,7 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
   taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
   Song song(&taglib_);
   QString line(temp.fileName());
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, &song));
+  ASSERT_TRUE(parser_.ParseTrackLocation(line, QDir(), &song));
   EXPECT_EQ(temp.fileName(), song.filename());
   EXPECT_EQ("foo", song.title());
   EXPECT_EQ("bar", song.artist());
@@ -64,10 +64,10 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
   temp.open();
   QFileInfo info(temp);
   taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
-  M3UParser parser(NULL, info.dir());
+  M3UParser parser;
   QString line(info.fileName());
   Song song(&taglib_);
-  ASSERT_TRUE(parser.ParseTrackLocation(line, &song));
+  ASSERT_TRUE(parser.ParseTrackLocation(line, info.dir(), &song));
   EXPECT_EQ(temp.fileName(), song.filename());
   EXPECT_EQ("foo", song.title());
 }
@@ -75,7 +75,7 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
 TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
   QString line("http://example.com/foo/bar.mp3");
   Song song;
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, &song));
+  ASSERT_TRUE(parser_.ParseTrackLocation(line, QDir(), &song));
   EXPECT_EQ("http://example.com/foo/bar.mp3", song.filename());
 }
 
@@ -85,8 +85,8 @@ TEST_F(M3UParserTest, ParsesSongsFromDevice) {
                     "http://foo.com/bar/somefile.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  M3UParser parser(&buffer);
-  const QList<Song>& songs = parser.Parse();
+  M3UParser parser;
+  SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.size());
   Song s = songs[0];
   EXPECT_EQ("Some Artist", s.artist());
@@ -101,8 +101,8 @@ TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
                     "http://baz.com/thing.mp3\n";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  M3UParser parser(&buffer, QDir("somedir"));
-  const QList<Song>& songs = parser.Parse();
+  M3UParser parser;
+  SongList songs = parser.Load(&buffer, QDir("somedir"));
   ASSERT_EQ(2, songs.size());
   EXPECT_PRED_FORMAT2(::testing::IsSubstring,
       "http://foo.com/bar/somefile.mp3", songs[0].filename().toStdString());

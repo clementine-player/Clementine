@@ -14,31 +14,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef XSPFPARSER_H
-#define XSPFPARSER_H
-
-#include "song.h"
+#ifndef PARSERBASE_H
+#define PARSERBASE_H
 
 #include <QObject>
-#include <QXmlStreamReader>
+#include <QDir>
 
-class QIODevice;
+#include "core/song.h"
 
-class XSPFParser : public QObject {
+class ParserBase : public QObject {
   Q_OBJECT
- public:
-  XSPFParser(QIODevice* device, QObject* parent = 0);
-  virtual ~XSPFParser() {}
 
-  const SongList& Parse();
+public:
+  ParserBase(QObject *parent = 0);
 
- private:
-  bool ParseUntilElement(QXmlStreamReader* reader, const QString& element) const;
-  void IgnoreElement(QXmlStreamReader* reader) const;
-  Song ParseTrack(QXmlStreamReader* reader) const;
+  virtual QStringList file_extensions() const = 0;
 
-  QIODevice* device_;
-  SongList songs_;
+  virtual SongList Load(QIODevice* device, const QDir& dir = QDir()) const = 0;
+  virtual void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const = 0;
 };
 
-#endif
+#endif // PARSERBASE_H

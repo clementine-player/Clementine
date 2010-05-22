@@ -32,6 +32,7 @@ add_subdirectory(core)
 add_subdirectory(engines)
 add_subdirectory(library)
 add_subdirectory(playlist)
+add_subdirectory(playlistparsers)
 add_subdirectory(radio)
 add_subdirectory(transcoder)
 add_subdirectory(ui)
@@ -59,6 +60,7 @@ target_link_libraries(clementine_lib
   clementine_engines
   clementine_library
   clementine_playlist
+  clementine_playlistparsers
   clementine_radio
   clementine_transcoder
   clementine_ui
