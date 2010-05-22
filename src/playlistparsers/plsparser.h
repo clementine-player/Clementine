@@ -25,6 +25,7 @@ class PLSParser : public ParserBase {
 public:
   PLSParser(QObject* parent = 0);
 
+  QString name() const { return "PLS"; }
   QStringList file_extensions() const { return QStringList() << "pls"; }
 
   SongList Load(QIODevice* device, const QDir& dir = QDir()) const;

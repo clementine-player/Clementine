@@ -236,7 +236,7 @@ void PlaylistContainer::LoadPlaylist() {
   QString filename = settings_.value("last_load_playlist").toString();
   filename = QFileDialog::getOpenFileName(
       this, tr("Load playlist"), filename,
-      tr("Playlists (%1)").arg(manager_->parser()->filter_text()));
+      manager_->parser()->filters());
 
   if (filename.isNull())
     return;
@@ -250,7 +250,7 @@ void PlaylistContainer::SavePlaylist(int id = -1) {
   QString filename = settings_.value("last_save_playlist").toString();
   filename = QFileDialog::getSaveFileName(
       this, tr("Save playlist"), filename,
-      tr("Playlists (%1)").arg(manager_->parser()->filter_text()));
+      manager_->parser()->filters());
 
   if (filename.isNull())
     return;

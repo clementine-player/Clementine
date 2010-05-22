@@ -28,6 +28,7 @@ class ParserBase : public QObject {
 public:
   ParserBase(QObject *parent = 0);
 
+  virtual QString name() const = 0;
   virtual QStringList file_extensions() const = 0;
 
   virtual SongList Load(QIODevice* device, const QDir& dir = QDir()) const = 0;

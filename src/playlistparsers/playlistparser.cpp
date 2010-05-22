@@ -40,11 +40,22 @@ QStringList PlaylistParser::file_extensions() const {
   return ret;
 }
 
-QString PlaylistParser::filter_text() const {
-  QStringList extensions;
-  foreach (const QString& extension, file_extensions())
-    extensions << "*." + extension;
-  return extensions.join(" ");
+QString PlaylistParser::filters() const {
+  QStringList filters;
+  QStringList all_extensions;
+  foreach (ParserBase* parser, parsers_) {
+    QStringList extensions;
+    foreach (const QString& extension, parser->file_extensions())
+      extensions << "*." + extension;
+    all_extensions << extensions;
+
+    filters << tr("%1 playlists (%2)").arg(parser->name(), extensions.join(" "));
+  }
+
+  filters.prepend(tr("All playlists (%1)").arg(all_extensions.join(" ")));
+
+  qDebug() << filters.join(";;");
+  return filters.join(";;");
 }
 
 bool PlaylistParser::can_load(const QString &filename) const {

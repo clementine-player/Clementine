@@ -27,6 +27,7 @@ class XSPFParser : public ParserBase {
  public:
   XSPFParser(QObject* parent = 0);
 
+  QString name() const { return "XSPF"; }
   QStringList file_extensions() const { return QStringList() << "xspf"; }
 
   SongList Load(QIODevice *device, const QDir &dir = QDir()) const;

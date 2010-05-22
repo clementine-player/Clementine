@@ -29,6 +29,7 @@ class M3UParser : public ParserBase {
  public:
   M3UParser(QObject* parent = 0);
 
+  QString name() const { return "M3U"; }
   QStringList file_extensions() const { return QStringList() << "m3u"; }
 
   SongList Load(QIODevice* device, const QDir& dir = QDir()) const;
