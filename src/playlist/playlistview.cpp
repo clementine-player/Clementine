@@ -79,8 +79,10 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
 }
 
 void PlaylistView::setModel(QAbstractItemModel *m) {
-  if (model())
-    disconnect(model(), 0, this, 0);
+  if (model()) {
+    disconnect(model(), SIGNAL(CurrentSongChanged(Song)),
+               this, SLOT(MaybeAutoscroll()));
+  }
 
   QTreeView::setModel(m);
   LoadGeometry();
