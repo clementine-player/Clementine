@@ -30,6 +30,8 @@ public:
   PlaylistParser(QObject *parent = 0);
 
   QStringList file_extensions() const;
+  QString filter_text() const;
+
   bool can_load(const QString& filename) const;
 
   SongList Load(const QString& filename) const;

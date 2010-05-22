@@ -72,13 +72,15 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   return ret;
 }
 
-void PlaylistManager::New(const QString& name) {
+void PlaylistManager::New(const QString& name, const SongList& songs) {
   int id = playlist_backend_->CreatePlaylist(name);
 
   if (id == -1)
     qFatal("Couldn't create playlist");
 
-  AddPlaylist(id, name);
+  Playlist* playlist = AddPlaylist(id, name);
+  playlist->InsertSongs(songs);
+
   SetCurrentPlaylist(id);
 }
 

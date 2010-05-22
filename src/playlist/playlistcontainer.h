@@ -24,6 +24,7 @@ class Ui_PlaylistContainer;
 
 class Playlist;
 class PlaylistManager;
+class PlaylistParser;
 class PlaylistView;
 
 class QTimeLine;
@@ -84,6 +85,7 @@ private:
 private:
   Ui_PlaylistContainer* ui_;
 
+  PlaylistParser* parser_;
   PlaylistManager* manager_;
   QAction* undo_;
   QAction* redo_;

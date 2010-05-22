@@ -17,6 +17,7 @@
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
 #include "ui_playlistcontainer.h"
+#include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 
 #include <QUndoStack>
@@ -25,12 +26,16 @@
 #include <QTimeLine>
 #include <QSortFilterProxyModel>
 #include <QLabel>
+#include <QFileDialog>
+#include <QMessageBox>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
 
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_PlaylistContainer),
+    parser_(new PlaylistParser(this)),
+    manager_(NULL),
     undo_(NULL),
     redo_(NULL),
     starting_up_(true),
@@ -228,7 +233,27 @@ void PlaylistContainer::NewPlaylist() {
 }
 
 void PlaylistContainer::LoadPlaylist() {
+  QString filename = settings_.value("last_load_playlist").toString();
+  filename = QFileDialog::getOpenFileName(
+      this, tr("Load playlist"), filename,
+      tr("Playlists (%1)").arg(parser_->filter_text()));
 
+  if (filename.isNull())
+    return;
+
+  settings_.setValue("last_load_playlist", filename);
+
+  SongList songs = parser_->Load(filename);
+  QFileInfo info(filename);
+
+  if (songs.isEmpty()) {
+    QMessageBox::information(this, tr("Error"),
+        tr("The playlist '%1' was empty or could not be loaded.").arg(
+            info.completeBaseName()));
+    return;
+  }
+
+  manager_->New(info.baseName(), songs);
 }
 
 void PlaylistContainer::SavePlaylist() {

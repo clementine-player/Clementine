@@ -38,6 +38,13 @@ QStringList PlaylistParser::file_extensions() const {
   return ret;
 }
 
+QString PlaylistParser::filter_text() const {
+  QStringList extensions;
+  foreach (const QString& extension, file_extensions())
+    extensions << "*." + extension;
+  return extensions.join(" ");
+}
+
 bool PlaylistParser::can_load(const QString &filename) const {
   return file_extensions().contains(QFileInfo(filename).suffix());
 }

@@ -20,11 +20,12 @@
 #include <QObject>
 #include <QMap>
 
+#include "core/song.h"
+
 class LibraryBackend;
 class Playlist;
 class PlaylistBackend;
 class PlaylistSequence;
-class Song;
 
 class QModelIndex;
 class QUrl;
@@ -53,7 +54,7 @@ public:
   PlaylistSequence* sequence() const { return sequence_; }
 
 public slots:
-  void New(const QString& name);
+  void New(const QString& name, const SongList& songs = SongList());
   void Load(const QString& filename);
   void Save(int id, const QString& filename);
   void Rename(int id, const QString& new_name);
