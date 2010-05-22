@@ -384,7 +384,8 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
                          ((crossfade_enabled_ && change == Engine::Manual) ||
                           (autocrossfade_enabled_ && change == Engine::Auto));
 
-  if (!crossfade && current_pipeline_ && current_pipeline_->url() == url) {
+  if (!crossfade && current_pipeline_ && current_pipeline_->url() == url &&
+      change == Engine::Auto) {
     // We're not crossfading, and the pipeline is already playing the URI we
     // want, so just do nothing.
     return true;
