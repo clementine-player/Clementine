@@ -6,6 +6,7 @@ set(SOURCES
   m3uparser.cpp
   parserbase.cpp
   playlistparser.cpp
+  plsparser.cpp
   xspfparser.cpp
 )
 
@@ -13,6 +14,7 @@ set(HEADERS
   m3uparser.h
   parserbase.h
   playlistparser.h
+  plsparser.h
   xspfparser.h
 )
 

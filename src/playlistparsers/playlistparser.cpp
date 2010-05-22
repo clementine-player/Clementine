@@ -17,6 +17,7 @@
 #include "playlistparser.h"
 #include "xspfparser.h"
 #include "m3uparser.h"
+#include "plsparser.h"
 
 #include <QtDebug>
 
@@ -25,6 +26,7 @@ PlaylistParser::PlaylistParser(QObject *parent)
 {
   parsers_ << new M3UParser(this);
   parsers_ << new XSPFParser(this);
+  parsers_ << new PLSParser(this);
 }
 
 QStringList PlaylistParser::file_extensions() const {

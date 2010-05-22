@@ -92,40 +92,6 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
   return true;
 }
 
-bool M3UParser::ParseTrackLocation(const QString& line, const QDir& dir, Song* song) const {
-  if (line.contains(QRegExp("^[a-z]+://"))) {
-    // Looks like a url.
-    QUrl temp(line);
-    if (temp.isValid()) {
-      song->set_filename(temp.toString());
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  // Should be a local path.
-  if (QDir::isAbsolutePath(line)) {
-    // Absolute path.
-    // Fix windows \, eg. C:\foo -> C:/foo.
-    QString proper_path = QDir::fromNativeSeparators(line);
-    if (!QFile::exists(proper_path)) {
-      return false;
-    }
-    song->set_filename(proper_path);
-  } else {
-    // Relative path.
-    QString proper_path = QDir::fromNativeSeparators(line);
-    QString absolute_path = dir.absoluteFilePath(proper_path);
-    if (!QFile::exists(absolute_path)) {
-      return false;
-    }
-    song->set_filename(absolute_path);
-  }
-  song->InitFromFile(song->filename(), -1);
-  return true;
-}
-
 void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
   // TODO
 }

@@ -16,7 +16,41 @@
 
 #include "parserbase.h"
 
+#include <QUrl>
+
 ParserBase::ParserBase(QObject *parent)
   : QObject(parent)
 {
+}
+
+bool ParserBase::ParseTrackLocation(const QString& filename_or_url,
+                                    const QDir& dir, Song* song) const {
+  if (filename_or_url.contains(QRegExp("^[a-z]+://"))) {
+    // Looks like a url.
+    QUrl temp(filename_or_url);
+    if (temp.isValid()) {
+      song->set_filename(temp.toString());
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Should be a local path.
+  if (QDir::isAbsolutePath(filename_or_url)) {
+    // Absolute path.
+    // Fix windows \, eg. C:\foo -> C:/foo.
+    QString proper_path = QDir::fromNativeSeparators(filename_or_url);
+    if (!QFile::exists(proper_path)) {
+      return false;
+    }
+    song->set_filename(proper_path);
+  } else {
+    // Relative path.
+    QString proper_path = QDir::fromNativeSeparators(filename_or_url);
+    QString absolute_path = dir.absoluteFilePath(proper_path);
+    song->set_filename(absolute_path);
+  }
+  song->InitFromFile(song->filename(), -1);
+  return true;
 }

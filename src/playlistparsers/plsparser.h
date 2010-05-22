@@ -14,28 +14,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PARSERBASE_H
-#define PARSERBASE_H
+#ifndef PLSPARSER_H
+#define PLSPARSER_H
 
-#include <QObject>
-#include <QDir>
+#include "parserbase.h"
 
-#include "core/song.h"
-
-class ParserBase : public QObject {
+class PLSParser : public ParserBase {
   Q_OBJECT
 
 public:
-  ParserBase(QObject *parent = 0);
+  PLSParser(QObject* parent = 0);
 
-  virtual QStringList file_extensions() const = 0;
+  QStringList file_extensions() const { return QStringList() << "pls"; }
 
-  virtual SongList Load(QIODevice* device, const QDir& dir = QDir()) const = 0;
-  virtual void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const = 0;
-
-protected:
-  bool ParseTrackLocation(const QString& filename_or_url, const QDir& dir,
-                          Song* song) const;
+  SongList Load(QIODevice* device, const QDir& dir = QDir()) const;
+  void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const;
 };
 
-#endif // PARSERBASE_H
+#endif // PLSPARSER_H
