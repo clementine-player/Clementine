@@ -102,11 +102,7 @@ void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
     }
     QString meta = QString("#EXTINF:%1,%2 - %3\n").arg(song.length()).arg(song.artist()).arg(song.title());
     device->write(meta.toLatin1());
-    if (song.filetype() == Song::Type_Stream) {
-      device->write(song.filename().toLatin1());
-    } else {
-      device->write(MakeRelativeTo(song.filename(), dir).toLatin1());
-    }
+    device->write(MakeRelativeTo(song.filename(), dir).toLatin1());
     device->write("\n");
   }
 }

@@ -145,12 +145,7 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
   QDomElement track_list = doc.createElement("trackList");
   root.appendChild(track_list);
   foreach (const Song& song, songs) {
-    QString url;
-    if (song.filetype() == Song::Type_Stream) {
-      url = song.filename();
-    } else {
-      url = QUrl::fromLocalFile(MakeRelativeTo(song.filename(), dir)).toString();
-    }
+    QString url = MakeRelativeTo(song.filename(), dir);
     if (url.isEmpty()) {
       continue;  // Skip empty items like Last.fm streams.
     }
