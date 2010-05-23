@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
 #include "test_utils.h"
 #include "mock_taglib.h"
@@ -22,6 +23,8 @@
 
 #include <QBuffer>
 #include <QTemporaryFile>
+
+using ::testing::HasSubstr;
 
 class M3UParserTest : public ::testing::Test {
  protected:
@@ -123,4 +126,23 @@ TEST_F(M3UParserTest, ParsesActualM3U) {
   EXPECT_EQ(203, songs[0].length());
   EXPECT_EQ("ほっぴンちょっぴン", songs.back().title());
   EXPECT_EQ(85, songs.back().length());
+}
+
+TEST_F(M3UParserTest, SavesSong) {
+  QByteArray data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::WriteOnly);
+  Song one;
+  one.set_filetype(Song::Type_Stream);
+  one.set_title("foo");
+  one.set_artist("bar");
+  one.set_length(123);
+  one.set_filename("http://www.example.com/foo.mp3");
+  SongList songs;
+  songs << one;
+  M3UParser parser;
+  parser.Save(songs, &buffer);
+  EXPECT_THAT(data.constData(), HasSubstr("#EXTM3U"));
+  EXPECT_THAT(data.constData(), HasSubstr("#EXTINF:123,bar - foo"));
+  EXPECT_THAT(data.constData(), HasSubstr("http://www.example.com/foo.mp3"));
 }
