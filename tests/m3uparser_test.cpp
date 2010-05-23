@@ -112,3 +112,15 @@ TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
   EXPECT_EQ(-1, songs[1].length());
   EXPECT_TRUE(songs[0].artist().isEmpty());
 }
+
+TEST_F(M3UParserTest, ParsesActualM3U) {
+  QFile file(":testdata/test.m3u");
+  file.open(QIODevice::ReadOnly);
+  M3UParser parser;
+  SongList songs = parser.Load(&file, QDir("somedir"));
+  ASSERT_EQ(239, songs.size());
+  EXPECT_EQ("gravity", songs[0].title());
+  EXPECT_EQ(203, songs[0].length());
+  EXPECT_EQ("ほっぴンちょっぴン", songs.back().title());
+  EXPECT_EQ(85, songs.back().length());
+}

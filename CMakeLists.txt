@@ -100,6 +100,7 @@ if (WIN32)
 endif(WIN32)
 
 add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
+add_definitions(-DQT_NO_CAST_TO_ASCII)
 
 # Translations stuff
 find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext)

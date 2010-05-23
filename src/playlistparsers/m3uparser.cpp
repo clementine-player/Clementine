@@ -81,14 +81,16 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
   if (!ok) {
     return false;
   }
+  metadata->length = length;
+
   QString track_info = info.section(',', 1);
   QStringList list = track_info.split('-');
   if (list.size() <= 1) {
-    return false;
+    metadata->title = track_info;
+    return true;
   }
   metadata->artist = list[0].trimmed();
   metadata->title = list[1].trimmed();
-  metadata->length = length;
   return true;
 }
 

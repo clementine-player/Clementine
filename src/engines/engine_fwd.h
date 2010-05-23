@@ -7,7 +7,7 @@
 
 namespace Engine
 {
-    class SimpleMetaBundle;
+    struct SimpleMetaBundle;
     class Base;
 
     enum Type { gstreamer, vlc, xine, qt_phonon };
