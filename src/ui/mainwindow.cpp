@@ -328,6 +328,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   tray_menu->addAction(ui_->action_previous_track);
   tray_menu->addAction(ui_->action_play_pause);
   tray_menu->addAction(ui_->action_stop);
+  tray_menu->addAction(ui_->action_stop_after_this_track);
   tray_menu->addAction(ui_->action_next_track);
   tray_menu->addSeparator();
   tray_menu->addAction(ui_->action_love);
