@@ -53,6 +53,11 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   connect(ui_.gst_plugin, SIGNAL(currentIndexChanged(int)), SLOT(GstPluginChanged(int)));
 #endif
 
+  connect(ui_.replaygain_preamp, SIGNAL(valueChanged(int)), SLOT(RgPreampChanged(int)));
+  ui_.replaygain_preamp_label->setMinimumWidth(
+      QFontMetrics(ui_.replaygain_preamp_label->font()).width("-WW.W dB"));
+  RgPreampChanged(ui_.replaygain_preamp->value());
+
   // Behaviour
   connect(ui_.b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
 
@@ -140,6 +145,10 @@ void SettingsDialog::accept() {
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", ui_.gst_plugin->itemData(ui_.gst_plugin->currentIndex()).toString());
   s.setValue("device", ui_.gst_device->text());
+  s.setValue("rgenabled", ui_.replaygain->isChecked());
+  s.setValue("rgmode", ui_.replaygain_mode->currentIndex());
+  s.setValue("rgpreamp", float(ui_.replaygain_preamp->value()) / 10 - 15);
+  s.setValue("rgcompression", ui_.replaygain_compression->isChecked());
   s.endGroup();
 #endif
 
@@ -208,6 +217,10 @@ void SettingsDialog::showEvent(QShowEvent*) {
     }
   }
   ui_.gst_device->setText(s.value("device").toString());
+  ui_.replaygain->setChecked(s.value("rgenabled", false).toBool());
+  ui_.replaygain_mode->setCurrentIndex(s.value("rgmode", 0).toInt());
+  ui_.replaygain_preamp->setValue(s.value("rgpreamp", 0.0).toFloat() * 10 + 150);
+  ui_.replaygain_compression->setChecked(s.value("rgcompression", true).toBool());
   s.endGroup();
 #endif
 
@@ -329,28 +342,36 @@ void SettingsDialog::ShowTrayIconToggled(bool on) {
 }
 
 #ifdef HAVE_GSTREAMER
-void SettingsDialog::SetGstEngine(const GstEngine *engine) {
-  GstEngine::PluginDetailsList list = engine->GetOutputsList();
+  void SettingsDialog::SetGstEngine(const GstEngine *engine) {
+    GstEngine::PluginDetailsList list = engine->GetOutputsList();
 
-  ui_.gst_plugin->setItemData(0, GstEngine::kAutoSink);
-  foreach (const GstEngine::PluginDetails& details, list) {
-    if (details.name == "autoaudiosink")
-      continue;
+    ui_.gst_plugin->setItemData(0, GstEngine::kAutoSink);
+    foreach (const GstEngine::PluginDetails& details, list) {
+      if (details.name == "autoaudiosink")
+        continue;
 
-    ui_.gst_plugin->addItem(details.long_name, details.name);
+      ui_.gst_plugin->addItem(details.long_name, details.name);
+    }
+    ui_.gst_group->setEnabled(true);
+    ui_.replaygain_group->setEnabled(true);
   }
-  ui_.gst_group->setEnabled(true);
+
+  void SettingsDialog::GstPluginChanged(int index) {
+    QString name = ui_.gst_plugin->itemData(index).toString();
+
+    bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
+
+    ui_.gst_device->setEnabled(enabled);
+    ui_.gst_device_label->setEnabled(enabled);
+  }
+#endif // HAVE_GSTREAMER
+
+void SettingsDialog::RgPreampChanged(int value) {
+  float db = float(value) / 10 - 15;
+  QString db_str;
+  db_str.sprintf("%+.1f dB", db);
+  ui_.replaygain_preamp_label->setText(db_str);
 }
-
-void SettingsDialog::GstPluginChanged(int index) {
-  QString name = ui_.gst_plugin->itemData(index).toString();
-
-  bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
-
-  ui_.gst_device->setEnabled(enabled);
-  ui_.gst_device_label->setEnabled(enabled);
-}
-#endif
 
 void SettingsDialog::FadingOptionsChanged() {
   ui_.fading_options->setEnabled(

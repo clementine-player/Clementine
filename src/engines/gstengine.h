@@ -145,6 +145,11 @@ class GstEngine : public Engine::Base {
   int equalizer_preamp_;
   QList<int> equalizer_gains_;
 
+  bool rg_enabled_;
+  int rg_mode_;
+  float rg_preamp_;
+  bool rg_compression_;
+
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
 

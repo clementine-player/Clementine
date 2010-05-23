@@ -63,6 +63,7 @@ class SettingsDialog : public QDialog {
   void GstPluginChanged(int index);
 #endif
   void FadingOptionsChanged();
+  void RgPreampChanged(int value);
 
  private:
   Ui::SettingsDialog ui_;

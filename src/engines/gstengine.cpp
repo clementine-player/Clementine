@@ -55,6 +55,10 @@ GstEngine::GstEngine()
     delayq_(g_queue_new()),
     current_sample_(0),
     equalizer_enabled_(false),
+    rg_enabled_(false),
+    rg_mode_(0),
+    rg_preamp_(0.0),
+    rg_compression_(true),
     seek_timer_(new QTimer(this)),
     timer_id_(-1)
 {
@@ -130,6 +134,11 @@ void GstEngine::ReloadSettings() {
     sink_ = "directsoundsink";
   }
 #endif
+
+  rg_enabled_ = s.value("rgenabled", false).toBool();
+  rg_mode_ = s.value("rgmode", 0).toInt();
+  rg_preamp_ = s.value("rgpreamp", 0.0).toFloat();
+  rg_compression_ = s.value("rgcompression", true).toBool();
 }
 
 
@@ -620,6 +629,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
   ret->set_forwards_buffers(true);
   ret->set_output_device(sink_, device_);
+  ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
 
   connect(ret.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(EndOfStreamReached(bool)));
   connect(ret.get(), SIGNAL(BufferFound(GstBuffer*)), SLOT(AddBufferToScope(GstBuffer*)));

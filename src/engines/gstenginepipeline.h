@@ -41,6 +41,7 @@ class GstEnginePipeline : public QObject {
   // Call these setters before Init
   void set_output_device(const QString& sink, const QString& device);
   void set_forwards_buffers(bool v) { forwards_buffers_ = v; }
+  void set_replaygain(bool enabled, int mode, float preamp, bool compression);
 
   // Creates the pipeline, returns false on error
   bool Init(const QUrl& url);
@@ -110,6 +111,11 @@ class GstEnginePipeline : public QObject {
   QString device_;
   bool forwards_buffers_;
 
+  bool rg_enabled_;
+  int rg_mode_;
+  float rg_preamp_;
+  bool rg_compression_;
+
   QUrl url_;
   QUrl next_url_;
 
@@ -127,8 +133,12 @@ class GstEnginePipeline : public QObject {
   GstElement* audiobin_;
 
   // Elements in the audiobin
-  // audioconvert ! equalizer ! volume ! audioscale ! audioconvert ! audiosink
+  // audioconvert ! rgvolume ! rglimiter ! audioconvert ! equalizer ! volume !
+  // audioresample ! audioconvert ! audiosink
   GstElement* audioconvert_;
+  GstElement* rgvolume_;
+  GstElement* rglimiter_;
+  GstElement* audioconvert2_;
   GstElement* equalizer_;
   GstElement* volume_;
   GstElement* audioscale_;

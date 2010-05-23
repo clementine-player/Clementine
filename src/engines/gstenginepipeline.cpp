@@ -29,6 +29,10 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     valid_(false),
     sink_(GstEngine::kAutoSink),
     forwards_buffers_(false),
+    rg_enabled_(false),
+    rg_mode_(0),
+    rg_preamp_(0.0),
+    rg_compression_(true),
     volume_percent_(100),
     volume_modifier_(1.0),
     fader_(NULL),
@@ -36,6 +40,9 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     uridecodebin_(NULL),
     audiobin_(NULL),
     audioconvert_(NULL),
+    rgvolume_(NULL),
+    rglimiter_(NULL),
+    audioconvert2_(NULL),
     equalizer_(NULL),
     volume_(NULL),
     audioscale_(NULL),
@@ -46,6 +53,14 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
 void GstEnginePipeline::set_output_device(const QString &sink, const QString &device) {
   sink_ = sink;
   device_ = device;
+}
+
+void GstEnginePipeline::set_replaygain(bool enabled, int mode, float preamp,
+                                       bool compression) {
+  rg_enabled_ = enabled;
+  rg_mode_ = mode;
+  rg_preamp_ = preamp;
+  rg_compression_ = compression;
 }
 
 bool GstEnginePipeline::StopUriDecodeBin(gpointer bin) {
@@ -85,8 +100,8 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // The uri decode bin is a gstreamer builtin that automatically picks the
   // right type of source and decoder for the URI.
   // The audio bin gets created here and contains:
-  //   audioconvert -> equalizer -> volume -> audioscale -> audioconvert ->
-  //   audiosink
+  //   audioconvert -> rgvolume -> rglimiter -> equalizer -> volume ->
+  //   audioscale -> audioconvert -> audiosink
 
   // Decode bin
   if (!ReplaceDecodeBin(url)) return false;
@@ -107,6 +122,19 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   if (!(audioconvert_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
   if (!(volume_ = engine_->CreateElement("volume", audiobin_))) { return false; }
   if (!(audioscale_ = engine_->CreateElement("audioresample", audiobin_))) { return false; }
+  GstElement* scope_element = audioconvert_;
+
+  if (rg_enabled_) {
+    if (!(rgvolume_ = engine_->CreateElement("rgvolume", audiobin_))) { return false; }
+    if (!(rglimiter_ = engine_->CreateElement("rglimiter", audiobin_))) { return false; }
+    if (!(audioconvert2_ = engine_->CreateElement("audioconvert", audiobin_, "audioconvert2"))) { return false; }
+    scope_element = audioconvert2_;
+
+    // Set replaygain settings
+    g_object_set(G_OBJECT(rgvolume_), "album-mode", rg_mode_, NULL);
+    g_object_set(G_OBJECT(rgvolume_), "pre-amp", double(rg_preamp_), NULL);
+    g_object_set(G_OBJECT(rglimiter_), "enabled", int(rg_compression_), NULL);
+  }
 
   GstPad* pad = gst_element_get_pad(audioconvert_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
@@ -115,7 +143,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // Add a data probe on the src pad of the audioconvert element for our scope.
   // We do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not affected by them
-  pad = gst_element_get_pad(audioconvert_, "src");
+  pad = gst_element_get_pad(scope_element, "src");
   gst_pad_add_buffer_probe(pad, G_CALLBACK(HandoffCallback), this);
   gst_object_unref (pad);
 
@@ -124,14 +152,15 @@ bool GstEnginePipeline::Init(const QUrl &url) {
       "width", G_TYPE_INT, 16,
       "signed", G_TYPE_BOOLEAN, true,
       NULL);
-  gst_element_link_filtered(audioconvert_, equalizer_, caps);
+  gst_element_link_filtered(scope_element, equalizer_, caps);
   gst_caps_unref(caps);
 
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
-  GstElement* convert = engine_->CreateElement("audioconvert", audiobin_, "FFFUUUU");
+  GstElement* convert = engine_->CreateElement("audioconvert", audiobin_, "audioconvert3");
   if (!convert) { return false; }
-  gst_element_link_many(equalizer_, volume_,
-                        audioscale_, convert, audiosink_, NULL);
+  if (rg_enabled_)
+    gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);
+  gst_element_link_many(equalizer_, volume_, audioscale_, convert, audiosink_, NULL);
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
@@ -195,6 +224,8 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
 
   gst_message_parse_error(msg, &error, &debugs);
   QString message = QString::fromLocal8Bit(error->message);
+
+  qDebug() << debugs;
 
   g_error_free(error);
   free(debugs);
