@@ -16,8 +16,10 @@
 
 #include "xspfparser.h"
 
+#include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
+#include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
 
@@ -137,5 +139,52 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
 }
 
 void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+  QDomDocument doc;
+  QDomElement root = doc.createElement("playlist");
+  doc.appendChild(root);
+  QDomElement track_list = doc.createElement("trackList");
+  root.appendChild(track_list);
+  foreach (const Song& song, songs) {
+    QString url;
+    if (song.filetype() == Song::Type_Stream) {
+      url = song.filename();
+    } else {
+      url = QUrl::fromLocalFile(MakeRelativeTo(song.filename(), dir)).toString();
+    }
+    if (url.isEmpty()) {
+      continue;  // Skip empty items like Last.fm streams.
+    }
+    QDomElement track = doc.createElement("track");
+    track_list.appendChild(track);
+    MaybeAppendElementWithText("location", url, &doc, &track);
+    MaybeAppendElementWithText("creator", song.artist(), &doc, &track);
+    MaybeAppendElementWithText("album", song.album(), &doc, &track);
+    MaybeAppendElementWithText("title", song.title(), &doc, &track);
+    if (song.length() != -1) {
+      MaybeAppendElementWithText("duration", QString::number(song.length() * 1000), &doc, &track);
+    }
+    QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
+    // Ignore images that are in our resource bundle.
+    if (!art.startsWith(":") && !art.isEmpty()) {
+      // Convert local files to URLs.
+      if (!art.contains(QRegExp("^\\w+://"))) {
+        art = QUrl::fromLocalFile(MakeRelativeTo(art, dir)).toString();
+      }
+      MaybeAppendElementWithText("image", art, &doc, &track);
+    }
+  }
 
+  device->write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+  device->write(doc.toByteArray(2));
+}
+
+void XSPFParser::MaybeAppendElementWithText(
+    const QString& element_name, const QString& text, QDomDocument* doc, QDomNode* parent) const {
+  if (text.isEmpty()) {
+    return;
+  }
+  QDomElement element = doc->createElement(element_name);
+  QDomText t = doc->createTextNode(text);
+  element.appendChild(t);
+  parent->appendChild(element);
 }

@@ -15,11 +15,14 @@
 */
 
 #include "test_utils.h"
+#include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
 
 #include "playlistparsers/xspfparser.h"
 
 #include <QBuffer>
+
+using ::testing::HasSubstr;
 
 class XSPFParserTest : public ::testing::Test {
 
@@ -88,4 +91,25 @@ TEST_F(XSPFParserTest, IgnoresInvalidLength) {
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ(-1, songs[0].length());
+}
+
+TEST_F(XSPFParserTest, SavesSong) {
+  QByteArray data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::WriteOnly);
+  XSPFParser parser;
+  Song one;
+  one.set_filename("http://www.example.com/foo.mp3");
+  one.set_filetype(Song::Type_Stream);
+  one.set_title("foo");
+  one.set_length(123);
+  one.set_artist("bar");
+  SongList songs;
+  songs << one;
+
+  parser.Save(songs, &buffer);
+  EXPECT_THAT(data.constData(), HasSubstr("<location>http://www.example.com/foo.mp3</location>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<duration>123000</duration>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<creator>bar</creator>"));
 }

@@ -21,6 +21,9 @@
 
 #include <QXmlStreamReader>
 
+class QDomDocument;
+class QDomNode;
+
 class XSPFParser : public ParserBase {
   Q_OBJECT
 
@@ -37,6 +40,8 @@ class XSPFParser : public ParserBase {
   bool ParseUntilElement(QXmlStreamReader* reader, const QString& element) const;
   void IgnoreElement(QXmlStreamReader* reader) const;
   Song ParseTrack(QXmlStreamReader* reader) const;
+  void MaybeAppendElementWithText(
+      const QString& element, const QString& text, QDomDocument* doc, QDomNode* parent) const;
 };
 
 #endif
