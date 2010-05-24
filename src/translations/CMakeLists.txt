@@ -43,9 +43,9 @@ add_custom_target(pot ALL
   COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE} 
       ${XGETTEXT_OPTIONS} -C --omit-header --no-location
       --directory=${CMAKE_CURRENT_SOURCE_DIR}
-      --output=${CMAKE_CURRENT_BINARY_DIR}/translations.pot
+      --output=${CMAKE_CURRENT_BINARY_DIR}/translations.pot.temp
       ${CLEMENTINE-TRANSLATION-SOURCE}
-  COMMAND cat ${CMAKE_CURRENT_SOURCE_DIR}/header ${CMAKE_CURRENT_BINARY_DIR}/translations.pot > ${CLEMENTINE-POT}
+  COMMAND cat ${CMAKE_CURRENT_SOURCE_DIR}/header ${CMAKE_CURRENT_BINARY_DIR}/translations.pot.temp > ${CLEMENTINE-POT}
   DEPENDS ${CLEMENTINE-TRANSLATION-DEPS}
 )
 
