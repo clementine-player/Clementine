@@ -76,7 +76,7 @@ TEST_F(SongTest, DetectsWindows1251) {
 }
 
 TEST_F(SongTest, LeavesASCIIAlone) {
-  char* ascii = "foobar";
+  const char* ascii = "foobar";
   UniversalEncodingHandler handler;
   TagLib::ByteVector bytes(ascii);
   TagLib::String str = handler.parse(bytes);
