@@ -137,7 +137,7 @@ void GstEngine::ReloadSettings() {
 
   rg_enabled_ = s.value("rgenabled", false).toBool();
   rg_mode_ = s.value("rgmode", 0).toInt();
-  rg_preamp_ = s.value("rgpreamp", 0.0).toFloat();
+  rg_preamp_ = s.value("rgpreamp", 0.0).toDouble();
   rg_compression_ = s.value("rgcompression", true).toBool();
 }
 
