@@ -219,7 +219,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_.gst_device->setText(s.value("device").toString());
   ui_.replaygain->setChecked(s.value("rgenabled", false).toBool());
   ui_.replaygain_mode->setCurrentIndex(s.value("rgmode", 0).toInt());
-  ui_.replaygain_preamp->setValue(s.value("rgpreamp", 0.0).toFloat() * 10 + 150);
+  ui_.replaygain_preamp->setValue(s.value("rgpreamp", 0.0).toDouble() * 10 + 150);
   ui_.replaygain_compression->setChecked(s.value("rgcompression", true).toBool());
   s.endGroup();
 #endif

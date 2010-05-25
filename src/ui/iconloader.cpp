@@ -27,10 +27,14 @@ void IconLoader::Init() {
 }
 
 QIcon IconLoader::Load(const QString &name) {
+  QIcon ret;
+
+#if QT_VERSION >= 0x040600
   // Try to load it from the theme initially
-  QIcon ret = QIcon::fromTheme(name);
+  ret = QIcon::fromTheme(name);
   if (!ret.isNull())
     return ret;
+#endif
 
   // Otherwise use our fallback theme
   const QString path(":/icons/%1x%2/%3.png");
