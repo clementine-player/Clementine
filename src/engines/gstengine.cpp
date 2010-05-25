@@ -158,7 +158,7 @@ bool GstEngine::CanDecode(const QUrl &url) {
                                   boost::bind(gst_object_unref, _1));
   if (!pipeline) return false;
   GstElement* src = CreateElement("giosrc", pipeline.get());    if (!src) return false;
-  GstElement* bin = CreateElement("decodebin", pipeline.get()); if (!bin) return false;
+  GstElement* bin = CreateElement("decodebin2", pipeline.get()); if (!bin) return false;
 
   gst_element_link(src, bin);
   g_signal_connect(G_OBJECT(bin), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), this);
