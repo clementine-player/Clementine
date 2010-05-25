@@ -379,7 +379,8 @@ void PlaylistView::JumpToCurrentlyPlayingTrack() {
   if (playlist_->current_index() == -1)
     return;
 
-  QModelIndex current = playlist_->index(playlist_->current_index(), 0);
+  QModelIndex current = playlist_->proxy()->mapFromSource(
+      playlist_->index(playlist_->current_index(), 0));
   currently_autoscrolling_ = true;
 
   // Scroll to the item

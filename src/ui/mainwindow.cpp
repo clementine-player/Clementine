@@ -579,8 +579,15 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   if (!index.isValid())
     return;
 
+  int row = index.row();
+  if (index.model() == playlists_->current()->proxy()) {
+    // The index was in the proxy model (might've been filtered), so we need
+    // to get the actual row in the source model.
+    row = playlists_->current()->proxy()->mapToSource(index).row();
+  }
+
   playlists_->SetActiveToCurrent();
-  player_->PlayAt(index.row(), Engine::Manual, true);
+  player_->PlayAt(row, Engine::Manual, true);
 }
 
 void MainWindow::LoadLibraryItemToPlaylist(const QModelIndex& index) {
@@ -605,6 +612,11 @@ void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& i
 
   QModelIndex first_song = playlists_->current()->InsertLibraryItems(
       library_->model()->GetChildSongs(idx));
+
+  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+    // The first song doesn't match the filter, so don't play it
+    return;
+  }
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
     playlists_->SetActiveToCurrent();
@@ -733,6 +745,11 @@ void MainWindow::RadioDoubleClick(const QModelIndex& index) {
   playlists_->current()->dropMimeData(data.get(), Qt::CopyAction, -1, 0, QModelIndex());
 
   QModelIndex first_song = playlists_->current()->index(0, 0);
+  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+    // The first song doesn't match the filter, so don't play it
+    return;
+  }
+
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
     playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
@@ -743,6 +760,11 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
   QModelIndex first_song = playlists_->current()->InsertRadioStations(
       QList<RadioItem*>() << item);
 
+  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+    // The first song doesn't match the filter, so don't play it
+    return;
+  }
+
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
     playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
@@ -751,6 +773,11 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
 
 void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
   QModelIndex first_song = playlists_->current()->InsertItems(items);
+
+  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+    // The first song doesn't match the filter, so don't play it
+    return;
+  }
 
   if (first_song.isValid() && player_->GetState() != Engine::Playing) {
     playlists_->SetActiveToCurrent();
@@ -826,13 +853,13 @@ void MainWindow::PlaylistPlay() {
   if (playlists_->current()->current_index() == playlist_menu_index_.row()) {
     player_->PlayPause();
   } else {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(playlist_menu_index_.row(), Engine::Manual, true);
+    PlayIndex(playlist_menu_index_);
   }
 }
 
 void MainWindow::PlaylistStopAfter() {
-  playlists_->current()->StopAfter(playlist_menu_index_.row());
+  playlists_->current()->StopAfter(
+      playlists_->current()->proxy()->mapToSource(playlist_menu_index_).row());
 }
 
 void MainWindow::EditTracks() {
@@ -843,7 +870,8 @@ void MainWindow::EditTracks() {
            ui_->playlist->view()->selectionModel()->selection().indexes()) {
     if (index.column() != 0)
       continue;
-    Song song = playlists_->current()->item_at(index.row())->Metadata();
+    int row = playlists_->current()->proxy()->mapToSource(index).row();
+    Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (song.IsEditable()) {
       songs << song;
@@ -878,7 +906,7 @@ void MainWindow::RenumberTracks() {
     if (index.column() != 0)
       continue;
 
-    int row = index.row();
+    int row = playlists_->current()->proxy()->mapToSource(index).row();
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (song.IsEditable()) {
@@ -899,7 +927,7 @@ void MainWindow::SelectionSetValue() {
     if (index.column() != 0)
       continue;
 
-    int row = index.row();
+    int row = playlists_->current()->proxy()->mapToSource(index).row();
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if(Playlist::set_column_value(song, column, column_value)) {
