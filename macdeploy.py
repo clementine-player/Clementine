@@ -70,6 +70,7 @@ GSTREAMER_PLUGINS=[
     # Codecs
     'libgstaacparse.so',
     'libgstaiff.so',
+    'libgstapetag.so',
     'libgstequalizer.so',
     'libgstfaac.so',
     'libgstfaad.so',
@@ -83,6 +84,9 @@ GSTREAMER_PLUGINS=[
 
     # HTTP src support
     'libgstneonhttpsrc.so',
+
+    # Icecast support
+    'libgsticydemux.so',
 ]
 
 GSTREAMER_SEARCH_PATH=[
