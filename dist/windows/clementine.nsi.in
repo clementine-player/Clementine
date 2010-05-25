@@ -93,6 +93,7 @@ Section "Gstreamer plugins" gstreamer-plugins
   SetOutPath "$INSTDIR\gstreamer-plugins"
   SetOverwrite ifnewer
   
+  File "/oname=libgstasfdemux.dll" "gstreamer-plugins\libgstapetag.dll"
   File "/oname=libgstasfdemux.dll" "gstreamer-plugins\libgstasfdemux.dll"
   File "/oname=libgstaudioconvert.dll" "gstreamer-plugins\libgstaudioconvert.dll"
   File "/oname=libgstaudioresample.dll" "gstreamer-plugins\libgstaudioresample.dll"
@@ -207,6 +208,7 @@ Section "Uninstall"
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\zlib1.dll"
 
+  Delete "$INSTDIR\gstreamer-plugins\libgstapetag.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstasfdemux.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstaudioconvert.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstaudioresample.dll"
