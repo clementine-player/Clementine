@@ -106,7 +106,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void Init();
 
  protected:
-  void LazyPopulate(LibraryItem* item) { LazyPopulate(item, false); }
+  void LazyPopulate(LibraryItem* item) { LazyPopulate(item, true); }
   void LazyPopulate(LibraryItem* item, bool signal);
 
  private slots:
