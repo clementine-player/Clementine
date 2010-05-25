@@ -70,6 +70,7 @@ GSTREAMER_PLUGINS=[
     # Codecs
     'libgstaacparse.so',
     'libgstaiff.so',
+    'libgstapetag.so',
     'libgstequalizer.so',
     'libgstfaac.so',
     'libgstfaad.so',
