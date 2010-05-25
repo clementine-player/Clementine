@@ -399,6 +399,8 @@
     <addaction name="action_cover_manager"/>
     <addaction name="action_equalizer"/>
     <addaction name="action_transcode"/>
+    <addaction name="separator"/>
+    <addaction name="action_update_library"/>
    </widget>
    <addaction name="menuMusic"/>
    <addaction name="menuPlaylist"/>
@@ -588,6 +590,11 @@
   <action name="action_load_playlist">
    <property name="text">
     <string>Load playlist...</string>
+   </property>
+  </action>
+  <action name="action_update_library">
+   <property name="text">
+    <string>Update Library</string>
    </property>
   </action>
  </widget>

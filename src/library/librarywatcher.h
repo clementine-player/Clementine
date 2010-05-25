@@ -1,4 +1,4 @@
-/* This file is part of Clementine.
+/* This file iss part of Clementine.
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -35,7 +35,10 @@ class LibraryWatcher : public QObject {
  public:
   LibraryWatcher(QObject* parent = 0);
 
+  static const char* kSettingsGroup;
+
   void SetBackend(LibraryBackend* backend) { backend_ = backend; }
+  void IncrementalScanAsync();
 
   void Stop() { stop_requested_ = true; }
 
@@ -50,6 +53,7 @@ class LibraryWatcher : public QObject {
   void ScanFinished();
 
  public slots:
+  void ReloadSettings();
   void AddDirectory(const Directory& dir, const SubdirectoryList& subdirs);
   void RemoveDirectory(const Directory& dir);
 
@@ -72,6 +76,7 @@ class LibraryWatcher : public QObject {
     bool HasSeenSubdir(const QString& path);
     void SetKnownSubdirs(const SubdirectoryList& subdirs);
     SubdirectoryList GetImmediateSubdirs(const QString& path);
+    SubdirectoryList GetAllSubdirs();
 
     int dir() const { return dir_; }
     bool is_incremental() const { return incremental_; }
@@ -99,6 +104,7 @@ class LibraryWatcher : public QObject {
 
  private slots:
   void DirectoryChanged(const QString& path);
+  void IncrementalScanNow();
   void RescanPathsNow();
   void ScanSubdirectory(const QString& path, const Subdirectory& subdir,
                         ScanTransaction* t, bool force_noincremental = false);
@@ -120,6 +126,7 @@ class LibraryWatcher : public QObject {
 
   LibraryBackend* backend_;
   bool stop_requested_;
+  bool scan_on_startup_;
 
   QMap<int, DirData> watched_dirs_;
   QTimer* rescan_timer_;

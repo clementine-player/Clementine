@@ -75,3 +75,9 @@ void Library::WatcherInitialised() {
   backend_->LoadDirectoriesAsync();
 }
 
+void Library::IncrementalScan() {
+  if (!watcher_->Worker())
+    return;
+
+  watcher_->Worker()->IncrementalScanAsync();
+}

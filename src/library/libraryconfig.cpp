@@ -17,6 +17,7 @@
 #include "libraryconfig.h"
 #include "librarydirectorymodel.h"
 #include "libraryview.h"
+#include "librarywatcher.h"
 #include "ui_libraryconfig.h"
 #include "ui/iconloader.h"
 
@@ -84,9 +85,13 @@ void LibraryConfig::CurrentRowChanged(const QModelIndex& index) {
 void LibraryConfig::Save() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
-
   s.setValue("auto_open", ui_->auto_open->isChecked());
   s.setValue("autoclear_playlist", ui_->auto_load->isChecked());
+  s.endGroup();
+
+  s.beginGroup(LibraryWatcher::kSettingsGroup);
+  s.setValue("startup_scan", ui_->startup_scan->isChecked());
+  s.endGroup();
 }
 
 void LibraryConfig::showEvent(QShowEvent *) {
@@ -96,7 +101,11 @@ void LibraryConfig::showEvent(QShowEvent *) {
 void LibraryConfig::Load() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
-
   ui_->auto_open->setChecked(s.value("auto_open", true).toBool());
   ui_->auto_load->setChecked(s.value("autoclear_playlist", false).toBool());
+  s.endGroup();
+
+  s.beginGroup(LibraryWatcher::kSettingsGroup);
+  ui_->startup_scan->setChecked(s.value("startup_scan", true).toBool());
+  s.endGroup();
 }

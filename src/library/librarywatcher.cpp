@@ -23,6 +23,7 @@
 #include <QThread>
 #include <QDateTime>
 #include <QTimer>
+#include <QSettings>
 
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
@@ -30,10 +31,12 @@
 QStringList LibraryWatcher::sValidImages;
 QStringList LibraryWatcher::sValidPlaylists;
 
+const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
 
 LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
+    scan_on_startup_(true),
     rescan_timer_(new QTimer(this)),
     total_watches_(0)
 {
@@ -44,6 +47,8 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     sValidImages << "jpg" << "png" << "gif" << "jpeg";
     sValidPlaylists << "m3u" << "pls";
   }
+
+  ReloadSettings();
 
   connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanPathsNow()));
 }
@@ -132,6 +137,12 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetImmediateSubdirs(const QStr
   return ret;
 }
 
+SubdirectoryList LibraryWatcher::ScanTransaction::GetAllSubdirs() {
+  if (known_subdirs_dirty_)
+    SetKnownSubdirs(watcher_->backend_->SubdirsInDirectory(dir_));
+  return known_subdirs_;
+}
+
 void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& subdirs) {
   DirData data;
   data.dir = dir;
@@ -152,7 +163,10 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
     transaction.SetKnownSubdirs(subdirs);
     foreach (const Subdirectory& subdir, subdirs) {
       if (stop_requested_) return;
-      ScanSubdirectory(subdir.path, subdir, &transaction);
+
+      if (scan_on_startup_)
+        ScanSubdirectory(subdir.path, subdir, &transaction);
+
       AddWatch(data.watcher, subdir.path);
     }
   }
@@ -412,4 +426,27 @@ QString LibraryWatcher::ImageForSong(const QString& path, QMap<QString, QStringL
     }
   }
   return QString();
+}
+
+void LibraryWatcher::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  scan_on_startup_ = s.value("startup_scan", true).toBool();
+}
+
+void LibraryWatcher::IncrementalScanAsync() {
+  QMetaObject::invokeMethod(this, "IncrementalScanNow", Qt::QueuedConnection);
+}
+
+void LibraryWatcher::IncrementalScanNow() {
+  foreach (const DirData& data, watched_dirs_.values()) {
+    ScanTransaction transaction(this, data.dir.id, true);
+    SubdirectoryList subdirs(transaction.GetAllSubdirs());
+    foreach (const Subdirectory& subdir, subdirs) {
+      if (stop_requested_) return;
+
+      ScanSubdirectory(subdir.path, subdir, &transaction);
+    }
+  }
+  backend_->UpdateCompilations();
 }

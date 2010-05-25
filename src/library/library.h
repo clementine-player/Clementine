@@ -48,6 +48,7 @@ class Library : public QObject {
   LibraryModel* model() const { return model_; }
 
  private slots:
+  void IncrementalScan();
   void WatcherInitialised();
 
  private:
