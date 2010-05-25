@@ -83,6 +83,9 @@ GSTREAMER_PLUGINS=[
 
     # HTTP src support
     'libgstneonhttpsrc.so',
+
+    # Icecast support
+    'libgsticydemux.so',
 ]
 
 GSTREAMER_SEARCH_PATH=[
