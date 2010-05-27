@@ -33,6 +33,8 @@ class XMLParser : public ParserBase {
   bool ParseUntilElement(QXmlStreamReader* reader, const QString& element) const;
   void IgnoreElement(QXmlStreamReader* reader) const;
 
+  QString MakeRelativeTo(const QString& filename, const QDir& dir) const;
+
   class StreamElement : public boost::noncopyable {
    public:
     StreamElement(const QString& name, QXmlStreamWriter* stream) : stream_(stream) {

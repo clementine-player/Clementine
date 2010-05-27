@@ -61,3 +61,11 @@ void XMLParser::IgnoreElement(QXmlStreamReader* reader) const {
     }
   }
 }
+
+QString XMLParser::MakeRelativeTo(const QString& filename_or_url, const QDir& dir) const {
+  QString file = ParserBase::MakeRelativeTo(filename_or_url, dir);
+  if (!file.contains(QRegExp("^[a-z]+://"))) {
+    return QUrl::fromLocalFile(file).toString();
+  }
+  return file;
+}

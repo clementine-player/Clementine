@@ -113,3 +113,25 @@ TEST_F(XSPFParserTest, SavesSong) {
   EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
   EXPECT_THAT(data.constData(), HasSubstr("<creator>bar</creator>"));
 }
+
+TEST_F(XSPFParserTest, SavesLocalFile) {
+  QByteArray data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::WriteOnly);
+  XSPFParser parser;
+  Song one;
+  one.set_filename("/bar/foo.mp3");
+  one.set_filetype(Song::Type_Mpeg);
+  one.set_title("foo");
+  one.set_length(123);
+  one.set_artist("bar");
+  SongList songs;
+  songs << one;
+
+  parser.Save(songs, &buffer);
+  EXPECT_THAT(data.constData(), HasSubstr("<location>file:///bar/foo.mp3</location>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<duration>123000</duration>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
+  EXPECT_THAT(data.constData(), HasSubstr("<creator>bar</creator>"));
+}
+
