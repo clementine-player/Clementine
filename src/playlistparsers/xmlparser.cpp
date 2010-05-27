@@ -61,14 +61,3 @@ void XMLParser::IgnoreElement(QXmlStreamReader* reader) const {
     }
   }
 }
-
-void XMLParser::MaybeAppendElementWithText(
-    const QString& element_name, const QString& text, QDomDocument* doc, QDomNode* parent) const {
-  if (text.isEmpty()) {
-    return;
-  }
-  QDomElement element = doc->createElement(element_name);
-  QDomText t = doc->createTextNode(text);
-  element.appendChild(t);
-  parent->appendChild(element);
-}

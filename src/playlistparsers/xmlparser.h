@@ -32,8 +32,6 @@ class XMLParser : public ParserBase {
   XMLParser(QObject* parent);
   bool ParseUntilElement(QXmlStreamReader* reader, const QString& element) const;
   void IgnoreElement(QXmlStreamReader* reader) const;
-  void MaybeAppendElementWithText(
-      const QString& element, const QString& text, QDomDocument* doc, QDomNode* parent) const;
 
   class StreamElement : public boost::noncopyable {
    public:

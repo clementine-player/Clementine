@@ -104,25 +104,27 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
 }
 
 void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
-  QDomDocument doc;
-  QDomElement root = doc.createElement("playlist");
-  doc.appendChild(root);
-  QDomElement track_list = doc.createElement("trackList");
-  root.appendChild(track_list);
+  QXmlStreamWriter writer(device);
+  writer.writeStartDocument();
+  StreamElement playlist("playlist", &writer);
+  writer.writeAttribute("version", "1");
+  writer.writeDefaultNamespace("http://xspf.org/ns/0/");
+
+  StreamElement tracklist("trackList", &writer);
   foreach (const Song& song, songs) {
-    QString url = MakeRelativeTo(song.filename(), dir);
-    if (url.isEmpty()) {
-      continue;  // Skip empty items like Last.fm streams.
+    StreamElement track("track", &writer);
+    writer.writeTextElement("location", MakeRelativeTo(song.filename(), dir));
+    writer.writeTextElement("title", song.title());
+    if (!song.artist().isEmpty()) {
+      writer.writeTextElement("creator", song.artist());
     }
-    QDomElement track = doc.createElement("track");
-    track_list.appendChild(track);
-    MaybeAppendElementWithText("location", url, &doc, &track);
-    MaybeAppendElementWithText("creator", song.artist(), &doc, &track);
-    MaybeAppendElementWithText("album", song.album(), &doc, &track);
-    MaybeAppendElementWithText("title", song.title(), &doc, &track);
+    if (!song.album().isEmpty()) {
+      writer.writeTextElement("album", song.album());
+    }
     if (song.length() != -1) {
-      MaybeAppendElementWithText("duration", QString::number(song.length() * 1000), &doc, &track);
+      writer.writeTextElement("duration", QString::number(song.length() * 1000));
     }
+
     QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
@@ -130,10 +132,8 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
       if (!art.contains(QRegExp("^\\w+://"))) {
         art = QUrl::fromLocalFile(MakeRelativeTo(art, dir)).toString();
       }
-      MaybeAppendElementWithText("image", art, &doc, &track);
+      writer.writeTextElement("image", art);
     }
   }
-
-  device->write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-  device->write(doc.toByteArray(2));
+  writer.writeEndDocument();
 }
