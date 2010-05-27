@@ -41,12 +41,7 @@ AddStreamDialog::AddStreamDialog(QWidget *parent)
   s.beginGroup(kSettingsGroup);
   ui_->save->setChecked(s.value("save", true).toBool());
   ui_->url->setText(s.value("url").toString());
-
-  // Connections to the saved streams service
-  saved_radio_ = qobject_cast<SavedRadio*>(
-      RadioModel::ServiceByName(SavedRadio::kServiceName));
-
-  connect(saved_radio_, SIGNAL(ShowAddStreamDialog()), SLOT(show()));
+  ui_->name->setText(s.value("name").toString());
 }
 
 AddStreamDialog::~AddStreamDialog() {
@@ -57,9 +52,27 @@ QUrl AddStreamDialog::url() const {
   return QUrl(ui_->url->text());
 }
 
+QString AddStreamDialog::name() const {
+  return ui_->name->text();
+}
+
+void AddStreamDialog::set_name(const QString &name) {
+  ui_->name->setText(name);
+}
+
+void AddStreamDialog::set_url(const QUrl &url) {
+  ui_->url->setText(url.toString());
+}
+
+void AddStreamDialog::set_save_visible(bool visible) {
+  ui_->save->setVisible(visible);
+  if (!visible)
+    ui_->name_container->setEnabled(true);
+}
+
 void AddStreamDialog::accept() {
-  if (ui_->save->isChecked()) {
-    saved_radio_->Add(url());
+  if (ui_->save->isChecked() && saved_radio_) {
+    saved_radio_->Add(url(), name());
   }
 
   // Save settings
@@ -67,6 +80,7 @@ void AddStreamDialog::accept() {
   s.beginGroup(kSettingsGroup);
   s.setValue("save", ui_->save->isChecked());
   s.setValue("url", url().toString());
+  s.setValue("name", ui_->name->text());
 
   QDialog::accept();
 }

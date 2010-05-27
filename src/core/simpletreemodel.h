@@ -44,6 +44,7 @@ class SimpleTreeModel : public QAbstractItemModel {
   void EndInsert();
   void BeginDelete(T* parent, int start, int end = -1);
   void EndDelete();
+  void EmitDataChanged(T* item);
 
  protected:
   virtual void LazyPopulate(T* item) = 0;
@@ -142,6 +143,12 @@ void SimpleTreeModel<T>::BeginDelete(T* parent, int start, int end) {
 template <typename T>
 void SimpleTreeModel<T>::EndDelete() {
   endRemoveRows();
+}
+
+template <typename T>
+    void SimpleTreeModel<T>::EmitDataChanged(T *item) {
+  QModelIndex index(ItemToIndex(item));
+  emit dataChanged(index, index);
 }
 
 #endif // SIMPLETREEMODEL_H

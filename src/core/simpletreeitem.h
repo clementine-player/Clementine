@@ -33,6 +33,7 @@ class SimpleTreeItem {
   void InsertNotify(T* _parent);
   void DeleteNotify(int child_row);
   void ClearNotify();
+  void ChangedNotify();
 
   void Delete(int child_row);
   T* ChildByKey(const QString& key) const;
@@ -126,6 +127,11 @@ void SimpleTreeItem<T>::ClearNotify() {
   children.clear();
 
   model->EndDelete();
+}
+
+template <typename T>
+void SimpleTreeItem<T>::ChangedNotify() {
+  model->EmitDataChanged(static_cast<T*>(this));
 }
 
 template <typename T>

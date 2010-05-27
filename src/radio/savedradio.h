@@ -19,7 +19,11 @@
 
 #include "radioservice.h"
 
+#include <boost/scoped_ptr.hpp>
+
 class QMenu;
+
+class AddStreamDialog;
 
 class SavedRadio : public RadioService {
   Q_OBJECT
@@ -41,7 +45,7 @@ class SavedRadio : public RadioService {
   void ShowContextMenu(RadioItem* item, const QModelIndex& index,
                        const QPoint& global_pos);
 
-  void Add(const QUrl& url);
+  void Add(const QUrl& url, const QString& name = QString());
 
  signals:
   void ShowAddStreamDialog();
@@ -49,11 +53,23 @@ class SavedRadio : public RadioService {
  private slots:
   void AddToPlaylist();
   void Remove();
+  void Edit();
 
  private:
+  struct Stream {
+    Stream(const QUrl& url, const QString& name = QString())
+      : url_(url), name_(name) {}
+
+    // For QList::contains
+    bool operator ==(const Stream& other) const { return url_ == other.url_; }
+
+    QUrl url_;
+    QString name_;
+  };
+
   void LoadStreams();
   void SaveStreams();
-  RadioItem* ItemForStream(const QUrl& url, RadioItem* parent);
+  RadioItem* ItemForStream(const Stream& stream, RadioItem* parent);
 
  private:
   RadioItem* root_;
@@ -62,8 +78,11 @@ class SavedRadio : public RadioService {
 
   QAction* add_action_;
   QAction* remove_action_;
+  QAction* edit_action_;
 
-  QStringList streams_;
+  QList<Stream> streams_;
+
+  boost::scoped_ptr<AddStreamDialog> edit_dialog_;
 };
 
 #endif // SAVEDRADIO_H

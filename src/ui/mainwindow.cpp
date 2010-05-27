@@ -40,6 +40,7 @@
 #include "radio/radiomodel.h"
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
+#include "radio/savedradio.h"
 #include "transcoder/transcodedialog.h"
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
@@ -324,6 +325,14 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->radio_view->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
 
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
+
+  // Connections to the saved streams service
+  SavedRadio* saved_radio_ = qobject_cast<SavedRadio*>(
+      RadioModel::ServiceByName(SavedRadio::kServiceName));
+  add_stream_dialog_->set_add_on_accept(saved_radio_);
+
+  connect(saved_radio_, SIGNAL(ShowAddStreamDialog()),
+          add_stream_dialog_.get(), SLOT(show()));
 
   // Tray icon
   QMenu* tray_menu = new QMenu(this);

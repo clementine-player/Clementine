@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>122</height>
+    <height>168</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,11 +27,30 @@
    <item>
     <widget class="QCheckBox" name="save">
      <property name="text">
-      <string>Save this stream in the Radio tab</string>
+      <string>Save this stream in the Internet tab</string>
      </property>
      <property name="checked">
       <bool>true</bool>
      </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="name_container" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Give it a name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="name"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -59,6 +78,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>url</tabstop>
+  <tabstop>save</tabstop>
+  <tabstop>name</tabstop>
+  <tabstop>button_box</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -68,12 +93,12 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>158</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
-     <y>274</y>
+     <y>167</y>
     </hint>
    </hints>
   </connection>
@@ -84,12 +109,28 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>158</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
-     <y>274</y>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>save</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>name_container</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>97</y>
     </hint>
    </hints>
   </connection>
