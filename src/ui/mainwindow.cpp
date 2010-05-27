@@ -327,11 +327,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
 
   // Connections to the saved streams service
-  SavedRadio* saved_radio_ = qobject_cast<SavedRadio*>(
-      RadioModel::ServiceByName(SavedRadio::kServiceName));
-  add_stream_dialog_->set_add_on_accept(saved_radio_);
+  SavedRadio* saved_radio = RadioModel::Service<SavedRadio>();
+  add_stream_dialog_->set_add_on_accept(saved_radio);
 
-  connect(saved_radio_, SIGNAL(ShowAddStreamDialog()),
+  connect(saved_radio, SIGNAL(ShowAddStreamDialog()),
           add_stream_dialog_.get(), SLOT(show()));
 
   // Tray icon

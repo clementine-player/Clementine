@@ -44,6 +44,14 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   // Needs to be static for RadioPlaylistItem::restore
   static RadioService* ServiceByName(const QString& name);
 
+  template<typename T>
+  static T* Service() {
+    if (sServices.contains(T::kServiceName)) {
+      return static_cast<T*>(sServices[T::kServiceName]);
+    }
+    return NULL;
+  }
+
   // This is special because Player needs it for scrobbling
   LastFMService* GetLastFMService() const;
 
