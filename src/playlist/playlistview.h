@@ -73,6 +73,8 @@ class PlaylistView : public QTreeView {
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
+  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
+                                    const QModelIndex& index);
 
  private:
   static const char* kSettingsGroup;
@@ -103,6 +105,10 @@ class PlaylistView : public QTreeView {
   QList<QPixmap> currenttrack_bar_right_;
   QPixmap currenttrack_play_;
   QPixmap currenttrack_pause_;
+
+  QPixmap cached_current_row_;
+  QRect cached_current_row_rect_;
+  int cached_current_row_row_;
 
   int drop_indicator_row_;
 };

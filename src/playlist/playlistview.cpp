@@ -32,7 +32,7 @@
 #include <math.h>
 
 const char* PlaylistView::kSettingsGroup = "Playlist";
-const int PlaylistView::kGlowIntensitySteps = 32;
+const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
@@ -49,6 +49,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     row_height_(-1),
     currenttrack_play_(":currenttrack_play.png"),
     currenttrack_pause_(":currenttrack_pause.png"),
+    cached_current_row_row_(-1),
     drop_indicator_row_(-1)
 {
   setHeader(new PlaylistHeader(Qt::Horizontal, this));
@@ -199,9 +200,33 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
     opt.palette.setColor(QPalette::AlternateBase, Qt::transparent);
     opt.font.setItalic(true);
     opt.decorationSize = QSize(20,20);
-  }
 
-  QTreeView::drawRow(painter, opt, index);
+    // Draw the actual row data on top.  We cache this, because it's fairly
+    // expensive (1-2ms), and we do it many times per second.
+    if (cached_current_row_rect_ != opt.rect ||
+        cached_current_row_row_ != index.row() ||
+        cached_current_row_.isNull()) {
+      const_cast<PlaylistView*>(this)->UpdateCachedCurrentRowPixmap(opt, index);
+    }
+
+    painter->drawPixmap(opt.rect, cached_current_row_);
+  } else {
+    QTreeView::drawRow(painter, opt, index);
+  }
+}
+
+void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
+                                                const QModelIndex& index) {
+  cached_current_row_rect_ = option.rect;
+  cached_current_row_row_ = index.row();
+
+  option.rect.moveTo(0, 0);
+  cached_current_row_ = QPixmap(option.rect.size());
+  cached_current_row_.fill(Qt::transparent);
+
+  QPainter p(&cached_current_row_);
+  QTreeView::drawRow(&p, option, index);
+  p.end();
 }
 
 void PlaylistView::timerEvent(QTimerEvent* event) {
