@@ -24,7 +24,7 @@
 #include <QXmlStreamReader>
 
 XSPFParser::XSPFParser(QObject* parent)
-    : ParserBase(parent)
+    : XMLParser(parent)
 {
 }
 
@@ -44,41 +44,6 @@ SongList XSPFParser::Load(QIODevice *device, const QDir&) const {
     }
   }
   return ret;
-}
-
-bool XSPFParser::ParseUntilElement(QXmlStreamReader* reader, const QString& name) const {
-  while (!reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement:
-        if (reader->name() == name) {
-          return true;
-        } else {
-          IgnoreElement(reader);
-        }
-        break;
-      default:
-        break;
-    }
-  }
-  return false;
-}
-
-void XSPFParser::IgnoreElement(QXmlStreamReader* reader) const {
-  int level = 1;
-  while (level != 0 && !reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement:
-        ++level;
-        break;
-      case QXmlStreamReader::EndElement:
-        --level;
-        break;
-      default:
-        break;
-    }
-  }
 }
 
 Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
@@ -171,15 +136,4 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
 
   device->write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
   device->write(doc.toByteArray(2));
-}
-
-void XSPFParser::MaybeAppendElementWithText(
-    const QString& element_name, const QString& text, QDomDocument* doc, QDomNode* parent) const {
-  if (text.isEmpty()) {
-    return;
-  }
-  QDomElement element = doc->createElement(element_name);
-  QDomText t = doc->createTextNode(text);
-  element.appendChild(t);
-  parent->appendChild(element);
 }

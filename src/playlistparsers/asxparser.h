@@ -14,24 +14,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef XSPFPARSER_H
-#define XSPFPARSER_H
+#ifndef ASXPARSER_H
+#define ASXPARSER_H
 
 #include "xmlparser.h"
 
-#include <QXmlStreamReader>
-
-class QDomDocument;
-class QDomNode;
-
-class XSPFParser : public XMLParser {
+class ASXParser : public XMLParser {
   Q_OBJECT
 
  public:
-  XSPFParser(QObject* parent = 0);
+  ASXParser(QObject* parent = 0);
 
-  QString name() const { return "XSPF"; }
-  QStringList file_extensions() const { return QStringList() << "xspf"; }
+  QString name() const { return "ASX"; }
+  QStringList file_extensions() const { return QStringList() << "asx"; }
 
   SongList Load(QIODevice *device, const QDir &dir = QDir()) const;
   void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
