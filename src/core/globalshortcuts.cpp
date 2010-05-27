@@ -56,6 +56,9 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
 
 #ifndef Q_OS_DARWIN
   system_backend_ = new QxtGlobalShortcutBackend(this);
+#else
+  // Setup global media key shortcuts for mac.
+  mac::SetShortcutHandler(this);
 #endif
 
   ReloadSettings();
