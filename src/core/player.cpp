@@ -218,18 +218,20 @@ void Player::TrackEnded() {
 void Player::PlayPause() {
   switch (engine_->state()) {
   case Engine::Paused:
-    qDebug() << "Unpausing";
     engine_->Unpause();
     break;
 
-  case Engine::Playing:
+  case Engine::Playing: {
     // We really shouldn't pause last.fm streams
-    if (current_item_->options() & PlaylistItem::PauseDisabled)
-      break;
-
-    qDebug() << "Pausing";
-    engine_->Pause();
+    // Stopping seems like a reasonable thing to do (especially on mac where there
+    // is no media key for stop).
+    if (current_item_->options() & PlaylistItem::PauseDisabled) {
+      engine_->Stop();
+    } else {
+      engine_->Pause();
+    }
     break;
+  }
 
   case Engine::Empty:
   case Engine::Idle: {
