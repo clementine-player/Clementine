@@ -652,7 +652,7 @@ qint64 GstEngine::PruneScope() {
   qint64 pos = current_pipeline_->position();
 
   GstBuffer *buf = 0;
-  quint64 etime;
+  quint64 etime = 0;
 
   // free up the buffers that the audio device has advanced past already
   do {
