@@ -451,8 +451,11 @@ bool GstEngine::Play( uint offset ) {
   // If "Resume playback on start" is enabled, we must seek to the last position
   if (offset) Seek(offset);
 
-  current_sample_ = 0;
+  if (timer_id_ != -1)
+    killTimer(timer_id_);
   timer_id_ = startTimer(kTimerInterval);
+
+  current_sample_ = 0;
   emit StateChanged(Engine::Playing);
   return true;
 }
@@ -460,6 +463,7 @@ bool GstEngine::Play( uint offset ) {
 
 void GstEngine::Stop() {
   killTimer(timer_id_);
+  timer_id_ = -1;
 
   url_ = QUrl(); // To ensure we return Empty from state()
 
