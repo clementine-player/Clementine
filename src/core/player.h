@@ -54,6 +54,7 @@ class Player : public QObject {
  public:
   Player(PlaylistManager* playlists, LastFMService* lastfm, Engine::Type engine,
          QObject* parent = 0);
+  ~Player();
 
   EngineBase* createEngine(Engine::Type engine);
   void Init();

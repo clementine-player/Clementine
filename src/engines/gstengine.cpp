@@ -609,20 +609,21 @@ GstEngine::PluginDetailsList
   PluginDetailsList ret;
 
   GstRegistry* registry = gst_registry_get_default();
-  GList* features =
+  GList* const features =
       gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
 
-  while (features) {
-    GstElementFactory* factory = GST_ELEMENT_FACTORY(features->data);
+  GList* p = features;
+  while (p) {
+    GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
     if (QString(factory->details.klass).contains(classname)) {
       PluginDetails details;
-      details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(features->data));
+      details.name = QString::fromUtf8(GST_PLUGIN_FEATURE_NAME(p->data));
       details.long_name = QString::fromUtf8(factory->details.longname);
       details.description = QString::fromUtf8(factory->details.description);
       details.author = QString::fromUtf8(factory->details.author);
       ret << details;
     }
-    features = g_list_next ( features );
+    p = g_list_next(p);
   }
 
   gst_plugin_feature_list_free(features);

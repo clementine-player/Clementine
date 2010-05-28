@@ -96,6 +96,10 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
 #endif
 }
 
+Player::~Player() {
+  delete engine_;
+}
+
 EngineBase* Player::createEngine(Engine::Type engine) {
 
   switch(engine) {

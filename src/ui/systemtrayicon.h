@@ -24,7 +24,6 @@ class SystemTrayIcon : public QSystemTrayIcon {
 
  public:
   SystemTrayIcon(QObject* parent = 0);
-  virtual ~SystemTrayIcon();
 
   virtual bool event(QEvent* event);
 

@@ -23,7 +23,8 @@ const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 
 Library::Library(Database *db, QObject *parent)
-  : backend_(new LibraryBackend(db, kSongsTable, kDirsTable, kSubdirsTable, this)),
+  : QObject(parent),
+    backend_(new LibraryBackend(db, kSongsTable, kDirsTable, kSubdirsTable, this)),
     model_(new LibraryModel(backend_, parent)),
     watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
     watcher_(NULL)
