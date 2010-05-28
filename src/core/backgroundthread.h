@@ -51,7 +51,10 @@
 class BackgroundThreadBase : public QThread {
   Q_OBJECT
  public:
-  BackgroundThreadBase(QObject* parent = 0) : QThread(parent), io_priority_(IOPRIO_CLASS_NONE) {}
+  BackgroundThreadBase(QObject* parent = 0)
+    : QThread(parent),
+      io_priority_(IOPRIO_CLASS_NONE),
+      cpu_priority_(InheritPriority) {}
 
   // Borrowed from schedutils
   enum IoPriority {
