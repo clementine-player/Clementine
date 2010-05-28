@@ -39,6 +39,10 @@ class LibraryView : public AutoExpandingTreeView {
 
   void SetLibrary(LibraryModel* library);
 
+  // QTreeView
+  void keyboardSearch(const QString &search);
+  void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible);
+
  public slots:
   void TotalSongCountUpdated(int count);
   void ReloadSettings();
@@ -76,6 +80,8 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* add_to_playlist_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
+
+  bool is_in_keyboard_search_;
 };
 
 #endif // LIBRARYVIEW_H

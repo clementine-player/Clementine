@@ -79,7 +79,8 @@ LibraryView::LibraryView(QWidget* parent)
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
-    context_menu_(new QMenu(this))
+    context_menu_(new QMenu(this)),
+    is_in_keyboard_search_(false)
 {
   setItemDelegate(new LibraryItemDelegate(this));
 
@@ -207,4 +208,17 @@ void LibraryView::AddToPlaylist() {
     return;
 
   emit AddToPlaylist(context_menu_index_);
+}
+
+void LibraryView::keyboardSearch(const QString &search) {
+  is_in_keyboard_search_ = true;
+  QTreeView::keyboardSearch(search);
+  is_in_keyboard_search_ = false;
+}
+
+void LibraryView::scrollTo(const QModelIndex &index, ScrollHint hint) {
+  if (is_in_keyboard_search_)
+    QTreeView::scrollTo(index, QAbstractItemView::PositionAtTop);
+  else
+    QTreeView::scrollTo(index, hint);
 }
