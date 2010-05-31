@@ -58,7 +58,7 @@ class Player : public QObject {
          QObject* parent = 0);
   ~Player();
 
-  EngineBase* createEngine(Engine::Type engine);
+  EngineBase* CreateEngine(Engine::Type engine);
   void Init();
 
   EngineBase* GetEngine() { return engine_.get(); }

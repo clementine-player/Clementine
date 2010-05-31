@@ -75,10 +75,9 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
   : QObject(parent),
     playlists_(playlists),
     lastfm_(lastfm),
+    engine_(CreateEngine(engine)),
     stream_change_type_(Engine::First)
 {
-  engine_.reset(createEngine(engine));
-
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
@@ -99,8 +98,7 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
 Player::~Player() {
 }
 
-EngineBase* Player::createEngine(Engine::Type engine) {
-
+EngineBase* Player::CreateEngine(Engine::Type engine) {
   switch(engine) {
 #ifdef HAVE_GSTREAMER
     case Engine::gstreamer:
