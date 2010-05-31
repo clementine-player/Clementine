@@ -22,16 +22,13 @@
 #include "playlist/playlistmanager.h"
 #include "radio/lastfmservice.h"
 
-#ifdef HAVE_GSTREAMER
+#if defined(HAVE_GSTREAMER)
 #  include "engines/gstengine.h"
-#endif
-#ifdef HAVE_LIBVLC
+#elif defined(HAVE_LIBVLC)
 #  include "engines/vlcengine.h"
-#endif
-#ifdef HAVE_LIBXINE
+#elif defined(HAVE_LIBXINE)
 #  include "engines/xine-engine.h"
-#endif
-#ifdef HAVE_QT_PHONON
+#elif defined(HAVE_QT_PHONON)
 #  include "engines/phononengine.h"
 #endif
 
@@ -100,23 +97,20 @@ Player::~Player() {
 
 EngineBase* Player::CreateEngine(Engine::Type engine) {
   switch(engine) {
-#ifdef HAVE_GSTREAMER
-    case Engine::gstreamer:
+#if defined(HAVE_GSTREAMER)
+    case Engine::Type_GStreamer:
       return new GstEngine();
       break;
-#endif
-#ifdef HAVE_LIBVLC
-    case Engine::vlc:
+#elif defined(HAVE_LIBVLC)
+    case Engine::Type_VLC:
       return new VlcEngine();
       break;
-#endif
-#ifdef HAVE_LIBXINE
-    case Engine::xine:
+#elif defined(HAVE_LIBXINE)
+    case Engine::Type_Xine:
       return new XineEngine();
       break;
-#endif
-#ifdef HAVE_QT_PHONON
-    case Engine::qt_phonon:
+#elif defined(HAVE_QT_PHONON)
+    case Engine::Type_QtPhonon:
       return new PhononEngine();
       break;
 #endif

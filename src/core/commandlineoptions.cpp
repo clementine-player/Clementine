@@ -62,13 +62,13 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     play_track_at_(-1),
     show_osd_(false),
 #ifdef HAVE_GSTREAMER
-    engine_(Engine::gstreamer)
+    engine_(Engine::Type_GStreamer)
 #elif defined(HAVE_LIBVLC)
-    engine_(Engine::vlc)
+    engine_(Engine::Type_VLC)
 #elif defined(HAVE_LIBXINE)
-    engine_(Engine::xine)
+    engine_(Engine::Type_Xine)
 #elif defined(HAVE_QT_PHONON)
-    engine_(Engine::qt_phonon)
+    engine_(Engine::Type_QtPhonon)
 #endif
 {
 }
@@ -173,27 +173,24 @@ bool CommandlineOptions::Parse() {
           ok = true;
           QString engine = optarg;
           if(engine == "gst")
-            engine_ = Engine::gstreamer;
+            engine_ = Engine::Type_GStreamer;
           else if(engine == "vlc")
-            engine_ = Engine::vlc;
+            engine_ = Engine::Type_VLC;
           else if(engine == "xine")
-            engine_ = Engine::xine;
+            engine_ = Engine::Type_Xine;
           else if(engine == "qt-phonon")
-            engine_ = Engine::qt_phonon;
+            engine_ = Engine::Type_QtPhonon;
           else
           {
             qFatal("%s%s",
                 tr("Unknown audio engine \"%1\". Choices are:").arg(engine).toAscii().data(),
-#ifdef HAVE_GSTREAMER
+#if defined(HAVE_GSTREAMER)
                 " gst"
-#endif
-#ifdef HAVE_LIBVLC
+#elif defined(HAVE_LIBVLC)
                 " vlc"
-#endif
-#ifdef HAVE_LIBXINE
+#elif defined(HAVE_LIBXINE)
                 " xine"
-#endif
-#ifdef HAVE_QT_PHONON
+#elif defined(HAVE_QT_PHONON)
                 " qt-phonon"
 #endif
             );

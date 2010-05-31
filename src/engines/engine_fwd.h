@@ -10,7 +10,12 @@ namespace Engine
     struct SimpleMetaBundle;
     class Base;
 
-    enum Type { gstreamer, vlc, xine, qt_phonon };
+    enum Type {
+      Type_GStreamer,
+      Type_VLC,
+      Type_Xine,
+      Type_QtPhonon,
+    };
 
     /**
      * You should return:
