@@ -77,13 +77,13 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
     lastfm_(lastfm),
     stream_change_type_(Engine::First)
 {
-  engine_ = createEngine(engine);
+  engine_.reset(createEngine(engine));
 
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
 
-  connect(engine_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  connect(engine_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   // MPRIS DBus interface.
 #ifdef Q_WS_X11
@@ -97,7 +97,6 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
 }
 
 Player::~Player() {
-  delete engine_;
 }
 
 EngineBase* Player::createEngine(Engine::Type engine) {
@@ -135,10 +134,10 @@ void Player::Init() {
   if (!engine_->Init())
     qFatal("Error initialising audio engine");
 
-  connect(engine_, SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(engine_, SIGNAL(TrackAboutToEnd()), SLOT(TrackAboutToEnd()));
-  connect(engine_, SIGNAL(TrackEnded()), SLOT(TrackEnded()));
-  connect(engine_, SIGNAL(MetaData(Engine::SimpleMetaBundle)),
+  connect(engine_.get(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(engine_.get(), SIGNAL(TrackAboutToEnd()), SLOT(TrackAboutToEnd()));
+  connect(engine_.get(), SIGNAL(TrackEnded()), SLOT(TrackEnded()));
+  connect(engine_.get(), SIGNAL(MetaData(Engine::SimpleMetaBundle)),
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
   engine_->SetVolume(settings_.value("volume", 50).toInt());

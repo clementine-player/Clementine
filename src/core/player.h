@@ -20,6 +20,8 @@
 #include <QObject>
 #include <QSettings>
 
+#include <boost/scoped_ptr.hpp>
+
 #include "core/song.h"
 #include "engines/engine_fwd.h"
 #include "playlist/playlistitem.h"
@@ -59,7 +61,7 @@ class Player : public QObject {
   EngineBase* createEngine(Engine::Type engine);
   void Init();
 
-  EngineBase* GetEngine() { return engine_; }
+  EngineBase* GetEngine() { return engine_.get(); }
   Engine::State GetState() const;
   int GetVolume() const;
 
@@ -172,7 +174,7 @@ class Player : public QObject {
 
   boost::shared_ptr<PlaylistItem> current_item_;
 
-  EngineBase* engine_;
+  boost::scoped_ptr<EngineBase> engine_;
   Engine::TrackChangeType stream_change_type_;
 
   QUrl loading_async_;
