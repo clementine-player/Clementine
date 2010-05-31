@@ -184,13 +184,16 @@ bool CommandlineOptions::Parse() {
           {
             qFatal("%s%s",
                 tr("Unknown audio engine \"%1\". Choices are:").arg(engine).toAscii().data(),
-#if defined(HAVE_GSTREAMER)
+#ifdef HAVE_GSTREAMER
                 " gst"
-#elif defined(HAVE_LIBVLC)
+#endif
+#ifdef HAVE_LIBVLC
                 " vlc"
-#elif defined(HAVE_LIBXINE)
+#endif
+#ifdef HAVE_LIBXINE
                 " xine"
-#elif defined(HAVE_QT_PHONON)
+#endif
+#ifdef HAVE_QT_PHONON
                 " qt-phonon"
 #endif
             );
