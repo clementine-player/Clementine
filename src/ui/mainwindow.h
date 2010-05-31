@@ -34,6 +34,7 @@ class CommandlineOptions;
 class Database;
 class EditTagDialog;
 class Equalizer;
+class ErrorDialog;
 class GlobalShortcuts;
 class GlobalShortcutsDialog;
 class GroupByDialog;
@@ -88,7 +89,6 @@ class MainWindow : public QMainWindow {
  private slots:
   void FilePathChanged(const QString& path);
 
-  void ReportError(const QString& message);
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
@@ -174,6 +174,7 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<Equalizer> equalizer_;
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
   boost::scoped_ptr<GlobalShortcutsDialog> global_shortcuts_dialog_;
+  boost::scoped_ptr<ErrorDialog> error_dialog_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

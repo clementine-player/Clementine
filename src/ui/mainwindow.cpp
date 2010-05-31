@@ -51,6 +51,7 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
+#include "widgets/errordialog.h"
 #include "widgets/multiloadingindicator.h"
 #include "widgets/osd.h"
 #include "widgets/trackslider.h"
@@ -116,6 +117,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
     global_shortcuts_dialog_(new GlobalShortcutsDialog(global_shortcuts_)),
+    error_dialog_(new ErrorDialog),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
@@ -241,7 +243,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Player connections
   connect(ui_->volume, SIGNAL(valueChanged(int)), player_, SLOT(SetVolume(int)));
 
-  connect(player_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
+  connect(player_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
@@ -267,7 +269,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
-  connect(playlists_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
+  connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -276,7 +278,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
   // Database connections
-  connect(database_, SIGNAL(Error(QString)), SLOT(ReportError(QString)));
+  connect(database_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
 
   // Library connections
   connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
@@ -315,7 +317,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Radio connections
   connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
-  connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ReportError(QString)));
+  connect(radio_model_, SIGNAL(StreamError(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
@@ -501,11 +503,6 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
     playlists_->SetActiveToCurrent();
     player_->PlayAt(playlist_index.row(), Engine::First, true);
   }
-}
-
-void MainWindow::ReportError(const QString& message) {
-  // TODO: rate limiting
-  QMessageBox::warning(this, "Error", message);
 }
 
 void MainWindow::MediaStopped() {

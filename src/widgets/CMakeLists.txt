@@ -6,6 +6,7 @@ set(SOURCES
   autoexpandingtreeview.cpp
   busyindicator.cpp
   equalizerslider.cpp
+  errordialog.cpp
   fileview.cpp
   fileviewlist.cpp
   lineedit.cpp
@@ -23,6 +24,7 @@ set(HEADERS
   autoexpandingtreeview.h
   busyindicator.h
   equalizerslider.h
+  errordialog.h
   fileview.h
   fileviewlist.h
   lineedit.h
@@ -37,6 +39,7 @@ set(HEADERS
 
 set(UI
   equalizerslider.ui
+  errordialog.ui
   fileview.ui
   multiloadingindicator.ui
   osdpretty.ui
