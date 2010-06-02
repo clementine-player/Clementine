@@ -124,7 +124,7 @@ TEST_F(M3UParserTest, ParsesActualM3U) {
   ASSERT_EQ(239, songs.size());
   EXPECT_EQ("gravity", songs[0].title());
   EXPECT_EQ(203, songs[0].length());
-  EXPECT_EQ("ほっぴンちょっぴン", songs.back().title());
+  EXPECT_EQ(QString::fromUtf8("ほっぴンちょっぴン"), songs.back().title());
   EXPECT_EQ(85, songs.back().length());
 }
 
@@ -145,4 +145,20 @@ TEST_F(M3UParserTest, SavesSong) {
   EXPECT_THAT(data.constData(), HasSubstr("#EXTM3U"));
   EXPECT_THAT(data.constData(), HasSubstr("#EXTINF:123,bar - foo"));
   EXPECT_THAT(data.constData(), HasSubstr("http://www.example.com/foo.mp3"));
+}
+
+TEST_F(M3UParserTest, ParsesUTF8) {
+  QByteArray data = "#EXTM3U\n"
+                    "#EXTINF:123,Разные - исполнители\n"
+                    "/foo/Разные/исполнители.mp3\n";
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+  M3UParser parser;
+  SongList songs = parser.Load(&buffer);
+  ASSERT_EQ(1, songs.length());
+  EXPECT_EQ(6, songs[0].artist().length());
+  EXPECT_EQ(11, songs[0].title().length());
+  EXPECT_EQ(QString::fromUtf8("Разные"), songs[0].artist());
+  EXPECT_EQ(QString::fromUtf8("исполнители"), songs[0].title());
+  EXPECT_EQ(QString::fromUtf8("/foo/Разные/исполнители.mp3"), songs[0].filename());
 }
