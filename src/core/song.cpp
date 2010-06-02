@@ -274,10 +274,10 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         d->bpm_ = TStringToQString(file->ID3v2Tag()->frameListMap()["TBPM"].front()->toString()).trimmed().toFloat();
 
       if (!file->ID3v2Tag()->frameListMap()["TCOM"].isEmpty())
-        d->composer_ = TStringToQString(file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString()).trimmed();
+        d->composer_ = UniversalEncodingHandler::FixEncoding(file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString());
 
       if (!file->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
-        d->albumartist_ = TStringToQString(file->ID3v2Tag()->frameListMap()["TPE2"].front()->toString()).trimmed();
+        d->albumartist_ = UniversalEncodingHandler::FixEncoding(file->ID3v2Tag()->frameListMap()["TPE2"].front()->toString());
 
       if (!file->ID3v2Tag()->frameListMap()["TCMP"].isEmpty())
         compilation = TStringToQString(file->ID3v2Tag()->frameListMap()["TCMP"].front()->toString()).trimmed();
@@ -286,7 +286,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
       if ( !file->tag()->fieldListMap()["COMPOSER"].isEmpty() )
-        d->composer_ = TStringToQString(file->tag()->fieldListMap()["COMPOSER"].front()).trimmed();
+        d->composer_ = UniversalEncodingHandler::FixEncoding(file->tag()->fieldListMap()["COMPOSER"].front());
 
       if ( !file->tag()->fieldListMap()["BPM"].isEmpty() )
         d->bpm_ = TStringToQString(file->tag()->fieldListMap()["BPM"].front()).trimmed().toFloat();
@@ -301,7 +301,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
       if (!file->xiphComment()->fieldListMap()["COMPOSER"].isEmpty())
-        d->composer_ = TStringToQString( file->xiphComment()->fieldListMap()["COMPOSER"].front() ).trimmed();
+        d->composer_ = UniversalEncodingHandler::FixEncoding( file->xiphComment()->fieldListMap()["COMPOSER"].front() );
 
       if (!file->xiphComment()->fieldListMap()["BPM"].isEmpty() )
         d->bpm_ = TStringToQString( file->xiphComment()->fieldListMap()["BPM"].front() ).trimmed().toFloat();
