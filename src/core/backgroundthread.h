@@ -19,6 +19,8 @@
 
 #include <QThread>
 #include <QtDebug>
+#include <QWaitCondition>
+#include <QMutexLocker>
 
 #include <boost/shared_ptr.hpp>
 
@@ -67,7 +69,7 @@ class BackgroundThreadBase : public QThread {
   void set_io_priority(IoPriority priority) { io_priority_ = priority; }
   void set_cpu_priority(QThread::Priority priority) { cpu_priority_ = priority; }
 
-  virtual void Start() { QThread::start(cpu_priority_); }
+  virtual void Start(bool block = false);
 
  signals:
   void Initialised();
@@ -85,6 +87,9 @@ class BackgroundThreadBase : public QThread {
 
   IoPriority io_priority_;
   QThread::Priority cpu_priority_;
+
+  QWaitCondition started_wait_condition_;
+  QMutex started_wait_condition_mutex_;
 };
 
 // This is the templated class that stores and returns the worker object.
@@ -161,14 +166,20 @@ BackgroundThreadImplementation<InterfaceType, DerivedType>::
 
 template <typename InterfaceType, typename DerivedType>
 void BackgroundThreadImplementation<InterfaceType, DerivedType>::run() {
-  BackgroundThreadBase::SetIOPriority();
+  this->SetIOPriority();
 
-  BackgroundThread<InterfaceType>::worker_.reset(new DerivedType);
+  this->worker_.reset(new DerivedType);
 
-  emit BackgroundThreadBase::Initialised();
+  {
+    // Tell the calling thread that we've initialised the worker.
+    QMutexLocker l(&this->started_wait_condition_mutex_);
+    this->started_wait_condition_.wakeAll();
+  }
+
+  emit this->Initialised();
   QThread::exec();
 
-  BackgroundThread<InterfaceType>::worker_.reset();
+  this->worker_.reset();
 }
 
 

@@ -35,3 +35,21 @@ int BackgroundThreadBase::gettid() {
   return 0;
 #endif
 }
+
+void BackgroundThreadBase::Start(bool block) {
+  if (!block) {
+    // Just start the thread and return immediately
+    QThread::start(cpu_priority_);
+    return;
+  }
+
+  // Lock the mutex so the new thread won't try to wake us up before we start
+  // waiting.
+  QMutexLocker l(&started_wait_condition_mutex_);
+
+  // Start the thread.
+  QThread::start(cpu_priority_);
+
+  // Wait for the thread to initalise.
+  started_wait_condition_.wait(l.mutex());
+}
