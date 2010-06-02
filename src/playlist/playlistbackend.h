@@ -22,13 +22,16 @@
 
 #include "playlistitem.h"
 
+#include <boost/shared_ptr.hpp>
+
 class Database;
 
 class PlaylistBackend : public QObject {
   Q_OBJECT
 
  public:
-  PlaylistBackend(Database* db, QObject* parent = 0);
+  Q_INVOKABLE PlaylistBackend(QObject* parent = 0);
+  void SetDatabase(boost::shared_ptr<Database> db) { db_ = db; }
 
   struct Playlist {
     int id;
@@ -52,7 +55,7 @@ class PlaylistBackend : public QObject {
   void SavePlaylist(int playlist, const PlaylistItemList& items, int last_played);
 
  private:
-  Database* db_;
+  boost::shared_ptr<Database> db_;
 };
 
 #endif // PLAYLISTBACKEND_H

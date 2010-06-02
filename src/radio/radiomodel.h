@@ -18,6 +18,7 @@
 #define RADIOMODEL_H
 
 #include "radioitem.h"
+#include "core/backgroundthread.h"
 #include "core/simpletreemodel.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
@@ -33,7 +34,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
 
  public:
-  RadioModel(Database* db, NetworkAccessManager* network, QObject* parent = 0);
+  RadioModel(BackgroundThread<Database>* db_thread,
+             NetworkAccessManager* network, QObject* parent = 0);
 
   enum {
     Role_Type = Qt::UserRole + 1,
@@ -65,7 +67,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
                        const QPoint& global_pos);
   void ReloadSettings();
 
-  Database* db() const { return db_; }
+  BackgroundThread<Database>* db_thread() const { return db_thread_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
   NetworkAccessManager* network() const { return network_; }
 
@@ -88,7 +90,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
 
  private:
   static QMap<QString, RadioService*> sServices;
-  Database* db_;
+  BackgroundThread<Database>* db_thread_;
   MergedProxyModel* merged_model_;
   NetworkAccessManager* network_;
 };

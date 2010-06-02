@@ -16,6 +16,41 @@
 
 #include "backgroundthread.h"
 
+int BackgroundThreadBase::CreateInThreadEvent::sEventType = -1;
+
+BackgroundThreadBase::BackgroundThreadBase(QObject *parent)
+  : QThread(parent),
+    io_priority_(IOPRIO_CLASS_NONE),
+    cpu_priority_(InheritPriority),
+    object_creator_(NULL)
+{
+  if (CreateInThreadEvent::sEventType == -1)
+    CreateInThreadEvent::sEventType = QEvent::registerEventType();
+}
+
+BackgroundThreadBase::CreateInThreadEvent::CreateInThreadEvent(CreateInThreadRequest *req)
+  : QEvent(QEvent::Type(sEventType)),
+    req_(req)
+{
+}
+
+bool BackgroundThreadBase::ObjectCreator::event(QEvent* e) {
+  if (e->type() != CreateInThreadEvent::sEventType)
+    return false;
+
+  // Create the object, parented to this object so it gets destroyed when the
+  // thread ends.
+  CreateInThreadRequest* req = static_cast<CreateInThreadEvent*>(e)->req_;
+  req->object_ = req->meta_object_.newInstance(Q_ARG(QObject*, this));
+
+  // Wake up the calling thread
+  QMutexLocker l(&req->mutex_);
+  req->wait_condition_.wakeAll();
+
+  return true;
+}
+
+
 int BackgroundThreadBase::SetIOPriority() {
 #ifdef Q_OS_LINUX
   return syscall(SYS_ioprio_set, IOPRIO_WHO_PROCESS, gettid(),
@@ -39,7 +74,7 @@ int BackgroundThreadBase::gettid() {
 void BackgroundThreadBase::Start(bool block) {
   if (!block) {
     // Just start the thread and return immediately
-    QThread::start(cpu_priority_);
+    start(cpu_priority_);
     return;
   }
 
@@ -48,8 +83,9 @@ void BackgroundThreadBase::Start(bool block) {
   QMutexLocker l(&started_wait_condition_mutex_);
 
   // Start the thread.
-  QThread::start(cpu_priority_);
+  start(cpu_priority_);
 
   // Wait for the thread to initalise.
   started_wait_condition_.wait(l.mutex());
 }
+

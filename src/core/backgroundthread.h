@@ -21,6 +21,7 @@
 #include <QtDebug>
 #include <QWaitCondition>
 #include <QMutexLocker>
+#include <QCoreApplication>
 
 #include <boost/shared_ptr.hpp>
 
@@ -53,10 +54,7 @@
 class BackgroundThreadBase : public QThread {
   Q_OBJECT
  public:
-  BackgroundThreadBase(QObject* parent = 0)
-    : QThread(parent),
-      io_priority_(IOPRIO_CLASS_NONE),
-      cpu_priority_(InheritPriority) {}
+  BackgroundThreadBase(QObject* parent = 0);
 
   // Borrowed from schedutils
   enum IoPriority {
@@ -71,10 +69,41 @@ class BackgroundThreadBase : public QThread {
 
   virtual void Start(bool block = false);
 
+  // Creates a new QObject in this thread synchronously.
+  // The class T needs to have a Q_INVOKABLE constructor that takes a single
+  // QObject* argument.
+  template <typename T>
+      T* CreateInThread();
+
  signals:
   void Initialised();
 
  protected:
+  struct CreateInThreadRequest {
+    CreateInThreadRequest(const QMetaObject& meta_object)
+      : meta_object_(meta_object), object_(NULL) {}
+
+    const QMetaObject& meta_object_;
+    QObject* object_;
+
+    QWaitCondition wait_condition_;
+    QMutex mutex_;
+  };
+
+  struct CreateInThreadEvent : public QEvent {
+    CreateInThreadEvent(CreateInThreadRequest* req);
+
+    static int sEventType;
+
+    CreateInThreadRequest* req_;
+  };
+
+  class ObjectCreator : public QObject {
+   public:
+    bool event(QEvent *);
+  };
+
+
   int SetIOPriority();
   static int gettid();
 
@@ -90,6 +119,8 @@ class BackgroundThreadBase : public QThread {
 
   QWaitCondition started_wait_condition_;
   QMutex started_wait_condition_mutex_;
+
+  ObjectCreator* object_creator_;
 };
 
 // This is the templated class that stores and returns the worker object.
@@ -136,6 +167,22 @@ class BackgroundThreadFactoryImplementation : public BackgroundThreadFactory<Int
 
 
 
+template <typename T>
+T* BackgroundThreadBase::CreateInThread() {
+  // Create the request and lock it.
+  CreateInThreadRequest req(T::staticMetaObject);
+  QMutexLocker l(&req.mutex_);
+
+  // Post an event to the thread.  It will create the object and signal the
+  // wait condition. Ownership of the event is transferred to Qt.
+  CreateInThreadEvent* event = new CreateInThreadEvent(&req);
+  QCoreApplication::postEvent(object_creator_, event);
+
+  req.wait_condition_.wait(&req.mutex_);
+
+  return static_cast<T*>(req.object_);
+}
+
 template <typename InterfaceType>
 BackgroundThread<InterfaceType>::BackgroundThread(QObject *parent)
   : BackgroundThreadBase(parent)
@@ -169,6 +216,7 @@ void BackgroundThreadImplementation<InterfaceType, DerivedType>::run() {
   this->SetIOPriority();
 
   this->worker_.reset(new DerivedType);
+  this->object_creator_ = new BackgroundThreadBase::ObjectCreator;
 
   {
     // Tell the calling thread that we've initialised the worker.
@@ -179,6 +227,7 @@ void BackgroundThreadImplementation<InterfaceType, DerivedType>::run() {
   emit this->Initialised();
   QThread::exec();
 
+  delete this->object_creator_;
   this->worker_.reset();
 }
 

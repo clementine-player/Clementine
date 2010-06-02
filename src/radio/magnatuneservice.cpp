@@ -50,13 +50,18 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
     context_menu_(new QMenu),
-    library_backend_(new LibraryBackend(parent->db(), kSongsTable,
-                                        QString::null, QString::null, this)),
-    library_model_(new LibraryModel(library_backend_, this)),
+    library_backend_(NULL),
+    library_model_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     total_song_count_(0),
     network_(parent->network()->network())
 {
+  // Create the library backend in the database thread
+  library_backend_ = parent->db_thread()->CreateInThread<LibraryBackend>();
+  library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
+                         QString::null, QString::null);
+  library_model_ = new LibraryModel(library_backend_, this);
+
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 

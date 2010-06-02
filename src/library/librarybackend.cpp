@@ -25,15 +25,17 @@
 #include <QtDebug>
 #include <QCoreApplication>
 
-LibraryBackend::LibraryBackend(Database *db, const QString& songs_table,
-                               const QString& dirs_table,
-                               const QString& subdirs_table, QObject *parent)
-  : QObject(parent),
-    db_(db),
-    songs_table_(songs_table),
-    dirs_table_(dirs_table),
-    subdirs_table_(subdirs_table)
+LibraryBackend::LibraryBackend(QObject *parent)
+  : QObject(parent)
 {
+}
+
+void LibraryBackend::Init(boost::shared_ptr<Database> db, const QString &songs_table,
+                          const QString &dirs_table, const QString &subdirs_table) {
+  db_ = db;
+  songs_table_ = songs_table;
+  dirs_table_ = dirs_table;
+  subdirs_table_ = subdirs_table;
 }
 
 void LibraryBackend::LoadDirectoriesAsync() {

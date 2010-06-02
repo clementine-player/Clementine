@@ -24,15 +24,17 @@
 #include "libraryquery.h"
 #include "core/song.h"
 
+#include <boost/shared_ptr.hpp>
+
 class Database;
 
 class LibraryBackend : public QObject {
   Q_OBJECT
 
  public:
-  LibraryBackend(Database* db, const QString& songs_table,
-                 const QString& dirs_table, const QString& subdirs_table,
-                 QObject* parent = 0);
+  Q_INVOKABLE LibraryBackend(QObject* parent = 0);
+  void Init(boost::shared_ptr<Database> db, const QString& songs_table,
+            const QString& dirs_table, const QString& subdirs_table);
 
   struct Album {
     Album() {}
@@ -121,7 +123,7 @@ class LibraryBackend : public QObject {
   SubdirectoryList SubdirsInDirectory(int id, QSqlDatabase& db);
 
  private:
-  Database* db_;
+  boost::shared_ptr<Database> db_;
   QString songs_table_;
   QString dirs_table_;
   QString subdirs_table_;

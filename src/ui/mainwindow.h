@@ -159,7 +159,7 @@ class MainWindow : public QMainWindow {
   MultiLoadingIndicator* multi_loading_indicator_;
   boost::scoped_ptr<About> about_dialog_;
 
-  Database* database_;
+  BackgroundThread<Database>* database_;
   RadioModel* radio_model_;
   PlaylistBackend* playlist_backend_;
   PlaylistManager* playlists_;

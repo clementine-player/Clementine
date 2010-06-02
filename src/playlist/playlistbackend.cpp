@@ -24,9 +24,8 @@
 
 using boost::shared_ptr;
 
-PlaylistBackend::PlaylistBackend(Database* db, QObject* parent)
-  : QObject(parent),
-    db_(db)
+PlaylistBackend::PlaylistBackend(QObject* parent)
+  : QObject(parent)
 {
 }
 

@@ -103,17 +103,17 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     edit_tag_dialog_(new EditTagDialog),
     multi_loading_indicator_(new MultiLoadingIndicator(this)),
     about_dialog_(new About),
-    database_(new Database(this)),
-    radio_model_(new RadioModel(database_, network, this)),
-    playlist_backend_(new PlaylistBackend(database_, this)),
+    database_(new BackgroundThreadImplementation<Database, Database>(this)),
+    radio_model_(NULL),
+    playlist_backend_(NULL),
     playlists_(new PlaylistManager(this)),
     playlist_parser_(new PlaylistParser(this)),
-    player_(new Player(playlists_, radio_model_->GetLastFMService(), engine, this)),
-    library_(new Library(database_, this)),
+    player_(NULL),
+    library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
     settings_dialog_(new SettingsDialog),
     add_stream_dialog_(new AddStreamDialog),
-    cover_manager_(new AlbumCoverManager(network, library_->model()->backend())),
+    cover_manager_(NULL),
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
     global_shortcuts_dialog_(new GlobalShortcutsDialog(global_shortcuts_)),
@@ -123,6 +123,20 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     track_position_timer_(new QTimer(this)),
     was_maximized_(false)
 {
+  // Wait for the database thread to start - lots of stuff depends on it.
+  database_->Start(true);
+
+  // Create some objects in the database thread
+  playlist_backend_ = database_->CreateInThread<PlaylistBackend>();
+  playlist_backend_->SetDatabase(database_->Worker());
+
+  // Create stuff that needs the database
+  radio_model_ = new RadioModel(database_, network, this);
+  player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
+  library_ = new Library(database_, this);
+  cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
+
+  // Initialise the UI
   ui_->setupUi(this);
   tray_icon_->setIcon(windowIcon());
   tray_icon_->setToolTip(QCoreApplication::applicationName());
@@ -278,7 +292,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
   // Database connections
-  connect(database_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(database_->Worker().get(), SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
 
   // Library connections
   connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));

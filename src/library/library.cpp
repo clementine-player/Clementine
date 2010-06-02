@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/database.h"
 #include "library.h"
 #include "librarymodel.h"
 #include "librarybackend.h"
@@ -22,13 +23,17 @@ const char* Library::kSongsTable = "songs";
 const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 
-Library::Library(Database *db, QObject *parent)
+Library::Library(BackgroundThread<Database>* db_thread, QObject *parent)
   : QObject(parent),
-    backend_(new LibraryBackend(db, kSongsTable, kDirsTable, kSubdirsTable, this)),
-    model_(new LibraryModel(backend_, parent)),
+    backend_(NULL),
+    model_(NULL),
     watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
     watcher_(NULL)
 {
+  backend_ = db_thread->CreateInThread<LibraryBackend>();
+  backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable);
+
+  model_ = new LibraryModel(backend_, this);
 }
 
 void Library::set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory) {

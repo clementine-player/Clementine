@@ -32,7 +32,7 @@ class Library : public QObject {
   Q_OBJECT
 
  public:
-  Library(Database* db, QObject* parent);
+  Library(BackgroundThread<Database>* db_thread, QObject* parent);
 
   static const char* kSongsTable;
   static const char* kDirsTable;

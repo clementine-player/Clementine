@@ -36,6 +36,8 @@ class Database : public QObject {
   static const int kSchemaVersion;
   static const char* kDatabaseFilename;
 
+  void Stop() {}
+
   QSqlDatabase Connect();
   bool CheckErrors(const QSqlError& error);
 
