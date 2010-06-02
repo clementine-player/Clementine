@@ -129,4 +129,12 @@ TEST_F(SongTest, DoesNotFixExtendedAscii) {
   EXPECT_EQ(fixed, unicode);
 }
 
+TEST_F(SongTest, FixesUtf8MungedIntoLatin1) {
+  char latin1[] = { 'E', 's', 't', 'h', 'e', 'r', 0xe2, 0x80, 0x99, 's', 0x00 };
+  TagLib::String str(latin1, TagLib::String::Latin1);
+  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  EXPECT_EQ(8, fixed.length());
+  EXPECT_EQ(QString::fromUtf8("Esther’s"), fixed);
+}
+
 }  // namespace
