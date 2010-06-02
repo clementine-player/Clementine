@@ -57,6 +57,8 @@ PlaylistView::PlaylistView(QWidget *parent)
 
   connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
   connect(header(), SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
+  connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header(), SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
 
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
@@ -91,6 +93,18 @@ void PlaylistView::SetPlaylist(Playlist *playlist) {
   LoadGeometry();
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
+}
+
+void PlaylistView::setModel(QAbstractItemModel *m) {
+  if (model()) {
+    disconnect(model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+               this, SLOT(InvalidateCachedCurrentPixmap()));
+  }
+
+  QTreeView::setModel(m);
+
+  connect(model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+          this, SLOT(InvalidateCachedCurrentPixmap()));
 }
 
 void PlaylistView::LoadGeometry() {
@@ -227,6 +241,10 @@ void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
   QPainter p(&cached_current_row_);
   QTreeView::drawRow(&p, option, index);
   p.end();
+}
+
+void PlaylistView::InvalidateCachedCurrentPixmap() {
+  cached_current_row_ = QPixmap();
 }
 
 void PlaylistView::timerEvent(QTimerEvent* event) {

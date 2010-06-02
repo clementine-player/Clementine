@@ -38,6 +38,7 @@ class PlaylistView : public QTreeView {
   // QTreeView
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   void keyPressEvent(QKeyEvent* event);
+  void setModel(QAbstractItemModel *model);
 
   // QAbstractScrollArea
   void contextMenuEvent(QContextMenuEvent* e);
@@ -69,6 +70,7 @@ class PlaylistView : public QTreeView {
   void GlowIntensityChanged();
   void InhibitAutoscrollTimeout();
   void MaybeAutoscroll();
+  void InvalidateCachedCurrentPixmap();
 
  private:
   void ReloadBarPixmaps();
