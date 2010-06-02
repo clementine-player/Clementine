@@ -33,8 +33,9 @@ class LibraryModelTest : public ::testing::Test {
  protected:
   void SetUp() {
     database_.reset(new MemoryDatabase);
-    backend_.reset(new LibraryBackend(database_.get(), Library::kSongsTable,
-                                      Library::kDirsTable, Library::kSubdirsTable));
+    backend_.reset(new LibraryBackend());
+    backend_->Init(database_, Library::kSongsTable,
+                   Library::kDirsTable, Library::kSubdirsTable);
     model_.reset(new LibraryModel(backend_.get()));
 
     added_dir_ = false;
@@ -68,7 +69,7 @@ class LibraryModelTest : public ::testing::Test {
     return AddSong(song);
   }
 
-  boost::scoped_ptr<Database> database_;
+  boost::shared_ptr<Database> database_;
   boost::scoped_ptr<LibraryBackend> backend_;
   boost::scoped_ptr<LibraryModel> model_;
   boost::scoped_ptr<QSortFilterProxyModel> model_sorted_;

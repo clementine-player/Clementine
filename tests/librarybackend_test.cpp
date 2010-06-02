@@ -34,8 +34,9 @@ class LibraryBackendTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
     database_.reset(new MemoryDatabase);
-    backend_.reset(new LibraryBackend(database_.get(), Library::kSongsTable,
-                                      Library::kDirsTable, Library::kSubdirsTable));
+    backend_.reset(new LibraryBackend);
+    backend_->Init(database_, Library::kSongsTable,
+                   Library::kDirsTable, Library::kSubdirsTable);
   }
 
   Song MakeDummySong(int directory_id) {
@@ -49,7 +50,7 @@ class LibraryBackendTest : public ::testing::Test {
     return ret;
   }
 
-  boost::scoped_ptr<Database> database_;
+  boost::shared_ptr<Database> database_;
   boost::scoped_ptr<LibraryBackend> backend_;
 };
 
