@@ -29,11 +29,11 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
   M3UType type = STANDARD;
   Metadata current_metadata;
 
-  QString line = QString::fromLocal8Bit(device->readLine()).trimmed();
+  QString line = QString::fromUtf8(device->readLine()).trimmed();
   if (line.startsWith("#EXTM3U")) {
     // This is in extended M3U format.
     type = EXTENDED;
-    line = QString::fromLocal8Bit(device->readLine()).trimmed();
+    line = QString::fromUtf8(device->readLine()).trimmed();
   }
 
   forever {
@@ -65,7 +65,7 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
     if (device->atEnd()) {
       break;
     }
-    line = QString::fromLocal8Bit(device->readLine()).trimmed();
+    line = QString::fromUtf8(device->readLine()).trimmed();
   }
 
   return ret;
@@ -101,8 +101,8 @@ void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
       continue;
     }
     QString meta = QString("#EXTINF:%1,%2 - %3\n").arg(song.length()).arg(song.artist()).arg(song.title());
-    device->write(meta.toLocal8Bit());
-    device->write(MakeRelativeTo(song.filename(), dir).toLocal8Bit());
+    device->write(meta.toUtf8());
+    device->write(MakeRelativeTo(song.filename(), dir).toUtf8());
     device->write("\n");
   }
 }
