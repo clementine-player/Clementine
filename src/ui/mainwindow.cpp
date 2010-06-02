@@ -111,7 +111,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     player_(NULL),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
-    settings_dialog_(new SettingsDialog),
+    settings_dialog_(NULL),
     add_stream_dialog_(new AddStreamDialog),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
@@ -135,6 +135,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
   library_ = new Library(database_, this);
   cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
+  settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
 
   // Initialise the UI
   ui_->setupUi(this);
