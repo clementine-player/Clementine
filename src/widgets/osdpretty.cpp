@@ -100,6 +100,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
     shadow_edge_[i] = QPixmap::fromImage(shadow_edge.transformed(rotation));
     shadow_corner_[i] = QPixmap::fromImage(shadow_corner.transformed(rotation));
   }
+  background_ = QPixmap(":osd_background.png");
 
   // Set the margins to allow for the drop shadow
   QBoxLayout* l = static_cast<QBoxLayout*>(layout());
@@ -178,12 +179,20 @@ void OSDPretty::paintEvent(QPaintEvent *) {
   p.setOpacity(background_opacity_);
   p.drawRoundedRect(box, kBorderRadius, kBorderRadius);
 
+  // Background pattern
+  QPainterPath background_path;
+  background_path.addRoundedRect(box, kBorderRadius, kBorderRadius);
+  p.setClipPath(background_path);
+  p.setOpacity(1.0);
+  p.drawPixmap(box.right() - background_.width(),
+               box.bottom() - background_.height(), background_);
+  p.setClipping(false);
+
   // Gradient overlay
   QLinearGradient gradient(0, 0, 0, height());
   gradient.setColorAt(0, QColor(255, 255, 255, 130));
   gradient.setColorAt(1, QColor(255, 255, 255, 50));
   p.setBrush(gradient);
-  p.setOpacity(1.0);
   p.drawRoundedRect(box, kBorderRadius, kBorderRadius);
 
   // Box border

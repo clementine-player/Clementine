@@ -113,6 +113,7 @@ class OSDPretty : public QWidget {
   // Cached pixmaps
   QPixmap shadow_edge_[4];
   QPixmap shadow_corner_[4];
+  QPixmap background_;
 
   // For dragging the OSD
   QPoint original_window_pos_;
