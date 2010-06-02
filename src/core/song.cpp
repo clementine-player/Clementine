@@ -96,6 +96,11 @@ UniversalEncodingHandler::UniversalEncodingHandler()
     current_codec_(NULL) {
 }
 
+UniversalEncodingHandler::UniversalEncodingHandler(uint32_t language_filter)
+  : nsUniversalDetector(language_filter),
+    current_codec_(NULL) {
+}
+
 TagLib::String UniversalEncodingHandler::parse(const TagLib::ByteVector& data) const {
   const_cast<UniversalEncodingHandler*>(this)->Reset();
   const_cast<UniversalEncodingHandler*>(this)->HandleData(data.data(), data.size());
@@ -129,12 +134,53 @@ void UniversalEncodingHandler::Report(const char* charset) {
   }
 
   QTextCodec* codec = QTextCodec::codecForName(charset);
-  if (!codec) {
-    qWarning() << "Could not identify encoding in ID3v1 tag. Assuming ASCII.";
-  } else {
-    qWarning() << "Detected non-ASCII encoding in ID3v1 tag:" << charset;
-  }
   current_codec_ = codec;
+}
+
+QTextCodec* UniversalEncodingHandler::Guess(const char* data) {
+  Reset();
+  HandleData(data, qstrlen(data));
+  DataEnd();
+
+  if (!current_codec_) {
+    // Windows-1251 heuristic.
+    const uchar* d = reinterpret_cast<const uchar*>(data);
+    int repeats = 0;
+    while (uchar x = *d++) {
+      if (x >= 0xc0) {
+        ++repeats;
+      } else {
+        repeats = 0;
+      }
+      if (repeats > 3) {
+        qWarning() << "Heuristic guessed windows-1251";
+        return QTextCodec::codecForName("windows-1251");
+      }
+    }
+  }
+
+  return current_codec_;
+}
+
+QString UniversalEncodingHandler::FixEncoding(const TagLib::String& input) {
+  if (input.isLatin1() && !input.isAscii()) {
+    qWarning() << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
+    std::string broken = input.toCString(true);
+    std::string fixed;
+    if (broken.size() > input.size()) {
+      fixed = QString::fromUtf8(broken.c_str()).toStdString();
+      // This is single byte encoding, therefore can't be CJK.
+      UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
+      QTextCodec* codec = detector.Guess(fixed.c_str());
+      if (!codec) {
+        qDebug() << "Could not guess encoding. Using extended ASCII.";
+      } else {
+        QString foo = codec->toUnicode(fixed.c_str());
+        return foo.trimmed();
+      }
+    }
+  }
+  return TStringToQString(input).trimmed();
 }
 
 
@@ -206,15 +252,13 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   TagLib::Tag* tag = fileref->tag();
   if (tag) {
-    #define strip(x) TStringToQString( x ).trimmed()
-    d->title_ = strip(tag->title());
-    d->artist_ = strip(tag->artist());
-    d->album_ = strip(tag->album());
-    d->comment_ = strip(tag->comment());
-    d->genre_ = strip(tag->genre());
+    d->title_ = UniversalEncodingHandler::FixEncoding(tag->title());
+    d->artist_ = UniversalEncodingHandler::FixEncoding(tag->artist());
+    d->album_ = UniversalEncodingHandler::FixEncoding(tag->album());
+    d->comment_ = UniversalEncodingHandler::FixEncoding(tag->comment());
+    d->genre_ = UniversalEncodingHandler::FixEncoding(tag->genre());
     d->year_ = tag->year();
     d->track_ = tag->track();
-    #undef strip
 
     d->valid_ = true;
   }

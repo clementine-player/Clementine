@@ -25,6 +25,7 @@
 #include "mock_taglib.h"
 
 #include <QTemporaryFile>
+#include <QTextCodec>
 
 namespace {
 
@@ -83,6 +84,49 @@ TEST_F(SongTest, LeavesASCIIAlone) {
   EXPECT_TRUE(str.isAscii());
   EXPECT_TRUE(str.isLatin1());
   EXPECT_STREQ("foobar", str.to8Bit(false).c_str());
+}
+
+TEST_F(SongTest, FixesCP866) {
+  const char cp866[] = { 0x8a, 0xa8, 0xad, 0xae, '\0' };  // Кино
+  TagLib::ByteVector bytes(cp866);
+  TagLib::String str(bytes);
+  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  EXPECT_EQ(4, fixed.length());
+  EXPECT_STREQ("Кино", fixed.toUtf8().constData());
+}
+
+TEST_F(SongTest, FixesWindows1251) {
+  const char w1251[] = { 0xca, 0xe8, 0xed, 0xee, '\0' };  // Кино
+  TagLib::ByteVector bytes(w1251);
+  TagLib::String str(bytes);
+  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  EXPECT_EQ(4, fixed.length());
+  EXPECT_STREQ("Кино", fixed.toUtf8().constData());
+}
+
+TEST_F(SongTest, DoesNotFixAscii) {
+  TagLib::ByteVector bytes("foobar");
+  TagLib::String str(bytes);
+  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  EXPECT_EQ(6, fixed.length());
+  EXPECT_STREQ("foobar", fixed.toUtf8().constData());
+}
+
+TEST_F(SongTest, DoesNotFixUtf8) {
+  TagLib::ByteVector bytes("Кино");
+  TagLib::String str(bytes, TagLib::String::UTF8);
+  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  EXPECT_EQ(4, fixed.length());
+  EXPECT_STREQ("Кино", fixed.toUtf8().constData());
+}
+
+TEST_F(SongTest, DoesNotFixExtendedAscii) {
+  char latin1[] = { 'R', 0xf6, 'y', 'k', 's', 'o', 'p', 'p', 0x00 };
+  QTextCodec* codec = QTextCodec::codecForName("latin1");
+  QString unicode = codec->toUnicode(latin1);
+  TagLib::String str(latin1);
+  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  EXPECT_EQ(fixed, unicode);
 }
 
 }  // namespace

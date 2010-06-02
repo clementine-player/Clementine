@@ -57,11 +57,14 @@ class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
                                  nsUniversalDetector {
  public:
   UniversalEncodingHandler();
+  explicit UniversalEncodingHandler(uint32_t language_filter);
 
   // TagLib::ID3v1::StringHandler
   virtual TagLib::String parse(const TagLib::ByteVector& data) const;
-  //virtual TagLib::ByteVector render(const TagLib::String& s) const;
 
+  QTextCodec* Guess(const char* data);
+
+  static QString FixEncoding(const TagLib::String& input);
  private:
   // nsUniversalDetector
   virtual void Report(const char* charset);
