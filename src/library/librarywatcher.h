@@ -48,6 +48,7 @@ class LibraryWatcher : public QObject {
   void SongsDeleted(const SongList& songs);
   void SubdirsDiscovered(const SubdirectoryList& subdirs);
   void SubdirsMTimeUpdated(const SubdirectoryList& subdirs);
+  void CompilationsNeedUpdating();
 
   void ScanStarted();
   void ScanFinished();

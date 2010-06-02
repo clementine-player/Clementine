@@ -18,6 +18,7 @@
 #include "librarybackend.h"
 #include "libraryitem.h"
 #include "librarydirectorymodel.h"
+#include "core/database.h"
 #include "playlist/songmimedata.h"
 #include "ui/iconloader.h"
 
@@ -366,6 +367,7 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
   }
 
   // Execute the query
+  QMutexLocker l(backend_->db()->Mutex());
   if (!backend_->ExecQuery(&q))
     return;
 

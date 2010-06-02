@@ -139,12 +139,14 @@ void Database::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** ar
 
 Database::Database(QObject* parent, const QString& database_name)
   : QObject(parent),
+    mutex_(QMutex::Recursive),
     injected_database_name_(database_name),
     query_hash_(0)
 {
   directory_ = QDir::toNativeSeparators(
       QDir::homePath() + "/.config/" + QCoreApplication::organizationName());
 
+  QMutexLocker l(&mutex_);
   Connect();
 }
 

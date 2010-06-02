@@ -47,6 +47,7 @@ void LibraryBackend::UpdateTotalSongCountAsync() {
 }
 
 void LibraryBackend::LoadDirectories() {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("SELECT ROWID, path FROM %1").arg(dirs_table_), db);
@@ -63,6 +64,7 @@ void LibraryBackend::LoadDirectories() {
 }
 
 SubdirectoryList LibraryBackend::SubdirsInDirectory(int id) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db = db_->Connect();
   return SubdirsInDirectory(id, db);
 }
@@ -87,6 +89,7 @@ SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase &db) {
 }
 
 void LibraryBackend::UpdateTotalSongCount() {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("SELECT COUNT(*) FROM %1").arg(songs_table_), db);
@@ -98,6 +101,7 @@ void LibraryBackend::UpdateTotalSongCount() {
 }
 
 void LibraryBackend::AddDirectory(const QString &path) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("INSERT INTO %1 (path, subdirs)"
@@ -114,6 +118,7 @@ void LibraryBackend::AddDirectory(const QString &path) {
 }
 
 void LibraryBackend::RemoveDirectory(const Directory& dir) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   // Remove songs first
@@ -141,6 +146,7 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
 }
 
 SongList LibraryBackend::FindSongsInDirectory(int id) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec +
@@ -160,6 +166,7 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
 }
 
 void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   QSqlQuery find_query(QString("SELECT ROWID FROM %1"
                                " WHERE directory = :id AND path = :path")
@@ -208,6 +215,7 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
 }
 
 void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery check_dir(QString("SELECT ROWID FROM %1 WHERE ROWID = :id")
@@ -275,6 +283,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
 }
 
 void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("UPDATE %1 SET mtime = :mtime WHERE ROWID = :id")
@@ -291,6 +300,7 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
 }
 
 void LibraryBackend::DeleteSongs(const SongList &songs) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("DELETE FROM %1 WHERE ROWID = :id")
@@ -314,6 +324,7 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
   query.SetColumnSpec("DISTINCT artist");
   query.AddCompilationRequirement(false);
 
+  QMutexLocker l(db_->Mutex());
   if (!ExecQuery(&query)) return QStringList();
 
   QStringList ret;
@@ -339,6 +350,7 @@ SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, c
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
 
+  QMutexLocker l(db_->Mutex());
   if (!ExecQuery(&query)) return SongList();
 
   SongList ret;
@@ -351,6 +363,7 @@ SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, c
 }
 
 Song LibraryBackend::GetSongById(int id) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
@@ -371,6 +384,7 @@ bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
   query.SetColumnSpec("ROWID");
   query.AddCompilationRequirement(true);
 
+  QMutexLocker l(db_->Mutex());
   if (!ExecQuery(&query)) return false;
 
   return query.Next();
@@ -386,6 +400,7 @@ SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOp
   query.AddCompilationRequirement(true);
   query.AddWhere("album", album);
 
+  QMutexLocker l(db_->Mutex());
   if (!ExecQuery(&query)) return SongList();
 
   SongList ret;
@@ -398,6 +413,7 @@ SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOp
 }
 
 void LibraryBackend::UpdateCompilations() {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   // Look for albums that have songs by more than one artist in the same
@@ -513,6 +529,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     query.AddWhere("artist", artist);
   }
 
+  QMutexLocker l(db_->Mutex());
   if (!ExecQuery(&query)) return ret;
 
   QString last_album;
@@ -548,6 +565,7 @@ LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const Q
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
 
+  QMutexLocker l(db_->Mutex());
    if (!ExecQuery(&query)) return ret;
 
   if (query.Next()) {
@@ -570,6 +588,7 @@ void LibraryBackend::UpdateManualAlbumArtAsync(const QString &artist,
 void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
                                           const QString &album,
                                           const QString &art) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QString sql(QString("UPDATE %1 SET art_manual = :art"
@@ -588,6 +607,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
 }
 
 void LibraryBackend::ForceCompilation(const QString& artist, const QString& album, bool on) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   // Get the songs before they're updated

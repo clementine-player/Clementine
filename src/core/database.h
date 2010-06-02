@@ -40,6 +40,7 @@ class Database : public QObject {
 
   QSqlDatabase Connect();
   bool CheckErrors(const QSqlError& error);
+  QMutex* Mutex() { return &mutex_; }
 
  signals:
   void Error(const QString& message);
@@ -49,6 +50,7 @@ class Database : public QObject {
 
   QString directory_;
   QMutex connect_mutex_;
+  QMutex mutex_;
 
   // Used by tests
   QString injected_database_name_;

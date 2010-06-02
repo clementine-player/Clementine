@@ -30,6 +30,7 @@ PlaylistBackend::PlaylistBackend(QObject* parent)
 }
 
 PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   PlaylistList ret;
@@ -51,6 +52,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
 }
 
 PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q("SELECT ROWID, name, last_played FROM playlists"
@@ -71,6 +73,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
 }
 
 PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   PlaylistItemList ret;
@@ -116,6 +119,7 @@ void PlaylistBackend::SavePlaylistAsync(int playlist, const PlaylistItemList &it
 
 void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
                                    int last_played) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery clear("DELETE FROM playlist_items WHERE playlist = :playlist", db);
@@ -154,6 +158,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
 }
 
 int PlaylistBackend::CreatePlaylist(const QString &name) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q("INSERT INTO playlists (name) VALUES (:name)", db);
@@ -166,6 +171,7 @@ int PlaylistBackend::CreatePlaylist(const QString &name) {
 }
 
 void PlaylistBackend::RemovePlaylist(int id) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   QSqlQuery delete_playlist("DELETE FROM playlists WHERE ROWID=:id", db);
   QSqlQuery delete_items("DELETE FROM playlist_items WHERE playlist=:id", db);
@@ -187,6 +193,7 @@ void PlaylistBackend::RemovePlaylist(int id) {
 }
 
 void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   QSqlQuery q("UPDATE playlists SET name=:name WHERE ROWID=:id", db);
   q.bindValue(":name", new_name);
@@ -197,6 +204,7 @@ void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
 }
 
 void PlaylistBackend::SetPlaylistOrder(const QList<int>& ids) {
+  QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   QSqlQuery q("UPDATE playlists SET ui_order=:index WHERE ROWID=:id", db);
 

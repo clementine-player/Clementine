@@ -36,6 +36,8 @@ class LibraryBackend : public QObject {
   void Init(boost::shared_ptr<Database> db, const QString& songs_table,
             const QString& dirs_table, const QString& subdirs_table);
 
+  boost::shared_ptr<Database> db() const { return db_; }
+
   struct Album {
     Album() {}
     Album(const QString& _artist, const QString& _album_name,

@@ -76,6 +76,8 @@ void Library::WatcherInitialised() {
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher,  SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
+  connect(watcher, SIGNAL(CompilationsNeedUpdating()),
+          backend_, SLOT(UpdateCompilations()));
 
   // This will start the watcher checking for updates
   backend_->LoadDirectoriesAsync();

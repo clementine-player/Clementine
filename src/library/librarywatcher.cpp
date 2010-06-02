@@ -171,7 +171,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
     }
   }
 
-  backend_->UpdateCompilations();
+  emit CompilationsNeedUpdating();
 }
 
 void LibraryWatcher::ScanSubdirectory(
@@ -388,7 +388,7 @@ void LibraryWatcher::RescanPathsNow() {
 
   rescan_queue_.clear();
 
-  backend_->UpdateCompilations();
+  emit CompilationsNeedUpdating();
 }
 
 QString LibraryWatcher::PickBestImage(const QStringList& images) {
@@ -448,5 +448,5 @@ void LibraryWatcher::IncrementalScanNow() {
       ScanSubdirectory(subdir.path, subdir, &transaction);
     }
   }
-  backend_->UpdateCompilations();
+  emit CompilationsNeedUpdating();
 }
