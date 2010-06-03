@@ -117,6 +117,13 @@ bool Database::Like(const char* needle, const char* haystack) {
 // Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
 void Database::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
   Q_ASSERT(argc == 2 || argc == 3);
+
+  if (_sqlite3_value_type(argv[0]) == SQLITE_NULL ||
+      _sqlite3_value_type(argv[1]) == SQLITE_NULL) {
+    _sqlite3_result_int64(context, 0);
+    return;
+  }
+
   Q_ASSERT(_sqlite3_value_type(argv[0]) == _sqlite3_value_type(argv[1]));
 
   Database* library = reinterpret_cast<Database*>(_sqlite3_user_data(context));
