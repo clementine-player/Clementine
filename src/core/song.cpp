@@ -169,6 +169,10 @@ QTextCodec* UniversalEncodingHandler::Guess(const TagLib::Tag& tag) {
   Guess(tag.comment(), &usages);
   Guess(tag.genre(), &usages);
 
+  if (usages.isEmpty()) {
+    return NULL;
+  }
+
   QHash<QTextCodec*, int>::const_iterator max = usages.begin();
   for (QHash<QTextCodec*, int>::const_iterator it = usages.begin(); it != usages.end(); ++it) {
     if (it.value() > max.value()) {
