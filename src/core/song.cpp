@@ -305,7 +305,7 @@ void Song::Init(const QString& title, const QString& artist, const QString& albu
 }
 
 QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) {
-  if (codec) {
+  if (codec && tag.isLatin1()) {  // Never override UTF-8.
     const std::string fixed = QString::fromUtf8(tag.toCString(true)).toStdString();
     return codec->toUnicode(fixed.c_str()).trimmed();
   } else {
