@@ -11,7 +11,7 @@ echo "Creating $name-$version.tar.gz..."
 tar -czf $name-$version.tar.gz "$root" \
     --transform "s,^$rootnoslash,$name-$version," \
     --exclude-vcs \
-    --exclude "$root/bin" \
+    --exclude "$root/bin/*" \
     --exclude "$root/debian" \
     --exclude "$root/dist/*.tar.gz"
 
