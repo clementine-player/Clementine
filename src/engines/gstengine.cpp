@@ -389,11 +389,21 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
     return false;
 
+  QUrl gst_url = url;
+
+  // It's a file:// url with a hostname set.  QUrl::fromLocalFile does this
+  // when given a \\host\share\file path on Windows.  Munge it back into a
+  // path that gstreamer will recognise.
+  if (url.scheme() == "file" && !url.host().isEmpty()) {
+    gst_url.setPath("//" + gst_url.host() + gst_url.path());
+    gst_url.setHost(QString());
+  }
+
   const bool crossfade = current_pipeline_ &&
                          ((crossfade_enabled_ && change == Engine::Manual) ||
                           (autocrossfade_enabled_ && change == Engine::Auto));
 
-  if (!crossfade && current_pipeline_ && current_pipeline_->url() == url &&
+  if (!crossfade && current_pipeline_ && current_pipeline_->url() == gst_url &&
       change == Engine::Auto) {
     // We're not crossfading, and the pipeline is already playing the URI we
     // want, so just do nothing.
@@ -401,13 +411,13 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   }
 
   shared_ptr<GstEnginePipeline> pipeline;
-  if (preload_pipeline_ && preloaded_url_ == url) {
+  if (preload_pipeline_ && preloaded_url_ == gst_url) {
     pipeline = preload_pipeline_;
     connect(preload_pipeline_.get(),
             SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
             SLOT(NewMetaData(Engine::SimpleMetaBundle)));
   } else {
-    pipeline = CreatePipeline(url);
+    pipeline = CreatePipeline(gst_url);
     if (!pipeline)
       return false;
   }
