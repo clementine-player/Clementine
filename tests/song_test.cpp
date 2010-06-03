@@ -27,6 +27,8 @@
 #include <QTemporaryFile>
 #include <QTextCodec>
 
+#include <taglib/id3v2tag.h>
+
 namespace {
 
 class SongTest : public ::testing::Test {
@@ -90,7 +92,7 @@ TEST_F(SongTest, FixesCP866) {
   const char cp866[] = { 0x8a, 0xa8, 0xad, 0xae, '\0' };  // Кино
   TagLib::ByteVector bytes(cp866);
   TagLib::String str(bytes);
-  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
   EXPECT_EQ(4, fixed.length());
   EXPECT_STREQ("Кино", fixed.toUtf8().constData());
 }
@@ -99,7 +101,7 @@ TEST_F(SongTest, FixesWindows1251) {
   const char w1251[] = { 0xca, 0xe8, 0xed, 0xee, '\0' };  // Кино
   TagLib::ByteVector bytes(w1251);
   TagLib::String str(bytes);
-  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
   EXPECT_EQ(4, fixed.length());
   EXPECT_STREQ("Кино", fixed.toUtf8().constData());
 }
@@ -107,7 +109,7 @@ TEST_F(SongTest, FixesWindows1251) {
 TEST_F(SongTest, DoesNotFixAscii) {
   TagLib::ByteVector bytes("foobar");
   TagLib::String str(bytes);
-  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
   EXPECT_EQ(6, fixed.length());
   EXPECT_STREQ("foobar", fixed.toUtf8().constData());
 }
@@ -115,7 +117,7 @@ TEST_F(SongTest, DoesNotFixAscii) {
 TEST_F(SongTest, DoesNotFixUtf8) {
   TagLib::ByteVector bytes("Кино");
   TagLib::String str(bytes, TagLib::String::UTF8);
-  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
   EXPECT_EQ(4, fixed.length());
   EXPECT_STREQ("Кино", fixed.toUtf8().constData());
 }
@@ -125,16 +127,29 @@ TEST_F(SongTest, DoesNotFixExtendedAscii) {
   QTextCodec* codec = QTextCodec::codecForName("latin1");
   QString unicode = codec->toUnicode(latin1);
   TagLib::String str(latin1);
-  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
   EXPECT_EQ(fixed, unicode);
 }
 
 TEST_F(SongTest, FixesUtf8MungedIntoLatin1) {
   char latin1[] = { 'E', 's', 't', 'h', 'e', 'r', 0xe2, 0x80, 0x99, 's', 0x00 };
   TagLib::String str(latin1, TagLib::String::Latin1);
-  QString fixed = UniversalEncodingHandler::FixEncoding(str);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
   EXPECT_EQ(8, fixed.length());
   EXPECT_EQ(QString::fromUtf8("Esther’s"), fixed);
+}
+
+TEST_F(SongTest, TakesMajorityVote) {
+  const char w1251[] = { 0xca, 0xe8, 0xed, 0xee, '\0' };  // Кино
+  // Actually windows-1251 but gets detected as windows-1252.
+  const char w1252[] = { 0xcf, '.', 0xc7, '.', '\0' };  // П.Э.
+  TagLib::ID3v2::Tag tag;
+  tag.setTitle(w1251);
+  tag.setArtist(w1251);
+  tag.setAlbum(w1252);
+
+  UniversalEncodingHandler handler(NS_FILTER_NON_CJK);
+  EXPECT_EQ(QTextCodec::codecForName("windows-1251"), handler.Guess(tag));
 }
 
 }  // namespace

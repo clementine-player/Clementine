@@ -17,6 +17,7 @@
 #ifndef SONG_H
 #define SONG_H
 
+#include <QHash>
 #include <QImage>
 #include <QList>
 #include <QSharedData>
@@ -63,11 +64,15 @@ class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
   virtual TagLib::String parse(const TagLib::ByteVector& data) const;
 
   QTextCodec* Guess(const char* data);
+  QTextCodec* Guess(const TagLib::Tag& tag);
+  QTextCodec* Guess(const TagLib::String& input);
 
-  static QString FixEncoding(const TagLib::String& input);
+  QString FixEncoding(const TagLib::String& input);
  private:
   // nsUniversalDetector
   virtual void Report(const char* charset);
+
+  void Guess(const TagLib::String& input, QHash<QTextCodec*, int>* usages);
 
   QTextCodec* current_codec_;
 };
@@ -110,6 +115,8 @@ class Song {
   void InitFromQuery(const QSqlQuery& query, int col = 0);
   void InitFromLastFM(const lastfm::Track& track);
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
+
+  QString Decode(const TagLib::String tag, const QTextCodec* codec) const;
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

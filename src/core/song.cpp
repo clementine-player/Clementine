@@ -154,12 +154,61 @@ QTextCodec* UniversalEncodingHandler::Guess(const char* data) {
       }
       if (repeats > 3) {
         qWarning() << "Heuristic guessed windows-1251";
-        return QTextCodec::codecForName("windows-1251");
+        current_codec_ = QTextCodec::codecForName("windows-1251");
       }
     }
   }
-
   return current_codec_;
+}
+
+QTextCodec* UniversalEncodingHandler::Guess(const TagLib::Tag& tag) {
+  QHash<QTextCodec*, int> usages;
+  Guess(tag.title(), &usages);
+  Guess(tag.artist(), &usages);
+  Guess(tag.album(), &usages);
+  Guess(tag.comment(), &usages);
+  Guess(tag.genre(), &usages);
+
+  QHash<QTextCodec*, int>::const_iterator max = usages.begin();
+  for (QHash<QTextCodec*, int>::const_iterator it = usages.begin(); it != usages.end(); ++it) {
+    if (it.value() > max.value()) {
+      max = it;
+    }
+  }
+  return max.key();
+}
+
+void UniversalEncodingHandler::Guess(const TagLib::String& input,
+                                     QHash<QTextCodec*, int>* usages) {
+  if (input.isEmpty()) {
+    return;  // Empty strings don't vote.
+  }
+  QTextCodec* codec = Guess(input);
+  QHash<QTextCodec*, int>::iterator it = usages->find(codec);
+  if (it == usages->end()) {
+    usages->insert(codec, 1);
+  } else {
+    ++it.value();
+  }
+}
+
+QTextCodec* UniversalEncodingHandler::Guess(const TagLib::String& input) {
+  if (input.isAscii()) {
+    return NULL;
+  }
+  if (input.isLatin1()) {
+    qWarning() << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
+    std::string broken = input.toCString(true);
+    std::string fixed;
+    if (broken.size() > input.size()) {
+      fixed = QString::fromUtf8(broken.c_str()).toStdString();
+      QTextCodec* codec = Guess(fixed.c_str());
+      return codec;
+    } else {
+      return NULL;
+    }
+  }
+  return QTextCodec::codecForName("UTF-8");
 }
 
 QString UniversalEncodingHandler::FixEncoding(const TagLib::String& input) {
@@ -169,12 +218,11 @@ QString UniversalEncodingHandler::FixEncoding(const TagLib::String& input) {
     std::string fixed;
     if (broken.size() > input.size()) {
       fixed = QString::fromUtf8(broken.c_str()).toStdString();
-      // This is single byte encoding, therefore can't be CJK.
-      UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
-      QTextCodec* codec = detector.Guess(fixed.c_str());
+      QTextCodec* codec = Guess(fixed.c_str());
       if (!codec) {
         qDebug() << "Could not guess encoding. Using extended ASCII.";
       } else {
+        qDebug() << "Guessed:" << codec->name();
         QString foo = codec->toUnicode(fixed.c_str());
         return foo.trimmed();
       }
@@ -235,6 +283,15 @@ void Song::Init(const QString& title, const QString& artist, const QString& albu
   d->length_ = length;
 }
 
+QString Song::Decode(const TagLib::String tag, const QTextCodec* codec) const {
+  if (codec) {
+    const std::string fixed = QString::fromUtf8(tag.toCString(true)).toStdString();
+    return codec->toUnicode(fixed.c_str()).trimmed();
+  } else {
+    return TStringToQString(tag).trimmed();
+  }
+}
+
 void Song::InitFromFile(const QString& filename, int directory_id) {
   d->filename_ = filename;
   d->directory_id_ = directory_id;
@@ -250,13 +307,18 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   d->mtime_ = info.lastModified().toTime_t();
   d->ctime_ = info.created().toTime_t();
 
+  // This is single byte encoding, therefore can't be CJK.
+  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
+
   TagLib::Tag* tag = fileref->tag();
+  QTextCodec* codec = NULL;
   if (tag) {
-    d->title_ = UniversalEncodingHandler::FixEncoding(tag->title());
-    d->artist_ = UniversalEncodingHandler::FixEncoding(tag->artist());
-    d->album_ = UniversalEncodingHandler::FixEncoding(tag->album());
-    d->comment_ = UniversalEncodingHandler::FixEncoding(tag->comment());
-    d->genre_ = UniversalEncodingHandler::FixEncoding(tag->genre());
+    codec = detector.Guess(*tag);
+    d->title_ = Decode(tag->title(), codec);
+    d->artist_ = Decode(tag->artist(), codec);
+    d->album_ = Decode(tag->album(), codec);
+    d->comment_ = Decode(tag->comment(), codec);
+    d->genre_ = Decode(tag->genre(), codec);
     d->year_ = tag->year();
     d->track_ = tag->track();
 
@@ -274,10 +336,10 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         d->bpm_ = TStringToQString(file->ID3v2Tag()->frameListMap()["TBPM"].front()->toString()).trimmed().toFloat();
 
       if (!file->ID3v2Tag()->frameListMap()["TCOM"].isEmpty())
-        d->composer_ = UniversalEncodingHandler::FixEncoding(file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString());
+        d->composer_ = Decode(file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString(), codec);
 
       if (!file->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
-        d->albumartist_ = UniversalEncodingHandler::FixEncoding(file->ID3v2Tag()->frameListMap()["TPE2"].front()->toString());
+        d->albumartist_ = Decode(file->ID3v2Tag()->frameListMap()["TPE2"].front()->toString(), codec);
 
       if (!file->ID3v2Tag()->frameListMap()["TCMP"].isEmpty())
         compilation = TStringToQString(file->ID3v2Tag()->frameListMap()["TCMP"].front()->toString()).trimmed();
@@ -286,7 +348,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
       if ( !file->tag()->fieldListMap()["COMPOSER"].isEmpty() )
-        d->composer_ = UniversalEncodingHandler::FixEncoding(file->tag()->fieldListMap()["COMPOSER"].front());
+        d->composer_ = Decode(file->tag()->fieldListMap()["COMPOSER"].front(), codec);
 
       if ( !file->tag()->fieldListMap()["BPM"].isEmpty() )
         d->bpm_ = TStringToQString(file->tag()->fieldListMap()["BPM"].front()).trimmed().toFloat();
@@ -301,7 +363,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
       if (!file->xiphComment()->fieldListMap()["COMPOSER"].isEmpty())
-        d->composer_ = UniversalEncodingHandler::FixEncoding( file->xiphComment()->fieldListMap()["COMPOSER"].front() );
+        d->composer_ = Decode(file->xiphComment()->fieldListMap()["COMPOSER"].front(), codec);
 
       if (!file->xiphComment()->fieldListMap()["BPM"].isEmpty() )
         d->bpm_ = TStringToQString( file->xiphComment()->fieldListMap()["BPM"].front() ).trimmed().toFloat();
