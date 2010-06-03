@@ -156,4 +156,26 @@ TEST_F(SongTest, TakesMajorityVote) {
   EXPECT_EQ(QTextCodec::codecForName("windows-1251"), handler.Guess(ref));
 }
 
+TEST_F(SongTest, DecodesLatin1AsUtf8) {
+  const char utf8[] = { 0xe2, 0x80, 0x99, 0x00 };
+  TagLib::String str(utf8, TagLib::String::Latin1);
+
+  QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+
+  QString fixed = Song::Decode(str, codec);
+  ASSERT_EQ(1, fixed.length());
+  EXPECT_EQ(QString::fromUtf8("’"), fixed);
+}
+
+TEST_F(SongTest, DecodesUtf8AsUtf8) {
+  const char utf8[] = { 0xe2, 0x80, 0x99, 0x00 };
+  TagLib::String str(utf8, TagLib::String::UTF8);
+
+  QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+
+  QString fixed = Song::Decode(str, codec);
+  ASSERT_EQ(1, fixed.length());
+  EXPECT_EQ(QString::fromUtf8("’"), fixed);
+}
+
 }  // namespace

@@ -116,7 +116,7 @@ class Song {
   void InitFromLastFM(const lastfm::Track& track);
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
-  QString Decode(const TagLib::String& tag, const QTextCodec* codec) const;
+  static QString Decode(const TagLib::String& tag, const QTextCodec* codec);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

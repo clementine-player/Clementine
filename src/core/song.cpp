@@ -171,6 +171,7 @@ QTextCodec* UniversalEncodingHandler::Guess(const TagLib::FileRef& fileref) {
   Guess(tag.album(), &usages);
   Guess(tag.comment(), &usages);
   Guess(tag.genre(), &usages);
+
   if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref.file())) {
     if (file->ID3v2Tag()) {
       if (!file->ID3v2Tag()->frameListMap()["TCOM"].isEmpty())
@@ -204,8 +205,12 @@ void UniversalEncodingHandler::Guess(const TagLib::String& input,
   if (input.isEmpty()) {
     return;  // Empty strings don't vote.
   }
+
   QTextCodec* codec = Guess(input);
-  ++(*usages)[codec];  // Qt automatically initialises ints to 0.
+  if (codec) {
+    // Ascii doesn't vote either
+    ++(*usages)[codec];  // Qt automatically initialises ints to 0.
+  }
 }
 
 QTextCodec* UniversalEncodingHandler::Guess(const TagLib::String& input) {
@@ -299,7 +304,7 @@ void Song::Init(const QString& title, const QString& artist, const QString& albu
   d->length_ = length;
 }
 
-QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) const {
+QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) {
   if (codec) {
     const std::string fixed = QString::fromUtf8(tag.toCString(true)).toStdString();
     return codec->toUnicode(fixed.c_str()).trimmed();
