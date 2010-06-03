@@ -205,12 +205,7 @@ void UniversalEncodingHandler::Guess(const TagLib::String& input,
     return;  // Empty strings don't vote.
   }
   QTextCodec* codec = Guess(input);
-  QHash<QTextCodec*, int>::iterator it = usages->find(codec);
-  if (it == usages->end()) {
-    usages->insert(codec, 1);
-  } else {
-    ++it.value();
-  }
+  ++(*usages)[codec];  // Qt automatically initialises ints to 0.
 }
 
 QTextCodec* UniversalEncodingHandler::Guess(const TagLib::String& input) {
