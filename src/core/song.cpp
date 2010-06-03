@@ -14,6 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <algorithm>
+
 #include "song.h"
 #include "utilities.h"
 
@@ -161,24 +163,39 @@ QTextCodec* UniversalEncodingHandler::Guess(const char* data) {
   return current_codec_;
 }
 
-QTextCodec* UniversalEncodingHandler::Guess(const TagLib::Tag& tag) {
+QTextCodec* UniversalEncodingHandler::Guess(const TagLib::FileRef& fileref) {
+  const TagLib::Tag& tag = *fileref.tag();
   QHash<QTextCodec*, int> usages;
   Guess(tag.title(), &usages);
   Guess(tag.artist(), &usages);
   Guess(tag.album(), &usages);
   Guess(tag.comment(), &usages);
   Guess(tag.genre(), &usages);
+  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref.file())) {
+    if (file->ID3v2Tag()) {
+      if (!file->ID3v2Tag()->frameListMap()["TCOM"].isEmpty())
+        Guess(file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString(), &usages);
+
+      if (!file->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
+        Guess(file->ID3v2Tag()->frameListMap()["TPE2"].front()->toString(), &usages);
+    }
+  } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref.file())) {
+    if (file->tag()) {
+      if (!file->tag()->fieldListMap()["COMPOSER"].isEmpty() )
+        Guess(file->tag()->fieldListMap()["COMPOSER"].front(), &usages);
+    }
+  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref.file())) {
+    if (file->xiphComment()) {
+      if (!file->xiphComment()->fieldListMap()["COMPOSER"].isEmpty())
+        Guess(file->xiphComment()->fieldListMap()["COMPOSER"].front(), &usages);
+    }
+  }
 
   if (usages.isEmpty()) {
     return NULL;
   }
 
-  QHash<QTextCodec*, int>::const_iterator max = usages.begin();
-  for (QHash<QTextCodec*, int>::const_iterator it = usages.begin(); it != usages.end(); ++it) {
-    if (it.value() > max.value()) {
-      max = it;
-    }
-  }
+  QHash<QTextCodec*, int>::const_iterator max = std::max_element(usages.begin(), usages.end());
   return max.key();
 }
 
@@ -287,7 +304,7 @@ void Song::Init(const QString& title, const QString& artist, const QString& albu
   d->length_ = length;
 }
 
-QString Song::Decode(const TagLib::String tag, const QTextCodec* codec) const {
+QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) const {
   if (codec) {
     const std::string fixed = QString::fromUtf8(tag.toCString(true)).toStdString();
     return codec->toUnicode(fixed.c_str()).trimmed();
@@ -317,7 +334,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   TagLib::Tag* tag = fileref->tag();
   QTextCodec* codec = NULL;
   if (tag) {
-    codec = detector.Guess(*tag);
+    codec = detector.Guess(*fileref);
     d->title_ = Decode(tag->title(), codec);
     d->artist_ = Decode(tag->artist(), codec);
     d->album_ = Decode(tag->album(), codec);

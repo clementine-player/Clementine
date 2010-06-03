@@ -143,13 +143,17 @@ TEST_F(SongTest, TakesMajorityVote) {
   const char w1251[] = { 0xca, 0xe8, 0xed, 0xee, '\0' };  // Кино
   // Actually windows-1251 but gets detected as windows-1252.
   const char w1252[] = { 0xcf, '.', 0xc7, '.', '\0' };  // П.Э.
-  TagLib::ID3v2::Tag tag;
-  tag.setTitle(w1251);
-  tag.setArtist(w1251);
-  tag.setAlbum(w1252);
+  TagLib::ID3v2::Tag* tag = new TagLib::ID3v2::Tag;
+  tag->setTitle(w1251);
+  tag->setArtist(w1251);
+  tag->setAlbum(w1252);
 
   UniversalEncodingHandler handler(NS_FILTER_NON_CJK);
-  EXPECT_EQ(QTextCodec::codecForName("windows-1251"), handler.Guess(tag));
+  QTemporaryFile temp;
+  temp.open();
+  MockFile* file = new MockFile(tag, temp.fileName());
+  TagLib::FileRef ref(file);
+  EXPECT_EQ(QTextCodec::codecForName("windows-1251"), handler.Guess(ref));
 }
 
 }  // namespace

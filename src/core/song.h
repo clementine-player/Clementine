@@ -64,7 +64,7 @@ class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
   virtual TagLib::String parse(const TagLib::ByteVector& data) const;
 
   QTextCodec* Guess(const char* data);
-  QTextCodec* Guess(const TagLib::Tag& tag);
+  QTextCodec* Guess(const TagLib::FileRef& file);
   QTextCodec* Guess(const TagLib::String& input);
 
   QString FixEncoding(const TagLib::String& input);
@@ -116,7 +116,7 @@ class Song {
   void InitFromLastFM(const lastfm::Track& track);
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
-  QString Decode(const TagLib::String tag, const QTextCodec* codec) const;
+  QString Decode(const TagLib::String& tag, const QTextCodec* codec) const;
 
   // Save
   void BindToQuery(QSqlQuery* query) const;
