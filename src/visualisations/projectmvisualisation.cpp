@@ -55,10 +55,10 @@ void ProjectMVisualisation::SceneRectChanged(const QRectF &rect) {
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {
-  const int samples = GST_BUFFER_SIZE(buffer) / sizeof(short);
+  const int samples_per_channel = GST_BUFFER_SIZE(buffer) / sizeof(short) / 2;
   const short* data = reinterpret_cast<short*>(GST_BUFFER_DATA(buffer));
 
   if (projectm_)
-    projectm_->pcm()->addPCM16Data(data, samples);
+    projectm_->pcm()->addPCM16Data(data, samples_per_channel);
   gst_buffer_unref(buffer);
 }
