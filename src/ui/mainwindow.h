@@ -54,6 +54,7 @@ class Song;
 class SystemTrayIcon;
 class TrackSlider;
 class TranscodeDialog;
+class VisualisationContainer;
 class Ui_MainWindow;
 
 class QSortFilterProxyModel;
@@ -175,6 +176,7 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
   boost::scoped_ptr<GlobalShortcutsDialog> global_shortcuts_dialog_;
   boost::scoped_ptr<ErrorDialog> error_dialog_;
+  boost::scoped_ptr<VisualisationContainer> visualisation_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

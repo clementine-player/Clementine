@@ -259,9 +259,18 @@ Engine::State GstEngine::state() const {
   }
 }
 
-void GstEngine::AddBufferToScope(GstBuffer* buf) {
-  GstEnginePipeline* pipeline = qobject_cast<GstEnginePipeline*>(sender());
-  if (!pipeline || pipeline != current_pipeline_.get()) {
+void GstEngine::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline) {
+  // Schedule this to run in the GUI thread.  The buffer gets added to the
+  // queue and unreffed by UpdateScope.
+  if (!QMetaObject::invokeMethod(this, "AddBufferToScope",
+                                 Q_ARG(GstBuffer*, buffer),
+                                 Q_ARG(GstEnginePipeline*, pipeline))) {
+    qWarning() << "Failed to invoke AddBufferToScope on GstEngine";
+  }
+}
+
+void GstEngine::AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline) {
+  if (current_pipeline_.get() != pipeline) {
     gst_buffer_unref(buf);
     return;
   }
@@ -442,7 +451,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
 void GstEngine::StartFadeout() {
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
-  fadeout_pipeline_->set_forwards_buffers(false);
+  fadeout_pipeline_->RemoveAllBufferConsumers();
   ClearScopeBuffers();
 
   fadeout_pipeline_->StartFader(fadeout_duration_, QTimeLine::Backward);
@@ -642,12 +651,14 @@ GstEngine::PluginDetailsList
 
 shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
-  ret->set_forwards_buffers(true);
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
 
+  ret->AddBufferConsumer(this);
+  foreach (BufferConsumer* consumer, buffer_consumers_)
+    ret->AddBufferConsumer(consumer);
+
   connect(ret.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(EndOfStreamReached(bool)));
-  connect(ret.get(), SIGNAL(BufferFound(GstBuffer*)), SLOT(AddBufferToScope(GstBuffer*)));
   connect(ret.get(), SIGNAL(Error(QString)), SLOT(HandlePipelineError(QString)));
   connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(Engine::SimpleMetaBundle)));
@@ -702,4 +713,16 @@ void GstEngine::ClearScopeBuffers() {
 
 bool GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString &name) {
   return (name == "alsasink" || name == "osssink" || name == "pulsesink");
+}
+
+void GstEngine::AddBufferConsumer(BufferConsumer *consumer) {
+  buffer_consumers_ << consumer;
+  if (current_pipeline_)
+    current_pipeline_->AddBufferConsumer(consumer);
+}
+
+void GstEngine::RemoveBufferConsumer(BufferConsumer *consumer) {
+  buffer_consumers_.removeAll(consumer);
+  if (current_pipeline_)
+    current_pipeline_->RemoveBufferConsumer(consumer);
 }

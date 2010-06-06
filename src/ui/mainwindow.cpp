@@ -51,6 +51,7 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
+#include "visualisations/visualisationcontainer.h"
 #include "widgets/errordialog.h"
 #include "widgets/multiloadingindicator.h"
 #include "widgets/osd.h"
@@ -118,6 +119,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     transcode_dialog_(new TranscodeDialog),
     global_shortcuts_dialog_(new GlobalShortcutsDialog(global_shortcuts_)),
     error_dialog_(new ErrorDialog),
+    visualisation_(new VisualisationContainer),
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
@@ -151,8 +153,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   player_->Init();
 
 #ifdef HAVE_GSTREAMER
-  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine()))
+  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
     settings_dialog_->SetGstEngine(engine);
+    visualisation_->SetEngine(engine);
+  }
 #endif
 
   // Models
@@ -233,6 +237,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
+  connect(ui_->action_visualisations, SIGNAL(triggered()), visualisation_.get(), SLOT(show()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);

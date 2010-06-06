@@ -21,6 +21,7 @@
 #include <QUrl>
 #include <QTimeLine>
 #include <QBasicTimer>
+#include <QMutex>
 
 #include <gst/gst.h>
 #include <boost/scoped_ptr.hpp>
@@ -28,6 +29,7 @@
 #include "engine_fwd.h"
 
 class GstEngine;
+class BufferConsumer;
 
 struct GstURIDecodeBin;
 
@@ -40,11 +42,15 @@ class GstEnginePipeline : public QObject {
 
   // Call these setters before Init
   void set_output_device(const QString& sink, const QString& device);
-  void set_forwards_buffers(bool v) { forwards_buffers_ = v; }
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
 
   // Creates the pipeline, returns false on error
   bool Init(const QUrl& url);
+
+  // BufferConsumers get fed audio data.  Thread-safe.
+  void AddBufferConsumer(BufferConsumer* consumer);
+  void RemoveBufferConsumer(BufferConsumer* consumer);
+  void RemoveAllBufferConsumers();
 
   // Control the music playback
   bool SetState(GstState state);
@@ -73,7 +79,6 @@ class GstEnginePipeline : public QObject {
  signals:
   void EndOfStreamReached(bool has_next_track);
   void MetadataFound(const Engine::SimpleMetaBundle& bundle);
-  void BufferFound(GstBuffer* buf);
   void Error(const QString& message);
   void FaderFinished();
 
@@ -106,16 +111,23 @@ class GstEnginePipeline : public QObject {
 
   GstEngine* engine_;
 
+  // General settings for the pipeline
   bool valid_;
   QString sink_;
   QString device_;
-  bool forwards_buffers_;
 
+  // These get called when there is a new audio buffer available
+  QList<BufferConsumer*> buffer_consumers_;
+  QMutex buffer_consumers_mutex_;
+
+  // ReplayGain
   bool rg_enabled_;
   int rg_mode_;
   float rg_preamp_;
   bool rg_compression_;
 
+  // The URL that is currently playing, and the URL that is to be preloaded
+  // when the current track is close to finishing.
   QUrl url_;
   QUrl next_url_;
 

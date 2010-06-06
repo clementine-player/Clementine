@@ -49,6 +49,11 @@
 #  include "widgets/osd.h"
 #endif
 
+#ifdef HAVE_GSTREAMER
+#  include <gst/gstbuffer.h>
+   class GstEnginePipeline;
+#endif
+
 // Load sqlite plugin on windows and mac.
 #ifndef Q_WS_X11
 # include <QtPlugin>
@@ -99,6 +104,11 @@ int main(int argc, char *argv[]) {
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
+
+#ifdef HAVE_GSTREAMER
+  qRegisterMetaType<GstBuffer*>("GstBuffer*");
+  qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
+#endif
 
 
   lastfm::ws::ApiKey = LastFMService::kApiKey;

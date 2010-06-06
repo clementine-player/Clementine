@@ -36,6 +36,7 @@ add_subdirectory(playlistparsers)
 add_subdirectory(radio)
 add_subdirectory(transcoder)
 add_subdirectory(ui)
+add_subdirectory(visualisations)
 add_subdirectory(widgets)
 add_subdirectory(translations)
 

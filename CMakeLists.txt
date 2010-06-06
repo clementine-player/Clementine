@@ -55,6 +55,9 @@ endif(WIN32)
 find_library(LASTFM_LIBRARY_DIRS lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
+find_library(PROJECTM_LIBRARIES projectM)
+find_path(PROJECTM_INCLUDE_DIRS libprojectM/projectM.hpp)
+
 if (APPLE)
   find_library(GROWL Growl)
   find_library(SPARKLE Sparkle)

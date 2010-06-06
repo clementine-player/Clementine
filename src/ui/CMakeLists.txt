@@ -59,6 +59,7 @@ target_link_libraries(clementine_ui
   clementine_playlistparsers
   clementine_radio
   clementine_transcoder
+  clementine_visualisations
 )
 
 add_translation_source(ui ${SOURCES} ${MOC} ${UIC})

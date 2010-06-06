@@ -17,6 +17,7 @@
 #include "gstenginepipeline.h"
 #include "gstequalizer.h"
 #include "gstengine.h"
+#include "bufferconsumer.h"
 
 #include <QDebug>
 
@@ -28,7 +29,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     engine_(engine),
     valid_(false),
     sink_(GstEngine::kAutoSink),
-    forwards_buffers_(false),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -268,7 +268,7 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) 
   GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
-    qDebug() << "audiopad is already linked. Unlinking old pad." ;
+    qDebug() << "audiopad is already linked. Unlinking old pad.";
     gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
   }
 
@@ -281,9 +281,15 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) 
 bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  if (instance->forwards_buffers_) {
+  QList<BufferConsumer*> consumers;
+  {
+    QMutexLocker l(&instance->buffer_consumers_mutex_);
+    consumers = instance->buffer_consumers_;
+  }
+
+  foreach (BufferConsumer* consumer, consumers) {
     gst_buffer_ref(buf);
-    emit instance->BufferFound(buf);
+    consumer->ConsumeBuffer(buf, instance);
   }
 
   return true;
@@ -425,4 +431,19 @@ void GstEnginePipeline::timerEvent(QTimerEvent* e) {
   }
 
   QObject::timerEvent(e);
+}
+
+void GstEnginePipeline::AddBufferConsumer(BufferConsumer *consumer) {
+  QMutexLocker l(&buffer_consumers_mutex_);
+  buffer_consumers_ << consumer;
+}
+
+void GstEnginePipeline::RemoveBufferConsumer(BufferConsumer *consumer) {
+  QMutexLocker l(&buffer_consumers_mutex_);
+  buffer_consumers_.removeAll(consumer);
+}
+
+void GstEnginePipeline::RemoveAllBufferConsumers() {
+  QMutexLocker l(&buffer_consumers_mutex_);
+  buffer_consumers_.clear();
 }

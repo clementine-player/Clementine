@@ -23,6 +23,7 @@
 #define AMAROK_GSTENGINE_H
 
 #include "enginebase.h"
+#include "bufferconsumer.h"
 
 #include <QString>
 #include <QTimerEvent>
@@ -42,7 +43,7 @@ class GstEnginePipeline;
  * @short GStreamer engine plugin
  * @author Mark Kretschmann <markey@web.de>
  */
-class GstEngine : public Engine::Base {
+class GstEngine : public Engine::Base, public BufferConsumer {
   Q_OBJECT
 
  public:
@@ -75,6 +76,9 @@ class GstEngine : public Engine::Base {
   GstElement* CreateElement(
       const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
 
+  // BufferConsumer
+  void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline);
+
  public slots:
   void StartPreloading(const QUrl &);
   bool Load(const QUrl&, Engine::TrackChangeType change);
@@ -92,6 +96,9 @@ class GstEngine : public Engine::Base {
 
   void ReloadSettings();
 
+  void AddBufferConsumer(BufferConsumer* consumer);
+  void RemoveBufferConsumer(BufferConsumer* consumer);
+
  protected:
   void SetVolumeSW(uint percent);
   void timerEvent(QTimerEvent*);
@@ -100,8 +107,8 @@ class GstEngine : public Engine::Base {
   void EndOfStreamReached(bool has_next_track);
   void HandlePipelineError(const QString& message);
   void NewMetaData(const Engine::SimpleMetaBundle& bundle);
-  void AddBufferToScope(GstBuffer* buf);
   void ClearScopeBuffers();
+  void AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline);
   void FadeoutFinished();
   void SeekNow();
 
@@ -136,6 +143,8 @@ class GstEngine : public Engine::Base {
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
   boost::shared_ptr<GstEnginePipeline> preload_pipeline_;
   QUrl preloaded_url_;
+
+  QList<BufferConsumer*> buffer_consumers_;
 
   GQueue* delayq_;
   float current_scope_[kScopeSize];

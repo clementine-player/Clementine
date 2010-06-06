@@ -341,7 +341,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -398,6 +398,7 @@
     </property>
     <addaction name="action_cover_manager"/>
     <addaction name="action_equalizer"/>
+    <addaction name="action_visualisations"/>
     <addaction name="action_transcode"/>
     <addaction name="separator"/>
     <addaction name="action_update_library"/>
@@ -595,6 +596,11 @@
   <action name="action_update_library">
    <property name="text">
     <string>Update Library</string>
+   </property>
+  </action>
+  <action name="action_visualisations">
+   <property name="text">
+    <string>Visualisations</string>
    </property>
   </action>
  </widget>
