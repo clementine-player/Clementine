@@ -34,6 +34,7 @@ const char* VisualisationContainer::kSettingsGroup = "Visualisations";
 const int VisualisationContainer::kDefaultWidth = 828;
 const int VisualisationContainer::kDefaultHeight = 512;
 const int VisualisationContainer::kDefaultFps = 35;
+const int VisualisationContainer::kDefaultTextureSize = 512;
 
 VisualisationContainer::VisualisationContainer(QWidget *parent)
   : QGraphicsView(parent),
@@ -41,7 +42,8 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     vis_(new ProjectMVisualisation(this)),
     overlay_(new VisualisationOverlay),
     menu_(new QMenu(this)),
-    fps_(kDefaultFps)
+    fps_(kDefaultFps),
+    size_(kDefaultTextureSize)
 {
   setWindowTitle(tr("Clementine Visualisation"));
 
@@ -66,8 +68,10 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     resize(kDefaultWidth, kDefaultHeight);
   }
   fps_ = s.value("fps", kDefaultFps).toInt();
+  size_ = s.value("size", kDefaultTextureSize).toInt();
 
   SizeChanged();
+  vis_->SetTextureSize(size_);
 
   // Settings menu
   menu_->addAction(IconLoader::Load("view-fullscreen"), tr("Toggle fullscreen"),
@@ -82,6 +86,15 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   AddMenuItem(tr("Super high (60 fps)"), 60, fps_, fps_group, fps_mapper);
   fps_menu->addActions(fps_group->actions());
   connect(fps_mapper, SIGNAL(mapped(int)), SLOT(SetFps(int)));
+
+  QMenu* quality_menu = menu_->addMenu(tr("Quality"));
+  QSignalMapper* quality_mapper = new QSignalMapper(this);
+  QActionGroup* quality_group = new QActionGroup(this);
+  AddMenuItem(tr("Low (256x256)"), 256, size_, quality_group, quality_mapper);
+  AddMenuItem(tr("Medium (512x512)"), 512, size_, quality_group, quality_mapper);
+  AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group, quality_mapper);
+  quality_menu->addActions(quality_group->actions());
+  connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
 
   menu_->addSeparator();
   menu_->addAction(IconLoader::Load("application-exit"), tr("Close visualisation"),
@@ -223,4 +236,15 @@ void VisualisationContainer::SetFps(int fps) {
 
 void VisualisationContainer::ShowPopupMenu(const QPoint &pos) {
   menu_->popup(mapToGlobal(pos));
+}
+
+void VisualisationContainer::SetQuality(int size) {
+  size_ = size;
+
+  // Save settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("size", size_);
+
+  vis_->SetTextureSize(size_);
 }

@@ -35,6 +35,9 @@ public:
   // BufferConsumer
   void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*);
 
+public slots:
+  void SetTextureSize(int size);
+
 protected:
   // QGraphicsScene
   void drawBackground(QPainter *painter, const QRectF &rect);
@@ -44,6 +47,8 @@ private slots:
 
 private:
   boost::scoped_ptr<projectM> projectm_;
+
+  int texture_size_;
 };
 
 #endif // PROJECTMVISUALISATION_H

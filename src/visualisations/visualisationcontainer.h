@@ -40,6 +40,7 @@ public:
   static const int kDefaultWidth;
   static const int kDefaultHeight;
   static const int kDefaultFps;
+  static const int kDefaultTextureSize;
 
   void SetEngine(GstEngine* engine);
   void SetActions(QAction* previous, QAction* play_pause,
@@ -72,6 +73,7 @@ private slots:
   void ShowPopupMenu(const QPoint& pos);
   void ToggleFullscreen();
   void SetFps(int fps);
+  void SetQuality(int size);
 
 private:
   GstEngine* engine_;
@@ -84,6 +86,7 @@ private:
   QMenu* menu_;
 
   int fps_;
+  int size_;
 };
 
 #endif // VISUALISATIONCONTAINER_H

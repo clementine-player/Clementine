@@ -28,7 +28,8 @@
 
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
   : QGraphicsScene(parent),
-    projectm_(NULL)
+    projectm_(NULL),
+    texture_size_(512)
 {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
 }
@@ -41,6 +42,7 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
 
   if (!projectm_) {
     projectm_.reset(new projectM("/usr/share/projectM/config.inp"));
+    projectm_->changeTextureSize(texture_size_);
   }
 
   projectm_->projectM_resetGL(sceneRect().width(), sceneRect().height());
@@ -52,6 +54,13 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
 void ProjectMVisualisation::SceneRectChanged(const QRectF &rect) {
   if (projectm_)
     projectm_->projectM_resetGL(rect.width(), rect.height());
+}
+
+void ProjectMVisualisation::SetTextureSize(int size) {
+  texture_size_ = size;
+
+  if (projectm_)
+    projectm_->changeTextureSize(texture_size_);
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {
