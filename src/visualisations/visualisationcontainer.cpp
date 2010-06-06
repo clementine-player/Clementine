@@ -18,12 +18,15 @@
 #include "visualisationcontainer.h"
 #include "visualisationoverlay.h"
 #include "engines/gstengine.h"
+#include "ui/iconloader.h"
 
 #include <QHBoxLayout>
 #include <QSettings>
 #include <QGLWidget>
 #include <QtDebug>
 #include <QGraphicsProxyWidget>
+#include <QMenu>
+#include <QSignalMapper>
 
 #include <QLabel>
 
@@ -37,6 +40,7 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     engine_(NULL),
     vis_(new ProjectMVisualisation(this)),
     overlay_(new VisualisationOverlay),
+    menu_(new QMenu(this)),
     fps_(kDefaultFps)
 {
   setWindowTitle(tr("Clementine Visualisation"));
@@ -52,6 +56,7 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   // Add the overlay
   overlay_proxy_ = scene()->addWidget(overlay_);
   connect(overlay_, SIGNAL(OpacityChanged(qreal)), SLOT(ChangeOverlayOpacity(qreal)));
+  connect(overlay_, SIGNAL(ShowPopupMenu(QPoint)), SLOT(ShowPopupMenu(QPoint)));
   ChangeOverlayOpacity(0.0);
 
   // Load settings
@@ -63,6 +68,33 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   fps_ = s.value("fps", kDefaultFps).toInt();
 
   SizeChanged();
+
+  // Settings menu
+  menu_->addAction(IconLoader::Load("view-fullscreen"), tr("Toggle fullscreen"),
+                   this, SLOT(ToggleFullscreen()));
+
+  QMenu* fps_menu = menu_->addMenu(tr("Framerate"));
+  QSignalMapper* fps_mapper = new QSignalMapper(this);
+  QActionGroup* fps_group = new QActionGroup(this);
+  AddMenuItem(tr("Low (15 fps)"), 15, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("Medium (25 fps)"), 25, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("High (35 fps)"), 35, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("Super high (60 fps)"), 60, fps_, fps_group, fps_mapper);
+  fps_menu->addActions(fps_group->actions());
+  connect(fps_mapper, SIGNAL(mapped(int)), SLOT(SetFps(int)));
+
+  menu_->addSeparator();
+  menu_->addAction(IconLoader::Load("application-exit"), tr("Close visualisation"),
+                   this, SLOT(hide()));
+}
+
+void VisualisationContainer::AddMenuItem(const QString &name, int value, int def,
+                                         QActionGroup* group, QSignalMapper *mapper) {
+  QAction* action = group->addAction(name);
+  action->setCheckable(true);
+  action->setChecked(value == def);
+  mapper->setMapping(action, value);
+  connect(action, SIGNAL(triggered()), mapper, SLOT(map()));
 }
 
 void VisualisationContainer::SetEngine(GstEngine* engine) {
@@ -127,6 +159,12 @@ void VisualisationContainer::Stopped() {
 
 void VisualisationContainer::ChangeOverlayOpacity(qreal value) {
   overlay_proxy_->setOpacity(value);
+
+  // Hide the cursor if the overlay is hidden
+  if (value < 0.5)
+    setCursor(Qt::BlankCursor);
+  else
+    unsetCursor();
 }
 
 void VisualisationContainer::enterEvent(QEvent* e) {
@@ -146,5 +184,30 @@ void VisualisationContainer::mouseMoveEvent(QMouseEvent* e) {
 
 void VisualisationContainer::mouseDoubleClickEvent(QMouseEvent* e) {
   QGraphicsView::mouseDoubleClickEvent(e);
+  ToggleFullscreen();
+}
+
+void VisualisationContainer::contextMenuEvent(QContextMenuEvent *event) {
+  QGraphicsView::contextMenuEvent(event);
+  ShowPopupMenu(event->pos());
+}
+
+void VisualisationContainer::ToggleFullscreen() {
   setWindowState(windowState() ^ Qt::WindowFullScreen);
+}
+
+void VisualisationContainer::SetFps(int fps) {
+  fps_ = fps;
+
+  // Save settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("fps", fps_);
+
+  update_timer_.stop();
+  update_timer_.start(1000 / fps_, this);
+}
+
+void VisualisationContainer::ShowPopupMenu(const QPoint &pos) {
+  menu_->popup(mapToGlobal(pos));
 }

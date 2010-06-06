@@ -45,6 +45,7 @@ public slots:
 
 signals:
   void OpacityChanged(qreal value);
+  void ShowPopupMenu(const QPoint& pos);
 
 protected:
   // QWidget

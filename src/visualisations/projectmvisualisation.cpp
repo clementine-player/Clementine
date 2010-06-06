@@ -23,7 +23,7 @@
 #include <QGLWidget>
 #include <QGraphicsView>
 
-#include <libprojectM/projectM.hpp>
+#include <projectM.hpp>
 #include <GL/gl.h>
 
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)

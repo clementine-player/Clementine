@@ -26,6 +26,10 @@ class GstEngine;
 class ProjectMVisualisation;
 class VisualisationOverlay;
 
+class QMenu;
+class QSignalMapper;
+class QActionGroup;
+
 class VisualisationContainer : public QGraphicsView {
   Q_OBJECT
 
@@ -55,12 +59,18 @@ protected:
   void enterEvent(QEvent* e);
   void leaveEvent(QEvent* e);
   void mouseDoubleClickEvent(QMouseEvent* e);
+  void contextMenuEvent(QContextMenuEvent *event);
 
 private:
   void SizeChanged();
+  void AddMenuItem(const QString& name, int value, int def,
+                   QActionGroup* group, QSignalMapper* mapper);
 
 private slots:
   void ChangeOverlayOpacity(qreal value);
+  void ShowPopupMenu(const QPoint& pos);
+  void ToggleFullscreen();
+  void SetFps(int fps);
 
 private:
   GstEngine* engine_;
@@ -69,6 +79,8 @@ private:
   QBasicTimer update_timer_;
 
   QGraphicsProxyWidget* overlay_proxy_;
+
+  QMenu* menu_;
 
   int fps_;
 };

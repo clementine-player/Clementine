@@ -61,7 +61,7 @@ void VisualisationOverlay::SetActions(QAction* previous, QAction* play_pause,
 }
 
 void VisualisationOverlay::ShowSettingsMenu() {
-
+  emit ShowPopupMenu(ui_->settings->mapToGlobal(ui_->settings->rect().bottomLeft()));
 }
 
 void VisualisationOverlay::timerEvent(QTimerEvent* e) {
@@ -73,10 +73,12 @@ void VisualisationOverlay::timerEvent(QTimerEvent* e) {
 }
 
 void VisualisationOverlay::SetVisible(bool visible) {
+  // If we're showing the overlay, then fade out again in a little while
   fade_out_timeout_.stop();
   if (visible)
     fade_out_timeout_.start(kFadeTimeout, this);
 
+  // Don't change to the state we're in already
   if (visible == visible_)
     return;
   visible_ = visible;
