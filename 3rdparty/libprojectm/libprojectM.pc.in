@@ -1,0 +1,13 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@LIB_INSTALL_DIR@
+includedir=@CMAKE_INSTALL_PREFIX@/include
+pkgdatadir=@CMAKE_INSTALL_PREFIX@/@RESOURCE_PREFIX@
+sysconfdir=@CMAKE_INSTALL_PREFIX@/@RESOURCE_PREFIX@
+
+Name: libprojectM
+Version: 2.0.0
+Description: projectM - OpenGL Milkdrop
+Requires:
+Libs: -L${libdir} -lprojectM 
+Cflags: -I${includedir} 

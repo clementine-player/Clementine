@@ -1,0 +1,13 @@
+prefix=/usr/local
+exec_prefix=/usr/local
+libdir=
+includedir=/usr/local/include
+pkgdatadir=/usr/local/share/projectM
+sysconfdir=/usr/local/share/projectM
+
+Name: libprojectM
+Version: 2.0.0
+Description: projectM - OpenGL Milkdrop
+Requires:
+Libs: -L${libdir} -lprojectM 
+Cflags: -I${includedir} 
