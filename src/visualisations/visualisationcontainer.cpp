@@ -47,6 +47,7 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  setFrameStyle(QFrame::NoFrame);
 
   // Add the overlay
   overlay_proxy_ = scene()->addWidget(overlay_);
@@ -106,6 +107,7 @@ void VisualisationContainer::SizeChanged() {
 }
 
 void VisualisationContainer::timerEvent(QTimerEvent* e) {
+  QGraphicsView::timerEvent(e);
   if (e->timerId() == update_timer_.timerId())
     scene()->update();
 }
@@ -127,14 +129,22 @@ void VisualisationContainer::ChangeOverlayOpacity(qreal value) {
   overlay_proxy_->setOpacity(value);
 }
 
-void VisualisationContainer::enterEvent(QEvent *) {
+void VisualisationContainer::enterEvent(QEvent* e) {
+  QGraphicsView::enterEvent(e);
   overlay_->SetVisible(true);
 }
 
-void VisualisationContainer::leaveEvent(QEvent *) {
+void VisualisationContainer::leaveEvent(QEvent* e) {
+  QGraphicsView::leaveEvent(e);
   overlay_->SetVisible(false);
 }
 
-void VisualisationContainer::mouseMoveEvent(QMouseEvent *) {
+void VisualisationContainer::mouseMoveEvent(QMouseEvent* e) {
+  QGraphicsView::mouseMoveEvent(e);
   overlay_->SetVisible(true);
+}
+
+void VisualisationContainer::mouseDoubleClickEvent(QMouseEvent* e) {
+  QGraphicsView::mouseDoubleClickEvent(e);
+  setWindowState(windowState() ^ Qt::WindowFullScreen);
 }

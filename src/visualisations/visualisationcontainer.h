@@ -47,13 +47,14 @@ public slots:
 
 protected:
   // QWidget
-  void showEvent(QShowEvent*);
-  void hideEvent(QHideEvent*);
-  void resizeEvent(QResizeEvent *);
-  void timerEvent(QTimerEvent *);
-  void mouseMoveEvent(QMouseEvent *event);
-  void enterEvent(QEvent *);
-  void leaveEvent(QEvent *);
+  void showEvent(QShowEvent* e);
+  void hideEvent(QHideEvent* e);
+  void resizeEvent(QResizeEvent* e);
+  void timerEvent(QTimerEvent* e);
+  void mouseMoveEvent(QMouseEvent* e);
+  void enterEvent(QEvent* e);
+  void leaveEvent(QEvent* e);
+  void mouseDoubleClickEvent(QMouseEvent* e);
 
 private:
   void SizeChanged();
