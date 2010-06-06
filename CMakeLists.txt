@@ -55,9 +55,6 @@ endif(WIN32)
 find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
-find_library(PROJECTM_LIBRARIES projectM)
-find_path(PROJECTM_INCLUDE_DIRS libprojectM/projectM.hpp)
-
 if (APPLE)
   find_library(GROWL Growl)
   find_library(SPARKLE Sparkle)
@@ -118,6 +115,7 @@ if (NOT APPLE)
   add_subdirectory(3rdparty/qxt)
 endif (NOT APPLE)
 add_subdirectory(3rdparty/universalchardet)
+add_subdirectory(3rdparty/libprojectm)
 add_subdirectory(tests)
 add_subdirectory(dist)
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${PROJECTM_INCLUDE_DIRS})
+include_directories("../../3rdparty/libprojectm")
 
 set(SOURCES
   projectmvisualisation.cpp
@@ -31,7 +31,7 @@ add_library(clementine_visualisations
 target_link_libraries(clementine_visualisations
   clementine_core
   clementine_engines
-  ${PROJECTM_LIBRARIES}
+  projectM
 )
 
 add_translation_source(visualisations ${SOURCES} ${MOC} ${UIC})
