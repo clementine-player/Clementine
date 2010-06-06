@@ -17,51 +17,48 @@
 #include "projectmvisualisation.h"
 
 #include <QTimerEvent>
+#include <QPainter>
+#include <QPaintEngine>
 #include <QtDebug>
+#include <QGLWidget>
+#include <QGraphicsView>
 
 #include <libprojectM/projectM.hpp>
+#include <GL/gl.h>
 
-ProjectMVisualisation::ProjectMVisualisation(QWidget *parent)
-  : QGLWidget(parent),
+ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
+  : QGraphicsScene(parent),
     projectm_(NULL)
 {
+  connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
 }
 
 ProjectMVisualisation::~ProjectMVisualisation() {
 }
 
-void ProjectMVisualisation::showEvent(QShowEvent *) {
-  redraw_timer_.start(1000/25, this);
-}
+void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
+  p->beginNativePainting();
 
-void ProjectMVisualisation::hideEvent(QHideEvent *) {
-  redraw_timer_.stop();
-}
+  if (!projectm_) {
+    projectm_.reset(new projectM("/usr/share/projectM/config.inp"));
+  }
 
-void ProjectMVisualisation::timerEvent(QTimerEvent* e) {
-  if (e->timerId() == redraw_timer_.timerId())
-    update();
-}
-
-void ProjectMVisualisation::initializeGL() {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-  projectm_.reset(new projectM("/usr/share/projectM/config.inp"));
-  projectm_->selectPreset(100);
-}
-
-void ProjectMVisualisation::paintGL() {
+  projectm_->projectM_resetGL(sceneRect().width(), sceneRect().height());
   projectm_->renderFrame();
+
+  p->endNativePainting();
 }
 
-void ProjectMVisualisation::resizeGL(int w, int h) {
-  projectm_->projectM_resetGL(w, h);
+void ProjectMVisualisation::SceneRectChanged(const QRectF &rect) {
+  if (projectm_)
+    projectm_->projectM_resetGL(rect.width(), rect.height());
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {
   const int samples = GST_BUFFER_SIZE(buffer) / sizeof(short);
   const short* data = reinterpret_cast<short*>(GST_BUFFER_DATA(buffer));
 
-  projectm_->pcm()->addPCM16Data(data, samples);
+  if (projectm_)
+    projectm_->pcm()->addPCM16Data(data, samples);
   gst_buffer_unref(buffer);
 }

@@ -14,35 +14,55 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "visualisationcontainer.h"
 #include "projectmvisualisation.h"
+#include "visualisationcontainer.h"
+#include "visualisationoverlay.h"
 #include "engines/gstengine.h"
 
 #include <QHBoxLayout>
 #include <QSettings>
+#include <QGLWidget>
+#include <QtDebug>
+#include <QGraphicsProxyWidget>
+
+#include <QLabel>
 
 const char* VisualisationContainer::kSettingsGroup = "Visualisations";
 const int VisualisationContainer::kDefaultWidth = 828;
 const int VisualisationContainer::kDefaultHeight = 512;
+const int VisualisationContainer::kDefaultFps = 35;
 
 VisualisationContainer::VisualisationContainer(QWidget *parent)
-  : QWidget(parent),
+  : QGraphicsView(parent),
     engine_(NULL),
-    vis_(new ProjectMVisualisation(this))
+    vis_(new ProjectMVisualisation(this)),
+    overlay_(new VisualisationOverlay),
+    fps_(kDefaultFps)
 {
   setWindowTitle(tr("Clementine Visualisation"));
 
-  QHBoxLayout* layout = new QHBoxLayout(this);
-  layout->setMargin(0);
-  layout->setSpacing(0);
-  layout->addWidget(vis_);
-  setLayout(layout);
+  // Set up the graphics view
+  setScene(vis_);
+  setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+  setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+  // Add the overlay
+  overlay_proxy_ = scene()->addWidget(overlay_);
+  connect(overlay_, SIGNAL(OpacityChanged(qreal)), SLOT(ChangeOverlayOpacity(qreal)));
+  ChangeOverlayOpacity(0.0);
+
+  // Load settings
   QSettings s;
   s.beginGroup(kSettingsGroup);
   if (!restoreGeometry(s.value("geometry").toByteArray())) {
     resize(kDefaultWidth, kDefaultHeight);
   }
+  fps_ = s.value("fps", kDefaultFps).toInt();
+
+  SizeChanged();
+  show();
 }
 
 void VisualisationContainer::SetEngine(GstEngine* engine) {
@@ -51,18 +71,71 @@ void VisualisationContainer::SetEngine(GstEngine* engine) {
     engine_->AddBufferConsumer(vis_);
 }
 
-void VisualisationContainer::showEvent(QShowEvent*) {
+void VisualisationContainer::showEvent(QShowEvent* e) {
+  QGraphicsView::showEvent(e);
+  update_timer_.start(1000 / fps_, this);
+
   if (engine_)
     engine_->AddBufferConsumer(vis_);
 }
 
-void VisualisationContainer::hideEvent(QHideEvent*) {
+void VisualisationContainer::hideEvent(QHideEvent* e) {
+  QGraphicsView::hideEvent(e);
+  update_timer_.stop();
+
   if (engine_)
     engine_->RemoveBufferConsumer(vis_);
 }
 
-void VisualisationContainer::resizeEvent(QResizeEvent *) {
+void VisualisationContainer::resizeEvent(QResizeEvent* e) {
+  QGraphicsView::resizeEvent(e);
+  SizeChanged();
+}
+
+void VisualisationContainer::SizeChanged() {
+  // Save the geometry
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("geometry", saveGeometry());
+
+  // Resize the scene
+  if (scene())
+    scene()->setSceneRect(QRect(QPoint(0, 0), size()));
+
+  // Resize the overlay
+  overlay_->resize(size());
+}
+
+void VisualisationContainer::timerEvent(QTimerEvent* e) {
+  if (e->timerId() == update_timer_.timerId())
+    scene()->update();
+}
+
+void VisualisationContainer::SetActions(QAction *previous, QAction *play_pause,
+                                        QAction *stop, QAction *next) {
+  overlay_->SetActions(previous, play_pause, stop, next);
+}
+
+void VisualisationContainer::SongMetadataChanged(const Song &metadata) {
+  overlay_->SetSongTitle(QString("%1 - %2").arg(metadata.artist(), metadata.title()));
+}
+
+void VisualisationContainer::Stopped() {
+  overlay_->SetSongTitle(tr("Clementine"));
+}
+
+void VisualisationContainer::ChangeOverlayOpacity(qreal value) {
+  overlay_proxy_->setOpacity(value);
+}
+
+void VisualisationContainer::enterEvent(QEvent *) {
+  overlay_->SetVisible(true);
+}
+
+void VisualisationContainer::leaveEvent(QEvent *) {
+  overlay_->SetVisible(false);
+}
+
+void VisualisationContainer::mouseMoveEvent(QMouseEvent *) {
+  overlay_->SetVisible(true);
 }

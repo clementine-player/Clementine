@@ -17,12 +17,16 @@
 #ifndef VISUALISATIONCONTAINER_H
 #define VISUALISATIONCONTAINER_H
 
-#include <QWidget>
+#include <QGraphicsView>
+#include <QBasicTimer>
 
-class ProjectMVisualisation;
+#include "core/song.h"
+
 class GstEngine;
+class ProjectMVisualisation;
+class VisualisationOverlay;
 
-class VisualisationContainer : public QWidget {
+class VisualisationContainer : public QGraphicsView {
   Q_OBJECT
 
 public:
@@ -31,18 +35,41 @@ public:
   static const char* kSettingsGroup;
   static const int kDefaultWidth;
   static const int kDefaultHeight;
+  static const int kDefaultFps;
 
   void SetEngine(GstEngine* engine);
+  void SetActions(QAction* previous, QAction* play_pause,
+                  QAction* stop, QAction* next);
+
+public slots:
+  void SongMetadataChanged(const Song& metadata);
+  void Stopped();
 
 protected:
   // QWidget
   void showEvent(QShowEvent*);
   void hideEvent(QHideEvent*);
   void resizeEvent(QResizeEvent *);
+  void timerEvent(QTimerEvent *);
+  void mouseMoveEvent(QMouseEvent *event);
+  void enterEvent(QEvent *);
+  void leaveEvent(QEvent *);
+
+private:
+  void SizeChanged();
+
+private slots:
+  void ChangeOverlayOpacity(qreal value);
 
 private:
   GstEngine* engine_;
   ProjectMVisualisation* vis_;
+  VisualisationOverlay* overlay_;
+  QBasicTimer update_timer_;
+
+  QGraphicsProxyWidget* overlay_proxy_;
+
+  int fps_;
 };
 
 #endif // VISUALISATIONCONTAINER_H

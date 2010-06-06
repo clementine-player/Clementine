@@ -249,6 +249,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
   ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
                             ui_->action_load_playlist);
+  visualisation_->SetActions(ui_->action_previous_track, ui_->action_play_pause,
+                             ui_->action_stop, ui_->action_next_track);
 
   // Add the shuffle and repeat action groups to the menu
   ui_->action_shuffle_mode->setMenu(playlist_sequence_->shuffle_menu());
@@ -281,12 +283,15 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
+  connect(player_, SIGNAL(Stopped()), visualisation_.get(), SLOT(Stopped()));
   connect(player_, SIGNAL(PlaylistFinished()), osd_, SLOT(PlaylistFinished()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
+  connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));

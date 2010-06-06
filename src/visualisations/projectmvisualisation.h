@@ -17,7 +17,7 @@
 #ifndef PROJECTMVISUALISATION_H
 #define PROJECTMVISUALISATION_H
 
-#include <QGLWidget>
+#include <QGraphicsScene>
 #include <QBasicTimer>
 
 #include <boost/scoped_ptr.hpp>
@@ -26,29 +26,24 @@
 
 class projectM;
 
-class ProjectMVisualisation : public QGLWidget, public BufferConsumer {
+class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
 public:
-  ProjectMVisualisation(QWidget *parent = 0);
+  ProjectMVisualisation(QObject *parent = 0);
   ~ProjectMVisualisation();
-
-  // QGLWidget
-  void paintGL();
-  void resizeGL(int w, int h);
-  void initializeGL();
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*);
 
 protected:
-  // QWidget
-  void hideEvent(QHideEvent *);
-  void showEvent(QShowEvent *);
-  void timerEvent(QTimerEvent *);
+  // QGraphicsScene
+  void drawBackground(QPainter *painter, const QRectF &rect);
+
+private slots:
+  void SceneRectChanged(const QRectF& rect);
 
 private:
   boost::scoped_ptr<projectM> projectm_;
-  QBasicTimer redraw_timer_;
 };
 
 #endif // PROJECTMVISUALISATION_H
