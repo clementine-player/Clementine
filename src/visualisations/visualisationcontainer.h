@@ -28,12 +28,17 @@ class VisualisationContainer : public QWidget {
 public:
   VisualisationContainer(QWidget* parent = 0);
 
+  static const char* kSettingsGroup;
+  static const int kDefaultWidth;
+  static const int kDefaultHeight;
+
   void SetEngine(GstEngine* engine);
 
 protected:
   // QWidget
   void showEvent(QShowEvent*);
   void hideEvent(QHideEvent*);
+  void resizeEvent(QResizeEvent *);
 
 private:
   GstEngine* engine_;

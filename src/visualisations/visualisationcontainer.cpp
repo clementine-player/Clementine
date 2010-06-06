@@ -19,6 +19,11 @@
 #include "engines/gstengine.h"
 
 #include <QHBoxLayout>
+#include <QSettings>
+
+const char* VisualisationContainer::kSettingsGroup = "Visualisations";
+const int VisualisationContainer::kDefaultWidth = 828;
+const int VisualisationContainer::kDefaultHeight = 512;
 
 VisualisationContainer::VisualisationContainer(QWidget *parent)
   : QWidget(parent),
@@ -26,13 +31,18 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     vis_(new ProjectMVisualisation(this))
 {
   setWindowTitle(tr("Clementine Visualisation"));
-  resize(512, 512);
 
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setMargin(0);
   layout->setSpacing(0);
   layout->addWidget(vis_);
   setLayout(layout);
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  if (!restoreGeometry(s.value("geometry").toByteArray())) {
+    resize(kDefaultWidth, kDefaultHeight);
+  }
 }
 
 void VisualisationContainer::SetEngine(GstEngine* engine) {
@@ -49,4 +59,10 @@ void VisualisationContainer::showEvent(QShowEvent*) {
 void VisualisationContainer::hideEvent(QHideEvent*) {
   if (engine_)
     engine_->RemoveBufferConsumer(vis_);
+}
+
+void VisualisationContainer::resizeEvent(QResizeEvent *) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("geometry", saveGeometry());
 }

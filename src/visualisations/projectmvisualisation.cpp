@@ -55,7 +55,7 @@ void ProjectMVisualisation::paintGL() {
 }
 
 void ProjectMVisualisation::resizeGL(int w, int h) {
-
+  projectm_->projectM_resetGL(w, h);
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {
