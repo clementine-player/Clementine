@@ -1,0 +1,33 @@
+Index: projectM.cpp
+===================================================================
+--- projectM.cpp	(revision 1048)
++++ projectM.cpp	(revision 1049)
+@@ -907,3 +907,13 @@
+ }
+ 
+ 
++void projectM::changeTextureSize(int size) {
++  _settings.textureSize = size;
++
++  delete renderer;
++  renderer = new Renderer(_settings.windowWidth, _settings.windowHeight,
++                          _settings.meshX, _settings.meshY,
++                          _settings.textureSize, beatDetect, _settings.presetURL,
++                          _settings.titleFontURL, _settings.menuFontURL);
++}
++
+Index: projectM.hpp
+===================================================================
+--- projectM.hpp	(revision 1048)
++++ projectM.hpp	(revision 1049)
+@@ -153,9 +153,9 @@
+   virtual ~projectM();
+ 
+ 
++  void changeTextureSize(int size);
+ 
+ 
+-
+   const Settings & settings() const {
+ 		return _settings;
+   }
