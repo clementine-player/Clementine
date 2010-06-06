@@ -52,7 +52,7 @@ else(WIN32)
   pkg_check_modules(LIBXINE libxine)
 endif(WIN32)
 
-find_library(LASTFM_LIBRARY_DIRS lastfm)
+find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
 find_library(PROJECTM_LIBRARIES projectM)
@@ -72,7 +72,6 @@ endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
-link_directories(${LASTFM_LIBRARY_DIRS})
 
 # Don't try to use Phonon if its include directory couldn't be found.
 # For some reason this works differently to the rest of Qt...

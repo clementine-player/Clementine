@@ -69,13 +69,13 @@ target_link_libraries(clementine_lib
   clementine_translations
   qtsingleapplication
   qtiocompressor
-  lastfm
   chardet
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${QT_LIBRARIES}
   ${ENGINE_LIBRARIES}
+  ${LASTFM_LIBRARIES}
 )
 
 if (APPLE)
