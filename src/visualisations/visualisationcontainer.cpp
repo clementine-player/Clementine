@@ -162,9 +162,9 @@ void VisualisationContainer::ChangeOverlayOpacity(qreal value) {
 
   // Hide the cursor if the overlay is hidden
   if (value < 0.5)
-    setCursor(Qt::BlankCursor);
+    viewport()->setCursor(Qt::BlankCursor);
   else
-    unsetCursor();
+    viewport()->unsetCursor();
 }
 
 void VisualisationContainer::enterEvent(QEvent* e) {
