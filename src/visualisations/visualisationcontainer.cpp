@@ -192,6 +192,19 @@ void VisualisationContainer::contextMenuEvent(QContextMenuEvent *event) {
   ShowPopupMenu(event->pos());
 }
 
+void VisualisationContainer::keyReleaseEvent(QKeyEvent *event) {
+  if (event->matches(QKeySequence::Close) ||
+      event->key() == Qt::Key_Escape) {
+    if (isFullScreen())
+      ToggleFullscreen();
+    else
+      hide();
+    event->accept();
+  }
+
+  QGraphicsView::keyReleaseEvent(event);
+}
+
 void VisualisationContainer::ToggleFullscreen() {
   setWindowState(windowState() ^ Qt::WindowFullScreen);
 }

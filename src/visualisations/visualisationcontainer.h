@@ -60,6 +60,7 @@ protected:
   void leaveEvent(QEvent* e);
   void mouseDoubleClickEvent(QMouseEvent* e);
   void contextMenuEvent(QContextMenuEvent *event);
+  void keyReleaseEvent(QKeyEvent *event);
 
 private:
   void SizeChanged();
