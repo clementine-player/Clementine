@@ -62,7 +62,6 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   fps_ = s.value("fps", kDefaultFps).toInt();
 
   SizeChanged();
-  show();
 }
 
 void VisualisationContainer::SetEngine(GstEngine* engine) {
