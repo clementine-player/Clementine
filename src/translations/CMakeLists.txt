@@ -6,6 +6,7 @@ set(CLEMENTINE-LANGUAGES
   da
   de
   el
+  en_CA
   en_GB
   es
   fi
@@ -23,6 +24,7 @@ set(CLEMENTINE-LANGUAGES
   sk
   sv
   tr
+  zh_CN
   zh_TW
 )
 

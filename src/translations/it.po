@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-19 17:43+0000\n"
-"PO-Revision-Date: 2010-05-18 10:41+0000\n"
+"POT-Creation-Date: 2010-06-02 00:48+0000\n"
+"PO-Revision-Date: 2010-06-03 13:09+0000\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-05-20 05:49+0000\n"
+"X-Launchpad-Export-Date: 2010-06-04 03:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 msgid "No analyzer"
@@ -232,10 +232,10 @@ msgid "Remove folder"
 msgstr "Rimuovi cartella"
 
 msgid "Update the library when Clementine starts"
-msgstr ""
+msgstr "Aggiorna la raccolta all'avvio di Clementine"
 
 msgid "Display options"
-msgstr ""
+msgstr "Opzioni di visualizzazione"
 
 msgid "Automatically open single categories in the library tree"
 msgstr "Apri automaticamente categorie singole nell'albero della raccolta"
@@ -336,21 +336,23 @@ msgstr "Data di modifica"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
+"Nessuna corrispondenza trovata. Svuota il campo di ricerca per mostrare "
+"nuovamente la scaletta completa."
 
 msgid "New playlist"
-msgstr ""
+msgstr "Nuova scaletta"
 
 msgid "Enter a name for the new playlist"
-msgstr ""
+msgstr "Inserisci un nome per la nuova scaletta"
 
 msgid "Playlist"
 msgstr "Scaletta"
 
 msgid "Load playlist"
-msgstr ""
+msgstr "Carica la scaletta"
 
 msgid "Save playlist"
-msgstr ""
+msgstr "Salva la scaletta"
 
 msgid "ASF"
 msgstr "ASF"
@@ -400,22 +402,22 @@ msgstr "Nascondi %1"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
+msgstr "La scaletta '%1' è vuota o non può essere caricata."
 
 msgid "Remove playlist"
-msgstr ""
+msgstr "Rimuovi la scaletta"
 
 msgid "Rename playlist..."
-msgstr ""
+msgstr "Rinomina la scaletta..."
 
 msgid "Save playlist..."
-msgstr ""
+msgstr "Salva la scaletta..."
 
 msgid "Rename playlist"
-msgstr ""
+msgstr "Rinomina la scaletta"
 
 msgid "Enter a new name for this playlist"
-msgstr ""
+msgstr "Inserisci un nuovo nome per questa scaletta"
 
 #, c-format
 msgid "add %n songs"
@@ -429,7 +431,7 @@ msgid "move songs"
 msgstr "sposta brani"
 
 msgid "Playlist search"
-msgstr ""
+msgstr "Ricerca nella scaletta"
 
 msgid "Don't repeat"
 msgstr "Non ripetere"
@@ -460,11 +462,11 @@ msgstr "Mescola"
 
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr ""
+msgstr "%1 scalette (%2)"
 
 #, qt-format
 msgid "All playlists (%1)"
-msgstr ""
+msgstr "Tutte le scalette (%1)"
 
 msgid "Authentication failed"
 msgstr "Autenticazione non riuscita"
@@ -608,7 +610,7 @@ msgid "Radio service couldn't be loaded :-("
 msgstr "Il servizio radio non può essere caricato :-("
 
 msgid "Edit..."
-msgstr ""
+msgstr "Modifica..."
 
 msgid "Add another stream..."
 msgstr "Aggiungi un altro flusso..."
@@ -918,10 +920,10 @@ msgid "Enter the URL of an internet radio stream:"
 msgstr "Inserisci l'URL di flusso radio in Internet:"
 
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Salva questo flusso nella scheda Internet"
 
 msgid "Give it a name:"
-msgstr ""
+msgstr "Dagli un nome:"
 
 msgid "Cover Manager"
 msgstr "Gestore copertine"
@@ -1059,10 +1061,10 @@ msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
 msgid "Load playlist..."
-msgstr ""
+msgstr "Carica la scaletta..."
 
 msgid "Update Library"
-msgstr ""
+msgstr "Aggiorna la raccolta"
 
 msgid "Visualisations"
 msgstr ""
@@ -1116,22 +1118,22 @@ msgid " ms"
 msgstr " ms"
 
 msgid "Replay Gain"
-msgstr ""
+msgstr "Guadagno di riproduzione"
 
 msgid "Use Replay Gain metadata if it is available"
-msgstr ""
+msgstr "Utilizza i metadati del guadagno di riproduzione se disponibili"
 
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Modalità del guadagno di riproduzione"
 
 msgid "Radio (equal loudness for all tracks)"
-msgstr ""
+msgstr "Radio (volume uguale per tutte le tracce)"
 
 msgid "Album (ideal loudness for all tracks)"
-msgstr ""
+msgstr "Album (volume ideale per tutte le tracce)"
 
 msgid "Apply compression to prevent clipping"
-msgstr ""
+msgstr "Applica la compressione per evitare il taglio"
 
 msgid "GStreamer audio engine"
 msgstr "Motore audio GStreamer"
@@ -1307,16 +1309,10 @@ msgid "Volume %1%"
 msgstr "Volume %1%"
 
 msgid "Clementine Error"
-msgstr ""
+msgstr "Errore di Clementine"
 
 msgid "0:00:00"
 msgstr "0:00:00"
-
-#~ msgid "Save this stream in the Radio tab"
-#~ msgstr "Salva questo flusso nella scheda Radio"
-
-#~ msgid "Options"
-#~ msgstr "Opzioni"
 
 #~ msgid "Add media..."
 #~ msgstr "Aggiungi media..."
@@ -1324,8 +1320,14 @@ msgstr "0:00:00"
 #~ msgid "Radio"
 #~ msgstr "Radio"
 
+#~ msgid "Options"
+#~ msgstr "Opzioni"
+
 #~ msgid "..."
 #~ msgstr "..."
 
 #~ msgid "Version"
 #~ msgstr "Versione"
+
+#~ msgid "Save this stream in the Radio tab"
+#~ msgstr "Salva questo flusso nella scheda Radio"
