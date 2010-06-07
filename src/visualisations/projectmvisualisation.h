@@ -57,6 +57,7 @@ private slots:
   void SceneRectChanged(const QRectF& rect);
 
 private:
+  void InitProjectM();
   void Load();
   void Save();
 

@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "projectmvisualisation.h"
 #include "visualisationcontainer.h"
 
@@ -24,9 +25,15 @@
 #include <QGLWidget>
 #include <QGraphicsView>
 #include <QSettings>
+#include <QCoreApplication>
+#include <QFile>
 
 #include <projectM.hpp>
 #include <GL/gl.h>
+
+#ifdef Q_OS_MAC
+#  include "core/mac_startup.h"
+#endif
 
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
   : QGraphicsScene(parent),
@@ -40,13 +47,59 @@ ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
 ProjectMVisualisation::~ProjectMVisualisation() {
 }
 
+void ProjectMVisualisation::InitProjectM() {
+  // Find the projectM presets
+  QStringList paths = QStringList()
+      << CMAKE_INSTALL_PREFIX "/share/clementine/projectm-presets"
+      << "/usr/share/clementine/projectm-presets"
+      << "/usr/local/share/clementine/projectm-presets"
+      << CMAKE_INSTALL_PREFIX "/share/projectM/presets"
+      << "/usr/share/projectM/presets"
+      << "/usr/local/share/projectM/presets";
+
+#if defined(Q_OS_WIN32)
+  paths.prepend(QCoreApplication::applicationDirPath() + "/projectm-presets");
+#elif defined(Q_OS_MAC)
+  paths.prepend(mac::GetResourcesPath() + "/projectm-presets");
+#endif
+
+  QString preset_path;
+  foreach (const QString& path, paths) {
+    if (QFile::exists(path)) {
+      preset_path = path;
+      break;
+    }
+  }
+
+  if (preset_path.isNull()) {
+    qFatal("ProjectM presets could not be found, search path was:\n  %s",
+           paths.join("\n  ").toLocal8Bit().constData());
+  }
+
+  // Create projectM settings
+  projectM::Settings s;
+  s.meshX = 32;
+  s.meshY = 24;
+  s.textureSize = texture_size_;
+  s.fps = 35;
+  s.windowWidth = 512;
+  s.windowHeight = 512;
+  s.smoothPresetDuration = 10;
+  s.presetDuration = 15;
+  s.presetURL = preset_path.toStdString();
+  s.shuffleEnabled = true;
+  s.easterEgg = 0; // ??
+  s.softCutRatingsEnabled = false;
+
+  projectm_.reset(new projectM(s));
+  Load();
+}
+
 void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
   p->beginNativePainting();
 
   if (!projectm_) {
-    projectm_.reset(new projectM("/usr/share/projectM/config.inp"));
-    projectm_->changeTextureSize(texture_size_);
-    Load();
+    InitProjectM();
   }
 
   projectm_->projectM_resetGL(sceneRect().width(), sceneRect().height());
