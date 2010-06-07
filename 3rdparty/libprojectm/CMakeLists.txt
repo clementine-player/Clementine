@@ -159,12 +159,16 @@ endif(BUILD_PROJECTM_STATIC)
 CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/libprojectM.pc.in" "${CMAKE_CURRENT_SOURCE_DIR}/libprojectM.pc" @ONLY)
 CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/config.inp.in" "${CMAKE_CURRENT_SOURCE_DIR}/config.inp" @ONLY)
 
+
 FILE(GLOB presets "presets/*.milk" "presets/*.prjm" "presets/*.tga")
-INSTALL(FILES ${presets} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM/presets)
-FILE(GLOB fonts "fonts/*.ttf")
-INSTALL(FILES ${fonts} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM/fonts)
-INSTALL(FILES ${Renderer_SOURCE_DIR}/projectM.cg ${Renderer_SOURCE_DIR}/blur.cg DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM/shaders)
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/libprojectM.pc DESTINATION ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig)
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/config.inp DESTINATION ${CMAKE_INSTALL_PREFIX}/share/projectM)
-INSTALL(FILES projectM.hpp event.h dlldefs.h fatal.h PCM.hpp Common.hpp DESTINATION include/libprojectM)
-INSTALL(TARGETS projectM DESTINATION lib${LIB_SUFFIX})
+if (APPLE)
+  foreach (preset ${presets})
+    configure_file(
+      "${preset}"
+      "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets/"
+      COPY_ONLY
+    )
+  endforeach (preset)
+else (APPLE)
+  INSTALL(FILES ${presets} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/clementine/projectm-presets)
+endif (APPLE)
