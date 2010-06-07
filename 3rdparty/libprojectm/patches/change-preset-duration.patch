@@ -1,0 +1,37 @@
+Index: TimeKeeper.hpp
+===================================================================
+--- TimeKeeper.hpp	(revision 1063)
++++ TimeKeeper.hpp	(revision 1064)
+@@ -37,6 +37,8 @@
+ 
+   double sampledPresetDuration();
+ 
++  void ChangePresetDuration(int seconds) { _presetDuration = seconds; }
++
+ #ifndef WIN32
+   /* The first ticks value of the application */
+   struct timeval startTime;
+Index: projectM.cpp
+===================================================================
+--- projectM.cpp	(revision 1063)
++++ projectM.cpp	(revision 1064)
+@@ -917,3 +917,7 @@
+                           _settings.titleFontURL, _settings.menuFontURL);
+ }
+ 
++void projectM::changePresetDuration(int seconds) {
++  timeKeeper->ChangePresetDuration(seconds);
++}
++
+Index: projectM.hpp
+===================================================================
+--- projectM.hpp	(revision 1063)
++++ projectM.hpp	(revision 1064)
+@@ -154,6 +154,7 @@
+ 
+ 
+   void changeTextureSize(int size);
++  void changePresetDuration(int seconds);
+ 
+ 
+   const Settings & settings() const {
