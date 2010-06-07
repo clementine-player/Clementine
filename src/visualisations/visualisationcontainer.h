@@ -25,6 +25,7 @@
 class GstEngine;
 class ProjectMVisualisation;
 class VisualisationOverlay;
+class VisualisationSelector;
 
 class QMenu;
 class QSignalMapper;
@@ -80,6 +81,8 @@ private:
   ProjectMVisualisation* vis_;
   VisualisationOverlay* overlay_;
   QBasicTimer update_timer_;
+
+  VisualisationSelector* selector_;
 
   QGraphicsProxyWidget* overlay_proxy_;
 

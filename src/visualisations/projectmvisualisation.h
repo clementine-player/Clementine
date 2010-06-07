@@ -19,6 +19,7 @@
 
 #include <QGraphicsScene>
 #include <QBasicTimer>
+#include <QSet>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -31,6 +32,16 @@ class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
 public:
   ProjectMVisualisation(QObject *parent = 0);
   ~ProjectMVisualisation();
+
+  projectM* projectm() const { return projectm_.get(); }
+
+  QSet<int> selected_indices() const { return selected_indices_; }
+  bool is_selected(int preset) { return selected_indices_.contains(preset); }
+  void set_selected(int preset, bool selected);
+  void set_all_selected(bool selected);
+
+  int mode() const { return mode_; }
+  void set_mode(int mode);
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*);
@@ -46,7 +57,13 @@ private slots:
   void SceneRectChanged(const QRectF& rect);
 
 private:
+  void Load();
+  void Save();
+
+private:
   boost::scoped_ptr<projectM> projectm_;
+  int mode_;
+  QSet<int> selected_indices_;
 
   int texture_size_;
 };

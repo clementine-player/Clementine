@@ -15,6 +15,7 @@
 */
 
 #include "projectmvisualisation.h"
+#include "visualisationcontainer.h"
 
 #include <QTimerEvent>
 #include <QPainter>
@@ -22,6 +23,7 @@
 #include <QtDebug>
 #include <QGLWidget>
 #include <QGraphicsView>
+#include <QSettings>
 
 #include <projectM.hpp>
 #include <GL/gl.h>
@@ -29,6 +31,7 @@
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
   : QGraphicsScene(parent),
     projectm_(NULL),
+    mode_(0),
     texture_size_(512)
 {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
@@ -43,6 +46,7 @@ void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
   if (!projectm_) {
     projectm_.reset(new projectM("/usr/share/projectM/config.inp"));
     projectm_->changeTextureSize(texture_size_);
+    Load();
   }
 
   projectm_->projectM_resetGL(sceneRect().width(), sceneRect().height());
@@ -71,3 +75,62 @@ void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*)
     projectm_->pcm()->addPCM16Data(data, samples_per_channel);
   gst_buffer_unref(buffer);
 }
+
+void ProjectMVisualisation::set_selected(int preset, bool selected) {
+  if (selected)
+    selected_indices_.insert(preset);
+  else
+    selected_indices_.remove(preset);
+
+  Save();
+}
+
+void ProjectMVisualisation::set_all_selected(bool selected) {
+  selected_indices_.clear();
+  if (selected) {
+    int count = projectm_->getPlaylistSize();
+    for (int i=0 ; i<count ; ++i) {
+      selected_indices_ << i;
+    }
+  }
+  Save();
+}
+
+void ProjectMVisualisation::Load() {
+  QSettings s;
+  s.beginGroup(VisualisationContainer::kSettingsGroup);
+  QVariantList presets(s.value("presets").toList());
+
+  int count = projectm_->getPlaylistSize();
+  selected_indices_.clear();
+
+  if (presets.isEmpty()) {
+    for (int i=0 ; i<count ; ++i)
+      selected_indices_ << i;
+  } else {
+    foreach (const QVariant& var, presets)
+      if (var.toInt() < count)
+        selected_indices_ << var.toInt();
+  }
+
+  mode_ = s.value("mode", 0).toInt();
+}
+
+void ProjectMVisualisation::Save() {
+  QVariantList list;
+
+  foreach (int index, selected_indices_.values()) {
+    list << index;
+  }
+
+  QSettings s;
+  s.beginGroup(VisualisationContainer::kSettingsGroup);
+  s.setValue("presets", list);
+  s.setValue("mode", mode_);
+}
+
+void ProjectMVisualisation::set_mode(int mode) {
+  mode_ = mode;
+  Save();
+}
+

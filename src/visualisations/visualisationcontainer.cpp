@@ -17,6 +17,7 @@
 #include "projectmvisualisation.h"
 #include "visualisationcontainer.h"
 #include "visualisationoverlay.h"
+#include "visualisationselector.h"
 #include "engines/gstengine.h"
 #include "ui/iconloader.h"
 
@@ -41,6 +42,8 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     engine_(NULL),
     vis_(new ProjectMVisualisation(this)),
     overlay_(new VisualisationOverlay),
+    selector_(new VisualisationSelector(this)),
+    overlay_proxy_(NULL),
     menu_(new QMenu(this)),
     fps_(kDefaultFps),
     size_(kDefaultTextureSize)
@@ -73,6 +76,9 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   SizeChanged();
   vis_->SetTextureSize(size_);
 
+  // Selector
+  selector_->SetVisualisation(vis_);
+
   // Settings menu
   menu_->addAction(IconLoader::Load("view-fullscreen"), tr("Toggle fullscreen"),
                    this, SLOT(ToggleFullscreen()));
@@ -95,6 +101,8 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group, quality_mapper);
   quality_menu->addActions(quality_group->actions());
   connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
+
+  menu_->addAction(tr("Select visualisations..."), selector_, SLOT(show()));
 
   menu_->addSeparator();
   menu_->addAction(IconLoader::Load("application-exit"), tr("Close visualisation"),
