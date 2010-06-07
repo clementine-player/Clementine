@@ -27,27 +27,36 @@
 
 class projectM;
 
+class ProjectMPresetModel;
+
 class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
 public:
   ProjectMVisualisation(QObject *parent = 0);
   ~ProjectMVisualisation();
 
-  projectM* projectm() const { return projectm_.get(); }
+  enum Mode {
+    Random = 0,
+    FromList = 1,
+  };
 
-  QSet<int> selected_indices() const { return selected_indices_; }
-  bool is_selected(int preset) { return selected_indices_.contains(preset); }
-  void set_selected(int preset, bool selected);
-  void set_all_selected(bool selected);
+  QString preset_url() const;
+  ProjectMPresetModel* preset_model() const { return preset_model_; }
 
-  int mode() const { return mode_; }
-  void set_mode(int mode);
+  Mode mode() const { return mode_; }
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*);
 
 public slots:
   void SetTextureSize(int size);
+
+  void SetSelected(const QStringList& paths, bool selected);
+  void ClearSelected();
+  void SetImmediatePreset(const QString& path);
+  void SetMode(Mode mode);
+
+  void Lock(bool lock);
 
 protected:
   // QGraphicsScene
@@ -61,10 +70,14 @@ private:
   void Load();
   void Save();
 
+  int IndexOfPreset(const QString& path) const;
+
 private:
   boost::scoped_ptr<projectM> projectm_;
-  int mode_;
-  QSet<int> selected_indices_;
+  ProjectMPresetModel* preset_model_;
+  Mode mode_;
+
+  std::vector<int> default_rating_list_;
 
   int texture_size_;
 };

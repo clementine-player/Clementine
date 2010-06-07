@@ -24,12 +24,16 @@ class ProjectMVisualisation;
 class ProjectMPresetModel : public QAbstractItemModel {
   Q_OBJECT
 
+  friend class ProjectMVisualisation;
+
 public:
   ProjectMPresetModel(ProjectMVisualisation* vis, QObject* parent = 0);
 
   enum {
     Role_Url = Qt::UserRole,
   };
+
+  void MarkSelected(const QString& path, bool selected);
 
   // QAbstractItemModel
   QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
@@ -46,7 +50,17 @@ public slots:
   void SelectNone();
 
 private:
+  struct Preset {
+    Preset(const QString& path, const QString& name, bool selected)
+      : path_(path), name_(name), selected_(selected) {}
+
+    QString path_;
+    QString name_;
+    bool selected_;
+  };
+
   ProjectMVisualisation* vis_;
+  QList<Preset> all_presets_;
 };
 
 #endif // PROJECTMPRESETMODEL_H

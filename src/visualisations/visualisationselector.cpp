@@ -21,20 +21,23 @@
 
 #include <QPushButton>
 
+#include <projectM.hpp>
+
 VisualisationSelector::VisualisationSelector(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_VisualisationSelector),
-    vis_(NULL),
-    preset_model_(NULL)
+    vis_(NULL)
 {
   ui_->setupUi(this);
 
-  QPushButton* select_all =
+  select_all_ =
       ui_->buttonBox->addButton(tr("Select All"), QDialogButtonBox::ActionRole);
-  QPushButton* select_none =
+  select_none_ =
       ui_->buttonBox->addButton(tr("Select None"), QDialogButtonBox::ActionRole);
-  connect(select_all, SIGNAL(clicked()), SLOT(SelectAll()));
-  connect(select_none, SIGNAL(clicked()), SLOT(SelectNone()));
+  connect(select_all_, SIGNAL(clicked()), SLOT(SelectAll()));
+  connect(select_none_, SIGNAL(clicked()), SLOT(SelectNone()));
+  select_all_->setEnabled(false);
+  select_none_->setEnabled(false);
 
   connect(ui_->mode, SIGNAL(currentIndexChanged(int)), SLOT(ModeChanged(int)));
 }
@@ -45,24 +48,33 @@ VisualisationSelector::~VisualisationSelector() {
 
 void VisualisationSelector::showEvent(QShowEvent *) {
   if (!ui_->list->model()) {
-    preset_model_ = new ProjectMPresetModel(vis_, this);
-    ui_->list->setModel(preset_model_);
+    ui_->list->setModel(vis_->preset_model());
     connect(ui_->list->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-            preset_model_, SLOT(SetImmediatePreset(QModelIndex)));
+            vis_->preset_model(), SLOT(SetImmediatePreset(QModelIndex)));
 
     ui_->mode->setCurrentIndex(vis_->mode());
   }
+
+  vis_->Lock(true);
+}
+
+void VisualisationSelector::hideEvent(QHideEvent *) {
+  vis_->Lock(false);
 }
 
 void VisualisationSelector::ModeChanged(int mode) {
-  ui_->list->setEnabled(mode == 1);
-  vis_->set_mode(mode);
+  bool enabled = mode == 1;
+  ui_->list->setEnabled(enabled);
+  select_all_->setEnabled(enabled);
+  select_none_->setEnabled(enabled);
+
+  vis_->SetMode(ProjectMVisualisation::Mode(mode));
 }
 
 void VisualisationSelector::SelectAll() {
-  preset_model_->SelectAll();
+  vis_->preset_model()->SelectAll();
 }
 
 void VisualisationSelector::SelectNone() {
-  preset_model_->SelectNone();
+  vis_->preset_model()->SelectNone();
 }

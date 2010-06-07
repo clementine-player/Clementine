@@ -15,6 +15,7 @@
 */
 
 #include "config.h"
+#include "projectmpresetmodel.h"
 #include "projectmvisualisation.h"
 #include "visualisationcontainer.h"
 
@@ -38,10 +39,14 @@
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
   : QGraphicsScene(parent),
     projectm_(NULL),
-    mode_(0),
+    preset_model_(NULL),
+    mode_(Random),
     texture_size_(512)
 {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
+
+  for (int i=0 ; i<TOTAL_RATING_TYPES ; ++i)
+    default_rating_list_.push_back(3);
 }
 
 ProjectMVisualisation::~ProjectMVisualisation() {
@@ -92,6 +97,7 @@ void ProjectMVisualisation::InitProjectM() {
   s.softCutRatingsEnabled = false;
 
   projectm_.reset(new projectM(s));
+  preset_model_ = new ProjectMPresetModel(this, this);
   Load();
 }
 
@@ -129,61 +135,93 @@ void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*)
   gst_buffer_unref(buffer);
 }
 
-void ProjectMVisualisation::set_selected(int preset, bool selected) {
-  if (selected)
-    selected_indices_.insert(preset);
-  else
-    selected_indices_.remove(preset);
+void ProjectMVisualisation::SetSelected(const QStringList& paths, bool selected) {
+  foreach (const QString& path, paths) {
+    int index = IndexOfPreset(path);
+    if (selected && index == -1) {
+      projectm_->addPresetURL(path.toStdString(), std::string(), default_rating_list_);
+    } else if (!selected && index != -1) {
+      projectm_->removePreset(index);
+    }
+  }
 
   Save();
 }
 
-void ProjectMVisualisation::set_all_selected(bool selected) {
-  selected_indices_.clear();
-  if (selected) {
-    int count = projectm_->getPlaylistSize();
-    for (int i=0 ; i<count ; ++i) {
-      selected_indices_ << i;
-    }
-  }
+void ProjectMVisualisation::ClearSelected() {
+  projectm_->clearPlaylist();
   Save();
+}
+
+int ProjectMVisualisation::IndexOfPreset(const QString &path) const {
+  for (uint i=0 ; i<projectm_->getPlaylistSize() ; ++i) {
+    if (QString::fromStdString(projectm_->getPresetURL(i)) == path)
+      return i;
+  }
+  return -1;
 }
 
 void ProjectMVisualisation::Load() {
   QSettings s;
   s.beginGroup(VisualisationContainer::kSettingsGroup);
-  QVariantList presets(s.value("presets").toList());
+  mode_ = Mode(s.value("mode", 0).toInt());
 
-  int count = projectm_->getPlaylistSize();
-  selected_indices_.clear();
+  projectm_->clearPlaylist();
+  switch (mode_) {
+    case Random:
+      for (int i=0 ; i<preset_model_->all_presets_.count() ; ++i) {
+        projectm_->addPresetURL(preset_model_->all_presets_[i].path_.toStdString(),
+                                std::string(), default_rating_list_);
+        preset_model_->all_presets_[i].selected_ = true;
+      }
+      break;
 
-  if (presets.isEmpty()) {
-    for (int i=0 ; i<count ; ++i)
-      selected_indices_ << i;
-  } else {
-    foreach (const QVariant& var, presets)
-      if (var.toInt() < count)
-        selected_indices_ << var.toInt();
+    case FromList: {
+      QStringList paths(s.value("preset_paths").toStringList());
+      foreach (const QString& path, paths) {
+        projectm_->addPresetURL(path.toStdString(), std::string(), default_rating_list_);
+        preset_model_->MarkSelected(path, true);
+      }
+    }
   }
-
-  mode_ = s.value("mode", 0).toInt();
 }
 
 void ProjectMVisualisation::Save() {
-  QVariantList list;
+  QStringList paths;
 
-  foreach (int index, selected_indices_.values()) {
-    list << index;
+  foreach (const ProjectMPresetModel::Preset& preset, preset_model_->all_presets_) {
+    if (preset.selected_)
+      paths << preset.path_;
   }
 
   QSettings s;
   s.beginGroup(VisualisationContainer::kSettingsGroup);
-  s.setValue("presets", list);
+  s.setValue("preset_paths", paths);
   s.setValue("mode", mode_);
 }
 
-void ProjectMVisualisation::set_mode(int mode) {
+void ProjectMVisualisation::SetMode(Mode mode) {
   mode_ = mode;
   Save();
+}
+
+QString ProjectMVisualisation::preset_url() const {
+  return QString::fromStdString(projectm_->settings().presetURL);
+}
+
+void ProjectMVisualisation::SetImmediatePreset(const QString& path) {
+  int index = IndexOfPreset(path);
+  if (index == -1) {
+    index = projectm_->addPresetURL(path.toStdString(), std::string(), default_rating_list_);
+  }
+
+  projectm_->selectPreset(index, true);
+}
+
+void ProjectMVisualisation::Lock(bool lock) {
+  projectm_->setPresetLock(lock);
+
+  if (!lock)
+    Load();
 }
 

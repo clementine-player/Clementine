@@ -20,17 +20,28 @@
 #include <projectM.hpp>
 
 #include <QtDebug>
+#include <QDir>
 
 ProjectMPresetModel::ProjectMPresetModel(ProjectMVisualisation* vis, QObject *parent)
   : QAbstractItemModel(parent),
     vis_(vis)
 {
+  // Find presets
+  QDir preset_dir(vis_->preset_url());
+  QStringList presets(preset_dir.entryList(
+      QStringList() << "*.milk" << "*.prjm",
+      QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
+      QDir::Name | QDir::IgnoreCase));
+
+  foreach (const QString& filename, presets) {
+    all_presets_ << Preset(preset_dir.absoluteFilePath(filename), filename, false);
+  }
 }
 
 int ProjectMPresetModel::rowCount(const QModelIndex&) const {
   if (!vis_)
     return 0;
-  return vis_->projectm()->getPlaylistSize();
+  return all_presets_.count();
 }
 
 int ProjectMPresetModel::columnCount(const QModelIndex&) const {
@@ -48,13 +59,13 @@ QModelIndex ProjectMPresetModel::parent(const QModelIndex &child) const {
 QVariant ProjectMPresetModel::data(const QModelIndex &index, int role) const {
   switch (role) {
   case Qt::DisplayRole:
-    return QString::fromStdString(vis_->projectm()->getPresetName(index.row()));
+    return all_presets_[index.row()].name_;
   case Qt::CheckStateRole: {
-    bool selected = vis_->is_selected(index.row());
+    bool selected = all_presets_[index.row()].selected_;
     return selected ? Qt::Checked : Qt::Unchecked;
   }
   case Role_Url:
-    return QString::fromStdString(vis_->projectm()->getPresetURL(index.row()));
+    return all_presets_[index.row()].path_;
   default:
     return QVariant();
   }
@@ -70,23 +81,43 @@ Qt::ItemFlags ProjectMPresetModel::flags(const QModelIndex &index) const {
 bool ProjectMPresetModel::setData(const QModelIndex &index,
                                   const QVariant &value, int role) {
   if (role == Qt::CheckStateRole) {
-    vis_->set_selected(index.row(), value.toBool());
+    all_presets_[index.row()].selected_ = value.toBool();
+    vis_->SetSelected(QStringList() << all_presets_[index.row()].path_, value.toBool());
     return true;
   }
   return false;
 }
 
 void ProjectMPresetModel::SetImmediatePreset(const QModelIndex& index) {
-  vis_->projectm()->selectPreset(index.row(), true);
+  vis_->SetImmediatePreset(all_presets_[index.row()].path_);
 }
 
 void ProjectMPresetModel::SelectAll() {
-  vis_->set_all_selected(true);
+  QStringList paths;
+  for (int i=0 ; i<all_presets_.count() ; ++i) {
+    paths << all_presets_[i].path_;
+    all_presets_[i].selected_ = true;
+  }
+  vis_->SetSelected(paths, true);
+
   emit dataChanged(index(0, 0), index(rowCount()-1, 0));
 }
 
 void ProjectMPresetModel::SelectNone() {
-  vis_->set_all_selected(false);
+  vis_->ClearSelected();
+  for (int i=0 ; i<all_presets_.count() ; ++i) {
+    all_presets_[i].selected_ = false;
+  }
+
   emit dataChanged(index(0, 0), index(rowCount()-1, 0));
+}
+
+void ProjectMPresetModel::MarkSelected(const QString& path, bool selected) {
+  for (int i=0 ; i<all_presets_.count() ; ++i) {
+    if (path == all_presets_[i].path_) {
+      all_presets_[i].selected_ = selected;
+      return;
+    }
+  }
 }
 

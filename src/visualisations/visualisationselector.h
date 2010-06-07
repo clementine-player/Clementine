@@ -19,7 +19,6 @@
 
 #include <QDialog>
 
-class ProjectMPresetModel;
 class ProjectMVisualisation;
 class Ui_VisualisationSelector;
 
@@ -33,6 +32,7 @@ public:
 
 protected:
   void showEvent(QShowEvent *);
+  void hideEvent(QHideEvent *);
 
 private slots:
   void ModeChanged(int mode);
@@ -41,9 +41,10 @@ private slots:
 
 private:
   Ui_VisualisationSelector* ui_;
-  ProjectMVisualisation* vis_;
+  QPushButton* select_all_;
+  QPushButton* select_none_;
 
-  ProjectMPresetModel* preset_model_;
+  ProjectMVisualisation* vis_;
 };
 
 #endif // VISUALISATIONSELECTOR_H
