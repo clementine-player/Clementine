@@ -11,6 +11,9 @@ void SetShortcutHandler(GlobalShortcuts* handler);
 void SetApplicationHandler(QObject* handler);
 void CheckForUpdates();
 
+QString GetBundlePath();
+QString GetResourcesPath();
+
 }  // namespace mac
 
 #endif
