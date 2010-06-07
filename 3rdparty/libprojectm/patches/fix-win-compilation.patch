@@ -1,0 +1,135 @@
+Index: MilkdropPresetFactory/CMakeLists.txt
+===================================================================
+--- MilkdropPresetFactory/CMakeLists.txt	(revision 1058)
++++ MilkdropPresetFactory/CMakeLists.txt	(revision 1060)
+@@ -7,10 +7,6 @@
+ 
+ SET(MilkdropPresetFactory_SOURCES BuiltinFuncs.cpp Func.cpp MilkdropPreset.cpp Param.hpp PresetFrameIO.cpp CustomShape.cpp  Eval.cpp MilkdropPresetFactory.cpp PerPixelEqn.cpp BuiltinParams.cpp InitCond.cpp Parser.cpp CustomWave.cpp Expr.cpp PerPointEqn.cpp Param.cpp PerFrameEqn.cpp IdlePreset.cpp)
+ 
+-IF(NOT MSVC)
+-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+-ENDIF(NOT MSVC)
+-
+ INCLUDE_DIRECTORIES(${projectM_SOURCE_DIR} ${Renderer_SOURCE_DIR})
+ LINK_DIRECTORIES(${projectM_BINARY_DIR} ${Renderer_BINARY_DIR})
+ 
+Index: NativePresetFactory/NativePresetFactory.cpp
+===================================================================
+--- NativePresetFactory/NativePresetFactory.cpp	(revision 1058)
++++ NativePresetFactory/NativePresetFactory.cpp	(revision 1060)
+@@ -10,7 +10,10 @@
+ //
+ //
+ 
+-#include <dlfcn.h>
++extern "C" {
++#  include <dlfcn.h>
++}
++
+ #include "NativePresetFactory.hpp"
+ 
+ typedef void Handle;
+Index: NativePresetFactory/CMakeLists.txt
+===================================================================
+--- NativePresetFactory/CMakeLists.txt	(revision 1058)
++++ NativePresetFactory/CMakeLists.txt	(revision 1060)
+@@ -7,9 +7,9 @@
+ 
+ SET(NativePresetFactory_SOURCES NativePresetFactory.cpp)
+ 
+-IF(NOT MSVC)
+-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+-ENDIF(NOT MSVC)
++if(WIN32)
++  find_library(DL_LIBRARIES dl)
++endif(WIN32)
+ 
+ if(MSVC)
+ 	SET (MATH_LIBRARIES )
+@@ -20,4 +20,4 @@
+ INCLUDE_DIRECTORIES(${projectM_SOURCE_DIR} ${Renderer_SOURCE_DIR})
+ ADD_LIBRARY(NativePresetFactory STATIC ${NativePresetFactory_SOURCES})
+ SET_TARGET_PROPERTIES(NativePresetFactory PROPERTIES VERSION 2.00 SOVERSION 2)
+-TARGET_LINK_LIBRARIES(NativePresetFactory Renderer ${MATH_LIBRARIES})
++TARGET_LINK_LIBRARIES(NativePresetFactory Renderer ${MATH_LIBRARIES} ${DL_LIBRARIES})
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 1058)
++++ CMakeLists.txt	(revision 1060)
+@@ -31,12 +31,12 @@
+ ADD_DEFINITIONS(-DCMAKE_INSTALL_PREFIX="\\\"${CMAKE_INSTALL_PREFIX}\\\"")
+ 
+ if (USE_NATIVE_GLEW)
+-ADD_DEFINITIONS(-DUSE_NATIVE_GLEW)
+-SET(GLEW_SOURCES glew.h glew.c)
+-SET(GLEW_LINK_TARGETS )
++  ADD_DEFINITIONS(-DUSE_NATIVE_GLEW)
++  SET(GLEW_SOURCES glew.h glew.c)
++  SET(GLEW_LINK_TARGETS )
+ else(USE_NATIVE_GLEW)
+-SET(GLEW_SOURCES )
+-SET (GLEW_LINK_TARGETS GLEW)
++  SET(GLEW_SOURCES )
++  find_library(GLEW_LINK_TARGETS NAMES glew GLEW glew32)
+ endif(USE_NATIVE_GLEW)
+ 
+ SET(projectM_SOURCES projectM.cpp PCM.cpp Preset.cpp fftsg.cpp KeyHandler.cpp
+Index: Renderer/CMakeLists.txt
+===================================================================
+--- Renderer/CMakeLists.txt	(revision 1058)
++++ Renderer/CMakeLists.txt	(revision 1060)
+@@ -11,11 +11,6 @@
+ Filters.cpp PerlinNoise.cpp PipelineContext.cpp  Renderable.cpp BeatDetect.cpp Shader.cpp TextureManager.cpp VideoEcho.cpp 
+ RenderItemDistanceMetric.cpp RenderItemMatcher.cpp ${SOIL_SOURCES})
+ 
+-IF(NOT MSVC)
+-	SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+-	SET (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+-ENDIF(NOT MSVC)
+-
+ if(MSVC)
+ 	SET (MATH_LIBRARIES )
+ else(MSVC)
+Index: MilkdropPresetFactory/PresetFrameIO.cpp
+===================================================================
+--- MilkdropPresetFactory/PresetFrameIO.cpp	(revision 1061)
++++ MilkdropPresetFactory/PresetFrameIO.cpp	(revision 1062)
+@@ -3,6 +3,7 @@
+ #include <math.h>
+ #include <cassert>
+ #include <iostream>
++#include <cmath>
+ #include "Renderer/BeatDetect.hpp"
+ 
+ PresetInputs::PresetInputs() : PipelineContext()
+@@ -195,7 +196,7 @@
+ 	{
+ 		for (y = 0; y < gy; y++)
+ 		{
+-			fZoom2 = powf(this->zoom_mesh[x][y], powf(this->zoomexp_mesh[x][y],
++      fZoom2 = std::pow(this->zoom_mesh[x][y], std::pow(this->zoomexp_mesh[x][y],
+ 					rad_mesh[x][y] * 2.0f - 1.0f));
+ 			fZoom2Inv = 1.0f / fZoom2;
+ 			this->x_mesh[x][y] = this->orig_x[x][y] * 0.5f * fZoom2Inv + 0.5f;
+Index: Renderer/MilkdropWaveform.cpp
+===================================================================
+--- Renderer/MilkdropWaveform.cpp	(revision 1061)
++++ Renderer/MilkdropWaveform.cpp	(revision 1062)
+@@ -16,6 +16,8 @@
+ #include <OpenGL/gl.h>
+ #endif
+ 
++#include <cmath>
++
+ #include "MilkdropWaveform.hpp"
+ #include "math.h"
+ #include "BeatDetect.hpp"
+@@ -124,7 +126,7 @@
+ 			case 2048: temp_a *= 0.33f; break;
+ 		}
+ 		temp_a*=1.3f;
+-		temp_a*=powf(context.beatDetect->treb , 2.0f);
++    temp_a*=std::pow(context.beatDetect->treb , 2.0f);
+ 	}
+ 
+ 	if (maximizeColors==true)
