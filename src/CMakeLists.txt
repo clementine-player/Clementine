@@ -132,21 +132,18 @@ set_target_properties(clementine PROPERTIES
 )
 
 if (APPLE)
-  configure_file(
-    ../dist/clementine.icns
-    ${PROJECT_BINARY_DIR}/clementine.app/Contents/Resources/clementine.icns
-    COPY_ONLY
-  )
-  configure_file(
-    ../dist/qt.conf
-    ${PROJECT_BINARY_DIR}/clementine.app/Contents/Resources/qt.conf
-    COPY_ONLY
-  )
-  configure_file(
-    ../dist/sparkle_pub.pem
-    ${PROJECT_BINARY_DIR}/clementine.app/Contents/Resources/sparkle_pub.pem
-    COPY_ONLY
-  )
+  install(FILES ../dist/clementine.icns
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+  install(FILES ../dist/qt.conf
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+  install(FILES ../dist/sparkle_pub.pem
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+
+  install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+  install(DIRECTORY "${SPARKLE}/Versions/Current/Resources/"
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
+
   add_custom_target(bundle
     ${CMAKE_CURRENT_SOURCE_DIR}/../macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
     DEPENDS clementine
@@ -155,19 +152,17 @@ if (APPLE)
     macdeployqt ${PROJECT_BINARY_DIR}/clementine.app -dmg
     DEPENDS clementine
   )
+else (APPLE)
+  install(TARGETS clementine
+    RUNTIME DESTINATION bin
+  )
+    
+  install(FILES ../dist/clementine_64.png
+    DESTINATION share/icons/hicolor/64x64/apps/
+    RENAME application-x-clementine.png
+  )
+
+  install(FILES ../dist/clementine.desktop
+    DESTINATION share/applications
+  )
 endif (APPLE)
-
-install(TARGETS clementine
-  BUNDLE DESTINATION bin
-  RUNTIME DESTINATION bin
-)
-  
-install(FILES ../dist/clementine_64.png
-  DESTINATION share/icons/hicolor/64x64/apps/
-  RENAME application-x-clementine.png
-)
-
-install(FILES ../dist/clementine.desktop
-  DESTINATION share/applications
-)
-
