@@ -50,6 +50,7 @@ public:
 
 public slots:
   void SetTextureSize(int size);
+  void SetDuration(int seconds);
 
   void SetSelected(const QStringList& paths, bool selected);
   void ClearSelected();
@@ -76,6 +77,7 @@ private:
   boost::scoped_ptr<projectM> projectm_;
   ProjectMPresetModel* preset_model_;
   Mode mode_;
+  int duration_;
 
   std::vector<int> default_rating_list_;
 

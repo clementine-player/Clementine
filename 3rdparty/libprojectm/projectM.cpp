@@ -917,3 +917,7 @@ void projectM::changeTextureSize(int size) {
                           _settings.titleFontURL, _settings.menuFontURL);
 }
 
+void projectM::changePresetDuration(int seconds) {
+  timeKeeper->ChangePresetDuration(seconds);
+}
+

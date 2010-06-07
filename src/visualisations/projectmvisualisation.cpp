@@ -41,6 +41,7 @@ ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
     projectm_(NULL),
     preset_model_(NULL),
     mode_(Random),
+    duration_(15),
     texture_size_(512)
 {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
@@ -89,8 +90,8 @@ void ProjectMVisualisation::InitProjectM() {
   s.fps = 35;
   s.windowWidth = 512;
   s.windowHeight = 512;
-  s.smoothPresetDuration = 10;
-  s.presetDuration = 15;
+  s.smoothPresetDuration = 5;
+  s.presetDuration = duration_;
   s.presetURL = preset_path.toStdString();
   s.shuffleEnabled = true;
   s.easterEgg = 0; // ??
@@ -124,6 +125,13 @@ void ProjectMVisualisation::SetTextureSize(int size) {
 
   if (projectm_)
     projectm_->changeTextureSize(texture_size_);
+}
+
+void ProjectMVisualisation::SetDuration(int seconds) {
+  duration_ = seconds;
+
+  if (projectm_)
+    projectm_->changePresetDuration(duration_);
 }
 
 void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {

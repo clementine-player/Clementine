@@ -154,6 +154,7 @@ public:
 
 
   void changeTextureSize(int size);
+  void changePresetDuration(int seconds);
 
 
   const Settings & settings() const {
