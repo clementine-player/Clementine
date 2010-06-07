@@ -1,0 +1,26 @@
+Index: Renderer/TextureManager.cpp
+===================================================================
+--- Renderer/TextureManager.cpp	(revision 1065)
++++ Renderer/TextureManager.cpp	(working copy)
+@@ -219,7 +219,7 @@
+ 	 // Allocate a new a stream given the current directory name
+ 	  if ((m_dir = opendir(dirname.c_str())) == NULL)
+ 	  {
+-	    std::cout<<"No Textures Loaded from "<<dirname<<std::endl;
++      //std::cout<<"No Textures Loaded from "<<dirname<<std::endl;
+ 	    return; // no files loaded. m_entries is empty
+ 	  }
+ 
+Index: PresetLoader.cpp
+===================================================================
+--- PresetLoader.cpp	(revision 1065)
++++ PresetLoader.cpp	(working copy)
+@@ -84,6 +84,8 @@
+ 
+ 	while ( ( dir_entry = readdir ( _dir ) ) != NULL )
+ 	{
++    if (dir_entry->d_name == 0)
++      continue;
+ 
+ 		std::ostringstream out;
+ 		// Convert char * to friendly string
