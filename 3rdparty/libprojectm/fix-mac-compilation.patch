@@ -1,0 +1,215 @@
+Index: TimeKeeper.cpp
+===================================================================
+--- TimeKeeper.cpp	(revision 1054)
++++ TimeKeeper.cpp	(revision 1055)
+@@ -11,7 +11,7 @@
+ #endif
+ 
+ #ifdef __APPLE__
+-#include <GL/gl.h>
++#include <OpenGL/gl.h>
+ #endif
+ 
+ #include "TimeKeeper.hpp"
+Index: CMakeLists.txt
+===================================================================
+--- CMakeLists.txt	(revision 1054)
++++ CMakeLists.txt	(revision 1055)
+@@ -2,6 +2,7 @@
+ cmake_minimum_required(VERSION 2.6.0)
+ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The projectM core library.")
+ 
++include(CheckCXXCompilerFlag)
+ 
+ cmake_policy(SET CMP0005 OLD)
+ 
+@@ -132,11 +133,12 @@
+ #set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH};/opt/local/include;/Developer/SDKs/MACOSX10.5.sdk/usr/X11/include)
+ #set(CMAKE_LIBRARY_PATH /opt/local/lib;/Developer/SDKs/MACOSX10.5.sdk;/Developer/SDKs/MacOSX10.5.sdk/usr/X11/lib/)
+ 
++CHECK_CXX_COMPILER_FLAG("-fopenmp" SUPPORTS_OPENMP)
+ 
+-IF(USE_OPENMP)
++IF(USE_OPENMP AND SUPPORTS_OPENMP)
+ 	SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp ")
+ 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp ")
+-ENDIF(USE_OPENMP)
++ENDIF(USE_OPENMP AND SUPPORTS_OPENMP)
+ 
+ INCLUDE_DIRECTORIES(${projectM_SOURCE_DIR} ${FTGL_INCLUDE_DIRS} ${Renderer_SOURCE_DIR} ${PRESET_FACTORY_SOURCES})
+ LINK_DIRECTORIES(${FTGL_LINK_DIRS} ${Renderer_BINARY_DIR} ${PRESET_FACTORY_BINARY_DIR})
+Index: Renderer/Waveform.cpp
+===================================================================
+--- Renderer/Waveform.cpp	(revision 1054)
++++ Renderer/Waveform.cpp	(revision 1055)
+@@ -12,7 +12,7 @@
+ #include "glew.h"
+ #endif
+ #ifdef __APPLE__
+-#include <GL/gl.h>
++#include <OpenGL/gl.h>
+ #endif
+ 
+ #include "Waveform.hpp"
+Index: Renderer/MilkdropWaveform.cpp
+===================================================================
+--- Renderer/MilkdropWaveform.cpp	(revision 1054)
++++ Renderer/MilkdropWaveform.cpp	(revision 1055)
+@@ -13,7 +13,7 @@
+ #include "glew.h"
+ #endif
+ #ifdef __APPLE__
+-#include <GL/gl.h>
++#include <OpenGL/gl.h>
+ #endif
+ 
+ #include "MilkdropWaveform.hpp"
+Index: Renderer/PerPixelMesh.cpp
+===================================================================
+--- Renderer/PerPixelMesh.cpp	(revision 1054)
++++ Renderer/PerPixelMesh.cpp	(revision 1055)
+@@ -5,8 +5,8 @@
+ #include "omptl/omptl_algorithm"
+ 
+ PerPixelMesh::PerPixelMesh(int width, int height) : width(width), height(height), size (width * height),
+-		p(width * height, Point(0,0)),
+-		p_original(width * height, Point(0,0)),
++		p(width * height, PixelPoint(0,0)),
++		p_original(width * height, PixelPoint(0,0)),
+ 		identity(width * height, PerPixelContext(0,0,0,0,0,0))
+ 		{
+ 		for (int j=0;j<height;j++)
+@@ -42,7 +42,7 @@
+ 	omptl::copy(p_original.begin(), p_original.end(), p.begin());
+ }
+ 
+-Point::Point(float x, float y)
++PixelPoint::PixelPoint(float x, float y)
+ 	: x(x), y(y) {}
+ PerPixelContext::PerPixelContext(float x, float y, float rad, float theta, int i, int j)
+ 	: x(x), y(y), rad(rad), theta(theta), i(i), j(j) {}
+Index: Renderer/Pipeline.cpp
+===================================================================
+--- Renderer/Pipeline.cpp	(revision 1054)
++++ Renderer/Pipeline.cpp	(revision 1055)
+@@ -45,5 +45,5 @@
+ }
+ 
+ //void Pipeline::Render(const BeatDetect &music, const PipelineContext &context){}
+-Point Pipeline::PerPixel(Point p, const PerPixelContext context)
++PixelPoint Pipeline::PerPixel(PixelPoint p, const PerPixelContext context)
+ {return p;}
+Index: Renderer/Pipeline.hpp
+===================================================================
+--- Renderer/Pipeline.hpp	(revision 1054)
++++ Renderer/Pipeline.hpp	(revision 1055)
+@@ -50,7 +50,7 @@
+ 	 Pipeline();
+ 	 void setStaticPerPixel(int gx, int gy);
+ 	 virtual ~Pipeline();
+-	 virtual Point PerPixel(Point p, const PerPixelContext context);
++	 virtual PixelPoint PerPixel(PixelPoint p, const PerPixelContext context);
+ };
+ 
+ #endif
+Index: Renderer/PerPixelMesh.hpp
+===================================================================
+--- Renderer/PerPixelMesh.hpp	(revision 1054)
++++ Renderer/PerPixelMesh.hpp	(revision 1055)
+@@ -3,12 +3,12 @@
+ 
+ #include <vector>
+ 
+-struct Point
++struct PixelPoint
+ {
+ 	float x;
+ 	float y;
+ 
+-	Point(float x, float y);
++	PixelPoint(float x, float y);
+ };
+ 
+ struct PerPixelContext
+@@ -31,8 +31,8 @@
+ 	int height;
+ 	int size;
+ 
+-	std::vector<Point> p;
+-	std::vector<Point> p_original;
++	std::vector<PixelPoint> p;
++	std::vector<PixelPoint> p_original;
+ 	std::vector<PerPixelContext> identity;
+ 
+ 	PerPixelMesh(int width, int height);
+Index: Renderer/Transformation.hpp
+===================================================================
+--- Renderer/Transformation.hpp	(revision 1054)
++++ Renderer/Transformation.hpp	(revision 1055)
+@@ -9,7 +9,7 @@
+ {
+ public:
+ 
+-	inline static void Zoom(Point &p, const PerPixelContext &context, float zoom, float zoomExponent)
++	inline static void Zoom(PixelPoint &p, const PerPixelContext &context, float zoom, float zoomExponent)
+ 	{
+ 		float fZoom2 = powf( zoom, powf( zoomExponent, context.rad*2.0f - 1.0f));
+ 		float fZoom2Inv = 1.0f/fZoom2;
+@@ -21,19 +21,19 @@
+ 		p.y += 0.5;
+ 	}
+ 
+-	inline static void Transform(Point &p, const PerPixelContext &context, float dx, float dy)
++	inline static void Transform(PixelPoint &p, const PerPixelContext &context, float dx, float dy)
+ 	{
+ 		p.x -= dx;
+ 		p.y -= dy;
+ 	}
+ 
+-	inline static void Scale(Point &p, const PerPixelContext &context, float sy, float sx, float cx, float cy)
++	inline static void Scale(PixelPoint &p, const PerPixelContext &context, float sy, float sx, float cx, float cy)
+ 	{
+ 		p.x = (p.x - cx)/sx + cx;
+ 		p.y = (p.y - cy)/sy + cy;
+ 	}
+ 
+-	inline static void Rotate(Point &p, const PerPixelContext &context, float angle, float cx, float cy)
++	inline static void Rotate(PixelPoint &p, const PerPixelContext &context, float angle, float cx, float cy)
+ 	{
+ 		float u2 = p.x - cx;
+ 		float v2 = p.y - cy;
+@@ -45,7 +45,7 @@
+ 		p.y = u2*sin_rot + v2*cos_rot + cy;
+ 	}
+ 
+-	inline static void Warp(Point &p, const PerPixelContext &context, float time, float speed, float scale, float warp)
++	inline static void Warp(PixelPoint &p, const PerPixelContext &context, float time, float speed, float scale, float warp)
+ 	{
+ 		float fWarpTime = time * speed;
+ 		float fWarpScaleInv = 1.0f / scale;
+Index: Renderer/Renderer.hpp
+===================================================================
+--- Renderer/Renderer.hpp	(revision 1054)
++++ Renderer/Renderer.hpp	(revision 1055)
+@@ -125,7 +125,7 @@
+   void Pass2 (const Pipeline &pipeline, const PipelineContext &pipelineContext);
+   void CompositeOutput(const Pipeline &pipeline, const PipelineContext &pipelineContext);
+ 
+-  inline static Point PerPixel(Point p, PerPixelContext &context)
++  inline static PixelPoint PerPixel(PixelPoint p, PerPixelContext &context)
+   {
+ 	  return currentPipe->PerPixel(p,context);
+   }
+Index: Renderer/TextureManager.cpp
+===================================================================
+--- Renderer/TextureManager.cpp	(revision 1054)
++++ Renderer/TextureManager.cpp	(revision 1055)
+@@ -5,7 +5,7 @@
+ #include "glew.h"
+ #endif
+ #ifdef __APPLE__
+-#include <GL/gl.h>
++#include <OpenGL/gl.h>
+ #endif
+ 
+ #ifdef USE_DEVIL
