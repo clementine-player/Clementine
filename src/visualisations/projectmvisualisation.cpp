@@ -30,10 +30,12 @@
 #include <QFile>
 
 #include <projectM.hpp>
-#include <GL/gl.h>
 
 #ifdef Q_OS_MAC
 #  include "core/mac_startup.h"
+#  include <OpenGL/gl.h>
+#else
+#  include <GL/gl.h>
 #endif
 
 ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
