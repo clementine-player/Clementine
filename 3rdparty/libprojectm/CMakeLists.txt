@@ -165,9 +165,10 @@ CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/config.inp.in" "${CMAKE_CURRENT_SOUR
 FILE(GLOB presets "presets/*.milk" "presets/*.prjm" "presets/*.tga")
 if (APPLE)
   foreach (preset ${presets})
+    get_filename_component(PRESET_NAME ${preset} NAME)
     configure_file(
       "${preset}"
-      "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets/"
+      "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets/${PRESET_NAME}"
       COPY_ONLY
     )
   endforeach (preset)

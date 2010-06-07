@@ -155,7 +155,7 @@ void CheckForUpdates() {
 QString GetBundlePath() {
   CFURLRef app_url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
   CFStringRef mac_path = CFURLCopyFileSystemPath(app_url, kCFURLPOSIXPathStyle);
-  const char* path = CFStringGetCStringPtr(mac_path, kCFStringEncodingUTF8);
+  const char* path = CFStringGetCStringPtr(mac_path, CFStringGetSystemEncoding());
   QString bundle_path = QString::fromUtf8(path);
   CFRelease(app_url);
   CFRelease(mac_path);
