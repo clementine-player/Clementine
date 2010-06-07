@@ -150,8 +150,9 @@ if (APPLE)
     DEPENDS clementine
   )
   add_custom_target(dmg
-    macdeployqt ${PROJECT_BINARY_DIR}/clementine.app -no-plugins -dmg
+    macdeployqt clementine.app -no-plugins -dmg
     DEPENDS clementine
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
 else (APPLE)
   install(TARGETS clementine
