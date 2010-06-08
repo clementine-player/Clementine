@@ -26,7 +26,6 @@
 #include "core/stylesheetloader.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
-#include "library/libraryconfigdialog.h"
 #include "library/libraryconfig.h"
 #include "library/library.h"
 #include "playlist/playlistbackend.h"
@@ -318,6 +317,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Library filter widget
   ui_->library_filter->SetSettingsGroup(kSettingsGroup);
   ui_->library_filter->SetLibraryModel(library_->model());
+  ui_->library_filter->SetSettingsDialog(settings_dialog_.get());
   connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), ui_->library_view,
           SLOT(ReloadSettings()));
   connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), SLOT(ReloadSettings()));

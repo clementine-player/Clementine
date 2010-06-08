@@ -24,7 +24,7 @@
 #include "librarymodel.h"
 
 class GroupByDialog;
-class LibraryConfigDialog;
+class SettingsDialog;
 class Ui_LibraryFilterWidget;
 
 class QMenu;
@@ -45,6 +45,7 @@ class LibraryFilterWidget : public QWidget {
 
   void SetSettingsGroup(const QString& group) { settings_group_ = group; }
   void SetLibraryModel(LibraryModel* model);
+  void SetSettingsDialog(SettingsDialog* dialog) { settings_dialog_ = dialog; }
 
  signals:
   void LibraryConfigChanged();
@@ -62,7 +63,7 @@ class LibraryFilterWidget : public QWidget {
   LibraryModel* model_;
 
   boost::scoped_ptr<GroupByDialog> group_by_dialog_;
-  boost::scoped_ptr<LibraryConfigDialog> library_config_dialog_;
+  SettingsDialog* settings_dialog_;
 
   QMenu* filter_age_menu_;
   QMenu* group_by_menu_;

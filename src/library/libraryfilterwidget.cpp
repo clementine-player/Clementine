@@ -17,9 +17,9 @@
 #include "libraryfilterwidget.h"
 #include "librarymodel.h"
 #include "groupbydialog.h"
-#include "libraryconfigdialog.h"
 #include "ui_libraryfilterwidget.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
 
 #include <QMenu>
 #include <QActionGroup>
@@ -30,8 +30,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_LibraryFilterWidget),
     model_(NULL),
-    group_by_dialog_(new GroupByDialog),
-    library_config_dialog_(new LibraryConfigDialog)
+    group_by_dialog_(new GroupByDialog)
 {
   ui_->setupUi(this);
 
@@ -101,9 +100,8 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   library_menu->addMenu(group_by_menu_);
   library_menu->addSeparator();
   config_action_ = library_menu->addAction(
-      tr("Configure library..."), library_config_dialog_.get(), SLOT(show()));
+      tr("Configure library..."), this, SLOT(ShowConfigDialog()));
   ui_->options->setMenu(library_menu);
-  connect(library_config_dialog_.get(), SIGNAL(accepted()), SIGNAL(LibraryConfigChanged()));
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {
@@ -130,9 +128,6 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
           model_, SLOT(SetGroupBy(LibraryModel::Grouping)));
   connect(ui_->filter, SIGNAL(textChanged(QString)), model_, SLOT(SetFilterText(QString)));
   connect(filter_age_mapper_, SIGNAL(mapped(int)), model_, SLOT(SetFilterAge(int)));
-
-  // Set up the dialogs
-  library_config_dialog_->SetModel(model_->directory_model());
 
   // Load settings
   if (!settings_group_.isEmpty()) {
@@ -184,7 +179,7 @@ void LibraryFilterWidget::ClearFilter() {
 }
 
 void LibraryFilterWidget::ShowConfigDialog() {
-  library_config_dialog_->show();
+  settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }
 
 void LibraryFilterWidget::SetFilterHint(const QString& hint) {

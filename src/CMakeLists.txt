@@ -50,7 +50,6 @@ set(SOURCES
   library/library.cpp
   library/librarybackend.cpp
   library/libraryconfig.cpp
-  library/libraryconfigdialog.cpp
   library/librarydirectorymodel.cpp
   library/libraryfilterwidget.cpp
   library/librarymodel.cpp
@@ -161,7 +160,6 @@ set(HEADERS
   library/library.h
   library/librarybackend.h
   library/libraryconfig.h
-  library/libraryconfigdialog.h
   library/librarydirectorymodel.h
   library/libraryfilterwidget.h
   library/librarymodel.h
@@ -239,7 +237,6 @@ set(HEADERS
 set(UI
   library/groupbydialog.ui
   library/libraryconfig.ui
-  library/libraryconfigdialog.ui
   library/libraryfilterwidget.ui
 
   playlist/playlistcontainer.ui
