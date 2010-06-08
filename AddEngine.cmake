@@ -43,6 +43,7 @@ macro(add_engine engine lib_list src_list moc_list supported)
 
     # add to list of disabled engines
     set(ENGINES_DISABLED "${ENGINES_DISABLED} ${engine}")
+    set("HAVE_${name}" 0 CACHE INTERNAL ${name})
 
   endif(ENGINE_${name}_ENABLED AND NOT ENGINE_${name}_LIB_MISSING)
 
