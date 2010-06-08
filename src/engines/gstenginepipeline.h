@@ -92,7 +92,6 @@ class GstEnginePipeline : public QObject {
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
-  static void EventCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static bool StopUriDecodeBin(gpointer bin);
   void TagMessageReceived(GstMessage*);

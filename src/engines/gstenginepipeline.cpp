@@ -194,6 +194,8 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
     default:
       break;
   }
+
+  gst_message_unref(msg);
   return GST_BUS_DROP;
 }
 
@@ -293,19 +295,6 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
   }
 
   return true;
-}
-
-void GstEnginePipeline::EventCallback(GstPad*, GstEvent* event, gpointer self) {
-  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
-
-  switch(event->type) {
-    case GST_EVENT_EOS:
-      emit instance->EndOfStreamReached(false);
-      break;
-
-    default:
-      break;
-  }
 }
 
 void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer self) {
