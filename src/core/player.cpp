@@ -449,7 +449,7 @@ void Player::Pause() {
       engine_->Pause();
       break;
     case Engine::Paused:
-      engine_->Pause();
+      engine_->Unpause();
       break;
     default:
       return;
