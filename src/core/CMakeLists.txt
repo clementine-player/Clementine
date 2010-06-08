@@ -73,4 +73,8 @@ add_library(clementine_core
   ${MOC}
 )
 
+target_link_libraries(clementine_core
+  clementine_engines
+)
+
 add_translation_source(core ${SOURCES} ${MOC})
