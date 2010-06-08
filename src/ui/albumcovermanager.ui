@@ -36,6 +36,12 @@
          </property>
          <item>
           <widget class="QToolButton" name="clear">
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
            <property name="autoRaise">
             <bool>true</bool>
            </property>
@@ -53,6 +59,12 @@
            <property name="text">
             <string>View</string>
            </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
            <property name="popupMode">
             <enum>QToolButton::MenuButtonPopup</enum>
            </property>
@@ -68,6 +80,12 @@
           <widget class="QPushButton" name="fetch">
            <property name="text">
             <string>Fetch Missing Covers</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
            </property>
           </widget>
          </item>
