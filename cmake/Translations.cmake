@@ -35,6 +35,8 @@ macro(add_po outfiles po_prefix)
     ${ARGN}
   )
 
+  add_custom_target(po_all ALL)
+
   # Merge the .pot into .po files
   foreach (_lang ${ADD_PO_LANGUAGES})
     set(_po ${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PO_DIRECTORY}/${_lang}.po)
@@ -43,6 +45,7 @@ macro(add_po outfiles po_prefix)
           ${_po} ${ADD_PO_POT}
       DEPENDS ${_po})
     add_dependencies("po_${_lang}" pot)
+    add_dependencies(po_all "po_${_lang}")
   endforeach (_lang)
 
   # Convert the .po files to .qm files
