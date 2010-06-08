@@ -355,16 +355,18 @@ void SettingsDialog::ShowTrayIconToggled(bool on) {
     ui_.gst_group->setEnabled(true);
     ui_.replaygain_group->setEnabled(true);
   }
-
-  void SettingsDialog::GstPluginChanged(int index) {
-    QString name = ui_.gst_plugin->itemData(index).toString();
-
-    bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
-
-    ui_.gst_device->setEnabled(enabled);
-    ui_.gst_device_label->setEnabled(enabled);
-  }
 #endif // HAVE_GSTREAMER
+
+void SettingsDialog::GstPluginChanged(int index) {
+#ifdef HAVE_GSTREAMER
+  QString name = ui_.gst_plugin->itemData(index).toString();
+
+  bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
+
+  ui_.gst_device->setEnabled(enabled);
+  ui_.gst_device_label->setEnabled(enabled);
+#endif // HAVE_GSTREAMER
+}
 
 void SettingsDialog::RgPreampChanged(int value) {
   float db = float(value) / 10 - 15;

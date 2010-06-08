@@ -59,9 +59,7 @@ class SettingsDialog : public QDialog {
 
   void UpdatePopupVisible();
   void ShowTrayIconToggled(bool on);
-#ifdef HAVE_GSTREAMER
   void GstPluginChanged(int index);
-#endif
   void FadingOptionsChanged();
   void RgPreampChanged(int value);
 
