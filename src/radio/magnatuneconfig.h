@@ -14,27 +14,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LASTFMCONFIGDIALOG_H
-#define LASTFMCONFIGDIALOG_H
+#ifndef MAGNATUNECONFIG_H
+#define MAGNATUNECONFIG_H
 
-#include <QDialog>
+#include <QWidget>
 
-class Ui_LastFMConfigDialog;
+class Ui_MagnatuneConfig;
 
-class LastFMConfigDialog : public QDialog {
+class MagnatuneConfig : public QWidget {
   Q_OBJECT
- public:
-  LastFMConfigDialog(QWidget* parent = 0);
-  ~LastFMConfigDialog();
+public:
+  MagnatuneConfig(QWidget* parent = 0);
+  ~MagnatuneConfig();
 
-  void accept();
-  void showEvent(QShowEvent *);
+private slots:
+  void MembershipChanged(int value);
 
- private slots:
-  void ValidationComplete(bool success);
-
- private:
-  Ui_LastFMConfigDialog* ui_;
+private:
+  Ui_MagnatuneConfig* ui_;
 };
 
-#endif // LASTFMCONFIGDIALOG_H
+#endif // MAGNATUNECONFIG_H

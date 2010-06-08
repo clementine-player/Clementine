@@ -83,9 +83,9 @@ set(SOURCES
 
   radio/fixlastfm.cpp
   radio/lastfmconfig.cpp
-  radio/lastfmconfigdialog.cpp
   radio/lastfmservice.cpp
   radio/lastfmstationdialog.cpp
+  radio/magnatuneconfig.cpp
   radio/magnatuneplaylistitem.cpp
   radio/magnatuneservice.cpp
   radio/radioitem.cpp
@@ -188,9 +188,9 @@ set(HEADERS
   playlistparsers/xspfparser.h
 
   radio/lastfmconfig.h
-  radio/lastfmconfigdialog.h
   radio/lastfmservice.h
   radio/lastfmstationdialog.h
+  radio/magnatuneconfig.h
   radio/magnatuneservice.h
   radio/radiomimedata.h
   radio/radiomodel.h
@@ -246,8 +246,8 @@ set(UI
   playlist/playlistsequence.ui
 
   radio/lastfmconfig.ui
-  radio/lastfmconfigdialog.ui
   radio/lastfmstationdialog.ui
+  radio/magnatuneconfig.ui
   radio/radioviewcontainer.ui
 
   transcoder/transcodedialog.ui
@@ -363,7 +363,7 @@ qt4_wrap_cpp(MOC ${HEADERS})
 qt4_wrap_ui(UIC ${UI})
 qt4_add_resources(QRC ${RESOURCES})
 
-add_pot(POT
+add_pot(
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
   ${SOURCES} ${MOC} ${UIC}
@@ -380,8 +380,9 @@ add_library(clementine_lib
   ${UIC}
   ${QRC}
   ${PO}
-  ${POT}
 )
+
+add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
   qtsingleapplication

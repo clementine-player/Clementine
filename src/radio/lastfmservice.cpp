@@ -17,11 +17,11 @@
 #include "lastfmservice.h"
 #include "radioitem.h"
 #include "lastfmstationdialog.h"
-#include "lastfmconfigdialog.h"
 #include "radiomodel.h"
 #include "core/networkaccessmanager.h"
 #include "core/song.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -97,11 +97,7 @@ void LastFMService::ReloadSettings() {
 }
 
 void LastFMService::ShowConfig() {
-  if (!config_) {
-    config_.reset(new LastFMConfigDialog);
-  }
-
-  config_->show();
+  model()->settings_dialog()->OpenAtPage(SettingsDialog::Page_Lastfm);
 }
 
 bool LastFMService::IsAuthenticated() const {

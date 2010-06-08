@@ -29,6 +29,7 @@ class RadioService;
 class LastFMService;
 class MergedProxyModel;
 class Database;
+class SettingsDialog;
 
 class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
@@ -42,6 +43,9 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
     Role_SortText,
     Role_Key,
   };
+
+  // Initialisation
+  void SetSettingsDialog(SettingsDialog* settings_dialog) { settings_dialog_ = settings_dialog; }
 
   // Needs to be static for RadioPlaylistItem::restore
   static RadioService* ServiceByName(const QString& name);
@@ -70,6 +74,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   BackgroundThread<Database>* db_thread() const { return db_thread_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
   NetworkAccessManager* network() const { return network_; }
+  SettingsDialog* settings_dialog() const { return settings_dialog_; }
 
  signals:
   void TaskStarted(MultiLoadingIndicator::TaskType);
@@ -93,6 +98,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   BackgroundThread<Database>* db_thread_;
   MergedProxyModel* merged_model_;
   NetworkAccessManager* network_;
+  SettingsDialog* settings_dialog_;
 };
 
 #endif // RADIOMODEL_H

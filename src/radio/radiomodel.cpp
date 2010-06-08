@@ -33,7 +33,8 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
-    network_(network)
+    network_(network),
+    settings_dialog_(NULL)
 {
   Q_ASSERT(sServices.isEmpty());
 

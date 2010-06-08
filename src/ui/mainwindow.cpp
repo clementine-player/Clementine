@@ -138,6 +138,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_ = new Library(database_, this);
   cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
   settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
+  radio_model_->SetSettingsDialog(settings_dialog_.get());
 
   // Initialise the UI
   ui_->setupUi(this);

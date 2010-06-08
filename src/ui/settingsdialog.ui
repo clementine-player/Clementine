@@ -79,6 +79,15 @@
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Magnatune</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../data/data.qrc">
+        <normaloff>:/magnatune.png</normaloff>:/magnatune.png</iconset>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
@@ -96,7 +105,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>5</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -601,6 +610,19 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="magnatune_page">
+        <layout class="QVBoxLayout" name="verticalLayout_11">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="MagnatuneConfig" name="magnatune" native="true"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>
@@ -643,6 +665,12 @@
    <class>StickySlider</class>
    <extends>QSlider</extends>
    <header>widgets/stickyslider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MagnatuneConfig</class>
+   <extends>QWidget</extends>
+   <header>radio/magnatuneconfig.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

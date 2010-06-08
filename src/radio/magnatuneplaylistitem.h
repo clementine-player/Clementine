@@ -10,7 +10,10 @@ class MagnatunePlaylistItem : public LibraryPlaylistItem {
 
   bool InitFromQuery(const QSqlQuery &query);
 
+  Options options() const;
+
   QUrl Url() const;
+  SpecialLoadResult StartLoading();
 };
 
 #endif // MAGNATUNEPLAYLISTITEM_H

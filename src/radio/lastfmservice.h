@@ -30,7 +30,6 @@ uint qHash(const lastfm::Track& track);
 #include <lastfm/ws.h>
 
 #include "radioservice.h"
-#include "lastfmconfigdialog.h"
 #include "lastfmstationdialog.h"
 #include "core/song.h"
 
@@ -157,7 +156,6 @@ class LastFMService : public RadioService {
   lastfm::Track next_metadata_;
   QQueue<lastfm::Track> playlist_;
 
-  boost::scoped_ptr<LastFMConfigDialog> config_;
   boost::scoped_ptr<LastFMStationDialog> station_dialog_;
 
   boost::scoped_ptr<QMenu> context_menu_;

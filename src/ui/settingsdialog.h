@@ -20,12 +20,13 @@
 #include <QDialog>
 
 #include "config.h"
-#include "ui_settingsdialog.h"
 
 class LibraryDirectoryModel;
 class OSDPretty;
+class Ui_SettingsDialog;
+
 #ifdef HAVE_GSTREAMER
-class GstEngine;
+  class GstEngine;
 #endif
 
 class SettingsDialog : public QDialog {
@@ -35,10 +36,21 @@ class SettingsDialog : public QDialog {
   SettingsDialog(QWidget* parent = 0);
   ~SettingsDialog();
 
+  enum Page {
+    Page_Playback = 0,
+    Page_Behaviour,
+    Page_Notifications,
+    Page_Library,
+    Page_Lastfm,
+    Page_Magnatune,
+  };
+
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
 #ifdef HAVE_GSTREAMER
   void SetGstEngine(const GstEngine* engine);
 #endif
+
+  void OpenAtPage(Page page);
 
   // QDialog
   void accept();
@@ -64,7 +76,7 @@ class SettingsDialog : public QDialog {
   void RgPreampChanged(int value);
 
  private:
-  Ui::SettingsDialog ui_;
+  Ui_SettingsDialog* ui_;
   bool loading_settings_;
 
   OSDPretty* pretty_popup_;

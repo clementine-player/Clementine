@@ -35,11 +35,20 @@ class MagnatuneService : public RadioService {
   MagnatuneService(RadioModel* parent);
   ~MagnatuneService();
 
+  // Values are saved in QSettings
+  enum MembershipType {
+    Membership_None = 0,
+    Membership_Streaming = 1,
+    Membership_Download = 2,
+  };
+
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kDatabaseUrl;
   static const char* kSongsTable;
   static const char* kHomepage;
+  static const char* kStreamingHostname;
+  static const char* kDownloadHostname;
 
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
@@ -48,6 +57,12 @@ class MagnatuneService : public RadioService {
                        const QPoint& global_pos);
 
   bool SetupLibraryFilter(LibraryFilterWidget *) const;
+
+  void ReloadSettings();
+
+  // Magnatune specific stuff
+  MembershipType membership_type() const { return membership_; }
+  QUrl ModifyUrl(const QUrl& url) const;
 
  private slots:
   void UpdateTotalSongCount(int count) { total_song_count_ = count; }
@@ -71,6 +86,10 @@ class MagnatuneService : public RadioService {
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
+
+  MembershipType membership_;
+  QString username_;
+  QString password_;
 
   int total_song_count_;
 

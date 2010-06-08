@@ -9,9 +9,9 @@ set (XGETTEXT_OPTIONS --qt --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pa
     --keyword=N_ --flag=N_:1:pass-c-format --flag=N_:1:pass-qt-format
     --from-code=utf-8)
 
-macro(add_pot outfiles header pot)
+macro(add_pot header pot)
   # Generate the .pot
-  add_custom_command(OUTPUT ${pot}
+  add_custom_target(pot ALL
     COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
         ${XGETTEXT_OPTIONS} -C --omit-header --no-location
         --directory=${CMAKE_CURRENT_SOURCE_DIR}
@@ -20,7 +20,6 @@ macro(add_pot outfiles header pot)
     COMMAND cat ${header} ${CMAKE_CURRENT_BINARY_DIR}/pot.temp > ${pot}
     DEPENDS ${ARGN}
   )
-  list(APPEND ${outfiles} ${pot})
 endmacro(add_pot)
 
 # Syntax is:
@@ -43,7 +42,7 @@ macro(add_po outfiles po_prefix)
       COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location --no-fuzzy-matching --backup=off
           ${_po} ${ADD_PO_POT}
       DEPENDS ${_po})
-    add_dependencies("po_${_lang}" ${ADD_PO_POT})
+    add_dependencies("po_${_lang}" pot)
   endforeach (_lang)
 
   # Convert the .po files to .qm files

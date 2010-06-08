@@ -34,6 +34,7 @@
 #include <QMenu>
 #include <QDesktopServices>
 #include <QCoreApplication>
+#include <QSettings>
 
 #include <QtDebug>
 
@@ -45,6 +46,8 @@ const char* MagnatuneService::kDatabaseUrl =
     "http://magnatune.com/info/song_info_xml.gz";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
 const char* MagnatuneService::kHomepage = "http://magnatune.com";
+const char* MagnatuneService::kStreamingHostname = "streaming.magnatune.com";
+const char* MagnatuneService::kDownloadHostname = "download.magnatune.com";
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
@@ -53,9 +56,12 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     library_backend_(NULL),
     library_model_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
+    membership_(Membership_None),
     total_song_count_(0),
     network_(parent->network()->network())
 {
+  ReloadSettings();
+
   // Create the library backend in the database thread
   library_backend_ = parent->db_thread()->CreateInThread<LibraryBackend>();
   library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
@@ -81,6 +87,15 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
 
 MagnatuneService::~MagnatuneService() {
   delete context_menu_;
+}
+
+void MagnatuneService::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  membership_ = MembershipType(s.value("membership", Membership_None).toInt());
+  username_ = s.value("username").toString();
+  password_ = s.value("password").toString();
 }
 
 RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
@@ -254,4 +269,23 @@ bool MagnatuneService::SetupLibraryFilter(LibraryFilterWidget* w) const {
   w->SetConfigDialogEnabled(false);
 
   return true;
+}
+
+QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
+  QUrl ret(url);
+
+  switch(membership_) {
+    case Membership_None:
+      return ret;
+    case Membership_Streaming:
+      ret.setHost(kStreamingHostname);
+      break;
+    case Membership_Download:
+      ret.setHost(kDownloadHostname);
+      break;
+  }
+
+  ret.setUserName(username_);
+  ret.setPassword(password_);
+  return ret;
 }

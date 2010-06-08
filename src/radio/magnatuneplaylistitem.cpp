@@ -1,4 +1,6 @@
 #include "magnatuneplaylistitem.h"
+#include "magnatuneservice.h"
+#include "radiomodel.h"
 
 MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)
   : LibraryPlaylistItem(type)
@@ -18,6 +20,18 @@ bool MagnatunePlaylistItem::InitFromQuery(const QSqlQuery &query) {
   return song_.is_valid();
 }
 
+PlaylistItem::Options MagnatunePlaylistItem::options() const {
+  return SpecialPlayBehaviour;
+}
+
 QUrl MagnatunePlaylistItem::Url() const {
   return QUrl::fromEncoded(song_.filename().toAscii());
+}
+
+PlaylistItem::SpecialLoadResult MagnatunePlaylistItem::StartLoading() {
+  MagnatuneService* service = RadioModel::Service<MagnatuneService>();
+  QUrl url(Url());
+
+  return SpecialLoadResult(PlaylistItem::SpecialLoadResult::TrackAvailable,
+                           url, service->ModifyUrl(url));
 }
