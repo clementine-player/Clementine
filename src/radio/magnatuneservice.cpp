@@ -278,7 +278,9 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
 
   switch(membership_) {
     case Membership_None:
-      return ret;
+      return ret; // Use the URL as-is
+
+    // Otherwise add the hostname
     case Membership_Streaming:
       ret.setHost(kStreamingHostname);
       break;
@@ -287,8 +289,14 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
       break;
   }
 
+  // Add the credentials
   ret.setUserName(username_);
   ret.setPassword(password_);
-  qDebug() << url << "becomes" << ret;
+
+  // And remove the commercial
+  QString path = ret.path();
+  path.insert(path.lastIndexOf('.'), "_nospeech");
+  ret.setPath(path);
+
   return ret;
 }
