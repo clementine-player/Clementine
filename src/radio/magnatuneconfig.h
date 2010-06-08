@@ -27,6 +27,10 @@ public:
   MagnatuneConfig(QWidget* parent = 0);
   ~MagnatuneConfig();
 
+public slots:
+  void Load();
+  void Save();
+
 private slots:
   void MembershipChanged(int value);
 

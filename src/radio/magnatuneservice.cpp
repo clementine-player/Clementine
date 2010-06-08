@@ -57,6 +57,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     library_model_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     membership_(Membership_None),
+    format_(Format_Ogg),
     total_song_count_(0),
     network_(parent->network()->network())
 {
@@ -96,6 +97,7 @@ void MagnatuneService::ReloadSettings() {
   membership_ = MembershipType(s.value("membership", Membership_None).toInt());
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
+  format_ = PreferredFormat(s.value("format", Format_Ogg).toInt());
 }
 
 RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
@@ -287,5 +289,6 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
 
   ret.setUserName(username_);
   ret.setPassword(password_);
+  qDebug() << url << "becomes" << ret;
   return ret;
 }

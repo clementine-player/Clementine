@@ -178,6 +178,7 @@ void SettingsDialog::accept() {
   s.endGroup();
 
   ui_->library_config->Save();
+  ui_->magnatune->Save();
 
   QDialog::accept();
 }
@@ -200,6 +201,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
 
   // Last.fm
   ui_->lastfm->Load();
+
+  // Magnatune
+  ui_->magnatune->Load();
 
   // Playback
   s.beginGroup(Engine::Base::kSettingsGroup);

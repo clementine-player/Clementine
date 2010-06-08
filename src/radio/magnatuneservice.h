@@ -35,11 +35,22 @@ class MagnatuneService : public RadioService {
   MagnatuneService(RadioModel* parent);
   ~MagnatuneService();
 
-  // Values are saved in QSettings
+  // Values are saved in QSettings and are indices into the combo box in
+  // MagnatuneConfig
   enum MembershipType {
     Membership_None = 0,
     Membership_Streaming = 1,
     Membership_Download = 2,
+  };
+
+  // Values are saved in QSettings and are indices into the combo box in
+  // MagnatuneConfig
+  enum PreferredFormat {
+    Format_Ogg = 0,
+    Format_Flac = 1,
+    Format_Wav = 2,
+    Format_MP3_VBR = 3,
+    Format_MP3_128 = 4,
   };
 
   static const char* kServiceName;
@@ -90,6 +101,7 @@ class MagnatuneService : public RadioService {
   MembershipType membership_;
   QString username_;
   QString password_;
+  PreferredFormat format_;
 
   int total_song_count_;
 

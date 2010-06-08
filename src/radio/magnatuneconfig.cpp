@@ -16,7 +16,10 @@
 
 #include "magnatuneconfig.h"
 #include "magnatuneservice.h"
+#include "radiomodel.h"
 #include "ui_magnatuneconfig.h"
+
+#include <QSettings>
 
 MagnatuneConfig::MagnatuneConfig(QWidget *parent)
   : QWidget(parent),
@@ -29,6 +32,28 @@ MagnatuneConfig::MagnatuneConfig(QWidget *parent)
 
 MagnatuneConfig::~MagnatuneConfig() {
   delete ui_;
+}
+
+void MagnatuneConfig::Load() {
+  QSettings s;
+  s.beginGroup(MagnatuneService::kSettingsGroup);
+
+  ui_->membership->setCurrentIndex(s.value("membership", MagnatuneService::Membership_None).toInt());
+  ui_->username->setText(s.value("username").toString());
+  ui_->password->setText(s.value("password").toString());
+  ui_->format->setCurrentIndex(s.value("format", MagnatuneService::Format_Ogg).toInt());
+}
+
+void MagnatuneConfig::Save() {
+  QSettings s;
+  s.beginGroup(MagnatuneService::kSettingsGroup);
+
+  s.setValue("membership", ui_->membership->currentIndex());
+  s.setValue("username", ui_->username->text());
+  s.setValue("password", ui_->password->text());
+  s.setValue("format", ui_->format->currentIndex());
+
+  RadioModel::Service<MagnatuneService>()->ReloadSettings();
 }
 
 void MagnatuneConfig::MembershipChanged(int value) {
