@@ -28,8 +28,8 @@ macro(add_engine engine lib_list src_list moc_list supported)
     set("HAVE_${name}" 1 CACHE INTERNAL ${name})
 
     # add sources and MOC headers
-    list(APPEND ENGINES-SOURCES ${src_list})
-    list(APPEND ENGINES-HEADERS ${moc_list})
+    list(APPEND SOURCES ${src_list})
+    list(APPEND HEADERS ${moc_list})
 
     # add libraries to link against
     foreach(lib ${lib_list})
@@ -69,6 +69,11 @@ macro(print_engines)
 
   message(STATUS "Building engines:${ENGINES_ENABLED}")
   message(STATUS "Skipping engines:${ENGINES_DISABLED}")
+
+  # need at least 1 engine
+  if(NOT ENGINES_ENABLED)
+    message(FATAL_ERROR "no engine enabled!")
+  endif(NOT ENGINES_ENABLED)
 endmacro(print_engines)
 
 # print the pig :)

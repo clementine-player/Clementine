@@ -18,7 +18,7 @@
 
 #include <QCoreApplication>
 
-#include "mpris_root.h"
+#include "core/mpris_root.h"
 
 QDBusArgument& operator<< (QDBusArgument& arg, const Version& version) {
   arg.beginStructure();

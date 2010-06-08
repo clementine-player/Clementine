@@ -4,72 +4,390 @@ set(CMAKE_C_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "-Wnon-virtual-dtor -Woverloaded-virtual -Wall")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qtsingleapplication")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qtiocompressor")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/qxt")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest/include")
+include_directories(${SPARKLE})
+include_directories(../3rdparty/gmock/gtest/include)
+include_directories(../3rdparty/qtsingleapplication)
+include_directories(../3rdparty/qtiocompressor)
+include_directories(../3rdparty/qxt)
+include_directories(../3rdparty/libprojectm)
 
-# These can be seen from child scopes
-set(CLEMENTINE-TRANSLATION-SOURCE CACHE INTERNAL foo)
-set(CLEMENTINE-TRANSLATION-DEPS CACHE INTERNAL foo)
+cmake_policy(SET CMP0011 NEW)
+include(../cmake/AddEngine.cmake)
+include(../cmake/ParseArguments.cmake)
+include(../cmake/Translations.cmake)
 
-macro(add_translation_source subdirectory)
-  get_filename_component(_translations_dir ${CMAKE_CURRENT_SOURCE_DIR}/../translations ABSOLUTE)
-  foreach(_file ${ARGN})
-    get_filename_component(_dep ${_file} ABSOLUTE)
-    if (IS_ABSOLUTE ${_file})
-      file(RELATIVE_PATH _relative ${_translations_dir} ${_file})
-    else (IS_ABSOLUTE ${_file})
-      set(_relative "../${subdirectory}/${_file}")
-    endif (IS_ABSOLUTE ${_file})
-    set(CLEMENTINE-TRANSLATION-SOURCE ${CLEMENTINE-TRANSLATION-SOURCE} ${_relative} CACHE INTERNAL foo)
-    set(CLEMENTINE-TRANSLATION-DEPS ${CLEMENTINE-TRANSLATION-DEPS} ${_dep} CACHE INTERNAL foo)
-  endforeach(_file)
-endmacro(add_translation_source)
+set(SOURCES
+  analyzers/analyzerbase.cpp
+  analyzers/analyzercontainer.cpp
+  analyzers/baranalyzer.cpp
+  analyzers/blockanalyzer.cpp
+  analyzers/boomanalyzer.cpp
+  analyzers/sonogram.cpp
+  analyzers/turbine.cpp
 
-add_subdirectory(analyzers)
-add_subdirectory(core)
-add_subdirectory(engines)
-add_subdirectory(library)
-add_subdirectory(playlist)
-add_subdirectory(playlistparsers)
-add_subdirectory(radio)
-add_subdirectory(transcoder)
-add_subdirectory(ui)
-add_subdirectory(visualisations)
-add_subdirectory(widgets)
-add_subdirectory(translations)
+  core/albumcoverfetcher.cpp
+  core/albumcoverloader.cpp
+  core/backgroundthread.cpp
+  core/commandlineoptions.cpp
+  core/database.cpp
+  core/fht.cpp
+  core/globalshortcutbackend.cpp
+  core/globalshortcuts.cpp
+  core/gnomeglobalshortcutbackend.cpp
+  core/mergedproxymodel.cpp
+  core/networkaccessmanager.cpp
+  core/player.cpp
+  core/qxtglobalshortcutbackend.cpp
+  core/scopedtransaction.cpp
+  core/settingsprovider.cpp
+  core/song.cpp
+  core/stylesheetloader.cpp
+  core/utilities.cpp
+
+  engines/enginebase.cpp
+
+  library/groupbydialog.cpp
+  library/library.cpp
+  library/librarybackend.cpp
+  library/libraryconfig.cpp
+  library/libraryconfigdialog.cpp
+  library/librarydirectorymodel.cpp
+  library/libraryfilterwidget.cpp
+  library/librarymodel.cpp
+  library/libraryplaylistitem.cpp
+  library/libraryquery.cpp
+  library/libraryview.cpp
+  library/librarywatcher.cpp
+
+  playlist/playlist.cpp
+  playlist/playlistbackend.cpp
+  playlist/playlistcontainer.cpp
+  playlist/playlistdelegates.cpp
+  playlist/playlistfilter.cpp
+  playlist/playlistheader.cpp
+  playlist/playlistitem.cpp
+  playlist/playlistmanager.cpp
+  playlist/playlistsequence.cpp
+  playlist/playlisttabbar.cpp
+  playlist/playlistundocommands.cpp
+  playlist/playlistview.cpp
+  playlist/songplaylistitem.cpp
+
+  playlistparsers/asxparser.cpp
+  playlistparsers/m3uparser.cpp
+  playlistparsers/parserbase.cpp
+  playlistparsers/playlistparser.cpp
+  playlistparsers/plsparser.cpp
+  playlistparsers/xmlparser.cpp
+  playlistparsers/xspfparser.cpp
+
+  radio/fixlastfm.cpp
+  radio/lastfmconfig.cpp
+  radio/lastfmconfigdialog.cpp
+  radio/lastfmservice.cpp
+  radio/lastfmstationdialog.cpp
+  radio/magnatuneplaylistitem.cpp
+  radio/magnatuneservice.cpp
+  radio/radioitem.cpp
+  radio/radiomodel.cpp
+  radio/radioplaylistitem.cpp
+  radio/radioservice.cpp
+  radio/radioview.cpp
+  radio/radioviewcontainer.cpp
+  radio/savedradio.cpp
+  radio/somafmservice.cpp
+
+  transcoder/transcodedialog.cpp
+  transcoder/transcoder.cpp
+  transcoder/transcoderformats.cpp
+
+  ui/about.cpp
+  ui/addstreamdialog.cpp
+  ui/albumcovermanager.cpp
+  ui/edittagdialog.cpp
+  ui/equalizer.cpp
+  ui/globalshortcutgrabber.cpp
+  ui/globalshortcutsdialog.cpp
+  ui/iconloader.cpp
+  ui/mainwindow.cpp
+  ui/settingsdialog.cpp
+  ui/systemtrayicon.cpp
+
+  visualisations/projectmpresetmodel.cpp
+  visualisations/projectmvisualisation.cpp
+  visualisations/visualisationcontainer.cpp
+  visualisations/visualisationoverlay.cpp
+  visualisations/visualisationselector.cpp
+
+  widgets/autoexpandingtreeview.cpp
+  widgets/busyindicator.cpp
+  widgets/equalizerslider.cpp
+  widgets/errordialog.cpp
+  widgets/fileview.cpp
+  widgets/fileviewlist.cpp
+  widgets/lineedit.cpp
+  widgets/multiloadingindicator.cpp
+  widgets/osd.cpp
+  widgets/osdpretty.cpp
+  widgets/sliderwidget.cpp
+  widgets/spinbox.cpp
+  widgets/stickyslider.cpp
+  widgets/trackslider.cpp
+  widgets/tracksliderslider.cpp
+)
+
+set(HEADERS
+  analyzers/analyzerbase.h
+  analyzers/analyzercontainer.h
+  analyzers/baranalyzer.h
+  analyzers/blockanalyzer.h
+  analyzers/boomanalyzer.h
+  analyzers/sonogram.h
+  analyzers/turbine.h
+
+  core/albumcoverfetcher.h
+  core/albumcoverloader.h
+  core/backgroundthread.h
+  core/database.h
+  core/globalshortcuts.h
+  core/gnomeglobalshortcutbackend.h
+  core/mergedproxymodel.h
+  core/networkaccessmanager.h
+  core/player.h
+
+  engines/enginebase.h
+
+  library/groupbydialog.h
+  library/library.h
+  library/librarybackend.h
+  library/libraryconfig.h
+  library/libraryconfigdialog.h
+  library/librarydirectorymodel.h
+  library/libraryfilterwidget.h
+  library/librarymodel.h
+  library/libraryview.h
+  library/librarywatcher.h
+
+  playlist/playlist.h
+  playlist/playlistbackend.h
+  playlist/playlistcontainer.h
+  playlist/playlistdelegates.h
+  playlist/playlistfilter.h
+  playlist/playlistheader.h
+  playlist/playlistmanager.h
+  playlist/playlistsequence.h
+  playlist/playlisttabbar.h
+  playlist/playlistview.h
+  playlist/songmimedata.h
+
+  playlistparsers/asxparser.h
+  playlistparsers/m3uparser.h
+  playlistparsers/parserbase.h
+  playlistparsers/playlistparser.h
+  playlistparsers/plsparser.h
+  playlistparsers/xspfparser.h
+
+  radio/lastfmconfig.h
+  radio/lastfmconfigdialog.h
+  radio/lastfmservice.h
+  radio/lastfmstationdialog.h
+  radio/magnatuneservice.h
+  radio/radiomimedata.h
+  radio/radiomodel.h
+  radio/radioservice.h
+  radio/radioview.h
+  radio/radioviewcontainer.h
+  radio/savedradio.h
+  radio/somafmservice.h
+
+  transcoder/transcodedialog.h
+  transcoder/transcoder.h
+
+  ui/about.h
+  ui/addstreamdialog.h
+  ui/albumcovermanager.h
+  ui/edittagdialog.h
+  ui/equalizer.h
+  ui/globalshortcutgrabber.h
+  ui/globalshortcutsdialog.h
+  ui/mainwindow.h
+  ui/settingsdialog.h
+  ui/systemtrayicon.h
+
+  visualisations/projectmpresetmodel.h
+  visualisations/projectmvisualisation.h
+  visualisations/visualisationcontainer.h
+  visualisations/visualisationoverlay.h
+  visualisations/visualisationselector.h
+
+  widgets/autoexpandingtreeview.h
+  widgets/busyindicator.h
+  widgets/equalizerslider.h
+  widgets/errordialog.h
+  widgets/fileview.h
+  widgets/fileviewlist.h
+  widgets/lineedit.h
+  widgets/multiloadingindicator.h
+  widgets/osd.h
+  widgets/osdpretty.h
+  widgets/sliderwidget.h
+  widgets/spinbox.h
+  widgets/stickyslider.h
+  widgets/trackslider.h
+)
+
+set(UI
+  library/groupbydialog.ui
+  library/libraryconfig.ui
+  library/libraryconfigdialog.ui
+  library/libraryfilterwidget.ui
+
+  playlist/playlistcontainer.ui
+  playlist/playlistsequence.ui
+
+  radio/lastfmconfig.ui
+  radio/lastfmconfigdialog.ui
+  radio/lastfmstationdialog.ui
+  radio/radioviewcontainer.ui
+
+  transcoder/transcodedialog.ui
+  transcoder/transcodelogdialog.ui
+
+  ui/about.ui
+  ui/addstreamdialog.ui
+  ui/albumcovermanager.ui
+  ui/edittagdialog.ui
+  ui/equalizer.ui
+  ui/globalshortcutgrabber.ui
+  ui/globalshortcutsdialog.ui
+  ui/mainwindow.ui
+  ui/settingsdialog.ui
+
+  visualisations/visualisationoverlay.ui
+  visualisations/visualisationselector.ui
+
+  widgets/equalizerslider.ui
+  widgets/errordialog.ui
+  widgets/fileview.ui
+  widgets/multiloadingindicator.ui
+  widgets/osdpretty.ui
+  widgets/trackslider.ui
+)
+
+set(RESOURCES
+  ../data/data.qrc
+)
+
+set(LANGUAGES
+  ar
+  cs
+  da
+  de
+  el
+  en_CA
+  en_GB
+  es
+  fi
+  fr
+  gl
+  it
+  kk
+  nb
+  oc
+  pl
+  pt
+  pt_BR
+  ro
+  ru
+  sk
+  sv
+  tr
+  zh_CN
+  zh_TW
+)
+
+# Engines
+set(GST_ENGINE_SRC engines/gstengine.cpp engines/gstequalizer.cpp engines/gstenginepipeline.cpp)
+set(GST_ENGINE_MOC engines/gstengine.h engines/gstenginepipeline.h)
+set(GST_ENGINE_LIB GSTREAMER GSTREAMER_BASE)
+set(XINE_ENGINE_SRC engines/xine-engine.cpp engines/xine-scope.c)
+set(XINE_ENGINE_MOC engines/xine-engine.h)
+
+add_engine(gst "${GST_ENGINE_LIB}" "${GST_ENGINE_SRC}" "${GST_ENGINE_MOC}" ON)
+add_engine(vlc LIBVLC engines/vlcengine.cpp engines/vlcengine.h OFF)
+add_engine(xine LIBXINE "${XINE_ENGINE_SRC}" "${XINE_ENGINE_MOC}" OFF)
+add_engine(qt-phonon QT_PHONON engines/phononengine.cpp engines/phononengine.h OFF)
+print_engines()
+
+# OSDs
+if(APPLE)
+  list(APPEND SOURCES widgets/osd_mac.mm)
+  include_directories(${GROWL}/Headers)
+else(APPLE)
+  if(WIN32)
+    list(APPEND SOURCES widgets/osd_win.cpp)
+  else(WIN32)
+    list(APPEND SOURCES widgets/osd_x11.cpp)
+  endif(WIN32)
+endif(APPLE)
+
+# MPRIS - Linux specific
+if(NOT APPLE AND NOT WIN32)
+  qt4_add_dbus_adaptor(SOURCES
+      ../data/org.freedesktop.MediaPlayer.player.xml
+      core/player.h Player core/mpris_player MprisPlayer)
+  qt4_add_dbus_adaptor(SOURCES
+      ../data/org.freedesktop.MediaPlayer.root.xml
+      core/mpris.h MPRIS core/mpris_root MprisRoot)
+  qt4_add_dbus_adaptor(SOURCES
+      ../data/org.freedesktop.MediaPlayer.tracklist.xml
+      core/player.h Player core/mpris_tracklist MprisTrackList)
+
+  # org.freedesktop.Notifications
+  qt4_add_dbus_interface(SOURCES
+      ../data/org.freedesktop.Notifications.xml
+      core/notification)
+  list(APPEND SOURCES core/mpris.cpp)
+  list(APPEND HEADERS core/mpris.h)
+endif(NOT APPLE AND NOT WIN32)
+
+# Mac specific startup stuff
+if(APPLE)
+  list(APPEND SOURCES core/mac_startup.mm)
+endif(APPLE)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-set(CLEMENTINE-RESOURCES
-  ../data/data.qrc
+qt4_wrap_cpp(MOC ${HEADERS})
+qt4_wrap_ui(UIC ${UI})
+qt4_add_resources(QRC ${RESOURCES})
+
+add_pot(POT
+  ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
+  ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
+  ${SOURCES} ${MOC} ${UIC}
+)
+add_po(PO clementine_
+  POT ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
+  LANGUAGES ${LANGUAGES}
+  DIRECTORY translations
 )
 
-qt4_wrap_cpp(CLEMENTINE-SOURCES-MOC ${CLEMENTINE-MOC-HEADERS})
-qt4_wrap_ui(CLEMENTINE-SOURCES-UI ${CLEMENTINE-UI})
-qt4_add_resources(CLEMENTINE-SOURCES-RESOURCE ${CLEMENTINE-RESOURCES})
-
 add_library(clementine_lib
-  ${CLEMENTINE-SOURCES-RESOURCE}
+  ${SOURCES}
+  ${MOC}
+  ${UIC}
+  ${QRC}
+  ${PO}
+  ${POT}
 )
 
 target_link_libraries(clementine_lib
-  clementine_analyzers
-  clementine_core
-  clementine_engines
-  clementine_library
-  clementine_playlist
-  clementine_playlistparsers
-  clementine_radio
-  clementine_transcoder
-  clementine_ui
-  clementine_widgets
-  clementine_translations
   qtsingleapplication
   qtiocompressor
   chardet
+  projectM
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}

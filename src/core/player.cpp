@@ -36,8 +36,8 @@
 #endif
 
 #ifdef Q_WS_X11
-#  include "mpris_player.h"
-#  include "mpris_tracklist.h"
+#  include "core/mpris_player.h"
+#  include "core/mpris_tracklist.h"
 #  include <QDBusConnection>
 #endif
 

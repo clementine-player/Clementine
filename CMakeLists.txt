@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
 include(FindPkgConfig)
-include(Version.cmake)
+include(cmake/Version.cmake)
 
 if (CMAKE_FIND_ROOT_PATH)
   # Help find the Qt headers if we're cross compiling (since we can't run qmake.exe)
