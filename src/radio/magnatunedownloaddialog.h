@@ -1,0 +1,72 @@
+/* This file is part of Clementine.
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef MAGNATUNEDOWNLOADDIALOG_H
+#define MAGNATUNEDOWNLOADDIALOG_H
+
+#include <QDialog>
+#include <QNetworkReply>
+#include <QStringList>
+
+#include <boost/scoped_ptr.hpp>
+
+#include "core/song.h"
+
+class MagnatuneService;
+class Ui_MagnatuneDownloadDialog;
+
+class QFile;
+class QXmlStreamReader;
+
+class MagnatuneDownloadDialog : public QDialog {
+  Q_OBJECT
+public:
+  MagnatuneDownloadDialog(MagnatuneService* service, QWidget *parent = 0);
+  ~MagnatuneDownloadDialog();
+
+  void Show(const SongList& songs);
+
+public slots:
+  void accept();
+
+private slots:
+  void Browse();
+
+  void DownloadNext();
+  void Error(QNetworkReply::NetworkError);
+  void MetadataFinished();
+  void DownloadProgress(qint64 received, qint64 total);
+  void DownloadReadyRead();
+  void DownloadFinished();
+
+  void ShowError(const QString& message);
+  void AllFinished(bool error);
+
+private:
+  QString GetOutputFilename();
+
+private:
+  Ui_MagnatuneDownloadDialog* ui_;
+  MagnatuneService* service_;
+
+  QNetworkAccessManager* network_;
+  QNetworkReply* current_reply_;
+  boost::scoped_ptr<QFile> download_file_;
+
+  int next_row_;
+};
+
+#endif // MAGNATUNEDOWNLOADDIALOG_H

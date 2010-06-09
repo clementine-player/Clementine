@@ -60,6 +60,10 @@ class MagnatuneService : public RadioService {
   static const char* kHomepage;
   static const char* kStreamingHostname;
   static const char* kDownloadHostname;
+  static const char* kPartnerId;
+  static const char* kDownloadUrl;
+
+  static QString ReadElementText(QXmlStreamReader& reader);
 
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
@@ -73,6 +77,10 @@ class MagnatuneService : public RadioService {
 
   // Magnatune specific stuff
   MembershipType membership_type() const { return membership_; }
+  PreferredFormat preferred_format() const { return format_; }
+  QString username() const { return username_; }
+  QString password() const { return password_; }
+
   QUrl ModifyUrl(const QUrl& url) const;
 
  private slots:
@@ -81,11 +89,12 @@ class MagnatuneService : public RadioService {
   void ReloadDatabaseFinished();
 
   void AddToPlaylist();
+  void Download();
   void Homepage();
+  void ShowConfig();
 
  private:
   Song ReadTrack(QXmlStreamReader& reader);
-  QString ReadElementText(QXmlStreamReader& reader);
 
  private:
   RadioItem* root_;
@@ -93,6 +102,7 @@ class MagnatuneService : public RadioService {
   QModelIndex context_item_;
 
   QAction* add_to_playlist_;
+  QAction* download_;
 
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;

@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "magnatunedownloaddialog.h"
 #include "magnatuneplaylistitem.h"
 #include "magnatuneservice.h"
 #include "radiomodel.h"
@@ -24,6 +25,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
 #include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -42,12 +44,15 @@ using boost::shared_ptr;
 
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kSettingsGroup = "Magnatune";
-const char* MagnatuneService::kDatabaseUrl =
-    "http://magnatune.com/info/song_info_xml.gz";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
+
 const char* MagnatuneService::kHomepage = "http://magnatune.com";
+const char* MagnatuneService::kDatabaseUrl = "http://magnatune.com/info/song_info_xml.gz";
 const char* MagnatuneService::kStreamingHostname = "streaming.magnatune.com";
 const char* MagnatuneService::kDownloadHostname = "download.magnatune.com";
+
+const char* MagnatuneService::kPartnerId = "rhythmbox"; // TODO: Get a proper one
+const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/membership_free_dl_xml";
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
@@ -79,9 +84,12 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
 
   add_to_playlist_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  download_ = context_menu_->addAction(
+      IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+  context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
 
   library_model_->Init();
 }
@@ -189,17 +197,19 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       break;
 
     if (reader.tokenType() == QXmlStreamReader::StartElement) {
+      QStringRef name = reader.name();
       QString value = ReadElementText(reader);
 
-      if (reader.name() == "artist")          song.set_artist(value);
-      if (reader.name() == "albumname")       song.set_album(value);
-      if (reader.name() == "trackname")       song.set_title(value);
-      if (reader.name() == "tracknum")        song.set_track(value.toInt());
-      if (reader.name() == "year")            song.set_year(value.toInt());
-      if (reader.name() == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
-      if (reader.name() == "seconds")         song.set_length(value.toInt());
-      if (reader.name() == "url")             song.set_filename(value);
-      if (reader.name() == "cover_small")     song.set_art_automatic(value);
+      if (name == "artist")          song.set_artist(value);
+      if (name == "albumname")       song.set_album(value);
+      if (name == "trackname")       song.set_title(value);
+      if (name == "tracknum")        song.set_track(value.toInt());
+      if (name == "year")            song.set_year(value.toInt());
+      if (name == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
+      if (name == "seconds")         song.set_length(value.toInt());
+      if (name == "url")             song.set_filename(value);
+      if (name == "cover_small")     song.set_art_automatic(value);
+      if (name == "albumsku")        song.set_comment(value);
     }
   }
 
@@ -243,6 +253,7 @@ void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
     context_item_ = QModelIndex();
 
   add_to_playlist_->setEnabled(context_item_.isValid());
+  download_->setEnabled(context_item_.isValid() && membership_ == Membership_Download);
   context_menu_->popup(global_pos);
 }
 
@@ -299,4 +310,17 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
   ret.setPath(path);
 
   return ret;
+}
+
+void MagnatuneService::ShowConfig() {
+  model()->settings_dialog()->OpenAtPage(SettingsDialog::Page_Magnatune);
+}
+
+void MagnatuneService::Download() {
+  QModelIndex index = library_sort_model_->mapToSource(context_item_);
+  SongList songs = library_model_->GetChildSongs(index);
+
+  MagnatuneDownloadDialog* dialog = new MagnatuneDownloadDialog(this, 0);
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  dialog->Show(songs);
 }

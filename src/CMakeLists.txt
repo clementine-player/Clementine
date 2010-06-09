@@ -85,6 +85,7 @@ set(SOURCES
   radio/lastfmservice.cpp
   radio/lastfmstationdialog.cpp
   radio/magnatuneconfig.cpp
+  radio/magnatunedownloaddialog.cpp
   radio/magnatuneplaylistitem.cpp
   radio/magnatuneservice.cpp
   radio/radioitem.cpp
@@ -128,6 +129,7 @@ set(SOURCES
   widgets/multiloadingindicator.cpp
   widgets/osd.cpp
   widgets/osdpretty.cpp
+  widgets/progressitemdelegate.cpp
   widgets/sliderwidget.cpp
   widgets/spinbox.cpp
   widgets/stickyslider.cpp
@@ -189,6 +191,7 @@ set(HEADERS
   radio/lastfmservice.h
   radio/lastfmstationdialog.h
   radio/magnatuneconfig.h
+  radio/magnatunedownloaddialog.h
   radio/magnatuneservice.h
   radio/radiomimedata.h
   radio/radiomodel.h
@@ -228,6 +231,7 @@ set(HEADERS
   widgets/multiloadingindicator.h
   widgets/osd.h
   widgets/osdpretty.h
+  widgets/progressitemdelegate.h
   widgets/sliderwidget.h
   widgets/spinbox.h
   widgets/stickyslider.h
@@ -245,6 +249,7 @@ set(UI
   radio/lastfmconfig.ui
   radio/lastfmstationdialog.ui
   radio/magnatuneconfig.ui
+  radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
 
   transcoder/transcodedialog.ui
