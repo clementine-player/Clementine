@@ -51,7 +51,7 @@ const char* MagnatuneService::kDatabaseUrl = "http://magnatune.com/info/song_inf
 const char* MagnatuneService::kStreamingHostname = "streaming.magnatune.com";
 const char* MagnatuneService::kDownloadHostname = "download.magnatune.com";
 
-const char* MagnatuneService::kPartnerId = "rhythmbox"; // TODO: Get a proper one
+const char* MagnatuneService::kPartnerId = "clementine";
 const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/membership_free_dl_xml";
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
