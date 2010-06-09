@@ -26,6 +26,7 @@
 #include <QWhatsThis>
 #include <QHelpEvent>
 #include <QHeaderView>
+#include <QScrollBar>
 
 const int PlaylistDelegateBase::kMinHeight = 19;
 
@@ -66,7 +67,10 @@ QSize PlaylistDelegateBase::sizeHint(const QStyleOptionViewItem &option, const Q
 void PlaylistDelegateBase::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
   QStyledItemDelegate::paint(painter, Adjusted(option, index), index);
 
-  if (view_->header()->logicalIndexAt(QPoint(0,0)) == index.column()) {
+  QPoint top_left(-view_->horizontalScrollBar()->value(),
+                  -view_->verticalScrollBar()->value());
+
+  if (view_->header()->logicalIndexAt(top_left) == index.column()) {
     if (index.data(Playlist::Role_StopAfter).toBool()) {
       QColor color(Qt::white);
       if (!index.data(Playlist::Role_IsCurrent).toBool() &&
@@ -91,7 +95,10 @@ void PlaylistDelegateBase::paint(QPainter* painter, const QStyleOptionViewItem& 
 }
 
 QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(const QStyleOptionViewItem& option, const QModelIndex& index) const {
-  if (view_->header()->logicalIndexAt(QPoint(0,0)) != index.column())
+  QPoint top_left(-view_->horizontalScrollBar()->value(),
+                  -view_->verticalScrollBar()->value());
+
+  if (view_->header()->logicalIndexAt(top_left) != index.column())
     return option;
 
   QStyleOptionViewItemV4 ret(option);

@@ -396,6 +396,10 @@ void PlaylistView::mousePressEvent(QMouseEvent *event) {
 }
 
 void PlaylistView::scrollContentsBy(int dx, int dy) {
+  if (dx) {
+    InvalidateCachedCurrentPixmap();
+  }
+
   QTreeView::scrollContentsBy(dx, dy);
 
   if (!currently_autoscrolling_) {
