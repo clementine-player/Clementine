@@ -309,18 +309,18 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
   connect(ui_->library_view, SIGNAL(Load(QModelIndex)), SLOT(LoadLibraryItemToPlaylist(QModelIndex)));
   connect(ui_->library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
-  connect(ui_->library_view, SIGNAL(ShowConfigDialog()), ui_->library_filter, SLOT(ShowConfigDialog()));
+  connect(ui_->library_view, SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_->library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
   connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
 
   // Library filter widget
+  QAction* library_config_action = new QAction(
+      IconLoader::Load("configure"), tr("Configure library..."), this);
+  connect(library_config_action, SIGNAL(triggered()), SLOT(ShowLibraryConfig()));
   ui_->library_filter->SetSettingsGroup(kSettingsGroup);
   ui_->library_filter->SetLibraryModel(library_->model());
-  ui_->library_filter->SetSettingsDialog(settings_dialog_.get());
-  connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), ui_->library_view,
-          SLOT(ReloadSettings()));
-  connect(ui_->library_filter, SIGNAL(LibraryConfigChanged()), SLOT(ReloadSettings()));
+  ui_->library_filter->AddMenuAction(library_config_action);
 
   // Playlist menu
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
@@ -1146,4 +1146,8 @@ void MainWindow::CheckForUpdates() {
 void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
   playlist_menu_->insertAction(playlist_undoredo_, undo);
   playlist_menu_->insertAction(playlist_undoredo_, redo);
+}
+
+void MainWindow::ShowLibraryConfig() {
+  settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }

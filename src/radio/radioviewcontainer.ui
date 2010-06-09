@@ -21,7 +21,13 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="LibraryFilterWidget" name="filter" native="true"/>
+    <widget class="QWidget" name="header_container" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="RadioView" name="tree">
@@ -55,12 +61,6 @@
    <class>RadioView</class>
    <extends>QTreeView</extends>
    <header>radio/radioview.h</header>
-  </customwidget>
-  <customwidget>
-   <class>LibraryFilterWidget</class>
-   <extends>QWidget</extends>
-   <header>library/libraryfilterwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

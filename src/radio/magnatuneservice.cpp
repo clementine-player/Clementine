@@ -60,6 +60,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     context_menu_(new QMenu),
     library_backend_(NULL),
     library_model_(NULL),
+    library_filter_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     membership_(Membership_None),
     format_(Format_Ogg),
@@ -89,13 +90,21 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
-  context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
+  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
+
+  library_filter_ = new LibraryFilterWidget(0);
+  library_filter_->SetSettingsGroup(kSettingsGroup);
+  library_filter_->SetLibraryModel(library_model_);
+  library_filter_->SetFilterHint(tr("Search Magnatune"));
+  library_filter_->SetAgeFilterEnabled(false);
+  library_filter_->AddMenuAction(config_action);
 
   library_model_->Init();
 }
 
 MagnatuneService::~MagnatuneService() {
   delete context_menu_;
+  delete library_filter_;
 }
 
 void MagnatuneService::ReloadSettings() {
@@ -274,16 +283,6 @@ void MagnatuneService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
 }
 
-bool MagnatuneService::SetupLibraryFilter(LibraryFilterWidget* w) const {
-  w->SetSettingsGroup(kSettingsGroup);
-  w->SetLibraryModel(library_model_);
-  w->SetFilterHint(tr("Search Magnatune"));
-  w->SetAgeFilterEnabled(false);
-  w->SetConfigDialogEnabled(false);
-
-  return true;
-}
-
 QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
   QUrl ret(url);
 
@@ -323,4 +322,8 @@ void MagnatuneService::Download() {
   MagnatuneDownloadDialog* dialog = new MagnatuneDownloadDialog(this, 0);
   dialog->setAttribute(Qt::WA_DeleteOnClose);
   dialog->Show(songs);
+}
+
+QWidget* MagnatuneService::HeaderWidget() const {
+  return library_filter_;
 }

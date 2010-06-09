@@ -18,7 +18,9 @@
 #define RADIOVIEWCONTAINER_H
 
 #include <QWidget>
+#include <QMap>
 
+class LibraryFilterWidget;
 class RadioModel;
 class RadioService;
 class RadioView;
@@ -34,6 +36,8 @@ class RadioViewContainer : public QWidget {
   RadioViewContainer(QWidget* parent = 0);
   ~RadioViewContainer();
 
+  static const int kAnimationDuration;
+
   void SetModel(RadioModel* model);
 
   RadioView* tree() const;
@@ -42,19 +46,24 @@ class RadioViewContainer : public QWidget {
   void Collapsed(const QModelIndex& index);
   void Expanded(const QModelIndex& index);
   void CurrentIndexChanged(const QModelIndex& index);
-  void SetFilterHeight(int height);
+  void SetHeaderHeight(int height);
 
  private:
-  void ServiceChanged(const QModelIndex& index, bool changed_away = false);
-  void SetFilterVisible(bool visible);
+  void ServiceChanged(const QModelIndex& index);
+  void SetHeaderVisible(QWidget* header, bool visible);
 
  private:
   Ui_RadioViewContainer* ui_;
   RadioModel* model_;
   RadioService* current_service_;
 
-  bool filter_visible_;
-  QTimeLine* filter_animation_;
+  QWidget* current_header_;
+
+  struct HeaderData {
+    bool visible_;
+    QTimeLine* animation_;
+  };
+  QMap<QWidget*, HeaderData> headers_;
 };
 
 #endif // RADIOVIEWCONTAINER_H

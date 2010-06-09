@@ -55,7 +55,7 @@ class RadioService : public QObject {
 
   virtual PlaylistItem::Options playlistitem_options() const { return PlaylistItem::Default; }
 
-  virtual bool SetupLibraryFilter(LibraryFilterWidget*) const { return false; }
+  virtual QWidget* HeaderWidget() const { return NULL; }
 
   virtual void ReloadSettings() {}
 

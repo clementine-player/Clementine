@@ -23,23 +23,19 @@
 #include <QtDebug>
 #include <QTimeLine>
 
+const int RadioViewContainer::kAnimationDuration = 500;
+
 RadioViewContainer::RadioViewContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_RadioViewContainer),
     model_(NULL),
     current_service_(NULL),
-    filter_visible_(false),
-    filter_animation_(new QTimeLine(500, this))
+    current_header_(NULL)
 {
   ui_->setupUi(this);
 
   connect(ui_->tree, SIGNAL(collapsed(QModelIndex)), SLOT(Collapsed(QModelIndex)));
   connect(ui_->tree, SIGNAL(expanded(QModelIndex)), SLOT(Expanded(QModelIndex)));
-
-  filter_animation_->setFrameRange(0, ui_->filter->sizeHint().height());
-  connect(filter_animation_, SIGNAL(frameChanged(int)), SLOT(SetFilterHeight(int)));
-
-  ui_->filter->setMaximumHeight(0);
 }
 
 RadioViewContainer::~RadioViewContainer() {
@@ -60,22 +56,36 @@ void RadioViewContainer::SetModel(RadioModel* model) {
           SLOT(CurrentIndexChanged(QModelIndex)));
 }
 
-void RadioViewContainer::ServiceChanged(const QModelIndex& index, bool changed_away) {
+void RadioViewContainer::ServiceChanged(const QModelIndex& index) {
   RadioItem* item = model_->IndexToItem(
       model_->merged_model()->FindSourceParent(index));
   if (!item)
     return;
 
-  if (changed_away) {
-    SetFilterVisible(false);
-  } else {
-    RadioService* service = item->service;
-    if (!service || service == current_service_)
-      return;
-    current_service_ = service;
+  RadioService* service = item->service;
+  if (!service || service == current_service_)
+    return;
+  current_service_ = service;
 
-    SetFilterVisible(service->SetupLibraryFilter(ui_->filter));
+  QWidget* header = service->HeaderWidget();
+  if (header && !headers_.contains(header)) {
+    header->setParent(ui_->header_container);
+    header->setMaximumHeight(0);
+    ui_->header_container->layout()->addWidget(header);
+    header->show();
+
+    HeaderData d;
+    d.visible_ = false;
+    d.animation_ = new QTimeLine(kAnimationDuration, this);
+    d.animation_->setFrameRange(0, header->sizeHint().height());
+    connect(d.animation_, SIGNAL(frameChanged(int)), SLOT(SetHeaderHeight(int)));
+
+    headers_.insert(header, d);
   }
+
+  SetHeaderVisible(current_header_, false);
+  current_header_ = header;
+  SetHeaderVisible(current_header_, true);
 }
 
 void RadioViewContainer::CurrentIndexChanged(const QModelIndex& index) {
@@ -84,8 +94,9 @@ void RadioViewContainer::CurrentIndexChanged(const QModelIndex& index) {
 
 void RadioViewContainer::Collapsed(const QModelIndex& index) {
   if (model_->merged_model()->mapToSource(index).model() == model_) {
-    SetFilterVisible(false);
+    SetHeaderVisible(current_header_, false);
     current_service_ = NULL;
+    current_header_ = NULL;
   }
 }
 
@@ -93,15 +104,29 @@ void RadioViewContainer::Expanded(const QModelIndex& index) {
   ServiceChanged(index);
 }
 
-void RadioViewContainer::SetFilterVisible(bool visible) {
-  if (filter_visible_ == visible)
+void RadioViewContainer::SetHeaderVisible(QWidget* header, bool visible) {
+  if (!header)
     return;
-  filter_visible_ = visible;
 
-  filter_animation_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
-  filter_animation_->start();
+  HeaderData& d = headers_[header];
+  if (d.visible_ == visible)
+    return;
+  d.visible_ = visible;
+
+  d.animation_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
+  d.animation_->start();
 }
 
-void RadioViewContainer::SetFilterHeight(int height) {
-  ui_->filter->setMaximumHeight(height);
+void RadioViewContainer::SetHeaderHeight(int height) {
+  QTimeLine* animation = qobject_cast<QTimeLine*>(sender());
+  QWidget* header = NULL;
+  foreach (QWidget* h, headers_.keys()) {
+    if (headers_[h].animation_ == animation) {
+      header = h;
+      break;
+    }
+  }
+
+  if (header)
+    header->setMaximumHeight(height);
 }

@@ -95,13 +95,11 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
 
   // Library config menu
-  QMenu* library_menu = new QMenu(this);
-  library_menu->addMenu(filter_age_menu_);
-  library_menu->addMenu(group_by_menu_);
-  library_menu->addSeparator();
-  config_action_ = library_menu->addAction(
-      tr("Configure library..."), this, SLOT(ShowConfigDialog()));
-  ui_->options->setMenu(library_menu);
+  library_menu_ = new QMenu(this);
+  library_menu_->addMenu(filter_age_menu_);
+  library_menu_->addMenu(group_by_menu_);
+  library_menu_->addSeparator();
+  ui_->options->setMenu(library_menu_);
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {
@@ -178,10 +176,6 @@ void LibraryFilterWidget::ClearFilter() {
   ui_->filter->setFocus();
 }
 
-void LibraryFilterWidget::ShowConfigDialog() {
-  settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
-}
-
 void LibraryFilterWidget::SetFilterHint(const QString& hint) {
   ui_->filter->SetHint(hint);
 }
@@ -194,6 +188,6 @@ void LibraryFilterWidget::SetGroupByEnabled(bool enabled) {
   group_by_menu_->setEnabled(enabled);
 }
 
-void LibraryFilterWidget::SetConfigDialogEnabled(bool enabled) {
-  config_action_->setEnabled(enabled);
+void LibraryFilterWidget::AddMenuAction(QAction* action) {
+  library_menu_->addAction(action);
 }

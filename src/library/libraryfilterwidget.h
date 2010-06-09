@@ -41,17 +41,10 @@ class LibraryFilterWidget : public QWidget {
   void SetFilterHint(const QString& hint);
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
-  void SetConfigDialogEnabled(bool enabled);
+  void AddMenuAction(QAction* action);
 
   void SetSettingsGroup(const QString& group) { settings_group_ = group; }
   void SetLibraryModel(LibraryModel* model);
-  void SetSettingsDialog(SettingsDialog* dialog) { settings_dialog_ = dialog; }
-
- signals:
-  void LibraryConfigChanged();
-
- public slots:
-  void ShowConfigDialog();
 
  private slots:
   void GroupingChanged(const LibraryModel::Grouping& g);
@@ -67,7 +60,7 @@ class LibraryFilterWidget : public QWidget {
 
   QMenu* filter_age_menu_;
   QMenu* group_by_menu_;
-  QAction* config_action_;
+  QMenu* library_menu_;
   QActionGroup* group_by_group_;
   QSignalMapper* filter_age_mapper_;
 

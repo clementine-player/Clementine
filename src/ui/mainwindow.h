@@ -132,6 +132,7 @@ class MainWindow : public QMainWindow {
   void LibraryScanStarted();
   void LibraryScanFinished();
 
+  void ShowLibraryConfig();
   void ReloadSettings();
 
   void AddFile();

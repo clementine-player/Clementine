@@ -71,7 +71,7 @@ class MagnatuneService : public RadioService {
   void ShowContextMenu(RadioItem* item, const QModelIndex& index,
                        const QPoint& global_pos);
 
-  bool SetupLibraryFilter(LibraryFilterWidget *) const;
+  QWidget* HeaderWidget() const;
 
   void ReloadSettings();
 
@@ -106,6 +106,7 @@ class MagnatuneService : public RadioService {
 
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
+  LibraryFilterWidget* library_filter_;
   QSortFilterProxyModel* library_sort_model_;
 
   MembershipType membership_;
