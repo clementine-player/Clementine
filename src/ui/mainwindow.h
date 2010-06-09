@@ -109,8 +109,8 @@ class MainWindow : public QMainWindow {
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
-  void LoadLibraryItemToPlaylist(const QModelIndex& index);
-  void AddLibraryItemToPlaylist(const QModelIndex& index);
+  void LoadLibraryItemToPlaylist(const QModelIndexList& indexes);
+  void AddLibraryItemToPlaylist(const QModelIndexList& indexes);
   void LibraryItemDoubleClicked(const QModelIndex& index);
 
   void LoadFilesToPlaylist(const QList<QUrl>& urls);
@@ -147,7 +147,7 @@ class MainWindow : public QMainWindow {
  private:
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
-  void AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& index);
+  void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
 
  private:
   static const int kStateVersion;

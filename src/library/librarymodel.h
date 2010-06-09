@@ -87,6 +87,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
                      QSet<int>* song_ids) const;
   SongList GetChildSongs(const QModelIndex& index) const;
+  SongList GetChildSongs(const QModelIndexList& indexes) const;
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

@@ -730,16 +730,19 @@ void LibraryModel::GetChildSongs(LibraryItem* item, QList<QUrl>* urls,
   }
 }
 
-SongList LibraryModel::GetChildSongs(const QModelIndex& index) const {
+SongList LibraryModel::GetChildSongs(const QModelIndexList& indexes) const {
   QList<QUrl> dontcare;
   SongList ret;
   QSet<int> song_ids;
 
-  if (!index.isValid())
-    return SongList();
-
-  GetChildSongs(IndexToItem(index), &dontcare, &ret, &song_ids);
+  foreach (const QModelIndex& index, indexes) {
+    GetChildSongs(IndexToItem(index), &dontcare, &ret, &song_ids);
+  }
   return ret;
+}
+
+SongList LibraryModel::GetChildSongs(const QModelIndex &index) const {
+  return GetChildSongs(QModelIndexList() << index);
 }
 
 void LibraryModel::SetFilterAge(int age) {

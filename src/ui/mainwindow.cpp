@@ -307,8 +307,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Library connections
   connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
-  connect(ui_->library_view, SIGNAL(Load(QModelIndex)), SLOT(LoadLibraryItemToPlaylist(QModelIndex)));
-  connect(ui_->library_view, SIGNAL(AddToPlaylist(QModelIndex)), SLOT(AddLibraryItemToPlaylist(QModelIndex)));
+  connect(ui_->library_view, SIGNAL(Load(QModelIndexList)), SLOT(LoadLibraryItemToPlaylist(QModelIndexList)));
+  connect(ui_->library_view, SIGNAL(AddToPlaylist(QModelIndexList)), SLOT(AddLibraryItemToPlaylist(QModelIndexList)));
   connect(ui_->library_view, SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_->library_view, SLOT(TotalSongCountUpdated(int)));
   connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
@@ -623,28 +623,32 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   player_->PlayAt(row, Engine::Manual, true);
 }
 
-void MainWindow::LoadLibraryItemToPlaylist(const QModelIndex& index) {
-  AddLibraryItemToPlaylist(true, index);
+void MainWindow::LoadLibraryItemToPlaylist(const QModelIndexList& indexes) {
+  AddLibraryItemToPlaylist(true, indexes);
 }
 
-void MainWindow::AddLibraryItemToPlaylist(const QModelIndex& index) {
-  AddLibraryItemToPlaylist(false, index);
+void MainWindow::AddLibraryItemToPlaylist(const QModelIndexList& indexes) {
+  AddLibraryItemToPlaylist(false, indexes);
 }
 
 void MainWindow::LibraryItemDoubleClicked(const QModelIndex &index) {
-  AddLibraryItemToPlaylist(autoclear_playlist_, index);
+  AddLibraryItemToPlaylist(autoclear_playlist_, QModelIndexList() << index);
 }
 
-void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndex& index) {
-  QModelIndex idx = index;
-  if (idx.model() == library_sort_model_)
-    idx = library_sort_model_->mapToSource(idx);
+void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes) {
+  QModelIndexList source_indexes;
+  foreach (const QModelIndex& index, indexes) {
+    if (index.model() == library_sort_model_)
+      source_indexes << library_sort_model_->mapToSource(index);
+    else
+      source_indexes << index;
+  }
 
   if (clear_first)
     playlists_->ClearCurrent();
 
   QModelIndex first_song = playlists_->current()->InsertLibraryItems(
-      library_->model()->GetChildSongs(idx));
+      library_->model()->GetChildSongs(source_indexes));
 
   if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
     // The first song doesn't match the filter, so don't play it

@@ -49,8 +49,8 @@ class LibraryView : public AutoExpandingTreeView {
 
  signals:
   void ShowConfigDialog();
-  void Load(const QModelIndex& index);
-  void AddToPlaylist(const QModelIndex& index);
+  void Load(const QModelIndexList& indexes);
+  void AddToPlaylist(const QModelIndexList& indexes);
 
  protected:
   // QWidget

@@ -200,14 +200,14 @@ void LibraryView::Load() {
   if (!context_menu_index_.isValid())
     return;
 
-  emit Load(context_menu_index_);
+  emit Load(selectedIndexes());
 }
 
 void LibraryView::AddToPlaylist() {
   if (!context_menu_index_.isValid())
     return;
 
-  emit AddToPlaylist(context_menu_index_);
+  emit AddToPlaylist(selectedIndexes());
 }
 
 void LibraryView::keyboardSearch(const QString &search) {
