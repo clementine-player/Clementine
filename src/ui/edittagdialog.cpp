@@ -20,6 +20,7 @@
 #include "playlist/playlistdelegates.h"
 
 #include <QtDebug>
+#include <QDir>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("[click to edit]");
 
@@ -67,7 +68,7 @@ bool EditTagDialog::SetSongs(const SongList &s) {
     ui_->track->setValue(song.track());
     ui_->comment->setPlainText(song.comment());
 
-    ui_->filename->setText(song.filename());
+    ui_->filename->setText(QDir::toNativeSeparators(song.filename()));
 
     ui_->artist->ClearHint();
     ui_->album->ClearHint();
