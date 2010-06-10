@@ -24,12 +24,10 @@
 PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
     : QHeaderView(orientation, parent),
       menu_(new QMenu(this)),
-      show_menu_(new QMenu(this)),
       show_mapper_(new QSignalMapper(this))
 {
   hide_action_ = menu_->addAction(tr("Hide..."), this, SLOT(HideCurrent()));
-  QAction* show_action = menu_->addAction(tr("Show section"));
-  show_action->setMenu(show_menu_);
+  menu_->addSeparator();
 
   connect(show_mapper_, SIGNAL(mapped(int)), SLOT(ToggleVisible(int)));
 }
@@ -47,7 +45,8 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
     hide_action_->setText(tr("Hide %1").arg(title));
   }
 
-  show_menu_->clear();
+  qDeleteAll(show_actions_);
+  show_actions_.clear();
   for (int i=0 ; i<count() ; ++i) {
     AddColumnAction(i);
   }
@@ -58,9 +57,10 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
 void PlaylistHeader::AddColumnAction(int index) {
   QString title(model()->headerData(index, Qt::Horizontal).toString());
 
-  QAction* action = show_menu_->addAction(title, show_mapper_, SLOT(map()));
+  QAction* action = menu_->addAction(title, show_mapper_, SLOT(map()));
   action->setCheckable(true);
   action->setChecked(!isSectionHidden(index));
+  show_actions_ << action;
 
   show_mapper_->setMapping(action, index);
 }

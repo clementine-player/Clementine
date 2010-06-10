@@ -42,7 +42,7 @@ class PlaylistHeader : public QHeaderView {
   int menu_section_;
   QMenu* menu_;
   QAction* hide_action_;
-  QMenu* show_menu_;
+  QList<QAction*> show_actions_;
 
   QSignalMapper* show_mapper_;
 };
