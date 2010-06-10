@@ -43,6 +43,9 @@ Section "Clementine" Clementine
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
 
+  File "avcodec-gpl-52.dll"
+  File "avformat-gpl-52.dll"
+  File "avutil-gpl-50.dll"
   File "clementine.exe"
   File "clementine.ico"
   File "glew32.dll"
@@ -745,6 +748,9 @@ Section "Uninstall"
   completed:
   
   ; Delete all the files
+  Delete "$INSTDIR\avcodec-gpl-52.dll"
+  Delete "$INSTDIR\avformat-gpl-52.dll"
+  Delete "$INSTDIR\avutil-gpl-50.dll"
   Delete "$INSTDIR\clementine.ico"
   Delete "$INSTDIR\clementine.exe"
   Delete "$INSTDIR\glew32.dll"
