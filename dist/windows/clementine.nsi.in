@@ -95,7 +95,7 @@ Section "Gstreamer plugins" gstreamer-plugins
   SetOutPath "$INSTDIR\gstreamer-plugins"
   SetOverwrite ifnewer
   
-  File "/oname=libgstasfdemux.dll" "gstreamer-plugins\libgstapetag.dll"
+  File "/oname=libgstapetag.dll" "gstreamer-plugins\libgstapetag.dll"
   File "/oname=libgstasfdemux.dll" "gstreamer-plugins\libgstasfdemux.dll"
   File "/oname=libgstaudioconvert.dll" "gstreamer-plugins\libgstaudioconvert.dll"
   File "/oname=libgstaudioresample.dll" "gstreamer-plugins\libgstaudioresample.dll"
