@@ -115,7 +115,6 @@ Section "Gstreamer plugins" gstreamer-plugins
   File "/oname=libgsttypefindfunctions.dll" "gstreamer-plugins\libgsttypefindfunctions.dll"
   File "/oname=libgstvolume.dll" "gstreamer-plugins\libgstvolume.dll"
   File "/oname=libgstvorbis.dll" "gstreamer-plugins\libgstvorbis.dll"
-  File "/oname=libgstwaveform.dll" "gstreamer-plugins\libgstwaveform.dll"
   File "/oname=libgstwavparse.dll" "gstreamer-plugins\libgstwavparse.dll"
 SectionEnd
 
@@ -809,7 +808,6 @@ Section "Uninstall"
   Delete "$INSTDIR\gstreamer-plugins\libgsttypefindfunctions.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstvolume.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstvorbis.dll"
-  Delete "$INSTDIR\gstreamer-plugins\libgstwaveform.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstwavparse.dll"
 
   Delete "$INSTDIR\projectm-presets\Aderrasi - Agitator.milk"
