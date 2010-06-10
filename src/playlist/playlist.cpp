@@ -185,6 +185,22 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
       }
     }
 
+    case Qt::TextAlignmentRole:
+      switch (index.column()) {
+        case Column_Length:
+        case Column_Track:
+        case Column_Disc:
+        case Column_Year:
+        case Column_BPM:
+        case Column_Bitrate:
+        case Column_Samplerate:
+        case Column_Filesize:
+          return Qt::AlignRight;
+
+        default:
+          return Qt::AlignLeft;
+      }
+
     default:
       return QVariant();
   }
