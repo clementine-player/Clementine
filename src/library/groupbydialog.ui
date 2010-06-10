@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Library advanced grouping</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label_4">
@@ -217,7 +221,9 @@
   <tabstop>third</tabstop>
   <tabstop>button_box</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>button_box</sender>

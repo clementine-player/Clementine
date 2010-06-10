@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Clementine Error</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -63,7 +67,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

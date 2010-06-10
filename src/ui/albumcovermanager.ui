@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Cover Manager</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="margin">
     <number>0</number>
@@ -172,7 +176,9 @@
   <tabstop>fetch</tabstop>
   <tabstop>albums</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>clear</sender>

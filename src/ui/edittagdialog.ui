@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>602</width>
-    <height>290</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Edit track information</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -211,7 +215,9 @@
   <tabstop>comment</tabstop>
   <tabstop>filename</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
