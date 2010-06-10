@@ -50,6 +50,7 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     size_(kDefaultTextureSize)
 {
   setWindowTitle(tr("Clementine Visualisation"));
+  setWindowIcon(QIcon(":/icon.png"));
 
   // Set up the graphics view
   setScene(vis_);
