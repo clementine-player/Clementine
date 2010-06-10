@@ -109,6 +109,7 @@ endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 
 # Optional bits
 option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
+option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 if(ENABLE_VISUALISATIONS)
   add_subdirectory(3rdparty/libprojectm)
 endif(ENABLE_VISUALISATIONS)

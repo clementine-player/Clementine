@@ -152,17 +152,18 @@ endif(BUILD_PROJECTM_STATIC)
 CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/libprojectM.pc.in" "${CMAKE_CURRENT_SOURCE_DIR}/libprojectM.pc" @ONLY)
 CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/config.inp.in" "${CMAKE_CURRENT_SOURCE_DIR}/config.inp" @ONLY)
 
-
-FILE(GLOB presets "presets/*.milk" "presets/*.prjm" "presets/*.tga")
-if (APPLE)
-  foreach (preset ${presets})
-    get_filename_component(PRESET_NAME ${preset} NAME)
-    configure_file(
-      "${preset}"
-      "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets/${PRESET_NAME}"
-      COPY_ONLY
-    )
-  endforeach (preset)
-else (APPLE)
-  INSTALL(FILES ${presets} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/clementine/projectm-presets)
-endif (APPLE)
+if(BUNDLE_PROJECTM_PRESETS)
+  FILE(GLOB presets "presets/*.milk" "presets/*.prjm" "presets/*.tga")
+  if (APPLE)
+    foreach (preset ${presets})
+      get_filename_component(PRESET_NAME ${preset} NAME)
+      configure_file(
+        "${preset}"
+        "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources/projectm-presets/${PRESET_NAME}"
+        COPY_ONLY
+      )
+    endforeach (preset)
+  else (APPLE)
+    INSTALL(FILES ${presets} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/clementine/projectm-presets)
+  endif (APPLE)
+endif(BUNDLE_PROJECTM_PRESETS)
