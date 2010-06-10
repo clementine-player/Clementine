@@ -81,6 +81,9 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_DateCreated, new DateItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_DateModified, new DateItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_BPM, new PlaylistDelegateBase(this, tr("bpm")));
+  setItemDelegateForColumn(Playlist::Column_Samplerate, new PlaylistDelegateBase(this, ("Hz")));
+  setItemDelegateForColumn(Playlist::Column_Bitrate, new PlaylistDelegateBase(this, tr("kbps")));
 }
 
 void PlaylistView::SetPlaylist(Playlist *playlist) {

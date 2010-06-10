@@ -28,7 +28,7 @@
 class PlaylistDelegateBase : public QStyledItemDelegate {
   Q_OBJECT
  public:
-  PlaylistDelegateBase(QTreeView* view);
+  PlaylistDelegateBase(QTreeView* view, const QString& suffix = QString());
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
   QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -43,6 +43,7 @@ class PlaylistDelegateBase : public QStyledItemDelegate {
 
  protected:
   QTreeView* view_;
+  QString suffix_;
 };
 
 class LengthItemDelegate : public PlaylistDelegateBase {

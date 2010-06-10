@@ -30,32 +30,40 @@
 
 const int PlaylistDelegateBase::kMinHeight = 19;
 
-PlaylistDelegateBase::PlaylistDelegateBase(QTreeView* view)
+PlaylistDelegateBase::PlaylistDelegateBase(QTreeView* view, const QString& suffix)
   : QStyledItemDelegate(view),
-    view_(view)
+    view_(view),
+    suffix_(suffix)
 {
 }
 
 QString PlaylistDelegateBase::displayText(const QVariant& value, const QLocale&) const {
+  QString text;
+
   switch (value.type()) {
     case QVariant::Int: {
       int v = value.toInt();
-      if (v <= 0)
-        return QString::null;
-      return QString::number(v);
+      if (v > 0)
+        text = QString::number(v);
+      break;
     }
 
     case QMetaType::Float:
     case QVariant::Double: {
       double v = value.toDouble();
-      if (v <= 0)
-        return QString::null;
-      return QString::number(v);
+      if (v > 0)
+        text = QString::number(v);
+      break;
     }
 
     default:
-      return value.toString();
+      text = value.toString();
+      break;
   }
+
+  if (!text.isNull() && !suffix_.isNull())
+    text += " " + suffix_;
+  return text;
 }
 
 QSize PlaylistDelegateBase::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const {
