@@ -108,6 +108,6 @@ TEST_P(FileformatsTest, GstCanDecode) {
 }
 
 INSTANTIATE_TEST_CASE_P(Formats, FileformatsTest, ::testing::Values(
-    "flac", "mp3", "ogg", "spx", "wav", "wma"));
+    "flac", "mp3", "ogg", "spx", "wav", "wma", "m4a"));
 
 }  // namespace
