@@ -45,6 +45,7 @@ QString PlaylistDelegateBase::displayText(const QVariant& value, const QLocale&)
       return QString::number(v);
     }
 
+    case QMetaType::Float:
     case QVariant::Double: {
       double v = value.toDouble();
       if (v <= 0)
