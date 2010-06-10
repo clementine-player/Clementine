@@ -107,6 +107,12 @@ if(NOT GETTEXT_XGETTEXT_EXECUTABLE)
   message(FATAL_ERROR "Could not find xgettext executable")
 endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 
+# Optional bits
+option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
+if(ENABLE_VISUALISATIONS)
+  add_subdirectory(3rdparty/libprojectm)
+endif(ENABLE_VISUALISATIONS)
+
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
 add_subdirectory(3rdparty/qtiocompressor)
@@ -115,7 +121,6 @@ if (NOT APPLE)
   add_subdirectory(3rdparty/qxt)
 endif (NOT APPLE)
 add_subdirectory(3rdparty/universalchardet)
-add_subdirectory(3rdparty/libprojectm)
 add_subdirectory(tests)
 add_subdirectory(dist)
 

@@ -14,7 +14,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "core/commandlineoptions.h"
@@ -50,7 +49,6 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
-#include "visualisations/visualisationcontainer.h"
 #include "widgets/errordialog.h"
 #include "widgets/multiloadingindicator.h"
 #include "widgets/osd.h"
@@ -58,6 +56,10 @@
 
 #ifdef HAVE_GSTREAMER
 # include "engines/gstengine.h"
+#endif
+
+#ifdef ENABLE_VISUALISATIONS
+# include "visualisations/visualisationcontainer.h"
 #endif
 
 #include <QFileSystemModel>
@@ -118,7 +120,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     transcode_dialog_(new TranscodeDialog),
     global_shortcuts_dialog_(new GlobalShortcutsDialog(global_shortcuts_)),
     error_dialog_(new ErrorDialog),
+#ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
+#endif
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
@@ -155,9 +159,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #ifdef HAVE_GSTREAMER
   if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
     settings_dialog_->SetGstEngine(engine);
-    visualisation_->SetEngine(engine);
+#   ifdef ENABLE_VISUALISATIONS
+      visualisation_->SetEngine(engine);
+#   endif
   }
-#endif
+#endif // HAVE_GSTREAMER
 
   // Models
   library_sort_model_->setSourceModel(library_->model());
@@ -237,7 +243,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
-  connect(ui_->action_visualisations, SIGNAL(triggered()), visualisation_.get(), SLOT(show()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
@@ -249,8 +254,17 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
   ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
                             ui_->action_load_playlist);
+
+#ifdef ENABLE_VISUALISATIONS
   visualisation_->SetActions(ui_->action_previous_track, ui_->action_play_pause,
                              ui_->action_stop, ui_->action_next_track);
+  connect(ui_->action_visualisations, SIGNAL(triggered()), visualisation_.get(), SLOT(show()));
+  connect(player_, SIGNAL(Stopped()), visualisation_.get(), SLOT(Stopped()));
+  connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
+#else
+  ui_->action_visualisations->setEnabled(false);
+#endif
 
   // Add the shuffle and repeat action groups to the menu
   ui_->action_shuffle_mode->setMenu(playlist_sequence_->shuffle_menu());
@@ -283,15 +297,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
-  connect(player_, SIGNAL(Stopped()), visualisation_.get(), SLOT(Stopped()));
   connect(player_, SIGNAL(PlaylistFinished()), osd_, SLOT(PlaylistFinished()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
-  connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
-  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));

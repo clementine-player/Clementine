@@ -23,6 +23,7 @@
 #include <QSettings>
 #include <QSystemTrayIcon>
 
+#include "config.h"
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
@@ -177,7 +178,10 @@ class MainWindow : public QMainWindow {
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
   boost::scoped_ptr<GlobalShortcutsDialog> global_shortcuts_dialog_;
   boost::scoped_ptr<ErrorDialog> error_dialog_;
+
+#ifdef ENABLE_VISUALISATIONS
   boost::scoped_ptr<VisualisationContainer> visualisation_;
+#endif
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

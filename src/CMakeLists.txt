@@ -113,12 +113,6 @@ set(SOURCES
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
 
-  visualisations/projectmpresetmodel.cpp
-  visualisations/projectmvisualisation.cpp
-  visualisations/visualisationcontainer.cpp
-  visualisations/visualisationoverlay.cpp
-  visualisations/visualisationselector.cpp
-
   widgets/autoexpandingtreeview.cpp
   widgets/busyindicator.cpp
   widgets/equalizerslider.cpp
@@ -215,12 +209,6 @@ set(HEADERS
   ui/settingsdialog.h
   ui/systemtrayicon.h
 
-  visualisations/projectmpresetmodel.h
-  visualisations/projectmvisualisation.h
-  visualisations/visualisationcontainer.h
-  visualisations/visualisationoverlay.h
-  visualisations/visualisationselector.h
-
   widgets/autoexpandingtreeview.h
   widgets/busyindicator.h
   widgets/equalizerslider.h
@@ -264,9 +252,6 @@ set(UI
   ui/globalshortcutsdialog.ui
   ui/mainwindow.ui
   ui/settingsdialog.ui
-
-  visualisations/visualisationoverlay.ui
-  visualisations/visualisationselector.ui
 
   widgets/equalizerslider.ui
   widgets/errordialog.ui
@@ -320,6 +305,28 @@ add_engine(vlc LIBVLC engines/vlcengine.cpp engines/vlcengine.h OFF)
 add_engine(xine LIBXINE "${XINE_ENGINE_SRC}" "${XINE_ENGINE_MOC}" OFF)
 add_engine(qt-phonon QT_PHONON engines/phononengine.cpp engines/phononengine.h OFF)
 print_engines()
+
+# Visualisations
+if(ENABLE_VISUALISATIONS)
+  list(APPEND SOURCES
+    visualisations/projectmpresetmodel.cpp
+    visualisations/projectmvisualisation.cpp
+    visualisations/visualisationcontainer.cpp
+    visualisations/visualisationoverlay.cpp
+    visualisations/visualisationselector.cpp
+  )
+  list(APPEND HEADERS
+    visualisations/projectmpresetmodel.h
+    visualisations/projectmvisualisation.h
+    visualisations/visualisationcontainer.h
+    visualisations/visualisationoverlay.h
+    visualisations/visualisationselector.h
+  )
+  list(APPEND UI
+    visualisations/visualisationoverlay.ui
+    visualisations/visualisationselector.ui
+  )
+endif(ENABLE_VISUALISATIONS)
 
 # OSDs
 if(APPLE)
@@ -390,7 +397,6 @@ target_link_libraries(clementine_lib
   qtsingleapplication
   qtiocompressor
   chardet
-  projectM
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
@@ -398,6 +404,10 @@ target_link_libraries(clementine_lib
   ${ENGINE_LIBRARIES}
   ${LASTFM_LIBRARIES}
 )
+
+if(ENABLE_VISUALISATIONS)
+  target_link_libraries(clementine_lib projectM)
+endif(ENABLE_VISUALISATIONS)
 
 if (APPLE)
   target_link_libraries(clementine_lib

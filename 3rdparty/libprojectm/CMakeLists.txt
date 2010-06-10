@@ -7,36 +7,27 @@ include(CheckCXXCompilerFlag)
 cmake_policy(SET CMP0005 OLD)
 
 
-OPTION (USE_DEVIL "Use devIL for image loading rather than the builtin SOIL library" OFF)
-
-OPTION (USE_FBO "Use Framebuffer Objects for increased rendering quality.  Disable this for OpenGL ES 1.x or if you are experiencing problems on older or poorly supported hardware." ON)
-
-OPTION(USE_FTGL "Use FTGL for on-screen fonts (found on your system)" OFF)
-
-OPTION (USE_GLES1 "Use OpenGL ES 1.x" OFF)
-
-OPTION (USE_THREADS "Use threads for parallelization" OFF)
-
-OPTION (USE_OPENMP "Use OpenMP and OMPTL for multi-core parallelization" ON)
-
-OPTION (USE_NATIVE_GLEW "Use projectM's native implemention of GLEW." OFF)
-
-OPTION (USE_CG "Use Cg for Pixel Shader support" OFF)
-
-OPTION (BUILD_PROJECTM_STATIC "Build the projectM target library in the platform's native static (NOT shared) format." ON)
-
-OPTION (DISABLE_NATIVE_PRESETS "Turn off support for native (C++ style) presets" OFF)
-OPTION (DISABLE_MILKDROP_PRESETS "Turn off support for Milkdrop (.milk / .prjm) presets"  OFF)
+set(USE_DEVIL OFF)
+set(USE_FBO ON)
+set(USE_FTGL OFF)
+set(USE_GLES1 OFF)
+set(USE_THREADS OFF)
+set(USE_OPENMP ON)
+set(USE_NATIVE_GLEW OFF)
+set(USE_CG OFF)
+set(BUILD_PROJECTM_STATIC ON)
+set(DISABLE_NATIVE_PRESETS OFF)
+set(DISABLE_MILKDROP_PRESETS OFF)
 
 ADD_DEFINITIONS(-DCMAKE_INSTALL_PREFIX="\\\"${CMAKE_INSTALL_PREFIX}\\\"")
 
 if (USE_NATIVE_GLEW)
   ADD_DEFINITIONS(-DUSE_NATIVE_GLEW)
   SET(GLEW_SOURCES glew.h glew.c)
-  SET(GLEW_LINK_TARGETS )
+  SET(GLEW_LIBRARIES )
 else(USE_NATIVE_GLEW)
   SET(GLEW_SOURCES )
-  find_library(GLEW_LINK_TARGETS NAMES glew GLEW glew32)
+  find_library(GLEW_LIBRARIES NAMES glew GLEW glew32)
 endif(USE_NATIVE_GLEW)
 
 SET(projectM_SOURCES projectM.cpp PCM.cpp Preset.cpp fftsg.cpp KeyHandler.cpp
@@ -150,10 +141,10 @@ else(MSVC)
 endif(MSVC)
 
 if(BUILD_PROJECTM_STATIC)
-		TARGET_LINK_LIBRARIES(projectM ${GLEW_LINK_TARGETS} ${MATH_LIBRARIES} ${FTGL_LINK_TARGETS} ${OPENGL_LIBRARIES} ${IMAGE_LINK_TARGETS} ${CG_LINK_TARGETS} ${PRESET_FACTORY_LINK_TARGETS})
+    TARGET_LINK_LIBRARIES(projectM ${GLEW_LIBRARIES} ${MATH_LIBRARIES} ${FTGL_LINK_TARGETS} ${OPENGL_LIBRARIES} ${IMAGE_LINK_TARGETS} ${CG_LINK_TARGETS} ${PRESET_FACTORY_LINK_TARGETS})
 else(BUILD_PROJECTM_STATIC)
 
-TARGET_LINK_LIBRARIES(projectM ${GLEW_LINK_TARGETS} ${MATH_LIBRARIES} ${FTGL_LINK_TARGETS} ${OPENGL_LIBRARIES}  ${IMAGE_LINK_TARGETS} ${CG_LINK_TARGETS} ${PRESET_FACTORY_LINK_TARGETS})
+TARGET_LINK_LIBRARIES(projectM ${GLEW_LIBRARIES} ${MATH_LIBRARIES} ${FTGL_LINK_TARGETS} ${OPENGL_LIBRARIES}  ${IMAGE_LINK_TARGETS} ${CG_LINK_TARGETS} ${PRESET_FACTORY_LINK_TARGETS})
 
 endif(BUILD_PROJECTM_STATIC)
 
