@@ -39,6 +39,7 @@
 #include <QtDebug>
 #include <QCoreApplication>
 #include <QTimeLine>
+#include <QDir>
 
 #include <gst/gst.h>
 
@@ -91,6 +92,7 @@ void GstEngine::SetEnv(const char *key, const QString &value) {
 bool GstEngine::Init() {
   QString scanner_path;
   QString plugin_path;
+  QString registry_filename;
 
   // On windows and mac we bundle the gstreamer plugins with clementine
 #if defined(Q_OS_DARWIN)
@@ -100,12 +102,23 @@ bool GstEngine::Init() {
   plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
 #endif
 
+#if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
+  registry_filename = QString("%1/.config/%2/gst-registry-%3.bin").arg(
+      QDir::homePath(), QCoreApplication::organizationName(),
+      QCoreApplication::applicationVersion());
+#endif
+
   if (!scanner_path.isEmpty())
     SetEnv("GST_PLUGIN_SCANNER", scanner_path);
+
   if (!plugin_path.isEmpty()) {
     SetEnv("GST_PLUGIN_PATH", plugin_path);
     // Never load plugins from anywhere else.
     SetEnv("GST_PLUGIN_SYSTEM_PATH", plugin_path);
+  }
+
+  if (!registry_filename.isEmpty()) {
+    SetEnv("GST_REGISTRY", registry_filename);
   }
 
   // GStreamer initialization
