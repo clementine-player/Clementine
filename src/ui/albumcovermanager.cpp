@@ -34,6 +34,8 @@
 #include <QLabel>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QProgressBar>
+#include <QTimer>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
@@ -48,7 +50,12 @@ AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
     cover_fetcher_(new AlbumCoverFetcher(network, this)),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
-    context_menu_(new QMenu(this)) {
+    context_menu_(new QMenu(this)),
+    progress_bar_(new QProgressBar(this)),
+    jobs_(0),
+    got_covers_(0),
+    missing_covers_(0)
+{
   ui_->setupUi(this);
 
   // Icons
@@ -69,6 +76,10 @@ AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
   p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2, nocover);
   p.end();
   no_cover_icon_ = QPixmap::fromImage(square_nocover);
+
+  // Set up the status bar
+  statusBar()->addPermanentWidget(progress_bar_);
+  progress_bar_->hide();
 }
 
 AlbumCoverManager::~AlbumCoverManager() {
@@ -142,7 +153,20 @@ void AlbumCoverManager::showEvent(QShowEvent *) {
   Reset();
 }
 
-void AlbumCoverManager::closeEvent(QCloseEvent *) {
+void AlbumCoverManager::closeEvent(QCloseEvent* e) {
+  if (!cover_fetching_tasks_.isEmpty()) {
+    boost::scoped_ptr<QMessageBox> message_box(new QMessageBox(
+        QMessageBox::Question, tr("Really cancel?"),
+        tr("Closing this window will stop searching for album covers."),
+        QMessageBox::Abort, this));
+    message_box->addButton(tr("Don't stop!"), QMessageBox::AcceptRole);
+
+    if (message_box->exec() != QMessageBox::Abort) {
+      e->ignore();
+      return;
+    }
+  }
+
   // Save geometry
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -163,6 +187,8 @@ void AlbumCoverManager::CancelRequests() {
   cover_fetching_tasks_.clear();
   cover_fetcher_->Clear();
   ui_->fetch->setEnabled(true);
+  progress_bar_->hide();
+  statusBar()->clearMessage();
 }
 
 void AlbumCoverManager::Reset() {
@@ -291,10 +317,15 @@ void AlbumCoverManager::FetchAlbumCovers() {
     quint64 id = cover_fetcher_->FetchAlbumCover(
         item->data(Role_ArtistName).toString(), item->data(Role_AlbumName).toString());
     cover_fetching_tasks_[id] = item;
+    jobs_ ++;
   }
 
   if (!cover_fetching_tasks_.isEmpty())
     ui_->fetch->setEnabled(false);
+
+  progress_bar_->setMaximum(jobs_);
+  progress_bar_->show();
+  UpdateStatusText();
 }
 
 void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
@@ -302,7 +333,11 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
     return;
 
   QListWidgetItem* item = cover_fetching_tasks_.take(id);
-  if (!image.isNull()) {
+  if (image.isNull()) {
+    missing_covers_ ++;
+  } else {
+    got_covers_ ++;
+
     const QString artist = item->data(Role_ArtistName).toString();
     const QString album = item->data(Role_AlbumName).toString();
 
@@ -332,6 +367,24 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
 
   if (cover_fetching_tasks_.isEmpty())
     ui_->fetch->setEnabled(true);
+
+  UpdateStatusText();
+}
+
+void AlbumCoverManager::UpdateStatusText() {
+  QString message = tr("Got %1 covers out of %2 (%3 failed)")
+                    .arg(got_covers_).arg(jobs_).arg(missing_covers_);
+  statusBar()->showMessage(message);
+  progress_bar_->setValue(got_covers_ + missing_covers_);
+
+  if (cover_fetching_tasks_.isEmpty()) {
+    QTimer::singleShot(2000, statusBar(), SLOT(clearMessage()));
+    progress_bar_->hide();
+
+    jobs_ = 0;
+    got_covers_ = 0;
+    missing_covers_ = 0;
+  }
 }
 
 bool AlbumCoverManager::event(QEvent* e) {
@@ -399,7 +452,12 @@ void AlbumCoverManager::FetchSingleCover() {
     quint64 id = cover_fetcher_->FetchAlbumCover(
         item->data(Role_ArtistName).toString(), item->data(Role_AlbumName).toString());
     cover_fetching_tasks_[id] = item;
+    jobs_ ++;
   }
+
+  progress_bar_->setMaximum(jobs_);
+  progress_bar_->show();
+  UpdateStatusText();
 }
 
 void AlbumCoverManager::ChooseManualCover() {

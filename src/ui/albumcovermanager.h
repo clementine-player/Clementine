@@ -32,6 +32,7 @@ class Ui_CoverManager;
 
 class QListWidgetItem;
 class QMenu;
+class QProgressBar;
 
 class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
@@ -90,6 +91,7 @@ class AlbumCoverManager : public QMainWindow {
 
   void CancelRequests();
 
+  void UpdateStatusText();
   bool ShouldHide(const QListWidgetItem& item, const QString& filter, HideCovers hide) const;
 
  private:
@@ -115,6 +117,11 @@ class AlbumCoverManager : public QMainWindow {
 
   QMenu* context_menu_;
   QList<QListWidgetItem*> context_menu_items_;
+
+  QProgressBar* progress_bar_;
+  int jobs_;
+  int got_covers_;
+  int missing_covers_;
 
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);
