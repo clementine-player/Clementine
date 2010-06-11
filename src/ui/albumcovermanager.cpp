@@ -39,7 +39,7 @@ const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
 AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
                                      LibraryBackend* backend, QWidget *parent)
-  : QDialog(parent),
+  : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
     backend_(backend),
@@ -173,7 +173,7 @@ void AlbumCoverManager::Reset() {
   new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_->artists, All_Artists);
   new QListWidgetItem(artist_icon_, tr("Various artists"), ui_->artists, Various_Artists);
 
-  foreach (const QString& artist, backend_->GetAllArtists()) {
+  foreach (const QString& artist, backend_->GetAllArtistsWithAlbums()) {
     if (artist.isEmpty())
       continue;
 
@@ -336,7 +336,7 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
 
 bool AlbumCoverManager::event(QEvent* e) {
   if (constructed_) {
-    // I think KDE styles override these, and ScrollPerItem really confusing
+    // I think KDE styles override these, and ScrollPerItem is really confusing
     // when you have huge items.
     // We seem to have to reset them to sensible values each time the contents
     // of ui_->albums changes.
@@ -344,7 +344,7 @@ bool AlbumCoverManager::event(QEvent* e) {
     ui_->albums->verticalScrollBar()->setSingleStep(20);
   }
 
-  QDialog::event(e);
+  QMainWindow::event(e);
   return false;
 }
 
@@ -369,7 +369,7 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
     context_menu_->popup(e->globalPos());
     return true;
   }
-  return false;
+  return QMainWindow::eventFilter(obj, event);
 }
 
 void AlbumCoverManager::ShowFullsize() {

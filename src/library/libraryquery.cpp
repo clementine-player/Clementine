@@ -48,14 +48,14 @@ LibraryQuery::LibraryQuery(const QueryOptions& options) {
   }
 }
 
-void LibraryQuery::AddWhere(const QString& column, const QVariant& value) {
+void LibraryQuery::AddWhere(const QString& column, const QVariant& value, const QString& op) {
   // Do integers inline - sqlite seems to get confused when you pass integers
   // to bound parameters
 
   if (value.type() == QVariant::Int)
-    where_clauses_ << QString("%1 = %2").arg(column, value.toString());
+    where_clauses_ << QString("%1 %2 %3").arg(column, op, value.toString());
   else {
-    where_clauses_ << QString("%1 = ?").arg(column);
+    where_clauses_ << QString("%1 %2 ?").arg(column, op);
     bound_values_ << value;
   }
 }

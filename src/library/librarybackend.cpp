@@ -334,6 +334,22 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
   return ret;
 }
 
+QStringList LibraryBackend::GetAllArtistsWithAlbums(const QueryOptions& opt) {
+  LibraryQuery query(opt);
+  query.SetColumnSpec("DISTINCT artist");
+  query.AddCompilationRequirement(false);
+  query.AddWhere("album", "", "!=");
+
+  QMutexLocker l(db_->Mutex());
+  if (!ExecQuery(&query)) return QStringList();
+
+  QStringList ret;
+  while (query.Next()) {
+    ret << query.Value(0).toString();
+  }
+  return ret;
+}
+
 LibraryBackend::AlbumList LibraryBackend::GetAllAlbums(const QueryOptions &opt) {
   return GetAlbums(QString(), false, opt);
 }

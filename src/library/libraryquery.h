@@ -41,7 +41,7 @@ class LibraryQuery {
 
   void SetColumnSpec(const QString& spec) { column_spec_ = spec; }
   void SetOrderBy(const QString& order_by) { order_by_ = order_by; }
-  void AddWhere(const QString& column, const QVariant& value);
+  void AddWhere(const QString& column, const QVariant& value, const QString& op = "=");
   void AddWhereLike(const QString& column, const QVariant& value);
   void AddCompilationRequirement(bool compilation);
 

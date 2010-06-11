@@ -17,7 +17,7 @@
 #ifndef ALBUMCOVERMANAGER_H
 #define ALBUMCOVERMANAGER_H
 
-#include <QDialog>
+#include <QMainWindow>
 #include <QIcon>
 
 #include "gtest/gtest_prod.h"
@@ -33,7 +33,7 @@ class Ui_CoverManager;
 class QListWidgetItem;
 class QMenu;
 
-class AlbumCoverManager : public QDialog {
+class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
   AlbumCoverManager(NetworkAccessManager* network, LibraryBackend* backend,

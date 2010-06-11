@@ -67,6 +67,7 @@ class LibraryBackend : public QObject {
   SubdirectoryList SubdirsInDirectory(int id);
 
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
+  QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
 
   bool HasCompilations(const QueryOptions& opt = QueryOptions());
