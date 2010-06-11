@@ -51,6 +51,7 @@ Section "Clementine" Clementine
   File "glew32.dll"
   File "iconv.dll"
   File "libbz2.dll"
+  File "libdl.dll"
   File "libfaad-2.dll"
   File "libFLAC-8.dll"
   File "libgcrypt-11.dll"
@@ -97,6 +98,13 @@ Section "Clementine" Clementine
   File "QtXml4.dll"
   File "z.dll"
   File "zlib1.dll"
+SectionEnd
+
+Section "Qt image format plugins" imageformats
+  SetOutPath "$INSTDIR\imageformats"
+  SetOverwrite ifnewer
+
+  File "/oname=qgif4.dll" "imageformats\qgif4.dll"
 SectionEnd
 
 Section "Gstreamer plugins" gstreamer-plugins
@@ -763,6 +771,7 @@ Section "Uninstall"
   Delete "$INSTDIR\glew32.dll"
   Delete "$INSTDIR\iconv.dll"
   Delete "$INSTDIR\libbz2.dll"
+  Delete "$INSTDIR\libdl.dll"
   Delete "$INSTDIR\libfaad-2.dll"
   Delete "$INSTDIR\libFLAC-8.dll"
   Delete "$INSTDIR\libgcrypt-11.dll"
@@ -809,6 +818,8 @@ Section "Uninstall"
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\z.dll"
   Delete "$INSTDIR\zlib1.dll"
+
+  Delete "$INSTDIR\imageformats\qgif4.dll"
 
   Delete "$INSTDIR\gstreamer-plugins\libgstapetag.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstasfdemux.dll"
