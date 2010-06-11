@@ -105,6 +105,7 @@ Section "Qt image format plugins" imageformats
   SetOverwrite ifnewer
 
   File "/oname=qgif4.dll" "imageformats\qgif4.dll"
+  File "/oname=qjpeg4.dll" "imageformats\qjpeg4.dll"
 SectionEnd
 
 Section "Gstreamer plugins" gstreamer-plugins
@@ -820,6 +821,7 @@ Section "Uninstall"
   Delete "$INSTDIR\zlib1.dll"
 
   Delete "$INSTDIR\imageformats\qgif4.dll"
+  Delete "$INSTDIR\imageformats\qjpeg4.dll"
 
   Delete "$INSTDIR\gstreamer-plugins\libgstapetag.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstasfdemux.dll"
