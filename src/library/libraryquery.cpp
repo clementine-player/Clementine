@@ -32,7 +32,9 @@ LibraryQuery::LibraryQuery(const QueryOptions& options) {
     where_clauses_ << "("
         "artist LIKE ? OR "
         "album LIKE ? OR "
-        "title LIKE ?)";
+        "title LIKE ? OR "
+        "albumartist LIKE ?)";
+    bound_values_ << "%" + options.filter + "%";
     bound_values_ << "%" + options.filter + "%";
     bound_values_ << "%" + options.filter + "%";
     bound_values_ << "%" + options.filter + "%";
