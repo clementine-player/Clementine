@@ -195,10 +195,10 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Bitrate:
         case Column_Samplerate:
         case Column_Filesize:
-          return Qt::AlignRight;
+          return QVariant(Qt::AlignRight | Qt::AlignVCenter);
 
         default:
-          return Qt::AlignLeft;
+          return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
       }
 
     default:
