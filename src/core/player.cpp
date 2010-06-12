@@ -309,6 +309,7 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
     if (current_item_->Url() == loading_async_)
       return;
 
+    stream_change_type_ = change;
     HandleSpecialLoad(current_item_->StartLoading());
   }
   else {
