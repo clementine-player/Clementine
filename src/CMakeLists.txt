@@ -270,33 +270,43 @@ set(RESOURCES
   ../data/data.qrc
 )
 
-set(LANGUAGES
-  ar
-  cs
-  da
-  de
-  el
-  en_CA
-  en_GB
-  es
-  fi
-  fr
-  gl
-  it
-  kk
-  nb
-  oc
-  pl
-  pt
-  pt_BR
-  ro
-  ru
-  sk
-  sv
-  tr
-  zh_CN
-  zh_TW
-)
+set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
+if (${LINGUAS} STREQUAL "All")
+  set (LANGUAGES
+    ar
+    cs
+    da
+    de
+    el
+    en_CA
+    en_GB
+    es
+    fi
+    fr
+    gl
+    it
+    kk
+    nb
+    oc
+    pl
+    pt
+    pt_BR
+    ro
+    ru
+    sk
+    sv
+    tr
+    zh_CN
+    zh_TW
+  )
+else (${LINGUAS} STREQUAL "All")
+  if (${LINGUAS} STREQUAL "None")
+    set (LANGUAGES "")
+  else (${LINGUAS} STREQUAL "None")
+    string(REGEX MATCHALL [a-zA-Z_]+
+           LANGUAGES ${LINGUAS})
+  endif (${LINGUAS} STREQUAL "None")
+endif (${LINGUAS} STREQUAL "All")
 
 # Engines
 set(GST_ENGINE_SRC engines/gstengine.cpp engines/gstequalizer.cpp engines/gstenginepipeline.cpp)
