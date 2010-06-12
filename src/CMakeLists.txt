@@ -104,6 +104,7 @@ set(SOURCES
   ui/about.cpp
   ui/addstreamdialog.cpp
   ui/albumcovermanager.cpp
+  ui/albumcovermanagerlist.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
   ui/globalshortcutgrabber.cpp
@@ -201,6 +202,7 @@ set(HEADERS
   ui/about.h
   ui/addstreamdialog.h
   ui/albumcovermanager.h
+  ui/albumcovermanagerlist.h
   ui/edittagdialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h

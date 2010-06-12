@@ -118,6 +118,10 @@ class MainWindow : public QMainWindow {
   void AddFilesToPlaylist(const QList<QUrl>& urls);
   void FilesDoubleClicked(const QList<QUrl>& urls);
 
+  void LoadLibrarySongsToPlaylist(const SongList& songs);
+  void AddLibrarySongsToPlaylist(const SongList& songs);
+  void LibrarySongsDoubleClicked(const SongList& songs);
+
   void VolumeWheelEvent(int delta);
   void TrayClicked(QSystemTrayIcon::ActivationReason reason);
 
@@ -149,6 +153,7 @@ class MainWindow : public QMainWindow {
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
+  void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
 
  private:
   static const int kStateVersion;

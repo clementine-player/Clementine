@@ -115,7 +115,13 @@
          </layout>
         </item>
         <item>
-         <widget class="QListWidget" name="albums">
+         <widget class="AlbumCoverManagerList" name="albums">
+          <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::DragOnly</enum>
+          </property>
           <property name="alternatingRowColors">
            <bool>false</bool>
           </property>
@@ -127,9 +133,6 @@
             <width>120</width>
             <height>120</height>
            </size>
-          </property>
-          <property name="movement">
-           <enum>QListView::Static</enum>
           </property>
           <property name="flow">
            <enum>QListView::LeftToRight</enum>
@@ -181,12 +184,27 @@
     <string>Unset cover</string>
    </property>
   </action>
+  <action name="action_load">
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="action_add_to_playlist">
+   <property name="text">
+    <string>Add to playlist</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>LineEdit</class>
    <extends>QLineEdit</extends>
    <header>widgets/lineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AlbumCoverManagerList</class>
+   <extends>QListWidget</extends>
+   <header>ui/albumcovermanagerlist.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

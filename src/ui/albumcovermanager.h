@@ -19,11 +19,13 @@
 
 #include <QMainWindow>
 #include <QIcon>
+#include <QModelIndex>
 
 #include "gtest/gtest_prod.h"
 
 #include "core/albumcoverloader.h"
 #include "core/backgroundthread.h"
+#include "core/song.h"
 
 class LibraryBackend;
 class AlbumCoverFetcher;
@@ -43,9 +45,18 @@ class AlbumCoverManager : public QMainWindow {
 
   static const char* kSettingsGroup;
 
-  void Reset();
+  LibraryBackend* backend() const { return backend_; }
 
+  void Reset();
   void Init();
+
+  SongList GetSongsInAlbum(const QModelIndex& index) const;
+  SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
+
+ signals:
+  void AddSongsToPlaylist(const SongList& songs);
+  void LoadSongsToPlaylist(const SongList& songs);
+  void SongsDoubleClicked(const SongList& songs);
 
  protected:
   void showEvent(QShowEvent *);
@@ -68,6 +79,11 @@ class AlbumCoverManager : public QMainWindow {
   void FetchSingleCover();
   void ChooseManualCover();
   void UnsetCover();
+
+  // For adding albums to the playlist
+  void AlbumDoubleClicked(const QModelIndex& index);
+  void AddSelectedToPlaylist();
+  void LoadSelectedToPlaylist();
 
  private:
   enum ArtistItemType {

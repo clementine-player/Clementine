@@ -57,6 +57,7 @@ AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
     missing_covers_(0)
 {
   ui_->setupUi(this);
+  ui_->albums->set_cover_manager(this);
 
   // Icons
   ui_->action_fetch->setIcon(IconLoader::Load("download"));
@@ -66,6 +67,8 @@ AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
   ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   ui_->view->setIcon(IconLoader::Load("view-choose"));
   ui_->fetch->setIcon(IconLoader::Load("download"));
+  ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
+  ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
 
   // Get a square version of nocover.png
   QImage nocover(":/nocover.png");
@@ -111,6 +114,9 @@ void AlbumCoverManager::Init() {
   context_menu_->addAction(ui_->action_choose_manual);
   context_menu_->addSeparator();
   context_menu_->addAction(ui_->action_unset_cover);
+  context_menu_->addSeparator();
+  context_menu_->addAction(ui_->action_load);
+  context_menu_->addAction(ui_->action_add_to_playlist);
   ui_->albums->installEventFilter(this);
 
   // Connections
@@ -127,6 +133,9 @@ void AlbumCoverManager::Init() {
   connect(ui_->action_fetch, SIGNAL(triggered()), SLOT(FetchSingleCover()));
   connect(ui_->action_choose_manual, SIGNAL(triggered()), SLOT(ChooseManualCover()));
   connect(ui_->action_unset_cover, SIGNAL(triggered()), SLOT(UnsetCover()));
+  connect(ui_->albums, SIGNAL(doubleClicked(QModelIndex)), SLOT(AlbumDoubleClicked(QModelIndex)));
+  connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
+  connect(ui_->action_load, SIGNAL(triggered()), SLOT(LoadSelectedToPlaylist()));
 
   // Restore settings
   QSettings s;
@@ -239,6 +248,8 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     QListWidgetItem* item = new QListWidgetItem(no_cover_icon_, info.album_name, ui_->albums);
     item->setData(Role_ArtistName, info.artist);
     item->setData(Role_AlbumName, info.album_name);
+    item->setData(Qt::TextAlignmentRole, QVariant(Qt::AlignTop | Qt::AlignHCenter));
+    item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled);
 
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
       quint64 id = cover_loader_->Worker()->LoadImageAsync(
@@ -496,4 +507,50 @@ void AlbumCoverManager::UnsetCover() {
                                         item->data(Role_AlbumName).toString(),
                                         AlbumCoverLoader::kManuallyUnsetCover);
   }
+}
+
+SongList AlbumCoverManager::GetSongsInAlbum(const QModelIndex& index) const {
+  SongList ret;
+
+  LibraryQuery q;
+  q.SetColumnSpec("ROWID," + Song::kColumnSpec);
+  q.AddWhere("album", index.data(Role_AlbumName).toString());
+  q.SetOrderBy("disc, track, title");
+
+  QString artist = index.data(Role_ArtistName).toString();
+  q.AddCompilationRequirement(artist.isEmpty());
+  if (!artist.isEmpty())
+    q.AddWhere("artist", artist);
+
+  if (!backend_->ExecQuery(&q))
+    return ret;
+
+  while (q.Next()) {
+    Song song;
+    song.InitFromQuery(q);
+    ret << song;
+  }
+  return ret;
+}
+
+SongList AlbumCoverManager::GetSongsInAlbums(const QModelIndexList& indexes) const {
+  SongList ret;
+  foreach (const QModelIndex& index, indexes) {
+    ret << GetSongsInAlbum(index);
+  }
+  return ret;
+}
+
+void AlbumCoverManager::AlbumDoubleClicked(const QModelIndex &index) {
+  emit SongsDoubleClicked(GetSongsInAlbum(index));
+}
+
+void AlbumCoverManager::AddSelectedToPlaylist() {
+  emit AddSongsToPlaylist(GetSongsInAlbums(
+      ui_->albums->selectionModel()->selectedIndexes()));
+}
+
+void AlbumCoverManager::LoadSelectedToPlaylist() {
+  emit LoadSongsToPlaylist(GetSongsInAlbums(
+      ui_->albums->selectionModel()->selectedIndexes()));
 }

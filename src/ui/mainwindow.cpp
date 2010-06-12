@@ -215,6 +215,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->file_view, SIGNAL(DoubleClicked(QList<QUrl>)), SLOT(FilesDoubleClicked(QList<QUrl>)));
   connect(ui_->file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
 
+  // Cover manager connections
+  connect(cover_manager_.get(), SIGNAL(AddSongsToPlaylist(SongList)), SLOT(AddLibrarySongsToPlaylist(SongList)));
+  connect(cover_manager_.get(), SIGNAL(LoadSongsToPlaylist(SongList)), SLOT(LoadLibrarySongsToPlaylist(SongList)));
+  connect(cover_manager_.get(), SIGNAL(SongsDoubleClicked(SongList)), SLOT(LibrarySongsDoubleClicked(SongList)));
+
   // Action connections
   connect(ui_->action_next_track, SIGNAL(triggered()), player_, SLOT(Next()));
   connect(ui_->action_previous_track, SIGNAL(triggered()), player_, SLOT(Previous()));
@@ -542,6 +547,35 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
   }
 }
 
+void MainWindow::AddLibrarySongsToPlaylist(const SongList &songs) {
+  AddLibrarySongsToPlaylist(false, songs);
+}
+
+void MainWindow::LoadLibrarySongsToPlaylist(const SongList &songs) {
+  AddLibrarySongsToPlaylist(true, songs);
+}
+
+void MainWindow::LibrarySongsDoubleClicked(const SongList &songs) {
+  AddLibrarySongsToPlaylist(autoclear_playlist_, songs);
+}
+
+void MainWindow::AddLibrarySongsToPlaylist(bool clear_first, const SongList &songs) {
+  if (clear_first)
+    playlists_->ClearCurrent();
+
+  QModelIndex first_song = playlists_->current()->InsertLibraryItems(songs);
+
+  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+    // The first song doesn't match the filter, so don't play it
+    return;
+  }
+
+  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
+    playlists_->SetActiveToCurrent();
+    player_->PlayAt(first_song.row(), Engine::First, true);
+  }
+}
+
 void MainWindow::MediaStopped() {
   ui_->action_stop->setEnabled(false);
   ui_->action_stop_after_this_track->setEnabled(false);
@@ -655,21 +689,7 @@ void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndexLis
       source_indexes << index;
   }
 
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  QModelIndex first_song = playlists_->current()->InsertLibraryItems(
-      library_->model()->GetChildSongs(source_indexes));
-
-  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-    // The first song doesn't match the filter, so don't play it
-    return;
-  }
-
-  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(first_song.row(), Engine::First, true);
-  }
+  AddLibrarySongsToPlaylist(clear_first, library_->model()->GetChildSongs(source_indexes));
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
