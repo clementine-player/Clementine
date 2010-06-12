@@ -141,6 +141,17 @@ void OSD::VolumeChanged(int value) {
   ShowMessage(QCoreApplication::applicationName(), tr("Volume %1%").arg(value));
 }
 
+void OSD::MagnatuneDownloadFinished(const QStringList& albums) {
+  QString message;
+  if (albums.count() == 1)
+    message = albums[0];
+  else
+    message = tr("%1 albums").arg(albums.count());
+
+  ShowMessage(tr("Magnatune download finished"), message, QString(),
+              QImage(":magnatune.png"));
+}
+
 void OSD::ShowMessage(const QString& summary,
                       const QString& message,
                       const QString& icon,

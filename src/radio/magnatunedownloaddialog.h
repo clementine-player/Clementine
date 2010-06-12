@@ -39,8 +39,14 @@ public:
 
   void Show(const SongList& songs);
 
+signals:
+  void Finished(const QStringList& albums);
+
 public slots:
   void accept();
+
+protected:
+  void closeEvent(QCloseEvent* e);
 
 private slots:
   void Browse();

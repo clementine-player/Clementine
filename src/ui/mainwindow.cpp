@@ -35,6 +35,7 @@
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "radio/lastfmservice.h"
+#include "radio/magnatuneservice.h"
 #include "radio/radiomodel.h"
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
@@ -366,6 +367,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
   connect(ui_->radio_view->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
+  connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
 
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
 

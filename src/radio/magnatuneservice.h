@@ -83,6 +83,9 @@ class MagnatuneService : public RadioService {
 
   QUrl ModifyUrl(const QUrl& url) const;
 
+ signals:
+  void DownloadFinished(const QStringList& albums);
+
  private slots:
   void UpdateTotalSongCount(int count) { total_song_count_ = count; }
   void ReloadDatabase();

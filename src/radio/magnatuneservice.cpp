@@ -322,6 +322,8 @@ void MagnatuneService::Download() {
   MagnatuneDownloadDialog* dialog = new MagnatuneDownloadDialog(this, 0);
   dialog->setAttribute(Qt::WA_DeleteOnClose);
   dialog->Show(songs);
+
+  connect(dialog, SIGNAL(Finished(QStringList)), SIGNAL(DownloadFinished(QStringList)));
 }
 
 QWidget* MagnatuneService::HeaderWidget() const {

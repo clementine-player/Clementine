@@ -69,6 +69,7 @@ class OSD : public QObject {
   void Stopped();
   void PlaylistFinished();
   void VolumeChanged(int value);
+  void MagnatuneDownloadFinished(const QStringList& albums);
 
  private:
   struct WaitingForAlbumArt {

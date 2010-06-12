@@ -21,6 +21,7 @@
 #include "core/networkaccessmanager.h"
 #include "widgets/progressitemdelegate.h"
 
+#include <QCloseEvent>
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -248,6 +249,17 @@ void MagnatuneDownloadDialog::AllFinished(bool error) {
   ui_->button_box->button(QDialogButtonBox::Close)->show();
   ui_->button_box->button(QDialogButtonBox::Cancel)->hide();
   ui_->options->setEnabled(true);
+
+  // Make the taskbar flash
+  QApplication::alert(this);
+
+  if (!error) {
+    QStringList albums;
+    for (int i=0 ; i<ui_->albums->topLevelItemCount() ; ++i) {
+      albums << ui_->albums->topLevelItem(i)->text(0);
+    }
+    emit Finished(albums);
+  }
 }
 
 void MagnatuneDownloadDialog::Browse() {
@@ -274,4 +286,18 @@ QString MagnatuneDownloadDialog::GetOutputFilename() {
   }
 
   return QString("%1/%2-%3.zip").arg(ui_->directory->text(), album, extension);
+}
+
+void MagnatuneDownloadDialog::closeEvent(QCloseEvent* e) {
+  if (current_reply_ && current_reply_->isRunning()) {
+    boost::scoped_ptr<QMessageBox> message_box(new QMessageBox(
+        QMessageBox::Question, tr("Really cancel?"),
+        tr("Closing this window will cancel the download."),
+        QMessageBox::Abort, this));
+    message_box->addButton(tr("Don't stop!"), QMessageBox::AcceptRole);
+
+    if (message_box->exec() != QMessageBox::Abort) {
+      e->ignore();
+    }
+  }
 }
