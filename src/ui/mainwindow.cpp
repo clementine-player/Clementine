@@ -680,13 +680,13 @@ void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {
   switch (reason) {
     case QSystemTrayIcon::DoubleClick:
     case QSystemTrayIcon::Trigger:
-      if (isActiveWindow()) {
+      if (settings_.value("hidden").toBool()) {
+        show();
+        SetHiddenInTray(false);
+      } else if (isActiveWindow()) {
         hide();
         setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
         SetHiddenInTray(true);
-      } else if (settings_.value("hidden").toBool()) {
-        show();
-        SetHiddenInTray(false);
       } else if (isMinimized()) {
         hide();
         setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
