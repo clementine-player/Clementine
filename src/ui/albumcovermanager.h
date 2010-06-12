@@ -29,6 +29,7 @@
 
 class LibraryBackend;
 class AlbumCoverFetcher;
+class AlbumCoverSearcher;
 class NetworkAccessManager;
 class Ui_CoverManager;
 
@@ -46,6 +47,7 @@ class AlbumCoverManager : public QMainWindow {
   static const char* kSettingsGroup;
 
   LibraryBackend* backend() const { return backend_; }
+  QIcon no_cover_icon() const { return no_cover_icon_; }
 
   void Reset();
   void Init();
@@ -77,6 +79,7 @@ class AlbumCoverManager : public QMainWindow {
   // On the context menu
   void ShowFullsize();
   void FetchSingleCover();
+  void SearchManual();
   void ChooseManualCover();
   void UnsetCover();
 
@@ -109,6 +112,7 @@ class AlbumCoverManager : public QMainWindow {
 
   void UpdateStatusText();
   bool ShouldHide(const QListWidgetItem& item, const QString& filter, HideCovers hide) const;
+  void SaveAndSetCover(QListWidgetItem* item, const QImage& image);
 
  private:
   bool constructed_;
@@ -126,6 +130,8 @@ class AlbumCoverManager : public QMainWindow {
 
   AlbumCoverFetcher* cover_fetcher_;
   QMap<quint64, QListWidgetItem*> cover_fetching_tasks_;
+
+  AlbumCoverSearcher* cover_searcher_;
 
   QIcon artist_icon_;
   QIcon all_artists_icon_;

@@ -39,26 +39,39 @@ class AlbumCoverFetcher : public QObject {
   AlbumCoverFetcher(NetworkAccessManager* network, QObject* parent = 0);
   virtual ~AlbumCoverFetcher() {}
 
+  struct SearchResult {
+    QString artist;
+    QString album;
+    QString image_url;
+  };
+  typedef QList<SearchResult> SearchResults;
+
   static const int kMaxConcurrentRequests;
 
+  quint64 SearchForCovers(const QString& query);
   quint64 FetchAlbumCover(const QString& artist, const QString& album);
 
   void Clear();
 
  signals:
   void AlbumCoverFetched(quint64, const QImage& cover);
+  void SearchFinished(quint64, const AlbumCoverFetcher::SearchResults& results);
 
  private slots:
   void AlbumGetInfoFinished();
   void AlbumCoverFetchFinished();
   void StartRequests();
+  void AlbumSearchFinished();
 
  private:
   struct QueuedRequest {
     quint64 id;
+    QString query;
     QString artist;
     QString album;
   };
+
+  void AddRequest(const QueuedRequest req);
 
   QNetworkAccessManager* network_;
   quint64 next_id_;

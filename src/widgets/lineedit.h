@@ -19,6 +19,7 @@
 
 #include <QLineEdit>
 
+// Remove in Qt 4.7: QLineEdit has placeholderText
 class LineEdit : public QLineEdit {
   Q_OBJECT
   Q_PROPERTY(QString hint READ GetHint WRITE SetHint);

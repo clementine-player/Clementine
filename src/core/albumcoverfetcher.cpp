@@ -43,15 +43,27 @@ quint64 AlbumCoverFetcher::FetchAlbumCover(
   request.artist = artist_name;
   request.id = next_id_ ++;
 
-  queued_requests_.enqueue(request);
+  AddRequest(request);
+  return request.id;
+}
+
+quint64 AlbumCoverFetcher::SearchForCovers(const QString &query) {
+  QueuedRequest request;
+  request.query = query;
+  request.id = next_id_ ++;
+
+  AddRequest(request);
+  return request.id;
+}
+
+void AlbumCoverFetcher::AddRequest(QueuedRequest req) {
+  queued_requests_.enqueue(req);
 
   if (!request_starter_->isActive())
     request_starter_->start();
 
   if (active_requests_.count() < kMaxConcurrentRequests)
     StartRequests();
-
-  return request.id;
 }
 
 void AlbumCoverFetcher::Clear() {
@@ -68,12 +80,22 @@ void AlbumCoverFetcher::StartRequests() {
          active_requests_.count() < kMaxConcurrentRequests) {
     QueuedRequest request = queued_requests_.dequeue();
 
-    lastfm::Artist artist(request.artist);
-    lastfm::Album album(artist, request.album);
+    if (request.query.isEmpty()) {
+      lastfm::Artist artist(request.artist);
+      lastfm::Album album(artist, request.album);
 
-    QNetworkReply* reply = album.getInfo();
-    connect(reply, SIGNAL(finished()), SLOT(AlbumGetInfoFinished()));
-    active_requests_.insert(reply, request.id);
+      QNetworkReply* reply = album.getInfo();
+      connect(reply, SIGNAL(finished()), SLOT(AlbumGetInfoFinished()));
+      active_requests_.insert(reply, request.id);
+    } else {
+      QMap<QString, QString> params;
+      params["method"] = "album.search";
+      params["album"] = request.query;
+
+      QNetworkReply* reply = lastfm::ws::post(params);
+      connect(reply, SIGNAL(finished()), SLOT(AlbumSearchFinished()));
+      active_requests_.insert(reply, request.id);
+    }
   }
 }
 
@@ -98,6 +120,38 @@ void AlbumCoverFetcher::AlbumGetInfoFinished() {
     active_requests_[image_reply] = id;
   } catch (std::runtime_error&) {
     emit AlbumCoverFetched(id, QImage());
+  }
+}
+
+void AlbumCoverFetcher::AlbumSearchFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  reply->deleteLater();
+  quint64 id = active_requests_.take(reply);
+
+  if (reply->error() != QNetworkReply::NoError) {
+    qDebug() << "Error" << reply->error();
+    // TODO: retry request.
+    emit SearchFinished(id, SearchResults());
+    return;
+  }
+
+  try {
+    lastfm::XmlQuery query(lastfm::ws::parse(reply));
+
+    QList<lastfm::XmlQuery> elements = query["results"]["albummatches"].children("album");
+    SearchResults results;
+    foreach (const lastfm::XmlQuery& element, elements) {
+      SearchResult result;
+      result.album = element["name"].text();
+      result.artist = element["artist"].text();
+      result.image_url = element["image size=large"].text();
+      results << result;
+    }
+
+    emit SearchFinished(id, results);
+  } catch (std::runtime_error&) {
+    qDebug() << "Parse error";
+    emit SearchFinished(id, SearchResults());
   }
 }
 
