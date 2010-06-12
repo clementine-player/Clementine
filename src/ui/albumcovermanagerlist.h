@@ -30,6 +30,7 @@ public:
 
 protected:
   QMimeData* mimeData(const QList<QListWidgetItem*> items) const;
+  void dropEvent(QDropEvent *event);
 
 private:
   AlbumCoverManager* manager_;

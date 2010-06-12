@@ -20,8 +20,8 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include <QDropEvent>
 #include <QUrl>
-#include <QtDebug>
 
 AlbumCoverManagerList::AlbumCoverManagerList(QWidget *parent)
   : QListWidget(parent),
@@ -54,4 +54,14 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items) 
   mime_data->setUrls(urls);
   mime_data->setData(orig_data->formats()[0], orig_data->data(orig_data->formats()[0]));
   return mime_data;
+}
+
+void AlbumCoverManagerList::dropEvent(QDropEvent* e) {
+  // Set movement to Static just for this dropEvent so the user can't move the
+  // album covers.  If it's set to Static all the time then the user can't even
+  // drag to the playlist
+  QListWidget::Movement old_movement = movement();
+  setMovement(QListWidget::Static);
+  QListWidget::dropEvent(e);
+  setMovement(old_movement);
 }
