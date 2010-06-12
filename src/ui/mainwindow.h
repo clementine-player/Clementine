@@ -156,8 +156,6 @@ class MainWindow : public QMainWindow {
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
 
  private:
-  static const int kStateVersion;
-
   Ui_MainWindow* ui_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;

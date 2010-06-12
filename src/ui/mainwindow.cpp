@@ -86,7 +86,6 @@ using boost::scoped_ptr;
 void qt_mac_set_dock_menu(QMenu*);
 #endif
 
-const int MainWindow::kStateVersion = 1;
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kMusicFilterSpec =
     QT_TR_NOOP("Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)");
@@ -464,11 +463,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   settings_.beginGroup(kSettingsGroup);
 
   restoreGeometry(settings_.value("geometry").toByteArray());
-  if (!restoreState(settings_.value("state").toByteArray(), kStateVersion)) {
-    tabifyDockWidget(ui_->files_dock, ui_->radio_dock);
-    tabifyDockWidget(ui_->files_dock, ui_->library_dock);
+  if (!ui_->splitter->restoreState(settings_.value("splitter_state").toByteArray())) {
+    ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
-
+  ui_->tabs->setCurrentIndex(settings_.value("current_tab", 0).toInt());
   ui_->file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
   ReloadSettings();
@@ -650,7 +648,8 @@ void MainWindow::resizeEvent(QResizeEvent*) {
 
 void MainWindow::SaveGeometry() {
   settings_.setValue("geometry", saveGeometry());
-  settings_.setValue("state", saveState(kStateVersion));
+  settings_.setValue("splitter_state", ui_->splitter->saveState());
+  settings_.setValue("current_tab", ui_->tabs->currentIndex());
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {
