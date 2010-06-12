@@ -58,6 +58,7 @@ class TranscodeDialog;
 class VisualisationContainer;
 class Ui_MainWindow;
 
+class QLabel;
 class QSortFilterProxyModel;
 
 class MainWindow : public QMainWindow {
@@ -196,6 +197,8 @@ class MainWindow : public QMainWindow {
 
   QTimer* track_position_timer_;
   QSettings settings_;
+
+  QLabel* playlist_summary_;
 
   bool was_maximized_;
   bool autoclear_playlist_;

@@ -113,6 +113,7 @@ class Playlist : public QAbstractListModel {
   Song current_item_metadata() const;
 
   SongList GetAllSongs() const;
+  quint64 GetTotalLength() const; // in seconds
 
   void set_sequence(PlaylistSequence* v);
   PlaylistSequence* sequence() const { return playlist_sequence_; }

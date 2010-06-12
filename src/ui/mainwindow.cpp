@@ -126,6 +126,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
+    playlist_summary_(new QLabel(this)),
     was_maximized_(false)
 {
   // Wait for the database thread to start - lots of stuff depends on it.
@@ -311,6 +312,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(playlists_, SIGNAL(SummaryTextChanged(QString)), playlist_summary_, SLOT(setText(QString)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -452,7 +454,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->statusBar->addPermanentWidget(playlist_sequence_);
   ui_->statusBar->addPermanentWidget(track_slider_);
   ui_->statusBar->addWidget(multi_loading_indicator_);
+  ui_->statusBar->addWidget(playlist_summary_);
   multi_loading_indicator_->hide();
+  playlist_summary_->setIndent(4);
 
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);

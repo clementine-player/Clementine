@@ -16,6 +16,9 @@
 
 #include "utilities.h"
 
+#include <QCoreApplication>
+#include <QStringList>
+
 namespace Utilities {
 
 QString PrettyTime(int seconds) {
@@ -34,6 +37,23 @@ QString PrettyTime(int seconds) {
     ret.sprintf("%d:%02d", minutes, seconds);
 
   return ret;
+}
+
+static QString tr(const char* str) {
+  return QCoreApplication::translate("", str);
+}
+
+QString WordyTime(quint64 seconds) {
+  quint64 days = seconds / (60*60*24);
+
+  // TODO: Make the plural rules translatable
+  QStringList parts;
+
+  if (days)
+    parts << (days == 1 ? tr("1 day") : tr("%1 days").arg(days));
+  parts << PrettyTime(seconds - days*60*60*24);
+
+  return parts.join(" ");
 }
 
 } // namespace

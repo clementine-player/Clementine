@@ -1041,3 +1041,13 @@ SongList Playlist::GetAllSongs() const {
   }
   return ret;
 }
+
+quint64 Playlist::GetTotalLength() const {
+  quint64 ret = 0;
+  foreach (boost::shared_ptr<PlaylistItem> item, items_) {
+    int length = item->Metadata().length();
+    if (length > 0)
+      ret += length;
+  }
+  return ret;
+}

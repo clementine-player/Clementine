@@ -83,11 +83,15 @@ signals:
   void ActiveChanged(Playlist* new_playlist);
 
   void Error(const QString& message);
+  void SummaryTextChanged(const QString& summary);
 
   // Forwarded from individual playlists
   void CurrentSongChanged(const Song& song);
   void PlaylistChanged();
   void EditingFinished(const QModelIndex& index);
+
+private slots:
+  void UpdateSummaryText();
 
 private:
   Playlist* AddPlaylist(int id, const QString& name);

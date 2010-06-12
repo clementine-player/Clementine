@@ -17,6 +17,7 @@
 #include "playlist.h"
 #include "playlistbackend.h"
 #include "playlistmanager.h"
+#include "core/utilities.h"
 #include "playlistparsers/playlistparser.h"
 
 #include <QFileInfo>
@@ -60,6 +61,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
 
   connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
   connect(ret, SIGNAL(PlaylistChanged()), SIGNAL(PlaylistChanged()));
+  connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
 
   playlists_[id] = Data(ret, name);
@@ -142,6 +144,7 @@ void PlaylistManager::SetCurrentPlaylist(int id) {
   Q_ASSERT(playlists_.contains(id));
   current_ = id;
   emit CurrentChanged(current());
+  UpdateSummaryText();
 }
 
 void PlaylistManager::SetActivePlaylist(int id) {
@@ -182,4 +185,17 @@ void PlaylistManager::SetActiveStreamMetadata(const QUrl &url, const Song &song)
 
 void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
   playlist_backend_->SetPlaylistOrder(ids);
+}
+
+void PlaylistManager::UpdateSummaryText() {
+  int tracks = current()->rowCount();
+  quint64 seconds = current()->GetTotalLength();
+
+  // TODO: Make the plurals translatable
+  QString summary = tracks == 1 ? tr("1 track") : tr("%1 tracks").arg(tracks);
+
+  if (seconds)
+    summary += " (" + Utilities::WordyTime(seconds) + ")";
+
+  emit SummaryTextChanged(summary);
 }
