@@ -132,12 +132,20 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
 }
 
 void PlaylistContainer::SetViewModel(Playlist* playlist) {
+  if (view()->selectionModel()) {
+    disconnect(view()->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+               this, SLOT(SelectionChanged()));
+  }
+
   // Set the view
   playlist->IgnoreSorting(true);
   view()->setModel(playlist->proxy());
   view()->SetItemDelegates(manager_->library_backend());
   view()->SetPlaylist(playlist);
   playlist->IgnoreSorting(false);
+
+  connect(view()->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+          this, SLOT(SelectionChanged()));
 
   // Update filter
   ui_->filter->setText(playlist->proxy()->filterRegExp().pattern());
@@ -309,4 +317,8 @@ void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
 
   no_matches_label_->move(pos);
   no_matches_label_->resize(size);
+}
+
+void PlaylistContainer::SelectionChanged() {
+  manager_->SelectionChanged(view()->selectionModel()->selection());
 }

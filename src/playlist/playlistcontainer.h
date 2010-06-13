@@ -76,6 +76,7 @@ private slots:
   void SetTabBarVisible(bool visible);
   void SetTabBarHeight(int height);
 
+  void SelectionChanged();
   void UpdateFilter();
 
 private:

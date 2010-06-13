@@ -17,8 +17,9 @@
 #ifndef PLAYLISTMANAGER_H
 #define PLAYLISTMANAGER_H
 
-#include <QObject>
+#include <QItemSelection>
 #include <QMap>
+#include <QObject>
 
 #include "core/song.h"
 
@@ -67,6 +68,8 @@ public slots:
   void SetActivePlaylist(int id);
   void SetActiveToCurrent() { SetActivePlaylist(current_id()); }
 
+  void SelectionChanged(const QItemSelection& selection);
+
   // Convenience slots that defer to either current() or active()
   void ClearCurrent();
   void ShuffleCurrent();
@@ -107,6 +110,8 @@ private:
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
+
+  QItemSelection current_selection_;
 
   // key = id
   QMap<int, Data> playlists_;

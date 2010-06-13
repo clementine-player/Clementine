@@ -21,6 +21,7 @@
 #include "playlistparsers/playlistparser.h"
 
 #include <QFileInfo>
+#include <QtDebug>
 
 PlaylistManager::PlaylistManager(QObject *parent)
   : QObject(parent),
@@ -189,13 +190,34 @@ void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
 
 void PlaylistManager::UpdateSummaryText() {
   int tracks = current()->rowCount();
-  quint64 seconds = current()->GetTotalLength();
+  quint64 seconds = 0;
+  int selected = 0;
+
+  // Get the length of the selected tracks
+  foreach (const QItemSelectionRange& range, current_selection_) {
+    selected += range.bottom() - range.top() + 1;
+    for (int i=range.top() ; i<=range.bottom() ; ++i) {
+      seconds += range.model()->index(i, Playlist::Column_Length).data().toInt();
+    }
+  }
+
+  QString summary;
+  if (selected > 1) {
+    summary += tr("%1 selected of").arg(selected) + " ";
+  } else {
+    seconds = current()->GetTotalLength();
+  }
 
   // TODO: Make the plurals translatable
-  QString summary = tracks == 1 ? tr("1 track") : tr("%1 tracks").arg(tracks);
+  summary += tracks == 1 ? tr("1 track") : tr("%1 tracks").arg(tracks);
 
   if (seconds)
-    summary += " (" + Utilities::WordyTime(seconds) + ")";
+    summary += " - [ " + Utilities::WordyTime(seconds) + " ]";
 
   emit SummaryTextChanged(summary);
+}
+
+void PlaylistManager::SelectionChanged(const QItemSelection &selection) {
+  current_selection_ = selection;
+  UpdateSummaryText();
 }

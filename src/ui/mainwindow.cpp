@@ -451,12 +451,13 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
       equalizer_->preamp_value(), equalizer_->gain_values());
 
   // Statusbar widgets
+  playlist_summary_->setMinimumWidth(QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));
+  playlist_summary_->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  ui_->statusBar->addPermanentWidget(playlist_summary_);
   ui_->statusBar->addPermanentWidget(playlist_sequence_);
   ui_->statusBar->addPermanentWidget(track_slider_);
   ui_->statusBar->addWidget(multi_loading_indicator_);
-  ui_->statusBar->addWidget(playlist_summary_);
   multi_loading_indicator_->hide();
-  playlist_summary_->setIndent(4);
 
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
