@@ -739,3 +739,32 @@ void GstEngine::RemoveBufferConsumer(BufferConsumer *consumer) {
   if (current_pipeline_)
     current_pipeline_->RemoveBufferConsumer(consumer);
 }
+
+int GstEngine::AddBackgroundStream(const QUrl& url) {
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url);
+  if (!pipeline) {
+    return -1;
+  }
+  // We don't want to get metadata messages or end notifications.
+  disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
+  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
+  connect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(BackgroundStreamFinished()));
+  if (!pipeline->SetState(GST_STATE_PLAYING)) {
+    qWarning() << "Could not set thread to PLAYING.";
+    pipeline.reset();
+    return -1;
+  }
+  pipeline->SetNextUrl(url);
+  int stream_id = next_background_stream_id_++;
+  background_streams_[stream_id] = pipeline;
+  return stream_id;
+}
+
+void GstEngine::StopBackgroundStream(int id) {
+  background_streams_.remove(id);  // Removes last shared_ptr reference.
+}
+
+void GstEngine::BackgroundStreamFinished() {
+  GstEnginePipeline* pipeline = qobject_cast<GstEnginePipeline*>(sender());
+  pipeline->SetNextUrl(pipeline->url());
+}

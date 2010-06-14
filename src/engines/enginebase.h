@@ -51,6 +51,9 @@ class Base : public QObject, boost::noncopyable {
   virtual void Unpause() = 0;
   virtual void Seek( uint ms ) = 0;
 
+  virtual int AddBackgroundStream(const QUrl& url);
+  virtual void StopBackgroundStream(int id) {}
+
   virtual State state() const = 0;
   virtual uint position() const = 0;
   virtual uint length() const { return 0; }
@@ -59,6 +62,7 @@ class Base : public QObject, boost::noncopyable {
   virtual bool Load(const QUrl &url, TrackChangeType change);
   bool Play(const QUrl &u, TrackChangeType c) { return Load(u, c) && Play(); }
   void SetVolume( uint value );
+
 
   // Simple accessors
   inline uint volume() const { return volume_; }
@@ -105,6 +109,7 @@ class Base : public QObject, boost::noncopyable {
   int fadeout_duration_;
   bool crossfade_enabled_;
   bool autocrossfade_enabled_;
+  int next_background_stream_id_;
 
  private:
   bool about_to_end_emitted_;

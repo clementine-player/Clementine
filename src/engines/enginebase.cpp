@@ -32,6 +32,7 @@ Engine::Base::Base()
     fadeout_enabled_(true),
     fadeout_duration_(2000),
     crossfade_enabled_(true),
+    next_background_stream_id_(0),
     about_to_end_emitted_(false)
 {
 }
@@ -72,4 +73,8 @@ void Engine::Base::EmitAboutToEnd() {
 
   about_to_end_emitted_ = true;
   emit TrackAboutToEnd();
+}
+
+int Engine::Base::AddBackgroundStream(const QUrl& url) {
+  return -1;
 }

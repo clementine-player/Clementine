@@ -25,10 +25,11 @@
 #include "enginebase.h"
 #include "bufferconsumer.h"
 
-#include <QString>
-#include <QTimerEvent>
+#include <QHash>
 #include <QList>
+#include <QString>
 #include <QStringList>
+#include <QTimerEvent>
 
 #include <gst/gst.h>
 #include <boost/shared_ptr.hpp>
@@ -64,6 +65,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool Init();
 
   bool CanDecode(const QUrl& url);
+
+  int AddBackgroundStream(const QUrl& url);
+  void StopBackgroundStream(int id);
 
   uint position() const;
   uint length() const;
@@ -111,6 +115,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline);
   void FadeoutFinished();
   void SeekNow();
+  void BackgroundStreamFinished();
 
  private:
   // Callbacks
@@ -168,6 +173,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   uint seek_pos_;
 
   int timer_id_;
+
+  QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
 };
 
 
