@@ -32,5 +32,192 @@
   <string>http://clementine-player.appspot.com/sparkle</string>
   <key>SUPublicDSAKeyFile</key>
   <string>sparkle_pub.pem</string>
+  <key>CFBundleDocumentTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>xspf</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>Generic.icns</string>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>application/xspf+xml</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>XSPF Playlist</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>wav</string>
+      </array>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>audio/x-wav</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>WAVE Audio File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>pls</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>pls.icns</string>
+      <key>CFBundleTypeName</key>
+      <string>Shoutcast playlist</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>m3u</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>m3u.icns</string>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>audio/x-mpegurl</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>Playlist file</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>aac</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>mpeg4.icns</string>
+      <key>CFBundleTypeName</key>
+      <string>AAC file</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>ogg</string>
+        <string>ogx</string>
+        <string>ogm</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>ogg.icns</string>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>audio/ogg</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>Ogg Vorbis File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>oga</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>ogg.icns</string>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>audio/ogg</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>Ogg Audio File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>wma</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>wma.icns</string>
+      <key>CFBundleTypeName</key>
+      <string>WIndows Media Audio</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>mp3</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>mp3.icns</string>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>audio/mpeg</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>MPEG Audio Layer 3</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>3gp</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>generic.icns</string>
+      <key>CFBundleTypeName</key>
+      <string>3GPP File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>m4a</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>mpeg4.icns</string>
+      <key>CFBundleTypeName</key>
+      <string>MPEG-4 Audio File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>mpc</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>generic.icns</string>
+      <key>CFBundleTypeName</key>
+      <string>Musepack Audio File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>flac</string>
+      </array>
+      <key>CFBundleTypeIconFile</key>
+      <string>generic.icns</string>
+      <key>CFBundleTypeMIMETypes</key>
+      <array>
+        <string>audio/flac</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>FLAC Audio File</string>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+    </dict>
+  </array>
 </dict>
 </plist>
