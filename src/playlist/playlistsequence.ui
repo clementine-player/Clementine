@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>62</width>
+    <width>80</width>
     <height>37</height>
    </rect>
   </property>
@@ -15,10 +15,7 @@
   border: 0px;
   background: transparent;
 }
-
-#line {
-  margin: 3px 0px 3px 0px;
-}</string>
+</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
@@ -27,6 +24,13 @@
    <property name="margin">
     <number>0</number>
    </property>
+   <item>
+    <widget class="Line" name="line_left">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QToolButton" name="repeat">
      <property name="toolTip">
@@ -66,7 +70,7 @@
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line">
+    <widget class="Line" name="line_right">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>

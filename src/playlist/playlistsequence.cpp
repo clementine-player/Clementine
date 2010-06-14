@@ -38,6 +38,12 @@ PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
 {
   ui_->setupUi(this);
 
+  // Windows puts lines between status bar widgets already
+#ifdef Q_OS_WIN32
+  ui_->line_left->hide();
+  ui_->line_right->hide();
+#endif
+
   // Icons
   ui_->repeat->setIcon(AddDesaturatedIcon(IconLoader::Load("media-playlist-repeat")));
   ui_->shuffle->setIcon(AddDesaturatedIcon(IconLoader::Load("media-playlist-shuffle")));
