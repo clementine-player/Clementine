@@ -24,6 +24,7 @@
 #include <QSystemTrayIcon>
 
 #include "config.h"
+#include "core/mac_startup.h"
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
@@ -61,7 +62,7 @@ class Ui_MainWindow;
 class QLabel;
 class QSortFilterProxyModel;
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
@@ -87,7 +88,8 @@ class MainWindow : public QMainWindow {
   void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
 
-  bool event(QEvent* event);
+  void Activate();
+  bool LoadUrl(const QString& url);
 
  private slots:
   void FilePathChanged(const QString& path);
