@@ -15,30 +15,31 @@
 
 #include <QCoreApplication>
 #include <QEvent>
-#include <QObject>
+
+#include <QtDebug>
 
 // Capture global media keys on Mac (Cocoa only!)
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
 @interface MacApplication :NSApplication {
   GlobalShortcuts* shortcut_handler_;
-  QObject* application_handler_;
+  PlatformInterface* application_handler_;
 }
 
 - (GlobalShortcuts*) shortcut_handler;
 - (void) SetShortcutHandler: (GlobalShortcuts*)handler;
 
-- (QObject*) application_handler;
-- (void) SetApplicationHandler: (QObject*)handler;
+- (PlatformInterface*) application_handler;
+- (void) SetApplicationHandler: (PlatformInterface*)handler;
 
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
 @interface AppDelegate :NSObject { //<NSApplicationDelegate> {
-  QObject* application_handler_;
+  PlatformInterface* application_handler_;
 }
 
-- (id) initWithHandler: (QObject*)handler;
+- (id) initWithHandler: (PlatformInterface*)handler;
 // NSApplicationDelegate
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
 @end
@@ -52,16 +53,26 @@
   return self;
 }
 
-- (id) initWithHandler: (QObject*)handler {
+- (id) initWithHandler: (PlatformInterface*)handler {
   application_handler_ = handler;
   return self;
 }
 
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag {
   if (application_handler_) {
-    qApp->postEvent(application_handler_, new QEvent(QEvent::ApplicationActivate));
+    application_handler_->Activate();
   }
   return YES;
+}
+
+- (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {
+  qDebug() << "Wants to open:" << [filename UTF8String];
+
+  if (application_handler_->LoadUrl(QString::fromUtf8([filename UTF8String]))) {
+    return YES;
+  }
+
+  return NO;
 }
 @end
 
@@ -83,11 +94,11 @@
   shortcut_handler_ = handler;
 }
 
-- (QObject*) application_handler {
+- (PlatformInterface*) application_handler {
   return application_handler_;
 }
 
-- (void) SetApplicationHandler: (QObject*)handler {
+- (void) SetApplicationHandler: (PlatformInterface*)handler {
   AppDelegate* delegate = [[AppDelegate alloc] initWithHandler:handler];
   [self setDelegate:delegate];
 }
@@ -144,7 +155,7 @@ void SetShortcutHandler(GlobalShortcuts* handler) {
   [NSApp SetShortcutHandler: handler];
 }
 
-void SetApplicationHandler(QObject* handler) {
+void SetApplicationHandler(PlatformInterface* handler) {
   [NSApp SetApplicationHandler: handler];
 }
 

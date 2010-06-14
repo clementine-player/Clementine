@@ -1169,13 +1169,20 @@ void MainWindow::ForceShowOSD(const Song &song) {
   osd_->SongChanged(song);
 }
 
-bool MainWindow::event(QEvent* event) {
-  // ApplicationActivate is received when the dock is clicked on OS X.
-  if (event->type() == QEvent::ApplicationActivate) {
-    show();
+void MainWindow::Activate() {
+  show();
+}
+
+bool MainWindow::LoadUrl(const QString& path) {
+  // Currently this is only local files.
+  QFileInfo info(path);
+  if (info.exists()) {
+    QList<QUrl> urls;
+    urls << QUrl::fromLocalFile(path);
+    AddFilesToPlaylist(urls);
     return true;
   }
-  return QMainWindow::event(event);
+  return false;
 }
 
 void MainWindow::CheckForUpdates() {
