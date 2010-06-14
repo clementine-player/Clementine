@@ -48,6 +48,8 @@
 
 using boost::shared_ptr;
 
+const char* Player::kRainUrl = "http://s315939866.onlinehome.us/rainymood30a.mp3";
+
 #ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
   arg.beginStructure();
@@ -76,7 +78,8 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
     playlists_(playlists),
     lastfm_(lastfm),
     engine_(CreateEngine(engine)),
-    stream_change_type_(Engine::First)
+    stream_change_type_(Engine::First),
+    rain_stream_(-1)
 {
   settings_.beginGroup("Player");
 
@@ -596,5 +599,16 @@ void Player::TrackAboutToEnd() {
       }
     }
     engine_->StartPreloading(url);
+  }
+}
+
+void Player::MakeItRain(bool rain) {
+  const bool is_raining = rain_stream_ != -1;
+  if (rain && !is_raining) {
+    rain_stream_ = engine_->AddBackgroundStream(QUrl(kRainUrl));
+  }
+  if (!rain && is_raining) {
+    engine_->StopBackgroundStream(rain_stream_);
+    rain_stream_ = -1;
   }
 }

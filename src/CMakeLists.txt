@@ -505,7 +505,7 @@ else (APPLE)
   install(TARGETS clementine
     RUNTIME DESTINATION bin
   )
-    
+
   install(FILES ../dist/clementine_64.png
     DESTINATION share/icons/hicolor/64x64/apps/
     RENAME application-x-clementine.png

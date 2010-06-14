@@ -209,6 +209,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_load_playlist->setIcon(IconLoader::Load("document-open"));
   ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
   ui_->action_update_library->setIcon(IconLoader::Load("view-refresh"));
+  ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
 
   // File view connections
   connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
@@ -249,6 +250,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
+  connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);

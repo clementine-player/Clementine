@@ -103,6 +103,8 @@ class Player : public QObject {
 
   void PlaylistChanged();
 
+  void MakeItRain(bool rain);
+
   // MPRIS /Player
   int GetCaps() const;
   DBusStatus GetStatus() const;
@@ -178,6 +180,10 @@ class Player : public QObject {
   Engine::TrackChangeType stream_change_type_;
 
   QUrl loading_async_;
+
+  int rain_stream_;
+
+  static const char* kRainUrl;
 };
 
 #endif // PLAYER_H

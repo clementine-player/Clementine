@@ -123,7 +123,7 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <property name="spacing">
          <number>0</number>
@@ -351,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>804</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -402,6 +402,12 @@
     </property>
     <addaction name="action_about"/>
    </widget>
+   <widget class="QMenu" name="menuExtras">
+    <property name="title">
+     <string>Extras</string>
+    </property>
+    <addaction name="action_rain"/>
+   </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Tools</string>
@@ -417,6 +423,7 @@
    <addaction name="menuPlaylist"/>
    <addaction name="menuTools"/>
    <addaction name="menuSettings"/>
+   <addaction name="menuExtras"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="action_previous_track">
@@ -543,6 +550,14 @@
   <action name="action_cover_manager">
    <property name="text">
     <string>Cover Manager</string>
+   </property>
+  </action>
+  <action name="action_rain">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string comment="Label for button to enable/disable rain background sound.">Rain</string>
    </property>
   </action>
   <action name="action_shuffle_mode">

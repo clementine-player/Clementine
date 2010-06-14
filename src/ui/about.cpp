@@ -59,6 +59,7 @@ QString About::MakeHtml() const {
     ret += "<br />" + MakeHtml(person);
 
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
+  ret += QString("<br /><br />and <a href=\"http://rainymood.com\">Rainy Mood</a>");
 
   return ret;
 }
