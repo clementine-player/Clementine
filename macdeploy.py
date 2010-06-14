@@ -81,6 +81,7 @@ GSTREAMER_PLUGINS=[
     'libgstmusepack.so',
     'libgstogg.so',
     'libgstvorbis.so',
+    'libgstwavparse.so',
 
     # HTTP src support
     'libgstneonhttpsrc.so',
