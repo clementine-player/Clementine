@@ -203,8 +203,9 @@ TEST_F(SongLoaderTest, LoadRemotePlainM3U) {
 
 TEST_F(SongLoaderTest, LoadLocalDirectory) {
   // Make a directory and shove some files in it
-  QByteArray dir(QString(QDir::tempPath() + "/songloader_testdir-XXXXXX").toLocal8Bit());
-  ASSERT_TRUE(mkdtemp(dir.data()));
+  char* dir = tmpnam(NULL);
+  ASSERT_TRUE(dir);
+  mkdir(dir, S_IRWXU);
 
   QFile resource(":/testdata/beep.mp3");
   resource.open(QIODevice::ReadOnly);
@@ -212,26 +213,26 @@ TEST_F(SongLoaderTest, LoadLocalDirectory) {
 
   // Write 3 MP3 files
   for (int i=0 ; i<3 ; ++i) {
-    QFile mp3(QString("%1/%2.mp3").arg(QString(dir)).arg(i));
+    QFile mp3(QString("%1/%2.mp3").arg(dir).arg(i));
     mp3.open(QIODevice::WriteOnly);
     mp3.write(data);
   }
 
   // And one file that isn't an MP3
-  QFile somethingelse(dir + "/somethingelse.foo");
+  QFile somethingelse(QString(dir) + "/somethingelse.foo");
   somethingelse.open(QIODevice::WriteOnly);
   somethingelse.write("I'm not an MP3!");
   somethingelse.close();
 
   // The actual test happens in another function so we can always clean up if
   // it asserts
-  LoadLocalDirectory(QString(dir));
+  LoadLocalDirectory(dir);
 
   QFile::remove(QString(dir) + "/0.mp3");
   QFile::remove(QString(dir) + "/1.mp3");
   QFile::remove(QString(dir) + "/2.mp3");
   QFile::remove(QString(dir) + "/somethingelse.foo");
-  rmdir(dir.constData());
+  rmdir(dir);
 }
 
 void SongLoaderTest::LoadLocalDirectory(const QString &filename) {
