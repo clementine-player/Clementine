@@ -101,7 +101,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   // First we wait for typefinder to tell us what it is.  If it's not text/plain
   // or text/uri-list assume it's a song and return success.
   // Otherwise wait to get 512 bytes of data and do magic on it - if the magic
-  // fails then we don't no what it is so return failure.
+  // fails then we don't know what it is so return failure.
   // If the magic succeeds then we know for sure it's a playlist - so read the
   // rest of the file, parse the playlist and return success.
 
