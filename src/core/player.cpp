@@ -513,23 +513,8 @@ void Player::VolumeSet(int volume) {
 }
 
 int Player::AddTrack(const QString& track, bool play_now) {
-  QUrl url(track);
-  QList<QUrl> list;
-  list << url;
-  QModelIndex index;
-  if (url.scheme() == "file") {
-    index = playlists_->active()->InsertPaths(list, play_now ? playlists_->active()->current_index() + 1 : -1);
-  } else {
-    index = playlists_->active()->InsertStreamUrls(list, play_now ? playlists_->active()->current_index() + 1: -1);
-  }
-
-  if (index.isValid()) {
-    if (play_now) {
-      PlayAt(index.row(), Engine::First, true);
-    }
-    return 0;  // Success.
-  }
-  return -1;  // Anything else for failure.
+  playlists_->active()->InsertUrls(QList<QUrl>() << QUrl(track), play_now);
+  return 0;
 }
 
 void Player::DelTrack(int index) {

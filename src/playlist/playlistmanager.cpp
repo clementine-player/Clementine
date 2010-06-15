@@ -64,6 +64,10 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   connect(ret, SIGNAL(PlaylistChanged()), SIGNAL(PlaylistChanged()));
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
+  connect(ret, SIGNAL(LoadTracksStarted()), SIGNAL(LoadTracksStarted()));
+  connect(ret, SIGNAL(LoadTracksFinished()), SIGNAL(LoadTracksFinished()));
+  connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
+  connect(ret, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 
   playlists_[id] = Data(ret, name);
 

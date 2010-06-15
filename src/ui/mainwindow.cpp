@@ -22,6 +22,7 @@
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
 #include "core/player.h"
+#include "core/songloader.h"
 #include "core/stylesheetloader.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
@@ -32,6 +33,7 @@
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlistview.h"
+#include "playlist/songloaderinserter.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "radio/lastfmservice.h"
@@ -89,9 +91,7 @@ void qt_mac_set_dock_menu(QMenu*);
 
 const char* MainWindow::kSettingsGroup = "MainWindow";
 const char* MainWindow::kMusicFilterSpec =
-    QT_TR_NOOP("Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)");
-const char* MainWindow::kPlaylistFilterSpec =
-    QT_TR_NOOP("Playlists (*.m3u *.xspf *.xml)");
+    QT_TR_NOOP("Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)");
 const char* MainWindow::kAllFilesFilterSpec =
     QT_TR_NOOP("All Files (*)");
 
@@ -315,6 +315,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), playlist_summary_, SLOT(setText(QString)));
+  connect(playlists_, SIGNAL(LoadTracksStarted()), SLOT(LoadTracksStarted()));
+  connect(playlists_, SIGNAL(LoadTracksFinished()), SLOT(LoadTracksFinished()));
+  connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -546,12 +549,25 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
   if (clear_first)
     playlists_->ClearCurrent();
 
-  QModelIndex playlist_index = playlists_->current()->InsertPaths(urls);
+  AddUrls(player_->GetState() != Engine::Playing, urls);
+}
 
-  if (playlist_index.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(playlist_index.row(), Engine::First, true);
-  }
+void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
+  SongLoaderInserter* inserter = new SongLoaderInserter(this);
+  connect(inserter, SIGNAL(AsyncLoadStarted()), SLOT(LoadTracksStarted()));
+  connect(inserter, SIGNAL(AsyncLoadFinished()), SLOT(LoadTracksFinished()));
+  connect(inserter, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+
+  inserter->Load(playlists_->current(), -1, play_now, urls);
+}
+
+void MainWindow::LoadTracksStarted() {
+  multi_loading_indicator_->TaskStarted(MultiLoadingIndicator::LoadingTracks);
+}
+
+void MainWindow::LoadTracksFinished() {
+  multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::LoadingTracks);
 }
 
 void MainWindow::AddLibrarySongsToPlaylist(const SongList &songs) {
@@ -1029,10 +1045,12 @@ void MainWindow::AddFile() {
   // Last used directory
   QString directory = settings_.value("add_media_path", QDir::currentPath()).toString();
 
+  PlaylistParser parser;
+
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add media"), directory,
-      QString("%1;;%2;;%3").arg(tr(kMusicFilterSpec), tr(kPlaylistFilterSpec),
+      QString("%1;;%2;;%3").arg(tr(kMusicFilterSpec), parser.filters(),
                                 tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty())
     return;
@@ -1040,20 +1058,12 @@ void MainWindow::AddFile() {
   // Save last used directory
   settings_.setValue("add_media_path", file_names[0]);
 
-  // Add media
-  /*QList<QUrl> urls;
+  // Convert to URLs
+  QList<QUrl> urls;
   foreach (const QString& path, file_names) {
-    if (playlist_parser_->can_load(path)) {
-      playlists_->current()->InsertSongs(playlist_parser_->Load(path));
-    } else {
-      QUrl url(QUrl::fromLocalFile(path));
-      if (url.scheme().isEmpty())
-        url.setScheme("file");
-      urls << url;
-    }
+    urls << QUrl::fromLocalFile(path);
   }
-  playlists_->current()->InsertPaths(urls);*/
-  // TODO: Fix
+  AddUrls(player_->GetState() != Engine::Playing, urls);
 }
 
 void MainWindow::AddFolder() {
@@ -1069,10 +1079,8 @@ void MainWindow::AddFolder() {
   settings_.setValue("add_folder_path", directory);
 
   // Add media
-  QUrl url(QUrl::fromLocalFile(directory));
-  if (url.scheme().isEmpty())
-    url.setScheme("file");
-  playlists_->current()->InsertPaths(QList<QUrl>() << url);
+  AddUrls(player_->GetState() != Engine::Playing,
+          QList<QUrl>() << QUrl::fromLocalFile(directory));
 }
 
 void MainWindow::AddStream() {
@@ -1080,10 +1088,8 @@ void MainWindow::AddStream() {
 }
 
 void MainWindow::AddStreamAccepted() {
-  QList<QUrl> urls;
-  urls << add_stream_dialog_->url();
-
-  playlists_->current()->InsertStreamUrls(urls);
+  AddUrls(player_->GetState() != Engine::Playing,
+          QList<QUrl>() << add_stream_dialog_->url());
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
@@ -1145,7 +1151,7 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
       // fallthrough
     case CommandlineOptions::UrlList_Append:
-      playlists_->current()->InsertPaths(options.urls(), -1);
+      AddUrls(player_->GetState() != Engine::Playing, options.urls());
       break;
   }
 
@@ -1174,18 +1180,6 @@ void MainWindow::ForceShowOSD(const Song &song) {
 
 void MainWindow::Activate() {
   show();
-}
-
-bool MainWindow::LoadUrl(const QString& path) {
-  // Currently this is only local files.
-  QFileInfo info(path);
-  if (info.exists()) {
-    QList<QUrl> urls;
-    urls << QUrl::fromLocalFile(path);
-    AddFilesToPlaylist(urls);
-    return true;
-  }
-  return false;
 }
 
 void MainWindow::CheckForUpdates() {

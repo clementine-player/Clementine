@@ -32,6 +32,7 @@ class SongLoader : public QObject {
   Q_OBJECT
 public:
   SongLoader(QObject* parent = 0);
+  ~SongLoader();
 
   enum Result {
     Success,

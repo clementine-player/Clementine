@@ -71,7 +71,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   static const char* kSettingsGroup;
   static const char* kMusicFilterSpec;
-  static const char* kPlaylistFilterSpec;
   static const char* kAllFilesFilterSpec;
 
   // Don't change the values
@@ -89,7 +88,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void closeEvent(QCloseEvent* event);
 
   void Activate();
-  bool LoadUrl(const QString& url);
 
  private slots:
   void FilePathChanged(const QString& path);
@@ -140,6 +138,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void LibraryScanStarted();
   void LibraryScanFinished();
 
+  void LoadTracksStarted();
+  void LoadTracksFinished();
+
   void ShowLibraryConfig();
   void ReloadSettings();
 
@@ -157,6 +158,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
+  void AddUrls(bool play_now, const QList<QUrl>& urls);
 
  private:
   Ui_MainWindow* ui_;

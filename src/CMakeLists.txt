@@ -71,6 +71,7 @@ set(SOURCES
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
   playlist/playlistview.cpp
+  playlist/songloaderinserter.cpp
   playlist/songplaylistitem.cpp
 
   playlistparsers/asxparser.cpp
@@ -176,6 +177,7 @@ set(HEADERS
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
   playlist/playlistview.h
+  playlist/songloaderinserter.h
   playlist/songmimedata.h
 
   playlistparsers/asxparser.h

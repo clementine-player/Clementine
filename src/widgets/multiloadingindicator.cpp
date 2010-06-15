@@ -70,6 +70,7 @@ QString MultiLoadingIndicator::TaskTypeToString(TaskType type) {
     case LoadingStream:      return tr("Loading stream");
     case LoadingLastFM:      return tr("Loading Last.fm radio");
     case LoadingMagnatune:   return tr("Downloading Magnatune catalogue");
+    case LoadingTracks:      return tr("Loading tracks");
 
     default: return QString::null;
   }

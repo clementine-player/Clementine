@@ -92,6 +92,9 @@ signals:
   void CurrentSongChanged(const Song& song);
   void PlaylistChanged();
   void EditingFinished(const QModelIndex& index);
+  void PlayRequested(const QModelIndex& index);
+  void LoadTracksStarted();
+  void LoadTracksFinished();
 
 private slots:
   void UpdateSummaryText();

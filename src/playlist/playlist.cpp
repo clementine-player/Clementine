@@ -18,6 +18,7 @@
 #include "playlistbackend.h"
 #include "playlistfilter.h"
 #include "playlistundocommands.h"
+#include "songloaderinserter.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
 #include "library/library.h"
@@ -470,10 +471,20 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     undo_stack_->push(new PlaylistUndoCommands::MoveItems(this, source_rows, row));
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
-    InsertPaths(data->urls(), row);
+    InsertUrls(data->urls(), false, row);
   }
 
   return true;
+}
+
+void Playlist::InsertUrls(const QList<QUrl> &urls, bool play_now, int pos) {
+  SongLoaderInserter* inserter = new SongLoaderInserter(this);
+  connect(inserter, SIGNAL(AsyncLoadStarted()), SIGNAL(LoadTracksStarted()));
+  connect(inserter, SIGNAL(AsyncLoadFinished()), SIGNAL(LoadTracksFinished()));
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
+
+  inserter->Load(this, pos, play_now, urls);
 }
 
 void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
@@ -564,45 +575,6 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
   Save();
 }
 
-QModelIndex Playlist::InsertPaths(QList<QUrl> urls, int pos) {
-  SongList songs;
-  for (int i=0 ; i<urls.count() ; ++i) {
-    QUrl url(urls[i]);
-    if (url.scheme() != "file")
-      continue;
-
-    QString filename(url.toLocalFile());
-    QFileInfo info(filename);
-
-    if (!info.exists())
-      continue;
-
-    if (info.isDir()) {
-      // Add all the songs in the directory
-      QDirIterator it(filename,
-          QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
-          QDirIterator::Subdirectories | QDirIterator::FollowSymlinks);
-
-      QList<QUrl> new_urls;
-      while (it.hasNext()) {
-        QString path(it.next());
-        new_urls << QUrl::fromLocalFile(path);
-      }
-      qSort(new_urls);
-      urls << new_urls;
-    } else {
-      Song song;
-      song.InitFromFile(filename, -1);
-      if (!song.is_valid())
-        continue;
-
-      songs << song;
-    }
-  }
-
-  return InsertSongs(songs, pos);
-}
-
 QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int pos) {
   if (items.isEmpty())
     return QModelIndex();
@@ -673,15 +645,6 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int po
 
     playlist_items << shared_ptr<PlaylistItem>(
         new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist()));
-  }
-  return InsertItems(playlist_items, pos);
-}
-
-QModelIndex Playlist::InsertStreamUrls(const QList<QUrl>& urls, int pos) {
-  PlaylistItemList playlist_items;
-  foreach (const QUrl& url, urls) {
-    playlist_items << shared_ptr<PlaylistItem>(new RadioPlaylistItem(
-        RadioModel::ServiceByName(SavedRadio::kServiceName), url.toString(), url.toString(), QString()));
   }
   return InsertItems(playlist_items, pos);
 }

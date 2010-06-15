@@ -41,6 +41,13 @@ SongLoader::SongLoader(QObject *parent)
   connect(timeout_timer_, SIGNAL(timeout()), SLOT(Timeout()));
 }
 
+SongLoader::~SongLoader() {
+  if (pipeline_) {
+    state_ = Finished;
+    gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
+  }
+}
+
 SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
   url_ = url;
 
@@ -53,6 +60,8 @@ SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
 }
 
 SongLoader::Result SongLoader::LoadLocal() {
+  qDebug() << "Loading local file" << url_;
+
   // First check to see if it's a directory - if so we can load all the songs
   // inside right away.
   QString filename = url_.toLocalFile();
@@ -70,6 +79,8 @@ SongLoader::Result SongLoader::LoadLocal() {
 
   ParserBase* parser = playlist_parser_->MaybeGetParserForMagic(data);
   if (parser) {
+    qDebug() << "Parsing using" << parser->name();
+
     // It's a playlist!
     file.reset();
     songs_ = parser->Load(&file, QFileInfo(filename).path());
@@ -84,6 +95,17 @@ SongLoader::Result SongLoader::LoadLocal() {
   return Success;
 }
 
+static bool CompareSongs(const Song& left, const Song& right) {
+  // Order by artist, album, disc, trac
+  if (left.artist() < right.artist()) return true;
+  if (left.artist() > right.artist()) return true;
+  if (left.album() < right.album()) return true;
+  if (left.album() > right.album()) return true;
+  if (left.disc() < right.disc()) return true;
+  if (left.disc() > right.disc()) return true;
+  return left.track() < right.track();
+}
+
 void SongLoader::LoadLocalDirectory(const QString& filename) {
   QDirIterator it(filename, QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                   QDirIterator::Subdirectories);
@@ -96,10 +118,14 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
       songs_ << song;
   }
 
+  qStableSort(songs_.begin(), songs_.end(), CompareSongs);
+
   emit LoadFinished(true);
 }
 
 SongLoader::Result SongLoader::LoadRemote() {
+  qDebug() << "Loading remote file" << url_;
+
   // It's not a local file so we have to fetch it to see what it is.  We use
   // gstreamer to do this since it handles funky URLs for us (http://, ssh://,
   // etc) and also has typefinder plugins.
@@ -154,6 +180,7 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
 
   // Check the mimetype
   instance->mime_type_ = gst_structure_get_name(gst_caps_get_structure(caps, 0));
+  qDebug() << "Mime type is" << instance->mime_type_;
   if (instance->mime_type_ == "text/plain" ||
       instance->mime_type_ == "text/uri-list") {
     // Yeah it might be a playlist, let's get some data and have a better look
@@ -174,6 +201,7 @@ void SongLoader::DataReady(GstPad *, GstBuffer *buf, void *self) {
   // Append the data to the buffer
   instance->buffer_.append(reinterpret_cast<const char*>(GST_BUFFER_DATA(buf)),
                            GST_BUFFER_SIZE(buf));
+  qDebug() << "Received total" << instance->buffer_.size() << "bytes";
 
   if (instance->state_ == WaitingForMagic &&
       instance->buffer_.size() >= PlaylistParser::kMagicSize) {
@@ -260,6 +288,7 @@ void SongLoader::MagicReady() {
   parser_ = playlist_parser_->MaybeGetParserForMagic(buffer_, mime_type_);
 
   if (!parser_) {
+    qWarning() << url_.toString() << "is text, but not a recognised playlist";
     // It doesn't look like a playlist, so just finish
     StopTypefindAsync(false);
     return;
@@ -267,6 +296,7 @@ void SongLoader::MagicReady() {
 
   // It is a playlist - we'll get more data and parse the whole thing in
   // EndOfStreamReached
+  qDebug() << "Magic says" << parser_->name();
   state_ = WaitingForData;
 }
 
@@ -286,11 +316,15 @@ void SongLoader::StopTypefind() {
   timeout_timer_->stop();
 
   if (success_ && parser_) {
+    qDebug() << "Parsing" << url_ << "with" << parser_->name();
+
     // Parse the playlist
     QBuffer buf(&buffer_);
     buf.open(QIODevice::ReadOnly);
     songs_ = parser_->Load(&buf);
   } else if (success_) {
+    qDebug() << "Loading" << url_ << "as raw stream";
+
     // It wasn't a playlist - just put the URL in as a stream
     Song song;
     song.set_valid(true);

@@ -131,8 +131,7 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertMagnatuneItems(const SongList& items, int pos = -1);
   QModelIndex InsertSongs(const SongList& items, int pos = -1);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1);
-  QModelIndex InsertStreamUrls(const QList<QUrl>& urls, int pos = -1);
-  QModelIndex InsertPaths(QList<QUrl> urls, int pos = -1);
+  void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 
@@ -169,8 +168,13 @@ class Playlist : public QAbstractListModel {
  signals:
   void CurrentSongChanged(const Song& metadata);
   void EditingFinished(const QModelIndex& index);
+  void PlayRequested(const QModelIndex& index);
 
   void PlaylistChanged();
+
+  void LoadTracksStarted();
+  void LoadTracksFinished();
+  void LoadTracksError(const QString& message);
 
  private:
   void SetCurrentIsPaused(bool paused);

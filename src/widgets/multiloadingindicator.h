@@ -35,6 +35,7 @@ class MultiLoadingIndicator : public QWidget {
     LoadingStream,
     LoadingLastFM,
     LoadingMagnatune,
+    LoadingTracks,
   };
 
  public slots:
