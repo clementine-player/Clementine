@@ -16,12 +16,14 @@
 
 #include "asxparser.h"
 
+#include <QBuffer>
 #include <QDomDocument>
 #include <QFile>
 #include <QIODevice>
 #include <QRegExp>
 #include <QUrl>
 #include <QXmlStreamReader>
+#include <QtDebug>
 
 ASXParser::ASXParser(QObject* parent)
     : XMLParser(parent)
@@ -29,9 +31,27 @@ ASXParser::ASXParser(QObject* parent)
 }
 
 SongList ASXParser::Load(QIODevice *device, const QDir&) const {
+  // We have to load everything first so we can munge the "XML".
+  QByteArray data = device->readAll();
+
+  // (thanks Amarok...)
+  // ASX looks a lot like xml, but doesn't require tags to be case sensitive,
+  // meaning we have to accept things like: <Abstract>...</abstract>
+  // We use a dirty way to achieve this: we make all tags lower case
+  QRegExp ex("(<[/]?[^>]*[A-Z]+[^>]*>)");
+  ex.setCaseSensitivity(Qt::CaseInsensitive);
+  int index = 0;
+  while ((index = ex.indexIn(data, index)) != -1) {
+    data.replace(ex.cap(1).toLocal8Bit(), ex.cap(1).toLower().toLocal8Bit());
+    index += ex.matchedLength();
+  }
+
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+
   SongList ret;
 
-  QXmlStreamReader reader(device);
+  QXmlStreamReader reader(&buffer);
   if (!ParseUntilElement(&reader, "asx")) {
     return ret;
   }
@@ -51,6 +71,7 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
   QString title, artist, album;
   while (!reader->atEnd()) {
     QXmlStreamReader::TokenType type = reader->readNext();
+
     switch (type) {
       case QXmlStreamReader::StartElement: {
         QStringRef name = reader->name();
@@ -79,6 +100,7 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
           song.Init(title, artist, album, -1);
           return song;
         }
+        break;
       }
       default:
         break;

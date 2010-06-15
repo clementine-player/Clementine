@@ -88,3 +88,16 @@ TEST_F(ASXParserTest, SavesSong) {
   EXPECT_THAT(data.constData(), HasSubstr("<title>foo</title>"));
   EXPECT_THAT(data.constData(), HasSubstr("<author>bar</author>"));
 }
+
+TEST_F(ASXParserTest, ParsesSomaFM) {
+  QFile somafm(":/testdata/secretagent.asx");
+  somafm.open(QIODevice::ReadOnly);
+
+  ASXParser parser;
+  SongList songs = parser.Load(&somafm);
+
+  ASSERT_EQ(4, songs.count());
+  EXPECT_EQ("SomaFM: Secret Agent", songs[0].title());
+  EXPECT_EQ("Keep us on the air! Click Support SomaFM above!", songs[0].artist());
+  EXPECT_EQ("http://streamer-ntc-aa03.somafm.com:80/stream/1021", songs[0].filename());
+}

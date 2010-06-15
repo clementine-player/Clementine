@@ -34,8 +34,6 @@ bool XMLParser::ParseUntilElement(QXmlStreamReader* reader, const QString& name)
       case QXmlStreamReader::StartElement:
         if (reader->name() == name) {
           return true;
-        } else {
-          IgnoreElement(reader);
         }
         break;
       default:
