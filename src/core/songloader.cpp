@@ -18,6 +18,7 @@
 #include "core/song.h"
 #include "playlistparsers/parserbase.h"
 #include "playlistparsers/playlistparser.h"
+#include "radio/fixlastfm.h"
 
 #include <QBuffer>
 #include <QDirIterator>
