@@ -16,8 +16,7 @@
 
 #include "plsparser.h"
 
-#include <QTemporaryFile>
-#include <QSettings>
+#include <QTextStream>
 #include <QtDebug>
 
 PLSParser::PLSParser(QObject* parent)
@@ -26,73 +25,44 @@ PLSParser::PLSParser(QObject* parent)
 }
 
 SongList PLSParser::Load(QIODevice *device, const QDir &dir) const {
-  QTemporaryFile temp_file;
-  temp_file.open();
-  temp_file.write(device->readAll());
-  temp_file.flush();
+  QMap<int, Song> songs;
+  QRegExp n_re("\\d+$");
 
-  QSettings s(temp_file.fileName(), QSettings::IniFormat);
+  while (!device->atEnd()) {
+    QString line = QString::fromUtf8(device->readLine()).trimmed();
+    int equals = line.indexOf('=');
+    QString key = line.left(equals).toLower();
+    QString value = line.mid(equals + 1);
 
-  SongList ret;
-  // Use the first group, probably "playlist" but it doesn't matter
-  if (s.childGroups().isEmpty())
-    return ret;
-  s.beginGroup(s.childGroups()[0]);
+    n_re.indexIn(key);
+    int n = n_re.cap(0).toInt();
 
-  // We try not to rely on NumberOfEntries (it might not be present), so go
-  // through each key in the file and look at ones that start with "File"
-  QStringList keys(s.childKeys());
-  keys.sort(); // Make sure we get the tracks in order
-
-  foreach (const QString& key, keys) {
-    if (!key.toLower().startsWith("file"))
-      continue;
-
-    bool ok = false;
-    int n = key.mid(4).toInt(&ok); // 4 == "file".length
-
-    if (!ok)
-      continue;
-
-    QString filename = s.value(key).toString();
-    QString title = s.value("Title" + QString::number(n)).toString();
-    int length = s.value("Length" + QString::number(n)).toInt();
-
-    Song song;
-    song.set_title(title);
-    song.set_length(length);
-
-    if (!ParseTrackLocation(filename, dir, &song)) {
-      qWarning() << "Failed to parse location: " << filename;
-    } else {
-      ret << song;
+    if (key.startsWith("file")) {
+      if (!ParseTrackLocation(value, dir, &songs[n]))
+        qWarning() << "Failed to parse location: " << value;
+    } else if (key.startsWith("title")) {
+      songs[n].set_title(value);
+    } else if (key.startsWith("length")) {
+      songs[n].set_length(value.toInt());
     }
   }
 
-  return ret;
+  return songs.values();
 }
 
 void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
-  QTemporaryFile temp_file;
-  temp_file.open();
-
-  QSettings s(temp_file.fileName(), QSettings::IniFormat);
-  s.beginGroup("playlist");
-  s.setValue("Version", 2);
-  s.setValue("NumberOfEntries", songs.count());
+  QTextStream s(device);
+  s << "[playlist]" << endl;
+  s << "Version=2" << endl;
+  s << "NumberOfEntries=" << songs.count() << endl;
 
   int n = 1;
   foreach (const Song& song, songs) {
-    s.setValue("File" + QString::number(n), MakeRelativeTo(song.filename(), dir));
-    s.setValue("Title" + QString::number(n), song.title());
-    s.setValue("Length" + QString::number(n), song.length());
+    s << "File" << n << "=" << MakeRelativeTo(song.filename(), dir) << endl;
+    s << "Title" << n << "=" << song.title() << endl;
+    s << "Length" << n << "=" << song.length() << endl;
     ++n;
   }
-
-  s.sync();
-
-  temp_file.reset();
-  device->write(temp_file.readAll());
 }
 
 bool PLSParser::TryMagic(const QByteArray &data) const {
