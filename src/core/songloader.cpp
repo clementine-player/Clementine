@@ -222,7 +222,7 @@ gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
       break;
   }
 
-  return GST_BUS_DROP;
+  return FALSE;
 }
 
 GstBusSyncReply SongLoader::BusCallbackSync(GstBus*, GstMessage* msg, gpointer self) {

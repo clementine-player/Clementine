@@ -195,7 +195,7 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
       break;
   }
 
-  return GST_BUS_DROP;
+  return FALSE;
 }
 
 GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpointer self) {
