@@ -48,7 +48,7 @@ SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
     return LoadLocal();
   }
 
-  // TODO: Start timeout
+  timeout_timer_->start();
   return LoadRemote();
 }
 
@@ -303,5 +303,7 @@ void SongLoader::StopTypefind() {
 }
 
 void SongLoader::Timeout() {
-  Q_ASSERT(0); // TODO
+  state_ = Finished;
+  success_ = false;
+  StopTypefind();
 }
