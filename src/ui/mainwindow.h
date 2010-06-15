@@ -87,7 +87,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
 
+  // PlatformInterface
   void Activate();
+  bool LoadUrl(const QString& url);
 
  private slots:
   void FilePathChanged(const QString& path);

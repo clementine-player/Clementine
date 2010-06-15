@@ -1182,6 +1182,16 @@ void MainWindow::Activate() {
   show();
 }
 
+bool MainWindow::LoadUrl(const QString& url) {
+  if (!QFile::exists(url))
+    return false;
+
+  QList<QUrl> urls;
+  urls << QUrl::fromLocalFile(url);
+  AddUrls(true, urls);  // Always play now as this was a direct request from Finder.
+  return true;
+}
+
 void MainWindow::CheckForUpdates() {
 #ifdef Q_OS_DARWIN
   mac::CheckForUpdates();
