@@ -139,6 +139,5 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
 }
 
 bool XSPFParser::TryMagic(const QByteArray &data) const {
-  QByteArray lower(data.toLower());
-  return lower.contains("<playlist") && lower.contains("<tracklist");
+  return data.contains("<playlist") && data.contains("<trackList");
 }

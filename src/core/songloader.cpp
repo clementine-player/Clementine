@@ -65,10 +65,10 @@ SongLoader::Result SongLoader::LoadLocal() {
     return Error;
   QByteArray data(file.read(PlaylistParser::kMagicSize));
 
-  ParserBase* parser = playlist_parser_->TryMagic(data);
+  ParserBase* parser = playlist_parser_->MaybeGetParserForMagic(data);
   if (parser) {
     // It's a playlist!
-    file.seek(0);
+    file.reset();
     songs_ = parser->Load(&file, QFileInfo(filename).path());
   } else {
     // Not a playlist, so just assume it's a song
@@ -252,7 +252,7 @@ void SongLoader::EndOfStreamReached() {
 }
 
 void SongLoader::MagicReady() {
-  parser_ = playlist_parser_->TryMagic(buffer_);
+  parser_ = playlist_parser_->MaybeGetParserForMagic(buffer_);
 
   if (!parser_) {
     // It doesn't look like a playlist, so just finish

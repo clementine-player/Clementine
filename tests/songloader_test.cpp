@@ -29,15 +29,15 @@
 
 class SongLoaderTest : public ::testing::Test {
 public:
- static void SetUpTestCase() {
-   sGstEngine = new GstEngine;
-   ASSERT_TRUE(sGstEngine->Init());
- }
+  static void SetUpTestCase() {
+    sGstEngine = new GstEngine;
+    ASSERT_TRUE(sGstEngine->Init());
+  }
 
- static void TearDownTestCase() {
-   delete sGstEngine;
-   sGstEngine = NULL;
- }
+  static void TearDownTestCase() {
+    delete sGstEngine;
+    sGstEngine = NULL;
+  }
 
 protected:
   void SetUp() {
@@ -109,7 +109,7 @@ TEST_F(SongLoaderTest, LoadRemoteMp3) {
   QEventLoop loop;
   QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
                    &loop, SLOT(quit()));
-  loop.exec();
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
   ASSERT_EQ(1, spy.count());
@@ -129,7 +129,7 @@ TEST_F(SongLoaderTest, LoadRemote404) {
   QEventLoop loop;
   QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
                    &loop, SLOT(quit()));
-  loop.exec();
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Error
   ASSERT_EQ(1, spy.count());
@@ -146,7 +146,7 @@ TEST_F(SongLoaderTest, LoadRemotePls) {
   QEventLoop loop;
   QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
                    &loop, SLOT(quit()));
-  loop.exec();
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Success
   ASSERT_EQ(1, spy.count());
@@ -169,7 +169,7 @@ TEST_F(SongLoaderTest, LoadRemotePlainText) {
   QEventLoop loop;
   QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
                    &loop, SLOT(quit()));
-  loop.exec();
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
 
   // Check the signal was emitted with Error
   ASSERT_EQ(1, spy.count());

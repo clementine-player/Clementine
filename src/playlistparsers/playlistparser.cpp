@@ -70,16 +70,12 @@ ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
   return NULL;
 }
 
-ParserBase* PlaylistParser::ParserForData(const QByteArray &data) const {
+ParserBase* PlaylistParser::MaybeGetParserForMagic(const QByteArray &data) const {
   foreach (ParserBase* p, parsers_) {
     if (p->TryMagic(data))
       return p;
   }
   return NULL;
-}
-
-ParserBase* PlaylistParser::TryMagic(const QByteArray &data) const {
-  return ParserForData(data);
 }
 
 SongList PlaylistParser::Load(const QString &filename, ParserBase* p) const {

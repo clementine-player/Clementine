@@ -91,7 +91,7 @@ void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
 
   s.sync();
 
-  temp_file.seek(0);
+  temp_file.reset();
   device->write(temp_file.readAll());
 }
 

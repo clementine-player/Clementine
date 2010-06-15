@@ -58,5 +58,5 @@ TemporaryResource::TemporaryResource(const QString& filename) {
   resource.open(QIODevice::ReadOnly);
   write(resource.readAll());
 
-  seek(0);
+  reset();
 }

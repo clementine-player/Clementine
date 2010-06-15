@@ -34,14 +34,13 @@ public:
   QStringList file_extensions() const;
   QString filters() const;
 
-  ParserBase* TryMagic(const QByteArray& data) const;
+  ParserBase* MaybeGetParserForMagic(const QByteArray& data) const;
 
   SongList Load(const QString& filename, ParserBase* parser = 0) const;
   void Save(const SongList& songs, const QString& filename) const;
 
 private:
   ParserBase* ParserForExtension(const QString& suffix) const;
-  ParserBase* ParserForData(const QByteArray& data) const;
 
   QList<ParserBase*> parsers_;
 };
