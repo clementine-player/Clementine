@@ -182,8 +182,6 @@ TEST_F(SongLoaderTest, LoadRemotePlainText) {
 
 TEST_F(SongLoaderTest, LoadLocalDirectory) {
   // Make a directory and shove some files in it
-  // Use QTemporaryFile to get a filename, delete the file and make a directory
-  // in its place with the same name.
   QByteArray dir(QString(QDir::tempPath() + "/songloader_testdir-XXXXXX").toLocal8Bit());
   ASSERT_TRUE(mkdtemp(dir.data()));
 
