@@ -60,8 +60,8 @@ private:
   };
 
   Result LoadLocal();
-  Result LoadLocalDirectory(const QString& filename);
   Result LoadRemote();
+  void LoadLocalDirectory(const QString& filename);
 
   // GStreamer callbacks
   static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps, void* self);

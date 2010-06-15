@@ -22,10 +22,12 @@
 #include "engines/gstengine.h"
 
 #include <QBuffer>
+#include <QDir>
 #include <QEventLoop>
 #include <QSignalSpy>
 
 #include <boost/scoped_ptr.hpp>
+#include <cstdlib>
 
 class SongLoaderTest : public ::testing::Test {
 public:
@@ -43,6 +45,8 @@ protected:
   void SetUp() {
     loader_.reset(new SongLoader);
   }
+
+  void LoadLocalDirectory(const QString& dir);
 
   static const char* kRemoteUrl;
   static GstEngine* sGstEngine;
@@ -174,4 +178,61 @@ TEST_F(SongLoaderTest, LoadRemotePlainText) {
   // Check the signal was emitted with Error
   ASSERT_EQ(1, spy.count());
   EXPECT_EQ(false, spy[0][0].toBool());
+}
+
+TEST_F(SongLoaderTest, LoadLocalDirectory) {
+  // Make a directory and shove some files in it
+  // Use QTemporaryFile to get a filename, delete the file and make a directory
+  // in its place with the same name.
+  QByteArray dir(QString(QDir::tempPath() + "/songloader_testdir-XXXXXX").toLocal8Bit());
+  ASSERT_TRUE(mkdtemp(dir.data()));
+
+  QFile resource(":/testdata/beep.mp3");
+  resource.open(QIODevice::ReadOnly);
+  QByteArray data(resource.readAll());
+
+  // Write 3 MP3 files
+  for (int i=0 ; i<3 ; ++i) {
+    QFile mp3(QString("%1/%2.mp3").arg(QString(dir)).arg(i));
+    mp3.open(QIODevice::WriteOnly);
+    mp3.write(data);
+  }
+
+  // And one file that isn't an MP3
+  QFile somethingelse(dir + "/somethingelse.foo");
+  somethingelse.open(QIODevice::WriteOnly);
+  somethingelse.write("I'm not an MP3!");
+  somethingelse.close();
+
+  // The actual test happens in another function so we can always clean up if
+  // it asserts
+  LoadLocalDirectory(QString(dir));
+
+  QFile::remove(QString(dir) + "/0.mp3");
+  QFile::remove(QString(dir) + "/1.mp3");
+  QFile::remove(QString(dir) + "/2.mp3");
+  QFile::remove(QString(dir) + "/somethingelse.foo");
+  rmdir(dir.constData());
+}
+
+void SongLoaderTest::LoadLocalDirectory(const QString &filename) {
+  // Load the directory
+  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(filename));
+  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
+
+  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
+
+  // Start an event loop to wait for it to read the directory
+  QEventLoop loop;
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
+                   &loop, SLOT(quit()));
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+  // Check the signal was emitted with Success
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(true, spy[0][0].toBool());
+
+  // Check it loaded three files
+  ASSERT_EQ(3, loader_->songs().count());
+  EXPECT_EQ("Beep mp3", loader_->songs()[2].title());
 }

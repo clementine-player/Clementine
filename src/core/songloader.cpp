@@ -23,6 +23,7 @@
 #include <QDirIterator>
 #include <QFileInfo>
 #include <QTimer>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 #include <boost/bind.hpp>
@@ -55,7 +56,8 @@ SongLoader::Result SongLoader::LoadLocal() {
   // inside right away.
   QString filename = url_.toLocalFile();
   if (QFileInfo(filename).isDir()) {
-    return LoadLocalDirectory(filename);
+    QtConcurrent::run(this, &SongLoader::LoadLocalDirectory, filename);
+    return WillLoadAsync;
   }
 
   // It's a local file, so check if it looks like a playlist.
@@ -74,13 +76,14 @@ SongLoader::Result SongLoader::LoadLocal() {
     // Not a playlist, so just assume it's a song
     Song song;
     song.InitFromFile(filename, -1);
-    songs_ << song;
+    if (song.is_valid())
+      songs_ << song;
   }
 
   return Success;
 }
 
-SongLoader::Result SongLoader::LoadLocalDirectory(const QString& filename) {
+void SongLoader::LoadLocalDirectory(const QString& filename) {
   QDirIterator it(filename, QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                   QDirIterator::Subdirectories);
 
@@ -88,10 +91,11 @@ SongLoader::Result SongLoader::LoadLocalDirectory(const QString& filename) {
     QString path = it.next();
     Song song;
     song.InitFromFile(path, -1);
-    songs_ << song;
+    if (song.is_valid())
+      songs_ << song;
   }
 
-  return Success;
+  emit LoadFinished(true);
 }
 
 SongLoader::Result SongLoader::LoadRemote() {
