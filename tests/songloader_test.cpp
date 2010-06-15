@@ -180,6 +180,27 @@ TEST_F(SongLoaderTest, LoadRemotePlainText) {
   EXPECT_EQ(false, spy[0][0].toBool());
 }
 
+TEST_F(SongLoaderTest, LoadRemotePlainM3U) {
+  SongLoader::Result ret = loader_->Load(QString(kRemoteUrl) + "/plainm3u.m3u");
+  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
+
+  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
+
+  // Start an event loop to wait for gstreamer to do its thing
+  QEventLoop loop;
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
+                   &loop, SLOT(quit()));
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+  // Check the signal was emitted with Success
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(true, spy[0][0].toBool());
+
+  ASSERT_EQ(2, loader_->songs().count());
+  EXPECT_EQ("http://www.example.com/one.mp3", loader_->songs()[0].filename());
+  EXPECT_EQ("http://www.example.com/two.mp3", loader_->songs()[1].filename());
+}
+
 TEST_F(SongLoaderTest, LoadLocalDirectory) {
   // Make a directory and shove some files in it
   QByteArray dir(QString(QDir::tempPath() + "/songloader_testdir-XXXXXX").toLocal8Bit());

@@ -48,7 +48,7 @@ SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
     return LoadLocal();
   }
 
-  timeout_timer_->start();
+  timeout_timer_->start(timeout_msec);
   return LoadRemote();
 }
 
@@ -153,9 +153,9 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
     return;
 
   // Check the mimetype
-  QString mimetype(gst_structure_get_name(gst_caps_get_structure(caps, 0)));
-  if (mimetype == "text/plain" ||
-      mimetype == "text/uri-list") {
+  instance->mime_type_ = gst_structure_get_name(gst_caps_get_structure(caps, 0));
+  if (instance->mime_type_ == "text/plain" ||
+      instance->mime_type_ == "text/uri-list") {
     // Yeah it might be a playlist, let's get some data and have a better look
     instance->state_ = WaitingForMagic;
     return;
@@ -257,7 +257,7 @@ void SongLoader::EndOfStreamReached() {
 }
 
 void SongLoader::MagicReady() {
-  parser_ = playlist_parser_->MaybeGetParserForMagic(buffer_);
+  parser_ = playlist_parser_->MaybeGetParserForMagic(buffer_, mime_type_);
 
   if (!parser_) {
     // It doesn't look like a playlist, so just finish

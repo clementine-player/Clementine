@@ -86,6 +86,7 @@ private:
   bool success_;
   boost::shared_ptr<GstElement> pipeline_;
   ParserBase* parser_;
+  QString mime_type_;
   QByteArray buffer_;
 };
 

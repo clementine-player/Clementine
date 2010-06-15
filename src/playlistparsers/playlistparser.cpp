@@ -70,9 +70,11 @@ ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
   return NULL;
 }
 
-ParserBase* PlaylistParser::MaybeGetParserForMagic(const QByteArray &data) const {
+ParserBase* PlaylistParser::MaybeGetParserForMagic(const QByteArray& data,
+                                                   const QString& mime_type) const {
   foreach (ParserBase* p, parsers_) {
-    if (p->TryMagic(data))
+    if ((!mime_type.isEmpty() && mime_type == p->mime_type()) ||
+        p->TryMagic(data))
       return p;
   }
   return NULL;
