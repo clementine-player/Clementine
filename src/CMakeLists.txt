@@ -41,6 +41,7 @@ set(SOURCES
   core/scopedtransaction.cpp
   core/settingsprovider.cpp
   core/song.cpp
+  core/songloader.cpp
   core/stylesheetloader.cpp
   core/utilities.cpp
 
@@ -151,6 +152,7 @@ set(HEADERS
   core/mergedproxymodel.h
   core/networkaccessmanager.h
   core/player.h
+  core/songloader.h
 
   engines/enginebase.h
 

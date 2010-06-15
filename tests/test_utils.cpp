@@ -16,6 +16,7 @@
 
 #include "test_utils.h"
 
+#include <QDir>
 #include <QNetworkRequest>
 #include <QString>
 #include <QUrl>
@@ -46,4 +47,16 @@ void PrintTo(const ::QString& str, std::ostream& os) {
 
 void PrintTo(const ::QVariant& var, std::ostream& os) {
   os << var.toString().toStdString();
+}
+
+TemporaryResource::TemporaryResource(const QString& filename) {
+  setFileTemplate(QDir::tempPath() + "/clementine_test-XXXXXX." +
+                  filename.section('.', -1, -1));
+  open();
+
+  QFile resource(filename);
+  resource.open(QIODevice::ReadOnly);
+  write(resource.readAll());
+
+  seek(0);
 }

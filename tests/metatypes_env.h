@@ -23,6 +23,7 @@
 #include <QModelIndex>
 
 #include "core/song.h"
+#include "core/songloader.h"
 #include "library/directory.h"
 
 class MetatypesEnvironment : public ::testing::Environment {
@@ -34,6 +35,7 @@ public:
     qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
     qRegisterMetaType<SongList>("SongList");
     qRegisterMetaType<QModelIndex>("QModelIndex");
+    qRegisterMetaType<SongLoader::Result>("SongLoader::Result");
   }
 };
 

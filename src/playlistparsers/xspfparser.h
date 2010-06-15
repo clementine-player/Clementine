@@ -33,6 +33,8 @@ class XSPFParser : public XMLParser {
   QString name() const { return "XSPF"; }
   QStringList file_extensions() const { return QStringList() << "xspf"; }
 
+  bool TryMagic(const QByteArray &data) const;
+
   SongList Load(QIODevice *device, const QDir &dir = QDir()) const;
   void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
 

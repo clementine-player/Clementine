@@ -29,16 +29,19 @@ class PlaylistParser : public QObject {
 public:
   PlaylistParser(QObject *parent = 0);
 
+  static const int kMagicSize;
+
   QStringList file_extensions() const;
   QString filters() const;
 
-  bool can_load(const QString& filename) const;
+  ParserBase* TryMagic(const QByteArray& data) const;
 
-  SongList Load(const QString& filename) const;
+  SongList Load(const QString& filename, ParserBase* parser = 0) const;
   void Save(const SongList& songs, const QString& filename) const;
 
 private:
   ParserBase* ParserForExtension(const QString& suffix) const;
+  ParserBase* ParserForData(const QByteArray& data) const;
 
   QList<ParserBase*> parsers_;
 };

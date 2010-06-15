@@ -22,6 +22,8 @@
 
 #include <QtDebug>
 
+const int PlaylistParser::kMagicSize = 512;
+
 PlaylistParser::PlaylistParser(QObject *parent)
   : QObject(parent)
 {
@@ -60,10 +62,6 @@ QString PlaylistParser::filters() const {
   return filters.join(";;");
 }
 
-bool PlaylistParser::can_load(const QString &filename) const {
-  return file_extensions().contains(QFileInfo(filename).suffix());
-}
-
 ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
   foreach (ParserBase* p, parsers_) {
     if (p->file_extensions().contains(suffix))
@@ -72,11 +70,23 @@ ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
   return NULL;
 }
 
-SongList PlaylistParser::Load(const QString &filename) const {
+ParserBase* PlaylistParser::ParserForData(const QByteArray &data) const {
+  foreach (ParserBase* p, parsers_) {
+    if (p->TryMagic(data))
+      return p;
+  }
+  return NULL;
+}
+
+ParserBase* PlaylistParser::TryMagic(const QByteArray &data) const {
+  return ParserForData(data);
+}
+
+SongList PlaylistParser::Load(const QString &filename, ParserBase* p) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension
-  ParserBase* parser = ParserForExtension(info.suffix());
+  ParserBase* parser = p ? p : ParserForExtension(info.suffix());
   if (!parser) {
     qWarning() << "Unknown filetype:" << filename;
     return SongList();

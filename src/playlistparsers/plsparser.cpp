@@ -94,3 +94,7 @@ void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
   temp_file.seek(0);
   device->write(temp_file.readAll());
 }
+
+bool PLSParser::TryMagic(const QByteArray &data) const {
+  return data.contains("[playlist]");
+}

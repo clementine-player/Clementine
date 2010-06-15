@@ -1041,7 +1041,7 @@ void MainWindow::AddFile() {
   settings_.setValue("add_media_path", file_names[0]);
 
   // Add media
-  QList<QUrl> urls;
+  /*QList<QUrl> urls;
   foreach (const QString& path, file_names) {
     if (playlist_parser_->can_load(path)) {
       playlists_->current()->InsertSongs(playlist_parser_->Load(path));
@@ -1052,7 +1052,8 @@ void MainWindow::AddFile() {
       urls << url;
     }
   }
-  playlists_->current()->InsertPaths(urls);
+  playlists_->current()->InsertPaths(urls);*/
+  // TODO: Fix
 }
 
 void MainWindow::AddFolder() {

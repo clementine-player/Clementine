@@ -21,6 +21,7 @@
 
 #include <QMetaType>
 #include <QModelIndex>
+#include <QTemporaryFile>
 
 class QNetworkRequest;
 class QString;
@@ -43,5 +44,10 @@ void PrintTo(const ::QVariant& var, std::ostream& os);
     void Emit##n(const t1& a1, const t2& a2) { emit n(a1, a2); }
 
 Q_DECLARE_METATYPE(QModelIndex);
+
+class TemporaryResource : public QTemporaryFile {
+public:
+  TemporaryResource(const QString& filename);
+};
 
 #endif  // TEST_UTILS_H

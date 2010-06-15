@@ -106,3 +106,7 @@ void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
     device->write("\n");
   }
 }
+
+bool M3UParser::TryMagic(const QByteArray &data) const {
+  return data.contains("#EXTM3U") || data.contains("#EXTINF");
+}

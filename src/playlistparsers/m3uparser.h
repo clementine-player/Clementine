@@ -31,6 +31,9 @@ class M3UParser : public ParserBase {
 
   QString name() const { return "M3U"; }
   QStringList file_extensions() const { return QStringList() << "m3u"; }
+  QString mime_type() const { return "text/uri-list"; }
+
+  bool TryMagic(const QByteArray &data) const;
 
   SongList Load(QIODevice* device, const QDir& dir = QDir()) const;
   void Save(const SongList &songs, QIODevice* device, const QDir& dir = QDir()) const;

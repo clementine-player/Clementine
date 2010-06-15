@@ -110,3 +110,7 @@ void ASXParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
   }
   writer.writeEndDocument();
 }
+
+bool ASXParser::TryMagic(const QByteArray &data) const {
+  return data.toLower().contains("<asx");
+}
