@@ -96,7 +96,7 @@ SongLoader::Result SongLoader::LoadLocal() {
 }
 
 static bool CompareSongs(const Song& left, const Song& right) {
-  // Order by artist, album, disc, trac
+  // Order by artist, album, disc, track
   if (left.artist() < right.artist()) return true;
   if (left.artist() > right.artist()) return true;
   if (left.album() < right.album()) return true;
