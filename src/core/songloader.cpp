@@ -144,7 +144,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   GstElement* source = gst_element_make_from_uri(
       GST_URI_SRC, url_.toEncoded().constData(), NULL);
   if (!source) {
-    qWarning() << "Couldn't create gstreamer source element for" << url_;
+    qWarning() << "Couldn't create gstreamer source element for" << url_.toString();
     return Error;
   }
 
