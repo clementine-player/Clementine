@@ -58,7 +58,6 @@ QString PlaylistParser::filters() const {
 
   filters.prepend(tr("All playlists (%1)").arg(all_extensions.join(" ")));
 
-  qDebug() << filters.join(";;");
   return filters.join(";;");
 }
 

@@ -71,7 +71,6 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   // Tab bar
   ui_->tab_bar->setExpanding(false);
   ui_->tab_bar->setMovable(true);
-  ui_->tab_bar->setShape(QTabBar::RoundedSouth);
 
   connect(tab_bar_animation_, SIGNAL(frameChanged(int)), SLOT(SetTabBarHeight(int)));
   ui_->tab_bar->setMaximumHeight(0);
