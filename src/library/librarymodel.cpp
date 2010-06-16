@@ -527,7 +527,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
   case GroupBy_AlbumArtist:
     item->key = q.Value(0).toString();
     item->display_text = TextOrUnknown(item->key);
-    item->sort_text = SortText(item->key);
+    item->sort_text = SortTextForArtist(item->key);
     break;
 
   case GroupBy_None:
@@ -574,7 +574,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   case GroupBy_Album: if (item->key.isNull()) item->key = s.album();
   case GroupBy_AlbumArtist: if (item->key.isNull()) item->key = s.albumartist();
     item->display_text = TextOrUnknown(item->key);
-    item->sort_text = SortText(item->key);
+    item->sort_text = SortTextForArtist(item->key);
     break;
 
   case GroupBy_None:
