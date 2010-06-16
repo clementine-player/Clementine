@@ -639,13 +639,23 @@ QModelIndex Playlist::InsertSongs(const SongList& songs, int pos) {
 
 QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos) {
   PlaylistItemList playlist_items;
+  QList<QUrl> song_urls;
   foreach (RadioItem* item, items) {
     if (!item->playable)
       continue;
 
-    playlist_items << shared_ptr<PlaylistItem>(
-        new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist()));
+    if (item->use_song_loader) {
+      song_urls << item->Url();
+    } else {
+      playlist_items << shared_ptr<PlaylistItem>(
+          new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist()));
+    }
   }
+
+  if (!song_urls.isEmpty()) {
+    InsertUrls(song_urls, false, pos);
+  }
+
   return InsertItems(playlist_items, pos);
 }
 

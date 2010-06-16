@@ -19,7 +19,8 @@
 
 RadioItem::RadioItem(SimpleTreeModel<RadioItem> *model)
   : SimpleTreeItem<RadioItem>(Type_Root, model),
-    service(NULL)
+    service(NULL),
+    use_song_loader(false)
 {
 }
 

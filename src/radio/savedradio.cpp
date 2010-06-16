@@ -137,6 +137,7 @@ RadioItem* SavedRadio::ItemForStream(const Stream& stream, RadioItem* parent) {
   s->lazy_loaded = true;
   s->icon = QIcon(":last.fm/icon_radio.png");
   s->playable = true;
+  s->use_song_loader = true;
   return s;
 }
 

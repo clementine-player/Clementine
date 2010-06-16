@@ -43,6 +43,7 @@ class RadioItem : public SimpleTreeItem<RadioItem> {
   QString artist;
   RadioService* service;
   bool playable;
+  bool use_song_loader;
 };
 
 #endif // RADIOITEM_H
