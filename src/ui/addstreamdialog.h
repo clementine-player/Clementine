@@ -40,6 +40,9 @@ class AddStreamDialog : public QDialog {
 
   void accept();
 
+ protected:
+  void showEvent(QShowEvent *);
+
  private slots:
   void TextChanged(const QString& text);
 

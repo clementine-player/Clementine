@@ -96,3 +96,7 @@ void AddStreamDialog::TextChanged(const QString &text) {
   ui_->button_box->button(QDialogButtonBox::Ok)->setEnabled(valid);
 }
 
+void AddStreamDialog::showEvent(QShowEvent *) {
+  ui_->url->setFocus();
+  ui_->url->selectAll();
+}
