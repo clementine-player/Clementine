@@ -205,7 +205,9 @@ TEST_F(SongLoaderTest, LoadLocalDirectory) {
   // Make a directory and shove some files in it
   char* dir = tmpnam(NULL);
   ASSERT_TRUE(dir);
-  mkdir(dir, S_IRWXU);
+
+  QDir d;
+  d.mkdir(dir);
 
   QFile resource(":/testdata/beep.mp3");
   resource.open(QIODevice::ReadOnly);
