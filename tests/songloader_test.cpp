@@ -25,6 +25,7 @@
 #include <QDir>
 #include <QEventLoop>
 #include <QSignalSpy>
+#include <QtDebug>
 
 #include <boost/scoped_ptr.hpp>
 #include <cstdlib>
@@ -203,11 +204,15 @@ TEST_F(SongLoaderTest, LoadRemotePlainM3U) {
 
 TEST_F(SongLoaderTest, LoadLocalDirectory) {
   // Make a directory and shove some files in it
-  char* dir = tmpnam(NULL);
-  ASSERT_TRUE(dir);
+  QString dir;
+  {
+    QTemporaryFile ffffuuuuuuuu;
+    ffffuuuuuuuu.open();
+    dir = ffffuuuuuuuu.fileName();
+  }
 
   QDir d;
-  d.mkdir(dir);
+  ASSERT_TRUE(d.mkdir(dir));
 
   QFile resource(":/testdata/beep.mp3");
   resource.open(QIODevice::ReadOnly);
@@ -234,7 +239,8 @@ TEST_F(SongLoaderTest, LoadLocalDirectory) {
   QFile::remove(QString(dir) + "/1.mp3");
   QFile::remove(QString(dir) + "/2.mp3");
   QFile::remove(QString(dir) + "/somethingelse.foo");
-  rmdir(dir);
+
+  d.rmdir(dir);
 }
 
 void SongLoaderTest::LoadLocalDirectory(const QString &filename) {
