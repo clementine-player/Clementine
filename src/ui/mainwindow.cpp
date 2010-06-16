@@ -150,6 +150,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   track_position_timer_->setInterval(1000);
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
 
+#ifdef Q_OS_MAC
+  // For some reason this makes the tabs go a funny colour on mac
+  ui_->tabs->setDocumentMode(false);
+#endif
+
   // Start initialising the player
   player_->Init();
 
