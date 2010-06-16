@@ -560,6 +560,9 @@
    <property name="text">
     <string>Stop after this track</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+V</string>
+   </property>
   </action>
   <action name="action_love">
    <property name="enabled">
@@ -571,6 +574,9 @@
    </property>
    <property name="text">
     <string>Love</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
   <action name="action_ban">
@@ -584,6 +590,9 @@
    <property name="text">
     <string>Ban</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
   </action>
   <action name="action_clear_playlist">
    <property name="text">
@@ -592,10 +601,16 @@
    <property name="toolTip">
     <string>Clear playlist</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
+   </property>
   </action>
   <action name="action_edit_track">
    <property name="text">
     <string>Edit track information...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="action_renumber_tracks">
@@ -620,6 +635,9 @@
    <property name="text">
     <string>Configure Clementine...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
   </action>
   <action name="action_about">
    <property name="text">
@@ -630,15 +648,24 @@
    <property name="text">
     <string>Shuffle playlist</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
   </action>
   <action name="action_add_file">
    <property name="text">
     <string>Add file...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+A</string>
+   </property>
   </action>
   <action name="action_add_stream">
    <property name="text">
     <string>Add stream...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="action_open_media">
@@ -706,15 +733,24 @@
    <property name="text">
     <string>New playlist</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="action_save_playlist">
    <property name="text">
     <string>Save playlist...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="action_load_playlist">
    <property name="text">
     <string>Load playlist...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+O</string>
    </property>
   </action>
   <action name="action_update_library">
