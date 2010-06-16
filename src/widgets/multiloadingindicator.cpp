@@ -35,15 +35,14 @@ void MultiLoadingIndicator::TaskStarted(TaskType type) {
   tasks_ << type;
 
   UpdateText();
-  show();
+  emit TaskCountChange(tasks_.count());
 }
 
 void MultiLoadingIndicator::TaskFinished(TaskType type) {
   tasks_.removeAll(type);
 
   UpdateText();
-  if (tasks_.count() == 0)
-    hide();
+  emit TaskCountChange(tasks_.count());
 }
 
 void MultiLoadingIndicator::UpdateText() {

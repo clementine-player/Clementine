@@ -38,6 +38,9 @@ class MultiLoadingIndicator : public QWidget {
     LoadingTracks,
   };
 
+ signals:
+  void TaskCountChange(int tasks);
+
  public slots:
   void TaskStarted(MultiLoadingIndicator::TaskType type);
   void TaskFinished(MultiLoadingIndicator::TaskType type);

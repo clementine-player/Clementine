@@ -100,10 +100,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     ui_(new Ui_MainWindow),
     tray_icon_(new SystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, network, this)),
-    track_slider_(new TrackSlider(this)),
-    playlist_sequence_(new PlaylistSequence(this)),
     edit_tag_dialog_(new EditTagDialog),
-    multi_loading_indicator_(new MultiLoadingIndicator(this)),
     about_dialog_(new About),
     database_(new BackgroundThreadImplementation<Database, Database>(this)),
     radio_model_(NULL),
@@ -126,7 +123,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
-    playlist_summary_(new QLabel(this)),
     was_maximized_(false)
 {
   // Wait for the database thread to start - lots of stuff depends on it.
@@ -275,8 +271,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #endif
 
   // Add the shuffle and repeat action groups to the menu
-  ui_->action_shuffle_mode->setMenu(playlist_sequence_->shuffle_menu());
-  ui_->action_repeat_mode->setMenu(playlist_sequence_->repeat_menu());
+  ui_->action_shuffle_mode->setMenu(ui_->playlist_sequence->shuffle_menu());
+  ui_->action_repeat_mode->setMenu(ui_->playlist_sequence->repeat_menu());
 
   // Stop actions
   QMenu* stop_menu = new QMenu(this);
@@ -314,7 +310,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
-  connect(playlists_, SIGNAL(SummaryTextChanged(QString)), playlist_summary_, SLOT(setText(QString)));
+  connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
   connect(playlists_, SIGNAL(LoadTracksStarted()), SLOT(LoadTracksStarted()));
   connect(playlists_, SIGNAL(LoadTracksFinished()), SLOT(LoadTracksFinished()));
   connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -323,7 +319,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
 
-  connect(track_slider_, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
+  connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
   // Database connections
   connect(database_->Worker().get(), SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
@@ -364,8 +360,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
           SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
 
   // Radio connections
-  connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
-  connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), multi_loading_indicator_, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
+  connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), ui_->multi_loading_indicator, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
+  connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), ui_->multi_loading_indicator, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(StreamError(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
@@ -456,20 +452,16 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
       equalizer_->preamp_value(), equalizer_->gain_values());
 
   // Statusbar widgets
-  playlist_summary_->setMinimumWidth(QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));
-  playlist_summary_->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-  ui_->statusBar->addPermanentWidget(playlist_summary_);
-  ui_->statusBar->addPermanentWidget(playlist_sequence_);
-  ui_->statusBar->addPermanentWidget(track_slider_);
-  ui_->statusBar->addWidget(multi_loading_indicator_);
-  multi_loading_indicator_->hide();
+  ui_->playlist_summary->setMinimumWidth(QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));
+  ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
+  connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
 
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
 
   // Load playlists
-  playlists_->Init(library_->backend(), playlist_backend_, playlist_sequence_);
+  playlists_->Init(library_->backend(), playlist_backend_, ui_->playlist_sequence);
 
   // Load settings
   settings_.beginGroup(kSettingsGroup);
@@ -563,11 +555,11 @@ void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
 }
 
 void MainWindow::LoadTracksStarted() {
-  multi_loading_indicator_->TaskStarted(MultiLoadingIndicator::LoadingTracks);
+  ui_->multi_loading_indicator->TaskStarted(MultiLoadingIndicator::LoadingTracks);
 }
 
 void MainWindow::LoadTracksFinished() {
-  multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::LoadingTracks);
+  ui_->multi_loading_indicator->TaskFinished(MultiLoadingIndicator::LoadingTracks);
 }
 
 void MainWindow::AddLibrarySongsToPlaylist(const SongList &songs) {
@@ -611,7 +603,7 @@ void MainWindow::MediaStopped() {
   ui_->action_love->setEnabled(false);
 
   track_position_timer_->stop();
-  track_slider_->SetStopped();
+  ui_->track_slider->SetStopped();
   tray_icon_->SetProgress(0);
   tray_icon_->SetStopped();
 }
@@ -644,7 +636,7 @@ void MainWindow::MediaPlaying() {
   ui_->action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
   ui_->action_love->setEnabled(lastfm->IsScrobblingEnabled());
 
-  track_slider_->SetCanSeek(!is_lastfm);
+  ui_->track_slider->SetCanSeek(!is_lastfm);
 
   track_position_timer_->start();
   UpdateTrackPosition();
@@ -797,7 +789,7 @@ void MainWindow::UpdateTrackPosition() {
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
-    track_slider_->SetStopped();
+    ui_->track_slider->SetStopped();
     tray_icon_->SetProgress(0);
     return;
   }
@@ -812,7 +804,7 @@ void MainWindow::UpdateTrackPosition() {
   }
 
   // Update the slider
-  track_slider_->SetValue(position, length);
+  ui_->track_slider->SetValue(position, length);
 
   // Update the tray icon every 10 seconds
   if (position % 10 == 1) {
@@ -1034,11 +1026,11 @@ void MainWindow::EditValue() {
 }
 
 void MainWindow::LibraryScanStarted() {
-  multi_loading_indicator_->TaskStarted(MultiLoadingIndicator::UpdatingLibrary);
+  ui_->multi_loading_indicator->TaskStarted(MultiLoadingIndicator::UpdatingLibrary);
 }
 
 void MainWindow::LibraryScanFinished() {
-  multi_loading_indicator_->TaskFinished(MultiLoadingIndicator::UpdatingLibrary);
+  ui_->multi_loading_indicator->TaskFinished(MultiLoadingIndicator::UpdatingLibrary);
 }
 
 void MainWindow::AddFile() {
@@ -1205,4 +1197,12 @@ void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
 
 void MainWindow::ShowLibraryConfig() {
   settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
+}
+
+void MainWindow::TaskCountChanged(int count) {
+  if (count == 0) {
+    ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
+  } else {
+    ui_->status_bar_stack->setCurrentWidget(ui_->multi_loading_indicator);
+  }
 }

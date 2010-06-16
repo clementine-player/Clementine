@@ -48,18 +48,15 @@ class Player;
 class PlaylistBackend;
 class PlaylistManager;
 class PlaylistParser;
-class PlaylistSequence;
 class RadioItem;
 class RadioModel;
 class SettingsDialog;
 class Song;
 class SystemTrayIcon;
-class TrackSlider;
 class TranscodeDialog;
 class VisualisationContainer;
 class Ui_MainWindow;
 
-class QLabel;
 class QSortFilterProxyModel;
 
 class MainWindow : public QMainWindow, public PlatformInterface {
@@ -139,9 +136,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void LibraryScanStarted();
   void LibraryScanFinished();
-
   void LoadTracksStarted();
   void LoadTracksFinished();
+  void TaskCountChanged(int count);
 
   void ShowLibraryConfig();
   void ReloadSettings();
@@ -166,8 +163,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Ui_MainWindow* ui_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
-  TrackSlider* track_slider_;
-  PlaylistSequence* playlist_sequence_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
   MultiLoadingIndicator* multi_loading_indicator_;
   boost::scoped_ptr<About> about_dialog_;
@@ -203,8 +198,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   QTimer* track_position_timer_;
   QSettings settings_;
-
-  QLabel* playlist_summary_;
 
   bool was_maximized_;
   bool autoclear_playlist_;
