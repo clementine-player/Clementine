@@ -74,6 +74,7 @@ void PlaylistHeader::HideCurrent() {
 
 void PlaylistHeader::ToggleVisible(int section) {
   setSectionHidden(section, !isSectionHidden(section));
+  emit SectionVisibilityChanged(section, !isSectionHidden(section));
 
   static const int kMinSectionSize = 80;
 

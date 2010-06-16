@@ -31,6 +31,9 @@ class PlaylistHeader : public QHeaderView {
   // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
 
+ signals:
+  void SectionVisibilityChanged(int logical, bool visible);
+
  private slots:
   void HideCurrent();
   void ToggleVisible(int section);

@@ -52,13 +52,16 @@ PlaylistView::PlaylistView(QWidget *parent)
     cached_current_row_row_(-1),
     drop_indicator_row_(-1)
 {
-  setHeader(new PlaylistHeader(Qt::Horizontal, this));
-  header()->setMovable(true);
+  PlaylistHeader* header = new PlaylistHeader(Qt::Horizontal, this);
+  setHeader(header);
+  header->setMovable(true);
 
-  connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
-  connect(header(), SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
-  connect(header(), SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
-  connect(header(), SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
+  connect(header, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
+  connect(header, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(SaveGeometry()));
+  connect(header, SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
 
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
@@ -129,6 +132,12 @@ void PlaylistView::LoadGeometry() {
     header()->hideSection(Playlist::Column_DateModified);
     header()->hideSection(Playlist::Column_AlbumArtist);
     header()->hideSection(Playlist::Column_Composer);
+  }
+
+  // Work around weirdness in QHeaderView
+  for (int i=0 ; i<header()->count() ; ++i) {
+    if (header()->sectionSize(i) == 0)
+      header()->hideSection(i);
   }
 }
 
