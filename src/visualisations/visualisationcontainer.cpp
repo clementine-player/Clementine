@@ -49,7 +49,7 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     fps_(kDefaultFps),
     size_(kDefaultTextureSize)
 {
-  setWindowTitle(tr("Clementine Visualisation"));
+  setWindowTitle(tr("Clementine Visualization"));
   setWindowIcon(QIcon(":/icon.png"));
 
   // Set up the graphics view
@@ -104,10 +104,10 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   quality_menu->addActions(quality_group->actions());
   connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
 
-  menu_->addAction(tr("Select visualisations..."), selector_, SLOT(show()));
+  menu_->addAction(tr("Select visualizations..."), selector_, SLOT(show()));
 
   menu_->addSeparator();
-  menu_->addAction(IconLoader::Load("application-exit"), tr("Close visualisation"),
+  menu_->addAction(IconLoader::Load("application-exit"), tr("Close visualization"),
                    this, SLOT(hide()));
 }
 
