@@ -125,6 +125,7 @@ set(SOURCES
   widgets/fileviewlist.cpp
   widgets/lineedit.cpp
   widgets/multiloadingindicator.cpp
+  widgets/nowplayingwidget.cpp
   widgets/osd.cpp
   widgets/osdpretty.cpp
   widgets/progressitemdelegate.cpp
@@ -225,6 +226,7 @@ set(HEADERS
   widgets/fileviewlist.h
   widgets/lineedit.h
   widgets/multiloadingindicator.h
+  widgets/nowplayingwidget.h
   widgets/osd.h
   widgets/osdpretty.h
   widgets/progressitemdelegate.h

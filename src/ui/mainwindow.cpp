@@ -456,6 +456,15 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
 
+  // Now playing widget
+  ui_->now_playing->set_network(network);
+  ui_->now_playing->set_ideal_height(ui_->status_bar->sizeHint().height() +
+                                     ui_->status_bar_line->sizeHint().height() +
+                                     ui_->player_controls->sizeHint().height() +
+                                     1); // Don't question the 1
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->now_playing, SLOT(NowPlaying(Song)));
+  connect(player_, SIGNAL(Stopped()), ui_->now_playing, SLOT(Stopped()));
+
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
