@@ -23,25 +23,33 @@
 
 #include <QAction>
 #include <QList>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QtDebug>
 
 #include <AppKit/NSEvent.h>
+#include <AppKit/NSWorkspace.h>
 #include <Foundation/NSString.h>
 #include <IOKit/hidsystem/ev_keymap.h>
 
 class MacGlobalShortcutBackendPrivate : boost::noncopyable {
  public:
   explicit MacGlobalShortcutBackendPrivate(MacGlobalShortcutBackend* backend)
-      : monitor_(nil),
+      : global_monitor_(nil),
+        local_monitor_(nil),
         backend_(backend) {
   }
 
   bool Register() {
   #ifdef NS_BLOCKS_AVAILABLE
-    monitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
+    global_monitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
         handler:^(NSEvent* event) {
-      qDebug() << __PRETTY_FUNCTION__;
       HandleKeyEvent(event);
+    }];
+    local_monitor_ = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
+        handler:^(NSEvent* event) {
+      HandleKeyEvent(event);
+      return event;
     }];
     return true;
   #else
@@ -50,7 +58,45 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
   }
 
   void Unregister() {
-    [NSEvent removeMonitor:monitor_];
+    [NSEvent removeMonitor:global_monitor_];
+    [NSEvent removeMonitor:local_monitor_];
+  }
+
+  // See UIElementInspector example.
+  bool CheckAccessibilityEnabled() {
+    if (AXAPIEnabled()) {
+      return true;
+    }
+
+    QMessageBox box(
+        QMessageBox::Question,
+        QObject::tr("Accessibility API required for global shortcuts"),
+        QObject::tr("Would you like to launch System Preferences so that you can turn on"
+                    " \"Enable access for assistive devices\"?\n"
+                    "This is required to use global shortcuts in Clementine."));
+    QPushButton* default_button =
+        box.addButton(QObject::tr("Open System Preferences"), QMessageBox::AcceptRole);
+    QPushButton* continue_button =
+        box.addButton(QObject::tr("Continue anyway"), QMessageBox::RejectRole);
+    box.setDefaultButton(default_button);
+
+    box.exec();
+    QPushButton* clicked_button = static_cast<QPushButton*>(box.clickedButton());
+    if (clicked_button == default_button) {
+      NSArray* paths = NSSearchPathForDirectoriesInDomains(
+          NSPreferencePanesDirectory, NSSystemDomainMask, YES);
+      if ([paths count] == 1) {
+        NSURL* prefpane_url = [NSURL fileURLWithPath:
+            [[paths objectAtIndex:0] stringByAppendingPathComponent:@"UniversalAccessPref.prefPane"]];
+        [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
+      }
+      // We assume the user actually clicks the button in the preference pane here...
+      return true;
+    } else if (clicked_button == continue_button) {
+      return false;
+    }
+
+    return false;
   }
 
  private:
@@ -81,12 +127,14 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
     backend_->KeyPressed(sequence);
   }
 
-  id monitor_;
+  id global_monitor_;
+  id local_monitor_;
   MacGlobalShortcutBackend* backend_;
 };
 
 MacGlobalShortcutBackend::MacGlobalShortcutBackend(GlobalShortcuts* parent)
   : GlobalShortcutBackend(parent),
+    accessibility_status_(NOT_CHECKED),
     p_(new MacGlobalShortcutBackendPrivate(this)) {
 }
 
@@ -95,15 +143,28 @@ MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {
 }
 
 bool MacGlobalShortcutBackend::DoRegister() {
+  // Always enable media keys.
   mac::SetShortcutHandler(this);
-  foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
-    shortcuts_[shortcut.action->shortcut()] = shortcut.action;
+
+  // Check whether universal access is enabled so that global shortcuts will work.
+  // This may pop up a modal dialog so only ask once per session.
+  if (accessibility_status_ == NOT_CHECKED) {
+    accessibility_status_ = CheckAccessibilityEnabled() ? ENABLED : DISABLED;
   }
-  return p_->Register();
+
+  if (accessibility_status_ == ENABLED && AXAPIEnabled()) {
+    foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
+      shortcuts_[shortcut.action->shortcut()] = shortcut.action;
+    }
+    return p_->Register();
+  }
+
+  return false;
 }
 
 void MacGlobalShortcutBackend::DoUnregister() {
   p_->Unregister();
+  shortcuts_.clear();
 }
 
 void MacGlobalShortcutBackend::MacMediaKeyPressed(int key) {
@@ -125,4 +186,8 @@ void MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
   if (action) {
     action->trigger();
   }
+}
+
+bool MacGlobalShortcutBackend::CheckAccessibilityEnabled() {
+  return p_->CheckAccessibilityEnabled();
 }

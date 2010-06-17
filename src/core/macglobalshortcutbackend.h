@@ -40,11 +40,17 @@ protected:
 
 private:
   void KeyPressed(const QKeySequence& sequence);
+  bool CheckAccessibilityEnabled();
 
   QMap<QKeySequence, QAction*> shortcuts_;
 
-  friend class MacGlobalShortcutBackendPrivate;
+  enum AccessibilityStatus {
+    NOT_CHECKED,
+    ENABLED,
+    DISABLED
+  } accessibility_status_;
 
+  friend class MacGlobalShortcutBackendPrivate;
   MacGlobalShortcutBackendPrivate* p_;
 };
 
