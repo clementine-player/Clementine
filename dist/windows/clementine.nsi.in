@@ -41,7 +41,6 @@ RequestExecutionLevel admin
 
 Section "Clementine" Clementine
   SetOutPath "$INSTDIR"
-  SetOverwrite ifnewer
 
   File "avcodec-gpl-52.dll"
   File "avformat-gpl-52.dll"
@@ -102,7 +101,6 @@ SectionEnd
 
 Section "Qt image format plugins" imageformats
   SetOutPath "$INSTDIR\imageformats"
-  SetOverwrite ifnewer
 
   File "/oname=qgif4.dll" "imageformats\qgif4.dll"
   File "/oname=qjpeg4.dll" "imageformats\qjpeg4.dll"
@@ -110,7 +108,6 @@ SectionEnd
 
 Section "Gstreamer plugins" gstreamer-plugins
   SetOutPath "$INSTDIR\gstreamer-plugins"
-  SetOverwrite ifnewer
   
   File "/oname=libgstapetag.dll" "gstreamer-plugins\libgstapetag.dll"
   File "/oname=libgstasfdemux.dll" "gstreamer-plugins\libgstasfdemux.dll"
@@ -143,7 +140,6 @@ SectionEnd
 
 Section "projectM presets" projectm-presets
   SetOutPath "$INSTDIR\projectm-presets"
-  SetOverwrite ifnewer
 
   File "/oname=Aderrasi - Agitator.milk" "../../3rdparty/libprojectm/presets/Aderrasi - Agitator.milk"
   File "/oname=Aderrasi - Aimless (Gravity Directive Mix).milk" "../../3rdparty/libprojectm/presets/Aderrasi - Aimless (Gravity Directive Mix).milk"
