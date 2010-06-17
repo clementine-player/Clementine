@@ -34,8 +34,8 @@ public:
   MacGlobalShortcutBackend(GlobalShortcuts* parent);
   virtual ~MacGlobalShortcutBackend();
 
-  bool IsAccessibilityEnabled() const { return false; }
-  void ShowAccessibilityDialog() {}
+  bool IsAccessibilityEnabled() const;
+  void ShowAccessibilityDialog();
 
   void MacMediaKeyPressed(int key);
 
@@ -45,15 +45,8 @@ protected:
 
 private:
   void KeyPressed(const QKeySequence& sequence);
-  bool CheckAccessibilityEnabled();
 
   QMap<QKeySequence, QAction*> shortcuts_;
-
-  enum AccessibilityStatus {
-    NOT_CHECKED,
-    ENABLED,
-    DISABLED
-  } accessibility_status_;
 
   friend class MacGlobalShortcutBackendPrivate;
   boost::scoped_ptr<MacGlobalShortcutBackendPrivate> p_;

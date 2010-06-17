@@ -62,43 +62,6 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
     [NSEvent removeMonitor:local_monitor_];
   }
 
-  // See UIElementInspector example.
-  bool CheckAccessibilityEnabled() {
-    if (AXAPIEnabled()) {
-      return true;
-    }
-
-    QMessageBox box(
-        QMessageBox::Question,
-        QObject::tr("Accessibility API required for global shortcuts"),
-        QObject::tr("Would you like to launch System Preferences so that you can turn on"
-                    " \"Enable access for assistive devices\"?\n"
-                    "This is required to use global shortcuts in Clementine."));
-    QPushButton* default_button =
-        box.addButton(QObject::tr("Open System Preferences"), QMessageBox::AcceptRole);
-    QPushButton* continue_button =
-        box.addButton(QObject::tr("Continue anyway"), QMessageBox::RejectRole);
-    box.setDefaultButton(default_button);
-
-    box.exec();
-    QPushButton* clicked_button = static_cast<QPushButton*>(box.clickedButton());
-    if (clicked_button == default_button) {
-      NSArray* paths = NSSearchPathForDirectoriesInDomains(
-          NSPreferencePanesDirectory, NSSystemDomainMask, YES);
-      if ([paths count] == 1) {
-        NSURL* prefpane_url = [NSURL fileURLWithPath:
-            [[paths objectAtIndex:0] stringByAppendingPathComponent:@"UniversalAccessPref.prefPane"]];
-        [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
-      }
-      // We assume the user actually clicks the button in the preference pane here...
-      return true;
-    } else if (clicked_button == continue_button) {
-      return false;
-    }
-
-    return false;
-  }
-
  private:
   static QKeySequence GetSequence(NSEvent* event) {
     NSString* str = [event charactersIgnoringModifiers];
@@ -212,7 +175,6 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
 
 MacGlobalShortcutBackend::MacGlobalShortcutBackend(GlobalShortcuts* parent)
   : GlobalShortcutBackend(parent),
-    accessibility_status_(NOT_CHECKED),
     p_(new MacGlobalShortcutBackendPrivate(this)) {
 }
 
@@ -223,13 +185,7 @@ bool MacGlobalShortcutBackend::DoRegister() {
   // Always enable media keys.
   mac::SetShortcutHandler(this);
 
-  // Check whether universal access is enabled so that global shortcuts will work.
-  // This may pop up a modal dialog so only ask once per session.
-  if (accessibility_status_ == NOT_CHECKED) {
-    accessibility_status_ = CheckAccessibilityEnabled() ? ENABLED : DISABLED;
-  }
-
-  if (accessibility_status_ == ENABLED && AXAPIEnabled()) {
+  if (AXAPIEnabled()) {
     foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
       shortcuts_[shortcut.action->shortcut()] = shortcut.action;
     }
@@ -265,6 +221,16 @@ void MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
   }
 }
 
-bool MacGlobalShortcutBackend::CheckAccessibilityEnabled() {
-  return p_->CheckAccessibilityEnabled();
+bool MacGlobalShortcutBackend::IsAccessibilityEnabled() const {
+  return AXAPIEnabled();
+}
+
+void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(
+      NSPreferencePanesDirectory, NSSystemDomainMask, YES);
+  if ([paths count] == 1) {
+    NSURL* prefpane_url = [NSURL fileURLWithPath:
+        [[paths objectAtIndex:0] stringByAppendingPathComponent:@"UniversalAccessPref.prefPane"]];
+    [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
+  }
 }

@@ -41,10 +41,6 @@ GlobalShortcutsDialog::GlobalShortcutsDialog(GlobalShortcuts* manager,
     ui_->gnome_container->hide();
   }
 
-  if (manager->IsMacAccessibilityEnabled()) {
-    ui_->mac_container->hide();
-  }
-
   settings_.beginGroup(GlobalShortcuts::kSettingsGroup);
 
   foreach (const GlobalShortcuts::Shortcut& s, manager_->shortcuts().values()) {
@@ -85,6 +81,8 @@ void GlobalShortcutsDialog::showEvent(QShowEvent*) {
   if (ui_->gnome_container->isVisible()) {
     ui_->gnome_checkbox->setChecked(use_gnome);
   }
+
+  ui_->mac_container->setVisible(!manager_->IsMacAccessibilityEnabled());
 }
 
 void GlobalShortcutsDialog::ResetAll() {
