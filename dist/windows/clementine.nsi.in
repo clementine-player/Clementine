@@ -1421,9 +1421,10 @@ Section "Uninstall"
 
   Delete "$INSTDIR\Uninstall.exe"
   
-  ; Remove the installation folder.
+  ; Remove the installation folders.
   RMDir "$INSTDIR\gstreamer-plugins"
   RMDir "$INSTDIR\projectm-presets"
+  RMDir "$INSTDIR\imageformats"
   RMDir "$INSTDIR"
 
   ; Remove the Shortcuts
