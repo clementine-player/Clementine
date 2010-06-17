@@ -256,7 +256,7 @@ bool Transcoder::StartJob(const Job &job) {
   // Create all the elements
   const TranscoderFormat* f = job.output_format;
   GstElement* src     = CreateElement("filesrc", state->pipeline_.get());
-  GstElement* decode  = CreateElement("decodebin", state->pipeline_.get());
+  GstElement* decode  = CreateElement("decodebin2", state->pipeline_.get());
   GstElement* convert = CreateElement("audioconvert", state->pipeline_.get());
   GstElement* encode  = CreateBin(f->gst_elements());
   GstElement* sink    = CreateElement("filesink", state->pipeline_.get());
