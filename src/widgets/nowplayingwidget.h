@@ -37,6 +37,7 @@ class NowPlayingWidget : public QWidget {
 public:
   NowPlayingWidget(QWidget* parent = 0);
 
+  static const char* kSettingsGroup;
   static const int kPadding;
   static const int kGradientHead;
   static const int kGradientTail;

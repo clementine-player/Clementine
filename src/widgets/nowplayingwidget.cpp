@@ -21,22 +21,27 @@
 #include <QMenu>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QSettings>
 #include <QSignalMapper>
 #include <QTextDocument>
 #include <QTimeLine>
 #include <QtDebug>
 
-// Space between the cover and the details
+const char* NowPlayingWidget::kSettingsGroup = "NowPlayingWidget";
+
+// Space between the cover and the details in small mode
 const int NowPlayingWidget::kPadding = 4;
 
-// Width of the transparent to black gradient above and below the text
+// Width of the transparent to black gradient above and below the text in large
+// mode
 const int NowPlayingWidget::kGradientHead = 40;
 const int NowPlayingWidget::kGradientTail = 20;
 
-// Maximum height of the cover in large cover mode, and offset between the
+// Maximum height of the cover in large mode, and offset between the
 // bottom of the cover and bottom of the widget
 const int NowPlayingWidget::kMaxCoverSize = 260;
 const int NowPlayingWidget::kBottomOffset = 0;
+
 
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
@@ -54,6 +59,12 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0)
 {
+  // Load settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  mode_ = Mode(s.value("mode", SmallSongDetails).toInt());
+
+  // Context menu
   QActionGroup* mode_group = new QActionGroup(this);
   QSignalMapper* mode_mapper = new QSignalMapper(this);
   CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group, mode_mapper);
@@ -61,12 +72,14 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   menu_->addActions(mode_group->actions());
   connect(mode_mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
 
+  // Animations
   connect(show_hide_animation_, SIGNAL(frameChanged(int)), SLOT(SetHeight(int)));
   setMaximumHeight(0);
 
   connect(fade_animation_, SIGNAL(valueChanged(qreal)), SLOT(FadePreviousTrack(qreal)));
   fade_animation_->setDirection(QTimeLine::Backward); // 1.0 -> 0.0
 
+  // Start loading the cover loader thread
   cover_loader_->Start();
   connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
 }
@@ -140,12 +153,9 @@ void NowPlayingWidget::NowPlaying(const Song& metadata) {
   }
 
   metadata_ = metadata;
-
-  // Load the cover
   cover_ = QPixmap();
-  load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(
-      metadata.art_automatic(), metadata.art_manual());
 
+  UpdateHeight(); // Loads the cover too
   UpdateDetailsText();
 
   SetVisible(true);
@@ -237,13 +247,17 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
 
   case LargeSongDetails:
     const int total_size = qMin(kMaxCoverSize, width());
+    const int x_offset = (width() - cover_height_) / 2;
+
+    // Draw the black background
+    p->fillRect(rect(), Qt::black);
 
     // Draw the cover
-    p->drawPixmap(0, 0, total_size, total_size, cover_);
+    p->drawPixmap(x_offset, 0, total_size, total_size, cover_);
 
     // Work out how high the text is going to be
-    int text_height = details_->size().height();
-    int gradient_mid = height() - qMax(text_height, kBottomOffset);
+    const int text_height = details_->size().height();
+    const int gradient_mid = height() - qMax(text_height, kBottomOffset);
 
     // Draw the black fade
     QLinearGradient gradient(0, gradient_mid - kGradientHead,
@@ -256,9 +270,9 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
 
     // Draw the text on top
     p->setPen(Qt::white);
-    p->translate(0, height() - text_height);
+    p->translate(x_offset, height() - text_height);
     details_->drawContents(p);
-    p->translate(0, -height() + text_height);
+    p->translate(-x_offset, -height() + text_height);
     break;
   }
 }
@@ -277,6 +291,10 @@ void NowPlayingWidget::SetMode(int mode) {
   UpdateHeight();
   UpdateDetailsText();
   update();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("mode", mode_);
 }
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
