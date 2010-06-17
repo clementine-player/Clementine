@@ -22,6 +22,8 @@
 #include <QKeySequence>
 #include <QMap>
 
+#include <boost/scoped_ptr.hpp>
+
 class MacGlobalShortcutBackendPrivate;
 class QAction;
 
@@ -51,7 +53,7 @@ private:
   } accessibility_status_;
 
   friend class MacGlobalShortcutBackendPrivate;
-  MacGlobalShortcutBackendPrivate* p_;
+  boost::scoped_ptr<MacGlobalShortcutBackendPrivate> p_;
 };
 
 #endif // MACGLOBALSHORTCUTBACKEND_H

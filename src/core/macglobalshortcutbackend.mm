@@ -139,7 +139,6 @@ MacGlobalShortcutBackend::MacGlobalShortcutBackend(GlobalShortcuts* parent)
 }
 
 MacGlobalShortcutBackend::~MacGlobalShortcutBackend() {
-  delete p_;
 }
 
 bool MacGlobalShortcutBackend::DoRegister() {
@@ -170,13 +169,13 @@ void MacGlobalShortcutBackend::DoUnregister() {
 void MacGlobalShortcutBackend::MacMediaKeyPressed(int key) {
   switch (key) {
     case NX_KEYTYPE_PLAY:
-      manager_->shortcuts()["play_pause"].action->trigger();
+      KeyPressed(Qt::Key_MediaPlay);
       break;
     case NX_KEYTYPE_FAST:
-      manager_->shortcuts()["next_track"].action->trigger();
+      KeyPressed(Qt::Key_MediaNext);
       break;
     case NX_KEYTYPE_REWIND:
-      manager_->shortcuts()["prev_track"].action->trigger();
+      KeyPressed(Qt::Key_MediaPrevious);
       break;
   }
 }
