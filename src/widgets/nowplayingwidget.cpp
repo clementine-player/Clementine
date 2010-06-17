@@ -18,8 +18,10 @@
 #include "core/albumcoverloader.h"
 #include "core/networkaccessmanager.h"
 
+#include <QMenu>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QSignalMapper>
 #include <QTextDocument>
 #include <QTimeLine>
 #include <QtDebug>
@@ -27,12 +29,24 @@
 // Space between the cover and the details
 const int NowPlayingWidget::kPadding = 4;
 
+// Width of the transparent to black gradient above and below the text
+const int NowPlayingWidget::kGradientHead = 40;
+const int NowPlayingWidget::kGradientTail = 20;
+
+// Maximum height of the cover in large cover mode, and offset between the
+// bottom of the cover and bottom of the widget
+const int NowPlayingWidget::kMaxCoverSize = 260;
+const int NowPlayingWidget::kBottomOffset = 0;
+
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     network_(NULL),
+    mode_(SmallSongDetails),
+    menu_(new QMenu(this)),
     visible_(false),
-    ideal_height_(0),
+    small_ideal_height_(0),
+    cover_height_(0),
     show_hide_animation_(new QTimeLine(500, this)),
     fade_animation_(new QTimeLine(1000, this)),
     no_cover_(":nocover.png"),
@@ -40,6 +54,13 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0)
 {
+  QActionGroup* mode_group = new QActionGroup(this);
+  QSignalMapper* mode_mapper = new QSignalMapper(this);
+  CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group, mode_mapper);
+  CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group, mode_mapper);
+  menu_->addActions(mode_group->actions());
+  connect(mode_mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
+
   connect(show_hide_animation_, SIGNAL(frameChanged(int)), SLOT(SetHeight(int)));
   setMaximumHeight(0);
 
@@ -50,22 +71,61 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
 }
 
+void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
+  QAction* action = new QAction(text, group);
+  action->setCheckable(true);
+  mapper->setMapping(action, mode);
+  connect(action, SIGNAL(triggered()), mapper, SLOT(map()));
+
+  if (mode == mode_)
+    action->setChecked(true);
+}
+
 void NowPlayingWidget::set_ideal_height(int height) {
-  ideal_height_= height;
-  show_hide_animation_->setFrameRange(0, ideal_height_);
+  small_ideal_height_ = height;
+  UpdateHeight();
 }
 
 QSize NowPlayingWidget::sizeHint() const {
-  return QSize(ideal_height_, ideal_height_);
+  return QSize(cover_height_, total_height_);
 }
 
 void NowPlayingWidget::CoverLoaderInitialised() {
+  UpdateHeight();
   cover_loader_->Worker()->SetNetwork(network_);
-  cover_loader_->Worker()->SetDesiredHeight(ideal_height_);
   cover_loader_->Worker()->SetPadOutputImage(true);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
+}
+
+void NowPlayingWidget::UpdateHeight() {
+  switch (mode_) {
+  case SmallSongDetails:
+    cover_height_ = small_ideal_height_;
+    total_height_ = small_ideal_height_;
+    break;
+
+  case LargeSongDetails:
+    cover_height_ = qMin(kMaxCoverSize, width());
+    total_height_ = cover_height_ + kBottomOffset;
+    break;
+  }
+
+  // Update the animation settings and resize the widget now if we're visible
+  show_hide_animation_->setFrameRange(0, total_height_);
+  if (visible_ && show_hide_animation_->state() != QTimeLine::Running)
+    setMaximumHeight(total_height_);
+
+  // Tell the cover loader what size we want the images in
+  cover_loader_->Worker()->SetDesiredHeight(cover_height_);
+
+  // Re-fetch the current image
+  load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(
+      metadata_.art_automatic(), metadata_.art_manual());
+
+  // Tell Qt we've changed size
+  updateGeometry();
 }
 
 void NowPlayingWidget::NowPlaying(const Song& metadata) {
@@ -86,10 +146,7 @@ void NowPlayingWidget::NowPlaying(const Song& metadata) {
   load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(
       metadata.art_automatic(), metadata.art_manual());
 
-  // TODO: Make this configurable
-  details_->setHtml(QString("<i>%1</i><br/>%2<br/>%3").arg(
-      Qt::escape(metadata.title()), Qt::escape(metadata.artist()),
-      Qt::escape(metadata.album())));
+  UpdateDetailsText();
 
   SetVisible(true);
   update();
@@ -97,6 +154,35 @@ void NowPlayingWidget::NowPlaying(const Song& metadata) {
 
 void NowPlayingWidget::Stopped() {
   SetVisible(false);
+}
+
+void NowPlayingWidget::UpdateDetailsText() {
+  QString html;
+
+  switch (mode_) {
+    case SmallSongDetails:
+      details_->setTextWidth(-1);
+      details_->setDefaultStyleSheet("");
+      html += "<p>";
+      break;
+
+    case LargeSongDetails:
+      details_->setTextWidth(cover_height_);
+      details_->setDefaultStyleSheet("p {"
+          "  font-size: small;"
+          "  color: white;"
+          "}");
+      html += "<p align=center>";
+      break;
+  }
+
+  // TODO: Make this configurable
+  html += QString("<i>%1</i><br/>%2<br/>%3").arg(
+      Qt::escape(metadata_.title()), Qt::escape(metadata_.artist()),
+      Qt::escape(metadata_.album()));
+
+  html += "</p>";
+  details_->setHtml(html);
 }
 
 void NowPlayingWidget::AlbumArtLoaded(quint64 id, const QImage& image) {
@@ -138,13 +224,43 @@ void NowPlayingWidget::paintEvent(QPaintEvent *e) {
 }
 
 void NowPlayingWidget::DrawContents(QPainter *p) {
-  // Draw the cover
-  p->drawPixmap(0, 0, ideal_height_, ideal_height_, cover_);
+  switch (mode_) {
+  case SmallSongDetails:
+    // Draw the cover
+    p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, cover_);
 
-  // Draw the details
-  p->translate(ideal_height_ + kPadding, 0);
-  details_->drawContents(p);
-  p->translate(-ideal_height_ - kPadding, 0);
+    // Draw the details
+    p->translate(small_ideal_height_ + kPadding, 0);
+    details_->drawContents(p);
+    p->translate(-small_ideal_height_ - kPadding, 0);
+    break;
+
+  case LargeSongDetails:
+    const int total_size = qMin(kMaxCoverSize, width());
+
+    // Draw the cover
+    p->drawPixmap(0, 0, total_size, total_size, cover_);
+
+    // Work out how high the text is going to be
+    int text_height = details_->size().height();
+    int gradient_mid = height() - qMax(text_height, kBottomOffset);
+
+    // Draw the black fade
+    QLinearGradient gradient(0, gradient_mid - kGradientHead,
+                             0, gradient_mid + kGradientTail);
+    gradient.setColorAt(0, QColor(0, 0, 0, 0));
+    gradient.setColorAt(1, QColor(0, 0, 0, 255));
+
+    p->fillRect(0, gradient_mid - kGradientHead,
+                width(), height() - (gradient_mid - kGradientHead), gradient);
+
+    // Draw the text on top
+    p->setPen(Qt::white);
+    p->translate(0, height() - text_height);
+    details_->drawContents(p);
+    p->translate(0, -height() + text_height);
+    break;
+  }
 }
 
 void NowPlayingWidget::FadePreviousTrack(qreal value) {
@@ -154,4 +270,22 @@ void NowPlayingWidget::FadePreviousTrack(qreal value) {
   }
 
   update();
+}
+
+void NowPlayingWidget::SetMode(int mode) {
+  mode_ = Mode(mode);
+  UpdateHeight();
+  UpdateDetailsText();
+  update();
+}
+
+void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
+  if (visible_ && mode_ == LargeSongDetails && e->oldSize().width() != e->size().width()) {
+    UpdateHeight();
+    UpdateDetailsText();
+  }
+}
+
+void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
+  menu_->popup(mapToGlobal(e->pos()));
 }
