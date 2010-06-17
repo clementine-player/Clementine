@@ -34,6 +34,9 @@ public:
   MacGlobalShortcutBackend(GlobalShortcuts* parent);
   virtual ~MacGlobalShortcutBackend();
 
+  bool IsAccessibilityEnabled() const { return false; }
+  void ShowAccessibilityDialog() {}
+
   void MacMediaKeyPressed(int key);
 
 protected:

@@ -42,11 +42,13 @@ public:
 
   QMap<QString, Shortcut> shortcuts() const { return shortcuts_; }
   bool IsGsdAvailable() const;
+  bool IsMacAccessibilityEnabled() const;
 
   void MacMediaKeyPressed(const QString& key);
 
 public slots:
   void ReloadSettings();
+  void ShowMacAccessibilityDialog();
 
 signals:
   void Play();

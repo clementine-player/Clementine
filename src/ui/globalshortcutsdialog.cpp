@@ -41,6 +41,10 @@ GlobalShortcutsDialog::GlobalShortcutsDialog(GlobalShortcuts* manager,
     ui_->gnome_container->hide();
   }
 
+  if (manager->IsMacAccessibilityEnabled()) {
+    ui_->mac_container->hide();
+  }
+
   settings_.beginGroup(GlobalShortcuts::kSettingsGroup);
 
   foreach (const GlobalShortcuts::Shortcut& s, manager_->shortcuts().values()) {
@@ -63,6 +67,7 @@ GlobalShortcutsDialog::GlobalShortcutsDialog(GlobalShortcuts* manager,
   connect(ui_->radio_custom, SIGNAL(clicked()), SLOT(ChangeClicked()));
   connect(ui_->change, SIGNAL(clicked()), SLOT(ChangeClicked()));
   connect(ui_->gnome_open, SIGNAL(clicked()), SLOT(OpenGnomeKeybindingProperties()));
+  connect(ui_->mac_open, SIGNAL(clicked()), manager_, SLOT(ShowMacAccessibilityDialog()));
 
   ItemClicked(ui_->list->topLevelItem(0));
 }

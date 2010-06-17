@@ -48,6 +48,41 @@
     </widget>
    </item>
    <item>
+    <widget class="QWidget" name="mac_container" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="mac_label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>You need to launch System Preferences and turn on &quot;&lt;span style=&quot; font-style:italic;&quot;&gt;Enable access for assistive devices&lt;/span&gt;&quot; to use global shortcuts in Clementine.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mac_open">
+        <property name="text">
+         <string>Open...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QTreeWidget" name="list">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>

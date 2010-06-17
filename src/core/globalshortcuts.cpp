@@ -110,3 +110,17 @@ void GlobalShortcuts::ReloadSettings() {
   else if (system_backend_)
     system_backend_->Register();
 }
+
+bool GlobalShortcuts::IsMacAccessibilityEnabled() const {
+#ifdef Q_OS_MAC
+  return static_cast<MacGlobalShortcutBackend*>(system_backend_)->IsAccessibilityEnabled();
+#else
+  return true;
+#endif
+}
+
+void GlobalShortcuts::ShowMacAccessibilityDialog() {
+#ifdef Q_OS_MAC
+  static_cast<MacGlobalShortcutBackend*>(system_backend_)->ShowAccessibilityDialog();
+#endif
+}
