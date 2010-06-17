@@ -38,6 +38,8 @@ class GlobalShortcutGrabber : public QDialog {
  private:
   Ui_GlobalShortcutGrabber* ui_;
   QKeySequence ret_;
+
+  QList<int> modifier_keys_;
 };
 
 #endif // GLOBALSHORTCUTGRABBER_H

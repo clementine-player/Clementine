@@ -25,6 +25,9 @@ GlobalShortcutGrabber::GlobalShortcutGrabber(QWidget *parent)
     ui_(new Ui::GlobalShortcutGrabber)
 {
   ui_->setupUi(this);
+
+  modifier_keys_ << Qt::Key_Shift << Qt::Key_Control << Qt::Key_Meta
+                 << Qt::Key_Alt << Qt::Key_AltGr;
 }
 
 GlobalShortcutGrabber::~GlobalShortcutGrabber() {
@@ -56,15 +59,14 @@ bool GlobalShortcutGrabber::event(QEvent* e) {
   if (e->type() == QEvent::ShortcutOverride) {
     QKeyEvent* ke = static_cast<QKeyEvent*>(e);
 
-    if (ke->text().isEmpty())
+    if (modifier_keys_.contains(ke->key()))
       ret_ = QKeySequence(ke->modifiers());
     else
       ret_ = QKeySequence(ke->modifiers() | ke->key());
 
-
     ui_->combo->setText("<b>" + ret_.toString(QKeySequence::NativeText) + "</b>");
 
-    if (!ke->text().isEmpty())
+    if (!modifier_keys_.contains(ke->key()))
       accept();
     return true;
   }
