@@ -11,6 +11,10 @@ include_directories(../3rdparty/qtiocompressor)
 include_directories(../3rdparty/qxt)
 include_directories(../3rdparty/libprojectm)
 
+include_directories(${GLIB_INCLUDE_DIRECTORIES})
+include_directories(${LIBXML_INCLUDE_DIRECTORIES})
+include_directories(${GOBJECT_INCLUDE_DIRECTORIES})
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/AddEngine.cmake)
 include(../cmake/ParseArguments.cmake)

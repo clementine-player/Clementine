@@ -28,6 +28,8 @@ if (USE_NATIVE_GLEW)
 else(USE_NATIVE_GLEW)
   SET(GLEW_SOURCES )
   find_library(GLEW_LIBRARIES NAMES glew GLEW glew32)
+  find_path(GLEW_INCLUDE_DIRS GL/glew.h HINTS /sw/include)
+  include_directories(${GLEW_INCLUDE_DIRS})
 endif(USE_NATIVE_GLEW)
 
 SET(projectM_SOURCES projectM.cpp PCM.cpp Preset.cpp fftsg.cpp KeyHandler.cpp
