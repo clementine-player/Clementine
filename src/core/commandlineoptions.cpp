@@ -269,8 +269,10 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
 }
 
 QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
-  s >> reinterpret_cast<qint32&>(a.player_action_)
-    >> reinterpret_cast<qint32&>(a.url_list_action_)
+  quint32 player_action = 0;
+  quint32 url_list_action = 0;
+  s >> player_action
+    >> url_list_action
     >> a.set_volume_
     >> a.volume_modifier_
     >> a.seek_to_
@@ -278,6 +280,8 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
     >> a.play_track_at_
     >> a.show_osd_
     >> a.urls_;
+  a.player_action_ = CommandlineOptions::PlayerAction(player_action);
+  a.url_list_action_ = CommandlineOptions::UrlListAction(url_list_action);
 
   return s;
 }
