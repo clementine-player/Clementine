@@ -44,9 +44,9 @@ class LibraryBackendTest : public ::testing::Test {
     Song ret;
     ret.set_directory_id(directory_id);
     ret.set_filename("foo.mp3");
-    ret.set_mtime(0);
-    ret.set_ctime(0);
-    ret.set_filesize(0);
+    ret.set_mtime(1);
+    ret.set_ctime(1);
+    ret.set_filesize(1);
     return ret;
   }
 

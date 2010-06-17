@@ -49,10 +49,10 @@ class LibraryModelTest : public ::testing::Test {
 
   Song AddSong(Song& song) {
     song.set_directory_id(1);
-    if (song.mtime() == -1) song.set_mtime(0);
-    if (song.ctime() == -1) song.set_ctime(0);
+    if (song.mtime() == -1) song.set_mtime(1);
+    if (song.ctime() == -1) song.set_ctime(1);
     if (song.filename().isNull()) song.set_filename("/test/foo");
-    if (song.filesize() == -1) song.set_filesize(0);
+    if (song.filesize() == -1) song.set_filesize(1);
 
     if (!added_dir_) {
       backend_->AddDirectory("/test");
