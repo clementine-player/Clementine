@@ -44,8 +44,6 @@ public:
   bool IsGsdAvailable() const;
   bool IsMacAccessibilityEnabled() const;
 
-  void MacMediaKeyPressed(const QString& key);
-
 public slots:
   void ReloadSettings();
   void ShowMacAccessibilityDialog();

@@ -88,13 +88,6 @@ bool GlobalShortcuts::IsGsdAvailable() const {
 #endif
 }
 
-void GlobalShortcuts::MacMediaKeyPressed(const QString& key) {
-  if (key == "Play")     emit PlayPause();
-  // Stop doesn't exist on a mac keyboard.
-  if (key == "Next")     emit Next();
-  if (key == "Previous") emit Previous();
-}
-
 void GlobalShortcuts::ReloadSettings() {
   // The actual shortcuts have been set in our actions for us by the config
   // dialog already - we just need to reread the gnome settings.
