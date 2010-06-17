@@ -91,10 +91,12 @@ PlaylistView* PlaylistContainer::view() const {
 }
 
 void PlaylistContainer::SetActions(
-    QAction *new_playlist, QAction *save_playlist, QAction *load_playlist) {
+    QAction* new_playlist, QAction* save_playlist, QAction* load_playlist,
+    QAction* clear_playlist) {
   ui_->create_new->setDefaultAction(new_playlist);
   ui_->save->setDefaultAction(save_playlist);
   ui_->load->setDefaultAction(load_playlist);
+  ui_->clear_playlist->setDefaultAction(clear_playlist);
 
   ui_->tab_bar->SetActions(new_playlist, load_playlist);
 

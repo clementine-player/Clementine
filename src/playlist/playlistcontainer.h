@@ -39,7 +39,7 @@ public:
   static const char* kSettingsGroup;
 
   void SetActions(QAction* new_playlist, QAction* save_playlist,
-                  QAction* load_playlist);
+                  QAction* load_playlist, QAction* clear_playlist);
   void SetManager(PlaylistManager* manager);
 
   PlaylistView* view() const;
