@@ -16,6 +16,7 @@
 
 #include "globalshortcuts.h"
 #include "gnomeglobalshortcutbackend.h"
+#include "macglobalshortcutbackend.h"
 #include "qxtglobalshortcutbackend.h"
 
 #include "mac_startup.h"
@@ -39,11 +40,11 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   // Create actions
   AddShortcut("play", tr("Play"), SIGNAL(Play()));
   AddShortcut("pause", tr("Pause"), SIGNAL(Pause()));
-  AddShortcut("play_pause", tr("Play/Pause"), SIGNAL(PlayPause()), QKeySequence(Qt::Key_MediaPlay));
-  AddShortcut("stop", tr("Stop"), SIGNAL(Stop()), QKeySequence(Qt::Key_MediaStop));
+  AddShortcut("play_pause", tr("Play/Pause"), SIGNAL(PlayPause())); //QKeySequence(Qt::Key_MediaPlay));
+  AddShortcut("stop", tr("Stop"), SIGNAL(Stop()));// QKeySequence(Qt::Key_MediaStop));
   AddShortcut("stop_after", tr("Stop playing after current track"), SIGNAL(StopAfter()));
-  AddShortcut("next_track", tr("Next track"), SIGNAL(Next()), QKeySequence(Qt::Key_MediaNext));
-  AddShortcut("prev_track", tr("Previous track"), SIGNAL(Previous()), QKeySequence(Qt::Key_MediaPrevious));
+  AddShortcut("next_track", tr("Next track"), SIGNAL(Next()));// QKeySequence(Qt::Key_MediaNext));
+  AddShortcut("prev_track", tr("Previous track"), SIGNAL(Previous()));// QKeySequence(Qt::Key_MediaPrevious));
   AddShortcut("inc_volume", tr("Increase volume"), SIGNAL(IncVolume()));
   AddShortcut("dec_volume", tr("Decrease volume"), SIGNAL(DecVolume()));
   AddShortcut("mute", tr("Mute"), SIGNAL(Mute()));
@@ -57,8 +58,7 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
 #ifndef Q_OS_DARWIN
   system_backend_ = new QxtGlobalShortcutBackend(this);
 #else
-  // Setup global media key shortcuts for mac.
-  mac::SetShortcutHandler(this);
+  system_backend_ = new MacGlobalShortcutBackend(this);
 #endif
 
   ReloadSettings();

@@ -28,11 +28,9 @@ QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts *parent)
 
 bool QxtGlobalShortcutBackend::DoRegister() {
   qDebug() << __PRETTY_FUNCTION__;
-#ifndef Q_OS_DARWIN
   foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
     AddShortcut(shortcut.action);
   }
-#endif
 
   return true;
 }

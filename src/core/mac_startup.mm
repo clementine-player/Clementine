@@ -10,8 +10,11 @@
 #import <AppKit/NSNibDeclarations.h>
 #import <Sparkle/SUUpdater.h>
 
+#import <Kernel/AvailabilityMacros.h>
+
 #include "globalshortcuts.h"
 #include "mac_startup.h"
+#include "macglobalshortcutbackend.h"
 
 #include <QCoreApplication>
 #include <QEvent>
@@ -22,12 +25,12 @@
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
 @interface MacApplication :NSApplication {
-  GlobalShortcuts* shortcut_handler_;
+  MacGlobalShortcutBackend* shortcut_handler_;
   PlatformInterface* application_handler_;
 }
 
-- (GlobalShortcuts*) shortcut_handler;
-- (void) SetShortcutHandler: (GlobalShortcuts*)handler;
+- (MacGlobalShortcutBackend*) shortcut_handler;
+- (void) SetShortcutHandler: (MacGlobalShortcutBackend*)handler;
 
 - (PlatformInterface*) application_handler;
 - (void) SetApplicationHandler: (PlatformInterface*)handler;
@@ -35,7 +38,11 @@
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
-@interface AppDelegate :NSObject { //<NSApplicationDelegate> {
+#ifdef MAC_OS_X_VERSION_10_6
+@interface AppDelegate :NSObject <NSApplicationDelegate> {
+#else
+@interface AppDelegate :NSObject {
+#endif
   PlatformInterface* application_handler_;
 }
 
@@ -86,11 +93,11 @@
   return self;
 }
 
-- (GlobalShortcuts*) shortcut_handler {
+- (MacGlobalShortcutBackend*) shortcut_handler {
   return shortcut_handler_;
 }
 
-- (void) SetShortcutHandler: (GlobalShortcuts*)handler {
+- (void) SetShortcutHandler: (MacGlobalShortcutBackend*)handler {
   shortcut_handler_ = handler;
 }
 
@@ -121,21 +128,7 @@
     return;
   }
   if (state == 0) {
-    switch (key) {
-      case NX_KEYTYPE_PLAY:
-        // Play pressed.
-        shortcut_handler_->MacMediaKeyPressed("Play");
-        break;
-      case NX_KEYTYPE_FAST:
-        // Next pressed.
-        shortcut_handler_->MacMediaKeyPressed("Next");
-        break;
-      case NX_KEYTYPE_REWIND:
-        shortcut_handler_->MacMediaKeyPressed("Previous");
-        break;
-      default:
-        break;
-    }
+    shortcut_handler_->MacMediaKeyPressed(key);
   }
 }
 
@@ -151,7 +144,7 @@ void MacMain() {
   [[SUUpdater sharedUpdater] setDelegate: NSApp];
 }
 
-void SetShortcutHandler(GlobalShortcuts* handler) {
+void SetShortcutHandler(MacGlobalShortcutBackend* handler) {
   [NSApp SetShortcutHandler: handler];
 }
 

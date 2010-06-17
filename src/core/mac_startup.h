@@ -1,7 +1,7 @@
 #ifndef MAC_STARTUP_H
 #define MAC_STARTUP_H
 
-class GlobalShortcuts;
+class MacGlobalShortcutBackend;
 class QObject;
 
 class PlatformInterface {
@@ -16,7 +16,7 @@ class PlatformInterface {
 namespace mac {
 
 void MacMain();
-void SetShortcutHandler(GlobalShortcuts* handler);
+void SetShortcutHandler(MacGlobalShortcutBackend* handler);
 void SetApplicationHandler(PlatformInterface* handler);
 void CheckForUpdates();
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_C_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS "-Wnon-virtual-dtor -Woverloaded-virtual -Wall")
+set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${SPARKLE})
@@ -356,6 +356,8 @@ endif(ENABLE_VISUALISATIONS)
 # OSDs
 if(APPLE)
   list(APPEND SOURCES widgets/osd_mac.mm)
+  list(APPEND SOURCES core/macglobalshortcutbackend.mm)
+  list(APPEND HEADERS core/macglobalshortcutbackend.h)
   include_directories(${GROWL}/Headers)
 else(APPLE)
   if(WIN32)
