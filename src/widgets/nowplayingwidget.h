@@ -97,8 +97,6 @@ private:
   QTimeLine* show_hide_animation_;
   QTimeLine* fade_animation_;
 
-  QPixmap no_cover_;
-
   // Information about the current track
   Song metadata_;
   quint64 load_cover_id_;

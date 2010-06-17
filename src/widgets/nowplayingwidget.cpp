@@ -54,7 +54,6 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     cover_height_(0),
     show_hide_animation_(new QTimeLine(500, this)),
     fade_animation_(new QTimeLine(1000, this)),
-    no_cover_(":nocover.png"),
     load_cover_id_(0),
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0)
@@ -107,7 +106,6 @@ void NowPlayingWidget::CoverLoaderInitialised() {
   UpdateHeight();
   cover_loader_->Worker()->SetNetwork(network_);
   cover_loader_->Worker()->SetPadOutputImage(true);
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 }
@@ -132,6 +130,7 @@ void NowPlayingWidget::UpdateHeight() {
 
   // Tell the cover loader what size we want the images in
   cover_loader_->Worker()->SetDesiredHeight(cover_height_);
+  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
 
   // Re-fetch the current image
   load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(
@@ -269,7 +268,6 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
                 width(), height() - (gradient_mid - kGradientHead), gradient);
 
     // Draw the text on top
-    p->setPen(Qt::white);
     p->translate(x_offset, height() - text_height);
     details_->drawContents(p);
     p->translate(-x_offset, -height() + text_height);

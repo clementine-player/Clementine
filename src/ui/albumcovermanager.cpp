@@ -79,6 +79,7 @@ AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
   QImage square_nocover(120, 120, QImage::Format_ARGB32);
   square_nocover.fill(0);
   QPainter p(&square_nocover);
+  p.setOpacity(0.4);
   p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2, nocover);
   p.end();
   no_cover_icon_ = QPixmap::fromImage(square_nocover);
