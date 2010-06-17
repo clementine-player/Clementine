@@ -1,3 +1,60 @@
+Version 0.4:
+  Features:
+    * Support for multiple, tabbed playlists.
+    * Support for loading and saving XSPF, M3U, PLS and ASX playlists.
+    * Fullscreen visualisation support using projectM.
+    * Added a search bar to filter playlists.
+    * Magnatune integration - search, stream and download from Magnatune's
+      collection of DRM-free music.
+    * Music transcoder that can convert your music to mp3, ogg, flac, spx, 3gp
+      or m4a from any format that's supported by Clementine.
+    * ReplayGain support for volume normalisation.
+    * Improved the manual search feature of the album cover manager - you can
+      now enter text to search for and pick the best cover from a list of
+      results.
+    * Added a "now playing" widget to the main window, and rework the UI slightly.
+    * Added a progress bar to the album cover manager.
+    * Added a "Configure global shortcuts" dialog.
+    * Added a menu item to add whole folders to the playlist.
+    * Added menu items in the Library view to "load" tracks and replace the
+      whole playlist.
+    * Added a "Jump to the currently playing track" menu item.
+    * Added statusbar text saying how many songs are in the playlist.
+    * Added a background rain option from http://www.rainymood.com/
+    * Added some keyboard shortcuts for common actions.
+    * Library scanning on startup is now optional.
+    * New application icon.
+    * The pretty OSD is now even prettier.
+    * (Linux) Use icons from the desktop icon theme where possible.
+
+  Bugfixes:
+    * Gapless playback should now work all the time with all formats.
+    * Song fading and crossfading shouldn't get cut off early on some sound
+      drivers.
+    * Automatically detect and fix non-UTF8 character encodings in song tags.
+    * Fix the 5 second delay between starting the first Last.fm track and
+      showing the cover-art in the notification.
+    * Lower the CPU usage of the currently playing track animation.
+    * Fixed a bug that would cause very high CPU usage after playing a number
+      of tracks.
+    * Group error messages together so the user isn't overwhelmed by dialogs.
+    * Pressing "previous" in a shuffled playlist should follow the same order.
+    * Adding whole directories to the playlist now happens in the background so
+      it doesn't block the GUI.
+    * Fix a bug where Clementine would forget which playlist columns had been
+      hidden which lead to "ghost" columns that were shown but invisible.
+    * (Linux) Fix MPRIS pause behaviour.
+    * (Windows) \\host\share\file style URLs are now playable.
+    * (Windows) Use the improved directsound8 audio driver from Songbird,
+      fixing several playback issues on Windows.
+    * (Windows) Fix playback of AAC and WMA files, as well as MMS streams.
+    * (Windows) Fix a bug that prevented loading of any JPEG album covers.
+    * (Windows) Fix the animated busy spinner.
+    * (Mac) Add a list of supported filetypes so OS X knows which file types
+      Clementine can open.
+
+
+
 Version 0.3:
   Features:
     * It is now possible to group the library by any field.
