@@ -511,7 +511,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   QShortcut* close_window_shortcut = new QShortcut(this);
   close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
-  connect(close_window_shortcut, SIGNAL(activated()), SLOT(hide()));
+  connect(close_window_shortcut, SIGNAL(activated()), SLOT(SetHiddenInTray()));
 
   library_->Init();
   library_->StartThreads();
