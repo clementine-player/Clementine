@@ -824,14 +824,15 @@ void Playlist::Restore() {
   items_ = backend_->GetPlaylistItems(id_);
 
   PlaylistBackend::Playlist p = backend_->GetPlaylist(id_);
-  last_played_item_index_ =
-      p.last_played == -1 ? QModelIndex() : index(p.last_played);
 
   for (int i=0 ; i<items_.count() ; ++i) {
     virtual_items_ << i;
   };
 
   reset();
+
+  last_played_item_index_ =
+      p.last_played == -1 ? QModelIndex() : index(p.last_played);
 }
 
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {

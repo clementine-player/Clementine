@@ -157,7 +157,7 @@ void PlaylistManager::SetActivePlaylist(int id) {
 
   // Kinda a hack: unset the current item from the old active playlist before
   // setting the new one
-  if (active_ != -1)
+  if (active_ != -1 && active_ != id)
     active()->set_current_index(-1);
 
   active_ = id;
