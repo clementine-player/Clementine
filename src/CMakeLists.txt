@@ -367,6 +367,14 @@ else(APPLE)
   endif(WIN32)
 endif(APPLE)
 
+list(APPEND OTHER_SOURCES
+  core/macglobalshortcutbackend.h
+  core/macglobalshortcutbackend.mm
+  widgets/osd_mac.mm
+  widgets/osd_win.cpp
+  widgets/osd_x11.cpp
+)
+
 # MPRIS - Linux specific
 if(NOT APPLE AND NOT WIN32)
   qt4_add_dbus_adaptor(SOURCES
@@ -402,7 +410,7 @@ qt4_add_resources(QRC ${RESOURCES})
 add_pot(
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
-  ${SOURCES} ${MOC} ${UIC}
+  ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
 )
 add_po(PO clementine_
   POT ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
