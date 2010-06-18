@@ -260,8 +260,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->stop_button->setDefaultAction(ui_->action_stop);
   ui_->love_button->setDefaultAction(ui_->action_love);
   ui_->ban_button->setDefaultAction(ui_->action_ban);
+  ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
   ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
-                            ui_->action_load_playlist, ui_->action_clear_playlist);
+                            ui_->action_load_playlist);
 
 #ifdef ENABLE_VISUALISATIONS
   visualisation_->SetActions(ui_->action_previous_track, ui_->action_play_pause,
