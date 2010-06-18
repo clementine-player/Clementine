@@ -124,6 +124,8 @@ void SavedRadio::Edit() {
   context_item_->display_text = stream.name_;
   context_item_->key = stream.url_.toString();
   context_item_->ChangedNotify();
+
+  SaveStreams();
 }
 
 void SavedRadio::AddToPlaylist() {
