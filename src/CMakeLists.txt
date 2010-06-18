@@ -507,9 +507,8 @@ if (APPLE)
 
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-  install(DIRECTORY "${SPARKLE}/Versions/Current/Resources/"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources"
-    PATTERN "Info.plist" EXCLUDE)
+  install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
 
   add_custom_target(bundle
     ${CMAKE_CURRENT_SOURCE_DIR}/../macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
