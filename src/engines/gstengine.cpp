@@ -745,6 +745,7 @@ int GstEngine::AddBackgroundStream(const QUrl& url) {
   if (!pipeline) {
     return -1;
   }
+  pipeline->SetVolume(30);
   // We don't want to get metadata messages or end notifications.
   disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
   disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
