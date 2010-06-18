@@ -61,6 +61,15 @@ find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 if (APPLE)
   find_library(GROWL Growl)
   find_library(SPARKLE Sparkle)
+  # Uses Darwin kernel version.
+  # 9.8.0  -> 10.5/Leopard
+  # 10.4.0 -> 10.6/Snow Leopard
+  string(REGEX MATCH "[0-9]+" DARWIN_VERSION ${CMAKE_HOST_SYSTEM_VERSION})
+  if (DARWIN_VERSION GREATER 9)
+    SET(SNOW_LEOPARD 1)
+  elseif (DARWIN_VERSION GREATER 8)
+    SET(LEOPARD 1)
+  endif (DARWIN_VERSION GREATER 9)
 endif (APPLE)
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
