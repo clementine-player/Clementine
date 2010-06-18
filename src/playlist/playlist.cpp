@@ -72,6 +72,7 @@ Playlist::Playlist(PlaylistBackend* backend, int id, QObject *parent)
 
 Playlist::~Playlist() {
   items_.clear();
+  library_items_by_id_.clear();
 }
 
 QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
@@ -603,6 +604,13 @@ QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
     items_.insert(i, item);
     virtual_items_ << virtual_items_.count();
 
+    if (item->type() == "Library") {
+      int id = item->Metadata().id();
+      if (id != -1) {
+        library_items_by_id_.insertMulti(id, item);
+      }
+    }
+
     if (item == current_item_) {
       // It's one we removed before that got re-added through an undo
       current_item_index_ = index(i, 0);
@@ -820,6 +828,7 @@ void Playlist::Restore() {
 
   items_.clear();
   virtual_items_.clear();
+  library_items_by_id_.clear();
 
   items_ = backend_->GetPlaylistItems(id_);
 
@@ -827,7 +836,14 @@ void Playlist::Restore() {
 
   for (int i=0 ; i<items_.count() ; ++i) {
     virtual_items_ << i;
-  };
+
+    if (items_[i]->type() == "Library") {
+      int id = items_[i]->Metadata().id();
+      if (id != -1) {
+        library_items_by_id_.insertMulti(id, items_[i]);
+      }
+    }
+  }
 
   reset();
 
@@ -852,8 +868,17 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
 
   // Remove items
   PlaylistItemList ret;
-  for (int i=0 ; i<count ; ++i)
-    ret << items_.takeAt(row);
+  for (int i=0 ; i<count ; ++i) {
+    boost::shared_ptr<PlaylistItem> item(items_.takeAt(row));
+    ret << item;
+
+    if (item->type() == "Library") {
+      int id = item->Metadata().id();
+      if (id != -1) {
+        library_items_by_id_.remove(id, item);
+      }
+    }
+  }
 
   endRemoveRows();
 
@@ -1028,4 +1053,8 @@ quint64 Playlist::GetTotalLength() const {
       ret += length;
   }
   return ret;
+}
+
+PlaylistItemList Playlist::library_items_by_id(int id) const {
+  return library_items_by_id_.values(id);
 }

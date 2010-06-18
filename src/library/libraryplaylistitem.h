@@ -29,6 +29,7 @@ class LibraryPlaylistItem : public PlaylistItem {
   void Reload();
 
   Song Metadata() const { return song_; }
+  void SetMetadata(const Song& song) { song_ = song; }
 
   QUrl Url() const;
 

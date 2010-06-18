@@ -98,6 +98,7 @@ signals:
 
 private slots:
   void UpdateSummaryText();
+  void SongsDiscovered(const SongList& songs);
 
 private:
   Playlist* AddPlaylist(int id, const QString& name);

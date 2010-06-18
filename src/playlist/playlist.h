@@ -112,6 +112,8 @@ class Playlist : public QAbstractListModel {
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
 
+  PlaylistItemList library_items_by_id(int id) const;
+
   SongList GetAllSongs() const;
   quint64 GetTotalLength() const; // in seconds
 
@@ -200,6 +202,9 @@ class Playlist : public QAbstractListModel {
   PlaylistItemList items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order
                              // that they will be played.
+  // A map of library ID to playlist item - for fast lookups when library
+  // items change.
+  QMultiMap<int, boost::shared_ptr<PlaylistItem> > library_items_by_id_;
 
   QPersistentModelIndex current_item_index_;
   QPersistentModelIndex last_played_item_index_;

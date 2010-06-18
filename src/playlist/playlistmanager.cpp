@@ -18,6 +18,8 @@
 #include "playlistbackend.h"
 #include "playlistmanager.h"
 #include "core/utilities.h"
+#include "library/librarybackend.h"
+#include "library/libraryplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 
 #include <QFileInfo>
@@ -46,6 +48,8 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   library_backend_ = library_backend;
   playlist_backend_ = playlist_backend;
   sequence_ = sequence;
+
+  connect(library_backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
 
   foreach (const PlaylistBackend::Playlist& p, playlist_backend->GetAllPlaylists()) {
     AddPlaylist(p.id, p.name);
@@ -224,4 +228,18 @@ void PlaylistManager::UpdateSummaryText() {
 void PlaylistManager::SelectionChanged(const QItemSelection &selection) {
   current_selection_ = selection;
   UpdateSummaryText();
+}
+
+void PlaylistManager::SongsDiscovered(const SongList& songs) {
+  // Some songs might've changed in the library, let's update any playlist
+  // items we have that match those songs
+
+  foreach (const Song& song, songs) {
+    foreach (const Data& data, playlists_) {
+      PlaylistItemList items = data.p->library_items_by_id(song.id());
+      foreach (boost::shared_ptr<PlaylistItem> item, items) {
+        static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(song);
+      }
+    }
+  }
 }
