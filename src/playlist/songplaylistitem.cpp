@@ -42,10 +42,6 @@ bool SongPlaylistItem::InitFromQuery(const QSqlQuery &query) {
     QString artist(query.value(row + 3).toString());
     QString album(query.value(row + 4).toString());
     int length(query.value(row + 5).toInt());
-    if (title.isEmpty())  title = "Unknown";
-    if (artist.isEmpty()) artist = "Unknown";
-    if (album.isEmpty())  album = "Unknown";
-    if (length == 0)      length = -1;
 
     song_.set_filename(filename);
     song_.set_filetype(Song::Type_Stream);
