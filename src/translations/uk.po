@@ -141,6 +141,13 @@ msgstr ""
 msgid "Seek backward"
 msgstr ""
 
+msgid "1 day"
+msgstr ""
+
+#, qt-format
+msgid "%1 days"
+msgstr ""
+
 msgid "Add directory..."
 msgstr ""
 
@@ -148,9 +155,6 @@ msgid "Show"
 msgstr ""
 
 msgid "Group by"
-msgstr ""
-
-msgid "Configure library..."
 msgstr ""
 
 msgid "Various Artists"
@@ -177,118 +181,13 @@ msgstr ""
 msgid "Click here to add some music"
 msgstr ""
 
-msgid "Library advanced grouping"
-msgstr ""
-
-msgid "You can change the way the songs in the library are organised."
-msgstr ""
-
-msgid "Group Library by..."
-msgstr ""
-
-msgid "First level"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Album"
+msgid "Title"
 msgstr ""
 
 msgid "Artist"
 msgstr ""
 
-msgid "Albumartist"
-msgstr ""
-
-msgid "Composer"
-msgstr ""
-
-msgid "Genre"
-msgstr ""
-
-msgid "Year"
-msgstr ""
-
-msgid "Year - Album"
-msgstr ""
-
-msgid "Second level"
-msgstr ""
-
-msgid "Third level"
-msgstr ""
-
-msgid "These folders will be scanned for music to make up your library"
-msgstr ""
-
-msgid "Add new folder..."
-msgstr ""
-
-msgid "Remove folder"
-msgstr ""
-
-msgid "Update the library when Clementine starts"
-msgstr ""
-
-msgid "Display options"
-msgstr ""
-
-msgid "Automatically open single categories in the library tree"
-msgstr ""
-
-msgid "Double-clicking a song clears the playlist first"
-msgstr ""
-
-msgid "Music Library"
-msgstr ""
-
-msgid "Form"
-msgstr ""
-
-msgid "Entire collection"
-msgstr ""
-
-msgid "Added today"
-msgstr ""
-
-msgid "Added this week"
-msgstr ""
-
-msgid "Added within three months"
-msgstr ""
-
-msgid "Added this year"
-msgstr ""
-
-msgid "Added this month"
-msgstr ""
-
-msgid "Group by Artist"
-msgstr ""
-
-msgid "Group by Artist/Album"
-msgstr ""
-
-msgid "Group by Artist/Year - Album"
-msgstr ""
-
-msgid "Group by Album"
-msgstr ""
-
-msgid "Group by Genre/Album"
-msgstr ""
-
-msgid "Group by Genre/Artist/Album"
-msgstr ""
-
-msgid "Advanced grouping..."
-msgstr ""
-
-msgid "Enter search terms here"
-msgstr ""
-
-msgid "Title"
+msgid "Album"
 msgstr ""
 
 msgid "Length"
@@ -300,7 +199,16 @@ msgstr ""
 msgid "Disc"
 msgstr ""
 
+msgid "Year"
+msgstr ""
+
+msgid "Genre"
+msgstr ""
+
 msgid "Album artist"
+msgstr ""
+
+msgid "Composer"
 msgstr ""
 
 msgid "BPM"
@@ -388,15 +296,23 @@ msgstr ""
 msgid "Hide..."
 msgstr ""
 
-msgid "Show section"
-msgstr ""
-
 #, qt-format
 msgid "Hide %1"
 msgstr ""
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
+msgstr ""
+
+#, qt-format
+msgid "%1 selected of"
+msgstr ""
+
+msgid "1 track"
+msgstr ""
+
+#, qt-format
+msgid "%1 tracks"
 msgstr ""
 
 msgid "Remove playlist"
@@ -425,34 +341,14 @@ msgstr ""
 msgid "move songs"
 msgstr ""
 
-msgid "Playlist search"
+msgid "bpm"
 msgstr ""
 
-msgid "Don't repeat"
+msgid "kbps"
 msgstr ""
 
-msgid "Repeat track"
-msgstr ""
-
-msgid "Repeat album"
-msgstr ""
-
-msgid "Repeat playlist"
-msgstr ""
-
-msgid "Don't shuffle"
-msgstr ""
-
-msgid "Shuffle by album"
-msgstr ""
-
-msgid "Shuffle all"
-msgstr ""
-
-msgid "Repeat"
-msgstr ""
-
-msgid "Shuffle"
+#, qt-format
+msgid "Error loading %1"
 msgstr ""
 
 #, qt-format
@@ -592,10 +488,52 @@ msgstr ""
 msgid "An unknown last.fm error occurred: %1"
 msgstr ""
 
+#, qt-format
+msgid "The directory %1 is not valid"
+msgstr ""
+
+msgid "Starting..."
+msgstr ""
+
+#, qt-format
+msgid "Unable to download %1 (%2)"
+msgstr ""
+
+msgid "There was a problem fetching the metadata from Magnatune"
+msgstr ""
+
+msgid "This album is not available in the requested format"
+msgstr ""
+
+#, qt-format
+msgid "Couldn't open output file %1"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Download directory"
+msgstr ""
+
+msgid "Really cancel?"
+msgstr ""
+
+msgid "Closing this window will cancel the download."
+msgstr ""
+
+msgid "Don't stop!"
+msgstr ""
+
+msgid "Download this album"
+msgstr ""
+
 msgid "Open magnatune.com in browser"
 msgstr ""
 
 msgid "Refresh catalogue"
+msgstr ""
+
+msgid "Configure Magnatune..."
 msgstr ""
 
 msgid "Search Magnatune"
@@ -617,45 +555,6 @@ msgid "Open somafm.com in browser"
 msgstr ""
 
 msgid "Refresh channels"
-msgstr ""
-
-msgid "Enter your Last.fm details below:"
-msgstr ""
-
-msgid "Last.fm username"
-msgstr ""
-
-msgid "Sign out"
-msgstr ""
-
-msgid "Last.fm password"
-msgstr ""
-
-msgid "Scrobble tracks that I listen to"
-msgstr ""
-
-msgid "Show the \"love\" and \"ban\" buttons"
-msgstr ""
-
-msgid ""
-"Note that you must be a <span style=\" font-weight:600;\">paid "
-"subscriber</span> to listen to Last.fm radio from within Clementine."
-msgstr ""
-
-msgid "Authenticating..."
-msgstr ""
-
-msgid "Last.fm"
-msgstr ""
-
-msgid "Play Artist or Tag"
-msgstr ""
-
-msgid ""
-"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-
-msgid "Tag"
 msgstr ""
 
 msgid "Start transcoding"
@@ -698,42 +597,6 @@ msgstr ""
 msgid "Starting %1"
 msgstr ""
 
-msgid "Transcode Music"
-msgstr ""
-
-msgid "Files to transcode"
-msgstr ""
-
-msgid "Directory"
-msgstr ""
-
-msgid "Filename"
-msgstr ""
-
-msgid "Add..."
-msgstr ""
-
-msgid "Output options"
-msgstr ""
-
-msgid "Audio format"
-msgstr ""
-
-msgid "Destination"
-msgstr ""
-
-msgid "Alongside the originals"
-msgstr ""
-
-msgid "Progress"
-msgstr ""
-
-msgid "Details..."
-msgstr ""
-
-msgid "Transcoder Log"
-msgstr ""
-
 #, qt-format
 msgid "About %1"
 msgstr ""
@@ -760,10 +623,17 @@ msgstr ""
 msgid "Albums without covers"
 msgstr ""
 
+msgid "Closing this window will stop searching for album covers."
+msgstr ""
+
 msgid "All artists"
 msgstr ""
 
 msgid "Various artists"
+msgstr ""
+
+#, qt-format
+msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr ""
 
 msgid "Choose manual cover"
@@ -865,13 +735,13 @@ msgstr ""
 msgid "The \"%1\" command could not be started."
 msgstr ""
 
-msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-msgstr ""
-
-msgid "Playlists (*.m3u *.xspf *.xml)"
+msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr ""
 
 msgid "All Files (*)"
+msgstr ""
+
+msgid "Configure library..."
 msgstr ""
 
 msgid "Stop after this track"
@@ -900,6 +770,357 @@ msgstr ""
 msgid "Drag to reposition"
 msgstr ""
 
+msgid "Loading audio engine"
+msgstr ""
+
+msgid "Updating library"
+msgstr ""
+
+msgid "Getting channels"
+msgstr ""
+
+msgid "Loading stream"
+msgstr ""
+
+msgid "Loading Last.fm radio"
+msgstr ""
+
+msgid "Downloading Magnatune catalogue"
+msgstr ""
+
+msgid "Loading tracks"
+msgstr ""
+
+msgid "Small album cover"
+msgstr ""
+
+msgid "Large album cover"
+msgstr ""
+
+msgid "Show above status bar"
+msgstr ""
+
+#, qt-format
+msgid "disc %1"
+msgstr ""
+
+#, qt-format
+msgid "track %1"
+msgstr ""
+
+msgid "Paused"
+msgstr ""
+
+msgid "Stopped"
+msgstr ""
+
+msgid "Playlist finished"
+msgstr ""
+
+#, qt-format
+msgid "Volume %1%"
+msgstr ""
+
+#, qt-format
+msgid "%1 albums"
+msgstr ""
+
+msgid "Magnatune download finished"
+msgstr ""
+
+msgid "Clementine Visualization"
+msgstr ""
+
+msgid "Toggle fullscreen"
+msgstr ""
+
+msgid "Framerate"
+msgstr ""
+
+msgid "Low (15 fps)"
+msgstr ""
+
+msgid "Medium (25 fps)"
+msgstr ""
+
+msgid "High (35 fps)"
+msgstr ""
+
+msgid "Super high (60 fps)"
+msgstr ""
+
+msgid "Quality"
+msgstr ""
+
+msgid "Low (256x256)"
+msgstr ""
+
+msgid "Medium (512x512)"
+msgstr ""
+
+msgid "High (1024x1024)"
+msgstr ""
+
+msgid "Select visualizations..."
+msgstr ""
+
+msgid "Close visualization"
+msgstr ""
+
+msgid "Clementine"
+msgstr ""
+
+msgid "Select All"
+msgstr ""
+
+msgid "Select None"
+msgstr ""
+
+msgid "Library advanced grouping"
+msgstr ""
+
+msgid "You can change the way the songs in the library are organised."
+msgstr ""
+
+msgid "Group Library by..."
+msgstr ""
+
+msgid "First level"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Albumartist"
+msgstr ""
+
+msgid "Year - Album"
+msgstr ""
+
+msgid "Second level"
+msgstr ""
+
+msgid "Third level"
+msgstr ""
+
+msgid "These folders will be scanned for music to make up your library"
+msgstr ""
+
+msgid "Add new folder..."
+msgstr ""
+
+msgid "Remove folder"
+msgstr ""
+
+msgid "Update the library when Clementine starts"
+msgstr ""
+
+msgid "Display options"
+msgstr ""
+
+msgid "Automatically open single categories in the library tree"
+msgstr ""
+
+msgid "Double-clicking a song clears the playlist first"
+msgstr ""
+
+msgid "Form"
+msgstr ""
+
+msgid "Entire collection"
+msgstr ""
+
+msgid "Added today"
+msgstr ""
+
+msgid "Added this week"
+msgstr ""
+
+msgid "Added within three months"
+msgstr ""
+
+msgid "Added this year"
+msgstr ""
+
+msgid "Added this month"
+msgstr ""
+
+msgid "Group by Artist"
+msgstr ""
+
+msgid "Group by Artist/Album"
+msgstr ""
+
+msgid "Group by Artist/Year - Album"
+msgstr ""
+
+msgid "Group by Album"
+msgstr ""
+
+msgid "Group by Genre/Album"
+msgstr ""
+
+msgid "Group by Genre/Artist/Album"
+msgstr ""
+
+msgid "Advanced grouping..."
+msgstr ""
+
+msgid "Enter search terms here"
+msgstr ""
+
+msgid "Playlist search"
+msgstr ""
+
+msgid "Don't repeat"
+msgstr ""
+
+msgid "Repeat track"
+msgstr ""
+
+msgid "Repeat album"
+msgstr ""
+
+msgid "Repeat playlist"
+msgstr ""
+
+msgid "Don't shuffle"
+msgstr ""
+
+msgid "Shuffle by album"
+msgstr ""
+
+msgid "Shuffle all"
+msgstr ""
+
+msgid "Repeat"
+msgstr ""
+
+msgid "Shuffle"
+msgstr ""
+
+msgid "Account details"
+msgstr ""
+
+msgid "Last.fm username"
+msgstr ""
+
+msgid "Sign out"
+msgstr ""
+
+msgid "Last.fm password"
+msgstr ""
+
+msgid ""
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Scrobble tracks that I listen to"
+msgstr ""
+
+msgid "Show the \"love\" and \"ban\" buttons"
+msgstr ""
+
+msgid "Authenticating..."
+msgstr ""
+
+msgid "Play Artist or Tag"
+msgstr ""
+
+msgid ""
+"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
+msgstr ""
+
+msgid "Tag"
+msgstr ""
+
+msgid "Membership type"
+msgstr ""
+
+msgid "I don't have a Magnatune account"
+msgstr ""
+
+msgid "Streaming membership"
+msgstr ""
+
+msgid "Download membership"
+msgstr ""
+
+msgid ""
+"You can listen to Magnatune songs for free without an account.  Purchasing a "
+"membership removes the messages at the end of each track."
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Preferred audio format"
+msgstr ""
+
+msgid "VBR MP3"
+msgstr ""
+
+msgid "128k MP3"
+msgstr ""
+
+msgid "Magnatune Download"
+msgstr ""
+
+msgid "You are about to download the following albums"
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Format"
+msgstr ""
+
+msgid "128K MP3"
+msgstr ""
+
+msgid "Directory"
+msgstr ""
+
+msgid "Browse..."
+msgstr ""
+
+msgid "Transcode Music"
+msgstr ""
+
+msgid "Files to transcode"
+msgstr ""
+
+msgid "Filename"
+msgstr ""
+
+msgid "Add..."
+msgstr ""
+
+msgid "Output options"
+msgstr ""
+
+msgid "Audio format"
+msgstr ""
+
+msgid "Destination"
+msgstr ""
+
+msgid "Alongside the originals"
+msgstr ""
+
+msgid "Details..."
+msgstr ""
+
+msgid "Transcoder Log"
+msgstr ""
+
 msgid "Add Stream"
 msgstr ""
 
@@ -921,16 +1142,22 @@ msgstr ""
 msgid "Fetch automatically"
 msgstr ""
 
-msgid "Choose manual cover..."
+msgid "Load cover from disk..."
 msgstr ""
 
 msgid "Unset cover"
+msgstr ""
+
+msgid "Search for album covers..."
 msgstr ""
 
 msgid "View"
 msgstr ""
 
 msgid "Fetch Missing Covers"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 msgid "Edit track information"
@@ -960,6 +1187,12 @@ msgstr ""
 msgid "Open..."
 msgstr ""
 
+msgid ""
+"You need to launch System Preferences and turn on \"<span style=\" font-"
+"style:italic;\">Enable access for assistive devices</span>\" to use global "
+"shortcuts in Clementine."
+msgstr ""
+
 msgid "Shortcut"
 msgstr ""
 
@@ -975,7 +1208,16 @@ msgstr ""
 msgid "Change shortcut..."
 msgstr ""
 
-msgid "Clementine"
+msgid "F5"
+msgstr ""
+
+msgid "F6"
+msgstr ""
+
+msgid "F7"
+msgstr ""
+
+msgid "F8"
 msgstr ""
 
 msgid "&Quit"
@@ -984,16 +1226,31 @@ msgstr ""
 msgid "Ctrl+Q"
 msgstr ""
 
+msgid "Ctrl+Alt+V"
+msgstr ""
+
 msgid "Love"
+msgstr ""
+
+msgid "Ctrl+L"
 msgstr ""
 
 msgid "Ban"
 msgstr ""
 
+msgid "Ctrl+B"
+msgstr ""
+
 msgid "Clear playlist"
 msgstr ""
 
+msgid "Ctrl+K"
+msgstr ""
+
 msgid "Edit track information..."
+msgstr ""
+
+msgid "Ctrl+E"
 msgstr ""
 
 msgid "Renumber tracks in this order..."
@@ -1011,19 +1268,37 @@ msgstr ""
 msgid "Configure Clementine..."
 msgstr ""
 
+msgid "Ctrl+P"
+msgstr ""
+
 msgid "About Clementine..."
+msgstr ""
+
+msgid "F1"
 msgstr ""
 
 msgid "Shuffle playlist"
 msgstr ""
 
+msgid "Ctrl+H"
+msgstr ""
+
 msgid "Add file..."
+msgstr ""
+
+msgid "Ctrl+Shift+A"
 msgstr ""
 
 msgid "Add stream..."
 msgstr ""
 
+msgid "Ctrl+O"
+msgstr ""
+
 msgid "Open media..."
+msgstr ""
+
+msgid "Rain"
 msgstr ""
 
 msgid "Shuffle mode"
@@ -1047,22 +1322,31 @@ msgstr ""
 msgid "Ctrl+J"
 msgstr ""
 
+msgid "Ctrl+N"
+msgstr ""
+
+msgid "Ctrl+S"
+msgstr ""
+
 msgid "Load playlist..."
+msgstr ""
+
+msgid "Ctrl+Shift+O"
 msgstr ""
 
 msgid "Update Library"
 msgstr ""
 
-msgid "Visualisations"
+msgid "Visualizations"
 msgstr ""
 
 msgid "Library"
 msgstr ""
 
-msgid "Internet"
+msgid "Files"
 msgstr ""
 
-msgid "Files"
+msgid "Internet"
 msgstr ""
 
 msgid "Music"
@@ -1072,6 +1356,9 @@ msgid "Settings"
 msgstr ""
 
 msgid "Help"
+msgstr ""
+
+msgid "Extras"
 msgstr ""
 
 msgid "Tools"
@@ -1084,6 +1371,15 @@ msgid "Behavior"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Music Library"
+msgstr ""
+
+msgid "Last.fm"
+msgstr ""
+
+msgid "Magnatune"
 msgstr ""
 
 msgid "Fading"
@@ -1209,116 +1505,26 @@ msgstr ""
 msgid "Choose color..."
 msgstr ""
 
-msgid "Clementine Visualisation"
+msgid "Clementine Error"
 msgstr ""
 
-msgid "Toggle fullscreen"
+msgid "0:00:00"
 msgstr ""
 
-msgid "Framerate"
+msgid "Visualizations Settings"
 msgstr ""
 
-msgid "Low (15 fps)"
+msgid "Select visualizations"
 msgstr ""
 
-msgid "Medium (25 fps)"
+msgid "Visualization mode"
 msgstr ""
 
-msgid "High (35 fps)"
-msgstr ""
-
-msgid "Super high (60 fps)"
-msgstr ""
-
-msgid "Quality"
-msgstr ""
-
-msgid "Low (256x256)"
-msgstr ""
-
-msgid "Medium (512x512)"
-msgstr ""
-
-msgid "High (1024x1024)"
-msgstr ""
-
-msgid "Select visualisations..."
-msgstr ""
-
-msgid "Close visualisation"
-msgstr ""
-
-msgid "Select All"
-msgstr ""
-
-msgid "Select None"
-msgstr ""
-
-msgid "Visualisations Settings"
-msgstr ""
-
-msgid "Select visualisations"
-msgstr ""
-
-msgid "Visualisation mode"
-msgstr ""
-
-msgid "Random visualisation"
+msgid "Random visualization"
 msgstr ""
 
 msgid "Choose from the list"
 msgstr ""
 
-msgid "Delay between visualisations"
-msgstr ""
-
-msgid "Copy to library..."
-msgstr ""
-
-msgid "Move to library..."
-msgstr ""
-
-msgid "Loading audio engine"
-msgstr ""
-
-msgid "Updating library"
-msgstr ""
-
-msgid "Getting channels"
-msgstr ""
-
-msgid "Loading stream"
-msgstr ""
-
-msgid "Loading Last.fm radio"
-msgstr ""
-
-msgid "Downloading Magnatune catalogue"
-msgstr ""
-
-#, qt-format
-msgid "disc %1"
-msgstr ""
-
-#, qt-format
-msgid "track %1"
-msgstr ""
-
-msgid "Paused"
-msgstr ""
-
-msgid "Stopped"
-msgstr ""
-
-msgid "Playlist finished"
-msgstr ""
-
-#, qt-format
-msgid "Volume %1%"
-msgstr ""
-
-msgid "Clementine Error"
-msgstr ""
-
-msgid "0:00:00"
+msgid "Delay between visualizations"
 msgstr ""
