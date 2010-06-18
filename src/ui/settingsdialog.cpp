@@ -92,6 +92,10 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
   // Make sure the list is big enough to show all the items
   ui_->list->setMinimumWidth(ui_->list->sizeHintForColumn(0));
+
+#ifdef Q_OS_DARWIN
+  ui_->list->item(1)->setHidden(true);  // Hide "Behaviour" on mac.
+#endif
 }
 
 SettingsDialog::~SettingsDialog() {
