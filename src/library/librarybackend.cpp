@@ -607,6 +607,24 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
+  // Get the songs before they're updated
+  LibraryQuery query;
+  query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
+  query.AddWhere("album", album);
+  if (!artist.isNull())
+    query.AddWhere("artist", artist);
+
+  if (!ExecQuery(&query)) return;
+
+  SongList deleted_songs;
+  while (query.Next()) {
+    Song song;
+    song.InitFromQuery(query);
+    deleted_songs << song;
+  }
+
+
+  // Update the songs
   QString sql(QString("UPDATE %1 SET art_manual = :art"
                       " WHERE album = :album").arg(songs_table_));
   if (!artist.isNull())
@@ -620,6 +638,22 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
 
   q.exec();
   db_->CheckErrors(q.lastError());
+
+
+  // Now get the updated songs
+  if (!ExecQuery(&query)) return;
+
+  SongList added_songs;
+  while (query.Next()) {
+    Song song;
+    song.InitFromQuery(query);
+    added_songs << song;
+  }
+
+  if (!added_songs.isEmpty() || !deleted_songs.isEmpty()) {
+    emit SongsDeleted(deleted_songs);
+    emit SongsDiscovered(added_songs);
+  }
 }
 
 void LibraryBackend::ForceCompilation(const QString& artist, const QString& album, bool on) {
