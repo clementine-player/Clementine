@@ -537,6 +537,7 @@ void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
 
 void Song::BindToQuery(QSqlQuery *query) const {
   #define intval(x) (x <= 0 ? QVariant() : x)
+  #define notnullintval(x) (x == -1 ? QVariant() : x)
 
   // Remember to bind these in the same order as kBindSpec
 
@@ -557,11 +558,11 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":bitrate", intval(d->bitrate_));
   query->bindValue(":samplerate", intval(d->samplerate_));
 
-  query->bindValue(":directory_id", intval(d->directory_id_));
+  query->bindValue(":directory_id", notnullintval(d->directory_id_));
   query->bindValue(":filename", d->filename_);
-  query->bindValue(":mtime", intval(d->mtime_));
-  query->bindValue(":ctime", intval(d->ctime_));
-  query->bindValue(":filesize", intval(d->filesize_));
+  query->bindValue(":mtime", notnullintval(d->mtime_));
+  query->bindValue(":ctime", notnullintval(d->ctime_));
+  query->bindValue(":filesize", notnullintval(d->filesize_));
 
   query->bindValue(":sampler", d->sampler_ ? 1 : 0);
   query->bindValue(":art_automatic", d->art_automatic_);
@@ -578,6 +579,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":effective_compilation", is_compilation() ? 1 : 0);
 
   #undef intval
+  #undef notnullintval
 }
 
 void Song::ToLastFM(lastfm::Track* track) const {
