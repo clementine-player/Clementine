@@ -203,6 +203,9 @@ void PlaylistManager::UpdateSummaryText() {
 
   // Get the length of the selected tracks
   foreach (const QItemSelectionRange& range, current_selection_) {
+    if (!range.isValid())
+      continue;
+
     selected += range.bottom() - range.top() + 1;
     for (int i=range.top() ; i<=range.bottom() ; ++i) {
       int length = range.model()->index(i, Playlist::Column_Length).data().toInt();
