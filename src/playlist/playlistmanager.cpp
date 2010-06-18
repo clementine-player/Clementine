@@ -205,7 +205,9 @@ void PlaylistManager::UpdateSummaryText() {
   foreach (const QItemSelectionRange& range, current_selection_) {
     selected += range.bottom() - range.top() + 1;
     for (int i=range.top() ; i<=range.bottom() ; ++i) {
-      seconds += range.model()->index(i, Playlist::Column_Length).data().toInt();
+      int length = range.model()->index(i, Playlist::Column_Length).data().toInt();
+      if (length > 0)
+        seconds += length;
     }
   }
 
