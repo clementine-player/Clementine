@@ -53,7 +53,12 @@ public:
   void set_network(NetworkAccessManager* network) { network_ = network; }
   void set_ideal_height(int height);
 
+  bool show_above_status_bar() const;
+
   QSize sizeHint() const;
+
+signals:
+  void ShowAboveStatusBarChanged(bool above);
 
 public slots:
   void NowPlaying(const Song& metadata);
@@ -66,6 +71,7 @@ protected:
 
 private slots:
   void SetMode(int mode);
+  void ShowAboveStatusBar(bool above);
 
   void CoverLoaderInitialised();
   void AlbumArtLoaded(quint64 id, const QImage& image);
@@ -89,6 +95,7 @@ private:
   Mode mode_;
 
   QMenu* menu_;
+  QAction* above_statusbar_action_;
 
   bool visible_;
   int small_ideal_height_;

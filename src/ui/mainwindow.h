@@ -153,6 +153,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void CheckForUpdates();
 
+  void NowPlayingWidgetPositionChanged(bool above_status_bar);
+
  private:
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);

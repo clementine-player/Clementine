@@ -468,6 +468,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
                                      1); // Don't question the 1
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->now_playing, SLOT(NowPlaying(Song)));
   connect(player_, SIGNAL(Stopped()), ui_->now_playing, SLOT(Stopped()));
+  connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
+          SLOT(NowPlayingWidgetPositionChanged(bool)));
+  NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
@@ -1218,4 +1221,15 @@ void MainWindow::TaskCountChanged(int count) {
   } else {
     ui_->status_bar_stack->setCurrentWidget(ui_->multi_loading_indicator);
   }
+}
+
+void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
+  if (above_status_bar) {
+    ui_->status_bar->setParent(ui_->centralWidget);
+  } else {
+    ui_->status_bar->setParent(ui_->player_controls_container);
+  }
+
+  ui_->status_bar->parentWidget()->layout()->addWidget(ui_->status_bar);
+  ui_->status_bar->show();
 }

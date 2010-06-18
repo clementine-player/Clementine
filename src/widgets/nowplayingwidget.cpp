@@ -49,6 +49,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     network_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
+    above_statusbar_action_(NULL),
     visible_(false),
     small_ideal_height_(0),
     cover_height_(0),
@@ -66,10 +67,16 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   // Context menu
   QActionGroup* mode_group = new QActionGroup(this);
   QSignalMapper* mode_mapper = new QSignalMapper(this);
+  connect(mode_mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
   CreateModeAction(SmallSongDetails, tr("Small album cover"), mode_group, mode_mapper);
   CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group, mode_mapper);
+
   menu_->addActions(mode_group->actions());
-  connect(mode_mapper, SIGNAL(mapped(int)), SLOT(SetMode(int)));
+  menu_->addSeparator();
+  above_statusbar_action_ = menu_->addAction(tr("Show above status bar"));
+  above_statusbar_action_->setCheckable(true);
+  connect(above_statusbar_action_, SIGNAL(toggled(bool)), SLOT(ShowAboveStatusBar(bool)));
+  above_statusbar_action_->setChecked(s.value("above_status_bar", false).toBool());
 
   // Animations
   connect(show_hide_animation_, SIGNAL(frameChanged(int)), SLOT(SetHeight(int)));
@@ -304,4 +311,16 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   menu_->popup(mapToGlobal(e->pos()));
+}
+
+void NowPlayingWidget::ShowAboveStatusBar(bool above) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("above_status_bar", above);
+
+  emit ShowAboveStatusBarChanged(above);
+}
+
+bool NowPlayingWidget::show_above_status_bar() const {
+  return above_statusbar_action_->isChecked();
 }
