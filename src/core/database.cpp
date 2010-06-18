@@ -105,7 +105,15 @@ bool Database::Like(const char* needle, const char* haystack) {
     query_cache_ = QString::fromUtf8(needle).section('%', 1, 1).split(' ');
     query_hash_ = hash;
   }
+
+  // In place decompose string as it's faster :-)
   QString b = QString::fromUtf8(haystack);
+  QChar* data = b.data();
+  for (int i = 0; i < b.length(); ++i) {
+    if (data[i].decompositionTag() != QChar::NoDecomposition) {
+      data[i] = data[i].decomposition()[0];
+    }
+  }
   foreach (const QString& query, query_cache_) {
     if (!b.contains(query, Qt::CaseInsensitive)) {
       return false;

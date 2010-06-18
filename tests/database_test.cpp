@@ -124,3 +124,10 @@ TEST_F(DatabaseTest, LikeQuerySplit) {
   EXPECT_FALSE(database_->Like("%foo bar%", "foobaz"));
   EXPECT_FALSE(database_->Like("%foo bar%", "baz"));
 }
+
+TEST_F(DatabaseTest, LikeDecomposes) {
+  EXPECT_TRUE(database_->Like("%Royksopp%", "Röyksopp"));
+  EXPECT_FALSE(database_->Like("%Ryksopp%", "Röyksopp"));
+  EXPECT_TRUE(database_->Like("%tiesto%", "DJ Tiësto"));
+  EXPECT_FALSE(database_->Like("%tisto%", "DJ Tiësto"));
+}

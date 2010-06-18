@@ -65,6 +65,7 @@ class Database : public QObject {
   FRIEND_TEST(DatabaseTest, LikePerformance);
   FRIEND_TEST(DatabaseTest, LikeCacheInvalidated);
   FRIEND_TEST(DatabaseTest, LikeQuerySplit);
+  FRIEND_TEST(DatabaseTest, LikeDecomposes);
 
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
