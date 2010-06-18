@@ -306,6 +306,7 @@ if ("${LINGUAS}" STREQUAL "All")
     sk
     sv
     tr
+    uk
     zh_CN
     zh_TW
   )

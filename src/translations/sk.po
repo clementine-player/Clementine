@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-02 00:48+0000\n"
-"PO-Revision-Date: 2010-06-03 18:17+0000\n"
+"POT-Creation-Date: 2010-06-07 07:21+0000\n"
+"PO-Revision-Date: 2010-06-14 20:29+0000\n"
 "Last-Translator: DAG Software <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-04 03:58+0000\n"
+"X-Launchpad-Export-Date: 2010-06-15 03:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Language: sk_SK\n"
 
@@ -791,7 +791,7 @@ msgid "Loading Last.fm radio"
 msgstr "Načítava sa Last.fm rádio"
 
 msgid "Downloading Magnatune catalogue"
-msgstr "Stiahnuť Magnatune katalóg"
+msgstr "Sťahovanie Magnatune katalógu"
 
 msgid "Loading tracks"
 msgstr ""
@@ -820,7 +820,7 @@ msgid "Stopped"
 msgstr "Zastavené"
 
 msgid "Playlist finished"
-msgstr "Playlist skončený"
+msgstr "Playlist dokončený"
 
 #, qt-format
 msgid "Volume %1%"
@@ -837,34 +837,34 @@ msgid "Clementine Visualization"
 msgstr ""
 
 msgid "Toggle fullscreen"
-msgstr ""
+msgstr "Prepnúť na celú obrazovku"
 
 msgid "Framerate"
-msgstr ""
+msgstr "Počet snímkov"
 
 msgid "Low (15 fps)"
-msgstr ""
+msgstr "Nízky (15 fps)"
 
 msgid "Medium (25 fps)"
-msgstr ""
+msgstr "Stredný (25 fps)"
 
 msgid "High (35 fps)"
-msgstr ""
+msgstr "Vysoký (35 fps)"
 
 msgid "Super high (60 fps)"
-msgstr ""
+msgstr "Super vysoký (60 fps)"
 
 msgid "Quality"
-msgstr ""
+msgstr "Kvalita"
 
 msgid "Low (256x256)"
-msgstr ""
+msgstr "Nízka (256x256)"
 
 msgid "Medium (512x512)"
-msgstr ""
+msgstr "Stredná (512x512)"
 
 msgid "High (1024x1024)"
-msgstr ""
+msgstr "Vysoká (1024x1024)"
 
 msgid "Select visualizations..."
 msgstr ""
@@ -876,10 +876,10 @@ msgid "Clementine"
 msgstr "Clementine"
 
 msgid "Select All"
-msgstr ""
+msgstr "Vybrať všetky"
 
 msgid "Select None"
-msgstr ""
+msgstr "Nevybrať nič"
 
 msgid "Library advanced grouping"
 msgstr "Pokročilé zoraďovanie zbierky"
@@ -1028,7 +1028,7 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Skrobblovať skladby, ktoré počúvam"
 
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Zobrazovať \"obľúbené\" a \"neznášané\" tlačítka"
+msgstr "Zobrazovať \"obľúbené\" a \"neobľúbené\" tlačítka"
 
 msgid "Authenticating..."
 msgstr "Autentifikácia..."
@@ -1243,7 +1243,7 @@ msgid "Ctrl+L"
 msgstr ""
 
 msgid "Ban"
-msgstr "Neznášané"
+msgstr "Neobľúbené"
 
 msgid "Ctrl+B"
 msgstr ""
@@ -1531,25 +1531,10 @@ msgid "Random visualization"
 msgstr ""
 
 msgid "Choose from the list"
-msgstr ""
+msgstr "Vybrať zo zoznamu"
 
 msgid "Delay between visualizations"
 msgstr ""
-
-#~ msgid "Copy to library..."
-#~ msgstr "Skopírovať do zbierky..."
-
-#~ msgid "Move to library..."
-#~ msgstr "Presunúť do zbierky..."
-
-#~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-#~ msgstr "Hudba (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-
-#~ msgid "Playlists (*.m3u *.xspf *.xml)"
-#~ msgstr "Playlisty (*.m3u *.xspf *.xml)"
-
-#~ msgid "Choose manual cover..."
-#~ msgstr "Vybrať obal ručne..."
 
 #~ msgid "Show section"
 #~ msgstr "Zobraziť stĺpec"
@@ -1563,6 +1548,48 @@ msgstr ""
 #~ msgstr ""
 #~ "Pamätajte, že musíte byť <span style=\" font-weight:600;\">platiaci "
 #~ "odberateľ</span> aby ste mohli počúvať Last.fm rádio v Clementine."
+
+#~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
+#~ msgstr "Hudba (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
+
+#~ msgid "Playlists (*.m3u *.xspf *.xml)"
+#~ msgstr "Playlisty (*.m3u *.xspf *.xml)"
+
+#~ msgid "Choose manual cover..."
+#~ msgstr "Vybrať obal ručne..."
+
+#~ msgid "Visualisations"
+#~ msgstr "Vizualizácie"
+
+#~ msgid "Clementine Visualisation"
+#~ msgstr "Clementine vizualizácie"
+
+#~ msgid "Select visualisations..."
+#~ msgstr "Vybrať vizualizácie..."
+
+#~ msgid "Close visualisation"
+#~ msgstr "Zavrieť vizuaizácie"
+
+#~ msgid "Visualisations Settings"
+#~ msgstr "Nastavenia vizualizácií"
+
+#~ msgid "Select visualisations"
+#~ msgstr "Vybrať vizualizácie"
+
+#~ msgid "Visualisation mode"
+#~ msgstr "Mód vizualizácií"
+
+#~ msgid "Random visualisation"
+#~ msgstr "Náhodná vizualizácia"
+
+#~ msgid "Delay between visualisations"
+#~ msgstr "Oneskorenie medzi vizualizáciami"
+
+#~ msgid "Copy to library..."
+#~ msgstr "Skopírovať do zbierky..."
+
+#~ msgid "Move to library..."
+#~ msgstr "Presunúť do zbierky..."
 
 #~ msgid "&Hide tray icon"
 #~ msgstr "&Skryť tray ikonu"
