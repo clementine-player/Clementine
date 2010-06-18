@@ -842,15 +842,19 @@ void MainWindow::RadioDoubleClick(const QModelIndex& index) {
   if (!data)
     return;
 
+  if (player_->GetState() != Engine::Playing)
+    data->setData(Playlist::kPlayNowMimetype, "true");
+
+  int rows = playlists_->current()->rowCount();
   playlists_->current()->dropMimeData(data.get(), Qt::CopyAction, -1, 0, QModelIndex());
 
-  QModelIndex first_song = playlists_->current()->index(0, 0);
-  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-    // The first song doesn't match the filter, so don't play it
-    return;
-  }
+  if (player_->GetState() != Engine::Playing && playlists_->current()->rowCount() > rows) {
+    QModelIndex first_song = playlists_->current()->index(rows, 0);
+    if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+      // The first song doesn't match the filter, so don't play it
+      return;
+    }
 
-  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
     playlists_->SetActiveToCurrent();
     player_->PlayAt(first_song.row(), Engine::First, true);
   }

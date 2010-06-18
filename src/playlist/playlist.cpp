@@ -47,6 +47,7 @@
 using boost::shared_ptr;
 
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
+const char* Playlist::kPlayNowMimetype = "application/x-clementine-play-now";
 
 Playlist::Playlist(PlaylistBackend* backend, int id, QObject *parent)
   : QAbstractListModel(parent),
@@ -462,7 +463,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       InsertSongs(song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
-    InsertRadioStations(radio_data->items, row);
+    InsertRadioStations(radio_data->items, row, data->hasFormat(kPlayNowMimetype));
   } else if (data->hasFormat(kRowsMimetype)) {
     // Dragged from the playlist
     // Rearranging it is tricky...
@@ -649,7 +650,7 @@ QModelIndex Playlist::InsertSongs(const SongList& songs, int pos) {
   return InsertItems(items, pos);
 }
 
-QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos) {
+QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos, bool play_now) {
   PlaylistItemList playlist_items;
   QList<QUrl> song_urls;
   foreach (RadioItem* item, items) {
@@ -665,7 +666,7 @@ QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int po
   }
 
   if (!song_urls.isEmpty()) {
-    InsertUrls(song_urls, false, pos);
+    InsertUrls(song_urls, play_now, pos);
   }
 
   return InsertItems(playlist_items, pos);

@@ -83,6 +83,7 @@ class Playlist : public QAbstractListModel {
   };
 
   static const char* kRowsMimetype;
+  static const char* kPlayNowMimetype;
 
   static bool CompareItems(int column, Qt::SortOrder order,
                            boost::shared_ptr<PlaylistItem> a,
@@ -132,7 +133,7 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertLibraryItems(const SongList& items, int pos = -1);
   QModelIndex InsertMagnatuneItems(const SongList& items, int pos = -1);
   QModelIndex InsertSongs(const SongList& items, int pos = -1);
-  QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1);
+  QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1, bool play_now = false);
   void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
