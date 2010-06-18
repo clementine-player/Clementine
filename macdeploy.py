@@ -60,8 +60,6 @@ GSTREAMER_PLUGINS=[
     'libgstautodetect.so',
     'libgstcoreelements.so',
     'libgstdecodebin.so',
-    'libgstgio.so',
-    'libgstladspa.so',
     'libgstosxaudio.so',
     'libgsttypefindfunctions.so',
     'libgstvolume.so',
@@ -69,11 +67,13 @@ GSTREAMER_PLUGINS=[
 
     # Codecs
     'libgstaacparse.so',
+    'libgstasf.so',
     'libgstaiff.so',
     'libgstapetag.so',
     'libgstequalizer.so',
     'libgstfaac.so',
     'libgstfaad.so',
+    'libgstffmpeg.so',
     'libgstflac.so',
     'libgstid3demux.so',
     'libgstmad.so',
