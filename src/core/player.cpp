@@ -48,7 +48,7 @@
 
 using boost::shared_ptr;
 
-const char* Player::kRainUrl = "http://s315939866.onlinehome.us/rainymood30a.mp3";
+const char* Player::kRainUrl = "http://data.clementine-player.org/rainymood";
 
 #ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
