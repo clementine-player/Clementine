@@ -30,7 +30,7 @@
 const char* NowPlayingWidget::kSettingsGroup = "NowPlayingWidget";
 
 // Space between the cover and the details in small mode
-const int NowPlayingWidget::kPadding = 4;
+const int NowPlayingWidget::kPadding = 2;
 
 // Width of the transparent to black gradient above and below the text in large
 // mode
@@ -41,6 +41,9 @@ const int NowPlayingWidget::kGradientTail = 20;
 // bottom of the cover and bottom of the widget
 const int NowPlayingWidget::kMaxCoverSize = 260;
 const int NowPlayingWidget::kBottomOffset = 0;
+
+// Border for large mode
+const int NowPlayingWidget::kTopBorder = 4;
 
 
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
@@ -126,7 +129,7 @@ void NowPlayingWidget::UpdateHeight() {
 
   case LargeSongDetails:
     cover_height_ = qMin(kMaxCoverSize, width());
-    total_height_ = cover_height_ + kBottomOffset;
+    total_height_ = kTopBorder + cover_height_ + kBottomOffset;
     break;
   }
 
@@ -256,10 +259,10 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
     const int x_offset = (width() - cover_height_) / 2;
 
     // Draw the black background
-    p->fillRect(rect(), Qt::black);
+    p->fillRect(QRect(0, kTopBorder, width(), height() - kTopBorder), Qt::black);
 
     // Draw the cover
-    p->drawPixmap(x_offset, 0, total_size, total_size, cover_);
+    p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
 
     // Work out how high the text is going to be
     const int text_height = details_->size().height();

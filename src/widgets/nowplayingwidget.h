@@ -43,6 +43,7 @@ public:
   static const int kGradientTail;
   static const int kMaxCoverSize;
   static const int kBottomOffset;
+  static const int kTopBorder;
 
   // Values are saved in QSettings
   enum Mode {

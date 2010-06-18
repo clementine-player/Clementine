@@ -463,7 +463,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Now playing widget
   ui_->now_playing->set_network(network);
   ui_->now_playing->set_ideal_height(ui_->status_bar->sizeHint().height() +
-                                     ui_->status_bar_line->sizeHint().height() +
                                      ui_->player_controls->sizeHint().height() +
                                      1); // Don't question the 1
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->now_playing, SLOT(NowPlaying(Song)));
