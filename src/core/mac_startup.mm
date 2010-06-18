@@ -12,6 +12,7 @@
 
 #import <Kernel/AvailabilityMacros.h>
 
+#include "config.h"
 #include "globalshortcuts.h"
 #include "mac_startup.h"
 #include "macglobalshortcutbackend.h"
@@ -38,7 +39,7 @@
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
-#ifdef MAC_OS_X_VERSION_10_6
+#ifdef SNOW_LEOPARD
 @interface AppDelegate :NSObject <NSApplicationDelegate> {
 #else
 @interface AppDelegate :NSObject {
