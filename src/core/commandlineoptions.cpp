@@ -21,8 +21,8 @@
 #include <getopt.h>
 #include <iostream>
 
-#include <QFileInfo>
 #include <QBuffer>
+#include <QFileInfo>
 
 const char* CommandlineOptions::kHelpText =
     "%1: clementine [%2] [%3]\n"
@@ -100,10 +100,9 @@ bool CommandlineOptions::Parse() {
   };
 
   // Parse the arguments
-  int option_index = 0;
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oe:", kOptions, &option_index);
+    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oe:", kOptions, NULL);
 
     // End of the options
     if (c == -1)
@@ -208,7 +207,7 @@ bool CommandlineOptions::Parse() {
   }
 
   // Get any filenames or URLs following the arguments
-  for (int i=option_index+1 ; i<argc_ ; ++i) {
+  for (int i=optind+1 ; i<argc_ ; ++i) {
     QString value = QString::fromLocal8Bit(argv_[i]);
     if (value.contains("://"))
       urls_ << value;
