@@ -443,7 +443,6 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
 
   // Run each command
   QStringList commands(schema.split(";\n\n"));
-  db.exec("DROP TABLE songs_fts");
   db.transaction();
   foreach (const QString& command, commands) {
     qDebug() << command;
