@@ -220,6 +220,11 @@ void Database::StaticInit() {
   _sqlite3_value_text = sqlite3_value_text;
   _sqlite3_result_int64 = sqlite3_result_int64;
   _sqlite3_user_data = sqlite3_user_data;
+  _sqlite3_prepare_v2 = sqlite3_prepare_v2;
+  _sqlite3_bind_text = sqlite3_bind_text;
+  _sqlite3_bind_blob = sqlite3_bind_blob;
+  _sqlite3_step = sqlite3_step;
+  _sqlite3_finalize = sqlite3_finalize;
   sLoadedSqliteSymbols = true;
   return;
 #else // Q_WS_X11
