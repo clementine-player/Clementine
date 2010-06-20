@@ -61,6 +61,7 @@ class PlaylistView : public QTreeView {
   void scrollContentsBy(int dx, int dy);
   void paintEvent(QPaintEvent *event);
   void dragMoveEvent(QDragMoveEvent *event);
+  void dragEnterEvent(QDragEnterEvent *event);
   void dragLeaveEvent(QDragLeaveEvent *event);
   void dropEvent(QDropEvent *event);
 
@@ -112,6 +113,7 @@ class PlaylistView : public QTreeView {
   QRect cached_current_row_rect_;
   int cached_current_row_row_;
 
+  QPixmap cached_tree_;
   int drop_indicator_row_;
 };
 

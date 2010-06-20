@@ -411,6 +411,7 @@ void PlaylistView::scrollContentsBy(int dx, int dy) {
   if (dx) {
     InvalidateCachedCurrentPixmap();
   }
+  cached_tree_ = QPixmap();
 
   QTreeView::scrollContentsBy(dx, dy);
 
@@ -456,11 +457,28 @@ void PlaylistView::JumpToCurrentlyPlayingTrack() {
 
 void PlaylistView::paintEvent(QPaintEvent* event) {
   // Reimplemented to draw the drop indicator
-  QPainter p(viewport());
-  drawTree(&p, event->region());
+  // When the user is dragging some stuff over the playlist paintEvent gets
+  // called for the entire viewport every time the user moves the mouse.
+  // The drawTree is kinda expensive, so we cache the result and draw from the
+  // cache while the user is dragging.  The cached pixmap gets invalidated in
+  // dragLeaveEvent, dropEvent and scrollContentsBy.
 
-  if (drop_indicator_row_ == -1)
+  QPainter p(viewport());
+
+  if (drop_indicator_row_ != -1) {
+    if (cached_tree_.isNull()) {
+      cached_tree_ = QPixmap(size());
+      cached_tree_.fill(Qt::transparent);
+
+      QPainter cache_painter(&cached_tree_);
+      drawTree(&cache_painter, event->region());
+    }
+
+    p.drawPixmap(0, 0, cached_tree_);
+  } else {
+    drawTree(&p, event->region());
     return;
+  }
 
   // Find the y position of the drop indicator
   QModelIndex drop_index = model()->index(drop_indicator_row_, 0);
@@ -516,12 +534,19 @@ void PlaylistView::dragMoveEvent(QDragMoveEvent *event) {
   drop_indicator_row_ = index.isValid() ? index.row() : 0;
 }
 
+void PlaylistView::dragEnterEvent(QDragEnterEvent *event) {
+  QTreeView::dragEnterEvent(event);
+  cached_tree_ = QPixmap();
+}
+
 void PlaylistView::dragLeaveEvent(QDragLeaveEvent *event) {
   QTreeView::dragLeaveEvent(event);
+  cached_tree_ = QPixmap();
   drop_indicator_row_ = -1;
 }
 
 void PlaylistView::dropEvent(QDropEvent *event) {
   QTreeView::dropEvent(event);
+  cached_tree_ = QPixmap();
   drop_indicator_row_ = -1;
 }
