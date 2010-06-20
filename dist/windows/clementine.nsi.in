@@ -40,6 +40,15 @@ ShowUnInstDetails show
 ; BrandingText "${PRODUCT_PUBLISHER}"
 RequestExecutionLevel admin
 
+Section "Delete old files" oldfiles
+  ; Delete files from older versions
+  ; 0.3
+  Delete "$INSTDIR\lastfm.lib"
+  Delete "$INSTDIR\gstreamer-plugins\libgstdecodebin.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstdirectsound.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstwaveform.dll"
+SectionEnd
+
 Section "Clementine" Clementine
   SetOutPath "$INSTDIR"
 
@@ -114,7 +123,6 @@ Section "Clementine" Clementine
   ${registerExtension} "$INSTDIR\clementine.exe" ".m3u" "M3U Audio File"
   ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
   ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
-
 SectionEnd
 
 Section "Qt image format plugins" imageformats
