@@ -16,14 +16,14 @@
 
 #include "database.h"
 
+#include <QCoreApplication>
+#include <QDir>
 #include <QLibrary>
 #include <QLibraryInfo>
-#include <QDir>
-#include <QCoreApplication>
-#include <QtDebug>
-#include <QThread>
 #include <QSqlDriver>
 #include <QSqlQuery>
+#include <QtDebug>
+#include <QThread>
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
