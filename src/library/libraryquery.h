@@ -42,20 +42,22 @@ class LibraryQuery {
   void SetColumnSpec(const QString& spec) { column_spec_ = spec; }
   void SetOrderBy(const QString& order_by) { order_by_ = order_by; }
   void AddWhere(const QString& column, const QVariant& value, const QString& op = "=");
-  void AddWhereLike(const QString& column, const QVariant& value);
   void AddCompilationRequirement(bool compilation);
+  void SetLimit(int limit) { limit_ = limit; }
 
-  QSqlError Exec(QSqlDatabase db, const QString& table);
+  QSqlError Exec(QSqlDatabase db, const QString& songs_table, const QString& fts_table);
   bool Next();
   QVariant Value(int column) const;
 
   operator const QSqlQuery& () const { return query_; }
 
  private:
+  bool join_with_fts_;
   QString column_spec_;
   QString order_by_;
   QStringList where_clauses_;
   QVariantList bound_values_;
+  int limit_;
 
   QSqlQuery query_;
 };

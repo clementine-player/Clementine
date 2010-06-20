@@ -27,7 +27,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 12;
+const int Database::kSchemaVersion = 13;
 
 int (*Database::_sqlite3_create_function) (
     sqlite3*, const char*, int, int, void*,

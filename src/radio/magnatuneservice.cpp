@@ -45,6 +45,7 @@ using boost::shared_ptr;
 const char* MagnatuneService::kServiceName = "Magnatune";
 const char* MagnatuneService::kSettingsGroup = "Magnatune";
 const char* MagnatuneService::kSongsTable = "magnatune_songs";
+const char* MagnatuneService::kFtsTable = "magnatune_songs_fts";
 
 const char* MagnatuneService::kHomepage = "http://magnatune.com";
 const char* MagnatuneService::kDatabaseUrl = "http://magnatune.com/info/song_info_xml.gz";
@@ -72,7 +73,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   // Create the library backend in the database thread
   library_backend_ = parent->db_thread()->CreateInThread<LibraryBackend>();
   library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
-                         QString::null, QString::null);
+                         QString::null, QString::null, kFtsTable);
   library_model_ = new LibraryModel(library_backend_, this);
 
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),

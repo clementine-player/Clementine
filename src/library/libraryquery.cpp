@@ -27,21 +27,29 @@ QueryOptions::QueryOptions()
 }
 
 
-LibraryQuery::LibraryQuery(const QueryOptions& options) {
+LibraryQuery::LibraryQuery(const QueryOptions& options)
+  : join_with_fts_(false),
+    limit_(-1)
+{
   if (!options.filter.isEmpty()) {
-    where_clauses_ << "("
-        "artist LIKE ? OR "
-        "album LIKE ? OR "
-        "title LIKE ? OR "
-        "composer LIKE ? OR "
-        "genre LIKE ? OR "
-        "albumartist LIKE ?)";
-    bound_values_ << "%" + options.filter + "%";
-    bound_values_ << "%" + options.filter + "%";
-    bound_values_ << "%" + options.filter + "%";
-    bound_values_ << "%" + options.filter + "%";
-    bound_values_ << "%" + options.filter + "%";
-    bound_values_ << "%" + options.filter + "%";
+    // We need to munge the filter text a little bit to get it to work as
+    // expected with sqlite's FTS3:
+    //  1) Append * to all tokens.
+    //  2) Prefix "fts" to column names.
+
+    // Split on whitespace
+    QStringList tokens(options.filter.split(QRegExp("\\s+")));
+    QString query;
+    foreach (const QString& token, tokens) {
+      if (token.contains(':'))
+        query += "fts" + token + "* ";
+      else
+        query += token + "* ";
+    }
+
+    where_clauses_ << "fts.%fts_table MATCH ?";
+    bound_values_ << query;
+    join_with_fts_ = true;
   }
 
   if (options.max_age != -1) {
@@ -64,17 +72,20 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value, const 
   }
 }
 
-void LibraryQuery::AddWhereLike(const QString& column, const QVariant& value) {
-  where_clauses_ << QString("%1 LIKE ?").arg(column);
-  bound_values_ << value;
-}
-
 void LibraryQuery::AddCompilationRequirement(bool compilation) {
   where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
 }
 
-QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& table) {
-  QString sql = QString("SELECT %1 FROM %2").arg(column_spec_, table);
+QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
+                             const QString& fts_table) {
+  QString sql;
+  if (join_with_fts_) {
+    sql = QString("SELECT %1 FROM %2 INNER JOIN %3 AS fts ON %2.ROWID = fts.ROWID")
+          .arg(column_spec_, songs_table, fts_table);
+  } else {
+    sql = QString("SELECT %1 FROM %2")
+          .arg(column_spec_, songs_table);
+  }
 
   if (!where_clauses_.isEmpty())
     sql += " WHERE " + where_clauses_.join(" AND ");
@@ -82,6 +93,11 @@ QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& table) {
   if (!order_by_.isEmpty())
     sql += " ORDER BY " + order_by_;
 
+  if (limit_ != -1)
+    sql += " LIMIT " + QString::number(limit_);
+
+  sql.replace("%songs_table", songs_table);
+  sql.replace("%fts_table", fts_table);
   query_ = QSqlQuery(sql, db);
 
   // Bind values

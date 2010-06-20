@@ -36,7 +36,8 @@ class LibraryBackendTest : public ::testing::Test {
     database_.reset(new MemoryDatabase);
     backend_.reset(new LibraryBackend);
     backend_->Init(database_, Library::kSongsTable,
-                   Library::kDirsTable, Library::kSubdirsTable);
+                   Library::kDirsTable, Library::kSubdirsTable,
+                   Library::kFtsTable);
   }
 
   Song MakeDummySong(int directory_id) {

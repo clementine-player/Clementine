@@ -84,6 +84,15 @@ const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
 const QString Song::kUpdateSpec = Updateify(Song::kColumns).join(", ");
 
+
+const QStringList Song::kFtsColumns = QStringList()
+    << "ftstitle" << "ftsalbum" << "ftsartist" << "ftsalbumartist"
+    << "ftscomposer" << "ftsgenre" << "ftscomment";
+
+const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
+const QString Song::kFtsBindSpec = Prepend(":", Song::kFtsColumns).join(", ");
+const QString Song::kFtsUpdateSpec = Updateify(Song::kFtsColumns).join(", ");
+
 QString Song::JoinSpec(const QString& table) {
   return Prepend(table + ".", kColumns).join(", ");
 }
@@ -580,6 +589,16 @@ void Song::BindToQuery(QSqlQuery *query) const {
 
   #undef intval
   #undef notnullintval
+}
+
+void Song::BindToFtsQuery(QSqlQuery *query) const {
+  query->bindValue(":ftstitle", d->title_);
+  query->bindValue(":ftsalbum", d->album_);
+  query->bindValue(":ftsartist", d->artist_);
+  query->bindValue(":ftsalbumartist", d->albumartist_);
+  query->bindValue(":ftscomposer", d->composer_);
+  query->bindValue(":ftsgenre", d->genre_);
+  query->bindValue(":ftscomment", d->comment_);
 }
 
 void Song::ToLastFM(lastfm::Track* track) const {

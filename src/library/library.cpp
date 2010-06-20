@@ -22,6 +22,7 @@
 const char* Library::kSongsTable = "songs";
 const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
+const char* Library::kFtsTable = "songs_fts";
 
 Library::Library(BackgroundThread<Database>* db_thread, QObject *parent)
   : QObject(parent),
@@ -31,7 +32,7 @@ Library::Library(BackgroundThread<Database>* db_thread, QObject *parent)
     watcher_(NULL)
 {
   backend_ = db_thread->CreateInThread<LibraryBackend>();
-  backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable);
+  backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
 
   model_ = new LibraryModel(backend_, this);
 }
