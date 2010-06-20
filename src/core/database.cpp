@@ -40,8 +40,156 @@ const uchar* (*Database::_sqlite3_value_text) (sqlite3_value*) = NULL;
 void (*Database::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
 void* (*Database::_sqlite3_user_data) (sqlite3_context*) = NULL;
 
+int (*Database::_sqlite3_prepare_v2) (
+    sqlite3*, const char*, int, sqlite3_stmt**, const char**) = NULL;
+int (*Database::_sqlite3_bind_text) (
+    sqlite3_stmt*, int, const char*, int, void(*)(void*)) = NULL;
+int (*Database::_sqlite3_bind_blob) (
+    sqlite3_stmt*, int, const void*, int, void(*)(void*)) = NULL;
+int (*Database::_sqlite3_step) (sqlite3_stmt*) = NULL;
+int (*Database::_sqlite3_finalize) (sqlite3_stmt*) = NULL;
+
 bool Database::sStaticInitDone = false;
 bool Database::sLoadedSqliteSymbols = false;
+
+sqlite3_tokenizer_module* Database::sFTSTokenizer = NULL;
+
+struct Token {
+  QString token;
+  int start_offset;
+  int end_offset;
+};
+
+extern "C" {
+// Based on sqlite3_tokenizer.
+struct UnicodeTokenizer {
+  const sqlite3_tokenizer_module* pModule;
+};
+
+struct UnicodeTokenizerCursor {
+  const sqlite3_tokenizer* pTokenizer;
+
+  QList<Token> tokens;
+  int position;
+  QByteArray current_utf8;
+};
+}
+
+int Database::FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** tokenizer) {
+  *tokenizer = reinterpret_cast<sqlite3_tokenizer*>(new UnicodeTokenizer);
+
+  return SQLITE_OK;
+}
+
+int Database::FTSDestroy(sqlite3_tokenizer* tokenizer) {
+  UnicodeTokenizer* real_tokenizer = reinterpret_cast<UnicodeTokenizer*>(tokenizer);
+  qDebug() << __PRETTY_FUNCTION__;
+  delete real_tokenizer;
+  return SQLITE_OK;
+}
+
+int Database::FTSOpen(
+    sqlite3_tokenizer* pTokenizer,
+    const char* input,
+    int bytes,
+    sqlite3_tokenizer_cursor** cursor) {
+  UnicodeTokenizerCursor* new_cursor = new UnicodeTokenizerCursor;
+  new_cursor->pTokenizer = pTokenizer;
+  new_cursor->position = 0;
+
+  QString str = QString::fromUtf8(input, bytes).toLower();
+  QChar* data = str.data();
+  // Decompose and strip punctuation.
+  QList<Token> tokens;
+  QString token;
+  int start_offset = 0;
+  int offset = 0;
+  for (int i = 0; i < str.length(); ++i) {
+    QChar c = data[i];
+    ushort unicode = c.unicode();
+    if (unicode >= 0x00 && unicode <= 0x007f) {
+      offset += 1;
+    } else if (unicode >= 0x0080 && unicode <= 0x07ff) {
+      offset += 2;
+    } else if (unicode >= 0x0800 && unicode <= 0xffff) {
+      offset += 3;
+    } else if (unicode >= 0x010000 && unicode <= 0x10ffff) {
+      offset += 4;
+    }
+
+    if (!data[i].isLetterOrNumber()) {
+      // Token finished.
+      if (token.length() != 0) {
+        Token t;
+        t.token = token;
+        t.start_offset = start_offset;
+        t.end_offset = offset - 1;
+        start_offset = offset;
+        tokens << t;
+        token.clear();
+      } else {
+        ++start_offset;
+      }
+    } else {
+      if (data[i].decompositionTag() != QChar::NoDecomposition) {
+        token.push_back(data[i].decomposition()[0]);
+      } else {
+        token.push_back(data[i]);
+      }
+    }
+
+    if (i == str.length() - 1) {
+      if (token.length() != 0) {
+        Token t;
+        t.token = token;
+        t.start_offset = start_offset;
+        t.end_offset = offset;
+        start_offset = offset;
+        tokens << t;
+        token.clear();
+      }
+    }
+  }
+
+  new_cursor->tokens = tokens;
+  *cursor = reinterpret_cast<sqlite3_tokenizer_cursor*>(new_cursor);
+
+  return SQLITE_OK;
+}
+
+int Database::FTSClose(sqlite3_tokenizer_cursor* cursor) {
+  UnicodeTokenizerCursor* real_cursor = reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
+  delete real_cursor;
+
+  return SQLITE_OK;
+}
+
+int Database::FTSNext(
+    sqlite3_tokenizer_cursor* cursor,
+    const char** token,
+    int* bytes,
+    int* start_offset,
+    int* end_offset,
+    int* position) {
+  UnicodeTokenizerCursor* real_cursor = reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
+
+  QList<Token> tokens = real_cursor->tokens;
+  if (real_cursor->position >= tokens.size()) {
+    return SQLITE_DONE;
+  }
+
+  Token t = tokens[real_cursor->position];
+  QByteArray utf8 = t.token.toUtf8();
+  *token = utf8.constData();
+  *bytes = utf8.size();
+  *start_offset = t.start_offset;
+  *end_offset = t.end_offset;
+  *position = real_cursor->position++;
+
+  real_cursor->current_utf8 = utf8;
+
+  return SQLITE_OK;
+}
 
 
 void Database::StaticInit() {
@@ -84,18 +232,45 @@ void Database::StaticInit() {
   _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
       library.resolve("sqlite3_user_data"));
 
+  _sqlite3_prepare_v2 = reinterpret_cast<
+      int (*) (sqlite3*, const char*, int, sqlite3_stmt**, const char**)>(
+        library.resolve("sqlite3_prepare_v2"));
+  _sqlite3_bind_text = reinterpret_cast<
+      int (*) (sqlite3_stmt*, int, const char*, int, void(*)(void*))>(
+        library.resolve("sqlite3_bind_text"));
+  _sqlite3_bind_blob = reinterpret_cast<
+      int (*) (sqlite3_stmt*, int, const void*, int, void(*)(void*))>(
+        library.resolve("sqlite3_bind_blob"));
+  _sqlite3_step = reinterpret_cast<int (*) (sqlite3_stmt*)>(
+      library.resolve("sqlite3_step"));
+  _sqlite3_finalize = reinterpret_cast<int (*) (sqlite3_stmt*)>(
+      library.resolve("sqlite3_finalize"));
+
   if (!_sqlite3_create_function ||
       !_sqlite3_value_type ||
       !_sqlite3_value_int64 ||
       !_sqlite3_value_text ||
       !_sqlite3_result_int64 ||
-      !_sqlite3_user_data) {
+      !_sqlite3_user_data ||
+      !_sqlite3_prepare_v2 ||
+      !_sqlite3_bind_text ||
+      !_sqlite3_bind_blob ||
+      !_sqlite3_step ||
+      !_sqlite3_finalize) {
     qDebug() << "Couldn't resolve sqlite symbols";
     sLoadedSqliteSymbols = false;
   } else {
     sLoadedSqliteSymbols = true;
   }
 #endif
+
+  sFTSTokenizer = new sqlite3_tokenizer_module;
+  sFTSTokenizer->iVersion = 0;
+  sFTSTokenizer->xCreate = &Database::FTSCreate;
+  sFTSTokenizer->xDestroy = &Database::FTSDestroy;
+  sFTSTokenizer->xOpen = &Database::FTSOpen;
+  sFTSTokenizer->xNext = &Database::FTSNext;
+  sFTSTokenizer->xClose = &Database::FTSClose;
 }
 
 bool Database::Like(const char* needle, const char* haystack) {
@@ -199,7 +374,7 @@ QSqlDatabase Database::Connect() {
   // Find Sqlite3 functions in the Qt plugin.
   StaticInit();
 
-  // We want Unicode aware LIKE clauses if possible
+  // We want Unicode aware LIKE clauses and FTS if possible.
   if (sLoadedSqliteSymbols) {
     QVariant v = db.driver()->handle();
     if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
@@ -213,6 +388,17 @@ QSqlDatabase Database::Connect() {
             this,         // Custom data available via sqlite3_user_data().
             &Database::SqliteLike,  // Our function :-)
             NULL, NULL);
+
+        sqlite3_stmt* statement;
+        const char* sql = "SELECT fts3_tokenizer(?, ?)";
+        int rc = _sqlite3_prepare_v2(handle, sql, -1, &statement, 0);
+        if (rc == SQLITE_OK) {
+          _sqlite3_bind_text(statement, 1, "unicode", -1, SQLITE_STATIC);
+          _sqlite3_bind_blob(statement, 2, &sFTSTokenizer, sizeof(sFTSTokenizer), SQLITE_STATIC);
+          qDebug() << _sqlite3_step(statement);
+
+          qDebug() << _sqlite3_finalize(statement);
+        }
       }
     }
   }
@@ -257,8 +443,10 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
 
   // Run each command
   QStringList commands(schema.split(";\n\n"));
+  db.exec("DROP TABLE songs_fts");
   db.transaction();
   foreach (const QString& command, commands) {
+    qDebug() << command;
     QSqlQuery query(db.exec(command));
     if (CheckErrors(query.lastError()))
       qFatal("Unable to update music library database");
