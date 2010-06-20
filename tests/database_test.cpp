@@ -180,3 +180,34 @@ TEST_F(DatabaseTest, FTSOpenParsesMultipleTokens) {
   EXPECT_EQ(10, tokens[1].start_offset);
   EXPECT_EQ(13, tokens[1].end_offset);
 }
+
+TEST_F(DatabaseTest, FTSCursorWorks) {
+  sqlite3_tokenizer_cursor* cursor = NULL;
+  Database::FTSOpen(NULL, "Röyksopp foo", 13, &cursor);
+  ASSERT_TRUE(cursor);
+  Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
+
+  const char* token;
+  int bytes = 0;
+  int start_offset = 42;
+  int end_offset = 0;
+  int position = 42;
+  int rc = Database::FTSNext(cursor, &token, &bytes, &start_offset, &end_offset, &position);
+  EXPECT_EQ(SQLITE_OK, rc);
+  EXPECT_STREQ("royksopp", token);
+  EXPECT_EQ(8, bytes);
+  EXPECT_EQ(0, start_offset);
+  EXPECT_EQ(9, end_offset);
+  EXPECT_EQ(0, position);
+
+  rc = Database::FTSNext(cursor, &token, &bytes, &start_offset, &end_offset, &position);
+  EXPECT_EQ(rc, SQLITE_OK);
+  EXPECT_STREQ("foo", token);
+  EXPECT_EQ(3, bytes);
+  EXPECT_EQ(10, start_offset);
+  EXPECT_EQ(13, end_offset);
+  EXPECT_EQ(1, position);
+
+  rc = Database::FTSNext(cursor, &token, &bytes, &start_offset, &end_offset, &position);
+  EXPECT_EQ(SQLITE_DONE, rc);
+}
