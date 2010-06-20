@@ -91,26 +91,6 @@ bool Database::sLoadedSqliteSymbols = false;
 
 sqlite3_tokenizer_module* Database::sFTSTokenizer = NULL;
 
-struct Token {
-  QString token;
-  int start_offset;
-  int end_offset;
-};
-
-extern "C" {
-// Based on sqlite3_tokenizer.
-struct UnicodeTokenizer {
-  const sqlite3_tokenizer_module* pModule;
-};
-
-struct UnicodeTokenizerCursor {
-  const sqlite3_tokenizer* pTokenizer;
-
-  QList<Token> tokens;
-  int position;
-  QByteArray current_utf8;
-};
-}
 
 int Database::FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** tokenizer) {
   *tokenizer = reinterpret_cast<sqlite3_tokenizer*>(new UnicodeTokenizer);
@@ -120,7 +100,6 @@ int Database::FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** t
 
 int Database::FTSDestroy(sqlite3_tokenizer* tokenizer) {
   UnicodeTokenizer* real_tokenizer = reinterpret_cast<UnicodeTokenizer*>(tokenizer);
-  qDebug() << __PRETTY_FUNCTION__;
   delete real_tokenizer;
   return SQLITE_OK;
 }
@@ -432,9 +411,9 @@ QSqlDatabase Database::Connect() {
         if (rc == SQLITE_OK) {
           _sqlite3_bind_text(statement, 1, "unicode", -1, SQLITE_STATIC);
           _sqlite3_bind_blob(statement, 2, &sFTSTokenizer, sizeof(sFTSTokenizer), SQLITE_STATIC);
-          qDebug() << _sqlite3_step(statement);
+          _sqlite3_step(statement);
 
-          qDebug() << _sqlite3_finalize(statement);
+          _sqlite3_finalize(statement);
         }
       }
     }
@@ -482,7 +461,6 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
   QStringList commands(schema.split(";\n\n"));
   db.transaction();
   foreach (const QString& command, commands) {
-    qDebug() << command;
     QSqlQuery query(db.exec(command));
     if (CheckErrors(query.lastError()))
       qFatal("Unable to update music library database");

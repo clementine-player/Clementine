@@ -74,6 +74,8 @@ class Database : public QObject {
   FRIEND_TEST(DatabaseTest, LikeCacheInvalidated);
   FRIEND_TEST(DatabaseTest, LikeQuerySplit);
   FRIEND_TEST(DatabaseTest, LikeDecomposes);
+  FRIEND_TEST(DatabaseTest, FTSOpenParsesSimpleInput);
+  FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
 
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
@@ -120,6 +122,24 @@ class Database : public QObject {
                      int* start_offset,
                      int* end_offset,
                      int* position);
+  struct Token {
+    QString token;
+    int start_offset;
+    int end_offset;
+  };
+
+  // Based on sqlite3_tokenizer.
+  struct UnicodeTokenizer {
+    const sqlite3_tokenizer_module* pModule;
+  };
+
+  struct UnicodeTokenizerCursor {
+    const sqlite3_tokenizer* pTokenizer;
+
+    QList<Token> tokens;
+    int position;
+    QByteArray current_utf8;
+  };
 };
 
 class MemoryDatabase : public Database {
