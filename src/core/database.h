@@ -76,6 +76,7 @@ class Database : public QObject {
   FRIEND_TEST(DatabaseTest, LikeDecomposes);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesSimpleInput);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
+  FRIEND_TEST(DatabaseTest, FTSOpenParsesMultipleTokens);
 
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
@@ -123,6 +124,7 @@ class Database : public QObject {
                      int* end_offset,
                      int* position);
   struct Token {
+    Token(const QString& token, int start, int end);
     QString token;
     int start_offset;
     int end_offset;

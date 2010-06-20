@@ -29,6 +29,12 @@
 const char* Database::kDatabaseFilename = "clementine.db";
 const int Database::kSchemaVersion = 13;
 
+Database::Token::Token(const QString& token, int start, int end)
+    : token(token),
+      start_offset(start),
+      end_offset(end) {
+}
+
 struct sqlite3_tokenizer_module {
   int iVersion;
   int (*xCreate)(
@@ -136,12 +142,8 @@ int Database::FTSOpen(
     if (!data[i].isLetterOrNumber()) {
       // Token finished.
       if (token.length() != 0) {
-        Token t;
-        t.token = token;
-        t.start_offset = start_offset;
-        t.end_offset = offset - 1;
+        tokens << Token(token, start_offset, offset - 1);
         start_offset = offset;
-        tokens << t;
         token.clear();
       } else {
         ++start_offset;
@@ -156,12 +158,7 @@ int Database::FTSOpen(
 
     if (i == str.length() - 1) {
       if (token.length() != 0) {
-        Token t;
-        t.token = token;
-        t.start_offset = start_offset;
-        t.end_offset = offset;
-        start_offset = offset;
-        tokens << t;
+        tokens << Token(token, start_offset, offset);
         token.clear();
       }
     }

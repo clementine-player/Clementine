@@ -131,3 +131,52 @@ TEST_F(DatabaseTest, LikeDecomposes) {
   EXPECT_TRUE(database_->Like("%tiesto%", "DJ Tiësto"));
   EXPECT_FALSE(database_->Like("%tisto%", "DJ Tiësto"));
 }
+
+TEST_F(DatabaseTest, FTSOpenParsesSimpleInput) {
+  sqlite3_tokenizer_cursor* cursor = NULL;
+  Database::FTSOpen(NULL, "foo", 3, &cursor);
+  ASSERT_TRUE(cursor);
+  Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
+  QList<Database::Token> tokens = real_cursor->tokens;
+  ASSERT_EQ(1, tokens.length());
+  EXPECT_EQ(0, real_cursor->position);
+  EXPECT_TRUE(real_cursor->current_utf8.isEmpty());
+
+  EXPECT_EQ("foo", tokens[0].token);
+  EXPECT_EQ(0, tokens[0].start_offset);
+  EXPECT_EQ(3, tokens[0].end_offset);
+}
+
+TEST_F(DatabaseTest, FTSOpenParsesUTF8Input) {
+  sqlite3_tokenizer_cursor* cursor = NULL;
+  Database::FTSOpen(NULL, "Röyksopp", 9, &cursor);
+  ASSERT_TRUE(cursor);
+  Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
+  QList<Database::Token> tokens = real_cursor->tokens;
+  ASSERT_EQ(1, tokens.length());
+  EXPECT_EQ(0, real_cursor->position);
+  EXPECT_TRUE(real_cursor->current_utf8.isEmpty());
+
+  EXPECT_EQ("royksopp", tokens[0].token);
+  EXPECT_EQ(0, tokens[0].start_offset);
+  EXPECT_EQ(9, tokens[0].end_offset);
+}
+
+TEST_F(DatabaseTest, FTSOpenParsesMultipleTokens) {
+  sqlite3_tokenizer_cursor* cursor = NULL;
+  Database::FTSOpen(NULL, "Röyksopp foo", 13, &cursor);
+  ASSERT_TRUE(cursor);
+  Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
+  QList<Database::Token> tokens = real_cursor->tokens;
+  ASSERT_EQ(2, tokens.length());
+  EXPECT_EQ(0, real_cursor->position);
+  EXPECT_TRUE(real_cursor->current_utf8.isEmpty());
+
+  EXPECT_EQ("royksopp", tokens[0].token);
+  EXPECT_EQ(0, tokens[0].start_offset);
+  EXPECT_EQ(9, tokens[0].end_offset);
+
+  EXPECT_EQ("foo", tokens[1].token);
+  EXPECT_EQ(10, tokens[1].start_offset);
+  EXPECT_EQ(13, tokens[1].end_offset);
+}
