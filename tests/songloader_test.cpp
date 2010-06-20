@@ -122,6 +122,7 @@ TEST_F(SongLoaderTest, LoadRemoteMp3) {
 
   // Check the song got loaded
   ASSERT_EQ(1, loader_->songs().count());
+  EXPECT_EQ(QString(kRemoteUrl) + "/beep.mp3", loader_->songs()[0].filename());
 }
 
 TEST_F(SongLoaderTest, LoadRemote404) {
