@@ -211,6 +211,14 @@ void Database::StaticInit() {
   }
   sStaticInitDone = true;
 
+  sFTSTokenizer = new sqlite3_tokenizer_module;
+  sFTSTokenizer->iVersion = 0;
+  sFTSTokenizer->xCreate = &Database::FTSCreate;
+  sFTSTokenizer->xDestroy = &Database::FTSDestroy;
+  sFTSTokenizer->xOpen = &Database::FTSOpen;
+  sFTSTokenizer->xNext = &Database::FTSNext;
+  sFTSTokenizer->xClose = &Database::FTSClose;
+
 #ifndef Q_WS_X11
   // We statically link libqsqlite.dll on windows and mac so these symbols are already
   // available
@@ -281,14 +289,6 @@ void Database::StaticInit() {
     sLoadedSqliteSymbols = true;
   }
 #endif
-
-  sFTSTokenizer = new sqlite3_tokenizer_module;
-  sFTSTokenizer->iVersion = 0;
-  sFTSTokenizer->xCreate = &Database::FTSCreate;
-  sFTSTokenizer->xDestroy = &Database::FTSDestroy;
-  sFTSTokenizer->xOpen = &Database::FTSOpen;
-  sFTSTokenizer->xNext = &Database::FTSNext;
-  sFTSTokenizer->xClose = &Database::FTSClose;
 }
 
 bool Database::Like(const char* needle, const char* haystack) {
