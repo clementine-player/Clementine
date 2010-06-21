@@ -437,7 +437,7 @@ void LastFMService::Ban() {
   last_track_ = mtrack;
 
   Scrobble();
-  LoadNext(last_url_);
+  emit AsyncLoadFinished(LoadNext(last_url_));
 }
 
 void LastFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
