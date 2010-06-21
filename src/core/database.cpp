@@ -129,15 +129,17 @@ int Database::FTSOpen(
   for (int i = 0; i < str.length(); ++i) {
     QChar c = data[i];
     ushort unicode = c.unicode();
-    if (unicode >= 0x00 && unicode <= 0x007f) {
+    if (unicode <= 0x007f) {
       offset += 1;
     } else if (unicode >= 0x0080 && unicode <= 0x07ff) {
       offset += 2;
-    } else if (unicode >= 0x0800 && unicode <= 0xffff) {
+    } else if (unicode >= 0x0800) {
       offset += 3;
-    } else if (unicode >= 0x010000 && unicode <= 0x10ffff) {
-      offset += 4;
     }
+    // Unicode astral planes unsupported in Qt?
+    /*else if (unicode >= 0x010000 && unicode <= 0x10ffff) {
+      offset += 4;
+    }*/
 
     if (!data[i].isLetterOrNumber()) {
       // Token finished.

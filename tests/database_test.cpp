@@ -181,6 +181,22 @@ TEST_F(DatabaseTest, FTSOpenParsesMultipleTokens) {
   EXPECT_EQ(13, tokens[1].end_offset);
 }
 
+TEST_F(DatabaseTest, FTSOpenLeavesCyrillicQueries) {
+  sqlite3_tokenizer_cursor* cursor = NULL;
+  const char* query = "Снег";
+  Database::FTSOpen(NULL, query, strlen(query), &cursor);
+  ASSERT_TRUE(cursor);
+  Database::UnicodeTokenizerCursor* real_cursor = reinterpret_cast<Database::UnicodeTokenizerCursor*>(cursor);
+  QList<Database::Token> tokens = real_cursor->tokens;
+  ASSERT_EQ(1, tokens.length());
+  EXPECT_EQ(0, real_cursor->position);
+  EXPECT_TRUE(real_cursor->current_utf8.isEmpty());
+
+  EXPECT_EQ(QString::fromUtf8("снег"), tokens[0].token);
+  EXPECT_EQ(0, tokens[0].start_offset);
+  EXPECT_EQ(strlen(query), tokens[0].end_offset);
+}
+
 TEST_F(DatabaseTest, FTSCursorWorks) {
   sqlite3_tokenizer_cursor* cursor = NULL;
   Database::FTSOpen(NULL, "Röyksopp foo", 13, &cursor);

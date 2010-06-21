@@ -78,6 +78,7 @@ class Database : public QObject {
   FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesMultipleTokens);
   FRIEND_TEST(DatabaseTest, FTSCursorWorks);
+  FRIEND_TEST(DatabaseTest, FTSOpenLeavesCyrillicQueries);
 
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
