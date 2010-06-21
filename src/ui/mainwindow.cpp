@@ -413,6 +413,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_configure_global_shortcuts->setMenuRole(QAction::ApplicationSpecificRole);
   // Force this menu to be the app "About".
   ui_->action_about->setMenuRole(QAction::AboutRole);
+
+  if (QSysInfo::MacintoshVersion != QSysInfo::MV_SNOWLEOPARD) {
+    ui_->action_configure_global_shortcuts->setEnabled(false);
+  }
 #else
   tray_icon_->setContextMenu(tray_menu);
   connect(tray_icon_, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
