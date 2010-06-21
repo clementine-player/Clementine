@@ -364,7 +364,7 @@ QSqlDatabase Database::Connect() {
   QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
   set_fts_tokenizer.bindValue(":name", "unicode");
   set_fts_tokenizer.bindValue(":pointer", QByteArray(
-      reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(sFTSTokenizer)));
+      reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
   if (!set_fts_tokenizer.exec()) {
     qWarning() << "Couldn't register FTS3 tokenizer";
   }
