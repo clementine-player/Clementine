@@ -56,7 +56,6 @@ void SystemTrayIcon::Update() {
     icon_ = big_icon.pixmap(128, 128, QIcon::Normal);
     QIcon big_grey_icon(":icon_large_grey.png");
     grey_icon_ = big_grey_icon.pixmap(128, 128, QIcon::Normal);
-    grey_icon_.save("grey.png");
 #else
     icon_ = icon().pixmap(geometry().size(), QIcon::Normal);
     grey_icon_ = icon().pixmap(geometry().size(), QIcon::Disabled);
