@@ -394,6 +394,14 @@ QSqlDatabase Database::Connect() {
   // Find Sqlite3 functions in the Qt plugin.
   StaticInit();
 
+  QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
+  set_fts_tokenizer.bindValue(":name", "unicode");
+  set_fts_tokenizer.bindValue(":pointer", QByteArray(
+      reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(sFTSTokenizer)));
+  if (!set_fts_tokenizer.exec()) {
+    qWarning() << "Couldn't register FTS3 tokenizer";
+  }
+
   // We want Unicode aware LIKE clauses and FTS if possible.
   if (sLoadedSqliteSymbols) {
     QVariant v = db.driver()->handle();
@@ -408,17 +416,6 @@ QSqlDatabase Database::Connect() {
             this,         // Custom data available via sqlite3_user_data().
             &Database::SqliteLike,  // Our function :-)
             NULL, NULL);
-
-        sqlite3_stmt* statement;
-        const char* sql = "SELECT fts3_tokenizer(?, ?)";
-        int rc = _sqlite3_prepare_v2(handle, sql, -1, &statement, 0);
-        if (rc == SQLITE_OK) {
-          _sqlite3_bind_text(statement, 1, "unicode", -1, SQLITE_STATIC);
-          _sqlite3_bind_blob(statement, 2, &sFTSTokenizer, sizeof(sFTSTokenizer), SQLITE_STATIC);
-          _sqlite3_step(statement);
-
-          _sqlite3_finalize(statement);
-        }
       }
     }
   }
