@@ -100,12 +100,6 @@ class Database : public QObject {
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
   static void* (*_sqlite3_user_data) (sqlite3_context*);
 
-  static int (*_sqlite3_prepare_v2) (sqlite3*, const char*, int, sqlite3_stmt**, const char**);
-  static int (*_sqlite3_bind_text) (sqlite3_stmt*, int, const char*, int, void(*)(void*));
-  static int (*_sqlite3_bind_blob) (sqlite3_stmt*, int, const void*, int, void(*)(void*));
-  static int (*_sqlite3_step) (sqlite3_stmt*);
-  static int (*_sqlite3_finalize) (sqlite3_stmt*);
-
 
   static bool sStaticInitDone;
   static bool sLoadedSqliteSymbols;

@@ -83,15 +83,6 @@ const uchar* (*Database::_sqlite3_value_text) (sqlite3_value*) = NULL;
 void (*Database::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
 void* (*Database::_sqlite3_user_data) (sqlite3_context*) = NULL;
 
-int (*Database::_sqlite3_prepare_v2) (
-    sqlite3*, const char*, int, sqlite3_stmt**, const char**) = NULL;
-int (*Database::_sqlite3_bind_text) (
-    sqlite3_stmt*, int, const char*, int, void(*)(void*)) = NULL;
-int (*Database::_sqlite3_bind_blob) (
-    sqlite3_stmt*, int, const void*, int, void(*)(void*)) = NULL;
-int (*Database::_sqlite3_step) (sqlite3_stmt*) = NULL;
-int (*Database::_sqlite3_finalize) (sqlite3_stmt*) = NULL;
-
 bool Database::sStaticInitDone = false;
 bool Database::sLoadedSqliteSymbols = false;
 
@@ -230,11 +221,6 @@ void Database::StaticInit() {
   _sqlite3_value_text = sqlite3_value_text;
   _sqlite3_result_int64 = sqlite3_result_int64;
   _sqlite3_user_data = sqlite3_user_data;
-  _sqlite3_prepare_v2 = sqlite3_prepare_v2;
-  _sqlite3_bind_text = sqlite3_bind_text;
-  _sqlite3_bind_blob = sqlite3_bind_blob;
-  _sqlite3_step = sqlite3_step;
-  _sqlite3_finalize = sqlite3_finalize;
   sLoadedSqliteSymbols = true;
   return;
 #else // Q_WS_X11
@@ -260,31 +246,12 @@ void Database::StaticInit() {
   _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
       library.resolve("sqlite3_user_data"));
 
-  _sqlite3_prepare_v2 = reinterpret_cast<
-      int (*) (sqlite3*, const char*, int, sqlite3_stmt**, const char**)>(
-        library.resolve("sqlite3_prepare_v2"));
-  _sqlite3_bind_text = reinterpret_cast<
-      int (*) (sqlite3_stmt*, int, const char*, int, void(*)(void*))>(
-        library.resolve("sqlite3_bind_text"));
-  _sqlite3_bind_blob = reinterpret_cast<
-      int (*) (sqlite3_stmt*, int, const void*, int, void(*)(void*))>(
-        library.resolve("sqlite3_bind_blob"));
-  _sqlite3_step = reinterpret_cast<int (*) (sqlite3_stmt*)>(
-      library.resolve("sqlite3_step"));
-  _sqlite3_finalize = reinterpret_cast<int (*) (sqlite3_stmt*)>(
-      library.resolve("sqlite3_finalize"));
-
   if (!_sqlite3_create_function ||
       !_sqlite3_value_type ||
       !_sqlite3_value_int64 ||
       !_sqlite3_value_text ||
       !_sqlite3_result_int64 ||
-      !_sqlite3_user_data ||
-      !_sqlite3_prepare_v2 ||
-      !_sqlite3_bind_text ||
-      !_sqlite3_bind_blob ||
-      !_sqlite3_step ||
-      !_sqlite3_finalize) {
+      !_sqlite3_user_data) {
     qDebug() << "Couldn't resolve sqlite symbols";
     sLoadedSqliteSymbols = false;
   } else {
