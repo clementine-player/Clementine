@@ -223,5 +223,22 @@
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>clear</sender>
+   <signal>clicked()</signal>
+   <receiver>filter</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
