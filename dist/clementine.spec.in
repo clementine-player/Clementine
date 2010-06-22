@@ -14,7 +14,7 @@ BuildRequires:  qt4-devel boost-devel gcc-c++ glew-devel
 BuildRequires:  cmake gstreamer-devel gstreamer-plugins-base-devel
 
 # GStreamer codec dependencies
-Requires:       gstreamer0.10(decoder-audio/mpeg)(mpegversion=1)(layer=3)
+Requires:       gstreamer-plugins-ugly
 Requires:       gstreamer0.10(decoder-audio/x-vorbis)
 Requires:       gstreamer0.10(decoder-audio/x-flac)
 Requires:       gstreamer0.10(decoder-audio/x-speex)
