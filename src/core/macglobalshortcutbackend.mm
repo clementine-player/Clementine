@@ -16,6 +16,7 @@
 
 #include "macglobalshortcutbackend.h"
 
+#include "config.h"
 #include "globalshortcuts.h"
 #include "mac_startup.h"
 
