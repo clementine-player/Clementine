@@ -118,6 +118,7 @@ set(SOURCES
   ui/globalshortcutsdialog.cpp
   ui/iconloader.cpp
   ui/mainwindow.cpp
+  ui/qtsystemtrayicon.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
 
@@ -219,6 +220,7 @@ set(HEADERS
   ui/globalshortcutgrabber.h
   ui/globalshortcutsdialog.h
   ui/mainwindow.h
+  ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/systemtrayicon.h
 

@@ -17,15 +17,28 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-#include <QSystemTrayIcon>
+#include <QObject>
+#include <QPixmap>
 
-class SystemTrayIcon : public QSystemTrayIcon {
+class QAction;
+
+class SystemTrayIcon : public QObject {
   Q_OBJECT
 
  public:
   SystemTrayIcon(QObject* parent = 0);
 
-  virtual bool event(QEvent* event);
+  // Called once to create the icon's context menu
+  virtual void SetupMenu(QAction* previous, QAction* play, QAction* stop,
+                         QAction* stop_after, QAction* next, QAction* love,
+                         QAction* ban, QAction* quit) = 0;
+
+  virtual bool IsVisible() const { return true; }
+  virtual void SetVisible(bool visible) {}
+
+  // Called by the OSD
+  virtual void ShowPopup(const QString& summary, const QString& message,
+                         int timeout) {}
 
  public slots:
   void SetProgress(int percentage);
@@ -34,17 +47,21 @@ class SystemTrayIcon : public QSystemTrayIcon {
   void SetStopped();
 
  signals:
-  void WheelEvent(int delta);
+  void ChangeVolume(int delta);
+  void ShowHide();
+  void PlayPause();
+
+ protected:
+  virtual void UpdateIcon() = 0;
+  QPixmap CreateIcon(const QPixmap& icon, const QPixmap& grey_icon);
+
+  int song_progress() const { return percentage_; }
+  QPixmap current_state_icon() const { return current_state_icon_; }
 
  private:
-  void Update();
-
-  QPixmap icon_;
-  QPixmap grey_icon_;
+  int percentage_;
   QPixmap playing_icon_;
   QPixmap paused_icon_;
-
-  int percentage_;
   QPixmap current_state_icon_;
 };
 

@@ -19,15 +19,15 @@
 
 #include <QImage>
 #include <QObject>
-#include <QSystemTrayIcon>
 
 #include "engines/engine_fwd.h"
 #include "core/albumcoverloader.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
 
-class OSDPretty;
 class NetworkAccessManager;
+class OSDPretty;
+class SystemTrayIcon;
 
 class QDBusPendingCallWatcher;
 
@@ -44,7 +44,7 @@ class OSD : public QObject {
   Q_OBJECT
 
  public:
-  OSD(QSystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent = 0);
+  OSD(SystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent = 0);
   ~OSD();
 
   static const char* kSettingsGroup;
@@ -97,7 +97,7 @@ class OSD : public QObject {
   void AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image);
 
  private:
-  QSystemTrayIcon* tray_icon_;
+  SystemTrayIcon* tray_icon_;
   int timeout_msec_;
   Behaviour behaviour_;
   bool show_on_volume_change_;

@@ -16,6 +16,7 @@
 
 #include "osd.h"
 #include "osdpretty.h"
+#include "ui/systemtrayicon.h"
 
 #include <QCoreApplication>
 #include <QtDebug>
@@ -23,7 +24,7 @@
 
 const char* OSD::kSettingsGroup = "OSD";
 
-OSD::OSD(QSystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent)
+OSD::OSD(SystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
     timeout_msec_(5000),
@@ -167,7 +168,7 @@ void OSD::ShowMessage(const QString& summary,
 
 #ifndef Q_OS_DARWIN
     case TrayPopup:
-      tray_icon_->showMessage(summary, message, QSystemTrayIcon::NoIcon, timeout_msec_);
+      tray_icon_->ShowPopup(summary, message, timeout_msec_);
       break;
 #endif
 

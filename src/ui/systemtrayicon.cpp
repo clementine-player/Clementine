@@ -26,50 +26,22 @@
 #include <cmath>
 
 SystemTrayIcon::SystemTrayIcon(QObject* parent)
-  : QSystemTrayIcon(parent),
+  : QObject(parent),
+    percentage_(0),
     playing_icon_(":/tiny-start.png"),
-    paused_icon_(":/tiny-pause.png"),
-    percentage_(0)
+    paused_icon_(":/tiny-pause.png")
 {
 #ifdef Q_OS_DARWIN
   hide();
 #endif
 }
 
-bool SystemTrayIcon::event(QEvent* event) {
-  if (event->type() == QEvent::Wheel) {
-    emit WheelEvent(static_cast<QWheelEvent*>(event)->delta());
-    return true;
-  }
-  return QSystemTrayIcon::event(event);
-}
-
-void SystemTrayIcon::SetProgress(int percentage) {
-  percentage_ = percentage;
-  Update();
-}
-
-void SystemTrayIcon::Update() {
-  if (icon_.isNull()) {
-#ifdef Q_OS_DARWIN
-    QIcon big_icon(":icon_large.png");
-    icon_ = big_icon.pixmap(128, 128, QIcon::Normal);
-    QIcon big_grey_icon(":icon_large_grey.png");
-    grey_icon_ = big_grey_icon.pixmap(128, 128, QIcon::Normal);
-#else
-    icon_ = icon().pixmap(geometry().size(), QIcon::Normal);
-    grey_icon_ = icon().pixmap(geometry().size(), QIcon::Disabled);
-#endif
-
-    if (icon_.isNull())
-      return;
-  }
-
-  QRect rect(icon_.rect());
+QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon, const QPixmap& grey_icon) {
+  QRect rect(icon.rect());
 
   // The angle of the line that's used to cover the icon.
   // Centered on rect.topRight()
-  double angle = double(100 - percentage_) / 100.0 * M_PI_2 + M_PI;
+  double angle = double(100 - song_progress()) / 100.0 * M_PI_2 + M_PI;
   double length = sqrt(pow(rect.width(), 2.0) + pow(rect.height(), 2.0));
 
   QPolygon mask;
@@ -78,24 +50,24 @@ void SystemTrayIcon::Update() {
       length * sin(angle),
       - length * cos(angle));
 
-  if (percentage_ > 50)
+  if (song_progress() > 50)
     mask << rect.bottomLeft();
 
   mask << rect.topLeft();
   mask << rect.topRight();
 
-  QPixmap icon(icon_);
-  QPainter p(&icon);
+  QPixmap ret(icon);
+  QPainter p(&ret);
 
   // Draw the grey bit over the orange icon
   p.setClipRegion(mask);
-  p.drawPixmap(0, 0, grey_icon_);
+  p.drawPixmap(0, 0, grey_icon);
   p.setClipping(false);
 
   // Draw the playing or paused icon in the top-right
-  if (!current_state_icon_.isNull()) {
+  if (!current_state_icon().isNull()) {
     int height = rect.height() / 2;
-    QPixmap scaled(current_state_icon_.scaledToHeight(height, Qt::SmoothTransformation));
+    QPixmap scaled(current_state_icon().scaledToHeight(height, Qt::SmoothTransformation));
 
     QRect state_rect(rect.width() - scaled.width(), 0, scaled.width(), scaled.height());
     p.drawPixmap(state_rect, scaled);
@@ -103,25 +75,25 @@ void SystemTrayIcon::Update() {
 
   p.end();
 
-#ifdef Q_OS_DARWIN
-  // Setting main window icon.
-  QApplication::setWindowIcon(icon);
-#else
-  setIcon(icon);
-#endif
+  return ret;
+}
+
+void SystemTrayIcon::SetProgress(int percentage) {
+  percentage_ = percentage;
+  UpdateIcon();
 }
 
 void SystemTrayIcon::SetPaused() {
   current_state_icon_ = paused_icon_;
-  Update();
+  UpdateIcon();
 }
 
 void SystemTrayIcon::SetPlaying() {
   current_state_icon_ = playing_icon_;
-  Update();
+  UpdateIcon();
 }
 
 void SystemTrayIcon::SetStopped() {
   current_state_icon_ = QPixmap();
-  Update();
+  UpdateIcon();
 }
