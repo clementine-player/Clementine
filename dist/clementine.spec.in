@@ -31,12 +31,12 @@ advantage of Qt4.
 
 %build
 cd bin
-cmake .. -DCMAKE_INSTALL_PREFIX=%{buildroot}/usr/
+%{cmake} .. -DVISUALISATIONS_USE_INSTALL_PREFIX=OFF
 make %{?_smp_mflags}
 
 %install
 cd bin
-make install
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 cd bin
@@ -49,7 +49,7 @@ make clean
 %{_bindir}/clementine
 %{_datadir}/applications/clementine.desktop
 %{_datadir}/icons/hicolor/64x64/apps/application-x-clementine.png
-
+%{_datadir}/clementine/projectm-presets
 
 %changelog
 * Fri Jun 18 2010 David Sansome <me@davidsansome.com> - 0.3.99
