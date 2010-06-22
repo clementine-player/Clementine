@@ -102,11 +102,7 @@ const char* MainWindow::kAllFilesFilterSpec =
 MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
-#ifdef Q_OS_DARWIN
-    tray_icon_(new MacSystemTrayIcon(this)),
-#else
-    tray_icon_(new QtSystemTrayIcon(this)),
-#endif
+    tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, network, this)),
     edit_tag_dialog_(new EditTagDialog),
     about_dialog_(new About),

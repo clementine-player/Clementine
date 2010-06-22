@@ -40,6 +40,8 @@ class SystemTrayIcon : public QObject {
   virtual void ShowPopup(const QString& summary, const QString& message,
                          int timeout) {}
 
+  static SystemTrayIcon* CreateSystemTrayIcon(QObject* parent = 0);
+
  public slots:
   void SetProgress(int percentage);
   void SetPaused();

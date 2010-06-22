@@ -16,6 +16,9 @@
 
 #include "systemtrayicon.h"
 
+#include "macsystemtrayicon.h"
+#include "qtsystemtrayicon.h"
+
 #include <QApplication>
 #include <QEvent>
 #include <QWheelEvent>
@@ -93,4 +96,12 @@ void SystemTrayIcon::SetPlaying() {
 void SystemTrayIcon::SetStopped() {
   current_state_icon_ = QPixmap();
   UpdateIcon();
+}
+
+SystemTrayIcon* SystemTrayIcon::CreateSystemTrayIcon(QObject* parent) {
+#ifdef Q_OS_DARWIN
+  return new MacSystemTrayIcon(parent);
+#else
+  return new QtSystemTrayIcon(parent);
+#endif
 }
