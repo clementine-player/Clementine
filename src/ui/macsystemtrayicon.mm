@@ -80,7 +80,6 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
 
   void ActionChanged(QAction* action) {
     NSMenuItem* item = actions_[action];
-    [[item title] release];
     NSString* title = [[NSString alloc] initWithUTF8String: action->text().toUtf8().constData()];
     [item setTitle:title];
   }

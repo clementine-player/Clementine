@@ -336,6 +336,8 @@ print_engines()
 
 # Visualisations
 if(ENABLE_VISUALISATIONS)
+  option(VISUALISATIONS_USE_INSTALL_PREFIX "Look for visualisations in CMAKE_INSTALL_PREFIX" ON)
+
   list(APPEND SOURCES
     visualisations/projectmpresetmodel.cpp
     visualisations/projectmvisualisation.cpp
