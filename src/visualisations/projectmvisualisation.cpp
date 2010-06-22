@@ -28,6 +28,7 @@
 #include <QSettings>
 #include <QCoreApplication>
 #include <QFile>
+#include <QDir>
 
 #include <projectM.hpp>
 
@@ -75,10 +76,15 @@ void ProjectMVisualisation::InitProjectM() {
 
   QString preset_path;
   foreach (const QString& path, paths) {
-    if (QFile::exists(path)) {
-      preset_path = path;
-      break;
-    }
+    if (!QFile::exists(path))
+      continue;
+
+    // Don't use empty directories
+    if (QDir(path).entryList(QDir::Files | QDir::NoDotAndDotDot).isEmpty())
+      continue;
+
+    preset_path = path;
+    break;
   }
 
   if (preset_path.isNull()) {
