@@ -58,10 +58,12 @@ ProjectMVisualisation::~ProjectMVisualisation() {
 void ProjectMVisualisation::InitProjectM() {
   // Find the projectM presets
   QStringList paths = QStringList()
+#ifdef VISUALISATIONS_USE_INSTALL_PREFIX
       << CMAKE_INSTALL_PREFIX "/share/clementine/projectm-presets"
+      << CMAKE_INSTALL_PREFIX "/share/projectM/presets"
+#endif
       << "/usr/share/clementine/projectm-presets"
       << "/usr/local/share/clementine/projectm-presets"
-      << CMAKE_INSTALL_PREFIX "/share/projectM/presets"
       << "/usr/share/projectM/presets"
       << "/usr/local/share/projectM/presets";
 
