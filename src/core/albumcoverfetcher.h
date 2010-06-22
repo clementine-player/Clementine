@@ -58,17 +58,15 @@ class AlbumCoverFetcher : public QObject {
   void SearchFinished(quint64, const AlbumCoverFetcher::SearchResults& results);
 
  private slots:
-  void AlbumGetInfoFinished();
+  void AlbumSearchFinished();
   void AlbumCoverFetchFinished();
   void StartRequests();
-  void AlbumSearchFinished();
 
  private:
   struct QueuedRequest {
     quint64 id;
     QString query;
-    QString artist;
-    QString album;
+    bool search;
   };
 
   void AddRequest(const QueuedRequest req);
@@ -77,7 +75,7 @@ class AlbumCoverFetcher : public QObject {
   quint64 next_id_;
 
   QQueue<QueuedRequest> queued_requests_;
-  QMap<QNetworkReply*, quint64> active_requests_;
+  QMap<QNetworkReply*, QueuedRequest> active_requests_;
 
   QTimer* request_starter_;
 };

@@ -39,8 +39,8 @@ AlbumCoverFetcher::AlbumCoverFetcher(NetworkAccessManager* network, QObject* par
 quint64 AlbumCoverFetcher::FetchAlbumCover(
     const QString& artist_name, const QString& album_name) {
   QueuedRequest request;
-  request.album = album_name;
-  request.artist = artist_name;
+  request.query = artist_name + " " + album_name;
+  request.search = false;
   request.id = next_id_ ++;
 
   AddRequest(request);
@@ -50,6 +50,7 @@ quint64 AlbumCoverFetcher::FetchAlbumCover(
 quint64 AlbumCoverFetcher::SearchForCovers(const QString &query) {
   QueuedRequest request;
   request.query = query;
+  request.search = true;
   request.id = next_id_ ++;
 
   AddRequest(request);
@@ -80,64 +81,31 @@ void AlbumCoverFetcher::StartRequests() {
          active_requests_.count() < kMaxConcurrentRequests) {
     QueuedRequest request = queued_requests_.dequeue();
 
-    if (request.query.isEmpty()) {
-      lastfm::Artist artist(request.artist);
-      lastfm::Album album(artist, request.album);
+    QMap<QString, QString> params;
+    params["method"] = "album.search";
+    params["album"] = request.query;
 
-      QNetworkReply* reply = album.getInfo();
-      connect(reply, SIGNAL(finished()), SLOT(AlbumGetInfoFinished()));
-      active_requests_.insert(reply, request.id);
-    } else {
-      QMap<QString, QString> params;
-      params["method"] = "album.search";
-      params["album"] = request.query;
-
-      QNetworkReply* reply = lastfm::ws::post(params);
-      connect(reply, SIGNAL(finished()), SLOT(AlbumSearchFinished()));
-      active_requests_.insert(reply, request.id);
-    }
-  }
-}
-
-void AlbumCoverFetcher::AlbumGetInfoFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  reply->deleteLater();
-  quint64 id = active_requests_.take(reply);
-
-  if (reply->error() != QNetworkReply::NoError) {
-    // TODO: retry request.
-    emit AlbumCoverFetched(id, QImage());
-    return;
-  }
-
-  try {
-    lastfm::XmlQuery query(lastfm::ws::parse(reply));
-
-    QUrl image_url(query["album"]["image size=large"].text());
-    QNetworkReply* image_reply = network_->get(QNetworkRequest(image_url));
-    connect(image_reply, SIGNAL(finished()), SLOT(AlbumCoverFetchFinished()));
-
-    active_requests_[image_reply] = id;
-  } catch (std::runtime_error&) {
-    emit AlbumCoverFetched(id, QImage());
+    QNetworkReply* reply = lastfm::ws::post(params);
+    connect(reply, SIGNAL(finished()), SLOT(AlbumSearchFinished()));
+    active_requests_.insert(reply, request);
   }
 }
 
 void AlbumCoverFetcher::AlbumSearchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
-  quint64 id = active_requests_.take(reply);
+  QueuedRequest request = active_requests_.take(reply);
 
   if (reply->error() != QNetworkReply::NoError) {
-    qDebug() << "Error" << reply->error();
     // TODO: retry request.
-    emit SearchFinished(id, SearchResults());
+    emit AlbumCoverFetched(request.id, QImage());
     return;
   }
 
   try {
     lastfm::XmlQuery query(lastfm::ws::parse(reply));
 
+    // Parse the list of search results
     QList<lastfm::XmlQuery> elements = query["results"]["albummatches"].children("album");
     SearchResults results;
     foreach (const lastfm::XmlQuery& element, elements) {
@@ -148,26 +116,44 @@ void AlbumCoverFetcher::AlbumSearchFinished() {
       results << result;
     }
 
-    emit SearchFinished(id, results);
+    // If we only wanted to do the search then we're done
+    if (request.search) {
+      emit SearchFinished(request.id, results);
+      return;
+    }
+
+    // No results?
+    if (results.isEmpty()) {
+      emit AlbumCoverFetched(request.id, QImage());
+      return;
+    }
+
+    // Now we need to fetch the first result's image
+    QNetworkReply* image_reply = network_->get(QNetworkRequest(results[0].image_url));
+    connect(image_reply, SIGNAL(finished()), SLOT(AlbumCoverFetchFinished()));
+
+    active_requests_[image_reply] = request;
   } catch (std::runtime_error&) {
-    qDebug() << "Parse error";
-    emit SearchFinished(id, SearchResults());
+    if (request.search)
+      emit SearchFinished(request.id, AlbumCoverFetcher::SearchResults());
+    else
+      emit AlbumCoverFetched(request.id, QImage());
   }
 }
 
 void AlbumCoverFetcher::AlbumCoverFetchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
-  quint64 id = active_requests_.take(reply);
+  QueuedRequest request = active_requests_.take(reply);
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: retry request.
-    emit AlbumCoverFetched(id, QImage());
+    emit AlbumCoverFetched(request.id, QImage());
     return;
   }
 
   QImage image;
   image.loadFromData(reply->readAll());
 
-  emit AlbumCoverFetched(id, image);
+  emit AlbumCoverFetched(request.id, image);
 }
