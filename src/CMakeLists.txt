@@ -427,7 +427,7 @@ add_po(PO clementine_
   DIRECTORY translations
 )
 
-add_library(clementine_lib
+add_library(clementine_lib STATIC
   ${SOURCES}
   ${MOC}
   ${UIC}
