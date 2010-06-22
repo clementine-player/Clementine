@@ -1,0 +1,37 @@
+--- a/src/gui/graphicsview/qgraphicsview_p.h
++++ b/src/gui/graphicsview/qgraphicsview_p.h
+@@ -183,8 +183,12 @@
+         else
+             QCoreApplication::sendPostedEvents(viewport->window(), QEvent::UpdateRequest);
+ #else
+-        QCoreApplication::processEvents(QEventLoop::AllEvents | QEventLoop::ExcludeSocketNotifiers
+-                                        | QEventLoop::ExcludeUserInputEvents);
++        // At this point either HIViewSetNeedsDisplay (Carbon) or setNeedsDisplay: YES (Cocoa)
++        // is called, which means there's a pending update request. We want to dispatch it
++        // now because otherwise graphics view updates would require two
++        // round-trips in the event loop before the item is painted.
++        extern void qt_mac_dispatchPendingUpdateRequests(QWidget *);
++        qt_mac_dispatchPendingUpdateRequests(viewport->window());
+ #endif
+     }
+ 
+--- a/src/gui/kernel/qt_cocoa_helpers_mac.mm
++++ b/src/gui/kernel/qt_cocoa_helpers_mac.mm
+@@ -1167,6 +1167,17 @@
+     return context;
+ }
+ 
++void qt_mac_dispatchPendingUpdateRequests(QWidget *widget)
++{
++    if (!widget)
++        return;
++#ifndef QT_MAC_USE_COCOA
++    HIViewRender(qt_mac_nativeview_for(widget));
++#else
++    [qt_mac_nativeview_for(widget) displayIfNeeded];
++#endif
++}
++
+ CGFloat qt_mac_get_scalefactor()
+ {
+ #ifndef QT_MAC_USE_COCOA
