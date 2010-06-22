@@ -51,6 +51,9 @@
 #include "ui/globalshortcutsdialog.h"
 #include "ui/iconloader.h"
 #include "ui/qtsystemtrayicon.h"
+#ifdef Q_OS_DARWIN
+#include "ui/macsystemtrayicon.h"
+#endif
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "widgets/errordialog.h"
@@ -99,7 +102,11 @@ const char* MainWindow::kAllFilesFilterSpec =
 MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
+#ifdef Q_OS_DARWIN
+    tray_icon_(new MacSystemTrayIcon(this)),
+#else
     tray_icon_(new QtSystemTrayIcon(this)),
+#endif
     osd_(new OSD(tray_icon_, network, this)),
     edit_tag_dialog_(new EditTagDialog),
     about_dialog_(new About),
@@ -385,6 +392,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(saved_radio, SIGNAL(ShowAddStreamDialog()),
           add_stream_dialog_.get(), SLOT(show()));
 
+#ifdef Q_OS_DARWIN
+  mac::SetApplicationHandler(this);
+#endif
   // Tray icon
   tray_icon_->SetupMenu(ui_->action_previous_track,
                         ui_->action_play_pause,
@@ -403,8 +413,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   QAction* check_updates = ui_->menuSettings->addAction(tr("Check for updates..."));
   check_updates->setMenuRole(QAction::ApplicationSpecificRole);
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
-  // We use the dock instead of the system tray on mac.
-  qt_mac_set_dock_menu(tray_menu);
 
   // Force this menu to be the app "Preferences".
   ui_->action_configure->setMenuRole(QAction::PreferencesRole);

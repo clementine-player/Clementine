@@ -31,9 +31,6 @@ SystemTrayIcon::SystemTrayIcon(QObject* parent)
     playing_icon_(":/tiny-start.png"),
     paused_icon_(":/tiny-pause.png")
 {
-#ifdef Q_OS_DARWIN
-  hide();
-#endif
 }
 
 QPixmap SystemTrayIcon::CreateIcon(const QPixmap& icon, const QPixmap& grey_icon) {
