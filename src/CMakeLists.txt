@@ -375,6 +375,8 @@ endif(APPLE)
 list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
+  ui/macsystemtrayicon.h
+  ui/macsystemtrayicon.mm
   widgets/osd_mac.mm
   widgets/osd_win.cpp
   widgets/osd_x11.cpp

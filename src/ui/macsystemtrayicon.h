@@ -34,10 +34,6 @@ public:
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,
                  QAction* stop_after, QAction* next, QAction* love,
                  QAction* ban, QAction* quit);
-  bool IsVisible() const;
-  void SetVisible(bool visible);
-
-  void ShowPopup(const QString &summary, const QString &message, int timeout);
 
 private:
   void SetupMenuItem(QAction* action);

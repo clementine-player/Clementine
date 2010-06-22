@@ -97,13 +97,11 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
 };
 
 MacSystemTrayIcon::MacSystemTrayIcon(QObject* parent)
-  : SystemTrayIcon(parent) {
-  QIcon orange(":icon_large.png");
-  QIcon grey(":icon_large_grey.png");
-
-  orange_icon_ = orange.pixmap(128, QIcon::Normal);
-  grey_icon_ = grey.pixmap(128, QIcon::Normal);
-
+  : SystemTrayIcon(parent),
+    orange_icon_(QPixmap(":icon_large.png").scaled(
+        128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)),
+    grey_icon_(QPixmap(":icon_large_grey.png").scaled(
+        128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation)) {
   QApplication::setWindowIcon(orange_icon_);
 }
 
@@ -130,19 +128,8 @@ void MacSystemTrayIcon::SetupMenuItem(QAction* action) {
   connect(action, SIGNAL(changed()), SLOT(ActionChanged()));
 }
 
-void MacSystemTrayIcon::ShowPopup(const QString &summary,
-                                 const QString &message, int timeout) {
-}
-
 void MacSystemTrayIcon::UpdateIcon() {
   QApplication::setWindowIcon(CreateIcon(orange_icon_, grey_icon_));
-}
-
-bool MacSystemTrayIcon::IsVisible() const {
-  return true;
-}
-
-void MacSystemTrayIcon::SetVisible(bool) {
 }
 
 void MacSystemTrayIcon::ActionChanged() {
