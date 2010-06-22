@@ -19,8 +19,6 @@
 
 #include "systemtrayicon.h"
 
-#include <QSignalMapper>
-
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 
@@ -54,8 +52,6 @@ protected:
 private:
   QPixmap orange_icon_;
   QPixmap grey_icon_;
-
-  QSignalMapper mapper_;
 
   boost::scoped_ptr<MacSystemTrayIconPrivate> p_;
 };
