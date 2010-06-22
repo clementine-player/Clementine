@@ -37,6 +37,7 @@ class Library : public QObject {
   static const char* kSongsTable;
   static const char* kDirsTable;
   static const char* kSubdirsTable;
+  static const char* kFtsTable;
 
   // Useful for tests.  The library takes ownership.
   void set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory);

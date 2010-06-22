@@ -167,10 +167,6 @@ int main(int argc, char *argv[]) {
   // Window
   MainWindow w(&network, options.engine());
 
-#ifdef Q_OS_DARWIN
-  mac::SetApplicationHandler(&w);
-#endif
-
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
 

@@ -118,6 +118,7 @@ set(SOURCES
   ui/globalshortcutsdialog.cpp
   ui/iconloader.cpp
   ui/mainwindow.cpp
+  ui/qtsystemtrayicon.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
 
@@ -219,6 +220,7 @@ set(HEADERS
   ui/globalshortcutgrabber.h
   ui/globalshortcutsdialog.h
   ui/mainwindow.h
+  ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/systemtrayicon.h
 
@@ -358,7 +360,9 @@ endif(ENABLE_VISUALISATIONS)
 if(APPLE)
   list(APPEND SOURCES widgets/osd_mac.mm)
   list(APPEND SOURCES core/macglobalshortcutbackend.mm)
+  list(APPEND SOURCES ui/macsystemtrayicon.mm)
   list(APPEND HEADERS core/macglobalshortcutbackend.h)
+  list(APPEND HEADERS ui/macsystemtrayicon.h)
   include_directories(${GROWL}/Headers)
 else(APPLE)
   if(WIN32)
@@ -371,6 +375,8 @@ endif(APPLE)
 list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
+  ui/macsystemtrayicon.h
+  ui/macsystemtrayicon.mm
   widgets/osd_mac.mm
   widgets/osd_win.cpp
   widgets/osd_x11.cpp

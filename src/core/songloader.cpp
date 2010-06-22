@@ -328,6 +328,7 @@ void SongLoader::StopTypefind() {
     Song song;
     song.set_valid(true);
     song.set_filetype(Song::Type_Stream);
+    song.set_filename(url_.toString());
     song.set_title(url_.toString());
     songs_ << song;
   }

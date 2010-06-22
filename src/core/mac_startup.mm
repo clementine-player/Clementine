@@ -45,11 +45,14 @@
 @interface AppDelegate :NSObject {
 #endif
   PlatformInterface* application_handler_;
+  NSMenu* dock_menu_;
 }
 
 - (id) initWithHandler: (PlatformInterface*)handler;
 // NSApplicationDelegate
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
+- (NSMenu*) applicationDockMenu: (NSApplication*)sender;
+- (void) setDockMenu: (NSMenu*)menu;
 @end
 
 @implementation AppDelegate
@@ -57,6 +60,7 @@
 - (id) init {
   if ((self = [super init])) {
     application_handler_ = nil;
+    dock_menu_ = nil;
   }
   return self;
 }
@@ -71,6 +75,14 @@
     application_handler_->Activate();
   }
   return YES;
+}
+
+- (void) setDockMenu: (NSMenu*)menu {
+  dock_menu_ = menu;
+}
+
+- (NSMenu*) applicationDockMenu: (NSApplication*)sender {
+  return dock_menu_;
 }
 
 - (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {

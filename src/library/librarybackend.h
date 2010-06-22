@@ -34,7 +34,8 @@ class LibraryBackend : public QObject {
  public:
   Q_INVOKABLE LibraryBackend(QObject* parent = 0);
   void Init(boost::shared_ptr<Database> db, const QString& songs_table,
-            const QString& dirs_table, const QString& subdirs_table);
+            const QString& dirs_table, const QString& subdirs_table,
+            const QString& fts_table);
 
   boost::shared_ptr<Database> db() const { return db_; }
 
@@ -130,6 +131,7 @@ class LibraryBackend : public QObject {
   QString songs_table_;
   QString dirs_table_;
   QString subdirs_table_;
+  QString fts_table_;
 };
 
 #endif // LIBRARYBACKEND_H

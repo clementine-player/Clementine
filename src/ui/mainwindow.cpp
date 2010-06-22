@@ -50,6 +50,10 @@
 #include "ui/equalizer.h"
 #include "ui/globalshortcutsdialog.h"
 #include "ui/iconloader.h"
+#include "ui/qtsystemtrayicon.h"
+#ifdef Q_OS_DARWIN
+#include "ui/macsystemtrayicon.h"
+#endif
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "widgets/errordialog.h"
@@ -98,7 +102,7 @@ const char* MainWindow::kAllFilesFilterSpec =
 MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
-    tray_icon_(new SystemTrayIcon(this)),
+    tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, network, this)),
     edit_tag_dialog_(new EditTagDialog),
     about_dialog_(new About),
@@ -142,8 +146,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Initialise the UI
   ui_->setupUi(this);
-  tray_icon_->setIcon(windowIcon());
-  tray_icon_->setToolTip(QCoreApplication::applicationName());
 
   ui_->volume->setValue(player_->GetVolume());
 
@@ -386,26 +388,27 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(saved_radio, SIGNAL(ShowAddStreamDialog()),
           add_stream_dialog_.get(), SLOT(show()));
 
+#ifdef Q_OS_DARWIN
+  mac::SetApplicationHandler(this);
+#endif
   // Tray icon
-  QMenu* tray_menu = new QMenu(this);
-  tray_menu->addAction(ui_->action_previous_track);
-  tray_menu->addAction(ui_->action_play_pause);
-  tray_menu->addAction(ui_->action_stop);
-  tray_menu->addAction(ui_->action_stop_after_this_track);
-  tray_menu->addAction(ui_->action_next_track);
-  tray_menu->addSeparator();
-  tray_menu->addAction(ui_->action_love);
-  tray_menu->addAction(ui_->action_ban);
-  tray_menu->addSeparator();
-  tray_menu->addAction(ui_->action_quit);
+  tray_icon_->SetupMenu(ui_->action_previous_track,
+                        ui_->action_play_pause,
+                        ui_->action_stop,
+                        ui_->action_stop_after_this_track,
+                        ui_->action_next_track,
+                        ui_->action_love,
+                        ui_->action_ban,
+                        ui_->action_quit);
+  connect(tray_icon_, SIGNAL(PlayPause()), player_, SLOT(PlayPause()));
+  connect(tray_icon_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
+  connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
   
 #ifdef Q_OS_DARWIN
   // Add check for updates item to application menu.
   QAction* check_updates = ui_->menuSettings->addAction(tr("Check for updates..."));
   check_updates->setMenuRole(QAction::ApplicationSpecificRole);
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
-  // We use the dock instead of the system tray on mac.
-  qt_mac_set_dock_menu(tray_menu);
 
   // Force this menu to be the app "Preferences".
   ui_->action_configure->setMenuRole(QAction::PreferencesRole);
@@ -413,10 +416,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_configure_global_shortcuts->setMenuRole(QAction::ApplicationSpecificRole);
   // Force this menu to be the app "About".
   ui_->action_about->setMenuRole(QAction::AboutRole);
-#else
-  tray_icon_->setContextMenu(tray_menu);
-  connect(tray_icon_, SIGNAL(WheelEvent(int)), SLOT(VolumeWheelEvent(int)));
-  connect(tray_icon_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(TrayClicked(QSystemTrayIcon::ActivationReason)));
+
+  if (QSysInfo::MacintoshVersion != QSysInfo::MV_SNOWLEOPARD) {
+    ui_->action_configure_global_shortcuts->setEnabled(false);
+  }
 #endif
 
   // Global shortcuts
@@ -503,7 +506,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   }
 
   // Force the window to show in case somehow the config has tray and window set to hide
-  if (hidden && !tray_icon_->isVisible()) {
+  if (hidden && !tray_icon_->IsVisible()) {
     settings_.setValue("hidden", false);
     show();
   }
@@ -530,7 +533,7 @@ void MainWindow::ReloadSettings() {
 #ifndef Q_OS_DARWIN
   bool show_tray = settings_.value("showtray", true).toBool();
 
-  tray_icon_->setVisible(show_tray);
+  tray_icon_->SetVisible(show_tray);
   if (!show_tray && !isVisible())
     show();
 #endif
@@ -728,34 +731,22 @@ void MainWindow::VolumeWheelEvent(int delta) {
   ui_->volume->setValue(ui_->volume->value() + delta / 30);
 }
 
-void MainWindow::TrayClicked(QSystemTrayIcon::ActivationReason reason) {
-  switch (reason) {
-    case QSystemTrayIcon::DoubleClick:
-    case QSystemTrayIcon::Trigger:
-      if (settings_.value("hidden").toBool()) {
-        show();
-        SetHiddenInTray(false);
-      } else if (isActiveWindow()) {
-        hide();
-        setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-        SetHiddenInTray(true);
-      } else if (isMinimized()) {
-        hide();
-        setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
-        SetHiddenInTray(false);
-      } else {
-        // Window is not hidden but does not have focus; bring it to front.
-        activateWindow();
-        raise();
-      }
-      break;
-
-    case QSystemTrayIcon::MiddleClick:
-      player_->PlayPause();
-      break;
-
-    default:
-      break;
+void MainWindow::ToggleShowHide() {
+  if (settings_.value("hidden").toBool()) {
+    show();
+    SetHiddenInTray(false);
+  } else if (isActiveWindow()) {
+    hide();
+    setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+    SetHiddenInTray(true);
+  } else if (isMinimized()) {
+    hide();
+    setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+    SetHiddenInTray(false);
+  } else {
+    // Window is not hidden but does not have focus; bring it to front.
+    activateWindow();
+    raise();
   }
 }
 
@@ -769,7 +760,7 @@ void MainWindow::StopAfterCurrent() {
   */
 void MainWindow::closeEvent(QCloseEvent* event) {
 #ifndef Q_OS_DARWIN
-  if (tray_icon_->isVisible() && event->spontaneous()) {
+  if (tray_icon_->IsVisible() && event->spontaneous()) {
     event->ignore();
     SetHiddenInTray(true);
   } else {

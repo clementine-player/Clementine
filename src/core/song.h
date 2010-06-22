@@ -85,9 +85,13 @@ class Song {
 
   static const QStringList kColumns;
   static const QString kColumnSpec;
-  static const QString kJoinSpec;
   static const QString kBindSpec;
   static const QString kUpdateSpec;
+
+  static const QStringList kFtsColumns;
+  static const QString kFtsColumnSpec;
+  static const QString kFtsBindSpec;
+  static const QString kFtsUpdateSpec;
 
   static QString JoinSpec(const QString& table);
 
@@ -120,6 +124,7 @@ class Song {
 
   // Save
   void BindToQuery(QSqlQuery* query) const;
+  void BindToFtsQuery(QSqlQuery* query) const;
   void ToLastFM(lastfm::Track* track) const;
 
   // Simple accessors

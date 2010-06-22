@@ -27,6 +27,14 @@
 
 #include "gtest/gtest_prod.h"
 
+extern "C" {
+
+struct sqlite3_tokenizer;
+struct sqlite3_tokenizer_cursor;
+struct sqlite3_tokenizer_module;
+
+}
+
 class Database : public QObject {
   Q_OBJECT
 
@@ -66,6 +74,11 @@ class Database : public QObject {
   FRIEND_TEST(DatabaseTest, LikeCacheInvalidated);
   FRIEND_TEST(DatabaseTest, LikeQuerySplit);
   FRIEND_TEST(DatabaseTest, LikeDecomposes);
+  FRIEND_TEST(DatabaseTest, FTSOpenParsesSimpleInput);
+  FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
+  FRIEND_TEST(DatabaseTest, FTSOpenParsesMultipleTokens);
+  FRIEND_TEST(DatabaseTest, FTSCursorWorks);
+  FRIEND_TEST(DatabaseTest, FTSOpenLeavesCyrillicQueries);
 
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
@@ -87,8 +100,44 @@ class Database : public QObject {
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
   static void* (*_sqlite3_user_data) (sqlite3_context*);
 
+
   static bool sStaticInitDone;
   static bool sLoadedSqliteSymbols;
+
+  static sqlite3_tokenizer_module* sFTSTokenizer;
+
+  static int FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** tokenizer);
+  static int FTSDestroy(sqlite3_tokenizer* tokenizer);
+  static int FTSOpen(sqlite3_tokenizer* tokenizer,
+                     const char* input,
+                     int bytes,
+                     sqlite3_tokenizer_cursor** cursor);
+  static int FTSClose(sqlite3_tokenizer_cursor* cursor);
+  static int FTSNext(sqlite3_tokenizer_cursor* cursor,
+                     const char** token,
+                     int* bytes,
+                     int* start_offset,
+                     int* end_offset,
+                     int* position);
+  struct Token {
+    Token(const QString& token, int start, int end);
+    QString token;
+    int start_offset;
+    int end_offset;
+  };
+
+  // Based on sqlite3_tokenizer.
+  struct UnicodeTokenizer {
+    const sqlite3_tokenizer_module* pModule;
+  };
+
+  struct UnicodeTokenizerCursor {
+    const sqlite3_tokenizer* pTokenizer;
+
+    QList<Token> tokens;
+    int position;
+    QByteArray current_utf8;
+  };
 };
 
 class MemoryDatabase : public Database {

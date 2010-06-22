@@ -123,7 +123,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void LibrarySongsDoubleClicked(const SongList& songs);
 
   void VolumeWheelEvent(int delta);
-  void TrayClicked(QSystemTrayIcon::ActivationReason reason);
+  void ToggleShowHide();
 
   void UpdateTrackPosition();
 

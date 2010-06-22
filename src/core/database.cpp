@@ -16,18 +16,61 @@
 
 #include "database.h"
 
+#include <QCoreApplication>
+#include <QDir>
 #include <QLibrary>
 #include <QLibraryInfo>
-#include <QDir>
-#include <QCoreApplication>
-#include <QtDebug>
-#include <QThread>
 #include <QSqlDriver>
 #include <QSqlQuery>
+#include <QtDebug>
+#include <QThread>
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 12;
+const int Database::kSchemaVersion = 13;
+
+Database::Token::Token(const QString& token, int start, int end)
+    : token(token),
+      start_offset(start),
+      end_offset(end) {
+}
+
+struct sqlite3_tokenizer_module {
+  int iVersion;
+  int (*xCreate)(
+    int argc,                           /* Size of argv array */
+    const char *const*argv,             /* Tokenizer argument strings */
+    sqlite3_tokenizer **ppTokenizer     /* OUT: Created tokenizer */
+  );
+
+  int (*xDestroy)(sqlite3_tokenizer *pTokenizer);
+
+  int (*xOpen)(
+    sqlite3_tokenizer *pTokenizer,       /* Tokenizer object */
+    const char *pInput, int nBytes,      /* Input buffer */
+    sqlite3_tokenizer_cursor **ppCursor  /* OUT: Created tokenizer cursor */
+  );
+
+  int (*xClose)(sqlite3_tokenizer_cursor *pCursor);
+
+  int (*xNext)(
+    sqlite3_tokenizer_cursor *pCursor,   /* Tokenizer cursor */
+    const char **ppToken, int *pnBytes,  /* OUT: Normalized text for token */
+    int *piStartOffset,  /* OUT: Byte offset of token in input buffer */
+    int *piEndOffset,    /* OUT: Byte offset of end of token in input buffer */
+    int *piPosition      /* OUT: Number of tokens returned before this one */
+  );
+};
+
+struct sqlite3_tokenizer {
+  const sqlite3_tokenizer_module *pModule;  /* The module for this tokenizer */
+  /* Tokenizer implementations will typically add additional fields */
+};
+
+struct sqlite3_tokenizer_cursor {
+  sqlite3_tokenizer *pTokenizer;       /* Tokenizer for this cursor. */
+  /* Tokenizer implementations will typically add additional fields */
+};
 
 int (*Database::_sqlite3_create_function) (
     sqlite3*, const char*, int, int, void*,
@@ -43,12 +86,131 @@ void* (*Database::_sqlite3_user_data) (sqlite3_context*) = NULL;
 bool Database::sStaticInitDone = false;
 bool Database::sLoadedSqliteSymbols = false;
 
+sqlite3_tokenizer_module* Database::sFTSTokenizer = NULL;
+
+
+int Database::FTSCreate(int argc, const char* const* argv, sqlite3_tokenizer** tokenizer) {
+  *tokenizer = reinterpret_cast<sqlite3_tokenizer*>(new UnicodeTokenizer);
+
+  return SQLITE_OK;
+}
+
+int Database::FTSDestroy(sqlite3_tokenizer* tokenizer) {
+  UnicodeTokenizer* real_tokenizer = reinterpret_cast<UnicodeTokenizer*>(tokenizer);
+  delete real_tokenizer;
+  return SQLITE_OK;
+}
+
+int Database::FTSOpen(
+    sqlite3_tokenizer* pTokenizer,
+    const char* input,
+    int bytes,
+    sqlite3_tokenizer_cursor** cursor) {
+  UnicodeTokenizerCursor* new_cursor = new UnicodeTokenizerCursor;
+  new_cursor->pTokenizer = pTokenizer;
+  new_cursor->position = 0;
+
+  QString str = QString::fromUtf8(input, bytes).toLower();
+  QChar* data = str.data();
+  // Decompose and strip punctuation.
+  QList<Token> tokens;
+  QString token;
+  int start_offset = 0;
+  int offset = 0;
+  for (int i = 0; i < str.length(); ++i) {
+    QChar c = data[i];
+    ushort unicode = c.unicode();
+    if (unicode <= 0x007f) {
+      offset += 1;
+    } else if (unicode >= 0x0080 && unicode <= 0x07ff) {
+      offset += 2;
+    } else if (unicode >= 0x0800) {
+      offset += 3;
+    }
+    // Unicode astral planes unsupported in Qt?
+    /*else if (unicode >= 0x010000 && unicode <= 0x10ffff) {
+      offset += 4;
+    }*/
+
+    if (!data[i].isLetterOrNumber()) {
+      // Token finished.
+      if (token.length() != 0) {
+        tokens << Token(token, start_offset, offset - 1);
+        start_offset = offset;
+        token.clear();
+      } else {
+        ++start_offset;
+      }
+    } else {
+      if (data[i].decompositionTag() != QChar::NoDecomposition) {
+        token.push_back(data[i].decomposition()[0]);
+      } else {
+        token.push_back(data[i]);
+      }
+    }
+
+    if (i == str.length() - 1) {
+      if (token.length() != 0) {
+        tokens << Token(token, start_offset, offset);
+        token.clear();
+      }
+    }
+  }
+
+  new_cursor->tokens = tokens;
+  *cursor = reinterpret_cast<sqlite3_tokenizer_cursor*>(new_cursor);
+
+  return SQLITE_OK;
+}
+
+int Database::FTSClose(sqlite3_tokenizer_cursor* cursor) {
+  UnicodeTokenizerCursor* real_cursor = reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
+  delete real_cursor;
+
+  return SQLITE_OK;
+}
+
+int Database::FTSNext(
+    sqlite3_tokenizer_cursor* cursor,
+    const char** token,
+    int* bytes,
+    int* start_offset,
+    int* end_offset,
+    int* position) {
+  UnicodeTokenizerCursor* real_cursor = reinterpret_cast<UnicodeTokenizerCursor*>(cursor);
+
+  QList<Token> tokens = real_cursor->tokens;
+  if (real_cursor->position >= tokens.size()) {
+    return SQLITE_DONE;
+  }
+
+  Token t = tokens[real_cursor->position];
+  QByteArray utf8 = t.token.toUtf8();
+  *token = utf8.constData();
+  *bytes = utf8.size();
+  *start_offset = t.start_offset;
+  *end_offset = t.end_offset;
+  *position = real_cursor->position++;
+
+  real_cursor->current_utf8 = utf8;
+
+  return SQLITE_OK;
+}
+
 
 void Database::StaticInit() {
   if (sStaticInitDone) {
     return;
   }
   sStaticInitDone = true;
+
+  sFTSTokenizer = new sqlite3_tokenizer_module;
+  sFTSTokenizer->iVersion = 0;
+  sFTSTokenizer->xCreate = &Database::FTSCreate;
+  sFTSTokenizer->xDestroy = &Database::FTSDestroy;
+  sFTSTokenizer->xOpen = &Database::FTSOpen;
+  sFTSTokenizer->xNext = &Database::FTSNext;
+  sFTSTokenizer->xClose = &Database::FTSClose;
 
 #ifndef Q_WS_X11
   // We statically link libqsqlite.dll on windows and mac so these symbols are already
@@ -199,7 +361,15 @@ QSqlDatabase Database::Connect() {
   // Find Sqlite3 functions in the Qt plugin.
   StaticInit();
 
-  // We want Unicode aware LIKE clauses if possible
+  QSqlQuery set_fts_tokenizer("SELECT fts3_tokenizer(:name, :pointer)", db);
+  set_fts_tokenizer.bindValue(":name", "unicode");
+  set_fts_tokenizer.bindValue(":pointer", QByteArray(
+      reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
+  if (!set_fts_tokenizer.exec()) {
+    qWarning() << "Couldn't register FTS3 tokenizer";
+  }
+
+  // We want Unicode aware LIKE clauses and FTS if possible.
   if (sLoadedSqliteSymbols) {
     QVariant v = db.driver()->handle();
     if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {

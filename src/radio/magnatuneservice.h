@@ -57,6 +57,7 @@ class MagnatuneService : public RadioService {
   static const char* kSettingsGroup;
   static const char* kDatabaseUrl;
   static const char* kSongsTable;
+  static const char* kFtsTable;
   static const char* kHomepage;
   static const char* kStreamingHostname;
   static const char* kDownloadHostname;
