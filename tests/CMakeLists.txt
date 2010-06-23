@@ -16,7 +16,7 @@ set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest-typed-test.cc
 )
 
-add_library(gtest EXCLUDE_FROM_ALL ${GTEST-SOURCES})
+add_library(gtest STATIC EXCLUDE_FROM_ALL ${GTEST-SOURCES})
 
 set(GMOCK-SOURCES
     ../3rdparty/gmock/src/gmock-cardinalities.cc
@@ -26,7 +26,7 @@ set(GMOCK-SOURCES
     ../3rdparty/gmock/src/gmock-printers.cc
     ../3rdparty/gmock/src/gmock-spec-builders.cc)
 
-add_library(gmock EXCLUDE_FROM_ALL ${GMOCK-SOURCES})
+add_library(gmock STATIC EXCLUDE_FROM_ALL ${GMOCK-SOURCES})
 target_link_libraries(gmock gtest)
 
 set(TESTUTILS-SOURCES
@@ -42,7 +42,7 @@ set(TESTUTILS-MOC-HEADERS
 
 qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})
 
-add_library(test_utils EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
+add_library(test_utils STATIC EXCLUDE_FROM_ALL ${TESTUTILS-SOURCES} ${TESTUTILS-SOURCES-MOC})
 target_link_libraries(test_utils gmock ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
 
 add_custom_target(test
@@ -56,11 +56,11 @@ add_dependencies(test build_tests)
 
 qt4_add_resources(TEST-RESOURCE-SOURCES data/testdata.qrc)
 
-add_library(test_gui_main EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
+add_library(test_gui_main STATIC EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_gui_main clementine_lib)
 set_target_properties(test_gui_main PROPERTIES COMPILE_DEFINITIONS GUI)
 
-add_library(test_main EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
+add_library(test_main STATIC EXCLUDE_FROM_ALL ${TEST-RESOURCE-SOURCES} main.cpp)
 target_link_libraries(test_main clementine_lib)
 
 # Given a file foo_test.cpp, creates a target foo_test and adds it to the test target.
