@@ -78,6 +78,9 @@ class LibraryWatcher : public QObject {
     SubdirectoryList GetImmediateSubdirs(const QString& path);
     SubdirectoryList GetAllSubdirs();
 
+    void AddToProgress(int n = 1);
+    void AddToProgressMax(int n);
+
     int dir() const { return dir_; }
     bool is_incremental() const { return incremental_; }
 
@@ -92,6 +95,8 @@ class LibraryWatcher : public QObject {
     ScanTransaction& operator =(const ScanTransaction&) { return *this; }
 
     int task_id_;
+    int progress_;
+    int progress_max_;
 
     int dir_;
     bool incremental_;

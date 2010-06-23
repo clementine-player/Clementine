@@ -58,7 +58,9 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
 
 LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
                                                  int dir, bool incremental)
-  : dir_(dir),
+  : progress_(0),
+    progress_max_(0),
+    dir_(dir),
     incremental_(incremental),
     watcher_(watcher),
     cached_songs_dirty_(true),
@@ -92,6 +94,16 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
   foreach (const Subdirectory& subdir, new_subdirs) {
     watcher_->AddWatch(watcher_->watched_dirs_[dir_].watcher, subdir.path);
   }
+}
+
+void LibraryWatcher::ScanTransaction::AddToProgress(int n) {
+  progress_ += n;
+  watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
+}
+
+void LibraryWatcher::ScanTransaction::AddToProgressMax(int n) {
+  progress_max_ += n;
+  watcher_->task_manager_->SetTaskProgress(task_id_, progress_, progress_max_);
 }
 
 SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(const QString &path) {
@@ -158,12 +170,14 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
     // Scan it fully.
     ScanTransaction transaction(this, dir.id, false);
     transaction.SetKnownSubdirs(subdirs);
+    transaction.AddToProgressMax(1);
     ScanSubdirectory(dir.path, Subdirectory(), &transaction);
   } else {
     // We can do an incremental scan - looking at the mtimes of each
     // subdirectory and only rescan if the directory has changed.
     ScanTransaction transaction(this, dir.id, true);
     transaction.SetKnownSubdirs(subdirs);
+    transaction.AddToProgressMax(subdirs.count());
     foreach (const Subdirectory& subdir, subdirs) {
       if (stop_requested_) return;
 
@@ -184,6 +198,7 @@ void LibraryWatcher::ScanSubdirectory(
   if (!force_noincremental && t->is_incremental() &&
       subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
+    t->AddToProgress(1);
     return;
   }
 
@@ -197,6 +212,7 @@ void LibraryWatcher::ScanSubdirectory(
   SubdirectoryList previous_subdirs = t->GetImmediateSubdirs(path);
   foreach (const Subdirectory& subdir, previous_subdirs) {
     if (!QFile::exists(subdir.path) && subdir.path != path) {
+      t->AddToProgressMax(1);
       ScanSubdirectory(subdir.path, subdir, t, true);
     }
   }
@@ -319,7 +335,10 @@ void LibraryWatcher::ScanSubdirectory(
   else
     t->touched_subdirs << updated_subdir;
 
+  t->AddToProgress(1);
+
   // Recurse into the new subdirs that we found
+  t->AddToProgressMax(my_new_subdirs.count());
   foreach (const Subdirectory& my_new_subdir, my_new_subdirs) {
     if (stop_requested_) return;
     ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
@@ -378,6 +397,7 @@ void LibraryWatcher::RescanPathsNow() {
   foreach (int dir, rescan_queue_.keys()) {
     if (stop_requested_) return;
     ScanTransaction transaction(this, dir, false);
+    transaction.AddToProgressMax(rescan_queue_[dir].count());
 
     foreach (const QString& path, rescan_queue_[dir]) {
       if (stop_requested_) return;
@@ -445,6 +465,8 @@ void LibraryWatcher::IncrementalScanNow() {
   foreach (const DirData& data, watched_dirs_.values()) {
     ScanTransaction transaction(this, data.dir.id, true);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
+    transaction.AddToProgressMax(subdirs.count());
+
     foreach (const Subdirectory& subdir, subdirs) {
       if (stop_requested_) return;
 

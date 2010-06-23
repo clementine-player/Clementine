@@ -57,7 +57,7 @@ void TaskManager::SetTaskProgress(int id, int progress, int max) {
 
     Task& t = tasks_[id];
     t.progress = progress;
-    if (max != -1)
+    if (max)
       t.progress_max = max;
   }
 
