@@ -444,7 +444,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(add_stream_dialog_.get(), SIGNAL(accepted()), SLOT(AddStreamAccepted()));
 
   // Analyzer
-  ui_->analyzer->set_engine(player_->GetEngine());
+  ui_->analyzer->SetEngine(player_->GetEngine());
+  ui_->analyzer->SetActions(ui_->action_visualisations);
 
   // Equalizer
   connect(equalizer_.get(), SIGNAL(ParametersChanged(int,QList<int>)),

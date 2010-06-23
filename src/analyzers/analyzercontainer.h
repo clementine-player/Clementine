@@ -30,16 +30,19 @@ class AnalyzerContainer : public QWidget {
 public:
   AnalyzerContainer(QWidget* parent);
 
-  void set_engine(EngineBase* engine);
+  void SetEngine(EngineBase* engine);
+  void SetActions(QAction* visualisation);
 
   static const char* kSettingsGroup;
 
 protected:
   void mouseReleaseEvent(QMouseEvent *);
+  void mouseDoubleClickEvent(QMouseEvent *);
 
 private slots:
   void ChangeAnalyzer(int id);
   void DisableAnalyzer();
+  void ShowPopupMenu();
 
 private:
   void Load();
@@ -55,6 +58,11 @@ private:
   QList<const QMetaObject*> analyzer_types_;
   QList<QAction*> actions_;
   QAction* disable_action_;
+
+  QAction* visualisation_action_;
+  QTimer* double_click_timer_;
+  QPoint last_click_pos_;
+  bool ignore_next_click_;
 
   Analyzer::Base* current_analyzer_;
   EngineBase* engine_;
