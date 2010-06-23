@@ -76,6 +76,7 @@ GSTREAMER_PLUGINS=[
     'libgstid3demux.so',
     'libgstlame.so',
     'libgstmad.so',
+    'libgstmms.so',
     'libgstmusepack.so',
     'libgstogg.so',
     'libgstqtdemux.so',
