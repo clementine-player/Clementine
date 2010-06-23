@@ -30,11 +30,13 @@
 #include <boost/bind.hpp>
 
 QSet<QString> SongLoader::sRawUriSchemes;
+const int SongLoader::kDefaultTimeout = 5000;
 
 SongLoader::SongLoader(QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
     playlist_parser_(new PlaylistParser(this)),
+    timeout_(kDefaultTimeout),
     state_(WaitingForType),
     success_(false),
     parser_(NULL)
@@ -55,7 +57,7 @@ SongLoader::~SongLoader() {
   }
 }
 
-SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
+SongLoader::Result SongLoader::Load(const QUrl& url) {
   url_ = url;
 
   if (url_.scheme() == "file") {
@@ -69,7 +71,7 @@ SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
     return Success;
   }
 
-  timeout_timer_->start(timeout_msec);
+  timeout_timer_->start(timeout_);
   return LoadRemote();
 }
 

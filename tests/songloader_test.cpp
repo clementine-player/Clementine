@@ -45,6 +45,7 @@ public:
 protected:
   void SetUp() {
     loader_.reset(new SongLoader);
+    loader_->set_timeout(20000);
   }
 
   void LoadLocalDirectory(const QString& dir);

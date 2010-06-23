@@ -40,10 +40,15 @@ public:
     WillLoadAsync,
   };
 
+  static const int kDefaultTimeout;
+
   const QUrl& url() const { return url_; }
   const SongList& songs() const { return songs_; }
 
-  Result Load(const QUrl& url, int timeout_msec = 5000);
+  int timeout() const { return timeout_; }
+  void set_timeout(int msec) { timeout_ = msec; }
+
+  Result Load(const QUrl& url);
 
 signals:
   void LoadFinished(bool success);
@@ -87,6 +92,7 @@ private:
   PlaylistParser* playlist_parser_;
 
   // For async loads
+  int timeout_;
   State state_;
   bool success_;
   boost::shared_ptr<GstElement> pipeline_;
