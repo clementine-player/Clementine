@@ -23,6 +23,7 @@ Version 0.4:
     * Added a background rain option from http://www.rainymood.com/
     * Added some keyboard shortcuts for common actions.
     * Library scanning on startup is now optional.
+    * Library scanning now shows progress information in the status bar.
     * New application icon.
     * The pretty OSD is now even prettier.
     * (Linux) Use icons from the desktop icon theme where possible.
@@ -38,6 +39,7 @@ Version 0.4:
     * Lower the CPU usage of the currently playing track animation.
     * Fixed a bug that would cause very high CPU usage after playing a number
       of tracks.
+    * MMS streams that redirect to a RTSP stream should now play properly.
     * Group error messages together so the user isn't overwhelmed by dialogs.
     * Pressing "previous" in a shuffled playlist should follow the same order.
     * Adding whole directories to the playlist now happens in the background so
