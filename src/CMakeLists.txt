@@ -420,11 +420,11 @@ qt4_add_resources(QRC ${RESOURCES})
 
 add_pot(
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
-  ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
+  ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
 )
 add_po(PO clementine_
-  POT ${CMAKE_CURRENT_SOURCE_DIR}/translations/clementine.pot
+  POT ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   LANGUAGES ${LANGUAGES}
   DIRECTORY translations
 )
