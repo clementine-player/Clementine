@@ -398,7 +398,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   
 #ifdef Q_OS_DARWIN
   // Add check for updates item to application menu.
-  QAction* check_updates = ui_->menuSettings->addAction(tr("Check for updates..."));
+  QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
   check_updates->setMenuRole(QAction::ApplicationSpecificRole);
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
 
