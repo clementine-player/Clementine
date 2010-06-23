@@ -21,6 +21,7 @@
 
 #include "config.h"
 
+class GlobalShortcuts;
 class LibraryDirectoryModel;
 class OSDPretty;
 class Ui_SettingsDialog;
@@ -39,6 +40,7 @@ class SettingsDialog : public QDialog {
   enum Page {
     Page_Playback = 0,
     Page_Behaviour,
+    Page_GlobalShortcuts,
     Page_Notifications,
     Page_Library,
     Page_Lastfm,
@@ -46,6 +48,7 @@ class SettingsDialog : public QDialog {
   };
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
+  void SetGlobalShortcutManager(GlobalShortcuts* manager);
 #ifdef HAVE_GSTREAMER
   void SetGstEngine(const GstEngine* engine);
 #endif

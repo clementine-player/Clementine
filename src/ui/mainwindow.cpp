@@ -49,7 +49,6 @@
 #include "ui/albumcovermanager.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
-#include "ui/globalshortcutsdialog.h"
 #include "ui/iconloader.h"
 #include "ui/qtsystemtrayicon.h"
 #ifdef Q_OS_DARWIN
@@ -121,7 +120,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     cover_manager_(NULL),
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
-    global_shortcuts_dialog_(new GlobalShortcutsDialog(global_shortcuts_)),
     error_dialog_(new ErrorDialog),
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
@@ -194,7 +192,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_add_stream->setIcon(IconLoader::Load("document-open-remote"));
   ui_->action_clear_playlist->setIcon(IconLoader::Load("edit-clear-list"));
   ui_->action_configure->setIcon(IconLoader::Load("configure"));
-  ui_->action_configure_global_shortcuts->setIcon(IconLoader::Load("configure-shortcuts"));
   ui_->action_cover_manager->setIcon(IconLoader::Load("download"));
   ui_->action_edit_track->setIcon(IconLoader::Load("edit-rename"));
   ui_->action_equalizer->setIcon(IconLoader::Load("view-media-equalizer"));
@@ -252,7 +249,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
-  connect(ui_->action_configure_global_shortcuts, SIGNAL(triggered()), global_shortcuts_dialog_.get(), SLOT(show()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
   connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
@@ -408,14 +404,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Force this menu to be the app "Preferences".
   ui_->action_configure->setMenuRole(QAction::PreferencesRole);
-  // Force this menu into the "Clementine" menu.
-  ui_->action_configure_global_shortcuts->setMenuRole(QAction::ApplicationSpecificRole);
   // Force this menu to be the app "About".
   ui_->action_about->setMenuRole(QAction::AboutRole);
-
-  if (QSysInfo::MacintoshVersion != QSysInfo::MV_SNOWLEOPARD) {
-    ui_->action_configure_global_shortcuts->setEnabled(false);
-  }
 #endif
 
   // Global shortcuts
@@ -431,7 +421,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(global_shortcuts_, SIGNAL(Mute()), player_, SLOT(Mute()));
   connect(global_shortcuts_, SIGNAL(SeekForward()), player_, SLOT(SeekForward()));
   connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
-  connect(global_shortcuts_dialog_.get(), SIGNAL(accepted()), global_shortcuts_, SLOT(ReloadSettings()));
+  settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));

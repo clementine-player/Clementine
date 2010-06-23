@@ -43,9 +43,10 @@ SettingsDialog::SettingsDialog(QWidget* parent)
                             QImage(":nocover.png"));
 
   // Icons
-  ui_->list->item(0)->setIcon(IconLoader::Load("media-playback-start")); // Playback
-  ui_->list->item(2)->setIcon(IconLoader::Load("help-hint")); // Notifications
-  ui_->list->item(3)->setIcon(IconLoader::Load("folder-sound")); // Library
+  ui_->list->item(Page_Playback)->setIcon(IconLoader::Load("media-playback-start"));
+  ui_->list->item(Page_GlobalShortcuts)->setIcon(IconLoader::Load("input-keyboard"));
+  ui_->list->item(Page_Notifications)->setIcon(IconLoader::Load("help-hint"));
+  ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
 
   // Playback
   connect(ui_->fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
@@ -63,12 +64,19 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   // Behaviour
   connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
 
+  // Global shortcuts
+#ifdef Q_OS_MAC
+  if (QSysInfo::MacintoshVersion != QSysInfo::MV_SNOWLEOPARD) {
+    ui_->list->item(Page_GlobalShortcuts)->setFlags(Qt::NoItemFlags);
+  }
+#endif
+
   // Last.fm
   connect(ui_->lastfm, SIGNAL(ValidationComplete(bool)), SLOT(LastFMValidationComplete(bool)));
 
   // List box
   connect(ui_->list, SIGNAL(currentTextChanged(QString)), SLOT(CurrentTextChanged(QString)));
-  ui_->list->setCurrentRow(0);
+  ui_->list->setCurrentRow(Page_Playback);
 
   // Notifications
   ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue), Qt::DecorationRole);
@@ -94,7 +102,7 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_->list->setMinimumWidth(ui_->list->sizeHintForColumn(0));
 
 #ifdef Q_OS_DARWIN
-  ui_->list->item(1)->setHidden(true);  // Hide "Behaviour" on mac.
+  ui_->list->item(Page_Behaviour)->setHidden(true);  // Hide "Behaviour" on mac.
 #endif
 }
 
@@ -109,6 +117,10 @@ void SettingsDialog::CurrentTextChanged(const QString &text) {
 
 void SettingsDialog::SetLibraryDirectoryModel(LibraryDirectoryModel* model) {
   ui_->library_config->SetModel(model);
+}
+
+void SettingsDialog::SetGlobalShortcutManager(GlobalShortcuts *manager) {
+  ui_->global_shortcuts->SetManager(manager);
 }
 
 void SettingsDialog::LastFMValidationComplete(bool success) {
@@ -183,6 +195,7 @@ void SettingsDialog::accept() {
 
   ui_->library_config->Save();
   ui_->magnatune->Save();
+  ui_->global_shortcuts->Save();
 
   QDialog::accept();
 }
@@ -208,6 +221,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
 
   // Magnatune
   ui_->magnatune->Load();
+
+  // Global Shortcuts
+  ui_->global_shortcuts->Load();
 
   // Playback
   s.beginGroup(Engine::Base::kSettingsGroup);

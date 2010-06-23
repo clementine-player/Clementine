@@ -89,9 +89,6 @@
               <attribute name="headerVisible">
                <bool>false</bool>
               </attribute>
-              <attribute name="headerVisible">
-               <bool>false</bool>
-              </attribute>
              </widget>
             </item>
            </layout>
@@ -518,13 +515,6 @@
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
    </widget>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-    <addaction name="action_configure"/>
-    <addaction name="action_configure_global_shortcuts"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
@@ -547,11 +537,12 @@
     <addaction name="action_transcode"/>
     <addaction name="separator"/>
     <addaction name="action_update_library"/>
+    <addaction name="separator"/>
+    <addaction name="action_configure"/>
    </widget>
    <addaction name="menuMusic"/>
    <addaction name="menuPlaylist"/>
    <addaction name="menuTools"/>
-   <addaction name="menuSettings"/>
    <addaction name="menuExtras"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -675,7 +666,7 @@
   </action>
   <action name="action_configure">
    <property name="text">
-    <string>Configure Clementine...</string>
+    <string>Preferences...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -759,11 +750,6 @@
   <action name="action_add_folder">
    <property name="text">
     <string>Add folder...</string>
-   </property>
-  </action>
-  <action name="action_configure_global_shortcuts">
-   <property name="text">
-    <string>Configure global shortcuts...</string>
    </property>
   </action>
   <action name="action_jump">

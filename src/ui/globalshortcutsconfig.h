@@ -14,10 +14,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GLOBALSHORTCUTSDIALOG_H
-#define GLOBALSHORTCUTSDIALOG_H
+#ifndef GLOBALSHORTCUTSCONFIG_H
+#define GLOBALSHORTCUTSCONFIG_H
 
-#include <QDialog>
+#include <QWidget>
 #include <QMap>
 #include <QSettings>
 
@@ -27,33 +27,28 @@
 
 class QTreeWidgetItem;
 
-class Ui_GlobalShortcutsDialog;
+class Ui_GlobalShortcutsConfig;
 class GlobalShortcutGrabber;
 
-class GlobalShortcutsDialog : public QDialog {
+class GlobalShortcutsConfig : public QWidget {
  Q_OBJECT
 
  public:
-  GlobalShortcutsDialog(GlobalShortcuts* manager, QWidget* parent = 0);
-  ~GlobalShortcutsDialog();
+  GlobalShortcutsConfig(QWidget* parent = 0);
+  ~GlobalShortcutsConfig();
 
- protected:
-  // QWidget
-  void showEvent(QShowEvent *);
+  void SetManager(GlobalShortcuts* manager);
+
+  void Load();
+  void Save();
 
  private slots:
-  void accept();
-
-  void ResetAll();
-
   void ItemClicked(QTreeWidgetItem*);
   void NoneClicked();
   void DefaultClicked();
   void ChangeClicked();
 
   void OpenGnomeKeybindingProperties();
-
-  void Save();
 
  private:
   struct Shortcut {
@@ -65,7 +60,7 @@ class GlobalShortcutsDialog : public QDialog {
   void SetShortcut(const QString& id, const QKeySequence& key);
 
  private:
-  Ui_GlobalShortcutsDialog* ui_;
+  Ui_GlobalShortcutsConfig* ui_;
 
   GlobalShortcuts* manager_;
   boost::scoped_ptr<GlobalShortcutGrabber> grabber_;
@@ -76,4 +71,4 @@ class GlobalShortcutsDialog : public QDialog {
   QString current_id_;
 };
 
-#endif // GLOBALSHORTCUTSDIALOG_H
+#endif // GLOBALSHORTCUTSCONFIG_H

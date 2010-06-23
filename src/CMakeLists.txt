@@ -116,7 +116,7 @@ set(SOURCES
   ui/edittagdialog.cpp
   ui/equalizer.cpp
   ui/globalshortcutgrabber.cpp
-  ui/globalshortcutsdialog.cpp
+  ui/globalshortcutsconfig.cpp
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/qtsystemtrayicon.cpp
@@ -220,7 +220,7 @@ set(HEADERS
   ui/edittagdialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h
-  ui/globalshortcutsdialog.h
+  ui/globalshortcutsconfig.h
   ui/mainwindow.h
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
@@ -268,7 +268,7 @@ set(UI
   ui/edittagdialog.ui
   ui/equalizer.ui
   ui/globalshortcutgrabber.ui
-  ui/globalshortcutsdialog.ui
+  ui/globalshortcutsconfig.ui
   ui/mainwindow.ui
   ui/settingsdialog.ui
 

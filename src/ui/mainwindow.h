@@ -38,7 +38,6 @@ class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
 class GlobalShortcuts;
-class GlobalShortcutsDialog;
 class GroupByDialog;
 class Library;
 class MultiLoadingIndicator;
@@ -181,7 +180,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<AlbumCoverManager> cover_manager_;
   boost::scoped_ptr<Equalizer> equalizer_;
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
-  boost::scoped_ptr<GlobalShortcutsDialog> global_shortcuts_dialog_;
   boost::scoped_ptr<ErrorDialog> error_dialog_;
 
 #ifdef ENABLE_VISUALISATIONS
