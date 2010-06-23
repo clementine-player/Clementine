@@ -62,9 +62,6 @@ class RadioService : public QObject {
   virtual QString Icon() { return QString(); }
 
  signals:
-  void TaskStarted(MultiLoadingIndicator::TaskType);
-  void TaskFinished(MultiLoadingIndicator::TaskType);
-
   void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);

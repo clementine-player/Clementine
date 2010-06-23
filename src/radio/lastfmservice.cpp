@@ -20,6 +20,7 @@
 #include "radiomodel.h"
 #include "core/networkaccessmanager.h"
 #include "core/song.h"
+#include "core/taskmanager.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
@@ -55,6 +56,7 @@ LastFMService::LastFMService(RadioModel* parent)
     station_dialog_(new LastFMStationDialog),
     context_menu_(new QMenu),
     initial_tune_(false),
+    tune_task_id_(0),
     scrobbling_enabled_(false),
     artist_list_(NULL),
     tag_list_(NULL),
@@ -287,7 +289,8 @@ PlaylistItem::SpecialLoadResult LastFMService::StartLoading(const QUrl& url) {
   if (!IsAuthenticated())
     return PlaylistItem::SpecialLoadResult();
 
-  emit TaskStarted(MultiLoadingIndicator::LoadingLastFM);
+  if (!tune_task_id_)
+    tune_task_id_ = model()->task_manager()->StartTask(tr("Loading Last.fm radio"));
 
   last_url_ = url;
   initial_tune_ = true;
@@ -332,7 +335,8 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   if (!initial_tune_)
     return;
 
-  emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
+  model()->task_manager()->SetTaskFinished(tune_task_id_);
+  tune_task_id_ = 0;
 
   if (error == lastfm::ws::NotEnoughContent) {
     emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
@@ -616,7 +620,8 @@ void LastFMService::FetchMoreTracksFinished() {
     return;
   }
   reply->deleteLater();
-  emit TaskFinished(MultiLoadingIndicator::LoadingLastFM);
+  model()->task_manager()->SetTaskFinished(tune_task_id_);
+  tune_task_id_ = 0;
 
   try {
     const XmlQuery& query = lastfm::ws::parse(reply);

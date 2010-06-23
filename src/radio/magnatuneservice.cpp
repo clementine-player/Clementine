@@ -21,6 +21,7 @@
 #include "core/mergedproxymodel.h"
 #include "core/networkaccessmanager.h"
 #include "core/song.h"
+#include "core/taskmanager.h"
 #include "library/librarymodel.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
@@ -63,6 +64,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     library_model_(NULL),
     library_filter_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
+    load_database_task_id_(0),
     membership_(Membership_None),
     format_(Format_Ogg),
     total_song_count_(0),
@@ -151,13 +153,17 @@ void MagnatuneService::ReloadDatabase() {
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(ReloadDatabaseFinished()));
   
-  emit TaskStarted(MultiLoadingIndicator::LoadingMagnatune);
+  if (!load_database_task_id_)
+    load_database_task_id_ = model()->task_manager()->StartTask(
+        tr("Downloading Magnatune catalogue"));
 }
 
 void MagnatuneService::ReloadDatabaseFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
-  emit TaskFinished(MultiLoadingIndicator::LoadingMagnatune);
+  model()->task_manager()->SetTaskFinished(load_database_task_id_);
+  load_database_task_id_ = 0;
+
   root_->lazy_loaded = true;
 
   if (reply->error() != QNetworkReply::NoError) {

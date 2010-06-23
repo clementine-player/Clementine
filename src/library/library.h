@@ -27,12 +27,14 @@ class Database;
 class LibraryBackend;
 class LibraryModel;
 class LibraryWatcher;
+class TaskManager;
 
 class Library : public QObject {
   Q_OBJECT
 
  public:
-  Library(BackgroundThread<Database>* db_thread, QObject* parent);
+  Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager_,
+          QObject* parent);
 
   static const char* kSongsTable;
   static const char* kDirsTable;
@@ -53,15 +55,12 @@ class Library : public QObject {
   void WatcherInitialised();
 
  private:
+  TaskManager* task_manager_;
   LibraryBackend* backend_;
   LibraryModel* model_;
 
   boost::scoped_ptr<BackgroundThreadFactory<LibraryWatcher> > watcher_factory_;
   BackgroundThread<LibraryWatcher>* watcher_;
-
- signals:
-  void ScanStarted();
-  void ScanFinished();
 };
 
 #endif

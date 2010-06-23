@@ -112,6 +112,7 @@ class MagnatuneService : public RadioService {
   LibraryModel* library_model_;
   LibraryFilterWidget* library_filter_;
   QSortFilterProxyModel* library_sort_model_;
+  int load_database_task_id_;
 
   MembershipType membership_;
   QString username_;

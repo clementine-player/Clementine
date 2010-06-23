@@ -17,12 +17,16 @@
 #include "playlist.h"
 #include "songloaderinserter.h"
 #include "core/songloader.h"
+#include "core/taskmanager.h"
 
-SongLoaderInserter::SongLoaderInserter(QObject *parent)
+SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager, QObject *parent)
   : QObject(parent),
+    task_manager_(task_manager),
     destination_(NULL),
     row_(-1),
-    play_now_(true)
+    play_now_(true),
+    async_load_id_(0),
+    async_progress_(0)
 {
 }
 
@@ -55,8 +59,11 @@ void SongLoaderInserter::Load(Playlist *destination, int row, bool play_now,
 
   if (pending_.isEmpty())
     Finished();
-  else
-    emit AsyncLoadStarted();
+  else {
+    async_progress_ = 0;
+    async_load_id_ = task_manager_->StartTask(tr("Loading tracks"));
+    task_manager_->SetTaskProgress(async_load_id_, async_progress_, pending_.count());
+  }
 }
 
 void SongLoaderInserter::PendingLoadFinished(bool success) {
@@ -72,8 +79,9 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
 
   loader->deleteLater();
 
+  task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
   if (pending_.isEmpty()) {
-    emit AsyncLoadFinished();
+    task_manager_->SetTaskFinished(async_load_id_);
     Finished();
   }
 }

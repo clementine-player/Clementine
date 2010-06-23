@@ -66,6 +66,9 @@ class SomaFMService : public RadioService {
   QMenu* context_menu_;
   RadioItem* context_item_;
 
+  int get_channels_task_id_;
+  int get_stream_task_id_;
+
   QNetworkAccessManager* network_;
 };
 

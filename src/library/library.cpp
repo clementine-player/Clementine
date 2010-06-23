@@ -24,8 +24,10 @@ const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 const char* Library::kFtsTable = "songs_fts";
 
-Library::Library(BackgroundThread<Database>* db_thread, QObject *parent)
+Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
+                 QObject *parent)
   : QObject(parent),
+    task_manager_(task_manager),
     backend_(NULL),
     model_(NULL),
     watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
@@ -58,10 +60,9 @@ void Library::StartThreads() {
 
 void Library::WatcherInitialised() {
   LibraryWatcher* watcher = watcher_->Worker().get();
-  connect(watcher, SIGNAL(ScanStarted()), SIGNAL(ScanStarted()));
-  connect(watcher, SIGNAL(ScanFinished()), SIGNAL(ScanFinished()));
 
   watcher->SetBackend(backend_);
+  watcher->SetTaskManager(task_manager_);
 
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
           watcher,  SLOT(AddDirectory(Directory,SubdirectoryList)));

@@ -16,6 +16,7 @@
 
 #include "multiloadingindicator.h"
 #include "ui_multiloadingindicator.h"
+#include "core/taskmanager.h"
 
 MultiLoadingIndicator::MultiLoadingIndicator(QWidget *parent)
   : QWidget(parent),
@@ -28,29 +29,19 @@ MultiLoadingIndicator::~MultiLoadingIndicator() {
   delete ui_;
 }
 
-void MultiLoadingIndicator::TaskStarted(TaskType type) {
-  if (tasks_.contains(type))
-    return;
-
-  tasks_ << type;
-
-  UpdateText();
-  emit TaskCountChange(tasks_.count());
-}
-
-void MultiLoadingIndicator::TaskFinished(TaskType type) {
-  tasks_.removeAll(type);
-
-  UpdateText();
-  emit TaskCountChange(tasks_.count());
+void MultiLoadingIndicator::SetTaskManager(TaskManager* task_manager) {
+  task_manager_ = task_manager;
+  connect(task_manager_, SIGNAL(TasksChanged()), SLOT(UpdateText()));
 }
 
 void MultiLoadingIndicator::UpdateText() {
+  QList<TaskManager::Task> tasks = task_manager_->GetTasks();
+
   QStringList strings;
-  foreach (TaskType type, tasks_) {
-    QString task(TaskTypeToString(type));
-    task[0] = task[0].toLower();
-    strings << task;
+  foreach (const TaskManager::Task& task, tasks) {
+    QString name(task.name);
+    name[0] = name[0].toLower();
+    strings << name;
   }
 
   QString text(strings.join(", "));
@@ -59,18 +50,5 @@ void MultiLoadingIndicator::UpdateText() {
   }
 
   ui_->text->setText(text + "...");
-}
-
-QString MultiLoadingIndicator::TaskTypeToString(TaskType type) {
-  switch (type) {
-    case LoadingAudioEngine: return tr("Loading audio engine");
-    case UpdatingLibrary:    return tr("Updating library");
-    case GettingChannels:    return tr("Getting channels");
-    case LoadingStream:      return tr("Loading stream");
-    case LoadingLastFM:      return tr("Loading Last.fm radio");
-    case LoadingMagnatune:   return tr("Downloading Magnatune catalogue");
-    case LoadingTracks:      return tr("Loading tracks");
-
-    default: return QString::null;
-  }
+  emit TaskCountChange(tasks.count());
 }

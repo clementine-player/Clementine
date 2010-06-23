@@ -28,6 +28,7 @@ class QFileSystemWatcher;
 class QTimer;
 
 class LibraryBackend;
+class TaskManager;
 
 class LibraryWatcher : public QObject {
   Q_OBJECT
@@ -38,6 +39,7 @@ class LibraryWatcher : public QObject {
   static const char* kSettingsGroup;
 
   void SetBackend(LibraryBackend* backend) { backend_ = backend; }
+  void SetTaskManager(TaskManager* task_manager) { task_manager_ = task_manager; }
   void IncrementalScanAsync();
 
   void Stop() { stop_requested_ = true; }
@@ -49,9 +51,6 @@ class LibraryWatcher : public QObject {
   void SubdirsDiscovered(const SubdirectoryList& subdirs);
   void SubdirsMTimeUpdated(const SubdirectoryList& subdirs);
   void CompilationsNeedUpdating();
-
-  void ScanStarted();
-  void ScanFinished();
 
  public slots:
   void ReloadSettings();
@@ -92,6 +91,8 @@ class LibraryWatcher : public QObject {
     ScanTransaction(const ScanTransaction&) {}
     ScanTransaction& operator =(const ScanTransaction&) { return *this; }
 
+    int task_id_;
+
     int dir_;
     bool incremental_;
     LibraryWatcher* watcher_;
@@ -126,6 +127,7 @@ class LibraryWatcher : public QObject {
   };
 
   LibraryBackend* backend_;
+  TaskManager* task_manager_;
   bool stop_requested_;
   bool scan_on_startup_;
 

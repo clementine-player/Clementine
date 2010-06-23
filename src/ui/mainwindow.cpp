@@ -24,6 +24,7 @@
 #include "core/player.h"
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
+#include "core/taskmanager.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
 #include "library/libraryconfig.h"
@@ -105,11 +106,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, network, this)),
     edit_tag_dialog_(new EditTagDialog),
+    task_manager_(new TaskManager(this)),
     about_dialog_(new About),
     database_(new BackgroundThreadImplementation<Database, Database>(this)),
     radio_model_(NULL),
     playlist_backend_(NULL),
-    playlists_(new PlaylistManager(this)),
+    playlists_(new PlaylistManager(task_manager_, this)),
     playlist_parser_(new PlaylistParser(this)),
     player_(NULL),
     library_(NULL),
@@ -137,16 +139,16 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_backend_->SetDatabase(database_->Worker());
 
   // Create stuff that needs the database
-  radio_model_ = new RadioModel(database_, network, this);
+  radio_model_ = new RadioModel(database_, network, task_manager_, this);
   player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
-  library_ = new Library(database_, this);
+  library_ = new Library(database_, task_manager_, this);
   cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
   settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
   radio_model_->SetSettingsDialog(settings_dialog_.get());
 
   // Initialise the UI
   ui_->setupUi(this);
-
+  ui_->multi_loading_indicator->SetTaskManager(task_manager_);
   ui_->volume->setValue(player_->GetVolume());
 
   track_position_timer_->setInterval(1000);
@@ -318,8 +320,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
-  connect(playlists_, SIGNAL(LoadTracksStarted()), SLOT(LoadTracksStarted()));
-  connect(playlists_, SIGNAL(LoadTracksFinished()), SLOT(LoadTracksFinished()));
   connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -337,8 +337,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->library_view, SIGNAL(AddToPlaylist(QModelIndexList)), SLOT(AddLibraryItemToPlaylist(QModelIndexList)));
   connect(ui_->library_view, SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_->library_view, SLOT(TotalSongCountUpdated(int)));
-  connect(library_, SIGNAL(ScanStarted()), SLOT(LibraryScanStarted()));
-  connect(library_, SIGNAL(ScanFinished()), SLOT(LibraryScanFinished()));
 
   // Library filter widget
   QAction* library_config_action = new QAction(
@@ -367,8 +365,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
           SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
 
   // Radio connections
-  connect(radio_model_, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), ui_->multi_loading_indicator, SLOT(TaskStarted(MultiLoadingIndicator::TaskType)));
-  connect(radio_model_, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), ui_->multi_loading_indicator, SLOT(TaskFinished(MultiLoadingIndicator::TaskType)));
   connect(radio_model_, SIGNAL(StreamError(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
@@ -564,21 +560,11 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
 }
 
 void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
-  SongLoaderInserter* inserter = new SongLoaderInserter(this);
-  connect(inserter, SIGNAL(AsyncLoadStarted()), SLOT(LoadTracksStarted()));
-  connect(inserter, SIGNAL(AsyncLoadFinished()), SLOT(LoadTracksFinished()));
+  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, this);
   connect(inserter, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
   inserter->Load(playlists_->current(), -1, play_now, urls);
-}
-
-void MainWindow::LoadTracksStarted() {
-  ui_->multi_loading_indicator->TaskStarted(MultiLoadingIndicator::LoadingTracks);
-}
-
-void MainWindow::LoadTracksFinished() {
-  ui_->multi_loading_indicator->TaskFinished(MultiLoadingIndicator::LoadingTracks);
 }
 
 void MainWindow::AddLibrarySongsToPlaylist(const SongList &songs) {
@@ -1034,14 +1020,6 @@ void MainWindow::SelectionSetValue() {
 
 void MainWindow::EditValue() {
   ui_->playlist->view()->edit(playlist_menu_index_);
-}
-
-void MainWindow::LibraryScanStarted() {
-  ui_->multi_loading_indicator->TaskStarted(MultiLoadingIndicator::UpdatingLibrary);
-}
-
-void MainWindow::LibraryScanFinished() {
-  ui_->multi_loading_indicator->TaskFinished(MultiLoadingIndicator::UpdatingLibrary);
 }
 
 void MainWindow::AddFile() {

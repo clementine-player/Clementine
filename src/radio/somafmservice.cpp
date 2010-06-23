@@ -17,6 +17,7 @@
 #include "somafmservice.h"
 #include "radiomodel.h"
 #include "core/networkaccessmanager.h"
+#include "core/taskmanager.h"
 #include "ui/iconloader.h"
 
 #include <QNetworkAccessManager>
@@ -38,6 +39,8 @@ SomaFMService::SomaFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
     context_menu_(new QMenu),
+    get_channels_task_id_(0),
+    get_stream_task_id_(0),
     network_(parent->network()->network())
 {
   context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
@@ -84,7 +87,8 @@ PlaylistItem::SpecialLoadResult SomaFMService::StartLoading(const QUrl& url) {
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
 
-  emit TaskStarted(MultiLoadingIndicator::LoadingStream);
+  if (!get_stream_task_id_)
+    get_stream_task_id_ = model()->task_manager()->StartTask(tr("Loading stream"));
 
   return PlaylistItem::SpecialLoadResult(
       PlaylistItem::SpecialLoadResult::WillLoadAsynchronously, url);
@@ -92,7 +96,8 @@ PlaylistItem::SpecialLoadResult SomaFMService::StartLoading(const QUrl& url) {
 
 void SomaFMService::LoadPlaylistFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  emit TaskFinished(MultiLoadingIndicator::LoadingStream);
+  model()->task_manager()->SetTaskFinished(get_stream_task_id_);
+  get_stream_task_id_ = 0;
 
   QUrl original_url(reply->url());
 
@@ -126,12 +131,14 @@ void SomaFMService::RefreshChannels() {
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(RefreshChannelsFinished()));
 
-  emit TaskStarted(MultiLoadingIndicator::GettingChannels);
+  if (!get_channels_task_id_)
+    get_channels_task_id_ = model()->task_manager()->StartTask(tr("Getting channels"));
 }
 
 void SomaFMService::RefreshChannelsFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  emit TaskFinished(MultiLoadingIndicator::GettingChannels);
+  model()->task_manager()->SetTaskFinished(get_channels_task_id_);
+  get_channels_task_id_ = 0;
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling

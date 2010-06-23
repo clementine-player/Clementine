@@ -25,8 +25,9 @@
 #include <QFileInfo>
 #include <QtDebug>
 
-PlaylistManager::PlaylistManager(QObject *parent)
+PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
   : QObject(parent),
+    task_manager_(task_manager),
     playlist_backend_(NULL),
     library_backend_(NULL),
     sequence_(NULL),
@@ -61,15 +62,13 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
 }
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
-  Playlist* ret = new Playlist(playlist_backend_, id);
+  Playlist* ret = new Playlist(playlist_backend_, task_manager_, id);
   ret->set_sequence(sequence_);
 
   connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
   connect(ret, SIGNAL(PlaylistChanged()), SIGNAL(PlaylistChanged()));
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
-  connect(ret, SIGNAL(LoadTracksStarted()), SIGNAL(LoadTracksStarted()));
-  connect(ret, SIGNAL(LoadTracksFinished()), SIGNAL(LoadTracksFinished()));
   connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
   connect(ret, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 

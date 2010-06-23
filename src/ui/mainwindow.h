@@ -53,6 +53,7 @@ class RadioModel;
 class SettingsDialog;
 class Song;
 class SystemTrayIcon;
+class TaskManager;
 class TranscodeDialog;
 class VisualisationContainer;
 class Ui_MainWindow;
@@ -134,10 +135,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void LastFMButtonVisibilityChanged(bool value);
   void Love();
 
-  void LibraryScanStarted();
-  void LibraryScanFinished();
-  void LoadTracksStarted();
-  void LoadTracksFinished();
   void TaskCountChanged(int count);
 
   void ShowLibraryConfig();
@@ -167,7 +164,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
-  MultiLoadingIndicator* multi_loading_indicator_;
+  TaskManager* task_manager_;
   boost::scoped_ptr<About> about_dialog_;
 
   BackgroundThread<Database>* database_;

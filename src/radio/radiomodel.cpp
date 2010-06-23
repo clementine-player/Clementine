@@ -29,11 +29,13 @@
 QMap<QString, RadioService*> RadioModel::sServices;
 
 RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
-                       NetworkAccessManager* network, QObject* parent)
+                       NetworkAccessManager* network, TaskManager* task_manager,
+                       QObject* parent)
   : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
     network_(network),
+    task_manager_(task_manager),
     settings_dialog_(NULL)
 {
   Q_ASSERT(sServices.isEmpty());
@@ -51,8 +53,6 @@ void RadioModel::AddService(RadioService *service) {
   sServices[service->name()] = service;
   service->CreateRootItem(root_);
 
-  connect(service, SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)), SIGNAL(TaskStarted(MultiLoadingIndicator::TaskType)));
-  connect(service, SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)), SIGNAL(TaskFinished(MultiLoadingIndicator::TaskType)));
   connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));

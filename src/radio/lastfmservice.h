@@ -167,6 +167,7 @@ class LastFMService : public RadioService {
 
   QUrl last_url_;
   bool initial_tune_;
+  int tune_task_id_;
 
   bool scrobbling_enabled_;
   bool buttons_visible_;

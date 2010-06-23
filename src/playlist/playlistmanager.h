@@ -28,6 +28,7 @@ class Playlist;
 class PlaylistBackend;
 class PlaylistParser;
 class PlaylistSequence;
+class TaskManager;
 
 class QModelIndex;
 class QUrl;
@@ -36,7 +37,7 @@ class PlaylistManager : public QObject {
   Q_OBJECT
 
 public:
-  PlaylistManager(QObject *parent = 0);
+  PlaylistManager(TaskManager* task_manager, QObject *parent = 0);
   ~PlaylistManager();
 
   int current_id() const { return current_; }
@@ -51,6 +52,7 @@ public:
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
             PlaylistSequence* sequence);
 
+  TaskManager* task_manager() const { return task_manager_; }
   LibraryBackend* library_backend() const { return library_backend_; }
   PlaylistBackend* playlist_backend() const { return playlist_backend_; }
   PlaylistSequence* sequence() const { return sequence_; }
@@ -93,8 +95,6 @@ signals:
   void PlaylistChanged();
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);
-  void LoadTracksStarted();
-  void LoadTracksFinished();
 
 private slots:
   void UpdateSummaryText();
@@ -110,6 +110,7 @@ private:
     QString name;
   };
 
+  TaskManager* task_manager_;
   PlaylistBackend* playlist_backend_;
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;

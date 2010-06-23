@@ -30,6 +30,7 @@
 class RadioService;
 class PlaylistBackend;
 class PlaylistFilter;
+class TaskManager;
 
 class QSortFilterProxyModel;
 class QUndoStack;
@@ -48,7 +49,8 @@ class Playlist : public QAbstractListModel {
   friend class PlaylistUndoCommands::MoveItems;
 
  public:
-  Playlist(PlaylistBackend* backend, int id, QObject* parent = 0);
+  Playlist(PlaylistBackend* backend, TaskManager* task_manager, int id,
+           QObject* parent = 0);
   ~Playlist();
 
   enum Column {
@@ -175,8 +177,6 @@ class Playlist : public QAbstractListModel {
 
   void PlaylistChanged();
 
-  void LoadTracksStarted();
-  void LoadTracksFinished();
   void LoadTracksError(const QString& message);
 
  private:
@@ -198,6 +198,7 @@ class Playlist : public QAbstractListModel {
   PlaylistFilter* proxy_;
 
   PlaylistBackend* backend_;
+  TaskManager* task_manager_;
   int id_;
 
   PlaylistItemList items_;

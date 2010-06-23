@@ -16,6 +16,7 @@
 
 #include "librarywatcher.h"
 #include "librarybackend.h"
+#include "core/taskmanager.h"
 
 #include <QFileSystemWatcher>
 #include <QDirIterator>
@@ -35,6 +36,8 @@ const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
 
 LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
+    backend_(NULL),
+    task_manager_(NULL),
     stop_requested_(false),
     scan_on_startup_(true),
     rescan_timer_(new QTimer(this)),
@@ -61,7 +64,7 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
     cached_songs_dirty_(true),
     known_subdirs_dirty_(true)
 {
-  emit watcher_->ScanStarted();
+  task_id_ = watcher_->task_manager_->StartTask(tr("Updating library"));
 }
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {
@@ -83,7 +86,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
   if (!touched_subdirs.isEmpty())
     emit watcher_->SubdirsMTimeUpdated(touched_subdirs);
 
-  emit watcher_->ScanFinished();
+  watcher_->task_manager_->SetTaskFinished(task_id_);
 
   // Watch the new subdirectories
   foreach (const Subdirectory& subdir, new_subdirs) {

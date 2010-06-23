@@ -14,32 +14,42 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MULTILOADINGINDICATOR_H
-#define MULTILOADINGINDICATOR_H
+#ifndef TASKMANAGER_H
+#define TASKMANAGER_H
 
-#include <QWidget>
+#include <QMap>
+#include <QMutex>
+#include <QObject>
 
-class TaskManager;
-class Ui_MultiLoadingIndicator;
-
-class MultiLoadingIndicator : public QWidget {
+class TaskManager : public QObject {
   Q_OBJECT
 
- public:
-  MultiLoadingIndicator(QWidget* parent = 0);
-  ~MultiLoadingIndicator();
+public:
+  TaskManager(QObject* parent = 0);
 
-  void SetTaskManager(TaskManager* task_manager);
+  struct Task {
+    int id;
+    QString name;
+    int progress;
+    int progress_max;
+  };
 
- signals:
-  void TaskCountChange(int tasks);
+  // Thread-safe
+  int StartTask(const QString& name);
+  QList<Task> GetTasks();
 
- private slots:
-  void UpdateText();
+public slots:
+  // Thread-safe
+  void SetTaskProgress(int id, int progress, int max = -1);
+  void SetTaskFinished(int id);
 
- private:
-  Ui_MultiLoadingIndicator* ui_;
-  TaskManager* task_manager_;
+signals:
+  void TasksChanged();
+
+private:
+  QMutex mutex_;
+  QMap<int, Task> tasks_;
+  int next_task_id_;
 };
 
-#endif // MULTILOADINGINDICATOR_H
+#endif // TASKMANAGER_H

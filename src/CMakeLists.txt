@@ -47,6 +47,7 @@ set(SOURCES
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
+  core/taskmanager.cpp
   core/utilities.cpp
 
   engines/enginebase.cpp
@@ -160,6 +161,7 @@ set(HEADERS
   core/networkaccessmanager.h
   core/player.h
   core/songloader.h
+  core/taskmanager.h
 
   engines/enginebase.h
 

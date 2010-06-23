@@ -25,21 +25,20 @@
 
 class Playlist;
 class SongLoader;
+class TaskManager;
 
 class QModelIndex;
 
 class SongLoaderInserter : public QObject {
   Q_OBJECT
 public:
-  SongLoaderInserter(QObject* parent = 0);
+  SongLoaderInserter(TaskManager* task_manager, QObject* parent = 0);
   ~SongLoaderInserter();
 
   void Load(Playlist* destination, int row, bool play_now, const QList<QUrl>& urls);
 
 signals:
   void Error(const QString& message);
-  void AsyncLoadStarted();
-  void AsyncLoadFinished();
   void PlayRequested(const QModelIndex& index);
 
 private slots:
@@ -49,6 +48,8 @@ private:
   void Finished();
 
 private:
+  TaskManager* task_manager_;
+
   Playlist* destination_;
   int row_;
   bool play_now_;
@@ -56,6 +57,8 @@ private:
   SongList songs_;
 
   QSet<SongLoader*> pending_;
+  int async_load_id_;
+  int async_progress_;
 };
 
 #endif // SONGLOADERINSERTER_H

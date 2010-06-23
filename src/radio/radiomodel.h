@@ -24,19 +24,21 @@
 #include "playlist/playlistitem.h"
 #include "widgets/multiloadingindicator.h"
 
-class NetworkAccessManager;
-class RadioService;
+class Database;
 class LastFMService;
 class MergedProxyModel;
-class Database;
+class NetworkAccessManager;
+class RadioService;
 class SettingsDialog;
+class TaskManager;
 
 class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
 
  public:
   RadioModel(BackgroundThread<Database>* db_thread,
-             NetworkAccessManager* network, QObject* parent = 0);
+             NetworkAccessManager* network, TaskManager* task_manager,
+             QObject* parent = 0);
 
   enum {
     Role_Type = Qt::UserRole + 1,
@@ -74,11 +76,10 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   BackgroundThread<Database>* db_thread() const { return db_thread_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
   NetworkAccessManager* network() const { return network_; }
+  TaskManager* task_manager() const { return task_manager_; }
   SettingsDialog* settings_dialog() const { return settings_dialog_; }
 
  signals:
-  void TaskStarted(MultiLoadingIndicator::TaskType);
-  void TaskFinished(MultiLoadingIndicator::TaskType);
   void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
@@ -98,6 +99,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   BackgroundThread<Database>* db_thread_;
   MergedProxyModel* merged_model_;
   NetworkAccessManager* network_;
+  TaskManager* task_manager_;
   SettingsDialog* settings_dialog_;
 };
 
