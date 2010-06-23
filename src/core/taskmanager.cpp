@@ -16,8 +16,6 @@
 
 #include "taskmanager.h"
 
-#include <QtDebug>
-
 TaskManager::TaskManager(QObject *parent)
   : QObject(parent),
     next_task_id_(1)
@@ -36,7 +34,6 @@ int TaskManager::StartTask(const QString& name) {
     tasks_[t.id] = t;
   }
 
-  qDebug() << name << "started";
   emit TasksChanged();
   return t.id;
 }
@@ -62,8 +59,6 @@ void TaskManager::SetTaskProgress(int id, int progress, int max) {
     t.progress = progress;
     if (max != -1)
       t.progress_max = max;
-
-    qDebug() << t.name << "progress" << t.progress << "/" << t.progress_max;
   }
 
   emit TasksChanged();
@@ -74,7 +69,6 @@ void TaskManager::SetTaskFinished(int id) {
     QMutexLocker l(&mutex_);
     if (!tasks_.contains(id))
       return;
-    qDebug() << tasks_[id].name << "finished";
     tasks_.remove(id);
   }
   emit TasksChanged();

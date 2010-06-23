@@ -39,9 +39,15 @@ void MultiLoadingIndicator::UpdateText() {
 
   QStringList strings;
   foreach (const TaskManager::Task& task, tasks) {
-    QString name(task.name);
-    name[0] = name[0].toLower();
-    strings << name;
+    QString task_text(task.name);
+    task_text[0] = task_text[0].toLower();
+
+    if (task.progress_max) {
+      int percentage = float(task.progress) / task.progress_max * 100;
+      task_text += QString(" %1%").arg(percentage);
+    }
+
+    strings << task_text;
   }
 
   QString text(strings.join(", "));
