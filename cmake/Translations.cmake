@@ -13,7 +13,7 @@ macro(add_pot header pot)
   # Generate the .pot
   add_custom_target(pot ALL
     COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
-        ${XGETTEXT_OPTIONS} -C --omit-header --no-location
+        ${XGETTEXT_OPTIONS} -s -C --omit-header --no-location
         --directory=${CMAKE_CURRENT_SOURCE_DIR}
         --output=${CMAKE_CURRENT_BINARY_DIR}/pot.temp
         ${ARGN}
