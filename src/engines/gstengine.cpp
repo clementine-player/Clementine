@@ -474,7 +474,19 @@ void GstEngine::StartFadeout() {
 
 bool GstEngine::Play( uint offset ) {
   // Try to play input pipeline; if fails, destroy input bin
-  if (!current_pipeline_->SetState(GST_STATE_PLAYING)) {
+  forever {
+    if (current_pipeline_->SetState(GST_STATE_PLAYING))
+      break; // Success
+
+    // Failure, but we got a redirection URL - try loading that instead
+    QUrl redirect_url = current_pipeline_->redirect_url();
+    if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
+      qDebug() << "Redirecting to" << redirect_url;
+      current_pipeline_ = CreatePipeline(redirect_url);
+      continue;
+    }
+
+    // Failure - give up
     qWarning() << "Could not set thread to PLAYING.";
     current_pipeline_.reset();
     return false;

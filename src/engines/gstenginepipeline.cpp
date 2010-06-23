@@ -213,10 +213,27 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       instance->ErrorMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_ELEMENT:
+      instance->ElementMessageReceived(msg);
+      break;
+
     default:
       break;
   }
   return GST_BUS_PASS;
+}
+
+void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
+  const GstStructure* structure = gst_message_get_structure(msg);
+
+  if (gst_structure_has_name(structure, "redirect")) {
+    const char* uri = gst_structure_get_string(structure, "new-location");
+
+    // Set the redirect URL.  In mmssrc redirect messages come during the
+    // initial state change to PLAYING, so callers can pick up this URL after
+    // the state change has failed.
+    redirect_url_ = QUrl::fromEncoded(uri);
+  }
 }
 
 void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
@@ -225,12 +242,20 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
 
   gst_message_parse_error(msg, &error, &debugs);
   QString message = QString::fromLocal8Bit(error->message);
-
-  qDebug() << debugs;
+  QString debugstr = QString::fromLocal8Bit(debugs);
 
   g_error_free(error);
   free(debugs);
 
+  if (!redirect_url_.isEmpty() && debugstr.contains(
+      "A redirect message was posted on the bus and should have been handled by the application.")) {
+    // mmssrc posts a message on the bus *and* makes an error message when it
+    // wants to do a redirect.  We handle the message, but now we have to
+    // ignore the error too.
+    return;
+  }
+
+  qDebug() << debugstr;
   emit Error(message);
 }
 

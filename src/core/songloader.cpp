@@ -29,6 +29,8 @@
 
 #include <boost/bind.hpp>
 
+QSet<QString> SongLoader::sRawUriSchemes;
+
 SongLoader::SongLoader(QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
@@ -37,6 +39,11 @@ SongLoader::SongLoader(QObject *parent)
     success_(false),
     parser_(NULL)
 {
+  if (sRawUriSchemes.isEmpty()) {
+    sRawUriSchemes << "udp" << "mms" << "mmsh" << "mmst" << "mmsu" << "rtsp"
+                   << "rtspu" << "rtspt" << "rtsph";
+  }
+
   timeout_timer_->setSingleShot(true);
   connect(timeout_timer_, SIGNAL(timeout()), SLOT(Timeout()));
 }
@@ -53,6 +60,13 @@ SongLoader::Result SongLoader::Load(const QUrl& url, int timeout_msec) {
 
   if (url_.scheme() == "file") {
     return LoadLocal();
+  }
+
+  if (sRawUriSchemes.contains(url_.scheme())) {
+    // The URI scheme indicates that it can't possibly be a playlist, so add
+    // it as a raw stream.
+    AddAsRawStream();
+    return Success;
   }
 
   timeout_timer_->start(timeout_msec);
@@ -325,15 +339,19 @@ void SongLoader::StopTypefind() {
     qDebug() << "Loading" << url_ << "as raw stream";
 
     // It wasn't a playlist - just put the URL in as a stream
-    Song song;
-    song.set_valid(true);
-    song.set_filetype(Song::Type_Stream);
-    song.set_filename(url_.toString());
-    song.set_title(url_.toString());
-    songs_ << song;
+    AddAsRawStream();
   }
 
   emit LoadFinished(success_);
+}
+
+void SongLoader::AddAsRawStream() {
+  Song song;
+  song.set_valid(true);
+  song.set_filetype(Song::Type_Stream);
+  song.set_filename(url_.toString());
+  song.set_title(url_.toString());
+  songs_ << song;
 }
 
 void SongLoader::Timeout() {

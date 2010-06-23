@@ -75,7 +75,11 @@ private:
   void EndOfStreamReached();
   void MagicReady();
 
+  void AddAsRawStream();
+
 private:
+  static QSet<QString> sRawUriSchemes;
+
   QUrl url_;
   SongList songs_;
 

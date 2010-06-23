@@ -73,6 +73,8 @@ class GstEnginePipeline : public QObject {
   qint64 length() const;
   GstState state() const;
 
+  QUrl redirect_url() const { return redirect_url_; }
+
  public slots:
   void SetVolumeModifier(qreal mod);
 
@@ -95,8 +97,9 @@ class GstEnginePipeline : public QObject {
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static bool StopUriDecodeBin(gpointer bin);
   void TagMessageReceived(GstMessage*);
-  QString ParseTag(GstTagList* list, const char* tag) const;
   void ErrorMessageReceived(GstMessage*);
+  void ElementMessageReceived(GstMessage*);
+  QString ParseTag(GstTagList* list, const char* tag) const;
 
   void UpdateVolume();
   bool ReplaceDecodeBin(const QUrl& url);
@@ -129,6 +132,10 @@ class GstEnginePipeline : public QObject {
   // when the current track is close to finishing.
   QUrl url_;
   QUrl next_url_;
+
+  // When the gstreamer source requests a redirect we store the URL here and
+  // callers can pick it up after the state change to PLAYING fails.
+  QUrl redirect_url_;
 
   int volume_percent_;
   qreal volume_modifier_;
