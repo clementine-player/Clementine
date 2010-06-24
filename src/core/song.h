@@ -170,7 +170,7 @@ class Song {
   QString PrettyLength() const;
 
   // Setters
-  bool IsEditable() const { return d->valid_ && !d->filename_.isNull(); }
+  bool IsEditable() const;
   bool Save() const;
 
   void set_id(int id) { d->id_ = id; }

@@ -683,6 +683,11 @@ TagLib::String QStringToTaglibString(const QString& s) {
   return TagLib::String(s.toUtf8().constData(), TagLib::String::UTF8);
 }
 
+bool Song::IsEditable() const {
+  return d->valid_ && !d->filename_.isNull() &&
+         d->filetype_ != Type_Stream && d->filetype_ != Type_Unknown;
+}
+
 bool Song::Save() const {
   if (d->filename_.isNull())
     return false;

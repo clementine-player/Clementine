@@ -365,8 +365,15 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
   playlist_menu_->addSeparator();
+  playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
+  playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
+  playlist_organise_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Organise files..."), this, SLOT(PlaylistMoveToLibrary()));
+  playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete files..."), this, SLOT(PlaylistDelete()));
+  playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
+
+  playlist_delete_->setVisible(false); // TODO
 
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
           SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
@@ -871,7 +878,10 @@ void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
   playlist_menu_index_ = index;
 
-  if (playlists_->current()->current_index() == index.row() && player_->GetState() == Engine::Playing) {
+  QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
+
+  // Is this song currently playing?
+  if (playlists_->current()->current_index() == source_index.row() && player_->GetState() == Engine::Playing) {
     playlist_play_pause_->setText(tr("Pause"));
     playlist_play_pause_->setIcon(IconLoader::Load("media-playback-pause"));
   } else {
@@ -879,10 +889,11 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     playlist_play_pause_->setIcon(IconLoader::Load("media-playback-start"));
   }
 
+  // Are we allowed to pause?
   if (index.isValid()) {
     playlist_play_pause_->setEnabled(
-        playlists_->current()->current_index() != index.row() ||
-        ! (playlists_->current()->item_at(index.row())->options() & PlaylistItem::PauseDisabled));
+        playlists_->current()->current_index() != source_index.row() ||
+        ! (playlists_->current()->item_at(source_index.row())->options() & PlaylistItem::PauseDisabled));
   } else {
     playlist_play_pause_->setEnabled(false);
   }
@@ -907,26 +918,39 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   ui_->action_edit_value->setVisible(editable);
   ui_->action_remove_from_playlist->setEnabled(!selection.isEmpty());
 
+  playlist_copy_to_library_->setVisible(false);
+  playlist_move_to_library_->setVisible(false);
+  playlist_organise_->setVisible(false);
+  playlist_delete_->setVisible(false);
+
   if (!index.isValid()) {
     ui_->action_selection_set_value->setVisible(false);
     ui_->action_edit_value->setVisible(false);
   } else {
     Playlist::Column column = (Playlist::Column)index.column();
-    bool editable = Playlist::column_is_editable(column);
+    bool column_is_editable = Playlist::column_is_editable(column);
 
     ui_->action_selection_set_value->setVisible(
-        ui_->action_selection_set_value->isVisible() && editable);
+        ui_->action_selection_set_value->isVisible() && column_is_editable);
     ui_->action_edit_value->setVisible(
-        ui_->action_edit_value->isVisible() && editable);
+        ui_->action_edit_value->isVisible() && column_is_editable);
 
     QString column_name = Playlist::column_name(column);
-    QString column_value = playlists_->current()->data(index).toString();
+    QString column_value = playlists_->current()->data(source_index).toString();
     if (column_value.length() > 25)
       column_value = column_value.left(25) + "...";
 
     ui_->action_selection_set_value->setText(tr("Set %1 to \"%2\"...")
              .arg(column_name.toLower()).arg(column_value));
     ui_->action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
+
+    // Is it a library item?
+    if (playlists_->current()->item_at(source_index.row())->type() == "Library") {
+      playlist_organise_->setVisible(editable);
+    } else {
+      playlist_copy_to_library_->setVisible(editable);
+      playlist_move_to_library_->setVisible(editable);
+    }
   }
 
   playlist_menu_->popup(global_pos);
@@ -1219,4 +1243,35 @@ void MainWindow::MoveFilesToLibrary(const QList<QUrl> &urls) {
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(false);
   organise_dialog_->show();
+}
+
+void MainWindow::PlaylistCopyToLibrary() {
+  PlaylistOrganiseSelected(true);
+}
+
+void MainWindow::PlaylistMoveToLibrary() {
+  PlaylistOrganiseSelected(false);
+}
+
+void MainWindow::PlaylistOrganiseSelected(bool copy) {
+  QModelIndexList indexes = playlists_->current()->proxy()->mapSelectionToSource(
+      ui_->playlist->view()->selectionModel()->selection()).indexes();
+  QList<QUrl> urls;
+
+  int last_row = -1;
+  foreach (const QModelIndex& index, indexes) {
+    if (last_row == index.row())
+      continue;
+    last_row = index.row();
+
+    urls << playlists_->current()->item_at(index.row())->Url();
+  }
+
+  organise_dialog_->SetUrls(urls);
+  organise_dialog_->SetCopy(copy);
+  organise_dialog_->show();
+}
+
+void MainWindow::PlaylistDelete() {
+
 }

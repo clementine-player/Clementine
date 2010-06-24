@@ -108,6 +108,11 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void EditValue();
   void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
 
+  void PlaylistCopyToLibrary();
+  void PlaylistMoveToLibrary();
+  void PlaylistOrganiseSelected(bool copy);
+  void PlaylistDelete();
+
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
@@ -195,6 +200,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_play_pause_;
   QAction* playlist_stop_after_;
   QAction* playlist_undoredo_;
+  QAction* playlist_organise_;
+  QAction* playlist_copy_to_library_;
+  QAction* playlist_move_to_library_;
+  QAction* playlist_delete_;
   QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;
