@@ -42,6 +42,7 @@ class GroupByDialog;
 class Library;
 class MultiLoadingIndicator;
 class NetworkAccessManager;
+class OrganiseDialog;
 class OSD;
 class Player;
 class PlaylistBackend;
@@ -118,6 +119,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFilesToPlaylist(const QList<QUrl>& urls);
   void FilesDoubleClicked(const QList<QUrl>& urls);
 
+  void CopyFilesToLibrary(const QList<QUrl>& urls);
+  void MoveFilesToLibrary(const QList<QUrl>& urls);
+
   void LoadLibrarySongsToPlaylist(const SongList& songs);
   void AddLibrarySongsToPlaylist(const SongList& songs);
   void LibrarySongsDoubleClicked(const SongList& songs);
@@ -181,6 +185,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<Equalizer> equalizer_;
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
   boost::scoped_ptr<ErrorDialog> error_dialog_;
+  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
 
 #ifdef ENABLE_VISUALISATIONS
   boost::scoped_ptr<VisualisationContainer> visualisation_;

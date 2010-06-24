@@ -30,11 +30,11 @@ FileViewList::FileViewList(QWidget* parent)
                    this, SLOT(LoadSlot()));
   menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"),
                    this, SLOT(AddToPlaylistSlot()));
-  /*menu_->addSeparator();
+  menu_->addSeparator();
   menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."),
                    this, SLOT(CopyToLibrarySlot()));
   menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."),
-                   this, SLOT(MoveToLibrarySlot()));*/
+                   this, SLOT(MoveToLibrarySlot()));
 }
 
 void FileViewList::contextMenuEvent(QContextMenuEvent* e) {

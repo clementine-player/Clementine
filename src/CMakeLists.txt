@@ -119,6 +119,8 @@ set(SOURCES
   ui/globalshortcutsconfig.cpp
   ui/iconloader.cpp
   ui/mainwindow.cpp
+  ui/organisedialog.cpp
+  ui/organiseformat.cpp
   ui/qtsystemtrayicon.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
@@ -130,6 +132,7 @@ set(SOURCES
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/lineedit.cpp
+  widgets/linetextedit.cpp
   widgets/multiloadingindicator.cpp
   widgets/nowplayingwidget.cpp
   widgets/osd.cpp
@@ -222,6 +225,7 @@ set(HEADERS
   ui/globalshortcutgrabber.h
   ui/globalshortcutsconfig.h
   ui/mainwindow.h
+  ui/organisedialog.h
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/systemtrayicon.h
@@ -233,6 +237,7 @@ set(HEADERS
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/lineedit.h
+  widgets/linetextedit.h
   widgets/multiloadingindicator.h
   widgets/nowplayingwidget.h
   widgets/osd.h
@@ -270,6 +275,7 @@ set(UI
   ui/globalshortcutgrabber.ui
   ui/globalshortcutsconfig.ui
   ui/mainwindow.ui
+  ui/organisedialog.ui
   ui/settingsdialog.ui
 
   widgets/equalizerslider.ui

@@ -50,10 +50,11 @@
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
-#include "ui/qtsystemtrayicon.h"
 #ifdef Q_OS_DARWIN
 #include "ui/macsystemtrayicon.h"
 #endif
+#include "ui/organisedialog.h"
+#include "ui/qtsystemtrayicon.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "widgets/errordialog.h"
@@ -121,6 +122,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
     error_dialog_(new ErrorDialog),
+    organise_dialog_(new OrganiseDialog),
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
 #endif
@@ -218,6 +220,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->file_view, SIGNAL(Load(QList<QUrl>)), SLOT(LoadFilesToPlaylist(QList<QUrl>)));
   connect(ui_->file_view, SIGNAL(DoubleClicked(QList<QUrl>)), SLOT(FilesDoubleClicked(QList<QUrl>)));
   connect(ui_->file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
+  connect(ui_->file_view, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
+  connect(ui_->file_view, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
 
   // Cover manager connections
   connect(cover_manager_.get(), SIGNAL(AddSongsToPlaylist(SongList)), SLOT(AddLibrarySongsToPlaylist(SongList)));
@@ -1196,4 +1200,14 @@ void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
 
   ui_->status_bar->parentWidget()->layout()->addWidget(ui_->status_bar);
   ui_->status_bar->show();
+}
+
+void MainWindow::CopyFilesToLibrary(const QList<QUrl> &urls) {
+  organise_dialog_->SetUrls(urls);
+  organise_dialog_->show();
+}
+
+void MainWindow::MoveFilesToLibrary(const QList<QUrl> &urls) {
+  organise_dialog_->SetUrls(urls);
+  organise_dialog_->show();
 }
