@@ -15,8 +15,6 @@
 */
 
 #include "organisedialog.h"
-#include "organisesyntaxhighlighter.h"
-#include "organisevalidator.h"
 #include "ui_organisedialog.h"
 
 #include <QDir>
