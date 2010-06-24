@@ -115,6 +115,10 @@ void OrganiseDialog::SetFilenames(const QStringList &filenames) {
   UpdatePreviews();
 }
 
+void OrganiseDialog::SetCopy(bool copy) {
+  ui_->move->setChecked(!copy);
+}
+
 void OrganiseDialog::InsertTag(const QString &tag) {
   ui_->naming->insertPlainText("%" + tag);
 }
@@ -168,8 +172,8 @@ void OrganiseDialog::accept() {
 
   // It deletes itself when it's finished.
   Organise* organise = new Organise(
-      task_manager_, ui_->destination->currentText(), format_, true,
-      ui_->overwrite->isChecked(), filenames_);
+      task_manager_, ui_->destination->currentText(), format_,
+      !ui_->move->isChecked(), ui_->overwrite->isChecked(), filenames_);
   organise->Start();
 
   QDialog::accept();

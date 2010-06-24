@@ -44,6 +44,7 @@ public:
 
   void SetUrls(const QList<QUrl>& urls);
   void SetFilenames(const QStringList& filenames);
+  void SetCopy(bool copy);
 
   bool IsFormatValid() const;
 

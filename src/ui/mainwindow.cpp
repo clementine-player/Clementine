@@ -1207,10 +1207,12 @@ void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
 
 void MainWindow::CopyFilesToLibrary(const QList<QUrl> &urls) {
   organise_dialog_->SetUrls(urls);
+  organise_dialog_->SetCopy(true);
   organise_dialog_->show();
 }
 
 void MainWindow::MoveFilesToLibrary(const QList<QUrl> &urls) {
   organise_dialog_->SetUrls(urls);
+  organise_dialog_->SetCopy(false);
   organise_dialog_->show();
 }
