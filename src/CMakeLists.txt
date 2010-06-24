@@ -522,7 +522,7 @@ if (APPLE)
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
 
   add_custom_target(bundle
-    ${CMAKE_CURRENT_SOURCE_DIR}/../macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
+    ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
     DEPENDS clementine
   )
   add_custom_target(dmg
