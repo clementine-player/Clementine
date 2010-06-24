@@ -341,6 +341,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->library_view, SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_->library_view, SLOT(TotalSongCountUpdated(int)));
 
+  connect(organise_dialog_.get(), SIGNAL(PauseLibraryScanning()),
+          library_, SLOT(PauseWatcher()));
+  connect(organise_dialog_.get(), SIGNAL(ResumeLibraryScanning()),
+          library_, SLOT(ResumeWatcher()));
+
   // Library filter widget
   QAction* library_config_action = new QAction(
       IconLoader::Load("configure"), tr("Configure library..."), this);

@@ -91,3 +91,17 @@ void Library::IncrementalScan() {
 
   watcher_->Worker()->IncrementalScanAsync();
 }
+
+void Library::PauseWatcher() {
+  if (!watcher_->Worker())
+    return;
+
+  watcher_->Worker()->SetRescanPausedAsync(true);
+}
+
+void Library::ResumeWatcher() {
+  if (!watcher_->Worker())
+    return;
+
+  watcher_->Worker()->SetRescanPausedAsync(false);
+}

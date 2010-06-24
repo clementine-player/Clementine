@@ -19,10 +19,12 @@
 #include "core/organise.h"
 
 #include <QDir>
+#include <QFileInfo>
 #include <QMenu>
 #include <QPushButton>
 #include <QSettings>
 #include <QSignalMapper>
+#include <QtDebug>
 
 const int OrganiseDialog::kNumberOfPreviews = 5;
 const char* OrganiseDialog::kDefaultFormat =
@@ -59,6 +61,7 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   // Naming scheme input field
   new OrganiseFormat::SyntaxHighlighter(ui_->naming);
 
+  connect(ui_->destination, SIGNAL(currentIndexChanged(int)), SLOT(UpdatePreviews()));
   connect(ui_->naming, SIGNAL(textChanged()), SLOT(UpdatePreviews()));
   connect(ui_->replace_ascii, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
   connect(ui_->replace_the, SIGNAL(toggled(bool)), SLOT(UpdatePreviews()));
@@ -92,27 +95,48 @@ void OrganiseDialog::AddDirectoryModel(QAbstractItemModel *model) {
 
 void OrganiseDialog::SetUrls(const QList<QUrl> &urls) {
   QStringList filenames;
+
+  // Only add file:// URLs
   foreach (const QUrl& url, urls) {
     if (url.scheme() != "file")
       continue;
     filenames << url.toLocalFile();
   }
+
   SetFilenames(filenames);
 }
 
-void OrganiseDialog::SetFilenames(const QStringList &filenames) {
+void OrganiseDialog::SetFilenames(const QStringList& filenames) {
   filenames_ = filenames;
   preview_songs_.clear();
 
   // Load some of the songs to show in the preview
   const int n = qMin(filenames_.count(), kNumberOfPreviews);
   for (int i=0 ; i<n ; ++i) {
-    Song song;
-    song.InitFromFile(filenames_[i], -1);
-    preview_songs_ << song;
+    LoadPreviewSongs(filenames_[i]);
   }
 
   UpdatePreviews();
+}
+
+void OrganiseDialog::LoadPreviewSongs(const QString& filename) {
+  if (preview_songs_.count() >= kNumberOfPreviews)
+    return;
+
+  if (QFileInfo(filename).isDir()) {
+    QDir dir(filename);
+    QStringList entries = dir.entryList(
+        QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable);
+    foreach (const QString& entry, entries) {
+      LoadPreviewSongs(filename + "/" + entry);
+    }
+    return;
+  }
+
+  Song song;
+  song.InitFromFile(filename, -1);
+  if (song.is_valid())
+    preview_songs_ << song;
 }
 
 void OrganiseDialog::SetCopy(bool copy) {
@@ -138,7 +162,8 @@ void OrganiseDialog::UpdatePreviews() {
 
   ui_->preview->clear();
   foreach (const Song& song, preview_songs_) {
-    QString filename = format_.GetFilenameForSong(song);
+    QString filename = ui_->destination->currentText() + "/" +
+                       format_.GetFilenameForSong(song);
     ui_->preview->addItem(QDir::toNativeSeparators(filename));
   }
 }
@@ -174,6 +199,9 @@ void OrganiseDialog::accept() {
   Organise* organise = new Organise(
       task_manager_, ui_->destination->currentText(), format_,
       !ui_->move->isChecked(), ui_->overwrite->isChecked(), filenames_);
+
+  emit PauseLibraryScanning();
+  connect(organise, SIGNAL(destroyed()), SIGNAL(ResumeLibraryScanning()));
   organise->Start();
 
   QDialog::accept();

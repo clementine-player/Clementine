@@ -41,6 +41,7 @@ class LibraryWatcher : public QObject {
   void SetBackend(LibraryBackend* backend) { backend_ = backend; }
   void SetTaskManager(TaskManager* task_manager) { task_manager_ = task_manager; }
   void IncrementalScanAsync();
+  void SetRescanPausedAsync(bool pause);
 
   void Stop() { stop_requested_ = true; }
 
@@ -56,6 +57,7 @@ class LibraryWatcher : public QObject {
   void ReloadSettings();
   void AddDirectory(const Directory& dir, const SubdirectoryList& subdirs);
   void RemoveDirectory(const Directory& dir);
+  void SetRescanPaused(bool pause);
 
  private:
   // This class encapsulates a full or partial scan of a directory.
@@ -139,6 +141,7 @@ class LibraryWatcher : public QObject {
   QMap<int, DirData> watched_dirs_;
   QTimer* rescan_timer_;
   QMap<int, QStringList> rescan_queue_; // dir id -> list of subdirs to be scanned
+  bool rescan_paused_;
 
   int total_watches_;
 

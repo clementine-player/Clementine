@@ -18,6 +18,7 @@
 #include "taskmanager.h"
 
 #include <QDir>
+#include <QFileInfo>
 #include <QTimer>
 #include <QThread>
 
@@ -25,7 +26,7 @@ const int Organise::kBatchSize = 10;
 
 Organise::Organise(TaskManager* task_manager, const QString &destination,
                    const OrganiseFormat &format, bool copy, bool overwrite,
-                   const QStringList &files)
+                   const QStringList& files)
                      : thread_(NULL),
                        task_manager_(task_manager),
                        destination_(destination),
@@ -44,7 +45,6 @@ void Organise::Start() {
     return;
 
   task_id_ = task_manager_->StartTask(tr("Organising files"));
-  task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
@@ -74,10 +74,21 @@ void Organise::ProcessSomeFiles() {
 
   const int n = qMin(files_.count(), progress_ + kBatchSize);
   for ( ; progress_<n ; ++progress_) {
-    task_manager_->SetTaskProgress(task_id_, progress_ + 1);
+    task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
+
+    const QString& filename = files_[progress_];
+
+    // Is it a directory?
+    if (QFileInfo(filename).isDir()) {
+      QDir dir(filename);
+      foreach (const QString& entry, dir.entryList(
+          QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Readable)) {
+        files_ << filename + "/" + entry;
+      }
+      continue;
+    }
 
     // Read metadata from the file
-    QString filename = files_[progress_];
     Song song;
     song.InitFromFile(filename, -1);
     if (!song.is_valid())

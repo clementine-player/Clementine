@@ -47,7 +47,7 @@ private:
   const OrganiseFormat format_;
   const bool copy_;
   const bool overwrite_;
-  const QStringList files_;
+  QStringList files_;
 
   int task_id_;
   int progress_;

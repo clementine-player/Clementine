@@ -41,6 +41,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     stop_requested_(false),
     scan_on_startup_(true),
     rescan_timer_(new QTimer(this)),
+    rescan_paused_(false),
     total_watches_(0)
 {
   rescan_timer_->setInterval(1000);
@@ -390,7 +391,8 @@ void LibraryWatcher::DirectoryChanged(const QString &subdir) {
   if (!rescan_queue_[dir.id].contains(subdir))
     rescan_queue_[dir.id] << subdir;
 
-  rescan_timer_->start();
+  if (!rescan_paused_)
+    rescan_timer_->start();
 }
 
 void LibraryWatcher::RescanPathsNow() {
@@ -455,6 +457,17 @@ void LibraryWatcher::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   scan_on_startup_ = s.value("startup_scan", true).toBool();
+}
+
+void LibraryWatcher::SetRescanPausedAsync(bool pause) {
+  QMetaObject::invokeMethod(this, "SetRescanPaused", Qt::QueuedConnection,
+                            Q_ARG(bool, pause));
+}
+
+void LibraryWatcher::SetRescanPaused(bool pause) {
+  rescan_paused_ = pause;
+  if (!rescan_paused_ && !rescan_queue_.isEmpty())
+    RescanPathsNow();
 }
 
 void LibraryWatcher::IncrementalScanAsync() {

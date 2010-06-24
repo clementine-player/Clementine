@@ -50,6 +50,10 @@ class Library : public QObject {
   LibraryBackend* backend() const { return backend_; }
   LibraryModel* model() const { return model_; }
 
+ public slots:
+  void PauseWatcher();
+  void ResumeWatcher();
+
  private slots:
   void IncrementalScan();
   void WatcherInitialised();

@@ -24,6 +24,9 @@
 #include "core/organiseformat.h"
 #include "core/song.h"
 
+#include <boost/shared_ptr.hpp>
+
+class LibraryWatcher;
 class TaskManager;
 class Ui_OrganiseDialog;
 
@@ -46,10 +49,12 @@ public:
   void SetFilenames(const QStringList& filenames);
   void SetCopy(bool copy);
 
-  bool IsFormatValid() const;
-
 public slots:
   void accept();
+
+signals:
+  void PauseLibraryScanning();
+  void ResumeLibraryScanning();
 
 protected:
   void showEvent(QShowEvent *);
@@ -58,6 +63,7 @@ private slots:
   void Reset();
 
   void InsertTag(const QString& tag);
+  void LoadPreviewSongs(const QString& filename);
   void UpdatePreviews();
 
 private:
