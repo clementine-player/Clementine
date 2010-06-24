@@ -48,7 +48,6 @@ void Organise::Start() {
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));
-  connect(thread_, SIGNAL(destroyed()), SLOT(deleteLater()));
 
   moveToThread(thread_);
   thread_->start();
