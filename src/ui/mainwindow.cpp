@@ -182,6 +182,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   ui_->library_view->setModel(library_sort_model_);
   ui_->library_view->SetLibrary(library_->model());
+  ui_->library_view->SetTaskManager(task_manager_);
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
   ui_->radio_view->SetModel(radio_model_);

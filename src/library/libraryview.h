@@ -21,7 +21,11 @@
 
 #include <QStyledItemDelegate>
 
+#include <boost/scoped_ptr.hpp>
+
 class LibraryModel;
+class OrganiseDialog;
+class TaskManager;
 
 class LibraryItemDelegate : public QStyledItemDelegate {
  public:
@@ -34,9 +38,11 @@ class LibraryView : public AutoExpandingTreeView {
 
  public:
   LibraryView(QWidget* parent = 0);
+  ~LibraryView();
 
   static const char* kSettingsGroup;
 
+  void SetTaskManager(TaskManager* task_manager);
   void SetLibrary(LibraryModel* library);
 
   // QTreeView
@@ -61,6 +67,8 @@ class LibraryView : public AutoExpandingTreeView {
  private slots:
   void Load();
   void AddToPlaylist();
+  void Organise();
+  void Delete();
   void ShowInVarious();
   void NoShowInVarious();
 
@@ -78,8 +86,12 @@ class LibraryView : public AutoExpandingTreeView {
   QModelIndex context_menu_index_;
   QAction* load_;
   QAction* add_to_playlist_;
+  QAction* organise_;
+  QAction* delete_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
+
+  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
 
   bool is_in_keyboard_search_;
 };

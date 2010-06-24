@@ -14,11 +14,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "librarydirectorymodel.h"
 #include "librarymodel.h"
 #include "libraryview.h"
 #include "libraryitem.h"
 #include "librarybackend.h"
 #include "ui/iconloader.h"
+#include "ui/organisedialog.h"
 
 #include <QPainter>
 #include <QContextMenuEvent>
@@ -89,12 +91,22 @@ LibraryView::LibraryView(QWidget* parent)
   add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
       tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   context_menu_->addSeparator();
+  organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
+      tr("Organise files..."), this, SLOT(Organise()));
+  delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+      tr("Delete from disk..."), this, SLOT(Delete()));
+  context_menu_->addSeparator();
   show_in_various_ = context_menu_->addAction(
       tr("Show in various artists"), this, SLOT(ShowInVarious()));
   no_show_in_various_ = context_menu_->addAction(
       tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
 
+  delete_->setVisible(false); // TODO
+
   ReloadSettings();
+}
+
+LibraryView::~LibraryView() {
 }
 
 void LibraryView::ReloadSettings() {
@@ -102,6 +114,11 @@ void LibraryView::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   SetAutoOpen(s.value("auto_open", true).toBool());
+}
+
+void LibraryView::SetTaskManager(TaskManager *task_manager) {
+  organise_dialog_.reset(new OrganiseDialog(task_manager));
+  organise_dialog_->AddDirectoryModel(library_->directory_model());
 }
 
 void LibraryView::SetLibrary(LibraryModel *library) {
@@ -221,4 +238,24 @@ void LibraryView::scrollTo(const QModelIndex &index, ScrollHint hint) {
     QTreeView::scrollTo(index, QAbstractItemView::PositionAtTop);
   else
     QTreeView::scrollTo(index, hint);
+}
+
+void LibraryView::Organise() {
+  QModelIndexList selected_indexes =
+      qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
+          selectionModel()->selection()).indexes();
+  SongList songs = library_->GetChildSongs(selected_indexes);
+  QStringList filenames;
+
+  foreach (const Song& song, songs) {
+    filenames << song.filename();
+  }
+
+  organise_dialog_->SetCopy(false);
+  organise_dialog_->SetFilenames(filenames);
+  organise_dialog_->show();
+}
+
+void LibraryView::Delete() {
+
 }
