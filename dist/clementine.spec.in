@@ -52,17 +52,5 @@ make clean
 %{_datadir}/clementine/projectm-presets
 
 %changelog
-* Thu May 6 2010 David Sansome <me@davidsansome.com> - 0.3
-- Version 0.3
-
-* Thu Apr 29 2010 David Sansome <me@davidsansome.com> - 0.2.99
-- Version 0.3 rc 1
-
-* Mon Mar 22 2010 David Sansome <me@davidsansome.com> - 0.2
-- Version 0.2
-
-* Sun Feb 21 2010 David Sansome <me@davidsansome.com> - 0.1-5
-- Various last-minute bugfixes
-
-* Sun Jan 17 2010 David Sansome <me@davidsansome.com> - 0.1-1
-- Initial package
+* ${RPM_DATE} David Sansome <me@davidsansome.com> - ${CLEMENTINE_VERSION}
+- Version ${CLEMENTINE_VERSION_STRING}
