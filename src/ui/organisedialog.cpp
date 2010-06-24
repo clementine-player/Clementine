@@ -19,17 +19,21 @@
 
 #include <QDir>
 #include <QMenu>
+#include <QPushButton>
+#include <QSettings>
 #include <QSignalMapper>
 
 const int OrganiseDialog::kNumberOfPreviews = 5;
 const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
+const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
 OrganiseDialog::OrganiseDialog(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_OrganiseDialog)
 {
   ui_->setupUi(this);
+  connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(Reset()));
 
   // Valid tags
   QMap<QString, QString> tags;
@@ -72,13 +76,16 @@ OrganiseDialog::OrganiseDialog(QWidget *parent)
 
   connect(tag_mapper, SIGNAL(mapped(QString)), SLOT(InsertTag(QString)));
   ui_->insert->setMenu(tag_menu);
-
-  // Load settings
-  ui_->naming->setPlainText(kDefaultFormat);
 }
 
 OrganiseDialog::~OrganiseDialog() {
   delete ui_;
+}
+
+void OrganiseDialog::AddDirectoryModel(QAbstractItemModel *model) {
+  // TODO: Add this model to a proxy model that merges different models
+  // together, eg. from the local library and also removable devices.
+  ui_->destination->setModel(model);
 }
 
 void OrganiseDialog::SetUrls(const QList<QUrl> &urls) {
@@ -117,7 +124,10 @@ void OrganiseDialog::UpdatePreviews() {
   format_.set_replace_spaces(ui_->replace_spaces->isChecked());
   format_.set_replace_the(ui_->replace_the->isChecked());
 
-  if (!format_.IsValid())
+  const bool format_valid = format_.IsValid();
+  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(
+      format_valid && !ui_->destination->currentText().isEmpty());
+  if (!format_valid)
     return;
 
   ui_->preview->clear();
@@ -125,4 +135,34 @@ void OrganiseDialog::UpdatePreviews() {
     QString filename = format_.GetFilenameForSong(song);
     ui_->preview->addItem(QDir::toNativeSeparators(filename));
   }
+}
+
+void OrganiseDialog::Reset() {
+  ui_->naming->setPlainText(kDefaultFormat);
+  ui_->replace_ascii->setChecked(false);
+  ui_->replace_spaces->setChecked(false);
+  ui_->replace_the->setChecked(false);
+  ui_->overwrite->setChecked(true);
+}
+
+void OrganiseDialog::showEvent(QShowEvent *) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  ui_->naming->setPlainText(s.value("format", kDefaultFormat).toString());
+  ui_->replace_ascii->setChecked(s.value("replace_ascii", false).toBool());
+  ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
+  ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
+  ui_->overwrite->setChecked(s.value("overwrite", true).toBool());
+}
+
+void OrganiseDialog::accept() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("format", ui_->naming->toPlainText());
+  s.setValue("replace_ascii", ui_->replace_ascii->isChecked());
+  s.setValue("replace_spaces", ui_->replace_spaces->isChecked());
+  s.setValue("replace_the", ui_->replace_the->isChecked());
+  s.setValue("overwrite", ui_->overwrite->isChecked());
+
+  QDialog::accept();
 }

@@ -26,6 +26,8 @@
 
 class Ui_OrganiseDialog;
 
+class QAbstractItemModel;
+
 class OrganiseDialog : public QDialog {
   Q_OBJECT
 
@@ -35,13 +37,24 @@ public:
 
   static const int kNumberOfPreviews;
   static const char* kDefaultFormat;
+  static const char* kSettingsGroup;
+
+  void AddDirectoryModel(QAbstractItemModel* model);
 
   void SetUrls(const QList<QUrl>& urls);
   void SetFilenames(const QStringList& filenames);
 
   bool IsFormatValid() const;
 
+public slots:
+  void accept();
+
+protected:
+  void showEvent(QShowEvent *);
+
 private slots:
+  void Reset();
+
   void InsertTag(const QString& tag);
   void UpdatePreviews();
 

@@ -28,6 +28,7 @@
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
 #include "library/libraryconfig.h"
+#include "library/librarydirectorymodel.h"
 #include "library/library.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
@@ -184,6 +185,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
   ui_->radio_view->SetModel(radio_model_);
+
+  organise_dialog_->AddDirectoryModel(library_->model()->directory_model());
 
   cover_manager_->Init();
 
