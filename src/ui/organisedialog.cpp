@@ -184,6 +184,12 @@ void OrganiseDialog::showEvent(QShowEvent *) {
   ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
   ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
   ui_->overwrite->setChecked(s.value("overwrite", true).toBool());
+
+  QString destination = s.value("destination").toString();
+  int index = ui_->destination->findText(destination);
+  if (index != -1 && !destination.isEmpty()) {
+    ui_->destination->setCurrentIndex(index);
+  }
 }
 
 void OrganiseDialog::accept() {
@@ -194,6 +200,7 @@ void OrganiseDialog::accept() {
   s.setValue("replace_spaces", ui_->replace_spaces->isChecked());
   s.setValue("replace_the", ui_->replace_the->isChecked());
   s.setValue("overwrite", ui_->overwrite->isChecked());
+  s.setValue("destination", ui_->destination->currentText());
 
   // It deletes itself when it's finished.
   Organise* organise = new Organise(
