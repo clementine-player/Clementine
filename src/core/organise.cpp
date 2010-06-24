@@ -86,7 +86,7 @@ void Organise::ProcessSomeFiles() {
     // Get the destination filename
     QString dest_filename = destination_ + "/" + format_.GetFilenameForSong(song);
 
-    // Don't do anything if it's the destination is the same as the source
+    // Don't do anything if the destination is the same as the source
     if (filename == dest_filename)
       continue;
 

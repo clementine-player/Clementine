@@ -43,11 +43,11 @@ private:
   QThread* original_thread_;
   TaskManager* task_manager_;
 
-  QString destination_;
-  OrganiseFormat format_;
-  bool copy_;
-  bool overwrite_;
-  QStringList files_;
+  const QString destination_;
+  const OrganiseFormat format_;
+  const bool copy_;
+  const bool overwrite_;
+  const QStringList files_;
 
   int task_id_;
   int progress_;
