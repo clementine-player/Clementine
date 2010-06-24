@@ -242,6 +242,8 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
     foreach (const Data& data, playlists_) {
       PlaylistItemList items = data.p->library_items_by_id(song.id());
       foreach (boost::shared_ptr<PlaylistItem> item, items) {
+        if (item->Metadata().directory_id() != song.directory_id())
+          continue;
         static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(song);
       }
     }
