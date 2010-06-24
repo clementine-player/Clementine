@@ -92,3 +92,34 @@ TEST_F(OrganiseFormatTest, Blocks) {
   song_.set_year(123);
   EXPECT_EQ("BeforeInside123After", format_.GetFilenameForSong(song_));
 }
+
+TEST_F(OrganiseFormatTest, ReplaceSpaces) {
+  song_.set_title("The Song Title");
+  format_.set_format("The Format String %title");
+
+  EXPECT_EQ("The Format String The Song Title", format_.GetFilenameForSong(song_));
+  format_.set_replace_spaces(true);
+  EXPECT_EQ("The_Format_String_The_Song_Title", format_.GetFilenameForSong(song_));
+}
+
+TEST_F(OrganiseFormatTest, ReplaceThe) {
+  song_.set_title("The Title");
+  song_.set_artist("The Artist");
+  format_.set_format("%artist %title");
+
+  EXPECT_EQ("The Artist The Title", format_.GetFilenameForSong(song_));
+  format_.set_replace_the(true);
+  EXPECT_EQ("Artist The Title", format_.GetFilenameForSong(song_));
+}
+
+TEST_F(OrganiseFormatTest, ReplaceNonAscii) {
+  song_.set_artist(QString::fromUtf8("Röyksopp"));
+  format_.set_format("%artist");
+
+  EXPECT_EQ(QString::fromUtf8("Röyksopp"), format_.GetFilenameForSong(song_));
+  format_.set_replace_non_ascii(true);
+  EXPECT_EQ("Royksopp", format_.GetFilenameForSong(song_));
+
+  song_.set_artist(QString::fromUtf8("Владимир Высоцкий"));
+  EXPECT_EQ("________ ________", format_.GetFilenameForSong(song_));
+}

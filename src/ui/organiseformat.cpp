@@ -53,8 +53,15 @@ QString OrganiseFormat::GetFilenameForSong(const Song &song) const {
     QString stripped;
     for (int i=0 ; i<filename.length() ; ++i) {
       const QCharRef c = filename[i];
-      if (c.toAscii())
+      if (c < 128)
         stripped.append(c);
+      else {
+        const QString decomposition = c.decomposition();
+        if (!decomposition.isEmpty() && decomposition[0] < 128)
+          stripped.append(decomposition[0]);
+        else
+          stripped.append("_");
+      }
     }
     filename = stripped;
   }
