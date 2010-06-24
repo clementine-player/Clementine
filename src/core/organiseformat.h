@@ -35,7 +35,7 @@ public:
   bool replace_spaces() const { return replace_spaces_; }
   bool replace_the() const { return replace_the_; }
 
-  void set_format(const QString& v) { format_ = v; }
+  void set_format(const QString& v);
   void set_replace_non_ascii(bool v) { replace_non_ascii_ = v; }
   void set_replace_spaces(bool v) { replace_spaces_ = v; }
   void set_replace_the(bool v) { replace_the_ = v; }

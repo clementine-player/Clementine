@@ -35,6 +35,11 @@ OrganiseFormat::OrganiseFormat(const QString &format)
 {
 }
 
+void OrganiseFormat::set_format(const QString &v) {
+  format_ = v;
+  format_.replace('\\', '/');
+}
+
 bool OrganiseFormat::IsValid() const {
   int pos = 0;
   QString format_copy(format_);
@@ -210,6 +215,4 @@ void OrganiseFormat::SyntaxHighlighter::highlightBlock(const QString& text) {
     pos += tag_regexp.matchedLength();
   }
 }
-
-
 

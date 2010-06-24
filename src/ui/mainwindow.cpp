@@ -123,7 +123,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     equalizer_(new Equalizer),
     transcode_dialog_(new TranscodeDialog),
     error_dialog_(new ErrorDialog),
-    organise_dialog_(new OrganiseDialog),
+    organise_dialog_(new OrganiseDialog(task_manager_)),
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
 #endif

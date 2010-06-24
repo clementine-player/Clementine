@@ -40,6 +40,8 @@ set(SOURCES
   core/gnomeglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
   core/networkaccessmanager.cpp
+  core/organise.cpp
+  core/organiseformat.cpp
   core/player.cpp
   core/qxtglobalshortcutbackend.cpp
   core/scopedtransaction.cpp
@@ -120,7 +122,6 @@ set(SOURCES
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/organisedialog.cpp
-  ui/organiseformat.cpp
   ui/qtsystemtrayicon.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
@@ -162,6 +163,7 @@ set(HEADERS
   core/gnomeglobalshortcutbackend.h
   core/mergedproxymodel.h
   core/networkaccessmanager.h
+  core/organise.h
   core/player.h
   core/songloader.h
   core/taskmanager.h

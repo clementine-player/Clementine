@@ -14,42 +14,43 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TASKMANAGER_H
-#define TASKMANAGER_H
+#ifndef ORGANISE_H
+#define ORGANISE_H
 
-#include <QMap>
-#include <QMutex>
 #include <QObject>
 
-class TaskManager : public QObject {
+#include "organiseformat.h"
+
+class TaskManager;
+
+class Organise : public QObject {
   Q_OBJECT
 
 public:
-  TaskManager(QObject* parent = 0);
+  Organise(TaskManager* task_manager, const QString& destination,
+           const OrganiseFormat& format, bool copy, bool overwrite,
+           const QStringList& files);
 
-  struct Task {
-    int id;
-    QString name;
-    int progress;
-    int progress_max;
-  };
+  static const int kBatchSize;
 
-  // Thread-safe
-  int StartTask(const QString& name);
-  QList<Task> GetTasks();
+  void Start();
 
-public slots:
-  // Thread-safe
-  void SetTaskProgress(int id, int progress, int max = 0);
-  void SetTaskFinished(int id);
-
-signals:
-  void TasksChanged();
+private slots:
+  void ProcessSomeFiles();
 
 private:
-  QMutex mutex_;
-  QMap<int, Task> tasks_;
-  int next_task_id_;
+  QThread* thread_;
+  QThread* original_thread_;
+  TaskManager* task_manager_;
+
+  QString destination_;
+  OrganiseFormat format_;
+  bool copy_;
+  bool overwrite_;
+  QStringList files_;
+
+  int task_id_;
+  int progress_;
 };
 
-#endif // TASKMANAGER_H
+#endif // ORGANISE_H

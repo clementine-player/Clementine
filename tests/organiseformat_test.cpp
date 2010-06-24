@@ -17,7 +17,7 @@
 #include "gtest/gtest.h"
 #include "test_utils.h"
 
-#include "ui/organiseformat.h"
+#include "core/organiseformat.h"
 
 class OrganiseFormatTest : public ::testing::Test {
 protected:

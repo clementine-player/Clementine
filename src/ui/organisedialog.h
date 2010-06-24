@@ -21,9 +21,10 @@
 #include <QMap>
 #include <QUrl>
 
-#include "organiseformat.h"
+#include "core/organiseformat.h"
 #include "core/song.h"
 
+class TaskManager;
 class Ui_OrganiseDialog;
 
 class QAbstractItemModel;
@@ -32,7 +33,7 @@ class OrganiseDialog : public QDialog {
   Q_OBJECT
 
 public:
-  OrganiseDialog(QWidget* parent = 0);
+  OrganiseDialog(TaskManager* task_manager, QWidget* parent = 0);
   ~OrganiseDialog();
 
   static const int kNumberOfPreviews;
@@ -60,6 +61,7 @@ private slots:
 
 private:
   Ui_OrganiseDialog* ui_;
+  TaskManager* task_manager_;
 
   OrganiseFormat format_;
 

@@ -16,6 +16,7 @@
 
 #include "organisedialog.h"
 #include "ui_organisedialog.h"
+#include "core/organise.h"
 
 #include <QDir>
 #include <QMenu>
@@ -28,9 +29,10 @@ const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 
-OrganiseDialog::OrganiseDialog(QWidget *parent)
+OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   : QDialog(parent),
-    ui_(new Ui_OrganiseDialog)
+    ui_(new Ui_OrganiseDialog),
+    task_manager_(task_manager)
 {
   ui_->setupUi(this);
   connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(Reset()));
@@ -163,6 +165,12 @@ void OrganiseDialog::accept() {
   s.setValue("replace_spaces", ui_->replace_spaces->isChecked());
   s.setValue("replace_the", ui_->replace_the->isChecked());
   s.setValue("overwrite", ui_->overwrite->isChecked());
+
+  // It deletes itself when it's finished.
+  Organise* organise = new Organise(
+      task_manager_, ui_->destination->currentText(), format_, true,
+      ui_->overwrite->isChecked(), filenames_);
+  organise->Start();
 
   QDialog::accept();
 }
