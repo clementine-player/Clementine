@@ -199,9 +199,6 @@ void OrganiseDialog::accept() {
   Organise* organise = new Organise(
       task_manager_, ui_->destination->currentText(), format_,
       !ui_->move->isChecked(), ui_->overwrite->isChecked(), filenames_);
-
-  emit PauseLibraryScanning();
-  connect(organise, SIGNAL(destroyed()), SIGNAL(ResumeLibraryScanning()));
   organise->Start();
 
   QDialog::accept();

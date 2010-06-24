@@ -52,10 +52,6 @@ public:
 public slots:
   void accept();
 
-signals:
-  void PauseLibraryScanning();
-  void ResumeLibraryScanning();
-
 protected:
   void showEvent(QShowEvent *);
 

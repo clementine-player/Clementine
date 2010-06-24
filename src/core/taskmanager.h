@@ -32,19 +32,22 @@ public:
     QString name;
     int progress;
     int progress_max;
+    bool blocks_library_scans;
   };
 
-  // Thread-safe
-  int StartTask(const QString& name);
+  // Everything here is thread safe
   QList<Task> GetTasks();
 
-public slots:
-  // Thread-safe
+  int StartTask(const QString& name);
+  void SetTaskBlocksLibraryScans(int id);
   void SetTaskProgress(int id, int progress, int max = 0);
   void SetTaskFinished(int id);
 
 signals:
   void TasksChanged();
+
+  void PauseLibraryWatchers();
+  void ResumeLibraryWatchers();
 
 private:
   QMutex mutex_;

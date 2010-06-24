@@ -45,6 +45,7 @@ void Organise::Start() {
     return;
 
   task_id_ = task_manager_->StartTask(tr("Organising files"));
+  task_manager_->SetTaskBlocksLibraryScans(true);
 
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ProcessSomeFiles()));

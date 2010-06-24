@@ -27,6 +27,7 @@ int TaskManager::StartTask(const QString& name) {
   t.name = name;
   t.progress = 0;
   t.progress_max = 0;
+  t.blocks_library_scans = false;
 
   {
     QMutexLocker l(&mutex_);
@@ -49,6 +50,20 @@ QList<TaskManager::Task> TaskManager::GetTasks() {
   return ret;
 }
 
+void TaskManager::SetTaskBlocksLibraryScans(int id) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!tasks_.contains(id))
+      return;
+
+    Task& t = tasks_[id];
+    t.blocks_library_scans = true;
+  }
+
+  emit TasksChanged();
+  emit PauseLibraryWatchers();
+}
+
 void TaskManager::SetTaskProgress(int id, int progress, int max) {
   {
     QMutexLocker l(&mutex_);
@@ -65,11 +80,27 @@ void TaskManager::SetTaskProgress(int id, int progress, int max) {
 }
 
 void TaskManager::SetTaskFinished(int id) {
+  bool resume_library_watchers = false;
+
   {
     QMutexLocker l(&mutex_);
     if (!tasks_.contains(id))
       return;
+
+    if (tasks_[id].blocks_library_scans) {
+      resume_library_watchers = true;
+      foreach (const Task& task, tasks_.values()) {
+        if (task.id != id && task.blocks_library_scans) {
+          resume_library_watchers = false;
+          break;
+        }
+      }
+    }
+
     tasks_.remove(id);
   }
+
   emit TasksChanged();
+  if (resume_library_watchers)
+    emit ResumeLibraryWatchers();
 }
