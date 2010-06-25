@@ -285,7 +285,7 @@ set(RESOURCES
 )
 
 set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
-if ("${LINGUAS}" STREQUAL "All")
+if (LINGUAS STREQUAL "All")
   set (LANGUAGES
     ar
     cs
@@ -314,14 +314,14 @@ if ("${LINGUAS}" STREQUAL "All")
     zh_CN
     zh_TW
   )
-else ("${LINGUAS}" STREQUAL "All")
-  if (NOT "${LINGUAS}" OR "${LINGUAS}" STREQUAL "None")
+else (LINGUAS STREQUAL "All")
+  if (NOT LINGUAS OR LINGUAS STREQUAL "None")
     set (LANGUAGES "")
-  else (NOT "${LINGUAS}" OR "${LINGUAS}" STREQUAL "None")
+  else (NOT LINGUAS OR LINGUAS STREQUAL "None")
     string(REGEX MATCHALL [a-zA-Z_]+
            LANGUAGES ${LINGUAS})
-  endif (NOT "${LINGUAS}" OR "${LINGUAS}" STREQUAL "None")
-endif ("${LINGUAS}" STREQUAL "All")
+  endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
+endif (LINGUAS STREQUAL "All")
 
 # Engines
 set(GST_ENGINE_SRC engines/gstengine.cpp engines/gstequalizer.cpp engines/gstenginepipeline.cpp)
