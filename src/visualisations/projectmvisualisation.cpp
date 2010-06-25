@@ -19,7 +19,6 @@
 #include "projectmvisualisation.h"
 #include "visualisationcontainer.h"
 
-#include <QTimerEvent>
 #include <QPainter>
 #include <QPaintEngine>
 #include <QtDebug>

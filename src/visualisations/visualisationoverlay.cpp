@@ -65,6 +65,8 @@ void VisualisationOverlay::ShowSettingsMenu() {
 }
 
 void VisualisationOverlay::timerEvent(QTimerEvent* e) {
+  qDebug() << __PRETTY_FUNCTION__;
+
   QWidget::timerEvent(e);
 
   if (e->timerId() == fade_out_timeout_.timerId()) {

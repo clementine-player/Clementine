@@ -86,6 +86,7 @@ void AnalyzerContainer::mouseReleaseEvent(QMouseEvent* e) {
 }
 
 void AnalyzerContainer::ShowPopupMenu() {
+  qDebug() << __PRETTY_FUNCTION__;
   context_menu_->popup(last_click_pos_);
 }
 

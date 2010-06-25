@@ -437,6 +437,8 @@ void GstEnginePipeline::FaderTimelineFinished() {
 }
 
 void GstEnginePipeline::timerEvent(QTimerEvent* e) {
+  qDebug() << __PRETTY_FUNCTION__;
+
   if (e->timerId() == fader_fudge_timer_.timerId()) {
     fader_fudge_timer_.stop();
     emit FaderFinished();

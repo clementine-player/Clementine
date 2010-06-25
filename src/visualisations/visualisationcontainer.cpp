@@ -169,6 +169,8 @@ void VisualisationContainer::SizeChanged() {
 }
 
 void VisualisationContainer::timerEvent(QTimerEvent* e) {
+  qDebug() << __PRETTY_FUNCTION__;
+
   QGraphicsView::timerEvent(e);
   if (e->timerId() == update_timer_.timerId())
     scene()->update();
