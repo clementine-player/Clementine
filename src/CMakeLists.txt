@@ -414,6 +414,14 @@ if(NOT APPLE AND NOT WIN32)
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
+  # DeviceKit DBUS interfaces
+  qt4_add_dbus_interface(SOURCES
+      dbus/org.freedesktop.UDisks.xml
+      dbus/udisks)
+  qt4_add_dbus_interface(SOURCES
+      dbus/org.freedesktop.UDisks.Device.xml
+      dbus/udisksdevice)
+
   # MPRIS source
   list(APPEND SOURCES core/mpris.cpp)
   list(APPEND HEADERS core/mpris.h)
