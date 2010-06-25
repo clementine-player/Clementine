@@ -31,7 +31,6 @@
 #include <QWheelEvent>
 #include <QMouseEvent>
 #include <QStyleOptionSlider>
-#include <QtDebug>
 
 
 Amarok::Slider::Slider( Qt::Orientation orientation, QWidget *parent, uint max )
@@ -264,8 +263,6 @@ Amarok::VolumeSlider::generateGradient()
 void
 Amarok::VolumeSlider::slotAnimTimer() //SLOT
 {
-  qDebug() << __PRETTY_FUNCTION__;
-
     if ( m_animEnter ) {
         m_animCount++;
         update();

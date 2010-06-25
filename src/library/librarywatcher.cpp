@@ -396,8 +396,6 @@ void LibraryWatcher::DirectoryChanged(const QString &subdir) {
 }
 
 void LibraryWatcher::RescanPathsNow() {
-  qDebug() << __PRETTY_FUNCTION__;
-
   foreach (int dir, rescan_queue_.keys()) {
     if (stop_requested_) return;
     ScanTransaction transaction(this, dir, false);

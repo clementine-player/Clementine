@@ -72,7 +72,6 @@ void AlbumCoverFetcher::Clear() {
 }
 
 void AlbumCoverFetcher::StartRequests() {
-  qDebug() << __PRETTY_FUNCTION__;
   if (queued_requests_.isEmpty()) {
     request_starter_->stop();
     return;

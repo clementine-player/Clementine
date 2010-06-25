@@ -260,8 +260,6 @@ void PlaylistView::InvalidateCachedCurrentPixmap() {
 }
 
 void PlaylistView::timerEvent(QTimerEvent* event) {
-  qDebug() << __PRETTY_FUNCTION__;
-
   QTreeView::timerEvent(event);
   if (event->timerId() == glow_timer_.timerId())
     GlowIntensityChanged();
@@ -425,8 +423,6 @@ void PlaylistView::scrollContentsBy(int dx, int dy) {
 }
 
 void PlaylistView::InhibitAutoscrollTimeout() {
-  qDebug() << __PRETTY_FUNCTION__;
-
   // For 1 minute after the user clicks on or scrolls the playlist we promise
   // not to automatically scroll the view to keep up with a track change.
   inhibit_autoscroll_ = false;

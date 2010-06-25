@@ -21,7 +21,6 @@
 #include <QFileInfo>
 #include <QTimer>
 #include <QThread>
-#include <QtDebug>
 
 const int Organise::kBatchSize = 10;
 
@@ -56,8 +55,6 @@ void Organise::Start() {
 }
 
 void Organise::ProcessSomeFiles() {
-  qDebug() << __PRETTY_FUNCTION__;
-
   // None left?
   if (progress_ >= files_.count()) {
     task_manager_->SetTaskFinished(task_id_);

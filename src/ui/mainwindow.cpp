@@ -785,8 +785,6 @@ void MainWindow::FilePathChanged(const QString& path) {
 }
 
 void MainWindow::UpdateTrackPosition() {
-  qDebug() << __PRETTY_FUNCTION__;
-
   // Track position in seconds
   const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
   const int length = player_->GetCurrentItem()->Metadata().length();

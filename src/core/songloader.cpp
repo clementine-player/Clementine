@@ -357,7 +357,6 @@ void SongLoader::AddAsRawStream() {
 }
 
 void SongLoader::Timeout() {
-  qDebug() << __PRETTY_FUNCTION__;
   state_ = Finished;
   success_ = false;
   StopTypefind();

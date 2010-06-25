@@ -218,7 +218,6 @@ Analyzer::initSin( Scope &v, const uint size ) //static
 }
 
 void Analyzer::Base::timerEvent(QTimerEvent* e) {
-  qDebug() << __PRETTY_FUNCTION__;
   QWidget::timerEvent(e);
   if (e->timerId() != m_timer.timerId())
     return;

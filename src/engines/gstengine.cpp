@@ -561,8 +561,6 @@ void GstEngine::Seek(uint ms) {
 }
 
 void GstEngine::SeekNow() {
-  qDebug() << __PRETTY_FUNCTION__;
-
   if (!waiting_to_seek_) return;
   waiting_to_seek_ = false;
 
@@ -598,8 +596,6 @@ void GstEngine::SetVolumeSW( uint percent ) {
 
 
 void GstEngine::timerEvent( QTimerEvent* ) {
-  qDebug() << __PRETTY_FUNCTION__;
-
   // keep the scope from building while we are not visible
   // this is why the timer must run as long as we are playing, and not just when
   // we are fading
