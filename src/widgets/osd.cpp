@@ -18,6 +18,10 @@
 #include "osdpretty.h"
 #include "ui/systemtrayicon.h"
 
+#ifdef Q_WS_X11
+# include "dbus/notification.h"
+#endif
+
 #include <QCoreApplication>
 #include <QtDebug>
 #include <QSettings>

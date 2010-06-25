@@ -15,6 +15,7 @@
 */
 
 #include "osd.h"
+#include "dbus/notification.h"
 
 #include <QCoreApplication>
 #include <QtDebug>
@@ -52,8 +53,8 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
 }
 
 void OSD::Init() {
-  interface_.reset(new org::freedesktop::Notifications(
-      "org.freedesktop.Notifications",
+  interface_.reset(new OrgFreedesktopNotificationsInterface(
+      OrgFreedesktopNotificationsInterface::staticInterfaceName(),
       "/org/freedesktop/Notifications",
       QDBusConnection::sessionBus()));
   if (!interface_->isValid()) {

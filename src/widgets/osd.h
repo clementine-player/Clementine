@@ -17,6 +17,7 @@
 #ifndef OSD_H
 #define OSD_H
 
+#include <QDateTime>
 #include <QImage>
 #include <QObject>
 
@@ -26,6 +27,7 @@
 #include "core/song.h"
 
 class NetworkAccessManager;
+class OrgFreedesktopNotificationsInterface;
 class OSDPretty;
 class SystemTrayIcon;
 
@@ -34,7 +36,6 @@ class QDBusPendingCallWatcher;
 #ifdef Q_WS_X11
 # include <QDBusArgument>
 # include <boost/scoped_ptr.hpp>
-# include "dbus/notification.h"
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
@@ -118,7 +119,7 @@ class OSD : public QObject {
 #endif  // Q_OS_DARWIN
 
 #ifdef Q_WS_X11
-  boost::scoped_ptr<org::freedesktop::Notifications> interface_;
+  boost::scoped_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
   QDateTime last_notification_time_;
 #endif

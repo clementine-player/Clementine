@@ -52,6 +52,10 @@ set(SOURCES
   core/taskmanager.cpp
   core/utilities.cpp
 
+  devices/device.cpp
+  devices/deviceengine.cpp
+  devices/filesystemdeviceengine.cpp
+
   engines/enginebase.cpp
 
   library/groupbydialog.cpp
@@ -167,6 +171,10 @@ set(HEADERS
   core/player.h
   core/songloader.h
   core/taskmanager.h
+
+  devices/device.h
+  devices/deviceengine.h
+  devices/filesystemdeviceengine.h
 
   engines/enginebase.h
 
@@ -397,6 +405,11 @@ list(APPEND OTHER_SOURCES
 # DBUS and MPRIS - Linux specific
 if(NOT APPLE AND NOT WIN32)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
+
+  # Hack to get it to generate interfaces without namespaces - required
+  # because otherwise org::freedesktop::UDisks and
+  # org::freedesktop::UDisks::Device conflict.
+  list(APPEND QT_DBUSXML2CPP_EXECUTABLE -N)
 
   # MPRIS DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
