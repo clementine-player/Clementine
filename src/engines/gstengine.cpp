@@ -529,6 +529,9 @@ void GstEngine::Pause() {
   if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
     current_pipeline_->SetState(GST_STATE_PAUSED);
     emit StateChanged(Engine::Paused);
+
+    killTimer(timer_id_);
+    timer_id_ = -1;
   }
 }
 
@@ -539,6 +542,8 @@ void GstEngine::Unpause() {
   if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
     current_pipeline_->SetState(GST_STATE_PLAYING);
     emit StateChanged(Engine::Playing);
+
+    timer_id_ = startTimer(kTimerInterval);
   }
 }
 
