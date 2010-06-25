@@ -123,3 +123,19 @@ TEST_F(OrganiseFormatTest, ReplaceNonAscii) {
   song_.set_artist(QString::fromUtf8("Владимир Высоцкий"));
   EXPECT_EQ("________ ________", format_.GetFilenameForSong(song_));
 }
+
+TEST_F(OrganiseFormatTest, TrackNumberPadding) {
+  format_.set_format("%track");
+
+  song_.set_track(9);
+  EXPECT_EQ("09", format_.GetFilenameForSong(song_));
+
+  song_.set_track(99);
+  EXPECT_EQ("99", format_.GetFilenameForSong(song_));
+
+  song_.set_track(999);
+  EXPECT_EQ("999", format_.GetFilenameForSong(song_));
+
+  song_.set_track(0);
+  EXPECT_EQ("", format_.GetFilenameForSong(song_));
+}

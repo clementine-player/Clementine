@@ -139,6 +139,11 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
 
   if (value == "0" || value == "-1")
     value = "";
+
+  // Prepend a 0 to single-digit track numbers
+  if (tag == "track" && value.length() == 1)
+    value.prepend('0');
+
   return value;
 }
 
