@@ -78,13 +78,8 @@ macro(add_test_file test_source gui_required)
       target_link_libraries(${TEST_NAME} test_main)
     endif (GUI_REQUIRED)
 
-    if (WIN32)
-        add_custom_command(TARGET test POST_BUILD
-            COMMAND ./${TEST_NAME}.exe)
-    else (WIN32)
-        add_custom_command(TARGET test POST_BUILD
-            COMMAND ./${TEST_NAME})
-    endif (WIN32)
+    add_custom_command(TARGET test POST_BUILD
+        COMMAND ./${TEST_NAME}${CMAKE_EXECUTABLE_SUFFIX})
     add_dependencies(build_tests ${TEST_NAME})
 endmacro (add_test_file)
 
