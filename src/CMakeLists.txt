@@ -394,22 +394,27 @@ list(APPEND OTHER_SOURCES
   widgets/osd_x11.cpp
 )
 
-# MPRIS - Linux specific
+# DBUS and MPRIS - Linux specific
 if(NOT APPLE AND NOT WIN32)
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
+
+  # MPRIS DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
-      ../data/org.freedesktop.MediaPlayer.player.xml
+      dbus/org.freedesktop.MediaPlayer.player.xml
       core/player.h Player core/mpris_player MprisPlayer)
   qt4_add_dbus_adaptor(SOURCES
-      ../data/org.freedesktop.MediaPlayer.root.xml
+      dbus/org.freedesktop.MediaPlayer.root.xml
       core/mpris.h MPRIS core/mpris_root MprisRoot)
   qt4_add_dbus_adaptor(SOURCES
-      ../data/org.freedesktop.MediaPlayer.tracklist.xml
+      dbus/org.freedesktop.MediaPlayer.tracklist.xml
       core/player.h Player core/mpris_tracklist MprisTrackList)
 
-  # org.freedesktop.Notifications
+  # org.freedesktop.Notifications DBUS interface
   qt4_add_dbus_interface(SOURCES
-      ../data/org.freedesktop.Notifications.xml
-      core/notification)
+      dbus/org.freedesktop.Notifications.xml
+      dbus/notification)
+
+  # MPRIS source
   list(APPEND SOURCES core/mpris.cpp)
   list(APPEND HEADERS core/mpris.h)
 endif(NOT APPLE AND NOT WIN32)

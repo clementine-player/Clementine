@@ -34,7 +34,7 @@ class QDBusPendingCallWatcher;
 #ifdef Q_WS_X11
 # include <QDBusArgument>
 # include <boost/scoped_ptr.hpp>
-# include "core/notification.h"
+# include "dbus/notification.h"
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
