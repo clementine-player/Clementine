@@ -34,6 +34,8 @@
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 
+#include "devices/devicetest.h" // TODO: Remove me
+
 #include <QtSingleApplication>
 #include <QtDebug>
 #include <QLibraryInfo>
@@ -163,6 +165,8 @@ int main(int argc, char *argv[]) {
   QDBusConnection::sessionBus().registerService("org.mpris.clementine");
   MPRIS mpris;
 #endif
+
+  DeviceTest device_test; // TODO: Remove me (and the header)
 
   // Window
   MainWindow w(&network, options.engine());

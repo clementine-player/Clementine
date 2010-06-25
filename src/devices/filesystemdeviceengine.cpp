@@ -18,15 +18,21 @@
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
 
-FilesystemDeviceEngine::FilesystemDeviceEngine(QObject *parent)
-  : DeviceEngine(parent)
+#include <QtDebug>
+
+FilesystemDeviceEngine::FilesystemDeviceEngine()
 {
 }
 
 FilesystemDeviceEngine::~FilesystemDeviceEngine() {
+  qDebug() << __PRETTY_FUNCTION__;
 }
 
-bool FilesystemDeviceEngine::Init() {
+QString FilesystemDeviceEngine::DeviceData::unique_id() const {
+  return QString("%1 %2 %3 %4").arg(drive_serial, drive_vendor, drive_model).arg(device_size);
+}
+
+void FilesystemDeviceEngine::Init() {
   interface_.reset(new OrgFreedesktopUDisksInterface(
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       "/org/freedesktop/UDisks", QDBusConnection::systemBus()));
@@ -34,71 +40,15 @@ bool FilesystemDeviceEngine::Init() {
   if (!interface_->isValid()) {
     qWarning() << "Error connecting to the DeviceKit-disks DBUS service";
     interface_.reset();
-    return false;
+    return;
   }
 
-  connect(interface_.get(), SIGNAL(DeviceAdded(QDBusObjectPath)), SLOT(DeviceAdded(QDBusObjectPath)));
-  connect(interface_.get(), SIGNAL(DeviceRemoved(QDBusObjectPath)), SLOT(DeviceRemoved(QDBusObjectPath)));
-  connect(interface_.get(), SIGNAL(DeviceChanged(QDBusObjectPath)), SLOT(DeviceChanged(QDBusObjectPath)));
+  // Listen for changes
+  connect(interface_.get(), SIGNAL(DeviceAdded(QDBusObjectPath)), SLOT(DBusDeviceAdded(QDBusObjectPath)));
+  connect(interface_.get(), SIGNAL(DeviceRemoved(QDBusObjectPath)), SLOT(DBusDeviceRemoved(QDBusObjectPath)));
+  connect(interface_.get(), SIGNAL(DeviceChanged(QDBusObjectPath)), SLOT(DBusDeviceChanged(QDBusObjectPath)));
 
-  Reset();
-  return true;
-}
-
-QModelIndex FilesystemDeviceEngine::index(int row, int column, const QModelIndex &parent) const {
-  if (parent.isValid())
-    return QModelIndex();
-  return createIndex(row, column);
-}
-
-int FilesystemDeviceEngine::rowCount(const QModelIndex &parent) const {
-  if (parent.isValid())
-    return 0;
-  return device_info_.count();
-}
-
-int FilesystemDeviceEngine::columnCount(const QModelIndex &parent) const {
-  return LastFilesystemDeviceEngineColumn;
-}
-
-QVariant FilesystemDeviceEngine::data(const QModelIndex &index, int role) const {
-  const DeviceInfo& info = device_info_[index.row()];
-
-  switch (index.column()) {
-    case Column_UniqueID:
-      return info.unique_id();
-
-    case Column_FriendlyName:
-      if (!info.device_presentation_name.isEmpty())
-        return info.device_presentation_name;
-      if (!info.drive_model.isEmpty() || !info.drive_vendor.isEmpty())
-        return QString("%1 %2").arg(info.drive_vendor, info.drive_model);
-      return info.drive_serial;
-
-    case Column_Manufacturer:
-      return info.drive_vendor;
-
-    case Column_Model:
-      return info.drive_model;
-
-    case Column_Capacity:
-      return info.device_size;
-
-    case Column_FreeSpace:
-      return QVariant();
-
-    case Column_DbusPath:
-      return info.dbus_path;
-
-    case Column_MountPath:
-      return info.device_mount_paths.isEmpty() ? QVariant() : info.device_mount_paths[0];
-
-    default:
-      return QVariant();
-  }
-}
-
-void FilesystemDeviceEngine::Reset() {
+  // Get all the devices currently attached
   QDBusPendingReply<QList<QDBusObjectPath> > reply = interface_->EnumerateDevices();
   reply.waitForFinished();
 
@@ -107,30 +57,81 @@ void FilesystemDeviceEngine::Reset() {
     return;
   }
 
-#if QT_VERSION >= 0x040600
-  emit beginResetModel();
-#endif
-
-  device_info_.clear();
+  // Get information about each one
+  QMap<QString, DeviceData> device_data;
   foreach (const QDBusObjectPath& path, reply.value()) {
-    DeviceInfo info = ReadDeviceInfo(path);
-    if (info.suitable)
-      device_info_ << info;
+    DeviceData data = ReadDeviceData(path);
+    if (data.suitable)
+      device_data[data.unique_id()] = data;
   }
 
-#if QT_VERSION >= 0x040600
-  emit endResetModel();
-#else
-  reset();
-#endif
+  // Update the internal cache
+  {
+    QMutexLocker l(&mutex_);
+    device_data_ = device_data;
+  }
+
+  // Notify about the changes
+  foreach (const QString& id, device_data.keys()) {
+    emit DeviceAdded(id);
+  }
 }
 
-FilesystemDeviceEngine::DeviceInfo FilesystemDeviceEngine::ReadDeviceInfo(
+QStringList FilesystemDeviceEngine::DeviceUniqueIDs() {
+  QMutexLocker l(&mutex_);
+  return device_data_.keys();
+}
+
+QVariant FilesystemDeviceEngine::DeviceInfo(const QString& id, int field) {
+  DeviceData data;
+
+  {
+    QMutexLocker l(&mutex_);
+    if (!device_data_.contains(id))
+      return QVariant();
+    data = device_data_[id];
+  }
+
+  switch (field) {
+    case Field_UniqueID:
+      return data.unique_id();
+
+    case Field_FriendlyName:
+      if (!data.device_presentation_name.isEmpty())
+        return data.device_presentation_name;
+      if (!data.drive_model.isEmpty() || !data.drive_vendor.isEmpty())
+        return QString("%1 %2").arg(data.drive_vendor, data.drive_model);
+      return data.drive_serial;
+
+    case Field_Manufacturer:
+      return data.drive_vendor;
+
+    case Field_Model:
+      return data.drive_model;
+
+    case Field_Capacity:
+      return data.device_size;
+
+    case Field_FreeSpace:
+      return QVariant();
+
+    case Field_DbusPath:
+      return data.dbus_path;
+
+    case Field_MountPath:
+      return data.device_mount_paths.isEmpty() ? QVariant() : data.device_mount_paths[0];
+
+    default:
+      return QVariant();
+  }
+}
+
+FilesystemDeviceEngine::DeviceData FilesystemDeviceEngine::ReadDeviceData(
     const QDBusObjectPath &path) const {
-  DeviceInfo ret;
+  DeviceData ret;
 
   OrgFreedesktopUDisksDeviceInterface device(
-      OrgFreedesktopUDisksDeviceInterface::staticInterfaceName(),
+      OrgFreedesktopUDisksInterface::staticInterfaceName(),
       path.path(), QDBusConnection::systemBus());
   if (!device.isValid()) {
     qWarning() << "Error connecting to the device interface on" << path.path();
@@ -153,39 +154,63 @@ FilesystemDeviceEngine::DeviceInfo FilesystemDeviceEngine::ReadDeviceInfo(
   ret.device_presentation_name = device.devicePresentationName();
   ret.device_presentation_icon_name = device.devicePresentationIconName();
   ret.device_size = device.deviceSize();
+  ret.device_mount_paths = device.deviceMountPaths();
   return ret;
 }
 
-void FilesystemDeviceEngine::DeviceAdded(const QDBusObjectPath &path) {
-  DeviceInfo info = ReadDeviceInfo(path);
-  if (!info.suitable)
+void FilesystemDeviceEngine::DBusDeviceAdded(const QDBusObjectPath &path) {
+  DeviceData data = ReadDeviceData(path);
+  if (!data.suitable)
     return;
 
-  emit beginInsertRows(QModelIndex(), device_info_.count(), device_info_.count());
-  device_info_ << info;
-  emit endInsertRows();
-}
-
-void FilesystemDeviceEngine::DeviceRemoved(const QDBusObjectPath &path) {
-  QModelIndex index = FindDevice(path);
-  if (!index.isValid())
-    return;
-
-  emit beginRemoveRows(QModelIndex(), index.row(), index.row());
-  device_info_.removeAt(index.row());
-  emit endRemoveRows();
-}
-
-void FilesystemDeviceEngine::DeviceChanged(const QDBusObjectPath &path) {
-  QModelIndex index = FindDevice(path);
-  DeviceInfo info = ReadDeviceInfo(path);
-
-  if (index.isValid() && !info.suitable)
-    DeviceRemoved(path);
-  else if (!index.isValid() && info.suitable)
-    DeviceAdded(path);
-  else if (index.isValid() && info.suitable) {
-    device_info_[index.row()] = info;
-    emit dataChanged(index, index.sibling(index.row(), columnCount()));
+  {
+    QMutexLocker l(&mutex_);
+    device_data_[data.unique_id()] = data;
   }
+
+  emit DeviceAdded(data.unique_id());
+}
+
+void FilesystemDeviceEngine::DBusDeviceRemoved(const QDBusObjectPath &path) {
+  QString id;
+  {
+    QMutexLocker l(&mutex_);
+    id = FindUniqueIdByPath(path);
+    if (id.isNull())
+      return;
+
+    device_data_.remove(id);
+  }
+
+  emit DeviceRemoved(id);
+}
+
+void FilesystemDeviceEngine::DBusDeviceChanged(const QDBusObjectPath &path) {
+  bool already_known = false;
+  {
+    QMutexLocker l(&mutex_);
+    already_known = !FindUniqueIdByPath(path).isNull();
+  }
+
+  DeviceData data = ReadDeviceData(path);
+
+  if (already_known && !data.suitable)
+    DeviceRemoved(data.unique_id());
+  else if (!already_known && data.suitable)
+    DeviceAdded(data.unique_id());
+  else if (already_known && data.suitable) {
+    {
+      QMutexLocker l(&mutex_);
+      device_data_[data.unique_id()] = data;
+    }
+    emit DeviceChanged(data.unique_id());
+  }
+}
+
+QString FilesystemDeviceEngine::FindUniqueIdByPath(const QDBusObjectPath &path) const {
+  foreach (const DeviceData& data, device_data_) {
+    if (data.dbus_path == path.path())
+      return data.unique_id();
+  }
+  return QString();
 }

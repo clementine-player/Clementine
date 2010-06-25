@@ -14,50 +14,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICEENGINE_H
-#define DEVICEENGINE_H
+#ifndef DEVICETEST_H
+#define DEVICETEST_H
 
-#include <QAbstractItemModel>
+#include <QObject>
 
-class DeviceEngine : public QObject {
+class DeviceEngine;
+
+class DeviceTest : public QObject {
   Q_OBJECT
 
 public:
-  DeviceEngine();
-  ~DeviceEngine();
+  DeviceTest(QObject* parent = 0);
+  ~DeviceTest();
 
-  enum Field {
-    Field_UniqueID = 0,
-    Field_FriendlyName,
-    Field_Manufacturer,
-    Field_Model,
-    Field_Capacity,
-    Field_FreeSpace,
-
-    LastDeviceEngineField
-  };
-
-  // Tries to start the thread and initialise the engine.  This object will be
-  // moved to the new thread.
-  void Start();
-
-  // Query information about the devices that are available.  Thread-safe.
-  virtual QStringList DeviceUniqueIDs() = 0;
-  virtual QVariant DeviceInfo(const QString& id, int field) = 0;
-
-signals:
+public slots:
   void DeviceAdded(const QString& id);
   void DeviceRemoved(const QString& id);
   void DeviceChanged(const QString& id);
 
-protected:
-  virtual void Init() = 0;
-
-protected:
-  QThread* thread_;
-
-private slots:
-  void ThreadStarted();
+private:
+  QList<DeviceEngine*> engines_;
 };
 
-#endif // DEVICEENGINE_H
+#endif // DEVICETEST_H

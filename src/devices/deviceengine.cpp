@@ -16,7 +16,30 @@
 
 #include "deviceengine.h"
 
-DeviceEngine::DeviceEngine(QObject *parent)
-  : QAbstractItemModel(parent)
+#include <QThread>
+#include <QtDebug>
+
+DeviceEngine::DeviceEngine()
+  : thread_(NULL)
 {
+}
+
+DeviceEngine::~DeviceEngine() {
+  qDebug() << __PRETTY_FUNCTION__;
+  if (thread_) {
+    thread_->quit();
+    thread_->wait(1000);
+  }
+}
+
+void DeviceEngine::Start() {
+  thread_ = new QThread;
+  connect(thread_, SIGNAL(started()), SLOT(ThreadStarted()));
+
+  moveToThread(thread_);
+  thread_->start();
+}
+
+void DeviceEngine::ThreadStarted() {
+  Init();
 }

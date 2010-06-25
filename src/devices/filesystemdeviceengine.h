@@ -19,6 +19,7 @@
 
 #include "deviceengine.h"
 
+#include <QMutex>
 #include <QStringList>
 
 #include <boost/scoped_ptr.hpp>
@@ -31,31 +32,32 @@ class FilesystemDeviceEngine : public DeviceEngine {
   Q_OBJECT
 
 public:
-  FilesystemDeviceEngine(QObject *parent = 0);
+  FilesystemDeviceEngine();
   ~FilesystemDeviceEngine();
 
-  enum Column {
-    Column_MountPath = LastDeviceEngineColumn,
-    Column_DbusPath,
+  enum Field {
+    Field_MountPath = LastDeviceEngineField,
+    Field_DbusPath,
 
-    LastFilesystemDeviceEngineColumn
+    LastFilesystemDeviceEngineField
   };
 
-  bool Init();
+  QStringList DeviceUniqueIDs();
+  QVariant DeviceInfo(const QString& id, int field);
 
-  QModelIndex index(int row, int column, const QModelIndex &parent) const;
-  int rowCount(const QModelIndex &parent = QModelIndex()) const;
-  int columnCount(const QModelIndex &parent = QModelIndex()) const;
-  QVariant data(const QModelIndex &index, int role) const;
+protected:
+  void Init();
 
 private slots:
-  void DeviceAdded(const QDBusObjectPath& path);
-  void DeviceRemoved(const QDBusObjectPath& path);
-  void DeviceChanged(const QDBusObjectPath& path);
+  void DBusDeviceAdded(const QDBusObjectPath& path);
+  void DBusDeviceRemoved(const QDBusObjectPath& path);
+  void DBusDeviceChanged(const QDBusObjectPath& path);
 
 private:
-  struct DeviceInfo {
-    DeviceInfo() : suitable(false), device_size(0) {}
+  struct DeviceData {
+    DeviceData() : suitable(false), device_size(0) {}
+
+    QString unique_id() const;
 
     bool suitable;
     QString dbus_path;
@@ -66,19 +68,18 @@ private:
     QString device_presentation_icon_name;
     QStringList device_mount_paths;
     quint64 device_size;
-
-    QString unique_id() const;
   };
 
-  void Reset();
-  DeviceInfo ReadDeviceInfo(const QDBusObjectPath& path) const;
+  DeviceData ReadDeviceData(const QDBusObjectPath& path) const;
 
-  QModelIndex FindDevice(const QDBusObjectPath& path) const;
+  // You MUST hold the mutex while calling this function
+  QString FindUniqueIdByPath(const QDBusObjectPath& path) const;
 
 private:
   boost::scoped_ptr<OrgFreedesktopUDisksInterface> interface_;
 
-  QList<DeviceInfo> device_info_;
+  QMutex mutex_;
+  QMap<QString, DeviceData> device_data_;
 };
 
 #endif // FILESYSTEMDEVICEENGINE_H

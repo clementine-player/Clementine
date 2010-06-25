@@ -54,6 +54,7 @@ set(SOURCES
 
   devices/device.cpp
   devices/deviceengine.cpp
+  devices/devicetest.cpp
   devices/filesystemdeviceengine.cpp
 
   engines/enginebase.cpp
@@ -174,6 +175,7 @@ set(HEADERS
 
   devices/device.h
   devices/deviceengine.h
+  devices/devicetest.h
   devices/filesystemdeviceengine.h
 
   engines/enginebase.h
