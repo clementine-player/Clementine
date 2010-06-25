@@ -14,9 +14,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "device.h"
+#include "filesystemdevice.h"
+#include "library/librarybackend.h"
 
-Device::Device(QObject *parent)
-  : QObject(parent)
+FilesystemDevice::FilesystemDevice(const QString& mount_point, QObject* parent)
+  : ConnectedDevice(parent)
 {
+  backend_->AddDirectory(mount_point);
 }

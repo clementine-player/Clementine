@@ -15,6 +15,7 @@
 */
 
 #include "devicekitlister.h"
+#include "filesystemdevice.h"
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
 
@@ -142,6 +143,7 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
   // aren't partitions
   if (device.deviceIsSystemInternal() ||
       device.devicePresentationHide() ||
+      device.deviceMountPaths().isEmpty() ||
       !device.deviceIsPartition()) {
     return ret;
   }
@@ -195,9 +197,9 @@ void DeviceKitLister::DBusDeviceChanged(const QDBusObjectPath &path) {
   DeviceData data = ReadDeviceData(path);
 
   if (already_known && !data.suitable)
-    DeviceRemoved(data.unique_id());
+    DBusDeviceRemoved(path);
   else if (!already_known && data.suitable)
-    DeviceAdded(data.unique_id());
+    DBusDeviceAdded(path);
   else if (already_known && data.suitable) {
     {
       QMutexLocker l(&mutex_);
@@ -213,4 +215,8 @@ QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
       return data.unique_id();
   }
   return QString();
+}
+
+ConnectedDevice* DeviceKitLister::Connect(const QString &id, QObject *parent) {
+  return new FilesystemDevice(DeviceInfo(id, Field_MountPath).toString(), parent);
 }

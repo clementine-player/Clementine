@@ -52,10 +52,11 @@ set(SOURCES
   core/taskmanager.cpp
   core/utilities.cpp
 
-  devices/device.cpp
+  devices/connecteddevice.cpp
   devices/devicekitlister.cpp
   devices/devicelister.cpp
   devices/devicetest.cpp
+  devices/filesystemdevice.cpp
 
   engines/enginebase.cpp
 
@@ -173,10 +174,11 @@ set(HEADERS
   core/songloader.h
   core/taskmanager.h
 
-  devices/device.h
+  devices/connecteddevice.h
   devices/devicekitlister.h
   devices/devicelister.h
   devices/devicetest.h
+  devices/filesystemdevice.h
 
   engines/enginebase.h
 

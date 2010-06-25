@@ -14,16 +14,37 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICE_H
-#define DEVICE_H
+#ifndef CONNECTEDDEVICE_H
+#define CONNECTEDDEVICE_H
 
 #include <QObject>
 
-class Device : public QObject {
+#include "core/backgroundthread.h"
+
+class Database;
+class DeviceLister;
+class LibraryBackend;
+class LibraryModel;
+
+class ConnectedDevice : public QObject {
   Q_OBJECT
 
 public:
-  Device(QObject *parent = 0);
+  ConnectedDevice(QObject *parent = 0);
+
+  void set_lister(DeviceLister* lister, const QString& id);
+  DeviceLister* lister() const { return lister_; }
+  QString unique_id() const { return unique_id_; }
+
+  LibraryModel* model() const { return model_; }
+
+protected:
+  DeviceLister* lister_;
+  QString unique_id_;
+
+  BackgroundThread<Database>* database_;
+  LibraryBackend* backend_;
+  LibraryModel* model_;
 };
 
-#endif // DEVICE_H
+#endif // CONNECTEDDEVICE_H

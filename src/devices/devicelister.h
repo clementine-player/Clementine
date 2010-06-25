@@ -19,6 +19,8 @@
 
 #include <QAbstractItemModel>
 
+class ConnectedDevice;
+
 class DeviceLister : public QObject {
   Q_OBJECT
 
@@ -41,9 +43,13 @@ public:
   // moved to the new thread.
   void Start();
 
-  // Query information about the devices that are available.  Thread-safe.
+  // Query information about the devices that are available.  Must be thread-safe.
   virtual QStringList DeviceUniqueIDs() = 0;
   virtual QVariant DeviceInfo(const QString& id, int field) = 0;
+
+  // Create a new ConnectedDevice instance for the given device.  Must be
+  // thread-safe.
+  virtual ConnectedDevice* Connect(const QString& id, QObject* parent) = 0;
 
 signals:
   void DeviceAdded(const QString& id);
