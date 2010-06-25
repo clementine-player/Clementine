@@ -14,17 +14,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "deviceengine.h"
+#include "devicelister.h"
 
 #include <QThread>
 #include <QtDebug>
 
-DeviceEngine::DeviceEngine()
+DeviceLister::DeviceLister()
   : thread_(NULL)
 {
 }
 
-DeviceEngine::~DeviceEngine() {
+DeviceLister::~DeviceLister() {
   qDebug() << __PRETTY_FUNCTION__;
   if (thread_) {
     thread_->quit();
@@ -32,7 +32,7 @@ DeviceEngine::~DeviceEngine() {
   }
 }
 
-void DeviceEngine::Start() {
+void DeviceLister::Start() {
   thread_ = new QThread;
   connect(thread_, SIGNAL(started()), SLOT(ThreadStarted()));
 
@@ -40,6 +40,6 @@ void DeviceEngine::Start() {
   thread_->start();
 }
 
-void DeviceEngine::ThreadStarted() {
+void DeviceLister::ThreadStarted() {
   Init();
 }

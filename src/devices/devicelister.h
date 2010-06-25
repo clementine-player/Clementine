@@ -14,17 +14,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICEENGINE_H
-#define DEVICEENGINE_H
+#ifndef DEVICELISTER_H
+#define DEVICELISTER_H
 
 #include <QAbstractItemModel>
 
-class DeviceEngine : public QObject {
+class DeviceLister : public QObject {
   Q_OBJECT
 
 public:
-  DeviceEngine();
-  ~DeviceEngine();
+  DeviceLister();
+  ~DeviceLister();
 
   enum Field {
     Field_UniqueID = 0,
@@ -34,7 +34,7 @@ public:
     Field_Capacity,
     Field_FreeSpace,
 
-    LastDeviceEngineField
+    LastField
   };
 
   // Tries to start the thread and initialise the engine.  This object will be
@@ -60,4 +60,4 @@ private slots:
   void ThreadStarted();
 };
 
-#endif // DEVICEENGINE_H
+#endif // DEVICELISTER_H

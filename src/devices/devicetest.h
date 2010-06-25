@@ -19,7 +19,7 @@
 
 #include <QObject>
 
-class DeviceEngine;
+class DeviceLister;
 
 class DeviceTest : public QObject {
   Q_OBJECT
@@ -34,7 +34,7 @@ public slots:
   void DeviceChanged(const QString& id);
 
 private:
-  QList<DeviceEngine*> engines_;
+  QList<DeviceLister*> listers_;
 };
 
 #endif // DEVICETEST_H

@@ -14,10 +14,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMDEVICEENGINE_H
-#define FILESYSTEMDEVICEENGINE_H
+#ifndef DEVICEKITLISTER_H
+#define DEVICEKITLISTER_H
 
-#include "deviceengine.h"
+#include "devicelister.h"
 
 #include <QMutex>
 #include <QStringList>
@@ -28,18 +28,18 @@ class OrgFreedesktopUDisksInterface;
 
 class QDBusObjectPath;
 
-class FilesystemDeviceEngine : public DeviceEngine {
+class DeviceKitLister : public DeviceLister {
   Q_OBJECT
 
 public:
-  FilesystemDeviceEngine();
-  ~FilesystemDeviceEngine();
+  DeviceKitLister();
+  ~DeviceKitLister();
 
   enum Field {
-    Field_MountPath = LastDeviceEngineField,
+    Field_MountPath = DeviceLister::LastField,
     Field_DbusPath,
 
-    LastFilesystemDeviceEngineField
+    LastField
   };
 
   QStringList DeviceUniqueIDs();
@@ -82,4 +82,4 @@ private:
   QMap<QString, DeviceData> device_data_;
 };
 
-#endif // FILESYSTEMDEVICEENGINE_H
+#endif // DEVICEKITLISTER_H

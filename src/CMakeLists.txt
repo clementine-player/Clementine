@@ -53,9 +53,9 @@ set(SOURCES
   core/utilities.cpp
 
   devices/device.cpp
-  devices/deviceengine.cpp
+  devices/devicekitlister.cpp
+  devices/devicelister.cpp
   devices/devicetest.cpp
-  devices/filesystemdeviceengine.cpp
 
   engines/enginebase.cpp
 
@@ -174,9 +174,9 @@ set(HEADERS
   core/taskmanager.h
 
   devices/device.h
-  devices/deviceengine.h
+  devices/devicekitlister.h
+  devices/devicelister.h
   devices/devicetest.h
-  devices/filesystemdeviceengine.h
 
   engines/enginebase.h
 

@@ -14,25 +14,25 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "filesystemdeviceengine.h"
+#include "devicekitlister.h"
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
 
 #include <QtDebug>
 
-FilesystemDeviceEngine::FilesystemDeviceEngine()
+DeviceKitLister::DeviceKitLister()
 {
 }
 
-FilesystemDeviceEngine::~FilesystemDeviceEngine() {
+DeviceKitLister::~DeviceKitLister() {
   qDebug() << __PRETTY_FUNCTION__;
 }
 
-QString FilesystemDeviceEngine::DeviceData::unique_id() const {
+QString DeviceKitLister::DeviceData::unique_id() const {
   return QString("%1 %2 %3 %4").arg(drive_serial, drive_vendor, drive_model).arg(device_size);
 }
 
-void FilesystemDeviceEngine::Init() {
+void DeviceKitLister::Init() {
   interface_.reset(new OrgFreedesktopUDisksInterface(
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       "/org/freedesktop/UDisks", QDBusConnection::systemBus()));
@@ -77,12 +77,12 @@ void FilesystemDeviceEngine::Init() {
   }
 }
 
-QStringList FilesystemDeviceEngine::DeviceUniqueIDs() {
+QStringList DeviceKitLister::DeviceUniqueIDs() {
   QMutexLocker l(&mutex_);
   return device_data_.keys();
 }
 
-QVariant FilesystemDeviceEngine::DeviceInfo(const QString& id, int field) {
+QVariant DeviceKitLister::DeviceInfo(const QString& id, int field) {
   DeviceData data;
 
   {
@@ -126,7 +126,7 @@ QVariant FilesystemDeviceEngine::DeviceInfo(const QString& id, int field) {
   }
 }
 
-FilesystemDeviceEngine::DeviceData FilesystemDeviceEngine::ReadDeviceData(
+DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
     const QDBusObjectPath &path) const {
   DeviceData ret;
 
@@ -158,7 +158,7 @@ FilesystemDeviceEngine::DeviceData FilesystemDeviceEngine::ReadDeviceData(
   return ret;
 }
 
-void FilesystemDeviceEngine::DBusDeviceAdded(const QDBusObjectPath &path) {
+void DeviceKitLister::DBusDeviceAdded(const QDBusObjectPath &path) {
   DeviceData data = ReadDeviceData(path);
   if (!data.suitable)
     return;
@@ -171,7 +171,7 @@ void FilesystemDeviceEngine::DBusDeviceAdded(const QDBusObjectPath &path) {
   emit DeviceAdded(data.unique_id());
 }
 
-void FilesystemDeviceEngine::DBusDeviceRemoved(const QDBusObjectPath &path) {
+void DeviceKitLister::DBusDeviceRemoved(const QDBusObjectPath &path) {
   QString id;
   {
     QMutexLocker l(&mutex_);
@@ -185,7 +185,7 @@ void FilesystemDeviceEngine::DBusDeviceRemoved(const QDBusObjectPath &path) {
   emit DeviceRemoved(id);
 }
 
-void FilesystemDeviceEngine::DBusDeviceChanged(const QDBusObjectPath &path) {
+void DeviceKitLister::DBusDeviceChanged(const QDBusObjectPath &path) {
   bool already_known = false;
   {
     QMutexLocker l(&mutex_);
@@ -207,7 +207,7 @@ void FilesystemDeviceEngine::DBusDeviceChanged(const QDBusObjectPath &path) {
   }
 }
 
-QString FilesystemDeviceEngine::FindUniqueIdByPath(const QDBusObjectPath &path) const {
+QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
   foreach (const DeviceData& data, device_data_) {
     if (data.dbus_path == path.path())
       return data.unique_id();

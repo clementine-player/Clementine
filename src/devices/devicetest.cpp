@@ -15,31 +15,31 @@
 */
 
 #include "devicetest.h"
-#include "filesystemdeviceengine.h"
+#include "devicekitlister.h"
 
 #include <QtDebug>
 
 DeviceTest::DeviceTest(QObject *parent)
   : QObject(parent)
 {
-  DeviceEngine* engine = new FilesystemDeviceEngine;
-  engines_ << engine;
-  connect(engine, SIGNAL(DeviceAdded(QString)), SLOT(DeviceAdded(QString)));
-  connect(engine, SIGNAL(DeviceRemoved(QString)), SLOT(DeviceRemoved(QString)));
-  connect(engine, SIGNAL(DeviceChanged(QString)), SLOT(DeviceChanged(QString)));
+  DeviceLister* lister = new DeviceKitLister;
+  listers_ << lister;
+  connect(lister, SIGNAL(DeviceAdded(QString)), SLOT(DeviceAdded(QString)));
+  connect(lister, SIGNAL(DeviceRemoved(QString)), SLOT(DeviceRemoved(QString)));
+  connect(lister, SIGNAL(DeviceChanged(QString)), SLOT(DeviceChanged(QString)));
 
-  engine->Start();
+  lister->Start();
 }
 
 DeviceTest::~DeviceTest() {
-  qDeleteAll(engines_);
+  qDeleteAll(listers_);
 }
 
 void DeviceTest::DeviceAdded(const QString &id) {
-  DeviceEngine* engine = qobject_cast<DeviceEngine*>(sender());
+  DeviceLister* engine = qobject_cast<DeviceLister*>(sender());
 
   qDebug() << "Device added:" << id;
-  for (int i=0 ; i<FilesystemDeviceEngine::LastFilesystemDeviceEngineField ; ++i) {
+  for (int i=0 ; i<DeviceKitLister::LastField ; ++i) {
     qDebug() << i << engine->DeviceInfo(id, i);
   }
 }
@@ -49,10 +49,10 @@ void DeviceTest::DeviceRemoved(const QString &id) {
 }
 
 void DeviceTest::DeviceChanged(const QString &id) {
-  DeviceEngine* engine = qobject_cast<DeviceEngine*>(sender());
+  DeviceLister* engine = qobject_cast<DeviceLister*>(sender());
 
   qDebug() << "Device changed:" << id;
-  for (int i=0 ; i<FilesystemDeviceEngine::LastFilesystemDeviceEngineField ; ++i) {
+  for (int i=0 ; i<DeviceKitLister::LastField ; ++i) {
     qDebug() << i << engine->DeviceInfo(id, i);
   }
 }
