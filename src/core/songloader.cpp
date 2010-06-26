@@ -160,6 +160,39 @@ void SongLoader::AddAsRawStream() {
   songs_ << song;
 }
 
+void SongLoader::Timeout() {
+  state_ = Finished;
+  success_ = false;
+  StopTypefind();
+}
+
+void SongLoader::StopTypefind() {
+#ifdef HAVE_GSTREAMER
+  // Destroy the pipeline
+  if (pipeline_) {
+    gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
+    pipeline_.reset();
+  }
+  timeout_timer_->stop();
+
+  if (success_ && parser_) {
+    qDebug() << "Parsing" << url_ << "with" << parser_->name();
+
+    // Parse the playlist
+    QBuffer buf(&buffer_);
+    buf.open(QIODevice::ReadOnly);
+    songs_ = parser_->Load(&buf);
+  } else if (success_) {
+    qDebug() << "Loading" << url_ << "as raw stream";
+
+    // It wasn't a playlist - just put the URL in as a stream
+    AddAsRawStream();
+  }
+#endif // HAVE_GSTREAMER
+
+  emit LoadFinished(success_);
+}
+
 #ifdef HAVE_GSTREAMER
 SongLoader::Result SongLoader::LoadRemote() {
   qDebug() << "Loading remote file" << url_;
@@ -246,12 +279,6 @@ void SongLoader::DataReady(GstPad *, GstBuffer *buf, void *self) {
     // Got enough that we can test the magic
     instance->MagicReady();
   }
-}
-
-void SongLoader::Timeout() {
-  state_ = Finished;
-  success_ = false;
-  StopTypefind();
 }
 
 gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
@@ -348,30 +375,5 @@ void SongLoader::StopTypefindAsync(bool success) {
   success_ = success;
 
   metaObject()->invokeMethod(this, "StopTypefind", Qt::QueuedConnection);
-}
-
-void SongLoader::StopTypefind() {
-  // Destroy the pipeline
-  if (pipeline_) {
-    gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
-    pipeline_.reset();
-  }
-  timeout_timer_->stop();
-
-  if (success_ && parser_) {
-    qDebug() << "Parsing" << url_ << "with" << parser_->name();
-
-    // Parse the playlist
-    QBuffer buf(&buffer_);
-    buf.open(QIODevice::ReadOnly);
-    songs_ = parser_->Load(&buf);
-  } else if (success_) {
-    qDebug() << "Loading" << url_ << "as raw stream";
-
-    // It wasn't a playlist - just put the URL in as a stream
-    AddAsRawStream();
-  }
-
-  emit LoadFinished(success_);
 }
 #endif // HAVE_GSTREAMER

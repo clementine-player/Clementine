@@ -58,10 +58,8 @@ signals:
   void LoadFinished(bool success);
 
 private slots:
-#ifdef HAVE_GSTREAMER
   void Timeout();
   void StopTypefind();
-#endif // HAVE_GSTREAMER
 
 private:
   enum State {
