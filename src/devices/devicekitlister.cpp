@@ -54,7 +54,7 @@ void DeviceKitLister::Init() {
   reply.waitForFinished();
 
   if (!reply.isValid()) {
-    qWarning() << "Error enumerating DeviceKit-disks devices:" << reply.error();
+    qWarning() << "Error enumerating DeviceKit-disks devices:" << reply.error().name() << reply.error().message();
     return;
   }
 
