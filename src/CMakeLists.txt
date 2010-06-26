@@ -104,10 +104,6 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
-  transcoder/transcodedialog.cpp
-  transcoder/transcoder.cpp
-  transcoder/transcoderformats.cpp
-
   ui/about.cpp
   ui/addstreamdialog.cpp
   ui/albumcovermanager.cpp
@@ -209,9 +205,6 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
-  transcoder/transcodedialog.h
-  transcoder/transcoder.h
-
   ui/about.h
   ui/addstreamdialog.h
   ui/albumcovermanager.h
@@ -257,9 +250,6 @@ set(UI
   radio/magnatuneconfig.ui
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
-
-  transcoder/transcodedialog.ui
-  transcoder/transcodelogdialog.ui
 
   ui/about.ui
   ui/addstreamdialog.ui
@@ -359,6 +349,25 @@ if(ENABLE_VISUALISATIONS)
     visualisations/visualisationselector.ui
   )
 endif(ENABLE_VISUALISATIONS)
+
+# Transcoder
+if(HAVE_GSTREAMER)
+  list(APPEND SOURCES
+    transcoder/transcodedialog.cpp
+    transcoder/transcoder.cpp
+    transcoder/transcoderformats.cpp
+  )
+
+  list(APPEND HEADERS
+    transcoder/transcodedialog.h
+    transcoder/transcoder.h
+  )
+
+  list(APPEND UI
+    transcoder/transcodedialog.ui
+    transcoder/transcodelogdialog.ui
+  )
+endif(HAVE_GSTREAMER)
 
 # OSDs
 if(APPLE)
