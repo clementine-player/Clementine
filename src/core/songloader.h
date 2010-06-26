@@ -20,10 +20,14 @@
 #include <QObject>
 #include <QUrl>
 
+#include "config.h"
 #include "song.h"
 
 #include <boost/shared_ptr.hpp>
-#include <gst/gst.h>
+
+#ifdef HAVE_GSTREAMER
+# include <gst/gst.h>
+#endif
 
 class ParserBase;
 class PlaylistParser;
@@ -54,8 +58,10 @@ signals:
   void LoadFinished(bool success);
 
 private slots:
+#ifdef HAVE_GSTREAMER
   void Timeout();
   void StopTypefind();
+#endif // HAVE_GSTREAMER
 
 private:
   enum State {
@@ -66,8 +72,12 @@ private:
   };
 
   Result LoadLocal();
-  Result LoadRemote();
   void LoadLocalDirectory(const QString& filename);
+
+  void AddAsRawStream();
+
+#ifdef HAVE_GSTREAMER
+  Result LoadRemote();
 
   // GStreamer callbacks
   static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps, void* self);
@@ -79,8 +89,7 @@ private:
   void ErrorMessageReceived(GstMessage* msg);
   void EndOfStreamReached();
   void MagicReady();
-
-  void AddAsRawStream();
+#endif // HAVE_GSTREAMER
 
 private:
   static QSet<QString> sRawUriSchemes;
@@ -95,10 +104,13 @@ private:
   int timeout_;
   State state_;
   bool success_;
-  boost::shared_ptr<GstElement> pipeline_;
   ParserBase* parser_;
   QString mime_type_;
   QByteArray buffer_;
+
+#ifdef HAVE_GSTREAMER
+  boost::shared_ptr<GstElement> pipeline_;
+#endif
 };
 
 #endif // SONGLOADER_H

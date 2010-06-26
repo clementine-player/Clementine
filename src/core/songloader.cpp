@@ -47,14 +47,19 @@ SongLoader::SongLoader(QObject *parent)
   }
 
   timeout_timer_->setSingleShot(true);
+
+#ifdef HAVE_GSTREAMER
   connect(timeout_timer_, SIGNAL(timeout()), SLOT(Timeout()));
+#endif
 }
 
 SongLoader::~SongLoader() {
+#ifdef HAVE_GSTREAMER
   if (pipeline_) {
     state_ = Finished;
     gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
   }
+#endif // HAVE_GSTREAMER
 }
 
 SongLoader::Result SongLoader::Load(const QUrl& url) {
@@ -71,8 +76,15 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
     return Success;
   }
 
+#ifdef HAVE_GSTREAMER
   timeout_timer_->start(timeout_);
   return LoadRemote();
+#else
+  // If we don't have GStreamer we can't check the type of remote playlists,
+  // so just assume it's a raw stream and get on with our lives.
+  AddAsRawStream();
+  return Success;
+#endif
 }
 
 SongLoader::Result SongLoader::LoadLocal() {
@@ -139,6 +151,16 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
   emit LoadFinished(true);
 }
 
+void SongLoader::AddAsRawStream() {
+  Song song;
+  song.set_valid(true);
+  song.set_filetype(Song::Type_Stream);
+  song.set_filename(url_.toString());
+  song.set_title(url_.toString());
+  songs_ << song;
+}
+
+#ifdef HAVE_GSTREAMER
 SongLoader::Result SongLoader::LoadRemote() {
   qDebug() << "Loading remote file" << url_;
 
@@ -224,6 +246,12 @@ void SongLoader::DataReady(GstPad *, GstBuffer *buf, void *self) {
     // Got enough that we can test the magic
     instance->MagicReady();
   }
+}
+
+void SongLoader::Timeout() {
+  state_ = Finished;
+  success_ = false;
+  StopTypefind();
 }
 
 gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
@@ -346,18 +374,4 @@ void SongLoader::StopTypefind() {
 
   emit LoadFinished(success_);
 }
-
-void SongLoader::AddAsRawStream() {
-  Song song;
-  song.set_valid(true);
-  song.set_filetype(Song::Type_Stream);
-  song.set_filename(url_.toString());
-  song.set_title(url_.toString());
-  songs_ << song;
-}
-
-void SongLoader::Timeout() {
-  state_ = Finished;
-  success_ = false;
-  StopTypefind();
-}
+#endif // HAVE_GSTREAMER

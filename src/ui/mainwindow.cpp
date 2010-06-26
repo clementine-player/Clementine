@@ -123,7 +123,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     add_stream_dialog_(new AddStreamDialog),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
+#ifdef HAVE_GSTREAMER
     transcode_dialog_(new TranscodeDialog),
+#endif
     error_dialog_(new ErrorDialog),
     organise_dialog_(new OrganiseDialog(task_manager_)),
 #ifdef ENABLE_VISUALISATIONS
@@ -171,7 +173,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #   ifdef ENABLE_VISUALISATIONS
       visualisation_->SetEngine(engine);
 #   endif
+  } else {
+    ui_->action_transcode->setEnabled(false);
   }
+#else // HAVE_GSTREAMER
+  ui_->action_transcode->setEnabled(false);
 #endif // HAVE_GSTREAMER
 
   // Models
