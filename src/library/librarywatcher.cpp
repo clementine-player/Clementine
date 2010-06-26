@@ -67,7 +67,13 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
     cached_songs_dirty_(true),
     known_subdirs_dirty_(true)
 {
-  task_id_ = watcher_->task_manager_->StartTask(tr("Updating library"));
+  QString description;
+  if (watcher_->device_name_.isEmpty())
+    description = tr("Updating library");
+  else
+    description = tr("Updating %1").arg(watcher_->device_name_);
+
+  task_id_ = watcher_->task_manager_->StartTask(description);
 }
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {

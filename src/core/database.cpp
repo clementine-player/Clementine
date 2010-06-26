@@ -29,6 +29,9 @@
 const char* Database::kDatabaseFilename = "clementine.db";
 const int Database::kSchemaVersion = 13;
 
+int Database::sNextConnectionId = 1;
+QMutex Database::sNextConnectionIdMutex;
+
 Database::Token::Token(const QString& token, int start, int end)
     : token(token),
       start_offset(start),
@@ -320,6 +323,11 @@ Database::Database(QObject* parent, const QString& database_name)
     injected_database_name_(database_name),
     query_hash_(0)
 {
+  {
+    QMutexLocker l(&sNextConnectionIdMutex);
+    connection_id_ = sNextConnectionId ++;
+  }
+
   directory_ = QDir::toNativeSeparators(
       QDir::homePath() + "/.config/" + QCoreApplication::organizationName());
 
@@ -337,8 +345,9 @@ QSqlDatabase Database::Connect() {
     }
   }
 
-  const QString connection_id("thread_" + QString::number(
-      reinterpret_cast<quint64>(QThread::currentThread())));
+  const QString connection_id =
+      QString("%1_thread_%2").arg(connection_id_).arg(
+        reinterpret_cast<quint64>(QThread::currentThread()));
 
   // Try to find an existing connection for this thread
   QSqlDatabase db = QSqlDatabase::database(connection_id);

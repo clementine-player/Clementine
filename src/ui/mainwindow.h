@@ -34,6 +34,7 @@ class AddStreamDialog;
 class AlbumCoverManager;
 class CommandlineOptions;
 class Database;
+class DeviceManager;
 class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
@@ -183,6 +184,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
+
+  DeviceManager* devices_;
 
   boost::scoped_ptr<SettingsDialog> settings_dialog_;
   boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;

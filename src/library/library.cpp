@@ -61,8 +61,8 @@ void Library::StartThreads() {
 void Library::WatcherInitialised() {
   LibraryWatcher* watcher = watcher_->Worker().get();
 
-  watcher->SetBackend(backend_);
-  watcher->SetTaskManager(task_manager_);
+  watcher->set_backend(backend_);
+  watcher->set_task_manager(task_manager_);
 
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
           watcher,  SLOT(AddDirectory(Directory,SubdirectoryList)));

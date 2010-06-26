@@ -15,18 +15,25 @@
 */
 
 #include "connecteddevice.h"
+#include "devicemanager.h"
 #include "core/database.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
-ConnectedDevice::ConnectedDevice(QObject *parent)
-  : QObject(parent),
-    lister_(NULL),
+#include <QtDebug>
+
+ConnectedDevice::ConnectedDevice(DeviceLister* lister, const QString& id,
+                                 DeviceManager* manager)
+  : QObject(manager),
+    lister_(lister),
+    unique_id_(id),
+    manager_(manager),
     database_(new BackgroundThreadImplementation<Database, MemoryDatabase>(this)),
     backend_(NULL),
     model_(NULL)
 {
+  qDebug() << __PRETTY_FUNCTION__;
   // Wait for the database thread to start
   database_->Start(true);
 
@@ -38,9 +45,4 @@ ConnectedDevice::ConnectedDevice(QObject *parent)
 
   // Create the model
   model_ = new LibraryModel(backend_, this);
-}
-
-void ConnectedDevice::set_lister(DeviceLister *lister, const QString &id) {
-  lister_ = lister;
-  unique_id_ = id;
 }

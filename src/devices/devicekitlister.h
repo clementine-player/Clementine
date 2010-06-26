@@ -45,7 +45,7 @@ public:
   QStringList DeviceUniqueIDs();
   QVariant DeviceInfo(const QString& id, int field);
 
-  ConnectedDevice* Connect(const QString &id, QObject *parent);
+  ConnectedDevice* Connect(const QString &id, DeviceManager* manager);
 
 protected:
   void Init();

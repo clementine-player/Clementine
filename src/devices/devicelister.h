@@ -20,6 +20,7 @@
 #include <QAbstractItemModel>
 
 class ConnectedDevice;
+class DeviceManager;
 
 class DeviceLister : public QObject {
   Q_OBJECT
@@ -49,7 +50,7 @@ public:
 
   // Create a new ConnectedDevice instance for the given device.  Must be
   // thread-safe.
-  virtual ConnectedDevice* Connect(const QString& id, QObject* parent) = 0;
+  virtual ConnectedDevice* Connect(const QString& id, DeviceManager* manager) = 0;
 
 signals:
   void DeviceAdded(const QString& id);

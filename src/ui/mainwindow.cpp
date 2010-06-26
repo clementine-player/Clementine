@@ -25,6 +25,7 @@
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
+#include "devices/devicemanager.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
 #include "library/libraryconfig.h"
@@ -117,6 +118,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     player_(NULL),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
+    devices_(new DeviceManager(task_manager_, this)),
     settings_dialog_(NULL),
     add_stream_dialog_(new AddStreamDialog),
     cover_manager_(NULL),

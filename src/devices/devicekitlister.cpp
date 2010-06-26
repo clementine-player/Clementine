@@ -217,6 +217,8 @@ QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
   return QString();
 }
 
-ConnectedDevice* DeviceKitLister::Connect(const QString &id, QObject *parent) {
-  return new FilesystemDevice(DeviceInfo(id, Field_MountPath).toString(), parent);
+ConnectedDevice* DeviceKitLister::Connect(const QString &id, DeviceManager* manager) {
+  return new FilesystemDevice(
+      DeviceInfo(id, Field_MountPath).toString(),
+      this, id, manager);
 }

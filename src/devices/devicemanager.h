@@ -14,27 +14,37 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DEVICETEST_H
-#define DEVICETEST_H
+#ifndef DEVICEMANAGER_H
+#define DEVICEMANAGER_H
 
 #include <QObject>
 
+class ConnectedDevice;
 class DeviceLister;
+class TaskManager;
 
-class DeviceTest : public QObject {
+class DeviceManager : public QObject {
   Q_OBJECT
 
 public:
-  DeviceTest(QObject* parent = 0);
-  ~DeviceTest();
+  DeviceManager(TaskManager* task_manager, QObject* parent = 0);
+  ~DeviceManager();
 
-public slots:
+  TaskManager* task_manager() const { return task_manager_; }
+
+private slots:
   void DeviceAdded(const QString& id);
   void DeviceRemoved(const QString& id);
   void DeviceChanged(const QString& id);
 
 private:
+  void AddLister(DeviceLister* lister);
+
+private:
+  TaskManager* task_manager_;
+
   QList<DeviceLister*> listers_;
+  QList<ConnectedDevice*> devices_;
 };
 
-#endif // DEVICETEST_H
+#endif // DEVICEMANAGER_H

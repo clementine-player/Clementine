@@ -38,8 +38,10 @@ class LibraryWatcher : public QObject {
 
   static const char* kSettingsGroup;
 
-  void SetBackend(LibraryBackend* backend) { backend_ = backend; }
-  void SetTaskManager(TaskManager* task_manager) { task_manager_ = task_manager; }
+  void set_backend(LibraryBackend* backend) { backend_ = backend; }
+  void set_task_manager(TaskManager* task_manager) { task_manager_ = task_manager; }
+  void set_device_name(const QString& device_name) { device_name_ = device_name; }
+
   void IncrementalScanAsync();
   void SetRescanPausedAsync(bool pause);
 
@@ -135,6 +137,7 @@ class LibraryWatcher : public QObject {
 
   LibraryBackend* backend_;
   TaskManager* task_manager_;
+  QString device_name_;
   bool stop_requested_;
   bool scan_on_startup_;
 

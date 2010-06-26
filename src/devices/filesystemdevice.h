@@ -19,11 +19,19 @@
 
 #include "connecteddevice.h"
 
+class DeviceManager;
+class LibraryWatcher;
+
 class FilesystemDevice : public ConnectedDevice {
   Q_OBJECT
 
 public:
-  FilesystemDevice(const QString& mount_point, QObject* parent = 0);
+  FilesystemDevice(const QString& mount_point, DeviceLister* lister,
+                   const QString& id, DeviceManager* manager);
+  ~FilesystemDevice();
+
+private:
+  BackgroundThread<LibraryWatcher>* watcher_;
 };
 
 #endif // FILESYSTEMDEVICE_H

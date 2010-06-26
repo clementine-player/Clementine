@@ -55,7 +55,7 @@ set(SOURCES
   devices/connecteddevice.cpp
   devices/devicekitlister.cpp
   devices/devicelister.cpp
-  devices/devicetest.cpp
+  devices/devicemanager.cpp
   devices/filesystemdevice.cpp
 
   engines/enginebase.cpp
@@ -177,7 +177,7 @@ set(HEADERS
   devices/connecteddevice.h
   devices/devicekitlister.h
   devices/devicelister.h
-  devices/devicetest.h
+  devices/devicemanager.h
   devices/filesystemdevice.h
 
   engines/enginebase.h

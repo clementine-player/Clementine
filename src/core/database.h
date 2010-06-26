@@ -60,6 +60,13 @@ class Database : public QObject {
   QMutex connect_mutex_;
   QMutex mutex_;
 
+  // This ID makes the QSqlDatabase name unique to the object as well as the
+  // thread
+  int connection_id_;
+
+  static QMutex sNextConnectionIdMutex;
+  static int sNextConnectionId;
+
   // Used by tests
   QString injected_database_name_;
 

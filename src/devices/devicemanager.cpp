@@ -14,15 +14,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "devicetest.h"
+#include "connecteddevice.h"
+#include "devicemanager.h"
 #include "devicekitlister.h"
 
-#include <QtDebug>
-
-DeviceTest::DeviceTest(QObject *parent)
-  : QObject(parent)
+DeviceManager::DeviceManager(TaskManager* task_manager, QObject *parent)
+  : QObject(parent),
+    task_manager_(task_manager)
 {
-  DeviceLister* lister = new DeviceKitLister;
+  AddLister(new DeviceKitLister);
+}
+
+DeviceManager::~DeviceManager() {
+  qDeleteAll(listers_);
+}
+
+void DeviceManager::AddLister(DeviceLister *lister) {
   listers_ << lister;
   connect(lister, SIGNAL(DeviceAdded(QString)), SLOT(DeviceAdded(QString)));
   connect(lister, SIGNAL(DeviceRemoved(QString)), SLOT(DeviceRemoved(QString)));
@@ -31,28 +38,36 @@ DeviceTest::DeviceTest(QObject *parent)
   lister->Start();
 }
 
-DeviceTest::~DeviceTest() {
-  qDeleteAll(listers_);
-}
-
-void DeviceTest::DeviceAdded(const QString &id) {
-  DeviceLister* engine = qobject_cast<DeviceLister*>(sender());
+void DeviceManager::DeviceAdded(const QString &id) {
+  DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
 
   qDebug() << "Device added:" << id;
   for (int i=0 ; i<DeviceKitLister::LastField ; ++i) {
-    qDebug() << i << engine->DeviceInfo(id, i);
+    qDebug() << i << lister->DeviceInfo(id, i);
+  }
+
+  ConnectedDevice* device = lister->Connect(id, this);
+  devices_ << device;
+}
+
+void DeviceManager::DeviceRemoved(const QString &id) {
+  DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
+
+  qDebug() << "Device removed:" << id;
+  foreach (ConnectedDevice* device, devices_) {
+    if (device->lister() == lister && device->unique_id() == id) {
+      delete device;
+      devices_.removeAll(device);
+      break;
+    }
   }
 }
 
-void DeviceTest::DeviceRemoved(const QString &id) {
-  qDebug() << "Device removed:" << id;
-}
-
-void DeviceTest::DeviceChanged(const QString &id) {
-  DeviceLister* engine = qobject_cast<DeviceLister*>(sender());
+void DeviceManager::DeviceChanged(const QString &id) {
+  DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
 
   qDebug() << "Device changed:" << id;
   for (int i=0 ; i<DeviceKitLister::LastField ; ++i) {
-    qDebug() << i << engine->DeviceInfo(id, i);
+    qDebug() << i << lister->DeviceInfo(id, i);
   }
 }

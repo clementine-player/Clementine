@@ -23,6 +23,7 @@
 
 class Database;
 class DeviceLister;
+class DeviceManager;
 class LibraryBackend;
 class LibraryModel;
 
@@ -30,9 +31,8 @@ class ConnectedDevice : public QObject {
   Q_OBJECT
 
 public:
-  ConnectedDevice(QObject *parent = 0);
+  ConnectedDevice(DeviceLister* lister, const QString& id, DeviceManager* manager);
 
-  void set_lister(DeviceLister* lister, const QString& id);
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }
 
@@ -41,6 +41,7 @@ public:
 protected:
   DeviceLister* lister_;
   QString unique_id_;
+  DeviceManager* manager_;
 
   BackgroundThread<Database>* database_;
   LibraryBackend* backend_;
