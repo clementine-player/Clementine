@@ -22,7 +22,9 @@ DeviceManager::DeviceManager(TaskManager* task_manager, QObject *parent)
   : QObject(parent),
     task_manager_(task_manager)
 {
+#ifdef Q_WS_X11
   AddLister(new DeviceKitLister);
+#endif
 }
 
 DeviceManager::~DeviceManager() {

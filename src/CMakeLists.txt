@@ -53,7 +53,6 @@ set(SOURCES
   core/utilities.cpp
 
   devices/connecteddevice.cpp
-  devices/devicekitlister.cpp
   devices/devicelister.cpp
   devices/devicemanager.cpp
   devices/filesystemdevice.cpp
@@ -175,7 +174,6 @@ set(HEADERS
   core/taskmanager.h
 
   devices/connecteddevice.h
-  devices/devicekitlister.h
   devices/devicelister.h
   devices/devicemanager.h
   devices/filesystemdevice.h
@@ -396,16 +394,6 @@ else(APPLE)
   endif(WIN32)
 endif(APPLE)
 
-list(APPEND OTHER_SOURCES
-  core/macglobalshortcutbackend.h
-  core/macglobalshortcutbackend.mm
-  ui/macsystemtrayicon.h
-  ui/macsystemtrayicon.mm
-  widgets/osd_mac.mm
-  widgets/osd_win.cpp
-  widgets/osd_x11.cpp
-)
-
 # DBUS and MPRIS - Linux specific
 if(NOT APPLE AND NOT WIN32)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
@@ -442,12 +430,30 @@ if(NOT APPLE AND NOT WIN32)
   # MPRIS source
   list(APPEND SOURCES core/mpris.cpp)
   list(APPEND HEADERS core/mpris.h)
+
+  # DeviceKit lister source
+  list(APPEND SOURCES devices/devicekitlister.cpp)
+  list(APPEND HEADERS devices/devicekitlister.h)
 endif(NOT APPLE AND NOT WIN32)
 
 # Mac specific startup stuff
 if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
 endif(APPLE)
+
+# OS-specific sources that should be searched for translatable strings even
+# if they're not compiled
+list(APPEND OTHER_SOURCES
+  core/macglobalshortcutbackend.h
+  core/macglobalshortcutbackend.mm
+  devices/devicekitlister.h
+  devices/devicekitlister.cpp
+  ui/macsystemtrayicon.h
+  ui/macsystemtrayicon.mm
+  widgets/osd_mac.mm
+  widgets/osd_win.cpp
+  widgets/osd_x11.cpp
+)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/config.h)
