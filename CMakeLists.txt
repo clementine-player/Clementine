@@ -136,7 +136,10 @@ endif (NOT APPLE)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)
-add_subdirectory(debian)
+
+if (EXISTS ${CMAKE_SOURCE_DIR}/debian)
+  add_subdirectory(debian)
+endif (EXISTS ${CMAKE_SOURCE_DIR}/debian)
 
 if (WIN32 OR APPLE)
   message(STATUS "Building static qsqlite plugin")
