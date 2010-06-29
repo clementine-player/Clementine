@@ -78,6 +78,7 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
       case 0x09: key = Qt::Key_Tab; break;
       case 0x0d: key = Qt::Key_Return; break;
       case 0x08: key = Qt::Key_Backspace; break;
+      case 0x03: key = Qt::Key_Enter; break;
     }
 
     if (key == 0) {
@@ -218,6 +219,9 @@ void MacGlobalShortcutBackend::MacMediaKeyPressed(int key) {
 }
 
 void MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
+  if (sequence.isEmpty()) {
+    return;
+  }
   QAction* action = shortcuts_[sequence];
   if (action) {
     action->trigger();
