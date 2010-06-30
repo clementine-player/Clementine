@@ -55,7 +55,7 @@
 #endif
 
 // Load sqlite plugin on windows and mac.
-#ifndef Q_WS_X11
+#ifdef HAVE_STATIC_SQLITE
 # include <QtPlugin>
   Q_IMPORT_PLUGIN(qsqlite)
 #endif
@@ -109,7 +109,6 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
 #endif
-
 
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;

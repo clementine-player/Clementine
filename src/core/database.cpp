@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "database.h"
 
 #include <QCoreApplication>
@@ -215,7 +216,7 @@ void Database::StaticInit() {
   sFTSTokenizer->xNext = &Database::FTSNext;
   sFTSTokenizer->xClose = &Database::FTSClose;
 
-#ifndef Q_WS_X11
+#ifdef HAVE_STATIC_SQLITE
   // We statically link libqsqlite.dll on windows and mac so these symbols are already
   // available
   _sqlite3_create_function = sqlite3_create_function;
@@ -226,7 +227,7 @@ void Database::StaticInit() {
   _sqlite3_user_data = sqlite3_user_data;
   sLoadedSqliteSymbols = true;
   return;
-#else // Q_WS_X11
+#else // HAVE_STATIC_SQLITE
   QString plugin_path = QLibraryInfo::location(QLibraryInfo::PluginsPath) +
                         "/sqldrivers/libqsqlite";
 
