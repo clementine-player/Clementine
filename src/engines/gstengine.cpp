@@ -61,7 +61,8 @@ GstEngine::GstEngine()
     rg_preamp_(0.0),
     rg_compression_(true),
     seek_timer_(new QTimer(this)),
-    timer_id_(-1)
+    prune_scope_timer_id_(-1),
+    about_to_end_timer_id_(-1)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelay);
@@ -495,9 +496,7 @@ bool GstEngine::Play( uint offset ) {
   // If "Resume playback on start" is enabled, we must seek to the last position
   if (offset) Seek(offset);
 
-  if (timer_id_ != -1)
-    killTimer(timer_id_);
-  timer_id_ = startTimer(kTimerInterval);
+  StartTimers();
 
   current_sample_ = 0;
   emit StateChanged(Engine::Playing);
@@ -506,8 +505,7 @@ bool GstEngine::Play( uint offset ) {
 
 
 void GstEngine::Stop() {
-  killTimer(timer_id_);
-  timer_id_ = -1;
+  StopTimers();
 
   url_ = QUrl(); // To ensure we return Empty from state()
 
@@ -530,8 +528,7 @@ void GstEngine::Pause() {
     current_pipeline_->SetState(GST_STATE_PAUSED);
     emit StateChanged(Engine::Paused);
 
-    killTimer(timer_id_);
-    timer_id_ = -1;
+    StopTimers();
   }
 }
 
@@ -543,7 +540,7 @@ void GstEngine::Unpause() {
     current_pipeline_->SetState(GST_STATE_PLAYING);
     emit StateChanged(Engine::Playing);
 
-    timer_id_ = startTimer(kTimerInterval);
+    StartTimers();
   }
 }
 
@@ -594,23 +591,43 @@ void GstEngine::SetVolumeSW( uint percent ) {
     current_pipeline_->SetVolume(percent);
 }
 
+void GstEngine::StartTimers() {
+  StopTimers();
 
-void GstEngine::timerEvent( QTimerEvent* ) {
-  // keep the scope from building while we are not visible
-  // this is why the timer must run as long as we are playing, and not just when
-  // we are fading
-  PruneScope();
+  prune_scope_timer_id_ = startTimer(kPruneScopeTimerInterval);
+  about_to_end_timer_id_ = startTimer(kAboutToEndTimerInterval);
+}
 
-  // Emit TrackAboutToEnd when we're a few seconds away from finishing
-  if (current_pipeline_) {
-    const qint64 nanosec_position = current_pipeline_->position();
-    const qint64 nanosec_length = current_pipeline_->length();
-    const qint64 remaining = (nanosec_length - nanosec_position) / 1000000;
-    const qint64 fudge = 100; // Mmm fudge
-    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
+void GstEngine::StopTimers() {
+  if (prune_scope_timer_id_ != -1) {
+    killTimer(prune_scope_timer_id_);
+    prune_scope_timer_id_ = -1;
+  }
 
-    if (nanosec_length > 0 && remaining < gap + fudge)
-      EmitAboutToEnd();
+  if (about_to_end_timer_id_ != -1) {
+    killTimer(about_to_end_timer_id_);
+    about_to_end_timer_id_ = -1;
+  }
+}
+
+void GstEngine::timerEvent(QTimerEvent* e) {
+  if (e->timerId() == prune_scope_timer_id_) {
+    // keep the scope from building while we are not visible
+    // this is why the timer must run as long as we are playing, and not just when
+    // we are fading
+    PruneScope();
+  } else if (e->timerId() == about_to_end_timer_id_) {
+    // Emit TrackAboutToEnd when we're a few seconds away from finishing
+    if (current_pipeline_) {
+      const qint64 nanosec_position = current_pipeline_->position();
+      const qint64 nanosec_length = current_pipeline_->length();
+      const qint64 remaining = (nanosec_length - nanosec_position) / 1000000;
+      const qint64 fudge = kAboutToEndTimerInterval + 100; // Mmm fudge
+      const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
+
+      if (nanosec_length > 0 && remaining < gap + fudge)
+        EmitAboutToEnd();
+    }
   }
 }
 

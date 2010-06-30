@@ -130,6 +130,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   void StartFadeout();
 
+  void StartTimers();
+  void StopTimers();
+
   boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url);
 
   void UpdateScope();
@@ -137,7 +140,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  private:
   // Interval of main timer, handles the volume fading
-  static const int kTimerInterval = 40; // msec
+  static const int kPruneScopeTimerInterval = 40; // msec
+  static const int kAboutToEndTimerInterval = 1500; // msec
   static const int kPreloadGap = 1000; // msec
   static const int kSeekDelay = 100; // msec
 
@@ -172,7 +176,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool waiting_to_seek_;
   uint seek_pos_;
 
-  int timer_id_;
+  int prune_scope_timer_id_;
+  int about_to_end_timer_id_;
 
   QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
 };
