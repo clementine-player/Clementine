@@ -479,10 +479,10 @@ else (APPLE)
 endif (APPLE)
 
 # Link against the qsqlite plugin on windows and mac
-if(WIN32 OR APPLE)
+if(HAVE_STATIC_SQLITE)
   set(3RDPARTY_SQLITE_LIBRARY qsqlite)
   target_link_libraries(clementine_lib qsqlite)
-endif(WIN32 OR APPLE)
+endif(HAVE_STATIC_SQLITE)
 
 add_dependencies(clementine_lib qtsingleapplication)
 

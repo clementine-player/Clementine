@@ -126,6 +126,28 @@ if(ENABLE_VISUALISATIONS)
   add_subdirectory(3rdparty/libprojectm)
 endif(ENABLE_VISUALISATIONS)
 
+# Test whether libsqlite3 is available and if FTS3 is enabled in it
+if(WIN32 OR APPLE)
+  option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
+else(WIN32 OR APPLE)
+  try_run(FTS_TEST_RUN FTS_TEST_COMPILE
+          ${CMAKE_CURRENT_BINARY_DIR}/sqlite3_fts_test
+          ${CMAKE_SOURCE_DIR}/cmake/sqlite3_fts_test.cpp
+          CMAKE_FLAGS "-DLINK_LIBRARIES:STRING=sqlite3")
+  if(NOT FTS_TEST_COMPILE OR FTS_TEST_RUN EQUAL 1 OR FTS_TEST_RUN STREQUAL "FAILED_TO_RUN")
+    option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
+  else(NOT FTS_TEST_COMPILE OR FTS_TEST_RUN EQUAL 1 OR FTS_TEST_RUN STREQUAL "FAILED_TO_RUN")
+    option(STATIC_SQLITE "Compile and use a static sqlite3 library" OFF)
+  endif(NOT FTS_TEST_COMPILE OR FTS_TEST_RUN EQUAL 1 OR FTS_TEST_RUN STREQUAL "FAILED_TO_RUN")
+endif(WIN32 OR APPLE)
+
+set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
+if(STATIC_SQLITE)
+  message(STATUS "Building static qsqlite plugin")
+  add_definitions(-DQT_STATICPLUGIN)
+  add_subdirectory(3rdparty/qsqlite)
+endif(STATIC_SQLITE)
+
 # Subdirectories
 add_subdirectory(3rdparty/qtsingleapplication)
 add_subdirectory(3rdparty/qtiocompressor)
@@ -140,12 +162,6 @@ add_subdirectory(dist)
 if (EXISTS ${CMAKE_SOURCE_DIR}/debian)
   add_subdirectory(debian)
 endif (EXISTS ${CMAKE_SOURCE_DIR}/debian)
-
-if (WIN32 OR APPLE)
-  message(STATUS "Building static qsqlite plugin")
-  add_definitions(-DQT_STATICPLUGIN)
-  add_subdirectory(3rdparty/qsqlite)
-endif(WIN32 OR APPLE)
 
 # Uninstall support
 configure_file(
