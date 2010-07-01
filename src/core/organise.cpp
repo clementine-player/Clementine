@@ -77,7 +77,7 @@ void Organise::ProcessSomeFiles() {
   for ( ; progress_<n ; ++progress_) {
     task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
 
-    const QString& filename = files_[progress_];
+    const QString filename = files_[progress_];
 
     // Is it a directory?
     if (QFileInfo(filename).isDir()) {
