@@ -61,8 +61,7 @@ GstEngine::GstEngine()
     rg_preamp_(0.0),
     rg_compression_(true),
     seek_timer_(new QTimer(this)),
-    prune_scope_timer_id_(-1),
-    about_to_end_timer_id_(-1)
+    timer_id_(-1)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelay);
@@ -594,40 +593,35 @@ void GstEngine::SetVolumeSW( uint percent ) {
 void GstEngine::StartTimers() {
   StopTimers();
 
-  prune_scope_timer_id_ = startTimer(kPruneScopeTimerInterval);
-  about_to_end_timer_id_ = startTimer(kAboutToEndTimerInterval);
+  timer_id_ = startTimer(kTimerInterval);
 }
 
 void GstEngine::StopTimers() {
-  if (prune_scope_timer_id_ != -1) {
-    killTimer(prune_scope_timer_id_);
-    prune_scope_timer_id_ = -1;
-  }
-
-  if (about_to_end_timer_id_ != -1) {
-    killTimer(about_to_end_timer_id_);
-    about_to_end_timer_id_ = -1;
+  if (timer_id_ != -1) {
+    killTimer(timer_id_);
+    timer_id_ = -1;
   }
 }
 
 void GstEngine::timerEvent(QTimerEvent* e) {
-  if (e->timerId() == prune_scope_timer_id_) {
-    // keep the scope from building while we are not visible
-    // this is why the timer must run as long as we are playing, and not just when
-    // we are fading
-    PruneScope();
-  } else if (e->timerId() == about_to_end_timer_id_) {
-    // Emit TrackAboutToEnd when we're a few seconds away from finishing
-    if (current_pipeline_) {
-      const qint64 nanosec_position = current_pipeline_->position();
-      const qint64 nanosec_length = current_pipeline_->length();
-      const qint64 remaining = (nanosec_length - nanosec_position) / 1000000;
-      const qint64 fudge = kAboutToEndTimerInterval + 100; // Mmm fudge
-      const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
+  if (e->timerId() != timer_id_)
+    return;
 
-      if (nanosec_length > 0 && remaining < gap + fudge)
-        EmitAboutToEnd();
-    }
+  // keep the scope from building while we are not visible
+  // this is why the timer must run as long as we are playing, and not just when
+  // we are fading
+  PruneScope();
+
+  // Emit TrackAboutToEnd when we're a few seconds away from finishing
+  if (current_pipeline_) {
+    const qint64 nanosec_position = current_pipeline_->position();
+    const qint64 nanosec_length = current_pipeline_->length();
+    const qint64 remaining = (nanosec_length - nanosec_position) / 1000000;
+    const qint64 fudge = kTimerInterval + 100; // Mmm fudge
+    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
+
+    if (nanosec_length > 0 && remaining < gap + fudge)
+      EmitAboutToEnd();
   }
 }
 
