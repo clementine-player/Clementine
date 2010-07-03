@@ -541,8 +541,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
 MainWindow::~MainWindow() {
   SaveGeometry();
-
   delete ui_;
+
+  // It's important that the device manager is deleted before the database.
+  // Deleting the database deletes all objects that have been created in its
+  // thread, including some device library backends.
+  delete devices_; devices_ = NULL;
 }
 
 void MainWindow::ReloadSettings() {
