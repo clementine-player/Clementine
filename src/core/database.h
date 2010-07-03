@@ -50,6 +50,9 @@ class Database : public QObject {
   bool CheckErrors(const QSqlError& error);
   QMutex* Mutex() { return &mutex_; }
 
+  void ExecFromFile(const QString& filename, QSqlDatabase &db);
+  void ExecCommands(const QString& commands, QSqlDatabase &db);
+
  signals:
   void Error(const QString& message);
 

@@ -23,26 +23,32 @@
 
 #include <QtDebug>
 
-ConnectedDevice::ConnectedDevice(DeviceLister* lister, const QString& id,
-                                 DeviceManager* manager)
+ConnectedDevice::ConnectedDevice(DeviceLister* lister, const QString& unique_id,
+                                 DeviceManager* manager, int database_id)
   : QObject(manager),
     lister_(lister),
-    unique_id_(id),
+    unique_id_(unique_id),
+    database_id_(database_id),
     manager_(manager),
-    database_(new BackgroundThreadImplementation<Database, MemoryDatabase>(this)),
     backend_(NULL),
     model_(NULL)
 {
   qDebug() << __PRETTY_FUNCTION__;
-  // Wait for the database thread to start
-  database_->Start(true);
 
   // Create the backend in the database thread.
   // The backend gets parented to the database.
-  backend_ = database_->CreateInThread<LibraryBackend>();
-  backend_->Init(database_->Worker(), Library::kSongsTable, Library::kDirsTable,
-                 Library::kSubdirsTable, Library::kFtsTable);
+  backend_ = manager->database()->CreateInThread<LibraryBackend>();
+  backend_->Init(manager->database()->Worker(),
+                 QString("device_%1_songs").arg(database_id),
+                 QString("device_%1_directories").arg(database_id),
+                 QString("device_%1_subdirectories").arg(database_id),
+                 QString("device_%1_fts").arg(database_id));
 
   // Create the model
   model_ = new LibraryModel(backend_, this);
+  model_->Init();
+}
+
+ConnectedDevice::~ConnectedDevice() {
+  backend_->deleteLater();
 }

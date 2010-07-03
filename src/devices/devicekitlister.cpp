@@ -220,8 +220,10 @@ QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
   return QString();
 }
 
-ConnectedDevice* DeviceKitLister::Connect(const QString &id, DeviceManager* manager) {
-  return new FilesystemDevice(
-      DeviceInfo(id, Field_MountPath).toString(),
-      this, id, manager);
+boost::shared_ptr<ConnectedDevice> DeviceKitLister::Connect(
+    const QString &unique_id, DeviceManager* manager, int database_id,
+    bool first_time) {
+  return boost::shared_ptr<ConnectedDevice>(new FilesystemDevice(
+      DeviceInfo(unique_id, Field_MountPath).toString(),
+      this, unique_id, manager, database_id, first_time));
 }

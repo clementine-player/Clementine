@@ -15,6 +15,7 @@
 */
 
 #include "connecteddevice.h"
+#include "devicedatabasebackend.h"
 #include "devicemanager.h"
 #include "devicekitlister.h"
 #include "core/utilities.h"
@@ -29,12 +30,62 @@ DeviceManager::DeviceInfo::DeviceInfo()
 {
 }
 
+DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
+  DeviceDatabaseBackend::Device ret;
+  ret.friendly_name_ = friendly_name_;
+  ret.size_ = size_;
+  ret.unique_id_ = unique_id_;
+  ret.id_ = database_id_;
+
+  if (lister_)
+    ret.icon_name_ = lister_->DeviceInfo(
+        unique_id_, DeviceLister::Field_Icon).toString();
+
+  return ret;
+}
+
+void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &dev) {
+  database_id_ = dev.id_;
+  friendly_name_ = dev.friendly_name_;
+  unique_id_ = dev.unique_id_;
+  size_ = dev.size_;
+  LoadIcon(dev.icon_name_);
+}
+
+void DeviceManager::DeviceInfo::LoadIcon(const QString &filename) {
+  // Try to load the icon with that exact name first
+  icon_ = IconLoader::Load(filename);
+
+  // If that failed than try to guess if it's a phone or ipod.  Fall back on
+  // a usb memory stick icon.
+  if (icon_.isNull()) {
+    if (filename.contains("phone"))
+      icon_ = IconLoader::Load("phone");
+    else if (filename.contains("ipod") || filename.contains("apple"))
+      icon_ = IconLoader::Load("multimedia-player-ipod-standard-monochrome");
+    else
+      icon_ = IconLoader::Load("drive-removable-media-usb-pendrive");
+  }
+}
+
+
 DeviceManager::DeviceManager(BackgroundThread<Database>* database,
                              TaskManager* task_manager, QObject *parent)
   : QAbstractListModel(parent),
     database_(database),
     task_manager_(task_manager)
 {
+  // Create the backend in the database thread
+  backend_ = database_->CreateInThread<DeviceDatabaseBackend>();
+  backend_->Init(database_->Worker());
+
+  DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
+  foreach (const DeviceDatabaseBackend::Device& device, devices) {
+    DeviceInfo info;
+    info.InitFromDb(device);
+    devices_ << info;
+  }
+
 #ifdef Q_WS_X11
   AddLister(new DeviceKitLister);
 #endif
@@ -42,6 +93,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 
 DeviceManager::~DeviceManager() {
   qDeleteAll(listers_);
+  backend_->deleteLater();
 }
 
 int DeviceManager::rowCount(const QModelIndex&) const {
@@ -105,21 +157,7 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
     info.unique_id_ = id;
     info.friendly_name_ = lister->DeviceInfo(id, DeviceLister::Field_FriendlyName).toString();
     info.size_ = lister->DeviceInfo(id, DeviceLister::Field_Capacity).toLongLong();
-
-    // Try to load the icon with that exact name first
-    QString icon_name = lister->DeviceInfo(id, DeviceLister::Field_Icon).toString();
-    info.icon_ = IconLoader::Load(icon_name);
-
-    // If that failed than try to guess if it's a phone or ipod.  Fall back on
-    // a usb memory stick icon.
-    if (info.icon_.isNull()) {
-      if (icon_name.contains("phone"))
-        info.icon_ = IconLoader::Load("phone");
-      else if (icon_name.contains("ipod") || icon_name.contains("apple"))
-        info.icon_ = IconLoader::Load("multimedia-player-ipod-standard-monochrome");
-      else
-        info.icon_ = IconLoader::Load("drive-removable-media-usb-pendrive");
-    }
+    info.LoadIcon(lister->DeviceInfo(id, DeviceLister::Field_Icon).toString());
 
     beginInsertRows(QModelIndex(), devices_.count(), devices_.count());
     devices_ << info;
@@ -127,7 +165,8 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
   } else {
     DeviceInfo& info = devices_[i];
 
-    // TODO: Make a ConnectedDevice
+    info.lister_ = lister;
+    dataChanged(index(i, 0), index(i, 0));
   }
 }
 
@@ -167,4 +206,27 @@ void DeviceManager::PhysicalDeviceChanged(const QString &id) {
   }
 
   // TODO
+}
+
+boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
+  DeviceInfo& info = devices_[row];
+  if (info.device_) // Already connected
+    return info.device_;
+
+  if (!info.lister_) // Not physically connected
+    return boost::shared_ptr<ConnectedDevice>();
+
+  bool first_time = (info.database_id_ == -1);
+  if (first_time) {
+    // We haven't stored this device in the database before
+    info.database_id_ = backend_->AddDevice(info.SaveToDb());
+  }
+
+  info.device_ = info.lister_->Connect(info.unique_id_, this, info.database_id_,
+                                       first_time);
+  return info.device_;
+}
+
+boost::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row) const {
+  return devices_[row].device_;
 }

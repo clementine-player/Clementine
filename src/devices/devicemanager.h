@@ -17,6 +17,7 @@
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
 
+#include "devicedatabasebackend.h"
 #include "core/backgroundthread.h"
 
 #include <QAbstractListModel>
@@ -40,6 +41,9 @@ public:
   BackgroundThread<Database>* database() const { return database_; }
   TaskManager* task_manager() const { return task_manager_; }
 
+  boost::shared_ptr<ConnectedDevice> Connect(int row);
+  boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+
   // QAbstractListModel
   int rowCount(const QModelIndex &parent) const;
   QVariant data(const QModelIndex &index, int role) const;
@@ -48,10 +52,6 @@ private slots:
   void PhysicalDeviceAdded(const QString& id);
   void PhysicalDeviceRemoved(const QString& id);
   void PhysicalDeviceChanged(const QString& id);
-
-private:
-  void AddLister(DeviceLister* lister);
-  int FindDeviceById(const QString& id) const;
 
 private:
   // Devices can be in three different states:
@@ -66,6 +66,11 @@ private:
   struct DeviceInfo {
     DeviceInfo();
 
+    void InitFromDb(const DeviceDatabaseBackend::Device& dev);
+    DeviceDatabaseBackend::Device SaveToDb() const;
+
+    void LoadIcon(const QString& filename);
+
     int database_id_; // -1 if not remembered in the database
     DeviceLister* lister_; // NULL if not physically connected
     boost::shared_ptr<ConnectedDevice> device_; // NULL if not connected to clementine
@@ -76,7 +81,14 @@ private:
     QIcon icon_;
   };
 
+  void AddLister(DeviceLister* lister);
+  int FindDeviceById(const QString& id) const;
+
+  DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info) const;
+
+private:
   BackgroundThread<Database>* database_;
+  DeviceDatabaseBackend* backend_;
   TaskManager* task_manager_;
 
   QList<DeviceLister*> listers_;

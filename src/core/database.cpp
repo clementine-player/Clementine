@@ -16,6 +16,7 @@
 
 #include "config.h"
 #include "database.h"
+#include "scopedtransaction.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -28,7 +29,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 14;
+const int Database::kSchemaVersion = 15;
 
 int Database::sNextConnectionId = 1;
 QMutex Database::sNextConnectionIdMutex;
@@ -429,21 +430,27 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
   else
     filename = QString(":/schema-%1.sql").arg(version);
 
+  ScopedTransaction t(&db);
+  ExecFromFile(filename, db);
+  t.Commit();
+}
+
+void Database::ExecFromFile(const QString &filename, QSqlDatabase &db) {
   // Open and read the database schema
   QFile schema_file(filename);
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
-  QString schema(QString::fromUtf8(schema_file.readAll()));
+  ExecCommands(QString::fromUtf8(schema_file.readAll()), db);
+}
 
+void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
   // Run each command
   QStringList commands(schema.split(";\n\n"));
-  db.transaction();
   foreach (const QString& command, commands) {
     QSqlQuery query(db.exec(command));
     if (CheckErrors(query.lastError()))
       qFatal("Unable to update music library database");
   }
-  db.commit();
 }
 
 bool Database::CheckErrors(const QSqlError& error) {

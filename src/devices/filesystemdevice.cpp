@@ -18,14 +18,15 @@
 #include "devicemanager.h"
 #include "filesystemdevice.h"
 #include "library/librarybackend.h"
+#include "library/librarymodel.h"
 #include "library/librarywatcher.h"
 
 #include <QtDebug>
 
 FilesystemDevice::FilesystemDevice(
-    const QString& mount_point, DeviceLister* lister, const QString& id,
-    DeviceManager* manager)
-      : ConnectedDevice(lister, id, manager),
+    const QString& mount_point, DeviceLister* lister, const QString& unique_id,
+    DeviceManager* manager, int database_id, bool first_time)
+      : ConnectedDevice(lister, unique_id, manager, database_id),
         watcher_(new BackgroundThreadImplementation<LibraryWatcher, LibraryWatcher>(this))
 {
   // Create the library watcher
@@ -55,7 +56,10 @@ FilesystemDevice::FilesystemDevice(
   connect(watcher,  SIGNAL(CompilationsNeedUpdating()),
           backend_, SLOT(UpdateCompilations()));
 
-  backend_->AddDirectory(mount_point);
+  if (first_time)
+    backend_->AddDirectory(mount_point);
+  else
+    backend_->LoadDirectoriesAsync();
 }
 
 FilesystemDevice::~FilesystemDevice() {

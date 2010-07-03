@@ -53,6 +53,7 @@ set(SOURCES
   core/utilities.cpp
 
   devices/connecteddevice.cpp
+  devices/devicedatabasebackend.cpp
   devices/devicelister.cpp
   devices/devicemanager.cpp
   devices/deviceview.cpp
@@ -171,6 +172,7 @@ set(HEADERS
   core/taskmanager.h
 
   devices/connecteddevice.h
+  devices/devicedatabasebackend.h
   devices/devicelister.h
   devices/devicemanager.h
   devices/deviceview.h

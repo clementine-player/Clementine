@@ -19,6 +19,8 @@
 
 #include <QAbstractItemModel>
 
+#include <boost/shared_ptr.hpp>
+
 class ConnectedDevice;
 class DeviceManager;
 
@@ -51,7 +53,9 @@ public:
 
   // Create a new ConnectedDevice instance for the given device.  Must be
   // thread-safe.
-  virtual ConnectedDevice* Connect(const QString& id, DeviceManager* manager) = 0;
+  virtual boost::shared_ptr<ConnectedDevice> Connect(
+      const QString& unique_id, DeviceManager* manager, int database_id,
+      bool first_time) = 0;
 
 signals:
   void DeviceAdded(const QString& id);

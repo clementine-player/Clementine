@@ -14,38 +14,44 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONNECTEDDEVICE_H
-#define CONNECTEDDEVICE_H
+#ifndef DEVICEDATABASEBACKEND_H
+#define DEVICEDATABASEBACKEND_H
 
 #include <QObject>
 
-class Database;
-class DeviceLister;
-class DeviceManager;
-class LibraryBackend;
-class LibraryModel;
+#include <boost/shared_ptr.hpp>
 
-class ConnectedDevice : public QObject {
+class Database;
+
+class DeviceDatabaseBackend : public QObject {
   Q_OBJECT
 
 public:
-  ConnectedDevice(DeviceLister* lister, const QString& unique_id,
-                  DeviceManager* manager, int database_id);
-  ~ConnectedDevice();
+  Q_INVOKABLE DeviceDatabaseBackend(QObject* parent = 0);
 
-  DeviceLister* lister() const { return lister_; }
-  QString unique_id() const { return unique_id_; }
+  struct Device {
+    Device() : id_(-1) {}
 
-  LibraryModel* model() const { return model_; }
+    int id_;
+    QString unique_id_;
+    QString friendly_name_;
+    quint64 size_;
+    QString icon_name_;
+  };
+  typedef QList<Device> DeviceList;
 
-protected:
-  DeviceLister* lister_;
-  QString unique_id_;
-  int database_id_;
-  DeviceManager* manager_;
+  static const int kDeviceSchemaVersion;
 
-  LibraryBackend* backend_;
-  LibraryModel* model_;
+  void Init(boost::shared_ptr<Database> db);
+  boost::shared_ptr<Database> db() const { return db_; }
+
+  DeviceList GetAllDevices();
+  int AddDevice(const Device& device);
+  void RemoveDevice(int id);
+
+private:
+  boost::shared_ptr<Database> db_;
+
 };
 
-#endif // CONNECTEDDEVICE_H
+#endif // DEVICEDATABASEBACKEND_H

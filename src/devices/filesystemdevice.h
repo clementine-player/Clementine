@@ -18,6 +18,7 @@
 #define FILESYSTEMDEVICE_H
 
 #include "connecteddevice.h"
+#include "core/backgroundthread.h"
 
 class DeviceManager;
 class LibraryWatcher;
@@ -27,7 +28,8 @@ class FilesystemDevice : public ConnectedDevice {
 
 public:
   FilesystemDevice(const QString& mount_point, DeviceLister* lister,
-                   const QString& id, DeviceManager* manager);
+                   const QString& unique_id, DeviceManager* manager,
+                   int database_id, bool first_time);
   ~FilesystemDevice();
 
 private:

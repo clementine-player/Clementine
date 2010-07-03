@@ -14,12 +14,68 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "connecteddevice.h"
+#include "devicemanager.h"
 #include "deviceview.h"
+#include "core/mergedproxymodel.h"
+#include "library/librarymodel.h"
+#include "ui/iconloader.h"
 
+#include <QContextMenuEvent>
 #include <QMenu>
+#include <QSortFilterProxyModel>
+
+#include <boost/shared_ptr.hpp>
 
 DeviceView::DeviceView(QWidget* parent)
   : QTreeView(parent),
+    manager_(NULL),
+    merged_model_(NULL),
+    sort_model_(NULL),
     menu_(new QMenu(this))
 {
+  connect_action_ = menu_->addAction(
+      IconLoader::Load("list-add"), tr("Connect device"), this, SLOT(Connect()));
+}
+
+void DeviceView::SetDeviceManager(DeviceManager *manager) {
+  Q_ASSERT(manager_ == NULL);
+
+  manager_ = manager;
+
+  merged_model_ = new MergedProxyModel(this);
+  merged_model_->setSourceModel(manager_);
+
+  sort_model_ = new QSortFilterProxyModel(this);
+  sort_model_->setSourceModel(merged_model_);
+  sort_model_->setDynamicSortFilter(true);
+  sort_model_->sort(0);
+
+  setModel(sort_model_);
+}
+
+void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
+  menu_index_ = currentIndex();
+  bool is_device = (MapToDevice(menu_index_).isValid());
+
+  connect_action_->setEnabled(is_device);
+  menu_->popup(e->globalPos());
+}
+
+QModelIndex DeviceView::MapToDevice(const QModelIndex &sort_model_index) const {
+  if (sort_model_index.model() != sort_model_)
+    return QModelIndex();
+
+  QModelIndex index =
+      merged_model_->mapToSource(sort_model_->mapToSource(sort_model_index));
+  if (index.model() != manager_)
+    return QModelIndex();
+  return index;
+}
+
+void DeviceView::Connect() {
+  QModelIndex device_idx = MapToDevice(menu_index_);
+
+  boost::shared_ptr<ConnectedDevice> device = manager_->Connect(device_idx.row());
+  merged_model_->AddSubModel(device_idx, device->model());
 }

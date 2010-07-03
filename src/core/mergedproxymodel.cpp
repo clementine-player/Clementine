@@ -56,6 +56,9 @@ void MergedProxyModel::AddSubModel(const QModelIndex& source_parent,
           this, SLOT(RowsInserted(QModelIndex,int,int)));
   connect(submodel, SIGNAL(rowsRemoved(QModelIndex,int,int)),
           this, SLOT(RowsRemoved(QModelIndex,int,int)));
+
+  QModelIndex proxy_parent = mapFromSource(source_parent);
+  dataChanged(proxy_parent, proxy_parent);
 }
 
 void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {

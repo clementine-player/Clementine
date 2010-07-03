@@ -21,6 +21,10 @@
 
 class QAction;
 class QMenu;
+class QSortFilterProxyModel;
+
+class DeviceManager;
+class MergedProxyModel;
 
 class DeviceView : public QTreeView {
   Q_OBJECT
@@ -28,9 +32,25 @@ class DeviceView : public QTreeView {
 public:
   DeviceView(QWidget* parent = 0);
 
+  void SetDeviceManager(DeviceManager* manager);
+
+protected:
+  void contextMenuEvent(QContextMenuEvent *);
+
+private slots:
+  void Connect();
+
 private:
+  QModelIndex MapToDevice(const QModelIndex& sort_model_index) const;
+
+private:
+  DeviceManager* manager_;
+  MergedProxyModel* merged_model_;
+  QSortFilterProxyModel* sort_model_;
+
   QMenu* menu_;
   QAction* connect_action_;
+  QModelIndex menu_index_;
 };
 
 #endif // DEVICEVIEW_H

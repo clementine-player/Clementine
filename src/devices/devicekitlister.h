@@ -45,7 +45,9 @@ public:
   QStringList DeviceUniqueIDs();
   QVariant DeviceInfo(const QString& id, int field);
 
-  ConnectedDevice* Connect(const QString &id, DeviceManager* manager);
+  boost::shared_ptr<ConnectedDevice> Connect(
+      const QString &unique_id, DeviceManager* manager, int database_id,
+      bool first_time);
 
 protected:
   void Init();
