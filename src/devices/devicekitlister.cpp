@@ -104,6 +104,9 @@ QVariant DeviceKitLister::DeviceInfo(const QString& id, int field) {
         return QString("%1 %2").arg(data.drive_vendor, data.drive_model);
       return data.drive_serial;
 
+    case Field_Icon:
+      return data.device_presentation_icon_name;
+
     case Field_Manufacturer:
       return data.drive_vendor;
 

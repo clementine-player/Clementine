@@ -171,19 +171,10 @@ QString LengthItemDelegate::displayText(const QVariant& value, const QLocale&) c
 QString SizeItemDelegate::displayText(const QVariant& value, const QLocale&) const {
   bool ok = false;
   int bytes = value.toInt(&ok);
-  QString ret;
 
-  if (ok && bytes > 0) {
-    if (bytes <= 1024)
-      ret.sprintf("%d bytes", bytes);
-    else if (bytes <= 1024*1024)
-      ret.sprintf("%.1f KB", float(bytes) / 1024);
-    else if (bytes <= 1024*1024*1024)
-      ret.sprintf("%.1f MB", float(bytes) / (1024*1024));
-    else
-      ret.sprintf("%.1f GB", float(bytes) / (1024*1024*1024));
-  }
-  return ret;
+  if (ok)
+    return Utilities::PrettySize(bytes);
+  return QString();
 }
 
 QString DateItemDelegate::displayText(const QVariant &value, const QLocale &locale) const {

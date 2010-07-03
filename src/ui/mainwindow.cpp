@@ -118,7 +118,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     player_(NULL),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
-    devices_(new DeviceManager(task_manager_, this)),
+    devices_(NULL),
     settings_dialog_(NULL),
     add_stream_dialog_(new AddStreamDialog),
     cover_manager_(NULL),
@@ -150,6 +150,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
   settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
   radio_model_->SetSettingsDialog(settings_dialog_.get());
+  devices_ = new DeviceManager(database_, task_manager_, this),
 
   // Initialise the UI
   ui_->setupUi(this);
@@ -194,6 +195,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
   ui_->radio_view->SetModel(radio_model_);
+
+  ui_->devices_view->setModel(devices_);
 
   organise_dialog_->AddDirectoryModel(library_->model()->directory_model());
 

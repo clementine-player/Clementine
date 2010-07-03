@@ -41,7 +41,7 @@
            <enum>QTabWidget::North</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <property name="usesScrollButtons">
            <bool>false</bool>
@@ -122,6 +122,32 @@
             </property>
             <item>
              <widget class="RadioViewContainer" name="radio_view" native="true"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="devices_tab">
+           <attribute name="title">
+            <string>Devices</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="DeviceView" name="devices_view">
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="allColumnsShowFocus">
+               <bool>true</bool>
+              </property>
+              <property name="headerHidden">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -860,6 +886,11 @@
    <extends>QWidget</extends>
    <header>widgets/nowplayingwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DeviceView</class>
+   <extends>QTreeView</extends>
+   <header>devices/deviceview.h</header>
   </customwidget>
  </customwidgets>
  <resources>

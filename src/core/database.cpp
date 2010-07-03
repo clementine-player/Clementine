@@ -28,7 +28,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 13;
+const int Database::kSchemaVersion = 14;
 
 int Database::sNextConnectionId = 1;
 QMutex Database::sNextConnectionIdMutex;

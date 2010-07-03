@@ -21,6 +21,7 @@
 
 namespace Utilities {
   QString PrettyTime(int seconds);
+  QString PrettySize(quint64 bytes);
   QString WordyTime(quint64 seconds);
 }
 

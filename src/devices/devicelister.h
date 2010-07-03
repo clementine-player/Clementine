@@ -32,6 +32,7 @@ public:
   enum Field {
     Field_UniqueID = 0,
     Field_FriendlyName,
+    Field_Icon,
     Field_Manufacturer,
     Field_Model,
     Field_Capacity,

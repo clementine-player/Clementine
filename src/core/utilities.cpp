@@ -21,6 +21,10 @@
 
 namespace Utilities {
 
+static QString tr(const char* str) {
+  return QCoreApplication::translate("", str);
+}
+
 QString PrettyTime(int seconds) {
   // last.fm sometimes gets the track length wrong, so you end up with
   // negative times.
@@ -39,10 +43,6 @@ QString PrettyTime(int seconds) {
   return ret;
 }
 
-static QString tr(const char* str) {
-  return QCoreApplication::translate("", str);
-}
-
 QString WordyTime(quint64 seconds) {
   quint64 days = seconds / (60*60*24);
 
@@ -54,6 +54,22 @@ QString WordyTime(quint64 seconds) {
   parts << PrettyTime(seconds - days*60*60*24);
 
   return parts.join(" ");
+}
+
+QString PrettySize(quint64 bytes) {
+  QString ret;
+
+  if (bytes > 0) {
+    if (bytes <= 1000)
+      ret = QString::number(bytes) + " bytes";
+    else if (bytes <= 1000*1000)
+      ret.sprintf("%.1f KB", float(bytes) / 1000);
+    else if (bytes <= 1000*1000*1000)
+      ret.sprintf("%.1f MB", float(bytes) / (1000*1000));
+    else
+      ret.sprintf("%.1f GB", float(bytes) / (1000*1000*1000));
+  }
+  return ret;
 }
 
 } // namespace

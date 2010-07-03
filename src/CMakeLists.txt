@@ -55,6 +55,7 @@ set(SOURCES
   devices/connecteddevice.cpp
   devices/devicelister.cpp
   devices/devicemanager.cpp
+  devices/deviceview.cpp
   devices/filesystemdevice.cpp
 
   engines/enginebase.cpp
@@ -172,6 +173,7 @@ set(HEADERS
   devices/connecteddevice.h
   devices/devicelister.h
   devices/devicemanager.h
+  devices/deviceview.h
   devices/filesystemdevice.h
 
   engines/enginebase.h
