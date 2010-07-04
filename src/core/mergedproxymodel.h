@@ -84,6 +84,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   void RowsInserted(const QModelIndex& source_parent, int start, int end);
   void RowsAboutToBeRemoved(const QModelIndex& source_parent, int start, int end);
   void RowsRemoved(const QModelIndex& source_parent, int start, int end);
+  void DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right);
 
  private:
   QModelIndex GetActualSourceParent(const QModelIndex& source_parent,

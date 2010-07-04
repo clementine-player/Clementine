@@ -194,7 +194,7 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
     DeviceInfo& info = devices_[i];
 
     info.lister_ = lister;
-    dataChanged(index(i, 0), index(i, 0));
+    emit dataChanged(index(i, 0), index(i, 0));
   }
 }
 

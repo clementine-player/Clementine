@@ -110,6 +110,8 @@ void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {
                this, SLOT(RowsInserted(QModelIndex,int,int)));
     disconnect(sourceModel(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
                this, SLOT(RowsRemoved(QModelIndex,int,int)));
+    disconnect(sourceModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+               this, SLOT(DataChanged(QModelIndex,QModelIndex)));
   }
 
   QAbstractProxyModel::setSourceModel(source_model);
@@ -123,6 +125,8 @@ void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {
           this, SLOT(RowsInserted(QModelIndex,int,int)));
   connect(sourceModel(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
           this, SLOT(RowsRemoved(QModelIndex,int,int)));
+  connect(sourceModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+          this, SLOT(DataChanged(QModelIndex,QModelIndex)));
 }
 
 void MergedProxyModel::SourceModelReset() {
@@ -409,4 +413,8 @@ QAbstractItemModel* MergedProxyModel::GetModel(const QModelIndex& source_index) 
       return submodel;
   }
   return NULL;
+}
+
+void MergedProxyModel::DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right) {
+  emit dataChanged(mapFromSource(top_left), mapFromSource(bottom_right));
 }
