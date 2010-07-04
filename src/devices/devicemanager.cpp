@@ -22,7 +22,10 @@
 #include "ui/iconloader.h"
 
 #include <QIcon>
+#include <QPainter>
 
+const int DeviceManager::kDeviceIconSize = 32;
+const int DeviceManager::kDeviceIconOverlaySize = 16;
 
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
@@ -54,17 +57,19 @@ void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &
 
 void DeviceManager::DeviceInfo::LoadIcon(const QString &filename) {
   // Try to load the icon with that exact name first
-  icon_ = IconLoader::Load(filename);
+  icon_name_ = filename;
+  icon_ = IconLoader::Load(icon_name_);
 
   // If that failed than try to guess if it's a phone or ipod.  Fall back on
   // a usb memory stick icon.
   if (icon_.isNull()) {
     if (filename.contains("phone"))
-      icon_ = IconLoader::Load("phone");
+      icon_name_ = "phone";
     else if (filename.contains("ipod") || filename.contains("apple"))
-      icon_ = IconLoader::Load("multimedia-player-ipod-standard-monochrome");
+      icon_name_ = "multimedia-player-ipod-standard-monochrome";
     else
-      icon_ = IconLoader::Load("drive-removable-media-usb-pendrive");
+      icon_name_ = "drive-removable-media-usb-pendrive";
+    icon_ = IconLoader::Load(icon_name_);
   }
 }
 
@@ -73,7 +78,8 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
                              TaskManager* task_manager, QObject *parent)
   : QAbstractListModel(parent),
     database_(database),
-    task_manager_(task_manager)
+    task_manager_(task_manager),
+    not_connected_overlay_(IconLoader::Load("edit-delete"))
 {
   // Create the backend in the database thread
   backend_ = database_->CreateInThread<DeviceDatabaseBackend>();
@@ -107,20 +113,42 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
   const DeviceInfo& info = devices_[index.row()];
 
   switch (role) {
-  case Qt::DisplayRole: {
-    QString text = info.friendly_name_.isEmpty() ? info.unique_id_ : info.friendly_name_;
-    if (info.size_)
-      text = text + QString(" (%1)").arg(Utilities::PrettySize(info.size_));
-    return text;
-  }
+    case Qt::DisplayRole: {
+      QString text = info.friendly_name_.isEmpty() ? info.unique_id_ : info.friendly_name_;
+      if (info.size_)
+        text = text + QString(" (%1)").arg(Utilities::PrettySize(info.size_));
+      return text;
+    }
 
-  case Qt::DecorationRole: {
-    bool connected = info.lister_;
-    return info.icon_.pixmap(22, connected ? QIcon::Normal : QIcon::Disabled);
-  }
+    case Qt::DecorationRole: {
+      QPixmap pixmap = info.icon_.pixmap(kDeviceIconSize);
 
-  default:
-    return QVariant();
+      if (!info.lister_) {
+        // Disconnected but remembered
+        QPainter p(&pixmap);
+        p.drawPixmap(kDeviceIconSize - kDeviceIconOverlaySize,
+                     kDeviceIconSize - kDeviceIconOverlaySize,
+                     not_connected_overlay_.pixmap(kDeviceIconOverlaySize));
+      }
+
+      return pixmap;
+    }
+
+    case Role_Lister:
+      return QVariant::fromValue(info.lister_);
+
+    case Role_UniqueId:
+      return info.unique_id_;
+
+    case Role_State:
+      if (info.device_)
+        return State_Connected;
+      if (info.lister_)
+        return State_NotConnected;
+      return State_Remembered;
+
+    default:
+      return QVariant();
   }
 }
 

@@ -17,6 +17,7 @@
 #ifndef DEVICEVIEW_H
 #define DEVICEVIEW_H
 
+#include "library/libraryview.h"
 #include "widgets/autoexpandingtreeview.h"
 
 class QAction;
@@ -25,6 +26,16 @@ class QSortFilterProxyModel;
 
 class DeviceManager;
 class MergedProxyModel;
+
+class DeviceItemDelegate : public LibraryItemDelegate {
+public:
+  DeviceItemDelegate(QObject* parent);
+
+  static const int kIconPadding;
+
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+};
+
 
 class DeviceView : public AutoExpandingTreeView {
   Q_OBJECT

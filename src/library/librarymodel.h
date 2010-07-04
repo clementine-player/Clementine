@@ -47,6 +47,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     Role_SortText,
     Role_Key,
     Role_Artist,
+
+    LastRole
   };
 
   // These values get saved in QSettings - don't change them

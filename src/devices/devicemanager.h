@@ -19,6 +19,7 @@
 
 #include "devicedatabasebackend.h"
 #include "core/backgroundthread.h"
+#include "library/librarymodel.h"
 
 #include <QAbstractListModel>
 #include <QIcon>
@@ -37,6 +38,21 @@ public:
   DeviceManager(BackgroundThread<Database>* database, TaskManager* task_manager,
                 QObject* parent = 0);
   ~DeviceManager();
+
+  enum Role {
+    Role_State = LibraryModel::LastRole,
+    Role_UniqueId,
+    Role_Lister,
+  };
+
+  enum State {
+    State_Remembered,
+    State_NotConnected,
+    State_Connected,
+  };
+
+  static const int kDeviceIconSize;
+  static const int kDeviceIconOverlaySize;
 
   BackgroundThread<Database>* database() const { return database_; }
   TaskManager* task_manager() const { return task_manager_; }
@@ -83,6 +99,8 @@ private:
     QString unique_id_;
     QString friendly_name_;
     quint64 size_;
+
+    QString icon_name_;
     QIcon icon_;
   };
 
@@ -95,6 +113,8 @@ private:
   BackgroundThread<Database>* database_;
   DeviceDatabaseBackend* backend_;
   TaskManager* task_manager_;
+
+  QIcon not_connected_overlay_;
 
   QList<DeviceLister*> listers_;
   QList<DeviceInfo> devices_;

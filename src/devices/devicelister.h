@@ -71,5 +71,6 @@ protected:
 private slots:
   void ThreadStarted();
 };
+Q_DECLARE_METATYPE(DeviceLister*);
 
 #endif // DEVICELISTER_H

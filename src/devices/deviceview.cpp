@@ -18,15 +18,84 @@
 #include "devicemanager.h"
 #include "deviceview.h"
 #include "core/mergedproxymodel.h"
-#include "library/libraryview.h"
 #include "library/librarymodel.h"
 #include "ui/iconloader.h"
 
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QPainter>
 #include <QSortFilterProxyModel>
 
 #include <boost/shared_ptr.hpp>
+
+const int DeviceItemDelegate::kIconPadding = 6;
+
+DeviceItemDelegate::DeviceItemDelegate(QObject *parent)
+  : LibraryItemDelegate(parent)
+{
+}
+
+void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, const QModelIndex& index) const {
+  // Is it a device or a library item?
+  if (index.data(DeviceManager::Role_State).isNull()) {
+    LibraryItemDelegate::paint(p, opt, index);
+    return;
+  }
+
+  // Draw the background
+  QStyledItemDelegate::paint(p, opt, QModelIndex());
+
+  p->save();
+
+  // Font for the status line
+  QFont status_font(opt.font);
+  status_font.setItalic(true);
+  status_font.setPointSize(status_font.pointSize() - 2);
+
+  const int text_height = QFontMetrics(opt.font).height() +
+                          QFontMetrics(status_font).height();
+
+  QRect line1(opt.rect);
+  QRect line2(opt.rect);
+  line1.setTop(line1.top() + (opt.rect.height() - text_height) / 2);
+  line2.setTop(line1.top() + QFontMetrics(opt.font).height());
+  line1.setLeft(line1.left() + DeviceManager::kDeviceIconSize + kIconPadding);
+  line2.setLeft(line2.left() + DeviceManager::kDeviceIconSize + kIconPadding);
+
+  // Change the color for selected items
+  if (opt.state & QStyle::State_Selected) {
+    p->setPen(opt.palette.color(QPalette::HighlightedText));
+  }
+
+  // Draw the icon
+  p->drawPixmap(opt.rect.topLeft(), index.data(Qt::DecorationRole).value<QPixmap>());
+
+  // Draw the first line (device name)
+  p->drawText(line1, Qt::AlignLeft | Qt::AlignTop, index.data().toString());
+
+  // Draw the second line (status)
+  p->setFont(status_font);
+
+  DeviceManager::State state =
+      static_cast<DeviceManager::State>(index.data(DeviceManager::Role_State).toInt());
+  switch (state) {
+    case DeviceManager::State_Remembered:
+      p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, tr("Not connected"));
+      break;
+
+    case DeviceManager::State_NotConnected:
+      p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, tr("Double click to open"));
+      break;
+
+    case DeviceManager::State_Connected:
+      p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, tr("Connected"));
+      break;
+  }
+
+  p->restore();
+}
+
+
 
 DeviceView::DeviceView(QWidget* parent)
   : AutoExpandingTreeView(parent),
@@ -40,7 +109,7 @@ DeviceView::DeviceView(QWidget* parent)
   disconnect_action_ = menu_->addAction(
       IconLoader::Load("list-remove"), tr("Disconnect device"), this, SLOT(Disconnect()));
 
-  setItemDelegate(new LibraryItemDelegate(this));
+  setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
 }
 
@@ -92,6 +161,8 @@ void DeviceView::Connect() {
   QModelIndex sort_idx = sort_model_->mapFromSource(device_idx);
 
   boost::shared_ptr<ConnectedDevice> device = manager_->Connect(device_idx.row());
+  if (!device)
+    return;
 
   QSortFilterProxyModel* sort_model = new QSortFilterProxyModel(device->model());
   sort_model->setSourceModel(device->model());
