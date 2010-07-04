@@ -18,6 +18,7 @@
 #include "devicemanager.h"
 #include "deviceview.h"
 #include "core/mergedproxymodel.h"
+#include "library/libraryview.h"
 #include "library/librarymodel.h"
 #include "ui/iconloader.h"
 
@@ -28,7 +29,7 @@
 #include <boost/shared_ptr.hpp>
 
 DeviceView::DeviceView(QWidget* parent)
-  : QTreeView(parent),
+  : AutoExpandingTreeView(parent),
     manager_(NULL),
     merged_model_(NULL),
     sort_model_(NULL),
@@ -38,6 +39,9 @@ DeviceView::DeviceView(QWidget* parent)
       IconLoader::Load("list-add"), tr("Connect device"), this, SLOT(Connect()));
   disconnect_action_ = menu_->addAction(
       IconLoader::Load("list-remove"), tr("Disconnect device"), this, SLOT(Disconnect()));
+
+  setItemDelegate(new LibraryItemDelegate(this));
+  SetExpandOnReset(false);
 }
 
 void DeviceView::SetDeviceManager(DeviceManager *manager) {
@@ -48,6 +52,10 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
 
   merged_model_ = new MergedProxyModel(this);
   merged_model_->setSourceModel(manager_);
+
+  connect(merged_model_,
+          SIGNAL(SubModelReset(QModelIndex,QAbstractItemModel*)),
+          SLOT(RecursivelyExpand(QModelIndex)));
 
   sort_model_ = new QSortFilterProxyModel(this);
   sort_model_->setSourceModel(merged_model_);
@@ -87,6 +95,8 @@ void DeviceView::Connect() {
 
   boost::shared_ptr<ConnectedDevice> device = manager_->Connect(device_idx.row());
   merged_model_->AddSubModel(device_idx, device->model());
+
+  expand(menu_index_);
 }
 
 void DeviceView::Disconnect() {

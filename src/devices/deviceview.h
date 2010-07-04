@@ -17,7 +17,7 @@
 #ifndef DEVICEVIEW_H
 #define DEVICEVIEW_H
 
-#include <QTreeView>
+#include "widgets/autoexpandingtreeview.h"
 
 class QAction;
 class QMenu;
@@ -26,7 +26,7 @@ class QSortFilterProxyModel;
 class DeviceManager;
 class MergedProxyModel;
 
-class DeviceView : public QTreeView {
+class DeviceView : public AutoExpandingTreeView {
   Q_OBJECT
 
 public:
