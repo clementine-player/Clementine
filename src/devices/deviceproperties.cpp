@@ -30,33 +30,6 @@ DeviceProperties::DeviceProperties(QWidget *parent)
 {
   ui_->setupUi(this);
 
-  // Load icons
-  QStringList icon_names = QStringList()
-      << "drive-removable-media-usb-pendrive"
-      << "multimedia-player-ipod-mini-blue"
-      << "multimedia-player-ipod-mini-gold"
-      << "multimedia-player-ipod-mini-green"
-      << "multimedia-player-ipod-mini-pink"
-      << "multimedia-player-ipod-mini-silver"
-      << "multimedia-player-ipod-nano-black"
-      << "multimedia-player-ipod-nano-white"
-      << "multimedia-player-ipod-shuffle"
-      << "multimedia-player-ipod-standard-color"
-      << "multimedia-player-ipod-standard-monochrome"
-      << "multimedia-player-ipod-U2-color"
-      << "multimedia-player-ipod-U2-monochrome"
-      << "phone"
-      << "phone-google-nexus-one"
-      << "phone-htc-g1-white"
-      << "phone-nokia-n900"
-      << "phone-palm-pre";
-
-  foreach (const QString& icon_name, icon_names) {
-    QListWidgetItem* item = new QListWidgetItem(
-        IconLoader::Load(icon_name), QString(), ui_->icon);
-    item->setData(Qt::UserRole, icon_name);
-  }
-
   // Maximum height of the icon widget
   ui_->icon->setMaximumHeight(ui_->icon->iconSize().height() +
                               ui_->icon->horizontalScrollBar()->sizeHint().height() +
@@ -78,6 +51,35 @@ void DeviceProperties::SetDeviceManager(DeviceManager *manager) {
 }
 
 void DeviceProperties::ShowDevice(int row) {
+  // Only load the icons the first time the dialog is shown
+  if (ui_->icon->count() == 0) {
+    QStringList icon_names = QStringList()
+        << "drive-removable-media-usb-pendrive"
+        << "multimedia-player-ipod-mini-blue"
+        << "multimedia-player-ipod-mini-gold"
+        << "multimedia-player-ipod-mini-green"
+        << "multimedia-player-ipod-mini-pink"
+        << "multimedia-player-ipod-mini-silver"
+        << "multimedia-player-ipod-nano-black"
+        << "multimedia-player-ipod-nano-white"
+        << "multimedia-player-ipod-shuffle"
+        << "multimedia-player-ipod-standard-color"
+        << "multimedia-player-ipod-standard-monochrome"
+        << "multimedia-player-ipod-U2-color"
+        << "multimedia-player-ipod-U2-monochrome"
+        << "phone"
+        << "phone-google-nexus-one"
+        << "phone-htc-g1-white"
+        << "phone-nokia-n900"
+        << "phone-palm-pre";
+
+    foreach (const QString& icon_name, icon_names) {
+      QListWidgetItem* item = new QListWidgetItem(
+          IconLoader::Load(icon_name), QString(), ui_->icon);
+      item->setData(Qt::UserRole, icon_name);
+    }
+  }
+
   index_ = manager_->index(row);
 
   // Basic information
@@ -136,3 +138,11 @@ void DeviceProperties::UpdateHardwareInfo() {
     ui_->hardware_info_stack->setCurrentWidget(ui_->hardware_info_not_connected_page);
   }
 }
+
+void DeviceProperties::accept() {
+  QDialog::accept();
+
+  manager_->SetDeviceIdentity(index_.row(), ui_->name->text(),
+                              ui_->icon->currentItem()->data(Qt::UserRole).toString());
+}
+

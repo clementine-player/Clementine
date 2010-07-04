@@ -312,6 +312,25 @@ void DeviceManager::Forget(int row) {
 
     endRemoveRows();
   } else {
+    // It's still attached, set the name and icon back to what they were
+    // originally
+    info.friendly_name_ = info.lister_->MakeFriendlyName(info.unique_id_);
+    info.icon_name_ = info.lister_->DeviceIcon(info.unique_id_);
+    info.LoadIcon(info.icon_name_);
+
     dataChanged(index(row, 0), index(row, 0));
   }
+}
+
+void DeviceManager::SetDeviceIdentity(int row, const QString &friendly_name,
+                                      const QString &icon_name) {
+  DeviceInfo& info = devices_[row];
+  info.friendly_name_ = friendly_name;
+  info.icon_name_ = icon_name;
+  info.LoadIcon(info.icon_name_);
+
+  emit dataChanged(index(row, 0), index(row, 0));
+
+  if (info.database_id_ != -1)
+    backend_->SetDeviceIdentity(info.database_id_, friendly_name, icon_name);
 }

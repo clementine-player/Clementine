@@ -31,8 +31,10 @@ public:
   ~DeviceProperties();
 
   void SetDeviceManager(DeviceManager* manager);
-
   void ShowDevice(int row);
+
+public slots:
+  void accept();
 
 private:
   void UpdateHardwareInfo();

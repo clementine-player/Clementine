@@ -71,6 +71,9 @@ public:
   void Disconnect(int row);
   void Forget(int row);
 
+  void SetDeviceIdentity(int row, const QString& friendly_name,
+                         const QString& icon_name);
+
   // QAbstractListModel
   int rowCount(const QModelIndex &parent) const;
   QVariant data(const QModelIndex &index, int role) const;

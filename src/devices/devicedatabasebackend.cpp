@@ -107,3 +107,19 @@ void DeviceDatabaseBackend::RemoveDevice(int id) {
 
   t.Commit();
 }
+
+void DeviceDatabaseBackend::SetDeviceIdentity(int id, const QString &friendly_name,
+                                              const QString &icon_name) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("UPDATE devices"
+              " SET friendly_name=:friendly_name,"
+              "     icon=:icon_name"
+              " WHERE ROWID=:id", db);
+  q.bindValue(":friendly_name", friendly_name);
+  q.bindValue(":icon_name", icon_name);
+  q.bindValue(":id", id);
+  q.exec();
+  db_->CheckErrors(q.lastError());
+}

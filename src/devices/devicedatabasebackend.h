@@ -49,6 +49,9 @@ public:
   int AddDevice(const Device& device);
   void RemoveDevice(int id);
 
+  void SetDeviceIdentity(int id, const QString& friendly_name,
+                         const QString& icon_name);
+
 private:
   boost::shared_ptr<Database> db_;
 
