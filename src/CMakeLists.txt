@@ -453,6 +453,15 @@ if(NOT APPLE AND NOT WIN32)
   list(APPEND HEADERS devices/devicekitlister.h)
 endif(NOT APPLE AND NOT WIN32)
 
+# Libgpod device backend
+if(LIBGPOD_FOUND)
+  set(HAVE_LIBGPOD ON)
+  include_directories(${LIBGPOD_INCLUDE_DIRS})
+
+  list(APPEND SOURCES devices/gpoddevice.cpp devices/gpodloader.cpp)
+  list(APPEND HEADERS devices/gpoddevice.h devices/gpodloader.h)
+endif(LIBGPOD_FOUND)
+
 # Mac specific startup stuff
 if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
@@ -465,6 +474,10 @@ list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.mm
   devices/devicekitlister.h
   devices/devicekitlister.cpp
+  devices/gpoddevice.cpp
+  devices/gpoddevice.h
+  devices/gpodloader.cpp
+  devices/gpodloader.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   widgets/osd_mac.mm
@@ -515,6 +528,10 @@ target_link_libraries(clementine_lib
 if(ENABLE_VISUALISATIONS)
   target_link_libraries(clementine_lib projectM)
 endif(ENABLE_VISUALISATIONS)
+
+if(HAVE_LIBGPOD)
+  target_link_libraries(clementine_lib ${LIBGPOD_LIBRARIES})
+endif(HAVE_LIBGPOD)
 
 if (APPLE)
   target_link_libraries(clementine_lib

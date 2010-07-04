@@ -26,10 +26,15 @@
 #include <QString>
 #include <QMetaType>
 
+#include "config.h"
 #include "engines/engine_fwd.h"
 
 #include <taglib/id3v1tag.h>
 #include "nsUniversalDetector.h"
+
+#ifdef HAVE_LIBGPOD
+#  include <gpod/itdb.h>
+#endif
 
 namespace lastfm {
   class Track;
@@ -118,7 +123,12 @@ class Song {
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const QSqlQuery& query, int col = 0);
   void InitFromLastFM(const lastfm::Track& track);
+
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
+
+#ifdef HAVE_LIBGPOD
+  void InitFromItdb(Itdb_Track* track);
+#endif
 
   static QString Decode(const TagLib::String& tag, const QTextCodec* codec);
 

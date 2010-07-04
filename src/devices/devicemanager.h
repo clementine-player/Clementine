@@ -81,6 +81,7 @@ public:
 
 signals:
   void DeviceDisconnected(int row);
+  void Error(const QString& message);
 
 private slots:
   void PhysicalDeviceAdded(const QString& id);

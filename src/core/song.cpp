@@ -529,6 +529,37 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->length_ = track.duration();
 }
 
+#ifdef HAVE_LIBGPOD
+  void Song::InitFromItdb(Itdb_Track* track) {
+    d->valid_ = true;
+
+    d->title_ = QString::fromUtf8(track->title);
+    d->album_ = QString::fromUtf8(track->album);
+    d->artist_ = QString::fromUtf8(track->artist);
+    d->albumartist_ = QString::fromUtf8(track->albumartist);
+    d->composer_ = QString::fromUtf8(track->composer);
+    d->track_ = track->track_nr;
+    d->disc_ = track->cd_nr;
+    d->bpm_ = track->BPM;
+    d->year_ = track->year;
+    d->genre_ = QString::fromUtf8(track->genre);
+    d->comment_ = QString::fromUtf8(track->comment);
+    d->compilation_ = track->compilation;
+    d->length_ = track->tracklen / 1000;
+    d->bitrate_ = track->bitrate;
+    d->samplerate_ = track->samplerate;
+    d->mtime_ = track->time_modified;
+    d->ctime_ = track->time_added;
+    d->filesize_ = track->size;
+    d->filetype_ = track->type2 ? Type_Mpeg : Type_Mp4;
+
+    itdb_filename_ipod2fs(track->ipod_path);
+
+    d->filename_ = QString::fromLocal8Bit(track->ipod_path);
+    d->basefilename_ = QFileInfo(d->filename_).fileName();
+  }
+#endif
+
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   d->valid_ = true;
 

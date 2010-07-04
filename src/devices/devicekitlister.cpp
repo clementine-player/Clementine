@@ -14,10 +14,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "devicekitlister.h"
 #include "filesystemdevice.h"
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
+
+#ifdef HAVE_LIBGPOD
+#  include "gpoddevice.h"
+#endif
 
 #include <QtDebug>
 
@@ -65,6 +70,13 @@ void DeviceKitLister::Init() {
     if (data.suitable)
       device_data[data.unique_id()] = data;
   }
+
+  DeviceData ipod;
+  ipod.device_mount_paths << QDir::homePath() + "/.gvfs/iPod touch";
+  ipod.device_presentation_name = "iPod Touch";
+  ipod.suitable = true;
+  ipod.drive_serial = "ipod";
+  device_data[ipod.unique_id()] = ipod;
 
   // Update the internal cache
   {
@@ -227,7 +239,20 @@ QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
 boost::shared_ptr<ConnectedDevice> DeviceKitLister::Connect(
     const QString &unique_id, DeviceManager* manager, int database_id,
     bool first_time) {
-  return boost::shared_ptr<ConnectedDevice>(new FilesystemDevice(
-      LockAndGetDeviceInfo(unique_id, &DeviceData::device_mount_paths)[0],
-      this, unique_id, manager, database_id, first_time));
+  QString mount_point = LockAndGetDeviceInfo(
+      unique_id, &DeviceData::device_mount_paths)[0];
+
+  boost::shared_ptr<ConnectedDevice> ret;
+
+#ifdef HAVE_LIBGPOD
+  if (QFile::exists(mount_point + "/iTunes_Control")) {
+    ret.reset(new GPodDevice(
+        mount_point, this, unique_id, manager, database_id, first_time));
+    return ret;
+  }
+#endif
+
+  ret.reset(new FilesystemDevice(
+      mount_point, this, unique_id, manager, database_id, first_time));
+  return ret;
 }

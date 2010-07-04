@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "connecteddevice.h"
 #include "devicedatabasebackend.h"
 #include "devicemanager.h"
@@ -273,6 +274,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   info.device_ = info.lister_->Connect(
       info.unique_id_, this, info.database_id_, first_time);
   connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
+  connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
   return info.device_;
 }

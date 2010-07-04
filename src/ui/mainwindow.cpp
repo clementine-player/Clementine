@@ -356,6 +356,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(task_manager_, SIGNAL(PauseLibraryWatchers()), library_, SLOT(PauseWatcher()));
   connect(task_manager_, SIGNAL(ResumeLibraryWatchers()), library_, SLOT(ResumeWatcher()));
 
+  // Devices connections
+  connect(devices_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+
   // Library filter widget
   QAction* library_config_action = new QAction(
       IconLoader::Load("configure"), tr("Configure library..."), this);

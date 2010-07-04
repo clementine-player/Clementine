@@ -51,3 +51,26 @@ ConnectedDevice::ConnectedDevice(DeviceLister* lister, const QString& unique_id,
 ConnectedDevice::~ConnectedDevice() {
   backend_->deleteLater();
 }
+
+void ConnectedDevice::InitBackendDirectory(const QString& mount_point, bool first_time) {
+  if (first_time)
+    backend_->AddDirectory(mount_point);
+  else {
+    // This is a bit of a hack.  The device might not be mounted at the same
+    // path each time, so if it's different we have to munge all the paths in
+    // the database to fix it.  This can be done entirely in sqlite so it's
+    // relatively fast...
+
+    // Get the directory it was mounted at last time.  Devices only have one
+    // directory (the root).
+    Directory dir = backend_->GetAllDirectories()[0];
+    if (dir.path != mount_point) {
+      // The directory is different, commence the munging.
+      qDebug() << "Changing path from" << dir.path << "to" << mount_point;
+      backend_->ChangeDirPath(dir.id, mount_point);
+    }
+
+    // Load the directory properly now
+    backend_->LoadDirectoriesAsync();
+  }
+}

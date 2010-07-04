@@ -14,44 +14,34 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONNECTEDDEVICE_H
-#define CONNECTEDDEVICE_H
+#ifndef GPODLOADER_H
+#define GPODLOADER_H
 
 #include <QObject>
 
-class Database;
-class DeviceLister;
-class DeviceManager;
-class LibraryBackend;
-class LibraryModel;
+#include <boost/shared_ptr.hpp>
 
-class ConnectedDevice : public QObject {
+class LibraryBackend;
+class TaskManager;
+
+class GPodLoader : public QObject {
   Q_OBJECT
 
 public:
-  ConnectedDevice(DeviceLister* lister, const QString& unique_id,
-                  DeviceManager* manager, int database_id);
-  ~ConnectedDevice();
+  GPodLoader(const QString& mount_point, TaskManager* task_manager,
+             LibraryBackend* backend, QObject* parent = 0);
 
-  DeviceLister* lister() const { return lister_; }
-  QString unique_id() const { return unique_id_; }
-  LibraryModel* model() const { return model_; }
+public slots:
+  void LoadDatabase();
 
 signals:
-  void TaskStarted(int id);
   void Error(const QString& message);
+  void TaskStarted(int task_id);
 
-protected:
-  void InitBackendDirectory(const QString& mount_point, bool first_time);
-
-protected:
-  DeviceLister* lister_;
-  QString unique_id_;
-  int database_id_;
-  DeviceManager* manager_;
-
+private:
+  QString mount_point_;
+  TaskManager* task_manager_;
   LibraryBackend* backend_;
-  LibraryModel* model_;
 };
 
-#endif // CONNECTEDDEVICE_H
+#endif // GPODLOADER_H
