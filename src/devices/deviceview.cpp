@@ -50,19 +50,19 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
   manager_ = manager;
   connect(manager_, SIGNAL(DeviceDisconnected(int)), SLOT(DeviceDisconnected(int)));
 
+  sort_model_ = new QSortFilterProxyModel(this);
+  sort_model_->setSourceModel(manager_);
+  sort_model_->setDynamicSortFilter(true);
+  sort_model_->sort(0);
+
   merged_model_ = new MergedProxyModel(this);
-  merged_model_->setSourceModel(manager_);
+  merged_model_->setSourceModel(sort_model_);
 
   connect(merged_model_,
           SIGNAL(SubModelReset(QModelIndex,QAbstractItemModel*)),
           SLOT(RecursivelyExpand(QModelIndex)));
 
-  sort_model_ = new QSortFilterProxyModel(this);
-  sort_model_->setSourceModel(merged_model_);
-  sort_model_->setDynamicSortFilter(true);
-  sort_model_->sort(0);
-
-  setModel(sort_model_);
+  setModel(merged_model_);
 }
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
@@ -79,22 +79,26 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   menu_->popup(e->globalPos());
 }
 
-QModelIndex DeviceView::MapToDevice(const QModelIndex &sort_model_index) const {
+QModelIndex DeviceView::MapToDevice(const QModelIndex& merged_model_index) const {
+  QModelIndex sort_model_index = merged_model_->mapToSource(merged_model_index);
   if (sort_model_index.model() != sort_model_)
     return QModelIndex();
 
-  QModelIndex index =
-      merged_model_->mapToSource(sort_model_->mapToSource(sort_model_index));
-  if (index.model() != manager_)
-    return QModelIndex();
-  return index;
+  return sort_model_->mapToSource(sort_model_index);
 }
 
 void DeviceView::Connect() {
   QModelIndex device_idx = MapToDevice(menu_index_);
+  QModelIndex sort_idx = sort_model_->mapFromSource(device_idx);
 
   boost::shared_ptr<ConnectedDevice> device = manager_->Connect(device_idx.row());
-  merged_model_->AddSubModel(device_idx, device->model());
+
+  QSortFilterProxyModel* sort_model = new QSortFilterProxyModel(device->model());
+  sort_model->setSourceModel(device->model());
+  sort_model->setSortRole(LibraryModel::Role_SortText);
+  sort_model->setDynamicSortFilter(true);
+  sort_model->sort(0);
+  merged_model_->AddSubModel(sort_idx, sort_model);
 
   expand(menu_index_);
 }
@@ -106,5 +110,5 @@ void DeviceView::Disconnect() {
 }
 
 void DeviceView::DeviceDisconnected(int row) {
-  merged_model_->RemoveSubModel(manager_->index(row));
+  merged_model_->RemoveSubModel(sort_model_->mapFromSource(manager_->index(row)));
 }

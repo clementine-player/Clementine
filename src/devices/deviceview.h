@@ -44,7 +44,7 @@ private slots:
   void DeviceDisconnected(int row);
 
 private:
-  QModelIndex MapToDevice(const QModelIndex& sort_model_index) const;
+  QModelIndex MapToDevice(const QModelIndex& merged_model_index) const;
 
 private:
   DeviceManager* manager_;
