@@ -81,19 +81,28 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
 
   DeviceManager::State state =
       static_cast<DeviceManager::State>(index.data(DeviceManager::Role_State).toInt());
-  switch (state) {
-    case DeviceManager::State_Remembered:
-      p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, tr("Not connected"));
-      break;
+  QVariant progress = index.data(DeviceManager::Role_UpdatingPercentage);
+  QString status_text;
 
-    case DeviceManager::State_NotConnected:
-      p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, tr("Double click to open"));
-      break;
+  if (progress.isValid()) {
+    status_text = tr("Updating %1%...").arg(progress.toInt());
+  } else {
+    switch (state) {
+      case DeviceManager::State_Remembered:
+        status_text = tr("Not connected");
+        break;
 
-    case DeviceManager::State_Connected:
-      p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, tr("Connected"));
-      break;
+      case DeviceManager::State_NotConnected:
+        status_text = tr("Double click to open");
+        break;
+
+      case DeviceManager::State_Connected:
+        status_text = tr("Connected");
+        break;
+    }
   }
+
+  p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, status_text);
 
   p->restore();
 }

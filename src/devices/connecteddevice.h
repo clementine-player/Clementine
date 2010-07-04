@@ -35,8 +35,10 @@ public:
 
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }
-
   LibraryModel* model() const { return model_; }
+
+signals:
+  void TaskStarted(int id);
 
 protected:
   DeviceLister* lister_;

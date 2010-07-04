@@ -55,6 +55,7 @@ FilesystemDevice::FilesystemDevice(
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
   connect(watcher,  SIGNAL(CompilationsNeedUpdating()),
           backend_, SLOT(UpdateCompilations()));
+  connect(watcher, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
 
   if (first_time)
     backend_->AddDirectory(mount_point);

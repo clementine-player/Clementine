@@ -74,6 +74,7 @@ LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
     description = tr("Updating %1").arg(watcher_->device_name_);
 
   task_id_ = watcher_->task_manager_->StartTask(description);
+  emit watcher_->ScanStarted(task_id_);
 }
 
 LibraryWatcher::ScanTransaction::~ScanTransaction() {

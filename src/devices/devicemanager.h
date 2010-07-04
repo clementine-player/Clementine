@@ -45,6 +45,7 @@ public:
     Role_FriendlyName,
     Role_Capacity,
     Role_IconName,
+    Role_UpdatingPercentage,
   };
 
   enum State {
@@ -85,6 +86,8 @@ private slots:
   void PhysicalDeviceAdded(const QString& id);
   void PhysicalDeviceRemoved(const QString& id);
   void PhysicalDeviceChanged(const QString& id);
+  void DeviceTaskStarted(int id);
+  void TasksChanged();
 
 private:
   // Devices can be in three different states:
@@ -114,6 +117,8 @@ private:
 
     QString icon_name_;
     QIcon icon_;
+
+    int task_percentage_;
   };
 
   void AddLister(DeviceLister* lister);
@@ -129,6 +134,9 @@ private:
 
   QList<DeviceLister*> listers_;
   QList<DeviceInfo> devices_;
+
+  // Map of task ID to device index
+  QMap<int, QPersistentModelIndex> active_tasks_;
 };
 
 #endif // DEVICEMANAGER_H

@@ -18,6 +18,7 @@
 #include "devicedatabasebackend.h"
 #include "devicemanager.h"
 #include "devicekitlister.h"
+#include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
@@ -29,7 +30,8 @@ const int DeviceManager::kDeviceIconOverlaySize = 16;
 
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
-    lister_(NULL)
+    lister_(NULL),
+    task_percentage_(-1)
 {
 }
 
@@ -80,6 +82,8 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
     task_manager_(task_manager),
     not_connected_overlay_(IconLoader::Load("edit-delete"))
 {
+  connect(task_manager_, SIGNAL(TasksChanged()), SLOT(TasksChanged()));
+
   // Create the backend in the database thread
   backend_ = database_->CreateInThread<DeviceDatabaseBackend>();
   backend_->Init(database_->Worker());
@@ -151,6 +155,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       if (info.lister_)
         return State_NotConnected;
       return State_Remembered;
+
+    case Role_UpdatingPercentage:
+      if (info.task_percentage_ == -1)
+        return QVariant();
+      return info.task_percentage_;
 
     default:
       return QVariant();
@@ -261,8 +270,10 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     info.database_id_ = backend_->AddDevice(info.SaveToDb());
   }
 
-  info.device_ = info.lister_->Connect(info.unique_id_, this, info.database_id_,
-                                       first_time);
+  info.device_ = info.lister_->Connect(
+      info.unique_id_, this, info.database_id_, first_time);
+  connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
+
   return info.device_;
 }
 
@@ -333,4 +344,51 @@ void DeviceManager::SetDeviceIdentity(int row, const QString &friendly_name,
 
   if (info.database_id_ != -1)
     backend_->SetDeviceIdentity(info.database_id_, friendly_name, icon_name);
+}
+
+void DeviceManager::DeviceTaskStarted(int id) {
+  ConnectedDevice* device = qobject_cast<ConnectedDevice*>(sender());
+  if (!device)
+    return;
+
+  for (int i=0 ; i<devices_.count() ; ++i) {
+    DeviceInfo& info = devices_[i];
+    if (info.device_.get() == device) {
+      active_tasks_[id] = index(i);
+      info.task_percentage_ = 0;
+      emit dataChanged(index(i), index(i));
+      return;
+    }
+  }
+}
+
+void DeviceManager::TasksChanged() {
+  QList<TaskManager::Task> tasks = task_manager_->GetTasks();
+  QList<QPersistentModelIndex> finished_tasks = active_tasks_.values();
+
+  foreach (const TaskManager::Task& task, tasks) {
+    if (!active_tasks_.contains(task.id))
+      continue;
+
+    QPersistentModelIndex index = active_tasks_[task.id];
+    if (!index.isValid())
+      continue;
+
+    DeviceInfo& info = devices_[index.row()];
+    if (task.progress_max)
+      info.task_percentage_ = float(task.progress) / task.progress_max * 100;
+    else
+      info.task_percentage_ = 0;
+    emit dataChanged(index, index);
+    finished_tasks.removeAll(index);
+  }
+
+  foreach (const QPersistentModelIndex& index, finished_tasks) {
+    if (!index.isValid())
+      continue;
+
+    DeviceInfo& info = devices_[index.row()];
+    info.task_percentage_ = -1;
+    emit dataChanged(index, index);
+  }
 }

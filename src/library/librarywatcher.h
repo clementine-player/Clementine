@@ -55,6 +55,8 @@ class LibraryWatcher : public QObject {
   void SubdirsMTimeUpdated(const SubdirectoryList& subdirs);
   void CompilationsNeedUpdating();
 
+  void ScanStarted(int task_id);
+
  public slots:
   void ReloadSettings();
   void AddDirectory(const Directory& dir, const SubdirectoryList& subdirs);
