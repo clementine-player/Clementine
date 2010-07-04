@@ -23,7 +23,9 @@
 
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QMessageBox>
 #include <QPainter>
+#include <QPushButton>
 #include <QSortFilterProxyModel>
 
 #include <boost/shared_ptr.hpp>
@@ -108,6 +110,8 @@ DeviceView::DeviceView(QWidget* parent)
       IconLoader::Load("list-add"), tr("Connect device"), this, SLOT(Connect()));
   disconnect_action_ = menu_->addAction(
       IconLoader::Load("list-remove"), tr("Disconnect device"), this, SLOT(Disconnect()));
+  forget_action_ = menu_->addAction(
+      IconLoader::Load("list-remove"), tr("Forget device"), this, SLOT(Forget()));
 
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
@@ -139,11 +143,13 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   QModelIndex device_index = MapToDevice(menu_index_);
   bool is_device = device_index.isValid();
   bool is_connected = is_device && manager_->GetConnectedDevice(device_index.row());
+  bool is_remembered = is_device && manager_->GetDatabaseId(device_index.row()) != -1;
 
   connect_action_->setEnabled(is_device);
   disconnect_action_->setEnabled(is_device);
   connect_action_->setVisible(!is_connected);
   disconnect_action_->setVisible(is_connected);
+  forget_action_->setEnabled(is_remembered);
 
   menu_->popup(e->globalPos());
 }
@@ -159,6 +165,20 @@ QModelIndex DeviceView::MapToDevice(const QModelIndex& merged_model_index) const
 void DeviceView::Connect() {
   QModelIndex device_idx = MapToDevice(menu_index_);
   QModelIndex sort_idx = sort_model_->mapFromSource(device_idx);
+  bool first_time = manager_->GetDatabaseId(device_idx.row()) == -1;
+
+  if (first_time) {
+    boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+        QMessageBox::Information, tr("Connect device"),
+        tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
+        QMessageBox::Cancel, this));
+    QPushButton* connect =
+        dialog->addButton(tr("Connect device"), QMessageBox::AcceptRole);
+    dialog->exec();
+
+    if (dialog->clickedButton() != connect)
+      return;
+  }
 
   boost::shared_ptr<ConnectedDevice> device = manager_->Connect(device_idx.row());
   if (!device)
@@ -176,10 +196,25 @@ void DeviceView::Connect() {
 
 void DeviceView::Disconnect() {
   QModelIndex device_idx = MapToDevice(menu_index_);
-
   manager_->Disconnect(device_idx.row());
 }
 
 void DeviceView::DeviceDisconnected(int row) {
   merged_model_->RemoveSubModel(sort_model_->mapFromSource(manager_->index(row)));
+}
+
+void DeviceView::Forget() {
+  boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+      QMessageBox::Question, tr("Forget device"),
+      tr("Forgetting a device will remove it from this list and Clementine will have to rescan all the songs again next time you connect it."),
+      QMessageBox::Cancel, this));
+  QPushButton* forget =
+      dialog->addButton(tr("Forget device"), QMessageBox::DestructiveRole);
+  dialog->exec();
+
+  if (dialog->clickedButton() != forget)
+    return;
+
+  QModelIndex device_idx = MapToDevice(menu_index_);
+  manager_->Forget(device_idx.row());
 }

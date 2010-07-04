@@ -51,6 +51,7 @@ protected:
 private slots:
   void Connect();
   void Disconnect();
+  void Forget();
 
   void DeviceDisconnected(int row);
 
@@ -65,6 +66,7 @@ private:
   QMenu* menu_;
   QAction* connect_action_;
   QAction* disconnect_action_;
+  QAction* forget_action_;
   QModelIndex menu_index_;
 };
 

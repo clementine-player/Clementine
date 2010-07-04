@@ -57,10 +57,12 @@ public:
   BackgroundThread<Database>* database() const { return database_; }
   TaskManager* task_manager() const { return task_manager_; }
 
-  boost::shared_ptr<ConnectedDevice> Connect(int row);
   boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+  int GetDatabaseId(int row) const;
 
+  boost::shared_ptr<ConnectedDevice> Connect(int row);
   void Disconnect(int row);
+  void Forget(int row);
 
   // QAbstractListModel
   int rowCount(const QModelIndex &parent) const;

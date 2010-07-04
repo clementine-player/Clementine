@@ -100,8 +100,10 @@ void DeviceDatabaseBackend::RemoveDevice(int id) {
   if (db_->CheckErrors(q.lastError())) return;
 
   // Remove the songs tables for the device
-  db.exec(QString("DROP TABLE device_%1").arg(id));
+  db.exec(QString("DROP TABLE device_%1_songs").arg(id));
   db.exec(QString("DROP TABLE device_%1_fts").arg(id));
+  db.exec(QString("DROP TABLE device_%1_directories").arg(id));
+  db.exec(QString("DROP TABLE device_%1_subdirectories").arg(id));
 
   t.Commit();
 }

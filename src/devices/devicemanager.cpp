@@ -260,6 +260,10 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row) co
   return devices_[row].device_;
 }
 
+int DeviceManager::GetDatabaseId(int row) const {
+  return devices_[row].database_id_;
+}
+
 void DeviceManager::Disconnect(int row) {
   DeviceInfo& info = devices_[row];
   if (!info.device_) // Already disconnected
@@ -267,4 +271,25 @@ void DeviceManager::Disconnect(int row) {
 
   info.device_.reset();
   emit DeviceDisconnected(row);
+}
+
+void DeviceManager::Forget(int row) {
+  DeviceInfo& info = devices_[row];
+  if (info.database_id_ == -1)
+    return;
+
+  if (info.device_)
+    Disconnect(row);
+
+  backend_->RemoveDevice(info.database_id_);
+  info.database_id_ = -1;
+
+  if (!info.lister_) {
+    // It's not attached any more so remove it from the list
+    beginRemoveRows(QModelIndex(), row, row);
+    devices_.removeAt(row);
+    endRemoveRows();
+  } else {
+    dataChanged(index(row, 0), index(row, 0));
+  }
 }
