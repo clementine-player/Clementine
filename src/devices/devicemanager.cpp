@@ -199,7 +199,6 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
 }
 
 void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
-  DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
   qDebug() << "Device removed:" << id;
 
   int i = FindDeviceById(id);
@@ -227,6 +226,7 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
 
 void DeviceManager::PhysicalDeviceChanged(const QString &id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
+  Q_UNUSED(lister);
 
   int i = FindDeviceById(id);
   if (i == -1) {
