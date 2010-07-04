@@ -161,10 +161,11 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   QModelIndex device_index = MapToDevice(menu_index_);
   bool is_device = device_index.isValid();
   bool is_connected = is_device && manager_->GetConnectedDevice(device_index.row());
+  bool is_plugged_in = is_device && manager_->GetLister(device_index.row());
   bool is_remembered = is_device && manager_->GetDatabaseId(device_index.row()) != -1;
 
-  connect_action_->setEnabled(is_device);
-  disconnect_action_->setEnabled(is_device);
+  connect_action_->setEnabled(is_plugged_in);
+  disconnect_action_->setEnabled(is_plugged_in);
   connect_action_->setVisible(!is_connected);
   disconnect_action_->setVisible(is_connected);
   forget_action_->setEnabled(is_remembered);
