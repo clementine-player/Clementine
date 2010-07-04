@@ -34,9 +34,6 @@ DeviceProperties::DeviceProperties(QWidget *parent)
   ui_->icon->setMaximumHeight(ui_->icon->iconSize().height() +
                               ui_->icon->horizontalScrollBar()->sizeHint().height() +
                               ui_->icon->spacing() * 2 + 5);
-
-  // Transparent background for non-editable fields
-  ui_->capacity->setStyleSheet("background: palette(window);");
 }
 
 DeviceProperties::~DeviceProperties() {

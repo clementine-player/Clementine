@@ -49,6 +49,7 @@ public:
 
 protected:
   void contextMenuEvent(QContextMenuEvent *);
+  void mouseDoubleClickEvent(QMouseEvent *event);
 
 private slots:
   void Connect();

@@ -231,3 +231,14 @@ void DeviceView::Forget() {
 void DeviceView::Properties() {
   properties_dialog_->ShowDevice(MapToDevice(menu_index_).row());
 }
+
+void DeviceView::mouseDoubleClickEvent(QMouseEvent *event) {
+  AutoExpandingTreeView::mouseDoubleClickEvent(event);
+
+  QModelIndex merged_index = indexAt(event->pos());
+  QModelIndex device_index = MapToDevice(merged_index);
+  if (device_index.isValid() && !manager_->GetConnectedDevice(device_index.row())) {
+    menu_index_ = merged_index;
+    Connect();
+  }
+}
