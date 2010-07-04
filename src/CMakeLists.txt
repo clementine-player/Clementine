@@ -56,6 +56,7 @@ set(SOURCES
   devices/devicedatabasebackend.cpp
   devices/devicelister.cpp
   devices/devicemanager.cpp
+  devices/deviceproperties.cpp
   devices/deviceview.cpp
   devices/filesystemdevice.cpp
 
@@ -175,6 +176,7 @@ set(HEADERS
   devices/devicedatabasebackend.h
   devices/devicelister.h
   devices/devicemanager.h
+  devices/deviceproperties.h
   devices/deviceview.h
   devices/filesystemdevice.h
 
@@ -259,6 +261,8 @@ set(HEADERS
 )
 
 set(UI
+  devices/deviceproperties.ui
+
   library/groupbydialog.ui
   library/libraryconfig.ui
   library/libraryfilterwidget.ui

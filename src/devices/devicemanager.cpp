@@ -41,8 +41,7 @@ DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
   ret.id_ = database_id_;
 
   if (lister_)
-    ret.icon_name_ = lister_->DeviceInfo(
-        unique_id_, DeviceLister::Field_Icon).toString();
+    ret.icon_name_ = lister_->DeviceIcon(unique_id_);
 
   return ret;
 }
@@ -134,11 +133,17 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       return pixmap;
     }
 
-    case Role_Lister:
-      return QVariant::fromValue(info.lister_);
+    case Role_FriendlyName:
+      return info.friendly_name_;
 
     case Role_UniqueId:
       return info.unique_id_;
+
+    case Role_IconName:
+      return info.icon_name_;
+
+    case Role_Capacity:
+      return info.size_;
 
     case Role_State:
       if (info.device_)
@@ -173,9 +178,6 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
 
   qDebug() << "Device added:" << id;
-  for (int i=0 ; i<DeviceKitLister::LastField ; ++i) {
-    qDebug() << i << lister->DeviceInfo(id, i);
-  }
 
   // Do we have this device already?
   int i = FindDeviceById(id);
@@ -183,9 +185,9 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
     DeviceInfo info;
     info.lister_ = lister;
     info.unique_id_ = id;
-    info.friendly_name_ = lister->DeviceInfo(id, DeviceLister::Field_FriendlyName).toString();
-    info.size_ = lister->DeviceInfo(id, DeviceLister::Field_Capacity).toLongLong();
-    info.LoadIcon(lister->DeviceInfo(id, DeviceLister::Field_Icon).toString());
+    info.friendly_name_ = lister->MakeFriendlyName(id);
+    info.size_ = lister->DeviceCapacity(id);
+    info.LoadIcon(lister->DeviceIcon(id));
 
     beginInsertRows(QModelIndex(), devices_.count(), devices_.count());
     devices_ << info;
@@ -220,6 +222,14 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
     // Remove the item from the model
     beginRemoveRows(QModelIndex(), i, i);
     devices_.removeAt(i);
+
+    foreach (const QModelIndex& idx, persistentIndexList()) {
+      if (idx.row() == i)
+        changePersistentIndex(idx, QModelIndex());
+      else if (idx.row() > i)
+        changePersistentIndex(idx, index(idx.row()-1, idx.column()));
+    }
+
     endRemoveRows();
   }
 }
@@ -264,6 +274,10 @@ int DeviceManager::GetDatabaseId(int row) const {
   return devices_[row].database_id_;
 }
 
+DeviceLister* DeviceManager::GetLister(int row) const {
+  return devices_[row].lister_;
+}
+
 void DeviceManager::Disconnect(int row) {
   DeviceInfo& info = devices_[row];
   if (!info.device_) // Already disconnected
@@ -288,6 +302,14 @@ void DeviceManager::Forget(int row) {
     // It's not attached any more so remove it from the list
     beginRemoveRows(QModelIndex(), row, row);
     devices_.removeAt(row);
+
+    foreach (const QModelIndex& idx, persistentIndexList()) {
+      if (idx.row() == row)
+        changePersistentIndex(idx, QModelIndex());
+      else if (idx.row() > row)
+        changePersistentIndex(idx, index(idx.row()-1, idx.column()));
+    }
+
     endRemoveRows();
   } else {
     dataChanged(index(row, 0), index(row, 0));

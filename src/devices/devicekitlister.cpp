@@ -83,51 +83,54 @@ QStringList DeviceKitLister::DeviceUniqueIDs() {
   return device_data_.keys();
 }
 
-QVariant DeviceKitLister::DeviceInfo(const QString& id, int field) {
-  DeviceData data;
+QString DeviceKitLister::DeviceIcon(const QString &id) {
+  return LockAndGetDeviceInfo(id, &DeviceData::device_presentation_icon_name);
+}
 
-  {
-    QMutexLocker l(&mutex_);
-    if (!device_data_.contains(id))
-      return QVariant();
-    data = device_data_[id];
-  }
+QString DeviceKitLister::DeviceManufacturer(const QString &id) {
+  return LockAndGetDeviceInfo(id, &DeviceData::drive_vendor);
+}
 
-  switch (field) {
-    case Field_UniqueID:
-      return data.unique_id();
+QString DeviceKitLister::DeviceModel(const QString &id) {
+  return LockAndGetDeviceInfo(id, &DeviceData::drive_model);
+}
 
-    case Field_FriendlyName:
-      if (!data.device_presentation_name.isEmpty())
-        return data.device_presentation_name;
-      if (!data.drive_model.isEmpty() || !data.drive_vendor.isEmpty())
-        return QString("%1 %2").arg(data.drive_vendor, data.drive_model);
-      return data.drive_serial;
+quint64 DeviceKitLister::DeviceCapacity(const QString &id) {
+  return LockAndGetDeviceInfo(id, &DeviceData::device_size);
+}
 
-    case Field_Icon:
-      return data.device_presentation_icon_name;
+quint64 DeviceKitLister::DeviceFreeSpace(const QString &id) {
+  return 0; // TODO
+}
 
-    case Field_Manufacturer:
-      return data.drive_vendor;
+QVariantMap DeviceKitLister::DeviceHardwareInfo(const QString &id) {
+  QVariantMap ret;
 
-    case Field_Model:
-      return data.drive_model;
+  QMutexLocker l(&mutex_);
+  if (!device_data_.contains(id))
+    return ret;
+  const DeviceData& data = device_data_[id];
 
-    case Field_Capacity:
-      return data.device_size;
+  ret[QT_TR_NOOP("DBus path")] = data.dbus_path;
+  ret[QT_TR_NOOP("Serial number")] = data.drive_serial;
+  ret[QT_TR_NOOP("Mount paths")] = data.device_mount_paths.join(", ");
+  ret[QT_TR_NOOP("Device")] = data.device_file;
+  return ret;
+}
 
-    case Field_FreeSpace:
-      return QVariant();
+QString DeviceKitLister::MakeFriendlyName(const QString &id) {
+  QMutexLocker l(&mutex_);
+  if (!device_data_.contains(id))
+    return QString();
+  const DeviceData& data = device_data_[id];
 
-    case Field_DbusPath:
-      return data.dbus_path;
-
-    case Field_MountPath:
-      return data.device_mount_paths.isEmpty() ? QVariant() : data.device_mount_paths[0];
-
-    default:
-      return QVariant();
-  }
+  if (!data.device_presentation_name.isEmpty())
+    return data.device_presentation_name;
+  if (!data.drive_model.isEmpty() && !data.drive_vendor.isEmpty())
+    return data.drive_vendor + " " + data.drive_model;
+  if (!data.drive_model.isEmpty())
+    return data.drive_model;
+  return data.drive_serial;
 }
 
 DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
@@ -156,6 +159,7 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
   ret.drive_serial = device.driveSerial();
   ret.drive_model = device.driveModel();
   ret.drive_vendor = device.driveVendor();
+  ret.device_file = device.deviceFile();
   ret.device_presentation_name = device.devicePresentationName();
   ret.device_presentation_icon_name = device.devicePresentationIconName();
   ret.device_size = device.deviceSize();
@@ -224,6 +228,6 @@ boost::shared_ptr<ConnectedDevice> DeviceKitLister::Connect(
     const QString &unique_id, DeviceManager* manager, int database_id,
     bool first_time) {
   return boost::shared_ptr<ConnectedDevice>(new FilesystemDevice(
-      DeviceInfo(unique_id, Field_MountPath).toString(),
+      LockAndGetDeviceInfo(unique_id, &DeviceData::device_mount_paths)[0],
       this, unique_id, manager, database_id, first_time));
 }

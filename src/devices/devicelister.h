@@ -31,25 +31,20 @@ public:
   DeviceLister();
   ~DeviceLister();
 
-  enum Field {
-    Field_UniqueID = 0,
-    Field_FriendlyName,
-    Field_Icon,
-    Field_Manufacturer,
-    Field_Model,
-    Field_Capacity,
-    Field_FreeSpace,
-
-    LastField
-  };
-
   // Tries to start the thread and initialise the engine.  This object will be
   // moved to the new thread.
   void Start();
 
   // Query information about the devices that are available.  Must be thread-safe.
   virtual QStringList DeviceUniqueIDs() = 0;
-  virtual QVariant DeviceInfo(const QString& id, int field) = 0;
+  virtual QString DeviceIcon(const QString& id) = 0;
+  virtual QString DeviceManufacturer(const QString& id) = 0;
+  virtual QString DeviceModel(const QString& id) = 0;
+  virtual quint64 DeviceCapacity(const QString& id) = 0;
+  virtual quint64 DeviceFreeSpace(const QString& id) = 0;
+  virtual QVariantMap DeviceHardwareInfo(const QString& id) = 0;
+
+  virtual QString MakeFriendlyName(const QString& id) = 0;
 
   // Create a new ConnectedDevice instance for the given device.  Must be
   // thread-safe.
@@ -71,6 +66,5 @@ protected:
 private slots:
   void ThreadStarted();
 };
-Q_DECLARE_METATYPE(DeviceLister*);
 
 #endif // DEVICELISTER_H

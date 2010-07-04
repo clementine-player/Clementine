@@ -42,7 +42,9 @@ public:
   enum Role {
     Role_State = LibraryModel::LastRole,
     Role_UniqueId,
-    Role_Lister,
+    Role_FriendlyName,
+    Role_Capacity,
+    Role_IconName,
   };
 
   enum State {
@@ -57,9 +59,14 @@ public:
   BackgroundThread<Database>* database() const { return database_; }
   TaskManager* task_manager() const { return task_manager_; }
 
-  boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
+  // Get info about devices
   int GetDatabaseId(int row) const;
+  DeviceLister* GetLister(int row) const;
+  boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
 
+  int FindDeviceById(const QString& id) const;
+
+  // Actions on devices
   boost::shared_ptr<ConnectedDevice> Connect(int row);
   void Disconnect(int row);
   void Forget(int row);
@@ -107,7 +114,6 @@ private:
   };
 
   void AddLister(DeviceLister* lister);
-  int FindDeviceById(const QString& id) const;
 
   DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info) const;
 

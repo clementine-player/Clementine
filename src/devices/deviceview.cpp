@@ -16,6 +16,7 @@
 
 #include "connecteddevice.h"
 #include "devicemanager.h"
+#include "deviceproperties.h"
 #include "deviceview.h"
 #include "core/mergedproxymodel.h"
 #include "library/librarymodel.h"
@@ -104,6 +105,7 @@ DeviceView::DeviceView(QWidget* parent)
     manager_(NULL),
     merged_model_(NULL),
     sort_model_(NULL),
+    properties_dialog_(new DeviceProperties),
     menu_(new QMenu(this))
 {
   connect_action_ = menu_->addAction(
@@ -112,9 +114,15 @@ DeviceView::DeviceView(QWidget* parent)
       IconLoader::Load("list-remove"), tr("Disconnect device"), this, SLOT(Disconnect()));
   forget_action_ = menu_->addAction(
       IconLoader::Load("list-remove"), tr("Forget device"), this, SLOT(Forget()));
+  menu_->addSeparator();
+  properties_action_ = menu_->addAction(
+      IconLoader::Load("configure"), tr("Device properties..."), this, SLOT(Properties()));
 
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
+}
+
+DeviceView::~DeviceView() {
 }
 
 void DeviceView::SetDeviceManager(DeviceManager *manager) {
@@ -136,6 +144,7 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
           SLOT(RecursivelyExpand(QModelIndex)));
 
   setModel(merged_model_);
+  properties_dialog_->SetDeviceManager(manager_);
 }
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
@@ -217,4 +226,8 @@ void DeviceView::Forget() {
 
   QModelIndex device_idx = MapToDevice(menu_index_);
   manager_->Forget(device_idx.row());
+}
+
+void DeviceView::Properties() {
+  properties_dialog_->ShowDevice(MapToDevice(menu_index_).row());
 }

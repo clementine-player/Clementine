@@ -31,8 +31,8 @@ FilesystemDevice::FilesystemDevice(
 {
   // Create the library watcher
   watcher_->Start(true);
-  watcher_->Worker()->set_device_name(lister_->DeviceInfo(
-      unique_id_, DeviceLister::Field_FriendlyName).toString());
+  watcher_->Worker()->set_device_name(manager->data(manager->index(
+      manager->FindDeviceById(unique_id)), DeviceManager::Role_FriendlyName).toString());
   watcher_->Worker()->set_backend(backend_);
   watcher_->Worker()->set_task_manager(manager_->task_manager());
 

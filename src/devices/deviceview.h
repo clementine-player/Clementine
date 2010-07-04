@@ -25,6 +25,7 @@ class QMenu;
 class QSortFilterProxyModel;
 
 class DeviceManager;
+class DeviceProperties;
 class MergedProxyModel;
 
 class DeviceItemDelegate : public LibraryItemDelegate {
@@ -42,6 +43,7 @@ class DeviceView : public AutoExpandingTreeView {
 
 public:
   DeviceView(QWidget* parent = 0);
+  ~DeviceView();
 
   void SetDeviceManager(DeviceManager* manager);
 
@@ -52,6 +54,7 @@ private slots:
   void Connect();
   void Disconnect();
   void Forget();
+  void Properties();
 
   void DeviceDisconnected(int row);
 
@@ -63,10 +66,13 @@ private:
   MergedProxyModel* merged_model_;
   QSortFilterProxyModel* sort_model_;
 
+  boost::scoped_ptr<DeviceProperties> properties_dialog_;
+
   QMenu* menu_;
   QAction* connect_action_;
   QAction* disconnect_action_;
   QAction* forget_action_;
+  QAction* properties_action_;
   QModelIndex menu_index_;
 };
 
