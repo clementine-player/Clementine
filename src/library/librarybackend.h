@@ -66,6 +66,8 @@ class LibraryBackend : public QObject {
 
   SongList FindSongsInDirectory(int id);
   SubdirectoryList SubdirsInDirectory(int id);
+  DirectoryList GetAllDirectories();
+  void ChangeDirPath(int id, const QString& new_path);
 
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions());

@@ -46,7 +46,6 @@ ConnectedDevice::ConnectedDevice(DeviceLister* lister, const QString& unique_id,
 
   // Create the model
   model_ = new LibraryModel(backend_, this);
-  model_->Init();
 }
 
 ConnectedDevice::~ConnectedDevice() {

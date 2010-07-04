@@ -49,20 +49,67 @@ void LibraryBackend::UpdateTotalSongCountAsync() {
 }
 
 void LibraryBackend::LoadDirectories() {
+  DirectoryList dirs = GetAllDirectories();
+
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("SELECT ROWID, path FROM %1").arg(dirs_table_), db);
+  foreach (const Directory& dir, dirs) {
+    emit DirectoryDiscovered(dir, SubdirsInDirectory(dir.id, db));
+  }
+}
+
+void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+  ScopedTransaction t(&db);
+
+  // Do the dirs table
+  QSqlQuery q(QString("UPDATE %1 SET path=:path WHERE ROWID=:id").arg(dirs_table_), db);
+  q.bindValue(":path", new_path);
+  q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q.lastError())) return;
+
+  const int path_len = new_path.length();
+
+  // Do the subdirs table
+  q = QSqlQuery(QString("UPDATE %1 SET path=:path || substr(path, %2)"
+                        " WHERE directory=:id").arg(subdirs_table_).arg(path_len), db);
+  q.bindValue(":path", new_path);
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return;
+
+  // Do the songs table
+  q = QSqlQuery(QString("UPDATE %1 SET filename=:path || substr(filename, %2)"
+                        " WHERE directory=:id").arg(songs_table_).arg(path_len), db);
+  q.bindValue(":path", new_path);
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return;
+
+  t.Commit();
+}
+
+DirectoryList LibraryBackend::GetAllDirectories() {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  DirectoryList ret;
+
+  QSqlQuery q(QString("SELECT ROWID, path FROM %1").arg(dirs_table_), db);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return ret;
 
   while (q.next()) {
     Directory dir;
     dir.id = q.value(0).toInt();
     dir.path = q.value(1).toString();
 
-    emit DirectoryDiscovered(dir, SubdirsInDirectory(dir.id, db));
+    ret << dir;
   }
+  return ret;
 }
 
 SubdirectoryList LibraryBackend::SubdirsInDirectory(int id) {
