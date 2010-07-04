@@ -44,9 +44,14 @@ public:
   boost::shared_ptr<ConnectedDevice> Connect(int row);
   boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
 
+  void Disconnect(int row);
+
   // QAbstractListModel
   int rowCount(const QModelIndex &parent) const;
   QVariant data(const QModelIndex &index, int role) const;
+
+signals:
+  void DeviceDisconnected(int row);
 
 private slots:
   void PhysicalDeviceAdded(const QString& id);

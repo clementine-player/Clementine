@@ -39,6 +39,9 @@ protected:
 
 private slots:
   void Connect();
+  void Disconnect();
+
+  void DeviceDisconnected(int row);
 
 private:
   QModelIndex MapToDevice(const QModelIndex& sort_model_index) const;
@@ -50,6 +53,7 @@ private:
 
   QMenu* menu_;
   QAction* connect_action_;
+  QAction* disconnect_action_;
   QModelIndex menu_index_;
 };
 

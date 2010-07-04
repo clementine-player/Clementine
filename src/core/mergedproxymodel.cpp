@@ -45,8 +45,6 @@ void MergedProxyModel::DeleteAllMappings() {
 
 void MergedProxyModel::AddSubModel(const QModelIndex& source_parent,
                                    QAbstractItemModel* submodel) {
-  merge_points_.insert(submodel, source_parent);
-
   connect(submodel, SIGNAL(modelReset()), this, SLOT(SubModelReset()));
   connect(submodel, SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)),
           this, SLOT(RowsAboutToBeInserted(QModelIndex,int,int)));
@@ -57,8 +55,44 @@ void MergedProxyModel::AddSubModel(const QModelIndex& source_parent,
   connect(submodel, SIGNAL(rowsRemoved(QModelIndex,int,int)),
           this, SLOT(RowsRemoved(QModelIndex,int,int)));
 
+  merge_points_.insert(submodel, source_parent);
+
   QModelIndex proxy_parent = mapFromSource(source_parent);
   dataChanged(proxy_parent, proxy_parent);
+}
+
+void MergedProxyModel::RemoveSubModel(const QModelIndex &source_parent) {
+  // Find the submodel that the parent corresponded to
+  QAbstractItemModel* submodel = merge_points_.key(source_parent);
+  merge_points_.remove(submodel);
+
+  // The submodel might have been deleted already so we must be careful not
+  // to dereference it.
+
+  // Remove all the children of the item that got deleted
+  QModelIndex proxy_parent = mapFromSource(source_parent);
+
+  // We can't know how many children it had, since we can't dereference it
+  resetting_model_ = submodel;
+  beginRemoveRows(proxy_parent, 0, std::numeric_limits<int>::max() - 1);
+  endRemoveRows();
+  resetting_model_ = NULL;
+
+  // Delete all the mappings that reference the submodel
+  MappingContainer::index<tag_by_pointer>::type::iterator it =
+      mappings_.get<tag_by_pointer>().begin();
+  MappingContainer::index<tag_by_pointer>::type::iterator end =
+      mappings_.get<tag_by_pointer>().end();
+  while (it != end) {
+    if ((*it)->source_index.model() == submodel) {
+      delete *it;
+      it = mappings_.get<tag_by_pointer>().erase(it);
+    } else {
+      ++it;
+    }
+  }
+
+  reset();
 }
 
 void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {

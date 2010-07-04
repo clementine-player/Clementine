@@ -43,6 +43,7 @@ class MergedProxyModel : public QAbstractProxyModel {
 
   // Make another model appear as a child of the given item in the source model.
   void AddSubModel(const QModelIndex& source_parent, QAbstractItemModel* submodel);
+  void RemoveSubModel(const QModelIndex& source_parent);
 
   // Find the item in the source model that is the parent of the model
   // containing proxy_index.  If proxy_index is in the source model, then

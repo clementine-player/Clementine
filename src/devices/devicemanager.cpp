@@ -188,6 +188,7 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
     info.device_.reset();
 
     emit dataChanged(index(i, 0), index(i, 0));
+    emit DeviceDisconnected(i);
   } else {
     // Remove the item from the model
     beginRemoveRows(QModelIndex(), i, i);
@@ -229,4 +230,13 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
 
 boost::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row) const {
   return devices_[row].device_;
+}
+
+void DeviceManager::Disconnect(int row) {
+  DeviceInfo& info = devices_[row];
+  if (!info.device_) // Already disconnected
+    return;
+
+  info.device_.reset();
+  emit DeviceDisconnected(row);
 }
