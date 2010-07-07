@@ -8,6 +8,7 @@ include_directories(${SPARKLE})
 include_directories(../3rdparty/gmock/gtest/include)
 include_directories(../3rdparty/qtsingleapplication)
 include_directories(../3rdparty/qtiocompressor)
+include_directories(../3rdparty/qtwin)
 include_directories(../3rdparty/qxt)
 include_directories(../3rdparty/libprojectm)
 
@@ -516,6 +517,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   qtsingleapplication
   qtiocompressor
+  qtwin
   chardet
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}

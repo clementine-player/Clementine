@@ -17,6 +17,8 @@
 #include "osdpretty.h"
 #include "ui_osdpretty.h"
 
+#include "qtwin.h"
+
 #include <QColor>
 #include <QPainter>
 #include <QLayout>
@@ -278,21 +280,25 @@ void OSDPretty::Reposition() {
   move(qBound(0, x, geometry.right() - width()),
        qBound(0, y, geometry.bottom() - height()));
 
+  // Create a mask for the actual area of the OSD
+  QBitmap mask(size());
+  mask.clear();
+
+  QPainter p(&mask);
+  p.setBrush(Qt::color1);
+  p.drawRoundedRect(BoxBorder().adjusted(-1, -1, 0, 0), kBorderRadius, kBorderRadius);
+  p.end();
+
   // If there's no compositing window manager running then we have to set an
   // XShape mask.
   if (IsTransparencyAvailable())
     clearMask();
   else {
-    QBitmap mask(size());
-    mask.clear();
-
-    QPainter p(&mask);
-    p.setBrush(Qt::color1);
-    p.drawRoundedRect(BoxBorder().adjusted(-1, -1, 0, 0), kBorderRadius, kBorderRadius);
-    p.end();
-
     setMask(mask);
   }
+
+  // On windows, enable blurbehind on the masked area
+  QtWin::enableBlurBehindWindow(this, true, QRegion(mask));
 }
 
 void OSDPretty::enterEvent(QEvent *) {
