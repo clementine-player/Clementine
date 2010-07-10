@@ -289,6 +289,7 @@ void PlaylistContainer::SetTabBarHeight(int height) {
 
 void PlaylistContainer::UpdateFilter() {
   manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
+  ui_->playlist->JumpToCurrentlyPlayingTrack();
 
   bool no_matches = manager_->current()->proxy()->rowCount() == 0 &&
                     manager_->current()->rowCount() > 0;
