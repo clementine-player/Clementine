@@ -125,7 +125,7 @@ option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
-  # to system installed 3rdparty libraries instead.
+  # to system installed projectM instead.
   option(USE_SYSTEM_PROJECTM "Don't set this option unless your system projectM library has been compiled with the Clementine patches in 3rdparty" OFF)
   if(USE_SYSTEM_PROJECTM)
     pkg_check_modules(LIBPROJECTM projectM)
@@ -158,8 +158,20 @@ if(STATIC_SQLITE)
   add_subdirectory(3rdparty/qsqlite)
 endif(STATIC_SQLITE)
 
+# When/if upstream accepts our patches then these options can be used to link
+# to system installed qtsingleapplication instead.
+option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system QtSingleApplication library has been compiled with the Clementine patches in 3rdparty" OFF)
+if(USE_SYSTEM_QTSINGLEAPPLICATION)
+  find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
+  find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
+else(USE_SYSTEM_QTSINGLEAPPLICATION)
+  add_subdirectory(3rdparty/qtsingleapplication)
+  set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
+  set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapplication)
+endif(USE_SYSTEM_QTSINGLEAPPLICATION)
+
 # Subdirectories
-add_subdirectory(3rdparty/qtsingleapplication)
+
 add_subdirectory(3rdparty/qtiocompressor)
 add_subdirectory(src)
 if (NOT APPLE)

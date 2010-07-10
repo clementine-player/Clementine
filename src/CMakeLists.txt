@@ -6,7 +6,6 @@ set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall")
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${SPARKLE})
 include_directories(../3rdparty/gmock/gtest/include)
-include_directories(../3rdparty/qtsingleapplication)
 include_directories(../3rdparty/qtiocompressor)
 include_directories(../3rdparty/qtwin)
 include_directories(../3rdparty/qxt)
@@ -15,6 +14,7 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${LIBPROJECTM_INCLUDE_DIRS})
+include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/AddEngine.cmake)
@@ -517,7 +517,6 @@ add_library(clementine_lib STATIC
 add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
-  qtsingleapplication
   qtiocompressor
   qtwin
   chardet
@@ -527,6 +526,7 @@ target_link_libraries(clementine_lib
   ${QT_LIBRARIES}
   ${ENGINE_LIBRARIES}
   ${LASTFM_LIBRARIES}
+  ${QTSINGLEAPPLICATION_LIBRARIES}
 )
 
 if(ENABLE_VISUALISATIONS)
