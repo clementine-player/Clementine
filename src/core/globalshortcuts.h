@@ -48,6 +48,9 @@ public slots:
   void ReloadSettings();
   void ShowMacAccessibilityDialog();
 
+  void Unregister();
+  void Register();
+
 signals:
   void Play();
   void Pause();
@@ -72,6 +75,8 @@ private:
 
   QMap<QString, Shortcut> shortcuts_;
   QSettings settings_;
+
+  bool use_gnome_;
 };
 
 #endif

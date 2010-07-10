@@ -130,9 +130,18 @@ void GlobalShortcutsConfig::DefaultClicked() {
 }
 
 void GlobalShortcutsConfig::ChangeClicked() {
+  manager_->Unregister();
   QKeySequence key = grabber_->GetKey(shortcuts_[current_id_].s.action->text());
+  manager_->Register();
+
   if (key.isEmpty())
     return;
+
+  // Check if this key sequence is used by any other actions
+  foreach (const QString& id, shortcuts_.keys()) {
+    if (shortcuts_[id].key == key)
+      SetShortcut(id, QKeySequence());
+  }
 
   ui_->radio_custom->setChecked(true);
   SetShortcut(current_id_, key);

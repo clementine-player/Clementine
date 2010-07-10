@@ -33,7 +33,8 @@ const char* GlobalShortcuts::kSettingsGroup = "Shortcuts";
 GlobalShortcuts::GlobalShortcuts(QObject *parent)
   : QObject(parent),
     gnome_backend_(NULL),
-    system_backend_(NULL)
+    system_backend_(NULL),
+    use_gnome_(false)
 {
   settings_.beginGroup(kSettingsGroup);
 
@@ -91,14 +92,21 @@ bool GlobalShortcuts::IsGsdAvailable() const {
 void GlobalShortcuts::ReloadSettings() {
   // The actual shortcuts have been set in our actions for us by the config
   // dialog already - we just need to reread the gnome settings.
-  bool use_gnome = settings_.value("use_gnome", true).toBool();
+  use_gnome_ = settings_.value("use_gnome", true).toBool();
 
+  Unregister();
+  Register();
+}
+
+void GlobalShortcuts::Unregister() {
   if (gnome_backend_ && gnome_backend_->is_active())
     gnome_backend_->Unregister();
   if (system_backend_ && system_backend_->is_active())
     system_backend_->Unregister();
+}
 
-  if (gnome_backend_ && use_gnome)
+void GlobalShortcuts::Register() {
+  if (gnome_backend_ && use_gnome_)
     gnome_backend_->Register();
   else if (system_backend_)
     system_backend_->Register();
