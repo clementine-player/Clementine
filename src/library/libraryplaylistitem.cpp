@@ -52,3 +52,9 @@ QVariant LibraryPlaylistItem::DatabaseValue(DatabaseColumn column) const {
     default:                  return PlaylistItem::DatabaseValue(column);
   }
 }
+
+Song LibraryPlaylistItem::Metadata() const {
+  if (HasTemporaryMetadata())
+    return temp_metadata_;
+  return song_;
+}

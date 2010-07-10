@@ -22,7 +22,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-class Song;
+#include "core/song.h"
 
 class QSqlQuery;
 
@@ -104,8 +104,9 @@ class PlaylistItem {
   // item a chance to get another track to play.
   virtual SpecialLoadResult LoadNext() { return SpecialLoadResult(); }
 
-  virtual void SetTemporaryMetadata(const Song& metadata) {Q_UNUSED(metadata)}
-  virtual void ClearTemporaryMetadata() {}
+  void SetTemporaryMetadata(const Song& metadata);
+  void ClearTemporaryMetadata();
+  bool HasTemporaryMetadata() const { return temp_metadata_.is_valid(); }
 
  protected:
   enum DatabaseColumn {
@@ -122,6 +123,8 @@ class PlaylistItem {
     return QVariant(QVariant::String); }
 
   QString type_;
+
+  Song temp_metadata_;
 };
 typedef QList<boost::shared_ptr<PlaylistItem> > PlaylistItemList;
 

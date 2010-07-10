@@ -80,16 +80,9 @@ void SongPlaylistItem::Reload() {
 }
 
 Song SongPlaylistItem::Metadata() const {
-  if (temp_metadata_.is_valid())
+  if (HasTemporaryMetadata())
     return temp_metadata_;
   return song_;
 }
 
-void SongPlaylistItem::SetTemporaryMetadata(const Song& metadata) {
-  temp_metadata_ = metadata;
-  temp_metadata_.set_filetype(Song::Type_Stream);
-}
 
-void SongPlaylistItem::ClearTemporaryMetadata() {
-  temp_metadata_ = Song();
-}

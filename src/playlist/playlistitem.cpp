@@ -53,4 +53,13 @@ void PlaylistItem::BindToQuery(QSqlQuery* query) const {
   query->bindValue(8, DatabaseValue(Column_RadioService));
 }
 
+void PlaylistItem::SetTemporaryMetadata(const Song& metadata) {
+  temp_metadata_ = metadata;
+  temp_metadata_.set_filetype(Song::Type_Stream);
+}
+
+void PlaylistItem::ClearTemporaryMetadata() {
+  temp_metadata_ = Song();
+}
+
 

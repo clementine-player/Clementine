@@ -28,7 +28,7 @@ class LibraryPlaylistItem : public PlaylistItem {
   bool InitFromQuery(const QSqlQuery &query);
   void Reload();
 
-  Song Metadata() const { return song_; }
+  Song Metadata() const;
   void SetMetadata(const Song& song) { song_ = song; }
 
   QUrl Url() const;

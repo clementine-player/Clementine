@@ -41,9 +41,6 @@ class RadioPlaylistItem : public PlaylistItem {
   SpecialLoadResult StartLoading();
   SpecialLoadResult LoadNext();
 
-  void SetTemporaryMetadata(const Song& metadata);
-  void ClearTemporaryMetadata();
-
  protected:
   QVariant DatabaseValue(DatabaseColumn) const;
 
@@ -57,7 +54,6 @@ class RadioPlaylistItem : public PlaylistItem {
   QString artist_;
 
   Song metadata_;
-  Song temp_metadata_;
 };
 
 #endif // RADIOPLAYLISTITEM_H
