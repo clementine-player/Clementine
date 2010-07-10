@@ -34,7 +34,10 @@
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 
-#include <QtSingleApplication>
+#include "qtlocalpeer.h"
+#include "qtsingleapplication.h"
+#include "qtsinglecoreapplication.h"
+
 #include <QtDebug>
 #include <QLibraryInfo>
 #include <QTranslator>
@@ -113,12 +116,34 @@ int main(int argc, char *argv[]) {
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
 
+  // Parse commandline options - need to do this before starting the
+  // QApplication so it works without an X server
+  CommandlineOptions options(argc, argv);
+  if (!options.Parse())
+    return 1;
+
+  {
+    // Only start a core application now so we can check if there's another
+    // Clementine running without needing an X server.
+    QtSingleCoreApplication a(argc, argv);
+    if (a.isRunning()) {
+      if (options.is_empty()) {
+        qDebug() << "Clementine is already running - activating existing window";
+      }
+      if (a.sendMessage(options.Serialize(), 5000)) {
+        return 0;
+      }
+      // Couldn't send the message so start anyway
+    }
+  }
+
   // Detect technically invalid usage of non-ASCII in ID3v1 tags.
   UniversalEncodingHandler handler;
   TagLib::ID3v1::Tag::setStringHandler(&handler);
 
   QtSingleApplication a(argc, argv);
   a.setQuitOnLastWindowClosed(false);
+  a.isRunning(); // Otherwise QtLocalPeer won't lock the lockfile :S
 
   // Gnome on Ubuntu has menu icons disabled by default.  I think that's a bad
   // idea, and makes some menus in Clementine look confusing.
@@ -136,21 +161,6 @@ int main(int argc, char *argv[]) {
 
   // Icons
   IconLoader::Init();
-
-
-  CommandlineOptions options(argc, argv);
-  if (!options.Parse())
-    return 1;
-
-  if (a.isRunning()) {
-    if (options.is_empty()) {
-      qDebug() << "Clementine is already running - activating existing window";
-    }
-    if (a.sendMessage(options.Serialize())) {
-      return 0;
-    }
-    // Couldn't send the message so start anyway
-  }
 
   NetworkAccessManager network;
 
