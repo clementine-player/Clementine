@@ -70,13 +70,26 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="startup_scan">
-     <property name="text">
-      <string>Update the library when Clementine starts</string>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Automatic updating</string>
      </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QCheckBox" name="startup_scan">
+        <property name="text">
+         <string>Update the library when Clementine starts</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="monitor">
+        <property name="text">
+         <string>Monitor the library for changes</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>

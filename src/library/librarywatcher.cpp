@@ -40,6 +40,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     task_manager_(NULL),
     stop_requested_(false),
     scan_on_startup_(true),
+    monitor_(true),
     rescan_timer_(new QTimer(this)),
     rescan_paused_(false),
     total_watches_(0)
@@ -98,9 +99,11 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
 
   watcher_->task_manager_->SetTaskFinished(task_id_);
 
-  // Watch the new subdirectories
-  foreach (const Subdirectory& subdir, new_subdirs) {
-    watcher_->AddWatch(watcher_->watched_dirs_[dir_].watcher, subdir.path);
+  if (watcher_->monitor_) {
+    // Watch the new subdirectories
+    foreach (const Subdirectory& subdir, new_subdirs) {
+      watcher_->AddWatch(watcher_->watched_dirs_[dir_].watcher, subdir.path);
+    }
   }
 }
 
@@ -192,7 +195,8 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
       if (scan_on_startup_)
         ScanSubdirectory(subdir.path, subdir, &transaction);
 
-      AddWatch(data.watcher, subdir.path);
+      if (monitor_)
+        AddWatch(data.watcher, subdir.path);
     }
   }
 
@@ -460,10 +464,32 @@ QString LibraryWatcher::ImageForSong(const QString& path, QMap<QString, QStringL
   return QString();
 }
 
+void LibraryWatcher::ReloadSettingsAsync() {
+  QMetaObject::invokeMethod(this, "ReloadSettings", Qt::QueuedConnection);
+}
+
 void LibraryWatcher::ReloadSettings() {
+  const bool was_monitoring_before = monitor_;
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
   scan_on_startup_ = s.value("startup_scan", true).toBool();
+  monitor_ = s.value("monitor", true).toBool();
+
+  if (!monitor_ && was_monitoring_before) {
+    // Remove all directories from all QFileSystemWatchers
+    foreach (const DirData& data, watched_dirs_.values()) {
+      data.watcher->removePaths(data.watcher->directories());
+    }
+  } else if (monitor_ && !was_monitoring_before) {
+    // Add all directories to all QFileSystemWatchers again
+    foreach (const DirData& data, watched_dirs_.values()) {
+      SubdirectoryList subdirs = backend_->SubdirsInDirectory(data.dir.id);
+      foreach (const Subdirectory& subdir, subdirs) {
+        AddWatch(data.watcher, subdir.path);
+      }
+    }
+  }
 }
 
 void LibraryWatcher::SetRescanPausedAsync(bool pause) {

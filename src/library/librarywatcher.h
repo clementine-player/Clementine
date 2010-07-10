@@ -44,6 +44,7 @@ class LibraryWatcher : public QObject {
 
   void IncrementalScanAsync();
   void SetRescanPausedAsync(bool pause);
+  void ReloadSettingsAsync();
 
   void Stop() { stop_requested_ = true; }
 
@@ -142,6 +143,7 @@ class LibraryWatcher : public QObject {
   QString device_name_;
   bool stop_requested_;
   bool scan_on_startup_;
+  bool monitor_;
 
   QMap<int, DirData> watched_dirs_;
   QTimer* rescan_timer_;

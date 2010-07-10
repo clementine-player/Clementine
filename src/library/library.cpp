@@ -105,3 +105,10 @@ void Library::ResumeWatcher() {
 
   watcher_->Worker()->SetRescanPausedAsync(false);
 }
+
+void Library::ReloadSettings() {
+  if (!watcher_->Worker())
+    return;
+
+  watcher_->Worker()->ReloadSettingsAsync();
+}

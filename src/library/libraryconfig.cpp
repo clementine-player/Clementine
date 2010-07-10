@@ -91,6 +91,7 @@ void LibraryConfig::Save() {
 
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   s.setValue("startup_scan", ui_->startup_scan->isChecked());
+  s.setValue("monitor", ui_->monitor->isChecked());
   s.endGroup();
 }
 
@@ -107,5 +108,6 @@ void LibraryConfig::Load() {
 
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   ui_->startup_scan->setChecked(s.value("startup_scan", true).toBool());
+  ui_->monitor->setChecked(s.value("monitor", true).toBool());
   s.endGroup();
 }

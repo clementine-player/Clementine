@@ -51,6 +51,8 @@ class Library : public QObject {
   LibraryModel* model() const { return model_; }
 
  public slots:
+  void ReloadSettings();
+
   void PauseWatcher();
   void ResumeWatcher();
 
