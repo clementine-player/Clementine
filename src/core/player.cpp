@@ -344,8 +344,18 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   if (item == NULL)
     return;
 
+  Engine::SimpleMetaBundle bundle_copy = bundle;
+
+  // Maybe the metadata is from icycast and has "Artist - Title" shoved
+  // together in the title field.
+  int dash_pos = bundle_copy.title.indexOf('-');
+  if (dash_pos != -1 && bundle_copy.artist.isEmpty()) {
+    bundle_copy.artist = bundle_copy.title.mid(dash_pos + 1).trimmed();
+    bundle_copy.title = bundle_copy.title.left(dash_pos).trimmed();
+  }
+
   Song song = item->Metadata();
-  song.MergeFromSimpleMetaBundle(bundle);
+  song.MergeFromSimpleMetaBundle(bundle_copy);
 
   // Ignore useless metadata
   if (song.title().isEmpty() && song.artist().isEmpty())
