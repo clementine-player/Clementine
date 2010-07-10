@@ -324,8 +324,18 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
   qDebug() << error->message;
   qDebug() << debugs;
 
+  QString message_str = error->message;
+
   g_error_free(error);
   free(debugs);
+
+  if (state_ == WaitingForType &&
+      message_str == "Could not determine type of stream.") {
+    // Don't give up - assume it's a playlist and see if one of our parsers can
+    // read it.
+    state_ = WaitingForMagic;
+    return;
+  }
 
   StopTypefindAsync(false);
 }

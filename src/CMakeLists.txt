@@ -91,6 +91,7 @@ set(SOURCES
   playlist/songplaylistitem.cpp
 
   playlistparsers/asxparser.cpp
+  playlistparsers/asxiniparser.cpp
   playlistparsers/m3uparser.cpp
   playlistparsers/parserbase.cpp
   playlistparsers/playlistparser.cpp
@@ -207,6 +208,7 @@ set(HEADERS
   playlist/songmimedata.h
 
   playlistparsers/asxparser.h
+  playlistparsers/asxiniparser.h
   playlistparsers/m3uparser.h
   playlistparsers/parserbase.h
   playlistparsers/playlistparser.h

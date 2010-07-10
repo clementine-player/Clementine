@@ -7,6 +7,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../src)
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
+if(LIBGPOD_FOUND)
+  include_directories(${LIBGPOD_INCLUDE_DIRS})
+endif(LIBGPOD_FOUND)
+
 set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest.cc
     ../3rdparty/gmock/gtest/src/gtest-death-test.cc
@@ -87,6 +91,7 @@ endmacro (add_test_file)
 #add_test_file(albumcoverfetcher_test.cpp false)
 add_test_file(albumcovermanager_test.cpp true)
 add_test_file(asxparser_test.cpp false)
+add_test_file(asxiniparser_test.cpp false)
 add_test_file(database_test.cpp false)
 add_test_file(fileformats_test.cpp false)
 add_test_file(librarybackend_test.cpp false)

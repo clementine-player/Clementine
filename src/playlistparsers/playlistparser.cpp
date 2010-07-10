@@ -19,6 +19,7 @@
 #include "m3uparser.h"
 #include "plsparser.h"
 #include "asxparser.h"
+#include "asxiniparser.h"
 
 #include <QtDebug>
 
@@ -31,6 +32,7 @@ PlaylistParser::PlaylistParser(QObject *parent)
   parsers_ << new XSPFParser(this);
   parsers_ << new PLSParser(this);
   parsers_ << new ASXParser(this);
+  parsers_ << new AsxIniParser(this);
 }
 
 QStringList PlaylistParser::file_extensions() const {
