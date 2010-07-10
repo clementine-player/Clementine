@@ -65,6 +65,8 @@ protected:
   void keyReleaseEvent(QKeyEvent *event);
 
 private:
+  void Init();
+
   void SizeChanged();
   void AddMenuItem(const QString& name, int value, int def,
                    QActionGroup* group, QSignalMapper* mapper);
@@ -77,6 +79,8 @@ private slots:
   void SetQuality(int size);
 
 private:
+  bool initialised_;
+
   GstEngine* engine_;
   ProjectMVisualisation* vis_;
   VisualisationOverlay* overlay_;

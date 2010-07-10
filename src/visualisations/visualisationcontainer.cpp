@@ -40,6 +40,7 @@ const int VisualisationContainer::kDefaultTextureSize = 512;
 
 VisualisationContainer::VisualisationContainer(QWidget *parent)
   : QGraphicsView(parent),
+    initialised_(false),
     engine_(NULL),
     vis_(new ProjectMVisualisation(this)),
     overlay_(new VisualisationOverlay),
@@ -49,6 +50,16 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
     fps_(kDefaultFps),
     size_(kDefaultTextureSize)
 {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  if (!restoreGeometry(s.value("geometry").toByteArray())) {
+    resize(kDefaultWidth, kDefaultHeight);
+  }
+  fps_ = s.value("fps", kDefaultFps).toInt();
+  size_ = s.value("size", kDefaultTextureSize).toInt();
+}
+
+void VisualisationContainer::Init() {
   setWindowTitle(tr("Clementine Visualization"));
   setWindowIcon(QIcon(":/icon.png"));
 
@@ -66,17 +77,8 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   connect(overlay_, SIGNAL(ShowPopupMenu(QPoint)), SLOT(ShowPopupMenu(QPoint)));
   ChangeOverlayOpacity(0.0);
 
-  // Load settings
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  if (!restoreGeometry(s.value("geometry").toByteArray())) {
-    resize(kDefaultWidth, kDefaultHeight);
-  }
-  fps_ = s.value("fps", kDefaultFps).toInt();
-  size_ = s.value("size", kDefaultTextureSize).toInt();
-
-  SizeChanged();
   vis_->SetTextureSize(size_);
+  SizeChanged();
 
   // Selector
   selector_->SetVisualisation(vis_);
@@ -130,6 +132,11 @@ void VisualisationContainer::SetEngine(GstEngine* engine) {
 }
 
 void VisualisationContainer::showEvent(QShowEvent* e) {
+  if (!initialised_) {
+    Init();
+    initialised_ = true;
+  }
+
   QGraphicsView::showEvent(e);
   update_timer_.start(1000 / fps_, this);
 
@@ -165,7 +172,8 @@ void VisualisationContainer::SizeChanged() {
     scene()->setSceneRect(QRect(QPoint(0, 0), size()));
 
   // Resize the overlay
-  overlay_->resize(size());
+  if (overlay_)
+    overlay_->resize(size());
 }
 
 void VisualisationContainer::timerEvent(QTimerEvent* e) {
