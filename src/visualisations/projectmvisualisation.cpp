@@ -19,16 +19,17 @@
 #include "projectmvisualisation.h"
 #include "visualisationcontainer.h"
 
-#include <QTimerEvent>
-#include <QPainter>
-#include <QPaintEngine>
-#include <QtDebug>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
 #include <QGLWidget>
 #include <QGraphicsView>
+#include <QMessageBox>
+#include <QPaintEngine>
+#include <QPainter>
 #include <QSettings>
-#include <QCoreApplication>
-#include <QFile>
-#include <QDir>
+#include <QtDebug>
+#include <QTimerEvent>
 
 #include <projectM.hpp>
 
@@ -87,11 +88,6 @@ void ProjectMVisualisation::InitProjectM() {
     break;
   }
 
-  if (preset_path.isNull()) {
-    qFatal("ProjectM presets could not be found, search path was:\n  %s",
-           paths.join("\n  ").toLocal8Bit().constData());
-  }
-
   // Create projectM settings
   projectM::Settings s;
   s.meshX = 32;
@@ -110,6 +106,13 @@ void ProjectMVisualisation::InitProjectM() {
   projectm_.reset(new projectM(s));
   preset_model_ = new ProjectMPresetModel(this, this);
   Load();
+
+  if (preset_path.isNull()) {
+    qWarning("ProjectM presets could not be found, search path was:\n  %s",
+             paths.join("\n  ").toLocal8Bit().constData());
+    QMessageBox::warning(NULL, tr("Missing projectM presets"),
+        tr("Clementine could not load any projectM visualisations.  Check that you have installed Clementine properly."));
+  }
 }
 
 void ProjectMVisualisation::drawBackground(QPainter* p, const QRectF&) {
