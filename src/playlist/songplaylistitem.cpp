@@ -78,3 +78,18 @@ QUrl SongPlaylistItem::Url() const {
 void SongPlaylistItem::Reload() {
   song_.InitFromFile(song_.filename(), song_.directory_id());
 }
+
+Song SongPlaylistItem::Metadata() const {
+  if (temp_metadata_.is_valid())
+    return temp_metadata_;
+  return song_;
+}
+
+void SongPlaylistItem::SetTemporaryMetadata(const Song& metadata) {
+  temp_metadata_ = metadata;
+  temp_metadata_.set_filetype(Song::Type_Stream);
+}
+
+void SongPlaylistItem::ClearTemporaryMetadata() {
+  temp_metadata_ = Song();
+}

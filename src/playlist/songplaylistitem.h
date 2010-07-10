@@ -28,7 +28,9 @@ class SongPlaylistItem : public PlaylistItem {
   bool InitFromQuery(const QSqlQuery &query);
   void Reload();
 
-  Song Metadata() const { return song_; }
+  Song Metadata() const;
+  void SetTemporaryMetadata(const Song &metadata);
+  void ClearTemporaryMetadata();
 
   QUrl Url() const;
 
@@ -37,6 +39,7 @@ class SongPlaylistItem : public PlaylistItem {
 
  private:
   Song song_;
+  Song temp_metadata_;
 };
 
 #endif // SONGPLAYLISTITEM_H
