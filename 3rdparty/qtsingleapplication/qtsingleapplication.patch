@@ -1,6 +1,15 @@
---- qtlocalpeer.cpp	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtlocalpeer.cpp	2010-05-03 15:15:24.000000000 +0100
-@@ -59,14 +59,12 @@
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtlocalpeer.cpp qtsingleapplication/qtlocalpeer.cpp
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtlocalpeer.cpp	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtlocalpeer.cpp	2010-07-10 16:26:50.000000000 +0100
+@@ -48,6 +48,7 @@
+ #include "qtlocalpeer.h"
+ #include <QtCore/QCoreApplication>
+ #include <QtCore/QTime>
++#include <QtDebug>
+ 
+ #if defined(Q_OS_WIN)
+ #include <QtCore/QLibrary>
+@@ -59,14 +60,12 @@
  #include <time.h>
  #endif
  
@@ -15,7 +24,7 @@
  
  const char* QtLocalPeer::ack = "ack";
  
-@@ -118,7 +116,7 @@
+@@ -118,7 +117,7 @@
      if (lockFile.isLocked())
          return false;
  
@@ -24,16 +33,19 @@
          return true;
  
      bool res = server->listen(socketName);
-@@ -136,7 +134,7 @@
- }
+@@ -138,6 +137,11 @@
  
- 
--bool QtLocalPeer::sendMessage(const QString &message, int timeout)
-+bool QtLocalPeer::sendMessage(const QByteArray &message, int timeout)
+ bool QtLocalPeer::sendMessage(const QString &message, int timeout)
  {
++    return sendMessage(message.toUtf8(), timeout);
++}
++
++bool QtLocalPeer::sendMessage(const QByteArray &message, int timeout)
++{
      if (!isClient())
          return false;
-@@ -160,9 +158,8 @@
+ 
+@@ -160,9 +164,8 @@
      if (!connOk)
          return false;
  
@@ -44,12 +56,7 @@
      bool res = socket.waitForBytesWritten(timeout);
      res &= socket.waitForReadyRead(timeout);   // wait for ack
      res &= (socket.read(qstrlen(ack)) == ack);
-@@ -191,13 +188,12 @@
-         uMsgBuf += got;
-     } while (remaining && got >= 0 && socket->waitForReadyRead(2000));
-     if (got < 0) {
--        qWarning() << "QtLocalPeer: Message reception failed" << socket->errorString();
-+        qWarning("QtLocalPeer: Message reception failed %s", socket->errorString().toUtf8().constData());
+@@ -195,9 +198,9 @@
          delete socket;
          return;
      }
@@ -59,9 +66,11 @@
      delete socket;
 -    emit messageReceived(message); //### (might take a long time to return)
 +    emit messageReceived(uMsg); //### (might take a long time to return)
++    emit messageReceived(QString::fromUtf8(uMsg));
  }
---- qtlocalpeer.h	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtlocalpeer.h	2010-05-03 15:15:17.000000000 +0100
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtlocalpeer.h qtsingleapplication/qtlocalpeer.h
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtlocalpeer.h	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtlocalpeer.h	2010-07-10 16:26:16.000000000 +0100
 @@ -49,9 +49,7 @@
  #include <QtNetwork/QLocalSocket>
  #include <QtCore/QDir>
@@ -72,22 +81,21 @@
  
  class QtLocalPeer : public QObject
  {
-@@ -60,12 +58,12 @@
- public:
+@@ -61,11 +59,13 @@
      QtLocalPeer(QObject *parent = 0, const QString &appId = QString());
      bool isClient();
--    bool sendMessage(const QString &message, int timeout);
+     bool sendMessage(const QString &message, int timeout);
 +    bool sendMessage(const QByteArray &message, int timeout);
      QString applicationId() const
          { return id; }
  
  Q_SIGNALS:
--    void messageReceived(const QString &message);
+     void messageReceived(const QString &message);
 +    void messageReceived(const QByteArray &message);
  
  protected Q_SLOTS:
      void receiveConnection();
-@@ -74,7 +72,7 @@
+@@ -74,7 +74,7 @@
      QString id;
      QString socketName;
      QLocalServer* server;
@@ -96,8 +104,9 @@
  
  private:
      static const char* ack;
---- qtlockedfile_win.cpp	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtlockedfile_win.cpp	2010-03-07 22:54:21.000000000 +0000
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtlockedfile_win.cpp qtsingleapplication/qtlockedfile_win.cpp
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtlockedfile_win.cpp	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtlockedfile_win.cpp	2010-07-10 16:26:33.000000000 +0100
 @@ -65,7 +65,7 @@
  
      Qt::HANDLE mutex;
@@ -116,97 +125,107 @@
                 { mutex = OpenMutexA(SYNCHRONIZE | MUTEX_MODIFY_STATE, FALSE, mname.toLocal8Bit().constData()); } );
          if (!mutex) {
              if (GetLastError() != ERROR_FILE_NOT_FOUND)
---- qtsingleapplication.cpp	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsingleapplication.cpp	2010-04-12 23:25:15.000000000 +0100
-@@ -143,7 +143,7 @@
- {
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtsingleapplication.cpp qtsingleapplication/qtsingleapplication.cpp
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtsingleapplication.cpp	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtsingleapplication.cpp	2010-07-10 16:23:53.000000000 +0100
+@@ -144,6 +144,7 @@
      actWin = 0;
      peer = new QtLocalPeer(this, appId);
--    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
+     connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
 +    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
  }
  
  
-@@ -260,7 +260,7 @@
- 
-     \sa isRunning(), messageReceived()
- */
--bool QtSingleApplication::sendMessage(const QString &message, int timeout)
-+bool QtSingleApplication::sendMessage(const QByteArray &message, int timeout)
- {
+@@ -265,6 +266,11 @@
      return peer->sendMessage(message, timeout);
  }
-@@ -292,9 +292,9 @@
+ 
++bool QtSingleApplication::sendMessage(const QByteArray &message, int timeout)
++{
++    return peer->sendMessage(message, timeout);
++}
++
+ 
+ /*!
+     Returns the application identifier. Two processes with the same
+@@ -291,10 +297,14 @@
+ void QtSingleApplication::setActivationWindow(QWidget* aw, bool activateOnMessage)
  {
      actWin = aw;
-     if (activateOnMessage)
--        connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
+-    if (activateOnMessage)
++    if (activateOnMessage) {
+         connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
+-    else
 +        connect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
-     else
--        disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
++    }
++    else {
+         disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
 +        disconnect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
++    }
  }
  
  
---- qtsingleapplication.h	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsingleapplication.h	2010-04-12 23:25:15.000000000 +0100
-@@ -90,12 +90,12 @@
-         { isRunning(); Q_UNUSED(dummy) }
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtsingleapplication.h qtsingleapplication/qtsingleapplication.h
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtsingleapplication.h	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtsingleapplication.h	2010-07-10 16:23:53.000000000 +0100
+@@ -91,11 +91,13 @@
  
  public Q_SLOTS:
--    bool sendMessage(const QString &message, int timeout = 5000);
+     bool sendMessage(const QString &message, int timeout = 5000);
 +    bool sendMessage(const QByteArray &message, int timeout = 5000);
      void activateWindow();
  
  
  Q_SIGNALS:
--    void messageReceived(const QString &message);
+     void messageReceived(const QString &message);
 +    void messageReceived(const QByteArray &message);
  
  
  private:
---- qtsinglecoreapplication.h	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsinglecoreapplication.h	2010-04-12 23:25:43.000000000 +0100
-@@ -61,11 +61,11 @@
-     QString id() const;
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtsinglecoreapplication.cpp qtsingleapplication/qtsinglecoreapplication.cpp
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtsinglecoreapplication.cpp	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtsinglecoreapplication.cpp	2010-07-10 16:32:33.000000000 +0100
+@@ -81,6 +81,7 @@
+ {
+     peer = new QtLocalPeer(this);
+     connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
++    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
+ }
+ 
+ 
+@@ -94,6 +95,7 @@
+ {
+     peer = new QtLocalPeer(this, appId);
+     connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
++    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
+ }
+ 
+ 
+@@ -133,6 +135,11 @@
+     return peer->sendMessage(message, timeout);
+ }
+ 
++bool QtSingleCoreApplication::sendMessage(const QByteArray &message, int timeout)
++{
++    return peer->sendMessage(message, timeout);
++}
++
+ 
+ /*!
+     Returns the application identifier. Two processes with the same
+diff -ur /home/david/qtsingleapplication-2.6_1-opensource/src/qtsinglecoreapplication.h qtsingleapplication/qtsinglecoreapplication.h
+--- /home/david/qtsingleapplication-2.6_1-opensource/src/qtsinglecoreapplication.h	2009-12-16 10:43:33.000000000 +0000
++++ qtsingleapplication/qtsinglecoreapplication.h	2010-07-10 16:32:33.000000000 +0100
+@@ -62,10 +62,12 @@
  
  public Q_SLOTS:
--    bool sendMessage(const QString &message, int timeout = 5000);
+     bool sendMessage(const QString &message, int timeout = 5000);
 +    bool sendMessage(const QByteArray &message, int timeout = 5000);
  
  
  Q_SIGNALS:
--    void messageReceived(const QString &message);
+     void messageReceived(const QString &message);
 +    void messageReceived(const QByteArray &message);
  
  
  private:
---- qtsinglecoreapplication.cpp	2009-12-16 10:43:33.000000000 +0000
-+++ /home/david/svn/clementine/3rdparty/qtsingleapplication/qtsinglecoreapplication.cpp	2010-04-12 23:25:43.000000000 +0100
-@@ -80,7 +80,7 @@
-     : QCoreApplication(argc, argv)
- {
-     peer = new QtLocalPeer(this);
--    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
-+    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
- }
- 
- 
-@@ -93,7 +93,7 @@
-     : QCoreApplication(argc, argv)
- {
-     peer = new QtLocalPeer(this, appId);
--    connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
-+    connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
- }
- 
- 
-@@ -128,7 +128,7 @@
-     \sa isRunning(), messageReceived()
- */
- 
--bool QtSingleCoreApplication::sendMessage(const QString &message, int timeout)
-+bool QtSingleCoreApplication::sendMessage(const QByteArray &message, int timeout)
- {
-     return peer->sendMessage(message, timeout);
- }

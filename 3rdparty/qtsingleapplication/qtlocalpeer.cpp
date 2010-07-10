@@ -48,6 +48,7 @@
 #include "qtlocalpeer.h"
 #include <QtCore/QCoreApplication>
 #include <QtCore/QTime>
+#include <QtDebug>
 
 #if defined(Q_OS_WIN)
 #include <QtCore/QLibrary>
@@ -134,6 +135,11 @@ bool QtLocalPeer::isClient()
 }
 
 
+bool QtLocalPeer::sendMessage(const QString &message, int timeout)
+{
+    return sendMessage(message.toUtf8(), timeout);
+}
+
 bool QtLocalPeer::sendMessage(const QByteArray &message, int timeout)
 {
     if (!isClient())
@@ -188,7 +194,7 @@ void QtLocalPeer::receiveConnection()
         uMsgBuf += got;
     } while (remaining && got >= 0 && socket->waitForReadyRead(2000));
     if (got < 0) {
-        qWarning("QtLocalPeer: Message reception failed %s", socket->errorString().toUtf8().constData());
+        qWarning() << "QtLocalPeer: Message reception failed" << socket->errorString();
         delete socket;
         return;
     }
@@ -196,4 +202,5 @@ void QtLocalPeer::receiveConnection()
     socket->waitForBytesWritten(1000);
     delete socket;
     emit messageReceived(uMsg); //### (might take a long time to return)
+    emit messageReceived(QString::fromUtf8(uMsg));
 }
