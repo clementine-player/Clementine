@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "projectmpresetmodel.h"
 #include "projectmvisualisation.h"
 #include "visualisationselector.h"
@@ -21,7 +22,11 @@
 
 #include <QPushButton>
 
-#include <projectM.hpp>
+#ifdef USE_SYSTEM_PROJECTM
+#  include <libprojectM/projectM.hpp>
+#else
+#  include "projectM.hpp"
+#endif
 
 VisualisationSelector::VisualisationSelector(QWidget *parent)
   : QDialog(parent),

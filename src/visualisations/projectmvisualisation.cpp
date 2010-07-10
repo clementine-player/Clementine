@@ -31,7 +31,11 @@
 #include <QtDebug>
 #include <QTimerEvent>
 
-#include <projectM.hpp>
+#ifdef USE_SYSTEM_PROJECTM
+#  include <libprojectM/projectM.hpp>
+#else
+#  include "projectM.hpp"
+#endif
 
 #ifdef Q_OS_MAC
 #  include "core/mac_startup.h"
@@ -50,7 +54,7 @@ ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
 {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
 
-  for (int i=0 ; i<TOTAL_RATING_TYPES ; ++i)
+  for (int i=0 ; i<4 ; ++i)
     default_rating_list_.push_back(3);
 }
 

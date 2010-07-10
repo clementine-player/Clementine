@@ -14,10 +14,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "projectmpresetmodel.h"
 #include "projectmvisualisation.h"
 
-#include <projectM.hpp>
+#ifdef USE_SYSTEM_PROJECTM
+#  include <libprojectM/projectM.hpp>
+#else
+#  include "projectM.hpp"
+#endif
 
 #include <QtDebug>
 #include <QDir>

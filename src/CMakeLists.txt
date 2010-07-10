@@ -10,11 +10,11 @@ include_directories(../3rdparty/qtsingleapplication)
 include_directories(../3rdparty/qtiocompressor)
 include_directories(../3rdparty/qtwin)
 include_directories(../3rdparty/qxt)
-include_directories(../3rdparty/libprojectm)
 
-include_directories(${GLIB_INCLUDE_DIRECTORIES})
-include_directories(${LIBXML_INCLUDE_DIRECTORIES})
-include_directories(${GOBJECT_INCLUDE_DIRECTORIES})
+include_directories(${GLIB_INCLUDE_DIRS})
+include_directories(${LIBXML_INCLUDE_DIRS})
+include_directories(${GOBJECT_INCLUDE_DIRS})
+include_directories(${LIBPROJECTM_INCLUDE_DIRS})
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/AddEngine.cmake)
@@ -530,7 +530,7 @@ target_link_libraries(clementine_lib
 )
 
 if(ENABLE_VISUALISATIONS)
-  target_link_libraries(clementine_lib projectM)
+  target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(ENABLE_VISUALISATIONS)
 
 if(HAVE_LIBGPOD)
