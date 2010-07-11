@@ -72,6 +72,7 @@ class GstEnginePipeline : public QObject {
   qint64 position() const;
   qint64 length() const;
   GstState state() const;
+  qint64 segment_start() const { return segment_start_; }
 
   QUrl redirect_url() const { return redirect_url_; }
 
@@ -94,6 +95,7 @@ class GstEnginePipeline : public QObject {
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
   static void NewPadCallback(GstElement*, GstPad*, gpointer);
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
+  static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static bool StopUriDecodeBin(gpointer bin);
   void TagMessageReceived(GstMessage*);
@@ -121,6 +123,7 @@ class GstEnginePipeline : public QObject {
   // These get called when there is a new audio buffer available
   QList<BufferConsumer*> buffer_consumers_;
   QMutex buffer_consumers_mutex_;
+  qint64 segment_start_;
 
   // ReplayGain
   bool rg_enabled_;

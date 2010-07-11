@@ -29,6 +29,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     engine_(engine),
     valid_(false),
     sink_(GstEngine::kAutoSink),
+    segment_start_(0),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -145,6 +146,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // so that our visualization are not affected by them
   pad = gst_element_get_pad(scope_element, "src");
   gst_pad_add_buffer_probe(pad, G_CALLBACK(HandoffCallback), this);
+  gst_pad_add_event_probe(pad, G_CALLBACK(EventHandoffCallback), this);
   gst_object_unref (pad);
 
   // Ensure we get the right type out of audioconvert for our scope
@@ -316,6 +318,20 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
   foreach (BufferConsumer* consumer, consumers) {
     gst_buffer_ref(buf);
     consumer->ConsumeBuffer(buf, instance);
+  }
+
+  return true;
+}
+
+bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self) {
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
+
+  if (GST_EVENT_TYPE(e) == GST_EVENT_NEWSEGMENT) {
+    // The segment start time is used to calculate the proper offset of data
+    // buffers from the start of the stream
+    gint64 start = 0;
+    gst_event_parse_new_segment(e, NULL, NULL, NULL, &start, NULL, NULL);
+    instance->segment_start_ = start;
   }
 
   return true;

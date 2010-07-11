@@ -308,7 +308,8 @@ void GstEngine::UpdateScope() {
   typedef int16_t sampletype;
 
   // prune the scope and get the current pos of the audio device
-  quint64 pos = PruneScope();
+  const quint64 pos = PruneScope();
+  const quint64 segment_start = current_pipeline_->segment_start();
 
   // head of the delay queue is the most delayed, so we work with that one
   GstBuffer *buf = reinterpret_cast<GstBuffer *>( g_queue_peek_head(delayq_) );
@@ -316,7 +317,7 @@ void GstEngine::UpdateScope() {
     return;
 
   // start time for this buffer
-  quint64 stime = GST_BUFFER_TIMESTAMP(buf);
+  quint64 stime = GST_BUFFER_TIMESTAMP(buf) - segment_start;
   // duration of the buffer...
   quint64 dur = GST_BUFFER_DURATION(buf);
   // therefore we can calculate the end time for the buffer
@@ -716,7 +717,8 @@ qint64 GstEngine::PruneScope() {
     return 0;
 
   // get the position playing in the audio device
-  qint64 pos = current_pipeline_->position();
+  const qint64 pos = current_pipeline_->position();
+  const qint64 segment_start = current_pipeline_->segment_start();
 
   GstBuffer *buf = 0;
   quint64 etime = 0;
@@ -727,7 +729,7 @@ qint64 GstEngine::PruneScope() {
     buf = reinterpret_cast<GstBuffer *>( g_queue_peek_head(delayq_) );
     if (buf) {
       // the start time of the buffer
-      quint64 stime = GST_BUFFER_TIMESTAMP(buf);
+      quint64 stime = GST_BUFFER_TIMESTAMP(buf) - segment_start;
       // the duration of the buffer
       quint64 dur = GST_BUFFER_DURATION(buf);
       // therefore we can calculate the end time of the buffer
