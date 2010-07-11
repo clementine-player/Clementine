@@ -85,6 +85,14 @@ int main(int argc, char *argv[]) {
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
   mac::MacMain();
+
+  // Strip mac command line option.
+  for (int i = 0; i < argc; ++i) {
+    QString arg(argv[i]);
+    if (arg.startsWith("-psn")) {
+      argv[i][0] = '\0';
+    }
+  }
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
