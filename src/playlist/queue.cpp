@@ -158,3 +158,53 @@ void Queue::Clear() {
   source_indexes_.clear();
   endRemoveRows();
 }
+
+void Queue::Move(const QList<int>& proxy_rows, int pos) {
+  layoutAboutToBeChanged();
+  QList<QPersistentModelIndex> moved_items;
+
+  // Take the items out of the list first, keeping track of whether the
+  // insertion point changes
+  int offset = 0;
+  foreach (int row, proxy_rows) {
+    moved_items << source_indexes_.takeAt(row-offset);
+    if (pos != -1 && pos >= row)
+      pos --;
+    offset++;
+  }
+
+  // Put the items back in
+  const int start = pos == -1 ? source_indexes_.count() : pos;
+  for (int i=start ; i<start+moved_items.count() ; ++i) {
+    source_indexes_.insert(i, moved_items[i - start]);
+  }
+
+  // Update persistent indexes
+  foreach (const QModelIndex& pidx, persistentIndexList()) {
+    const int dest_offset = proxy_rows.indexOf(pidx.row());
+    if (dest_offset != -1) {
+      // This index was moved
+      changePersistentIndex(pidx, index(start + dest_offset, pidx.column(), QModelIndex()));
+    } else {
+      int d = 0;
+      foreach (int row, proxy_rows) {
+        if (pidx.row() > row)
+          d --;
+      }
+      if (pidx.row() + d >= start)
+        d += proxy_rows.count();
+
+      changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
+    }
+  }
+
+  layoutChanged();
+}
+
+void Queue::MoveUp(int row) {
+  Move(QList<int>() << row, row - 1);
+}
+
+void Queue::MoveDown(int row) {
+  Move(QList<int>() << row, row + 2);
+}

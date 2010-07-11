@@ -58,6 +58,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
                this, SLOT(UpdateButtonState()));
     disconnect(current_playlist_->queue(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
                this, SLOT(UpdateButtonState()));
+    disconnect(current_playlist_->queue(), SIGNAL(layoutChanged()),
+               this, SLOT(UpdateButtonState()));
   }
 
   current_playlist_ = playlist;
@@ -65,6 +67,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
   connect(current_playlist_->queue(), SIGNAL(rowsInserted(QModelIndex,int,int)),
           this, SLOT(UpdateButtonState()));
   connect(current_playlist_->queue(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
+          this, SLOT(UpdateButtonState()));
+  connect(current_playlist_->queue(), SIGNAL(layoutChanged()),
           this, SLOT(UpdateButtonState()));
 
   ui_->list->setModel(current_playlist_->queue());
@@ -75,11 +79,27 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
 }
 
 void QueueManager::MoveUp() {
+  QModelIndexList indexes = ui_->list->selectionModel()->selectedRows();
+  qStableSort(indexes);
 
+  if (indexes.isEmpty() || indexes.first().row() == 0)
+    return;
+
+  foreach (const QModelIndex& index, indexes) {
+    current_playlist_->queue()->MoveUp(index.row());
+  }
 }
 
 void QueueManager::MoveDown() {
+  QModelIndexList indexes = ui_->list->selectionModel()->selectedRows();
+  qStableSort(indexes);
 
+  if (indexes.isEmpty() || indexes.last().row() == current_playlist_->queue()->rowCount()-1)
+    return;
+
+  for (int i=indexes.count()-1 ; i>=0 ; --i) {
+    current_playlist_->queue()->MoveDown(indexes[i].row());
+  }
 }
 
 void QueueManager::Clear() {

@@ -41,6 +41,9 @@ public:
   QModelIndex TakeNext();
   void ToggleTracks(const QModelIndexList& source_indexes);
   void Clear();
+  void Move(const QList<int>& proxy_rows, int pos);
+  void MoveUp(int row);
+  void MoveDown(int row);
 
   // QAbstractProxyModel
   void setSourceModel(QAbstractItemModel* source_model);
