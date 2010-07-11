@@ -150,6 +150,10 @@ int main(int argc, char *argv[]) {
   TagLib::ID3v1::Tag::setStringHandler(&handler);
 
   QtSingleApplication a(argc, argv);
+#ifdef Q_OS_DARWIN
+  QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/../PlugIns");
+#endif
+
   a.setQuitOnLastWindowClosed(false);
   a.isRunning(); // Otherwise QtLocalPeer won't lock the lockfile :S
 
