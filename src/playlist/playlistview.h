@@ -72,6 +72,7 @@ class PlaylistView : public QTreeView {
   void InhibitAutoscrollTimeout();
   void MaybeAutoscroll();
   void InvalidateCachedCurrentPixmap();
+  void PlaylistDestroyed();
 
  private:
   void ReloadBarPixmaps();

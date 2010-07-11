@@ -60,6 +60,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
                this, SLOT(UpdateButtonState()));
     disconnect(current_playlist_->queue(), SIGNAL(layoutChanged()),
                this, SLOT(UpdateButtonState()));
+    disconnect(current_playlist_, SIGNAL(destroyed()),
+               this, SLOT(PlaylistDestroyed()));
   }
 
   current_playlist_ = playlist;
@@ -70,6 +72,8 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
           this, SLOT(UpdateButtonState()));
   connect(current_playlist_->queue(), SIGNAL(layoutChanged()),
           this, SLOT(UpdateButtonState()));
+  connect(current_playlist_, SIGNAL(destroyed()),
+          this, SLOT(PlaylistDestroyed()));
 
   ui_->list->setModel(current_playlist_->queue());
   ui_->list->setModelColumn(Queue::Column_CombinedArtistTitle);
@@ -118,4 +122,9 @@ void QueueManager::UpdateButtonState() {
   }
 
   ui_->clear->setEnabled(!current_playlist_->queue()->is_empty());
+}
+
+void QueueManager::PlaylistDestroyed() {
+  current_playlist_ = NULL;
+  // We'll get another CurrentPlaylistChanged() soon
 }

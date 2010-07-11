@@ -36,6 +36,7 @@ public:
 
 private slots:
   void CurrentPlaylistChanged(Playlist* playlist);
+  void PlaylistDestroyed();
   void UpdateButtonState();
 
   void MoveUp();

@@ -93,12 +93,14 @@ void PlaylistView::SetPlaylist(Playlist *playlist) {
   if (playlist_) {
     disconnect(playlist_, SIGNAL(CurrentSongChanged(Song)),
                this, SLOT(MaybeAutoscroll()));
+    disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
   }
 
   playlist_ = playlist;
   LoadGeometry();
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
+  connect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
 }
 
 void PlaylistView::setModel(QAbstractItemModel *m) {
@@ -552,4 +554,9 @@ void PlaylistView::dropEvent(QDropEvent *event) {
   QTreeView::dropEvent(event);
   cached_tree_ = QPixmap();
   drop_indicator_row_ = -1;
+}
+
+void PlaylistView::PlaylistDestroyed() {
+  playlist_ = NULL;
+  // We'll get a SetPlaylist() soon
 }
