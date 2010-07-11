@@ -33,6 +33,8 @@ public:
     ColumnCount
   };
 
+  static const char* kRowsMimetype;
+
   // Query the queue
   bool is_empty() const;
   int PositionOf(const QModelIndex& source_index) const;
@@ -56,6 +58,11 @@ public:
   int rowCount(const QModelIndex &parent = QModelIndex()) const;
   int columnCount(const QModelIndex &parent = QModelIndex()) const;
   QVariant data(const QModelIndex& proxy_index, int role) const;
+  QStringList mimeTypes() const;
+  Qt::DropActions supportedDropActions() const;
+  QMimeData* mimeData(const QModelIndexList& indexes) const;
+  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
+  Qt::ItemFlags flags(const QModelIndex &index) const;
 
 private slots:
   void SourceDataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right);

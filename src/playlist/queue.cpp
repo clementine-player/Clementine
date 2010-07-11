@@ -16,6 +16,12 @@
 
 #include "queue.h"
 
+#include <QBuffer>
+#include <QMimeData>
+#include <QtDebug>
+
+const char* Queue::kRowsMimetype = "application/x-clementine-queue-rows";
+
 Queue::Queue(QObject* parent)
   : QAbstractProxyModel(parent)
 {
@@ -34,6 +40,9 @@ QModelIndex Queue::mapFromSource(const QModelIndex& source_index) const {
 }
 
 QModelIndex Queue::mapToSource(const QModelIndex& proxy_index) const {
+  if (!proxy_index.isValid())
+    return QModelIndex();
+
   return source_indexes_[proxy_index.row()];
 }
 
@@ -207,4 +216,64 @@ void Queue::MoveUp(int row) {
 
 void Queue::MoveDown(int row) {
   Move(QList<int>() << row, row + 2);
+}
+
+QStringList Queue::mimeTypes() const {
+  return QStringList() << kRowsMimetype;
+}
+
+Qt::DropActions Queue::supportedDropActions() const {
+  return Qt::MoveAction | Qt::CopyAction | Qt::LinkAction;
+}
+
+QMimeData* Queue::mimeData(const QModelIndexList& indexes) const {
+  QMimeData* data = new QMimeData;
+
+  QList<int> rows;
+  foreach (const QModelIndex& index, indexes) {
+    if (index.column() != Column_CombinedArtistTitle)
+      continue;
+
+    rows << index.row();
+  }
+
+  QBuffer buf;
+  buf.open(QIODevice::WriteOnly);
+  QDataStream stream(&buf);
+  stream << rows;
+  buf.close();
+
+  data->setData(kRowsMimetype, buf.data());
+
+  return data;
+}
+
+bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int, const QModelIndex&) {
+  if (action == Qt::IgnoreAction)
+    return false;
+
+  if (data->hasFormat(kRowsMimetype)) {
+    // Dragged from the queue
+
+    QList<int> proxy_rows;
+    QDataStream stream(data->data(kRowsMimetype));
+    stream >> proxy_rows;
+    qStableSort(proxy_rows); // Make sure we take them in order
+
+    Move(proxy_rows, row);
+  }
+
+  return true;
+}
+
+Qt::ItemFlags Queue::flags(const QModelIndex &index) const {
+  Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+
+  if (index.isValid())
+    flags |= Qt::ItemIsDragEnabled;
+  else
+    flags |= Qt::ItemIsDropEnabled;
+
+  return flags;
+
 }
