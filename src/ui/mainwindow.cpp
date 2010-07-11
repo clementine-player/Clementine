@@ -376,7 +376,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_->action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(IconLoader::Load("media-playback-stop"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
-  playlist_queue_ = playlist_menu_->addAction(IconLoader::Load("go-next"), tr("Queue this track"), this, SLOT(PlaylistQueue()));
+  playlist_queue_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueue()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
@@ -925,15 +925,22 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   playlist_stop_after_->setEnabled(index.isValid());
 
-  // Are any of the selected songs editable?
+  // Are any of the selected songs editable or queued?
   QModelIndexList selection = ui_->playlist->view()->selectionModel()->selection().indexes();
   int editable = 0;
+  int in_queue = 0;
+  int not_in_queue = 0;
   foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
       continue;
     if (playlists_->current()->item_at(index.row())->Metadata().IsEditable()) {
       editable++;
     }
+
+    if (index.data(Playlist::Role_QueuePosition).toInt() == -1)
+      not_in_queue ++;
+    else
+      in_queue ++;
   }
   ui_->action_edit_track->setEnabled(editable);
 
@@ -947,6 +954,22 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_move_to_library_->setVisible(false);
   playlist_organise_->setVisible(false);
   playlist_delete_->setVisible(false);
+
+  if (in_queue == 1 && not_in_queue == 0)
+    playlist_queue_->setText(tr("Dequeue track"));
+  else if (in_queue > 1 && not_in_queue == 0)
+    playlist_queue_->setText(tr("Dequeue selected tracks"));
+  else if (in_queue == 0 && not_in_queue == 1)
+    playlist_queue_->setText(tr("Queue track"));
+  else if (in_queue == 0 && not_in_queue > 1)
+    playlist_queue_->setText(tr("Queue selected tracks"));
+  else
+    playlist_queue_->setText(tr("Toggle queue status"));
+
+  if (not_in_queue == 0)
+    playlist_queue_->setIcon(IconLoader::Load("go-previous"));
+  else
+    playlist_queue_->setIcon(IconLoader::Load("go-next"));
 
   if (!index.isValid()) {
     ui_->action_selection_set_value->setVisible(false);
