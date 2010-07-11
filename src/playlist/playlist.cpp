@@ -18,6 +18,7 @@
 #include "playlistbackend.h"
 #include "playlistfilter.h"
 #include "playlistundocommands.h"
+#include "queue.h"
 #include "songloaderinserter.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
@@ -53,6 +54,7 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
                    int id, QObject *parent)
   : QAbstractListModel(parent),
     proxy_(new PlaylistFilter(this)),
+    queue_(new Queue(this)),
     backend_(backend),
     task_manager_(task_manager),
     id_(id),
@@ -71,6 +73,7 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
   Restore();
 
   proxy_->setSourceModel(this);
+  queue_->setSourceModel(this);
 }
 
 Playlist::~Playlist() {

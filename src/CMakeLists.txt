@@ -87,6 +87,8 @@ set(SOURCES
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
   playlist/playlistview.cpp
+  playlist/queue.cpp
+  playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp
   playlist/songplaylistitem.cpp
 
@@ -204,6 +206,8 @@ set(HEADERS
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
   playlist/playlistview.h
+  playlist/queue.h
+  playlist/queuemanager.h
   playlist/songloaderinserter.h
   playlist/songmimedata.h
 
@@ -272,6 +276,7 @@ set(UI
 
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui
+  playlist/queuemanager.ui
 
   radio/lastfmconfig.ui
   radio/lastfmstationdialog.ui

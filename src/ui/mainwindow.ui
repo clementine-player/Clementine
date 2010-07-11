@@ -558,6 +558,7 @@
      <string>Tools</string>
     </property>
     <addaction name="action_cover_manager"/>
+    <addaction name="action_queue_manager"/>
     <addaction name="action_equalizer"/>
     <addaction name="action_visualisations"/>
     <addaction name="action_transcode"/>
@@ -818,6 +819,11 @@
   <action name="action_visualisations">
    <property name="text">
     <string>Visualizations</string>
+   </property>
+  </action>
+  <action name="action_queue_manager">
+   <property name="text">
+    <string>Queue Manager</string>
    </property>
   </action>
  </widget>

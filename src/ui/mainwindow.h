@@ -49,6 +49,7 @@ class Player;
 class PlaylistBackend;
 class PlaylistManager;
 class PlaylistParser;
+class QueueManager;
 class RadioItem;
 class RadioModel;
 class SettingsDialog;
@@ -101,6 +102,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);
   void PlaylistPlay();
   void PlaylistStopAfter();
+  void PlaylistQueue();
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
   void EditTracks();
@@ -194,6 +196,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
   boost::scoped_ptr<ErrorDialog> error_dialog_;
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
+  boost::scoped_ptr<QueueManager> queue_manager_;
 
 #ifdef ENABLE_VISUALISATIONS
   boost::scoped_ptr<VisualisationContainer> visualisation_;
@@ -207,6 +210,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_copy_to_library_;
   QAction* playlist_move_to_library_;
   QAction* playlist_delete_;
+  QAction* playlist_queue_;
   QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;

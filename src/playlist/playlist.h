@@ -30,6 +30,7 @@
 class RadioService;
 class PlaylistBackend;
 class PlaylistFilter;
+class Queue;
 class TaskManager;
 
 class QSortFilterProxyModel;
@@ -101,6 +102,7 @@ class Playlist : public QAbstractListModel {
 
   // Accessors
   QSortFilterProxyModel* proxy() const;
+  Queue* queue() const { return queue_; }
 
   int id() const { return id_; }
   int current_index() const;
@@ -196,6 +198,7 @@ class Playlist : public QAbstractListModel {
 
  private:
   PlaylistFilter* proxy_;
+  Queue* queue_;
 
   PlaylistBackend* backend_;
   TaskManager* task_manager_;

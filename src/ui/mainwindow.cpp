@@ -36,6 +36,8 @@
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlistview.h"
+#include "playlist/queue.h"
+#include "playlist/queuemanager.h"
 #include "playlist/songloaderinserter.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
@@ -128,6 +130,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #endif
     error_dialog_(new ErrorDialog),
     organise_dialog_(new OrganiseDialog(task_manager_)),
+    queue_manager_(new QueueManager),
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
 #endif
@@ -188,6 +191,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_sort_model_->sort(0);
 
   ui_->playlist->SetManager(playlists_);
+  queue_manager_->SetPlaylistManager(playlists_);
 
   ui_->library_view->setModel(library_sort_model_);
   ui_->library_view->SetLibrary(library_->model());
@@ -271,6 +275,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
   connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
+  connect(ui_->action_queue_manager, SIGNAL(triggered()), queue_manager_.get(), SLOT(show()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
@@ -371,6 +376,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
   playlist_menu_->addAction(ui_->action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(IconLoader::Load("media-playback-stop"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
+  playlist_queue_ = playlist_menu_->addAction(IconLoader::Load("go-next"), tr("Queue this track"), this, SLOT(PlaylistQueue()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
@@ -1292,5 +1298,11 @@ void MainWindow::PlaylistOrganiseSelected(bool copy) {
 }
 
 void MainWindow::PlaylistDelete() {
+  // TODO
+}
 
+void MainWindow::PlaylistQueue() {
+  QModelIndexList indexes = playlists_->current()->proxy()->mapSelectionToSource(
+      ui_->playlist->view()->selectionModel()->selection()).indexes();
+  playlists_->current()->queue()->ToggleTracks(indexes);
 }
