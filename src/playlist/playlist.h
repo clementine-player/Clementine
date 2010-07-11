@@ -197,9 +197,15 @@ class Playlist : public QAbstractListModel {
   void MoveItemsWithoutUndo(const QList<int>& source_rows, int pos);
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
 
+ private slots:
+  void TracksAboutToBeDequeued(const QModelIndex&, int begin, int end);
+  void TracksDequeued();
+
  private:
   PlaylistFilter* proxy_;
   Queue* queue_;
+
+  QList<QModelIndex> temp_queue_change_indexes_;
 
   PlaylistBackend* backend_;
   TaskManager* task_manager_;

@@ -1302,7 +1302,11 @@ void MainWindow::PlaylistDelete() {
 }
 
 void MainWindow::PlaylistQueue() {
-  QModelIndexList indexes = playlists_->current()->proxy()->mapSelectionToSource(
-      ui_->playlist->view()->selectionModel()->selection()).indexes();
+  QModelIndexList indexes;
+  foreach (const QModelIndex& proxy_index,
+           ui_->playlist->view()->selectionModel()->selectedRows()) {
+    indexes << playlists_->current()->proxy()->mapToSource(proxy_index);
+  }
+
   playlists_->current()->queue()->ToggleTracks(indexes);
 }

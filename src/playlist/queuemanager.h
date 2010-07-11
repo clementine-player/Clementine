@@ -23,6 +23,8 @@ class Playlist;
 class PlaylistManager;
 class Ui_QueueManager;
 
+class QModelIndex;
+
 class QueueManager : public QDialog {
   Q_OBJECT
 
@@ -34,6 +36,11 @@ public:
 
 private slots:
   void CurrentPlaylistChanged(Playlist* playlist);
+  void UpdateButtonState();
+
+  void MoveUp();
+  void MoveDown();
+  void Clear();
 
 private:
   Ui_QueueManager* ui_;

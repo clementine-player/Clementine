@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>455</width>
-    <height>366</height>
+    <width>582</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,35 +35,50 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>0</number>
-       </property>
        <item>
-        <widget class="QToolButton" name="move_up">
+        <widget class="QPushButton" name="move_up">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Move up</string>
+         </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="move_down">
+        <widget class="QPushButton" name="move_down">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Move down</string>
+         </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="clear">
+        <widget class="QPushButton" name="clear">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Clear</string>
+         </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
@@ -91,7 +106,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Close</set>
      </property>
     </widget>
    </item>

@@ -33,11 +33,14 @@ public:
     ColumnCount
   };
 
+  // Query the queue
   bool is_empty() const;
   int PositionOf(const QModelIndex& source_index) const;
 
+  // Modify the queue
   QModelIndex TakeNext();
   void ToggleTracks(const QModelIndexList& source_indexes);
+  void Clear();
 
   // QAbstractProxyModel
   void setSourceModel(QAbstractItemModel* source_model);
@@ -47,8 +50,8 @@ public:
   // QAbstractItemModel
   QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
   QModelIndex parent(const QModelIndex &child) const;
-  int rowCount(const QModelIndex &parent) const;
-  int columnCount(const QModelIndex &parent) const;
+  int rowCount(const QModelIndex &parent = QModelIndex()) const;
+  int columnCount(const QModelIndex &parent = QModelIndex()) const;
   QVariant data(const QModelIndex& proxy_index, int role) const;
 
 private slots:

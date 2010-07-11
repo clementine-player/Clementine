@@ -74,6 +74,10 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
 
   proxy_->setSourceModel(this);
   queue_->setSourceModel(this);
+
+  connect(queue_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+          SLOT(TracksAboutToBeDequeued(QModelIndex,int,int)));
+  connect(queue_, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(TracksDequeued()));
 }
 
 Playlist::~Playlist() {
@@ -1064,4 +1068,19 @@ quint64 Playlist::GetTotalLength() const {
 
 PlaylistItemList Playlist::library_items_by_id(int id) const {
   return library_items_by_id_.values(id);
+}
+
+void Playlist::TracksAboutToBeDequeued(const QModelIndex&, int begin, int end) {
+  qDebug() << begin << end;
+  for (int i=begin ; i<=end ; ++i) {
+    temp_queue_change_indexes_ << queue_->mapToSource(queue_->index(i, Column_Title));
+  }
+}
+
+void Playlist::TracksDequeued() {
+  foreach (const QModelIndex& index, temp_queue_change_indexes_) {
+    qDebug() << "Changed" << index.row() << index.data(Role_QueuePosition);
+    emit dataChanged(index, index);
+  }
+  temp_queue_change_indexes_.clear();
 }
