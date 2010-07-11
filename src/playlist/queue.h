@@ -38,9 +38,10 @@ public:
   // Query the queue
   bool is_empty() const;
   int PositionOf(const QModelIndex& source_index) const;
+  int PeekNext() const;
 
   // Modify the queue
-  QModelIndex TakeNext();
+  int TakeNext();
   void ToggleTracks(const QModelIndexList& source_indexes);
   void Clear();
   void Move(const QList<int>& proxy_rows, int pos);

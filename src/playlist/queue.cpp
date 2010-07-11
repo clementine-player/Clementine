@@ -300,5 +300,21 @@ Qt::ItemFlags Queue::flags(const QModelIndex &index) const {
     flags |= Qt::ItemIsDropEnabled;
 
   return flags;
+}
 
+int Queue::PeekNext() const {
+  if (source_indexes_.isEmpty())
+    return -1;
+  return source_indexes_.first().row();
+}
+
+int Queue::TakeNext() {
+  if (source_indexes_.isEmpty())
+    return -1;
+
+  beginRemoveRows(QModelIndex(), 0, 0);
+  int ret = source_indexes_.takeFirst().row();
+  endRemoveRows();
+
+  return ret;
 }

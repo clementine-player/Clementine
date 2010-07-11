@@ -348,6 +348,11 @@ int Playlist::next_index() const {
   if (stop_after_.isValid() && current_index() == stop_after_.row())
     return -1;
 
+  // Any queued items take priority
+  if (!queue_->is_empty()) {
+    return queue_->PeekNext();
+  }
+
   int next_virtual_index = NextVirtualIndex(current_virtual_index_);
   if (next_virtual_index >= virtual_items_.count()) {
     // We've gone off the end of the playlist.
@@ -417,6 +422,10 @@ void Playlist::set_current_index(int i) {
   if (current_item_index_.isValid() && current_item_index_ != old_current) {
     emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount-1));
     emit CurrentSongChanged(current_item_metadata());
+  }
+
+  if (current_item_index_.row() == queue_->PeekNext()) {
+    queue_->TakeNext();
   }
 
   // Update the virtual index
