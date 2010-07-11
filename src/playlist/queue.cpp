@@ -219,7 +219,7 @@ void Queue::MoveDown(int row) {
 }
 
 QStringList Queue::mimeTypes() const {
-  return QStringList() << kRowsMimetype;
+  return QStringList() << kRowsMimetype << Playlist::kRowsMimetype;
 }
 
 Qt::DropActions Queue::supportedDropActions() const {
@@ -261,6 +261,31 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, 
     qStableSort(proxy_rows); // Make sure we take them in order
 
     Move(proxy_rows, row);
+  } else if (data->hasFormat(Playlist::kRowsMimetype)) {
+    // Dragged from the playlist
+
+    QList<int> source_rows;
+    QDataStream stream(data->data(Playlist::kRowsMimetype));
+    stream >> source_rows;
+
+    QModelIndexList source_indexes;
+    foreach (int source_row, source_rows) {
+      const QModelIndex source_index = sourceModel()->index(source_row, 0);
+      const QModelIndex proxy_index = mapFromSource(source_index);
+      if (proxy_index.isValid()) {
+        // This row was already in the queue, so no need to add it again
+        continue;
+      }
+
+      source_indexes << source_index;
+    }
+
+    const int insert_point = row == -1 ? source_indexes_.count() : row;
+    beginInsertRows(QModelIndex(), insert_point, insert_point + source_indexes.count() - 1);
+    for (int i=0 ; i<source_indexes.count() ; ++i) {
+      source_indexes_.insert(insert_point + i, source_indexes[i]);
+    }
+    endInsertRows();
   }
 
   return true;
