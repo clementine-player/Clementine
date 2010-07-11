@@ -54,7 +54,7 @@ ProjectMVisualisation::ProjectMVisualisation(QObject *parent)
 {
   connect(this, SIGNAL(sceneRectChanged(QRectF)), SLOT(SceneRectChanged(QRectF)));
 
-  for (int i=0 ; i<4 ; ++i)
+  for (int i=0 ; i<TOTAL_RATING_TYPES ; ++i)
     default_rating_list_.push_back(3);
 }
 
