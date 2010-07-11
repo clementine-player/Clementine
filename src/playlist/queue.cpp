@@ -68,14 +68,12 @@ void Queue::setSourceModel(QAbstractItemModel* source_model) {
 
 void Queue::SourceDataChanged(const QModelIndex& top_left,
                               const QModelIndex& bottom_right) {
-  const int last_col = ColumnCount - 1;
-
   for (int row = top_left.row() ; row <= bottom_right.row() ; ++row) {
     QModelIndex proxy_index = mapFromSource(sourceModel()->index(row, 0));
     if (!proxy_index.isValid())
       continue;
 
-    emit dataChanged(proxy_index, proxy_index.sibling(proxy_index.row(), last_col));
+    emit dataChanged(proxy_index, proxy_index);
   }
 }
 
@@ -105,8 +103,8 @@ int Queue::rowCount(const QModelIndex &parent) const {
   return source_indexes_.count();
 }
 
-int Queue::columnCount(const QModelIndex &parent) const {
-  return ColumnCount;
+int Queue::columnCount(const QModelIndex&) const {
+  return 1;
 }
 
 QVariant Queue::data(const QModelIndex& proxy_index, int role) const {
@@ -116,19 +114,17 @@ QVariant Queue::data(const QModelIndex& proxy_index, int role) const {
     case Playlist::Role_QueuePosition:
       return proxy_index.row();
 
-    case Qt::DisplayRole:
-      if (proxy_index.column() == Column_CombinedArtistTitle) {
-        const QString artist = source_index.sibling(source_index.row(), Playlist::Column_Artist).data().toString();
-        const QString title = source_index.sibling(source_index.row(), Playlist::Column_Title).data().toString();
+    case Qt::DisplayRole: {
+      const QString artist = source_index.sibling(source_index.row(), Playlist::Column_Artist).data().toString();
+      const QString title = source_index.sibling(source_index.row(), Playlist::Column_Title).data().toString();
 
-        if (artist.isEmpty())
-          return title;
-        return artist + " - " + title;
-      }
-      // fallthrough
+      if (artist.isEmpty())
+        return title;
+      return artist + " - " + title;
+    }
 
     default:
-      return source_index.data(role);
+      return QVariant();
   }
 }
 
@@ -231,7 +227,7 @@ QMimeData* Queue::mimeData(const QModelIndexList& indexes) const {
 
   QList<int> rows;
   foreach (const QModelIndex& index, indexes) {
-    if (index.column() != Column_CombinedArtistTitle)
+    if (index.column() != 0)
       continue;
 
     rows << index.row();
@@ -280,12 +276,14 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, 
       source_indexes << source_index;
     }
 
-    const int insert_point = row == -1 ? source_indexes_.count() : row;
-    beginInsertRows(QModelIndex(), insert_point, insert_point + source_indexes.count() - 1);
-    for (int i=0 ; i<source_indexes.count() ; ++i) {
-      source_indexes_.insert(insert_point + i, source_indexes[i]);
+    if (!source_indexes.isEmpty()) {
+      const int insert_point = row == -1 ? source_indexes_.count() : row;
+      beginInsertRows(QModelIndex(), insert_point, insert_point + source_indexes.count() - 1);
+      for (int i=0 ; i<source_indexes.count() ; ++i) {
+        source_indexes_.insert(insert_point + i, source_indexes[i]);
+      }
+      endInsertRows();
     }
-    endInsertRows();
   }
 
   return true;
@@ -317,4 +315,8 @@ int Queue::TakeNext() {
   endRemoveRows();
 
   return ret;
+}
+
+QVariant Queue::headerData(int section, Qt::Orientation orientation, int role) const {
+  return QVariant();
 }

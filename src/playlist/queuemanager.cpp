@@ -29,7 +29,7 @@ QueueManager::QueueManager(QWidget *parent)
     current_playlist_(NULL)
 {
   ui_->setupUi(this);
-  ui_->list->setItemDelegate(new QueuedItemDelegate(this));
+  ui_->list->setItemDelegate(new QueuedItemDelegate(this, 0));
 
   // Set icons on buttons
   ui_->move_down->setIcon(IconLoader::Load("go-down"));
@@ -76,7 +76,6 @@ void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {
           this, SLOT(PlaylistDestroyed()));
 
   ui_->list->setModel(current_playlist_->queue());
-  ui_->list->setModelColumn(Queue::Column_CombinedArtistTitle);
 
   connect(ui_->list->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateButtonState()));

@@ -27,7 +27,7 @@
 
 class QueuedItemDelegate : public QStyledItemDelegate {
 public:
-  QueuedItemDelegate(QObject* parent);
+  QueuedItemDelegate(QObject* parent, int indicator_column = Playlist::Column_Title);
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   void DrawBox(QPainter* painter, const QRect& line_rect,
                const QFont& font, const QString& text, int width = -1) const;
@@ -42,6 +42,8 @@ private:
   static const QRgb kQueueBoxGradientColor2;
   static const int kQueueOpacitySteps;
   static const float kQueueOpacityLowerBound;
+
+  int indicator_column_;
 };
 
 class PlaylistDelegateBase : public QueuedItemDelegate {

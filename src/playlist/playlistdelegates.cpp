@@ -40,16 +40,16 @@ const float QueuedItemDelegate::kQueueOpacityLowerBound = 0.4;
 
 const int PlaylistDelegateBase::kMinHeight = 19;
 
-QueuedItemDelegate::QueuedItemDelegate(QObject *parent)
-  : QStyledItemDelegate(parent)
+QueuedItemDelegate::QueuedItemDelegate(QObject *parent, int indicator_column)
+  : QStyledItemDelegate(parent),
+    indicator_column_(indicator_column)
 {
 }
 
 void QueuedItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
   QStyledItemDelegate::paint(painter, option, index);
 
-  if (index.column() == Playlist::Column_Title ||
-      index.column() == Queue::Column_CombinedArtistTitle) {
+  if (index.column() == indicator_column_) {
     const int queue_pos = index.data(Playlist::Role_QueuePosition).toInt();
     if (queue_pos != -1) {
       float opacity = kQueueOpacitySteps - qMin(kQueueOpacitySteps, queue_pos);
@@ -103,8 +103,7 @@ void QueuedItemDelegate::DrawBox(
 }
 
 int QueuedItemDelegate::queue_indicator_size(const QModelIndex& index) const {
-  if (index.column() == Playlist::Column_Title ||
-      index.column() == Queue::Column_CombinedArtistTitle) {
+  if (index.column() == indicator_column_) {
     const int queue_pos = index.data(Playlist::Role_QueuePosition).toInt();
     if (queue_pos != -1) {
       return kQueueBoxLength + kQueueBoxBorder*2;

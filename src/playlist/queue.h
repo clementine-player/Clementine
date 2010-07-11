@@ -27,12 +27,6 @@ class Queue : public QAbstractProxyModel {
 public:
   Queue(QObject* parent = 0);
 
-  enum Columns {
-    Column_CombinedArtistTitle = Playlist::ColumnCount,
-
-    ColumnCount
-  };
-
   static const char* kRowsMimetype;
 
   // Query the queue
@@ -59,6 +53,7 @@ public:
   int rowCount(const QModelIndex &parent = QModelIndex()) const;
   int columnCount(const QModelIndex &parent = QModelIndex()) const;
   QVariant data(const QModelIndex& proxy_index, int role) const;
+  QVariant headerData(int section, Qt::Orientation orientation, int role) const;
   QStringList mimeTypes() const;
   Qt::DropActions supportedDropActions() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;

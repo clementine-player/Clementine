@@ -21,7 +21,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QListView" name="list">
+      <widget class="QTreeView" name="list">
        <property name="acceptDrops">
         <bool>true</bool>
        </property>
@@ -46,9 +46,12 @@
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
-       <property name="uniformItemSizes">
-        <bool>true</bool>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
        </property>
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
      <item>
