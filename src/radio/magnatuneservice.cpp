@@ -28,11 +28,12 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
+#include "qtiocompressor.h"
+
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QXmlStreamReader>
-#include <QtIOCompressor>
 #include <QSortFilterProxyModel>
 #include <QMenu>
 #include <QDesktopServices>

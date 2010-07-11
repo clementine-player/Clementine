@@ -170,9 +170,17 @@ else(USE_SYSTEM_QTSINGLEAPPLICATION)
   set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapplication)
 endif(USE_SYSTEM_QTSINGLEAPPLICATION)
 
-# Subdirectories
+# QtIoCompressor isn't patched, so we can use a system version if it's
+# available
+find_path(QTIOCOMPRESSOR_INCLUDE_DIRS qtiocompressor.h PATH_SUFFIXES QtSolutions)
+find_library(QTIOCOMPRESSOR_LIBRARIES QtSolutions_IOCompressor-2.3)
+if(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
+  add_subdirectory(3rdparty/qtiocompressor)
+  set(QTIOCOMPRESSOR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtiocompressor)
+  set(QTIOCOMPRESSOR_LIBRARIES qtiocompressor)
+endif(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
 
-add_subdirectory(3rdparty/qtiocompressor)
+# Subdirectories
 add_subdirectory(src)
 if (NOT APPLE)
   add_subdirectory(3rdparty/qxt)
