@@ -30,6 +30,14 @@
 #include <QScrollBar>
 #include <QLinearGradient>
 
+const int   QueuedItemDelegate::kQueueBoxBorder = 1;
+const int   QueuedItemDelegate::kQueueBoxCornerRadius = 3;
+const int   QueuedItemDelegate::kQueueBoxLength = 30;
+const QRgb  QueuedItemDelegate::kQueueBoxGradientColor1 = qRgb(102, 150, 227);
+const QRgb  QueuedItemDelegate::kQueueBoxGradientColor2 = qRgb(77, 121, 200);
+const int   QueuedItemDelegate::kQueueOpacitySteps = 10;
+const float QueuedItemDelegate::kQueueOpacityLowerBound = 0.4;
+
 const int PlaylistDelegateBase::kMinHeight = 19;
 
 QueuedItemDelegate::QueuedItemDelegate(QObject *parent)
@@ -44,53 +52,67 @@ void QueuedItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
       index.column() == Queue::Column_CombinedArtistTitle) {
     const int queue_pos = index.data(Playlist::Role_QueuePosition).toInt();
     if (queue_pos != -1) {
-      QFont smaller = option.font;
-      smaller.setPointSize(smaller.pointSize() - 2);
-      smaller.setBold(true);
-
-      const int kQueueBoxBorder = 1;
-      const int kQueueBoxCornerRadius = 3;
-      const int kQueueBoxLength = QFontMetrics(smaller).width('7') * 4;
-      const QRgb kQueueBoxGradientColor1 = qRgb(102, 150, 227);
-      const QRgb kQueueBoxGradientColor2 = qRgb(77, 121, 200);
-      const int kQueueOpacitySteps = 10;
-      const float kQueueOpacityLowerBound = 0.4;
-
-      QRect rect(option.rect);
-      rect.setLeft(rect.right() - kQueueBoxLength - kQueueBoxBorder);
-      rect.setWidth(kQueueBoxLength);
-      rect.setTop(rect.top() + kQueueBoxBorder);
-      rect.setBottom(rect.bottom() - kQueueBoxBorder - 1);
-
-      QRect text_rect(rect);
-      text_rect.setBottom(text_rect.bottom() + 1);
-
-      QLinearGradient gradient(rect.topLeft(), rect.bottomLeft());
-      gradient.setColorAt(0.0, kQueueBoxGradientColor1);
-      gradient.setColorAt(1.0, kQueueBoxGradientColor2);
-
-      // Turn on antialisaing
-      painter->setRenderHint(QPainter::Antialiasing);
-
       float opacity = kQueueOpacitySteps - qMin(kQueueOpacitySteps, queue_pos);
       opacity /= kQueueOpacitySteps;
       opacity *= 1.0 - kQueueOpacityLowerBound;
       opacity += kQueueOpacityLowerBound;
       painter->setOpacity(opacity);
 
-      // Draw the box
-      painter->setPen(QPen(Qt::white, 1));
-      painter->setBrush(gradient);
-      painter->drawRoundedRect(rect, kQueueBoxCornerRadius, kQueueBoxCornerRadius);
-
-      // Draw the text
-      painter->setFont(smaller);
-      painter->drawText(rect, Qt::AlignCenter, QString::number(queue_pos+1));
+      DrawBox(painter, option.rect, option.font, QString::number(queue_pos+1),
+              kQueueBoxLength);
 
       painter->setOpacity(1.0);
     }
   }
 }
+
+void QueuedItemDelegate::DrawBox(
+    QPainter* painter, const QRect& line_rect, const QFont& font,
+    const QString& text, int width) const {
+  QFont smaller = font;
+  smaller.setPointSize(smaller.pointSize() - 2);
+  smaller.setBold(true);
+
+  if (width == -1)
+    width = QFontMetrics(font).width(text + "  ");
+
+  QRect rect(line_rect);
+  rect.setLeft(rect.right() - width - kQueueBoxBorder);
+  rect.setWidth(width);
+  rect.setTop(rect.top() + kQueueBoxBorder);
+  rect.setBottom(rect.bottom() - kQueueBoxBorder - 1);
+
+  QRect text_rect(rect);
+  text_rect.setBottom(text_rect.bottom() + 1);
+
+  QLinearGradient gradient(rect.topLeft(), rect.bottomLeft());
+  gradient.setColorAt(0.0, kQueueBoxGradientColor1);
+  gradient.setColorAt(1.0, kQueueBoxGradientColor2);
+
+  // Turn on antialiasing
+  painter->setRenderHint(QPainter::Antialiasing);
+
+  // Draw the box
+  painter->setPen(QPen(Qt::white, 1));
+  painter->setBrush(gradient);
+  painter->drawRoundedRect(rect, kQueueBoxCornerRadius, kQueueBoxCornerRadius);
+
+  // Draw the text
+  painter->setFont(smaller);
+  painter->drawText(rect, Qt::AlignCenter, text);
+}
+
+int QueuedItemDelegate::queue_indicator_size(const QModelIndex& index) const {
+  if (index.column() == Playlist::Column_Title ||
+      index.column() == Queue::Column_CombinedArtistTitle) {
+    const int queue_pos = index.data(Playlist::Role_QueuePosition).toInt();
+    if (queue_pos != -1) {
+      return kQueueBoxLength + kQueueBoxBorder*2;
+    }
+  }
+  return 0;
+}
+
 
 PlaylistDelegateBase::PlaylistDelegateBase(QTreeView* view, const QString& suffix)
   : QueuedItemDelegate(view),
@@ -138,30 +160,13 @@ QSize PlaylistDelegateBase::sizeHint(const QStyleOptionViewItem &option, const Q
 void PlaylistDelegateBase::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
   QueuedItemDelegate::paint(painter, Adjusted(option, index), index);
 
-  QPoint top_left(-view_->horizontalScrollBar()->value(),
-                  -view_->verticalScrollBar()->value());
-
   // Stop after indicator
-  if (view_->header()->logicalIndexAt(top_left) == index.column()) {
+  if (index.column() == Playlist::Column_Title) {
     if (index.data(Playlist::Role_StopAfter).toBool()) {
-      QColor color(Qt::white);
-      if (!index.data(Playlist::Role_IsCurrent).toBool() &&
-          !(option.state & QStyle::State_Selected)) {
-        color = option.palette.color(QPalette::Highlight);
-      }
+      QRect rect(option.rect);
+      rect.setRight(rect.right() - queue_indicator_size(index));
 
-      const int kStopSize = 10;
-      const int kStopBorder = 2;
-
-      QRect stop_rect(option.rect);
-      stop_rect.setLeft(stop_rect.right() - kStopSize - kStopBorder);
-      stop_rect.setWidth(kStopSize);
-      stop_rect.moveTop(stop_rect.top() + (stop_rect.height() - kStopSize) / 2);
-      stop_rect.setHeight(kStopSize);
-
-      painter->setOpacity(0.65);
-      painter->fillRect(stop_rect, color);
-      painter->setOpacity(1.0);
+      DrawBox(painter, rect, option.font, tr("stop"));
     }
   }
 }

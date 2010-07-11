@@ -29,6 +29,19 @@ class QueuedItemDelegate : public QStyledItemDelegate {
 public:
   QueuedItemDelegate(QObject* parent);
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  void DrawBox(QPainter* painter, const QRect& line_rect,
+               const QFont& font, const QString& text, int width = -1) const;
+
+  int queue_indicator_size(const QModelIndex& index) const;
+
+private:
+  static const int kQueueBoxBorder;
+  static const int kQueueBoxCornerRadius;
+  static const int kQueueBoxLength;
+  static const QRgb kQueueBoxGradientColor1;
+  static const QRgb kQueueBoxGradientColor2;
+  static const int kQueueOpacitySteps;
+  static const float kQueueOpacityLowerBound;
 };
 
 class PlaylistDelegateBase : public QueuedItemDelegate {
