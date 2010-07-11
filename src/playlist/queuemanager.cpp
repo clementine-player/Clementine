@@ -15,6 +15,7 @@
 */
 
 #include "playlist.h"
+#include "playlistdelegates.h"
 #include "playlistmanager.h"
 #include "queue.h"
 #include "queuemanager.h"
@@ -27,6 +28,8 @@ QueueManager::QueueManager(QWidget *parent)
     current_playlist_(NULL)
 {
   ui_->setupUi(this);
+
+  ui_->list->setItemDelegate(new QueuedItemDelegate(this));
 }
 
 QueueManager::~QueueManager() {

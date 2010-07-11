@@ -34,6 +34,7 @@ public:
   };
 
   bool is_empty() const;
+  int PositionOf(const QModelIndex& source_index) const;
 
   QModelIndex TakeNext();
   void ToggleTracks(const QModelIndexList& source_indexes);

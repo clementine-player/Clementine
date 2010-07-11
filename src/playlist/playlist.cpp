@@ -161,6 +161,9 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
     case Role_StopAfter:
       return stop_after_.isValid() && stop_after_.row() == index.row();
 
+    case Role_QueuePosition:
+      return queue_->PositionOf(index);
+
     case Qt::EditRole:
     case Qt::ToolTipRole:
     case Qt::DisplayRole: {

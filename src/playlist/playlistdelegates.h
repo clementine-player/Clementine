@@ -25,7 +25,13 @@
 #include <QStringListModel>
 #include <QCompleter>
 
-class PlaylistDelegateBase : public QStyledItemDelegate {
+class QueuedItemDelegate : public QStyledItemDelegate {
+public:
+  QueuedItemDelegate(QObject* parent);
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+};
+
+class PlaylistDelegateBase : public QueuedItemDelegate {
   Q_OBJECT
  public:
   PlaylistDelegateBase(QTreeView* view, const QString& suffix = QString());

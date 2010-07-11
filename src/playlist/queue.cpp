@@ -101,20 +101,28 @@ int Queue::columnCount(const QModelIndex &parent) const {
 }
 
 QVariant Queue::data(const QModelIndex& proxy_index, int role) const {
-  if (role != Qt::DisplayRole)
-    return QVariant();
+  switch (role) {
+    case Playlist::Role_QueuePosition:
+      return proxy_index.row();
 
-  QModelIndex source_index = source_indexes_[proxy_index.row()];
+    case Qt::DisplayRole: {
+      QModelIndex source_index = source_indexes_[proxy_index.row()];
 
-  if (proxy_index.column() == Column_CombinedArtistTitle) {
-    const QString artist = source_index.sibling(source_index.row(), Playlist::Column_Artist).data().toString();
-    const QString title = source_index.sibling(source_index.row(), Playlist::Column_Title).data().toString();
+      if (proxy_index.column() == Column_CombinedArtistTitle) {
+        const QString artist = source_index.sibling(source_index.row(), Playlist::Column_Artist).data().toString();
+        const QString title = source_index.sibling(source_index.row(), Playlist::Column_Title).data().toString();
 
-    if (artist.isEmpty())
-      return title;
-    return artist + " - " + title;
+        if (artist.isEmpty())
+          return title;
+        return artist + " - " + title;
+      }
+    }
+
+    default: {
+      QModelIndex source_index = source_indexes_[proxy_index.row()];
+      return source_index.data(role);
+    }
   }
-  return source_index.data(role);
 }
 
 void Queue::ToggleTracks(const QModelIndexList &source_indexes) {
@@ -134,4 +142,8 @@ void Queue::ToggleTracks(const QModelIndexList &source_indexes) {
       endInsertRows();
     }
   }
+}
+
+int Queue::PositionOf(const QModelIndex& source_index) const {
+  return mapFromSource(source_index).row();
 }

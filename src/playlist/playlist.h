@@ -83,6 +83,7 @@ class Playlist : public QAbstractListModel {
     Role_IsCurrent = Qt::UserRole + 1,
     Role_IsPaused,
     Role_StopAfter,
+    Role_QueuePosition,
   };
 
   static const char* kRowsMimetype;
