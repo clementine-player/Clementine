@@ -180,7 +180,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
       "width", G_TYPE_INT, 16,
       "signed", G_TYPE_BOOLEAN, true,
       NULL);
-  gst_element_link_filtered(scope_element, equalizer_, caps);
+  gst_element_link_filtered(scope_element, equalizer_preamp_, caps);
   gst_caps_unref(caps);
 
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
@@ -188,7 +188,7 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   if (!convert) { return false; }
   if (rg_enabled_)
     gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);
-  gst_element_link_many(equalizer_, volume_, audioscale_, convert, audiosink_, NULL);
+  gst_element_link_many(equalizer_preamp_, equalizer_, volume_, audioscale_, convert, audiosink_, NULL);
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
@@ -450,7 +450,7 @@ void GstEnginePipeline::UpdateEqualizer() {
   // Update preamp
   float preamp = 1.0;
   if (eq_enabled_)
-    preamp = float(eq_preamp_) * 0.02;  // To scale from 0.0 to 2.0
+    preamp = float(eq_preamp_ + 100) * 0.01;  // To scale from 0.0 to 2.0
 
   g_object_set(G_OBJECT(equalizer_preamp_), "volume", preamp, NULL);
 }
