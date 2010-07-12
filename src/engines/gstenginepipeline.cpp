@@ -15,7 +15,6 @@
 */
 
 #include "gstenginepipeline.h"
-#include "gstequalizer.h"
 #include "gstengine.h"
 #include "bufferconsumer.h"
 
@@ -24,6 +23,10 @@
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
 
+const int GstEnginePipeline::kEqBandCount = 10;
+const int GstEnginePipeline::kEqBandFrequencies[] = {
+  60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
+
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
     engine_(engine),
@@ -31,6 +34,8 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     sink_(GstEngine::kAutoSink),
     segment_start_(0),
     segment_start_received_(false),
+    eq_enabled_(false),
+    eq_preamp_(0),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -50,6 +55,8 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     audioscale_(NULL),
     audiosink_(NULL)
 {
+  for (int i=0 ; i<kEqBandCount ; ++i)
+    eq_band_gains_ << 0;
 }
 
 void GstEnginePipeline::set_output_device(const QString &sink, const QString &device) {
@@ -104,8 +111,8 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // The uri decode bin is a gstreamer builtin that automatically picks the
   // right type of source and decoder for the URI.
   // The audio bin gets created here and contains:
-  //   audioconvert -> rgvolume -> rglimiter -> equalizer -> volume ->
-  //   audioscale -> audioconvert -> audiosink
+  //   audioconvert -> rgvolume -> rglimiter -> equalizer_preamp -> equalizer ->
+  //   volume -> audioscale -> audioconvert -> audiosink
 
   // Decode bin
   if (!ReplaceDecodeBin(url)) return false;
@@ -120,9 +127,8 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   if (GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty())
     g_object_set(G_OBJECT(audiosink_), "device", device_.toUtf8().constData(), NULL);
 
-  equalizer_ = GST_ELEMENT(gst_equalizer_new());
-  gst_bin_add(GST_BIN(audiobin_), equalizer_);
-
+  if (!(equalizer_preamp_ = engine_->CreateElement("volume", audiobin_, "equalizer-preamp"))) { return false; }
+  if (!(equalizer_ = engine_->CreateElement("equalizer-nbands", audiobin_))) { return false; }
   if (!(audioconvert_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
   if (!(volume_ = engine_->CreateElement("volume", audiobin_))) { return false; }
   if (!(audioscale_ = engine_->CreateElement("audioresample", audiobin_))) { return false; }
@@ -151,6 +157,23 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   gst_pad_add_buffer_probe(pad, G_CALLBACK(HandoffCallback), this);
   gst_pad_add_event_probe(pad, G_CALLBACK(EventHandoffCallback), this);
   gst_object_unref (pad);
+
+  // Set the equalizer bands
+  g_object_set(G_OBJECT(equalizer_), "num-bands", 10, NULL);
+
+  int last_band_frequency = 0;
+  for (int i=0 ; i<kEqBandCount ; ++i) {
+    GstObject* band = gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), i);
+
+    const float frequency = kEqBandFrequencies[i];
+    const float bandwidth = frequency - last_band_frequency;
+    last_band_frequency = frequency;
+
+    g_object_set(G_OBJECT(band), "freq", frequency,
+                                "bandwidth", bandwidth,
+                                "gain", 0.0f, NULL);
+    g_object_unref(G_OBJECT(band));
+  }
 
   // Ensure we get the right type out of audioconvert for our scope
   GstCaps* caps = gst_caps_new_simple ("audio/x-raw-int",
@@ -399,21 +422,37 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
 }
 
 void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {
-  g_object_set(G_OBJECT(equalizer_), "active", enabled, NULL);
+  eq_enabled_ = enabled;
+  UpdateEqualizer();
 }
 
 
 void GstEnginePipeline::SetEqualizerParams(int preamp, const QList<int>& band_gains) {
-  // Preamp
-  g_object_set(G_OBJECT(equalizer_), "preamp", ( preamp + 100 ) / 2, NULL);
+  eq_preamp_ = preamp;
+  eq_band_gains_ = band_gains;
+  UpdateEqualizer();
+}
 
-  // Gains
-  std::vector<int> gains_temp;
-  gains_temp.resize( band_gains.count() );
-  for ( int i = 0; i < band_gains.count(); i++ )
-    gains_temp[i] = band_gains.at( i ) + 100;
+void GstEnginePipeline::UpdateEqualizer() {
+  // Update band gains
+  for (int i=0 ; i<kEqBandCount ; ++i) {
+    float gain = eq_enabled_ ? eq_band_gains_[i] : 0.0;
+    if (gain < 0)
+      gain *= 0.24;
+    else
+      gain *= 0.12;
 
-  g_object_set(G_OBJECT(equalizer_), "gain", &gains_temp, NULL);
+    GstObject* band = gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(equalizer_), i);
+    g_object_set(G_OBJECT(band), "gain", gain, NULL);
+    g_object_unref(G_OBJECT(band));
+  }
+
+  // Update preamp
+  float preamp = 1.0;
+  if (eq_enabled_)
+    preamp = float(eq_preamp_) * 0.02;  // To scale from 0.0 to 2.0
+
+  g_object_set(G_OBJECT(equalizer_preamp_), "volume", preamp, NULL);
 }
 
 void GstEnginePipeline::SetVolume(int percent) {

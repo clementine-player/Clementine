@@ -22,7 +22,6 @@
 #define DEBUG_PREFIX "Gst-Engine"
 
 #include "gstengine.h"
-#include "gstequalizer.h"
 #include "gstenginepipeline.h"
 
 #include <math.h>

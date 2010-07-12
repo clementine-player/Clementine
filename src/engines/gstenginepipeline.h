@@ -104,6 +104,7 @@ class GstEnginePipeline : public QObject {
   QString ParseTag(GstTagList* list, const char* tag) const;
 
   void UpdateVolume();
+  void UpdateEqualizer();
   bool ReplaceDecodeBin(const QUrl& url);
 
  private slots:
@@ -112,6 +113,8 @@ class GstEnginePipeline : public QObject {
  private:
   static const int kGstStateTimeoutNanosecs;
   static const int kFaderFudgeMsec;
+  static const int kEqBandCount;
+  static const int kEqBandFrequencies[];
 
   GstEngine* engine_;
 
@@ -125,6 +128,11 @@ class GstEnginePipeline : public QObject {
   QMutex buffer_consumers_mutex_;
   qint64 segment_start_;
   bool segment_start_received_;
+
+  // Equalizer
+  bool eq_enabled_;
+  int eq_preamp_;
+  QList<int> eq_band_gains_;
 
   // ReplayGain
   bool rg_enabled_;
@@ -155,12 +163,13 @@ class GstEnginePipeline : public QObject {
   GstElement* audiobin_;
 
   // Elements in the audiobin
-  // audioconvert ! rgvolume ! rglimiter ! audioconvert ! equalizer ! volume !
-  // audioresample ! audioconvert ! audiosink
+  // audioconvert ! rgvolume ! rglimiter ! audioconvert ! equalizer_preamp !
+  // equalizer ! volume ! audioresample ! audioconvert ! audiosink
   GstElement* audioconvert_;
   GstElement* rgvolume_;
   GstElement* rglimiter_;
   GstElement* audioconvert2_;
+  GstElement* equalizer_preamp_;
   GstElement* equalizer_;
   GstElement* volume_;
   GstElement* audioscale_;
