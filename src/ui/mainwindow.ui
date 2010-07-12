@@ -552,6 +552,7 @@
      <string>Extras</string>
     </property>
     <addaction name="action_rain"/>
+    <addaction name="action_hypnotoad"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -747,6 +748,14 @@
    </property>
    <property name="text">
     <string comment="Label for button to enable/disable rain background sound.">Rain</string>
+   </property>
+  </action>
+  <action name="action_hypnotoad">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string comment="Label for button to enable/disable Hypnotoad background sound.">All Glory to the Hypnotoad!</string>
    </property>
   </action>
   <action name="action_shuffle_mode">

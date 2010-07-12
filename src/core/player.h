@@ -104,6 +104,7 @@ class Player : public QObject {
   void PlaylistChanged();
 
   void MakeItRain(bool rain);
+  void AllHail(bool hypnotoad);
 
   // MPRIS /Player
   int GetCaps() const;
@@ -182,8 +183,10 @@ class Player : public QObject {
   QUrl loading_async_;
 
   int rain_stream_;
+  int toad_stream_;
 
   static const char* kRainUrl;
+  static const char* kHypnotoadUrl;
 };
 
 #endif // PLAYER_H

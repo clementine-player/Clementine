@@ -19,6 +19,7 @@
 #include "core/networkaccessmanager.h"
 
 #include <QMenu>
+#include <QMovie>
 #include <QPainter>
 #include <QPaintEvent>
 #include <QSettings>
@@ -28,6 +29,8 @@
 #include <QtDebug>
 
 const char* NowPlayingWidget::kSettingsGroup = "NowPlayingWidget";
+
+const char* NowPlayingWidget::kHypnotoadPath = ":/hypnotoad.gif";
 
 // Space between the cover and the details in small mode
 const int NowPlayingWidget::kPadding = 2;
@@ -60,7 +63,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     fade_animation_(new QTimeLine(1000, this)),
     load_cover_id_(0),
     details_(new QTextDocument(this)),
-    previous_track_opacity_(0.0)
+    previous_track_opacity_(0.0),
+    hypnotoad_(NULL)
 {
   // Load settings
   QSettings s;
@@ -243,6 +247,11 @@ void NowPlayingWidget::paintEvent(QPaintEvent *e) {
 }
 
 void NowPlayingWidget::DrawContents(QPainter *p) {
+  const int total_size = qMin(kMaxCoverSize, width());
+  if (hypnotoad_) {
+    p->drawPixmap(0, 0, total_size, total_size, hypnotoad_->currentPixmap());
+    return;
+  }
   switch (mode_) {
   case SmallSongDetails:
     // Draw the cover
@@ -255,7 +264,6 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
     break;
 
   case LargeSongDetails:
-    const int total_size = qMin(kMaxCoverSize, width());
     const int x_offset = (width() - cover_height_) / 2;
 
     // Draw the black background
@@ -326,4 +334,11 @@ void NowPlayingWidget::ShowAboveStatusBar(bool above) {
 
 bool NowPlayingWidget::show_above_status_bar() const {
   return above_statusbar_action_->isChecked();
+}
+
+void NowPlayingWidget::AllHail(bool hypnotoad) {
+  hypnotoad_ = new QMovie(kHypnotoadPath, QByteArray(), this);
+  connect(hypnotoad_, SIGNAL(updated(const QRect&)), SLOT(repaint()));
+  hypnotoad_->start();
+  update();
 }

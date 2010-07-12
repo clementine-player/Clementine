@@ -275,6 +275,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
   connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
+  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), player_, SLOT(AllHail(bool)));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), queue_manager_.get(), SLOT(show()));
 
   // Give actions to buttons
@@ -499,6 +500,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(Stopped()), ui_->now_playing, SLOT(Stopped()));
   connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
           SLOT(NowPlayingWidgetPositionChanged(bool)));
+  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme

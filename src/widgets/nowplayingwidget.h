@@ -27,6 +27,7 @@ class NetworkAccessManager;
 
 class QActionGroup;
 class QMenu;
+class QMovie;
 class QSignalMapper;
 class QTextDocument;
 class QTimeLine;
@@ -64,6 +65,7 @@ signals:
 public slots:
   void NowPlaying(const Song& metadata);
   void Stopped();
+  void AllHail(bool hypnotoad);
 
 protected:
   void paintEvent(QPaintEvent* e);
@@ -114,6 +116,9 @@ private:
   // Holds the last track while we're fading to the new track
   QPixmap previous_track_;
   qreal previous_track_opacity_;
+
+  static const char* kHypnotoadPath;
+  QMovie* hypnotoad_;
 };
 
 #endif // NOWPLAYINGWIDGET_H
