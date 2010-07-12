@@ -78,8 +78,8 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   if (uridecodebin_) {
     gst_bin_remove(GST_BIN(pipeline_), uridecodebin_);
 
-    // Set its state to NULL later in the main thread
-    g_idle_add(GSourceFunc(StopUriDecodeBin), uridecodebin_);
+    // Note that the caller to this function MUST schedule StopUriDecodeBin in
+    // the main thread on the old bin.
   }
 
   uridecodebin_ = new_bin;
@@ -345,6 +345,8 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
   if (instance->next_url_.isValid()) {
+    GstElement* old_decode_bin = instance->uridecodebin_;
+
     instance->ReplaceDecodeBin(instance->next_url_);
     gst_element_set_state(instance->uridecodebin_, GST_STATE_PLAYING);
 
@@ -353,6 +355,10 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
 
     // This just tells the UI that we've moved on to the next song
     emit instance->EndOfStreamReached(true);
+
+    // This has to happen *after* the gst_element_set_state on the new bin to
+    // fix an occasional race condition deadlock.
+    g_idle_add(GSourceFunc(StopUriDecodeBin), old_decode_bin);
   }
 }
 
