@@ -337,8 +337,14 @@ bool NowPlayingWidget::show_above_status_bar() const {
 }
 
 void NowPlayingWidget::AllHail(bool hypnotoad) {
-  hypnotoad_ = new QMovie(kHypnotoadPath, QByteArray(), this);
-  connect(hypnotoad_, SIGNAL(updated(const QRect&)), SLOT(repaint()));
-  hypnotoad_->start();
-  update();
+  if (hypnotoad) {
+    hypnotoad_ = new QMovie(kHypnotoadPath, QByteArray(), this);
+    connect(hypnotoad_, SIGNAL(updated(const QRect&)), SLOT(repaint()));
+    hypnotoad_->start();
+    update();
+  } else {
+    delete hypnotoad_;
+    hypnotoad_ = NULL;
+    update();
+  }
 }
