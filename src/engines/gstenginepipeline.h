@@ -124,6 +124,7 @@ class GstEnginePipeline : public QObject {
   QList<BufferConsumer*> buffer_consumers_;
   QMutex buffer_consumers_mutex_;
   qint64 segment_start_;
+  bool segment_start_received_;
 
   // ReplayGain
   bool rg_enabled_;

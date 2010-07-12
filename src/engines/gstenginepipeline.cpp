@@ -30,6 +30,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     valid_(false),
     sink_(GstEngine::kAutoSink),
     segment_start_(0),
+    segment_start_received_(false),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -82,6 +83,8 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   }
 
   uridecodebin_ = new_bin;
+  segment_start_ = 0;
+  segment_start_received_ = false;
   gst_bin_add(GST_BIN(pipeline_), uridecodebin_);
 
   g_object_set(G_OBJECT(uridecodebin_), "uri", url.toEncoded().constData(), NULL);
@@ -326,12 +329,13 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
 bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  if (GST_EVENT_TYPE(e) == GST_EVENT_NEWSEGMENT) {
+  if (GST_EVENT_TYPE(e) == GST_EVENT_NEWSEGMENT && !instance->segment_start_received_) {
     // The segment start time is used to calculate the proper offset of data
     // buffers from the start of the stream
     gint64 start = 0;
     gst_event_parse_new_segment(e, NULL, NULL, NULL, &start, NULL, NULL);
     instance->segment_start_ = start;
+    instance->segment_start_received_ = true;
   }
 
   return true;
