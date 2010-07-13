@@ -60,6 +60,7 @@ GSTREAMER_PLUGINS=[
     'libgstautodetect.so',
     'libgstcoreelements.so',
     'libgstdecodebin2.so',
+    'libgstequalizer.so',
     'libgstosxaudio.so',
     'libgsttypefindfunctions.so',
     'libgstudp.so',
