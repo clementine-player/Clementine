@@ -81,7 +81,8 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
     engine_(CreateEngine(engine)),
     stream_change_type_(Engine::First),
     rain_stream_(-1),
-    toad_stream_(-1)
+    toad_stream_(-1),
+    volume_before_mute_(0)
 {
   settings_.beginGroup("Player");
 
@@ -456,7 +457,14 @@ QVariantMap Player::GetMetadata(int track) const {
 }
 
 void Player::Mute() {
-  SetVolume(0);
+  const int current_volume = engine_->volume();
+
+  if (current_volume == 0) {
+    SetVolume(volume_before_mute_);
+  } else {
+    volume_before_mute_ = current_volume;
+    SetVolume(0);
+  }
 }
 
 void Player::Pause() {

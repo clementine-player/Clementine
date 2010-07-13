@@ -185,6 +185,8 @@ class Player : public QObject {
   int rain_stream_;
   int toad_stream_;
 
+  int volume_before_mute_;
+
   static const char* kRainUrl;
   static const char* kHypnotoadUrl;
 };
