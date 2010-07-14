@@ -140,6 +140,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void UpdateScope();
   qint64 PruneScope();
 
+  int AddBackgroundStream(boost::shared_ptr<GstEnginePipeline> pipeline);
+
  private:
   static const int kTimerInterval = 1000; // msec
   static const int kPreloadGap = 1000; // msec

@@ -781,12 +781,7 @@ void GstEngine::RemoveBufferConsumer(BufferConsumer *consumer) {
     current_pipeline_->RemoveBufferConsumer(consumer);
 }
 
-int GstEngine::AddBackgroundStream(const QUrl& url) {
-  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url);
-  if (!pipeline) {
-    return -1;
-  }
-  pipeline->SetVolume(30);
+int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   // We don't want to get metadata messages or end notifications.
   disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
   disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
@@ -796,10 +791,19 @@ int GstEngine::AddBackgroundStream(const QUrl& url) {
     pipeline.reset();
     return -1;
   }
-  pipeline->SetNextUrl(url);
-  int stream_id = next_background_stream_id_++;
+  const int stream_id = next_background_stream_id_++;
   background_streams_[stream_id] = pipeline;
   return stream_id;
+}
+
+int GstEngine::AddBackgroundStream(const QUrl& url) {
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url);
+  if (!pipeline) {
+    return -1;
+  }
+  pipeline->SetVolume(30);
+  pipeline->SetNextUrl(url);
+  return AddBackgroundStream(pipeline);
 }
 
 void GstEngine::StopBackgroundStream(int id) {
@@ -818,16 +822,5 @@ int GstEngine::AllGloryToTheHypnotoad() {
     return -1;
   }
   pipeline->SetVolume(5);  // Hypnotoad is *loud*.
-  // We don't want to get metadata messages or end notifications.
-  disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
-  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
-  connect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(BackgroundStreamFinished()));
-  if (!pipeline->SetState(GST_STATE_PLAYING)) {
-    qWarning() << "Could not set thread to PLAYING.";
-    pipeline.reset();
-    return -1;
-  }
-  int stream_id = next_background_stream_id_++;
-  background_streams_[stream_id] = pipeline;
-  return stream_id;
+  return AddBackgroundStream(pipeline);
 }
