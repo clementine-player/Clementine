@@ -251,10 +251,10 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
   case SmallSongDetails:
     if (hypnotoad_) {
       p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, hypnotoad_->currentPixmap());
-      return;
+    } else {
+      // Draw the cover
+      p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, cover_);
     }
-    // Draw the cover
-    p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, cover_);
 
     // Draw the details
     p->translate(small_ideal_height_ + kPadding, 0);
@@ -264,17 +264,17 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
 
   case LargeSongDetails:
     const int total_size = qMin(kMaxCoverSize, width());
-    if (hypnotoad_) {
-      p->drawPixmap(0, 0, total_size, total_size, hypnotoad_->currentPixmap());
-      return;
-    }
     const int x_offset = (width() - cover_height_) / 2;
 
     // Draw the black background
     p->fillRect(QRect(0, kTopBorder, width(), height() - kTopBorder), Qt::black);
 
     // Draw the cover
-    p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
+    if (hypnotoad_) {
+      p->drawPixmap(x_offset, kTopBorder, total_size, total_size, hypnotoad_->currentPixmap());
+    } else {
+      p->drawPixmap(x_offset, kTopBorder, total_size, total_size, cover_);
+    }
 
     // Work out how high the text is going to be
     const int text_height = details_->size().height();
