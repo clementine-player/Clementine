@@ -188,7 +188,6 @@ class Player : public QObject {
   int volume_before_mute_;
 
   static const char* kRainUrl;
-  static const char* kHypnotoadUrl;
 };
 
 #endif // PLAYER_H

@@ -77,8 +77,7 @@ bool GstEnginePipeline::StopUriDecodeBin(gpointer bin) {
   return false; // So it doesn't get called again
 }
 
-bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
-  GstElement* new_bin = engine_->CreateElement("uridecodebin");
+bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
 
   // Destroy the old one, if any
@@ -94,17 +93,33 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   segment_start_received_ = false;
   gst_bin_add(GST_BIN(pipeline_), uridecodebin_);
 
-  g_object_set(G_OBJECT(uridecodebin_), "uri", url.toEncoded().constData(), NULL);
-  g_signal_connect(G_OBJECT(uridecodebin_), "pad-added", G_CALLBACK(NewPadCallback), this);
-  g_signal_connect(G_OBJECT(uridecodebin_), "drained", G_CALLBACK(SourceDrainedCallback), this);
-
   return true;
 }
 
-bool GstEnginePipeline::Init(const QUrl &url) {
-  pipeline_ = gst_pipeline_new("pipeline");
-  url_ = url;
+bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
+  GstElement* new_bin = engine_->CreateElement("uridecodebin");
+  g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
+  g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
+  g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
+  return ReplaceDecodeBin(new_bin);
+}
 
+GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
+  GError* error = NULL;
+  GstElement* bin = gst_parse_bin_from_description(pipeline, TRUE, &error);
+  if (error) {
+    QString message = QString::fromLocal8Bit(error->message);
+    g_error_free(error);
+
+    qWarning() << message;
+    emit Error(message);
+    return NULL;
+  }
+
+  return bin;
+}
+
+bool GstEnginePipeline::Init() {
   // Here we create all the parts of the gstreamer pipeline - from the source
   // to the sink.  The parts of the pipeline are split up into bins:
   //   uri decode bin -> audio bin
@@ -113,9 +128,6 @@ bool GstEnginePipeline::Init(const QUrl &url) {
   // The audio bin gets created here and contains:
   //   audioconvert -> rgvolume -> rglimiter -> equalizer_preamp -> equalizer ->
   //   volume -> audioscale -> audioconvert -> audiosink
-
-  // Decode bin
-  if (!ReplaceDecodeBin(url)) return false;
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
@@ -192,8 +204,32 @@ bool GstEnginePipeline::Init(const QUrl &url) {
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
-
   return true;
+}
+
+bool GstEnginePipeline::InitFromString(const QString& pipeline) {
+  pipeline_ = gst_pipeline_new("pipeline");
+
+  GstElement* new_bin = CreateDecodeBinFromString(pipeline.toAscii().constData());
+  if (!new_bin) {
+    return false;
+  }
+
+  if (!ReplaceDecodeBin(new_bin)) return false;
+
+  if (!Init()) return false;
+  return gst_element_link(new_bin, audiobin_);
+}
+
+bool GstEnginePipeline::InitFromUrl(const QUrl &url) {
+  pipeline_ = gst_pipeline_new("pipeline");
+
+  url_ = url;
+
+  // Decode bin
+  if (!ReplaceDecodeBin(url)) return false;
+
+  return Init();
 }
 
 GstEnginePipeline::~GstEnginePipeline() {

@@ -247,13 +247,12 @@ void NowPlayingWidget::paintEvent(QPaintEvent *e) {
 }
 
 void NowPlayingWidget::DrawContents(QPainter *p) {
-  const int total_size = qMin(kMaxCoverSize, width());
-  if (hypnotoad_) {
-    p->drawPixmap(0, 0, total_size, total_size, hypnotoad_->currentPixmap());
-    return;
-  }
   switch (mode_) {
   case SmallSongDetails:
+    if (hypnotoad_) {
+      p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, hypnotoad_->currentPixmap());
+      return;
+    }
     // Draw the cover
     p->drawPixmap(0, 0, small_ideal_height_, small_ideal_height_, cover_);
 
@@ -264,6 +263,11 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
     break;
 
   case LargeSongDetails:
+    const int total_size = qMin(kMaxCoverSize, width());
+    if (hypnotoad_) {
+      p->drawPixmap(0, 0, total_size, total_size, hypnotoad_->currentPixmap());
+      return;
+    }
     const int x_offset = (width() - cover_height_) / 2;
 
     // Draw the black background

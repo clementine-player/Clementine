@@ -49,7 +49,6 @@
 using boost::shared_ptr;
 
 const char* Player::kRainUrl = "http://data.clementine-player.org/rainymood";
-const char* Player::kHypnotoadUrl = "http://data.clementine-player.org/hypnotoad";
 
 #ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
@@ -621,7 +620,7 @@ void Player::MakeItRain(bool rain) {
 void Player::AllHail(bool hypnotoad) {
   const bool is_hailing = toad_stream_ != -1;
   if (hypnotoad && !is_hailing) {
-    toad_stream_ = engine_->AddBackgroundStream(QUrl(kHypnotoadUrl));
+    toad_stream_ = engine_->AllGloryToTheHypnotoad();
   }
   if (!hypnotoad && is_hailing) {
     engine_->StopBackgroundStream(toad_stream_);

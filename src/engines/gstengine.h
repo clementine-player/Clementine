@@ -68,6 +68,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
+  int AllGloryToTheHypnotoad();
 
   uint position() const;
   uint length() const;
@@ -133,6 +134,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StartTimers();
   void StopTimers();
 
+  boost::shared_ptr<GstEnginePipeline> CreatePipeline();
   boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url);
 
   void UpdateScope();
@@ -142,6 +144,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const int kTimerInterval = 1000; // msec
   static const int kPreloadGap = 1000; // msec
   static const int kSeekDelay = 100; // msec
+
+  static const char* kHypnotoadPipeline;
 
   QString sink_;
   QString device_;

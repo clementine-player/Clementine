@@ -48,6 +48,13 @@ using boost::shared_ptr;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
 const char* GstEngine::kAutoSink = "autoaudiosink";
+const char* GstEngine::kHypnotoadPipeline = 
+      "audiotestsrc wave=6 ! "
+      "audioecho intensity=1 delay=50000000 ! "
+      "audioecho intensity=1 delay=25000000 ! "
+      "equalizer-10bands "
+      "band0=-24 band1=-3 band2=7.5 band3=12 band4=8 "
+      "band5=6 band6=5 band7=6 band8=0 band9=-24";
 
 
 GstEngine::GstEngine()
@@ -690,7 +697,7 @@ GstEngine::PluginDetailsList
   return ret;
 }
 
-shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
+shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
@@ -705,7 +712,12 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
           SLOT(NewMetaData(Engine::SimpleMetaBundle)));
   connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
 
-  if (!ret->Init(url))
+  return ret;
+}
+
+shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
+  shared_ptr<GstEnginePipeline> ret = CreatePipeline();
+  if (!ret->InitFromUrl(url))
     ret.reset();
 
   return ret;
@@ -797,4 +809,25 @@ void GstEngine::StopBackgroundStream(int id) {
 void GstEngine::BackgroundStreamFinished() {
   GstEnginePipeline* pipeline = qobject_cast<GstEnginePipeline*>(sender());
   pipeline->SetNextUrl(pipeline->url());
+}
+
+int GstEngine::AllGloryToTheHypnotoad() {
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline();
+  pipeline->InitFromString(kHypnotoadPipeline);
+  if (!pipeline) {
+    return -1;
+  }
+  pipeline->SetVolume(5);  // Hypnotoad is *loud*.
+  // We don't want to get metadata messages or end notifications.
+  disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
+  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
+  connect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(BackgroundStreamFinished()));
+  if (!pipeline->SetState(GST_STATE_PLAYING)) {
+    qWarning() << "Could not set thread to PLAYING.";
+    pipeline.reset();
+    return -1;
+  }
+  int stream_id = next_background_stream_id_++;
+  background_streams_[stream_id] = pipeline;
+  return stream_id;
 }

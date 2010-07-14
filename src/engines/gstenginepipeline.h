@@ -45,7 +45,8 @@ class GstEnginePipeline : public QObject {
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
 
   // Creates the pipeline, returns false on error
-  bool Init(const QUrl& url);
+  bool InitFromUrl(const QUrl& url);
+  bool InitFromString(const QString& pipeline);
 
   // BufferConsumers get fed audio data.  Thread-safe.
   void AddBufferConsumer(BufferConsumer* consumer);
@@ -103,8 +104,12 @@ class GstEnginePipeline : public QObject {
   void ElementMessageReceived(GstMessage*);
   QString ParseTag(GstTagList* list, const char* tag) const;
 
+  bool Init();
+  GstElement* CreateDecodeBinFromString(const char* pipeline);
+
   void UpdateVolume();
   void UpdateEqualizer();
+  bool ReplaceDecodeBin(GstElement* new_bin);
   bool ReplaceDecodeBin(const QUrl& url);
 
  private slots:

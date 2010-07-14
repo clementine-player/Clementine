@@ -56,6 +56,8 @@ XINEPLUGIN_SEARCH_PATH=[
 GSTREAMER_PLUGINS=[
     # Core plugins
     'libgstaudioconvert.so',
+    'libgstaudiofx.so',
+    'libgstaudiotestsrc.so',
     'libgstaudioresample.so',
     'libgstautodetect.so',
     'libgstcoreelements.so',
@@ -103,6 +105,7 @@ GSTREAMER_SEARCH_PATH=[
 
 QT_PLUGINS = [
     'accessible/libqtaccessiblewidgets.dylib',
+    'bearer/libqcorewlanbearer.dylib',
     'codecs/libqcncodecs.dylib',
     'codecs/libqjpcodecs.dylib',
     'codecs/libqkrcodecs.dylib',
