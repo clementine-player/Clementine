@@ -229,14 +229,9 @@ QTextCodec* UniversalEncodingHandler::Guess(const TagLib::String& input) {
   if (input.isLatin1()) {
     qWarning() << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
     std::string broken = input.toCString(true);
-    std::string fixed;
-    if (broken.size() > input.size()) {
-      fixed = QString::fromUtf8(broken.c_str()).toStdString();
-      QTextCodec* codec = Guess(fixed.c_str());
-      return codec;
-    } else {
-      return NULL;
-    }
+    std::string fixed = QString::fromUtf8(broken.c_str()).toStdString();
+    QTextCodec* codec = Guess(fixed.c_str());
+    return codec;
   }
   return QTextCodec::codecForName("UTF-8");
 }

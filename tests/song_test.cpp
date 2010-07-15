@@ -178,4 +178,12 @@ TEST_F(SongTest, DecodesUtf8AsUtf8) {
   EXPECT_EQ(QString::fromUtf8("’"), fixed);
 }
 
+TEST_F(SongTest, DecodesAmbiguousLatin1AndWindows1252) {
+  const char latin1[] = { 0x53, 0x75, 0x64, 0xe1, 0x66, 0x72, 0x69, 0x63, 0x61, 0x00 };
+  TagLib::String str(latin1, TagLib::String::Latin1);
+  QString fixed = UniversalEncodingHandler(NS_FILTER_NON_CJK).FixEncoding(str);
+  EXPECT_EQ(9, fixed.length());
+  EXPECT_EQ(QString::fromUtf8("Sudáfrica"), fixed);
+}
+
 }  // namespace
