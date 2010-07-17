@@ -14,19 +14,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "playlist.h"
+#include "playlistmanager.h"
 #include "playlisttabbar.h"
+#include "songmimedata.h"
+#include "radio/radiomimedata.h"
 #include "ui/iconloader.h"
 
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QInputDialog>
+#include <QtDebug>
 
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   : QTabBar(parent),
+    manager_(NULL),
     menu_(new QMenu(this)),
     menu_index_(-1),
     suppress_current_changed_(false)
 {
+  setAcceptDrops(true);
+
   remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
   rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist..."), this, SLOT(Rename()));
   save_ = menu_->addAction(IconLoader::Load("document-save"), tr("Save playlist..."), this, SLOT(Save()));
@@ -42,6 +50,10 @@ void PlaylistTabBar::SetActions(
   menu_->insertAction(0, load_playlist);
 
   new_ = new_playlist;
+}
+
+void PlaylistTabBar::SetManager(PlaylistManager *manager) {
+  manager_ = manager;
 }
 
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
@@ -155,4 +167,53 @@ void PlaylistTabBar::TabMoved() {
     ids << tabData(i).toInt();
   }
   emit PlaylistOrderChanged(ids);
+}
+
+void PlaylistTabBar::dragEnterEvent(QDragEnterEvent* e) {
+  if (e->mimeData()->hasUrls() ||
+      e->mimeData()->hasFormat(Playlist::kRowsMimetype) ||
+      qobject_cast<const SongMimeData*>(e->mimeData()) ||
+      qobject_cast<const RadioMimeData*>(e->mimeData())) {
+    e->acceptProposedAction();
+  }
+}
+
+void PlaylistTabBar::dragMoveEvent(QDragMoveEvent* e) {
+  drag_hover_tab_ = tabAt(e->pos());
+
+  if (drag_hover_tab_ == -1) {
+    e->setDropAction(Qt::IgnoreAction);
+    e->ignore();
+    drag_hover_timer_.stop();
+  } else {
+    e->setDropAction(Qt::CopyAction);
+    e->accept(tabRect(drag_hover_tab_));
+
+    if (!drag_hover_timer_.isActive())
+      drag_hover_timer_.start(kDragHoverTimeout, this);
+  }
+}
+
+void PlaylistTabBar::dragLeaveEvent(QDragLeaveEvent*) {
+  drag_hover_timer_.stop();
+}
+
+void PlaylistTabBar::timerEvent(QTimerEvent* e) {
+  QTabBar::timerEvent(e);
+
+  if (e->timerId() == drag_hover_timer_.timerId()) {
+    drag_hover_timer_.stop();
+    if (drag_hover_tab_ != -1)
+      setCurrentIndex(drag_hover_tab_);
+  }
+}
+
+void PlaylistTabBar::dropEvent(QDropEvent* e) {
+  if (drag_hover_tab_ == -1) {
+    e->ignore();
+    return;
+  }
+
+  setCurrentIndex(drag_hover_tab_);
+  manager_->current()->dropMimeData(e->mimeData(), e->proposedAction(), -1, 0, QModelIndex());
 }

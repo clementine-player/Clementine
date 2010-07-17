@@ -110,6 +110,7 @@ void PlaylistContainer::ClearFilter() {
 
 void PlaylistContainer::SetManager(PlaylistManager *manager) {
   manager_ = manager;
+  ui_->tab_bar->SetManager(manager);
 
   connect(ui_->tab_bar, SIGNAL(CurrentIdChanged(int)),
           manager, SLOT(SetCurrentPlaylist(int)));

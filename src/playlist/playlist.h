@@ -240,4 +240,7 @@ class Playlist : public QAbstractListModel {
   QUndoStack* undo_stack_;
 };
 
+QDataStream& operator <<(QDataStream&, const Playlist*);
+QDataStream& operator >>(QDataStream&, Playlist*&);
+
 #endif // PLAYLIST_H

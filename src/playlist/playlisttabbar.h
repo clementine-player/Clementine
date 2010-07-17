@@ -17,7 +17,10 @@
 #ifndef PLAYLISTTABBAR_H
 #define PLAYLISTTABBAR_H
 
+#include <QBasicTimer>
 #include <QTabBar>
+
+class PlaylistManager;
 
 class QMenu;
 
@@ -27,7 +30,10 @@ class PlaylistTabBar : public QTabBar {
 public:
   PlaylistTabBar(QWidget *parent = 0);
 
+  static const int kDragHoverTimeout = 500;
+
   void SetActions(QAction* new_playlist, QAction* load_playlist);
+  void SetManager(PlaylistManager* manager);
 
   // We use IDs to refer to tabs so the tabs can be moved around (and their
   // indexes change).
@@ -49,6 +55,16 @@ signals:
   void Save(int id);
   void PlaylistOrderChanged(const QList<int>& ids);
 
+protected:
+  void contextMenuEvent(QContextMenuEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
+  void mouseDoubleClickEvent(QMouseEvent* e);
+  void dragEnterEvent(QDragEnterEvent* e);
+  void dragMoveEvent(QDragMoveEvent* e);
+  void dragLeaveEvent(QDragLeaveEvent* e);
+  void dropEvent(QDropEvent* e);
+  void timerEvent(QTimerEvent *);
+
 private slots:
   void CurrentIndexChanged(int index);
   void Rename();
@@ -56,18 +72,18 @@ private slots:
   void TabMoved();
   void Save();
 
-protected:
-  void contextMenuEvent(QContextMenuEvent* e);
-  void mouseReleaseEvent(QMouseEvent* e);
-  void mouseDoubleClickEvent(QMouseEvent* e);
-
 private:
+  PlaylistManager* manager_;
+
   QMenu* menu_;
   int menu_index_;
   QAction* new_;
   QAction* rename_;
   QAction* remove_;
   QAction* save_;
+
+  QBasicTimer drag_hover_timer_;
+  int drag_hover_tab_;
 
   bool suppress_current_changed_;
 };

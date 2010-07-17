@@ -492,11 +492,31 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 
     // Get the list of rows that were moved
     QList<int> source_rows;
+    Playlist* source_playlist = NULL;
+
     QDataStream stream(data->data(kRowsMimetype));
+    stream >> source_playlist;
     stream >> source_rows;
     qStableSort(source_rows); // Make sure we take them in order
 
-    undo_stack_->push(new PlaylistUndoCommands::MoveItems(this, source_rows, row));
+    if (source_playlist == this) {
+      // Dragged from this playlist - rearrange the items
+      undo_stack_->push(new PlaylistUndoCommands::MoveItems(this, source_rows, row));
+    } else {
+      // Drag from a different playlist
+      PlaylistItemList items;
+      foreach (int row, source_rows)
+        items << source_playlist->item_at(row);
+      undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, row));
+
+      // Remove the items from the source playlist if it was a move event
+      if (action == Qt::MoveAction) {
+        foreach (int row, source_rows) {
+          source_playlist->undo_stack()->push(
+              new PlaylistUndoCommands::RemoveItems(source_playlist, row, 1));
+        }
+      }
+    }
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
     InsertUrls(data->urls(), false, row);
@@ -708,6 +728,7 @@ QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
   QBuffer buf;
   buf.open(QIODevice::WriteOnly);
   QDataStream stream(&buf);
+  stream << this;
   stream << rows;
   buf.close();
 
@@ -1098,4 +1119,14 @@ void Playlist::QueueLayoutChanged() {
     const QModelIndex index = queue_->mapToSource(queue_->index(i, Column_Title));
     emit dataChanged(index, index);
   }
+}
+
+QDataStream& operator <<(QDataStream& s, const Playlist* p) {
+  s.writeRawData(reinterpret_cast<char*>(&p), sizeof(p));
+  return s;
+}
+
+QDataStream& operator >>(QDataStream& s, Playlist*& p) {
+  s.readRawData(reinterpret_cast<char*>(&p), sizeof(p));
+  return s;
 }
