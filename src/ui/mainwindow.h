@@ -134,6 +134,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddLibrarySongsToPlaylist(const SongList& songs);
   void LibrarySongsDoubleClicked(const SongList& songs);
 
+  void LoadDeviceSongsToPlaylist(const SongList& songs);
+  void AddDeviceSongsToPlaylist(const SongList& songs);
+  void DeviceSongsDoubleClicked(const SongList& songs);
+
   void VolumeWheelEvent(int delta);
   void ToggleShowHide();
 
@@ -168,6 +172,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
+  void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);
 
  private:

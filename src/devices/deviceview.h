@@ -17,6 +17,7 @@
 #ifndef DEVICEVIEW_H
 #define DEVICEVIEW_H
 
+#include "core/song.h"
 #include "library/libraryview.h"
 #include "widgets/autoexpandingtreeview.h"
 
@@ -47,20 +48,33 @@ public:
 
   void SetDeviceManager(DeviceManager* manager);
 
+signals:
+  void Load(const SongList& songs);
+  void AddToPlaylist(const SongList& songs);
+  void DoubleClicked(const SongList& songs);
+
 protected:
   void contextMenuEvent(QContextMenuEvent *);
   void mouseDoubleClickEvent(QMouseEvent *event);
 
 private slots:
+  // Device menu actions
   void Connect();
   void Disconnect();
   void Forget();
   void Properties();
 
+  // Library menu actions
+  void Load();
+  void AddToPlaylist();
+  void Delete();
+
   void DeviceDisconnected(int row);
 
 private:
   QModelIndex MapToDevice(const QModelIndex& merged_model_index) const;
+  QModelIndex MapToLibrary(const QModelIndex& merged_model_index) const;
+  SongList GetSelectedSongs() const;
 
 private:
   DeviceManager* manager_;
@@ -69,11 +83,17 @@ private:
 
   boost::scoped_ptr<DeviceProperties> properties_dialog_;
 
-  QMenu* menu_;
+  QMenu* device_menu_;
   QAction* connect_action_;
   QAction* disconnect_action_;
   QAction* forget_action_;
   QAction* properties_action_;
+
+  QMenu* library_menu_;
+  QAction* load_action_;
+  QAction* add_to_playlist_action_;
+  QAction* delete_action_;
+
   QModelIndex menu_index_;
 };
 

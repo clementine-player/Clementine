@@ -364,6 +364,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Devices connections
   connect(devices_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(ui_->devices_view, SIGNAL(Load(SongList)), SLOT(LoadDeviceSongsToPlaylist(SongList)));
+  connect(ui_->devices_view, SIGNAL(AddToPlaylist(SongList)), SLOT(AddDeviceSongsToPlaylist(SongList)));
+  connect(ui_->devices_view, SIGNAL(DoubleClicked(SongList)), SLOT(DeviceSongsDoubleClicked(SongList)));
 
   // Library filter widget
   QAction* library_config_action = new QAction(
@@ -620,6 +623,35 @@ void MainWindow::AddLibrarySongsToPlaylist(bool clear_first, const SongList &son
     playlists_->ClearCurrent();
 
   QModelIndex first_song = playlists_->current()->InsertLibraryItems(songs);
+
+  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
+    // The first song doesn't match the filter, so don't play it
+    return;
+  }
+
+  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
+    playlists_->SetActiveToCurrent();
+    player_->PlayAt(first_song.row(), Engine::First, true);
+  }
+}
+
+void MainWindow::AddDeviceSongsToPlaylist(const SongList &songs) {
+  AddDeviceSongsToPlaylist(false, songs);
+}
+
+void MainWindow::LoadDeviceSongsToPlaylist(const SongList &songs) {
+  AddDeviceSongsToPlaylist(true, songs);
+}
+
+void MainWindow::DeviceSongsDoubleClicked(const SongList &songs) {
+  AddDeviceSongsToPlaylist(autoclear_playlist_, songs);
+}
+
+void MainWindow::AddDeviceSongsToPlaylist(bool clear_first, const SongList &songs) {
+  if (clear_first)
+    playlists_->ClearCurrent();
+
+  QModelIndex first_song = playlists_->current()->InsertSongs(songs);
 
   if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
     // The first song doesn't match the filter, so don't play it

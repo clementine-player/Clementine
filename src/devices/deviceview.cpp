@@ -115,17 +115,28 @@ DeviceView::DeviceView(QWidget* parent)
     merged_model_(NULL),
     sort_model_(NULL),
     properties_dialog_(new DeviceProperties),
-    menu_(new QMenu(this))
+    device_menu_(new QMenu(this)),
+    library_menu_(new QMenu(this))
 {
-  connect_action_ = menu_->addAction(
+  // Device menu items
+  connect_action_ = device_menu_->addAction(
       IconLoader::Load("list-add"), tr("Connect device"), this, SLOT(Connect()));
-  disconnect_action_ = menu_->addAction(
+  disconnect_action_ = device_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Disconnect device"), this, SLOT(Disconnect()));
-  forget_action_ = menu_->addAction(
+  forget_action_ = device_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Forget device"), this, SLOT(Forget()));
-  menu_->addSeparator();
-  properties_action_ = menu_->addAction(
+  device_menu_->addSeparator();
+  properties_action_ = device_menu_->addAction(
       IconLoader::Load("configure"), tr("Device properties..."), this, SLOT(Properties()));
+
+  // Library menu items
+  load_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
+      tr("Load"), this, SLOT(Load()));
+  add_to_playlist_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
+      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  library_menu_->addSeparator();
+  delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete"),
+      tr("Delete from disk..."), this, SLOT(Delete()));
 
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
@@ -158,19 +169,26 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   menu_index_ = currentIndex();
-  QModelIndex device_index = MapToDevice(menu_index_);
-  bool is_device = device_index.isValid();
-  bool is_connected = is_device && manager_->GetConnectedDevice(device_index.row());
-  bool is_plugged_in = is_device && manager_->GetLister(device_index.row());
-  bool is_remembered = is_device && manager_->GetDatabaseId(device_index.row()) != -1;
 
-  connect_action_->setEnabled(is_plugged_in);
-  disconnect_action_->setEnabled(is_plugged_in);
-  connect_action_->setVisible(!is_connected);
-  disconnect_action_->setVisible(is_connected);
-  forget_action_->setEnabled(is_remembered);
+  const QModelIndex device_index = MapToDevice(menu_index_);
+  const QModelIndex library_index = MapToLibrary(menu_index_);
 
-  menu_->popup(e->globalPos());
+  if (device_index.isValid()) {
+    const bool is_connected = manager_->GetConnectedDevice(device_index.row());
+    const bool is_plugged_in = manager_->GetLister(device_index.row());
+    const bool is_remembered = manager_->GetDatabaseId(device_index.row()) != -1;
+
+    connect_action_->setEnabled(is_plugged_in);
+    disconnect_action_->setEnabled(is_plugged_in);
+    forget_action_->setEnabled(is_remembered);
+
+    connect_action_->setVisible(!is_connected);
+    disconnect_action_->setVisible(is_connected);
+
+    device_menu_->popup(e->globalPos());
+  } else if (library_index.isValid()) {
+    library_menu_->popup(e->globalPos());
+  }
 }
 
 QModelIndex DeviceView::MapToDevice(const QModelIndex& merged_model_index) const {
@@ -179,6 +197,16 @@ QModelIndex DeviceView::MapToDevice(const QModelIndex& merged_model_index) const
     return QModelIndex();
 
   return sort_model_->mapToSource(sort_model_index);
+}
+
+QModelIndex DeviceView::MapToLibrary(const QModelIndex& merged_model_index) const {
+  QModelIndex sort_model_index = merged_model_->mapToSource(merged_model_index);
+  if (const QSortFilterProxyModel* sort_model =
+      qobject_cast<const QSortFilterProxyModel*>(sort_model_index.model())) {
+    return sort_model->mapToSource(sort_model_index);
+  }
+
+  return QModelIndex();
 }
 
 void DeviceView::Connect() {
@@ -247,8 +275,46 @@ void DeviceView::mouseDoubleClickEvent(QMouseEvent *event) {
 
   QModelIndex merged_index = indexAt(event->pos());
   QModelIndex device_index = MapToDevice(merged_index);
-  if (device_index.isValid() && !manager_->GetConnectedDevice(device_index.row())) {
-    menu_index_ = merged_index;
-    Connect();
+  if (device_index.isValid()) {
+    if (!manager_->GetConnectedDevice(device_index.row())) {
+      menu_index_ = merged_index;
+      Connect();
+    }
+    return;
   }
+
+  QModelIndex library_index = MapToLibrary(merged_index);
+  if (library_index.isValid()) {
+    emit DoubleClicked(GetSelectedSongs());
+  }
+}
+
+SongList DeviceView::GetSelectedSongs() const {
+  QModelIndexList selected_merged_indexes = selectionModel()->selectedRows();
+  SongList songs;
+  foreach (const QModelIndex& merged_index, selected_merged_indexes) {
+    QModelIndex library_index = MapToLibrary(merged_index);
+    if (!library_index.isValid())
+      continue;
+
+    const LibraryModel* library = qobject_cast<const LibraryModel*>(
+        library_index.model());
+    if (!library)
+      continue;
+
+    songs << library->GetChildSongs(library_index);
+  }
+  return songs;
+}
+
+void DeviceView::Load() {
+  emit Load(GetSelectedSongs());
+}
+
+void DeviceView::AddToPlaylist() {
+  emit AddToPlaylist(GetSelectedSongs());
+}
+
+void DeviceView::Delete() {
+
 }
