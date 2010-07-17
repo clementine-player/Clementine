@@ -128,7 +128,7 @@ if(ENABLE_VISUALISATIONS)
   # to system installed projectM instead.
   option(USE_SYSTEM_PROJECTM "Don't set this option unless your system projectM library has been compiled with the Clementine patches in 3rdparty" OFF)
   if(USE_SYSTEM_PROJECTM)
-    pkg_check_modules(LIBPROJECTM projectM)
+    pkg_check_modules(LIBPROJECTM libprojectM)
   else(USE_SYSTEM_PROJECTM)
     add_subdirectory(3rdparty/libprojectm)
     set(LIBPROJECTM_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libprojectm)
