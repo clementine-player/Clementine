@@ -29,9 +29,9 @@ GPodDevice::GPodDevice(
     int database_id, bool first_time)
       : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
         loader_thread_(new QThread(this)),
-        loader_(new GPodLoader(url.toLocalFile(), manager->task_manager(), backend_))
+        loader_(new GPodLoader(url.path(), manager->task_manager(), backend_))
 {
-  InitBackendDirectory(url.toLocalFile(), first_time);
+  InitBackendDirectory(url.path(), first_time);
   model_->Init();
 
   loader_->moveToThread(loader_thread_);

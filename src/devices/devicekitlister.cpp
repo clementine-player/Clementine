@@ -35,7 +35,7 @@ DeviceKitLister::~DeviceKitLister() {
 }
 
 QString DeviceKitLister::DeviceData::unique_id() const {
-  return QString("%1 %2 %3 %4").arg(drive_serial, drive_vendor, drive_model).arg(device_size);
+  return QString("DeviceKit/%1/%2/%3/%4").arg(drive_serial, drive_vendor, drive_model).arg(device_size);
 }
 
 void DeviceKitLister::Init() {
@@ -71,13 +71,6 @@ void DeviceKitLister::Init() {
       device_data[data.unique_id()] = data;
   }
 
-  DeviceData ipod;
-  ipod.device_mount_paths << QDir::homePath() + "/.gvfs/iPod touch";
-  ipod.device_presentation_name = "iPod Touch";
-  ipod.suitable = true;
-  ipod.drive_serial = "ipod";
-  device_data[ipod.unique_id()] = ipod;
-
   // Update the internal cache
   {
     QMutexLocker l(&mutex_);
@@ -95,8 +88,9 @@ QStringList DeviceKitLister::DeviceUniqueIDs() {
   return device_data_.keys();
 }
 
-QString DeviceKitLister::DeviceIcon(const QString &id) {
-  return LockAndGetDeviceInfo(id, &DeviceData::device_presentation_icon_name);
+QStringList DeviceKitLister::DeviceIcons(const QString &id) {
+  return QStringList() <<
+      LockAndGetDeviceInfo(id, &DeviceData::device_presentation_icon_name);
 }
 
 QString DeviceKitLister::DeviceManufacturer(const QString &id) {
@@ -240,11 +234,5 @@ QUrl DeviceKitLister::MakeDeviceUrl(const QString& id) {
   QString mount_point = LockAndGetDeviceInfo(
       id, &DeviceData::device_mount_paths)[0];
 
-#ifdef HAVE_LIBGPOD
-  if (QFile::exists(mount_point + "/iTunes_Control")) {
-    return QUrl("ipod://" + mount_point);
-  }
-#endif
-
-  return QUrl::fromLocalFile(mount_point);
+  return MakeUrlFromLocalPath(mount_point);
 }

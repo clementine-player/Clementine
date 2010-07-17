@@ -36,9 +36,13 @@ public:
   // moved to the new thread.
   void Start();
 
+  // If two listers know about the same device, then the metadata will get
+  // taken from the one with the highest priority.
+  virtual int priority() const { return 100; }
+
   // Query information about the devices that are available.  Must be thread-safe.
   virtual QStringList DeviceUniqueIDs() = 0;
-  virtual QString DeviceIcon(const QString& id) = 0;
+  virtual QStringList DeviceIcons(const QString& id) = 0;
   virtual QString DeviceManufacturer(const QString& id) = 0;
   virtual QString DeviceModel(const QString& id) = 0;
   virtual quint64 DeviceCapacity(const QString& id) = 0;
@@ -56,6 +60,7 @@ signals:
 
 protected:
   virtual void Init() = 0;
+  QUrl MakeUrlFromLocalPath(const QString& path);
 
 protected:
   QThread* thread_;

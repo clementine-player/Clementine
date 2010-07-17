@@ -14,10 +14,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "giolister.h"
 
+#include <QFile>
 #include <QStringList>
 #include <QtDebug>
+
+QString GioLister::MountInfo::unique_id() const {
+  return QString("Gio/%1/%2/%3").arg(uuid, filesystem_type).arg(filesystem_size);
+}
 
 GioLister::GioLister()
   : monitor_(NULL)
@@ -49,11 +55,12 @@ GioLister::~GioLister() {
 }
 
 QStringList GioLister::DeviceUniqueIDs() {
-  return QStringList();
+  QMutexLocker l(&mutex_);
+  return mounts_.keys();
 }
 
-QString GioLister::DeviceIcon(const QString &id) {
-  return QString();
+QStringList GioLister::DeviceIcons(const QString &id) {
+  return LockAndGetMountInfo(id, &MountInfo::icon_names);
 }
 
 QString GioLister::DeviceManufacturer(const QString &id) {
@@ -61,27 +68,38 @@ QString GioLister::DeviceManufacturer(const QString &id) {
 }
 
 QString GioLister::DeviceModel(const QString &id) {
-  return QString();
+  return LockAndGetMountInfo(id, &MountInfo::name);
 }
 
 quint64 GioLister::DeviceCapacity(const QString &id) {
-  return 0;
+  return LockAndGetMountInfo(id, &MountInfo::filesystem_size);
 }
 
 quint64 GioLister::DeviceFreeSpace(const QString &id) {
-  return 0; // TODO
+  return LockAndGetMountInfo(id, &MountInfo::filesystem_free);
 }
 
 QString GioLister::MakeFriendlyName(const QString &id) {
-  return QString();
+  return DeviceModel(id);
 }
 
 QVariantMap GioLister::DeviceHardwareInfo(const QString &id) {
-  return QVariantMap();
+  QVariantMap ret;
+
+  QMutexLocker l(&mutex_);
+  if (!mounts_.contains(id))
+    return ret;
+  const MountInfo& info = mounts_[id];
+
+  ret[QT_TR_NOOP("Mount point")] = info.mount_path;
+  return ret;
 }
 
 QUrl GioLister::MakeDeviceUrl(const QString &id) {
-  return QUrl();
+  QString mount_point = LockAndGetMountInfo(
+      id, &MountInfo::mount_path);
+
+  return MakeUrlFromLocalPath(mount_point);
 }
 
 void GioLister::MountAddedCallback(GVolumeMonitor*, GMount* m, gpointer d) {
@@ -97,13 +115,115 @@ void GioLister::MountRemovedCallback(GVolumeMonitor*, GMount* m, gpointer d) {
 }
 
 void GioLister::MountAdded(GMount *mount) {
-  qDebug() << "mount added" << g_mount_get_name(mount);
+  MountInfo info = ReadMountInfo(mount);
+
+  {
+    QMutexLocker l(&mutex_);
+    mounts_[info.unique_id()] = info;
+  }
+
+  emit DeviceAdded(info.unique_id());
 }
 
 void GioLister::MountChanged(GMount *mount) {
-  qDebug() << "mount changed" << g_mount_get_name(mount);
+  QString id;
+  {
+    QMutexLocker l(&mutex_);
+    id = FindUniqueIdByMount(mount);
+    if (id.isNull())
+      return;
+
+    mounts_[id] = ReadMountInfo(mount);
+  }
+
+  emit DeviceChanged(id);
 }
 
 void GioLister::MountRemoved(GMount *mount) {
-  qDebug() << "mount removed" << g_mount_get_name(mount);
+  QString id;
+  {
+    QMutexLocker l(&mutex_);
+    id = FindUniqueIdByMount(mount);
+    if (id.isNull())
+      return;
+
+    mounts_.remove(id);
+  }
+
+  emit DeviceRemoved(id);
+}
+
+QString GioLister::ConvertAndFree(char *str) {
+  QString ret = QString::fromUtf8(str);
+  g_free(str);
+  return ret;
+}
+
+GioLister::MountInfo GioLister::ReadMountInfo(GMount* mount) {
+  MountInfo ret;
+
+  // Get basic information
+  ret.mount = mount;
+  ret.name = ConvertAndFree(g_mount_get_name(mount));
+
+  // Get the icon name(s)
+  GIcon* icon = g_mount_get_icon(mount);
+  if (G_IS_THEMED_ICON(icon)) {
+    const char* const * icons = g_themed_icon_get_names(G_THEMED_ICON(icon));
+    for (const char* const * p = icons ; *p ; ++p) {
+      ret.icon_names << QString::fromUtf8(*p);
+    }
+  }
+  g_object_unref(icon);
+
+  GFile* root = g_mount_get_root(mount);
+
+  // Get the mount path
+  ret.mount_path = ConvertAndFree(g_file_get_path(root));
+
+  // Query the filesystem info for size, free space, and type
+  GError* error = NULL;
+  GFileInfo* info = g_file_query_filesystem_info(root,
+      G_FILE_ATTRIBUTE_FILESYSTEM_SIZE "," G_FILE_ATTRIBUTE_FILESYSTEM_FREE ","
+      G_FILE_ATTRIBUTE_FILESYSTEM_TYPE, NULL, &error);
+  if (error) {
+    qWarning() << error->message;
+    g_error_free(error);
+  } else {
+    ret.filesystem_size = g_file_info_get_attribute_uint64(
+        info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
+    ret.filesystem_free = g_file_info_get_attribute_uint64(
+        info, G_FILE_ATTRIBUTE_FILESYSTEM_FREE);
+    ret.filesystem_type = QString::fromUtf8(g_file_info_get_attribute_string(
+        info, G_FILE_ATTRIBUTE_FILESYSTEM_TYPE));
+    g_object_unref(info);
+  }
+
+  // Query the file's info for a filesystem ID
+  // Only afc devices (that I know of) give reliably unique IDs
+  if (ret.filesystem_type == "afc") {
+    error = NULL;
+    info = g_file_query_info(root, G_FILE_ATTRIBUTE_ID_FILESYSTEM,
+                             G_FILE_QUERY_INFO_NONE, NULL, &error);
+    if (error) {
+      qWarning() << error->message;
+      g_error_free(error);
+    } else {
+      ret.uuid = QString::fromUtf8(g_file_info_get_attribute_string(
+          info, G_FILE_ATTRIBUTE_ID_FILESYSTEM));
+      g_object_unref(info);
+    }
+  }
+
+  g_object_unref(root);
+
+  return ret;
+}
+
+QString GioLister::FindUniqueIdByMount(GMount *mount) const {
+  foreach (const MountInfo& info, mounts_) {
+    if (info.mount == mount)
+      return info.unique_id();
+  }
+  return QString();
 }

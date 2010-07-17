@@ -34,7 +34,6 @@ const int DeviceManager::kDeviceIconOverlaySize = 16;
 
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
-    lister_(NULL),
     task_percentage_(-1)
 {
 }
@@ -43,11 +42,14 @@ DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
   DeviceDatabaseBackend::Device ret;
   ret.friendly_name_ = friendly_name_;
   ret.size_ = size_;
-  ret.unique_id_ = unique_id_;
   ret.id_ = database_id_;
+  ret.icon_name_ = icon_name_;
 
-  if (lister_)
-    ret.icon_name_ = lister_->DeviceIcon(unique_id_);
+  QStringList unique_ids;
+  foreach (const Backend& backend, backends_) {
+    unique_ids << backend.unique_id_;
+  }
+  ret.unique_id_ = unique_ids.join(",");
 
   return ret;
 }
@@ -55,27 +57,58 @@ DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
 void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &dev) {
   database_id_ = dev.id_;
   friendly_name_ = dev.friendly_name_;
-  unique_id_ = dev.unique_id_;
   size_ = dev.size_;
-  LoadIcon(dev.icon_name_);
+  LoadIcon(dev.icon_name_.split(','));
+
+  QStringList unique_ids = dev.unique_id_.split(',');
+  foreach (const QString& id, unique_ids) {
+    backends_ << Backend(NULL, id);
+  }
 }
 
-void DeviceManager::DeviceInfo::LoadIcon(const QString &filename) {
+void DeviceManager::DeviceInfo::LoadIcon(const QStringList& icons) {
+  if (icons.isEmpty()) {
+    icon_name_ = "drive-removable-media-usb-pendrive";
+    icon_ = IconLoader::Load(icon_name_);
+    return;
+  }
+
   // Try to load the icon with that exact name first
-  icon_name_ = filename;
-  icon_ = IconLoader::Load(icon_name_);
+  foreach (const QString& name, icons) {
+    icon_ = IconLoader::Load(name);
+    if (!icon_.isNull()) {
+      icon_name_ = name;
+      return;
+    }
+  }
+
+  QString filename = icons.first();
 
   // If that failed than try to guess if it's a phone or ipod.  Fall back on
   // a usb memory stick icon.
-  if (icon_.isNull()) {
-    if (filename.contains("phone"))
-      icon_name_ = "phone";
-    else if (filename.contains("ipod") || filename.contains("apple"))
-      icon_name_ = "multimedia-player-ipod-standard-monochrome";
-    else
-      icon_name_ = "drive-removable-media-usb-pendrive";
-    icon_ = IconLoader::Load(icon_name_);
+  if (filename.contains("phone"))
+    icon_name_ = "phone";
+  else if (filename.contains("ipod") || filename.contains("apple"))
+    icon_name_ = "multimedia-player-ipod-standard-monochrome";
+  else
+    icon_name_ = "drive-removable-media-usb-pendrive";
+  icon_ = IconLoader::Load(icon_name_);
+}
+
+const DeviceManager::DeviceInfo::Backend* DeviceManager::DeviceInfo::BestBackend() const {
+  int best_priority = -1;
+  const Backend* ret = NULL;
+
+  for (int i=0 ; i<backends_.count() ; ++i) {
+    if (backends_[i].lister_ && backends_[i].lister_->priority() > best_priority) {
+      best_priority = backends_[i].lister_->priority();
+      ret = &(backends_[i]);
+    }
   }
+
+  if (!ret && !backends_.isEmpty())
+    return &(backends_[0]);
+  return ret;
 }
 
 
@@ -130,7 +163,12 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
 
   switch (role) {
     case Qt::DisplayRole: {
-      QString text = info.friendly_name_.isEmpty() ? info.unique_id_ : info.friendly_name_;
+      QString text;
+      if (!info.friendly_name_.isEmpty())
+        text = info.friendly_name_;
+      else
+        text = info.BestBackend()->unique_id_;
+
       if (info.size_)
         text = text + QString(" (%1)").arg(Utilities::PrettySize(info.size_));
       return text;
@@ -139,7 +177,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
     case Qt::DecorationRole: {
       QPixmap pixmap = info.icon_.pixmap(kDeviceIconSize);
 
-      if (!info.lister_) {
+      if (!info.BestBackend()->lister_) {
         // Disconnected but remembered
         QPainter p(&pixmap);
         p.drawPixmap(kDeviceIconSize - kDeviceIconOverlaySize,
@@ -154,7 +192,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       return info.friendly_name_;
 
     case Role_UniqueId:
-      return info.unique_id_;
+      return info.BestBackend()->unique_id_;
 
     case Role_IconName:
       return info.icon_name_;
@@ -165,7 +203,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
     case Role_State:
       if (info.device_)
         return State_Connected;
-      if (info.lister_)
+      if (info.BestBackend()->lister_)
         return State_NotConnected;
       return State_Remembered;
 
@@ -190,8 +228,23 @@ void DeviceManager::AddLister(DeviceLister *lister) {
 
 int DeviceManager::FindDeviceById(const QString &id) const {
   for (int i=0 ; i<devices_.count() ; ++i) {
-    if (devices_[i].unique_id_ == id)
-      return i;
+    foreach (const DeviceInfo::Backend& backend, devices_[i].backends_) {
+      if (backend.unique_id_ == id)
+        return i;
+    }
+  }
+  return -1;
+}
+
+int DeviceManager::FindDeviceByUrl(const QUrl& url) const {
+  if (url.isEmpty())
+    return -1;
+
+  for (int i=0 ; i<devices_.count() ; ++i) {
+    foreach (const DeviceInfo::Backend& backend, devices_[i].backends_) {
+      if (backend.lister_ && backend.lister_->MakeDeviceUrl(backend.unique_id_) == url)
+        return i;
+    }
   }
   return -1;
 }
@@ -203,26 +256,51 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
 
   // Do we have this device already?
   int i = FindDeviceById(id);
-  if (i == -1) {
-    DeviceInfo info;
-    info.lister_ = lister;
-    info.unique_id_ = id;
-    info.friendly_name_ = lister->MakeFriendlyName(id);
-    info.size_ = lister->DeviceCapacity(id);
-    info.LoadIcon(lister->DeviceIcon(id));
-
-    beginInsertRows(QModelIndex(), devices_.count(), devices_.count());
-    devices_ << info;
-    endInsertRows();
-  } else {
+  if (i != -1) {
     DeviceInfo& info = devices_[i];
+    for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++backend_index) {
+      if (info.backends_[backend_index].unique_id_ == id) {
+        info.backends_[backend_index].lister_ = lister;
+        break;
+      }
+    }
 
-    info.lister_ = lister;
     emit dataChanged(index(i, 0), index(i, 0));
+  } else {
+    // Check if we have another device with the same URL
+    i = FindDeviceByUrl(lister->MakeDeviceUrl(id));
+    if (i != -1) {
+      // Add this device's lister to the existing device
+      DeviceInfo& info = devices_[i];
+      info.backends_ << DeviceInfo::Backend(lister, id);
+
+      // If the user hasn't saved the device in the DB yet then overwrite the
+      // device's name and icon etc.
+      if (info.database_id_ == -1 && info.BestBackend()->lister_ == lister) {
+        info.friendly_name_ = lister->MakeFriendlyName(id);
+        info.size_ = lister->DeviceCapacity(id);
+        info.LoadIcon(lister->DeviceIcons(id));
+      }
+
+      emit dataChanged(index(i, 0), index(i, 0));
+    } else {
+      // It's a completely new device
+      DeviceInfo info;
+      info.backends_ << DeviceInfo::Backend(lister, id);
+      info.friendly_name_ = lister->MakeFriendlyName(id);
+      info.size_ = lister->DeviceCapacity(id);
+      info.LoadIcon(lister->DeviceIcons(id));
+
+      beginInsertRows(QModelIndex(), devices_.count(), devices_.count());
+      devices_ << info;
+      endInsertRows();
+    }
   }
 }
 
 void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
+  DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
+
   qDebug() << "Device removed:" << id;
 
   int i = FindDeviceById(id);
@@ -235,24 +313,42 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
 
   if (info.database_id_ != -1) {
     // Keep the structure around, but just "disconnect" it
-    info.lister_ = NULL;
-    info.device_.reset();
-
-    emit dataChanged(index(i, 0), index(i, 0));
-    emit DeviceDisconnected(i);
-  } else {
-    // Remove the item from the model
-    beginRemoveRows(QModelIndex(), i, i);
-    devices_.removeAt(i);
-
-    foreach (const QModelIndex& idx, persistentIndexList()) {
-      if (idx.row() == i)
-        changePersistentIndex(idx, QModelIndex());
-      else if (idx.row() > i)
-        changePersistentIndex(idx, index(idx.row()-1, idx.column()));
+    for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++i) {
+      if (info.backends_[i].unique_id_ == id) {
+        info.backends_[i].lister_ = NULL;
+        break;
+      }
     }
 
-    endRemoveRows();
+    if (info.device_ && info.device_->lister() == lister)
+      info.device_.reset();
+
+    emit dataChanged(index(i, 0), index(i, 0));
+
+    if (!info.device_)
+      emit DeviceDisconnected(i);
+  } else {
+    // If this was the last lister for the device then remove it from the model
+    for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++backend_index) {
+      if (info.backends_[backend_index].unique_id_ == id) {
+        info.backends_.removeAt(backend_index);
+        break;
+      }
+    }
+
+    if (info.backends_.isEmpty()) {
+      beginRemoveRows(QModelIndex(), i, i);
+      devices_.removeAt(i);
+
+      foreach (const QModelIndex& idx, persistentIndexList()) {
+        if (idx.row() == i)
+          changePersistentIndex(idx, QModelIndex());
+        else if (idx.row() > i)
+          changePersistentIndex(idx, index(idx.row()-1, idx.column()));
+      }
+
+      endRemoveRows();
+    }
   }
 }
 
@@ -276,7 +372,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
 
   boost::shared_ptr<ConnectedDevice> ret;
 
-  if (!info.lister_) // Not physically connected
+  if (!info.BestBackend()->lister_) // Not physically connected
     return ret;
 
   bool first_time = (info.database_id_ == -1);
@@ -286,9 +382,11 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   }
 
   // Get the device URL
-  QUrl url = info.lister_->MakeDeviceUrl(info.unique_id_);
+  QUrl url = info.BestBackend()->lister_->MakeDeviceUrl(info.BestBackend()->unique_id_);
   if (url.isEmpty())
     return ret;
+
+  qDebug() << "Connecting" << url;
 
   // Find a device class for this URL's scheme
   if (!device_classes_.contains(url.scheme())) {
@@ -298,8 +396,8 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
 
   QMetaObject meta_object = device_classes_.value(url.scheme());
   QObject* instance = meta_object.newInstance(
-      Q_ARG(QUrl, url), Q_ARG(DeviceLister*, info.lister_),
-      Q_ARG(QString, info.unique_id_), Q_ARG(DeviceManager*, this),
+      Q_ARG(QUrl, url), Q_ARG(DeviceLister*, info.BestBackend()->lister_),
+      Q_ARG(QString, info.BestBackend()->unique_id_), Q_ARG(DeviceManager*, this),
       Q_ARG(int, info.database_id_), Q_ARG(bool, first_time));
   ret.reset(static_cast<ConnectedDevice*>(instance));
 
@@ -323,7 +421,7 @@ int DeviceManager::GetDatabaseId(int row) const {
 }
 
 DeviceLister* DeviceManager::GetLister(int row) const {
-  return devices_[row].lister_;
+  return devices_[row].BestBackend()->lister_;
 }
 
 void DeviceManager::Disconnect(int row) {
@@ -346,7 +444,7 @@ void DeviceManager::Forget(int row) {
   backend_->RemoveDevice(info.database_id_);
   info.database_id_ = -1;
 
-  if (!info.lister_) {
+  if (!info.BestBackend()->lister_) {
     // It's not attached any more so remove it from the list
     beginRemoveRows(QModelIndex(), row, row);
     devices_.removeAt(row);
@@ -362,9 +460,8 @@ void DeviceManager::Forget(int row) {
   } else {
     // It's still attached, set the name and icon back to what they were
     // originally
-    info.friendly_name_ = info.lister_->MakeFriendlyName(info.unique_id_);
-    info.icon_name_ = info.lister_->DeviceIcon(info.unique_id_);
-    info.LoadIcon(info.icon_name_);
+    info.friendly_name_ = info.BestBackend()->lister_->MakeFriendlyName(info.BestBackend()->unique_id_);
+    info.LoadIcon(info.BestBackend()->lister_->DeviceIcons(info.BestBackend()->unique_id_));
 
     dataChanged(index(row, 0), index(row, 0));
   }
@@ -374,8 +471,7 @@ void DeviceManager::SetDeviceIdentity(int row, const QString &friendly_name,
                                       const QString &icon_name) {
   DeviceInfo& info = devices_[row];
   info.friendly_name_ = friendly_name;
-  info.icon_name_ = icon_name;
-  info.LoadIcon(info.icon_name_);
+  info.LoadIcon(QStringList() << info.icon_name_);
 
   emit dataChanged(index(row, 0), index(row, 0));
 

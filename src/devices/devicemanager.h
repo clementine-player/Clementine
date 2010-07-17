@@ -66,6 +66,7 @@ public:
   boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
 
   int FindDeviceById(const QString& id) const;
+  int FindDeviceByUrl(const QUrl& url) const;
 
   // Actions on devices
   boost::shared_ptr<ConnectedDevice> Connect(int row);
@@ -103,16 +104,27 @@ private:
   struct DeviceInfo {
     DeviceInfo();
 
+    struct Backend {
+      Backend(DeviceLister* lister = NULL, const QString& id = QString())
+        : lister_(lister), unique_id_(id) {}
+
+      DeviceLister* lister_; // NULL if not physically connected
+      QString unique_id_;
+    };
+
     void InitFromDb(const DeviceDatabaseBackend::Device& dev);
     DeviceDatabaseBackend::Device SaveToDb() const;
 
-    void LoadIcon(const QString& filename);
+    void LoadIcon(const QStringList& icons);
+
+    const Backend* BestBackend() const;
+
+
 
     int database_id_; // -1 if not remembered in the database
-    DeviceLister* lister_; // NULL if not physically connected
     boost::shared_ptr<ConnectedDevice> device_; // NULL if not connected to clementine
+    QList<Backend> backends_;
 
-    QString unique_id_;
     QString friendly_name_;
     quint64 size_;
 

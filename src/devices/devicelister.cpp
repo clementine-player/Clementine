@@ -14,8 +14,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "devicelister.h"
 
+#include <QFile>
 #include <QThread>
 #include <QtDebug>
 
@@ -42,4 +44,15 @@ void DeviceLister::Start() {
 
 void DeviceLister::ThreadStarted() {
   Init();
+}
+
+QUrl DeviceLister::MakeUrlFromLocalPath(const QString &path) {
+#ifdef HAVE_LIBGPOD
+  if (QFile::exists(path + "/iTunes_Control") ||
+      QFile::exists(path + "/iPod_Control")) {
+    return QUrl("ipod://" + path);
+  }
+#endif
+
+  return QUrl::fromLocalFile(path);
 }
