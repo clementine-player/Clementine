@@ -138,6 +138,12 @@
             </property>
             <item>
              <widget class="DeviceView" name="devices_view">
+              <property name="dragEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="dragDropMode">
+               <enum>QAbstractItemView::DragOnly</enum>
+              </property>
               <property name="alternatingRowColors">
                <bool>true</bool>
               </property>
