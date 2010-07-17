@@ -18,6 +18,7 @@
 #define DEVICELISTER_H
 
 #include <QAbstractItemModel>
+#include <QUrl>
 
 #include <boost/shared_ptr.hpp>
 
@@ -46,11 +47,7 @@ public:
 
   virtual QString MakeFriendlyName(const QString& id) = 0;
 
-  // Create a new ConnectedDevice instance for the given device.  Must be
-  // thread-safe.
-  virtual boost::shared_ptr<ConnectedDevice> Connect(
-      const QString& unique_id, DeviceManager* manager, int database_id,
-      bool first_time) = 0;
+  virtual QUrl MakeDeviceUrl(const QString& id) = 0;
 
 signals:
   void DeviceAdded(const QString& id);

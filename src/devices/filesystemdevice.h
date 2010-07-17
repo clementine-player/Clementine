@@ -27,10 +27,13 @@ class FilesystemDevice : public ConnectedDevice {
   Q_OBJECT
 
 public:
-  FilesystemDevice(const QString& mount_point, DeviceLister* lister,
-                   const QString& unique_id, DeviceManager* manager,
-                   int database_id, bool first_time);
+  Q_INVOKABLE FilesystemDevice(
+      const QUrl& url, DeviceLister* lister,
+      const QString& unique_id, DeviceManager* manager,
+      int database_id, bool first_time);
   ~FilesystemDevice();
+
+  static QStringList url_schemes() { return QStringList() << "file"; }
 
 private:
   BackgroundThread<LibraryWatcher>* watcher_;

@@ -23,8 +23,9 @@
 
 #include <QtDebug>
 
-ConnectedDevice::ConnectedDevice(DeviceLister* lister, const QString& unique_id,
-                                 DeviceManager* manager, int database_id)
+ConnectedDevice::ConnectedDevice(const QUrl&, DeviceLister* lister,
+                                 const QString& unique_id, DeviceManager* manager,
+                                 int database_id, bool)
   : QObject(manager),
     lister_(lister),
     unique_id_(unique_id),

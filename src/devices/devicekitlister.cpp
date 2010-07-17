@@ -236,23 +236,15 @@ QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
   return QString();
 }
 
-boost::shared_ptr<ConnectedDevice> DeviceKitLister::Connect(
-    const QString &unique_id, DeviceManager* manager, int database_id,
-    bool first_time) {
+QUrl DeviceKitLister::MakeDeviceUrl(const QString& id) {
   QString mount_point = LockAndGetDeviceInfo(
-      unique_id, &DeviceData::device_mount_paths)[0];
-
-  boost::shared_ptr<ConnectedDevice> ret;
+      id, &DeviceData::device_mount_paths)[0];
 
 #ifdef HAVE_LIBGPOD
   if (QFile::exists(mount_point + "/iTunes_Control")) {
-    ret.reset(new GPodDevice(
-        mount_point, this, unique_id, manager, database_id, first_time));
-    return ret;
+    return QUrl("ipod://" + mount_point);
   }
 #endif
 
-  ret.reset(new FilesystemDevice(
-      mount_point, this, unique_id, manager, database_id, first_time));
-  return ret;
+  return QUrl::fromLocalFile(mount_point);
 }

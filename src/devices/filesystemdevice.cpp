@@ -24,9 +24,10 @@
 #include <QtDebug>
 
 FilesystemDevice::FilesystemDevice(
-    const QString& mount_point, DeviceLister* lister, const QString& unique_id,
-    DeviceManager* manager, int database_id, bool first_time)
-      : ConnectedDevice(lister, unique_id, manager, database_id),
+    const QUrl& url, DeviceLister* lister,
+    const QString& unique_id, DeviceManager* manager,
+    int database_id, bool first_time)
+      : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
         watcher_(new BackgroundThreadImplementation<LibraryWatcher, LibraryWatcher>(this))
 {
   // Create the library watcher
@@ -57,7 +58,7 @@ FilesystemDevice::FilesystemDevice(
           backend_, SLOT(UpdateCompilations()));
   connect(watcher, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
 
-  InitBackendDirectory(mount_point, first_time);
+  InitBackendDirectory(url.toLocalFile(), first_time);
 
   model_->Init();
 }

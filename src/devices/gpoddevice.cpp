@@ -24,13 +24,14 @@
 #include <gpod/itdb.h>
 
 GPodDevice::GPodDevice(
-    const QString& mount_point, DeviceLister* lister, const QString& unique_id,
-    DeviceManager* manager, int database_id, bool first_time)
-      : ConnectedDevice(lister, unique_id, manager, database_id),
+    const QUrl& url, DeviceLister* lister,
+    const QString& unique_id, DeviceManager* manager,
+    int database_id, bool first_time)
+      : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
         loader_thread_(new QThread(this)),
-        loader_(new GPodLoader(mount_point, manager->task_manager(), backend_))
+        loader_(new GPodLoader(url.toLocalFile(), manager->task_manager(), backend_))
 {
-  InitBackendDirectory(mount_point, first_time);
+  InitBackendDirectory(url.toLocalFile(), first_time);
   model_->Init();
 
   loader_->moveToThread(loader_thread_);

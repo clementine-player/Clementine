@@ -45,9 +45,7 @@ public:
 
   QString MakeFriendlyName(const QString &id);
 
-  boost::shared_ptr<ConnectedDevice> Connect(
-      const QString &unique_id, DeviceManager* manager, int database_id,
-      bool first_time);
+  QUrl MakeDeviceUrl(const QString &id);
 
 protected:
   void Init();

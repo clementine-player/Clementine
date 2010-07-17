@@ -470,6 +470,15 @@ if(LIBGPOD_FOUND)
   list(APPEND HEADERS devices/gpoddevice.h devices/gpodloader.h)
 endif(LIBGPOD_FOUND)
 
+# GIO device backend
+if(GIO_FOUND)
+  set(HAVE_GIO ON)
+  include_directories(${GIO_INCLUDE_DIRS})
+
+  list(APPEND SOURCES devices/giolister.cpp)
+  list(APPEND HEADERS devices/giolister.h)
+endif(GIO_FOUND)
+
 # Mac specific startup stuff
 if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)

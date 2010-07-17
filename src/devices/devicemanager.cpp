@@ -15,16 +15,19 @@
 */
 
 #include "config.h"
-#include "connecteddevice.h"
 #include "devicedatabasebackend.h"
 #include "devicemanager.h"
 #include "devicekitlister.h"
+#include "filesystemdevice.h"
+#include "giolister.h"
+#include "gpoddevice.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
 #include <QIcon>
 #include <QPainter>
+#include <QUrl>
 
 const int DeviceManager::kDeviceIconSize = 32;
 const int DeviceManager::kDeviceIconOverlaySize = 16;
@@ -98,6 +101,15 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 
 #ifdef Q_WS_X11
   AddLister(new DeviceKitLister);
+#endif
+#ifdef HAVE_GIO
+  AddLister(new GioLister);
+#endif
+
+  AddDeviceClass<FilesystemDevice>();
+
+#ifdef HAVE_LIBGPOD
+  AddDeviceClass<GPodDevice>();
 #endif
 }
 
@@ -262,8 +274,10 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   if (info.device_) // Already connected
     return info.device_;
 
+  boost::shared_ptr<ConnectedDevice> ret;
+
   if (!info.lister_) // Not physically connected
-    return boost::shared_ptr<ConnectedDevice>();
+    return ret;
 
   bool first_time = (info.database_id_ == -1);
   if (first_time) {
@@ -271,12 +285,33 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     info.database_id_ = backend_->AddDevice(info.SaveToDb());
   }
 
-  info.device_ = info.lister_->Connect(
-      info.unique_id_, this, info.database_id_, first_time);
-  connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
-  connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  // Get the device URL
+  QUrl url = info.lister_->MakeDeviceUrl(info.unique_id_);
+  if (url.isEmpty())
+    return ret;
 
-  return info.device_;
+  // Find a device class for this URL's scheme
+  if (!device_classes_.contains(url.scheme())) {
+    emit Error(tr("This type of device is not supported: %1").arg(url.toString()));
+    return ret;
+  }
+
+  QMetaObject meta_object = device_classes_.value(url.scheme());
+  QObject* instance = meta_object.newInstance(
+      Q_ARG(QUrl, url), Q_ARG(DeviceLister*, info.lister_),
+      Q_ARG(QString, info.unique_id_), Q_ARG(DeviceManager*, this),
+      Q_ARG(int, info.database_id_), Q_ARG(bool, first_time));
+  ret.reset(static_cast<ConnectedDevice*>(instance));
+
+  if (!ret) {
+    qWarning() << "Could not create device for" << url.toString();
+  } else {
+    info.device_ = ret;
+    connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
+    connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+  }
+
+  return ret;
 }
 
 boost::shared_ptr<ConnectedDevice> DeviceManager::GetConnectedDevice(int row) const {

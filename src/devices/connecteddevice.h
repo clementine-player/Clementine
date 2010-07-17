@@ -18,6 +18,8 @@
 #define CONNECTEDDEVICE_H
 
 #include <QObject>
+#include <QStringList>
+#include <QUrl>
 
 class Database;
 class DeviceLister;
@@ -29,8 +31,9 @@ class ConnectedDevice : public QObject {
   Q_OBJECT
 
 public:
-  ConnectedDevice(DeviceLister* lister, const QString& unique_id,
-                  DeviceManager* manager, int database_id);
+  ConnectedDevice(const QUrl& url, DeviceLister* lister,
+                  const QString& unique_id, DeviceManager* manager,
+                  int database_id, bool first_time);
   ~ConnectedDevice();
 
   DeviceLister* lister() const { return lister_; }

@@ -123,6 +123,7 @@ private:
   };
 
   void AddLister(DeviceLister* lister);
+  template <typename T> void AddDeviceClass();
 
   DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info) const;
 
@@ -136,8 +137,20 @@ private:
   QList<DeviceLister*> listers_;
   QList<DeviceInfo> devices_;
 
+  QMultiMap<QString, QMetaObject> device_classes_;
+
   // Map of task ID to device index
   QMap<int, QPersistentModelIndex> active_tasks_;
 };
+
+template <typename T>
+void DeviceManager::AddDeviceClass() {
+  QStringList schemes = T::url_schemes();
+  QMetaObject obj = T::staticMetaObject;
+
+  foreach (const QString& scheme, schemes) {
+    device_classes_.insert(scheme, obj);
+  }
+}
 
 #endif // DEVICEMANAGER_H

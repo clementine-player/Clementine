@@ -25,10 +25,13 @@ class GPodDevice : public ConnectedDevice {
   Q_OBJECT
 
 public:
-  GPodDevice(const QString& mount_point, DeviceLister* lister,
-             const QString& unique_id, DeviceManager* manager,
-             int database_id, bool first_time);
+  Q_INVOKABLE GPodDevice(
+      const QUrl& url, DeviceLister* lister,
+      const QString& unique_id, DeviceManager* manager,
+      int database_id, bool first_time);
   ~GPodDevice();
+
+  static QStringList url_schemes() { return QStringList() << "ipod"; }
 
 private:
   QThread* loader_thread_;
