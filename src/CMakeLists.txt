@@ -551,6 +551,10 @@ if(HAVE_LIBGPOD)
   target_link_libraries(clementine_lib ${LIBGPOD_LIBRARIES})
 endif(HAVE_LIBGPOD)
 
+if(HAVE_GIO)
+  target_link_libraries(clementine_lib ${GIO_LIBRARIES})
+endif(HAVE_GIO)
+
 if (APPLE)
   target_link_libraries(clementine_lib
     ${GROWL}
