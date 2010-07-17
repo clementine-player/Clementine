@@ -44,6 +44,7 @@ public:
     Role_UniqueId,
     Role_FriendlyName,
     Role_Capacity,
+    Role_FreeSpace,
     Role_IconName,
     Role_UpdatingPercentage,
   };

@@ -200,6 +200,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
     case Role_Capacity:
       return info.size_;
 
+    case Role_FreeSpace:
+      return info.BestBackend()->lister_ ?
+          info.BestBackend()->lister_->DeviceFreeSpace(info.BestBackend()->unique_id_) :
+          QVariant();
+
     case Role_State:
       if (info.device_)
         return State_Connected;

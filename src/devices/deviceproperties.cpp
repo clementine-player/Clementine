@@ -81,8 +81,15 @@ void DeviceProperties::ShowDevice(int row) {
 
   // Basic information
   ui_->name->setText(index_.data(DeviceManager::Role_FriendlyName).toString());
-  ui_->capacity->setText(Utilities::PrettySize(
-      index_.data(DeviceManager::Role_Capacity).toLongLong()));
+
+  // Size
+  QString size_text = Utilities::PrettySize(
+      index_.data(DeviceManager::Role_Capacity).toLongLong());
+  qint64 free_space = index_.data(DeviceManager::Role_FreeSpace).toLongLong();
+  if (free_space)
+    size_text += QString(" (%1 %2)").arg(Utilities::PrettySize(free_space),
+                                         tr("available"));
+  ui_->capacity->setText(size_text);
 
   // Find the right icon
   QString icon_name = index_.data(DeviceManager::Role_IconName).toString();

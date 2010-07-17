@@ -92,6 +92,8 @@ QVariantMap GioLister::DeviceHardwareInfo(const QString &id) {
   const MountInfo& info = mounts_[id];
 
   ret[QT_TR_NOOP("Mount point")] = info.mount_path;
+  ret[QT_TR_NOOP("Device")] = info.unix_device;
+  ret[QT_TR_NOOP("URI")] = info.uri;
   return ret;
 }
 
@@ -180,6 +182,7 @@ GioLister::MountInfo GioLister::ReadMountInfo(GMount* mount) {
 
   // Get the mount path
   ret.mount_path = ConvertAndFree(g_file_get_path(root));
+  ret.uri = ConvertAndFree(g_file_get_uri(root));
 
   // Query the filesystem info for size, free space, and type
   GError* error = NULL;
@@ -216,6 +219,14 @@ GioLister::MountInfo GioLister::ReadMountInfo(GMount* mount) {
   }
 
   g_object_unref(root);
+
+  // Get information about the volume
+  GVolume* volume = g_mount_get_volume(mount);
+  if (volume) {
+    ret.unix_device = ConvertAndFree(g_volume_get_identifier(
+        volume, G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE));
+    g_object_unref(volume);
+  }
 
   return ret;
 }

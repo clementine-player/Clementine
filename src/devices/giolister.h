@@ -55,7 +55,9 @@ private:
     QString unique_id() const;
 
     GMount* mount;
+    QString unix_device;
     QString mount_path;
+    QString uri;
     QString name;
     QStringList icon_names;
     QString uuid;
