@@ -58,7 +58,7 @@ void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &
   database_id_ = dev.id_;
   friendly_name_ = dev.friendly_name_;
   size_ = dev.size_;
-  LoadIcon(dev.icon_name_.split(','));
+  LoadIcon(dev.icon_name_.split(','), friendly_name_);
 
   QStringList unique_ids = dev.unique_id_.split(',');
   foreach (const QString& id, unique_ids) {
@@ -66,7 +66,7 @@ void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &
   }
 }
 
-void DeviceManager::DeviceInfo::LoadIcon(const QStringList& icons) {
+void DeviceManager::DeviceInfo::LoadIcon(const QStringList& icons, const QString& name_hint) {
   if (icons.isEmpty()) {
     icon_name_ = "drive-removable-media-usb-pendrive";
     icon_ = IconLoader::Load(icon_name_);
@@ -82,13 +82,13 @@ void DeviceManager::DeviceInfo::LoadIcon(const QStringList& icons) {
     }
   }
 
-  QString filename = icons.first();
+  QString hint = QString(icons.first() + name_hint).toLower();
 
   // If that failed than try to guess if it's a phone or ipod.  Fall back on
   // a usb memory stick icon.
-  if (filename.contains("phone"))
+  if (hint.contains("phone"))
     icon_name_ = "phone";
-  else if (filename.contains("ipod") || filename.contains("apple"))
+  else if (hint.contains("ipod") || hint.contains("apple"))
     icon_name_ = "multimedia-player-ipod-standard-monochrome";
   else
     icon_name_ = "drive-removable-media-usb-pendrive";
@@ -279,7 +279,7 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
       if (info.database_id_ == -1 && info.BestBackend()->lister_ == lister) {
         info.friendly_name_ = lister->MakeFriendlyName(id);
         info.size_ = lister->DeviceCapacity(id);
-        info.LoadIcon(lister->DeviceIcons(id));
+        info.LoadIcon(lister->DeviceIcons(id), info.friendly_name_);
       }
 
       emit dataChanged(index(i, 0), index(i, 0));
@@ -289,7 +289,7 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
       info.backends_ << DeviceInfo::Backend(lister, id);
       info.friendly_name_ = lister->MakeFriendlyName(id);
       info.size_ = lister->DeviceCapacity(id);
-      info.LoadIcon(lister->DeviceIcons(id));
+      info.LoadIcon(lister->DeviceIcons(id), info.friendly_name_);
 
       beginInsertRows(QModelIndex(), devices_.count(), devices_.count());
       devices_ << info;
@@ -460,8 +460,10 @@ void DeviceManager::Forget(int row) {
   } else {
     // It's still attached, set the name and icon back to what they were
     // originally
-    info.friendly_name_ = info.BestBackend()->lister_->MakeFriendlyName(info.BestBackend()->unique_id_);
-    info.LoadIcon(info.BestBackend()->lister_->DeviceIcons(info.BestBackend()->unique_id_));
+    const QString id = info.BestBackend()->unique_id_;
+
+    info.friendly_name_ = info.BestBackend()->lister_->MakeFriendlyName(id);
+    info.LoadIcon(info.BestBackend()->lister_->DeviceIcons(id), info.friendly_name_);
 
     dataChanged(index(row, 0), index(row, 0));
   }
@@ -471,7 +473,7 @@ void DeviceManager::SetDeviceIdentity(int row, const QString &friendly_name,
                                       const QString &icon_name) {
   DeviceInfo& info = devices_[row];
   info.friendly_name_ = friendly_name;
-  info.LoadIcon(QStringList() << info.icon_name_);
+  info.LoadIcon(QStringList() << icon_name, friendly_name);
 
   emit dataChanged(index(row, 0), index(row, 0));
 

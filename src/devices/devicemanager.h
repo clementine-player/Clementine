@@ -104,6 +104,9 @@ private:
   struct DeviceInfo {
     DeviceInfo();
 
+    // A device can be discovered in different ways (devicekit, gio, etc.)
+    // Sometimes the same device is discovered more than once.  In this case
+    // the device will have multiple "backends".
     struct Backend {
       Backend(DeviceLister* lister = NULL, const QString& id = QString())
         : lister_(lister), unique_id_(id) {}
@@ -112,13 +115,15 @@ private:
       QString unique_id_;
     };
 
+    // Serialising to the database
     void InitFromDb(const DeviceDatabaseBackend::Device& dev);
     DeviceDatabaseBackend::Device SaveToDb() const;
 
-    void LoadIcon(const QStringList& icons);
+    // Tries to load a good icon for the device.  Sets icon_name_ and icon_.
+    void LoadIcon(const QStringList& icons, const QString& name_hint);
 
+    // Gets the best backend available (the one with the highest priority)
     const Backend* BestBackend() const;
-
 
 
     int database_id_; // -1 if not remembered in the database
