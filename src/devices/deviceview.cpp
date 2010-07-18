@@ -19,8 +19,10 @@
 #include "deviceproperties.h"
 #include "deviceview.h"
 #include "core/mergedproxymodel.h"
+#include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 #include "ui/iconloader.h"
+#include "ui/organisedialog.h"
 
 #include <QContextMenuEvent>
 #include <QMenu>
@@ -135,8 +137,10 @@ DeviceView::DeviceView(QWidget* parent)
   add_to_playlist_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
       tr("Add to playlist"), this, SLOT(AddToPlaylist()));
   library_menu_->addSeparator();
+  organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy"),
+      tr("Copy to library..."), this, SLOT(Organise()));
   delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete"),
-      tr("Delete from disk..."), this, SLOT(Delete()));
+      tr("Delete from device..."), this, SLOT(Delete()));
 
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
@@ -165,6 +169,15 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
 
   setModel(merged_model_);
   properties_dialog_->SetDeviceManager(manager_);
+}
+
+void DeviceView::SetLibrary(LibraryModel* library) {
+  Q_ASSERT(manager_);
+
+  library_ = library;
+
+  organise_dialog_.reset(new OrganiseDialog(manager_->task_manager()));
+  organise_dialog_->AddDirectoryModel(library_->directory_model());
 }
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
@@ -317,4 +330,16 @@ void DeviceView::AddToPlaylist() {
 
 void DeviceView::Delete() {
 
+}
+
+void DeviceView::Organise() {
+  SongList songs = GetSelectedSongs();
+  QStringList filenames;
+  foreach (const Song& song, songs) {
+    filenames << song.filename();
+  }
+
+  organise_dialog_->SetCopy(true);
+  organise_dialog_->SetFilenames(filenames);
+  organise_dialog_->show();
 }

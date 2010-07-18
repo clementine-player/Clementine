@@ -201,6 +201,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->radio_view->SetModel(radio_model_);
 
   ui_->devices_view->SetDeviceManager(devices_);
+  ui_->devices_view->SetLibrary(library_->model());
 
   organise_dialog_->AddDirectoryModel(library_->model()->directory_model());
 

@@ -27,6 +27,7 @@ class QSortFilterProxyModel;
 
 class DeviceManager;
 class DeviceProperties;
+class LibraryModel;
 class MergedProxyModel;
 
 class DeviceItemDelegate : public LibraryItemDelegate {
@@ -47,6 +48,7 @@ public:
   ~DeviceView();
 
   void SetDeviceManager(DeviceManager* manager);
+  void SetLibrary(LibraryModel* library);
 
 signals:
   void Load(const SongList& songs);
@@ -67,6 +69,7 @@ private slots:
   // Library menu actions
   void Load();
   void AddToPlaylist();
+  void Organise();
   void Delete();
 
   void DeviceDisconnected(int row);
@@ -78,10 +81,12 @@ private:
 
 private:
   DeviceManager* manager_;
+  LibraryModel* library_;
   MergedProxyModel* merged_model_;
   QSortFilterProxyModel* sort_model_;
 
   boost::scoped_ptr<DeviceProperties> properties_dialog_;
+  boost::scoped_ptr<OrganiseDialog> organise_dialog_;
 
   QMenu* device_menu_;
   QAction* connect_action_;
@@ -92,6 +97,7 @@ private:
   QMenu* library_menu_;
   QAction* load_action_;
   QAction* add_to_playlist_action_;
+  QAction* organise_action_;
   QAction* delete_action_;
 
   QModelIndex menu_index_;
