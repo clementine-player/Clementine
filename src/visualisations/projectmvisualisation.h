@@ -29,6 +29,8 @@ class projectM;
 
 class ProjectMPresetModel;
 
+class QTemporaryFile;
+
 class ProjectMVisualisation : public QGraphicsScene, public BufferConsumer {
   Q_OBJECT
 public:
@@ -78,6 +80,8 @@ private:
   ProjectMPresetModel* preset_model_;
   Mode mode_;
   int duration_;
+
+  boost::scoped_ptr<QTemporaryFile> temporary_font_;
 
   std::vector<int> default_rating_list_;
 

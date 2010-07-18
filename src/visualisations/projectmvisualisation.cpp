@@ -28,6 +28,7 @@
 #include <QPaintEngine>
 #include <QPainter>
 #include <QSettings>
+#include <QTemporaryFile>
 #include <QtDebug>
 #include <QTimerEvent>
 
@@ -92,6 +93,12 @@ void ProjectMVisualisation::InitProjectM() {
     break;
   }
 
+  // Write an empty font out to a temporary directory.  libprojectM dies if it's
+  // compiled with FTGL support and you pass it an empty font URL, so we have
+  // to give it a dummy font even though we won't use it.
+  temporary_font_.reset(QTemporaryFile::createLocalFile(":blank.ttf"));
+  const QString font_path = temporary_font_->fileName();
+
   // Create projectM settings
   projectM::Settings s;
   s.meshX = 32;
@@ -106,12 +113,14 @@ void ProjectMVisualisation::InitProjectM() {
   s.shuffleEnabled = true;
   s.easterEgg = 0; // ??
   s.softCutRatingsEnabled = false;
+  s.menuFontURL = font_path.toStdString();
+  s.titleFontURL = font_path.toStdString();
 
   projectm_.reset(new projectM(s));
   preset_model_ = new ProjectMPresetModel(this, this);
   Load();
 
-  if (preset_path.isNull()) {
+  if (font_path.isNull()) {
     qWarning("ProjectM presets could not be found, search path was:\n  %s",
              paths.join("\n  ").toLocal8Bit().constData());
     QMessageBox::warning(NULL, tr("Missing projectM presets"),
