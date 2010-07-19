@@ -152,7 +152,7 @@ QImage AlbumCoverLoader::LoadFromTaglib(const QString& filename) const {
   if (filename.isEmpty())
     return ret;
 
-  TagLib::FileRef ref(QFile::encodeName(filename));
+  TagLib::FileRef ref(QFile::encodeName(filename).constData());
   if (ref.isNull())
     return ret;
 
