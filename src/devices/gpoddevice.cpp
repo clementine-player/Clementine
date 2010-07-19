@@ -47,3 +47,10 @@ GPodDevice::~GPodDevice() {
 
 }
 
+bool GPodDevice::CopyToStorage(
+    const QString &source, const QString &destination,
+    const Song &metadata, bool overwrite, bool remove_original)
+{
+  return true;
+}
+

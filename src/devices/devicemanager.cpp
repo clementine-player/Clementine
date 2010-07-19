@@ -27,10 +27,24 @@
 
 #include <QIcon>
 #include <QPainter>
+#include <QSortFilterProxyModel>
 #include <QUrl>
 
 const int DeviceManager::kDeviceIconSize = 32;
 const int DeviceManager::kDeviceIconOverlaySize = 16;
+
+DeviceStateFilterModel::DeviceStateFilterModel(QObject *parent,
+                                               DeviceManager::State state)
+  : QSortFilterProxyModel(parent),
+    state_(state)
+{
+}
+
+bool DeviceStateFilterModel::filterAcceptsRow(int row, const QModelIndex&) const {
+  return sourceModel()->index(row, 0).data(DeviceManager::Role_State).toInt()
+      == state_;
+}
+
 
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
@@ -131,6 +145,10 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
     info.InitFromDb(device);
     devices_ << info;
   }
+
+  // This proxy model only shows connected devices
+  connected_devices_model_ = new DeviceStateFilterModel(this);
+  connected_devices_model_->setSourceModel(this);
 
 #ifdef Q_WS_X11
   AddLister(new DeviceKitLister);

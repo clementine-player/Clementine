@@ -18,10 +18,11 @@
 #define GPODDEVICE_H
 
 #include "connecteddevice.h"
+#include "core/musicstorage.h"
 
 class GPodLoader;
 
-class GPodDevice : public ConnectedDevice {
+class GPodDevice : public ConnectedDevice, public MusicStorage {
   Q_OBJECT
 
 public:
@@ -32,6 +33,11 @@ public:
   ~GPodDevice();
 
   static QStringList url_schemes() { return QStringList() << "ipod"; }
+
+  MusicStorage* storage() { return this; }
+
+  bool CopyToStorage(const QString &source, const QString &destination,
+                     const Song &metadata, bool overwrite, bool remove_original);
 
 private:
   QThread* loader_thread_;

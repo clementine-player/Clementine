@@ -28,6 +28,7 @@ FilesystemDevice::FilesystemDevice(
     const QString& unique_id, DeviceManager* manager,
     int database_id, bool first_time)
       : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
+        FilesystemMusicStorage(url.toLocalFile()),
         watcher_(new BackgroundThreadImplementation<LibraryWatcher, LibraryWatcher>(this))
 {
   // Create the library watcher

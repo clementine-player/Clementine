@@ -177,7 +177,7 @@ void DeviceView::SetLibrary(LibraryModel* library) {
   library_ = library;
 
   organise_dialog_.reset(new OrganiseDialog(manager_->task_manager()));
-  organise_dialog_->AddDirectoryModel(library_->directory_model());
+  organise_dialog_->SetDestinationModel(library_->directory_model());
 }
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {

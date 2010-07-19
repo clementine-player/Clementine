@@ -21,13 +21,14 @@
 
 #include "organiseformat.h"
 
+class MusicStorage;
 class TaskManager;
 
 class Organise : public QObject {
   Q_OBJECT
 
 public:
-  Organise(TaskManager* task_manager, const QString& destination,
+  Organise(TaskManager* task_manager, MusicStorage* destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
            const QStringList& files);
 
@@ -42,8 +43,8 @@ private:
   QThread* thread_;
   QThread* original_thread_;
   TaskManager* task_manager_;
+  MusicStorage* destination_;
 
-  const QString destination_;
   const OrganiseFormat format_;
   const bool copy_;
   const bool overwrite_;

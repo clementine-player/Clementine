@@ -118,7 +118,7 @@ void LibraryView::ReloadSettings() {
 
 void LibraryView::SetTaskManager(TaskManager *task_manager) {
   organise_dialog_.reset(new OrganiseDialog(task_manager));
-  organise_dialog_->AddDirectoryModel(library_->directory_model());
+  organise_dialog_->SetDestinationModel(library_->directory_model());
 }
 
 void LibraryView::SetLibrary(LibraryModel *library) {

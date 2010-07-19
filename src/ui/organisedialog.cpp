@@ -16,6 +16,7 @@
 
 #include "organisedialog.h"
 #include "ui_organisedialog.h"
+#include "core/musicstorage.h"
 #include "core/organise.h"
 
 #include <QDir>
@@ -87,9 +88,7 @@ OrganiseDialog::~OrganiseDialog() {
   delete ui_;
 }
 
-void OrganiseDialog::AddDirectoryModel(QAbstractItemModel *model) {
-  // TODO: Add this model to a proxy model that merges different models
-  // together, eg. from the local library and also removable devices.
+void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model) {
   ui_->destination->setModel(model);
 }
 
@@ -148,6 +147,15 @@ void OrganiseDialog::InsertTag(const QString &tag) {
 }
 
 void OrganiseDialog::UpdatePreviews() {
+  const QModelIndex destination = ui_->destination->model()->index(
+      ui_->destination->currentIndex(), 0);
+  if (!destination.isValid())
+    return;
+  const MusicStorage* storage =
+      destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
+
+  const bool has_local_destination = !storage->LocalPath().isEmpty();
+
   // Update the format object
   format_.set_format(ui_->naming->toPlainText());
   format_.set_replace_non_ascii(ui_->replace_ascii->isChecked());
@@ -155,16 +163,19 @@ void OrganiseDialog::UpdatePreviews() {
   format_.set_replace_the(ui_->replace_the->isChecked());
 
   const bool format_valid = format_.IsValid();
-  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(
-      format_valid && !ui_->destination->currentText().isEmpty());
+  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(format_valid);
   if (!format_valid)
     return;
 
+  // Update the previews
   ui_->preview->clear();
-  foreach (const Song& song, preview_songs_) {
-    QString filename = ui_->destination->currentText() + "/" +
-                       format_.GetFilenameForSong(song);
-    ui_->preview->addItem(QDir::toNativeSeparators(filename));
+  ui_->preview->setVisible(has_local_destination);
+  if (has_local_destination) {
+    foreach (const Song& song, preview_songs_) {
+      QString filename = storage->LocalPath() + "/" +
+                         format_.GetFilenameForSong(song);
+      ui_->preview->addItem(QDir::toNativeSeparators(filename));
+    }
   }
 }
 
@@ -202,9 +213,14 @@ void OrganiseDialog::accept() {
   s.setValue("overwrite", ui_->overwrite->isChecked());
   s.setValue("destination", ui_->destination->currentText());
 
+  const QModelIndex destination = ui_->destination->model()->index(
+      ui_->destination->currentIndex(), 0);
+  MusicStorage* storage =
+      destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
+
   // It deletes itself when it's finished.
   Organise* organise = new Organise(
-      task_manager_, ui_->destination->currentText(), format_,
+      task_manager_, storage, format_,
       !ui_->move->isChecked(), ui_->overwrite->isChecked(), filenames_);
   organise->Start();
 

@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "musicstorage.h"
 #include "organise.h"
 #include "taskmanager.h"
 
@@ -24,7 +25,7 @@
 
 const int Organise::kBatchSize = 10;
 
-Organise::Organise(TaskManager* task_manager, const QString &destination,
+Organise::Organise(TaskManager* task_manager, MusicStorage* destination,
                    const OrganiseFormat &format, bool copy, bool overwrite,
                    const QStringList& files)
                      : thread_(NULL),
@@ -95,25 +96,8 @@ void Organise::ProcessSomeFiles() {
     if (!song.is_valid())
       continue;
 
-    // Get the destination filename
-    QString dest_filename = destination_ + "/" + format_.GetFilenameForSong(song);
-
-    // Don't do anything if the destination is the same as the source
-    if (filename == dest_filename)
-      continue;
-
-    // Create directories as required
-    dir.mkpath(dest_filename.section('/', 0, -2));
-
-    // Remove the destination file if it exists and we want to overwrite
-    if (overwrite_ && QFile::exists(dest_filename))
-      QFile::remove(dest_filename);
-
-    // Copy or move
-    if (copy_)
-      QFile::copy(filename, dest_filename);
-    else
-      QFile::rename(filename, dest_filename);
+    destination_->CopyToStorage(filename, format_.GetFilenameForSong(song),
+                                song, overwrite_, !copy_);
   }
 
   QTimer::singleShot(0, this, SLOT(ProcessSomeFiles()));

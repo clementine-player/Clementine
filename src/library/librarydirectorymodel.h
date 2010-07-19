@@ -23,16 +23,20 @@
 #include "directory.h"
 
 class LibraryBackend;
+class MusicStorage;
 
 class LibraryDirectoryModel : public QStandardItemModel {
   Q_OBJECT
 
  public:
   LibraryDirectoryModel(LibraryBackend* backend, QObject* parent = 0);
+  ~LibraryDirectoryModel();
 
   // To be called by GUIs
   void AddDirectory(const QString& path);
   void RemoveDirectory(const QModelIndex& index);
+
+  QVariant data(const QModelIndex &index, int role) const;
 
  private slots:
   // To be called by the backend
@@ -44,6 +48,7 @@ class LibraryDirectoryModel : public QStandardItemModel {
 
   QIcon dir_icon_;
   LibraryBackend* backend_;
+  QList<MusicStorage*> storage_;
 };
 
 #endif // LIBRARYDIRECTORYMODEL_H

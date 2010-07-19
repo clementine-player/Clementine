@@ -16,6 +16,8 @@
 
 #include "librarydirectorymodel.h"
 #include "librarybackend.h"
+#include "core/filesystemmusicstorage.h"
+#include "core/musicstorage.h"
 #include "ui/iconloader.h"
 
 LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* parent)
@@ -27,10 +29,15 @@ LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* p
   connect(backend_, SIGNAL(DirectoryDeleted(Directory)), SLOT(DirectoryDeleted(Directory)));
 }
 
+LibraryDirectoryModel::~LibraryDirectoryModel() {
+  qDeleteAll(storage_);
+}
+
 void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {
   QStandardItem* item = new QStandardItem(dir.path);
   item->setData(dir.id, kIdRole);
   item->setIcon(dir_icon_);
+  storage_ << new FilesystemMusicStorage(dir.path);
   appendRow(item);
 }
 
@@ -38,6 +45,7 @@ void LibraryDirectoryModel::DirectoryDeleted(const Directory &dir) {
   for (int i=0 ; i<rowCount() ; ++i) {
     if (item(i, 0)->data(kIdRole).toInt() == dir.id) {
       removeRow(i);
+      delete storage_.takeAt(i);
       break;
     }
   }
@@ -59,4 +67,12 @@ void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
   dir.id = index.data(kIdRole).toInt();
 
   backend_->RemoveDirectory(dir);
+}
+
+QVariant LibraryDirectoryModel::data(const QModelIndex &index, int role) const {
+  if (role == MusicStorage::kStorageRole) {
+    return QVariant::fromValue(storage_[index.row()]);
+  }
+
+  return QStandardItemModel::data(index, role);
 }

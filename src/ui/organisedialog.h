@@ -43,7 +43,7 @@ public:
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
 
-  void AddDirectoryModel(QAbstractItemModel* model);
+  void SetDestinationModel(QAbstractItemModel* model);
 
   void SetUrls(const QList<QUrl>& urls);
   void SetFilenames(const QStringList& filenames);

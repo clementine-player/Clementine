@@ -41,7 +41,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   LibraryModel(LibraryBackend* backend, QObject* parent = 0);
   ~LibraryModel();
 
-  enum {
+  enum Role {
     Role_Type = Qt::UserRole + 1,
     Role_ContainerType,
     Role_SortText,

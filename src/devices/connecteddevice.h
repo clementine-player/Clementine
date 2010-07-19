@@ -26,6 +26,7 @@ class DeviceLister;
 class DeviceManager;
 class LibraryBackend;
 class LibraryModel;
+class MusicStorage;
 
 class ConnectedDevice : public QObject {
   Q_OBJECT
@@ -39,6 +40,8 @@ public:
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }
   LibraryModel* model() const { return model_; }
+
+  virtual MusicStorage* storage() = 0;
 
 signals:
   void TaskStarted(int id);

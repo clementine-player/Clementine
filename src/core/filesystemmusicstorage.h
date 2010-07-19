@@ -14,32 +14,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMDEVICE_H
-#define FILESYSTEMDEVICE_H
+#ifndef FILESYSTEMMUSICSTORAGE_H
+#define FILESYSTEMMUSICSTORAGE_H
 
-#include "connecteddevice.h"
-#include "core/backgroundthread.h"
-#include "core/filesystemmusicstorage.h"
+#include "musicstorage.h"
 
-class DeviceManager;
-class LibraryWatcher;
-
-class FilesystemDevice : public ConnectedDevice, public FilesystemMusicStorage {
-  Q_OBJECT
-
+class FilesystemMusicStorage : public MusicStorage {
 public:
-  Q_INVOKABLE FilesystemDevice(
-      const QUrl& url, DeviceLister* lister,
-      const QString& unique_id, DeviceManager* manager,
-      int database_id, bool first_time);
-  ~FilesystemDevice();
+  FilesystemMusicStorage(const QString& root);
 
-  static QStringList url_schemes() { return QStringList() << "file"; }
+  QString LocalPath() const { return root_; }
 
-  MusicStorage* storage() { return this; }
+  bool CopyToStorage(const QString &source, const QString &destination,
+                     const Song &metadata, bool overwrite, bool remove_original);
 
 private:
-  BackgroundThread<LibraryWatcher>* watcher_;
+  QString root_;
 };
 
-#endif // FILESYSTEMDEVICE_H
+#endif // FILESYSTEMMUSICSTORAGE_H

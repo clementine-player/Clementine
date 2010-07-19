@@ -35,11 +35,13 @@ set(SOURCES
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
   core/database.cpp
+  core/filesystemmusicstorage.cpp
   core/fht.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
+  core/musicstorage.cpp
   core/networkaccessmanager.cpp
   core/organise.cpp
   core/organiseformat.cpp
