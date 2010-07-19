@@ -23,6 +23,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class DeviceManager;
 class LibraryModel;
 class OrganiseDialog;
 class TaskManager;
@@ -44,6 +45,7 @@ class LibraryView : public AutoExpandingTreeView {
 
   void SetTaskManager(TaskManager* task_manager);
   void SetLibrary(LibraryModel* library);
+  void SetDeviceManager(DeviceManager* device_manager);
 
   // QTreeView
   void keyboardSearch(const QString &search);
@@ -68,6 +70,7 @@ class LibraryView : public AutoExpandingTreeView {
   void Load();
   void AddToPlaylist();
   void Organise();
+  void CopyToDevice();
   void Delete();
   void ShowInVarious();
   void NoShowInVarious();
@@ -75,9 +78,12 @@ class LibraryView : public AutoExpandingTreeView {
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
+  QStringList GetSelectedFilenames() const;
 
  private:
   LibraryModel* library_;
+  DeviceManager* devices_;
+
   int total_song_count_;
 
   QPixmap nomusic_;
@@ -87,6 +93,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* load_;
   QAction* add_to_playlist_;
   QAction* organise_;
+  QAction* copy_to_device_;
   QAction* delete_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;

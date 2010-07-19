@@ -149,12 +149,13 @@ void OrganiseDialog::InsertTag(const QString &tag) {
 void OrganiseDialog::UpdatePreviews() {
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
-  if (!destination.isValid())
-    return;
-  const MusicStorage* storage =
-      destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
+  MusicStorage* storage = NULL;
+  bool has_local_destination = false;
 
-  const bool has_local_destination = !storage->LocalPath().isEmpty();
+  if (destination.isValid()) {
+    storage = destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
+    has_local_destination = !storage->LocalPath().isEmpty();
+  }
 
   // Update the format object
   format_.set_format(ui_->naming->toPlainText());
@@ -163,13 +164,13 @@ void OrganiseDialog::UpdatePreviews() {
   format_.set_replace_the(ui_->replace_the->isChecked());
 
   const bool format_valid = format_.IsValid();
-  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(format_valid);
+  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(format_valid && storage);
   if (!format_valid)
     return;
 
   // Update the previews
   ui_->preview->clear();
-  ui_->preview->setVisible(has_local_destination);
+  ui_->preview_group->setVisible(has_local_destination);
   if (has_local_destination) {
     foreach (const Song& song, preview_songs_) {
       QString filename = storage->LocalPath() + "/" +

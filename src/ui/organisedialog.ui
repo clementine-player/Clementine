@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>639</width>
-    <height>436</height>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -114,7 +114,7 @@
       </widget>
      </item>
      <item row="3" column="0" colspan="2">
-      <widget class="QGroupBox" name="groupBox_2">
+      <widget class="QGroupBox" name="preview_group">
        <property name="title">
         <string>Preview</string>
        </property>
@@ -146,7 +146,9 @@
    <header>widgets/linetextedit.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

@@ -21,6 +21,7 @@
 #include "filesystemdevice.h"
 #include "giolister.h"
 #include "gpoddevice.h"
+#include "core/musicstorage.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "ui/iconloader.h"
@@ -38,6 +39,7 @@ DeviceStateFilterModel::DeviceStateFilterModel(QObject *parent,
   : QSortFilterProxyModel(parent),
     state_(state)
 {
+  setDynamicSortFilter(true);
 }
 
 bool DeviceStateFilterModel::filterAcceptsRow(int row, const QModelIndex&) const {
@@ -235,6 +237,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         return QVariant();
       return info.task_percentage_;
 
+    case MusicStorage::kStorageRole:
+      if (info.device_)
+        return QVariant::fromValue(info.device_->storage());
+      return QVariant();
+
     default:
       return QVariant();
   }
@@ -428,6 +435,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     qWarning() << "Could not create device for" << url.toString();
   } else {
     info.device_ = ret;
+    emit dataChanged(index(row), index(row));
     connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
     connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   }
@@ -453,6 +461,7 @@ void DeviceManager::Disconnect(int row) {
     return;
 
   info.device_.reset();
+  emit dataChanged(index(row), index(row));
   emit DeviceDisconnected(row);
 }
 

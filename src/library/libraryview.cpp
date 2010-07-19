@@ -19,6 +19,7 @@
 #include "libraryview.h"
 #include "libraryitem.h"
 #include "librarybackend.h"
+#include "devices/devicemanager.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 
@@ -93,6 +94,8 @@ LibraryView::LibraryView(QWidget* parent)
   context_menu_->addSeparator();
   organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
       tr("Organise files..."), this, SLOT(Organise()));
+  copy_to_device_ = context_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
+      tr("Copy to device..."), this, SLOT(CopyToDevice()));
   delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
       tr("Delete from disk..."), this, SLOT(Delete()));
   context_menu_->addSeparator();
@@ -118,11 +121,14 @@ void LibraryView::ReloadSettings() {
 
 void LibraryView::SetTaskManager(TaskManager *task_manager) {
   organise_dialog_.reset(new OrganiseDialog(task_manager));
-  organise_dialog_->SetDestinationModel(library_->directory_model());
 }
 
 void LibraryView::SetLibrary(LibraryModel *library) {
   library_ = library;
+}
+
+void LibraryView::SetDeviceManager(DeviceManager *device_manager) {
+  devices_ = device_manager;
 }
 
 void LibraryView::TotalSongCountUpdated(int count) {
@@ -240,22 +246,34 @@ void LibraryView::scrollTo(const QModelIndex &index, ScrollHint hint) {
     QTreeView::scrollTo(index, hint);
 }
 
-void LibraryView::Organise() {
+QStringList LibraryView::GetSelectedFilenames() const {
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
           selectionModel()->selection()).indexes();
   SongList songs = library_->GetChildSongs(selected_indexes);
-  QStringList filenames;
+  QStringList ret;
 
   foreach (const Song& song, songs) {
-    filenames << song.filename();
+    ret << song.filename();
   }
 
+  return ret;
+}
+
+void LibraryView::Organise() {
+  organise_dialog_->SetDestinationModel(library_->directory_model());
   organise_dialog_->SetCopy(false);
-  organise_dialog_->SetFilenames(filenames);
+  organise_dialog_->SetFilenames(GetSelectedFilenames());
   organise_dialog_->show();
 }
 
 void LibraryView::Delete() {
 
+}
+
+void LibraryView::CopyToDevice() {
+  organise_dialog_->SetDestinationModel(devices_->connected_devices_model());
+  organise_dialog_->SetCopy(true);
+  organise_dialog_->SetFilenames(GetSelectedFilenames());
+  organise_dialog_->show();
 }
