@@ -100,6 +100,7 @@ class AlbumCoverManager : public QMainWindow {
     Role_AlbumName,
     Role_PathAutomatic,
     Role_PathManual,
+    Role_FirstFilename,
   };
 
   enum HideCovers {

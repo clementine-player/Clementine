@@ -603,7 +603,8 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
   AlbumList ret;
 
   LibraryQuery query(opt);
-  query.SetColumnSpec("album, artist, compilation, sampler, art_automatic, art_manual");
+  query.SetColumnSpec("album, artist, compilation, sampler, art_automatic, "
+                      "art_manual, filename");
   query.SetOrderBy("album");
 
   if (compilation) {
@@ -626,6 +627,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     info.album_name = query.Value(0).toString();
     info.art_automatic = query.Value(4).toString();
     info.art_manual = query.Value(5).toString();
+    info.first_filename = query.Value(6).toString();
 
     if (info.artist == last_artist && info.album_name == last_album)
       continue;
@@ -645,16 +647,17 @@ LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const Q
   ret.artist = artist;
 
   LibraryQuery query = LibraryQuery(QueryOptions());
-  query.SetColumnSpec("art_automatic, art_manual");
+  query.SetColumnSpec("art_automatic, art_manual, filename");
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
 
   QMutexLocker l(db_->Mutex());
-   if (!ExecQuery(&query)) return ret;
+  if (!ExecQuery(&query)) return ret;
 
   if (query.Next()) {
     ret.art_automatic = query.Value(0).toString();
     ret.art_manual = query.Value(1).toString();
+    ret.first_filename = query.Value(2).toString();
   }
 
   return ret;

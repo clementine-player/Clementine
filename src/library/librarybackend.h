@@ -42,15 +42,18 @@ class LibraryBackend : public QObject {
   struct Album {
     Album() {}
     Album(const QString& _artist, const QString& _album_name,
-          const QString& _art_automatic, const QString& _art_manual)
+          const QString& _art_automatic, const QString& _art_manual,
+          const QString& _first_filename)
             : artist(_artist), album_name(_album_name),
-              art_automatic(_art_automatic), art_manual(_art_manual) {}
+              art_automatic(_art_automatic), art_manual(_art_manual),
+              first_filename(_first_filename) {}
 
     QString artist;
     QString album_name;
 
     QString art_automatic;
     QString art_manual;
+    QString first_filename;
   };
   typedef QList<Album> AlbumList;
 
