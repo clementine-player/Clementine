@@ -48,7 +48,7 @@ void PlaylistFilter::sort(int column, Qt::SortOrder order) {
 }
 
 bool PlaylistFilter::filterAcceptsRow(int row, const QModelIndex &parent) const {
-  QString filter = filterRegExp().pattern();
+  QString filter = filterRegExp().pattern().toLower();
 
   uint hash = qHash(filter);
   if (hash != query_hash_) {
