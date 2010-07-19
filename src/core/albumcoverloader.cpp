@@ -23,7 +23,13 @@
 #include <QUrl>
 #include <QNetworkReply>
 
+#include <taglib/attachedpictureframe.h>
+#include <taglib/fileref.h>
+#include <taglib/id3v2tag.h>
+#include <taglib/mpegfile.h>
+
 const char* AlbumCoverLoader::kManuallyUnsetCover = "(unset)";
+const char* AlbumCoverLoader::kEmbeddedCover = "(embedded)";
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
@@ -46,10 +52,14 @@ void AlbumCoverLoader::Clear() {
 }
 
 quint64 AlbumCoverLoader::LoadImageAsync(const QString& art_automatic,
-                                         const QString& art_manual) {
+                                         const QString& art_manual,
+                                         const QString& song_filename,
+                                         const QImage& embedded_image) {
   Task task;
   task.art_automatic = art_automatic;
   task.art_manual = art_manual;
+  task.song_filename = song_filename;
+  task.embedded_image = embedded_image;
   task.state = State_TryingManual;
 
   {
@@ -107,6 +117,10 @@ void AlbumCoverLoader::NextState(Task* task) {
 
 AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     const Task& task) {
+  // An image embedded in the song itself takes priority
+  if (!task.embedded_image.isNull())
+    return TryLoadResult(false, true, ScaleAndPad(task.embedded_image));
+
   QString filename;
   switch (task.state) {
     case State_TryingAuto:   filename = task.art_automatic; break;
@@ -115,6 +129,12 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
   if (filename == kManuallyUnsetCover)
     return TryLoadResult(false, true, default_);
+
+  if (filename == kEmbeddedCover && !task.song_filename.isEmpty()) {
+    QImage taglib_image = LoadFromTaglib(task.song_filename);
+    if (!taglib_image.isNull())
+      return TryLoadResult(false, true, ScaleAndPad(taglib_image));
+  }
 
   if (filename.toLower().startsWith("http://")) {
     network_->Get(QUrl(filename), this, "RemoteFetchFinished", task.id, true);
@@ -125,6 +145,30 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
   QImage image(filename);
   return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
+}
+
+QImage AlbumCoverLoader::LoadFromTaglib(const QString& filename) const {
+  QImage ret;
+  if (filename.isEmpty())
+    return ret;
+
+  TagLib::FileRef ref(QFile::encodeName(filename));
+  if (ref.isNull())
+    return ret;
+
+  TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(ref.file());
+  if (!file || !file->ID3v2Tag())
+    return ret;
+
+  TagLib::ID3v2::FrameList apic_frames = file->ID3v2Tag()->frameListMap()["APIC"];
+  if (apic_frames.isEmpty())
+    return ret;
+
+  TagLib::ID3v2::AttachedPictureFrame* pic =
+      static_cast<TagLib::ID3v2::AttachedPictureFrame*>(apic_frames.front());
+
+  ret.loadFromData((const uchar*) pic->picture().data(), pic->picture().size());
+  return ret;
 }
 
 void AlbumCoverLoader::RemoteFetchFinished(quint64 id, QNetworkReply* reply) {
@@ -180,4 +224,9 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString &automatic, const QString 
 
 void AlbumCoverLoader::SetDefaultOutputImage(const QImage &image) {
   default_ = ScaleAndPad(image);
+}
+
+quint64 AlbumCoverLoader::LoadImageAsync(const Song &song) {
+  return LoadImageAsync(song.art_automatic(), song.art_manual(),
+                        song.filename(), song.image());
 }

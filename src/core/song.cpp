@@ -39,7 +39,6 @@
 #include <taglib/trueaudiofile.h>
 #include <taglib/textidentificationframe.h>
 #include <taglib/xiphcomment.h>
-#include <taglib/attachedpictureframe.h>
 
 #include "radio/fixlastfm.h"
 #include <lastfm/Track>
@@ -370,12 +369,8 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
       if (!file->ID3v2Tag()->frameListMap()["TCMP"].isEmpty())
         compilation = TStringToQString(file->ID3v2Tag()->frameListMap()["TCMP"].front()->toString()).trimmed();
 
-      if (!file->ID3v2Tag()->frameListMap()["APIC"].isEmpty()) {
-        TagLib::ID3v2::AttachedPictureFrame* pic =
-            static_cast<TagLib::ID3v2::AttachedPictureFrame*>(
-                file->ID3v2Tag()->frameListMap()["APIC"].front());
-        d->image_.loadFromData((const uchar*) pic->picture().data(), pic->picture().size());
-      }
+      if (!file->ID3v2Tag()->frameListMap()["APIC"].isEmpty())
+        d->art_automatic_ = AlbumCoverLoader::kEmbeddedCover;
     }
   }
   else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {

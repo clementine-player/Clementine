@@ -18,6 +18,7 @@
 #define ALBUMCOVERLOADER_H
 
 #include "backgroundthread.h"
+#include "song.h"
 
 #include <QObject>
 #include <QImage>
@@ -42,13 +43,20 @@ class AlbumCoverLoader : public QObject {
   void SetDesiredHeight(int height) { height_ = height; }
   void SetPadOutputImage(bool padding) { padding_ = padding; }
   void SetDefaultOutputImage(const QImage& image);
-  quint64 LoadImageAsync(const QString& art_automatic, const QString& art_manual);
+
+
+  quint64 LoadImageAsync(const Song& song);
+  quint64 LoadImageAsync(const QString& art_automatic,
+                         const QString& art_manual,
+                         const QString& song_filename = QString(),
+                         const QImage& embedded_image = QImage());
 
   void Clear();
 
   static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual);
 
   static const char* kManuallyUnsetCover;
+  static const char* kEmbeddedCover;
 
  signals:
   void ImageLoaded(quint64 id, const QImage& image);
@@ -67,11 +75,13 @@ class AlbumCoverLoader : public QObject {
     quint64 id;
     QString art_automatic;
     QString art_manual;
+    QString song_filename;
+    QImage embedded_image;
     State state;
   };
 
   struct TryLoadResult {
-    TryLoadResult(bool async, bool success, const QImage i)
+    TryLoadResult(bool async, bool success, const QImage& i)
       : started_async(async), loaded_success(success), image(i) {}
 
     bool started_async;
@@ -83,6 +93,7 @@ class AlbumCoverLoader : public QObject {
   void NextState(Task* task);
   TryLoadResult TryLoadImage(const Task& task);
   QImage ScaleAndPad(const QImage& image) const;
+  QImage LoadFromTaglib(const QString& filename) const;
 
   bool stop_requested_;
 

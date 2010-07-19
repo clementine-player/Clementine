@@ -321,7 +321,8 @@ void LibraryWatcher::ScanSubdirectory(
       qDebug() << file << "created";
 
       // Choose an image for the song
-      song.set_art_automatic(ImageForSong(file, album_art));
+      if (song.art_automatic().isEmpty())
+        song.set_art_automatic(ImageForSong(file, album_art));
 
       t->new_songs << song;
     }

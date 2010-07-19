@@ -96,14 +96,10 @@ void OSD::SongChanged(const Song &song) {
   waiting.summary = summary;
   waiting.message = message_parts.join(", ");
 
-  if (show_art_ && !song.image().isNull()) {
-    // The song has embedded art, so use that
-    AlbumArtLoaded(waiting, song.image());
-  } else if (show_art_) {
+  if (show_art_) {
     // Load the art in a background thread (maybe from a remote server),
     // AlbumArtLoaded gets called when it's ready.
-    quint64 id = cover_loader_->Worker()->LoadImageAsync(
-        song.art_automatic(), song.art_manual());
+    quint64 id = cover_loader_->Worker()->LoadImageAsync(song);
     waiting_for_album_art_.insert(id, waiting);
   } else {
     AlbumArtLoaded(waiting, QImage());

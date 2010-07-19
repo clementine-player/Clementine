@@ -147,8 +147,7 @@ void NowPlayingWidget::UpdateHeight() {
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
 
   // Re-fetch the current image
-  load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(
-      metadata_.art_automatic(), metadata_.art_manual());
+  load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(metadata_);
 
   // Tell Qt we've changed size
   updateGeometry();
