@@ -43,6 +43,7 @@
 #include <QTranslator>
 #include <QDir>
 
+#include <glib-object.h>
 #include <glib/gutils.h>
 
 #ifdef Q_WS_X11
@@ -101,6 +102,7 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 
   // This makes us show up nicely in gnome-volume-control
+  g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
   qRegisterMetaType<Directory>("Directory");
