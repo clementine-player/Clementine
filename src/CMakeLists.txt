@@ -409,6 +409,8 @@ endif(HAVE_GSTREAMER)
 if(APPLE)
   list(APPEND SOURCES widgets/osd_mac.mm)
   list(APPEND SOURCES core/macglobalshortcutbackend.mm)
+  list(APPEND SOURCES devices/macdevicelister.mm)
+  list(APPEND HEADERS devices/macdevicelister.h)
   list(APPEND SOURCES ui/macsystemtrayicon.mm)
   list(APPEND HEADERS core/macglobalshortcutbackend.h)
   list(APPEND HEADERS ui/macsystemtrayicon.h)
@@ -562,9 +564,11 @@ if (APPLE)
     ${GROWL}
     ${SPARKLE}
     z
-    /System/Library/Frameworks/Carbon.framework
-    /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/AppKit.framework
+    /System/Library/Frameworks/Carbon.framework
+    /System/Library/Frameworks/DiskArbitration.framework
+    /System/Library/Frameworks/Foundation.framework
+    /System/Library/Frameworks/IOKit.framework
   )
   include_directories(${SPARKLE}/Headers)
 else (APPLE)

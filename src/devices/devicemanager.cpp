@@ -26,6 +26,10 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
+#ifdef Q_OS_DARWIN
+#include "macdevicelister.h"
+#endif
+
 #include <QIcon>
 #include <QPainter>
 #include <QSortFilterProxyModel>
@@ -157,6 +161,9 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 #endif
 #ifdef HAVE_GIO
   AddLister(new GioLister);
+#endif
+#ifdef Q_OS_DARWIN
+  AddLister(new MacDeviceLister);
 #endif
 
   AddDeviceClass<FilesystemDevice>();
