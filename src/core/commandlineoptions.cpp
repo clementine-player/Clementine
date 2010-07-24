@@ -71,6 +71,20 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     engine_(Engine::Type_QtPhonon)
 #endif
 {
+#ifdef Q_OS_DARWIN
+  // Remove -psn_xxx option that Mac passes when opened from Finder.
+  for (int i = 0; i < argc_; ++i) {
+    QString opt(argv_[i]);
+    if (opt.startsWith("-psn")) {
+      // Shuffle remaining args.
+      for (int j = i; j < argc_; ++j) {
+        argv_[j] = argv_[j+1];
+      }
+      --argc_;
+      break;
+    }
+  }
+#endif
 }
 
 bool CommandlineOptions::Parse() {
