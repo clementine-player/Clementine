@@ -342,9 +342,9 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
 
   if (info.database_id_ != -1) {
     // Keep the structure around, but just "disconnect" it
-    for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++i) {
-      if (info.backends_[i].unique_id_ == id) {
-        info.backends_[i].lister_ = NULL;
+    for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++backend_index) {
+      if (info.backends_[backend_index].unique_id_ == id) {
+        info.backends_[backend_index].lister_ = NULL;
         break;
       }
     }
