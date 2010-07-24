@@ -21,6 +21,7 @@
 #include "core/musicstorage.h"
 
 #include <QMutex>
+#include <QWaitCondition>
 
 class GPodLoader;
 
@@ -43,12 +44,18 @@ public:
                      const Song &metadata, bool overwrite, bool remove_original);
   void FinishCopy();
 
+private slots:
+  void LoadFinished(Itdb_iTunesDB* db);
+
 private:
   QThread* loader_thread_;
   GPodLoader* loader_;
 
-  QMutex active_copy_mutex_;
-  Itdb_iTunesDB* active_copy_db_;
+  QWaitCondition db_wait_cond_;
+  QMutex db_mutex_;
+  Itdb_iTunesDB* db_;
+
+  QMutex copy_in_progress_;
 };
 
 #endif // GPODDEVICE_H

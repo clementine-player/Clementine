@@ -30,6 +30,7 @@ GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
     task_manager_(task_manager),
     backend_(backend)
 {
+  original_thread_ = thread();
 }
 
 void GPodLoader::LoadDatabase() {
@@ -67,7 +68,8 @@ void GPodLoader::LoadDatabase() {
   // Add the songs we've just loaded
   backend_->AddOrUpdateSongs(songs);
 
-  // Cleanup
-  itdb_free(db);
+  moveToThread(original_thread_);
+
   task_manager_->SetTaskFinished(task_id);
+  emit LoadFinished(db);
 }

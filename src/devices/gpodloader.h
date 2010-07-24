@@ -21,6 +21,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include <gpod/itdb.h>
+
 class LibraryBackend;
 class TaskManager;
 
@@ -37,8 +39,11 @@ public slots:
 signals:
   void Error(const QString& message);
   void TaskStarted(int task_id);
+  void LoadFinished(Itdb_iTunesDB* db);
 
 private:
+  QThread* original_thread_;
+
   QString mount_point_;
   TaskManager* task_manager_;
   LibraryBackend* backend_;

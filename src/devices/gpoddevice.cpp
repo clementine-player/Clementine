@@ -30,7 +30,7 @@ GPodDevice::GPodDevice(
       : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
         loader_thread_(new QThread(this)),
         loader_(new GPodLoader(url.path(), manager->task_manager(), backend_)),
-        active_copy_db_(NULL)
+        db_(NULL)
 {
   InitBackendDirectory(url.path(), first_time);
   model_->Init();
@@ -39,35 +39,40 @@ GPodDevice::GPodDevice(
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   connect(loader_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
+  connect(loader_, SIGNAL(LoadFinished(Itdb_iTunesDB*)), SLOT(LoadFinished(Itdb_iTunesDB*)));
   connect(loader_thread_, SIGNAL(started()), loader_, SLOT(LoadDatabase()));
   loader_thread_->start();
-  // TODO: loader cleanup
 }
 
 GPodDevice::~GPodDevice() {
 }
 
+void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
+  QMutexLocker l(&db_mutex_);
+  db_ = db;
+  db_wait_cond_.wakeAll();
+
+  loader_->deleteLater();
+  loader_ = NULL;
+}
+
 void GPodDevice::StartCopy() {
-  active_copy_mutex_.lock();
-
-  // Load the iTunes database
-  GError* error = NULL;
-  active_copy_db_ = itdb_parse(url_.path().toLocal8Bit(), &error);
-
-  // Check for errors
-  if (!active_copy_db_) {
-    qDebug() << "GPodDevice error:" << error->message;
-    emit Error(QString::fromUtf8(error->message));
-    g_error_free(error);
+  {
+    // Wait for the database to be loaded
+    QMutexLocker l(&db_mutex_);
+    if (!db_)
+      db_wait_cond_.wait(&db_mutex_);
   }
+
+  // Ensure only one "organise files" can be active at any one time
+  copy_in_progress_.lock();
 }
 
 bool GPodDevice::CopyToStorage(
     const QString& source, const QString&,
     const Song& metadata, bool, bool remove_original)
 {
-  if (!active_copy_db_)
-    return false;
+  Q_ASSERT(db_);
 
   // Create the track
   Itdb_Track* track = itdb_track_new();
@@ -75,8 +80,8 @@ bool GPodDevice::CopyToStorage(
 
   // Add it to the DB and the master playlist
   // The DB takes ownership of the track
-  itdb_track_add(active_copy_db_, track, -1);
-  Itdb_Playlist* mpl = itdb_playlist_mpl(active_copy_db_);
+  itdb_track_add(db_, track, -1);
+  Itdb_Playlist* mpl = itdb_playlist_mpl(db_);
   itdb_playlist_add_track(mpl, track, -1);
 
   // Copy the file
@@ -97,13 +102,13 @@ bool GPodDevice::CopyToStorage(
 
 void GPodDevice::FinishCopy() {
   GError* error = NULL;
-  itdb_write(active_copy_db_, &error);
+  itdb_write(db_, &error);
   if (error) {
     qDebug() << "GPodDevice error:" << error->message;
     emit Error(QString::fromUtf8(error->message));
     g_error_free(error);
   }
 
-  active_copy_mutex_.unlock();
+  copy_in_progress_.unlock();
 }
 
