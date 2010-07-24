@@ -112,7 +112,6 @@ if (WIN32)
   SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I../../dist/windows")
 endif(WIN32)
 
-add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
 add_definitions(-DQT_NO_CAST_TO_ASCII)
 
 # Translations stuff
@@ -181,11 +180,26 @@ if(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
   set(QTIOCOMPRESSOR_LIBRARIES qtiocompressor)
 endif(NOT QTIOCOMPRESSOR_INCLUDE_DIRS OR NOT QTIOCOMPRESSOR_LIBRARIES)
 
+# When/if upstream accepts our or reimplement our patches then these options can be
+# used to link to system installed qxt instead.
+option(USE_SYSTEM_QXT "Don't set this option unless your system Qxt library has been compiled with the Clementine patches in 3rdparty" OFF)
+if (USE_SYSTEM_QXT)
+  find_path(QXTCORE_INCLUDE_DIRS qxtglobal.h PATH_SUFFIXES QxtCore)
+  find_path(QXTGUI_INCLUDE_DIRS qxtglobalshortcut.h PATH_SUFFIXES QxtGui)
+  set(QXT_INCLUDE_DIRS ${QXTCORE_INCLUDE_DIRS} ${QXTGUI_INCLUDE_DIRS})
+  # We only need its header. We don't need to link to QxtCore.
+  find_library(QXT_LIBRARIES QxtGui)
+else (USE_SYSTEM_QXT)
+  if (NOT APPLE)
+    add_subdirectory(3rdparty/qxt)
+    add_definitions(-DQXT_STATIC -DBUILD_QXT_GUI -DBUILD_QXT_CORE)
+    set(QXT_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qxt)
+    set(QXT_LIBRARIES qxt)
+  endif (NOT APPLE)
+endif (USE_SYSTEM_QXT)
+
 # Subdirectories
 add_subdirectory(src)
-if (NOT APPLE)
-  add_subdirectory(3rdparty/qxt)
-endif (NOT APPLE)
 add_subdirectory(3rdparty/qtwin)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
