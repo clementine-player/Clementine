@@ -51,6 +51,8 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   AddShortcut("mute", tr("Mute"), SIGNAL(Mute()));
   AddShortcut("seek_forward", tr("Seek forward"), SIGNAL(SeekForward()));
   AddShortcut("seek_backward", tr("Seek backward"), SIGNAL(SeekBackward()));
+  AddShortcut("show_hide", tr("Show/Hide"), SIGNAL(ShowHide()));
+  AddShortcut("show_osd", tr("Show OSD"), SIGNAL(ShowOSD()));
 
   // Create backends - these do the actual shortcut registration
   if (IsGsdAvailable())

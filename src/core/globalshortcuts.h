@@ -64,6 +64,8 @@ signals:
   void Mute();
   void SeekForward();
   void SeekBackward();
+  void ShowHide();
+  void ShowOSD();
 
 private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

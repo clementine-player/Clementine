@@ -465,6 +465,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(global_shortcuts_, SIGNAL(Mute()), player_, SLOT(Mute()));
   connect(global_shortcuts_, SIGNAL(SeekForward()), player_, SLOT(SeekForward()));
   connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
+  connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
+  connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
 
   // Settings
