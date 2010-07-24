@@ -460,8 +460,8 @@ void DeviceManager::Disconnect(int row) {
     return;
 
   info.device_.reset();
-  emit dataChanged(index(row), index(row));
   emit DeviceDisconnected(row);
+  emit dataChanged(index(row), index(row));
 }
 
 void DeviceManager::Forget(int row) {
