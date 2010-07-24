@@ -128,6 +128,7 @@ class Song {
 
 #ifdef HAVE_LIBGPOD
   void InitFromItdb(Itdb_Track* track);
+  void ToItdb(Itdb_Track* track) const;
 #endif
 
   static QString Decode(const TagLib::String& tag, const QTextCodec* codec);

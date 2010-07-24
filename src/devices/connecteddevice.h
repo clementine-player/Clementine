@@ -51,6 +51,7 @@ protected:
   void InitBackendDirectory(const QString& mount_point, bool first_time);
 
 protected:
+  QUrl url_;
   DeviceLister* lister_;
   QString unique_id_;
   int database_id_;

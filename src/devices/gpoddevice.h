@@ -20,6 +20,8 @@
 #include "connecteddevice.h"
 #include "core/musicstorage.h"
 
+#include <QMutex>
+
 class GPodLoader;
 
 class GPodDevice : public ConnectedDevice, public MusicStorage {
@@ -36,12 +38,17 @@ public:
 
   MusicStorage* storage() { return this; }
 
+  void StartCopy();
   bool CopyToStorage(const QString &source, const QString &destination,
                      const Song &metadata, bool overwrite, bool remove_original);
+  void FinishCopy();
 
 private:
   QThread* loader_thread_;
   GPodLoader* loader_;
+
+  QMutex active_copy_mutex_;
+  Itdb_iTunesDB* active_copy_db_;
 };
 
 #endif // GPODDEVICE_H

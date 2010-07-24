@@ -30,9 +30,11 @@ public:
 
   virtual QString LocalPath() const { return QString(); }
 
+  virtual void StartCopy() {}
   virtual bool CopyToStorage(const QString& source, const QString& destination,
                              const Song& metadata, bool overwrite,
                              bool remove_original) = 0;
+  virtual void FinishCopy() {}
 };
 
 Q_DECLARE_METATYPE(MusicStorage*);

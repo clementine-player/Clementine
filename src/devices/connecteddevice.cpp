@@ -23,10 +23,11 @@
 
 #include <QtDebug>
 
-ConnectedDevice::ConnectedDevice(const QUrl&, DeviceLister* lister,
+ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
                                  const QString& unique_id, DeviceManager* manager,
                                  int database_id, bool)
   : QObject(manager),
+    url_(url),
     lister_(lister),
     unique_id_(unique_id),
     database_id_(database_id),

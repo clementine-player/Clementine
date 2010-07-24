@@ -562,6 +562,38 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->filename_ = QString::fromLocal8Bit(track->ipod_path);
     d->basefilename_ = QFileInfo(d->filename_).fileName();
   }
+
+  static void CopyStr(const QString& str, gchar** dest_p) {
+    Q_ASSERT(*dest_p == NULL);
+    const QByteArray data = str.toUtf8();
+    const int size = data.size() + 1;
+
+    gchar* dest = new gchar[size];
+    std::copy(data.constData(), data.constData() + size, dest);
+    *dest_p = dest;
+  }
+
+  void Song::ToItdb(Itdb_Track *track) const {
+    CopyStr(d->title_, &track->title);
+    CopyStr(d->album_, &track->album);
+    CopyStr(d->artist_, &track->artist);
+    CopyStr(d->albumartist_, &track->albumartist);
+    CopyStr(d->composer_, &track->composer);
+    track->track_nr = d->track_;
+    track->cd_nr = d->disc_;
+    track->BPM = d->bpm_;
+    track->year = d->year_;
+    CopyStr(d->genre_, &track->genre);
+    CopyStr(d->comment_, &track->comment);
+    track->compilation = d->compilation_;
+    track->tracklen = d->length_ * 1000;
+    track->bitrate = d->bitrate_;
+    track->samplerate = d->samplerate_;
+    track->time_modified = d->mtime_;
+    track->time_added = d->ctime_;
+    track->size = d->filesize_;
+    track->type2 = d->filetype_ == Type_Mp4 ? 0 : 1;
+  }
 #endif
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {

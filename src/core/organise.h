@@ -50,6 +50,8 @@ private:
   const bool overwrite_;
   QStringList files_;
 
+  bool started_;
+
   int task_id_;
   int progress_;
 };

@@ -35,6 +35,7 @@ Organise::Organise(TaskManager* task_manager, MusicStorage* destination,
                        copy_(copy),
                        overwrite_(overwrite),
                        files_(files),
+                       started_(false),
                        task_id_(0),
                        progress_(0)
 {
@@ -56,8 +57,15 @@ void Organise::Start() {
 }
 
 void Organise::ProcessSomeFiles() {
+  if (!started_) {
+    destination_->StartCopy();
+    started_ = true;
+  }
+
   // None left?
   if (progress_ >= files_.count()) {
+    destination_->FinishCopy();
+
     task_manager_->SetTaskFinished(task_id_);
 
     // Move back to the original thread so deleteLater() can get called in
