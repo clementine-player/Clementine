@@ -18,6 +18,7 @@
 #include "ui_organisedialog.h"
 #include "core/musicstorage.h"
 #include "core/organise.h"
+#include "ui/iconloader.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -27,7 +28,7 @@
 #include <QSignalMapper>
 #include <QtDebug>
 
-const int OrganiseDialog::kNumberOfPreviews = 5;
+const int OrganiseDialog::kNumberOfPreviews = 10;
 const char* OrganiseDialog::kDefaultFormat =
     "%artist/%album{ (Disc %disc)}/{%track - }%title.%extension";
 const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
@@ -39,6 +40,8 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
 {
   ui_->setupUi(this);
   connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(Reset()));
+
+  ui_->aftercopying->setItemIcon(1, IconLoader::Load("edit-delete"));
 
   // Valid tags
   QMap<QString, QString> tags;
@@ -139,7 +142,7 @@ void OrganiseDialog::LoadPreviewSongs(const QString& filename) {
 }
 
 void OrganiseDialog::SetCopy(bool copy) {
-  ui_->move->setChecked(!copy);
+  ui_->aftercopying->setCurrentIndex(copy ? 0 : 1);
 }
 
 void OrganiseDialog::InsertTag(const QString &tag) {
@@ -171,6 +174,7 @@ void OrganiseDialog::UpdatePreviews() {
   // Update the previews
   ui_->preview->clear();
   ui_->preview_group->setVisible(has_local_destination);
+  ui_->naming_group->setVisible(has_local_destination);
   if (has_local_destination) {
     foreach (const Song& song, preview_songs_) {
       QString filename = storage->LocalPath() + "/" +
@@ -178,6 +182,10 @@ void OrganiseDialog::UpdatePreviews() {
       ui_->preview->addItem(QDir::toNativeSeparators(filename));
     }
   }
+
+  QSize new_size = size();
+  new_size.setHeight(sizeHint().height());
+  resize(new_size);
 }
 
 void OrganiseDialog::Reset() {
@@ -220,9 +228,9 @@ void OrganiseDialog::accept() {
       destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
 
   // It deletes itself when it's finished.
+  const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
-      task_manager_, storage, format_,
-      !ui_->move->isChecked(), ui_->overwrite->isChecked(), filenames_);
+      task_manager_, storage, format_, copy, ui_->overwrite->isChecked(), filenames_);
   organise->Start();
 
   QDialog::accept();

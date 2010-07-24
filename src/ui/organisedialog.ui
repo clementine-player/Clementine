@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
-    <height>492</height>
+    <width>588</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,9 +20,6 @@
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QFormLayout" name="formLayout">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
@@ -36,96 +33,103 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>File naming scheme</string>
+        <string>After copying...</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <widget class="QComboBox" name="aftercopying">
        <item>
-        <widget class="LineTextEdit" name="naming">
-         <property name="toolTip">
-          <string>&lt;p&gt;Tokens start with %, for example: %artist %album %title &lt;/p&gt;
-
-&lt;p&gt;If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.&lt;/p&gt;</string>
-         </property>
-         <property name="lineWrapMode">
-          <enum>QTextEdit::NoWrap</enum>
-         </property>
-         <property name="acceptRichText">
-          <bool>false</bool>
-         </property>
-        </widget>
+        <property name="text">
+         <string>Keep the original files</string>
+        </property>
        </item>
        <item>
-        <widget class="QToolButton" name="insert">
-         <property name="text">
-          <string>Insert...</string>
-         </property>
-         <property name="popupMode">
-          <enum>QToolButton::InstantPopup</enum>
-         </property>
-        </widget>
+        <property name="text">
+         <string>Delete the original files</string>
+        </property>
        </item>
-      </layout>
-     </item>
-     <item row="2" column="0" colspan="2">
-      <widget class="QGroupBox" name="groupBox">
-       <property name="title">
-        <string>Options</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QCheckBox" name="replace_the">
-          <property name="text">
-           <string>Ignore &quot;The&quot; in artist names</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="replace_spaces">
-          <property name="text">
-           <string>Replaces spaces with underscores</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="replace_ascii">
-          <property name="text">
-           <string>Restrict to ASCII characters</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="overwrite">
-          <property name="text">
-           <string>Overwrite files</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="move">
-          <property name="text">
-           <string>Delete originals</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item row="3" column="0" colspan="2">
-      <widget class="QGroupBox" name="preview_group">
-       <property name="title">
-        <string>Preview</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QListWidget" name="preview"/>
-        </item>
-       </layout>
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="naming_group">
+     <property name="title">
+      <string>Naming options</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="LineTextEdit" name="naming">
+          <property name="toolTip">
+           <string>&lt;p&gt;Tokens start with %, for example: %artist %album %title &lt;/p&gt;
+
+&lt;p&gt;If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.&lt;/p&gt;</string>
+          </property>
+          <property name="lineWrapMode">
+           <enum>QTextEdit::NoWrap</enum>
+          </property>
+          <property name="acceptRichText">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="insert">
+          <property name="text">
+           <string>Insert...</string>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::InstantPopup</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="replace_the">
+        <property name="text">
+         <string>Ignore &quot;The&quot; in artist names</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="replace_spaces">
+        <property name="text">
+         <string>Replaces spaces with underscores</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="replace_ascii">
+        <property name="text">
+         <string>Restrict to ASCII characters</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="overwrite">
+        <property name="text">
+         <string>Overwrite existing files</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="preview_group">
+     <property name="title">
+      <string>Preview</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QListWidget" name="preview"/>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
