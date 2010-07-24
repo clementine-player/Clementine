@@ -23,6 +23,8 @@
 #include <QMutex>
 #include <QWaitCondition>
 
+#include <gpod/itdb.h>
+
 class GPodLoader;
 
 class GPodDevice : public ConnectedDevice, public MusicStorage {

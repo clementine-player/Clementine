@@ -19,15 +19,19 @@
 #include "devicemanager.h"
 #include "devicekitlister.h"
 #include "filesystemdevice.h"
-#include "giolister.h"
-#include "gpoddevice.h"
 #include "core/musicstorage.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
 #ifdef Q_OS_DARWIN
-#include "macdevicelister.h"
+#  include "macdevicelister.h"
+#endif
+#ifdef HAVE_LIBGPOD
+#  include "gpoddevice.h"
+#endif
+#ifdef HAVE_GIO
+#  include "giolister.h"
 #endif
 
 #include <QIcon>
