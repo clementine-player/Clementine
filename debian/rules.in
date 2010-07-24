@@ -5,8 +5,9 @@ configure: configure-stamp
 configure-stamp:
 	dh_testdir
 	cd bin && cmake .. \
-    -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/clementine/usr \
-    -DBUNDLE_PROJECTM_PRESETS=OFF
+	  -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/clementine/usr \
+	  -DBUNDLE_PROJECTM_PRESETS=OFF \
+	  -DBUILDBOT_REVISION=@BUILDBOT_REVISION@
 	touch configure-stamp
 
 build: build-stamp
