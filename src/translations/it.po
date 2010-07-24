@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-26 17:31+0000\n"
-"PO-Revision-Date: 2010-06-26 21:00+0000\n"
+"POT-Creation-Date: 2010-07-13 03:09+0000\n"
+"PO-Revision-Date: 2010-07-13 06:56+0000\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"X-Launchpad-Export-Date: 2010-06-27 03:57+0000\n"
+"X-Launchpad-Export-Date: 2010-07-14 03:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Language: it\n"
 
 msgid " ms"
 msgstr " ms"
@@ -90,6 +90,12 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
+"<p>Le variabili iniziano con %, ad esempio: %artist %album %title </p>\n"
+"\n"
+"<p>Se racchiudi sezioni di testo che contengono una variabile tra "
+"parentesi \n"
+"graffe, queste sezioni saranno nascoste se la variabile non contiene alcun \n"
+"valore.</p>"
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -183,7 +189,7 @@ msgid "All Files (*)"
 msgstr "Tutti i file (*)"
 
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "Tutti adorano il rospo ipnotico!"
 
 msgid "All albums"
 msgstr "Tutti gli album"
@@ -212,7 +218,7 @@ msgid "An unknown last.fm error occurred: %1"
 msgstr "Si è verificato un errore di last.fm: %1"
 
 msgid "And:"
-msgstr ""
+msgstr "E:"
 
 msgid "Append files/URLs to the playlist"
 msgstr "Aggiungi file/URL alla scaletta"
@@ -246,7 +252,7 @@ msgid "Authors"
 msgstr "Autori"
 
 msgid "Automatic updating"
-msgstr ""
+msgstr "Aggiornamento automatico"
 
 msgid "Automatically open single categories in the library tree"
 msgstr "Apri automaticamente categorie singole nell'albero della raccolta"
@@ -288,7 +294,7 @@ msgid "Browse..."
 msgstr "Sfoglia..."
 
 msgid "Capacity"
-msgstr ""
+msgstr "Capacità"
 
 msgid "Change shortcut..."
 msgstr "Cambia la scorciatoia"
@@ -312,7 +318,7 @@ msgid "Classical"
 msgstr "Classica"
 
 msgid "Clear"
-msgstr ""
+msgstr "Svuota"
 
 msgid "Clear playlist"
 msgstr "Svuota la scaletta"
@@ -336,6 +342,8 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
+"Clementine non può caricare alcuna visualizzazione projectM. Controlla che "
+"Clementine sia installato correttamente."
 
 msgid "Click here to add some music"
 msgstr "Fai clic qui per aggiungere della musica"
@@ -371,10 +379,10 @@ msgid "Configure library..."
 msgstr "Configura raccolta..."
 
 msgid "Connect device"
-msgstr ""
+msgstr "Connetti dispositivo"
 
 msgid "Connected"
-msgstr ""
+msgstr "Connesso"
 
 msgid "Copy to device..."
 msgstr ""
@@ -453,7 +461,7 @@ msgid "Custom..."
 msgstr "Personalizzato..."
 
 msgid "DBus path"
-msgstr ""
+msgstr "Percorso DBus"
 
 msgid "Dance"
 msgstr "Dance"
@@ -492,10 +500,10 @@ msgid "Delete preset"
 msgstr "Elimina la preimpostazione"
 
 msgid "Dequeue selected tracks"
-msgstr ""
+msgstr "Rimuovi le tracce selezionate dalla coda"
 
 msgid "Dequeue track"
-msgstr ""
+msgstr "Rimuovi tracce dalla coda"
 
 msgid "Destination"
 msgstr "Destinazione"
@@ -504,16 +512,16 @@ msgid "Details..."
 msgstr "Dettagli..."
 
 msgid "Device"
-msgstr ""
+msgstr "Dispositivo"
 
 msgid "Device Properties"
-msgstr ""
+msgstr "Proprietà del dispositivo"
 
 msgid "Device properties..."
-msgstr ""
+msgstr "Proprietà del dispositivo..."
 
 msgid "Devices"
-msgstr ""
+msgstr "Dispositivi"
 
 msgid "Directory"
 msgstr "Cartella"
@@ -525,7 +533,7 @@ msgid "Disc"
 msgstr "Disco"
 
 msgid "Disconnect device"
-msgstr ""
+msgstr "Disconnetti dispositivo"
 
 msgid "Display options"
 msgstr "Opzioni di visualizzazione"
@@ -546,7 +554,7 @@ msgid "Don't stop!"
 msgstr "Non fermare!"
 
 msgid "Double click to open"
-msgstr ""
+msgstr "Doppio clic per aprire"
 
 msgid "Double-clicking a song clears the playlist first"
 msgstr "Il doppio clic su un brano svuota la scaletta"
@@ -555,7 +563,7 @@ msgid "Download directory"
 msgstr "Cartella degli scaricamenti"
 
 msgid "Download membership"
-msgstr ""
+msgstr "Scaricamento"
 
 msgid "Download this album"
 msgstr "Scarica questo album"
@@ -694,12 +702,15 @@ msgid "First level"
 msgstr "Primo livello"
 
 msgid "Forget device"
-msgstr ""
+msgstr "Elimina dispositivo"
 
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
 msgstr ""
+"L'eliminazione di un dispositivo lo rimuoverà da questo elenco e Clementine "
+"dovrà effettuare una nuova scansione di tutti i brani al successivo "
+"collegamento."
 
 msgid "Form"
 msgstr "Modulo"
@@ -769,10 +780,12 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Raggruppa per genere/artista/album"
 
 msgid "Hardware information"
-msgstr ""
+msgstr "Informazioni hardware"
 
 msgid "Hardware information is only available while the device is connected."
 msgstr ""
+"Le informazioni hardware sono disponibili solo quando il dispositivo è "
+"connesso."
 
 msgid "Help"
 msgstr "Aiuto"
@@ -794,7 +807,7 @@ msgid "I don't have a Magnatune account"
 msgstr "Non ho un account Magnatune"
 
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignora \"The\" nei nomi degli artisti"
@@ -926,7 +939,7 @@ msgid "Loading Last.fm radio"
 msgstr "Caricamento radio Last.fm"
 
 msgid "Loading iPod database"
-msgstr ""
+msgstr "Caricamento database dell'iPod"
 
 msgid "Loading stream"
 msgstr "Caricamento flusso"
@@ -968,7 +981,7 @@ msgid "Malformed response"
 msgstr "Risposta non corretta"
 
 msgid "Manufacturer"
-msgstr ""
+msgstr "Produttore"
 
 msgid "Medium (25 fps)"
 msgstr "Media (25 fps)"
@@ -980,28 +993,28 @@ msgid "Membership type"
 msgstr "Tipo d'iscrizione"
 
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "Preimpostazioni projectM mancanti"
 
 msgid "Model"
-msgstr ""
+msgstr "Modello"
 
 msgid "Monitor the library for changes"
-msgstr ""
+msgstr "Controlla i cambiamenti alla raccolta"
 
 msgid "Mount point"
 msgstr ""
 
 msgid "Mount points"
-msgstr ""
+msgstr "Punti di mount"
 
 msgid "Move down"
-msgstr ""
+msgstr "Sposta in basso"
 
 msgid "Move to library..."
 msgstr "Sposta nella raccolta..."
 
 msgid "Move up"
-msgstr ""
+msgstr "Sposta in alto"
 
 msgid "Music"
 msgstr "Musica"
@@ -1052,7 +1065,7 @@ msgid "None"
 msgstr "Nessuna"
 
 msgid "Not connected"
-msgstr ""
+msgstr "Non connesso"
 
 msgid "Not enough content"
 msgstr "Contenuti non sufficienti"
@@ -1224,13 +1237,13 @@ msgid "Quality"
 msgstr "Qualità"
 
 msgid "Queue Manager"
-msgstr ""
+msgstr "Gestore della coda"
 
 msgid "Queue selected tracks"
-msgstr ""
+msgstr "Accoda le tracce selezionate"
 
 msgid "Queue track"
-msgstr ""
+msgstr "Accoda la traccia"
 
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (volume uguale per tutte le tracce)"
@@ -1371,7 +1384,7 @@ msgid "Select visualizations..."
 msgstr "Seleziona visualizzazioni..."
 
 msgid "Serial number"
-msgstr ""
+msgstr "Numero seriale"
 
 msgid "Service offline"
 msgstr "Servizio non in linea"
@@ -1412,7 +1425,7 @@ msgid "Show a pretty OSD"
 msgstr "Mostra un OSD gradevole"
 
 msgid "Show above status bar"
-msgstr ""
+msgstr "Mostra la barra di stato superiore"
 
 msgid "Show fullsize..."
 msgstr "Mostra a dimensioni originali..."
@@ -1500,7 +1513,7 @@ msgid "Stream"
 msgstr "Flusso"
 
 msgid "Streaming membership"
-msgstr ""
+msgstr "Trasmissione"
 
 #, qt-format
 msgid "Successfully written %1"
@@ -1556,6 +1569,9 @@ msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr ""
+"È la prima volta che si connette questo dispositivo. Clementine effettuerà "
+"una scansione del dispositivo alla ricerca di file musicali - l'operazione "
+"potrebbe richiedere del tempo."
 
 msgid "This stream is for paid subscribers only"
 msgstr "Questo flusso è riservato ai soli abbonati"
@@ -1571,7 +1587,7 @@ msgid "Toggle fullscreen"
 msgstr "Attiva la modalità a schermo intero"
 
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Cambia lo stato della coda"
 
 msgid "Tools"
 msgstr "Strumenti"
@@ -1630,7 +1646,7 @@ msgstr "Aggiornamento di %1"
 
 #, qt-format
 msgid "Updating %1%..."
-msgstr ""
+msgstr "Aggiornamento %1%..."
 
 msgid "Updating library"
 msgstr "Aggiornamento raccolta"
@@ -1706,12 +1722,18 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-weight:600;"
 "\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
+"Puoi inviare informazioni sulle tracce gratuitamente, ma solo gli <span "
+"style=\" font-weight:600;\">abbonati a pagamento</span> possono ascoltare le "
+"radio Last.fm da Clementine"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
+"Devi aprire le preferenze di sistema e attivare \"<span style=\" font-style:"
+"italic;\">Abilita l'accesso per i dispositivi di assistenza</span>\" per "
+"utilizzare le scorciatoie globali in Clementine."
 
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Le credenziali Last.fm non sono corrette"
@@ -1756,7 +1778,7 @@ msgid "remove %n songs"
 msgstr "rimuovi %n brani"
 
 msgid "stop"
-msgstr ""
+msgstr "ferma"
 
 #, qt-format
 msgid "track %1"

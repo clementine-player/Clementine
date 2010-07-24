@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-26 17:31+0000\n"
-"PO-Revision-Date: 2010-06-26 18:14+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
+"POT-Creation-Date: 2010-07-20 03:06+0000\n"
+"PO-Revision-Date: 2010-07-20 06:51+0000\n"
+"Last-Translator: Pavel Maleev <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"X-Launchpad-Export-Date: 2010-06-27 03:57+0000\n"
+"X-Launchpad-Export-Date: 2010-07-21 03:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Language: ru\n"
 
 msgid " ms"
 msgstr " мс"
@@ -88,6 +88,10 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
+"<p>Поля начинаются со знака %, например: %artist %album %title </p>\n"
+"\n"
+"<p>Если вы окружили часть текста фигурными скобками, то эта часть текста не "
+"будет видна если в значения полей будут отсутствовать</p>"
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -160,7 +164,7 @@ msgid "Advanced grouping..."
 msgstr "Расширенная сортировка..."
 
 msgid "Album"
-msgstr "%n альбом"
+msgstr "Альбом"
 
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Альбом(идеальная громкость для всех композиций)"
@@ -213,7 +217,7 @@ msgid "And:"
 msgstr ""
 
 msgid "Append files/URLs to the playlist"
-msgstr "Добавить файлы /URLs в список воспроизведения"
+msgstr "Добавить файлы/URLs в список воспроизведения"
 
 msgid "Apply compression to prevent clipping"
 msgstr "Применить сжатие для предотвращения отсечения"
@@ -232,7 +236,7 @@ msgid "Artist's initial"
 msgstr "Инициалы исполнителя"
 
 msgid "Audio format"
-msgstr "формат аудио"
+msgstr "Формат аудио"
 
 msgid "Authenticating..."
 msgstr "Аутентификация..."
@@ -244,7 +248,7 @@ msgid "Authors"
 msgstr "Авторы"
 
 msgid "Automatic updating"
-msgstr ""
+msgstr "Автоматическое обновление"
 
 msgid "Automatically open single categories in the library tree"
 msgstr "Автоматически открывать одиночные категории в дереве коллекции"
@@ -286,19 +290,19 @@ msgid "Browse..."
 msgstr "Обзор..."
 
 msgid "Capacity"
-msgstr ""
+msgstr "Объём"
 
 msgid "Change shortcut..."
 msgstr "Изменить горячую клавишу..."
 
 msgid "Check for updates..."
-msgstr "Проверить обновления"
+msgstr "Проверить обновления..."
 
 msgid "Choose automatically"
 msgstr "Выбрать автоматически"
 
 msgid "Choose color..."
-msgstr "Выберете цвет"
+msgstr "Выбрать цвет..."
 
 msgid "Choose from the list"
 msgstr "Выбор из списка"
@@ -310,7 +314,7 @@ msgid "Classical"
 msgstr "Classical"
 
 msgid "Clear"
-msgstr ""
+msgstr "Очистить"
 
 msgid "Clear playlist"
 msgstr "Очистить список воспроизведения"
@@ -334,6 +338,8 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
+"Clementine не может загрузить какою-либо визуализацию projectM. Проверьте, "
+"что установили Clementine правильно."
 
 msgid "Click here to add some music"
 msgstr "Щелкните здесь, чтобы добавить музыку"
@@ -369,13 +375,13 @@ msgid "Configure library..."
 msgstr "Настроить коллекцию..."
 
 msgid "Connect device"
-msgstr ""
+msgstr "Подсоединение устройства"
 
 msgid "Connected"
-msgstr ""
+msgstr "Подключено"
 
 msgid "Copy to device..."
-msgstr ""
+msgstr "Копировать на устройство..."
 
 msgid "Copy to library..."
 msgstr "Копировать в коллекцию..."
@@ -394,7 +400,7 @@ msgstr "Невозможно загрузить радиостанцию last.fm
 
 #, qt-format
 msgid "Couldn't open output file %1"
-msgstr ""
+msgstr "Невозможно открыть выходной файл %1"
 
 msgid "Cover Manager"
 msgstr "Менеджер обложек"
@@ -451,7 +457,7 @@ msgid "Custom..."
 msgstr "Пользовательский..."
 
 msgid "DBus path"
-msgstr ""
+msgstr "DBus path"
 
 msgid "Dance"
 msgstr "Dance"
@@ -478,7 +484,7 @@ msgid "Delete files..."
 msgstr "Удалить файлы..."
 
 msgid "Delete from device..."
-msgstr ""
+msgstr "Удалить с устройства"
 
 msgid "Delete from disk..."
 msgstr "Удалить с диска..."
@@ -490,10 +496,10 @@ msgid "Delete preset"
 msgstr "Удалить настройку"
 
 msgid "Dequeue selected tracks"
-msgstr ""
+msgstr "Убрать из очереди выбранные композиции"
 
 msgid "Dequeue track"
-msgstr ""
+msgstr "Убрать из очереди композицию"
 
 msgid "Destination"
 msgstr "Назначение"
@@ -502,19 +508,19 @@ msgid "Details..."
 msgstr "Подробнее..."
 
 msgid "Device"
-msgstr ""
+msgstr "Носитель"
 
 msgid "Device Properties"
-msgstr ""
+msgstr "Свойства носителя"
 
 msgid "Device properties..."
-msgstr ""
+msgstr "Свойства носителя..."
 
 msgid "Devices"
-msgstr ""
+msgstr "Носители"
 
 msgid "Directory"
-msgstr "Директория"
+msgstr "Каталог"
 
 msgid "Disabled"
 msgstr "Отключено"
@@ -523,7 +529,7 @@ msgid "Disc"
 msgstr "Диск"
 
 msgid "Disconnect device"
-msgstr ""
+msgstr "Отсоединение устройства"
 
 msgid "Display options"
 msgstr "Настройки отображения"
@@ -535,16 +541,16 @@ msgid "Don't repeat"
 msgstr "Не повторять"
 
 msgid "Don't show in various artists"
-msgstr "Не показывать в разных исполнителях"
+msgstr "Не показывать в \"Разных исполнителях\""
 
 msgid "Don't shuffle"
 msgstr "Не перемешивать"
 
 msgid "Don't stop!"
-msgstr ""
+msgstr "Не останавливать!"
 
 msgid "Double click to open"
-msgstr ""
+msgstr "Двойной щелчок для открытия"
 
 msgid "Double-clicking a song clears the playlist first"
 msgstr "Двойной щелчок мышью на композиции стирает список воспроизведения"
@@ -572,10 +578,10 @@ msgid "Edit tag..."
 msgstr "Редактировать тег..."
 
 msgid "Edit track information"
-msgstr "Редактировать информацию"
+msgstr "Изменение информации о композиции"
 
 msgid "Edit track information..."
-msgstr "Редактировать информацию о композиции..."
+msgstr "Изменить информацию о композиции..."
 
 msgid "Edit..."
 msgstr "Изменить..."
@@ -598,7 +604,7 @@ msgid ""
 msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
 
 msgid "Enter search terms here"
-msgstr "Введите выражение для поиска"
+msgstr "Поиск..."
 
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Введите адрес радиопотока:"
@@ -621,7 +627,7 @@ msgid "Error processing %1: %2"
 msgstr "Ошибка при обработке %1: %2"
 
 msgid "Extras"
-msgstr "Дополнительно"
+msgstr "Расширения"
 
 msgid "F1"
 msgstr "F1"
@@ -654,7 +660,7 @@ msgid "Fading duration"
 msgstr "Длительность затухания"
 
 msgid "Fetch Missing Covers"
-msgstr "Выберете пропущенные обложки"
+msgstr "Выберите пропущенные обложки"
 
 msgid "Fetch automatically"
 msgstr "Выбирать автоматически"
@@ -672,13 +678,13 @@ msgid "File naming scheme"
 msgstr "Схема имени файла"
 
 msgid "File size"
-msgstr "Размер"
+msgstr "Размер файла"
 
 msgid "File type"
-msgstr "Тип"
+msgstr "Тип Файла"
 
 msgid "Filename"
-msgstr "Имя Файла"
+msgstr "Имя файла"
 
 msgid "Files"
 msgstr "Файлы"
@@ -690,12 +696,14 @@ msgid "First level"
 msgstr "Первый уровень"
 
 msgid "Forget device"
-msgstr ""
+msgstr "\"Забыть\" устройство"
 
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
 msgstr ""
+"Если выбрать \"Забыть устройство\", то оно будет удалено из этого списка и "
+"Clementine пересканирует все песни на нём при следующем подключении"
 
 msgid "Form"
 msgstr "Форма"
@@ -738,7 +746,7 @@ msgstr "Глобальные комбинации клавиш"
 
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr ""
+msgstr "Получено %1 обложек из %2 (%3 загрузить не удалось)"
 
 msgid "Group Library by..."
 msgstr "Сортировать коллекцию по..."
@@ -765,10 +773,10 @@ msgid "Group by Genre/Artist/Album"
 msgstr "Сортировать по Жанр/Исполнитель/Альбом"
 
 msgid "Hardware information"
-msgstr ""
+msgstr "Информация об оборудовании"
 
 msgid "Hardware information is only available while the device is connected."
-msgstr ""
+msgstr "Информация об оборудовании доступна только если устройство подключено"
 
 msgid "Help"
 msgstr "Помощь"
@@ -790,7 +798,7 @@ msgid "I don't have a Magnatune account"
 msgstr "У меня нет учётной записи Magnatune"
 
 msgid "Icon"
-msgstr ""
+msgstr "Значок"
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Игнорировать \"The\" в имени исполнителя"
@@ -820,13 +828,13 @@ msgid "Invalid API key"
 msgstr "Неправильный ключ API"
 
 msgid "Invalid format"
-msgstr "Неправильный формат"
+msgstr "Неверный формат"
 
 msgid "Invalid method"
 msgstr "Неправильный метод"
 
 msgid "Invalid parameters"
-msgstr "Неправильные параметры"
+msgstr "Неверные параметры"
 
 msgid "Invalid resource specified"
 msgstr "Неправильно указан источник"
@@ -841,7 +849,7 @@ msgid "Jump to the currently playing track"
 msgstr "Перейти к текущей композиции"
 
 msgid "Laptop/Headphones"
-msgstr "портативный компьютер/наушники"
+msgstr "Портативный компьютер/наушники"
 
 msgid "Large Hall"
 msgstr "Large Hall"
@@ -921,7 +929,7 @@ msgid "Loading Last.fm radio"
 msgstr "Загрузка радио Last.fm"
 
 msgid "Loading iPod database"
-msgstr ""
+msgstr "Загружается база данных iPod"
 
 msgid "Loading stream"
 msgstr "Загрузка потока"
@@ -957,13 +965,13 @@ msgid "Magnatune Download"
 msgstr "Загрузка Magnatune"
 
 msgid "Magnatune download finished"
-msgstr ""
+msgstr "Загрузка Magnatune окончена"
 
 msgid "Malformed response"
 msgstr "Неправильный ответ"
 
 msgid "Manufacturer"
-msgstr ""
+msgstr "Производитель"
 
 msgid "Medium (25 fps)"
 msgstr "Средняя (25 fps)"
@@ -972,37 +980,37 @@ msgid "Medium (512x512)"
 msgstr "Среднее (512x512)"
 
 msgid "Membership type"
-msgstr ""
+msgstr "Тип подписки"
 
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "Пропущенные установки projectM"
 
 msgid "Model"
-msgstr ""
+msgstr "Модель"
 
 msgid "Monitor the library for changes"
-msgstr ""
+msgstr "Следить за изменениями бибилиотеки"
 
 msgid "Mount point"
-msgstr ""
+msgstr "Точка монтирования"
 
 msgid "Mount points"
-msgstr ""
+msgstr "Точки монтирования"
 
 msgid "Move down"
-msgstr ""
+msgstr "Переместить вниз"
 
 msgid "Move to library..."
 msgstr "Переместить в коллекцию..."
 
 msgid "Move up"
-msgstr ""
+msgstr "Переместить вверх"
 
 msgid "Music"
 msgstr "Музыка"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr "музыка (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Музыка (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Музыкальная коллекция"
@@ -1044,16 +1052,16 @@ msgstr ""
 "воспроизведения."
 
 msgid "None"
-msgstr "Нет"
+msgstr "Ничего"
 
 msgid "Not connected"
-msgstr ""
+msgstr "Не подключено"
 
 msgid "Not enough content"
-msgstr "Не достаточно содержания"
+msgstr "Недостаточно содержания"
 
 msgid "Not enough fans"
-msgstr "Не достаточно фанов"
+msgstr "Недостаточно фанов"
 
 msgid "Not enough members"
 msgstr "Не достаточно участников"
@@ -1104,7 +1112,7 @@ msgid "Organise files..."
 msgstr "Упорядочить файлы..."
 
 msgid "Organising files"
-msgstr ""
+msgstr "Организация файлов"
 
 msgid "Other options"
 msgstr "Другие настройки"
@@ -1164,16 +1172,16 @@ msgid "Player options"
 msgstr "Настройки проигрывателя"
 
 msgid "Playlist"
-msgstr "Плейлист"
+msgstr "Список воспроизведения"
 
 msgid "Playlist finished"
-msgstr "Плейлист закончен"
+msgstr "Список воспроизведения закончился"
 
 msgid "Playlist options"
 msgstr "Настройки списка воспроизведения"
 
 msgid "Playlist search"
-msgstr "Поиск списка вопсроизведения"
+msgstr "Поиск по списку воспроизведения"
 
 msgid "Pop"
 msgstr "Pop"
@@ -1194,7 +1202,7 @@ msgid "Preferred audio format"
 msgstr "Предпочитаемый аудио формат"
 
 msgid "Preset:"
-msgstr "Настройка:"
+msgstr "Профиль:"
 
 msgid "Press a key"
 msgstr "Нажмите клавишу"
@@ -1219,13 +1227,13 @@ msgid "Quality"
 msgstr "Качество"
 
 msgid "Queue Manager"
-msgstr ""
+msgstr "Управление очередью"
 
 msgid "Queue selected tracks"
-msgstr ""
+msgstr "Добавить в очередь выбранные композиции"
 
 msgid "Queue track"
-msgstr ""
+msgstr "Добавить в очередь композицию"
 
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радио (одинаковая громкость для всех композиций)"
@@ -1276,22 +1284,22 @@ msgid "Renumber tracks in this order..."
 msgstr "Перенумеровать композиции в таком порядке..."
 
 msgid "Repeat"
-msgstr "Повторить"
-
-msgid "Repeat album"
-msgstr "Повторить альбом"
-
-msgid "Repeat mode"
 msgstr "Повторять"
 
+msgid "Repeat album"
+msgstr "Повторять альбом"
+
+msgid "Repeat mode"
+msgstr "Режим повтора"
+
 msgid "Repeat playlist"
-msgstr "Повторить список воспроизведения"
+msgstr "Повторять список воспроизведения"
 
 msgid "Repeat track"
-msgstr "Повторить композицию"
+msgstr "Повторять композицию"
 
 msgid "Replaces spaces with underscores"
-msgstr "Заменить пробелы подчеркиванием"
+msgstr "Заменять пробелы подчеркиванием"
 
 msgid "Replay Gain"
 msgstr "Replay Gain"
@@ -1300,7 +1308,7 @@ msgid "Replay Gain mode"
 msgstr "Режим Replay Gain"
 
 msgid "Restrict to ASCII characters"
-msgstr ""
+msgstr "Ограничить только символами ASCII"
 
 msgid "Rock"
 msgstr "Rock"
@@ -1315,10 +1323,10 @@ msgid "Save playlist"
 msgstr "Сохранить список воспроизведения"
 
 msgid "Save playlist..."
-msgstr "Сохранить список воспроизведения"
+msgstr "Сохранить список воспроизведения..."
 
 msgid "Save preset"
-msgstr "Сохранить настройку"
+msgstr "Сохранить профиль"
 
 msgid "Save this stream in the Internet tab"
 msgstr "Сохранить этот поток в закладке Интернет"
@@ -1366,7 +1374,7 @@ msgid "Select visualizations..."
 msgstr "Выбрать визуализации..."
 
 msgid "Serial number"
-msgstr ""
+msgstr "Серийный номер"
 
 msgid "Service offline"
 msgstr "Служба не работает"
@@ -1407,13 +1415,13 @@ msgid "Show a pretty OSD"
 msgstr "Показывать OSD"
 
 msgid "Show above status bar"
-msgstr ""
+msgstr "Показать над строкой состояния"
 
 msgid "Show fullsize..."
 msgstr "Показать полный размер..."
 
 msgid "Show in various artists"
-msgstr "Показать в разных исполнителях"
+msgstr "Показать в \"Разных исполнителях\""
 
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Показывать кнопки \"Избранное\" и \"Запретить\""
@@ -1425,13 +1433,13 @@ msgid "Show/Hide"
 msgstr ""
 
 msgid "Shuffle"
-msgstr "Перемешать"
+msgstr "Случайный порядок"
 
 msgid "Shuffle all"
-msgstr "Перемешать все"
+msgstr "Все в случайном порядке"
 
 msgid "Shuffle by album"
-msgstr "Перемешать альбомы"
+msgstr "Альбомы в случайном порядке"
 
 msgid "Shuffle mode"
 msgstr "Случайно"
@@ -1495,7 +1503,7 @@ msgid "Stream"
 msgstr "Поток"
 
 msgid "Streaming membership"
-msgstr ""
+msgstr "Streaming подписка"
 
 #, qt-format
 msgid "Successfully written %1"
@@ -1525,7 +1533,7 @@ msgstr "Команда \"%1\" не может быть выполнена"
 
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr ""
+msgstr "Каталог %1 неправильный"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
@@ -1542,19 +1550,22 @@ msgid "Third level"
 msgstr "Третий уровень"
 
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "Этот альбом не доступен в требуемом формате"
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr ""
+"Это первый раз, когда вы подключили это устройство. Clementine "
+"просканировать устройство для получения музыкальных файлов - это может "
+"занять некоторое время"
 
 msgid "This stream is for paid subscribers only"
 msgstr "Этот поток только для платных подписчиков"
 
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr ""
+msgstr "Этот тип устройства не поддерживается: %1"
 
 msgid "Title"
 msgstr "Название"
@@ -1563,7 +1574,7 @@ msgid "Toggle fullscreen"
 msgstr "Переключение в полноэкранный режим"
 
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Переключить состояние очереди"
 
 msgid "Tools"
 msgstr "Инструменты"
@@ -1588,7 +1599,7 @@ msgid "Turbine"
 msgstr "Турбина"
 
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 msgid "URL(s)"
 msgstr "URL(s)"
@@ -1614,15 +1625,15 @@ msgid "Update Library"
 msgstr "Обновить коллекцию"
 
 msgid "Update the library when Clementine starts"
-msgstr "Обновить коллекцию при старте Clementine"
+msgstr "Обновлять коллекцию при старте Clementine"
 
 #, qt-format
 msgid "Updating %1"
-msgstr ""
+msgstr "Идет обновление %1"
 
 #, qt-format
 msgid "Updating %1%..."
-msgstr ""
+msgstr "Обновление %1%..."
 
 msgid "Updating library"
 msgstr "Обновление библиотеки"
@@ -1690,6 +1701,8 @@ msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a "
 "membership removes the messages at the end of each track."
 msgstr ""
+"Вы можете слушать песни с Magnatune свободно без регистрации. Регистрация "
+"убирает сообщения в конце каждой композиции."
 
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-weight:600;"
@@ -1704,6 +1717,9 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
+"Вы должны запустить Настройку системы (System Preferences) и включить "
+"функцию \"Разрешить доступ для вспомогательных  устройств\" для "
+"использования глобальных горячих клавиш в Clementine"
 
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Ваши данные Last.fm некорректны"
@@ -1715,7 +1731,7 @@ msgid "Your radio streams"
 msgstr "Ваши потоки радио"
 
 msgid "Zero"
-msgstr "Zero"
+msgstr "По-умолчанию"
 
 msgid "[click to edit]"
 msgstr "[щелкните, чтобы изменить]"
@@ -1725,10 +1741,10 @@ msgid "add %n songs"
 msgstr "добавить %n композиций"
 
 msgid "available"
-msgstr ""
+msgstr "доступно"
 
 msgid "bpm"
-msgstr "ударов в минуту"
+msgstr "bpm"
 
 #, qt-format
 msgid "disc %1"
@@ -1748,7 +1764,7 @@ msgid "remove %n songs"
 msgstr "удалить %n композиций"
 
 msgid "stop"
-msgstr ""
+msgstr "Остановить"
 
 #, qt-format
 msgid "track %1"

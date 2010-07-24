@@ -314,6 +314,7 @@ set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compil
 if (LINGUAS STREQUAL "All")
   set (LANGUAGES
     ar
+    bg
     cs
     da
     de
@@ -326,7 +327,9 @@ if (LINGUAS STREQUAL "All")
     gl
     it
     kk
+    lt
     nb
+    nl
     oc
     pl
     pt
@@ -334,6 +337,7 @@ if (LINGUAS STREQUAL "All")
     ro
     ru
     sk
+    sr
     sv
     tr
     uk
