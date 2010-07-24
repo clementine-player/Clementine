@@ -106,20 +106,26 @@ SongLoader::Result SongLoader::LoadLocal() {
   QByteArray data(file.read(PlaylistParser::kMagicSize));
 
   ParserBase* parser = playlist_parser_->MaybeGetParserForMagic(data);
+  if (!parser) {
+    // Check the file extension as well, maybe the magic failed, or it was a
+    // basic M3U file which is just a plain list of filenames.
+    parser = playlist_parser_->ParserForExtension(QFileInfo(filename).suffix());
+  }
+
   if (parser) {
     qDebug() << "Parsing using" << parser->name();
 
     // It's a playlist!
     file.reset();
     songs_ = parser->Load(&file, QFileInfo(filename).path());
-  } else {
-    // Not a playlist, so just assume it's a song
-    Song song;
-    song.InitFromFile(filename, -1);
-    if (song.is_valid())
-      songs_ << song;
+    return Success;
   }
 
+  // Not a playlist, so just assume it's a song
+  Song song;
+  song.InitFromFile(filename, -1);
+  if (song.is_valid())
+    songs_ << song;
   return Success;
 }
 

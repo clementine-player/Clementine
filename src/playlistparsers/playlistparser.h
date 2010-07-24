@@ -36,13 +36,12 @@ public:
 
   ParserBase* MaybeGetParserForMagic(const QByteArray& data,
                                      const QString& mime_type = QString()) const;
+  ParserBase* ParserForExtension(const QString& suffix) const;
 
   SongList Load(const QString& filename, ParserBase* parser = 0) const;
   void Save(const SongList& songs, const QString& filename) const;
 
 private:
-  ParserBase* ParserForExtension(const QString& suffix) const;
-
   QList<ParserBase*> parsers_;
 };
 
