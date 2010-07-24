@@ -378,6 +378,9 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
       if ( !file->tag()->fieldListMap()["COMPOSER"].isEmpty() )
         d->composer_ = Decode(file->tag()->fieldListMap()["COMPOSER"].front(), codec);
 
+      if ( !file->tag()->fieldListMap()["ALBUMARTIST"].isEmpty() )
+        d->albumartist_ = Decode(file->tag()->fieldListMap()["ALBUMARTIST"].front(), codec);
+
       if ( !file->tag()->fieldListMap()["BPM"].isEmpty() )
         d->bpm_ = TStringToQString(file->tag()->fieldListMap()["BPM"].front()).trimmed().toFloat();
 
@@ -392,6 +395,9 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     if ( file->xiphComment() ) {
       if (!file->xiphComment()->fieldListMap()["COMPOSER"].isEmpty())
         d->composer_ = Decode(file->xiphComment()->fieldListMap()["COMPOSER"].front(), codec);
+
+      if (!file->xiphComment()->fieldListMap()["ALBUMARTIST"].isEmpty())
+        d->albumartist_ = Decode(file->xiphComment()->fieldListMap()["ALBUMARTIST"].front(), codec);
 
       if (!file->xiphComment()->fieldListMap()["BPM"].isEmpty() )
         d->bpm_ = TStringToQString( file->xiphComment()->fieldListMap()["BPM"].front() ).trimmed().toFloat();
