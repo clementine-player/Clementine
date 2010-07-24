@@ -139,3 +139,9 @@ TEST_F(OrganiseFormatTest, TrackNumberPadding) {
   song_.set_track(0);
   EXPECT_EQ("", format_.GetFilenameForSong(song_));
 }
+
+TEST_F(OrganiseFormatTest, ReplaceSlashes) {
+  format_.set_format("%title");
+  song_.set_title("foo/bar\\baz");
+  EXPECT_EQ("foo_bar_baz", format_.GetFilenameForSong(song_));
+}
