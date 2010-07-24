@@ -56,14 +56,16 @@ CFTypeRef GetUSBRegistryEntry(io_object_t device, CFStringRef key) {
         IOObjectRelease(next);
         IOObjectRelease(it);
         return registry_entry;
-      } else {
-        CFTypeRef ret = GetUSBRegistryEntry(next, key);
-        if (ret) {
-          IOObjectRelease(next);
-          IOObjectRelease(it);
-          return ret;
-        }
       }
+
+      CFTypeRef ret = GetUSBRegistryEntry(next, key);
+      if (ret) {
+        IOObjectRelease(next);
+        IOObjectRelease(it);
+        return ret;
+      }
+
+      IOObjectRelease(next);
     }
   }
 
@@ -82,7 +84,7 @@ QString GetUSBRegistryEntryString(io_object_t device, CFStringRef key) {
   return NULL;
 }
 
-quint64 GetUSBRegistryEntryStringInt64(io_object_t device, CFStringRef key) {
+quint64 GetUSBRegistryEntryInt64(io_object_t device, CFStringRef key) {
   CFNumberRef registry_num = (CFNumberRef)GetUSBRegistryEntry(device, key);
   if (registry_num) {
     qint64 ret = -1;
@@ -144,6 +146,21 @@ QString GetSerialForDevice(io_object_t device) {
       "USB/" + GetUSBRegistryEntryString(device, CFSTR(kUSBSerialNumberString)));
 }
 
+QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  io_object_t device = DADiskCopyIOMedia(disk);
+  QString ret = GetUSBRegistryEntryString(device, property);
+  IOObjectRelease(device);
+
+  CFRelease(disk);
+  CFRelease(session);
+
+  return ret;
+}
+
 }
 
 void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
@@ -181,7 +198,7 @@ void MacDeviceLister::DiskRemovedCallback(DADiskRef disk, void* context) {
   // the BSD disk name.
   for (QMap<QString, QString>::iterator it = me->current_devices_.begin();
        it != me->current_devices_.end(); ++it) {
-    if (it.value() == QString(DADiskGetBSDName(disk))) {
+    if (it.value() == QString::fromLocal8Bit(DADiskGetBSDName(disk))) {
       emit me->DeviceRemoved(it.key());
       me->current_devices_.erase(it);
       break;
@@ -203,6 +220,9 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
   CFRelease(disk);
   CFRelease(session);
 
+  if (vendor.isEmpty()) {
+    return product;
+  }
   return vendor + " " + product;
 }
 
@@ -217,7 +237,7 @@ QUrl MacDeviceLister::MakeDeviceUrl(const QString& serial) {
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
 
   QString path = [[volume_path path] UTF8String];
-  QUrl ret = QUrl::fromLocalFile(path);
+  QUrl ret = MakeUrlFromLocalPath(path);
 
   CFRelease(disk);
   CFRelease(session);
@@ -250,35 +270,11 @@ QStringList MacDeviceLister::DeviceIcons(const QString& serial) {
 }
 
 QString MacDeviceLister::DeviceManufacturer(const QString& serial){
-  QString bsd_name = current_devices_[serial];
-  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
-  DADiskRef disk = DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
-
-  io_object_t device = DADiskCopyIOMedia(disk);
-  QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
-  IOObjectRelease(device);
-
-  CFRelease(disk);
-  CFRelease(session);
-
-  return vendor;
+  return FindDeviceProperty(current_devices_[serial], CFSTR(kUSBVendorString));
 }
 
 QString MacDeviceLister::DeviceModel(const QString& serial){
-  QString bsd_name = current_devices_[serial];
-  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
-  DADiskRef disk = DADiskCreateFromBSDName(
-      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
-
-  io_object_t device = DADiskCopyIOMedia(disk);
-  QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
-  IOObjectRelease(device);
-
-  CFRelease(disk);
-  CFRelease(session);
-
-  return product;
+  return FindDeviceProperty(current_devices_[serial], CFSTR(kUSBProductString));
 }
 
 quint64 MacDeviceLister::DeviceCapacity(const QString& serial){
