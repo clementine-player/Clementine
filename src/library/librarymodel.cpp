@@ -509,7 +509,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
 
   case GroupBy_YearAlbum:
     year = qMax(0, q.Value(0).toInt());
-    item->metadata.set_year(year);
+    item->metadata.set_year(q.Value(0).toInt());
     item->metadata.set_album(q.Value(1).toString());
     item->key = PrettyYearAlbum(year, item->metadata.album());
     item->sort_text = SortTextForYear(year) + item->metadata.album();

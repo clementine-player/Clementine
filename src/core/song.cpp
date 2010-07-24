@@ -580,22 +580,23 @@ void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
 }
 
 void Song::BindToQuery(QSqlQuery *query) const {
-  #define intval(x) (x <= 0 ? QVariant() : x)
+  #define strval(x) (x.isNull() ? "" : x)
+  #define intval(x) (x <= 0 ? -1 : x)
   #define notnullintval(x) (x == -1 ? QVariant() : x)
 
   // Remember to bind these in the same order as kBindSpec
 
-  query->bindValue(":title", d->title_);
-  query->bindValue(":album", d->album_);
-  query->bindValue(":artist", d->artist_);
-  query->bindValue(":albumartist", d->albumartist_);
-  query->bindValue(":composer", d->composer_);
+  query->bindValue(":title", strval(d->title_));
+  query->bindValue(":album", strval(d->album_));
+  query->bindValue(":artist", strval(d->artist_));
+  query->bindValue(":albumartist", strval(d->albumartist_));
+  query->bindValue(":composer", strval(d->composer_));
   query->bindValue(":track", intval(d->track_));
   query->bindValue(":disc", intval(d->disc_));
   query->bindValue(":bpm", intval(d->bpm_));
   query->bindValue(":year", intval(d->year_));
-  query->bindValue(":genre", d->genre_);
-  query->bindValue(":comment", d->comment_);
+  query->bindValue(":genre", strval(d->genre_));
+  query->bindValue(":comment", strval(d->comment_));
   query->bindValue(":compilation", d->compilation_ ? 1 : 0);
 
   query->bindValue(":length", intval(d->length_));
