@@ -48,6 +48,7 @@ public:
     Role_FreeSpace,
     Role_IconName,
     Role_UpdatingPercentage,
+    Role_MountPath,
 
     LastRole,
   };

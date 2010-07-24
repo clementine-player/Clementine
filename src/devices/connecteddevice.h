@@ -40,6 +40,7 @@ public:
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }
   LibraryModel* model() const { return model_; }
+  QUrl url() const { return url_; }
 
   virtual MusicStorage* storage() = 0;
 

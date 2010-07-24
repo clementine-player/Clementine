@@ -99,7 +99,7 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
         break;
 
       case DeviceManager::State_Connected:
-        status_text = tr("Connected");
+        status_text = index.data(DeviceManager::Role_MountPath).toString();
         break;
     }
   }

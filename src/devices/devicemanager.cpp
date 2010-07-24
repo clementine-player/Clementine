@@ -241,6 +241,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         return QVariant::fromValue(info.device_->storage());
       return QVariant();
 
+    case Role_MountPath:
+      if (info.device_)
+        return info.device_->url().path();
+      return QVariant();
+
     default:
       return QVariant();
   }
