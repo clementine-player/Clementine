@@ -16,8 +16,9 @@
 
 #include "config.h"
 #include "devicedatabasebackend.h"
-#include "devicemanager.h"
 #include "devicekitlister.h"
+#include "devicemanager.h"
+#include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
 #include "core/musicstorage.h"
 #include "core/taskmanager.h"
@@ -41,19 +42,6 @@
 
 const int DeviceManager::kDeviceIconSize = 32;
 const int DeviceManager::kDeviceIconOverlaySize = 16;
-
-DeviceStateFilterModel::DeviceStateFilterModel(QObject *parent,
-                                               DeviceManager::State state)
-  : QSortFilterProxyModel(parent),
-    state_(state)
-{
-  setDynamicSortFilter(true);
-}
-
-bool DeviceStateFilterModel::filterAcceptsRow(int row, const QModelIndex&) const {
-  return sourceModel()->index(row, 0).data(DeviceManager::Role_State).toInt()
-      == state_;
-}
 
 
 DeviceManager::DeviceInfo::DeviceInfo()

@@ -20,6 +20,7 @@
 #include "libraryitem.h"
 #include "librarybackend.h"
 #include "devices/devicemanager.h"
+#include "devices/devicestatefiltermodel.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 
@@ -129,6 +130,9 @@ void LibraryView::SetLibrary(LibraryModel *library) {
 
 void LibraryView::SetDeviceManager(DeviceManager *device_manager) {
   devices_ = device_manager;
+  copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
+  connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
+          copy_to_device_, SLOT(setDisabled(bool)));
 }
 
 void LibraryView::TotalSongCountUpdated(int count) {

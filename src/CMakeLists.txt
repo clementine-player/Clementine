@@ -60,6 +60,7 @@ set(SOURCES
   devices/devicelister.cpp
   devices/devicemanager.cpp
   devices/deviceproperties.cpp
+  devices/devicestatefiltermodel.cpp
   devices/deviceview.cpp
   devices/filesystemdevice.cpp
 
@@ -183,6 +184,7 @@ set(HEADERS
   devices/devicelister.h
   devices/devicemanager.h
   devices/deviceproperties.h
+  devices/devicestatefiltermodel.h
   devices/deviceview.h
   devices/filesystemdevice.h
 

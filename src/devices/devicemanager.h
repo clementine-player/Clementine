@@ -23,13 +23,13 @@
 
 #include <QAbstractListModel>
 #include <QIcon>
-#include <QSortFilterProxyModel>
 
 #include <boost/shared_ptr.hpp>
 
 class ConnectedDevice;
 class Database;
 class DeviceLister;
+class DeviceStateFilterModel;
 class TaskManager;
 
 class DeviceManager : public QAbstractListModel {
@@ -64,7 +64,7 @@ public:
   BackgroundThread<Database>* database() const { return database_; }
   TaskManager* task_manager() const { return task_manager_; }
 
-  QAbstractItemModel* connected_devices_model() const { return connected_devices_model_; }
+  DeviceStateFilterModel* connected_devices_model() const { return connected_devices_model_; }
 
   // Get info about devices
   int GetDatabaseId(int row) const;
@@ -155,7 +155,7 @@ private:
   DeviceDatabaseBackend* backend_;
   TaskManager* task_manager_;
 
-  QSortFilterProxyModel* connected_devices_model_;
+  DeviceStateFilterModel* connected_devices_model_;
 
   QIcon not_connected_overlay_;
 
@@ -166,18 +166,6 @@ private:
 
   // Map of task ID to device index
   QMap<int, QPersistentModelIndex> active_tasks_;
-};
-
-class DeviceStateFilterModel : public QSortFilterProxyModel {
-public:
-  DeviceStateFilterModel(QObject* parent, DeviceManager::State state =
-                         DeviceManager::State_Connected);
-
-protected:
-  bool filterAcceptsRow(int row, const QModelIndex& parent) const;
-
-private:
-  DeviceManager::State state_;
 };
 
 
