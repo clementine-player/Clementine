@@ -2,226 +2,332 @@
 
 #include <CoreFoundation/CFRunLoop.h>
 #include <DiskArbitration/DiskArbitration.h>
-#include <IOKit/storage/IOBlockStorageDevice.h>
-#include <IOKit/storage/IOStorage.h>
+#include <IOKit/kext/KextManager.h>
 #include <IOKit/usb/IOUSBLib.h>
 
 #import <AppKit/NSWorkspace.h>
+#import <Foundation/NSAutoreleasePool.h>
+#import <Foundation/NSDictionary.h>
 #import <Foundation/NSNotification.h>
+#import <Foundation/NSPathUtilities.h>
 #import <Foundation/NSString.h>
+#import <Foundation/NSURL.h>
 
 #include <QtDebug>
 
 #include <QString>
 #include <QStringList>
 
-@interface NotificationTarget :NSObject {
-
-}
-
-- (void) mediaMounted: (NSNotification*) notification;
-- (void) mediaUnmounted: (NSNotification*) notification;
-
-@end
-
-@implementation NotificationTarget
-
-- (id) init {
-  qDebug() << Q_FUNC_INFO;
-  if ((self = [super init])) {
-    [[[NSWorkspace sharedWorkspace] notificationCenter]
-        addObserver:self
-        selector:@selector(mediaMounted:)
-        name:NSWorkspaceDidMountNotification
-        object:[NSWorkspace sharedWorkspace]];
-
-    [[[NSWorkspace sharedWorkspace] notificationCenter]
-        addObserver:self
-        selector:@selector(mediaUnmounted:)
-        name:NSWorkspaceDidUnmountNotification
-        object:[NSWorkspace sharedWorkspace]];
-  }
-  return self;
-}
-
-- (void) mediaMounted: (NSNotification*) notification {
-  NSString* path = [[notification userInfo] objectForKey:@"NSDevicePath"];
-  qDebug() << Q_FUNC_INFO << QString::fromUtf8([path UTF8String]);
-}
-
-- (void) mediaUnmounted: (NSNotification*) notification {
-  NSString* path = [[notification userInfo] objectForKey:@"NSDevicePath"];
-  qDebug() << Q_FUNC_INFO << QString::fromUtf8([path UTF8String]);
-}
-
-@end
-
-
-class MacDeviceListerPrivate {
- public:
-  MacDeviceListerPrivate() {
-    target_ = [[NotificationTarget alloc] init];
-  }
-
- private:
-  NotificationTarget* target_;
-};
-
-
-MacDeviceLister::MacDeviceLister() : p_(new MacDeviceListerPrivate) {
+MacDeviceLister::MacDeviceLister() {
 }
 
 MacDeviceLister::~MacDeviceLister() {
-  qDebug() << Q_FUNC_INFO;
 }
 
 void MacDeviceLister::Init() {
-  qDebug() << Q_FUNC_INFO;
-
-  notification_port_ = IONotificationPortCreate(kIOMasterPortDefault);
-  CFRunLoopSourceRef loop_source =
-      IONotificationPortGetRunLoopSource(notification_port_);
+  [[NSAutoreleasePool alloc] init];
 
   CFRunLoopRef run_loop = CFRunLoopGetCurrent();
-  CFRunLoopAddSource(run_loop, loop_source, kCFRunLoopDefaultMode);
-
-  AddNotification(
-      kIOFirstMatchNotification,
-      kIOUSBDeviceClassName,
-      &DeviceAddedCallback);
-  AddNotification(
-      kIOTerminatedNotification,
-      kIOUSBDeviceClassName,
-      &DeviceRemovedCallback);
-
-  AddNotification(
-      kIOFirstMatchNotification,
-      kIOBlockStorageDeviceClass,
-      &StorageAddedCallback);
-
 
   DASessionRef da_session = DASessionCreate(kCFAllocatorDefault);
   DARegisterDiskAppearedCallback(
-      da_session, NULL, &DiskAddedCallback, reinterpret_cast<void*>(this));
+      da_session, kDADiskDescriptionMatchVolumeMountable, &DiskAddedCallback, reinterpret_cast<void*>(this));
   DARegisterDiskDisappearedCallback(
       da_session, NULL, &DiskRemovedCallback, reinterpret_cast<void*>(this));
-  DAApprovalSessionRef approval_session = DAApprovalSessionCreate(kCFAllocatorDefault);
-  DARegisterDiskMountApprovalCallback(
-      approval_session, NULL, &DiskMountCallback, reinterpret_cast<void*>(this));
   DASessionScheduleWithRunLoop(da_session, run_loop, kCFRunLoopDefaultMode);
-  DAApprovalSessionScheduleWithRunLoop(approval_session, run_loop, kCFRunLoopDefaultMode);
+
   CFRelease(da_session);
-  CFRelease(approval_session);
 
-
-  qDebug() << "STARTING LOOP";
   CFRunLoopRun();
-  qDebug() << "ENDING LOOP";
 }
 
-bool MacDeviceLister::AddNotification(
-    const io_name_t type,
-    const char* class_name,
-    IOServiceMatchingCallback callback) {
-  CFMutableDictionaryRef matching_dict = IOServiceMatching(class_name);
+
+// IOKit helpers.
+namespace {
+
+CFTypeRef GetUSBRegistryEntry(io_object_t device, CFStringRef key) {
   io_iterator_t it;
-  kern_return_t ret = IOServiceAddMatchingNotification(
-      notification_port_,
-      type,
-      matching_dict,
-      callback,
-      reinterpret_cast<void*>(this),
-      &it);
-  if (ret != KERN_SUCCESS) {
-    return false;
-  }
-
-  while (IOIteratorNext(it));
-  return true;
-}
-
-void MacDeviceLister::DeviceAddedCallback(void* refcon, io_iterator_t it) {
-  qDebug() << Q_FUNC_INFO;
-
-  io_object_t object;
-  while ((object = IOIteratorNext(it))) {
-    io_name_t class_name;
-    IOObjectGetClass(object, class_name);
-    qDebug() << class_name;
-
-    IOObjectRelease(object);
-  }
-}
-
-void MacDeviceLister::DeviceRemovedCallback(void* refcon, io_iterator_t it) {
-  qDebug() << Q_FUNC_INFO;
-  while (IOIteratorNext(it));
-}
-
-void MacDeviceLister::StorageAddedCallback(void* refcon, io_iterator_t it) {
-  qDebug() << Q_FUNC_INFO;
-
-  io_object_t object;
-  while ((object = IOIteratorNext(it))) {
-    io_name_t class_name;
-    IOObjectGetClass(object, class_name);
-    qDebug() << class_name;
-
-    io_iterator_t registry_it;
-    kern_return_t ret = IORegistryEntryGetParentEntry(
-        object, kIOServicePlane, &registry_it);
-
-    io_object_t registry_entry;
-    while ((registry_entry = IOIteratorNext(registry_it))) {
-      io_name_t name;
-      IORegistryEntryGetName(registry_entry, name);
-      qDebug() << name;
-
-      IOObjectRelease(registry_entry);
+  if (IORegistryEntryGetParentIterator(device, kIOServicePlane, &it) == KERN_SUCCESS) {
+    io_object_t next;
+    while ((next = IOIteratorNext(it))) {
+      CFTypeRef registry_entry = (CFStringRef)IORegistryEntryCreateCFProperty(
+          next, key, kCFAllocatorDefault, 0);
+      if (registry_entry) {
+        IOObjectRelease(next);
+        IOObjectRelease(it);
+        return registry_entry;
+      } else {
+        CFTypeRef ret = GetUSBRegistryEntry(next, key);
+        if (ret) {
+          IOObjectRelease(next);
+          IOObjectRelease(it);
+          return ret;
+        }
+      }
     }
-
-
-    IOObjectRelease(object);
-  }
-}
-
-void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
-  qDebug() << Q_FUNC_INFO;
-
-  io_service_t service = DADiskCopyIOMedia(disk);
-  io_iterator_t registry_it;
-  IORegistryEntryGetParentEntry(
-      service, kIOServicePlane, &registry_it);
-
-  io_object_t registry_entry;
-  while ((registry_entry = IOIteratorNext(registry_it))) {
-    io_name_t name;
-    IORegistryEntryGetName(registry_entry, name);
-    qDebug() << name;
-
-    IOObjectRelease(registry_entry);
   }
 
-  qDebug() << DADiskGetBSDName(disk);
-
-  IOObjectRelease(service);
-}
-
-void MacDeviceLister::DiskRemovedCallback(DADiskRef, void* context) {
-  qDebug() << Q_FUNC_INFO;
-}
-
-DADissenterRef MacDeviceLister::DiskMountCallback(DADiskRef disk, void* context) {
-  qDebug() << Q_FUNC_INFO << DADiskGetBSDName(disk);
+  IOObjectRelease(it);
   return NULL;
 }
 
-QStringList MacDeviceLister::DeviceUniqueIDs(){return QStringList();}
-QStringList MacDeviceLister::DeviceIcons(const QString& id){return QStringList();}
-QString MacDeviceLister::DeviceManufacturer(const QString& id){return QString();}
-QString MacDeviceLister::DeviceModel(const QString& id){return QString();}
-quint64 MacDeviceLister::DeviceCapacity(const QString& id){return 0;}
-quint64 MacDeviceLister::DeviceFreeSpace(const QString& id){return 0;}
+QString GetUSBRegistryEntryString(io_object_t device, CFStringRef key) {
+  CFStringRef registry_string = (CFStringRef)GetUSBRegistryEntry(device, key);
+  if (registry_string) {
+    QString ret = QString::fromUtf8([(NSString*)registry_string UTF8String]);
+    CFRelease(registry_string);
+    return ret;
+  }
+
+  return NULL;
+}
+
+quint64 GetUSBRegistryEntryStringInt64(io_object_t device, CFStringRef key) {
+  CFNumberRef registry_num = (CFNumberRef)GetUSBRegistryEntry(device, key);
+  if (registry_num) {
+    qint64 ret = -1;
+    Boolean result = CFNumberGetValue(registry_num, kCFNumberLongLongType, &ret);
+    if (!result || ret < 0) {
+      return 0;
+    } else {
+      return ret;
+    }
+  }
+
+  return 0;
+}
+
+NSObject* GetPropertyForDevice(io_object_t device, NSString* key) {
+  CFMutableDictionaryRef properties;
+  kern_return_t ret = IORegistryEntryCreateCFProperties(
+      device, &properties, kCFAllocatorDefault, 0);
+
+  if (ret != KERN_SUCCESS) {
+    return nil;
+  }
+
+  NSDictionary* dict = (NSDictionary*)properties;
+  NSObject* prop = [dict objectForKey:key];
+  if (prop) {
+    return prop;
+  }
+
+  io_object_t parent;
+  ret = IORegistryEntryGetParentEntry(device, kIOServicePlane, &parent);
+  if (ret == KERN_SUCCESS) {
+    return GetPropertyForDevice(parent, key);
+  }
+
+  return nil;
+}
+
+QString GetIconForDevice(io_object_t device) {
+  NSDictionary* media_icon = (NSDictionary*)GetPropertyForDevice(device, @"IOMediaIcon");
+  if (media_icon) {
+    NSString* bundle = (NSString*)[media_icon objectForKey:@"CFBundleIdentifier"];
+    NSString* file = (NSString*)[media_icon objectForKey:@"IOBundleResourceFile"];
+
+    NSURL* bundle_url = (NSURL*)KextManagerCreateURLForBundleIdentifier(
+        kCFAllocatorDefault, (CFStringRef)bundle);
+
+    QString path = QString::fromUtf8([[bundle_url path] UTF8String]);
+    path += "/Contents/Resources/";
+    path += [file UTF8String];
+    return path;
+  }
+
+  return QString();
+}
+
+QString GetSerialForDevice(io_object_t device) {
+  return QString(
+      "USB/" + GetUSBRegistryEntryString(device, CFSTR(kUSBSerialNumberString)));
+}
+
+}
+
+void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
+  MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
+
+  NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
+  NSURL* volume_path = 
+      [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
+
+  if (volume_path) {
+    io_object_t device = DADiskCopyIOMedia(disk);
+    QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
+    QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
+
+    CFMutableDictionaryRef properties;
+    kern_return_t ret = IORegistryEntryCreateCFProperties(
+        device, &properties, kCFAllocatorDefault, 0);
+
+    if (ret == KERN_SUCCESS) {
+      NSDictionary* dict = (NSDictionary*)properties;
+      if ([[dict objectForKey:@"Removable"] intValue] == 1) {
+        QString serial = GetSerialForDevice(device);
+        me->current_devices_[serial] = QString(DADiskGetBSDName(disk));
+        emit me->DeviceAdded(serial);
+      }
+    }
+
+    IOObjectRelease(device);
+  }
+}
+
+void MacDeviceLister::DiskRemovedCallback(DADiskRef disk, void* context) {
+  MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
+  // We cannot access the USB tree when the disk is removed but we still get
+  // the BSD disk name.
+  for (QMap<QString, QString>::iterator it = me->current_devices_.begin();
+       it != me->current_devices_.end(); ++it) {
+    if (it.value() == QString(DADiskGetBSDName(disk))) {
+      emit me->DeviceRemoved(it.key());
+      me->current_devices_.erase(it);
+      break;
+    }
+  }
+}
+
+QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  io_object_t device = DADiskCopyIOMedia(disk);
+  QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
+  QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
+  IOObjectRelease(device);
+
+  CFRelease(disk);
+  CFRelease(session);
+
+  return vendor + " " + product;
+}
+
+QUrl MacDeviceLister::MakeDeviceUrl(const QString& serial) {
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
+  NSURL* volume_path = 
+      [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
+
+  QString path = [[volume_path path] UTF8String];
+  QUrl ret = QUrl::fromLocalFile(path);
+
+  CFRelease(disk);
+  CFRelease(session);
+
+  return ret;
+}
+
+QStringList MacDeviceLister::DeviceUniqueIDs() {
+  return current_devices_.keys();
+}
+
+QStringList MacDeviceLister::DeviceIcons(const QString& serial) {
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  io_object_t device = DADiskCopyIOMedia(disk);
+  QString icon = GetIconForDevice(device);
+
+  IOObjectRelease(device);
+  CFRelease(disk);
+  CFRelease(session);
+
+  QStringList ret;
+  if (!icon.isEmpty()) {
+    ret << icon;
+  }
+  return ret;
+}
+
+QString MacDeviceLister::DeviceManufacturer(const QString& serial){
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  io_object_t device = DADiskCopyIOMedia(disk);
+  QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
+  IOObjectRelease(device);
+
+  CFRelease(disk);
+  CFRelease(session);
+
+  return vendor;
+}
+
+QString MacDeviceLister::DeviceModel(const QString& serial){
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  io_object_t device = DADiskCopyIOMedia(disk);
+  QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
+  IOObjectRelease(device);
+
+  CFRelease(disk);
+  CFRelease(session);
+
+  return product;
+}
+
+quint64 MacDeviceLister::DeviceCapacity(const QString& serial){
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  io_object_t device = DADiskCopyIOMedia(disk);
+
+  NSNumber* capacity = (NSNumber*)GetPropertyForDevice(device, @"Size");
+
+  quint64 ret = [capacity unsignedLongLongValue];
+
+  IOObjectRelease(device);
+
+  CFRelease(disk);
+  CFRelease(session);
+
+  return ret;
+}
+
+quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
+  QString bsd_name = current_devices_[serial];
+  DASessionRef session = DASessionCreate(kCFAllocatorDefault);
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, session, bsd_name.toAscii().constData());
+
+  NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
+  NSURL* volume_path = 
+      [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
+
+  FSRef ref;
+  OSStatus err = FSPathMakeRef(
+      (const UInt8*)[[volume_path path] fileSystemRepresentation], &ref, NULL);
+  if (err == noErr) {
+    FSCatalogInfo catalog;
+    err = FSGetCatalogInfo(&ref, kFSCatInfoVolume, &catalog, NULL, NULL, NULL);
+    if (err == noErr) {
+      FSVolumeRefNum volume_ref = catalog.volume;
+      FSVolumeInfo info;
+      err = FSGetVolumeInfo(
+          volume_ref, 0, NULL, kFSVolInfoSizes, &info, NULL, NULL);
+      UInt64 free_bytes = info.freeBytes;
+      return free_bytes;
+    }
+  }
+
+  return 0;
+}
+
 QVariantMap MacDeviceLister::DeviceHardwareInfo(const QString& id){return QVariantMap();}
-QString MacDeviceLister::MakeFriendlyName(const QString& id){return QString();}
-QUrl MacDeviceLister::MakeDeviceUrl(const QString& id){return QUrl();}
