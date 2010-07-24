@@ -17,8 +17,10 @@
 #include "devicemanager.h"
 #include "gpoddevice.h"
 #include "gpodloader.h"
+#include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
+#include <QFile>
 #include <QtDebug>
 
 #include <gpod/itdb.h>
@@ -97,18 +99,35 @@ bool GPodDevice::CopyToStorage(
     return false;
   }
 
+  // Add it to our LibraryModel
+  Song metadata_on_device;
+  metadata_on_device.InitFromItdb(track);
+  metadata_on_device.set_directory_id(1);
+  metadata_on_device.set_filename(url_.path() + metadata_on_device.filename());
+  songs_to_add_ << metadata_on_device;
+
+  // Remove the original if it was requested
+  if (remove_original) {
+    QFile::remove(source);
+  }
+
   return true;
 }
 
 void GPodDevice::FinishCopy() {
+  // Write the itunes database
   GError* error = NULL;
   itdb_write(db_, &error);
   if (error) {
     qDebug() << "GPodDevice error:" << error->message;
     emit Error(QString::fromUtf8(error->message));
     g_error_free(error);
+  } else {
+    // Update the library model
+    backend_->AddOrUpdateSongs(songs_to_add_);
   }
 
+  songs_to_add_.clear();
   copy_in_progress_.unlock();
 }
 

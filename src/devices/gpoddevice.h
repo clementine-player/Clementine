@@ -58,6 +58,7 @@ private:
   Itdb_iTunesDB* db_;
 
   QMutex copy_in_progress_;
+  SongList songs_to_add_;
 };
 
 #endif // GPODDEVICE_H
