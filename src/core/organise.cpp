@@ -64,6 +64,7 @@ void Organise::ProcessSomeFiles() {
 
   // None left?
   if (progress_ >= files_.count()) {
+    task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
     destination_->FinishCopy();
 
     task_manager_->SetTaskFinished(task_id_);
