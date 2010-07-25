@@ -190,16 +190,25 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
     itdb_device_free(device);
 
     if (!colour.isEmpty()) {
-      QString colour_icon = "multimedia-player-ipod-%1-%2.png";
+      QString colour_icon = "multimedia-player-ipod-%1-%2";
       ret << colour_icon.arg(colour, model);
     }
 
     if (!model.isEmpty()) {
-      QString model_icon = "multimedia-player-ipod-%1.png";
+      QString model_icon = "multimedia-player-ipod-%1";
       ret << model_icon.arg(model);
     }
   }
 #endif
 
+  return ret;
+}
+
+QStringList DeviceLister::GuessIconForModel(const QString& vendor, const QString& model) {
+  qDebug() << vendor << ":" << model;
+  QStringList ret;
+  if (vendor.startsWith("Google") && model.contains("Nexus")) {
+    ret << "phone-google-nexus-one";
+  }
   return ret;
 }

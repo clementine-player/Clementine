@@ -65,6 +65,7 @@ protected:
   QUrl MakeUrlFromLocalPath(const QString& path);
 
   QStringList GuessIconForPath(const QString& path);
+  QStringList GuessIconForModel(const QString& vendor, const QString& model);
 
 protected:
   QThread* thread_;
