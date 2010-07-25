@@ -91,8 +91,10 @@ OrganiseDialog::~OrganiseDialog() {
   delete ui_;
 }
 
-void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model) {
+void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices) {
   ui_->destination->setModel(model);
+
+  ui_->eject_after->setVisible(devices);
 }
 
 void OrganiseDialog::SetUrls(const QList<QUrl> &urls) {
@@ -196,6 +198,7 @@ void OrganiseDialog::Reset() {
   ui_->replace_spaces->setChecked(false);
   ui_->replace_the->setChecked(false);
   ui_->overwrite->setChecked(true);
+  ui_->eject_after->setChecked(false);
 }
 
 void OrganiseDialog::showEvent(QShowEvent *) {
@@ -206,6 +209,7 @@ void OrganiseDialog::showEvent(QShowEvent *) {
   ui_->replace_spaces->setChecked(s.value("replace_spaces", false).toBool());
   ui_->replace_the->setChecked(s.value("replace_the", false).toBool());
   ui_->overwrite->setChecked(s.value("overwrite", true).toBool());
+  ui_->eject_after->setChecked(s.value("eject_after", false).toBool());
 
   QString destination = s.value("destination").toString();
   int index = ui_->destination->findText(destination);
@@ -223,6 +227,7 @@ void OrganiseDialog::accept() {
   s.setValue("replace_the", ui_->replace_the->isChecked());
   s.setValue("overwrite", ui_->overwrite->isChecked());
   s.setValue("destination", ui_->destination->currentText());
+  s.setValue("eject_after", ui_->eject_after->isChecked());
 
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
@@ -232,7 +237,8 @@ void OrganiseDialog::accept() {
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;
   Organise* organise = new Organise(
-      task_manager_, storage, format_, copy, ui_->overwrite->isChecked(), filenames_);
+      task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
+      filenames_, ui_->eject_after->isChecked());
   organise->Start();
 
   QDialog::accept();

@@ -27,7 +27,7 @@
 
 class GPodLoader;
 
-class GPodDevice : public ConnectedDevice, public MusicStorage {
+class GPodDevice : public ConnectedDevice, public virtual MusicStorage {
   Q_OBJECT
 
 public:
@@ -38,8 +38,6 @@ public:
   ~GPodDevice();
 
   static QStringList url_schemes() { return QStringList() << "ipod"; }
-
-  MusicStorage* storage() { return this; }
 
   void StartCopy();
   bool CopyToStorage(const QString &source, const QString &destination,

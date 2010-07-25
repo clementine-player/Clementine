@@ -27,7 +27,7 @@ const int Organise::kBatchSize = 10;
 
 Organise::Organise(TaskManager* task_manager, MusicStorage* destination,
                    const OrganiseFormat &format, bool copy, bool overwrite,
-                   const QStringList& files)
+                   const QStringList& files, bool eject_after)
                      : thread_(NULL),
                        task_manager_(task_manager),
                        destination_(destination),
@@ -35,6 +35,7 @@ Organise::Organise(TaskManager* task_manager, MusicStorage* destination,
                        copy_(copy),
                        overwrite_(overwrite),
                        files_(files),
+                       eject_after_(eject_after),
                        started_(false),
                        task_id_(0),
                        progress_(0)
@@ -65,7 +66,10 @@ void Organise::ProcessSomeFiles() {
   // None left?
   if (progress_ >= files_.count()) {
     task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
+
     destination_->FinishCopy();
+    if (eject_after_)
+      destination_->Eject();
 
     task_manager_->SetTaskFinished(task_id_);
 

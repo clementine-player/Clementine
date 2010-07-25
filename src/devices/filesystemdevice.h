@@ -24,7 +24,7 @@
 class DeviceManager;
 class LibraryWatcher;
 
-class FilesystemDevice : public ConnectedDevice, public FilesystemMusicStorage {
+class FilesystemDevice : public ConnectedDevice, public virtual FilesystemMusicStorage {
   Q_OBJECT
 
 public:
@@ -35,8 +35,6 @@ public:
   ~FilesystemDevice();
 
   static QStringList url_schemes() { return QStringList() << "file"; }
-
-  MusicStorage* storage() { return this; }
 
 private:
   BackgroundThread<LibraryWatcher>* watcher_;

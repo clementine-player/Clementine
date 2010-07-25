@@ -19,7 +19,7 @@
 
 #include "musicstorage.h"
 
-class FilesystemMusicStorage : public MusicStorage {
+class FilesystemMusicStorage : public virtual MusicStorage {
 public:
   FilesystemMusicStorage(const QString& root);
 

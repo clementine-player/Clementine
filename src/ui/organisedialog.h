@@ -45,7 +45,7 @@ public:
 
   QSize sizeHint() const;
 
-  void SetDestinationModel(QAbstractItemModel* model);
+  void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 
   void SetUrls(const QList<QUrl>& urls);
   void SetFilenames(const QStringList& filenames);

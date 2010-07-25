@@ -30,7 +30,7 @@ class Organise : public QObject {
 public:
   Organise(TaskManager* task_manager, MusicStorage* destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
-           const QStringList& files);
+           const QStringList& files, bool eject_after);
 
   static const int kBatchSize;
 
@@ -49,6 +49,7 @@ private:
   const bool copy_;
   const bool overwrite_;
   QStringList files_;
+  const bool eject_after_;
 
   bool started_;
 

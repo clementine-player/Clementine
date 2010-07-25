@@ -35,6 +35,7 @@ public:
                              const Song& metadata, bool overwrite,
                              bool remove_original) = 0;
   virtual void FinishCopy() {}
+  virtual void Eject() {}
 };
 
 Q_DECLARE_METATYPE(MusicStorage*);

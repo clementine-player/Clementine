@@ -276,7 +276,7 @@ void LibraryView::Delete() {
 }
 
 void LibraryView::CopyToDevice() {
-  organise_dialog_->SetDestinationModel(devices_->connected_devices_model());
+  organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
   organise_dialog_->SetFilenames(GetSelectedFilenames());
   organise_dialog_->show();

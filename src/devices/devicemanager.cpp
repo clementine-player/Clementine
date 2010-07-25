@@ -241,7 +241,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         const_cast<DeviceManager*>(this)->Connect(index.row());
       if (!info.device_)
         return QVariant();
-      return QVariant::fromValue(info.device_->storage());
+      return QVariant::fromValue<MusicStorage*>(info.device_.get());
 
     case Role_MountPath:
       if (!info.device_)

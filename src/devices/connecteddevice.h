@@ -17,6 +17,8 @@
 #ifndef CONNECTEDDEVICE_H
 #define CONNECTEDDEVICE_H
 
+#include "core/musicstorage.h"
+
 #include <QObject>
 #include <QStringList>
 #include <QUrl>
@@ -26,9 +28,8 @@ class DeviceLister;
 class DeviceManager;
 class LibraryBackend;
 class LibraryModel;
-class MusicStorage;
 
-class ConnectedDevice : public QObject {
+class ConnectedDevice : public QObject, public virtual MusicStorage {
   Q_OBJECT
 
 public:
@@ -42,7 +43,7 @@ public:
   LibraryModel* model() const { return model_; }
   QUrl url() const { return url_; }
 
-  virtual MusicStorage* storage() = 0;
+  void Eject();
 
 signals:
   void TaskStarted(int id);

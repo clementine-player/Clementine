@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>588</width>
-    <height>475</height>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,6 +52,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="eject_after">
+     <property name="text">
+      <string>Safely remove the device after copying</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="naming_group">
@@ -150,6 +157,19 @@
    <header>widgets/linetextedit.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>destination</tabstop>
+  <tabstop>aftercopying</tabstop>
+  <tabstop>eject_after</tabstop>
+  <tabstop>naming</tabstop>
+  <tabstop>insert</tabstop>
+  <tabstop>replace_the</tabstop>
+  <tabstop>replace_spaces</tabstop>
+  <tabstop>replace_ascii</tabstop>
+  <tabstop>overwrite</tabstop>
+  <tabstop>preview</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
@@ -161,8 +181,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>487</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -177,8 +197,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>487</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

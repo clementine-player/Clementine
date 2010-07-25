@@ -76,3 +76,7 @@ void ConnectedDevice::InitBackendDirectory(const QString& mount_point, bool firs
     backend_->LoadDirectoriesAsync();
   }
 }
+
+void ConnectedDevice::Eject() {
+  manager_->Unmount(manager_->FindDeviceById(unique_id_));
+}
