@@ -22,6 +22,7 @@ MacDeviceLister::MacDeviceLister() {
 }
 
 MacDeviceLister::~MacDeviceLister() {
+  CFRelease(loop_session_);
 }
 
 void MacDeviceLister::Init() {
@@ -29,14 +30,12 @@ void MacDeviceLister::Init() {
 
   CFRunLoopRef run_loop = CFRunLoopGetCurrent();
 
-  DASessionRef da_session = DASessionCreate(kCFAllocatorDefault);
+  loop_session_ = DASessionCreate(kCFAllocatorDefault);
   DARegisterDiskAppearedCallback(
-      da_session, kDADiskDescriptionMatchVolumeMountable, &DiskAddedCallback, reinterpret_cast<void*>(this));
+      loop_session_, kDADiskDescriptionMatchVolumeMountable, &DiskAddedCallback, reinterpret_cast<void*>(this));
   DARegisterDiskDisappearedCallback(
-      da_session, NULL, &DiskRemovedCallback, reinterpret_cast<void*>(this));
-  DASessionScheduleWithRunLoop(da_session, run_loop, kCFRunLoopDefaultMode);
-
-  CFRelease(da_session);
+      loop_session_, NULL, &DiskRemovedCallback, reinterpret_cast<void*>(this));
+  DASessionScheduleWithRunLoop(loop_session_, run_loop, kCFRunLoopDefaultMode);
 
   CFRunLoopRun();
 }
@@ -328,6 +327,22 @@ quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
 
 QVariantMap MacDeviceLister::DeviceHardwareInfo(const QString& id){return QVariantMap();}
 
-void MacDeviceLister::UnmountDevice(const QString &id) {
-  qFatal("Fixme");
+void MacDeviceLister::UnmountDevice(const QString& serial) {
+  QString bsd_name = current_devices_[serial];
+  DADiskRef disk = DADiskCreateFromBSDName(
+      kCFAllocatorDefault, loop_session_, bsd_name.toAscii().constData());
+
+  DADiskUnmount(disk, kDADiskUnmountOptionDefault, &DiskUnmountCallback, this);
+
+  CFRelease(disk);
+}
+
+void MacDeviceLister::DiskUnmountCallback(
+    DADiskRef disk, DADissenterRef dissenter, void* context) {
+  MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
+  if (dissenter) {
+    qDebug() << "Another app blocked the unmount";
+  } else {
+    DiskRemovedCallback(disk, context);
+  }
 }

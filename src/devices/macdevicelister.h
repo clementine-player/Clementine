@@ -33,6 +33,11 @@ class MacDeviceLister : public DeviceLister {
   static void DiskAddedCallback(DADiskRef disk, void* context);
   static void DiskRemovedCallback(DADiskRef disk, void* context);
 
+  static void DiskUnmountCallback(
+      DADiskRef disk, DADissenterRef dissenter, void* context);
+
+  DASessionRef loop_session_;
+
   QMap<QString, QString> current_devices_;
 };
 
