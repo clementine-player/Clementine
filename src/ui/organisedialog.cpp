@@ -183,11 +183,11 @@ void OrganiseDialog::UpdatePreviews() {
     }
   }
 
-  updateGeometry();
+  adjustSize();
+}
 
-  QSize new_size = size();
-  new_size.setHeight(sizeHint().height());
-  resize(new_size);
+QSize OrganiseDialog::sizeHint() const {
+  return QSize(650, 0);
 }
 
 void OrganiseDialog::Reset() {

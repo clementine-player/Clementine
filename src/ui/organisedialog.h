@@ -43,6 +43,8 @@ public:
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
 
+  QSize sizeHint() const;
+
   void SetDestinationModel(QAbstractItemModel* model);
 
   void SetUrls(const QList<QUrl>& urls);
