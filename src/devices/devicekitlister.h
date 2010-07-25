@@ -44,8 +44,9 @@ public:
   QVariantMap DeviceHardwareInfo(const QString& id);
 
   QString MakeFriendlyName(const QString &id);
-
   QUrl MakeDeviceUrl(const QString &id);
+
+  void UnmountDevice(const QString &id);
 
 protected:
   void Init();

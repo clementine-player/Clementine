@@ -563,3 +563,15 @@ void DeviceManager::TasksChanged() {
     emit dataChanged(index, index);
   }
 }
+
+void DeviceManager::Unmount(int row) {
+  DeviceInfo& info = devices_[row];
+  if (info.database_id_ == -1)
+    return;
+
+  if (info.device_)
+    Disconnect(row);
+
+  if (info.BestBackend()->lister_)
+    info.BestBackend()->lister_->UnmountDevice(info.BestBackend()->unique_id_);
+}

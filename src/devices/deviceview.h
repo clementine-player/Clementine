@@ -62,7 +62,7 @@ protected:
 private slots:
   // Device menu actions
   void Connect();
-  void Disconnect();
+  void Unmount();
   void Forget();
   void Properties();
 
@@ -89,8 +89,7 @@ private:
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
 
   QMenu* device_menu_;
-  QAction* connect_action_;
-  QAction* disconnect_action_;
+  QAction* eject_action_;
   QAction* forget_action_;
   QAction* properties_action_;
 

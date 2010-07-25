@@ -327,3 +327,7 @@ quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
 }
 
 QVariantMap MacDeviceLister::DeviceHardwareInfo(const QString& id){return QVariantMap();}
+
+void MacDeviceLister::UnmountDevice(const QString &id) {
+  qFatal("Fixme");
+}

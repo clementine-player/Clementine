@@ -21,6 +21,8 @@
 #include <QStringList>
 #include <QtDebug>
 
+#include <boost/bind.hpp>
+
 QString GioLister::MountInfo::unique_id() const {
   return QString("Gio/%1/%2/%3").arg(uuid, filesystem_type).arg(filesystem_size);
 }
@@ -139,7 +141,14 @@ void GioLister::MountChanged(GMount *mount) {
     if (id.isNull())
       return;
 
-    mounts_[id] = ReadMountInfo(mount);
+    MountInfo new_info = ReadMountInfo(mount);
+
+    // Ignore the change if the new info is useless
+    if ((mounts_[id].filesystem_size != 0 && new_info.filesystem_size == 0) ||
+        (!mounts_[id].filesystem_type.isEmpty() && new_info.filesystem_type.isEmpty())) {
+      return;
+    }
+    mounts_[id] = new_info;
   }
 
   emit DeviceChanged(id);
@@ -241,4 +250,57 @@ QString GioLister::FindUniqueIdByMount(GMount *mount) const {
       return info.unique_id();
   }
   return QString();
+}
+
+template <typename T, typename F>
+void OperationFinished(F f, GObject *object, GAsyncResult *result) {
+  T* obj = reinterpret_cast<T*>(object);
+  GError* error = NULL;
+
+  f(obj, result, &error);
+
+  if (error) {
+    qDebug() << "Unmount error:" << error->message;
+    g_error_free(error);
+  }
+}
+
+void GioLister::VolumeEjectFinished(GObject *object, GAsyncResult *result, gpointer) {
+  OperationFinished<GVolume>(boost::bind(
+      g_volume_eject_with_operation_finish, _1, _2, _3), object, result);
+}
+
+void GioLister::MountEjectFinished(GObject *object, GAsyncResult *result, gpointer) {
+  OperationFinished<GMount>(boost::bind(
+      g_mount_eject_with_operation_finish, _1, _2, _3), object, result);
+}
+
+void GioLister::MountUnmountFinished(GObject *object, GAsyncResult *result, gpointer) {
+  OperationFinished<GMount>(boost::bind(
+      g_mount_unmount_with_operation_finish, _1, _2, _3), object, result);
+}
+
+void GioLister::UnmountDevice(const QString &id) {
+  GMount* mount = LockAndGetMountInfo(id, &MountInfo::mount);
+  if (!mount)
+    return;
+
+  GVolume* volume = g_mount_get_volume(mount);
+  if (volume) {
+    if (g_volume_can_eject(volume)) {
+      g_volume_eject(volume, G_MOUNT_UNMOUNT_NONE, NULL,
+                     (GAsyncReadyCallback) VolumeEjectFinished, NULL);
+      g_object_unref(volume);
+      return;
+    }
+    g_object_unref(volume);
+  }
+
+  if (g_mount_can_eject(mount)) {
+    g_mount_eject(mount, G_MOUNT_UNMOUNT_NONE, NULL,
+                  (GAsyncReadyCallback) MountEjectFinished, NULL);
+  } else if (g_mount_can_unmount(mount)) {
+    g_mount_unmount(mount, G_MOUNT_UNMOUNT_NONE, NULL,
+                    (GAsyncReadyCallback) MountUnmountFinished, NULL);
+  }
 }

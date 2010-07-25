@@ -239,3 +239,33 @@ QUrl DeviceKitLister::MakeDeviceUrl(const QString& id) {
 
   return MakeUrlFromLocalPath(mount_point);
 }
+
+void DeviceKitLister::UnmountDevice(const QString& id) {
+  QString path = LockAndGetDeviceInfo(id, &DeviceData::dbus_path);
+
+  OrgFreedesktopUDisksDeviceInterface device(
+      OrgFreedesktopUDisksInterface::staticInterfaceName(),
+      path, QDBusConnection::systemBus());
+  if (!device.isValid()) {
+    qWarning() << "Error connecting to the device interface on" << path;
+    return;
+  }
+
+  // Get the device's parent drive
+  QString drive_path = device.partitionSlave().path();
+  OrgFreedesktopUDisksDeviceInterface drive(
+      OrgFreedesktopUDisksInterface::staticInterfaceName(),
+      drive_path, QDBusConnection::systemBus());
+  if (!drive.isValid()) {
+    qWarning() << "Error connecting to the drive interface on" << drive_path;
+    return;
+  }
+
+  // Unmount the filesystem
+  QDBusPendingReply<> reply = device.FilesystemUnmount(QStringList());
+  reply.waitForFinished();
+
+  // Eject the drive
+  drive.DriveEject(QStringList());
+  // Don't bother waiting for the eject to finish
+}

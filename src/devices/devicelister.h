@@ -50,8 +50,10 @@ public:
   virtual QVariantMap DeviceHardwareInfo(const QString& id) = 0;
 
   virtual QString MakeFriendlyName(const QString& id) = 0;
-
   virtual QUrl MakeDeviceUrl(const QString& id) = 0;
+
+  // Do whatever needs to be done to safely remove the device.
+  virtual void UnmountDevice(const QString& id) = 0;
 
 signals:
   void DeviceAdded(const QString& id);

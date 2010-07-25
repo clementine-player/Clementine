@@ -121,10 +121,8 @@ DeviceView::DeviceView(QWidget* parent)
     library_menu_(new QMenu(this))
 {
   // Device menu items
-  connect_action_ = device_menu_->addAction(
-      IconLoader::Load("list-add"), tr("Connect device"), this, SLOT(Connect()));
-  disconnect_action_ = device_menu_->addAction(
-      IconLoader::Load("list-remove"), tr("Disconnect device"), this, SLOT(Disconnect()));
+  eject_action_ = device_menu_->addAction(
+      IconLoader::Load("media-eject"), tr("Safely remove device"), this, SLOT(Unmount()));
   forget_action_ = device_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Forget device"), this, SLOT(Forget()));
   device_menu_->addSeparator();
@@ -187,16 +185,11 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
   const QModelIndex library_index = MapToLibrary(menu_index_);
 
   if (device_index.isValid()) {
-    const bool is_connected = manager_->GetConnectedDevice(device_index.row());
     const bool is_plugged_in = manager_->GetLister(device_index.row());
     const bool is_remembered = manager_->GetDatabaseId(device_index.row()) != -1;
 
-    connect_action_->setEnabled(is_plugged_in);
-    disconnect_action_->setEnabled(is_plugged_in);
     forget_action_->setEnabled(is_remembered);
-
-    connect_action_->setVisible(!is_connected);
-    disconnect_action_->setVisible(is_connected);
+    eject_action_->setEnabled(is_plugged_in);
 
     device_menu_->popup(e->globalPos());
   } else if (library_index.isValid()) {
@@ -252,11 +245,6 @@ void DeviceView::Connect() {
   merged_model_->AddSubModel(sort_idx, sort_model);
 
   expand(menu_index_);
-}
-
-void DeviceView::Disconnect() {
-  QModelIndex device_idx = MapToDevice(menu_index_);
-  manager_->Disconnect(device_idx.row());
 }
 
 void DeviceView::DeviceDisconnected(int row) {
@@ -342,4 +330,9 @@ void DeviceView::Organise() {
   organise_dialog_->SetCopy(true);
   organise_dialog_->SetFilenames(filenames);
   organise_dialog_->show();
+}
+
+void DeviceView::Unmount() {
+  QModelIndex device_idx = MapToDevice(menu_index_);
+  manager_->Unmount(device_idx.row());
 }

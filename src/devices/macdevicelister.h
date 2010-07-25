@@ -25,6 +25,8 @@ class MacDeviceLister : public DeviceLister {
   virtual QString MakeFriendlyName(const QString& id);
   virtual QUrl MakeDeviceUrl(const QString& id);
 
+  virtual void UnmountDevice(const QString &id);
+
  private:
   virtual void Init();
 

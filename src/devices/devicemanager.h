@@ -79,6 +79,7 @@ public:
   boost::shared_ptr<ConnectedDevice> Connect(int row);
   void Disconnect(int row);
   void Forget(int row);
+  void Unmount(int row);
 
   void SetDeviceIdentity(int row, const QString& friendly_name,
                          const QString& icon_name);

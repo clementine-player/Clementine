@@ -42,8 +42,9 @@ public:
   QVariantMap DeviceHardwareInfo(const QString& id);
 
   QString MakeFriendlyName(const QString &id);
-
   QUrl MakeDeviceUrl(const QString &id);
+
+  void UnmountDevice(const QString &id);
 
 protected:
   void Init();
@@ -73,6 +74,10 @@ private:
   static void MountAddedCallback(GVolumeMonitor*, GMount*, gpointer);
   static void MountChangedCallback(GVolumeMonitor*, GMount*, gpointer);
   static void MountRemovedCallback(GVolumeMonitor*, GMount*, gpointer);
+
+  static void VolumeEjectFinished(GObject *object, GAsyncResult *result, gpointer);
+  static void MountEjectFinished(GObject *object, GAsyncResult *result, gpointer);
+  static void MountUnmountFinished(GObject *object, GAsyncResult *result, gpointer);
 
   static QString ConvertAndFree(char* str);
   static MountInfo ReadMountInfo(GMount* mount);
