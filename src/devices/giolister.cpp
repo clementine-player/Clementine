@@ -60,7 +60,11 @@ QStringList GioLister::DeviceUniqueIDs() {
 }
 
 QStringList GioLister::DeviceIcons(const QString &id) {
-  return LockAndGetMountInfo(id, &MountInfo::icon_names);
+  QStringList ret;
+  QString path = LockAndGetMountInfo(id, &MountInfo::mount_path);
+  ret << DeviceLister::GuessIconForPath(path)
+      << LockAndGetMountInfo(id, &MountInfo::icon_names);
+  return ret;
 }
 
 QString GioLister::DeviceManufacturer(const QString &id) {

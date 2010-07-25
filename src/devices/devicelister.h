@@ -62,6 +62,8 @@ protected:
   virtual void Init() = 0;
   QUrl MakeUrlFromLocalPath(const QString& path);
 
+  QStringList GuessIconForPath(const QString& path);
+
 protected:
   QThread* thread_;
 
