@@ -56,6 +56,8 @@ bool IsIpod(const QString& path) {
          QFile::exists(path + "/iPod_Control");
 }
 
+#ifdef HAVE_LIBGPOD
+
 QString GetIpodColour(Itdb_IpodModel model) {
   switch (model) {
     case ITDB_IPOD_MODEL_MINI_GREEN:
@@ -154,6 +156,8 @@ QString GetIpodModel(Itdb_IpodModel model) {
   }
 }
 
+#endif
+
 }
 
 QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
@@ -168,6 +172,8 @@ QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
 
 QStringList DeviceLister::GuessIconForPath(const QString& path) {
   QStringList ret;
+
+#ifdef HAVE_LIBGPOD
   if (IsIpod(path)) {
     Itdb_Device* device = itdb_device_new();
     itdb_device_set_mountpoint(device, path.toLocal8Bit().constData());
@@ -191,6 +197,7 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
       ret << model_icon.arg(model);
     }
   }
+#endif
 
   return ret;
 }
