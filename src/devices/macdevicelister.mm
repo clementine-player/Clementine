@@ -339,9 +339,8 @@ void MacDeviceLister::UnmountDevice(const QString& serial) {
 
 void MacDeviceLister::DiskUnmountCallback(
     DADiskRef disk, DADissenterRef dissenter, void* context) {
-  MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
   if (dissenter) {
-    qDebug() << "Another app blocked the unmount";
+    qWarning() << "Another app blocked the unmount";
   } else {
     DiskRemovedCallback(disk, context);
   }
