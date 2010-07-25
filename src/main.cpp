@@ -81,6 +81,13 @@ void LoadTranslation(const QString& prefix, const QString& path) {
     delete t;
 }
 
+void GLog(const gchar* domain,
+          GLogLevelFlags level,
+          const gchar* message,
+          gpointer user_data) {
+  qDebug() << "GLOG" << message;
+}
+
 int main(int argc, char *argv[]) {
 #ifdef Q_OS_DARWIN
   // Do Mac specific startup to get media keys working.
@@ -96,6 +103,8 @@ int main(int argc, char *argv[]) {
   // This makes us show up nicely in gnome-volume-control
   g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
+
+  g_log_set_default_handler(&GLog, NULL);
 
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
