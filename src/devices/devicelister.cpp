@@ -22,7 +22,9 @@
 #include <QThread>
 #include <QtDebug>
 
+#ifdef HAVE_LIBGPOD
 #include <gpod/itdb.h>
+#endif
 
 DeviceLister::DeviceLister()
   : thread_(NULL)
