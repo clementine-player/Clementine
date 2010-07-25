@@ -26,7 +26,7 @@ class DeviceStateFilterModel : public QSortFilterProxyModel {
 
 public:
   DeviceStateFilterModel(QObject* parent,
-      DeviceManager::State state = DeviceManager::State_Connected);
+      DeviceManager::State state = DeviceManager::State_Remembered);
 
 signals:
   void IsEmptyChanged(bool is_empty);

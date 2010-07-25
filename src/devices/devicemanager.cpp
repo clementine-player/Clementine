@@ -237,14 +237,16 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       return info.task_percentage_;
 
     case MusicStorage::kStorageRole:
-      if (info.device_)
-        return QVariant::fromValue(info.device_->storage());
-      return QVariant();
+      if (!info.device_)
+        const_cast<DeviceManager*>(this)->Connect(index.row());
+      if (!info.device_)
+        return QVariant();
+      return QVariant::fromValue(info.device_->storage());
 
     case Role_MountPath:
-      if (info.device_)
-        return info.device_->url().path();
-      return QVariant();
+      if (!info.device_)
+        return QVariant();
+      return info.device_->url().path();
 
     default:
       return QVariant();
@@ -443,6 +445,8 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
     connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
   }
+
+  emit DeviceConnected(row);
 
   return ret;
 }

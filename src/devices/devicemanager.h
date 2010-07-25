@@ -89,6 +89,7 @@ public:
   QVariant data(const QModelIndex &index, int role) const;
 
 signals:
+  void DeviceConnected(int row);
   void DeviceDisconnected(int row);
   void Error(const QString& message);
 

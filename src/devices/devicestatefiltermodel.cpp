@@ -30,7 +30,7 @@ DeviceStateFilterModel::DeviceStateFilterModel(QObject *parent,
 
 bool DeviceStateFilterModel::filterAcceptsRow(int row, const QModelIndex&) const {
   return sourceModel()->index(row, 0).data(DeviceManager::Role_State).toInt()
-      == state_;
+      != state_;
 }
 
 void DeviceStateFilterModel::ProxyRowCountChanged() {

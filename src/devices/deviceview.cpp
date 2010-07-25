@@ -151,6 +151,7 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
   Q_ASSERT(manager_ == NULL);
 
   manager_ = manager;
+  connect(manager_, SIGNAL(DeviceConnected(int)), SLOT(DeviceConnected(int)));
   connect(manager_, SIGNAL(DeviceDisconnected(int)), SLOT(DeviceDisconnected(int)));
 
   sort_model_ = new QSortFilterProxyModel(this);
@@ -217,7 +218,6 @@ QModelIndex DeviceView::MapToLibrary(const QModelIndex& merged_model_index) cons
 
 void DeviceView::Connect() {
   QModelIndex device_idx = MapToDevice(menu_index_);
-  QModelIndex sort_idx = sort_model_->mapFromSource(device_idx);
   bool first_time = manager_->GetDatabaseId(device_idx.row()) == -1;
 
   if (first_time) {
@@ -233,9 +233,15 @@ void DeviceView::Connect() {
       return;
   }
 
-  boost::shared_ptr<ConnectedDevice> device = manager_->Connect(device_idx.row());
+  manager_->Connect(device_idx.row());
+}
+
+void DeviceView::DeviceConnected(int row) {
+  boost::shared_ptr<ConnectedDevice> device = manager_->GetConnectedDevice(row);
   if (!device)
     return;
+
+  QModelIndex sort_idx = sort_model_->mapFromSource(manager_->index(row));
 
   QSortFilterProxyModel* sort_model = new QSortFilterProxyModel(device->model());
   sort_model->setSourceModel(device->model());

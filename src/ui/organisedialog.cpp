@@ -183,6 +183,8 @@ void OrganiseDialog::UpdatePreviews() {
     }
   }
 
+  updateGeometry();
+
   QSize new_size = size();
   new_size.setHeight(sizeHint().height());
   resize(new_size);

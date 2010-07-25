@@ -72,6 +72,7 @@ private slots:
   void Organise();
   void Delete();
 
+  void DeviceConnected(int row);
   void DeviceDisconnected(int row);
 
 private:
