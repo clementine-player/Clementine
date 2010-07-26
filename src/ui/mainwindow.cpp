@@ -383,6 +383,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_menu_->addAction(ui_->action_stop);
   playlist_stop_after_ = playlist_menu_->addAction(IconLoader::Load("media-playback-stop"), tr("Stop after this track"), this, SLOT(PlaylistStopAfter()));
   playlist_queue_ = playlist_menu_->addAction("", this, SLOT(PlaylistQueue()));
+  playlist_queue_->setShortcut(QKeySequence("Ctrl+D"));
+  ui_->playlist->addAction(playlist_queue_);
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_remove_from_playlist);
   playlist_undoredo_ = playlist_menu_->addSeparator();
