@@ -78,6 +78,10 @@ Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
   connect(queue_, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
           SLOT(TracksAboutToBeDequeued(QModelIndex,int,int)));
   connect(queue_, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(TracksDequeued()));
+
+  connect(queue_, SIGNAL(rowsInserted(const QModelIndex&, int, int)),
+          SLOT(TracksEnqueued(const QModelIndex&, int, int)));
+
   connect(queue_, SIGNAL(layoutChanged()), SLOT(QueueLayoutChanged()));
 }
 
@@ -1103,20 +1107,26 @@ PlaylistItemList Playlist::library_items_by_id(int id) const {
 
 void Playlist::TracksAboutToBeDequeued(const QModelIndex&, int begin, int end) {
   for (int i=begin ; i<=end ; ++i) {
-    temp_queue_change_indexes_ << queue_->mapToSource(queue_->index(i, Column_Title));
+    temp_dequeue_change_indexes_ << queue_->mapToSource(queue_->index(i, Column_Title));
   }
 }
 
 void Playlist::TracksDequeued() {
-  foreach (const QModelIndex& index, temp_queue_change_indexes_) {
+  foreach (const QModelIndex& index, temp_dequeue_change_indexes_) {
     emit dataChanged(index, index);
   }
-  temp_queue_change_indexes_.clear();
+  temp_dequeue_change_indexes_.clear();
+}
+
+void Playlist::TracksEnqueued(const QModelIndex&, int begin, int end) {
+  const QModelIndex& b = queue_->mapToSource(queue_->index(begin, Column_Title));
+  const QModelIndex& e = queue_->mapToSource(queue_->index(end, Column_Title));
+  emit dataChanged(b, e);
 }
 
 void Playlist::QueueLayoutChanged() {
   for (int i=0 ; i<queue_->rowCount() ; ++i) {
-    const QModelIndex index = queue_->mapToSource(queue_->index(i, Column_Title));
+    const QModelIndex& index = queue_->mapToSource(queue_->index(i, Column_Title));
     emit dataChanged(index, index);
   }
 }

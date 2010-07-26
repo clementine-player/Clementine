@@ -200,13 +200,14 @@ class Playlist : public QAbstractListModel {
  private slots:
   void TracksAboutToBeDequeued(const QModelIndex&, int begin, int end);
   void TracksDequeued();
+  void TracksEnqueued(const QModelIndex&, int begin, int end);
   void QueueLayoutChanged();
 
  private:
   PlaylistFilter* proxy_;
   Queue* queue_;
 
-  QList<QModelIndex> temp_queue_change_indexes_;
+  QList<QModelIndex> temp_dequeue_change_indexes_;
 
   PlaylistBackend* backend_;
   TaskManager* task_manager_;
