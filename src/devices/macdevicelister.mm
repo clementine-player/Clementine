@@ -18,6 +18,18 @@
 #include <QString>
 #include <QStringList>
 
+#ifndef kUSBSerialNumberString
+#define kUSBSerialNumberString "USB Serial Number"
+#endif
+
+#ifndef kUSBVendorString
+#define kUSBVendorString "USB Vendor Name"
+#endif
+
+#ifndef kUSBProductString
+#define kUSBProductString "USB Product Name"
+#endif
+
 MacDeviceLister::MacDeviceLister() {
 }
 
@@ -257,11 +269,19 @@ QStringList MacDeviceLister::DeviceIcons(const QString& serial) {
   io_object_t device = DADiskCopyIOMedia(disk);
   QString icon = GetIconForDevice(device);
 
+  NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
+  NSURL* volume_path = 
+      [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
+
+  QString path = QString::fromUtf8([[volume_path path] UTF8String]);
+
   IOObjectRelease(device);
   CFRelease(disk);
   CFRelease(session);
 
   QStringList ret;
+  ret << GuessIconForPath(path);
+  ret << GuessIconForModel(DeviceManufacturer(serial), DeviceModel(serial));
   if (!icon.isEmpty()) {
     ret << icon;
   }
