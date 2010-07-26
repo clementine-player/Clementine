@@ -399,6 +399,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
 
+#ifdef Q_OS_DARWIN
+  ui_->action_shuffle->setShortcut(QKeySequence());
+#endif
+
   playlist_delete_->setVisible(false); // TODO
 
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
