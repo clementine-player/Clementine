@@ -121,12 +121,14 @@ void SimpleTreeItem<T>::DeleteNotify(int child_row) {
 
 template <typename T>
 void SimpleTreeItem<T>::ClearNotify() {
-  model->BeginDelete(static_cast<T*>(this), 0, children.count()-1);
+  if (children.count()) {
+    model->BeginDelete(static_cast<T*>(this), 0, children.count() - 1);
 
-  qDeleteAll(children);
-  children.clear();
+    qDeleteAll(children);
+    children.clear();
 
-  model->EndDelete();
+    model->EndDelete();
+  }
 }
 
 template <typename T>
