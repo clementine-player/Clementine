@@ -73,6 +73,10 @@ void StyleSheetLoader::UpdateStyleSheet(QWidget *widget) {
   ReplaceColor(&contents, "Link", p, QPalette::Link);
   ReplaceColor(&contents, "LinkVisited", p, QPalette::LinkVisited);
 
+#ifdef Q_OS_DARWIN
+  contents.replace("darwin", "*");
+#endif
+
   widget->setStyleSheet(contents);
 }
 
