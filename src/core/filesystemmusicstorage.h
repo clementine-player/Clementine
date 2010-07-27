@@ -22,6 +22,7 @@
 class FilesystemMusicStorage : public virtual MusicStorage {
 public:
   FilesystemMusicStorage(const QString& root);
+  ~FilesystemMusicStorage() {}
 
   QString LocalPath() const { return root_; }
 

@@ -24,6 +24,7 @@ using std::min;
 using ::testing::MakeMatcher;
 using ::testing::Matcher;
 using ::testing::MatcherInterface;
+using ::testing::MatchResultListener;
 using ::testing::Return;
 
 class RequestForUrlMatcher : public MatcherInterface<const QNetworkRequest&> {
@@ -50,6 +51,11 @@ class RequestForUrlMatcher : public MatcherInterface<const QNetworkRequest&> {
       }
     }
     return true;
+  }
+
+  virtual bool MatchAndExplain(const QNetworkRequest& req, MatchResultListener* listener) const {
+    *listener << "which is " << req.url().toString().toUtf8().constData();
+    return Matches(req);
   }
 
   virtual void DescribeTo(::std::ostream* os) const {
@@ -108,6 +114,7 @@ qint64 MockNetworkReply::readData(char* data, qint64 size) {
 
 qint64 MockNetworkReply::writeData(const char* data, qint64) {
   ADD_FAILURE() << "Something tried to write to a QNetworkReply";
+  return -1;
 }
 
 void MockNetworkReply::Done() {

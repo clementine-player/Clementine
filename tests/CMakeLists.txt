@@ -20,6 +20,7 @@ set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest-typed-test.cc
 )
 
+add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=1)
 add_library(gtest STATIC EXCLUDE_FROM_ALL ${GTEST-SOURCES})
 
 set(GMOCK-SOURCES
