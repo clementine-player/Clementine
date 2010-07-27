@@ -83,6 +83,8 @@ macro(add_test_file test_source gui_required)
       target_link_libraries(${TEST_NAME} test_main)
     endif (GUI_REQUIRED)
 
+    set_target_properties(${TEST_NAME} PROPERTIES COMPILE_FLAGS "-Wno-bool-conversions")
+
     add_custom_command(TARGET test POST_BUILD
         COMMAND ./${TEST_NAME}${CMAKE_EXECUTABLE_SUFFIX})
     add_dependencies(build_tests ${TEST_NAME})
