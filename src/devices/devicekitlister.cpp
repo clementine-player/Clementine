@@ -24,7 +24,7 @@
 #  include "gpoddevice.h"
 #endif
 
-#include <sys/vfs.h>
+#include <sys/statvfs.h>
 
 #include <QtDebug>
 
@@ -179,8 +179,8 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
 
   // Get free space info
   if (!ret.device_mount_paths.isEmpty()) {
-    struct statfs fs_info;
-    if (statfs(ret.device_mount_paths[0].toLocal8Bit().constData(), &fs_info) == 0) {
+    struct statvfs fs_info;
+    if (statvfs(ret.device_mount_paths[0].toLocal8Bit().constData(), &fs_info) == 0) {
       ret.free_space = fs_info.f_bavail * fs_info.f_bsize;
     }
   }
