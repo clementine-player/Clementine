@@ -207,6 +207,18 @@ void LibraryWatcher::ScanSubdirectory(
     const QString& path, const Subdirectory& subdir, ScanTransaction* t,
     bool force_noincremental) {
   QFileInfo path_info(path);
+
+  // Do not scan symlinked dirs that are already in collection
+  if (path_info.isSymLink()) {
+    QString real_path = path_info.symLinkTarget();
+    foreach (const DirData& dir_data, watched_dirs_) {
+      if (real_path.startsWith(dir_data.dir.path)) {
+        t->AddToProgress(1);
+        return;
+      }
+    }
+  }
+
   if (!force_noincremental && t->is_incremental() &&
       subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
