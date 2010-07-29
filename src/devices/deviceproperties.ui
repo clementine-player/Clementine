@@ -14,7 +14,7 @@
    <string>Device Properties</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -69,18 +69,21 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_5">
+      <widget class="QLabel" name="free_space_label">
        <property name="text">
-        <string>Capacity</string>
+        <string>Available space</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="capacity">
+      <widget class="QLabel" name="free_space_value">
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
        </property>
       </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="FreeSpaceBar" name="free_space_bar" native="true"/>
      </item>
     </layout>
    </item>
@@ -172,13 +175,23 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FreeSpaceBar</class>
+   <extends>QWidget</extends>
+   <header>widgets/freespacebar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>name</tabstop>
   <tabstop>icon</tabstop>
   <tabstop>hardware_info</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

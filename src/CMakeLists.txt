@@ -143,6 +143,7 @@ set(SOURCES
   widgets/errordialog.cpp
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
+  widgets/freespacebar.cpp
   widgets/lineedit.cpp
   widgets/linetextedit.cpp
   widgets/multiloadingindicator.cpp
@@ -258,6 +259,7 @@ set(HEADERS
   widgets/errordialog.h
   widgets/fileview.h
   widgets/fileviewlist.h
+  widgets/freespacebar.h
   widgets/lineedit.h
   widgets/linetextedit.h
   widgets/multiloadingindicator.h

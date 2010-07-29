@@ -82,15 +82,6 @@ void DeviceProperties::ShowDevice(int row) {
   // Basic information
   ui_->name->setText(index_.data(DeviceManager::Role_FriendlyName).toString());
 
-  // Size
-  QString size_text = Utilities::PrettySize(
-      index_.data(DeviceManager::Role_Capacity).toLongLong());
-  qint64 free_space = index_.data(DeviceManager::Role_FreeSpace).toLongLong();
-  if (free_space)
-    size_text += QString(" (%1 %2)").arg(Utilities::PrettySize(free_space),
-                                         tr("available"));
-  ui_->capacity->setText(size_text);
-
   // Find the right icon
   QString icon_name = index_.data(DeviceManager::Role_IconName).toString();
   for (int i=0 ; i<ui_->icon->count() ; ++i) {
@@ -140,6 +131,26 @@ void DeviceProperties::UpdateHardwareInfo() {
     ui_->hardware_info->sortItems(0);
   } else {
     ui_->hardware_info_stack->setCurrentWidget(ui_->hardware_info_not_connected_page);
+  }
+
+  // Size
+  quint64 total = index_.data(DeviceManager::Role_Capacity).toLongLong();
+  QString total_text = Utilities::PrettySize(total);
+
+  QVariant free_var = index_.data(DeviceManager::Role_FreeSpace);
+  if (free_var.isValid()) {
+    quint64 free = free_var.toLongLong();
+    QString free_text = Utilities::PrettySize(free);
+
+    ui_->free_space_label->setText(tr("Available space"));
+    ui_->free_space_value->setText(tr("%1 of %2").arg(free_text, total_text));
+    ui_->free_space_bar->set_total_bytes(total);
+    ui_->free_space_bar->set_free_bytes(free);
+    ui_->free_space_bar->show();
+  } else {
+    ui_->free_space_label->setText(tr("Capacity"));
+    ui_->free_space_value->setText(total_text);
+    ui_->free_space_bar->hide();
   }
 }
 
