@@ -58,7 +58,7 @@ private slots:
 
 private:
   struct DeviceData {
-    DeviceData() : suitable(false), device_size(0) {}
+    DeviceData() : suitable(false), device_size(0), free_space(0) {}
 
     QString unique_id() const;
 
@@ -72,6 +72,7 @@ private:
     QString device_presentation_icon_name;
     QStringList device_mount_paths;
     quint64 device_size;
+    quint64 free_space;
   };
 
   DeviceData ReadDeviceData(const QDBusObjectPath& path) const;

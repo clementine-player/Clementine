@@ -24,6 +24,8 @@
 #  include "gpoddevice.h"
 #endif
 
+#include <sys/vfs.h>
+
 #include <QtDebug>
 
 DeviceKitLister::DeviceKitLister()
@@ -110,7 +112,7 @@ quint64 DeviceKitLister::DeviceCapacity(const QString &id) {
 }
 
 quint64 DeviceKitLister::DeviceFreeSpace(const QString &id) {
-  return 0; // TODO
+  return LockAndGetDeviceInfo(id, &DeviceData::free_space);
 }
 
 QVariantMap DeviceKitLister::DeviceHardwareInfo(const QString &id) {
@@ -174,6 +176,15 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
   ret.device_presentation_icon_name = device.devicePresentationIconName();
   ret.device_size = device.deviceSize();
   ret.device_mount_paths = device.deviceMountPaths();
+
+  // Get free space info
+  if (!ret.device_mount_paths.isEmpty()) {
+    struct statfs fs_info;
+    if (statfs(ret.device_mount_paths[0].toLocal8Bit().constData(), &fs_info) == 0) {
+      ret.free_space = fs_info.f_bavail * fs_info.f_bsize;
+    }
+  }
+
   return ret;
 }
 
