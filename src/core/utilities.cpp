@@ -19,6 +19,8 @@
 #include <QCoreApplication>
 #include <QStringList>
 
+#include <sys/statvfs.h>
+
 namespace Utilities {
 
 static QString tr(const char* str) {
@@ -70,6 +72,22 @@ QString PrettySize(quint64 bytes) {
       ret.sprintf("%.1f GB", float(bytes) / (1000*1000*1000));
   }
   return ret;
+}
+
+quint64 FileSystemCapacity(const QString& path) {
+  struct statvfs fs_info;
+  if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
+    return fs_info.f_blocks * fs_info.f_bsize;
+
+  return 0;
+}
+
+quint64 FileSystemFreeSpace(const QString& path) {
+  struct statvfs fs_info;
+  if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
+    return fs_info.f_bavail * fs_info.f_bsize;
+
+  return 0;
 }
 
 } // namespace

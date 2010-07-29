@@ -97,7 +97,7 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices
   ui_->eject_after->setVisible(devices);
 }
 
-void OrganiseDialog::SetUrls(const QList<QUrl> &urls) {
+void OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
   QStringList filenames;
 
   // Only add file:// URLs
@@ -107,10 +107,10 @@ void OrganiseDialog::SetUrls(const QList<QUrl> &urls) {
     filenames << url.toLocalFile();
   }
 
-  SetFilenames(filenames);
+  SetFilenames(filenames, total_size);
 }
 
-void OrganiseDialog::SetFilenames(const QStringList& filenames) {
+void OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_size) {
   filenames_ = filenames;
   preview_songs_.clear();
 
@@ -119,6 +119,9 @@ void OrganiseDialog::SetFilenames(const QStringList& filenames) {
   for (int i=0 ; i<n ; ++i) {
     LoadPreviewSongs(filenames_[i]);
   }
+
+  ui_->free_space->set_additional_bytes(total_size);
+  qDebug() << "Total bytes" << total_size;
 
   UpdatePreviews();
 }
@@ -158,7 +161,7 @@ void OrganiseDialog::UpdatePreviews() {
   bool has_local_destination = false;
 
   if (destination.isValid()) {
-    storage = destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
+    storage = destination.data(MusicStorage::Role_Storage).value<MusicStorage*>();
     has_local_destination = !storage->LocalPath().isEmpty();
   }
 
@@ -172,6 +175,18 @@ void OrganiseDialog::UpdatePreviews() {
   ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(format_valid && storage);
   if (!format_valid)
     return;
+
+  // Update the free space bar
+  quint64 capacity = destination.data(MusicStorage::Role_Capacity).toLongLong();
+  quint64 free = destination.data(MusicStorage::Role_FreeSpace).toLongLong();
+
+  if (!capacity) {
+    ui_->free_space->hide();
+  } else {
+    ui_->free_space->show();
+    ui_->free_space->set_free_bytes(free);
+    ui_->free_space->set_total_bytes(capacity);
+  }
 
   // Update the previews
   ui_->preview->clear();
@@ -232,7 +247,7 @@ void OrganiseDialog::accept() {
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
   MusicStorage* storage =
-      destination.data(MusicStorage::kStorageRole).value<MusicStorage*>();
+      destination.data(MusicStorage::Role_Storage).value<MusicStorage*>();
 
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;

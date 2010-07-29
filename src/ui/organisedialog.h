@@ -47,8 +47,8 @@ public:
 
   void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 
-  void SetUrls(const QList<QUrl>& urls);
-  void SetFilenames(const QStringList& filenames);
+  void SetUrls(const QList<QUrl>& urls, quint64 total_size = 0);
+  void SetFilenames(const QStringList& filenames, quint64 total_size = 0);
   void SetCopy(bool copy);
 
 public slots:

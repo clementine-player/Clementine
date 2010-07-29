@@ -217,9 +217,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       return info.icon_name_;
 
     case Role_Capacity:
+    case MusicStorage::Role_Capacity:
       return info.size_;
 
     case Role_FreeSpace:
+    case MusicStorage::Role_FreeSpace:
       return info.BestBackend()->lister_ ?
           info.BestBackend()->lister_->DeviceFreeSpace(info.BestBackend()->unique_id_) :
           QVariant();
@@ -236,7 +238,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         return QVariant();
       return info.task_percentage_;
 
-    case MusicStorage::kStorageRole:
+    case MusicStorage::Role_Storage:
       if (!info.device_)
         const_cast<DeviceManager*>(this)->Connect(index.row());
       if (!info.device_)

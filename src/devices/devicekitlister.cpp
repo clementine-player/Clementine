@@ -17,6 +17,7 @@
 #include "config.h"
 #include "devicekitlister.h"
 #include "filesystemdevice.h"
+#include "core/utilities.h"
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
 
@@ -178,12 +179,8 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
   ret.device_mount_paths = device.deviceMountPaths();
 
   // Get free space info
-  if (!ret.device_mount_paths.isEmpty()) {
-    struct statvfs fs_info;
-    if (statvfs(ret.device_mount_paths[0].toLocal8Bit().constData(), &fs_info) == 0) {
-      ret.free_space = fs_info.f_bavail * fs_info.f_bsize;
-    }
-  }
+  if (!ret.device_mount_paths.isEmpty())
+    ret.free_space = Utilities::FileSystemFreeSpace(ret.device_mount_paths[0]);
 
   return ret;
 }

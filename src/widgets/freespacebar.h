@@ -22,6 +22,7 @@
 class FreeSpaceBar : public QWidget {
   Q_OBJECT
   Q_PROPERTY(quint64 free READ free_bytes WRITE set_free_bytes);
+  Q_PROPERTY(quint64 additional READ additional_bytes WRITE set_additional_bytes);
   Q_PROPERTY(quint64 total READ total_bytes WRITE set_total_bytes);
 
 public:
@@ -33,13 +34,17 @@ public:
 
   static const QRgb kColorBg1;
   static const QRgb kColorBg2;
+  static const QRgb kColorAdd1;
+  static const QRgb kColorAdd2;
   static const QRgb kColorBar1;
   static const QRgb kColorBar2;
   static const QRgb kColorBorder;
 
   quint64 free_bytes() const { return free_; }
+  quint64 additional_bytes() const { return additional_; }
   quint64 total_bytes() const { return total_; }
   void set_free_bytes(quint64 bytes);
+  void set_additional_bytes(quint64 bytes);
   void set_total_bytes(quint64 bytes);
 
   QSize sizeHint() const;
@@ -49,6 +54,7 @@ protected:
 
 private:
   quint64 free_;
+  quint64 additional_;
   quint64 total_;
 };
 

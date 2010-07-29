@@ -250,24 +250,30 @@ void LibraryView::scrollTo(const QModelIndex &index, ScrollHint hint) {
     QTreeView::scrollTo(index, hint);
 }
 
-QStringList LibraryView::GetSelectedFilenames() const {
+void LibraryView::GetSelectedFileInfo(
+    QStringList *filenames, quint64 *size) const {
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
           selectionModel()->selection()).indexes();
   SongList songs = library_->GetChildSongs(selected_indexes);
-  QStringList ret;
 
+  *size = 0;
   foreach (const Song& song, songs) {
-    ret << song.filename();
-  }
+    *filenames << song.filename();
 
-  return ret;
+    if (song.filesize() >= 0)
+      *size += song.filesize();
+  }
 }
 
 void LibraryView::Organise() {
+  QStringList filenames;
+  quint64 size = 0;
+  GetSelectedFileInfo(&filenames, &size);
+
   organise_dialog_->SetDestinationModel(library_->directory_model());
   organise_dialog_->SetCopy(false);
-  organise_dialog_->SetFilenames(GetSelectedFilenames());
+  organise_dialog_->SetFilenames(filenames, size);
   organise_dialog_->show();
 }
 
@@ -276,8 +282,12 @@ void LibraryView::Delete() {
 }
 
 void LibraryView::CopyToDevice() {
+  QStringList filenames;
+  quint64 size = 0;
+  GetSelectedFileInfo(&filenames, &size);
+
   organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
-  organise_dialog_->SetFilenames(GetSelectedFilenames());
+  organise_dialog_->SetFilenames(filenames, size);
   organise_dialog_->show();
 }

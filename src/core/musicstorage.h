@@ -26,7 +26,11 @@ public:
   MusicStorage();
   virtual ~MusicStorage() {}
 
-  static const int kStorageRole = Qt::UserRole + 100;
+  enum Role {
+    Role_Storage = Qt::UserRole + 100,
+    Role_Capacity,
+    Role_FreeSpace,
+  };
 
   virtual QString LocalPath() const { return QString(); }
 

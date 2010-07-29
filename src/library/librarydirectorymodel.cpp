@@ -18,6 +18,7 @@
 #include "librarybackend.h"
 #include "core/filesystemmusicstorage.h"
 #include "core/musicstorage.h"
+#include "core/utilities.h"
 #include "ui/iconloader.h"
 
 LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* parent)
@@ -70,9 +71,17 @@ void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
 }
 
 QVariant LibraryDirectoryModel::data(const QModelIndex &index, int role) const {
-  if (role == MusicStorage::kStorageRole) {
+  switch (role) {
+  case MusicStorage::Role_Storage:
     return QVariant::fromValue(storage_[index.row()]);
-  }
 
-  return QStandardItemModel::data(index, role);
+  case MusicStorage::Role_FreeSpace:
+    return Utilities::FileSystemFreeSpace(data(index, Qt::DisplayRole).toString());
+
+  case MusicStorage::Role_Capacity:
+    return Utilities::FileSystemCapacity(data(index, Qt::DisplayRole).toString());
+
+  default:
+    return QStandardItemModel::data(index, role);
+  }
 }

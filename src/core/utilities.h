@@ -23,6 +23,9 @@ namespace Utilities {
   QString PrettyTime(int seconds);
   QString PrettySize(quint64 bytes);
   QString WordyTime(quint64 seconds);
+
+  quint64 FileSystemCapacity(const QString& path);
+  quint64 FileSystemFreeSpace(const QString& path);
 }
 
 #endif // UTILITIES_H

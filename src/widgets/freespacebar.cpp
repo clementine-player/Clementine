@@ -25,6 +25,8 @@ const int FreeSpaceBar::kMarkerSpacing = 32;
 
 const QRgb FreeSpaceBar::kColorBg1 = qRgb(214, 207, 200);
 const QRgb FreeSpaceBar::kColorBg2 = qRgb(234, 226, 218);
+const QRgb FreeSpaceBar::kColorAdd1 = qRgb(250, 182, 134);
+const QRgb FreeSpaceBar::kColorAdd2 = qRgb(229, 157, 105);
 const QRgb FreeSpaceBar::kColorBar1 = qRgb(250, 148, 76);
 const QRgb FreeSpaceBar::kColorBar2 = qRgb(214, 102, 24);
 const QRgb FreeSpaceBar::kColorBorder = qRgb(174, 168, 162);
@@ -32,7 +34,8 @@ const QRgb FreeSpaceBar::kColorBorder = qRgb(174, 168, 162);
 
 FreeSpaceBar::FreeSpaceBar(QWidget *parent)
   : QWidget(parent),
-    free_(33),
+    free_(100),
+    additional_(0),
     total_(100)
 {
   setMinimumHeight(kBarHeight);
@@ -40,6 +43,11 @@ FreeSpaceBar::FreeSpaceBar(QWidget *parent)
 
 void FreeSpaceBar::set_free_bytes(quint64 bytes) {
   free_ = bytes;
+  update();
+}
+
+void FreeSpaceBar::set_additional_bytes(quint64 bytes) {
+  additional_ = bytes;
   update();
 }
 
@@ -73,6 +81,20 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
   p.setPen(Qt::NoPen);
   p.setBrush(background_gradient);
   p.drawRoundedRect(background_rect, kBarBorderRadius, kBarBorderRadius);
+
+  // Draw any additional space
+  if (additional_) {
+    QRect additional_rect(bar_rect);
+    additional_rect.setWidth(float(background_rect.width()) * (
+        float(qMin(total_, total_ - free_ + additional_)) / total_));
+
+    QLinearGradient additional_gradient(additional_rect.topLeft(), additional_rect.bottomLeft());
+    additional_gradient.setColorAt(0, kColorAdd1);
+    additional_gradient.setColorAt(1, kColorAdd2);
+
+    p.setBrush(additional_gradient);
+    p.drawRoundedRect(additional_rect, kBarBorderRadius, kBarBorderRadius);
+  }
 
   // Draw the bar foreground
   p.setBrush(bar_gradient);

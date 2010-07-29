@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>588</width>
-    <height>497</height>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,6 +52,9 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="FreeSpaceBar" name="free_space" native="true"/>
    </item>
    <item>
     <widget class="QCheckBox" name="eject_after">
@@ -151,6 +154,12 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>FreeSpaceBar</class>
+   <extends>QWidget</extends>
+   <header>widgets/freespacebar.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>LineTextEdit</class>
    <extends>QTextEdit</extends>
