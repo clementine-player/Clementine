@@ -17,9 +17,14 @@
 #include "utilities.h"
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QStringList>
 
-#include <sys/statvfs.h>
+#if defined(Q_OS_UNIX)
+#  include <sys/statvfs.h>
+#elif defined(Q_OS_WIN32)
+#  include <windows.h>
+#endif
 
 namespace Utilities {
 
@@ -75,17 +80,31 @@ QString PrettySize(quint64 bytes) {
 }
 
 quint64 FileSystemCapacity(const QString& path) {
+#if defined(Q_OS_UNIX)
   struct statvfs fs_info;
   if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
     return fs_info.f_blocks * fs_info.f_bsize;
+#elif defined(Q_OS_WIN32)
+  _ULARGE_INTEGER ret;
+  if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
+                         NULL, &ret, NULL) != 0)
+    return ret.QuadPart;
+#endif
 
   return 0;
 }
 
 quint64 FileSystemFreeSpace(const QString& path) {
+#if defined(Q_OS_UNIX)
   struct statvfs fs_info;
   if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
     return fs_info.f_bavail * fs_info.f_bsize;
+#elif defined(Q_OS_WIN32)
+  _ULARGE_INTEGER ret;
+  if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
+                         &ret, NULL, NULL) != 0)
+    return ret.QuadPart;
+#endif
 
   return 0;
 }
