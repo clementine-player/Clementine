@@ -121,7 +121,6 @@ void OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_si
   }
 
   ui_->free_space->set_additional_bytes(total_size);
-  qDebug() << "Total bytes" << total_size;
 
   UpdatePreviews();
 }
@@ -162,7 +161,9 @@ void OrganiseDialog::UpdatePreviews() {
 
   if (destination.isValid()) {
     storage = destination.data(MusicStorage::Role_Storage).value<MusicStorage*>();
-    has_local_destination = !storage->LocalPath().isEmpty();
+    if (storage) {
+      has_local_destination = !storage->LocalPath().isEmpty();
+    }
   }
 
   // Update the format object
