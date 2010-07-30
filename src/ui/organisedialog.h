@@ -72,6 +72,7 @@ private:
 
   QStringList filenames_;
   SongList preview_songs_;
+  quint64 total_size_;
 };
 
 #endif // ORGANISEDIALOG_H

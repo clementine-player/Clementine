@@ -36,7 +36,8 @@ const char* OrganiseDialog::kSettingsGroup = "OrganiseDialog";
 OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_OrganiseDialog),
-    task_manager_(task_manager)
+    task_manager_(task_manager),
+    total_size_(0)
 {
   ui_->setupUi(this);
   connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(Reset()));
@@ -121,6 +122,7 @@ void OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_si
   }
 
   ui_->free_space->set_additional_bytes(total_size);
+  total_size_ = total_size;
 
   UpdatePreviews();
 }
@@ -166,17 +168,6 @@ void OrganiseDialog::UpdatePreviews() {
     }
   }
 
-  // Update the format object
-  format_.set_format(ui_->naming->toPlainText());
-  format_.set_replace_non_ascii(ui_->replace_ascii->isChecked());
-  format_.set_replace_spaces(ui_->replace_spaces->isChecked());
-  format_.set_replace_the(ui_->replace_the->isChecked());
-
-  const bool format_valid = format_.IsValid();
-  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(format_valid && storage);
-  if (!format_valid)
-    return;
-
   // Update the free space bar
   quint64 capacity = destination.data(MusicStorage::Role_Capacity).toLongLong();
   quint64 free = destination.data(MusicStorage::Role_FreeSpace).toLongLong();
@@ -188,6 +179,23 @@ void OrganiseDialog::UpdatePreviews() {
     ui_->free_space->set_free_bytes(free);
     ui_->free_space->set_total_bytes(capacity);
   }
+
+  // Update the format object
+  format_.set_format(ui_->naming->toPlainText());
+  format_.set_replace_non_ascii(ui_->replace_ascii->isChecked());
+  format_.set_replace_spaces(ui_->replace_spaces->isChecked());
+  format_.set_replace_the(ui_->replace_the->isChecked());
+
+  const bool format_valid = format_.IsValid();
+
+  // Are we gonna enable the ok button?
+  bool ok = format_valid && storage;
+  if (capacity != 0 && total_size_ > free)
+    ok = false;
+
+  ui_->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(ok);
+  if (!format_valid)
+    return;
 
   // Update the previews
   ui_->preview->clear();
