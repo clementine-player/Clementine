@@ -1,15 +1,16 @@
 #include "ilister.h"
 
+#include <QCoreApplication>
 #include <QStringList>
 #include <QtDebug>
 
 #include <plist/plist.h>
 
 iLister::iLister() {
-
 }
 
 iLister::~iLister() {
+  qDeleteAll(devices_);
 }
 
 
@@ -44,8 +45,9 @@ iLister::Connection::Connection(const char* uuid)
     return;
   }
 
+  const char* label = QCoreApplication::applicationName().toUtf8().constData();
   lockdownd_error_t lockdown_err =
-      lockdownd_client_new_with_handshake(device_, &lockdown_, "clementine");
+      lockdownd_client_new_with_handshake(device_, &lockdown_, label);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     qWarning() << "lockdown error:" << lockdown_err;
     return;
@@ -88,6 +90,26 @@ QString iLister::Connection::GetProperty(const char* property) {
   return ret;
 }
 
+quint64 iLister::Connection::GetInfoLongLong(const char* key) {
+  char* value = NULL;
+  afc_error_t err = afc_get_device_info_key(afc_, key, &value);
+  if (err != AFC_E_SUCCESS || !value) {
+    return 0;
+  }
+  QString num = QString::fromAscii(value);
+  quint64 ret = num.toULongLong();
+  free(value);
+  return ret;
+}
+
+quint64 iLister::Connection::GetFreeBytes() {
+  return GetInfoLongLong("FSFreeBytes");
+}
+
+quint64 iLister::Connection::GetTotalBytes() {
+  return GetInfoLongLong("FSTotalBytes");
+}
+
 void iLister::DeviceAddedCallback(const char* uuid) {
   qDebug() << Q_FUNC_INFO;
 
@@ -125,8 +147,13 @@ QString iLister::DeviceModel(const QString& id) {
   return devices_[id]->GetProperty("ProductType");
 }
 
-quint64 iLister::DeviceCapacity(const QString& id) { return 0; }
-quint64 iLister::DeviceFreeSpace(const QString& id) { return 0; }
+quint64 iLister::DeviceCapacity(const QString& id) {
+  return devices_[id]->GetTotalBytes();
+}
+
+quint64 iLister::DeviceFreeSpace(const QString& id) {
+  return devices_[id]->GetFreeBytes();
+}
 QVariantMap iLister::DeviceHardwareInfo(const QString& id) { return QVariantMap(); }
 QString iLister::MakeFriendlyName(const QString& id) {
   QString model_id = DeviceModel(id);

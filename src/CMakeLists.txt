@@ -516,6 +516,8 @@ list(APPEND OTHER_SOURCES
   devices/gpoddevice.h
   devices/gpodloader.cpp
   devices/gpodloader.h
+  devices/ilister.cpp
+  devices/ilister.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   widgets/osd_mac.mm

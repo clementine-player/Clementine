@@ -38,8 +38,12 @@ class iLister : public DeviceLister {
     ~Connection();
 
     QString GetProperty(const char* property);
+    quint64 GetFreeBytes();
+    quint64 GetTotalBytes();
 
    private:
+    quint64 GetInfoLongLong(const char* key);
+
     idevice_t device_;
     lockdownd_client_t lockdown_;
     afc_client_t afc_;
