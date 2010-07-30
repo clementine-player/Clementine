@@ -63,7 +63,6 @@ set(SOURCES
   devices/devicestatefiltermodel.cpp
   devices/deviceview.cpp
   devices/filesystemdevice.cpp
-  devices/ilister.cpp
 
   engines/enginebase.cpp
 
@@ -189,7 +188,6 @@ set(HEADERS
   devices/devicestatefiltermodel.h
   devices/deviceview.h
   devices/filesystemdevice.h
-  devices/ilister.h
 
   engines/enginebase.h
 
