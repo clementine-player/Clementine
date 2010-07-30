@@ -63,6 +63,7 @@ set(SOURCES
   devices/devicestatefiltermodel.cpp
   devices/deviceview.cpp
   devices/filesystemdevice.cpp
+  devices/ilister.cpp
 
   engines/enginebase.cpp
 
@@ -188,6 +189,7 @@ set(HEADERS
   devices/devicestatefiltermodel.h
   devices/deviceview.h
   devices/filesystemdevice.h
+  devices/ilister.h
 
   engines/enginebase.h
 
@@ -491,6 +493,15 @@ if(GIO_FOUND)
   list(APPEND HEADERS devices/giolister.h)
 endif(GIO_FOUND)
 
+if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
+  set(HAVE_IMOBILEDEVICE ON)
+  include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
+  include_directories(${PLIST_INCLUDE_DIRS})
+
+  list(APPEND SOURCES devices/ilister.cpp)
+  list(APPEND HEADERS devices/ilister.h)
+endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
+
 # Mac specific startup stuff
 if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
@@ -566,6 +577,14 @@ endif(HAVE_LIBGPOD)
 if(HAVE_GIO)
   target_link_libraries(clementine_lib ${GIO_LIBRARIES})
 endif(HAVE_GIO)
+
+if(HAVE_IMOBILEDEVICE)
+  target_link_libraries(clementine_lib
+    ${IMOBILEDEVICE_LIBRARIES}
+    ${PLIST_LIBRARIES}
+  )
+endif(HAVE_IMOBILEDEVICE)
+
 
 if (APPLE)
   target_link_libraries(clementine_lib

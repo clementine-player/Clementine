@@ -34,6 +34,9 @@
 #ifdef HAVE_GIO
 #  include "giolister.h"
 #endif
+#ifdef HAVE_IMOBILEDEVICE
+#  include "ilister.h"
+#endif
 
 #include <QIcon>
 #include <QPainter>
@@ -156,6 +159,9 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 #endif
 #ifdef Q_OS_DARWIN
   AddLister(new MacDeviceLister);
+#endif
+#ifdef HAVE_IMOBILEDEVICE
+  AddLister(new iLister);
 #endif
 
   AddDeviceClass<FilesystemDevice>();
