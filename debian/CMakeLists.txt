@@ -11,9 +11,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/changelog.in
 
 if(DEB_REWRITE_RULES)
   configure_file(  ${CMAKE_CURRENT_SOURCE_DIR}/rules.in
-                   ${CMAKE_CURRENT_BINARY_DIR}/rules @ONLY)
+                   ${CMAKE_CURRENT_BINARY_DIR}/rules.tmp/rules @ONLY)
   file(REMOVE      ${CMAKE_CURRENT_SOURCE_DIR}/rules)
-  file(COPY        ${CMAKE_CURRENT_BINARY_DIR}/rules
+  file(COPY        ${CMAKE_CURRENT_BINARY_DIR}/rules.tmp/rules
        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/
        FILE_PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
                         GROUP_EXECUTE GROUP_READ)
