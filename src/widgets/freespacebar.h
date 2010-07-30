@@ -21,9 +21,6 @@
 
 class FreeSpaceBar : public QWidget {
   Q_OBJECT
-  Q_PROPERTY(quint64 free READ free_bytes WRITE set_free_bytes);
-  Q_PROPERTY(quint64 additional READ additional_bytes WRITE set_additional_bytes);
-  Q_PROPERTY(quint64 total READ total_bytes WRITE set_total_bytes);
 
 public:
   FreeSpaceBar(QWidget* parent = 0);
@@ -31,6 +28,9 @@ public:
   static const int kBarHeight;
   static const int kBarBorderRadius;
   static const int kMarkerSpacing;
+  static const int kLabelBoxSize;
+  static const int kLabelBoxPadding;
+  static const int kLabelSpacing;
 
   static const QRgb kColorBg1;
   static const QRgb kColorBg2;
@@ -40,12 +40,13 @@ public:
   static const QRgb kColorBar2;
   static const QRgb kColorBorder;
 
-  quint64 free_bytes() const { return free_; }
-  quint64 additional_bytes() const { return additional_; }
-  quint64 total_bytes() const { return total_; }
-  void set_free_bytes(quint64 bytes);
-  void set_additional_bytes(quint64 bytes);
-  void set_total_bytes(quint64 bytes);
+  void set_free_bytes(qint64 bytes) { free_ = bytes; update(); }
+  void set_additional_bytes(qint64 bytes) { additional_ = bytes; update(); }
+  void set_total_bytes(qint64 bytes) { total_ = bytes; update(); }
+
+  void set_free_text(const QString& text) { free_text_ = text; update(); }
+  void set_additional_text(const QString& text) { additional_text_ = text; update(); }
+  void set_used_text(const QString& text) { used_text_ = text; update(); }
 
   QSize sizeHint() const;
 
@@ -53,9 +54,26 @@ protected:
   void paintEvent(QPaintEvent*);
 
 private:
-  quint64 free_;
-  quint64 additional_;
-  quint64 total_;
+  struct Label {
+    Label(const QString& t, const QColor& c) : text(t), color(c) {}
+
+    QString text;
+    QColor color;
+  };
+
+  QString TextForSize(const QString& prefix, qint64 size) const;
+
+  void DrawBar(QPainter* p, const QRect& r);
+  void DrawText(QPainter* p, const QRect& r);
+
+private:
+  qint64 free_;
+  qint64 additional_;
+  qint64 total_;
+
+  QString free_text_;
+  QString additional_text_;
+  QString used_text_;
 };
 
 #endif // FREESPACEBAR_H
