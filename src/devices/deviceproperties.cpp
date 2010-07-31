@@ -135,21 +135,15 @@ void DeviceProperties::UpdateHardwareInfo() {
 
   // Size
   quint64 total = index_.data(DeviceManager::Role_Capacity).toLongLong();
-  QString total_text = Utilities::PrettySize(total);
 
   QVariant free_var = index_.data(DeviceManager::Role_FreeSpace);
   if (free_var.isValid()) {
     quint64 free = free_var.toLongLong();
-    QString free_text = Utilities::PrettySize(free);
 
-    ui_->free_space_label->setText(tr("Available space"));
-    ui_->free_space_value->setText(tr("%1 of %2").arg(free_text, total_text));
     ui_->free_space_bar->set_total_bytes(total);
     ui_->free_space_bar->set_free_bytes(free);
     ui_->free_space_bar->show();
   } else {
-    ui_->free_space_label->setText(tr("Capacity"));
-    ui_->free_space_value->setText(total_text);
     ui_->free_space_bar->hide();
   }
 }
