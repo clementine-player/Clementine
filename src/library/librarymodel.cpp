@@ -681,7 +681,7 @@ QString LibraryModel::SortTextForYear(int year) const {
 }
 
 QString LibraryModel::SortTextForSong(const Song& song) const {
-  QString ret = QString::number(song.disc() * 1000 + song.track());
+  QString ret = QString::number(qMax(0, song.disc()) * 1000 + qMax(0, song.track()));
   ret.prepend(QString("0").repeated(6 - ret.length()));
   ret.append(song.filename());
   return ret;
