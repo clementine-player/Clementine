@@ -101,7 +101,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
             key = QString::number(qMax(0, song.year())); break;
           case GroupBy_YearAlbum:
             key = PrettyYearAlbum(qMax(0, song.year()), song.album()); break;
-          case GroupBy_FileType:    key = song.filetype();
+          case GroupBy_FileType:    key = song.filetype(); break;
           case GroupBy_None: Q_ASSERT(0); break;
         }
 
