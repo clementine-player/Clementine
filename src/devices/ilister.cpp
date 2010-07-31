@@ -154,7 +154,9 @@ quint64 iLister::DeviceCapacity(const QString& id) {
 quint64 iLister::DeviceFreeSpace(const QString& id) {
   return devices_[id]->GetFreeBytes();
 }
+
 QVariantMap iLister::DeviceHardwareInfo(const QString& id) { return QVariantMap(); }
+
 QString iLister::MakeFriendlyName(const QString& id) {
   QString model_id = DeviceModel(id);
   if (model_id.startsWith("iPhone")) {
@@ -173,8 +175,14 @@ QString iLister::MakeFriendlyName(const QString& id) {
     if (major == '3' && minor == '1') {
       return "iPhone 4";
     }
+  } else if (model_id.startsWith("iPod")) {
+    return "iPod Touch";
+  } else if (model_id.startsWith("iPad")) {
+    return "iPad";
   }
-  return DeviceModel(id);
+  return model_id;
 }
+
 QUrl iLister::MakeDeviceUrl(const QString& id) { return QUrl(); }
+
 void iLister::UnmountDevice(const QString& id) { }
