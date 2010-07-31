@@ -333,8 +333,6 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
       return item->metadata.artist();
 
     case Role_SortText:
-      if (item->type == LibraryItem::Type_Song)
-        return item->metadata.disc() * 1000 + item->metadata.track();
       return item->SortText();
   }
   return QVariant();
@@ -534,6 +532,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
     item->metadata.InitFromQuery(q);
     item->key = item->metadata.title();
     item->display_text = item->metadata.PrettyTitleWithArtist();
+    item->sort_text = SortTextForSong(item->metadata);
     break;
   }
 
@@ -581,6 +580,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
     item->metadata = s;
     item->key = s.title();
     item->display_text = s.PrettyTitleWithArtist();
+    item->sort_text = SortTextForSong(s);
     break;
   }
 
@@ -657,6 +657,13 @@ QString LibraryModel::SortTextForArtist(QString artist) const {
 QString LibraryModel::SortTextForYear(int year) const {
   QString str = QString::number(year);
   return QString("0").repeated(qMax(0, 4 - str.length())) + str;
+}
+
+QString LibraryModel::SortTextForSong(const Song& song) const {
+  QString ret = QString::number(song.disc() * 1000 + song.track());
+  ret.prepend(QString("0").repeated(6 - ret.length()));
+  ret.append(song.filename());
+  return ret;
 }
 
 Qt::ItemFlags LibraryModel::flags(const QModelIndex& index) const {

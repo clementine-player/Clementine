@@ -154,6 +154,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QString SortText(QString text) const;
   QString SortTextForArtist(QString artist) const;
   QString SortTextForYear(int year) const;
+  QString SortTextForSong(const Song& song) const;
 
   QString DividerKey(GroupBy type, LibraryItem* item) const;
   QString DividerDisplayText(GroupBy type, const QString& key) const;
