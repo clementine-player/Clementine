@@ -316,3 +316,15 @@ void LibraryView::CopyToDevice() {
   organise_dialog_->SetFilenames(filenames, size);
   organise_dialog_->show();
 }
+
+void LibraryView::keyReleaseEvent(QKeyEvent* e) {
+  switch (e->key()) {
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+      if (currentIndex().isValid())
+        emit doubleClicked(currentIndex());
+      break;
+  }
+
+  QTreeView::keyReleaseEvent(e);
+}
