@@ -39,6 +39,11 @@ public:
                              const Song& metadata, bool overwrite,
                              bool remove_original) = 0;
   virtual void FinishCopy() {}
+
+  virtual void StartDelete() {}
+  virtual bool DeleteFromStorage(const Song& metadata) = 0;
+  virtual void FinishDelete() {}
+
   virtual void Eject() {}
 };
 

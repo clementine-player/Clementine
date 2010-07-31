@@ -19,6 +19,8 @@
 #include "libraryview.h"
 #include "libraryitem.h"
 #include "librarybackend.h"
+#include "core/deletefiles.h"
+#include "core/musicstorage.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "ui/iconloader.h"
@@ -27,6 +29,7 @@
 #include <QPainter>
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QSettings>
 
@@ -105,8 +108,6 @@ LibraryView::LibraryView(QWidget* parent)
   no_show_in_various_ = context_menu_->addAction(
       tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
 
-  delete_->setVisible(false); // TODO
-
   ReloadSettings();
 }
 
@@ -121,6 +122,7 @@ void LibraryView::ReloadSettings() {
 }
 
 void LibraryView::SetTaskManager(TaskManager *task_manager) {
+  task_manager_ = task_manager;
   organise_dialog_.reset(new OrganiseDialog(task_manager));
 }
 
@@ -251,19 +253,25 @@ void LibraryView::scrollTo(const QModelIndex &index, ScrollHint hint) {
 }
 
 void LibraryView::GetSelectedFileInfo(
-    QStringList *filenames, quint64 *size) const {
+    QStringList *filenames, quint64 *size, SongList* songs_out) const {
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
           selectionModel()->selection()).indexes();
   SongList songs = library_->GetChildSongs(selected_indexes);
 
-  *size = 0;
-  foreach (const Song& song, songs) {
-    *filenames << song.filename();
+  if (size)
+    *size = 0;
 
-    if (song.filesize() >= 0)
+  foreach (const Song& song, songs) {
+    if (filenames)
+      *filenames << song.filename();
+
+    if (size && song.filesize() >= 0)
       *size += song.filesize();
   }
+
+  if (songs_out)
+    *songs_out = songs;
 }
 
 void LibraryView::Organise() {
@@ -278,7 +286,24 @@ void LibraryView::Organise() {
 }
 
 void LibraryView::Delete() {
+  SongList songs;
+  GetSelectedFileInfo(NULL, NULL, &songs);
 
+  if (songs.isEmpty())
+    return;
+
+  if (QMessageBox::question(this, tr("Delete files"),
+        tr("These files will be deleted from disk, are you sure you want to continue?"),
+        QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+    return;
+
+  // We can cheat and always take the storage of the first directory, since
+  // they'll all be FilesystemMusicStorage in a library and deleting doesn't
+  // check the actual directory.
+  MusicStorage* storage = library_->directory_model()->index(0, 0).data(
+      MusicStorage::Role_Storage).value<MusicStorage*>();
+  DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
+  delete_files->Start(songs);
 }
 
 void LibraryView::CopyToDevice() {

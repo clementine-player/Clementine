@@ -67,7 +67,7 @@ void GPodDevice::StartCopy() {
   }
 
   // Ensure only one "organise files" can be active at any one time
-  copy_in_progress_.lock();
+  db_busy_.lock();
 }
 
 bool GPodDevice::CopyToStorage(
@@ -128,6 +128,55 @@ void GPodDevice::FinishCopy() {
   }
 
   songs_to_add_.clear();
-  copy_in_progress_.unlock();
+  db_busy_.unlock();
+}
+
+void GPodDevice::StartDelete() {
+  StartCopy();
+}
+
+bool GPodDevice::DeleteFromStorage(const Song& metadata) {
+  Q_ASSERT(db_);
+
+  // Find the track in the itdb, identify it by its filename
+  Itdb_Track* track = NULL;
+  for (GList* tracks = db_->tracks ; tracks != NULL ; tracks = tracks->next) {
+    Itdb_Track* t = static_cast<Itdb_Track*>(tracks->data);
+
+    itdb_filename_ipod2fs(t->ipod_path);
+    if (url_.path() + t->ipod_path == metadata.filename()) {
+      track = t;
+      break;
+    }
+  }
+
+  if (track == NULL) {
+    qWarning() << "Couldn't find song" << metadata.filename() << "in iTunesDB";
+    return false;
+  }
+
+  // Remove the track from all playlists
+  for (GList* playlists = db_->playlists ; playlists != NULL ; playlists = playlists->next) {
+    Itdb_Playlist* playlist = static_cast<Itdb_Playlist*>(playlists->data);
+
+    if (itdb_playlist_contains_track(playlist, track)) {
+      itdb_playlist_remove_track(playlist, track);
+    }
+  }
+
+  // Remove the track from the database, this frees the struct too
+  itdb_track_remove(track);
+
+  // Remove the file
+  QFile::remove(metadata.filename());
+
+  // Remove it from our library model
+  backend_->DeleteSongs(SongList() << metadata);
+
+  return true;
+}
+
+void GPodDevice::FinishDelete() {
+  FinishCopy();
 }
 

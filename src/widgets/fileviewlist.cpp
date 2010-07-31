@@ -35,6 +35,8 @@ FileViewList::FileViewList(QWidget* parent)
                    this, SLOT(CopyToLibrarySlot()));
   menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."),
                    this, SLOT(MoveToLibrarySlot()));
+  menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."),
+                   this, SLOT(DeleteSlot()));
 }
 
 void FileViewList::contextMenuEvent(QContextMenuEvent* e) {
@@ -54,6 +56,15 @@ QList<QUrl> FileViewList::UrlListFromSelection() const {
   return urls;
 }
 
+QStringList FileViewList::FilenamesFromSelection() const {
+  QStringList filenames;
+  foreach (const QModelIndex& index, menu_selection_.indexes()) {
+    if (index.column() == 0)
+      filenames << static_cast<QFileSystemModel*>(model())->filePath(index);
+  }
+  return filenames;
+}
+
 void FileViewList::LoadSlot() {
   emit Load(UrlListFromSelection());
 }
@@ -68,4 +79,8 @@ void FileViewList::CopyToLibrarySlot() {
 
 void FileViewList::MoveToLibrarySlot() {
   emit MoveToLibrary(UrlListFromSelection());
+}
+
+void FileViewList::DeleteSlot() {
+  emit Delete(FilenamesFromSelection());
 }

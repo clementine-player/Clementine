@@ -78,6 +78,7 @@ private slots:
 private:
   QModelIndex MapToDevice(const QModelIndex& merged_model_index) const;
   QModelIndex MapToLibrary(const QModelIndex& merged_model_index) const;
+  QModelIndex FindParentDevice(const QModelIndex& merged_model_index) const;
   SongList GetSelectedSongs() const;
 
 private:

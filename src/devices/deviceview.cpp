@@ -18,6 +18,7 @@
 #include "devicemanager.h"
 #include "deviceproperties.h"
 #include "deviceview.h"
+#include "core/deletefiles.h"
 #include "core/mergedproxymodel.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
@@ -206,6 +207,14 @@ QModelIndex DeviceView::MapToDevice(const QModelIndex& merged_model_index) const
   return sort_model_->mapToSource(sort_model_index);
 }
 
+QModelIndex DeviceView::FindParentDevice(const QModelIndex& merged_model_index) const {
+  QModelIndex index = merged_model_->FindSourceParent(merged_model_index);
+  if (index.model() != sort_model_)
+    return QModelIndex();
+
+  return sort_model_->mapToSource(index);
+}
+
 QModelIndex DeviceView::MapToLibrary(const QModelIndex& merged_model_index) const {
   QModelIndex sort_model_index = merged_model_->mapToSource(merged_model_index);
   if (const QSortFilterProxyModel* sort_model =
@@ -323,7 +332,23 @@ void DeviceView::AddToPlaylist() {
 }
 
 void DeviceView::Delete() {
+  if (selectedIndexes().isEmpty())
+    return;
 
+  // Take the device of the first selected item
+  QModelIndex device_index = FindParentDevice(selectedIndexes()[0]);
+  if (!device_index.isValid())
+    return;
+
+  if (QMessageBox::question(this, tr("Delete files"),
+        tr("These files will be deleted from the device, are you sure you want to continue?"),
+        QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+    return;
+
+  MusicStorage* storage = device_index.data(MusicStorage::Role_Storage).value<MusicStorage*>();
+
+  DeleteFiles* delete_files = new DeleteFiles(manager_->task_manager(), storage);
+  delete_files->Start(GetSelectedSongs());
 }
 
 void DeviceView::Organise() {

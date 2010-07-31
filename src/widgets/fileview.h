@@ -22,6 +22,8 @@
 #include <QUrl>
 #include <QModelIndex>
 
+class FilesystemMusicStorage;
+class TaskManager;
 class Ui_FileView;
 
 class QFileSystemModel;
@@ -35,6 +37,7 @@ class FileView : public QWidget {
   ~FileView();
 
   void SetPath(const QString& path);
+  void SetTaskManager(TaskManager* task_manager);
 
  signals:
   void PathChanged(const QString& path);
@@ -51,6 +54,7 @@ class FileView : public QWidget {
   void ChangeFilePath(const QString& new_path);
   void ItemActivated(const QModelIndex& index);
   void ItemDoubleClick(const QModelIndex& index);
+  void Delete(const QStringList& filenames);
 
  private:
   void ChangeFilePathWithoutUndo(const QString& new_path);
@@ -83,6 +87,9 @@ class FileView : public QWidget {
 
   QFileSystemModel* model_;
   QUndoStack* undo_stack_;
+
+  TaskManager* task_manager_;
+  FilesystemMusicStorage* storage_;
 };
 
 #endif // FILEVIEW_H

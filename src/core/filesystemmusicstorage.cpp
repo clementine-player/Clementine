@@ -47,3 +47,7 @@ bool FilesystemMusicStorage::CopyToStorage(
   else
     return QFile::copy(source, dest_filename);
 }
+
+bool FilesystemMusicStorage::DeleteFromStorage(const Song& metadata) {
+  return QFile::remove(metadata.filename());
+}

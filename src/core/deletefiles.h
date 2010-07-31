@@ -14,24 +14,42 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILESYSTEMMUSICSTORAGE_H
-#define FILESYSTEMMUSICSTORAGE_H
+#ifndef DELETEFILES_H
+#define DELETEFILES_H
 
-#include "musicstorage.h"
+#include <QObject>
 
-class FilesystemMusicStorage : public virtual MusicStorage {
+#include "song.h"
+
+class MusicStorage;
+class TaskManager;
+
+class DeleteFiles : public QObject {
+  Q_OBJECT
+
 public:
-  FilesystemMusicStorage(const QString& root);
-  ~FilesystemMusicStorage() {}
+  DeleteFiles(TaskManager* task_manager, MusicStorage* storage);
 
-  QString LocalPath() const { return root_; }
+  static const int kBatchSize;
 
-  bool CopyToStorage(const QString &source, const QString &destination,
-                     const Song &metadata, bool overwrite, bool remove_original);
-  bool DeleteFromStorage(const Song& metadata);
+  void Start(const SongList& songs);
+  void Start(const QStringList& filenames);
+
+private slots:
+  void ProcessSomeFiles();
 
 private:
-  QString root_;
+  QThread* thread_;
+  QThread* original_thread_;
+  TaskManager* task_manager_;
+  MusicStorage* storage_;
+
+  SongList songs_;
+
+  bool started_;
+
+  int task_id_;
+  int progress_;
 };
 
-#endif // FILESYSTEMMUSICSTORAGE_H
+#endif // DELETEFILES_H

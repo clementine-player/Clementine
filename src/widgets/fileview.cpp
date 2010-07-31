@@ -16,16 +16,21 @@
 
 #include "fileview.h"
 #include "ui_fileview.h"
+#include "core/deletefiles.h"
+#include "core/filesystemmusicstorage.h"
 #include "ui/iconloader.h"
 
 #include <QFileSystemModel>
+#include <QMessageBox>
 #include <QScrollBar>
 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_FileView),
       model_(new QFileSystemModel(this)),
-      undo_stack_(new QUndoStack(this))
+      undo_stack_(new QUndoStack(this)),
+      task_manager_(NULL),
+      storage_(new FilesystemMusicStorage("/"))
 {
   ui_->setupUi(this);
 
@@ -53,14 +58,20 @@ FileView::FileView(QWidget* parent)
   connect(ui_->list, SIGNAL(AddToPlaylist(QList<QUrl>)), SIGNAL(AddToPlaylist(QList<QUrl>)));
   connect(ui_->list, SIGNAL(CopyToLibrary(QList<QUrl>)), SIGNAL(CopyToLibrary(QList<QUrl>)));
   connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)), SIGNAL(MoveToLibrary(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(Delete(QStringList)), SLOT(Delete(QStringList)));
 }
 
 FileView::~FileView() {
   delete ui_;
+  delete storage_;
 }
 
 void FileView::SetPath(const QString& path) {
   ChangeFilePathWithoutUndo(path);
+}
+
+void FileView::SetTaskManager(TaskManager* task_manager) {
+  task_manager_ = task_manager;
 }
 
 void FileView::FileUp() {
@@ -145,4 +156,17 @@ void FileView::UndoCommand::undo() {
   view_->ChangeFilePathWithoutUndo(old_state_.path);
   view_->ui_->list->setCurrentIndex(old_state_.index);
   view_->ui_->list->verticalScrollBar()->setValue(old_state_.scroll_pos);
+}
+
+void FileView::Delete(const QStringList& filenames) {
+  if (filenames.isEmpty())
+    return;
+
+  if (QMessageBox::question(this, tr("Delete files"),
+        tr("These files will be deleted from disk, are you sure you want to continue?"),
+        QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+    return;
+
+  DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage_);
+  delete_files->Start(filenames);
 }

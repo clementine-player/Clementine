@@ -243,6 +243,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
   connect(ui_->file_view, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
   connect(ui_->file_view, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
+  ui_->file_view->SetTaskManager(task_manager_);
 
   // Cover manager connections
   connect(cover_manager_.get(), SIGNAL(AddSongsToPlaylist(SongList)), SLOT(AddLibrarySongsToPlaylist(SongList)));

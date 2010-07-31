@@ -35,6 +35,7 @@ set(SOURCES
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
   core/database.cpp
+  core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
   core/fht.cpp
   core/globalshortcutbackend.cpp
@@ -171,6 +172,7 @@ set(HEADERS
   core/albumcoverloader.h
   core/backgroundthread.h
   core/database.h
+  core/deletefiles.h
   core/globalshortcuts.h
   core/gnomeglobalshortcutbackend.h
   core/mergedproxymodel.h

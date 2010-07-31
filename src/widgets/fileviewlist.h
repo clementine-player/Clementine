@@ -31,6 +31,7 @@ class FileViewList : public QListView {
   void AddToPlaylist(const QList<QUrl>& urls);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
+  void Delete(const QStringList& filenames);
 
  protected:
   void contextMenuEvent(QContextMenuEvent* e);
@@ -40,8 +41,10 @@ class FileViewList : public QListView {
   void AddToPlaylistSlot();
   void CopyToLibrarySlot();
   void MoveToLibrarySlot();
+  void DeleteSlot();
 
   QList<QUrl> UrlListFromSelection() const;
+  QStringList FilenamesFromSelection() const;
 
  private:
   QMenu* menu_;

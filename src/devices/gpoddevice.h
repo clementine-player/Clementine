@@ -44,6 +44,10 @@ public:
                      const Song &metadata, bool overwrite, bool remove_original);
   void FinishCopy();
 
+  void StartDelete();
+  bool DeleteFromStorage(const Song& metadata);
+  void FinishDelete();
+
 private slots:
   void LoadFinished(Itdb_iTunesDB* db);
 
@@ -55,7 +59,7 @@ private:
   QMutex db_mutex_;
   Itdb_iTunesDB* db_;
 
-  QMutex copy_in_progress_;
+  QMutex db_busy_;
   SongList songs_to_add_;
 };
 

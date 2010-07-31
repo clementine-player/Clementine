@@ -17,6 +17,7 @@
 #ifndef LIBRARYVIEW_H
 #define LIBRARYVIEW_H
 
+#include "core/song.h"
 #include "widgets/autoexpandingtreeview.h"
 
 #include <QStyledItemDelegate>
@@ -78,11 +79,12 @@ class LibraryView : public AutoExpandingTreeView {
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
-  void GetSelectedFileInfo(QStringList* filenames, quint64* size) const;
+  void GetSelectedFileInfo(QStringList* filenames, quint64* size, SongList* songs = NULL) const;
 
  private:
   LibraryModel* library_;
   DeviceManager* devices_;
+  TaskManager* task_manager_;
 
   int total_song_count_;
 
