@@ -28,8 +28,9 @@ const int PlaylistParser::kMagicSize = 512;
 PlaylistParser::PlaylistParser(QObject *parent)
   : QObject(parent)
 {
+  default_parser_ = new XSPFParser(this);
   parsers_ << new M3UParser(this);
-  parsers_ << new XSPFParser(this);
+  parsers_ << default_parser_;
   parsers_ << new PLSParser(this);
   parsers_ << new ASXParser(this);
   parsers_ << new AsxIniParser(this);
@@ -50,17 +51,31 @@ QString PlaylistParser::filters() const {
   QStringList filters;
   QStringList all_extensions;
   foreach (ParserBase* parser, parsers_) {
-    QStringList extensions;
-    foreach (const QString& extension, parser->file_extensions())
-      extensions << "*." + extension;
-    all_extensions << extensions;
-
-    filters << tr("%1 playlists (%2)").arg(parser->name(), extensions.join(" "));
+    filters << FilterForParser(parser, &all_extensions);
   }
 
   filters.prepend(tr("All playlists (%1)").arg(all_extensions.join(" ")));
 
   return filters.join(";;");
+}
+
+QString PlaylistParser::FilterForParser(const ParserBase *parser, QStringList *all_extensions) const {
+  QStringList extensions;
+  foreach (const QString& extension, parser->file_extensions())
+    extensions << "*." + extension;
+
+  if (all_extensions)
+    *all_extensions << extensions;
+
+  return tr("%1 playlists (%2)").arg(parser->name(), extensions.join(" "));
+}
+
+QString PlaylistParser::default_extension() const {
+  return default_parser_->file_extensions()[0];
+}
+
+QString PlaylistParser::default_filter() const {
+  return FilterForParser(default_parser_);
 }
 
 ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {

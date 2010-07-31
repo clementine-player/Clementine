@@ -34,6 +34,9 @@ public:
   QStringList file_extensions() const;
   QString filters() const;
 
+  QString default_extension() const;
+  QString default_filter() const;
+
   ParserBase* MaybeGetParserForMagic(const QByteArray& data,
                                      const QString& mime_type = QString()) const;
   ParserBase* ParserForExtension(const QString& suffix) const;
@@ -42,7 +45,12 @@ public:
   void Save(const SongList& songs, const QString& filename) const;
 
 private:
+  QString FilterForParser(const ParserBase* parser,
+                          QStringList* all_extensions = NULL) const;
+
+private:
   QList<ParserBase*> parsers_;
+  ParserBase* default_parser_;
 };
 
 #endif // PLAYLISTPARSER_H

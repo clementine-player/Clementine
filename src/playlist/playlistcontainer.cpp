@@ -256,9 +256,32 @@ void PlaylistContainer::LoadPlaylist() {
 
 void PlaylistContainer::SavePlaylist(int id = -1) {
   QString filename = settings_.value("last_save_playlist").toString();
+
+  // We want to use the playlist tab name as a default filename, but in the
+  // same directory as the last saved file.
+
+  // Strip off filename components until we find something that's a folder
+  forever {
+    QFileInfo fileinfo(filename);
+    if (filename.isEmpty() || fileinfo.isDir())
+      break;
+
+    filename = filename.section('/', 0, -2);
+  }
+
+  // Use the home directory as a fallback in case the path is empty.
+  if (filename.isEmpty())
+    filename = QDir::homePath();
+
+  // Add the suggested filename based on the tab name
+  filename += "/" + ui_->tab_bar->tabText(ui_->tab_bar->currentIndex()) +
+              "." + manager_->parser()->default_extension();
+
+  QString default_filter = manager_->parser()->default_filter();
+
   filename = QFileDialog::getSaveFileName(
       this, tr("Save playlist"), filename,
-      manager_->parser()->filters());
+      manager_->parser()->filters(), &default_filter);
 
   if (filename.isNull())
     return;
