@@ -101,6 +101,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
             key = QString::number(qMax(0, song.year())); break;
           case GroupBy_YearAlbum:
             key = PrettyYearAlbum(qMax(0, song.year()), song.album()); break;
+          case GroupBy_FileType:    key = song.filetype();
           case GroupBy_None: Q_ASSERT(0); break;
         }
 
@@ -158,6 +159,7 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_Composer:
   case GroupBy_Genre:
   case GroupBy_AlbumArtist:
+  case GroupBy_FileType:
     if (item->sort_text[0].isDigit())
       return "0";
     if (item->sort_text[0] == ' ')
@@ -171,10 +173,11 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     return SortTextForYear(item->metadata.year());
 
   case GroupBy_None:
-  default:
-    Q_ASSERT(0);
-    return QString();
+    // fallthrough
+    ;
   }
+  Q_ASSERT(0);
+  return QString();
 }
 
 QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const {
@@ -186,6 +189,7 @@ QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const
   case GroupBy_Composer:
   case GroupBy_Genre:
   case GroupBy_AlbumArtist:
+  case GroupBy_FileType:
     if (key == "0")
       return "0-9";
     return key.toUpper();
@@ -201,10 +205,11 @@ QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const
     return QString::number(key.toInt()); // To remove leading 0s
 
   case GroupBy_None:
-  default:
-    Q_ASSERT(0);
-    return QString();
+    // fallthrough
+    ;
   }
+  Q_ASSERT(0);
+  return QString();
 }
 
 void LibraryModel::SongsDeleted(const SongList& songs) {
@@ -433,6 +438,9 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
   case GroupBy_None:
     q->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
     break;
+  case GroupBy_FileType:
+    q->SetColumnSpec("DISTINCT filetype");
+    break;
   }
 }
 
@@ -468,6 +476,9 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     break;
   case GroupBy_AlbumArtist:
     q->AddWhere("albumartist", item->key);
+    break;
+  case GroupBy_FileType:
+    q->AddWhere("filetype", item->metadata.filetype());
     break;
   case GroupBy_None:
     Q_ASSERT(0);
@@ -528,6 +539,11 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
     item->sort_text = SortTextForArtist(item->key);
     break;
 
+  case GroupBy_FileType:
+    item->metadata.set_filetype(Song::FileType(q.Value(0).toInt()));
+    item->key = item->metadata.TextForFiletype();
+    break;
+
   case GroupBy_None:
     item->metadata.InitFromQuery(q);
     item->key = item->metadata.title();
@@ -574,6 +590,11 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   case GroupBy_AlbumArtist: if (item->key.isNull()) item->key = s.albumartist();
     item->display_text = TextOrUnknown(item->key);
     item->sort_text = SortTextForArtist(item->key);
+    break;
+
+  case GroupBy_FileType:
+    item->metadata.set_filetype(s.filetype());
+    item->key = s.TextForFiletype();
     break;
 
   case GroupBy_None:

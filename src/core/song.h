@@ -117,6 +117,8 @@ class Song {
 
     Type_Stream = 99,
   };
+  static QString TextForFiletype(FileType type);
+  QString TextForFiletype() const { return TextForFiletype(filetype()); }
 
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, int length);

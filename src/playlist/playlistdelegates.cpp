@@ -262,25 +262,7 @@ QString FileTypeItemDelegate::displayText(const QVariant &value, const QLocale &
   if (!ok)
     return tr("Unknown");
 
-  switch (type) {
-    case Song::Type_Asf:       return tr("ASF");
-    case Song::Type_Flac:      return tr("FLAC");
-    case Song::Type_Mp4:       return tr("MP4");
-    case Song::Type_Mpc:       return tr("MPC");
-    case Song::Type_Mpeg:      return tr("MP3"); // Not technically correct
-    case Song::Type_OggFlac:   return tr("Ogg FLAC");
-    case Song::Type_OggSpeex:  return tr("Ogg Speex");
-    case Song::Type_OggVorbis: return tr("Ogg Vorbis");
-    case Song::Type_Aiff:      return tr("AIFF");
-    case Song::Type_Wav:       return tr("WAV");
-    case Song::Type_TrueAudio: return tr("TrueAudio");
-
-    case Song::Type_Stream:    return tr("Stream");
-
-    case Song::Type_Unknown:
-    default:
-      return tr("Unknown");
-  }
+  return Song::TextForFiletype(type);
 }
 
 QWidget* TextItemDelegate::createEditor(

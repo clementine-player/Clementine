@@ -97,6 +97,28 @@ QString Song::JoinSpec(const QString& table) {
   return Prepend(table + ".", kColumns).join(", ");
 }
 
+QString Song::TextForFiletype(FileType type) {
+  switch (type) {
+    case Song::Type_Asf:       return QObject::tr("ASF");
+    case Song::Type_Flac:      return QObject::tr("FLAC");
+    case Song::Type_Mp4:       return QObject::tr("MP4");
+    case Song::Type_Mpc:       return QObject::tr("MPC");
+    case Song::Type_Mpeg:      return QObject::tr("MP3"); // Not technically correct
+    case Song::Type_OggFlac:   return QObject::tr("Ogg FLAC");
+    case Song::Type_OggSpeex:  return QObject::tr("Ogg Speex");
+    case Song::Type_OggVorbis: return QObject::tr("Ogg Vorbis");
+    case Song::Type_Aiff:      return QObject::tr("AIFF");
+    case Song::Type_Wav:       return QObject::tr("WAV");
+    case Song::Type_TrueAudio: return QObject::tr("TrueAudio");
+
+    case Song::Type_Stream:    return QObject::tr("Stream");
+
+    case Song::Type_Unknown:
+    default:
+      return QObject::tr("Unknown");
+  }
+}
+
 
 static TagLib::String QStringToTaglibString(const QString& s);
 
