@@ -54,6 +54,7 @@ private:
     MountInfo() : filesystem_size(0), filesystem_free(0) {}
 
     QString unique_id() const;
+    bool is_suitable() const;
 
     GMount* mount;
     QString unix_device;

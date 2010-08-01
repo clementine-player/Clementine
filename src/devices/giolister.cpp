@@ -27,6 +27,12 @@ QString GioLister::MountInfo::unique_id() const {
   return QString("Gio/%1/%2/%3").arg(uuid, filesystem_type).arg(filesystem_size);
 }
 
+bool GioLister::MountInfo::is_suitable() const {
+  return filesystem_type != "udf" &&
+         filesystem_type != "smb" &&
+         filesystem_type != "cifs";
+}
+
 GioLister::GioLister()
   : monitor_(NULL)
 {
@@ -133,6 +139,8 @@ void GioLister::MountRemovedCallback(GVolumeMonitor*, GMount* m, gpointer d) {
 
 void GioLister::MountAdded(GMount *mount) {
   MountInfo info = ReadMountInfo(mount);
+  if (!info.is_suitable())
+    return;
 
   {
     QMutexLocker l(&mutex_);
