@@ -105,10 +105,12 @@ quint64 iLister::Connection::GetInfoLongLong(const char* key) {
 void iLister::DeviceAddedCallback(const char* uuid) {
   qDebug() << Q_FUNC_INFO;
 
+  DeviceInfo info = ReadDeviceInfo(uuid);
   QString id = UniqueId(uuid);
+
   {
     QMutexLocker l(&mutex_);
-    devices_[id] = ReadDeviceInfo(uuid);
+    devices_[id] = info;
   }
 
   emit DeviceAdded(id);
