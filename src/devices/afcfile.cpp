@@ -1,18 +1,27 @@
 #include "afcfile.h"
+#include "imobiledeviceconnection.h"
 
 #include <libimobiledevice/afc.h>
 
-AFCFile::AFCFile(afc_client_t client, const QUrl& url, QObject* parent)
-    : QIODevice(parent),
-      client_(client),
-      url_(url) {
+AfcFile::AfcFile(afc_client_t client, const QString& path, QObject* parent)
+  : QIODevice(parent),
+    client_(client),
+    path_(path)
+{
 }
 
-AFCFile::~AFCFile() {
+AfcFile::AfcFile(iMobileDeviceConnection* connection, const QString& path, QObject* parent)
+  : QIODevice(parent),
+    client_(connection->afc()),
+    path_(path)
+{
+}
+
+AfcFile::~AfcFile() {
 
 }
 
-bool AFCFile::open(QIODevice::OpenMode mode) {
+bool AfcFile::open(QIODevice::OpenMode mode) {
   afc_file_mode_t afc_mode;
   switch (mode) {
     case ReadOnly:
@@ -29,7 +38,7 @@ bool AFCFile::open(QIODevice::OpenMode mode) {
       afc_mode = AFC_FOPEN_RW;
   }
   afc_error_t err = afc_file_open(
-      client_, url_.path().toUtf8().constData(), afc_mode, &handle_);
+      client_, path_.toUtf8().constData(), afc_mode, &handle_);
   if (err != AFC_E_SUCCESS) {
     return false;
   }
@@ -37,12 +46,12 @@ bool AFCFile::open(QIODevice::OpenMode mode) {
   return QIODevice::open(mode);
 }
 
-void AFCFile::close() {
+void AfcFile::close() {
   afc_file_close(client_, handle_);
   QIODevice::close();
 }
 
-bool AFCFile::seek(qint64 pos) {
+bool AfcFile::seek(qint64 pos) {
   afc_error_t err = afc_file_seek(client_, handle_, pos, SEEK_SET);
   if (err != AFC_E_SUCCESS) {
     return false;
@@ -51,7 +60,7 @@ bool AFCFile::seek(qint64 pos) {
   return true;
 }
 
-qint64 AFCFile::readData(char* data, qint64 max_size) {
+qint64 AfcFile::readData(char* data, qint64 max_size) {
   uint32_t bytes_read = 0;
   afc_error_t err = afc_file_read(client_, handle_, data, max_size, &bytes_read);
   if (err != AFC_E_SUCCESS) {
@@ -60,7 +69,7 @@ qint64 AFCFile::readData(char* data, qint64 max_size) {
   return bytes_read;
 }
 
-qint64 AFCFile::writeData(const char* data, qint64 max_size) {
+qint64 AfcFile::writeData(const char* data, qint64 max_size) {
   uint32_t bytes_written = 0;
   afc_error_t err = afc_file_write(client_, handle_, data, max_size, &bytes_written);
   if (err != AFC_E_SUCCESS) {

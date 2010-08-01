@@ -3,9 +3,7 @@
 
 #include "devicelister.h"
 
-#include <libimobiledevice/afc.h>
 #include <libimobiledevice/libimobiledevice.h>
-#include <libimobiledevice/lockdown.h>
 
 #include <QMutex>
 
@@ -15,7 +13,7 @@ class iLister : public DeviceLister {
   iLister();
   ~iLister();
 
-  int priority() const { return 25; }
+  int priority() const { return 120; }
 
   virtual QStringList DeviceUniqueIDs();
   virtual QStringList DeviceIcons(const QString& id);
@@ -36,22 +34,6 @@ class iLister : public DeviceLister {
     QString product_type;
     quint64 free_bytes;
     quint64 total_bytes;
-  };
-
-  class Connection {
-   public:
-    explicit Connection(const char* uuid);
-    ~Connection();
-
-    QString GetProperty(const char* property);
-    quint64 GetInfoLongLong(const char* key);
-
-   private:
-    idevice_t device_;
-    lockdownd_client_t lockdown_;
-    afc_client_t afc_;
-
-    uint16_t afc_port_;
   };
 
   virtual void Init();

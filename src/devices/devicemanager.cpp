@@ -35,6 +35,7 @@
 #  include "giolister.h"
 #endif
 #ifdef HAVE_IMOBILEDEVICE
+#  include "afcdevice.h"
 #  include "ilister.h"
 #endif
 
@@ -162,6 +163,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 #endif
 #ifdef HAVE_IMOBILEDEVICE
   AddLister(new iLister);
+  AddDeviceClass<AfcDevice>();
 #endif
 
   AddDeviceClass<FilesystemDevice>();

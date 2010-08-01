@@ -19,6 +19,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QStringList>
+#include <QTemporaryFile>
 
 #if defined(Q_OS_UNIX)
 #  include <sys/statvfs.h>
@@ -107,6 +108,31 @@ quint64 FileSystemFreeSpace(const QString& path) {
 #endif
 
   return 0;
+}
+
+QString MakeTempDir() {
+  QString path;
+  {
+    QTemporaryFile tempfile;
+    tempfile.open();
+    path = tempfile.fileName();
+  }
+
+  QDir d;
+  d.mkdir(path);
+
+  return path;
+}
+
+void RemoveRecursive(const QString& path) {
+  QDir dir(path);
+  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs))
+    RemoveRecursive(path + "/" + child);
+
+  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files))
+    QFile::remove(path + "/" + child);
+
+  dir.rmdir(path);
 }
 
 } // namespace

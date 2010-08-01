@@ -493,14 +493,21 @@ if(GIO_FOUND)
   list(APPEND HEADERS devices/giolister.h)
 endif(GIO_FOUND)
 
+# libimobiledevice backend and device
 if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   set(HAVE_IMOBILEDEVICE ON)
   include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
   include_directories(${PLIST_INCLUDE_DIRS})
 
+  list(APPEND SOURCES devices/afcdevice.cpp)
   list(APPEND SOURCES devices/afcfile.cpp)
+  list(APPEND SOURCES devices/afctransfer.cpp)
   list(APPEND SOURCES devices/ilister.cpp)
+  list(APPEND SOURCES devices/imobiledeviceconnection.cpp)
+
+  list(APPEND HEADERS devices/afcdevice.h)
   list(APPEND HEADERS devices/afcfile.h)
+  list(APPEND HEADERS devices/afctransfer.h)
   list(APPEND HEADERS devices/ilister.h)
 endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
@@ -514,8 +521,12 @@ endif(APPLE)
 list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
+  devices/afcdevice.cpp
+  devices/afcdevice.h
   devices/afcfile.cpp
   devices/afcfile.h
+  devices/afctransfer.cpp
+  devices/afctransfer.h
   devices/devicekitlister.h
   devices/devicekitlister.cpp
   devices/gpoddevice.cpp
@@ -524,6 +535,8 @@ list(APPEND OTHER_SOURCES
   devices/gpodloader.h
   devices/ilister.cpp
   devices/ilister.h
+  devices/imobiledeviceconnection.cpp
+  devices/imobiledeviceconnection.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   widgets/osd_mac.mm

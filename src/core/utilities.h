@@ -26,6 +26,9 @@ namespace Utilities {
 
   quint64 FileSystemCapacity(const QString& path);
   quint64 FileSystemFreeSpace(const QString& path);
+
+  QString MakeTempDir();
+  void RemoveRecursive(const QString& path);
 }
 
 #endif // UTILITIES_H

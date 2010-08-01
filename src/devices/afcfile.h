@@ -4,23 +4,25 @@
 #include <stdint.h>
 
 #include <QIODevice>
-#include <QUrl>
 
-struct afc_client_private;
-typedef afc_client_private* afc_client_t;
+#include <libimobiledevice/afc.h>
 
-class AFCFile : public QIODevice {
+class iMobileDeviceConnection;
+
+class AfcFile : public QIODevice {
   Q_OBJECT
- public:
-  AFCFile(afc_client_t client, const QUrl& url, QObject* parent = 0);
-  ~AFCFile();
+
+public:
+  AfcFile(afc_client_t client, const QString& path, QObject* parent = 0);
+  AfcFile(iMobileDeviceConnection* connection, const QString& path, QObject* parent = 0);
+  ~AfcFile();
 
   // QIODevice
   void close();
   bool open(OpenMode mode);
   bool seek(qint64 pos);
 
- private:
+private:
   // QIODevice
   qint64 readData(char* data, qint64 max_size);
   qint64 writeData(const char* data, qint64 max_size);
@@ -28,7 +30,7 @@ class AFCFile : public QIODevice {
   afc_client_t client_;
   uint64_t handle_;
 
-  QUrl url_;
+  QString path_;
 };
 
 #endif
