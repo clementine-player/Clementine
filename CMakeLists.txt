@@ -208,6 +208,10 @@ add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(debian)
 
+if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
+  add_subdirectory(gstafcsrc)
+endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
+
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
