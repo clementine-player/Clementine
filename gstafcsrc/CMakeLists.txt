@@ -15,7 +15,7 @@ set(SOURCES
   main.c
 )
 
-add_library(gstafcsrc SHARED
+add_library(gstafcsrc STATIC
   ${SOURCES}
 )
 

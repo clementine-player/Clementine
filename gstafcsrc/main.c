@@ -25,7 +25,7 @@ static gboolean afcsrc_init(GstPlugin* afcsrc) {
   return gst_element_register(afcsrc, "afcsrc", GST_RANK_PRIMARY, GST_TYPE_AFCSRC);
 }
 
-GST_PLUGIN_DEFINE(
+GST_PLUGIN_DEFINE_STATIC(
     GST_VERSION_MAJOR,
     GST_VERSION_MINOR,
     "afcsrc",
