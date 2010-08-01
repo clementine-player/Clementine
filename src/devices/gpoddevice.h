@@ -42,11 +42,11 @@ public:
   void StartCopy();
   bool CopyToStorage(const QString &source, const QString &destination,
                      const Song &metadata, bool overwrite, bool remove_original);
-  void FinishCopy(bool about_to_eject);
+  void FinishCopy();
 
   void StartDelete();
   bool DeleteFromStorage(const Song& metadata);
-  void FinishDelete(bool about_to_eject);
+  void FinishDelete();
 
 private slots:
   void LoadFinished(Itdb_iTunesDB* db);

@@ -114,7 +114,7 @@ bool GPodDevice::CopyToStorage(
   return true;
 }
 
-void GPodDevice::FinishCopy(bool about_to_eject) {
+void GPodDevice::FinishCopy() {
   // Write the itunes database
   GError* error = NULL;
   itdb_write(db_, &error);
@@ -180,7 +180,7 @@ bool GPodDevice::DeleteFromStorage(const Song& metadata) {
   return true;
 }
 
-void GPodDevice::FinishDelete(bool about_to_eject) {
-  FinishCopy(about_to_eject);
+void GPodDevice::FinishDelete() {
+  FinishCopy();
 }
 
