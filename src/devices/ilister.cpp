@@ -15,8 +15,6 @@ void iLister::Init() {
 }
 
 void iLister::EventCallback(const idevice_event_t* event, void* context) {
-  qDebug() << Q_FUNC_INFO;
-
   iLister* me = reinterpret_cast<iLister*>(context);
 
   const char* uuid = event->uuid;
@@ -34,8 +32,6 @@ void iLister::EventCallback(const idevice_event_t* event, void* context) {
 
 
 void iLister::DeviceAddedCallback(const char* uuid) {
-  qDebug() << Q_FUNC_INFO;
-
   DeviceInfo info = ReadDeviceInfo(uuid);
   QString id = UniqueId(uuid);
 
@@ -48,8 +44,6 @@ void iLister::DeviceAddedCallback(const char* uuid) {
 }
 
 void iLister::DeviceRemovedCallback(const char* uuid) {
-  qDebug() << Q_FUNC_INFO;
-
   QString id = UniqueId(uuid);
   {
     QMutexLocker l(&mutex_);
