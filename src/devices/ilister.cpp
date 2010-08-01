@@ -10,7 +10,6 @@ iLister::iLister() {
 }
 
 iLister::~iLister() {
-  qDeleteAll(devices_);
 }
 
 
@@ -102,21 +101,15 @@ quint64 iLister::Connection::GetInfoLongLong(const char* key) {
   return ret;
 }
 
-quint64 iLister::Connection::GetFreeBytes() {
-  return GetInfoLongLong("FSFreeBytes");
-}
-
-quint64 iLister::Connection::GetTotalBytes() {
-  return GetInfoLongLong("FSTotalBytes");
-}
 
 void iLister::DeviceAddedCallback(const char* uuid) {
   qDebug() << Q_FUNC_INFO;
 
-  Connection* device = new Connection(uuid);
-
-  QString id = "ithing/" + QString::fromUtf8(uuid);
-  devices_[id] = device;
+  QString id = UniqueId(uuid);
+  {
+    QMutexLocker l(&mutex_);
+    devices_[id] = ReadDeviceInfo(uuid);
+  }
 
   emit DeviceAdded(id);
 }
@@ -124,11 +117,20 @@ void iLister::DeviceAddedCallback(const char* uuid) {
 void iLister::DeviceRemovedCallback(const char* uuid) {
   qDebug() << Q_FUNC_INFO;
 
-  QString id = "ithing/" + QString::fromUtf8(uuid);
-  Connection* device = devices_.take(id);
-  delete device;
+  QString id = UniqueId(uuid);
+  {
+    QMutexLocker l(&mutex_);
+    if (!devices_.contains(id))
+      return;
+
+    devices_.remove(id);
+  }
 
   emit DeviceRemoved(id);
+}
+
+QString iLister::UniqueId(const char *uuid) {
+  return "ithing/" + QString::fromUtf8(uuid);
 }
 
 QStringList iLister::DeviceUniqueIDs() {
@@ -144,21 +146,22 @@ QString iLister::DeviceManufacturer(const QString& id) {
 }
 
 QString iLister::DeviceModel(const QString& id) {
-  return devices_[id]->GetProperty("ProductType");
+  return LockAndGetDeviceInfo(id, &DeviceInfo::product_type);
 }
 
 quint64 iLister::DeviceCapacity(const QString& id) {
-  return devices_[id]->GetTotalBytes();
+  return LockAndGetDeviceInfo(id, &DeviceInfo::total_bytes);
 }
 
 quint64 iLister::DeviceFreeSpace(const QString& id) {
-  return devices_[id]->GetFreeBytes();
+  return LockAndGetDeviceInfo(id, &DeviceInfo::free_bytes);
 }
 
 QVariantMap iLister::DeviceHardwareInfo(const QString& id) { return QVariantMap(); }
 
 QString iLister::MakeFriendlyName(const QString& id) {
-  QString model_id = DeviceModel(id);
+  QString model_id = LockAndGetDeviceInfo(id, &DeviceInfo::product_type);
+
   if (model_id.startsWith("iPhone")) {
     QString version = model_id.right(3);
     QChar major = version[0];
@@ -186,3 +189,15 @@ QString iLister::MakeFriendlyName(const QString& id) {
 QUrl iLister::MakeDeviceUrl(const QString& id) { return QUrl(); }
 
 void iLister::UnmountDevice(const QString& id) { }
+
+iLister::DeviceInfo iLister::ReadDeviceInfo(const char *uuid) {
+  DeviceInfo ret;
+
+  Connection conn(uuid);
+  ret.uuid = uuid;
+  ret.product_type = conn.GetProperty("ProductType");
+  ret.free_bytes = conn.GetInfoLongLong("FSFreeBytes");
+  ret.total_bytes = conn.GetInfoLongLong("FSTotalBytes");
+
+  return ret;
+}
