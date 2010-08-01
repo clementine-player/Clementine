@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 set(CMAKE_C_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall")
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${SPARKLE})
 include_directories(../3rdparty/gmock/gtest/include)
 include_directories(../3rdparty/qtwin)
@@ -601,7 +601,6 @@ if(HAVE_IMOBILEDEVICE)
   target_link_libraries(clementine_lib
     ${IMOBILEDEVICE_LIBRARIES}
     ${PLIST_LIBRARIES}
-    gstafcsrc
   )
 endif(HAVE_IMOBILEDEVICE)
 
@@ -656,6 +655,12 @@ add_executable(clementine
 target_link_libraries(clementine
   clementine_lib
 )
+
+if(HAVE_IMOBILEDEVICE)
+  target_link_libraries(clementine
+    gstafcsrc
+  )
+endif(HAVE_IMOBILEDEVICE)
 
 set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"

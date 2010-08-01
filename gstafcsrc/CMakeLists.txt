@@ -12,7 +12,6 @@ include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
 
 set(SOURCES
   gstafcsrc.cpp
-  main.c
 )
 
 add_library(gstafcsrc STATIC

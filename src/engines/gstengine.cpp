@@ -21,8 +21,13 @@
 
 #define DEBUG_PREFIX "Gst-Engine"
 
+#include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
+
+#ifdef HAVE_IMOBILEDEVICE
+# include "gstafcsrc/gstafcsrc.h"
+#endif
 
 #include <math.h>
 #include <unistd.h>
@@ -133,6 +138,10 @@ bool GstEngine::Init() {
     qWarning("GStreamer could not be initialized");
     return false;
   }
+
+#ifdef HAVE_IMOBILEDEVICE
+  afcsrc_register_static();
+#endif
 
   return true;
 }

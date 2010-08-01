@@ -311,3 +311,24 @@ static gboolean gst_afc_src_get_size(GstBaseSrc* src, guint64* size) {
 
   return true;
 }
+
+#define PACKAGE "Clementine"
+
+static gboolean afcsrc_init(GstPlugin* afcsrc) {
+  return gst_element_register(afcsrc, "afcsrc", GST_RANK_PRIMARY, GST_TYPE_AFCSRC);
+}
+
+void afcsrc_register_static() {
+  gst_plugin_register_static(
+    GST_VERSION_MAJOR,
+    GST_VERSION_MINOR,
+    "afcsrc",
+    "iPod/iPhone Source",
+    afcsrc_init,
+    "0.1",
+    "GPL",
+    "Clementine",
+    "Clementine",
+    "http://www.clementine-player.org/");
+}
+

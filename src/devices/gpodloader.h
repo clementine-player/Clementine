@@ -33,6 +33,8 @@ public:
   GPodLoader(const QString& mount_point, TaskManager* task_manager,
              LibraryBackend* backend, QObject* parent = 0);
 
+  void set_music_path_prefix(const QString& prefix) { path_prefix_ = prefix; }
+
 public slots:
   void LoadDatabase();
 
@@ -45,6 +47,7 @@ private:
   QThread* original_thread_;
 
   QString mount_point_;
+  QString path_prefix_;
   TaskManager* task_manager_;
   LibraryBackend* backend_;
 };

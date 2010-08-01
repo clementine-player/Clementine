@@ -58,7 +58,8 @@ void GPodLoader::LoadDatabase() {
     Song song;
     song.InitFromItdb(track);
     song.set_directory_id(1);
-    song.set_filename(mount_point_ + song.filename());
+    song.set_filename((path_prefix_.isEmpty() ? mount_point_ : path_prefix_) +
+                      song.filename());
     songs << song;
   }
 

@@ -24,6 +24,8 @@
 #include <libimobiledevice/libimobiledevice.h>
 #include <libimobiledevice/lockdown.h>
 
+void afcsrc_register_static();
+
 G_BEGIN_DECLS
 
 #define GST_TYPE_AFCSRC \

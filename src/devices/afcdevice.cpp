@@ -56,6 +56,7 @@ void AfcDevice::CopyFinished() {
 
   // Now load the songs from the local database
   loader_ = new GPodLoader(local_path_, manager_->task_manager(), backend_);
+  loader_->set_music_path_prefix("afc://" + url_.host());
   loader_->moveToThread(loader_thread_);
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
