@@ -498,7 +498,9 @@ if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
   include_directories(${PLIST_INCLUDE_DIRS})
 
+  list(APPEND SOURCES devices/afcfile.cpp)
   list(APPEND SOURCES devices/ilister.cpp)
+  list(APPEND HEADERS devices/afcfile.h)
   list(APPEND HEADERS devices/ilister.h)
 endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
@@ -512,6 +514,8 @@ endif(APPLE)
 list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
+  devices/afcfile.cpp
+  devices/afcfile.h
   devices/devicekitlister.h
   devices/devicekitlister.cpp
   devices/gpoddevice.cpp
