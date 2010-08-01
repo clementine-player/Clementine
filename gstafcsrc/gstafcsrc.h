@@ -43,6 +43,7 @@ typedef struct _GstAfcSrcClass GstAfcSrcClass;
 struct _GstAfcSrc {
   GstBaseSrc element;
 
+  char* location_;
   char* uuid_;
   char* path_;
 

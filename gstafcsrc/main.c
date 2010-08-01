@@ -18,16 +18,12 @@
 
 #include <gst/gst.h>
 
-GST_DEBUG_CATEGORY_STATIC(gst_afc_src_debug);
-#define GST_CAT_DEFAULT gst_afc_src_debug
+#define PACKAGE "Clementine"
+
 
 static gboolean afcsrc_init(GstPlugin* afcsrc) {
-  GST_DEBUG_CATEGORY_INIT (gst_afc_src_debug, "afcsrc", 0, "iPod/iPhone Source");
-
-  return gst_element_register(afcsrc, "afcsrc", GST_RANK_NONE, GST_TYPE_AFCSRC);
+  return gst_element_register(afcsrc, "afcsrc", GST_RANK_PRIMARY, GST_TYPE_AFCSRC);
 }
-
-#define PACKAGE "Clementine"
 
 GST_PLUGIN_DEFINE(
     GST_VERSION_MAJOR,
