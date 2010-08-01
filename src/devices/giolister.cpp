@@ -104,11 +104,19 @@ QVariantMap GioLister::DeviceHardwareInfo(const QString &id) {
   return ret;
 }
 
-QUrl GioLister::MakeDeviceUrl(const QString &id) {
-  QString mount_point = LockAndGetMountInfo(
-      id, &MountInfo::mount_path);
+QList<QUrl> GioLister::MakeDeviceUrls(const QString &id) {
+  QString mount_point;
+  QString uri;
+  {
+    QMutexLocker l(&mutex_);
+    mount_point = mounts_[id].mount_path;
+    uri = mounts_[id].uri;
+  }
 
-  return MakeUrlFromLocalPath(mount_point);
+  QList<QUrl> ret;
+  ret << MakeUrlFromLocalPath(mount_point);
+  ret << uri;
+  return ret;
 }
 
 void GioLister::MountAddedCallback(GVolumeMonitor*, GMount* m, gpointer d) {

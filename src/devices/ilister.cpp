@@ -188,7 +188,17 @@ QString iLister::MakeFriendlyName(const QString& id) {
   return model_id;
 }
 
-QUrl iLister::MakeDeviceUrl(const QString& id) { return QUrl(); }
+QList<QUrl> iLister::MakeDeviceUrls(const QString& id) {
+  QList<QUrl> ret;
+
+  QString uuid = LockAndGetDeviceInfo(id, &DeviceInfo::uuid);
+  if (uuid.isEmpty())
+    return ret;
+
+  ret << QUrl("afc://" + uuid + "/");
+
+  return ret;
+}
 
 void iLister::UnmountDevice(const QString& id) { }
 

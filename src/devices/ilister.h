@@ -15,6 +15,8 @@ class iLister : public DeviceLister {
   iLister();
   ~iLister();
 
+  int priority() const { return 25; }
+
   virtual QStringList DeviceUniqueIDs();
   virtual QStringList DeviceIcons(const QString& id);
   virtual QString DeviceManufacturer(const QString& id);
@@ -23,7 +25,7 @@ class iLister : public DeviceLister {
   virtual quint64 DeviceFreeSpace(const QString& id);
   virtual QVariantMap DeviceHardwareInfo(const QString& id);
   virtual QString MakeFriendlyName(const QString& id);
-  virtual QUrl MakeDeviceUrl(const QString& id);
+  virtual QList<QUrl> MakeDeviceUrls(const QString& id);
   virtual void UnmountDevice(const QString& id);
 
  private:

@@ -280,14 +280,20 @@ int DeviceManager::FindDeviceById(const QString &id) const {
   return -1;
 }
 
-int DeviceManager::FindDeviceByUrl(const QUrl& url) const {
-  if (url.isEmpty())
+int DeviceManager::FindDeviceByUrl(const QList<QUrl>& urls) const {
+  if (urls.isEmpty())
     return -1;
 
   for (int i=0 ; i<devices_.count() ; ++i) {
     foreach (const DeviceInfo::Backend& backend, devices_[i].backends_) {
-      if (backend.lister_ && backend.lister_->MakeDeviceUrl(backend.unique_id_) == url)
-        return i;
+      if (!backend.lister_)
+        continue;
+
+      QList<QUrl> device_urls = backend.lister_->MakeDeviceUrls(backend.unique_id_);
+      foreach (const QUrl& url, device_urls) {
+        if (urls.contains(url))
+          return i;
+      }
     }
   }
   return -1;
@@ -312,7 +318,7 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
     emit dataChanged(index(i, 0), index(i, 0));
   } else {
     // Check if we have another device with the same URL
-    i = FindDeviceByUrl(lister->MakeDeviceUrl(id));
+    i = FindDeviceByUrl(lister->MakeDeviceUrls(id));
     if (i != -1) {
       // Add this device's lister to the existing device
       DeviceInfo& info = devices_[i];
@@ -425,28 +431,41 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     info.database_id_ = backend_->AddDevice(info.SaveToDb());
   }
 
-  // Get the device URL
-  QUrl url = info.BestBackend()->lister_->MakeDeviceUrl(info.BestBackend()->unique_id_);
-  if (url.isEmpty())
+  // Get the device URLs
+  QList<QUrl> urls = info.BestBackend()->lister_->MakeDeviceUrls(
+      info.BestBackend()->unique_id_);
+  if (urls.isEmpty())
     return ret;
 
-  qDebug() << "Connecting" << url;
+  // Take the first URL that we have a handler for
+  QUrl device_url;
+  foreach (const QUrl& url, urls) {
+    qDebug() << "Connecting" << url;
 
-  // Find a device class for this URL's scheme
-  if (!device_classes_.contains(url.scheme())) {
-    emit Error(tr("This type of device is not supported: %1").arg(url.toString()));
+    // Find a device class for this URL's scheme
+    if (device_classes_.contains(url.scheme())) {
+      device_url = url;
+    }
+  }
+
+  if (device_url.isEmpty()) {
+    // Munge the URL list into a string list
+    QStringList url_strings;
+    foreach (const QUrl& url, urls) { url_strings << url.toString(); }
+
+    emit Error(tr("This type of device is not supported: %1").arg(url_strings.join(", ")));
     return ret;
   }
 
-  QMetaObject meta_object = device_classes_.value(url.scheme());
+  QMetaObject meta_object = device_classes_.value(device_url.scheme());
   QObject* instance = meta_object.newInstance(
-      Q_ARG(QUrl, url), Q_ARG(DeviceLister*, info.BestBackend()->lister_),
+      Q_ARG(QUrl, device_url), Q_ARG(DeviceLister*, info.BestBackend()->lister_),
       Q_ARG(QString, info.BestBackend()->unique_id_), Q_ARG(DeviceManager*, this),
       Q_ARG(int, info.database_id_), Q_ARG(bool, first_time));
   ret.reset(static_cast<ConnectedDevice*>(instance));
 
   if (!ret) {
-    qWarning() << "Could not create device for" << url.toString();
+    qWarning() << "Could not create device for" << device_url.toString();
   } else {
     info.device_ = ret;
     emit dataChanged(index(row), index(row));

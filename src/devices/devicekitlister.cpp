@@ -242,11 +242,11 @@ QString DeviceKitLister::FindUniqueIdByPath(const QDBusObjectPath &path) const {
   return QString();
 }
 
-QUrl DeviceKitLister::MakeDeviceUrl(const QString& id) {
+QList<QUrl> DeviceKitLister::MakeDeviceUrls(const QString& id) {
   QString mount_point = LockAndGetDeviceInfo(
       id, &DeviceData::device_mount_paths)[0];
 
-  return MakeUrlFromLocalPath(mount_point);
+  return QList<QUrl>() << MakeUrlFromLocalPath(mount_point);
 }
 
 void DeviceKitLister::UnmountDevice(const QString& id) {

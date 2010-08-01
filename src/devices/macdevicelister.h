@@ -23,7 +23,7 @@ class MacDeviceLister : public DeviceLister {
   virtual quint64 DeviceFreeSpace(const QString& id);
   virtual QVariantMap DeviceHardwareInfo(const QString& id);
   virtual QString MakeFriendlyName(const QString& id);
-  virtual QUrl MakeDeviceUrl(const QString& id);
+  virtual QList<QUrl> MakeDeviceUrls(const QString& id);
 
   virtual void UnmountDevice(const QString &id);
 

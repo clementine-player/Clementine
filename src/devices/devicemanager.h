@@ -73,7 +73,7 @@ public:
   boost::shared_ptr<ConnectedDevice> GetConnectedDevice(int row) const;
 
   int FindDeviceById(const QString& id) const;
-  int FindDeviceByUrl(const QUrl& url) const;
+  int FindDeviceByUrl(const QList<QUrl>& url) const;
 
   // Actions on devices
   boost::shared_ptr<ConnectedDevice> Connect(int row);

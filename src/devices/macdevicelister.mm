@@ -237,7 +237,7 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
   return vendor + " " + product;
 }
 
-QUrl MacDeviceLister::MakeDeviceUrl(const QString& serial) {
+QList<QUrl> MacDeviceLister::MakeDeviceUrsl(const QString& serial) {
   QString bsd_name = current_devices_[serial];
   DASessionRef session = DASessionCreate(kCFAllocatorDefault);
   DADiskRef disk = DADiskCreateFromBSDName(
@@ -253,7 +253,7 @@ QUrl MacDeviceLister::MakeDeviceUrl(const QString& serial) {
   CFRelease(disk);
   CFRelease(session);
 
-  return ret;
+  return QList<QUrl>() << ret;
 }
 
 QStringList MacDeviceLister::DeviceUniqueIDs() {
