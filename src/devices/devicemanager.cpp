@@ -576,6 +576,10 @@ void DeviceManager::TasksChanged() {
   }
 }
 
+void DeviceManager::UnmountAsync(int row) {
+  Q_ASSERT(QMetaObject::invokeMethod(this, "Unmount", Q_ARG(int, row)));
+}
+
 void DeviceManager::Unmount(int row) {
   DeviceInfo& info = devices_[row];
   if (info.database_id_ == -1)

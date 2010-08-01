@@ -72,7 +72,7 @@ void DeleteFiles::ProcessSomeFiles() {
   if (progress_ >= songs_.count()) {
     task_manager_->SetTaskProgress(task_id_, progress_, songs_.count());
 
-    storage_->FinishCopy();
+    storage_->FinishCopy(false);
 
     task_manager_->SetTaskFinished(task_id_);
 

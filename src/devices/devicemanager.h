@@ -79,7 +79,7 @@ public:
   boost::shared_ptr<ConnectedDevice> Connect(int row);
   void Disconnect(int row);
   void Forget(int row);
-  void Unmount(int row);
+  void UnmountAsync(int row);
 
   void SetDeviceIdentity(int row, const QString& friendly_name,
                          const QString& icon_name);
@@ -87,6 +87,9 @@ public:
   // QAbstractListModel
   int rowCount(const QModelIndex &parent) const;
   QVariant data(const QModelIndex &index, int role) const;
+
+public slots:
+  void Unmount(int row);
 
 signals:
   void DeviceConnected(int row);

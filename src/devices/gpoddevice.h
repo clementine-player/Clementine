@@ -42,11 +42,11 @@ public:
   void StartCopy();
   bool CopyToStorage(const QString &source, const QString &destination,
                      const Song &metadata, bool overwrite, bool remove_original);
-  void FinishCopy();
+  void FinishCopy(bool about_to_eject);
 
   void StartDelete();
   bool DeleteFromStorage(const Song& metadata);
-  void FinishDelete();
+  void FinishDelete(bool about_to_eject);
 
 private slots:
   void LoadFinished(Itdb_iTunesDB* db);
@@ -61,6 +61,7 @@ private:
 
   QMutex db_busy_;
   SongList songs_to_add_;
+  SongList songs_to_remove_;
 };
 
 #endif // GPODDEVICE_H
