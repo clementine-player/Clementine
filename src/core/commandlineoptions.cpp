@@ -47,7 +47,8 @@ const char* CommandlineOptions::kHelpText =
     "\n"
     "%20:\n"
     "  -o, --show-osd            %21\n"
-    "  -e, --engine              %22\n";
+    "  -e, --engine              %22\n"
+    "  -g, --language <lang>     %23\n";
 
 
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
@@ -109,6 +110,7 @@ bool CommandlineOptions::Parse() {
 
     {"show-osd",    no_argument,       0, 'o'},
     {"engine",      required_argument, 0, 'e'},
+    {"language",    required_argument, 0, 'g'},
 
     {0, 0, 0, 0}
   };
@@ -116,7 +118,7 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oe:", kOptions, NULL);
+    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oe:g:", kOptions, NULL);
 
     // End of the options
     if (c == -1)
@@ -143,7 +145,8 @@ bool CommandlineOptions::Parse() {
             tr("Play the <n>th track in the playlist"),
             tr("Other options"),
             tr("Display the on-screen-display"),
-            tr("Select engine"));
+            tr("Select engine"),
+            tr("Change the language"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
         return false;
@@ -158,6 +161,7 @@ bool CommandlineOptions::Parse() {
       case 'a': url_list_action_ = UrlList_Append;   break;
       case 'l': url_list_action_ = UrlList_Load;     break;
       case 'o': show_osd_        = true;             break;
+      case 'g': language_        = QString(optarg);  break;
       case VolumeUp:   volume_modifier_ = +4;        break;
       case VolumeDown: volume_modifier_ = -4;        break;
 

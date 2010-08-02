@@ -64,7 +64,8 @@
   Q_IMPORT_PLUGIN(qsqlite)
 #endif
 
-void LoadTranslation(const QString& prefix, const QString& path) {
+void LoadTranslation(const QString& prefix, const QString& path,
+                     const QString& override_language = QString()) {
 #if QT_VERSION < 0x040700
   // QTranslator::load will try to open and read "clementine" if it exists,
   // without checking if it's a file first.
@@ -74,8 +75,11 @@ void LoadTranslation(const QString& prefix, const QString& path) {
     return;
 #endif
 
+  QString language = override_language.isEmpty() ?
+                     QLocale::system().name() : override_language;
+
   QTranslator* t = new PoTranslator;
-  if (t->load(prefix + "_" + QLocale::system().name(), path))
+  if (t->load(prefix + "_" + language, path))
     QCoreApplication::installTranslator(t);
   else
     delete t;
@@ -168,11 +172,19 @@ int main(int argc, char *argv[]) {
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
 
+  // Has the user forced a different language?
+  QString language = options.language();
+  if (language.isEmpty()) {
+    QSettings s;
+    s.beginGroup("General");
+    language = s.value("language").toString();
+  }
+
   // Translations
-  LoadTranslation("qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-  LoadTranslation("clementine", ":/translations");
-  LoadTranslation("clementine", a.applicationDirPath());
-  LoadTranslation("clementine", QDir::currentPath());
+  LoadTranslation("qt", QLibraryInfo::location(QLibraryInfo::TranslationsPath), language);
+  LoadTranslation("clementine", ":/translations", language);
+  LoadTranslation("clementine", a.applicationDirPath(), language);
+  LoadTranslation("clementine", QDir::currentPath(), language);
 
   // Icons
   IconLoader::Init();

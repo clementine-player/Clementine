@@ -114,7 +114,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -393,6 +393,31 @@
               </property>
               <property name="checked">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="title">
+            <string>Language</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <item>
+             <widget class="QComboBox" name="language">
+              <item>
+               <property name="text">
+                <string>Use the system default</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>You will need to restart Clementine if you change the language.</string>
               </property>
              </widget>
             </item>

@@ -62,6 +62,7 @@ class CommandlineOptions {
   bool show_osd() const { return show_osd_; }
   QList<QUrl> urls() const { return urls_; }
   Engine::Type engine() const { return engine_; }
+  QString language() const { return language_; }
 
   QByteArray Serialize() const;
   void Load(const QByteArray& serialized);
@@ -93,6 +94,7 @@ class CommandlineOptions {
   int play_track_at_;
   bool show_osd_;
   Engine::Type engine_;
+  QString language_;
 
   QList<QUrl> urls_;
 };

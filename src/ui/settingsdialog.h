@@ -18,6 +18,7 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
+#include <QMap>
 
 #include "config.h"
 
@@ -83,6 +84,8 @@ class SettingsDialog : public QDialog {
   bool loading_settings_;
 
   OSDPretty* pretty_popup_;
+
+  QMap<QString, QString> language_map_;
 };
 
 #endif // SETTINGSDIALOG_H

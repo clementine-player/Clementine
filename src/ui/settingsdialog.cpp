@@ -27,8 +27,9 @@
 # include "engines/gstengine.h"
 #endif
 
-#include <QSettings>
 #include <QColorDialog>
+#include <QDir>
+#include <QSettings>
 
 #include <QtDebug>
 
@@ -63,6 +64,30 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
   // Behaviour
   connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
+
+  // Populate the language combo box.  We do this by looking at all the
+  // compiled in translations.
+  QDir dir(":/translations/");
+  QStringList codes(dir.entryList(QStringList() << "*.qm"));
+  QRegExp lang_re("^clementine_(.*).qm$");
+  foreach (const QString& filename, codes) {
+    // The regex captures the "ru" from "clementine_ru.qm"
+    if (!lang_re.exactMatch(filename))
+      continue;
+
+    QString code = lang_re.cap(1);
+    QString name = QString("%1 (%2)").arg(
+        QLocale::languageToString(QLocale(code).language()), code);
+
+    language_map_[name] = code;
+  }
+
+  language_map_["English (en)"] = "en";
+
+  // Sort the names and show them in the UI
+  QStringList names = language_map_.keys();
+  qStableSort(names);
+  ui_->language->addItems(names);
 
   // Global shortcuts
 #ifdef Q_OS_MAC
@@ -152,6 +177,11 @@ void SettingsDialog::accept() {
   s.setValue("startupbehaviour", int(behaviour));
   s.endGroup();
 
+  s.beginGroup("General");
+  s.setValue("language", language_map_.contains(ui_->language->currentText()) ?
+             language_map_[ui_->language->currentText()] : QString());
+  s.endGroup();
+
   // Playback
   s.beginGroup(Engine::Base::kSettingsGroup);
   s.setValue("FadeoutEnabled", ui_->fading_out->isChecked());
@@ -214,6 +244,14 @@ void SettingsDialog::showEvent(QShowEvent*) {
     case MainWindow::Startup_AlwaysShow: ui_->b_always_show_->setChecked(true); break;
     case MainWindow::Startup_Remember:   ui_->b_remember_->setChecked(true);    break;
   }
+  s.endGroup();
+
+  s.beginGroup("General");
+  QString name = language_map_.key(s.value("language").toString());
+  if (name.isEmpty())
+    ui_->language->setCurrentIndex(0);
+  else
+    ui_->language->setCurrentIndex(ui_->language->findText(name));
   s.endGroup();
 
   // Last.fm
