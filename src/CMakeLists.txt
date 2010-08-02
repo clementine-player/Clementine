@@ -601,8 +601,10 @@ if(HAVE_IMOBILEDEVICE)
   target_link_libraries(clementine_lib
     ${IMOBILEDEVICE_LIBRARIES}
     ${PLIST_LIBRARIES}
+    ${USBMUXD_LIBRARIES}
     gstafcsrc
   )
+  link_directories(${USBMUXD_LIBRARY_DIRS})
 endif(HAVE_IMOBILEDEVICE)
 
 
