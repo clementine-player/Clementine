@@ -139,7 +139,7 @@ bool GstEnginePipeline::Init() {
   if (GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty())
     g_object_set(G_OBJECT(audiosink_), "device", device_.toUtf8().constData(), NULL);
 
-  if (!(equalizer_preamp_ = engine_->CreateElement("volume", audiobin_, "equalizer-preamp"))) { return false; }
+  if (!(equalizer_preamp_ = engine_->CreateElement("volume", audiobin_))) { return false; }
   if (!(equalizer_ = engine_->CreateElement("equalizer-nbands", audiobin_))) { return false; }
   if (!(audioconvert_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
   if (!(volume_ = engine_->CreateElement("volume", audiobin_))) { return false; }
@@ -149,7 +149,7 @@ bool GstEnginePipeline::Init() {
   if (rg_enabled_) {
     if (!(rgvolume_ = engine_->CreateElement("rgvolume", audiobin_))) { return false; }
     if (!(rglimiter_ = engine_->CreateElement("rglimiter", audiobin_))) { return false; }
-    if (!(audioconvert2_ = engine_->CreateElement("audioconvert", audiobin_, "audioconvert2"))) { return false; }
+    if (!(audioconvert2_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
     scope_element = audioconvert2_;
 
     // Set replaygain settings
@@ -196,7 +196,7 @@ bool GstEnginePipeline::Init() {
   gst_caps_unref(caps);
 
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
-  GstElement* convert = engine_->CreateElement("audioconvert", audiobin_, "audioconvert3");
+  GstElement* convert = engine_->CreateElement("audioconvert", audiobin_);
   if (!convert) { return false; }
   if (rg_enabled_)
     gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);

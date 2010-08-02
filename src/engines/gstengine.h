@@ -78,8 +78,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   PluginDetailsList GetOutputsList() const { return GetPluginList( "Sink/Audio" ); }
   static bool DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(const QString& name);
 
-  GstElement* CreateElement(
-      const QString& factoryName, GstElement* bin = 0, const QString& name = 0);
+  GstElement* CreateElement(const QString& factoryName, GstElement* bin = 0);
 
   // BufferConsumer
   void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline);
@@ -181,6 +180,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   uint seek_pos_;
 
   int timer_id_;
+  int next_element_id_;
 
   QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
 };

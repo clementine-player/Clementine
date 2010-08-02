@@ -72,7 +72,8 @@ GstEngine::GstEngine()
     rg_preamp_(0.0),
     rg_compression_(true),
     seek_timer_(new QTimer(this)),
-    timer_id_(-1)
+    timer_id_(-1),
+    next_element_id_(0)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelay);
@@ -661,20 +662,23 @@ void GstEngine::NewMetaData(const Engine::SimpleMetaBundle& bundle) {
   emit MetaData(bundle);
 }
 
-GstElement* GstEngine::CreateElement(
-    const QString& factoryName, GstElement* bin, const QString& name ) {
-  GstElement* element =
-      gst_element_factory_make(
-          factoryName.toAscii().constData(),
-          name.isNull() ? factoryName.toAscii().constData() : name.toAscii().constData() );
+GstElement* GstEngine::CreateElement(const QString& factoryName, GstElement* bin) {
+  // Make a unique name
+  QString name = factoryName + "-" + QString::number(next_element_id_ ++);
+  qDebug() << name;
 
-  if ( element ) {
-    if ( bin ) gst_bin_add( GST_BIN( bin ), element );
-  } else {
+  GstElement* element = gst_element_factory_make(
+      factoryName.toAscii().constData(), name.toAscii().constData());
+
+  if (!element) {
     emit Error(QString("GStreamer could not create the element: %1.  "
                        "Please make sure that you have installed all necessary GStreamer plugins (e.g. OGG and MP3)").arg( factoryName ) );
-    gst_object_unref( GST_OBJECT( bin ) );
+    gst_object_unref(GST_OBJECT(bin));
+    return NULL;
   }
+
+  if (bin)
+    gst_bin_add(GST_BIN(bin), element);
 
   return element;
 }
