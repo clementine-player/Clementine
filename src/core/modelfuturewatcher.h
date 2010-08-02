@@ -2,7 +2,7 @@
 #define MODELFUTUREWATCHER_H
 
 #include <QFutureWatcher>
-#include <QModelIndex>
+#include <QPersistentModelIndex>
 
 template <typename T>
 class ModelFutureWatcher : public QFutureWatcher<T> {
@@ -15,10 +15,10 @@ class ModelFutureWatcher : public QFutureWatcher<T> {
   ~ModelFutureWatcher() {
   }
 
-  const QModelIndex& index() const { return index_; }
+  const QPersistentModelIndex& index() const { return index_; }
 
  private:
-  QModelIndex index_;
+  QPersistentModelIndex index_;
 
 };
 

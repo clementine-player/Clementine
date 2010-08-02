@@ -251,10 +251,12 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
 void Playlist::SongSaveComplete() {
   ModelFutureWatcher<bool>* watcher = static_cast<ModelFutureWatcher<bool>*>(sender());
   watcher->deleteLater();
-  const QModelIndex& index = watcher->index();
-  item_at(index.row())->Reload();
-  emit dataChanged(index, index);
-  emit EditingFinished(index);
+  const QPersistentModelIndex& index = watcher->index();
+  if (index.isValid()) {
+    item_at(index.row())->Reload();
+    emit dataChanged(index, index);
+    emit EditingFinished(index);
+  }
 }
 
 int Playlist::current_index() const {
