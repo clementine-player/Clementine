@@ -19,6 +19,10 @@
 #include "library/library.h"
 #include "playlist/playlistdelegates.h"
 
+#include <boost/bind.hpp>
+using boost::bind;
+
+#include <QtConcurrentMap>
 #include <QtDebug>
 #include <QDir>
 
@@ -29,6 +33,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     ui_(new Ui_EditTagDialog)
 {
   ui_->setupUi(this);
+  ui_->busy->hide();
+  connect(&watcher_, SIGNAL(finished()), SLOT(SongsEdited()));
 }
 
 EditTagDialog::~EditTagDialog() {
@@ -116,35 +122,51 @@ void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
   new TagCompleter(backend, Playlist::Column_Album, ui_->album);
 }
 
-void EditTagDialog::accept() {
-  foreach (const Song& old, songs_) {
-    Song song(old);
+void EditTagDialog::SaveSong(const Song& old) {
+  Song song(old);
 
-    int track = ui_->track->text().isEmpty() ? -1 : ui_->track->value();
-    int year = ui_->year->text().isEmpty() ? -1 : ui_->year->value();
+  int track = ui_->track->text().isEmpty() ? -1 : ui_->track->value();
+  int year = ui_->year->text().isEmpty() ? -1 : ui_->year->value();
 
-    if (ui_->title->isEnabled())
-      song.set_title(ui_->title->text());
+  if (ui_->title->isEnabled())
+    song.set_title(ui_->title->text());
 
-    if (ui_->artist->isEnabled() && !(common_artist_.isNull() && ui_->artist->text().isEmpty()))
-      song.set_artist(ui_->artist->text());
-    if (ui_->album->isEnabled() && !(common_album_.isNull() && ui_->album->text().isEmpty()))
-      song.set_album(ui_->album->text());
-    if (ui_->genre->isEnabled() && !(common_genre_.isNull() && ui_->genre->text().isEmpty()))
-      song.set_genre(ui_->genre->text());
-    if (ui_->year->isEnabled() && !(common_year_ == -1 && year == -1))
-      song.set_year(year);
+  if (ui_->artist->isEnabled() && !(common_artist_.isNull() && ui_->artist->text().isEmpty()))
+    song.set_artist(ui_->artist->text());
+  if (ui_->album->isEnabled() && !(common_album_.isNull() && ui_->album->text().isEmpty()))
+    song.set_album(ui_->album->text());
+  if (ui_->genre->isEnabled() && !(common_genre_.isNull() && ui_->genre->text().isEmpty()))
+    song.set_genre(ui_->genre->text());
+  if (ui_->year->isEnabled() && !(common_year_ == -1 && year == -1))
+    song.set_year(year);
 
-    if (ui_->track->isEnabled())
-      song.set_track(track);
+  if (ui_->track->isEnabled())
+    song.set_track(track);
 
-    if (ui_->comment->isEnabled())
-      song.set_comment(ui_->comment->toPlainText());
+  if (ui_->comment->isEnabled())
+    song.set_comment(ui_->comment->toPlainText());
 
+  {
+    QMutexLocker l(&taglib_mutex_);
     song.Save();
-
-    emit SongEdited(old, song);
   }
+
+  // Corresponding slots should automatically be called in the receiver's thread, assuming
+  // the connection is an auto connection.
+  emit SongEdited(old, song);
+}
+
+void EditTagDialog::accept() {
+  QFuture<void> future = QtConcurrent::map(songs_, bind(&EditTagDialog::SaveSong, this, _1));
+  watcher_.setFuture(future);
+  ui_->busy->show();
+  ui_->buttonBox->setEnabled(false);
+}
+
+void EditTagDialog::SongsEdited() {
+  qDebug() << Q_FUNC_INFO;
+  ui_->busy->hide();
+  ui_->buttonBox->setEnabled(true);
 
   QDialog::accept();
 }

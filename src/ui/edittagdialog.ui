@@ -173,6 +173,16 @@
       </widget>
      </item>
      <item>
+      <widget class="BusyIndicator" name="busy">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -193,6 +203,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>BusyIndicator</class>
+   <extends>QLabel</extends>
+   <header>widgets/busyindicator.h</header>
+  </customwidget>
   <customwidget>
    <class>LineEdit</class>
    <extends>QLineEdit</extends>

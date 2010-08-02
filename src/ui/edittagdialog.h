@@ -18,6 +18,8 @@
 #define EDITTAGDIALOG_H
 
 #include <QDialog>
+#include <QFutureWatcher>
+#include <QMutex>
 
 #include "core/song.h"
 
@@ -39,10 +41,15 @@ class EditTagDialog : public QDialog {
  public slots:
   void accept();
 
+ private slots:
+  void SongsEdited();
+
  signals:
   void SongEdited(const Song& old_song, const Song& new_song);
 
  private:
+  void SaveSong(const Song& song);
+
   Ui_EditTagDialog* ui_;
 
   SongList songs_;
@@ -51,6 +58,9 @@ class EditTagDialog : public QDialog {
   QString common_album_;
   QString common_genre_;
   int common_year_;
+
+  QFutureWatcher<void> watcher_;
+  QMutex taglib_mutex_;
 };
 
 #endif // EDITTAGDIALOG_H
