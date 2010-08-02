@@ -167,6 +167,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NowPlayingWidgetPositionChanged(bool above_status_bar);
 
+  void SongSaveComplete();
+
  private:
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);

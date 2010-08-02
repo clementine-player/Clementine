@@ -21,6 +21,7 @@
 #include "core/globalshortcuts.h"
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
+#include "core/modelfuturewatcher.h"
 #include "core/player.h"
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
@@ -1111,10 +1112,20 @@ void MainWindow::RenumberTracks() {
 
     if (song.IsEditable()) {
       song.set_track(track);
-      song.Save();
-      playlists_->current()->item_at(row)->Reload();
+      QFuture<bool> future = song.BackgroundSave();
+      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
+      watcher->setFuture(future);
+      connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
     }
     track++;
+  }
+}
+
+void MainWindow::SongSaveComplete() {
+  ModelFutureWatcher<bool>* watcher = static_cast<ModelFutureWatcher<bool>*>(sender());
+  watcher->deleteLater();
+  if (watcher->index().isValid()) {
+    playlists_->current()->item_at(watcher->index().row())->Reload();
   }
 }
 
@@ -1131,8 +1142,10 @@ void MainWindow::SelectionSetValue() {
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if(Playlist::set_column_value(song, column, column_value)) {
-      song.Save();
-      playlists_->current()->item_at(row)->Reload();
+      QFuture<bool> future = song.BackgroundSave();
+      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
+      watcher->setFuture(future);
+      connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
     }
   }
 }
