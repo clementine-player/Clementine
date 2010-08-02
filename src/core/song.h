@@ -17,6 +17,7 @@
 #ifndef SONG_H
 #define SONG_H
 
+#include <QFuture>
 #include <QHash>
 #include <QImage>
 #include <QList>
@@ -185,6 +186,7 @@ class Song {
   // Setters
   bool IsEditable() const;
   bool Save() const;
+  QFuture<bool> BackgroundSave() const;
 
   void set_id(int id) { d->id_ = id; }
   void set_valid(bool v) { d->valid_ = v; }
@@ -225,6 +227,7 @@ class Song {
 
  private:
   void GuessFileType(TagLib::FileRef* fileref);
+  static bool Save(const Song& song);
 
   // Helper methods for taglib
   static void SetTextFrame(const QString& id, const QString& value,

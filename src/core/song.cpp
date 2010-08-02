@@ -50,6 +50,8 @@
 #include <QTextCodec>
 #include <QVariant>
 
+#include <QtConcurrentRun>
+
 #include <boost/scoped_ptr.hpp>
 using boost::scoped_ptr;
 
@@ -828,4 +830,13 @@ bool Song::Save() const {
   #endif  // Q_OS_LINUX
 
   return ret;
+}
+
+bool Song::Save(const Song& song) {
+  return song.Save();
+}
+
+QFuture<bool> Song::BackgroundSave() const {
+  QFuture<bool> future = QtConcurrent::run(&Song::Save, Song(*this));
+  return future;
 }

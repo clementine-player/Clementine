@@ -202,6 +202,7 @@ class Playlist : public QAbstractListModel {
   void TracksDequeued();
   void TracksEnqueued(const QModelIndex&, int begin, int end);
   void QueueLayoutChanged();
+  void SongSaveComplete();
 
  private:
   PlaylistFilter* proxy_;

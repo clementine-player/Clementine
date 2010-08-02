@@ -521,6 +521,7 @@ endif(APPLE)
 list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
+  core/modelfuturewatcher.h
   devices/afcdevice.cpp
   devices/afcdevice.h
   devices/afcfile.cpp
