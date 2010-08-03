@@ -19,6 +19,7 @@
 
 #include "core/song.h"
 #include "core/settingsprovider.h"
+#include "library/sqlrow.h"
 #include "playlist/playlistitem.h"
 
 #include <gmock/gmock.h>
@@ -30,7 +31,7 @@ class MockPlaylistItem : public PlaylistItem {
   MOCK_CONST_METHOD0(options,
       Options());
   MOCK_METHOD1(InitFromQuery,
-      bool(const QSqlQuery& settings));
+      bool(const SqlRow& settings));
   MOCK_METHOD0(Reload,
       void());
   MOCK_CONST_METHOD0(Metadata,

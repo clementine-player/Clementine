@@ -22,6 +22,7 @@
 
 #include "config.h"
 #include "core/commandlineoptions.h"
+#include "core/encoding.h"
 #include "core/mac_startup.h"
 #include "core/networkaccessmanager.h"
 #include "core/player.h"

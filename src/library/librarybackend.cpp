@@ -464,7 +464,9 @@ Song LibraryBackend::GetSongById(int id) {
   q.next();
 
   Song ret;
-  ret.InitFromQuery(q);
+  if (q.isValid()) {
+    ret.InitFromQuery(q);
+  }
   return ret;
 }
 

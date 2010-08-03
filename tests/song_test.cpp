@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/encoding.h"
 #include "core/song.h"
 #include "radio/fixlastfm.h"
 #include <lastfm/Track>

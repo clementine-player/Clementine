@@ -36,6 +36,7 @@ set(SOURCES
   core/commandlineoptions.cpp
   core/database.cpp
   core/deletefiles.cpp
+  core/encoding.cpp
   core/filesystemmusicstorage.cpp
   core/fht.cpp
   core/globalshortcutbackend.cpp
