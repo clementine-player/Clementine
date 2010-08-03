@@ -40,10 +40,11 @@ class PlaylistBackend : public QObject {
     int last_played;
   };
   typedef QList<Playlist> PlaylistList;
+  typedef QFuture<boost::shared_ptr<PlaylistItem> > PlaylistItemFuture;
 
   PlaylistList GetAllPlaylists();
   Playlist GetPlaylist(int id);
-  QFuture<boost::shared_ptr<PlaylistItem> > GetPlaylistItems(int playlist);
+  PlaylistItemFuture GetPlaylistItems(int playlist);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
                          int last_played);
   void SetPlaylistOrder(const QList<int>& ids);
