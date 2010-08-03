@@ -57,6 +57,7 @@ using boost::scoped_ptr;
 
 #include "albumcoverloader.h"
 #include "engines/enginebase.h"
+#include "library/sqlrow.h"
 #include "widgets/trackslider.h"
 
 static QStringList Prepend(const QString& text, const QStringList& list) {
@@ -280,7 +281,6 @@ QString UniversalEncodingHandler::FixEncoding(const TagLib::String& input) {
   return TStringToQString(input).trimmed();
 }
 
-
 Song::Private::Private()
   : valid_(false),
     id_(-1),
@@ -495,13 +495,11 @@ void Song::GuessFileType(TagLib::FileRef* fileref) {
     d->filetype_ = Type_TrueAudio;
 }
 
-void Song::InitFromQuery(const QSqlQuery& q, int col) {
+void Song::InitFromQuery(const SqlRow& q, int col) {
 #ifndef QT_NO_DEBUG_OUTPUT
   if (qApp->thread() == QThread::currentThread())
     qWarning() << Q_FUNC_INFO << "on GUI thread!";
 #endif
-  if (!q.isValid())
-    return;
 
   d->valid_ = true;
 

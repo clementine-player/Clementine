@@ -881,6 +881,7 @@ void Playlist::Save() const {
 }
 
 void Playlist::Restore() {
+  qDebug() << Q_FUNC_INFO;
   if (!backend_)
     return;
 
@@ -888,11 +889,23 @@ void Playlist::Restore() {
   virtual_items_.clear();
   library_items_by_id_.clear();
 
-  items_ = backend_->GetPlaylistItems(id_);
+  QFuture<shared_ptr<PlaylistItem> > future = backend_->GetPlaylistItems(id_);
+  QFutureWatcher<shared_ptr<PlaylistItem> >* watcher =
+      new QFutureWatcher<shared_ptr<PlaylistItem> >(this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(ItemsLoaded()));
+}
+
+void Playlist::ItemsLoaded() {
+  QFutureWatcher<shared_ptr<PlaylistItem> >* watcher =
+      static_cast<QFutureWatcher<shared_ptr<PlaylistItem> >*>(sender());
+  watcher->deleteLater();
+
+  items_ = watcher->future().results();
 
   PlaylistBackend::Playlist p = backend_->GetPlaylist(id_);
 
-  for (int i=0 ; i<items_.count() ; ++i) {
+  for (int i = 0 ; i < items_.count() ; ++i) {
     virtual_items_ << i;
 
     if (items_[i]->type() == "Library") {

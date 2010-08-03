@@ -18,6 +18,7 @@
 #include "radioservice.h"
 #include "radiomodel.h"
 #include "core/settingsprovider.h"
+#include "library/sqlrow.h"
 
 #include <QSettings>
 #include <QApplication>
@@ -40,7 +41,7 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
   InitMetadata();
 }
 
-bool RadioPlaylistItem::InitFromQuery(const QSqlQuery &query) {
+bool RadioPlaylistItem::InitFromQuery(const SqlRow& query) {
   // The song tables gets joined first, plus one each for the song ROWIDs
   const int row = (Song::kColumns.count() + 1) * 2;
 

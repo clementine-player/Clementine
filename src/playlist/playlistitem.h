@@ -24,7 +24,7 @@
 
 #include "core/song.h"
 
-class QSqlQuery;
+class SqlRow;
 
 class PlaylistItem {
  public:
@@ -89,7 +89,7 @@ class PlaylistItem {
 
   virtual Options options() const { return Default; }
 
-  virtual bool InitFromQuery(const QSqlQuery& query) = 0;
+  virtual bool InitFromQuery(const SqlRow& query) = 0;
   void BindToQuery(QSqlQuery* query) const;
   virtual void Reload() {}
 

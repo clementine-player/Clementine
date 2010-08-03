@@ -39,7 +39,7 @@ void LibraryPlaylistItem::Reload() {
   song_.InitFromFile(song_.filename(), song_.directory_id());
 }
 
-bool LibraryPlaylistItem::InitFromQuery(const QSqlQuery &query) {
+bool LibraryPlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
   song_.InitFromQuery(query);
 

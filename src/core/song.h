@@ -37,6 +37,8 @@
 #  include <gpod/itdb.h>
 #endif
 
+class SqlRow;
+
 namespace lastfm {
   class Track;
 }
@@ -83,6 +85,7 @@ class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
   QTextCodec* current_codec_;
 };
 
+
 class Song {
  public:
   Song();
@@ -124,7 +127,7 @@ class Song {
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, int length);
   void InitFromFile(const QString& filename, int directory_id);
-  void InitFromQuery(const QSqlQuery& query, int col = 0);
+  void InitFromQuery(const SqlRow& query, int col = 0);
   void InitFromLastFM(const lastfm::Track& track);
 
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);

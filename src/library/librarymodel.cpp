@@ -18,6 +18,7 @@
 #include "librarybackend.h"
 #include "libraryitem.h"
 #include "librarydirectorymodel.h"
+#include "sqlrow.h"
 #include "core/database.h"
 #include "playlist/songmimedata.h"
 #include "ui/iconloader.h"

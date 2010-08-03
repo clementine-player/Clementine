@@ -78,6 +78,7 @@ set(SOURCES
   library/libraryquery.cpp
   library/libraryview.cpp
   library/librarywatcher.cpp
+  library/sqlrow.cpp
 
   playlist/playlist.cpp
   playlist/playlistbackend.cpp

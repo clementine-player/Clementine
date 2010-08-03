@@ -16,6 +16,8 @@
 
 #include "songplaylistitem.h"
 
+#include "library/sqlrow.h"
+
 #include <QtDebug>
 #include <QFile>
 #include <QSettings>
@@ -31,7 +33,7 @@ SongPlaylistItem::SongPlaylistItem(const Song& song)
 {
 }
 
-bool SongPlaylistItem::InitFromQuery(const QSqlQuery &query) {
+bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   // The song tables gets joined first, plus one each for the song ROWIDs
   const int row = (Song::kColumns.count() + 1) * 2;
 

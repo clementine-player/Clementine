@@ -16,6 +16,7 @@
 
 #include "librarybackend.h"
 #include "libraryquery.h"
+#include "sqlrow.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
 

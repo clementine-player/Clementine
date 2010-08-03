@@ -8,7 +8,7 @@ class MagnatunePlaylistItem : public LibraryPlaylistItem {
   MagnatunePlaylistItem(const QString& type);
   MagnatunePlaylistItem(const Song& song);
 
-  bool InitFromQuery(const QSqlQuery &query);
+  bool InitFromQuery(const SqlRow& query);
 
   Options options() const;
 

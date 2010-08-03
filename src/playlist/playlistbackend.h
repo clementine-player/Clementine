@@ -17,8 +17,9 @@
 #ifndef PLAYLISTBACKEND_H
 #define PLAYLISTBACKEND_H
 
-#include <QObject>
+#include <QFuture>
 #include <QList>
+#include <QObject>
 
 #include "playlistitem.h"
 
@@ -42,7 +43,7 @@ class PlaylistBackend : public QObject {
 
   PlaylistList GetAllPlaylists();
   Playlist GetPlaylist(int id);
-  PlaylistItemList GetPlaylistItems(int playlist);
+  QFuture<boost::shared_ptr<PlaylistItem> > GetPlaylistItems(int playlist);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
                          int last_played);
   void SetPlaylistOrder(const QList<int>& ids);
@@ -55,6 +56,8 @@ class PlaylistBackend : public QObject {
   void SavePlaylist(int playlist, const PlaylistItemList& items, int last_played);
 
  private:
+  static boost::shared_ptr<PlaylistItem> NewSongFromQuery(const SqlRow& row);
+
   boost::shared_ptr<Database> db_;
 };
 

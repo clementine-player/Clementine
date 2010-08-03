@@ -21,6 +21,7 @@
 #include "core/albumcoverfetcher.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
+#include "library/sqlrow.h"
 
 #include <QSettings>
 #include <QPainter>

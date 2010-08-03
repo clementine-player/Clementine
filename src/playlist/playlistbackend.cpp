@@ -18,9 +18,11 @@
 #include "core/database.h"
 #include "core/scopedtransaction.h"
 #include "core/song.h"
+#include "library/sqlrow.h"
 
-#include <QtDebug>
 #include <QSqlQuery>
+#include <QtConcurrentMap>
+#include <QtDebug>
 
 using boost::shared_ptr;
 
@@ -72,7 +74,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   return p;
 }
 
-PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
+QFuture<shared_ptr<PlaylistItem> > PlaylistBackend::GetPlaylistItems(int playlist) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -91,22 +93,27 @@ PlaylistItemList PlaylistBackend::GetPlaylistItems(int playlist) {
   q.bindValue(":playlist", playlist);
   q.exec();
   if (db_->CheckErrors(q.lastError()))
-    return ret;
+    return QFuture<shared_ptr<PlaylistItem> >();
+
+  QList<SqlRow> rows;
 
   while (q.next()) {
-    // The song tables gets joined first, plus one each for the song ROWIDs
-    const int row = (Song::kColumns.count() + 1) * 2;
-
-    shared_ptr<PlaylistItem> item(
-        PlaylistItem::NewFromType(q.value(row + 0).toString()));
-    if (!item)
-      continue;
-
-    if (item->InitFromQuery(q))
-      ret << item;
+    rows << SqlRow(q);
   }
 
-  return ret;
+  return QtConcurrent::mapped(rows, &PlaylistBackend::NewSongFromQuery);
+}
+
+shared_ptr<PlaylistItem> PlaylistBackend::NewSongFromQuery(const SqlRow& row) {
+  // The song tables gets joined first, plus one each for the song ROWIDs
+  const int playlist_row = (Song::kColumns.count() + 1) * 2;
+
+  shared_ptr<PlaylistItem> item(
+      PlaylistItem::NewFromType(row.value(playlist_row).toString()));
+  if (item) {
+    item->InitFromQuery(row);
+  }
+  return item;
 }
 
 void PlaylistBackend::SavePlaylistAsync(int playlist, const PlaylistItemList &items,

@@ -13,7 +13,7 @@ MagnatunePlaylistItem::MagnatunePlaylistItem(const Song& song)
   song_ = song;
 }
 
-bool MagnatunePlaylistItem::InitFromQuery(const QSqlQuery &query) {
+bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
   song_.InitFromQuery(query, Song::kColumns.count() + 1);
 
