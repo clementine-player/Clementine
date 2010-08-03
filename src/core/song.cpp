@@ -342,6 +342,10 @@ QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) {
 }
 
 void Song::InitFromFile(const QString& filename, int directory_id) {
+#ifndef QT_NO_DEBUG_OUTPUT
+  if (qApp->thread() == QThread::currentThread())
+    qWarning() << Q_FUNC_INFO << "on GUI thread!";
+#endif
   d->filename_ = filename;
   d->directory_id_ = directory_id;
 
@@ -492,6 +496,10 @@ void Song::GuessFileType(TagLib::FileRef* fileref) {
 }
 
 void Song::InitFromQuery(const QSqlQuery& q, int col) {
+#ifndef QT_NO_DEBUG_OUTPUT
+  if (qApp->thread() == QThread::currentThread())
+    qWarning() << Q_FUNC_INFO << "on GUI thread!";
+#endif
   if (!q.isValid())
     return;
 
