@@ -73,7 +73,20 @@ TEST_F(SongLoaderTest, LoadLocalPls) {
   TemporaryResource file(":/testdata/pls_one.pls");
   SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
 
-  ASSERT_EQ(SongLoader::Success, ret);
+  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
+  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
+
+  // Start an event loop to wait for gstreamer to do its thing
+  QEventLoop loop;
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
+                   &loop, SLOT(quit()));
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+  // Check the signal was emitted with Success
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(true, spy[0][0].toBool());
+
+  // Check the song got loaded
   ASSERT_EQ(1, loader_->songs().count());
   EXPECT_EQ("Title", loader_->songs()[0].title());
   EXPECT_EQ(123, loader_->songs()[0].length());
@@ -83,7 +96,18 @@ TEST_F(SongLoaderTest, LoadLocalM3U) {
   TemporaryResource file(":/testdata/test.m3u");
   SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
 
-  ASSERT_EQ(SongLoader::Success, ret);
+  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
+
+  QEventLoop loop;
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
+                   &loop, SLOT(quit()));
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+  // Check the signal was emitted with Success
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(true, spy[0][0].toBool());
+
+  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
   ASSERT_EQ(239, loader_->songs().count());
 }
 
@@ -91,7 +115,18 @@ TEST_F(SongLoaderTest, LoadLocalXSPF) {
   TemporaryResource file(":/testdata/test.xspf");
   SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
 
-  ASSERT_EQ(SongLoader::Success, ret);
+  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
+
+  QEventLoop loop;
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
+                   &loop, SLOT(quit()));
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+  // Check the signal was emitted with Success
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(true, spy[0][0].toBool());
+
+  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
   ASSERT_EQ(1, loader_->songs().count());
   EXPECT_EQ("Foo", loader_->songs()[0].title());
 }
@@ -100,7 +135,18 @@ TEST_F(SongLoaderTest, LoadLocalASX) {
   TemporaryResource file(":/testdata/test.asx");
   SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
 
-  ASSERT_EQ(SongLoader::Success, ret);
+  QSignalSpy spy(loader_.get(), SIGNAL(LoadFinished(bool)));
+
+  QEventLoop loop;
+  QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
+                   &loop, SLOT(quit()));
+  loop.exec(QEventLoop::ExcludeUserInputEvents);
+
+  // Check the signal was emitted with Success
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(true, spy[0][0].toBool());
+
+  ASSERT_EQ(SongLoader::WillLoadAsync, ret);
   ASSERT_EQ(1, loader_->songs().count());
   EXPECT_EQ("Foo", loader_->songs()[0].title());
 }
