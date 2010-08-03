@@ -881,7 +881,6 @@ void Playlist::Save() const {
 }
 
 void Playlist::Restore() {
-  qDebug() << Q_FUNC_INFO;
   if (!backend_)
     return;
 
