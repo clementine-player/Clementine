@@ -116,9 +116,8 @@ SongLoader::Result SongLoader::LoadLocal() {
     qDebug() << "Parsing using" << parser->name();
 
     // It's a playlist!
-    file.reset();
-    songs_ = parser->Load(&file, QFileInfo(filename).path());
-    return Success;
+    QtConcurrent::run(this, &SongLoader::LoadPlaylist, parser, filename);
+    return WillLoadAsync;
   }
 
   // Not a playlist, so just assume it's a song
@@ -127,6 +126,13 @@ SongLoader::Result SongLoader::LoadLocal() {
   if (song.is_valid())
     songs_ << song;
   return Success;
+}
+
+void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
+  QFile file(filename);
+  file.open(QIODevice::ReadOnly);
+  songs_ = parser->Load(&file, QFileInfo(filename).path());
+  emit LoadFinished(true);
 }
 
 static bool CompareSongs(const Song& left, const Song& right) {

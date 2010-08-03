@@ -71,6 +71,7 @@ private:
 
   Result LoadLocal();
   void LoadLocalDirectory(const QString& filename);
+  void LoadPlaylist(ParserBase* parser, const QString& filename);
 
   void AddAsRawStream();
 
