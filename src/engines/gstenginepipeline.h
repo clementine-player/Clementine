@@ -17,11 +17,12 @@
 #ifndef GSTENGINEPIPELINE_H
 #define GSTENGINEPIPELINE_H
 
-#include <QObject>
-#include <QUrl>
-#include <QTimeLine>
 #include <QBasicTimer>
+#include <QFuture>
 #include <QMutex>
+#include <QObject>
+#include <QTimeLine>
+#include <QUrl>
 
 #include <gst/gst.h>
 #include <boost/scoped_ptr.hpp>
@@ -54,7 +55,7 @@ class GstEnginePipeline : public QObject {
   void RemoveAllBufferConsumers();
 
   // Control the music playback
-  bool SetState(GstState state);
+  QFuture<GstStateChangeReturn> SetState(GstState state);
   bool Seek(qint64 nanosec);
   void SetEqualizerEnabled(bool enabled);
   void SetEqualizerParams(int preamp, const QList<int>& band_gains);

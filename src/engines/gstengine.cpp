@@ -24,6 +24,7 @@
 #include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
+#include "core/boundfuturewatcher.h"
 
 #ifdef HAVE_IMOBILEDEVICE
 # include "gstafcsrc/gstafcsrc.h"
@@ -490,33 +491,46 @@ void GstEngine::StartFadeout() {
 
 
 bool GstEngine::Play( uint offset ) {
-  // Try to play input pipeline; if fails, destroy input bin
-  forever {
-    if (current_pipeline_->SetState(GST_STATE_PLAYING))
-      break; // Success
+  QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
+  BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
+      new BoundFutureWatcher<GstStateChangeReturn, uint>(offset, this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
+  return true;
+}
+
+void GstEngine::PlayDone() {
+  BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
+      static_cast<BoundFutureWatcher<GstStateChangeReturn, uint>*>(sender());
+  watcher->deleteLater();
+  GstStateChangeReturn ret = watcher->result();
+
+  if (ret == GST_STATE_CHANGE_FAILURE) {
     // Failure, but we got a redirection URL - try loading that instead
     QUrl redirect_url = current_pipeline_->redirect_url();
     if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
       qDebug() << "Redirecting to" << redirect_url;
       current_pipeline_ = CreatePipeline(redirect_url);
-      continue;
+      Play(watcher->data());
+      return;
     }
 
     // Failure - give up
     qWarning() << "Could not set thread to PLAYING.";
     current_pipeline_.reset();
-    return false;
+    return;
   }
-
-  // If "Resume playback on start" is enabled, we must seek to the last position
-  if (offset) Seek(offset);
 
   StartTimers();
 
   current_sample_ = 0;
+
+  if (watcher->data()) {
+    Seek(watcher->data());
+  }
+
   emit StateChanged(Engine::Playing);
-  return true;
 }
 
 

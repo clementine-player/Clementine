@@ -19,6 +19,7 @@
 #include "bufferconsumer.h"
 
 #include <QDebug>
+#include <QtConcurrentRun>
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
@@ -448,8 +449,8 @@ GstState GstEnginePipeline::state() const {
   return s;
 }
 
-bool GstEnginePipeline::SetState(GstState state) {
-  return gst_element_set_state(pipeline_, state) != GST_STATE_CHANGE_FAILURE;
+QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
+  return QtConcurrent::run(&gst_element_set_state, pipeline_, state);
 }
 
 bool GstEnginePipeline::Seek(qint64 nanosec) {
