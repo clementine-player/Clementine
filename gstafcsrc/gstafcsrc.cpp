@@ -135,18 +135,37 @@ static void gst_afc_src_init(GstAfcSrc* element, GstAfcSrcClass* gclass) {
   element->location_ = NULL;
   element->uuid_ = NULL;
   element->path_ = NULL;
+  element->connected_ = false;
   element->afc_ = NULL;
   element->afc_port_ = 0;
   element->device_ = NULL;
   element->file_handle_ = 0;
   element->lockdown_ = NULL;
+  element->buffer_ = NULL;
+  element->buffer_is_valid_ = false;
+  element->buffer_length_ = 0;
+  element->buffer_offset_ = 0;
 }
 
 static void gst_afc_src_finalize(GObject* object) {
-  GstAfcSrc* src = GST_AFCSRC(object);
-  free(src->location_);
-  free(src->uuid_);
-  free(src->path_);
+  GstAfcSrc* self = GST_AFCSRC(object);
+  free(self->location_);
+  free(self->uuid_);
+  free(self->path_);
+  free(self->buffer_);
+
+  if (self->file_handle_)
+    afc_file_close(self->afc_, self->file_handle_);
+
+  if (self->afc_)
+    afc_client_free(self->afc_);
+
+  if (self->lockdown_)
+    lockdownd_client_free(self->lockdown_);
+
+  if (self->device_)
+    idevice_free(self->device_);
+
 
   G_OBJECT_CLASS(parent_class)->finalize(object);
 }
@@ -183,6 +202,10 @@ static void gst_afc_src_get_property(
 
 static gboolean gst_afc_src_start(GstBaseSrc* src) {
   GstAfcSrc* self = GST_AFCSRC(src);
+
+  // Don't connect again
+  if (self->connected_)
+    return true;
 
   // Check that a URI has been passed
   if (!self->location_ || self->location_[0] == '\0') {
@@ -235,25 +258,12 @@ static gboolean gst_afc_src_start(GstBaseSrc* src) {
     return false;
   }
 
+  self->connected_ = true;
+
   return true;
 }
 
 static gboolean gst_afc_src_stop(GstBaseSrc* src) {
-  GstAfcSrc* self = GST_AFCSRC(src);
-
-  if (self->file_handle_) {
-    afc_file_close(self->afc_, self->file_handle_);
-  }
-
-  if (self->afc_) {
-    afc_client_free(self->afc_);
-  }
-  if (self->lockdown_) {
-    lockdownd_client_free(self->lockdown_);
-  }
-  if (self->device_) {
-    idevice_free(self->device_);
-  }
 
   return true;
 }
@@ -267,11 +277,25 @@ static GstFlowReturn gst_afc_src_create(GstBaseSrc* src, guint64 offset, guint l
     return GST_FLOW_ERROR;
   }
 
-  uint32_t bytes_read = 0;
-  if (length > 0) {
+  // Is this section within our cache?
+  if (!self->buffer_is_valid_ || offset < self->buffer_offset_ ||
+      offset + length > self->buffer_offset_ + self->buffer_length_) {
+    // No - read from the device to fill our internal cache.
+    // Always read twice the requested size so the next read(s) hit the cache too.
+    if (self->buffer_length_ != length * 2) {
+      self->buffer_ = (char*)realloc(self->buffer_, length * 2);
+      self->buffer_is_valid_ = true;
+      self->buffer_length_ = length * 2;
+    }
+    self->buffer_offset_ = offset;
+
+    uint32_t bytes_read = 0;
     afc_file_seek(self->afc_, self->file_handle_, offset, SEEK_SET);
-    afc_file_read(self->afc_, self->file_handle_, (char*)(GST_BUFFER_DATA(buf)), length, &bytes_read);
+    afc_file_read(self->afc_, self->file_handle_, self->buffer_, length * 2, &bytes_read);
   }
+
+  // Copy from our internal buffer to the output buffer
+  memcpy(GST_BUFFER_DATA(buf), self->buffer_ + offset - self->buffer_offset_, length);
 
   *buffer = buf;
   return GST_FLOW_OK;

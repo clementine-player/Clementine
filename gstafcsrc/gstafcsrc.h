@@ -49,6 +49,7 @@ struct _GstAfcSrc {
   char* uuid_;
   char* path_;
 
+  bool connected_;
   idevice_t device_;
   lockdownd_client_t lockdown_;
   afc_client_t afc_;
@@ -56,6 +57,11 @@ struct _GstAfcSrc {
   uint16_t afc_port_;
 
   uint64_t file_handle_;
+
+  bool buffer_is_valid_;
+  guint64 buffer_offset_;
+  guint buffer_length_;
+  char* buffer_;
 };
 
 struct _GstAfcSrcClass {
