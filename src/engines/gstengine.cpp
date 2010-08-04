@@ -506,6 +506,9 @@ void GstEngine::PlayDone() {
   watcher->deleteLater();
   GstStateChangeReturn ret = watcher->result();
 
+  if (!current_pipeline_)
+    return;
+
   if (ret == GST_STATE_CHANGE_FAILURE) {
     // Failure, but we got a redirection URL - try loading that instead
     QUrl redirect_url = current_pipeline_->redirect_url();
