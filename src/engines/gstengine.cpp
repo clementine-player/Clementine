@@ -679,7 +679,6 @@ void GstEngine::NewMetaData(const Engine::SimpleMetaBundle& bundle) {
 GstElement* GstEngine::CreateElement(const QString& factoryName, GstElement* bin) {
   // Make a unique name
   QString name = factoryName + "-" + QString::number(next_element_id_ ++);
-  qDebug() << name;
 
   GstElement* element = gst_element_factory_make(
       factoryName.toAscii().constData(), name.toAscii().constData());
