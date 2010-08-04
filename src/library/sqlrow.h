@@ -6,15 +6,20 @@
 
 class QSqlQuery;
 
+class LibraryQuery;
+
 class SqlRow {
  public:
   // WARNING: Implicit construction from QSqlQuery and LibraryQuery.
   SqlRow(const QSqlQuery& query);
+  SqlRow(const LibraryQuery& query);
 
   QVariant value(int i) const { return columns_[i]; }
 
  private:
   SqlRow();
+
+  void Init(const QSqlQuery& query);
 
   QList<QVariant> columns_;
 };
