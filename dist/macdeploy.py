@@ -105,7 +105,6 @@ GSTREAMER_SEARCH_PATH=[
 
 QT_PLUGINS = [
     'accessible/libqtaccessiblewidgets.dylib',
-    'bearer/libqcorewlanbearer.dylib',
     'codecs/libqcncodecs.dylib',
     'codecs/libqjpcodecs.dylib',
     'codecs/libqkrcodecs.dylib',
