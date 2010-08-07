@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
-set(CMAKE_C_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall")
+set(CMAKE_C_FLAGS "-Wall ${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall ${CMAKE_CXX_FLAGS}")
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${SPARKLE})
