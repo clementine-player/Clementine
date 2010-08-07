@@ -9,10 +9,22 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 
+; Set Application Capabilities info
+!define CAPABILITIES_NAME "Clementine"
+!define CAPABILITIES_LOCAL_NAME "Clementine"
+!define CAPABILITIES_PROGID "Clementine music player"
+!define CAPABILITIES_PATH "Software\Clients\Media\Clementine"
+!define CAPABILITIES_DESCRIPTION "Clementine music player"
+!define CAPABILITIES_ICON "$INSTDIR\clementine.ico"
+!define CAPABILITIES_REINSTALL "Command to reinstall"
+!define CAPABILITIES_HIDE_ICONS "Command to hide icons"
+!define CAPABILITIES_SHOW_ICONS "Command to show icons"
+
 SetCompressor /SOLID lzma
 !addplugindir nsisplugins
 !include "MUI2.nsh"
 !include "FileAssociation.nsh"
+!include "Capabilities.nsh"
 
 !define MUI_ICON "clementine.ico"
 
@@ -110,19 +122,57 @@ Section "Clementine" Clementine
   File "z.dll"
   File "zlib1.dll"
 
-  ${registerExtension} "$INSTDIR\clementine.exe" ".mp3" "MP3 Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".flac" "FLAC Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".ogg" "OGG Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".spx" "OGG Speex Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".mp4" "MP4 Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".aac" "AAC Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".wma" "WMA Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".wav" "WAV Audio File"
+  ; Check the OS.  If Vista or newer, use Default Programs
+  nsisos::osversion
+  StrCpy $R0 $0
+  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
-  ${registerExtension} "$INSTDIR\clementine.exe" ".pls" "PLS Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".m3u" "M3U Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
-  ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
+  HasDefaultPrograms:
+    ; Register Clementine with Default Programs
+    Var /GLOBAL AppIcon
+    Var /GLOBAL AppExe
+    StrCpy $AppExe "$INSTDIR\clementine.exe"
+    StrCpy $AppIcon "$INSTDIR\clementine.ico"
+
+    ${RegisterCapabilities}
+
+    ${RegisterMediaType} ".mp3" $AppExe $AppIcon "MP3 Audio File"
+    ${RegisterMediaType} ".flac" $AppExe $AppIcon "FLAC Audio File"
+    ${RegisterMediaType} ".ogg" $AppExe $AppIcon "OGG Audio File"
+    ${RegisterMediaType} ".spx" $AppExe $AppIcon "OGG Speex Audio File"
+    ${RegisterMediaType} ".m4a" $AppExe $AppIcon "MP4 Audio File"
+    ${RegisterMediaType} ".aac" $AppExe $AppIcon "AAC Audio File"
+    ${RegisterMediaType} ".wma" $AppExe $AppIcon "WMA Audio File"
+    ${RegisterMediaType} ".wav" $AppExe $AppIcon "WAV Audio File"
+    
+    ${RegisterMediaType} ".pls" $AppExe $AppIcon "PLS Audio File"
+    ${RegisterMediaType} ".m3u" $AppExe $AppIcon "M3U Audio File"
+    ${RegisterMediaType} ".xspf" $AppExe $AppIcon "XSPF Audio File"
+    ${RegisterMediaType} ".asx" $AppExe $AppIcon "Windows Media Audio/Video playlist"
+    
+    ${RegisterMimeType} "audio/mp3" "mp3" "{cd3afa76-b84f-48f0-9393-7edc34128127}"
+    ${RegisterMimeType} "audio/mp4" "m4a" "{cd3afa7c-b84f-48f0-9393-7edc34128127}"
+    ${RegisterMimeType} "audio/x-ms-wma" "wma" "{cd3afa84-b84f-48f0-9393-7edc34128127}"
+    ${RegisterMimeType} "audio/wav" "wav" "{cd3afa7b-b84f-48f0-9393-7edc34128127}"
+
+    ${RegisterMimeType} "audio/mpegurl" "m3u" "{cd3afa78-b84f-48f0-9393-7edc34128127}"
+    ${RegisterMimeType} "application/x-wmplayer" "asx" "{cd3afa96-b84f-48f0-9393-7edc34128127}"
+    Goto done
+  NoDefaultPrograms:
+    ${registerExtension} "$INSTDIR\clementine.exe" ".mp3" "MP3 Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".flac" "FLAC Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".ogg" "OGG Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".spx" "OGG Speex Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".m4a" "MP4 Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".aac" "AAC Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".wma" "WMA Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".wav" "WAV Audio File"
+
+    ${registerExtension} "$INSTDIR\clementine.exe" ".pls" "PLS Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".m3u" "M3U Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
+    ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
+  done:
 SectionEnd
 
 Section "Qt image format plugins" imageformats
@@ -1469,18 +1519,29 @@ Section "Uninstall"
   ; Remove the entry from 'installed programs list'
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 
-  ; Remove file associations
-  ${unregisterExtension} ".mp3" "MP3 Audio File"
-  ${unregisterExtension} ".flac" "FLAC Audio File"
-  ${unregisterExtension} ".ogg" "OGG Audio File"
-  ${unregisterExtension} ".spx" "OGG Speex Audio File"
-  ${unregisterExtension} ".mp4" "MP4 Audio File"
-  ${unregisterExtension} ".aac" "AAC Audio File"
-  ${unregisterExtension} ".wma" "WMA Audio File"
-  ${unregisterExtension} ".wav" "WAV Audio File"
+  ; Check the OS.  If Vista or newer, use Default Programs
+  nsisos::osversion
+  StrCpy $R0 $0
+  IntCmp $R0 6 HasDefaultPrograms NoDefaultPrograms HasDefaultPrograms
 
-  ${unregisterExtension} ".pls" "PLS Audio File"
-  ${unregisterExtension} ".m3u" "M3U Audio File"
-  ${unregisterExtension} ".xspf" "XSPF Audio File"
-  ${unregisterExtension} ".asx" "Windows Media Audio/Video playlist"
+  HasDefaultPrograms:
+    ; Unregister from Default Programs
+    ${UnRegisterCapabilities}
+    Goto done
+  NoDefaultPrograms:
+    ; Remove file associations
+    ${unregisterExtension} ".mp3" "MP3 Audio File"
+    ${unregisterExtension} ".flac" "FLAC Audio File"
+    ${unregisterExtension} ".ogg" "OGG Audio File"
+    ${unregisterExtension} ".spx" "OGG Speex Audio File"
+    ${unregisterExtension} ".mp4" "MP4 Audio File"
+    ${unregisterExtension} ".aac" "AAC Audio File"
+    ${unregisterExtension} ".wma" "WMA Audio File"
+    ${unregisterExtension} ".wav" "WAV Audio File"
+
+    ${unregisterExtension} ".pls" "PLS Audio File"
+    ${unregisterExtension} ".m3u" "M3U Audio File"
+    ${unregisterExtension} ".xspf" "XSPF Audio File"
+    ${unregisterExtension} ".asx" "Windows Media Audio/Video playlist"
+  done:
 SectionEnd
