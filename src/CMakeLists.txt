@@ -699,6 +699,11 @@ else (APPLE)
     RENAME application-x-clementine.png
   )
 
+  install(FILES ../data/icon.svg
+    DESTINATION share/icons/hicolor/scalable/apps/
+    RENAME application-x-clementine.svg
+  )
+
   install(FILES ../dist/clementine.desktop
     DESTINATION share/applications
   )
