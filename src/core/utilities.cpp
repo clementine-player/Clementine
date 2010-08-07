@@ -84,7 +84,7 @@ quint64 FileSystemCapacity(const QString& path) {
 #if defined(Q_OS_UNIX)
   struct statvfs fs_info;
   if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
-    return fs_info.f_blocks * fs_info.f_bsize;
+    return quint64(fs_info.f_blocks) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
   if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
@@ -99,7 +99,7 @@ quint64 FileSystemFreeSpace(const QString& path) {
 #if defined(Q_OS_UNIX)
   struct statvfs fs_info;
   if (statvfs(path.toLocal8Bit().constData(), &fs_info) == 0)
-    return fs_info.f_bavail * fs_info.f_bsize;
+    return quint64(fs_info.f_bavail) * quint64(fs_info.f_bsize);
 #elif defined(Q_OS_WIN32)
   _ULARGE_INTEGER ret;
   if (GetDiskFreeSpaceEx(QDir::toNativeSeparators(path).toLocal8Bit().constData(),
