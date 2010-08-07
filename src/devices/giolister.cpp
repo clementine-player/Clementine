@@ -28,9 +28,11 @@ QString GioLister::MountInfo::unique_id() const {
 }
 
 bool GioLister::MountInfo::is_suitable() const {
-  return filesystem_type != "udf" &&
+  return !filesystem_type.isEmpty() &&
+         filesystem_type != "udf" &&
          filesystem_type != "smb" &&
-         filesystem_type != "cifs";
+         filesystem_type != "cifs" &&
+         filesystem_type != "ssh";
 }
 
 GioLister::GioLister()
