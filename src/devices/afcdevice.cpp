@@ -34,7 +34,7 @@ AfcDevice::AfcDevice(
   // Make a new temporary directory for the iTunesDB.  We copy it off the iPod
   // so that libgpod can have a local directory to use.
   local_path_ = Utilities::MakeTempDir();
-  InitBackendDirectory(local_path_, first_time);
+  InitBackendDirectory(local_path_, first_time, false);
   model_->Init();
 
   transfer_ = new AfcTransfer(url.host(), local_path_, manager_->task_manager());
@@ -57,6 +57,7 @@ void AfcDevice::CopyFinished() {
   // Now load the songs from the local database
   loader_ = new GPodLoader(local_path_, manager_->task_manager(), backend_);
   loader_->set_music_path_prefix("afc://" + url_.host());
+  loader_->set_song_type(Song::Type_Stream);
   loader_->moveToThread(loader_thread_);
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));

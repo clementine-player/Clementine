@@ -27,6 +27,7 @@ GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
                        LibraryBackend* backend, QObject *parent)
   : QObject(parent),
     mount_point_(mount_point),
+    type_(Song::Type_Unknown),
     task_manager_(task_manager),
     backend_(backend)
 {
@@ -60,6 +61,8 @@ void GPodLoader::LoadDatabase() {
     song.set_directory_id(1);
     song.set_filename((path_prefix_.isEmpty() ? mount_point_ : path_prefix_) +
                       song.filename());
+    if (type_ != Song::Type_Unknown)
+      song.set_filetype(type_);
     songs << song;
   }
 

@@ -50,7 +50,7 @@ signals:
   void Error(const QString& message);
 
 protected:
-  void InitBackendDirectory(const QString& mount_point, bool first_time);
+  void InitBackendDirectory(const QString& mount_point, bool first_time, bool rewrite_path = true);
 
 protected:
   QUrl url_;

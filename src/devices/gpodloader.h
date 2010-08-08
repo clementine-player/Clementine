@@ -20,8 +20,9 @@
 #include <QObject>
 
 #include <boost/shared_ptr.hpp>
-
 #include <gpod/itdb.h>
+
+#include "core/song.h"
 
 class LibraryBackend;
 class TaskManager;
@@ -34,6 +35,7 @@ public:
              LibraryBackend* backend, QObject* parent = 0);
 
   void set_music_path_prefix(const QString& prefix) { path_prefix_ = prefix; }
+  void set_song_type(Song::FileType type) { type_ = type; }
 
 public slots:
   void LoadDatabase();
@@ -48,6 +50,7 @@ private:
 
   QString mount_point_;
   QString path_prefix_;
+  Song::FileType type_;
   TaskManager* task_manager_;
   LibraryBackend* backend_;
 };
