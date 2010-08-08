@@ -415,7 +415,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 }
 
 #ifdef HAVE_LIBGPOD
-  void Song::InitFromItdb(Itdb_Track* track) {
+  void Song::InitFromItdb(const Itdb_Track* track) {
     d->valid_ = true;
 
     d->title_ = QString::fromUtf8(track->title);
@@ -438,23 +438,14 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->filesize_ = track->size;
     d->filetype_ = track->type2 ? Type_Mpeg : Type_Mp4;
 
-    itdb_filename_ipod2fs(track->ipod_path);
-
     d->filename_ = QString::fromLocal8Bit(track->ipod_path);
+    d->filename_.replace(':', '/');
     d->basefilename_ = QFileInfo(d->filename_).fileName();
   }
 
-  static void CopyStr(const QString& str, gchar** dest_p) {
-    Q_ASSERT(*dest_p == NULL);
-    const QByteArray data = str.toUtf8();
-    const int size = data.size() + 1;
-
-    gchar* dest = new gchar[size];
-    std::copy(data.constData(), data.constData() + size, dest);
-    *dest_p = dest;
-  }
-
   void Song::ToItdb(Itdb_Track *track) const {
+    using Utilities::CopyStr;
+
     CopyStr(d->title_, &track->title);
     CopyStr(d->album_, &track->album);
     CopyStr(d->artist_, &track->artist);
@@ -473,7 +464,9 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->time_modified = d->mtime_;
     track->time_added = d->ctime_;
     track->size = d->filesize_;
+    track->type1 = 0;
     track->type2 = d->filetype_ == Type_Mp4 ? 0 : 1;
+    track->mediatype = 1; // Audio
   }
 #endif
 

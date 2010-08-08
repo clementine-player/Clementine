@@ -31,12 +31,16 @@ GPodDevice::GPodDevice(
     int database_id, bool first_time)
       : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
         loader_thread_(new QThread(this)),
-        loader_(new GPodLoader(url.path(), manager->task_manager(), backend_)),
+        loader_(),
         db_(NULL)
 {
-  InitBackendDirectory(url.path(), first_time);
+}
+
+void GPodDevice::Init() {
+  InitBackendDirectory(url_.path(), first_time_);
   model_->Init();
 
+  loader_ = new GPodLoader(url_.path(), manager_->task_manager(), backend_);
   loader_->moveToThread(loader_thread_);
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
@@ -70,12 +74,7 @@ void GPodDevice::StartCopy() {
   db_busy_.lock();
 }
 
-bool GPodDevice::CopyToStorage(
-    const QString& source, const QString&,
-    const Song& metadata, bool, bool remove_original)
-{
-  Q_ASSERT(db_);
-
+Itdb_Track* GPodDevice::AddTrackToITunesDb(const Song& metadata) {
   // Create the track
   Itdb_Track* track = itdb_track_new();
   metadata.ToItdb(track);
@@ -85,6 +84,26 @@ bool GPodDevice::CopyToStorage(
   itdb_track_add(db_, track, -1);
   Itdb_Playlist* mpl = itdb_playlist_mpl(db_);
   itdb_playlist_add_track(mpl, track, -1);
+
+  return track;
+}
+
+void GPodDevice::AddTrackToModel(Itdb_Track* track, const QString& prefix) {
+  // Add it to our LibraryModel
+  Song metadata_on_device;
+  metadata_on_device.InitFromItdb(track);
+  metadata_on_device.set_directory_id(1);
+  metadata_on_device.set_filename(prefix + metadata_on_device.filename());
+  songs_to_add_ << metadata_on_device;
+}
+
+bool GPodDevice::CopyToStorage(
+    const QString& source, const QString&,
+    const Song& metadata, bool, bool remove_original)
+{
+  Q_ASSERT(db_);
+
+  Itdb_Track* track = AddTrackToITunesDb(metadata);
 
   // Copy the file
   GError* error = NULL;
@@ -99,12 +118,7 @@ bool GPodDevice::CopyToStorage(
     return false;
   }
 
-  // Add it to our LibraryModel
-  Song metadata_on_device;
-  metadata_on_device.InitFromItdb(track);
-  metadata_on_device.set_directory_id(1);
-  metadata_on_device.set_filename(url_.path() + metadata_on_device.filename());
-  songs_to_add_ << metadata_on_device;
+  AddTrackToModel(track, url_.path());
 
   // Remove the original if it was requested
   if (remove_original) {
@@ -123,6 +137,8 @@ void GPodDevice::FinishCopy() {
     emit Error(QString::fromUtf8(error->message));
     g_error_free(error);
   } else {
+    FinaliseDatabase();
+
     // Update the library model
     if (!songs_to_add_.isEmpty())
       backend_->AddOrUpdateSongs(songs_to_add_);

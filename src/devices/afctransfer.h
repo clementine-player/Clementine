@@ -40,6 +40,8 @@ signals:
 private:
   void CopyDirFromDevice(iMobileDeviceConnection* c, const QString& path);
   void CopyFileFromDevice(iMobileDeviceConnection* c, const QString& path);
+  void CopyDirToDevice(iMobileDeviceConnection* c, const QString& path);
+  void CopyFileToDevice(iMobileDeviceConnection* c, const QString& path);
 
 private:
   QThread* original_thread_;

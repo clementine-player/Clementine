@@ -58,9 +58,10 @@ FilesystemDevice::FilesystemDevice(
   connect(watcher,  SIGNAL(CompilationsNeedUpdating()),
           backend_, SLOT(UpdateCompilations()));
   connect(watcher, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
+}
 
-  InitBackendDirectory(url.toLocalFile(), first_time);
-
+void FilesystemDevice::Init() {
+  InitBackendDirectory(url_.toLocalFile(), first_time_);
   model_->Init();
 }
 

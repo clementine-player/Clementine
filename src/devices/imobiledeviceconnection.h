@@ -17,9 +17,12 @@
 #ifndef IMOBILEDEVICECONNECTION_H
 #define IMOBILEDEVICECONNECTION_H
 
+#include "core/song.h"
+
 #include <libimobiledevice/afc.h>
 #include <libimobiledevice/libimobiledevice.h>
 #include <libimobiledevice/lockdown.h>
+#include <gpod/itdb.h>
 
 #include <QDir>
 #include <QStringList>
@@ -35,10 +38,14 @@ public:
   quint64 GetInfoLongLong(const QString& key);
   QStringList ReadDirectory(const QString& path, QDir::Filters filters = QDir::NoFilter);
 
+  QString GetFileInfo(const QString& path, const QString& key);
+  bool Exists(const QString& path);
+
+  QString GetUnusedFilename(Itdb_iTunesDB* itdb, const Song& metadata);
+
 private:
   Q_DISABLE_COPY(iMobileDeviceConnection);
 
-  QString GetFileInfo(const QString& path, const QString& key);
 
   idevice_t device_;
   lockdownd_client_t lockdown_;

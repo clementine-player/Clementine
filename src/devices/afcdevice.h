@@ -17,7 +17,7 @@
 #ifndef AFCDEVICE_H
 #define AFCDEVICE_H
 
-#include "connecteddevice.h"
+#include "gpoddevice.h"
 
 #include <QMutex>
 #include <QWaitCondition>
@@ -27,7 +27,7 @@
 class AfcTransfer;
 class GPodLoader;
 
-class AfcDevice : public ConnectedDevice {
+class AfcDevice : public GPodDevice {
   Q_OBJECT
 
 public:
@@ -36,29 +36,29 @@ public:
                         int database_id, bool first_time);
   ~AfcDevice();
 
+  void Init();
+
   static QStringList url_schemes() { return QStringList() << "afc"; }
 
   bool CopyToStorage(const QString &source, const QString &destination,
                      const Song &metadata, bool overwrite, bool remove_original);
+  void FinishCopy();
+
   bool DeleteFromStorage(const Song &metadata);
+
+protected:
+  void FinaliseDatabase();
 
 private slots:
   void CopyFinished();
-  void LoadFinished(Itdb_iTunesDB* db);
 
 private:
   void RemoveRecursive(const QString& path);
 
 private:
-  QThread* loader_thread_;
   AfcTransfer* transfer_;
-  GPodLoader* loader_;
 
   QString local_path_;
-
-  QWaitCondition db_wait_cond_;
-  QMutex db_mutex_;
-  Itdb_iTunesDB* db_;
 };
 
 #endif // AFCDEVICE_H

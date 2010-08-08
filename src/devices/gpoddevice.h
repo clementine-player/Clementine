@@ -37,6 +37,8 @@ public:
       int database_id, bool first_time);
   ~GPodDevice();
 
+  void Init();
+
   static QStringList url_schemes() { return QStringList() << "ipod"; }
 
   void StartCopy();
@@ -48,10 +50,16 @@ public:
   bool DeleteFromStorage(const Song& metadata);
   void FinishDelete();
 
-private slots:
+protected slots:
   void LoadFinished(Itdb_iTunesDB* db);
 
-private:
+protected:
+  Itdb_Track* AddTrackToITunesDb(const Song& metadata);
+  void AddTrackToModel(Itdb_Track* track, const QString& prefix);
+
+  virtual void FinaliseDatabase() {}
+
+protected:
   QThread* loader_thread_;
   GPodLoader* loader_;
 

@@ -106,7 +106,7 @@ class Song {
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
 #ifdef HAVE_LIBGPOD
-  void InitFromItdb(Itdb_Track* track);
+  void InitFromItdb(const Itdb_Track* track);
   void ToItdb(Itdb_Track* track) const;
 #endif
 

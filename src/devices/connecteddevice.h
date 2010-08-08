@@ -38,6 +38,8 @@ public:
                   int database_id, bool first_time);
   ~ConnectedDevice();
 
+  virtual void Init() = 0;
+
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }
   LibraryModel* model() const { return model_; }
@@ -54,6 +56,7 @@ protected:
 
 protected:
   QUrl url_;
+  bool first_time_;
   DeviceLister* lister_;
   QString unique_id_;
   int database_id_;

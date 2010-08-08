@@ -34,6 +34,8 @@ public:
       int database_id, bool first_time);
   ~FilesystemDevice();
 
+  void Init();
+
   static QStringList url_schemes() { return QStringList() << "file"; }
 
 private:

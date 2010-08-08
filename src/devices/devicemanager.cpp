@@ -469,6 +469,8 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   if (!ret) {
     qWarning() << "Could not create device for" << device_url.toString();
   } else {
+    ret->Init();
+
     info.device_ = ret;
     emit dataChanged(index(row), index(row));
     connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));

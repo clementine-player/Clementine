@@ -141,3 +141,58 @@ QString iMobileDeviceConnection::GetFileInfo(const QString& path, const QString&
   free(infolist);
   return ret;
 }
+
+bool iMobileDeviceConnection::Exists(const QString& path) {
+  return !GetFileInfo(path, "st_ifmt").isNull();
+}
+
+QString iMobileDeviceConnection::GetUnusedFilename(
+    Itdb_iTunesDB* itdb, const Song& metadata) {
+  // This function does the same as itdb_cp_get_dest_filename, except it
+  // accesses the device's filesystem through imobiledevice.
+
+  // Get the total number of F.. directories
+  int total_musicdirs = 0;
+  for ( ; ; ++total_musicdirs) {
+    QString dir;
+    dir.sprintf("/iTunes_Control/Music/F%02d", total_musicdirs);
+
+    if (!Exists(dir))
+      break;
+  }
+
+  if (total_musicdirs <= 0) {
+    qWarning() << "No 'F..'' directories found on iPod";
+    return QString();
+  }
+
+  // Pick one at random
+  const int dir_num = qrand() % total_musicdirs;
+  QString dir;
+  dir.sprintf("/iTunes_Control/Music/F%02d", dir_num);
+
+  if (!Exists(dir)) {
+    qWarning() << "Music directory doesn't exist:" << dir;
+    return QString();
+  }
+
+  // Use the same file extension as the original file, default to mp3.
+  QString extension = metadata.filename().section('.', -1, -1).toLower();
+  if (extension.isEmpty())
+    extension = "mp3";
+
+  // Loop until we find an unused filename.
+  // Use the same naming convention as libgpod, which is
+  // "libgpod" + 6-digit random number
+  static const int kRandMax = 999999;
+  QString filename;
+  forever {
+    filename.sprintf("libgpod%06d", qrand() % kRandMax);
+    filename += "." + extension;
+
+    if (!Exists(dir + "/" + filename))
+      break;
+  }
+
+  return dir + "/" + filename;
+}

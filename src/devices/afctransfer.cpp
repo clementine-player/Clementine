@@ -33,18 +33,24 @@ AfcTransfer::AfcTransfer(const QString& uuid, const QString& local_destination,
 }
 
 void AfcTransfer::CopyFromDevice() {
-  int task_id = task_manager_->StartTask(tr("Copying iPod database"));
-  emit TaskStarted(task_id);
+  int task_id = 0;
+  if (task_manager_) {
+    task_id = task_manager_->StartTask(tr("Copying iPod database"));
+    emit TaskStarted(task_id);
+  }
 
   // Connect to the device
   iMobileDeviceConnection c(uuid_);
 
+  CopyDirFromDevice(&c, "/iTunes_Control/Artwork");
   CopyDirFromDevice(&c, "/iTunes_Control/Device");
   CopyDirFromDevice(&c, "/iTunes_Control/iTunes");
 
-  moveToThread(original_thread_);
-  task_manager_->SetTaskFinished(task_id);
-  emit CopyFinished();
+  if (task_manager_) {
+    moveToThread(original_thread_);
+    task_manager_->SetTaskFinished(task_id);
+    emit CopyFinished();
+  }
 }
 
 void AfcTransfer::CopyDirFromDevice(iMobileDeviceConnection* c, const QString& path) {
@@ -74,5 +80,35 @@ void AfcTransfer::CopyFileFromDevice(iMobileDeviceConnection *c, const QString &
 }
 
 void AfcTransfer::CopyToDevice() {
+  // Connect to the device
+  iMobileDeviceConnection c(uuid_);
 
+  CopyDirToDevice(&c, "/iTunes_Control/Artwork");
+  CopyDirToDevice(&c, "/iTunes_Control/Device");
+  CopyDirToDevice(&c, "/iTunes_Control/iTunes");
+}
+
+void AfcTransfer::CopyDirToDevice(iMobileDeviceConnection* c, const QString& path) {
+  QDir dir(local_destination_ + path);
+
+  foreach (const QString& filename, dir.entryList(QDir::Files | QDir::NoDotAndDotDot)) {
+    CopyFileToDevice(c, path + "/" + filename);
+  }
+
+  foreach (const QString& dir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+    CopyDirToDevice(c, path + "/" + dir);
+  }
+}
+
+void AfcTransfer::CopyFileToDevice(iMobileDeviceConnection *c, const QString &path) {
+  QString local_filename = local_destination_ + path;
+  qDebug() << "Copying file" << path;
+
+  QFile source(local_filename);
+  AfcFile dest(c, path);
+
+  dest.open(QIODevice::WriteOnly);
+  source.open(QIODevice::ReadOnly);
+
+  dest.write(source.readAll());
 }

@@ -25,9 +25,10 @@
 
 ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
                                  const QString& unique_id, DeviceManager* manager,
-                                 int database_id, bool)
+                                 int database_id, bool first_time)
   : QObject(manager),
     url_(url),
+    first_time_(first_time),
     lister_(lister),
     unique_id_(unique_id),
     database_id_(database_id),
