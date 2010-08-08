@@ -444,19 +444,17 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   }
 
   void Song::ToItdb(Itdb_Track *track) const {
-    using Utilities::CopyStr;
-
-    CopyStr(d->title_, &track->title);
-    CopyStr(d->album_, &track->album);
-    CopyStr(d->artist_, &track->artist);
-    CopyStr(d->albumartist_, &track->albumartist);
-    CopyStr(d->composer_, &track->composer);
+    track->title = strdup(d->title_.toUtf8().constData());
+    track->album = strdup(d->album_.toUtf8().constData());
+    track->artist = strdup(d->artist_.toUtf8().constData());
+    track->albumartist = strdup(d->albumartist_.toUtf8().constData());
+    track->composer = strdup(d->composer_.toUtf8().constData());
     track->track_nr = d->track_;
     track->cd_nr = d->disc_;
     track->BPM = d->bpm_;
     track->year = d->year_;
-    CopyStr(d->genre_, &track->genre);
-    CopyStr(d->comment_, &track->comment);
+    track->genre = strdup(d->genre_.toUtf8().constData());
+    track->comment = strdup(d->comment_.toUtf8().constData());
     track->compilation = d->compilation_;
     track->tracklen = d->length_ * 1000;
     track->bitrate = d->bitrate_;

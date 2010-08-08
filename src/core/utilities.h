@@ -29,8 +29,6 @@ namespace Utilities {
 
   QString MakeTempDir();
   void RemoveRecursive(const QString& path);
-
-  void CopyStr(const QString& str, char** dest_p);
 }
 
 #endif // UTILITIES_H

@@ -135,14 +135,4 @@ void RemoveRecursive(const QString& path) {
   dir.rmdir(path);
 }
 
-void CopyStr(const QString& str, char** dest_p) {
-  Q_ASSERT(*dest_p == NULL);
-  const QByteArray data = str.toUtf8();
-  const int size = data.size() + 1;
-
-  char* dest = new char[size];
-  std::copy(data.constData(), data.constData() + size, dest);
-  *dest_p = dest;
-}
-
 } // namespace

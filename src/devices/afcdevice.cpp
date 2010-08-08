@@ -107,7 +107,7 @@ bool AfcDevice::CopyToStorage(
   qDebug() << track->filetype_marker;
 
   // Set the filename
-  Utilities::CopyStr(dest, &track->ipod_path);
+  track->ipod_path = strdup(dest.toUtf8().constData());
   itdb_filename_fs2ipod(track->ipod_path);
   qDebug() << track->ipod_path;
 
