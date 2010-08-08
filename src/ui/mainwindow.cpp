@@ -27,6 +27,7 @@
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
 #include "devices/devicemanager.h"
+#include "devices/devicestatefiltermodel.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
 #include "library/libraryconfig.h"
@@ -398,6 +399,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
   playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
   playlist_organise_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Organise files..."), this, SLOT(PlaylistMoveToLibrary()));
+  playlist_copy_to_device_ = playlist_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
   playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete files..."), this, SLOT(PlaylistDelete()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
@@ -411,6 +413,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
           SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
+
+  playlist_copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
+  connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
+          playlist_copy_to_device_, SLOT(setDisabled(bool)));
 
   // Radio connections
   connect(radio_model_, SIGNAL(StreamError(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
@@ -1340,12 +1346,14 @@ void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
 }
 
 void MainWindow::CopyFilesToLibrary(const QList<QUrl> &urls) {
+  organise_dialog_->SetDestinationModel(library_->model()->directory_model());
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(true);
   organise_dialog_->show();
 }
 
 void MainWindow::MoveFilesToLibrary(const QList<QUrl> &urls) {
+  organise_dialog_->SetDestinationModel(library_->model()->directory_model());
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(false);
   organise_dialog_->show();
@@ -1360,20 +1368,17 @@ void MainWindow::PlaylistMoveToLibrary() {
 }
 
 void MainWindow::PlaylistOrganiseSelected(bool copy) {
-  QModelIndexList indexes = playlists_->current()->proxy()->mapSelectionToSource(
-      ui_->playlist->view()->selectionModel()->selection()).indexes();
-  QList<QUrl> urls;
+  QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+  SongList songs;
 
-  int last_row = -1;
-  foreach (const QModelIndex& index, indexes) {
-    if (last_row == index.row())
-      continue;
-    last_row = index.row();
+  foreach (const QModelIndex& proxy_index, proxy_indexes) {
+    QModelIndex index = playlists_->current()->proxy()->mapToSource(proxy_index);
 
-    urls << playlists_->current()->item_at(index.row())->Url();
+    songs << playlists_->current()->item_at(index.row())->Metadata();
   }
 
-  organise_dialog_->SetUrls(urls);
+  organise_dialog_->SetDestinationModel(library_->model()->directory_model());
+  organise_dialog_->SetSongs(songs);
   organise_dialog_->SetCopy(copy);
   organise_dialog_->show();
 }
@@ -1390,4 +1395,20 @@ void MainWindow::PlaylistQueue() {
   }
 
   playlists_->current()->queue()->ToggleTracks(indexes);
+}
+
+void MainWindow::PlaylistCopyToDevice() {
+  QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+  SongList songs;
+
+  foreach (const QModelIndex& proxy_index, proxy_indexes) {
+    QModelIndex index = playlists_->current()->proxy()->mapToSource(proxy_index);
+
+    songs << playlists_->current()->item_at(index.row())->Metadata();
+  }
+
+  organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
+  organise_dialog_->SetSongs(songs);
+  organise_dialog_->SetCopy(true);
+  organise_dialog_->show();
 }

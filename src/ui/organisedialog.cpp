@@ -98,6 +98,25 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices
   ui_->eject_after->setVisible(devices);
 }
 
+void OrganiseDialog::SetSongs(const SongList &songs) {
+  quint64 total_size = 0;
+  QStringList filenames;
+
+  foreach (const Song& song, songs) {
+    QUrl url(song.filename());
+    if (url.isEmpty())
+      continue;
+    if (!url.scheme().isEmpty() && url.scheme() != "file")
+      continue;
+
+    if (song.filesize() > 0)
+      total_size += song.filesize();
+    filenames << url.toLocalFile();
+  }
+
+  SetFilenames(filenames, total_size);
+}
+
 void OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
   QStringList filenames;
 
@@ -189,7 +208,7 @@ void OrganiseDialog::UpdatePreviews() {
   const bool format_valid = format_.IsValid();
 
   // Are we gonna enable the ok button?
-  bool ok = format_valid && storage;
+  bool ok = format_valid && storage && !filenames_.isEmpty();
   if (capacity != 0 && total_size_ > free)
     ok = false;
 
