@@ -256,6 +256,8 @@ class Song {
   FileRefFactory* factory_;
 
   static TagLibFileRefFactory kDefaultFactory;
+
+  static QMutex taglib_mutex_;
 };
 Q_DECLARE_METATYPE(Song);
 

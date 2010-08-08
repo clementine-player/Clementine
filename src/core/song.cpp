@@ -128,6 +128,8 @@ static TagLib::String QStringToTaglibString(const QString& s);
 
 TagLibFileRefFactory Song::kDefaultFactory;
 
+QMutex Song::taglib_mutex_;
+
 
 Song::Private::Private()
   : valid_(false),
@@ -197,6 +199,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   d->filename_ = filename;
   d->directory_id_ = directory_id;
 
+  QMutexLocker l(&taglib_mutex_);
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
   if(fileref->isNull())
@@ -638,6 +641,7 @@ bool Song::Save() const {
   if (d->filename_.isNull())
     return false;
 
+  QMutexLocker l(&taglib_mutex_);
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
 
   if (!fileref || fileref->isNull()) // The file probably doesn't exist
