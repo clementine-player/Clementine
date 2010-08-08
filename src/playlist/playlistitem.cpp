@@ -20,6 +20,7 @@
 #include "radio/magnatuneplaylistitem.h"
 #include "radio/radioplaylistitem.h"
 
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 PlaylistItem::SpecialLoadResult::SpecialLoadResult(
@@ -60,6 +61,14 @@ void PlaylistItem::SetTemporaryMetadata(const Song& metadata) {
 
 void PlaylistItem::ClearTemporaryMetadata() {
   temp_metadata_ = Song();
+}
+
+static void ReloadPlaylistItem(boost::shared_ptr<PlaylistItem> item) {
+  item->Reload();
+}
+
+QFuture<void> PlaylistItem::BackgroundReload() {
+  return QtConcurrent::run(ReloadPlaylistItem, shared_from_this());
 }
 
 

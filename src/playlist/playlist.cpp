@@ -253,9 +253,21 @@ void Playlist::SongSaveComplete() {
   watcher->deleteLater();
   const QPersistentModelIndex& index = watcher->index();
   if (index.isValid()) {
-    item_at(index.row())->Reload();
-    emit dataChanged(index, index);
+    QFuture<void> future = item_at(index.row())->BackgroundReload();
+    ModelFutureWatcher<void>* watcher = new ModelFutureWatcher<void>(index, this);
+    watcher->setFuture(future);
+    connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
+
     emit EditingFinished(index);
+  }
+}
+
+void Playlist::ItemReloadComplete() {
+  ModelFutureWatcher<void>* watcher = static_cast<ModelFutureWatcher<void>*>(sender());
+  watcher->deleteLater();
+  const QPersistentModelIndex& index = watcher->index();
+  if (index.isValid()) {
+    emit dataChanged(index, index);
   }
 }
 

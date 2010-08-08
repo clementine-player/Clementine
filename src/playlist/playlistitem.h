@@ -20,13 +20,14 @@
 #include <QStandardItem>
 #include <QUrl>
 
+#include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "core/song.h"
 
 class SqlRow;
 
-class PlaylistItem {
+class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
   PlaylistItem(const QString& type) : type_(type) {}
   virtual ~PlaylistItem() {}
@@ -92,6 +93,7 @@ class PlaylistItem {
   virtual bool InitFromQuery(const SqlRow& query) = 0;
   void BindToQuery(QSqlQuery* query) const;
   virtual void Reload() {}
+  QFuture<void> BackgroundReload();
 
   virtual Song Metadata() const = 0;
   virtual QUrl Url() const = 0;

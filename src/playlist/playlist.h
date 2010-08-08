@@ -203,6 +203,7 @@ class Playlist : public QAbstractListModel {
   void TracksEnqueued(const QModelIndex&, int begin, int end);
   void QueueLayoutChanged();
   void SongSaveComplete();
+  void ItemReloadComplete();
   void ItemsLoaded();
 
  private:
