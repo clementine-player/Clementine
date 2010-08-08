@@ -18,7 +18,7 @@ AfcFile::AfcFile(iMobileDeviceConnection* connection, const QString& path, QObje
 }
 
 AfcFile::~AfcFile() {
-
+  close();
 }
 
 bool AfcFile::open(QIODevice::OpenMode mode) {
