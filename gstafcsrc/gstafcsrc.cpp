@@ -290,8 +290,20 @@ static GstFlowReturn gst_afc_src_create(GstBaseSrc* src, guint64 offset, guint l
     self->buffer_offset_ = offset;
 
     uint32_t bytes_read = 0;
-    afc_file_seek(self->afc_, self->file_handle_, offset, SEEK_SET);
-    afc_file_read(self->afc_, self->file_handle_, self->buffer_, length * 2, &bytes_read);
+    afc_error_t err;
+    err = afc_file_seek(self->afc_, self->file_handle_, offset, SEEK_SET);
+    if (err == AFC_E_SUCCESS) {
+      err = afc_file_read(self->afc_, self->file_handle_, self->buffer_, length * 2, &bytes_read);
+    }
+
+    if (err != AFC_E_SUCCESS) {
+      // Trying to free a lockdownd client that's been disconnected results in
+      // a whole load of "Broken pipe" errors.
+      self->lockdown_ = NULL;
+
+      gst_buffer_unref(buf);
+      return GST_FLOW_ERROR;
+    }
   }
 
   // Copy from our internal buffer to the output buffer
