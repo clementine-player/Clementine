@@ -191,7 +191,7 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
 
     if (!colour.isEmpty()) {
       QString colour_icon = "multimedia-player-ipod-%1-%2";
-      ret << colour_icon.arg(colour, model);
+      ret << colour_icon.arg(model, colour);
     }
 
     if (!model.isEmpty()) {
