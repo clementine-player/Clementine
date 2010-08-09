@@ -18,9 +18,12 @@
 #define AFCTRANSFER_H
 
 #include <QObject>
+#include <QStringList>
 
 class iMobileDeviceConnection;
 class TaskManager;
+
+class QIODevice;
 
 class AfcTransfer : public QObject {
   Q_OBJECT
@@ -29,19 +32,22 @@ public:
   AfcTransfer(const QString& uuid, const QString& local_destination,
               TaskManager* task_manager, QObject* parent = 0);
 
+  bool CopyToDevice();
+
 public slots:
   void CopyFromDevice();
-  void CopyToDevice();
 
 signals:
   void TaskStarted(int task_id);
-  void CopyFinished();
+  void CopyFinished(bool success);
 
 private:
-  void CopyDirFromDevice(iMobileDeviceConnection* c, const QString& path);
-  void CopyFileFromDevice(iMobileDeviceConnection* c, const QString& path);
-  void CopyDirToDevice(iMobileDeviceConnection* c, const QString& path);
-  void CopyFileToDevice(iMobileDeviceConnection* c, const QString& path);
+  bool CopyDirFromDevice(iMobileDeviceConnection* c, const QString& path);
+  bool CopyDirToDevice(iMobileDeviceConnection* c, const QString& path);
+  bool CopyFileFromDevice(iMobileDeviceConnection* c, const QString& path);
+  bool CopyFileToDevice(iMobileDeviceConnection* c, const QString& path);
+
+  static bool Copy(QIODevice* source, QIODevice* destination);
 
 private:
   QThread* original_thread_;
@@ -49,6 +55,8 @@ private:
   TaskManager* task_manager_;
   QString uuid_;
   QString local_destination_;
+
+  QStringList important_directories_;
 };
 
 #endif // AFCTRANSFER_H

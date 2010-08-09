@@ -13,7 +13,6 @@ class AfcFile : public QIODevice {
   Q_OBJECT
 
 public:
-  AfcFile(afc_client_t client, const QString& path, QObject* parent = 0);
   AfcFile(iMobileDeviceConnection* connection, const QString& path, QObject* parent = 0);
   ~AfcFile();
 
@@ -21,13 +20,14 @@ public:
   void close();
   bool open(OpenMode mode);
   bool seek(qint64 pos);
+  qint64 size() const;
 
 private:
   // QIODevice
   qint64 readData(char* data, qint64 max_size);
   qint64 writeData(const char* data, qint64 max_size);
 
-  afc_client_t client_;
+  iMobileDeviceConnection* connection_;
   uint64_t handle_;
 
   QString path_;

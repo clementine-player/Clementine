@@ -47,14 +47,19 @@ void AfcDevice::Init() {
   transfer_->moveToThread(loader_thread_);
 
   connect(transfer_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
-  connect(transfer_, SIGNAL(CopyFinished()), SLOT(CopyFinished()));
+  connect(transfer_, SIGNAL(CopyFinished(bool)), SLOT(CopyFinished(bool)));
   connect(loader_thread_, SIGNAL(started()), transfer_, SLOT(CopyFromDevice()));
   loader_thread_->start();
 }
 
-void AfcDevice::CopyFinished() {
+void AfcDevice::CopyFinished(bool success) {
   transfer_->deleteLater();
   transfer_ = NULL;
+
+  if (!success) {
+    emit Error(tr("An error occurred copying the iTunes database from the device"));
+    return;
+  }
 
   // Now load the songs from the local database
   loader_ = new GPodLoader(local_path_, manager_->task_manager(), backend_);
@@ -137,8 +142,13 @@ void AfcDevice::FinaliseDatabase() {
   AfcTransfer transfer(url_.host(), local_path_, NULL);
 
   itdb_start_sync(db_);
-  transfer.CopyToDevice();
+  bool success = transfer.CopyToDevice();
   itdb_stop_sync(db_);
+
+  if (!success) {
+    emit Error(tr("An error occurred copying the iTunes database onto the device"));
+    return;
+  }
 }
 
 bool AfcDevice::DeleteFromStorage(const Song &metadata) {

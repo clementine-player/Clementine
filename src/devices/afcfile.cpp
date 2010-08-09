@@ -3,16 +3,10 @@
 
 #include <libimobiledevice/afc.h>
 
-AfcFile::AfcFile(afc_client_t client, const QString& path, QObject* parent)
-  : QIODevice(parent),
-    client_(client),
-    path_(path)
-{
-}
-
 AfcFile::AfcFile(iMobileDeviceConnection* connection, const QString& path, QObject* parent)
   : QIODevice(parent),
-    client_(connection->afc()),
+    connection_(connection),
+    handle_(0),
     path_(path)
 {
 }
@@ -38,7 +32,7 @@ bool AfcFile::open(QIODevice::OpenMode mode) {
       afc_mode = AFC_FOPEN_RW;
   }
   afc_error_t err = afc_file_open(
-      client_, path_.toUtf8().constData(), afc_mode, &handle_);
+      connection_->afc(), path_.toUtf8().constData(), afc_mode, &handle_);
   if (err != AFC_E_SUCCESS) {
     return false;
   }
@@ -47,12 +41,18 @@ bool AfcFile::open(QIODevice::OpenMode mode) {
 }
 
 void AfcFile::close() {
-  afc_file_close(client_, handle_);
+  if (handle_) {
+    if (afc_file_close(connection_->afc(), handle_) != AFC_E_SUCCESS) {
+      // Warn the connection not to free its lockdownd, as doing so will cause
+      // a load of "Broken pipe" errors.
+      connection_->MarkBroken();
+    }
+  }
   QIODevice::close();
 }
 
 bool AfcFile::seek(qint64 pos) {
-  afc_error_t err = afc_file_seek(client_, handle_, pos, SEEK_SET);
+  afc_error_t err = afc_file_seek(connection_->afc(), handle_, pos, SEEK_SET);
   if (err != AFC_E_SUCCESS) {
     return false;
   }
@@ -62,7 +62,7 @@ bool AfcFile::seek(qint64 pos) {
 
 qint64 AfcFile::readData(char* data, qint64 max_size) {
   uint32_t bytes_read = 0;
-  afc_error_t err = afc_file_read(client_, handle_, data, max_size, &bytes_read);
+  afc_error_t err = afc_file_read(connection_->afc(), handle_, data, max_size, &bytes_read);
   if (err != AFC_E_SUCCESS) {
     return -1;
   }
@@ -71,9 +71,13 @@ qint64 AfcFile::readData(char* data, qint64 max_size) {
 
 qint64 AfcFile::writeData(const char* data, qint64 max_size) {
   uint32_t bytes_written = 0;
-  afc_error_t err = afc_file_write(client_, handle_, data, max_size, &bytes_written);
+  afc_error_t err = afc_file_write(connection_->afc(), handle_, data, max_size, &bytes_written);
   if (err != AFC_E_SUCCESS) {
     return -1;
   }
   return bytes_written;
+}
+
+qint64 AfcFile::size() const {
+  return connection_->GetFileInfo(path_, "st_size").toLongLong();
 }

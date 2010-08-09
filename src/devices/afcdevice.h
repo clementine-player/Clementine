@@ -50,7 +50,7 @@ protected:
   void FinaliseDatabase();
 
 private slots:
-  void CopyFinished();
+  void CopyFinished(bool success);
 
 private:
   void RemoveRecursive(const QString& path);

@@ -44,9 +44,14 @@ void GPodLoader::LoadDatabase() {
 
   // Check for errors
   if (!db) {
-    qDebug() << "GPodLoader error:" << error->message;
-    emit Error(QString::fromUtf8(error->message));
-    g_error_free(error);
+    if (error) {
+      qDebug() << "GPodLoader error:" << error->message;
+      emit Error(QString::fromUtf8(error->message));
+      g_error_free(error);
+    } else {
+      emit Error(tr("An error occurred loading the iTunes database"));
+    }
+
     task_manager_->SetTaskFinished(task_id);
     return;
   }

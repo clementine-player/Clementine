@@ -26,7 +26,7 @@ using boost::scoped_ptr;
 #include <QtDebug>
 
 iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)
-    : device_(NULL), lockdown_(NULL), afc_(NULL), afc_port_(0) {
+    : device_(NULL), lockdown_(NULL), afc_(NULL), afc_port_(0), broken_(false) {
   idevice_error_t err = idevice_new(&device_, uuid.toUtf8().constData());
   if (err != IDEVICE_E_SUCCESS) {
     qWarning() << "idevice error:" << err;
@@ -58,7 +58,7 @@ iMobileDeviceConnection::~iMobileDeviceConnection() {
   if (afc_) {
     afc_client_free(afc_);
   }
-  if (lockdown_) {
+  if (lockdown_ && !broken_) {
     lockdownd_client_free(lockdown_);
   }
   if (device_) {
