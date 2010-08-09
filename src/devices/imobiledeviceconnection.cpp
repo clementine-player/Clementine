@@ -18,9 +18,6 @@
 
 #include <plist/plist.h>
 
-#include <boost/scoped_ptr.hpp>
-using boost::scoped_ptr;
-
 #include <QCoreApplication>
 #include <QtDebug>
 
