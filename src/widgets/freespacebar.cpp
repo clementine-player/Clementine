@@ -65,7 +65,7 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
 
   // Draw the reflection
   // Create the reflected pixmap
-  QPixmap reflection(reflection_rect.size());
+  QImage reflection(reflection_rect.size(), QImage::Format_ARGB32_Premultiplied);
   reflection.fill(Qt::transparent);
   QPainter p(&reflection);
 
@@ -91,7 +91,7 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
   // Draw on the widget
   p.begin(this);
   DrawBar(&p, bar_rect);
-  p.drawPixmap(reflection_rect, reflection);
+  p.drawImage(reflection_rect, reflection);
   DrawText(&p, labels_rect);
 }
 
