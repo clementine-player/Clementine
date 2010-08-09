@@ -17,6 +17,10 @@
 #include "imobiledeviceconnection.h"
 
 #include <plist/plist.h>
+#include <plist/plist++.h>
+
+#include <boost/scoped_ptr.hpp>
+using boost::scoped_ptr;
 
 #include <QCoreApplication>
 #include <QtDebug>
@@ -62,28 +66,30 @@ iMobileDeviceConnection::~iMobileDeviceConnection() {
   }
 }
 
-QString iMobileDeviceConnection::GetProperty(const QString& property) {
+QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QString& domain) {
   plist_t node = NULL;
-  lockdownd_get_value(lockdown_, NULL, property.toUtf8().constData(), &node);
-  char* value = NULL;
-  plist_get_string_val(node, &value);
-  plist_free(node);
+  const char* d = domain.isEmpty() ? NULL : domain.toUtf8().constData();
+  lockdownd_get_value(lockdown_, d, property.toUtf8().constData(), &node);
 
-  QString ret = QString::fromUtf8(value);
-  free(value);
-  return ret;
-}
-
-quint64 iMobileDeviceConnection::GetInfoLongLong(const QString& key) {
-  char* value = NULL;
-  afc_error_t err = afc_get_device_info_key(afc_, key.toUtf8().constData(), &value);
-  if (err != AFC_E_SUCCESS || !value) {
-    return 0;
+  scoped_ptr<PList::Node> n(PList::Node::FromPlist(node));
+  if (!n) {
+    return QVariant();
   }
-  QString num = QString::fromAscii(value);
-  quint64 ret = num.toULongLong();
-  free(value);
-  return ret;
+
+  switch (n->GetType()) {
+    case PLIST_BOOLEAN:
+      return static_cast<PList::Boolean*>(n.get())->GetValue();
+
+    case PLIST_UINT:
+      return QVariant::fromValue<quint64>(static_cast<PList::Integer*>(n.get())->GetValue());
+
+    case PLIST_STRING:
+      return QString::fromUtf8(static_cast<PList::String*>(n.get())->GetValue().c_str());
+
+    default:
+      qWarning() << "Unhandled PList type";
+      return QVariant();
+  }
 }
 
 QStringList iMobileDeviceConnection::ReadDirectory(const QString& path,

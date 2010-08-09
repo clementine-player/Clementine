@@ -84,9 +84,24 @@ quint64 iLister::DeviceFreeSpace(const QString& id) {
   return LockAndGetDeviceInfo(id, &DeviceInfo::free_bytes);
 }
 
-QVariantMap iLister::DeviceHardwareInfo(const QString& id) { return QVariantMap(); }
+QVariantMap iLister::DeviceHardwareInfo(const QString& id) {
+  QVariantMap ret;
+  ret[tr("Colour")] = LockAndGetDeviceInfo(id, &DeviceInfo::colour);
+  ret["IMEI"] = LockAndGetDeviceInfo(id, &DeviceInfo::imei);
+  ret[tr("Password Protected")] = LockAndGetDeviceInfo(id, &DeviceInfo::password_protected);
+  ret[tr("Timezone")] = LockAndGetDeviceInfo(id, &DeviceInfo::timezone);
+  ret[tr("WiFi MAC Address")] = LockAndGetDeviceInfo(id, &DeviceInfo::wifi_mac);
+  ret[tr("Bluetooth MAC Address")] = LockAndGetDeviceInfo(id, &DeviceInfo::bt_mac);
+
+  return ret;
+}
 
 QString iLister::MakeFriendlyName(const QString& id) {
+  QString name = LockAndGetDeviceInfo(id, &DeviceInfo::name);
+  if (!name.isEmpty()) {
+    return name;
+  }
+
   QString model_id = LockAndGetDeviceInfo(id, &DeviceInfo::product_type);
 
   if (model_id.startsWith("iPhone")) {
@@ -132,9 +147,19 @@ iLister::DeviceInfo iLister::ReadDeviceInfo(const char* uuid) {
 
   iMobileDeviceConnection conn(uuid);
   ret.uuid = uuid;
-  ret.product_type = conn.GetProperty("ProductType");
-  ret.free_bytes = conn.GetInfoLongLong("FSFreeBytes");
-  ret.total_bytes = conn.GetInfoLongLong("FSTotalBytes");
+  ret.product_type = conn.GetProperty("ProductType").toString();
+  ret.free_bytes = conn.GetProperty("AmountDataAvailable", "com.apple.disk_usage").toULongLong();
+  ret.total_bytes = conn.GetProperty("TotalDataCapacity", "com.apple.disk_usage").toULongLong();
+  ret.name = conn.GetProperty("DeviceName").toString();
+
+  ret.colour = conn.GetProperty("DeviceColor").toString();
+  ret.imei = conn.GetProperty("InternationalMobileEquipmentIdentity").toString();
+  ret.hardware = conn.GetProperty("HardwareModel").toString();
+  ret.password_protected = conn.GetProperty("PasswordProtected").toBool();
+  ret.os_version = conn.GetProperty("ProductVersion").toString();
+  ret.timezone = conn.GetProperty("TimeZone").toString();
+  ret.wifi_mac = conn.GetProperty("WiFiAddress").toString();
+  ret.bt_mac = conn.GetProperty("BluetoothAddress").toString();
 
   return ret;
 }

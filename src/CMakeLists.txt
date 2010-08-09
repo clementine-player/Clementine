@@ -500,6 +500,7 @@ if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   set(HAVE_IMOBILEDEVICE ON)
   include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
   include_directories(${PLIST_INCLUDE_DIRS})
+  include_directories(${PLISTPP_INCLUDE_DIRS})
 
   list(APPEND SOURCES devices/afcdevice.cpp)
   list(APPEND SOURCES devices/afcfile.cpp)
@@ -604,6 +605,7 @@ if(HAVE_IMOBILEDEVICE)
   target_link_libraries(clementine_lib
     ${IMOBILEDEVICE_LIBRARIES}
     ${PLIST_LIBRARIES}
+    ${PLISTPP_LIBRARIES}
     ${USBMUXD_LIBRARIES}
     gstafcsrc
   )

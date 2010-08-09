@@ -34,6 +34,17 @@ class iLister : public DeviceLister {
     QString product_type;
     quint64 free_bytes;
     quint64 total_bytes;
+    QString name;  // Name given to the iDevice by the user.
+
+    // Extra information.
+    QString colour;
+    QString imei;
+    QString hardware;
+    bool password_protected;
+    QString os_version;
+    QString timezone;
+    QString wifi_mac;
+    QString bt_mac;
   };
 
   virtual void Init();

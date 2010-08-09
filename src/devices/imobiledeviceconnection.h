@@ -26,6 +26,7 @@
 
 #include <QDir>
 #include <QStringList>
+#include <QVariant>
 
 class iMobileDeviceConnection {
 public:
@@ -34,8 +35,7 @@ public:
 
   afc_client_t afc() { return afc_; }
 
-  QString GetProperty(const QString& property);
-  quint64 GetInfoLongLong(const QString& key);
+  QVariant GetProperty(const QString& property, const QString& domain = QString());
   QStringList ReadDirectory(const QString& path, QDir::Filters filters = QDir::NoFilter);
 
   QString GetFileInfo(const QString& path, const QString& key);
