@@ -23,13 +23,16 @@
 #include <QStringList>
 #include <QUrl>
 
+#include <boost/enable_shared_from_this.hpp>
+
 class Database;
 class DeviceLister;
 class DeviceManager;
 class LibraryBackend;
 class LibraryModel;
 
-class ConnectedDevice : public QObject, public virtual MusicStorage {
+class ConnectedDevice : public QObject, public virtual MusicStorage,
+                        public boost::enable_shared_from_this<ConnectedDevice> {
   Q_OBJECT
 
 public:

@@ -25,8 +25,9 @@
 #include <boost/scoped_ptr.hpp>
 
 AfcTransfer::AfcTransfer(const QString& uuid, const QString& local_destination,
-                         TaskManager* task_manager, QObject* parent)
-  : QObject(parent),
+                         TaskManager* task_manager, boost::shared_ptr<ConnectedDevice> device)
+  : QObject(NULL),
+    device_(device),
     task_manager_(task_manager),
     uuid_(uuid),
     local_destination_(local_destination)
@@ -36,6 +37,9 @@ AfcTransfer::AfcTransfer(const QString& uuid, const QString& local_destination,
   important_directories_ << "/iTunes_Control/Artwork";
   important_directories_ << "/iTunes_Control/Device";
   important_directories_ << "/iTunes_Control/iTunes";
+}
+
+AfcTransfer::~AfcTransfer() {
 }
 
 void AfcTransfer::CopyFromDevice() {

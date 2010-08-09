@@ -43,7 +43,8 @@ void AfcDevice::Init() {
   InitBackendDirectory(local_path_, first_time_, false);
   model_->Init();
 
-  transfer_ = new AfcTransfer(url_.host(), local_path_, manager_->task_manager());
+  transfer_ = new AfcTransfer(url_.host(), local_path_, manager_->task_manager(),
+                              shared_from_this());
   transfer_->moveToThread(loader_thread_);
 
   connect(transfer_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
@@ -62,7 +63,8 @@ void AfcDevice::CopyFinished(bool success) {
   }
 
   // Now load the songs from the local database
-  loader_ = new GPodLoader(local_path_, manager_->task_manager(), backend_);
+  loader_ = new GPodLoader(local_path_, manager_->task_manager(), backend_,
+                           shared_from_this());
   loader_->set_music_path_prefix("afc://" + url_.host());
   loader_->set_song_type(Song::Type_Stream);
   loader_->moveToThread(loader_thread_);
@@ -139,7 +141,7 @@ void AfcDevice::FinaliseDatabase() {
 
   // Copy the files back to the iPod
   // No need to start another thread since we're already in the organiser thread
-  AfcTransfer transfer(url_.host(), local_path_, NULL);
+  AfcTransfer transfer(url_.host(), local_path_, NULL, shared_from_this());
 
   itdb_start_sync(db_);
   bool success = transfer.CopyToDevice();

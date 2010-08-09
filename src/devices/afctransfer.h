@@ -20,6 +20,9 @@
 #include <QObject>
 #include <QStringList>
 
+#include <boost/shared_ptr.hpp>
+
+class ConnectedDevice;
 class iMobileDeviceConnection;
 class TaskManager;
 
@@ -30,7 +33,8 @@ class AfcTransfer : public QObject {
 
 public:
   AfcTransfer(const QString& uuid, const QString& local_destination,
-              TaskManager* task_manager, QObject* parent = 0);
+              TaskManager* task_manager, boost::shared_ptr<ConnectedDevice> device);
+  ~AfcTransfer();
 
   bool CopyToDevice();
 
@@ -50,6 +54,7 @@ private:
   static bool Copy(QIODevice* source, QIODevice* destination);
 
 private:
+  boost::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;
 
   TaskManager* task_manager_;

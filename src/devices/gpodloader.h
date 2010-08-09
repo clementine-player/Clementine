@@ -24,6 +24,7 @@
 
 #include "core/song.h"
 
+class ConnectedDevice;
 class LibraryBackend;
 class TaskManager;
 
@@ -32,7 +33,8 @@ class GPodLoader : public QObject {
 
 public:
   GPodLoader(const QString& mount_point, TaskManager* task_manager,
-             LibraryBackend* backend, QObject* parent = 0);
+             LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device);
+  ~GPodLoader();
 
   void set_music_path_prefix(const QString& prefix) { path_prefix_ = prefix; }
   void set_song_type(Song::FileType type) { type_ = type; }
@@ -46,6 +48,7 @@ signals:
   void LoadFinished(Itdb_iTunesDB* db);
 
 private:
+  boost::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;
 
   QString mount_point_;

@@ -40,7 +40,8 @@ void GPodDevice::Init() {
   InitBackendDirectory(url_.path(), first_time_);
   model_->Init();
 
-  loader_ = new GPodLoader(url_.path(), manager_->task_manager(), backend_);
+  loader_ = new GPodLoader(url_.path(), manager_->task_manager(), backend_,
+                           shared_from_this());
   loader_->moveToThread(loader_thread_);
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));

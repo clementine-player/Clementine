@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "connecteddevice.h"
 #include "gpodloader.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
@@ -24,14 +25,18 @@
 #include <QtDebug>
 
 GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
-                       LibraryBackend* backend, QObject *parent)
-  : QObject(parent),
+                       LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device)
+  : QObject(NULL),
+    device_(device),
     mount_point_(mount_point),
     type_(Song::Type_Unknown),
     task_manager_(task_manager),
     backend_(backend)
 {
   original_thread_ = thread();
+}
+
+GPodLoader::~GPodLoader() {
 }
 
 void GPodLoader::LoadDatabase() {
