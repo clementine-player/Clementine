@@ -17,7 +17,6 @@
 #include "imobiledeviceconnection.h"
 
 #include <plist/plist.h>
-#include <plist/plist++.h>
 
 #include <boost/scoped_ptr.hpp>
 using boost::scoped_ptr;
@@ -66,25 +65,34 @@ iMobileDeviceConnection::~iMobileDeviceConnection() {
   }
 }
 
+template <typename T, typename F>
+T GetPListValue(plist_t node, F f) {
+  T ret;
+  f(node, &ret);
+  return ret;
+}
+
 QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QString& domain) {
   plist_t node = NULL;
   const char* d = domain.isEmpty() ? NULL : domain.toUtf8().constData();
   lockdownd_get_value(lockdown_, d, property.toUtf8().constData(), &node);
 
-  scoped_ptr<PList::Node> n(PList::Node::FromPlist(node));
-  if (!n) {
+  if (!node)
     return QVariant();
-  }
 
-  switch (n->GetType()) {
+  switch (plist_get_node_type(node)) {
     case PLIST_BOOLEAN:
-      return static_cast<PList::Boolean*>(n.get())->GetValue();
+      return bool(GetPListValue<quint8>(node, plist_get_bool_val));
 
     case PLIST_UINT:
-      return QVariant::fromValue<quint64>(static_cast<PList::Integer*>(n.get())->GetValue());
+      return QVariant::fromValue(GetPListValue<uint64_t>(node, plist_get_uint_val));
 
-    case PLIST_STRING:
-      return QString::fromUtf8(static_cast<PList::String*>(n.get())->GetValue().c_str());
+    case PLIST_STRING: {
+      char* data = GetPListValue<char*>(node, plist_get_string_val);
+      QString ret = QString::fromUtf8(data);
+      free(data);
+      return ret;
+    }
 
     default:
       qWarning() << "Unhandled PList type";
