@@ -31,14 +31,13 @@ LibraryDirectoryModel::LibraryDirectoryModel(LibraryBackend* backend, QObject* p
 }
 
 LibraryDirectoryModel::~LibraryDirectoryModel() {
-  qDeleteAll(storage_);
 }
 
 void LibraryDirectoryModel::DirectoryDiscovered(const Directory &dir) {
   QStandardItem* item = new QStandardItem(dir.path);
   item->setData(dir.id, kIdRole);
   item->setIcon(dir_icon_);
-  storage_ << new FilesystemMusicStorage(dir.path);
+  storage_ << boost::shared_ptr<MusicStorage>(new FilesystemMusicStorage(dir.path));
   appendRow(item);
 }
 
@@ -46,7 +45,7 @@ void LibraryDirectoryModel::DirectoryDeleted(const Directory &dir) {
   for (int i=0 ; i<rowCount() ; ++i) {
     if (item(i, 0)->data(kIdRole).toInt() == dir.id) {
       removeRow(i);
-      delete storage_.takeAt(i);
+      storage_.removeAt(i);
       break;
     }
   }

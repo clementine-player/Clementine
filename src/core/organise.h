@@ -19,6 +19,8 @@
 
 #include <QObject>
 
+#include <boost/shared_ptr.hpp>
+
 #include "organiseformat.h"
 
 class MusicStorage;
@@ -28,7 +30,8 @@ class Organise : public QObject {
   Q_OBJECT
 
 public:
-  Organise(TaskManager* task_manager, MusicStorage* destination,
+  Organise(TaskManager* task_manager,
+           boost::shared_ptr<MusicStorage> destination,
            const OrganiseFormat& format, bool copy, bool overwrite,
            const QStringList& files, bool eject_after);
 
@@ -43,7 +46,7 @@ private:
   QThread* thread_;
   QThread* original_thread_;
   TaskManager* task_manager_;
-  MusicStorage* destination_;
+  boost::shared_ptr<MusicStorage> destination_;
 
   const OrganiseFormat format_;
   const bool copy_;

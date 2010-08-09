@@ -63,7 +63,6 @@ FileView::FileView(QWidget* parent)
 
 FileView::~FileView() {
   delete ui_;
-  delete storage_;
 }
 
 void FileView::SetPath(const QString& path) {

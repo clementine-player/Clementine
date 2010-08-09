@@ -25,7 +25,8 @@
 
 const int Organise::kBatchSize = 10;
 
-Organise::Organise(TaskManager* task_manager, MusicStorage* destination,
+Organise::Organise(TaskManager* task_manager,
+                   boost::shared_ptr<MusicStorage> destination,
                    const OrganiseFormat &format, bool copy, bool overwrite,
                    const QStringList& files, bool eject_after)
                      : thread_(NULL),

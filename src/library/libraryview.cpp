@@ -300,8 +300,10 @@ void LibraryView::Delete() {
   // We can cheat and always take the storage of the first directory, since
   // they'll all be FilesystemMusicStorage in a library and deleting doesn't
   // check the actual directory.
-  MusicStorage* storage = library_->directory_model()->index(0, 0).data(
-      MusicStorage::Role_Storage).value<MusicStorage*>();
+  boost::shared_ptr<MusicStorage> storage =
+      library_->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
+      .value<boost::shared_ptr<MusicStorage> >();
+
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
   delete_files->Start(songs);
 }

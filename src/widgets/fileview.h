@@ -22,7 +22,10 @@
 #include <QUrl>
 #include <QModelIndex>
 
+#include <boost/shared_ptr.hpp>
+
 class FilesystemMusicStorage;
+class MusicStorage;
 class TaskManager;
 class Ui_FileView;
 
@@ -89,7 +92,7 @@ class FileView : public QWidget {
   QUndoStack* undo_stack_;
 
   TaskManager* task_manager_;
-  FilesystemMusicStorage* storage_;
+  boost::shared_ptr<MusicStorage> storage_;
 };
 
 #endif // FILEVIEW_H

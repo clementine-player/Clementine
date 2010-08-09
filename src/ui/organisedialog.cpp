@@ -177,11 +177,12 @@ void OrganiseDialog::InsertTag(const QString &tag) {
 void OrganiseDialog::UpdatePreviews() {
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
-  MusicStorage* storage = NULL;
+  boost::shared_ptr<MusicStorage> storage;
   bool has_local_destination = false;
 
   if (destination.isValid()) {
-    storage = destination.data(MusicStorage::Role_Storage).value<MusicStorage*>();
+    storage = destination.data(MusicStorage::Role_Storage)
+              .value<boost::shared_ptr<MusicStorage> >();
     if (storage) {
       has_local_destination = !storage->LocalPath().isEmpty();
     }
@@ -274,8 +275,9 @@ void OrganiseDialog::accept() {
 
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
-  MusicStorage* storage =
-      destination.data(MusicStorage::Role_Storage).value<MusicStorage*>();
+  boost::shared_ptr<MusicStorage> storage =
+      destination.data(MusicStorage::Role_Storage)
+      .value<boost::shared_ptr<MusicStorage> >();
 
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;

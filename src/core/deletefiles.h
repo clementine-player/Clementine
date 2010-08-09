@@ -19,6 +19,8 @@
 
 #include <QObject>
 
+#include <boost/shared_ptr.hpp>
+
 #include "song.h"
 
 class MusicStorage;
@@ -28,7 +30,8 @@ class DeleteFiles : public QObject {
   Q_OBJECT
 
 public:
-  DeleteFiles(TaskManager* task_manager, MusicStorage* storage);
+  DeleteFiles(TaskManager* task_manager, boost::shared_ptr<MusicStorage> storage);
+  ~DeleteFiles();
 
   static const int kBatchSize;
 
@@ -42,7 +45,7 @@ private:
   QThread* thread_;
   QThread* original_thread_;
   TaskManager* task_manager_;
-  MusicStorage* storage_;
+  boost::shared_ptr<MusicStorage> storage_;
 
   SongList songs_;
 

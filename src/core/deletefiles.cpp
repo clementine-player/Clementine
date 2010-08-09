@@ -24,7 +24,8 @@
 
 const int DeleteFiles::kBatchSize = 50;
 
-DeleteFiles::DeleteFiles(TaskManager* task_manager, MusicStorage* storage)
+DeleteFiles::DeleteFiles(TaskManager* task_manager,
+                         boost::shared_ptr<MusicStorage> storage)
   : thread_(NULL),
     task_manager_(task_manager),
     storage_(storage),
@@ -33,6 +34,9 @@ DeleteFiles::DeleteFiles(TaskManager* task_manager, MusicStorage* storage)
     progress_(0)
 {
   original_thread_ = thread();
+}
+
+DeleteFiles::~DeleteFiles() {
 }
 
 void DeleteFiles::Start(const SongList& songs) {

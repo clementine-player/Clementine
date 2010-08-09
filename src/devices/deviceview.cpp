@@ -345,7 +345,8 @@ void DeviceView::Delete() {
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  MusicStorage* storage = device_index.data(MusicStorage::Role_Storage).value<MusicStorage*>();
+  boost::shared_ptr<MusicStorage> storage =
+      device_index.data(MusicStorage::Role_Storage).value<boost::shared_ptr<MusicStorage> >();
 
   DeleteFiles* delete_files = new DeleteFiles(manager_->task_manager(), storage);
   delete_files->Start(GetSelectedSongs());

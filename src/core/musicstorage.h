@@ -21,6 +21,8 @@
 
 #include <QMetaType>
 
+#include <boost/shared_ptr.hpp>
+
 class MusicStorage {
 public:
   MusicStorage();
@@ -48,5 +50,6 @@ public:
 };
 
 Q_DECLARE_METATYPE(MusicStorage*);
+Q_DECLARE_METATYPE(boost::shared_ptr<MusicStorage>);
 
 #endif // MUSICSTORAGE_H
