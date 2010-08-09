@@ -111,6 +111,7 @@ class Song {
 #endif
 
   static QString Decode(const TagLib::String& tag, const QTextCodec* codec);
+  static QString Decode(const QString& tag, const QTextCodec* codec);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;

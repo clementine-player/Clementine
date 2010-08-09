@@ -191,6 +191,14 @@ QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) {
   }
 }
 
+QString Song::Decode(const QString& tag, const QTextCodec* codec) {
+  if (!codec) {
+    return tag;
+  }
+
+  return codec->toUnicode(tag.toUtf8());
+}
+
 void Song::InitFromFile(const QString& filename, int directory_id) {
 #ifndef QT_NO_DEBUG_OUTPUT
   if (qApp->thread() == QThread::currentThread())
@@ -471,11 +479,14 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   d->valid_ = true;
 
-  if (!bundle.title.isEmpty()) d->title_ = bundle.title;
-  if (!bundle.artist.isEmpty()) d->artist_ = bundle.artist;
-  if (!bundle.album.isEmpty()) d->album_ = bundle.album;
-  if (!bundle.comment.isEmpty()) d->comment_ = bundle.comment;
-  if (!bundle.genre.isEmpty()) d->genre_ = bundle.genre;
+  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
+  QTextCodec* codec = detector.Guess(bundle);
+
+  if (!bundle.title.isEmpty()) d->title_ = Decode(bundle.title, codec);
+  if (!bundle.artist.isEmpty()) d->artist_ = Decode(bundle.artist, codec);
+  if (!bundle.album.isEmpty()) d->album_ = Decode(bundle.album, codec);
+  if (!bundle.comment.isEmpty()) d->comment_ = Decode(bundle.comment, codec);
+  if (!bundle.genre.isEmpty()) d->genre_ = Decode(bundle.genre, codec);
   if (!bundle.bitrate.isEmpty()) d->bitrate_ = bundle.bitrate.toInt();
   if (!bundle.samplerate.isEmpty()) d->samplerate_ = bundle.samplerate.toInt();
   if (!bundle.length.isEmpty()) d->length_ = bundle.length.toInt();

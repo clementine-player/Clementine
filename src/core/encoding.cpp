@@ -10,6 +10,8 @@
 #include <taglib/vorbisfile.h>
 #include <taglib/flacfile.h>
 
+#include "engines/enginebase.h"
+
 UniversalEncodingHandler::UniversalEncodingHandler()
   : nsUniversalDetector(NS_FILTER_ALL),
     current_codec_(NULL) {
@@ -142,6 +144,22 @@ QTextCodec* UniversalEncodingHandler::Guess(const TagLib::String& input) {
     return codec;
   }
   return QTextCodec::codecForName("UTF-8");
+}
+
+QTextCodec* UniversalEncodingHandler::Guess(const Engine::SimpleMetaBundle& bundle) {
+  QHash<QTextCodec*, int> usages;
+  ++usages[Guess(bundle, &Engine::SimpleMetaBundle::title)];
+  ++usages[Guess(bundle, &Engine::SimpleMetaBundle::artist)];
+  ++usages[Guess(bundle, &Engine::SimpleMetaBundle::album)];
+  ++usages[Guess(bundle, &Engine::SimpleMetaBundle::comment)];
+  ++usages[Guess(bundle, &Engine::SimpleMetaBundle::genre)];
+
+  usages.remove(NULL);  // Remove votes for ASCII.
+  QHash<QTextCodec*, int>::const_iterator max = std::max_element(usages.begin(), usages.end());
+  if (max != usages.end()) {
+    return max.key();
+  }
+  return NULL;
 }
 
 QString UniversalEncodingHandler::FixEncoding(const TagLib::String& input) {

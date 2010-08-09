@@ -343,7 +343,7 @@ void Player::Seek(int seconds) {
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   shared_ptr<PlaylistItem> item = playlists_->active()->current_item();
-  if (item == NULL)
+  if (!item)
     return;
 
   Engine::SimpleMetaBundle bundle_copy = bundle;

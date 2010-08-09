@@ -16,6 +16,10 @@ namespace TagLib {
   }
 }
 
+namespace Engine {
+class SimpleMetaBundle;
+}
+
 class QTextCodec;
 
 class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
@@ -30,9 +34,15 @@ class UniversalEncodingHandler : public TagLib::ID3v1::StringHandler,
   QTextCodec* Guess(const char* data);
   QTextCodec* Guess(const TagLib::FileRef& file);
   QTextCodec* Guess(const TagLib::String& input);
+  QTextCodec* Guess(const Engine::SimpleMetaBundle& metadata);
 
   QString FixEncoding(const TagLib::String& input);
  private:
+  template<typename T>
+  QTextCodec* Guess(const Engine::SimpleMetaBundle& bundle, T Engine::SimpleMetaBundle::*field) {
+    return Guess(static_cast<QString>(bundle.*field).toUtf8().constData());
+  }
+
   // nsUniversalDetector
   virtual void Report(const char* charset);
 
