@@ -86,7 +86,7 @@ quint64 iLister::DeviceFreeSpace(const QString& id) {
 
 QVariantMap iLister::DeviceHardwareInfo(const QString& id) {
   QVariantMap ret;
-  ret[tr("Colour")] = LockAndGetDeviceInfo(id, &DeviceInfo::colour);
+  ret[tr("Color")] = LockAndGetDeviceInfo(id, &DeviceInfo::colour);
   ret["IMEI"] = LockAndGetDeviceInfo(id, &DeviceInfo::imei);
   ret[tr("Password Protected")] = LockAndGetDeviceInfo(id, &DeviceInfo::password_protected);
   ret[tr("Timezone")] = LockAndGetDeviceInfo(id, &DeviceInfo::timezone);
