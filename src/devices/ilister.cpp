@@ -65,7 +65,7 @@ QStringList iLister::DeviceUniqueIDs() {
 }
 
 QStringList iLister::DeviceIcons(const QString& id) {
-  return QStringList();
+  return QStringList() << "ipodtouchicon";
 }
 
 QString iLister::DeviceManufacturer(const QString& id) {
