@@ -119,6 +119,12 @@ void DeviceProperties::UpdateHardwareInfo() {
   if (DeviceLister* lister = manager_->GetLister(index_.row())) {
     QVariantMap info = lister->DeviceHardwareInfo(id);
 
+    // Remove empty items
+    foreach (const QString& key, info.keys()) {
+      if (info[key].isNull() || info[key].toString().isEmpty())
+        info.remove(key);
+    }
+
     ui_->hardware_info_stack->setCurrentWidget(ui_->hardware_info_page);
     ui_->hardware_info->clear();
     ui_->hardware_info->setRowCount(2 + info.count());
