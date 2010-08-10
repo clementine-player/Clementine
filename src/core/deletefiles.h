@@ -53,6 +53,8 @@ private:
 
   int task_id_;
   int progress_;
+
+  SongList songs_with_errors_;
 };
 
 #endif // DELETEFILES_H

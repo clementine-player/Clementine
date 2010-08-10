@@ -94,9 +94,8 @@ bool AfcDevice::CopyToStorage(
   {
     QFile source_file(source);
     AfcFile dest_file(&connection, dest);
-    source_file.open(QIODevice::ReadOnly);
-    dest_file.open(QIODevice::WriteOnly);
-    dest_file.write(source_file.readAll());
+    if (!Utilities::Copy(&source_file, &dest_file))
+      return false;
   }
 
   track->transferred = 1;
@@ -111,12 +110,10 @@ bool AfcDevice::CopyToStorage(
     else
       track->filetype_marker |= suffix[i].toAscii();
   }
-  qDebug() << track->filetype_marker;
 
   // Set the filename
   track->ipod_path = strdup(dest.toUtf8().constData());
   itdb_filename_fs2ipod(track->ipod_path);
-  qDebug() << track->ipod_path;
 
   AddTrackToModel(track, "afc://" + url_.host());
 
@@ -128,11 +125,11 @@ bool AfcDevice::CopyToStorage(
   return true;
 }
 
-void AfcDevice::FinishCopy() {
+void AfcDevice::FinishCopy(bool success) {
   // Temporarily unset the GUID so libgpod doesn't lock the device for syncing
   itdb_device_set_sysinfo(db_->device, "FirewireGuid", NULL);
 
-  GPodDevice::FinishCopy();
+  GPodDevice::FinishCopy(success);
 }
 
 void AfcDevice::FinaliseDatabase() {

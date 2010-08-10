@@ -68,7 +68,7 @@ void Organise::ProcessSomeFiles() {
   if (progress_ >= files_.count()) {
     task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
 
-    destination_->FinishCopy();
+    destination_->FinishCopy(files_with_errors_.isEmpty());
     if (eject_after_)
       destination_->Eject();
 
@@ -110,8 +110,10 @@ void Organise::ProcessSomeFiles() {
     if (!song.is_valid())
       continue;
 
-    destination_->CopyToStorage(filename, format_.GetFilenameForSong(song),
-                                song, overwrite_, !copy_);
+    if (!destination_->CopyToStorage(filename, format_.GetFilenameForSong(song),
+                                     song, overwrite_, !copy_)) {
+      files_with_errors_ << filename;
+    }
   }
 
   QTimer::singleShot(0, this, SLOT(ProcessSomeFiles()));

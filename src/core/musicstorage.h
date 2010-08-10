@@ -40,11 +40,11 @@ public:
   virtual bool CopyToStorage(const QString& source, const QString& destination,
                              const Song& metadata, bool overwrite,
                              bool remove_original) = 0;
-  virtual void FinishCopy() {}
+  virtual void FinishCopy(bool success) {}
 
   virtual void StartDelete() {}
   virtual bool DeleteFromStorage(const Song& metadata) = 0;
-  virtual void FinishDelete() {}
+  virtual void FinishDelete(bool success) {}
 
   virtual void Eject() {}
 };

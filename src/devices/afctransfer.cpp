@@ -18,6 +18,7 @@
 #include "afctransfer.h"
 #include "imobiledeviceconnection.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 
 #include <QDir>
 #include <QtDebug>
@@ -117,52 +118,12 @@ bool AfcTransfer::CopyFileFromDevice(iMobileDeviceConnection *c, const QString &
   QFile dest(local_filename);
   AfcFile source(c, path);
 
-  return Copy(&source, &dest);
+  return Utilities::Copy(&source, &dest);
 }
 
 bool AfcTransfer::CopyFileToDevice(iMobileDeviceConnection *c, const QString &path) {
   QFile source(local_destination_ + path);
   AfcFile dest(c, path);
 
-  return Copy(&source, &dest);
-}
-
-bool AfcTransfer::Copy(QIODevice* source, QIODevice* destination) {
-  if (!source->open(QIODevice::ReadOnly))
-    return false;
-
-  if (!destination->open(QIODevice::WriteOnly))
-    return false;
-
-  const qint64 bytes = source->size();
-  char* data = new char[bytes];
-  qint64 pos = 0;
-
-  forever {
-    const qint64 bytes_read = source->read(data + pos, bytes - pos);
-    if (bytes_read == -1) {
-      delete[] data;
-      return false;
-    }
-
-    pos += bytes_read;
-    if (bytes_read == 0 || pos == bytes)
-      break;
-  }
-
-  pos = 0;
-  forever {
-    const qint64 bytes_written = destination->write(data + pos, bytes - pos);
-    if (bytes_written == -1) {
-      delete[] data;
-      return false;
-    }
-
-    pos += bytes_written;
-    if (bytes_written == 0 || pos == bytes)
-      break;
-  }
-
-  delete[] data;
-  return true;
+  return Utilities::Copy(&source, &dest);
 }

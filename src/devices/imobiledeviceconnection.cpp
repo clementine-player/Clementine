@@ -52,8 +52,18 @@ iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)
 
 iMobileDeviceConnection::~iMobileDeviceConnection() {
   if (afc_) {
+    // Do a test to see if we can still talk to the device.  If not, it's
+    // probably not safe to free the lockdownd client.
+    char* model = NULL;
+    afc_error_t err = afc_get_device_info_key(afc_, "Model", &model);
+    free(model);
+
+    if (err != AFC_E_SUCCESS)
+      broken_ = true;
+
     afc_client_free(afc_);
   }
+
   if (lockdown_ && !broken_) {
     lockdownd_client_free(lockdown_);
   }

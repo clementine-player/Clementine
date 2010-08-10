@@ -19,6 +19,8 @@
 
 #include <QString>
 
+class QIODevice;
+
 namespace Utilities {
   QString PrettyTime(int seconds);
   QString PrettySize(quint64 bytes);
@@ -29,6 +31,7 @@ namespace Utilities {
 
   QString MakeTempDir();
   void RemoveRecursive(const QString& path);
+  bool Copy(QIODevice* source, QIODevice* destination);
 }
 
 #endif // UTILITIES_H

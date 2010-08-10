@@ -51,8 +51,6 @@ private:
   bool CopyFileFromDevice(iMobileDeviceConnection* c, const QString& path);
   bool CopyFileToDevice(iMobileDeviceConnection* c, const QString& path);
 
-  static bool Copy(QIODevice* source, QIODevice* destination);
-
 private:
   boost::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;

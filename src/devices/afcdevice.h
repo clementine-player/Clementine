@@ -42,7 +42,7 @@ public:
 
   bool CopyToStorage(const QString &source, const QString &destination,
                      const Song &metadata, bool overwrite, bool remove_original);
-  void FinishCopy();
+  void FinishCopy(bool success);
 
   bool DeleteFromStorage(const Song &metadata);
 

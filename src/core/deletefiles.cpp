@@ -76,7 +76,7 @@ void DeleteFiles::ProcessSomeFiles() {
   if (progress_ >= songs_.count()) {
     task_manager_->SetTaskProgress(task_id_, progress_, songs_.count());
 
-    storage_->FinishCopy();
+    storage_->FinishCopy(songs_with_errors_.isEmpty());
 
     task_manager_->SetTaskFinished(task_id_);
 
@@ -96,7 +96,11 @@ void DeleteFiles::ProcessSomeFiles() {
   for ( ; progress_<n ; ++progress_) {
     task_manager_->SetTaskProgress(task_id_, progress_, songs_.count());
 
-    storage_->DeleteFromStorage(songs_.at(progress_));
+    const Song& song = songs_[progress_];
+
+    if (!storage_->DeleteFromStorage(song)) {
+      songs_with_errors_ << song;
+    }
   }
 
   QTimer::singleShot(0, this, SLOT(ProcessSomeFiles()));

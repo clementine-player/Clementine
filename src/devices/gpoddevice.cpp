@@ -129,22 +129,24 @@ bool GPodDevice::CopyToStorage(
   return true;
 }
 
-void GPodDevice::FinishCopy() {
-  // Write the itunes database
-  GError* error = NULL;
-  itdb_write(db_, &error);
-  if (error) {
-    qDebug() << "GPodDevice error:" << error->message;
-    emit Error(QString::fromUtf8(error->message));
-    g_error_free(error);
-  } else {
-    FinaliseDatabase();
+void GPodDevice::FinishCopy(bool success) {
+  if (success) {
+    // Write the itunes database
+    GError* error = NULL;
+    itdb_write(db_, &error);
+    if (error) {
+      qDebug() << "GPodDevice error:" << error->message;
+      emit Error(QString::fromUtf8(error->message));
+      g_error_free(error);
+    } else {
+      FinaliseDatabase();
 
-    // Update the library model
-    if (!songs_to_add_.isEmpty())
-      backend_->AddOrUpdateSongs(songs_to_add_);
-    if (!songs_to_remove_.isEmpty())
-      backend_->DeleteSongs(songs_to_remove_);
+      // Update the library model
+      if (!songs_to_add_.isEmpty())
+        backend_->AddOrUpdateSongs(songs_to_add_);
+      if (!songs_to_remove_.isEmpty())
+        backend_->DeleteSongs(songs_to_remove_);
+    }
   }
 
   songs_to_add_.clear();
@@ -197,7 +199,7 @@ bool GPodDevice::DeleteFromStorage(const Song& metadata) {
   return true;
 }
 
-void GPodDevice::FinishDelete() {
-  FinishCopy();
+void GPodDevice::FinishDelete(bool success) {
+  FinishCopy(success);
 }
 

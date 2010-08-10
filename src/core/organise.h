@@ -58,6 +58,8 @@ private:
 
   int task_id_;
   int progress_;
+
+  QStringList files_with_errors_;
 };
 
 #endif // ORGANISE_H

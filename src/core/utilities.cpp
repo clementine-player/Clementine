@@ -18,6 +18,7 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QIODevice>
 #include <QStringList>
 #include <QTemporaryFile>
 
@@ -133,6 +134,46 @@ void RemoveRecursive(const QString& path) {
     QFile::remove(path + "/" + child);
 
   dir.rmdir(path);
+}
+
+bool Copy(QIODevice* source, QIODevice* destination) {
+  if (!source->open(QIODevice::ReadOnly))
+    return false;
+
+  if (!destination->open(QIODevice::WriteOnly))
+    return false;
+
+  const qint64 bytes = source->size();
+  char* data = new char[bytes];
+  qint64 pos = 0;
+
+  forever {
+    const qint64 bytes_read = source->read(data + pos, bytes - pos);
+    if (bytes_read == -1) {
+      delete[] data;
+      return false;
+    }
+
+    pos += bytes_read;
+    if (bytes_read == 0 || pos == bytes)
+      break;
+  }
+
+  pos = 0;
+  forever {
+    const qint64 bytes_written = destination->write(data + pos, bytes - pos);
+    if (bytes_written == -1) {
+      delete[] data;
+      return false;
+    }
+
+    pos += bytes_written;
+    if (bytes_written == 0 || pos == bytes)
+      break;
+  }
+
+  delete[] data;
+  return true;
 }
 
 } // namespace
