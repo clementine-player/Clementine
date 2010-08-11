@@ -55,6 +55,9 @@ public:
   // Do whatever needs to be done to safely remove the device.
   virtual void UnmountDevice(const QString& id) = 0;
 
+public slots:
+  virtual void UpdateDeviceFreeSpace(const QString& id) = 0;
+
 signals:
   void DeviceAdded(const QString& id);
   void DeviceRemoved(const QString& id);

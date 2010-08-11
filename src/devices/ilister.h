@@ -26,6 +26,9 @@ class iLister : public DeviceLister {
   virtual QList<QUrl> MakeDeviceUrls(const QString& id);
   virtual void UnmountDevice(const QString& id);
 
+ public slots:
+  virtual void UpdateDeviceFreeSpace(const QString& id);
+
  private:
   struct DeviceInfo {
     DeviceInfo() : free_bytes(0), total_bytes(0) {}

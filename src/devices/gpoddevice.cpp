@@ -129,7 +129,7 @@ bool GPodDevice::CopyToStorage(
   return true;
 }
 
-void GPodDevice::FinishCopy(bool success) {
+void GPodDevice::WriteDatabase(bool success) {
   if (success) {
     // Write the itunes database
     GError* error = NULL;
@@ -152,6 +152,11 @@ void GPodDevice::FinishCopy(bool success) {
   songs_to_add_.clear();
   songs_to_remove_.clear();
   db_busy_.unlock();
+}
+
+void GPodDevice::FinishCopy(bool success) {
+  WriteDatabase(success);
+  ConnectedDevice::FinishCopy(success);
 }
 
 void GPodDevice::StartDelete() {
@@ -200,6 +205,7 @@ bool GPodDevice::DeleteFromStorage(const Song& metadata) {
 }
 
 void GPodDevice::FinishDelete(bool success) {
-  FinishCopy(success);
+  WriteDatabase(success);
+  ConnectedDevice::FinishDelete(success);
 }
 

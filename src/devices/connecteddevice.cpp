@@ -15,6 +15,7 @@
 */
 
 #include "connecteddevice.h"
+#include "devicelister.h"
 #include "devicemanager.h"
 #include "core/database.h"
 #include "library/library.h"
@@ -83,4 +84,12 @@ void ConnectedDevice::InitBackendDirectory(
 
 void ConnectedDevice::Eject() {
   manager_->UnmountAsync(manager_->FindDeviceById(unique_id_));
+}
+
+void ConnectedDevice::FinishCopy(bool) {
+  lister_->UpdateDeviceFreeSpace(unique_id_);
+}
+
+void ConnectedDevice::FinishDelete(bool) {
+  lister_->UpdateDeviceFreeSpace(unique_id_);
 }

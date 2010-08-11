@@ -48,6 +48,9 @@ public:
   LibraryModel* model() const { return model_; }
   QUrl url() const { return url_; }
 
+  virtual void FinishCopy(bool success);
+  virtual void FinishDelete(bool success);
+
   void Eject();
 
 signals:

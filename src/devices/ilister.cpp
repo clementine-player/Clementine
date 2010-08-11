@@ -163,3 +163,18 @@ iLister::DeviceInfo iLister::ReadDeviceInfo(const char* uuid) {
 
   return ret;
 }
+
+void iLister::UpdateDeviceFreeSpace(const QString& id) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!devices_.contains(id))
+      return;
+
+    DeviceInfo& info = devices_[id];
+    iMobileDeviceConnection conn(info.uuid);
+
+    info.free_bytes = conn.GetProperty("AmountDataAvailable", "com.apple.disk_usage").toULongLong();
+  }
+
+  emit DeviceChanged(id);
+}

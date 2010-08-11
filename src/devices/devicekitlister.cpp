@@ -278,3 +278,17 @@ void DeviceKitLister::UnmountDevice(const QString& id) {
   drive.DriveEject(QStringList());
   // Don't bother waiting for the eject to finish
 }
+
+void DeviceKitLister::UpdateDeviceFreeSpace(const QString& id) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!device_data_.contains(id))
+      return;
+
+    DeviceData& data = device_data_[id];
+    if (!data.device_mount_paths.isEmpty())
+      data.free_space = Utilities::FileSystemFreeSpace(data.device_mount_paths[0]);
+  }
+
+  emit DeviceChanged(id);
+}

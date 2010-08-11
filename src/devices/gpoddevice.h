@@ -56,8 +56,10 @@ protected slots:
 protected:
   Itdb_Track* AddTrackToITunesDb(const Song& metadata);
   void AddTrackToModel(Itdb_Track* track, const QString& prefix);
-
   virtual void FinaliseDatabase() {}
+
+private:
+  void WriteDatabase(bool success);
 
 protected:
   QThread* loader_thread_;

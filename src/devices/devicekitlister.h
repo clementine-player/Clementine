@@ -48,6 +48,9 @@ public:
 
   void UnmountDevice(const QString &id);
 
+public slots:
+  void UpdateDeviceFreeSpace(const QString& id);
+
 protected:
   void Init();
 

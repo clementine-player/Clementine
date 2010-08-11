@@ -323,3 +323,31 @@ void GioLister::UnmountDevice(const QString &id) {
                     (GAsyncReadyCallback) MountUnmountFinished, NULL);
   }
 }
+
+void GioLister::UpdateDeviceFreeSpace(const QString& id) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!mounts_.contains(id))
+      return;
+
+    MountInfo& mount_info = mounts_[id];
+
+    GFile* root = g_mount_get_root(mount_info.mount);
+
+    GError* error = NULL;
+    GFileInfo* info = g_file_query_filesystem_info(
+        root, G_FILE_ATTRIBUTE_FILESYSTEM_FREE, NULL, &error);
+    if (error) {
+      qWarning() << error->message;
+      g_error_free(error);
+    } else {
+      mount_info.filesystem_free = g_file_info_get_attribute_uint64(
+          info, G_FILE_ATTRIBUTE_FILESYSTEM_FREE);
+      g_object_unref(info);
+    }
+
+    g_object_unref(root);
+  }
+
+  emit DeviceChanged(id);
+}
