@@ -323,6 +323,7 @@ if (LINGUAS STREQUAL "All")
   set (LANGUAGES
     ar
     bg
+    ca
     cs
     da
     de
@@ -333,6 +334,7 @@ if (LINGUAS STREQUAL "All")
     fi
     fr
     gl
+    hu
     it
     kk
     lt
@@ -345,6 +347,7 @@ if (LINGUAS STREQUAL "All")
     ro
     ru
     sk
+    sl
     sr
     sv
     tr
