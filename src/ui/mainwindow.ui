@@ -147,6 +147,9 @@
               <property name="alternatingRowColors">
                <bool>true</bool>
               </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ExtendedSelection</enum>
+              </property>
               <property name="allColumnsShowFocus">
                <bool>true</bool>
               </property>
@@ -177,8 +180,8 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <addaction name="action_edit_track" />
-          <addaction name="action_edit_value" />
+          <addaction name="action_edit_track"/>
+          <addaction name="action_edit_value"/>
          </widget>
         </item>
         <item>
