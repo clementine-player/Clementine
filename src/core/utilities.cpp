@@ -28,6 +28,8 @@
 #  include <windows.h>
 #endif
 
+#include <boost/scoped_array.hpp>
+
 namespace Utilities {
 
 static QString tr(const char* str) {
@@ -144,35 +146,28 @@ bool Copy(QIODevice* source, QIODevice* destination) {
     return false;
 
   const qint64 bytes = source->size();
-  char* data = new char[bytes];
+  boost::scoped_array<char> data(new char[bytes]);
   qint64 pos = 0;
 
-  forever {
-    const qint64 bytes_read = source->read(data + pos, bytes - pos);
-    if (bytes_read == -1) {
-      delete[] data;
+  qint64 bytes_read;
+  do {
+    bytes_read = source->read(data.get() + pos, bytes - pos);
+    if (bytes_read == -1)
       return false;
-    }
 
     pos += bytes_read;
-    if (bytes_read == 0 || pos == bytes)
-      break;
-  }
+  } while (bytes_read > 0 && pos != bytes);
 
   pos = 0;
-  forever {
-    const qint64 bytes_written = destination->write(data + pos, bytes - pos);
-    if (bytes_written == -1) {
-      delete[] data;
+  qint64 bytes_written;
+  do {
+    bytes_written = destination->write(data.get() + pos, bytes - pos);
+    if (bytes_written == -1)
       return false;
-    }
 
     pos += bytes_written;
-    if (bytes_written == 0 || pos == bytes)
-      break;
-  }
+  } while (bytes_written > 0 && pos != bytes);
 
-  delete[] data;
   return true;
 }
 
