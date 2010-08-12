@@ -11,7 +11,7 @@ include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
 
 set(SOURCES
-  gstafcsrc.cpp
+  gstafcsrc.c
 )
 
 add_library(gstafcsrc STATIC

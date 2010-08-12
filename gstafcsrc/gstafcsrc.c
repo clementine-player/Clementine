@@ -92,7 +92,7 @@ static void gst_afc_src_class_init (GstAfcSrcClass* klass) {
     g_param_spec_string(
         "location", "URI",
         "The URI of the file to read, must be of the form afc://uuid/filename", NULL,
-        GParamFlags(G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
+        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY));
 
   gstbasesrc_class->start = gst_afc_src_start;
   gstbasesrc_class->stop = gst_afc_src_stop;
@@ -118,10 +118,10 @@ static const gchar* gst_afc_src_uri_get_uri(GstURIHandler* handler) {
 static gboolean gst_afc_src_uri_set_uri(GstURIHandler* handler, const gchar* uri) {
   GstAfcSrc* self = GST_AFCSRC(handler);
   self->location_ = g_strdup(uri);
-  return true;
+  return TRUE;
 }
 
-static void gst_afc_src_uri_handler_init(gpointer g_iface, gpointer) {
+static void gst_afc_src_uri_handler_init(gpointer g_iface, gpointer data) {
   GstURIHandlerInterface* iface = (GstURIHandlerInterface*) g_iface;
 
   iface->get_type = gst_afc_src_uri_get_type;
@@ -135,14 +135,14 @@ static void gst_afc_src_init(GstAfcSrc* element, GstAfcSrcClass* gclass) {
   element->location_ = NULL;
   element->uuid_ = NULL;
   element->path_ = NULL;
-  element->connected_ = false;
+  element->connected_ = FALSE;
   element->afc_ = NULL;
   element->afc_port_ = 0;
   element->device_ = NULL;
   element->file_handle_ = 0;
   element->lockdown_ = NULL;
   element->buffer_ = NULL;
-  element->buffer_is_valid_ = false;
+  element->buffer_is_valid_ = FALSE;
   element->buffer_length_ = 0;
   element->buffer_offset_ = 0;
 }
@@ -205,12 +205,12 @@ static gboolean gst_afc_src_start(GstBaseSrc* src) {
 
   // Don't connect again
   if (self->connected_)
-    return true;
+    return TRUE;
 
   // Check that a URI has been passed
   if (!self->location_ || self->location_[0] == '\0') {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("No URI specified"), (NULL));
-    return false;
+    return FALSE;
   }
 
   // Parse the URI
@@ -229,43 +229,42 @@ static gboolean gst_afc_src_start(GstBaseSrc* src) {
   idevice_error_t err = idevice_new(&self->device_, self->uuid_);
   if (err != IDEVICE_E_SUCCESS) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("idevice error: %d", err), (NULL));
-    return false;
+    return FALSE;
   }
 
   lockdownd_error_t lockdown_err =
       lockdownd_client_new_with_handshake(self->device_, &self->lockdown_, "GstAfcSrc");
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("lockdown error: %d", lockdown_err), (NULL));
-    return false;
+    return FALSE;
   }
 
   lockdown_err = lockdownd_start_service(self->lockdown_, "com.apple.afc", &self->afc_port_);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("lockdown error: %d", lockdown_err), (NULL));
-    return false;
+    return FALSE;
   }
 
   afc_error_t afc_err = afc_client_new(self->device_, self->afc_port_, &self->afc_);
   if (afc_err != 0) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("afc error: %d", afc_err), (NULL));
-    return false;
+    return FALSE;
   }
 
   // Try opening the file
   afc_err = afc_file_open(self->afc_, self->path_, AFC_FOPEN_RDONLY, &self->file_handle_);
   if (afc_err != 0) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("afc error: %d", afc_err), (NULL));
-    return false;
+    return FALSE;
   }
 
-  self->connected_ = true;
+  self->connected_ = TRUE;
 
-  return true;
+  return TRUE;
 }
 
 static gboolean gst_afc_src_stop(GstBaseSrc* src) {
-
-  return true;
+  return TRUE;
 }
 
 static GstFlowReturn gst_afc_src_create(GstBaseSrc* src, guint64 offset, guint length, GstBuffer** buffer) {
@@ -284,7 +283,7 @@ static GstFlowReturn gst_afc_src_create(GstBaseSrc* src, guint64 offset, guint l
     // Always read twice the requested size so the next read(s) hit the cache too.
     if (self->buffer_length_ != length * 2) {
       self->buffer_ = (char*)realloc(self->buffer_, length * 2);
-      self->buffer_is_valid_ = true;
+      self->buffer_is_valid_ = TRUE;
       self->buffer_length_ = length * 2;
     }
     self->buffer_offset_ = offset;
@@ -314,7 +313,7 @@ static GstFlowReturn gst_afc_src_create(GstBaseSrc* src, guint64 offset, guint l
 }
 
 static gboolean gst_afc_src_is_seekable(GstBaseSrc* src) {
-  return true;
+  return TRUE;
 }
 
 static gboolean gst_afc_src_get_size(GstBaseSrc* src, guint64* size) {
@@ -324,16 +323,16 @@ static gboolean gst_afc_src_get_size(GstBaseSrc* src, guint64* size) {
   afc_error_t err = afc_get_file_info(self->afc_, self->path_, &infolist);
   if (err != AFC_E_SUCCESS || !infolist) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("afc error: %d", err), (NULL));
-    return false;
+    return FALSE;
   }
 
-  bool found_size = false;
+  gboolean found_size = FALSE;
 
   char** p = infolist;
   while (*p != NULL) {
     if (g_strcmp0(*p, "st_size") == 0) {
       *size = strtoll(*(p+1), NULL, 0);
-      found_size = true;
+      found_size = TRUE;
     }
     free(*p); ++p;
     free(*p); ++p;
@@ -342,10 +341,10 @@ static gboolean gst_afc_src_get_size(GstBaseSrc* src, guint64* size) {
 
   if (!found_size) {
     *size = 0;
-    return false;
+    return FALSE;
   }
 
-  return true;
+  return TRUE;
 }
 
 #define PACKAGE "Clementine"

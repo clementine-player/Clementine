@@ -24,7 +24,13 @@
 #include <libimobiledevice/libimobiledevice.h>
 #include <libimobiledevice/lockdown.h>
 
-void afcsrc_register_static();
+#ifdef __cplusplus
+extern "C" {
+#endif
+  void afcsrc_register_static();
+#ifdef __cplusplus
+}
+#endif
 
 G_BEGIN_DECLS
 
@@ -49,7 +55,7 @@ struct _GstAfcSrc {
   char* uuid_;
   char* path_;
 
-  bool connected_;
+  gboolean connected_;
   idevice_t device_;
   lockdownd_client_t lockdown_;
   afc_client_t afc_;
@@ -58,7 +64,7 @@ struct _GstAfcSrc {
 
   uint64_t file_handle_;
 
-  bool buffer_is_valid_;
+  gboolean buffer_is_valid_;
   guint64 buffer_offset_;
   guint buffer_length_;
   char* buffer_;
