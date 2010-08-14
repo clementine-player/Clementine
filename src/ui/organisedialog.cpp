@@ -210,7 +210,7 @@ void OrganiseDialog::UpdatePreviews() {
   const bool format_valid = format_.IsValid();
 
   // Are we gonna enable the ok button?
-  bool ok = format_valid && storage && !filenames_.isEmpty();
+  bool ok = format_valid && !filenames_.isEmpty();
   if (capacity != 0 && total_size_ > free)
     ok = false;
 
@@ -277,8 +277,11 @@ void OrganiseDialog::accept() {
   const QModelIndex destination = ui_->destination->model()->index(
       ui_->destination->currentIndex(), 0);
   boost::shared_ptr<MusicStorage> storage =
-      destination.data(MusicStorage::Role_Storage)
+      destination.data(MusicStorage::Role_StorageForceConnect)
       .value<boost::shared_ptr<MusicStorage> >();
+
+  if (!storage)
+    return;
 
   // It deletes itself when it's finished.
   const bool copy = ui_->aftercopying->currentIndex() == 0;

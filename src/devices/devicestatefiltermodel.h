@@ -28,6 +28,8 @@ public:
   DeviceStateFilterModel(QObject* parent,
       DeviceManager::State state = DeviceManager::State_Remembered);
 
+  void setSourceModel(QAbstractItemModel* sourceModel);
+
 signals:
   void IsEmptyChanged(bool is_empty);
 

@@ -21,8 +21,6 @@ DeviceStateFilterModel::DeviceStateFilterModel(QObject *parent,
   : QSortFilterProxyModel(parent),
     state_(state)
 {
-  setDynamicSortFilter(true);
-
   connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(ProxyRowCountChanged()));
   connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(ProxyRowCountChanged()));
   connect(this, SIGNAL(modelReset()), SLOT(ProxyRowCountChanged()));
@@ -35,4 +33,11 @@ bool DeviceStateFilterModel::filterAcceptsRow(int row, const QModelIndex&) const
 
 void DeviceStateFilterModel::ProxyRowCountChanged() {
   emit IsEmptyChanged(rowCount() == 0);
+}
+
+void DeviceStateFilterModel::setSourceModel(QAbstractItemModel* sourceModel) {
+  QSortFilterProxyModel::setSourceModel(sourceModel);
+  setDynamicSortFilter(true);
+  setSortCaseSensitivity(Qt::CaseInsensitive);
+  sort(0);
 }

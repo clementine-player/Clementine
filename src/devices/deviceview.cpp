@@ -159,6 +159,7 @@ void DeviceView::SetDeviceManager(DeviceManager *manager) {
   sort_model_ = new QSortFilterProxyModel(this);
   sort_model_->setSourceModel(manager_);
   sort_model_->setDynamicSortFilter(true);
+  sort_model_->setSortCaseSensitivity(Qt::CaseInsensitive);
   sort_model_->sort(0);
 
   merged_model_ = new MergedProxyModel(this);
@@ -228,22 +229,7 @@ QModelIndex DeviceView::MapToLibrary(const QModelIndex& merged_model_index) cons
 
 void DeviceView::Connect() {
   QModelIndex device_idx = MapToDevice(menu_index_);
-  bool first_time = manager_->GetDatabaseId(device_idx.row()) == -1;
-
-  if (first_time) {
-    boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
-        QMessageBox::Information, tr("Connect device"),
-        tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
-        QMessageBox::Cancel, this));
-    QPushButton* connect =
-        dialog->addButton(tr("Connect device"), QMessageBox::AcceptRole);
-    dialog->exec();
-
-    if (dialog->clickedButton() != connect)
-      return;
-  }
-
-  manager_->Connect(device_idx.row());
+  manager_->data(device_idx, MusicStorage::Role_StorageForceConnect);
 }
 
 void DeviceView::DeviceConnected(int row) {

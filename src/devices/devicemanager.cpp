@@ -40,7 +40,9 @@
 #endif
 
 #include <QIcon>
+#include <QMessageBox>
 #include <QPainter>
+#include <QPushButton>
 #include <QSortFilterProxyModel>
 #include <QUrl>
 
@@ -247,8 +249,29 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       return info.task_percentage_;
 
     case MusicStorage::Role_Storage:
-      if (!info.device_)
+      if (!info.device_ && info.database_id_ != -1)
         const_cast<DeviceManager*>(this)->Connect(index.row());
+      if (!info.device_)
+        return QVariant();
+      return QVariant::fromValue<boost::shared_ptr<MusicStorage> >(info.device_);
+
+    case MusicStorage::Role_StorageForceConnect:
+      if (!info.device_) {
+        if (info.database_id_ == -1) {
+          boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+              QMessageBox::Information, tr("Connect device"),
+              tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
+              QMessageBox::Cancel));
+          QPushButton* connect =
+              dialog->addButton(tr("Connect device"), QMessageBox::AcceptRole);
+          dialog->exec();
+
+          if (dialog->clickedButton() != connect)
+            return QVariant();
+        }
+
+        const_cast<DeviceManager*>(this)->Connect(index.row());
+      }
       if (!info.device_)
         return QVariant();
       return QVariant::fromValue<boost::shared_ptr<MusicStorage> >(info.device_);

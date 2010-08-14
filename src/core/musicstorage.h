@@ -30,6 +30,7 @@ public:
 
   enum Role {
     Role_Storage = Qt::UserRole + 100,
+    Role_StorageForceConnect,
     Role_Capacity,
     Role_FreeSpace,
   };
