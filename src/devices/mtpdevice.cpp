@@ -89,6 +89,7 @@ bool MtpDevice::CopyToStorage(
   Song metadata_on_device;
   metadata_on_device.InitFromMTP(&track);
   metadata_on_device.set_directory_id(1);
+  metadata_on_device.set_filename("mtp://" + url_.host() + "/" + metadata_on_device.filename());
   songs_to_add_ << metadata_on_device;
 
   // Remove the original if requested
@@ -104,6 +105,8 @@ void MtpDevice::FinishCopy(bool success) {
   if (success) {
     if (!songs_to_add_.isEmpty())
       backend_->AddOrUpdateSongs(songs_to_add_);
+    if (!songs_to_remove_.isEmpty())
+      backend_->DeleteSongs(songs_to_remove_);
   }
 
   songs_to_add_.clear();
@@ -115,13 +118,31 @@ void MtpDevice::FinishCopy(bool success) {
 }
 
 void MtpDevice::StartDelete() {
-
+  StartCopy();
 }
 
 bool MtpDevice::DeleteFromStorage(const Song& metadata) {
-  return false;
+  // Extract the ID from the song's URL
+  QUrl url(metadata.filename());
+  QString filename = url.path();
+  filename.remove('/');
+
+  bool ok = false;
+  uint32_t id = filename.toUInt(&ok);
+  if (!ok)
+    return false;
+
+  // Remove the file
+  int ret = LIBMTP_Delete_Object(connection_->device(), id);
+  if (ret != 0)
+    return false;
+
+  // Remove it from our library model
+  songs_to_remove_ << metadata;
+
+  return true;
 }
 
 void MtpDevice::FinishDelete(bool success) {
-
+  FinishCopy(success);
 }

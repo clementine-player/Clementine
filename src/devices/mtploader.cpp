@@ -65,6 +65,7 @@ bool MtpLoader::TryLoad() {
     Song song;
     song.InitFromMTP(track);
     song.set_directory_id(1);
+    song.set_filename("mtp://" + hostname_ + "/" + song.filename());
     songs << song;
 
     tracks = tracks->next;
