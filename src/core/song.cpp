@@ -508,6 +508,45 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
       default:                   d->filetype_ = Type_Unknown;   break;
     }
   }
+
+  void Song::ToMTP(LIBMTP_track_t* track) const {
+    track->item_id = 0;
+    track->parent_id = 0;
+    track->storage_id = 0;
+
+    track->title = strdup(d->title_.toUtf8().constData());
+    track->artist = strdup(d->artist_.toUtf8().constData());
+    track->album = strdup(d->album_.toUtf8().constData());
+    track->composer = strdup(d->composer_.toUtf8().constData());
+    track->genre = strdup(d->genre_.toUtf8().constData());
+    track->title = strdup(d->title_.toUtf8().constData());
+    track->date = NULL;
+
+    track->tracknumber = d->track_;
+    track->duration = d->length_ * 1000;
+    track->samplerate = d->samplerate_;
+    track->nochannels = 0;
+    track->wavecodec = 0;
+    track->bitrate = d->bitrate_;
+    track->bitratetype = 0;
+    track->rating = 0;
+    track->usecount = 0;
+    track->filesize = d->filesize_;
+    track->modificationdate = d->mtime_;
+
+    switch (d->filetype_) {
+      case Type_Asf:       track->filetype = LIBMTP_FILETYPE_ASF;         break;
+      case Type_Mp4:       track->filetype = LIBMTP_FILETYPE_MP4;         break;
+      case Type_Mpeg:      track->filetype = LIBMTP_FILETYPE_MP3;         break;
+      case Type_Flac:
+      case Type_OggFlac:   track->filetype = LIBMTP_FILETYPE_FLAC;        break;
+      case Type_OggSpeex:
+      case Type_OggVorbis: track->filetype = LIBMTP_FILETYPE_OGG;         break;
+      case Type_Wav:       track->filetype = LIBMTP_FILETYPE_WAV;         break;
+      default:             track->filetype = LIBMTP_FILETYPE_UNDEF_AUDIO; break;
+    }
+  }
+
 #endif
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {

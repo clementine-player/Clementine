@@ -15,6 +15,7 @@
 */
 
 #include "connecteddevice.h"
+#include "mtpconnection.h"
 #include "mtploader.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
@@ -49,48 +50,15 @@ void MtpLoader::LoadDatabase() {
 }
 
 bool MtpLoader::TryLoad() {
-  // Parse the URL
-  QRegExp host_re("^usb-(\\d+)-(\\d+)$");
-
-  if (host_re.indexIn(hostname_) == -1) {
-    emit Error(tr("Invalid MTP device: %1").arg(hostname_));
-    return false;
-  }
-
-  const unsigned int bus_location = host_re.cap(1).toInt();
-  const unsigned int device_num = host_re.cap(2).toInt();
-
-  // Get a list of devices from libmtp and figure out which one is ours
-  int count = 0;
-  LIBMTP_raw_device_t* raw_devices = NULL;
-  LIBMTP_error_number_t err = LIBMTP_Detect_Raw_Devices(&raw_devices, &count);
-  if (err != LIBMTP_ERROR_NONE) {
+  MtpConnection dev(hostname_);
+  if (!dev.is_valid()) {
     emit Error(tr("Error connecting MTP device"));
-    qWarning() << "MTP error:" << err;
     return false;
   }
-
-  LIBMTP_raw_device_t* raw_device = NULL;
-  for (int i=0 ; i<count ; ++i) {
-    if (raw_devices[i].bus_location == bus_location &&
-        raw_devices[i].devnum == device_num) {
-      raw_device = &raw_devices[i];
-      break;
-    }
-  }
-
-  if (!raw_device) {
-    emit Error(tr("MTP device not found"));
-    free(raw_devices);
-    return false;
-  }
-
-  // Connect to the device
-  LIBMTP_mtpdevice_t* device = LIBMTP_Open_Raw_Device(raw_device);
 
   // Load the list of songs on the device
   SongList songs;
-  LIBMTP_track_t* tracks = LIBMTP_Get_Tracklisting_With_Callback(device, NULL, NULL);
+  LIBMTP_track_t* tracks = LIBMTP_Get_Tracklisting_With_Callback(dev.device(), NULL, NULL);
   while (tracks) {
     LIBMTP_track_t* track = tracks;
 
@@ -109,6 +77,5 @@ bool MtpLoader::TryLoad() {
   // Add the songs we've just loaded
   backend_->AddOrUpdateSongs(songs);
 
-  free(raw_devices);
   return true;
 }

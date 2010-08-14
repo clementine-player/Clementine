@@ -22,6 +22,9 @@
 #include <QMutex>
 #include <QWaitCondition>
 
+#include <boost/scoped_ptr.hpp>
+
+class MtpConnection;
 class MtpLoader;
 
 class MtpDevice : public ConnectedDevice {
@@ -31,14 +34,20 @@ public:
   Q_INVOKABLE MtpDevice(const QUrl& url, DeviceLister* lister,
                         const QString& unique_id, DeviceManager* manager,
                         int database_id, bool first_time);
+  ~MtpDevice();
 
   static QStringList url_schemes() { return QStringList() << "mtp" << "gphoto2"; }
 
   void Init();
 
+  void StartCopy();
   bool CopyToStorage(const QString& source, const QString& destination,
                      const Song& metadata, bool overwrite, bool remove_original);
+  void FinishCopy(bool success);
+
+  void StartDelete();
   bool DeleteFromStorage(const Song& metadata);
+  void FinishDelete(bool success);
 
 private slots:
   void LoadFinished();
@@ -49,8 +58,11 @@ private:
   QThread* loader_thread_;
   MtpLoader* loader_;
 
-  QWaitCondition db_wait_cond_;
-  QMutex db_mutex_;
+  QMutex db_busy_;
+  SongList songs_to_add_;
+  SongList songs_to_remove_;
+
+  boost::scoped_ptr<MtpConnection> connection_;
 };
 
 #endif // MTPDEVICE_H

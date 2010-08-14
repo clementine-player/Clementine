@@ -116,6 +116,7 @@ class Song {
 
 #ifdef HAVE_LIBMTP
   void InitFromMTP(const LIBMTP_track_t* track);
+  void ToMTP(LIBMTP_track_t* track) const;
 #endif
 
   static QString Decode(const TagLib::String& tag, const QTextCodec* codec);

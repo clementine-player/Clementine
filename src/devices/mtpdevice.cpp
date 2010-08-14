@@ -15,12 +15,15 @@
 */
 
 #include "devicemanager.h"
+#include "mtpconnection.h"
 #include "mtpdevice.h"
 #include "mtploader.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
 #include <libmtp.h>
+
+#include <QFile>
 
 bool MtpDevice::sInitialisedLibMTP = false;
 
@@ -35,6 +38,9 @@ MtpDevice::MtpDevice(const QUrl& url, DeviceLister* lister,
     LIBMTP_Init();
     sInitialisedLibMTP = true;
   }
+}
+
+MtpDevice::~MtpDevice() {
 }
 
 void MtpDevice::Init() {
@@ -53,20 +59,69 @@ void MtpDevice::Init() {
 }
 
 void MtpDevice::LoadFinished() {
-  QMutexLocker l(&db_mutex_);
-  db_wait_cond_.wakeAll();
-
   loader_->deleteLater();
   loader_ = NULL;
 }
 
+void MtpDevice::StartCopy() {
+  // Ensure only one "organise files" can be active at any one time
+  db_busy_.lock();
+
+  // Connect to the device
+  connection_.reset(new MtpConnection(url_.host()));
+}
+
 bool MtpDevice::CopyToStorage(
-    const QString& source, const QString& destination, const Song& metadata,
-    bool overwrite, bool remove_original)
+    const QString& source, const QString&, const Song& metadata,
+    bool, bool remove_original)
 {
-  return false;
+  // Convert metadata
+  LIBMTP_track_t track;
+  metadata.ToMTP(&track);
+
+  // Send the file
+  int ret = LIBMTP_Send_Track_From_File(
+      connection_->device(), source.toUtf8().constData(), &track, NULL, NULL);
+  if (ret != 0)
+    return false;
+
+  // Add it to our LibraryModel
+  Song metadata_on_device;
+  metadata_on_device.InitFromMTP(&track);
+  metadata_on_device.set_directory_id(1);
+  songs_to_add_ << metadata_on_device;
+
+  // Remove the original if requested
+  if (remove_original) {
+    if (!QFile::remove(source))
+      return false;
+  }
+
+  return true;
+}
+
+void MtpDevice::FinishCopy(bool success) {
+  if (success) {
+    if (!songs_to_add_.isEmpty())
+      backend_->AddOrUpdateSongs(songs_to_add_);
+  }
+
+  songs_to_add_.clear();
+  songs_to_remove_.clear();
+
+  connection_.reset();
+
+  db_busy_.unlock();
+}
+
+void MtpDevice::StartDelete() {
+
 }
 
 bool MtpDevice::DeleteFromStorage(const Song& metadata) {
   return false;
+}
+
+void MtpDevice::FinishDelete(bool success) {
+
 }

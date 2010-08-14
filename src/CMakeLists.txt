@@ -525,9 +525,11 @@ if(LIBMTP_FOUND)
   set(HAVE_LIBMTP ON)
   include_directories(${LIBMTP_INCLUDE_DIRS})
 
+  list(APPEND SOURCES devices/mtpconnection.cpp)
   list(APPEND SOURCES devices/mtpdevice.cpp)
   list(APPEND SOURCES devices/mtploader.cpp)
 
+  list(APPEND SOURCES devices/mtpconnection.h)
   list(APPEND HEADERS devices/mtpdevice.h)
   list(APPEND HEADERS devices/mtploader.h)
 endif(LIBMTP_FOUND)
