@@ -628,7 +628,7 @@ void DeviceManager::UnmountAsync(int row) {
 
 void DeviceManager::Unmount(int row) {
   DeviceInfo& info = devices_[row];
-  if (info.database_id_ == -1)
+  if (info.database_id_ != -1 && !info.device_)
     return;
 
   if (info.device_)
