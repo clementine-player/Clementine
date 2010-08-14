@@ -28,6 +28,9 @@
 #ifdef Q_OS_DARWIN
 #  include "macdevicelister.h"
 #endif
+#ifdef Q_OS_WIN32
+#  include "wpdlister.h"
+#endif
 #ifdef HAVE_LIBGPOD
 #  include "gpoddevice.h"
 #endif
@@ -165,6 +168,9 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 #endif
 #ifdef Q_OS_DARWIN
   AddLister(new MacDeviceLister);
+#endif
+#ifdef Q_OS_WIN32
+  AddLister(new WpdLister);
 #endif
 #ifdef HAVE_IMOBILEDEVICE
   AddLister(new iLister);

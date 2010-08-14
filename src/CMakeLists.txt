@@ -534,6 +534,12 @@ if(LIBMTP_FOUND)
   list(APPEND HEADERS devices/mtploader.h)
 endif(LIBMTP_FOUND)
 
+# Windows portable device lister
+IF(WIN32)
+  list(APPEND SOURCES devices/wpdlister.cpp)
+  list(APPEND HEADERS devices/wpdlister.h)
+ENDIF(WIN32)
+
 # Mac specific startup stuff
 if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
@@ -561,10 +567,14 @@ list(APPEND OTHER_SOURCES
   devices/ilister.h
   devices/imobiledeviceconnection.cpp
   devices/imobiledeviceconnection.h
+  devices/mtpconnection.cpp
+  devices/mtpconnection.h
   devices/mtpdevice.cpp
   devices/mtpdevice.h
   devices/mtploader.cpp
   devices/mtploader.h
+  devices/wpdlister.cpp
+  devices/wpdlister.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   widgets/osd_mac.mm
@@ -661,9 +671,11 @@ if(HAVE_STATIC_SQLITE)
   target_link_libraries(clementine_lib qsqlite)
 endif(HAVE_STATIC_SQLITE)
 
-# Link against zlib on windows
 if (WIN32)
   target_link_libraries(clementine_lib ${ZLIB_LIBRARIES})
+  target_link_libraries(clementine_lib ${PORTABLEDEVICEAPI_LIBRARIES})
+  target_link_libraries(clementine_lib ${PORTABLEDEVICEGUIDS_LIBRARIES})
+  target_link_libraries(clementine_lib ${PORTABLEDEVICETYPES_LIBRARIES})
 endif (WIN32)
 
 add_dependencies(clementine_lib qtsingleapplication)
