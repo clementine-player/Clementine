@@ -24,6 +24,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "core/song.h"
+
 class FilesystemMusicStorage;
 class MusicStorage;
 class TaskManager;
@@ -57,7 +59,9 @@ class FileView : public QWidget {
   void ChangeFilePath(const QString& new_path);
   void ItemActivated(const QModelIndex& index);
   void ItemDoubleClick(const QModelIndex& index);
+
   void Delete(const QStringList& filenames);
+  void DeleteFinished(const SongList& songs_with_errors);
 
  private:
   void ChangeFilePathWithoutUndo(const QString& new_path);

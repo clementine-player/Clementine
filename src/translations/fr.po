@@ -45,15 +45,15 @@ msgstr "%1 sélectionné de"
 msgid "%1 tracks"
 msgstr "%1 pistes"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n échoué"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n terminé"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n manquant"
 
@@ -608,7 +608,7 @@ msgstr "Modifier la description de la piste..."
 msgid "Edit..."
 msgstr "Éditer..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "Éditer %n pistes"
 
@@ -641,6 +641,12 @@ msgstr "Égaliseur"
 
 msgid "Error"
 msgstr "Erreur"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -927,8 +933,8 @@ msgstr "Nom d'utilisateur"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Laisser vide pour les paramètres par défaut. Exemples : \"/dev/dsp\", "
-"\"front\", etc."
+"Laisser vide pour les paramètres par défaut. Exemples : \"/dev/dsp\", \"front"
+"\", etc."
 
 msgid "Length"
 msgstr "Durée"
@@ -1582,6 +1588,16 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 
 msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
+
+msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 
@@ -1763,9 +1779,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
@@ -1792,7 +1807,7 @@ msgstr "Zéro"
 msgid "[click to edit]"
 msgstr "[cliquer pour modifier]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr ""
 
@@ -1812,7 +1827,7 @@ msgstr "déplacer les chansons"
 msgid "options"
 msgstr "options"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -1829,11 +1844,9 @@ msgstr "piste %1"
 #~ msgid "Show section"
 #~ msgstr "Montrer la colonne"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "Voisinnage de %1"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "Bibliothèque de %1"
 
@@ -1862,8 +1875,8 @@ msgstr "piste %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "N'oubliez pas que vous devez être <span style=\" font-weight:600;\">abonné "
-#~ "(payant)</span> pour écouter la radio Last.fm avec Clementine."
+#~ "N'oubliez pas que vous devez être <span style=\" font-weight:600;"
+#~ "\">abonné (payant)</span> pour écouter la radio Last.fm avec Clementine."
 
 #~ msgid "Fadeout"
 #~ msgstr "Fondu final"

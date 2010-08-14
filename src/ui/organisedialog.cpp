@@ -14,11 +14,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "iconloader.h"
 #include "organisedialog.h"
+#include "organiseerrordialog.h"
 #include "ui_organisedialog.h"
 #include "core/musicstorage.h"
 #include "core/organise.h"
-#include "ui/iconloader.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -284,7 +285,17 @@ void OrganiseDialog::accept() {
   Organise* organise = new Organise(
       task_manager_, storage, format_, copy, ui_->overwrite->isChecked(),
       filenames_, ui_->eject_after->isChecked());
+  connect(organise, SIGNAL(Finished(QStringList)), SLOT(OrganiseFinished(QStringList)));
   organise->Start();
 
   QDialog::accept();
+}
+
+void OrganiseDialog::OrganiseFinished(const QStringList& files_with_errors) {
+  if (files_with_errors.isEmpty())
+    return;
+
+  OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
+  dialog->Show(OrganiseErrorDialog::Type_Copy, files_with_errors);
+  // It deletes itself when the user closes it
 }

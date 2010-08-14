@@ -65,6 +65,8 @@ private slots:
   void LoadPreviewSongs(const QString& filename);
   void UpdatePreviews();
 
+  void OrganiseFinished(const QStringList& files_with_errors);
+
 private:
   Ui_OrganiseDialog* ui_;
   TaskManager* task_manager_;

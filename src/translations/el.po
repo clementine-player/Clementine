@@ -46,15 +46,15 @@ msgstr "%1 επιλεγμένα από"
 msgid "%1 tracks"
 msgstr "%1 κομμάτια"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n απομένει"
 
@@ -91,8 +91,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Λέξεις που αρχίζουν με %, για παράδειγμα:%καλλιτέχνης %άλμπουμ "
-"%τίτλος</p>\n"
+"<p>Λέξεις που αρχίζουν με %, για παράδειγμα:%καλλιτέχνης %άλμπουμ %τίτλος</"
+"p>\n"
 "\n"
 "<p>Αν κλείσεις ένα κείμενο που περιέχει λέξη με % σε άγκιστρα  ({}), το "
 "τμήμα αυτό δεν θα είναι ορατό η λέξη λείπει</p>"
@@ -221,8 +221,7 @@ msgstr ""
 "Προέκυψε σφάλμα στην αντιγραφή της βάσης δεδομένων iTunes από την συσκευή"
 
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr ""
-"Προέκυψε σφάλμα στην αντιγραφή της βάσης δεδομένων iTunes στην συσκευή"
+msgstr "Προέκυψε σφάλμα στην αντιγραφή της βάσης δεδομένων iTunes στην συσκευή"
 
 msgid "An error occurred loading the iTunes database"
 msgstr "Προέκυψε σφάλμα στην φόρτωση της βάσης δεδομένων iTunes"
@@ -617,7 +616,7 @@ msgstr "Τροποποίηση πληροφοριών κομματιού..."
 msgid "Edit..."
 msgstr "Επεξεργασία..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "Τροποποίηση %n κομματιών"
 
@@ -650,6 +649,12 @@ msgstr "Ισοσταθμιστής"
 
 msgid "Error"
 msgstr "Σφάλμα"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -974,8 +979,7 @@ msgid "Loading tracks"
 msgstr "Φόρτωση κομματιών"
 
 msgid "Loads files/URLs, replacing current playlist"
-msgstr ""
-"Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
+msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
 msgid "Love"
 msgstr "Αγάπη"
@@ -1047,8 +1051,7 @@ msgid "Music"
 msgstr "Μουσική"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Μουσική (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Μουσική (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Μουσική βιβλιοθήκη"
@@ -1594,6 +1597,16 @@ msgstr ""
 "Υπήρξε κάποιο σφάλμα κατά την μεταφορά των μετα-δεδομένων από το Magnatune"
 
 msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
+
+msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 "Αυτά τα αρχεία θα διαγραφούν από τον δίσκο, είστε σίγουροι πως θέλετε να "
@@ -1607,8 +1620,7 @@ msgstr ""
 "συνεχίσετε;"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
-"Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας"
+msgstr "Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας"
 
 msgid "Third level"
 msgstr "Τρίτο επίπεδο"
@@ -1782,9 +1794,8 @@ msgstr ""
 "αγορά μιας συνδρομής αφαιρεί το μήνυμα από το τέλος κάθε κομματιού."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Μπορείτε να κάνετε \"scroble\" δωρεάν, αλλά μόνο <span style=\" font-"
 "weight:600;\">οι συνδρομητές επί πληρωμή</span> μπορούν να έχουν ροή από το "
@@ -1818,7 +1829,7 @@ msgstr "Zero"
 msgid "[click to edit]"
 msgstr "[κλικ για τροποποίηση]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
@@ -1838,7 +1849,7 @@ msgstr "μετακίνηση τραγουδιών"
 msgid "options"
 msgstr "επιλογές"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 
@@ -1849,11 +1860,9 @@ msgstr "διακοπή"
 msgid "track %1"
 msgstr "κομμάτι %1"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1's Συνοικιακά"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1's Βιβλιοθήκη"
 
@@ -1885,8 +1894,8 @@ msgstr "κομμάτι %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Σημείωσε πως πρέπει να είσαι <span style=\" font-"
-#~ "weight:600;\">συνδρομητής</span> για να ακούσεις Last.fm από το Clementine."
+#~ "Σημείωσε πως πρέπει να είσαι <span style=\" font-weight:600;"
+#~ "\">συνδρομητής</span> για να ακούσεις Last.fm από το Clementine."
 
 #~ msgid "Fadeout"
 #~ msgstr "Ομαλό σβήσιμο"

@@ -45,15 +45,15 @@ msgstr "%1 selezionate di"
 msgid "%1 tracks"
 msgstr "%1 tracce"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n non riusciti"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n completati"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n rimanenti"
 
@@ -92,8 +92,8 @@ msgid ""
 msgstr ""
 "<p>Le variabili iniziano con %, ad esempio: %artist %album %title </p>\n"
 "\n"
-"<p>Se racchiudi sezioni di testo che contengono una variabile tra parentesi "
-"\n"
+"<p>Se racchiudi sezioni di testo che contengono una variabile tra "
+"parentesi \n"
 "graffe, queste sezioni saranno nascoste se la variabile non contiene alcun \n"
 "valore.</p>"
 
@@ -619,7 +619,7 @@ msgstr "Modifica informazioni traccia..."
 msgid "Edit..."
 msgstr "Modifica..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "Modifica di %n tracce"
 
@@ -652,6 +652,12 @@ msgstr "Equalizzatore"
 
 msgid "Error"
 msgstr "Errore"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -841,8 +847,8 @@ msgstr "Ignora \"The\" nei nomi degli artisti"
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
-"Immagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-"*.tiff)"
+"Immagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+"tiff)"
 
 msgid "Include album art in the notification"
 msgstr "Includi copertina nella notifica"
@@ -930,8 +936,7 @@ msgid "Last.fm Tag Radio: %1"
 msgstr "Radio del tag di Last.fm: %1"
 
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr ""
-"Al momento Last.fm non è disponibile, prova ancora tra qualche minuto"
+msgstr "Al momento Last.fm non è disponibile, prova ancora tra qualche minuto"
 
 msgid "Last.fm password"
 msgstr "Password Last.fm"
@@ -1053,8 +1058,7 @@ msgid "Music"
 msgstr "Musica"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Musica (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Musica (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Raccolta musicale"
@@ -1601,6 +1605,16 @@ msgstr ""
 "Magnatune"
 
 msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
+
+msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 "Questi file saranno eliminati dal disco, sei sicuro di voler continuare?"
@@ -1789,9 +1803,8 @@ msgstr ""
 "traccia."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Puoi inviare informazioni sulle tracce gratuitamente, ma solo gli <span "
 "style=\" font-weight:600;\">abbonati a pagamento</span> possono ascoltare le "
@@ -1802,9 +1815,9 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"Devi aprire le preferenze di sistema e attivare \"<span style=\" font-"
-"style:italic;\">Abilita l'accesso per i dispositivi di assistenza</span>\" "
-"per utilizzare le scorciatoie globali in Clementine."
+"Devi aprire le preferenze di sistema e attivare \"<span style=\" font-style:"
+"italic;\">Abilita l'accesso per i dispositivi di assistenza</span>\" per "
+"utilizzare le scorciatoie globali in Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dovrai riavviare Clementine se cambi la lingua."
@@ -1824,7 +1837,7 @@ msgstr "Zero"
 msgid "[click to edit]"
 msgstr "[clic per modificare]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "aggiungi %n brani"
 
@@ -1844,7 +1857,7 @@ msgstr "sposta brani"
 msgid "options"
 msgstr "opzioni"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "rimuovi %n brani"
 
@@ -1901,8 +1914,9 @@ msgstr "traccia %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Nota che è necessario essere un <span style=\" font-weight:600;\">abbonato a "
-#~ "pagamento</span> per ascoltare una radio Last.fm da Clementine."
+#~ "Nota che è necessario essere un <span style=\" font-weight:600;"
+#~ "\">abbonato a pagamento</span> per ascoltare una radio Last.fm da "
+#~ "Clementine."
 
 #~ msgid "Configure global shortcuts..."
 #~ msgstr "Configura le scorciatoie globali..."

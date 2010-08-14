@@ -75,6 +75,8 @@ private slots:
   void DeviceConnected(int row);
   void DeviceDisconnected(int row);
 
+  void DeleteFinished(const SongList& songs_with_errors);
+
 private:
   QModelIndex MapToDevice(const QModelIndex& merged_model_index) const;
   QModelIndex MapToLibrary(const QModelIndex& merged_model_index) const;

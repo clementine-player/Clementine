@@ -77,6 +77,8 @@ class LibraryView : public AutoExpandingTreeView {
   void ShowInVarious();
   void NoShowInVarious();
 
+  void DeleteFinished(const SongList& songs_with_errors);
+
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);

@@ -136,6 +136,7 @@ set(SOURCES
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/organisedialog.cpp
+  ui/organiseerrordialog.cpp
   ui/qtsystemtrayicon.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
@@ -253,6 +254,7 @@ set(HEADERS
   ui/globalshortcutsconfig.h
   ui/mainwindow.h
   ui/organisedialog.h
+  ui/organiseerrordialog.h
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/systemtrayicon.h
@@ -304,6 +306,7 @@ set(UI
   ui/globalshortcutsconfig.ui
   ui/mainwindow.ui
   ui/organisedialog.ui
+  ui/organiseerrordialog.ui
   ui/settingsdialog.ui
 
   widgets/equalizerslider.ui

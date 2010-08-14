@@ -38,6 +38,9 @@ public:
   void Start(const SongList& songs);
   void Start(const QStringList& filenames);
 
+signals:
+  void Finished(const SongList& songs_with_errors);
+
 private slots:
   void ProcessSomeFiles();
 

@@ -24,6 +24,7 @@
 #include "library/librarymodel.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
+#include "ui/organiseerrordialog.h"
 
 #include <QContextMenuEvent>
 #include <QMenu>
@@ -349,6 +350,7 @@ void DeviceView::Delete() {
       device_index.data(MusicStorage::Role_Storage).value<boost::shared_ptr<MusicStorage> >();
 
   DeleteFiles* delete_files = new DeleteFiles(manager_->task_manager(), storage);
+  connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
   delete_files->Start(GetSelectedSongs());
 }
 
@@ -367,4 +369,13 @@ void DeviceView::Organise() {
 void DeviceView::Unmount() {
   QModelIndex device_idx = MapToDevice(menu_index_);
   manager_->Unmount(device_idx.row());
+}
+
+void DeviceView::DeleteFinished(const SongList& songs_with_errors) {
+  if (songs_with_errors.isEmpty())
+    return;
+
+  OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
+  dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
+  // It deletes itself when the user closes it
 }

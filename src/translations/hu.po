@@ -43,15 +43,15 @@ msgstr "%1 kiválasztva"
 msgid "%1 tracks"
 msgstr "%1 szám"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n meghiúsult"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n befejezve"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
@@ -611,7 +611,7 @@ msgstr "Száminformáció szerkesztése..."
 msgid "Edit..."
 msgstr "Szerkesztés..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "%n szám szerkesztése"
 
@@ -644,6 +644,12 @@ msgstr "Hangszínszabályzó"
 
 msgid "Error"
 msgstr "Hiba"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -800,8 +806,7 @@ msgid "Hardware information"
 msgstr "Hardverjellemzők"
 
 msgid "Hardware information is only available while the device is connected."
-msgstr ""
-"A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők meg."
+msgstr "A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők meg."
 
 msgid "Help"
 msgstr "Súgó"
@@ -1585,6 +1590,16 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Hiba lépett fel az adatok Magnatuneról való letöltése közben"
 
 msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
+
+msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 "Ezek a fájlok törölve lesznek a lemezről. Biztos benne, hogy folytatja?"
@@ -1768,9 +1783,8 @@ msgstr ""
 "vásárlása esetén a számvégi üzenetek eltávolításra kerülnek."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Scrobble funkcióval ingyenesen figyeltetheted a számokat, de csak <span "
 "style=\" font-weight:600;\">előfizetők</span> hallgathatnak Last.fm rádiót a "
@@ -1781,9 +1795,9 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"A Rendszerbeállításokban engedélyeznie kell a \"<span style=\" font-"
-"style:italic;\">Hozzáférés engedélyezése kisegítő eszközökhöz</span>\" "
-"opciót a globális billentyűparancsok használatához."
+"A Rendszerbeállításokban engedélyeznie kell a \"<span style=\" font-style:"
+"italic;\">Hozzáférés engedélyezése kisegítő eszközökhöz</span>\" opciót a "
+"globális billentyűparancsok használatához."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "A nyelv megváltoztatásához újra kell indítania a Clementinet."
@@ -1803,7 +1817,7 @@ msgstr "Nulla"
 msgid "[click to edit]"
 msgstr "[kattintson a szerkesztéshez]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n szám felvétele"
 
@@ -1823,7 +1837,7 @@ msgstr "számok mozgatása"
 msgid "options"
 msgstr "beállítások"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n szám eltávolítása"
 

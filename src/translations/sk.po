@@ -45,15 +45,15 @@ msgstr "%1 vybratých z"
 msgid "%1 tracks"
 msgstr "%1 skladieb"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n dokončených"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n zostávajúcich"
 
@@ -612,7 +612,7 @@ msgstr "Upravť informácie o skladbe..."
 msgid "Edit..."
 msgstr "Upraviť..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "Upravovanie %n skladieb"
 
@@ -645,6 +645,12 @@ msgstr "Ekvalizér"
 
 msgid "Error"
 msgstr "Chyba"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -1583,6 +1589,16 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Nastal problém so získavaním metadát z Magnatune"
 
 msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
+
+msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 "Tieto súbory budú odstránené z disku, ste si istý, že chcete pokračovať?"
@@ -1767,13 +1783,11 @@ msgstr ""
 "správy na konci každej skladby."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
-"Môžte skrobblovať skladby zadarmo, ale len <span style=\" font-"
-"weight:600;\">platiaci predplatitelia</span> môžu streamovať Last.fm rádio z "
-"Clementine."
+"Môžte skrobblovať skladby zadarmo, ale len <span style=\" font-weight:600;"
+"\">platiaci predplatitelia</span> môžu streamovať Last.fm rádio z Clementine."
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -1802,7 +1816,7 @@ msgstr "Vynulovať"
 msgid "[click to edit]"
 msgstr "[kliknite pre úpravu]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
@@ -1822,7 +1836,7 @@ msgstr "presunúť piesne"
 msgid "options"
 msgstr "možnosti"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 
@@ -1839,11 +1853,9 @@ msgstr "skladba %1"
 #~ msgid "Show section"
 #~ msgstr "Zobraziť stĺpec"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1 susedia"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1 zbierka"
 
@@ -1926,8 +1938,8 @@ msgstr "skladba %1"
 #~ msgstr "Pôvodný kľúč"
 
 #~ msgid ""
-#~ "You are about to reset to global shortcuts default values. Are you sure you "
-#~ "want to continue?"
+#~ "You are about to reset to global shortcuts default values. Are you sure "
+#~ "you want to continue?"
 #~ msgstr ""
 #~ "Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete "
 #~ "pokračovať?"

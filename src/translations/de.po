@@ -45,15 +45,15 @@ msgstr "%1 ausgewählt von"
 msgid "%1 tracks"
 msgstr "%1 Stücke"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -373,8 +373,7 @@ msgid "Closing this window will cancel the download."
 msgstr "Der Download wird abgebrochen wenn Sie das Fenster schließen"
 
 msgid "Closing this window will stop searching for album covers."
-msgstr ""
-"Die Suche nach Covern wird abgebrochen wenn Sie das Fenster schließen"
+msgstr "Die Suche nach Covern wird abgebrochen wenn Sie das Fenster schließen"
 
 msgid "Club"
 msgstr "Club"
@@ -615,7 +614,7 @@ msgstr "Metadaten bearbeiten..."
 msgid "Edit..."
 msgstr "Bearbeiten..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "%n Stücke bearbeiten"
 
@@ -648,6 +647,12 @@ msgstr "Equalizer"
 
 msgid "Error"
 msgstr "Fehler"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -1584,11 +1589,20 @@ msgstr "Ordner %1 ist ungültig"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
-"Die Wiedergabeliste \"%1\" ist leer oder konnte nicht geladen werden."
+msgstr "Die Wiedergabeliste \"%1\" ist leer oder konnte nicht geladen werden."
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Beim Holen der Metadaten von Magnatune ist ein Fehler aufgetreten"
+
+msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
@@ -1776,9 +1790,8 @@ msgstr ""
 "kaufen."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Sie können die Musik kostenlos 'scrobblen' aber nur <span style=\" font-"
 "weight:600;\">zahlende Last.fm-Kunden</span> können Last.fm-Radio mit "
@@ -1790,8 +1803,8 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Öffnen Sie die Systemeinstellungen und aktivieren Sie \"<span style=\" font-"
-"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in "
-"\"Bedienhilfen\" um Clementines Tastenkürzel zu benutzen."
+"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in \"Bedienhilfen"
+"\" um Clementines Tastenkürzel zu benutzen."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Sie müssen Clementine nach dem Ändern der Sprache neustarten."
@@ -1811,7 +1824,7 @@ msgstr "Null"
 msgid "[click to edit]"
 msgstr "[zum Bearbeiten klicken]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -1831,7 +1844,7 @@ msgstr "Stücke verschieben"
 msgid "options"
 msgstr "Einstellungen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 
@@ -1842,7 +1855,6 @@ msgstr "Anhalten"
 msgid "track %1"
 msgstr "Stück %1"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1s Musiksammlung"
 
@@ -1886,8 +1898,8 @@ msgstr "Stück %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Sie müssen zahlender Last.fm Kunde sein um Last.fm über Clementine hören zu "
-#~ "können"
+#~ "Sie müssen zahlender Last.fm Kunde sein um Last.fm über Clementine hören "
+#~ "zu können"
 
 #~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
 #~ msgstr "Musik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"

@@ -25,6 +25,7 @@
 #include "devices/devicestatefiltermodel.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
+#include "ui/organiseerrordialog.h"
 
 #include <QPainter>
 #include <QContextMenuEvent>
@@ -305,6 +306,7 @@ void LibraryView::Delete() {
       .value<boost::shared_ptr<MusicStorage> >();
 
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
+  connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
   delete_files->Start(songs);
 }
 
@@ -329,4 +331,13 @@ void LibraryView::keyReleaseEvent(QKeyEvent* e) {
   }
 
   QTreeView::keyReleaseEvent(e);
+}
+
+void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
+  if (songs_with_errors.isEmpty())
+    return;
+
+  OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
+  dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
+  // It deletes itself when the user closes it
 }

@@ -19,6 +19,7 @@
 #include "core/deletefiles.h"
 #include "core/filesystemmusicstorage.h"
 #include "ui/iconloader.h"
+#include "ui/organiseerrordialog.h"
 
 #include <QFileSystemModel>
 #include <QMessageBox>
@@ -167,5 +168,15 @@ void FileView::Delete(const QStringList& filenames) {
     return;
 
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage_);
+  connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
   delete_files->Start(filenames);
+}
+
+void FileView::DeleteFinished(const SongList& songs_with_errors) {
+  if (songs_with_errors.isEmpty())
+    return;
+
+  OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
+  dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
+  // It deletes itself when the user closes it
 }

@@ -45,15 +45,15 @@ msgstr ""
 msgid "%1 tracks"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr ""
 
@@ -604,7 +604,7 @@ msgstr "Upravit informaci o skladbách..."
 msgid "Edit..."
 msgstr "Upravit..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "Úprava %n stop"
 
@@ -620,8 +620,8 @@ msgstr ""
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Zadejte <b>umělce</b> nebo <b>značku</b> pro spuštění poslouchání rádia "
-"Last.fm."
+"Zadejte <b>umělce</b> nebo <b>značku</b> pro spuštění poslouchání rádia Last."
+"fm."
 
 msgid "Enter search terms here"
 msgstr "Zde zadejte klíčová slova"
@@ -637,6 +637,12 @@ msgstr "Ekvalizér"
 
 msgid "Error"
 msgstr "Chyba"
+
+msgid "Error copying songs"
+msgstr ""
+
+msgid "Error deleting songs"
+msgstr ""
 
 #, qt-format
 msgid "Error loading %1"
@@ -1572,6 +1578,16 @@ msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 
 msgid ""
+"There were problems copying some songs.  The following files could not be "
+"copied:"
+msgstr ""
+
+msgid ""
+"There were problems deleting some songs.  The following files could not be "
+"deleted:"
+msgstr ""
+
+msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 
@@ -1581,8 +1597,7 @@ msgid ""
 msgstr ""
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
-"Tyto složky budou prohledány a nalezená hudba bude přidána do knihovny"
+msgstr "Tyto složky budou prohledány a nalezená hudba bude přidána do knihovny"
 
 msgid "Third level"
 msgstr "Třetí úroveň"
@@ -1750,9 +1765,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
@@ -1779,7 +1793,7 @@ msgstr "Vynulovat"
 msgid "[click to edit]"
 msgstr "[pro úpravy klikněte]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "Přidej %n skladby"
 
@@ -1799,7 +1813,7 @@ msgstr "Přesuň skladby"
 msgid "options"
 msgstr "Možnosti"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "Odeber %n skladeb"
 
@@ -1816,11 +1830,9 @@ msgstr "stopa %1"
 #~ msgid "Show section"
 #~ msgstr "Zobrazit skeci"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "Sousedství uživatele %1"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "Knihovna uživatele %1"
 

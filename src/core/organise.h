@@ -39,6 +39,9 @@ public:
 
   void Start();
 
+signals:
+  void Finished(const QStringList& files_with_errors);
+
 private slots:
   void ProcessSomeFiles();
 
