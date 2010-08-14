@@ -661,6 +661,11 @@ if(HAVE_STATIC_SQLITE)
   target_link_libraries(clementine_lib qsqlite)
 endif(HAVE_STATIC_SQLITE)
 
+# Link against zlib on windows
+if (WIN32)
+  target_link_libraries(clementine_lib ${ZLIB_LIBRARIES})
+endif (WIN32)
+
 add_dependencies(clementine_lib qtsingleapplication)
 
 
