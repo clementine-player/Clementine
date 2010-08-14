@@ -22,50 +22,43 @@
 #include <QtDebug>
 
 iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)
-    : device_(NULL), lockdown_(NULL), afc_(NULL), afc_port_(0), broken_(false) {
+    : device_(NULL), afc_(NULL), afc_port_(0) {
   idevice_error_t err = idevice_new(&device_, uuid.toUtf8().constData());
   if (err != IDEVICE_E_SUCCESS) {
     qWarning() << "idevice error:" << err;
     return;
   }
 
+  lockdownd_client_t lockdown;
+
   const char* label = QCoreApplication::applicationName().toUtf8().constData();
   lockdownd_error_t lockdown_err =
-      lockdownd_client_new_with_handshake(device_, &lockdown_, label);
+      lockdownd_client_new_with_handshake(device_, &lockdown, label);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     qWarning() << "lockdown error:" << lockdown_err;
     return;
   }
 
-  lockdown_err = lockdownd_start_service(lockdown_, "com.apple.afc", &afc_port_);
+  lockdown_err = lockdownd_start_service(lockdown, "com.apple.afc", &afc_port_);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     qWarning() << "lockdown error:" << lockdown_err;
+    lockdownd_client_free(lockdown);
     return;
   }
 
   afc_error_t afc_err = afc_client_new(device_, afc_port_, &afc_);
   if (afc_err != 0) {
     qWarning() << "afc error:" << afc_err;
+    lockdownd_client_free(lockdown);
     return;
   }
+
+  lockdownd_client_free(lockdown);
 }
 
 iMobileDeviceConnection::~iMobileDeviceConnection() {
   if (afc_) {
-    // Do a test to see if we can still talk to the device.  If not, it's
-    // probably not safe to free the lockdownd client.
-    char* model = NULL;
-    afc_error_t err = afc_get_device_info_key(afc_, "Model", &model);
-    free(model);
-
-    if (err != AFC_E_SUCCESS)
-      broken_ = true;
-
     afc_client_free(afc_);
-  }
-
-  if (lockdown_ && !broken_) {
-    lockdownd_client_free(lockdown_);
   }
   if (device_) {
     idevice_free(device_);
@@ -80,9 +73,20 @@ T GetPListValue(plist_t node, F f) {
 }
 
 QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QString& domain) {
+  lockdownd_client_t lockdown;
+  const char* label = QCoreApplication::applicationName().toUtf8().constData();
+
+  lockdownd_error_t lockdown_err =
+      lockdownd_client_new_with_handshake(device_, &lockdown, label);
+  if (lockdown_err != LOCKDOWN_E_SUCCESS) {
+    qWarning() << "lockdown error:" << lockdown_err;
+    return QVariant();
+  }
+
   plist_t node = NULL;
   const char* d = domain.isEmpty() ? NULL : domain.toUtf8().constData();
-  lockdownd_get_value(lockdown_, d, property.toUtf8().constData(), &node);
+  lockdownd_get_value(lockdown, d, property.toUtf8().constData(), &node);
+  lockdownd_client_free(lockdown);
 
   if (!node)
     return QVariant();

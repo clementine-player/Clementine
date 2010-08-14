@@ -36,7 +36,7 @@ public:
               TaskManager* task_manager, boost::shared_ptr<ConnectedDevice> device);
   ~AfcTransfer();
 
-  bool CopyToDevice();
+  bool CopyToDevice(iMobileDeviceConnection* connection);
 
 public slots:
   void CopyFromDevice();

@@ -75,6 +75,11 @@ void AfcDevice::CopyFinished(bool success) {
   QMetaObject::invokeMethod(loader_, "LoadDatabase");
 }
 
+void AfcDevice::StartCopy() {
+  GPodDevice::StartCopy();
+  connection_.reset(new iMobileDeviceConnection(url_.host()));
+}
+
 bool AfcDevice::CopyToStorage(
     const QString& source, const QString&,
     const Song& metadata, bool, bool remove_original) {
@@ -83,8 +88,7 @@ bool AfcDevice::CopyToStorage(
   Itdb_Track* track = AddTrackToITunesDb(metadata);
 
   // Get an unused filename on the device
-  iMobileDeviceConnection connection(url_.host());
-  QString dest = connection.GetUnusedFilename(db_, metadata);
+  QString dest = connection_->GetUnusedFilename(db_, metadata);
   if (dest.isEmpty()) {
     itdb_track_remove(track);
     return false;
@@ -93,7 +97,7 @@ bool AfcDevice::CopyToStorage(
   // Copy the file
   {
     QFile source_file(source);
-    AfcFile dest_file(&connection, dest);
+    AfcFile dest_file(connection_.get(), dest);
     if (!Utilities::Copy(&source_file, &dest_file))
       return false;
   }
@@ -130,6 +134,9 @@ void AfcDevice::FinishCopy(bool success) {
   itdb_device_set_sysinfo(db_->device, "FirewireGuid", NULL);
 
   GPodDevice::FinishCopy(success);
+
+  // Close the connection to the device
+  connection_.reset();
 }
 
 void AfcDevice::FinaliseDatabase() {
@@ -141,7 +148,7 @@ void AfcDevice::FinaliseDatabase() {
   AfcTransfer transfer(url_.host(), local_path_, NULL, shared_from_this());
 
   itdb_start_sync(db_);
-  bool success = transfer.CopyToDevice();
+  bool success = transfer.CopyToDevice(connection_.get());
   itdb_stop_sync(db_);
 
   if (!success) {
@@ -157,8 +164,7 @@ bool AfcDevice::DeleteFromStorage(const Song& metadata) {
     return false;
 
   // Remove the file
-  iMobileDeviceConnection connection(url_.host());
-  if (afc_remove_path(connection.afc(), path.toUtf8().constData()) != AFC_E_SUCCESS)
+  if (afc_remove_path(connection_->afc(), path.toUtf8().constData()) != AFC_E_SUCCESS)
     return false;
 
   // Remove it from our library model

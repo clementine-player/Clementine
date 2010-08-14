@@ -22,10 +22,13 @@
 #include <QMutex>
 #include <QWaitCondition>
 
+#include <boost/scoped_ptr.hpp>
+
 #include <gpod/itdb.h>
 
 class AfcTransfer;
 class GPodLoader;
+class iMobileDeviceConnection;
 
 class AfcDevice : public GPodDevice {
   Q_OBJECT
@@ -40,6 +43,7 @@ public:
 
   static QStringList url_schemes() { return QStringList() << "afc"; }
 
+  void StartCopy();
   bool CopyToStorage(const QString &source, const QString &destination,
                      const Song &metadata, bool overwrite, bool remove_original);
   void FinishCopy(bool success);
@@ -57,6 +61,7 @@ private:
 
 private:
   AfcTransfer* transfer_;
+  boost::scoped_ptr<iMobileDeviceConnection> connection_;
 
   QString local_path_;
 };

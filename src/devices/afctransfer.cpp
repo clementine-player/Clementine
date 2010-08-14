@@ -69,12 +69,13 @@ void AfcTransfer::CopyFromDevice() {
   }
 }
 
-bool AfcTransfer::CopyToDevice() {
+bool AfcTransfer::CopyToDevice(iMobileDeviceConnection* connection) {
   // Connect to the device
-  iMobileDeviceConnection c(uuid_);
+  if (!connection)
+    connection = new iMobileDeviceConnection(uuid_);
 
   foreach (const QString& dir, important_directories_)
-    if (!CopyDirToDevice(&c, dir))
+    if (!CopyDirToDevice(connection, dir))
       return false;
 
   return true;

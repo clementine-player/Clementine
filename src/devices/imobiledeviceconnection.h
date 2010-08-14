@@ -43,18 +43,13 @@ public:
 
   QString GetUnusedFilename(Itdb_iTunesDB* itdb, const Song& metadata);
 
-  void MarkBroken() { broken_ = true; }
-
 private:
   Q_DISABLE_COPY(iMobileDeviceConnection);
 
   idevice_t device_;
-  lockdownd_client_t lockdown_;
   afc_client_t afc_;
 
   uint16_t afc_port_;
-
-  bool broken_;
 };
 
 #endif // IMOBILEDEVICECONNECTION_H

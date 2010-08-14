@@ -42,11 +42,7 @@ bool AfcFile::open(QIODevice::OpenMode mode) {
 
 void AfcFile::close() {
   if (handle_) {
-    if (afc_file_close(connection_->afc(), handle_) != AFC_E_SUCCESS) {
-      // Warn the connection not to free its lockdownd, as doing so will cause
-      // a load of "Broken pipe" errors.
-      connection_->MarkBroken();
-    }
+    afc_file_close(connection_->afc(), handle_);
   }
   QIODevice::close();
 }
