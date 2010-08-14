@@ -323,7 +323,7 @@ quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
       kCFAllocatorDefault, session, bsd_name.toAscii().constData());
 
   NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
-  NSURL* volume_path = 
+  NSURL* volume_path =
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
 
   FSRef ref;
@@ -345,7 +345,7 @@ quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
   return 0;
 }
 
-QVariantMap MacDeviceLister::DeviceHardwareInfo(const QString& id){return QVariantMap();}
+QVariantMap MacDeviceLister::DeviceHardwareInfo(const QString& serial){return QVariantMap();}
 
 void MacDeviceLister::UnmountDevice(const QString& serial) {
   QString bsd_name = current_devices_[serial];
@@ -364,4 +364,8 @@ void MacDeviceLister::DiskUnmountCallback(
   } else {
     DiskRemovedCallback(disk, context);
   }
+}
+
+void MacDeviceLister::UpdateDeviceFreeSpace(const QString& serial) {
+  emit DeviceChanged(serial);
 }
