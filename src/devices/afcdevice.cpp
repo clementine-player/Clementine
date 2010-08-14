@@ -150,6 +150,19 @@ void AfcDevice::FinaliseDatabase() {
   }
 }
 
-bool AfcDevice::DeleteFromStorage(const Song &metadata) {
-  return false;
+bool AfcDevice::DeleteFromStorage(const Song& metadata) {
+  const QString path = QUrl(metadata.filename()).path();
+
+  if (!RemoveTrackFromITunesDb(path))
+    return false;
+
+  // Remove the file
+  iMobileDeviceConnection connection(url_.host());
+  if (afc_remove_path(connection.afc(), path.toUtf8().constData()) != AFC_E_SUCCESS)
+    return false;
+
+  // Remove it from our library model
+  songs_to_remove_ << metadata;
+
+  return true;
 }

@@ -56,6 +56,8 @@ protected slots:
 protected:
   Itdb_Track* AddTrackToITunesDb(const Song& metadata);
   void AddTrackToModel(Itdb_Track* track, const QString& prefix);
+  bool RemoveTrackFromITunesDb(const QString& path,
+                               const QString& relative_to = QString());
   virtual void FinaliseDatabase() {}
 
 private:

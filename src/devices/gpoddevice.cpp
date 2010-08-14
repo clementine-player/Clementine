@@ -163,23 +163,27 @@ void GPodDevice::StartDelete() {
   StartCopy();
 }
 
-bool GPodDevice::DeleteFromStorage(const Song& metadata) {
-  Q_ASSERT(db_);
+bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& relative_to) {
+  QString ipod_filename = path;
+  if (!relative_to.isEmpty() && path.startsWith(relative_to))
+    ipod_filename.remove(0, relative_to.length() + (relative_to.endsWith('/') ? -1 : 0));
+
+  ipod_filename.replace('/', ':');
 
   // Find the track in the itdb, identify it by its filename
   Itdb_Track* track = NULL;
   for (GList* tracks = db_->tracks ; tracks != NULL ; tracks = tracks->next) {
     Itdb_Track* t = static_cast<Itdb_Track*>(tracks->data);
 
-    itdb_filename_ipod2fs(t->ipod_path);
-    if (url_.path() + t->ipod_path == metadata.filename()) {
+    qDebug() << ipod_filename << t->ipod_path;
+    if (t->ipod_path == ipod_filename) {
       track = t;
       break;
     }
   }
 
   if (track == NULL) {
-    qWarning() << "Couldn't find song" << metadata.filename() << "in iTunesDB";
+    qWarning() << "Couldn't find song" << path << "in iTunesDB";
     return false;
   }
 
@@ -195,8 +199,18 @@ bool GPodDevice::DeleteFromStorage(const Song& metadata) {
   // Remove the track from the database, this frees the struct too
   itdb_track_remove(track);
 
+  return true;
+}
+
+bool GPodDevice::DeleteFromStorage(const Song& metadata) {
+  Q_ASSERT(db_);
+
+  if (!RemoveTrackFromITunesDb(metadata.filename(), url_.path()))
+    return false;
+
   // Remove the file
-  QFile::remove(metadata.filename());
+  if (!QFile::remove(metadata.filename()))
+    return false;
 
   // Remove it from our library model
   songs_to_remove_ << metadata;
