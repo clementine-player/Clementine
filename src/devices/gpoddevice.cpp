@@ -31,7 +31,7 @@ GPodDevice::GPodDevice(
     int database_id, bool first_time)
       : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
         loader_thread_(new QThread(this)),
-        loader_(),
+        loader_(NULL),
         db_(NULL)
 {
 }

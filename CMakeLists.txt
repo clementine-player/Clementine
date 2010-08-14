@@ -58,6 +58,7 @@ else(WIN32)
   pkg_check_modules(IMOBILEDEVICE libimobiledevice-1.0)
   pkg_check_modules(PLIST libplist)
   pkg_check_modules(USBMUXD libusbmuxd)
+  pkg_check_modules(LIBMTP libmtp)
 endif(WIN32)
 
 find_library(LASTFM_LIBRARIES lastfm)

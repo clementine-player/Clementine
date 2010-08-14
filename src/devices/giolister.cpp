@@ -121,9 +121,12 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString &id) {
     uri = mounts_[id].uri;
   }
 
+  // gphoto2 gives invalid hostnames with []:, characters in
+  uri.replace(QRegExp("//\\[usb:(\\d+),(\\d+)\\]"), "//usb-\\1-\\2");
+
   QList<QUrl> ret;
-  ret << MakeUrlFromLocalPath(mount_point);
   ret << uri;
+  ret << MakeUrlFromLocalPath(mount_point);
   return ret;
 }
 

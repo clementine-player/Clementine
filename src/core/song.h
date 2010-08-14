@@ -33,6 +33,10 @@
 #  include <gpod/itdb.h>
 #endif
 
+#ifdef HAVE_LIBMTP
+#  include <libmtp.h>
+#endif
+
 class SqlRow;
 
 namespace lastfm {
@@ -108,6 +112,10 @@ class Song {
 #ifdef HAVE_LIBGPOD
   void InitFromItdb(const Itdb_Track* track);
   void ToItdb(Itdb_Track* track) const;
+#endif
+
+#ifdef HAVE_LIBMTP
+  void InitFromMTP(const LIBMTP_track_t* track);
 #endif
 
   static QString Decode(const TagLib::String& tag, const QTextCodec* codec);

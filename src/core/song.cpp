@@ -476,6 +476,40 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   }
 #endif
 
+#ifdef HAVE_LIBMTP
+  void Song::InitFromMTP(const LIBMTP_track_t* track) {
+    d->valid_ = true;
+
+    d->title_ = QString::fromUtf8(track->title);
+    d->artist_ = QString::fromUtf8(track->artist);
+    d->album_ = QString::fromUtf8(track->album);
+    d->composer_ = QString::fromUtf8(track->composer);
+    d->genre_ = QString::fromUtf8(track->genre);
+    d->filename_ = QString::fromUtf8(track->filename);
+
+    d->track_ = track->tracknumber;
+    d->length_ = track->duration / 1000;
+    d->samplerate_ = track->samplerate;
+    d->bitrate_ = track->bitrate;
+    d->filesize_ = track->filesize;
+    d->mtime_ = track->modificationdate;
+    d->ctime_ = track->modificationdate;
+
+    switch (track->filetype) {
+      case LIBMTP_FILETYPE_WAV:  d->filetype_ = Type_Wav;       break;
+      case LIBMTP_FILETYPE_MP3:  d->filetype_ = Type_Mpeg;      break;
+      case LIBMTP_FILETYPE_WMA:  d->filetype_ = Type_Asf;       break;
+      case LIBMTP_FILETYPE_OGG:  d->filetype_ = Type_OggVorbis; break;
+      case LIBMTP_FILETYPE_MP4:  d->filetype_ = Type_Mp4;       break;
+      case LIBMTP_FILETYPE_AAC:  d->filetype_ = Type_Mp4;       break;
+      case LIBMTP_FILETYPE_FLAC: d->filetype_ = Type_OggFlac;   break;
+      case LIBMTP_FILETYPE_MP2:  d->filetype_ = Type_Mpeg;      break;
+      case LIBMTP_FILETYPE_M4A:  d->filetype_ = Type_Mp4;       break;
+      default:                   d->filetype_ = Type_Unknown;   break;
+    }
+  }
+#endif
+
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   d->valid_ = true;
 

@@ -38,6 +38,9 @@
 #  include "afcdevice.h"
 #  include "ilister.h"
 #endif
+#ifdef HAVE_LIBMTP
+#  include "mtpdevice.h"
+#endif
 
 #include <QIcon>
 #include <QMessageBox>
@@ -172,6 +175,10 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 
 #ifdef HAVE_LIBGPOD
   AddDeviceClass<GPodDevice>();
+#endif
+
+#ifdef HAVE_LIBMTP
+  AddDeviceClass<MtpDevice>();
 #endif
 }
 
@@ -470,6 +477,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     // Find a device class for this URL's scheme
     if (device_classes_.contains(url.scheme())) {
       device_url = url;
+      break;
     }
   }
 

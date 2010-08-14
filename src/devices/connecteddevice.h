@@ -51,7 +51,7 @@ public:
   virtual void FinishCopy(bool success);
   virtual void FinishDelete(bool success);
 
-  void Eject();
+  virtual void Eject();
 
 signals:
   void TaskStarted(int id);

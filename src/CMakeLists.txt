@@ -520,6 +520,18 @@ if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   list(APPEND HEADERS devices/ilister.h)
 endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
+# mtp device
+if(LIBMTP_FOUND)
+  set(HAVE_LIBMTP ON)
+  include_directories(${LIBMTP_INCLUDE_DIRS})
+
+  list(APPEND SOURCES devices/mtpdevice.cpp)
+  list(APPEND SOURCES devices/mtploader.cpp)
+
+  list(APPEND HEADERS devices/mtpdevice.h)
+  list(APPEND HEADERS devices/mtploader.h)
+endif(LIBMTP_FOUND)
+
 # Mac specific startup stuff
 if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
@@ -547,6 +559,10 @@ list(APPEND OTHER_SOURCES
   devices/ilister.h
   devices/imobiledeviceconnection.cpp
   devices/imobiledeviceconnection.h
+  devices/mtpdevice.cpp
+  devices/mtpdevice.h
+  devices/mtploader.cpp
+  devices/mtploader.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   widgets/osd_mac.mm
@@ -617,6 +633,9 @@ if(HAVE_IMOBILEDEVICE)
   link_directories(${USBMUXD_LIBRARY_DIRS})
 endif(HAVE_IMOBILEDEVICE)
 
+if(LIBMTP_FOUND)
+  target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
+endif(LIBMTP_FOUND)
 
 if (APPLE)
   target_link_libraries(clementine_lib
