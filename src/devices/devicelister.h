@@ -42,7 +42,7 @@ public:
 
   // Query information about the devices that are available.  Must be thread-safe.
   virtual QStringList DeviceUniqueIDs() = 0;
-  virtual QStringList DeviceIcons(const QString& id) = 0;
+  virtual QVariantList DeviceIcons(const QString& id) = 0;
   virtual QString DeviceManufacturer(const QString& id) = 0;
   virtual QString DeviceModel(const QString& id) = 0;
   virtual quint64 DeviceCapacity(const QString& id) = 0;

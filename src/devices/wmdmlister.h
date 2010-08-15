@@ -19,19 +19,23 @@
 
 #include "devicelister.h"
 
+struct IWMDMDevice;
+struct IWMDeviceManager;
+
+#include <QMap>
+#include <QMutex>
+#include <QPixmap>
+
 class WmdmLister : public DeviceLister {
   Q_OBJECT
 
 public:
   WmdmLister();
 
-  static uchar* kDRMCert;
-  static uchar* kDRMPrivateKey;
-
   virtual void Init();
 
   virtual QStringList DeviceUniqueIDs();
-  virtual QStringList DeviceIcons(const QString& id);
+  virtual QVariantList DeviceIcons(const QString& id);
   virtual QString DeviceManufacturer(const QString& id);
   virtual QString DeviceModel(const QString& id);
   virtual quint64 DeviceCapacity(const QString& id);
@@ -42,7 +46,41 @@ public:
   virtual void UnmountDevice(const QString& id);
 
 public slots:
- virtual void UpdateDeviceFreeSpace(const QString& id);
+  virtual void UpdateDeviceFreeSpace(const QString& id);
+
+private:
+  struct DeviceInfo {
+    DeviceInfo() : is_suitable_(false) {}
+
+    QString unique_id() const;
+
+    bool is_suitable_;
+
+    QString name_;
+    QString manufacturer_;
+
+    QPixmap icon_;
+  };
+
+  DeviceInfo ReadDeviceInfo(IWMDMDevice* device);
+
+  template <typename T>
+  T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
+
+private:
+  IWMDeviceManager* device_manager_;
+
+  QMutex mutex_;
+  QMap<QString, DeviceInfo> devices_;
 };
+
+template <typename T>
+T WmdmLister::LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field) {
+  QMutexLocker l(&mutex_);
+  if (!devices_.contains(id))
+    return T();
+
+  return devices_[id].*field;
+}
 
 #endif // WMDMLISTER_H

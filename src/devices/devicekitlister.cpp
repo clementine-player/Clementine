@@ -91,10 +91,9 @@ QStringList DeviceKitLister::DeviceUniqueIDs() {
   return device_data_.keys();
 }
 
-QStringList DeviceKitLister::DeviceIcons(const QString &id) {
+QVariantList DeviceKitLister::DeviceIcons(const QString &id) {
   QString path = LockAndGetDeviceInfo(id, &DeviceData::device_mount_paths)[0];
-  QStringList guessed = DeviceLister::GuessIconForPath(path);
-  return QStringList()
+  return QVariantList()
       << GuessIconForPath(path)
       << GuessIconForModel(DeviceManufacturer(id), DeviceModel(id))
       << LockAndGetDeviceInfo(id, &DeviceData::device_presentation_icon_name);

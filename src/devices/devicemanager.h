@@ -132,7 +132,7 @@ private:
     DeviceDatabaseBackend::Device SaveToDb() const;
 
     // Tries to load a good icon for the device.  Sets icon_name_ and icon_.
-    void LoadIcon(const QStringList& icons, const QString& name_hint);
+    void LoadIcon(const QVariantList& icons, const QString& name_hint);
 
     // Gets the best backend available (the one with the highest priority)
     const Backend* BestBackend() const;

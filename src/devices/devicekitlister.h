@@ -36,7 +36,7 @@ public:
   ~DeviceKitLister();
 
   QStringList DeviceUniqueIDs();
-  QStringList DeviceIcons(const QString& id);
+  QVariantList DeviceIcons(const QString& id);
   QString DeviceManufacturer(const QString& id);
   QString DeviceModel(const QString& id);
   quint64 DeviceCapacity(const QString& id);

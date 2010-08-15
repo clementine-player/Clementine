@@ -22,70 +22,135 @@
 #include <mswmdm.h>
 #include <mswmdm_i.c>
 
+#include <QPixmap>
 #include <QStringList>
 #include <QtDebug>
 
 BYTE abPVK[] = {0x00};
 BYTE abCert[] = {0x00};
 
+QString WmdmLister::DeviceInfo::unique_id() const {
+  // TODO: Serial number?
+  return name_;
+}
+
 WmdmLister::WmdmLister()
+  : device_manager_(NULL)
 {
 }
 
 void WmdmLister::Init() {
-  qDebug() << "Creating IPortableDeviceManager";
+  // Initialise COM
+  CoInitialize(0);
 
-  qDebug() << "CoInitialize says" << CoInitialize(0);
-
+  // Authenticate with WMDM
   IComponentAuthenticate* auth;
-  HRESULT result = CoCreateInstance(
-      CLSID_MediaDevMgr, NULL, CLSCTX_ALL, IID_IComponentAuthenticate, (void **)&auth);
-  qDebug() << "Auth" << result << auth;
+  if (CoCreateInstance(CLSID_MediaDevMgr, NULL, CLSCTX_ALL,
+                       IID_IComponentAuthenticate, (void**) &auth)) {
+    qWarning() << "Error creating the IComponentAuthenticate interface";
+    return;
+  }
 
   SacHandle sac = CSecureChannelClient_New();
-  qDebug() << "SAC is" << sac;
-
-  result = CSecureChannelClient_SetCertificate(sac,
-      SAC_CERT_V1,
-      abCert, sizeof(abCert),
-      abPVK, sizeof(abPVK));
-  qDebug() << "SetCertificate" << result << abCert << sizeof(abCert);
+  if (CSecureChannelClient_SetCertificate(
+      sac, SAC_CERT_V1, abCert, sizeof(abCert), abPVK, sizeof(abPVK))) {
+    qWarning() << "Error setting SAC certificate";
+    return;
+  }
 
   CSecureChannelClient_SetInterface(sac, auth);
+  if (CSecureChannelClient_Authenticate(sac, SAC_PROTOCOL_V1)) {
+    qWarning() << "Error authenticating with SAC";
+    return;
+  }
 
-  DWORD* prot;
-  DWORD prot_count;
-  result = auth->SACGetProtocols(&prot, &prot_count);
-  qDebug() << "SACGetProtocols" << result << prot_count;
-  qDebug() << "Prot is" << prot;
-  qDebug() << "Prot is" << prot[0];
+  // Create the device manager
+  if (auth->QueryInterface(IID_IWMDeviceManager, (void**)&device_manager_)) {
+    qWarning() << "Error creating WMDM device manager";
+    return;
+  }
 
-  result = CSecureChannelClient_Authenticate(sac, prot[0]);
-  qDebug() << "Authenticate" << result;
+  // Fetch the inital list of devices
+  IWMDMEnumDevice* device_it = NULL;
+  if (device_manager_->EnumDevices(&device_it)) {
+    qWarning() << "Error querying WMDM devices";
+    return;
+  }
 
-  CoTaskMemFree(prot);
+  // Iterate through the devices
+  QMap<QString, DeviceInfo> devices;
+  forever {
+    IWMDMDevice* device = NULL;
+    ULONG fetched = 0;
+    if (device_it->Next(1, &device, &fetched) || fetched != 1)
+      break;
 
-  IWMDeviceManager* device_manager;
-  result = auth->QueryInterface(IID_IWMDeviceManager, (void**)device_manager);
-  qDebug() << "Manager" << result << device_manager;
+    DeviceInfo info = ReadDeviceInfo(device);
+    if (info.is_suitable_)
+      devices[info.unique_id()] = info;
 
-  CoUninitialize();
+    device->Release();
+  }
+  device_it->Release();
+
+  // Update the internal cache
+  {
+    QMutexLocker l(&mutex_);
+    devices_ = devices;
+  }
+
+  // Notify about the changes
+  foreach (const QString& id, devices.keys()) {
+    emit DeviceAdded(id);
+  }
+}
+
+WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice* device) {
+  DeviceInfo ret;
+
+  // Get text strings
+  wchar_t buf[MAX_PATH];
+  device->GetName(buf, MAX_PATH);
+  ret.name_ = QString::fromWCharArray(buf);
+
+  device->GetManufacturer(buf, MAX_PATH);
+  ret.manufacturer_ = QString::fromWCharArray(buf);
+
+  // Get the type and check whether it has storage
+  DWORD type = 0;
+  device->GetType(&type);
+  if (type & WMDM_DEVICE_TYPE_STORAGE)
+    ret.is_suitable_ = true;
+
+  // Get the icon
+  HICON icon;
+  device->GetDeviceIcon((ULONG*)&icon);
+
+  ret.icon_ = QPixmap::fromWinHICON(icon);
+  DestroyIcon(icon);
+
+  return ret;
 }
 
 QStringList WmdmLister::DeviceUniqueIDs() {
-  return QStringList();
+  QMutexLocker l(&mutex_);
+  return devices_.keys();
 }
 
-QStringList WmdmLister::DeviceIcons(const QString& id) {
-  return QStringList();
+QVariantList WmdmLister::DeviceIcons(const QString& id) {
+  QPixmap pixmap = LockAndGetDeviceInfo(id, &DeviceInfo::icon_);
+
+  if (pixmap.isNull())
+    return QVariantList();
+  return QVariantList() << pixmap;
 }
 
 QString WmdmLister::DeviceManufacturer(const QString& id) {
-  return QString();
+  return LockAndGetDeviceInfo(id, &DeviceInfo::manufacturer_);
 }
 
 QString WmdmLister::DeviceModel(const QString& id) {
-  return QString();
+  return LockAndGetDeviceInfo(id, &DeviceInfo::name_);
 }
 
 quint64 WmdmLister::DeviceCapacity(const QString& id) {
@@ -101,7 +166,15 @@ QVariantMap WmdmLister::DeviceHardwareInfo(const QString& id) {
 }
 
 QString WmdmLister::MakeFriendlyName(const QString& id) {
-  return QString();
+  QMutexLocker l(&mutex_);
+  if (!devices_.contains(id))
+    return QString();
+
+  const DeviceInfo& info = devices_[id];
+  if (info.manufacturer_.isEmpty() || info.manufacturer_ == "Unknown")
+    return info.name_;
+
+  return info.manufacturer_ + " " + info.name_;
 }
 
 QList<QUrl> WmdmLister::MakeDeviceUrls(const QString& id) {

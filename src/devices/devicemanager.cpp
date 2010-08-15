@@ -82,7 +82,14 @@ void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &
   database_id_ = dev.id_;
   friendly_name_ = dev.friendly_name_;
   size_ = dev.size_;
-  LoadIcon(dev.icon_name_.split(','), friendly_name_);
+
+  QStringList icon_names = dev.icon_name_.split(',');
+  QVariantList icons;
+  foreach (const QString& icon_name, icon_names) {
+    icons << icon_name;
+  }
+
+  LoadIcon(icons, friendly_name_);
 
   QStringList unique_ids = dev.unique_id_.split(',');
   foreach (const QString& id, unique_ids) {
@@ -90,7 +97,7 @@ void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &
   }
 }
 
-void DeviceManager::DeviceInfo::LoadIcon(const QStringList& icons, const QString& name_hint) {
+void DeviceManager::DeviceInfo::LoadIcon(const QVariantList& icons, const QString& name_hint) {
   if (icons.isEmpty()) {
     icon_name_ = "drive-removable-media-usb-pendrive";
     icon_ = IconLoader::Load(icon_name_);
@@ -98,15 +105,20 @@ void DeviceManager::DeviceInfo::LoadIcon(const QStringList& icons, const QString
   }
 
   // Try to load the icon with that exact name first
-  foreach (const QString& name, icons) {
-    icon_ = IconLoader::Load(name);
-    if (!icon_.isNull()) {
-      icon_name_ = name;
+  foreach (const QVariant& icon, icons) {
+    if (!icon.value<QPixmap>().isNull()) {
+      icon_ = QIcon(icon.value<QPixmap>());
       return;
+    } else {
+      icon_ = IconLoader::Load(icon.toString());
+      if (!icon_.isNull()) {
+        icon_name_ = icon.toString();
+        return;
+      }
     }
   }
 
-  QString hint = QString(icons.first() + name_hint).toLower();
+  QString hint = QString(icons.first().toString() + name_hint).toLower();
 
   // If that failed than try to guess if it's a phone or ipod.  Fall back on
   // a usb memory stick icon.
@@ -581,7 +593,7 @@ void DeviceManager::SetDeviceIdentity(int row, const QString &friendly_name,
                                       const QString &icon_name) {
   DeviceInfo& info = devices_[row];
   info.friendly_name_ = friendly_name;
-  info.LoadIcon(QStringList() << icon_name, friendly_name);
+  info.LoadIcon(QVariantList() << icon_name, friendly_name);
 
   emit dataChanged(index(row, 0), index(row, 0));
 

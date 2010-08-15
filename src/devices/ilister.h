@@ -16,7 +16,7 @@ class iLister : public DeviceLister {
   int priority() const { return 120; }
 
   virtual QStringList DeviceUniqueIDs();
-  virtual QStringList DeviceIcons(const QString& id);
+  virtual QVariantList DeviceIcons(const QString& id);
   virtual QString DeviceManufacturer(const QString& id);
   virtual QString DeviceModel(const QString& id);
   virtual quint64 DeviceCapacity(const QString& id);

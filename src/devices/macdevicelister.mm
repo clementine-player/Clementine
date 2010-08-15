@@ -260,7 +260,7 @@ QStringList MacDeviceLister::DeviceUniqueIDs() {
   return current_devices_.keys();
 }
 
-QStringList MacDeviceLister::DeviceIcons(const QString& serial) {
+QVariantList MacDeviceLister::DeviceIcons(const QString& serial) {
   QString bsd_name = current_devices_[serial];
   DASessionRef session = DASessionCreate(kCFAllocatorDefault);
   DADiskRef disk = DADiskCreateFromBSDName(
@@ -279,7 +279,7 @@ QStringList MacDeviceLister::DeviceIcons(const QString& serial) {
   CFRelease(disk);
   CFRelease(session);
 
-  QStringList ret;
+  QVariantList ret;
   ret << GuessIconForPath(path);
   ret << GuessIconForModel(DeviceManufacturer(serial), DeviceModel(serial));
   if (!icon.isEmpty()) {
