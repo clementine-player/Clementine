@@ -14,16 +14,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef WPDLISTER_H
-#define WPDLISTER_H
+#ifndef WMDMLISTER_H
+#define WMDMLISTER_H
 
 #include "devicelister.h"
 
-class WpdLister : public DeviceLister {
+class WmdmLister : public DeviceLister {
   Q_OBJECT
 
 public:
-  WpdLister();
+  WmdmLister();
+
+  static uchar* kDRMCert;
+  static uchar* kDRMPrivateKey;
 
   virtual void Init();
 
@@ -40,7 +43,6 @@ public:
 
 public slots:
  virtual void UpdateDeviceFreeSpace(const QString& id);
-
 };
 
-#endif // WPDLISTER_H
+#endif // WMDMLISTER_H

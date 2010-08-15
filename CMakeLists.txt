@@ -47,9 +47,8 @@ pkg_check_modules(LIBMTP libmtp)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(PORTABLEDEVICEAPI_LIBRARIES PortableDeviceApi)
-  find_library(PORTABLEDEVICEGUIDS_LIBRARIES PortableDeviceGuids)
-  find_library(PORTABLEDEVICETYPES_LIBRARIES PortableDeviceTypes)
+  find_library(MSWMDM_LIBRARIES MSWMDM)
+  find_library(SAC_SHIM_LIBRARIES sac_shim)
 endif (WIN32)
 
 find_library(LASTFM_LIBRARIES lastfm)
