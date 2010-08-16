@@ -914,22 +914,10 @@ void Playlist::ItemsLoaded() {
   PlaylistItemFutureWatcher* watcher = static_cast<PlaylistItemFutureWatcher*>(sender());
   watcher->deleteLater();
 
-  items_ = watcher->future().results();
+  PlaylistItemList items = watcher->future().results();
+  InsertItems(items, 0);
 
   PlaylistBackend::Playlist p = backend_->GetPlaylist(id_);
-
-  for (int i = 0 ; i < items_.count() ; ++i) {
-    virtual_items_ << i;
-
-    if (items_[i]->type() == "Library") {
-      int id = items_[i]->Metadata().id();
-      if (id != -1) {
-        library_items_by_id_.insertMulti(id, items_[i]);
-      }
-    }
-  }
-
-  reset();
 
   last_played_item_index_ =
       p.last_played == -1 ? QModelIndex() : index(p.last_played);

@@ -8,16 +8,14 @@
 
 #include "nsUniversalDetector.h"
 
+#include "engines/engine_fwd.h"
+
 namespace TagLib {
   class FileRef;
 
   namespace ID3v2 {
     class Tag;
   }
-}
-
-namespace Engine {
-class SimpleMetaBundle;
 }
 
 class QTextCodec;

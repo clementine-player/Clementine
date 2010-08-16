@@ -26,7 +26,7 @@ Base::Base(Playlist *playlist)
 }
 
 
-InsertItems::InsertItems(Playlist *playlist, const PlaylistItemList &items, int pos)
+InsertItems::InsertItems(Playlist *playlist, const PlaylistItemList& items, int pos)
   : Base(playlist),
     items_(items),
     pos_(pos)
