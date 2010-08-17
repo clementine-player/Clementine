@@ -20,6 +20,7 @@
 #include "devicelister.h"
 
 struct IWMDMDevice;
+struct IWMDMStorage;
 struct IWMDeviceManager;
 
 #include <QMap>
@@ -50,9 +51,13 @@ public slots:
 
 private:
   struct DeviceInfo {
-    DeviceInfo() : is_suitable_(false) {}
+    DeviceInfo() : device_(NULL), storage_(NULL), is_suitable_(false),
+                   total_bytes_(0), free_bytes_(0) {}
 
     QString unique_id() const;
+
+    IWMDMDevice* device_;
+    IWMDMStorage* storage_;
 
     bool is_suitable_;
 
@@ -60,6 +65,9 @@ private:
     QString manufacturer_;
 
     QPixmap icon_;
+
+    quint64 total_bytes_;
+    quint64 free_bytes_;
   };
 
   DeviceInfo ReadDeviceInfo(IWMDMDevice* device);

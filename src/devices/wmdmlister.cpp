@@ -22,6 +22,8 @@
 #include <mswmdm.h>
 #include <mswmdm_i.c>
 
+#include <boost/bind.hpp>
+
 #include <QPixmap>
 #include <QStringList>
 #include <QtDebug>
@@ -105,8 +107,17 @@ void WmdmLister::Init() {
   }
 }
 
+template <typename F>
+qint64 GetSpaceValue(F f) {
+  DWORD low, high;
+  f(&low, &high);
+
+  return (qint64)high << 32 | (qint64)low;
+}
+
 WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice* device) {
   DeviceInfo ret;
+  ret.device_ = device;
 
   // Get text strings
   wchar_t buf[MAX_PATH];
@@ -128,6 +139,24 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice* device) {
 
   ret.icon_ = QPixmap::fromWinHICON(icon);
   DestroyIcon(icon);
+
+  // Get the main (first) storage for the device
+  IWMDMEnumStorage* storage_it = NULL;
+  if (device->EnumStorage(&storage_it) == S_OK && storage_it) {
+    ULONG storage_fetched = 0;
+    if (storage_it->Next(1, &ret.storage_, &storage_fetched) == S_OK) {
+      // Get free space information
+      IWMDMStorageGlobals* globals;
+      ret.storage_->GetStorageGlobals(&globals);
+
+      ret.total_bytes_ = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalSize, globals, _1, _2));
+      ret.free_bytes_  = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalFree, globals, _1, _2));
+      ret.free_bytes_ -= GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalBad,  globals, _1, _2));
+
+      globals->Release();
+    }
+    storage_it->Release();
+  }
 
   return ret;
 }
@@ -154,11 +183,11 @@ QString WmdmLister::DeviceModel(const QString& id) {
 }
 
 quint64 WmdmLister::DeviceCapacity(const QString& id) {
-  return 0;
+  return LockAndGetDeviceInfo(id, &DeviceInfo::total_bytes_);
 }
 
 quint64 WmdmLister::DeviceFreeSpace(const QString& id) {
-  return 0;
+  return LockAndGetDeviceInfo(id, &DeviceInfo::free_bytes_);
 }
 
 QVariantMap WmdmLister::DeviceHardwareInfo(const QString& id) {
