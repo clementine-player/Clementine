@@ -2,6 +2,10 @@
 
 #include <QtDebug>
 
+#include <QApplication>
+#include <QColor>
+#include <QPalette>
+
 const char* GLBlockAnalyzer::kName = "GL Block Analyzer";
 
 GLBlockAnalyzer::GLBlockAnalyzer(QWidget* parent)
@@ -12,13 +16,16 @@ GLBlockAnalyzer::GLBlockAnalyzer(QWidget* parent)
 }
 
 void GLBlockAnalyzer::SpectrumAvailable(const QVector<float>& spectrum) {
-  updateGL();
   current_spectrum_ = spectrum;
+  updateGL();
 }
 
 void GLBlockAnalyzer::initializeGL() {
   qDebug() << Q_FUNC_INFO;
-  glClearColor(0.0, 0.0, 0.0, 1.0);
+
+  QColor background_color = QApplication::palette().color(QPalette::Window);
+
+  glClearColor(background_color.redF(), background_color.greenF(), background_color.blueF(), 1.0);
   glDisable(GL_DEPTH_TEST);
 
   shader_.addShaderFromSourceFile(QGLShader::Vertex, ":shaders/glblock_vert.glsl");

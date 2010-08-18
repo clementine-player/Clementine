@@ -29,7 +29,7 @@ const int GstEnginePipeline::kEqBandFrequencies[] = {
   60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
 
 const quint32 GstEnginePipeline::kSpectrumBands = 200;
-const int GstEnginePipeline::kSpectrumThreshold = -80;
+const int GstEnginePipeline::kSpectrumThreshold = -100;
 const quint64 GstEnginePipeline::kSpectrumIntervalns = 16666666;
 
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
@@ -213,7 +213,7 @@ bool GstEnginePipeline::Init() {
   if (!convert) { return false; }
   if (rg_enabled_)
     gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);
-  gst_element_link_many(equalizer_preamp_, equalizer_, volume_, audioscale_, convert, spectrum_, audiosink_, NULL);
+  gst_element_link_many(equalizer_preamp_, equalizer_, spectrum_, volume_, audioscale_, convert, audiosink_, NULL);
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);

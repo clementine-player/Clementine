@@ -175,7 +175,7 @@ class GstEnginePipeline : public QObject {
 
   // Elements in the audiobin
   // audioconvert ! rgvolume ! rglimiter ! audioconvert ! equalizer_preamp !
-  // equalizer ! volume ! audioresample ! audioconvert ! spectrum ! audiosink
+  // equalizer ! spectrum ! volume ! audioresample ! audioconvert ! audiosink
   GstElement* audioconvert_;
   GstElement* rgvolume_;
   GstElement* rglimiter_;
