@@ -15,6 +15,7 @@
 */
 
 #include "analyzercontainer.h"
+#include "glblockanalyzer.h"
 #include "baranalyzer.h"
 #include "blockanalyzer.h"
 #include "boomanalyzer.h"
@@ -44,11 +45,6 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   setLayout(layout);
   layout->setContentsMargins(0, 0, 0, 0);
 
-  AddAnalyzerType<BarAnalyzer>();
-  AddAnalyzerType<BlockAnalyzer>();
-  AddAnalyzerType<BoomAnalyzer>();
-  AddAnalyzerType<Sonogram>();
-  AddAnalyzerType<TurbineAnalyzer>();
   connect(mapper_, SIGNAL(mapped(int)), SLOT(ChangeAnalyzer(int)));
   disable_action_ =
       context_menu_->addAction(tr("No analyzer"), this, SLOT(DisableAnalyzer()));
@@ -61,6 +57,13 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   double_click_timer_->setSingleShot(true);
   double_click_timer_->setInterval(250);
   connect(double_click_timer_, SIGNAL(timeout()), SLOT(ShowPopupMenu()));
+
+  AddAnalyzerType<GLBlockAnalyzer>();
+  AddAnalyzerType<BlockAnalyzer>();
+  AddAnalyzerType<BarAnalyzer>();
+  AddAnalyzerType<BoomAnalyzer>();
+  AddAnalyzerType<TurbineAnalyzer>();
+  AddAnalyzerType<Sonogram>();
 
   Load();
 }
@@ -99,7 +102,7 @@ void AnalyzerContainer::mouseDoubleClickEvent(QMouseEvent *) {
 
 void AnalyzerContainer::SetEngine(EngineBase *engine) {
   if (current_analyzer_)
-    current_analyzer_->set_engine(engine);
+    QMetaObject::invokeMethod(current_analyzer_, "set_engine", Qt::DirectConnection, Q_ARG(Engine::Base*, engine));
   engine_ = engine;
 }
 
@@ -119,8 +122,11 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   }
 
   delete current_analyzer_;
-  current_analyzer_ = qobject_cast<Analyzer::Base*>(instance);
-  current_analyzer_->set_engine(engine_);
+  current_analyzer_ = qobject_cast<AnalyzerBase*>(instance);
+  if (!current_analyzer_) {
+    current_analyzer_ = qobject_cast<Analyzer::Base*>(instance);
+  }
+  QMetaObject::invokeMethod(current_analyzer_, "set_engine", Qt::DirectConnection, Q_ARG(Engine::Base*, engine_));
 
   layout()->addWidget(current_analyzer_);
 

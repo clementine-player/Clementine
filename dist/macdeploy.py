@@ -26,7 +26,7 @@ FRAMEWORK_SEARCH_PATH=[
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
 
-LIBRARY_SEARCH_PATH=['/usr/local/lib', '/sw/lib']
+LIBRARY_SEARCH_PATH=['/usr/local/lib', '/sw/lib', '/usr/local/lib64']
 
 XINE_PLUGINS = [
     'xineplug_ao_out_coreaudio.so',
@@ -64,13 +64,14 @@ GSTREAMER_PLUGINS=[
     'libgstdecodebin2.so',
     'libgstequalizer.so',
     'libgstosxaudio.so',
+    'libgstspectrum.so',
     'libgsttypefindfunctions.so',
     'libgstudp.so',
     'libgstvolume.so',
 
     # Codecs
     'libgstapetag.so',
-    'libgstasf.so',
+    #'libgstasf.so',
     'libgstfaac.so',
     'libgstfaad.so',
     'libgstffmpeg.so',
@@ -83,7 +84,7 @@ GSTREAMER_PLUGINS=[
     'libgstmusepack.so',
     'libgstogg.so',
     'libgstqtdemux.so',
-    'libgstqtwrapper.so',
+    #'libgstqtwrapper.so',
     'libgstreplaygain.so',
     'libgstspeex.so',
     'libgstvorbis.so',
@@ -109,6 +110,7 @@ QT_PLUGINS = [
     'codecs/libqjpcodecs.dylib',
     'codecs/libqkrcodecs.dylib',
     'codecs/libqtwcodecs.dylib',
+    'graphicssystems/libqglgraphicssystem.dylib',
     'iconengines/libqsvgicon.dylib',
     'imageformats/libqgif.dylib',
     'imageformats/libqico.dylib',
@@ -269,7 +271,7 @@ def FixBinary(path):
 
 def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
-  args = ['ditto', '--arch=i386', path, new_path]
+  args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
   return new_path
 
@@ -277,7 +279,7 @@ def CopyPlugin(path, subdir):
   new_path = os.path.join(plugins_dir, subdir, os.path.basename(path))
   args = ['mkdir', '-p', os.path.dirname(new_path)]
   commands.append(args)
-  args = ['ditto', '--arch=i386', path, new_path]
+  args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
   return new_path
 
@@ -289,7 +291,7 @@ def CopyFramework(path):
       break
   args = ['mkdir', '-p', full_path]
   commands.append(args)
-  args = ['ditto', '--arch=i386', path, full_path]
+  args = ['ditto', '--arch=x86_64', path, full_path]
   commands.append(args)
   return os.path.join(full_path, parts[-1])
 
@@ -310,6 +312,8 @@ def FixInstallPath(library_path, library, new_path):
   commands.append(args)
 
 def FindSystemLibrary(library_name):
+  if library_name == 'libiconv.2.dylib':
+    return None
   for path in ['/lib', '/usr/lib']:
     full_path = os.path.join(path, library_name)
     if os.path.exists(full_path):

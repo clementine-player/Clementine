@@ -94,6 +94,8 @@ class Base : public QObject, boost::noncopyable {
 
   void StateChanged(Engine::State);
 
+  void SpectrumAvailable(const QVector<float>& spectrum);
+
  protected:
   Base();
 

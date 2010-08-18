@@ -468,6 +468,10 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   current_pipeline_ = pipeline;
   preload_pipeline_.reset();
 
+  qDebug() << current_pipeline_.get();
+  connect(current_pipeline_.get(), SIGNAL(SpectrumAvailable(const QVector<float>&)),
+          this, SIGNAL(SpectrumAvailable(const QVector<float>&)));
+
   SetVolume(volume_);
   SetEqualizerEnabled(equalizer_enabled_);
   SetEqualizerParameters(equalizer_preamp_, equalizer_gains_);

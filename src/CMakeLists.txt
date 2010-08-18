@@ -30,6 +30,9 @@ set(SOURCES
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
 
+  analyzers/analyzer.cpp
+  analyzers/glblockanalyzer.cpp
+
   core/albumcoverfetcher.cpp
   core/albumcoverloader.cpp
   core/backgroundthread.cpp
@@ -170,6 +173,9 @@ set(HEADERS
   analyzers/boomanalyzer.h
   analyzers/sonogram.h
   analyzers/turbine.h
+
+  analyzers/analyzer.h
+  analyzers/glblockanalyzer.h
 
   core/albumcoverfetcher.h
   core/albumcoverloader.h

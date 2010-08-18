@@ -86,6 +86,7 @@ class GstEnginePipeline : public QObject {
   void MetadataFound(const Engine::SimpleMetaBundle& bundle);
   void Error(const QString& message);
   void FaderFinished();
+  void SpectrumAvailable(const QVector<float>& spectrum);
 
  protected:
   void timerEvent(QTimerEvent *);
@@ -121,6 +122,10 @@ class GstEnginePipeline : public QObject {
   static const int kFaderFudgeMsec;
   static const int kEqBandCount;
   static const int kEqBandFrequencies[];
+
+  static const quint32 kSpectrumBands;
+  static const int kSpectrumThreshold;
+  static const quint64 kSpectrumIntervalns;
 
   GstEngine* engine_;
 
@@ -170,7 +175,7 @@ class GstEnginePipeline : public QObject {
 
   // Elements in the audiobin
   // audioconvert ! rgvolume ! rglimiter ! audioconvert ! equalizer_preamp !
-  // equalizer ! volume ! audioresample ! audioconvert ! audiosink
+  // equalizer ! volume ! audioresample ! audioconvert ! spectrum ! audiosink
   GstElement* audioconvert_;
   GstElement* rgvolume_;
   GstElement* rglimiter_;
@@ -180,6 +185,7 @@ class GstEnginePipeline : public QObject {
   GstElement* volume_;
   GstElement* audioscale_;
   GstElement* audiosink_;
+  GstElement* spectrum_;
 
   uint bus_cb_id_;
 };

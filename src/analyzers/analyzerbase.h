@@ -43,7 +43,8 @@ public:
 
     uint timeout() const { return m_timeout; }
 
-    void set_engine(EngineBase* engine) { m_engine = engine; }
+public slots:
+    void set_engine(Engine::Base* engine) { m_engine = engine; }
 
 protected:
     Base( QWidget*, uint scopeSize = 7 );

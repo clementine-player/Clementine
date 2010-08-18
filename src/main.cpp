@@ -123,6 +123,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
+  qRegisterMetaType<QVector<float> >("QVector<float>");
 
 #ifdef HAVE_GSTREAMER
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
@@ -159,7 +160,9 @@ int main(int argc, char *argv[]) {
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN
-  QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/../PlugIns");
+  QStringList list;
+  list << QCoreApplication::applicationDirPath() + "/../PlugIns";
+  QCoreApplication::setLibraryPaths(list);
 #endif
 
   a.setQuitOnLastWindowClosed(false);
