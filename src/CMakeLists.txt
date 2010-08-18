@@ -41,7 +41,6 @@ set(SOURCES
   core/deletefiles.cpp
   core/encoding.cpp
   core/filesystemmusicstorage.cpp
-  core/fht.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp

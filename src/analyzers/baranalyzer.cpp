@@ -20,7 +20,7 @@ const char* BarAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Bar ana
 
 
 BarAnalyzer::BarAnalyzer( QWidget *parent )
-    : Analyzer::Base( parent, 8 )
+    : Analyzer::Base(parent)
     //, m_bands( BAND_COUNT )
     //, barVector( BAND_COUNT, 0 )
     //, roofVector( BAND_COUNT, 50 )

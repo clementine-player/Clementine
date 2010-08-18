@@ -20,7 +20,6 @@ public:
     static const char* kName;
 
     virtual void init();
-    virtual void transform( Scope &s );
     virtual void analyze( QPainter& p, const Scope& );
 
 public slots:

@@ -28,7 +28,7 @@ const int GstEnginePipeline::kEqBandCount = 10;
 const int GstEnginePipeline::kEqBandFrequencies[] = {
   60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
 
-const quint32 GstEnginePipeline::kSpectrumBands = 100;
+const quint32 GstEnginePipeline::kSpectrumBands = 200;
 const int GstEnginePipeline::kSpectrumThreshold = -80;
 const quint64 GstEnginePipeline::kSpectrumIntervalns = 16666666;
 

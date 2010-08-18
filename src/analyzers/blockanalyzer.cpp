@@ -24,7 +24,7 @@ const uint BlockAnalyzer::FADE_SIZE   = 90;
 const char* BlockAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Block analyzer");
 
 BlockAnalyzer::BlockAnalyzer( QWidget *parent )
-        : Analyzer::Base( parent, 9 )
+        : Analyzer::Base(parent)
         , m_columns( 0 )         //uint
         , m_rows( 0 )            //uint
         , m_y( 0 )               //uint
@@ -42,6 +42,8 @@ BlockAnalyzer::BlockAnalyzer( QWidget *parent )
     // mxcl says null pixmaps cause crashes, so let's play it safe
     for ( uint i = 0; i < FADE_SIZE; ++i )
         m_fade_bars[i] = QPixmap( 1, 1 );
+
+    time_.start();
 }
 
 BlockAnalyzer::~BlockAnalyzer()
@@ -97,23 +99,7 @@ BlockAnalyzer::determineStep()
     // I calculated the value 30 based on some trial and error
 
     const double fallTime = 30 * m_rows;
-    m_step = double(m_rows * timeout()) / fallTime;
-}
-
-void
-BlockAnalyzer::transform( Analyzer::Scope &s ) //pure virtual
-{
-    for( uint x = 0; x < s.size(); ++x )
-        s[x] *= 2;
-
-    float *front = static_cast<float*>( &s.front() );
-
-    m_fht->spectrum( front );
-    m_fht->scale( front, 1.0 / 20 );
-
-    //the second half is pretty dull, so only show it if the user has a large analyzer
-    //by setting to m_scope.size() if large we prevent interpolation of large analyzers, this is good!
-    s.resize( m_scope.size() <= MAX_COLUMNS/2 ? MAX_COLUMNS/2 : m_scope.size() );
+    m_step = double(m_rows * time_.elapsed()) / fallTime;
 }
 
 void
@@ -172,11 +158,9 @@ BlockAnalyzer::analyze( QPainter& p, const Analyzer::Scope &s )
 
    for( uint x = 0; x < m_store.size(); ++x )
       p.drawPixmap(x*(WIDTH+1), int(m_store[x])*(HEIGHT+1) + m_y, m_topBarPixmap );
+
+    time_.restart();
 }
-
-
-
-
 
 static inline void
 adjustToLimits( int &b, int &f, uint &amount )

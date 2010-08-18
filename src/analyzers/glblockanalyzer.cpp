@@ -75,7 +75,7 @@ void GLBlockAnalyzer::paintGL() {
 
   for (int i = 0; i < current_spectrum_.size(); ++i) {
     const float x = width * i;
-    const float height = current_spectrum_[i];
+    const float height = current_spectrum_[i] + 0.2;
 
     float* current_rectangle = rectangles_.get() + i*4*3;  // 4 points of size 3.
     float* bottom_left = current_rectangle;

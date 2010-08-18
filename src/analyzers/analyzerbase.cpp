@@ -42,40 +42,22 @@ template class Analyzer::Base<QWidget>;
 #endif
 
 
-Analyzer::Base::Base( QWidget *parent, uint scopeSize )
-        : QWidget( parent )
-        , m_timeout( 40 ) // msec
-        , m_fht( new FHT(scopeSize) )
+Analyzer::Base::Base(QWidget *parent)
+        : QWidget(parent)
         , m_engine(NULL)
-        , m_lastScope(512)
+        , m_lastScope(200)
 {
 }
 
-void Analyzer::Base::hideEvent(QHideEvent *) {
-  m_timer.stop();
+void Analyzer::Base::set_engine(Engine::Base* engine) {
+  m_engine = engine;
+  connect(m_engine, SIGNAL(SpectrumAvailable(const QVector<float>&)),
+                    SLOT(SpectrumAvailable(const QVector<float>&)));
 }
 
-void Analyzer::Base::showEvent(QShowEvent *) {
-  m_timer.start(timeout(), this);
-}
-
-void Analyzer::Base::transform( Scope &scope ) //virtual
-{
-    //this is a standard transformation that should give
-    //an FFT scope that has bands for pretty analyzers
-
-    //NOTE resizing here is redundant as FHT routines only calculate FHT::size() values
-    //scope.resize( m_fht->size() );
-
-    float *front = static_cast<float*>( &scope.front() );
-
-    float* f = new float[ m_fht->size() ];
-    m_fht->copy( &f[0], front );
-    m_fht->logSpectrum( front, &f[0] );
-    m_fht->scale( front, 1.0 / 20 );
-
-    scope.resize( m_fht->size() / 2 ); //second half of values are rubbish
-    delete [] f;
+void Analyzer::Base::SpectrumAvailable(const QVector<float>& spectrum) {
+  m_lastScope = spectrum;
+  update();
 }
 
 void Analyzer::Base::paintEvent(QPaintEvent * e)
@@ -89,21 +71,7 @@ void Analyzer::Base::paintEvent(QPaintEvent * e)
     {
     case Engine::Playing:
     {
-        const Engine::Scope &thescope = engine->scope();
-        int i = 0;
-
-        // convert to mono here - our built in analyzers need mono, but we the engines provide interleaved pcm
-        for( uint x = 0; (int)x < m_fht->size(); ++x ) 
-        {
-           m_lastScope[x] = double(thescope[i] + thescope[i+1]) / (2*(1<<15));
-           i += 2;
-        }
-
-        transform( m_lastScope );
-        analyze( p, m_lastScope );
-
-        //scope.resize( m_fht->size() );
-
+        analyze(p, m_lastScope);
         break;
     }
     case Engine::Paused:
@@ -113,40 +81,6 @@ void Analyzer::Base::paintEvent(QPaintEvent * e)
     default:
         demo(p);
     }
-}
-
-int Analyzer::Base::resizeExponent( int exp )
-{
-    if ( exp < 3 )
-        exp = 3;
-    else if ( exp > 9 )
-        exp = 9;
-
-    if ( exp != m_fht->sizeExp() ) {
-        delete m_fht;
-        m_fht = new FHT( exp );
-    }
-    return exp;
-}
-
-int Analyzer::Base::resizeForBands( int bands )
-{
-    int exp;
-    if ( bands <= 8 )
-        exp = 4;
-    else if ( bands <= 16 )
-        exp = 5;
-    else if ( bands <= 32 )
-        exp = 6;
-    else if ( bands <= 64 )
-        exp = 7;
-    else if ( bands <= 128 )
-        exp = 8;
-    else
-        exp = 9;
-
-    resizeExponent( exp );
-    return m_fht->size() / 2;
 }
 
 void Analyzer::Base::paused(QPainter&) //virtual
@@ -215,12 +149,4 @@ Analyzer::initSin( Scope &v, const uint size ) //static
         v.push_back( sin( radian ) );
         radian += step;
     }
-}
-
-void Analyzer::Base::timerEvent(QTimerEvent* e) {
-  QWidget::timerEvent(e);
-  if (e->timerId() != m_timer.timerId())
-    return;
-
-  update();
 }
