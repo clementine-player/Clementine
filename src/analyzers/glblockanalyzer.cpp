@@ -24,8 +24,8 @@ void GLBlockAnalyzer::initializeGL() {
   qDebug() << Q_FUNC_INFO;
 
   QColor background_color = QApplication::palette().color(QPalette::Window);
+  qglClearColor(background_color);
 
-  glClearColor(background_color.redF(), background_color.greenF(), background_color.blueF(), 1.0);
   glDisable(GL_DEPTH_TEST);
 
   shader_.addShaderFromSourceFile(QGLShader::Vertex, ":shaders/glblock_vert.glsl");
