@@ -1,0 +1,15 @@
+#include "analyzer.h"
+
+#include "engines/enginebase.h"
+
+AnalyzerBase::AnalyzerBase(QWidget* parent)
+    : QGLWidget(parent),
+      engine_(NULL) {
+}
+
+void AnalyzerBase::set_engine(Engine::Base* engine) {
+  disconnect(engine_);
+  engine_ = engine;
+  connect(engine_, SIGNAL(SpectrumAvailable(const QVector<float>&)),
+                   SLOT(SpectrumAvailable(const QVector<float>&)));
+}
