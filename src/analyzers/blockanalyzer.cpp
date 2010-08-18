@@ -84,7 +84,6 @@ BlockAnalyzer::resizeEvent( QResizeEvent *e )
 
       m_yscale[m_rows] = 0;
 
-      determineStep();
       paletteChange( palette() );
    }
 
@@ -117,6 +116,7 @@ BlockAnalyzer::analyze( QPainter& p, const Analyzer::Scope &s )
 
    // m_yscale looks similar to: { 0.7, 0.5, 0.25, 0.15, 0.1, 0 }
    // if it contains 6 elements there are 5 rows in the analyzer
+   determineStep();
 
    Analyzer::interpolate( s, m_scope );
 
