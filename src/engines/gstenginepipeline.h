@@ -103,7 +103,7 @@ class GstEnginePipeline : public QObject {
   static bool StopUriDecodeBin(gpointer bin);
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
-  void ElementMessageReceived(GstMessage*);
+  bool ElementMessageReceived(GstMessage*);
   QString ParseTag(GstTagList* list, const char* tag) const;
 
   bool Init();

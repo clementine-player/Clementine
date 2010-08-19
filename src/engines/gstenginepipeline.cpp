@@ -291,7 +291,10 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       break;
 
     case GST_MESSAGE_ELEMENT:
-      instance->ElementMessageReceived(msg);
+      if (instance->ElementMessageReceived(msg)) {
+        gst_message_unref(msg);
+        return GST_BUS_DROP;
+      }
       break;
 
     default:
@@ -300,7 +303,8 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
   return GST_BUS_PASS;
 }
 
-void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
+// Returns whether or not to drop the message.
+bool GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
   const GstStructure* structure = gst_message_get_structure(msg);
 
   const gchar* name = gst_structure_get_name(structure);
@@ -317,13 +321,12 @@ void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
     GstStructure* s = gst_caps_get_structure(caps, 0);
     gint frequency = 0;
     gboolean ret = gst_structure_get_int(s, "rate", &frequency);
-    // The docs say we should unref caps but glib complains if we do.
-    //gst_object_unref(caps);
+    gst_caps_unref(caps);
     gst_object_unref(pad);
 
     if (!ret || frequency == 0) {
       qWarning() << "Failed to get rate";
-      return;
+      return true;
     }
 
     const GValue* magnitudes = gst_structure_get_value(structure, "magnitude");
@@ -335,7 +338,9 @@ void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
       spectrum[i] = (mag - kSpectrumThreshold) / -kSpectrumThreshold;
     }
     emit SpectrumAvailable(spectrum);
+    return true;
   }
+  return false;
 }
 
 void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
