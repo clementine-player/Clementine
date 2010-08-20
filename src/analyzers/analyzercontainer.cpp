@@ -15,10 +15,11 @@
 */
 
 #include "analyzercontainer.h"
-#include "glblockanalyzer.h"
 #include "baranalyzer.h"
 #include "blockanalyzer.h"
 #include "boomanalyzer.h"
+#include "engines/enginebase.h"
+#include "glblockanalyzer.h"
 #include "sonogram.h"
 #include "turbine.h"
 
@@ -104,11 +105,18 @@ void AnalyzerContainer::SetEngine(EngineBase *engine) {
   if (current_analyzer_)
     QMetaObject::invokeMethod(current_analyzer_, "set_engine", Qt::DirectConnection, Q_ARG(Engine::Base*, engine));
   engine_ = engine;
+  if (engine_) {
+    engine_->SetSpectrum(current_analyzer_);
+  }
 }
 
 void AnalyzerContainer::DisableAnalyzer() {
   delete current_analyzer_;
   current_analyzer_ = NULL;
+
+  if (engine_) {
+    engine_->SetSpectrum(false);
+  }
 
   Save();
 }
@@ -129,6 +137,10 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   QMetaObject::invokeMethod(current_analyzer_, "set_engine", Qt::DirectConnection, Q_ARG(Engine::Base*, engine_));
 
   layout()->addWidget(current_analyzer_);
+
+  if (engine_) {
+    engine_->SetSpectrum(true);
+  }
 
   Save();
 }

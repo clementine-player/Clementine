@@ -78,6 +78,8 @@ class GstEnginePipeline : public QObject {
 
   QUrl redirect_url() const { return redirect_url_; }
 
+  void SetSpectrum(bool enable);
+
  public slots:
   void SetVolumeModifier(qreal mod);
 

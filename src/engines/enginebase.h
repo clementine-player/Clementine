@@ -71,6 +71,8 @@ class Base : public QObject, boost::noncopyable {
   bool is_crossfade_enabled() const { return crossfade_enabled_; }
   bool is_autocrossfade_enabled() const { return autocrossfade_enabled_; }
 
+  virtual void SetSpectrum(bool) {}
+
   static const char* kSettingsGroup;
   static const int kScopeSize = 1024;
 

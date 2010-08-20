@@ -74,7 +74,8 @@ GstEngine::GstEngine()
     rg_compression_(true),
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
-    next_element_id_(0)
+    next_element_id_(0),
+    spectrum_enabled_(false)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelay);
@@ -468,7 +469,6 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   current_pipeline_ = pipeline;
   preload_pipeline_.reset();
 
-  qDebug() << current_pipeline_.get();
   connect(current_pipeline_.get(), SIGNAL(SpectrumAvailable(const QVector<float>&)),
           this, SIGNAL(SpectrumAvailable(const QVector<float>&)));
 
@@ -536,6 +536,8 @@ void GstEngine::PlayDone() {
   if (watcher->data()) {
     Seek(watcher->data());
   }
+
+  SetSpectrum(spectrum_enabled_);
 
   emit StateChanged(Engine::Playing);
 }
@@ -856,4 +858,11 @@ int GstEngine::AllGloryToTheHypnotoad() {
   }
   pipeline->SetVolume(5);  // Hypnotoad is *loud*.
   return AddBackgroundStream(pipeline);
+}
+
+void GstEngine::SetSpectrum(bool enable) {
+  spectrum_enabled_ = enable;
+  if (current_pipeline_) {
+    current_pipeline_->SetSpectrum(enable);
+  }
 }

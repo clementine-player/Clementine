@@ -168,8 +168,8 @@ bool GstEnginePipeline::Init() {
   g_object_set(G_OBJECT(spectrum_),
       "bands", kSpectrumBands,
       "threshold", kSpectrumThreshold,
-      "interval", kSpectrumIntervalns,
       NULL);
+  SetSpectrum(false);  // Spectrum disabled by default.
 
   GstPad* pad = gst_element_get_pad(audioconvert_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
@@ -603,4 +603,10 @@ void GstEnginePipeline::RemoveBufferConsumer(BufferConsumer *consumer) {
 void GstEnginePipeline::RemoveAllBufferConsumers() {
   QMutexLocker l(&buffer_consumers_mutex_);
   buffer_consumers_.clear();
+}
+
+void GstEnginePipeline::SetSpectrum(bool enable) {
+  g_object_set(spectrum_,
+      "interval", enable ? kSpectrumIntervalns : std::numeric_limits<quint64>::max(),
+      NULL);
 }
