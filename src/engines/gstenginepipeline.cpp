@@ -14,6 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <limits>
+
 #include "gstenginepipeline.h"
 #include "gstengine.h"
 #include "bufferconsumer.h"
