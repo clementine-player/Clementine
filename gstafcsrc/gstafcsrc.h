@@ -57,7 +57,6 @@ struct _GstAfcSrc {
 
   gboolean connected_;
   idevice_t device_;
-  lockdownd_client_t lockdown_;
   afc_client_t afc_;
 
   uint16_t afc_port_;

@@ -140,7 +140,6 @@ static void gst_afc_src_init(GstAfcSrc* element, GstAfcSrcClass* gclass) {
   element->afc_port_ = 0;
   element->device_ = NULL;
   element->file_handle_ = 0;
-  element->lockdown_ = NULL;
   element->buffer_ = NULL;
   element->buffer_is_valid_ = FALSE;
   element->buffer_length_ = 0;
@@ -159,9 +158,6 @@ static void gst_afc_src_finalize(GObject* object) {
 
   if (self->afc_)
     afc_client_free(self->afc_);
-
-  if (self->lockdown_)
-    lockdownd_client_free(self->lockdown_);
 
   if (self->device_)
     idevice_free(self->device_);
@@ -232,24 +228,30 @@ static gboolean gst_afc_src_start(GstBaseSrc* src) {
     return FALSE;
   }
 
+  lockdownd_client_t lockdown;
+
   lockdownd_error_t lockdown_err =
-      lockdownd_client_new_with_handshake(self->device_, &self->lockdown_, "GstAfcSrc");
+      lockdownd_client_new_with_handshake(self->device_, &lockdown, "GstAfcSrc");
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("lockdown error: %d", lockdown_err), (NULL));
     return FALSE;
   }
 
-  lockdown_err = lockdownd_start_service(self->lockdown_, "com.apple.afc", &self->afc_port_);
+  lockdown_err = lockdownd_start_service(lockdown, "com.apple.afc", &self->afc_port_);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("lockdown error: %d", lockdown_err), (NULL));
+    lockdownd_client_free(lockdown);
     return FALSE;
   }
 
   afc_error_t afc_err = afc_client_new(self->device_, self->afc_port_, &self->afc_);
   if (afc_err != 0) {
     GST_ELEMENT_ERROR(src, RESOURCE, NOT_FOUND, ("afc error: %d", afc_err), (NULL));
+    lockdownd_client_free(lockdown);
     return FALSE;
   }
+
+  lockdownd_client_free(lockdown);
 
   // Try opening the file
   afc_err = afc_file_open(self->afc_, self->path_, AFC_FOPEN_RDONLY, &self->file_handle_);
@@ -296,10 +298,6 @@ static GstFlowReturn gst_afc_src_create(GstBaseSrc* src, guint64 offset, guint l
     }
 
     if (err != AFC_E_SUCCESS) {
-      // Trying to free a lockdownd client that's been disconnected results in
-      // a whole load of "Broken pipe" errors.
-      self->lockdown_ = NULL;
-
       gst_buffer_unref(buf);
       return GST_FLOW_ERROR;
     }
