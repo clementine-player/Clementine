@@ -27,12 +27,17 @@ struct IWMDeviceManager;
 #include <QMutex>
 #include <QPixmap>
 
-class WmdmLister : public DeviceLister {
+#include <mswmdm.h>
+
+#undef LoadIcon
+
+class WmdmLister : public DeviceLister, public IWMDMNotification {
   Q_OBJECT
 
 public:
   WmdmLister();
 
+  // DeviceLister
   virtual void Init();
 
   virtual QStringList DeviceUniqueIDs();
@@ -45,6 +50,13 @@ public:
   virtual QString MakeFriendlyName(const QString& id);
   virtual QList<QUrl> MakeDeviceUrls(const QString& id);
   virtual void UnmountDevice(const QString& id);
+
+  // IWMDMNotification
+  // The __stdcall is *really* important
+  virtual HRESULT __stdcall WMDMMessage(DWORD message_type, LPCWSTR name);
+  virtual LONG __stdcall QueryInterface(const IID& riid, void** object);
+  virtual ULONG __stdcall AddRef();
+  virtual ULONG __stdcall Release();
 
 public slots:
   virtual void UpdateDeviceFreeSpace(const QString& id);
@@ -77,6 +89,7 @@ private:
 
 private:
   IWMDeviceManager* device_manager_;
+  DWORD notification_cookie_;
 
   QMutex mutex_;
   QMap<QString, DeviceInfo> devices_;

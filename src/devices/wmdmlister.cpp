@@ -37,7 +37,8 @@ QString WmdmLister::DeviceInfo::unique_id() const {
 }
 
 WmdmLister::WmdmLister()
-  : device_manager_(NULL)
+  : device_manager_(NULL),
+    notification_cookie_(0)
 {
 }
 
@@ -72,7 +73,19 @@ void WmdmLister::Init() {
     return;
   }
 
-  // Fetch the inital list of devices
+  // Register for notifications
+  IConnectionPointContainer* cp_container = NULL;
+  device_manager_->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
+
+  IConnectionPoint* cp = NULL;
+  cp_container->FindConnectionPoint(IID_IWMDMNotification, &cp);
+
+  cp->Advise(this, &notification_cookie_);
+
+  cp->Release();
+  cp_container->Release();
+
+  // Fetch the initial list of devices
   IWMDMEnumDevice* device_it = NULL;
   if (device_manager_->EnumDevices(&device_it)) {
     qWarning() << "Error querying WMDM devices";
@@ -215,3 +228,30 @@ void WmdmLister::UnmountDevice(const QString& id) {
 
 void WmdmLister::UpdateDeviceFreeSpace(const QString& id) {
 }
+
+HRESULT WmdmLister::WMDMMessage(DWORD message_type, LPCWSTR name) {
+  qDebug() << "Event" << message_type << name;
+  return S_OK;
+}
+
+LONG WmdmLister::QueryInterface(REFIID riid, void** object) {
+  *object = 0;
+
+  if (riid == IID_IUnknown)
+    *object = (IUnknown*) this;
+  else if (riid == IID_IWMDMNotification)
+    *object = (IWMDMNotification*) this;
+  else
+    return E_NOINTERFACE;
+
+  return S_OK;
+}
+
+ULONG WmdmLister::AddRef() {
+  return 0;
+}
+
+ULONG WmdmLister::Release() {
+  return 0;
+}
+
