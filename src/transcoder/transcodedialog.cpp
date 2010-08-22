@@ -32,9 +32,9 @@
 
 const char* TranscodeDialog::kSettingsGroup = "Transcoder";
 
-static bool CompareFormatsByName(const TranscoderFormat* left,
-                                 const TranscoderFormat* right) {
-  return left->name() < right->name();
+static bool ComparePresetsByName(const TranscoderPreset& left,
+                                 const TranscoderPreset& right) {
+  return left.name_ < right.name_;
 }
 
 
@@ -53,13 +53,13 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
 
   log_ui_->setupUi(log_dialog_);
 
-  // Get formats
-  QList<const TranscoderFormat*> formats = transcoder_->formats();
-  qSort(formats.begin(), formats.end(), CompareFormatsByName);
-  foreach (const TranscoderFormat* format, formats) {
+  // Get presets
+  QList<TranscoderPreset> presets = transcoder_->presets();
+  qSort(presets.begin(), presets.end(), ComparePresetsByName);
+  foreach (const TranscoderPreset& preset, presets) {
     ui_->format->addItem(
-        QString("%1 (.%2)").arg(format->name(), format->file_extension()),
-        QVariant::fromValue(format));
+        QString("%1 (.%2)").arg(preset.name_, preset.extension_),
+        QVariant::fromValue(preset));
   }
 
   // Load settings
@@ -70,7 +70,7 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   QString last_output_format = s.value("last_output_format", "ogg").toString();
   for (int i=0 ; i<ui_->format->count() ; ++i) {
     if (last_output_format ==
-        ui_->format->itemData(i).value<const TranscoderFormat*>()->file_extension()) {
+        ui_->format->itemData(i).value<TranscoderPreset>().extension_) {
       ui_->format->setCurrentIndex(i);
       break;
     }
@@ -117,13 +117,13 @@ void TranscodeDialog::Start() {
   SetWorking(true);
 
   QAbstractItemModel* file_model = ui_->files->model();
-  const TranscoderFormat* format = ui_->format->itemData(
-      ui_->format->currentIndex()).value<const TranscoderFormat*>();
+  TranscoderPreset preset = ui_->format->itemData(
+      ui_->format->currentIndex()).value<TranscoderPreset>();
 
   // Add jobs to the transcoder
   for (int i=0 ; i<file_model->rowCount() ; ++i) {
     QString filename = file_model->index(i, 0).data(Qt::UserRole).toString();
-    transcoder_->AddJob(filename, format);
+    transcoder_->AddJob(filename, preset);
   }
 
   // Set up the progressbar
@@ -142,7 +142,7 @@ void TranscodeDialog::Start() {
   // Save the last output format
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  s.setValue("last_output_format", format->file_extension());
+  s.setValue("last_output_format", preset.extension_);
 }
 
 void TranscodeDialog::Cancel() {

@@ -27,20 +27,20 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
 
-class Transcoder;
 
-class TranscoderFormat {
-  friend class Transcoder;
+struct TranscoderPreset {
+  TranscoderPreset() {}
+  TranscoderPreset(const QString& name,
+                   const QString& extension,
+                   const QString& codec_mimetype,
+                   const QString& muxer_mimetype_ = QString());
 
- public:
-  virtual ~TranscoderFormat() {}
-
-  virtual QString name() const = 0;
-  virtual QString file_extension() const = 0;
-
-  virtual QStringList gst_elements() const = 0;
+  QString name_;
+  QString extension_;
+  QString codec_mimetype_;
+  QString muxer_mimetype_;
 };
-Q_DECLARE_METATYPE(const TranscoderFormat*);
+Q_DECLARE_METATYPE(TranscoderPreset);
 
 
 class Transcoder : public QObject {
@@ -48,14 +48,13 @@ class Transcoder : public QObject {
 
  public:
   Transcoder(QObject* parent = 0);
-  ~Transcoder();
 
-  QList<const TranscoderFormat*> formats() const;
+  QList<TranscoderPreset> presets() const { return presets_; }
   int max_threads() const { return max_threads_; }
 
   void set_max_threads(int count) { max_threads_ = count; }
 
-  void AddJob(const QString& input, const TranscoderFormat* output_format,
+  void AddJob(const QString& input, const TranscoderPreset& preset,
               const QString& output = QString());
 
  public slots:
@@ -75,7 +74,7 @@ class Transcoder : public QObject {
   struct Job {
     QString input;
     QString output;
-    const TranscoderFormat* output_format;
+    TranscoderPreset preset;
   };
 
   // State held by a job and shared across gstreamer callbacks - lives in the
@@ -117,7 +116,9 @@ class Transcoder : public QObject {
 
   GstElement* CreateElement(const QString& factory_name, GstElement* bin = NULL,
                             const QString& name = QString());
-  GstElement* CreateBin(const QStringList& elements);
+  GstElement* CreateElementForMimeType(const QString& element_type,
+                                       const QString& mime_type,
+                                       GstElement* bin = NULL);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
@@ -127,7 +128,7 @@ class Transcoder : public QObject {
   typedef QList<boost::shared_ptr<JobState> > JobStateList;
 
   int max_threads_;
-  QList<TranscoderFormat*> formats_;
+  QList<TranscoderPreset> presets_;
   QList<Job> queued_jobs_;
   JobStateList current_jobs_;
 };

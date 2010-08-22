@@ -414,7 +414,6 @@ if(HAVE_GSTREAMER)
   list(APPEND SOURCES
     transcoder/transcodedialog.cpp
     transcoder/transcoder.cpp
-    transcoder/transcoderformats.cpp
   )
 
   list(APPEND HEADERS

@@ -15,7 +15,6 @@
 */
 
 #include "transcoder.h"
-#include "transcoderformats.h"
 
 #include <QtConcurrentMap>
 #include <QtDebug>
@@ -27,6 +26,19 @@
 using boost::shared_ptr;
 
 int Transcoder::JobFinishedEvent::sEventType = -1;
+
+
+TranscoderPreset::TranscoderPreset(
+    const QString& name,
+    const QString& extension,
+    const QString& codec_mimetype,
+    const QString& muxer_mimetype)
+      : name_(name),
+        extension_(extension),
+        codec_mimetype_(codec_mimetype),
+        muxer_mimetype_(muxer_mimetype)
+{
+}
 
 
 GstElement* Transcoder::CreateElement(const QString &factory_name,
@@ -49,38 +61,84 @@ GstElement* Transcoder::CreateElement(const QString &factory_name,
   return ret;
 }
 
-GstElement* Transcoder::CreateBin(const QStringList& elements) {
-  GstElement* bin = gst_bin_new("outputbin");
+struct SuitableElement {
+  SuitableElement(const QString& name = QString(), int rank = 0)
+    : name_(name), rank_(rank) {}
 
-  GstElement* last_element = NULL;
-  for (int i=0 ; i<elements.count() ; ++i) {
-    GstElement* element = CreateElement(elements[i], bin);
-    if (!element) {
-      gst_object_unref(bin);
-      return NULL;
-    }
+  bool operator <(const SuitableElement& other) const { return rank_ < other.rank_; }
 
-    if (i == 0) {
-      // If this is the first element, make it the bin's sink
-      GstPad* pad = gst_element_get_pad(element, "sink");
-      gst_element_add_pad(bin, gst_ghost_pad_new("sink", pad));
-      gst_object_unref(pad);
-    }
+  QString name_;
+  int rank_;
+};
 
-    if (i == elements.count() - 1) {
-      // If this is the last element, make it the bin's src
-      GstPad* pad = gst_element_get_pad(element, "src");
-      gst_element_add_pad(bin, gst_ghost_pad_new("src", pad));
-      gst_object_unref(pad);
-    }
+GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
+                                                 const QString& mime_type,
+                                                 GstElement* bin) {
+  if (mime_type.isEmpty())
+    return NULL;
 
-    // Link the last element to this one
-    if (last_element)
-      gst_element_link(last_element, element);
-    last_element = element;
+  // HACK: Force ffmux_mp4 because it doesn't set any useful src caps
+  if (mime_type == "audio/mp4") {
+    LogLine(QString("Using '%1' (rank %2)").arg("ffmux_mp4").arg(-1));
+    return CreateElement("ffmux_mp4", bin);
   }
 
-  return bin;
+  // Keep track of all the suitable elements we find and figure out which
+  // is the best at the end.
+  QList<SuitableElement> suitable_elements_;
+
+  // The caps we're trying to find
+  GstCaps* target_caps = gst_caps_from_string(mime_type.toUtf8().constData());
+
+  GstRegistry* registry = gst_registry_get_default();
+  GList* const features =
+      gst_registry_get_feature_list(registry, GST_TYPE_ELEMENT_FACTORY);
+
+  for (GList* p = features ; p ; p = g_list_next(p)) {
+    GstElementFactory* factory = GST_ELEMENT_FACTORY(p->data);
+
+    // Is this the right type of plugin?
+    if (QString(factory->details.klass).contains(element_type)) {
+      const GList* const templates =
+          gst_element_factory_get_static_pad_templates(factory);
+      for (const GList* p = templates ; p ; p = g_list_next(p)) {
+        // Only interested in source pads
+        GstStaticPadTemplate* pad_template = reinterpret_cast<GstStaticPadTemplate*>(p->data);
+        if (pad_template->direction != GST_PAD_SRC)
+          continue;
+
+        // Does this pad support the mime type we want?
+        GstCaps* caps = gst_static_pad_template_get_caps(pad_template);
+        GstCaps* intersection = gst_caps_intersect(caps, target_caps);
+
+        if (intersection) {
+          if (!gst_caps_is_empty(intersection)) {
+            int rank = gst_plugin_feature_get_rank(GST_PLUGIN_FEATURE(factory));
+            QString name = GST_PLUGIN_FEATURE_NAME(factory);
+
+            if (name.startsWith("ffmux") || name.startsWith("ffenc"))
+              rank = -1; // ffmpeg usually sucks
+
+            suitable_elements_ << SuitableElement(name, rank);
+          }
+          gst_caps_unref(intersection);
+        }
+      }
+    }
+  }
+
+  gst_plugin_feature_list_free(features);
+  gst_caps_unref(target_caps);
+
+  if (suitable_elements_.isEmpty())
+    return NULL;
+
+  // Sort by rank
+  qSort(suitable_elements_);
+  const SuitableElement& best = suitable_elements_.last();
+
+  LogLine(QString("Using '%1' (rank %2)").arg(best.name_).arg(best.rank_));
+  return CreateElement(best.name_, bin);
 }
 
 
@@ -108,38 +166,27 @@ Transcoder::Transcoder(QObject* parent)
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
 
-  formats_ << new OggVorbisTranscoder;
-  formats_ << new OggSpeexTranscoder;
-  formats_ << new FlacTranscoder;
-  formats_ << new Mp3Transcoder;
-  formats_ << new M4aTranscoder;
-  formats_ << new ThreeGPTranscoder;
+  presets_ << TranscoderPreset("Ogg Vorbis", "ogg",  "audio/x-vorbis", "application/ogg");
+  presets_ << TranscoderPreset("Ogg Speex",  "spx",  "audio/x-speex", "application/ogg");
+  presets_ << TranscoderPreset("FLAC",       "flac", "audio/x-flac");
+  presets_ << TranscoderPreset("MP3",        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
+  presets_ << TranscoderPreset("M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
+  presets_ << TranscoderPreset("3GP AAC",    "3gp",  "audio/mpeg, mpegversion=(int)4", "application/x-3gp");
 }
 
-Transcoder::~Transcoder() {
-  qDeleteAll(formats_);
-}
-
-QList<const TranscoderFormat*> Transcoder::formats() const {
-  QList<const TranscoderFormat*> ret;
-  foreach (TranscoderFormat* format, formats_)
-    ret << format;
-  return ret;
-}
-
-void Transcoder::AddJob(const QString &input,
-                        const TranscoderFormat *output_format,
-                        const QString &output) {
+void Transcoder::AddJob(const QString& input,
+                        const TranscoderPreset& preset,
+                        const QString& output) {
   Job job;
   job.input = input;
-  job.output_format = output_format;
+  job.preset = preset;
 
   // Use the supplied filename if there was one, otherwise take the file
   // extension off the input filename and append the correct one.
   if (!output.isEmpty())
     job.output = output;
   else
-    job.output = input.section('.', 0, -2) + '.' + output_format->file_extension();
+    job.output = input.section('.', 0, -2) + '.' + preset.extension_;
 
   // Never overwrite existing files
   if (QFile::exists(job.output)) {
@@ -178,7 +225,11 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
   }
 
   Job job = queued_jobs_.takeFirst();
-  return StartJob(job) ? StartedSuccessfully : FailedToStart;
+  if (StartJob(job))
+    return StartedSuccessfully;
+
+  emit JobComplete(job.input, false);
+  return FailedToStart;
 }
 
 void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
@@ -254,20 +305,34 @@ bool Transcoder::StartJob(const Job &job) {
   if (!state->pipeline_) return false;
 
   // Create all the elements
-  const TranscoderFormat* f = job.output_format;
   GstElement* src     = CreateElement("filesrc", state->pipeline_.get());
   GstElement* decode  = CreateElement("decodebin2", state->pipeline_.get());
   GstElement* convert = CreateElement("audioconvert", state->pipeline_.get());
-  GstElement* encode  = CreateBin(f->gst_elements());
+  GstElement* codec   = CreateElementForMimeType("Codec/Encoder/Audio", job.preset.codec_mimetype_, state->pipeline_.get());
+  GstElement* muxer   = CreateElementForMimeType("Codec/Muxer", job.preset.muxer_mimetype_, state->pipeline_.get());
   GstElement* sink    = CreateElement("filesink", state->pipeline_.get());
 
-  if (!src || !decode || !convert || !encode || !sink)
+  if (!src || !decode || !convert || !sink)
     return false;
 
+  if (!codec) {
+    LogLine(tr("Couldn't find an encoder for %1, check you have the correct GStreamer plugins installed"
+               ).arg(job.preset.codec_mimetype_));
+    return false;
+  }
+
+  if (!muxer && !job.preset.muxer_mimetype_.isEmpty()) {
+    LogLine(tr("Couldn't find a muxer for %1, check you have the correct GStreamer plugins installed"
+               ).arg(job.preset.muxer_mimetype_));
+    return false;
+  }
+
   // Join them together
-  gst_bin_add(GST_BIN(state->pipeline_.get()), encode);
   gst_element_link(src, decode);
-  gst_element_link_many(convert, encode, sink, NULL);
+  if (muxer)
+    gst_element_link_many(convert, codec, muxer, sink, NULL);
+  else
+    gst_element_link_many(convert, codec, sink, NULL);
 
   // Set properties
   g_object_set(src, "location", job.input.toLocal8Bit().constData(), NULL);
