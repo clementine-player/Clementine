@@ -30,8 +30,7 @@ BYTE abPVK[] = {0x00};
 BYTE abCert[] = {0x00};
 
 QString WmdmLister::DeviceInfo::unique_id() const {
-  // TODO: Serial number?
-  return name_;
+  return "wmdm/" + canonical_name_;
 }
 
 WmdmLister::WmdmLister()
@@ -66,7 +65,7 @@ void WmdmLister::Init() {
   }
 
   // Create the device manager
-  if (auth->QueryInterface(IID_IWMDeviceManager, (void**)&device_manager_)) {
+  if (auth->QueryInterface(IID_IWMDeviceManager2, (void**)&device_manager_)) {
     qWarning() << "Error creating WMDM device manager";
     return;
   }
@@ -85,7 +84,7 @@ void WmdmLister::Init() {
 
   // Fetch the initial list of devices
   IWMDMEnumDevice* device_it = NULL;
-  if (device_manager_->EnumDevices(&device_it)) {
+  if (device_manager_->EnumDevices2(&device_it)) {
     qWarning() << "Error querying WMDM devices";
     return;
   }
@@ -94,15 +93,22 @@ void WmdmLister::Init() {
   QMap<QString, DeviceInfo> devices;
   forever {
     IWMDMDevice* device = NULL;
+    IWMDMDevice2* device2 = NULL;
     ULONG fetched = 0;
     if (device_it->Next(1, &device, &fetched) || fetched != 1)
       break;
 
-    DeviceInfo info = ReadDeviceInfo(device);
+    if (device->QueryInterface(IID_IWMDMDevice2, (void**)&device2)) {
+      qWarning() << "Error getting IWMDMDevice2 from device";
+      device->Release();
+      continue;
+    }
+
+    DeviceInfo info = ReadDeviceInfo(device2);
     if (info.is_suitable_)
       devices[info.unique_id()] = info;
-
-    device->Release();
+    else
+      device->Release();
   }
   device_it->Release();
 
@@ -147,17 +153,21 @@ qint64 GetSpaceValue(F f) {
   return (qint64)high << 32 | (qint64)low;
 }
 
-WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice* device) {
+WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
   DeviceInfo ret;
   ret.device_ = device;
 
   // Get text strings
-  wchar_t buf[MAX_PATH];
-  device->GetName(buf, MAX_PATH);
+  const int max_size = 512;
+  wchar_t buf[max_size];
+  device->GetName(buf, max_size);
   ret.name_ = QString::fromWCharArray(buf);
 
-  device->GetManufacturer(buf, MAX_PATH);
+  device->GetManufacturer(buf, max_size);
   ret.manufacturer_ = QString::fromWCharArray(buf);
+
+  qDebug() << device->GetCanonicalName(buf, max_size);
+  ret.canonical_name_ = QString::fromWCharArray(buf);
 
   // Get the type and check whether it has storage
   DWORD type = 0;
@@ -176,16 +186,23 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice* device) {
   IWMDMEnumStorage* storage_it = NULL;
   if (device->EnumStorage(&storage_it) == S_OK && storage_it) {
     ULONG storage_fetched = 0;
-    if (storage_it->Next(1, &ret.storage_, &storage_fetched) == S_OK) {
-      // Get free space information
-      IWMDMStorageGlobals* globals;
-      ret.storage_->GetStorageGlobals(&globals);
+    IWMDMStorage* storage;
 
-      ret.total_bytes_ = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalSize, globals, _1, _2));
-      ret.free_bytes_  = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalFree, globals, _1, _2));
-      ret.free_bytes_ -= GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalBad,  globals, _1, _2));
+    if (storage_it->Next(1, &storage, &storage_fetched) == S_OK) {
+      if (storage->QueryInterface(IID_IWMDMStorage2, (void**)&ret.storage_)) {
+        qWarning() << "Error getting IWMDMStorage2 from storage";
+      } else {
+        // Get free space information
+        IWMDMStorageGlobals* globals;
+        ret.storage_->GetStorageGlobals(&globals);
 
-      globals->Release();
+        ret.total_bytes_ = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalSize, globals, _1, _2));
+        ret.free_bytes_  = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalFree, globals, _1, _2));
+        ret.free_bytes_ -= GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalBad,  globals, _1, _2));
+
+        globals->Release();
+        storage->Release();
+      }
     }
     storage_it->Release();
   }
@@ -249,7 +266,8 @@ void WmdmLister::UpdateDeviceFreeSpace(const QString& id) {
 }
 
 HRESULT WmdmLister::WMDMMessage(DWORD message_type, LPCWSTR name) {
-  qDebug() << "Event" << message_type << name;
+  qDebug() << message_type << QString::fromWCharArray(name);
+
   return S_OK;
 }
 

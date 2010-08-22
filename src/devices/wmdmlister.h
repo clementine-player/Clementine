@@ -19,10 +19,6 @@
 
 #include "devicelister.h"
 
-struct IWMDMDevice;
-struct IWMDMStorage;
-struct IWMDeviceManager;
-
 #include <QMap>
 #include <QMutex>
 #include <QPixmap>
@@ -70,13 +66,14 @@ private:
 
     QString unique_id() const;
 
-    IWMDMDevice* device_;
-    IWMDMStorage* storage_;
+    IWMDMDevice2* device_;
+    IWMDMStorage2* storage_;
 
     bool is_suitable_;
 
     QString name_;
     QString manufacturer_;
+    QString canonical_name_;
 
     QPixmap icon_;
 
@@ -84,13 +81,13 @@ private:
     quint64 free_bytes_;
   };
 
-  DeviceInfo ReadDeviceInfo(IWMDMDevice* device);
+  DeviceInfo ReadDeviceInfo(IWMDMDevice2* device);
 
   template <typename T>
   T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
 
 private:
-  IWMDeviceManager* device_manager_;
+  IWMDeviceManager2* device_manager_;
   SacHandle sac_;
   DWORD notification_cookie_;
 
