@@ -18,8 +18,6 @@
 
 #include <icomponentauthenticate.h>
 #include <objbase.h>
-#include <sac_shim.h>
-#include <mswmdm.h>
 #include <mswmdm_i.c>
 
 #include <boost/bind.hpp>
@@ -54,15 +52,15 @@ void WmdmLister::Init() {
     return;
   }
 
-  SacHandle sac = CSecureChannelClient_New();
+  sac_ = CSecureChannelClient_New();
   if (CSecureChannelClient_SetCertificate(
-      sac, SAC_CERT_V1, abCert, sizeof(abCert), abPVK, sizeof(abPVK))) {
+      sac_, SAC_CERT_V1, abCert, sizeof(abCert), abPVK, sizeof(abPVK))) {
     qWarning() << "Error setting SAC certificate";
     return;
   }
 
-  CSecureChannelClient_SetInterface(sac, auth);
-  if (CSecureChannelClient_Authenticate(sac, SAC_PROTOCOL_V1)) {
+  CSecureChannelClient_SetInterface(sac_, auth);
+  if (CSecureChannelClient_Authenticate(sac_, SAC_PROTOCOL_V1)) {
     qWarning() << "Error authenticating with SAC";
     return;
   }
@@ -118,6 +116,27 @@ void WmdmLister::Init() {
   foreach (const QString& id, devices.keys()) {
     emit DeviceAdded(id);
   }
+}
+
+void WmdmLister::ShutDown() {
+  // Unregister for notifications
+  IConnectionPointContainer* cp_container;
+  device_manager_->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
+
+  IConnectionPoint* cp;
+  cp_container->FindConnectionPoint(IID_IWMDMNotification, &cp);
+
+  cp->Release();
+  cp_container->Release();
+
+  // Release the device manager
+  device_manager_->Release();
+
+  // SAC
+  CSecureChannelClient_Free(sac_);
+
+  // Uninitialise COM
+  CoUninitialize();
 }
 
 template <typename F>

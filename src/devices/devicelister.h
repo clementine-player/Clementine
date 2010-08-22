@@ -57,6 +57,7 @@ public:
 
 public slots:
   virtual void UpdateDeviceFreeSpace(const QString& id) = 0;
+  virtual void ShutDown() {}
 
 signals:
   void DeviceAdded(const QString& id);

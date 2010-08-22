@@ -28,6 +28,7 @@ struct IWMDeviceManager;
 #include <QPixmap>
 
 #include <mswmdm.h>
+#include <sac_shim.h>
 
 #undef LoadIcon
 
@@ -60,6 +61,7 @@ public:
 
 public slots:
   virtual void UpdateDeviceFreeSpace(const QString& id);
+  virtual void ShutDown();
 
 private:
   struct DeviceInfo {
@@ -89,6 +91,7 @@ private:
 
 private:
   IWMDeviceManager* device_manager_;
+  SacHandle sac_;
   DWORD notification_cookie_;
 
   QMutex mutex_;
