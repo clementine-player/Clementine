@@ -23,16 +23,20 @@
 #include <QMutex>
 #include <QPixmap>
 
+#include <boost/scoped_ptr.hpp>
+
 #include <mswmdm.h>
 #include <sac_shim.h>
-
 #undef LoadIcon
+
+class WmdmThread;
 
 class WmdmLister : public DeviceLister, public IWMDMNotification {
   Q_OBJECT
 
 public:
   WmdmLister();
+  ~WmdmLister();
 
   // DeviceLister
   virtual void Init();
@@ -54,6 +58,9 @@ public:
   virtual LONG __stdcall QueryInterface(const IID& riid, void** object);
   virtual ULONG __stdcall AddRef();
   virtual ULONG __stdcall Release();
+
+  // Called by WmdmLister
+  QString DeviceCanonicalName(const QString& id);
 
 public slots:
   virtual void UpdateDeviceFreeSpace(const QString& id);
@@ -91,7 +98,8 @@ private:
   void WMDMDeviceRemoved(const QString& canonical_name);
 
 private:
-  IWMDeviceManager2* device_manager_;
+  boost::scoped_ptr<WmdmThread> thread_;
+
   SacHandle sac_;
   DWORD notification_cookie_;
 

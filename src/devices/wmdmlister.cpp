@@ -15,6 +15,7 @@
 */
 
 #include "wmdmlister.h"
+#include "wmdmthread.h"
 
 #include <icomponentauthenticate.h>
 #include <objbase.h>
@@ -27,9 +28,6 @@
 #include <QStringList>
 #include <QtDebug>
 
-BYTE abPVK[] = {0x00};
-BYTE abCert[] = {0x00};
-
 QString WmdmLister::CanonicalNameToId(const QString& canonical_name) {
   return "wmdm/" + canonical_name;
 }
@@ -39,45 +37,20 @@ QString WmdmLister::DeviceInfo::unique_id() const {
 }
 
 WmdmLister::WmdmLister()
-  : device_manager_(NULL),
-    notification_cookie_(0)
+  : notification_cookie_(0)
 {
 }
 
+WmdmLister::~WmdmLister() {
+  Q_ASSERT(!thread_);
+}
+
 void WmdmLister::Init() {
-  // Initialise COM
-  CoInitialize(0);
-
-  // Authenticate with WMDM
-  IComponentAuthenticate* auth;
-  if (CoCreateInstance(CLSID_MediaDevMgr, NULL, CLSCTX_ALL,
-                       IID_IComponentAuthenticate, (void**) &auth)) {
-    qWarning() << "Error creating the IComponentAuthenticate interface";
-    return;
-  }
-
-  sac_ = CSecureChannelClient_New();
-  if (CSecureChannelClient_SetCertificate(
-      sac_, SAC_CERT_V1, abCert, sizeof(abCert), abPVK, sizeof(abPVK))) {
-    qWarning() << "Error setting SAC certificate";
-    return;
-  }
-
-  CSecureChannelClient_SetInterface(sac_, auth);
-  if (CSecureChannelClient_Authenticate(sac_, SAC_PROTOCOL_V1)) {
-    qWarning() << "Error authenticating with SAC";
-    return;
-  }
-
-  // Create the device manager
-  if (auth->QueryInterface(IID_IWMDeviceManager2, (void**)&device_manager_)) {
-    qWarning() << "Error creating WMDM device manager";
-    return;
-  }
+  thread_.reset(new WmdmThread);
 
   // Register for notifications
   IConnectionPointContainer* cp_container = NULL;
-  device_manager_->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
+  thread_->manager()->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
 
   IConnectionPoint* cp = NULL;
   cp_container->FindConnectionPoint(IID_IWMDMNotification, &cp);
@@ -89,7 +62,7 @@ void WmdmLister::Init() {
 
   // Fetch the initial list of devices
   IWMDMEnumDevice* device_it = NULL;
-  if (device_manager_->EnumDevices2(&device_it)) {
+  if (thread_->manager()->EnumDevices2(&device_it)) {
     qWarning() << "Error querying WMDM devices";
     return;
   }
@@ -133,7 +106,7 @@ void WmdmLister::Init() {
 void WmdmLister::ShutDown() {
   // Unregister for notifications
   IConnectionPointContainer* cp_container;
-  device_manager_->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
+  thread_->manager()->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
 
   IConnectionPoint* cp;
   cp_container->FindConnectionPoint(IID_IWMDMNotification, &cp);
@@ -141,14 +114,7 @@ void WmdmLister::ShutDown() {
   cp->Release();
   cp_container->Release();
 
-  // Release the device manager
-  device_manager_->Release();
-
-  // SAC
-  CSecureChannelClient_Free(sac_);
-
-  // Uninitialise COM
-  CoUninitialize();
+  thread_.reset();
 }
 
 template <typename F>
@@ -207,8 +173,8 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
         ret.free_bytes_ -= GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalBad,  globals, _1, _2));
 
         globals->Release();
-        storage->Release();
       }
+      storage->Release();
     }
     storage_it->Release();
   }
@@ -262,7 +228,11 @@ QString WmdmLister::MakeFriendlyName(const QString& id) {
 }
 
 QList<QUrl> WmdmLister::MakeDeviceUrls(const QString& id) {
-  return QList<QUrl>();
+  QUrl url;
+  url.setScheme("wmdm");
+  url.setPath(id);
+
+  return QList<QUrl>() << url;
 }
 
 void WmdmLister::UnmountDevice(const QString& id) {
@@ -288,7 +258,7 @@ void WmdmLister::WMDMDeviceAdded(const QString& canonical_name) {
   name[canonical_name.length()] = '\0';
 
   IWMDMDevice* device = NULL;
-  if (device_manager_->GetDeviceFromCanonicalName(name.get(), &device)) {
+  if (thread_->manager()->GetDeviceFromCanonicalName(name.get(), &device)) {
     qWarning() << "Error in GetDeviceFromCanonicalName for" << canonical_name;
     return;
   }
@@ -321,6 +291,9 @@ void WmdmLister::WMDMDeviceRemoved(const QString& canonical_name) {
     if (!devices_.contains(id))
       return;
 
+    devices_[id].device_->Release();
+    devices_[id].storage_->Release();
+
     devices_.remove(id);
   }
 
@@ -346,5 +319,9 @@ ULONG WmdmLister::AddRef() {
 
 ULONG WmdmLister::Release() {
   return 0;
+}
+
+QString WmdmLister::DeviceCanonicalName(const QString& id) {
+  return LockAndGetDeviceInfo(id, &DeviceInfo::canonical_name_);
 }
 

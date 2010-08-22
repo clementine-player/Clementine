@@ -540,8 +540,15 @@ endif(LIBMTP_FOUND)
 
 # Windows media lister
 IF(WIN32)
+  list(APPEND SOURCES devices/wmdmdevice.cpp)
   list(APPEND SOURCES devices/wmdmlister.cpp)
+  list(APPEND SOURCES devices/wmdmloader.cpp)
+  list(APPEND SOURCES devices/wmdmthread.cpp)
+
+  list(APPEND HEADERS devices/wmdmdevice.h)
   list(APPEND HEADERS devices/wmdmlister.h)
+  list(APPEND HEADERS devices/wmdmloader.h)
+  list(APPEND HEADERS devices/wmdmthread.h)
 ENDIF(WIN32)
 
 # Mac specific startup stuff

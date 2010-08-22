@@ -30,6 +30,7 @@
 #endif
 #ifdef Q_OS_WIN32
 #  include "wmdmlister.h"
+#  include "wmdmdevice.h"
 #endif
 #ifdef HAVE_LIBGPOD
 #  include "gpoddevice.h"
@@ -183,6 +184,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 #endif
 #ifdef Q_OS_WIN32
   AddLister(new WmdmLister);
+  AddDeviceClass<WmdmDevice>();
 #endif
 #ifdef HAVE_IMOBILEDEVICE
   AddLister(new iLister);
