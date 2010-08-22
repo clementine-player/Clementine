@@ -486,6 +486,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->composer_ = QString::fromUtf8(track->composer);
     d->genre_ = QString::fromUtf8(track->genre);
     d->filename_ = QString::number(track->item_id);
+    d->basefilename_ = d->filename_;
 
     d->track_ = track->tracknumber;
     d->length_ = track->duration / 1000;
@@ -521,6 +522,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->genre = strdup(d->genre_.toUtf8().constData());
     track->title = strdup(d->title_.toUtf8().constData());
     track->date = NULL;
+
+    track->filename = strdup(d->basefilename_.toUtf8().constData());
 
     track->tracknumber = d->track_;
     track->duration = d->length_ * 1000;
