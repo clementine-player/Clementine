@@ -86,6 +86,10 @@ private:
   template <typename T>
   T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
 
+  static QString CanonicalNameToId(const QString& canonical_name);
+  void WMDMDeviceAdded(const QString& canonical_name);
+  void WMDMDeviceRemoved(const QString& canonical_name);
+
 private:
   IWMDeviceManager2* device_manager_;
   SacHandle sac_;

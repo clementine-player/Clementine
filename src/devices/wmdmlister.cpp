@@ -21,6 +21,7 @@
 #include <mswmdm_i.c>
 
 #include <boost/bind.hpp>
+#include <boost/scoped_array.hpp>
 
 #include <QPixmap>
 #include <QStringList>
@@ -29,8 +30,12 @@
 BYTE abPVK[] = {0x00};
 BYTE abCert[] = {0x00};
 
+QString WmdmLister::CanonicalNameToId(const QString& canonical_name) {
+  return "wmdm/" + canonical_name;
+}
+
 QString WmdmLister::DeviceInfo::unique_id() const {
-  return "wmdm/" + canonical_name_;
+  return WmdmLister::CanonicalNameToId(canonical_name_);
 }
 
 WmdmLister::WmdmLister()
@@ -103,12 +108,13 @@ void WmdmLister::Init() {
       device->Release();
       continue;
     }
+    device->Release();
 
     DeviceInfo info = ReadDeviceInfo(device2);
     if (info.is_suitable_)
       devices[info.unique_id()] = info;
     else
-      device->Release();
+      device2->Release();
   }
   device_it->Release();
 
@@ -166,8 +172,8 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
   device->GetManufacturer(buf, max_size);
   ret.manufacturer_ = QString::fromWCharArray(buf);
 
-  qDebug() << device->GetCanonicalName(buf, max_size);
-  ret.canonical_name_ = QString::fromWCharArray(buf);
+  device->GetCanonicalName(buf, max_size);
+  ret.canonical_name_ = QString::fromWCharArray(buf).toLower();
 
   // Get the type and check whether it has storage
   DWORD type = 0;
@@ -266,9 +272,59 @@ void WmdmLister::UpdateDeviceFreeSpace(const QString& id) {
 }
 
 HRESULT WmdmLister::WMDMMessage(DWORD message_type, LPCWSTR name) {
-  qDebug() << message_type << QString::fromWCharArray(name);
+  QString canonical_name = QString::fromWCharArray(name).toLower();
+
+  switch (message_type) {
+    case WMDM_MSG_DEVICE_ARRIVAL: WMDMDeviceAdded(canonical_name);   break;
+    case WMDM_MSG_DEVICE_REMOVAL: WMDMDeviceRemoved(canonical_name); break;
+  }
 
   return S_OK;
+}
+
+void WmdmLister::WMDMDeviceAdded(const QString& canonical_name) {
+  boost::scoped_array<wchar_t> name(new wchar_t[canonical_name.length() + 1]);
+  canonical_name.toWCharArray(name.get());
+  name[canonical_name.length()] = '\0';
+
+  IWMDMDevice* device = NULL;
+  if (device_manager_->GetDeviceFromCanonicalName(name.get(), &device)) {
+    qWarning() << "Error in GetDeviceFromCanonicalName for" << canonical_name;
+    return;
+  }
+
+  IWMDMDevice2* device2 = NULL;
+  if (device->QueryInterface(IID_IWMDMDevice2, (void**) &device2)) {
+    qWarning() << "Error getting IWMDMDevice2 from device";
+    device->Release();
+    return;
+  }
+  device->Release();
+
+  DeviceInfo info = ReadDeviceInfo(device2);
+  if (info.is_suitable_) {
+    QString id = info.unique_id();
+    {
+      QMutexLocker l(&mutex_);
+      devices_[id] = info;
+    }
+    emit DeviceAdded(id);
+  } else {
+    device2->Release();
+  }
+}
+
+void WmdmLister::WMDMDeviceRemoved(const QString& canonical_name) {
+  QString id = CanonicalNameToId(canonical_name);
+  {
+    QMutexLocker l(&mutex_);
+    if (!devices_.contains(id))
+      return;
+
+    devices_.remove(id);
+  }
+
+  emit DeviceRemoved(id);
 }
 
 LONG WmdmLister::QueryInterface(REFIID riid, void** object) {
