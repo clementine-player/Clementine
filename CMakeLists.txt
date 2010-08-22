@@ -3,13 +3,6 @@ cmake_minimum_required(VERSION 2.6)
 include(FindPkgConfig)
 include(cmake/Version.cmake)
 
-if (CMAKE_FIND_ROOT_PATH)
-  # Help find the Qt headers if we're cross compiling (since we can't run qmake.exe)
-  # CMAKE_FIND_ROOT_PATH should get set by your cmake toolchain file
-  set(QT_HEADERS_DIR ${CMAKE_FIND_ROOT_PATH}/include)
-  set(QT_LIBRARY_DIR ${CMAKE_FIND_ROOT_PATH}/lib)
-endif (CMAKE_FIND_ROOT_PATH)
-
 find_package(Qt4 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
 if(UNIX AND NOT APPLE)
   find_package(Qt4 REQUIRED QtDbus)
