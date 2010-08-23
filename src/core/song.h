@@ -37,6 +37,10 @@
 #  include <libmtp.h>
 #endif
 
+#ifdef Q_OS_WIN32
+   struct IWMDMMetaData;
+#endif
+
 class SqlRow;
 
 namespace lastfm {
@@ -117,6 +121,11 @@ class Song {
 #ifdef HAVE_LIBMTP
   void InitFromMTP(const LIBMTP_track_t* track);
   void ToMTP(LIBMTP_track_t* track) const;
+#endif
+
+#ifdef Q_OS_WIN32
+  void InitFromWmdm(IWMDMMetaData* metadata);
+  void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
 
   static QString Decode(const TagLib::String& tag, const QTextCodec* codec);

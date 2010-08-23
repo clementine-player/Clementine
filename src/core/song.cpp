@@ -50,6 +50,97 @@
 #include <QTime>
 #include <QVariant>
 
+#ifdef Q_OS_WIN32
+# include <mswmdm.h>
+# include <QUuid>
+
+  // Copied from the WMDM SDK 11, it doesn't seem to be included in SDK 9 for
+  // some reason, even though the devices use it.
+  typedef enum tagWMDM_FORMATCODE {
+    WMDM_FORMATCODE_NOTUSED  =  0x0000,
+    WMDM_FORMATCODE_ALLIMAGES  =  0xFFFFFFFF,
+    WMDM_FORMATCODE_UNDEFINED  =  0x3000,
+    WMDM_FORMATCODE_ASSOCIATION  =  0x3001,
+    WMDM_FORMATCODE_SCRIPT  =  0x3002,
+    WMDM_FORMATCODE_EXECUTABLE  =  0x3003,
+    WMDM_FORMATCODE_TEXT  =  0x3004,
+    WMDM_FORMATCODE_HTML  =  0x3005,
+    WMDM_FORMATCODE_DPOF  =  0x3006,
+    WMDM_FORMATCODE_AIFF  =  0x3007,
+    WMDM_FORMATCODE_WAVE  =  0x3008,
+    WMDM_FORMATCODE_MP3  =  0x3009,
+    WMDM_FORMATCODE_AVI  =  0x300A,
+    WMDM_FORMATCODE_MPEG  =  0x300B,
+    WMDM_FORMATCODE_ASF  =  0x300C,
+    WMDM_FORMATCODE_RESERVED_FIRST  =  0x300D,
+    WMDM_FORMATCODE_RESERVED_LAST  =  0x37FF,
+    WMDM_FORMATCODE_IMAGE_UNDEFINED  =  0x3800,
+    WMDM_FORMATCODE_IMAGE_EXIF  =  0x3801,
+    WMDM_FORMATCODE_IMAGE_TIFFEP  =  0x3802,
+    WMDM_FORMATCODE_IMAGE_FLASHPIX  =  0x3803,
+    WMDM_FORMATCODE_IMAGE_BMP  =  0x3804,
+    WMDM_FORMATCODE_IMAGE_CIFF  =  0x3805,
+    WMDM_FORMATCODE_IMAGE_GIF  =  0x3807,
+    WMDM_FORMATCODE_IMAGE_JFIF  =  0x3808,
+    WMDM_FORMATCODE_IMAGE_PCD  =  0x3809,
+    WMDM_FORMATCODE_IMAGE_PICT  =  0x380A,
+    WMDM_FORMATCODE_IMAGE_PNG  =  0x380B,
+    WMDM_FORMATCODE_IMAGE_TIFF  =  0x380D,
+    WMDM_FORMATCODE_IMAGE_TIFFIT  =  0x380E,
+    WMDM_FORMATCODE_IMAGE_JP2  =  0x380F,
+    WMDM_FORMATCODE_IMAGE_JPX  =  0x3810,
+    WMDM_FORMATCODE_IMAGE_RESERVED_FIRST  =  0x3811,
+    WMDM_FORMATCODE_IMAGE_RESERVED_LAST  =  0x3FFF,
+    WMDM_FORMATCODE_UNDEFINEDFIRMWARE  =  0xB802,
+    WMDM_FORMATCODE_WINDOWSIMAGEFORMAT  =  0xB881,
+    WMDM_FORMATCODE_UNDEFINEDAUDIO  =  0xB900,
+    WMDM_FORMATCODE_WMA  =  0xB901,
+    WMDM_FORMATCODE_OGG = 0xB902,
+    WMDM_FORMATCODE_AAC  = 0xB903,
+    WMDM_FORMATCODE_AUDIBLE = 0xB904,
+    WMDM_FORMATCODE_FLAC = 0xB906,
+    WMDM_FORMATCODE_UNDEFINEDVIDEO  =  0xB980,
+    WMDM_FORMATCODE_WMV  =  0xB981,
+    WMDM_FORMATCODE_MP4 = 0xB982,
+    WMDM_FORMATCODE_MP2 = 0xB983,
+    WMDM_FORMATCODE_UNDEFINEDCOLLECTION  =  0xBA00,
+    WMDM_FORMATCODE_ABSTRACTMULTIMEDIAALBUM  =  0xBA01,
+    WMDM_FORMATCODE_ABSTRACTIMAGEALBUM  =  0xBA02,
+    WMDM_FORMATCODE_ABSTRACTAUDIOALBUM  =  0xBA03,
+    WMDM_FORMATCODE_ABSTRACTVIDEOALBUM  =  0xBA04,
+    WMDM_FORMATCODE_ABSTRACTAUDIOVIDEOPLAYLIST  =  0xBA05,
+    WMDM_FORMATCODE_ABSTRACTCONTACTGROUP  =  0xBA06,
+    WMDM_FORMATCODE_ABSTRACTMESSAGEFOLDER  =  0xBA07,
+    WMDM_FORMATCODE_ABSTRACTCHAPTEREDPRODUCTION  =  0xBA08,
+    WMDM_FORMATCODE_WPLPLAYLIST  =  0xBA10,
+    WMDM_FORMATCODE_M3UPLAYLIST  =  0xBA11,
+    WMDM_FORMATCODE_MPLPLAYLIST  =  0xBA12,
+    WMDM_FORMATCODE_ASXPLAYLIST  =  0xBA13,
+    WMDM_FORMATCODE_PLSPLAYLIST  =  0xBA14,
+    WMDM_FORMATCODE_UNDEFINEDDOCUMENT  =  0xBA80,
+    WMDM_FORMATCODE_ABSTRACTDOCUMENT  =  0xBA81,
+    WMDM_FORMATCODE_XMLDOCUMENT = 0xBA82,
+    WMDM_FORMATCODE_MICROSOFTWORDDOCUMENT= 0xBA83,
+    WMDM_FORMATCODE_MHTCOMPILEDHTMLDOCUMENT = 0xBA84,
+    WMDM_FORMATCODE_MICROSOFTEXCELSPREADSHEET = 0xBA85,
+    WMDM_FORMATCODE_MICROSOFTPOWERPOINTDOCUMENT = 0xBA86,
+    WMDM_FORMATCODE_UNDEFINEDMESSAGE  =  0xBB00,
+    WMDM_FORMATCODE_ABSTRACTMESSAGE  =  0xBB01,
+    WMDM_FORMATCODE_UNDEFINEDCONTACT  =  0xBB80,
+    WMDM_FORMATCODE_ABSTRACTCONTACT  =  0xBB81,
+    WMDM_FORMATCODE_VCARD2  =  0xBB82,
+    WMDM_FORMATCODE_VCARD3  =  0xBB83,
+    WMDM_FORMATCODE_UNDEFINEDCALENDARITEM  =  0xBE00,
+    WMDM_FORMATCODE_ABSTRACTCALENDARITEM  =  0xBE01,
+    WMDM_FORMATCODE_VCALENDAR1  =  0xBE02,
+    WMDM_FORMATCODE_VCALENDAR2 = 0xBE03,
+    WMDM_FORMATCODE_UNDEFINEDWINDOWSEXECUTABLE  =  0xBE80,
+    WMDM_FORMATCODE_MEDIA_CAST = 0xBE81,
+    WMDM_FORMATCODE_SECTION = 0xBE82
+  } WMDM_FORMATCODE;
+#endif // Q_OS_WIN32
+
+#include <boost/scoped_array.hpp>
 #include <boost/scoped_ptr.hpp>
 using boost::scoped_ptr;
 
@@ -549,8 +640,213 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
       default:             track->filetype = LIBMTP_FILETYPE_UNDEF_AUDIO; break;
     }
   }
-
 #endif
+
+#ifdef Q_OS_WIN32
+  static void AddWmdmItem(IWMDMMetaData* metadata, const wchar_t* name,
+                          const QVariant& value) {
+    switch (value.type()) {
+      case QVariant::Int:
+      case QVariant::UInt: {
+        DWORD data = value.toUInt();
+        metadata->AddItem(WMDM_TYPE_DWORD, name, (BYTE*)&data, sizeof(data));
+        break;
+      }
+      case QVariant::String: {
+        ScopedWCharArray data(value.toString());
+        metadata->AddItem(WMDM_TYPE_STRING, name, (BYTE*)data.get(), data.bytes());
+        break;
+      }
+      case QVariant::ByteArray: {
+        QByteArray data = value.toByteArray();
+        metadata->AddItem(WMDM_TYPE_BINARY, name, (BYTE*)data.constData(), data.size());
+        break;
+      }
+      case QVariant::Bool: {
+        int data = value.toBool();
+        metadata->AddItem(WMDM_TYPE_BOOL, name, (BYTE*)&data, sizeof(data));
+        break;
+      }
+      case QVariant::LongLong:
+      case QVariant::ULongLong: {
+        quint64 data = value.toULongLong();
+        metadata->AddItem(WMDM_TYPE_QWORD, name, (BYTE*)&data, sizeof(data));
+        break;
+      }
+      default:
+        qWarning() << "Type" << value << "not handled";
+        Q_ASSERT(0);
+        break;
+    }
+  }
+
+  static QVariant ReadWmdmValue(int type, uchar* data, uint length) {
+    switch (type) {
+    case WMDM_TYPE_DWORD:
+      return QVariant::fromValue(uint(*reinterpret_cast<DWORD*>(data)));
+    case WMDM_TYPE_WORD:
+      return QVariant::fromValue(uint(*reinterpret_cast<WORD*>(data)));
+    case WMDM_TYPE_QWORD:
+      return QVariant::fromValue(qulonglong(*reinterpret_cast<quint64*>(data)));
+    case WMDM_TYPE_STRING:
+      return QString::fromWCharArray(reinterpret_cast<wchar_t*>(data));
+    case WMDM_TYPE_BINARY:
+      return QByteArray(reinterpret_cast<char*>(data), length);
+    case WMDM_TYPE_BOOL:
+      return bool(*reinterpret_cast<int*>(data));
+    case WMDM_TYPE_GUID:
+      return QUuid(*reinterpret_cast<GUID*>(data)).toString();
+    }
+    return QVariant();
+  }
+
+  void Song::InitFromWmdm(IWMDMMetaData* metadata) {
+    bool non_consumable = false;
+    int format = 0;
+
+    // How much metadata is there?
+    uint count = 0;
+    metadata->GetItemCount(&count);
+
+    for (int i=0 ; i<count ; ++i) {
+      // Get this metadata item
+      wchar_t* name = NULL;
+      WMDM_TAG_DATATYPE type;
+      BYTE* value = NULL;
+      uint length = 0;
+
+      metadata->QueryByIndex(i, &name, &type, &value, &length);
+
+      QVariant item_value = ReadWmdmValue(type, value, length);
+
+      // Store it in the song if it's something we recognise
+      if (wcscmp(name, g_wszWMDMTitle) == 0)
+        d->title_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMAuthor) == 0)
+        d->artist_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMDescription) == 0)
+        d->comment_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMAlbumTitle) == 0)
+        d->album_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMTrack) == 0)
+        d->track_ = item_value.toInt();
+
+      else if (wcscmp(name, g_wszWMDMGenre) == 0)
+        d->genre_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMYear) == 0)
+        d->year_ = item_value.toInt();
+
+      else if (wcscmp(name, g_wszWMDMComposer) == 0)
+        d->composer_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMBitrate) == 0)
+        d->bitrate_ = item_value.toInt();
+
+      else if (wcscmp(name, g_wszWMDMFileName) == 0)
+        d->filename_ = item_value.toString();
+
+      else if (wcscmp(name, g_wszWMDMDuration) == 0)
+        d->length_ = item_value.toULongLong() / 10000000ll;
+
+      else if (wcscmp(name, L"WMDM/FileSize") == 0)
+        d->filesize_ = item_value.toULongLong();
+
+      else if (wcscmp(name, L"WMDM/NonConsumable") == 0)
+        non_consumable = item_value.toBool();
+
+      else if (wcscmp(name, L"WMDM/FormatCode") == 0)
+        format = item_value.toInt();
+
+      CoTaskMemFree(name);
+      CoTaskMemFree(value);
+    }
+
+    // Decide if this is music or not
+    if (count == 0 || non_consumable)
+      return;
+
+    switch (format) {
+    case WMDM_FORMATCODE_AIFF:
+      d->filetype_ = Song::Type_Aiff;
+      break;
+
+    case WMDM_FORMATCODE_WAVE:
+      d->filetype_ = Song::Type_Wav;
+      break;
+
+    case WMDM_FORMATCODE_MP2:
+    case WMDM_FORMATCODE_MP3:
+    case WMDM_FORMATCODE_MPEG:
+      d->filetype_ = Song::Type_Mpeg;
+      break;
+
+    case WMDM_FORMATCODE_WMA:
+    case WMDM_FORMATCODE_ASF:
+      d->filetype_ = Song::Type_Asf;
+      break;
+
+    case WMDM_FORMATCODE_OGG:
+      d->filetype_ = Song::Type_OggVorbis;
+      break;
+
+    case WMDM_FORMATCODE_AAC:
+    case WMDM_FORMATCODE_MP4:
+      d->filetype_ = Song::Type_Mp4;
+      break;
+
+    case WMDM_FORMATCODE_FLAC:
+      d->filetype_ = Song::Type_Flac;
+      break;
+
+    case WMDM_FORMATCODE_AUDIBLE:
+    case WMDM_FORMATCODE_UNDEFINEDAUDIO:
+      d->filetype_ = Song::Type_Unknown;
+      break;
+
+    default:
+      return; // It's not music
+    }
+
+    d->valid_ = true;
+    d->mtime_ = 0;
+    d->ctime_ = 0;
+  }
+
+  void Song::ToWmdm(IWMDMMetaData* metadata) const {
+    AddWmdmItem(metadata, g_wszWMDMTitle, d->title_);
+    AddWmdmItem(metadata, g_wszWMDMAuthor, d->artist_);
+    AddWmdmItem(metadata, g_wszWMDMDescription, d->comment_);
+    AddWmdmItem(metadata, g_wszWMDMAlbumTitle, d->album_);
+    AddWmdmItem(metadata, g_wszWMDMTrack, d->track_);
+    AddWmdmItem(metadata, g_wszWMDMGenre, d->genre_);
+    AddWmdmItem(metadata, g_wszWMDMYear, QString::number(d->year_));
+    AddWmdmItem(metadata, g_wszWMDMComposer, d->composer_);
+    AddWmdmItem(metadata, g_wszWMDMBitrate, d->bitrate_);
+    AddWmdmItem(metadata, g_wszWMDMFileName, d->basefilename_);
+    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(d->length_) * 10000000ll);
+    AddWmdmItem(metadata, L"WMDM/FileSize", d->filesize_);
+
+    WMDM_FORMATCODE format;
+    switch (d->filetype_) {
+      case Type_Aiff:      format = WMDM_FORMATCODE_AIFF; break;
+      case Type_Wav:       format = WMDM_FORMATCODE_WAVE; break;
+      case Type_Mpeg:      format = WMDM_FORMATCODE_MP3;  break;
+      case Type_Asf:       format = WMDM_FORMATCODE_ASF;  break;
+      case Type_OggFlac:
+      case Type_OggSpeex:
+      case Type_OggVorbis: format = WMDM_FORMATCODE_OGG;  break;
+      case Type_Mp4:       format = WMDM_FORMATCODE_MP4;  break;
+      case Type_Flac:      format = WMDM_FORMATCODE_FLAC; break;
+      default:             format = WMDM_FORMATCODE_UNDEFINEDAUDIO; break;
+    }
+    AddWmdmItem(metadata, L"WMDM/FormatCode", format);
+  }
+#endif // Q_OS_WIN32
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   d->valid_ = true;

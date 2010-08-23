@@ -16,6 +16,7 @@
 
 #include "wmdmlister.h"
 #include "wmdmthread.h"
+#include "core/utilities.h"
 
 #include <icomponentauthenticate.h>
 #include <objbase.h>
@@ -258,12 +259,10 @@ HRESULT WmdmLister::WMDMMessage(DWORD message_type, LPCWSTR name) {
 }
 
 void WmdmLister::WMDMDeviceAdded(const QString& canonical_name) {
-  boost::scoped_array<wchar_t> name(new wchar_t[canonical_name.length() + 1]);
-  canonical_name.toWCharArray(name.get());
-  name[canonical_name.length()] = '\0';
+  ScopedWCharArray name(canonical_name);
 
   IWMDMDevice* device = NULL;
-  if (thread_->manager()->GetDeviceFromCanonicalName(name.get(), &device)) {
+  if (thread_->manager()->GetDeviceFromCanonicalName(name, &device)) {
     qWarning() << "Error in GetDeviceFromCanonicalName for" << canonical_name;
     return;
   }

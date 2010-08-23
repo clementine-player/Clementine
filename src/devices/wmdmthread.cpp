@@ -15,10 +15,13 @@
 */
 
 #include "wmdmthread.h"
+#include "core/utilities.h"
 
 #include <mswmdm.h>
 
 #include <QtDebug>
+
+#include <boost/scoped_array.hpp>
 
 BYTE abPVK[] = {0x00};
 BYTE abCert[] = {0x00};
@@ -67,4 +70,32 @@ WmdmThread::~WmdmThread() {
 
   // Uninitialise COM
   CoUninitialize();
+}
+
+IWMDMDevice* WmdmThread::GetDeviceByCanonicalName(const QString& device_name) {
+  ScopedWCharArray name(device_name);
+
+  IWMDMDevice* device = NULL;
+  if (device_manager_->GetDeviceFromCanonicalName(name, &device)) {
+    qWarning() << "Error in GetDeviceFromCanonicalName for" << device_name;
+    return NULL;
+  }
+
+  return device;
+}
+
+IWMDMStorage* WmdmThread::GetRootStorage(const QString& device_name) {
+  IWMDMDevice* device = GetDeviceByCanonicalName(device_name);
+
+  IWMDMEnumStorage* storage_it = NULL;
+  device->EnumStorage(&storage_it);
+
+  ULONG storage_fetched = 0;
+  IWMDMStorage* storage = NULL;
+  storage_it->Next(1, &storage, &storage_fetched);
+
+  storage_it->Release();
+  device->Release();
+
+  return storage;
 }

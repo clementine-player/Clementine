@@ -172,3 +172,12 @@ bool Copy(QIODevice* source, QIODevice* destination) {
 }
 
 } // namespace
+
+
+ScopedWCharArray::ScopedWCharArray(const QString& str)
+  : chars_(str.length()),
+    data_(new wchar_t(chars_ + 1))
+{
+  str.toWCharArray(data_.get());
+  data_[chars_] = '\0';
+}

@@ -19,6 +19,8 @@
 
 #include <QString>
 
+#include <boost/scoped_array.hpp>
+
 class QIODevice;
 
 namespace Utilities {
@@ -33,5 +35,24 @@ namespace Utilities {
   void RemoveRecursive(const QString& path);
   bool Copy(QIODevice* source, QIODevice* destination);
 }
+
+class ScopedWCharArray {
+public:
+  ScopedWCharArray(const QString& str);
+
+  QString ToString() const { return QString::fromWCharArray(data_.get()); }
+
+  wchar_t* get() const { return data_.get(); }
+  operator wchar_t*() const { return get(); }
+
+  int characters() const { return chars_; }
+  int bytes() const { return chars_ * sizeof(wchar_t) + 1; }
+
+private:
+  Q_DISABLE_COPY(ScopedWCharArray);
+
+  int chars_;
+  boost::scoped_array<wchar_t> data_;
+};
 
 #endif // UTILITIES_H

@@ -22,6 +22,8 @@
 #include <sac_shim.h>
 
 struct IWMDeviceManager2;
+struct IWMDMDevice;
+struct IWMDMStorage;
 
 class WmdmThread {
 public:
@@ -29,6 +31,9 @@ public:
   ~WmdmThread();
 
   IWMDeviceManager2* manager() const { return device_manager_; }
+
+  IWMDMDevice* GetDeviceByCanonicalName(const QString& device_name);
+  IWMDMStorage* GetRootStorage(const QString& device_name);
 
 private:
   Q_DISABLE_COPY(WmdmThread);

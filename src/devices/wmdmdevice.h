@@ -19,7 +19,13 @@
 
 #include "connecteddevice.h"
 
+#include <boost/scoped_ptr.hpp>
+
 class WmdmLoader;
+class WmdmThread;
+
+struct IWMDMStorage3;
+struct IWMDMStorageControl3;
 
 class WmdmDevice : public ConnectedDevice {
   Q_OBJECT
@@ -53,6 +59,10 @@ private:
   QMutex db_busy_;
   SongList songs_to_add_;
   SongList songs_to_remove_;
+
+  boost::scoped_ptr<WmdmThread> thread_;
+  IWMDMStorage3* storage_;
+  IWMDMStorageControl3* storage_control_;
 };
 
 #endif // WMDMDEVICE_H

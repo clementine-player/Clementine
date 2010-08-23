@@ -49,8 +49,6 @@ private:
   void RecursiveExploreStorage(IWMDMStorage* parent);
   void LoadFile(IWMDMStorage* file);
 
-  static QVariant ReadValue(int type, uchar* data, uint length);
-
 private:
   boost::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;

@@ -16,11 +16,19 @@
 
 #include "devicemanager.h"
 #include "wmdmdevice.h"
+#include "wmdmlister.h"
 #include "wmdmloader.h"
+#include "wmdmthread.h"
+#include "core/utilities.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
+#include <QDir>
 #include <QThread>
+
+#include <boost/scoped_array.hpp>
+
+#include <mswmdm.h>
 
 WmdmDevice::WmdmDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,
@@ -56,13 +64,86 @@ void WmdmDevice::LoadFinished() {
 void WmdmDevice::StartCopy() {
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
+
+  // This initialises COM and gets a connection to the device
+  thread_.reset(new WmdmThread);
+
+  // Find a place to put the files.  We default to the root folder for now, but
+  // could look for a "Music" folder in the future?
+  WmdmLister* wmdm_lister = static_cast<WmdmLister*>(lister());
+  QString canonical_name = wmdm_lister->DeviceCanonicalName(unique_id());
+  IWMDMStorage* destination = thread_->GetRootStorage(canonical_name);
+
+  // Get the control interface
+  destination->QueryInterface(IID_IWMDMStorageControl3, (void**)&storage_control_);
+
+  // Get the storage3 interface for CreateEmptyMetadataObject later
+  destination->QueryInterface(IID_IWMDMStorage3, (void**)&storage_);
+
+  destination->Release();
 }
 
 bool WmdmDevice::CopyToStorage(
-    const QString& source, const QString&, const Song& metadata,
+    const QString& source, const QString&, const Song& song,
     bool, bool remove_original)
 {
-  return false;
+  if (!storage_control_ || !storage_)
+    return false;
+
+  // Create the song metadata
+  IWMDMMetaData* metadata_iface = NULL;
+  storage_->CreateEmptyMetadataObject(&metadata_iface);
+  song.ToWmdm(metadata_iface);
+
+
+  // Convert the filenames to wchars
+  ScopedWCharArray source_filename(QDir::toNativeSeparators(source));
+  ScopedWCharArray dest_filename(song.basefilename());
+
+  // Copy the file
+  IWMDMStorage* new_storage = NULL;
+  if (storage_control_->Insert3(
+      WMDM_MODE_BLOCK | WMDM_STORAGECONTROL_INSERTINTO |
+      WMDM_FILE_CREATE_OVERWRITE | WMDM_CONTENT_FILE,
+      WMDM_FILE_ATTR_FOLDER,
+      source_filename,
+      dest_filename,
+      NULL, // operation
+      NULL, // progress
+      metadata_iface,
+      NULL, // data
+      &new_storage)) {
+    qWarning() << "Couldn't copy file to WMDM device";
+    metadata_iface->Release();
+    return false;
+  }
+  metadata_iface->Release();
+
+  // Get the metadata from the newly copied file
+  IWMDMStorage3* new_storage3 = NULL;
+  IWMDMMetaData* new_metadata = NULL;
+
+  new_storage->QueryInterface(IID_IWMDMStorage3, (void**)&new_storage3);
+  new_storage3->GetMetadata(&new_metadata);
+
+  new_storage->Release();
+  new_storage3->Release();
+
+  // Add it to our LibraryModel
+  Song new_song;
+  new_song.InitFromWmdm(new_metadata);
+  new_song.set_directory_id(1);
+  songs_to_add_ << new_song;
+
+  new_metadata->Release();
+
+  // Remove the original if requested
+  if (remove_original) {
+    if (!QFile::remove(source))
+      return false;
+  }
+
+  return true;
 }
 
 void WmdmDevice::FinishCopy(bool success) {
@@ -75,6 +156,10 @@ void WmdmDevice::FinishCopy(bool success) {
 
   songs_to_add_.clear();
   songs_to_remove_.clear();
+
+  storage_->Release();
+  storage_control_->Release();
+  thread_.reset();
 
   db_busy_.unlock();
 }
