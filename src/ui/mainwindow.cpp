@@ -68,6 +68,10 @@
 #include "widgets/osd.h"
 #include "widgets/trackslider.h"
 
+#ifdef ENABLE_WIIMOTEDEV
+#include "wiimotedev/interface.h"
+#endif
+
 #ifdef HAVE_GSTREAMER
 # include "engines/gstengine.h"
 #endif
@@ -133,6 +137,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     error_dialog_(new ErrorDialog),
     organise_dialog_(new OrganiseDialog(task_manager_)),
     queue_manager_(new QueueManager),
+#ifdef ENABLE_WIIMOTEDEV
+    wiimotedev_buttons(0),
+    wiimotedev_iface_(NULL),
+#endif
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
 #endif
@@ -570,6 +578,13 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   library_->Init();
   library_->StartThreads();
+
+#ifdef ENABLE_WIIMOTEDEV
+  wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME, WIIMOTEDEV_DBUS_EVENTS_OBJECT,
+                                                    QDBusConnection::systemBus(), this);
+
+  connect(wiimotedev_iface_, SIGNAL(dbusWiimoteButtons(quint32,quint64)), this, SLOT(DbusWiimoteButtons(quint32,quint64)));
+#endif
 }
 
 MainWindow::~MainWindow() {
@@ -1412,3 +1427,35 @@ void MainWindow::PlaylistCopyToDevice() {
   organise_dialog_->SetCopy(true);
   organise_dialog_->show();
 }
+
+#ifdef ENABLE_WIIMOTEDEV
+void MainWindow::DbusWiimoteButtons(quint32 id, quint64 value) {
+    if (!id) return;
+
+    quint64 buttons = value & ~WIIMOTE_TILT_MASK;
+    if (wiimotedev_buttons == buttons) return;
+
+    if ((!(wiimotedev_buttons & WIIMOTE_BTN_SHIFT_LEFT) &&
+        (value & WIIMOTE_BTN_SHIFT_LEFT)) ||
+        (!(wiimotedev_buttons & WIIMOTE_BTN_LEFT) &&
+        (value & WIIMOTE_BTN_LEFT))) player_->Previous();
+
+
+    if ((!(wiimotedev_buttons & WIIMOTE_BTN_SHIFT_RIGHT) &&
+        (value & WIIMOTE_BTN_SHIFT_RIGHT)) ||
+        (!(wiimotedev_buttons & WIIMOTE_BTN_RIGHT) &&
+        (value & WIIMOTE_BTN_RIGHT))) player_->Next();
+
+    if (!(wiimotedev_buttons & WIIMOTE_BTN_PLUS) &&
+        (value & WIIMOTE_BTN_PLUS)) player_->VolumeUp();
+
+    if (!(wiimotedev_buttons & WIIMOTE_BTN_MINUS) &&
+        (value & WIIMOTE_BTN_MINUS)) player_->VolumeDown();
+
+    if (!(wiimotedev_buttons & WIIMOTE_BTN_A) &&
+        (value & WIIMOTE_BTN_A)) player_->PlayPause();
+
+    wiimotedev_buttons = buttons;
+}
+
+#endif
