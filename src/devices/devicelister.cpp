@@ -32,7 +32,6 @@ DeviceLister::DeviceLister()
 }
 
 DeviceLister::~DeviceLister() {
-  qDebug() << __PRETTY_FUNCTION__;
   if (thread_) {
     thread_->quit();
     thread_->wait(1000);

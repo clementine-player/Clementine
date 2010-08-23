@@ -103,7 +103,7 @@ void WmdmLister::Init() {
   }
 }
 
-void WmdmLister::ShutDown() {
+void WmdmLister::ReallyShutdown() {
   // Unregister for notifications
   IConnectionPointContainer* cp_container;
   thread_->manager()->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
@@ -115,6 +115,11 @@ void WmdmLister::ShutDown() {
   cp_container->Release();
 
   thread_.reset();
+}
+
+void WmdmLister::ShutDown() {
+  // COM shutdown must be done in the original thread.
+  metaObject()->invokeMethod(this, "ReallyShutdown", Qt::BlockingQueuedConnection);
 }
 
 template <typename F>

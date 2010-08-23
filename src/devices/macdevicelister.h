@@ -28,6 +28,9 @@ class MacDeviceLister : public DeviceLister {
   virtual void UnmountDevice(const QString &id);
   virtual void UpdateDeviceFreeSpace(const QString& id);
 
+ public slots:
+  virtual void ShutDown();
+
  private:
   virtual void Init();
 
@@ -38,6 +41,7 @@ class MacDeviceLister : public DeviceLister {
       DADiskRef disk, DADissenterRef dissenter, void* context);
 
   DASessionRef loop_session_;
+  CFRunLoopRef run_loop_;
 
   QMap<QString, QString> current_devices_;
 };

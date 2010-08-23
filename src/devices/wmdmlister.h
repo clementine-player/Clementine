@@ -66,6 +66,9 @@ public slots:
   virtual void UpdateDeviceFreeSpace(const QString& id);
   virtual void ShutDown();
 
+private slots:
+  virtual void ReallyShutdown();
+
 private:
   struct DeviceInfo {
     DeviceInfo() : device_(NULL), storage_(NULL), is_suitable_(false),

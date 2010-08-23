@@ -586,6 +586,8 @@ list(APPEND OTHER_SOURCES
   devices/mtploader.h
   devices/wmdmlister.cpp
   devices/wmdmlister.h
+  devices/wmdmloader.h
+  devices/wmdmloader.cpp
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   widgets/osd_mac.mm

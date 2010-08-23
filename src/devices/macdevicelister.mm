@@ -40,16 +40,20 @@ MacDeviceLister::~MacDeviceLister() {
 void MacDeviceLister::Init() {
   [[NSAutoreleasePool alloc] init];
 
-  CFRunLoopRef run_loop = CFRunLoopGetCurrent();
+  run_loop_ = CFRunLoopGetCurrent();
 
   loop_session_ = DASessionCreate(kCFAllocatorDefault);
   DARegisterDiskAppearedCallback(
       loop_session_, kDADiskDescriptionMatchVolumeMountable, &DiskAddedCallback, reinterpret_cast<void*>(this));
   DARegisterDiskDisappearedCallback(
       loop_session_, NULL, &DiskRemovedCallback, reinterpret_cast<void*>(this));
-  DASessionScheduleWithRunLoop(loop_session_, run_loop, kCFRunLoopDefaultMode);
+  DASessionScheduleWithRunLoop(loop_session_, run_loop_, kCFRunLoopDefaultMode);
 
   CFRunLoopRun();
+}
+
+void MacDeviceLister::ShutDown() {
+  CFRunLoopStop(run_loop_);
 }
 
 

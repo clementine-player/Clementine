@@ -10,6 +10,8 @@ AnalyzerBase::AnalyzerBase(QWidget* parent)
 void AnalyzerBase::set_engine(Engine::Base* engine) {
   disconnect(engine_);
   engine_ = engine;
-  connect(engine_, SIGNAL(SpectrumAvailable(const QVector<float>&)),
-                   SLOT(SpectrumAvailable(const QVector<float>&)));
+  if (engine_) {
+    connect(engine_, SIGNAL(SpectrumAvailable(const QVector<float>&)),
+                     SLOT(SpectrumAvailable(const QVector<float>&)));
+  }
 }

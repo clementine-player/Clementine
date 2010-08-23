@@ -12,7 +12,6 @@ GLBlockAnalyzer::GLBlockAnalyzer(QWidget* parent)
     : AnalyzerBase(parent),
       rectangles_size_(0),
       shader_(this) {
-  qDebug() << Q_FUNC_INFO;
 }
 
 void GLBlockAnalyzer::SpectrumAvailable(const QVector<float>& spectrum) {
@@ -21,7 +20,6 @@ void GLBlockAnalyzer::SpectrumAvailable(const QVector<float>& spectrum) {
 }
 
 void GLBlockAnalyzer::initializeGL() {
-  qDebug() << Q_FUNC_INFO;
 
   QColor background_color = QApplication::palette().color(QPalette::Window);
   qglClearColor(background_color);
@@ -38,7 +36,6 @@ void GLBlockAnalyzer::initializeGL() {
 }
 
 void GLBlockAnalyzer::resizeGL(int w, int h) {
-  qDebug() << Q_FUNC_INFO;
   glViewport(0, 0, w, h);
 
   glMatrixMode(GL_PROJECTION);

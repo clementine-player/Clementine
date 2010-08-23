@@ -204,9 +204,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 
 DeviceManager::~DeviceManager() {
   foreach (DeviceLister* lister, listers_) {
-    // Let the lister close itself down
-    metaObject()->invokeMethod(lister, "ShutDown", Qt::BlockingQueuedConnection);
-
+    lister->ShutDown();
     delete lister;
   }
 
