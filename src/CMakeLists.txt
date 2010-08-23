@@ -162,8 +162,6 @@ set(SOURCES
   widgets/stickyslider.cpp
   widgets/trackslider.cpp
   widgets/tracksliderslider.cpp
-
-  wiimotedev/interface.cpp
 )
 
 set(HEADERS
@@ -284,8 +282,6 @@ set(HEADERS
   widgets/spinbox.h
   widgets/stickyslider.h
   widgets/trackslider.h
-
-  wiimotedev/interface.h
 )
 
 set(UI
@@ -485,6 +481,10 @@ if(NOT APPLE AND NOT WIN32)
   # MPRIS source
   list(APPEND SOURCES core/mpris.cpp)
   list(APPEND HEADERS core/mpris.h)
+
+  # Wiimotedev interface classes
+  list(APPEND SOURCES wiimotedev/interface.cpp)
+  list(APPEND HEADERS wiimotedev/interface.h)
 
   # DeviceKit lister source
   list(APPEND SOURCES devices/devicekitlister.cpp)
