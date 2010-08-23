@@ -217,7 +217,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
 #ifdef ENABLE_WIIMOTEDEV
   DBusDeviceEventsInterface* wiimotedev_iface_;
-  quint64 wiimotedev_buttons;
+  quint64 wiimotedev_buttons_;
 #endif
 
   QMenu* playlist_menu_;
