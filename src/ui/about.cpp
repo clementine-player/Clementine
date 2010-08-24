@@ -41,7 +41,8 @@ About::About(QWidget *parent)
              << Person("Max Howell", "max.howell@methylblue.com")
              << Person("Jakub Stachowski", "qbast@go2.pl")
              << Person("Paul Cifarelli", "paul@cifarelli.net")
-             << Person("Felipe Rivera", "liebremx@users.sourceforge.net");
+             << Person("Felipe Rivera", "liebremx@users.sourceforge.net")
+             << Person("Alexander Peitz", "");
 
   ui_.content->setHtml(MakeHtml());
 }
