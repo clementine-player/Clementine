@@ -27,6 +27,10 @@ class LibraryDirectoryModel;
 class OSDPretty;
 class Ui_SettingsDialog;
 
+#ifdef ENABLE_WIIMOTEDEV
+  class WiimotedevShortcutsConfig;
+#endif
+
 #ifdef HAVE_GSTREAMER
   class GstEngine;
 #endif
@@ -46,6 +50,9 @@ class SettingsDialog : public QDialog {
     Page_Library,
     Page_Lastfm,
     Page_Magnatune,
+#ifdef ENABLE_WIIMOTEDEV
+    Page_Wiimotedev
+#endif
   };
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
@@ -80,7 +87,11 @@ class SettingsDialog : public QDialog {
   void RgPreampChanged(int value);
 
  private:
+#ifdef ENABLE_WIIMOTEDEV
+  WiimotedevShortcutsConfig* wiimotedev_config_;
+#endif
   Ui_SettingsDialog* ui_;
+
   bool loading_settings_;
 
   OSDPretty* pretty_popup_;

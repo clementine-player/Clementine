@@ -23,6 +23,10 @@
 #include "widgets/osd.h"
 #include "widgets/osdpretty.h"
 
+#ifdef ENABLE_WIIMOTEDEV
+#include "ui/wiimotedevshortcutsconfig.h"
+#endif
+
 #ifdef HAVE_GSTREAMER
 # include "engines/gstengine.h"
 #endif
@@ -48,6 +52,22 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_->list->item(Page_GlobalShortcuts)->setIcon(IconLoader::Load("input-keyboard"));
   ui_->list->item(Page_Notifications)->setIcon(IconLoader::Load("help-hint"));
   ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
+
+#ifdef ENABLE_WIIMOTEDEV
+  // Wiimotedev page
+  ui_->list->addItem("Wiimotedev");
+  ui_->list->item(Page_Wiimotedev)->setIcon(QIcon(":/icons/32x32/wiimotedev.png"));
+
+  QWidget *wiimotedev_page = new QWidget(this);
+  wiimotedev_page->setObjectName(QString::fromUtf8("wiimotedev_page"));
+  QVBoxLayout *wiimotedev_layout = new QVBoxLayout(wiimotedev_page);
+  wiimotedev_layout->setObjectName(QString::fromUtf8("wiimotedev_layout"));
+  WiimotedevShortcutsConfig  *wiimotedev_config = new WiimotedevShortcutsConfig(wiimotedev_page);
+  wiimotedev_config->setObjectName(QString::fromUtf8("wiimotedev_config"));
+  wiimotedev_layout->addWidget(wiimotedev_config);
+
+  ui_->stacked_widget->addWidget(wiimotedev_page);
+#endif
 
   // Playback
   connect(ui_->fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));

@@ -483,8 +483,14 @@ if(NOT APPLE AND NOT WIN32)
   list(APPEND HEADERS core/mpris.h)
 
   # Wiimotedev interface classes
-  list(APPEND SOURCES wiimotedev/interface.cpp)
-  list(APPEND HEADERS wiimotedev/interface.h)
+  if(ENABLE_WIIMOTEDEV)
+    list(APPEND SOURCES wiimotedev/interface.cpp)
+    list(APPEND HEADERS wiimotedev/interface.h)
+
+    list(APPEND SOURCES ui/wiimotedevshortcutsconfig.cpp)
+    list(APPEND HEADERS ui/wiimotedevshortcutsconfig.h)
+    list(APPEND UI ui/wiimotedevshortcutsconfig.ui)
+  endif(ENABLE_WIIMOTEDEV)
 
   # DeviceKit lister source
   list(APPEND SOURCES devices/devicekitlister.cpp)

@@ -110,6 +110,11 @@ endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 # Optional bits
 option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
+
+if(NOT APPLE AND NOT WIN32)
+  option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
+endif(NOT APPLE AND NOT WIN32)
+
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
   # to system installed projectM instead.
