@@ -19,15 +19,17 @@
 #include "wiimotedev/shortcuts.h"
 #include "wiimotedev/interface.h"
 
-const char* WiimotedevShortcuts::kSettingsGroup = "Wiimotedev";
+const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
+const char* WiimotedevShortcuts::kSettingsGroup = "WiimotedevSettings";
 
 WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
  :QObject(parent),
   player_(player),
   wiimotedev_iface_(NULL),
-  wiimotedev_buttons_(0)
+  wiimotedev_buttons_(0),
+  wiimotedev_device_(1),
+  wiimotedev_active_(false)
 {
-  settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
   ReloadSettings();
 
   wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
@@ -61,25 +63,53 @@ void WiimotedevShortcuts::SetEnabled(bool enabled)
 }
 
 void WiimotedevShortcuts::ReloadSettings() {
-  settings_.sync();
-  quint64 value;
-  if (value = settings_.value("next_track", WIIMOTE_BTN_RIGHT).toULongLong()) actions_[value] = PlayerNextTrack;
-  if (value = settings_.value("previous_track", WIIMOTE_BTN_LEFT).toULongLong()) actions_[value] = PlayerPreviousTrack;
-  if (value = settings_.value("next_track", WIIMOTE_BTN_SHIFT_RIGHT).toULongLong()) actions_[value] = PlayerNextTrack;
-  if (value = settings_.value("previous_track", WIIMOTE_BTN_SHIFT_LEFT).toULongLong()) actions_[value] = PlayerPreviousTrack;
-  if (value = settings_.value("play", 0).toULongLong()) actions_[value] = PlayerPlay;
-  if (value = settings_.value("stop", 0).toULongLong()) actions_[value] = PlayerStop;
-  if (value = settings_.value("inc_volume", WIIMOTE_BTN_PLUS).toULongLong()) actions_[value] = PlayerIncVolume;
-  if (value = settings_.value("dec_volume", WIIMOTE_BTN_MINUS).toULongLong()) actions_[value] = PlayerDecVolume;
-  if (value = settings_.value("mute", 0).toULongLong()) actions_[value] = PlayerMute;
-  if (value = settings_.value("pause", 0).toULongLong()) actions_[value] = PlayerPause;
-  if (value = settings_.value("togglepause", WIIMOTE_BTN_1).toULongLong()) actions_[value] = PlayerTogglePause;
-  if (value = settings_.value("seek_backward", WIIMOTE_BTN_UP).toULongLong()) actions_[value] = PlayerSeekBackward;
-  if (value = settings_.value("seek_forward", WIIMOTE_BTN_DOWN).toULongLong()) actions_[value] = PlayerSeekForward;
-  if (value = settings_.value("show_osd", WIIMOTE_BTN_2).toULongLong()) actions_[value] = PlayerShowOSD;
+  settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
 
-  SetEnabled(settings_.value(QString::fromUtf8("enabled"), quint64(true)).toBool());
+  if (!settings_.allKeys().count()) {
+      SetDefaultSettings();
+      settings_.sync();
+  }
+
+  quint64 fvalue, svalue;
+  bool fvalid, svalid;
+
+  foreach (const QString& str, settings_.allKeys()) {
+    fvalue = str.toULongLong(&fvalid, 10);
+    svalue = settings_.value(str, 0).toULongLong(&svalid);
+    if (fvalid && svalid) actions_[fvalue] = svalue;
+  }
+
+  settings_.endGroup();
+
+  settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
+  SetEnabled(settings_.value("enabled", quint64(true)).toBool());
+  wiimotedev_device_ = settings_.value("device", 1).toInt();
+  settings_.endGroup();
 }
+
+void WiimotedevShortcuts::SetDefaultSettings()
+{
+    QSettings settings;
+    settings.beginGroup(WiimotedevShortcuts::kActionsGroup);
+    settings.setValue(QString::number(WIIMOTE_BTN_LEFT), PlayerPreviousTrack);
+    settings.setValue(QString::number(WIIMOTE_BTN_RIGHT), PlayerNextTrack);
+    settings.setValue(QString::number(WIIMOTE_BTN_SHIFT_LEFT), PlayerPreviousTrack);
+    settings.setValue(QString::number(WIIMOTE_BTN_SHIFT_RIGHT), PlayerNextTrack);
+    settings.setValue(QString::number(WIIMOTE_BTN_PLUS), PlayerIncVolume);
+    settings.setValue(QString::number(WIIMOTE_BTN_MINUS), PlayerDecVolume);
+    settings.setValue(QString::number(WIIMOTE_BTN_1), PlayerTogglePause);
+    settings.setValue(QString::number(WIIMOTE_BTN_2), PlayerShowOSD);
+    settings.endGroup();
+
+    settings.beginGroup(WiimotedevShortcuts::kSettingsGroup);
+    settings.setValue("enabled", true);
+    settings.setValue("device", 1);
+    settings.endGroup();
+
+    settings.sync();
+}
+
+
 
 void WiimotedevShortcuts::EmitRequest(quint32 action) {
   switch (action) {
@@ -100,7 +130,7 @@ void WiimotedevShortcuts::EmitRequest(quint32 action) {
 }
 
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
-  if (id != 1) return;
+  if (id != wiimotedev_device_) return;
 
   quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
 
@@ -110,8 +140,9 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
 
   while (actions.hasNext()) {
     actions.next();
-    if (actions.key() == 0) continue;
-    if ((actions.key() & buttons) == actions.key()) EmitRequest(actions.value());
+    quint64 key = actions.key();
+    if (!key) continue;
+    if ((key & buttons) == key) EmitRequest(actions.value());
   }
 
   wiimotedev_buttons_ = buttons;

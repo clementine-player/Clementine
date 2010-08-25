@@ -27,12 +27,14 @@ class QSettings;
 class WiimotedevShortcuts :public QObject {
   Q_OBJECT
 public:
+  static const char* kActionsGroup;
   static const char* kSettingsGroup;
 
   WiimotedevShortcuts(Player* player = 0, QObject* parent = 0);
 
 public slots:
   void ReloadSettings();
+  void SetDefaultSettings();
   void SetEnabled(bool enabled);
 
 private slots:
@@ -46,8 +48,13 @@ private:
   quint64 wiimotedev_buttons_;
   QSettings settings_;
 
+  quint32 wiimotedev_device_;
+  bool wiimotedev_active_;
+
 private:
   enum Action {
+    WiimotedevActive,
+    WiimotedevDeactive,
     PlayerNextTrack,
     PlayerPreviousTrack,
     PlayerPlay,
