@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-07-25 01:29+0000\n"
 "Last-Translator: ironic <fatih@ubuntu-tr.org>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "X-Launchpad-Export-Date: 2010-07-26 04:29+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -44,15 +44,15 @@ msgstr ""
 msgid "%1 tracks"
 msgstr "%1 parça"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -399,6 +399,9 @@ msgstr "Kısayolları Yapılandır"
 msgid "Configure library..."
 msgstr "Kütüphaneyi düzenle..."
 
+msgid "Connect Wii remotes to Clementine using active/deactive action"
+msgstr ""
+
 msgid "Connect device"
 msgstr "Aygıtı bağla"
 
@@ -627,11 +630,17 @@ msgstr "Parça bilgisini düzenle..."
 msgid "Edit..."
 msgstr "Düzenle..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr ""
 
+msgid "Enable Wii remote support in Clementine"
+msgstr ""
+
 msgid "Enable equalizer"
+msgstr ""
+
+msgid "Enable shortcuts only when application is focused"
 msgstr ""
 
 msgid "Enter a name for the new playlist"
@@ -1738,6 +1747,12 @@ msgstr "Gnome kısayol tuşlarını kullan"
 msgid "Use Replay Gain metadata if it is available"
 msgstr ""
 
+msgid "Use Wii remote id"
+msgstr ""
+
+msgid "Use notifications to report Wii remote status"
+msgstr ""
+
 msgid "Use the system default"
 msgstr ""
 
@@ -1831,7 +1846,7 @@ msgstr ""
 msgid "[click to edit]"
 msgstr "[düzenlemek için tıklayın]"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şakıyı ekle"
 
@@ -1851,7 +1866,7 @@ msgstr "Parçaları taşı"
 msgid "options"
 msgstr "seçenekler"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şakıyı çıkart"
 

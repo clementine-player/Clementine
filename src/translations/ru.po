@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2010-08-10 06:34+0000\n"
 "Last-Translator: Malody <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "X-Launchpad-Export-Date: 2010-08-11 04:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -43,15 +43,15 @@ msgstr "%1 выбрано из"
 msgid "%1 tracks"
 msgstr "%1 композиций"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -404,6 +404,9 @@ msgstr "Настройка горячих клавиш"
 msgid "Configure library..."
 msgstr "Настроить коллекцию..."
 
+msgid "Connect Wii remotes to Clementine using active/deactive action"
+msgstr ""
+
 msgid "Connect device"
 msgstr "Подсоединение устройства"
 
@@ -634,12 +637,18 @@ msgstr "Изменить информацию о композиции..."
 msgid "Edit..."
 msgstr "Изменить..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "Редактирую %n треков"
 
+msgid "Enable Wii remote support in Clementine"
+msgstr ""
+
 msgid "Enable equalizer"
 msgstr "Включить эквалайзер"
+
+msgid "Enable shortcuts only when application is focused"
+msgstr ""
 
 msgid "Enter a name for the new playlist"
 msgstr "Введите имя для списка воспроизведения"
@@ -1750,6 +1759,12 @@ msgstr "Использовать горячие клавиши Gnome"
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Использовать метаданные Replay Gain  если возможно"
 
+msgid "Use Wii remote id"
+msgstr ""
+
+msgid "Use notifications to report Wii remote status"
+msgstr ""
+
 msgid "Use the system default"
 msgstr "Использовать значения по умолчанию"
 
@@ -1851,7 +1866,7 @@ msgstr "По-умолчанию"
 msgid "[click to edit]"
 msgstr "[щелкните, чтобы изменить]"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -1871,7 +1886,7 @@ msgstr "переместить композиции"
 msgid "options"
 msgstr "настройки"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 

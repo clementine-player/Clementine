@@ -1,5 +1,6 @@
 #include "glblockanalyzer.h"
 
+#include <algorithm>
 #include <cmath>
 
 #include <QtDebug>
@@ -12,9 +13,9 @@ const char* GLBlockAnalyzer::kName = "GL Block Analyzer";
 
 GLBlockAnalyzer::GLBlockAnalyzer(QWidget* parent)
     : AnalyzerBase(parent),
+      current_spectrum_(200, 0.0),
       rectangles_size_(0),
-      shader_(this),
-      current_spectrum_(200, 0.0) {
+      shader_(this) {
 }
 
 void GLBlockAnalyzer::SpectrumAvailable(const QVector<float>& spectrum) {
@@ -90,12 +91,6 @@ class ColourGenerator {
     rgb_[1] = colour.greenF();
     rgb_[2] = colour.blueF();
   }
-  ColourGenerator(float r, float g, float b)
-      : i_(0) {
-    rgb_[0] = r;
-    rgb_[1] = g;
-    rgb_[2] = b;
-  }
   float operator() () {
     return rgb_[i_++ % 3];
   }
@@ -132,8 +127,6 @@ void GLBlockAnalyzer::paintGL() {
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
-
-  const float width = 2.0 / current_spectrum_.size();
 
   // Now we have x 0.0 -> 1.0 and y 0.0 -> 1.0.
   glTranslatef(-1.0, -1.0, 0.0);

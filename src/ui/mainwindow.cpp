@@ -137,11 +137,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     error_dialog_(new ErrorDialog),
     organise_dialog_(new OrganiseDialog(task_manager_)),
     queue_manager_(new QueueManager),
-#ifdef ENABLE_WIIMOTEDEV
-    wiimotedev_shortcuts_(NULL),
-#endif
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(new VisualisationContainer),
+#endif
+#ifdef ENABLE_WIIMOTEDEV
+    wiimotedev_shortcuts_(NULL),
 #endif
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),

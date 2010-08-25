@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-08-01 07:33+0000\n"
 "Last-Translator: R33D3M33R <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sl\n"
 "X-Launchpad-Export-Date: 2010-08-02 04:02+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -44,15 +44,15 @@ msgstr "izbran %1 od"
 msgid "%1 tracks"
 msgstr "%1 skladb"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n spodletelih"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n končanih"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostaja"
 
@@ -405,6 +405,9 @@ msgstr "Nastavi bližnjice"
 msgid "Configure library..."
 msgstr "Nastavi knjižnico..."
 
+msgid "Connect Wii remotes to Clementine using active/deactive action"
+msgstr ""
+
 msgid "Connect device"
 msgstr "Priklopi napravo"
 
@@ -635,12 +638,18 @@ msgstr "Uredi informacije o skladbi..."
 msgid "Edit..."
 msgstr "Uredi..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "Urejanje %n skladb"
 
+msgid "Enable Wii remote support in Clementine"
+msgstr ""
+
 msgid "Enable equalizer"
 msgstr "Omogoči izenačevalnik"
+
+msgid "Enable shortcuts only when application is focused"
+msgstr ""
 
 msgid "Enter a name for the new playlist"
 msgstr "Vnesite ime za nov predvajalni seznam"
@@ -1751,6 +1760,12 @@ msgstr "Uporabi Gnome bližnjice"
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Uporabi Replay Gain metapodatke, če je možno"
 
+msgid "Use Wii remote id"
+msgstr ""
+
+msgid "Use notifications to report Wii remote status"
+msgstr ""
+
 msgid "Use the system default"
 msgstr ""
 
@@ -1852,7 +1867,7 @@ msgstr "Brez"
 msgid "[click to edit]"
 msgstr "[kliknite za urejanje]"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodaj %n skladb"
 
@@ -1872,7 +1887,7 @@ msgstr "premakni skladbe"
 msgid "options"
 msgstr "možnosti"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstrani %n skladb"
 

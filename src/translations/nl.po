@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-08-08 15:32+0000\n"
 "Last-Translator: Ward <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "X-Launchpad-Export-Date: 2010-08-09 03:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -44,15 +44,15 @@ msgstr "%1 geselecteerd van"
 msgid "%1 tracks"
 msgstr "%1 tracks"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n mislukt"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n voltooid"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n te gaan"
 
@@ -405,6 +405,9 @@ msgstr "Sneltoetsen instellen"
 msgid "Configure library..."
 msgstr "Bibliotheek configureren..."
 
+msgid "Connect Wii remotes to Clementine using active/deactive action"
+msgstr ""
+
 msgid "Connect device"
 msgstr "Apparaat verbinden"
 
@@ -635,12 +638,18 @@ msgstr "Trackinformatie bewerken..."
 msgid "Edit..."
 msgstr "Bewerken..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "%n tracks bewerken"
 
+msgid "Enable Wii remote support in Clementine"
+msgstr ""
+
 msgid "Enable equalizer"
 msgstr "Equalizer inschakelen"
+
+msgid "Enable shortcuts only when application is focused"
+msgstr ""
 
 msgid "Enter a name for the new playlist"
 msgstr "Voer een naam in voor de nieuwe afspeellijst"
@@ -1759,6 +1768,12 @@ msgstr "Gebruik Gnome's sneltoetsen"
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Gebruik Replay Gain metadata indien beschikbaar"
 
+msgid "Use Wii remote id"
+msgstr ""
+
+msgid "Use notifications to report Wii remote status"
+msgstr ""
+
 msgid "Use the system default"
 msgstr "Gebruik de systeem standaard"
 
@@ -1861,7 +1876,7 @@ msgstr "Nul"
 msgid "[click to edit]"
 msgstr "[klik om te bewerken:]"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n nummers toevoegen"
 
@@ -1881,7 +1896,7 @@ msgstr "nummers verplaatsen"
 msgid "options"
 msgstr "opties"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n nummers verwijderen"
 

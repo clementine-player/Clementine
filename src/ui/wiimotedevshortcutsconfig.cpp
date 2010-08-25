@@ -121,7 +121,8 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
     fvalue = str.toULongLong(&fvalid, 10);
     svalue = settings_.value(str, 0).toULongLong(&svalid);
     if (fvalid && svalid) {
-      QTreeWidgetItem* item = new QTreeWidgetItem(ui_->list, QStringList() << GetReadableWiiremoteSequence(fvalue) << text_actions_[svalue]);
+      new QTreeWidgetItem(ui_->list,
+          QStringList() << GetReadableWiiremoteSequence(fvalue) << text_actions_[svalue]);
     }
     ui_->list->sortItems(1, Qt::AscendingOrder);
   }
