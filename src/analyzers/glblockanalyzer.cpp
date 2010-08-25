@@ -1,5 +1,7 @@
 #include "glblockanalyzer.h"
 
+#include <cmath>
+
 #include <QtDebug>
 
 #include <QApplication>
@@ -11,7 +13,8 @@ const char* GLBlockAnalyzer::kName = "GL Block Analyzer";
 GLBlockAnalyzer::GLBlockAnalyzer(QWidget* parent)
     : AnalyzerBase(parent),
       rectangles_size_(0),
-      shader_(this) {
+      shader_(this),
+      current_spectrum_(200, 0.0) {
 }
 
 void GLBlockAnalyzer::SpectrumAvailable(const QVector<float>& spectrum) {
@@ -43,27 +46,87 @@ void GLBlockAnalyzer::resizeGL(int w, int h) {
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
+  num_columns_ = w / kRectPixels;
+
+  rectangles_size_ = num_columns_ * kNumRectangles * 4 * 3;
+  rectangles_.reset(new float[rectangles_size_]);
+  const float rect_height = 1.0 / kNumRectangles;
+  const float rect_width = 1.0 / num_columns_;
+  const int row_size = 3 * 4 * num_columns_;
+  for (int y = 0; y < kNumRectangles; ++y) {
+    for (int x = 0; x < num_columns_; ++x) {
+      float* pos = &rectangles_[y * row_size + x * 3 * 4];
+      float* bottom_left = pos;
+      float* bottom_right = pos + 3;
+      float* top_right = pos + 6;
+      float* top_left = pos + 9;
+
+      bottom_left[0] = x * rect_width;
+      bottom_left[1] = y * rect_height;
+      bottom_left[2] = 0.0;
+
+      bottom_right[0] = (x + 1) * rect_width;
+      bottom_right[1] = y * rect_height;
+      bottom_right[2] = 0.0;
+
+      top_right[0] = (x + 1) * rect_width;
+      top_right[1] = (y + 1) * rect_height;
+      top_right[2] = 0.0;
+
+      top_left[0] = x * rect_width;
+      top_left[1] = (y + 1) * rect_height;
+      top_left[2] = 0.0;
+    }
+  }
 }
 
+namespace {
+class ColourGenerator {
+ public:
+  ColourGenerator(const QColor& colour)
+      : i_(0) {
+    rgb_[0] = colour.redF();
+    rgb_[1] = colour.greenF();
+    rgb_[2] = colour.blueF();
+  }
+  ColourGenerator(float r, float g, float b)
+      : i_(0) {
+    rgb_[0] = r;
+    rgb_[1] = g;
+    rgb_[2] = b;
+  }
+  float operator() () {
+    return rgb_[i_++ % 3];
+  }
+ private:
+  int i_;
+  float rgb_[3];
+};
+}  // namespace
+
 void GLBlockAnalyzer::paintGL() {
-  if (current_spectrum_.size() != rectangles_size_) {
-    rectangles_.reset(new float[current_spectrum_.size() * 3 * 4]);
-    rectangles_size_ = current_spectrum_.size();
-    std::fill(rectangles_.get(), rectangles_.get() + rectangles_size_ * 3 * 4, 0.0f);
+  colours_.reset(new float[rectangles_size_]);
+  std::fill(colours_.get(), colours_.get() + rectangles_size_, 0.8);
 
-    tex_coords_.reset(new float[rectangles_size_ * 2 * 4]);
-    for (int i = 0; i < rectangles_size_ * 2 * 4; i += 2 * 4) {
-      tex_coords_[i] = 0.0;
-      tex_coords_[i+1] = 0.0;
+  QColor bg_colour = QApplication::palette().color(QPalette::Window);
+  std::generate(colours_.get(), colours_.get() + rectangles_size_,
+      ColourGenerator(bg_colour.darker(120)));
 
-      tex_coords_[i+2] = 1.0;
-      tex_coords_[i+3] = 0.0;
-
-      tex_coords_[i+4] = 1.0;
-      tex_coords_[i+5] = 1.0;
-
-      tex_coords_[i+6] = 0.0;
-      tex_coords_[i+7] = 1.0;
+  const int row_size = 3 * 4 * num_columns_;
+  for (int x = 0; x < num_columns_; ++x) {
+    int peak_rect = current_spectrum_[x] * 10;
+    float* peak = &colours_[peak_rect * row_size + x * 3 * 4];
+    const QColor& colour = Qt::blue;
+    std::generate(peak, peak + 3 * 4, ColourGenerator(colour));
+    for (int i = 0; i < peak_rect; ++i) {
+      float* p = &colours_[i * row_size + x * 3 * 4];
+      const QColor& c = colour.lighter(std::pow(double(i - peak_rect), 2) * 10 + 100);
+      if (c.valueF() > bg_colour.valueF()) {
+        std::generate(p, p + 3 * 4, ColourGenerator(bg_colour));
+      } else {
+        std::generate(p, p + 3 * 4, ColourGenerator(c));
+      }
     }
   }
 
@@ -76,48 +139,24 @@ void GLBlockAnalyzer::paintGL() {
   glTranslatef(-1.0, -1.0, 0.0);
   glScalef(2.0, 2.0, 1.0);
 
-
-  for (int i = 0; i < current_spectrum_.size(); ++i) {
-    const float x = width * i;
-    const float height = current_spectrum_[i] + 0.2;
-
-    float* current_rectangle = rectangles_.get() + i*4*3;  // 4 points of size 3.
-    float* bottom_left = current_rectangle;
-    float* bottom_right = current_rectangle + 3;
-    float* top_right = current_rectangle + 6;
-    float* top_left = current_rectangle + 9;
-
-    bottom_left[0] = x;
-    bottom_left[1] = 0.0;
-
-    bottom_right[0] = x + width;
-    bottom_right[1] = 0.0;
-
-    top_right[0] = x + width;
-    top_right[1] = height;
-
-    top_left[0] = x;
-    top_left[1] = height;
-  }
-
-  shader_.bind();
+  //shader_.bind();
 
   glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  glEnableClientState(GL_COLOR_ARRAY);
 
   // Draw rectangles.
   glVertexPointer(3, GL_FLOAT, 0, rectangles_.get());
-  glTexCoordPointer(2, GL_FLOAT, 0, tex_coords_.get());
+  glColorPointer(3, GL_FLOAT, 0, colours_.get());
 
   glColor3f(1.0, 0.0, 0.0);
   glPolygonMode(GL_FRONT, GL_FILL);
-  glDrawArrays(GL_QUADS, 0, rectangles_size_ * 4);
+  glDrawArrays(GL_QUADS, 0, rectangles_size_ / 3);
 
+  glDisableClientState(GL_COLOR_ARRAY);
   // Draw outlines.
-  glColor3f(1.0, 1.0, 1.0);
+  qglColor(bg_colour);
   glPolygonMode(GL_FRONT, GL_LINE);
-  glDrawArrays(GL_QUADS, 0, rectangles_size_ * 4);
+  glDrawArrays(GL_QUADS, 0, rectangles_size_ / 3);
 
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   glDisableClientState(GL_VERTEX_ARRAY);
 }

@@ -19,6 +19,7 @@
 #include "ui_playlistcontainer.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
+#include "widgets/maclineedit.h"
 
 #include <QUndoStack>
 #include <QInputDialog>
@@ -79,7 +80,19 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
   connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
-  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
+
+  // Replace playlist search filter with native search box.
+#ifdef Q_OS_DARWIN
+  delete ui_->filter;
+  MacLineEdit* filter = new MacLineEdit(ui_->toolbar);
+  filter->setObjectName("filter");
+  ui_->horizontalLayout->addWidget(ui_->filter);
+  connect(filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
+  filter->SetHint(tr("Playlist search"));
+  filter_ = filter;
+#else
+  filter_ = ui_->filter;
+#endif
 }
 
 PlaylistContainer::~PlaylistContainer() {
@@ -104,8 +117,8 @@ void PlaylistContainer::SetActions(
 }
 
 void PlaylistContainer::ClearFilter() {
-  ui_->filter->clear();
-  ui_->filter->setFocus();
+  filter_->clear();
+  filter_->setFocus();
 }
 
 void PlaylistContainer::SetManager(PlaylistManager *manager) {
@@ -148,7 +161,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
           this, SLOT(SelectionChanged()));
 
   // Update filter
-  ui_->filter->setText(playlist->proxy()->filterRegExp().pattern());
+  filter_->setText(playlist->proxy()->filterRegExp().pattern());
 
   // Ensure that tab is current
   if (ui_->tab_bar->current_id() != manager_->current_id())
@@ -312,7 +325,7 @@ void PlaylistContainer::SetTabBarHeight(int height) {
 }
 
 void PlaylistContainer::UpdateFilter() {
-  manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
+  manager_->current()->proxy()->setFilterFixedString(filter_->text());
   ui_->playlist->JumpToCurrentlyPlayingTrack();
 
   bool no_matches = manager_->current()->proxy()->rowCount() == 0 &&

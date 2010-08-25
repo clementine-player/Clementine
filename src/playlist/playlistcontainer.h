@@ -22,6 +22,7 @@
 
 class Ui_PlaylistContainer;
 
+class LineEditInterface;
 class Playlist;
 class PlaylistManager;
 class PlaylistView;
@@ -97,6 +98,7 @@ private:
   QTimeLine* tab_bar_animation_;
 
   QLabel* no_matches_label_;
+  LineEditInterface* filter_;
 };
 
 #endif // PLAYLISTCONTAINER_H

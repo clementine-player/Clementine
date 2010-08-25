@@ -19,6 +19,7 @@
 #include "blockanalyzer.h"
 #include "boomanalyzer.h"
 #include "engines/enginebase.h"
+#include "glbaranalyzer.h"
 #include "glblockanalyzer.h"
 #include "sonogram.h"
 #include "turbine.h"
@@ -60,6 +61,7 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   connect(double_click_timer_, SIGNAL(timeout()), SLOT(ShowPopupMenu()));
 
   AddAnalyzerType<GLBlockAnalyzer>();
+  AddAnalyzerType<GLBarAnalyzer>();
   AddAnalyzerType<BlockAnalyzer>();
   AddAnalyzerType<BarAnalyzer>();
   AddAnalyzerType<BoomAnalyzer>();

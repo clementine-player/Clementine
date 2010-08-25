@@ -14,26 +14,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LINEEDIT_H
-#define LINEEDIT_H
+#ifndef MACLINEEDIT_H
+#define MACLINEEDIT_H
 
-#include <QLineEdit>
+#include <QMacCocoaViewContainer>
 
-class LineEditInterface {
- public:
-  virtual void clear() = 0;
-  virtual void setFocus() = 0;
-  virtual void setText(const QString&) = 0;
-  virtual QString text() const = 0;
-};
+#include "lineedit.h"
 
-// Remove in Qt 4.7: QLineEdit has placeholderText
-class LineEdit : public QLineEdit, public LineEditInterface {
+class SearchTargetWrapper;
+
+class MacLineEdit : public QMacCocoaViewContainer, public LineEditInterface {
   Q_OBJECT
   Q_PROPERTY(QString hint READ GetHint WRITE SetHint);
 
  public:
-  LineEdit(QWidget* parent = 0);
+  MacLineEdit(QWidget* parent = 0);
+  ~MacLineEdit();
 
   QString GetHint() const { return hint_; }
   void SetHint(const QString& hint);
@@ -41,13 +37,24 @@ class LineEdit : public QLineEdit, public LineEditInterface {
 
   void paintEvent(QPaintEvent* e);
 
-  void clear() { QLineEdit::clear(); }
-  void setFocus() { QLineEdit::setFocus(); }
-  void setText(const QString& t) { QLineEdit::setText(t); }
-  QString text() const { return QLineEdit::text(); }
+  void clear() {}
+
+  void setText(const QString&);
+  QString text() const;
+  void setFocus() {}
+
+ signals:
+  void textChanged(const QString& text);
+  void textEdited(const QString& text);
 
  private:
+  // Called by NSSearchFieldCell when the text changes.
+  void TextChanged(const QString& text);
+
   QString hint_;
+
+  friend class SearchTargetWrapper;
+  SearchTargetWrapper* wrapper_;
 };
 
-#endif // LINEEDIT_H
+#endif // MACLINEEDIT_H

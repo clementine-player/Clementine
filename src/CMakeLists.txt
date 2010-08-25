@@ -31,6 +31,7 @@ set(SOURCES
   analyzers/turbine.cpp
 
   analyzers/analyzer.cpp
+  analyzers/glbaranalyzer.cpp
   analyzers/glblockanalyzer.cpp
 
   core/albumcoverfetcher.cpp
@@ -150,7 +151,6 @@ set(SOURCES
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/freespacebar.cpp
-  widgets/lineedit.cpp
   widgets/linetextedit.cpp
   widgets/multiloadingindicator.cpp
   widgets/nowplayingwidget.cpp
@@ -162,6 +162,7 @@ set(SOURCES
   widgets/stickyslider.cpp
   widgets/trackslider.cpp
   widgets/tracksliderslider.cpp
+  widgets/lineedit.cpp
 )
 
 set(HEADERS
@@ -174,6 +175,7 @@ set(HEADERS
   analyzers/turbine.h
 
   analyzers/analyzer.h
+  analyzers/glbaranalyzer.h
   analyzers/glblockanalyzer.h
 
   core/albumcoverfetcher.h
@@ -271,7 +273,6 @@ set(HEADERS
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/freespacebar.h
-  widgets/lineedit.h
   widgets/linetextedit.h
   widgets/multiloadingindicator.h
   widgets/nowplayingwidget.h
@@ -282,6 +283,7 @@ set(HEADERS
   widgets/spinbox.h
   widgets/stickyslider.h
   widgets/trackslider.h
+  widgets/lineedit.h
 )
 
 set(UI
@@ -436,6 +438,8 @@ if(APPLE)
   list(APPEND SOURCES ui/macsystemtrayicon.mm)
   list(APPEND HEADERS core/macglobalshortcutbackend.h)
   list(APPEND HEADERS ui/macsystemtrayicon.h)
+  list(APPEND SOURCES widgets/maclineedit.mm)
+  list(APPEND HEADERS widgets/maclineedit.h)
   include_directories(${GROWL}/Headers)
 else(APPLE)
   if(WIN32)
