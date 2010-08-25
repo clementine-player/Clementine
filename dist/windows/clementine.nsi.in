@@ -9,6 +9,9 @@
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_INSTALL_DIR "$PROGRAMFILES\Clementine"
 
+!define WMDM_DIST_URL "http://clementine-player.googlecode.com/files/wmdmdist.exe"
+!define WMF_DIST_URL  "http://clementine-player.googlecode.com/files/wmfdist.exe"
+
 ; Set Application Capabilities info
 !define CAPABILITIES_NAME "Clementine"
 !define CAPABILITIES_LOCAL_NAME "Clementine"
@@ -49,7 +52,6 @@ OutFile "${PRODUCT_NAME}Setup.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show
-; BrandingText "${PRODUCT_PUBLISHER}"
 RequestExecutionLevel admin
 
 Section "Delete old files" oldfiles
@@ -59,6 +61,39 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\gstreamer-plugins\libgstdecodebin.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstdirectsound.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstwaveform.dll"
+
+  ; 0.4
+  Delete "$INSTDIR\avcodec-gpl-52.dll"
+  Delete "$INSTDIR\avformat-gpl-52.dll"
+  Delete "$INSTDIR\avutil-gpl-50.dll"
+  Delete "$INSTDIR\iconv.dll"
+  Delete "$INSTDIR\libbz2.dll"
+  Delete "$INSTDIR\libdl.dll"
+  Delete "$INSTDIR\libfaac-0.dll"
+  Delete "$INSTDIR\libfaad-2.dll"
+  Delete "$INSTDIR\libFLAC-8.dll"
+  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
+  Delete "$INSTDIR\libgcc_s_sjlj-1.dll"
+  Delete "$INSTDIR\libgstaudio-0.10.dll"
+  Delete "$INSTDIR\libgstbase-0.10.dll"
+  Delete "$INSTDIR\libgstcontroller-0.10.dll"
+  Delete "$INSTDIR\libgstdshow-0.10.dll"
+  Delete "$INSTDIR\libgstinterfaces-0.10.dll"
+  Delete "$INSTDIR\libgstnet-0.10.dll"
+  Delete "$INSTDIR\libgstnetbuffer-0.10.dll"
+  Delete "$INSTDIR\libgstpbutils-0.10.dll"
+  Delete "$INSTDIR\libgstreamer-0.10.dll"
+  Delete "$INSTDIR\libgstriff-0.10.dll"
+  Delete "$INSTDIR\libgstrtp-0.10.dll"
+  Delete "$INSTDIR\libgstrtsp-0.10.dll"
+  Delete "$INSTDIR\libgstsdp-0.10.dll"
+  Delete "$INSTDIR\libgsttag-0.10.dll"
+  Delete "$INSTDIR\libxml2.dll"
+  Delete "$INSTDIR\z.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstasfdemux.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstffmpeg-gpl.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstqueue2.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstsoup.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -819,6 +854,41 @@ Section "Uninstaller"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
 
+Section "Windows Media Device Manager"
+  GetDllVersion "$SYSDIR\mswmdm.dll" $R8 $R9
+  IntOp $R7 $R8 / 0x00010000
+  IntCmp $R7 9 end downloadwmf end  # Major version >= 9
+
+downloadwmf:
+  StrCpy $1 "wmfdist.exe"
+  NSISdl::download ${WMF_DIST_URL} "$TEMP\$1"
+  Pop $R0
+  StrCmp $R0 "success" downloadwmdm
+  MessageBox MB_OK|MB_ICONSTOP "Error while downloading $1."
+  Quit
+
+downloadwmdm:
+  StrCpy $1 "wmdmdist.exe"
+  NSISdl::download ${WMDM_DIST_URL} "$TEMP\$1"
+  Pop $R0
+  StrCmp $R0 "success" install
+  MessageBox MB_OK|MB_ICONSTOP "Error while downloading $1."
+  Quit
+
+install:
+  DetailPrint "Installing the Windows Media Format 9 redistributable"
+  ExecWait "$TEMP\wmfdist.exe /Q"
+
+  DetailPrint "Installing the Windows Media Device Manager 9 redistributable"
+  ExecWait "$TEMP\wmdmdist.exe /Q"
+
+  Delete "$TEMP\wmfdist.exe"
+  Delete "$TEMP\wmdmdist.exe"
+
+end:
+  DetailPrint "WMDM redistributable installed"
+SectionEnd
+
 Section "Uninstall"
   ; Kill clementine.exe if it's running
   ; This calling convention is retarded...
@@ -845,7 +915,7 @@ Section "Uninstall"
   
   ; Delete all the files
   Delete "$INSTDIR\avcodec-52.dll"
-  Delete "$INSTDIR\avformat52.dll"
+  Delete "$INSTDIR\avformat-52.dll"
   Delete "$INSTDIR\avutil-50.dll"
   Delete "$INSTDIR\clementine.ico"
   Delete "$INSTDIR\clementine.exe"
