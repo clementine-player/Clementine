@@ -70,6 +70,8 @@ void WiimotedevShortcuts::ReloadSettings() {
     settings_.sync();
   }
 
+  actions_.clear();
+
   quint64 fvalue, svalue;
   bool fvalid, svalid;
 

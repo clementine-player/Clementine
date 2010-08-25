@@ -20,6 +20,7 @@
 #include <QSettings>
 #include <QWidget>
 
+class QTreeWidgetItem;
 class Ui_WiimotedevShortcutsConfig;
 
 class WiimotedevShortcutsConfig : public QWidget {
@@ -30,10 +31,16 @@ public:
 
 private:
   QSettings settings_;
+  QString current_id_;
+
+  QMap < quint64, QString> text_buttons_;
+  QMap < quint32, QString> text_actions_;
+
+  QString GetReadableWiiremoteSequence(quint64 value);
 
 private slots:
   void WiimotedevEnabledChecked(bool checked);
-
+  void ItemClicked(QTreeWidgetItem* item);
 };
 
 #endif // WIIMOTEDEVSHORTCUTSCONFIG_H

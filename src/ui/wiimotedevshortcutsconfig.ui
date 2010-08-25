@@ -123,86 +123,77 @@
         </property>
         <column>
          <property name="text">
-          <string>Name</string>
+          <string>Buttons</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Shortcut</string>
+          <string>Action</string>
          </property>
         </column>
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="shortcut_options">
-        <property name="enabled">
-         <bool>true</bool>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="title">
-         <string>Shortcut for %1</string>
+        <property name="bottomMargin">
+         <number>0</number>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QRadioButton" name="radio_none">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="text">
-            <string>&amp;None</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radio_default">
-           <property name="text">
-            <string>De&amp;fault</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radio_custom">
-           <property name="text">
-            <string>&amp;Custom</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="change">
-           <property name="text">
-            <string>Change shortcut...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+        <item>
+         <widget class="QPushButton" name="wiimotedev_add_action">
+          <property name="text">
+           <string>Add action</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/data.qrc">
+            <normaloff>:/icons/22x22/list-add.png</normaloff>:/icons/22x22/list-add.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="wiimotedev_delete_action">
+          <property name="text">
+           <string>Remove action</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/data.qrc">
+            <normaloff>:/icons/22x22/list-remove.png</normaloff>:/icons/22x22/list-remove.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="wiimotedev_edit_action">
+          <property name="text">
+           <string>Edit action</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../data/data.qrc">
+            <normaloff>:/icons/22x22/configure.png</normaloff>:/icons/22x22/configure.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <tabstops>
-  <tabstop>radio_none</tabstop>
-  <tabstop>radio_default</tabstop>
-  <tabstop>radio_custom</tabstop>
-  <tabstop>change</tabstop>
- </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>

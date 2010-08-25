@@ -53,7 +53,7 @@ private:
   bool wiimotedev_focus_;
   bool wiimotedev_notification_;
 
-private:
+public:
   enum Action {
     WiimotedevActive,
     WiimotedevDeactive,
@@ -72,6 +72,7 @@ private:
     PlayerShowOSD
   };
 
+private:
   QMap <quint64, quint32> actions_;
 
 signals:
