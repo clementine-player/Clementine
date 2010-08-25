@@ -674,7 +674,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
         break;
       }
       default:
-        qWarning() << "Type" << value << "not handled";
+        qWarning() << "Type" << value.type() << "not handled";
         Q_ASSERT(0);
         break;
     }
