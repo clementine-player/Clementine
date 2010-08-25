@@ -50,6 +50,8 @@ private:
 
   quint32 wiimotedev_device_;
   bool wiimotedev_active_;
+  bool wiimotedev_focus_;
+  bool wiimotedev_notification_;
 
 private:
   enum Action {

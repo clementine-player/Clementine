@@ -473,6 +473,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_about->setMenuRole(QAction::AboutRole);
 #endif
 
+#ifdef ENABLE_WIIMOTEDEV
+  wiimotedev_shortcuts_ = new WiimotedevShortcuts(player_, this);
+#endif
+
   // Global shortcuts
   connect(global_shortcuts_, SIGNAL(Play()), player_, SLOT(Play()));
   connect(global_shortcuts_, SIGNAL(Pause()), player_, SLOT(Pause()));
@@ -497,6 +501,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
+#ifdef ENABLE_WIIMOTEDEV
+  connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_, SLOT(ReloadSettings()));
+#endif
 
   // Add stream dialog
   connect(add_stream_dialog_.get(), SIGNAL(accepted()), SLOT(AddStreamAccepted()));
@@ -577,10 +584,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   library_->Init();
   library_->StartThreads();
-
-#ifdef ENABLE_WIIMOTEDEV
-  wiimotedev_shortcuts_ = new WiimotedevShortcuts(player_, this);
-#endif
 }
 
 MainWindow::~MainWindow() {

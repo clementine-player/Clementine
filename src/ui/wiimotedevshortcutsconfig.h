@@ -17,19 +17,22 @@
 #ifndef WIIMOTEDEVSHORTCUTSCONFIG_H
 #define WIIMOTEDEVSHORTCUTSCONFIG_H
 
+#include <QSettings>
 #include <QWidget>
 
 class Ui_WiimotedevShortcutsConfig;
 
 class WiimotedevShortcutsConfig : public QWidget {
- Q_OBJECT
-
- public:
+  Q_OBJECT
+public:
   WiimotedevShortcutsConfig(QWidget* parent = 0);
-  ~WiimotedevShortcutsConfig(){};
-
- private:
   Ui_WiimotedevShortcutsConfig* ui_;
+
+private:
+  QSettings settings_;
+
+private slots:
+  void WiimotedevEnabledChecked(bool checked);
 
 };
 

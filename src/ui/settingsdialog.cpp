@@ -25,6 +25,8 @@
 
 #ifdef ENABLE_WIIMOTEDEV
 #include "ui/wiimotedevshortcutsconfig.h"
+#include "ui_wiimotedevshortcutsconfig.h"
+#include "wiimotedev/shortcuts.h"
 #endif
 
 #ifdef HAVE_GSTREAMER
@@ -58,13 +60,13 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_->list->addItem("Wiimotedev");
   ui_->list->item(Page_Wiimotedev)->setIcon(QIcon(":/icons/32x32/wiimotedev.png"));
 
-  QWidget *wiimotedev_page = new QWidget(this);
+  QWidget* wiimotedev_page = new QWidget(this);
   wiimotedev_page->setObjectName(QString::fromUtf8("wiimotedev_page"));
-  QVBoxLayout *wiimotedev_layout = new QVBoxLayout(wiimotedev_page);
+  QVBoxLayout* wiimotedev_layout = new QVBoxLayout(wiimotedev_page);
   wiimotedev_layout->setObjectName(QString::fromUtf8("wiimotedev_layout"));
-  WiimotedevShortcutsConfig  *wiimotedev_config = new WiimotedevShortcutsConfig(wiimotedev_page);
-  wiimotedev_config->setObjectName(QString::fromUtf8("wiimotedev_config"));
-  wiimotedev_layout->addWidget(wiimotedev_config);
+  wiimotedev_config_ = new WiimotedevShortcutsConfig(wiimotedev_page);
+  wiimotedev_config_->setObjectName(QString::fromUtf8("wiimotedev_config"));
+  wiimotedev_layout->addWidget(wiimotedev_config_);
 
   ui_->stacked_widget->addWidget(wiimotedev_page);
 #endif
@@ -218,6 +220,16 @@ void SettingsDialog::accept() {
   s.setValue("rgmode", ui_->replaygain_mode->currentIndex());
   s.setValue("rgpreamp", float(ui_->replaygain_preamp->value()) / 10 - 15);
   s.setValue("rgcompression", ui_->replaygain_compression->isChecked());
+  s.endGroup();
+#endif
+
+#ifdef ENABLE_WIIMOTEDEV
+  s.beginGroup(WiimotedevShortcuts::kSettingsGroup);
+  s.setValue("enabled", wiimotedev_config_->ui_->wiimotedev_enable->isChecked());
+  s.setValue("only_when_focused", wiimotedev_config_->ui_->wiimotedev_focus->isChecked());
+  s.setValue("use_active_action", wiimotedev_config_->ui_->wiimotedev_active->isChecked());
+  s.setValue("use_notification", wiimotedev_config_->ui_->wiimotedev_notification->isChecked());
+  s.setValue("device", wiimotedev_config_->ui_->wiimotedev_device->value());
   s.endGroup();
 #endif
 
