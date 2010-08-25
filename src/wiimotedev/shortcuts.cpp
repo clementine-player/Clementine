@@ -21,7 +21,7 @@
 
 const char* WiimotedevShortcuts::kSettingsGroup = "Wiimotedev";
 
-WiimotedevShortcuts::WiimotedevShortcuts(Player *player, QObject *parent)
+WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
  :QObject(parent),
   player_(player),
   wiimotedev_iface_(NULL),
@@ -63,18 +63,20 @@ void WiimotedevShortcuts::SetEnabled(bool enabled)
 void WiimotedevShortcuts::ReloadSettings() {
   settings_.sync();
   quint64 value;
-  if (value = settings_.value(QString::fromUtf8("next_track"), quint64(WIIMOTE_BTN_RIGHT)).toInt()) actions_[PlayerNextTrack] = value;
-  if (value = settings_.value(QString::fromUtf8("previous_track"), quint64(WIIMOTE_BTN_LEFT)).toInt()) actions_[PlayerPreviousTrack] = value;
-  if (value = settings_.value(QString::fromUtf8("play"), quint64(0)).toInt()) actions_[PlayerPlay] = value;
-  if (value = settings_.value(QString::fromUtf8("stop"), quint64(0)).toInt()) actions_[PlayerStop] = value;
-  if (value = settings_.value(QString::fromUtf8("inc_volume"), quint64(WIIMOTE_BTN_PLUS)).toInt()) actions_[PlayerIncVolume] = value;
-  if (value = settings_.value(QString::fromUtf8("dec_volume"), quint64(WIIMOTE_BTN_MINUS)).toInt()) actions_[PlayerDecVolume] = value;
-  if (value = settings_.value(QString::fromUtf8("mute"), quint64(0)).toInt()) actions_[PlayerMute] = value;
-  if (value = settings_.value(QString::fromUtf8("pause"), quint64(0)).toInt()) actions_[PlayerPause] = value;
-  if (value = settings_.value(QString::fromUtf8("togglepause"), quint64(WIIMOTE_BTN_1)).toInt()) actions_[PlayerTogglePause] = value;
-  if (value = settings_.value(QString::fromUtf8("seek_backward"), quint64(WIIMOTE_BTN_UP)).toInt()) actions_[PlayerSeekBackward] = value;
-  if (value = settings_.value(QString::fromUtf8("seek_forward"), quint64(WIIMOTE_BTN_DOWN)).toInt()) actions_[PlayerSeekForward] = value;
-  if (value = settings_.value(QString::fromUtf8("show_osd"), quint64(WIIMOTE_BTN_2)).toInt()) actions_[PlayerShowOSD] = value;
+  if (value = settings_.value("next_track", WIIMOTE_BTN_RIGHT).toULongLong()) actions_[value] = PlayerNextTrack;
+  if (value = settings_.value("previous_track", WIIMOTE_BTN_LEFT).toULongLong()) actions_[value] = PlayerPreviousTrack;
+  if (value = settings_.value("next_track", WIIMOTE_BTN_SHIFT_RIGHT).toULongLong()) actions_[value] = PlayerNextTrack;
+  if (value = settings_.value("previous_track", WIIMOTE_BTN_SHIFT_LEFT).toULongLong()) actions_[value] = PlayerPreviousTrack;
+  if (value = settings_.value("play", 0).toULongLong()) actions_[value] = PlayerPlay;
+  if (value = settings_.value("stop", 0).toULongLong()) actions_[value] = PlayerStop;
+  if (value = settings_.value("inc_volume", WIIMOTE_BTN_PLUS).toULongLong()) actions_[value] = PlayerIncVolume;
+  if (value = settings_.value("dec_volume", WIIMOTE_BTN_MINUS).toULongLong()) actions_[value] = PlayerDecVolume;
+  if (value = settings_.value("mute", 0).toULongLong()) actions_[value] = PlayerMute;
+  if (value = settings_.value("pause", 0).toULongLong()) actions_[value] = PlayerPause;
+  if (value = settings_.value("togglepause", WIIMOTE_BTN_1).toULongLong()) actions_[value] = PlayerTogglePause;
+  if (value = settings_.value("seek_backward", WIIMOTE_BTN_UP).toULongLong()) actions_[value] = PlayerSeekBackward;
+  if (value = settings_.value("seek_forward", WIIMOTE_BTN_DOWN).toULongLong()) actions_[value] = PlayerSeekForward;
+  if (value = settings_.value("show_osd", WIIMOTE_BTN_2).toULongLong()) actions_[value] = PlayerShowOSD;
 
   SetEnabled(settings_.value(QString::fromUtf8("enabled"), quint64(true)).toBool());
 }
@@ -104,12 +106,12 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
 
   if (wiimotedev_buttons_ == buttons) return;
 
-  QMapIterator< quint32, quint64> actions(actions_);
+  QMapIterator<quint64, quint32> actions(actions_);
 
   while (actions.hasNext()) {
     actions.next();
-    if (actions.value() == 0) continue;
-    if ((actions.value() & buttons) == actions.value()) EmitRequest(actions.key());
+    if (actions.key() == 0) continue;
+    if ((actions.key() & buttons) == actions.key()) EmitRequest(actions.value());
   }
 
   wiimotedev_buttons_ = buttons;

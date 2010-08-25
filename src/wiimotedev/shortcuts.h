@@ -14,8 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SHORTCUTS_H
-#define SHORTCUTS_H
+#ifndef WIIMOTEDEV_SHORTCUTS_H
+#define WIIMOTEDEV_SHORTCUTS_H
 
 #include <QObject>
 #include <QMap>
@@ -29,13 +29,13 @@ class WiimotedevShortcuts :public QObject {
 public:
   static const char* kSettingsGroup;
 
-  WiimotedevShortcuts(Player *player = 0, QObject *parent = 0);
+  WiimotedevShortcuts(Player* player = 0, QObject* parent = 0);
 
 public slots:
   void ReloadSettings();
   void SetEnabled(bool enabled);
 
-private Q_SLOTS:
+private slots:
   void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
 
 private:
@@ -47,7 +47,7 @@ private:
   QSettings settings_;
 
 private:
-  enum action {
+  enum Action {
     PlayerNextTrack,
     PlayerPreviousTrack,
     PlayerPlay,
@@ -63,7 +63,7 @@ private:
     PlayerShowOSD
   };
 
-  QMap < quint32, quint64> actions_;
+  QMap <quint64, quint32> actions_;
 
 signals:
   void Next();
@@ -82,4 +82,4 @@ signals:
 
 };
 
-#endif // SHORTCUTS_H
+#endif // WIIMOTEDEV_SHORTCUTS_H

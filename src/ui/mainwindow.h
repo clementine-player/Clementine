@@ -57,8 +57,8 @@ class Song;
 class SystemTrayIcon;
 class TaskManager;
 class TranscodeDialog;
-class WiimotedevShortcuts;
 class VisualisationContainer;
+class WiimotedevShortcuts;
 class Ui_MainWindow;
 
 class QSortFilterProxyModel;
@@ -212,7 +212,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
-  WiimotedevShortcuts *wiimotedev_shortcuts_;
+  WiimotedevShortcuts* wiimotedev_shortcuts_;
 #endif
 
   QMenu* playlist_menu_;
