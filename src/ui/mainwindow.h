@@ -34,7 +34,6 @@ class AddStreamDialog;
 class AlbumCoverManager;
 class CommandlineOptions;
 class Database;
-class DBusDeviceEventsInterface;
 class DeviceManager;
 class EditTagDialog;
 class Equalizer;
@@ -58,6 +57,7 @@ class Song;
 class SystemTrayIcon;
 class TaskManager;
 class TranscodeDialog;
+class WiimotedevShortcuts;
 class VisualisationContainer;
 class Ui_MainWindow;
 
@@ -171,10 +171,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void SongSaveComplete();
 
-#ifdef ENABLE_WIIMOTEDEV
-  void DbusWiimoteButtons(quint32 id, quint64 value);
-#endif
-
  private:
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
@@ -216,8 +212,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
-  DBusDeviceEventsInterface* wiimotedev_iface_;
-  quint64 wiimotedev_buttons_;
+  WiimotedevShortcuts *wiimotedev_shortcuts_;
 #endif
 
   QMenu* playlist_menu_;

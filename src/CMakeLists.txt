@@ -487,6 +487,9 @@ if(NOT APPLE AND NOT WIN32)
     list(APPEND SOURCES wiimotedev/interface.cpp)
     list(APPEND HEADERS wiimotedev/interface.h)
 
+    list(APPEND SOURCES wiimotedev/shortcuts.cpp)
+    list(APPEND HEADERS wiimotedev/shortcuts.h)
+
     list(APPEND SOURCES ui/wiimotedevshortcutsconfig.cpp)
     list(APPEND HEADERS ui/wiimotedevshortcutsconfig.h)
     list(APPEND UI ui/wiimotedevshortcutsconfig.ui)
