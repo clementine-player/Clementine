@@ -40,8 +40,8 @@ private slots:
   void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
 
 private:
-  DBusDeviceEventsInterface* wiimotedev_iface_;
   Player* player_;
+  DBusDeviceEventsInterface* wiimotedev_iface_;
   quint64 wiimotedev_buttons_;
   QSettings settings_;
 
