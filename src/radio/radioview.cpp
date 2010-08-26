@@ -26,6 +26,7 @@ RadioView::RadioView(QWidget *parent)
 {
   setItemDelegate(new LibraryItemDelegate(this));
   SetExpandOnReset(false);
+  setAttribute(Qt::WA_MacShowFocusRect, false);
 }
 
 void RadioView::contextMenuEvent(QContextMenuEvent* e) {

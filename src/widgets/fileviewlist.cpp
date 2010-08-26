@@ -37,6 +37,7 @@ FileViewList::FileViewList(QWidget* parent)
                    this, SLOT(MoveToLibrarySlot()));
   menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."),
                    this, SLOT(DeleteSlot()));
+  setAttribute(Qt::WA_MacShowFocusRect, false);
 }
 
 void FileViewList::contextMenuEvent(QContextMenuEvent* e) {

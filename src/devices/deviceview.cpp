@@ -144,6 +144,7 @@ DeviceView::DeviceView(QWidget* parent)
 
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
+  setAttribute(Qt::WA_MacShowFocusRect, false);
 }
 
 DeviceView::~DeviceView() {
