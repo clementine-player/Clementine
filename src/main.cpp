@@ -168,9 +168,13 @@ int main(int argc, char *argv[]) {
   a.setQuitOnLastWindowClosed(false);
   a.isRunning(); // Otherwise QtLocalPeer won't lock the lockfile :S
 
+#ifndef Q_OS_DARWIN
   // Gnome on Ubuntu has menu icons disabled by default.  I think that's a bad
   // idea, and makes some menus in Clementine look confusing.
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
+#else
+  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
+#endif
 
   // Resources
   Q_INIT_RESOURCE(data);
