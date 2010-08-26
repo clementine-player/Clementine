@@ -29,18 +29,32 @@ public:
   WiimotedevShortcutsConfig(QWidget* parent = 0);
   Ui_WiimotedevShortcutsConfig* ui_;
 
+  struct Shortcut {
+    QTreeWidgetItem* object;
+    quint64 button;
+    quint32 action;
+  };
+
+  QList <struct Shortcut> actions_;
+
 private:
   QSettings settings_;
   QString current_id_;
 
-  QMap < quint64, QString> text_buttons_;
-  QMap < quint32, QString> text_actions_;
+  QTreeWidgetItem* selected_item_;
+
+  QMap <quint64, QString> text_buttons_;
+  QMap <quint32, QString> text_actions_;
 
   QString GetReadableWiiremoteSequence(quint64 value);
 
 private slots:
+  void LoadSettings();
+  void DefaultSettings();
+  void DeleteAction();
+
   void WiimotedevEnabledChecked(bool checked);
-  void ItemClicked(QTreeWidgetItem* item);
+  void ItemClicked(QTreeWidgetItem*);
 };
 
 #endif // WIIMOTEDEVSHORTCUTSCONFIG_H

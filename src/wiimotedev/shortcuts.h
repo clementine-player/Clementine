@@ -35,27 +35,25 @@ public:
 public slots:
   void ReloadSettings();
   void SetDefaultSettings();
-  void SetEnabled(bool enabled);
 
 private slots:
   void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
 
 private:
-  void EmitRequest(quint32 action);
-
   DBusDeviceEventsInterface* wiimotedev_iface_;
   Player* player_;
   quint64 wiimotedev_buttons_;
   QSettings settings_;
 
-  quint32 wiimotedev_device_;
+  quint32 wiimotedev_device_; 
   bool wiimotedev_active_;
+  bool wiimotedev_enable_;
   bool wiimotedev_focus_;
   bool wiimotedev_notification_;
 
 public:
   enum Action {
-    WiimotedevActive,
+    WiimotedevActive = 0,
     WiimotedevDeactive,
     PlayerNextTrack,
     PlayerPreviousTrack,
@@ -69,26 +67,12 @@ public:
     PlayerSeekBackward,
     PlayerSeekForward,
     PlayerStopAfter,
-    PlayerShowOSD
+    PlayerShowOSD,
+    ActionNone  = 0xff
   };
 
 private:
-  QMap <quint64, quint32> actions_;
-
-signals:
-  void Next();
-  void Previous();
-  void Play();
-  void Stop();
-  void IncVolume();
-  void DecVolume();
-  void Mute();
-  void Pause();
-  void TogglePause();
-  void SeekBackward();
-  void SeekForward();
-  void StopAfter();
-  void ShowOSD();
+  QHash <quint64, quint32> actions_;
 
 };
 

@@ -29,11 +29,11 @@ WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
   wiimotedev_buttons_(0),
   wiimotedev_device_(1),
   wiimotedev_active_(true),
+  wiimotedev_enable_(true),
   wiimotedev_focus_(false),
   wiimotedev_notification_(true)
 {
   ReloadSettings();
-
   wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
                                                     WIIMOTEDEV_DBUS_EVENTS_OBJECT,
                                                     QDBusConnection::systemBus(),
@@ -43,34 +43,14 @@ WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
           this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
 }
 
-void WiimotedevShortcuts::SetEnabled(bool enabled)
-{
-  disconnect(this, 0, player_, 0);
-  if (!enabled) return;
-
-  connect(this, SIGNAL(Next()), player_, SLOT(Next()));
-  connect(this, SIGNAL(Previous()), player_, SLOT(Previous()));
-  connect(this, SIGNAL(Play()), player_, SLOT(Play()));
-  connect(this, SIGNAL(Stop()), player_, SLOT(Stop()));
-  connect(this, SIGNAL(IncVolume()), player_, SLOT(VolumeUp()));
-  connect(this, SIGNAL(DecVolume()), player_, SLOT(VolumeDown()));
-  connect(this, SIGNAL(Mute()), player_, SLOT(Mute()));
-  connect(this, SIGNAL(Pause()), player_, SLOT(Pause()));
-  connect(this, SIGNAL(TogglePause()), player_, SLOT(PlayPause()));
-  connect(this, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
-  connect(this, SIGNAL(SeekForward()), player_, SLOT(SeekForward()));
-  connect(this, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
-}
-
 void WiimotedevShortcuts::ReloadSettings() {
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  actions_.clear();
 
   if (!settings_.allKeys().count()) {
     SetDefaultSettings();
     settings_.sync();
   }
-
-  actions_.clear();
 
   quint64 fvalue, svalue;
   bool fvalid, svalid;
@@ -84,8 +64,8 @@ void WiimotedevShortcuts::ReloadSettings() {
   settings_.endGroup();
 
   settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
-  SetEnabled(settings_.value("enabled", quint64(true)).toBool());
-  wiimotedev_device_ = settings_.value("device", 1).toInt();
+  wiimotedev_enable_ = settings_.value("enabled", wiimotedev_enable_).toBool();
+  wiimotedev_device_ = settings_.value("device", wiimotedev_device_).toInt();
   wiimotedev_active_ = settings_.value("use_active_action", wiimotedev_active_).toBool();
   wiimotedev_focus_ = settings_.value("only_when_focused", wiimotedev_focus_).toBool();
   wiimotedev_notification_ = settings_.value("use_notification", wiimotedev_notification_).toBool();
@@ -97,6 +77,9 @@ void WiimotedevShortcuts::SetDefaultSettings()
 {
   QSettings settings;
   settings.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  foreach (const QString& key, settings_.allKeys()) {
+    settings_.remove(key);
+  }
   settings.setValue(QString::number(WIIMOTE_BTN_LEFT), PlayerPreviousTrack);
   settings.setValue(QString::number(WIIMOTE_BTN_RIGHT), PlayerNextTrack);
   settings.setValue(QString::number(WIIMOTE_BTN_SHIFT_LEFT), PlayerPreviousTrack);
@@ -108,47 +91,41 @@ void WiimotedevShortcuts::SetDefaultSettings()
   settings.endGroup();
 
   settings.beginGroup(WiimotedevShortcuts::kSettingsGroup);
+  foreach (const QString& key, settings_.allKeys()) {
+    settings_.remove(key);
+  }
   settings.setValue("enabled", true);
   settings.setValue("device", 1);
   settings.setValue("use_active_action", true);
   settings.setValue("only_when_focused", false);
   settings.setValue("use_notification", true);
   settings.endGroup();
-
   settings.sync();
 }
 
-void WiimotedevShortcuts::EmitRequest(quint32 action) {
-  switch (action) {
-    case PlayerNextTrack: emit Next(); break;
-    case PlayerPreviousTrack: emit Previous(); break;
-    case PlayerPlay: emit Play(); break;
-    case PlayerStop: emit Stop(); break;
-    case PlayerIncVolume: emit IncVolume(); break;
-    case PlayerDecVolume: emit DecVolume(); break;
-    case PlayerMute: emit Mute(); break;
-    case PlayerPause: emit Pause(); break;
-    case PlayerTogglePause: emit TogglePause(); break;
-    case PlayerSeekBackward: emit SeekBackward(); break;
-    case PlayerSeekForward: emit SeekForward(); break;
-    case PlayerStopAfter: emit StopAfter(); break;
-    case PlayerShowOSD: emit ShowOSD(); break;
-  }
-}
-
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
-  if (id != wiimotedev_device_) return;
+  if (id != wiimotedev_device_ || !wiimotedev_enable_) return;
 
   quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
 
   if (wiimotedev_buttons_ == buttons) return;
 
-  QMapIterator<quint64, quint32> actions(actions_);
-
-  while (actions.hasNext()) {
-    actions.next();
-    if (!actions.key()) continue;
-    if ((actions.key() & buttons) == actions.key()) EmitRequest(actions.value());
+  if (actions_.contains(buttons)) {
+    switch (actions_.value(buttons, 0xff)) {
+      case PlayerNextTrack: player_->Next(); break;
+      case PlayerPreviousTrack: player_->Previous(); break;
+      case PlayerPlay: player_->Play(); break;
+      case PlayerStop: player_->Stop(); break;
+      case PlayerIncVolume: player_->VolumeUp(); break;
+      case PlayerDecVolume: player_->VolumeDown(); break;
+      case PlayerMute: player_->Mute(); break;
+      case PlayerPause: player_->Pause(); break;
+      case PlayerTogglePause: player_->PlayPause(); break;
+      case PlayerSeekBackward: player_->SeekBackward(); break;
+      case PlayerSeekForward: player_->SeekForward(); break;
+      case PlayerStopAfter: player_->Stop(); break;
+      case PlayerShowOSD: player_->ShowOSD(); break;
+    }
   }
 
   wiimotedev_buttons_ = buttons;

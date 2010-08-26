@@ -113,7 +113,18 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
   ui_->wiimotedev_device->setValue(settings_.value("device", 1).toUInt());
   settings_.endGroup();
 
+  LoadSettings();
+
+  connect(ui_->wiimotedev_enable, SIGNAL(clicked(bool)), this, SLOT(WiimotedevEnabledChecked(bool)));
+  connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(ItemClicked(QTreeWidgetItem*)));
+  connect(ui_->wiimotedev_delete_action, SIGNAL(clicked()), this, SLOT(DeleteAction()));
+  connect(ui_->wiimotedev_reload, SIGNAL(clicked()), this , SLOT(DefaultSettings()));
+}
+
+void WiimotedevShortcutsConfig::LoadSettings(){
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  ui_->list->clear();
+
   quint64 fvalue, svalue;
   bool fvalid, svalid;
 
@@ -121,40 +132,70 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
     fvalue = str.toULongLong(&fvalid, 10);
     svalue = settings_.value(str, 0).toULongLong(&svalid);
     if (fvalid && svalid) {
-      new QTreeWidgetItem(ui_->list,
-          QStringList() << GetReadableWiiremoteSequence(fvalue) << text_actions_[svalue]);
+      Shortcut s;
+      s.object = new QTreeWidgetItem(ui_->list, QStringList() << GetReadableWiiremoteSequence(fvalue) << text_actions_[svalue]);
+      s.button = fvalue;
+      s.action = svalue;
+      actions_ << s;
     }
     ui_->list->sortItems(1, Qt::AscendingOrder);
   }
 
   settings_.endGroup();
+}
 
-  connect(ui_->wiimotedev_enable, SIGNAL(clicked(bool)), this, SLOT(WiimotedevEnabledChecked(bool)));
-  connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(ItemClicked(QTreeWidgetItem*)));
+void WiimotedevShortcutsConfig::DefaultSettings()
+{
+  settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  foreach (const QString& key, settings_.allKeys()) {
+    settings_.remove(key);
+  }
+  settings_.setValue(QString::number(WIIMOTE_BTN_LEFT), WiimotedevShortcuts::PlayerPreviousTrack);
+  settings_.setValue(QString::number(WIIMOTE_BTN_RIGHT), WiimotedevShortcuts::PlayerNextTrack);
+  settings_.setValue(QString::number(WIIMOTE_BTN_SHIFT_LEFT), WiimotedevShortcuts::PlayerPreviousTrack);
+  settings_.setValue(QString::number(WIIMOTE_BTN_SHIFT_RIGHT), WiimotedevShortcuts::PlayerNextTrack);
+  settings_.setValue(QString::number(WIIMOTE_BTN_PLUS), WiimotedevShortcuts::PlayerIncVolume);
+  settings_.setValue(QString::number(WIIMOTE_BTN_MINUS), WiimotedevShortcuts::PlayerDecVolume);
+  settings_.setValue(QString::number(WIIMOTE_BTN_1), WiimotedevShortcuts::PlayerTogglePause);
+  settings_.setValue(QString::number(WIIMOTE_BTN_2), WiimotedevShortcuts::PlayerShowOSD);
+  settings_.endGroup();
+  settings_.sync();
+
+  LoadSettings();
 }
 
 void WiimotedevShortcutsConfig::WiimotedevEnabledChecked(bool checked) {
   ui_->wiimotedev_groupbox->setEnabled(checked);
 }
 
-void WiimotedevShortcutsConfig::ItemClicked(QTreeWidgetItem* item) {
-  current_id_ = item->data(0, Qt::UserRole).toString();
+void WiimotedevShortcutsConfig::ItemClicked(QTreeWidgetItem* selected_item) {
+  selected_item_ = selected_item;
 }
 
 QString WiimotedevShortcutsConfig::GetReadableWiiremoteSequence(quint64 value) {
   QMapIterator<quint64, QString> text(text_buttons_);
 
   QStringList list;
-  QString output;
   while (text.hasNext()) {
     text.next();
     if ((text.key() & value) == text.key())
       list << text.value();
   }
 
+  QString output;
   for (int i = 0; i < (list.count() - 1); ++i)
     output += list.at(i) + " + ";
   output += list.last();
 
   return output;
+}
+
+void WiimotedevShortcutsConfig::DeleteAction() {
+  for (int i = 0; i < actions_.count(); ++i) {
+    if (actions_.at(i).object == selected_item_) {
+      delete selected_item_;
+      actions_.removeAt(i);
+      break;
+    }
+  }
 }

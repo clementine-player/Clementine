@@ -224,6 +224,15 @@ void SettingsDialog::accept() {
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
+  s.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  s.clear();
+
+  foreach (const WiimotedevShortcutsConfig::Shortcut& shortcut, wiimotedev_config_->actions_) {
+    s.setValue(QString::number(shortcut.button), shortcut.action);
+  }
+
+  s.endGroup();
+
   s.beginGroup(WiimotedevShortcuts::kSettingsGroup);
   s.setValue("enabled", wiimotedev_config_->ui_->wiimotedev_enable->isChecked());
   s.setValue("only_when_focused", wiimotedev_config_->ui_->wiimotedev_focus->isChecked());
