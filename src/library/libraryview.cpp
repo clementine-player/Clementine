@@ -109,6 +109,8 @@ LibraryView::LibraryView(QWidget* parent)
   no_show_in_various_ = context_menu_->addAction(
       tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
 
+  setAttribute(Qt::WA_MacShowFocusRect, false);
+
   ReloadSettings();
 }
 

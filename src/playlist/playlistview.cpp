@@ -68,6 +68,8 @@ PlaylistView::PlaylistView(QWidget *parent)
   connect(inhibit_autoscroll_timer_, SIGNAL(timeout()), SLOT(InhibitAutoscrollTimeout()));
 
   setAlternatingRowColors(true);
+
+  setAttribute(Qt::WA_MacShowFocusRect, false);
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
