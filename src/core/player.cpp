@@ -186,6 +186,12 @@ void Player::Next() {
 }
 
 void Player::NextInternal(Engine::TrackChangeType change) {
+  if (playlists_->active()->stop_after_current()) {
+    playlists_->active()->StopAfter(-1);
+    Stop();
+    return;
+  }
+
   if (playlists_->active()->current_item() &&
       playlists_->active()->current_item()->options() & PlaylistItem::ContainsMultipleTracks) {
     // The next track is already being loaded
@@ -214,6 +220,7 @@ void Player::NextItem(Engine::TrackChangeType change) {
 
 void Player::TrackEnded() {
   if (playlists_->active()->stop_after_current()) {
+    playlists_->active()->StopAfter(-1);
     Stop();
     return;
   }
