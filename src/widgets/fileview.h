@@ -44,6 +44,8 @@ class FileView : public QWidget {
   void SetPath(const QString& path);
   void SetTaskManager(TaskManager* task_manager);
 
+  void showEvent(QShowEvent*);
+
  signals:
   void PathChanged(const QString& path);
 
@@ -97,6 +99,8 @@ class FileView : public QWidget {
 
   TaskManager* task_manager_;
   boost::shared_ptr<MusicStorage> storage_;
+
+  QString lazy_set_path_;
 };
 
 #endif // FILEVIEW_H

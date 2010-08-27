@@ -119,29 +119,9 @@ DeviceView::DeviceView(QWidget* parent)
     merged_model_(NULL),
     sort_model_(NULL),
     properties_dialog_(new DeviceProperties),
-    device_menu_(new QMenu(this)),
-    library_menu_(new QMenu(this))
+    device_menu_(NULL),
+    library_menu_(NULL)
 {
-  // Device menu items
-  eject_action_ = device_menu_->addAction(
-      IconLoader::Load("media-eject"), tr("Safely remove device"), this, SLOT(Unmount()));
-  forget_action_ = device_menu_->addAction(
-      IconLoader::Load("list-remove"), tr("Forget device"), this, SLOT(Forget()));
-  device_menu_->addSeparator();
-  properties_action_ = device_menu_->addAction(
-      IconLoader::Load("configure"), tr("Device properties..."), this, SLOT(Properties()));
-
-  // Library menu items
-  load_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Load"), this, SLOT(Load()));
-  add_to_playlist_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  library_menu_->addSeparator();
-  organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy"),
-      tr("Copy to library..."), this, SLOT(Organise()));
-  delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete"),
-      tr("Delete from device..."), this, SLOT(Delete()));
-
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
   setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -184,6 +164,31 @@ void DeviceView::SetLibrary(LibraryModel* library) {
 }
 
 void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
+  if (!device_menu_) {
+    device_menu_ = new QMenu(this);
+    library_menu_ = new QMenu(this);
+
+    // Device menu
+    eject_action_ = device_menu_->addAction(
+        IconLoader::Load("media-eject"), tr("Safely remove device"), this, SLOT(Unmount()));
+    forget_action_ = device_menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Forget device"), this, SLOT(Forget()));
+    device_menu_->addSeparator();
+    properties_action_ = device_menu_->addAction(
+        IconLoader::Load("configure"), tr("Device properties..."), this, SLOT(Properties()));
+
+    // Library menu
+    load_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Load"), this, SLOT(Load()));
+    add_to_playlist_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    library_menu_->addSeparator();
+    organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy"),
+        tr("Copy to library..."), this, SLOT(Organise()));
+    delete_action_ = library_menu_->addAction(IconLoader::Load("edit-delete"),
+        tr("Delete from device..."), this, SLOT(Delete()));
+  }
+
   menu_index_ = currentIndex();
 
   const QModelIndex device_index = MapToDevice(menu_index_);

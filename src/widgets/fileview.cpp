@@ -28,7 +28,7 @@
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_FileView),
-      model_(new QFileSystemModel(this)),
+      model_(NULL),
       undo_stack_(new QUndoStack(this)),
       task_manager_(NULL),
       storage_(new FilesystemMusicStorage("/"))
@@ -40,9 +40,6 @@ FileView::FileView(QWidget* parent)
   ui_->forward->setIcon(IconLoader::Load("go-next"));
   ui_->home->setIcon(IconLoader::Load("go-home"));
   ui_->up->setIcon(IconLoader::Load("go-up"));
-
-  ui_->list->setModel(model_);
-  ChangeFilePathWithoutUndo(QDir::homePath());
 
   connect(ui_->back, SIGNAL(clicked()), undo_stack_, SLOT(undo()));
   connect(ui_->forward, SIGNAL(clicked()), undo_stack_, SLOT(redo()));
@@ -67,7 +64,10 @@ FileView::~FileView() {
 }
 
 void FileView::SetPath(const QString& path) {
-  ChangeFilePathWithoutUndo(path);
+  if (!model_)
+    lazy_set_path_ = path;
+  else
+    ChangeFilePathWithoutUndo(path);
 }
 
 void FileView::SetTaskManager(TaskManager* task_manager) {
@@ -179,4 +179,18 @@ void FileView::DeleteFinished(const SongList& songs_with_errors) {
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
   // It deletes itself when the user closes it
+}
+
+void FileView::showEvent(QShowEvent* e) {
+  QWidget::showEvent(e);
+
+  if (model_)
+    return;
+
+  model_ = new QFileSystemModel(this);
+  ui_->list->setModel(model_);
+  ChangeFilePathWithoutUndo(QDir::homePath());
+
+  if (!lazy_set_path_.isEmpty())
+    ChangeFilePathWithoutUndo(lazy_set_path_);
 }

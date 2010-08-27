@@ -87,28 +87,10 @@ LibraryView::LibraryView(QWidget* parent)
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
-    context_menu_(new QMenu(this)),
+    context_menu_(NULL),
     is_in_keyboard_search_(false)
 {
   setItemDelegate(new LibraryItemDelegate(this));
-
-  load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Load"), this, SLOT(Load()));
-  add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  context_menu_->addSeparator();
-  organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
-      tr("Organise files..."), this, SLOT(Organise()));
-  copy_to_device_ = context_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
-      tr("Copy to device..."), this, SLOT(CopyToDevice()));
-  delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
-      tr("Delete from disk..."), this, SLOT(Delete()));
-  context_menu_->addSeparator();
-  show_in_various_ = context_menu_->addAction(
-      tr("Show in various artists"), this, SLOT(ShowInVarious()));
-  no_show_in_various_ = context_menu_->addAction(
-      tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
-
   setAttribute(Qt::WA_MacShowFocusRect, false);
 
   ReloadSettings();
@@ -126,7 +108,6 @@ void LibraryView::ReloadSettings() {
 
 void LibraryView::SetTaskManager(TaskManager *task_manager) {
   task_manager_ = task_manager;
-  organise_dialog_.reset(new OrganiseDialog(task_manager));
 }
 
 void LibraryView::SetLibrary(LibraryModel *library) {
@@ -135,9 +116,6 @@ void LibraryView::SetLibrary(LibraryModel *library) {
 
 void LibraryView::SetDeviceManager(DeviceManager *device_manager) {
   devices_ = device_manager;
-  copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
-  connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
-          copy_to_device_, SLOT(setDisabled(bool)));
 }
 
 void LibraryView::TotalSongCountUpdated(int count) {
@@ -190,6 +168,30 @@ void LibraryView::mouseReleaseEvent(QMouseEvent* e) {
 }
 
 void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
+  if (!context_menu_) {
+    context_menu_ = new QMenu(this);
+    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Load"), this, SLOT(Load()));
+    add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    context_menu_->addSeparator();
+    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
+        tr("Organise files..."), this, SLOT(Organise()));
+    copy_to_device_ = context_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
+        tr("Copy to device..."), this, SLOT(CopyToDevice()));
+    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+        tr("Delete from disk..."), this, SLOT(Delete()));
+    context_menu_->addSeparator();
+    show_in_various_ = context_menu_->addAction(
+        tr("Show in various artists"), this, SLOT(ShowInVarious()));
+    no_show_in_various_ = context_menu_->addAction(
+        tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
+
+    copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
+    connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
+            copy_to_device_, SLOT(setDisabled(bool)));
+  }
+
   context_menu_index_ = indexAt(e->pos());
   if (!context_menu_index_.isValid())
     return;
@@ -282,6 +284,9 @@ void LibraryView::Organise() {
   quint64 size = 0;
   GetSelectedFileInfo(&filenames, &size);
 
+  if (!organise_dialog_)
+    organise_dialog_.reset(new OrganiseDialog(task_manager_));
+
   organise_dialog_->SetDestinationModel(library_->directory_model());
   organise_dialog_->SetCopy(false);
   organise_dialog_->SetFilenames(filenames, size);
@@ -316,6 +321,9 @@ void LibraryView::CopyToDevice() {
   QStringList filenames;
   quint64 size = 0;
   GetSelectedFileInfo(&filenames, &size);
+
+  if (!organise_dialog_)
+    organise_dialog_.reset(new OrganiseDialog(task_manager_));
 
   organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
