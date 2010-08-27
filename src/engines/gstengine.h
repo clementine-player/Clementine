@@ -25,6 +25,7 @@
 #include "enginebase.h"
 #include "bufferconsumer.h"
 
+#include <QFuture>
 #include <QHash>
 #include <QList>
 #include <QString>
@@ -130,6 +131,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
+  void InitialiseGstreamer();
 
   void StartFadeout();
 
@@ -150,6 +152,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const int kSeekDelay = 100; // msec
 
   static const char* kHypnotoadPipeline;
+
+  QFuture<void> initialising_;
 
   QString sink_;
   QString device_;

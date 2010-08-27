@@ -45,6 +45,7 @@
 #include <QCoreApplication>
 #include <QTimeLine>
 #include <QDir>
+#include <QtConcurrentRun>
 
 #include <gst/gst.h>
 
@@ -85,6 +86,8 @@ GstEngine::GstEngine()
 }
 
 GstEngine::~GstEngine() {
+  initialising_.waitForFinished();
+
   current_pipeline_.reset();
 
   // Destroy scope delay queue
@@ -135,18 +138,17 @@ bool GstEngine::Init() {
     SetEnv("GST_REGISTRY", registry_filename);
   }
 
-  // GStreamer initialization
-  GError *err;
-  if ( !gst_init_check( NULL, NULL, &err ) ) {
-    qWarning("GStreamer could not be initialized");
-    return false;
-  }
+  initialising_ = QtConcurrent::run(this, &GstEngine::InitialiseGstreamer);
+
+  return true;
+}
+
+void GstEngine::InitialiseGstreamer() {
+  gst_init(NULL, NULL);
 
 #ifdef HAVE_IMOBILEDEVICE
   afcsrc_register_static();
 #endif
-
-  return true;
 }
 
 void GstEngine::ReloadSettings() {
@@ -174,6 +176,8 @@ void GstEngine::ReloadSettings() {
 
 
 bool GstEngine::CanDecode(const QUrl &url) {
+  initialising_.waitForFinished();
+
   // We had some bug reports claiming that video files cause crashes in canDecode(),
   // so don't try to decode them
   if ( url.path().toLower().endsWith( ".mov" ) ||
@@ -400,6 +404,8 @@ void GstEngine::UpdateScope() {
 }
 
 void GstEngine::StartPreloading(const QUrl& url) {
+  initialising_.waitForFinished();
+
   if (autocrossfade_enabled_) {
     // Have to create a new pipeline so we can crossfade between the two
 
@@ -422,6 +428,8 @@ void GstEngine::StartPreloading(const QUrl& url) {
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
+  initialising_.waitForFinished();
+
   Engine::Base::Load(url, change);
 
   // Clementine just crashes when asked to load a file that doesn't exist on
@@ -495,6 +503,8 @@ void GstEngine::StartFadeout() {
 
 
 bool GstEngine::Play( uint offset ) {
+  initialising_.waitForFinished();
+
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
   BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
       new BoundFutureWatcher<GstStateChangeReturn, uint>(offset, this);
@@ -708,6 +718,8 @@ GstElement* GstEngine::CreateElement(const QString& factoryName, GstElement* bin
 
 GstEngine::PluginDetailsList
     GstEngine::GetPluginList(const QString& classname) const {
+  const_cast<GstEngine*>(this)->initialising_.waitForFinished();
+
   PluginDetailsList ret;
 
   GstRegistry* registry = gst_registry_get_default();
@@ -733,6 +745,8 @@ GstEngine::PluginDetailsList
 }
 
 shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
+  initialising_.waitForFinished();
+
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);

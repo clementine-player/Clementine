@@ -42,6 +42,7 @@
 
 SettingsDialog::SettingsDialog(QWidget* parent)
   : QDialog(parent),
+    gst_engine_(NULL),
     ui_(new Ui_SettingsDialog),
     loading_settings_(false),
     pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable))
@@ -280,6 +281,22 @@ void SettingsDialog::showEvent(QShowEvent*) {
   QSettings s;
   loading_settings_ = true;
 
+#ifdef HAVE_GSTREAMER
+  if (ui_->gst_plugin->count() == 0 && gst_engine_) {
+    GstEngine::PluginDetailsList list = gst_engine_->GetOutputsList();
+
+    ui_->gst_plugin->setItemData(0, GstEngine::kAutoSink);
+    foreach (const GstEngine::PluginDetails& details, list) {
+      if (details.name == "autoaudiosink")
+        continue;
+
+      ui_->gst_plugin->addItem(details.long_name, details.name);
+    }
+    ui_->gst_group->setEnabled(true);
+    ui_->replaygain_group->setEnabled(true);
+  }
+#endif // HAVE_GSTREAMER
+
   // Behaviour
   s.beginGroup(MainWindow::kSettingsGroup);
   ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
@@ -455,22 +472,6 @@ void SettingsDialog::ShowTrayIconToggled(bool on) {
   if (!on && ui_->b_always_hide_->isChecked())
     ui_->b_remember_->setChecked(true);
 }
-
-#ifdef HAVE_GSTREAMER
-  void SettingsDialog::SetGstEngine(const GstEngine *engine) {
-    GstEngine::PluginDetailsList list = engine->GetOutputsList();
-
-    ui_->gst_plugin->setItemData(0, GstEngine::kAutoSink);
-    foreach (const GstEngine::PluginDetails& details, list) {
-      if (details.name == "autoaudiosink")
-        continue;
-
-      ui_->gst_plugin->addItem(details.long_name, details.name);
-    }
-    ui_->gst_group->setEnabled(true);
-    ui_->replaygain_group->setEnabled(true);
-  }
-#endif // HAVE_GSTREAMER
 
 void SettingsDialog::GstPluginChanged(int index) {
 #ifdef HAVE_GSTREAMER

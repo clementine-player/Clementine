@@ -31,9 +31,7 @@ class Ui_SettingsDialog;
   class WiimotedevShortcutsConfig;
 #endif
 
-#ifdef HAVE_GSTREAMER
-  class GstEngine;
-#endif
+class GstEngine;
 
 class SettingsDialog : public QDialog {
   Q_OBJECT
@@ -57,9 +55,7 @@ class SettingsDialog : public QDialog {
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
   void SetGlobalShortcutManager(GlobalShortcuts* manager);
-#ifdef HAVE_GSTREAMER
-  void SetGstEngine(const GstEngine* engine);
-#endif
+  void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
 
   void OpenAtPage(Page page);
 
@@ -90,6 +86,8 @@ class SettingsDialog : public QDialog {
 #ifdef ENABLE_WIIMOTEDEV
   WiimotedevShortcutsConfig* wiimotedev_config_;
 #endif
+  const GstEngine* gst_engine_;
+
   Ui_SettingsDialog* ui_;
 
   bool loading_settings_;

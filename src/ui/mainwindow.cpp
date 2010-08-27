@@ -96,6 +96,8 @@
 
 #include <cmath>
 
+#include <QTime>
+
 using boost::shared_ptr;
 using boost::scoped_ptr;
 
@@ -148,12 +150,18 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     track_position_timer_(new QTimer(this)),
     was_maximized_(false)
 {
+  QTime t;
+  t.start();
   // Wait for the database thread to start - lots of stuff depends on it.
   database_->Start(true);
+
+  qDebug() << t.restart() << "database startup";
 
   // Create some objects in the database thread
   playlist_backend_ = database_->CreateInThread<PlaylistBackend>();
   playlist_backend_->SetDatabase(database_->Worker());
+
+  qDebug() << t.restart() << "playlist backend";
 
   // Create stuff that needs the database
   radio_model_ = new RadioModel(database_, network, task_manager_, this);
@@ -163,6 +171,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
   radio_model_->SetSettingsDialog(settings_dialog_.get());
   devices_ = new DeviceManager(database_, task_manager_, this),
+
+  qDebug() << t.restart() << "other shit";
 
   // Initialise the UI
   ui_->setupUi(this);
@@ -177,8 +187,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->tabs->setDocumentMode(false);
 #endif
 
+  qDebug() << t.restart() << "ui";
+
   // Start initialising the player
   player_->Init();
+
+  qDebug() << t.restart() << "player";
 
 #ifdef HAVE_GSTREAMER
   if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
@@ -217,6 +231,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   cover_manager_->Init();
 
+  qDebug() << t.restart() << "models";
+
   // Icons
   ui_->action_about->setIcon(IconLoader::Load("help-about"));
   ui_->action_add_file->setIcon(IconLoader::Load("document-open"));
@@ -244,6 +260,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
   ui_->action_update_library->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
+
+  qDebug() << t.restart() << "icons";
 
   // File view connections
   connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
@@ -416,6 +434,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_shuffle->setShortcut(QKeySequence());
 #endif
 
+  qDebug() << t.restart() << "connections";
+
   playlist_delete_->setVisible(false); // TODO
 
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
@@ -444,6 +464,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   connect(saved_radio, SIGNAL(ShowAddStreamDialog()),
           add_stream_dialog_.get(), SLOT(show()));
+
+  qDebug() << t.restart() << "more connections";
 
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(this);
@@ -476,6 +498,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #ifdef ENABLE_WIIMOTEDEV
   wiimotedev_shortcuts_ = new WiimotedevShortcuts(player_, this);
 #endif
+
+  qDebug() << t.restart() << "tray";
 
   // Global shortcuts
   connect(global_shortcuts_, SIGNAL(Play()), player_, SLOT(Play()));
@@ -539,12 +563,18 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
+  qDebug() << t.restart() << "stuff";
+
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
 
+  qDebug() << t.restart() << "theme";
+
   // Load playlists
   playlists_->Init(library_->backend(), playlist_backend_, ui_->playlist_sequence);
+
+  qDebug() << t.restart() << "load playlists";
 
   // Load settings
   settings_.beginGroup(kSettingsGroup);
@@ -579,12 +609,16 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   show();
 #endif
 
+  qDebug() << t.restart() << "load settings";
+
   QShortcut* close_window_shortcut = new QShortcut(this);
   close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
   connect(close_window_shortcut, SIGNAL(activated()), SLOT(SetHiddenInTray()));
 
   library_->Init();
   library_->StartThreads();
+
+  qDebug() << t.restart() << "start library";
 }
 
 MainWindow::~MainWindow() {
