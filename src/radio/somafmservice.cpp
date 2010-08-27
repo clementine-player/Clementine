@@ -38,15 +38,11 @@ const char* SomaFMService::kHomepage = "http://somafm.com";
 SomaFMService::SomaFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
-    context_menu_(new QMenu),
+    context_menu_(NULL),
     get_channels_task_id_(0),
     get_stream_task_id_(0),
     network_(parent->network()->network())
 {
-  context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
 }
 
 SomaFMService::~SomaFMService() {
@@ -74,6 +70,14 @@ void SomaFMService::LazyPopulate(RadioItem* item) {
 
 void SomaFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
                                     const QPoint& global_pos) {
+  if (!context_menu_) {
+    context_menu_ = new QMenu;
+    context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("download"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
+    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
+  }
+
   context_item_ = item;
   context_menu_->popup(global_pos);
 }

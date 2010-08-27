@@ -27,17 +27,8 @@ const char* SavedRadio::kSettingsGroup = "SavedRadio";
 SavedRadio::SavedRadio(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
-    context_menu_(new QMenu),
-    edit_dialog_(new AddStreamDialog)
+    context_menu_(NULL)
 {
-  add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  remove_action_ = context_menu_->addAction(IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
-  edit_action_ = context_menu_->addAction(IconLoader::Load("edit-rename"), tr("Edit..."), this, SLOT(Edit()));
-  context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("document-open-remote"), tr("Add another stream..."), this, SIGNAL(ShowAddStreamDialog()));
-
-  edit_dialog_->set_save_visible(false);
-
   LoadStreams();
 }
 
@@ -95,6 +86,15 @@ void SavedRadio::SaveStreams() {
 
 void SavedRadio::ShowContextMenu(RadioItem* item, const QModelIndex&,
                                  const QPoint& global_pos) {
+  if (!context_menu_) {
+    context_menu_ = new QMenu;
+    add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    remove_action_ = context_menu_->addAction(IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
+    edit_action_ = context_menu_->addAction(IconLoader::Load("edit-rename"), tr("Edit..."), this, SLOT(Edit()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("document-open-remote"), tr("Add another stream..."), this, SIGNAL(ShowAddStreamDialog()));
+  }
+
   context_item_ = item;
 
   add_action_->setEnabled(item != root_);
@@ -111,6 +111,11 @@ void SavedRadio::Remove() {
 }
 
 void SavedRadio::Edit() {
+  if (!edit_dialog_) {
+    edit_dialog_.reset(new AddStreamDialog);
+    edit_dialog_->set_save_visible(false);
+  }
+
   edit_dialog_->set_name(context_item_->display_text);
   edit_dialog_->set_url(context_item_->key);
   if (edit_dialog_->exec() == QDialog::Rejected)

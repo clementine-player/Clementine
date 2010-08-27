@@ -165,14 +165,19 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Create stuff that needs the database
   radio_model_ = new RadioModel(database_, network, task_manager_, this);
+  qDebug() << t.restart() << "dbdeps: radio model";
   player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
+  qDebug() << t.restart() << "dbdeps: player";
   library_ = new Library(database_, task_manager_, this);
+  qDebug() << t.restart() << "dbdeps: library";
   cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
+  qDebug() << t.restart() << "dbdeps: covermanager";
   settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
+  qDebug() << t.restart() << "dbdeps: settings dialog";
   radio_model_->SetSettingsDialog(settings_dialog_.get());
+  qDebug() << t.restart() << "dbdeps: radiomodel";
   devices_ = new DeviceManager(database_, task_manager_, this),
-
-  qDebug() << t.restart() << "other shit";
+  qDebug() << t.restart() << "dbdeps: devices";
 
   // Initialise the UI
   ui_->setupUi(this);

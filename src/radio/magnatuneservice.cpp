@@ -60,7 +60,7 @@ const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     root_(NULL),
-    context_menu_(new QMenu),
+    context_menu_(NULL),
     library_backend_(NULL),
     library_model_(NULL),
     library_filter_(NULL),
@@ -87,21 +87,11 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
-  add_to_playlist_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  download_ = context_menu_->addAction(
-      IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
-  context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
-  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
-
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);
   library_filter_->SetLibraryModel(library_model_);
   library_filter_->SetFilterHint(tr("Search Magnatune"));
   library_filter_->SetAgeFilterEnabled(false);
-  library_filter_->AddMenuAction(config_action);
 
   library_model_->Init();
 }
@@ -262,8 +252,28 @@ QString MagnatuneService::ReadElementText(QXmlStreamReader& reader) {
   return ret;
 }
 
+void MagnatuneService::EnsureMenuCreated() {
+  if (context_menu_)
+    return;
+
+  context_menu_ = new QMenu;
+
+  add_to_playlist_ = context_menu_->addAction(
+      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  download_ = context_menu_->addAction(
+      IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
+
+  library_filter_->AddMenuAction(config_action);
+}
+
 void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
                                        const QPoint& global_pos) {
+  EnsureMenuCreated();
+
   if (index.model() == library_sort_model_)
     context_item_ = index;
   else
@@ -335,5 +345,6 @@ void MagnatuneService::Download() {
 }
 
 QWidget* MagnatuneService::HeaderWidget() const {
+  const_cast<MagnatuneService*>(this)->EnsureMenuCreated();
   return library_filter_;
 }

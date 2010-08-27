@@ -98,6 +98,8 @@ class MagnatuneService : public RadioService {
   void ShowConfig();
 
  private:
+  void EnsureMenuCreated();
+
   Song ReadTrack(QXmlStreamReader& reader);
 
  private:
