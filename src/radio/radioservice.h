@@ -24,6 +24,7 @@
 #include "radioitem.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
+#include "ui/settingsdialog.h"
 #include "widgets/multiloadingindicator.h"
 
 class RadioModel;
@@ -65,6 +66,7 @@ class RadioService : public QObject {
   void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
+  void OpenSettingsAtPage(SettingsDialog::Page page);
 
   void AddItemToPlaylist(RadioItem* item);
   void AddItemsToPlaylist(const PlaylistItemList& items);

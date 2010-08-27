@@ -330,7 +330,7 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
 }
 
 void MagnatuneService::ShowConfig() {
-  model()->settings_dialog()->OpenAtPage(SettingsDialog::Page_Magnatune);
+  emit OpenSettingsAtPage(SettingsDialog::Page_Magnatune);
 }
 
 void MagnatuneService::Download() {

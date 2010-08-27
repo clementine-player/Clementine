@@ -115,11 +115,10 @@ const char* MainWindow::kAllFilesFilterSpec =
 MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
+    network_(network),
     tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
     osd_(new OSD(tray_icon_, network, this)),
-    edit_tag_dialog_(new EditTagDialog),
     task_manager_(new TaskManager(this)),
-    about_dialog_(new About),
     database_(new BackgroundThreadImplementation<Database, Database>(this)),
     radio_model_(NULL),
     playlist_backend_(NULL),
@@ -130,12 +129,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     global_shortcuts_(new GlobalShortcuts(this)),
     devices_(NULL),
     settings_dialog_(NULL),
-    add_stream_dialog_(new AddStreamDialog),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
-#ifdef HAVE_GSTREAMER
-    transcode_dialog_(new TranscodeDialog),
-#endif
     error_dialog_(new ErrorDialog),
     organise_dialog_(new OrganiseDialog(task_manager_)),
     queue_manager_(new QueueManager),
@@ -170,12 +165,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   qDebug() << t.restart() << "dbdeps: player";
   library_ = new Library(database_, task_manager_, this);
   qDebug() << t.restart() << "dbdeps: library";
-  cover_manager_.reset(new AlbumCoverManager(network, library_->backend()));
-  qDebug() << t.restart() << "dbdeps: covermanager";
-  settings_dialog_.reset(new SettingsDialog); // Needs RadioModel
-  qDebug() << t.restart() << "dbdeps: settings dialog";
-  radio_model_->SetSettingsDialog(settings_dialog_.get());
-  qDebug() << t.restart() << "dbdeps: radiomodel";
   devices_ = new DeviceManager(database_, task_manager_, this),
   qDebug() << t.restart() << "dbdeps: devices";
 
@@ -201,7 +190,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
 #ifdef HAVE_GSTREAMER
   if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
-    settings_dialog_->SetGstEngine(engine);
 #   ifdef ENABLE_VISUALISATIONS
       visualisation_->SetEngine(engine);
 #   endif
@@ -225,7 +213,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->library_view->SetLibrary(library_->model());
   ui_->library_view->SetTaskManager(task_manager_);
   ui_->library_view->SetDeviceManager(devices_);
-  settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
   ui_->radio_view->SetModel(radio_model_);
 
@@ -233,8 +220,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->devices_view->SetLibrary(library_->model());
 
   organise_dialog_->SetDestinationModel(library_->model()->directory_model());
-
-  cover_manager_->Init();
 
   qDebug() << t.restart() << "models";
 
@@ -277,11 +262,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->file_view, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
   ui_->file_view->SetTaskManager(task_manager_);
 
-  // Cover manager connections
-  connect(cover_manager_.get(), SIGNAL(AddSongsToPlaylist(SongList)), SLOT(AddLibrarySongsToPlaylist(SongList)));
-  connect(cover_manager_.get(), SIGNAL(LoadSongsToPlaylist(SongList)), SLOT(LoadLibrarySongsToPlaylist(SongList)));
-  connect(cover_manager_.get(), SIGNAL(SongsDoubleClicked(SongList)), SLOT(LibrarySongsDoubleClicked(SongList)));
-
   // Action connections
   connect(ui_->action_next_track, SIGNAL(triggered()), player_, SLOT(Next()));
   connect(ui_->action_previous_track, SIGNAL(triggered()), player_, SLOT(Previous()));
@@ -297,16 +277,16 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
   connect(ui_->action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
   connect(ui_->action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
-  connect(ui_->action_configure, SIGNAL(triggered()), settings_dialog_.get(), SLOT(show()));
-  connect(ui_->action_about, SIGNAL(triggered()), about_dialog_.get(), SLOT(show()));
+  connect(ui_->action_configure, SIGNAL(triggered()), SLOT(OpenSettingsDialog()));
+  connect(ui_->action_about, SIGNAL(triggered()), SLOT(ShowAboutDialog()));
   connect(ui_->action_shuffle, SIGNAL(triggered()), playlists_, SLOT(ShuffleCurrent()));
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
-  connect(ui_->action_cover_manager, SIGNAL(triggered()), cover_manager_.get(), SLOT(show()));
+  connect(ui_->action_cover_manager, SIGNAL(triggered()), SLOT(ShowCoverManager()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
-  connect(ui_->action_transcode, SIGNAL(triggered()), transcode_dialog_.get(), SLOT(show()));
+  connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
   connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
@@ -454,6 +434,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(radio_model_, SIGNAL(StreamError(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
+  connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
   connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList)), SLOT(InsertRadioItems(PlaylistItemList)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
@@ -464,11 +445,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
 
   // Connections to the saved streams service
-  SavedRadio* saved_radio = RadioModel::Service<SavedRadio>();
-  add_stream_dialog_->set_add_on_accept(saved_radio);
-
-  connect(saved_radio, SIGNAL(ShowAddStreamDialog()),
-          add_stream_dialog_.get(), SLOT(show()));
+  connect(RadioModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()), SLOT(AddStream()));
 
   qDebug() << t.restart() << "more connections";
 
@@ -521,22 +498,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
-  settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-
-  // Settings
-  connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), library_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
-#ifdef ENABLE_WIIMOTEDEV
-  connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_, SLOT(ReloadSettings()));
-#endif
-
-  // Add stream dialog
-  connect(add_stream_dialog_.get(), SIGNAL(accepted()), SLOT(AddStreamAccepted()));
 
   // Analyzer
   ui_->analyzer->SetEngine(player_->GetEngine());
@@ -1140,6 +1101,7 @@ void MainWindow::EditTracks() {
     }
   }
 
+  EnsureEditTagDialogCreated();
   edit_tag_dialog_->SetSongs(songs);
   edit_tag_dialog_->SetTagCompleter(library_->model()->backend());
 
@@ -1257,6 +1219,13 @@ void MainWindow::AddFolder() {
 }
 
 void MainWindow::AddStream() {
+  if (!add_stream_dialog_) {
+    add_stream_dialog_.reset(new AddStreamDialog);
+    connect(add_stream_dialog_.get(), SIGNAL(accepted()), SLOT(AddStreamAccepted()));
+
+    add_stream_dialog_->set_add_on_accept(RadioModel::Service<SavedRadio>());
+  }
+
   add_stream_dialog_->show();
 }
 
@@ -1268,8 +1237,6 @@ void MainWindow::AddStreamAccepted() {
 void MainWindow::PlaylistRemoveCurrent() {
   ui_->playlist->view()->RemoveSelected();
 }
-
-
 
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_)
@@ -1377,6 +1344,7 @@ void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
 }
 
 void MainWindow::ShowLibraryConfig() {
+  EnsureSettingsDialogCreated();
   settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }
 
@@ -1465,4 +1433,80 @@ void MainWindow::PlaylistCopyToDevice() {
   organise_dialog_->SetSongs(songs);
   organise_dialog_->SetCopy(true);
   organise_dialog_->show();
+}
+
+void MainWindow::ShowCoverManager() {
+  if (!cover_manager_) {
+    cover_manager_.reset(new AlbumCoverManager(network_, library_->backend()));
+    cover_manager_->Init();
+
+    // Cover manager connections
+    connect(cover_manager_.get(), SIGNAL(AddSongsToPlaylist(SongList)), SLOT(AddLibrarySongsToPlaylist(SongList)));
+    connect(cover_manager_.get(), SIGNAL(LoadSongsToPlaylist(SongList)), SLOT(LoadLibrarySongsToPlaylist(SongList)));
+    connect(cover_manager_.get(), SIGNAL(SongsDoubleClicked(SongList)), SLOT(LibrarySongsDoubleClicked(SongList)));
+  }
+
+  cover_manager_->show();
+}
+
+void MainWindow::EnsureSettingsDialogCreated() {
+  if (settings_dialog_)
+    return;
+
+  settings_dialog_.reset(new SettingsDialog);
+  settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
+
+#ifdef HAVE_GSTREAMER
+  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
+    settings_dialog_->SetGstEngine(engine);
+  }
+#endif
+
+  settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
+
+  // Settings
+  connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), library_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
+  #ifdef ENABLE_WIIMOTEDEV
+  connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_, SLOT(ReloadSettings()));
+  #endif
+}
+
+void MainWindow::OpenSettingsDialog() {
+  EnsureSettingsDialogCreated();
+  settings_dialog_->show();
+}
+
+void MainWindow::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
+  EnsureSettingsDialogCreated();
+  settings_dialog_->OpenAtPage(page);
+}
+
+void MainWindow::EnsureEditTagDialogCreated() {
+  if (edit_tag_dialog_)
+    return;
+
+  edit_tag_dialog_.reset(new EditTagDialog);
+}
+
+void MainWindow::ShowAboutDialog() {
+  if (!about_dialog_) {
+    about_dialog_.reset(new About);
+  }
+
+  about_dialog_->show();
+}
+
+void MainWindow::ShowTranscodeDialog() {
+#ifdef HAVE_GSTREAMER
+  if (!transcode_dialog_) {
+    transcode_dialog_.reset(new TranscodeDialog);
+  }
+  transcode_dialog_->show();
+#endif
 }

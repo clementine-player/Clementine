@@ -22,6 +22,7 @@
 #include "core/simpletreemodel.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
+#include "ui/settingsdialog.h"
 #include "widgets/multiloadingindicator.h"
 
 class Database;
@@ -45,9 +46,6 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
     Role_SortText,
     Role_Key,
   };
-
-  // Initialisation
-  void SetSettingsDialog(SettingsDialog* settings_dialog) { settings_dialog_ = settings_dialog; }
 
   // Needs to be static for RadioPlaylistItem::restore
   static RadioService* ServiceByName(const QString& name);
@@ -77,12 +75,12 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   MergedProxyModel* merged_model() const { return merged_model_; }
   NetworkAccessManager* network() const { return network_; }
   TaskManager* task_manager() const { return task_manager_; }
-  SettingsDialog* settings_dialog() const { return settings_dialog_; }
 
  signals:
   void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
+  void OpenSettingsAtPage(SettingsDialog::Page);
 
   void AddItemToPlaylist(RadioItem* item);
   void AddItemsToPlaylist(const PlaylistItemList& items);
@@ -100,7 +98,6 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   MergedProxyModel* merged_model_;
   NetworkAccessManager* network_;
   TaskManager* task_manager_;
-  SettingsDialog* settings_dialog_;
 };
 
 #endif // RADIOMODEL_H

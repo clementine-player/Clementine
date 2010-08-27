@@ -36,8 +36,7 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
     network_(network),
-    task_manager_(task_manager),
-    settings_dialog_(NULL)
+    task_manager_(task_manager)
 {
   Q_ASSERT(sServices.isEmpty());
 
@@ -64,6 +63,7 @@ void RadioModel::AddService(RadioService *service) {
   connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
+  connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));
   connect(service, SIGNAL(AddItemToPlaylist(RadioItem*)), SIGNAL(AddItemToPlaylist(RadioItem*)));
   connect(service, SIGNAL(AddItemsToPlaylist(PlaylistItemList)), SIGNAL(AddItemsToPlaylist(PlaylistItemList)));
 }

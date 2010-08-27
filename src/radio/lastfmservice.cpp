@@ -99,7 +99,7 @@ void LastFMService::ReloadSettings() {
 }
 
 void LastFMService::ShowConfig() {
-  model()->settings_dialog()->OpenAtPage(SettingsDialog::Page_Lastfm);
+  emit OpenSettingsAtPage(SettingsDialog::Page_Lastfm);
 }
 
 bool LastFMService::IsAuthenticated() const {

@@ -28,6 +28,7 @@
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
+#include "ui/settingsdialog.h"
 
 class About;
 class AddStreamDialog;
@@ -52,7 +53,6 @@ class PlaylistParser;
 class QueueManager;
 class RadioItem;
 class RadioModel;
-class SettingsDialog;
 class Song;
 class SystemTrayIcon;
 class TaskManager;
@@ -171,6 +171,14 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void SongSaveComplete();
 
+  void ShowCoverManager();
+  void ShowAboutDialog();
+  void ShowTranscodeDialog();
+  void EnsureSettingsDialogCreated();
+  void EnsureEditTagDialogCreated();
+  void OpenSettingsDialog();
+  void OpenSettingsDialogAtPage(SettingsDialog::Page page);
+
  private:
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
@@ -181,6 +189,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  private:
   Ui_MainWindow* ui_;
+  NetworkAccessManager* network_;
+
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
