@@ -19,6 +19,11 @@
 
 #include "devicelister.h"
 
+// Work around compile issue with glib >= 2.25
+#ifdef signals
+# undef signals
+#endif
+
 #include <gio/gio.h>
 
 #include <QMutex>
