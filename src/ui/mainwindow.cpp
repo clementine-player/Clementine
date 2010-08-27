@@ -165,7 +165,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   qDebug() << t.restart() << "dbdeps: player";
   library_ = new Library(database_, task_manager_, this);
   qDebug() << t.restart() << "dbdeps: library";
-  devices_ = new DeviceManager(database_, task_manager_, this),
+  devices_ = new DeviceManager(database_, task_manager_, this);
   qDebug() << t.restart() << "dbdeps: devices";
 
   // Initialise the UI
