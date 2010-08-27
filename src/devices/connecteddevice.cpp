@@ -40,8 +40,9 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
   qDebug() << __PRETTY_FUNCTION__;
 
   // Create the backend in the database thread.
-  // The backend gets parented to the database.
-  backend_ = manager->database()->CreateInThread<LibraryBackend>();
+  backend_ = new LibraryBackend();
+  backend_->moveToThread(manager->database());
+
   backend_->Init(manager->database()->Worker(),
                  QString("device_%1_songs").arg(database_id),
                  QString("device_%1_directories").arg(database_id),

@@ -33,7 +33,9 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
     watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
     watcher_(NULL)
 {
-  backend_ = db_thread->CreateInThread<LibraryBackend>();
+  backend_ = new LibraryBackend;
+  backend()->moveToThread(db_thread);
+
   backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
 
   model_ = new LibraryModel(backend_, this);

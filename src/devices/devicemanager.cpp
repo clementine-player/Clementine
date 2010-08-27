@@ -159,7 +159,8 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   connect(task_manager_, SIGNAL(TasksChanged()), SLOT(TasksChanged()));
 
   // Create the backend in the database thread
-  backend_ = database_->CreateInThread<DeviceDatabaseBackend>();
+  backend_ = new DeviceDatabaseBackend;
+  backend_->moveToThread(database);
   backend_->Init(database_->Worker());
 
   DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();

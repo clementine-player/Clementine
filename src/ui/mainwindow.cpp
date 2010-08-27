@@ -153,7 +153,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   qDebug() << t.restart() << "database startup";
 
   // Create some objects in the database thread
-  playlist_backend_ = database_->CreateInThread<PlaylistBackend>();
+  playlist_backend_ = new PlaylistBackend;
+  playlist_backend_->moveToThread(database_);
   playlist_backend_->SetDatabase(database_->Worker());
 
   qDebug() << t.restart() << "playlist backend";
