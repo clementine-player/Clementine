@@ -41,7 +41,8 @@ const int PlaylistView::kDropIndicatorGradientWidth = 5;
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
     playlist_(NULL),
-    glow_enabled_(false),
+    glow_enabled_(true),
+    currently_glowing_(false),
     glow_intensity_step_(0),
     inhibit_autoscroll_timer_(new QTimer(this)),
     inhibit_autoscroll_(false),
@@ -100,6 +101,7 @@ void PlaylistView::SetPlaylist(Playlist *playlist) {
 
   playlist_ = playlist;
   LoadGeometry();
+  ReloadSettings();
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
@@ -276,14 +278,14 @@ void PlaylistView::GlowIntensityChanged() {
 }
 
 void PlaylistView::StopGlowing() {
-  glow_enabled_ = false;
+  currently_glowing_ = false;
   glow_timer_.stop();
   glow_intensity_step_ = kGlowIntensitySteps;
 }
 
 void PlaylistView::StartGlowing() {
-  glow_enabled_ = true;
-  if (isVisible())
+  currently_glowing_ = true;
+  if (isVisible() && glow_enabled_)
     glow_timer_.start(1500 / kGlowIntensitySteps, this);
 }
 
@@ -292,7 +294,7 @@ void PlaylistView::hideEvent(QHideEvent*) {
 }
 
 void PlaylistView::showEvent(QShowEvent*) {
-  if (glow_enabled_)
+  if (currently_glowing_ && glow_enabled_)
     glow_timer_.start(1500 / kGlowIntensitySteps, this);
   MaybeAutoscroll();
 }
@@ -555,4 +557,15 @@ void PlaylistView::dropEvent(QDropEvent *event) {
 void PlaylistView::PlaylistDestroyed() {
   playlist_ = NULL;
   // We'll get a SetPlaylist() soon
+}
+
+void PlaylistView::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  glow_enabled_ = s.value("glow_effect", true).toBool();
+
+  if (currently_glowing_ && glow_enabled_ && isVisible())
+    StartGlowing();
+  if (!glow_enabled_)
+    StopGlowing();
 }

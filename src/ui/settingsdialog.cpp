@@ -20,6 +20,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 #include "engines/enginebase.h"
+#include "playlist/playlistview.h"
 #include "widgets/osd.h"
 #include "widgets/osdpretty.h"
 
@@ -205,6 +206,10 @@ void SettingsDialog::accept() {
   s.endGroup();
 
   // Playback
+  s.beginGroup(PlaylistView::kSettingsGroup);
+  s.setValue("glow_effect", ui_->current_glow->isChecked());
+  s.endGroup();
+
   s.beginGroup(Engine::Base::kSettingsGroup);
   s.setValue("FadeoutEnabled", ui_->fading_out->isChecked());
   s.setValue("FadeoutDuration", ui_->fading_duration->value());
@@ -225,7 +230,7 @@ void SettingsDialog::accept() {
 
 #ifdef ENABLE_WIIMOTEDEV
   s.beginGroup(WiimotedevShortcuts::kActionsGroup);
-  s.clear();
+  s.remove("");
 
   foreach (const WiimotedevShortcutsConfig::Shortcut& shortcut, wiimotedev_config_->actions_) {
     s.setValue(QString::number(shortcut.button), shortcut.action);
@@ -305,6 +310,10 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->global_shortcuts->Load();
 
   // Playback
+  s.beginGroup(PlaylistView::kSettingsGroup);
+  ui_->current_glow->setChecked(s.value("glow_effect", true).toBool());
+  s.endGroup();
+
   s.beginGroup(Engine::Base::kSettingsGroup);
   ui_->fading_out->setChecked(s.value("FadeoutEnabled", true).toBool());
   ui_->fading_cross->setChecked(s.value("CrossfadeEnabled", true).toBool());

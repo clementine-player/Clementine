@@ -31,6 +31,8 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
+  static const char* kSettingsGroup;
+
   void SetItemDelegates(LibraryBackend* backend);
   void SetPlaylist(Playlist* playlist);
   void RemoveSelected();
@@ -44,6 +46,7 @@ class PlaylistView : public QTreeView {
   void contextMenuEvent(QContextMenuEvent* e);
 
  public slots:
+  void ReloadSettings();
   void StopGlowing();
   void StartGlowing();
   void JumpToCurrentlyPlayingTrack();
@@ -81,7 +84,6 @@ class PlaylistView : public QTreeView {
                                     const QModelIndex& index);
 
  private:
-  static const char* kSettingsGroup;
   static const int kGlowIntensitySteps;
   static const int kAutoscrollGraceTimeout;
   static const int kDropIndicatorWidth;
@@ -94,6 +96,7 @@ class PlaylistView : public QTreeView {
   Playlist* playlist_;
 
   bool glow_enabled_;
+  bool currently_glowing_;
   QBasicTimer glow_timer_;
   int glow_intensity_step_;
   QModelIndex last_current_item_;
