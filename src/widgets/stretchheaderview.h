@@ -32,6 +32,7 @@ public:
   void HideSection(int logical);
   void ShowSection(int logical);
   void SetSectionHidden(int logical, bool hidden);
+  void SetColumnWidth(int logical, float width);
 
   bool is_stretch_enabled() const { return stretch_enabled_; }
 
@@ -47,7 +48,7 @@ protected:
   void resizeEvent(QResizeEvent* event);
 
 private:
-  void NormaliseWidths();
+  void NormaliseWidths(const QList<int>& sections = QList<int>());
   void UpdateWidths(const QList<int>& sections = QList<int>());
 
 private slots:

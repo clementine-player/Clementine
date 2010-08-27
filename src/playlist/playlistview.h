@@ -99,6 +99,7 @@ class PlaylistView : public QTreeView {
 
   Playlist* playlist_;
   PlaylistHeader* header_;
+  bool setting_initial_header_layout_;
 
   bool glow_enabled_;
   bool currently_glowing_;

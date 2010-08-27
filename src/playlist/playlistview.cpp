@@ -42,6 +42,7 @@ PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this)),
+    setting_initial_header_layout_(false),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -133,13 +134,15 @@ void PlaylistView::LoadGeometry() {
     header_->HideSection(Playlist::Column_Bitrate);
     header_->HideSection(Playlist::Column_Samplerate);
     header_->HideSection(Playlist::Column_Filename);
-    header_->HideSection(Playlist::Column_BaseFilename);
     header_->HideSection(Playlist::Column_Filesize);
     header_->HideSection(Playlist::Column_Filetype);
     header_->HideSection(Playlist::Column_DateCreated);
     header_->HideSection(Playlist::Column_DateModified);
     header_->HideSection(Playlist::Column_AlbumArtist);
     header_->HideSection(Playlist::Column_Composer);
+
+    header_->moveSection(header_->visualIndex(Playlist::Column_Track), 0);
+    setting_initial_header_layout_ = true;
   }
 }
 
@@ -565,6 +568,12 @@ void PlaylistView::ReloadSettings() {
     StartGlowing();
   if (!glow_enabled_)
     StopGlowing();
+
+  if (setting_initial_header_layout_) {
+    header_->SetColumnWidth(Playlist::Column_Length, 0.06);
+    header_->SetColumnWidth(Playlist::Column_Track, 0.05);
+    setting_initial_header_layout_ = false;
+  }
 }
 
 void PlaylistView::SaveSettings() {

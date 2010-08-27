@@ -20,6 +20,7 @@
 #include <QtDebug>
 
 #include <algorithm>
+#include <cmath>
 
 const float StretchHeaderView::kMinimumColumnWidth = 0.01;
 
@@ -43,18 +44,23 @@ void StretchHeaderView::setModel(QAbstractItemModel* model) {
   }
 }
 
-void StretchHeaderView::NormaliseWidths() {
+void StretchHeaderView::NormaliseWidths(const QList<int>& sections) {
   if (!stretch_enabled_)
     return;
 
-  float sum = 0.0;
-  foreach (float width, column_widths_)
-    sum += width;
+  float total_sum = 0.0;
+  float selected_sum = 0.0;
+  for (int i=0 ; i<count() ; ++i) {
+    total_sum += column_widths_[i];
+    if (sections.isEmpty() || sections.contains(i))
+      selected_sum += column_widths_[i];
+  }
 
-  if (sum != 0.0 && !qFuzzyCompare(sum, 1.0f)) {
-    const float mult = 1.0 / sum;
+  if (total_sum != 0.0 && !qFuzzyCompare(total_sum, 1.0f)) {
+    const float mult = (selected_sum + (1.0 - total_sum)) / selected_sum;
     for (int i=0 ; i<column_widths_.count() ; ++i) {
-      column_widths_[i] *= mult;
+      if (sections.isEmpty() || sections.contains(i))
+        column_widths_[i] *= mult;
     }
   }
 }
@@ -63,11 +69,16 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
   if (!stretch_enabled_)
     return;
 
-  int total_pixels = 0;
+  float total_w = 0.0;
+
   for (int i=0 ; i<column_widths_.count() ; ++i) {
     const float w = column_widths_[i];
-    const int pixels = w * width();
-    total_pixels += pixels;
+    int pixels = w * width();
+
+    if (pixels != 0 && total_w - int(total_w) > 0.5)
+      pixels ++;
+
+    total_w += w;
 
     if (!sections.isEmpty() && !sections.contains(i))
       continue;
@@ -83,7 +94,7 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
 
   // Add the remaining pixels to some arbitrary column just to make sure it
   // adds up to the total width.
-  for (int i=0 ; i<column_widths_.count() ; ++i) {
+  /*for (int i=0 ; i<column_widths_.count() ; ++i) {
     if (!sections.isEmpty() && !sections.contains(i))
       continue;
 
@@ -93,7 +104,7 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
       resizeSection(i, pixels + (width() - total_pixels));
       break;
     }
-  }
+  }*/
 }
 
 void StretchHeaderView::HideSection(int logical) {
@@ -163,19 +174,9 @@ void StretchHeaderView::SectionResized(int logical, int, int new_size) {
 
     // Resize just those columns
     if (!logical_sections_to_resize.isEmpty()) {
-      float sum = 0.0;
-      foreach (float width, column_widths_)
-        sum += width;
-
-      if (sum != 0.0 && !qFuzzyCompare(sum, 1.0f)) {
-        const float d = (1.0 - sum) / logical_sections_to_resize.count();
-        foreach (int i, logical_sections_to_resize) {
-          column_widths_[i] = qMax(kMinimumColumnWidth, column_widths_[i] + d);
-        }
-      }
-
       in_mouse_move_event_ = false;
       UpdateWidths(logical_sections_to_resize);
+      NormaliseWidths(logical_sections_to_resize);
       in_mouse_move_event_ = true;
     }
   }
@@ -201,4 +202,17 @@ void StretchHeaderView::SetStretchEnabled(bool enabled) {
   }
 
   emit StretchEnabledChanged(enabled);
+}
+
+void StretchHeaderView::SetColumnWidth(int logical, float width) {
+  if (!stretch_enabled_)
+    return;
+
+  column_widths_[logical] = width;
+
+  QList<int> other_columns;
+  for (int i=0 ; i<count() ; ++i)
+    if (!isSectionHidden(i) && i != logical)
+      other_columns << i;
+  NormaliseWidths(other_columns);
 }
