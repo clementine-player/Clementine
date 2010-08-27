@@ -41,6 +41,7 @@ const int PlaylistView::kDropIndicatorGradientWidth = 5;
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
     playlist_(NULL),
+    header_(new PlaylistHeader(Qt::Horizontal, this)),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -53,16 +54,17 @@ PlaylistView::PlaylistView(QWidget *parent)
     cached_current_row_row_(-1),
     drop_indicator_row_(-1)
 {
-  PlaylistHeader* header = new PlaylistHeader(Qt::Horizontal, this);
-  setHeader(header);
-  header->setMovable(true);
+  setHeader(header_);
+  header_->setMovable(true);
 
-  connect(header, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
-  connect(header, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
-  connect(header, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(SaveGeometry()));
-  connect(header, SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
-  connect(header, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
-  connect(header, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
+  connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(SaveSettings()));
+  connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(StretchChanged(bool)));
 
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
@@ -123,34 +125,28 @@ void PlaylistView::LoadGeometry() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  if (!header()->restoreState(settings.value("state").toByteArray())) {
-    header()->hideSection(Playlist::Column_Disc);
-    header()->hideSection(Playlist::Column_Year);
-    header()->hideSection(Playlist::Column_Genre);
-    header()->hideSection(Playlist::Column_BPM);
-    header()->hideSection(Playlist::Column_Bitrate);
-    header()->hideSection(Playlist::Column_Samplerate);
-    header()->hideSection(Playlist::Column_Filename);
-    header()->hideSection(Playlist::Column_BaseFilename);
-    header()->hideSection(Playlist::Column_Filesize);
-    header()->hideSection(Playlist::Column_Filetype);
-    header()->hideSection(Playlist::Column_DateCreated);
-    header()->hideSection(Playlist::Column_DateModified);
-    header()->hideSection(Playlist::Column_AlbumArtist);
-    header()->hideSection(Playlist::Column_Composer);
-  }
-
-  // Work around weirdness in QHeaderView
-  for (int i=0 ; i<header()->count() ; ++i) {
-    if (header()->sectionSize(i) == 0)
-      header()->hideSection(i);
+  if (!header_->restoreState(settings.value("state").toByteArray())) {
+    header_->HideSection(Playlist::Column_Disc);
+    header_->HideSection(Playlist::Column_Year);
+    header_->HideSection(Playlist::Column_Genre);
+    header_->HideSection(Playlist::Column_BPM);
+    header_->HideSection(Playlist::Column_Bitrate);
+    header_->HideSection(Playlist::Column_Samplerate);
+    header_->HideSection(Playlist::Column_Filename);
+    header_->HideSection(Playlist::Column_BaseFilename);
+    header_->HideSection(Playlist::Column_Filesize);
+    header_->HideSection(Playlist::Column_Filetype);
+    header_->HideSection(Playlist::Column_DateCreated);
+    header_->HideSection(Playlist::Column_DateModified);
+    header_->HideSection(Playlist::Column_AlbumArtist);
+    header_->HideSection(Playlist::Column_Composer);
   }
 }
 
 void PlaylistView::SaveGeometry() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
-  settings.setValue("state", header()->saveState());
+  settings.setValue("state", header_->saveState());
 }
 
 void PlaylistView::ReloadBarPixmaps() {
@@ -563,9 +559,21 @@ void PlaylistView::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   glow_enabled_ = s.value("glow_effect", true).toBool();
+  header_->SetStretchEnabled(s.value("stretch", true).toBool());
 
   if (currently_glowing_ && glow_enabled_ && isVisible())
     StartGlowing();
   if (!glow_enabled_)
     StopGlowing();
+}
+
+void PlaylistView::SaveSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("glow_effect", glow_enabled_);
+  s.setValue("stretch", header_->is_stretch_enabled());
+}
+
+void PlaylistView::StretchChanged(bool stretch) {
+  setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff : Qt::ScrollBarAsNeeded);
 }

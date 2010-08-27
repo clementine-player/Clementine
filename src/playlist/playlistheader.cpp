@@ -22,14 +22,19 @@
 #include <QSignalMapper>
 
 PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
-    : QHeaderView(orientation, parent),
+    : StretchHeaderView(orientation, parent),
       menu_(new QMenu(this)),
       show_mapper_(new QSignalMapper(this))
 {
   hide_action_ = menu_->addAction(tr("Hide..."), this, SLOT(HideCurrent()));
+  stretch_action_ = menu_->addAction(tr("Stretch columns to fit window"), this, SLOT(ToggleStretchEnabled()));
   menu_->addSeparator();
 
+  stretch_action_->setCheckable(true);
+  stretch_action_->setChecked(is_stretch_enabled());
+
   connect(show_mapper_, SIGNAL(mapped(int)), SLOT(ToggleVisible(int)));
+  connect(this, SIGNAL(StretchEnabledChanged(bool)), stretch_action_, SLOT(setChecked(bool)));
 }
 
 void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
@@ -69,15 +74,10 @@ void PlaylistHeader::HideCurrent() {
   if (menu_section_ == -1)
     return;
 
-  setSectionHidden(menu_section_, true);
+  SetSectionHidden(menu_section_, true);
 }
 
 void PlaylistHeader::ToggleVisible(int section) {
-  setSectionHidden(section, !isSectionHidden(section));
+  SetSectionHidden(section, !isSectionHidden(section));
   emit SectionVisibilityChanged(section, !isSectionHidden(section));
-
-  static const int kMinSectionSize = 80;
-
-  if (!isSectionHidden(section) && sectionSize(section) < kMinSectionSize)
-    resizeSection(section, kMinSectionSize);
 }

@@ -160,6 +160,7 @@ set(SOURCES
   widgets/sliderwidget.cpp
   widgets/spinbox.cpp
   widgets/stickyslider.cpp
+  widgets/stretchheaderview.cpp
   widgets/trackslider.cpp
   widgets/tracksliderslider.cpp
   widgets/lineedit.cpp
@@ -282,6 +283,7 @@ set(HEADERS
   widgets/sliderwidget.h
   widgets/spinbox.h
   widgets/stickyslider.h
+  widgets/stretchheaderview.h
   widgets/trackslider.h
   widgets/lineedit.h
 )

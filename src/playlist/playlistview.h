@@ -22,8 +22,9 @@
 #include <QTreeView>
 #include <QBasicTimer>
 
-class RadioLoadingIndicator;
 class LibraryBackend;
+class PlaylistHeader;
+class RadioLoadingIndicator;
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
@@ -77,6 +78,9 @@ class PlaylistView : public QTreeView {
   void InvalidateCachedCurrentPixmap();
   void PlaylistDestroyed();
 
+  void SaveSettings();
+  void StretchChanged(bool stretch);
+
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
@@ -94,6 +98,7 @@ class PlaylistView : public QTreeView {
   QModelIndex PrevEditableIndex(const QModelIndex& current);
 
   Playlist* playlist_;
+  PlaylistHeader* header_;
 
   bool glow_enabled_;
   bool currently_glowing_;

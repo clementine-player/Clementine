@@ -17,12 +17,12 @@
 #ifndef PLAYLISTHEADER_H
 #define PLAYLISTHEADER_H
 
-#include <QHeaderView>
+#include "widgets/stretchheaderview.h"
 
 class QMenu;
 class QSignalMapper;
 
-class PlaylistHeader : public QHeaderView {
+class PlaylistHeader : public StretchHeaderView {
   Q_OBJECT
 
  public:
@@ -45,6 +45,7 @@ class PlaylistHeader : public QHeaderView {
   int menu_section_;
   QMenu* menu_;
   QAction* hide_action_;
+  QAction* stretch_action_;
   QList<QAction*> show_actions_;
 
   QSignalMapper* show_mapper_;
