@@ -21,6 +21,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <numeric>
 
 const float StretchHeaderView::kMinimumColumnWidth = 0.01;
 
@@ -36,11 +37,8 @@ void StretchHeaderView::setModel(QAbstractItemModel* model) {
   QHeaderView::setModel(model);
 
   if (stretch_enabled_) {
-    column_widths_.clear();
-    int count = model->columnCount();
-    for (int i=0 ; i<count ; ++i) {
-      column_widths_ << 1.0 / count;
-    }
+    column_widths_.resize(count());
+    std::fill(column_widths_.begin(), column_widths_.end(), 1.0 / count());
   }
 }
 
@@ -48,12 +46,14 @@ void StretchHeaderView::NormaliseWidths(const QList<int>& sections) {
   if (!stretch_enabled_)
     return;
 
-  float total_sum = 0.0;
-  float selected_sum = 0.0;
-  for (int i=0 ; i<count() ; ++i) {
-    total_sum += column_widths_[i];
-    if (sections.isEmpty() || sections.contains(i))
-      selected_sum += column_widths_[i];
+  float total_sum = std::accumulate(column_widths_.begin(), column_widths_.end(), 0.0);
+  float selected_sum = total_sum;
+
+  if (!sections.isEmpty()) {
+    selected_sum = 0.0;
+    for (int i=0 ; i<count() ; ++i)
+      if (sections.contains(i))
+        selected_sum += column_widths_[i];
   }
 
   if (total_sum != 0.0 && !qFuzzyCompare(total_sum, 1.0f)) {
@@ -91,20 +91,6 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
     if (pixels != 0)
       resizeSection(i, pixels);
   }
-
-  // Add the remaining pixels to some arbitrary column just to make sure it
-  // adds up to the total width.
-  /*for (int i=0 ; i<column_widths_.count() ; ++i) {
-    if (!sections.isEmpty() && !sections.contains(i))
-      continue;
-
-    const float w = column_widths_[i];
-    const int pixels = w * width();
-    if (pixels != 0) {
-      resizeSection(i, pixels + (width() - total_pixels));
-      break;
-    }
-  }*/
 }
 
 void StretchHeaderView::HideSection(int logical) {
@@ -191,9 +177,9 @@ void StretchHeaderView::SetStretchEnabled(bool enabled) {
 
   if (enabled) {
     // Initialise the list of widths from the current state of the widget
-    column_widths_.clear();
+    column_widths_.resize(count());
     for (int i=0 ; i<count() ; ++i) {
-      column_widths_ << float(sectionSize(i)) / width();
+      column_widths_[i] = float(sectionSize(i)) / width();
     }
 
     // Stretch the columns to fill the widget

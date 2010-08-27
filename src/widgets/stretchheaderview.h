@@ -56,7 +56,7 @@ private slots:
 
 private:
   bool stretch_enabled_;
-  QList<float> column_widths_;
+  QVector<float> column_widths_;
 
   bool in_mouse_move_event_;
 };
