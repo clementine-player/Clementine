@@ -160,13 +160,8 @@ void GstEngine::ReloadSettings() {
   sink_ = s.value("sink", kAutoSink).toString();
   device_ = s.value("device").toString();
 
-#ifdef Q_OS_WIN32
-  if (sink_ == kAutoSink) {
-    // HACK: Force the direct sound sink on Windows unless the user has
-    // explicitly chosen otherwise.
-    sink_ = "directsoundsink";
-  }
-#endif
+  if (sink_.isEmpty())
+    sink_ = kAutoSink;
 
   rg_enabled_ = s.value("rgenabled", false).toBool();
   rg_mode_ = s.value("rgmode", 0).toInt();

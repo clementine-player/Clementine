@@ -282,7 +282,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   loading_settings_ = true;
 
 #ifdef HAVE_GSTREAMER
-  if (ui_->gst_plugin->count() == 0 && gst_engine_) {
+  if (ui_->gst_plugin->count() <= 1 && gst_engine_) {
     GstEngine::PluginDetailsList list = gst_engine_->GetOutputsList();
 
     ui_->gst_plugin->setItemData(0, GstEngine::kAutoSink);
