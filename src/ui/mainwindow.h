@@ -174,6 +174,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void ShowCoverManager();
   void ShowAboutDialog();
   void ShowTranscodeDialog();
+  void ShowErrorDialog(const QString& message);
+  void ShowQueueManager();
+  void ShowVisualisations();
   void EnsureSettingsDialogCreated();
   void EnsureEditTagDialogCreated();
   void OpenSettingsDialog();

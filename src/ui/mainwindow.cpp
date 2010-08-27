@@ -131,11 +131,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     settings_dialog_(NULL),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
-    error_dialog_(new ErrorDialog),
+    error_dialog_(NULL),
     organise_dialog_(new OrganiseDialog(task_manager_)),
-    queue_manager_(new QueueManager),
+    queue_manager_(NULL),
 #ifdef ENABLE_VISUALISATIONS
-    visualisation_(new VisualisationContainer),
+    visualisation_(NULL),
 #endif
 #ifdef ENABLE_WIIMOTEDEV
     wiimotedev_shortcuts_(NULL),
@@ -147,6 +147,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 {
   QTime t;
   t.start();
+
   // Wait for the database thread to start - lots of stuff depends on it.
   database_->Start(true);
 
@@ -190,11 +191,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   qDebug() << t.restart() << "player";
 
 #ifdef HAVE_GSTREAMER
-  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
-#   ifdef ENABLE_VISUALISATIONS
-      visualisation_->SetEngine(engine);
-#   endif
-  } else {
+  if (qobject_cast<GstEngine*>(player_->GetEngine()) == NULL) {
     ui_->action_transcode->setEnabled(false);
   }
 #else // HAVE_GSTREAMER
@@ -208,7 +205,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_sort_model_->sort(0);
 
   ui_->playlist->SetManager(playlists_);
-  queue_manager_->SetPlaylistManager(playlists_);
 
   ui_->library_view->setModel(library_sort_model_);
   ui_->library_view->SetLibrary(library_->model());
@@ -292,7 +288,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
   connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), player_, SLOT(AllHail(bool)));
-  connect(ui_->action_queue_manager, SIGNAL(triggered()), queue_manager_.get(), SLOT(show()));
+  connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
@@ -306,12 +302,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
                             ui_->action_load_playlist);
 
 #ifdef ENABLE_VISUALISATIONS
-  visualisation_->SetActions(ui_->action_previous_track, ui_->action_play_pause,
-                             ui_->action_stop, ui_->action_next_track);
-  connect(ui_->action_visualisations, SIGNAL(triggered()), visualisation_.get(), SLOT(show()));
-  connect(player_, SIGNAL(Stopped()), visualisation_.get(), SLOT(Stopped()));
-  connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
-  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
+  connect(ui_->action_visualisations, SIGNAL(triggered()), SLOT(ShowVisualisations()));
 #else
   ui_->action_visualisations->setEnabled(false);
 #endif
@@ -329,7 +320,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Player connections
   connect(ui_->volume, SIGNAL(valueChanged(int)), player_, SLOT(SetVolume(int)));
 
-  connect(player_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(player_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
@@ -355,7 +346,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
-  connect(playlists_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
   connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
@@ -366,7 +357,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
   // Database connections
-  connect(database_->Worker().get(), SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 
   // Library connections
   connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
@@ -379,7 +370,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(task_manager_, SIGNAL(ResumeLibraryWatchers()), library_, SLOT(ResumeWatcher()));
 
   // Devices connections
-  connect(devices_, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(devices_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(ui_->devices_view, SIGNAL(Load(SongList)), SLOT(LoadDeviceSongsToPlaylist(SongList)));
   connect(ui_->devices_view, SIGNAL(AddToPlaylist(SongList)), SLOT(AddDeviceSongsToPlaylist(SongList)));
   connect(ui_->devices_view, SIGNAL(DoubleClicked(SongList)), SLOT(DeviceSongsDoubleClicked(SongList)));
@@ -432,7 +423,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
           playlist_copy_to_device_, SLOT(setDisabled(bool)));
 
   // Radio connections
-  connect(radio_model_, SIGNAL(StreamError(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
@@ -634,7 +625,7 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
 
 void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
   SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, this);
-  connect(inserter, SIGNAL(Error(QString)), error_dialog_.get(), SLOT(ShowMessage(QString)));
+  connect(inserter, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
   inserter->Load(playlists_->current(), -1, play_now, urls);
@@ -1510,4 +1501,40 @@ void MainWindow::ShowTranscodeDialog() {
   }
   transcode_dialog_->show();
 #endif
+}
+
+void MainWindow::ShowErrorDialog(const QString& message) {
+  if (!error_dialog_) {
+    error_dialog_.reset(new ErrorDialog);
+  }
+  error_dialog_->ShowMessage(message);
+}
+
+void MainWindow::ShowQueueManager() {
+  if (!queue_manager_) {
+    queue_manager_.reset(new QueueManager);
+    queue_manager_->SetPlaylistManager(playlists_);
+  }
+  queue_manager_->show();
+}
+
+void MainWindow::ShowVisualisations() {
+#ifdef ENABLE_VISUALISATIONS
+  if (!visualisation_) {
+    visualisation_.reset(new VisualisationContainer);
+
+    visualisation_->SetActions(ui_->action_previous_track, ui_->action_play_pause,
+                               ui_->action_stop, ui_->action_next_track);
+    connect(player_, SIGNAL(Stopped()), visualisation_.get(), SLOT(Stopped()));
+    connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
+    connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
+
+#ifdef HAVE_GSTREAMER
+    if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine()))
+    visualisation_->SetEngine(engine);
+#endif
+  }
+
+  visualisation_->show();
+#endif // ENABLE_VISUALISATIONS
 }
