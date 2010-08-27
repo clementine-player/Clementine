@@ -97,9 +97,6 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
   qDebug() << t.restart() << "magnatune: sort model";
-
-  library_model_->Init();
-  qDebug() << t.restart() << "magnatune: libraryinit";
 }
 
 MagnatuneService::~MagnatuneService() {
@@ -121,16 +118,17 @@ RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
   root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
   root_->icon = QIcon(":magnatune.png");
 
-  model()->merged_model()->AddSubModel(
-      model()->index(root_->row, 0, model()->ItemToIndex(parent)),
-      library_sort_model_);
-
   return root_;
 }
 
 void MagnatuneService::LazyPopulate(RadioItem *item) {
   switch (item->type) {
     case RadioItem::Type_Service:
+      library_model_->Init();
+      model()->merged_model()->AddSubModel(
+          model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
+          library_sort_model_);
+
       if (total_song_count_ == 0)
         ReloadDatabase();
       break;
