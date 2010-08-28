@@ -19,9 +19,12 @@
 
 #include <mswmdm.h>
 
+#include "core/musicstorage.h"
+
 class WmdmProgress : public IWMDMProgress3 {
 public:
-  WmdmProgress();
+  WmdmProgress(const MusicStorage::ProgressFunction& f =
+                     MusicStorage::ProgressFunction());
 
   // IUnknown
   // The __stdcall is *really* important
@@ -44,6 +47,11 @@ public:
                                  OPAQUECOMMAND* context);
   virtual HRESULT __stdcall Progress3(GUID event_id, DWORD transpired_ticks,
                                       OPAQUECOMMAND* context);
+
+private:
+  MusicStorage::ProgressFunction f_;
+
+  DWORD estimated_;
 };
 
 #endif // WMDMPROGRESS_H

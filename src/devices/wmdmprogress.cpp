@@ -18,7 +18,9 @@
 
 #include <QtDebug>
 
-WmdmProgress::WmdmProgress()
+WmdmProgress::WmdmProgress(const MusicStorage::ProgressFunction& f)
+  : f_(f),
+    estimated_(0)
 {
 }
 
@@ -63,17 +65,17 @@ HRESULT WmdmProgress::End2(HRESULT completion_code) {
   return End3(EVENT_WMDM_CONTENT_TRANSFER, completion_code, NULL);
 }
 
-HRESULT WmdmProgress::Begin3(GUID event_id, DWORD estimated_ticks, OPAQUECOMMAND* context) {
-  qDebug() << Q_FUNC_INFO << estimated_ticks;
+HRESULT WmdmProgress::Begin3(GUID, DWORD estimated_ticks, OPAQUECOMMAND*) {
+  estimated_ = estimated_ticks;
   return S_OK;
 }
 
-HRESULT WmdmProgress::End3(GUID event_id, HRESULT completion_code, OPAQUECOMMAND* context) {
-  qDebug() << Q_FUNC_INFO << completion_code;
+HRESULT WmdmProgress::End3(GUID, HRESULT, OPAQUECOMMAND*) {
   return S_OK;
 }
 
-HRESULT WmdmProgress::Progress3(GUID event_id, DWORD transpired_ticks, OPAQUECOMMAND* context) {
-  qDebug() << Q_FUNC_INFO << transpired_ticks;
+HRESULT WmdmProgress::Progress3(GUID, DWORD transpired_ticks, OPAQUECOMMAND*) {
+  if (estimated_ != 0)
+    f_(float(transpired_ticks) / estimated_);
   return S_OK;
 }

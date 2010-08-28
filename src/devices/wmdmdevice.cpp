@@ -98,7 +98,7 @@ bool WmdmDevice::CopyToStorage(const CopyJob& job) {
   ScopedWCharArray dest_filename(job.metadata_.basefilename());
 
   // Create the progress object
-  WmdmProgress progress;
+  WmdmProgress progress(job.progress_);
 
   // Copy the file
   IWMDMStorage* new_storage = NULL;
