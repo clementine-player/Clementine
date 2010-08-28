@@ -1,37 +1,60 @@
-This package was debianized by David Sansome <me@davidsansome.com> on
-Mon, 18 Jan 2010 11:16:00 -0800.
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Name: Clementine
+Maintainer: David Sansome <me@davidsansome.com>
+Source: http://www.clementine-player.org/
 
-It was downloaded from <http://code.google.com/p/clementine-player>
+Files: *
+Copyright: 2010, David Sansome <me@davidsansome.com>
+License: GPL-3
 
-Upstream Author(s):
+Files: src/engines/xine-scope.*
+Copyright: 2004, Max Howell <max.howell@methylblue.com>
+License: GPL-2+
 
-    David Sansome <me@davidsansome.com>
+Files: src/engines/xine-engine.*
+Copyright: 2005, Christophe Thommeret <hftom@free.fr>
+           2005, Ian Monroe <ian@monroe.nu>
+           2005-2006, Mark Kretschmann <markey@web.de>
+           2004-2005, Max Howell <max.howell@methylblue.com>
+           2003-2004, J. Kofler <kaffeine@gmx.net>
+License: GPL-2+
 
-Copyright:
+Files: src/engines/enginebase.*
+Copyright: 2003, Mark Kretschmann
+           2004-2005, Max Howell, <max.howell@methylblue.com>
+License: GPL-2+
 
-    Copyright (C) 2010 David Sansome <me@davidsansome.com>
+Files: src/widgets/sliderwidget.*
+Copyright: 2003, Mark Kretschmann <markey@web.de>
+           2005, Gábor Lehel <illissius@gmail.com>
+License: GPL-2+
 
-License:
+Files: src/analyzers/analyzerbase.*
+       src/analyzers/blockanalyzer.*
+       src/analyzers/baranalyzer.*
+       src/analyzers/boomanalyzer.*
+       src/analyzers/sonogram.*
+       src/analyzers/glanalyzer.*
+Copyright: 2003-2005, Max Howell <max.howell@methylblue.com>
+           2003-2005, Mark Kretschmann
+License: GPL-2+
 
-    All original Clementine source code is under GPL-3 (/usr/share/common-licenses/GPL-3)
-    Code from Amarok is under GPL-2 (/usr/share/common-licenses/GPL-2).  This includes:
-      src/xine-{engine,scope}.{h,cpp}
-      src/enginebase.{h,cpp}
-      src/engine_fwd.h
-      src/sliderwidget.{h,cpp}
-      src/analyzers/analyzerbase.{h,cpp}
-      src/analyzers/{bar,block,boom}analyzer.{h,cpp}
-      src/analyzers/sonogram.{h,cpp}
-      src/analyzers/glanalyzer*.{h,cpp}
+Files: 3rdparty/gmock/*
+Copyright: 2008, Google Inc.
+License: BSD
 
-    googlemock and googletest (3rdparty/gmock) are under APL-2 (/usr/share/common-licenses/Apache-2.0)
-    qsqlite is (3rdparty/qsqlite) is under LGPL-2.1 (/usr/share/common-licenses/LGPL-2.1)
-    qtsingleapplication (3rdparty/qtsingleapplication) is under LGPL-2.1 (/usr/share/common-licenses/LGPL-2.1)
-    qxt (3rdparty/qxt) is under LGPL-2.1 (/usr/share/common-licenses/LGPL-2.1)
+Files: 3rdparty/qsqlite/*
+Copyright: 2009, Nokia Corporation
+License: LGPL-2.1 or GPL-3
 
-The Debian packaging is:
+Files: 3rdparty/qsqlite/sqlite.*
+Copyright: Public domain
+License: Public domain
 
-    Copyright (C) 2010 David Sansome <me@davidsansome.com>
+Files: 3rdparty/qtsingleapplication/*
+Copyright: 2009, Nokia Corporation
+License: LGPL-2.1 or GPL-3
 
-and is licensed under the GPL version 3, 
-see `/usr/share/common-licenses/GPL-3'.
+Files: 3rdparty/qxt/*
+Copyright: 2007, Qxt Foundation
+License: LGPL-2.1
