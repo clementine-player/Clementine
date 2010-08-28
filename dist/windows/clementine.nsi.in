@@ -24,7 +24,7 @@
 !define CAPABILITIES_SHOW_ICONS "Command to show icons"
 
 SetCompressor /SOLID lzma
-!addplugindir nsisplugins
+!addplugindir .
 !include "MUI2.nsh"
 !include "FileAssociation.nsh"
 !include "Capabilities.nsh"
