@@ -9,10 +9,21 @@
 #include <sys/types.h>
 #endif
 
+#include "core/fht.h"     //stack allocated and convenience
 #include "engines/engine_fwd.h"
 #include <QPixmap> //stack allocated and convenience
 #include <QBasicTimer>  //stack allocated
 #include <QWidget> //baseclass
+#include <vector>    //included for convenience
+
+#include <QGLWidget>     //baseclass
+#ifdef Q_WS_MACX
+#include <OpenGL/gl.h>   //included for convenience
+#include <OpenGL/glu.h>  //included for convenience
+#else
+#include <GL/gl.h>   //included for convenience
+#include <GL/glu.h>  //included for convenience
+#endif
 
 class QEvent;
 class QPaintEvent;
@@ -21,32 +32,53 @@ class QResizeEvent;
 
 namespace Analyzer {
 
-typedef QVector<float> Scope;
+typedef std::vector<float> Scope;
 
 class Base : public QWidget
 {
   Q_OBJECT
 
-public slots:
-    void set_engine(Engine::Base* engine);
-    void SpectrumAvailable(const QVector<float>& spectrum);
+public:
+    ~Base() { delete m_fht; }
+
+    uint timeout() const { return m_timeout; }
+
+    void set_engine(EngineBase* engine) { m_engine = engine; }
 
 protected:
-    Base(QWidget* parent);
+    Base( QWidget*, uint scopeSize = 7 );
 
+    void hideEvent(QHideEvent *);
+    void showEvent(QShowEvent *);
     void paintEvent( QPaintEvent* );
+    void timerEvent(QTimerEvent *);
 
     void polishEvent();
 
+    int  resizeExponent( int );
+    int  resizeForBands( int );
     virtual void init() {}
-    virtual void analyze(QPainter& p, const Scope&) = 0;
+    virtual void transform( Scope& );
+    virtual void analyze( QPainter& p, const Scope& ) = 0;
     virtual void paused(QPainter& p);
     virtual void demo(QPainter& p);
 
+    void changeTimeout( uint newTimeout ) {
+      m_timeout = newTimeout;
+      if (m_timer.isActive()) {
+        m_timer.stop();
+        m_timer.start(m_timeout, this);
+      }
+    }
+
 protected:
+    QBasicTimer m_timer;
+    uint   m_timeout;
+    FHT    *m_fht;
     EngineBase* m_engine;
     Scope m_lastScope;
 };
+
 
 void interpolate( const Scope&, Scope& );
 void initSin( Scope&, const uint = 6000 );

@@ -8,7 +8,7 @@
 const char* BoomAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Boom analyzer");
 
 BoomAnalyzer::BoomAnalyzer( QWidget *parent )
-    : Analyzer::Base(parent)
+    : Analyzer::Base( parent, 9 )
     , K_barHeight( 1.271 )//1.471
     , F_peakSpeed( 1.103 )//1.122
     , F( 1.0 )
@@ -56,6 +56,26 @@ BoomAnalyzer::init()
             qMax(0, 255 - int(191.0 * F))));
         p.drawLine( 0, y, COLUMN_WIDTH-2, y );
     }
+}
+
+void
+BoomAnalyzer::transform( Scope &s )
+{
+    float *front = static_cast<float*>( &s.front() );
+
+    m_fht->spectrum( front );
+    m_fht->scale( front, 1.0 / 60 );
+
+    Scope scope( 32, 0 );
+
+    const uint xscale[] = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,24,29,36,43,52,63,76,91,108,129,153,182,216,255 };
+
+    for( uint j, i = 0; i < 32; i++ )
+        for( j = xscale[i]; j < xscale[i + 1]; j++ )
+            if ( s[j] > scope[i] )
+                scope[i] = s[j];
+
+    s = scope;
 }
 
 void

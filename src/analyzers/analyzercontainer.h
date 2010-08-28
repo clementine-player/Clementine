@@ -24,8 +24,6 @@
 #include "analyzerbase.h"
 #include "engines/engine_fwd.h"
 
-#include "analyzer.h"
-
 class AnalyzerContainer : public QWidget {
   Q_OBJECT
 
@@ -66,7 +64,7 @@ private:
   QPoint last_click_pos_;
   bool ignore_next_click_;
 
-  QWidget* current_analyzer_;
+  Analyzer::Base* current_analyzer_;
   EngineBase* engine_;
 };
 

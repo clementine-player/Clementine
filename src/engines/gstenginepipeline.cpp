@@ -30,10 +30,6 @@ const int GstEnginePipeline::kEqBandCount = 10;
 const int GstEnginePipeline::kEqBandFrequencies[] = {
   60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
 
-const quint32 GstEnginePipeline::kSpectrumBands = 200;
-const int GstEnginePipeline::kSpectrumThreshold = -100;
-const quint64 GstEnginePipeline::kSpectrumIntervalns = 16666666;
-
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
     engine_(engine),
@@ -60,8 +56,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     equalizer_(NULL),
     volume_(NULL),
     audioscale_(NULL),
-    audiosink_(NULL),
-    spectrum_(NULL)
+    audiosink_(NULL)
 {
   for (int i=0 ; i<kEqBandCount ; ++i)
     eq_band_gains_ << 0;
@@ -166,13 +161,6 @@ bool GstEnginePipeline::Init() {
     g_object_set(G_OBJECT(rglimiter_), "enabled", int(rg_compression_), NULL);
   }
 
-  if (!(spectrum_ = engine_->CreateElement("spectrum", audiobin_))) { return false; }
-  g_object_set(G_OBJECT(spectrum_),
-      "bands", kSpectrumBands,
-      "threshold", kSpectrumThreshold,
-      NULL);
-  SetSpectrum(false);  // Spectrum disabled by default.
-
   GstPad* pad = gst_element_get_pad(audioconvert_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
@@ -215,7 +203,7 @@ bool GstEnginePipeline::Init() {
   if (!convert) { return false; }
   if (rg_enabled_)
     gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);
-  gst_element_link_many(equalizer_preamp_, equalizer_, spectrum_, volume_, audioscale_, convert, audiosink_, NULL);
+  gst_element_link_many(equalizer_preamp_, equalizer_, volume_, audioscale_, convert, audiosink_, NULL);
 
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
@@ -293,10 +281,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       break;
 
     case GST_MESSAGE_ELEMENT:
-      if (instance->ElementMessageReceived(msg)) {
-        gst_message_unref(msg);
-        return GST_BUS_DROP;
-      }
+      instance->ElementMessageReceived(msg);
       break;
 
     default:
@@ -305,44 +290,17 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
   return GST_BUS_PASS;
 }
 
-// Returns whether or not to drop the message.
-bool GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
+void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
   const GstStructure* structure = gst_message_get_structure(msg);
 
-  const gchar* name = gst_structure_get_name(structure);
-  if (strcmp(name, "redirect") == 0) {
+  if (gst_structure_has_name(structure, "redirect")) {
     const char* uri = gst_structure_get_string(structure, "new-location");
 
     // Set the redirect URL.  In mmssrc redirect messages come during the
     // initial state change to PLAYING, so callers can pick up this URL after
     // the state change has failed.
     redirect_url_ = QUrl::fromEncoded(uri);
-  } else if (strcmp(name, "spectrum") == 0) {
-    GstPad* pad = gst_element_get_static_pad(spectrum_, "sink");
-    GstCaps* caps = gst_pad_get_negotiated_caps(pad);
-    GstStructure* s = gst_caps_get_structure(caps, 0);
-    gint frequency = 0;
-    gboolean ret = gst_structure_get_int(s, "rate", &frequency);
-    gst_caps_unref(caps);
-    gst_object_unref(pad);
-
-    if (!ret || frequency == 0) {
-      qWarning() << "Failed to get rate";
-      return true;
-    }
-
-    const GValue* magnitudes = gst_structure_get_value(structure, "magnitude");
-
-    QVector<float> spectrum(kSpectrumBands);
-    for (int i = 0; i < kSpectrumBands; ++i) {
-      //double f = ((frequency / 2) * i + frequency / 4) / kSpectrumBands;
-      float mag = g_value_get_float(gst_value_list_get_value(magnitudes, i));
-      spectrum[i] = (mag - kSpectrumThreshold) / -kSpectrumThreshold;
-    }
-    emit SpectrumAvailable(spectrum);
-    return true;
   }
-  return false;
 }
 
 void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
@@ -605,10 +563,4 @@ void GstEnginePipeline::RemoveBufferConsumer(BufferConsumer *consumer) {
 void GstEnginePipeline::RemoveAllBufferConsumers() {
   QMutexLocker l(&buffer_consumers_mutex_);
   buffer_consumers_.clear();
-}
-
-void GstEnginePipeline::SetSpectrum(bool enable) {
-  g_object_set(spectrum_,
-      "interval", enable ? kSpectrumIntervalns : std::numeric_limits<quint64>::max(),
-      NULL);
 }

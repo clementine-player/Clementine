@@ -104,8 +104,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void AddBufferConsumer(BufferConsumer* consumer);
   void RemoveBufferConsumer(BufferConsumer* consumer);
 
-  void SetSpectrum(bool enable);
-
  protected:
   void SetVolumeSW(uint percent);
   void timerEvent(QTimerEvent*);
@@ -190,8 +188,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int next_element_id_;
 
   QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
-
-  bool spectrum_enabled_;
 };
 
 

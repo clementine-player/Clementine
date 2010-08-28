@@ -6,8 +6,7 @@
 #define BLOCKANALYZER_H
 
 #include "analyzerbase.h"
-#include <QColor>
-#include <QTime>
+#include <qcolor.h>
 
 class QResizeEvent;
 class QMouseEvent;
@@ -35,6 +34,7 @@ public:
     static const char* kName;
 
 protected:
+    virtual void transform( Scope& );
     virtual void analyze( QPainter& p, const Scope& );
     virtual void resizeEvent( QResizeEvent* );
     virtual void paletteChange( const QPalette& );
@@ -60,8 +60,6 @@ private:
     std::vector<int>     m_fade_intensity;
 
     float m_step; //rows to fall per frame
-
-    QTime time_;
 };
 
 #endif

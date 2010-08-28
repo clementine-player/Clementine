@@ -31,6 +31,7 @@ public:
 
 protected:
     void analyze(QPainter& p, const Scope&);
+    void transform(Scope&);
     void demo(QPainter& p);
     void resizeEvent(QResizeEvent*);
 
