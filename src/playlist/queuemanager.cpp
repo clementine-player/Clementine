@@ -50,6 +50,7 @@ void QueueManager::SetPlaylistManager(PlaylistManager* manager) {
   playlists_ = manager;
 
   connect(playlists_, SIGNAL(CurrentChanged(Playlist*)), SLOT(CurrentPlaylistChanged(Playlist*)));
+  CurrentPlaylistChanged(playlists_->current());
 }
 
 void QueueManager::CurrentPlaylistChanged(Playlist* playlist) {

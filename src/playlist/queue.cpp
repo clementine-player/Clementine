@@ -260,8 +260,10 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, 
   } else if (data->hasFormat(Playlist::kRowsMimetype)) {
     // Dragged from the playlist
 
+    Playlist* playlist = NULL;
     QList<int> source_rows;
     QDataStream stream(data->data(Playlist::kRowsMimetype));
+    stream >> playlist;
     stream >> source_rows;
 
     QModelIndexList source_indexes;
