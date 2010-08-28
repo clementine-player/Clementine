@@ -18,6 +18,7 @@
 #include "wmdmdevice.h"
 #include "wmdmlister.h"
 #include "wmdmloader.h"
+#include "wmdmprogress.h"
 #include "wmdmthread.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
@@ -95,10 +96,12 @@ bool WmdmDevice::CopyToStorage(
   storage_->CreateEmptyMetadataObject(&metadata_iface);
   song.ToWmdm(metadata_iface);
 
-
   // Convert the filenames to wchars
   ScopedWCharArray source_filename(QDir::toNativeSeparators(source));
   ScopedWCharArray dest_filename(song.basefilename());
+
+  // Create the progress object
+  WmdmProgress progress;
 
   // Copy the file
   IWMDMStorage* new_storage = NULL;
@@ -109,7 +112,7 @@ bool WmdmDevice::CopyToStorage(
       source_filename,
       dest_filename,
       NULL, // operation
-      NULL, // progress
+      &progress, // progress
       metadata_iface,
       NULL, // data
       &new_storage)) {
@@ -118,6 +121,9 @@ bool WmdmDevice::CopyToStorage(
     return false;
   }
   metadata_iface->Release();
+
+  if (!new_storage)
+    return false;
 
   // Get the metadata from the newly copied file
   IWMDMStorage3* new_storage3 = NULL;
@@ -128,6 +134,9 @@ bool WmdmDevice::CopyToStorage(
 
   new_storage->Release();
   new_storage3->Release();
+
+  if (!new_metadata)
+    return false;
 
   // Add it to our LibraryModel
   Song new_song;

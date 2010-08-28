@@ -562,6 +562,7 @@ IF(WIN32)
   list(APPEND SOURCES devices/wmdmdevice.cpp)
   list(APPEND SOURCES devices/wmdmlister.cpp)
   list(APPEND SOURCES devices/wmdmloader.cpp)
+  list(APPEND SOURCES devices/wmdmprogress.cpp)
   list(APPEND SOURCES devices/wmdmthread.cpp)
 
   list(APPEND HEADERS devices/wmdmdevice.h)
