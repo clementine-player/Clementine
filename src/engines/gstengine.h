@@ -64,6 +64,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const char* kAutoSink;
 
   bool Init();
+  void EnsureInitialised() { initialising_.waitForFinished(); }
 
   bool CanDecode(const QUrl& url);
 

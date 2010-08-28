@@ -35,6 +35,7 @@ public:
   static void SetUpTestCase() {
     sGstEngine = new GstEngine;
     ASSERT_TRUE(sGstEngine->Init());
+    sGstEngine->EnsureInitialised();
   }
 
   static void TearDownTestCase() {
