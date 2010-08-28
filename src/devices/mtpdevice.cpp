@@ -71,17 +71,24 @@ void MtpDevice::StartCopy() {
   connection_.reset(new MtpConnection(url_.host()));
 }
 
-bool MtpDevice::CopyToStorage(
-    const QString& source, const QString&, const Song& metadata,
-    bool, bool remove_original)
-{
+static int ProgressCallback(uint64_t const sent, uint64_t const total,
+                             void const* const data) {
+  const MusicStorage::CopyJob* job =
+      reinterpret_cast<const MusicStorage::CopyJob*>(data);
+  job->progress_(float(sent) / total);
+
+  return 0;
+}
+
+bool MtpDevice::CopyToStorage(const CopyJob& job) {
   // Convert metadata
   LIBMTP_track_t track;
-  metadata.ToMTP(&track);
+  job.metadata_.ToMTP(&track);
 
   // Send the file
   int ret = LIBMTP_Send_Track_From_File(
-      connection_->device(), source.toUtf8().constData(), &track, NULL, NULL);
+      connection_->device(), job.source_.toUtf8().constData(), &track,
+      ProgressCallback, &job);
   if (ret != 0)
     return false;
 
@@ -93,8 +100,8 @@ bool MtpDevice::CopyToStorage(
   songs_to_add_ << metadata_on_device;
 
   // Remove the original if requested
-  if (remove_original) {
-    if (!QFile::remove(source))
+  if (job.remove_original_) {
+    if (!QFile::remove(job.source_))
       return false;
   }
 
@@ -121,9 +128,9 @@ void MtpDevice::StartDelete() {
   StartCopy();
 }
 
-bool MtpDevice::DeleteFromStorage(const Song& metadata) {
+bool MtpDevice::DeleteFromStorage(const DeleteJob& job) {
   // Extract the ID from the song's URL
-  QUrl url(metadata.filename());
+  QUrl url(job.metadata_.filename());
   QString filename = url.path();
   filename.remove('/');
 
@@ -138,7 +145,7 @@ bool MtpDevice::DeleteFromStorage(const Song& metadata) {
     return false;
 
   // Remove it from our library model
-  songs_to_remove_ << metadata;
+  songs_to_remove_ << job.metadata_;
 
   return true;
 }

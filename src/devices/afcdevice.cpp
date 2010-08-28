@@ -80,15 +80,13 @@ void AfcDevice::StartCopy() {
   connection_.reset(new iMobileDeviceConnection(url_.host()));
 }
 
-bool AfcDevice::CopyToStorage(
-    const QString& source, const QString&,
-    const Song& metadata, bool, bool remove_original) {
+bool AfcDevice::CopyToStorage(const CopyJob& job) {
   Q_ASSERT(db_);
 
-  Itdb_Track* track = AddTrackToITunesDb(metadata);
+  Itdb_Track* track = AddTrackToITunesDb(job.metadata_);
 
   // Get an unused filename on the device
-  QString dest = connection_->GetUnusedFilename(db_, metadata);
+  QString dest = connection_->GetUnusedFilename(db_, job.metadata_);
   if (dest.isEmpty()) {
     itdb_track_remove(track);
     return false;
@@ -96,7 +94,7 @@ bool AfcDevice::CopyToStorage(
 
   // Copy the file
   {
-    QFile source_file(source);
+    QFile source_file(job.source_);
     AfcFile dest_file(connection_.get(), dest);
     if (!Utilities::Copy(&source_file, &dest_file))
       return false;
@@ -122,8 +120,8 @@ bool AfcDevice::CopyToStorage(
   AddTrackToModel(track, "afc://" + url_.host());
 
   // Remove the original if it was requested
-  if (remove_original) {
-    QFile::remove(source);
+  if (job.remove_original_) {
+    QFile::remove(job.source_);
   }
 
   return true;
@@ -157,8 +155,8 @@ void AfcDevice::FinaliseDatabase() {
   }
 }
 
-bool AfcDevice::DeleteFromStorage(const Song& metadata) {
-  const QString path = QUrl(metadata.filename()).path();
+bool AfcDevice::DeleteFromStorage(const DeleteJob& job) {
+  const QString path = QUrl(job.metadata_.filename()).path();
 
   if (!RemoveTrackFromITunesDb(path))
     return false;
@@ -168,7 +166,7 @@ bool AfcDevice::DeleteFromStorage(const Song& metadata) {
     return false;
 
   // Remove it from our library model
-  songs_to_remove_ << metadata;
+  songs_to_remove_ << job.metadata_;
 
   return true;
 }

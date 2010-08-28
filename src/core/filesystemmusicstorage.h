@@ -26,9 +26,8 @@ public:
 
   QString LocalPath() const { return root_; }
 
-  bool CopyToStorage(const QString &source, const QString &destination,
-                     const Song &metadata, bool overwrite, bool remove_original);
-  bool DeleteFromStorage(const Song& metadata);
+  bool CopyToStorage(const CopyJob& job);
+  bool DeleteFromStorage(const DeleteJob& job);
 
 private:
   QString root_;

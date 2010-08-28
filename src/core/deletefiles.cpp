@@ -100,7 +100,10 @@ void DeleteFiles::ProcessSomeFiles() {
 
     const Song& song = songs_[progress_];
 
-    if (!storage_->DeleteFromStorage(song)) {
+    MusicStorage::DeleteJob job;
+    job.metadata_ = song;
+
+    if (!storage_->DeleteFromStorage(job)) {
       songs_with_errors_ << song;
     }
   }

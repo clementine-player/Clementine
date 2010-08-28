@@ -23,6 +23,8 @@
 #include <QTimer>
 #include <QThread>
 
+#include <boost/bind.hpp>
+
 const int Organise::kBatchSize = 10;
 
 Organise::Organise(TaskManager* task_manager,
@@ -39,7 +41,8 @@ Organise::Organise(TaskManager* task_manager,
                        eject_after_(eject_after),
                        started_(false),
                        task_id_(0),
-                       progress_(0)
+                       progress_(0),
+                       song_progress_(0)
 {
   original_thread_ = thread();
 }
@@ -66,7 +69,7 @@ void Organise::ProcessSomeFiles() {
 
   // None left?
   if (progress_ >= files_.count()) {
-    task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
+    UpdateProgress();
 
     destination_->FinishCopy(files_with_errors_.isEmpty());
     if (eject_after_)
@@ -92,7 +95,7 @@ void Organise::ProcessSomeFiles() {
 
   const int n = qMin(files_.count(), progress_ + kBatchSize);
   for ( ; progress_<n ; ++progress_) {
-    task_manager_->SetTaskProgress(task_id_, progress_, files_.count());
+    SetSongProgress(0);
 
     const QString filename = files_[progress_];
 
@@ -112,11 +115,30 @@ void Organise::ProcessSomeFiles() {
     if (!song.is_valid())
       continue;
 
-    if (!destination_->CopyToStorage(filename, format_.GetFilenameForSong(song),
-                                     song, overwrite_, !copy_)) {
+    MusicStorage::CopyJob job;
+    job.source_ = filename;
+    job.destination_ = format_.GetFilenameForSong(song);
+    job.metadata_ = song;
+    job.overwrite_ = overwrite_;
+    job.remove_original_ = !copy_;
+    job.progress_ = boost::bind(&Organise::SetSongProgress, this, _1);
+
+    if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << filename;
     }
   }
+  SetSongProgress(0);
 
   QTimer::singleShot(0, this, SLOT(ProcessSomeFiles()));
+}
+
+void Organise::SetSongProgress(float progress) {
+  song_progress_ = qBound(0, int(progress * 100), 99);
+  UpdateProgress();
+}
+
+void Organise::UpdateProgress() {
+  const int progress = progress_ * 100 + song_progress_;
+  const int total = files_.count() * 100;
+  task_manager_->SetTaskProgress(task_id_, progress, total);
 }

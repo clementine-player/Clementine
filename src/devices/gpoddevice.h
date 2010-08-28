@@ -42,12 +42,11 @@ public:
   static QStringList url_schemes() { return QStringList() << "ipod"; }
 
   void StartCopy();
-  bool CopyToStorage(const QString &source, const QString &destination,
-                     const Song &metadata, bool overwrite, bool remove_original);
+  bool CopyToStorage(const CopyJob& job);
   void FinishCopy(bool success);
 
   void StartDelete();
-  bool DeleteFromStorage(const Song& metadata);
+  bool DeleteFromStorage(const DeleteJob& job);
   void FinishDelete(bool success);
 
 protected slots:

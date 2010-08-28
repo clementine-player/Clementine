@@ -21,6 +21,7 @@
 
 #include <QMetaType>
 
+#include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 
 class MusicStorage {
@@ -35,16 +36,29 @@ public:
     Role_FreeSpace,
   };
 
+  typedef boost::function<void (float progress)> ProgressFunction;
+
+  struct CopyJob {
+    QString source_;
+    QString destination_;
+    Song metadata_;
+    bool overwrite_;
+    bool remove_original_;
+    ProgressFunction progress_;
+  };
+
+  struct DeleteJob {
+    Song metadata_;
+  };
+
   virtual QString LocalPath() const { return QString(); }
 
   virtual void StartCopy() {}
-  virtual bool CopyToStorage(const QString& source, const QString& destination,
-                             const Song& metadata, bool overwrite,
-                             bool remove_original) = 0;
+  virtual bool CopyToStorage(const CopyJob& job) = 0;
   virtual void FinishCopy(bool success) {}
 
   virtual void StartDelete() {}
-  virtual bool DeleteFromStorage(const Song& metadata) = 0;
+  virtual bool DeleteFromStorage(const DeleteJob& job) = 0;
   virtual void FinishDelete(bool success) {}
 
   virtual void Eject() {}

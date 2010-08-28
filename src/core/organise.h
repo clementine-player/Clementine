@@ -44,6 +44,8 @@ signals:
 
 private slots:
   void ProcessSomeFiles();
+  void SetSongProgress(float progress);
+  void UpdateProgress();
 
 private:
   QThread* thread_;
@@ -61,6 +63,7 @@ private:
 
   int task_id_;
   int progress_;
+  int song_progress_;
 
   QStringList files_with_errors_;
 };

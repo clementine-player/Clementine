@@ -44,11 +44,10 @@ public:
   static QStringList url_schemes() { return QStringList() << "afc"; }
 
   void StartCopy();
-  bool CopyToStorage(const QString &source, const QString &destination,
-                     const Song &metadata, bool overwrite, bool remove_original);
+  bool CopyToStorage(const CopyJob& job);
   void FinishCopy(bool success);
 
-  bool DeleteFromStorage(const Song &metadata);
+  bool DeleteFromStorage(const DeleteJob& job);
 
 protected:
   void FinaliseDatabase();

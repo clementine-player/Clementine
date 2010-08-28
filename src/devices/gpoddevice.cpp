@@ -98,17 +98,14 @@ void GPodDevice::AddTrackToModel(Itdb_Track* track, const QString& prefix) {
   songs_to_add_ << metadata_on_device;
 }
 
-bool GPodDevice::CopyToStorage(
-    const QString& source, const QString&,
-    const Song& metadata, bool, bool remove_original)
-{
+bool GPodDevice::CopyToStorage(const CopyJob& job) {
   Q_ASSERT(db_);
 
-  Itdb_Track* track = AddTrackToITunesDb(metadata);
+  Itdb_Track* track = AddTrackToITunesDb(job.metadata_);
 
   // Copy the file
   GError* error = NULL;
-  itdb_cp_track_to_ipod(track, source.toLocal8Bit().constData(), &error);
+  itdb_cp_track_to_ipod(track, job.source_.toLocal8Bit().constData(), &error);
   if (error) {
     qDebug() << "GPodDevice error:" << error->message;
     emit Error(QString::fromUtf8(error->message));
@@ -122,8 +119,8 @@ bool GPodDevice::CopyToStorage(
   AddTrackToModel(track, url_.path());
 
   // Remove the original if it was requested
-  if (remove_original) {
-    QFile::remove(source);
+  if (job.remove_original_) {
+    QFile::remove(job.source_);
   }
 
   return true;
@@ -202,18 +199,18 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
   return true;
 }
 
-bool GPodDevice::DeleteFromStorage(const Song& metadata) {
+bool GPodDevice::DeleteFromStorage(const DeleteJob& job) {
   Q_ASSERT(db_);
 
-  if (!RemoveTrackFromITunesDb(metadata.filename(), url_.path()))
+  if (!RemoveTrackFromITunesDb(job.metadata_.filename(), url_.path()))
     return false;
 
   // Remove the file
-  if (!QFile::remove(metadata.filename()))
+  if (!QFile::remove(job.metadata_.filename()))
     return false;
 
   // Remove it from our library model
-  songs_to_remove_ << metadata;
+  songs_to_remove_ << job.metadata_;
 
   return true;
 }

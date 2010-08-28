@@ -84,21 +84,18 @@ void WmdmDevice::StartCopy() {
   destination->Release();
 }
 
-bool WmdmDevice::CopyToStorage(
-    const QString& source, const QString&, const Song& song,
-    bool, bool remove_original)
-{
+bool WmdmDevice::CopyToStorage(const CopyJob& job) {
   if (!storage_control_ || !storage_)
     return false;
 
   // Create the song metadata
   IWMDMMetaData* metadata_iface = NULL;
   storage_->CreateEmptyMetadataObject(&metadata_iface);
-  song.ToWmdm(metadata_iface);
+  job.metadata_.ToWmdm(metadata_iface);
 
   // Convert the filenames to wchars
-  ScopedWCharArray source_filename(QDir::toNativeSeparators(source));
-  ScopedWCharArray dest_filename(song.basefilename());
+  ScopedWCharArray source_filename(QDir::toNativeSeparators(job.source_));
+  ScopedWCharArray dest_filename(job.metadata_.basefilename());
 
   // Create the progress object
   WmdmProgress progress;
@@ -147,8 +144,8 @@ bool WmdmDevice::CopyToStorage(
   new_metadata->Release();
 
   // Remove the original if requested
-  if (remove_original) {
-    if (!QFile::remove(source))
+  if (job.remove_original_) {
+    if (!QFile::remove(job.source_))
       return false;
   }
 
@@ -177,11 +174,11 @@ void WmdmDevice::StartDelete() {
   StartCopy();
 }
 
-bool WmdmDevice::DeleteFromStorage(const Song& metadata) {
+bool WmdmDevice::DeleteFromStorage(const DeleteJob& job) {
   // Walk down the tree until we've found the file
   IWMDMStorage3* storage = storage_;
   storage->AddRef();
-  foreach (const QString& path_component, metadata.filename().split('/')) {
+  foreach (const QString& path_component, job.metadata_.filename().split('/')) {
     ScopedWCharArray path_component_wchar(path_component);
 
     IWMDMStorage* next_storage = NULL;
@@ -207,7 +204,7 @@ bool WmdmDevice::DeleteFromStorage(const Song& metadata) {
   }
 
   // Remove it from our library model
-  songs_to_remove_ << metadata;
+  songs_to_remove_ << job.metadata_;
 
   return true;
 }

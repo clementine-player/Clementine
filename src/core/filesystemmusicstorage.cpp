@@ -24,13 +24,11 @@ FilesystemMusicStorage::FilesystemMusicStorage(const QString& root)
 {
 }
 
-bool FilesystemMusicStorage::CopyToStorage(
-    const QString& source, const QString& destination,
-    const Song&, bool overwrite, bool remove_original) {
-  const QString dest_filename = root_ + "/" + destination;
+bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
+  const QString dest_filename = root_ + "/" + job.destination_;
 
   // Don't do anything if the destination is the same as the source
-  if (source == dest_filename)
+  if (job.source_ == dest_filename)
     return true;
 
   // Create directories as required
@@ -38,16 +36,16 @@ bool FilesystemMusicStorage::CopyToStorage(
   dir.mkpath(dest_filename.section('/', 0, -2));
 
   // Remove the destination file if it exists and we want to overwrite
-  if (overwrite && QFile::exists(dest_filename))
+  if (job.overwrite_ && QFile::exists(dest_filename))
     QFile::remove(dest_filename);
 
   // Copy or move
-  if (remove_original)
-    return QFile::rename(source, dest_filename);
+  if (job.remove_original_)
+    return QFile::rename(job.source_, dest_filename);
   else
-    return QFile::copy(source, dest_filename);
+    return QFile::copy(job.source_, dest_filename);
 }
 
-bool FilesystemMusicStorage::DeleteFromStorage(const Song& metadata) {
-  return QFile::remove(metadata.filename());
+bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
+  return QFile::remove(job.metadata_.filename());
 }
