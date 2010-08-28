@@ -97,6 +97,10 @@ bool AfcTransfer::CopyDirFromDevice(iMobileDeviceConnection* c, const QString& p
 bool AfcTransfer::CopyDirToDevice(iMobileDeviceConnection* c, const QString& path) {
   QDir dir(local_destination_ + path);
 
+  if (!c->Exists(path)) {
+    c->MkDir(path);
+  }
+
   foreach (const QString& filename, dir.entryList(QDir::Files | QDir::NoDotAndDotDot)) {
     if (!CopyFileToDevice(c, path + "/" + filename))
       return false;

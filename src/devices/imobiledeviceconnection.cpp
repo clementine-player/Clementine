@@ -144,6 +144,11 @@ QStringList iMobileDeviceConnection::ReadDirectory(const QString& path,
   return ret;
 }
 
+bool iMobileDeviceConnection::MkDir(const QString& path) {
+  afc_error_t err = afc_make_directory(afc_, path.toUtf8().constData());
+  return err == AFC_E_SUCCESS;
+}
+
 QString iMobileDeviceConnection::GetFileInfo(const QString& path, const QString& key) {
   QString ret;
   char** infolist = NULL;

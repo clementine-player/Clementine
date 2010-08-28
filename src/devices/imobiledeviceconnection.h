@@ -37,6 +37,7 @@ public:
 
   QVariant GetProperty(const QString& property, const QString& domain = QString());
   QStringList ReadDirectory(const QString& path, QDir::Filters filters = QDir::NoFilter);
+  bool MkDir(const QString& path);
 
   QString GetFileInfo(const QString& path, const QString& key);
   bool Exists(const QString& path);
