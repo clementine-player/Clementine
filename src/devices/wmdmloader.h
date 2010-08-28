@@ -46,8 +46,8 @@ signals:
   void LoadFinished();
 
 private:
-  void RecursiveExploreStorage(IWMDMStorage* parent);
-  void LoadFile(IWMDMStorage* file);
+  void RecursiveExploreStorage(IWMDMStorage* parent, QStringList* path_components);
+  void LoadFile(IWMDMStorage* file, const QStringList* path_components);
 
 private:
   boost::shared_ptr<ConnectedDevice> device_;

@@ -55,7 +55,8 @@ void WmdmLoader::LoadDatabase() {
   QString canonical_name = lister->DeviceCanonicalName(connected_device->unique_id());
 
   IWMDMStorage* storage = thread->GetRootStorage(canonical_name);
-  RecursiveExploreStorage(storage);
+  QStringList path_components;
+  RecursiveExploreStorage(storage, &path_components);
   storage->Release();
 
   thread.reset();
@@ -70,7 +71,7 @@ void WmdmLoader::LoadDatabase() {
   emit LoadFinished();
 }
 
-void WmdmLoader::RecursiveExploreStorage(IWMDMStorage* parent) {
+void WmdmLoader::RecursiveExploreStorage(IWMDMStorage* parent, QStringList* path_components) {
   IWMDMEnumStorage* child_it = NULL;
   parent->EnumStorage(&child_it);
 
@@ -85,18 +86,20 @@ void WmdmLoader::RecursiveExploreStorage(IWMDMStorage* parent) {
     _WAVEFORMATEX audio_format;
     child->GetAttributes(&attributes, &audio_format);
 
+    path_components->append(QString::fromWCharArray(name));
     if (attributes & WMDM_FILE_ATTR_FILE) {
-      LoadFile(child);
+      LoadFile(child, path_components);
     } else if (attributes & WMDM_FILE_ATTR_FOLDER) {
-      RecursiveExploreStorage(child);
+      RecursiveExploreStorage(child, path_components);
     }
+    path_components->removeLast();
 
     child->Release();
   }
   child_it->Release();
 }
 
-void WmdmLoader::LoadFile(IWMDMStorage* file) {
+void WmdmLoader::LoadFile(IWMDMStorage* file, const QStringList* path_components) {
   // Convert to a IWMDMStorage3 so we can get metadata
   IWMDMStorage3* storage3 = NULL;
   if (file->QueryInterface(IID_IWMDMStorage3, (void**) &storage3))
@@ -114,6 +117,7 @@ void WmdmLoader::LoadFile(IWMDMStorage* file) {
   Song song;
   song.InitFromWmdm(metadata);
   song.set_directory_id(1);
+  song.set_filename(path_components->join("/"));
 
   metadata->Release();
 
