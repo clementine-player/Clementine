@@ -176,7 +176,7 @@ bool Copy(QIODevice* source, QIODevice* destination) {
 
 ScopedWCharArray::ScopedWCharArray(const QString& str)
   : chars_(str.length()),
-    data_(new wchar_t(chars_ + 1))
+    data_(new wchar_t[chars_ + 1])
 {
   str.toWCharArray(data_.get());
   data_[chars_] = '\0';
