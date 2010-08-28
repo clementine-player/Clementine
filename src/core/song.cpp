@@ -689,7 +689,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     case WMDM_TYPE_QWORD:
       return QVariant::fromValue(qulonglong(*reinterpret_cast<quint64*>(data)));
     case WMDM_TYPE_STRING:
-      return QString::fromWCharArray(reinterpret_cast<wchar_t*>(data));
+      return QString::fromWCharArray(reinterpret_cast<wchar_t*>(data), length/2);
     case WMDM_TYPE_BINARY:
       return QByteArray(reinterpret_cast<char*>(data), length);
     case WMDM_TYPE_BOOL:
@@ -807,6 +807,27 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     case WMDM_FORMATCODE_UNDEFINEDAUDIO:
       d->filetype_ = Song::Type_Unknown;
       break;
+
+    case WMDM_FORMATCODE_UNDEFINED:
+      // WMDM doesn't know what type of file it is, so we start guessing - first
+      // check if any of the music metadata fields were defined.  If they were,
+      // there's a fairly good chance the file was music.
+      if (!d->title_.isEmpty() || !d->artist_.isEmpty() ||
+          !d->album_.isEmpty() || !d->comment_.isEmpty() ||
+          !d->genre_.isEmpty() || d->track_ != -1 || d->year_ != -1 ||
+          d->length_ != -1) {
+        d->filetype_ = Song::Type_Unknown;
+        break;
+      }
+
+      // Make a final guess based on the file extension
+      {
+        QString ext = d->filename_.section('.', -1, -1).toLower();
+        if (ext == "mp3" || ext == "wma" || ext == "flac" || ext == "ogg" ||
+            ext == "spx" || ext == "mp4" || ext == "aac" || ext == "m4a")
+          break;
+      }
+      return;
 
     default:
       return; // It's not music
