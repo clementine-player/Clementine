@@ -159,7 +159,8 @@ int main(int argc, char *argv[]) {
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN
-  QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath() + "/../PlugIns");
+  QCoreApplication::setLibraryPaths(
+      QStringList() << QCoreApplication::applicationDirPath() + "/../PlugIns");
 #endif
 
   a.setQuitOnLastWindowClosed(false);
