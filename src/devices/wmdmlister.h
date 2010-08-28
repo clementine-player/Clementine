@@ -89,6 +89,12 @@ private:
 
     quint64 total_bytes_;
     quint64 free_bytes_;
+
+    // Only valid for filesystem devices
+    QString mount_point_;
+    QString fs_name_;
+    QString fs_type_;
+    int fs_serial_;
   };
 
   DeviceInfo ReadDeviceInfo(IWMDMDevice2* device);

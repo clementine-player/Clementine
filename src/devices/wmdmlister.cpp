@@ -185,6 +185,33 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
     storage_it->Release();
   }
 
+  // There doesn't seem to be a way to get the drive letter of MSC devices, so
+  // try parsing the device's name to extract it.
+  QRegExp drive_letter("\\(([A-Z]:)\\)$");
+  if (drive_letter.indexIn(ret.name_) != -1) {
+    // Sanity check to make sure there really is a drive there
+    ScopedWCharArray path(drive_letter.cap(1) + "\\");
+    ScopedWCharArray name(QString(MAX_PATH + 1, '\0'));
+    ScopedWCharArray type(QString(MAX_PATH + 1, '\0'));
+    DWORD serial = 0;
+
+    if (!GetVolumeInformationW(
+        path,
+        name, MAX_PATH,
+        &serial,
+        NULL, // max component length
+        NULL, // flags
+        type, MAX_PATH // fat or ntfs
+        )) {
+      qWarning() << "Error getting volume information for" << drive_letter.cap(1);
+    } else {
+      ret.mount_point_ = drive_letter.cap(1) + "/";
+      ret.fs_name_ = name.ToString();
+      ret.fs_type_ = type.ToString();
+      ret.fs_serial_ = serial;
+    }
+  }
+
   return ret;
 }
 
@@ -234,11 +261,19 @@ QString WmdmLister::MakeFriendlyName(const QString& id) {
 }
 
 QList<QUrl> WmdmLister::MakeDeviceUrls(const QString& id) {
-  QUrl url;
-  url.setScheme("wmdm");
-  url.setPath(id);
+  QList<QUrl> ret;
 
-  return QList<QUrl>() << url;
+  QString mount_point = LockAndGetDeviceInfo(id, &DeviceInfo::mount_point_);
+  if (!mount_point.isEmpty()) {
+    ret << MakeUrlFromLocalPath(mount_point);
+  }
+
+  QUrl wmdm_url;
+  wmdm_url.setScheme("wmdm");
+  wmdm_url.setPath(id);
+  ret << wmdm_url;
+
+  return ret;
 }
 
 void WmdmLister::UnmountDevice(const QString& id) {
