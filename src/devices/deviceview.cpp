@@ -56,8 +56,7 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
 
   // Font for the status line
   QFont status_font(opt.font);
-  status_font.setItalic(true);
-  status_font.setPointSize(status_font.pointSize() - 2);
+  status_font.setPointSize(status_font.pointSize() - 1);
 
   const int text_height = QFontMetrics(opt.font).height() +
                           QFontMetrics(status_font).height();
@@ -81,8 +80,6 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
   p->drawText(line1, Qt::AlignLeft | Qt::AlignTop, index.data().toString());
 
   // Draw the second line (status)
-  p->setFont(status_font);
-
   DeviceManager::State state =
       static_cast<DeviceManager::State>(index.data(DeviceManager::Role_State).toInt());
   QVariant progress = index.data(DeviceManager::Role_UpdatingPercentage);
@@ -106,6 +103,11 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
     }
   }
 
+  if (opt.state & QStyle::State_Selected)
+    p->setPen(opt.palette.color(QPalette::HighlightedText));
+  else
+    p->setPen(opt.palette.color(QPalette::Dark));
+  p->setFont(status_font);
   p->drawText(line2, Qt::AlignLeft | Qt::AlignTop, status_text);
 
   p->restore();
