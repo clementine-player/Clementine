@@ -178,7 +178,38 @@ void WmdmDevice::StartDelete() {
 }
 
 bool WmdmDevice::DeleteFromStorage(const Song& metadata) {
-  return false;
+  // Walk down the tree until we've found the file
+  IWMDMStorage3* storage = storage_;
+  storage->AddRef();
+  foreach (const QString& path_component, metadata.filename().split('/')) {
+    ScopedWCharArray path_component_wchar(path_component);
+
+    IWMDMStorage* next_storage = NULL;
+    if (storage->GetStorage(path_component_wchar, &next_storage)) {
+      // Couldn't find it
+      storage->Release();
+      return false;
+    }
+    storage->Release();
+
+    next_storage->QueryInterface(IID_IWMDMStorage3, (void**)&storage);
+  }
+
+  // Get a control interface on it
+  IWMDMStorageControl3* control = NULL;
+  storage->QueryInterface(IID_IWMDMStorageControl3, (void**)&control);
+  storage->Release();
+
+  // Delete it
+  WmdmProgress progress;
+  if (control->Delete(WMDM_MODE_BLOCK, &progress)) {
+    return false;
+  }
+
+  // Remove it from our library model
+  songs_to_remove_ << metadata;
+
+  return true;
 }
 
 void WmdmDevice::FinishDelete(bool success) {
