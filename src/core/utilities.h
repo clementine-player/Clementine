@@ -46,7 +46,7 @@ public:
   operator wchar_t*() const { return get(); }
 
   int characters() const { return chars_; }
-  int bytes() const { return chars_ * sizeof(wchar_t) + 1; }
+  int bytes() const { return (chars_ + 1) * sizeof(wchar_t); }
 
 private:
   Q_DISABLE_COPY(ScopedWCharArray);
