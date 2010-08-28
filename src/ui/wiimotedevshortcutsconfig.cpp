@@ -123,6 +123,7 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
 
 void WiimotedevShortcutsConfig::LoadSettings(){
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  settings_.sync();
   ui_->list->clear();
 
   quint64 fvalue, svalue;
@@ -147,9 +148,8 @@ void WiimotedevShortcutsConfig::LoadSettings(){
 void WiimotedevShortcutsConfig::DefaultSettings()
 {
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
-  foreach (const QString& key, settings_.allKeys()) {
-    settings_.remove(key);
-  }
+  settings_.sync();
+  settings_.remove("");
   settings_.setValue(QString::number(WIIMOTE_BTN_LEFT), WiimotedevShortcuts::PlayerPreviousTrack);
   settings_.setValue(QString::number(WIIMOTE_BTN_RIGHT), WiimotedevShortcuts::PlayerNextTrack);
   settings_.setValue(QString::number(WIIMOTE_BTN_SHIFT_LEFT), WiimotedevShortcuts::PlayerPreviousTrack);
@@ -159,7 +159,6 @@ void WiimotedevShortcutsConfig::DefaultSettings()
   settings_.setValue(QString::number(WIIMOTE_BTN_1), WiimotedevShortcuts::PlayerTogglePause);
   settings_.setValue(QString::number(WIIMOTE_BTN_2), WiimotedevShortcuts::PlayerShowOSD);
   settings_.endGroup();
-  settings_.sync();
 
   LoadSettings();
 }

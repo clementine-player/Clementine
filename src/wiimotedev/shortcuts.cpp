@@ -45,6 +45,7 @@ WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
 
 void WiimotedevShortcuts::ReloadSettings() {
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
+  settings_.sync();
   actions_.clear();
 
   if (!settings_.allKeys().count()) {
@@ -77,9 +78,7 @@ void WiimotedevShortcuts::SetDefaultSettings()
 {
   QSettings settings;
   settings.beginGroup(WiimotedevShortcuts::kActionsGroup);
-  foreach (const QString& key, settings_.allKeys()) {
-    settings_.remove(key);
-  }
+  settings.remove("");
   settings.setValue(QString::number(WIIMOTE_BTN_LEFT), PlayerPreviousTrack);
   settings.setValue(QString::number(WIIMOTE_BTN_RIGHT), PlayerNextTrack);
   settings.setValue(QString::number(WIIMOTE_BTN_SHIFT_LEFT), PlayerPreviousTrack);
@@ -91,16 +90,13 @@ void WiimotedevShortcuts::SetDefaultSettings()
   settings.endGroup();
 
   settings.beginGroup(WiimotedevShortcuts::kSettingsGroup);
-  foreach (const QString& key, settings_.allKeys()) {
-    settings_.remove(key);
-  }
+  settings.remove("");
   settings.setValue("enabled", true);
   settings.setValue("device", 1);
   settings.setValue("use_active_action", true);
   settings.setValue("only_when_focused", false);
   settings.setValue("use_notification", true);
   settings.endGroup();
-  settings.sync();
 }
 
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
