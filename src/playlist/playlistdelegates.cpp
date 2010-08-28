@@ -21,6 +21,7 @@
 #include "widgets/trackslider.h"
 
 #include <QDateTime>
+#include <QDir>
 #include <QLineEdit>
 #include <QPainter>
 #include <QToolTip>
@@ -50,8 +51,9 @@ void QueuedItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
   QStyledItemDelegate::paint(painter, option, index);
 
   if (index.column() == indicator_column_) {
-    const int queue_pos = index.data(Playlist::Role_QueuePosition).toInt();
-    if (queue_pos != -1) {
+    bool ok = false;
+    const int queue_pos = index.data(Playlist::Role_QueuePosition).toInt(&ok);
+    if (ok && queue_pos != -1) {
       float opacity = kQueueOpacitySteps - qMin(kQueueOpacitySteps, queue_pos);
       opacity /= kQueueOpacitySteps;
       opacity *= 1.0 - kQueueOpacityLowerBound;
@@ -70,7 +72,7 @@ void QueuedItemDelegate::DrawBox(
     QPainter* painter, const QRect& line_rect, const QFont& font,
     const QString& text, int width) const {
   QFont smaller = font;
-  smaller.setPointSize(smaller.pointSize() - 2);
+  smaller.setPointSize(smaller.pointSize() - 1);
   smaller.setBold(true);
 
   if (width == -1)
@@ -113,9 +115,9 @@ int QueuedItemDelegate::queue_indicator_size(const QModelIndex& index) const {
 }
 
 
-PlaylistDelegateBase::PlaylistDelegateBase(QTreeView* view, const QString& suffix)
-  : QueuedItemDelegate(view),
-    view_(view),
+PlaylistDelegateBase::PlaylistDelegateBase(QObject* parent, const QString& suffix)
+  : QueuedItemDelegate(parent),
+    view_(qobject_cast<QTreeView*>(parent)),
     suffix_(suffix)
 {
 }
@@ -171,6 +173,9 @@ void PlaylistDelegateBase::paint(QPainter* painter, const QStyleOptionViewItem& 
 }
 
 QStyleOptionViewItemV4 PlaylistDelegateBase::Adjusted(const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  if (!view_)
+    return option;
+
   QPoint top_left(-view_->horizontalScrollBar()->value(),
                   -view_->verticalScrollBar()->value());
 
@@ -311,4 +316,11 @@ QWidget* TagCompletionItemDelegate::createEditor(
   new TagCompleter(backend_, column_, editor);
 
   return editor;
+}
+
+QString NativeSeparatorsDelegate::displayText(const QVariant& value, const QLocale&) const {
+  QString str = value.toString();
+  if (str.contains("://"))
+    return str;
+  return QDir::toNativeSeparators(str);
 }

@@ -96,7 +96,9 @@ void FileView::FileHome() {
   ChangeFilePath(QDir::homePath());
 }
 
-void FileView::ChangeFilePath(const QString& new_path) {
+void FileView::ChangeFilePath(const QString& new_path_native) {
+  QString new_path = QDir::fromNativeSeparators(new_path_native);
+
   QFileInfo info(new_path);
   if (!info.exists() || !info.isDir())
     return;
@@ -110,7 +112,7 @@ void FileView::ChangeFilePath(const QString& new_path) {
 
 void FileView::ChangeFilePathWithoutUndo(const QString& new_path) {
   ui_->list->setRootIndex(model_->setRootPath(new_path));
-  ui_->path->setText(new_path);
+  ui_->path->setText(QDir::toNativeSeparators(new_path));
 
   QDir dir(new_path);
   ui_->up->setEnabled(dir.cdUp());

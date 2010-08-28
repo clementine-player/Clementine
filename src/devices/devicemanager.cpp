@@ -46,6 +46,7 @@
 #  include "mtpdevice.h"
 #endif
 
+#include <QDir>
 #include <QIcon>
 #include <QMessageBox>
 #include <QPainter>
@@ -308,10 +309,17 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         return QVariant();
       return QVariant::fromValue<boost::shared_ptr<MusicStorage> >(info.device_);
 
-    case Role_MountPath:
+    case Role_MountPath: {
       if (!info.device_)
         return QVariant();
-      return info.device_->url().path();
+
+      QString ret = info.device_->url().path();
+#     ifdef Q_OS_WIN32
+        if (ret.startsWith('/'))
+          ret.remove(0, 1);
+#     endif
+      return QDir::toNativeSeparators(ret);
+    }
 
     default:
       return QVariant();

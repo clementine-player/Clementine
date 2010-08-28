@@ -19,6 +19,7 @@
 #include "libraryview.h"
 #include "librarywatcher.h"
 #include "ui_libraryconfig.h"
+#include "playlist/playlistdelegates.h"
 #include "ui/iconloader.h"
 
 #include <QFileDialog>
@@ -27,12 +28,14 @@
 
 const char* LibraryConfig::kSettingsGroup = "LibraryConfig";
 
+
 LibraryConfig::LibraryConfig(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_LibraryConfig),
     model_(NULL)
 {
   ui_->setupUi(this);
+  ui_->list->setItemDelegate(new NativeSeparatorsDelegate(this));
 
   // Icons
   ui_->add->setIcon(IconLoader::Load("document-open-folder"));

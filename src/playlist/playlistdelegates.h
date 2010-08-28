@@ -49,7 +49,7 @@ private:
 class PlaylistDelegateBase : public QueuedItemDelegate {
   Q_OBJECT
  public:
-  PlaylistDelegateBase(QTreeView* view, const QString& suffix = QString());
+  PlaylistDelegateBase(QObject* parent, const QString& suffix = QString());
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
   QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -69,31 +69,31 @@ class PlaylistDelegateBase : public QueuedItemDelegate {
 
 class LengthItemDelegate : public PlaylistDelegateBase {
  public:
-  LengthItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  LengthItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
 class SizeItemDelegate : public PlaylistDelegateBase {
  public:
-  SizeItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  SizeItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
 class DateItemDelegate : public PlaylistDelegateBase {
  public:
-  DateItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  DateItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
 class FileTypeItemDelegate : public PlaylistDelegateBase {
  public:
-  FileTypeItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {}
+  FileTypeItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
 class TextItemDelegate : public PlaylistDelegateBase {
  public:
-  TextItemDelegate(QTreeView* view) : PlaylistDelegateBase(view) {};
+  TextItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
       const QModelIndex& index) const;
 };
@@ -110,8 +110,8 @@ class TagCompleter : public QCompleter {
 
 class TagCompletionItemDelegate : public PlaylistDelegateBase {
  public:
-  TagCompletionItemDelegate(QTreeView* view,LibraryBackend* backend, Playlist::Column column) :
-    PlaylistDelegateBase(view), backend_(backend), column_(column) {};
+  TagCompletionItemDelegate(QObject* parent, LibraryBackend* backend, Playlist::Column column) :
+    PlaylistDelegateBase(parent), backend_(backend), column_(column) {};
 
   QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option,
       const QModelIndex& index) const;
@@ -119,6 +119,12 @@ class TagCompletionItemDelegate : public PlaylistDelegateBase {
  private:
   LibraryBackend* backend_;
   Playlist::Column column_;
+};
+
+class NativeSeparatorsDelegate : public PlaylistDelegateBase {
+public:
+  NativeSeparatorsDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
+  QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
 #endif // PLAYLISTDELEGATES_H
