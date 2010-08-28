@@ -21,10 +21,18 @@
 
 class LineEditInterface {
  public:
+  LineEditInterface(QObject* object) : object_(object) {}
+  virtual ~LineEditInterface() {}
   virtual void clear() = 0;
   virtual void setFocus() = 0;
   virtual void setText(const QString&) = 0;
   virtual QString text() const = 0;
+  virtual void SetHint(const QString&) = 0;
+
+  QObject* object() const { return object_; }
+
+ private:
+  QObject* object_;
 };
 
 // Remove in Qt 4.7: QLineEdit has placeholderText

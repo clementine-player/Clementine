@@ -20,7 +20,8 @@
 #include <QPaintEvent>
 
 LineEdit::LineEdit(QWidget* parent)
-  : QLineEdit(parent)
+  : QLineEdit(parent),
+    LineEditInterface(this)
 {
 }
 

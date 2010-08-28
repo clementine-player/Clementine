@@ -20,6 +20,7 @@
 #include "ui_libraryfilterwidget.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
+#include "widgets/maclineedit.h"
 
 #include <QMenu>
 #include <QActionGroup>
@@ -100,6 +101,16 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   library_menu_->addMenu(group_by_menu_);
   library_menu_->addSeparator();
   ui_->options->setMenu(library_menu_);
+
+#ifdef Q_OS_DARWIN
+  delete ui_->filter;
+  MacLineEdit* lineedit = new MacLineEdit(this);
+  ui_->horizontalLayout->insertWidget(1, lineedit);
+  filter_ = lineedit;
+  ui_->clear->setHidden(true);
+#else
+  filter_ = ui_->filter;
+#endif
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {
@@ -111,7 +122,7 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
     disconnect(model_, 0, this, 0);
     disconnect(model_, 0, group_by_dialog_.get(), 0);
     disconnect(group_by_dialog_.get(), 0, model_, 0);
-    disconnect(ui_->filter, 0, model_, 0);
+    disconnect(filter_->object(), 0, model_, 0);
     disconnect(filter_age_mapper_, 0, model_, 0);
   }
 
@@ -124,7 +135,7 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
           SLOT(GroupingChanged(LibraryModel::Grouping)));
   connect(group_by_dialog_.get(), SIGNAL(Accepted(LibraryModel::Grouping)),
           model_, SLOT(SetGroupBy(LibraryModel::Grouping)));
-  connect(ui_->filter, SIGNAL(textChanged(QString)), model_, SLOT(SetFilterText(QString)));
+  connect(filter_->object(), SIGNAL(textChanged(QString)), model_, SLOT(SetFilterText(QString)));
   connect(filter_age_mapper_, SIGNAL(mapped(int)), model_, SLOT(SetFilterAge(int)));
 
   // Load settings
@@ -172,12 +183,12 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
 }
 
 void LibraryFilterWidget::ClearFilter() {
-  ui_->filter->clear();
-  ui_->filter->setFocus();
+  filter_->clear();
+  filter_->setFocus();
 }
 
 void LibraryFilterWidget::SetFilterHint(const QString& hint) {
-  ui_->filter->SetHint(hint);
+  filter_->SetHint(hint);
 }
 
 void LibraryFilterWidget::SetAgeFilterEnabled(bool enabled) {

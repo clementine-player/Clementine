@@ -74,7 +74,8 @@ void SearchTargetWrapper::SetHint(const QString& hint) {
 
 
 MacLineEdit::MacLineEdit(QWidget* parent)
-    : QMacCocoaViewContainer(0, parent) {
+    : QMacCocoaViewContainer(0, parent),
+      LineEditInterface(this) {
   NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
   NSSearchField* search = [[NSSearchField alloc] init];

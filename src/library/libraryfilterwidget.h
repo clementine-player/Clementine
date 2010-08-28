@@ -24,6 +24,7 @@
 #include "librarymodel.h"
 
 class GroupByDialog;
+class LineEditInterface;
 class SettingsDialog;
 class Ui_LibraryFilterWidget;
 
@@ -65,6 +66,8 @@ class LibraryFilterWidget : public QWidget {
   QSignalMapper* filter_age_mapper_;
 
   QString settings_group_;
+
+  LineEditInterface* filter_;
 };
 
 #endif // LIBRARYFILTERWIDGET_H

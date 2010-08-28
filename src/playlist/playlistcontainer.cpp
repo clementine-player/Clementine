@@ -86,7 +86,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   delete ui_->filter;
   MacLineEdit* filter = new MacLineEdit(ui_->toolbar);
   filter->setObjectName("filter");
-  ui_->horizontalLayout->addWidget(ui_->filter);
+  ui_->horizontalLayout->addWidget(filter);
   connect(filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
   filter->SetHint(tr("Playlist search"));
   filter_ = filter;
