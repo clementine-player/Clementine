@@ -206,6 +206,9 @@ int main(int argc, char *argv[]) {
   MPRIS mpris;
 #endif
 
+  // Seed the random number generator
+  srand(time(NULL));
+
   // Window
   MainWindow w(&network, options.engine());
 
