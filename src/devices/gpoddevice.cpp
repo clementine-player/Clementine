@@ -220,3 +220,9 @@ void GPodDevice::FinishDelete(bool success) {
   ConnectedDevice::FinishDelete(success);
 }
 
+QList<Song::FileType> GPodDevice::SupportedFiletypes() {
+  QList<Song::FileType> ret;
+  ret << Song::Type_Mp4;
+  ret << Song::Type_Mpeg;
+  return ret;
+}
