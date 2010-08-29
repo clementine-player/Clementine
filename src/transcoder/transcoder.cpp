@@ -206,6 +206,23 @@ TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
   }
 }
 
+Song::FileType Transcoder::PickBestFormat(QList<Song::FileType> supported) {
+  if (supported.isEmpty())
+    return Song::Type_Unknown;
+
+  QList<Song::FileType> best_formats;
+  best_formats << Song::Type_Mpeg;
+  best_formats << Song::Type_OggVorbis;
+  best_formats << Song::Type_Asf;
+
+  foreach (Song::FileType type, best_formats) {
+    if (supported.isEmpty() || supported.contains(type))
+      return type;
+  }
+
+  return supported[0];
+}
+
 void Transcoder::AddJob(const QString& input,
                         const TranscoderPreset& preset,
                         const QString& output) {

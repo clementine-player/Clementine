@@ -94,3 +94,15 @@ void ConnectedDevice::FinishCopy(bool) {
 void ConnectedDevice::FinishDelete(bool) {
   lister_->UpdateDeviceFreeSpace(unique_id_);
 }
+
+MusicStorage::TranscodeMode ConnectedDevice::GetTranscodeMode() const {
+  int index = manager_->FindDeviceById(unique_id_);
+  return MusicStorage::TranscodeMode(
+      manager_->index(index).data(DeviceManager::Role_TranscodeMode).toInt());
+}
+
+Song::FileType ConnectedDevice::GetTranscodeFormat() const {
+  int index = manager_->FindDeviceById(unique_id_);
+  return Song::FileType(
+      manager_->index(index).data(DeviceManager::Role_TranscodeFormat).toInt());
+}

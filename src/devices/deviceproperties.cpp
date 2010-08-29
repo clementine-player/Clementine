@@ -187,18 +187,18 @@ void DeviceProperties::UpdateFormats() {
       manager_->GetConnectedDevice(index_.row());
 
   // Transcode mode
-  DeviceDatabaseBackend::TranscodeMode mode = DeviceDatabaseBackend::TranscodeMode(
+  MusicStorage::TranscodeMode mode = MusicStorage::TranscodeMode(
       index_.data(DeviceManager::Role_TranscodeMode).toInt());
   switch (mode) {
-    case DeviceDatabaseBackend::Transcode_Always:
+    case MusicStorage::Transcode_Always:
       ui_->transcode_all->setChecked(true);
       break;
 
-    case DeviceDatabaseBackend::Transcode_Never:
+    case MusicStorage::Transcode_Never:
       ui_->transcode_off->setChecked(true);
       break;
 
-    case DeviceDatabaseBackend::Transcode_Unsupported:
+    case MusicStorage::Transcode_Unsupported:
     default:
       ui_->transcode_unsupported->setChecked(true);
       break;
@@ -238,13 +238,13 @@ void DeviceProperties::accept() {
   QDialog::accept();
 
   // Transcode mode
-  DeviceDatabaseBackend::TranscodeMode mode = DeviceDatabaseBackend::Transcode_Unsupported;
+  MusicStorage::TranscodeMode mode = MusicStorage::Transcode_Unsupported;
   if (ui_->transcode_all->isChecked())
-    mode = DeviceDatabaseBackend::Transcode_Always;
+    mode = MusicStorage::Transcode_Always;
   else if (ui_->transcode_off->isChecked())
-    mode = DeviceDatabaseBackend::Transcode_Never;
+    mode = MusicStorage::Transcode_Never;
   else if (ui_->transcode_unsupported->isChecked())
-    mode = DeviceDatabaseBackend::Transcode_Unsupported;
+    mode = MusicStorage::Transcode_Unsupported;
 
   // Transcode format
   Song::FileType format = Song::FileType(ui_->transcode_format->itemData(
@@ -288,23 +288,7 @@ void DeviceProperties::UpdateFormatsFinished() {
   if (preset.type_ == Song::Type_Unknown) {
     // The user hasn't chosen a format for this device yet, so work our way down
     // a list of some preferred formats, picking the first one that is supported
-    QList<Song::FileType> best_formats;
-    best_formats << Song::Type_Mpeg;
-    best_formats << Song::Type_OggVorbis;
-    best_formats << Song::Type_Asf;
-
-    foreach (Song::FileType type, best_formats) {
-      if (list.isEmpty() || list.contains(type)) {
-        preset = Transcoder::PresetForFileType(type);
-        break;
-      }
-    }
-
-    if (preset.type_ == Song::Type_Unknown) {
-      // Still haven't found a good format - pick the first one that the
-      // device advertises.
-      preset = Transcoder::PresetForFileType(list[0]);
-    }
+    preset = Transcoder::PresetForFileType(Transcoder::PickBestFormat(list));
   }
   ui_->transcode_format->setCurrentIndex(ui_->transcode_format->findText(preset.name_));
 

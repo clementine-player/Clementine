@@ -18,10 +18,12 @@
 #define ORGANISE_H
 
 #include <QObject>
+#include <QTemporaryFile>
 
 #include <boost/shared_ptr.hpp>
 
 #include "organiseformat.h"
+#include "transcoder/transcoder.h"
 
 class MusicStorage;
 class TaskManager;
@@ -44,20 +46,41 @@ signals:
 
 private slots:
   void ProcessSomeFiles();
-  void SetSongProgress(float progress);
-  void UpdateProgress();
+  void FileTranscoded(const QString& filename, bool success);
 
 private:
+  void SetSongProgress(float progress);
+  void UpdateProgress();
+  Song::FileType CheckTranscode(Song::FileType original_type) const;
+
+private:
+  struct Task {
+    Task(const QString& filename = QString()) : filename_(filename) {}
+
+    QString filename_;
+    QString transcoded_filename_;
+    QString new_extension_;
+    Song::FileType new_filetype_;
+  };
+
   QThread* thread_;
   QThread* original_thread_;
   TaskManager* task_manager_;
+  Transcoder* transcoder_;
   boost::shared_ptr<MusicStorage> destination_;
+  QList<Song::FileType> supported_filetypes_;
 
   const OrganiseFormat format_;
   const bool copy_;
   const bool overwrite_;
-  QStringList files_;
   const bool eject_after_;
+  int task_count_;
+
+  QTemporaryFile transcode_temp_name_;
+  int transcode_suffix_;
+
+  QList<Task> tasks_pending_;
+  QMap<QString, Task> tasks_transcoding_;
 
   bool started_;
 

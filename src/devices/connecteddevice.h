@@ -44,7 +44,8 @@ public:
 
   virtual void Init() = 0;
 
-  virtual QList<Song::FileType> SupportedFiletypes() { return QList<Song::FileType>(); }
+  virtual TranscodeMode GetTranscodeMode() const;
+  virtual Song::FileType GetTranscodeFormat() const;
 
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }

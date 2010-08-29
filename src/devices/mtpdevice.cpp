@@ -84,6 +84,9 @@ static int ProgressCallback(uint64_t const sent, uint64_t const total,
 }
 
 bool MtpDevice::CopyToStorage(const CopyJob& job) {
+  if (!connection_->is_valid())
+    return false;
+
   // Convert metadata
   LIBMTP_track_t track;
   job.metadata_.ToMTP(&track);
@@ -165,6 +168,11 @@ QList<Song::FileType> MtpDevice::SupportedFiletypes() {
 
   QMutexLocker l(&db_busy_);
   MtpConnection connection(url_.host());
+  if (!connection.is_valid()) {
+    qWarning() << "Error connecting to MTP device, couldn't get list of supported filetypes";
+    return ret;
+  }
+
   if (LIBMTP_Get_Supported_Filetypes(connection.device(), &list, &length)
       || !list || !length)
     return ret;

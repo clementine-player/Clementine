@@ -55,6 +55,7 @@ class Transcoder : public QObject {
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
   static QList<TranscoderPreset> GetAllPresets();
+  static Song::FileType PickBestFormat(QList<Song::FileType> supported);
 
   int max_threads() const { return max_threads_; }
 

@@ -52,7 +52,7 @@ DeviceDatabaseBackend::DeviceList DeviceDatabaseBackend::GetAllDevices() {
     dev.friendly_name_ = q.value(2).toString();
     dev.size_ = q.value(3).toLongLong();
     dev.icon_name_ = q.value(4).toString();
-    dev.transcode_mode_ = TranscodeMode(q.value(5).toInt());
+    dev.transcode_mode_ = MusicStorage::TranscodeMode(q.value(5).toInt());
     dev.transcode_format_ = Song::FileType(q.value(6).toInt());
     ret << dev;
   }
@@ -118,7 +118,7 @@ void DeviceDatabaseBackend::RemoveDevice(int id) {
 
 void DeviceDatabaseBackend::SetDeviceOptions(int id,
     const QString &friendly_name, const QString &icon_name,
-    TranscodeMode mode, Song::FileType format) {
+    MusicStorage::TranscodeMode mode, Song::FileType format) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 

@@ -60,7 +60,7 @@ const int DeviceManager::kDeviceIconOverlaySize = 16;
 
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
-    transcode_mode_(DeviceDatabaseBackend::Transcode_Unsupported),
+    transcode_mode_(MusicStorage::Transcode_Unsupported),
     transcode_format_(Song::Type_Unknown),
     task_percentage_(-1)
 {
@@ -618,7 +618,7 @@ void DeviceManager::Forget(int row) {
 
 void DeviceManager::SetDeviceOptions(int row,
     const QString& friendly_name, const QString& icon_name,
-    DeviceDatabaseBackend::TranscodeMode mode, Song::FileType format) {
+    MusicStorage::TranscodeMode mode, Song::FileType format) {
   DeviceInfo& info = devices_[row];
   info.friendly_name_ = friendly_name;
   info.LoadIcon(QVariantList() << icon_name, friendly_name);
@@ -676,6 +676,8 @@ void DeviceManager::TasksChanged() {
     DeviceInfo& info = devices_[index.row()];
     info.task_percentage_ = -1;
     emit dataChanged(index, index);
+
+    active_tasks_.remove(active_tasks_.key(index));
   }
 }
 

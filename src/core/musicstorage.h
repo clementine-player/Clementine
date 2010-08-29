@@ -36,6 +36,13 @@ public:
     Role_FreeSpace,
   };
 
+  // Values are saved in the database - don't change
+  enum TranscodeMode {
+    Transcode_Always = 1,
+    Transcode_Never = 2,
+    Transcode_Unsupported = 3,
+  };
+
   typedef boost::function<void (float progress)> ProgressFunction;
 
   struct CopyJob {
@@ -52,6 +59,10 @@ public:
   };
 
   virtual QString LocalPath() const { return QString(); }
+
+  virtual TranscodeMode GetTranscodeMode() const { return Transcode_Never; }
+  virtual Song::FileType GetTranscodeFormat() const { return Song::Type_Unknown; }
+  virtual QList<Song::FileType> SupportedFiletypes() { return QList<Song::FileType>(); }
 
   virtual void StartCopy() {}
   virtual bool CopyToStorage(const CopyJob& job) = 0;
