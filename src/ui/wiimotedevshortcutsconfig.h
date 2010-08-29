@@ -22,6 +22,7 @@
 
 class QTreeWidgetItem;
 class Ui_WiimotedevShortcutsConfig;
+class WiimotedevShortcutGrabber;
 
 class WiimotedevShortcutsConfig : public QWidget {
   Q_OBJECT
@@ -36,22 +37,23 @@ public:
   };
 
   QList <struct Shortcut> actions_;
-
-private:
-  QSettings settings_;
-  QString current_id_;
-
-  QTreeWidgetItem* selected_item_;
-
   QMap <quint64, QString> text_buttons_;
   QMap <quint32, QString> text_actions_;
 
   QString GetReadableWiiremoteSequence(quint64 value);
 
+private:
+  WiimotedevShortcutGrabber *grabber;
+  QSettings settings_;
+  QString current_id_;
+
+  QTreeWidgetItem* selected_item_;
+
 private slots:
   void LoadSettings();
   void DefaultSettings();
   void DeleteAction();
+  void AddAction();
 
   void WiimotedevEnabledChecked(bool checked);
   void ItemClicked(QTreeWidgetItem*);

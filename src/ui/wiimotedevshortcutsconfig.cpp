@@ -16,6 +16,7 @@
 
 #include "ui/wiimotedevshortcutsconfig.h"
 #include "ui_wiimotedevshortcutsconfig.h"
+#include "ui/wiimotedevshortcutgrabber.h"
 
 #include "wiimotedev/shortcuts.h"
 #include "wiimotedev/consts.h"
@@ -27,68 +28,68 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
   ui_->setupUi(this);
   ui_->list->header()->setResizeMode(QHeaderView::ResizeToContents);
 
-  text_buttons_.insert(WIIMOTE_BTN_1, "wiiremote.1");
-  text_buttons_.insert(WIIMOTE_BTN_2, "wiiremote.2");
-  text_buttons_.insert(WIIMOTE_BTN_A, "wiiremote.a");
-  text_buttons_.insert(WIIMOTE_BTN_B, "wiiremote.b");
-  text_buttons_.insert(WIIMOTE_BTN_PLUS, "wiiremote.plus");
-  text_buttons_.insert(WIIMOTE_BTN_MINUS, "wiiremote.minus");
-  text_buttons_.insert(WIIMOTE_BTN_HOME, "wiiremote.home");
-  text_buttons_.insert(WIIMOTE_BTN_UP, "wiiremote.up");
-  text_buttons_.insert(WIIMOTE_BTN_DOWN, "wiiremote.down");
-  text_buttons_.insert(WIIMOTE_BTN_LEFT, "wiiremote.left");
-  text_buttons_.insert(WIIMOTE_BTN_RIGHT, "wiiremote.right");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_UP, "wiiremote.shift.up");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_DOWN, "wiiremote.shift.down");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_LEFT, "wiiremote.shift.left");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_RIGHT, "wiiremote.shift.right");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_FORWARD, "wiiremote.shift.forward");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_BACKWARD, "wiiremote.shift.backward");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_FRONT, "wiiremote.tilt.front");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_BACK, "wiiremote.tilt.back");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_LEFT, "wiiremote.tilt.left");
-  text_buttons_.insert(WIIMOTE_BTN_TILT_RIGHT, "wiiremote.tilt.right");
-  text_buttons_.insert(NUNCHUK_BTN_Z, "nunchuk.z");
-  text_buttons_.insert(NUNCHUK_BTN_C, "nunchuk.c");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_UP, "nunchuk.stick.up");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_DOWN, "nunchuk.stick.down");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_LEFT, "nunchuk.stick.left");
-  text_buttons_.insert(NUNCHUK_BTN_STICK_RIGHT, "nunchuk.stick.right");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_UP, "nunchuk.shift.up");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_DOWN, "nunchuk.shift.down");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_LEFT, "nunchuk.shift.left");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_RIGHT, "nunchuk.shift.right");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_FORWARD, "nunchuk.shift.forward");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_BACKWARD, "nunchuk.shift.backward");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_FRONT, "nunchuk.tilt.front");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_BACK, "nunchuk.tilt.back");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_LEFT, "nunchuk.tilt.left");
-  text_buttons_.insert(NUNCHUK_BTN_TILT_RIGHT, "nunchuk.tilt.right");
-  text_buttons_.insert(CLASSIC_BTN_X, "classic.x");
-  text_buttons_.insert(CLASSIC_BTN_Y, "classic.y");
-  text_buttons_.insert(CLASSIC_BTN_A, "classic.a");
-  text_buttons_.insert(CLASSIC_BTN_B, "classic.b");
-  text_buttons_.insert(CLASSIC_BTN_L, "classic.l");
-  text_buttons_.insert(CLASSIC_BTN_R, "classic.r");
-  text_buttons_.insert(CLASSIC_BTN_ZL, "classic.zl");
-  text_buttons_.insert(CLASSIC_BTN_ZR, "classic.zr");
-  text_buttons_.insert(CLASSIC_BTN_MINUS, "classic.minus");
-  text_buttons_.insert(CLASSIC_BTN_PLUS, "classic.plus");
-  text_buttons_.insert(CLASSIC_BTN_HOME, "classic.home");
-  text_buttons_.insert(CLASSIC_BTN_UP, "classic.up");
-  text_buttons_.insert(CLASSIC_BTN_DOWN, "classic.down");
-  text_buttons_.insert(CLASSIC_BTN_LEFT, "classic.left");
-  text_buttons_.insert(CLASSIC_BTN_RIGHT, "classic.right");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_UP, "classic.lstick.up");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_DOWN, "classic.lstick.down");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_LEFT, "classic.lstick.left");
-  text_buttons_.insert(CLASSIC_BTN_LSTICK_RIGHT, "classic.lstick.right");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_UP, "classic.rstick.up");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_DOWN, "classic.rstick.down");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_LEFT, "classic.rstick.left");
-  text_buttons_.insert(CLASSIC_BTN_RSTICK_RIGHT, "classic.rstick.right");
-  text_buttons_.insert(WIIMOTE_BTN_SHIFT_SHAKE, "wiiremote.shift.shake");
-  text_buttons_.insert(NUNCHUK_BTN_SHIFT_SHAKE, "nunchuk.shift.shake");
+  text_buttons_.insert(WIIMOTE_BTN_1, "Wiiremote 1");
+  text_buttons_.insert(WIIMOTE_BTN_2, "Wiiremote 2");
+  text_buttons_.insert(WIIMOTE_BTN_A, "Wiiremote A");
+  text_buttons_.insert(WIIMOTE_BTN_B, "Wiiremote B");
+  text_buttons_.insert(WIIMOTE_BTN_PLUS, "Wiiremote Plus");
+  text_buttons_.insert(WIIMOTE_BTN_MINUS, "Wiiremote Minus");
+  text_buttons_.insert(WIIMOTE_BTN_HOME, "Wiiremote Home");
+  text_buttons_.insert(WIIMOTE_BTN_UP, "Wiiremote Up");
+  text_buttons_.insert(WIIMOTE_BTN_DOWN, "Wiiremote Down");
+  text_buttons_.insert(WIIMOTE_BTN_LEFT, "Wiiremote Left");
+  text_buttons_.insert(WIIMOTE_BTN_RIGHT, "Wiiremote Right");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_UP, "Wiiremote Shift Up");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_DOWN, "Wiiremote Shift Down");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_LEFT, "Wiiremote Shift Left");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_RIGHT, "Wiiremote Shift Right");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_FORWARD, "Wiiremote Shift Forward");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_BACKWARD, "Wiiremote Shift Backward");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_FRONT, "Wiiremote Tilt Front");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_BACK, "Wiiremote Tilt Back");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_LEFT, "Wiiremote Tilt Left");
+  text_buttons_.insert(WIIMOTE_BTN_TILT_RIGHT, "Wiiremote Tilt Right");
+  text_buttons_.insert(NUNCHUK_BTN_Z, "Nunchuk Z");
+  text_buttons_.insert(NUNCHUK_BTN_C, "Nunchuk B");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_UP, "Nunchuk Stick Up");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_DOWN, "Nunchuk Stick Down");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_LEFT, "Nunchuk Stick Left");
+  text_buttons_.insert(NUNCHUK_BTN_STICK_RIGHT, "Nunchuk Stick Right");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_UP, "Nunchuk Shift Up");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_DOWN, "Nunchuk Shift Down");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_LEFT, "Nunchuk Shift Left");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_RIGHT, "Nunchuk Shift Right");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_FORWARD, "Nunchuk Shift Forward");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_BACKWARD, "Nunchuk Shift Backward");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_FRONT, "Nunchuk Tilt Front");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_BACK, "Nunchuk Tilt Back");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_LEFT, "Nunchuk Tilt Left");
+  text_buttons_.insert(NUNCHUK_BTN_TILT_RIGHT, "Nunchuk Tilt Right");
+  text_buttons_.insert(CLASSIC_BTN_X, "Classic X");
+  text_buttons_.insert(CLASSIC_BTN_Y, "Classic Y");
+  text_buttons_.insert(CLASSIC_BTN_A, "Classic A");
+  text_buttons_.insert(CLASSIC_BTN_B, "Classic B");
+  text_buttons_.insert(CLASSIC_BTN_L, "Classic L");
+  text_buttons_.insert(CLASSIC_BTN_R, "Classic R");
+  text_buttons_.insert(CLASSIC_BTN_ZL, "Classic ZL");
+  text_buttons_.insert(CLASSIC_BTN_ZR, "Classic ZR");
+  text_buttons_.insert(CLASSIC_BTN_MINUS, "Classic Minus");
+  text_buttons_.insert(CLASSIC_BTN_PLUS, "Classic Plus");
+  text_buttons_.insert(CLASSIC_BTN_HOME, "Classic Home");
+  text_buttons_.insert(CLASSIC_BTN_UP, "Classic Up");
+  text_buttons_.insert(CLASSIC_BTN_DOWN, "Classic Down");
+  text_buttons_.insert(CLASSIC_BTN_LEFT, "Classic Left");
+  text_buttons_.insert(CLASSIC_BTN_RIGHT, "Classic Right");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_UP, "Classic Left-Stick Up");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_DOWN, "Classic Left-Stick Down");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_LEFT, "Classic Left-Stick Left");
+  text_buttons_.insert(CLASSIC_BTN_LSTICK_RIGHT, "Classic Left-Stick Right");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_UP, "Classic Right-Stick Up");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_DOWN, "Classic Right-Stick Down");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_LEFT, "Classic Right-Stick Left");
+  text_buttons_.insert(CLASSIC_BTN_RSTICK_RIGHT, "Classic Right-Stick Right");
+  text_buttons_.insert(WIIMOTE_BTN_SHIFT_SHAKE, "Wiiremote Shift Shake");
+  text_buttons_.insert(NUNCHUK_BTN_SHIFT_SHAKE, "Nunchuk Shift Shake");
 
   text_actions_.insert(WiimotedevShortcuts::PlayerPlay, tr("Play"));
   text_actions_.insert(WiimotedevShortcuts::PlayerStop, tr("Stop"));
@@ -117,6 +118,7 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
 
   connect(ui_->wiimotedev_enable, SIGNAL(clicked(bool)), this, SLOT(WiimotedevEnabledChecked(bool)));
   connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(ItemClicked(QTreeWidgetItem*)));
+  connect(ui_->wiimotedev_add_action, SIGNAL(clicked()), this, SLOT(AddAction()));
   connect(ui_->wiimotedev_delete_action, SIGNAL(clicked()), this, SLOT(DeleteAction()));
   connect(ui_->wiimotedev_reload, SIGNAL(clicked()), this , SLOT(DefaultSettings()));
 }
@@ -181,12 +183,22 @@ QString WiimotedevShortcutsConfig::GetReadableWiiremoteSequence(quint64 value) {
       list << text.value();
   }
 
+
   QString output;
-  for (int i = 0; i < (list.count() - 1); ++i)
-    output += list.at(i) + " + ";
-  output += list.last();
+
+  if (!list.isEmpty()) {
+    for (int i = 0; i < (list.count() - 1); ++i)
+      output += list.at(i) + " + ";
+    output += list.last();
+  }
 
   return output;
+}
+
+void WiimotedevShortcutsConfig::AddAction() {
+  grabber = new WiimotedevShortcutGrabber(this, this);
+  grabber->exec();
+  delete grabber;
 }
 
 void WiimotedevShortcutsConfig::DeleteAction() {
