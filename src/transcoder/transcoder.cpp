@@ -166,12 +166,39 @@ Transcoder::Transcoder(QObject* parent)
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
 
-  presets_ << TranscoderPreset("Ogg Vorbis", "ogg",  "audio/x-vorbis", "application/ogg");
-  presets_ << TranscoderPreset("Ogg Speex",  "spx",  "audio/x-speex", "application/ogg");
-  presets_ << TranscoderPreset("FLAC",       "flac", "audio/x-flac");
-  presets_ << TranscoderPreset("MP3",        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
-  presets_ << TranscoderPreset("M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
+  presets_ << PresetForFileType(Song::Type_Flac);
+  presets_ << PresetForFileType(Song::Type_Mp4);
+  presets_ << PresetForFileType(Song::Type_Mpeg);
+  presets_ << PresetForFileType(Song::Type_OggVorbis);
+  presets_ << PresetForFileType(Song::Type_OggFlac);
+  presets_ << PresetForFileType(Song::Type_OggSpeex);
+  presets_ << PresetForFileType(Song::Type_Asf);
+  presets_ << PresetForFileType(Song::Type_Wav);
   presets_ << TranscoderPreset("3GP AAC",    "3gp",  "audio/mpeg, mpegversion=(int)4", "application/x-3gp");
+}
+
+TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
+  switch (type) {
+    case Song::Type_Flac:
+      return TranscoderPreset("FLAC",       "flac", "audio/x-flac");
+    case Song::Type_Mp4:
+      return TranscoderPreset("M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
+    case Song::Type_Mpeg:
+      return TranscoderPreset("MP3",        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
+    case Song::Type_OggVorbis:
+      return TranscoderPreset("Ogg Vorbis", "ogg",  "audio/x-vorbis", "application/ogg");
+    case Song::Type_OggFlac:
+      return TranscoderPreset("Ogg Flac",   "ogg",  "audio/x-flac",   "application/ogg");
+    case Song::Type_OggSpeex:
+      return TranscoderPreset("Ogg Speex",  "spx",  "audio/x-speex",  "application/ogg");
+    case Song::Type_Asf:
+      return TranscoderPreset("Windows Media audio", "wma", "audio/x-wma", "video/x-ms-asf");
+    case Song::Type_Wav:
+      return TranscoderPreset("Wav",        "wav",  QString(),        "audio/x-wav");
+    default:
+      qWarning() << "Unsupported format in Transcoder::PresetForFileType:" << type;
+      return TranscoderPreset();
+  }
 }
 
 void Transcoder::AddJob(const QString& input,
@@ -315,7 +342,7 @@ bool Transcoder::StartJob(const Job &job) {
   if (!src || !decode || !convert || !sink)
     return false;
 
-  if (!codec) {
+  if (!codec && !job.preset.codec_mimetype_.isEmpty()) {
     LogLine(tr("Couldn't find an encoder for %1, check you have the correct GStreamer plugins installed"
                ).arg(job.preset.codec_mimetype_));
     return false;
@@ -329,10 +356,12 @@ bool Transcoder::StartJob(const Job &job) {
 
   // Join them together
   gst_element_link(src, decode);
-  if (muxer)
+  if (codec && muxer)
     gst_element_link_many(convert, codec, muxer, sink, NULL);
-  else
+  else if (codec)
     gst_element_link_many(convert, codec, sink, NULL);
+  else if (muxer)
+    gst_element_link_many(convert, muxer, sink, NULL);
 
   // Set properties
   g_object_set(src, "location", job.input.toLocal8Bit().constData(), NULL);

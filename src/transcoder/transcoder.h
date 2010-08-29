@@ -27,6 +27,8 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
 
+#include "core/song.h"
+
 
 struct TranscoderPreset {
   TranscoderPreset() {}
@@ -48,6 +50,8 @@ class Transcoder : public QObject {
 
  public:
   Transcoder(QObject* parent = 0);
+
+  static TranscoderPreset PresetForFileType(Song::FileType type);
 
   QList<TranscoderPreset> presets() const { return presets_; }
   int max_threads() const { return max_threads_; }
