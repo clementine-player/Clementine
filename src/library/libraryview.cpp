@@ -87,8 +87,7 @@ LibraryView::LibraryView(QWidget* parent)
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
-    context_menu_(NULL),
-    is_in_keyboard_search_(false)
+    context_menu_(NULL)
 {
   setItemDelegate(new LibraryItemDelegate(this));
   setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -244,17 +243,8 @@ void LibraryView::AddToPlaylist() {
   emit AddToPlaylist(selectedIndexes());
 }
 
-void LibraryView::keyboardSearch(const QString &search) {
-  is_in_keyboard_search_ = true;
-  QTreeView::keyboardSearch(search);
-  is_in_keyboard_search_ = false;
-}
-
-void LibraryView::scrollTo(const QModelIndex &index, ScrollHint hint) {
-  if (is_in_keyboard_search_)
-    QTreeView::scrollTo(index, QAbstractItemView::PositionAtTop);
-  else
-    QTreeView::scrollTo(index, hint);
+void LibraryView::keyboardSearch(const QString& search) {
+  emit FocusFilterBox(search);
 }
 
 void LibraryView::GetSelectedFileInfo(
@@ -350,4 +340,32 @@ void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
   // It deletes itself when the user closes it
+}
+
+void LibraryView::UpAndFocus() {
+  setCurrentIndex(moveCursor(QAbstractItemView::MoveUp, Qt::NoModifier));
+  setFocus();
+}
+
+void LibraryView::DownAndFocus() {
+  setCurrentIndex(moveCursor(QAbstractItemView::MoveDown, Qt::NoModifier));
+  setFocus();
+}
+
+void LibraryView::FilterReturnPressed() {
+  if (!currentIndex().isValid()) {
+    // Pick the first thing that isn't a divider
+    for (int row=0 ; row<model()->rowCount() ; ++row) {
+      QModelIndex idx(model()->index(row, 0));
+      if (idx.data(LibraryModel::Role_Type) != LibraryItem::Type_Divider) {
+        setCurrentIndex(idx);
+        break;
+      }
+    }
+  }
+
+  if (!currentIndex().isValid())
+    return;
+
+  emit doubleClicked(currentIndex());
 }

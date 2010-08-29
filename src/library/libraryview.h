@@ -50,16 +50,20 @@ class LibraryView : public AutoExpandingTreeView {
 
   // QTreeView
   void keyboardSearch(const QString &search);
-  void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible);
 
  public slots:
   void TotalSongCountUpdated(int count);
   void ReloadSettings();
 
+  void UpAndFocus();
+  void DownAndFocus();
+  void FilterReturnPressed();
+
  signals:
   void ShowConfigDialog();
   void Load(const QModelIndexList& indexes);
   void AddToPlaylist(const QModelIndexList& indexes);
+  void FocusFilterBox(const QString& text);
 
  protected:
   // QWidget
@@ -104,8 +108,6 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* no_show_in_various_;
 
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-
-  bool is_in_keyboard_search_;
 };
 
 #endif // LIBRARYVIEW_H

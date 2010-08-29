@@ -47,6 +47,17 @@ class LibraryFilterWidget : public QWidget {
   void SetSettingsGroup(const QString& group) { settings_group_ = group; }
   void SetLibraryModel(LibraryModel* model);
 
+ public slots:
+  void AppendAndFocus(const QString& text);
+
+ signals:
+  void UpPressed();
+  void DownPressed();
+  void ReturnPressed();
+
+ protected:
+  void keyReleaseEvent(QKeyEvent* e);
+
  private slots:
   void GroupingChanged(const LibraryModel::Grouping& g);
   void GroupByClicked(QAction* action);

@@ -22,6 +22,7 @@
 #include "ui/settingsdialog.h"
 #include "widgets/maclineedit.h"
 
+#include <QKeyEvent>
 #include <QMenu>
 #include <QActionGroup>
 #include <QSignalMapper>
@@ -34,6 +35,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
     group_by_dialog_(new GroupByDialog)
 {
   ui_->setupUi(this);
+  connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
 
   // Icons
   ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
@@ -201,4 +203,25 @@ void LibraryFilterWidget::SetGroupByEnabled(bool enabled) {
 
 void LibraryFilterWidget::AddMenuAction(QAction* action) {
   library_menu_->addAction(action);
+}
+
+void LibraryFilterWidget::AppendAndFocus(const QString& text) {
+  ui_->filter->setText(ui_->filter->text() + text);
+  ui_->filter->setFocus();
+}
+
+void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {
+  switch (e->key()) {
+    case Qt::Key_Up:
+      emit UpPressed();
+      e->accept();
+      break;
+
+    case Qt::Key_Down:
+      emit DownPressed();
+      e->accept();
+      break;
+  }
+
+  QWidget::keyReleaseEvent(e);
 }
