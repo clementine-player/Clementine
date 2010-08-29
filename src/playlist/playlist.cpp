@@ -772,19 +772,20 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
   shared_ptr<PlaylistItem> a = order == Qt::AscendingOrder ? _a : _b;
   shared_ptr<PlaylistItem> b = order == Qt::AscendingOrder ? _b : _a;
 
-#define cmp(field) return a->Metadata().field() < b->Metadata().field()
+#define cmp(field)    return a->Metadata().field() < b->Metadata().field()
+#define strcmp(field) return QString::localeAwareCompare(a->Metadata().field(), b->Metadata().field()) < 0;
 
   switch (column) {
-    case Column_Title:        cmp(title);
-    case Column_Artist:       cmp(artist);
-    case Column_Album:        cmp(album);
+    case Column_Title:        strcmp(title);
+    case Column_Artist:       strcmp(artist);
+    case Column_Album:        strcmp(album);
     case Column_Length:       cmp(length);
     case Column_Track:        cmp(track);
     case Column_Disc:         cmp(disc);
     case Column_Year:         cmp(year);
-    case Column_Genre:        cmp(genre);
-    case Column_AlbumArtist:  cmp(albumartist);
-    case Column_Composer:     cmp(composer);
+    case Column_Genre:        strcmp(genre);
+    case Column_AlbumArtist:  strcmp(albumartist);
+    case Column_Composer:     strcmp(composer);
 
     case Column_BPM:          cmp(bpm);
     case Column_Bitrate:      cmp(bitrate);
@@ -798,6 +799,7 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
   }
 
 #undef cmp
+#undef strcmp
 
   return false;
 }
