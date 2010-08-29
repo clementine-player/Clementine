@@ -27,7 +27,7 @@ class WiimotedevShortcutGrabber : public QDialog {
   Q_OBJECT
 
  public:
-  WiimotedevShortcutGrabber(WiimotedevShortcutsConfig* config = 0, QWidget* parent = 0);
+  WiimotedevShortcutGrabber(QWidget* parent = 0);
   ~WiimotedevShortcutGrabber();
 
  private slots:
@@ -35,7 +35,7 @@ class WiimotedevShortcutGrabber : public QDialog {
 
  private:
   Ui_WiimotedevShortcutGrabber* ui_;
-  WiimotedevShortcutsConfig* config;
+  WiimotedevShortcutsConfig* config_;
   DBusDeviceEventsInterface* wiimotedev_iface_;
   quint32 wiimotedev_device_;
   quint64 wiimotedev_buttons_;

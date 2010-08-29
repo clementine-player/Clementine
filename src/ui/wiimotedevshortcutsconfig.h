@@ -43,7 +43,6 @@ public:
   QString GetReadableWiiremoteSequence(quint64 value);
 
 private:
-  WiimotedevShortcutGrabber *grabber;
   QSettings settings_;
   QString current_id_;
 

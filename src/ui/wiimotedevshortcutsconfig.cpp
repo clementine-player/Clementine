@@ -196,9 +196,8 @@ QString WiimotedevShortcutsConfig::GetReadableWiiremoteSequence(quint64 value) {
 }
 
 void WiimotedevShortcutsConfig::AddAction() {
-  grabber = new WiimotedevShortcutGrabber(this, this);
-  grabber->exec();
-  delete grabber;
+  WiimotedevShortcutGrabber grabber(this);
+  grabber.exec();
 }
 
 void WiimotedevShortcutsConfig::DeleteAction() {

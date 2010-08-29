@@ -20,10 +20,10 @@
 #include "ui/wiimotedevshortcutsconfig.h"
 
 
-WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(WiimotedevShortcutsConfig* config, QWidget *parent)
+WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_WiimotedevShortcutGrabber),
-    config(config),
+    config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
     wiimotedev_device_(1),
     wiimotedev_buttons_(0)
 {
@@ -37,11 +37,9 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(WiimotedevShortcutsConfig* 
   connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
           this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
 
-  QMapIterator <quint32, QString> iter(config->text_actions_);
-  while (iter.hasNext()) {
-    iter.next();
-    ui_->comboBox->addItem(iter.value());
-  }
+  foreach (const QString& name, config_->text_actions_.values())
+    ui_->comboBox->addItem(name);
+
 }
 
 WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
@@ -54,7 +52,7 @@ void WiimotedevShortcutGrabber::DbusWiimoteGeneralButtons(quint32 id, quint64 va
   quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
   if (wiimotedev_buttons_ == buttons) return;
 
-  ui_->combo->setText(config->GetReadableWiiremoteSequence(buttons));
+  ui_->combo->setText(config_->GetReadableWiiremoteSequence(buttons));
 
   wiimotedev_buttons_ = buttons;
 }

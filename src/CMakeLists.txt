@@ -310,6 +310,8 @@ set(UI
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
   ui/settingsdialog.ui
+  ui/wiimotedevshortcutsconfig.ui
+  ui/wiimotedevshortcutgrabber.ui
 
   widgets/equalizerslider.ui
   widgets/errordialog.ui
@@ -491,11 +493,11 @@ if(NOT APPLE AND NOT WIN32)
 
     list(APPEND SOURCES ui/wiimotedevshortcutgrabber.cpp)
     list(APPEND HEADERS ui/wiimotedevshortcutgrabber.h)
-    list(APPEND UI ui/wiimotedevshortcutgrabber.ui)
+
 
     list(APPEND SOURCES ui/wiimotedevshortcutsconfig.cpp)
     list(APPEND HEADERS ui/wiimotedevshortcutsconfig.h)
-    list(APPEND UI ui/wiimotedevshortcutsconfig.ui)
+
   endif(ENABLE_WIIMOTEDEV)
 
   # DeviceKit lister source
@@ -607,7 +609,12 @@ list(APPEND OTHER_SOURCES
   devices/wmdmloader.cpp
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
+  ui/wiimotedevshortcutsconfig.cpp
+  ui/wiimotedevshortcutsconfig.h
+  ui/wiimotedevshortcutgrabber.cpp
+  ui/wiimotedevshortcutgrabber.h
   ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimotedevshortcutsconfig.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimotedevshortcutgrabber.h
   widgets/osd_mac.mm
   widgets/osd_win.cpp
   widgets/osd_x11.cpp
