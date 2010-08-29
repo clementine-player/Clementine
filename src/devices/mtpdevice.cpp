@@ -55,12 +55,15 @@ void MtpDevice::Init() {
   connect(loader_, SIGNAL(TaskStarted(int)), SIGNAL(TaskStarted(int)));
   connect(loader_, SIGNAL(LoadFinished()), SLOT(LoadFinished()));
   connect(loader_thread_, SIGNAL(started()), loader_, SLOT(LoadDatabase()));
+
+  db_busy_.lock();
   loader_thread_->start();
 }
 
 void MtpDevice::LoadFinished() {
   loader_->deleteLater();
   loader_ = NULL;
+  db_busy_.unlock();
 }
 
 void MtpDevice::StartCopy() {
@@ -160,6 +163,7 @@ QList<Song::FileType> MtpDevice::SupportedFiletypes() {
   uint16_t* list = NULL;
   uint16_t length = 0;
 
+  QMutexLocker l(&db_busy_);
   MtpConnection connection(url_.host());
   if (LIBMTP_Get_Supported_Filetypes(connection.device(), &list, &length)
       || !list || !length)
