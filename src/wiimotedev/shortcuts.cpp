@@ -34,13 +34,16 @@ WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
   wiimotedev_notification_(true)
 {
   ReloadSettings();
-  wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
-                                                    WIIMOTEDEV_DBUS_EVENTS_OBJECT,
-                                                    QDBusConnection::systemBus(),
-                                                    this);
 
-  connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
-          this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
+  if (QDBusConnection::systemBus().isConnected()) {
+    wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
+                                                      WIIMOTEDEV_DBUS_EVENTS_OBJECT,
+                                                      QDBusConnection::systemBus(),
+                                                      this);
+
+    connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
+            this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
+  }
 }
 
 void WiimotedevShortcuts::ReloadSettings() {

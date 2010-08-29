@@ -28,14 +28,16 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
     wiimotedev_buttons_(0)
 {
   ui_->setupUi(this);
-  wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
-                                                    WIIMOTEDEV_DBUS_EVENTS_OBJECT,
 
-                                                   QDBusConnection::systemBus(),
-                                                    this);
+  if (QDBusConnection::systemBus().isConnected()) {
+    wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
+                                                      WIIMOTEDEV_DBUS_EVENTS_OBJECT,
+                                                      QDBusConnection::systemBus(),
+                                                      this);
 
-  connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
-          this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
+    connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
+            this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
+  }
 
   foreach (const QString& name, config_->text_actions_.values())
     ui_->comboBox->addItem(name);
