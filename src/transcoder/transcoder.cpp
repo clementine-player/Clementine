@@ -185,7 +185,7 @@ QList<TranscoderPreset> Transcoder::GetAllPresets() {
 TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
   switch (type) {
     case Song::Type_Flac:
-      return TranscoderPreset(type, "FLAC",       "flac", "audio/x-flac");
+      return TranscoderPreset(type, "Flac",       "flac", "audio/x-flac");
     case Song::Type_Mp4:
       return TranscoderPreset(type, "M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
     case Song::Type_Mpeg:

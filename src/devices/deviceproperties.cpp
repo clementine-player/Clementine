@@ -204,11 +204,6 @@ void DeviceProperties::UpdateFormats() {
       break;
   }
 
-  // Transcode format
-  TranscoderPreset preset = Transcoder::PresetForFileType(Song::FileType(
-      index_.data(DeviceManager::Role_TranscodeFormat).toInt()));
-  ui_->transcode_format->setCurrentIndex(ui_->transcode_format->findText(preset.name_));
-
   // If there's no lister then the device is physically disconnected
   if (!lister) {
     ui_->formats_stack->setCurrentWidget(ui_->formats_page_not_connected);
@@ -285,6 +280,33 @@ void DeviceProperties::UpdateFormatsFinished() {
     QListWidgetItem* item = new QListWidgetItem(Song::TextForFiletype(type));
     ui_->supported_formats->addItem(item);
   }
+  ui_->supported_formats->sortItems();
+
+  // Set the format combobox item
+  TranscoderPreset preset = Transcoder::PresetForFileType(Song::FileType(
+      index_.data(DeviceManager::Role_TranscodeFormat).toInt()));
+  if (preset.type_ == Song::Type_Unknown) {
+    // The user hasn't chosen a format for this device yet, so work our way down
+    // a list of some preferred formats, picking the first one that is supported
+    QList<Song::FileType> best_formats;
+    best_formats << Song::Type_Mpeg;
+    best_formats << Song::Type_OggVorbis;
+    best_formats << Song::Type_Asf;
+
+    foreach (Song::FileType type, best_formats) {
+      if (list.isEmpty() || list.contains(type)) {
+        preset = Transcoder::PresetForFileType(type);
+        break;
+      }
+    }
+
+    if (preset.type_ == Song::Type_Unknown) {
+      // Still haven't found a good format - pick the first one that the
+      // device advertises.
+      preset = Transcoder::PresetForFileType(list[0]);
+    }
+  }
+  ui_->transcode_format->setCurrentIndex(ui_->transcode_format->findText(preset.name_));
 
   ui_->formats_stack->setCurrentWidget(ui_->formats_page);
 }

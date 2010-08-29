@@ -61,7 +61,7 @@ const int DeviceManager::kDeviceIconOverlaySize = 16;
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
     transcode_mode_(DeviceDatabaseBackend::Transcode_Unsupported),
-    transcode_format_(Song::Type_Mpeg),
+    transcode_format_(Song::Type_Unknown),
     task_percentage_(-1)
 {
 }
