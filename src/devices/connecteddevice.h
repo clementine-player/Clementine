@@ -18,6 +18,7 @@
 #define CONNECTEDDEVICE_H
 
 #include "core/musicstorage.h"
+#include "core/song.h"
 
 #include <QObject>
 #include <QStringList>
@@ -42,6 +43,8 @@ public:
   ~ConnectedDevice();
 
   virtual void Init() = 0;
+
+  virtual QList<Song::FileType> SupportedFiletypes() { return QList<Song::FileType>(); }
 
   DeviceLister* lister() const { return lister_; }
   QString unique_id() const { return unique_id_; }

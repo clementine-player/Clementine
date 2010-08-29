@@ -153,3 +153,43 @@ bool MtpDevice::DeleteFromStorage(const DeleteJob& job) {
 void MtpDevice::FinishDelete(bool success) {
   FinishCopy(success);
 }
+
+QList<Song::FileType> MtpDevice::SupportedFiletypes() {
+  QList<Song::FileType> ret;
+
+  uint16_t* list = NULL;
+  uint16_t length = 0;
+
+  MtpConnection connection(url_.host());
+  if (LIBMTP_Get_Supported_Filetypes(connection.device(), &list, &length)
+      || !list || !length)
+    return ret;
+
+  for (int i=0 ; i<length ; ++i) {
+    switch (LIBMTP_filetype_t(list[i])) {
+      case LIBMTP_FILETYPE_WAV:  ret << Song::Type_Wav; break;
+      case LIBMTP_FILETYPE_MP2:
+      case LIBMTP_FILETYPE_MP3:  ret << Song::Type_Mpeg; break;
+      case LIBMTP_FILETYPE_WMA:  ret << Song::Type_Asf; break;
+      case LIBMTP_FILETYPE_MP4:
+      case LIBMTP_FILETYPE_M4A:
+      case LIBMTP_FILETYPE_AAC:  ret << Song::Type_Mp4; break;
+      case LIBMTP_FILETYPE_FLAC:
+        ret << Song::Type_Flac;
+        ret << Song::Type_OggFlac;
+        break;
+      case LIBMTP_FILETYPE_OGG:
+        ret << Song::Type_OggVorbis;
+        ret << Song::Type_OggSpeex;
+        ret << Song::Type_OggFlac;
+        break;
+      default:
+        qDebug() << "Unknown MTP file format" <<
+            LIBMTP_Get_Filetype_Description(LIBMTP_filetype_t(list[i]));
+        break;
+    }
+  }
+
+  free(list);
+  return ret;
+}
