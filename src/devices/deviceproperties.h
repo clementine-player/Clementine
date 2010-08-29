@@ -39,15 +39,20 @@ public slots:
 private:
   void UpdateHardwareInfo();
   void AddHardwareInfo(int row, const QString& key, const QString& value);
+  void UpdateFormats();
 
 private slots:
   void ModelChanged();
+  void OpenDevice();
+  void UpdateFormatsFinished();
 
 private:
   Ui_DeviceProperties* ui_;
 
   DeviceManager* manager_;
   QPersistentModelIndex index_;
+
+  bool updating_formats_;
 };
 
 #endif // DEVICEPROPERTIES_H

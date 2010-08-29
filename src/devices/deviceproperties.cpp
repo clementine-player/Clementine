@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "connecteddevice.h"
 #include "devicelister.h"
 #include "devicemanager.h"
 #include "deviceproperties.h"
@@ -21,14 +22,21 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
+#include <QFutureWatcher>
 #include <QScrollBar>
+#include <QtConcurrentRun>
+
+#include <boost/bind.hpp>
 
 DeviceProperties::DeviceProperties(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_DeviceProperties),
-    manager_(NULL)
+    manager_(NULL),
+    updating_formats_(false)
 {
   ui_->setupUi(this);
+
+  connect(ui_->open_device, SIGNAL(clicked()), SLOT(OpenDevice()));
 
   // Maximum height of the icon widget
   ui_->icon->setMaximumHeight(ui_->icon->iconSize().height() +
@@ -94,6 +102,7 @@ void DeviceProperties::ShowDevice(int row) {
   }
 
   UpdateHardwareInfo();
+  UpdateFormats();
 
   show();
 }
@@ -109,8 +118,10 @@ void DeviceProperties::ModelChanged() {
 
   if (!index_.isValid())
     reject(); // Device went away
-  else
+  else {
     UpdateHardwareInfo();
+    UpdateFormats();
+  }
 }
 
 void DeviceProperties::UpdateHardwareInfo() {
@@ -156,6 +167,48 @@ void DeviceProperties::UpdateHardwareInfo() {
   }
 }
 
+namespace {
+  typedef QList<Song::FileType> TypeList;
+  typedef QFuture<TypeList> DeviceTypesFuture;
+  typedef QFutureWatcher<TypeList> DeviceTypesFutureWatcher;
+}
+
+void DeviceProperties::UpdateFormats() {
+  QString id = index_.data(DeviceManager::Role_UniqueId).toString();
+  DeviceLister* lister = manager_->GetLister(index_.row());
+  boost::shared_ptr<ConnectedDevice> device =
+      manager_->GetConnectedDevice(index_.row());
+
+  // If there's no lister then the device is physically disconnected
+  if (!lister) {
+    ui_->formats_stack->setCurrentWidget(ui_->formats_page_not_connected);
+    ui_->open_device->setEnabled(false);
+    return;
+  }
+
+  // If there's a lister but no device then the user just needs to open the
+  // device.  This will cause a rescan so we don't do it automatically.
+  if (!device) {
+    ui_->formats_stack->setCurrentWidget(ui_->formats_page_not_connected);
+    ui_->open_device->setEnabled(true);
+    return;
+  }
+
+  if (!updating_formats_) {
+    // Get the device's supported formats list.  This takes a long time and it
+    // blocks, so do it in the background.
+    DeviceTypesFuture future = QtConcurrent::run(
+        boost::bind(&ConnectedDevice::SupportedFiletypes, device));
+    DeviceTypesFutureWatcher* watcher = new DeviceTypesFutureWatcher(this);
+    watcher->setFuture(future);
+
+    connect(watcher, SIGNAL(finished()), SLOT(UpdateFormatsFinished()));
+
+    ui_->formats_stack->setCurrentWidget(ui_->formats_page_loading);
+    updating_formats_ = true;
+  }
+}
+
 void DeviceProperties::accept() {
   QDialog::accept();
 
@@ -163,3 +216,27 @@ void DeviceProperties::accept() {
                               ui_->icon->currentItem()->data(Qt::UserRole).toString());
 }
 
+void DeviceProperties::OpenDevice() {
+  manager_->Connect(index_.row());
+}
+
+void DeviceProperties::UpdateFormatsFinished() {
+  DeviceTypesFutureWatcher* watcher = static_cast<DeviceTypesFutureWatcher*>(sender());
+  watcher->deleteLater();
+  updating_formats_ = false;
+
+  TypeList list = watcher->future().result();
+
+  // Hide widgets if there are no supported types
+  ui_->supported_formats_container->setVisible(!list.isEmpty());
+  ui_->transcode_unsupported->setEnabled(!list.isEmpty());
+
+  // Populate supported types list
+  ui_->supported_formats->clear();
+  foreach (Song::FileType type, list) {
+    QListWidgetItem* item = new QListWidgetItem(Song::TextForFiletype(type));
+    ui_->supported_formats->addItem(item);
+  }
+
+  ui_->formats_stack->setCurrentWidget(ui_->formats_page);
+}

@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2010-08-09 23:36+0000\n"
 "Last-Translator: Markus Fuchs <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
 "X-Launchpad-Export-Date: 2010-08-11 04:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -45,15 +45,15 @@ msgstr "%1 ausgewählt von"
 msgid "%1 tracks"
 msgstr "%1 Stücke"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -362,6 +362,11 @@ msgstr "Clementineorange"
 msgid "Clementine Visualization"
 msgstr "Clementine Visualisierung"
 
+msgid ""
+"Clementine can automatically convert the music you copy to this device into "
+"a format that it can play."
+msgstr ""
+
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine kann beim Stückwechsel Benachrichtigungen anzeigen"
 
@@ -413,6 +418,12 @@ msgstr ""
 
 msgid "Connect device"
 msgstr "Gerät verbinden"
+
+msgid "Convert all music"
+msgstr ""
+
+msgid "Convert any music that the device can't play"
+msgstr ""
 
 msgid "Copy to device..."
 msgstr "Auf das Gerät kopieren..."
@@ -592,6 +603,9 @@ msgstr "Anzeigeoptionen"
 msgid "Display the on-screen-display"
 msgstr "Zeige das OSD"
 
+msgid "Do not convert any music"
+msgstr ""
+
 msgid "Don't repeat"
 msgstr "Nicht wiederholen"
 
@@ -644,7 +658,7 @@ msgstr "Metadaten bearbeiten..."
 msgid "Edit..."
 msgstr "Bearbeiten..."
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "Editing %n tracks"
 msgstr "%n Stücke bearbeiten"
 
@@ -742,6 +756,9 @@ msgstr "Cover automatisch holen"
 
 msgid "File extension"
 msgstr "Dateiendung"
+
+msgid "File formats"
+msgstr ""
 
 msgid "File name"
 msgstr "Dateiname"
@@ -890,6 +907,9 @@ msgstr "Lautstärke um 4% erhöhen"
 
 msgid "Increase volume"
 msgstr "Lautstärke erhöhen"
+
+msgid "Information"
+msgstr ""
 
 msgid "Insert..."
 msgstr "Einfügen..."
@@ -1178,6 +1198,9 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+msgid "Open device"
+msgstr ""
+
 msgid "Open magnatune.com in browser"
 msgstr "magnatune.com im Browser öffnen"
 
@@ -1292,6 +1315,9 @@ msgstr "Einstellungen..."
 msgid "Preferred audio format"
 msgstr "Bevorzugtes Dateiformat"
 
+msgid "Preferred format"
+msgstr ""
+
 msgid "Preset:"
 msgstr "Profil:"
 
@@ -1316,6 +1342,9 @@ msgstr "Fortschritt"
 
 msgid "Quality"
 msgstr "Qualität"
+
+msgid "Querying device..."
+msgstr ""
 
 msgid "Queue Manager"
 msgstr "Warteschlangenverwaltung"
@@ -1618,6 +1647,9 @@ msgstr "%1 erfolgreich geschrieben"
 msgid "Super high (60 fps)"
 msgstr "Sehr hoch (60 fps)"
 
+msgid "Supported formats"
+msgstr ""
+
 msgid "Tag"
 msgstr "Stichwort"
 
@@ -1678,6 +1710,14 @@ msgstr "Dritte Stufe"
 
 msgid "This album is not available in the requested format"
 msgstr "Das Album ist im gewünschten Format nicht verfügbar"
+
+msgid ""
+"This device must be connected and opened before Clementine can see what file "
+"formats it supports."
+msgstr ""
+
+msgid "This device supports the following file formats:"
+msgstr ""
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -1884,7 +1924,7 @@ msgstr "Null"
 msgid "[click to edit]"
 msgstr "[zum Bearbeiten klicken]"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -1904,7 +1944,7 @@ msgstr "Stücke verschieben"
 msgid "options"
 msgstr "Einstellungen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 
