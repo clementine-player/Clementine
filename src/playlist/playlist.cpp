@@ -773,7 +773,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
   shared_ptr<PlaylistItem> b = order == Qt::AscendingOrder ? _b : _a;
 
 #define cmp(field)    return a->Metadata().field() < b->Metadata().field()
-#define strcmp(field) return QString::localeAwareCompare(a->Metadata().field(), b->Metadata().field()) < 0;
+#define strcmp(field) return QString::localeAwareCompare( \
+  a->Metadata().field().toLower(), b->Metadata().field().toLower()) < 0;
 
   switch (column) {
     case Column_Title:        strcmp(title);
