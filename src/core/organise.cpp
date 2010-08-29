@@ -184,6 +184,10 @@ void Organise::ProcessSomeFiles() {
       files_with_errors_ << task.filename_;
     }
 
+    // Clean up the temporary transcoded file
+    if (!task.transcoded_filename_.isEmpty())
+      QFile::remove(task.transcoded_filename_);
+
     progress_++;
   }
   SetSongProgress(0);
