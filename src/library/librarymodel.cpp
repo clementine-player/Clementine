@@ -161,16 +161,14 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_Genre:
   case GroupBy_AlbumArtist:
   case GroupBy_FileType: {
-    if (item->sort_text[0].isDigit())
-      return "0";
-    if (item->sort_text[0] == ' ')
-      return QString();
-
     QChar c = item->sort_text[0];
+    if (c.isDigit())
+      return "0";
+    if (c == ' ')
+      return QString();
     if (c.decompositionTag() != QChar::NoDecomposition)
-      c = c.decomposition()[0];
-
-    return c.toLower();
+      return QChar(c.decomposition()[0]);
+    return c;
   }
 
   case GroupBy_Year:
