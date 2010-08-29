@@ -53,9 +53,11 @@ private:
   void UpdateProgress();
   Song::FileType CheckTranscode(Song::FileType original_type) const;
 
+  static QString FiddleFileExtension(const QString& filename, const QString& new_extension);
+
 private:
   struct Task {
-    Task(const QString& filename = QString()) : filename_(filename) {}
+    explicit Task(const QString& filename = QString()) : filename_(filename) {}
 
     QString filename_;
     QString transcoded_filename_;

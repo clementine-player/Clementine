@@ -140,8 +140,8 @@ void Organise::ProcessSomeFiles() {
       song.set_filetype(task.new_filetype_);
 
       // Fiddle the filename extension as well to match the new type
-      song.set_filename(song.filename().section('.', 0, -2) + "." + task.new_extension_);
-      song.set_basefilename(song.basefilename().section('.', 0, -2) + "." + task.new_extension_);
+      song.set_filename(FiddleFileExtension(song.filename(), task.new_extension_));
+      song.set_basefilename(FiddleFileExtension(song.basefilename(), task.new_extension_));
 
       // Have to set this to the size of the new file or else funny stuff happens
       song.set_filesize(QFileInfo(task.transcoded_filename_).size());
@@ -247,4 +247,10 @@ void Organise::FileTranscoded(const QString& filename, bool success) {
     tasks_pending_ << task;
   }
   QTimer::singleShot(0, this, SLOT(ProcessSomeFiles()));
+}
+
+QString Organise::FiddleFileExtension(const QString& filename, const QString& new_extension) {
+  if (filename.section('/', -1, -1).contains('.'))
+    return filename.section('.', 0, -2) + "." + new_extension;
+  return filename + "." + new_extension;
 }
