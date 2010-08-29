@@ -29,11 +29,13 @@ int Transcoder::JobFinishedEvent::sEventType = -1;
 
 
 TranscoderPreset::TranscoderPreset(
+    Song::FileType type,
     const QString& name,
     const QString& extension,
     const QString& codec_mimetype,
     const QString& muxer_mimetype)
-      : name_(name),
+      : type_(type),
+        name_(name),
         extension_(extension),
         codec_mimetype_(codec_mimetype),
         muxer_mimetype_(muxer_mimetype)
@@ -165,36 +167,39 @@ Transcoder::Transcoder(QObject* parent)
 {
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
+}
 
-  presets_ << PresetForFileType(Song::Type_Flac);
-  presets_ << PresetForFileType(Song::Type_Mp4);
-  presets_ << PresetForFileType(Song::Type_Mpeg);
-  presets_ << PresetForFileType(Song::Type_OggVorbis);
-  presets_ << PresetForFileType(Song::Type_OggFlac);
-  presets_ << PresetForFileType(Song::Type_OggSpeex);
-  presets_ << PresetForFileType(Song::Type_Asf);
-  presets_ << PresetForFileType(Song::Type_Wav);
-  presets_ << TranscoderPreset("3GP AAC",    "3gp",  "audio/mpeg, mpegversion=(int)4", "application/x-3gp");
+QList<TranscoderPreset> Transcoder::GetAllPresets() {
+  QList<TranscoderPreset> ret;
+  ret << PresetForFileType(Song::Type_Flac);
+  ret << PresetForFileType(Song::Type_Mp4);
+  ret << PresetForFileType(Song::Type_Mpeg);
+  ret << PresetForFileType(Song::Type_OggVorbis);
+  ret << PresetForFileType(Song::Type_OggFlac);
+  ret << PresetForFileType(Song::Type_OggSpeex);
+  ret << PresetForFileType(Song::Type_Asf);
+  ret << PresetForFileType(Song::Type_Wav);
+  return ret;
 }
 
 TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
   switch (type) {
     case Song::Type_Flac:
-      return TranscoderPreset("FLAC",       "flac", "audio/x-flac");
+      return TranscoderPreset(type, "FLAC",       "flac", "audio/x-flac");
     case Song::Type_Mp4:
-      return TranscoderPreset("M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
+      return TranscoderPreset(type, "M4A AAC",    "mp4",  "audio/mpeg, mpegversion=(int)4", "audio/mp4");
     case Song::Type_Mpeg:
-      return TranscoderPreset("MP3",        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
+      return TranscoderPreset(type, "MP3",        "mp3",  "audio/mpeg, mpegversion=(int)1, layer=(int)3");
     case Song::Type_OggVorbis:
-      return TranscoderPreset("Ogg Vorbis", "ogg",  "audio/x-vorbis", "application/ogg");
+      return TranscoderPreset(type, "Ogg Vorbis", "ogg",  "audio/x-vorbis", "application/ogg");
     case Song::Type_OggFlac:
-      return TranscoderPreset("Ogg Flac",   "ogg",  "audio/x-flac",   "application/ogg");
+      return TranscoderPreset(type, "Ogg Flac",   "ogg",  "audio/x-flac",   "application/ogg");
     case Song::Type_OggSpeex:
-      return TranscoderPreset("Ogg Speex",  "spx",  "audio/x-speex",  "application/ogg");
+      return TranscoderPreset(type, "Ogg Speex",  "spx",  "audio/x-speex",  "application/ogg");
     case Song::Type_Asf:
-      return TranscoderPreset("Windows Media audio", "wma", "audio/x-wma", "video/x-ms-asf");
+      return TranscoderPreset(type, "Windows Media audio", "wma", "audio/x-wma", "video/x-ms-asf");
     case Song::Type_Wav:
-      return TranscoderPreset("Wav",        "wav",  QString(),        "audio/x-wav");
+      return TranscoderPreset(type, "Wav",        "wav",  QString(),        "audio/x-wav");
     default:
       qWarning() << "Unsupported format in Transcoder::PresetForFileType:" << type;
       return TranscoderPreset();

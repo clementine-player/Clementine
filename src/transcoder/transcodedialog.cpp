@@ -54,7 +54,7 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   log_ui_->setupUi(log_dialog_);
 
   // Get presets
-  QList<TranscoderPreset> presets = transcoder_->presets();
+  QList<TranscoderPreset> presets = Transcoder::GetAllPresets();
   qSort(presets.begin(), presets.end(), ComparePresetsByName);
   foreach (const TranscoderPreset& preset, presets) {
     ui_->format->addItem(

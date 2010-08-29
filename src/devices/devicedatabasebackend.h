@@ -21,6 +21,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "core/song.h"
+
 class Database;
 
 class DeviceDatabaseBackend : public QObject {
@@ -28,6 +30,13 @@ class DeviceDatabaseBackend : public QObject {
 
 public:
   Q_INVOKABLE DeviceDatabaseBackend(QObject* parent = 0);
+
+  // Values are saved in the database - don't change
+  enum TranscodeMode {
+    Transcode_Always = 1,
+    Transcode_Never = 2,
+    Transcode_Unsupported = 3,
+  };
 
   struct Device {
     Device() : id_(-1) {}
@@ -37,6 +46,9 @@ public:
     QString friendly_name_;
     quint64 size_;
     QString icon_name_;
+
+    TranscodeMode transcode_mode_;
+    Song::FileType transcode_format_;
   };
   typedef QList<Device> DeviceList;
 
@@ -49,8 +61,9 @@ public:
   int AddDevice(const Device& device);
   void RemoveDevice(int id);
 
-  void SetDeviceIdentity(int id, const QString& friendly_name,
-                         const QString& icon_name);
+  void SetDeviceOptions(int id,
+      const QString& friendly_name, const QString& icon_name,
+      TranscodeMode mode, Song::FileType format);
 
 private:
   boost::shared_ptr<Database> db_;

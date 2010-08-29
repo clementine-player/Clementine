@@ -20,6 +20,7 @@
 #include "deviceproperties.h"
 #include "ui_deviceproperties.h"
 #include "core/utilities.h"
+#include "transcoder/transcoder.h"
 #include "ui/iconloader.h"
 
 #include <QFutureWatcher>
@@ -56,8 +57,8 @@ void DeviceProperties::SetDeviceManager(DeviceManager *manager) {
 }
 
 void DeviceProperties::ShowDevice(int row) {
-  // Only load the icons the first time the dialog is shown
   if (ui_->icon->count() == 0) {
+    // Only load the icons the first time the dialog is shown
     QStringList icon_names = QStringList()
         << "drive-removable-media-usb-pendrive"
         << "multimedia-player-ipod-mini-blue"
@@ -85,6 +86,12 @@ void DeviceProperties::ShowDevice(int row) {
           IconLoader::Load(icon_name), QString(), ui_->icon);
       item->setData(Qt::UserRole, icon_name);
     }
+
+    // Load the transcode formats the first time the dialog is shown
+    foreach (const TranscoderPreset& preset, Transcoder::GetAllPresets()) {
+      ui_->transcode_format->addItem(preset.name_, preset.type_);
+    }
+    ui_->transcode_format->model()->sort(0);
   }
 
   index_ = manager_->index(row);
@@ -179,6 +186,29 @@ void DeviceProperties::UpdateFormats() {
   boost::shared_ptr<ConnectedDevice> device =
       manager_->GetConnectedDevice(index_.row());
 
+  // Transcode mode
+  DeviceDatabaseBackend::TranscodeMode mode = DeviceDatabaseBackend::TranscodeMode(
+      index_.data(DeviceManager::Role_TranscodeMode).toInt());
+  switch (mode) {
+    case DeviceDatabaseBackend::Transcode_Always:
+      ui_->transcode_all->setChecked(true);
+      break;
+
+    case DeviceDatabaseBackend::Transcode_Never:
+      ui_->transcode_off->setChecked(true);
+      break;
+
+    case DeviceDatabaseBackend::Transcode_Unsupported:
+    default:
+      ui_->transcode_unsupported->setChecked(true);
+      break;
+  }
+
+  // Transcode format
+  TranscoderPreset preset = Transcoder::PresetForFileType(Song::FileType(
+      index_.data(DeviceManager::Role_TranscodeFormat).toInt()));
+  ui_->transcode_format->setCurrentIndex(ui_->transcode_format->findText(preset.name_));
+
   // If there's no lister then the device is physically disconnected
   if (!lister) {
     ui_->formats_stack->setCurrentWidget(ui_->formats_page_not_connected);
@@ -212,8 +242,22 @@ void DeviceProperties::UpdateFormats() {
 void DeviceProperties::accept() {
   QDialog::accept();
 
-  manager_->SetDeviceIdentity(index_.row(), ui_->name->text(),
-                              ui_->icon->currentItem()->data(Qt::UserRole).toString());
+  // Transcode mode
+  DeviceDatabaseBackend::TranscodeMode mode = DeviceDatabaseBackend::Transcode_Unsupported;
+  if (ui_->transcode_all->isChecked())
+    mode = DeviceDatabaseBackend::Transcode_Always;
+  else if (ui_->transcode_off->isChecked())
+    mode = DeviceDatabaseBackend::Transcode_Never;
+  else if (ui_->transcode_unsupported->isChecked())
+    mode = DeviceDatabaseBackend::Transcode_Unsupported;
+
+  // Transcode format
+  Song::FileType format = Song::FileType(ui_->transcode_format->itemData(
+      ui_->transcode_format->currentIndex()).toInt());
+
+  manager_->SetDeviceOptions(index_.row(),
+      ui_->name->text(), ui_->icon->currentItem()->data(Qt::UserRole).toString(),
+      mode, format);
 }
 
 void DeviceProperties::OpenDevice() {
@@ -230,6 +274,10 @@ void DeviceProperties::UpdateFormatsFinished() {
   // Hide widgets if there are no supported types
   ui_->supported_formats_container->setVisible(!list.isEmpty());
   ui_->transcode_unsupported->setEnabled(!list.isEmpty());
+
+  if (ui_->transcode_unsupported->isChecked() && list.isEmpty()) {
+    ui_->transcode_off->setChecked(true);
+  }
 
   // Populate supported types list
   ui_->supported_formats->clear();

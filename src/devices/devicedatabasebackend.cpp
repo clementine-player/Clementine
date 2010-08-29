@@ -39,7 +39,8 @@ DeviceDatabaseBackend::DeviceList DeviceDatabaseBackend::GetAllDevices() {
 
   DeviceList ret;
 
-  QSqlQuery q("SELECT ROWID, unique_id, friendly_name, size, icon"
+  QSqlQuery q("SELECT ROWID, unique_id, friendly_name, size, icon,"
+              "   transcode_mode, transcode_format"
               " FROM devices", db);
   q.exec();
   if (db_->CheckErrors(q.lastError())) return ret;
@@ -51,24 +52,31 @@ DeviceDatabaseBackend::DeviceList DeviceDatabaseBackend::GetAllDevices() {
     dev.friendly_name_ = q.value(2).toString();
     dev.size_ = q.value(3).toLongLong();
     dev.icon_name_ = q.value(4).toString();
+    dev.transcode_mode_ = TranscodeMode(q.value(5).toInt());
+    dev.transcode_format_ = Song::FileType(q.value(6).toInt());
     ret << dev;
   }
   return ret;
 }
 
-int DeviceDatabaseBackend::AddDevice(const Device &device) {
+int DeviceDatabaseBackend::AddDevice(const Device& device) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   ScopedTransaction t(&db);
 
   // Insert the device into the devices table
-  QSqlQuery q("INSERT INTO devices (unique_id, friendly_name, size, icon)"
-              " VALUES (:unique_id, :friendly_name, :size, :icon)", db);
+  QSqlQuery q("INSERT INTO devices ("
+              "   unique_id, friendly_name, size, icon,"
+              "   transcode_mode, transcode_format)"
+              " VALUES (:unique_id, :friendly_name, :size, :icon,"
+              "   :transcode_mode, :transcode_format)", db);
   q.bindValue(":unique_id", device.unique_id_);
   q.bindValue(":friendly_name", device.friendly_name_);
   q.bindValue(":size", device.size_);
   q.bindValue(":icon", device.icon_name_);
+  q.bindValue(":transcode_mode", device.transcode_mode_);
+  q.bindValue(":transcode_format", device.transcode_format_);
   q.exec();
   if (db_->CheckErrors(q.lastError())) return -1;
   int id = q.lastInsertId().toInt();
@@ -108,17 +116,22 @@ void DeviceDatabaseBackend::RemoveDevice(int id) {
   t.Commit();
 }
 
-void DeviceDatabaseBackend::SetDeviceIdentity(int id, const QString &friendly_name,
-                                              const QString &icon_name) {
+void DeviceDatabaseBackend::SetDeviceOptions(int id,
+    const QString &friendly_name, const QString &icon_name,
+    TranscodeMode mode, Song::FileType format) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q("UPDATE devices"
               " SET friendly_name=:friendly_name,"
-              "     icon=:icon_name"
+              "     icon=:icon_name,"
+              "     transcode_mode=:transcode_mode,"
+              "     transcode_format=:transcode_format"
               " WHERE ROWID=:id", db);
   q.bindValue(":friendly_name", friendly_name);
   q.bindValue(":icon_name", icon_name);
+  q.bindValue(":transcode_mode", mode);
+  q.bindValue(":transcode_format", format);
   q.bindValue(":id", id);
   q.exec();
   db_->CheckErrors(q.lastError());

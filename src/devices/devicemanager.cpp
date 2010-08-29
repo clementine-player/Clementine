@@ -60,6 +60,8 @@ const int DeviceManager::kDeviceIconOverlaySize = 16;
 
 DeviceManager::DeviceInfo::DeviceInfo()
   : database_id_(-1),
+    transcode_mode_(DeviceDatabaseBackend::Transcode_Unsupported),
+    transcode_format_(Song::Type_Mpeg),
     task_percentage_(-1)
 {
 }
@@ -70,6 +72,8 @@ DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
   ret.size_ = size_;
   ret.id_ = database_id_;
   ret.icon_name_ = icon_name_;
+  ret.transcode_mode_ = transcode_mode_;
+  ret.transcode_format_ = transcode_format_;
 
   QStringList unique_ids;
   foreach (const Backend& backend, backends_) {
@@ -80,10 +84,12 @@ DeviceDatabaseBackend::Device DeviceManager::DeviceInfo::SaveToDb() const {
   return ret;
 }
 
-void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device &dev) {
+void DeviceManager::DeviceInfo::InitFromDb(const DeviceDatabaseBackend::Device& dev) {
   database_id_ = dev.id_;
   friendly_name_ = dev.friendly_name_;
   size_ = dev.size_;
+  transcode_mode_ = dev.transcode_mode_;
+  transcode_format_ = dev.transcode_format_;
 
   QStringList icon_names = dev.icon_name_.split(',');
   QVariantList icons;
@@ -320,6 +326,12 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
 #     endif
       return QDir::toNativeSeparators(ret);
     }
+
+    case Role_TranscodeMode:
+      return info.transcode_mode_;
+
+    case Role_TranscodeFormat:
+      return info.transcode_format_;
 
     default:
       return QVariant();
@@ -604,16 +616,20 @@ void DeviceManager::Forget(int row) {
   }
 }
 
-void DeviceManager::SetDeviceIdentity(int row, const QString &friendly_name,
-                                      const QString &icon_name) {
+void DeviceManager::SetDeviceOptions(int row,
+    const QString& friendly_name, const QString& icon_name,
+    DeviceDatabaseBackend::TranscodeMode mode, Song::FileType format) {
   DeviceInfo& info = devices_[row];
   info.friendly_name_ = friendly_name;
   info.LoadIcon(QVariantList() << icon_name, friendly_name);
+  info.transcode_mode_ = mode;
+  info.transcode_format_ = format;
 
   emit dataChanged(index(row, 0), index(row, 0));
 
   if (info.database_id_ != -1)
-    backend_->SetDeviceIdentity(info.database_id_, friendly_name, icon_name);
+    backend_->SetDeviceOptions(info.database_id_, friendly_name, icon_name,
+                               mode, format);
 }
 
 void DeviceManager::DeviceTaskStarted(int id) {

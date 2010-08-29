@@ -49,6 +49,8 @@ public:
     Role_IconName,
     Role_UpdatingPercentage,
     Role_MountPath,
+    Role_TranscodeMode,
+    Role_TranscodeFormat,
 
     LastRole,
   };
@@ -81,8 +83,9 @@ public:
   void Forget(int row);
   void UnmountAsync(int row);
 
-  void SetDeviceIdentity(int row, const QString& friendly_name,
-                         const QString& icon_name);
+  void SetDeviceOptions(int row,
+      const QString& friendly_name, const QString& icon_name,
+      DeviceDatabaseBackend::TranscodeMode mode, Song::FileType format);
 
   // QAbstractListModel
   int rowCount(const QModelIndex &parent) const;
@@ -147,6 +150,9 @@ private:
 
     QString icon_name_;
     QIcon icon_;
+
+    DeviceDatabaseBackend::TranscodeMode transcode_mode_;
+    Song::FileType transcode_format_;
 
     int task_percentage_;
   };

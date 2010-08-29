@@ -20,6 +20,8 @@
 #include <QDialog>
 #include <QPersistentModelIndex>
 
+#include "core/song.h"
+
 class DeviceManager;
 class Ui_DeviceProperties;
 

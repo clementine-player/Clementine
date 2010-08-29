@@ -31,12 +31,14 @@
 
 
 struct TranscoderPreset {
-  TranscoderPreset() {}
-  TranscoderPreset(const QString& name,
+  TranscoderPreset() : type_(Song::Type_Unknown) {}
+  TranscoderPreset(Song::FileType type,
+                   const QString& name,
                    const QString& extension,
                    const QString& codec_mimetype,
                    const QString& muxer_mimetype_ = QString());
 
+  Song::FileType type_;
   QString name_;
   QString extension_;
   QString codec_mimetype_;
@@ -52,8 +54,8 @@ class Transcoder : public QObject {
   Transcoder(QObject* parent = 0);
 
   static TranscoderPreset PresetForFileType(Song::FileType type);
+  static QList<TranscoderPreset> GetAllPresets();
 
-  QList<TranscoderPreset> presets() const { return presets_; }
   int max_threads() const { return max_threads_; }
 
   void set_max_threads(int count) { max_threads_ = count; }
@@ -132,7 +134,6 @@ class Transcoder : public QObject {
   typedef QList<boost::shared_ptr<JobState> > JobStateList;
 
   int max_threads_;
-  QList<TranscoderPreset> presets_;
   QList<Job> queued_jobs_;
   JobStateList current_jobs_;
 };
