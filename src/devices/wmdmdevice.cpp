@@ -186,7 +186,7 @@ void WmdmDevice::FinishCopy(bool success) {
 }
 
 void WmdmDevice::StartDelete() {
-  StartCopy();
+  StartCopy(NULL);
 }
 
 bool WmdmDevice::DeleteFromStorage(const DeleteJob& job) {
@@ -237,7 +237,7 @@ bool WmdmDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, IWMDMDevice* 
 
   if (device->GetFormatSupport(
       &formats, &format_count, &mime_types, &mime_count)) {
-    qWarning() << "Unable to get a list of supported formats for device" << canonical_name;
+    qWarning() << "Unable to get a list of supported formats for device";
     return false;
   }
 
