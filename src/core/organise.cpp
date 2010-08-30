@@ -42,6 +42,7 @@ Organise::Organise(TaskManager* task_manager,
                        eject_after_(eject_after),
                        task_count_(files.count()),
                        transcode_suffix_(1),
+                       tasks_complete_(0),
                        started_(false),
                        task_id_(0),
                        current_copy_progress_(0)
@@ -230,7 +231,8 @@ Song::FileType Organise::CheckTranscode(Song::FileType original_type) const {
 
 void Organise::SetSongProgress(float progress, bool transcoded) {
   const int max = transcoded ? 50 : 100;
-  current_copy_progress_ = qBound(0, int(progress * max), max-1);
+  current_copy_progress_ = (transcoded ? 50 : 0) +
+                           qBound(0, int(progress * max), max-1);
   UpdateProgress();
 }
 
