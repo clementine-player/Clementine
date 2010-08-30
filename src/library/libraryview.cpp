@@ -257,49 +257,24 @@ void LibraryView::scrollTo(const QModelIndex& index, ScrollHint hint) {
     QTreeView::scrollTo(index, hint);
 }
 
-void LibraryView::GetSelectedFileInfo(
-    QStringList *filenames, quint64 *size, SongList* songs_out) const {
+SongList LibraryView::GetSelectedSongs() const {
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
           selectionModel()->selection()).indexes();
-  SongList songs = library_->GetChildSongs(selected_indexes);
-
-  if (size)
-    *size = 0;
-
-  foreach (const Song& song, songs) {
-    if (filenames)
-      *filenames << song.filename();
-
-    if (size && song.filesize() >= 0)
-      *size += song.filesize();
-  }
-
-  if (songs_out)
-    *songs_out = songs;
+  return library_->GetChildSongs(selected_indexes);
 }
 
 void LibraryView::Organise() {
-  QStringList filenames;
-  quint64 size = 0;
-  GetSelectedFileInfo(&filenames, &size);
-
   if (!organise_dialog_)
     organise_dialog_.reset(new OrganiseDialog(task_manager_));
 
   organise_dialog_->SetDestinationModel(library_->directory_model());
   organise_dialog_->SetCopy(false);
-  organise_dialog_->SetFilenames(filenames, size);
+  organise_dialog_->SetSongs(GetSelectedSongs());
   organise_dialog_->show();
 }
 
 void LibraryView::Delete() {
-  SongList songs;
-  GetSelectedFileInfo(NULL, NULL, &songs);
-
-  if (songs.isEmpty())
-    return;
-
   if (QMessageBox::question(this, tr("Delete files"),
         tr("These files will be deleted from disk, are you sure you want to continue?"),
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
@@ -314,20 +289,16 @@ void LibraryView::Delete() {
 
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
   connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
-  delete_files->Start(songs);
+  delete_files->Start(GetSelectedSongs());
 }
 
 void LibraryView::CopyToDevice() {
-  QStringList filenames;
-  quint64 size = 0;
-  GetSelectedFileInfo(&filenames, &size);
-
   if (!organise_dialog_)
     organise_dialog_.reset(new OrganiseDialog(task_manager_));
 
   organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
-  organise_dialog_->SetFilenames(filenames, size);
+  organise_dialog_->SetSongs(GetSelectedSongs());
   organise_dialog_->show();
 }
 

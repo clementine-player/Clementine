@@ -86,7 +86,7 @@ class LibraryView : public AutoExpandingTreeView {
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
-  void GetSelectedFileInfo(QStringList* filenames, quint64* size, SongList* songs = NULL) const;
+  SongList GetSelectedSongs() const;
 
  private:
   LibraryModel* library_;

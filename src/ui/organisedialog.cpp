@@ -99,9 +99,10 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices
   ui_->eject_after->setVisible(devices);
 }
 
-void OrganiseDialog::SetSongs(const SongList &songs) {
-  quint64 total_size = 0;
-  QStringList filenames;
+void OrganiseDialog::SetSongs(const SongList& songs) {
+  total_size_ = 0;
+  filenames_.clear();
+  preview_songs_.clear();
 
   foreach (const Song& song, songs) {
     QUrl url(song.filename());
@@ -111,11 +112,15 @@ void OrganiseDialog::SetSongs(const SongList &songs) {
       continue;
 
     if (song.filesize() > 0)
-      total_size += song.filesize();
-    filenames << url.toLocalFile();
+      total_size_ += song.filesize();
+    filenames_ << url.toLocalFile();
+
+    if (preview_songs_.count() < kNumberOfPreviews)
+      preview_songs_ << song;
   }
 
-  SetFilenames(filenames, total_size);
+  ui_->free_space->set_additional_bytes(total_size_);
+  UpdatePreviews();
 }
 
 void OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
