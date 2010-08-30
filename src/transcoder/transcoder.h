@@ -58,11 +58,13 @@ class Transcoder : public QObject {
   static Song::FileType PickBestFormat(QList<Song::FileType> supported);
 
   int max_threads() const { return max_threads_; }
-
   void set_max_threads(int count) { max_threads_ = count; }
 
   void AddJob(const QString& input, const TranscoderPreset& preset,
               const QString& output = QString());
+
+  QMap<QString, float> GetProgress() const;
+  int QueuedJobsCount() const { return queued_jobs_.count(); }
 
  public slots:
   void Start();

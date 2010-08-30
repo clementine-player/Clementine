@@ -17,6 +17,7 @@
 #ifndef ORGANISE_H
 #define ORGANISE_H
 
+#include <QBasicTimer>
 #include <QObject>
 #include <QTemporaryFile>
 
@@ -38,18 +39,22 @@ public:
            const QStringList& files, bool eject_after);
 
   static const int kBatchSize;
+  static const int kTranscodeProgressInterval;
 
   void Start();
 
 signals:
   void Finished(const QStringList& files_with_errors);
 
+protected:
+  void timerEvent(QTimerEvent* e);
+
 private slots:
   void ProcessSomeFiles();
   void FileTranscoded(const QString& filename, bool success);
 
 private:
-  void SetSongProgress(float progress);
+  void SetSongProgress(float progress, bool transcoded = false);
   void UpdateProgress();
   Song::FileType CheckTranscode(Song::FileType original_type) const;
 
@@ -57,9 +62,12 @@ private:
 
 private:
   struct Task {
-    explicit Task(const QString& filename = QString()) : filename_(filename) {}
+    explicit Task(const QString& filename = QString())
+      : filename_(filename), transcode_progress_(0.0) {}
 
     QString filename_;
+
+    float transcode_progress_;
     QString transcoded_filename_;
     QString new_extension_;
     Song::FileType new_filetype_;
@@ -78,17 +86,18 @@ private:
   const bool eject_after_;
   int task_count_;
 
+  QBasicTimer transcode_progress_timer_;
   QTemporaryFile transcode_temp_name_;
   int transcode_suffix_;
 
   QList<Task> tasks_pending_;
   QMap<QString, Task> tasks_transcoding_;
+  int tasks_complete_;
 
   bool started_;
 
   int task_id_;
-  int progress_;
-  int song_progress_;
+  int current_copy_progress_;
 
   QStringList files_with_errors_;
 };

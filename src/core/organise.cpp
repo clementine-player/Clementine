@@ -26,6 +26,7 @@
 #include <boost/bind.hpp>
 
 const int Organise::kBatchSize = 10;
+const int Organise::kTranscodeProgressInterval = 500;
 
 Organise::Organise(TaskManager* task_manager,
                    boost::shared_ptr<MusicStorage> destination,
@@ -43,8 +44,7 @@ Organise::Organise(TaskManager* task_manager,
                        transcode_suffix_(1),
                        started_(false),
                        task_id_(0),
-                       progress_(0),
-                       song_progress_(0)
+                       current_copy_progress_(0)
 {
   original_thread_ = thread();
 
@@ -82,6 +82,7 @@ void Organise::ProcessSomeFiles() {
     if (!tasks_transcoding_.isEmpty()) {
       // Just wait - FileTranscoded will start us off again in a little while
       qDebug() << "Waiting for transcoding jobs";
+      transcode_progress_timer_.start(kTranscodeProgressInterval, this);
       return;
     }
 
@@ -178,7 +179,8 @@ void Organise::ProcessSomeFiles() {
     job.metadata_ = song;
     job.overwrite_ = overwrite_;
     job.remove_original_ = !copy_;
-    job.progress_ = boost::bind(&Organise::SetSongProgress, this, _1);
+    job.progress_ = boost::bind(&Organise::SetSongProgress,
+                                this, _1, !task.transcoded_filename_.isEmpty());
 
     if (!destination_->CopyToStorage(job)) {
       files_with_errors_ << task.filename_;
@@ -188,7 +190,7 @@ void Organise::ProcessSomeFiles() {
     if (!task.transcoded_filename_.isEmpty())
       QFile::remove(task.transcoded_filename_);
 
-    progress_++;
+    tasks_complete_++;
   }
   SetSongProgress(0);
 
@@ -226,19 +228,44 @@ Song::FileType Organise::CheckTranscode(Song::FileType original_type) const {
   return Song::Type_Unknown;
 }
 
-void Organise::SetSongProgress(float progress) {
-  song_progress_ = qBound(0, int(progress * 100), 99);
+void Organise::SetSongProgress(float progress, bool transcoded) {
+  const int max = transcoded ? 50 : 100;
+  current_copy_progress_ = qBound(0, int(progress * max), max-1);
   UpdateProgress();
 }
 
 void Organise::UpdateProgress() {
-  const int progress = progress_ * 100 + song_progress_;
   const int total = task_count_ * 100;
+
+  // Update transcoding progress
+  QMap<QString, float> transcode_progress = transcoder_->GetProgress();
+  foreach (const QString& filename, transcode_progress.keys()) {
+    if (!tasks_transcoding_.contains(filename))
+      continue;
+    tasks_transcoding_[filename].transcode_progress_ = transcode_progress[filename];
+  }
+
+  // Count the progress of all tasks that are in the queue.  Files that need
+  // transcoding total 50 for the transcode and 50 for the copy, files that
+  // only need to be copied total 100.
+  int progress = tasks_complete_ * 100;
+
+  foreach (const Task& task, tasks_pending_) {
+    progress += qBound(0, int(task.transcode_progress_ * 50), 50);
+  }
+  foreach (const Task& task, tasks_transcoding_.values()) {
+    progress += qBound(0, int(task.transcode_progress_ * 50), 50);
+  }
+
+  // Add the progress of the track that's currently copying
+  progress += current_copy_progress_;
+
   task_manager_->SetTaskProgress(task_id_, progress, total);
 }
 
 void Organise::FileTranscoded(const QString& filename, bool success) {
   qDebug() << "File finished" << filename << success;
+  transcode_progress_timer_.stop();
 
   Task task = tasks_transcoding_.take(filename);
   if (!success) {
@@ -253,4 +280,12 @@ QString Organise::FiddleFileExtension(const QString& filename, const QString& ne
   if (filename.section('/', -1, -1).contains('.'))
     return filename.section('.', 0, -2) + "." + new_extension;
   return filename + "." + new_extension;
+}
+
+void Organise::timerEvent(QTimerEvent* e) {
+  QObject::timerEvent(e);
+
+  if (e->timerId() == transcode_progress_timer_.timerId()) {
+    UpdateProgress();
+  }
 }

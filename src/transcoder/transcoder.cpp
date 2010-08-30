@@ -470,3 +470,23 @@ void Transcoder::Cancel() {
     it = current_jobs_.erase(it);
   }
 }
+
+QMap<QString, float> Transcoder::GetProgress() const {
+  QMap<QString, float> ret;
+
+  foreach (boost::shared_ptr<JobState> state, current_jobs_) {
+    if (!state->pipeline_)
+      continue;
+
+    gint64 position = 0;
+    gint64 duration = 0;
+    GstFormat format = GST_FORMAT_TIME;
+
+    gst_element_query_position(state->pipeline_.get(), &format, &position);
+    gst_element_query_duration(state->pipeline_.get(), &format, &duration);
+
+    ret[state->job_.input] = float(position) / duration;
+  }
+
+  return ret;
+}
