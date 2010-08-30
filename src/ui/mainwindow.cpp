@@ -1168,7 +1168,25 @@ void MainWindow::SelectionSetValue() {
 }
 
 void MainWindow::EditValue() {
-  ui_->playlist->view()->edit(playlist_menu_index_);
+  QModelIndex current = ui_->playlist->view()->currentIndex();
+  if (!current.isValid())
+    return;
+
+  // Edit the last column that was right-clicked on.  If nothing's ever been
+  // right clicked then look for the first editable column.
+  int column = playlist_menu_index_.column();
+  if (column == -1) {
+    for (int i=0 ; i<ui_->playlist->view()->model()->columnCount() ; ++i) {
+      if (ui_->playlist->view()->isColumnHidden(i))
+        continue;
+      if (!Playlist::column_is_editable(Playlist::Column(i)))
+        continue;
+      column = i;
+      break;
+    }
+  }
+
+  ui_->playlist->view()->edit(current.sibling(current.row(), column));
 }
 
 void MainWindow::AddFile() {
