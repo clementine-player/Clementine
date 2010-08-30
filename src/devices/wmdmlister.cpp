@@ -14,13 +14,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define _WIN32_WINNT 0x0501
+
 #include "wmdmlister.h"
 #include "wmdmthread.h"
 #include "core/utilities.h"
 
-#include <icomponentauthenticate.h>
 #include <objbase.h>
 #include <mswmdm_i.c>
+#include <winbase.h>
 
 #include <boost/bind.hpp>
 #include <boost/scoped_array.hpp>
@@ -28,6 +30,9 @@
 #include <QPixmap>
 #include <QStringList>
 #include <QtDebug>
+
+const QUuid WmdmLister::kDeviceProtocolMsc(
+    0xa4d2c26c, 0xa881, 0x44bb, 0xbd, 0x5d, 0x1f, 0x70, 0x3c, 0x71, 0xf7, 0xa9);
 
 QString WmdmLister::CanonicalNameToId(const QString& canonical_name) {
   return "wmdm/" + canonical_name;
@@ -139,13 +144,22 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
   const int max_size = 512;
   wchar_t buf[max_size];
   device->GetName(buf, max_size);
-  ret.name_ = QString::fromWCharArray(buf);
+  ret.name_ = QString::fromWCharArray(buf).trimmed();
 
   device->GetManufacturer(buf, max_size);
-  ret.manufacturer_ = QString::fromWCharArray(buf);
+  ret.manufacturer_ = QString::fromWCharArray(buf).trimmed();
 
   device->GetCanonicalName(buf, max_size);
   ret.canonical_name_ = QString::fromWCharArray(buf).toLower();
+
+  // Upgrade to a device3
+  IWMDMDevice3* device3 = NULL;
+  device->QueryInterface(IID_IWMDMDevice3, (void**)&device3);
+
+  // Get the device protocol so we can figure out whether the device is MSC
+  PROPVARIANT protocol;
+  device3->GetProperty(g_wszWMDMDeviceProtocol, &protocol);
+  device3->Release();
 
   // Get the type and check whether it has storage
   DWORD type = 0;
@@ -180,32 +194,97 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 
   // There doesn't seem to be a way to get the drive letter of MSC devices, so
   // try parsing the device's name to extract it.
-  QRegExp drive_letter("\\(([A-Z]:)\\)$");
-  if (drive_letter.indexIn(ret.name_) != -1) {
-    // Sanity check to make sure there really is a drive there
-    ScopedWCharArray path(drive_letter.cap(1) + "\\");
-    ScopedWCharArray name(QString(MAX_PATH + 1, '\0'));
-    ScopedWCharArray type(QString(MAX_PATH + 1, '\0'));
-    DWORD serial = 0;
-
-    if (!GetVolumeInformationW(
-        path,
-        name, MAX_PATH,
-        &serial,
-        NULL, // max component length
-        NULL, // flags
-        type, MAX_PATH // fat or ntfs
-        )) {
-      qWarning() << "Error getting volume information for" << drive_letter.cap(1);
-    } else {
-      ret.mount_point_ = drive_letter.cap(1) + "/";
-      ret.fs_name_ = name.ToString();
-      ret.fs_type_ = type.ToString();
-      ret.fs_serial_ = serial;
-    }
-  }
+  if (QUuid(*protocol.puuid) == kDeviceProtocolMsc)
+    GuessDriveLetter(&ret);
 
   return ret;
+}
+
+void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
+  // Windows XP puts the drive letter in brackets at the end of the name
+  QRegExp drive_letter("\\(([A-Z]:)\\)$");
+  if (drive_letter.indexIn(info->name_) != -1) {
+    CheckDriveLetter(info, drive_letter.cap(1));
+    return;
+  }
+
+  // Windows 7 sometimes has the drive letter as the whole name
+  drive_letter = QRegExp("^([A-Z]:)\\\\$");
+  if (drive_letter.indexIn(info->name_) != -1) {
+    CheckDriveLetter(info, drive_letter.cap(1));
+    return;
+  }
+
+  // Otherwise Windows 7 uses the drive's DOS label as its whole name.
+  // Let's enumerate all the volumes on the system and find one with that
+  // label, then get its drive letter.  Yay!
+  wchar_t volume_name[MAX_PATH + 1];
+  HANDLE handle = FindFirstVolumeW(volume_name, MAX_PATH);
+
+  forever {
+    // QueryDosDeviceW doesn't allow a trailing backslash, so remove it.
+    int length = wcslen(volume_name);
+    volume_name[length - 1] = L'\0';
+
+    wchar_t device_name[MAX_PATH + 1];
+    QueryDosDeviceW(&volume_name[4], device_name, MAX_PATH);
+
+    volume_name[length - 1] = L'\\';
+
+    // Don't do cd-roms or floppies
+    if (QString::fromWCharArray(device_name).contains("HarddiskVolume")) {
+      wchar_t volume_path[MAX_PATH + 1];
+      DWORD volume_path_length = MAX_PATH;
+      GetVolumePathNamesForVolumeNameW(
+          volume_name, volume_path, volume_path_length, &volume_path_length);
+
+      if (wcslen(volume_path) == 3) {
+        ScopedWCharArray name(QString(MAX_PATH + 1, '\0'));
+        ScopedWCharArray type(QString(MAX_PATH + 1, '\0'));
+        DWORD serial = 0;
+
+        if (!GetVolumeInformationW(volume_path, name, MAX_PATH,
+            &serial, NULL, NULL, type, MAX_PATH)) {
+          qWarning() << "Error getting volume information for" <<
+              QString::fromWCharArray(volume_path);
+        } else {
+          if (name.ToString() == info->name_ && name.characters() != 0) {
+            // We found it!
+            CheckDriveLetter(info, QString::fromWCharArray(volume_path));
+            break;
+          }
+        }
+      }
+    }
+
+    if (!FindNextVolumeW(handle, volume_name, MAX_PATH))
+      break;
+  }
+  FindVolumeClose(handle);
+}
+
+void WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
+  // Sanity check to make sure there really is a drive there
+  ScopedWCharArray path(drive.endsWith('\\') ? drive : (drive + "\\"));
+  ScopedWCharArray name(QString(MAX_PATH + 1, '\0'));
+  ScopedWCharArray type(QString(MAX_PATH + 1, '\0'));
+  DWORD serial = 0;
+
+  if (!GetVolumeInformationW(
+      path,
+      name, MAX_PATH,
+      &serial,
+      NULL, // max component length
+      NULL, // flags
+      type, MAX_PATH // fat or ntfs
+      )) {
+    qWarning() << "Error getting volume information for" << drive;
+  } else {
+    info->mount_point_ = drive + "/";
+    info->fs_name_ = name.ToString();
+    info->fs_type_ = type.ToString();
+    info->fs_serial_ = serial;
+  }
 }
 
 QStringList WmdmLister::DeviceUniqueIDs() {

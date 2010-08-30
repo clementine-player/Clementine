@@ -22,6 +22,7 @@
 #include <QMap>
 #include <QMutex>
 #include <QPixmap>
+#include <QUuid>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -98,12 +99,16 @@ private:
     int fs_serial_;
   };
 
+  static const QUuid kDeviceProtocolMsc;
+
   DeviceInfo ReadDeviceInfo(IWMDMDevice2* device);
 
   template <typename T>
   T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
 
   void UpdateFreeSpace(DeviceInfo* info);
+  void GuessDriveLetter(DeviceInfo* info);
+  void CheckDriveLetter(DeviceInfo* info, const QString& drive);
 
   static QString CanonicalNameToId(const QString& canonical_name);
   void WMDMDeviceAdded(const QString& canonical_name);

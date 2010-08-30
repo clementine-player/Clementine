@@ -41,7 +41,7 @@ pkg_check_modules(LIBMTP libmtp)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
-  find_library(MSWMDM_LIBRARIES MSWMDM)
+  find_library(MSWMDM_LIBRARIES mswmdm)
   find_library(SAC_SHIM_LIBRARIES sac_shim)
 endif (WIN32)
 
