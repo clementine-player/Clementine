@@ -87,7 +87,8 @@ LibraryView::LibraryView(QWidget* parent)
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
-    context_menu_(NULL)
+    context_menu_(NULL),
+    is_in_keyboard_search_(false)
 {
   setItemDelegate(new LibraryItemDelegate(this));
   setAttribute(Qt::WA_MacShowFocusRect, false);
