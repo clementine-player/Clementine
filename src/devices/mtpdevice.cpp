@@ -138,6 +138,8 @@ void MtpDevice::FinishCopy(bool success) {
   connection_.reset();
 
   db_busy_.unlock();
+
+  ConnectedDevice::FinishCopy(success);
 }
 
 void MtpDevice::StartDelete() {

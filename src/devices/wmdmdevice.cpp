@@ -181,6 +181,8 @@ void WmdmDevice::FinishCopy(bool success) {
   thread_.reset();
 
   db_busy_.unlock();
+
+  ConnectedDevice::FinishCopy(success);
 }
 
 void WmdmDevice::StartDelete() {
