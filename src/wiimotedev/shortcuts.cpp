@@ -102,7 +102,7 @@ void WiimotedevShortcuts::RestoreSettings()
 
   settings.beginGroup(WiimotedevShortcuts::kSettingsGroup);
   settings.remove("");
-  settings.setValue("enabled", true);
+  settings.setValue("enabled", false);
   settings.setValue("device", 1);
   settings.setValue("use_active_action", true);
   settings.setValue("only_when_focused", false);
