@@ -202,7 +202,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_sort_model_->setSourceModel(library_->model());
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
-  library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
   ui_->playlist->SetManager(playlists_);

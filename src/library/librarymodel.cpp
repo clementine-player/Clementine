@@ -626,6 +626,7 @@ void LibraryModel::FinishItem(GroupBy type,
   // Create the divider entry if we're supposed to
   if (create_divider) {
     QString divider_key = DividerKey(type, item);
+    item->sort_text.prepend(divider_key);
 
     if (!divider_key.isEmpty() && !divider_nodes_.contains(divider_key)) {
       if (signal)
