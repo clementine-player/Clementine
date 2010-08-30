@@ -158,8 +158,10 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 
   // Get the device protocol so we can figure out whether the device is MSC
   PROPVARIANT protocol;
-  device3->GetProperty(g_wszWMDMDeviceProtocol, &protocol);
-  device3->Release();
+  if (device3) {
+    device3->GetProperty(g_wszWMDMDeviceProtocol, &protocol);
+    device3->Release();
+  }
 
   // Get the type and check whether it has storage
   DWORD type = 0;
@@ -194,16 +196,19 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 
   // There doesn't seem to be a way to get the drive letter of MSC devices, so
   // try parsing the device's name to extract it.
-  if (QUuid(*protocol.puuid) == kDeviceProtocolMsc)
+  if (!device3 || QUuid(*protocol.puuid) == kDeviceProtocolMsc)
     GuessDriveLetter(&ret);
 
   return ret;
 }
 
 void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
+  qDebug() << "Guessing drive letter for" << info->name_;
+
   // Windows XP puts the drive letter in brackets at the end of the name
   QRegExp drive_letter("\\(([A-Z]:)\\)$");
   if (drive_letter.indexIn(info->name_) != -1) {
+    qDebug() << "Looks like an XP drive" << drive_letter.cap(1);
     CheckDriveLetter(info, drive_letter.cap(1));
     return;
   }
@@ -211,6 +216,7 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
   // Windows 7 sometimes has the drive letter as the whole name
   drive_letter = QRegExp("^([A-Z]:)\\\\$");
   if (drive_letter.indexIn(info->name_) != -1) {
+    qDebug() << "Looks like a win7 drive" << drive_letter.cap(1);
     CheckDriveLetter(info, drive_letter.cap(1));
     return;
   }
@@ -250,6 +256,7 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
         } else {
           if (name.ToString() == info->name_ && name.characters() != 0) {
             // We found it!
+            qDebug() << "Looks like a win7 drive name" << QString::fromWCharArray(volume_path);
             CheckDriveLetter(info, QString::fromWCharArray(volume_path));
             break;
           }
@@ -280,6 +287,7 @@ void WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
       )) {
     qWarning() << "Error getting volume information for" << drive;
   } else {
+    qDebug() << "Validated drive letter" << drive;
     info->mount_point_ = drive + "/";
     info->fs_name_ = name.ToString();
     info->fs_type_ = type.ToString();
