@@ -485,8 +485,9 @@ if(NOT APPLE AND NOT WIN32)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
-    list(APPEND SOURCES wiimotedev/interface.cpp)
-    list(APPEND HEADERS wiimotedev/interface.h)
+    qt4_add_dbus_interface(SOURCES
+        dbus/org.wiimotedev.deviceEvents.xml
+        dbus/wiimotedev)
 
     list(APPEND SOURCES wiimotedev/shortcuts.cpp)
     list(APPEND HEADERS wiimotedev/shortcuts.h)

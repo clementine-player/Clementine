@@ -18,9 +18,10 @@
 #define WIIMOTEDEVSHORTCUTGRABBER_H
 
 #include <QDialog>
+#include <boost/scoped_ptr.hpp>
+#include "dbus/wiimotedev.h"
 
 class WiimotedevShortcutsConfig;
-class DBusDeviceEventsInterface;
 class Ui_WiimotedevShortcutGrabber;
 
 class WiimotedevShortcutGrabber : public QDialog {
@@ -31,12 +32,12 @@ class WiimotedevShortcutGrabber : public QDialog {
   ~WiimotedevShortcutGrabber();
 
  private slots:
-  void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
+  void DbusWiimoteGeneralButtons(uint id, qulonglong value);
 
  private:
   Ui_WiimotedevShortcutGrabber* ui_;
   WiimotedevShortcutsConfig* config_;
-  DBusDeviceEventsInterface* wiimotedev_iface_;
+  boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   quint32 wiimotedev_device_;
   quint64 wiimotedev_buttons_;
   quint32 action;

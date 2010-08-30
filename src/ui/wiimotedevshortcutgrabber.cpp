@@ -16,9 +16,9 @@
 
 #include "ui/wiimotedevshortcutgrabber.h"
 #include "ui_wiimotedevshortcutgrabber.h"
-#include "wiimotedev/interface.h"
 #include "ui/wiimotedevshortcutsconfig.h"
 
+#include "wiimotedev/consts.h"
 
 WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
   : QDialog(parent),
@@ -30,13 +30,14 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
   ui_->setupUi(this);
 
   if (QDBusConnection::systemBus().isConnected()) {
-    wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
-                                                      WIIMOTEDEV_DBUS_EVENTS_OBJECT,
-                                                      QDBusConnection::systemBus(),
-                                                      this);
+    wiimotedev_iface_.reset(new OrgWiimotedevDeviceEventsInterface(
+        WIIMOTEDEV_DBUS_SERVICE_NAME,
+        WIIMOTEDEV_DBUS_EVENTS_OBJECT,
+        QDBusConnection::systemBus(),
+        this));
 
-    connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
-            this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(uint,qulonglong)),
+            this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
   }
 
   foreach (const QString& name, config_->text_actions_.values())
@@ -48,7 +49,7 @@ WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
   delete ui_;
 }
 
-void WiimotedevShortcutGrabber::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
+void WiimotedevShortcutGrabber::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (wiimotedev_device_ != id) return;
 
   quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);

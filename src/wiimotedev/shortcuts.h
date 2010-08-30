@@ -18,9 +18,9 @@
 #define WIIMOTEDEV_SHORTCUTS_H
 
 #include <boost/scoped_ptr.hpp>
+#include "dbus/wiimotedev.h"
 
 #include "core/player.h"
-#include "wiimotedev/interface.h"
 
 class QSettings;
 
@@ -57,7 +57,7 @@ public slots:
   void RestoreSettings();
 
 private slots:
-  void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
+  void DbusWiimoteGeneralButtons(uint id, qulonglong value);
 
 private:
   Player* player_;
@@ -67,7 +67,7 @@ private:
   quint32 wiimotedev_device_;
   bool wiimotedev_enable_;
   bool wiimotedev_focus_;
-  boost::scoped_ptr<DBusDeviceEventsInterface> wiimotedev_iface_;
+  boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   bool wiimotedev_notification_;
 
   QHash <quint64, quint32> actions_;

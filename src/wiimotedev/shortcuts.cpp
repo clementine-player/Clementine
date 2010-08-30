@@ -16,6 +16,7 @@
 
 #include <QSettings>
 
+#include "wiimotedev/consts.h"
 #include "wiimotedev/shortcuts.h"
 
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
@@ -40,12 +41,12 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
     return;
 
   if (actived && !wiimotedev_iface_) {
-    wiimotedev_iface_.reset(new DBusDeviceEventsInterface(
+    wiimotedev_iface_.reset(new OrgWiimotedevDeviceEventsInterface(
         WIIMOTEDEV_DBUS_SERVICE_NAME, WIIMOTEDEV_DBUS_EVENTS_OBJECT,
         QDBusConnection::systemBus(), this));
 
-    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
-            this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(uint,qulonglong)),
+            this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
   }
 
   if (!actived && wiimotedev_iface_)
@@ -110,7 +111,7 @@ void WiimotedevShortcuts::RestoreSettings()
   settings.endGroup();
 }
 
-void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
+void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (id != wiimotedev_device_ || !wiimotedev_enable_ || !player_) return;
 
   quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
