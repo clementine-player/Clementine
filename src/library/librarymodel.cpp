@@ -178,8 +178,7 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
     return SortTextForYear(item->metadata.year());
 
   case GroupBy_None:
-    // fallthrough
-    ;
+    return QString();
   }
   Q_ASSERT(0);
   return QString();
