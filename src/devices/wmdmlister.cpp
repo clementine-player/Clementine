@@ -171,14 +171,7 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
         qWarning() << "Error getting IWMDMStorage2 from storage";
       } else {
         // Get free space information
-        IWMDMStorageGlobals* globals;
-        ret.storage_->GetStorageGlobals(&globals);
-
-        ret.total_bytes_ = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalSize, globals, _1, _2));
-        ret.free_bytes_  = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalFree, globals, _1, _2));
-        ret.free_bytes_ -= GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalBad,  globals, _1, _2));
-
-        globals->Release();
+        UpdateFreeSpace(&ret);
       }
       storage->Release();
     }
@@ -280,6 +273,33 @@ void WmdmLister::UnmountDevice(const QString& id) {
 }
 
 void WmdmLister::UpdateDeviceFreeSpace(const QString& id) {
+  // This needs to be done in the lister's thread where we already have COM
+  // initialised
+  metaObject()->invokeMethod(this, "DoUpdateDriveFreeSpace",
+                             Qt::BlockingQueuedConnection, Q_ARG(QString, id));
+}
+
+void WmdmLister::DoUpdateDriveFreeSpace(const QString& id) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!devices_.contains(id))
+      return;
+
+    UpdateFreeSpace(&devices_[id]);
+  }
+
+  emit DeviceChanged(id);
+}
+
+void WmdmLister::UpdateFreeSpace(DeviceInfo* info) {
+  IWMDMStorageGlobals* globals;
+  info->storage_->GetStorageGlobals(&globals);
+
+  info->total_bytes_ = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalSize, globals, _1, _2));
+  info->free_bytes_  = GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalFree, globals, _1, _2));
+  info->free_bytes_ -= GetSpaceValue(boost::bind(&IWMDMStorageGlobals::GetTotalBad,  globals, _1, _2));
+
+  globals->Release();
 }
 
 HRESULT WmdmLister::WMDMMessage(DWORD message_type, LPCWSTR name) {

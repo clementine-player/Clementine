@@ -67,6 +67,7 @@ public slots:
   virtual void ShutDown();
 
 private slots:
+  virtual void DoUpdateDriveFreeSpace(const QString& id);
   virtual void ReallyShutdown();
 
 private:
@@ -101,6 +102,8 @@ private:
 
   template <typename T>
   T LockAndGetDeviceInfo(const QString& id, T DeviceInfo::*field);
+
+  void UpdateFreeSpace(DeviceInfo* info);
 
   static QString CanonicalNameToId(const QString& canonical_name);
   void WMDMDeviceAdded(const QString& canonical_name);
