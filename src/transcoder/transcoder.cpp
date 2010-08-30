@@ -16,10 +16,11 @@
 
 #include "transcoder.h"
 
-#include <QtConcurrentMap>
-#include <QtDebug>
-#include <QFile>
 #include <QCoreApplication>
+#include <QDir>
+#include <QFile>
+#include <QThread>
+#include <QtDebug>
 
 #include <boost/bind.hpp>
 
@@ -156,7 +157,7 @@ void Transcoder::JobState::PostFinished(bool success) {
 
   if (success) {
     emit parent_->LogLine(
-        tr("Successfully written %1").arg(job_.output));
+        tr("Successfully written %1").arg(QDir::toNativeSeparators(job_.output)));
   }
 }
 
@@ -338,13 +339,13 @@ void Transcoder::JobState::ReportError(GstMessage* msg) {
   free(debugs);
 
   emit parent_->LogLine(
-      tr("Error processing %1: %2").arg(job_.input, message));
+      tr("Error processing %1: %2").arg(QDir::toNativeSeparators(job_.input), message));
 }
 
 bool Transcoder::StartJob(const Job &job) {
   shared_ptr<JobState> state(new JobState(job, this));
 
-  emit LogLine(tr("Starting %1").arg(job.input));
+  emit LogLine(tr("Starting %1").arg(QDir::toNativeSeparators(job.input)));
 
   // Create the pipeline.
   // This should be a scoped_ptr, but scoped_ptr doesn't support custom
