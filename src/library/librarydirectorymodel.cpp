@@ -72,6 +72,7 @@ void LibraryDirectoryModel::RemoveDirectory(const QModelIndex& index) {
 QVariant LibraryDirectoryModel::data(const QModelIndex &index, int role) const {
   switch (role) {
   case MusicStorage::Role_Storage:
+  case MusicStorage::Role_StorageForceConnect:
     return QVariant::fromValue(storage_[index.row()]);
 
   case MusicStorage::Role_FreeSpace:
