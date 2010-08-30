@@ -56,7 +56,12 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
 
   // Font for the status line
   QFont status_font(opt.font);
+
+#ifdef Q_OS_WIN32
   status_font.setPointSize(status_font.pointSize() - 1);
+#else
+  status_font.setPointSize(status_font.pointSize() - 2);
+#endif
 
   const int text_height = QFontMetrics(opt.font).height() +
                           QFontMetrics(status_font).height();
