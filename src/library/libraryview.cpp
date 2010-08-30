@@ -244,7 +244,16 @@ void LibraryView::AddToPlaylist() {
 }
 
 void LibraryView::keyboardSearch(const QString& search) {
-  emit FocusFilterBox(search);
+  is_in_keyboard_search_ = true;
+  QTreeView::keyboardSearch(search);
+  is_in_keyboard_search_ = false;
+}
+
+void LibraryView::scrollTo(const QModelIndex& index, ScrollHint hint) {
+  if (is_in_keyboard_search_)
+    QTreeView::scrollTo(index, QAbstractItemView::PositionAtTop);
+  else
+    QTreeView::scrollTo(index, hint);
 }
 
 void LibraryView::GetSelectedFileInfo(
