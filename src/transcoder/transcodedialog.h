@@ -17,6 +17,7 @@
 #ifndef TRANSCODEDIALOG_H
 #define TRANSCODEDIALOG_H
 
+#include <QBasicTimer>
 #include <QDialog>
 
 class Transcoder;
@@ -31,8 +32,12 @@ class TranscodeDialog : public QDialog {
   ~TranscodeDialog();
 
   static const char* kSettingsGroup;
+  static const int kProgressInterval;
 
   void SetFilenames(const QStringList& filenames);
+
+ protected:
+  void timerEvent(QTimerEvent* e);
 
  private slots:
   void Add();
@@ -46,11 +51,14 @@ class TranscodeDialog : public QDialog {
  private:
   void SetWorking(bool working);
   void UpdateStatusText();
+  void UpdateProgress();
 
  private:
   Ui_TranscodeDialog* ui_;
   Ui_TranscodeLogDialog* log_ui_;
   QDialog* log_dialog_;
+
+  QBasicTimer progress_timer_;
 
   QPushButton* start_button_;
   QPushButton* cancel_button_;

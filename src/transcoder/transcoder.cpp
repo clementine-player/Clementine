@@ -153,12 +153,12 @@ Transcoder::JobFinishedEvent::JobFinishedEvent(JobState *state, bool success)
 }
 
 void Transcoder::JobState::PostFinished(bool success) {
-  QCoreApplication::postEvent(parent_, new Transcoder::JobFinishedEvent(this, success));
-
   if (success) {
     emit parent_->LogLine(
         tr("Successfully written %1").arg(QDir::toNativeSeparators(job_.output)));
   }
+
+  QCoreApplication::postEvent(parent_, new Transcoder::JobFinishedEvent(this, success));
 }
 
 
@@ -425,8 +425,7 @@ bool Transcoder::event(QEvent* e) {
       return true;
     }
 
-    // Emit the finished signal
-    emit JobComplete((*it)->job_.input, finished_event->success_);
+    QString filename = (*it)->job_.input;
 
     // Remove event handlers from the gstreamer pipeline so they don't get
     // called after the pipeline is shutting down
@@ -436,6 +435,9 @@ bool Transcoder::event(QEvent* e) {
 
     // Remove it from the list - this will also destroy the GStreamer pipeline
     current_jobs_.erase(it);
+
+    // Emit the finished signal
+    emit JobComplete(filename, finished_event->success_);
 
     // Start some more jobs
     MaybeStartNextJob();

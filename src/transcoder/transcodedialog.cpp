@@ -31,6 +31,7 @@
 #endif
 
 const char* TranscodeDialog::kSettingsGroup = "Transcoder";
+const int TranscodeDialog::kProgressInterval = 500;
 
 static bool ComparePresetsByName(const TranscoderPreset& left,
                                  const TranscoderPreset& right) {
@@ -111,6 +112,11 @@ void TranscodeDialog::SetWorking(bool working) {
   ui_->input_group->setEnabled(!working);
   ui_->output_group->setEnabled(!working);
   ui_->progress_group->setVisible(true);
+
+  if (working)
+    progress_timer_.start(kProgressInterval, this);
+  else
+    progress_timer_.stop();
 }
 
 void TranscodeDialog::Start() {
@@ -128,7 +134,7 @@ void TranscodeDialog::Start() {
 
   // Set up the progressbar
   ui_->progress_bar->setValue(0);
-  ui_->progress_bar->setMaximum(file_model->rowCount());
+  ui_->progress_bar->setMaximum(file_model->rowCount() * 100);
 
   // Reset the UI
   queued_ = file_model->rowCount();
@@ -155,8 +161,18 @@ void TranscodeDialog::JobComplete(const QString& filename, bool success) {
   queued_ --;
 
   UpdateStatusText();
+  UpdateProgress();
+}
 
-  ui_->progress_bar->setValue(finished_success_ + finished_failed_);
+void TranscodeDialog::UpdateProgress() {
+  int progress = (finished_success_ + finished_failed_) * 100;
+
+  QMap<QString, float> current_jobs = transcoder_->GetProgress();
+  foreach (float value, current_jobs.values()) {
+    progress += qBound(0, int(value * 100), 99);
+  }
+
+  ui_->progress_bar->setValue(progress);
 }
 
 void TranscodeDialog::UpdateStatusText() {
@@ -215,4 +231,12 @@ void TranscodeDialog::Remove() {
 void TranscodeDialog::LogLine(const QString &message) {
   QString date(QDateTime::currentDateTime().toString(Qt::TextDate));
   log_ui_->log->appendPlainText(QString("%1: %2").arg(date, message));
+}
+
+void TranscodeDialog::timerEvent(QTimerEvent* e) {
+  QDialog::timerEvent(e);
+
+  if (e->timerId() == progress_timer_.timerId()) {
+    UpdateProgress();
+  }
 }
