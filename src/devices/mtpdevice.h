@@ -40,9 +40,9 @@ public:
 
   void Init();
 
-  QList<Song::FileType> SupportedFiletypes();
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret);
 
-  void StartCopy();
+  bool StartCopy(QList<Song::FileType>* supported_types);
   bool CopyToStorage(const CopyJob& job);
   void FinishCopy(bool success);
 
@@ -52,6 +52,9 @@ public:
 
 private slots:
   void LoadFinished();
+
+private:
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret, LIBMTP_mtpdevice_t* device);
 
 private:
   static bool sInitialisedLibMTP;

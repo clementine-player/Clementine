@@ -66,12 +66,22 @@ void MtpDevice::LoadFinished() {
   db_busy_.unlock();
 }
 
-void MtpDevice::StartCopy() {
+bool MtpDevice::StartCopy(QList<Song::FileType>* supported_types) {
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
 
   // Connect to the device
   connection_.reset(new MtpConnection(url_.host()));
+
+  // Did the caller want a list of supported types?
+  if (supported_types) {
+    if (!GetSupportedFiletypes(supported_types, connection_->device())) {
+      FinishCopy(false);
+      return false;
+    }
+  }
+
+  return true;
 }
 
 static int ProgressCallback(uint64_t const sent, uint64_t const total,
@@ -131,7 +141,7 @@ void MtpDevice::FinishCopy(bool success) {
 }
 
 void MtpDevice::StartDelete() {
-  StartCopy();
+  StartCopy(NULL);
 }
 
 bool MtpDevice::DeleteFromStorage(const DeleteJob& job) {
@@ -160,40 +170,42 @@ void MtpDevice::FinishDelete(bool success) {
   FinishCopy(success);
 }
 
-QList<Song::FileType> MtpDevice::SupportedFiletypes() {
-  QList<Song::FileType> ret;
-
-  uint16_t* list = NULL;
-  uint16_t length = 0;
-
+bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
   QMutexLocker l(&db_busy_);
   MtpConnection connection(url_.host());
   if (!connection.is_valid()) {
     qWarning() << "Error connecting to MTP device, couldn't get list of supported filetypes";
-    return ret;
+    return false;
   }
 
-  if (LIBMTP_Get_Supported_Filetypes(connection.device(), &list, &length)
+  return GetSupportedFiletypes(ret, connection.device());
+}
+
+bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, LIBMTP_mtpdevice_t* device) {
+  uint16_t* list = NULL;
+  uint16_t length = 0;
+
+  if (LIBMTP_Get_Supported_Filetypes(device, &list, &length)
       || !list || !length)
-    return ret;
+    return false;
 
   for (int i=0 ; i<length ; ++i) {
     switch (LIBMTP_filetype_t(list[i])) {
-      case LIBMTP_FILETYPE_WAV:  ret << Song::Type_Wav; break;
+      case LIBMTP_FILETYPE_WAV:  *ret << Song::Type_Wav; break;
       case LIBMTP_FILETYPE_MP2:
-      case LIBMTP_FILETYPE_MP3:  ret << Song::Type_Mpeg; break;
-      case LIBMTP_FILETYPE_WMA:  ret << Song::Type_Asf; break;
+      case LIBMTP_FILETYPE_MP3:  *ret << Song::Type_Mpeg; break;
+      case LIBMTP_FILETYPE_WMA:  *ret << Song::Type_Asf; break;
       case LIBMTP_FILETYPE_MP4:
       case LIBMTP_FILETYPE_M4A:
-      case LIBMTP_FILETYPE_AAC:  ret << Song::Type_Mp4; break;
+      case LIBMTP_FILETYPE_AAC:  *ret << Song::Type_Mp4; break;
       case LIBMTP_FILETYPE_FLAC:
-        ret << Song::Type_Flac;
-        ret << Song::Type_OggFlac;
+        *ret << Song::Type_Flac;
+        *ret << Song::Type_OggFlac;
         break;
       case LIBMTP_FILETYPE_OGG:
-        ret << Song::Type_OggVorbis;
-        ret << Song::Type_OggSpeex;
-        ret << Song::Type_OggFlac;
+        *ret << Song::Type_OggVorbis;
+        *ret << Song::Type_OggSpeex;
+        *ret << Song::Type_OggFlac;
         break;
       default:
         qDebug() << "Unknown MTP file format" <<
@@ -203,5 +215,5 @@ QList<Song::FileType> MtpDevice::SupportedFiletypes() {
   }
 
   free(list);
-  return ret;
+  return true;
 }

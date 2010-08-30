@@ -41,9 +41,9 @@ public:
 
   static QStringList url_schemes() { return QStringList() << "ipod"; }
 
-  QList<Song::FileType> SupportedFiletypes();
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret);
 
-  void StartCopy();
+  bool StartCopy(QList<Song::FileType>* supported_types);
   bool CopyToStorage(const CopyJob& job);
   void FinishCopy(bool success);
 

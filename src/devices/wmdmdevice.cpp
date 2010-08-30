@@ -62,7 +62,7 @@ void WmdmDevice::LoadFinished() {
   loader_ = NULL;
 }
 
-void WmdmDevice::StartCopy() {
+bool WmdmDevice::StartCopy(QList<Song::FileType>* supported_types) {
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
 
@@ -82,6 +82,19 @@ void WmdmDevice::StartCopy() {
   destination->QueryInterface(IID_IWMDMStorage3, (void**)&storage_);
 
   destination->Release();
+
+  // Did the caller want a list of supported filetypes?
+  if (supported_types) {
+    IWMDMDevice* device = thread_->GetDeviceByCanonicalName(canonical_name);
+    if (!GetSupportedFiletypes(supported_types, device)) {
+      device->Release();
+      FinishCopy(false);
+      return false;
+    }
+    device->Release();
+  }
+
+  return true;
 }
 
 bool WmdmDevice::CopyToStorage(const CopyJob& job) {
@@ -213,15 +226,7 @@ void WmdmDevice::FinishDelete(bool success) {
   FinishCopy(success);
 }
 
-QList<Song::FileType> WmdmDevice::SupportedFiletypes() {
-  QList<Song::FileType> ret;
-  WmdmThread thread;
-
-  // Get the device
-  WmdmLister* wmdm_lister = static_cast<WmdmLister*>(lister());
-  QString canonical_name = wmdm_lister->DeviceCanonicalName(unique_id());
-  IWMDMDevice* device = thread.GetDeviceByCanonicalName(canonical_name);
-
+bool WmdmDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, IWMDMDevice* device) {
   // Get a list of supported formats
   uint32_t format_count = 0;
   uint32_t mime_count = 0;
@@ -231,28 +236,40 @@ QList<Song::FileType> WmdmDevice::SupportedFiletypes() {
   if (device->GetFormatSupport(
       &formats, &format_count, &mime_types, &mime_count)) {
     qWarning() << "Unable to get a list of supported formats for device" << canonical_name;
-    device->Release();
-    return ret;
+    return false;
   }
-  device->Release();
 
   // Find known mime types
   for (int i=0 ; i<mime_count ; ++i) {
     QString type = QString::fromWCharArray(mime_types[i]);
     if (type == "audio/mp3" || type == "audio/mpeg")
-      ret << Song::Type_Mpeg;
+      *ret << Song::Type_Mpeg;
     else if (type == "audio/x-ms-wma")
-      ret << Song::Type_Asf;
+      *ret << Song::Type_Asf;
     else if (type == "audio/wav")
-      ret << Song::Type_Wav;
+      *ret << Song::Type_Wav;
     else if (type == "audio/mp4")
-      ret << Song::Type_Mp4;
+      *ret << Song::Type_Mp4;
     else if (type == "audio/ogg" || type == "audio/vorbis")
-      ret << Song::Type_OggVorbis;
+      *ret << Song::Type_OggVorbis;
   }
 
   CoTaskMemFree(formats);
   CoTaskMemFree(mime_types);
 
-  return ret;
+  return true;
+}
+
+bool WmdmDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
+  WmdmThread thread;
+
+  // Get the device
+  WmdmLister* wmdm_lister = static_cast<WmdmLister*>(lister());
+  QString canonical_name = wmdm_lister->DeviceCanonicalName(unique_id());
+  IWMDMDevice* device = thread.GetDeviceByCanonicalName(canonical_name);
+
+  bool success = GetSupportedFiletypes(ret, device);
+  device->Release();
+
+  return success;
 }

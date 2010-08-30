@@ -24,6 +24,7 @@
 class WmdmLoader;
 class WmdmThread;
 
+struct IWMDMDevice;
 struct IWMDMStorage3;
 struct IWMDMStorageControl3;
 
@@ -40,9 +41,9 @@ public:
 
   void Init();
 
-  QList<Song::FileType> SupportedFiletypes();
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret);
 
-  void StartCopy();
+  bool StartCopy(QList<Song::FileType>* supported_types);
   bool CopyToStorage(const CopyJob& job);
   void FinishCopy(bool success);
 
@@ -52,6 +53,9 @@ public:
 
 private slots:
   void LoadFinished();
+
+private:
+  bool GetSupportedFiletypes(QList<Song::FileType>* ret, IWMDMDevice* device);
 
 private:
   QThread* loader_thread_;

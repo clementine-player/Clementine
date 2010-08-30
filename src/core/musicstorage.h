@@ -62,9 +62,9 @@ public:
 
   virtual TranscodeMode GetTranscodeMode() const { return Transcode_Never; }
   virtual Song::FileType GetTranscodeFormat() const { return Song::Type_Unknown; }
-  virtual QList<Song::FileType> SupportedFiletypes() { return QList<Song::FileType>(); }
+  virtual bool GetSupportedFiletypes(QList<Song::FileType>* ret) { return true; }
 
-  virtual void StartCopy() {}
+  virtual bool StartCopy(QList<Song::FileType>* supported_types) { return true;}
   virtual bool CopyToStorage(const CopyJob& job) = 0;
   virtual void FinishCopy(bool success) {}
 

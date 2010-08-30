@@ -43,7 +43,7 @@ public:
 
   static QStringList url_schemes() { return QStringList() << "afc"; }
 
-  void StartCopy();
+  bool StartCopy(QList<Song::FileType>* supported_types);
   bool CopyToStorage(const CopyJob& job);
   void FinishCopy(bool success);
 

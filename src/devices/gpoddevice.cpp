@@ -63,7 +63,7 @@ void GPodDevice::LoadFinished(Itdb_iTunesDB* db) {
   loader_ = NULL;
 }
 
-void GPodDevice::StartCopy() {
+bool GPodDevice::StartCopy(QList<Song::FileType>* supported_filetypes) {
   {
     // Wait for the database to be loaded
     QMutexLocker l(&db_mutex_);
@@ -73,6 +73,10 @@ void GPodDevice::StartCopy() {
 
   // Ensure only one "organise files" can be active at any one time
   db_busy_.lock();
+
+  if (supported_filetypes)
+    GetSupportedFiletypes(supported_filetypes);
+  return true;
 }
 
 Itdb_Track* GPodDevice::AddTrackToITunesDb(const Song& metadata) {
@@ -157,7 +161,7 @@ void GPodDevice::FinishCopy(bool success) {
 }
 
 void GPodDevice::StartDelete() {
-  StartCopy();
+  StartCopy(NULL);
 }
 
 bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& relative_to) {
@@ -220,9 +224,8 @@ void GPodDevice::FinishDelete(bool success) {
   ConnectedDevice::FinishDelete(success);
 }
 
-QList<Song::FileType> GPodDevice::SupportedFiletypes() {
-  QList<Song::FileType> ret;
-  ret << Song::Type_Mp4;
-  ret << Song::Type_Mpeg;
-  return ret;
+bool GPodDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
+  *ret << Song::Type_Mp4;
+  *ret << Song::Type_Mpeg;
+  return true;
 }

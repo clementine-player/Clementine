@@ -75,9 +75,11 @@ void AfcDevice::CopyFinished(bool success) {
   QMetaObject::invokeMethod(loader_, "LoadDatabase");
 }
 
-void AfcDevice::StartCopy() {
-  GPodDevice::StartCopy();
+bool AfcDevice::StartCopy(QList<Song::FileType>* supported_types) {
+  GPodDevice::StartCopy(supported_types);
   connection_.reset(new iMobileDeviceConnection(url_.host()));
+
+  return true;
 }
 
 bool AfcDevice::CopyToStorage(const CopyJob& job) {

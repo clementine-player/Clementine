@@ -174,12 +174,6 @@ void DeviceProperties::UpdateHardwareInfo() {
   }
 }
 
-namespace {
-  typedef QList<Song::FileType> TypeList;
-  typedef QFuture<TypeList> DeviceTypesFuture;
-  typedef QFutureWatcher<TypeList> DeviceTypesFutureWatcher;
-}
-
 void DeviceProperties::UpdateFormats() {
   QString id = index_.data(DeviceManager::Role_UniqueId).toString();
   DeviceLister* lister = manager_->GetLister(index_.row());
@@ -222,9 +216,11 @@ void DeviceProperties::UpdateFormats() {
   if (!updating_formats_) {
     // Get the device's supported formats list.  This takes a long time and it
     // blocks, so do it in the background.
-    DeviceTypesFuture future = QtConcurrent::run(
-        boost::bind(&ConnectedDevice::SupportedFiletypes, device));
-    DeviceTypesFutureWatcher* watcher = new DeviceTypesFutureWatcher(this);
+    supported_formats_.clear();
+
+    QFuture<bool> future = QtConcurrent::run(boost::bind(
+        &ConnectedDevice::GetSupportedFiletypes, device, &supported_formats_));
+    QFutureWatcher<bool>* watcher = new QFutureWatcher<bool>(this);
     watcher->setFuture(future);
 
     connect(watcher, SIGNAL(finished()), SLOT(UpdateFormatsFinished()));
@@ -260,23 +256,25 @@ void DeviceProperties::OpenDevice() {
 }
 
 void DeviceProperties::UpdateFormatsFinished() {
-  DeviceTypesFutureWatcher* watcher = static_cast<DeviceTypesFutureWatcher*>(sender());
+  QFutureWatcher<bool>* watcher = static_cast<QFutureWatcher<bool>*>(sender());
   watcher->deleteLater();
   updating_formats_ = false;
 
-  TypeList list = watcher->future().result();
+  if (!watcher->future().result()) {
+    supported_formats_.clear();
+  }
 
   // Hide widgets if there are no supported types
-  ui_->supported_formats_container->setVisible(!list.isEmpty());
-  ui_->transcode_unsupported->setEnabled(!list.isEmpty());
+  ui_->supported_formats_container->setVisible(!supported_formats_.isEmpty());
+  ui_->transcode_unsupported->setEnabled(!supported_formats_.isEmpty());
 
-  if (ui_->transcode_unsupported->isChecked() && list.isEmpty()) {
+  if (ui_->transcode_unsupported->isChecked() && supported_formats_.isEmpty()) {
     ui_->transcode_off->setChecked(true);
   }
 
   // Populate supported types list
   ui_->supported_formats->clear();
-  foreach (Song::FileType type, list) {
+  foreach (Song::FileType type, supported_formats_) {
     QListWidgetItem* item = new QListWidgetItem(Song::TextForFiletype(type));
     ui_->supported_formats->addItem(item);
   }
@@ -288,7 +286,7 @@ void DeviceProperties::UpdateFormatsFinished() {
   if (preset.type_ == Song::Type_Unknown) {
     // The user hasn't chosen a format for this device yet, so work our way down
     // a list of some preferred formats, picking the first one that is supported
-    preset = Transcoder::PresetForFileType(Transcoder::PickBestFormat(list));
+    preset = Transcoder::PresetForFileType(Transcoder::PickBestFormat(supported_formats_));
   }
   ui_->transcode_format->setCurrentIndex(ui_->transcode_format->findText(preset.name_));
 

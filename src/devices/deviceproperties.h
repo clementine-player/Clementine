@@ -55,6 +55,7 @@ private:
   QPersistentModelIndex index_;
 
   bool updating_formats_;
+  QList<Song::FileType> supported_formats_;
 };
 
 #endif // DEVICEPROPERTIES_H

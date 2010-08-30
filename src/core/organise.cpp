@@ -72,9 +72,13 @@ void Organise::Start() {
 void Organise::ProcessSomeFiles() {
   if (!started_) {
     transcode_temp_name_.open();
-    supported_filetypes_ = destination_->SupportedFiletypes();
 
-    destination_->StartCopy();
+    if (!destination_->StartCopy(&supported_filetypes_)) {
+      // Failed to start - mark everything as failed :(
+      foreach (const Task& task, tasks_pending_)
+        files_with_errors_ << task.filename_;
+      tasks_pending_.clear();
+    }
     started_ = true;
   }
 
