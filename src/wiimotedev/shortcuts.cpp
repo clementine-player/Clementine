@@ -17,34 +17,39 @@
 #include <QSettings>
 
 #include "wiimotedev/shortcuts.h"
-#include "wiimotedev/interface.h"
 
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
 const char* WiimotedevShortcuts::kSettingsGroup = "WiimotedevSettings";
 
-WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
+WiimotedevShortcuts::WiimotedevShortcuts(QObject* parent)
  :QObject(parent),
-  player_(player),
-  wiimotedev_iface_(NULL),
+  player_(qobject_cast<Player*>(parent)),
+  wiimotedev_active_(true),
   wiimotedev_buttons_(0),
   wiimotedev_device_(1),
-  wiimotedev_active_(true),
   wiimotedev_enable_(true),
   wiimotedev_focus_(false),
+  wiimotedev_iface_(NULL),
   wiimotedev_notification_(true)
 {
   ReloadSettings();
+}
 
-  if (QDBusConnection::systemBus().isConnected()) {
-    wiimotedev_iface_ = new DBusDeviceEventsInterface(WIIMOTEDEV_DBUS_SERVICE_NAME,
-                                                      WIIMOTEDEV_DBUS_EVENTS_OBJECT,
-                                                      QDBusConnection::systemBus(),
-                                                      this);
-    qDebug() << "Wiimotedev interface valid" << wiimotedev_iface_->isValid();
+void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
+  if (!QDBusConnection::systemBus().isConnected())
+    return;
 
-    connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
+  if (actived && !wiimotedev_iface_) {
+    wiimotedev_iface_.reset(new DBusDeviceEventsInterface(
+        WIIMOTEDEV_DBUS_SERVICE_NAME, WIIMOTEDEV_DBUS_EVENTS_OBJECT,
+        QDBusConnection::systemBus(), this));
+
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
             this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));
   }
+
+  if (!actived && wiimotedev_iface_)
+    wiimotedev_iface_.reset();
 }
 
 void WiimotedevShortcuts::ReloadSettings() {
@@ -53,7 +58,7 @@ void WiimotedevShortcuts::ReloadSettings() {
   actions_.clear();
 
   if (!settings_.allKeys().count()) {
-    SetDefaultSettings();
+    RestoreSettings();
     settings_.sync();
   }
 
@@ -76,9 +81,11 @@ void WiimotedevShortcuts::ReloadSettings() {
   wiimotedev_notification_ = settings_.value("use_notification", wiimotedev_notification_).toBool();
 
   settings_.endGroup();
+
+  SetWiimotedevInterfaceActived(wiimotedev_enable_);
 }
 
-void WiimotedevShortcuts::SetDefaultSettings()
+void WiimotedevShortcuts::RestoreSettings()
 {
   QSettings settings;
   settings.beginGroup(WiimotedevShortcuts::kActionsGroup);
@@ -104,7 +111,7 @@ void WiimotedevShortcuts::SetDefaultSettings()
 }
 
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(quint32 id, quint64 value) {
-  if (id != wiimotedev_device_ || !wiimotedev_enable_) return;
+  if (id != wiimotedev_device_ || !wiimotedev_enable_ || !player_) return;
 
   quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
 

@@ -107,7 +107,7 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
 
   settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
   ui_->wiimotedev_enable->setChecked(settings_.value("enabled", true).toBool());
-  ui_->wiimotedev_groupbox->setChecked(settings_.value("enabled", true).toBool());
+  ui_->wiimotedev_groupbox->setEnabled(settings_.value("enabled", true).toBool());
   ui_->wiimotedev_active->setChecked(settings_.value("use_active_action", false).toBool());
   ui_->wiimotedev_focus->setChecked(settings_.value("only_when_focused", false).toBool());
   ui_->wiimotedev_notification->setChecked(settings_.value("use_notification", false).toBool());

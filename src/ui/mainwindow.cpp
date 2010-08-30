@@ -473,7 +473,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
-  wiimotedev_shortcuts_ = new WiimotedevShortcuts(player_, this);
+  wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(player_));
 #endif
 
   qDebug() << t.restart() << "tray";
@@ -1486,7 +1486,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
   #ifdef ENABLE_WIIMOTEDEV
-  connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
   #endif
 }
 

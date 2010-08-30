@@ -225,7 +225,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
-  WiimotedevShortcuts* wiimotedev_shortcuts_;
+  boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
 #endif
 
   QMenu* playlist_menu_;

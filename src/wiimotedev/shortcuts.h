@@ -17,11 +17,11 @@
 #ifndef WIIMOTEDEV_SHORTCUTS_H
 #define WIIMOTEDEV_SHORTCUTS_H
 
-#include <QObject>
-#include <QMap>
-#include "core/player.h"
+#include <boost/scoped_ptr.hpp>
 
-class DBusDeviceEventsInterface;
+#include "core/player.h"
+#include "wiimotedev/interface.h"
+
 class QSettings;
 
 class WiimotedevShortcuts :public QObject {
@@ -30,28 +30,8 @@ public:
   static const char* kActionsGroup;
   static const char* kSettingsGroup;
 
-  WiimotedevShortcuts(Player* player = 0, QObject* parent = 0);
+  WiimotedevShortcuts(QObject* parent = 0);
 
-public slots:
-  void ReloadSettings();
-  void SetDefaultSettings();
-
-private slots:
-  void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
-
-private:
-  Player* player_;
-  DBusDeviceEventsInterface* wiimotedev_iface_;
-  quint64 wiimotedev_buttons_;
-  QSettings settings_;
-
-  quint32 wiimotedev_device_; 
-  bool wiimotedev_active_;
-  bool wiimotedev_enable_;
-  bool wiimotedev_focus_;
-  bool wiimotedev_notification_;
-
-public:
   enum Action {
     WiimotedevActive = 0,
     WiimotedevDeactive,
@@ -71,9 +51,27 @@ public:
     ActionNone  = 0xff
   };
 
-private:
-  QHash <quint64, quint32> actions_;
+public slots:
+  void SetWiimotedevInterfaceActived(bool actived);
+  void ReloadSettings();
+  void RestoreSettings();
 
+private slots:
+  void DbusWiimoteGeneralButtons(quint32 id, quint64 value);
+
+private:
+  Player* player_;
+
+  bool wiimotedev_active_;
+  quint64 wiimotedev_buttons_;
+  quint32 wiimotedev_device_;
+  bool wiimotedev_enable_;
+  bool wiimotedev_focus_;
+  boost::scoped_ptr<DBusDeviceEventsInterface> wiimotedev_iface_;
+  bool wiimotedev_notification_;
+
+  QHash <quint64, quint32> actions_;
+  QSettings settings_;
 };
 
 #endif // WIIMOTEDEV_SHORTCUTS_H
