@@ -35,13 +35,16 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
     database_id_(database_id),
     manager_(manager),
     backend_(NULL),
-    model_(NULL)
+    model_(NULL),
+    song_count_(0)
 {
   qDebug() << __PRETTY_FUNCTION__;
 
   // Create the backend in the database thread.
   backend_ = new LibraryBackend();
   backend_->moveToThread(manager->database());
+
+  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(BackendTotalSongCountUpdated(int)));
 
   backend_->Init(manager->database()->Worker(),
                  QString("device_%1_songs").arg(database_id),
@@ -105,4 +108,9 @@ Song::FileType ConnectedDevice::GetTranscodeFormat() const {
   int index = manager_->FindDeviceById(unique_id_);
   return Song::FileType(
       manager_->index(index).data(DeviceManager::Role_TranscodeFormat).toInt());
+}
+
+void ConnectedDevice::BackendTotalSongCountUpdated(int count) {
+  song_count_ = count;
+  emit SongCountUpdated(count);
 }

@@ -40,6 +40,7 @@ WiimotedevShortcuts::WiimotedevShortcuts(Player* player, QObject* parent)
                                                       WIIMOTEDEV_DBUS_EVENTS_OBJECT,
                                                       QDBusConnection::systemBus(),
                                                       this);
+    qDebug() << "Wiimotedev interface valid" << wiimotedev_iface_->isValid();
 
     connect(wiimotedev_iface_, SIGNAL(dbusWiimoteGeneralButtons(quint32,quint64)),
             this, SLOT(DbusWiimoteGeneralButtons(quint32, quint64)));

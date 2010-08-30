@@ -333,6 +333,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
     case Role_TranscodeFormat:
       return info.transcode_format_;
 
+    case Role_SongCount:
+      if (!info.device_)
+        return QVariant();
+      return info.device_->song_count();
+
     default:
       return QVariant();
   }
@@ -551,6 +556,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     emit dataChanged(index(row), index(row));
     connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
     connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+    connect(info.device_.get(), SIGNAL(SongCountUpdated(int)), SLOT(DeviceSongCountUpdated(int)));
   }
 
   emit DeviceConnected(row);
@@ -695,4 +701,16 @@ void DeviceManager::Unmount(int row) {
 
   if (info.BestBackend()->lister_)
     info.BestBackend()->lister_->UnmountDevice(info.BestBackend()->unique_id_);
+}
+
+void DeviceManager::DeviceSongCountUpdated(int count) {
+  ConnectedDevice* device = qobject_cast<ConnectedDevice*>(sender());
+  if (!device)
+    return;
+
+  int row = FindDeviceById(device->unique_id());
+  if (row == -1)
+    return;
+
+  emit dataChanged(index(row), index(row));
 }

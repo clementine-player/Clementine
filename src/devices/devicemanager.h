@@ -51,6 +51,7 @@ public:
     Role_MountPath,
     Role_TranscodeMode,
     Role_TranscodeFormat,
+    Role_SongCount,
 
     LastRole,
   };
@@ -105,6 +106,7 @@ private slots:
   void PhysicalDeviceChanged(const QString& id);
   void DeviceTaskStarted(int id);
   void TasksChanged();
+  void DeviceSongCountUpdated(int count);
 
 private:
   // Devices can be in three different states:

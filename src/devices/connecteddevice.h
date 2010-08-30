@@ -51,6 +51,7 @@ public:
   QString unique_id() const { return unique_id_; }
   LibraryModel* model() const { return model_; }
   QUrl url() const { return url_; }
+  int song_count() const { return song_count_; }
 
   virtual void FinishCopy(bool success);
   virtual void FinishDelete(bool success);
@@ -60,6 +61,7 @@ public:
 signals:
   void TaskStarted(int id);
   void Error(const QString& message);
+  void SongCountUpdated(int count);
 
 protected:
   void InitBackendDirectory(const QString& mount_point, bool first_time, bool rewrite_path = true);
@@ -74,6 +76,11 @@ protected:
 
   LibraryBackend* backend_;
   LibraryModel* model_;
+
+  int song_count_;
+
+private slots:
+  void BackendTotalSongCountUpdated(int count);
 };
 
 #endif // CONNECTEDDEVICE_H
