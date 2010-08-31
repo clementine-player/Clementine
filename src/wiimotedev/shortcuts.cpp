@@ -54,61 +54,44 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
 }
 
 void WiimotedevShortcuts::ReloadSettings() {
-  settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
   settings_.sync();
   actions_.clear();
 
-  if (!settings_.allKeys().count()) {
-    RestoreSettings();
-    settings_.sync();
+  settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
+
+  if (!settings_.allKeys().count())  {
+    actions_[WIIMOTE_BTN_LEFT] = PlayerPreviousTrack;
+    actions_[WIIMOTE_BTN_RIGHT] = PlayerNextTrack;
+    actions_[WIIMOTE_BTN_RIGHT] = PlayerNextTrack;
+    actions_[WIIMOTE_BTN_SHIFT_LEFT] = PlayerPreviousTrack;
+    actions_[WIIMOTE_BTN_SHIFT_RIGHT] = PlayerNextTrack;
+    actions_[WIIMOTE_BTN_PLUS] = PlayerIncVolume;
+    actions_[WIIMOTE_BTN_MINUS] = PlayerDecVolume;
+    actions_[WIIMOTE_BTN_1] = PlayerTogglePause;
+    actions_[WIIMOTE_BTN_2] = PlayerShowOSD;
+  } else {
+
+    quint64 fvalue, svalue;
+    bool fvalid, svalid;
+
+    foreach (const QString& str, settings_.allKeys()) {
+      fvalue = str.toULongLong(&fvalid, 10);
+      svalue = settings_.value(str, 0).toULongLong(&svalid);
+      if (fvalid && svalid) actions_[fvalue] = svalue;
+    }
   }
-
-  quint64 fvalue, svalue;
-  bool fvalid, svalid;
-
-  foreach (const QString& str, settings_.allKeys()) {
-    fvalue = str.toULongLong(&fvalid, 10);
-    svalue = settings_.value(str, 0).toULongLong(&svalid);
-    if (fvalid && svalid) actions_[fvalue] = svalue;
-  }
-
   settings_.endGroup();
 
   settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
-  wiimotedev_enable_ = settings_.value("enabled", wiimotedev_enable_).toBool();
-  wiimotedev_device_ = settings_.value("device", wiimotedev_device_).toInt();
-  wiimotedev_active_ = settings_.value("use_active_action", wiimotedev_active_).toBool();
-  wiimotedev_focus_ = settings_.value("only_when_focused", wiimotedev_focus_).toBool();
-  wiimotedev_notification_ = settings_.value("use_notification", wiimotedev_notification_).toBool();
+  wiimotedev_enable_ = settings_.value("enabled", false).toBool();
+  wiimotedev_device_ = settings_.value("device", 1).toInt();
+  wiimotedev_active_ = settings_.value("use_active_action", true).toBool();
+  wiimotedev_focus_ = settings_.value("only_when_focused", false).toBool();
+  wiimotedev_notification_ = settings_.value("use_notification", true).toBool();
 
   settings_.endGroup();
 
   SetWiimotedevInterfaceActived(wiimotedev_enable_);
-}
-
-void WiimotedevShortcuts::RestoreSettings()
-{
-  QSettings settings;
-  settings.beginGroup(WiimotedevShortcuts::kActionsGroup);
-  settings.remove("");
-  settings.setValue(QString::number(WIIMOTE_BTN_LEFT), PlayerPreviousTrack);
-  settings.setValue(QString::number(WIIMOTE_BTN_RIGHT), PlayerNextTrack);
-  settings.setValue(QString::number(WIIMOTE_BTN_SHIFT_LEFT), PlayerPreviousTrack);
-  settings.setValue(QString::number(WIIMOTE_BTN_SHIFT_RIGHT), PlayerNextTrack);
-  settings.setValue(QString::number(WIIMOTE_BTN_PLUS), PlayerIncVolume);
-  settings.setValue(QString::number(WIIMOTE_BTN_MINUS), PlayerDecVolume);
-  settings.setValue(QString::number(WIIMOTE_BTN_1), PlayerTogglePause);
-  settings.setValue(QString::number(WIIMOTE_BTN_2), PlayerShowOSD);
-  settings.endGroup();
-
-  settings.beginGroup(WiimotedevShortcuts::kSettingsGroup);
-  settings.remove("");
-  settings.setValue("enabled", false);
-  settings.setValue("device", 1);
-  settings.setValue("use_active_action", true);
-  settings.setValue("only_when_focused", false);
-  settings.setValue("use_notification", true);
-  settings.endGroup();
 }
 
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {

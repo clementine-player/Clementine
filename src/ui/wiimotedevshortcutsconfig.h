@@ -43,6 +43,9 @@ public:
   QString GetReadableWiiremoteSequence(quint64 value);
 
 private:
+  void AddShortcut(quint64 button, quint32 action);
+
+private:
   QSettings settings_;
   QString current_id_;
 

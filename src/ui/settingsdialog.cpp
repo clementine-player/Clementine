@@ -232,11 +232,8 @@ void SettingsDialog::accept() {
 #ifdef ENABLE_WIIMOTEDEV
   s.beginGroup(WiimotedevShortcuts::kActionsGroup);
   s.remove("");
-
-  foreach (const WiimotedevShortcutsConfig::Shortcut& shortcut, wiimotedev_config_->actions_) {
+  foreach (const WiimotedevShortcutsConfig::Shortcut& shortcut, wiimotedev_config_->actions_)
     s.setValue(QString::number(shortcut.button), shortcut.action);
-  }
-
   s.endGroup();
 
   s.beginGroup(WiimotedevShortcuts::kSettingsGroup);

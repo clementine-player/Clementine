@@ -54,7 +54,6 @@ public:
 public slots:
   void SetWiimotedevInterfaceActived(bool actived);
   void ReloadSettings();
-  void RestoreSettings();
 
 private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
