@@ -361,11 +361,6 @@ void Song::GuessFileType(TagLib::FileRef* fileref) {
 }
 
 void Song::InitFromQuery(const SqlRow& q, int col) {
-#ifndef QT_NO_DEBUG_OUTPUT
-  if (qApp->thread() == QThread::currentThread())
-    qWarning() << Q_FUNC_INFO << "on GUI thread!";
-#endif
-
   d->valid_ = true;
 
   #define tostr(n) (q.value(n).isNull() ? QString::null : q.value(n).toString())
