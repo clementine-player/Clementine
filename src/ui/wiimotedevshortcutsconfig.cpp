@@ -136,6 +136,15 @@ void WiimotedevShortcutsConfig::AddShortcut(quint64 button, quint32 action) {
 }
 
 void WiimotedevShortcutsConfig::LoadSettings(){
+  settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
+  bool first_conf = settings_.value("first_conf", true).toBool();
+  settings_.endGroup();
+
+  if (first_conf) {
+    DefaultSettings();
+    return;
+  }
+
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
   settings_.sync();
   ui_->list->clear();
@@ -154,7 +163,6 @@ void WiimotedevShortcutsConfig::LoadSettings(){
 
   ui_->list->sortItems(1, Qt::AscendingOrder);
 }
-
 
 void WiimotedevShortcutsConfig::DefaultSettings()
 {

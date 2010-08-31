@@ -59,27 +59,16 @@ void WiimotedevShortcuts::ReloadSettings() {
 
   settings_.beginGroup(WiimotedevShortcuts::kActionsGroup);
 
-  if (!settings_.allKeys().count())  {
-    actions_[WIIMOTE_BTN_LEFT] = PlayerPreviousTrack;
-    actions_[WIIMOTE_BTN_RIGHT] = PlayerNextTrack;
-    actions_[WIIMOTE_BTN_RIGHT] = PlayerNextTrack;
-    actions_[WIIMOTE_BTN_SHIFT_LEFT] = PlayerPreviousTrack;
-    actions_[WIIMOTE_BTN_SHIFT_RIGHT] = PlayerNextTrack;
-    actions_[WIIMOTE_BTN_PLUS] = PlayerIncVolume;
-    actions_[WIIMOTE_BTN_MINUS] = PlayerDecVolume;
-    actions_[WIIMOTE_BTN_1] = PlayerTogglePause;
-    actions_[WIIMOTE_BTN_2] = PlayerShowOSD;
-  } else {
+  quint64 fvalue, svalue;
+  bool fvalid, svalid;
 
-    quint64 fvalue, svalue;
-    bool fvalid, svalid;
-
-    foreach (const QString& str, settings_.allKeys()) {
-      fvalue = str.toULongLong(&fvalid, 10);
-      svalue = settings_.value(str, 0).toULongLong(&svalid);
-      if (fvalid && svalid) actions_[fvalue] = svalue;
-    }
+  foreach (const QString& str, settings_.allKeys()) {
+    fvalue = str.toULongLong(&fvalid, 10);
+    svalue = settings_.value(str, 0).toULongLong(&svalid);
+    if (fvalid && svalid)
+      actions_[fvalue] = svalue;
   }
+
   settings_.endGroup();
 
   settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
@@ -88,7 +77,6 @@ void WiimotedevShortcuts::ReloadSettings() {
   wiimotedev_active_ = settings_.value("use_active_action", true).toBool();
   wiimotedev_focus_ = settings_.value("only_when_focused", false).toBool();
   wiimotedev_notification_ = settings_.value("use_notification", true).toBool();
-
   settings_.endGroup();
 
   SetWiimotedevInterfaceActived(wiimotedev_enable_);

@@ -239,6 +239,7 @@ void SettingsDialog::accept() {
   s.endGroup();
 
   s.beginGroup(WiimotedevShortcuts::kSettingsGroup);
+  s.setValue("first_conf", false);
   s.setValue("enabled", wiimotedev_config_->ui_->wiimotedev_enable->isChecked());
   s.setValue("only_when_focused", wiimotedev_config_->ui_->wiimotedev_focus->isChecked());
   s.setValue("use_active_action", wiimotedev_config_->ui_->wiimotedev_active->isChecked());
