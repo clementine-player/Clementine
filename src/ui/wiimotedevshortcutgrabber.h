@@ -18,9 +18,10 @@
 #define WIIMOTEDEVSHORTCUTGRABBER_H
 
 #include <QDialog>
+#include <QTimeLine>
+
 #include <boost/scoped_ptr.hpp>
 #include "dbus/wiimotedev.h"
-
 #include "ui/wiimotedevshortcutsconfig.h"
 
 class Ui_WiimotedevShortcutGrabber;
@@ -36,8 +37,11 @@ public:
 private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
   void RememberSwingChecked(bool checked);
+  void Timeout(int);
 
 private:
+  QTimeLine line_;
+
   quint32 pref_action_;
 
   Ui_WiimotedevShortcutGrabber* ui_;

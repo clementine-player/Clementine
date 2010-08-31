@@ -16,18 +16,17 @@
 
 #include "ui/wiimotedevshortcutgrabber.h"
 #include "ui_wiimotedevshortcutgrabber.h"
-
 #include "wiimotedev/consts.h"
 
 WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *parent)
-  : QDialog(parent),
-    pref_action_(action),
-    ui_(new Ui_WiimotedevShortcutGrabber),
-    config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
-    wiimotedev_device_(1),
-    wiimotedev_buttons_(0),
-    remember_wiimote_shifts_(0),
-    remember_nunchuk_shifts_(0)
+ :QDialog(parent),
+  pref_action_(action),
+  ui_(new Ui_WiimotedevShortcutGrabber),
+  config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
+  wiimotedev_device_(1),
+  wiimotedev_buttons_(0),
+  remember_wiimote_shifts_(0),
+  remember_nunchuk_shifts_(0)
 {
   ui_->setupUi(this);
 
@@ -50,16 +49,35 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *pa
     ui_->comboBox->addItem(name);
 
   ui_->comboBox->setCurrentIndex(pref_action_);
+  ui_->keep_label->setVisible(false);
 
   connect(ui_->remember_shifts, SIGNAL(clicked(bool)), this, SLOT(RememberSwingChecked(bool)));
+  connect(ui_->buttonBox, SIGNAL(rejected()),  this, SLOT(close()));
+  connect(&line_, SIGNAL(frameChanged(int)), this, SLOT(Timeout(int)));
+
+  line_.setFrameRange(4, 0);
+  line_.setEasingCurve(QEasingCurve::Linear);
+  line_.setDuration(line_.startFrame()*1000);
 }
 
 WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
   delete ui_;
 }
 
+void WiimotedevShortcutGrabber::Timeout(int secs) {
+  if (secs == 0)
+    close();
+
+  if (secs == 1)
+    ui_->keep_label->setText(QString(tr("Keep buttons for %1 second")).arg(QString::number(secs))); else
+    ui_->keep_label->setText(QString(tr("Keep buttons for %1 seconds")).arg(QString::number(secs)));
+}
+
 void WiimotedevShortcutGrabber::RememberSwingChecked(bool checked) {
   quint64 buttons = wiimotedev_buttons_;
+  line_.stop();
+  ui_->keep_label->setVisible(false);
+
 
   if (checked) {
     buttons |=  remember_wiimote_shifts_ | remember_nunchuk_shifts_;
@@ -92,6 +110,11 @@ void WiimotedevShortcutGrabber::DbusWiimoteGeneralButtons(uint id, qulonglong va
   remember_wiimote_shifts_ = buttons & WIIMOTE_SHIFT_MASK;
   remember_nunchuk_shifts_ = buttons & NUNCHUK_SHIFT_MASK;
 
+  line_.stop();
+  if (buttons) line_.start();
+
+  ui_->keep_label->setVisible(buttons);
+  ui_->keep_label->setText(QString(tr("Keep buttons for %1 seconds")).arg(QString::number(line_.startFrame())));
   ui_->combo->setText(config_->GetReadableWiiremoteSequence(buttons));
 
   wiimotedev_buttons_ = buttons;
