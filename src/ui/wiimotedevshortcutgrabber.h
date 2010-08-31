@@ -32,18 +32,12 @@ public:
   WiimotedevShortcutGrabber(quint32 action = 0, QWidget* parent = 0);
   ~WiimotedevShortcutGrabber();
 
-  bool IsAccepted() { return accepted_; }
-  quint32 GetActionValue() { return pref_action_; }
-  quint64 GetButtonsValue() { return wiimotedev_buttons_; }
-
 private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
   void RememberSwingChecked(bool checked);
   void Timeout(int);
 
 private:
-  bool accepted_;
-
   QTimeLine line_;
   quint32 pref_action_;
 
@@ -55,6 +49,9 @@ private:
 
   quint64 remember_wiimote_shifts_;
   quint64 remember_nunchuk_shifts_;
+
+signals:
+  void AddShortcut(quint64 buttons, quint32 action);
 
 };
 

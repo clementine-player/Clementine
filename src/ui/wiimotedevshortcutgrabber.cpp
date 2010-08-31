@@ -20,7 +20,6 @@
 
 WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *parent)
  :QDialog(parent),
-  accepted_(false),
   pref_action_(action),
   ui_(new Ui_WiimotedevShortcutGrabber),
   config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
@@ -63,8 +62,7 @@ WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
 
 void WiimotedevShortcutGrabber::Timeout(int secs) {
   if (secs == 0) {
-    pref_action_ = ui_->comboBox->currentIndex();
-    accepted_ = true;
+    emit AddShortcut(wiimotedev_buttons_, ui_->comboBox->currentIndex());
     close();
   }
 

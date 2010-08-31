@@ -43,9 +43,6 @@ public:
   QString GetReadableWiiremoteSequence(quint64 value);
 
 private:
-  void AddShortcut(quint64 button, quint32 action);
-
-private:
   QSettings settings_;
   QString current_id_;
 
@@ -53,12 +50,13 @@ private:
 
 private slots:
   void AddAction();
+  void AddShortcut(quint64 button, quint32 action);
   void DefaultSettings();
   void DeleteAction();
-  void LoadSettings();
-
-  void WiimotedevEnabledChecked(bool checked);
   void ItemClicked(QTreeWidgetItem*);
+  void LoadSettings();
+  void WiimotedevEnabledChecked(bool checked);
+
 
 signals:
   void SetWiimotedevInterfaceActived(bool);
