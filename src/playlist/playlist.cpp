@@ -51,13 +51,17 @@ using boost::shared_ptr;
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kPlayNowMimetype = "application/x-clementine-play-now";
 
-Playlist::Playlist(PlaylistBackend* backend, TaskManager* task_manager,
-                   int id, QObject *parent)
+Playlist::Playlist(PlaylistBackend* backend,
+                   TaskManager* task_manager,
+                   LibraryBackend* library,
+                   int id,
+                   QObject *parent)
   : QAbstractListModel(parent),
     proxy_(new PlaylistFilter(this)),
     queue_(new Queue(this)),
     backend_(backend),
     task_manager_(task_manager),
+    library_(library),
     id_(id),
     current_is_paused_(false),
     current_virtual_index_(-1),
@@ -554,7 +558,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 }
 
 void Playlist::InsertUrls(const QList<QUrl> &urls, bool play_now, int pos) {
-  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, this);
+  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_, this);
   connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 

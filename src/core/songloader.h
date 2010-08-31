@@ -29,13 +29,14 @@
 # include <gst/gst.h>
 #endif
 
+class LibraryBackend;
 class ParserBase;
 class PlaylistParser;
 
 class SongLoader : public QObject {
   Q_OBJECT
 public:
-  SongLoader(QObject* parent = 0);
+  SongLoader(LibraryBackend* library, QObject* parent = 0);
   ~SongLoader();
 
   enum Result {
@@ -69,7 +70,7 @@ private:
     Finished,
   };
 
-  Result LoadLocal();
+  Result LoadLocal(const QString& filename, bool block = false);
   void LoadLocalDirectory(const QString& filename);
   void LoadPlaylist(ParserBase* parser, const QString& filename);
 
@@ -106,6 +107,7 @@ private:
   ParserBase* parser_;
   QString mime_type_;
   QByteArray buffer_;
+  LibraryBackend* library_;
 
 #ifdef HAVE_GSTREAMER
   boost::shared_ptr<GstElement> pipeline_;

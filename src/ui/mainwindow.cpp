@@ -627,7 +627,8 @@ void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
 }
 
 void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
-  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, this);
+  SongLoaderInserter* inserter =
+      new SongLoaderInserter(task_manager_, library_->backend(), this);
   connect(inserter, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 

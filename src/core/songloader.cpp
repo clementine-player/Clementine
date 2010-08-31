@@ -16,6 +16,8 @@
 
 #include "songloader.h"
 #include "core/song.h"
+#include "library/librarybackend.h"
+#include "library/sqlrow.h"
 #include "playlistparsers/parserbase.h"
 #include "playlistparsers/playlistparser.h"
 #include "radio/fixlastfm.h"
@@ -32,14 +34,15 @@
 QSet<QString> SongLoader::sRawUriSchemes;
 const int SongLoader::kDefaultTimeout = 5000;
 
-SongLoader::SongLoader(QObject *parent)
+SongLoader::SongLoader(LibraryBackend* library, QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
     playlist_parser_(new PlaylistParser(this)),
     timeout_(kDefaultTimeout),
     state_(WaitingForType),
     success_(false),
-    parser_(NULL)
+    parser_(NULL),
+    library_(library)
 {
   if (sRawUriSchemes.isEmpty()) {
     sRawUriSchemes << "udp" << "mms" << "mmsh" << "mmst" << "mmsu" << "rtsp"
@@ -66,7 +69,7 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
   url_ = url;
 
   if (url_.scheme() == "file") {
-    return LoadLocal();
+    return LoadLocal(url_.toLocalFile());
   }
 
   if (sRawUriSchemes.contains(url_.scheme())) {
@@ -87,15 +90,19 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
 #endif
 }
 
-SongLoader::Result SongLoader::LoadLocal() {
-  qDebug() << "Loading local file" << url_;
+SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block) {
+  qDebug() << "Loading local file" << filename;
 
   // First check to see if it's a directory - if so we can load all the songs
   // inside right away.
-  QString filename = url_.toLocalFile();
   if (QFileInfo(filename).isDir()) {
-    QtConcurrent::run(this, &SongLoader::LoadLocalDirectory, filename);
-    return WillLoadAsync;
+    if (!block) {
+      QtConcurrent::run(this, &SongLoader::LoadLocalDirectory, filename);
+      return WillLoadAsync;
+    } else {
+      LoadLocalDirectory(filename);
+      return Success;
+    }
   }
 
   // It's a local file, so check if it looks like a playlist.
@@ -116,13 +123,27 @@ SongLoader::Result SongLoader::LoadLocal() {
     qDebug() << "Parsing using" << parser->name();
 
     // It's a playlist!
-    QtConcurrent::run(this, &SongLoader::LoadPlaylist, parser, filename);
-    return WillLoadAsync;
+    if (!block) {
+      QtConcurrent::run(this, &SongLoader::LoadPlaylist, parser, filename);
+      return WillLoadAsync;
+    } else {
+      LoadPlaylist(parser, filename);
+      return Success;
+    }
   }
 
   // Not a playlist, so just assume it's a song
+  QFileInfo info(filename);
+  LibraryQuery query;
+  query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
+  query.AddWhere("filename", info.canonicalFilePath());
   Song song;
-  song.InitFromFile(filename, -1);
+  if (library_->ExecQuery(&query) && query.Next()) {
+    qDebug() << "Found it in db!";
+    song.InitFromQuery(query);
+  } else {
+    song.InitFromFile(filename, -1);
+  }
   if (song.is_valid())
     songs_ << song;
   return Success;
@@ -151,11 +172,8 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
                   QDirIterator::Subdirectories);
 
   while (it.hasNext()) {
-    QString path = it.next();
-    Song song;
-    song.InitFromFile(path, -1);
-    if (song.is_valid())
-      songs_ << song;
+    // This is in another thread so we can do blocking calls.
+    LoadLocal(filename, true);
   }
 
   qStableSort(songs_.begin(), songs_.end(), CompareSongs);

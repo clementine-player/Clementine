@@ -23,6 +23,7 @@
 
 #include "core/song.h"
 
+class LibraryBackend;
 class Playlist;
 class SongLoader;
 class TaskManager;
@@ -32,7 +33,7 @@ class QModelIndex;
 class SongLoaderInserter : public QObject {
   Q_OBJECT
 public:
-  SongLoaderInserter(TaskManager* task_manager, QObject* parent = 0);
+  SongLoaderInserter(TaskManager* task_manager, LibraryBackend* library, QObject* parent = 0);
   ~SongLoaderInserter();
 
   void Load(Playlist* destination, int row, bool play_now, const QList<QUrl>& urls);
@@ -59,6 +60,7 @@ private:
   QSet<SongLoader*> pending_;
   int async_load_id_;
   int async_progress_;
+  LibraryBackend* library_;
 };
 
 #endif // SONGLOADERINSERTER_H

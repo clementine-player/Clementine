@@ -19,15 +19,16 @@
 #include "core/songloader.h"
 #include "core/taskmanager.h"
 
-SongLoaderInserter::SongLoaderInserter(TaskManager* task_manager, QObject *parent)
-  : QObject(parent),
-    task_manager_(task_manager),
-    destination_(NULL),
-    row_(-1),
-    play_now_(true),
-    async_load_id_(0),
-    async_progress_(0)
-{
+SongLoaderInserter::SongLoaderInserter(
+    TaskManager* task_manager, LibraryBackend* library, QObject *parent)
+    : QObject(parent),
+      task_manager_(task_manager),
+      destination_(NULL),
+      row_(-1),
+      play_now_(true),
+      async_load_id_(0),
+      async_progress_(0),
+      library_(library) {
 }
 
 SongLoaderInserter::~SongLoaderInserter() {
@@ -41,7 +42,7 @@ void SongLoaderInserter::Load(Playlist *destination, int row, bool play_now,
   play_now_ = play_now;
 
   foreach (const QUrl& url, urls) {
-    SongLoader* loader = new SongLoader(this);
+    SongLoader* loader = new SongLoader(library_, this);
     SongLoader::Result ret = loader->Load(url);
 
     if (ret == SongLoader::WillLoadAsync) {

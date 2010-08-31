@@ -63,7 +63,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
 }
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
-  Playlist* ret = new Playlist(playlist_backend_, task_manager_, id);
+  Playlist* ret = new Playlist(playlist_backend_, task_manager_, library_backend_, id);
   ret->set_sequence(sequence_);
 
   connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
@@ -101,7 +101,7 @@ void PlaylistManager::New(const QString& name, const SongList& songs) {
 
 void PlaylistManager::Load(const QString& filename) {
   QUrl url = QUrl::fromLocalFile(filename);
-  SongLoader* loader = new SongLoader(this);
+  SongLoader* loader = new SongLoader(library_backend_, this);
   connect(loader, SIGNAL(LoadFinished(bool)), SLOT(LoadFinished(bool)));
   SongLoader::Result result = loader->Load(url);
   QFileInfo info(filename);

@@ -27,10 +27,11 @@
 #include "core/song.h"
 #include "radio/radioitem.h"
 
-class RadioService;
+class LibraryBackend;
 class PlaylistBackend;
 class PlaylistFilter;
 class Queue;
+class RadioService;
 class TaskManager;
 
 class QSortFilterProxyModel;
@@ -50,7 +51,10 @@ class Playlist : public QAbstractListModel {
   friend class PlaylistUndoCommands::MoveItems;
 
  public:
-  Playlist(PlaylistBackend* backend, TaskManager* task_manager, int id,
+  Playlist(PlaylistBackend* backend,
+           TaskManager* task_manager,
+           LibraryBackend* library,
+           int id,
            QObject* parent = 0);
   ~Playlist();
 
@@ -214,6 +218,7 @@ class Playlist : public QAbstractListModel {
 
   PlaylistBackend* backend_;
   TaskManager* task_manager_;
+  LibraryBackend* library_;
   int id_;
 
   PlaylistItemList items_;
