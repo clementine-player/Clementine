@@ -27,7 +27,7 @@
 #include <QCoreApplication>
 
 LibraryBackend::LibraryBackend(QObject *parent)
-  : QObject(parent)
+  : LibraryBackendInterface(parent)
 {
 }
 

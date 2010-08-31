@@ -28,16 +28,10 @@
 
 class Database;
 
-class LibraryBackend : public QObject {
-  Q_OBJECT
-
+class LibraryBackendInterface : public QObject {
  public:
-  Q_INVOKABLE LibraryBackend(QObject* parent = 0);
-  void Init(boost::shared_ptr<Database> db, const QString& songs_table,
-            const QString& dirs_table, const QString& subdirs_table,
-            const QString& fts_table);
-
-  boost::shared_ptr<Database> db() const { return db_; }
+  LibraryBackendInterface(QObject* parent = 0) : QObject(parent) {}
+  virtual ~LibraryBackendInterface() {}
 
   struct Album {
     Album() {}
@@ -56,6 +50,51 @@ class LibraryBackend : public QObject {
     QString first_filename;
   };
   typedef QList<Album> AlbumList;
+
+  // Get a list of directories in the library.  Emits DirectoriesDiscovered.
+  virtual void LoadDirectoriesAsync() = 0;
+
+  // Counts the songs in the library.  Emits TotalSongCountUpdated
+  virtual void UpdateTotalSongCountAsync() = 0;
+
+  virtual SongList FindSongsInDirectory(int id) = 0;
+  virtual SubdirectoryList SubdirsInDirectory(int id) = 0;
+  virtual DirectoryList GetAllDirectories() = 0;
+  virtual void ChangeDirPath(int id, const QString& new_path) = 0;
+
+  virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetSongs(
+      const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+
+  virtual bool HasCompilations(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
+
+  virtual AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual AlbumList GetAlbumsByArtist(const QString& artist, const QueryOptions& opt = QueryOptions()) = 0;
+  virtual AlbumList GetCompilationAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+
+  virtual void UpdateManualAlbumArtAsync(const QString& artist, const QString& album, const QString& art) = 0;
+  virtual Album GetAlbumArt(const QString& artist, const QString& album) = 0;
+
+  virtual Song GetSongById(int id) = 0;
+
+  virtual void AddDirectory(const QString& path) = 0;
+  virtual void RemoveDirectory(const Directory& dir) = 0;
+
+  virtual bool ExecQuery(LibraryQuery* q) = 0;
+};
+
+class LibraryBackend : public LibraryBackendInterface {
+  Q_OBJECT
+
+ public:
+  Q_INVOKABLE LibraryBackend(QObject* parent = 0);
+  void Init(boost::shared_ptr<Database> db, const QString& songs_table,
+            const QString& dirs_table, const QString& subdirs_table,
+            const QString& fts_table);
+
+  boost::shared_ptr<Database> db() const { return db_; }
 
   QString songs_table() const { return songs_table_; }
   QString dirs_table() const { return dirs_table_; }

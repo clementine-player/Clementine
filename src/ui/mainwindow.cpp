@@ -30,6 +30,7 @@
 #include "devices/devicestatefiltermodel.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
+#include "library/librarybackend.h"
 #include "library/libraryconfig.h"
 #include "library/librarydirectorymodel.h"
 #include "library/library.h"

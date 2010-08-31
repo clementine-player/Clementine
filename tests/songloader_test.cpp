@@ -17,6 +17,7 @@
 #include "test_utils.h"
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
+#include "mock_librarybackend.h"
 
 #include "core/songloader.h"
 #include "engines/gstengine.h"
@@ -29,6 +30,9 @@
 
 #include <boost/scoped_ptr.hpp>
 #include <cstdlib>
+
+using ::testing::_;
+using ::testing::Return;
 
 class SongLoaderTest : public ::testing::Test {
 public:
@@ -45,7 +49,8 @@ public:
 
 protected:
   void SetUp() {
-    loader_.reset(new SongLoader);
+    library_.reset(new MockLibraryBackend);
+    loader_.reset(new SongLoader(library_.get()));
     loader_->set_timeout(20000);
   }
 
@@ -55,12 +60,24 @@ protected:
   static GstEngine* sGstEngine;
 
   boost::scoped_ptr<SongLoader> loader_;
+  boost::scoped_ptr<MockLibraryBackend> library_;
 };
 
 const char* SongLoaderTest::kRemoteUrl = "http://remotetestdata.clementine-player.org";
 GstEngine* SongLoaderTest::sGstEngine = NULL;
 
 TEST_F(SongLoaderTest, LoadLocalMp3) {
+  TemporaryResource file(":/testdata/beep.mp3");
+  SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
+
+  ASSERT_EQ(SongLoader::Success, ret);
+  ASSERT_EQ(1, loader_->songs().count());
+  EXPECT_TRUE(loader_->songs()[0].is_valid());
+  EXPECT_EQ("Beep mp3", loader_->songs()[0].title());
+}
+
+TEST_F(SongLoaderTest, LoadLocalFileQueryExecutesButEmpty) {
+  EXPECT_CALL(*library_.get(), ExecQuery(_)).WillOnce(Return(true));
   TemporaryResource file(":/testdata/beep.mp3");
   SongLoader::Result ret = loader_->Load(QUrl::fromLocalFile(file.fileName()));
 

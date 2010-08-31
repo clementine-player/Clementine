@@ -29,14 +29,14 @@
 # include <gst/gst.h>
 #endif
 
-class LibraryBackend;
+class LibraryBackendInterface;
 class ParserBase;
 class PlaylistParser;
 
 class SongLoader : public QObject {
   Q_OBJECT
 public:
-  SongLoader(LibraryBackend* library, QObject* parent = 0);
+  SongLoader(LibraryBackendInterface* library, QObject* parent = 0);
   ~SongLoader();
 
   enum Result {
@@ -107,7 +107,7 @@ private:
   ParserBase* parser_;
   QString mime_type_;
   QByteArray buffer_;
-  LibraryBackend* library_;
+  LibraryBackendInterface* library_;
 
 #ifdef HAVE_GSTREAMER
   boost::shared_ptr<GstElement> pipeline_;

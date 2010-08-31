@@ -34,7 +34,7 @@
 QSet<QString> SongLoader::sRawUriSchemes;
 const int SongLoader::kDefaultTimeout = 5000;
 
-SongLoader::SongLoader(LibraryBackend* library, QObject *parent)
+SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
     playlist_parser_(new PlaylistParser(this)),
@@ -173,7 +173,7 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
 
   while (it.hasNext()) {
     // This is in another thread so we can do blocking calls.
-    LoadLocal(filename, true);
+    LoadLocal(it.next(), true);
   }
 
   qStableSort(songs_.begin(), songs_.end(), CompareSongs);

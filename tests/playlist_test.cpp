@@ -33,7 +33,7 @@ namespace {
 class PlaylistTest : public ::testing::Test {
  protected:
   PlaylistTest()
-    : playlist_(NULL, NULL, NULL),
+    : playlist_(NULL, NULL, NULL, NULL),
       sequence_(NULL, new DummySettingsProvider)
   {
   }

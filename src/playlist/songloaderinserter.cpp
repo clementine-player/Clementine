@@ -20,7 +20,7 @@
 #include "core/taskmanager.h"
 
 SongLoaderInserter::SongLoaderInserter(
-    TaskManager* task_manager, LibraryBackend* library, QObject *parent)
+    TaskManager* task_manager, LibraryBackendInterface* library, QObject *parent)
     : QObject(parent),
       task_manager_(task_manager),
       destination_(NULL),
