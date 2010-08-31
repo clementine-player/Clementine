@@ -498,7 +498,6 @@ if(NOT APPLE AND NOT WIN32)
 
     list(APPEND SOURCES ui/wiimotedevshortcutsconfig.cpp)
     list(APPEND HEADERS ui/wiimotedevshortcutsconfig.h)
-
   endif(ENABLE_WIIMOTEDEV)
 
   # DeviceKit lister source
@@ -507,26 +506,23 @@ if(NOT APPLE AND NOT WIN32)
 endif(NOT APPLE AND NOT WIN32)
 
 # Libgpod device backend
-if(LIBGPOD_FOUND)
-  set(HAVE_LIBGPOD ON)
+if(HAVE_LIBGPOD)
   include_directories(${LIBGPOD_INCLUDE_DIRS})
 
   list(APPEND SOURCES devices/gpoddevice.cpp devices/gpodloader.cpp)
   list(APPEND HEADERS devices/gpoddevice.h devices/gpodloader.h)
-endif(LIBGPOD_FOUND)
+endif(HAVE_LIBGPOD)
 
 # GIO device backend
-if(GIO_FOUND)
-  set(HAVE_GIO ON)
+if(HAVE_GIO)
   include_directories(${GIO_INCLUDE_DIRS})
 
   list(APPEND SOURCES devices/giolister.cpp)
   list(APPEND HEADERS devices/giolister.h)
-endif(GIO_FOUND)
+endif(HAVE_GIO)
 
 # libimobiledevice backend and device
-if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
-  set(HAVE_IMOBILEDEVICE ON)
+if(HAVE_IMOBILEDEVICE)
   include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
   include_directories(${PLIST_INCLUDE_DIRS})
   include_directories(${PLISTPP_INCLUDE_DIRS})
@@ -541,11 +537,10 @@ if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   list(APPEND HEADERS devices/afcfile.h)
   list(APPEND HEADERS devices/afctransfer.h)
   list(APPEND HEADERS devices/ilister.h)
-endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
+endif(HAVE_IMOBILEDEVICE)
 
 # mtp device
-if(LIBMTP_FOUND)
-  set(HAVE_LIBMTP ON)
+if(HAVE_LIBMTP)
   include_directories(${LIBMTP_INCLUDE_DIRS})
 
   list(APPEND SOURCES devices/mtpconnection.cpp)
@@ -555,7 +550,7 @@ if(LIBMTP_FOUND)
   list(APPEND SOURCES devices/mtpconnection.h)
   list(APPEND HEADERS devices/mtpdevice.h)
   list(APPEND HEADERS devices/mtploader.h)
-endif(LIBMTP_FOUND)
+endif(HAVE_LIBMTP)
 
 # Windows media lister
 IF(WIN32)

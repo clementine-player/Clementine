@@ -66,10 +66,6 @@ macro(print_engines)
     pig()
     message("")
   endif(ENGINES_UNSUPPORTED)
-
-  message(STATUS "Building engines:${ENGINES_ENABLED}")
-  message(STATUS "Skipping engines:${ENGINES_DISABLED}")
-
   # need at least 1 engine
   if(NOT ENGINES_ENABLED)
     message(FATAL_ERROR "no engine enabled!")

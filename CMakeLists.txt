@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
+include(cmake/Summary.cmake)
 include(cmake/Version.cmake)
 
 find_package(Qt4 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
@@ -116,6 +117,22 @@ if(NOT APPLE AND NOT WIN32)
   option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
 endif(NOT APPLE AND NOT WIN32)
 
+if(LIBGPOD_FOUND)
+  set(HAVE_LIBGPOD ON)
+endif(LIBGPOD_FOUND)
+
+if(GIO_FOUND)
+  set(HAVE_GIO ON)
+endif(GIO_FOUND)
+
+if(IMOBILEDEVICE_FOUND AND PLIST_FOUND AND LIBGPOD_FOUND AND USBMUXD_FOUND)
+  set(HAVE_IMOBILEDEVICE ON)
+endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND AND LIBGPOD_FOUND AND USBMUXD_FOUND)
+
+if(LIBMTP_FOUND)
+  set(HAVE_LIBMTP ON)
+endif(LIBMTP_FOUND)
+
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
   # to system installed projectM instead.
@@ -211,3 +228,12 @@ configure_file(
 
 add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+
+# Show a summary of what we have enabled
+summary_add("devices: iPod classic support" HAVE_LIBGPOD)
+summary_add("devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
+summary_add("devices: MTP support" LIBMTP_FOUND)
+summary_add("devices: GIO backend" HAVE_GIO)
+summary_add("Wiimote support" ENABLE_WIIMOTEDEV)
+summary_add("Visualisations" ENABLE_VISUALISATIONS)
+summary_show()
