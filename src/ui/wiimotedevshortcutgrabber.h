@@ -27,12 +27,14 @@
 class Ui_WiimotedevShortcutGrabber;
 
 class WiimotedevShortcutGrabber : public QDialog {
-  Q_OBJECT  
+  Q_OBJECT
 public:
   WiimotedevShortcutGrabber(quint32 action = 0, QWidget* parent = 0);
   ~WiimotedevShortcutGrabber();
 
-  WiimotedevShortcutsConfig::Shortcut shortcut;
+  bool IsAccepted() { return accepted_; }
+  quint32 GetActionValue() { return pref_action_; }
+  quint64 GetButtonsValue() { return wiimotedev_buttons_; }
 
 private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
@@ -40,8 +42,9 @@ private slots:
   void Timeout(int);
 
 private:
-  QTimeLine line_;
+  bool accepted_;
 
+  QTimeLine line_;
   quint32 pref_action_;
 
   Ui_WiimotedevShortcutGrabber* ui_;
@@ -49,7 +52,6 @@ private:
   boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;
   quint32 wiimotedev_device_;
   quint64 wiimotedev_buttons_;
-  quint32 action;
 
   quint64 remember_wiimote_shifts_;
   quint64 remember_nunchuk_shifts_;

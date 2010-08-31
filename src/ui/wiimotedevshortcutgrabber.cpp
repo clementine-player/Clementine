@@ -20,6 +20,7 @@
 
 WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *parent)
  :QDialog(parent),
+  accepted_(false),
   pref_action_(action),
   ui_(new Ui_WiimotedevShortcutGrabber),
   config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
@@ -41,10 +42,6 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *pa
             this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
   }
 
-  shortcut.action = 0;
-  shortcut.button = 0;
-  shortcut.object = 0;
-
   foreach (const QString& name, config_->text_actions_.values())
     ui_->comboBox->addItem(name);
 
@@ -65,12 +62,15 @@ WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
 }
 
 void WiimotedevShortcutGrabber::Timeout(int secs) {
-  if (secs == 0)
+  if (secs == 0) {
+    pref_action_ = ui_->comboBox->currentIndex();
+    accepted_ = true;
     close();
+  }
 
   if (secs == 1)
-    ui_->keep_label->setText(QString(tr("Keep buttons for %1 second")).arg(QString::number(secs))); else
-    ui_->keep_label->setText(QString(tr("Keep buttons for %1 seconds")).arg(QString::number(secs)));
+    ui_->keep_label->setText(QString(tr("Keep buttons for %1 second...")).arg(QString::number(secs))); else
+    ui_->keep_label->setText(QString(tr("Keep buttons for %1 seconds...")).arg(QString::number(secs)));
 }
 
 void WiimotedevShortcutGrabber::RememberSwingChecked(bool checked) {
@@ -114,7 +114,7 @@ void WiimotedevShortcutGrabber::DbusWiimoteGeneralButtons(uint id, qulonglong va
   if (buttons) line_.start();
 
   ui_->keep_label->setVisible(buttons);
-  ui_->keep_label->setText(QString(tr("Keep buttons for %1 seconds")).arg(QString::number(line_.startFrame())));
+  ui_->keep_label->setText(QString(tr("Keep buttons for %1 seconds...")).arg(QString::number(line_.startFrame())));
   ui_->combo->setText(config_->GetReadableWiiremoteSequence(buttons));
 
   wiimotedev_buttons_ = buttons;

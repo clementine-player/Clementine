@@ -91,17 +91,20 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
   text_buttons_.insert(WIIMOTE_BTN_SHIFT_SHAKE, "Wiiremote Shift Shake");
   text_buttons_.insert(NUNCHUK_BTN_SHIFT_SHAKE, "Nunchuk Shift Shake");
 
-  text_actions_.insert(WiimotedevShortcuts::PlayerPlay, tr("Play"));
-  text_actions_.insert(WiimotedevShortcuts::PlayerStop, tr("Stop"));
+  text_actions_.insert(WiimotedevShortcuts::WiimotedevActive, tr("Active Wiiremote"));
+  text_actions_.insert(WiimotedevShortcuts::WiimotedevDeactive, tr("Deactive Wiiremote"));
   text_actions_.insert(WiimotedevShortcuts::PlayerNextTrack, tr("Next track"));
   text_actions_.insert(WiimotedevShortcuts::PlayerPreviousTrack, tr("Previous track"));
+  text_actions_.insert(WiimotedevShortcuts::PlayerPlay, tr("Play"));
+  text_actions_.insert(WiimotedevShortcuts::PlayerStop, tr("Stop"));
+  text_actions_.insert(WiimotedevShortcuts::PlayerIncVolume, tr("Increase volume"));
+  text_actions_.insert(WiimotedevShortcuts::PlayerDecVolume, tr("Decrease volume"));
   text_actions_.insert(WiimotedevShortcuts::PlayerMute, tr("Mute"));
   text_actions_.insert(WiimotedevShortcuts::PlayerPause, tr("Pause"));
   text_actions_.insert(WiimotedevShortcuts::PlayerTogglePause, tr("Play/Pause"));
   text_actions_.insert(WiimotedevShortcuts::PlayerSeekBackward, tr("Seek backward"));
   text_actions_.insert(WiimotedevShortcuts::PlayerSeekForward, tr("Seek forward"));
-  text_actions_.insert(WiimotedevShortcuts::PlayerIncVolume, tr("Increase volume"));
-  text_actions_.insert(WiimotedevShortcuts::PlayerDecVolume, tr("Decrease volume"));
+  text_actions_.insert(WiimotedevShortcuts::PlayerSeekForward, tr("Stop after"));
   text_actions_.insert(WiimotedevShortcuts::PlayerShowOSD, tr("Show OSD"));
 
 
@@ -204,6 +207,8 @@ void WiimotedevShortcutsConfig::AddAction() {
   emit SetWiimotedevInterfaceActived(false);
   WiimotedevShortcutGrabber grabber(0, this);
   grabber.exec();
+  if (grabber.IsAccepted())
+    AddShortcut(grabber.GetButtonsValue(), grabber.GetActionValue());
   emit SetWiimotedevInterfaceActived(true);
 }
 
