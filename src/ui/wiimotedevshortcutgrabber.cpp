@@ -25,7 +25,9 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
     ui_(new Ui_WiimotedevShortcutGrabber),
     config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
     wiimotedev_device_(1),
-    wiimotedev_buttons_(0)
+    wiimotedev_buttons_(0),
+    remember_wiimote_shifts_(0),
+    remember_nunchuk_shifts_(0)
 {
   ui_->setupUi(this);
 
@@ -43,17 +45,46 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
   foreach (const QString& name, config_->text_actions_.values())
     ui_->comboBox->addItem(name);
 
+  connect(ui_->remember_shifts, SIGNAL(clicked(bool)), this, SLOT(RememberSwingChecked(bool)));
 }
 
 WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
   delete ui_;
 }
 
+void WiimotedevShortcutGrabber::RememberSwingChecked(bool checked) {
+  quint64 buttons = wiimotedev_buttons_;
+
+  if (checked) {
+    buttons |=  remember_wiimote_shifts_ | remember_nunchuk_shifts_;
+    ui_->combo->setText(config_->GetReadableWiiremoteSequence(buttons));
+  } else {
+    remember_wiimote_shifts_ = 0;
+    remember_nunchuk_shifts_ = 0;
+    buttons &= ~(WIIMOTE_SHIFT_MASK | NUNCHUK_SHIFT_MASK);
+    ui_->combo->setText(config_->GetReadableWiiremoteSequence(buttons));
+  }
+}
+
+
 void WiimotedevShortcutGrabber::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (wiimotedev_device_ != id) return;
 
-  quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
+  quint64 buttons = value & ~(
+      WIIMOTE_TILT_MASK |
+      NUNCHUK_TILT_MASK |
+      WIIMOTE_BTN_SHIFT_SHAKE |
+      NUNCHUK_BTN_SHIFT_SHAKE);
+
+  if (ui_->remember_shifts->isChecked()) {
+    if (!(buttons & WIIMOTE_SHIFT_MASK)) buttons |= remember_wiimote_shifts_;
+    if (!(buttons & NUNCHUK_SHIFT_MASK)) buttons |= remember_nunchuk_shifts_;
+  }
+
   if (wiimotedev_buttons_ == buttons) return;
+
+  remember_wiimote_shifts_ = buttons & WIIMOTE_SHIFT_MASK;
+  remember_nunchuk_shifts_ = buttons & NUNCHUK_SHIFT_MASK;
 
   ui_->combo->setText(config_->GetReadableWiiremoteSequence(buttons));
 
