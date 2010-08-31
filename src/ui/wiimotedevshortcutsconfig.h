@@ -52,10 +52,10 @@ private:
   QTreeWidgetItem* selected_item_;
 
 private slots:
-  void LoadSettings();
+  void AddAction();
   void DefaultSettings();
   void DeleteAction();
-  void AddAction();
+  void LoadSettings();
 
   void WiimotedevEnabledChecked(bool checked);
   void ItemClicked(QTreeWidgetItem*);
