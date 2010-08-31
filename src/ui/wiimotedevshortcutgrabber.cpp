@@ -61,7 +61,7 @@ WiimotedevShortcutGrabber::~WiimotedevShortcutGrabber() {
 }
 
 void WiimotedevShortcutGrabber::Timeout(int secs) {
-  if (secs == 0) {
+  if (!secs) {
     emit AddShortcut(wiimotedev_buttons_, ui_->comboBox->currentIndex());
     close();
   }
