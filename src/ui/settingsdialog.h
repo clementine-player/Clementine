@@ -95,6 +95,11 @@ class SettingsDialog : public QDialog {
   OSDPretty* pretty_popup_;
 
   QMap<QString, QString> language_map_;
+
+#ifdef ENABLE_WIIMOTEDEV
+ signals:
+  void SetWiimotedevInterfaceActived(bool);
+#endif
 };
 
 #endif // SETTINGSDIALOG_H

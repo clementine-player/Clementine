@@ -1486,9 +1486,10 @@ void MainWindow::EnsureSettingsDialogCreated() {
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
-  #ifdef ENABLE_WIIMOTEDEV
+#ifdef ENABLE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
-  #endif
+  connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));
+#endif
 }
 
 void MainWindow::OpenSettingsDialog() {

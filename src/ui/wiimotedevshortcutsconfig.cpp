@@ -201,8 +201,10 @@ QString WiimotedevShortcutsConfig::GetReadableWiiremoteSequence(quint64 value) {
 }
 
 void WiimotedevShortcutsConfig::AddAction() {
-  WiimotedevShortcutGrabber grabber(this);
+  emit SetWiimotedevInterfaceActived(false);
+  WiimotedevShortcutGrabber grabber(0, this);
   grabber.exec();
+  emit SetWiimotedevInterfaceActived(true);
 }
 
 void WiimotedevShortcutsConfig::DeleteAction() {

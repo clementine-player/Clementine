@@ -21,21 +21,25 @@
 #include <boost/scoped_ptr.hpp>
 #include "dbus/wiimotedev.h"
 
-class WiimotedevShortcutsConfig;
+#include "ui/wiimotedevshortcutsconfig.h"
+
 class Ui_WiimotedevShortcutGrabber;
 
 class WiimotedevShortcutGrabber : public QDialog {
-  Q_OBJECT
-
+  Q_OBJECT  
 public:
-  WiimotedevShortcutGrabber(QWidget* parent = 0);
+  WiimotedevShortcutGrabber(quint32 action = 0, QWidget* parent = 0);
   ~WiimotedevShortcutGrabber();
+
+  WiimotedevShortcutsConfig::Shortcut shortcut;
 
 private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
   void RememberSwingChecked(bool checked);
 
 private:
+  quint32 pref_action_;
+
   Ui_WiimotedevShortcutGrabber* ui_;
   WiimotedevShortcutsConfig* config_;
   boost::scoped_ptr<OrgWiimotedevDeviceEventsInterface> wiimotedev_iface_;

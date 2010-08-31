@@ -59,6 +59,10 @@ private slots:
 
   void WiimotedevEnabledChecked(bool checked);
   void ItemClicked(QTreeWidgetItem*);
+
+signals:
+  void SetWiimotedevInterfaceActived(bool);
+
 };
 
 #endif // WIIMOTEDEVSHORTCUTSCONFIG_H

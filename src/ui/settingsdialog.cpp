@@ -71,6 +71,8 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   wiimotedev_layout->addWidget(wiimotedev_config_);
 
   ui_->stacked_widget->addWidget(wiimotedev_page);
+
+  connect(wiimotedev_config_, SIGNAL(SetWiimotedevInterfaceActived(bool)), this, SIGNAL(SetWiimotedevInterfaceActived(bool)));
 #endif
 
   // Playback

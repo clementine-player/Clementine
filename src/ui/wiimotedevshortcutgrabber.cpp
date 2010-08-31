@@ -16,12 +16,12 @@
 
 #include "ui/wiimotedevshortcutgrabber.h"
 #include "ui_wiimotedevshortcutgrabber.h"
-#include "ui/wiimotedevshortcutsconfig.h"
 
 #include "wiimotedev/consts.h"
 
-WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
+WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *parent)
   : QDialog(parent),
+    pref_action_(action),
     ui_(new Ui_WiimotedevShortcutGrabber),
     config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
     wiimotedev_device_(1),
@@ -42,8 +42,14 @@ WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(QWidget *parent)
             this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
   }
 
+  shortcut.action = 0;
+  shortcut.button = 0;
+  shortcut.object = 0;
+
   foreach (const QString& name, config_->text_actions_.values())
     ui_->comboBox->addItem(name);
+
+  ui_->comboBox->setCurrentIndex(pref_action_);
 
   connect(ui_->remember_shifts, SIGNAL(clicked(bool)), this, SLOT(RememberSwingChecked(bool)));
 }

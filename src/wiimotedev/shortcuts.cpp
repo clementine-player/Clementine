@@ -97,7 +97,11 @@ void WiimotedevShortcuts::ReloadSettings() {
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (id != wiimotedev_device_ || !wiimotedev_enable_ || !player_) return;
 
-  quint64 buttons = value & ~(WIIMOTE_TILT_MASK | NUNCHUK_TILT_MASK);
+  quint64 buttons = value & ~(
+      WIIMOTE_TILT_MASK |
+      NUNCHUK_TILT_MASK |
+      WIIMOTE_BTN_SHIFT_SHAKE |
+      NUNCHUK_BTN_SHIFT_SHAKE);
 
   if (wiimotedev_buttons_ == buttons) return;
 
