@@ -48,6 +48,9 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
 
     connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(uint,qulonglong)),
             this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
+
+    if (!wiimotedev_iface_.get()->isValid())
+      qWarning("Error connecting to the Wiimotedev-daemon DBUS service");
   }
 
   if (!actived && wiimotedev_iface_)
