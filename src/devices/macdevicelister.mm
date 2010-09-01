@@ -3,6 +3,7 @@
 #include <CoreFoundation/CFRunLoop.h>
 #include <DiskArbitration/DiskArbitration.h>
 #include <IOKit/kext/KextManager.h>
+#include <IOKit/IOCFPlugin.h>
 #include <IOKit/usb/IOUSBLib.h>
 
 #import <AppKit/NSWorkspace.h>
@@ -12,6 +13,8 @@
 #import <Foundation/NSPathUtilities.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSURL.h>
+
+#include <libmtp.h>
 
 #include <QtDebug>
 
@@ -30,6 +33,12 @@
 #define kUSBProductString "USB Product Name"
 #endif
 
+QSet<MacDeviceLister::MTPDevice> MacDeviceLister::sMTPDeviceList;
+
+uint qHash(const MacDeviceLister::MTPDevice& d) {
+  return qHash(d.vendor) ^ qHash(d.vendor_id) ^ qHash(d.product) ^ qHash(d.product_id);
+}
+
 MacDeviceLister::MacDeviceLister() {
 }
 
@@ -40,14 +49,53 @@ MacDeviceLister::~MacDeviceLister() {
 void MacDeviceLister::Init() {
   [[NSAutoreleasePool alloc] init];
 
+  // Populate MTP Device list.
+  if (sMTPDeviceList.empty()) {
+    LIBMTP_device_entry_t* devices = NULL;
+    int num = 0;
+    if (LIBMTP_Get_Supported_Devices_List(&devices, &num) != 0) {
+      qWarning() << "Failed to get MTP device list";
+    } else {
+      for (int i = 0; i < num; ++i) {
+        LIBMTP_device_entry_t device = devices[i];
+        MTPDevice d;
+        d.vendor = QString::fromAscii(device.vendor);
+        d.vendor_id = device.vendor_id;
+        d.product = QString::fromAscii(device.product);
+        d.product_id = device.product_id;
+      }
+    }
+  }
+
   run_loop_ = CFRunLoopGetCurrent();
 
+  // Register for disk mounts/unmounts.
   loop_session_ = DASessionCreate(kCFAllocatorDefault);
   DARegisterDiskAppearedCallback(
       loop_session_, kDADiskDescriptionMatchVolumeMountable, &DiskAddedCallback, reinterpret_cast<void*>(this));
   DARegisterDiskDisappearedCallback(
       loop_session_, NULL, &DiskRemovedCallback, reinterpret_cast<void*>(this));
   DASessionScheduleWithRunLoop(loop_session_, run_loop_, kCFRunLoopDefaultMode);
+
+  // Register for USB device connection/disconnection.
+  IONotificationPortRef notification_port = IONotificationPortCreate(kIOMasterPortDefault);
+  CFMutableDictionaryRef matching_dict = IOServiceMatching(kIOUSBDeviceClassName);
+  io_iterator_t it;
+  kern_return_t err = IOServiceAddMatchingNotification(
+      notification_port,
+      kIOFirstMatchNotification,
+      matching_dict,
+      &USBDeviceAddedCallback,
+      reinterpret_cast<void*>(this),
+      &it);
+  if (err == KERN_SUCCESS) {
+    USBDeviceAddedCallback(this, it);
+  } else {
+    qWarning() << "Could not add notification on USB device connection";
+  }
+
+  CFRunLoopSourceRef io_source = IONotificationPortGetRunLoopSource(notification_port);
+  CFRunLoopAddSource(run_loop_, io_source, kCFRunLoopDefaultMode);
 
   CFRunLoopRun();
 }
@@ -114,7 +162,7 @@ quint64 GetUSBRegistryEntryInt64(io_object_t device, CFStringRef key) {
   return 0;
 }
 
-NSObject* GetPropertyForDevice(io_object_t device, NSString* key) {
+NSObject* GetPropertyForDevice(io_object_t device, CFStringRef key) {
   CFMutableDictionaryRef properties;
   kern_return_t ret = IORegistryEntryCreateCFProperties(
       device, &properties, kCFAllocatorDefault, 0);
@@ -124,7 +172,7 @@ NSObject* GetPropertyForDevice(io_object_t device, NSString* key) {
   }
 
   NSDictionary* dict = (NSDictionary*)properties;
-  NSObject* prop = [dict objectForKey:key];
+  NSObject* prop = [dict objectForKey:(NSString*)key];
   if (prop) {
     return prop;
   }
@@ -139,7 +187,7 @@ NSObject* GetPropertyForDevice(io_object_t device, NSString* key) {
 }
 
 QString GetIconForDevice(io_object_t device) {
-  NSDictionary* media_icon = (NSDictionary*)GetPropertyForDevice(device, @"IOMediaIcon");
+  NSDictionary* media_icon = (NSDictionary*)GetPropertyForDevice(device, CFSTR("IOMediaIcon"));
   if (media_icon) {
     NSString* bundle = (NSString*)[media_icon objectForKey:@"CFBundleIdentifier"];
     NSString* file = (NSString*)[media_icon objectForKey:@"IOBundleResourceFile"];
@@ -218,6 +266,166 @@ void MacDeviceLister::DiskRemovedCallback(DADiskRef disk, void* context) {
       me->current_devices_.erase(it);
       break;
     }
+  }
+}
+
+void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
+  MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(refcon);
+
+  io_object_t object;
+  while ((object = IOIteratorNext(it))) {
+    CFStringRef class_name = IOObjectCopyClass(object);
+    if (CFStringCompare(class_name, CFSTR(kIOUSBDeviceClassName), 0) == kCFCompareEqualTo) {
+      NSString* vendor = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBVendorString));
+      NSString* product = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBProductString));
+      NSNumber* vendor_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBVendorID));
+      NSNumber* product_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBProductID));
+
+      MTPDevice device;
+      device.vendor = QString::fromUtf8([vendor UTF8String]);
+      device.product = QString::fromUtf8([product UTF8String]);
+      device.vendor_id = [vendor_id unsignedShortValue];
+      device.product_id = [product_id unsignedShortValue];
+
+      qDebug() << device.vendor
+               << device.vendor_id
+               << device.product
+               << device.product_id;
+
+      // First check the libmtp device list.
+      if (sMTPDeviceList.contains(device)) {
+        qDebug() << "Matched device to libmtp list!";
+        // emit.
+        return;
+      }
+
+      IOCFPlugInInterface** plugin_interface = NULL;
+      SInt32 score;
+      kern_return_t err = IOCreatePlugInInterfaceForService(
+          object,
+          kIOUSBDeviceUserClientTypeID,
+          kIOCFPlugInInterfaceID,
+          &plugin_interface,
+          &score);
+      if (err != KERN_SUCCESS) {
+        continue;
+      }
+
+      IOUSBDeviceInterface** dev = NULL;
+      HRESULT result = (*plugin_interface)->QueryInterface(
+          plugin_interface,
+          CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID),
+          (LPVOID*)&dev);
+
+      (*plugin_interface)->Release(plugin_interface);
+
+      if (result || !dev) {
+        continue;
+      }
+
+      err = (*dev)->USBDeviceOpen(dev);
+      if (err != kIOReturnSuccess) {
+        continue;
+      }
+
+
+      // Request the string descriptor at 0xee.
+      // This is a magic string that indicates whether this device supports MTP.
+
+      // Fetch string descriptor length.
+      UInt8 desc[256];  // Max descriptor length.
+      IOUSBDevRequest req;
+      req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBStandard, kUSBDevice);
+      req.bRequest = kUSBRqGetDescriptor;
+      req.wValue = (kUSBStringDesc << 8) | 0xee;  // 0xee is the MTP descriptor.
+      req.wIndex = 0x0409;  // English
+      req.wLength = 2;
+      req.pData = &desc;
+      err = (*dev)->DeviceRequest(dev, &req);
+
+      if (err != kIOReturnSuccess) {
+        continue;
+      }
+
+      UInt8 string_len = desc[0];
+      if (string_len == 0) {
+        continue;
+      }
+
+      // Fetch actual string descriptor.
+      req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBStandard, kUSBDevice);
+      req.bRequest = kUSBRqGetDescriptor;
+      req.wValue = (kUSBStringDesc << 8) | 0xee;
+      req.wIndex = 0x0409;
+      req.wLength = string_len;
+      req.pData = &desc;
+
+      err = (*dev)->DeviceRequest(dev, &req);
+      if (err != kIOReturnSuccess) {
+        continue;
+      }
+
+      // The device actually returned something. That's a good sign.
+      // Because this was designed by MS, the characters are in UTF-16 (LE?).
+      CFStringRef str = CFStringCreateWithCharacters(NULL, (const UniChar*)(desc + 2), (req.wLenDone-2) / 2);
+      char buf[256];
+      CFStringGetCString(str, buf, 256, kCFStringEncodingNonLossyASCII);
+      CFRelease(str);
+
+      if (QString(buf).startsWith("MSFT100")) {
+        // We got the OS descriptor!
+        char vendor_code = desc[16];
+        req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBDevice);
+        req.bRequest = vendor_code;
+        req.wValue = 0;
+        req.wIndex = 4;
+        req.wLength = 256;  // Magic number!
+        req.pData = &desc;
+
+        err = (*dev)->DeviceRequest(dev, &req);
+        if (err != kIOReturnSuccess) {
+          qDebug() << "Getting vendor OS descriptor failed";
+          continue;
+        }
+
+        // Moar magic!
+        if (desc[0] != 0x28) {
+          continue;
+        }
+
+        if (desc[0x12] != 'M' || desc[0x13] != 'T' || desc[0x14] != 'P') {
+          // Not quite.
+          continue;
+        }
+
+        req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBDevice);
+        req.bRequest = vendor_code;
+        req.wValue = 0;
+        req.wIndex = 5;
+        req.wLength = 256;
+        req.pData = &desc;
+
+        err = (*dev)->DeviceRequest(dev, &req);
+        if (err != kIOReturnSuccess || desc[0] != 0x28) {
+          continue;
+        }
+
+        if (desc[0x12] != 'M' || desc[0x13] != 'T' || desc[0x14] != 'P') {
+          // :-(
+          continue;
+        }
+
+
+        // Hurray! We made it!
+        qDebug() << "New MTP device detected!";
+      }
+
+      (*dev)->USBDeviceClose(dev);
+      (*dev)->Release(dev);
+    }
+
+    CFRelease(class_name);
+    IOObjectRelease(object);
   }
 }
 
@@ -308,7 +516,7 @@ quint64 MacDeviceLister::DeviceCapacity(const QString& serial){
 
   io_object_t device = DADiskCopyIOMedia(disk);
 
-  NSNumber* capacity = (NSNumber*)GetPropertyForDevice(device, @"Size");
+  NSNumber* capacity = (NSNumber*)GetPropertyForDevice(device, CFSTR("Size"));
 
   quint64 ret = [capacity unsignedLongLongValue];
 

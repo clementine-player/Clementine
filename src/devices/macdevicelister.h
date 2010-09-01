@@ -9,6 +9,8 @@
 #include <DiskArbitration/DADissenter.h>
 #include <IOKit/IOKitLib.h>
 
+struct libusb_context;
+
 class MacDeviceLister : public DeviceLister {
   Q_OBJECT
  public:
@@ -28,6 +30,13 @@ class MacDeviceLister : public DeviceLister {
   virtual void UnmountDevice(const QString &id);
   virtual void UpdateDeviceFreeSpace(const QString& id);
 
+  struct MTPDevice {
+    QString vendor;
+    quint16 vendor_id;
+    QString product;
+    quint16 product_id;
+  };
+
  public slots:
   virtual void ShutDown();
 
@@ -36,14 +45,26 @@ class MacDeviceLister : public DeviceLister {
 
   static void DiskAddedCallback(DADiskRef disk, void* context);
   static void DiskRemovedCallback(DADiskRef disk, void* context);
+  static void USBDeviceAddedCallback(void* refcon, io_iterator_t it);
 
   static void DiskUnmountCallback(
       DADiskRef disk, DADissenterRef dissenter, void* context);
 
   DASessionRef loop_session_;
   CFRunLoopRef run_loop_;
+  libusb_context* usb_context_;
 
   QMap<QString, QString> current_devices_;
+
+  static QSet<MTPDevice> sMTPDeviceList;
 };
+
+uint qHash(const MacDeviceLister::MTPDevice& device);
+inline bool operator==(const MacDeviceLister::MTPDevice& a, const MacDeviceLister::MTPDevice& b) {
+  return (a.vendor == b.vendor) &&
+         (a.vendor_id == b.vendor_id) &&
+         (a.product == b.product) &&
+         (a.product_id == b.product_id);
+}
 
 #endif
