@@ -35,8 +35,7 @@ public:
   WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent = 0);
 
   enum Action {
-    WiimotedevActive = 0,
-    WiimotedevDeactive,
+    WiimotedevActiveDeactive = 0,
     PlayerNextTrack,
     PlayerPreviousTrack,
     PlayerPlay,
@@ -70,6 +69,7 @@ private:
 
   bool low_battery_notification_;
   bool critical_battery_notification_;
+  bool actived_;
 
   bool wiimotedev_active_;
   quint64 wiimotedev_buttons_;
@@ -83,6 +83,8 @@ private:
   QSettings settings_;
 
 signals:
+  void WiiremoteActived(int);
+  void WiiremoteDeactived(int);
   void WiiremoteConnected(int);
   void WiiremoteDisconnected(int);
   void WiiremoteLowBattery(int, int);

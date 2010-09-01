@@ -29,6 +29,7 @@ WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* par
   player_(qobject_cast<Player*>(parent)),
   low_battery_notification_(true),
   critical_battery_notification_(true),
+  actived_(false),
   wiimotedev_active_(true),
   wiimotedev_buttons_(0),
   wiimotedev_device_(1),
@@ -37,6 +38,8 @@ WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* par
   wiimotedev_iface_(NULL),
   wiimotedev_notification_(true)
 {
+  connect(this, SIGNAL(WiiremoteActived(int)), osd_, SLOT(WiiremoteActived(int)));
+  connect(this, SIGNAL(WiiremoteDeactived(int)), osd_, SLOT(WiiremoteDeactived(int)));
   connect(this, SIGNAL(WiiremoteConnected(int)), osd_, SLOT(WiiremoteConnected(int)));
   connect(this, SIGNAL(WiiremoteDisconnected(int)), osd_, SLOT(WiiremoteDisconnected(int)));
   connect(this, SIGNAL(WiiremoteLowBattery(int,int)), osd_, SLOT(WiiremoteLowBattery(int,int)));
@@ -48,6 +51,11 @@ WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* par
 void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
   if (!QDBusConnection::systemBus().isConnected())
     return;
+
+  // http://code.google.com/p/clementine-player/issues/detail?id=670
+  // Probably dbus bug, or something else
+
+  qWarning() << "bug 670: before freeze ?";
 
   if (actived && !wiimotedev_iface_) {
     wiimotedev_iface_.reset(new OrgWiimotedevDeviceEventsInterface(
@@ -69,6 +77,8 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
 
   if (!actived && wiimotedev_iface_)
     wiimotedev_iface_.reset();
+
+  qWarning() << "bug 670: after freeze ?";
 }
 
 void WiimotedevShortcuts::ReloadSettings() {
@@ -106,7 +116,6 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (wiimotedev_focus_ && !main_window_->isActiveWindow())
     return;
 
-
   quint64 buttons = value & ~(
       WIIMOTE_TILT_MASK |
       NUNCHUK_TILT_MASK |
@@ -116,20 +125,32 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (wiimotedev_buttons_ == buttons) return;
 
   if (actions_.contains(buttons)) {
-    switch (actions_.value(buttons, 0xff)) {
-      case PlayerNextTrack: player_->Next(); break;
-      case PlayerPreviousTrack: player_->Previous(); break;
-      case PlayerPlay: player_->Play(); break;
-      case PlayerStop: player_->Stop(); break;
-      case PlayerIncVolume: player_->VolumeUp(); break;
-      case PlayerDecVolume: player_->VolumeDown(); break;
-      case PlayerMute: player_->Mute(); break;
-      case PlayerPause: player_->Pause(); break;
-      case PlayerTogglePause: player_->PlayPause(); break;
-      case PlayerSeekBackward: player_->SeekBackward(); break;
-      case PlayerSeekForward: player_->SeekForward(); break;
-      case PlayerStopAfter: player_->Stop(); break;
-      case PlayerShowOSD: player_->ShowOSD(); break;
+
+    if (!actived_ || wiimotedev_active_) {
+      if (actions_.value(buttons, 0xff) == WiimotedevActiveDeactive) {
+        actived_ = !actived_;
+        if (actived_)
+          emit WiiremoteActived(id); else
+          emit WiiremoteDeactived(id);
+      }
+    }
+
+    if (actived_ || !wiimotedev_active_) {
+      switch (actions_.value(buttons, 0xff)) {
+        case PlayerNextTrack: player_->Next(); break;
+        case PlayerPreviousTrack: player_->Previous(); break;
+        case PlayerPlay: player_->Play(); break;
+        case PlayerStop: player_->Stop(); break;
+        case PlayerIncVolume: player_->VolumeUp(); break;
+        case PlayerDecVolume: player_->VolumeDown(); break;
+        case PlayerMute: player_->Mute(); break;
+        case PlayerPause: player_->Pause(); break;
+        case PlayerTogglePause: player_->PlayPause(); break;
+        case PlayerSeekBackward: player_->SeekBackward(); break;
+        case PlayerSeekForward: player_->SeekForward(); break;
+        case PlayerStopAfter: player_->Stop(); break;
+        case PlayerShowOSD: player_->ShowOSD(); break;
+      }
     }
   }
 

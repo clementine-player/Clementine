@@ -91,8 +91,7 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
   text_buttons_.insert(WIIMOTE_BTN_SHIFT_SHAKE, "Wiiremote Shift Shake");
   text_buttons_.insert(NUNCHUK_BTN_SHIFT_SHAKE, "Nunchuk Shift Shake");
 
-  text_actions_.insert(WiimotedevShortcuts::WiimotedevActive, tr("Active Wiiremote"));
-  text_actions_.insert(WiimotedevShortcuts::WiimotedevDeactive, tr("Deactive Wiiremote"));
+  text_actions_.insert(WiimotedevShortcuts::WiimotedevActiveDeactive, tr("Active/deactive Wiiremote"));
   text_actions_.insert(WiimotedevShortcuts::PlayerNextTrack, tr("Next track"));
   text_actions_.insert(WiimotedevShortcuts::PlayerPreviousTrack, tr("Previous track"));
   text_actions_.insert(WiimotedevShortcuts::PlayerPlay, tr("Play"));
@@ -178,6 +177,7 @@ void WiimotedevShortcutsConfig::DefaultSettings()
   AddShortcut(WIIMOTE_BTN_MINUS, WiimotedevShortcuts::PlayerDecVolume);
   AddShortcut(WIIMOTE_BTN_1, WiimotedevShortcuts::PlayerTogglePause);
   AddShortcut(WIIMOTE_BTN_2, WiimotedevShortcuts::PlayerShowOSD);
+  AddShortcut(WIIMOTE_BTN_A, WiimotedevShortcuts::WiimotedevActiveDeactive);
 
   ui_->list->sortItems(1, Qt::AscendingOrder);
 }
@@ -218,6 +218,8 @@ void WiimotedevShortcutsConfig::AddAction() {
   connect(&grabber, SIGNAL(AddShortcut(quint64,quint32)), this, SLOT(AddShortcut(quint64,quint32)));
   grabber.exec();
   emit SetWiimotedevInterfaceActived(true);
+
+  ui_->list->sortItems(1, Qt::AscendingOrder);
 }
 
 void WiimotedevShortcutsConfig::DeleteAction() {

@@ -473,10 +473,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_about->setMenuRole(QAction::AboutRole);
 #endif
 
-#ifdef ENABLE_WIIMOTEDEV
-  wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
-#endif
-
   qDebug() << t.restart() << "tray";
 
   // Global shortcuts
@@ -581,6 +577,15 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_->StartThreads();
 
   qDebug() << t.restart() << "start library";
+
+#ifdef ENABLE_WIIMOTEDEV
+// http://code.google.com/p/clementine-player/issues/detail?id=670
+// Switched position, mayby something is not ready ?
+
+  wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
+  qDebug() << t.restart() << "start wiimotedev";
+#endif
+
 }
 
 MainWindow::~MainWindow() {

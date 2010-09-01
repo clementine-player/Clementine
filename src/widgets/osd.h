@@ -73,6 +73,8 @@ class OSD : public QObject {
   void MagnatuneDownloadFinished(const QStringList& albums);
 
 #ifdef ENABLE_WIIMOTEDEV
+  void WiiremoteActived(int id);
+  void WiiremoteDeactived(int id);
   void WiiremoteConnected(int id);
   void WiiremoteDisconnected(int id);
   void WiiremoteLowBattery(int id, int live);

@@ -193,6 +193,16 @@ void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 
 #ifdef ENABLE_WIIMOTEDEV
 
+void OSD::WiiremoteActived(int id) {
+  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+              tr("Wiiremote %1: actived").arg(QString::number(id)));
+}
+
+void OSD::WiiremoteDeactived(int id) {
+  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+              tr("Wiiremote %1: disactived").arg(QString::number(id)));
+}
+
 void OSD::WiiremoteConnected(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
               tr("Wiiremote %1: connected").arg(QString::number(id)));
