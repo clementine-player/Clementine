@@ -9,8 +9,6 @@
 #include <DiskArbitration/DADissenter.h>
 #include <IOKit/IOKitLib.h>
 
-struct libusb_context;
-
 class MacDeviceLister : public DeviceLister {
   Q_OBJECT
  public:
@@ -52,7 +50,6 @@ class MacDeviceLister : public DeviceLister {
 
   DASessionRef loop_session_;
   CFRunLoopRef run_loop_;
-  libusb_context* usb_context_;
 
   QMap<QString, QString> current_devices_;
 
