@@ -126,17 +126,19 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
 
   if (actions_.contains(buttons)) {
 
-    if (!actived_ || wiimotedev_active_) {
-      if (actions_.value(buttons, 0xff) == WiimotedevActiveDeactive) {
+    if (wiimotedev_active_) {
+      if (actions_.value(buttons, ActionNone) == WiimotedevActiveDeactive) {
         actived_ = !actived_;
-        if (actived_)
-          emit WiiremoteActived(id); else
-          emit WiiremoteDeactived(id);
+        if (wiimotedev_notification_) {
+          if (actived_)
+            emit WiiremoteActived(id); else
+            emit WiiremoteDeactived(id);
+        }
       }
     }
 
     if (actived_ || !wiimotedev_active_) {
-      switch (actions_.value(buttons, 0xff)) {
+      switch (actions_.value(buttons, ActionNone)) {
         case PlayerNextTrack: player_->Next(); break;
         case PlayerPreviousTrack: player_->Previous(); break;
         case PlayerPlay: player_->Play(); break;
