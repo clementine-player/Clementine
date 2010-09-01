@@ -14,6 +14,8 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSURL.h>
 
+#include <boost/scope_exit.hpp>
+
 #include <libmtp.h>
 
 #include <QtDebug>
@@ -269,6 +271,31 @@ void MacDeviceLister::DiskRemovedCallback(DADiskRef disk, void* context) {
   }
 }
 
+bool DeviceRequest(IOUSBDeviceInterface** dev,
+                   quint8 direction,
+                   quint8 type,
+                   quint8 recipient,
+                   quint8 request_code,
+                   quint16 value,
+                   quint16 index,
+                   quint16 length,
+                   QByteArray* data) {
+  IOUSBDevRequest req;
+  req.bmRequestType = USBmakebmRequestType(direction, type, recipient);
+  req.bRequest = request_code;
+  req.wValue = value;
+  req.wIndex = index;
+  req.wLength = length;
+  data->resize(256);
+  req.pData = data->data();
+  kern_return_t err = (*dev)->DeviceRequest(dev, &req);
+  if (err != kIOReturnSuccess) {
+    return false;
+  }
+  data->resize(req.wLenDone);
+  return true;
+}
+
 void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
   MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(refcon);
 
@@ -286,6 +313,11 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       device.product = QString::fromUtf8([product UTF8String]);
       device.vendor_id = [vendor_id unsignedShortValue];
       device.product_id = [product_id unsignedShortValue];
+
+      if (device.vendor_id == 0x5ac) {
+        // I think we can safely skip Apple products.
+        continue;
+      }
 
       qDebug() << device.vendor
                << device.vendor_id
@@ -328,100 +360,59 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
         continue;
       }
 
+      // Automatically close & release usb device at scope exit.
+      BOOST_SCOPE_EXIT((dev)) {
+        (*dev)->USBDeviceClose(dev);
+        (*dev)->Release(dev);
+      } BOOST_SCOPE_EXIT_END
 
       // Request the string descriptor at 0xee.
       // This is a magic string that indicates whether this device supports MTP.
-
-      // Fetch string descriptor length.
-      UInt8 desc[256];  // Max descriptor length.
-      IOUSBDevRequest req;
-      req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBStandard, kUSBDevice);
-      req.bRequest = kUSBRqGetDescriptor;
-      req.wValue = (kUSBStringDesc << 8) | 0xee;  // 0xee is the MTP descriptor.
-      req.wIndex = 0x0409;  // English
-      req.wLength = 2;
-      req.pData = &desc;
-      err = (*dev)->DeviceRequest(dev, &req);
-
-      if (err != kIOReturnSuccess) {
+      QByteArray data;
+      bool ret = DeviceRequest(
+          dev, kUSBIn, kUSBStandard, kUSBDevice, kUSBRqGetDescriptor,
+          (kUSBStringDesc << 8) | 0xee, 0x0409, 2, &data);
+      if (!ret)
         continue;
-      }
 
-      UInt8 string_len = desc[0];
-      if (string_len == 0) {
+      UInt8 string_len = data[0];
+
+      ret = DeviceRequest(
+          dev, kUSBIn, kUSBStandard, kUSBDevice, kUSBRqGetDescriptor,
+          (kUSBStringDesc << 8) | 0xee, 0x0409, string_len, &data);
+      if (!ret)
         continue;
-      }
-
-      // Fetch actual string descriptor.
-      req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBStandard, kUSBDevice);
-      req.bRequest = kUSBRqGetDescriptor;
-      req.wValue = (kUSBStringDesc << 8) | 0xee;
-      req.wIndex = 0x0409;
-      req.wLength = string_len;
-      req.pData = &desc;
-
-      err = (*dev)->DeviceRequest(dev, &req);
-      if (err != kIOReturnSuccess) {
-        continue;
-      }
 
       // The device actually returned something. That's a good sign.
       // Because this was designed by MS, the characters are in UTF-16 (LE?).
-      CFStringRef str = CFStringCreateWithCharacters(NULL, (const UniChar*)(desc + 2), (req.wLenDone-2) / 2);
-      char buf[256];
-      CFStringGetCString(str, buf, 256, kCFStringEncodingNonLossyASCII);
-      CFRelease(str);
+      QString str = QString::fromUtf16(reinterpret_cast<ushort*>(data.data() + 2), (data.size() / 2) - 2);
 
-      if (QString(buf).startsWith("MSFT100")) {
+      if (str.startsWith("MSFT100")) {
         // We got the OS descriptor!
-        char vendor_code = desc[16];
-        req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBDevice);
-        req.bRequest = vendor_code;
-        req.wValue = 0;
-        req.wIndex = 4;
-        req.wLength = 256;  // Magic number!
-        req.pData = &desc;
-
-        err = (*dev)->DeviceRequest(dev, &req);
-        if (err != kIOReturnSuccess) {
-          qDebug() << "Getting vendor OS descriptor failed";
+        char vendor_code = data[16];
+        ret = DeviceRequest(
+            dev, kUSBIn, kUSBVendor, kUSBDevice, vendor_code, 0, 4, 256, &data);
+        if (!ret || data.at(0) != 0x28)
           continue;
-        }
 
-        // Moar magic!
-        if (desc[0] != 0x28) {
-          continue;
-        }
-
-        if (desc[0x12] != 'M' || desc[0x13] != 'T' || desc[0x14] != 'P') {
+        if (QString::fromAscii(data.data() + 0x12, 3) != "MTP") {
           // Not quite.
           continue;
         }
 
-        req.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBDevice);
-        req.bRequest = vendor_code;
-        req.wValue = 0;
-        req.wIndex = 5;
-        req.wLength = 256;
-        req.pData = &desc;
-
-        err = (*dev)->DeviceRequest(dev, &req);
-        if (err != kIOReturnSuccess || desc[0] != 0x28) {
+        ret = DeviceRequest(
+            dev, kUSBIn, kUSBVendor, kUSBDevice, vendor_code, 0, 5, 256, &data);
+        if (!ret || data.at(0) != 0x28) {
           continue;
         }
 
-        if (desc[0x12] != 'M' || desc[0x13] != 'T' || desc[0x14] != 'P') {
-          // :-(
+        if (QString::fromAscii(data.data() + 0x12, 3) != "MTP") {
+          // Not quite.
           continue;
         }
-
-
         // Hurray! We made it!
         qDebug() << "New MTP device detected!";
       }
-
-      (*dev)->USBDeviceClose(dev);
-      (*dev)->Release(dev);
     }
 
     CFRelease(class_name);
