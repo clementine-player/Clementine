@@ -72,6 +72,13 @@ class OSD : public QObject {
   void VolumeChanged(int value);
   void MagnatuneDownloadFinished(const QStringList& albums);
 
+#ifdef ENABLE_WIIMOTEDEV
+  void WiiremoteConnected(int id);
+  void WiiremoteDisconnected(int id);
+  void WiiremoteLowBattery(int id, int live);
+  void WiiremoteCriticalBattery(int id, int live);
+#endif
+
  private:
   struct WaitingForAlbumArt {
     QString summary;

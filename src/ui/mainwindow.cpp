@@ -474,7 +474,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
-  wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(this, player_));
+  wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
 #endif
 
   qDebug() << t.restart() << "tray";

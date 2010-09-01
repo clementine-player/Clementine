@@ -22,10 +22,13 @@
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
 const char* WiimotedevShortcuts::kSettingsGroup = "WiimotedevSettings";
 
-WiimotedevShortcuts::WiimotedevShortcuts(QWidget* window, QObject* parent)
+WiimotedevShortcuts::WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent)
  :QObject(parent),
+  osd_(osd),
   main_window_(window),
   player_(qobject_cast<Player*>(parent)),
+  low_battery_notification_(true),
+  critical_battery_notification_(true),
   wiimotedev_active_(true),
   wiimotedev_buttons_(0),
   wiimotedev_device_(1),
@@ -34,6 +37,11 @@ WiimotedevShortcuts::WiimotedevShortcuts(QWidget* window, QObject* parent)
   wiimotedev_iface_(NULL),
   wiimotedev_notification_(true)
 {
+  connect(this, SIGNAL(WiiremoteConnected(int)), osd_, SLOT(WiiremoteConnected(int)));
+  connect(this, SIGNAL(WiiremoteDisconnected(int)), osd_, SLOT(WiiremoteDisconnected(int)));
+  connect(this, SIGNAL(WiiremoteLowBattery(int,int)), osd_, SLOT(WiiremoteLowBattery(int,int)));
+  connect(this, SIGNAL(WiiremoteCriticalBattery(int,int)), osd_, SLOT(WiiremoteCriticalBattery(int,int)));
+
   ReloadSettings();
 }
 
@@ -48,6 +56,12 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
 
     connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteGeneralButtons(uint,qulonglong)),
             this, SLOT(DbusWiimoteGeneralButtons(uint,qulonglong)));
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteConnected(uint)), this,
+            SLOT(DbusWiimoteConnected(uint)));
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteDisconnected(uint)), this,
+            SLOT(DbusWiimoteDisconnected(uint)));
+    connect(wiimotedev_iface_.get(), SIGNAL(dbusWiimoteBatteryLife(uint,uchar)), this,
+            SLOT(DbusWiimoteBatteryLife(uint,uchar)));
 
     if (!wiimotedev_iface_.get()->isValid())
       qWarning("Error connecting to the Wiimotedev-daemon DBUS service");
@@ -121,3 +135,30 @@ void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
 
   wiimotedev_buttons_ = buttons;
 }
+
+void WiimotedevShortcuts::DbusWiimoteConnected(uint id) {
+  if (wiimotedev_device_ == id && wiimotedev_notification_)
+    emit WiiremoteConnected(id);
+}
+
+void WiimotedevShortcuts::DbusWiimoteDisconnected(uint id) {
+  if (wiimotedev_device_ == id && wiimotedev_notification_)
+    emit WiiremoteDisconnected(id);
+}
+
+void WiimotedevShortcuts::DbusWiimoteBatteryLife(uint id, uchar life) {
+  if (wiimotedev_device_ == id && wiimotedev_notification_) {
+    if (life <= 30 && life > 20 && low_battery_notification_) {
+      low_battery_notification_ = false;
+      emit WiiremoteLowBattery(id, life);
+    }
+
+    if (life <= 20 && critical_battery_notification_) {
+      critical_battery_notification_ = false;
+      low_battery_notification_ = false;
+      emit WiiremoteCriticalBattery(id, life);
+    }
+  }
+}
+
+

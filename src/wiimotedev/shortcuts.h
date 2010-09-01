@@ -19,9 +19,10 @@
 
 #include <QWidget>
 #include <boost/scoped_ptr.hpp>
-#include "dbus/wiimotedev.h"
 
+#include "dbus/wiimotedev.h"
 #include "core/player.h"
+#include "widgets/osd.h"
 
 class QSettings;
 
@@ -31,7 +32,7 @@ public:
   static const char* kActionsGroup;
   static const char* kSettingsGroup;
 
-  WiimotedevShortcuts(QWidget* window, QObject* parent = 0);
+  WiimotedevShortcuts(OSD* osd, QWidget* window, QObject* parent = 0);
 
   enum Action {
     WiimotedevActive = 0,
@@ -57,11 +58,18 @@ public slots:
   void ReloadSettings();
 
 private slots:
+  void DbusWiimoteBatteryLife(uint id, uchar life);
+  void DbusWiimoteConnected(uint id);
+  void DbusWiimoteDisconnected(uint id);
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
 
 private:
+  OSD* osd_;
   QWidget* main_window_;
   Player* player_;
+
+  bool low_battery_notification_;
+  bool critical_battery_notification_;
 
   bool wiimotedev_active_;
   quint64 wiimotedev_buttons_;
@@ -73,6 +81,12 @@ private:
 
   QHash <quint64, quint32> actions_;
   QSettings settings_;
+
+signals:
+  void WiiremoteConnected(int);
+  void WiiremoteDisconnected(int);
+  void WiiremoteLowBattery(int, int);
+  void WiiremoteCriticalBattery(int, int);
 };
 
 #endif // WIIMOTEDEV_SHORTCUTS_H

@@ -190,3 +190,27 @@ void OSD::ShowMessage(const QString& summary,
 #ifndef Q_WS_X11
 void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 #endif
+
+#ifdef ENABLE_WIIMOTEDEV
+
+void OSD::WiiremoteConnected(int id) {
+  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+              tr("Wiiremote %1: connected").arg(QString::number(id)));
+}
+
+void OSD::WiiremoteDisconnected(int id) {
+  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+              tr("Wiiremote %1: disconnected").arg(QString::number(id)));
+}
+
+void OSD::WiiremoteLowBattery(int id, int live) {
+  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+              tr("Wiiremote %1: low battery (%2%)").arg(QString::number(id), QString::number(live)));
+}
+
+void OSD::WiiremoteCriticalBattery(int id, int live) {
+  ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
+              tr("Wiiremote %1: critical battery (%2%) ").arg(QString::number(id), QString::number(live)));
+}
+
+#endif

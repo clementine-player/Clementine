@@ -7,5 +7,15 @@
       <arg direction="out" type="u" name="id" />
       <arg direction="out" type="t" name="value" />
     </signal>
+    <signal name="dbusWiimoteConnected">
+      <arg direction="out" type="u" name="id" />
+    </signal>
+    <signal name="dbusWiimoteDisconnected">
+      <arg direction="out" type="u" name="id" />
+    </signal>
+    <signal name="dbusWiimoteBatteryLife">
+      <arg type="u" direction="out"/>
+      <arg type="y" direction="out"/>
+    </signal>
   </interface>
 </node>
