@@ -35,6 +35,22 @@
 #define kUSBProductString "USB Product Name"
 #endif
 
+// Helpful MTP & USB links:
+// Apple USB device interface guide:
+// http://developer.apple.com/mac/library/documentation/DeviceDrivers/Conceptual/USBBook/USBDeviceInterfaces/USBDevInterfaces.html
+// Example Apple code for requesting a USB device descriptor:
+// http://www.opensource.apple.com/source/IOUSBFamily/IOUSBFamily-208.4.5/USBProber/BusProbeClass.m
+// Libmtp's detection code:
+// http://libmtp.cvs.sourceforge.net/viewvc/libmtp/libmtp/src/libusb-glue.c?view=markup
+// Libusb's Mac code:
+// http://www.libusb.org/browser/libusb/libusb/os/darwin_usb.c
+// Microsoft OS Descriptors:
+// http://www.microsoft.com/whdc/connect/usb/os_desc.mspx
+// Symbian docs for implementing the device side:
+// http://developer.symbian.org/main/documentation/reference/s3/pdk/GUID-3FF0F248-EDF0-5348-BC43-869CE1B5B415.html
+// Libgphoto2 MTP detection code:
+// http://www.sfr-fresh.com/unix/privat/libgphoto2-2.4.10.1.tar.gz:a/libgphoto2-2.4.10.1/libgphoto2_port/usb/check-mtp-device.c
+
 QSet<MacDeviceLister::MTPDevice> MacDeviceLister::sMTPDeviceList;
 
 uint qHash(const MacDeviceLister::MTPDevice& d) {
