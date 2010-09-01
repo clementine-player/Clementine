@@ -21,6 +21,8 @@
 #include "wiimotedev/shortcuts.h"
 #include "wiimotedev/consts.h"
 
+#include <QMessageBox>
+
 WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_WiimotedevShortcutsConfig)
@@ -128,6 +130,13 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
 
 
 void WiimotedevShortcutsConfig::AddShortcut(quint64 button, quint32 action) {
+  foreach (const Shortcut& shortcut, actions_) {
+    if (shortcut.button == button) {
+      QMessageBox::information(this, tr("Information"), QString(tr("Shortcut for %1 already exists")).arg(GetReadableWiiremoteSequence(button)), QMessageBox::Ok);
+      return;
+    }
+  }
+
   Shortcut s;
   s.object = new QTreeWidgetItem(ui_->list, QStringList() << GetReadableWiiremoteSequence(button) << text_actions_[action]);
   s.button = button;
@@ -215,7 +224,7 @@ QString WiimotedevShortcutsConfig::GetReadableWiiremoteSequence(quint64 value) {
 void WiimotedevShortcutsConfig::AddAction() {
   emit SetWiimotedevInterfaceActived(false);
   WiimotedevShortcutGrabber grabber(0, this);
-  connect(&grabber, SIGNAL(AddShortcut(quint64,quint32)), this, SLOT(AddShortcut(quint64,quint32)));
+  connect(&grabber, SIGNAL(AddShortcut(quint64,quint32)), this, SLOT(AddShortcut(quint64,quint32)), Qt::QueuedConnection);
   grabber.exec();
   emit SetWiimotedevInterfaceActived(true);
 
