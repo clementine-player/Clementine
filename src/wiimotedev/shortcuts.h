@@ -17,6 +17,7 @@
 #ifndef WIIMOTEDEV_SHORTCUTS_H
 #define WIIMOTEDEV_SHORTCUTS_H
 
+#include <QWidget>
 #include <boost/scoped_ptr.hpp>
 #include "dbus/wiimotedev.h"
 
@@ -30,7 +31,7 @@ public:
   static const char* kActionsGroup;
   static const char* kSettingsGroup;
 
-  WiimotedevShortcuts(QObject* parent = 0);
+  WiimotedevShortcuts(QWidget* window, QObject* parent = 0);
 
   enum Action {
     WiimotedevActive = 0,
@@ -59,6 +60,7 @@ private slots:
   void DbusWiimoteGeneralButtons(uint id, qulonglong value);
 
 private:
+  QWidget* main_window_;
   Player* player_;
 
   bool wiimotedev_active_;

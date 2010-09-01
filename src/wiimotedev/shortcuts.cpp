@@ -22,8 +22,9 @@
 const char* WiimotedevShortcuts::kActionsGroup = "WiimotedevActions";
 const char* WiimotedevShortcuts::kSettingsGroup = "WiimotedevSettings";
 
-WiimotedevShortcuts::WiimotedevShortcuts(QObject* parent)
+WiimotedevShortcuts::WiimotedevShortcuts(QWidget* window, QObject* parent)
  :QObject(parent),
+  main_window_(window),
   player_(qobject_cast<Player*>(parent)),
   wiimotedev_active_(true),
   wiimotedev_buttons_(0),
@@ -84,6 +85,10 @@ void WiimotedevShortcuts::ReloadSettings() {
 
 void WiimotedevShortcuts::DbusWiimoteGeneralButtons(uint id, qulonglong value) {
   if (id != wiimotedev_device_ || !wiimotedev_enable_ || !player_) return;
+
+  if (wiimotedev_focus_ && !main_window_->isActiveWindow())
+    return;
+
 
   quint64 buttons = value & ~(
       WIIMOTE_TILT_MASK |
