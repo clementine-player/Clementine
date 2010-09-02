@@ -17,13 +17,13 @@
 #ifndef MTPCONNECTION_H
 #define MTPCONNECTION_H
 
-#include <QString>
+#include <QUrl>
 
 #include <libmtp.h>
 
 class MtpConnection {
 public:
-  MtpConnection(const QString& hostname);
+  MtpConnection(const QUrl& url);
   ~MtpConnection();
 
   bool is_valid() const { return device_; }

@@ -47,7 +47,7 @@ void MtpDevice::Init() {
   InitBackendDirectory("/", first_time_, false);
   model_->Init();
 
-  loader_ = new MtpLoader(url_.host(), manager_->task_manager(), backend_,
+  loader_ = new MtpLoader(url_, manager_->task_manager(), backend_,
                           shared_from_this());
   loader_->moveToThread(loader_thread_);
 

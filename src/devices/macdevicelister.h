@@ -30,9 +30,13 @@ class MacDeviceLister : public DeviceLister {
 
   struct MTPDevice {
     QString vendor;
-    quint16 vendor_id;
     QString product;
+    quint16 vendor_id;
     quint16 product_id;
+
+    int quirks;
+    int bus;
+    int address;
   };
 
  public slots:
@@ -48,10 +52,13 @@ class MacDeviceLister : public DeviceLister {
   static void DiskUnmountCallback(
       DADiskRef disk, DADissenterRef dissenter, void* context);
 
+  void FoundMTPDevice(const MTPDevice& device, const QString& serial);
+
   DASessionRef loop_session_;
   CFRunLoopRef run_loop_;
 
   QMap<QString, QString> current_devices_;
+  QMap<QString, MTPDevice> mtp_devices_;
 
   static QSet<MTPDevice> sMTPDeviceList;
 };

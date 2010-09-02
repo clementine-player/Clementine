@@ -18,6 +18,7 @@
 #define MTPLOADER_H
 
 #include <QObject>
+#include <QUrl>
 
 #include <boost/shared_ptr.hpp>
 
@@ -29,7 +30,7 @@ class MtpLoader : public QObject {
   Q_OBJECT
 
 public:
-  MtpLoader(const QString& hostname, TaskManager* task_manager,
+  MtpLoader(const QUrl& url, TaskManager* task_manager,
             LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device);
   ~MtpLoader();
 
@@ -48,7 +49,7 @@ private:
   boost::shared_ptr<ConnectedDevice> device_;
   QThread* original_thread_;
 
-  QString hostname_;
+  QUrl url_;
   TaskManager* task_manager_;
   LibraryBackend* backend_;
 };

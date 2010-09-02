@@ -23,11 +23,11 @@
 
 #include <libmtp.h>
 
-MtpLoader::MtpLoader(const QString& hostname, TaskManager* task_manager,
+MtpLoader::MtpLoader(const QUrl& url, TaskManager* task_manager,
                      LibraryBackend* backend, boost::shared_ptr<ConnectedDevice> device)
   : QObject(NULL),
     device_(device),
-    hostname_(hostname),
+    url_(url),
     task_manager_(task_manager),
     backend_(backend)
 {
@@ -50,7 +50,7 @@ void MtpLoader::LoadDatabase() {
 }
 
 bool MtpLoader::TryLoad() {
-  MtpConnection dev(hostname_);
+  MtpConnection dev(url_);
   if (!dev.is_valid()) {
     emit Error(tr("Error connecting MTP device"));
     return false;
@@ -65,7 +65,7 @@ bool MtpLoader::TryLoad() {
     Song song;
     song.InitFromMTP(track);
     song.set_directory_id(1);
-    song.set_filename("mtp://" + hostname_ + "/" + song.filename());
+    song.set_filename("mtp://" + url_.host() + "/" + song.filename());
     songs << song;
 
     tracks = tracks->next;

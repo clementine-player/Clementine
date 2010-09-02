@@ -19,9 +19,10 @@
 #include <QRegExp>
 #include <QtDebug>
 
-MtpConnection::MtpConnection(const QString& hostname)
+MtpConnection::MtpConnection(const QUrl& url)
   : device_(NULL)
 {
+  QString hostname = url.host();
   // Parse the URL
   QRegExp host_re("^usb-(\\d+)-(\\d+)$");
 
@@ -32,6 +33,23 @@ MtpConnection::MtpConnection(const QString& hostname)
 
   const unsigned int bus_location = host_re.cap(1).toInt();
   const unsigned int device_num = host_re.cap(2).toInt();
+
+  if (url.hasQueryItem("vendor")) {
+    LIBMTP_raw_device_t* raw_device = (LIBMTP_raw_device_t*)malloc(sizeof(LIBMTP_raw_device_t));
+    raw_device->device_entry.vendor = url.queryItemValue("vendor").toAscii().data();
+    raw_device->device_entry.product = url.queryItemValue("product").toAscii().data();
+    raw_device->device_entry.vendor_id = url.queryItemValue("vendor_id").toUShort();
+    raw_device->device_entry.product_id = url.queryItemValue("product_id").toUShort();
+    raw_device->device_entry.device_flags = url.queryItemValue("quirks").toUInt();
+
+    raw_device->bus_location = bus_location;
+    raw_device->devnum = device_num;
+
+    qDebug() << "\\o/" << url;
+
+    device_ = LIBMTP_Open_Raw_Device(raw_device);
+    return;
+  }
 
   // Get a list of devices from libmtp and figure out which one is ours
   int count = 0;
