@@ -253,22 +253,27 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
 
   if (volume_path) {
     io_object_t device = DADiskCopyIOMedia(disk);
-    QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
-    QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
+    CFStringRef class_name = IOObjectCopyClass(device);
+    if (class_name && CFStringCompare(class_name, CFSTR(kIOUSBDeviceClassName), 0) == kCFCompareEqualTo) {
+      QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
+      QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
 
-    CFMutableDictionaryRef properties;
-    kern_return_t ret = IORegistryEntryCreateCFProperties(
-        device, &properties, kCFAllocatorDefault, 0);
+      CFMutableDictionaryRef properties;
+      kern_return_t ret = IORegistryEntryCreateCFProperties(
+          device, &properties, kCFAllocatorDefault, 0);
 
-    if (ret == KERN_SUCCESS) {
-      NSDictionary* dict = (NSDictionary*)properties;
-      if ([[dict objectForKey:@"Removable"] intValue] == 1) {
-        QString serial = GetSerialForDevice(device);
-        me->current_devices_[serial] = QString(DADiskGetBSDName(disk));
-        emit me->DeviceAdded(serial);
+      if (ret == KERN_SUCCESS) {
+        NSDictionary* dict = (NSDictionary*)properties;
+        if ([[dict objectForKey:@"Removable"] intValue] == 1) {
+          QString serial = GetSerialForDevice(device);
+          me->current_devices_[serial] = QString(DADiskGetBSDName(disk));
+          emit me->DeviceAdded(serial);
+        }
       }
     }
 
+    if (class_name)
+      CFRelease(class_name);
     IOObjectRelease(device);
   }
 }
