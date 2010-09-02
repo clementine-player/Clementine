@@ -312,6 +312,23 @@ bool DeviceRequest(IOUSBDeviceInterface** dev,
   return true;
 }
 
+int GetBusNumber(io_object_t o) {
+  io_iterator_t it;
+  kern_return_t err = IORegistryEntryGetParentIterator(o, kIOServicePlane, &it);
+  if (err != KERN_SUCCESS) {
+    return -1;
+  }
+  while ((o = IOIteratorNext(it))) {
+    NSObject* bus = GetPropertyForDevice(o, CFSTR("USBBusNumber"));
+    if (bus) {
+      NSNumber* bus_num = (NSNumber*)bus;
+      return [bus_num intValue];
+    }
+  }
+
+  return -1;
+}
+
 void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
   MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(refcon);
 
@@ -339,6 +356,14 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
                << device.vendor_id
                << device.product
                << device.product_id;
+
+      NSNumber* addr = (NSNumber*)GetPropertyForDevice(object, CFSTR("USB Address"));
+      int bus = GetBusNumber(object);
+      qDebug("Bus: %d Address: %d", bus, [addr intValue]);
+      if (!addr || bus == -1) {
+        // Failed to get bus or address number.
+        continue;
+      }
 
       // First check the libmtp device list.
       if (sMTPDeviceList.contains(device)) {
