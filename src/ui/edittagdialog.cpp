@@ -45,8 +45,16 @@ bool EditTagDialog::SetSongs(const SongList &s) {
   SongList songs;
 
   foreach (const Song& song, s) {
-    if (song.IsEditable())
-      songs << song;
+    if (song.IsEditable()) {
+      // Try reloading the tags from file
+      Song copy(song);
+      copy.InitFromFile(copy.filename(), copy.directory_id());
+
+      if (copy.is_valid())
+        songs << copy;
+      else
+        songs << song;
+    }
   }
   songs_ = songs;
 
@@ -150,10 +158,6 @@ void EditTagDialog::SaveSong(const Song& old) {
     QMutexLocker l(&taglib_mutex_);
     song.Save();
   }
-
-  // Corresponding slots should automatically be called in the receiver's thread, assuming
-  // the connection is an auto connection.
-  emit SongEdited(old, song);
 }
 
 void EditTagDialog::accept() {

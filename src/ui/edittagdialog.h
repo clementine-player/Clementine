@@ -44,9 +44,6 @@ class EditTagDialog : public QDialog {
  private slots:
   void SongsEdited();
 
- signals:
-  void SongEdited(const Song& old_song, const Song& new_song);
-
  private:
   void SaveSong(const Song& song);
 
