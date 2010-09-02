@@ -94,6 +94,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   ui_->clear->hide();
 #else
   filter_ = ui_->filter;
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
 #endif
 }
 
