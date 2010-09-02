@@ -230,7 +230,7 @@ QString GetSerialForDevice(io_object_t device) {
 
 QString GetSerialForMTPDevice(io_object_t device) {
   return QString(
-      "MTP/" + GetUSBRegistryEntryString(device, CFSTR(kUSBSerialNumberString)));
+      QString("MTP/") + [(NSString*)GetPropertyForDevice(device, CFSTR(kUSBSerialNumberString)) UTF8String]);
 }
 
 QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
@@ -356,6 +356,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       NSString* product = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBProductString));
       NSNumber* vendor_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBVendorID));
       NSNumber* product_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBProductID));
+      QString serial = GetSerialForMTPDevice(object);
 
       MTPDevice device;
       device.vendor = QString::fromUtf8([vendor UTF8String]);
@@ -375,7 +376,8 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       qDebug() << device.vendor
                << device.vendor_id
                << device.product
-               << device.product_id;
+               << device.product_id
+               << serial;
 
       NSNumber* addr = (NSNumber*)GetPropertyForDevice(object, CFSTR("USB Address"));
       int bus = GetBusNumber(object);
@@ -477,7 +479,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
           continue;
         }
         // Hurray! We made it!
-        me->FoundMTPDevice(device, GetSerialForMTPDevice(object));
+        me->FoundMTPDevice(device, serial);
       }
     }
   }

@@ -71,7 +71,7 @@ bool MtpDevice::StartCopy(QList<Song::FileType>* supported_types) {
   db_busy_.lock();
 
   // Connect to the device
-  connection_.reset(new MtpConnection(url_.host()));
+  connection_.reset(new MtpConnection(url_));
 
   // Did the caller want a list of supported types?
   if (supported_types) {
@@ -174,7 +174,7 @@ void MtpDevice::FinishDelete(bool success) {
 
 bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
   QMutexLocker l(&db_busy_);
-  MtpConnection connection(url_.host());
+  MtpConnection connection(url_);
   if (!connection.is_valid()) {
     qWarning() << "Error connecting to MTP device, couldn't get list of supported filetypes";
     return false;
