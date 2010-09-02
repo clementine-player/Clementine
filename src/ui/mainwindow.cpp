@@ -832,6 +832,10 @@ void MainWindow::ToggleShowHide() {
     hide();
     setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
     SetHiddenInTray(false);
+  } else if (!isVisible())
+  {
+    show();
+    activateWindow();
   } else {
     // Window is not hidden but does not have focus; bring it to front.
     activateWindow();
