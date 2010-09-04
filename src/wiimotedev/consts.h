@@ -14,8 +14,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef WIIMOTEDEV_H
-#define WIIMOTEDEV_H
+#ifndef WIIMOTEDEV_CONSTS_H
+#define WIIMOTEDEV_CONSTS_H
 
 #define WIIMOTEDEV_CONFIG_FILE "/etc/wiimotedev/wiimotedev.conf"
 #define WIIMOTEDEV_TCP_PORT 50091
@@ -312,4 +312,4 @@ const uint64 CLASSIC_BUTTON_NOTMASK = ~CLASSIC_BUTTON_MASK;
 const uint64 CLASSIC_LSTICK_NOTMASK = ~CLASSIC_LSTICK_MASK;
 const uint64 CLASSIC_RSTICK_NOTMASK = ~CLASSIC_RSTICK_MASK;
 
-#endif //WIIMOTEDEV_H
+#endif // WIIMOTEDEV_CONSTS_H
