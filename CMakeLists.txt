@@ -4,6 +4,7 @@ include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
 include(cmake/Summary.cmake)
 include(cmake/Version.cmake)
+include(cmake/Rpm.cmake)
 
 find_package(Qt4 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
 if(UNIX AND NOT APPLE)
