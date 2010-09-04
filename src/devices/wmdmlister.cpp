@@ -27,6 +27,7 @@
 #include <boost/bind.hpp>
 #include <boost/scoped_array.hpp>
 
+#include <QDir>
 #include <QPixmap>
 #include <QStringList>
 #include <QtDebug>
@@ -257,7 +258,10 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
           if (name.ToString() == info->name_ && name.characters() != 0) {
             // We found it!
             qDebug() << "Looks like a win7 drive name" << QString::fromWCharArray(volume_path);
-            CheckDriveLetter(info, QString::fromWCharArray(volume_path));
+            if (CheckDriveLetter(info, QString::fromWCharArray(volume_path))) {
+              info->device_name_ = QString::fromWCharArray(device_name);
+              info->volume_name_ = QString::fromWCharArray(volume_name);
+            }
             break;
           }
         }
@@ -270,7 +274,7 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
   FindVolumeClose(handle);
 }
 
-void WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
+bool WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
   // Sanity check to make sure there really is a drive there
   ScopedWCharArray path(drive.endsWith('\\') ? drive : (drive + "\\"));
   ScopedWCharArray name(QString(MAX_PATH + 1, '\0'));
@@ -286,12 +290,14 @@ void WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
       type, MAX_PATH // fat or ntfs
       )) {
     qWarning() << "Error getting volume information for" << drive;
+    return false;
   } else {
     qDebug() << "Validated drive letter" << drive;
-    info->mount_point_ = drive + "/";
+    info->mount_point_ = path.ToString();
     info->fs_name_ = name.ToString();
     info->fs_type_ = type.ToString();
     info->fs_serial_ = serial;
+    return true;
   }
 }
 
@@ -325,7 +331,24 @@ quint64 WmdmLister::DeviceFreeSpace(const QString& id) {
 }
 
 QVariantMap WmdmLister::DeviceHardwareInfo(const QString& id) {
-  return QVariantMap();
+  QVariantMap ret;
+
+  QMutexLocker l(&mutex_);
+  if (!devices_.contains(id))
+    return ret;
+
+  const DeviceInfo& info = devices_[id];
+
+  ret[tr("Drive letter")] = QDir::toNativeSeparators(info.mount_point_);
+  ret[tr("Filesystem type")] = info.fs_type_;
+  ret[tr("Filesystem name")] = info.fs_name_;
+  ret[tr("Device name")] = info.device_name_;
+  ret[tr("Volume name")] = info.volume_name_;
+
+  if (info.fs_serial_ != 0)
+    ret[tr("Filesystem serial number")] = info.fs_serial_;
+
+  return ret;
 }
 
 QString WmdmLister::MakeFriendlyName(const QString& id) {

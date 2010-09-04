@@ -97,6 +97,10 @@ private:
     QString fs_name_;
     QString fs_type_;
     int fs_serial_;
+
+    // Information we get by querying win7-style FS devices
+    QString device_name_;
+    QString volume_name_;
   };
 
   static const QUuid kDeviceProtocolMsc;
@@ -108,7 +112,7 @@ private:
 
   void UpdateFreeSpace(DeviceInfo* info);
   void GuessDriveLetter(DeviceInfo* info);
-  void CheckDriveLetter(DeviceInfo* info, const QString& drive);
+  bool CheckDriveLetter(DeviceInfo* info, const QString& drive);
 
   static QString CanonicalNameToId(const QString& canonical_name);
   void WMDMDeviceAdded(const QString& canonical_name);
