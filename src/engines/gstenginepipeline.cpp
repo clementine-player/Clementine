@@ -43,6 +43,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_mode_(0),
     rg_preamp_(0.0),
     rg_compression_(true),
+    ignore_tags_(false),
     volume_percent_(100),
     volume_modifier_(1.0),
     fader_(NULL),
@@ -338,6 +339,9 @@ void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
 
   gst_tag_list_free(taglist);
 
+  if (ignore_tags_)
+    return;
+
   if (!bundle.title.isEmpty() || !bundle.artist.isEmpty() ||
       !bundle.comment.isEmpty() || !bundle.album.isEmpty())
     emit MetadataFound(bundle);
@@ -409,6 +413,8 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
   if (instance->next_url_.isValid()) {
     GstElement* old_decode_bin = instance->uridecodebin_;
 
+    instance->ignore_tags_ = true;
+
     instance->ReplaceDecodeBin(instance->next_url_);
     gst_element_set_state(instance->uridecodebin_, GST_STATE_PLAYING);
 
@@ -421,6 +427,8 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
     // This has to happen *after* the gst_element_set_state on the new bin to
     // fix an occasional race condition deadlock.
     g_idle_add(GSourceFunc(StopUriDecodeBin), old_decode_bin);
+
+    instance->ignore_tags_ = false;
   }
 }
 

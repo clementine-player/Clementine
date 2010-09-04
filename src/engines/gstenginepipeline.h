@@ -151,6 +151,10 @@ class GstEnginePipeline : public QObject {
   QUrl url_;
   QUrl next_url_;
 
+  // Set temporarily when switching out the decode bin, so metadata doesn't
+  // get sent while the Player still thinks it's playing the last song
+  bool ignore_tags_;
+
   // When the gstreamer source requests a redirect we store the URL here and
   // callers can pick it up after the state change to PLAYING fails.
   QUrl redirect_url_;
