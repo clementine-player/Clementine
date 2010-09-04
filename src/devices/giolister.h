@@ -76,17 +76,20 @@ private:
     QString filesystem_type;
   };
 
+  void VolumeAdded(GVolume* volume);
   void MountAdded(GMount* mount);
   void MountChanged(GMount* mount);
   void MountRemoved(GMount* mount);
 
+  static void VolumeAddedCallback(GVolumeMonitor*, GVolume*, gpointer);
   static void MountAddedCallback(GVolumeMonitor*, GMount*, gpointer);
   static void MountChangedCallback(GVolumeMonitor*, GMount*, gpointer);
   static void MountRemovedCallback(GVolumeMonitor*, GMount*, gpointer);
 
-  static void VolumeEjectFinished(GObject *object, GAsyncResult *result, gpointer);
-  static void MountEjectFinished(GObject *object, GAsyncResult *result, gpointer);
-  static void MountUnmountFinished(GObject *object, GAsyncResult *result, gpointer);
+  static void VolumeMountFinished(GObject* object, GAsyncResult* result, gpointer);
+  static void VolumeEjectFinished(GObject* object, GAsyncResult* result, gpointer);
+  static void MountEjectFinished(GObject* object, GAsyncResult* result, gpointer);
+  static void MountUnmountFinished(GObject* object, GAsyncResult* result, gpointer);
 
   static QString ConvertAndFree(char* str);
   static MountInfo ReadMountInfo(GMount* mount);

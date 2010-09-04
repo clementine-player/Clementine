@@ -40,13 +40,42 @@ GioLister::GioLister()
 {
 }
 
+template <typename T, typename F>
+void OperationFinished(F f, GObject *object, GAsyncResult *result) {
+  T* obj = reinterpret_cast<T*>(object);
+  GError* error = NULL;
+
+  f(obj, result, &error);
+
+  if (error) {
+    qDebug() << "Unmount error:" << error->message;
+    g_error_free(error);
+  }
+}
+
+void GioLister::VolumeMountFinished(GObject* object, GAsyncResult* result, gpointer) {
+  OperationFinished<GVolume>(boost::bind(
+      g_volume_mount_finish, _1, _2, _3), object, result);
+}
+
 void GioLister::Init() {
   monitor_ = g_volume_monitor_get();
 
+  // Mount any volumes that aren't already mounted
+  GList* const volumes = g_volume_monitor_get_volumes(monitor_);
+  for (GList* p=volumes; p; p=p->next) {
+    GVolume* volume = static_cast<GVolume*>(p->data);
+    if (g_volume_can_mount(volume) && !g_volume_get_mount(volume)) {
+      g_volume_mount(volume, G_MOUNT_MOUNT_NONE, NULL, NULL,
+                     (GAsyncReadyCallback) VolumeMountFinished, NULL);
+    }
+    g_object_unref(volume);
+  }
+
   // Get things that are already mounted
-  GList* mounts = g_volume_monitor_get_mounts(monitor_);
-  for (; mounts ; mounts=mounts->next) {
-    GMount* mount = static_cast<GMount*>(mounts->data);
+  GList* const mounts = g_volume_monitor_get_mounts(monitor_);
+  for (GList* p=mounts; p; p=p->next) {
+    GMount* mount = static_cast<GMount*>(p->data);
 
     MountAdded(mount);
     g_object_unref(mount);
@@ -54,6 +83,7 @@ void GioLister::Init() {
   g_list_free(mounts);
 
   // Connect signals from the monitor
+  g_signal_connect(monitor_, "volume-added", G_CALLBACK(VolumeAddedCallback), this);
   g_signal_connect(monitor_, "mount-added", G_CALLBACK(MountAddedCallback), this);
   g_signal_connect(monitor_, "mount-changed", G_CALLBACK(MountChangedCallback), this);
   g_signal_connect(monitor_, "mount-removed", G_CALLBACK(MountRemovedCallback), this);
@@ -130,6 +160,10 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString &id) {
   return ret;
 }
 
+void GioLister::VolumeAddedCallback(GVolumeMonitor*, GVolume* v, gpointer d) {
+  static_cast<GioLister*>(d)->VolumeAdded(v);
+}
+
 void GioLister::MountAddedCallback(GVolumeMonitor*, GMount* m, gpointer d) {
   static_cast<GioLister*>(d)->MountAdded(m);
 }
@@ -140,6 +174,14 @@ void GioLister::MountChangedCallback(GVolumeMonitor*, GMount* m, gpointer d) {
 
 void GioLister::MountRemovedCallback(GVolumeMonitor*, GMount* m, gpointer d) {
   static_cast<GioLister*>(d)->MountRemoved(m);
+}
+
+void GioLister::VolumeAdded(GVolume* volume) {
+  if (g_volume_can_mount(volume) && !g_volume_get_mount(volume)) {
+    g_volume_mount(volume, G_MOUNT_MOUNT_NONE, NULL, NULL,
+                   (GAsyncReadyCallback) VolumeMountFinished, NULL);
+  }
+  g_object_unref(volume);
 }
 
 void GioLister::MountAdded(GMount *mount) {
@@ -272,19 +314,6 @@ QString GioLister::FindUniqueIdByMount(GMount *mount) const {
       return info.unique_id();
   }
   return QString();
-}
-
-template <typename T, typename F>
-void OperationFinished(F f, GObject *object, GAsyncResult *result) {
-  T* obj = reinterpret_cast<T*>(object);
-  GError* error = NULL;
-
-  f(obj, result, &error);
-
-  if (error) {
-    qDebug() << "Unmount error:" << error->message;
-    g_error_free(error);
-  }
 }
 
 void GioLister::VolumeEjectFinished(GObject *object, GAsyncResult *result, gpointer) {
