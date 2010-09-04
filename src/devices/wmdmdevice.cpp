@@ -55,11 +55,15 @@ void WmdmDevice::Init() {
   connect(loader_, SIGNAL(LoadFinished()), SLOT(LoadFinished()));
   connect(loader_thread_, SIGNAL(started()), loader_, SLOT(LoadDatabase()));
   loader_thread_->start();
+
+  db_busy_.lock();
 }
 
 void WmdmDevice::LoadFinished() {
   loader_->deleteLater();
   loader_ = NULL;
+
+  db_busy_.unlock();
 }
 
 bool WmdmDevice::StartCopy(QList<Song::FileType>* supported_types) {
@@ -263,6 +267,8 @@ bool WmdmDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, IWMDMDevice* 
 }
 
 bool WmdmDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
+  QMutexLocker l(&db_busy_);
+
   WmdmThread thread;
 
   // Get the device
