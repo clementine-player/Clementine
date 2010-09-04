@@ -162,11 +162,9 @@ QString GetIpodModel(Itdb_IpodModel model) {
 }
 
 QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
-#ifdef HAVE_LIBGPOD
   if (IsIpod(path)) {
     return QUrl("ipod://" + path);
   }
-#endif
 
   return QUrl::fromLocalFile(path);
 }

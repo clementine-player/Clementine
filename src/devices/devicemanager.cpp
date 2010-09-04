@@ -529,6 +529,25 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
       device_url = url;
       break;
     }
+
+    // If we get here it means that this URL scheme wasn't supported.  If it
+    // was "ipod" or "mtp" then the user compiled out support and the device
+    // won't work properly.
+    if (url.scheme() == "mtp" || url.scheme() == "gphoto2") {
+      if (QMessageBox::critical(NULL, tr("This device will not work properly"),
+          tr("This is an MTP device, but you compiled Clementine without libmtp support.") + "  " +
+          tr("If you continue, this device will work slowly and songs copied to it may not work."),
+          QMessageBox::Abort, QMessageBox::Ignore) == QMessageBox::Abort)
+        return ret;
+    }
+
+    if (url.scheme() == "ipod") {
+      if (QMessageBox::critical(NULL, tr("This device will not work properly"),
+          tr("This is an iPod, but you compiled Clementine without libgpod support.") + "  " +
+          tr("If you continue, this device will work slowly and songs copied to it may not work."),
+          QMessageBox::Abort, QMessageBox::Ignore) == QMessageBox::Abort)
+        return ret;
+    }
   }
 
   if (device_url.isEmpty()) {
