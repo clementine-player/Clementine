@@ -57,7 +57,7 @@
 QSet<MacDeviceLister::MTPDevice> MacDeviceLister::sMTPDeviceList;
 
 uint qHash(const MacDeviceLister::MTPDevice& d) {
-  return qHash(d.vendor) ^ qHash(d.vendor_id) ^ qHash(d.product) ^ qHash(d.product_id);
+  return qHash(d.vendor_id) ^ qHash(d.product_id);
 }
 
 MacDeviceLister::MacDeviceLister() {
@@ -85,8 +85,18 @@ void MacDeviceLister::Init() {
         d.product = QString::fromAscii(device.product);
         d.product_id = device.product_id;
         d.quirks = device.device_flags;
+        sMTPDeviceList << d;
       }
     }
+
+    MTPDevice d;
+    d.vendor = "SanDisk";
+    d.vendor_id = 0x781;
+    d.product = "Sansa Clip+";
+    d.product_id = 0x74d0;
+
+    d.quirks = 0x2 | 0x4 | 0x40 | 0x4000;
+    sMTPDeviceList << d;
   }
 
   run_loop_ = CFRunLoopGetCurrent();
@@ -423,6 +433,7 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       // First check the libmtp device list.
       QSet<MTPDevice>::const_iterator it = sMTPDeviceList.find(device);
       if (it != sMTPDeviceList.end()) {
+        qDebug() << "Found in table";
         // Fill in quirks flags from libmtp.
         device.quirks = it->quirks;
         me->FoundMTPDevice(device, GetSerialForMTPDevice(object));

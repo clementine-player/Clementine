@@ -77,9 +77,7 @@ class MacDeviceLister : public DeviceLister {
 
 uint qHash(const MacDeviceLister::MTPDevice& device);
 inline bool operator==(const MacDeviceLister::MTPDevice& a, const MacDeviceLister::MTPDevice& b) {
-  return (a.vendor == b.vendor) &&
-         (a.vendor_id == b.vendor_id) &&
-         (a.product == b.product) &&
+  return (a.vendor_id == b.vendor_id) &&
          (a.product_id == b.product_id);
 }
 

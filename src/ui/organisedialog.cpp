@@ -303,7 +303,6 @@ void OrganiseDialog::OrganiseFinished(const QStringList& files_with_errors) {
   if (files_with_errors.isEmpty())
     return;
 
-  OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
-  dialog->Show(OrganiseErrorDialog::Type_Copy, files_with_errors);
-  // It deletes itself when the user closes it
+  error_dialog_.reset(new OrganiseErrorDialog);
+  error_dialog_->Show(OrganiseErrorDialog::Type_Copy, files_with_errors);
 }

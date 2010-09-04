@@ -24,9 +24,10 @@
 #include "core/organiseformat.h"
 #include "core/song.h"
 
-#include <boost/shared_ptr.hpp>
+#include <boost/scoped_ptr.hpp>
 
 class LibraryWatcher;
+class OrganiseErrorDialog;
 class TaskManager;
 class Ui_OrganiseDialog;
 
@@ -76,6 +77,8 @@ private:
   QStringList filenames_;
   SongList preview_songs_;
   quint64 total_size_;
+
+  boost::scoped_ptr<OrganiseErrorDialog> error_dialog_;
 };
 
 #endif // ORGANISEDIALOG_H
