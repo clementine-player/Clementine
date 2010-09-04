@@ -45,8 +45,6 @@ MtpConnection::MtpConnection(const QUrl& url)
     raw_device->bus_location = bus_location;
     raw_device->devnum = device_num;
 
-    qDebug() << "\\o/" << url;
-
     device_ = LIBMTP_Open_Raw_Device(raw_device);
     return;
   }

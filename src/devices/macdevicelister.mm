@@ -1,5 +1,7 @@
 #include "macdevicelister.h"
 
+#include "mtpconnection.h"
+
 #include <CoreFoundation/CFRunLoop.h>
 #include <DiskArbitration/DiskArbitration.h>
 #include <IOKit/kext/KextManager.h>
@@ -20,6 +22,7 @@
 
 #include <QtDebug>
 
+#include <QMutex>
 #include <QString>
 #include <QStringList>
 
@@ -99,6 +102,8 @@ void MacDeviceLister::Init() {
   // Register for USB device connection/disconnection.
   IONotificationPortRef notification_port = IONotificationPortCreate(kIOMasterPortDefault);
   CFMutableDictionaryRef matching_dict = IOServiceMatching(kIOUSBDeviceClassName);
+  // IOServiceAddMatchingNotification decreases reference count.
+  CFRetain(matching_dict);
   io_iterator_t it;
   kern_return_t err = IOServiceAddMatchingNotification(
       notification_port,
@@ -111,6 +116,19 @@ void MacDeviceLister::Init() {
     USBDeviceAddedCallback(this, it);
   } else {
     qWarning() << "Could not add notification on USB device connection";
+  }
+
+  err = IOServiceAddMatchingNotification(
+      notification_port,
+      kIOTerminatedNotification,
+      matching_dict,
+      &USBDeviceRemovedCallback,
+      reinterpret_cast<void*>(this),
+      &it);
+  if (err == KERN_SUCCESS) {
+    USBDeviceRemovedCallback(this, it);
+  } else {
+    qWarning() << "Could not add notification USB device removal";
   }
 
   CFRunLoopSourceRef io_source = IONotificationPortGetRunLoopSource(notification_port);
@@ -250,6 +268,26 @@ QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
 
 }
 
+int MacDeviceLister::GetFreeSpace(const QUrl& url) {
+  QMutexLocker l(&libmtp_mutex_);
+  MtpConnection connection(url);
+  if (!connection.is_valid()) {
+    qWarning() << "Error connecting to MTP device, couldn't get device free space";
+    return -1;
+  }
+  return connection.device()->storage->FreeSpaceInBytes;
+}
+
+int MacDeviceLister::GetCapacity(const QUrl& url) {
+  QMutexLocker l(&libmtp_mutex_);
+  MtpConnection connection(url);
+  if (!connection.is_valid()) {
+    qWarning() << "Error connecting to MTP device, couldn't get device capacity";
+    return -1;
+  }
+  return connection.device()->storage->MaxCapacity;
+}
+
 void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
   MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
 
@@ -373,15 +411,8 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
         continue;
       }
 
-      qDebug() << device.vendor
-               << device.vendor_id
-               << device.product
-               << device.product_id
-               << serial;
-
       NSNumber* addr = (NSNumber*)GetPropertyForDevice(object, CFSTR("USB Address"));
       int bus = GetBusNumber(object);
-      qDebug("Bus: %d Address: %d", bus, [addr intValue]);
       if (!addr || bus == -1) {
         // Failed to get bus or address number.
         continue;
@@ -392,7 +423,6 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       // First check the libmtp device list.
       QSet<MTPDevice>::const_iterator it = sMTPDeviceList.find(device);
       if (it != sMTPDeviceList.end()) {
-        qDebug() << "Matched device to libmtp list!";
         // Fill in quirks flags from libmtp.
         device.quirks = it->quirks;
         me->FoundMTPDevice(device, GetSerialForMTPDevice(object));
@@ -485,9 +515,49 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
   }
 }
 
+void MacDeviceLister::USBDeviceRemovedCallback(void* refcon, io_iterator_t it) {
+  MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(refcon);
+  io_object_t object;
+  while ((object = IOIteratorNext(it))) {
+    CFStringRef class_name = IOObjectCopyClass(object);
+    BOOST_SCOPE_EXIT((class_name)(object)) {
+      CFRelease(class_name);
+      IOObjectRelease(object);
+    } BOOST_SCOPE_EXIT_END
+
+    if (CFStringCompare(class_name, CFSTR(kIOUSBDeviceClassName), 0) == kCFCompareEqualTo) {
+      NSString* vendor = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBVendorString));
+      NSString* product = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBProductString));
+      NSNumber* vendor_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBVendorID));
+      NSNumber* product_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBProductID));
+      QString serial = GetSerialForMTPDevice(object);
+
+      MTPDevice device;
+      device.vendor = QString::fromUtf8([vendor UTF8String]);
+      device.product = QString::fromUtf8([product UTF8String]);
+      device.vendor_id = [vendor_id unsignedShortValue];
+      device.product_id = [product_id unsignedShortValue];
+
+      me->RemovedMTPDevice(serial);
+    }
+  }
+}
+
+void MacDeviceLister::RemovedMTPDevice(const QString& serial) {
+  int count = mtp_devices_.remove(serial);
+  if (count) {
+    qDebug() << "MTP device removed:" << serial;
+    emit DeviceRemoved(serial);
+  }
+}
+
 void MacDeviceLister::FoundMTPDevice(const MTPDevice& device, const QString& serial) {
-  qDebug() << "New MTP device detected!";
+  qDebug() << "New MTP device detected!" << device.bus << device.address;
   mtp_devices_[serial] = device;
+  QList<QUrl> urls = MakeDeviceUrls(serial);
+  MTPDevice* d = &mtp_devices_[serial];
+  d->capacity = GetCapacity(urls[0]);
+  d->free_space = GetFreeSpace(urls[0]);
   emit DeviceAdded(serial);
 }
 
@@ -606,7 +676,8 @@ QString MacDeviceLister::DeviceModel(const QString& serial){
 
 quint64 MacDeviceLister::DeviceCapacity(const QString& serial){
   if (IsMTPSerial(serial)) {
-    return 10000000;
+    QList<QUrl> urls = MakeDeviceUrls(serial);
+    return mtp_devices_[serial].capacity;
   }
   QString bsd_name = current_devices_[serial];
   DASessionRef session = DASessionCreate(kCFAllocatorDefault);
@@ -629,7 +700,8 @@ quint64 MacDeviceLister::DeviceCapacity(const QString& serial){
 
 quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
   if (IsMTPSerial(serial)) {
-    return 10000000;
+    QList<QUrl> urls = MakeDeviceUrls(serial);
+    return mtp_devices_[serial].free_space;
   }
   QString bsd_name = current_devices_[serial];
   DASessionRef session = DASessionCreate(kCFAllocatorDefault);
@@ -683,5 +755,12 @@ void MacDeviceLister::DiskUnmountCallback(
 }
 
 void MacDeviceLister::UpdateDeviceFreeSpace(const QString& serial) {
+  if (IsMTPSerial(serial)) {
+    if (mtp_devices_.contains(serial)) {
+      QList<QUrl> urls = MakeDeviceUrls(serial);
+      MTPDevice* d = &mtp_devices_[serial];
+      d->free_space = GetFreeSpace(urls[0]);
+    }
+  }
   emit DeviceChanged(serial);
 }

@@ -41,6 +41,8 @@ public:
   void Init();
 
   bool GetSupportedFiletypes(QList<Song::FileType>* ret);
+  int GetFreeSpace();
+  int GetCapacity();
 
   bool StartCopy(QList<Song::FileType>* supported_types);
   bool CopyToStorage(const CopyJob& job);
@@ -55,6 +57,8 @@ private slots:
 
 private:
   bool GetSupportedFiletypes(QList<Song::FileType>* ret, LIBMTP_mtpdevice_t* device);
+  int GetFreeSpace(LIBMTP_mtpdevice_t* device);
+  int GetCapacity(LIBMTP_mtpdevice_t* device);
 
 private:
   static bool sInitialisedLibMTP;

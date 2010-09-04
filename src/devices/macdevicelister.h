@@ -3,6 +3,7 @@
 
 #include "devicelister.h"
 
+#include <QMutex>
 #include <QThread>
 
 #include <DiskArbitration/DADisk.h>
@@ -29,6 +30,7 @@ class MacDeviceLister : public DeviceLister {
   virtual void UpdateDeviceFreeSpace(const QString& id);
 
   struct MTPDevice {
+    MTPDevice() : capacity(0), free_space(0) {}
     QString vendor;
     QString product;
     quint16 vendor_id;
@@ -37,6 +39,9 @@ class MacDeviceLister : public DeviceLister {
     int quirks;
     int bus;
     int address;
+
+    int capacity;
+    int free_space;
   };
 
  public slots:
@@ -48,17 +53,24 @@ class MacDeviceLister : public DeviceLister {
   static void DiskAddedCallback(DADiskRef disk, void* context);
   static void DiskRemovedCallback(DADiskRef disk, void* context);
   static void USBDeviceAddedCallback(void* refcon, io_iterator_t it);
+  static void USBDeviceRemovedCallback(void* refcon, io_iterator_t it);
 
   static void DiskUnmountCallback(
       DADiskRef disk, DADissenterRef dissenter, void* context);
 
   void FoundMTPDevice(const MTPDevice& device, const QString& serial);
+  void RemovedMTPDevice(const QString& serial);
+
+  int GetFreeSpace(const QUrl& url);
+  int GetCapacity(const QUrl& url);
 
   DASessionRef loop_session_;
   CFRunLoopRef run_loop_;
 
   QMap<QString, QString> current_devices_;
   QMap<QString, MTPDevice> mtp_devices_;
+
+  QMutex libmtp_mutex_;
 
   static QSet<MTPDevice> sMTPDeviceList;
 };
