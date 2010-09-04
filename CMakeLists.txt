@@ -215,7 +215,11 @@ add_subdirectory(3rdparty/qtwin)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)
-add_subdirectory(debian)
+
+option(WITH_DEBIAN OFF)
+if(WITH_DEBIAN)
+  add_subdirectory(debian)
+endif(WITH_DEBIAN)
 
 if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   add_subdirectory(gstafcsrc)
