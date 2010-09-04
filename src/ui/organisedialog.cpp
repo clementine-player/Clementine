@@ -212,7 +212,7 @@ void OrganiseDialog::UpdatePreviews() {
   format_.set_replace_spaces(ui_->replace_spaces->isChecked());
   format_.set_replace_the(ui_->replace_the->isChecked());
 
-  const bool format_valid = format_.IsValid();
+  const bool format_valid = !has_local_destination || format_.IsValid();
 
   // Are we gonna enable the ok button?
   bool ok = format_valid && !filenames_.isEmpty();
