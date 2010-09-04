@@ -220,6 +220,17 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
 
     device_menu_->popup(e->globalPos());
   } else if (library_index.isValid()) {
+    const QModelIndex parent_device_index = FindParentDevice(menu_index_);
+
+    bool is_filesystem_device = false;
+    if (parent_device_index.isValid()) {
+      boost::shared_ptr<ConnectedDevice> device = manager_->GetConnectedDevice(parent_device_index.row());
+      if (device && !device->LocalPath().isEmpty())
+        is_filesystem_device = true;
+    }
+
+    organise_action_->setEnabled(is_filesystem_device);
+
     library_menu_->popup(e->globalPos());
   }
 }
