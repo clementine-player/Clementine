@@ -55,7 +55,6 @@ private slots:
   void DeleteAction();
   void ItemClicked(QTreeWidgetItem*);
   void LoadSettings();
-  void WiimotedevEnabledChecked(bool checked);
 
 
 signals:

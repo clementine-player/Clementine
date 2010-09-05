@@ -111,7 +111,6 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
 
   settings_.beginGroup(WiimotedevShortcuts::kSettingsGroup);
   ui_->wiimotedev_enable->setChecked(settings_.value("enabled", false).toBool());
-  ui_->wiimotedev_groupbox->setEnabled(settings_.value("enabled", false).toBool());
   ui_->wiimotedev_active->setChecked(settings_.value("use_active_action", true).toBool());
   ui_->wiimotedev_focus->setChecked(settings_.value("only_when_focused", false).toBool());
   ui_->wiimotedev_notification->setChecked(settings_.value("use_notification", true).toBool());
@@ -189,10 +188,6 @@ void WiimotedevShortcutsConfig::DefaultSettings()
   AddShortcut(WIIMOTE_BTN_A, WiimotedevShortcuts::WiimotedevActiveDeactive);
 
   ui_->list->sortItems(1, Qt::AscendingOrder);
-}
-
-void WiimotedevShortcutsConfig::WiimotedevEnabledChecked(bool checked) {
-  ui_->wiimotedev_groupbox->setEnabled(checked);
 }
 
 void WiimotedevShortcutsConfig::ItemClicked(QTreeWidgetItem* selected_item) {
