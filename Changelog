@@ -1,3 +1,62 @@
+Version 0.5:
+  Features:
+    * Add support for iPods, MTP music players and USB mass storage disks.
+      You can now copy songs on to and manage files on your portable devices.
+      Music will get transcoded automatically if the device you're copying to
+      doesn't support the file type.
+    * Add a queue manager.  You can now add songs to a queue to have them
+      played before anything else in the playlist.
+    * Add an Organise Files dialog that lets you copy files into your library
+      or rename them to follow your naming convention.
+    * Add support for Wii Remotes - you can now use your Wii Remote as a remote
+      control for Clementine!
+    * The columns in the playlist will now stretch to fit the whole window size.
+    * Load embedded album art from id3v2 tags.
+    * Load local files from the library instead if they exist, meaning existing
+      album art will be used.
+    * Support drag and drop between playlists.
+    * Add options to disable library scanning.
+    * Add an option to group the library by file type.
+    * Add an option to change the GUI language.
+    * Add an option to disable the current track glow effect.
+    * Add a global shortcut to show/hide the OSD.
+    * Show progress information for individual tracks when transcoding.
+    * ALL GLORY TO THE HYPNOTOAD.
+    * (Linux) Add an svg icon.
+    * (Windows Vista and Windows 7) Add Clementine to the Default Programs menu.
+    * (Windows Vista and Windows 7) Blur the background of the OSD.
+
+  Bugfixes:
+    * Fix a memory leak when playing ogg streams.
+    * Reduce the constant CPU usage when playing music.
+    * Greatly reduce CPU usage when using the equalizer.
+    * Greatly reduce startup time.
+    * Move lots of disk IO to the background, making the GUI more responsive.
+    * Display an error dialog instead of crashing if no projectM visualisations
+      were found.
+    * Fix a crash when the "Last.fm" tree item was expanded.
+    * Fix a bug that would create empty "Unknown" categories in the Library.
+    * Fix a black visualisations window when using a non-English locale.
+    * Detect symbolic links in the music library properly.
+    * Pick gstreamer codecs automatically when transcoding, insteading of using
+      a hardcoded list.
+    * Sort items in the library that don't have a track number set properly.
+    * Sort library items with UTF-8 characters properly.
+    * Use the file extension as well as the mime-type when figuring out how to
+      load a remote playlist.
+    * Handle "Artist - Title" icycast metadata properly.
+    * Filtering the playlist now focuses the currently playing song.
+    * Filtering the playlist is now case-insensitive.
+    * Load the "albumartist" tag from flac and ogg metadata.
+    * (Linux) Make the commandline interface work even when not running an X
+      server.
+    * (Mac) Reduce the default font size to fit in with other OS X applications.
+    * (Windows) Seed the random number generator properly so the same tracks
+      don't get played over and over when using shuffle.
+    * (Windows) Use \ instead of / in several places in the GUI.
+
+
+
 Version 0.4.2:
   Bugfixes:
     * (Linux) Fixed a bug where Clementine wouldn't start at all on Slackware,
