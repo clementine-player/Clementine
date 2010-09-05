@@ -177,13 +177,15 @@ void FreeSpaceBar::DrawText(QPainter* p, const QRect& r) {
 
   p->setRenderHint(QPainter::Antialiasing, false);
   foreach (const Label& label, labels) {
+    const bool light = palette().color(QPalette::Base).value() > 128;
+
     QRect box(x, r.top() + (r.height() - kLabelBoxSize)/2, kLabelBoxSize, kLabelBoxSize);
     p->setPen(label.color.darker());
     p->setBrush(label.color);
     p->drawRect(box);
 
     QRect text(x + kLabelBoxSize + kLabelBoxPadding, r.top(), small_metrics.width(label.text), r.height());
-    p->setPen(label.color.darker());
+    p->setPen(light ? label.color.darker() : label.color);
     p->drawText(text, Qt::AlignCenter, label.text);
 
     x += kLabelBoxSize + kLabelBoxPadding + kLabelSpacing + small_metrics.width(label.text);

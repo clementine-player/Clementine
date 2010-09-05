@@ -52,9 +52,13 @@ public:
 
   class SyntaxHighlighter : public QSyntaxHighlighter {
   public:
-    static const QRgb kValidTagColor;
-    static const QRgb kInvalidTagColor;
-    static const QRgb kBlockColor;
+    static const QRgb kValidTagColorLight;
+    static const QRgb kInvalidTagColorLight;
+    static const QRgb kBlockColorLight;
+    static const QRgb kValidTagColorDark;
+    static const QRgb kInvalidTagColorDark;
+    static const QRgb kBlockColorDark;
+
     SyntaxHighlighter(QObject* parent = 0);
     SyntaxHighlighter(QTextEdit* parent);
     SyntaxHighlighter(QTextDocument* parent);

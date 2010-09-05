@@ -16,6 +16,9 @@
 
 #include "organiseformat.h"
 
+#include <QApplication>
+#include <QPalette>
+
 const char* OrganiseFormat::kTagPattern = "\\%([a-zA-Z]*)";
 const char* OrganiseFormat::kBlockPattern = "\\{([^{}]+)\\}";
 const QStringList OrganiseFormat::kKnownTags = QStringList()
@@ -23,9 +26,13 @@ const QStringList OrganiseFormat::kKnownTags = QStringList()
     << "composer" << "track" << "disc" << "bpm" << "year" << "genre"
     << "comment" << "length" << "bitrate" << "samplerate" << "extension";
 
-const QRgb OrganiseFormat::SyntaxHighlighter::kValidTagColor = qRgb(0, 0, 255);
-const QRgb OrganiseFormat::SyntaxHighlighter::kInvalidTagColor = qRgb(255, 0, 0);
-const QRgb OrganiseFormat::SyntaxHighlighter::kBlockColor = qRgb(230, 230, 230);
+const QRgb OrganiseFormat::SyntaxHighlighter::kValidTagColorLight = qRgb(64, 64, 255);
+const QRgb OrganiseFormat::SyntaxHighlighter::kInvalidTagColorLight = qRgb(255, 64, 64);
+const QRgb OrganiseFormat::SyntaxHighlighter::kBlockColorLight = qRgb(230, 230, 230);
+
+const QRgb OrganiseFormat::SyntaxHighlighter::kValidTagColorDark = qRgb(128, 128, 255);
+const QRgb OrganiseFormat::SyntaxHighlighter::kInvalidTagColorDark = qRgb(255, 128, 128);
+const QRgb OrganiseFormat::SyntaxHighlighter::kBlockColorDark = qRgb(64, 64, 64);
 
 OrganiseFormat::OrganiseFormat(const QString &format)
   : format_(format),
@@ -196,11 +203,16 @@ OrganiseFormat::SyntaxHighlighter::SyntaxHighlighter(QTextDocument* parent)
   : QSyntaxHighlighter(parent) {}
 
 void OrganiseFormat::SyntaxHighlighter::highlightBlock(const QString& text) {
+  const bool light = QApplication::palette().color(QPalette::Base).value() > 128;
+  const QRgb block_color = light ? kBlockColorLight : kBlockColorDark;
+  const QRgb valid_tag_color = light ? kValidTagColorLight : kValidTagColorDark;
+  const QRgb invalid_tag_color = light ? kInvalidTagColorLight : kInvalidTagColorDark;
+
   QRegExp tag_regexp(kTagPattern);
   QRegExp block_regexp(kBlockPattern);
 
   QTextCharFormat block_format;
-  block_format.setBackground(QColor(kBlockColor));
+  block_format.setBackground(QColor(block_color));
 
   // Reset formatting
   setFormat(0, text.length(), QTextCharFormat());
@@ -218,7 +230,7 @@ void OrganiseFormat::SyntaxHighlighter::highlightBlock(const QString& text) {
   while ((pos = tag_regexp.indexIn(text, pos)) != -1) {
     QTextCharFormat f = format(pos);
     f.setForeground(QColor(OrganiseFormat::kKnownTags.contains(tag_regexp.cap(1))
-                           ? kValidTagColor : kInvalidTagColor));
+                           ? valid_tag_color : invalid_tag_color));
 
     setFormat(pos, tag_regexp.matchedLength(), f);
     pos += tag_regexp.matchedLength();
