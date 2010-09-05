@@ -19,7 +19,7 @@
 
 #include <QCoreApplication>
 
-const char* About::kUrl = "http://code.google.com/p/clementine-player/";
+const char* About::kUrl = "http://www.clementine-player.org/";
 
 About::About(QWidget *parent)
   : QDialog(parent)
@@ -43,7 +43,7 @@ About::About(QWidget *parent)
              << Person("Jakub Stachowski", "qbast@go2.pl")
              << Person("Paul Cifarelli", "paul@cifarelli.net")
              << Person("Felipe Rivera", "liebremx@users.sourceforge.net")
-             << Person("Alexander Peitz", "");
+             << Person("Alexander Peitz");
 
   ui_.content->setHtml(MakeHtml());
 }
@@ -61,14 +61,17 @@ QString About::MakeHtml() const {
     ret += "<br />" + MakeHtml(person);
 
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
-  ret += QString("<br /><b>%1</b>").arg(tr("And:"));
-  ret += QString("<p><a href=\"http://rainymood.com\">Rainy Mood</a></p>");
-  ret += QString("<p><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a></p>");
+  ret += QString("<p><b>%1</b>").arg(tr("And:"));
+  ret += QString("<br /><a href=\"http://rainymood.com\">Rainy Mood</a>");
+  ret += QString("<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a></p>");
 
   return ret;
 }
 
 QString About::MakeHtml(const Person& person) const {
-  return QString("%1 &lt;<a href=\"mailto:%2\">%3</a>&gt;")
-      .arg(person.name, person.email, person.email);
+  if (person.email.isNull())
+    return person.name;
+  else
+    return QString("%1 &lt;<a href=\"mailto:%2\">%3</a>&gt;")
+        .arg(person.name, person.email, person.email);
 }
