@@ -2,6 +2,7 @@
 
 name=clementine
 version="@CLEMENTINE_VERSION@"
+deb_version="@CLEMENTINE_VERSION@"
 root=$(cd "${0%/*}/.." && echo $PWD/${0##*/})
 root=`dirname "$root"`
 rootnoslash=`echo $root | sed "s/^\///"`
@@ -15,6 +16,6 @@ tar -czf $name-$version.tar.gz "$root" \
     --exclude "$root/debian" \
     --exclude "$root/dist/*.tar.gz"
 
-echo "Also creating ${name}_$version.orig.tar.gz..."
-cp "$name-$version.tar.gz" "${name}_$version.orig.tar.gz"
+echo "Also creating ${name}_$deb_version.orig.tar.gz..."
+cp "$name-$version.tar.gz" "${name}_$deb_version.orig.tar.gz"
 
