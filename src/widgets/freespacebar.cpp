@@ -66,7 +66,7 @@ void FreeSpaceBar::paintEvent(QPaintEvent*) {
   // Draw the reflection
   // Create the reflected pixmap
   QImage reflection(reflection_rect.size(), QImage::Format_ARGB32_Premultiplied);
-  reflection.fill(Qt::transparent);
+  reflection.fill(palette().color(QPalette::Background).rgba());
   QPainter p(&reflection);
 
   // Set up the transformation
