@@ -29,7 +29,7 @@ class About : public QDialog {
   static const char* kUrl;
 
   struct Person {
-    Person(const QString& n, const QString& e) : name(n), email(e) {}
+    Person(const QString& n, const QString& e = QString()) : name(n), email(e) {}
 
     QString name;
     QString email;
