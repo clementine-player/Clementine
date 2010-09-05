@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-08-09 21:31+0000\n"
-"PO-Revision-Date: 2010-08-11 00:04+0000\n"
+"POT-Creation-Date: 2010-09-04 17:09+0000\n"
+"PO-Revision-Date: 2010-09-04 19:52+0000\n"
 "Last-Translator: ntomka <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
-"X-Launchpad-Export-Date: 2010-08-11 04:06+0000\n"
+"X-Launchpad-Export-Date: 2010-09-05 05:06+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Language: hu\n"
 
 msgid " ms"
 msgstr " ms"
@@ -42,11 +42,11 @@ msgstr "%1 kiválasztva"
 
 #, qt-format
 msgid "%1 song"
-msgstr ""
+msgstr "%1 szám"
 
 #, qt-format
 msgid "%1 songs"
-msgstr ""
+msgstr "%1 szám"
 
 #, qt-format
 msgid "%1 tracks"
@@ -54,7 +54,7 @@ msgstr "%1 szám"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1: Wiimotedev modul"
 
 #, c-format
 msgid "%n failed"
@@ -121,16 +121,16 @@ msgid "Account details"
 msgstr "Fiók részletek"
 
 msgid "Action"
-msgstr ""
+msgstr "Esemény"
 
 msgid "Active/deactive Wiiremote"
-msgstr ""
+msgstr "Wiiremote aktiválása/deaktiválása"
 
 msgid "Add Stream"
 msgstr "Adatfolyam hozzáadása"
 
 msgid "Add action"
-msgstr ""
+msgstr "Esemény felvétele"
 
 msgid "Add another stream..."
 msgstr "Új adatfolyam hozzáadása"
@@ -163,7 +163,7 @@ msgid "Add to playlist"
 msgstr "Hozzáadás a lejátszási listához"
 
 msgid "Add wiimotedev action"
-msgstr ""
+msgstr "Wiimotedev esemény hozzáadása"
 
 msgid "Add..."
 msgstr "Hozzáadás.."
@@ -286,7 +286,7 @@ msgid "Automatic updating"
 msgstr "Automatikus frissítés"
 
 msgid "Automatically open single categories in the library tree"
-msgstr "Egyedüli kategóriák automatikus listázása a zenetárban"
+msgstr "Egyelemű kategóriák automatikus listázása a zenetárban"
 
 msgid "Available"
 msgstr "Elérhető"
@@ -331,7 +331,7 @@ msgid "Browse..."
 msgstr "Tallózás…"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Gombok"
 
 msgid "Change shortcut..."
 msgstr "Billentyűparancs módosítása..."
@@ -361,7 +361,7 @@ msgid "Clear"
 msgstr "Kiürít"
 
 msgid "Clear playlist"
-msgstr "Lejátszólista űrítése"
+msgstr "Lejátszási lista űrítése"
 
 msgid "Clementine"
 msgstr "Clementine"
@@ -379,6 +379,8 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
+"Clementine automatikusan az eszköz által is támogatott formátumba tudja "
+"konvertálni a számokat másolás előtt."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "A Clementine felbukkanó üzenetben tudja jelezni, ha számot vált."
@@ -433,13 +435,13 @@ msgid "Connect device"
 msgstr "Eszköz csatlakoztatása"
 
 msgid "Convert all music"
-msgstr ""
+msgstr "Minden szám tömörítése"
 
 msgid "Convert any music that the device can't play"
-msgstr ""
+msgstr "Az eszköz által nem támogatott számok konvertálása"
 
 msgid "Copy to device..."
-msgstr "Másolás az eszközre..."
+msgstr "Másolás eszközre..."
 
 msgid "Copy to library..."
 msgstr "Másolás a zenetárba..."
@@ -460,12 +462,16 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
+"%1 kódolásához nem található muxer, ellenőrizze, hogy telepítve van-e a "
+"megfelelő GStreamer beépülő"
 
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr ""
+"Nem található megfelelő kódoló %1 tömörítéséhez. Ellenőrizze, hogy a "
+"GStreamer beépülők megfelelően vannak-e telepítve"
 
 #, qt-format
 msgid "Couldn't load the last.fm radio station: %1"
@@ -551,7 +557,7 @@ msgid "Decrease volume"
 msgstr "Hangerő csökkentése"
 
 msgid "Defaults"
-msgstr ""
+msgstr "Alapértelmezések"
 
 msgid "Delay between visualizations"
 msgstr "Megjelenítések között váltás ideje"
@@ -596,7 +602,7 @@ msgid "Device Properties"
 msgstr "Eszköztulajdonságok"
 
 msgid "Device name"
-msgstr ""
+msgstr "Eszköznév"
 
 msgid "Device properties..."
 msgstr "Eszköztulajdonságok..."
@@ -620,13 +626,13 @@ msgid "Display the on-screen-display"
 msgstr "OSD mutatása"
 
 msgid "Do not convert any music"
-msgstr ""
+msgstr "Ne konvertáljon egy számot sem"
 
 msgid "Don't repeat"
-msgstr "Ne ismételje"
+msgstr "Ne ismételjen"
 
 msgid "Don't show in various artists"
-msgstr "Ne mutassa az ismeretlen előadók között"
+msgstr "Ne mutassa a különböző előadók között"
 
 msgid "Don't shuffle"
 msgstr "Ne keverje össze"
@@ -656,11 +662,11 @@ msgid "Drag to reposition"
 msgstr "Fogja meg az áthelyezéshez"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Meghajtó azonosító"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "\"%1\" címke módosítása..."
+msgstr "\"%1\" információ módosítása..."
 
 msgid "Edit tag..."
 msgstr "Címke módosítása..."
@@ -669,7 +675,7 @@ msgid "Edit track information"
 msgstr "Száminformációk szerkesztése"
 
 msgid "Edit track information..."
-msgstr "Száminformáció szerkesztése..."
+msgstr "Száminformációk szerkesztése..."
 
 msgid "Edit..."
 msgstr "Szerkesztés..."
@@ -715,13 +721,13 @@ msgid "Error"
 msgstr "Hiba"
 
 msgid "Error connecting MTP device"
-msgstr ""
+msgstr "Hiba történt az MTP eszközhöz való csatlakozás közben"
 
 msgid "Error copying songs"
-msgstr ""
+msgstr "Hiba történt a számok másolása közben"
 
 msgid "Error deleting songs"
-msgstr ""
+msgstr "Hiba történt a számok törlése közben"
 
 #, qt-format
 msgid "Error loading %1"
@@ -774,7 +780,7 @@ msgid "File extension"
 msgstr "Fájlkiterjesztés"
 
 msgid "File formats"
-msgstr ""
+msgstr "Fájl formátumok"
 
 msgid "File name"
 msgstr "Fájlnév"
@@ -798,19 +804,19 @@ msgid "Files to transcode"
 msgstr "Átkódolandó fájlok"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Fájlrendszer név"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Fájlrendszer szériaszám"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Fájlrendszertípus"
 
 msgid "First level"
 msgstr "Első szinten"
 
 msgid "Flac"
-msgstr ""
+msgstr "FLAC"
 
 msgid "Forget device"
 msgstr "Eszköz elfelejtése"
@@ -921,6 +927,8 @@ msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
 "work."
 msgstr ""
+"Ha folytatja, az eszköz lassan fog működni és a rá másolt számok "
+"használhatatlanok lehetnek."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "A \"The\" mellőzése előadó nevekben"
@@ -940,7 +948,7 @@ msgid "Increase volume"
 msgstr "Hangerő növelése"
 
 msgid "Information"
-msgstr ""
+msgstr "Információ"
 
 msgid "Insert..."
 msgstr "Beszúrás..."
@@ -974,11 +982,11 @@ msgstr "Ugrás a most lejátszott számra"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 
 msgid "Keep the original files"
 msgstr "Eredeti fájlok megőrzése"
@@ -987,7 +995,7 @@ msgid "Language"
 msgstr "Nyelv"
 
 msgid "Laptop/Headphones"
-msgstr "Laptop/Fejhallgatók"
+msgstr "Laptop/Fejhallgató"
 
 msgid "Large Hall"
 msgstr "Nagy terem"
@@ -1067,10 +1075,10 @@ msgid "Loading Last.fm radio"
 msgstr "Last.fm rádió betöltése"
 
 msgid "Loading MTP device"
-msgstr ""
+msgstr "MTP eszköz beolvasása"
 
 msgid "Loading Windows Media device"
-msgstr ""
+msgstr "Windows Media eszköz betöltése"
 
 msgid "Loading iPod database"
 msgstr "iPod adatbázis betöltése"
@@ -1097,7 +1105,7 @@ msgid "MP3"
 msgstr "MP3"
 
 msgid "MP4 AAC"
-msgstr ""
+msgstr "MP4 AAC"
 
 msgid "MPC"
 msgstr "MPC"
@@ -1229,7 +1237,7 @@ msgid "OSD Preview"
 msgstr "OSD Előnézet"
 
 msgid "Ogg Flac"
-msgstr ""
+msgstr "OGG FLAC"
 
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -1238,7 +1246,7 @@ msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
 msgid "Open device"
-msgstr ""
+msgstr "Eszköz megnyitása"
 
 msgid "Open magnatune.com in browser"
 msgstr "A magnatune.com megnyitása böngészőben"
@@ -1340,7 +1348,7 @@ msgid "Pop"
 msgstr "Pop"
 
 msgid "Popup duration"
-msgstr "Felugró időtartama"
+msgstr "Értesítés időtartama"
 
 msgid "Pre-amp"
 msgstr "Előerősítő"
@@ -1355,13 +1363,13 @@ msgid "Preferred audio format"
 msgstr "Előnyben részesített audio formátum"
 
 msgid "Preferred format"
-msgstr ""
+msgstr "Előnyben részesített formátum"
 
 msgid "Preset:"
 msgstr "Beállítás:"
 
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "Nyomja meg a használni kívánt billentyűkombinációt"
 
 msgid "Press a key"
 msgstr "Nyomjon meg egy billentyűt"
@@ -1383,13 +1391,13 @@ msgid "Progress"
 msgstr "Folyamat"
 
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "Nyomja meg a Wiiremote gombot"
 
 msgid "Quality"
 msgstr "Minőség"
 
 msgid "Querying device..."
-msgstr ""
+msgstr "Eszköz lekérdezése..."
 
 msgid "Queue Manager"
 msgstr "Sorkezelő"
@@ -1401,7 +1409,7 @@ msgid "Queue track"
 msgstr "Szám sorba állítása"
 
 msgid "Radio (equal loudness for all tracks)"
-msgstr "rádió (egyenlő hangerő minden számhoz)"
+msgstr "Rádió (egyenlő hangerő minden számhoz)"
 
 msgid "Radio service couldn't be loaded :-("
 msgstr "Nem lehet betölteni a rádió szolgáltatást :-("
@@ -1425,7 +1433,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Emlékezzen a Wii távvezérlő mozdulatra"
 
 msgid "Remember from last time"
 msgstr "Ahogy legutoljára volt"
@@ -1434,7 +1442,7 @@ msgid "Remove"
 msgstr "Eltávolítás"
 
 msgid "Remove action"
-msgstr ""
+msgstr "Esemény eltávolítása"
 
 msgid "Remove folder"
 msgstr "Mappa eltávolítása"
@@ -1571,20 +1579,21 @@ msgstr "Billentyűparancs"
 
 #, qt-format
 msgid "Shortcut for %1"
-msgstr "Billentyűparancs %1-hoz/hez"
+msgstr "%1 billentyűparancsa"
 
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr ""
+msgstr "%1 billentyűparancsa már létezik"
 
 msgid "Show"
-msgstr "Megjelenít"
+msgstr "Megjelenítés"
 
 msgid "Show OSD"
 msgstr "OSD megjelenítése"
 
 msgid "Show a glowing animation on the current track"
 msgstr ""
+"Ragyogás animáció megjelenítése a játszott számon a lejátszási listában"
 
 msgid "Show a native desktop notification"
 msgstr "Rendszer alapértelmezett értesítés mutatása"
@@ -1593,7 +1602,7 @@ msgid "Show a notification when I change the volume"
 msgstr "Hangerő változtatásakor értesítés megjelenítése"
 
 msgid "Show a popup from the system tray"
-msgstr "Felugró megjelenítése a rendszertálcán"
+msgstr "Értesítés megjelenítése a rendszertálcán"
 
 msgid "Show a pretty OSD"
 msgstr "Pretty OSD megjelenítése"
@@ -1605,7 +1614,7 @@ msgid "Show fullsize..."
 msgstr "Jelenítse meg teljes méretben..."
 
 msgid "Show in various artists"
-msgstr "Jelenítse meg az ismeretlen előadók között"
+msgstr "Jelenítse meg a különböző előadók között"
 
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Jelenítse meg a \"kedvenc\" és \"tiltás\" gombokat"
@@ -1617,7 +1626,7 @@ msgid "Show/Hide"
 msgstr "Megjelenítés/Elrejtés"
 
 msgid "Shuffle"
-msgstr "Véletlenszerűen"
+msgstr "Keverés"
 
 msgid "Shuffle all"
 msgstr "Az összes véletlenszerűen"
@@ -1672,7 +1681,7 @@ msgid "Stop"
 msgstr "Leállít"
 
 msgid "Stop after"
-msgstr ""
+msgstr "Megállít utána"
 
 msgid "Stop after this track"
 msgstr "Leállítás az aktuális szám után"
@@ -1693,7 +1702,7 @@ msgid "Streaming membership"
 msgstr "Adatfolyam tagság"
 
 msgid "Stretch columns to fit window"
-msgstr ""
+msgstr "Oszlopszélességek igazítása az ablakhoz"
 
 #, qt-format
 msgid "Successfully written %1"
@@ -1703,7 +1712,7 @@ msgid "Super high (60 fps)"
 msgstr "Nagyon gyors (60 fps)"
 
 msgid "Supported formats"
-msgstr ""
+msgstr "Támogatott formátumok"
 
 msgid "Tag"
 msgstr "Címke"
@@ -1739,11 +1748,15 @@ msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
+"Néhány szám másolása közben hiba lépett fel. Az alábbi fájlokat nem sikerült "
+"másolni:"
 
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
+"Néhány szám törlése közben hiba lépett fel. Az alábbi fájlokat nem sikerült "
+"törölni:"
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
@@ -1769,19 +1782,24 @@ msgid ""
 "This device must be connected and opened before Clementine can see what file "
 "formats it supports."
 msgstr ""
+"A Clementine csak az eszköz csatlakoztatása és megnyitása után képes "
+"megállapítani, hogy az milyen fájl formátumokat kezel."
 
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "Ez az eszköz az alábbi fájlformátumokat támogatja:"
 
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Az eszköz nem fog megfelelően működni"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"Ez egy MTP eszköz, de a Clementine libmtp támogatás nélkül lett fordítva."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
+"Ez az eszköz egy iPod, de a Clementine libgpod támogatás nélkül lett "
+"fordítva."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -1899,10 +1917,10 @@ msgid "VBR MP3"
 msgstr "VBR MP3"
 
 msgid "Various Artists"
-msgstr "Ismeretlen előadók"
+msgstr "Különböző előadók"
 
 msgid "Various artists"
-msgstr "Ismeretlen előadók"
+msgstr "Különböző előadók"
 
 #, qt-format
 msgid "Version %1"
@@ -1925,13 +1943,13 @@ msgid "Volume %1%"
 msgstr "Hangerő %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "Meghajtó név"
 
 msgid "WAV"
 msgstr "WAV"
 
 msgid "Wav"
-msgstr ""
+msgstr "WAV"
 
 msgid "When Clementine starts"
 msgstr "Amikor a Clementine elindul"
@@ -1941,30 +1959,30 @@ msgstr "WiFi MAC cím"
 
 #, qt-format
 msgid "Wiiremote %1: actived"
-msgstr ""
+msgstr "Wiiremote %1: aktiválva"
 
 #, qt-format
 msgid "Wiiremote %1: connected"
-msgstr ""
+msgstr "Wiiremote %1: csatlakoztatva"
 
 #, qt-format
 msgid "Wiiremote %1: critical battery (%2%) "
-msgstr ""
+msgstr "Wiiremote %1: kritikus teleptöltés (%2%) "
 
 #, qt-format
 msgid "Wiiremote %1: disactived"
-msgstr ""
+msgstr "Wiiremote %1: deaktiválva"
 
 #, qt-format
 msgid "Wiiremote %1: disconnected"
-msgstr ""
+msgstr "Wiiremote %1: leválasztva"
 
 #, qt-format
 msgid "Wiiremote %1: low battery (%2%)"
-msgstr ""
+msgstr "Wiiremote %1: alacsony teleptöltés (%2%)"
 
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Windows Media audio"
 
 msgid "Year"
 msgstr "Év"
@@ -2055,7 +2073,25 @@ msgstr "leállítás"
 
 #, qt-format
 msgid "track %1"
-msgstr "%1 szám"
+msgstr "%1. szám"
+
+#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
+#~ msgstr ""
+#~ "Wii távvezérlő eszköz csatlakoztatása az aktív/deaktív esemény "
+#~ "használatával"
+
+#~ msgid "Enable Wii remote support in Clementine"
+#~ msgstr "Wii távvezérlő támogatás engedélyezése"
+
+#~ msgid "Enable shortcuts only when application is focused"
+#~ msgstr "Billentyűparancsok engedélyezése csak ha az alkalmazás aktív"
+
+#~ msgid "Use Wii remote"
+#~ msgstr "Wii távvezérlő használata"
+
+#~ msgid "Use notifications to report Wii remote status"
+#~ msgstr ""
+#~ "Értesítések használata a Wii távvezérlő eszköz állapotának jelentéséhez"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"
