@@ -35,7 +35,6 @@
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 
-#include "qtlocalpeer.h"
 #include "qtsingleapplication.h"
 #include "qtsinglecoreapplication.h"
 
