@@ -19,12 +19,36 @@
 
 #include "playlist.h"
 
-#include <QTreeView>
 #include <QBasicTimer>
+#include <QProxyStyle>
+#include <QTreeView>
+
+#include <boost/scoped_ptr.hpp>
+
+class QCleanlooksStyle;
 
 class LibraryBackend;
 class PlaylistHeader;
 class RadioLoadingIndicator;
+
+
+// This proxy style works around a bug/feature introduced in Qt 4.7's QGtkStyle
+// that uses Gtk to paint row backgrounds, ignoring any custom brush or palette
+// the caller set in the QStyleOption.  That breaks our currently playing track
+// animation, which relies on the background painted by Qt to be transparent.
+// This proxy style uses QCleanlooksStyle to paint the affected elements.
+class PlaylistProxyStyle : public QProxyStyle {
+public:
+  PlaylistProxyStyle(QStyle* base);
+  void drawControl(ControlElement element, const QStyleOption* option,
+                   QPainter* painter, const QWidget* widget) const;
+  void drawPrimitive(PrimitiveElement element, const QStyleOption* option,
+                     QPainter* painter, const QWidget* widget) const;
+
+private:
+  boost::scoped_ptr<QCleanlooksStyle> cleanlooks_;
+};
+
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
@@ -84,7 +108,7 @@ class PlaylistView : public QTreeView {
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
-  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
+  void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                     const QModelIndex& index);
 
  private:
@@ -97,6 +121,7 @@ class PlaylistView : public QTreeView {
   QModelIndex NextEditableIndex(const QModelIndex& current);
   QModelIndex PrevEditableIndex(const QModelIndex& current);
 
+  PlaylistProxyStyle* style_;
   Playlist* playlist_;
   PlaylistHeader* header_;
   bool setting_initial_header_layout_;
