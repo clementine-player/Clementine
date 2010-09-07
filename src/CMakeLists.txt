@@ -758,6 +758,8 @@ if (APPLE)
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
   install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
+  install(DIRECTORY "${GROWL}/Versions/Current/Resources"
+    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Growl.framework")
 
   add_custom_target(bundle
     ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
