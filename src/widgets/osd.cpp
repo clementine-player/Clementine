@@ -79,6 +79,7 @@ void OSD::ReloadSettings() {
 }
 
 void OSD::SongChanged(const Song &song) {
+  tray_icon_->SetNowPlaying(song);
   QString summary(song.PrettyTitle());
   if (!song.artist().isEmpty())
     summary = QString("%1 - %2").arg(song.artist(), summary);
@@ -120,6 +121,7 @@ void OSD::Paused() {
 }
 
 void OSD::Stopped() {
+  tray_icon_->ClearNowPlaying();
   if (ignore_next_stopped_) {
     ignore_next_stopped_ = false;
     return;

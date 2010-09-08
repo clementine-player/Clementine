@@ -21,6 +21,7 @@
 #include <QPixmap>
 
 class QAction;
+class Song;
 
 class SystemTrayIcon : public QObject {
   Q_OBJECT
@@ -39,6 +40,8 @@ class SystemTrayIcon : public QObject {
   // Called by the OSD
   virtual void ShowPopup(const QString& summary, const QString& message,
                          int timeout) {}
+  virtual void SetNowPlaying(const Song& song) {}
+  virtual void ClearNowPlaying() {}
 
   static SystemTrayIcon* CreateSystemTrayIcon(QObject* parent = 0);
 
