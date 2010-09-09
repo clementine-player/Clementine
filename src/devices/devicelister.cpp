@@ -17,6 +17,7 @@
 #include "config.h"
 #include "devicelister.h"
 
+#include <QDir>
 #include <QFile>
 #include <QStringList>
 #include <QThread>
@@ -54,7 +55,8 @@ namespace {
 
 bool IsIpod(const QString& path) {
   return QFile::exists(path + "/iTunes_Control") ||
-         QFile::exists(path + "/iPod_Control");
+         QFile::exists(path + "/iPod_Control") ||
+         QFile::exists(path + "/iTunes/iTunes_Control");
 }
 
 #ifdef HAVE_LIBGPOD
@@ -163,7 +165,10 @@ QString GetIpodModel(Itdb_IpodModel model) {
 
 QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
   if (IsIpod(path)) {
-    return QUrl("ipod://" + path);
+    QUrl ret;
+    ret.setScheme("ipod");
+    ret.setPath(QDir::fromNativeSeparators(path));
+    return ret;
   }
 
   return QUrl::fromLocalFile(path);
