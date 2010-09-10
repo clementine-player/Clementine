@@ -39,7 +39,6 @@
 #include <QDesktopServices>
 #include <QCoreApplication>
 #include <QSettings>
-#include <QTime>
 
 #include <QtDebug>
 
@@ -72,31 +71,22 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     total_song_count_(0),
     network_(parent->network()->network())
 {
-  QTime t;
-  t.start();
-
   ReloadSettings();
-  qDebug() << t.restart() << "magnatune: settings";
 
   // Create the library backend in the database thread
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(parent->db_thread());
-  qDebug() << t.restart() << "magnatune: backendctor";
   library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
                          QString::null, QString::null, kFtsTable);
-  qDebug() << t.restart() << "magnatune: backendinit";
   library_model_ = new LibraryModel(library_backend_, this);
-  qDebug() << t.restart() << "magnatune: modelctor";
 
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
-  qDebug() << t.restart() << "magnatune: connect";
 
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
-  qDebug() << t.restart() << "magnatune: sort model";
 }
 
 MagnatuneService::~MagnatuneService() {

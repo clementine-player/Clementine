@@ -24,7 +24,6 @@
 #include "core/mergedproxymodel.h"
 
 #include <QMimeData>
-#include <QTime>
 #include <QtDebug>
 
 QMap<QString, RadioService*> RadioModel::sServices;
@@ -43,17 +42,10 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   root_->lazy_loaded = true;
   merged_model_->setSourceModel(this);
 
-  QTime t;
-  t.start();
-
   AddService(new LastFMService(this));
-  qDebug() << t.restart() << "lastfm";
   AddService(new SomaFMService(this));
-  qDebug() << t.restart() << "somafm";
   AddService(new MagnatuneService(this));
-  qDebug() << t.restart() << "magnatune";
   AddService(new SavedRadio(this));
-  qDebug() << t.restart() << "saved";
 }
 
 void RadioModel::AddService(RadioService *service) {

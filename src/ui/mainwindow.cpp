@@ -97,8 +97,6 @@
 
 #include <cmath>
 
-#include <QTime>
-
 using boost::shared_ptr;
 using boost::scoped_ptr;
 
@@ -146,30 +144,19 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     track_position_timer_(new QTimer(this)),
     was_maximized_(false)
 {
-  QTime t;
-  t.start();
-
   // Wait for the database thread to start - lots of stuff depends on it.
   database_->Start(true);
-
-  qDebug() << t.restart() << "database startup";
 
   // Create some objects in the database thread
   playlist_backend_ = new PlaylistBackend;
   playlist_backend_->moveToThread(database_);
   playlist_backend_->SetDatabase(database_->Worker());
 
-  qDebug() << t.restart() << "playlist backend";
-
   // Create stuff that needs the database
   radio_model_ = new RadioModel(database_, network, task_manager_, this);
-  qDebug() << t.restart() << "dbdeps: radio model";
   player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
-  qDebug() << t.restart() << "dbdeps: player";
   library_ = new Library(database_, task_manager_, this);
-  qDebug() << t.restart() << "dbdeps: library";
   devices_ = new DeviceManager(database_, task_manager_, this);
-  qDebug() << t.restart() << "dbdeps: devices";
 
   // Initialise the UI
   ui_->setupUi(this);
@@ -184,12 +171,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->tabs->setDocumentMode(false);
 #endif
 
-  qDebug() << t.restart() << "ui";
-
   // Start initialising the player
   player_->Init();
-
-  qDebug() << t.restart() << "player";
 
 #ifdef HAVE_GSTREAMER
   if (qobject_cast<GstEngine*>(player_->GetEngine()) == NULL) {
@@ -219,8 +202,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   organise_dialog_->SetDestinationModel(library_->model()->directory_model());
 
-  qDebug() << t.restart() << "models";
-
   // Icons
   ui_->action_about->setIcon(IconLoader::Load("help-about"));
   ui_->action_add_file->setIcon(IconLoader::Load("document-open"));
@@ -248,8 +229,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
   ui_->action_update_library->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
-
-  qDebug() << t.restart() << "icons";
 
   // File view connections
   connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
@@ -415,8 +394,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_shuffle->setShortcut(QKeySequence());
 #endif
 
-  qDebug() << t.restart() << "connections";
-
   playlist_delete_->setVisible(false); // TODO
 
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
@@ -442,8 +419,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Connections to the saved streams service
   connect(RadioModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()), SLOT(AddStream()));
-
-  qDebug() << t.restart() << "more connections";
 
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(this);
@@ -472,8 +447,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Force this menu to be the app "About".
   ui_->action_about->setMenuRole(QAction::AboutRole);
 #endif
-
-  qDebug() << t.restart() << "tray";
 
   // Global shortcuts
   connect(global_shortcuts_, SIGNAL(Play()), player_, SLOT(Play()));
@@ -521,18 +494,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
-  qDebug() << t.restart() << "stuff";
-
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
 
-  qDebug() << t.restart() << "theme";
-
   // Load playlists
   playlists_->Init(library_->backend(), playlist_backend_, ui_->playlist_sequence);
-
-  qDebug() << t.restart() << "load playlists";
 
   // Load settings
   settings_.beginGroup(kSettingsGroup);
@@ -567,8 +534,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   show();
 #endif
 
-  qDebug() << t.restart() << "load settings";
-
   QShortcut* close_window_shortcut = new QShortcut(this);
   close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
   connect(close_window_shortcut, SIGNAL(activated()), SLOT(SetHiddenInTray()));
@@ -576,14 +541,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   library_->Init();
   library_->StartThreads();
 
-  qDebug() << t.restart() << "start library";
-
 #ifdef ENABLE_WIIMOTEDEV
 // http://code.google.com/p/clementine-player/issues/detail?id=670
 // Switched position, mayby something is not ready ?
 
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
-  qDebug() << t.restart() << "start wiimotedev";
 #endif
 
 }
