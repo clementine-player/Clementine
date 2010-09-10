@@ -148,20 +148,9 @@ if(ENABLE_VISUALISATIONS)
   endif(USE_SYSTEM_PROJECTM)
 endif(ENABLE_VISUALISATIONS)
 
-# Test whether libsqlite3 is available and if FTS3 is enabled in it
-if(WIN32 OR APPLE)
-  option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
-else(WIN32 OR APPLE)
-  try_run(FTS_TEST_RUN FTS_TEST_COMPILE
-          ${CMAKE_CURRENT_BINARY_DIR}/sqlite3_fts_test
-          ${CMAKE_SOURCE_DIR}/cmake/sqlite3_fts_test.cpp
-          CMAKE_FLAGS "-DLINK_LIBRARIES:STRING=sqlite3")
-  if(NOT FTS_TEST_COMPILE OR FTS_TEST_RUN EQUAL 1 OR FTS_TEST_RUN STREQUAL "FAILED_TO_RUN")
-    option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
-  else(NOT FTS_TEST_COMPILE OR FTS_TEST_RUN EQUAL 1 OR FTS_TEST_RUN STREQUAL "FAILED_TO_RUN")
-    option(STATIC_SQLITE "Compile and use a static sqlite3 library" OFF)
-  endif(NOT FTS_TEST_COMPILE OR FTS_TEST_RUN EQUAL 1 OR FTS_TEST_RUN STREQUAL "FAILED_TO_RUN")
-endif(WIN32 OR APPLE)
+# We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
+# need from it are private.
+option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
 if(STATIC_SQLITE)
