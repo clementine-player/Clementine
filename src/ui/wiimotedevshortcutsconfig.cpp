@@ -218,7 +218,7 @@ QString WiimotedevShortcutsConfig::GetReadableWiiremoteSequence(quint64 value) {
 
 void WiimotedevShortcutsConfig::AddAction() {
   emit SetWiimotedevInterfaceActived(false);
-  WiimotedevShortcutGrabber grabber(0, this);
+  WiimotedevShortcutGrabber grabber(0, ui_->wiimotedev_device->value(), this);
   connect(&grabber, SIGNAL(AddShortcut(quint64,quint32)), this, SLOT(AddShortcut(quint64,quint32)), Qt::QueuedConnection);
   grabber.exec();
   emit SetWiimotedevInterfaceActived(true);
