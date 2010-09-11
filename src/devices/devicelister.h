@@ -48,9 +48,14 @@ public:
   virtual quint64 DeviceCapacity(const QString& id) = 0;
   virtual quint64 DeviceFreeSpace(const QString& id) = 0;
   virtual QVariantMap DeviceHardwareInfo(const QString& id) = 0;
+  virtual bool DeviceNeedsMount(const QString& id) { return false; }
 
   virtual QString MakeFriendlyName(const QString& id) = 0;
   virtual QList<QUrl> MakeDeviceUrls(const QString& id) = 0;
+
+  // Ensure the device is mounted.  This should run asynchronously and emit
+  // DeviceMounted when it's done.
+  virtual int MountDevice(const QString& id);
 
   // Do whatever needs to be done to safely remove the device.
   virtual void UnmountDevice(const QString& id) = 0;
@@ -63,6 +68,7 @@ signals:
   void DeviceAdded(const QString& id);
   void DeviceRemoved(const QString& id);
   void DeviceChanged(const QString& id);
+  void DeviceMounted(const QString& id, int request_id, bool success);
 
 protected:
   virtual void Init() = 0;
@@ -73,6 +79,7 @@ protected:
 
 protected:
   QThread* thread_;
+  int next_mount_request_id_;
 
 private slots:
   void ThreadStarted();

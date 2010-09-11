@@ -207,10 +207,15 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
 }
 
 QStringList DeviceLister::GuessIconForModel(const QString& vendor, const QString& model) {
-  qDebug() << vendor << ":" << model;
   QStringList ret;
   if (vendor.startsWith("Google") && model.contains("Nexus")) {
     ret << "phone-google-nexus-one";
   }
+  return ret;
+}
+
+int DeviceLister::MountDevice(const QString& id) {
+  const int ret = next_mount_request_id_ ++;
+  emit DeviceMounted(id, ret, true);
   return ret;
 }

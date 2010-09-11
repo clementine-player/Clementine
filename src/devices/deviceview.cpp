@@ -102,6 +102,10 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
         status_text = tr("Not connected");
         break;
 
+      case DeviceManager::State_NotMounted:
+        status_text = tr("Not mounted - double click to mount");
+        break;
+
       case DeviceManager::State_NotConnected:
         status_text = tr("Double click to open");
         break;
