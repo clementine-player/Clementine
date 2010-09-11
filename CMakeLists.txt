@@ -165,6 +165,7 @@ option(USE_SYSTEM_QTSINGLEAPPLICATION "Don't set this option unless your system 
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
   find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
   find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
+  find_library(QTSINGLECOREAPPLICATION_LIBRARIES QtSolutions_SingleCoreApplication-2.6)
 else(USE_SYSTEM_QTSINGLEAPPLICATION)
   add_subdirectory(3rdparty/qtsingleapplication)
   set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/qtsingleapplication)
