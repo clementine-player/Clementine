@@ -286,7 +286,8 @@ void GioLister::MountChanged(GMount* mount) {
     new_info.ReadDriveInfo(g_mount_get_drive(mount));
 
     // Ignore the change if the new info is useless
-    if ((devices_[id].filesystem_size != 0 && new_info.filesystem_size == 0) ||
+    if (new_info.invalid_enclosing_mount ||
+        (devices_[id].filesystem_size != 0 && new_info.filesystem_size == 0) ||
         (!devices_[id].filesystem_type.isEmpty() && new_info.filesystem_type.isEmpty()))
       return;
 
@@ -341,8 +342,20 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
   mount_path = ConvertAndFree(g_file_get_path(root));
   mount_uri = ConvertAndFree(g_file_get_uri(root));
 
-  // Query the filesystem info for size, free space, and type
+  // Do a sanity check to make sure the root is actually this mount - when a
+  // device is unmounted GIO sends a changed signal before the removed signal,
+  // and we end up reading information about the / filesystem by mistake.
   GError* error = NULL;
+  GMount* actual_mount = g_file_find_enclosing_mount(root, NULL, &error);
+  if (error || !actual_mount) {
+    g_error_free(error);
+    invalid_enclosing_mount = true;
+  } else if (actual_mount) {
+    g_object_unref(actual_mount);
+  }
+
+  // Query the filesystem info for size, free space, and type
+  error = NULL;
   GFileInfo* info = g_file_query_filesystem_info(root,
       G_FILE_ATTRIBUTE_FILESYSTEM_SIZE "," G_FILE_ATTRIBUTE_FILESYSTEM_FREE ","
       G_FILE_ATTRIBUTE_FILESYSTEM_TYPE, NULL, &error);

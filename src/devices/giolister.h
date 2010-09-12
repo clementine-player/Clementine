@@ -61,7 +61,8 @@ protected:
 
 private:
   struct DeviceInfo {
-    DeviceInfo() : drive_removable(false), filesystem_size(0), filesystem_free(0) {}
+    DeviceInfo() : drive_removable(false), filesystem_size(0),
+                   filesystem_free(0), invalid_enclosing_mount(false) {}
 
     QString unique_id() const;
     bool is_suitable() const;
@@ -93,6 +94,8 @@ private:
     quint64 filesystem_size;
     quint64 filesystem_free;
     QString filesystem_type;
+
+    bool invalid_enclosing_mount;
   };
 
   void VolumeAdded(GVolume* volume);
