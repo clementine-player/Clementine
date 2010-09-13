@@ -125,7 +125,6 @@ void AlbumCoverManager::Init() {
   ui_->albums->installEventFilter(this);
 
   // Connections
-  connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
   connect(ui_->artists, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)),
           SLOT(ArtistChanged(QListWidgetItem*)));
   connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
@@ -153,7 +152,8 @@ void AlbumCoverManager::Init() {
     ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
 
-  cover_loader_->Start();
+  cover_loader_->Start(true);
+  CoverLoaderInitialised();
   constructed_ = true;
 }
 
