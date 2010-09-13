@@ -33,7 +33,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
          gstreamer0.10-alsa | gstreamer0.10-audiosink,
          gstreamer0.10-plugins-ugly,
          libprojectm-data | projectm-data,
-         libgpod4
+         libgpod4,
+         libimobiledevice0 | libimobiledevice1
 Description: Clementine is a modern music player and library organiser.
   It is largely a port of Amarok 1.4, with some features rewritten to take
   advantage of Qt4.
