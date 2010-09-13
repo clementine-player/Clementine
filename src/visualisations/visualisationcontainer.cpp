@@ -237,7 +237,7 @@ void VisualisationContainer::keyReleaseEvent(QKeyEvent *event) {
       ToggleFullscreen();
     else
       hide();
-    event->accept();
+    return;
   }
 
   QGraphicsView::keyReleaseEvent(event);
