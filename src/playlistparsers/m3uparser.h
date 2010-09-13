@@ -30,7 +30,7 @@ class M3UParser : public ParserBase {
   M3UParser(QObject* parent = 0);
 
   QString name() const { return "M3U"; }
-  QStringList file_extensions() const { return QStringList() << "m3u"; }
+  QStringList file_extensions() const { return QStringList() << "m3u" << "m3u8"; }
   QString mime_type() const { return "text/uri-list"; }
 
   bool TryMagic(const QByteArray &data) const;
