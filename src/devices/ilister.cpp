@@ -35,6 +35,12 @@ void iLister::DeviceAddedCallback(const char* uuid) {
   DeviceInfo info = ReadDeviceInfo(uuid);
   QString id = UniqueId(uuid);
 
+  QString name = MakeFriendlyName(id);
+  if (info.product_type == "iPhone 3,1" || info.product_type.startsWith("iPad")) {
+    // iPhone 4 and iPad unsupported by libgpod as of 0.7.94.
+    return;
+  }
+
   {
     QMutexLocker l(&mutex_);
     devices_[id] = info;
