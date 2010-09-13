@@ -46,6 +46,8 @@ class LastFMConfig : public QWidget {
  private:
   LastFMService* service_;
   Ui_LastFMConfig* ui_;
+
+  bool waiting_for_auth_;
 };
 
 #endif // LASTFMCONFIG_H

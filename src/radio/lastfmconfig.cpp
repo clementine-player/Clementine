@@ -28,7 +28,8 @@
 LastFMConfig::LastFMConfig(QWidget *parent)
   : QWidget(parent),
     service_(static_cast<LastFMService*>(RadioModel::ServiceByName("Last.fm"))),
-    ui_(new Ui_LastFMConfig)
+    ui_(new Ui_LastFMConfig),
+    waiting_for_auth_(false)
 {
   ui_->setupUi(this);
   ui_->busy->hide();
@@ -53,15 +54,17 @@ bool LastFMConfig::NeedsValidation() const {
 
 void LastFMConfig::Validate() {
   ui_->busy->show();
+  waiting_for_auth_ = true;
 
   service_->Authenticate(ui_->username->text(), ui_->password->text());
 }
 
 void LastFMConfig::AuthenticationComplete(bool success) {
-  if (!ui_->busy->isVisible())
+  if (!waiting_for_auth_)
     return; // Wasn't us that was waiting for auth
 
   ui_->busy->hide();
+  waiting_for_auth_ = false;
 
   if (success) {
     ui_->username->setText(lastfm::ws::Username);
