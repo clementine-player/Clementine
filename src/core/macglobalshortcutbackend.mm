@@ -49,8 +49,8 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
     }];
     local_monitor_ = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask
         handler:^(NSEvent* event) {
-      HandleKeyEvent(event);
-      return event;
+      // Filter event if we handle it as a global shortcut.
+      return HandleKeyEvent(event) ? nil : event;
     }];
     return true;
   #else
@@ -108,9 +108,9 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
     return QKeySequence(key);
   }
 
-  void HandleKeyEvent(NSEvent* event) {
+  bool HandleKeyEvent(NSEvent* event) {
     QKeySequence sequence = GetSequence(event);
-    backend_->KeyPressed(sequence);
+    return backend_->KeyPressed(sequence);
   }
 
   static int MapFunctionKey(int keycode) {
@@ -218,14 +218,16 @@ void MacGlobalShortcutBackend::MacMediaKeyPressed(int key) {
   }
 }
 
-void MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
+bool MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
   if (sequence.isEmpty()) {
-    return;
+    return false;
   }
   QAction* action = shortcuts_[sequence];
   if (action) {
     action->trigger();
+    return true;
   }
+  return false;
 }
 
 bool MacGlobalShortcutBackend::IsAccessibilityEnabled() const {
