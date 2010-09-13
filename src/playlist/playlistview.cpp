@@ -99,6 +99,10 @@ PlaylistView::PlaylistView(QWidget *parent)
   setAlternatingRowColors(true);
 
   setAttribute(Qt::WA_MacShowFocusRect, false);
+
+#ifdef Q_OS_DARWIN
+  setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+#endif
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
