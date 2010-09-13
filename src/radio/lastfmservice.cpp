@@ -212,15 +212,12 @@ void LastFMService::AuthenticateReplyFinished() {
     lastfm::XmlQuery const lfm = lastfm::ws::parse(reply);
 #ifdef Q_OS_WIN32
     if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      goto lastfm_error;
+      throw std::runtime_error("");
 #endif
 
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
   } catch (std::runtime_error& e) {
-#ifdef Q_OS_WIN32
-    lastfm_error:
-#endif
     qDebug() << e.what();
     emit AuthenticationComplete(false);
     return;
@@ -503,12 +500,9 @@ void LastFMService::RefreshFriendsFinished() {
     friends = lastfm::User::list(reply);
 #ifdef Q_OS_WIN32
     if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      goto lastfm_error;
+      throw std::runtime_error("");
 #endif
   } catch (std::runtime_error& e) {
-#ifdef Q_OS_WIN32
-    lastfm_error:
-#endif
     qDebug() << e.what();
     return;
   }
@@ -532,12 +526,9 @@ void LastFMService::RefreshNeighboursFinished() {
     neighbours = lastfm::User::list(reply);
 #ifdef Q_OS_WIN32
     if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      goto lastfm_error;
+      throw std::runtime_error("");
 #endif
   } catch (std::runtime_error& e) {
-#ifdef Q_OS_WIN32
-    lastfm_error:
-#endif
     qDebug() << e.what();
     return;
   }
@@ -648,7 +639,7 @@ void LastFMService::FetchMoreTracksFinished() {
     const XmlQuery& query = lastfm::ws::parse(reply);
 #ifdef Q_OS_WIN32
     if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      goto lastfm_error;
+      throw std::runtime_error("");
 #endif
 
     const XmlQuery& playlist = query["playlist"];
@@ -666,10 +657,6 @@ void LastFMService::FetchMoreTracksFinished() {
       playlist_ << t;
     }
   } catch (std::runtime_error& e) {
-#ifdef Q_OS_WIN32
-    lastfm_error:
-#endif
-
     // For some reason a catch block that takes a lastfm::ws::ParseError&
     // doesn't get called, even when a lastfm::ws::ParseError is thrown...
     // Hacks like this remind me of Java...

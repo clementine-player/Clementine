@@ -106,7 +106,7 @@ void AlbumCoverFetcher::AlbumSearchFinished() {
     lastfm::XmlQuery query(lastfm::ws::parse(reply));
 #ifdef Q_OS_WIN32
     if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      goto lastfm_error;
+      throw std::runtime_error("");
 #endif
 
     // Parse the list of search results
@@ -138,9 +138,6 @@ void AlbumCoverFetcher::AlbumSearchFinished() {
 
     active_requests_[image_reply] = request;
   } catch (std::runtime_error&) {
-#ifdef Q_OS_WIN32
-    lastfm_error:
-#endif
     if (request.search)
       emit SearchFinished(request.id, AlbumCoverFetcher::SearchResults());
     else
