@@ -1416,9 +1416,13 @@ void MainWindow::PlaylistCopyToDevice() {
   }
 
   organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
-  organise_dialog_->SetSongs(songs);
   organise_dialog_->SetCopy(true);
-  organise_dialog_->show();
+  if (organise_dialog_->SetSongs(songs))
+    organise_dialog_->show();
+  else {
+    QMessageBox::warning(this, tr("Error"),
+        tr("None of the selected songs were suitable for copying to a device"));
+  }
 }
 
 void MainWindow::ShowCoverManager() {
