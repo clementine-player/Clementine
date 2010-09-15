@@ -26,6 +26,8 @@
 #include <QSqlQuery>
 #include <QString>
 
+#include <taglib/xiphcomment.h>
+
 #include "config.h"
 #include "engines/engine_fwd.h"
 
@@ -269,6 +271,8 @@ class Song {
 
     QImage image_;
   };
+
+  void ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec, QString* disc, QString* compilation);
 
  private:
   QSharedDataPointer<Private> d;

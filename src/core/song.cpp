@@ -22,6 +22,7 @@
 
 #include <taglib/aifffile.h>
 #include <taglib/asffile.h>
+#include <taglib/commentsframe.h>
 #include <taglib/fileref.h>
 #include <taglib/flacfile.h>
 #include <taglib/id3v2tag.h>
@@ -37,7 +38,6 @@
 #include <taglib/tstring.h>
 #include <taglib/vorbisfile.h>
 #include <taglib/wavfile.h>
-#include <taglib/xiphcomment.h>
 
 #include "radio/fixlastfm.h"
 #include <lastfm/Track>
@@ -235,7 +235,6 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     d->title_ = Decode(tag->title(), codec);
     d->artist_ = Decode(tag->artist(), codec);
     d->album_ = Decode(tag->album(), codec);
-    d->comment_ = Decode(tag->comment(), codec);
     d->genre_ = Decode(tag->genre(), codec);
     d->year_ = tag->year();
     d->track_ = tag->track();
@@ -247,60 +246,49 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   QString compilation;
   if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     if (file->ID3v2Tag()) {
-      if (!file->ID3v2Tag()->frameListMap()["TPOS"].isEmpty())
-        disc = TStringToQString(file->ID3v2Tag()->frameListMap()["TPOS"].front()->toString()).trimmed();
+      const TagLib::ID3v2::FrameListMap& map = file->ID3v2Tag()->frameListMap();
 
-      if (!file->ID3v2Tag()->frameListMap()["TBPM"].isEmpty())
-        d->bpm_ = TStringToQString(file->ID3v2Tag()->frameListMap()["TBPM"].front()->toString()).trimmed().toFloat();
+      if (!map["TPOS"].isEmpty())
+        disc = TStringToQString(map["TPOS"].front()->toString()).trimmed();
 
-      if (!file->ID3v2Tag()->frameListMap()["TCOM"].isEmpty())
-        d->composer_ = Decode(file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString(), codec);
+      if (!map["TBPM"].isEmpty())
+        d->bpm_ = TStringToQString(map["TBPM"].front()->toString()).trimmed().toFloat();
 
-      if (!file->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
-        d->albumartist_ = Decode(file->ID3v2Tag()->frameListMap()["TPE2"].front()->toString(), codec);
+      if (!map["TCOM"].isEmpty())
+        d->composer_ = Decode(map["TCOM"].front()->toString(), codec);
 
-      if (!file->ID3v2Tag()->frameListMap()["TCMP"].isEmpty())
-        compilation = TStringToQString(file->ID3v2Tag()->frameListMap()["TCMP"].front()->toString()).trimmed();
+      if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
+        d->albumartist_ = Decode(map["TPE2"].front()->toString(), codec);
 
-      if (!file->ID3v2Tag()->frameListMap()["APIC"].isEmpty())
+      if (!map["TCMP"].isEmpty())
+        compilation = TStringToQString(map["TCMP"].front()->toString()).trimmed();
+
+      if (!map["APIC"].isEmpty())
         d->art_automatic_ = AlbumCoverLoader::kEmbeddedCover;
+
+      // Find a suitable comment tag.  For now we ignore iTunNORM comments.
+      for (int i=0 ; i<map["COMM"].size() ; ++i) {
+        const TagLib::ID3v2::CommentsFrame* frame =
+            dynamic_cast<const TagLib::ID3v2::CommentsFrame*>(map["COMM"][i]);
+
+        if (TStringToQString(frame->description()) != "iTunNORM") {
+          d->comment_ = Decode(frame->text(), codec);
+          break;
+        }
+      }
     }
-  }
-  else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
+  } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
-      if ( !file->tag()->fieldListMap()["COMPOSER"].isEmpty() )
-        d->composer_ = Decode(file->tag()->fieldListMap()["COMPOSER"].front(), codec);
-
-      if ( !file->tag()->fieldListMap()["ALBUMARTIST"].isEmpty() )
-        d->albumartist_ = Decode(file->tag()->fieldListMap()["ALBUMARTIST"].front(), codec);
-
-      if ( !file->tag()->fieldListMap()["BPM"].isEmpty() )
-        d->bpm_ = TStringToQString(file->tag()->fieldListMap()["BPM"].front()).trimmed().toFloat();
-
-      if ( !file->tag()->fieldListMap()["DISCNUMBER"].isEmpty() )
-        disc = TStringToQString(file->tag()->fieldListMap()["DISCNUMBER"].front()).trimmed();
-
-      if ( !file->tag()->fieldListMap()["COMPILATION"].isEmpty() )
-        compilation = TStringToQString(file->tag()->fieldListMap()["COMPILATION"].front()).trimmed();
+      ParseOggTag(file->tag()->fieldListMap(), codec, &disc, &compilation);
     }
-  }
-  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+    d->comment_ = Decode(tag->comment(), codec);
+  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
-      if (!file->xiphComment()->fieldListMap()["COMPOSER"].isEmpty())
-        d->composer_ = Decode(file->xiphComment()->fieldListMap()["COMPOSER"].front(), codec);
-
-      if (!file->xiphComment()->fieldListMap()["ALBUMARTIST"].isEmpty())
-        d->albumartist_ = Decode(file->xiphComment()->fieldListMap()["ALBUMARTIST"].front(), codec);
-
-      if (!file->xiphComment()->fieldListMap()["BPM"].isEmpty() )
-        d->bpm_ = TStringToQString( file->xiphComment()->fieldListMap()["BPM"].front() ).trimmed().toFloat();
-
-      if (!file->xiphComment()->fieldListMap()["DISCNUMBER"].isEmpty() )
-        disc = TStringToQString( file->xiphComment()->fieldListMap()["DISCNUMBER"].front() ).trimmed();
-
-      if (!file->xiphComment()->fieldListMap()["COMPILATION"].isEmpty() )
-        compilation = TStringToQString( file->xiphComment()->fieldListMap()["COMPILATION"].front() ).trimmed();
+      ParseOggTag(file->xiphComment()->fieldListMap(), codec, &disc, &compilation);
     }
+    d->comment_ = Decode(tag->comment(), codec);
+  } else {
+    d->comment_ = Decode(tag->comment(), codec);
   }
 
   if ( !disc.isEmpty() )   {
@@ -329,6 +317,24 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   // Get the filetype if we can
   GuessFileType(fileref.get());
+}
+
+void Song::ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec,
+                       QString* disc, QString* compilation) {
+  if (!map["COMPOSER"].isEmpty())
+    d->composer_ = Decode(map["COMPOSER"].front(), codec);
+
+  if (!map["ALBUMARTIST"].isEmpty())
+    d->albumartist_ = Decode(map["ALBUMARTIST"].front(), codec);
+
+  if (!map["BPM"].isEmpty() )
+    d->bpm_ = TStringToQString( map["BPM"].front() ).trimmed().toFloat();
+
+  if (!map["DISCNUMBER"].isEmpty() )
+    *disc = TStringToQString( map["DISCNUMBER"].front() ).trimmed();
+
+  if (!map["COMPILATION"].isEmpty() )
+    *compilation = TStringToQString( map["COMPILATION"].front() ).trimmed();
 }
 
 void Song::GuessFileType(TagLib::FileRef* fileref) {
