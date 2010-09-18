@@ -61,6 +61,5 @@ void OrganiseErrorDialog::Show(
 
   ui_->list->addItems(sorted_files);
 
-  setAttribute(Qt::WA_DeleteOnClose);
   show();
 }
