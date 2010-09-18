@@ -5,9 +5,13 @@ Maintainer: David Sansome <me@davidsansome.com>
 Build-Depends: debhelper (>= 7),
                liblastfm-dev,
                libtag1-dev,
+               libboost1.38-dev |
+               libboost1.40-dev |
+               libboost1.42-dev |
                libboost-dev,
                libboost-serialization1.38-dev |
                libboost-serialization1.40-dev |
+               libboost-serialization1.42-dev |
                libboost-serialization-dev,
                libglew1.5-dev,
                libqt4-dev,
