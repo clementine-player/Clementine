@@ -97,8 +97,8 @@ GSTREAMER_PLUGINS=[
 ]
 
 GSTREAMER_SEARCH_PATH=[
-    '/usr/local/gstreamer-0.10',
-    '/usr/local/gstreamer-0.10/gstreamer-0.10',
+    '/usr/local/lib/gstreamer-0.10',
+    '/usr/local/lib/gstreamer-0.10/gstreamer-0.10',
     '/sw/lib/gstreamer-0.10',
     '/sw/lib/gstreamer-0.10/gstreamer-0.10',
 ]

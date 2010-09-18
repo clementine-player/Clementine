@@ -79,6 +79,7 @@ void OSD::ReloadSettings() {
 }
 
 void OSD::SongChanged(const Song &song) {
+  tray_icon_->SetNowPlaying(song);
   QString summary(song.PrettyTitle());
   if (!song.artist().isEmpty())
     summary = QString("%1 - %2").arg(song.artist(), summary);
@@ -120,6 +121,7 @@ void OSD::Paused() {
 }
 
 void OSD::Stopped() {
+  tray_icon_->ClearNowPlaying();
   if (ignore_next_stopped_) {
     ignore_next_stopped_ = false;
     return;
@@ -195,32 +197,32 @@ void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 
 void OSD::WiiremoteActived(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wiiremote %1: actived").arg(QString::number(id)));
+              tr("Wii Remote %1: actived").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteDeactived(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wiiremote %1: disactived").arg(QString::number(id)));
+              tr("Wii Remote %1: disactived").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteConnected(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wiiremote %1: connected").arg(QString::number(id)));
+              tr("Wii Remote %1: connected").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteDisconnected(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wiiremote %1: disconnected").arg(QString::number(id)));
+              tr("Wii Remote %1: disconnected").arg(QString::number(id)));
 }
 
 void OSD::WiiremoteLowBattery(int id, int live) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wiiremote %1: low battery (%2%)").arg(QString::number(id), QString::number(live)));
+              tr("Wii Remote %1: low battery (%2%)").arg(QString::number(id), QString::number(live)));
 }
 
 void OSD::WiiremoteCriticalBattery(int id, int live) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),
-              tr("Wiiremote %1: critical battery (%2%) ").arg(QString::number(id), QString::number(live)));
+              tr("Wii Remote %1: critical battery (%2%) ").arg(QString::number(id), QString::number(live)));
 }
 
 #endif

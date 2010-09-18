@@ -278,8 +278,11 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
     case Role_State:
       if (info.device_)
         return State_Connected;
-      if (info.BestBackend()->lister_)
+      if (info.BestBackend()->lister_) {
+        if (info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_))
+          return State_NotMounted;
         return State_NotConnected;
+      }
       return State_Remembered;
 
     case Role_UpdatingPercentage:
@@ -296,7 +299,8 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
 
     case MusicStorage::Role_StorageForceConnect:
       if (!info.device_) {
-        if (info.database_id_ == -1) {
+        if (info.database_id_ == -1 &&
+            !info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_)) {
           boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
               QMessageBox::Information, tr("Connect device"),
               tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
@@ -455,10 +459,10 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
     if (info.device_ && info.device_->lister() == lister)
       info.device_.reset();
 
-    emit dataChanged(index(i, 0), index(i, 0));
-
     if (!info.device_)
       emit DeviceDisconnected(i);
+
+    emit dataChanged(index(i, 0), index(i, 0));
   } else {
     // If this was the last lister for the device then remove it from the model
     for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++backend_index) {
@@ -506,6 +510,12 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
 
   if (!info.BestBackend()->lister_) // Not physically connected
     return ret;
+
+  if (info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_)) {
+    // Mount the device
+    info.BestBackend()->lister_->MountDevice(info.BestBackend()->unique_id_);
+    return ret;
+  }
 
   bool first_time = (info.database_id_ == -1);
   if (first_time) {

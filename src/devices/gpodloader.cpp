@@ -22,6 +22,7 @@
 
 #include <gpod/itdb.h>
 
+#include <QDir>
 #include <QtDebug>
 
 GPodLoader::GPodLoader(const QString& mount_point, TaskManager* task_manager,
@@ -45,7 +46,8 @@ void GPodLoader::LoadDatabase() {
 
   // Load the iTunes database
   GError* error = NULL;
-  Itdb_iTunesDB* db = itdb_parse(mount_point_.toLocal8Bit(), &error);
+  Itdb_iTunesDB* db = itdb_parse(
+      QDir::toNativeSeparators(mount_point_).toLocal8Bit(), &error);
 
   // Check for errors
   if (!db) {
@@ -69,8 +71,13 @@ void GPodLoader::LoadDatabase() {
     Song song;
     song.InitFromItdb(track);
     song.set_directory_id(1);
-    song.set_filename((path_prefix_.isEmpty() ? mount_point_ : path_prefix_) +
-                      song.filename());
+
+    QString filename = (path_prefix_.isEmpty() ? mount_point_ : path_prefix_) +
+                       song.filename();
+    if (path_prefix_.isEmpty())
+      filename = QDir::cleanPath(QDir::fromNativeSeparators(filename));
+    song.set_filename(filename);
+
     if (type_ != Song::Type_Unknown)
       song.set_filetype(type_);
     songs << song;

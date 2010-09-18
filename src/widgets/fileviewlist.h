@@ -31,6 +31,7 @@ class FileViewList : public QListView {
   void AddToPlaylist(const QList<QUrl>& urls);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
+  void CopyToDevice(const QList<QUrl>& urls);
   void Delete(const QStringList& filenames);
 
  protected:
@@ -41,6 +42,7 @@ class FileViewList : public QListView {
   void AddToPlaylistSlot();
   void CopyToLibrarySlot();
   void MoveToLibrarySlot();
+  void CopyToDeviceSlot();
   void DeleteSlot();
 
   QList<QUrl> UrlListFromSelection() const;

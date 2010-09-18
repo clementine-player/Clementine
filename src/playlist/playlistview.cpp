@@ -20,6 +20,7 @@
 #include "playlistdelegates.h"
 #include "playlist.h"
 
+#include <QCleanlooksStyle>
 #include <QPainter>
 #include <QHeaderView>
 #include <QSettings>
@@ -38,8 +39,31 @@ const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
 
 
+PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
+  : QProxyStyle(base),
+    cleanlooks_(new QCleanlooksStyle){
+}
+
+void PlaylistProxyStyle::drawControl(
+    ControlElement element, const QStyleOption* option, QPainter* painter,
+    const QWidget* widget) const {
+  if (element == CE_ItemViewItem)
+    cleanlooks_->drawControl(element, option, painter, widget);
+  else
+    QProxyStyle::drawControl(element, option, painter, widget);
+}
+
+void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
+  if (element == QStyle::PE_PanelItemViewRow)
+    cleanlooks_->drawPrimitive(element, option, painter, widget);
+  else
+    QProxyStyle::drawPrimitive(element, option, painter, widget);
+}
+
+
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
+    style_(new PlaylistProxyStyle(style())),
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this)),
     setting_initial_header_layout_(false),
@@ -57,6 +81,7 @@ PlaylistView::PlaylistView(QWidget *parent)
 {
   setHeader(header_);
   header_->setMovable(true);
+  setStyle(style_);
 
   connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
@@ -74,6 +99,10 @@ PlaylistView::PlaylistView(QWidget *parent)
   setAlternatingRowColors(true);
 
   setAttribute(Qt::WA_MacShowFocusRect, false);
+
+#ifdef Q_OS_DARWIN
+  setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+#endif
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
@@ -247,7 +276,7 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
   }
 }
 
-void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItem option,
+void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                                 const QModelIndex& index) {
   cached_current_row_rect_ = option.rect;
   cached_current_row_row_ = index.row();

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-04 17:09+0000\n"
-"PO-Revision-Date: 2010-09-04 20:23+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
+"POT-Creation-Date: 2010-09-11 17:36+0000\n"
+"PO-Revision-Date: 2010-09-13 03:25+0000\n"
+"Last-Translator: Manuel Suárez <jasmuz@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-05 05:06+0000\n"
+"X-Launchpad-Export-Date: 2010-09-14 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 "X-Language: es_ES\n"
@@ -55,7 +55,7 @@ msgstr "%1 pistas"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1: Módulo Wiimotedev"
 
 #, c-format
 msgid "%n failed"
@@ -165,7 +165,7 @@ msgid "Add to playlist"
 msgstr "Añadir a la lista de reproducción"
 
 msgid "Add wiimotedev action"
-msgstr ""
+msgstr "Añadir acción wiimotedev"
 
 msgid "Add..."
 msgstr "Añadir..."
@@ -433,7 +433,7 @@ msgid "Configure library..."
 msgstr "Configurar colección..."
 
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Conectar Wiimotes usando acción de activar/desactivar"
 
 msgid "Connect device"
 msgstr "Conectar dispositivo"
@@ -466,6 +466,8 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
+"No se pudo encontrar un muxer para %1, compruebe que tiene instalados los "
+"complementos correctos de GStreamer"
 
 #, qt-format
 msgid ""
@@ -604,7 +606,7 @@ msgid "Device Properties"
 msgstr "Propiedades del dispositivo"
 
 msgid "Device name"
-msgstr ""
+msgstr "Nombre del dispositivo"
 
 msgid "Device properties..."
 msgstr "Propiedades del dispositivo..."
@@ -665,7 +667,7 @@ msgid "Drag to reposition"
 msgstr "Arrastrar para reposicionar"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Letra de unidad"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
@@ -688,13 +690,13 @@ msgid "Editing %n tracks"
 msgstr "Editando %n pistas"
 
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Habilitar soporte para Wiimote"
 
 msgid "Enable equalizer"
 msgstr "Habilitar el ecualizador"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "Habilitar atajos sólo cuando Clementine tenga el foco"
 
 msgid "Enter a name for the new playlist"
 msgstr "Ingrese un nombre para la nueva lista de reproducción"
@@ -807,13 +809,13 @@ msgid "Files to transcode"
 msgstr "Archivos para convertir"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Nombre del sistema de ficheros"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Número de serie del sistema de ficheros"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Tipo de sistema de archivos"
 
 msgid "First level"
 msgstr "Primer nivel"
@@ -932,6 +934,8 @@ msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
 "work."
 msgstr ""
+"Si continúa, este dispositivo trabajará con lentitud y las canciones que se "
+"copien a él podrán no funcionar."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorar el \"The\" en los nombres de los artistas"
@@ -986,11 +990,11 @@ msgstr "Ir a la pista actualmente reproduciéndose"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Presione los botones por %1 segundo..."
 
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Presione los botones por %1 segundo..."
 
 msgid "Keep the original files"
 msgstr "Mantener los archivos originales"
@@ -1140,7 +1144,7 @@ msgid "Membership type"
 msgstr "Tipo de membrecía"
 
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "Faltan los ajustes por defecto de projectM"
 
 msgid "Model"
 msgstr "Modelo"
@@ -1217,6 +1221,9 @@ msgstr ""
 msgid "None"
 msgstr "Ninguno"
 
+msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
 msgid "Not connected"
 msgstr "No conectado"
 
@@ -1232,11 +1239,17 @@ msgstr "No hay suficientes miembros"
 msgid "Not enough neighbors"
 msgstr "No hay suficientes vecinos"
 
+msgid "Not mounted - double click to mount"
+msgstr "Dispositvo no montado - doble click para montar"
+
 msgid "Notification type"
 msgstr "Tipo de notificación"
 
 msgid "Notifications"
 msgstr "Notificaciones"
+
+msgid "Now Playing"
+msgstr "En reproducción"
 
 msgid "OSD Preview"
 msgstr "Previsualización del OSD"
@@ -1438,7 +1451,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Recordar el movimiento del Wiimote"
 
 msgid "Remember from last time"
 msgstr "Recordar de la ultima vez"
@@ -1793,14 +1806,16 @@ msgid "This device supports the following file formats:"
 msgstr "Este dispositivo soporta los siguientes formatos de archivo:"
 
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Este dispositivo no funcionará correctamente"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"Este es un dispositivo MTP, pero compiló Clementine sin soporte para libmtp."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
+"Esto es un iPod, pero ha compilado Clementine sin soporte para libgpod."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -1900,10 +1915,10 @@ msgid "Use Replay Gain metadata if it is available"
 msgstr "Usar metadatos de ganancia de repetición si están disponibles"
 
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Usar Wiimote"
 
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Usar notificaciones para informar del estado del Wiimote"
 
 msgid "Use the system default"
 msgstr "Usar los ajustes por defecto del sistema"
@@ -1944,7 +1959,7 @@ msgid "Volume %1%"
 msgstr "Volumen %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "Nombre del volumen"
 
 msgid "WAV"
 msgstr "WAV"
@@ -1959,28 +1974,28 @@ msgid "WiFi MAC Address"
 msgstr "Dirección MAC WiFi"
 
 #, qt-format
-msgid "Wiiremote %1: actived"
-msgstr "Wiiremote %1: activado"
+msgid "Wii Remote %1: actived"
+msgstr "Wiimote %1: activo"
 
 #, qt-format
-msgid "Wiiremote %1: connected"
-msgstr "Wiiremote %1: conectado"
+msgid "Wii Remote %1: connected"
+msgstr "Wiimote %1: conectado"
 
 #, qt-format
-msgid "Wiiremote %1: critical battery (%2%) "
-msgstr "Wiiremote %1: batería crítica (%2%) "
+msgid "Wii Remote %1: critical battery (%2%) "
+msgstr "Wiimote %1: batería en estado crítico (%2%) "
 
 #, qt-format
-msgid "Wiiremote %1: disactived"
-msgstr "Wiiremote %1: desactivado"
+msgid "Wii Remote %1: disactived"
+msgstr "Wiimote %1: desactivado"
 
 #, qt-format
-msgid "Wiiremote %1: disconnected"
-msgstr "Wiiremote %1: desconectado"
+msgid "Wii Remote %1: disconnected"
+msgstr "Wiimote %1: desconectado"
 
 #, qt-format
-msgid "Wiiremote %1: low battery (%2%)"
-msgstr "Wiiremote %1: batería baja (%2%)"
+msgid "Wii Remote %1: low battery (%2%)"
+msgstr "Wiimote %1: batería baja (%2%)"
 
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
@@ -2019,6 +2034,9 @@ msgid ""
 "\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
 "wiki</a> for more information.\n"
 msgstr ""
+"Puedes usar tu Wiimote como un mando a distancia para Clementine. <a href="
+"\"http://www.clementine-player.org/wiimote\">Visita la página en el wiki de "
+"Clementine</a> para más información.\n"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -2077,18 +2095,6 @@ msgstr "detener"
 #, qt-format
 msgid "track %1"
 msgstr "Pista %1"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Habilitar el uso de Wii remote en Clementine."
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Habilitar los atajos sólo cuando la aplicación esté en primer plano"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Usar mando a distancia de Wii"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr "Usar notificaciones para informar del estado del Wii remote"
 
 #~ msgid "&Hide tray icon"
 #~ msgstr "&Ocultar icono de la bandeja"
@@ -2269,3 +2275,33 @@ msgstr "Pista %1"
 
 #~ msgid "available"
 #~ msgstr "disponible"
+
+#~ msgid "Enable shortcuts only when application is focused"
+#~ msgstr "Habilitar los atajos sólo cuando la aplicación esté en primer plano"
+
+#~ msgid "Use Wii remote"
+#~ msgstr "Usar mando a distancia de Wii"
+
+#~ msgid "Wiiremote %1: disconnected"
+#~ msgstr "Wiiremote %1: desconectado"
+
+#~ msgid "Wiiremote %1: low battery (%2%)"
+#~ msgstr "Wiiremote %1: batería baja (%2%)"
+
+#~ msgid "Wiiremote %1: disactived"
+#~ msgstr "Wiiremote %1: desactivado"
+
+#~ msgid "Enable Wii remote support in Clementine"
+#~ msgstr "Habilitar el uso de Wii remote en Clementine."
+
+#~ msgid "Wiiremote %1: critical battery (%2%) "
+#~ msgstr "Wiiremote %1: batería crítica (%2%) "
+
+#~ msgid "Wiiremote %1: actived"
+#~ msgstr "Wiiremote %1: activado"
+
+#~ msgid "Wiiremote %1: connected"
+#~ msgstr "Wiiremote %1: conectado"
+
+#~ msgid "Use notifications to report Wii remote status"
+#~ msgstr "Usar notificaciones para informar del estado del Wii remote"

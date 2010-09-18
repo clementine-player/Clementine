@@ -35,6 +35,9 @@ public:
                  QAction* stop_after, QAction* next, QAction* love,
                  QAction* ban, QAction* quit);
 
+  void SetNowPlaying(const Song& song);
+  void ClearNowPlaying();
+
 private:
   void SetupMenuItem(QAction* action);
 

@@ -44,7 +44,7 @@ protected:
   void DoUnregister();
 
 private:
-  void KeyPressed(const QKeySequence& sequence);
+  bool KeyPressed(const QKeySequence& sequence);
 
   QMap<QKeySequence, QAction*> shortcuts_;
 

@@ -32,8 +32,12 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
     return true;
 
   // Create directories as required
+  const QString dest_directory = dest_filename.section('/', 0, -2);
   QDir dir;
-  dir.mkpath(dest_filename.section('/', 0, -2));
+  if (!dir.mkpath(dest_directory)) {
+    qWarning() << "Failed to create directory" << dest_directory;
+    return false;
+  }
 
   // Remove the destination file if it exists and we want to overwrite
   if (job.overwrite_ && QFile::exists(dest_filename))

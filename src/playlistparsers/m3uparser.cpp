@@ -16,6 +16,7 @@
 
 #include "m3uparser.h"
 
+#include <QBuffer>
 #include <QtDebug>
 
 M3UParser::M3UParser(QObject* parent)
@@ -29,14 +30,22 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
   M3UType type = STANDARD;
   Metadata current_metadata;
 
-  QString line = QString::fromUtf8(device->readLine()).trimmed();
+  QString data = QString::fromUtf8(device->readAll());
+  data.replace('\r', '\n');
+  QByteArray bytes = data.toUtf8();
+  QBuffer buffer(&bytes);
+  buffer.open(QIODevice::ReadOnly);
+
+  QString line = QString::fromUtf8(buffer.readLine()).trimmed();
+  qDebug() << line;
   if (line.startsWith("#EXTM3U")) {
     // This is in extended M3U format.
     type = EXTENDED;
-    line = QString::fromUtf8(device->readLine()).trimmed();
+    line = QString::fromUtf8(buffer.readLine()).trimmed();
   }
 
   forever {
+    qDebug() << line;
     if (line.startsWith('#')) {
       // Extended info or comment.
       if (type == EXTENDED && line.startsWith("#EXT")) {
@@ -62,10 +71,10 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
         current_metadata.length = -1;
       }
     }
-    if (device->atEnd()) {
+    if (buffer.atEnd()) {
       break;
     }
-    line = QString::fromUtf8(device->readLine()).trimmed();
+    line = QString::fromUtf8(buffer.readLine()).trimmed();
   }
 
   return ret;

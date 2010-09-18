@@ -154,6 +154,7 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
   // Replace characters that really shouldn't be in paths
   value.replace('/', '_');
   value.replace('\\', '_');
+  value.replace('?', '_');
 
   return value;
 }

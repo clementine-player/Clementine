@@ -58,6 +58,7 @@ public:
 
   enum State {
     State_Remembered,
+    State_NotMounted,
     State_NotConnected,
     State_Connected,
   };

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-04 17:09+0000\n"
-"PO-Revision-Date: 2010-09-04 20:22+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
+"POT-Creation-Date: 2010-09-08 17:03+0000\n"
+"PO-Revision-Date: 2010-09-09 20:14+0000\n"
+"Last-Translator: Omega9 <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-05 05:06+0000\n"
+"X-Launchpad-Export-Date: 2010-09-10 05:03+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: ru\n"
 
@@ -53,7 +53,7 @@ msgstr "%1 композиций"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1: модуль Wiimotedev"
 
 #, c-format
 msgid "%n failed"
@@ -122,7 +122,7 @@ msgid "Action"
 msgstr "Действия"
 
 msgid "Active/deactive Wiiremote"
-msgstr ""
+msgstr "Активировать/деактивировать Wiiremote"
 
 msgid "Add Stream"
 msgstr "Добавить потоковое радио"
@@ -161,7 +161,7 @@ msgid "Add to playlist"
 msgstr "Добавить в список воспроизведения"
 
 msgid "Add wiimotedev action"
-msgstr ""
+msgstr "Добавить действие wiimotedev"
 
 msgid "Add..."
 msgstr "Добавить..."
@@ -427,7 +427,7 @@ msgid "Configure library..."
 msgstr "Настроить коллекцию..."
 
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Подключить пульт Wii используя с помощью активации/деактивации"
 
 msgid "Connect device"
 msgstr "Подсоединение устройства"
@@ -460,12 +460,16 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
+"Не возможно найти мультиплексор для %1. Убедитесь, что установлены "
+"необходимые модули GStreamer"
 
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr ""
+"Невозможно найти кодировщик для %1, проверьте, что установлены все "
+"необходимые модули GStreamer"
 
 #, qt-format
 msgid "Couldn't load the last.fm radio station: %1"
@@ -596,7 +600,7 @@ msgid "Device Properties"
 msgstr "Свойства носителя"
 
 msgid "Device name"
-msgstr ""
+msgstr "Имя устройства"
 
 msgid "Device properties..."
 msgstr "Свойства носителя..."
@@ -656,7 +660,7 @@ msgid "Drag to reposition"
 msgstr "Тащите для перемещения"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Буква диска"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
@@ -679,13 +683,13 @@ msgid "Editing %n tracks"
 msgstr "Редактирую %n треков"
 
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Включить поддержку пульта Wii"
 
 msgid "Enable equalizer"
 msgstr "Включить эквалайзер"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "Разрешить горячие клавиши только, когда окно программы активно"
 
 msgid "Enter a name for the new playlist"
 msgstr "Введите имя для списка воспроизведения"
@@ -796,13 +800,13 @@ msgid "Files to transcode"
 msgstr "Файлы для перекодирования"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Имя файловой системы"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Серийный номер файловой системы"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Тип файловой системы"
 
 msgid "First level"
 msgstr "Первый уровень"
@@ -919,6 +923,8 @@ msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
 "work."
 msgstr ""
+"Если продолжать, то устройство будет работать медленно и копирование "
+"композиций на него может не работать."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Игнорировать \"The\" в имени исполнителя"
@@ -973,11 +979,11 @@ msgstr "Перейти к текущей композиции"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Отображать кнопки в течении %1 секунд"
 
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Отображать кнопки в течении %1 секунды"
 
 msgid "Keep the original files"
 msgstr "Сохранить оригинальные файлы"
@@ -1203,6 +1209,9 @@ msgstr ""
 msgid "None"
 msgstr "Ничего"
 
+msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
 msgid "Not connected"
 msgstr "Не подключено"
 
@@ -1218,11 +1227,17 @@ msgstr "Не достаточно участников"
 msgid "Not enough neighbors"
 msgstr "Недостаточно соседей"
 
+msgid "Not mounted - double click to mount"
+msgstr ""
+
 msgid "Notification type"
 msgstr "Тип уведомления"
 
 msgid "Notifications"
 msgstr "Уведомления"
+
+msgid "Now Playing"
+msgstr "Сейчас играет"
 
 msgid "OSD Preview"
 msgstr "Предпросмотр OSD"
@@ -1360,7 +1375,7 @@ msgid "Preset:"
 msgstr "Профиль:"
 
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "Нажмите комбинацию клавиш"
 
 msgid "Press a key"
 msgstr "Нажмите клавишу"
@@ -1382,13 +1397,13 @@ msgid "Progress"
 msgstr "Ход выполнения"
 
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "Нажмите на кнопку пульта Wiiremote"
 
 msgid "Quality"
 msgstr "Качество"
 
 msgid "Querying device..."
-msgstr ""
+msgstr "Опрашиваем устройство..."
 
 msgid "Queue Manager"
 msgstr "Управление очередью"
@@ -1424,7 +1439,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Запомнить движение ульта Wiiremote"
 
 msgid "Remember from last time"
 msgstr "Запомнить последнее"
@@ -1583,7 +1598,7 @@ msgid "Show OSD"
 msgstr "Показывать OSD"
 
 msgid "Show a glowing animation on the current track"
-msgstr ""
+msgstr "Подсвечивать проигрывающийся трек"
 
 msgid "Show a native desktop notification"
 msgstr "Показывать системные сообщения"
@@ -1692,7 +1707,7 @@ msgid "Streaming membership"
 msgstr "Streaming подписка"
 
 msgid "Stretch columns to fit window"
-msgstr ""
+msgstr "Выровнять поля по размеру окна"
 
 #, qt-format
 msgid "Successfully written %1"
@@ -1778,14 +1793,17 @@ msgid "This device supports the following file formats:"
 msgstr "Это устройство поддерживает следующие форматы:"
 
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Это устройство не будет работать правильно"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"Это MTP устройство, а ваша версия Clementine скомпилирована без поддержки "
+"libmtp."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
+"Это iPod, а ваша версия Clementine скомпилирована без поддержки libgpod."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -1886,10 +1904,10 @@ msgid "Use Replay Gain metadata if it is available"
 msgstr "Использовать метаданные Replay Gain  если возможно"
 
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Использовать пульт Wii"
 
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Показывать уведомления о статусе пульта Wii"
 
 msgid "Use the system default"
 msgstr "Использовать значения по умолчанию"
@@ -1930,7 +1948,7 @@ msgid "Volume %1%"
 msgstr "Громкость %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "Имя тома"
 
 msgid "WAV"
 msgstr "WAV"
@@ -1945,31 +1963,31 @@ msgid "WiFi MAC Address"
 msgstr "MAC адрес WiFi"
 
 #, qt-format
-msgid "Wiiremote %1: actived"
+msgid "Wii Remote %1: actived"
 msgstr ""
 
 #, qt-format
-msgid "Wiiremote %1: connected"
+msgid "Wii Remote %1: connected"
 msgstr ""
 
 #, qt-format
-msgid "Wiiremote %1: critical battery (%2%) "
+msgid "Wii Remote %1: critical battery (%2%) "
 msgstr ""
 
 #, qt-format
-msgid "Wiiremote %1: disactived"
+msgid "Wii Remote %1: disactived"
 msgstr ""
 
 #, qt-format
-msgid "Wiiremote %1: disconnected"
+msgid "Wii Remote %1: disconnected"
 msgstr ""
 
 #, qt-format
-msgid "Wiiremote %1: low battery (%2%)"
+msgid "Wii Remote %1: low battery (%2%)"
 msgstr ""
 
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Windows Media"
 
 msgid "Year"
 msgstr "Год"
@@ -2003,6 +2021,9 @@ msgid ""
 "\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
 "wiki</a> for more information.\n"
 msgstr ""
+"Вы можете использовать пульт Wii для дистанционного управления Clementine. "
+"<a href=\"http://www.clementine-player.org/wiimote\">Смотри раздел на wiki-"
+"странице Clementine</a> для более подробной информации.\n"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -2062,8 +2083,23 @@ msgstr "Остановить"
 msgid "track %1"
 msgstr "композиция %1"
 
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Показывать ярлыки только когда приложение в фокусе"
+#~ msgid "Wiiremote %1: actived"
+#~ msgstr "Пульт Wii %1: активирован"
+
+#~ msgid "Wiiremote %1: connected"
+#~ msgstr "Пульт Wii %1: подключен"
+
+#~ msgid "Wiiremote %1: critical battery (%2%) "
+#~ msgstr "Пульт Wii %1: критический уровень батареи (%2%) "
+
+#~ msgid "Wiiremote %1: disactived"
+#~ msgstr "Пульт Wii %1: деактивирован"
+
+#~ msgid "Wiiremote %1: disconnected"
+#~ msgstr "Пульт Wii %1: отключен"
+
+#~ msgid "Wiiremote %1: low battery (%2%)"
+#~ msgstr "Пульт Wii %1: батарея разряжена (%2%)"
 
 #~ msgid "Show section"
 #~ msgstr "Показать секцию"
@@ -2188,3 +2224,6 @@ msgstr "композиция %1"
 
 #~ msgid "available"
 #~ msgstr "доступно"
+
+#~ msgid "Enable shortcuts only when application is focused"
+#~ msgstr "Показывать ярлыки только когда приложение в фокусе"

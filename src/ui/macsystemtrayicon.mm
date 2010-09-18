@@ -16,6 +16,8 @@
 
 #include "macsystemtrayicon.h"
 
+#include "core/song.h"
+
 #include <QAction>
 #include <QApplication>
 #include <QIcon>
@@ -57,9 +59,32 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
   MacSystemTrayIconPrivate() {
     dock_menu_ = [[NSMenu alloc] initWithTitle:@"DockMenu"];
 
+    QString title = QT_TR_NOOP("Now Playing");
+    NSString* t = [[NSString alloc] initWithUTF8String:title.toUtf8().constData()];
+    now_playing_ = [[NSMenuItem alloc]
+        initWithTitle:t
+        action:NULL
+        keyEquivalent:@""];
+
+    now_playing_artist_ = [[NSMenuItem alloc]
+        initWithTitle:@"Nothing to see here"
+        action:NULL
+        keyEquivalent:@""];
+
+    now_playing_title_ = [[NSMenuItem alloc]
+        initWithTitle:@"Nothing to see here"
+        action:NULL
+        keyEquivalent:@""];
+
+    [dock_menu_ insertItem:now_playing_title_ atIndex:0];
+    [dock_menu_ insertItem:now_playing_artist_ atIndex:0];
+    [dock_menu_ insertItem:now_playing_ atIndex:0];
+
     // Don't look now.
     // This must be called after our custom NSApplicationDelegate has been set.
     [[NSApp delegate] setDockMenu:dock_menu_];
+
+    ClearNowPlaying();
   }
 
   void AddMenuItem(QAction* action) {
@@ -89,10 +114,43 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
     [dock_menu_ addItem:separator];
   }
 
+  void ShowNowPlaying(const QString& artist, const QString& title) {
+    ClearNowPlaying();  // Makes sure the order is consistent.
+    [now_playing_artist_ setTitle:
+        [[NSString alloc] initWithUTF8String: artist.toUtf8().constData()]];
+    [now_playing_title_ setTitle:
+        [[NSString alloc] initWithUTF8String: title.toUtf8().constData()]];
+    title.isEmpty() ? HideItem(now_playing_title_) : ShowItem(now_playing_title_);
+    artist.isEmpty() ? HideItem(now_playing_artist_) : ShowItem(now_playing_artist_);
+    artist.isEmpty() && title.isEmpty() ? HideItem(now_playing_) : ShowItem(now_playing_);
+  }
+
+  void ClearNowPlaying() {
+    // Hiding doesn't seem to work in the dock menu.
+    HideItem(now_playing_);
+    HideItem(now_playing_artist_);
+    HideItem(now_playing_title_);
+  }
+
  private:
+  void HideItem(NSMenuItem* item) {
+    if ([dock_menu_ indexOfItem:item] != -1) {
+      [dock_menu_ removeItem:item];
+    }
+  }
+
+  void ShowItem(NSMenuItem* item, int index = 0) {
+    if ([dock_menu_ indexOfItem:item] == -1) {
+      [dock_menu_ insertItem:item atIndex:index];
+    }
+  }
+
   QMap<QAction*, NSMenuItem*> actions_;
 
   NSMenu* dock_menu_;
+  NSMenuItem* now_playing_;
+  NSMenuItem* now_playing_artist_;
+  NSMenuItem* now_playing_title_;
 };
 
 MacSystemTrayIcon::MacSystemTrayIcon(QObject* parent)
@@ -134,4 +192,12 @@ void MacSystemTrayIcon::UpdateIcon() {
 void MacSystemTrayIcon::ActionChanged() {
   QAction* action = qobject_cast<QAction*>(sender());
   p_->ActionChanged(action);
+}
+
+void MacSystemTrayIcon::ClearNowPlaying() {
+  p_->ClearNowPlaying();
+}
+
+void MacSystemTrayIcon::SetNowPlaying(const Song& song) {
+  p_->ShowNowPlaying(song.artist(), song.PrettyTitle());
 }

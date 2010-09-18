@@ -35,6 +35,8 @@ FileViewList::FileViewList(QWidget* parent)
                    this, SLOT(CopyToLibrarySlot()));
   menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."),
                    this, SLOT(MoveToLibrarySlot()));
+  menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
+                   tr("Copy to device..."), this, SLOT(CopyToDeviceSlot()));
   menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."),
                    this, SLOT(DeleteSlot()));
   setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -80,6 +82,10 @@ void FileViewList::CopyToLibrarySlot() {
 
 void FileViewList::MoveToLibrarySlot() {
   emit MoveToLibrary(UrlListFromSelection());
+}
+
+void FileViewList::CopyToDeviceSlot() {
+  emit CopyToDevice(UrlListFromSelection());
 }
 
 void FileViewList::DeleteSlot() {

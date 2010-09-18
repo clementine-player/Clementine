@@ -17,6 +17,7 @@
 #include "config.h"
 #include "devicelister.h"
 
+#include <QDir>
 #include <QFile>
 #include <QStringList>
 #include <QThread>
@@ -54,7 +55,8 @@ namespace {
 
 bool IsIpod(const QString& path) {
   return QFile::exists(path + "/iTunes_Control") ||
-         QFile::exists(path + "/iPod_Control");
+         QFile::exists(path + "/iPod_Control") ||
+         QFile::exists(path + "/iTunes/iTunes_Control");
 }
 
 #ifdef HAVE_LIBGPOD
@@ -163,7 +165,10 @@ QString GetIpodModel(Itdb_IpodModel model) {
 
 QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
   if (IsIpod(path)) {
-    return QUrl("ipod://" + path);
+    QUrl ret;
+    ret.setScheme("ipod");
+    ret.setPath(QDir::fromNativeSeparators(path));
+    return ret;
   }
 
   return QUrl::fromLocalFile(path);
@@ -202,10 +207,15 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
 }
 
 QStringList DeviceLister::GuessIconForModel(const QString& vendor, const QString& model) {
-  qDebug() << vendor << ":" << model;
   QStringList ret;
   if (vendor.startsWith("Google") && model.contains("Nexus")) {
     ret << "phone-google-nexus-one";
   }
+  return ret;
+}
+
+int DeviceLister::MountDevice(const QString& id) {
+  const int ret = next_mount_request_id_ ++;
+  emit DeviceMounted(id, ret, true);
   return ret;
 }

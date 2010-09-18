@@ -86,6 +86,9 @@ class MergedProxyModel : public QAbstractProxyModel {
   void RowsRemoved(const QModelIndex& source_parent, int start, int end);
   void DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right);
 
+  void LayoutAboutToBeChanged();
+  void LayoutChanged();
+
  private:
   QModelIndex GetActualSourceParent(const QModelIndex& source_parent,
                                     QAbstractItemModel* model) const;
@@ -112,8 +115,10 @@ class MergedProxyModel : public QAbstractProxyModel {
   > MappingContainer;
 
   MappingContainer mappings_;
-  QMap<QAbstractItemModel*, QModelIndex> merge_points_;
+  QMap<QAbstractItemModel*, QPersistentModelIndex> merge_points_;
   QAbstractItemModel* resetting_model_;
+
+  QMap<QAbstractItemModel*, QModelIndex> old_merge_points_;
 };
 
 #endif // MERGEDPROXYMODEL_H

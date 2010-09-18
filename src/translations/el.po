@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-04 17:09+0000\n"
-"PO-Revision-Date: 2010-09-04 12:27+0000\n"
+"POT-Creation-Date: 2010-09-11 17:36+0000\n"
+"PO-Revision-Date: 2010-09-13 16:09+0000\n"
 "Last-Translator: firewalker <Unknown>\n"
 "Language-Team: <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-05 05:06+0000\n"
+"X-Launchpad-Export-Date: 2010-09-14 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 "X-Language: el_GR\n"
@@ -434,6 +434,8 @@ msgstr "Παραμετροποίηση της βιβλιοθήκης"
 
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr ""
+"Σύνδεση των χειριστηρίων Wii χρησιμοποιώντας την ενέργεια ενεργοποίηση/"
+"απενεργοποίηση"
 
 msgid "Connect device"
 msgstr "Σύνδεση συσκευής"
@@ -606,7 +608,7 @@ msgid "Device Properties"
 msgstr "Ιδιότητες συσκευής"
 
 msgid "Device name"
-msgstr ""
+msgstr "Όνομα συσκευής"
 
 msgid "Device properties..."
 msgstr "Ιδιότητες συσκευής..."
@@ -666,7 +668,7 @@ msgid "Drag to reposition"
 msgstr "Σύρετε για μετακίνηση"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Γράμμα δίσκου"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
@@ -689,13 +691,14 @@ msgid "Editing %n tracks"
 msgstr "Τροποποίηση %n κομματιών"
 
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Ενεργοποίηση της υποστήριξης χειριστηρίων Wii"
 
 msgid "Enable equalizer"
 msgstr "Ενεργοποίηση του ισοσταθμιστή"
 
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr ""
+"Ενεργοποίηση των συντομεύσεων μόνο όταν ο Clementine είναι στο προσκήνιο"
 
 msgid "Enter a name for the new playlist"
 msgstr "Εισάγετε ένα όνομα για την νέα λίστα αναπαραγωγής"
@@ -808,13 +811,13 @@ msgid "Files to transcode"
 msgstr "Αρχεία για επανακωδικοποίηση"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Όνομα συστήματος αρχείων"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Αριθμός σειράς συστήματος αρχείων"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Τύπος συστήματος αρχείων"
 
 msgid "First level"
 msgstr "Πρώτο επίπεδο"
@@ -933,6 +936,8 @@ msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
 "work."
 msgstr ""
+"Αν συνεχίσετε, η συσκευή αυτή θα λειτουργεί αργά και τα τραγούδια που θα "
+"αντιγραφούν σε αυτή ίσως δεν παίζουν."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Αγνόηση του \"The\" στο όνομα των καλλιτεχνών"
@@ -986,11 +991,11 @@ msgstr "Μετάβαση στο τρέχον κομμάτι που παίζει"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτα..."
 
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτα..."
 
 msgid "Keep the original files"
 msgstr "Διατήρηση των αρχικών αρχείων"
@@ -1215,6 +1220,9 @@ msgstr ""
 msgid "None"
 msgstr "Κανένα"
 
+msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
 msgid "Not connected"
 msgstr "Αποσυνδεμένο"
 
@@ -1230,11 +1238,17 @@ msgstr "Δεν υπάρχουν αρκετά μέλη"
 msgid "Not enough neighbors"
 msgstr "Δεν υπάρχουν αρκετοί γείτονες"
 
+msgid "Not mounted - double click to mount"
+msgstr "Δεν είναι φορτωμένο - διπλό \"κλικ\" για φόρτωση"
+
 msgid "Notification type"
 msgstr "Τύπος ειδοποίησης"
 
 msgid "Notifications"
 msgstr "Ειδοποιήσεις"
+
+msgid "Now Playing"
+msgstr "Τρέχουσα αναπαραγωγή"
 
 msgid "OSD Preview"
 msgstr "Προ-επισκόπηση OSD"
@@ -1436,7 +1450,7 @@ msgid "Reggae"
 msgstr "Reggae"
 
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Απομνημόνευσε την ταλάντευση του χειριστηρίου του Wii"
 
 msgid "Remember from last time"
 msgstr "Υπενθύμιση από την τελευταία φορά"
@@ -1794,14 +1808,17 @@ msgid "This device supports the following file formats:"
 msgstr "Η συσκευή αυτή υποστηρίζει τις ακόλουθες μορφές:"
 
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Η συσκευή αυτή δεν θα λειτουργήσει σωστά"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"Αυτή είναι μία συσκευή MTP, αλλά φτιάξατε τον Clementine χωρίς υποστήριξη "
+"της libmtp."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
+"Αυτό είναι iPod, αλλά φτιάξατε τον Clementine χωρίς υποστήριξη της libgpod."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -1902,10 +1919,11 @@ msgid "Use Replay Gain metadata if it is available"
 msgstr "Χρήση των μετα δεδομένων Replay Gain αν είναι διαθέσημα"
 
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Χρήση χειριστηρίου Wii"
 
 msgid "Use notifications to report Wii Remote status"
 msgstr ""
+"Χρήση των ειδοποιήσεων για την αναφορά της κατάστασης του χειριστηρίου Wii"
 
 msgid "Use the system default"
 msgstr "Χρήση προκαθορισμένου του συστήματος"
@@ -1946,7 +1964,7 @@ msgid "Volume %1%"
 msgstr "Ένταση %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "Όνομα τομέα"
 
 msgid "WAV"
 msgstr "WAV"
@@ -1961,28 +1979,28 @@ msgid "WiFi MAC Address"
 msgstr "Διεύθυνση MAC του WiFi"
 
 #, qt-format
-msgid "Wiiremote %1: actived"
-msgstr "Wiiremote %1: ενεργοποιημένο"
+msgid "Wii Remote %1: actived"
+msgstr "Χειριστήριο Wii %1: ενεργοποιήθηκε"
 
 #, qt-format
-msgid "Wiiremote %1: connected"
-msgstr "Wiiremote %1: συνδεδεμένο"
+msgid "Wii Remote %1: connected"
+msgstr "Χειριστήριο Wii %1: συνδέθηκε"
 
 #, qt-format
-msgid "Wiiremote %1: critical battery (%2%) "
-msgstr "Wiiremote %1: Μπαταρία σε κρίσιμο σημείο (%2%) "
+msgid "Wii Remote %1: critical battery (%2%) "
+msgstr "Χειριστήριο Wii %1: μπαταρια σε κρίσιμο σημείο (%2%) "
 
 #, qt-format
-msgid "Wiiremote %1: disactived"
-msgstr "Wiiremote %1: απενεργοποιημένο"
+msgid "Wii Remote %1: disactived"
+msgstr "Χειριστήριο Wii %1: απενεργοποιήθηκε"
 
 #, qt-format
-msgid "Wiiremote %1: disconnected"
-msgstr "Wiiremote %1: αποσυνδεδεμένο"
+msgid "Wii Remote %1: disconnected"
+msgstr "Χειριστήριο Wii %1: αποσυνδέθηκε"
 
 #, qt-format
-msgid "Wiiremote %1: low battery (%2%)"
-msgstr "Wiiremote %1: χαμηλή μπαταρία (%2%)"
+msgid "Wii Remote %1: low battery (%2%)"
+msgstr "Χειριστήριο Wii %1: χαμηλή μπαταρία (%2%)"
 
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
@@ -2020,6 +2038,9 @@ msgid ""
 "\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
 "wiki</a> for more information.\n"
 msgstr ""
+"Μπορείτε να χρησιμοποιήσετε χειριστήριο Wii σαν τηλεχειριστήριο για τον "
+"Clementine.  <a href=\"http://www.clementine-player.org/wiimote\">Δείτε την "
+"σχετική σελίδα στο wiki του Clementine</a> για περισσότερες πληροφορίες.\n"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -2079,25 +2100,6 @@ msgstr "διακοπή"
 #, qt-format
 msgid "track %1"
 msgstr "κομμάτι %1"
-
-#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
-#~ msgstr ""
-#~ "Σύνδεση των χειριστηρίων του Wii στον Clementine χρησιμοποιώντας την "
-#~ "ενέργεια ενεργοποίησης/απενεργοποίησης"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Ενεργοποίηση της υποστήριξης χειριστήριου του Wii στον Clkementine"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Ενεργοποίηση των συντομεύσεων μόνο όταν η εφαρμογή είναι επιλεγμένη"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Χρήση του χειριστηρίου Wii"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr ""
-#~ "Χρήση των ειδοποιήσεων για την αναφορά της κατάστασης του χειριστήριου "
-#~ "του Wii"
 
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1's Συνοικιακά"
@@ -2219,3 +2221,40 @@ msgstr "κομμάτι %1"
 
 #~ msgid "available"
 #~ msgstr "διαθέσιμο"
+
+#~ msgid "Enable Wii remote support in Clementine"
+#~ msgstr "Ενεργοποίηση της υποστήριξης χειριστήριου του Wii στον Clkementine"
+
+#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
+#~ msgstr ""
+#~ "Σύνδεση των χειριστηρίων του Wii στον Clementine χρησιμοποιώντας την "
+#~ "ενέργεια ενεργοποίησης/απενεργοποίησης"
+
+#~ msgid "Enable shortcuts only when application is focused"
+#~ msgstr "Ενεργοποίηση των συντομεύσεων μόνο όταν η εφαρμογή είναι επιλεγμένη"
+
+#~ msgid "Use notifications to report Wii remote status"
+#~ msgstr ""
+#~ "Χρήση των ειδοποιήσεων για την αναφορά της κατάστασης του χειριστήριου "
+#~ "του Wii"
+
+#~ msgid "Wiiremote %1: connected"
+#~ msgstr "Wiiremote %1: συνδεδεμένο"
+
+#~ msgid "Wiiremote %1: actived"
+#~ msgstr "Wiiremote %1: ενεργοποιημένο"
+
+#~ msgid "Wiiremote %1: critical battery (%2%) "
+#~ msgstr "Wiiremote %1: Μπαταρία σε κρίσιμο σημείο (%2%) "
+
+#~ msgid "Use Wii remote"
+#~ msgstr "Χρήση του χειριστηρίου Wii"
+
+#~ msgid "Wiiremote %1: disconnected"
+#~ msgstr "Wiiremote %1: αποσυνδεδεμένο"
+
+#~ msgid "Wiiremote %1: low battery (%2%)"
+#~ msgstr "Wiiremote %1: χαμηλή μπαταρία (%2%)"
+
+#~ msgid "Wiiremote %1: disactived"
+#~ msgstr "Wiiremote %1: απενεργοποιημένο"

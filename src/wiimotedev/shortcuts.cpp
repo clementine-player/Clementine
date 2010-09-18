@@ -55,8 +55,6 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
   // http://code.google.com/p/clementine-player/issues/detail?id=670
   // Probably dbus bug, or something else
 
-  qWarning() << "bug 670: before freeze ?";
-
   if (actived && !wiimotedev_iface_) {
     wiimotedev_iface_.reset(new OrgWiimotedevDeviceEventsInterface(
         WIIMOTEDEV_DBUS_SERVICE_NAME, WIIMOTEDEV_DBUS_EVENTS_OBJECT,
@@ -77,8 +75,6 @@ void WiimotedevShortcuts::SetWiimotedevInterfaceActived(bool actived) {
 
   if (!actived && wiimotedev_iface_)
     wiimotedev_iface_.reset();
-
-  qWarning() << "bug 670: after freeze ?";
 }
 
 void WiimotedevShortcuts::ReloadSettings() {

@@ -210,6 +210,10 @@ void LastFMService::AuthenticateReplyFinished() {
   // Parse the reply
   try {
     lastfm::XmlQuery const lfm = lastfm::ws::parse(reply);
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
+      throw std::runtime_error("");
+#endif
 
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
@@ -494,6 +498,10 @@ void LastFMService::RefreshFriendsFinished() {
 
   try {
     friends = lastfm::User::list(reply);
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
+      throw std::runtime_error("");
+#endif
   } catch (std::runtime_error& e) {
     qDebug() << e.what();
     return;
@@ -516,6 +524,10 @@ void LastFMService::RefreshNeighboursFinished() {
 
   try {
     neighbours = lastfm::User::list(reply);
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
+      throw std::runtime_error("");
+#endif
   } catch (std::runtime_error& e) {
     qDebug() << e.what();
     return;
@@ -625,6 +637,11 @@ void LastFMService::FetchMoreTracksFinished() {
 
   try {
     const XmlQuery& query = lastfm::ws::parse(reply);
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
+      throw std::runtime_error("");
+#endif
+
     const XmlQuery& playlist = query["playlist"];
     foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
       lastfm::MutableTrack t;

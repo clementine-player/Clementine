@@ -7,23 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-04 17:09+0000\n"
-"PO-Revision-Date: 2010-09-04 20:14+0000\n"
+"POT-Creation-Date: 2010-09-15 23:46+0000\n"
+"PO-Revision-Date: 2010-09-16 03:08+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-05 05:06+0000\n"
+"X-Launchpad-Export-Date: 2010-09-17 05:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 "X-Language: pl_PL\n"
 
 msgid " ms"
-msgstr " milisekund"
+msgstr " ms"
 
 msgid " seconds"
-msgstr " sekund"
+msgstr " sekundy"
 
 #, qt-format
 msgid "%1 albums"
@@ -55,7 +55,7 @@ msgstr "%1 ścieżek"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1: moduł Wiimotedev"
 
 #, c-format
 msgid "%n failed"
@@ -102,6 +102,13 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
+"<p>Tokeny rozpoczynają się od %, na przykład: %artist %album %title </p>\n"
+"\n"
+"<p>Jeżeli otoczysz fragmenty tekstu, które zawierają token z nawiasami "
+"klamrowymi, to zaznaczenie będzie niewidoczne, jeżeli token jest pusty.</p>\n"
+"\n"
+"reprezentuje nową linię. Rozpocznij nową linią w odpowiedniej pozycji "
+"tłumaczenia."
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -120,7 +127,7 @@ msgid "Action"
 msgstr "Akcja"
 
 msgid "Active/deactive Wiiremote"
-msgstr ""
+msgstr "Aktywuj/deaktywuj Wiiremote'a"
 
 msgid "Add Stream"
 msgstr "Dodaj URL"
@@ -223,7 +230,7 @@ msgid "All playlists (%1)"
 msgstr "Wszystkie listy odtwarzania (%1)"
 
 msgid "Alongside the originals"
-msgstr ""
+msgstr "Wraz z orginałem"
 
 msgid "Always hide the main window"
 msgstr "Zawsze ukrywaj główne okno"
@@ -321,7 +328,7 @@ msgid "Bluetooth MAC Address"
 msgstr "Adres MAC urządzenia Bluetooth"
 
 msgid "Boom analyzer"
-msgstr ""
+msgstr "Analizator słupkowy 2"
 
 msgid "Browse..."
 msgstr "Przeglądaj..."
@@ -375,6 +382,8 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
+"Clementine potrafi automatycznie konwertować muzykę którą kopiujesz na to "
+"urządzenie,  w formacie który potrafi odtwarzać"
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine może pokazywać powiadomienia gdy zmienia się utwór."
@@ -424,7 +433,7 @@ msgid "Configure library..."
 msgstr "Konfiguruj bibliotekę..."
 
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Podłącz urządzenia Wii Remote używając akcji aktywuj/deaktywuj"
 
 msgid "Connect device"
 msgstr "Podłącz urządzenie"
@@ -457,12 +466,16 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
+"Nie można odnaleźć muxera dla %1, sprawdź czy posiadasz zainstalowane "
+"prawidłowe pluginy dla GStreamer'a"
 
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr ""
+"Nie można odnaleźć enkodera dla %1, sprawdź czy posiadasz zainstalowane "
+"prawidłowe pluginy dla GStreamer'a"
 
 #, qt-format
 msgid "Couldn't load the last.fm radio station: %1"
@@ -593,7 +606,7 @@ msgid "Device Properties"
 msgstr "Ustawienia Urządzenia"
 
 msgid "Device name"
-msgstr ""
+msgstr "Nazwa urządzenia"
 
 msgid "Device properties..."
 msgstr "Ustawienia urządzenia..."
@@ -614,7 +627,7 @@ msgid "Display options"
 msgstr "Opcje wyświetlania"
 
 msgid "Display the on-screen-display"
-msgstr ""
+msgstr "Wyświetl na ekranie"
 
 msgid "Do not convert any music"
 msgstr "Nie konwertuj"
@@ -635,13 +648,13 @@ msgid "Double click to open"
 msgstr "Kliknij podwójnie by otworzyć"
 
 msgid "Double-clicking a song clears the playlist first"
-msgstr ""
+msgstr "Podwójne kliknięcie na utworze najpierw czyści listę odtwarzania"
 
 msgid "Download directory"
 msgstr "Pobierz katalog"
 
 msgid "Download membership"
-msgstr ""
+msgstr "Pobierz członkwstwo"
 
 msgid "Download this album"
 msgstr "Pobierz ten album"
@@ -653,7 +666,7 @@ msgid "Drag to reposition"
 msgstr "Przeciągnij aby zmienić pozycję"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Litera dysku"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
@@ -676,13 +689,13 @@ msgid "Editing %n tracks"
 msgstr "Edytowanie %n ścieżek"
 
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Włącz obsługę urządzeń Wii Remote"
 
 msgid "Enable equalizer"
 msgstr "Włącz korektor dźwięku"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "Włącz skróty tylko gdy Clementine jest aktywne"
 
 msgid "Enter a name for the new playlist"
 msgstr "Wprowadź nazwę nowej listy odtwarzania"
@@ -692,7 +705,8 @@ msgstr "Wpisz nową nazwę dla listy odtwarzania"
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Wpisz <b>wykonawcę</b> lub <b>znacznik</b> aby słuchać radia Last.fm."
+msgstr ""
+"Wpisz <b>wykonawcę</b> lub <b>znacznik</b> aby słuchać radia Last.fm."
 
 msgid "Enter search terms here"
 msgstr "Wpisz szukane wyrażenie"
@@ -793,13 +807,13 @@ msgid "Files to transcode"
 msgstr "Pliki do transkodowania"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Nazwa systemu plików"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Numer seryjny systemu plików"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Typ systemu plików"
 
 msgid "First level"
 msgstr "Pierwszy poziom"
@@ -814,6 +828,9 @@ msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
 msgstr ""
+"Zapomnienie urządzenia spowoduje usunięcie go z listy i Clementine będzie "
+"musiało ponownie przeskanować wszystkie piosenki ponownie przy podłączeniu "
+"urządzenia"
 
 msgid "Form"
 msgstr "Forma"
@@ -886,7 +903,8 @@ msgid "Hardware information"
 msgstr "Informacja o urządzeniu"
 
 msgid "Hardware information is only available while the device is connected."
-msgstr "Informacja o urządzeniu jest widoczna gdy urządzenie jest podłączone."
+msgstr ""
+"Informacja o urządzeniu jest widoczna gdy urządzenie jest podłączone."
 
 msgid "Help"
 msgstr "Pomoc"
@@ -914,6 +932,8 @@ msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
 "work."
 msgstr ""
+"Jeśli będziesz kontynłował, urządzenie będzie działać wolniej i piosenki "
+"skopiowane na nie mogą nie działać."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignoruj \"The\" w nazwach artystów"
@@ -1017,7 +1037,7 @@ msgstr "Podobni do %1 Artyści z Last.fm"
 
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
-msgstr ""
+msgstr "Last.fm Tag Radio: %1"
 
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm jest przeciążony, prosimy spróbować za chwilę"
@@ -1121,7 +1141,7 @@ msgid "Membership type"
 msgstr "Typ członkostwa"
 
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "Brakuje obecności projectM"
 
 msgid "Model"
 msgstr "Model"
@@ -1148,7 +1168,8 @@ msgid "Music"
 msgstr "Muzyka"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr "Muzyka (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr ""
+"Muzyka (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Biblioteka muzyki"
@@ -1172,7 +1193,7 @@ msgid "Name"
 msgstr "Nazwa"
 
 msgid "Naming options"
-msgstr ""
+msgstr "Nazwy opcji"
 
 msgid "Neighbors"
 msgstr "Sąsiedzi"
@@ -1198,11 +1219,14 @@ msgstr ""
 msgid "None"
 msgstr "Brak"
 
+msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
 msgid "Not connected"
 msgstr "Nie podłączono"
 
 msgid "Not enough content"
-msgstr ""
+msgstr "Za mało zawartości"
 
 msgid "Not enough fans"
 msgstr "Za mało fanów"
@@ -1213,11 +1237,17 @@ msgstr "Za mało użytkowników"
 msgid "Not enough neighbors"
 msgstr "Za mało sąsiadów"
 
+msgid "Not mounted - double click to mount"
+msgstr "Nie zamontowane - kliknij dwukrotnie, aby zamontować"
+
 msgid "Notification type"
 msgstr "Typ powiadomień"
 
 msgid "Notifications"
 msgstr "Powiadomienia"
+
+msgid "Now Playing"
+msgstr "Teraz odtwarzane"
 
 msgid "OSD Preview"
 msgstr "Podgląd OSD"
@@ -1395,7 +1425,7 @@ msgid "Queue track"
 msgstr "Kolejkuj ścieżkę"
 
 msgid "Radio (equal loudness for all tracks)"
-msgstr ""
+msgstr "Radio (równa głośność dla wszystkich ścieżek)"
 
 msgid "Radio service couldn't be loaded :-("
 msgstr "Usługa radio nie może być załadowana :-("
@@ -1500,7 +1530,7 @@ msgid "Save preset"
 msgstr "Zapisz ustawienia korektora"
 
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Zapisz ten strumień w zakładce Internet"
 
 msgid "Scrobble tracks that I listen to"
 msgstr "Wysyłaj informacje o utworach których słucham"
@@ -1524,10 +1554,10 @@ msgid "Seek forward"
 msgstr "Przewiń w przód"
 
 msgid "Seek the currently playing track by a relative amount"
-msgstr ""
+msgstr "Przesuń obecnie odtwarzaną scieżkę o względną wartość"
 
 msgid "Seek the currently playing track to an absolute position"
-msgstr ""
+msgstr "Przesuń obecnie odtwarzaną scieżkę o absolutną wartość"
 
 msgid "Select All"
 msgstr "Zaznacz wszystko"
@@ -1578,7 +1608,7 @@ msgid "Show OSD"
 msgstr "Pokaż OSD"
 
 msgid "Show a glowing animation on the current track"
-msgstr ""
+msgstr "Pokaż animacje podświetlenia na aktualnie odtwarzanej ścieżce"
 
 msgid "Show a native desktop notification"
 msgstr "Pokaż natywne powiadomienia  srodowiska graficznego"
@@ -1602,7 +1632,7 @@ msgid "Show in various artists"
 msgstr "Pokaż w różni wykonawcy"
 
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr ""
+msgstr "Pokaż przyciski \"love\" i \"ban\""
 
 msgid "Show tray icon"
 msgstr "Pokaż ikonkę w obszarze powiadomień"
@@ -1650,10 +1680,10 @@ msgid "Sonogram"
 msgstr "Sonogram"
 
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "Rozpocznij aktualnie odtwarzaną playliste"
 
 msgid "Start transcoding"
-msgstr ""
+msgstr "Rozpocznij transkodowanie"
 
 #, qt-format
 msgid "Starting %1"
@@ -1684,17 +1714,17 @@ msgid "Stream"
 msgstr "Strumień"
 
 msgid "Streaming membership"
-msgstr ""
+msgstr "Członkostwo w strumieniu"
 
 msgid "Stretch columns to fit window"
-msgstr ""
+msgstr "Naciągnij kolumny aby dopasować do okna"
 
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "Sukcesywnie zapisano %1"
 
 msgid "Super high (60 fps)"
-msgstr ""
+msgstr "Bardzo wyska jakość (60 fps)"
 
 msgid "Supported formats"
 msgstr "Obsługiwane formaty"
@@ -1746,11 +1776,13 @@ msgstr ""
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
+"Te pliki zostaną usunięte z dysku, czy jesteś pewnień że chcesz kontynłować?"
 
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr ""
+"Te pliki zostaną usunięte z dysku, czy jesteś pewnień że chcesz kontynłować?"
 
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Te katalogi będą skanowane w poszukiwaniu muzyki"
@@ -1765,19 +1797,23 @@ msgid ""
 "This device must be connected and opened before Clementine can see what file "
 "formats it supports."
 msgstr ""
+"To urządzenie musi być podłączone i otwarte zanim Clementine zobaczy jakie "
+"formaty plików ono obsługuje"
 
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "To urządzenie obsługuje następujące formaty plików:"
 
 msgid "This device will not work properly"
-msgstr ""
+msgstr "To urządzenie nie będzie działać prawidłowo"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"To jest urządzenie MTP, ale skompilowałeś Clementine bez obsługi libmtp."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
+"To jest urządzenie iPod, ale skompilowałeś Clementine bez obsługi libgpod."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -1803,7 +1839,7 @@ msgid "Toggle fullscreen"
 msgstr "Przełącz tryb pełnoekranowy"
 
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Zaznacz kolejke statusów"
 
 msgid "Tools"
 msgstr "Narzędzia"
@@ -1812,14 +1848,14 @@ msgid "Track"
 msgstr "Utwór"
 
 msgid "Transcode Music"
-msgstr ""
+msgstr "Transkoduj muzykę"
 
 msgid "Transcoder Log"
-msgstr ""
+msgstr "Dziennik transkodera"
 
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "Transkodowanie %1 plików urzywając %2 wątków"
 
 msgid "TrueAudio"
 msgstr "TrueAudio"
@@ -1877,10 +1913,10 @@ msgid "Use Replay Gain metadata if it is available"
 msgstr "Używaj metadanych Replay Gain, jeśli są dostępne"
 
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Używaj Wii Remote"
 
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Używaj powiadomień do raportowania statusów urządzenia Wii Remote"
 
 msgid "Use the system default"
 msgstr "Użyj domyślnych ustawień systemowych"
@@ -1908,7 +1944,7 @@ msgid "View"
 msgstr "Pokaż"
 
 msgid "Visualization mode"
-msgstr ""
+msgstr "Tryb wizualizacji"
 
 msgid "Visualizations"
 msgstr "Wizualizacje"
@@ -1936,31 +1972,31 @@ msgid "WiFi MAC Address"
 msgstr "Adres MAC urządzenia WiFi"
 
 #, qt-format
-msgid "Wiiremote %1: actived"
-msgstr ""
+msgid "Wii Remote %1: actived"
+msgstr "Wii Remote %1: aktywowany"
 
 #, qt-format
-msgid "Wiiremote %1: connected"
-msgstr "Wiiremote %1: połączony"
+msgid "Wii Remote %1: connected"
+msgstr "Wii Remote %1: połączony"
 
 #, qt-format
-msgid "Wiiremote %1: critical battery (%2%) "
-msgstr "Wiiremote %1: krytyczny poziom baterii (%2%) "
+msgid "Wii Remote %1: critical battery (%2%) "
+msgstr "Wii Remote %1: krytyczny poziom baterii (%2%) "
 
 #, qt-format
-msgid "Wiiremote %1: disactived"
-msgstr ""
+msgid "Wii Remote %1: disactived"
+msgstr "Wii Remote %1: zdezaktywowany"
 
 #, qt-format
-msgid "Wiiremote %1: disconnected"
-msgstr "Wiiremote %1: rozłączony"
+msgid "Wii Remote %1: disconnected"
+msgstr "Wii Remote %1: rozłączony"
 
 #, qt-format
-msgid "Wiiremote %1: low battery (%2%)"
-msgstr "Wiiremote %1: niski poziom baterii (%2%)"
+msgid "Wii Remote %1: low battery (%2%)"
+msgstr "Wii Remote %1: niski poziom baterii (%2%)"
 
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Windows Media audio"
 
 msgid "Year"
 msgstr "Rok"
@@ -1969,7 +2005,7 @@ msgid "Year - Album"
 msgstr "Rok - Album"
 
 msgid "You are about to download the following albums"
-msgstr ""
+msgstr "Zaraz ściągniesz następujące albumy"
 
 msgid "You can change the way the songs in the library are organised."
 msgstr "Możesz zmienić sposób w jaki prezentowane są utwory w Bibliotece."
@@ -1978,17 +2014,23 @@ msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a "
 "membership removes the messages at the end of each track."
 msgstr ""
+"Możesz słuchać utworów z Magnatune za darmo nie posiadając konta. Opłacenie "
+"członkostwa usuwa komunikaty na końcu każdej ścieżki."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
+"Możesz użyć kontrolerów Wii Remote jako zdalny pilot w Clementine. <a "
+"href=\"http://www.clementine-player.org/wiimote\"> Zobacz strone wiki dla "
+"Clementine</a> w celu uzyskania wiekszej ilości informacji.\n"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -2046,30 +2088,17 @@ msgstr "zatrzymaj"
 msgid "track %1"
 msgstr "utwór %1"
 
-#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
-#~ msgstr "Podłącz urządzenia Wii remote używając akcji aktywuj/deaktywuj"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Włącz obsługę urządzeń Wii remote w Clementine"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Reaguj na skróty tylko gdy aplikacja jest aktywna"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Użyj Wii remote"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr "Użyj powiadomień do raportowania statusów urządzenia Wii remote"
-
 #~ msgid "&Hide tray icon"
 #~ msgstr "&Ukryj ikonę w trayu"
 
 #~ msgid "Show section"
 #~ msgstr "Pokaż sekcję"
 
+#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1 sąsiada"
 
+#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1 biblioteka"
 
@@ -2101,8 +2130,8 @@ msgstr "utwór %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Musisz posiadać <span style=\" font-weight:600;\">opłacone konto</span> "
-#~ "aby słuchać radia Last.fm w Clementine."
+#~ "Musisz posiadać <span style=\" font-weight:600;\">opłacone konto</span> aby "
+#~ "słuchać radia Last.fm w Clementine."
 
 #~ msgid "Fadeout"
 #~ msgstr "Zanikanie"
@@ -2146,14 +2175,31 @@ msgstr "utwór %1"
 #~ msgid "available"
 #~ msgstr "dostępny"
 
+#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
+#~ msgstr "Podłącz urządzenia Wii remote używając akcji aktywuj/deaktywuj"
+
 #~ msgid "Edit action"
 #~ msgstr "Edytuj akcje"
 
+#~ msgid "Enable Wii remote support in Clementine"
+#~ msgstr "Włącz obsługę urządzeń Wii remote w Clementine"
+
+#~ msgid "Enable shortcuts only when application is focused"
+#~ msgstr "Reaguj na skróty tylko gdy aplikacja jest aktywna"
+
+#, qt-format
 #~ msgid "Keep buttons for %1 second"
 #~ msgstr "Przytrzymaj klawisze przez %1 sekunde"
 
+#, qt-format
 #~ msgid "Keep buttons for %1 seconds"
 #~ msgstr "Przytrzymaj klawisze przez %1 sekundy"
+
+#~ msgid "Use Wii remote"
+#~ msgstr "Użyj Wii remote"
+
+#~ msgid "Use notifications to report Wii remote status"
+#~ msgstr "Użyj powiadomień do raportowania statusów urządzenia Wii remote"
 
 #~ msgid "Use Wii remote id"
 #~ msgstr "Użyj Wii remote:"
@@ -2163,3 +2209,19 @@ msgstr "utwór %1"
 
 #~ msgid "Deactive Wiiremote"
 #~ msgstr "Deaktywuj wiiremote'a"
+
+#, qt-format
+#~ msgid "Wiiremote %1: connected"
+#~ msgstr "Wiiremote %1: połączony"
+
+#, qt-format
+#~ msgid "Wiiremote %1: critical battery (%2%) "
+#~ msgstr "Wiiremote %1: krytyczny poziom baterii (%2%) "
+
+#, qt-format
+#~ msgid "Wiiremote %1: disconnected"
+#~ msgstr "Wiiremote %1: rozłączony"
+
+#, qt-format
+#~ msgid "Wiiremote %1: low battery (%2%)"
+#~ msgstr "Wiiremote %1: niski poziom baterii (%2%)"

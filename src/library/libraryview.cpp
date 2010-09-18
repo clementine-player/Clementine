@@ -270,8 +270,12 @@ void LibraryView::Organise() {
 
   organise_dialog_->SetDestinationModel(library_->directory_model());
   organise_dialog_->SetCopy(false);
-  organise_dialog_->SetSongs(GetSelectedSongs());
-  organise_dialog_->show();
+  if (organise_dialog_->SetSongs(GetSelectedSongs()))
+    organise_dialog_->show();
+  else {
+    QMessageBox::warning(this, tr("Error"),
+        tr("None of the selected songs were suitable for copying to a device"));
+  }
 }
 
 void LibraryView::Delete() {

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-04 17:09+0000\n"
-"PO-Revision-Date: 2010-09-04 20:21+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
+"POT-Creation-Date: 2010-09-15 23:46+0000\n"
+"PO-Revision-Date: 2010-09-15 11:27+0000\n"
+"Last-Translator: Delfi Lopez Sastre <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-05 05:06+0000\n"
+"X-Launchpad-Export-Date: 2010-09-16 05:18+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: ca\n"
 
@@ -42,11 +42,11 @@ msgstr "%1 seleccionades de"
 
 #, qt-format
 msgid "%1 song"
-msgstr ""
+msgstr "%1 cancó"
 
 #, qt-format
 msgid "%1 songs"
-msgstr ""
+msgstr "%1 cançons"
 
 #, qt-format
 msgid "%1 tracks"
@@ -54,7 +54,7 @@ msgstr "%1 temes"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1 mòdul Wiimotedev"
 
 #, c-format
 msgid "%n failed"
@@ -69,13 +69,13 @@ msgid "%n remaining"
 msgstr "%n restants"
 
 msgid "&Custom"
-msgstr "&Personalitzades"
+msgstr "Personalitzades"
 
 msgid "&None"
 msgstr "&Cap"
 
 msgid "&Quit"
-msgstr "&Sortir"
+msgstr "&Abandona"
 
 msgid "...and all the Amarok contributors"
 msgstr "...i tots els que han contribuït amb l'Amarok"
@@ -87,7 +87,7 @@ msgid "1 day"
 msgstr "1 dia"
 
 msgid "1 track"
-msgstr "1 peça"
+msgstr "1 pista"
 
 msgid "128K MP3"
 msgstr "128K MP3"
@@ -101,10 +101,10 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album "
+"%title </p>\n"
 "\n"
-"<p>Si demarques entre claus una secció de text que contingui una fitxa de "
+"<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
 "remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
 "troba buida.</p>"
 
@@ -122,22 +122,22 @@ msgid "Account details"
 msgstr "Detalls del compte"
 
 msgid "Action"
-msgstr ""
+msgstr "Acció"
 
 msgid "Active/deactive Wiiremote"
-msgstr ""
+msgstr "Activa/desactiva Wiiremote"
 
 msgid "Add Stream"
-msgstr "Afegeix un flux de dades"
+msgstr "Afegeix un corrent de dades"
 
 msgid "Add action"
-msgstr ""
+msgstr "Afegeix acció"
 
 msgid "Add another stream..."
 msgstr "Afegir un altre fluxe..."
 
 msgid "Add directory..."
-msgstr "Afegir directory..."
+msgstr "Afegir directori..."
 
 msgid "Add file..."
 msgstr "Afegir fitxer..."
@@ -164,10 +164,10 @@ msgid "Add to playlist"
 msgstr "Afegir a la llista de reproducció"
 
 msgid "Add wiimotedev action"
-msgstr ""
+msgstr "Afegir acció wiimotedev"
 
 msgid "Add..."
-msgstr "Afegir..."
+msgstr "Afegeix..."
 
 msgid "Added this month"
 msgstr "Afegit aquest mes"
@@ -335,7 +335,7 @@ msgid "Browse..."
 msgstr "Explora..."
 
 msgid "Buttons"
-msgstr ""
+msgstr "Botons"
 
 msgid "Change shortcut..."
 msgstr "Canviar combinació de tecles"
@@ -383,6 +383,8 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
+"El Clementine pot convertir automàticament la música que copieu en aquest "
+"dispositiu a un formant que pugui reproduir."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine pot mostrar un missatge quan canvia de pista"
@@ -432,16 +434,16 @@ msgid "Configure library..."
 msgstr "Configura la llibreria..."
 
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Connetar els comandaments remot Wii amb l'acció activar/desactivar"
 
 msgid "Connect device"
 msgstr "Connecta el dispositiu"
 
 msgid "Convert all music"
-msgstr ""
+msgstr "Converitr tota la música"
 
 msgid "Convert any music that the device can't play"
-msgstr ""
+msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
 msgid "Copy to device..."
 msgstr "Còpia al dispositiu..."
@@ -471,6 +473,8 @@ msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr ""
+"No s'ha pogut trobar un codificador per %1, comproveu si teniu els "
+"complements GStreamer adequat instal·lat"
 
 #, qt-format
 msgid "Couldn't load the last.fm radio station: %1"
@@ -556,7 +560,7 @@ msgid "Decrease volume"
 msgstr "Redueix el volum"
 
 msgid "Defaults"
-msgstr ""
+msgstr "Opcions per defecte"
 
 msgid "Delay between visualizations"
 msgstr "Retard entre visualitzacions"
@@ -601,7 +605,7 @@ msgid "Device Properties"
 msgstr "Propietats del dispositiu"
 
 msgid "Device name"
-msgstr ""
+msgstr "Nom de dispositiu"
 
 msgid "Device properties..."
 msgstr "Propietats del dispositiu..."
@@ -625,7 +629,7 @@ msgid "Display the on-screen-display"
 msgstr "Mostrar la indicació-a-pantalla"
 
 msgid "Do not convert any music"
-msgstr ""
+msgstr "No converteixis cap musica"
 
 msgid "Don't repeat"
 msgstr "No repetir"
@@ -684,7 +688,7 @@ msgid "Editing %n tracks"
 msgstr "Editant %n pistes"
 
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Habilitat suport remot Wii"
 
 msgid "Enable equalizer"
 msgstr "Habilitar l'equalitzador"
@@ -779,7 +783,7 @@ msgid "File extension"
 msgstr "Extensió del fitxer"
 
 msgid "File formats"
-msgstr ""
+msgstr "Format dels fitxers"
 
 msgid "File name"
 msgstr "Nom del fitxer"
@@ -803,19 +807,19 @@ msgid "Files to transcode"
 msgstr "Arxius per codificar"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Nom dels fitxers de sistema"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Número de sèrie dels fitxers de sistema"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Tipus de sistema de fitxers"
 
 msgid "First level"
 msgstr "Primer nivell"
 
 msgid "Flac"
-msgstr ""
+msgstr "FLAC"
 
 msgid "Forget device"
 msgstr "Oblidar dispositiu"
@@ -947,7 +951,7 @@ msgid "Increase volume"
 msgstr "Incrementa el volum"
 
 msgid "Information"
-msgstr ""
+msgstr "Informació"
 
 msgid "Insert..."
 msgstr "Insereix..."
@@ -1044,8 +1048,8 @@ msgstr "Usuari de Last.fm"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Deixar-ho en blanc per assignar el valor per defecte. Exemples : \"/dev/dsp"
-"\", \"front\", etc."
+"Deixar-ho en blanc per assignar el valor per defecte. Exemples : "
+"\"/dev/dsp\", \"front\", etc."
 
 msgid "Length"
 msgstr "Durada"
@@ -1078,7 +1082,7 @@ msgid "Loading MTP device"
 msgstr "Carregant el dispositiu MTP"
 
 msgid "Loading Windows Media device"
-msgstr ""
+msgstr "Carregant el dispositiu Windows Media"
 
 msgid "Loading iPod database"
 msgstr "Carregant la base de dades de l'iPod"
@@ -1105,7 +1109,7 @@ msgid "MP3"
 msgstr "MP3"
 
 msgid "MP4 AAC"
-msgstr ""
+msgstr "MP$ AAC"
 
 msgid "MPC"
 msgstr "MPC"
@@ -1162,7 +1166,8 @@ msgid "Music"
 msgstr "Música"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr ""
+"Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Biblioteca de Música"
@@ -1212,14 +1217,17 @@ msgstr ""
 msgid "None"
 msgstr "Cap"
 
+msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
 msgid "Not connected"
 msgstr "No connectat"
 
 msgid "Not enough content"
-msgstr ""
+msgstr "No hi ha suficient contingut"
 
 msgid "Not enough fans"
-msgstr ""
+msgstr "No hi ha suficients ventiladors"
 
 msgid "Not enough members"
 msgstr "No hi ha prous membres"
@@ -1227,11 +1235,17 @@ msgstr "No hi ha prous membres"
 msgid "Not enough neighbors"
 msgstr "No hi ha prous veïns"
 
+msgid "Not mounted - double click to mount"
+msgstr "No muntatm - fes doble click per muntar-lo"
+
 msgid "Notification type"
 msgstr "Tipus de notificació"
 
 msgid "Notifications"
 msgstr "Notificacions"
+
+msgid "Now Playing"
+msgstr "Ara s'està reproduint"
 
 msgid "OSD Preview"
 msgstr "Vista prèvia OSD"
@@ -1246,7 +1260,7 @@ msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
 msgid "Open device"
-msgstr ""
+msgstr "Obrir dispositiu"
 
 msgid "Open magnatune.com in browser"
 msgstr "Obre magnatune.com al navegador"
@@ -1321,7 +1335,7 @@ msgid "Play tag radio..."
 msgstr "Reproduix la radio de l'etiqueta..."
 
 msgid "Play the <n>th track in the playlist"
-msgstr ""
+msgstr "Escoltar la canço <n> de la llista de reproducció"
 
 msgid "Play/Pause"
 msgstr "Reprodueix/Pausa"
@@ -1360,10 +1374,10 @@ msgid "Preferences..."
 msgstr "Preferències..."
 
 msgid "Preferred audio format"
-msgstr ""
+msgstr "Format d'àudio preferit"
 
 msgid "Preferred format"
-msgstr ""
+msgstr "Format preferit"
 
 msgid "Preset:"
 msgstr "Preestablert:"
@@ -1376,7 +1390,7 @@ msgstr "Pulsa una tecla"
 
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "Pressionar una combinació de tecles per utilitzar el %1..."
 
 msgid "Pretty OSD options"
 msgstr "Opcions de l'OSD bonic"
@@ -1442,7 +1456,7 @@ msgid "Remove"
 msgstr "Suprimeix"
 
 msgid "Remove action"
-msgstr ""
+msgstr "Elimina acció"
 
 msgid "Remove folder"
 msgstr "Suprimeix carpeta"
@@ -1514,7 +1528,7 @@ msgid "Save preset"
 msgstr "Desa els valors"
 
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Salva aquest flux a la pestanya d'Internet"
 
 msgid "Scrobble tracks that I listen to"
 msgstr ""
@@ -1671,7 +1685,7 @@ msgstr "Inicia transcodificació"
 
 #, qt-format
 msgid "Starting %1"
-msgstr ""
+msgstr "Començarà %1"
 
 msgid "Starting..."
 msgstr "Iniciant..."
@@ -1680,7 +1694,7 @@ msgid "Stop"
 msgstr "Atura"
 
 msgid "Stop after"
-msgstr ""
+msgstr "Aturar desprès"
 
 msgid "Stop after this track"
 msgstr "Parar després d'aquesta pista"
@@ -1705,13 +1719,13 @@ msgstr ""
 
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "Escrit satisfactòriament %1"
 
 msgid "Super high (60 fps)"
 msgstr ""
 
 msgid "Supported formats"
-msgstr ""
+msgstr "Formats suportats"
 
 msgid "Tag"
 msgstr "Etiqueta"
@@ -1830,7 +1844,7 @@ msgid "Track"
 msgstr "Pista"
 
 msgid "Transcode Music"
-msgstr ""
+msgstr "Transcodificar Música"
 
 msgid "Transcoder Log"
 msgstr ""
@@ -1843,7 +1857,7 @@ msgid "TrueAudio"
 msgstr ""
 
 msgid "Turbine"
-msgstr ""
+msgstr "Turbina"
 
 msgid "URI"
 msgstr "URI"
@@ -1895,7 +1909,7 @@ msgid "Use Replay Gain metadata if it is available"
 msgstr ""
 
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Utilitza el comandament remot Wii"
 
 msgid "Use notifications to report Wii Remote status"
 msgstr ""
@@ -1945,7 +1959,7 @@ msgid "WAV"
 msgstr "WAV"
 
 msgid "Wav"
-msgstr ""
+msgstr "Wav"
 
 msgid "When Clementine starts"
 msgstr "Quan s'inicia Clementine"
@@ -1954,31 +1968,31 @@ msgid "WiFi MAC Address"
 msgstr "Adreça MAC de la WiFi"
 
 #, qt-format
-msgid "Wiiremote %1: actived"
-msgstr ""
+msgid "Wii Remote %1: actived"
+msgstr "Comandament remot Wii %1: activat"
 
 #, qt-format
-msgid "Wiiremote %1: connected"
-msgstr ""
+msgid "Wii Remote %1: connected"
+msgstr "Comandament remot Wii %1: connectat"
 
 #, qt-format
-msgid "Wiiremote %1: critical battery (%2%) "
-msgstr ""
+msgid "Wii Remote %1: critical battery (%2%) "
+msgstr "Comandament remot Wii %1: bateria crítica (%2%) "
 
 #, qt-format
-msgid "Wiiremote %1: disactived"
-msgstr ""
+msgid "Wii Remote %1: disactived"
+msgstr "Comandament remot Wii %1: desactivat"
 
 #, qt-format
-msgid "Wiiremote %1: disconnected"
-msgstr ""
+msgid "Wii Remote %1: disconnected"
+msgstr "Comandament remot Wii %1: desconnectat"
 
 #, qt-format
-msgid "Wiiremote %1: low battery (%2%)"
-msgstr ""
+msgid "Wii Remote %1: low battery (%2%)"
+msgstr "Comandament remot Wii %1: bateria baixa (%2%)"
 
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Audio Windows Media"
 
 msgid "Year"
 msgstr "Any"
@@ -1997,16 +2011,19 @@ msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a "
 "membership removes the messages at the end of each track."
 msgstr ""
+"Pots sentir cançons de Magnatune gratuïtament sense compte. Comprant una "
+"afiliació s'eliminaran els missatges al final de cada pista."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid ""
@@ -2014,6 +2031,9 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
+"Necessita llançar les Preferències del Sistema i activar \"<span style=\" "
+"font-style:italic;\">Habilita l'accés per dispositivos d'ajuda </ span>\", "
+"per utilitzar dreceres globals a Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Si canvies la llengua, tindràs que re-iniciar Clementine"

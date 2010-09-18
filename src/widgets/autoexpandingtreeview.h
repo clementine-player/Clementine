@@ -37,6 +37,8 @@ class AutoExpandingTreeView : public QTreeView {
   // QAbstractItemView
   void reset();
 
+  virtual bool CanRecursivelyExpand(const QModelIndex& index) const { return true; }
+
  private slots:
   void ItemExpanded(const QModelIndex& index);
 

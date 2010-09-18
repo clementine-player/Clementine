@@ -26,6 +26,7 @@
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 
+#include <QApplication>
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QMessageBox>
@@ -50,7 +51,10 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
   }
 
   // Draw the background
-  QStyledItemDelegate::paint(p, opt, QModelIndex());
+  const QStyleOptionViewItemV3* vopt = qstyleoption_cast<const QStyleOptionViewItemV3*>(&opt);
+  const QWidget* widget = vopt->widget;
+  QStyle* style = widget->style() ? widget->style() : QApplication::style();
+  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, p, widget);
 
   p->save();
 
@@ -96,6 +100,10 @@ void DeviceItemDelegate::paint(QPainter* p, const QStyleOptionViewItem& opt, con
     switch (state) {
       case DeviceManager::State_Remembered:
         status_text = tr("Not connected");
+        break;
+
+      case DeviceManager::State_NotMounted:
+        status_text = tr("Not mounted - double click to mount");
         break;
 
       case DeviceManager::State_NotConnected:
@@ -398,4 +406,9 @@ void DeviceView::DeleteFinished(const SongList& songs_with_errors) {
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
   // It deletes itself when the user closes it
+}
+
+bool DeviceView::CanRecursivelyExpand(const QModelIndex& index) const {
+  // Never expand devices
+  return index.parent().isValid();
 }

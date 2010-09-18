@@ -18,12 +18,12 @@
 #include "ui_wiimotedevshortcutgrabber.h"
 #include "wiimotedev/consts.h"
 
-WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, QWidget *parent)
+WiimotedevShortcutGrabber::WiimotedevShortcutGrabber(quint32 action, quint32 device, QWidget *parent)
  :QDialog(parent),
   pref_action_(action),
   ui_(new Ui_WiimotedevShortcutGrabber),
   config_(qobject_cast<WiimotedevShortcutsConfig*>(parent)),
-  wiimotedev_device_(1),
+  wiimotedev_device_(device),
   wiimotedev_buttons_(0),
   remember_wiimote_shifts_(0),
   remember_nunchuk_shifts_(0)

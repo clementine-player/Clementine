@@ -20,6 +20,7 @@
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
+#include <QDir>
 #include <QFile>
 #include <QtDebug>
 
@@ -109,7 +110,8 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
 
   // Copy the file
   GError* error = NULL;
-  itdb_cp_track_to_ipod(track, job.source_.toLocal8Bit().constData(), &error);
+  itdb_cp_track_to_ipod(track, QDir::toNativeSeparators(job.source_)
+                        .toLocal8Bit().constData(), &error);
   if (error) {
     qDebug() << "GPodDevice error:" << error->message;
     emit Error(QString::fromUtf8(error->message));
@@ -176,7 +178,6 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
   for (GList* tracks = db_->tracks ; tracks != NULL ; tracks = tracks->next) {
     Itdb_Track* t = static_cast<Itdb_Track*>(tracks->data);
 
-    qDebug() << ipod_filename << t->ipod_path;
     if (t->ipod_path == ipod_filename) {
       track = t;
       break;

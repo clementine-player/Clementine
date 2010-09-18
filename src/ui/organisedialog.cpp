@@ -99,21 +99,25 @@ void OrganiseDialog::SetDestinationModel(QAbstractItemModel *model, bool devices
   ui_->eject_after->setVisible(devices);
 }
 
-void OrganiseDialog::SetSongs(const SongList& songs) {
+int OrganiseDialog::SetSongs(const SongList& songs) {
   total_size_ = 0;
   filenames_.clear();
   preview_songs_.clear();
 
   foreach (const Song& song, songs) {
-    QUrl url(song.filename());
-    if (url.isEmpty())
+    const QString filename = song.filename();
+
+    if (filename.isEmpty())
       continue;
-    if (!url.scheme().isEmpty() && url.scheme() != "file")
-      continue;
+    if (filename.contains("://")) {
+      QUrl url(song.filename());
+      if (!url.scheme().isEmpty() && url.scheme() != "file")
+        continue;
+    }
 
     if (song.filesize() > 0)
       total_size_ += song.filesize();
-    filenames_ << url.toLocalFile();
+    filenames_ << filename;
 
     if (preview_songs_.count() < kNumberOfPreviews)
       preview_songs_ << song;
@@ -121,9 +125,11 @@ void OrganiseDialog::SetSongs(const SongList& songs) {
 
   ui_->free_space->set_additional_bytes(total_size_);
   UpdatePreviews();
+
+  return filenames_.count();
 }
 
-void OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
+int OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
   QStringList filenames;
 
   // Only add file:// URLs
@@ -133,10 +139,10 @@ void OrganiseDialog::SetUrls(const QList<QUrl> &urls, quint64 total_size) {
     filenames << url.toLocalFile();
   }
 
-  SetFilenames(filenames, total_size);
+  return SetFilenames(filenames, total_size);
 }
 
-void OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_size) {
+int OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_size) {
   filenames_ = filenames;
   preview_songs_.clear();
 
@@ -150,6 +156,8 @@ void OrganiseDialog::SetFilenames(const QStringList& filenames, quint64 total_si
   total_size_ = total_size;
 
   UpdatePreviews();
+
+  return filenames_.count();
 }
 
 void OrganiseDialog::LoadPreviewSongs(const QString& filename) {

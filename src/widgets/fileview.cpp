@@ -56,6 +56,7 @@ FileView::FileView(QWidget* parent)
   connect(ui_->list, SIGNAL(AddToPlaylist(QList<QUrl>)), SIGNAL(AddToPlaylist(QList<QUrl>)));
   connect(ui_->list, SIGNAL(CopyToLibrary(QList<QUrl>)), SIGNAL(CopyToLibrary(QList<QUrl>)));
   connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)), SIGNAL(MoveToLibrary(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(CopyToDevice(QList<QUrl>)), SIGNAL(CopyToDevice(QList<QUrl>)));
   connect(ui_->list, SIGNAL(Delete(QStringList)), SLOT(Delete(QStringList)));
 }
 
