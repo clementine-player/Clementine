@@ -354,3 +354,8 @@ void LibraryView::FilterReturnPressed() {
 
   emit doubleClicked(currentIndex());
 }
+
+bool LibraryView::CanRecursivelyExpand(const QModelIndex& index) const {
+  // Never expand devices
+  return index.parent().isValid();
+}

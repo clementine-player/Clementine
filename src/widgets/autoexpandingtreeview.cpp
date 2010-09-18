@@ -16,6 +16,8 @@
 
 #include "autoexpandingtreeview.h"
 
+#include <QtDebug>
+
 const int AutoExpandingTreeView::kRowsToShow = 50;
 
 AutoExpandingTreeView::AutoExpandingTreeView(QWidget *parent)
@@ -41,6 +43,9 @@ void AutoExpandingTreeView::RecursivelyExpand(const QModelIndex &index) {
 }
 
 bool AutoExpandingTreeView::RecursivelyExpand(const QModelIndex& index, int* count) {
+  if (!CanRecursivelyExpand(index))
+    return true;
+
   if (model()->canFetchMore(index))
     model()->fetchMore(index);
 
