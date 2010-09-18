@@ -34,8 +34,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     backend_(backend),
     dir_model_(new LibraryDirectoryModel(backend, this)),
-    artist_icon_(":/icons/22x22/x-clementine-artist"),
-    album_icon_(":/icons/22x22/x-clementine-album"),
+    artist_icon_(":/icons/22x22/x-clementine-artist.png"),
+    album_icon_(":/icons/22x22/x-clementine-album.png"),
     no_cover_icon_(":nocover.png")
 {
   root_->lazy_loaded = true;
