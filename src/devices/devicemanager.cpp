@@ -459,10 +459,10 @@ void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
     if (info.device_ && info.device_->lister() == lister)
       info.device_.reset();
 
-    emit dataChanged(index(i, 0), index(i, 0));
-
     if (!info.device_)
       emit DeviceDisconnected(i);
+
+    emit dataChanged(index(i, 0), index(i, 0));
   } else {
     // If this was the last lister for the device then remove it from the model
     for (int backend_index = 0 ; backend_index < info.backends_.count() ; ++backend_index) {
