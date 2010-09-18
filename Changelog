@@ -23,6 +23,7 @@ Version 0.5:
     * Show progress information for individual tracks when transcoding.
     * ALL GLORY TO THE HYPNOTOAD.
     * (Linux) Add an svg icon.
+    * (Mac) Show now playing information in the dock menu.
     * (Windows Vista and Windows 7) Add Clementine to the Default Programs menu.
     * (Windows Vista and Windows 7) Blur the background of the OSD.
 
@@ -37,6 +38,7 @@ Version 0.5:
     * Fix a crash when the "Last.fm" tree item was expanded.
     * Fix a bug that would create empty "Unknown" categories in the Library.
     * Fix a black visualisations window when using a non-English locale.
+    * Fix a crash when closing the visualisation window with the ESC key.
     * Detect symbolic links in the music library properly.
     * Pick gstreamer codecs automatically when transcoding, insteading of using
       a hardcoded list.
@@ -48,12 +50,18 @@ Version 0.5:
     * Filtering the playlist now focuses the currently playing song.
     * Filtering the playlist is now case-insensitive.
     * Load the "albumartist" tag from flac and ogg metadata.
+    * Ignore garbage iTunNORM comment fields in ID3v2 tags.
+    * Be sure to always enable the OK button in the settings dialog properly.
+    * Fix a bug that would prevent covers from loading in the cover manager.
     * (Linux) Make the commandline interface work even when not running an X
       server.
     * (Mac) Reduce the default font size to fit in with other OS X applications.
+    * (Mac) Use smooth scrolling in the playlist view.
+    * (Mac) Correctly load M3U files created by iTunes.
     * (Windows) Seed the random number generator properly so the same tracks
       don't get played over and over when using shuffle.
     * (Windows) Use \ instead of / in several places in the GUI.
+    * (Windows) Fix a crash when authenticating with Last.fm.
 
 
 
