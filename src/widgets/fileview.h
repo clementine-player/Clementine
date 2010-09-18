@@ -54,6 +54,7 @@ class FileView : public QWidget {
   void DoubleClicked(const QList<QUrl>& urls);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
+  void CopyToDevice(const QList<QUrl>& urls);
 
  private slots:
   void FileUp();

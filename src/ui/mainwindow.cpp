@@ -237,6 +237,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
   connect(ui_->file_view, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
   connect(ui_->file_view, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
+  connect(ui_->file_view, SIGNAL(CopyToDevice(QList<QUrl>)), SLOT(CopyFilesToDevice(QList<QUrl>)));
   ui_->file_view->SetTaskManager(task_manager_);
 
   // Action connections
@@ -1365,6 +1366,17 @@ void MainWindow::MoveFilesToLibrary(const QList<QUrl> &urls) {
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(false);
   organise_dialog_->show();
+}
+
+void MainWindow::CopyFilesToDevice(const QList<QUrl> &urls) {
+  organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
+  organise_dialog_->SetCopy(true);
+  if (organise_dialog_->SetUrls(urls))
+    organise_dialog_->show();
+  else {
+    QMessageBox::warning(this, tr("Error"),
+        tr("None of the selected songs were suitable for copying to a device"));
+  }
 }
 
 void MainWindow::PlaylistCopyToLibrary() {

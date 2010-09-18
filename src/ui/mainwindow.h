@@ -131,6 +131,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void CopyFilesToLibrary(const QList<QUrl>& urls);
   void MoveFilesToLibrary(const QList<QUrl>& urls);
+  void CopyFilesToDevice(const QList<QUrl>& urls);
 
   void LoadLibrarySongsToPlaylist(const SongList& songs);
   void AddLibrarySongsToPlaylist(const SongList& songs);
