@@ -407,3 +407,8 @@ void DeviceView::DeleteFinished(const SongList& songs_with_errors) {
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
   // It deletes itself when the user closes it
 }
+
+bool DeviceView::CanRecursivelyExpand(const QModelIndex& index) const {
+  // Never expand devices
+  return index.parent().isValid();
+}

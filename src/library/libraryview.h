@@ -72,9 +72,6 @@ class LibraryView : public AutoExpandingTreeView {
   void contextMenuEvent(QContextMenuEvent* e);
   void keyReleaseEvent(QKeyEvent* e);
 
-  // AutoExpandingTreeView
-  bool CanRecursivelyExpand(const QModelIndex& index) const;
-
  private slots:
   void Load();
   void AddToPlaylist();

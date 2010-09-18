@@ -77,6 +77,9 @@ private slots:
 
   void DeleteFinished(const SongList& songs_with_errors);
 
+  // AutoExpandingTreeView
+  bool CanRecursivelyExpand(const QModelIndex& index) const;
+
 private:
   QModelIndex MapToDevice(const QModelIndex& merged_model_index) const;
   QModelIndex MapToLibrary(const QModelIndex& merged_model_index) const;
