@@ -73,6 +73,8 @@ private:
   Result LoadLocal(const QString& filename, bool block = false);
   void LoadLocalDirectory(const QString& filename);
   void LoadPlaylist(ParserBase* parser, const QString& filename);
+  void LoadLocalDirectoryAndEmit(const QString& filename);
+  void LoadPlaylistAndEmit(ParserBase* parser, const QString& filename);
 
   void AddAsRawStream();
 

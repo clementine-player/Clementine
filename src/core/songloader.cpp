@@ -97,7 +97,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block) {
   // inside right away.
   if (QFileInfo(filename).isDir()) {
     if (!block) {
-      QtConcurrent::run(this, &SongLoader::LoadLocalDirectory, filename);
+      QtConcurrent::run(this, &SongLoader::LoadLocalDirectoryAndEmit, filename);
       return WillLoadAsync;
     } else {
       LoadLocalDirectory(filename);
@@ -124,7 +124,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block) {
 
     // It's a playlist!
     if (!block) {
-      QtConcurrent::run(this, &SongLoader::LoadPlaylist, parser, filename);
+      QtConcurrent::run(this, &SongLoader::LoadPlaylistAndEmit, parser, filename);
       return WillLoadAsync;
     } else {
       LoadPlaylist(parser, filename);
@@ -149,11 +149,15 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block) {
   return Success;
 }
 
+void SongLoader::LoadPlaylistAndEmit(ParserBase* parser, const QString& filename) {
+  LoadPlaylist(parser, filename);
+  emit LoadFinished(true);
+}
+
 void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
   songs_ = parser->Load(&file, QFileInfo(filename).path());
-  emit LoadFinished(true);
 }
 
 static bool CompareSongs(const Song& left, const Song& right) {
@@ -167,6 +171,11 @@ static bool CompareSongs(const Song& left, const Song& right) {
   return left.track() < right.track();
 }
 
+void SongLoader::LoadLocalDirectoryAndEmit(const QString& filename) {
+  LoadLocalDirectory(filename);
+  emit LoadFinished(true);
+}
+
 void SongLoader::LoadLocalDirectory(const QString& filename) {
   QDirIterator it(filename, QDir::Files | QDir::NoDotAndDotDot | QDir::Readable,
                   QDirIterator::Subdirectories);
@@ -177,8 +186,6 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
   }
 
   qStableSort(songs_.begin(), songs_.end(), CompareSongs);
-
-  emit LoadFinished(true);
 }
 
 void SongLoader::AddAsRawStream() {
