@@ -112,6 +112,10 @@ void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {
                this, SLOT(RowsRemoved(QModelIndex,int,int)));
     disconnect(sourceModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
                this, SLOT(DataChanged(QModelIndex,QModelIndex)));
+    disconnect(sourceModel(), SIGNAL(layoutAboutToBeChanged()),
+               this, SLOT(LayoutAboutToBeChanged()));
+    disconnect(sourceModel(), SIGNAL(layoutChanged()),
+               this, SLOT(LayoutChanged()));
   }
 
   QAbstractProxyModel::setSourceModel(source_model);
@@ -127,6 +131,10 @@ void MergedProxyModel::setSourceModel(QAbstractItemModel* source_model) {
           this, SLOT(RowsRemoved(QModelIndex,int,int)));
   connect(sourceModel(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           this, SLOT(DataChanged(QModelIndex,QModelIndex)));
+  connect(sourceModel(), SIGNAL(layoutAboutToBeChanged()),
+          this, SLOT(LayoutAboutToBeChanged()));
+  connect(sourceModel(), SIGNAL(layoutChanged()),
+          this, SLOT(LayoutChanged()));
 }
 
 void MergedProxyModel::SourceModelReset() {
@@ -417,4 +425,26 @@ QAbstractItemModel* MergedProxyModel::GetModel(const QModelIndex& source_index) 
 
 void MergedProxyModel::DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right) {
   emit dataChanged(mapFromSource(top_left), mapFromSource(bottom_right));
+}
+
+void MergedProxyModel::LayoutAboutToBeChanged() {
+  old_merge_points_.clear();
+  foreach (QAbstractItemModel* key, merge_points_.keys()) {
+    old_merge_points_[key] = merge_points_.value(key);
+  }
+}
+
+void MergedProxyModel::LayoutChanged() {
+  foreach (QAbstractItemModel* key, merge_points_.keys()) {
+    if (!old_merge_points_.contains(key))
+      continue;
+
+    const int old_row = old_merge_points_[key].row();
+    const int new_row = merge_points_[key].row();
+
+    if (old_row != new_row) {
+      reset();
+      return;
+    }
+  }
 }
