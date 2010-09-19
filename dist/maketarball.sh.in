@@ -2,7 +2,7 @@
 
 name=clementine
 version="@CLEMENTINE_VERSION@"
-deb_version="@CLEMENTINE_VERSION@"
+deb_version="@CLEMENTINE_DEB_VERSION@"
 root=$(cd "${0%/*}/.." && echo $PWD/${0##*/})
 root=`dirname "$root"`
 rootnoslash=`echo $root | sed "s/^\///"`
