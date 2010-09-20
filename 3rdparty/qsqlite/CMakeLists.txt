@@ -22,7 +22,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 add_definitions(-DQT_PLUGIN -DQT_NO_DEBUG)
 add_definitions(-DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS)
 
-add_library(qsqlite
+add_library(qsqlite STATIC
    ${SQLITE-SOURCES}
    ${SQLITE-SOURCES-MOC}
    ${SQLITE-WIN32-RESOURCES}
