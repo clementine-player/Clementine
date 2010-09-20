@@ -31,7 +31,8 @@ iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)
 
   lockdownd_client_t lockdown;
 
-  const char* label = QCoreApplication::applicationName().toUtf8().constData();
+  QByteArray label_ascii = QCoreApplication::applicationName().toAscii();
+  const char* label = label_ascii.constData();
   lockdownd_error_t lockdown_err =
       lockdownd_client_new_with_handshake(device_, &lockdown, label);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
@@ -74,7 +75,8 @@ T GetPListValue(plist_t node, F f) {
 
 QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QString& domain) {
   lockdownd_client_t lockdown;
-  const char* label = QCoreApplication::applicationName().toUtf8().constData();
+  QByteArray label_ascii = QCoreApplication::applicationName().toAscii();
+  const char* label = label_ascii.constData();
 
   lockdownd_error_t lockdown_err =
       lockdownd_client_new_with_handshake(device_, &lockdown, label);
@@ -84,12 +86,16 @@ QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QSt
   }
 
   plist_t node = NULL;
-  const char* d = domain.isEmpty() ? NULL : domain.toUtf8().constData();
-  lockdownd_get_value(lockdown, d, property.toUtf8().constData(), &node);
+  QByteArray domain_ascii = domain.toAscii();
+  const char* d = domain_ascii.isEmpty() ? NULL : domain_ascii.constData();
+  //const char* d = domain.isEmpty() ? NULL : "com.apple.disk_usage";
+  lockdownd_get_value(lockdown, d, property.toAscii().constData(), &node);
   lockdownd_client_free(lockdown);
 
-  if (!node)
+  if (!node) {
+    qWarning() << "get_value failed" << property << domain;
     return QVariant();
+  }
 
   switch (plist_get_node_type(node)) {
     case PLIST_BOOLEAN:
