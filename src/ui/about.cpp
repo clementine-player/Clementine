@@ -37,7 +37,7 @@ About::About(QWidget *parent)
 
   authors_ << Person("David Sansome", "me@davidsansome.com")
            << Person("John Maguire", "john.maguire@gmail.com");
-  thanks_to_ << Person("Mark Kretschmann", "markey@web.de")
+  thanks_to_ << Person("Mark Kretschmann", "kretschmann@kde.org")
              << Person("Max Howell", "max.howell@methylblue.com")
              << Person(QString::fromUtf8("Bartłomiej Burdukiewicz"), "dev.strikeu@gmail.com")
              << Person("Jakub Stachowski", "qbast@go2.pl")
