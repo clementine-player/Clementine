@@ -112,6 +112,10 @@ if(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
 
 # Optional bits
+option(ENABLE_LIBGPOD "iPod classic support" ON)
+option(ENABLE_IMOBILEDEVICE "iPod Touch, iPhone, iPad support" ON)
+option(ENABLE_LIBMTP "MTP support" ON)
+option(ENABLE_GIO "GIO backend" ON)
 option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 
@@ -119,21 +123,21 @@ if(NOT APPLE AND NOT WIN32)
   option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
 endif(NOT APPLE AND NOT WIN32)
 
-if(LIBGPOD_FOUND)
+if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
   set(HAVE_LIBGPOD ON)
-endif(LIBGPOD_FOUND)
+endif(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
 
-if(GIO_FOUND)
+if(ENABLE_GIO AND GIO_FOUND)
   set(HAVE_GIO ON)
-endif(GIO_FOUND)
+endif(ENABLE_GIO AND GIO_FOUND)
 
-if(IMOBILEDEVICE_FOUND AND PLIST_FOUND AND LIBGPOD_FOUND AND USBMUXD_FOUND)
+if(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_FOUND AND PLIST_FOUND AND HAVE_LIBGPOD AND USBMUXD_FOUND)
   set(HAVE_IMOBILEDEVICE ON)
-endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND AND LIBGPOD_FOUND AND USBMUXD_FOUND)
+endif(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_FOUND AND PLIST_FOUND AND HAVE_LIBGPOD AND USBMUXD_FOUND)
 
-if(LIBMTP_FOUND)
+if(ENABLE_LIBMTP AND LIBMTP_FOUND)
   set(HAVE_LIBMTP ON)
-endif(LIBMTP_FOUND)
+endif(ENABLE_LIBMTP AND LIBMTP_FOUND)
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
@@ -228,7 +232,7 @@ add_custom_target(uninstall
 # Show a summary of what we have enabled
 summary_add("devices: iPod classic support" HAVE_LIBGPOD)
 summary_add("devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
-summary_add("devices: MTP support" LIBMTP_FOUND)
+summary_add("devices: MTP support" HAVE_LIBMTP)
 summary_add("devices: GIO backend" HAVE_GIO)
 summary_add("Wiimote support" ENABLE_WIIMOTEDEV)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)

@@ -680,9 +680,9 @@ if(HAVE_IMOBILEDEVICE)
   link_directories(${USBMUXD_LIBRARY_DIRS})
 endif(HAVE_IMOBILEDEVICE)
 
-if(LIBMTP_FOUND)
+if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
-endif(LIBMTP_FOUND)
+endif(HAVE_LIBMTP)
 
 if (APPLE)
   target_link_libraries(clementine_lib

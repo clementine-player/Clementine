@@ -7,9 +7,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../src)
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
-if(LIBGPOD_FOUND)
+if(HAVE_LIBGPOD)
   include_directories(${LIBGPOD_INCLUDE_DIRS})
-endif(LIBGPOD_FOUND)
+endif(HAVE_LIBGPOD)
 
 set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest.cc
