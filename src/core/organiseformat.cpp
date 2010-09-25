@@ -26,6 +26,10 @@ const QStringList OrganiseFormat::kKnownTags = QStringList()
     << "composer" << "track" << "disc" << "bpm" << "year" << "genre"
     << "comment" << "length" << "bitrate" << "samplerate" << "extension";
 
+// From http://en.wikipedia.org/wiki/8.3_filename#Directory_table
+const char* OrganiseFormat::kInvalidFatCharacters = "\"*/\\:<>?|";
+const int OrganiseFormat::kInvalidFatCharactersCount = strlen(OrganiseFormat::kInvalidFatCharacters);
+
 const QRgb OrganiseFormat::SyntaxHighlighter::kValidTagColorLight = qRgb(64, 64, 255);
 const QRgb OrganiseFormat::SyntaxHighlighter::kInvalidTagColorLight = qRgb(255, 64, 64);
 const QRgb OrganiseFormat::SyntaxHighlighter::kBlockColorLight = qRgb(230, 230, 230);
@@ -152,9 +156,9 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
     value.prepend('0');
 
   // Replace characters that really shouldn't be in paths
-  value.replace('/', '_');
-  value.replace('\\', '_');
-  value.replace('?', '_');
+  for (int i=0 ; i<kInvalidFatCharactersCount ; ++i) {
+    value.replace(kInvalidFatCharacters[i], '_');
+  }
 
   return value;
 }

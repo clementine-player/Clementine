@@ -29,6 +29,8 @@ public:
   static const char* kTagPattern;
   static const char* kBlockPattern;
   static const QStringList kKnownTags;
+  static const char* kInvalidFatCharacters;
+  static const int kInvalidFatCharactersCount;
 
   QString format() const { return format_; }
   bool replace_non_ascii() const { return replace_non_ascii_; }
