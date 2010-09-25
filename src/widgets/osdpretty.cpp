@@ -36,7 +36,7 @@
 #endif
 
 #ifdef Q_OS_WIN32
-#include "qtwin.h"
+#  include "qtwin.h"
 #endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
