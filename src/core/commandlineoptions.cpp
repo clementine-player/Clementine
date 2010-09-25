@@ -226,7 +226,7 @@ bool CommandlineOptions::Parse() {
 
   // Get any filenames or URLs following the arguments
   for (int i=optind ; i<argc_ ; ++i) {
-    QString value = QString::fromLocal8Bit(argv_[i]);
+    QString value = QFile::decodeName(argv_[i]);
     if (value.contains("://"))
       urls_ << value;
     else
