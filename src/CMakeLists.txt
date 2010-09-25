@@ -6,7 +6,9 @@ set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall -Wno-sign-compare ${CMAKE_CXX_FL
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${SPARKLE})
 include_directories(../3rdparty/gmock/gtest/include)
-include_directories(../3rdparty/qtwin)
+if(WIN32)
+  include_directories(../3rdparty/qtwin)
+endif(WIN32)
 
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
@@ -653,7 +655,6 @@ add_library(clementine_lib STATIC
 add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
-  qtwin
   chardet
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
@@ -719,6 +720,7 @@ if (WIN32)
     ${ZLIB_LIBRARIES}
     ${MSWMDM_LIBRARIES}
     ${SAC_SHIM_LIBRARIES}
+    qtwin
   )
 endif (WIN32)
 

@@ -206,7 +206,9 @@ endif (USE_SYSTEM_QXT)
 
 # Subdirectories
 add_subdirectory(src)
-add_subdirectory(3rdparty/qtwin)
+if (WIN32)
+  add_subdirectory(3rdparty/qtwin)
+endif (WIN32)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)

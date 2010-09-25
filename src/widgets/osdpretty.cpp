@@ -17,7 +17,6 @@
 #include "osdpretty.h"
 #include "ui_osdpretty.h"
 
-#include "qtwin.h"
 
 #include <QColor>
 #include <QPainter>
@@ -34,6 +33,10 @@
 
 #ifdef Q_WS_X11
 #  include <QX11Info>
+#endif
+
+#ifdef Q_OS_WIN32
+#include "qtwin.h"
 #endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
@@ -297,8 +300,10 @@ void OSDPretty::Reposition() {
     setMask(mask);
   }
 
+#ifdef Q_OS_WIN32
   // On windows, enable blurbehind on the masked area
   QtWin::enableBlurBehindWindow(this, true, QRegion(mask));
+#endif
 }
 
 void OSDPretty::enterEvent(QEvent *) {
