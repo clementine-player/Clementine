@@ -223,7 +223,7 @@ void PlaylistManager::UpdateSummaryText() {
   int selected = 0;
 
   // Get the length of the selected tracks
-  foreach (const QItemSelectionRange& range, current_selection_) {
+  foreach (const QItemSelectionRange& range, playlists_[current_id()].selection) {
     if (!range.isValid())
       continue;
 
@@ -251,8 +251,8 @@ void PlaylistManager::UpdateSummaryText() {
   emit SummaryTextChanged(summary);
 }
 
-void PlaylistManager::SelectionChanged(const QItemSelection &selection) {
-  current_selection_ = selection;
+void PlaylistManager::SelectionChanged(const QItemSelection& selection) {
+  playlists_[current_id()].selection = selection;
   UpdateSummaryText();
 }
 

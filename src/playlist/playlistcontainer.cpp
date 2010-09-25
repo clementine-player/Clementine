@@ -158,6 +158,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   view()->setModel(playlist->proxy());
   view()->SetItemDelegates(manager_->library_backend());
   view()->SetPlaylist(playlist);
+  view()->selectionModel()->select(manager_->current_selection(), QItemSelectionModel::ClearAndSelect);
   playlist->IgnoreSorting(false);
 
   connect(view()->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),

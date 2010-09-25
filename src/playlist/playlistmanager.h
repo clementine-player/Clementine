@@ -47,6 +47,10 @@ public:
   Playlist* current() const { return playlist(current_id()); }
   Playlist* active() const { return playlist(active_id()); }
 
+  const QItemSelection& selection(int id) const { return playlists_[id].selection; }
+  const QItemSelection& current_selection() const { return selection(current_id()); }
+  const QItemSelection& active_selection() const { return selection(active_id()); }
+
   QString name(int index) const { return playlists_[index].name; }
 
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
@@ -109,6 +113,7 @@ private:
     Data(Playlist* _p = NULL, const QString& _name = QString()) : p(_p), name(_name) {}
     Playlist* p;
     QString name;
+    QItemSelection selection;
   };
 
   TaskManager* task_manager_;
@@ -116,8 +121,6 @@ private:
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
-
-  QItemSelection current_selection_;
 
   // key = id
   QMap<int, Data> playlists_;
