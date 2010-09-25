@@ -20,6 +20,8 @@ Requires:       libgpod
 # There must be a better way to do this
 %ifarch x86_64
 %define archthing ()(64bit)
+%else
+%define archthing
 %endif
 
 # GStreamer codec dependencies
