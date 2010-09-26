@@ -75,11 +75,14 @@ add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
-# Don't try to use Phonon if its include directory couldn't be found.
-# For some reason this works differently to the rest of Qt...
-if (NOT ${QT_PHONON_INCLUDE_DIR})
+# Don't try to use Phonon or webkit if their include directories couldn't be found.
+if (NOT QT_PHONON_INCLUDE_DIR)
   set (QT_USE_PHONON 0)
-endif (NOT ${QT_PHONON_INCLUDE_DIR})
+endif (NOT QT_PHONON_INCLUDE_DIR)
+
+if (NOT QT_QTWEBKIT_INCLUDE_DIR)
+  set (QT_USE_QTWEBKIT 0)
+endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
 include(${QT_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
