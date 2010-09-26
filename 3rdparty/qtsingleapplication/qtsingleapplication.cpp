@@ -145,6 +145,7 @@ void QtSingleApplication::sysInit(const QString &appId)
     peer = new QtLocalPeer(this, appId);
     connect(peer, SIGNAL(messageReceived(const QString&)), SIGNAL(messageReceived(const QString&)));
     connect(peer, SIGNAL(messageReceived(const QByteArray&)), SIGNAL(messageReceived(const QByteArray&)));
+    connect(peer, SIGNAL(messageReceived(const char*)), SIGNAL(messageReceived(const char*)));
 }
 
 
@@ -271,6 +272,11 @@ bool QtSingleApplication::sendMessage(const QByteArray &message, int timeout)
     return peer->sendMessage(message, timeout);
 }
 
+bool QtSingleApplication::sendMessage(const char* message, int timeout)
+{
+    return peer->sendMessage(message, timeout);
+}
+
 
 /*!
     Returns the application identifier. Two processes with the same
@@ -300,10 +306,12 @@ void QtSingleApplication::setActivationWindow(QWidget* aw, bool activateOnMessag
     if (activateOnMessage) {
         connect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
         connect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
+        connect(peer, SIGNAL(messageReceived(const char*)), this, SLOT(activateWindow()));
     }
     else {
         disconnect(peer, SIGNAL(messageReceived(const QString&)), this, SLOT(activateWindow()));
         disconnect(peer, SIGNAL(messageReceived(const QByteArray&)), this, SLOT(activateWindow()));
+        disconnect(peer, SIGNAL(messageReceived(const char*)), this, SLOT(activateWindow()));
     }
 }
 

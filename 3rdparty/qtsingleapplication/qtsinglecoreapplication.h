@@ -63,11 +63,13 @@ public:
 public Q_SLOTS:
     bool sendMessage(const QString &message, int timeout = 5000);
     bool sendMessage(const QByteArray &message, int timeout = 5000);
+    bool sendMessage(const char* message, int timeout = 5000);
 
 
 Q_SIGNALS:
     void messageReceived(const QString &message);
     void messageReceived(const QByteArray &message);
+    void messageReceived(const char* message);
 
 
 private:

@@ -140,6 +140,11 @@ bool QtLocalPeer::sendMessage(const QString &message, int timeout)
     return sendMessage(message.toUtf8(), timeout);
 }
 
+bool QtLocalPeer::sendMessage(const char* message, int timeout)
+{
+    return sendMessage(QByteArray(message), timeout);
+}
+
 bool QtLocalPeer::sendMessage(const QByteArray &message, int timeout)
 {
     if (!isClient())

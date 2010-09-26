@@ -60,12 +60,14 @@ public:
     bool isClient();
     bool sendMessage(const QString &message, int timeout);
     bool sendMessage(const QByteArray &message, int timeout);
+    bool sendMessage(const char* message, int timeout);
     QString applicationId() const
         { return id; }
 
 Q_SIGNALS:
     void messageReceived(const QString &message);
     void messageReceived(const QByteArray &message);
+    void messageReceived(const char* message);
 
 protected Q_SLOTS:
     void receiveConnection();
