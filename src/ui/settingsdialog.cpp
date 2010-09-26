@@ -53,6 +53,7 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
   // Icons
   ui_->list->item(Page_Playback)->setIcon(IconLoader::Load("media-playback-start"));
+  ui_->list->item(Page_SongInformation)->setIcon(IconLoader::Load("view-media-lyrics"));
   ui_->list->item(Page_GlobalShortcuts)->setIcon(IconLoader::Load("input-keyboard"));
   ui_->list->item(Page_Notifications)->setIcon(IconLoader::Load("help-hint"));
   ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
@@ -174,6 +175,10 @@ void SettingsDialog::SetGlobalShortcutManager(GlobalShortcuts *manager) {
   ui_->global_shortcuts->SetManager(manager);
 }
 
+void SettingsDialog::SetLyricFetcher(const LyricFetcher* fetcher) {
+  ui_->lyric_settings->set_fetcher(fetcher);
+}
+
 void SettingsDialog::LastFMValidationComplete(bool success) {
   ui_->buttonBox->setEnabled(true);
 
@@ -231,6 +236,10 @@ void SettingsDialog::accept() {
   s.endGroup();
 #endif
 
+  // Lyrics
+  ui_->lyric_settings->Save();
+
+  // Wii remotes
 #ifdef ENABLE_WIIMOTEDEV
   s.beginGroup(WiimotedevShortcuts::kActionsGroup);
   s.remove("");
@@ -316,6 +325,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
   else
     ui_->language->setCurrentIndex(ui_->language->findText(name));
   s.endGroup();
+
+  // Lyrics
+  ui_->lyric_settings->Load();
 
   // Last.fm
   ui_->lastfm->Load();

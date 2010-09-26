@@ -18,6 +18,7 @@
 
 LyricProvider::LyricProvider(NetworkAccessManager* network, QObject* parent)
   : QObject(parent),
-    network_(network)
+    network_(network),
+    enabled_(true)
 {
 }

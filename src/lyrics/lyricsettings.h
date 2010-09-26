@@ -14,38 +14,40 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LYRICPROVIDER_H
-#define LYRICPROVIDER_H
+#ifndef LYRICSETTINGS_H
+#define LYRICSETTINGS_H
 
-#include <QObject>
+#include <QWidget>
 
-#include "core/song.h"
+class LyricFetcher;
+class Ui_LyricSettings;
 
-class NetworkAccessManager;
+class QListWidgetItem;
 
-class LyricProvider : public QObject {
+
+class LyricSettings : public QWidget {
   Q_OBJECT
 
 public:
-  LyricProvider(NetworkAccessManager* network, QObject* parent = 0);
+  LyricSettings(QWidget *parent = 0);
+  ~LyricSettings();
 
-  struct Result {
-    Result() : valid(false) {}
+  void set_fetcher(const LyricFetcher* fetcher) { fetcher_ = fetcher; }
 
-    bool valid;
-    QString title;
-    QString content;
-  };
+  void Load();
+  void Save();
 
-  bool is_enabled() const { return enabled_; }
-  void set_enabled(bool enabled) { enabled_ = enabled; }
+private slots:
+  void MoveUp();
+  void MoveDown();
+  void Move(int d);
 
-  virtual QString name() const = 0;
-  virtual Result Search(const Song& metadata) const = 0;
+  void CurrentItemChanged(QListWidgetItem* item);
+  void ItemChanged(QListWidgetItem* item);
 
-protected:
-  NetworkAccessManager* network_;
-  bool enabled_;
+private:
+  Ui_LyricSettings* ui_;
+  const LyricFetcher* fetcher_;
 };
 
-#endif // LYRICPROVIDER_H
+#endif // LYRICSETTINGS_H

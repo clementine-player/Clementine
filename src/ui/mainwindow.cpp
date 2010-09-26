@@ -34,6 +34,7 @@
 #include "library/libraryconfig.h"
 #include "library/librarydirectorymodel.h"
 #include "library/library.h"
+#include "lyrics/lyricfetcher.h"
 #include "lyrics/lyricview.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
@@ -1470,6 +1471,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
 #endif
 
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
+  settings_dialog_->SetLyricFetcher(ui_->lyrics_view->fetcher());
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
@@ -1479,6 +1481,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->lyrics_view->fetcher(), SLOT(ReloadSettings()));
 #ifdef ENABLE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));

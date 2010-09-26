@@ -86,6 +86,7 @@ set(SOURCES
   lyrics/htmlscraper.cpp
   lyrics/lyricfetcher.cpp
   lyrics/lyricprovider.cpp
+  lyrics/lyricsettings.cpp
   lyrics/lyricview.cpp
   lyrics/ultimatelyricsreader.cpp
 
@@ -219,6 +220,7 @@ set(HEADERS
   lyrics/htmlscraper.h
   lyrics/lyricfetcher.h
   lyrics/lyricprovider.h
+  lyrics/lyricsettings.h
   lyrics/lyricview.h
   lyrics/ultimatelyricsreader.h
 
@@ -304,6 +306,7 @@ set(UI
   library/libraryconfig.ui
   library/libraryfilterwidget.ui
 
+  lyrics/lyricsettings.ui
   lyrics/lyricview.ui
 
   playlist/playlistcontainer.ui

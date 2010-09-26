@@ -34,7 +34,14 @@ public:
   LyricFetcher(NetworkAccessManager* network, QObject* parent = 0);
   ~LyricFetcher();
 
+  static const char* kSettingsGroup;
+
+  QList<LyricProvider*> providers() const { return providers_; }
+
   int SearchAsync(const Song& metadata);
+
+public slots:
+  void ReloadSettings();
 
 signals:
   void SearchProgress(int id, const QString& provider);
@@ -45,6 +52,7 @@ private slots:
 
 private:
   void DoSearch(const Song& metadata, int id);
+  LyricProvider* ProviderByName(const QString& name) const;
 
 private:
   NetworkAccessManager* network_;

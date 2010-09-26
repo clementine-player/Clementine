@@ -33,6 +33,7 @@ public:
   ~LyricView();
 
   void set_network(NetworkAccessManager* network);
+  LyricFetcher* fetcher() const { return fetcher_; }
 
 public slots:
   void SongChanged(const Song& metadata);
