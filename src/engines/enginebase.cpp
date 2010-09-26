@@ -78,3 +78,9 @@ void Engine::Base::EmitAboutToEnd() {
 int Engine::Base::AddBackgroundStream(const QUrl& url) {
   return -1;
 }
+
+bool Engine::Base::Play(const QUrl& u, TrackChangeType c) {
+  if (!Load(u, c))
+    return false;
+  return Play();
+}

@@ -61,7 +61,7 @@ class Base : public QObject, boost::noncopyable {
 
   // Helpers
   virtual bool Load(const QUrl &url, TrackChangeType change);
-  bool Play(const QUrl &u, TrackChangeType c) { return Load(u, c) && Play(); }
+  bool Play(const QUrl &u, TrackChangeType c);
   void SetVolume( uint value );
 
 

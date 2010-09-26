@@ -496,6 +496,9 @@ void GstEngine::StartFadeout() {
 bool GstEngine::Play( uint offset ) {
   EnsureInitialised();
 
+  if (!current_pipeline_)
+    return false;
+
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
   BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
       new BoundFutureWatcher<GstStateChangeReturn, uint>(offset, this);
