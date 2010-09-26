@@ -14,45 +14,38 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LYRICFETCHER_H
-#define LYRICFETCHER_H
-
-#include <QObject>
-
-#include <boost/scoped_ptr.hpp>
+#ifndef LYRICVIEW_H
+#define LYRICVIEW_H
 
 #include "core/song.h"
 
-class LyricProvider;
-class NetworkAccessManager;
-class UltimateLyricsReader;
+#include <QWidget>
 
-class LyricFetcher : public QObject {
+class LyricFetcher;
+class NetworkAccessManager;
+class Ui_LyricView;
+
+class LyricView : public QWidget {
   Q_OBJECT
 
 public:
-  LyricFetcher(NetworkAccessManager* network, QObject* parent = 0);
-  ~LyricFetcher();
+  LyricView(QWidget* parent = 0);
+  ~LyricView();
 
-  int SearchAsync(const Song& metadata);
+  void set_network(NetworkAccessManager* network);
 
-signals:
-  void SearchProgress(int id, const QString& provider);
-  void SearchResult(int id, bool success, const QString& title, const QString& content);
+public slots:
+  void SongChanged(const Song& metadata);
 
 private slots:
-  void UltimateLyricsParsed();
+  void SearchProgress(int id, const QString& provider);
+  void SearchFinished(int id, bool success, const QString& title, const QString& content);
 
 private:
-  void DoSearch(const Song& metadata, int id);
+  Ui_LyricView* ui_;
 
-private:
-  NetworkAccessManager* network_;
-
-  int next_id_;
-  QList<LyricProvider*> providers_;
-
-  boost::scoped_ptr<UltimateLyricsReader> ultimate_reader_;
+  LyricFetcher* fetcher_;
+  int current_request_id_;
 };
 
-#endif // LYRICFETCHER_H
+#endif // LYRICVIEW_H

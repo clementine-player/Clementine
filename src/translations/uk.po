@@ -934,8 +934,8 @@ msgstr "Ігнорувати «The» в іменах виконавців"
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
-"Зображення (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-"*.tiff)"
+"Зображення (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+"tiff)"
 
 msgid "Include album art in the notification"
 msgstr "Показувати обкладинку в повідомлені"
@@ -1099,6 +1099,9 @@ msgstr "Низька (15 к/с)"
 msgid "Low (256x256)"
 msgstr "Низька (256x256)"
 
+msgid "Lyrics"
+msgstr ""
+
 msgid "MP3"
 msgstr "MP3"
 
@@ -1160,8 +1163,7 @@ msgid "Music"
 msgstr "Музика"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Музика (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Музика (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Фонотека"
@@ -1201,6 +1203,9 @@ msgstr "Наступна доріжка"
 
 msgid "No analyzer"
 msgstr "Без аналізатора"
+
+msgid "No lyrics could be found"
+msgstr ""
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
@@ -1536,6 +1541,13 @@ msgstr "Пошук на Magnatune"
 msgid "Search for album covers..."
 msgstr "Пошук обкладинок альбомів..."
 
+#, qt-format
+msgid "Searching %1..."
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
 msgid "Second level"
 msgstr "Другий рівень"
 
@@ -1796,8 +1808,7 @@ msgstr "Цей пристрів не працюватиме як слід"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
-"Це пристрій MTP, але ви скомпілювали Clementine без підтримки libmtp."
+msgstr "Це пристрій MTP, але ви скомпілювали Clementine без підтримки libmtp."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
@@ -2006,18 +2017,17 @@ msgstr ""
 "Набуття членства дає змогу вилучати повідомлення в кінці кожної композиції."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
-"Ви можете вільно скроббити доріжки, але лише <span style=\" font-"
-"weight:600;\">платні передплатники</span> можуть слухати потокове радіо "
-"Last.fm з Clementine."
+"Ви можете вільно скроббити доріжки, але лише <span style=\" font-weight:600;"
+"\">платні передплатники</span> можуть слухати потокове радіо Last.fm з "
+"Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 "Можете використовувати Wii Remote для віддаленого керування Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">Детальніше, на сторінці "
@@ -2029,9 +2039,8 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Потрібно запустити «Системні налаштування» та увімкнути параметр \"<span "
-"style=\" font-style:italic;\">Увімкнути доступ для допоміжних "
-"пристроїв</span>\", щоб використовувати глобальні комбінації клавіш в "
-"Clementine."
+"style=\" font-style:italic;\">Увімкнути доступ для допоміжних пристроїв</"
+"span>\", щоб використовувати глобальні комбінації клавіш в Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Потрібно перезапустити Clementine, щоб змінити мову."
@@ -2191,26 +2200,20 @@ msgstr "доріжка %1"
 #~ msgid "Use Wii remote"
 #~ msgstr "Використовувати Wii remote"
 
-#, qt-format
 #~ msgid "Wiiremote %1: disconnected"
 #~ msgstr "Wiiremote %1: роз’єднано"
 
-#, qt-format
 #~ msgid "Wiiremote %1: low battery (%2%)"
 #~ msgstr "Wiiremote %1: низький заряд акумулятора (%2%)"
 
-#, qt-format
 #~ msgid "Wiiremote %1: critical battery (%2%) "
 #~ msgstr "Wiiremote %1: критичний заряд акумулятора (%2%) "
 
-#, qt-format
 #~ msgid "Wiiremote %1: disactived"
 #~ msgstr "Wiiremote %1: деактивовано"
 
-#, qt-format
 #~ msgid "Wiiremote %1: actived"
 #~ msgstr "Wiiremote %1: активовано"
 
-#, qt-format
 #~ msgid "Wiiremote %1: connected"
 #~ msgstr "Wiiremote %1: з’єднано"

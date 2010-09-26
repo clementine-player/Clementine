@@ -42,7 +42,6 @@ class ErrorDialog;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
-class LyricFetcher;
 class MultiLoadingIndicator;
 class NetworkAccessManager;
 class OrganiseDialog;
@@ -184,9 +183,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
-  // TODO: Move to the UI class
-  void FetchLyrics(const Song& song);
-
  private:
   void SaveGeometry();
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
@@ -213,7 +209,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
-  LyricFetcher* lyric_fetcher_;
 
   DeviceManager* devices_;
 

@@ -86,6 +86,7 @@ set(SOURCES
   lyrics/htmlscraper.cpp
   lyrics/lyricfetcher.cpp
   lyrics/lyricprovider.cpp
+  lyrics/lyricview.cpp
   lyrics/ultimatelyricsreader.cpp
 
   playlist/playlist.cpp
@@ -150,6 +151,7 @@ set(SOURCES
 
   widgets/autoexpandingtreeview.cpp
   widgets/busyindicator.cpp
+  widgets/elidedlabel.cpp
   widgets/equalizerslider.cpp
   widgets/errordialog.cpp
   widgets/fileview.cpp
@@ -217,6 +219,7 @@ set(HEADERS
   lyrics/htmlscraper.h
   lyrics/lyricfetcher.h
   lyrics/lyricprovider.h
+  lyrics/lyricview.h
   lyrics/ultimatelyricsreader.h
 
   playlist/playlist.h
@@ -274,6 +277,7 @@ set(HEADERS
 
   widgets/autoexpandingtreeview.h
   widgets/busyindicator.h
+  widgets/elidedlabel.h
   widgets/equalizerslider.h
   widgets/errordialog.h
   widgets/fileview.h
@@ -299,6 +303,8 @@ set(UI
   library/groupbydialog.ui
   library/libraryconfig.ui
   library/libraryfilterwidget.ui
+
+  lyrics/lyricview.ui
 
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui

@@ -39,6 +39,7 @@ LyricFetcher::LyricFetcher(NetworkAccessManager* network, QObject* parent)
 }
 
 LyricFetcher::~LyricFetcher() {
+  qDeleteAll(providers_);
 }
 
 void LyricFetcher::UltimateLyricsParsed() {
@@ -61,13 +62,12 @@ int LyricFetcher::SearchAsync(const Song& metadata) {
 
 void LyricFetcher::DoSearch(const Song& metadata, int id) {
   foreach (LyricProvider* provider, providers_) {
-    qDebug() << "Searching" << metadata.title() << "with" << provider->name();
+    emit SearchProgress(id, provider->name());
 
     LyricProvider::Result result = provider->Search(metadata);
     if (result.valid) {
-      qDebug() << "Content" << result.content;
       emit SearchResult(id, true, result.title, result.content);
-      //return;
+      return;
     }
   }
 
