@@ -372,8 +372,16 @@ else (LINGUAS STREQUAL "All")
 endif (LINGUAS STREQUAL "All")
 
 # Engines
-set(GST_ENGINE_SRC engines/gstengine.cpp engines/gstenginepipeline.cpp)
-set(GST_ENGINE_MOC engines/gstengine.h engines/gstenginepipeline.h)
+set(GST_ENGINE_SRC
+  engines/gstengine.cpp
+  engines/gstenginepipeline.cpp
+  engines/gstelementdeleter.cpp
+)
+set(GST_ENGINE_MOC
+  engines/gstengine.h
+  engines/gstenginepipeline.h
+  engines/gstelementdeleter.h
+)
 set(GST_ENGINE_LIB GSTREAMER GSTREAMER_BASE)
 set(XINE_ENGINE_SRC engines/xine-engine.cpp engines/xine-scope.c)
 set(XINE_ENGINE_MOC engines/xine-engine.h)

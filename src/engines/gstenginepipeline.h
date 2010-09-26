@@ -29,6 +29,7 @@
 
 #include "engine_fwd.h"
 
+class GstElementDeleter;
 class GstEngine;
 class BufferConsumer;
 
@@ -99,7 +100,6 @@ class GstEnginePipeline : public QObject {
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
-  static bool StopUriDecodeBin(gpointer bin);
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
   void ElementMessageReceived(GstMessage*);
@@ -121,6 +121,8 @@ class GstEnginePipeline : public QObject {
   static const int kFaderFudgeMsec;
   static const int kEqBandCount;
   static const int kEqBandFrequencies[];
+
+  static GstElementDeleter* sElementDeleter;
 
   GstEngine* engine_;
 

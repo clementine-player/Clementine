@@ -16,6 +16,7 @@
 
 #include <limits>
 
+#include "gstelementdeleter.h"
 #include "gstenginepipeline.h"
 #include "gstengine.h"
 #include "bufferconsumer.h"
@@ -29,6 +30,9 @@ const int GstEnginePipeline::kFaderFudgeMsec = 2000;
 const int GstEnginePipeline::kEqBandCount = 10;
 const int GstEnginePipeline::kEqBandFrequencies[] = {
   60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
+
+GstElementDeleter* GstEnginePipeline::sElementDeleter = NULL;
+
 
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
@@ -59,6 +63,10 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     audioscale_(NULL),
     audiosink_(NULL)
 {
+  if (!sElementDeleter) {
+    sElementDeleter = new GstElementDeleter;
+  }
+
   for (int i=0 ; i<kEqBandCount ; ++i)
     eq_band_gains_ << 0;
 }
@@ -76,11 +84,6 @@ void GstEnginePipeline::set_replaygain(bool enabled, int mode, float preamp,
   rg_compression_ = compression;
 }
 
-bool GstEnginePipeline::StopUriDecodeBin(gpointer bin) {
-  gst_element_set_state(GST_ELEMENT(bin), GST_STATE_NULL);
-  return false; // So it doesn't get called again
-}
-
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
 
@@ -88,8 +91,8 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (uridecodebin_) {
     gst_bin_remove(GST_BIN(pipeline_), uridecodebin_);
 
-    // Note that the caller to this function MUST schedule StopUriDecodeBin in
-    // the main thread on the old bin.
+    // Note that the caller to this function MUST schedule the old bin for
+    // deletion in the main thread
   }
 
   uridecodebin_ = new_bin;
@@ -426,7 +429,7 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
 
     // This has to happen *after* the gst_element_set_state on the new bin to
     // fix an occasional race condition deadlock.
-    g_idle_add(GSourceFunc(StopUriDecodeBin), old_decode_bin);
+    sElementDeleter->DeleteElementLater(old_decode_bin);
 
     instance->ignore_tags_ = false;
   }

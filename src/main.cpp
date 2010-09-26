@@ -54,7 +54,7 @@
 #endif
 
 #ifdef HAVE_GSTREAMER
-#  include <gst/gstbuffer.h>
+#  include <gst/gst.h>
    class GstEnginePipeline;
 #endif
 
@@ -125,6 +125,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef HAVE_GSTREAMER
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
+  qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
 #endif
 
