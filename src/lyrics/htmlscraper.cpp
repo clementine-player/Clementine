@@ -42,14 +42,14 @@ LyricProvider::Result HtmlScraper::Search(const Song& metadata) const {
 
   // Fill in fields in the URL
   QString url_text(url_);
-  DoUrlReplace(&url_text, "{artist}", metadata.artist().toLower());
-  DoUrlReplace(&url_text, "{album}",  metadata.album().toLower());
-  DoUrlReplace(&url_text, "{title}",  metadata.title().toLower());
-  DoUrlReplace(&url_text, "{Artist}", metadata.artist());
-  DoUrlReplace(&url_text, "{Album}",  metadata.album());
-  DoUrlReplace(&url_text, "{Title}",  metadata.title());
-  DoUrlReplace(&url_text, "{Title2}", TitleCase(metadata.title()));
-  DoUrlReplace(&url_text, "{a}",      FirstChar(metadata.artist()));
+  DoUrlReplace("{artist}", metadata.artist().toLower(),  &url_text);
+  DoUrlReplace("{album}",  metadata.album().toLower(),   &url_text);
+  DoUrlReplace("{title}",  metadata.title().toLower(),   &url_text);
+  DoUrlReplace("{Artist}", metadata.artist(),            &url_text);
+  DoUrlReplace("{Album}",  metadata.album(),             &url_text);
+  DoUrlReplace("{Title}",  metadata.title(),             &url_text);
+  DoUrlReplace("{Title2}", TitleCase(metadata.title()),  &url_text);
+  DoUrlReplace("{a}",      FirstChar(metadata.artist()), &url_text);
 
   QUrl url(url_text);
 
@@ -66,16 +66,16 @@ LyricProvider::Result HtmlScraper::Search(const Song& metadata) const {
       return ret;
 
     QVariant redirect_target = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-    if (redirect_target.isValid()) {
-      QUrl target = redirect_target.toUrl();
-      if (target.scheme().isEmpty() || target.host().isEmpty()) {
-        QString path = target.path();
-        target = url;
-        target.setPath(path);
-      }
-      url = target;
-    } else
+    if (!redirect_target.isValid())
       break;
+
+    QUrl target = redirect_target.toUrl();
+    if (target.scheme().isEmpty() || target.host().isEmpty()) {
+      QString path = target.path();
+      target = url;
+      target.setPath(path);
+    }
+    url = target;
   }
 
   const QString original_content = codec->toUnicode(reply->readAll());
@@ -116,7 +116,7 @@ void HtmlScraper::ApplyExtractRule(const Rule& rule, QString* content) const {
 }
 
 QString HtmlScraper::ExtractXmlTag(const QString& source, const QString& tag) {
-  QRegExp re("<(\\w+).*>");
+  QRegExp re("<(\\w+).*>"); // ಠ_ಠ
   if (re.indexIn(tag) == -1)
     return QString();
 
@@ -147,7 +147,7 @@ void HtmlScraper::ApplyExcludeRule(const Rule& rule, QString* content) const {
 }
 
 QString HtmlScraper::ExcludeXmlTag(const QString& source, const QString& tag) {
-  QRegExp re("<(\\w+).*>");
+  QRegExp re("<(\\w+).*>"); // ಠ_ಠ
   if (re.indexIn(tag) == -1)
     return source;
 
@@ -180,8 +180,8 @@ QString HtmlScraper::TitleCase(const QString& text) {
   return text[0].toUpper() + text.right(text.length() - 1).toLower();
 }
 
-void HtmlScraper::DoUrlReplace(QString* url, const QString& tag,
-                               const QString& value) const {
+void HtmlScraper::DoUrlReplace(const QString& tag, const QString& value,
+                               QString* url) const {
   if (!url->contains(tag))
     return;
 

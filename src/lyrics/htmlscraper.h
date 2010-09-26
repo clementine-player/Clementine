@@ -60,7 +60,7 @@ private:
   static QString Exclude(const QString& source, const QString& begin, const QString& end);
   static QString FirstChar(const QString& text);
   static QString TitleCase(const QString& text);
-  void DoUrlReplace(QString* url, const QString& tag, const QString& value) const;
+  void DoUrlReplace(const QString& tag, const QString& value, QString* url) const;
 
 private:
   QString name_;
