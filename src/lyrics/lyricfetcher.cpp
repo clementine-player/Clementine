@@ -56,7 +56,6 @@ void LyricFetcher::ReloadSettings() {
   if (saved_order.isNull()) {
     // Hardcoded default order
     ordered_providers << ProviderByName("lyrics.wikia.com")
-                      << ProviderByName("lyricsplugin.com")
                       << ProviderByName("lyricstime.com")
                       << ProviderByName("lyricsreg.com")
                       << ProviderByName("lyricsmania.com")
@@ -131,6 +130,9 @@ int LyricFetcher::SearchAsync(const Song& metadata) {
 
 void LyricFetcher::DoSearch(const Song& metadata, int id) {
   foreach (LyricProvider* provider, providers_) {
+    if (!provider->is_enabled())
+      continue;
+
     emit SearchProgress(id, provider->name());
 
     LyricProvider::Result result = provider->Search(metadata);
