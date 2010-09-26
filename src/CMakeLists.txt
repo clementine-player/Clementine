@@ -83,6 +83,11 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
+  lyrics/htmlscraper.cpp
+  lyrics/lyricfetcher.cpp
+  lyrics/lyricprovider.cpp
+  lyrics/ultimatelyricsreader.cpp
+
   playlist/playlist.cpp
   playlist/playlistbackend.cpp
   playlist/playlistcontainer.cpp
@@ -208,6 +213,11 @@ set(HEADERS
   library/librarymodel.h
   library/libraryview.h
   library/librarywatcher.h
+
+  lyrics/htmlscraper.h
+  lyrics/lyricfetcher.h
+  lyrics/lyricprovider.h
+  lyrics/ultimatelyricsreader.h
 
   playlist/playlist.h
   playlist/playlistbackend.h

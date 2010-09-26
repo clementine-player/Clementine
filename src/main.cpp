@@ -122,6 +122,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
+  qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
 
 #ifdef HAVE_GSTREAMER
   qRegisterMetaType<GstBuffer*>("GstBuffer*");

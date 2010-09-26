@@ -34,6 +34,7 @@
 #include "library/libraryconfig.h"
 #include "library/librarydirectorymodel.h"
 #include "library/library.h"
+#include "lyrics/lyricfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -126,6 +127,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     player_(NULL),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
+    lyric_fetcher_(new LyricFetcher(network, this)),
     devices_(NULL),
     settings_dialog_(NULL),
     cover_manager_(NULL),
@@ -325,6 +327,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), this, SLOT(FetchLyrics(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
@@ -1548,4 +1551,8 @@ void MainWindow::ShowVisualisations() {
 
   visualisation_->show();
 #endif // ENABLE_VISUALISATIONS
+}
+
+void MainWindow::FetchLyrics(const Song& song) {
+  lyric_fetcher_->SearchAsync(song);
 }

@@ -31,16 +31,7 @@ void NetworkAccessManager::Get(const QUrl &url, QObject *receiver,
 
 void NetworkAccessManager::RunGet(const QUrl &url, QObject *receiver,
                                   const char *slot, quint64 id, bool force_cache) {
-  QNetworkRequest req(url);
-  req.setRawHeader("User-Agent", QString("%1 %2").arg(
-      QCoreApplication::applicationName(),
-      QCoreApplication::applicationVersion()).toUtf8());
-
-  if (force_cache) {
-    req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                     QNetworkRequest::PreferCache);
-  }
-
+  QNetworkRequest req = CreateRequest(url, force_cache);
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
 
@@ -52,6 +43,19 @@ void NetworkAccessManager::RunGet(const QUrl &url, QObject *receiver,
   pending_replies_.insert(reply, r);
 }
 
+QNetworkRequest NetworkAccessManager::CreateRequest(const QUrl& url, bool force_cache) {
+  QNetworkRequest req(url);
+  req.setRawHeader("User-Agent", QString("%1 %2").arg(
+      QCoreApplication::applicationName(),
+      QCoreApplication::applicationVersion()).toUtf8());
+
+  if (force_cache) {
+    req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                     QNetworkRequest::PreferCache);
+  }
+  return req;
+}
+
 void NetworkAccessManager::RequestFinished() {
   QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
   Receiver r = pending_replies_.take(reply);
@@ -59,4 +63,23 @@ void NetworkAccessManager::RequestFinished() {
   QMetaObject::invokeMethod(r.receiver, r.slot,
                             Q_ARG(quint64, r.id),
                             Q_ARG(QNetworkReply*, reply));
+}
+
+QNetworkReply* NetworkAccessManager::GetBlocking(const QUrl& url, bool force_cache) {
+  QNetworkReply* reply = NULL;
+  QMetaObject::invokeMethod(
+      this, "RunGetBlocking", Qt::BlockingQueuedConnection,
+      Q_ARG(QUrl, url), Q_ARG(bool, force_cache),
+      Q_ARG(QNetworkReply**, &reply));
+  return reply;
+}
+
+void NetworkAccessManager::RunGetBlocking(const QUrl& url, bool force_cache,
+                                          QNetworkReply** reply) {
+  QNetworkRequest req = CreateRequest(url, force_cache);
+  *reply = network_->get(req);
+
+  QEventLoop loop;
+  connect(*reply, SIGNAL(finished()), &loop, SLOT(quit()));
+  loop.exec();
 }

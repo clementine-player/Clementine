@@ -11,7 +11,7 @@ find_package(Qt4 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
 if(UNIX AND NOT APPLE)
   find_package(Qt4 REQUIRED QtDbus)
 endif(UNIX AND NOT APPLE)
-find_package(Qt4 COMPONENTS Phonon)
+find_package(Qt4 COMPONENTS Phonon QtWebKit)
 
 # Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
 find_program(QT_LCONVERT_EXECUTABLE NAMES lconvert lconvert-qt4 PATHS ${QT_BINARY_DIR} NO_DEFAULT_PATH)
@@ -212,6 +212,7 @@ endif (WIN32)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)
+add_subdirectory(tools/ultimate_lyrics_parser)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)

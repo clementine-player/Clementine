@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lyricproviders>
+  <provider name="azlyrics.com" title="{artist} LYRICS - {title}" charset="utf-8" url="http://www.azlyrics.com/lyrics/{artist}/{title}.html">
+    <urlFormat replace=" ._@,;&amp;\/'&quot;-" with=""/>
+    <extract>
+      <item begin="&lt;!-- END OF RINGTONE 1 --&gt;" end="&lt;!-- RINGTONE 2 --&gt;"/>
+    </extract>
+    <exclude>
+      <item tag="&lt;B&gt;"/>
+      <item begin="&lt;i&gt;[" end="]&lt;/i&gt;"/>
+      <item begin="[" end="]"/>
+    </exclude>
+  </provider>
+  <provider name="directlyrics.com" title="{artist} - {title} lyrics" charset="iso-8859-1" url="http://www.directlyrics.com/{artist}-{title}-lyrics.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;" with="-"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item tag="&lt;div id=&quot;lyricsContent&quot;&gt;"/>
+      <item tag="&lt;p&gt;"/>
+    </extract>
+    <exclude>
+      <item begin="&lt;b&gt;" end="&lt;/b&gt;"/>
+    </exclude>
+  </provider>
+  <provider name="elyrics.net" title="{title} Lyrics - {artist}" charset="iso-8859-1" url="http://www.elyrics.net/read/{a}/{artist}-lyrics/{title}-lyrics.html">
+    <urlFormat replace=" _@;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="'" with="_"/>
+    <extract>
+      <item tag="&lt;div class='ly' style='font-size:12px;'&gt;"/>
+    </extract>
+    <exclude>
+      <item tag="&lt;strong&gt;"/>
+      <item tag="&lt;em&gt;"/>
+    </exclude>
+    <invalidIndicator value="Page not Found"/>
+  </provider>
+  <provider name="loudson.gs" title="" charset="utf-8" url="http://www.loudson.gs/{a}/{artist}/{album}/{title}">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item tag="&lt;div class=&quot;middle_col_TracksLyrics &quot;&gt;"/>
+    </extract>
+  </provider>
+  <provider name="lyrics.com" title="{artist} - {title} Lyrics" charset="utf-8" url="http://www.lyrics.com/lyrics/{artist}/{title}.html">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="'." with=""/>
+    <extract>
+      <item tag="&lt;div id=&quot;lyrics&quot; class=&quot;SCREENONLY&quot;&gt;"/>
+    </extract>
+    <invalidIndicator value="we do not have the lyric for this song"/>
+  </provider>
+  <provider name="lyrics.wikia.com" title="{artist}:{title} Lyrics - " charset="utf-8" url="http://lyrics.wikia.com/{Artist}:{Title}">
+    <urlFormat replace=" _@;\&quot;" with="_"/>
+    <urlFormat replace="?" with="%3F"/>
+    <extract>
+      <item begin="&lt;div class='lyricbox'&gt;" end="&lt;!--"/>
+    </extract>
+    <exclude>
+      <item tag="&lt;div class='rtMatcher'&gt;"/>
+      <item tag="&lt;span style=&quot;padding:1em&quot;&gt;"/>
+    </exclude>
+  </provider>
+  <provider name="lyricsbay.com" title="{title} lyrics {artist}" charset="iso-8859-1" url="http://www.lyricsbay.com/{title}_lyrics-{artist}.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;" with="_"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item tag="&lt;div id=EchoTopic&gt;"/>
+    </extract>
+    <exclude>
+      <item tag="&lt;textarea name=&quot;songscpy&quot; id=&quot;songscpyid&quot; onclick=&quot;callselect('songscpyid','selectswf')&quot; rows=&quot;3&quot; cols=&quot;45&quot; READONLY&gt;"/>
+    </exclude>
+  </provider>
+  <provider name="lyricsdownload.com" title="{artist} - {title} LYRICS" charset="utf-8" url="http://www.lyricsdownload.com/{artist}-{title}-lyrics.html">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item tag="&lt;div id=&quot;div_customCSS&quot;&gt;"/>
+    </extract>
+    <invalidIndicator value="We haven't lyrics of this song"/>
+  </provider>
+  <provider name="lyricsmania.com" title="{artist} - {title} Lyrics" charset="iso-8859-1" url="http://www.lyricsmania.com/{title}_lyrics_{artist}.html">
+    <urlFormat replace=" _@;&amp;\/&quot;'." with="_"/>
+    <extract>
+      <item begin="&lt;span style=&quot;font-size:14px;&quot;&gt;" end="&lt;span style=&quot;font-size:14px;&quot;&gt;"/>
+      <item begin="&lt;/center&gt;" end="&lt;a"/>
+    </extract>
+    <invalidIndicator value="The lyrics you requested is not in our archive yet,"/>
+  </provider>
+  <provider name="lyricsmode.com" title="{artist} - {title} lyrics" charset="iso-8859-1" url="http://www.lyricsmode.com/lyrics/{a}/{artist}/{title}.html">
+    <urlFormat replace=" ._@,;&amp;\/&quot;" with="_"/>
+    <extract>
+      <item tag="&lt;div id='songlyrics_h' class='dn'&gt;"/>
+    </extract>
+    <invalidIndicator value="Sorry, we have no"/>
+  </provider>
+  <provider name="lyricsplugin.com" title="{artist} - {title} Lyrics" charset="utf-8" url="http://www.lyricsplugin.com/winamp03/plugin/?title={title}&amp;artist={artist}">
+    <urlFormat replace="_@;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="'" with=""/>
+    <urlFormat replace=" " with="%20"/>
+    <extract>
+      <item tag="&lt;div id=&quot;lyrics&quot;&gt;"/>
+    </extract>
+  </provider>
+  <provider name="lyricsreg.com" title="{title} lyrics {artist}" charset="iso-8859-1" url="http://www.lyricsreg.com/lyrics/{artist}/{title}/">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="+"/>
+    <urlFormat replace="'." with=""/>
+    <extract>
+      <item begin="Ringtone to your Cell" end="Ringtone to your Cell"/>
+      <item begin="&lt;div style=&quot;text-align:center;&quot;&gt;" end="&lt;a"/>
+    </extract>
+    <invalidIndicator value="Page not Found"/>
+  </provider>
+  <provider name="lyricstime.com" title="{artist} - {title} Lyrics" charset="iso-8859-1" url="http://www.lyricstime.com/{artist}-{title}-lyrics.html">
+    <urlFormat replace=" _@,;&amp;\/&quot;'" with="-"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item tag="&lt;div id=&quot;songlyrics&quot; &gt;"/>
+      <item tag="&lt;p&gt;"/>
+    </extract>
+  </provider>
+  <provider name="lyriki.com" title="" charset="utf-8" url="http://www.lyriki.com/{artist}:{title}">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="_"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item begin="&lt;/table&gt;" end="&lt;div class=&quot;printfooter&quot;&gt;"/>
+      <item tag="&lt;p&gt;"/>
+    </extract>
+  </provider>
+  <provider name="metrolyrics.com" title="{artist} - {title} LYRICS" charset="utf-8" url="http://www.metrolyrics.com/{title}-lyrics-{artist}.html">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="'." with=""/>
+    <extract>
+      <item tag="&lt;span id=&quot;lyrics&quot;&gt;"/>
+    </extract>
+    <extract>
+      <item tag="&lt;div id=&quot;lyrics&quot;&gt;"/>
+    </extract>
+    <exclude>
+      <item tag="&lt;h5&gt;"/>
+    </exclude>
+    <invalidIndicator value="These lyrics are missing"/>
+  </provider>
+  <provider name="mp3lyrics.org" title="{artist} &amp;quot;{title}&amp;quot; Lyrics" charset="utf-8" url="http://www.mp3lyrics.org/{a}/{artist}/{title}/">
+    <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="'." with=""/>
+    <extract>
+      <item tag="&lt;span id=gn_lyricsB&gt;"/>
+    </extract>
+    <extract>
+      <item tag="&lt;div class=&quot;KonaBody&quot; id=&quot;EchoTopic&quot;&gt;"/>
+    </extract>
+    <exclude>
+      <item tag="&lt;font size=2&gt;"/>
+      <item begin="&lt;b&gt;&lt;i&gt;" end="&lt;/u&gt;&lt;/b&gt;:"/>
+      <item begin="&lt;b&gt;Lyrics" end="&lt;/b&gt;"/>
+    </exclude>
+    <invalidIndicator value="Something went wrong"/>
+  </provider>
+  <provider name="seeklyrics.com" title="{artist} - {title} Lyrics" charset="iso-8859-1" url="http://www.seeklyrics.com/lyrics/{Artist}/{Title}.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;" with="-"/>
+    <urlFormat replace="." with=""/>
+    <extract>
+      <item tag="&lt;div id=&quot;songlyrics&quot;&gt;"/>
+    </extract>
+  </provider>
+  <provider name="songlyrics.com" title="{title} LYRICS - {artist}" charset="utf-8" url="http://www.songlyrics.com/{artist}/{title}-lyrics/">
+    <urlFormat replace=" ._@,;&amp;\/&quot;" with="-"/>
+    <urlFormat replace="'" with="_"/>
+    <extract>
+      <item tag="&lt;p id=&quot;songLyricsDiv&quot; ondragstart=&quot;return false;&quot; onselectstart=&quot;return false;&quot; oncontextmenu=&quot;return false;&quot; class=&quot;songLyricsV14&quot; style=&quot;font-size: 14px;z-index: 9999;position: absolute;left: -6000px;&quot;&gt;"/>
+    </extract>
+    <exclude>
+      <item begin="&#10;[" end="] "/>
+    </exclude>
+    <invalidIndicator value="Sorry, we have no"/>
+    <invalidIndicator value="This is an upcoming album and we do not have the"/>
+  </provider>
+  <provider name="tekstowo.pl (Polish translations)" title="                                   {artist} - {title} - " charset="iso-8859-2" url="http://www.tekstowo.pl/piosenka,{artist},{title}.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;." with="_"/>
+    <extract>
+      <item tag="&lt;div id=&quot;tran&quot; style=&quot;display:none&quot;&gt;"/>
+    </extract>
+    <extract>
+      <item tag="&lt;div id=&quot;tex&quot; style=&quot;display:block&quot;&gt;"/>
+    </extract>
+    <exclude>
+      <item begin="&lt;div style=&quot;float:left&quot;" end="&gt;"/>
+    </exclude>
+  </provider>
+  <provider name="teksty.org" title="{artist} - {title} - tekst" charset="UTF-8" url="http://www.teksty.org/{Artist},{Title2}">
+    <urlFormat replace=" _@,;&amp;\/&quot;." with="_"/>
+    <urlFormat replace="'" with=""/>
+    <extract>
+      <item tag="&lt;span class=&quot;text&quot; id='text25534-dta'&gt;"/>
+    </extract>
+    <exclude>
+      <item begin="&lt;div style=&quot;float:left&quot;" end="&gt;"/>
+    </exclude>
+  </provider>
+  <provider name="vagalume.uol.com.br" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.uol.com.br/{artist}/{title}.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;." with="-"/>
+    <extract>
+      <item tag="&lt;div class=&quot;tab_original&quot;&gt;"/>
+    </extract>
+  </provider>
+  <provider name="vagalume.uol.com.br (Portuguese translations)" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.uol.com.br/{artist}/{title}-traducao.html">
+    <urlFormat replace=" _@,;&amp;\/'&quot;." with="-"/>
+    <extract>
+      <item tag="&lt;div class=&quot;tab_tra_pt&quot;&gt;"/>
+    </extract>
+  </provider>
+</lyricproviders>
