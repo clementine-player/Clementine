@@ -17,19 +17,20 @@ BuildRequires:  libmtp-devel
 
 Requires:       libgpod
 
-# There must be a better way to do this
-%ifarch x86_64
-%define archthing ()(64bit)
-%else
-%define archthing
-%endif
-
 # GStreamer codec dependencies
 Requires:       gstreamer-plugins-ugly
-Requires:       gstreamer0.10(decoder-audio/x-vorbis)%{archthing}
-Requires:       gstreamer0.10(decoder-audio/x-flac)%{archthing}
-Requires:       gstreamer0.10(decoder-audio/x-speex)%{archthing}
-Requires:       gstreamer0.10(decoder-audio/x-wav)%{archthing}
+
+%ifarch x86_64
+Requires:       gstreamer0.10(decoder-audio/x-vorbis)()(64bit)
+Requires:       gstreamer0.10(decoder-audio/x-flac)()(64bit)
+Requires:       gstreamer0.10(decoder-audio/x-speex)()(64bit)
+Requires:       gstreamer0.10(decoder-audio/x-wav)()(64bit)
+%else
+Requires:       gstreamer0.10(decoder-audio/x-vorbis)
+Requires:       gstreamer0.10(decoder-audio/x-flac)
+Requires:       gstreamer0.10(decoder-audio/x-speex)
+Requires:       gstreamer0.10(decoder-audio/x-wav)
+%endif
 
 %description
 Clementine is a modern music player and library organiser.
