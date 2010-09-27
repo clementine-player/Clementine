@@ -18,11 +18,11 @@
 #define ULTIMATELYRICSREADER_H
 
 #include <QObject>
+#include <QXmlStreamReader>
 
 #include "htmlscraper.h"
 
 class QIODevice;
-class QXmlStreamReader;
 
 class UltimateLyricsReader : public QObject {
   Q_OBJECT

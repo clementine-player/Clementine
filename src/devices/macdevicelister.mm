@@ -7,6 +7,7 @@
 #include <IOKit/kext/KextManager.h>
 #include <IOKit/IOCFPlugin.h>
 #include <IOKit/usb/IOUSBLib.h>
+#include <IOKit/storage/IOMedia.h>
 
 #import <AppKit/NSWorkspace.h>
 #import <Foundation/NSAutoreleasePool.h>
@@ -252,8 +253,11 @@ QString GetIconForDevice(io_object_t device) {
 }
 
 QString GetSerialForDevice(io_object_t device) {
-  return QString(
-      "USB/" + GetUSBRegistryEntryString(device, CFSTR(kUSBSerialNumberString)));
+  QString serial = GetUSBRegistryEntryString(device, CFSTR(kUSBSerialNumberString));
+  if (!serial.isEmpty()) {
+    return "USB/" + serial;
+  }
+  return QString();
 }
 
 QString GetSerialForMTPDevice(io_object_t device) {
@@ -308,7 +312,7 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
   if (volume_path) {
     io_object_t device = DADiskCopyIOMedia(disk);
     CFStringRef class_name = IOObjectCopyClass(device);
-    if (class_name && CFStringCompare(class_name, CFSTR(kIOUSBDeviceClassName), 0) == kCFCompareEqualTo) {
+    if (class_name && CFStringCompare(class_name, CFSTR(kIOMediaClass), 0) == kCFCompareEqualTo) {
       QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
       QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
 
@@ -320,8 +324,10 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
         NSDictionary* dict = (NSDictionary*)properties;
         if ([[dict objectForKey:@"Removable"] intValue] == 1) {
           QString serial = GetSerialForDevice(device);
-          me->current_devices_[serial] = QString(DADiskGetBSDName(disk));
-          emit me->DeviceAdded(serial);
+          if (!serial.isEmpty()) {
+            me->current_devices_[serial] = QString(DADiskGetBSDName(disk));
+            emit me->DeviceAdded(serial);
+          }
         }
       }
     }
