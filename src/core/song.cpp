@@ -287,7 +287,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
       ParseOggTag(file->xiphComment()->fieldListMap(), codec, &disc, &compilation);
     }
     d->comment_ = Decode(tag->comment(), codec);
-  } else {
+  } else if (tag) {
     d->comment_ = Decode(tag->comment(), codec);
   }
 

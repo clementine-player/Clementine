@@ -447,6 +447,14 @@ QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
   AddMetadata("album", song.album(), &ret);
   AddMetadata("time", song.length(), &ret);
   AddMetadata("tracknumber", song.track(), &ret);
+  AddMetadata("year", song.year(), &ret);
+  AddMetadata("genre", song.genre(), &ret);
+  AddMetadata("disc", song.disc(), &ret);
+  AddMetadata("comment", song.comment(), &ret);
+  AddMetadata("bitrate", song.bitrate(), &ret);
+  AddMetadata("samplerate", song.samplerate(), &ret);
+  AddMetadata("bpm", song.bpm(), &ret);
+  AddMetadata("composer", song.composer(), &ret);
 
   return ret;
 }

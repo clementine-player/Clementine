@@ -662,9 +662,8 @@ void LastFMService::FetchMoreTracksFinished() {
     // Hacks like this remind me of Java...
     if (QString(typeid(e).name()).contains("ParseError")) {
       // dynamic_cast throws a std::bad_cast ... *boggle*
-      lastfm::ws::ParseError& error = reinterpret_cast<lastfm::ws::ParseError&>(e);
-      emit StreamError(tr("Couldn't load the last.fm radio station: %1")
-                       .arg(ErrorString(error.enumValue())));
+      emit StreamError(tr("Couldn't load the last.fm radio station")
+                       .arg(e.what()));
     } else {
       emit StreamError(tr("An unknown last.fm error occurred: %1").arg(e.what()));
     }
