@@ -207,6 +207,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Icons
   ui_->action_about->setIcon(IconLoader::Load("help-about"));
+  ui_->action_about_qt->setIcon(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"));
   ui_->action_add_file->setIcon(IconLoader::Load("document-open"));
   ui_->action_add_folder->setIcon(IconLoader::Load("document-open-folder"));
   ui_->action_add_stream->setIcon(IconLoader::Load("document-open-remote"));
@@ -260,6 +261,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
   connect(ui_->action_configure, SIGNAL(triggered()), SLOT(OpenSettingsDialog()));
   connect(ui_->action_about, SIGNAL(triggered()), SLOT(ShowAboutDialog()));
+  connect(ui_->action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
   connect(ui_->action_shuffle, SIGNAL(triggered()), playlists_, SLOT(ShuffleCurrent()));
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));

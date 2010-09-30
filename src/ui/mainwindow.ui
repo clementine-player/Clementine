@@ -173,16 +173,16 @@
          <number>0</number>
         </property>
         <item>
-          <widget class="PlaylistContainer" name="playlist" native="true">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <addaction name="action_edit_track"/>
-           <addaction name="action_edit_value"/>
-          </widget>
+         <widget class="PlaylistContainer" name="playlist" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <addaction name="action_edit_track"/>
+          <addaction name="action_edit_value"/>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -557,6 +557,7 @@
      <string>Help</string>
     </property>
     <addaction name="action_about"/>
+    <addaction name="action_about_qt"/>
    </widget>
    <widget class="QMenu" name="menuExtras">
     <property name="title">
@@ -844,6 +845,11 @@
   <action name="action_queue_manager">
    <property name="text">
     <string>Queue Manager</string>
+   </property>
+  </action>
+  <action name="action_about_qt">
+   <property name="text">
+    <string>About Qt...</string>
    </property>
   </action>
  </widget>
