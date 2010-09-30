@@ -14,16 +14,9 @@ QPushButton:hover {
     stop: 0 palette(light), stop: 1 palette(button));
 }
 
-QPushButton:checked {
+QPushButton:checked:!disabled {
   border: 1px solid palette(text);
   color: palette(highlighted-text);
   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
     stop: 0 palette(highlight), stop: 1 %darkhighlight);
-}
-
-QPushButton:checked:disabled {
-  border: 1px solid palette(text);
-  color: palette(text);
-  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-    stop: 0 palette(button), stop: 1 palette(dark));
 }
