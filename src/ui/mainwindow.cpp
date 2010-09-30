@@ -36,6 +36,7 @@
 #include "library/library.h"
 #include "lyrics/lyricfetcher.h"
 #include "lyrics/lyricview.h"
+#include "lyrics/songinfobuttonbox.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -322,12 +323,14 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
   connect(player_, SIGNAL(PlaylistFinished()), osd_, SLOT(PlaylistFinished()));
+  connect(player_, SIGNAL(Stopped()), ui_->playlist->song_info(), SLOT(SongFinished()));
+  connect(player_, SIGNAL(PlaylistFinished()), ui_->playlist->song_info(), SLOT(SongFinished()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
-  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->lyrics_view, SLOT(SongChanged(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->playlist->song_info(), SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
@@ -469,7 +472,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
 
   // Lyrics
-  ui_->lyrics_view->set_network(network);
+  ui_->playlist->song_info()->lyric_view()->set_network(network);
 
   // Analyzer
   ui_->analyzer->SetEngine(player_->GetEngine());
@@ -1471,7 +1474,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
 #endif
 
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetLyricFetcher(ui_->lyrics_view->fetcher());
+  settings_dialog_->SetLyricFetcher(ui_->playlist->song_info()->lyric_fetcher());
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
@@ -1481,7 +1484,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->lyrics_view->fetcher(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->song_info()->lyric_fetcher(), SLOT(ReloadSettings()));
 #ifdef ENABLE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));

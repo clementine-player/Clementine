@@ -14,7 +14,7 @@
    <string>Preferences</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -60,7 +60,7 @@
        <string>Behavior</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../../data/data.qrc">
         <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
       </property>
      </item>
@@ -89,7 +89,7 @@
        <string>Last.fm</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../../data/data.qrc">
         <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
       </property>
      </item>
@@ -98,7 +98,7 @@
        <string>Magnatune</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="../../data/data.qrc">
         <normaloff>:/magnatune.png</normaloff>:/magnatune.png</iconset>
       </property>
      </item>
@@ -457,39 +457,6 @@
        <widget class="QWidget" name="song_info_page">
         <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
-          <widget class="QGroupBox" name="groupBox_5">
-           <property name="title">
-            <string>Show the song information sidebar</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_14">
-            <item>
-             <widget class="QRadioButton" name="info_sidebar_always">
-              <property name="text">
-               <string>Always</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="info_sidebar_playing">
-              <property name="text">
-               <string>Only when playing a song</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="info_sidebar_never">
-              <property name="text">
-               <string>Never</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
           <widget class="QGroupBox" name="groupBox_6">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -830,7 +797,9 @@
   <tabstop>b_always_hide_</tabstop>
   <tabstop>b_always_show_</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>list</sender>

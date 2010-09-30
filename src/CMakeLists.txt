@@ -88,6 +88,7 @@ set(SOURCES
   lyrics/lyricprovider.cpp
   lyrics/lyricsettings.cpp
   lyrics/lyricview.cpp
+  lyrics/songinfobuttonbox.cpp
   lyrics/ultimatelyricsreader.cpp
 
   playlist/playlist.cpp
@@ -166,6 +167,7 @@ set(SOURCES
   widgets/osdpretty.cpp
   widgets/progressitemdelegate.cpp
   widgets/sliderwidget.cpp
+  widgets/slimbuttonbox.cpp
   widgets/spinbox.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
@@ -222,6 +224,7 @@ set(HEADERS
   lyrics/lyricprovider.h
   lyrics/lyricsettings.h
   lyrics/lyricview.h
+  lyrics/songinfobuttonbox.h
   lyrics/ultimatelyricsreader.h
 
   playlist/playlist.h
@@ -293,6 +296,7 @@ set(HEADERS
   widgets/osdpretty.h
   widgets/progressitemdelegate.h
   widgets/sliderwidget.h
+  widgets/slimbuttonbox.h
   widgets/spinbox.h
   widgets/stickyslider.h
   widgets/stretchheaderview.h

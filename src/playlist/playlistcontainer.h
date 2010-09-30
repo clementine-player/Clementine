@@ -26,6 +26,7 @@ class LineEditInterface;
 class Playlist;
 class PlaylistManager;
 class PlaylistView;
+class SongInfoButtonBox;
 
 class QTimeLine;
 class QLabel;
@@ -44,6 +45,7 @@ public:
   void SetManager(PlaylistManager* manager);
 
   PlaylistView* view() const;
+  SongInfoButtonBox* song_info() const { return song_info_button_box_; }
 
 signals:
   void TabChanged(int id);
@@ -86,6 +88,7 @@ private:
 
 private:
   Ui_PlaylistContainer* ui_;
+  SongInfoButtonBox* song_info_button_box_;
 
   PlaylistManager* manager_;
   QAction* undo_;
