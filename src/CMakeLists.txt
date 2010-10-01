@@ -80,6 +80,7 @@ set(SOURCES
   library/libraryplaylistitem.cpp
   library/libraryquery.cpp
   library/libraryview.cpp
+  library/libraryviewcontainer.cpp
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
@@ -88,7 +89,6 @@ set(SOURCES
   lyrics/lyricprovider.cpp
   lyrics/lyricsettings.cpp
   lyrics/lyricview.cpp
-  lyrics/songinfobuttonbox.cpp
   lyrics/ultimatelyricsreader.cpp
 
   playlist/playlist.cpp
@@ -167,7 +167,6 @@ set(SOURCES
   widgets/osdpretty.cpp
   widgets/progressitemdelegate.cpp
   widgets/sliderwidget.cpp
-  widgets/slimbuttonbox.cpp
   widgets/spinbox.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
@@ -217,6 +216,7 @@ set(HEADERS
   library/libraryfilterwidget.h
   library/librarymodel.h
   library/libraryview.h
+  library/libraryviewcontainer.h
   library/librarywatcher.h
 
   lyrics/htmlscraper.h
@@ -224,7 +224,6 @@ set(HEADERS
   lyrics/lyricprovider.h
   lyrics/lyricsettings.h
   lyrics/lyricview.h
-  lyrics/songinfobuttonbox.h
   lyrics/ultimatelyricsreader.h
 
   playlist/playlist.h
@@ -296,7 +295,6 @@ set(HEADERS
   widgets/osdpretty.h
   widgets/progressitemdelegate.h
   widgets/sliderwidget.h
-  widgets/slimbuttonbox.h
   widgets/spinbox.h
   widgets/stickyslider.h
   widgets/stretchheaderview.h
@@ -309,6 +307,7 @@ set(UI
   library/groupbydialog.ui
   library/libraryconfig.ui
   library/libraryfilterwidget.ui
+  library/libraryviewcontainer.ui
 
   lyrics/lyricsettings.ui
   lyrics/lyricview.ui
@@ -679,6 +678,7 @@ add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
   chardet
+  fancytabwidget
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}

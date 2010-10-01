@@ -150,6 +150,11 @@ DeviceView::DeviceView(QWidget* parent)
   setItemDelegate(new DeviceItemDelegate(this));
   SetExpandOnReset(false);
   setAttribute(Qt::WA_MacShowFocusRect, false);
+  setHeaderHidden(true);
+  setAllColumnsShowFocus(true);
+  setDragEnabled(true);
+  setDragDropMode(QAbstractItemView::DragOnly);
+  setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
 DeviceView::~DeviceView() {

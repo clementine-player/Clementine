@@ -15,6 +15,7 @@
 */
 
 #include "mainwindow.h"
+#include "stylehelper.h"
 #include "ui_mainwindow.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
@@ -28,15 +29,17 @@
 #include "core/taskmanager.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
+#include "devices/deviceview.h"
 #include "engines/enginebase.h"
 #include "library/groupbydialog.h"
+#include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/libraryconfig.h"
 #include "library/librarydirectorymodel.h"
-#include "library/library.h"
+#include "library/libraryfilterwidget.h"
+#include "library/libraryviewcontainer.h"
 #include "lyrics/lyricfetcher.h"
 #include "lyrics/lyricview.h"
-#include "lyrics/songinfobuttonbox.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -68,6 +71,7 @@
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "widgets/errordialog.h"
+#include "widgets/fileview.h"
 #include "widgets/multiloadingindicator.h"
 #include "widgets/osd.h"
 #include "widgets/trackslider.h"
@@ -84,19 +88,22 @@
 # include "visualisations/visualisationcontainer.h"
 #endif
 
-#include <QFileSystemModel>
-#include <QSortFilterProxyModel>
-#include <QUndoStack>
+#include <QCloseEvent>
 #include <QDir>
+#include <QFileDialog>
+#include <QFileSystemModel>
+#include <QLinearGradient>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSettings>
-#include <QtDebug>
-#include <QCloseEvent>
-#include <QSignalMapper>
-#include <QFileDialog>
-#include <QTimer>
 #include <QShortcut>
+#include <QSignalMapper>
+#include <QSortFilterProxyModel>
+#include <QStatusBar>
+#include <QtDebug>
+#include <QTimer>
+#include <QUndoStack>
+
 
 #include <cmath>
 
@@ -130,6 +137,11 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
     devices_(NULL),
+    library_view_(new LibraryViewContainer(this)),
+    file_view_(new FileView(this)),
+    radio_view_(new RadioViewContainer(this)),
+    device_view_(new DeviceView(this)),
+    lyric_view_(new LyricView(this)),
     settings_dialog_(NULL),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
@@ -166,13 +178,20 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);
   ui_->volume->setValue(player_->GetVolume());
 
+  // Add tabs to the fancy tab widget
+  AddFancyTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
+  AddFancyTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
+  AddFancyTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
+  AddFancyTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
+  AddFancyTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
+  AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
+  AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
+
+  ui_->tabs->statusBar()->hide();
+  StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
+
   track_position_timer_->setInterval(1000);
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
-
-#ifdef Q_OS_MAC
-  // For some reason this makes the tabs go a funny colour on mac
-  ui_->tabs->setDocumentMode(false);
-#endif
 
   // Start initialising the player
   player_->Init();
@@ -193,15 +212,15 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   ui_->playlist->SetManager(playlists_);
 
-  ui_->library_view->setModel(library_sort_model_);
-  ui_->library_view->SetLibrary(library_->model());
-  ui_->library_view->SetTaskManager(task_manager_);
-  ui_->library_view->SetDeviceManager(devices_);
+  library_view_->view()->setModel(library_sort_model_);
+  library_view_->view()->SetLibrary(library_->model());
+  library_view_->view()->SetTaskManager(task_manager_);
+  library_view_->view()->SetDeviceManager(devices_);
 
-  ui_->radio_view->SetModel(radio_model_);
+  radio_view_->SetModel(radio_model_);
 
-  ui_->devices_view->SetDeviceManager(devices_);
-  ui_->devices_view->SetLibrary(library_->model());
+  device_view_->SetDeviceManager(devices_);
+  device_view_->SetLibrary(library_->model());
 
   organise_dialog_->SetDestinationModel(library_->model()->directory_model());
 
@@ -235,14 +254,14 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
 
   // File view connections
-  connect(ui_->file_view, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
-  connect(ui_->file_view, SIGNAL(Load(QList<QUrl>)), SLOT(LoadFilesToPlaylist(QList<QUrl>)));
-  connect(ui_->file_view, SIGNAL(DoubleClicked(QList<QUrl>)), SLOT(FilesDoubleClicked(QList<QUrl>)));
-  connect(ui_->file_view, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
-  connect(ui_->file_view, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
-  connect(ui_->file_view, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
-  connect(ui_->file_view, SIGNAL(CopyToDevice(QList<QUrl>)), SLOT(CopyFilesToDevice(QList<QUrl>)));
-  ui_->file_view->SetTaskManager(task_manager_);
+  connect(file_view_, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
+  connect(file_view_, SIGNAL(Load(QList<QUrl>)), SLOT(LoadFilesToPlaylist(QList<QUrl>)));
+  connect(file_view_, SIGNAL(DoubleClicked(QList<QUrl>)), SLOT(FilesDoubleClicked(QList<QUrl>)));
+  connect(file_view_, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
+  connect(file_view_, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
+  connect(file_view_, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
+  connect(file_view_, SIGNAL(CopyToDevice(QList<QUrl>)), SLOT(CopyFilesToDevice(QList<QUrl>)));
+  file_view_->SetTaskManager(task_manager_);
 
   // Action connections
   connect(ui_->action_next_track, SIGNAL(triggered()), player_, SLOT(Next()));
@@ -325,14 +344,12 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(Paused()), osd_, SLOT(Paused()));
   connect(player_, SIGNAL(Stopped()), osd_, SLOT(Stopped()));
   connect(player_, SIGNAL(PlaylistFinished()), osd_, SLOT(PlaylistFinished()));
-  connect(player_, SIGNAL(Stopped()), ui_->playlist->song_info(), SLOT(SongFinished()));
-  connect(player_, SIGNAL(PlaylistFinished()), ui_->playlist->song_info(), SLOT(SongFinished()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
-  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->playlist->song_info(), SLOT(SongChanged(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), lyric_view_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
@@ -349,31 +366,28 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 
   // Library connections
-  connect(ui_->library_view, SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
-  connect(ui_->library_view, SIGNAL(Load(QModelIndexList)), SLOT(LoadLibraryItemToPlaylist(QModelIndexList)));
-  connect(ui_->library_view, SIGNAL(AddToPlaylist(QModelIndexList)), SLOT(AddLibraryItemToPlaylist(QModelIndexList)));
-  connect(ui_->library_view, SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
-  connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), ui_->library_view, SLOT(TotalSongCountUpdated(int)));
+  connect(library_view_->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
+  connect(library_view_->view(), SIGNAL(Load(QModelIndexList)), SLOT(LoadLibraryItemToPlaylist(QModelIndexList)));
+  connect(library_view_->view(), SIGNAL(AddToPlaylist(QModelIndexList)), SLOT(AddLibraryItemToPlaylist(QModelIndexList)));
+  connect(library_view_->view(), SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
+  connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), library_view_->view(), SLOT(TotalSongCountUpdated(int)));
 
   connect(task_manager_, SIGNAL(PauseLibraryWatchers()), library_, SLOT(PauseWatcher()));
   connect(task_manager_, SIGNAL(ResumeLibraryWatchers()), library_, SLOT(ResumeWatcher()));
 
   // Devices connections
   connect(devices_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
-  connect(ui_->devices_view, SIGNAL(Load(SongList)), SLOT(LoadDeviceSongsToPlaylist(SongList)));
-  connect(ui_->devices_view, SIGNAL(AddToPlaylist(SongList)), SLOT(AddDeviceSongsToPlaylist(SongList)));
-  connect(ui_->devices_view, SIGNAL(DoubleClicked(SongList)), SLOT(DeviceSongsDoubleClicked(SongList)));
+  connect(device_view_, SIGNAL(Load(SongList)), SLOT(LoadDeviceSongsToPlaylist(SongList)));
+  connect(device_view_, SIGNAL(AddToPlaylist(SongList)), SLOT(AddDeviceSongsToPlaylist(SongList)));
+  connect(device_view_, SIGNAL(DoubleClicked(SongList)), SLOT(DeviceSongsDoubleClicked(SongList)));
 
   // Library filter widget
   QAction* library_config_action = new QAction(
       IconLoader::Load("configure"), tr("Configure library..."), this);
   connect(library_config_action, SIGNAL(triggered()), SLOT(ShowLibraryConfig()));
-  ui_->library_filter->SetSettingsGroup(kSettingsGroup);
-  ui_->library_filter->SetLibraryModel(library_->model());
-  ui_->library_filter->AddMenuAction(library_config_action);
-  connect(ui_->library_filter, SIGNAL(UpPressed()), ui_->library_view, SLOT(UpAndFocus()));
-  connect(ui_->library_filter, SIGNAL(DownPressed()), ui_->library_view, SLOT(DownAndFocus()));
-  connect(ui_->library_filter, SIGNAL(ReturnPressed()), ui_->library_view, SLOT(FilterReturnPressed()));
+  library_view_->filter()->SetSettingsGroup(kSettingsGroup);
+  library_view_->filter()->SetLibraryModel(library_->model());
+  library_view_->filter()->AddMenuAction(library_config_action);
 
   // Playlist menu
   playlist_play_pause_ = playlist_menu_->addAction(tr("Play"), this, SLOT(PlaylistPlay()));
@@ -421,7 +435,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList)), SLOT(InsertRadioItems(PlaylistItemList)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
-  connect(ui_->radio_view->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
+  connect(radio_view_->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
   connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
 
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
@@ -474,7 +488,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
 
   // Lyrics
-  ui_->playlist->song_info()->lyric_view()->set_network(network);
+  lyric_view_->set_network(network);
 
   // Analyzer
   ui_->analyzer->SetEngine(player_->GetEngine());
@@ -521,7 +535,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
   ui_->tabs->setCurrentIndex(settings_.value("current_tab", 0).toInt());
-  ui_->file_view->SetPath(settings_.value("file_path", QDir::homePath()).toString());
+  file_view_->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
   ReloadSettings();
 
@@ -1476,17 +1490,17 @@ void MainWindow::EnsureSettingsDialogCreated() {
 #endif
 
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetLyricFetcher(ui_->playlist->song_info()->lyric_fetcher());
+  settings_dialog_->SetLyricFetcher(lyric_view_->fetcher());
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), library_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->library_view, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), library_view_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->song_info()->lyric_fetcher(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), lyric_view_->fetcher(), SLOT(ReloadSettings()));
 #ifdef ENABLE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));
@@ -1561,4 +1575,10 @@ void MainWindow::ShowVisualisations() {
 
   visualisation_->show();
 #endif // ENABLE_VISUALISATIONS
+}
+
+void MainWindow::AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label) {
+  const int i = ui_->tabs->count();
+  ui_->tabs->insertTab(i, widget, icon, label);
+  ui_->tabs->setTabEnabled(i, true);
 }

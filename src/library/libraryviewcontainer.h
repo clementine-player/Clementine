@@ -14,43 +14,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SLIMBUTTONBOX_H
-#define SLIMBUTTONBOX_H
+#ifndef LIBRARYVIEWCONTAINER_H
+#define LIBRARYVIEWCONTAINER_H
 
-#include <QIcon>
-#include <QList>
 #include <QWidget>
 
-class QPushButton;
+class LibraryFilterWidget;
+class LibraryView;
+class Ui_LibraryViewContainer;
 
-class SlimButtonBox : public QWidget {
+class LibraryViewContainer : public QWidget {
   Q_OBJECT
 
 public:
-  SlimButtonBox(QWidget* parent = 0);
+  LibraryViewContainer(QWidget* parent = 0);
+  ~LibraryViewContainer();
 
-  void AddButton(const QString& text, const QIcon& icon = QIcon());
-  bool IsAnyButtonChecked() const;
-  void SetCurrentButton(int index);
-
-  void SetTabBarBase(bool tab_bar_base);
-
-signals:
-  void CurrentChanged(int index);
-
-protected:
-  void changeEvent(QEvent* e);
-  void paintEvent(QPaintEvent*);
-
-private slots:
-  void ButtonClicked();
+  LibraryFilterWidget* filter() const;
+  LibraryView* view() const;
 
 private:
-  void ReloadStylesheet();
-
-private:
-  bool tab_bar_base_;
-  QList<QPushButton*> buttons_;
+  Ui_LibraryViewContainer* ui_;
 };
 
-#endif // SLIMBUTTONBOX_H
+#endif // LIBRARYVIEWCONTAINER_H

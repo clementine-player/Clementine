@@ -17,7 +17,6 @@
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
 #include "ui_playlistcontainer.h"
-#include "lyrics/songinfobuttonbox.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 #include "widgets/maclineedit.h"
@@ -36,7 +35,6 @@ const char* PlaylistContainer::kSettingsGroup = "Playlist";
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_PlaylistContainer),
-    song_info_button_box_(new SongInfoButtonBox(this)),
     manager_(NULL),
     undo_(NULL),
     redo_(NULL),
@@ -46,12 +44,6 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     no_matches_label_(new QLabel(this))
 {
   ui_->setupUi(this);
-
-  song_info_button_box_->SetSplitter(ui_->splitter);
-
-  // Initially add the info button box to the toolbar, but it might get moved
-  // later when the user adds a playlist.
-  ui_->toolbar->layout()->addWidget(song_info_button_box_);
 
   no_matches_label_->setText(tr("No matches found.  Clear the search box to show the whole playlist again."));
   no_matches_label_->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
@@ -82,7 +74,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   ui_->tab_bar->setMovable(true);
 
   connect(tab_bar_animation_, SIGNAL(frameChanged(int)), SLOT(SetTabBarHeight(int)));
-  ui_->tab_bar_container->setMaximumHeight(0);
+  ui_->tab_bar->setMaximumHeight(0);
 
   // Connections
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
@@ -237,7 +229,7 @@ void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
       // Skip the animation since the window is hidden (eg. if we're still
       // loading the UI).
       tab_bar_visible_ = true;
-      SetTabBarHeight(tab_bar_animation_->endFrame());
+      ui_->tab_bar->setMaximumHeight(tab_bar_animation_->endFrame());
     } else {
       SetTabBarVisible(true);
     }
@@ -330,17 +322,10 @@ void PlaylistContainer::SetTabBarVisible(bool visible) {
 
   tab_bar_animation_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
   tab_bar_animation_->start();
-
-  if (visible) {
-    ui_->tab_bar_container->layout()->addWidget(song_info_button_box_);
-  } else {
-    ui_->toolbar->layout()->addWidget(song_info_button_box_);
-  }
-  song_info_button_box_->SetTabBarBase(visible);
 }
 
 void PlaylistContainer::SetTabBarHeight(int height) {
-  ui_->tab_bar_container->setMaximumHeight(height);
+  ui_->tab_bar->setMaximumHeight(height);
 }
 
 void PlaylistContainer::UpdateFilter() {

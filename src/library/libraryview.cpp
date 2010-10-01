@@ -92,6 +92,11 @@ LibraryView::LibraryView(QWidget* parent)
 {
   setItemDelegate(new LibraryItemDelegate(this));
   setAttribute(Qt::WA_MacShowFocusRect, false);
+  setHeaderHidden(true);
+  setAllColumnsShowFocus(true);
+  setDragEnabled(true);
+  setDragDropMode(QAbstractItemView::DragOnly);
+  setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   ReloadSettings();
 }

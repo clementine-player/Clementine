@@ -36,12 +36,16 @@ class AlbumCoverManager;
 class CommandlineOptions;
 class Database;
 class DeviceManager;
+class DeviceView;
 class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
+class FileView;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
+class LibraryViewContainer;
+class LyricView;
 class MultiLoadingIndicator;
 class NetworkAccessManager;
 class OrganiseDialog;
@@ -53,6 +57,7 @@ class PlaylistParser;
 class QueueManager;
 class RadioItem;
 class RadioModel;
+class RadioViewContainer;
 class Song;
 class SystemTrayIcon;
 class TaskManager;
@@ -190,6 +195,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
   void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);
+  void AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label);
 
  private:
   Ui_MainWindow* ui_;
@@ -211,6 +217,12 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalShortcuts* global_shortcuts_;
 
   DeviceManager* devices_;
+
+  LibraryViewContainer* library_view_;
+  FileView* file_view_;
+  RadioViewContainer* radio_view_;
+  DeviceView* device_view_;
+  LyricView* lyric_view_;
 
   boost::scoped_ptr<SettingsDialog> settings_dialog_;
   boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
