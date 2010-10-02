@@ -189,6 +189,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
 
   ui_->tabs->statusBar()->hide();
+  ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
   track_position_timer_->setInterval(1000);

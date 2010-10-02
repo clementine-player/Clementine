@@ -477,14 +477,10 @@ void FancyTabWidget::removeTab(int index)
     m_tabBar->removeTab(index);
 }
 
-void FancyTabWidget::setBackgroundBrush(const QBrush &brush)
+void FancyTabWidget::setBackgroundPixmap(const QPixmap& pixmap)
 {
-    QPalette pal = m_tabBar->palette();
-    pal.setBrush(QPalette::Mid, brush);
-    m_tabBar->setPalette(pal);
-    pal = m_cornerWidgetContainer->palette();
-    pal.setBrush(QPalette::Mid, brush);
-    m_cornerWidgetContainer->setPalette(pal);
+    m_backgroundPixmap = pixmap;
+    update();
 }
 
 void FancyTabWidget::paintEvent(QPaintEvent *event)
@@ -495,6 +491,19 @@ void FancyTabWidget::paintEvent(QPaintEvent *event)
     QRect rect = m_selectionWidget->rect().adjusted(0, 0, 1, 0);
     rect = style()->visualRect(layoutDirection(), geometry(), rect);
     Utils::StyleHelper::verticalGradient(&painter, rect, rect);
+
+    if (!m_backgroundPixmap.isNull()) {
+      QRect pixmap_rect(m_backgroundPixmap.rect());
+      pixmap_rect.moveTo(rect.topLeft());
+
+      while (pixmap_rect.top() < rect.bottom()) {
+        QRect source_rect(pixmap_rect.intersected(rect));
+        source_rect.moveTo(0, 0);
+        painter.drawPixmap(pixmap_rect.topLeft(), m_backgroundPixmap, source_rect);
+        pixmap_rect.moveTop(pixmap_rect.bottom() - 10);
+      }
+    }
+
     painter.setPen(Utils::StyleHelper::borderColor());
     painter.drawLine(rect.topRight(), rect.bottomRight());
 

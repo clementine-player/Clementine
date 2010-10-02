@@ -140,7 +140,7 @@ public:
     void addTab(QWidget *tab, const QIcon &icon, const QString &label);
     void addSpacer(int size = 40);
     void removeTab(int index);
-    void setBackgroundBrush(const QBrush &brush);
+    void setBackgroundPixmap(const QPixmap& pixmap);
     void addCornerWidget(QWidget *widget);
     void insertCornerWidget(int pos, QWidget *widget);
     int cornerWidgetCount() const;
@@ -171,6 +171,7 @@ private:
     QStackedLayout *m_modesStack;
     QWidget *m_selectionWidget;
     QStatusBar *m_statusBar;
+    QPixmap m_backgroundPixmap;
 };
 
 } // namespace Internal
