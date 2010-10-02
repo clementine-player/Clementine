@@ -53,6 +53,14 @@ using namespace Internal;
 const int FancyTabBar::m_rounding = 22;
 const int FancyTabBar::m_textPadding = 4;
 
+FancyTab::FancyTab(QWidget* tabbar)
+  : QWidget(tabbar), enabled(false), tabbar(tabbar), m_fader(0)
+{
+  animator.setPropertyName("fader");
+  animator.setTargetObject(this);
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
+}
+
 void FancyTab::fadeIn()
 {
     animator.stop();
@@ -88,6 +96,12 @@ FancyTabBar::FancyTabBar(QWidget *parent)
     setMouseTracking(true); // Needed for hover events
     m_triggerTimer.setSingleShot(true);
 
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Expanding));
+    layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
+    setLayout(layout);
+
     // We use a zerotimer to keep the sidebar responsive
     connect(&m_triggerTimer, SIGNAL(timeout()), this, SLOT(emitCurrentIndex()));
 }
@@ -97,22 +111,34 @@ FancyTabBar::~FancyTabBar()
     delete style();
 }
 
+QSize FancyTab::sizeHint() const {
+  QFont boldFont(font());
+  boldFont.setPointSizeF(Utils::StyleHelper::sidebarFontSize());
+  boldFont.setBold(true);
+  QFontMetrics fm(boldFont);
+  int spacing = 8;
+  int width = 60 + spacing + 2;
+  int iconHeight = 32;
+  QSize ret(width, iconHeight + spacing + fm.height());
+  return ret;
+}
+
 QSize FancyTabBar::tabSizeHint(bool minimum) const
 {
-    QFont boldFont(font());
-    boldFont.setPointSizeF(Utils::StyleHelper::sidebarFontSize());
-    boldFont.setBold(true);
-    QFontMetrics fm(boldFont);
-    int spacing = 8;
-    int width = 60 + spacing + 2;
-    int maxLabelwidth = 0;
-    for (int tab=0 ; tab<count() ;++tab) {
-        int width = fm.width(tabText(tab));
-        if (width > maxLabelwidth)
-            maxLabelwidth = width;
-    }
-    int iconHeight = minimum ? 0 : 32;
-    return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());
+  QFont boldFont(font());
+  boldFont.setPointSizeF(Utils::StyleHelper::sidebarFontSize());
+  boldFont.setBold(true);
+  QFontMetrics fm(boldFont);
+  int spacing = 8;
+  int width = 60 + spacing + 2;
+  int maxLabelwidth = 0;
+  for (int tab=0 ; tab<count() ;++tab) {
+      int width = fm.width(m_tabs[tab]->text);
+      if (width > maxLabelwidth)
+          maxLabelwidth = width;
+  }
+  int iconHeight = minimum ? 0 : 32;
+  return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());
 }
 
 void FancyTabBar::paintEvent(QPaintEvent *event)
@@ -201,12 +227,7 @@ QSize FancyTabBar::minimumSizeHint() const
 
 QRect FancyTabBar::tabRect(int index) const
 {
-    QSize sh = tabSizeHint();
-
-    if (sh.height() * m_tabs.count() > height())
-        sh.setHeight(height() / m_tabs.count());
-
-    return QRect(0, index * sh.height(), sh.width(), sh.height());
+    return m_tabs[index]->geometry();
 
 }
 
@@ -232,6 +253,19 @@ void FancyTabBar::mousePressEvent(QMouseEvent *e)
             break;
         }
     }
+}
+
+void FancyTabBar::addTab(const QIcon& icon, const QString& label) {
+  FancyTab *tab = new FancyTab(this);
+  tab->icon = icon;
+  tab->text = label;
+  m_tabs.append(tab);
+  qobject_cast<QVBoxLayout*>(layout())->insertWidget(layout()->count()-1, tab);
+}
+
+void FancyTabBar::addSpacer(int size) {
+  qobject_cast<QVBoxLayout*>(layout())->insertSpacerItem(layout()->count()-1,
+      new QSpacerItem(0, size, QSizePolicy::Fixed, QSizePolicy::Maximum));
 }
 
 void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
@@ -275,6 +309,7 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
     QString tabText(this->tabText(tabIndex));
     QRect tabTextRect(tabRect(tabIndex));
     QRect tabIconRect(tabTextRect);
+    tabIconRect.adjust(+4, +4, -4, -4);
     tabTextRect.translate(0, -2);
     QFont boldFont(painter->font());
     boldFont.setPointSizeF(Utils::StyleHelper::sidebarFontSize());
@@ -426,10 +461,14 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(showWidget(int)));
 }
 
-void FancyTabWidget::insertTab(int index, QWidget *tab, const QIcon &icon, const QString &label)
+void FancyTabWidget::addTab(QWidget *tab, const QIcon &icon, const QString &label)
 {
-    m_modesStack->insertWidget(index, tab);
-    m_tabBar->insertTab(index, icon, label);
+    m_modesStack->addWidget(tab);
+    m_tabBar->addTab(icon, label);
+}
+
+void FancyTabWidget::addSpacer(int size) {
+  m_tabBar->addSpacer(size);
 }
 
 void FancyTabWidget::removeTab(int index)

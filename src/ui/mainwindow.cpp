@@ -183,6 +183,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   AddFancyTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
   AddFancyTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
   AddFancyTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
+  ui_->tabs->addSpacer();
   AddFancyTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
   AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
   AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
@@ -1579,6 +1580,6 @@ void MainWindow::ShowVisualisations() {
 
 void MainWindow::AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label) {
   const int i = ui_->tabs->count();
-  ui_->tabs->insertTab(i, widget, icon, label);
+  ui_->tabs->addTab(widget, icon, label);
   ui_->tabs->setTabEnabled(i, true);
 }

@@ -45,17 +45,16 @@ QT_END_NAMESPACE
 namespace Core {
 namespace Internal {
 
-class FancyTab : public QObject{
+class FancyTab : public QWidget{
     Q_OBJECT
 
     Q_PROPERTY(float fader READ fader WRITE setFader)
 public:
-    FancyTab(QWidget *tabbar) : enabled(false), tabbar(tabbar), m_fader(0) {
-        animator.setPropertyName("fader");
-        animator.setTargetObject(this);
-    }
+    FancyTab(QWidget *tabbar);
     float fader() { return m_fader; }
     void setFader(float value);
+
+    QSize sizeHint() const;
 
     void fadeIn();
     void fadeOut();
@@ -95,12 +94,8 @@ public:
     void setTabEnabled(int index, bool enable);
     bool isTabEnabled(int index) const;
 
-    void insertTab(int index, const QIcon &icon, const QString &label) {
-        FancyTab *tab = new FancyTab(this);
-        tab->icon = icon;
-        tab->text = label;
-        m_tabs.insert(index, tab);
-    }
+    void addTab(const QIcon &icon, const QString &label);
+    void addSpacer(int size = 40);
     void setEnabled(int index, bool enabled);
     void removeTab(int index) {
         FancyTab *tab = m_tabs.takeAt(index);
@@ -142,7 +137,8 @@ class FancyTabWidget : public QWidget
 public:
     FancyTabWidget(QWidget *parent = 0);
 
-    void insertTab(int index, QWidget *tab, const QIcon &icon, const QString &label);
+    void addTab(QWidget *tab, const QIcon &icon, const QString &label);
+    void addSpacer(int size = 40);
     void removeTab(int index);
     void setBackgroundBrush(const QBrush &brush);
     void addCornerWidget(QWidget *widget);
