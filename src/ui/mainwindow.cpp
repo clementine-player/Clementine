@@ -351,7 +351,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
-  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), lyric_view_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
@@ -491,6 +490,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
 
   // Lyrics
   lyric_view_->set_network(network);
+  ConnectInfoView(lyric_view_);
 
   // Analyzer
   ui_->analyzer->SetEngine(player_->GetEngine());
@@ -1581,4 +1581,10 @@ void MainWindow::ShowVisualisations() {
 
 void MainWindow::AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label) {
   ui_->tabs->addTab(widget, icon, label);
+}
+
+void MainWindow::ConnectInfoView(SongInfoBase* view) {
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), view, SLOT(SongChanged(Song)));
+  connect(player_, SIGNAL(PlaylistFinished()), view, SLOT(SongFinished()));
+  connect(player_, SIGNAL(Stopped()), view, SLOT(SongFinished()));
 }

@@ -89,6 +89,7 @@ set(SOURCES
   lyrics/lyricprovider.cpp
   lyrics/lyricsettings.cpp
   lyrics/lyricview.cpp
+  lyrics/songinfobase.cpp
   lyrics/ultimatelyricsreader.cpp
 
   playlist/playlist.cpp
@@ -224,6 +225,7 @@ set(HEADERS
   lyrics/lyricprovider.h
   lyrics/lyricsettings.h
   lyrics/lyricview.h
+  lyrics/songinfobase.h
   lyrics/ultimatelyricsreader.h
 
   playlist/playlist.h

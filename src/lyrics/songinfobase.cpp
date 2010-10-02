@@ -14,38 +14,32 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LYRICVIEW_H
-#define LYRICVIEW_H
-
 #include "songinfobase.h"
-#include "core/song.h"
 
-class LyricFetcher;
-class NetworkAccessManager;
-class Ui_LyricView;
+SongInfoBase::SongInfoBase(QWidget* parent)
+  : QWidget(parent),
+    dirty_(false)
+{
+}
 
-class LyricView : public SongInfoBase {
-  Q_OBJECT
+void SongInfoBase::SongChanged(const Song& metadata) {
+  if (isVisible()) {
+    Update(metadata);
+    dirty_ = false;
+  } else {
+    queued_metadata_ = metadata;
+    dirty_ = true;
+  }
+}
 
-public:
-  LyricView(QWidget* parent = 0);
-  ~LyricView();
+void SongInfoBase::SongFinished() {
+  dirty_ = false;
+}
 
-  void set_network(NetworkAccessManager* network);
-  LyricFetcher* fetcher() const { return fetcher_; }
-
-protected:
-  void Update(const Song& metadata);
-
-private slots:
-  void SearchProgress(int id, const QString& provider);
-  void SearchFinished(int id, bool success, const QString& title, const QString& content);
-
-private:
-  Ui_LyricView* ui_;
-
-  LyricFetcher* fetcher_;
-  int current_request_id_;
-};
-
-#endif // LYRICVIEW_H
+void SongInfoBase::showEvent(QShowEvent* e) {
+  if (dirty_) {
+    Update(queued_metadata_);
+    dirty_ = false;
+  }
+  QWidget::showEvent(e);
+}

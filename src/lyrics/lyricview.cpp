@@ -19,7 +19,7 @@
 #include "ui_lyricview.h"
 
 LyricView::LyricView(QWidget *parent)
-  : QWidget(parent),
+  : SongInfoBase(parent),
     ui_(new Ui_LyricView),
     fetcher_(NULL),
     current_request_id_(-1)
@@ -40,7 +40,7 @@ void LyricView::set_network(NetworkAccessManager* network) {
           SLOT(SearchProgress(int,QString)));
 }
 
-void LyricView::SongChanged(const Song& metadata) {
+void LyricView::Update(const Song& metadata) {
   current_request_id_ = fetcher_->SearchAsync(metadata);
 
   ui_->busy_text->SetText(tr("Searching..."));

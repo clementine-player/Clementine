@@ -59,6 +59,7 @@ class RadioItem;
 class RadioModel;
 class RadioViewContainer;
 class Song;
+class SongInfoBase;
 class SystemTrayIcon;
 class TaskManager;
 class TranscodeDialog;
@@ -196,6 +197,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);
   void AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label);
+  void ConnectInfoView(SongInfoBase* view);
 
  private:
   Ui_MainWindow* ui_;
