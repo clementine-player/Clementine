@@ -61,8 +61,10 @@ public:
 
     QIcon icon;
     QString text;
-    QString toolTip;
-    bool enabled;
+
+protected:
+    void enterEvent(QEvent *);
+    void leaveEvent(QEvent *);
 
 private:
     QPropertyAnimation animator;
@@ -78,25 +80,16 @@ public:
     FancyTabBar(QWidget *parent = 0);
     ~FancyTabBar();
 
-    bool event(QEvent *event);
-
     void paintEvent(QPaintEvent *event);
     void paintTab(QPainter *painter, int tabIndex) const;
     void mousePressEvent(QMouseEvent *);
-    void mouseMoveEvent(QMouseEvent *);
-    void enterEvent(QEvent *);
-    void leaveEvent(QEvent *);
     bool validIndex(int index) const { return index >= 0 && index < m_tabs.count(); }
 
     QSize sizeHint() const;
     QSize minimumSizeHint() const;
 
-    void setTabEnabled(int index, bool enable);
-    bool isTabEnabled(int index) const;
-
     void addTab(const QIcon &icon, const QString &label);
     void addSpacer(int size = 40);
-    void setEnabled(int index, bool enabled);
     void removeTab(int index) {
         FancyTab *tab = m_tabs.takeAt(index);
         delete tab;
@@ -104,8 +97,8 @@ public:
     void setCurrentIndex(int index);
     int currentIndex() const { return m_currentIndex; }
 
-    void setTabToolTip(int index, QString toolTip) { m_tabs[index]->toolTip = toolTip; }
-    QString tabToolTip(int index) const { return m_tabs.at(index)->toolTip; }
+    void setTabToolTip(int index, const QString& toolTip);
+    QString tabToolTip(int index) const;
 
     QIcon tabIcon(int index) const {return m_tabs.at(index)->icon; }
     QString tabText(int index) const { return m_tabs.at(index)->text; }
@@ -121,8 +114,6 @@ public slots:
 private:
     static const int m_rounding;
     static const int m_textPadding;
-    QRect m_hoverRect;
-    int m_hoverIndex;
     int m_currentIndex;
     QList<FancyTab*> m_tabs;
     QTimer m_triggerTimer;
@@ -151,9 +142,6 @@ public:
 
     int currentIndex() const;
     QStatusBar *statusBar() const;
-
-    void setTabEnabled(int index, bool enable);
-    bool isTabEnabled(int index) const;
 
 signals:
     void currentAboutToShow(int index);

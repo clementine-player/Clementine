@@ -54,7 +54,7 @@ const int FancyTabBar::m_rounding = 22;
 const int FancyTabBar::m_textPadding = 4;
 
 FancyTab::FancyTab(QWidget* tabbar)
-  : QWidget(tabbar), enabled(false), tabbar(tabbar), m_fader(0)
+  : QWidget(tabbar), tabbar(tabbar), m_fader(0)
 {
   animator.setPropertyName("fader");
   animator.setTargetObject(this);
@@ -86,8 +86,6 @@ void FancyTab::setFader(float value)
 FancyTabBar::FancyTabBar(QWidget *parent)
     : QWidget(parent)
 {
-    m_hoverIndex = -1;
-    m_currentIndex = -1;
     setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
     setStyle(new QWindowsStyle);
     setMinimumWidth(qMax(2 * m_rounding, 40));
@@ -155,62 +153,16 @@ void FancyTabBar::paintEvent(QPaintEvent *event)
         paintTab(&p, currentIndex());
 }
 
-// Handle hover events for mouse fade ins
-void FancyTabBar::mouseMoveEvent(QMouseEvent *e)
+// Resets hover animation on mouse enter
+void FancyTab::enterEvent(QEvent*)
 {
-    int newHover = -1;
-    for (int i = 0; i < count(); ++i) {
-        QRect area = tabRect(i);
-        if (area.contains(e->pos())) {
-            newHover = i;
-            break;
-        }
-    }
-    if (newHover == m_hoverIndex)
-        return;
-
-    if (validIndex(m_hoverIndex))
-        m_tabs[m_hoverIndex]->fadeOut();
-
-    m_hoverIndex = newHover;
-
-    if (validIndex(m_hoverIndex)) {
-        m_tabs[m_hoverIndex]->fadeIn();
-        m_hoverRect = tabRect(m_hoverIndex);
-    }
-}
-
-bool FancyTabBar::event(QEvent *event)
-{
-    if (event->type() == QEvent::ToolTip) {
-        if (validIndex(m_hoverIndex)) {
-            QString tt = tabToolTip(m_hoverIndex);
-            if (!tt.isEmpty()) {
-                QToolTip::showText(static_cast<QHelpEvent*>(event)->globalPos(), tt, this);
-                return true;
-            }
-        }
-    }
-    return QWidget::event(event);
+    fadeIn();
 }
 
 // Resets hover animation on mouse enter
-void FancyTabBar::enterEvent(QEvent *e)
+void FancyTab::leaveEvent(QEvent*)
 {
-    Q_UNUSED(e)
-    m_hoverRect = QRect();
-    m_hoverIndex = -1;
-}
-
-// Resets hover animation on mouse enter
-void FancyTabBar::leaveEvent(QEvent *e)
-{
-    Q_UNUSED(e)
-    m_hoverIndex = -1;
-    m_hoverRect = QRect();
-    for (int i = 0 ; i < m_tabs.count() ; ++i) {
-        m_tabs[i]->fadeOut();
-    }
+    fadeOut();
 }
 
 QSize FancyTabBar::sizeHint() const
@@ -228,7 +180,14 @@ QSize FancyTabBar::minimumSizeHint() const
 QRect FancyTabBar::tabRect(int index) const
 {
     return m_tabs[index]->geometry();
+}
 
+QString FancyTabBar::tabToolTip(int index) const {
+  return m_tabs[index]->toolTip();
+}
+
+void FancyTabBar::setTabToolTip(int index, const QString& toolTip) {
+  m_tabs[index]->setToolTip(toolTip);
 }
 
 // This keeps the sidebar responsive since
@@ -244,12 +203,9 @@ void FancyTabBar::mousePressEvent(QMouseEvent *e)
     e->accept();
     for (int index = 0; index < m_tabs.count(); ++index) {
         if (tabRect(index).contains(e->pos())) {
-
-            if (isTabEnabled(index)) {
-                m_currentIndex = index;
-                update();
-                m_triggerTimer.start(0);
-            }
+            m_currentIndex = index;
+            update();
+            m_triggerTimer.start(0);
             break;
         }
     }
@@ -278,7 +234,6 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
 
     QRect rect = tabRect(tabIndex);
     bool selected = (tabIndex == m_currentIndex);
-    bool enabled = isTabEnabled(tabIndex);
 
     if (selected) {
         //background
@@ -317,14 +272,10 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
     painter->setFont(boldFont);
     painter->setPen(selected ? QColor(255, 255, 255, 160) : QColor(0, 0, 0, 110));
     int textFlags = Qt::AlignCenter | Qt::AlignBottom | Qt::TextWordWrap;
-    if (enabled) {
-        painter->drawText(tabTextRect, textFlags, tabText);
-        painter->setPen(selected ? QColor(60, 60, 60) : Utils::StyleHelper::panelTextColor());
-    } else {
-        painter->setPen(selected ? Utils::StyleHelper::panelTextColor() : QColor(255, 255, 255, 120));
-    }
+    painter->drawText(tabTextRect, textFlags, tabText);
+    painter->setPen(selected ? QColor(60, 60, 60) : Utils::StyleHelper::panelTextColor());
 #ifndef Q_WS_MAC
-    if (!selected && enabled) {
+    if (!selected) {
         painter->save();
         int fader = int(m_tabs[tabIndex]->fader());
         QLinearGradient grad(rect.topLeft(), rect.topRight());
@@ -339,12 +290,9 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
     }
 #endif
 
-    if (!enabled)
-        painter->setOpacity(0.7);
-
     int textHeight = painter->fontMetrics().boundingRect(QRect(0, 0, width(), height()), Qt::TextWordWrap, tabText).height();
     tabIconRect.adjust(0, 4, 0, -textHeight);
-    Utils::StyleHelper::drawIconWithShadow(tabIcon(tabIndex), tabIconRect, painter, enabled ? QIcon::Normal : QIcon::Disabled);
+    Utils::StyleHelper::drawIconWithShadow(tabIcon(tabIndex), tabIconRect, painter, QIcon::Normal);
 
     painter->translate(0, -1);
     painter->drawText(tabTextRect, textFlags, tabText);
@@ -352,33 +300,9 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
 }
 
 void FancyTabBar::setCurrentIndex(int index) {
-    if (isTabEnabled(index)) {
-        m_currentIndex = index;
-        update();
-        emit currentChanged(m_currentIndex);
-    }
-}
-
-void FancyTabBar::setTabEnabled(int index, bool enable)
-{
-    Q_ASSERT(index < m_tabs.size());
-    Q_ASSERT(index >= 0);
-
-    if (index < m_tabs.size() && index >= 0) {
-        m_tabs[index]->enabled = enable;
-        update(tabRect(index));
-    }
-}
-
-bool FancyTabBar::isTabEnabled(int index) const
-{
-    Q_ASSERT(index < m_tabs.size());
-    Q_ASSERT(index >= 0);
-
-    if (index < m_tabs.size() && index >= 0)
-        return m_tabs[index]->enabled;
-
-    return false;
+    m_currentIndex = index;
+    update();
+    emit currentChanged(m_currentIndex);
 }
 
 
@@ -540,8 +464,7 @@ QStatusBar *FancyTabWidget::statusBar() const
 
 void FancyTabWidget::setCurrentIndex(int index)
 {
-    if (m_tabBar->isTabEnabled(index))
-        m_tabBar->setCurrentIndex(index);
+  m_tabBar->setCurrentIndex(index);
 }
 
 void FancyTabWidget::showWidget(int index)
@@ -554,14 +477,4 @@ void FancyTabWidget::showWidget(int index)
 void FancyTabWidget::setTabToolTip(int index, const QString &toolTip)
 {
     m_tabBar->setTabToolTip(index, toolTip);
-}
-
-void FancyTabWidget::setTabEnabled(int index, bool enable)
-{
-    m_tabBar->setTabEnabled(index, enable);
-}
-
-bool FancyTabWidget::isTabEnabled(int index) const
-{
-    return m_tabBar->isTabEnabled(index);
 }

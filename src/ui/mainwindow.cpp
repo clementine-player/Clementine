@@ -1580,7 +1580,5 @@ void MainWindow::ShowVisualisations() {
 }
 
 void MainWindow::AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label) {
-  const int i = ui_->tabs->count();
   ui_->tabs->addTab(widget, icon, label);
-  ui_->tabs->setTabEnabled(i, true);
 }
