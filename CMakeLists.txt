@@ -208,6 +208,8 @@ else (USE_SYSTEM_QXT)
   endif (NOT APPLE)
 endif (USE_SYSTEM_QXT)
 
+set(ECHONEST_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/3rdparty/libechonest)
+
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)
@@ -215,6 +217,7 @@ if (WIN32)
 endif (WIN32)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(3rdparty/fancytabwidget)
+add_subdirectory(3rdparty/libechonest)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)

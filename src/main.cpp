@@ -46,6 +46,8 @@
 #include <glib-object.h>
 #include <glib/gutils.h>
 
+#include <echonest/Config.h>
+
 #ifdef Q_WS_X11
 #  include <QDBusConnection>
 #  include <QDBusMetaType>
@@ -197,6 +199,9 @@ int main(int argc, char *argv[]) {
   IconLoader::Init();
 
   NetworkAccessManager network;
+
+  Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
+  Echonest::Config::instance()->setNetworkAccessManager(network.network());
 
   // MPRIS DBus interface.
 #ifdef Q_WS_X11

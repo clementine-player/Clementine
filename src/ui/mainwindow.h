@@ -33,6 +33,7 @@
 class About;
 class AddStreamDialog;
 class AlbumCoverManager;
+class ArtistInfoView;
 class CommandlineOptions;
 class Database;
 class DeviceManager;
@@ -196,7 +197,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
   void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);
-  void AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label);
   void ConnectInfoView(SongInfoBase* view);
 
  private:
@@ -225,6 +225,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   RadioViewContainer* radio_view_;
   DeviceView* device_view_;
   LyricView* lyric_view_;
+  ArtistInfoView* artist_info_view_;
 
   boost::scoped_ptr<SettingsDialog> settings_dialog_;
   boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;

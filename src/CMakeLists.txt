@@ -17,6 +17,7 @@ include_directories(${LIBPROJECTM_INCLUDE_DIRS})
 include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
+include_directories(${ECHONEST_INCLUDE_DIRS})
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/AddEngine.cmake)
@@ -127,6 +128,11 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
+  songinfo/artistinfofetcher.cpp
+  songinfo/artistinfoprovider.cpp
+  songinfo/artistinfoview.cpp
+  songinfo/collapsibleinfopane.cpp
+  songinfo/echonestartistinfo.cpp
   songinfo/htmlscraper.cpp
   songinfo/lyricfetcher.cpp
   songinfo/lyricprovider.cpp
@@ -257,6 +263,11 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
+  songinfo/artistinfofetcher.h
+  songinfo/artistinfoprovider.h
+  songinfo/artistinfoview.h
+  songinfo/collapsibleinfopane.h
+  songinfo/echonestartistinfo.h
   songinfo/htmlscraper.h
   songinfo/lyricfetcher.h
   songinfo/lyricprovider.h
@@ -681,6 +692,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   chardet
   fancytabwidget
+  echonest
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}

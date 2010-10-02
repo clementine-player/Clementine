@@ -54,6 +54,7 @@
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
 #include "radio/savedradio.h"
+#include "songinfo/artistinfoview.h"
 #include "songinfo/lyricfetcher.h"
 #include "songinfo/lyricview.h"
 #include "transcoder/transcodedialog.h"
@@ -142,6 +143,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     radio_view_(new RadioViewContainer(this)),
     device_view_(new DeviceView(this)),
     lyric_view_(new LyricView(this)),
+    artist_info_view_(new ArtistInfoView(this)),
     settings_dialog_(NULL),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
@@ -179,14 +181,14 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->volume->setValue(player_->GetVolume());
 
   // Add tabs to the fancy tab widget
-  AddFancyTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
-  AddFancyTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
-  AddFancyTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
-  AddFancyTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
+  ui_->tabs->addTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
+  ui_->tabs->addTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
+  ui_->tabs->addTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
+  ui_->tabs->addTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->addSpacer();
-  AddFancyTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
-  AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
-  AddFancyTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
+  ui_->tabs->addTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
+  ui_->tabs->addTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
+  ui_->tabs->addTab(artist_info_view_, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
 
   ui_->tabs->statusBar()->hide();
   ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
@@ -491,6 +493,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   // Lyrics
   lyric_view_->set_network(network);
   ConnectInfoView(lyric_view_);
+  ConnectInfoView(artist_info_view_);
 
   // Analyzer
   ui_->analyzer->SetEngine(player_->GetEngine());
@@ -1577,10 +1580,6 @@ void MainWindow::ShowVisualisations() {
 
   visualisation_->show();
 #endif // ENABLE_VISUALISATIONS
-}
-
-void MainWindow::AddFancyTab(QWidget* widget, const QIcon& icon, const QString& label) {
-  ui_->tabs->addTab(widget, icon, label);
 }
 
 void MainWindow::ConnectInfoView(SongInfoBase* view) {
