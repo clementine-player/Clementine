@@ -84,14 +84,6 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
-  lyrics/htmlscraper.cpp
-  lyrics/lyricfetcher.cpp
-  lyrics/lyricprovider.cpp
-  lyrics/lyricsettings.cpp
-  lyrics/lyricview.cpp
-  lyrics/songinfobase.cpp
-  lyrics/ultimatelyricsreader.cpp
-
   playlist/playlist.cpp
   playlist/playlistbackend.cpp
   playlist/playlistcontainer.cpp
@@ -134,6 +126,14 @@ set(SOURCES
   radio/radioviewcontainer.cpp
   radio/savedradio.cpp
   radio/somafmservice.cpp
+
+  songinfo/htmlscraper.cpp
+  songinfo/lyricfetcher.cpp
+  songinfo/lyricprovider.cpp
+  songinfo/lyricsettings.cpp
+  songinfo/lyricview.cpp
+  songinfo/songinfobase.cpp
+  songinfo/ultimatelyricsreader.cpp
 
   ui/about.cpp
   ui/addstreamdialog.cpp
@@ -220,14 +220,6 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
 
-  lyrics/htmlscraper.h
-  lyrics/lyricfetcher.h
-  lyrics/lyricprovider.h
-  lyrics/lyricsettings.h
-  lyrics/lyricview.h
-  lyrics/songinfobase.h
-  lyrics/ultimatelyricsreader.h
-
   playlist/playlist.h
   playlist/playlistbackend.h
   playlist/playlistcontainer.h
@@ -264,6 +256,14 @@ set(HEADERS
   radio/radioviewcontainer.h
   radio/savedradio.h
   radio/somafmservice.h
+
+  songinfo/htmlscraper.h
+  songinfo/lyricfetcher.h
+  songinfo/lyricprovider.h
+  songinfo/lyricsettings.h
+  songinfo/lyricview.h
+  songinfo/songinfobase.h
+  songinfo/ultimatelyricsreader.h
 
   ui/about.h
   ui/addstreamdialog.h
@@ -311,9 +311,6 @@ set(UI
   library/libraryfilterwidget.ui
   library/libraryviewcontainer.ui
 
-  lyrics/lyricsettings.ui
-  lyrics/lyricview.ui
-
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
@@ -323,6 +320,9 @@ set(UI
   radio/magnatuneconfig.ui
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
+
+  songinfo/lyricsettings.ui
+  songinfo/lyricview.ui
 
   ui/about.ui
   ui/addstreamdialog.ui
