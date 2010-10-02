@@ -827,14 +827,31 @@ int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
   disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
   connect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(BackgroundStreamFinished()));
-  if (!pipeline->SetState(GST_STATE_PLAYING)) {
-    qWarning() << "Could not set thread to PLAYING.";
-    pipeline.reset();
-    return -1;
-  }
+
   const int stream_id = next_background_stream_id_++;
   background_streams_[stream_id] = pipeline;
+
+  QFuture<GstStateChangeReturn> future = pipeline->SetState(GST_STATE_PLAYING);
+  BoundFutureWatcher<GstStateChangeReturn, int>* watcher =
+      new BoundFutureWatcher<GstStateChangeReturn, int>(stream_id, this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(BackgroundStreamPlayDone()));
+
   return stream_id;
+}
+
+void GstEngine::BackgroundStreamPlayDone() {
+  BoundFutureWatcher<GstStateChangeReturn, int>* watcher =
+      static_cast<BoundFutureWatcher<GstStateChangeReturn, int>*>(sender());
+  watcher->deleteLater();
+
+  const int stream_id = watcher->data();
+  GstStateChangeReturn ret = watcher->result();
+
+  if (ret == GST_STATE_CHANGE_FAILURE) {
+    qWarning() << "Could not set thread to PLAYING.";
+    background_streams_.remove(stream_id);
+  }
 }
 
 int GstEngine::AddBackgroundStream(const QUrl& url) {
