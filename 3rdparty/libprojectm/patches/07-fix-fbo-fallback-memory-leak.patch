@@ -1,0 +1,17 @@
+Index: Renderer/FBO.cpp
+===================================================================
+--- Renderer/FBO.cpp	(revision 2090)
++++ Renderer/FBO.cpp	(working copy)
+@@ -187,8 +187,11 @@
+   {
+ 	int mindim = width < height ? width : height;
+     int origtexsize = this->texsize;
+-    this->texsize = nearestPower2( mindim, SCALE_MINIFY );      
++    this->texsize = nearestPower2( mindim, SCALE_MINIFY );
+ 
++    if (origtexsize == texsize)
++      return;
++
+     /* Create the texture that will be bound to the render this */
+     /*
+ 
