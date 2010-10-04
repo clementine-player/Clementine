@@ -13,7 +13,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions( -Wall -Wundef -Wcast-align -Wchar-subscripts -Wpointer-arith
        -Wwrite-strings -Wpacked -Wformat-security -Wmissing-format-attribute
        -Wold-style-cast -Woverloaded-virtual -Wnon-virtual-dtor -Werror )
-    add_definitions( -fvisibility=hidden )
+    if ( NOT WIN32 )
+        add_definitions( -fvisibility=hidden )
+    endif()
 # to be added:
 #       -Wshadow
 # FIXME we might want this one back in, but Qt 4.4.3 spits gazillions of warnings with it on Linux-64:

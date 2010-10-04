@@ -47,3 +47,4 @@ QString Echonest::statusToString(Echonest::Analysis::AnalysisStatus status)
     }
     return QString();
 }
+
