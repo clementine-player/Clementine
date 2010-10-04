@@ -47,17 +47,48 @@ Echonest::ParseError::ParseError(Echonest::ErrorType error): exception()
 Echonest::ParseError::~ParseError() throw()
 {}
 
-Echonest::ErrorType Echonest::ParseError::errorType() const
+Echonest::ErrorType Echonest::ParseError::errorType() const throw()
 {
     return type;
 }
 
-void Echonest::ParseError::setNetworkError( QNetworkReply::NetworkError error )
+void Echonest::ParseError::setNetworkError( QNetworkReply::NetworkError error ) throw()
 {
     nError = error;
 }
 
-QNetworkReply::NetworkError Echonest::ParseError::networkError() const
+const char* Echonest::ParseError::what() const throw()
+{
+    switch( type )
+    {
+        case UnknownError:
+            return "Unknown Echo Nest Error";
+        case NoError:
+            return "No Error";
+        case MissingAPIKey:
+            return "Missing Echo Nest API Key";
+        case NotAllowed:
+            return "Method not allowed";
+        case RateLimitExceeded:
+            return "Rate limit exceeded";
+        case MissingParameter:
+            return "Missing parameter";
+        case InvalidParameter:
+            return "Invalid parameter";
+        case UnfinishedQuery:
+            return "Unfinished query object";
+        case EmptyResult:
+            return "No results";
+        case NetworkError:
+            return "Network Error";
+        case UnknownParseError:
+            return "Unknown Parse Error";
+    }
+    return "";
+}
+
+
+QNetworkReply::NetworkError Echonest::ParseError::networkError() const throw()
 {
     return nError;
 }

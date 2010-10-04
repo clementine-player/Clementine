@@ -56,21 +56,22 @@ namespace Echonest{
         NetworkError = 9
     };
     
-    class ParseError : public std::exception
+    class ECHONEST_EXPORT ParseError : public std::exception
     {
     public:
         ParseError( ErrorType error );
         virtual ~ParseError() throw();
     
-        ErrorType errorType() const;
+        ErrorType errorType() const throw();
         
         /**
          * If the ErrorType is NetworkError, this value contains the QNetworkReply
          *  error code that was returned.
          */
-        void setNetworkError( QNetworkReply::NetworkError error );
-        QNetworkReply::NetworkError networkError() const;
+        void setNetworkError( QNetworkReply::NetworkError error ) throw();
+        QNetworkReply::NetworkError networkError() const throw();
         
+        virtual const char* what() const throw ();
     private:
         ErrorType type;
         QNetworkReply::NetworkError nError;
