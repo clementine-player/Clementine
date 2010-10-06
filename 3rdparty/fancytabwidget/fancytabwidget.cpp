@@ -41,7 +41,6 @@
 #include <QtGui/QPainter>
 #include <QtGui/QSplitter>
 #include <QtGui/QStackedLayout>
-#include <QtGui/QStatusBar>
 #include <QtGui/QToolButton>
 #include <QtGui/QToolTip>
 #include <QtCore/QAnimationGroup>
@@ -366,20 +365,17 @@ FancyTabWidget::FancyTabWidget(QWidget *parent)
     selectionLayout->addWidget(m_cornerWidgetContainer, 0);
 
     m_modesStack = new QStackedLayout;
-    m_statusBar = new QStatusBar;
-    m_statusBar->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
 
-    QVBoxLayout *vlayout = new QVBoxLayout;
-    vlayout->setMargin(0);
-    vlayout->setSpacing(0);
-    vlayout->addLayout(m_modesStack);
-    vlayout->addWidget(m_statusBar);
+    m_vlayout = new QVBoxLayout;
+    m_vlayout->setMargin(0);
+    m_vlayout->setSpacing(0);
+    m_vlayout->addLayout(m_modesStack);
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->setMargin(0);
     mainLayout->setSpacing(1);
     mainLayout->addWidget(m_selectionWidget);
-    mainLayout->addLayout(vlayout);
+    mainLayout->addLayout(m_vlayout);
     setLayout(mainLayout);
 
     connect(m_tabBar, SIGNAL(currentChanged(int)), this, SLOT(showWidget(int)));
@@ -457,11 +453,6 @@ int FancyTabWidget::currentIndex() const
     return m_tabBar->currentIndex();
 }
 
-QStatusBar *FancyTabWidget::statusBar() const
-{
-    return m_statusBar;
-}
-
 void FancyTabWidget::setCurrentIndex(int index)
 {
   m_tabBar->setCurrentIndex(index);
@@ -477,4 +468,8 @@ void FancyTabWidget::showWidget(int index)
 void FancyTabWidget::setTabToolTip(int index, const QString &toolTip)
 {
     m_tabBar->setTabToolTip(index, toolTip);
+}
+
+void FancyTabWidget::addBottomWidget(QWidget* widget) {
+    m_vlayout->addWidget(widget);
 }

@@ -40,6 +40,7 @@ QT_BEGIN_NAMESPACE
 class QPainter;
 class QStackedLayout;
 class QStatusBar;
+class QVBoxLayout;
 QT_END_NAMESPACE
 
 namespace Core {
@@ -141,7 +142,8 @@ public:
     void paintEvent(QPaintEvent *event);
 
     int currentIndex() const;
-    QStatusBar *statusBar() const;
+
+    void addBottomWidget(QWidget* widget);
 
 signals:
     void currentAboutToShow(int index);
@@ -158,8 +160,8 @@ private:
     QWidget *m_cornerWidgetContainer;
     QStackedLayout *m_modesStack;
     QWidget *m_selectionWidget;
-    QStatusBar *m_statusBar;
     QPixmap m_backgroundPixmap;
+    QVBoxLayout* m_vlayout;
 };
 
 } // namespace Internal

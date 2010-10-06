@@ -190,7 +190,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->tabs->addTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
   ui_->tabs->addTab(artist_info_view_, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
 
-  ui_->tabs->statusBar()->hide();
+  // Add the now playing widget to the fancy tab widget
+  ui_->tabs->addBottomWidget(ui_->now_playing);
+
   ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
