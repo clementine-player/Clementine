@@ -17,6 +17,64 @@
 #include "lastfmstationdialog.h"
 #include "ui_lastfmstationdialog.h"
 
+#include <map>
+#include <string>
+#include <vector>
+
+#include <boost/spirit/include/qi.hpp>
+#include <boost/fusion/include/std_pair.hpp>
+
+#include <QtDebug>
+#include <QValidator>
+
+namespace {
+
+namespace qi = boost::spirit::qi;
+using boost::spirit::lit;
+
+template <typename Iterator>
+struct rql : qi::grammar<Iterator, std::vector<std::pair<std::string, std::string> >()> {
+  rql() : rql::base_type(query) {
+    query = pair % lit(' ') >> qi::eoi;
+    pair = key >> lit(':') >> value;
+    key = qi::string("simart") |
+          qi::string("tag") |
+          qi::string("user") |
+          qi::string("library") |
+          qi::string("loved");
+    value = (unquoted | quoted);
+    unquoted = +(qi::char_ - lit(' ') - lit('"'));
+    quoted = '"' >> +(qi::char_ - '"') >> '"';
+  }
+
+  qi::rule<Iterator, std::vector<std::pair<std::string, std::string> >()> query;
+  qi::rule<Iterator, std::pair<std::string, std::string>()> pair;
+  qi::rule<Iterator, std::string()> key;
+  qi::rule<Iterator, std::string()> value, unquoted, quoted;
+};
+
+class RQLValidator : public QValidator {
+ public:
+  QValidator::State validate(QString& str, int& pos) const {
+    std::string input = str.toStdString();
+    rql<std::string::iterator> parser;
+    std::vector<std::pair<std::string, std::string> > results;
+    bool ret = qi::parse(input.begin(), input.end(), parser, results);
+
+    qDebug() << "Success:" << ret;
+
+    for (std::vector<std::pair<std::string, std::string> >::const_iterator it = results.begin();
+        it != results.end(); ++it) {
+      qDebug("key:%s value:%s", it->first.c_str(), it->second.c_str());
+    }
+    qDebug() << "---";
+
+    return ret ? Acceptable : Intermediate;
+  }
+};
+
+}  // namespace
+
 LastFMStationDialog::LastFMStationDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_LastFMStationDialog)
@@ -24,6 +82,8 @@ LastFMStationDialog::LastFMStationDialog(QWidget* parent)
   ui_->setupUi(this);
 
   resize(sizeHint());
+
+  ui_->content->setValidator(new RQLValidator());
 }
 
 LastFMStationDialog::~LastFMStationDialog() {
@@ -38,4 +98,7 @@ void LastFMStationDialog::SetType(Type type) {
 
 QString LastFMStationDialog::content() const {
   return ui_->content->text();
+}
+
+void LastFMStationDialog::accept() {
 }
