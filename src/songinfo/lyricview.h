@@ -28,7 +28,7 @@ class LyricView : public SongInfoBase {
   Q_OBJECT
 
 public:
-  LyricView(QWidget* parent = 0);
+  LyricView(NetworkAccessManager* network, QWidget* parent = 0);
   ~LyricView();
 
   void set_network(NetworkAccessManager* network);

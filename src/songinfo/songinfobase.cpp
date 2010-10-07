@@ -16,8 +16,9 @@
 
 #include "songinfobase.h"
 
-SongInfoBase::SongInfoBase(QWidget* parent)
+SongInfoBase::SongInfoBase(NetworkAccessManager* network, QWidget* parent)
   : QWidget(parent),
+    network_(network),
     dirty_(false)
 {
 }

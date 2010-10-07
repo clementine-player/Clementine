@@ -21,11 +21,13 @@
 
 #include "core/song.h"
 
+class NetworkAccessManager;
+
 class SongInfoBase : public QWidget {
   Q_OBJECT
 
 public:
-  SongInfoBase(QWidget* parent = 0);
+  SongInfoBase(NetworkAccessManager* network, QWidget* parent = 0);
 
 public slots:
   void SongChanged(const Song& metadata);
@@ -35,6 +37,8 @@ protected:
   void showEvent(QShowEvent* e);
 
   virtual void Update(const Song& metadata) {}
+
+  NetworkAccessManager* network_;
 
 private:
   Song queued_metadata_;

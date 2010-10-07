@@ -18,8 +18,8 @@
 #include "lyricview.h"
 #include "ui_lyricview.h"
 
-LyricView::LyricView(QWidget *parent)
-  : SongInfoBase(parent),
+LyricView::LyricView(NetworkAccessManager* network, QWidget *parent)
+  : SongInfoBase(network, parent),
     ui_(new Ui_LyricView),
     fetcher_(NULL),
     current_request_id_(-1)

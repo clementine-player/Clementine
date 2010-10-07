@@ -20,6 +20,7 @@
 #include "songinfobase.h"
 
 class ArtistInfoFetcher;
+class PrettyImageView;
 
 class QScrollArea;
 class QVBoxLayout;
@@ -28,7 +29,7 @@ class ArtistInfoView : public SongInfoBase {
   Q_OBJECT
 
 public:
-  ArtistInfoView(QWidget* parent = 0);
+  ArtistInfoView(NetworkAccessManager* network, QWidget* parent = 0);
   ~ArtistInfoView();
 
 protected:
@@ -48,6 +49,8 @@ private:
 
   QScrollArea* scroll_area_;
   QVBoxLayout* container_;
+  PrettyImageView* image_view_;
+
   QList<QWidget*> children_;
 };
 

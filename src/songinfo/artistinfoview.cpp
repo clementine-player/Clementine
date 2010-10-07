@@ -17,6 +17,7 @@
 #include "artistinfofetcher.h"
 #include "artistinfoview.h"
 #include "collapsibleinfopane.h"
+#include "widgets/prettyimageview.h"
 
 #include <QFile>
 #include <QScrollArea>
@@ -24,8 +25,8 @@
 #include <QVBoxLayout>
 #include <QtDebug>
 
-ArtistInfoView::ArtistInfoView(QWidget *parent)
-  : SongInfoBase(parent),
+ArtistInfoView::ArtistInfoView(NetworkAccessManager* network, QWidget *parent)
+  : SongInfoBase(network, parent),
     fetcher_(new ArtistInfoFetcher(this)),
     current_request_id_(-1),
     scroll_area_(new QScrollArea),
@@ -75,13 +76,16 @@ void ArtistInfoView::Clear() {
 void ArtistInfoView::Update(const Song& metadata) {
   Clear();
   current_request_id_ = fetcher_->FetchInfo(metadata.artist());
+
+  image_view_ = new PrettyImageView(network_);
+  AddChild(image_view_);
 }
 
 void ArtistInfoView::ImageReady(int id, const QUrl& url) {
   if (id != current_request_id_)
     return;
 
-  qDebug() << "Image" << url;
+  image_view_->AddImage(url);
 }
 
 void ArtistInfoView::InfoReady(int id, const QString& title, QWidget* widget) {
