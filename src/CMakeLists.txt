@@ -131,6 +131,7 @@ set(SOURCES
   songinfo/artistinfofetcher.cpp
   songinfo/artistinfoprovider.cpp
   songinfo/artistinfoview.cpp
+  songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
   songinfo/echonestartistinfo.cpp
   songinfo/htmlscraper.cpp
@@ -267,6 +268,7 @@ set(HEADERS
   songinfo/artistinfofetcher.h
   songinfo/artistinfoprovider.h
   songinfo/artistinfoview.h
+  songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
   songinfo/echonestartistinfo.h
   songinfo/htmlscraper.h

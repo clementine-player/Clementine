@@ -43,7 +43,9 @@ ArtistInfoView::ArtistInfoView(QWidget *parent)
   QWidget* container_widget = new QWidget;
   container_widget->setLayout(container_);
   container_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
+  container_widget->setBackgroundRole(QPalette::Base);
   container_->setSizeConstraint(QLayout::SetMinAndMaxSize);
+  container_->setContentsMargins(0, 0, 0, 0);
   scroll_area_->setWidget(container_widget);
   scroll_area_->setWidgetResizable(true);
 

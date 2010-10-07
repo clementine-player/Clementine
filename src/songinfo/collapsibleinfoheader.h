@@ -14,32 +14,42 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLLAPSIBLEINFOPANE_H
-#define COLLAPSIBLEINFOPANE_H
+#ifndef COLLAPSIBLEINFOHEADER_H
+#define COLLAPSIBLEINFOHEADER_H
 
 #include <QWidget>
 
-class CollapsibleInfoHeader;
-
-class CollapsibleInfoPane : public QWidget {
+class CollapsibleInfoHeader : public QWidget {
   Q_OBJECT
 
 public:
-  CollapsibleInfoPane(QWidget* parent = 0);
+  CollapsibleInfoHeader(QWidget* parent = 0);
 
-  void SetTitle(const QString& title);
-  void SetWidget(QWidget* widget);
+  static const int kHeight;
+
+  bool expanded() const { return expanded_; }
+  bool hovering() const { return hovering_; }
+  const QString& title() const { return title_; }
 
 public slots:
-  void Expand();
-  void Collapse();
+  void SetExpanded(bool expanded);
+  void SetTitle(const QString& title);
 
-private slots:
+signals:
+  void Expanded();
+  void Collapsed();
   void ExpandedToggled(bool expanded);
 
+protected:
+  void enterEvent(QEvent*);
+  void leaveEvent(QEvent*);
+  void paintEvent(QPaintEvent* e);
+  void mouseReleaseEvent(QMouseEvent*);
+
 private:
-  CollapsibleInfoHeader* header_;
-  QWidget* widget_;
+  bool expanded_;
+  bool hovering_;
+  QString title_;
 };
 
-#endif // COLLAPSIBLEINFOPANE_H
+#endif // COLLAPSIBLEINFOHEADER_H
