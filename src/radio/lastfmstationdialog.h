@@ -31,6 +31,7 @@ class LastFMStationDialog : public QDialog {
   enum Type {
     Artist,
     Tag,
+    Custom,
   };
 
   void SetType(Type type);

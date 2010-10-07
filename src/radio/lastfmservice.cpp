@@ -60,6 +60,7 @@ LastFMService::LastFMService(RadioModel* parent)
     scrobbling_enabled_(false),
     artist_list_(NULL),
     tag_list_(NULL),
+    custom_list_(NULL),
     friends_list_(NULL),
     neighbours_list_(NULL),
     network_(parent->network()->network())
@@ -75,12 +76,15 @@ LastFMService::LastFMService(RadioModel* parent)
       QIcon(":last.fm/icon_radio.png"), tr("Play artist radio..."), this, SLOT(AddArtistRadio()));
   add_tag_action_ = context_menu_->addAction(
       QIcon(":last.fm/icon_tag.png"), tr("Play tag radio..."), this, SLOT(AddTagRadio()));
+  add_custom_action_ = context_menu_->addAction(
+      QIcon(":last.fm/icon_radio.png"), tr("Play custom radio..."), this, SLOT(AddCustomRadio()));
   context_menu_->addAction(
       IconLoader::Load("configure"), tr("Configure Last.fm..."), this, SLOT(ShowConfig()));
 
   remove_action_->setEnabled(false);
   add_artist_action_->setEnabled(false);
   add_tag_action_->setEnabled(false);
+  add_custom_action_->setEnabled(false);
 }
 
 LastFMService::~LastFMService() {
@@ -130,8 +134,13 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       tag_list_->icon = QIcon(":last.fm/icon_tag.png");
       tag_list_->lazy_loaded = true;
 
+      custom_list_ = new RadioItem(this, Type_CustomRadio, tr("Custom radio"), item);
+      custom_list_->icon = QIcon(":last.fm/icon_radio.png");
+      custom_list_->lazy_loaded = true;
+
       RestoreList("artists", Type_Artist, QIcon(":last.fm/icon_radio.png"), artist_list_);
       RestoreList("tags", Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
+      RestoreList("custom", Type_Custom, QIcon(":last.fm/icon_radio.png"), custom_list_);
 
       friends_list_ = new RadioItem(this, Type_MyFriends, tr("Friends"), item);
       friends_list_->icon = QIcon(":last.fm/my_friends.png");
@@ -144,6 +153,7 @@ void LastFMService::LazyPopulate(RadioItem *item) {
 
       add_artist_action_->setEnabled(true);
       add_tag_action_->setEnabled(true);
+      add_custom_action_->setEnabled(true);
       break;
 
     case Type_MyFriends:
@@ -265,6 +275,9 @@ QUrl LastFMService::UrlForItem(const RadioItem* item) const {
 
     case Type_Tag:
       return "lastfm://globaltags/" + item->key;
+
+    case Type_Custom:
+      return QString("lastfm://rql/" + item->key.toUtf8().toBase64());
   }
   return QUrl();
 }
@@ -455,6 +468,7 @@ void LastFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
   switch (item->type) {
     case Type_Artist:
     case Type_Tag:
+    case Type_Custom:
       remove_action_->setEnabled(true);
       break;
 
@@ -553,6 +567,10 @@ void LastFMService::AddTagRadio() {
   AddArtistOrTag("tags", LastFMStationDialog::Tag, Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
 }
 
+void LastFMService::AddCustomRadio() {
+  AddArtistOrTag("custom", LastFMStationDialog::Custom, Type_Custom, QIcon(":last.fm/icon_radio.png"), custom_list_);
+}
+
 void LastFMService::AddArtistOrTag(const QString& name,
                                    LastFMStationDialog::Type dialog_type, ItemType item_type,
                                    const QIcon& icon, RadioItem* list) {
@@ -613,6 +631,8 @@ void LastFMService::Remove() {
     SaveList("artists", artist_list_);
   else if (type == Type_Tag)
     SaveList("tags", tag_list_);
+  else if (type == Type_Custom)
+    SaveList("custom", custom_list_);
 }
 
 void LastFMService::FetchMoreTracks() {

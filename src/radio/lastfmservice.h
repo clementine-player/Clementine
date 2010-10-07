@@ -71,6 +71,8 @@ class LastFMService : public RadioService {
     Type_OtherUserNeighbourhood,
     Type_Artist,
     Type_Tag,
+    Type_Custom,
+    Type_CustomRadio,
   };
 
   // RadioService
@@ -125,6 +127,7 @@ class LastFMService : public RadioService {
   void AddToPlaylist();
   void AddArtistRadio();
   void AddTagRadio();
+  void AddCustomRadio();
   void Remove();
 
   // Radio tuner.
@@ -163,6 +166,7 @@ class LastFMService : public RadioService {
   QAction* remove_action_;
   QAction* add_artist_action_;
   QAction* add_tag_action_;
+  QAction* add_custom_action_;
   RadioItem* context_item_;
 
   QUrl last_url_;
@@ -174,6 +178,7 @@ class LastFMService : public RadioService {
 
   RadioItem* artist_list_;
   RadioItem* tag_list_;
+  RadioItem* custom_list_;
   RadioItem* friends_list_;
   RadioItem* neighbours_list_;
 
