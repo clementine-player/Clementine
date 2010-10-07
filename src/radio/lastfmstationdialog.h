@@ -37,9 +37,6 @@ class LastFMStationDialog : public QDialog {
   void SetType(Type type);
   QString content() const;
 
- public slots:
-  virtual void accept();
-
  private:
   Ui_LastFMStationDialog* ui_;
 };
