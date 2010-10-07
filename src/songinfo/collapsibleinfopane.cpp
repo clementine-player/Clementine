@@ -20,7 +20,6 @@
 #include <QStyleOption>
 #include <QVBoxLayout>
 
-const int CollapsibleInfoPane::kMargin = 6;
 const int CollapsibleInfoPane::kTitleHeight = 20;
 
 CollapsibleInfoPane::CollapsibleInfoPane(QWidget* parent)
@@ -29,7 +28,8 @@ CollapsibleInfoPane::CollapsibleInfoPane(QWidget* parent)
     expanded_(true)
 {
   QVBoxLayout* layout = new QVBoxLayout(this);
-  layout->setContentsMargins(kMargin, kTitleHeight, kMargin, 0);
+  layout->setContentsMargins(0, kTitleHeight, 0, 0);
+  layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
   setLayout(layout);
 
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);

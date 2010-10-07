@@ -159,6 +159,7 @@ set(SOURCES
   ui/systemtrayicon.cpp
 
   widgets/autoexpandingtreeview.cpp
+  widgets/autosizedtextedit.cpp
   widgets/busyindicator.cpp
   widgets/elidedlabel.cpp
   widgets/equalizerslider.cpp
@@ -293,6 +294,7 @@ set(HEADERS
   ui/systemtrayicon.h
 
   widgets/autoexpandingtreeview.h
+  widgets/autosizedtextedit.h
   widgets/busyindicator.h
   widgets/elidedlabel.h
   widgets/equalizerslider.h

@@ -42,8 +42,8 @@ ArtistInfoView::ArtistInfoView(QWidget *parent)
   // Add a container widget to the scroll area
   QWidget* container_widget = new QWidget;
   container_widget->setLayout(container_);
-  container_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  container_->setSizeConstraint(QLayout::SetNoConstraint);
+  container_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
+  container_->setSizeConstraint(QLayout::SetMinAndMaxSize);
   scroll_area_->setWidget(container_widget);
   scroll_area_->setWidgetResizable(true);
 

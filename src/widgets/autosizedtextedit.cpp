@@ -14,33 +14,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COLLAPSIBLEINFOPANE_H
-#define COLLAPSIBLEINFOPANE_H
+#include "autosizedtextedit.h"
 
-#include <QWidget>
+AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
+  : QTextEdit(parent)
+{
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+}
 
-class CollapsibleInfoPane : public QWidget {
-  Q_OBJECT
+void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {
+  const int w = qMax(100, width());
 
-public:
-  CollapsibleInfoPane(QWidget* parent = 0);
+  document()->setTextWidth(w);
+  setMinimumHeight(document()->size().height());
+}
 
-  static const int kTitleHeight;
-
-  void SetTitle(const QString& title);
-  void SetWidget(QWidget* widget);
-
-public slots:
-  void Expand();
-  void Collapse();
-
-protected:
-  void paintEvent(QPaintEvent* e);
-
-private:
-  QString title_;
-  QWidget* widget_;
-  bool expanded_;
-};
-
-#endif // COLLAPSIBLEINFOPANE_H
+QSize AutoSizedTextEdit::sizeHint() const {
+  return minimumSize();
+}

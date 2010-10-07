@@ -15,8 +15,7 @@
 */
 
 #include "echonestartistinfo.h"
-
-#include <QTextEdit>
+#include "widgets/autosizedtextedit.h"
 
 #include <echonest/Artist.h>
 
@@ -81,7 +80,7 @@ void EchoNestArtistInfo::BiographiesFinished() {
   RequestPtr request = ReplyFinished(qobject_cast<QNetworkReply*>(sender()));
 
   foreach (const Echonest::Biography& bio, request->artist_->biographies()) {
-    QTextEdit* editor = new QTextEdit;
+    QTextEdit* editor = new AutoSizedTextEdit;
     editor->setHtml(bio.text());
 
     emit InfoReady(request->id_, tr("Biography from %1").arg(bio.site()), editor);
