@@ -23,6 +23,7 @@
 
 class NetworkAccessManager;
 
+class QMenu;
 class QNetworkReply;
 class QTimeLine;
 
@@ -35,10 +36,13 @@ public:
   static const int kTotalHeight;
   static const int kImageHeight;
   static const int kBorderHeight;
-  static const int kArrowWidth;
+  static const int kEdgeWidth;
+  static const int kEdgePadding;
 
   static const int kBaseAnimationDuration;
   static const int kArrowAnimationDuration;
+
+  static const char* kSettingsGroup;
 
 public slots:
   void Clear();
@@ -48,8 +52,12 @@ protected:
   void paintEvent(QPaintEvent*);
   void mouseMoveEvent(QMouseEvent*);
   void mouseReleaseEvent(QMouseEvent*);
-  void enterEvent(QEvent*);
+  void contextMenuEvent(QContextMenuEvent*);
   void leaveEvent(QEvent*);
+
+private slots:
+  void ShowFullsize();
+  void SaveAs();
 
 private:
   struct Image {
@@ -65,11 +73,11 @@ private:
 
   QRect left() const;
   QRect right() const;
-  QPolygon arrow(const QRect& rect, int direction) const;
+  QRect middle() const;
 
   void SetTimeLineActive(QTimeLine* timeline, bool active);
 
-  void DrawImage(QPainter* p, const QRect& rect, const Image& image);
+  void DrawImage(QPainter* p, const QRect& rect, Qt::Alignment align, qreal opacity, int image_index);
   void DrawThumbnail(QPainter* p, const QRect& rect, const Image& image);
 
 private slots:
@@ -84,9 +92,11 @@ private:
   QList<Image> images_;
   int current_index_;
 
-  QTimeLine* base_timeline_;
   QTimeLine* left_timeline_;
   QTimeLine* right_timeline_;
+
+  QMenu* menu_;
+  QString last_save_dir_;
 };
 
 #endif // PRETTYIMAGEVIEW_H
