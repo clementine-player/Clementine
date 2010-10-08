@@ -61,11 +61,18 @@ private slots:
 
 private:
   struct Image {
-    Image(const QUrl& url) : loading_(false), url_(url) {}
+    Image(const QUrl& url) : state_(WaitingForLazyLoad), url_(url) {}
 
     void SetImage(const QImage& image);
 
-    bool loading_;
+    enum State {
+      WaitingForLazyLoad,
+      Loading,
+      Failed,
+      Loaded,
+    };
+
+    State state_;
     QUrl url_;
     QImage image_;
     QPixmap thumbnail_;
@@ -77,8 +84,12 @@ private:
 
   void SetTimeLineActive(QTimeLine* timeline, bool active);
 
-  void DrawImage(QPainter* p, const QRect& rect, Qt::Alignment align, qreal opacity, int image_index);
-  void DrawThumbnail(QPainter* p, const QRect& rect, const Image& image);
+  void DrawImage(QPainter* p, const QRect& rect, Qt::Alignment align,
+                 qreal opacity, int image_index);
+  void DrawThumbnail(QPainter* p, const QRect& rect, Qt::Alignment align,
+                     const Image& image);
+
+  void LazyLoadImage(int index);
 
 private slots:
   void ImageFetched(quint64 id, QNetworkReply* reply);

@@ -19,6 +19,7 @@
 #include "ui/iconloader.h"
 
 #include <QApplication>
+#include <QDesktopWidget>
 #include <QFileDialog>
 #include <QLabel>
 #include <QMenu>
@@ -74,7 +75,8 @@ QRect PrettyImageView::right() const {
 
 QRect PrettyImageView::middle() const {
   return QRect(kEdgeWidth + kEdgePadding, kBorderHeight,
-               width() - (kEdgeWidth + kEdgePadding) * 2, kImageHeight - kBorderHeight);
+               width() - (kEdgeWidth + kEdgePadding) * 2,
+               kImageHeight - kBorderHeight);
 }
 
 void PrettyImageView::Clear() {
@@ -85,15 +87,22 @@ void PrettyImageView::Clear() {
 }
 
 void PrettyImageView::AddImage(const QUrl& url) {
-  const int index = images_.count();
+  images_ << Image(url);
+}
+
+void PrettyImageView::LazyLoadImage(int index) {
+  if (index < 0 || index >= images_.count())
+    return;
+  Image* image = &images_[index];
+  if (image->state_ != Image::WaitingForLazyLoad)
+    return;
+
   const int id = next_image_request_id_ ++;
 
-  // Add the image to the list
-  images_ << Image(url);
-
   // Start fetching the image
-  network_->Get(url, this, "ImageFetched", id);
+  network_->Get(image->url_, this, "ImageFetched", id);
   image_requests_[id] = index;
+  image->state_ = Image::Loading;
 }
 
 void PrettyImageView::ImageFetched(quint64 id, QNetworkReply* reply) {
@@ -105,19 +114,18 @@ void PrettyImageView::ImageFetched(quint64 id, QNetworkReply* reply) {
   Image& data = images_[image_requests_.take(id)];
 
   QImage image = QImage::fromData(reply->readAll());
-  if (image.isNull())
-    return;
-
-  data.SetImage(image);
+  if (image.isNull()) {
+    data.state_ = Image::Failed;
+  } else {
+    data.SetImage(image);
+    data.state_ = Image::Loaded;
+  }
   update();
 }
 
 void PrettyImageView::paintEvent(QPaintEvent*) {
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing, true);
-
-  p.setBrush(palette().color(QPalette::Highlight));
-  p.setPen(QPen(palette().color(QPalette::Text), 0.5));
 
   const int next_index = current_index_ + 1;
   const int prev_index = current_index_ - 1;
@@ -133,6 +141,11 @@ void PrettyImageView::paintEvent(QPaintEvent*) {
   const QRect prev_rect(-image_width + kEdgeWidth, kBorderHeight,
                         image_width, kImageHeight - kBorderHeight);
 
+  // Start the images loading if they're not already
+  LazyLoadImage(current_index_);
+  LazyLoadImage(next_index);
+  LazyLoadImage(prev_index);
+
   // Draw the images
   DrawImage(&p, current_rect, Qt::AlignHCenter, 1.0, current_index_);
   DrawImage(&p, next_rect, Qt::AlignLeft, next_opacity, next_index);
@@ -145,7 +158,7 @@ void PrettyImageView::DrawImage(QPainter* p, const QRect& rect, Qt::Alignment al
     return;
   const Image& image = images_[image_index];
 
-  QSize image_size = image.image_.isNull() ? QSize(100, 160) : image.image_.size();
+  QSize image_size = image.image_.isNull() ? QSize(160, 100) : image.image_.size();
 
   // Scale the image rect to fit in the rectangle
   image_size.scale(rect.size(), Qt::KeepAspectRatio);
@@ -161,7 +174,7 @@ void PrettyImageView::DrawImage(QPainter* p, const QRect& rect, Qt::Alignment al
 
   // Draw the main image
   p->setOpacity(opacity);
-  DrawThumbnail(p, draw_rect, image);
+  DrawThumbnail(p, draw_rect, align, image);
 
   // Draw the reflection
   // Figure out where to draw it
@@ -183,7 +196,7 @@ void PrettyImageView::DrawImage(QPainter* p, const QRect& rect, Qt::Alignment al
                   reflection.rect().bottomRight());
 
   // Draw the reflection into the buffer
-  DrawThumbnail(&reflection_painter, reflection.rect(), image);
+  DrawThumbnail(&reflection_painter, reflection.rect(), align, image);
 
   // Make it fade out towards the bottom
   QLinearGradient fade_gradient(fade_rect.topLeft(), fade_rect.bottomLeft());
@@ -199,14 +212,23 @@ void PrettyImageView::DrawImage(QPainter* p, const QRect& rect, Qt::Alignment al
   p->drawImage(reflection_rect, reflection);
 }
 
-void PrettyImageView::DrawThumbnail(QPainter* p, const QRect& rect, const Image& image) {
-  if (image.image_.isNull()) {
-    // Draw an empty box if there's no image to show
+void PrettyImageView::DrawThumbnail(QPainter* p, const QRect& rect,
+                                    Qt::Alignment align, const Image& image) {
+  switch (image.state_) {
+  case Image::WaitingForLazyLoad:
+  case Image::Loading:
     p->setPen(palette().color(QPalette::Disabled, QPalette::Text));
-    p->drawText(rect, Qt::AlignHCenter | Qt::AlignBottom, tr("Loading..."));
-  } else {
-    // Draw the image
+    p->drawText(rect, align | Qt::AlignBottom, tr("Loading..."));
+    break;
+
+  case Image::Failed:
+    p->setPen(palette().color(QPalette::Disabled, QPalette::Text));
+    p->drawText(rect, align | Qt::AlignBottom, tr("Problem loading image"));
+    break;
+
+  case Image::Loaded:
     p->drawPixmap(rect, image.thumbnail_);
+    break;
   }
 }
 
@@ -280,15 +302,23 @@ void PrettyImageView::ShowFullsize() {
 
   const QImage& image = images_[current_index_].image_;
 
+  // Work out how large to make the window, based on the size of the screen
+  QRect desktop_rect(QApplication::desktop()->availableGeometry(this));
+  QSize window_size(qMin(desktop_rect.width() - 20, image.width() + 2),
+                    qMin(desktop_rect.height() - 20, image.height() + 2));
+
+  // Create the window
   QScrollArea* window = new QScrollArea;
-
-  QLabel* label = new QLabel(window);
-  label->setPixmap(QPixmap::fromImage(image));
-  window->setWidget(label);
-
   window->setAttribute(Qt::WA_DeleteOnClose, true);
   window->setWindowTitle(tr("Clementine image viewer"));
-  window->resize(qMin(800, image.width() + 2), qMin(500, image.height() + 2));
+  window->resize(window_size);
+
+  // Create the label that displays the image
+  QLabel* label = new QLabel(window);
+  label->setPixmap(QPixmap::fromImage(image));
+
+  // Show the label in the window
+  window->setWidget(label);
   window->show();
 }
 
