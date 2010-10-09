@@ -19,7 +19,8 @@
 #include <QWheelEvent>
 
 AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
-  : QTextEdit(parent)
+  : QTextEdit(parent),
+    last_width_(-1)
 {
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -27,6 +28,9 @@ AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
 
 void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {
   const int w = qMax(100, width());
+  if (w == last_width_)
+    return;
+  last_width_ = w;
 
   document()->setTextWidth(w);
   setMinimumHeight(document()->size().height());

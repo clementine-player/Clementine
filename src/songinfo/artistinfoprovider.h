@@ -33,6 +33,7 @@ public:
 signals:
   void ImageReady(int id, const QUrl& url);
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
+  void Finished(int id);
 };
 
 #endif // ARTISTINFOPROVIDER_H

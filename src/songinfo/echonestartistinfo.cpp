@@ -24,6 +24,8 @@
 struct EchoNestArtistInfo::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
 
+  bool is_finished() const { return pending_replies_.isEmpty(); }
+
   int id_;
   boost::scoped_ptr<Echonest::Artist> artist_;
   QList<QNetworkReply*> pending_replies_;
@@ -33,7 +35,6 @@ EchoNestArtistInfo::EchoNestArtistInfo(QObject* parent)
   : ArtistInfoProvider(parent)
 {
   site_relevance_["wikipedia"] = 100;
-  site_relevance_["last.fm"] = 60;
   site_relevance_["lastfm"] = 60;
   site_relevance_["amazon"] = 30;
 
@@ -41,7 +42,6 @@ EchoNestArtistInfo::EchoNestArtistInfo(QObject* parent)
   site_icons_["aol"] = QIcon(":/providers/aol.png");
   site_icons_["cdbaby"] = QIcon(":/providers/cdbaby.png");
   site_icons_["lastfm"] = QIcon(":/last.fm/as.png");
-  site_icons_["last.fm"] = QIcon(":/last.fm/as.png");
   site_icons_["mog"] = QIcon(":/providers/mog.png");
   site_icons_["mtvmusic"] = QIcon(":/providers/mtvmusic.png");
   site_icons_["myspace"] = QIcon(":/providers/myspace.png");
@@ -77,7 +77,7 @@ EchoNestArtistInfo::RequestPtr EchoNestArtistInfo::ReplyFinished(QNetworkReply* 
 
       request->pending_replies_.removeAll(reply);
 
-      if (request->pending_replies_.isEmpty()) {
+      if (request->is_finished()) {
         requests_.removeAll(request);
       }
 
@@ -93,6 +93,9 @@ void EchoNestArtistInfo::ImagesFinished() {
   foreach (const Echonest::ArtistImage& image, request->artist_->images()) {
     emit ImageReady(request->id_, image.url());
   }
+
+  if (request->is_finished())
+    emit Finished(request->id_);
 }
 
 void EchoNestArtistInfo::BiographiesFinished() {
@@ -101,19 +104,21 @@ void EchoNestArtistInfo::BiographiesFinished() {
   QSet<QString> already_seen;
 
   foreach (const Echonest::Biography& bio, request->artist_->biographies()) {
-    if (already_seen.contains(bio.text()))
+    QString canonical_site = bio.site().toLower();
+    canonical_site.replace(QRegExp("[^a-z]"),"");
+
+    if (already_seen.contains(canonical_site))
       continue;
-    already_seen.insert(bio.text());
+    already_seen.insert(canonical_site);
 
     CollapsibleInfoPane::Data data;
     data.title_ = tr("Biography from %1").arg(bio.site());
     data.type_ = CollapsibleInfoPane::Data::Type_Biography;
 
-    const QString site = bio.site().toLower();
-    if (site_relevance_.contains(site))
-      data.relevance_ = site_relevance_[site];
-    if (site_icons_.contains(site))
-      data.icon_ = site_icons_[site];
+    if (site_relevance_.contains(canonical_site))
+      data.relevance_ = site_relevance_[canonical_site];
+    if (site_icons_.contains(canonical_site))
+      data.icon_ = site_icons_[canonical_site];
 
     AutoSizedTextEdit* editor = new AutoSizedTextEdit;
     editor->setHtml(bio.text());
@@ -121,4 +126,7 @@ void EchoNestArtistInfo::BiographiesFinished() {
 
     emit InfoReady(request->id_, data);
   }
+
+  if (request->is_finished())
+    emit Finished(request->id_);
 }

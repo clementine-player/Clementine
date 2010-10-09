@@ -34,8 +34,8 @@ ArtistInfoView::ArtistInfoView(NetworkAccessManager* network, QWidget *parent)
     image_view_(NULL),
     section_container_(NULL)
 {
-  connect(fetcher_, SIGNAL(ImageReady(int,QUrl)), SLOT(ImageReady(int,QUrl)));
-  connect(fetcher_, SIGNAL(InfoReady(int,CollapsibleInfoPane::Data)), SLOT(InfoReady(int,CollapsibleInfoPane::Data)));
+  connect(fetcher_, SIGNAL(ResultReady(int,ArtistInfoFetcher::Result)),
+          SLOT(ResultReady(int,ArtistInfoFetcher::Result)));
 
   // Add the top-level scroll area
   setLayout(new QVBoxLayout);
@@ -88,8 +88,14 @@ bool ArtistInfoView::NeedsUpdate(const Song& old_metadata, const Song& new_metad
 }
 
 void ArtistInfoView::Update(const Song& metadata) {
-  Clear();
   current_request_id_ = fetcher_->FetchInfo(metadata.artist());
+}
+
+void ArtistInfoView::ResultReady(int id, const ArtistInfoFetcher::Result& result) {
+  if (id != current_request_id_)
+    return;
+
+  Clear();
 
   // Image view goes at the top
   image_view_ = new PrettyImageView(network_);
@@ -102,20 +108,12 @@ void ArtistInfoView::Update(const Song& metadata) {
   section_container_->layout()->setSpacing(1);
   section_container_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
   container_->insertWidget(1, section_container_);
-}
 
-void ArtistInfoView::ImageReady(int id, const QUrl& url) {
-  if (id != current_request_id_)
-    return;
-
-  image_view_->AddImage(url);
-}
-
-void ArtistInfoView::InfoReady(int id, const CollapsibleInfoPane::Data& data) {
-  if (id != current_request_id_) {
-    delete data.contents_;
-    return;
+  foreach (const QUrl& url, result.images_) {
+    image_view_->AddImage(url);
   }
 
-  AddSection(new CollapsibleInfoPane(data, this));
+  foreach (const CollapsibleInfoPane::Data& data, result.info_) {
+    AddSection(new CollapsibleInfoPane(data, this));
+  }
 }

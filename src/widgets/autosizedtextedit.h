@@ -30,6 +30,9 @@ public:
 protected:
   void resizeEvent(QResizeEvent* e);
   void wheelEvent(QWheelEvent* e);
+
+private:
+  int last_width_;
 };
 
 #endif // AUTOSIZEDTEXTEDIT_H

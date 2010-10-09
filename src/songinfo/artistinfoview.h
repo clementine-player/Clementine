@@ -17,6 +17,7 @@
 #ifndef ARTISTINFOVIEW_H
 #define ARTISTINFOVIEW_H
 
+#include "artistinfofetcher.h"
 #include "collapsibleinfopane.h"
 #include "songinfobase.h"
 
@@ -42,8 +43,7 @@ private:
   void Clear();
 
 private slots:
-  void ImageReady(int id, const QUrl& url);
-  void InfoReady(int id, const CollapsibleInfoPane::Data& data);
+  void ResultReady(int id, const ArtistInfoFetcher::Result& result);
 
 private:
   ArtistInfoFetcher* fetcher_;

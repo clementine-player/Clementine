@@ -17,6 +17,7 @@
 #ifndef ARTISTINFOFETCHER_H
 #define ARTISTINFOFETCHER_H
 
+#include <QMap>
 #include <QObject>
 #include <QUrl>
 
@@ -30,17 +31,29 @@ class ArtistInfoFetcher : public QObject {
 public:
   ArtistInfoFetcher(QObject* parent = 0);
 
+  struct Result {
+    QList<QUrl> images_;
+    QList<CollapsibleInfoPane::Data> info_;
+  };
+
   int FetchInfo(const QString& artist);
 
 signals:
+  void ResultReady(int id, const ArtistInfoFetcher::Result& result);
+
+private slots:
   void ImageReady(int id, const QUrl& url);
-  void InfoReady(int id, const CollapsibleInfoPane::Data&);
+  void InfoReady(int id, const CollapsibleInfoPane::Data& data);
+  void ProviderFinished(int id);
 
 private:
   void AddProvider(ArtistInfoProvider* provider);
 
 private:
   QList<ArtistInfoProvider*> providers_;
+
+  QMap<int, Result> results_;
+  QMap<int, QList<ArtistInfoProvider*> > waiting_for_;
 
   int next_id_;
 };
