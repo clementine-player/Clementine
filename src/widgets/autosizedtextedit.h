@@ -29,6 +29,7 @@ public:
 
 protected:
   void resizeEvent(QResizeEvent* e);
+  void wheelEvent(QWheelEvent* e);
 };
 
 #endif // AUTOSIZEDTEXTEDIT_H

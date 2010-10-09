@@ -22,6 +22,7 @@
 #include <QStyleOption>
 
 const int CollapsibleInfoHeader::kHeight = 20;
+const int CollapsibleInfoHeader::kIconSize = 16;
 
 CollapsibleInfoHeader::CollapsibleInfoHeader(QWidget* parent)
   : QWidget(parent),
@@ -35,6 +36,11 @@ CollapsibleInfoHeader::CollapsibleInfoHeader(QWidget* parent)
 
 void CollapsibleInfoHeader::SetTitle(const QString& title) {
   title_ = title;
+  update();
+}
+
+void CollapsibleInfoHeader::SetIcon(const QIcon& icon) {
+  icon_ = icon;
   update();
 }
 
@@ -62,8 +68,9 @@ void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   QPainter p(this);
 
   QRect indicator_rect(0, 0, height(), height());
+  QRect icon_rect(height() + 2, (kHeight - kIconSize) / 2, kIconSize, kIconSize);
   QRect text_rect(rect());
-  text_rect.setLeft(height() + 6);
+  text_rect.setLeft(icon_rect.right() + 4);
 
   // Draw the background
   const QColor bg_color_1(palette().color(QPalette::Highlight).lighter(120));
@@ -95,6 +102,9 @@ void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   // Have to use the application's style here because using the widget's style
   // will trigger QStyleSheetStyle's recursion guard (I don't know why).
   QApplication::style()->drawPrimitive(QStyle::PE_IndicatorBranch, &opt, &p, this);
+
+  // Draw the icon
+  p.drawPixmap(icon_rect, icon_.pixmap(kIconSize));
 
   // Draw the title text
   QFont bold_font(font());

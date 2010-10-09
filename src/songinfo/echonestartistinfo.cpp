@@ -32,6 +32,20 @@ struct EchoNestArtistInfo::Request {
 EchoNestArtistInfo::EchoNestArtistInfo(QObject* parent)
   : ArtistInfoProvider(parent)
 {
+  site_relevance_["wikipedia"] = 100;
+  site_relevance_["last.fm"] = 60;
+  site_relevance_["lastfm"] = 60;
+  site_relevance_["amazon"] = 30;
+
+  site_icons_["amazon"] = QIcon(":/providers/amazon.png");
+  site_icons_["aol"] = QIcon(":/providers/aol.png");
+  site_icons_["cdbaby"] = QIcon(":/providers/cdbaby.png");
+  site_icons_["lastfm"] = QIcon(":/last.fm/as.png");
+  site_icons_["last.fm"] = QIcon(":/last.fm/as.png");
+  site_icons_["mog"] = QIcon(":/providers/mog.png");
+  site_icons_["mtvmusic"] = QIcon(":/providers/mtvmusic.png");
+  site_icons_["myspace"] = QIcon(":/providers/myspace.png");
+  site_icons_["wikipedia"] = QIcon(":/providers/wikipedia.png");
 }
 
 void EchoNestArtistInfo::FetchInfo(int id, const QString& artist_name) {
@@ -84,10 +98,27 @@ void EchoNestArtistInfo::ImagesFinished() {
 void EchoNestArtistInfo::BiographiesFinished() {
   RequestPtr request = ReplyFinished(qobject_cast<QNetworkReply*>(sender()));
 
-  foreach (const Echonest::Biography& bio, request->artist_->biographies()) {
-    QTextEdit* editor = new AutoSizedTextEdit;
-    editor->setHtml(bio.text());
+  QSet<QString> already_seen;
 
-    emit InfoReady(request->id_, tr("Biography from %1").arg(bio.site()), editor);
+  foreach (const Echonest::Biography& bio, request->artist_->biographies()) {
+    if (already_seen.contains(bio.text()))
+      continue;
+    already_seen.insert(bio.text());
+
+    CollapsibleInfoPane::Data data;
+    data.title_ = tr("Biography from %1").arg(bio.site());
+    data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+
+    const QString site = bio.site().toLower();
+    if (site_relevance_.contains(site))
+      data.relevance_ = site_relevance_[site];
+    if (site_icons_.contains(site))
+      data.icon_ = site_icons_[site];
+
+    AutoSizedTextEdit* editor = new AutoSizedTextEdit;
+    editor->setHtml(bio.text());
+    data.contents_ = editor;
+
+    emit InfoReady(request->id_, data);
   }
 }

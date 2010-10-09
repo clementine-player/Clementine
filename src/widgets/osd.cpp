@@ -152,7 +152,7 @@ void OSD::MagnatuneDownloadFinished(const QStringList& albums) {
     message = tr("%1 albums").arg(albums.count());
 
   ShowMessage(tr("Magnatune download finished"), message, QString(),
-              QImage(":magnatune.png"));
+              QImage(":/providers/magnatune.png"));
 }
 
 void OSD::ShowMessage(const QString& summary,

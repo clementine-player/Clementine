@@ -19,10 +19,10 @@
 
 #include <QVBoxLayout>
 
-CollapsibleInfoPane::CollapsibleInfoPane(QWidget* parent)
+CollapsibleInfoPane::CollapsibleInfoPane(const Data& data, QWidget* parent)
   : QWidget(parent),
-    header_(new CollapsibleInfoHeader(this)),
-    widget_(NULL)
+    data_(data),
+    header_(new CollapsibleInfoHeader(this))
 {
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -31,22 +31,14 @@ CollapsibleInfoPane::CollapsibleInfoPane(QWidget* parent)
   setLayout(layout);
 
   layout->addWidget(header_);
+  layout->addWidget(data.contents_);
+
+  header_->SetTitle(data.title_);
+  header_->SetIcon(data.icon_);
 
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 
   connect(header_, SIGNAL(ExpandedToggled(bool)), SLOT(ExpandedToggled(bool)));
-}
-
-void CollapsibleInfoPane::SetTitle(const QString& title) {
-  header_->SetTitle(title);
-}
-
-void CollapsibleInfoPane::SetWidget(QWidget* widget) {
-  if (widget_)
-    delete widget_;
-
-  widget_ = widget;
-  layout()->addWidget(widget);
 }
 
 void CollapsibleInfoPane::Collapse() {
@@ -58,5 +50,12 @@ void CollapsibleInfoPane::Expand() {
 }
 
 void CollapsibleInfoPane::ExpandedToggled(bool expanded) {
-  widget_->setVisible(expanded);
+  data_.contents_->setVisible(expanded);
+}
+
+bool CollapsibleInfoPane::Data::operator <(const CollapsibleInfoPane::Data& other) const {
+  const int my_score    = type_       * 1000 + relevance_;
+  const int other_score = other.type_ * 1000 + other.relevance_;
+
+  return my_score > other_score;
 }

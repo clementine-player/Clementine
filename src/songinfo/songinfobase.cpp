@@ -25,7 +25,7 @@ SongInfoBase::SongInfoBase(NetworkAccessManager* network, QWidget* parent)
 
 void SongInfoBase::SongChanged(const Song& metadata) {
   if (isVisible()) {
-    Update(metadata);
+    MaybeUpdate(metadata);
     dirty_ = false;
   } else {
     queued_metadata_ = metadata;
@@ -39,8 +39,19 @@ void SongInfoBase::SongFinished() {
 
 void SongInfoBase::showEvent(QShowEvent* e) {
   if (dirty_) {
-    Update(queued_metadata_);
+    MaybeUpdate(queued_metadata_);
     dirty_ = false;
   }
   QWidget::showEvent(e);
+}
+
+void SongInfoBase::MaybeUpdate(const Song& metadata) {
+  if (old_metadata_.is_valid()) {
+    if (!NeedsUpdate(old_metadata_, metadata)) {
+      return;
+    }
+  }
+
+  Update(metadata);
+  old_metadata_ = metadata;
 }

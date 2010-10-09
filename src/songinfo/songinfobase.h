@@ -37,11 +37,16 @@ protected:
   void showEvent(QShowEvent* e);
 
   virtual void Update(const Song& metadata) {}
+  virtual bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const { return true; }
 
   NetworkAccessManager* network_;
 
 private:
+  void MaybeUpdate(const Song& metadata);
+
+private:
   Song queued_metadata_;
+  Song old_metadata_;
   bool dirty_;
 };
 

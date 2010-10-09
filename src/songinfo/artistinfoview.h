@@ -17,6 +17,7 @@
 #ifndef ARTISTINFOVIEW_H
 #define ARTISTINFOVIEW_H
 
+#include "collapsibleinfopane.h"
 #include "songinfobase.h"
 
 class ArtistInfoFetcher;
@@ -34,14 +35,15 @@ public:
 
 protected:
   void Update(const Song& metadata);
+  bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
 private:
-  void AddChild(QWidget* widget);
+  void AddSection(CollapsibleInfoPane* section);
   void Clear();
 
 private slots:
   void ImageReady(int id, const QUrl& url);
-  void InfoReady(int id, const QString& title, QWidget* widget);
+  void InfoReady(int id, const CollapsibleInfoPane::Data& data);
 
 private:
   ArtistInfoFetcher* fetcher_;
@@ -51,7 +53,8 @@ private:
   QVBoxLayout* container_;
   PrettyImageView* image_view_;
 
-  QList<QWidget*> children_;
+  QWidget* section_container_;
+  QList<CollapsibleInfoPane*> sections_;
 };
 
 #endif // ARTISTINFOVIEW_H

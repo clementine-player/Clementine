@@ -106,7 +106,7 @@ void MagnatuneService::ReloadSettings() {
 
 RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
   root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  root_->icon = QIcon(":magnatune.png");
+  root_->icon = QIcon(":/providers/magnatune.png");
 
   return root_;
 }

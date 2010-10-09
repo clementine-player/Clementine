@@ -19,6 +19,8 @@
 
 #include "artistinfoprovider.h"
 
+#include <QMap>
+
 #include <boost/shared_ptr.hpp>
 
 class QNetworkReply;
@@ -44,6 +46,8 @@ private:
 
 private:
   QList<RequestPtr> requests_;
+  QMap<QString, int> site_relevance_;
+  QMap<QString, QIcon> site_icons_;
 };
 
 #endif // ECHONESTARTISTINFO_H

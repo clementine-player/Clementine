@@ -17,6 +17,7 @@
 #ifndef COLLAPSIBLEINFOPANE_H
 #define COLLAPSIBLEINFOPANE_H
 
+#include <QIcon>
 #include <QWidget>
 
 class CollapsibleInfoHeader;
@@ -25,10 +26,28 @@ class CollapsibleInfoPane : public QWidget {
   Q_OBJECT
 
 public:
-  CollapsibleInfoPane(QWidget* parent = 0);
+  struct Data {
+    Data() : type_(Type_Biography), relevance_(0) {}
 
-  void SetTitle(const QString& title);
-  void SetWidget(QWidget* widget);
+    bool operator <(const Data& other) const;
+
+    enum Type {
+      Type_Biography = 0,
+
+      TypeCount
+    };
+
+    QString title_;
+    QIcon icon_;
+    Type type_;
+    int relevance_;
+
+    QWidget* contents_;
+  };
+
+  CollapsibleInfoPane(const Data& data, QWidget* parent = 0);
+
+  const Data& data() const { return data_; }
 
 public slots:
   void Expand();
@@ -38,8 +57,8 @@ private slots:
   void ExpandedToggled(bool expanded);
 
 private:
+  Data data_;
   CollapsibleInfoHeader* header_;
-  QWidget* widget_;
 };
 
 #endif // COLLAPSIBLEINFOPANE_H

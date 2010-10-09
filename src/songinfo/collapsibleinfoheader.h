@@ -17,6 +17,7 @@
 #ifndef COLLAPSIBLEINFOHEADER_H
 #define COLLAPSIBLEINFOHEADER_H
 
+#include <QIcon>
 #include <QWidget>
 
 class CollapsibleInfoHeader : public QWidget {
@@ -26,14 +27,17 @@ public:
   CollapsibleInfoHeader(QWidget* parent = 0);
 
   static const int kHeight;
+  static const int kIconSize;
 
   bool expanded() const { return expanded_; }
   bool hovering() const { return hovering_; }
   const QString& title() const { return title_; }
+  const QIcon& icon() const { return icon_; }
 
 public slots:
   void SetExpanded(bool expanded);
   void SetTitle(const QString& title);
+  void SetIcon(const QIcon& icon);
 
 signals:
   void Expanded();
@@ -50,6 +54,7 @@ private:
   bool expanded_;
   bool hovering_;
   QString title_;
+  QIcon icon_;
 };
 
 #endif // COLLAPSIBLEINFOHEADER_H

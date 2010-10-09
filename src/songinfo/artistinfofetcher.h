@@ -20,6 +20,8 @@
 #include <QObject>
 #include <QUrl>
 
+#include "collapsibleinfopane.h"
+
 class ArtistInfoProvider;
 
 class ArtistInfoFetcher : public QObject {
@@ -32,7 +34,7 @@ public:
 
 signals:
   void ImageReady(int id, const QUrl& url);
-  void InfoReady(int id, const QString& title, QWidget* widget);
+  void InfoReady(int id, const CollapsibleInfoPane::Data&);
 
 private:
   void AddProvider(ArtistInfoProvider* provider);

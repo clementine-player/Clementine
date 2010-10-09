@@ -51,7 +51,7 @@ SomaFMService::~SomaFMService() {
 
 RadioItem* SomaFMService::CreateRootItem(RadioItem* parent) {
   root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  root_->icon = QIcon(":somafm.png");
+  root_->icon = QIcon(":/providers/somafm.png");
   return root_;
 }
 

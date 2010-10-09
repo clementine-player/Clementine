@@ -27,7 +27,7 @@ ArtistInfoFetcher::ArtistInfoFetcher(QObject* parent)
 void ArtistInfoFetcher::AddProvider(ArtistInfoProvider* provider) {
   providers_ << provider;
   connect(provider, SIGNAL(ImageReady(int,QUrl)), SIGNAL(ImageReady(int,QUrl)));
-  connect(provider, SIGNAL(InfoReady(int,QString,QWidget*)), SIGNAL(InfoReady(int,QString,QWidget*)));
+  connect(provider, SIGNAL(InfoReady(int,CollapsibleInfoPane::Data)), SIGNAL(InfoReady(int,CollapsibleInfoPane::Data)));
 }
 
 int ArtistInfoFetcher::FetchInfo(const QString& artist) {

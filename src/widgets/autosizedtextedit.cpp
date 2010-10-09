@@ -16,6 +16,8 @@
 
 #include "autosizedtextedit.h"
 
+#include <QWheelEvent>
+
 AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
   : QTextEdit(parent)
 {
@@ -28,8 +30,14 @@ void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {
 
   document()->setTextWidth(w);
   setMinimumHeight(document()->size().height());
+
+  QTextEdit::resizeEvent(e);
 }
 
 QSize AutoSizedTextEdit::sizeHint() const {
   return minimumSize();
+}
+
+void AutoSizedTextEdit::wheelEvent(QWheelEvent* e) {
+  e->ignore();
 }
