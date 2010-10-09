@@ -55,7 +55,12 @@ EchoNestArtistInfo::RequestPtr EchoNestArtistInfo::ReplyFinished(QNetworkReply* 
 
   foreach (RequestPtr request, requests_) {
     if (request->pending_replies_.contains(reply)) {
-      request->artist_->parseProfile(reply);
+      try {
+        request->artist_->parseProfile(reply);
+      } catch (Echonest::ParseError e) {
+        qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
+      }
+
       request->pending_replies_.removeAll(reply);
 
       if (request->pending_replies_.isEmpty()) {

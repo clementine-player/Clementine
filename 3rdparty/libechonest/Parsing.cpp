@@ -32,8 +32,8 @@ void Echonest::Parser::checkForErrors( QNetworkReply* reply ) throw( Echonest::P
 //         throw ParseError( Echonest::UnfinishedQuery );
 //     
     if( reply->error() != QNetworkReply::NoError ) {   
-        ParseError* err = new ParseError( Echonest::NetworkError );
-        err->setNetworkError( reply->error() );
+        ParseError err( Echonest::NetworkError );
+        err.setNetworkError( reply->error() );
         
         throw err;
     }
