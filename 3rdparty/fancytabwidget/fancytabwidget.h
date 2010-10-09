@@ -30,18 +30,19 @@
 #ifndef FANCYTABWIDGET_H
 #define FANCYTABWIDGET_H
 
-#include <QtGui/QIcon>
-#include <QtGui/QWidget>
+#include <QIcon>
+#include <QPropertyAnimation>
+#include <QTabBar>
+#include <QTimer>
+#include <QWidget>
 
-#include <QtCore/QTimer>
-#include <QtCore/QPropertyAnimation>
-
-QT_BEGIN_NAMESPACE
+class QActionGroup;
+class QMenu;
 class QPainter;
+class QSignalMapper;
 class QStackedLayout;
 class QStatusBar;
 class QVBoxLayout;
-QT_END_NAMESPACE
 
 namespace Core {
 namespace Internal {
@@ -122,46 +123,78 @@ private:
 
 };
 
-class FancyTabWidget : public QWidget
-{
-    Q_OBJECT
+class FancyTabWidget : public QWidget {
+  Q_OBJECT
 
 public:
-    FancyTabWidget(QWidget *parent = 0);
+  FancyTabWidget(QWidget* parent = 0);
 
-    void addTab(QWidget *tab, const QIcon &icon, const QString &label);
-    void addSpacer(int size = 40);
-    void removeTab(int index);
-    void setBackgroundPixmap(const QPixmap& pixmap);
-    void addCornerWidget(QWidget *widget);
-    void insertCornerWidget(int pos, QWidget *widget);
-    int cornerWidgetCount() const;
-    void setTabToolTip(int index, const QString &toolTip);
-    int count() const { return m_tabBar->count(); }
+  enum Mode {
+    Mode_None = 0,
 
-    void paintEvent(QPaintEvent *event);
+    Mode_LargeSidebar = 1,
+    Mode_SmallSidebar = 2,
+    Mode_Tabs = 3,
+    Mode_IconOnlyTabs = 4,
+  };
 
-    int currentIndex() const;
+  struct Item {
+    Item(const QIcon& icon, const QString& label)
+      : type_(Type_Tab), tab_label_(label), tab_icon_(icon), spacer_size_(0) {}
+    Item(int size) : type_(Type_Spacer), spacer_size_(size) {}
 
-    void addBottomWidget(QWidget* widget);
+    enum Type {
+      Type_Tab,
+      Type_Spacer,
+    };
 
-signals:
-    void currentAboutToShow(int index);
-    void currentChanged(int index);
+    Type type_;
+    QString tab_label_;
+    QIcon tab_icon_;
+    int spacer_size_;
+  };
+
+  void AddTab(QWidget *tab, const QIcon &icon, const QString &label);
+  void AddSpacer(int size = 40);
+  void SetBackgroundPixmap(const QPixmap& pixmap);
+
+  void AddBottomWidget(QWidget* widget);
+
+  int current_index() const;
+  Mode mode() const { return mode_; }
 
 public slots:
-    void setCurrentIndex(int index);
+  void SetCurrentIndex(int index);
+  void SetMode(Mode mode);
+  void SetMode(int mode) { SetMode(Mode(mode)); }
+
+signals:
+  void CurrentChanged(int index);
+  void ModeChanged(FancyTabWidget::Mode mode);
+
+protected:
+  void paintEvent(QPaintEvent *event);
+  void contextMenuEvent(QContextMenuEvent* e);
 
 private slots:
-    void showWidget(int index);
+  void ShowWidget(int index);
 
 private:
-    FancyTabBar *m_tabBar;
-    QWidget *m_cornerWidgetContainer;
-    QStackedLayout *m_modesStack;
-    QWidget *m_selectionWidget;
-    QPixmap m_backgroundPixmap;
-    QVBoxLayout* m_vlayout;
+  void MakeTabBar(QTabBar::Shape shape, bool text, bool icons);
+  void AddMenuItem(QSignalMapper* mapper, QActionGroup* group,
+                   const QString& text, Mode mode);
+
+  Mode mode_;
+  QList<Item> items_;
+
+  QWidget* tab_bar_;
+  QStackedLayout* stack_;
+  QPixmap background_pixmap_;
+  QWidget* side_widget_;
+  QVBoxLayout* side_layout_;
+  QVBoxLayout* top_layout_;
+
+  QMenu* menu_;
 };
 
 } // namespace Internal

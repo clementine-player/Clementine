@@ -181,19 +181,19 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->volume->setValue(player_->GetVolume());
 
   // Add tabs to the fancy tab widget
-  ui_->tabs->addTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
-  ui_->tabs->addTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
-  ui_->tabs->addTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
-  ui_->tabs->addTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
-  ui_->tabs->addSpacer();
-  ui_->tabs->addTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
-  ui_->tabs->addTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
-  ui_->tabs->addTab(artist_info_view_, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
+  ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
+  ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
+  ui_->tabs->AddTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
+  ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
+  ui_->tabs->AddSpacer();
+  ui_->tabs->AddTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
+  ui_->tabs->AddTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
+  ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
-  ui_->tabs->addBottomWidget(ui_->now_playing);
+  ui_->tabs->AddBottomWidget(ui_->now_playing);
 
-  ui_->tabs->setBackgroundPixmap(QPixmap(":/sidebar_background.png"));
+  ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
   track_position_timer_->setInterval(1000);
@@ -492,6 +492,10 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
 
+  // Fancy tabs
+  connect(ui_->tabs, SIGNAL(ModeChanged(FancyTabWidget::Mode)), SLOT(SaveGeometry()));
+  connect(ui_->tabs, SIGNAL(CurrentChanged(int)), SLOT(SaveGeometry()));
+
   // Lyrics
   lyric_view_->set_network(network);
   ConnectInfoView(lyric_view_);
@@ -541,7 +545,9 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   if (!ui_->splitter->restoreState(settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
-  ui_->tabs->setCurrentIndex(settings_.value("current_tab", 0).toInt());
+  ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 0).toInt());
+  ui_->tabs->SetMode(FancyTabWidget::Mode(settings_.value(
+      "tab_mode", FancyTabWidget::Mode_LargeSidebar).toInt()));
   file_view_->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
   ReloadSettings();
@@ -769,7 +775,8 @@ void MainWindow::resizeEvent(QResizeEvent*) {
 void MainWindow::SaveGeometry() {
   settings_.setValue("geometry", saveGeometry());
   settings_.setValue("splitter_state", ui_->splitter->saveState());
-  settings_.setValue("current_tab", ui_->tabs->currentIndex());
+  settings_.setValue("current_tab", ui_->tabs->current_index());
+  settings_.setValue("tab_mode", ui_->tabs->mode());
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {

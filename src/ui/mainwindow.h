@@ -190,8 +190,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
- private:
   void SaveGeometry();
+
+ private:
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
