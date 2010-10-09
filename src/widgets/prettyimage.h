@@ -14,49 +14,65 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PRETTYIMAGEVIEW_H
-#define PRETTYIMAGEVIEW_H
+#ifndef PRETTYIMAGE_H
+#define PRETTYIMAGE_H
 
-#include <QMap>
-#include <QScrollArea>
 #include <QUrl>
+#include <QWidget>
 
 class NetworkAccessManager;
 
-class QHBoxLayout;
 class QMenu;
 class QNetworkReply;
-class QPropertyAnimation;
-class QTimeLine;
 
-class PrettyImageView : public QScrollArea {
+class PrettyImage : public QWidget {
   Q_OBJECT
 
 public:
-  PrettyImageView(NetworkAccessManager* network, QWidget* parent = 0);
+  PrettyImage(const QUrl& url, NetworkAccessManager* network, QWidget* parent = 0);
+
+  static const int kTotalHeight;
+  static const int kReflectionHeight;
+  static const int kImageHeight;
+
+  static const int kMaxImageWidth;
 
   static const char* kSettingsGroup;
 
+  QSize sizeHint() const;
+  QSize image_size() const;
+
 public slots:
-  void AddImage(const QUrl& url);
+  void LazyLoad();
+  void SaveAs();
+  void ShowFullsize();
 
 protected:
-  void mouseReleaseEvent(QMouseEvent*);
-  void resizeEvent(QResizeEvent* e);
+  void contextMenuEvent(QContextMenuEvent*);
+  void paintEvent(QPaintEvent*);
 
 private slots:
-  void ScrollBarReleased();
-  void ScrollBarAction(int action);
-  void ScrollTo(int index, bool smooth = true);
+  void ImageFetched(quint64 id, QNetworkReply* reply);
+
+private:
+  enum State {
+    State_WaitingForLazyLoad,
+    State_Loading,
+    State_Finished,
+  };
+
+  void DrawThumbnail(QPainter* p, const QRect& rect);
 
 private:
   NetworkAccessManager* network_;
+  State state_;
+  QUrl url_;
 
-  QWidget* container_;
-  QHBoxLayout* layout_;
+  QImage image_;
+  QPixmap thumbnail_;
 
-  int current_index_;
-  QPropertyAnimation* scroll_animation_;
+  QMenu* menu_;
+  QString last_save_dir_;
 };
 
-#endif // PRETTYIMAGEVIEW_H
+#endif // PRETTYIMAGE_H

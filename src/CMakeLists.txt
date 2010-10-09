@@ -174,6 +174,7 @@ set(SOURCES
   widgets/nowplayingwidget.cpp
   widgets/osd.cpp
   widgets/osdpretty.cpp
+  widgets/prettyimage.cpp
   widgets/prettyimageview.cpp
   widgets/progressitemdelegate.cpp
   widgets/sliderwidget.cpp
@@ -312,6 +313,7 @@ set(HEADERS
   widgets/nowplayingwidget.h
   widgets/osd.h
   widgets/osdpretty.h
+  widgets/prettyimage.h
   widgets/prettyimageview.h
   widgets/progressitemdelegate.h
   widgets/sliderwidget.h

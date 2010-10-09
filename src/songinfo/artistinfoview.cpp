@@ -52,7 +52,7 @@ ArtistInfoView::ArtistInfoView(NetworkAccessManager* network, QWidget *parent)
   container_widget->setBackgroundRole(QPalette::Base);
   container_->setSizeConstraint(QLayout::SetMinAndMaxSize);
   container_->setContentsMargins(0, 0, 0, 0);
-  container_->setSpacing(0);
+  container_->setSpacing(6);
   scroll_area_->setWidget(container_widget);
   scroll_area_->setWidgetResizable(true);
 
