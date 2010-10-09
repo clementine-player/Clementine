@@ -23,8 +23,10 @@
 
 class ArtistInfoFetcher;
 class PrettyImageView;
+class WidgetFadeHelper;
 
 class QScrollArea;
+class QTimeLine;
 class QVBoxLayout;
 
 class ArtistInfoView : public SongInfoBase {
@@ -55,6 +57,8 @@ private:
 
   QWidget* section_container_;
   QList<CollapsibleInfoPane*> sections_;
+
+  WidgetFadeHelper* fader_;
 };
 
 #endif // ARTISTINFOVIEW_H

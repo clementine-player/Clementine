@@ -18,10 +18,12 @@
 #include "artistinfoview.h"
 #include "collapsibleinfopane.h"
 #include "widgets/prettyimageview.h"
+#include "widgets/widgetfadehelper.h"
 
 #include <QFile>
 #include <QScrollArea>
 #include <QTextEdit>
+#include <QTimeLine>
 #include <QVBoxLayout>
 #include <QtDebug>
 
@@ -32,7 +34,8 @@ ArtistInfoView::ArtistInfoView(NetworkAccessManager* network, QWidget *parent)
     scroll_area_(new QScrollArea),
     container_(new QVBoxLayout),
     image_view_(NULL),
-    section_container_(NULL)
+    section_container_(NULL),
+    fader_(new WidgetFadeHelper(this, 1000))
 {
   connect(fetcher_, SIGNAL(ResultReady(int,ArtistInfoFetcher::Result)),
           SLOT(ResultReady(int,ArtistInfoFetcher::Result)));
@@ -94,6 +97,8 @@ void ArtistInfoView::Update(const Song& metadata) {
 void ArtistInfoView::ResultReady(int id, const ArtistInfoFetcher::Result& result) {
   if (id != current_request_id_)
     return;
+
+  fader_->Start();
 
   Clear();
 
