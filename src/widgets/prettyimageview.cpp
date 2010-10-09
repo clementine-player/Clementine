@@ -300,7 +300,11 @@ void PrettyImageView::ShowFullsize() {
   if (current_index_ < 0 || current_index_ >= images_.count())
     return;
 
-  const QImage& image = images_[current_index_].image_;
+  const Image& image_data = images_[current_index_];
+  if (image_data.state_ != Image::Loaded)
+    return;
+
+  const QImage& image = image_data.image_;
 
   // Work out how large to make the window, based on the size of the screen
   QRect desktop_rect(QApplication::desktop()->availableGeometry(this));
