@@ -168,8 +168,8 @@ void PrettyImage::contextMenuEvent(QContextMenuEvent* e) {
 void PrettyImage::ShowFullsize() {
   // Work out how large to make the window, based on the size of the screen
   QRect desktop_rect(QApplication::desktop()->availableGeometry(this));
-  QSize window_size(qMin(desktop_rect.width() - 20, image_.width() + 2),
-                    qMin(desktop_rect.height() - 20, image_.height() + 2));
+  QSize window_size(qMin(desktop_rect.width() - 20, image_.width()),
+                    qMin(desktop_rect.height() - 20, image_.height()));
 
   // Create the window
   QScrollArea* window = new QScrollArea;
@@ -183,6 +183,7 @@ void PrettyImage::ShowFullsize() {
 
   // Show the label in the window
   window->setWidget(label);
+  window->setFrameShape(QFrame::NoFrame);
   window->show();
 }
 
