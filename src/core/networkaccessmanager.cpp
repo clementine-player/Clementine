@@ -22,6 +22,7 @@ NetworkAccessManager::NetworkAccessManager(QObject* parent,
 
 void NetworkAccessManager::Get(const QUrl &url, QObject *receiver,
                                const char *slot, quint64 id, bool force_cache) {
+  connect(receiver, SIGNAL(destroyed(QObject*)), SLOT(ReceiverDestroyed(QObject*)));
   QMetaObject::invokeMethod(
       this, "RunGet", Qt::QueuedConnection,
       Q_ARG(QUrl, url), Q_ARG(QObject*, receiver),
@@ -43,6 +44,13 @@ void NetworkAccessManager::RunGet(const QUrl &url, QObject *receiver,
   pending_replies_.insert(reply, r);
 }
 
+void NetworkAccessManager::ReceiverDestroyed(QObject* receiver) {
+  foreach (QNetworkReply* key, pending_replies_.keys()) {
+    if (pending_replies_[key].receiver == receiver)
+      pending_replies_[key].receiver = NULL;
+  }
+}
+
 QNetworkRequest NetworkAccessManager::CreateRequest(const QUrl& url, bool force_cache) {
   QNetworkRequest req(url);
   req.setRawHeader("User-Agent", QString("%1 %2").arg(
@@ -59,6 +67,9 @@ QNetworkRequest NetworkAccessManager::CreateRequest(const QUrl& url, bool force_
 void NetworkAccessManager::RequestFinished() {
   QNetworkReply* reply = static_cast<QNetworkReply*>(sender());
   Receiver r = pending_replies_.take(reply);
+
+  if (!r.receiver)
+    return;
 
   QMetaObject::invokeMethod(r.receiver, r.slot,
                             Q_ARG(quint64, r.id),

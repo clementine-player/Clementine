@@ -31,6 +31,7 @@ class NetworkAccessManager : public QObject {
               quint64 id, bool force_cache);
   void RunGetBlocking(const QUrl& url, bool force_cache, QNetworkReply** reply);
   void RequestFinished();
+  void ReceiverDestroyed(QObject* receiver);
 
  private:
   QNetworkRequest CreateRequest(const QUrl& url, bool force_cache);
