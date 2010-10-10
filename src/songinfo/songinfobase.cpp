@@ -61,7 +61,7 @@ SongInfoBase::SongInfoBase(NetworkAccessManager* network, QWidget* parent)
 }
 
 void SongInfoBase::Clear() {
-  fader_->Start();
+  fader_->StartFade();
 
   qDeleteAll(widgets_);
   widgets_.clear();
@@ -128,6 +128,7 @@ void SongInfoBase::MaybeUpdate(const Song& metadata) {
 }
 
 void SongInfoBase::Update(const Song& metadata) {
+  fader_->StartBlur();
   current_request_id_ = fetcher_->FetchInfo(metadata);
 }
 

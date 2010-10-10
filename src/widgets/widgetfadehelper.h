@@ -28,16 +28,22 @@ public:
   WidgetFadeHelper(QWidget* parent, int msec = 500);
 
 public slots:
-  void Start();
+  void StartBlur();
+  void StartFade();
 
 protected:
   void paintEvent(QPaintEvent*);
 
+private slots:
+  void FadeFinished();
+
 private:
   QWidget* parent_;
-  QTimeLine* timeline_;
+  QTimeLine* blur_timeline_;
+  QTimeLine* fade_timeline_;
 
-  QPixmap pixmap_;
+  QPixmap original_pixmap_;
+  QPixmap blurred_pixmap_;
 };
 
 #endif // WIDGETFADEHELPER_H
