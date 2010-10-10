@@ -22,6 +22,7 @@
 const int SongPlayStats::kIconSize = 16;
 const int SongPlayStats::kLineSpacing = 2;
 const int SongPlayStats::kIconTextSpacing = 6;
+const int SongPlayStats::kMargin = 4;
 
 SongPlayStats::SongPlayStats(QWidget* parent)
   : QWidget(parent)
@@ -36,16 +37,17 @@ void SongPlayStats::AddItem(const QIcon& icon, const QString& text) {
 }
 
 QSize SongPlayStats::sizeHint() const {
-  return QSize(100, items_.count() * kIconSize +
+  return QSize(100, kMargin * 2 +
+                    items_.count() * kIconSize +
                     (items_.count() - 1) * kLineSpacing);
 }
 
 void SongPlayStats::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
-  int y = 0;
+  int y = kMargin;
   foreach (const Item& item, items_) {
-    const QRect line(0, y, width(), kIconSize);
+    const QRect line(kMargin, y, width() - kMargin*2, kIconSize);
     const QRect icon_rect(line.topLeft(), QSize(kIconSize, kIconSize));
     const QRect text_rect(icon_rect.topRight() + QPoint(kIconTextSpacing, 0),
                           QSize(line.width() - icon_rect.width() - kIconTextSpacing,

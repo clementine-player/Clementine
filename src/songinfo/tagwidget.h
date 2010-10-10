@@ -33,7 +33,8 @@ public:
 
   static const int kIconSize;
   static const int kIconTextSpacing;
-  static const int kPadding;
+  static const int kHPadding;
+  static const int kVPadding;
 
   float background_opacity() const { return opacity_; }
   void set_background_opacity(float opacity);

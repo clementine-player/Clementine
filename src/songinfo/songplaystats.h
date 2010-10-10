@@ -29,6 +29,7 @@ public:
   static const int kIconSize;
   static const int kLineSpacing;
   static const int kIconTextSpacing;
+  static const int kMargin;
 
   void AddItem(const QIcon& icon, const QString& text);
 

@@ -21,8 +21,9 @@
 #include <QPropertyAnimation>
 
 const int TagWidgetTag::kIconSize = 16;
-const int TagWidgetTag::kIconTextSpacing = 6;
-const int TagWidgetTag::kPadding = 2;
+const int TagWidgetTag::kIconTextSpacing = 8;
+const int TagWidgetTag::kHPadding = 6;
+const int TagWidgetTag::kVPadding = 2;
 
 TagWidgetTag::TagWidgetTag(const QIcon& icon, const QString& text, QWidget* parent)
   : QWidget(parent),
@@ -38,8 +39,8 @@ QSize TagWidgetTag::sizeHint() const {
   QSize text = fontMetrics().size(0, text_);
   QSize icon(kIconSize + kIconTextSpacing, kIconSize);
 
-  return QSize(kPadding + icon.width() + text.width() + kPadding,
-               kPadding + qMax(text.height(), icon.height()) + kPadding);
+  return QSize(kHPadding + icon.width() + text.width() + kHPadding,
+               kVPadding + qMax(text.height(), icon.height()) + kVPadding);
 }
 
 void TagWidgetTag::set_background_opacity(float opacity) {
@@ -65,10 +66,10 @@ void TagWidgetTag::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   const QRect tag_rect(rect());
-  const QRect icon_rect(tag_rect.topLeft() + QPoint(kPadding, kPadding),
+  const QRect icon_rect(tag_rect.topLeft() + QPoint(kHPadding, kVPadding),
                         QSize(kIconSize, kIconSize));
   const QRect text_rect(icon_rect.topRight() + QPoint(kIconTextSpacing, 0),
-                        QSize(tag_rect.width() - icon_rect.right() - kIconTextSpacing - kPadding,
+                        QSize(tag_rect.width() - icon_rect.right() - kIconTextSpacing - kHPadding,
                               icon_rect.height()));
 
   // Use the tag's opacity
@@ -96,7 +97,7 @@ void TagWidgetTag::paintEvent(QPaintEvent*) {
 TagWidget::TagWidget(QWidget* parent)
   : QWidget(parent)
 {
-  setLayout(new FlowLayout);
+  setLayout(new FlowLayout(4, 6, 4));
 }
 
 void TagWidget::AddTag(const QString& tag) {
