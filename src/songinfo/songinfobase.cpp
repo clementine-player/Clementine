@@ -19,6 +19,7 @@
 #include <QFile>
 #include <QScrollArea>
 #include <QSpacerItem>
+#include <QTimer>
 #include <QVBoxLayout>
 
 SongInfoBase::SongInfoBase(NetworkAccessManager* network, QWidget* parent)
@@ -128,8 +129,11 @@ void SongInfoBase::MaybeUpdate(const Song& metadata) {
 }
 
 void SongInfoBase::Update(const Song& metadata) {
-  fader_->StartBlur();
   current_request_id_ = fetcher_->FetchInfo(metadata);
+
+  // Do this after the new pane has been shown otherwise it'll just grab a
+  // black rectangle.
+  QTimer::singleShot(0, fader_, SLOT(StartBlur()));
 }
 
 void SongInfoBase::ResultReady(int id, const SongInfoFetcher::Result& result) {
