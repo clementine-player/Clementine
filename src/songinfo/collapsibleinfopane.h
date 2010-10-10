@@ -32,8 +32,10 @@ public:
     bool operator <(const Data& other) const;
 
     enum Type {
-      Type_Biography = 0,
-      Type_Lyrics = 1,
+      Type_PlayCounts,
+      Type_Tags,
+      Type_Biography,
+      Type_Lyrics,
 
       TypeCount
     };

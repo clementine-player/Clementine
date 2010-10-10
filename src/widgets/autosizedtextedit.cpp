@@ -28,6 +28,8 @@ AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
   QFont f(font());
   f.setPointSizeF(8.5);
   document()->setDefaultFont(f);
+
+  setReadOnly(true);
 }
 
 void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {

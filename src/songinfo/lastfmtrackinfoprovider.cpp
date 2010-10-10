@@ -1,0 +1,121 @@
+/* This file is part of Clementine.
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "lastfmtrackinfoprovider.h"
+#include "songplaystats.h"
+#include "ui/iconloader.h"
+#include "widgets/autosizedtextedit.h"
+
+#include <lastfm/ws.h>
+#include <lastfm/XmlQuery>
+
+void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
+  QMap<QString, QString> params;
+  params["method"] = "track.getInfo";
+  params["track"] = metadata.title();
+  params["artist"] = metadata.artist();
+
+  if (!lastfm::ws::Username.isEmpty())
+    params["username"] = lastfm::ws::Username;
+
+  QNetworkReply* reply = lastfm::ws::get(params);
+  connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
+  requests_[reply] = id;
+}
+
+void LastfmTrackInfoProvider::RequestFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply || !requests_.contains(reply))
+    return;
+
+  const int id = requests_.take(reply);
+
+  if (reply->error() != QNetworkReply::NoError) {
+    emit Finished(id);
+    return;
+  }
+
+  try {
+    lastfm::XmlQuery query = lastfm::ws::parse(reply);
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
+      throw std::runtime_error("");
+#endif
+
+    GetPlayCounts(id, query);
+    GetWiki(id, query);
+
+  } catch (std::runtime_error&) {
+  }
+  emit Finished(id);
+}
+
+void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
+  // Parse the response
+  const int listeners = q["track"]["listeners"].text().toInt();
+  const int playcount = q["track"]["playcount"].text().toInt();
+  int myplaycount = -1;
+  bool love = false;
+
+  if (!q["track"].children("userplaycount").isEmpty()) {
+    myplaycount = q["track"]["userplaycount"].text().toInt();
+    love = q["track"]["userloved"].text() == "1";
+  }
+
+  if (!listeners && !playcount && myplaycount == -1)
+    return; // No useful data
+
+  CollapsibleInfoPane::Data data;
+  data.title_ = tr("Last.fm play counts");
+  data.type_ = CollapsibleInfoPane::Data::Type_PlayCounts;
+  data.icon_ = QIcon(":/last.fm/as.png");
+
+  SongPlayStats* widget = new SongPlayStats;
+  data.contents_ = widget;
+
+  if (myplaycount != -1) {
+    if (love)
+      widget->AddItem(QIcon(":/last.fm/love.png"), tr("You love this track"));
+    widget->AddItem(QIcon(":/last.fm/icon_user.png"), tr("Your scrobbles: %1").arg(myplaycount));
+  }
+
+  if (playcount)
+    widget->AddItem(IconLoader::Load("media-playback-start"), tr("%1 total plays").arg(playcount));
+  if (listeners)
+    widget->AddItem(QIcon(":/last.fm/my_neighbours.png"), tr("%1 other listeners").arg(listeners));
+
+  emit InfoReady(id, data);
+}
+
+void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
+  // Parse the response
+  const QString content = q["track"]["wiki"]["content"].text();
+
+  if (content.isEmpty())
+    return; // No useful data
+
+  CollapsibleInfoPane::Data data;
+  data.title_ = tr("Last.fm wiki");
+  data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+  data.icon_ = QIcon(":/last.fm/as.png");
+
+  AutoSizedTextEdit* widget = new AutoSizedTextEdit;
+  data.contents_ = widget;
+
+  widget->setHtml(content);
+
+  emit InfoReady(id, data);
+}

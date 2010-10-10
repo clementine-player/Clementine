@@ -132,11 +132,13 @@ set(SOURCES
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
   songinfo/echonestartistinfo.cpp
+  songinfo/lastfmtrackinfoprovider.cpp
   songinfo/lyricsettings.cpp
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
   songinfo/songinfoprovider.cpp
   songinfo/songinfoview.cpp
+  songinfo/songplaystats.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
@@ -272,11 +274,13 @@ set(HEADERS
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
   songinfo/echonestartistinfo.h
+  songinfo/lastfmtrackinfoprovider.h
   songinfo/lyricsettings.h
   songinfo/songinfobase.h
   songinfo/songinfofetcher.h
   songinfo/songinfoprovider.h
   songinfo/songinfoview.h
+  songinfo/songplaystats.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 

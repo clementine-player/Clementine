@@ -54,8 +54,8 @@ void CollapsibleInfoPane::ExpandedToggled(bool expanded) {
 }
 
 bool CollapsibleInfoPane::Data::operator <(const CollapsibleInfoPane::Data& other) const {
-  const int my_score    = type_       * 1000 + relevance_;
-  const int other_score = other.type_ * 1000 + other.relevance_;
+  const int my_score    = (TypeCount - type_      ) * 1000 + relevance_;
+  const int other_score = (TypeCount - other.type_) * 1000 + other.relevance_;
 
   return my_score > other_score;
 }

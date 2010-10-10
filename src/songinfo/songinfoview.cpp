@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "lastfmtrackinfoprovider.h"
 #include "songinfoprovider.h"
 #include "songinfoview.h"
 #include "ultimatelyricsprovider.h"
@@ -39,6 +40,8 @@ SongInfoView::SongInfoView(NetworkAccessManager* network, QWidget* parent)
   QFutureWatcher<ProviderList>* watcher = new QFutureWatcher<ProviderList>(this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(UltimateLyricsParsed()));
+
+  fetcher_->AddProvider(new LastfmTrackInfoProvider);
 }
 
 SongInfoView::~SongInfoView() {
