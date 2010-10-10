@@ -29,6 +29,9 @@ ArtistInfoView::~ArtistInfoView() {
 }
 
 bool ArtistInfoView::NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const {
+  if (new_metadata.artist().isEmpty())
+    return false;
+
   return old_metadata.artist() != new_metadata.artist();
 }
 

@@ -16,6 +16,7 @@
 
 #include "lastfmtrackinfoprovider.h"
 #include "songplaystats.h"
+#include "tagwidget.h"
 #include "ui/iconloader.h"
 #include "widgets/autosizedtextedit.h"
 
@@ -57,6 +58,7 @@ void LastfmTrackInfoProvider::RequestFinished() {
 
     GetPlayCounts(id, query);
     GetWiki(id, query);
+    GetTags(id, query);
 
   } catch (std::runtime_error&) {
   }
@@ -102,6 +104,9 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
 
 void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   // Parse the response
+  if (q["track"].children("wiki").isEmpty())
+    return; // No wiki element
+
   const QString content = q["track"]["wiki"]["content"].text();
 
   if (content.isEmpty())
@@ -116,6 +121,29 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   data.contents_ = widget;
 
   widget->setHtml(content);
+
+  emit InfoReady(id, data);
+}
+
+void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
+  // Parse the response
+  if (q["track"].children("toptags").isEmpty())
+    return; // No tag elements
+
+  CollapsibleInfoPane::Data data;
+  data.title_ = tr("Last.fm tags");
+  data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+  data.icon_ = QIcon(":/last.fm/icon_tag.png");
+
+  TagWidget* widget = new TagWidget;
+  data.contents_ = widget;
+
+  widget->SetIcon(data.icon_);
+  widget->SetUrlPattern("lastfm://globaltags/%1");
+
+  foreach (const lastfm::XmlQuery& e, q["track"]["toptags"].children("tag")) {
+    widget->AddTag(e["name"].text());
+  }
 
   emit InfoReady(id, data);
 }

@@ -61,6 +61,14 @@ void SongInfoView::UltimateLyricsParsed() {
   ReloadSettings();
 }
 
+bool SongInfoView::NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const {
+  if (new_metadata.title().isEmpty() || new_metadata.artist().isEmpty())
+    return false;
+
+  return old_metadata.title() != new_metadata.title() ||
+         old_metadata.artist() != new_metadata.artist();
+}
+
 void SongInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {
   if (id != current_request_id_)
     return;

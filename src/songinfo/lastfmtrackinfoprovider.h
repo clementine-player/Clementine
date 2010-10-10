@@ -37,6 +37,7 @@ private slots:
 private:
   void GetPlayCounts(int id, const lastfm::XmlQuery& q);
   void GetWiki(int id, const lastfm::XmlQuery& q);
+  void GetTags(int id, const lastfm::XmlQuery& q);
 
 private:
   QMap<QNetworkReply*, int> requests_;

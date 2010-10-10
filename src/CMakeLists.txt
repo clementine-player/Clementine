@@ -139,6 +139,7 @@ set(SOURCES
   songinfo/songinfoprovider.cpp
   songinfo/songinfoview.cpp
   songinfo/songplaystats.cpp
+  songinfo/tagwidget.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
@@ -149,6 +150,7 @@ set(SOURCES
   ui/albumcoversearcher.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
+  ui/flowlayout.cpp
   ui/globalshortcutgrabber.cpp
   ui/globalshortcutsconfig.cpp
   ui/iconloader.cpp
@@ -281,6 +283,7 @@ set(HEADERS
   songinfo/songinfoprovider.h
   songinfo/songinfoview.h
   songinfo/songplaystats.h
+  songinfo/tagwidget.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 

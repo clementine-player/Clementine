@@ -38,6 +38,9 @@ public:
 public slots:
   void ReloadSettings();
 
+protected:
+  bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
+
 protected slots:
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 
