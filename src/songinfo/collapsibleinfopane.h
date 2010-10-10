@@ -34,6 +34,7 @@ public:
     enum Type {
       Type_PlayCounts,
       Type_Tags,
+      Type_Similar,
       Type_Biography,
       Type_Lyrics,
 

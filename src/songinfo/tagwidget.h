@@ -64,10 +64,12 @@ public:
   void SetIcon(const QIcon& icon) { icon_ = icon; }
   void AddTag(const QString& tag);
 
+  int count() const { return tags_.count(); }
+
 private:
   QString url_pattern_;
   QIcon icon_;
-  QStringList tags_;
+  QList<TagWidgetTag*> tags_;
 };
 
 #endif // TAGWIDGET_H

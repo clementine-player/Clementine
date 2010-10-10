@@ -14,40 +14,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ECHONESTARTISTINFO_H
-#define ECHONESTARTISTINFO_H
+#ifndef ECHONESTSIMILARARTISTS_H
+#define ECHONESTSIMILARARTISTS_H
 
 #include "songinfoprovider.h"
 
-#include <QMap>
-
-#include <boost/shared_ptr.hpp>
-
 class QNetworkReply;
 
-class EchoNestArtistInfo : public SongInfoProvider {
+class EchoNestSimilarArtists : public SongInfoProvider {
   Q_OBJECT
 
 public:
-  EchoNestArtistInfo();
-
   void FetchInfo(int id, const Song& metadata);
 
 private slots:
-  void BiographiesFinished();
-  void ImagesFinished();
+  void RequestFinished();
 
 private:
-  struct Request;
-  typedef boost::shared_ptr<Request> RequestPtr;
-
-  void ConnectReply(RequestPtr request, QNetworkReply* reply, const char* slot);
-  RequestPtr ReplyFinished(QNetworkReply* reply);
-
-private:
-  QList<RequestPtr> requests_;
-  QMap<QString, int> site_relevance_;
-  QMap<QString, QIcon> site_icons_;
+  QMap<QNetworkReply*, int> requests_;
 };
 
-#endif // ECHONESTARTISTINFO_H
+#endif // ECHONESTSIMILARARTISTS_H

@@ -131,7 +131,10 @@ set(SOURCES
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
-  songinfo/echonestartistinfo.cpp
+  songinfo/echonestbiographies.cpp
+  songinfo/echonestimages.cpp
+  songinfo/echonestsimilarartists.cpp
+  songinfo/echonesttags.cpp
   songinfo/lastfmtrackinfoprovider.cpp
   songinfo/lyricsettings.cpp
   songinfo/songinfobase.cpp
@@ -275,7 +278,10 @@ set(HEADERS
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
-  songinfo/echonestartistinfo.h
+  songinfo/echonestbiographies.h
+  songinfo/echonestimages.h
+  songinfo/echonestsimilarartists.h
+  songinfo/echonesttags.h
   songinfo/lastfmtrackinfoprovider.h
   songinfo/lyricsettings.h
   songinfo/songinfobase.h

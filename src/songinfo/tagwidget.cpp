@@ -104,5 +104,7 @@ void TagWidget::AddTag(const QString& tag) {
   if (tag.isEmpty())
     return;
 
-  layout()->addWidget(new TagWidgetTag(icon_, tag, this));
+  TagWidgetTag* widget = new TagWidgetTag(icon_, tag, this);
+  layout()->addWidget(widget);
+  tags_ << widget;
 }

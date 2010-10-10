@@ -14,24 +14,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "echonestartistinfo.h"
+#include "echonestbiographies.h"
 #include "widgets/autosizedtextedit.h"
 
 #include <echonest/Artist.h>
 
 #include <boost/scoped_ptr.hpp>
 
-struct EchoNestArtistInfo::Request {
+struct EchoNestBiographies::Request {
   Request(int id) : id_(id), artist_(new Echonest::Artist) {}
-
-  bool is_finished() const { return pending_replies_.isEmpty(); }
 
   int id_;
   boost::scoped_ptr<Echonest::Artist> artist_;
-  QList<QNetworkReply*> pending_replies_;
 };
 
-EchoNestArtistInfo::EchoNestArtistInfo() {
+EchoNestBiographies::EchoNestBiographies() {
   site_relevance_["wikipedia"] = 100;
   site_relevance_["lastfm"] = 60;
   site_relevance_["amazon"] = 30;
@@ -46,58 +43,28 @@ EchoNestArtistInfo::EchoNestArtistInfo() {
   site_icons_["wikipedia"] = QIcon(":/providers/wikipedia.png");
 }
 
-void EchoNestArtistInfo::FetchInfo(int id, const Song& metadata) {
+void EchoNestBiographies::FetchInfo(int id, const Song& metadata) {
   boost::shared_ptr<Request> request(new Request(id));
   request->artist_->setName(metadata.artist());
 
-  ConnectReply(request, request->artist_->fetchBiographies(), SLOT(BiographiesFinished()));
-  ConnectReply(request, request->artist_->fetchImages(), SLOT(ImagesFinished()));
-
-  requests_ << request;
+  QNetworkReply* reply = request->artist_->fetchBiographies();
+  connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
+  requests_[reply] = request;
 }
 
-void EchoNestArtistInfo::ConnectReply(
-    boost::shared_ptr<Request> request, QNetworkReply* reply, const char* slot) {
-  request->pending_replies_ << reply;
-  connect(reply, SIGNAL(finished()), slot);
-}
-
-EchoNestArtistInfo::RequestPtr EchoNestArtistInfo::ReplyFinished(QNetworkReply* reply) {
+void EchoNestBiographies::RequestFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply || !requests_.contains(reply))
+    return;
   reply->deleteLater();
 
-  foreach (RequestPtr request, requests_) {
-    if (request->pending_replies_.contains(reply)) {
-      try {
-        request->artist_->parseProfile(reply);
-      } catch (Echonest::ParseError e) {
-        qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
-      }
+  RequestPtr request = requests_.take(reply);
 
-      request->pending_replies_.removeAll(reply);
-
-      if (request->is_finished()) {
-        requests_.removeAll(request);
-      }
-
-      return request;
-    }
+  try {
+    request->artist_->parseProfile(reply);
+  } catch (Echonest::ParseError e) {
+    qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
   }
-  return RequestPtr();
-}
-
-void EchoNestArtistInfo::ImagesFinished() {
-  RequestPtr request = ReplyFinished(qobject_cast<QNetworkReply*>(sender()));
-
-  foreach (const Echonest::ArtistImage& image, request->artist_->images()) {
-    emit ImageReady(request->id_, image.url());
-  }
-
-  if (request->is_finished())
-    emit Finished(request->id_);
-}
-
-void EchoNestArtistInfo::BiographiesFinished() {
-  RequestPtr request = ReplyFinished(qobject_cast<QNetworkReply*>(sender()));
 
   QSet<QString> already_seen;
 
@@ -125,6 +92,5 @@ void EchoNestArtistInfo::BiographiesFinished() {
     emit InfoReady(request->id_, data);
   }
 
-  if (request->is_finished())
-    emit Finished(request->id_);
+  emit Finished(request->id_);
 }

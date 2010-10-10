@@ -15,14 +15,20 @@
 */
 
 #include "artistinfoview.h"
-#include "echonestartistinfo.h"
+#include "echonestbiographies.h"
+#include "echonestimages.h"
+#include "echonestsimilarartists.h"
+#include "echonesttags.h"
 #include "songinfofetcher.h"
 #include "widgets/prettyimageview.h"
 
 ArtistInfoView::ArtistInfoView(NetworkAccessManager* network, QWidget *parent)
   : SongInfoBase(network, parent)
 {
-  fetcher_->AddProvider(new EchoNestArtistInfo);
+  fetcher_->AddProvider(new EchoNestBiographies);
+  fetcher_->AddProvider(new EchoNestImages);
+  fetcher_->AddProvider(new EchoNestSimilarArtists);
+  fetcher_->AddProvider(new EchoNestTags);
 }
 
 ArtistInfoView::~ArtistInfoView() {
