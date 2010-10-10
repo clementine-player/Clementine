@@ -15,13 +15,16 @@
 */
 
 #include "lyricsettings.h"
+#include "songinfoview.h"
+#include "ultimatelyricsprovider.h"
 #include "ui_lyricsettings.h"
 
 #include <QSettings>
 
 LyricSettings::LyricSettings(QWidget *parent)
   : QWidget(parent),
-    ui_(new Ui_LyricSettings)
+    ui_(new Ui_LyricSettings),
+    view_(NULL)
 {
   ui_->setupUi(this);
 
@@ -38,23 +41,21 @@ LyricSettings::~LyricSettings() {
 }
 
 void LyricSettings::Load() {
-  /*QList<LyricProvider*> providers = fetcher_->providers();
+  QList<const UltimateLyricsProvider*> providers = view_->lyric_providers();
 
   ui_->providers->clear();
-  foreach (const LyricProvider* provider, providers) {
+  foreach (const UltimateLyricsProvider* provider, providers) {
     QListWidgetItem* item = new QListWidgetItem(ui_->providers);
     item->setText(provider->name());
     item->setCheckState(provider->is_enabled() ? Qt::Checked : Qt::Unchecked);
     item->setForeground(provider->is_enabled() ? palette().color(QPalette::Active, QPalette::Text)
                                                : palette().color(QPalette::Disabled, QPalette::Text));
-  }*/
+  }
 }
 
 void LyricSettings::Save() {
-  /*QSettings s;
-  s.beginGroup(LyricFetcher::kSettingsGroup);
-
-  s.setValue("download", ui_->download->isChecked());
+  QSettings s;
+  s.beginGroup(SongInfoView::kSettingsGroup);
 
   QVariantList search_order;
   for (int i=0 ; i<ui_->providers->count() ; ++i) {
@@ -62,7 +63,7 @@ void LyricSettings::Save() {
     if (item->checkState() == Qt::Checked)
       search_order << item->text();
   }
-  s.setValue("search_order", search_order);*/
+  s.setValue("search_order", search_order);
 }
 
 void LyricSettings::CurrentItemChanged(QListWidgetItem* item) {

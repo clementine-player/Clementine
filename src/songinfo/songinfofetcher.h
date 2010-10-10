@@ -40,6 +40,8 @@ public:
   void AddProvider(SongInfoProvider* provider);
   int FetchInfo(const Song& metadata);
 
+  QList<SongInfoProvider*> providers() const { return providers_; }
+
 signals:
   void ResultReady(int id, const SongInfoFetcher::Result& result);
 

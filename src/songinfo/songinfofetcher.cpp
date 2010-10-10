@@ -35,8 +35,10 @@ int SongInfoFetcher::FetchInfo(const Song& metadata) {
   results_[id] = Result();
 
   foreach (SongInfoProvider* provider, providers_) {
-    waiting_for_[id].append(provider);
-    provider->FetchInfo(id, metadata);
+    if (provider->is_enabled()) {
+      waiting_for_[id].append(provider);
+      provider->FetchInfo(id, metadata);
+    }
   }
   return id;
 }

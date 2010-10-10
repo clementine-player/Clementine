@@ -40,6 +40,7 @@ public:
 public slots:
   void SongChanged(const Song& metadata);
   void SongFinished();
+  virtual void ReloadSettings() {}
 
 protected:
   void showEvent(QShowEvent* e);

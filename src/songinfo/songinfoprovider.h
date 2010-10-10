@@ -27,12 +27,20 @@ class SongInfoProvider : public QObject {
   Q_OBJECT
 
 public:
+  SongInfoProvider();
+
   virtual void FetchInfo(int id, const Song& metadata) = 0;
+
+  bool is_enabled() const { return enabled_; }
+  void set_enabled(bool enabled) { enabled_ = enabled; }
 
 signals:
   void ImageReady(int id, const QUrl& url);
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
   void Finished(int id);
+
+private:
+  bool enabled_;
 };
 
 #endif // SONGINFOPROVIDER_H

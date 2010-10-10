@@ -28,6 +28,7 @@ const int UltimateLyricsProvider::kRedirectLimit = 5;
 
 UltimateLyricsProvider::UltimateLyricsProvider(NetworkAccessManager* network)
   : network_(network),
+    relevance_(0),
     redirect_count_(0)
 {
 }

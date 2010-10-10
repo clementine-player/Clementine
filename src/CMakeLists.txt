@@ -135,6 +135,7 @@ set(SOURCES
   songinfo/lyricsettings.cpp
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
+  songinfo/songinfoprovider.cpp
   songinfo/songinfoview.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp

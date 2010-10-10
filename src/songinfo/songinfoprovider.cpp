@@ -14,39 +14,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LYRICSETTINGS_H
-#define LYRICSETTINGS_H
+#include "songinfoprovider.h"
 
-#include <QWidget>
-
-class SongInfoView;
-class Ui_LyricSettings;
-
-class QListWidgetItem;
-
-class LyricSettings : public QWidget {
-  Q_OBJECT
-
-public:
-  LyricSettings(QWidget *parent = 0);
-  ~LyricSettings();
-
-  void SetSongInfoView(SongInfoView* view) { view_ = view; }
-
-  void Load();
-  void Save();
-
-private slots:
-  void MoveUp();
-  void MoveDown();
-  void Move(int d);
-
-  void CurrentItemChanged(QListWidgetItem* item);
-  void ItemChanged(QListWidgetItem* item);
-
-private:
-  Ui_LyricSettings* ui_;
-  SongInfoView* view_;
-};
-
-#endif // LYRICSETTINGS_H
+SongInfoProvider::SongInfoProvider()
+  : enabled_(true)
+{
+}

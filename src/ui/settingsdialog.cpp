@@ -509,3 +509,7 @@ void SettingsDialog::OpenAtPage(Page page) {
   ui_->list->setCurrentRow(page);
   show();
 }
+
+void SettingsDialog::SetSongInfoView(SongInfoView* view) {
+  ui_->lyric_settings->SetSongInfoView(view);
+}

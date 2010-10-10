@@ -21,6 +21,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class UltimateLyricsProvider;
 class UltimateLyricsReader;
 
 class SongInfoView : public SongInfoBase {
@@ -30,8 +31,18 @@ public:
   SongInfoView(NetworkAccessManager* network, QWidget* parent = 0);
   ~SongInfoView();
 
+  static const char* kSettingsGroup;
+
+  QList<const UltimateLyricsProvider*> lyric_providers() const;
+
+public slots:
+  void ReloadSettings();
+
 protected slots:
   void ResultReady(int id, const SongInfoFetcher::Result& result);
+
+private:
+  SongInfoProvider* ProviderByName(const QString& name) const;
 
 private slots:
   void UltimateLyricsParsed();

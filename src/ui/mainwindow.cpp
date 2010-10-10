@@ -1501,13 +1501,15 @@ void MainWindow::EnsureSettingsDialogCreated() {
 #endif
 
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
+  settings_dialog_->SetSongInfoView(song_info_view_);
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), library_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), library_view_, SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), library_view_->view(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), song_info_view_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
 #ifdef ENABLE_WIIMOTEDEV

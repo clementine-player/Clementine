@@ -25,6 +25,7 @@
 class GlobalShortcuts;
 class LibraryDirectoryModel;
 class OSDPretty;
+class SongInfoView;
 class Ui_SettingsDialog;
 
 #ifdef ENABLE_WIIMOTEDEV
@@ -57,6 +58,7 @@ class SettingsDialog : public QDialog {
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
   void SetGlobalShortcutManager(GlobalShortcuts* manager);
   void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
+  void SetSongInfoView(SongInfoView* view);
 
   void OpenAtPage(Page page);
 

@@ -43,6 +43,7 @@ public:
   void set_title(const QString& title) { title_ = title; }
   void set_url(const QString& url) { url_ = url; }
   void set_charset(const QString& charset) { charset_ = charset; }
+  void set_relevance(int relevance) { relevance_ = relevance; }
 
   void add_url_format(const QString& replace, const QString& with) {
     url_formats_ << UrlFormat(replace, with); }
@@ -50,6 +51,9 @@ public:
   void add_extract_rule(const Rule& rule) { extract_rules_ << rule; }
   void add_exclude_rule(const Rule& rule) { exclude_rules_ << rule; }
   void add_invalid_indicator(const QString& indicator) { invalid_indicators_ << indicator; }
+
+  QString name() const { return name_; }
+  int relevance() const { return relevance_; }
 
   void FetchInfo(int id, const Song& metadata);
 
@@ -75,6 +79,7 @@ private:
   QString title_;
   QString url_;
   QString charset_;
+  int relevance_;
 
   QList<UrlFormat> url_formats_;
   QList<Rule> extract_rules_;
