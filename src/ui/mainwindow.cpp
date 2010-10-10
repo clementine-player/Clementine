@@ -15,7 +15,6 @@
 */
 
 #include "mainwindow.h"
-#include "stylehelper.h"
 #include "ui_mainwindow.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
@@ -75,6 +74,7 @@
 #include "widgets/fileview.h"
 #include "widgets/multiloadingindicator.h"
 #include "widgets/osd.h"
+#include "widgets/stylehelper.h"
 #include "widgets/trackslider.h"
 
 #ifdef ENABLE_WIIMOTEDEV

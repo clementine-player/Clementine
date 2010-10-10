@@ -51,9 +51,7 @@ public:
     static const unsigned int DEFAULT_BASE_COLOR = 0x666666;
 
     // Height of the project explorer navigation bar
-    static int navigationWidgetHeight() { return 24; }
     static qreal sidebarFontSize();
-    static QPalette sidebarFontPalette(const QPalette &original);
 
     // This is our color table, all colors derive from baseColor
     static QColor requestedBaseColor() { return m_requestedBaseColor; }
@@ -62,8 +60,6 @@ public:
     static QColor highlightColor(bool lightColored = false);
     static QColor shadowColor(bool lightColored = false);
     static QColor borderColor(bool lightColored = false);
-    static QColor buttonTextColor() { return QColor(0x4c4c4c); }
-    static QColor mergedColors(const QColor &colorA, const QColor &colorB, int factor = 50);
 
     static QColor sidebarHighlight() { return QColor(255, 255, 255, 40); }
     static QColor sidebarShadow() { return QColor(0, 0, 0, 40); }
@@ -71,20 +67,13 @@ public:
     // Sets the base color and makes sure all top level widgets are updated
     static void setBaseColor(const QColor &color);
 
-    // Draws a shaded anti-aliased arrow
-    static void drawArrow(QStyle::PrimitiveElement element, QPainter *painter, const QStyleOption *option);
-
     // Gradients used for panels
-    static void horizontalGradient(QPainter *painter, const QRect &spanRect, const QRect &clipRect, bool lightColored = false);
     static void verticalGradient(QPainter *painter, const QRect &spanRect, const QRect &clipRect, bool lightColored = false);
-    static void menuGradient(QPainter *painter, const QRect &spanRect, const QRect &clipRect);
     static bool usePixmapCache() { return true; }
 
     static void drawIconWithShadow(const QIcon &icon, const QRect &rect, QPainter *p, QIcon::Mode iconMode,
                                    int radius = 3, const QColor &color = QColor(0, 0, 0, 130),
                                    const QPoint &offset = QPoint(1, -2));
-    static void drawCornerImage(const QImage &img, QPainter *painter, QRect rect,
-                         int left = 0, int top = 0, int right = 0, int bottom = 0);
 
 private:
     static QColor m_baseColor;

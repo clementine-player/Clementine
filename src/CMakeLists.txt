@@ -165,6 +165,7 @@ set(SOURCES
   widgets/elidedlabel.cpp
   widgets/equalizerslider.cpp
   widgets/errordialog.cpp
+  widgets/fancytabwidget.cpp
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/freespacebar.cpp
@@ -181,6 +182,7 @@ set(SOURCES
   widgets/spinbox.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
+  widgets/stylehelper.cpp
   widgets/trackslider.cpp
   widgets/tracksliderslider.cpp
   widgets/widgetfadehelper.cpp
@@ -304,6 +306,7 @@ set(HEADERS
   widgets/elidedlabel.h
   widgets/equalizerslider.h
   widgets/errordialog.h
+  widgets/fancytabwidget.h
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/freespacebar.h
@@ -701,7 +704,6 @@ add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
   chardet
-  fancytabwidget
   echonest
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
