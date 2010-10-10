@@ -108,10 +108,10 @@ void SongInfoView::ReloadSettings() {
   }
 
   // Enable all the providers in the list and rank them
-  int relevance = ordered_providers.count();
+  int relevance = 0;
   foreach (SongInfoProvider* provider, ordered_providers) {
     provider->set_enabled(true);
-    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
+    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance++);
   }
 
   // Any lyric providers we don't have in ordered_providers are considered disabled
