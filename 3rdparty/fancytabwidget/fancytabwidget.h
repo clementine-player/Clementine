@@ -32,9 +32,12 @@
 
 #include <QIcon>
 #include <QPropertyAnimation>
+#include <QProxyStyle>
 #include <QTabBar>
 #include <QTimer>
 #include <QWidget>
+
+#include <boost/scoped_ptr.hpp>
 
 class QActionGroup;
 class QMenu;
@@ -46,6 +49,20 @@ class QVBoxLayout;
 
 namespace Core {
 namespace Internal {
+
+class FancyTabProxyStyle : public QProxyStyle {
+  Q_OBJECT
+
+public:
+  void drawControl(ControlElement element, const QStyleOption* option,
+                   QPainter* painter, const QWidget* widget) const;
+  void polish(QWidget* widget);
+  void polish(QApplication* app);
+  void polish(QPalette& palette);
+
+protected:
+  bool eventFilter(QObject* o, QEvent* e);
+};
 
 class FancyTab : public QWidget{
     Q_OBJECT
@@ -195,10 +212,14 @@ private:
   QVBoxLayout* top_layout_;
 
   QMenu* menu_;
+
+  boost::scoped_ptr<FancyTabProxyStyle> proxy_style_;
 };
 
 } // namespace Internal
 } // namespace Core
+
+Q_DECLARE_METATYPE(QPropertyAnimation*);
 
 using Core::Internal::FancyTab;
 using Core::Internal::FancyTabBar;

@@ -2,13 +2,11 @@ cmake_minimum_required(VERSION 2.6)
 
 set(SOURCES
   fancytabwidget.cpp
-  styledbar.cpp
   stylehelper.cpp
 )
 
 set(HEADERS
   fancytabwidget.h
-  styledbar.h
 )
 
 qt4_wrap_cpp(MOC ${HEADERS})
