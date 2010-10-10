@@ -17,10 +17,10 @@
 #ifndef ULTIMATELYRICSREADER_H
 #define ULTIMATELYRICSREADER_H
 
+#include "ultimatelyricsprovider.h"
+
 #include <QObject>
 #include <QXmlStreamReader>
-
-#include "htmlscraper.h"
 
 class QIODevice;
 
@@ -30,12 +30,12 @@ class UltimateLyricsReader : public QObject {
 public:
   UltimateLyricsReader(NetworkAccessManager* network, QObject* parent = 0);
 
-  QList<LyricProvider*> Parse(const QString& filename) const;
-  QList<LyricProvider*> ParseDevice(QIODevice* device) const;
+  QList<SongInfoProvider*> Parse(const QString& filename) const;
+  QList<SongInfoProvider*> ParseDevice(QIODevice* device) const;
 
 private:
-  LyricProvider* ParseProvider(QXmlStreamReader* reader) const;
-  HtmlScraper::Rule ParseRule(QXmlStreamReader* reader) const;
+  SongInfoProvider* ParseProvider(QXmlStreamReader* reader) const;
+  UltimateLyricsProvider::Rule ParseRule(QXmlStreamReader* reader) const;
   QString ParseInvalidIndicator(QXmlStreamReader* reader) const;
 
 private:

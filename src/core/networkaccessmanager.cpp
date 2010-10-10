@@ -75,22 +75,3 @@ void NetworkAccessManager::RequestFinished() {
                             Q_ARG(quint64, r.id),
                             Q_ARG(QNetworkReply*, reply));
 }
-
-QNetworkReply* NetworkAccessManager::GetBlocking(const QUrl& url, bool force_cache) {
-  QNetworkReply* reply = NULL;
-  QMetaObject::invokeMethod(
-      this, "RunGetBlocking", Qt::BlockingQueuedConnection,
-      Q_ARG(QUrl, url), Q_ARG(bool, force_cache),
-      Q_ARG(QNetworkReply**, &reply));
-  return reply;
-}
-
-void NetworkAccessManager::RunGetBlocking(const QUrl& url, bool force_cache,
-                                          QNetworkReply** reply) {
-  QNetworkRequest req = CreateRequest(url, force_cache);
-  *reply = network_->get(req);
-
-  QEventLoop loop;
-  connect(*reply, SIGNAL(finished()), &loop, SLOT(quit()));
-  loop.exec();
-}

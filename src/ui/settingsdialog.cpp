@@ -175,10 +175,6 @@ void SettingsDialog::SetGlobalShortcutManager(GlobalShortcuts *manager) {
   ui_->global_shortcuts->SetManager(manager);
 }
 
-void SettingsDialog::SetLyricFetcher(const LyricFetcher* fetcher) {
-  ui_->lyric_settings->set_fetcher(fetcher);
-}
-
 void SettingsDialog::LastFMValidationComplete(bool success) {
   ui_->buttonBox->setEnabled(true);
 

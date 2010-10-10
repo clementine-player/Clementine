@@ -14,26 +14,47 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARTISTINFOPROVIDER_H
-#define ARTISTINFOPROVIDER_H
+#ifndef SONGINFOFETCHER_H
+#define SONGINFOFETCHER_H
 
+#include <QMap>
 #include <QObject>
 #include <QUrl>
 
 #include "collapsibleinfopane.h"
+#include "core/song.h"
 
-class ArtistInfoProvider : public QObject {
+class SongInfoProvider;
+
+class SongInfoFetcher : public QObject {
   Q_OBJECT
 
 public:
-  ArtistInfoProvider(QObject* parent = 0);
+  SongInfoFetcher(QObject* parent = 0);
 
-  virtual void FetchInfo(int id, const QString& artist) = 0;
+  struct Result {
+    QList<QUrl> images_;
+    QList<CollapsibleInfoPane::Data> info_;
+  };
+
+  void AddProvider(SongInfoProvider* provider);
+  int FetchInfo(const Song& metadata);
 
 signals:
+  void ResultReady(int id, const SongInfoFetcher::Result& result);
+
+private slots:
   void ImageReady(int id, const QUrl& url);
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
-  void Finished(int id);
+  void ProviderFinished(int id);
+
+private:
+  QList<SongInfoProvider*> providers_;
+
+  QMap<int, Result> results_;
+  QMap<int, QList<SongInfoProvider*> > waiting_for_;
+
+  int next_id_;
 };
 
-#endif // ARTISTINFOPROVIDER_H
+#endif // SONGINFOFETCHER_H

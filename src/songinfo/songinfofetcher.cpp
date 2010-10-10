@@ -14,53 +14,52 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "artistinfofetcher.h"
-#include "echonestartistinfo.h"
+#include "songinfofetcher.h"
+#include "songinfoprovider.h"
 
-ArtistInfoFetcher::ArtistInfoFetcher(QObject* parent)
+SongInfoFetcher::SongInfoFetcher(QObject* parent)
   : QObject(parent),
     next_id_(1)
 {
-  AddProvider(new EchoNestArtistInfo(this));
 }
 
-void ArtistInfoFetcher::AddProvider(ArtistInfoProvider* provider) {
+void SongInfoFetcher::AddProvider(SongInfoProvider* provider) {
   providers_ << provider;
   connect(provider, SIGNAL(ImageReady(int,QUrl)), SLOT(ImageReady(int,QUrl)));
   connect(provider, SIGNAL(InfoReady(int,CollapsibleInfoPane::Data)), SLOT(InfoReady(int,CollapsibleInfoPane::Data)));
   connect(provider, SIGNAL(Finished(int)), SLOT(ProviderFinished(int)));
 }
 
-int ArtistInfoFetcher::FetchInfo(const QString& artist) {
+int SongInfoFetcher::FetchInfo(const Song& metadata) {
   const int id = next_id_ ++;
   results_[id] = Result();
 
-  foreach (ArtistInfoProvider* provider, providers_) {
+  foreach (SongInfoProvider* provider, providers_) {
     waiting_for_[id].append(provider);
-    provider->FetchInfo(id, artist);
+    provider->FetchInfo(id, metadata);
   }
   return id;
 }
 
-void ArtistInfoFetcher::ImageReady(int id, const QUrl& url) {
+void SongInfoFetcher::ImageReady(int id, const QUrl& url) {
   if (!results_.contains(id))
     return;
   results_[id].images_ << url;
 }
 
-void ArtistInfoFetcher::InfoReady(int id, const CollapsibleInfoPane::Data& data) {
+void SongInfoFetcher::InfoReady(int id, const CollapsibleInfoPane::Data& data) {
   if (!results_.contains(id))
     return;
   results_[id].info_ << data;
 }
 
-void ArtistInfoFetcher::ProviderFinished(int id) {
+void SongInfoFetcher::ProviderFinished(int id) {
   if (!results_.contains(id))
     return;
   if (!waiting_for_.contains(id))
     return;
 
-  ArtistInfoProvider* provider = qobject_cast<ArtistInfoProvider*>(sender());
+  SongInfoProvider* provider = qobject_cast<SongInfoProvider*>(sender());
   if (!waiting_for_[id].contains(provider))
     return;
 

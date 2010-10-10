@@ -14,38 +14,25 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LYRICVIEW_H
-#define LYRICVIEW_H
+#ifndef SONGINFOPROVIDER_H
+#define SONGINFOPROVIDER_H
 
-#include "songinfobase.h"
+#include <QObject>
+#include <QUrl>
+
+#include "collapsibleinfopane.h"
 #include "core/song.h"
 
-class LyricFetcher;
-class NetworkAccessManager;
-class Ui_LyricView;
-
-class LyricView : public SongInfoBase {
+class SongInfoProvider : public QObject {
   Q_OBJECT
 
 public:
-  LyricView(NetworkAccessManager* network, QWidget* parent = 0);
-  ~LyricView();
+  virtual void FetchInfo(int id, const Song& metadata) = 0;
 
-  void set_network(NetworkAccessManager* network);
-  LyricFetcher* fetcher() const { return fetcher_; }
-
-protected:
-  void Update(const Song& metadata);
-
-private slots:
-  void SearchProgress(int id, const QString& provider);
-  void SearchFinished(int id, bool success, const QString& title, const QString& content);
-
-private:
-  Ui_LyricView* ui_;
-
-  LyricFetcher* fetcher_;
-  int current_request_id_;
+signals:
+  void ImageReady(int id, const QUrl& url);
+  void InfoReady(int id, const CollapsibleInfoPane::Data& data);
+  void Finished(int id);
 };
 
-#endif // LYRICVIEW_H
+#endif // SONGINFOPROVIDER_H

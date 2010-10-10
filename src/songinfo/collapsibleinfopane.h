@@ -33,6 +33,7 @@ public:
 
     enum Type {
       Type_Biography = 0,
+      Type_Lyrics = 1,
 
       TypeCount
     };

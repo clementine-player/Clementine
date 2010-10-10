@@ -14,30 +14,31 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "htmlscraper.h"
+#include "ultimatelyricsprovider.h"
 #include "core/networkaccessmanager.h"
+#include "widgets/autosizedtextedit.h"
 
 #include <QNetworkReply>
 #include <QTextCodec>
 
 #include <boost/scoped_ptr.hpp>
 
-const int HtmlScraper::kRedirectLimit = 5;
+const int UltimateLyricsProvider::kRedirectLimit = 5;
 
 
-HtmlScraper::HtmlScraper(NetworkAccessManager* network, QObject* parent)
-  : LyricProvider(network, parent)
+UltimateLyricsProvider::UltimateLyricsProvider(NetworkAccessManager* network)
+  : network_(network),
+    redirect_count_(0)
 {
 }
 
-LyricProvider::Result HtmlScraper::Search(const Song& metadata) const {
-  LyricProvider::Result ret;
-
+void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   // Get the text codec
   const QTextCodec* codec = QTextCodec::codecForName(charset_.toAscii().constData());
   if (!codec) {
     qWarning() << "Invalid codec" << charset_;
-    return ret;
+    emit Finished(id);
+    return;
   }
 
   // Fill in fields in the URL
@@ -54,36 +55,48 @@ LyricProvider::Result HtmlScraper::Search(const Song& metadata) const {
   QUrl url(url_text);
 
   // Fetch the URL, follow redirects
-  boost::scoped_ptr<QNetworkReply> reply;
+  redirect_count_ = 0;
+  network_->Get(url, this, "LyricsFetched", id);
+}
 
-  for (int i=0 ; ; ++i) {
-    if (i >= kRedirectLimit)
-      return ret;
+void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
+  reply->deleteLater();
 
-    qDebug() << "Fetching" << url;
-    reply.reset(network_->GetBlocking(QUrl(url)));
-    if (reply->error() != QNetworkReply::NoError)
-      return ret;
+  if (reply->error() != QNetworkReply::NoError) {
+    emit Finished(id);
+    return;
+  }
 
-    QVariant redirect_target = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-    if (!redirect_target.isValid())
-      break;
+  // Handle redirects
+  QVariant redirect_target = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+  if (redirect_target.isValid()) {
+    if (redirect_count_ >= kRedirectLimit) {
+      emit Finished(id);
+      return;
+    }
 
     QUrl target = redirect_target.toUrl();
     if (target.scheme().isEmpty() || target.host().isEmpty()) {
       QString path = target.path();
-      target = url;
+      target = reply->url();
       target.setPath(path);
     }
-    url = target;
+
+    redirect_count_ ++;
+    network_->Get(target, this, "LyricsFetched", id);
+    return;
   }
 
+  const QTextCodec* codec = QTextCodec::codecForName(charset_.toAscii().constData());
   const QString original_content = codec->toUnicode(reply->readAll());
+  QString lyrics;
 
   // Check for invalid indicators
   foreach (const QString& indicator, invalid_indicators_) {
-    if (original_content.contains(indicator))
-      return ret;
+    if (original_content.contains(indicator)) {
+      emit Finished(id);
+      return;
+    }
   }
 
   // Apply extract rules
@@ -92,20 +105,29 @@ LyricProvider::Result HtmlScraper::Search(const Song& metadata) const {
     ApplyExtractRule(rule, &content);
 
     if (!content.isEmpty())
-      ret.content = content;
+      lyrics = content;
   }
 
   // Apply exclude rules
   foreach (const Rule& rule, exclude_rules_) {
-    ApplyExcludeRule(rule, &ret.content);
+    ApplyExcludeRule(rule, &lyrics);
   }
 
-  if (!ret.content.isEmpty())
-    ret.valid = true;
-  return ret;
+  if (!lyrics.isEmpty()) {
+    CollapsibleInfoPane::Data data;
+    data.title_ = tr("Lyrics from %1").arg(name_);
+    data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
+
+    AutoSizedTextEdit* editor = new AutoSizedTextEdit;
+    editor->setHtml(lyrics);
+    data.contents_ = editor;
+
+    emit InfoReady(id, data);
+  }
+  emit Finished(id);
 }
 
-void HtmlScraper::ApplyExtractRule(const Rule& rule, QString* content) const {
+void UltimateLyricsProvider::ApplyExtractRule(const Rule& rule, QString* content) const {
   foreach (const RuleItem& item, rule) {
     if (item.second.isNull()) {
       *content = ExtractXmlTag(*content, item.first);
@@ -115,7 +137,7 @@ void HtmlScraper::ApplyExtractRule(const Rule& rule, QString* content) const {
   }
 }
 
-QString HtmlScraper::ExtractXmlTag(const QString& source, const QString& tag) {
+QString UltimateLyricsProvider::ExtractXmlTag(const QString& source, const QString& tag) {
   QRegExp re("<(\\w+).*>"); // ಠ_ಠ
   if (re.indexIn(tag) == -1)
     return QString();
@@ -123,7 +145,7 @@ QString HtmlScraper::ExtractXmlTag(const QString& source, const QString& tag) {
   return Extract(source, tag, "</" + re.cap(1) + ">");
 }
 
-QString HtmlScraper::Extract(const QString& source, const QString& begin, const QString& end) {
+QString UltimateLyricsProvider::Extract(const QString& source, const QString& begin, const QString& end) {
   int begin_idx = source.indexOf(begin);
   if (begin_idx == -1)
     return QString();
@@ -136,7 +158,7 @@ QString HtmlScraper::Extract(const QString& source, const QString& begin, const 
   return source.mid(begin_idx, end_idx - begin_idx - 1);
 }
 
-void HtmlScraper::ApplyExcludeRule(const Rule& rule, QString* content) const {
+void UltimateLyricsProvider::ApplyExcludeRule(const Rule& rule, QString* content) const {
   foreach (const RuleItem& item, rule) {
     if (item.second.isNull()) {
       *content = ExcludeXmlTag(*content, item.first);
@@ -146,7 +168,7 @@ void HtmlScraper::ApplyExcludeRule(const Rule& rule, QString* content) const {
   }
 }
 
-QString HtmlScraper::ExcludeXmlTag(const QString& source, const QString& tag) {
+QString UltimateLyricsProvider::ExcludeXmlTag(const QString& source, const QString& tag) {
   QRegExp re("<(\\w+).*>"); // ಠ_ಠ
   if (re.indexIn(tag) == -1)
     return source;
@@ -154,7 +176,7 @@ QString HtmlScraper::ExcludeXmlTag(const QString& source, const QString& tag) {
   return Exclude(source, tag, "</" + re.cap(1) + ">");
 }
 
-QString HtmlScraper::Exclude(const QString& source, const QString& begin, const QString& end) {
+QString UltimateLyricsProvider::Exclude(const QString& source, const QString& begin, const QString& end) {
   int begin_idx = source.indexOf(begin);
   if (begin_idx == -1)
     return source;
@@ -166,13 +188,13 @@ QString HtmlScraper::Exclude(const QString& source, const QString& begin, const 
   return source.left(begin_idx) + source.right(source.length() - end_idx - end.length());
 }
 
-QString HtmlScraper::FirstChar(const QString& text) {
+QString UltimateLyricsProvider::FirstChar(const QString& text) {
   if (text.isEmpty())
     return QString();
   return text[0].toLower();
 }
 
-QString HtmlScraper::TitleCase(const QString& text) {
+QString UltimateLyricsProvider::TitleCase(const QString& text) {
   if (text.length() == 0)
     return QString();
   if (text.length() == 1)
@@ -180,7 +202,7 @@ QString HtmlScraper::TitleCase(const QString& text) {
   return text[0].toUpper() + text.right(text.length() - 1).toLower();
 }
 
-void HtmlScraper::DoUrlReplace(const QString& tag, const QString& value,
+void UltimateLyricsProvider::DoUrlReplace(const QString& tag, const QString& value,
                                QString* url) const {
   if (!url->contains(tag))
     return;

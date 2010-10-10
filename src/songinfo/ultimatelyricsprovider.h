@@ -14,20 +14,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HTMLSCRAPER_H
-#define HTMLSCRAPER_H
+#ifndef ULTIMATELYRICSPROVIDER_H
+#define ULTIMATELYRICSPROVIDER_H
 
 #include <QObject>
 #include <QPair>
 #include <QStringList>
 
-#include "lyricprovider.h"
+#include "songinfoprovider.h"
 
-class HtmlScraper : public LyricProvider {
+class NetworkAccessManager;
+
+class QNetworkReply;
+
+class UltimateLyricsProvider : public SongInfoProvider {
   Q_OBJECT
 
 public:
-  HtmlScraper(NetworkAccessManager* network, QObject* parent = 0);
+  UltimateLyricsProvider(NetworkAccessManager* network);
 
   static const int kRedirectLimit;
 
@@ -47,8 +51,10 @@ public:
   void add_exclude_rule(const Rule& rule) { exclude_rules_ << rule; }
   void add_invalid_indicator(const QString& indicator) { invalid_indicators_ << indicator; }
 
-  QString name() const { return name_; }
-  Result Search(const Song& metadata) const;
+  void FetchInfo(int id, const Song& metadata);
+
+private slots:
+  void LyricsFetched(quint64 id, QNetworkReply* reply);
 
 private:
   void ApplyExtractRule(const Rule& rule, QString* content) const;
@@ -63,6 +69,8 @@ private:
   void DoUrlReplace(const QString& tag, const QString& value, QString* url) const;
 
 private:
+  NetworkAccessManager* network_;
+
   QString name_;
   QString title_;
   QString url_;
@@ -72,6 +80,8 @@ private:
   QList<Rule> extract_rules_;
   QList<Rule> exclude_rules_;
   QStringList invalid_indicators_;
+
+  int redirect_count_;
 };
 
-#endif // HTMLSCRAPER_H
+#endif // ULTIMATELYRICSPROVIDER_H

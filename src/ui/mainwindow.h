@@ -46,7 +46,6 @@ class GlobalShortcuts;
 class GroupByDialog;
 class Library;
 class LibraryViewContainer;
-class LyricView;
 class MultiLoadingIndicator;
 class NetworkAccessManager;
 class OrganiseDialog;
@@ -61,6 +60,7 @@ class RadioModel;
 class RadioViewContainer;
 class Song;
 class SongInfoBase;
+class SongInfoView;
 class SystemTrayIcon;
 class TaskManager;
 class TranscodeDialog;
@@ -225,7 +225,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   FileView* file_view_;
   RadioViewContainer* radio_view_;
   DeviceView* device_view_;
-  LyricView* lyric_view_;
+  SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;
 
   boost::scoped_ptr<SettingsDialog> settings_dialog_;

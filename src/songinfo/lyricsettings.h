@@ -19,11 +19,9 @@
 
 #include <QWidget>
 
-class LyricFetcher;
 class Ui_LyricSettings;
 
 class QListWidgetItem;
-
 
 class LyricSettings : public QWidget {
   Q_OBJECT
@@ -31,8 +29,6 @@ class LyricSettings : public QWidget {
 public:
   LyricSettings(QWidget *parent = 0);
   ~LyricSettings();
-
-  void set_fetcher(const LyricFetcher* fetcher) { fetcher_ = fetcher; }
 
   void Load();
   void Save();
@@ -47,7 +43,6 @@ private slots:
 
 private:
   Ui_LyricSettings* ui_;
-  const LyricFetcher* fetcher_;
 };
 
 #endif // LYRICSETTINGS_H

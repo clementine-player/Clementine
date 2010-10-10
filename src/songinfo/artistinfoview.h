@@ -17,11 +17,10 @@
 #ifndef ARTISTINFOVIEW_H
 #define ARTISTINFOVIEW_H
 
-#include "artistinfofetcher.h"
 #include "collapsibleinfopane.h"
 #include "songinfobase.h"
+#include "songinfofetcher.h"
 
-class ArtistInfoFetcher;
 class PrettyImageView;
 class WidgetFadeHelper;
 
@@ -37,28 +36,10 @@ public:
   ~ArtistInfoView();
 
 protected:
-  void Update(const Song& metadata);
   bool NeedsUpdate(const Song& old_metadata, const Song& new_metadata) const;
 
-private:
-  void AddSection(CollapsibleInfoPane* section);
-  void Clear();
-
-private slots:
-  void ResultReady(int id, const ArtistInfoFetcher::Result& result);
-
-private:
-  ArtistInfoFetcher* fetcher_;
-  int current_request_id_;
-
-  QScrollArea* scroll_area_;
-  QVBoxLayout* container_;
-  PrettyImageView* image_view_;
-
-  QWidget* section_container_;
-  QList<CollapsibleInfoPane*> sections_;
-
-  WidgetFadeHelper* fader_;
+protected slots:
+  void ResultReady(int id, const SongInfoFetcher::Result& result);
 };
 
 #endif // ARTISTINFOVIEW_H

@@ -128,18 +128,15 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
-  songinfo/artistinfofetcher.cpp
-  songinfo/artistinfoprovider.cpp
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
   songinfo/echonestartistinfo.cpp
-  songinfo/htmlscraper.cpp
-  songinfo/lyricfetcher.cpp
-  songinfo/lyricprovider.cpp
   songinfo/lyricsettings.cpp
-  songinfo/lyricview.cpp
   songinfo/songinfobase.cpp
+  songinfo/songinfofetcher.cpp
+  songinfo/songinfoview.cpp
+  songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
   ui/about.cpp
@@ -270,18 +267,16 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
-  songinfo/artistinfofetcher.h
-  songinfo/artistinfoprovider.h
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
   songinfo/echonestartistinfo.h
-  songinfo/htmlscraper.h
-  songinfo/lyricfetcher.h
-  songinfo/lyricprovider.h
   songinfo/lyricsettings.h
-  songinfo/lyricview.h
   songinfo/songinfobase.h
+  songinfo/songinfofetcher.h
+  songinfo/songinfoprovider.h
+  songinfo/songinfoview.h
+  songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 
   ui/about.h
@@ -346,7 +341,6 @@ set(UI
   radio/radioviewcontainer.ui
 
   songinfo/lyricsettings.ui
-  songinfo/lyricview.ui
 
   ui/about.ui
   ui/addstreamdialog.ui

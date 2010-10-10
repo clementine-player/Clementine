@@ -14,8 +14,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lyricfetcher.h"
-#include "lyricprovider.h"
 #include "lyricsettings.h"
 #include "ui_lyricsettings.h"
 
@@ -23,8 +21,7 @@
 
 LyricSettings::LyricSettings(QWidget *parent)
   : QWidget(parent),
-    ui_(new Ui_LyricSettings),
-    fetcher_(NULL)
+    ui_(new Ui_LyricSettings)
 {
   ui_->setupUi(this);
 
@@ -41,7 +38,7 @@ LyricSettings::~LyricSettings() {
 }
 
 void LyricSettings::Load() {
-  QList<LyricProvider*> providers = fetcher_->providers();
+  /*QList<LyricProvider*> providers = fetcher_->providers();
 
   ui_->providers->clear();
   foreach (const LyricProvider* provider, providers) {
@@ -50,11 +47,11 @@ void LyricSettings::Load() {
     item->setCheckState(provider->is_enabled() ? Qt::Checked : Qt::Unchecked);
     item->setForeground(provider->is_enabled() ? palette().color(QPalette::Active, QPalette::Text)
                                                : palette().color(QPalette::Disabled, QPalette::Text));
-  }
+  }*/
 }
 
 void LyricSettings::Save() {
-  QSettings s;
+  /*QSettings s;
   s.beginGroup(LyricFetcher::kSettingsGroup);
 
   s.setValue("download", ui_->download->isChecked());
@@ -65,7 +62,7 @@ void LyricSettings::Save() {
     if (item->checkState() == Qt::Checked)
       search_order << item->text();
   }
-  s.setValue("search_order", search_order);
+  s.setValue("search_order", search_order);*/
 }
 
 void LyricSettings::CurrentItemChanged(QListWidgetItem* item) {

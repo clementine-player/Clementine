@@ -24,12 +24,10 @@ class NetworkAccessManager : public QObject {
   // Thread-safe.  slot should take (quint64, QNetworkReply*)
   void Get(const QUrl& url, QObject* receiver, const char* slot,
            quint64 id, bool force_cache = false);
-  QNetworkReply* GetBlocking(const QUrl& url, bool force_cache = false);
 
  private slots:
   void RunGet(const QUrl& url, QObject* receiver, const char* slot,
               quint64 id, bool force_cache);
-  void RunGetBlocking(const QUrl& url, bool force_cache, QNetworkReply** reply);
   void RequestFinished();
   void ReceiverDestroyed(QObject* receiver);
 

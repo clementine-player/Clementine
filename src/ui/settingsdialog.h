@@ -24,7 +24,6 @@
 
 class GlobalShortcuts;
 class LibraryDirectoryModel;
-class LyricFetcher;
 class OSDPretty;
 class Ui_SettingsDialog;
 
@@ -58,7 +57,6 @@ class SettingsDialog : public QDialog {
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
   void SetGlobalShortcutManager(GlobalShortcuts* manager);
   void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
-  void SetLyricFetcher(const LyricFetcher* fetcher);
 
   void OpenAtPage(Page page);
 

@@ -14,9 +14,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "htmlscraper.h"
+#include "ultimatelyricsprovider.h"
 #include "ultimatelyricsreader.h"
 
+#include <QCoreApplication>
 #include <QFile>
 #include <QXmlStreamReader>
 
@@ -26,37 +27,39 @@ UltimateLyricsReader::UltimateLyricsReader(NetworkAccessManager* network, QObjec
 {
 }
 
-QList<LyricProvider*> UltimateLyricsReader::Parse(const QString& filename) const {
+QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename) const {
   QFile file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
     qWarning() << "Error opening" << filename;
-    return QList<LyricProvider*>();
+    return QList<SongInfoProvider*>();
   }
 
   return ParseDevice(&file);
 }
 
-QList<LyricProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device) const {
-  QList<LyricProvider*> ret;
+QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device) const {
+  QList<SongInfoProvider*> ret;
 
   QXmlStreamReader reader(device);
   while (!reader.atEnd()) {
     reader.readNext();
 
     if (reader.name() == "provider") {
-      LyricProvider* provider = ParseProvider(&reader);
-      if (provider)
+      SongInfoProvider* provider = ParseProvider(&reader);
+      if (provider) {
+        provider->moveToThread(qApp->thread());
         ret << provider;
+      }
     }
   }
 
   return ret;
 }
 
-LyricProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) const {
+SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) const {
   QXmlStreamAttributes attributes = reader->attributes();
 
-  HtmlScraper* scraper = new HtmlScraper(network_);
+  UltimateLyricsProvider* scraper = new UltimateLyricsProvider(network_);
   scraper->set_name(attributes.value("name").toString());
   scraper->set_title(attributes.value("title").toString());
   scraper->set_charset(attributes.value("charset").toString());
@@ -87,8 +90,8 @@ LyricProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) con
   return scraper;
 }
 
-HtmlScraper::Rule UltimateLyricsReader::ParseRule(QXmlStreamReader* reader) const {
-  HtmlScraper::Rule ret;
+UltimateLyricsProvider::Rule UltimateLyricsReader::ParseRule(QXmlStreamReader* reader) const {
+  UltimateLyricsProvider::Rule ret;
 
   while (!reader->atEnd()) {
     reader->readNext();
@@ -100,10 +103,10 @@ HtmlScraper::Rule UltimateLyricsReader::ParseRule(QXmlStreamReader* reader) cons
       if (reader->name() == "item") {
         QXmlStreamAttributes attr = reader->attributes();
         if (attr.hasAttribute("tag"))
-          ret << HtmlScraper::RuleItem(attr.value("tag").toString(), QString());
+          ret << UltimateLyricsProvider::RuleItem(attr.value("tag").toString(), QString());
         else if (attr.hasAttribute("begin"))
-          ret << HtmlScraper::RuleItem(attr.value("begin").toString(),
-                                       attr.value("end").toString());
+          ret << UltimateLyricsProvider::RuleItem(attr.value("begin").toString(),
+                                                  attr.value("end").toString());
       }
       reader->skipCurrentElement();
     }

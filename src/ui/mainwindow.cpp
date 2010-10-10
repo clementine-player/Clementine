@@ -54,8 +54,7 @@
 #include "radio/radioviewcontainer.h"
 #include "radio/savedradio.h"
 #include "songinfo/artistinfoview.h"
-#include "songinfo/lyricfetcher.h"
-#include "songinfo/lyricview.h"
+#include "songinfo/songinfoview.h"
 #include "transcoder/transcodedialog.h"
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
@@ -142,7 +141,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     file_view_(new FileView(this)),
     radio_view_(new RadioViewContainer(this)),
     device_view_(new DeviceView(this)),
-    lyric_view_(new LyricView(network, this)),
+    song_info_view_(new SongInfoView(network, this)),
     artist_info_view_(new ArtistInfoView(network, this)),
     settings_dialog_(NULL),
     cover_manager_(NULL),
@@ -186,8 +185,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->tabs->AddTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
-  ui_->tabs->AddTab(lyric_view_, IconLoader::Load("view-media-lyrics"), tr("Lyrics"));
-  ui_->tabs->AddTab(new QWidget, IconLoader::Load("view-media-lyrics"), tr("Song info"));
+  ui_->tabs->AddTab(song_info_view_, IconLoader::Load("view-media-lyrics"), tr("Song info"));
   ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
@@ -497,8 +495,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->tabs, SIGNAL(CurrentChanged(int)), SLOT(SaveGeometry()));
 
   // Lyrics
-  lyric_view_->set_network(network);
-  ConnectInfoView(lyric_view_);
+  ConnectInfoView(song_info_view_);
   ConnectInfoView(artist_info_view_);
 
   // Analyzer
@@ -1504,7 +1501,6 @@ void MainWindow::EnsureSettingsDialogCreated() {
 #endif
 
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetLyricFetcher(lyric_view_->fetcher());
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
@@ -1514,7 +1510,6 @@ void MainWindow::EnsureSettingsDialogCreated() {
   connect(settings_dialog_.get(), SIGNAL(accepted()), library_view_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), lyric_view_->fetcher(), SLOT(ReloadSettings()));
 #ifdef ENABLE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));

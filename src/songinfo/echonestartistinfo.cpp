@@ -31,9 +31,7 @@ struct EchoNestArtistInfo::Request {
   QList<QNetworkReply*> pending_replies_;
 };
 
-EchoNestArtistInfo::EchoNestArtistInfo(QObject* parent)
-  : ArtistInfoProvider(parent)
-{
+EchoNestArtistInfo::EchoNestArtistInfo() {
   site_relevance_["wikipedia"] = 100;
   site_relevance_["lastfm"] = 60;
   site_relevance_["amazon"] = 30;
@@ -48,9 +46,9 @@ EchoNestArtistInfo::EchoNestArtistInfo(QObject* parent)
   site_icons_["wikipedia"] = QIcon(":/providers/wikipedia.png");
 }
 
-void EchoNestArtistInfo::FetchInfo(int id, const QString& artist_name) {
+void EchoNestArtistInfo::FetchInfo(int id, const Song& metadata) {
   boost::shared_ptr<Request> request(new Request(id));
-  request->artist_->setName(artist_name);
+  request->artist_->setName(metadata.artist());
 
   ConnectReply(request, request->artist_->fetchBiographies(), SLOT(BiographiesFinished()));
   ConnectReply(request, request->artist_->fetchImages(), SLOT(ImagesFinished()));

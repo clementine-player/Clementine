@@ -17,7 +17,7 @@
 #ifndef ECHONESTARTISTINFO_H
 #define ECHONESTARTISTINFO_H
 
-#include "artistinfoprovider.h"
+#include "songinfoprovider.h"
 
 #include <QMap>
 
@@ -25,13 +25,13 @@
 
 class QNetworkReply;
 
-class EchoNestArtistInfo : public ArtistInfoProvider {
+class EchoNestArtistInfo : public SongInfoProvider {
   Q_OBJECT
 
 public:
-  EchoNestArtistInfo(QObject* parent = 0);
+  EchoNestArtistInfo();
 
-  void FetchInfo(int id, const QString& artist);
+  void FetchInfo(int id, const Song& metadata);
 
 private slots:
   void BiographiesFinished();
