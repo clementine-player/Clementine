@@ -24,6 +24,10 @@ AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
 {
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+  QFont f(font());
+  f.setPointSizeF(8.5);
+  document()->setDefaultFont(f);
 }
 
 void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {
