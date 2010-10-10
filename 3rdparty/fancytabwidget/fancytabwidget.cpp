@@ -663,8 +663,11 @@ void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons) {
   QTabBar* bar = new QTabBar(this);
   bar->setShape(shape);
   bar->setDocumentMode(true);
-  bar->setIconSize(QSize(22, 22));
-  bar->setStyle(proxy_style_.get());
+
+  if (shape == QTabBar::RoundedWest) {
+    bar->setStyle(proxy_style_.get());
+    bar->setIconSize(QSize(22, 22));
+  }
 
   if (shape == QTabBar::RoundedNorth)
     top_layout_->insertWidget(0, bar);
