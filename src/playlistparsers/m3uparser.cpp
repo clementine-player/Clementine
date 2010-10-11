@@ -32,6 +32,7 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
 
   QString data = QString::fromUtf8(device->readAll());
   data.replace('\r', '\n');
+  data.replace("\n\n", "\n");
   QByteArray bytes = data.toUtf8();
   QBuffer buffer(&bytes);
   buffer.open(QIODevice::ReadOnly);
