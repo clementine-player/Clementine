@@ -40,6 +40,7 @@ CollapsibleInfoPane::CollapsibleInfoPane(const Data& data, QWidget* parent)
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 
   connect(header_, SIGNAL(ExpandedToggled(bool)), SLOT(ExpandedToggled(bool)));
+  connect(header_, SIGNAL(ExpandedToggled(bool)), SIGNAL(Toggled(bool)));
 }
 
 void CollapsibleInfoPane::Collapse() {

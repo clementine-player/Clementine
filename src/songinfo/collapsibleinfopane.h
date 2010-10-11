@@ -58,6 +58,9 @@ public slots:
   void Expand();
   void Collapse();
 
+signals:
+  void Toggled(bool expanded);
+
 private slots:
   void ExpandedToggled(bool expanded);
 

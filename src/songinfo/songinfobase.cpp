@@ -155,12 +155,10 @@ void SongInfoBase::CollapseSections() {
   //     relevance section of each type and hide the rest)
   //   * If one or more sections in a type have been explicitly hidden/shown
   //     by the user before then hide all sections in that type and show only
-  //     the ones that are explicitly shown.  If there are multiple sections in
-  //     that type, but they are all hidden, then show the first one.
+  //     the ones that are explicitly shown.
 
   QMap<CollapsibleInfoPane::Data::Type, CollapsibleInfoPane*> types_;
   QSet<CollapsibleInfoPane::Data::Type> has_user_preference_;
-  QSet<CollapsibleInfoPane::Data::Type> has_user_preference_on_;
   foreach (CollapsibleInfoPane* pane, sections_) {
     const CollapsibleInfoPane::Data::Type type = pane->data().type_;
     types_.insertMulti(type, pane);
@@ -169,17 +167,29 @@ void SongInfoBase::CollapseSections() {
     if (preference.isValid()) {
       has_user_preference_.insert(type);
       if (preference.toBool()) {
-        has_user_preference_on_.insert(type);
         pane->Expand();
       }
     }
   }
 
   foreach (CollapsibleInfoPane::Data::Type type, types_.keys()) {
-    if (!has_user_preference_.contains(type) ||
-        (!has_user_preference_on_.contains(type) && types_.values(type).count() > 1)) {
+    if (!has_user_preference_.contains(type)) {
       // Expand the first one
       types_.values(type).last()->Expand();
     }
   }
+
+  foreach (CollapsibleInfoPane* pane, sections_) {
+    connect(pane, SIGNAL(Toggled(bool)), SLOT(SectionToggled(bool)));
+  }
+}
+
+void SongInfoBase::SectionToggled(bool value) {
+  CollapsibleInfoPane* pane = qobject_cast<CollapsibleInfoPane*>(sender());
+  if (!pane || !sections_.contains(pane))
+    return;
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue(pane->data().id_, value);
 }

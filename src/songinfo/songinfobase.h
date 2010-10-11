@@ -66,6 +66,9 @@ protected:
 private:
   void MaybeUpdate(const Song& metadata);
 
+private slots:
+  void SectionToggled(bool value);
+
 private:
   QScrollArea* scroll_area_;
 
