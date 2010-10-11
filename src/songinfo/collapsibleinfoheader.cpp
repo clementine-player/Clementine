@@ -73,8 +73,9 @@ void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   text_rect.setLeft(icon_rect.right() + 4);
 
   // Draw the background
-  const QColor bg_color_1(palette().color(QPalette::Highlight).lighter(120));
-  const QColor bg_color_2(palette().color(QPalette::Highlight).darker(120));
+  QColor highlight(palette().color(QPalette::Active, QPalette::Highlight));
+  const QColor bg_color_1(highlight.lighter(120));
+  const QColor bg_color_2(highlight.darker(120));
   const QColor bg_border(palette().color(QPalette::Dark));
   QLinearGradient bg_brush(rect().topLeft(), rect().bottomLeft());
   bg_brush.setColorAt(0.0, bg_color_1);
@@ -111,7 +112,7 @@ void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   bold_font.setBold(true);
   p.setFont(bold_font);
 
-  p.setPen(palette().color(QPalette::HighlightedText));
+  p.setPen(palette().color(QPalette::Active, QPalette::HighlightedText));
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, title_);
 }
 
