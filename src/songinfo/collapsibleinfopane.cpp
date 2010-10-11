@@ -32,6 +32,7 @@ CollapsibleInfoPane::CollapsibleInfoPane(const Data& data, QWidget* parent)
 
   layout->addWidget(header_);
   layout->addWidget(data.contents_);
+  data.contents_->hide();
 
   header_->SetTitle(data.title_);
   header_->SetIcon(data.icon_);

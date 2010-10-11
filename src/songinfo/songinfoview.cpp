@@ -78,6 +78,8 @@ void SongInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) {
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
     AddSection(new CollapsibleInfoPane(data, this));
   }
+
+  CollapseSections();
 }
 
 void SongInfoView::ReloadSettings() {

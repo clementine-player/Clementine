@@ -53,6 +53,7 @@ void EchoNestTags::RequestFinished() {
 
   if (!request->artist_->terms().isEmpty()) {
     CollapsibleInfoPane::Data data;
+    data.id_ = "echonest/artisttags";
     data.title_ = tr("Artist tags");
     data.type_ = CollapsibleInfoPane::Data::Type_Tags;
     data.icon_ = QIcon(":/last.fm/icon_tag.png");

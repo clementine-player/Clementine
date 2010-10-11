@@ -77,6 +77,7 @@ void EchoNestBiographies::RequestFinished() {
     already_seen.insert(canonical_site);
 
     CollapsibleInfoPane::Data data;
+    data.id_ = "echonest/bio/" + bio.site();
     data.title_ = tr("Biography from %1").arg(bio.site());
     data.type_ = CollapsibleInfoPane::Data::Type_Biography;
 

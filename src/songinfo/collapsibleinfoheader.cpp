@@ -19,6 +19,7 @@
 #include <QApplication>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QPropertyAnimation>
 #include <QStyleOption>
 
 const int CollapsibleInfoHeader::kHeight = 20;
@@ -26,8 +27,10 @@ const int CollapsibleInfoHeader::kIconSize = 16;
 
 CollapsibleInfoHeader::CollapsibleInfoHeader(QWidget* parent)
   : QWidget(parent),
-    expanded_(true),
-    hovering_(false)
+    expanded_(false),
+    hovering_(false),
+    animation_(new QPropertyAnimation(this, "opacity", this)),
+    opacity_(0.0)
 {
   setMinimumHeight(kHeight);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -56,16 +59,44 @@ void CollapsibleInfoHeader::SetExpanded(bool expanded) {
 
 void CollapsibleInfoHeader::enterEvent(QEvent*) {
   hovering_ = true;
-  update();
+  if (!expanded_) {
+    animation_->stop();
+    animation_->setEndValue(1.0);
+    animation_->setDuration(80);
+    animation_->start();
+  }
 }
 
 void CollapsibleInfoHeader::leaveEvent(QEvent*) {
   hovering_ = false;
+  if (!expanded_) {
+    animation_->stop();
+    animation_->setEndValue(0.0);
+    animation_->setDuration(160);
+    animation_->start();
+  }
+}
+
+void CollapsibleInfoHeader::set_opacity(float opacity) {
+  opacity_ = opacity;
   update();
 }
 
 void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   QPainter p(this);
+
+  QColor active_text_color(palette().color(QPalette::Active, QPalette::HighlightedText));
+  QColor inactive_text_color(palette().color(QPalette::Active, QPalette::Text));
+  QColor text_color;
+  if (expanded_) {
+    text_color = active_text_color;
+  } else {
+    p.setOpacity(0.4 + opacity_ * 0.6);
+    text_color = QColor(
+        active_text_color.red() * opacity_   + inactive_text_color.red()   * (1.0 - opacity_),
+        active_text_color.green() * opacity_ + inactive_text_color.green() * (1.0 - opacity_),
+        active_text_color.blue() * opacity_  + inactive_text_color.blue()  * (1.0 - opacity_));
+  }
 
   QRect indicator_rect(0, 0, height(), height());
   QRect icon_rect(height() + 2, (kHeight - kIconSize) / 2, kIconSize, kIconSize);
@@ -112,7 +143,7 @@ void CollapsibleInfoHeader::paintEvent(QPaintEvent* e) {
   bold_font.setBold(true);
   p.setFont(bold_font);
 
-  p.setPen(palette().color(QPalette::Active, QPalette::HighlightedText));
+  p.setPen(text_color);
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, title_);
 }
 

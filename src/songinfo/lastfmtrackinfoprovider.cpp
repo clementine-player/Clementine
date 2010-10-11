@@ -81,6 +81,7 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
     return; // No useful data
 
   CollapsibleInfoPane::Data data;
+  data.id_ = "lastfm/playcounts";
   data.title_ = tr("Last.fm play counts");
   data.type_ = CollapsibleInfoPane::Data::Type_PlayCounts;
   data.icon_ = QIcon(":/last.fm/as.png");
@@ -113,6 +114,7 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
     return; // No useful data
 
   CollapsibleInfoPane::Data data;
+  data.id_ = "lastfm/songwiki";
   data.title_ = tr("Last.fm wiki");
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.icon_ = QIcon(":/last.fm/as.png");
@@ -131,6 +133,7 @@ void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
     return; // No tag elements
 
   CollapsibleInfoPane::Data data;
+  data.id_ = "lastfm/songtags";
   data.title_ = tr("Last.fm tags");
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.icon_ = QIcon(":/last.fm/icon_tag.png");

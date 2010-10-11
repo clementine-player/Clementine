@@ -41,6 +41,7 @@ public:
       TypeCount
     };
 
+    QString id_;
     QString title_;
     QIcon icon_;
     Type type_;

@@ -51,6 +51,7 @@ void EchoNestSimilarArtists::RequestFinished() {
 
   if (!artists.isEmpty()) {
     CollapsibleInfoPane::Data data;
+    data.id_ = "echonest/similarartists";
     data.title_ = tr("Similar artists");
     data.type_ = CollapsibleInfoPane::Data::Type_Similar;
     data.icon_ = QIcon(":/providers/echonest.png");

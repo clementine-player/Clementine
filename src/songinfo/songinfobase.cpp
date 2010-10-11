@@ -18,9 +18,12 @@
 
 #include <QFile>
 #include <QScrollArea>
+#include <QSettings>
 #include <QSpacerItem>
 #include <QTimer>
 #include <QVBoxLayout>
+
+const char* SongInfoBase::kSettingsGroup = "SongInfo";
 
 SongInfoBase::SongInfoBase(NetworkAccessManager* network, QWidget* parent)
   : QWidget(parent),
@@ -139,5 +142,44 @@ void SongInfoBase::Update(const Song& metadata) {
 void SongInfoBase::ResultReady(int id, const SongInfoFetcher::Result& result) {
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
     delete data.contents_;
+  }
+}
+
+void SongInfoBase::CollapseSections() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  // Sections are already sorted by type and relevance, so the algorithm we use
+  // to determine which ones to show by default is:
+  //   * In the absense of any user preference, show the first (highest
+  //     relevance section of each type and hide the rest)
+  //   * If one or more sections in a type have been explicitly hidden/shown
+  //     by the user before then hide all sections in that type and show only
+  //     the ones that are explicitly shown.  If there are multiple sections in
+  //     that type, but they are all hidden, then show the first one.
+
+  QMap<CollapsibleInfoPane::Data::Type, CollapsibleInfoPane*> types_;
+  QSet<CollapsibleInfoPane::Data::Type> has_user_preference_;
+  QSet<CollapsibleInfoPane::Data::Type> has_user_preference_on_;
+  foreach (CollapsibleInfoPane* pane, sections_) {
+    const CollapsibleInfoPane::Data::Type type = pane->data().type_;
+    types_.insertMulti(type, pane);
+
+    QVariant preference = s.value(pane->data().id_);
+    if (preference.isValid()) {
+      has_user_preference_.insert(type);
+      if (preference.toBool()) {
+        has_user_preference_on_.insert(type);
+        pane->Expand();
+      }
+    }
+  }
+
+  foreach (CollapsibleInfoPane::Data::Type type, types_.keys()) {
+    if (!has_user_preference_.contains(type) ||
+        (!has_user_preference_on_.contains(type) && types_.values(type).count() > 1)) {
+      // Expand the first one
+      types_.values(type).last()->Expand();
+    }
   }
 }

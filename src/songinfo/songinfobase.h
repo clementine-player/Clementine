@@ -37,6 +37,8 @@ class SongInfoBase : public QWidget {
 public:
   SongInfoBase(NetworkAccessManager* network, QWidget* parent = 0);
 
+  static const char* kSettingsGroup;
+
 public slots:
   void SongChanged(const Song& metadata);
   void SongFinished();
@@ -51,6 +53,7 @@ protected:
   void AddWidget(QWidget* widget);
   void AddSection(CollapsibleInfoPane* section);
   void Clear();
+  void CollapseSections();
 
 protected slots:
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);

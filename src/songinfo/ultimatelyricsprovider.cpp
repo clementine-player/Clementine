@@ -116,6 +116,7 @@ void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
 
   if (!lyrics.isEmpty()) {
     CollapsibleInfoPane::Data data;
+    data.id_ = "ultimatelyrics/" + name_;
     data.title_ = tr("Lyrics from %1").arg(name_);
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
 

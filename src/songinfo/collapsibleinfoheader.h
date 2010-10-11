@@ -20,8 +20,11 @@
 #include <QIcon>
 #include <QWidget>
 
+class QPropertyAnimation;
+
 class CollapsibleInfoHeader : public QWidget {
   Q_OBJECT
+  Q_PROPERTY(float opacity READ opacity WRITE set_opacity);
 
 public:
   CollapsibleInfoHeader(QWidget* parent = 0);
@@ -33,6 +36,9 @@ public:
   bool hovering() const { return hovering_; }
   const QString& title() const { return title_; }
   const QIcon& icon() const { return icon_; }
+
+  float opacity() const { return opacity_; }
+  void set_opacity(float opacity);
 
 public slots:
   void SetExpanded(bool expanded);
@@ -55,6 +61,9 @@ private:
   bool hovering_;
   QString title_;
   QIcon icon_;
+
+  QPropertyAnimation* animation_;
+  float opacity_;
 };
 
 #endif // COLLAPSIBLEINFOHEADER_H
