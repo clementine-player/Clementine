@@ -129,7 +129,8 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
 
 void LastfmTrackInfoProvider::GetTags(int id, const lastfm::XmlQuery& q) {
   // Parse the response
-  if (q["track"].children("toptags").isEmpty())
+  if (q["track"].children("toptags").isEmpty() ||
+      q["track"]["toptags"].children("tag").isEmpty())
     return; // No tag elements
 
   CollapsibleInfoPane::Data data;
