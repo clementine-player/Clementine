@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>708</width>
-    <height>549</height>
+    <height>604</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -119,7 +119,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -348,6 +348,26 @@
               </property>
               <property name="text">
                <string>Output device</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="buffer_duration_label">
+              <property name="text">
+               <string>Buffer Duration (ms)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="buffer_duration">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="suffix">
+               <string> ms</string>
+              </property>
+              <property name="maximum">
+               <number>60000</number>
               </property>
              </widget>
             </item>

@@ -178,6 +178,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   float rg_preamp_;
   bool rg_compression_;
 
+  int buffer_duration_ms_;
+
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
 

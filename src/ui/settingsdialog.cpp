@@ -229,6 +229,7 @@ void SettingsDialog::accept() {
   s.setValue("rgmode", ui_->replaygain_mode->currentIndex());
   s.setValue("rgpreamp", float(ui_->replaygain_preamp->value()) / 10 - 15);
   s.setValue("rgcompression", ui_->replaygain_compression->isChecked());
+  s.setValue("bufferduration", ui_->buffer_duration->value());
   s.endGroup();
 #endif
 
@@ -361,6 +362,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->replaygain_mode->setCurrentIndex(s.value("rgmode", 0).toInt());
   ui_->replaygain_preamp->setValue(s.value("rgpreamp", 0.0).toDouble() * 10 + 150);
   ui_->replaygain_compression->setChecked(s.value("rgcompression", true).toBool());
+  ui_->buffer_duration->setValue(s.value("bufferduration", 1000).toInt());
   s.endGroup();
 #endif
 

@@ -45,6 +45,7 @@ class GstEnginePipeline : public QObject {
   // Call these setters before Init
   void set_output_device(const QString& sink, const QString& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
+  void set_buffer_duration_ms(int duration_ms);
 
   // Creates the pipeline, returns false on error
   bool InitFromUrl(const QUrl& url);
@@ -147,6 +148,7 @@ class GstEnginePipeline : public QObject {
   int rg_mode_;
   float rg_preamp_;
   bool rg_compression_;
+  quint64 buffer_duration_ms_;
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.

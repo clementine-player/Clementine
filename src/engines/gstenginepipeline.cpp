@@ -47,6 +47,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_mode_(0),
     rg_preamp_(0.0),
     rg_compression_(true),
+    buffer_duration_ms_(1000),
     ignore_tags_(false),
     volume_percent_(100),
     volume_modifier_(1.0),
@@ -84,6 +85,10 @@ void GstEnginePipeline::set_replaygain(bool enabled, int mode, float preamp,
   rg_compression_ = compression;
 }
 
+void GstEnginePipeline::set_buffer_duration_ms(int buffer_duration_ms) {
+  buffer_duration_ms_ = buffer_duration_ms;
+}
+
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
 
@@ -106,6 +111,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
 bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   GstElement* new_bin = engine_->CreateElement("uridecodebin");
   g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
+  g_object_set(G_OBJECT(new_bin), "buffer-duration", buffer_duration_ms_ * 1000 * 1000, NULL);
+  g_object_set(G_OBJECT(new_bin), "download", true, NULL);
+  g_object_set(G_OBJECT(new_bin), "use-buffering", true, NULL);
   g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
   g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
   return ReplaceDecodeBin(new_bin);

@@ -166,6 +166,8 @@ void GstEngine::ReloadSettings() {
   rg_mode_ = s.value("rgmode", 0).toInt();
   rg_preamp_ = s.value("rgpreamp", 0.0).toDouble();
   rg_compression_ = s.value("rgcompression", true).toBool();
+
+  buffer_duration_ms_ = s.value("bufferduration", 1000).toInt();
 }
 
 
@@ -742,6 +744,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
+  ret->set_buffer_duration_ms(buffer_duration_ms_);
 
   ret->AddBufferConsumer(this);
   foreach (BufferConsumer* consumer, buffer_consumers_)
