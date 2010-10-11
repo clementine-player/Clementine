@@ -73,6 +73,7 @@ GstEngine::GstEngine()
     rg_mode_(0),
     rg_preamp_(0.0),
     rg_compression_(true),
+    buffer_duration_ms_(1000),
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
     next_element_id_(0)
