@@ -3,6 +3,8 @@
 
 class Screensaver {
  public:
+  virtual ~Screensaver() {}
+
   virtual void Inhibit() = 0;
   virtual void Uninhibit() = 0;
 
