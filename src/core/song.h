@@ -270,6 +270,9 @@ class Song {
     QString art_manual_;    // Set by the user - should take priority
 
     QImage image_;
+
+    // Whether this song was loaded from a file using taglib.
+    bool init_from_file_;
   };
 
   void ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec, QString* disc, QString* compilation);

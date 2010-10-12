@@ -155,7 +155,8 @@ Song::Private::Private()
     mtime_(-1),
     ctime_(-1),
     filesize_(-1),
-    filetype_(Type_Unknown)
+    filetype_(Type_Unknown),
+    init_from_file_(false)
 {
 }
 
@@ -218,6 +219,8 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   if(fileref->isNull())
     return;
+
+  d->init_from_file_ = true;
 
   QFileInfo info(filename);
   d->basefilename_ = info.fileName();
@@ -368,6 +371,8 @@ void Song::GuessFileType(TagLib::FileRef* fileref) {
 
 void Song::InitFromQuery(const SqlRow& q, int col) {
   d->valid_ = true;
+
+  d->init_from_file_ = true;
 
   #define tostr(n) (q.value(n).isNull() ? QString::null : q.value(n).toString())
   #define toint(n) (q.value(n).isNull() ? -1 : q.value(n).toInt())
@@ -787,6 +792,11 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   d->valid_ = true;
+
+  if (d->init_from_file_) {
+    // This Song was already loaded using taglib. Our tags are probably better than the engine's.
+    return;
+  }
 
   UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
   QTextCodec* codec = detector.Guess(bundle);
