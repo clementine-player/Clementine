@@ -1,10 +1,18 @@
-#include "gnomescreensaver.h"
+#include "dbusscreensaver.h"
 
 #include <QCoreApplication>
 #include <QDBusInterface>
 #include <QDBusReply>
 
-void GnomeScreensaver::Inhibit() {
+DBusScreensaver::DBusScreensaver(const QString& service, const QString& path,
+                                 const QString& interface)
+  : service_(service),
+    path_(path),
+    interface_(interface)
+{
+}
+
+void DBusScreensaver::Inhibit() {
   QDBusInterface gnome_screensaver("org.gnome.ScreenSaver", "/", "org.gnome.ScreenSaver");
   QDBusReply<quint32> reply =
       gnome_screensaver.call("Inhibit", QCoreApplication::applicationName(), QObject::tr("Visualizations"));
@@ -13,7 +21,7 @@ void GnomeScreensaver::Inhibit() {
   }
 }
 
-void GnomeScreensaver::Uninhibit() {
+void DBusScreensaver::Uninhibit() {
   QDBusInterface gnome_screensaver("org.gnome.ScreenSaver", "/", "org.gnome.ScreenSaver");
   gnome_screensaver.call("UnInhibit", cookie_);
 }

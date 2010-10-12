@@ -574,7 +574,7 @@ if(NOT APPLE AND NOT WIN32)
   list(APPEND HEADERS devices/devicekitlister.h)
 
   # Gnome Screensaver DBus interface
-  list(APPEND SOURCES ui/gnomescreensaver.cpp)
+  list(APPEND SOURCES ui/dbusscreensaver.cpp)
 endif(NOT APPLE AND NOT WIN32)
 
 # Libgpod device backend
