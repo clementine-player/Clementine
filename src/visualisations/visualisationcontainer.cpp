@@ -21,6 +21,7 @@
 #include "visualisationselector.h"
 #include "engines/gstengine.h"
 #include "ui/iconloader.h"
+#include "ui/screensaver.h"
 
 #include <QHBoxLayout>
 #include <QSettings>
@@ -245,6 +246,10 @@ void VisualisationContainer::keyReleaseEvent(QKeyEvent *event) {
 
 void VisualisationContainer::ToggleFullscreen() {
   setWindowState(windowState() ^ Qt::WindowFullScreen);
+
+  Screensaver* screensaver = Screensaver::GetScreensaver();
+  if (screensaver)
+    isFullScreen() ? screensaver->Inhibit() : screensaver->Uninhibit();
 }
 
 void VisualisationContainer::SetFps(int fps) {

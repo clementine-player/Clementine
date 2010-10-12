@@ -161,6 +161,7 @@ set(SOURCES
   ui/organisedialog.cpp
   ui/organiseerrordialog.cpp
   ui/qtsystemtrayicon.cpp
+  ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
 
@@ -569,6 +570,9 @@ if(NOT APPLE AND NOT WIN32)
   # DeviceKit lister source
   list(APPEND SOURCES devices/devicekitlister.cpp)
   list(APPEND HEADERS devices/devicekitlister.h)
+
+  # Gnome Screensaver DBus interface
+  list(APPEND SOURCES ui/gnomescreensaver.cpp)
 endif(NOT APPLE AND NOT WIN32)
 
 # Libgpod device backend
