@@ -54,7 +54,11 @@ PrettyImageView::PrettyImageView(NetworkAccessManager* network, QWidget* parent)
 }
 
 void PrettyImageView::AddImage(const QUrl& url) {
-  layout_->insertWidget(layout_->count() - 1, new PrettyImage(url, network_, container_));
+  PrettyImage* image = new PrettyImage(url, network_, container_);
+  connect(image, SIGNAL(destroyed()), SLOT(ScrollToCurrent()));
+  connect(image, SIGNAL(Loaded()), SLOT(ScrollToCurrent()));
+
+  layout_->insertWidget(layout_->count() - 1, image);
   if (current_index_ == -1)
     ScrollTo(0);
 }
@@ -93,6 +97,9 @@ void PrettyImageView::ScrollTo(int index, bool smooth) {
   const int current_x = horizontalScrollBar()->value();
   const int target_x = target_widget->geometry().center().x() - width() / 2;
 
+  if (current_x == target_x)
+    return;
+
   if (smooth) {
     scroll_animation_->setStartValue(current_x);
     scroll_animation_->setEndValue(target_x);
@@ -101,6 +108,10 @@ void PrettyImageView::ScrollTo(int index, bool smooth) {
     scroll_animation_->stop();
     horizontalScrollBar()->setValue(target_x);
   }
+}
+
+void PrettyImageView::ScrollToCurrent() {
+  ScrollTo(current_index_);
 }
 
 void PrettyImageView::ScrollBarReleased() {

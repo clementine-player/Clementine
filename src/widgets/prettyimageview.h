@@ -48,6 +48,7 @@ private slots:
   void ScrollBarReleased();
   void ScrollBarAction(int action);
   void ScrollTo(int index, bool smooth = true);
+  void ScrollToCurrent();
 
 private:
   NetworkAccessManager* network_;

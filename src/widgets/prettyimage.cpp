@@ -87,6 +87,7 @@ void PrettyImage::ImageFetched(quint64 id, QNetworkReply* reply) {
 
     updateGeometry();
     update();
+    emit Loaded();
   }
 }
 

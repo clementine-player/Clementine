@@ -42,6 +42,9 @@ public:
   QSize sizeHint() const;
   QSize image_size() const;
 
+signals:
+  void Loaded();
+
 public slots:
   void LazyLoad();
   void SaveAs();
