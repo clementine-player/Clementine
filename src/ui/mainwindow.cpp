@@ -472,6 +472,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   ui_->action_configure->setMenuRole(QAction::PreferencesRole);
   // Force this menu to be the app "About".
   ui_->action_about->setMenuRole(QAction::AboutRole);
+  // Force this menu to be the app "Quit".
+  ui_->action_quit->setMenuRole(QAction::QuitRole);
 #endif
 
   // Global shortcuts
