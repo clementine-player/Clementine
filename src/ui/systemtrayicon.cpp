@@ -14,10 +14,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "systemtrayicon.h"
-
 #include "macsystemtrayicon.h"
 #include "qtsystemtrayicon.h"
+#include "systemtrayicon.h"
 
 #include <QApplication>
 #include <QEvent>

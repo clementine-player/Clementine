@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "iconloader.h"
 #include "qtsystemtrayicon.h"
 
 #include <QCoreApplication>
@@ -26,9 +27,19 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
     tray_(new QSystemTrayIcon(this)),
     menu_(new QMenu)
 {
-  QIcon icon(":icon.png");
-  orange_icon_ = icon.pixmap(48, QIcon::Normal);
-  grey_icon_ = icon.pixmap(48, QIcon::Disabled);
+  QIcon theme_icon      = IconLoader::Load("clementine-panel");
+  QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey");
+
+  if (theme_icon.isNull() || theme_icon_grey.isNull()) {
+    // Load the default icon
+    QIcon icon(":icon.png");
+    orange_icon_ = icon.pixmap(48, QIcon::Normal);
+    grey_icon_ = icon.pixmap(48, QIcon::Disabled);
+  } else {
+    // Use the icons from the theme
+    orange_icon_ = theme_icon.pixmap(48);
+    grey_icon_ = theme_icon_grey.pixmap(48);
+  }
 
   tray_->setIcon(orange_icon_);
   tray_->setToolTip(QCoreApplication::applicationName());
