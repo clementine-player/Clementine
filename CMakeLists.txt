@@ -40,7 +40,7 @@ pkg_check_modules(GIO gio-2.0)
 pkg_check_modules(IMOBILEDEVICE libimobiledevice-1.0)
 pkg_check_modules(PLIST libplist)
 pkg_check_modules(USBMUXD libusbmuxd)
-pkg_check_modules(LIBMTP libmtp)
+pkg_check_modules(LIBMTP libmtp>=1.0)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
