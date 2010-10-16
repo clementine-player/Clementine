@@ -30,13 +30,11 @@
 class QNetworkReply;
 class QString;
 
-class NetworkAccessManager;
-
 class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(NetworkAccessManager* network, QObject* parent = 0);
+  AlbumCoverFetcher(QObject* parent = 0);
   virtual ~AlbumCoverFetcher() {}
 
   struct SearchResult {

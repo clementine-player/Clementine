@@ -21,9 +21,8 @@
 #include <QFile>
 #include <QXmlStreamReader>
 
-UltimateLyricsReader::UltimateLyricsReader(NetworkAccessManager* network, QObject* parent)
-  : QObject(parent),
-    network_(network)
+UltimateLyricsReader::UltimateLyricsReader(QObject* parent)
+  : QObject(parent)
 {
 }
 
@@ -59,7 +58,7 @@ QList<SongInfoProvider*> UltimateLyricsReader::ParseDevice(QIODevice* device) co
 SongInfoProvider* UltimateLyricsReader::ParseProvider(QXmlStreamReader* reader) const {
   QXmlStreamAttributes attributes = reader->attributes();
 
-  UltimateLyricsProvider* scraper = new UltimateLyricsProvider(network_);
+  UltimateLyricsProvider* scraper = new UltimateLyricsProvider;
   scraper->set_name(attributes.value("name").toString());
   scraper->set_title(attributes.value("title").toString());
   scraper->set_charset(attributes.value("charset").toString());

@@ -16,11 +16,10 @@
 
 #include "somafmservice.h"
 #include "radiomodel.h"
-#include "core/networkaccessmanager.h"
+#include "core/network.h"
 #include "core/taskmanager.h"
 #include "ui/iconloader.h"
 
-#include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QXmlStreamReader>
@@ -41,7 +40,7 @@ SomaFMService::SomaFMService(RadioModel* parent)
     context_menu_(NULL),
     get_channels_task_id_(0),
     get_stream_task_id_(0),
-    network_(parent->network()->network())
+    network_(new NetworkAccessManager(this))
 {
 }
 

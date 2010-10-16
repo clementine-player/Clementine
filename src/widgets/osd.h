@@ -26,7 +26,6 @@
 #include "core/backgroundthread.h"
 #include "core/song.h"
 
-class NetworkAccessManager;
 class OrgFreedesktopNotificationsInterface;
 class OSDPretty;
 class SystemTrayIcon;
@@ -45,7 +44,7 @@ class OSD : public QObject {
   Q_OBJECT
 
  public:
-  OSD(SystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent = 0);
+  OSD(SystemTrayIcon* tray_icon, QObject* parent = 0);
   ~OSD();
 
   static const char* kSettingsGroup;
@@ -118,7 +117,6 @@ class OSD : public QObject {
 
   OSDPretty* pretty_popup_;
 
-  NetworkAccessManager* network_;
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   QMap<quint64, WaitingForAlbumArt> waiting_for_album_art_;
 

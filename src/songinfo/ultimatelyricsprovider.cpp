@@ -16,7 +16,7 @@
 
 #include "songinfotextview.h"
 #include "ultimatelyricsprovider.h"
-#include "core/networkaccessmanager.h"
+#include "core/network.h"
 
 #include <QNetworkReply>
 #include <QTextCodec>
@@ -26,8 +26,8 @@
 const int UltimateLyricsProvider::kRedirectLimit = 5;
 
 
-UltimateLyricsProvider::UltimateLyricsProvider(NetworkAccessManager* network)
-  : network_(network),
+UltimateLyricsProvider::UltimateLyricsProvider()
+  : network_(new NetworkAccessManager(this)),
     relevance_(0),
     redirect_count_(0)
 {
@@ -57,10 +57,17 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
 
   // Fetch the URL, follow redirects
   redirect_count_ = 0;
-  network_->Get(url, this, "LyricsFetched", id);
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  requests_[reply] = id;
+  connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
 }
 
-void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
+void UltimateLyricsProvider::LyricsFetched() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  int id = requests_.take(reply);
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
@@ -84,7 +91,9 @@ void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
     }
 
     redirect_count_ ++;
-    network_->Get(target, this, "LyricsFetched", id);
+    QNetworkReply* reply = network_->get(QNetworkRequest(target));
+    requests_[reply] = id;
+    connect(reply, SIGNAL(finished()), SLOT(LyricsFetched()));
     return;
   }
 

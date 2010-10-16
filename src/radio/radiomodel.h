@@ -28,7 +28,6 @@
 class Database;
 class LastFMService;
 class MergedProxyModel;
-class NetworkAccessManager;
 class RadioService;
 class SettingsDialog;
 class TaskManager;
@@ -37,8 +36,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
 
  public:
-  RadioModel(BackgroundThread<Database>* db_thread,
-             NetworkAccessManager* network, TaskManager* task_manager,
+  RadioModel(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
              QObject* parent = 0);
 
   enum {
@@ -73,7 +71,6 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
 
   BackgroundThread<Database>* db_thread() const { return db_thread_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
-  NetworkAccessManager* network() const { return network_; }
   TaskManager* task_manager() const { return task_manager_; }
 
  signals:
@@ -96,7 +93,6 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   static QMap<QString, RadioService*> sServices;
   BackgroundThread<Database>* db_thread_;
   MergedProxyModel* merged_model_;
-  NetworkAccessManager* network_;
   TaskManager* task_manager_;
 };
 

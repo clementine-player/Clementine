@@ -30,7 +30,6 @@
 class LibraryBackend;
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
-class NetworkAccessManager;
 class Ui_CoverManager;
 
 class QListWidgetItem;
@@ -40,8 +39,7 @@ class QProgressBar;
 class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
-  AlbumCoverManager(NetworkAccessManager* network, LibraryBackend* backend,
-                    QWidget *parent = 0);
+  AlbumCoverManager(LibraryBackend* backend, QWidget *parent = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
@@ -125,7 +123,6 @@ class AlbumCoverManager : public QMainWindow {
   QAction* filter_with_covers_;
   QAction* filter_without_covers_;
 
-  NetworkAccessManager* network_;
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   QMap<quint64, QListWidgetItem*> cover_loading_tasks_;
 

@@ -47,7 +47,7 @@ set(SOURCES
   core/gnomeglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
   core/musicstorage.cpp
-  core/networkaccessmanager.cpp
+  core/network.cpp
   core/organise.cpp
   core/organiseformat.cpp
   core/player.cpp
@@ -211,7 +211,7 @@ set(HEADERS
   core/globalshortcuts.h
   core/gnomeglobalshortcutbackend.h
   core/mergedproxymodel.h
-  core/networkaccessmanager.h
+  core/network.h
   core/organise.h
   core/player.h
   core/songloader.h

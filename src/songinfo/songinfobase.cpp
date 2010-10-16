@@ -25,9 +25,8 @@
 
 const char* SongInfoBase::kSettingsGroup = "SongInfo";
 
-SongInfoBase::SongInfoBase(NetworkAccessManager* network, QWidget* parent)
+SongInfoBase::SongInfoBase(QWidget* parent)
   : QWidget(parent),
-    network_(network),
     fetcher_(new SongInfoFetcher(this)),
     current_request_id_(-1),
     scroll_area_(new QScrollArea),

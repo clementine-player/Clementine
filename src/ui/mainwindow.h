@@ -47,7 +47,6 @@ class GroupByDialog;
 class Library;
 class LibraryViewContainer;
 class MultiLoadingIndicator;
-class NetworkAccessManager;
 class OrganiseDialog;
 class OSD;
 class Player;
@@ -74,7 +73,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent = 0);
+  MainWindow(Engine::Type engine, QWidget *parent = 0);
   ~MainWindow();
 
   static const char* kSettingsGroup;
@@ -203,7 +202,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  private:
   Ui_MainWindow* ui_;
-  NetworkAccessManager* network_;
 
   SystemTrayIcon* tray_icon_;
   OSD* osd_;

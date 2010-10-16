@@ -29,7 +29,7 @@ class PrettyImage : public QWidget {
   Q_OBJECT
 
 public:
-  PrettyImage(const QUrl& url, NetworkAccessManager* network, QWidget* parent = 0);
+  PrettyImage(const QUrl& url, QWidget* parent = 0);
 
   static const int kTotalHeight;
   static const int kReflectionHeight;
@@ -55,7 +55,7 @@ protected:
   void paintEvent(QPaintEvent*);
 
 private slots:
-  void ImageFetched(quint64 id, QNetworkReply* reply);
+  void ImageFetched();
 
 private:
   enum State {

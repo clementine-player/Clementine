@@ -24,7 +24,7 @@
 #include "core/commandlineoptions.h"
 #include "core/encoding.h"
 #include "core/mac_startup.h"
-#include "core/networkaccessmanager.h"
+#include "core/network.h"
 #include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
@@ -198,10 +198,8 @@ int main(int argc, char *argv[]) {
   // Icons
   IconLoader::Init();
 
-  NetworkAccessManager network;
-
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
-  Echonest::Config::instance()->setNetworkAccessManager(network.network());
+  Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
 
   // MPRIS DBus interface.
 #ifdef Q_WS_X11
@@ -216,7 +214,7 @@ int main(int argc, char *argv[]) {
   srand(time(NULL));
 
   // Window
-  MainWindow w(&network, options.engine());
+  MainWindow w(options.engine());
 
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);

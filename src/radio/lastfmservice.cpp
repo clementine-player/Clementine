@@ -19,7 +19,6 @@
 #include "lastfmstationdialog.h"
 #include "radiomodel.h"
 #include "radioplaylistitem.h"
-#include "core/networkaccessmanager.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "ui/iconloader.h"
@@ -63,8 +62,7 @@ LastFMService::LastFMService(RadioModel* parent)
     tag_list_(NULL),
     custom_list_(NULL),
     friends_list_(NULL),
-    neighbours_list_(NULL),
-    network_(parent->network()->network())
+    neighbours_list_(NULL)
 {
   ReloadSettings();
 

@@ -29,9 +29,9 @@ const char* SongInfoView::kSettingsGroup = "SongInfo";
 
 typedef QList<SongInfoProvider*> ProviderList;
 
-SongInfoView::SongInfoView(NetworkAccessManager* network, QWidget* parent)
-  : SongInfoBase(network, parent),
-    ultimate_reader_(new UltimateLyricsReader(network))
+SongInfoView::SongInfoView(QWidget* parent)
+  : SongInfoBase(parent),
+    ultimate_reader_(new UltimateLyricsReader(this))
 {
   // Parse the ultimate lyrics xml file in the background
   QFuture<ProviderList> future = QtConcurrent::run(

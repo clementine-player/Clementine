@@ -121,12 +121,11 @@ const char* MainWindow::kMusicFilterSpec =
 const char* MainWindow::kAllFilesFilterSpec =
     QT_TR_NOOP("All Files (*)");
 
-MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidget *parent)
+MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
-    network_(network),
     tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
-    osd_(new OSD(tray_icon_, network, this)),
+    osd_(new OSD(tray_icon_, this)),
     task_manager_(new TaskManager(this)),
     database_(new BackgroundThreadImplementation<Database, Database>(this)),
     radio_model_(NULL),
@@ -141,8 +140,8 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
     file_view_(new FileView(this)),
     radio_view_(new RadioViewContainer(this)),
     device_view_(new DeviceView(this)),
-    song_info_view_(new SongInfoView(network, this)),
-    artist_info_view_(new ArtistInfoView(network, this)),
+    song_info_view_(new SongInfoView(this)),
+    artist_info_view_(new ArtistInfoView(this)),
     settings_dialog_(NULL),
     cover_manager_(NULL),
     equalizer_(new Equalizer),
@@ -169,7 +168,7 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   playlist_backend_->SetDatabase(database_->Worker());
 
   // Create stuff that needs the database
-  radio_model_ = new RadioModel(database_, network, task_manager_, this);
+  radio_model_ = new RadioModel(database_, task_manager_, this);
   player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
   library_ = new Library(database_, task_manager_, this);
   devices_ = new DeviceManager(database_, task_manager_, this);
@@ -519,7 +518,6 @@ MainWindow::MainWindow(NetworkAccessManager* network, Engine::Type engine, QWidg
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
 
   // Now playing widget
-  ui_->now_playing->set_network(network);
   ui_->now_playing->set_ideal_height(ui_->status_bar->sizeHint().height() +
                                      ui_->player_controls->sizeHint().height() +
                                      1); // Don't question the 1
@@ -1477,7 +1475,7 @@ void MainWindow::PlaylistCopyToDevice() {
 
 void MainWindow::ShowCoverManager() {
   if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(network_, library_->backend()));
+    cover_manager_.reset(new AlbumCoverManager(library_->backend()));
     cover_manager_->Init();
 
     // Cover manager connections

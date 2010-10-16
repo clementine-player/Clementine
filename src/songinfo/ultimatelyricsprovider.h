@@ -31,7 +31,7 @@ class UltimateLyricsProvider : public SongInfoProvider {
   Q_OBJECT
 
 public:
-  UltimateLyricsProvider(NetworkAccessManager* network);
+  UltimateLyricsProvider();
 
   static const int kRedirectLimit;
 
@@ -58,7 +58,7 @@ public:
   void FetchInfo(int id, const Song& metadata);
 
 private slots:
-  void LyricsFetched(quint64 id, QNetworkReply* reply);
+  void LyricsFetched();
 
 private:
   void ApplyExtractRule(const Rule& rule, QString* content) const;
@@ -74,6 +74,7 @@ private:
 
 private:
   NetworkAccessManager* network_;
+  QMap<QNetworkReply*, int> requests_;
 
   QString name_;
   QString title_;

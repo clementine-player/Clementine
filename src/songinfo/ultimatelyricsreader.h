@@ -28,7 +28,7 @@ class UltimateLyricsReader : public QObject {
   Q_OBJECT
 
 public:
-  UltimateLyricsReader(NetworkAccessManager* network, QObject* parent = 0);
+  UltimateLyricsReader(QObject* parent = 0);
 
   QList<SongInfoProvider*> Parse(const QString& filename) const;
   QList<SongInfoProvider*> ParseDevice(QIODevice* device) const;
@@ -37,9 +37,6 @@ private:
   SongInfoProvider* ParseProvider(QXmlStreamReader* reader) const;
   UltimateLyricsProvider::Rule ParseRule(QXmlStreamReader* reader) const;
   QString ParseInvalidIndicator(QXmlStreamReader* reader) const;
-
-private:
-  NetworkAccessManager* network_;
 };
 
 #endif // ULTIMATELYRICSREADER_H

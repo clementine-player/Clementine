@@ -28,7 +28,7 @@
 
 const char* OSD::kSettingsGroup = "OSD";
 
-OSD::OSD(SystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* parent)
+OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
     timeout_msec_(5000),
@@ -38,7 +38,6 @@ OSD::OSD(SystemTrayIcon* tray_icon, NetworkAccessManager* network, QObject* pare
     force_show_next_(false),
     ignore_next_stopped_(false),
     pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)),
-    network_(network),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
   cover_loader_->Start();
@@ -54,7 +53,6 @@ OSD::~OSD() {
 }
 
 void OSD::CoverLoaderInitialised() {
-  cover_loader_->Worker()->SetNetwork(network_);
   cover_loader_->Worker()->SetPadOutputImage(false);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),

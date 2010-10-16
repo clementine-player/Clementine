@@ -15,7 +15,7 @@
 */
 
 #include "albumcoverloader.h"
-#include "networkaccessmanager.h"
+#include "network.h"
 
 #include <QPainter>
 #include <QDir>
@@ -37,7 +37,7 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     height_(120),
     padding_(true),
     next_id_(0),
-    network_(NULL)
+    network_(new NetworkAccessManager(this))
 {
 }
 
@@ -137,9 +137,10 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   if (filename.toLower().startsWith("http://")) {
-    network_->Get(QUrl(filename), this, "RemoteFetchFinished", task.id, true);
+    QNetworkReply* reply = network_->get(QNetworkRequest(filename));
+    connect(reply, SIGNAL(finished()), SLOT(RemoteFetchFinished()));
 
-    remote_tasks_.insert(task.id, task);
+    remote_tasks_.insert(reply, task);
     return TryLoadResult(true, false, QImage());
   }
 
@@ -171,8 +172,12 @@ QImage AlbumCoverLoader::LoadFromTaglib(const QString& filename) const {
   return ret;
 }
 
-void AlbumCoverLoader::RemoteFetchFinished(quint64 id, QNetworkReply* reply) {
-  Task task = remote_tasks_.take(id);
+void AlbumCoverLoader::RemoteFetchFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  Task task = remote_tasks_.take(reply);
 
   if (reply->error() == QNetworkReply::NoError) {
     // Try to load the image

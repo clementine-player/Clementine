@@ -16,7 +16,6 @@
 
 #include "nowplayingwidget.h"
 #include "core/albumcoverloader.h"
-#include "core/networkaccessmanager.h"
 
 #include <QMenu>
 #include <QMovie>
@@ -52,7 +51,6 @@ const int NowPlayingWidget::kTopBorder = 4;
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    network_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
     above_statusbar_action_(NULL),
@@ -118,7 +116,6 @@ QSize NowPlayingWidget::sizeHint() const {
 
 void NowPlayingWidget::CoverLoaderInitialised() {
   UpdateHeight();
-  cover_loader_->Worker()->SetNetwork(network_);
   cover_loader_->Worker()->SetPadOutputImage(true);
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));

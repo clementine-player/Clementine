@@ -18,7 +18,7 @@
 #include "magnatuneservice.h"
 #include "radiomodel.h"
 #include "ui_magnatunedownloaddialog.h"
-#include "core/networkaccessmanager.h"
+#include "core/network.h"
 #include "widgets/progressitemdelegate.h"
 
 #include <QCloseEvent>
@@ -37,7 +37,7 @@ MagnatuneDownloadDialog::MagnatuneDownloadDialog(MagnatuneService* service,
   : QDialog(parent),
     ui_(new Ui_MagnatuneDownloadDialog),
     service_(service),
-    network_(service_->model()->network()->network()),
+    network_(new NetworkAccessManager(this)),
     current_reply_(NULL),
     next_row_(0)
 {
@@ -122,8 +122,7 @@ void MagnatuneDownloadDialog::DownloadNext() {
   url.addQueryItem("id", MagnatuneService::kPartnerId);
   url.addQueryItem("sku", sku);
 
-  QNetworkRequest req(url);
-  current_reply_ = network_->get(req);
+  current_reply_ = network_->get(QNetworkRequest(url));
 
   connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)), SLOT(Error(QNetworkReply::NetworkError)));
   connect(current_reply_, SIGNAL(finished()), SLOT(MetadataFinished()));
@@ -183,8 +182,7 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   url.setPassword(service_->password());
 
   // Start the actual download
-  QNetworkRequest req(url);
-  current_reply_ = network_->get(req);
+  current_reply_ = network_->get(QNetworkRequest(url));
 
   connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)), SLOT(Error(QNetworkReply::NetworkError)));
   connect(current_reply_, SIGNAL(finished()), SLOT(DownloadFinished()));
@@ -212,8 +210,7 @@ void MagnatuneDownloadDialog::DownloadFinished() {
     redirect.setUserName(service_->username());
     redirect.setPassword(service_->password());
 
-    QNetworkRequest req(redirect);
-    current_reply_ = network_->get(req);
+    current_reply_ = network_->get(QNetworkRequest(redirect));
 
     connect(current_reply_, SIGNAL(error(QNetworkReply::NetworkError)), SLOT(Error(QNetworkReply::NetworkError)));
     connect(current_reply_, SIGNAL(finished()), SLOT(DownloadFinished()));

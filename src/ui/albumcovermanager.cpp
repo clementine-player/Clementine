@@ -41,15 +41,13 @@
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
-AlbumCoverManager::AlbumCoverManager(NetworkAccessManager* network,
-                                     LibraryBackend* backend, QWidget *parent)
+AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget *parent)
   : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
     backend_(backend),
-    network_(network),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    cover_fetcher_(new AlbumCoverFetcher(network, this)),
+    cover_fetcher_(new AlbumCoverFetcher(this)),
     cover_searcher_(new AlbumCoverSearcher(this)),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
@@ -158,7 +156,6 @@ void AlbumCoverManager::Init() {
 }
 
 void AlbumCoverManager::CoverLoaderInitialised() {
-  cover_loader_->Worker()->SetNetwork(network_);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(CoverImageLoaded(quint64,QImage)));

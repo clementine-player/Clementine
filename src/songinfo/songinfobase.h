@@ -26,7 +26,6 @@
 #include "widgets/widgetfadehelper.h"
 
 class CollapsibleInfoPane;
-class NetworkAccessManager;
 class WidgetFadeHelper;
 
 class QScrollArea;
@@ -36,7 +35,7 @@ class SongInfoBase : public QWidget {
   Q_OBJECT
 
 public:
-  SongInfoBase(NetworkAccessManager* network, QWidget* parent = 0);
+  SongInfoBase(QWidget* parent = 0);
 
   static const char* kSettingsGroup;
 
@@ -64,7 +63,6 @@ protected slots:
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
 
 protected:
-  NetworkAccessManager* network_;
   SongInfoFetcher* fetcher_;
   int current_request_id_;
 

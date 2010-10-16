@@ -22,8 +22,8 @@
 #include "songinfofetcher.h"
 #include "widgets/prettyimageview.h"
 
-ArtistInfoView::ArtistInfoView(NetworkAccessManager* network, QWidget *parent)
-  : SongInfoBase(network, parent)
+ArtistInfoView::ArtistInfoView(QWidget *parent)
+  : SongInfoBase(parent)
 {
   fetcher_->AddProvider(new EchoNestBiographies);
   fetcher_->AddProvider(new EchoNestImages);
@@ -48,7 +48,7 @@ void ArtistInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) 
   Clear();
 
   // Image view goes at the top
-  PrettyImageView* image_view = new PrettyImageView(network_);
+  PrettyImageView* image_view = new PrettyImageView(this);
   AddWidget(image_view);
 
   foreach (const QUrl& url, result.images_) {

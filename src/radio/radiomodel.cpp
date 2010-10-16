@@ -29,12 +29,10 @@
 QMap<QString, RadioService*> RadioModel::sServices;
 
 RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
-                       NetworkAccessManager* network, TaskManager* task_manager,
-                       QObject* parent)
+                       TaskManager* task_manager, QObject* parent)
   : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
-    network_(network),
     task_manager_(task_manager)
 {
   Q_ASSERT(sServices.isEmpty());

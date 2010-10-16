@@ -34,7 +34,6 @@ class AlbumCoverLoader : public QObject {
  public:
   AlbumCoverLoader(QObject* parent = 0);
 
-  void SetNetwork(NetworkAccessManager* network) { network_ = network; }
   
   void Stop() { stop_requested_ = true; }
 
@@ -63,7 +62,7 @@ class AlbumCoverLoader : public QObject {
 
  private slots:
   void ProcessTasks();
-  void RemoteFetchFinished(quint64 id, QNetworkReply* reply);
+  void RemoteFetchFinished();
 
  private:
   enum State {
@@ -103,7 +102,7 @@ class AlbumCoverLoader : public QObject {
 
   QMutex mutex_;
   QQueue<Task> tasks_;
-  QMap<quint64, Task> remote_tasks_;
+  QMap<QNetworkReply*, Task> remote_tasks_;
   quint64 next_id_;
 
   NetworkAccessManager* network_;

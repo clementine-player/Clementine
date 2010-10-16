@@ -19,7 +19,7 @@
 #include "magnatuneservice.h"
 #include "radiomodel.h"
 #include "core/mergedproxymodel.h"
-#include "core/networkaccessmanager.h"
+#include "core/network.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "library/librarymodel.h"
@@ -69,7 +69,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
     membership_(Membership_None),
     format_(Format_Ogg),
     total_song_count_(0),
-    network_(parent->network()->network())
+    network_(new NetworkAccessManager(this))
 {
   ReloadSettings();
 

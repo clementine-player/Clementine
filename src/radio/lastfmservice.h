@@ -185,7 +185,6 @@ class LastFMService : public RadioService {
   RadioItem* friends_list_;
   RadioItem* neighbours_list_;
 
-  QNetworkAccessManager* network_;
   QHash<lastfm::Track, QString> art_urls_;
 };
 

@@ -32,7 +32,7 @@ class ArtistInfoView : public SongInfoBase {
   Q_OBJECT
 
 public:
-  ArtistInfoView(NetworkAccessManager* network, QWidget* parent = 0);
+  ArtistInfoView(QWidget* parent = 0);
   ~ArtistInfoView();
 
 protected:

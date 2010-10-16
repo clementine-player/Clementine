@@ -21,8 +21,6 @@
 #include <QScrollArea>
 #include <QUrl>
 
-class NetworkAccessManager;
-
 class QHBoxLayout;
 class QMenu;
 class QNetworkReply;
@@ -33,7 +31,7 @@ class PrettyImageView : public QScrollArea {
   Q_OBJECT
 
 public:
-  PrettyImageView(NetworkAccessManager* network, QWidget* parent = 0);
+  PrettyImageView(QWidget* parent = 0);
 
   static const char* kSettingsGroup;
 
@@ -51,8 +49,6 @@ private slots:
   void ScrollToCurrent();
 
 private:
-  NetworkAccessManager* network_;
-
   QWidget* container_;
   QHBoxLayout* layout_;
 

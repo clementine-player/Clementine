@@ -28,7 +28,7 @@ class SongInfoView : public SongInfoBase {
   Q_OBJECT
 
 public:
-  SongInfoView(NetworkAccessManager* network, QWidget* parent = 0);
+  SongInfoView(QWidget* parent = 0);
   ~SongInfoView();
 
   static const char* kSettingsGroup;

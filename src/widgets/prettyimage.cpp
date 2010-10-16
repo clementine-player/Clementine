@@ -15,7 +15,7 @@
 */
 
 #include "prettyimage.h"
-#include "core/networkaccessmanager.h"
+#include "core/network.h"
 #include "ui/iconloader.h"
 
 #include <QApplication>
@@ -39,9 +39,9 @@ const int PrettyImage::kMaxImageWidth = 400;
 
 const char* PrettyImage::kSettingsGroup = "PrettyImageView";
 
-PrettyImage::PrettyImage(const QUrl& url, NetworkAccessManager* network, QWidget* parent)
+PrettyImage::PrettyImage(const QUrl& url, QWidget* parent)
   : QWidget(parent),
-    network_(network),
+    network_(new NetworkAccessManager(this)),
     state_(State_WaitingForLazyLoad),
     url_(url),
     menu_(NULL)
@@ -56,7 +56,8 @@ void PrettyImage::LazyLoad() {
     return;
 
   // Start fetching the image
-  network_->Get(url_, this, "ImageFetched", 0);
+  QNetworkReply* reply = network_->get(QNetworkRequest(url_));
+  connect(reply, SIGNAL(finished()), SLOT(ImageFetched()));
   state_ = State_Loading;
 }
 
@@ -73,7 +74,8 @@ QSize PrettyImage::sizeHint() const {
   return QSize(image_size().width(), kTotalHeight);
 }
 
-void PrettyImage::ImageFetched(quint64 id, QNetworkReply* reply) {
+void PrettyImage::ImageFetched() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
 
   QImage image = QImage::fromData(reply->readAll());

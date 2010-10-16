@@ -23,7 +23,6 @@
 #include <QWidget>
 
 class AlbumCoverLoader;
-class NetworkAccessManager;
 
 class QActionGroup;
 class QMenu;
@@ -52,7 +51,6 @@ public:
     LargeSongDetails = 1,
   };
 
-  void set_network(NetworkAccessManager* network) { network_ = network; }
   void set_ideal_height(int height);
 
   bool show_above_status_bar() const;
@@ -93,7 +91,6 @@ private:
 
 private:
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  NetworkAccessManager* network_;
 
   Mode mode_;
 
