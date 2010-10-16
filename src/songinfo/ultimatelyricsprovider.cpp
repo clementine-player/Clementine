@@ -119,6 +119,7 @@ void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
     data.id_ = "ultimatelyrics/" + name_;
     data.title_ = tr("Lyrics from %1").arg(name_);
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
+    data.relevance_ = relevance();
 
     AutoSizedTextEdit* editor = new AutoSizedTextEdit;
     editor->setHtml(lyrics);

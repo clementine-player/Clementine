@@ -97,11 +97,8 @@ void SongInfoView::ReloadSettings() {
                       << ProviderByName("lyricsreg.com")
                       << ProviderByName("lyricsmania.com")
                       << ProviderByName("metrolyrics.com")
-                      << ProviderByName("seeklyrics.com")
                       << ProviderByName("azlyrics.com")
-                      << ProviderByName("mp3lyrics.org")
                       << ProviderByName("songlyrics.com")
-                      << ProviderByName("lyricsmode.com")
                       << ProviderByName("elyrics.net")
                       << ProviderByName("lyricsdownload.com")
                       << ProviderByName("lyrics.com")
@@ -121,10 +118,10 @@ void SongInfoView::ReloadSettings() {
   }
 
   // Enable all the providers in the list and rank them
-  int relevance = 0;
+  int relevance = 100;
   foreach (SongInfoProvider* provider, ordered_providers) {
     provider->set_enabled(true);
-    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance++);
+    qobject_cast<UltimateLyricsProvider*>(provider)->set_relevance(relevance--);
   }
 
   // Any lyric providers we don't have in ordered_providers are considered disabled
