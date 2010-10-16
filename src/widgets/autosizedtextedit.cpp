@@ -19,17 +19,17 @@
 #include <QWheelEvent>
 
 AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
-  : QTextEdit(parent),
+  : QTextBrowser(parent),
     last_width_(-1)
 {
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+  setOpenExternalLinks(true);
+
   QFont f(font());
   f.setPointSizeF(8.5);
   document()->setDefaultFont(f);
-
-  setReadOnly(true);
 }
 
 void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {

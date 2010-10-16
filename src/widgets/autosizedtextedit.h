@@ -17,9 +17,9 @@
 #ifndef AUTOSIZEDTEXTEDIT_H
 #define AUTOSIZEDTEXTEDIT_H
 
-#include <QTextEdit>
+#include <QTextBrowser>
 
-class AutoSizedTextEdit : public QTextEdit {
+class AutoSizedTextEdit : public QTextBrowser {
   Q_OBJECT
 
 public:
