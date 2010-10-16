@@ -26,9 +26,9 @@
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
-AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent)
+AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent, QNetworkAccessManager* network)
     : QObject(parent),
-      network_(new NetworkAccessManager(this)),
+      network_(network ? network : new NetworkAccessManager(this)),
       next_id_(0),
       request_starter_(new QTimer(this))
 {

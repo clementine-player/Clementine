@@ -34,12 +34,14 @@ class Ui_CoverManager;
 
 class QListWidgetItem;
 class QMenu;
+class QNetworkAccessManager;
 class QProgressBar;
 
 class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
-  AlbumCoverManager(LibraryBackend* backend, QWidget *parent = 0);
+  AlbumCoverManager(LibraryBackend* backend, QWidget *parent = 0,
+                    QNetworkAccessManager* network = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;

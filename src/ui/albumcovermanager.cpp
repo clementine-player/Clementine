@@ -41,13 +41,14 @@
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
-AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget *parent)
+AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
+                                     QNetworkAccessManager* network)
   : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    cover_fetcher_(new AlbumCoverFetcher(this)),
+    cover_fetcher_(new AlbumCoverFetcher(this, network)),
     cover_searcher_(new AlbumCoverSearcher(this)),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),

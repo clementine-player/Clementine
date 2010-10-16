@@ -34,7 +34,7 @@ class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(QObject* parent = 0);
+  AlbumCoverFetcher(QObject* parent = 0, QNetworkAccessManager* network = 0);
   virtual ~AlbumCoverFetcher() {}
 
   struct SearchResult {
