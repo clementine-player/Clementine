@@ -193,3 +193,13 @@ void SongInfoBase::SectionToggled(bool value) {
   s.beginGroup(kSettingsGroup);
   s.setValue(pane->data().id_, value);
 }
+
+void SongInfoBase::ReloadSettings() {
+  foreach (CollapsibleInfoPane* pane, sections_) {
+    QWidget* contents = pane->data().contents_;
+    if (!contents)
+      continue;
+
+    QMetaObject::invokeMethod(contents, "ReloadSettings");
+  }
+}

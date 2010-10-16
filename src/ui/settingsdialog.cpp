@@ -21,6 +21,7 @@
 #include "ui_settingsdialog.h"
 #include "engines/enginebase.h"
 #include "playlist/playlistview.h"
+#include "widgets/autosizedtextedit.h"
 #include "widgets/osd.h"
 #include "widgets/osdpretty.h"
 
@@ -36,6 +37,7 @@
 
 #include <QColorDialog>
 #include <QDir>
+#include <QFontDialog>
 #include <QSettings>
 
 #include <QtDebug>
@@ -115,6 +117,13 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   QStringList names = language_map_.keys();
   qStableSort(names);
   ui_->language->addItems(names);
+
+  // Song info
+  QFile song_info_preview(":/lumberjacksong.txt");
+  song_info_preview.open(QIODevice::ReadOnly);
+  ui_->song_info_font_preview->setText(QString::fromUtf8(song_info_preview.readAll()));
+
+  connect(ui_->song_info_font_size, SIGNAL(valueChanged(double)), SLOT(SongInfoFontSizeChanged(double)));
 
   // Global shortcuts
 #ifdef Q_OS_MAC
@@ -233,7 +242,11 @@ void SettingsDialog::accept() {
   s.endGroup();
 #endif
 
-  // Lyrics
+  // Song info
+  s.beginGroup(AutoSizedTextEdit::kSettingsGroup);
+  s.setValue("font_size", ui_->song_info_font_preview->font().pointSizeF());
+  s.endGroup();
+
   ui_->lyric_settings->Save();
 
   // Wii remotes
@@ -323,7 +336,12 @@ void SettingsDialog::showEvent(QShowEvent*) {
     ui_->language->setCurrentIndex(ui_->language->findText(name));
   s.endGroup();
 
-  // Lyrics
+  // Song Info
+  s.beginGroup(AutoSizedTextEdit::kSettingsGroup);
+  ui_->song_info_font_size->setValue(
+      s.value("font_size", AutoSizedTextEdit::kDefaultFontSize).toReal());
+  s.endGroup();
+
   ui_->lyric_settings->Load();
 
   // Last.fm
@@ -514,4 +532,11 @@ void SettingsDialog::OpenAtPage(Page page) {
 
 void SettingsDialog::SetSongInfoView(SongInfoView* view) {
   ui_->lyric_settings->SetSongInfoView(view);
+}
+
+void SettingsDialog::SongInfoFontSizeChanged(qreal value) {
+  QFont font;
+  font.setPointSizeF(value);
+
+  ui_->song_info_font_preview->setFont(font);
 }

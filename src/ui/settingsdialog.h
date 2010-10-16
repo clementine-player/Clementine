@@ -85,6 +85,8 @@ class SettingsDialog : public QDialog {
   void FadingOptionsChanged();
   void RgPreampChanged(int value);
 
+  void SongInfoFontSizeChanged(double value);
+
  private:
 #ifdef ENABLE_WIIMOTEDEV
   WiimotedevShortcutsConfig* wiimotedev_config_;

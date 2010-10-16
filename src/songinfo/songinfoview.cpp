@@ -130,6 +130,8 @@ void SongInfoView::ReloadSettings() {
       provider->set_enabled(false);
     }
   }
+
+  SongInfoBase::ReloadSettings();
 }
 
 SongInfoProvider* SongInfoView::ProviderByName(const QString& name) const {

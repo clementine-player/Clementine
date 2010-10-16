@@ -16,7 +16,12 @@
 
 #include "autosizedtextedit.h"
 
+#include <QApplication>
+#include <QSettings>
 #include <QWheelEvent>
+
+const qreal AutoSizedTextEdit::kDefaultFontSize = 8.5;
+const char* AutoSizedTextEdit::kSettingsGroup = "SongInfo";
 
 AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
   : QTextBrowser(parent),
@@ -26,10 +31,17 @@ AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   setOpenExternalLinks(true);
+  ReloadSettings();
+}
 
-  QFont f(font());
-  f.setPointSizeF(8.5);
-  document()->setDefaultFont(f);
+void AutoSizedTextEdit::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  qreal size = s.value("font_size", kDefaultFontSize).toReal();
+  QFont font;
+  font.setPointSizeF(size);
+  document()->setDefaultFont(font);
 }
 
 void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {

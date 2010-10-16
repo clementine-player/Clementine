@@ -25,7 +25,13 @@ class AutoSizedTextEdit : public QTextBrowser {
 public:
   AutoSizedTextEdit(QWidget* parent = 0);
 
+  static const qreal kDefaultFontSize;
+  static const char* kSettingsGroup;
+
   QSize sizeHint() const;
+
+public slots:
+  void ReloadSettings();
 
 protected:
   void resizeEvent(QResizeEvent* e);
