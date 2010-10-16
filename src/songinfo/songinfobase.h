@@ -44,6 +44,9 @@ public slots:
   void SongFinished();
   virtual void ReloadSettings();
 
+signals:
+  void ShowSettingsDialog();
+
 protected:
   void showEvent(QShowEvent* e);
 
@@ -65,6 +68,7 @@ protected:
 
 private:
   void MaybeUpdate(const Song& metadata);
+  void ConnectWidget(QWidget* widget);
 
 private slots:
   void SectionToggled(bool value);

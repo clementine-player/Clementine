@@ -1594,4 +1594,10 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), view, SLOT(SongChanged(Song)));
   connect(player_, SIGNAL(PlaylistFinished()), view, SLOT(SongFinished()));
   connect(player_, SIGNAL(Stopped()), view, SLOT(SongFinished()));
+
+  connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
+}
+
+void MainWindow::ShowSongInfoConfig() {
+  OpenSettingsDialogAtPage(SettingsDialog::Page_SongInformation);
 }

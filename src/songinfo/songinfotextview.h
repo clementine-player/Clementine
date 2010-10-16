@@ -33,9 +33,13 @@ public:
 public slots:
   void ReloadSettings();
 
+signals:
+  void ShowSettingsDialog();
+
 protected:
   void resizeEvent(QResizeEvent* e);
   void wheelEvent(QWheelEvent* e);
+  void contextMenuEvent(QContextMenuEvent* e);
 
 private:
   int last_width_;

@@ -189,6 +189,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void EnsureEditTagDialogCreated();
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
+  void ShowSongInfoConfig();
 
   void SaveGeometry();
 

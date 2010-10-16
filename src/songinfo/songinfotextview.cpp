@@ -17,6 +17,7 @@
 #include "songinfotextview.h"
 
 #include <QApplication>
+#include <QMenu>
 #include <QSettings>
 #include <QWheelEvent>
 
@@ -62,4 +63,13 @@ QSize SongInfoTextView::sizeHint() const {
 
 void SongInfoTextView::wheelEvent(QWheelEvent* e) {
   e->ignore();
+}
+
+void SongInfoTextView::contextMenuEvent(QContextMenuEvent* e) {
+  QMenu* menu = createStandardContextMenu(e->pos());
+  menu->setAttribute(Qt::WA_DeleteOnClose);
+
+  menu->addAction(tr("Change font size..."), this, SIGNAL(ShowSettingsDialog()));
+
+  menu->popup(e->globalPos());
 }

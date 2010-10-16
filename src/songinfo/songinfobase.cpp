@@ -88,12 +88,16 @@ void SongInfoBase::AddSection(CollapsibleInfoPane* section) {
       break;
   }
 
+  ConnectWidget(section->data().contents_);
+
   sections_.insert(index, section);
   qobject_cast<QVBoxLayout*>(section_container_->layout())->insertWidget(index, section);
   section->show();
 }
 
 void SongInfoBase::AddWidget(QWidget* widget) {
+  ConnectWidget(widget);
+
   container_->insertWidget(container_->count() - 2, widget);
   widgets_ << widget;
 }
@@ -201,5 +205,11 @@ void SongInfoBase::ReloadSettings() {
       continue;
 
     QMetaObject::invokeMethod(contents, "ReloadSettings");
+  }
+}
+
+void SongInfoBase::ConnectWidget(QWidget* widget) {
+  if (widget->metaObject()->indexOfSignal("ShowSettingsDialog()") != -1) {
+    connect(widget, SIGNAL(ShowSettingsDialog()), SIGNAL(ShowSettingsDialog()));
   }
 }
