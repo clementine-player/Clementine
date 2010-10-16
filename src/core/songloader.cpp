@@ -90,7 +90,8 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
 #endif
 }
 
-SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block) {
+SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
+                                         bool ignore_playlists) {
   qDebug() << "Loading local file" << filename;
 
   // First check to see if it's a directory - if so we can load all the songs
@@ -120,6 +121,11 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block) {
   }
 
   if (parser) {
+    if (ignore_playlists) {
+      qDebug() << "Skipping" << parser->name() << "playlist while loading directory";
+      return Success;
+    }
+
     qDebug() << "Parsing using" << parser->name();
 
     // It's a playlist!
@@ -182,7 +188,7 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
 
   while (it.hasNext()) {
     // This is in another thread so we can do blocking calls.
-    LoadLocal(it.next(), true);
+    LoadLocal(it.next(), true, true);
   }
 
   qStableSort(songs_.begin(), songs_.end(), CompareSongs);

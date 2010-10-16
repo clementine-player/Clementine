@@ -70,7 +70,7 @@ private:
     Finished,
   };
 
-  Result LoadLocal(const QString& filename, bool block = false);
+  Result LoadLocal(const QString& filename, bool block = false, bool ignore_playlists = false);
   void LoadLocalDirectory(const QString& filename);
   void LoadPlaylist(ParserBase* parser, const QString& filename);
   void LoadLocalDirectoryAndEmit(const QString& filename);
