@@ -43,11 +43,11 @@ void Echonest::Parser::readStatus( QXmlStreamReader& xml ) throw( Echonest::Pars
 {
     if( xml.readNextStartElement() ) {
         // sanity checks
-        if( xml.name() !=  QLatin1String( "response" ) )
+        if( xml.atEnd() || xml.name() !=  QLatin1String( "response" ) )
             throw ParseError( UnknownParseError );
         
         if( xml.readNextStartElement() ) {
-            if( xml.name() != "status" )
+            if( xml.atEnd() || xml.name() != "status" )
                 throw ParseError( UnknownParseError );
             
             // only check the error code for now
@@ -87,7 +87,7 @@ QVector< Echonest::Song > Echonest::Parser::parseSongList( QXmlStreamReader& xml
 
 Echonest::Song Echonest::Parser::parseSong( QXmlStreamReader& xml ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "song" )
+    if( xml.atEnd() || xml.name() != "song" )
         throw ParseError( Echonest::UnknownParseError );
     
     Echonest::Song song;   
@@ -125,7 +125,7 @@ Echonest::Song Echonest::Parser::parseSong( QXmlStreamReader& xml ) throw( Echon
 
 Echonest::Track Echonest::Parser::parseTrack( QXmlStreamReader& xml ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "track" ) {
+    if( xml.atEnd() || xml.name() != "track" ) {
         throw ParseError( Echonest::UnknownParseError );
     }
     
@@ -165,7 +165,7 @@ Echonest::Track Echonest::Parser::parseTrack( QXmlStreamReader& xml ) throw( Ech
 
 Echonest::AudioSummary Echonest::Parser::parseAudioSummary( QXmlStreamReader& xml ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "audio_summary" ) {
+    if( xml.atEnd() || xml.name() != "audio_summary" ) {
         throw ParseError( Echonest::UnknownParseError );
     }
     
@@ -196,17 +196,17 @@ Echonest::AudioSummary Echonest::Parser::parseAudioSummary( QXmlStreamReader& xm
 Echonest::Artists Echonest::Parser::parseArtists( QXmlStreamReader& xml )
 {
     // we expect to be in an <artists> start element
-    if( xml.name() != "artists" || !xml.isStartElement() )
+    if( xml.atEnd() || xml.name() != "artists" || !xml.isStartElement() )
         throw ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     
     Echonest::Artists artists;
-    while( xml.name() != "artists" || !xml.isEndElement() ) {
-        if( xml.name() != "artist" || !xml.isStartElement() )
+    while( !xml.atEnd() && ( xml.name() != "artists" || !xml.isEndElement() ) ) {
+        if( xml.atEnd() || xml.name() != "artist" || !xml.isStartElement() )
             throw Echonest::ParseError( Echonest::UnknownParseError );
         Echonest::Artist artist;
-        while( xml.name() != "artist" || !xml.isEndElement() ) {
+        while( !xml.atEnd() && ( xml.name() != "artist" || !xml.isEndElement() ) ) {
             parseArtistInfo( xml, artist );
             xml.readNextStartElement();
         }
@@ -287,12 +287,12 @@ void Echonest::Parser::parseArtistInfo( QXmlStreamReader& xml, Echonest::Artist&
 
 void Echonest::Parser::parseAudio( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "audio" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "audio" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     Echonest::AudioList audioList;
-    while( xml.name() != "audio" || xml.tokenType() != QXmlStreamReader::EndElement ) {
+    while( !xml.atEnd() && ( xml.name() != "audio" || xml.tokenType() != QXmlStreamReader::EndElement ) ) {
         Echonest::AudioFile audio;
         do {
             xml.readNext();
@@ -314,7 +314,7 @@ void Echonest::Parser::parseAudio( QXmlStreamReader& xml, Echonest::Artist& arti
             else if( xml.name() == "id" )
                 audio.setId( xml.readElementText().toLatin1() );
             
-        } while( xml.name() != "audio" || xml.tokenType() != QXmlStreamReader::EndElement );
+        } while( !xml.atEnd() && ( xml.name() != "audio" || xml.tokenType() != QXmlStreamReader::EndElement ) );
         audioList.append( audio );
         xml.readNext();
     }
@@ -323,12 +323,12 @@ void Echonest::Parser::parseAudio( QXmlStreamReader& xml, Echonest::Artist& arti
 
 void Echonest::Parser::parseBiographies( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "biographies" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "biographies" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     Echonest::BiographyList bios;
-    while( xml.name() != "biographies" || xml.tokenType() != QXmlStreamReader::EndElement ) {
+    while( !xml.atEnd() && ( xml.name() != "biographies" || xml.tokenType() != QXmlStreamReader::EndElement ) ) {
         Echonest::Biography bio;
         do {
             xml.readNext();
@@ -342,7 +342,7 @@ void Echonest::Parser::parseBiographies( QXmlStreamReader& xml, Echonest::Artist
             else if( xml.name() == "license" )
                 bio.setLicense( parseLicense( xml) );
             
-        } while( xml.name() != "biography" || xml.tokenType() != QXmlStreamReader::EndElement );
+        } while( !xml.atEnd() && ( xml.name() != "biography" || xml.tokenType() != QXmlStreamReader::EndElement ) );
         bios.append( bio );
         xml.readNext();
     }
@@ -352,12 +352,12 @@ void Echonest::Parser::parseBiographies( QXmlStreamReader& xml, Echonest::Artist
 
 void Echonest::Parser::parseImages( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "images" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "images" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     Echonest::ArtistImageList imgs;
-    while( xml.name() != "images" || xml.tokenType() != QXmlStreamReader::EndElement ) {
+    while( !xml.atEnd() && ( xml.name() != "images" || xml.tokenType() != QXmlStreamReader::EndElement ) ) {
         Echonest::ArtistImage img;
         do {
             xml.readNext();
@@ -367,7 +367,7 @@ void Echonest::Parser::parseImages( QXmlStreamReader& xml, Echonest::Artist& art
             else if( xml.name() == "license" )
                 img.setLicense( parseLicense( xml) );
             
-        } while( xml.name() != "image" || xml.tokenType() != QXmlStreamReader::EndElement );
+        } while( !xml.atEnd() && ( xml.name() != "image" || xml.tokenType() != QXmlStreamReader::EndElement ) );
         imgs.append( img );
         xml.readNext();
     }
@@ -376,9 +376,9 @@ void Echonest::Parser::parseImages( QXmlStreamReader& xml, Echonest::Artist& art
 
 void Echonest::Parser::parseNewsOrBlogs( QXmlStreamReader& xml, Echonest::Artist& artist, bool news  ) throw( Echonest::ParseError )
 {
-    if( news && ( xml.name() != "news" || xml.tokenType() != QXmlStreamReader::StartElement ) )
+    if( news && ( xml.atEnd() || xml.name() != "news" || xml.tokenType() != QXmlStreamReader::StartElement ) )
         throw Echonest::ParseError( Echonest::UnknownParseError );
-    else if( !news && ( xml.name() != "blogs" || xml.tokenType() != QXmlStreamReader::StartElement ) )
+    else if( !news && ( xml.atEnd() || xml.name() != "blogs" || xml.tokenType() != QXmlStreamReader::StartElement ) )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
@@ -413,12 +413,12 @@ void Echonest::Parser::parseNewsOrBlogs( QXmlStreamReader& xml, Echonest::Artist
 
 void Echonest::Parser::parseReviews( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "reviews" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "reviews" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     Echonest::ReviewList reviews;
-    while( xml.name() != "reviews" || xml.tokenType() != QXmlStreamReader::EndElement ) {
+    while( !xml.atEnd() && ( xml.name() != "reviews" || xml.tokenType() != QXmlStreamReader::EndElement ) ) {
         Echonest::Review review;
         do {
             xml.readNextStartElement();
@@ -438,7 +438,7 @@ void Echonest::Parser::parseReviews( QXmlStreamReader& xml, Echonest::Artist& ar
             else if( xml.name() == "id" )
                 review.setId( xml.readElementText().toLatin1() );
             
-        } while( xml.name() != "review" || xml.tokenType() != QXmlStreamReader::EndElement );
+        } while( !xml.atEnd() && ( xml.name() != "review" || xml.tokenType() != QXmlStreamReader::EndElement ) );
         reviews.append( review );
         xml.readNext();
     }
@@ -447,16 +447,16 @@ void Echonest::Parser::parseReviews( QXmlStreamReader& xml, Echonest::Artist& ar
 
 void Echonest::Parser::parseArtistSong( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "songs" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "songs" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     Echonest::SongList songs;
-    while( xml.name() != "songs" || xml.tokenType() != QXmlStreamReader::EndElement ) {
+    while( !xml.atEnd() && ( xml.name() != "songs" || xml.tokenType() != QXmlStreamReader::EndElement ) ) {
         if( xml.name() == "song" && xml.isStartElement() ) 
         {
             Echonest::Song song;
-            while( xml.name() != "song" || !xml.isEndElement() ) {
+            while( !xml.atEnd() && ( xml.name() != "song" || !xml.isEndElement() ) ) {
                 if( xml.name() == "id" && xml.isStartElement() )
                     song.setId( xml.readElementText().toLatin1() );
                 else if( xml.name() == "title" && xml.isStartElement() )
@@ -472,7 +472,7 @@ void Echonest::Parser::parseArtistSong( QXmlStreamReader& xml, Echonest::Artist&
 
 void Echonest::Parser::parseTerms( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "terms" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "terms" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     artist.setTerms( parseTermList( xml ) );
@@ -480,13 +480,13 @@ void Echonest::Parser::parseTerms( QXmlStreamReader& xml, Echonest::Artist& arti
 
 void Echonest::Parser::parseUrls( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "urls" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "urls" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     xml.readNextStartElement();
     xml.readNextStartElement();
     
-    while( xml.name() != "urls" || !xml.isEndElement() ) {
+    while( !xml.atEnd() && ( xml.name() != "urls" || !xml.isEndElement() ) ) {
         if( xml.name() == "lastfm_url" )
             artist.setLastFmUrl( QUrl( xml.readElementText() ) );
         else if( xml.name() == "aolmusic_url" )
@@ -507,7 +507,7 @@ void Echonest::Parser::parseUrls( QXmlStreamReader& xml, Echonest::Artist& artis
 
 void Echonest::Parser::parseVideos( QXmlStreamReader& xml, Echonest::Artist& artist ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "video" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "video" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     Echonest::VideoList videos;
@@ -515,7 +515,7 @@ void Echonest::Parser::parseVideos( QXmlStreamReader& xml, Echonest::Artist& art
         
         Echonest::Video video;
         
-        while( xml.name() != "video" || !xml.isEndElement() ) {
+        while( !xml.atEnd() && ( xml.name() != "video" || !xml.isEndElement() ) ) {
             if( xml.name() == "title" )
                 video.setTitle( xml.readElementText() );
             else if( xml.name() == "url" )
@@ -540,7 +540,7 @@ void Echonest::Parser::parseVideos( QXmlStreamReader& xml, Echonest::Artist& art
 
 Echonest::TermList Echonest::Parser::parseTermList( QXmlStreamReader& xml )
 {
-    if( xml.name() != "terms" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "terms" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     Echonest::TermList terms;
@@ -548,7 +548,7 @@ Echonest::TermList Echonest::Parser::parseTermList( QXmlStreamReader& xml )
         
         Echonest::Term term;
         
-        while( xml.name() != "terms" || !xml.isEndElement() ) {
+        while( !xml.atEnd() && ( xml.name() != "terms" || !xml.isEndElement() ) ) {
             if( xml.name() == "frequency" )
                 term.setFrequency( xml.readElementText().toDouble() );
             else if( xml.name() == "name" )
@@ -572,11 +572,11 @@ void Echonest::Parser::parseForeignIds( QXmlStreamReader& xml, Echonest::Artist&
 
 Echonest::License Echonest::Parser::parseLicense( QXmlStreamReader& xml ) throw( Echonest::ParseError )
 {
-    if( xml.name() != "license" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "license" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     Echonest::License license;
-    while( xml.name() != "license" || xml.tokenType() != QXmlStreamReader::EndElement ) {
+    while( !xml.atEnd() && ( xml.name() != "license" || xml.tokenType() != QXmlStreamReader::EndElement ) ) {
         if( xml.name() == "type" )
             license.type = xml.readElementText();
         else if( xml.name() == "attribution" )
@@ -593,7 +593,7 @@ Echonest::License Echonest::Parser::parseLicense( QXmlStreamReader& xml ) throw(
 
 QByteArray Echonest::Parser::parsePlaylistSessionId( QXmlStreamReader& xml ) throw( ParseError )
 {
-    if( xml.name() != "session_id" || xml.tokenType() != QXmlStreamReader::StartElement )
+    if( xml.atEnd() || xml.name() != "session_id" || xml.tokenType() != QXmlStreamReader::StartElement )
         throw Echonest::ParseError( Echonest::UnknownParseError );
     
     QByteArray sessionId = xml.readElementText().toLatin1();
