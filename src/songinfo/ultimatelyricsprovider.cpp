@@ -14,9 +14,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "songinfotextview.h"
 #include "ultimatelyricsprovider.h"
 #include "core/networkaccessmanager.h"
-#include "widgets/autosizedtextedit.h"
 
 #include <QNetworkReply>
 #include <QTextCodec>
@@ -121,7 +121,7 @@ void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
     data.type_ = CollapsibleInfoPane::Data::Type_Lyrics;
     data.relevance_ = relevance();
 
-    AutoSizedTextEdit* editor = new AutoSizedTextEdit;
+    SongInfoTextView* editor = new SongInfoTextView;
     editor->setHtml(lyrics);
     data.contents_ = editor;
 

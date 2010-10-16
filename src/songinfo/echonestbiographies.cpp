@@ -15,7 +15,7 @@
 */
 
 #include "echonestbiographies.h"
-#include "widgets/autosizedtextedit.h"
+#include "songinfotextview.h"
 
 #include <echonest/Artist.h>
 
@@ -86,7 +86,7 @@ void EchoNestBiographies::RequestFinished() {
     if (site_icons_.contains(canonical_site))
       data.icon_ = site_icons_[canonical_site];
 
-    AutoSizedTextEdit* editor = new AutoSizedTextEdit;
+    SongInfoTextView* editor = new SongInfoTextView;
     editor->setHtml(bio.text());
     data.contents_ = editor;
 

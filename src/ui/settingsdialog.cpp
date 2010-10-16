@@ -21,7 +21,7 @@
 #include "ui_settingsdialog.h"
 #include "engines/enginebase.h"
 #include "playlist/playlistview.h"
-#include "widgets/autosizedtextedit.h"
+#include "songinfo/songinfotextview.h"
 #include "widgets/osd.h"
 #include "widgets/osdpretty.h"
 
@@ -243,7 +243,7 @@ void SettingsDialog::accept() {
 #endif
 
   // Song info
-  s.beginGroup(AutoSizedTextEdit::kSettingsGroup);
+  s.beginGroup(SongInfoTextView::kSettingsGroup);
   s.setValue("font_size", ui_->song_info_font_preview->font().pointSizeF());
   s.endGroup();
 
@@ -337,9 +337,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
   s.endGroup();
 
   // Song Info
-  s.beginGroup(AutoSizedTextEdit::kSettingsGroup);
+  s.beginGroup(SongInfoTextView::kSettingsGroup);
   ui_->song_info_font_size->setValue(
-      s.value("font_size", AutoSizedTextEdit::kDefaultFontSize).toReal());
+      s.value("font_size", SongInfoTextView::kDefaultFontSize).toReal());
   s.endGroup();
 
   ui_->lyric_settings->Load();

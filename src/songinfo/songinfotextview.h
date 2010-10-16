@@ -14,16 +14,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef AUTOSIZEDTEXTEDIT_H
-#define AUTOSIZEDTEXTEDIT_H
+#ifndef SONGINFOTEXTVIEW_H
+#define SONGINFOTEXTVIEW_H
 
 #include <QTextBrowser>
 
-class AutoSizedTextEdit : public QTextBrowser {
+class SongInfoTextView : public QTextBrowser {
   Q_OBJECT
 
 public:
-  AutoSizedTextEdit(QWidget* parent = 0);
+  SongInfoTextView(QWidget* parent = 0);
 
   static const qreal kDefaultFontSize;
   static const char* kSettingsGroup;
@@ -41,4 +41,4 @@ private:
   int last_width_;
 };
 
-#endif // AUTOSIZEDTEXTEDIT_H
+#endif // SONGINFOTEXTVIEW_H

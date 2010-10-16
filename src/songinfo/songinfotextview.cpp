@@ -14,16 +14,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "autosizedtextedit.h"
+#include "songinfotextview.h"
 
 #include <QApplication>
 #include <QSettings>
 #include <QWheelEvent>
 
-const qreal AutoSizedTextEdit::kDefaultFontSize = 8.5;
-const char* AutoSizedTextEdit::kSettingsGroup = "SongInfo";
+const qreal SongInfoTextView::kDefaultFontSize = 8.5;
+const char* SongInfoTextView::kSettingsGroup = "SongInfo";
 
-AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
+SongInfoTextView::SongInfoTextView(QWidget* parent)
   : QTextBrowser(parent),
     last_width_(-1)
 {
@@ -34,7 +34,7 @@ AutoSizedTextEdit::AutoSizedTextEdit(QWidget* parent)
   ReloadSettings();
 }
 
-void AutoSizedTextEdit::ReloadSettings() {
+void SongInfoTextView::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
@@ -44,7 +44,7 @@ void AutoSizedTextEdit::ReloadSettings() {
   document()->setDefaultFont(font);
 }
 
-void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {
+void SongInfoTextView::resizeEvent(QResizeEvent* e) {
   const int w = qMax(100, width());
   if (w == last_width_)
     return;
@@ -56,10 +56,10 @@ void AutoSizedTextEdit::resizeEvent(QResizeEvent* e) {
   QTextEdit::resizeEvent(e);
 }
 
-QSize AutoSizedTextEdit::sizeHint() const {
+QSize SongInfoTextView::sizeHint() const {
   return minimumSize();
 }
 
-void AutoSizedTextEdit::wheelEvent(QWheelEvent* e) {
+void SongInfoTextView::wheelEvent(QWheelEvent* e) {
   e->ignore();
 }

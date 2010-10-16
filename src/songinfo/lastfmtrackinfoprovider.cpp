@@ -15,10 +15,10 @@
 */
 
 #include "lastfmtrackinfoprovider.h"
+#include "songinfotextview.h"
 #include "songplaystats.h"
 #include "tagwidget.h"
 #include "ui/iconloader.h"
-#include "widgets/autosizedtextedit.h"
 
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery>
@@ -119,7 +119,7 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.icon_ = QIcon(":/last.fm/as.png");
 
-  AutoSizedTextEdit* widget = new AutoSizedTextEdit;
+  SongInfoTextView* widget = new SongInfoTextView;
   data.contents_ = widget;
 
   widget->setHtml(content);

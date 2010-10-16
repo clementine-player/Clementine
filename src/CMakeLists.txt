@@ -140,6 +140,7 @@ set(SOURCES
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
   songinfo/songinfoprovider.cpp
+  songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songplaystats.cpp
   songinfo/tagwidget.cpp
@@ -166,7 +167,6 @@ set(SOURCES
   ui/systemtrayicon.cpp
 
   widgets/autoexpandingtreeview.cpp
-  widgets/autosizedtextedit.cpp
   widgets/busyindicator.cpp
   widgets/elidedlabel.cpp
   widgets/equalizerslider.cpp
@@ -288,6 +288,7 @@ set(HEADERS
   songinfo/songinfobase.h
   songinfo/songinfofetcher.h
   songinfo/songinfoprovider.h
+  songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songplaystats.h
   songinfo/tagwidget.h
@@ -311,7 +312,6 @@ set(HEADERS
   ui/systemtrayicon.h
 
   widgets/autoexpandingtreeview.h
-  widgets/autosizedtextedit.h
   widgets/busyindicator.h
   widgets/elidedlabel.h
   widgets/equalizerslider.h
