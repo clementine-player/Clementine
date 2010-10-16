@@ -122,7 +122,7 @@ void LastfmTrackInfoProvider::GetWiki(int id, const lastfm::XmlQuery& q) {
   SongInfoTextView* widget = new SongInfoTextView;
   data.contents_ = widget;
 
-  widget->setHtml(content);
+  widget->SetHtml(content);
 
   emit InfoReady(id, data);
 }

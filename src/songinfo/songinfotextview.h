@@ -32,6 +32,7 @@ public:
 
 public slots:
   void ReloadSettings();
+  void SetHtml(const QString& html);
 
 signals:
   void ShowSettingsDialog();

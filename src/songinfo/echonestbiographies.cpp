@@ -87,7 +87,7 @@ void EchoNestBiographies::RequestFinished() {
       data.icon_ = site_icons_[canonical_site];
 
     SongInfoTextView* editor = new SongInfoTextView;
-    editor->setHtml(bio.text());
+    editor->SetHtml(bio.text());
     data.contents_ = editor;
 
     emit InfoReady(request->id_, data);

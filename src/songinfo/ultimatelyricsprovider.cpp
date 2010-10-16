@@ -122,7 +122,7 @@ void UltimateLyricsProvider::LyricsFetched(quint64 id, QNetworkReply* reply) {
     data.relevance_ = relevance();
 
     SongInfoTextView* editor = new SongInfoTextView;
-    editor->setHtml(lyrics);
+    editor->SetHtml(lyrics);
     data.contents_ = editor;
 
     emit InfoReady(id, data);
