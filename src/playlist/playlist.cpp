@@ -673,7 +673,7 @@ QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
 
   beginInsertRows(QModelIndex(), start, end);
   for (int i=start ; i<=end ; ++i) {
-    boost::shared_ptr<PlaylistItem> item = items[i - start];
+    PlaylistItemPtr item = items[i - start];
     items_.insert(i, item);
     virtual_items_ << virtual_items_.count();
 
@@ -948,7 +948,7 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
   // Remove items
   PlaylistItemList ret;
   for (int i=0 ; i<count ; ++i) {
-    boost::shared_ptr<PlaylistItem> item(items_.takeAt(row));
+    PlaylistItemPtr item(items_.takeAt(row));
     ret << item;
 
     if (item->type() == "Library") {
@@ -1118,7 +1118,7 @@ QSortFilterProxyModel* Playlist::proxy() const {
 
 SongList Playlist::GetAllSongs() const {
   SongList ret;
-  foreach (boost::shared_ptr<PlaylistItem> item, items_) {
+  foreach (PlaylistItemPtr item, items_) {
     ret << item->Metadata();
   }
   return ret;
@@ -1126,7 +1126,7 @@ SongList Playlist::GetAllSongs() const {
 
 quint64 Playlist::GetTotalLength() const {
   quint64 ret = 0;
-  foreach (boost::shared_ptr<PlaylistItem> item, items_) {
+  foreach (PlaylistItemPtr item, items_) {
     int length = item->Metadata().length();
     if (length > 0)
       ret += length;

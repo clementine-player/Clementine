@@ -17,6 +17,8 @@
 #ifndef TAGWIDGET_H
 #define TAGWIDGET_H
 
+#include "playlist/playlistitem.h"
+
 #include <QIcon>
 #include <QWidget>
 
@@ -40,11 +42,16 @@ public:
   void set_background_opacity(float opacity);
 
   QSize sizeHint() const;
+  QString text() const { return text_; }
+
+signals:
+  void Clicked();
 
 protected:
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
   void paintEvent(QPaintEvent*);
+  void mouseReleaseEvent(QMouseEvent*);
 
 private:
   QString text_;
@@ -65,6 +72,12 @@ public:
   void AddTag(const QString& tag);
 
   int count() const { return tags_.count(); }
+
+signals:
+  void AddPlaylistItems(const PlaylistItemList& items);
+
+private slots:
+  void TagClicked();
 
 private:
   QString url_pattern_;

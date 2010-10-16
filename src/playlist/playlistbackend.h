@@ -40,7 +40,7 @@ class PlaylistBackend : public QObject {
     int last_played;
   };
   typedef QList<Playlist> PlaylistList;
-  typedef QFuture<boost::shared_ptr<PlaylistItem> > PlaylistItemFuture;
+  typedef QFuture<PlaylistItemPtr> PlaylistItemFuture;
 
   PlaylistList GetAllPlaylists();
   Playlist GetPlaylist(int id);
@@ -57,7 +57,7 @@ class PlaylistBackend : public QObject {
   void SavePlaylist(int playlist, const PlaylistItemList& items, int last_played);
 
  private:
-  static boost::shared_ptr<PlaylistItem> NewSongFromQuery(const SqlRow& row);
+  static PlaylistItemPtr NewSongFromQuery(const SqlRow& row);
 
   boost::shared_ptr<Database> db_;
 };

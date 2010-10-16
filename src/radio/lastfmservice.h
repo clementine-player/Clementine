@@ -32,6 +32,7 @@ uint qHash(const lastfm::Track& track);
 #include "radioservice.h"
 #include "lastfmstationdialog.h"
 #include "core/song.h"
+#include "playlist/playlistitem.h"
 
 #include <QMap>
 #include <QMenu>
@@ -104,11 +105,14 @@ class LastFMService : public RadioService {
 
   void FetchMoreTracks();
 
+  PlaylistItemPtr PlaylistItemForUrl(const QUrl& url);
+
  public slots:
   void NowPlaying(const Song& song);
   void Scrobble();
   void Love();
   void Ban();
+  void ShowConfig();
 
  signals:
   void AuthenticationComplete(bool success);
@@ -119,7 +123,6 @@ class LastFMService : public RadioService {
   void AuthenticateReplyFinished();
   void RefreshFriendsFinished();
   void RefreshNeighboursFinished();
-  void ShowConfig();
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);

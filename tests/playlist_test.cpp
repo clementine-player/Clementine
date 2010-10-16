@@ -440,7 +440,7 @@ TEST_F(PlaylistTest, LibraryIdMapSingle) {
   song.Init("title", "artist", "album", 123);
   song.set_id(1);
 
-  boost::shared_ptr<PlaylistItem> item(new LibraryPlaylistItem(song));
+  PlaylistItemPtr item(new LibraryPlaylistItem(song));
   playlist_.InsertItems(PlaylistItemList() << item);
 
   EXPECT_EQ(0, playlist_.library_items_by_id(-1).count());
@@ -459,7 +459,7 @@ TEST_F(PlaylistTest, LibraryIdMapInvalid) {
   invalid.Init("title", "artist", "album", 123);
   ASSERT_EQ(-1, invalid.id());
 
-  boost::shared_ptr<PlaylistItem> item(new LibraryPlaylistItem(invalid));
+  PlaylistItemPtr item(new LibraryPlaylistItem(invalid));
   playlist_.InsertItems(PlaylistItemList() << item);
 
   EXPECT_EQ(0, playlist_.library_items_by_id(-1).count());
@@ -477,9 +477,9 @@ TEST_F(PlaylistTest, LibraryIdMapMulti) {
   two.Init("title 2", "artist 2", "album 2", 123);
   two.set_id(2);
 
-  boost::shared_ptr<PlaylistItem> item_one(new LibraryPlaylistItem(one));
-  boost::shared_ptr<PlaylistItem> item_two(new LibraryPlaylistItem(two));
-  boost::shared_ptr<PlaylistItem> item_three(new LibraryPlaylistItem(one));
+  PlaylistItemPtr item_one(new LibraryPlaylistItem(one));
+  PlaylistItemPtr item_two(new LibraryPlaylistItem(two));
+  PlaylistItemPtr item_three(new LibraryPlaylistItem(one));
   playlist_.InsertItems(PlaylistItemList() << item_one << item_two << item_three);
 
   EXPECT_EQ(2, playlist_.library_items_by_id(1).count());

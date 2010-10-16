@@ -18,6 +18,7 @@
 #include "radioitem.h"
 #include "lastfmstationdialog.h"
 #include "radiomodel.h"
+#include "radioplaylistitem.h"
 #include "core/networkaccessmanager.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
@@ -724,4 +725,26 @@ PlaylistItem::Options LastFMService::playlistitem_options() const {
          PlaylistItem::LastFMControls |
          PlaylistItem::PauseDisabled |
          PlaylistItem::ContainsMultipleTracks;
+}
+
+PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {
+  // This is a bit of a hack, it's only used by the artist/song info tag
+  // widgets for tag radio and similar artists radio.
+
+  PlaylistItemPtr ret;
+
+  if (url.scheme() != "lastfm")
+    return ret;
+
+  QStringList sections(url.path().split("/", QString::SkipEmptyParts));
+
+  if (sections.count() == 2 && url.host() == "artist" && sections[1] == "similarartists") {
+    ret.reset(new RadioPlaylistItem(this, url,
+        tr("Last.fm Similar Artists to %1").arg(sections[0]), QString()));
+  } else if (sections.count() == 1 && url.host() == "globaltags") {
+    ret.reset(new RadioPlaylistItem(this, url,
+        tr("Last.fm Tag Radio: %1").arg(sections[0]), QString()));
+  }
+
+  return ret;
 }

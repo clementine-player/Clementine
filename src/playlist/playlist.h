@@ -94,8 +94,7 @@ class Playlist : public QAbstractListModel {
   static const char* kPlayNowMimetype;
 
   static bool CompareItems(int column, Qt::SortOrder order,
-                           boost::shared_ptr<PlaylistItem> a,
-                           boost::shared_ptr<PlaylistItem> b);
+                           PlaylistItemPtr a, PlaylistItemPtr b);
 
   static QString column_name(Column column);
   static bool column_is_editable(Playlist::Column column);
@@ -116,8 +115,8 @@ class Playlist : public QAbstractListModel {
   int previous_index() const;
   bool stop_after_current() const;
 
-  const boost::shared_ptr<PlaylistItem>& item_at(int index) const { return items_[index]; }
-  boost::shared_ptr<PlaylistItem> current_item() const { return current_item_; }
+  const PlaylistItemPtr& item_at(int index) const { return items_[index]; }
+  PlaylistItemPtr current_item() const { return current_item_; }
 
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
@@ -226,7 +225,7 @@ class Playlist : public QAbstractListModel {
                              // that they will be played.
   // A map of library ID to playlist item - for fast lookups when library
   // items change.
-  QMultiMap<int, boost::shared_ptr<PlaylistItem> > library_items_by_id_;
+  QMultiMap<int, PlaylistItemPtr> library_items_by_id_;
 
   QPersistentModelIndex current_item_index_;
   QPersistentModelIndex last_played_item_index_;
@@ -234,7 +233,7 @@ class Playlist : public QAbstractListModel {
   bool current_is_paused_;
   int current_virtual_index_;
 
-  boost::shared_ptr<PlaylistItem> current_item_;
+  PlaylistItemPtr current_item_;
 
   bool is_shuffled_;
 

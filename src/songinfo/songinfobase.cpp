@@ -212,4 +212,8 @@ void SongInfoBase::ConnectWidget(QWidget* widget) {
   if (widget->metaObject()->indexOfSignal("ShowSettingsDialog()") != -1) {
     connect(widget, SIGNAL(ShowSettingsDialog()), SIGNAL(ShowSettingsDialog()));
   }
+
+  if (widget->metaObject()->indexOfSignal("AddPlaylistItems(PlaylistItemList)") != -1) {
+    connect(widget, SIGNAL(AddPlaylistItems(PlaylistItemList)), SIGNAL(AddPlaylistItems(PlaylistItemList)));
+  }
 }

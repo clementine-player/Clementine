@@ -22,6 +22,7 @@
 #include "collapsibleinfopane.h"
 #include "songinfofetcher.h"
 #include "core/song.h"
+#include "playlist/playlistitem.h"
 #include "widgets/widgetfadehelper.h"
 
 class CollapsibleInfoPane;
@@ -46,6 +47,7 @@ public slots:
 
 signals:
   void ShowSettingsDialog();
+  void AddPlaylistItems(const PlaylistItemList& items);
 
 protected:
   void showEvent(QShowEvent* e);

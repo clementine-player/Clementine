@@ -1596,6 +1596,7 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
   connect(player_, SIGNAL(Stopped()), view, SLOT(SongFinished()));
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
+  connect(view, SIGNAL(AddPlaylistItems(PlaylistItemList)), SLOT(InsertRadioItems(PlaylistItemList)));
 }
 
 void MainWindow::ShowSongInfoConfig() {

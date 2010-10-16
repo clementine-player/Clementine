@@ -128,7 +128,8 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
   Song temp_metadata_;
 };
-typedef QList<boost::shared_ptr<PlaylistItem> > PlaylistItemList;
+typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
+typedef QList<PlaylistItemPtr> PlaylistItemList;
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options);
 

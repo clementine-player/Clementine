@@ -63,7 +63,7 @@ void PlaylistItem::ClearTemporaryMetadata() {
   temp_metadata_ = Song();
 }
 
-static void ReloadPlaylistItem(boost::shared_ptr<PlaylistItem> item) {
+static void ReloadPlaylistItem(PlaylistItemPtr item) {
   item->Reload();
 }
 

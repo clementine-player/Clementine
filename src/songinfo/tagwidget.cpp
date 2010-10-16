@@ -15,6 +15,8 @@
 */
 
 #include "tagwidget.h"
+#include "radio/lastfmservice.h"
+#include "radio/radiomodel.h"
 #include "ui/flowlayout.h"
 
 #include <QPainter>
@@ -93,6 +95,10 @@ void TagWidgetTag::paintEvent(QPaintEvent*) {
   p.drawText(text_rect, text_);
 }
 
+void TagWidgetTag::mouseReleaseEvent(QMouseEvent*) {
+  emit Clicked();
+}
+
 
 TagWidget::TagWidget(QWidget* parent)
   : QWidget(parent)
@@ -105,6 +111,27 @@ void TagWidget::AddTag(const QString& tag) {
     return;
 
   TagWidgetTag* widget = new TagWidgetTag(icon_, tag, this);
+  connect(widget, SIGNAL(Clicked()), SLOT(TagClicked()));
+
   layout()->addWidget(widget);
   tags_ << widget;
+}
+
+void TagWidget::TagClicked() {
+  TagWidgetTag* tag = qobject_cast<TagWidgetTag*>(sender());
+  if (!tag)
+    return;
+
+  LastFMService* last_fm = RadioModel::Service<LastFMService>();
+  if (!last_fm->IsAuthenticated()) {
+    last_fm->ShowConfig();
+    return;
+  }
+
+  QUrl url(url_pattern_.arg(tag->text()));
+  PlaylistItemPtr item(last_fm->PlaylistItemForUrl(url));
+  if (!item)
+    return;
+
+  emit AddPlaylistItems(PlaylistItemList() << item);
 }

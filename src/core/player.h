@@ -65,7 +65,7 @@ class Player : public QObject {
   Engine::State GetState() const;
   int GetVolume() const;
 
-  boost::shared_ptr<PlaylistItem> GetCurrentItem() const { return current_item_; }
+  PlaylistItemPtr GetCurrentItem() const { return current_item_; }
 
   // MPRIS
   enum DBusCaps {
@@ -175,7 +175,7 @@ class Player : public QObject {
   LastFMService* lastfm_;
   QSettings settings_;
 
-  boost::shared_ptr<PlaylistItem> current_item_;
+  PlaylistItemPtr current_item_;
 
   boost::scoped_ptr<EngineBase> engine_;
   Engine::TrackChangeType stream_change_type_;
