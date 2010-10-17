@@ -52,6 +52,7 @@ LibraryModel::~LibraryModel() {
 void LibraryModel::Init() {
   connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
+  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
   connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SIGNAL(TotalSongCountUpdated(int)));
 
   backend_->UpdateTotalSongCountAsync();
@@ -128,6 +129,17 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
     // already lazy loaded, so now we have to create the song in the container.
     song_nodes_[song.id()] =
         ItemFromSong(GroupBy_None, true, false, container, song, -1);
+  }
+}
+
+void LibraryModel::SongsStatisticsChanged(const SongList& songs) {
+  // This is called if there was a minor change to the songs that will not
+  // normally require the library to be restructured.  We can just update our
+  // internal cache of Song objects without worrying about resetting the model.
+  foreach (const Song& song, songs) {
+    if (song_nodes_.contains(song.id())) {
+      song_nodes_[song.id()]->metadata = song;
+    }
   }
 }
 

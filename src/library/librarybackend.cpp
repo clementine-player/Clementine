@@ -810,8 +810,6 @@ void LibraryBackend::IncrementPlayCount(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  Song old_song = GetSongById(id, db);
-
   QSqlQuery q(QString("UPDATE %1 SET playcount = playcount + 1,"
                       "              lastplayed = :now"
                       " WHERE ROWID = :id").arg(songs_table_), db);
@@ -822,9 +820,7 @@ void LibraryBackend::IncrementPlayCount(int id) {
     return;
 
   Song new_song = GetSongById(id, db);
-
-  emit SongsDeleted(SongList() << old_song);
-  emit SongsDiscovered(SongList() << new_song);
+  emit SongsStatisticsChanged(SongList() << new_song);
 }
 
 void LibraryBackend::IncrementSkipCount(int id) {
@@ -834,8 +830,6 @@ void LibraryBackend::IncrementSkipCount(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  Song old_song = GetSongById(id, db);
-
   QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1"
                       " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":id", id);
@@ -844,7 +838,5 @@ void LibraryBackend::IncrementSkipCount(int id) {
     return;
 
   Song new_song = GetSongById(id, db);
-
-  emit SongsDeleted(SongList() << old_song);
-  emit SongsDiscovered(SongList() << new_song);
+  emit SongsStatisticsChanged(SongList() << new_song);
 }
