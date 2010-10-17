@@ -60,6 +60,11 @@ void LibraryBackend::IncrementSkipCountAsync(int id) {
                              Q_ARG(int, id));
 }
 
+void LibraryBackend::UpdateSongRatingAsync(int id, float rating) {
+  metaObject()->invokeMethod(this, "UpdateSongRating", Qt::QueuedConnection,
+                             Q_ARG(int, id), Q_ARG(float, rating));
+}
+
 void LibraryBackend::LoadDirectories() {
   DirectoryList dirs = GetAllDirectories();
 
@@ -832,6 +837,25 @@ void LibraryBackend::IncrementSkipCount(int id) {
 
   QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1"
                       " WHERE ROWID = :id").arg(songs_table_), db);
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return;
+
+  Song new_song = GetSongById(id, db);
+  emit SongsStatisticsChanged(SongList() << new_song);
+}
+
+void LibraryBackend::UpdateSongRating(int id, float rating) {
+  if (id == -1)
+    return;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q(QString("UPDATE %1 SET rating = :rating"
+                      " WHERE ROWID = :id").arg(songs_table_), db);
+  q.bindValue(":rating", rating);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q.lastError()))

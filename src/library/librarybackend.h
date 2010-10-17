@@ -134,6 +134,7 @@ class LibraryBackend : public LibraryBackendInterface {
 
   void IncrementPlayCountAsync(int id);
   void IncrementSkipCountAsync(int id);
+  void UpdateSongRatingAsync(int id, float rating);
 
  public slots:
   void LoadDirectories();
@@ -147,6 +148,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void ForceCompilation(const QString& artist, const QString& album, bool on);
   void IncrementPlayCount(int id);
   void IncrementSkipCount(int id);
+  void UpdateSongRating(int id, float rating);
 
  signals:
   void DirectoryDiscovered(const Directory& dir, const SubdirectoryList& subdirs);
