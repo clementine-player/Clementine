@@ -43,7 +43,8 @@ bool GioLister::DeviceInfo::is_suitable() const {
   return filesystem_type != "udf" &&
          filesystem_type != "smb" &&
          filesystem_type != "cifs" &&
-         filesystem_type != "ssh";
+         filesystem_type != "ssh" &&
+         filesystem_type != "isofs";
 }
 
 template <typename T, typename F>
