@@ -19,6 +19,7 @@
 #include "core/utilities.h"
 #include "library/librarybackend.h"
 #include "widgets/trackslider.h"
+#include "ui/iconloader.h"
 
 #include <QDateTime>
 #include <QDir>
@@ -39,7 +40,9 @@ const QRgb  QueuedItemDelegate::kQueueBoxGradientColor2 = qRgb(77, 121, 200);
 const int   QueuedItemDelegate::kQueueOpacitySteps = 10;
 const float QueuedItemDelegate::kQueueOpacityLowerBound = 0.4;
 
-const int PlaylistDelegateBase::kMinHeight = 19;
+const int   PlaylistDelegateBase::kMinHeight = 19;
+
+const int   RatingItemDelegate::kStarCount = 5; // There are 4 stars
 
 QueuedItemDelegate::QueuedItemDelegate(QObject *parent, int indicator_column)
   : QStyledItemDelegate(parent),
@@ -275,6 +278,56 @@ QWidget* TextItemDelegate::createEditor(
   return new QLineEdit(parent);
 }
 
+RatingItemDelegate::RatingItemDelegate(QObject* parent)
+  : PlaylistDelegateBase(parent),
+    star_(IconLoader::Load("rating"))
+{
+}
+
+void RatingItemDelegate::paint(
+    QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  const double rating = index.data().toDouble() * kStarCount;
+  const int star_size = option.rect.height();
+  const int width = star_size * kStarCount;
+
+  const QPixmap empty(star_.pixmap(star_size, QIcon::Disabled));
+  const QPixmap full(star_.pixmap(star_size));
+
+  int x = option.rect.x() + (option.rect.width() - width) / 2;
+  for (int i=0 ; i<kStarCount ; ++i, x+=star_size) {
+    const QRect rect(x, option.rect.y(), star_size, star_size);
+
+    if (rating - 0.25 <= i) {
+      // Totally empty
+      painter->drawPixmap(rect, empty);
+    } else if (rating - 0.75 <= i) {
+      // Half full
+      const QRect target_left(rect.x(), rect.y(), rect.width()/2, rect.height());
+      const QRect target_right(rect.x() + rect.width()/2, rect.y(), rect.width()/2, rect.height());
+      const QRect source_left(0, 0, empty.width()/2, empty.height());
+      const QRect source_right(empty.width()/2, 0, empty.width()/2, empty.height());
+      painter->drawPixmap(target_left, full, source_left);
+      painter->drawPixmap(target_right, empty, source_right);
+    } else {
+      // Totally full
+      painter->drawPixmap(rect, full);
+    }
+  }
+}
+
+QSize RatingItemDelegate::sizeHint(
+    const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  QSize size = PlaylistDelegateBase::sizeHint(option, index);
+  size.setWidth(size.height() * kStarCount);
+  return size;
+}
+
+QString RatingItemDelegate::displayText(
+    const QVariant& value, const QLocale&) const {
+  // Round to the nearest .5
+  const float rating = float(int(value.toDouble() * kStarCount * 2 + 0.5)) / 2;
+  return QString::number(rating, 'f', 1);
+}
 
 TagCompletionModel::TagCompletionModel(LibraryBackend* backend, Playlist::Column column) :
   QStringListModel() {

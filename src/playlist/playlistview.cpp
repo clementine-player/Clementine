@@ -123,6 +123,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Samplerate, new PlaylistDelegateBase(this, ("Hz")));
   setItemDelegateForColumn(Playlist::Column_Bitrate, new PlaylistDelegateBase(this, tr("kbps")));
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Rating, new RatingItemDelegate(this));
 }
 
 void PlaylistView::SetPlaylist(Playlist *playlist) {
@@ -170,6 +171,8 @@ void PlaylistView::LoadGeometry() {
     header_->HideSection(Playlist::Column_DateModified);
     header_->HideSection(Playlist::Column_AlbumArtist);
     header_->HideSection(Playlist::Column_Composer);
+    header_->HideSection(Playlist::Column_PlayCount);
+    header_->HideSection(Playlist::Column_Rating);
 
     header_->moveSection(header_->visualIndex(Playlist::Column_Track), 0);
     setting_initial_header_layout_ = true;

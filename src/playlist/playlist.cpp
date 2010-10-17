@@ -202,6 +202,9 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_AlbumArtist: return song.albumartist();
         case Column_Composer: return song.composer();
 
+        case Column_Rating:   return song.rating();
+        case Column_PlayCount:return song.playcount();
+
         case Column_BPM:      return song.bpm();
         case Column_Bitrate:  return song.bitrate();
         case Column_Samplerate: return song.samplerate();
@@ -224,6 +227,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Bitrate:
         case Column_Samplerate:
         case Column_Filesize:
+        case Column_PlayCount:
           return QVariant(Qt::AlignRight | Qt::AlignVCenter);
 
         default:
@@ -792,6 +796,9 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_AlbumArtist:  strcmp(albumartist);
     case Column_Composer:     strcmp(composer);
 
+    case Column_Rating:       cmp(rating);
+    case Column_PlayCount:    cmp(playcount);
+
     case Column_BPM:          cmp(bpm);
     case Column_Bitrate:      cmp(bitrate);
     case Column_Samplerate:   cmp(samplerate);
@@ -821,6 +828,9 @@ QString Playlist::column_name(Column column) {
     case Column_Genre:    return tr("Genre");
     case Column_AlbumArtist: return tr("Album artist");
     case Column_Composer: return tr("Composer");
+
+    case Column_Rating:   return tr("Rating");
+    case Column_PlayCount:return tr("Play count");
 
     case Column_BPM:      return tr("BPM");
     case Column_Bitrate:  return tr("Bit rate");

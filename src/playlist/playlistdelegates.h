@@ -98,6 +98,19 @@ class TextItemDelegate : public PlaylistDelegateBase {
       const QModelIndex& index) const;
 };
 
+class RatingItemDelegate : public PlaylistDelegateBase {
+public:
+  RatingItemDelegate(QObject* parent);
+  void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+  QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  QString displayText(const QVariant& value, const QLocale& locale) const;
+
+  static const int kStarCount;
+
+private:
+  QIcon star_;
+};
+
 class TagCompletionModel : public QStringListModel {
  public:
   TagCompletionModel(LibraryBackend* backend, Playlist::Column column);

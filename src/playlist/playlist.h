@@ -58,6 +58,7 @@ class Playlist : public QAbstractListModel {
            QObject* parent = 0);
   ~Playlist();
 
+  // Always add new columns to the end of this enum - the values are persisted
   enum Column {
     Column_Title = 0,
     Column_Artist,
@@ -79,6 +80,9 @@ class Playlist : public QAbstractListModel {
     Column_Filetype,
     Column_DateCreated,
     Column_DateModified,
+
+    Column_Rating,
+    Column_PlayCount,
 
     ColumnCount
   };
