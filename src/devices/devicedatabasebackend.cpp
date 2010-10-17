@@ -82,7 +82,7 @@ int DeviceDatabaseBackend::AddDevice(const Device& device) {
   int id = q.lastInsertId().toInt();
 
   // Create the songs tables for the device
-  QString filename(":device-schema.sql");
+  QString filename(":schema/device-schema.sql");
   QFile schema_file(filename);
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());

@@ -426,9 +426,9 @@ QSqlDatabase Database::Connect() {
 void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
   QString filename;
   if (version == 0)
-    filename = ":/schema.sql";
+    filename = ":/schema/schema.sql";
   else
-    filename = QString(":/schema-%1.sql").arg(version);
+    filename = QString(":/schema/schema-%1.sql").arg(version);
 
   ScopedTransaction t(&db);
   ExecFromFile(filename, db);
