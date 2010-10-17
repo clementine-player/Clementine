@@ -906,7 +906,7 @@ void MainWindow::UpdateTrackPosition() {
   ui_->track_slider->SetValue(position, length);
 
   // Update the tray icon every 10 seconds
-  if (position % 10 == 1) {
+  if (position % 10 == 0) {
     tray_icon_->SetProgress(double(position) / length * 100);
   }
 }
