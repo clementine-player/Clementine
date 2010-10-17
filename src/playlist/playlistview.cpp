@@ -488,7 +488,8 @@ void PlaylistView::leaveEvent(QEvent* e) {
 
 void PlaylistView::mousePressEvent(QMouseEvent* event) {
   QModelIndex index = indexAt(event->pos());
-  if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {
+  if (event->button() == Qt::LeftButton && index.isValid() &&
+      index.data(Playlist::Role_CanSetRating).toBool()) {
     // Calculate which star was clicked
     double new_rating = RatingItemDelegate::RatingForPos(
         event->pos(), visualRect(index));
