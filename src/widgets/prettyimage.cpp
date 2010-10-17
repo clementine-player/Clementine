@@ -38,7 +38,7 @@ const int PrettyImage::kReflectionHeight = 40;
 const int PrettyImage::kImageHeight = PrettyImage::kTotalHeight -
                                       PrettyImage::kReflectionHeight;
 
-const int PrettyImage::kMaxImageWidth = 400;
+const int PrettyImage::kMaxImageWidth = 300;
 
 const char* PrettyImage::kSettingsGroup = "PrettyImageView";
 
@@ -88,8 +88,8 @@ void PrettyImage::ImageFetched() {
     state_ = State_CreatingThumbnail;
     image_ = image;
 
-    QFuture<QImage> future = QtConcurrent::run(image_,
-        &QImage::scaledToHeight, kImageHeight, Qt::SmoothTransformation);
+    QFuture<QImage> future = QtConcurrent::run(image_, &QImage::scaled,
+        image_size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QFutureWatcher<QImage>* watcher = new QFutureWatcher<QImage>(this);
     watcher->setFuture(future);
