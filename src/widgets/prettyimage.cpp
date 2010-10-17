@@ -23,12 +23,15 @@
 #include <QDesktopWidget>
 #include <QDir>
 #include <QFileDialog>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
 #include <QNetworkReply>
 #include <QPainter>
 #include <QScrollArea>
 #include <QSettings>
+#include <QtConcurrentRun>
 
 const int PrettyImage::kTotalHeight = 200;
 const int PrettyImage::kReflectionHeight = 40;
@@ -58,7 +61,7 @@ void PrettyImage::LazyLoad() {
   // Start fetching the image
   QNetworkReply* reply = network_->get(QNetworkRequest(url_));
   connect(reply, SIGNAL(finished()), SLOT(ImageFetched()));
-  state_ = State_Loading;
+  state_ = State_Fetching;
 }
 
 QSize PrettyImage::image_size() const {
@@ -82,15 +85,30 @@ void PrettyImage::ImageFetched() {
   if (image.isNull()) {
     deleteLater();
   } else {
-    state_ = State_Finished;
+    state_ = State_CreatingThumbnail;
     image_ = image;
-    thumbnail_ = QPixmap::fromImage(image_.scaledToHeight(
-        kImageHeight, Qt::SmoothTransformation));
 
-    updateGeometry();
-    update();
-    emit Loaded();
+    QFuture<QImage> future = QtConcurrent::run(image_,
+        &QImage::scaledToHeight, kImageHeight, Qt::SmoothTransformation);
+
+    QFutureWatcher<QImage>* watcher = new QFutureWatcher<QImage>(this);
+    watcher->setFuture(future);
+    connect(watcher, SIGNAL(finished()), SLOT(ImageScaled()));
   }
+}
+
+void PrettyImage::ImageScaled() {
+  QFutureWatcher<QImage>* watcher = reinterpret_cast<QFutureWatcher<QImage>*>(sender());
+  if (!watcher)
+    return;
+  watcher->deleteLater();
+
+  thumbnail_ = QPixmap::fromImage(watcher->result());
+  state_ = State_Finished;
+
+  updateGeometry();
+  update();
+  emit Loaded();
 }
 
 void PrettyImage::paintEvent(QPaintEvent* ) {
@@ -142,7 +160,8 @@ void PrettyImage::paintEvent(QPaintEvent* ) {
 void PrettyImage::DrawThumbnail(QPainter* p, const QRect& rect) {
   switch (state_) {
   case State_WaitingForLazyLoad:
-  case State_Loading:
+  case State_Fetching:
+  case State_CreatingThumbnail:
     p->setPen(palette().color(QPalette::Disabled, QPalette::Text));
     p->drawText(rect, Qt::AlignHCenter | Qt::AlignBottom, tr("Loading..."));
     break;

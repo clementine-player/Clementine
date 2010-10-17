@@ -56,11 +56,13 @@ protected:
 
 private slots:
   void ImageFetched();
+  void ImageScaled();
 
 private:
   enum State {
     State_WaitingForLazyLoad,
-    State_Loading,
+    State_Fetching,
+    State_CreatingThumbnail,
     State_Finished,
   };
 

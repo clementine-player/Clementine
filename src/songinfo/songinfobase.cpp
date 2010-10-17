@@ -43,7 +43,7 @@ SongInfoBase::SongInfoBase(QWidget* parent)
   // Add a container widget to the scroll area
   QWidget* container_widget = new QWidget;
   container_widget->setLayout(container_);
-  container_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
+  container_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
   container_widget->setBackgroundRole(QPalette::Base);
   container_->setSizeConstraint(QLayout::SetMinAndMaxSize);
   container_->setContentsMargins(0, 0, 0, 0);
@@ -52,7 +52,7 @@ SongInfoBase::SongInfoBase(QWidget* parent)
   scroll_area_->setWidgetResizable(true);
 
   // Add a spacer to the bottom of the container
-  container_->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Expanding));
+  container_->addStretch();
 
   // Set stylesheet
   QFile stylesheet(":/songinfo.css");
