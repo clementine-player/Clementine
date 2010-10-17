@@ -263,6 +263,16 @@ QString DateItemDelegate::displayText(const QVariant &value, const QLocale &loca
       QLocale::system().dateTimeFormat(QLocale::ShortFormat));
 }
 
+QString LastPlayedItemDelegate::displayText(const QVariant& value, const QLocale& locale) const {
+  bool ok = false;
+  const int time = value.toInt(&ok);
+
+  if (!ok || time == -1)
+    return tr("Never");
+
+  return Utilities::Ago(time, locale);
+}
+
 QString FileTypeItemDelegate::displayText(const QVariant &value, const QLocale &locale) const {
   bool ok = false;
   Song::FileType type = Song::FileType(value.toInt(&ok));
@@ -336,6 +346,9 @@ QSize RatingItemDelegate::sizeHint(
 
 QString RatingItemDelegate::displayText(
     const QVariant& value, const QLocale&) const {
+  if (value.isNull() || value.toDouble() <= 0)
+    return QString();
+
   // Round to the nearest .5
   const float rating = float(int(value.toDouble() * kStarCount * 2 + 0.5)) / 2;
   return QString::number(rating, 'f', 1);

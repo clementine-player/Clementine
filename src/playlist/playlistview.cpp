@@ -125,7 +125,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Bitrate, new PlaylistDelegateBase(this, tr("kbps")));
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, new RatingItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_LastPlayed, new DateItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
 }
 
 void PlaylistView::SetPlaylist(Playlist *playlist) {

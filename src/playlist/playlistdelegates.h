@@ -85,6 +85,12 @@ class DateItemDelegate : public PlaylistDelegateBase {
   QString displayText(const QVariant& value, const QLocale& locale) const;
 };
 
+class LastPlayedItemDelegate : public PlaylistDelegateBase {
+public:
+  LastPlayedItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}
+  QString displayText(const QVariant& value, const QLocale& locale) const;
+};
+
 class FileTypeItemDelegate : public PlaylistDelegateBase {
  public:
   FileTypeItemDelegate(QObject* parent) : PlaylistDelegateBase(parent) {}

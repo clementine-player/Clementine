@@ -17,6 +17,7 @@
 #include "utilities.h"
 
 #include <QCoreApplication>
+#include <QDateTime>
 #include <QDir>
 #include <QIODevice>
 #include <QStringList>
@@ -65,6 +66,22 @@ QString WordyTime(quint64 seconds) {
   parts << PrettyTime(seconds - days*60*60*24);
 
   return parts.join(" ");
+}
+
+QString Ago(int seconds_since_epoch, const QLocale& locale) {
+  const QDateTime now = QDateTime::currentDateTime();
+  const QDateTime then = QDateTime::fromTime_t(seconds_since_epoch);
+  const int days_ago = then.date().daysTo(now.date());
+  const QString time = then.time().toString(locale.timeFormat(QLocale::ShortFormat));
+
+  if (days_ago == 0)
+    return tr("Today") + " " + time;
+  if (days_ago == 1)
+    return tr("Yesterday") + " " + time;
+  if (days_ago <= 7)
+    return tr("%1 days ago").arg(days_ago);
+
+  return then.date().toString(locale.dateTimeFormat());
 }
 
 QString PrettySize(quint64 bytes) {
