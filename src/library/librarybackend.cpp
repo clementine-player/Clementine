@@ -25,6 +25,7 @@
 #include <QSettings>
 #include <QtDebug>
 #include <QCoreApplication>
+#include <QDateTime>
 
 LibraryBackend::LibraryBackend(QObject *parent)
   : LibraryBackendInterface(parent)
@@ -47,6 +48,16 @@ void LibraryBackend::LoadDirectoriesAsync() {
 
 void LibraryBackend::UpdateTotalSongCountAsync() {
   metaObject()->invokeMethod(this, "UpdateTotalSongCount", Qt::QueuedConnection);
+}
+
+void LibraryBackend::IncrementPlayCountAsync(int id) {
+  metaObject()->invokeMethod(this, "IncrementPlayCount", Qt::QueuedConnection,
+                             Q_ARG(int, id));
+}
+
+void LibraryBackend::IncrementSkipCountAsync(int id) {
+  metaObject()->invokeMethod(this, "IncrementSkipCount", Qt::QueuedConnection,
+                             Q_ARG(int, id));
 }
 
 void LibraryBackend::LoadDirectories() {
@@ -455,6 +466,10 @@ Song LibraryBackend::GetSongById(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
+  return GetSongById(id, db);
+}
+
+Song LibraryBackend::GetSongById(int id, QSqlDatabase& db) {
   QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
                       " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":id", id);
@@ -786,4 +801,50 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
 
 bool LibraryBackend::ExecQuery(LibraryQuery *q) {
   return !db_->CheckErrors(q->Exec(db_->Connect(), songs_table_, fts_table_));
+}
+
+void LibraryBackend::IncrementPlayCount(int id) {
+  if (id == -1)
+    return;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  Song old_song = GetSongById(id, db);
+
+  QSqlQuery q(QString("UPDATE %1 SET playcount = playcount + 1,"
+                      "              lastplayed = :now"
+                      " WHERE ROWID = :id").arg(songs_table_), db);
+  q.bindValue(":now", QDateTime::currentDateTime().toTime_t());
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return;
+
+  Song new_song = GetSongById(id, db);
+
+  emit SongsDeleted(SongList() << old_song);
+  emit SongsDiscovered(SongList() << new_song);
+}
+
+void LibraryBackend::IncrementSkipCount(int id) {
+  if (id == -1)
+    return;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  Song old_song = GetSongById(id, db);
+
+  QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1"
+                      " WHERE ROWID = :id").arg(songs_table_), db);
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return;
+
+  Song new_song = GetSongById(id, db);
+
+  emit SongsDeleted(SongList() << old_song);
+  emit SongsDiscovered(SongList() << new_song);
 }

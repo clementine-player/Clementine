@@ -186,6 +186,10 @@ void Player::Next() {
 }
 
 void Player::NextInternal(Engine::TrackChangeType change) {
+  if (change == Engine::Manual) {
+    emit TrackSkipped(current_item_);
+  }
+
   if (playlists_->active()->stop_after_current()) {
     playlists_->active()->StopAfter(-1);
     Stop();

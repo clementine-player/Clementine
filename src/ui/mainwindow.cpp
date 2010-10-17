@@ -332,6 +332,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
+  connect(player_, SIGNAL(TrackSkipped(PlaylistItemPtr)), SLOT(TrackSkipped(PlaylistItemPtr)));
 
   connect(player_, SIGNAL(Paused()), playlists_, SLOT(SetActivePaused()));
   connect(player_, SIGNAL(Playing()), playlists_, SLOT(SetActivePlaying()));
@@ -750,6 +751,14 @@ void MainWindow::MediaPlaying() {
   tray_icon_->SetPlaying();
 }
 
+void MainWindow::TrackSkipped(PlaylistItemPtr item) {
+  // If it was a library item then we have to increment its skipped count in
+  // the database.
+  if (item && item->type() == "Library" && item->Metadata().id() != -1) {
+    library_->backend()->IncrementSkipCountAsync(item->Metadata().id());
+  }
+}
+
 void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (!player_->GetState() == Engine::Idle)
     return;
@@ -883,8 +892,9 @@ void MainWindow::FilePathChanged(const QString& path) {
 
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
+  PlaylistItemPtr item(player_->GetCurrentItem());
   const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
-  const int length = player_->GetCurrentItem()->Metadata().length();
+  const int length = item->Metadata().length();
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
@@ -900,6 +910,11 @@ void MainWindow::UpdateTrackPosition() {
       position >= playlists_->active()->scrobble_point()) {
     lastfm->Scrobble();
     playlists_->active()->set_scrobbled(true);
+
+    // Update the play count for the song if it's from the library
+    if (item->type() == "Library" && item->Metadata().id() != -1) {
+      library_->backend()->IncrementPlayCountAsync(item->Metadata().id());
+    }
   }
 
   // Update the slider

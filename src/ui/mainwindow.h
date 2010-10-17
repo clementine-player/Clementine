@@ -104,6 +104,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
+  void TrackSkipped(PlaylistItemPtr item);
   void ForceShowOSD(const Song& song);
 
   void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);

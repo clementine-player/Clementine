@@ -314,12 +314,19 @@ void LibraryWatcher::ScanSubdirectory(
         song_on_disk.set_id(matching_song.id());
         song_on_disk.set_art_automatic(image);
 
+        // Preserve user-settable fields
+        song_on_disk.set_playcount(matching_song.playcount());
+        song_on_disk.set_skipcount(matching_song.skipcount());
+        song_on_disk.set_lastplayed(matching_song.lastplayed());
+        song_on_disk.set_rating(matching_song.rating());
+        song_on_disk.set_art_manual(matching_song.art_manual());
+
         if (!matching_song.IsMetadataEqual(song_on_disk)) {
           qDebug() << file << "metadata changed";
           // Update the song in the DB
           t->new_songs << song_on_disk;
         } else {
-          // Only the metadata changed
+          // Only the mtimes changed
           t->touched_songs << song_on_disk;
         }
       }

@@ -132,6 +132,9 @@ class LibraryBackend : public LibraryBackendInterface {
 
   bool ExecQuery(LibraryQuery* q);
 
+  void IncrementPlayCountAsync(int id);
+  void IncrementSkipCountAsync(int id);
+
  public slots:
   void LoadDirectories();
   void UpdateTotalSongCount();
@@ -142,6 +145,8 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
   void ForceCompilation(const QString& artist, const QString& album, bool on);
+  void IncrementPlayCount(int id);
+  void IncrementSkipCount(int id);
 
  signals:
   void DirectoryDiscovered(const Directory& dir, const SubdirectoryList& subdirs);
@@ -169,6 +174,7 @@ class LibraryBackend : public LibraryBackendInterface {
   AlbumList GetAlbums(const QString& artist, bool compilation = false,
                       const QueryOptions& opt = QueryOptions());
   SubdirectoryList SubdirsInDirectory(int id, QSqlDatabase& db);
+  Song GetSongById(int id, QSqlDatabase& db);
 
  private:
   boost::shared_ptr<Database> db_;

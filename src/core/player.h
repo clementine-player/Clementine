@@ -145,6 +145,7 @@ class Player : public QObject {
   void PlaylistFinished();
   void VolumeChanged(int volume);
   void Error(const QString& message);
+  void TrackSkipped(PlaylistItemPtr old_track);
 
   void ForceShowOSD(Song);
 
