@@ -83,6 +83,8 @@ class Playlist : public QAbstractListModel {
 
     Column_Rating,
     Column_PlayCount,
+    Column_SkipCount,
+    Column_LastPlayed,
 
     ColumnCount
   };

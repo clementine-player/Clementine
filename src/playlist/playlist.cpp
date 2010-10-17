@@ -192,28 +192,30 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
           if (!song.basefilename().isEmpty())
             return song.basefilename();
           return song.filename();
-        case Column_Artist:   return song.artist();
-        case Column_Album:    return song.album();
-        case Column_Length:   return song.length();
-        case Column_Track:    return song.track();
-        case Column_Disc:     return song.disc();
-        case Column_Year:     return song.year();
-        case Column_Genre:    return song.genre();
-        case Column_AlbumArtist: return song.albumartist();
-        case Column_Composer: return song.composer();
+        case Column_Artist:       return song.artist();
+        case Column_Album:        return song.album();
+        case Column_Length:       return song.length();
+        case Column_Track:        return song.track();
+        case Column_Disc:         return song.disc();
+        case Column_Year:         return song.year();
+        case Column_Genre:        return song.genre();
+        case Column_AlbumArtist:  return song.albumartist();
+        case Column_Composer:     return song.composer();
 
-        case Column_Rating:   return song.rating();
-        case Column_PlayCount:return song.playcount();
+        case Column_Rating:       return song.rating();
+        case Column_PlayCount:    return song.playcount();
+        case Column_SkipCount:    return song.skipcount();
+        case Column_LastPlayed:   return song.lastplayed();
 
-        case Column_BPM:      return song.bpm();
-        case Column_Bitrate:  return song.bitrate();
-        case Column_Samplerate: return song.samplerate();
-        case Column_Filename: return song.filename();
+        case Column_BPM:          return song.bpm();
+        case Column_Bitrate:      return song.bitrate();
+        case Column_Samplerate:   return song.samplerate();
+        case Column_Filename:     return song.filename();
         case Column_BaseFilename: return song.basefilename();
-        case Column_Filesize: return song.filesize();
-        case Column_Filetype: return song.filetype();
+        case Column_Filesize:     return song.filesize();
+        case Column_Filetype:     return song.filetype();
         case Column_DateModified: return song.mtime();
-        case Column_DateCreated: return song.ctime();
+        case Column_DateCreated:  return song.ctime();
       }
     }
 
@@ -228,6 +230,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Samplerate:
         case Column_Filesize:
         case Column_PlayCount:
+        case Column_SkipCount:
           return QVariant(Qt::AlignRight | Qt::AlignVCenter);
 
         default:
@@ -798,6 +801,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
 
     case Column_Rating:       cmp(rating);
     case Column_PlayCount:    cmp(playcount);
+    case Column_SkipCount:    cmp(skipcount);
+    case Column_LastPlayed:   cmp(lastplayed);
 
     case Column_BPM:          cmp(bpm);
     case Column_Bitrate:      cmp(bitrate);
@@ -818,29 +823,31 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
 
 QString Playlist::column_name(Column column) {
   switch (column) {
-    case Column_Title:    return tr("Title");
-    case Column_Artist:   return tr("Artist");
-    case Column_Album:    return tr("Album");
-    case Column_Length:   return tr("Length");
-    case Column_Track:    return tr("Track");
-    case Column_Disc:     return tr("Disc");
-    case Column_Year:     return tr("Year");
-    case Column_Genre:    return tr("Genre");
-    case Column_AlbumArtist: return tr("Album artist");
-    case Column_Composer: return tr("Composer");
+    case Column_Title:        return tr("Title");
+    case Column_Artist:       return tr("Artist");
+    case Column_Album:        return tr("Album");
+    case Column_Length:       return tr("Length");
+    case Column_Track:        return tr("Track");
+    case Column_Disc:         return tr("Disc");
+    case Column_Year:         return tr("Year");
+    case Column_Genre:        return tr("Genre");
+    case Column_AlbumArtist:  return tr("Album artist");
+    case Column_Composer:     return tr("Composer");
 
-    case Column_Rating:   return tr("Rating");
-    case Column_PlayCount:return tr("Play count");
+    case Column_Rating:       return tr("Rating");
+    case Column_PlayCount:    return tr("Play count");
+    case Column_SkipCount:    return tr("Skip count");
+    case Column_LastPlayed:   return tr("Last played");
 
-    case Column_BPM:      return tr("BPM");
-    case Column_Bitrate:  return tr("Bit rate");
-    case Column_Samplerate: return tr("Sample rate");
-    case Column_Filename: return tr("File name");
+    case Column_BPM:          return tr("BPM");
+    case Column_Bitrate:      return tr("Bit rate");
+    case Column_Samplerate:   return tr("Sample rate");
+    case Column_Filename:     return tr("File name");
     case Column_BaseFilename: return tr("File name (without path)");
-    case Column_Filesize: return tr("File size");
-    case Column_Filetype: return tr("File type");
+    case Column_Filesize:     return tr("File size");
+    case Column_Filetype:     return tr("File type");
     case Column_DateModified: return tr("Date modified");
-    case Column_DateCreated: return tr("Date created");
+    case Column_DateCreated:  return tr("Date created");
     default: return QString();
   }
   return "";

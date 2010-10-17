@@ -33,6 +33,7 @@
 #include <math.h>
 
 const char* PlaylistView::kSettingsGroup = "Playlist";
+const int PlaylistView::kStateVersion = 1;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
@@ -124,6 +125,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Bitrate, new PlaylistDelegateBase(this, tr("kbps")));
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, new RatingItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_LastPlayed, new DateItemDelegate(this));
 }
 
 void PlaylistView::SetPlaylist(Playlist *playlist) {
@@ -171,11 +173,23 @@ void PlaylistView::LoadGeometry() {
     header_->HideSection(Playlist::Column_DateModified);
     header_->HideSection(Playlist::Column_AlbumArtist);
     header_->HideSection(Playlist::Column_Composer);
-    header_->HideSection(Playlist::Column_PlayCount);
     header_->HideSection(Playlist::Column_Rating);
+    header_->HideSection(Playlist::Column_PlayCount);
+    header_->HideSection(Playlist::Column_SkipCount);
+    header_->HideSection(Playlist::Column_LastPlayed);
 
     header_->moveSection(header_->visualIndex(Playlist::Column_Track), 0);
     setting_initial_header_layout_ = true;
+  }
+
+  // New columns that we add are visible by default if the user has upgraded
+  // Clementine.  Hide them again here
+  const int state_version = settings.value("state_version", 0).toInt();
+  if (state_version < 1) {
+    header_->HideSection(Playlist::Column_Rating);
+    header_->HideSection(Playlist::Column_PlayCount);
+    header_->HideSection(Playlist::Column_SkipCount);
+    header_->HideSection(Playlist::Column_LastPlayed);
   }
 }
 
@@ -183,6 +197,7 @@ void PlaylistView::SaveGeometry() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   settings.setValue("state", header_->saveState());
+  settings.setValue("state_version", kStateVersion);
 }
 
 void PlaylistView::ReloadBarPixmaps() {

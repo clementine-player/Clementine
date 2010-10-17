@@ -293,6 +293,16 @@ void RatingItemDelegate::paint(
   const QPixmap empty(star_.pixmap(star_size, QIcon::Disabled));
   const QPixmap full(star_.pixmap(star_size));
 
+  // Draw the background
+  const QStyleOptionViewItemV3* vopt =
+      qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
+  vopt->widget->style()->drawPrimitive(
+      QStyle::PE_PanelItemViewItem, vopt, painter, vopt->widget);
+
+  // Set the clip rect so we don't draw outside the item
+  painter->setClipRect(option.rect);
+
+  // Draw the stars
   int x = option.rect.x() + (option.rect.width() - width) / 2;
   for (int i=0 ; i<kStarCount ; ++i, x+=star_size) {
     const QRect rect(x, option.rect.y(), star_size, star_size);
@@ -313,6 +323,8 @@ void RatingItemDelegate::paint(
       painter->drawPixmap(rect, full);
     }
   }
+
+  painter->setClipping(false);
 }
 
 QSize RatingItemDelegate::sizeHint(
