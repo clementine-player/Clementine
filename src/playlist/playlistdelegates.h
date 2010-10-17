@@ -111,10 +111,24 @@ public:
   QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
 
+  void set_mouse_over(const QModelIndex& index, const QPoint& pos) {
+      mouse_over_index_ = index ; mouse_over_pos_ = pos; }
+  void set_mouse_out() { mouse_over_index_ = QModelIndex(); }
+  bool is_mouse_over() const { return mouse_over_index_.isValid(); }
+  QModelIndex mouse_over_index() const { return mouse_over_index_; }
+
+  static QRect ContentRect(const QRect& total);
+  static double RatingForPos(const QPoint& pos, const QRect& total_rect);
+
   static const int kStarCount;
+  static const float kEmptyOpacity;
+  static const float kFullOpacity;
 
 private:
   QIcon star_;
+
+  QModelIndex mouse_over_index_;
+  QPoint mouse_over_pos_;
 };
 
 class TagCompletionModel : public QStringListModel {

@@ -178,10 +178,14 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
     case Role_QueuePosition:
       return queue_->PositionOf(index);
 
+    case Role_CanSetRating:
+      return index.column() == Column_Rating &&
+             items_[index.row()]->IsLocalLibraryItem();
+
     case Qt::EditRole:
     case Qt::ToolTipRole:
     case Qt::DisplayRole: {
-      shared_ptr<PlaylistItem> item = items_[index.row()];
+      PlaylistItemPtr item = items_[index.row()];
       Song song = item->Metadata();
 
       // Don't forget to change Playlist::CompareItems when adding new columns

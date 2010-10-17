@@ -33,6 +33,8 @@ class LibraryPlaylistItem : public PlaylistItem {
 
   QUrl Url() const;
 
+  bool IsLocalLibraryItem() const { return song_.id() != -1; }
+
  protected:
   QVariant DatabaseValue(DatabaseColumn column) const;
 

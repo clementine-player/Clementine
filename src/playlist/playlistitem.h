@@ -110,6 +110,10 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   void ClearTemporaryMetadata();
   bool HasTemporaryMetadata() const { return temp_metadata_.is_valid(); }
 
+  // Convenience function to find out whether this item is from the local
+  // library, as opposed to a device, a file on disk, or a stream.
+  virtual bool IsLocalLibraryItem() const { return false; }
+
  protected:
   enum DatabaseColumn {
     Column_LibraryId,

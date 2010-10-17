@@ -30,6 +30,7 @@ class QCleanlooksStyle;
 class LibraryBackend;
 class PlaylistHeader;
 class RadioLoadingIndicator;
+class RatingItemDelegate;
 
 
 // This proxy style works around a bug/feature introduced in Qt 4.7's QGtkStyle
@@ -81,12 +82,15 @@ class PlaylistView : public QTreeView {
  signals:
   void PlayPauseItem(const QModelIndex& index);
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);
+  void SongRatingSet(const QModelIndex& index, double rating);
 
  protected:
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);
-  void timerEvent(QTimerEvent *event);
-  void mousePressEvent(QMouseEvent *event);
+  void timerEvent(QTimerEvent* event);
+  void mouseMoveEvent(QMouseEvent* event);
+  void mousePressEvent(QMouseEvent* event);
+  void leaveEvent(QEvent*);
   void scrollContentsBy(int dx, int dy);
   void paintEvent(QPaintEvent *event);
   void dragMoveEvent(QDragMoveEvent *event);
@@ -133,6 +137,8 @@ class PlaylistView : public QTreeView {
   int glow_intensity_step_;
   QModelIndex last_current_item_;
   QRect last_glow_rect_;
+
+  RatingItemDelegate* rating_delegate_;
 
   QTimer* inhibit_autoscroll_timer_;
   bool inhibit_autoscroll_;

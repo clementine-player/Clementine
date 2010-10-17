@@ -70,5 +70,3 @@ static void ReloadPlaylistItem(PlaylistItemPtr item) {
 QFuture<void> PlaylistItem::BackgroundReload() {
   return QtConcurrent::run(ReloadPlaylistItem, shared_from_this());
 }
-
-

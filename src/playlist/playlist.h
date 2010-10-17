@@ -94,6 +94,7 @@ class Playlist : public QAbstractListModel {
     Role_IsPaused,
     Role_StopAfter,
     Role_QueuePosition,
+    Role_CanSetRating,
   };
 
   static const char* kRowsMimetype;

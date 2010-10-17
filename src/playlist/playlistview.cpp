@@ -71,6 +71,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
+    rating_delegate_(NULL),
     inhibit_autoscroll_timer_(new QTimer(this)),
     inhibit_autoscroll_(false),
     currently_autoscrolling_(false),
@@ -83,6 +84,7 @@ PlaylistView::PlaylistView(QWidget *parent)
   setHeader(header_);
   header_->setMovable(true);
   setStyle(style_);
+  setMouseTracking(true);
 
   connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
@@ -107,6 +109,8 @@ PlaylistView::PlaylistView(QWidget *parent)
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
+  rating_delegate_ = new RatingItemDelegate(this);
+
   setItemDelegate(new PlaylistDelegateBase(this));
   setItemDelegateForColumn(Playlist::Column_Title, new TextItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Album,
@@ -124,7 +128,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Samplerate, new PlaylistDelegateBase(this, ("Hz")));
   setItemDelegateForColumn(Playlist::Column_Bitrate, new PlaylistDelegateBase(this, tr("kbps")));
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Rating, new RatingItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
 }
 
@@ -454,8 +458,45 @@ void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHi
   }
 }
 
-void PlaylistView::mousePressEvent(QMouseEvent *event) {
-  QTreeView::mousePressEvent(event);
+void PlaylistView::mouseMoveEvent(QMouseEvent* event) {
+  QModelIndex index = indexAt(event->pos());
+  if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {
+    // Little hack to get hover effects on the rating column
+    rating_delegate_->set_mouse_over(index, event->pos());
+    update(index);
+    setCursor(Qt::PointingHandCursor);
+  } else if (rating_delegate_->is_mouse_over()) {
+    QModelIndex old_index = rating_delegate_->mouse_over_index();
+    rating_delegate_->set_mouse_out();
+    update(old_index);
+    setCursor(QCursor());
+  }
+
+  QTreeView::mouseMoveEvent(event);
+}
+
+void PlaylistView::leaveEvent(QEvent* e) {
+  if (rating_delegate_->is_mouse_over()) {
+    QModelIndex old_index = rating_delegate_->mouse_over_index();
+    rating_delegate_->set_mouse_out();
+    update(old_index);
+    setCursor(QCursor());
+  }
+
+  QTreeView::leaveEvent(e);
+}
+
+void PlaylistView::mousePressEvent(QMouseEvent* event) {
+  QModelIndex index = indexAt(event->pos());
+  if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {
+    // Calculate which star was clicked
+    double new_rating = RatingItemDelegate::RatingForPos(
+        event->pos(), visualRect(index));
+    emit SongRatingSet(index, new_rating);
+  } else {
+    QTreeView::mousePressEvent(event);
+  }
+
   inhibit_autoscroll_ = true;
   inhibit_autoscroll_timer_->start();
 }

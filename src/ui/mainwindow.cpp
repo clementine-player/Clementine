@@ -362,6 +362,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
+  connect(ui_->playlist->view(), SIGNAL(SongRatingSet(QModelIndex,double)), SLOT(PlaylistSongRated(QModelIndex,double)));
 
   connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
@@ -754,7 +755,7 @@ void MainWindow::MediaPlaying() {
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // If it was a library item then we have to increment its skipped count in
   // the database.
-  if (item && item->type() == "Library" && item->Metadata().id() != -1) {
+  if (item && item->IsLocalLibraryItem()) {
     library_->backend()->IncrementSkipCountAsync(item->Metadata().id());
   }
 }
@@ -912,7 +913,7 @@ void MainWindow::UpdateTrackPosition() {
     playlists_->active()->set_scrobbled(true);
 
     // Update the play count for the song if it's from the library
-    if (item->type() == "Library" && item->Metadata().id() != -1) {
+    if (item->IsLocalLibraryItem()) {
       library_->backend()->IncrementPlayCountAsync(item->Metadata().id());
     }
   }
@@ -1080,7 +1081,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     ui_->action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
 
     // Is it a library item?
-    if (playlists_->current()->item_at(source_index.row())->type() == "Library") {
+    if (playlists_->current()->item_at(source_index.row())->IsLocalLibraryItem()) {
       playlist_organise_->setVisible(editable);
     } else {
       playlist_copy_to_library_->setVisible(editable);
@@ -1279,6 +1280,15 @@ void MainWindow::PlaylistRemoveCurrent() {
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_)
     SelectionSetValue();
+}
+
+void MainWindow::PlaylistSongRated(const QModelIndex& index, double rating) {
+  const QModelIndex source_index =
+      playlists_->active()->proxy()->mapToSource(index);
+  PlaylistItemPtr item(playlists_->active()->item_at(source_index.row()));
+  if (item && item->IsLocalLibraryItem()) {
+    library_->backend()->UpdateSongRatingAsync(item->Metadata().id(), rating);
+  }
 }
 
 void MainWindow::CommandlineOptionsReceived(const QByteArray& serialized_options) {
