@@ -159,6 +159,8 @@ class Song {
   }
   float rating() const { return d->rating_; }
   int playcount() const { return d->playcount_; }
+  int skipcount() const { return d->skipcount_; }
+  int lastplayed() const { return d->lastplayed_; }
 
   int length() const { return d->length_; }
   int bitrate() const { return d->bitrate_; }
@@ -217,6 +219,8 @@ class Song {
   void set_forced_compilation_off(bool v) { d->forced_compilation_off_ = v; }
   void set_rating(float v) { d->rating_ = v; }
   void set_playcount(int v) { d->playcount_ = v; }
+  void set_skipcount(int v) { d->skipcount_ = v; }
+  void set_lastplayed(int v) { d->lastplayed_ = v; }
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }
@@ -260,6 +264,8 @@ class Song {
 
     float rating_;
     int playcount_;
+    int skipcount_;
+    int lastplayed_;
 
     int length_;
     int bitrate_;

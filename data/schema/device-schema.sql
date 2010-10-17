@@ -45,7 +45,9 @@ CREATE TABLE device_%deviceid_songs (
   rating INTEGER,
   forced_compilation_on INTEGER NOT NULL DEFAULT 0,
   forced_compilation_off INTEGER NOT NULL DEFAULT 0,
-  effective_compilation NOT NULL DEFAULT 0
+  effective_compilation NOT NULL DEFAULT 0,
+
+  skipcount INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);

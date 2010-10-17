@@ -43,6 +43,7 @@ class Database : public QObject {
 
   static const int kSchemaVersion;
   static const char* kDatabaseFilename;
+  static const char* kMagicAllSongsTables;
 
   void Stop() {}
 
@@ -58,6 +59,7 @@ class Database : public QObject {
 
  private:
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
+  QStringList SongsTables(QSqlDatabase& db) const;
 
   QString directory_;
   QMutex connect_mutex_;

@@ -89,7 +89,7 @@ const QStringList Song::kColumns = QStringList()
     << "mtime" << "ctime" << "filesize" << "sampler" << "art_automatic"
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
-    << "effective_compilation";
+    << "effective_compilation" << "skipcount";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
@@ -151,6 +151,8 @@ Song::Private::Private()
     forced_compilation_off_(false),
     rating_(-1.0),
     playcount_(0),
+    skipcount_(0),
+    lastplayed_(-1),
     length_(-1),
     bitrate_(-1),
     samplerate_(-1),
@@ -459,13 +461,15 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
 
   d->filetype_ = FileType(q.value(col + 24).toInt());
   d->playcount_ = q.value(col + 25).isNull() ? 0 : q.value(col + 25).toInt();
-  // lastplayed = 26
+  d->lastplayed_ = toint(col + 26);
   d->rating_ = tofloat(col + 27);
 
   d->forced_compilation_on_ = q.value(col + 28).toBool();
   d->forced_compilation_off_ = q.value(col + 29).toBool();
 
   // effective_compilation = 30
+
+  d->skipcount_ = q.value(col + 31).isNull() ? 0 : q.value(col + 31).toInt();
 
   #undef tostr
   #undef toint
@@ -508,6 +512,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->filetype_ = track->type2 ? Type_Mpeg : Type_Mp4;
     d->rating_ = float(track->rating) / 100; // 100 = 20 * 5 stars
     d->playcount_ = track->playcount;
+    d->skipcount_ = track->skipcount;
+    d->lastplayed_ = track->time_played;
 
     d->filename_ = QString::fromLocal8Bit(track->ipod_path);
     d->filename_.replace(':', '/');
@@ -538,6 +544,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->mediatype = 1; // Audio
     track->rating = d->rating_ * 100; // 100 = 20 * 5 stars
     track->playcount = d->playcount_;
+    track->skipcount = d->skipcount_;
+    track->time_played = d->lastplayed_;
   }
 #endif
 
@@ -905,13 +913,15 @@ void Song::BindToQuery(QSqlQuery *query) const {
 
   query->bindValue(":filetype", d->filetype_);
   query->bindValue(":playcount", d->playcount_);
-  query->bindValue(":lastplayed", -1); // TODO
+  query->bindValue(":lastplayed", intval(d->lastplayed_));
   query->bindValue(":rating", intval(d->rating_));
 
   query->bindValue(":forced_compilation_on", d->forced_compilation_on_ ? 1 : 0);
   query->bindValue(":forced_compilation_off", d->forced_compilation_off_ ? 1 : 0);
 
   query->bindValue(":effective_compilation", is_compilation() ? 1 : 0);
+
+  query->bindValue(":skipcount", d->skipcount_);
 
   #undef intval
   #undef notnullintval

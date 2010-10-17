@@ -29,7 +29,8 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 17;
+const int Database::kSchemaVersion = 18;
+const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
 QMutex Database::sNextConnectionIdMutex;
@@ -447,10 +448,33 @@ void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
   // Run each command
   QStringList commands(schema.split(";\n\n"));
   foreach (const QString& command, commands) {
-    QSqlQuery query(db.exec(command));
-    if (CheckErrors(query.lastError()))
-      qFatal("Unable to update music library database");
+    // There are now lots of "songs" tables that need to have the same schema:
+    // songs, magnatune_songs, and device_*_songs.  We allow a magic value
+    // in the schema files to update all songs tables at once.
+    if (command.contains(kMagicAllSongsTables)) {
+      foreach (const QString& table, SongsTables(db)) {
+        qDebug() << "Updating" << table << "for" << kMagicAllSongsTables;
+        QString new_command(command);
+        new_command.replace(kMagicAllSongsTables, table);
+        QSqlQuery query(db.exec(new_command));
+        if (CheckErrors(query.lastError()))
+          qFatal("Unable to update music library database");
+      }
+    } else {
+      QSqlQuery query(db.exec(command));
+      if (CheckErrors(query.lastError()))
+        qFatal("Unable to update music library database");
+    }
   }
+}
+
+QStringList Database::SongsTables(QSqlDatabase& db) const {
+  QStringList ret;
+  foreach (const QString& table, db.tables()) {
+    if (table == "songs" || table.endsWith("_songs"))
+      ret << table;
+  }
+  return ret;
 }
 
 bool Database::CheckErrors(const QSqlError& error) {
