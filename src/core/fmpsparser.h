@@ -24,13 +24,20 @@ class FMPSParser {
 public:
   FMPSParser();
 
+  // A FMPS result is a list of lists of values (where a value is a string or
+  // a float).
   typedef QList<QVariantList> Result;
 
+  // Parses a FMPS value and returns true on success.
   bool Parse(const QString& data);
+
+  // Gets the result of the last successful Parse.
   Result result() const { return result_; }
 
+  // Returns true if result() is empty.
   bool is_empty() const { return result().isEmpty() || result()[0].isEmpty(); }
 
+  // Internal functions, public for unit tests
   int ParseValue(const QString& data, QVariant* ret) const;
   int ParseValueRef(const QStringRef& data, QVariant* ret) const;
 
