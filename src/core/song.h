@@ -157,6 +157,8 @@ class Song {
     return (d->compilation_ || d->sampler_ || d->forced_compilation_on_)
             && ! d->forced_compilation_off_;
   }
+  float rating() const { return d->rating_; }
+  int playcount() const { return d->playcount_; }
 
   int length() const { return d->length_; }
   int bitrate() const { return d->bitrate_; }
@@ -213,6 +215,8 @@ class Song {
   void set_image(const QImage& i) { d->image_ = i; }
   void set_forced_compilation_on(bool v) { d->forced_compilation_on_ = v; }
   void set_forced_compilation_off(bool v) { d->forced_compilation_off_ = v; }
+  void set_rating(float v) { d->rating_ = v; }
+  void set_playcount(int v) { d->playcount_ = v; }
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }
@@ -229,6 +233,7 @@ class Song {
   // Helper methods for taglib
   static void SetTextFrame(const QString& id, const QString& value,
                            TagLib::ID3v2::Tag* tag);
+  void ParseFMPSFrame(const QString& name, const QString& value);
 
  private:
   struct Private : public QSharedData {
@@ -252,6 +257,9 @@ class Song {
     bool sampler_;                // From the library scanner
     bool forced_compilation_on_;  // Set by the user
     bool forced_compilation_off_; // Set by the user
+
+    float rating_;
+    int playcount_;
 
     int length_;
     int bitrate_;

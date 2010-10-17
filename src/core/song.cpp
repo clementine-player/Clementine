@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "fmpsparser.h"
 #include "song.h"
 
 #include <algorithm>
@@ -148,6 +149,8 @@ Song::Private::Private()
     sampler_(false),
     forced_compilation_on_(false),
     forced_compilation_off_(false),
+    rating_(-1.0),
+    playcount_(0),
     length_(-1),
     bitrate_(-1),
     samplerate_(-1),
@@ -279,6 +282,17 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
           break;
         }
       }
+
+      // Parse FMPS frames
+      for (int i=0 ; i<map["TXXX"].size() ; ++i) {
+        const TagLib::ID3v2::UserTextIdentificationFrame* frame =
+            dynamic_cast<const TagLib::ID3v2::UserTextIdentificationFrame*>(map["TXXX"][i]);
+
+        if (frame->description().startsWith("FMPS_")) {
+          ParseFMPSFrame(TStringToQString(frame->description()),
+                         TStringToQString(frame->fieldList()[1]));
+        }
+      }
     }
   } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
@@ -320,6 +334,41 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   // Get the filetype if we can
   GuessFileType(fileref.get());
+}
+
+void Song::ParseFMPSFrame(const QString& name, const QString& value) {
+  FMPSParser parser;
+  if (!parser.Parse(value) || parser.is_empty())
+    return;
+
+  QVariant var;
+  if (name == "FMPS_Rating") {
+    var = parser.result()[0][0];
+    if (var.type() == QVariant::Double) {
+      d->rating_ = var.toDouble();
+    }
+  } else if (name == "FMPS_Rating_User") {
+    // Take a user rating only if there's no rating already set
+    if (d->rating_ == -1 && parser.result()[0].count() >= 2) {
+      var = parser.result()[0][1];
+      if (var.type() == QVariant::Double) {
+        d->rating_ = var.toDouble();
+      }
+    }
+  } else if (name == "FMPS_PlayCount") {
+    var = parser.result()[0][0];
+    if (var.type() == QVariant::Double) {
+      d->playcount_ = var.toDouble();
+    }
+  } else if (name == "FMPS_PlayCount_User") {
+    // Take a user rating only if there's no playcount already set
+    if (d->rating_ == -1 && parser.result()[0].count() >= 2) {
+      var = parser.result()[0][1];
+      if (var.type() == QVariant::Double) {
+        d->playcount_ = var.toDouble();
+      }
+    }
+  }
 }
 
 void Song::ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec,
@@ -409,9 +458,9 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   d->art_manual_ = q.value(col + 23).toString();
 
   d->filetype_ = FileType(q.value(col + 24).toInt());
-  // playcount = 25
+  d->playcount_ = q.value(col + 25).isNull() ? 0 : q.value(col + 25).toInt();
   // lastplayed = 26
-  // rating = 27
+  d->rating_ = tofloat(col + 27);
 
   d->forced_compilation_on_ = q.value(col + 28).toBool();
   d->forced_compilation_off_ = q.value(col + 29).toBool();
@@ -457,6 +506,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->ctime_ = track->time_added;
     d->filesize_ = track->size;
     d->filetype_ = track->type2 ? Type_Mpeg : Type_Mp4;
+    d->rating_ = float(track->rating) / 100; // 100 = 20 * 5 stars
+    d->playcount_ = track->playcount;
 
     d->filename_ = QString::fromLocal8Bit(track->ipod_path);
     d->filename_.replace(':', '/');
@@ -485,6 +536,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->type1 = 0;
     track->type2 = d->filetype_ == Type_Mp4 ? 0 : 1;
     track->mediatype = 1; // Audio
+    track->rating = d->rating_ * 100; // 100 = 20 * 5 stars
+    track->playcount = d->playcount_;
   }
 #endif
 
@@ -507,6 +560,9 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->filesize_ = track->filesize;
     d->mtime_ = track->modificationdate;
     d->ctime_ = track->modificationdate;
+
+    d->rating_ = float(track->rating) / 100;
+    d->playcount_ = track->usecount;
 
     switch (track->filetype) {
       case LIBMTP_FILETYPE_WAV:  d->filetype_ = Type_Wav;       break;
@@ -544,8 +600,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->wavecodec = 0;
     track->bitrate = d->bitrate_;
     track->bitratetype = 0;
-    track->rating = 0;
-    track->usecount = 0;
+    track->rating = d->rating_ * 100;
+    track->usecount = d->playcount_;
     track->filesize = d->filesize_;
     track->modificationdate = d->mtime_;
 
@@ -848,9 +904,9 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":art_manual", d->art_manual_);
 
   query->bindValue(":filetype", d->filetype_);
-  query->bindValue(":playcount", 0); // TODO
+  query->bindValue(":playcount", d->playcount_);
   query->bindValue(":lastplayed", -1); // TODO
-  query->bindValue(":rating", -1);
+  query->bindValue(":rating", intval(d->rating_));
 
   query->bindValue(":forced_compilation_on", d->forced_compilation_on_ ? 1 : 0);
   query->bindValue(":forced_compilation_off", d->forced_compilation_off_ ? 1 : 0);

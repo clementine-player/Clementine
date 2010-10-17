@@ -187,4 +187,46 @@ TEST_F(SongTest, DecodesAmbiguousLatin1AndWindows1252) {
   EXPECT_EQ(QString::fromUtf8("Sudáfrica"), fixed);
 }
 
+TEST_F(SongTest, FMPSRating) {
+  TemporaryResource r(":/testdata/fmpsrating.mp3");
+  Song song;
+  song.InitFromFile(r.fileName(), -1);
+  EXPECT_FLOAT_EQ(0.42, song.rating());
+}
+
+TEST_F(SongTest, FMPSRatingUser) {
+  TemporaryResource r(":/testdata/fmpsratinguser.mp3");
+  Song song;
+  song.InitFromFile(r.fileName(), -1);
+  EXPECT_FLOAT_EQ(0.10, song.rating());
+}
+
+TEST_F(SongTest, FMPSRatingBoth) {
+  TemporaryResource r(":/testdata/fmpsratingboth.mp3");
+  Song song;
+  song.InitFromFile(r.fileName(), -1);
+  EXPECT_FLOAT_EQ(0.42, song.rating());
+}
+
+TEST_F(SongTest, FMPSPlayCount) {
+  TemporaryResource r(":/testdata/fmpsplaycount.mp3");
+  Song song;
+  song.InitFromFile(r.fileName(), -1);
+  EXPECT_EQ(123, song.playcount());
+}
+
+TEST_F(SongTest, FMPSPlayCountUser) {
+  TemporaryResource r(":/testdata/fmpsplaycountuser.mp3");
+  Song song;
+  song.InitFromFile(r.fileName(), -1);
+  EXPECT_EQ(42, song.playcount());
+}
+
+TEST_F(SongTest, FMPSPlayCountBoth) {
+  TemporaryResource r(":/testdata/fmpsplaycountboth.mp3");
+  Song song;
+  song.InitFromFile(r.fileName(), -1);
+  EXPECT_EQ(123, song.playcount());
+}
+
 }  // namespace

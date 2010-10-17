@@ -42,6 +42,7 @@ set(SOURCES
   core/encoding.cpp
   core/filesystemmusicstorage.cpp
   core/fht.cpp
+  core/fmpsparser.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp

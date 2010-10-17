@@ -33,6 +33,16 @@ std::ostream& operator <<(std::ostream& stream, const QVariant& var);
 std::ostream& operator <<(std::ostream& stream, const QUrl& url);
 std::ostream& operator <<(std::ostream& stream, const QNetworkRequest& req);
 
+template <typename T>
+std::ostream& operator <<(std::ostream& stream, const QList<T>& list) {
+  stream << "QList(";
+  foreach (const T& item, list) {
+    stream << item << ",";
+  }
+  stream << ")";
+  return stream;
+}
+
 void PrintTo(const ::QString& str, std::ostream& os);
 void PrintTo(const ::QVariant& var, std::ostream& os);
 
