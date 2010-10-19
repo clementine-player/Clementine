@@ -459,6 +459,7 @@ QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
   AddMetadata("samplerate", song.samplerate(), &ret);
   AddMetadata("bpm", song.bpm(), &ret);
   AddMetadata("composer", song.composer(), &ret);
+  AddMetadata("mtime", song.length() * 1000, &ret);
 
   return ret;
 }

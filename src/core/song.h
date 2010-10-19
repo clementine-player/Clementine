@@ -267,7 +267,7 @@ class Song {
     int skipcount_;
     int lastplayed_;
 
-    int length_;
+    int length_;  // Seconds.
     int bitrate_;
     int samplerate_;
 
