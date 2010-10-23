@@ -387,41 +387,12 @@ set(RESOURCES
 
 set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
 if (LINGUAS STREQUAL "All")
-  set (LANGUAGES
-    ar
-    bg
-    ca
-    cs
-    da
-    de
-    el
-    en_CA
-    en_GB
-    es
-    fi
-    fr
-    gl
-    hu
-    it
-    kk
-    lt
-    nb
-    nl
-    oc
-    pl
-    pt
-    pt_BR
-    ro
-    ru
-    sk
-    sl
-    sr
-    sv
-    tr
-    uk
-    zh_CN
-    zh_TW
-  )
+  # build LANGUAGES from all existing .po files
+  file(GLOB pofiles translations/*.po)
+  foreach(pofile ${pofiles})
+    get_filename_component(lang ${pofile} NAME_WE)
+    list(APPEND LANGUAGES ${lang})
+  endforeach(pofile)
 else (LINGUAS STREQUAL "All")
   if (NOT LINGUAS OR LINGUAS STREQUAL "None")
     set (LANGUAGES "")
