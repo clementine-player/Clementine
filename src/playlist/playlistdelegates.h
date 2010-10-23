@@ -120,12 +120,11 @@ public:
   static QRect ContentRect(const QRect& total);
   static double RatingForPos(const QPoint& pos, const QRect& total_rect);
 
-  static const int kStarCount;
-  static const float kEmptyOpacity;
-  static const float kFullOpacity;
+  static const int kStarCount = 5;
+  static const int kStarSize = 15;
 
 private:
-  QIcon star_;
+  QPixmap stars_[kStarCount*2+1];
 
   QModelIndex mouse_over_index_;
   QPoint mouse_over_pos_;

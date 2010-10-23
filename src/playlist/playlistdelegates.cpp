@@ -42,9 +42,8 @@ const float QueuedItemDelegate::kQueueOpacityLowerBound = 0.4;
 
 const int   PlaylistDelegateBase::kMinHeight = 19;
 
-const int   RatingItemDelegate::kStarCount = 5; // There are 4 stars
-const float RatingItemDelegate::kFullOpacity = 1.0;
-const float RatingItemDelegate::kEmptyOpacity = 0.5;
+const int   RatingItemDelegate::kStarCount;
+const int   RatingItemDelegate::kStarSize;
 
 QueuedItemDelegate::QueuedItemDelegate(QObject *parent, int indicator_column)
   : QStyledItemDelegate(parent),
@@ -291,9 +290,43 @@ QWidget* TextItemDelegate::createEditor(
 }
 
 RatingItemDelegate::RatingItemDelegate(QObject* parent)
-  : PlaylistDelegateBase(parent),
-    star_(IconLoader::Load("rating"))
+  : PlaylistDelegateBase(parent)
 {
+  // Load the base pixmaps
+  QPixmap on(":/star-on.png");
+  QPixmap off(":/star-off.png");
+
+  // Generate the 10 states, better to do it now than on the fly
+  for (int i=0 ; i<kStarCount*2+1 ; ++i) {
+    const float rating = float(i) / 2.0;
+
+    // Clear the pixmap
+    stars_[i] = QPixmap(kStarSize * kStarCount, kStarSize);
+    stars_[i].fill(Qt::transparent);
+    QPainter p(&stars_[i]);
+
+    // Draw the stars
+    int x = 0;
+    for (int i=0 ; i<kStarCount ; ++i, x+=kStarSize) {
+      const QRect rect(x, 0, kStarSize, kStarSize);
+
+      if (rating - 0.25 <= i) {
+        // Totally empty
+        p.drawPixmap(rect, off);
+      } else if (rating - 0.75 <= i) {
+        // Half full
+        const QRect target_left(rect.x(), rect.y(), kStarSize/2, kStarSize);
+        const QRect target_right(rect.x() + kStarSize/2, rect.y(), kStarSize/2, kStarSize);
+        const QRect source_left(0, 0, kStarSize/2, kStarSize);
+        const QRect source_right(kStarSize/2, 0, kStarSize/2, kStarSize);
+        p.drawPixmap(target_left, on, source_left);
+        p.drawPixmap(target_right, off, source_right);
+      } else {
+        // Totally full
+        p.drawPixmap(rect, on);
+      }
+    }
+  }
 }
 
 QRect RatingItemDelegate::ContentRect(const QRect& total) {
@@ -323,47 +356,17 @@ void RatingItemDelegate::paint(
   if (!index.data(Playlist::Role_CanSetRating).toBool())
     return;
 
-  const int star_size = option.rect.height();
-  const int width = star_size * kStarCount;
-  const bool hover = mouse_over_index_ == index;
-  int x = option.rect.x() + (option.rect.width() - width) / 2;
+  QSize size(qMin(kStarSize*kStarCount, option.rect.width()),
+             qMin(kStarSize, option.rect.height()));
+  QPoint pos(option.rect.center() - QPoint(size.width() / 2, size.height() / 2));
 
-  const double rating = hover ? double(mouse_over_pos_.x() - x) / star_size
+  const bool hover = mouse_over_index_ == index;
+  const double rating = hover ? double(mouse_over_pos_.x() - pos.x()) / kStarSize
                               : index.data().toDouble() * kStarCount;
 
-  const QPixmap empty(star_.pixmap(star_size, QIcon::Disabled));
-  const QPixmap full(star_.pixmap(star_size));
-
-  // Set the clip rect so we don't draw outside the item
-  painter->setClipRect(option.rect);
-
   // Draw the stars
-  for (int i=0 ; i<kStarCount ; ++i, x+=star_size) {
-    const QRect rect(x, option.rect.y(), star_size, star_size);
-
-    if (rating - 0.25 <= i) {
-      // Totally empty
-      painter->setOpacity(kEmptyOpacity);
-      painter->drawPixmap(rect, empty);
-    } else if (rating - 0.75 <= i) {
-      // Half full
-      const QRect target_left(rect.x(), rect.y(), rect.width()/2, rect.height());
-      const QRect target_right(rect.x() + rect.width()/2, rect.y(), rect.width()/2, rect.height());
-      const QRect source_left(0, 0, empty.width()/2, empty.height());
-      const QRect source_right(empty.width()/2, 0, empty.width()/2, empty.height());
-      painter->setOpacity(kFullOpacity);
-      painter->drawPixmap(target_left, full, source_left);
-      painter->setOpacity(kEmptyOpacity);
-      painter->drawPixmap(target_right, empty, source_right);
-    } else {
-      // Totally full
-      painter->setOpacity(kFullOpacity);
-      painter->drawPixmap(rect, full);
-    }
-  }
-
-  painter->setOpacity(1.0);
-  painter->setClipping(false);
+  const int star = qBound(0, int(rating*2.0 + 0.5), kStarCount*2);
+  painter->drawPixmap(QRect(pos, size), stars_[star], QRect(QPoint(0,0), size));
 }
 
 QSize RatingItemDelegate::sizeHint(
