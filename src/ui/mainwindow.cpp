@@ -546,7 +546,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   }
   ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 0).toInt());
   ui_->tabs->SetMode(FancyTabWidget::Mode(settings_.value(
-      "tab_mode", FancyTabWidget::Mode_LargeSidebar).toInt()));
+      "tab_mode", FancyTabWidget::Mode_SmallSidebar).toInt()));
   file_view_->SetPath(settings_.value("file_path", QDir::homePath()).toString());
 
   ReloadSettings();
