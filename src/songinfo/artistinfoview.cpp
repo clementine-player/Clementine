@@ -47,12 +47,14 @@ void ArtistInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) 
 
   Clear();
 
-  // Image view goes at the top
-  PrettyImageView* image_view = new PrettyImageView(this);
-  AddWidget(image_view);
+  if (!result.images_.isEmpty()) {
+    // Image view goes at the top
+    PrettyImageView* image_view = new PrettyImageView(this);
+    AddWidget(image_view);
 
-  foreach (const QUrl& url, result.images_) {
-    image_view->AddImage(url);
+    foreach (const QUrl& url, result.images_) {
+      image_view->AddImage(url);
+    }
   }
 
   foreach (const CollapsibleInfoPane::Data& data, result.info_) {
