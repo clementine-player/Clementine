@@ -755,7 +755,7 @@ void MainWindow::MediaPlaying() {
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // If it was a library item then we have to increment its skipped count in
   // the database.
-  if (item && item->IsLocalLibraryItem()) {
+  if (item && item->IsLocalLibraryItem() && !playlists_->active()->has_scrobbled()) {
     library_->backend()->IncrementSkipCountAsync(item->Metadata().id());
   }
 }
