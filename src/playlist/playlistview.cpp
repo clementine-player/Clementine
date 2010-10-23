@@ -55,7 +55,8 @@ void PlaylistProxyStyle::drawControl(
 }
 
 void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const {
-  if (element == QStyle::PE_PanelItemViewRow)
+  if (element == QStyle::PE_PanelItemViewRow ||
+      element == QStyle::PE_PanelItemViewItem)
     cleanlooks_->drawPrimitive(element, option, painter, widget);
   else
     QProxyStyle::drawPrimitive(element, option, painter, widget);
