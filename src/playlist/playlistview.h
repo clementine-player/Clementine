@@ -111,14 +111,14 @@ class PlaylistView : public QTreeView {
   void SaveSettings();
   void StretchChanged(bool stretch);
 
+  void RatingHoverIn(const QModelIndex& index, const QPoint& pos);
+  void RatingHoverOut();
+
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
   void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                     const QModelIndex& index);
-
-  void RatingHoverIn(const QModelIndex& index, const QPoint& pos);
-  void RatingHoverOut();
 
  private:
   static const int kGlowIntensitySteps;

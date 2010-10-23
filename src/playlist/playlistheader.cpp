@@ -81,3 +81,7 @@ void PlaylistHeader::ToggleVisible(int section) {
   SetSectionHidden(section, !isSectionHidden(section));
   emit SectionVisibilityChanged(section, !isSectionHidden(section));
 }
+
+void PlaylistHeader::enterEvent(QEvent*) {
+  emit MouseEntered();
+}

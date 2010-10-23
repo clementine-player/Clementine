@@ -95,6 +95,7 @@ PlaylistView::PlaylistView(QWidget *parent)
   connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(SaveSettings()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(StretchChanged(bool)));
+  connect(header_, SIGNAL(MouseEntered()), SLOT(RatingHoverOut()));
 
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
