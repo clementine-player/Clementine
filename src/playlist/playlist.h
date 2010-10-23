@@ -177,6 +177,7 @@ class Playlist : public QAbstractListModel {
 
   void ClearStreamMetadata();
   void SetStreamMetadata(const QUrl& url, const Song& song);
+  void ItemChanged(PlaylistItemPtr item);
 
   void Clear();
   void Shuffle();

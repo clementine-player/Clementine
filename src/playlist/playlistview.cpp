@@ -236,6 +236,12 @@ QList<QPixmap> PlaylistView::LoadBarPixmap(const QString& filename) {
   return ret;
 }
 
+void PlaylistView::drawTree(QPainter* painter, const QRegion& region) const {
+  const_cast<PlaylistView*>(this)->current_paint_region_ = region;
+  QTreeView::drawTree(painter, region);
+  const_cast<PlaylistView*>(this)->current_paint_region_ = QRegion();
+}
+
 void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
   QStyleOptionViewItemV4 opt(option);
 
@@ -286,13 +292,26 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
 
     // Draw the actual row data on top.  We cache this, because it's fairly
     // expensive (1-2ms), and we do it many times per second.
-    if (cached_current_row_rect_ != opt.rect ||
-        cached_current_row_row_ != index.row() ||
-        cached_current_row_.isNull()) {
-      const_cast<PlaylistView*>(this)->UpdateCachedCurrentRowPixmap(opt, index);
-    }
+    const bool cache_dirty = cached_current_row_rect_ != opt.rect ||
+                             cached_current_row_row_ != index.row() ||
+                             cached_current_row_.isNull();
 
-    painter->drawPixmap(opt.rect, cached_current_row_);
+    // We can't update the cache if we're not drawing the entire region,
+    // QTreeView clips its drawing to only the columns in the region, so it
+    // wouldn't update the whole pixmap properly.
+    const bool whole_region =
+        current_paint_region_.boundingRect().width() == viewport()->width();
+
+    if (!cache_dirty) {
+      painter->drawPixmap(opt.rect, cached_current_row_);
+    } else {
+      if (whole_region) {
+        const_cast<PlaylistView*>(this)->UpdateCachedCurrentRowPixmap(opt, index);
+        painter->drawPixmap(opt.rect, cached_current_row_);
+      } else {
+        QTreeView::drawRow(painter, opt, index);
+      }
+    }
   } else {
     QTreeView::drawRow(painter, opt, index);
   }
@@ -309,7 +328,6 @@ void PlaylistView::UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
 
   QPainter p(&cached_current_row_);
   QTreeView::drawRow(&p, option, index);
-  p.end();
 }
 
 void PlaylistView::InvalidateCachedCurrentPixmap() {
@@ -461,29 +479,41 @@ void PlaylistView::closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHi
 void PlaylistView::mouseMoveEvent(QMouseEvent* event) {
   QModelIndex index = indexAt(event->pos());
   if (index.isValid() && index.data(Playlist::Role_CanSetRating).toBool()) {
-    // Little hack to get hover effects on the rating column
-    rating_delegate_->set_mouse_over(index, event->pos());
-    update(index);
-    setCursor(Qt::PointingHandCursor);
+    RatingHoverIn(index, event->pos());
   } else if (rating_delegate_->is_mouse_over()) {
-    QModelIndex old_index = rating_delegate_->mouse_over_index();
-    rating_delegate_->set_mouse_out();
-    update(old_index);
-    setCursor(QCursor());
+    RatingHoverOut();
   }
-
   QTreeView::mouseMoveEvent(event);
 }
 
 void PlaylistView::leaveEvent(QEvent* e) {
   if (rating_delegate_->is_mouse_over()) {
-    QModelIndex old_index = rating_delegate_->mouse_over_index();
-    rating_delegate_->set_mouse_out();
-    update(old_index);
-    setCursor(QCursor());
+    RatingHoverOut();
   }
-
   QTreeView::leaveEvent(e);
+}
+
+void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
+  const QModelIndex old_index = rating_delegate_->mouse_over_index();
+  rating_delegate_->set_mouse_over(index, pos);
+  update(index);
+  setCursor(Qt::PointingHandCursor);
+
+  if (index.data(Playlist::Role_IsCurrent).toBool() ||
+      old_index.data(Playlist::Role_IsCurrent).toBool()) {
+    InvalidateCachedCurrentPixmap();
+  }
+}
+
+void PlaylistView::RatingHoverOut() {
+  const QModelIndex old_index = rating_delegate_->mouse_over_index();
+  rating_delegate_->set_mouse_out();
+  update(old_index);
+  setCursor(QCursor());
+
+  if (old_index.data(Playlist::Role_IsCurrent).toBool()) {
+    InvalidateCachedCurrentPixmap();
+  }
 }
 
 void PlaylistView::mousePressEvent(QMouseEvent* event) {

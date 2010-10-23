@@ -268,6 +268,7 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
         if (item->Metadata().directory_id() != song.directory_id())
           continue;
         static_cast<LibraryPlaylistItem*>(item.get())->SetMetadata(song);
+        data.p->ItemChanged(item);
       }
     }
   }

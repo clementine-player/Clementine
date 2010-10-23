@@ -1194,3 +1194,12 @@ QDataStream& operator >>(QDataStream& s, Playlist*& p) {
   s.readRawData(reinterpret_cast<char*>(&p), sizeof(p));
   return s;
 }
+
+void Playlist::ItemChanged(PlaylistItemPtr item) {
+  for (int row=0 ; row<items_.count() ; ++row) {
+    if (items_[row] == item) {
+      emit dataChanged(index(row, 0), index(row, ColumnCount-1));
+      return;
+    }
+  }
+}

@@ -65,6 +65,7 @@ class PlaylistView : public QTreeView {
   void RemoveSelected();
 
   // QTreeView
+  void drawTree(QPainter* painter, const QRegion& region) const;
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
   void keyPressEvent(QKeyEvent* event);
   void setModel(QAbstractItemModel *model);
@@ -116,6 +117,9 @@ class PlaylistView : public QTreeView {
   void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                     const QModelIndex& index);
 
+  void RatingHoverIn(const QModelIndex& index, const QPoint& pos);
+  void RatingHoverOut();
+
  private:
   static const int kGlowIntensitySteps;
   static const int kAutoscrollGraceTimeout;
@@ -151,6 +155,7 @@ class PlaylistView : public QTreeView {
   QPixmap currenttrack_play_;
   QPixmap currenttrack_pause_;
 
+  QRegion current_paint_region_;
   QPixmap cached_current_row_;
   QRect cached_current_row_rect_;
   int cached_current_row_row_;
