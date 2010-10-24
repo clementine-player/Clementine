@@ -63,6 +63,7 @@ make %{?_smp_mflags}
 %install
 cd bin
 make install DESTDIR=$RPM_BUILD_ROOT
+rm -f $RPM_BUILD_ROOT/usr/share/icons/ubuntu-mono-{dark,light}/apps/24/clementine-panel*.png
 
 %clean
 cd bin
