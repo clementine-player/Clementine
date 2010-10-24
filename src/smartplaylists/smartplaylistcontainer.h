@@ -35,7 +35,7 @@ public:
   SmartPlaylistContainer(QWidget* parent);
   ~SmartPlaylistContainer();
 
-  void set_library(LibraryBackend* library) { library_ = library; }
+  void set_library(LibraryBackend* library);
   void set_playlists(PlaylistManager* playlist_manager) { playlist_manager_ = playlist_manager; }
 
 protected:
@@ -48,7 +48,6 @@ private:
   Ui_SmartPlaylistContainer* ui_;
   bool first_show_;
 
-  LibraryBackend* library_;
   SmartPlaylistModel* model_;
   PlaylistManager* playlist_manager_;
 };

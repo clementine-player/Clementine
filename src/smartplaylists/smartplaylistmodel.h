@@ -47,9 +47,14 @@ public:
   };
 
   static const char* kSettingsGroup;
+  static const char* kMimeType;
 
-  PlaylistGeneratorPtr CreateGenerator(const QModelIndex& index,
-                                       LibraryBackend* library) const;
+  void set_library(LibraryBackend* library) { library_ = library; }
+
+  PlaylistGeneratorPtr CreateGenerator(const QModelIndex& index) const;
+
+  // QAbstractItemModel
+  QMimeData* mimeData(const QModelIndexList& indexes) const;
 
 private:
   void Load(const char* name, QStandardItem* parent);
@@ -61,6 +66,8 @@ private:
   QStandardItem* CreateContainer(const QString& name, const QString& group);
 
 private:
+  LibraryBackend* library_;
+
   QIcon container_icon_;
   QIcon playlist_icon_;
 

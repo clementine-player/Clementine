@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "generatormimedata.h"
 #include "playlistgenerator.h"
 #include "smartplaylistmodel.h"
 #include "ui/iconloader.h"
@@ -21,9 +22,11 @@
 #include <QSettings>
 
 const char* SmartPlaylistModel::kSettingsGroup = "SmartPlaylists";
+const char* SmartPlaylistModel::kMimeType = "application/x-clementine-smart-playlist-generator";
 
 SmartPlaylistModel::SmartPlaylistModel(QObject* parent)
   : QStandardItemModel(parent),
+    library_(NULL),
     container_icon_(IconLoader::Load("folder")),
     playlist_icon_(IconLoader::Load("view-media-playlist")),
     smart_item_(CreateContainer(tr("Smart playlists"), "smart")),
@@ -94,8 +97,7 @@ void SmartPlaylistModel::SaveDefaultQuery(QSettings* s, int i,
   if (!order.isEmpty()) s->setValue("order", order);
 }
 
-PlaylistGeneratorPtr SmartPlaylistModel::CreateGenerator(
-    const QModelIndex& index, LibraryBackend* library) const {
+PlaylistGeneratorPtr SmartPlaylistModel::CreateGenerator(const QModelIndex& index) const {
   PlaylistGeneratorPtr ret;
 
   // Get the item
@@ -124,7 +126,17 @@ PlaylistGeneratorPtr SmartPlaylistModel::CreateGenerator(
     return ret;
 
   // Initialise the generator
-  ret->set_library(library);
+  ret->set_library(library_);
   ret->Load(s);
   return ret;
+}
+
+QMimeData* SmartPlaylistModel::mimeData(const QModelIndexList& indexes) const {
+  PlaylistGeneratorPtr generator = CreateGenerator(indexes.first());
+  if (!generator)
+    return NULL;
+
+  GeneratorMimeData* data = new GeneratorMimeData(generator);
+  data->setData(kMimeType, QByteArray());
+  return data;
 }

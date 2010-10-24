@@ -32,7 +32,9 @@
 #include "radio/radiomodel.h"
 #include "radio/radioplaylistitem.h"
 #include "radio/savedradio.h"
+#include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/playlistgeneratorinserter.h"
+#include "smartplaylists/smartplaylistmodel.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -493,7 +495,6 @@ void Playlist::set_current_index(int i) {
 }
 
 Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
-
   Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 
   if(column_is_editable((Column)index.column()))
@@ -506,7 +507,9 @@ Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
 }
 
 QStringList Playlist::mimeTypes() const {
-  return QStringList() << "text/uri-list" << kRowsMimetype;
+  qDebug() << __PRETTY_FUNCTION__;
+  return QStringList() << "text/uri-list" << kRowsMimetype
+                       << SmartPlaylistModel::kMimeType;
 }
 
 Qt::DropActions Playlist::supportedDropActions() const {
@@ -530,6 +533,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
     InsertRadioStations(radio_data->items, row, data->hasFormat(kPlayNowMimetype));
+  } else if (const GeneratorMimeData* generator_data = qobject_cast<const GeneratorMimeData*>(data)) {
+    InsertSmartPlaylist(generator_data->generator_, row, data->hasFormat(kPlayNowMimetype));
   } else if (data->hasFormat(kRowsMimetype)) {
     // Dragged from the playlist
     // Rearranging it is tricky...

@@ -169,7 +169,6 @@ class Playlist : public QAbstractListModel {
   void sort(int column, Qt::SortOrder order);
   bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
 
-
  public slots:
   void set_current_index(int index);
   void Paused();

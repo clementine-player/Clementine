@@ -24,7 +24,6 @@ SmartPlaylistContainer::SmartPlaylistContainer(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_SmartPlaylistContainer),
     first_show_(true),
-    library_(NULL),
     model_(new SmartPlaylistModel(this)),
     playlist_manager_(NULL)
 {
@@ -39,6 +38,10 @@ SmartPlaylistContainer::~SmartPlaylistContainer() {
   delete ui_;
 }
 
+void SmartPlaylistContainer::set_library(LibraryBackend* library) {
+  model_->set_library(library);
+}
+
 void SmartPlaylistContainer::showEvent(QShowEvent*) {
   if (!first_show_)
     return;
@@ -50,7 +53,7 @@ void SmartPlaylistContainer::showEvent(QShowEvent*) {
 }
 
 void SmartPlaylistContainer::Play(const QModelIndex& index, bool as_new, bool clear) {
-  PlaylistGeneratorPtr generator = model_->CreateGenerator(index, library_);
+  PlaylistGeneratorPtr generator = model_->CreateGenerator(index);
   if (!generator)
     return;
 

@@ -284,6 +284,7 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
+  smartplaylists/generatormimedata.h
   smartplaylists/playlistgenerator.h
   smartplaylists/playlistgeneratorinserter.h
   smartplaylists/smartplaylistcontainer.h
