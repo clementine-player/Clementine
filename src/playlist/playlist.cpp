@@ -32,6 +32,7 @@
 #include "radio/radiomodel.h"
 #include "radio/radioplaylistitem.h"
 #include "radio/savedradio.h"
+#include "smartplaylists/playlistgeneratorinserter.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -574,6 +575,14 @@ void Playlist::InsertUrls(const QList<QUrl> &urls, bool play_now, int pos) {
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 
   inserter->Load(this, pos, play_now, urls);
+}
+
+void Playlist::InsertSmartPlaylist(PlaylistGeneratorPtr generator, int pos, bool play_now) {
+  PlaylistGeneratorInserter* inserter = new PlaylistGeneratorInserter(task_manager_, library_, this);
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
+
+  inserter->Load(this, pos, play_now, generator);
 }
 
 void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {

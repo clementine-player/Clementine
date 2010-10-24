@@ -57,6 +57,7 @@ class QueueManager;
 class RadioItem;
 class RadioModel;
 class RadioViewContainer;
+class SmartPlaylistContainer;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -224,6 +225,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   LibraryViewContainer* library_view_;
   FileView* file_view_;
+  SmartPlaylistContainer* smart_playlist_view_;
   RadioViewContainer* radio_view_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;

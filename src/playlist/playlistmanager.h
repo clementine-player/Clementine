@@ -22,6 +22,7 @@
 #include <QObject>
 
 #include "core/song.h"
+#include "smartplaylists/playlistgenerator_fwd.h"
 
 class LibraryBackend;
 class Playlist;
@@ -83,6 +84,8 @@ public slots:
   void SetActivePaused();
   void SetActiveStopped();
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
+
+  void PlaySmartPlaylist(PlaylistGeneratorPtr generator, bool as_new, bool clear);
 
 signals:
   void PlaylistAdded(int id, const QString& name);

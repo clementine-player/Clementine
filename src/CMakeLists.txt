@@ -129,6 +129,13 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
+  smartplaylists/playlistgenerator.cpp
+  smartplaylists/playlistgeneratorinserter.cpp
+  smartplaylists/smartplaylistcontainer.cpp
+  smartplaylists/smartplaylistmodel.cpp
+  smartplaylists/smartplaylistview.cpp
+  smartplaylists/queryplaylistgenerator.cpp
+
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
   songinfo/collapsibleinfopane.cpp
@@ -277,6 +284,12 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
+  smartplaylists/playlistgenerator.h
+  smartplaylists/playlistgeneratorinserter.h
+  smartplaylists/smartplaylistcontainer.h
+  smartplaylists/smartplaylistmodel.h
+  smartplaylists/smartplaylistview.h
+
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
   songinfo/collapsibleinfopane.h
@@ -355,6 +368,8 @@ set(UI
   radio/magnatuneconfig.ui
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
+
+  smartplaylists/smartplaylistcontainer.ui
 
   songinfo/lyricsettings.ui
 

@@ -808,6 +808,33 @@ bool LibraryBackend::ExecQuery(LibraryQuery *q) {
   return !db_->CheckErrors(q->Exec(db_->Connect(), songs_table_, fts_table_));
 }
 
+SongList LibraryBackend::FindSongs(const QString& where_sql,
+                                   const QString& order_sql, int limit) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  // Build the query
+  QString sql = "SELECT ROWID, " + Song::kColumnSpec + " FROM " + songs_table_;
+  if (!where_sql.isEmpty()) sql += " WHERE "    + where_sql;
+  if (!order_sql.isEmpty()) sql += " ORDER BY " + order_sql;
+  if (limit)                sql += " LIMIT "    + QString::number(limit);
+
+  // Run the query
+  SongList ret;
+  QSqlQuery query(sql, db);
+  query.exec();
+  if (db_->CheckErrors(query.lastError()))
+    return ret;
+
+  // Read the results
+  while (query.next()) {
+    Song song;
+    song.InitFromQuery(query);
+    ret << song;
+  }
+  return ret;
+}
+
 void LibraryBackend::IncrementPlayCount(int id) {
   if (id == -1)
     return;

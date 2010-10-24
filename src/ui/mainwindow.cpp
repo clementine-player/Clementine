@@ -53,6 +53,7 @@
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
 #include "radio/savedradio.h"
+#include "smartplaylists/smartplaylistcontainer.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
 #include "transcoder/transcodedialog.h"
@@ -138,6 +139,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
+    smart_playlist_view_(new SmartPlaylistContainer(this)),
     radio_view_(new RadioViewContainer(this)),
     device_view_(new DeviceView(this)),
     song_info_view_(new SongInfoView(this)),
@@ -181,6 +183,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
+  ui_->tabs->AddTab(smart_playlist_view_, IconLoader::Load("view-media-playlist"), tr("Playlists"));
   ui_->tabs->AddTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
@@ -429,6 +432,10 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   playlist_copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
   connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
           playlist_copy_to_device_, SLOT(setDisabled(bool)));
+
+  // Smart playlists connections
+  smart_playlist_view_->set_library(library_->backend());
+  smart_playlist_view_->set_playlists(playlists_);
 
   // Radio connections
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));

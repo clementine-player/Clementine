@@ -26,6 +26,7 @@
 #include "playlistsequence.h"
 #include "core/song.h"
 #include "radio/radioitem.h"
+#include "smartplaylists/playlistgenerator_fwd.h"
 
 class LibraryBackend;
 class PlaylistBackend;
@@ -149,6 +150,7 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertMagnatuneItems(const SongList& items, int pos = -1);
   QModelIndex InsertSongs(const SongList& items, int pos = -1);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1, bool play_now = false);
+  void InsertSmartPlaylist(PlaylistGeneratorPtr generator, int pos = -1, bool play_now = false);
   void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);

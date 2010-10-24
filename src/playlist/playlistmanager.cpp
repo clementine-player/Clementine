@@ -22,6 +22,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
+#include "smartplaylists/playlistgenerator.h"
 
 #include <QFileInfo>
 #include <QtDebug>
@@ -272,4 +273,16 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
       }
     }
   }
+}
+
+void PlaylistManager::PlaySmartPlaylist(PlaylistGeneratorPtr generator, bool as_new, bool clear) {
+  if (as_new) {
+    New(generator->name());
+  }
+
+  if (clear) {
+    current()->Clear();
+  }
+
+  current()->InsertSmartPlaylist(generator);
 }

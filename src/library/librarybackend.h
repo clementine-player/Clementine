@@ -131,6 +131,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void RemoveDirectory(const Directory& dir);
 
   bool ExecQuery(LibraryQuery* q);
+  SongList FindSongs(const QString& where_sql, const QString& order_sql, int limit);
 
   void IncrementPlayCountAsync(int id);
   void IncrementSkipCountAsync(int id);
