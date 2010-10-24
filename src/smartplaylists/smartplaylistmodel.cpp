@@ -16,6 +16,7 @@
 
 #include "playlistgenerator.h"
 #include "smartplaylistmodel.h"
+#include "ui/iconloader.h"
 
 #include <QSettings>
 
@@ -23,6 +24,8 @@ const char* SmartPlaylistModel::kSettingsGroup = "SmartPlaylists";
 
 SmartPlaylistModel::SmartPlaylistModel(QObject* parent)
   : QStandardItemModel(parent),
+    container_icon_(IconLoader::Load("folder")),
+    playlist_icon_(IconLoader::Load("view-media-playlist")),
     smart_item_(CreateContainer(tr("Smart playlists"), "smart")),
     dynamic_item_(CreateContainer(tr("Dynamic playlists"), "dynamic"))
 {
@@ -45,6 +48,7 @@ QStandardItem* SmartPlaylistModel::CreateContainer(
   QStandardItem* ret = new QStandardItem(name);
   ret->setData(Type_Container, Role_Type);
   ret->setData(group, Role_ContainerGroup);
+  ret->setData(container_icon_, Qt::DecorationRole);
   return ret;
 }
 
@@ -59,6 +63,7 @@ void SmartPlaylistModel::Load(const char* name, QStandardItem* parent) {
     item->setText(s.value("name").toString());
     item->setData(s.value("type").toString(), Role_GeneratorClass);
     item->setData(Type_Generator, Role_Type);
+    item->setData(playlist_icon_, Qt::DecorationRole);
     parent->appendRow(item);
   }
 }

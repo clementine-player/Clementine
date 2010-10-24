@@ -58,9 +58,12 @@ private:
                         const QString& where, const QString& order,
                         int limit = -1);
 
-  static QStandardItem* CreateContainer(const QString& name, const QString& group);
+  QStandardItem* CreateContainer(const QString& name, const QString& group);
 
 private:
+  QIcon container_icon_;
+  QIcon playlist_icon_;
+
   QStandardItem* smart_item_;
   QStandardItem* dynamic_item_;
 };
