@@ -74,7 +74,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   return p;
 }
 
-QFuture<shared_ptr<PlaylistItem> > PlaylistBackend::GetPlaylistItems(int playlist) {
+QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -93,7 +93,7 @@ QFuture<shared_ptr<PlaylistItem> > PlaylistBackend::GetPlaylistItems(int playlis
   q.bindValue(":playlist", playlist);
   q.exec();
   if (db_->CheckErrors(q.lastError()))
-    return QFuture<shared_ptr<PlaylistItem> >();
+    return QFuture<PlaylistItemPtr>();
 
   QList<SqlRow> rows;
 
@@ -104,11 +104,11 @@ QFuture<shared_ptr<PlaylistItem> > PlaylistBackend::GetPlaylistItems(int playlis
   return QtConcurrent::mapped(rows, &PlaylistBackend::NewSongFromQuery);
 }
 
-shared_ptr<PlaylistItem> PlaylistBackend::NewSongFromQuery(const SqlRow& row) {
+PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row) {
   // The song tables gets joined first, plus one each for the song ROWIDs
   const int playlist_row = (Song::kColumns.count() + 1) * 2;
 
-  shared_ptr<PlaylistItem> item(
+  PlaylistItemPtr item(
       PlaylistItem::NewFromType(row.value(playlist_row).toString()));
   if (item) {
     item->InitFromQuery(row);
@@ -146,7 +146,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
     return;
 
   // Save the new ones
-  foreach (shared_ptr<PlaylistItem> item, items) {
+  foreach (PlaylistItemPtr item, items) {
     insert.bindValue(0, playlist);
     item->BindToQuery(&insert);
 
