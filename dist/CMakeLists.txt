@@ -2,7 +2,7 @@ execute_process(COMMAND date "+%a %b %d %Y"
                 OUTPUT_VARIABLE RPM_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/clementine.spec.in
-               ${CMAKE_CURRENT_SOURCE_DIR}/clementine.spec)
+               ${CMAKE_CURRENT_SOURCE_DIR}/clementine.spec @ONLY)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in
                ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/maketarball.sh.in
