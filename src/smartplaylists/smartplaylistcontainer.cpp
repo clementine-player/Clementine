@@ -16,6 +16,7 @@
 
 #include "smartplaylistcontainer.h"
 #include "smartplaylistmodel.h"
+#include "smartplaylistwizard.h"
 #include "ui_smartplaylistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "ui/iconloader.h"
@@ -25,11 +26,15 @@ SmartPlaylistContainer::SmartPlaylistContainer(QWidget *parent)
     ui_(new Ui_SmartPlaylistContainer),
     first_show_(true),
     model_(new SmartPlaylistModel(this)),
+    library_(NULL),
     playlist_manager_(NULL)
 {
   ui_->setupUi(this);
 
   connect(ui_->view, SIGNAL(Play(QModelIndex,bool,bool)), SLOT(Play(QModelIndex,bool,bool)));
+  connect(ui_->view, SIGNAL(NewSmartPlaylist()), SLOT(NewSmartPlaylist()));
+
+  connect(ui_->add, SIGNAL(clicked()), SLOT(NewSmartPlaylist()));
 
   ui_->view->setModel(model_);
 }
@@ -39,6 +44,7 @@ SmartPlaylistContainer::~SmartPlaylistContainer() {
 }
 
 void SmartPlaylistContainer::set_library(LibraryBackend* library) {
+  library_ = library;
   model_->set_library(library);
 }
 
@@ -58,4 +64,9 @@ void SmartPlaylistContainer::Play(const QModelIndex& index, bool as_new, bool cl
     return;
 
   playlist_manager_->PlaySmartPlaylist(generator, as_new, clear);
+}
+
+void SmartPlaylistContainer::NewSmartPlaylist() {
+  SmartPlaylistWizard* wizard = new SmartPlaylistWizard(library_, this);
+  wizard->show();
 }

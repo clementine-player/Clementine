@@ -44,7 +44,7 @@ void SmartPlaylistView::contextMenuEvent(QContextMenuEvent* e) {
         tr("Add as new playlist..."), this, SLOT(AddAsNewPlaylist()));
     menu_->addSeparator();
     new_smart_action_ = menu_->addAction(IconLoader::Load("list-add"),
-        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
+        tr("New smart playlist..."), this, SIGNAL(NewSmartPlaylist()));
     new_folder_action_ = menu_->addAction(IconLoader::Load("folder-new"),
         tr("New folder..."), this, SLOT(NewFolder()));
     remove_action_ = menu_->addAction(IconLoader::Load("list-remove"),
@@ -76,9 +76,6 @@ void SmartPlaylistView::AddToPlaylist() {
 void SmartPlaylistView::AddAsNewPlaylist() {
   if (menu_index_.isValid())
     emit Play(menu_index_, true, false);
-}
-
-void SmartPlaylistView::NewSmartPlaylist() {
 }
 
 void SmartPlaylistView::NewFolder() {

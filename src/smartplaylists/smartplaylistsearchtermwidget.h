@@ -1,0 +1,68 @@
+/* This file is part of Clementine.
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef SMARTPLAYLISTSEARCHTERMWIDGET_H
+#define SMARTPLAYLISTSEARCHTERMWIDGET_H
+
+#include <QPushButton>
+#include <QWidget>
+
+class LibraryBackend;
+class Ui_SmartPlaylistSearchTermWidget;
+
+class QPropertyAnimation;
+
+class SmartPlaylistSearchTermWidget : public QWidget {
+  Q_OBJECT
+  Q_PROPERTY(float overlay_opacity
+             READ  overlay_opacity
+             WRITE set_overlay_opacity);
+
+public:
+  SmartPlaylistSearchTermWidget(LibraryBackend* library, QWidget* parent);
+  ~SmartPlaylistSearchTermWidget();
+
+  void SetActive(bool active);
+
+  float overlay_opacity() const;
+  void set_overlay_opacity(float opacity);
+
+signals:
+  void Clicked();
+
+protected:
+  void showEvent(QShowEvent*);
+  void enterEvent(QEvent*);
+  void leaveEvent(QEvent*);
+  void resizeEvent(QResizeEvent*);
+
+private slots:
+  void FieldChanged(int index);
+  void Grab();
+
+private:
+  class Overlay;
+  friend class Overlay;
+
+  Ui_SmartPlaylistSearchTermWidget* ui_;
+  LibraryBackend* library_;
+
+  Overlay* overlay_;
+  QPropertyAnimation* animation_;
+  bool active_;
+};
+
+#endif // SMARTPLAYLISTSEARCHTERMWIDGET_H

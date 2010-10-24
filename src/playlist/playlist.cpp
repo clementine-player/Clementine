@@ -507,7 +507,6 @@ Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
 }
 
 QStringList Playlist::mimeTypes() const {
-  qDebug() << __PRETTY_FUNCTION__;
   return QStringList() << "text/uri-list" << kRowsMimetype
                        << SmartPlaylistModel::kMimeType;
 }

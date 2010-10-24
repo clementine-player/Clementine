@@ -1,0 +1,96 @@
+/* This file is part of Clementine.
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef SMARTPLAYLISTSEARCHTERM_H
+#define SMARTPLAYLISTSEARCHTERM_H
+
+#include <QDataStream>
+#include <QVariant>
+
+class SmartPlaylistSearchTerm {
+public:
+  SmartPlaylistSearchTerm();
+
+  // These values are persisted, so add to the end of the enum only
+  enum Field {
+    Field_Title = 0,
+    Field_Artist,
+    Field_Album,
+    Field_AlbumArtist,
+    Field_Composer,
+    Field_Length,
+    Field_Track,
+    Field_Disc,
+    Field_Year,
+    Field_Genre,
+    Field_BPM,
+    Field_Bitrate,
+    Field_Samplerate,
+    Field_Filesize,
+    Field_DateCreated,
+    Field_DateModified,
+    Field_Rating,
+    Field_PlayCount,
+    Field_SkipCount,
+    Field_LastPlayed,
+    Field_Comment,
+
+    FieldCount
+  };
+
+  // These values are persisted, so add to the end of the enum only
+  enum Operator {
+    // For text
+    Op_Contains = 0,
+    Op_NotContains,
+    Op_StartsWith,
+    Op_EndsWith,
+
+    // For numbers
+    Op_GreaterThan,
+    Op_LessThan,
+
+    // For everything
+    Op_Equals,
+  };
+
+  enum Type {
+    Type_Text,
+    Type_Date,
+    Type_Time,
+    Type_Number,
+    Type_Rating,
+  };
+
+  Field field_;
+  Operator operator_;
+  QVariant value_;
+
+  QString ToSql() const;
+
+  static Type TypeOf(Field field);
+  static QList<Operator> OperatorsForType(Type type);
+  static QString OperatorText(Type type, Operator op);
+  static QString FieldName(Field field);
+  static QString FieldColumnName(Field field);
+};
+
+typedef QList<SmartPlaylistSearchTerm::Operator> OperatorList;
+
+QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearchTerm& term);
+QDataStream& operator >>(QDataStream& s, SmartPlaylistSearchTerm& term);
+
+#endif // SMARTPLAYLISTSEARCHTERM_H

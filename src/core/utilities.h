@@ -17,6 +17,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <QColor>
 #include <QLocale>
 #include <QString>
 
@@ -29,6 +30,8 @@ namespace Utilities {
   QString PrettySize(quint64 bytes);
   QString WordyTime(quint64 seconds);
   QString Ago(int seconds_since_epoch, const QLocale& locale);
+
+  QString ColorToRgba(const QColor& color);
 
   quint64 FileSystemCapacity(const QString& path);
   quint64 FileSystemFreeSpace(const QString& path);

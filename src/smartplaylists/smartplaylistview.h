@@ -30,6 +30,7 @@ public:
 
 signals:
   void Play(const QModelIndex& index, bool as_new, bool clear);
+  void NewSmartPlaylist();
 
 protected:
   void contextMenuEvent(QContextMenuEvent*);
@@ -38,7 +39,6 @@ private slots:
   void Load();
   void AddToPlaylist();
   void AddAsNewPlaylist();
-  void NewSmartPlaylist();
   void NewFolder();
   void Remove();
 

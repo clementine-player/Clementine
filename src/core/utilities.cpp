@@ -188,6 +188,11 @@ bool Copy(QIODevice* source, QIODevice* destination) {
   return true;
 }
 
+QString ColorToRgba(const QColor& c) {
+  return QString("rgba(%1, %2, %3, %4)")
+      .arg(c.red()).arg(c.green()).arg(c.blue()).arg(c.alpha());
+}
+
 } // namespace
 
 

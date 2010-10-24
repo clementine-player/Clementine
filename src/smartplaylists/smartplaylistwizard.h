@@ -14,44 +14,34 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SMARTPLAYLISTCONTAINER_H
-#define SMARTPLAYLISTCONTAINER_H
+#ifndef SMARTPLAYLISTWIZARD_H
+#define SMARTPLAYLISTWIZARD_H
 
-#include "playlistgenerator_fwd.h"
-
-#include <QWidget>
+#include <QWizard>
 
 class LibraryBackend;
-class PlaylistManager;
-class SmartPlaylistModel;
-class Ui_SmartPlaylistContainer;
+class SmartPlaylistSearchTermWidget;
+class Ui_SmartPlaylistWizard;
 
-class QModelIndex;
+class QVBoxLayout;
 
-class SmartPlaylistContainer : public QWidget {
+class SmartPlaylistWizard : public QWizard {
   Q_OBJECT
 
 public:
-  SmartPlaylistContainer(QWidget* parent);
-  ~SmartPlaylistContainer();
-
-  void set_library(LibraryBackend* library);
-  void set_playlists(PlaylistManager* playlist_manager) { playlist_manager_ = playlist_manager; }
-
-protected:
-  void showEvent(QShowEvent*);
+  SmartPlaylistWizard(LibraryBackend* library, QWidget* parent);
+  ~SmartPlaylistWizard();
 
 private slots:
-  void Play(const QModelIndex& index, bool as_new, bool clear);
-  void NewSmartPlaylist();
+  void AddSearchTerm();
 
 private:
-  Ui_SmartPlaylistContainer* ui_;
-  bool first_show_;
-
-  SmartPlaylistModel* model_;
+  Ui_SmartPlaylistWizard* ui_;
   LibraryBackend* library_;
-  PlaylistManager* playlist_manager_;
+
+  QVBoxLayout* search_term_layout_;
+  QList<SmartPlaylistSearchTermWidget*> search_terms_;
+  SmartPlaylistSearchTermWidget* new_search_term_;
 };
 
-#endif // SMARTPLAYLISTCONTAINER_H
+#endif // SMARTPLAYLISTWIZARD_H
