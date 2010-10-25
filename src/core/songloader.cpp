@@ -420,6 +420,13 @@ void SongLoader::MagicReady() {
   // It is a playlist - we'll get more data and parse the whole thing in
   // EndOfStreamReached
   qDebug() << "Magic says" << parser_->name();
+  if (parser_->name() == "ASX/INI") {
+    // This is actually a weird MS-WMSP stream. Changing the protocol to MMS from
+    // HTTP makes it playable.
+    parser_ = NULL;
+    url_.setScheme("mms");
+    StopTypefindAsync(true);
+  }
   state_ = WaitingForData;
 }
 
