@@ -68,6 +68,7 @@ SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* lib
 {
   ui_->setupUi(this);
   connect(ui_->field, SIGNAL(currentIndexChanged(int)), SLOT(FieldChanged(int)));
+  connect(ui_->remove, SIGNAL(clicked()), SIGNAL(RemoveClicked()));
 
   // Populate the combo boxes
   for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {

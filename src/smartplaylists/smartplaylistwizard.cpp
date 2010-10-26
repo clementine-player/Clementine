@@ -35,13 +35,29 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
   AddSearchTerm();
 }
 
+SmartPlaylistWizard::~SmartPlaylistWizard() {
+  delete ui_;
+}
+
 void SmartPlaylistWizard::AddSearchTerm() {
   SmartPlaylistSearchTermWidget* widget =
       new SmartPlaylistSearchTermWidget(library_, this);
+  connect(widget, SIGNAL(RemoveClicked()), SLOT(RemoveSearchTerm()));
+
   search_term_layout_->insertWidget(search_terms_.count(), widget);
   search_terms_ << widget;
 }
 
-SmartPlaylistWizard::~SmartPlaylistWizard() {
-  delete ui_;
+void SmartPlaylistWizard::RemoveSearchTerm() {
+  SmartPlaylistSearchTermWidget* widget =
+      qobject_cast<SmartPlaylistSearchTermWidget*>(sender());
+  if (!widget)
+    return;
+
+  const int index = search_terms_.indexOf(widget);
+  if (index == -1)
+    return;
+
+  delete search_terms_.takeAt(index);
 }
+

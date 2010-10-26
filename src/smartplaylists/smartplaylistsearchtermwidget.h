@@ -42,6 +42,7 @@ public:
 
 signals:
   void Clicked();
+  void RemoveClicked();
 
 protected:
   void showEvent(QShowEvent*);

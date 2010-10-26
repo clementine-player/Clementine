@@ -34,6 +34,7 @@ public:
 
 private slots:
   void AddSearchTerm();
+  void RemoveSearchTerm();
 
 private:
   Ui_SmartPlaylistWizard* ui_;
