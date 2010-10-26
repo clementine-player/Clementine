@@ -17,6 +17,8 @@
 #ifndef SMARTPLAYLISTSEARCHTERMWIDGET_H
 #define SMARTPLAYLISTSEARCHTERMWIDGET_H
 
+#include "smartplaylistsearchterm.h"
+
 #include <QPushButton>
 #include <QWidget>
 
@@ -39,6 +41,8 @@ public:
 
   float overlay_opacity() const;
   void set_overlay_opacity(float opacity);
+
+  SmartPlaylistSearchTerm Term() const;
 
 signals:
   void Clicked();

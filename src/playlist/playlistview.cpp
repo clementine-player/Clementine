@@ -523,7 +523,7 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton && index.isValid() &&
       index.data(Playlist::Role_CanSetRating).toBool()) {
     // Calculate which star was clicked
-    double new_rating = RatingItemDelegate::RatingForPos(
+    double new_rating = RatingPainter::RatingForPos(
         event->pos(), visualRect(index));
     emit SongRatingSet(index, new_rating);
   } else {

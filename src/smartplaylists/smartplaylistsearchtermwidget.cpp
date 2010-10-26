@@ -104,7 +104,9 @@ void SmartPlaylistSearchTermWidget::FieldChanged(int index) {
   // Populate the operator combo box
   ui_->op->clear();
   foreach (SmartPlaylistSearchTerm::Operator op, SmartPlaylistSearchTerm::OperatorsForType(type)) {
+    const int i = ui_->op->count();
     ui_->op->addItem(SmartPlaylistSearchTerm::OperatorText(type, op));
+    ui_->op->setItemData(i, op);
   }
 
   // Show the correct value editor
@@ -113,7 +115,7 @@ void SmartPlaylistSearchTermWidget::FieldChanged(int index) {
     case SmartPlaylistSearchTerm::Type_Time:   page = ui_->page_time;   break;
     case SmartPlaylistSearchTerm::Type_Number: page = ui_->page_number; break;
     case SmartPlaylistSearchTerm::Type_Date:   page = ui_->page_date;   break;
-    case SmartPlaylistSearchTerm::Type_Rating: page = ui_->page_number; break; // TODO
+    case SmartPlaylistSearchTerm::Type_Rating: page = ui_->page_rating; break;
     case SmartPlaylistSearchTerm::Type_Text:   page = ui_->page_text;   break;
   }
   ui_->value_stack->setCurrentWidget(page);
@@ -188,6 +190,31 @@ void SmartPlaylistSearchTermWidget::set_overlay_opacity(float opacity) {
 
 float SmartPlaylistSearchTermWidget::overlay_opacity() const {
   return overlay_ ? overlay_->opacity() : 0.0;
+}
+
+SmartPlaylistSearchTerm SmartPlaylistSearchTermWidget::Term() const {
+  const int field = ui_->field->itemData(ui_->field->currentIndex()).toInt();
+  const int op    = ui_->op->itemData(ui_->op->currentIndex()).toInt();
+
+  SmartPlaylistSearchTerm ret;
+  ret.field_ = SmartPlaylistSearchTerm::Field(field);
+  ret.operator_ = SmartPlaylistSearchTerm::Operator(op);
+
+  // The value depends on the data type
+  const QWidget* value_page = ui_->value_stack->currentWidget();
+  if (value_page == ui_->page_text) {
+    ret.value_ = ui_->value_text->text();
+  } else if (value_page == ui_->page_number) {
+    ret.value_ = ui_->value_number->value();
+  } else if (value_page == ui_->page_date) {
+    ret.value_ = ui_->value_date->dateTime().toTime_t();
+  } else if (value_page == ui_->page_time) {
+    ret.value_ = QTime(0,0).secsTo(ui_->value_time->time());
+  } else if (value_page == ui_->page_rating) {
+    ret.value_ = ui_->value_rating->rating();
+  }
+
+  return ret;
 }
 
 

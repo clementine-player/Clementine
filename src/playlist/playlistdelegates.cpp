@@ -42,9 +42,6 @@ const float QueuedItemDelegate::kQueueOpacityLowerBound = 0.4;
 
 const int   PlaylistDelegateBase::kMinHeight = 19;
 
-const int   RatingItemDelegate::kStarCount;
-const int   RatingItemDelegate::kStarSize;
-
 QueuedItemDelegate::QueuedItemDelegate(QObject *parent, int indicator_column)
   : QStyledItemDelegate(parent),
     indicator_column_(indicator_column)
@@ -292,56 +289,6 @@ QWidget* TextItemDelegate::createEditor(
 RatingItemDelegate::RatingItemDelegate(QObject* parent)
   : PlaylistDelegateBase(parent)
 {
-  // Load the base pixmaps
-  QPixmap on(":/star-on.png");
-  QPixmap off(":/star-off.png");
-
-  // Generate the 10 states, better to do it now than on the fly
-  for (int i=0 ; i<kStarCount*2+1 ; ++i) {
-    const float rating = float(i) / 2.0;
-
-    // Clear the pixmap
-    stars_[i] = QPixmap(kStarSize * kStarCount, kStarSize);
-    stars_[i].fill(Qt::transparent);
-    QPainter p(&stars_[i]);
-
-    // Draw the stars
-    int x = 0;
-    for (int i=0 ; i<kStarCount ; ++i, x+=kStarSize) {
-      const QRect rect(x, 0, kStarSize, kStarSize);
-
-      if (rating - 0.25 <= i) {
-        // Totally empty
-        p.drawPixmap(rect, off);
-      } else if (rating - 0.75 <= i) {
-        // Half full
-        const QRect target_left(rect.x(), rect.y(), kStarSize/2, kStarSize);
-        const QRect target_right(rect.x() + kStarSize/2, rect.y(), kStarSize/2, kStarSize);
-        const QRect source_left(0, 0, kStarSize/2, kStarSize);
-        const QRect source_right(kStarSize/2, 0, kStarSize/2, kStarSize);
-        p.drawPixmap(target_left, on, source_left);
-        p.drawPixmap(target_right, off, source_right);
-      } else {
-        // Totally full
-        p.drawPixmap(rect, on);
-      }
-    }
-  }
-}
-
-QRect RatingItemDelegate::ContentRect(const QRect& total) {
-  const int width = total.height() * kStarCount;
-  const int x = total.x() + (total.width() - width) / 2;
-
-  return QRect(x, total.y(), width, total.height());
-}
-
-double RatingItemDelegate::RatingForPos(const QPoint& pos, const QRect& total_rect) {
-  const QRect contents = ContentRect(total_rect);
-  const double raw = double(pos.x() - contents.left()) / contents.width();
-
-  // Round to the nearest 0.1
-  return double(int(raw * kStarCount * 2 + 0.5)) / (kStarCount * 2);
 }
 
 void RatingItemDelegate::paint(
@@ -356,23 +303,18 @@ void RatingItemDelegate::paint(
   if (!index.data(Playlist::Role_CanSetRating).toBool())
     return;
 
-  QSize size(qMin(kStarSize*kStarCount, option.rect.width()),
-             qMin(kStarSize, option.rect.height()));
-  QPoint pos(option.rect.center() - QPoint(size.width() / 2, size.height() / 2));
-
   const bool hover = mouse_over_index_ == index;
-  const double rating = hover ? double(mouse_over_pos_.x() - pos.x()) / kStarSize
-                              : index.data().toDouble() * kStarCount;
+  const double rating =
+      (hover ? RatingPainter::RatingForPos(mouse_over_pos_, option.rect)
+             : index.data().toDouble());
 
-  // Draw the stars
-  const int star = qBound(0, int(rating*2.0 + 0.5), kStarCount*2);
-  painter->drawPixmap(QRect(pos, size), stars_[star], QRect(QPoint(0,0), size));
+  painter_.Paint(painter, option.rect, rating);
 }
 
 QSize RatingItemDelegate::sizeHint(
     const QStyleOptionViewItem& option, const QModelIndex& index) const {
   QSize size = PlaylistDelegateBase::sizeHint(option, index);
-  size.setWidth(size.height() * kStarCount);
+  size.setWidth(size.height() * RatingPainter::kStarCount);
   return size;
 }
 
@@ -382,7 +324,7 @@ QString RatingItemDelegate::displayText(
     return QString();
 
   // Round to the nearest 0.5
-  const double rating = float(int(value.toDouble() * kStarCount * 2 + 0.5)) / 2;
+  const double rating = float(int(value.toDouble() * RatingPainter::kStarCount * 2 + 0.5)) / 2;
 
   return QString::number(rating, 'f', 1);
 }

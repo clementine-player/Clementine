@@ -19,6 +19,7 @@
 
 #include "playlist.h"
 #include "library/library.h"
+#include "widgets/ratingwidget.h"
 
 #include <QStyledItemDelegate>
 #include <QTreeView>
@@ -117,14 +118,8 @@ public:
   bool is_mouse_over() const { return mouse_over_index_.isValid(); }
   QModelIndex mouse_over_index() const { return mouse_over_index_; }
 
-  static QRect ContentRect(const QRect& total);
-  static double RatingForPos(const QPoint& pos, const QRect& total_rect);
-
-  static const int kStarCount = 5;
-  static const int kStarSize = 15;
-
 private:
-  QPixmap stars_[kStarCount*2+1];
+  RatingPainter painter_;
 
   QModelIndex mouse_over_index_;
   QPoint mouse_over_pos_;

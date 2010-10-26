@@ -195,6 +195,7 @@ set(SOURCES
   widgets/prettyimage.cpp
   widgets/prettyimageview.cpp
   widgets/progressitemdelegate.cpp
+  widgets/ratingwidget.cpp
   widgets/sliderwidget.cpp
   widgets/spinbox.cpp
   widgets/stickyslider.cpp
@@ -349,6 +350,7 @@ set(HEADERS
   widgets/prettyimage.h
   widgets/prettyimageview.h
   widgets/progressitemdelegate.h
+  widgets/ratingwidget.h
   widgets/sliderwidget.h
   widgets/spinbox.h
   widgets/stickyslider.h

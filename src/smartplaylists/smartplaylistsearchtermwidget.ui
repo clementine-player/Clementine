@@ -78,6 +78,19 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="page_rating">
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="RatingWidget" name="value_rating" native="true"/>
+             </item>
+            </layout>
+           </widget>
            <widget class="QWidget" name="page_time">
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <property name="spacing">
@@ -164,6 +177,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RatingWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/ratingwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
