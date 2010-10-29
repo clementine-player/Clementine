@@ -531,6 +531,11 @@ void PlaylistView::RatingHoverOut() {
 }
 
 void PlaylistView::mousePressEvent(QMouseEvent* event) {
+  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+    QTreeView::mousePressEvent(event);
+    return;
+  }
+
   QModelIndex index = indexAt(event->pos());
   if (event->button() == Qt::LeftButton && index.isValid() &&
       index.data(Playlist::Role_CanSetRating).toBool()) {

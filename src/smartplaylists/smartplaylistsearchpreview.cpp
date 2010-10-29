@@ -84,6 +84,14 @@ void SmartPlaylistSearchPreview::SearchFinished() {
   watcher->deleteLater();
   generator_.reset();
 
+  if (pending_search_.is_valid()) {
+    // There was another search done while we were running - throw away these
+    // results and do that one now instead
+    RunSearch(pending_search_);
+    pending_search_ = SmartPlaylistSearch();
+    return;
+  }
+
   PlaylistItemList all_items = watcher->result();
   PlaylistItemList displayed_items = all_items.mid(0, PlaylistGenerator::kDefaultLimit);
 

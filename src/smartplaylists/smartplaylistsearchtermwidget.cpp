@@ -70,13 +70,14 @@ SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* lib
   connect(ui_->field, SIGNAL(currentIndexChanged(int)), SLOT(FieldChanged(int)));
   connect(ui_->remove, SIGNAL(clicked()), SIGNAL(RemoveClicked()));
 
-  connect(ui_->field, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
   connect(ui_->op, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
   connect(ui_->value_date, SIGNAL(dateChanged(QDate)), SIGNAL(Changed()));
   connect(ui_->value_number, SIGNAL(valueChanged(int)), SIGNAL(Changed()));
   connect(ui_->value_rating, SIGNAL(RatingChanged(float)), SIGNAL(Changed()));
   connect(ui_->value_text, SIGNAL(textChanged(QString)), SIGNAL(Changed()));
   connect(ui_->value_time, SIGNAL(timeChanged(QTime)), SIGNAL(Changed()));
+
+  ui_->value_date->setDate(QDate::currentDate());
 
   // Populate the combo boxes
   for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {
@@ -141,6 +142,8 @@ void SmartPlaylistSearchTermWidget::FieldChanged(int index) {
   default:
     ui_->value_text->setCompleter(NULL);
   }
+
+  emit Changed();
 }
 
 void SmartPlaylistSearchTermWidget::SetActive(bool active) {

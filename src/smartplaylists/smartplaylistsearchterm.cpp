@@ -36,7 +36,9 @@ QString SmartPlaylistSearchTerm::ToSql() const {
     case Op_EndsWith:
       return col + " LIKE '%" + value + "'";
     case Op_Equals:
-      return col + " LIKE '" + value + "'";
+      if (TypeOf(field_) == Type_Text)
+        return col + " LIKE '" + value + "'";
+      return col + " = '" + value + "'";
     case Op_GreaterThan:
       return col + " > '" + value + "'";
     case Op_LessThan:
