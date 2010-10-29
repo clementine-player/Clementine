@@ -69,6 +69,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this)),
     setting_initial_header_layout_(false),
+    read_only_settings_(false),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -200,6 +201,9 @@ void PlaylistView::LoadGeometry() {
 }
 
 void PlaylistView::SaveGeometry() {
+  if (read_only_settings_)
+    return;
+
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   settings.setValue("state", header_->saveState());
@@ -496,6 +500,10 @@ void PlaylistView::leaveEvent(QEvent* e) {
 }
 
 void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
+  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+    return;
+  }
+
   const QModelIndex old_index = rating_delegate_->mouse_over_index();
   rating_delegate_->set_mouse_over(index, pos);
   update(index);
@@ -508,6 +516,10 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
 }
 
 void PlaylistView::RatingHoverOut() {
+  if (!(editTriggers() & QAbstractItemView::SelectedClicked)) {
+    return;
+  }
+
   const QModelIndex old_index = rating_delegate_->mouse_over_index();
   rating_delegate_->set_mouse_out();
   update(old_index);
@@ -699,6 +711,9 @@ void PlaylistView::ReloadSettings() {
 }
 
 void PlaylistView::SaveSettings() {
+  if (read_only_settings_)
+    return;
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("glow_effect", glow_enabled_);

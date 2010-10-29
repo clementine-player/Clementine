@@ -64,6 +64,8 @@ class PlaylistView : public QTreeView {
   void SetPlaylist(Playlist* playlist);
   void RemoveSelected();
 
+  void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
+
   // QTreeView
   void drawTree(QPainter* painter, const QRegion& region) const;
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -134,6 +136,7 @@ class PlaylistView : public QTreeView {
   Playlist* playlist_;
   PlaylistHeader* header_;
   bool setting_initial_header_layout_;
+  bool read_only_settings_;
 
   bool glow_enabled_;
   bool currently_glowing_;

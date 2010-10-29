@@ -17,7 +17,7 @@
 #include "queryplaylistgenerator.h"
 #include "smartplaylistsearchpreview.h"
 #include "ui_smartplaylistsearchpreview.h"
-#include "playlist/playlistdelegates.h"
+#include "playlist/playlist.h"
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
@@ -27,34 +27,19 @@ typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
 SmartPlaylistSearchPreview::SmartPlaylistSearchPreview(QWidget *parent)
   : QWidget(parent),
-    ui_(new Ui_SmartPlaylistSearchPreview)
+    ui_(new Ui_SmartPlaylistSearchPreview),
+    model_(NULL)
 {
   ui_->setupUi(this);
+
+  // Prevent editing songs and saving settings (like header columns and geometry)
+  ui_->tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  ui_->tree->SetReadOnlySettings(true);
 
   QFont bold_font;
   bold_font.setBold(true);
   ui_->preview_label->setFont(bold_font);
   ui_->busy_container->hide();
-
-  fields_ << SmartPlaylistSearchTerm::Field_Artist;
-  fields_ << SmartPlaylistSearchTerm::Field_Album;
-  fields_ << SmartPlaylistSearchTerm::Field_Title;
-  fields_ << SmartPlaylistSearchTerm::Field_Length;
-  fields_ << SmartPlaylistSearchTerm::Field_PlayCount;
-  fields_ << SmartPlaylistSearchTerm::Field_SkipCount;
-  fields_ << SmartPlaylistSearchTerm::Field_Rating;
-
-  QStringList column_names;
-  foreach (SmartPlaylistSearchTerm::Field field, fields_) {
-    column_names << SmartPlaylistSearchTerm::FieldName(field);
-  }
-  ui_->tree->setHeaderLabels(column_names);
-
-  ui_->tree->setItemDelegateForColumn(0, new TextItemDelegate(this));
-  ui_->tree->setItemDelegateForColumn(1, new TextItemDelegate(this));
-  ui_->tree->setItemDelegateForColumn(2, new TextItemDelegate(this));
-  ui_->tree->setItemDelegateForColumn(3, new LengthItemDelegate(this));
-  ui_->tree->setItemDelegateForColumn(6, new RatingItemDelegate(this));
 }
 
 SmartPlaylistSearchPreview::~SmartPlaylistSearchPreview() {
@@ -63,6 +48,11 @@ SmartPlaylistSearchPreview::~SmartPlaylistSearchPreview() {
 
 void SmartPlaylistSearchPreview::set_library(LibraryBackend* backend) {
   backend_ = backend;
+
+  model_ = new Playlist(NULL, NULL, backend_, -1, this);
+  ui_->tree->setModel(model_);
+  ui_->tree->SetPlaylist(model_);
+  ui_->tree->SetItemDelegates(backend_);
 }
 
 void SmartPlaylistSearchPreview::Update(const SmartPlaylistSearch& search) {
@@ -94,30 +84,17 @@ void SmartPlaylistSearchPreview::SearchFinished() {
   watcher->deleteLater();
   generator_.reset();
 
-  PlaylistItemList items = watcher->result();
-  int count = 0;
+  PlaylistItemList all_items = watcher->result();
+  PlaylistItemList displayed_items = all_items.mid(0, PlaylistGenerator::kDefaultLimit);
 
-  ui_->tree->clear();
-  foreach (PlaylistItemPtr item, items) {
-    if (count >= PlaylistGenerator::kDefaultLimit)
-      break;
-    count ++;
+  model_->Clear();
+  model_->InsertItems(displayed_items);
 
-    QTreeWidgetItem* tree_item = new QTreeWidgetItem;
-    tree_item->setData(0, Qt::DisplayRole, item->Metadata().album());
-    tree_item->setData(1, Qt::DisplayRole, item->Metadata().artist());
-    tree_item->setData(2, Qt::DisplayRole, item->Metadata().title());
-    tree_item->setData(3, Qt::DisplayRole, item->Metadata().length());
-    tree_item->setData(4, Qt::DisplayRole, item->Metadata().playcount());
-    tree_item->setData(5, Qt::DisplayRole, item->Metadata().skipcount());
-    tree_item->setData(6, Qt::DisplayRole, item->Metadata().rating());
-    ui_->tree->addTopLevelItem(tree_item);
-  }
-
-  if (items.count() > count) {
-    ui_->count_label->setText(tr("%1 songs found (showing %2)").arg(items.count()).arg(count));
+  if (displayed_items.count() < all_items.count()) {
+    ui_->count_label->setText(tr("%1 songs found (showing %2)")
+        .arg(all_items.count()).arg(displayed_items.count()));
   } else {
-    ui_->count_label->setText(tr("%1 songs found").arg(items.count()));
+    ui_->count_label->setText(tr("%1 songs found").arg(all_items.count()));
   }
 
   ui_->busy_container->hide();

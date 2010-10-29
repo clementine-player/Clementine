@@ -24,6 +24,7 @@
 #include <boost/scoped_ptr.hpp>
 
 class LibraryBackend;
+class Playlist;
 class QueryPlaylistGenerator;
 class Ui_SmartPlaylistSearchPreview;
 
@@ -49,6 +50,7 @@ private:
   QList<SmartPlaylistSearchTerm::Field> fields_;
 
   LibraryBackend* backend_;
+  Playlist* model_;
 
   SmartPlaylistSearch pending_search_;
   boost::scoped_ptr<QueryPlaylistGenerator> generator_;

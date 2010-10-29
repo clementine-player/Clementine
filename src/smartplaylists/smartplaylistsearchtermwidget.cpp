@@ -71,6 +71,7 @@ SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* lib
   connect(ui_->remove, SIGNAL(clicked()), SIGNAL(RemoveClicked()));
 
   connect(ui_->field, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
+  connect(ui_->op, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
   connect(ui_->value_date, SIGNAL(dateChanged(QDate)), SIGNAL(Changed()));
   connect(ui_->value_number, SIGNAL(valueChanged(int)), SIGNAL(Changed()));
   connect(ui_->value_rating, SIGNAL(RatingChanged(float)), SIGNAL(Changed()));

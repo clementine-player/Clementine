@@ -64,7 +64,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QTreeWidget" name="tree">
+    <widget class="PlaylistView" name="tree">
      <property name="rootIsDecorated">
       <bool>false</bool>
      </property>
@@ -74,11 +74,6 @@
      <property name="allColumnsShowFocus">
       <bool>true</bool>
      </property>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
     </widget>
    </item>
   </layout>
@@ -89,6 +84,11 @@
    <extends>QWidget</extends>
    <header>widgets/busyindicator.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PlaylistView</class>
+   <extends>QTreeView</extends>
+   <header>playlist/playlistview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
