@@ -81,7 +81,7 @@ QLabel {
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="page_query_search">
+  <widget class="SmartPlaylistWizard::SearchPage" name="page_query_search">
    <property name="styleSheet">
     <string notr="true">#termframe {
   border: 1px solid grey;
@@ -206,9 +206,33 @@ margin-left: 9px;
       </layout>
      </widget>
     </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="SmartPlaylistSearchPreview" name="widget" native="true"/>
+    </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SmartPlaylistSearchPreview</class>
+   <extends>QWidget</extends>
+   <header>smartplaylists/smartplaylistsearchpreview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SmartPlaylistWizard::SearchPage</class>
+   <extends>QWizardPage</extends>
+   <header>smartplaylistwizard.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

@@ -47,6 +47,9 @@ public:
   float rating() const { return rating_; }
   void set_rating(float rating);
 
+signals:
+  void RatingChanged(float rating);
+
 protected:
   void paintEvent(QPaintEvent*);
   void mousePressEvent(QMouseEvent* e);

@@ -19,17 +19,12 @@
 
 #include <QSettings>
 
-const int PlaylistGenerator::kDefaultLimit = 15;
+const int PlaylistGenerator::kDefaultLimit = 20;
 
 PlaylistGenerator::PlaylistGenerator()
   : QObject(NULL),
-    backend_(NULL),
-    limit_(kDefaultLimit)
+    backend_(NULL)
 {
-}
-
-void PlaylistGenerator::Load(const QSettings& s) {
-  limit_ = s.value("limit", kDefaultLimit).toInt();
 }
 
 PlaylistGeneratorPtr PlaylistGenerator::Create(const QString& type) {

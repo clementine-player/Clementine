@@ -48,6 +48,8 @@ signals:
   void Clicked();
   void RemoveClicked();
 
+  void Changed();
+
 protected:
   void showEvent(QShowEvent*);
   void enterEvent(QEvent*);

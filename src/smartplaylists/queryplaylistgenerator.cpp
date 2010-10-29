@@ -25,15 +25,19 @@ QueryPlaylistGenerator::QueryPlaylistGenerator()
 {
 }
 
+void QueryPlaylistGenerator::Load(const SmartPlaylistSearch& search) {
+  search_ = search;
+}
+
 void QueryPlaylistGenerator::Load(const QSettings& s) {
   PlaylistGenerator::Load(s);
-  name_  = s.value("name").toString();
-  where_ = s.value("where").toString();
-  order_ = s.value("order").toString();
+
+  QDataStream stream(s.value("search").toByteArray());
+  stream >> search_;
 }
 
 PlaylistItemList QueryPlaylistGenerator::Generate() {
-  SongList songs = backend_->FindSongs(where_, order_, limit_);
+  SongList songs = backend_->FindSongs(search_);
 
   PlaylistItemList items;
   foreach (const Song& song, songs) {

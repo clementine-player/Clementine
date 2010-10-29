@@ -128,6 +128,7 @@ void RatingWidget::paintEvent(QPaintEvent* e) {
 
 void RatingWidget::mousePressEvent(QMouseEvent* e) {
   rating_ = RatingPainter::RatingForPos(e->pos(), rect());
+  emit RatingChanged(rating_);
 }
 
 void RatingWidget::mouseMoveEvent(QMouseEvent* e) {

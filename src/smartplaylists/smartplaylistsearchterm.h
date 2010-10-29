@@ -80,6 +80,7 @@ public:
   QVariant value_;
 
   QString ToSql() const;
+  bool is_valid() const;
 
   static Type TypeOf(Field field);
   static QList<Operator> OperatorsForType(Type type);

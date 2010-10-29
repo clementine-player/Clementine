@@ -17,9 +17,12 @@
 #ifndef SMARTPLAYLISTWIZARD_H
 #define SMARTPLAYLISTWIZARD_H
 
+#include "smartplaylistsearch.h"
+
 #include <QWizard>
 
 class LibraryBackend;
+class SmartPlaylistSearchPreview;
 class SmartPlaylistSearchTermWidget;
 class Ui_SmartPlaylistWizard;
 
@@ -32,17 +35,31 @@ public:
   SmartPlaylistWizard(LibraryBackend* library, QWidget* parent);
   ~SmartPlaylistWizard();
 
+  class SearchPage : public QWizardPage {
+    friend class SmartPlaylistWizard;
+  public:
+    SearchPage(QWidget* parent = 0);
+    bool isComplete() const;
+
+    QVBoxLayout* layout_;
+    QList<SmartPlaylistSearchTermWidget*> terms_;
+    SmartPlaylistSearchTermWidget* new_term_;
+
+    SmartPlaylistSearchPreview* preview_;
+  };
+
 private slots:
   void AddSearchTerm();
   void RemoveSearchTerm();
 
+  void UpdateTermPreview();
+
+private:
+  SmartPlaylistSearch MakeSearch() const;
+
 private:
   Ui_SmartPlaylistWizard* ui_;
   LibraryBackend* library_;
-
-  QVBoxLayout* search_term_layout_;
-  QList<SmartPlaylistSearchTermWidget*> search_terms_;
-  SmartPlaylistSearchTermWidget* new_search_term_;
 };
 
 #endif // SMARTPLAYLISTWIZARD_H

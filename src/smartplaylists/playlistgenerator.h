@@ -38,10 +38,9 @@ public:
 
   void set_library(LibraryBackend* backend) { backend_ = backend; }
 
-  int limit() const { return limit_; }
   QString name() const { return name_; }
 
-  virtual void Load(const QSettings& s);
+  virtual void Load(const QSettings& s) {}
   virtual PlaylistItemList Generate() = 0;
 
 signals:
@@ -50,7 +49,6 @@ signals:
 protected:
   LibraryBackend* backend_;
 
-  int limit_;
   QString name_;
 };
 

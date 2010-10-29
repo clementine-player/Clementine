@@ -70,6 +70,13 @@ SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* lib
   connect(ui_->field, SIGNAL(currentIndexChanged(int)), SLOT(FieldChanged(int)));
   connect(ui_->remove, SIGNAL(clicked()), SIGNAL(RemoveClicked()));
 
+  connect(ui_->field, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
+  connect(ui_->value_date, SIGNAL(dateChanged(QDate)), SIGNAL(Changed()));
+  connect(ui_->value_number, SIGNAL(valueChanged(int)), SIGNAL(Changed()));
+  connect(ui_->value_rating, SIGNAL(RatingChanged(float)), SIGNAL(Changed()));
+  connect(ui_->value_text, SIGNAL(textChanged(QString)), SIGNAL(Changed()));
+  connect(ui_->value_time, SIGNAL(timeChanged(QTime)), SIGNAL(Changed()));
+
   // Populate the combo boxes
   for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {
     ui_->field->addItem(SmartPlaylistSearchTerm::FieldName(SmartPlaylistSearchTerm::Field(i)));

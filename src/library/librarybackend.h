@@ -27,6 +27,7 @@
 #include <boost/shared_ptr.hpp>
 
 class Database;
+class SmartPlaylistSearch;
 
 class LibraryBackendInterface : public QObject {
  public:
@@ -131,7 +132,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void RemoveDirectory(const Directory& dir);
 
   bool ExecQuery(LibraryQuery* q);
-  SongList FindSongs(const QString& where_sql, const QString& order_sql, int limit);
+  SongList FindSongs(const SmartPlaylistSearch& search);
 
   void IncrementPlayCountAsync(int id);
   void IncrementSkipCountAsync(int id);

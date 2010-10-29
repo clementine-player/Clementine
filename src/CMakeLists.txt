@@ -133,6 +133,8 @@ set(SOURCES
   smartplaylists/playlistgeneratorinserter.cpp
   smartplaylists/smartplaylistcontainer.cpp
   smartplaylists/smartplaylistmodel.cpp
+  smartplaylists/smartplaylistsearch.cpp
+  smartplaylists/smartplaylistsearchpreview.cpp
   smartplaylists/smartplaylistsearchterm.cpp
   smartplaylists/smartplaylistsearchtermwidget.cpp
   smartplaylists/smartplaylistview.cpp
@@ -293,6 +295,7 @@ set(HEADERS
   smartplaylists/playlistgeneratorinserter.h
   smartplaylists/smartplaylistcontainer.h
   smartplaylists/smartplaylistmodel.h
+  smartplaylists/smartplaylistsearchpreview.h
   smartplaylists/smartplaylistsearchtermwidget.h
   smartplaylists/smartplaylistview.h
   smartplaylists/smartplaylistwizard.h
@@ -378,6 +381,7 @@ set(UI
   radio/radioviewcontainer.ui
 
   smartplaylists/smartplaylistcontainer.ui
+  smartplaylists/smartplaylistsearchpreview.ui
   smartplaylists/smartplaylistsearchtermwidget.ui
   smartplaylists/smartplaylistwizard.ui
 

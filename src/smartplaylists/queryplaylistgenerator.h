@@ -18,17 +18,18 @@
 #define QUERYPLAYLISTGENERATOR_H
 
 #include "playlistgenerator.h"
+#include "smartplaylistsearch.h"
 
 class QueryPlaylistGenerator : public PlaylistGenerator {
 public:
   QueryPlaylistGenerator();
 
+  void Load(const SmartPlaylistSearch& search);
   void Load(const QSettings& s);
   PlaylistItemList Generate();
 
 private:
-  QString where_;
-  QString order_;
+  SmartPlaylistSearch search_;
 };
 
 #endif // QUERYPLAYLISTGENERATOR_H

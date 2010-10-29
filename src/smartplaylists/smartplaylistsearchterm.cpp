@@ -46,6 +46,17 @@ QString SmartPlaylistSearchTerm::ToSql() const {
   return QString();
 }
 
+bool SmartPlaylistSearchTerm::is_valid() const {
+  switch (TypeOf(field_)) {
+    case Type_Text:   return !value_.toString().isEmpty();
+    case Type_Date:   return value_.toInt() != 0;
+    case Type_Number: return value_.toInt() >= 0;
+    case Type_Rating: return value_.toFloat() >= 0.0;
+    case Type_Time:   return true;
+  }
+  return false;
+}
+
 SmartPlaylistSearchTerm::Type SmartPlaylistSearchTerm::TypeOf(Field field) {
   switch (field) {
     case Field_Length:

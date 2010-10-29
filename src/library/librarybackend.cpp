@@ -19,6 +19,7 @@
 #include "sqlrow.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
+#include "smartplaylists/smartplaylistsearch.h"
 
 #include <QDir>
 #include <QVariant>
@@ -808,16 +809,13 @@ bool LibraryBackend::ExecQuery(LibraryQuery *q) {
   return !db_->CheckErrors(q->Exec(db_->Connect(), songs_table_, fts_table_));
 }
 
-SongList LibraryBackend::FindSongs(const QString& where_sql,
-                                   const QString& order_sql, int limit) {
+SongList LibraryBackend::FindSongs(const SmartPlaylistSearch& search) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   // Build the query
-  QString sql = "SELECT ROWID, " + Song::kColumnSpec + " FROM " + songs_table_;
-  if (!where_sql.isEmpty()) sql += " WHERE "    + where_sql;
-  if (!order_sql.isEmpty()) sql += " ORDER BY " + order_sql;
-  if (limit)                sql += " LIMIT "    + QString::number(limit);
+  QString sql = search.ToSql(songs_table());
+  qDebug() << sql;
 
   // Run the query
   SongList ret;
