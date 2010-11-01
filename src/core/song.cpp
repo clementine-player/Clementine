@@ -89,7 +89,7 @@ const QStringList Song::kColumns = QStringList()
     << "mtime" << "ctime" << "filesize" << "sampler" << "art_automatic"
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
-    << "effective_compilation" << "skipcount";
+    << "effective_compilation" << "skipcount" << "score";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
@@ -153,6 +153,7 @@ Song::Private::Private()
     playcount_(0),
     skipcount_(0),
     lastplayed_(-1),
+    score_(0),
     length_(-1),
     bitrate_(-1),
     samplerate_(-1),
@@ -470,6 +471,8 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   // effective_compilation = 30
 
   d->skipcount_ = q.value(col + 31).isNull() ? 0 : q.value(col + 31).toInt();
+
+  d->score_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toInt();
 
   #undef tostr
   #undef toint
@@ -922,6 +925,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":effective_compilation", is_compilation() ? 1 : 0);
 
   query->bindValue(":skipcount", d->skipcount_);
+
+  query->bindValue(":score", d->score_);
 
   #undef intval
   #undef notnullintval

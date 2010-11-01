@@ -319,6 +319,7 @@ void LibraryWatcher::ScanSubdirectory(
         song_on_disk.set_skipcount(matching_song.skipcount());
         song_on_disk.set_lastplayed(matching_song.lastplayed());
         song_on_disk.set_rating(matching_song.rating());
+        song_on_disk.set_score(matching_song.score());
         song_on_disk.set_art_manual(matching_song.art_manual());
 
         if (!matching_song.IsMetadataEqual(song_on_disk)) {

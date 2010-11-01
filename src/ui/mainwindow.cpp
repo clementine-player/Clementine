@@ -763,7 +763,12 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // If it was a library item then we have to increment its skipped count in
   // the database.
   if (item && item->IsLocalLibraryItem() && !playlists_->active()->has_scrobbled()) {
-    library_->backend()->IncrementSkipCountAsync(item->Metadata().id());
+    Song song = item->Metadata();
+    const int position = player_->GetEngine()->position();
+    const int length = player_->GetEngine()->length();
+    const float percentage = (length == 0 ? 1 : float(position) / length);
+
+    library_->backend()->IncrementSkipCountAsync(song.id(), percentage);
   }
 }
 

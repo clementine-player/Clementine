@@ -120,6 +120,7 @@ bool Playlist::column_is_editable(Playlist::Column column) {
     case Column_Disc:
     case Column_Year:
     case Column_Genre:
+    case Column_Score:
       return true;
     default:
       break;
@@ -161,6 +162,8 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
     case Column_Genre:
       song.set_genre(value.toString());
       break;
+    case Column_Score:
+      song.set_score(value.toInt());
     default:
       break;
   }
@@ -213,6 +216,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_PlayCount:    return song.playcount();
         case Column_SkipCount:    return song.skipcount();
         case Column_LastPlayed:   return song.lastplayed();
+        case Column_Score:        return song.score();
 
         case Column_BPM:          return song.bpm();
         case Column_Bitrate:      return song.bitrate();
@@ -239,7 +243,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_PlayCount:
         case Column_SkipCount:
           return QVariant(Qt::AlignRight | Qt::AlignVCenter);
-
+        case Column_Score:
+          return QVariant(Qt::AlignCenter | Qt::AlignVCenter);
         default:
           return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
       }
@@ -259,10 +264,16 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
   if(!set_column_value(song, (Column)index.column(), value))
     return false;
 
-  QFuture<bool> future = song.BackgroundSave();
-  ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
-  watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+  if((Column)index.column() == Column_Score) {
+    // The score is only saved in the database, not the file
+    library_->AddOrUpdateSongs(SongList() << song);
+    emit EditingFinished(index);
+  } else {
+    QFuture<bool> future = song.BackgroundSave();
+    ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
+    watcher->setFuture(future);
+    connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+  }
   return true;
 }
 
@@ -820,6 +831,7 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_PlayCount:    cmp(playcount);
     case Column_SkipCount:    cmp(skipcount);
     case Column_LastPlayed:   cmp(lastplayed);
+    case Column_Score:        cmp(score);
 
     case Column_BPM:          cmp(bpm);
     case Column_Bitrate:      cmp(bitrate);
@@ -855,6 +867,7 @@ QString Playlist::column_name(Column column) {
     case Column_PlayCount:    return tr("Play count");
     case Column_SkipCount:    return tr("Skip count");
     case Column_LastPlayed:   return tr("Last played");
+    case Column_Score:        return tr("Score");
 
     case Column_BPM:          return tr("BPM");
     case Column_Bitrate:      return tr("Bit rate");

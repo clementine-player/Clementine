@@ -135,7 +135,7 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList FindSongs(const SmartPlaylistSearch& search);
 
   void IncrementPlayCountAsync(int id);
-  void IncrementSkipCountAsync(int id);
+  void IncrementSkipCountAsync(int id, float progress);
   void UpdateSongRatingAsync(int id, float rating);
 
  public slots:
@@ -149,7 +149,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
   void ForceCompilation(const QString& artist, const QString& album, bool on);
   void IncrementPlayCount(int id);
-  void IncrementSkipCount(int id);
+  void IncrementSkipCount(int id, float progress);
   void UpdateSongRating(int id, float rating);
 
  signals:
@@ -172,6 +172,8 @@ class LibraryBackend : public LibraryBackendInterface {
     bool has_samplers;
     bool has_not_samplers;
   };
+
+  static const char* kNewScoreSql;
 
   void UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update,
                           SongList& deleted_songs, SongList& added_songs,

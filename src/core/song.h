@@ -161,6 +161,7 @@ class Song {
   int playcount() const { return d->playcount_; }
   int skipcount() const { return d->skipcount_; }
   int lastplayed() const { return d->lastplayed_; }
+  int score() const { return d->score_; }
 
   int length() const { return d->length_; }
   int bitrate() const { return d->bitrate_; }
@@ -221,6 +222,7 @@ class Song {
   void set_playcount(int v) { d->playcount_ = v; }
   void set_skipcount(int v) { d->skipcount_ = v; }
   void set_lastplayed(int v) { d->lastplayed_ = v; }
+  void set_score(int v) { d->score_ = v; }
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }
@@ -266,6 +268,7 @@ class Song {
     int playcount_;
     int skipcount_;
     int lastplayed_;
+    int score_;
 
     int length_;  // Seconds.
     int bitrate_;

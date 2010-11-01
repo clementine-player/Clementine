@@ -28,6 +28,11 @@
 #include <QCoreApplication>
 #include <QDateTime>
 
+const char* LibraryBackend::kNewScoreSql =
+    "case when playcount <= 0 then (%1 * 100 + score) / 2"
+    "     else (score * (playcount + skipcount) + %1 * 100) / (playcount + skipcount + 1)"
+    " end";
+
 LibraryBackend::LibraryBackend(QObject *parent)
   : LibraryBackendInterface(parent)
 {
@@ -56,9 +61,9 @@ void LibraryBackend::IncrementPlayCountAsync(int id) {
                              Q_ARG(int, id));
 }
 
-void LibraryBackend::IncrementSkipCountAsync(int id) {
+void LibraryBackend::IncrementSkipCountAsync(int id, float progress) {
   metaObject()->invokeMethod(this, "IncrementSkipCount", Qt::QueuedConnection,
-                             Q_ARG(int, id));
+                             Q_ARG(int, id), Q_ARG(float, progress));
 }
 
 void LibraryBackend::UpdateSongRatingAsync(int id, float rating) {
@@ -841,7 +846,8 @@ void LibraryBackend::IncrementPlayCount(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("UPDATE %1 SET playcount = playcount + 1,"
-                      "              lastplayed = :now"
+                      "              lastplayed = :now,"
+                      "              score = " + QString(kNewScoreSql).arg("1.0") +
                       " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":now", QDateTime::currentDateTime().toTime_t());
   q.bindValue(":id", id);
@@ -853,14 +859,16 @@ void LibraryBackend::IncrementPlayCount(int id) {
   emit SongsStatisticsChanged(SongList() << new_song);
 }
 
-void LibraryBackend::IncrementSkipCount(int id) {
+void LibraryBackend::IncrementSkipCount(int id, float progress) {
   if (id == -1)
     return;
+  progress = qBound(0.0f, progress, 1.0f);
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1"
+  QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1,"
+                      "              score = " + QString(kNewScoreSql).arg(progress) +
                       " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":id", id);
   q.exec();
