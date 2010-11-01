@@ -18,6 +18,7 @@
 #include "smartplaylistsearchtermwidget.h"
 #include "smartplaylistwizard.h"
 #include "ui_smartplaylistwizard.h"
+#include "playlistgenerator.h"
 
 SmartPlaylistWizard::SearchPage::SearchPage(QWidget* parent)
   : QWizardPage(parent)
@@ -38,6 +39,7 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
     library_(library)
 {
   ui_->setupUi(this);
+  ui_->limit_value->setValue(PlaylistGenerator::kDefaultLimit);
 
   // Create the new search term widget
   ui_->page_query_search->new_term_ = new SmartPlaylistSearchTermWidget(library_, this);
@@ -50,14 +52,43 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
   ui_->page_query_search->layout_->addStretch();
   AddSearchTerm();
 
-  // Add the preview widget at the bottom
+  // Add the preview widget at the bottom of the search terms page
   ui_->page_query_search->preview_ = new SmartPlaylistSearchPreview(this);
   ui_->page_query_search->preview_->set_library(library_);
   ui_->page_query_search->layout_->addWidget(ui_->page_query_search->preview_);
+
+  // Add sort field texts
+  for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {
+    const SmartPlaylistSearchTerm::Field field = SmartPlaylistSearchTerm::Field(i);
+    const QString field_name = SmartPlaylistSearchTerm::FieldName(field);
+    ui_->sort_field_value->addItem(field_name);
+  }
+  connect(ui_->sort_field_value, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortOrder()));
+  UpdateSortOrder();
+
+  // Set the sort and limit radio buttons back to their defaults - they would
+  // have been changed by setupUi
+  ui_->sort_random->setChecked(true);
+  ui_->limit_none->setChecked(true);
+
+  // Set up the preview widget that's already at the bottom of the sort page
+  ui_->sort_preview->set_library(library_);
 }
 
 SmartPlaylistWizard::~SmartPlaylistWizard() {
   delete ui_;
+}
+
+void SmartPlaylistWizard::UpdateSortOrder() {
+  const SmartPlaylistSearchTerm::Field field =
+      SmartPlaylistSearchTerm::Field(ui_->sort_field_value->currentIndex());
+  const SmartPlaylistSearchTerm::Type type = SmartPlaylistSearchTerm::TypeOf(field);
+  const QString asc = SmartPlaylistSearchTerm::FieldSortOrderText(type, true);
+  const QString desc = SmartPlaylistSearchTerm::FieldSortOrderText(type, false);
+
+  ui_->sort_order->clear();
+  ui_->sort_order->addItem(asc);
+  ui_->sort_order->addItem(desc);
 }
 
 void SmartPlaylistWizard::AddSearchTerm() {
@@ -93,12 +124,24 @@ void SmartPlaylistWizard::UpdateTermPreview() {
   if (!search.is_valid())
     return;
 
+  // Don't apply limits in the term page
+  search.limit_ = -1;
+
   ui_->page_query_search->preview_->Update(search);
+}
+
+void SmartPlaylistWizard::UpdateSortPreview() {
+  SmartPlaylistSearch search = MakeSearch();
+  if (!search.is_valid())
+    return;
+
+  ui_->sort_preview->Update(search);
 }
 
 SmartPlaylistSearch SmartPlaylistWizard::MakeSearch() const {
   SmartPlaylistSearch ret;
 
+  // Search terms
   foreach (SmartPlaylistSearchTermWidget* widget, ui_->page_query_search->terms_) {
     SmartPlaylistSearchTerm term = widget->Term();
     if (!term.is_valid())
@@ -106,6 +149,23 @@ SmartPlaylistSearch SmartPlaylistWizard::MakeSearch() const {
 
     ret.terms_ << term;
   }
+
+  // Sort order
+  if (ui_->sort_random->isChecked()) {
+    ret.sort_type_ = SmartPlaylistSearch::Sort_Random;
+  } else {
+    const bool ascending = ui_->sort_order->currentIndex() == 0;
+    ret.sort_type_ = ascending ? SmartPlaylistSearch::Sort_FieldAsc :
+                                 SmartPlaylistSearch::Sort_FieldDesc;
+    ret.sort_field_ = SmartPlaylistSearchTerm::Field(
+          ui_->sort_field_value->currentIndex());
+  }
+
+  // Limit
+  if (ui_->limit_none->isChecked())
+    ret.limit_ = -1;
+  else
+    ret.limit_ = ui_->limit_value->value();
 
   return ret;
 }

@@ -177,6 +177,17 @@ QString SmartPlaylistSearchTerm::FieldName(Field field) {
   return QString();
 }
 
+QString SmartPlaylistSearchTerm::FieldSortOrderText(Type type, bool ascending) {
+  switch (type) {
+    case Type_Text:   return ascending ? QObject::tr("A-Z")            : QObject::tr("Z-A");
+    case Type_Date:   return ascending ? QObject::tr("oldest first")   : QObject::tr("newest first");
+    case Type_Time:   return ascending ? QObject::tr("shortest first") : QObject::tr("longest first");
+    case Type_Number:
+    case Type_Rating: return ascending ? QObject::tr("smallest first") : QObject::tr("biggest first");
+  }
+  return QString();
+}
+
 QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearchTerm& term) {
   s << quint8(term.field_);
   s << quint8(term.operator_);

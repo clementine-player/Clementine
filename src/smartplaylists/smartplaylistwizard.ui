@@ -136,33 +136,14 @@ margin-left: 9px;
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="sort_field_value">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <property name="text">
-           <string>Artist A-Z</string>
-          </property>
+          <widget class="QComboBox" name="sort_field_value"/>
          </item>
          <item>
-          <property name="text">
-           <string>Length (shortest first)</string>
-          </property>
+          <widget class="QComboBox" name="sort_order"/>
          </item>
-         <item>
-          <property name="text">
-           <string>Length (longest first)</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Year (oldest first)</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Year (newest first)</string>
-          </property>
-         </item>
-        </widget>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -174,7 +155,7 @@ margin-left: 9px;
       </property>
       <layout class="QFormLayout" name="formLayout_2">
        <item row="0" column="0" colspan="2">
-        <widget class="QRadioButton" name="radioButton_3">
+        <widget class="QRadioButton" name="limit_none">
          <property name="text">
           <string>Show all the songs</string>
          </property>
@@ -184,14 +165,14 @@ margin-left: 9px;
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QRadioButton" name="radioButton_4">
+        <widget class="QRadioButton" name="limit_limit">
          <property name="text">
           <string>Only show the first</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QSpinBox" name="spinBox">
+        <widget class="QSpinBox" name="limit_value">
          <property name="suffix">
           <string> songs</string>
          </property>
@@ -214,7 +195,7 @@ margin-left: 9px;
      </widget>
     </item>
     <item>
-     <widget class="SmartPlaylistSearchPreview" name="widget" native="true"/>
+     <widget class="SmartPlaylistSearchPreview" name="sort_preview" native="true"/>
     </item>
    </layout>
   </widget>
@@ -252,9 +233,9 @@ margin-left: 9px;
    </hints>
   </connection>
   <connection>
-   <sender>spinBox</sender>
+   <sender>limit_value</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>radioButton_4</receiver>
+   <receiver>limit_limit</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

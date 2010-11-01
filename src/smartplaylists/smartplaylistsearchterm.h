@@ -87,6 +87,7 @@ public:
   static QString OperatorText(Type type, Operator op);
   static QString FieldName(Field field);
   static QString FieldColumnName(Field field);
+  static QString FieldSortOrderText(Type type, bool ascending);
 };
 
 typedef QList<SmartPlaylistSearchTerm::Operator> OperatorList;

@@ -53,6 +53,8 @@ private slots:
   void RemoveSearchTerm();
 
   void UpdateTermPreview();
+  void UpdateSortPreview();
+  void UpdateSortOrder();
 
 private:
   SmartPlaylistSearch MakeSearch() const;
