@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-15 23:46+0000\n"
-"PO-Revision-Date: 2010-09-16 03:08+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
+"POT-Creation-Date: 2010-10-11 18:21+0000\n"
+"PO-Revision-Date: 2010-10-12 22:51+0000\n"
+"Last-Translator: Kuba Galus <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-17 05:44+0000\n"
+"X-Launchpad-Export-Date: 2010-10-13 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 "X-Language: pl_PL\n"
@@ -164,7 +164,7 @@ msgid "About Clementine..."
 msgstr "O Clemetine..."
 
 msgid "About Qt..."
-msgstr ""
+msgstr "O Qt..."
 
 msgid "Account details"
 msgstr "Szczegóły konta"
@@ -323,13 +323,13 @@ msgid "Artist"
 msgstr "Wykonawca"
 
 msgid "Artist info"
-msgstr ""
+msgstr "Informacja o artyście"
 
 msgid "Artist radio"
 msgstr "Radio wykonawcy"
 
 msgid "Artist tags"
-msgstr ""
+msgstr "Tagi wykonawcy"
 
 msgid "Artist's initial"
 msgstr "Inicjał autora"
@@ -378,7 +378,7 @@ msgstr "Tryb"
 
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "Biografia z %1"
 
 msgid "Bit rate"
 msgstr "Bitrate"
@@ -399,7 +399,7 @@ msgid "Browse..."
 msgstr "Przeglądaj..."
 
 msgid "Buffer Duration (ms)"
-msgstr ""
+msgstr "Rozmiar bufora (ms)"
 
 msgid "Buttons"
 msgstr "Przyciski"
@@ -559,7 +559,7 @@ msgstr ""
 "prawidłowe pluginy dla GStreamer'a"
 
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "Nie można wczytać radia last.fm"
 
 #, qt-format
 msgid "Couldn't open output file %1"
@@ -620,7 +620,7 @@ msgid "Custom"
 msgstr ""
 
 msgid "Custom radio"
-msgstr ""
+msgstr "Własne radio"
 
 msgid "Custom..."
 msgstr "Własny..."
@@ -1230,7 +1230,7 @@ msgid "Loading tracks"
 msgstr "Wczytywanie ścieżek"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Wczytywanie..."
 
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Wczytywanie plików/adresów URL, zamiana obecnej listy odtwarzania"
@@ -1245,11 +1245,11 @@ msgid "Low (256x256)"
 msgstr "Niska (256x256)"
 
 msgid "Lyrics"
-msgstr ""
+msgstr "Teksty utworów"
 
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "Teskt z %1"
 
 msgid "MP3"
 msgstr "MP3"
@@ -1385,6 +1385,7 @@ msgstr "Brak"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
+"Żadna z zaznaczonych piosenek nie nadaje się do skopiowania na urządzenie"
 
 msgid "Not connected"
 msgstr "Nie podłączono"
@@ -1501,7 +1502,7 @@ msgid "Play count"
 msgstr ""
 
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Odtwarzaj własne radio..."
 
 msgid "Play if stopped, pause if playing"
 msgstr "Odtwarzaj gdy zatrzymane, zatrzymaj gdy odtwarzane"
@@ -1706,7 +1707,7 @@ msgid "Samplerate"
 msgstr "Próbkowanie"
 
 msgid "Save image"
-msgstr ""
+msgstr "Zapisz obraz"
 
 msgid "Save playlist"
 msgstr "Zapisz listę odtwarzania"
@@ -1859,7 +1860,7 @@ msgid "Sign out"
 msgstr "Wyloguj"
 
 msgid "Similar artists"
-msgstr ""
+msgstr "Podobni wykonawcy"
 
 msgid "Ska"
 msgstr "Ska"
@@ -1892,10 +1893,10 @@ msgid "Soft Rock"
 msgstr "Soft Rock"
 
 msgid "Song Information"
-msgstr ""
+msgstr "Informacje o utworze"
 
 msgid "Song info"
-msgstr ""
+msgstr "Informacje o utworze"
 
 msgid "Sonogram"
 msgstr "Sonogram"
@@ -2190,7 +2191,7 @@ msgid "Volume %1%"
 msgstr "Głośność %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "Nazwa woluminu"
 
 msgid "WAV"
 msgstr "WAV"
@@ -2257,6 +2258,8 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-weight:600;"
 "\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
+"Możesz scrobblować utwory za darmo ale tylko <span style=\" font-weight:600;"
+"\">płacący subskrybenci</span> mogą odtwarzać radio Last.fm z Clementine."
 
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a href="
@@ -2381,9 +2384,6 @@ msgstr "zatrzymaj"
 msgid "track %1"
 msgstr "utwór %1"
 
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Nie można załadować stacji last.fm: %1"
-
 #~ msgid "&Hide tray icon"
 #~ msgstr "&Ukryj ikonę w trayu"
 
@@ -2444,6 +2444,9 @@ msgstr "utwór %1"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"
+
+#~ msgid "Couldn't load the last.fm radio station: %1"
+#~ msgstr "Nie można załadować stacji last.fm: %1"
 
 #~ msgid "Connected"
 #~ msgstr "Podłączono"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-11 17:36+0000\n"
-"PO-Revision-Date: 2010-09-13 16:09+0000\n"
+"POT-Creation-Date: 2010-11-02 01:51+0000\n"
+"PO-Revision-Date: 2010-11-01 22:47+0000\n"
 "Last-Translator: firewalker <Unknown>\n"
 "Language-Team: <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-14 05:08+0000\n"
+"X-Launchpad-Export-Date: 2010-11-02 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: \n"
 "X-Language: el_GR\n"
@@ -24,13 +24,13 @@ msgid " ms"
 msgstr " ms"
 
 msgid " pt"
-msgstr ""
+msgstr " σημ"
 
 msgid " seconds"
 msgstr " δευτερόλεπτα"
 
 msgid " songs"
-msgstr ""
+msgstr " τραγούδια"
 
 #, qt-format
 msgid "%1 albums"
@@ -42,11 +42,11 @@ msgstr "%1 ημέρες"
 
 #, qt-format
 msgid "%1 days ago"
-msgstr ""
+msgstr "Πριν %1 ημέρες"
 
 #, qt-format
 msgid "%1 other listeners"
-msgstr ""
+msgstr "%1 άλλοι ακροατές"
 
 #, qt-format
 msgid "%1 playlists (%2)"
@@ -66,15 +66,15 @@ msgstr "%1 τραγούδια"
 
 #, qt-format
 msgid "%1 songs found"
-msgstr ""
+msgstr "βρέθηκαν %1 τραγούδια"
 
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr ""
+msgstr "βρέθηκαν %1 τραγούδια (εμφάνιση %2)"
 
 #, qt-format
 msgid "%1 total plays"
-msgstr ""
+msgstr "%1 συνολικές αναπαραγωγές"
 
 #, qt-format
 msgid "%1 tracks"
@@ -124,7 +124,7 @@ msgid "128k MP3"
 msgstr "128k MP3"
 
 msgid "50 random tracks"
-msgstr ""
+msgstr "50 τυχαία τραγούδια"
 
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -132,8 +132,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Λέξεις που αρχίζουν με %, για παράδειγμα:%καλλιτέχνης %άλμπουμ %τίτλος</"
-"p>\n"
+"<p>Λέξεις που αρχίζουν με %, για παράδειγμα:%καλλιτέχνης %άλμπουμ "
+"%τίτλος</p>\n"
 "\n"
 "<p>Αν κλείσεις ένα κείμενο που περιέχει λέξη με % σε άγκιστρα  ({}), το "
 "τμήμα αυτό δεν θα είναι ορατό η λέξη λείπει</p>"
@@ -143,11 +143,17 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
+"Μια έξυπνη λίστα αναπαραγωγής είναι μία δυναμική λίστα τραγουδιών που "
+"προέρχεται από την βιβλιοθήκη σας. Υπάρχουν διαφορετικοί τύποι \"έξυπνης "
+"λίστα αναπαραγωγής\" που προσφέρουν διαφορετικούς τρόπους επιλογής "
+"τραγουδιών."
 
 msgid ""
 "A song will be included in the playlist if it matches all of these "
 "conditions."
 msgstr ""
+"Ένα τραγούδι θα συμπεριληφθεί στην λίστα αναπαραγωγής αν πληρεί όλες αυτές "
+"τις συνθήκες."
 
 msgid "A-Z"
 msgstr ""
@@ -163,7 +169,7 @@ msgid "About Clementine..."
 msgstr "Περί του Clementine..."
 
 msgid "About Qt..."
-msgstr ""
+msgstr "Περί του Qt..."
 
 msgid "Account details"
 msgstr "Λεπτομέρειες λογαριασμού"
@@ -184,7 +190,7 @@ msgid "Add another stream..."
 msgstr "Προσθήκη άλλης ροής..."
 
 msgid "Add as new playlist..."
-msgstr ""
+msgstr "Προσθήκη ως νέα λίστα..."
 
 msgid "Add directory..."
 msgstr "Προσθήκη καταλόγου..."
@@ -208,7 +214,7 @@ msgid "Add new folder..."
 msgstr "Προσθήκη νέου φακέλου..."
 
 msgid "Add search term"
-msgstr ""
+msgstr "Προσθήκη όρου αναζήτησης"
 
 msgid "Add stream..."
 msgstr "Προσθήκη ροής..."
@@ -250,7 +256,7 @@ msgid "Album (ideal loudness for all tracks)"
 msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμάτια)"
 
 msgid "Album artist"
-msgstr "Άλμπουμ καλλιτέχνη"
+msgstr "Καλλιτέχνης άλμπουμ"
 
 msgid "Albumartist"
 msgstr "Άλμπουμ Καλλιτέχνης"
@@ -294,7 +300,8 @@ msgstr ""
 "Προέκυψε σφάλμα στην αντιγραφή της βάσης δεδομένων iTunes από την συσκευή"
 
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Προέκυψε σφάλμα στην αντιγραφή της βάσης δεδομένων iTunes στην συσκευή"
+msgstr ""
+"Προέκυψε σφάλμα στην αντιγραφή της βάσης δεδομένων iTunes στην συσκευή"
 
 msgid "An error occurred loading the iTunes database"
 msgstr "Προέκυψε σφάλμα στην φόρτωση της βάσης δεδομένων iTunes"
@@ -307,7 +314,7 @@ msgid "And:"
 msgstr "Και:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
 msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
@@ -323,13 +330,13 @@ msgid "Artist"
 msgstr "Καλλιτέχνης"
 
 msgid "Artist info"
-msgstr ""
+msgstr "Πληροφορίες καλλιτέχνη"
 
 msgid "Artist radio"
 msgstr "Ραδιόφωνο καλλιτέχνη"
 
 msgid "Artist tags"
-msgstr ""
+msgstr "Ετικέτες Καλλιτέχνη"
 
 msgid "Artist's initial"
 msgstr "Αρχικά του καλλιτέχνη"
@@ -378,7 +385,7 @@ msgstr "Συμπεριφορά"
 
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "Βιογραφία από %1"
 
 msgid "Bit rate"
 msgstr "Ρυθμός bit"
@@ -399,13 +406,13 @@ msgid "Browse..."
 msgstr "Αναζήτηση..."
 
 msgid "Buffer Duration (ms)"
-msgstr ""
+msgstr "Διάρκεια απομονωτή (Buffer) (ms)"
 
 msgid "Buttons"
 msgstr "Κουμπιά"
 
 msgid "Change font size..."
-msgstr ""
+msgstr "Αλλαγή μεγέθους γραμματοσειράς..."
 
 msgid "Change shortcut..."
 msgstr "Αλλαγή συντόμευσης..."
@@ -427,6 +434,8 @@ msgstr "Επιλογή από τη λίστα"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
+"Επιλέξτε πως θα ταξινομηθεί η λίστα αναπαραγωγής και πόσα τραγούδια θα "
+"περιέχει."
 
 msgid "Choose manual cover"
 msgstr "Επιλογή εξώφυλλου χειροκίνητα"
@@ -434,6 +443,8 @@ msgstr "Επιλογή εξώφυλλου χειροκίνητα"
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
+"Επιλέξτε τις ιστοσελίδες που θέλετε να χρησιμοποιεί ο Clementine όταν ψάχνει "
+"για στοίχους."
 
 msgid "Classical"
 msgstr "Κλασσική"
@@ -474,7 +485,7 @@ msgstr ""
 "πως έχετε εγκαταστήσει τον Clementine σωστά."
 
 msgid "Clementine image viewer"
-msgstr ""
+msgstr "Προβολή εικόνων του Clementine"
 
 msgid "Click here to add some music"
 msgstr "Κλικ εδώ για να προσθέσετε μουσική"
@@ -515,8 +526,8 @@ msgstr "Παραμετροποίηση της βιβλιοθήκης"
 
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr ""
-"Σύνδεση των χειριστηρίων Wii χρησιμοποιώντας την ενέργεια ενεργοποίηση/"
-"απενεργοποίηση"
+"Σύνδεση των χειριστηρίων Wii χρησιμοποιώντας την ενέργεια "
+"ενεργοποίηση/απενεργοποίηση"
 
 msgid "Connect device"
 msgstr "Σύνδεση συσκευής"
@@ -561,7 +572,7 @@ msgstr ""
 "σωστά πρόσθετα του  GStreamer εγκατεστημένα"
 
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "Δεν μπόρεσε να γίνει φόρτωση του ραδιοσταθμού  last.fm"
 
 #, qt-format
 msgid "Couldn't open output file %1"
@@ -619,10 +630,10 @@ msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
 msgid "Custom"
-msgstr ""
+msgstr "Προσαρμοσμένο"
 
 msgid "Custom radio"
-msgstr ""
+msgstr "Προσαρμοσμένο ράδιο"
 
 msgid "Custom..."
 msgstr "Προσωπική..."
@@ -757,7 +768,7 @@ msgid "Drive letter"
 msgstr "Γράμμα δίσκου"
 
 msgid "Dynamic playlists"
-msgstr ""
+msgstr "Δυναμικές λίστες"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
@@ -834,7 +845,7 @@ msgid "Error processing %1: %2"
 msgstr "Σφάλμα επεξεργασίας %1: %2"
 
 msgid "Ever played"
-msgstr ""
+msgstr "Ενίοτε έπαιξαν"
 
 msgid "Extras"
 msgstr "Επιπλέον"
@@ -870,7 +881,7 @@ msgid "Fading duration"
 msgstr "Διάρκειας «Σβησίματος»"
 
 msgid "Favourite tracks"
-msgstr ""
+msgstr "Αγαπημένα κομμάτια"
 
 msgid "Fetch Missing Covers"
 msgstr "Κατέβασμα εξώφυλλων που λείπουν"
@@ -916,6 +927,7 @@ msgstr "Τύπος συστήματος αρχείων"
 
 msgid "Find songs in your library that match the criteria you specify."
 msgstr ""
+"Εύρεση τραγουδιών στην βιβλιοθήκη που πληρούν τα κριτήρια που ορίσατε."
 
 msgid "First level"
 msgstr "Πρώτο επίπεδο"
@@ -924,7 +936,7 @@ msgid "Flac"
 msgstr "Flac"
 
 msgid "Font size"
-msgstr ""
+msgstr "Μέγεθος γραμματοσειράς"
 
 msgid "Forget device"
 msgstr "«Ξέχνα» την συσκευή"
@@ -1034,7 +1046,7 @@ msgid "Icon"
 msgstr "Εικονίδιο"
 
 msgid "Icons on top"
-msgstr ""
+msgstr "Εικονίδια στην κορυφή"
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1117,10 +1129,10 @@ msgid "Large album cover"
 msgstr "Μεγάλο εξώφυλλο άλμπουμ"
 
 msgid "Large sidebar"
-msgstr ""
+msgstr "Μεγάλη πλευρική μπάρα"
 
 msgid "Last played"
-msgstr ""
+msgstr "Τελευταία εκτέλεση"
 
 msgid "Last.fm"
 msgstr "Last.fm"
@@ -1160,19 +1172,19 @@ msgid "Last.fm password"
 msgstr "Last.fm συνθηματικό"
 
 msgid "Last.fm play counts"
-msgstr ""
+msgstr "Αριθμός αναπαραγωγής Last.fm"
 
 msgid "Last.fm similar artists"
-msgstr ""
+msgstr "Παρόμοιοι καλλιτέχνες Last.fm"
 
 msgid "Last.fm tags"
-msgstr ""
+msgstr "Ετικέτες του Last.fm"
 
 msgid "Last.fm username"
 msgstr "Last.fm όνομα χρήστη"
 
 msgid "Last.fm wiki"
-msgstr ""
+msgstr "Wiki του Last.fm"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Κενό για τα προεπιλεγμένα.  Π.χ. \"/dev/dsp\", \"front\", κ.τ.λ."
@@ -1184,6 +1196,8 @@ msgid ""
 "Let Last.fm suggest songs from your library that are similar to one you "
 "specify."
 msgstr ""
+"Επιτρέψτε στο Last.fm να προτείνει τραγούδια από την βιβλιοθήκη σας παρόμοια "
+"με αυτό που ορίζετε."
 
 msgid "Library"
 msgstr "Βιβλιοθήκη"
@@ -1192,10 +1206,10 @@ msgid "Library advanced grouping"
 msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
 
 msgid "Library search"
-msgstr ""
+msgstr "Έρευνα βιβλιοθήκης"
 
 msgid "Limits"
-msgstr ""
+msgstr "Όρια"
 
 msgid "Live"
 msgstr "Ζωντανά"
@@ -1225,7 +1239,7 @@ msgid "Loading iPod database"
 msgstr "Φόρτωση της βάσης δεδομένων iPod"
 
 msgid "Loading smart playlist"
-msgstr ""
+msgstr "Φόρτωση έξυπνης λίστας"
 
 msgid "Loading stream"
 msgstr "Φόρτωμα ροής (stream)"
@@ -1234,10 +1248,11 @@ msgid "Loading tracks"
 msgstr "Φόρτωση κομματιών"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Φόρτωση..."
 
 msgid "Loads files/URLs, replacing current playlist"
-msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
+msgstr ""
+"Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
 msgid "Love"
 msgstr "Αγάπη"
@@ -1249,11 +1264,11 @@ msgid "Low (256x256)"
 msgstr "Χαμηλή (256x256)"
 
 msgid "Lyrics"
-msgstr ""
+msgstr "Στίχοι"
 
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "Στίχοι από %1"
 
 msgid "MP3"
 msgstr "MP3"
@@ -1298,7 +1313,7 @@ msgid "Monitor the library for changes"
 msgstr "Έλεγχος της βιβλιοθήκης για αλλαγές"
 
 msgid "Most played"
-msgstr ""
+msgstr "Έπαιξαν περισσότερο"
 
 msgid "Mount point"
 msgstr "Σημείο φόρτωσης (mount point)"
@@ -1319,7 +1334,8 @@ msgid "Music"
 msgstr "Μουσική"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr "Μουσική (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr ""
+"Μουσική (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Μουσική βιβλιοθήκη"
@@ -1349,28 +1365,28 @@ msgid "Neighbors"
 msgstr "Γείτονες"
 
 msgid "Never"
-msgstr ""
+msgstr "Ποτέ"
 
 msgid "Never played"
-msgstr ""
+msgstr "Ποτέ δεν έπαιξαν"
 
 msgid "New"
-msgstr ""
+msgstr "Νέο"
 
 msgid "New folder..."
-msgstr ""
+msgstr "Νέος φάκελος..."
 
 msgid "New playlist"
 msgstr "Νέα λίστα"
 
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Νέα έξυπνη λίστα..."
 
 msgid "New songs"
 msgstr "Νέα τραγούδια"
 
 msgid "Newest tracks"
-msgstr ""
+msgstr "Νεότερα κομμάτια"
 
 msgid "Next track"
 msgstr "Επόμενο κομμάτι"
@@ -1389,6 +1405,8 @@ msgstr "Κανένα"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
+"Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία "
+"συσκευή"
 
 msgid "Not connected"
 msgstr "Αποσυνδεμένο"
@@ -1430,7 +1448,7 @@ msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
 msgid "Only show the first"
-msgstr ""
+msgstr "Εμφάνιση μόνο του πρώτου"
 
 msgid "Open device"
 msgstr "Άνοιγμα συσκευής"
@@ -1502,10 +1520,10 @@ msgid "Play artist radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου καλλιτέχνη..."
 
 msgid "Play count"
-msgstr ""
+msgstr "Μετρητής εκτελέσεων"
 
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Αναπαραγωγή προσαρμοσμένου ραδιοφώνου..."
 
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
@@ -1538,10 +1556,10 @@ msgid "Playlist search"
 msgstr "Αναζήτηση στη λίστα αναπαραγωγής"
 
 msgid "Playlist type"
-msgstr ""
+msgstr "Τύπος λίστας αναπαραγωγής"
 
 msgid "Playlists"
-msgstr ""
+msgstr "Λίστες αναπαραγωγής"
 
 msgid "Pop"
 msgstr "Pop"
@@ -1593,7 +1611,7 @@ msgid "Push Wiiremote button"
 msgstr "πιέστε ένα πλήκτρο Wiiremote"
 
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "Τοποθέτηση τραγουδιών σΌροιε τυχαία σειρά"
 
 msgid "Quality"
 msgstr "Ποιότητα"
@@ -1623,7 +1641,7 @@ msgid "Random visualization"
 msgstr "Τυχαίο οπτικό εφέ"
 
 msgid "Rating"
-msgstr ""
+msgstr "Βαθμολόγηση"
 
 msgid "Really cancel?"
 msgstr "Ακύρωση στ' αλήθεια;"
@@ -1710,7 +1728,7 @@ msgid "Samplerate"
 msgstr "Δειγματοληψία"
 
 msgid "Save image"
-msgstr ""
+msgstr "Αποθήκευση εικόνας"
 
 msgid "Save playlist"
 msgstr "Αποθήκευση λίστας αναπαραγωγής"
@@ -1740,10 +1758,10 @@ msgid "Search for album covers..."
 msgstr "Αναζήτηση για εξώφυλλο άλμπουμ..."
 
 msgid "Search options"
-msgstr ""
+msgstr "Επιλογές εύρεσης"
 
 msgid "Search terms"
-msgstr ""
+msgstr "Όροι αναζήτησης"
 
 msgid "Second level"
 msgstr "Δεύτερο επίπεδο"
@@ -1827,7 +1845,7 @@ msgid "Show above status bar"
 msgstr "Εμφάνιση πάνω από την μπάρα κατάστασης"
 
 msgid "Show all the songs"
-msgstr ""
+msgstr "Εμφάνιση όλλων των τραγουδιών"
 
 msgid "Show fullsize..."
 msgstr "Εμφάνισε σε πλήρες μέγεθος..."
@@ -1863,7 +1881,7 @@ msgid "Sign out"
 msgstr "Αποσύνδεση"
 
 msgid "Similar artists"
-msgstr ""
+msgstr "Παρόμοιοι καλλιτέχνες"
 
 msgid "Ska"
 msgstr "Ska"
@@ -1872,7 +1890,7 @@ msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
 msgid "Skip count"
-msgstr ""
+msgstr "Μετρητής παραλήψεων"
 
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
@@ -1881,13 +1899,13 @@ msgid "Small album cover"
 msgstr "Μικρό εξώφυλλο άλμπουμ"
 
 msgid "Small sidebar"
-msgstr ""
+msgstr "Μικρή πλευρική μπάρα"
 
 msgid "Smart playlist"
-msgstr ""
+msgstr "Έξυπνη λίστα αναπαραγωγής"
 
 msgid "Smart playlists"
-msgstr ""
+msgstr "Έξυπνες λίστες αναπαραγωγής"
 
 msgid "Soft"
 msgstr "Απαλή"
@@ -1896,19 +1914,19 @@ msgid "Soft Rock"
 msgstr "Απαλή Rock"
 
 msgid "Song Information"
-msgstr ""
+msgstr "Πληροφορίες τραγουδιού"
 
 msgid "Song info"
-msgstr ""
+msgstr "Πληροφορίες τραγουδιού"
 
 msgid "Sonogram"
 msgstr "Sonogram"
 
 msgid "Sort songs by"
-msgstr ""
+msgstr "Ταξινόμηση τραγουδιών κατά"
 
 msgid "Sorting"
-msgstr ""
+msgstr "Ταξινόμηση"
 
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
@@ -1961,7 +1979,7 @@ msgid "Supported formats"
 msgstr "Υποστηριζόμενες μορφές"
 
 msgid "Tabs on top"
-msgstr ""
+msgstr "Καρτέλες στην κορυφή"
 
 msgid "Tag"
 msgstr "Ετικέτα"
@@ -2022,7 +2040,8 @@ msgstr ""
 "συνεχίσετε;"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας"
+msgstr ""
+"Οι φάκελοι αυτοί θα σαρωθούν για μουσικά αρχεία για την βιβλιοθήκη σας"
 
 msgid "Third level"
 msgstr "Τρίτο επίπεδο"
@@ -2075,7 +2094,7 @@ msgid "Title"
 msgstr "Τίτλος"
 
 msgid "Today"
-msgstr ""
+msgstr "Σήμερα"
 
 msgid "Toggle fullscreen"
 msgstr "Εναλλαγή πλήρης οθόνης"
@@ -2248,7 +2267,7 @@ msgid "Year - Album"
 msgstr "Έτος - Άλμπουμ"
 
 msgid "Yesterday"
-msgstr ""
+msgstr "Χθες"
 
 msgid "You are about to download the following albums"
 msgstr "Πρόκειτε να \"κατεβάσετε\" τα παρακάτω άλμπουμ"
@@ -2265,24 +2284,25 @@ msgstr ""
 "αγορά μιας συνδρομής αφαιρεί το μήνυμα από το τέλος κάθε κομματιού."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Μπορείτε να κάνετε \"scroble\" δωρεάν, αλλά μόνο <span style=\" font-"
 "weight:600;\">οι συνδρομητές επί πληρωμή</span> μπορούν να έχουν ροή από το "
 "ραδιόφωνο Last.fm στον Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Μπορείτε να χρησιμοποιήσετε χειριστήριο Wii σαν τηλεχειριστήριο για τον "
 "Clementine.  <a href=\"http://www.clementine-player.org/wiimote\">Δείτε την "
 "σχετική σελίδα στο wiki του Clementine</a> για περισσότερες πληροφορίες.\n"
 
 msgid "You love this track"
-msgstr ""
+msgstr "Λατρεύεις αυτό το κομμάτι"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -2308,7 +2328,7 @@ msgstr "Οι ροές ραδιοφώνου σας"
 
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "Τα scrobbles σου: %1"
 
 msgid "Z-A"
 msgstr ""
@@ -2324,10 +2344,10 @@ msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
 msgid "after"
-msgstr ""
+msgstr "μετά"
 
 msgid "before"
-msgstr ""
+msgstr "πριν"
 
 msgid "biggest first"
 msgstr ""
@@ -2336,29 +2356,29 @@ msgid "bpm"
 msgstr "bpm"
 
 msgid "contains"
-msgstr ""
+msgstr "περιέχει"
 
 #, qt-format
 msgid "disc %1"
 msgstr "δίσκος %1"
 
 msgid "does not contain"
-msgstr ""
+msgstr "δεν περιέχει"
 
 msgid "ends with"
-msgstr ""
+msgstr "τελειώνει με"
 
 msgid "equals"
-msgstr ""
+msgstr "ισούται"
 
 msgid "greater than"
-msgstr ""
+msgstr "μεγαλύτερο από"
 
 msgid "kbps"
 msgstr "kbps"
 
 msgid "less than"
-msgstr ""
+msgstr "λιγότερο από"
 
 msgid "longest first"
 msgstr ""
@@ -2389,7 +2409,7 @@ msgid "smallest first"
 msgstr ""
 
 msgid "starts with"
-msgstr ""
+msgstr "αρχίζει με"
 
 msgid "stop"
 msgstr "διακοπή"
@@ -2398,12 +2418,11 @@ msgstr "διακοπή"
 msgid "track %1"
 msgstr "κομμάτι %1"
 
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Αποτυχία φόρτωσης του last.fm σταθμού: %1"
-
+#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1's Συνοικιακά"
 
+#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1's Βιβλιοθήκη"
 
@@ -2444,8 +2463,8 @@ msgstr "κομμάτι %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Σημείωσε πως πρέπει να είσαι <span style=\" font-weight:600;"
-#~ "\">συνδρομητής</span> για να ακούσεις Last.fm από το Clementine."
+#~ "Σημείωσε πως πρέπει να είσαι <span style=\" font-"
+#~ "weight:600;\">συνδρομητής</span> για να ακούσεις Last.fm από το Clementine."
 
 #~ msgid "Fadeout"
 #~ msgstr "Ομαλό σβήσιμο"
@@ -2470,6 +2489,10 @@ msgstr "κομμάτι %1"
 
 #~ msgid "Show section"
 #~ msgstr "Εμφάνιση τμήματος"
+
+#, qt-format
+#~ msgid "Couldn't load the last.fm radio station: %1"
+#~ msgstr "Αποτυχία φόρτωσης του last.fm σταθμού: %1"
 
 #~ msgid "Save this stream in the Radio tab"
 #~ msgstr "Αποθήκευση της ροής αυτής στην καρτέλα του ραδιοφώνου"
@@ -2535,26 +2558,32 @@ msgstr "κομμάτι %1"
 
 #~ msgid "Use notifications to report Wii remote status"
 #~ msgstr ""
-#~ "Χρήση των ειδοποιήσεων για την αναφορά της κατάστασης του χειριστήριου "
-#~ "του Wii"
+#~ "Χρήση των ειδοποιήσεων για την αναφορά της κατάστασης του χειριστήριου του "
+#~ "Wii"
 
+#, qt-format
 #~ msgid "Wiiremote %1: connected"
 #~ msgstr "Wiiremote %1: συνδεδεμένο"
 
+#, qt-format
 #~ msgid "Wiiremote %1: actived"
 #~ msgstr "Wiiremote %1: ενεργοποιημένο"
 
+#, qt-format
 #~ msgid "Wiiremote %1: critical battery (%2%) "
 #~ msgstr "Wiiremote %1: Μπαταρία σε κρίσιμο σημείο (%2%) "
 
 #~ msgid "Use Wii remote"
 #~ msgstr "Χρήση του χειριστηρίου Wii"
 
+#, qt-format
 #~ msgid "Wiiremote %1: disconnected"
 #~ msgstr "Wiiremote %1: αποσυνδεδεμένο"
 
+#, qt-format
 #~ msgid "Wiiremote %1: low battery (%2%)"
 #~ msgstr "Wiiremote %1: χαμηλή μπαταρία (%2%)"
 
+#, qt-format
 #~ msgid "Wiiremote %1: disactived"
 #~ msgstr "Wiiremote %1: απενεργοποιημένο"

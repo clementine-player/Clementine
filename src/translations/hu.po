@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-15 23:46+0000\n"
-"PO-Revision-Date: 2010-09-16 11:20+0000\n"
+"POT-Creation-Date: 2010-10-29 19:43+0000\n"
+"PO-Revision-Date: 2010-10-30 11:02+0000\n"
 "Last-Translator: ntomka <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-17 05:44+0000\n"
+"X-Launchpad-Export-Date: 2010-10-31 05:16+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: hu\n"
 
@@ -22,13 +22,13 @@ msgid " ms"
 msgstr " ms"
 
 msgid " pt"
-msgstr ""
+msgstr " pt"
 
 msgid " seconds"
 msgstr " másodperc"
 
 msgid " songs"
-msgstr ""
+msgstr " számok"
 
 #, qt-format
 msgid "%1 albums"
@@ -40,11 +40,11 @@ msgstr "%1 nap"
 
 #, qt-format
 msgid "%1 days ago"
-msgstr ""
+msgstr "%1 nappal ezelőtt"
 
 #, qt-format
 msgid "%1 other listeners"
-msgstr ""
+msgstr "%1 hallgató"
 
 #, qt-format
 msgid "%1 playlists (%2)"
@@ -64,15 +64,15 @@ msgstr "%1 szám"
 
 #, qt-format
 msgid "%1 songs found"
-msgstr ""
+msgstr "%1 szám megtalálva"
 
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr ""
+msgstr "%1 szám megtalálva (mutatva %2)"
 
 #, qt-format
 msgid "%1 total plays"
-msgstr ""
+msgstr "Lejátszva %1-szer/szor"
 
 #, qt-format
 msgid "%1 tracks"
@@ -122,7 +122,7 @@ msgid "128k MP3"
 msgstr "128k MP3"
 
 msgid "50 random tracks"
-msgstr ""
+msgstr "50 véletlen szám"
 
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -141,11 +141,16 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
+"Az intelligens lejátszási listák dinamikusan jönnek létre a zenetáradból. "
+"Többféle ilyen lista létezik, melyek különféle módon nyújtanak lehetőséget a "
+"számok rendezésére."
 
 msgid ""
 "A song will be included in the playlist if it matches all of these "
 "conditions."
 msgstr ""
+"Egy szám csak akkor kerül bele a lejátszási listába, ha minden alábbi "
+"feltétel teljesül rá."
 
 msgid "A-Z"
 msgstr ""
@@ -161,7 +166,7 @@ msgid "About Clementine..."
 msgstr "A Clementine névjegye"
 
 msgid "About Qt..."
-msgstr ""
+msgstr "Qt névjegye..."
 
 msgid "Account details"
 msgstr "Fiók részletek"
@@ -182,7 +187,7 @@ msgid "Add another stream..."
 msgstr "Új adatfolyam hozzáadása"
 
 msgid "Add as new playlist..."
-msgstr ""
+msgstr "Hozzáadás új lejátszási listaként..."
 
 msgid "Add directory..."
 msgstr "Mappa hozzáadása"
@@ -206,7 +211,7 @@ msgid "Add new folder..."
 msgstr "Új mappa hozzáadása..."
 
 msgid "Add search term"
-msgstr ""
+msgstr "Keresési feltétel megadása"
 
 msgid "Add stream..."
 msgstr "Adatfolyam hozzáadása..."
@@ -304,7 +309,7 @@ msgid "And:"
 msgstr "És:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Megjelenés"
 
 msgid "Append files/URLs to the playlist"
 msgstr "Fájlok/URL-ek hozzáadása a lejátszási listához"
@@ -320,13 +325,13 @@ msgid "Artist"
 msgstr "Előadó"
 
 msgid "Artist info"
-msgstr ""
+msgstr "Előadó információ"
 
 msgid "Artist radio"
 msgstr "Előadó rádió"
 
 msgid "Artist tags"
-msgstr ""
+msgstr "Előadó címkék"
 
 msgid "Artist's initial"
 msgstr "Előadó kezdése"
@@ -375,7 +380,7 @@ msgstr "Viselkedés"
 
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "Életrajz a(z) %1-ról/ről"
 
 msgid "Bit rate"
 msgstr "Bitráta"
@@ -396,13 +401,13 @@ msgid "Browse..."
 msgstr "Tallózás…"
 
 msgid "Buffer Duration (ms)"
-msgstr ""
+msgstr "Előreolvasás hossza (ms)"
 
 msgid "Buttons"
 msgstr "Gombok"
 
 msgid "Change font size..."
-msgstr ""
+msgstr "Betűméret megváltoztatása..."
 
 msgid "Change shortcut..."
 msgstr "Billentyűparancs módosítása..."
@@ -424,6 +429,8 @@ msgstr "Választás a listáról"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
+"Válaszd ki, hogy a lejátszási lista hogyan legyen rendezve és hány számot "
+"tartalmazzon."
 
 msgid "Choose manual cover"
 msgstr "Borító választása manuálisan"
@@ -431,6 +438,7 @@ msgstr "Borító választása manuálisan"
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
+"Válaszd ki a weboldalakat, amelyekről a Clementine dalszövegeket kereshet."
 
 msgid "Classical"
 msgstr "Klasszikus"
@@ -471,7 +479,7 @@ msgstr ""
 "megfelelően telepítette a Clementinet."
 
 msgid "Clementine image viewer"
-msgstr ""
+msgstr "Clementine képmegjelenítő"
 
 msgid "Click here to add some music"
 msgstr "Zene felvételéhez kattintson ide"
@@ -556,7 +564,7 @@ msgstr ""
 "GStreamer beépülők megfelelően vannak-e telepítve"
 
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "Nem sikerült betölteni a Last.fm rádióállomást"
 
 #, qt-format
 msgid "Couldn't open output file %1"
@@ -614,10 +622,10 @@ msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
 msgid "Custom"
-msgstr ""
+msgstr "Egyéni"
 
 msgid "Custom radio"
-msgstr ""
+msgstr "Egyéni rádió"
 
 msgid "Custom..."
 msgstr "Egyéni..."
@@ -752,7 +760,7 @@ msgid "Drive letter"
 msgstr "Meghajtó azonosító"
 
 msgid "Dynamic playlists"
-msgstr ""
+msgstr "Dinamikus lejátszási listák"
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
@@ -829,7 +837,7 @@ msgid "Error processing %1: %2"
 msgstr "Hiba %1: %2 feldolgozásakor"
 
 msgid "Ever played"
-msgstr ""
+msgstr "Valaha játszott"
 
 msgid "Extras"
 msgstr "Extrák"
@@ -865,7 +873,7 @@ msgid "Fading duration"
 msgstr "Elhalkulás hossza"
 
 msgid "Favourite tracks"
-msgstr ""
+msgstr "Kedvenc számok"
 
 msgid "Fetch Missing Covers"
 msgstr "A hiányzó borítók letöltése"
@@ -911,6 +919,7 @@ msgstr "Fájlrendszertípus"
 
 msgid "Find songs in your library that match the criteria you specify."
 msgstr ""
+"Azon számok megkeresése, melyek kielégítik az általad megadott feltételeket."
 
 msgid "First level"
 msgstr "Első szinten"
@@ -919,7 +928,7 @@ msgid "Flac"
 msgstr "FLAC"
 
 msgid "Font size"
-msgstr ""
+msgstr "Betűméret"
 
 msgid "Forget device"
 msgstr "Eszköz elfelejtése"
@@ -1027,7 +1036,7 @@ msgid "Icon"
 msgstr "Ikon"
 
 msgid "Icons on top"
-msgstr ""
+msgstr "Ikonok felül"
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1110,10 +1119,10 @@ msgid "Large album cover"
 msgstr "Nagy albumborító"
 
 msgid "Large sidebar"
-msgstr ""
+msgstr "Nagy oldalsáv"
 
 msgid "Last played"
-msgstr ""
+msgstr "Utoljára lejátszva"
 
 msgid "Last.fm"
 msgstr "Last.fm"
@@ -1153,19 +1162,19 @@ msgid "Last.fm password"
 msgstr "Last.fm jelszó"
 
 msgid "Last.fm play counts"
-msgstr ""
+msgstr "Last.fm lejátszás számláló"
 
 msgid "Last.fm similar artists"
-msgstr ""
+msgstr "Last.fm hasonló előadók"
 
 msgid "Last.fm tags"
-msgstr ""
+msgstr "Last.fm címkék"
 
 msgid "Last.fm username"
 msgstr "Last.fm felhasználói név"
 
 msgid "Last.fm wiki"
-msgstr ""
+msgstr "Last.fm wiki"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
@@ -1178,6 +1187,8 @@ msgid ""
 "Let Last.fm suggest songs from your library that are similar to one you "
 "specify."
 msgstr ""
+"Last.fm ajánlások használata számok kiválasztásához a zenetáradból a "
+"feltételeidnek megfelelően."
 
 msgid "Library"
 msgstr "Zenetár"
@@ -1186,10 +1197,10 @@ msgid "Library advanced grouping"
 msgstr "Zenetár egyedi csoportosítása"
 
 msgid "Library search"
-msgstr ""
+msgstr "Keresés a zenetárban"
 
 msgid "Limits"
-msgstr ""
+msgstr "Szűrések"
 
 msgid "Live"
 msgstr "Élő"
@@ -1219,7 +1230,7 @@ msgid "Loading iPod database"
 msgstr "iPod adatbázis betöltése"
 
 msgid "Loading smart playlist"
-msgstr ""
+msgstr "Inteligens lejátszási lista betöltése"
 
 msgid "Loading stream"
 msgstr "Adatfolyam betöltése"
@@ -1228,7 +1239,7 @@ msgid "Loading tracks"
 msgstr "Számok betöltése"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Töltés..."
 
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
@@ -1243,11 +1254,11 @@ msgid "Low (256x256)"
 msgstr "Alacsony (256x256)"
 
 msgid "Lyrics"
-msgstr ""
+msgstr "Dalszöveg"
 
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "%1"
 
 msgid "MP3"
 msgstr "MP3"
@@ -1292,7 +1303,7 @@ msgid "Monitor the library for changes"
 msgstr "Zenetár figyelése változások után"
 
 msgid "Most played"
-msgstr ""
+msgstr "Gyakran játszott"
 
 msgid "Mount point"
 msgstr "Csatolási pont"
@@ -1343,28 +1354,28 @@ msgid "Neighbors"
 msgstr "Szomszédok"
 
 msgid "Never"
-msgstr ""
+msgstr "Soha"
 
 msgid "Never played"
-msgstr ""
+msgstr "Sohasem játszott"
 
 msgid "New"
-msgstr ""
+msgstr "Új"
 
 msgid "New folder..."
-msgstr ""
+msgstr "Új könyvtár..."
 
 msgid "New playlist"
 msgstr "Új lejátszási lista"
 
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Új intelligens lejátszási lista..."
 
 msgid "New songs"
 msgstr "Új számok"
 
 msgid "Newest tracks"
-msgstr ""
+msgstr "Legújabb számok"
 
 msgid "Next track"
 msgstr "Következő szám"
@@ -1424,7 +1435,7 @@ msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
 msgid "Only show the first"
-msgstr ""
+msgstr "Csak a legelsőt mutassa"
 
 msgid "Open device"
 msgstr "Eszköz megnyitása"
@@ -1496,10 +1507,10 @@ msgid "Play artist radio..."
 msgstr "Előadó rádió lejátszása"
 
 msgid "Play count"
-msgstr ""
+msgstr "Lejátszások száma"
 
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Egyéni rádió lejátszása..."
 
 msgid "Play if stopped, pause if playing"
 msgstr "Lejátszás, ha le van állítva, különben szünet"
@@ -1532,10 +1543,10 @@ msgid "Playlist search"
 msgstr "Keresés a lejátszási listán"
 
 msgid "Playlist type"
-msgstr ""
+msgstr "Lejátszási lista típus"
 
 msgid "Playlists"
-msgstr ""
+msgstr "Lejátszási listák"
 
 msgid "Pop"
 msgstr "Pop"
@@ -1587,7 +1598,7 @@ msgid "Push Wiiremote button"
 msgstr "Nyomja meg a Wiiremote gombot"
 
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "Számok felvétele véletlenszerű rendezésben"
 
 msgid "Quality"
 msgstr "Minőség"
@@ -1617,7 +1628,7 @@ msgid "Random visualization"
 msgstr "Véletlenszerű megjelenítés"
 
 msgid "Rating"
-msgstr ""
+msgstr "Értékelés"
 
 msgid "Really cancel?"
 msgstr "Tényleg mégse?"
@@ -1704,7 +1715,7 @@ msgid "Samplerate"
 msgstr "Mintavétel"
 
 msgid "Save image"
-msgstr ""
+msgstr "Kép mentése"
 
 msgid "Save playlist"
 msgstr "Lejátszási lista mentése"
@@ -1734,10 +1745,10 @@ msgid "Search for album covers..."
 msgstr "Album borítok keresése..."
 
 msgid "Search options"
-msgstr ""
+msgstr "Keresési beállítások"
 
 msgid "Search terms"
-msgstr ""
+msgstr "Keresési feltételek"
 
 msgid "Second level"
 msgstr "Második szinten"
@@ -1822,7 +1833,7 @@ msgid "Show above status bar"
 msgstr "Jelenítse meg az állapotsáv fölött"
 
 msgid "Show all the songs"
-msgstr ""
+msgstr "Minden számot mutasson"
 
 msgid "Show fullsize..."
 msgstr "Jelenítse meg teljes méretben..."
@@ -1858,7 +1869,7 @@ msgid "Sign out"
 msgstr "Kijelentkezés"
 
 msgid "Similar artists"
-msgstr ""
+msgstr "Hasonló előadók"
 
 msgid "Ska"
 msgstr "Ska"
@@ -1867,7 +1878,7 @@ msgid "Skip backwards in playlist"
 msgstr "Visszalépés a lejátszási listában"
 
 msgid "Skip count"
-msgstr ""
+msgstr "Kihagyások száma"
 
 msgid "Skip forwards in playlist"
 msgstr "Léptetés előre a lejátszási listában"
@@ -1876,13 +1887,13 @@ msgid "Small album cover"
 msgstr "Kis albumborító"
 
 msgid "Small sidebar"
-msgstr ""
+msgstr "Kis oldalsáv"
 
 msgid "Smart playlist"
-msgstr ""
+msgstr "Intelligens lejátszási lista"
 
 msgid "Smart playlists"
-msgstr ""
+msgstr "Intelligens lejátszási listák"
 
 msgid "Soft"
 msgstr "Lágy"
@@ -1891,19 +1902,19 @@ msgid "Soft Rock"
 msgstr "Lágy Rock"
 
 msgid "Song Information"
-msgstr ""
+msgstr "Száminformációk"
 
 msgid "Song info"
-msgstr ""
+msgstr "Szám információ"
 
 msgid "Sonogram"
 msgstr "Szonográfia"
 
 msgid "Sort songs by"
-msgstr ""
+msgstr "Számok rendezése"
 
 msgid "Sorting"
-msgstr ""
+msgstr "Rendezés"
 
 msgid "Start the playlist currently playing"
 msgstr "Az éppen lejátszott lista indítása"
@@ -1956,7 +1967,7 @@ msgid "Supported formats"
 msgstr "Támogatott formátumok"
 
 msgid "Tabs on top"
-msgstr ""
+msgstr "Lapfülek felül"
 
 msgid "Tag"
 msgstr "Címke"
@@ -2066,7 +2077,7 @@ msgid "Title"
 msgstr "Cím"
 
 msgid "Today"
-msgstr ""
+msgstr "Ma"
 
 msgid "Toggle fullscreen"
 msgstr "Teljes képernyő"
@@ -2238,7 +2249,7 @@ msgid "Year - Album"
 msgstr "Év - Album"
 
 msgid "Yesterday"
-msgstr ""
+msgstr "Tegnap"
 
 msgid "You are about to download the following albums"
 msgstr "A következő albumokat készül letölteni"
@@ -2271,7 +2282,7 @@ msgstr ""
 "wiki oldalát</a>.\n"
 
 msgid "You love this track"
-msgstr ""
+msgstr "Kedveled ezt a számot"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
@@ -2296,7 +2307,7 @@ msgstr "Az ön rádió adatfolyamai"
 
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "Scrobblejaid: %1"
 
 msgid "Z-A"
 msgstr ""
@@ -2312,10 +2323,10 @@ msgid "add %n songs"
 msgstr "%n szám felvétele"
 
 msgid "after"
-msgstr ""
+msgstr "után"
 
 msgid "before"
-msgstr ""
+msgstr "előtt"
 
 msgid "biggest first"
 msgstr ""
@@ -2324,29 +2335,29 @@ msgid "bpm"
 msgstr "bpm"
 
 msgid "contains"
-msgstr ""
+msgstr "tartalmazza"
 
 #, qt-format
 msgid "disc %1"
 msgstr "%1 lemez"
 
 msgid "does not contain"
-msgstr ""
+msgstr "nem tartalmazza"
 
 msgid "ends with"
-msgstr ""
+msgstr "végződik"
 
 msgid "equals"
-msgstr ""
+msgstr "egyenlő"
 
 msgid "greater than"
-msgstr ""
+msgstr "nagyobb mint"
 
 msgid "kbps"
 msgstr "kbps"
 
 msgid "less than"
-msgstr ""
+msgstr "kevesebb mint"
 
 msgid "longest first"
 msgstr ""
@@ -2361,7 +2372,7 @@ msgid "oldest first"
 msgstr ""
 
 msgid "on"
-msgstr ""
+msgstr "ezen"
 
 msgid "options"
 msgstr "beállítások"
@@ -2377,7 +2388,7 @@ msgid "smallest first"
 msgstr ""
 
 msgid "starts with"
-msgstr ""
+msgstr "kezdődik"
 
 msgid "stop"
 msgstr "leállítás"
@@ -2386,14 +2397,29 @@ msgstr "leállítás"
 msgid "track %1"
 msgstr "%1. szám"
 
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "A %1 rádióadó betöltése sikertelen"
+#~ msgid "Artist A-Z"
+#~ msgstr "Előadó A-Z"
+
+#~ msgid "Length (longest first)"
+#~ msgstr "Hossz (leghoszabb először)"
+
+#~ msgid "Length (shortest first)"
+#~ msgstr "Hossz (rövidebb először)"
+
+#~ msgid "Year (newest first)"
+#~ msgstr "Év (újabb elől)"
+
+#~ msgid "Year (oldest first)"
+#~ msgstr "Év (régebbi elől)"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"
 
 #~ msgid "MP4"
 #~ msgstr "MP4"
+
+#~ msgid "Couldn't load the last.fm radio station: %1"
+#~ msgstr "A %1 rádióadó betöltése sikertelen"
 
 #~ msgid "Ogg FLAC"
 #~ msgstr "Ogg FLAC"
