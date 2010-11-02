@@ -729,6 +729,9 @@ target_link_libraries(clementine_lib
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
+  dl
+  pthread
+  z
 )
 
 if(ENABLE_VISUALISATIONS)
@@ -761,7 +764,6 @@ if (APPLE)
   target_link_libraries(clementine_lib
     ${GROWL}
     ${SPARKLE}
-    z
     /System/Library/Frameworks/AppKit.framework
     /System/Library/Frameworks/Carbon.framework
     /System/Library/Frameworks/DiskArbitration.framework
