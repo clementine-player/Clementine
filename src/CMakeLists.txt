@@ -729,8 +729,8 @@ target_link_libraries(clementine_lib
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
   dl
-  pthread
   z
 )
 

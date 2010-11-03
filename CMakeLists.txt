@@ -65,6 +65,8 @@ if (APPLE)
   endif (DARWIN_VERSION GREATER 9)
 endif (APPLE)
 
+find_package(Threads)
+
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
