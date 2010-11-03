@@ -126,8 +126,8 @@ PlaylistDelegateBase::PlaylistDelegateBase(QObject* parent, const QString& suffi
 QString PlaylistDelegateBase::displayText(const QVariant& value, const QLocale&) const {
   QString text;
 
-  switch (value.type()) {
-    case QVariant::Int: {
+  switch (static_cast<QMetaType::Type>(value.type())) {
+    case QMetaType::Int: {
       int v = value.toInt();
       if (v > 0)
         text = QString::number(v);
@@ -135,7 +135,7 @@ QString PlaylistDelegateBase::displayText(const QVariant& value, const QLocale&)
     }
 
     case QMetaType::Float:
-    case QVariant::Double: {
+    case QMetaType::Double: {
       double v = value.toDouble();
       if (v > 0)
         text = QString::number(v);
