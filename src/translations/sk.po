@@ -145,10 +145,8 @@ msgstr ""
 "rôzne typy inteligentných playlistov ktoré ponúkajú rúzne cesty výberu "
 "piesní."
 
-msgid ""
-"A song will be included in the playlist if it matches all of these "
-"conditions."
-msgstr "Pieseň nude zahrnutá v playliste ak spĺňa všetky tieto podmienky."
+msgid "A song will be included in the playlist if it matches these conditions."
+msgstr ""
 
 msgid "A-Z"
 msgstr ""
@@ -426,8 +424,7 @@ msgid "Choose from the list"
 msgstr "Vybrať zo zoznamu"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr ""
-"Vyberte, ako má byť playlist usporiadaný a koľko piesní má obsahovať."
+msgstr "Vyberte, ako má byť playlist usporiadaný a koľko piesní má obsahovať."
 
 msgid "Choose manual cover"
 msgstr "Vybrať obal ručne"
@@ -730,6 +727,9 @@ msgstr "Nezamiešavať"
 msgid "Don't stop!"
 msgstr "Neprestávať!"
 
+msgid "Don't use search terms (include all songs)"
+msgstr ""
+
 msgid "Double click to open"
 msgstr "Otvoríte dvojklikom"
 
@@ -912,8 +912,7 @@ msgid "Filesystem type"
 msgstr "Typ súborového systému"
 
 msgid "Find songs in your library that match the criteria you specify."
-msgstr ""
-"Nájsť piesne vo vašej zbierke ktoré spĺňajú kritériá ktoré ste zadali."
+msgstr "Nájsť piesne vo vašej zbierke ktoré spĺňajú kritériá ktoré ste zadali."
 
 msgid "First level"
 msgstr "Prvá úroveň"
@@ -1276,6 +1275,12 @@ msgstr "Poškodená odpoveď"
 
 msgid "Manufacturer"
 msgstr "Výrobca"
+
+msgid "Match every search term (AND)"
+msgstr ""
+
+msgid "Match one or more search terms (OR)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Stredný (25 fps)"
@@ -1735,6 +1740,9 @@ msgstr "Hľadať v Magnatune"
 
 msgid "Search for album covers..."
 msgstr "Hľadať obaly albumov..."
+
+msgid "Search mode"
+msgstr ""
 
 msgid "Search options"
 msgstr "Možnosti hľadania"
@@ -2257,18 +2265,16 @@ msgstr ""
 "správy na konci každej skladby."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
-"Môžte skrobblovať skladby zadarmo, ale len <span style=\" font-"
-"weight:600;\">platiaci predplatitelia</span> môžu streamovať Last.fm rádio z "
-"Clementine."
+"Môžte skrobblovať skladby zadarmo, ale len <span style=\" font-weight:600;"
+"\">platiaci predplatitelia</span> môžu streamovať Last.fm rádio z Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 "Môžete použiť vaše Wii diaľkové ako diaľkový ovládač pre Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">Pozrite si stránku na "
@@ -2390,17 +2396,20 @@ msgstr "zastaviť"
 msgid "track %1"
 msgstr "skladba %1"
 
+#~ msgid ""
+#~ "A song will be included in the playlist if it matches all of these "
+#~ "conditions."
+#~ msgstr "Pieseň nude zahrnutá v playliste ak spĺňa všetky tieto podmienky."
+
 #~ msgid "&Hide tray icon"
 #~ msgstr "&Skryť tray ikonu"
 
 #~ msgid "Show section"
 #~ msgstr "Zobraziť stĺpec"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1 susedia"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1 zbierka"
 
@@ -2483,8 +2492,8 @@ msgstr "skladba %1"
 #~ msgstr "Pôvodný kľúč"
 
 #~ msgid ""
-#~ "You are about to reset to global shortcuts default values. Are you sure you "
-#~ "want to continue?"
+#~ "You are about to reset to global shortcuts default values. Are you sure "
+#~ "you want to continue?"
 #~ msgstr ""
 #~ "Pokúšate sa zresetovať pôvodné globálne skratky. Ste si istý, že chcete "
 #~ "pokračovať?"
@@ -2517,7 +2526,6 @@ msgstr "skladba %1"
 #~ msgid "Ogg FLAC"
 #~ msgstr "Ogg FLAC"
 
-#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "Nedá sa načítať last.fm rádio stanica: %1"
 

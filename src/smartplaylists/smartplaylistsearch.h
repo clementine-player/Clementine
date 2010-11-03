@@ -24,14 +24,22 @@ public:
   SmartPlaylistSearch();
 
   // These values are persisted, so add to the end of the enum only
+  enum SearchType {
+    Type_And = 0,
+    Type_Or,
+    Type_All,
+  };
+
+  // These values are persisted, so add to the end of the enum only
   enum SortType {
     Sort_Random = 0,
     Sort_FieldAsc,
     Sort_FieldDesc,
   };
 
-  bool is_valid() const { return !terms_.isEmpty(); }
+  bool is_valid() const;
 
+  SearchType search_type_;
   QList<SmartPlaylistSearchTerm> terms_;
   SortType sort_type_;
   SmartPlaylistSearchTerm::Field sort_field_;

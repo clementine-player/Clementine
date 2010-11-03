@@ -26,6 +26,7 @@ class SmartPlaylistSearchPreview;
 class SmartPlaylistSearchTermWidget;
 class Ui_SmartPlaylistWizard;
 
+class QComboBox;
 class QVBoxLayout;
 
 class SmartPlaylistWizard : public QWizard {
@@ -42,6 +43,7 @@ public:
     bool isComplete() const;
 
     QVBoxLayout* layout_;
+    QComboBox* type_;
     QList<SmartPlaylistSearchTermWidget*> terms_;
     SmartPlaylistSearchTermWidget* new_term_;
 
@@ -51,6 +53,8 @@ public:
 private slots:
   void AddSearchTerm();
   void RemoveSearchTerm();
+
+  void SearchTypeChanged();
 
   void UpdateTermPreview();
   void UpdateSortPreview();

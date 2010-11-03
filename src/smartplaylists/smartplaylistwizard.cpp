@@ -26,6 +26,9 @@ SmartPlaylistWizard::SearchPage::SearchPage(QWidget* parent)
 }
 
 bool SmartPlaylistWizard::SearchPage::isComplete() const {
+  if (type_->currentIndex() == 2) // All songs
+    return true;
+
   foreach (SmartPlaylistSearchTermWidget* widget, terms_) {
     if (!widget->Term().is_valid())
       return false;
@@ -41,21 +44,27 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
   ui_->setupUi(this);
   ui_->limit_value->setValue(PlaylistGenerator::kDefaultLimit);
 
+  connect(ui_->search_type, SIGNAL(currentIndexChanged(int)), SLOT(SearchTypeChanged()));
+
+  // Get the type combo box
+  ui_->page_query_search->type_ = ui_->search_type;
+
   // Create the new search term widget
   ui_->page_query_search->new_term_ = new SmartPlaylistSearchTermWidget(library_, this);
   ui_->page_query_search->new_term_->SetActive(false);
   connect(ui_->page_query_search->new_term_, SIGNAL(Clicked()), SLOT(AddSearchTerm()));
 
   // Add an empty initial term
-  ui_->page_query_search->layout_ = new QVBoxLayout(ui_->page_query_search);
+  ui_->page_query_search->layout_ = static_cast<QVBoxLayout*>(ui_->terms_group->layout());
   ui_->page_query_search->layout_->addWidget(ui_->page_query_search->new_term_);
-  ui_->page_query_search->layout_->addStretch();
   AddSearchTerm();
 
   // Add the preview widget at the bottom of the search terms page
+  QVBoxLayout* terms_page_layout = static_cast<QVBoxLayout*>(ui_->page_query_search->layout());
+  terms_page_layout->addStretch();
   ui_->page_query_search->preview_ = new SmartPlaylistSearchPreview(this);
   ui_->page_query_search->preview_->set_library(library_);
-  ui_->page_query_search->layout_->addWidget(ui_->page_query_search->preview_);
+  terms_page_layout->addWidget(ui_->page_query_search->preview_);
 
   // Add sort field texts
   for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {
@@ -141,13 +150,14 @@ void SmartPlaylistWizard::UpdateSortPreview() {
 SmartPlaylistSearch SmartPlaylistWizard::MakeSearch() const {
   SmartPlaylistSearch ret;
 
+  // Search type
+  ret.search_type_ = SmartPlaylistSearch::SearchType(ui_->search_type->currentIndex());
+
   // Search terms
   foreach (SmartPlaylistSearchTermWidget* widget, ui_->page_query_search->terms_) {
     SmartPlaylistSearchTerm term = widget->Term();
-    if (!term.is_valid())
-      return SmartPlaylistSearch();
-
-    ret.terms_ << term;
+    if (term.is_valid())
+      ret.terms_ << term;
   }
 
   // Sort order
@@ -168,4 +178,11 @@ SmartPlaylistSearch SmartPlaylistWizard::MakeSearch() const {
     ret.limit_ = ui_->limit_value->value();
 
   return ret;
+}
+
+void SmartPlaylistWizard::SearchTypeChanged() {
+  const bool all = ui_->search_type->currentIndex() == 2;
+  ui_->terms_group->setEnabled(!all);
+
+  UpdateTermPreview();
 }

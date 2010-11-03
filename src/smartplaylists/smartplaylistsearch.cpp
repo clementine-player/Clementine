@@ -24,6 +24,7 @@ SmartPlaylistSearch::SmartPlaylistSearch() {
 }
 
 void SmartPlaylistSearch::Reset() {
+  search_type_ = Type_And;
   terms_.clear();
   sort_type_ = Sort_Random;
   sort_field_ = SmartPlaylistSearchTerm::Field_Title;
@@ -38,8 +39,9 @@ QString SmartPlaylistSearch::ToSql(const QString& songs_table) const {
   foreach (const SmartPlaylistSearchTerm& term, terms_) {
     term_sql += term.ToSql();
   }
-  if (!terms_.isEmpty()) {
-    sql += " WHERE " + term_sql.join(" AND ");
+  if (!terms_.isEmpty() && search_type_ != Type_All) {
+    QString boolean_op = search_type_ == Type_And ? " AND " : " OR ";
+    sql += " WHERE " + term_sql.join(boolean_op);
   }
 
   // Add sort by
@@ -56,6 +58,12 @@ QString SmartPlaylistSearch::ToSql(const QString& songs_table) const {
   }
 
   return sql;
+}
+
+bool SmartPlaylistSearch::is_valid() const {
+  if (search_type_ == Type_All)
+    return true;
+  return !terms_.isEmpty();
 }
 
 QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearch& search) {
