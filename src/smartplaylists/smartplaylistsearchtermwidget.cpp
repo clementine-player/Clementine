@@ -238,7 +238,6 @@ SmartPlaylistSearchTermWidget::Overlay::Overlay(SmartPlaylistSearchTermWidget* p
     icon_(IconLoader::Load("list-add").pixmap(kIconSize))
 {
   raise();
-  setCursor(Qt::PointingHandCursor);
 }
 
 void SmartPlaylistSearchTermWidget::Overlay::SetOpacity(float opacity) {
@@ -278,6 +277,12 @@ void SmartPlaylistSearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
   p.setOpacity(0.25 + opacity_ * 0.25);
   p.drawPixmap(0, 0, pixmap_);
 
+  // Draw a frame
+  p.setOpacity(1.0);
+  p.setPen(palette().color(QPalette::Mid));
+  p.setRenderHint(QPainter::Antialiasing);
+  p.drawRoundedRect(rect(), 5, 5);
+
   // Geometry
   const QSize contents_size(kIconSize + kSpacing + fontMetrics().width(text_),
                             qMax(kIconSize, fontMetrics().height()));
@@ -290,9 +295,9 @@ void SmartPlaylistSearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
                    contents.height());
 
   // Icon and text
-  p.setOpacity(1.0);
+  p.setPen(palette().color(QPalette::Text));
   p.drawPixmap(icon, icon_);
-  p.drawText(text, text_);
+  p.drawText(text, Qt::TextDontClip | Qt::AlignVCenter, text_);
 }
 
 void SmartPlaylistSearchTermWidget::Overlay::mouseReleaseEvent(QMouseEvent*) {
