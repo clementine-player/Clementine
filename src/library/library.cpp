@@ -39,6 +39,7 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
   backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
 
   model_ = new LibraryModel(backend_, this);
+  model_->set_show_smart_playlists(true);
 }
 
 void Library::set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory) {

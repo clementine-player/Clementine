@@ -30,6 +30,8 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
     Type_Divider,
     Type_Container,
     Type_Song,
+    Type_PlaylistContainer,
+    Type_SmartPlaylist,
   };
 
   LibraryItem(SimpleTreeModel<LibraryItem>* model)
@@ -39,6 +41,7 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
 
   int container_level;
   Song metadata;
+  QByteArray smart_playlist_data;
 };
 
 #endif // LIBRARYITEM_H

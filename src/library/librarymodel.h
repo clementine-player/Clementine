@@ -27,11 +27,15 @@
 #include "core/simpletreemodel.h"
 #include "core/song.h"
 #include "engines/engine_fwd.h"
+#include "smartplaylists/playlistgenerator_fwd.h"
 
 #include <boost/scoped_ptr.hpp>
 
 class LibraryDirectoryModel;
 class LibraryBackend;
+class SmartPlaylistSearch;
+
+class QSettings;
 
 class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_OBJECT
@@ -40,6 +44,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
  public:
   LibraryModel(LibraryBackend* backend, QObject* parent = 0);
   ~LibraryModel();
+
+  static const char* kSmartPlaylistsMimeType;
+  static const char* kSmartPlaylistsSettingsGroup;
 
   enum Role {
     Role_Type = Qt::UserRole + 1,
@@ -86,11 +93,16 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   LibraryBackend* backend() const { return backend_; }
   LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
+  // Call before Init()
+  void set_show_smart_playlists(bool show_smart_playlists) { show_smart_playlists_ = show_smart_playlists; }
+
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
                      QSet<int>* song_ids) const;
   SongList GetChildSongs(const QModelIndex& index) const;
   SongList GetChildSongs(const QModelIndexList& indexes) const;
+
+  PlaylistGeneratorPtr CreateGenerator(const QModelIndex& index) const;
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
@@ -143,6 +155,12 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // The "Various Artists" node is an annoying special case.
   LibraryItem* CreateCompilationArtistNode(bool signal, LibraryItem* parent);
 
+  // Smart playlists are shown in another top-level node
+  void CreateSmartPlaylists();
+  void SaveDefaultGenerator(QSettings* s, int i, const QString& name,
+                            const SmartPlaylistSearch& search) const;
+  void SaveGenerator(QSettings* s, int i, PlaylistGeneratorPtr generator) const;
+
   // Helpers for ItemFromQuery and ItemFromSong
   LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent,
                         int container_level);
@@ -168,6 +186,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
  private:
   LibraryBackend* backend_;
   LibraryDirectoryModel* dir_model_;
+  bool show_smart_playlists_;
 
   QueryOptions query_options_;
   Grouping group_by_;
@@ -184,9 +203,14 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Only applies if the first level is "artist"
   LibraryItem* compilation_artist_node_;
 
+  // Only applies if smart playlists are set to on
+  LibraryItem* smart_playlist_node_;
+
   QIcon artist_icon_;
   QIcon album_icon_;
   QIcon no_cover_icon_;
+  QIcon playlists_dir_icon_;
+  QIcon playlist_icon_;
 };
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);

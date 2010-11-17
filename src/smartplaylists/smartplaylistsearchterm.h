@@ -22,8 +22,6 @@
 
 class SmartPlaylistSearchTerm {
 public:
-  SmartPlaylistSearchTerm();
-
   // These values are persisted, so add to the end of the enum only
   enum Field {
     Field_Title = 0,
@@ -43,6 +41,7 @@ public:
     Field_DateCreated,
     Field_DateModified,
     Field_Rating,
+    Field_Score,
     Field_PlayCount,
     Field_SkipCount,
     Field_LastPlayed,
@@ -74,6 +73,9 @@ public:
     Type_Number,
     Type_Rating,
   };
+
+  SmartPlaylistSearchTerm();
+  SmartPlaylistSearchTerm(Field field, Operator op, const QVariant& value);
 
   Field field_;
   Operator operator_;

@@ -24,8 +24,12 @@ class QueryPlaylistGenerator : public PlaylistGenerator {
 public:
   QueryPlaylistGenerator();
 
+  QString type() const { return "Query"; }
+
   void Load(const SmartPlaylistSearch& search);
-  void Load(const QSettings& s);
+  void Load(const QByteArray& data);
+  QByteArray Save() const;
+
   PlaylistItemList Generate();
 
 private:

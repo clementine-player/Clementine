@@ -18,6 +18,16 @@
 #include "playlist/playlist.h"
 
 SmartPlaylistSearchTerm::SmartPlaylistSearchTerm()
+  : field_(Field_Title),
+    operator_(Op_Equals)
+{
+}
+
+SmartPlaylistSearchTerm::SmartPlaylistSearchTerm(
+    Field field, Operator op, const QVariant& value)
+  : field_(field),
+    operator_(op),
+    value_(value)
 {
 }
 
@@ -73,6 +83,7 @@ SmartPlaylistSearchTerm::Type SmartPlaylistSearchTerm::TypeOf(Field field) {
     case Field_Filesize:
     case Field_PlayCount:
     case Field_SkipCount:
+    case Field_Score:
       return Type_Number;
 
     case Field_LastPlayed:
@@ -137,6 +148,7 @@ QString SmartPlaylistSearchTerm::FieldColumnName(Field field) {
     case Field_DateCreated: return "ctime";
     case Field_DateModified:return "mtime";
     case Field_Rating:      return "rating";
+    case Field_Score:       return "score";
     case Field_Title:       return "title";
     case Field_Artist:      return "artist";
     case Field_Album:       return "album";
@@ -165,6 +177,7 @@ QString SmartPlaylistSearchTerm::FieldName(Field field) {
     case Field_DateCreated: return Playlist::column_name(Playlist::Column_DateCreated);
     case Field_DateModified:return Playlist::column_name(Playlist::Column_DateModified);
     case Field_Rating:      return Playlist::column_name(Playlist::Column_Rating);
+    case Field_Score:       return Playlist::column_name(Playlist::Column_Score);
     case Field_Title:       return Playlist::column_name(Playlist::Column_Title);
     case Field_Artist:      return Playlist::column_name(Playlist::Column_Artist);
     case Field_Album:       return Playlist::column_name(Playlist::Column_Album);

@@ -24,8 +24,6 @@
 
 class LibraryBackend;
 
-class QSettings;
-
 class PlaylistGenerator : public QObject, public boost::enable_shared_from_this<PlaylistGenerator> {
   Q_OBJECT
 
@@ -39,8 +37,13 @@ public:
   void set_library(LibraryBackend* backend) { backend_ = backend; }
 
   QString name() const { return name_; }
+  void set_name(const QString& name) { name_ = name; }
 
-  virtual void Load(const QSettings& s) {}
+  virtual QString type() const = 0;
+
+  virtual void Load(const QByteArray& data) = 0;
+  virtual QByteArray Save() const = 0;
+
   virtual PlaylistItemList Generate() = 0;
 
 signals:

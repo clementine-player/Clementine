@@ -21,22 +21,31 @@
 #include "sqlrow.h"
 #include "core/database.h"
 #include "playlist/songmimedata.h"
+#include "smartplaylists/generatormimedata.h"
+#include "smartplaylists/playlistgenerator.h"
+#include "smartplaylists/queryplaylistgenerator.h"
 #include "ui/iconloader.h"
 
+#include <QSettings>
 #include <QStringList>
 #include <QUrl>
 #include <QMetaEnum>
 
 #include <boost/bind.hpp>
 
+const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
+const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
 
 LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     backend_(backend),
     dir_model_(new LibraryDirectoryModel(backend, this)),
+    show_smart_playlists_(false),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png"),
-    no_cover_icon_(":nocover.png")
+    no_cover_icon_(":nocover.png"),
+    playlists_dir_icon_(IconLoader::Load("folder")),
+    playlist_icon_(IconLoader::Load("view-media-playlist"))
 {
   root_->lazy_loaded = true;
 
@@ -327,6 +336,8 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
 
     case Qt::DecorationRole:
       switch (item->type)
+        case LibraryItem::Type_PlaylistContainer:
+          return playlists_dir_icon_;
         case LibraryItem::Type_Container:
           switch (container_type) {
             case GroupBy_Album:
@@ -337,6 +348,8 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
             default:
               break;
           }
+        case LibraryItem::Type_SmartPlaylist:
+          return playlist_icon_;
         default:
           break;
       break;
@@ -412,6 +425,7 @@ void LibraryModel::Reset() {
   container_nodes_[2].clear();
   divider_nodes_.clear();
   compilation_artist_node_ = NULL;
+  smart_playlist_node_ = NULL;
 
   root_ = new LibraryItem(this);
   root_->lazy_loaded = false;
@@ -420,6 +434,10 @@ void LibraryModel::Reset() {
   if (group_by_[0] == GroupBy_Artist &&
       backend_->HasCompilations(query_options_))
     CreateCompilationArtistNode(false, root_);
+
+  // Smart playlists?
+  if (show_smart_playlists_)
+    CreateSmartPlaylists();
 
   // Populate top level
   LazyPopulate(root_, false);
@@ -708,6 +726,7 @@ Qt::ItemFlags LibraryModel::flags(const QModelIndex& index) const {
   switch (IndexToItem(index)->type) {
   case LibraryItem::Type_Song:
   case LibraryItem::Type_Container:
+  case LibraryItem::Type_SmartPlaylist:
     return Qt::ItemIsSelectable |
            Qt::ItemIsEnabled |
            Qt::ItemIsDragEnabled;
@@ -723,6 +742,20 @@ QStringList LibraryModel::mimeTypes() const {
 }
 
 QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
+  if (indexes.isEmpty())
+    return NULL;
+
+  // Special case: a smart playlist was dragged
+  if (IndexToItem(indexes.first())->type == LibraryItem::Type_SmartPlaylist) {
+    PlaylistGeneratorPtr generator = CreateGenerator(indexes.first());
+    if (!generator)
+      return NULL;
+
+    GeneratorMimeData* data = new GeneratorMimeData(generator);
+    data->setData(kSmartPlaylistsMimeType, QByteArray());
+    return data;
+  }
+
   SongMimeData* data = new SongMimeData;
   QList<QUrl> urls;
   QSet<int> song_ids;
@@ -833,4 +866,92 @@ LibraryModel::GroupBy& LibraryModel::Grouping::operator [](int i) {
   }
   Q_ASSERT(0);
   return first;
+}
+
+void LibraryModel::CreateSmartPlaylists() {
+  smart_playlist_node_ = new LibraryItem(LibraryItem::Type_PlaylistContainer, root_);
+  smart_playlist_node_->container_level = 0;
+  smart_playlist_node_->sort_text = " _smart";
+  smart_playlist_node_->key = tr("Smart playlists");
+
+  QSettings s;
+
+  if (!s.childGroups().contains(kSmartPlaylistsSettingsGroup)) {
+    // No smart playlists existed in the settings, so create some defaults
+
+    s.beginGroup(kSmartPlaylistsSettingsGroup);
+    s.beginWriteArray("smart");
+
+    // These defines really make this section more concise
+    #define S SmartPlaylistSearch
+    #define T SmartPlaylistSearchTerm
+
+    int i = 0;
+    SaveDefaultGenerator(&s, i++, tr("50 random tracks"), S(
+        S::Type_All, S::TermList(), S::Sort_Random, T::Field_Title, 50));
+    SaveDefaultGenerator(&s, i++, tr("Ever played"), S(
+        S::Type_And, S::TermList() << T(T::Field_PlayCount, T::Op_GreaterThan, 0),
+        S::Sort_Random, T::Field_Title));
+    SaveDefaultGenerator(&s, i++, tr("Never played"), S(
+        S::Type_And, S::TermList() << T(T::Field_PlayCount, T::Op_Equals, 0),
+        S::Sort_Random, T::Field_Title));
+    SaveDefaultGenerator(&s, i++, tr("Last played"), S(
+        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_LastPlayed));
+    SaveDefaultGenerator(&s, i++, tr("Most played"), S(
+        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_PlayCount));
+    SaveDefaultGenerator(&s, i++, tr("Favourite tracks"), S(
+        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_Score));
+    SaveDefaultGenerator(&s, i++, tr("Newest tracks"), S(
+        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_DateCreated));
+
+    #undef S
+    #undef T
+
+    s.endArray();
+    s.endGroup();
+  }
+
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+
+  const int count = s.beginReadArray("smart");
+  for (int i=0 ; i<count ; ++i) {
+    s.setArrayIndex(i);
+    LibraryItem* item = new LibraryItem(LibraryItem::Type_SmartPlaylist, smart_playlist_node_);
+    item->display_text = s.value("name").toString();
+    item->key = s.value("type").toString();
+    item->smart_playlist_data = s.value("data").toByteArray();
+    item->lazy_loaded = true;
+  }
+}
+
+void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name,
+                                        const SmartPlaylistSearch& search) const {
+  boost::shared_ptr<QueryPlaylistGenerator> gen(new QueryPlaylistGenerator);
+  gen->set_name(name);
+  gen->Load(search);
+  SaveGenerator(s, i, boost::static_pointer_cast<PlaylistGenerator>(gen));
+}
+
+void LibraryModel::SaveGenerator(QSettings* s, int i, PlaylistGeneratorPtr generator) const {
+  s->setArrayIndex(i);
+  s->setValue("name", generator->name());
+  s->setValue("type", generator->type());
+  s->setValue("data", generator->Save());
+}
+
+PlaylistGeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
+  PlaylistGeneratorPtr ret;
+
+  const LibraryItem* item = IndexToItem(index);
+  if (!item || item->type != LibraryItem::Type_SmartPlaylist)
+    return ret;
+
+  ret = PlaylistGenerator::Create(item->key);
+  if (!ret)
+    return ret;
+
+  ret->set_name(item->display_text);
+  ret->set_library(backend());
+  ret->Load(item->smart_playlist_data);
+  return ret;
 }

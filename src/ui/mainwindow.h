@@ -57,7 +57,6 @@ class QueueManager;
 class RadioItem;
 class RadioModel;
 class RadioViewContainer;
-class SmartPlaylistContainer;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -199,6 +198,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
+  void AddSmartPlaylistToPlaylist(bool clear_first, PlaylistGeneratorPtr gen);
   void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);
   void ConnectInfoView(SongInfoBase* view);
@@ -225,7 +225,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   LibraryViewContainer* library_view_;
   FileView* file_view_;
-  SmartPlaylistContainer* smart_playlist_view_;
   RadioViewContainer* radio_view_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;

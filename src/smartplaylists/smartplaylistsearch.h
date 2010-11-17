@@ -17,11 +17,12 @@
 #ifndef SMARTPLAYLISTSEARCH_H
 #define SMARTPLAYLISTSEARCH_H
 
+#include "playlistgenerator.h"
 #include "smartplaylistsearchterm.h"
 
 class SmartPlaylistSearch {
 public:
-  SmartPlaylistSearch();
+  typedef QList<SmartPlaylistSearchTerm> TermList;
 
   // These values are persisted, so add to the end of the enum only
   enum SearchType {
@@ -37,10 +38,15 @@ public:
     Sort_FieldDesc,
   };
 
+  SmartPlaylistSearch();
+  SmartPlaylistSearch(SearchType type, TermList terms, SortType sort_type,
+                      SmartPlaylistSearchTerm::Field sort_field,
+                      int limit = PlaylistGenerator::kDefaultLimit);
+
   bool is_valid() const;
 
   SearchType search_type_;
-  QList<SmartPlaylistSearchTerm> terms_;
+  TermList terms_;
   SortType sort_type_;
   SmartPlaylistSearchTerm::Field sort_field_;
   int limit_;

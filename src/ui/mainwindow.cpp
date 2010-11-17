@@ -53,7 +53,6 @@
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
 #include "radio/savedradio.h"
-#include "smartplaylists/smartplaylistcontainer.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
 #include "transcoder/transcodedialog.h"
@@ -139,7 +138,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
-    smart_playlist_view_(new SmartPlaylistContainer(this)),
     radio_view_(new RadioViewContainer(this)),
     device_view_(new DeviceView(this)),
     song_info_view_(new SongInfoView(this)),
@@ -183,7 +181,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
-  ui_->tabs->AddTab(smart_playlist_view_, IconLoader::Load("view-media-playlist"), tr("Playlists"));
   ui_->tabs->AddTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
@@ -433,10 +430,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
           playlist_copy_to_device_, SLOT(setDisabled(bool)));
 
-  // Smart playlists connections
-  smart_playlist_view_->set_library(library_->backend());
-  smart_playlist_view_->set_playlists(playlists_);
-
   // Radio connections
   connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
@@ -660,6 +653,14 @@ void MainWindow::LibrarySongsDoubleClicked(const SongList &songs) {
   AddLibrarySongsToPlaylist(autoclear_playlist_, songs);
 }
 
+void MainWindow::AddSmartPlaylistToPlaylist(bool clear_first, PlaylistGeneratorPtr gen) {
+  if (clear_first)
+    playlists_->ClearCurrent();
+
+  const bool play_now = player_->GetState() != Engine::Playing;
+  playlists_->current()->InsertSmartPlaylist(gen, -1, play_now);
+}
+
 void MainWindow::AddLibrarySongsToPlaylist(bool clear_first, const SongList &songs) {
   if (clear_first)
     playlists_->ClearCurrent();
@@ -832,6 +833,15 @@ void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndexLis
       source_indexes << library_sort_model_->mapToSource(index);
     else
       source_indexes << index;
+  }
+
+  // Special case: is the first item a smart playlist?
+  if (!source_indexes.isEmpty() &&
+      source_indexes.first().data(LibraryModel::Role_Type).toInt() ==
+        LibraryItem::Type_SmartPlaylist) {
+    AddSmartPlaylistToPlaylist(
+        clear_first, library_->model()->CreateGenerator(source_indexes.first()));
+    return;
   }
 
   AddLibrarySongsToPlaylist(clear_first, library_->model()->GetChildSongs(source_indexes));

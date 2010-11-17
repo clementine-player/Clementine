@@ -18,7 +18,6 @@
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
 
-#include <QSettings>
 #include <QtDebug>
 
 QueryPlaylistGenerator::QueryPlaylistGenerator()
@@ -29,11 +28,17 @@ void QueryPlaylistGenerator::Load(const SmartPlaylistSearch& search) {
   search_ = search;
 }
 
-void QueryPlaylistGenerator::Load(const QSettings& s) {
-  PlaylistGenerator::Load(s);
+void QueryPlaylistGenerator::Load(const QByteArray& data) {
+  QDataStream s(data);
+  s >> search_;
+}
 
-  QDataStream stream(s.value("search").toByteArray());
-  stream >> search_;
+QByteArray QueryPlaylistGenerator::Save() const {
+  QByteArray ret;
+  QDataStream s(&ret, QIODevice::WriteOnly);
+  s << search_;
+
+  return ret;
 }
 
 PlaylistItemList QueryPlaylistGenerator::Generate() {

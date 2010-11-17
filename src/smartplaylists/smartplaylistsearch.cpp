@@ -23,6 +23,17 @@ SmartPlaylistSearch::SmartPlaylistSearch() {
   Reset();
 }
 
+SmartPlaylistSearch::SmartPlaylistSearch(
+    SearchType type, TermList terms, SortType sort_type,
+    SmartPlaylistSearchTerm::Field sort_field, int limit)
+  : search_type_(type),
+    terms_(terms),
+    sort_type_(sort_type),
+    sort_field_(sort_field),
+    limit_(limit)
+{
+}
+
 void SmartPlaylistSearch::Reset() {
   search_type_ = Type_And;
   terms_.clear();

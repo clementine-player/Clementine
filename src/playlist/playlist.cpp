@@ -25,6 +25,7 @@
 #include "core/modelfuturewatcher.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "library/librarymodel.h"
 #include "library/libraryplaylistitem.h"
 #include "radio/magnatuneservice.h"
 #include "radio/magnatuneplaylistitem.h"
@@ -34,7 +35,6 @@
 #include "radio/savedradio.h"
 #include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/playlistgeneratorinserter.h"
-#include "smartplaylists/smartplaylistmodel.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -519,7 +519,7 @@ Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
 
 QStringList Playlist::mimeTypes() const {
   return QStringList() << "text/uri-list" << kRowsMimetype
-                       << SmartPlaylistModel::kMimeType;
+                       << LibraryModel::kSmartPlaylistsMimeType;
 }
 
 Qt::DropActions Playlist::supportedDropActions() const {
