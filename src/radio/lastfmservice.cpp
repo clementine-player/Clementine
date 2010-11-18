@@ -295,6 +295,7 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
     case Type_OtherUserNeighbourhood: return tr("Last.fm Neighbor Radio - %1").arg(item->key);
     case Type_Artist:            return tr("Last.fm Similar Artists to %1").arg(item->key);
     case Type_Tag:               return tr("Last.fm Tag Radio: %1").arg(item->key);
+    case Type_Custom:            return tr("Last.fm Custom Radio: %1").arg(item->key);
   }
   return QString();
 }

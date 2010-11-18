@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-10-29 16:40+0000\n"
 "Last-Translator: eMancu <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2010-10-30 06:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Language: es_ES\n"
@@ -83,15 +83,15 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -785,7 +785,7 @@ msgstr "Editar información de la pista..."
 msgid "Edit..."
 msgstr "Editar..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "Editando %n pistas"
 
@@ -1137,6 +1137,10 @@ msgstr "Último reproducido"
 
 msgid "Last.fm"
 msgstr "Last.fm"
+
+#, qt-format
+msgid "Last.fm Custom Radio: %1"
+msgstr ""
 
 #, qt-format
 msgid "Last.fm Library - %1"
@@ -2322,7 +2326,7 @@ msgstr "Zero"
 msgid "[click to edit]"
 msgstr "[click para editar]"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "agregar %n pistas"
 
@@ -2381,7 +2385,7 @@ msgstr ""
 msgid "options"
 msgstr "opciones"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 
