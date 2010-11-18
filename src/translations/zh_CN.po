@@ -11,6 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2010-09-28 07:50+0000\n"
 "Last-Translator: Yi Zeng <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -81,15 +82,15 @@ msgstr "%1 歌曲"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 失败的"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 剩余的"
 
@@ -754,7 +755,7 @@ msgstr "编辑音轨信息..."
 msgid "Edit..."
 msgstr "编辑..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "编辑 %n 歌曲"
 
@@ -1101,7 +1102,7 @@ msgid "Last.fm Library - %1"
 msgstr ""
 
 #, qt-format
-msgid "Last.fm Loved Tracks - %1"
+msgid "Last.fm Mix Radio - %1"
 msgstr ""
 
 #, qt-format
@@ -1296,8 +1297,8 @@ msgstr "音乐库"
 msgid "Mute"
 msgstr "静音"
 
-msgid "My Loved Tracks"
-msgstr "我喜欢的音乐"
+msgid "My Mix Radio"
+msgstr ""
 
 msgid "My Neighborhood"
 msgstr "我的邻居"
@@ -2249,7 +2250,7 @@ msgstr ""
 msgid "[click to edit]"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -2308,7 +2309,7 @@ msgstr ""
 msgid "options"
 msgstr "选项"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 
@@ -2327,6 +2328,9 @@ msgstr "停止"
 #, qt-format
 msgid "track %1"
 msgstr ""
+
+#~ msgid "My Loved Tracks"
+#~ msgstr "我喜欢的音乐"
 
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "无法加载 last.fm 电台: %1"

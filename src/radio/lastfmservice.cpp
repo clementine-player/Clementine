@@ -121,7 +121,7 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       // Normal radio types
       CreateStationItem(Type_MyRecommendations, tr("My Recommendations"), ":last.fm/recommended_radio.png", item);
       CreateStationItem(Type_MyRadio, tr("My Radio Station"), ":last.fm/personal_radio.png", item);
-      CreateStationItem(Type_MyLoved, tr("My Loved Tracks"), ":last.fm/loved_radio.png", item);
+      CreateStationItem(Type_MyMix, tr("My Mix Radio"), ":last.fm/loved_radio.png", item);
       CreateStationItem(Type_MyNeighbourhood, tr("My Neighborhood"), ":last.fm/neighbour_radio.png", item);
 
       // Types that have children
@@ -166,8 +166,8 @@ void LastFMService::LazyPopulate(RadioItem *item) {
     case Type_OtherUser:
       CreateStationItem(Type_OtherUserRadio, item->key, ":last.fm/recommended_radio.png", item)
           ->display_text = tr("Last.fm Radio Station - %1").arg(item->key);
-      CreateStationItem(Type_OtherUserLoved, item->key, ":last.fm/loved_radio.png", item)
-          ->display_text = tr("Last.fm Loved Tracks - %1").arg(item->key);
+      CreateStationItem(Type_OtherUserMix, item->key, ":last.fm/loved_radio.png", item)
+          ->display_text = tr("Last.fm Mix Radio - %1").arg(item->key);
       CreateStationItem(Type_OtherUserNeighbourhood, item->key, ":last.fm/neighbour_radio.png", item)
           ->display_text = tr("Last.fm Neighbor Radio - %1").arg(item->key);
       break;
@@ -250,8 +250,8 @@ QUrl LastFMService::UrlForItem(const RadioItem* item) const {
     case Type_MyRecommendations:
       return "lastfm://user/" + lastfm::ws::Username + "/recommended";
 
-    case Type_MyLoved:
-      return "lastfm://user/" + lastfm::ws::Username + "/loved";
+    case Type_MyMix:
+      return QString("lastfm://rql/") + QString("adv:" + lastfm::ws::Username).toUtf8().toBase64();
 
     case Type_MyNeighbourhood:
       return "lastfm://user/" + lastfm::ws::Username + "/neighbours";
@@ -263,8 +263,8 @@ QUrl LastFMService::UrlForItem(const RadioItem* item) const {
     case Type_OtherUserRadio:
       return "lastfm://user/" + item->key + "/library";
 
-    case Type_OtherUserLoved:
-      return "lastfm://user/" + item->key + "/loved";
+    case Type_OtherUserMix:
+      return QString("lastfm://rql/") + QString("adv:" + item->key).toUtf8().toBase64();
 
     case Type_OtherUserNeighbourhood:
       return "lastfm://user/" + item->key + "/neighbours";
@@ -286,12 +286,12 @@ QString LastFMService::TitleForItem(const RadioItem* item) const {
 
   switch (item->type) {
     case Type_MyRecommendations: return tr("Last.fm Recommended Radio - %1").arg(me);
-    case Type_MyLoved:           return tr("Last.fm Loved Tracks - %1").arg(me);
+    case Type_MyMix:             return tr("Last.fm Mix Radio - %1").arg(me);
     case Type_MyNeighbourhood:   return tr("Last.fm Neighbor Radio - %1").arg(me);
     case Type_MyRadio:           return tr("Last.fm Library - %1").arg(me);
     case Type_OtherUser:
     case Type_OtherUserRadio:    return tr("Last.fm Library - %1").arg(item->key);
-    case Type_OtherUserLoved:    return tr("Last.fm Loved Tracks - %1").arg(item->key);
+    case Type_OtherUserMix:      return tr("Last.fm Mix Radio - %1").arg(item->key);
     case Type_OtherUserNeighbourhood: return tr("Last.fm Neighbor Radio - %1").arg(item->key);
     case Type_Artist:            return tr("Last.fm Similar Artists to %1").arg(item->key);
     case Type_Tag:               return tr("Last.fm Tag Radio: %1").arg(item->key);

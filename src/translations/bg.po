@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2010-10-26 10:39+0000\n"
 "Last-Translator: svilborg <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-10-27 05:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
-"Language: bg\n"
 
 msgid " ms"
 msgstr ""
@@ -82,15 +82,15 @@ msgstr ""
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr ""
 
@@ -755,7 +755,7 @@ msgstr "Редактиране на информацията за песента
 msgid "Edit..."
 msgstr "Редактиране..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "Редактиране на %n песни"
 
@@ -1104,8 +1104,8 @@ msgid "Last.fm Library - %1"
 msgstr "Last.fm Библиотека - %1"
 
 #, qt-format
-msgid "Last.fm Loved Tracks - %1"
-msgstr "Last.fm Любими Песни - %1"
+msgid "Last.fm Mix Radio - %1"
+msgstr ""
 
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
@@ -1299,8 +1299,8 @@ msgstr ""
 msgid "Mute"
 msgstr "Без звук"
 
-msgid "My Loved Tracks"
-msgstr "Моите Любими Песни"
+msgid "My Mix Radio"
+msgstr ""
 
 msgid "My Neighborhood"
 msgstr ""
@@ -2252,7 +2252,7 @@ msgstr ""
 msgid "[click to edit]"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -2311,7 +2311,7 @@ msgstr ""
 msgid "options"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -2330,6 +2330,12 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr ""
+
+#~ msgid "Last.fm Loved Tracks - %1"
+#~ msgstr "Last.fm Любими Песни - %1"
+
+#~ msgid "My Loved Tracks"
+#~ msgstr "Моите Любими Песни"
 
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "Не може да бъде заредена last.fm радио станция: %1"

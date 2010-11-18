@@ -60,7 +60,7 @@ class LastFMService : public RadioService {
   enum ItemType {
     Type_MyRecommendations = 1000,
     Type_MyRadio,
-    Type_MyLoved,
+    Type_MyMix,
     Type_MyNeighbourhood,
     Type_ArtistRadio,
     Type_TagRadio,
@@ -68,7 +68,7 @@ class LastFMService : public RadioService {
     Type_MyNeighbours,
     Type_OtherUser,
     Type_OtherUserRadio,
-    Type_OtherUserLoved,
+    Type_OtherUserMix,
     Type_OtherUserNeighbourhood,
     Type_Artist,
     Type_Tag,
