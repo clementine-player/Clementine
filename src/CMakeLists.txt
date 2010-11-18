@@ -382,6 +382,7 @@ set(UI
   smartplaylists/querysortpage.ui
   smartplaylists/searchpreview.ui
   smartplaylists/searchtermwidget.ui
+  smartplaylists/wizardfinishpage.ui
 
   songinfo/lyricsettings.ui
 

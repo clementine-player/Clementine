@@ -389,22 +389,33 @@ void LibraryView::FilterReturnPressed() {
   emit doubleClicked(currentIndex());
 }
 
-void LibraryView::CreateSmartPlaylistWizard() {
-  if (smart_playlist_wizard_)
-    return;
-
-  smart_playlist_wizard_.reset(new Wizard(library_->backend(), this));
-}
-
 void LibraryView::NewSmartPlaylist() {
-  CreateSmartPlaylistWizard();
-  smart_playlist_wizard_->show();
+  Wizard* wizard = new Wizard(library_->backend(), this);
+  wizard->setAttribute(Qt::WA_DeleteOnClose);
+  connect(wizard, SIGNAL(accepted()), SLOT(NewSmartPlaylistFinished()));
+
+  wizard->show();
 }
 
 void LibraryView::EditSmartPlaylist() {
-  // TODO
+  Wizard* wizard = new Wizard(library_->backend(), this);
+  wizard->setAttribute(Qt::WA_DeleteOnClose);
+  connect(wizard, SIGNAL(accepted()), SLOT(EditSmartPlaylistFinished()));
+
+  wizard->show();
+  wizard->SetGenerator(library_->CreateGenerator(context_menu_index_));
 }
 
 void LibraryView::DeleteSmartPlaylist() {
-  // TODO
+  library_->DeleteGenerator(context_menu_index_);
+}
+
+void LibraryView::NewSmartPlaylistFinished() {
+  const Wizard* wizard = qobject_cast<Wizard*>(sender());
+  library_->AddGenerator(wizard->CreateGenerator());
+}
+
+void LibraryView::EditSmartPlaylistFinished() {
+  const Wizard* wizard = qobject_cast<Wizard*>(sender());
+  library_->UpdateGenerator(context_menu_index_, wizard->CreateGenerator());
 }

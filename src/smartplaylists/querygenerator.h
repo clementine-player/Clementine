@@ -34,6 +34,8 @@ public:
 
   PlaylistItemList Generate();
 
+  Search search() const { return search_; }
+
 private:
   Search search_;
 };

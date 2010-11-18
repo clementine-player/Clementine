@@ -47,6 +47,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   static const char* kSmartPlaylistsMimeType;
   static const char* kSmartPlaylistsSettingsGroup;
+  static const int kSmartPlaylistsVersion;
 
   enum Role {
     Role_Type = Qt::UserRole + 1,
@@ -102,7 +103,11 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   SongList GetChildSongs(const QModelIndex& index) const;
   SongList GetChildSongs(const QModelIndexList& indexes) const;
 
+  // Smart playlists
   smart_playlists::GeneratorPtr CreateGenerator(const QModelIndex& index) const;
+  void AddGenerator(smart_playlists::GeneratorPtr gen);
+  void UpdateGenerator(const QModelIndex& index, smart_playlists::GeneratorPtr gen);
+  void DeleteGenerator(const QModelIndex& index);
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
@@ -160,6 +165,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SaveDefaultGenerator(QSettings* s, int i, const QString& name,
                             const smart_playlists::Search& search) const;
   void SaveGenerator(QSettings* s, int i, smart_playlists::GeneratorPtr generator) const;
+  void ItemFromSmartPlaylist(const QSettings& s, bool notify) const;
 
   // Helpers for ItemFromQuery and ItemFromSong
   LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent,

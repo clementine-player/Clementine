@@ -33,16 +33,18 @@ class WizardPlugin : public QObject {
 public:
   WizardPlugin(LibraryBackend* library, QObject* parent);
 
+  virtual QString type() const = 0;
   virtual QString name() const = 0;
   virtual QString description() const = 0;
   int start_page() const { return start_page_; }
 
+  virtual void SetGenerator(GeneratorPtr gen) = 0;
   virtual GeneratorPtr CreateGenerator() const = 0;
 
-  void Init(QWizard* wizard);
+  void Init(QWizard* wizard, int finish_page_id);
 
 protected:
-  virtual int CreatePages(QWizard* wizard) = 0;
+  virtual int CreatePages(QWizard* wizard, int finish_page_id) = 0;
 
   LibraryBackend* library_;
 

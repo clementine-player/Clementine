@@ -205,6 +205,34 @@ float SearchTermWidget::overlay_opacity() const {
   return overlay_ ? overlay_->opacity() : 0.0;
 }
 
+void SearchTermWidget::SetTerm(const SearchTerm& term) {
+  ui_->field->setCurrentIndex(ui_->field->findData(term.field_));
+  ui_->op->setCurrentIndex(ui_->op->findData(term.operator_));
+
+  // The value depends on the data type
+  switch (SearchTerm::TypeOf(term.field_)) {
+  case SearchTerm::Type_Text:
+    ui_->value_text->setText(term.value_.toString());
+    break;
+
+  case SearchTerm::Type_Number:
+    ui_->value_number->setValue(term.value_.toInt());
+    break;
+
+  case SearchTerm::Type_Date:
+    ui_->value_date->setDateTime(QDateTime::fromTime_t(term.value_.toInt()));
+    break;
+
+  case SearchTerm::Type_Time:
+    ui_->value_time->setTime(QTime(0,0).addSecs(term.value_.toInt()));
+    break;
+
+  case SearchTerm::Type_Rating:
+    ui_->value_rating->set_rating(term.value_.toFloat());
+    break;
+  }
+}
+
 SearchTerm SearchTermWidget::Term() const {
   const int field = ui_->field->itemData(ui_->field->currentIndex()).toInt();
   const int op    = ui_->op->itemData(ui_->op->currentIndex()).toInt();

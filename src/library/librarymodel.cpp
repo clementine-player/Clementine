@@ -40,6 +40,7 @@ using smart_playlists::QueryGenerator;
 
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
+const int LibraryModel::kSmartPlaylistsVersion = 1;
 
 LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
@@ -880,11 +881,12 @@ void LibraryModel::CreateSmartPlaylists() {
   smart_playlist_node_->key = tr("Smart playlists");
 
   QSettings s;
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+  const int version = s.value("version", 0).toInt();
 
-  if (!s.childGroups().contains(kSmartPlaylistsSettingsGroup)) {
+  if (version == 0) {
     // No smart playlists existed in the settings, so create some defaults
 
-    s.beginGroup(kSmartPlaylistsSettingsGroup);
     s.beginWriteArray("smart");
 
     using smart_playlists::Search;
@@ -916,20 +918,28 @@ void LibraryModel::CreateSmartPlaylists() {
         Search::Sort_FieldDesc, SearchTerm::Field_DateCreated));
 
     s.endArray();
-    s.endGroup();
   }
 
-  s.beginGroup(kSmartPlaylistsSettingsGroup);
+  s.setValue("version", kSmartPlaylistsVersion);
 
   const int count = s.beginReadArray("smart");
   for (int i=0 ; i<count ; ++i) {
     s.setArrayIndex(i);
-    LibraryItem* item = new LibraryItem(LibraryItem::Type_SmartPlaylist, smart_playlist_node_);
-    item->display_text = s.value("name").toString();
-    item->key = s.value("type").toString();
-    item->smart_playlist_data = s.value("data").toByteArray();
-    item->lazy_loaded = true;
+    ItemFromSmartPlaylist(s, false);
   }
+}
+
+void LibraryModel::ItemFromSmartPlaylist(const QSettings& s, bool notify) const {
+  LibraryItem* item = new LibraryItem(LibraryItem::Type_SmartPlaylist,
+                                      notify ? NULL : smart_playlist_node_);
+  item->display_text = s.value("name").toString();
+  item->sort_text = item->display_text;
+  item->key = s.value("type").toString();
+  item->smart_playlist_data = s.value("data").toByteArray();
+  item->lazy_loaded = true;
+
+  if (notify)
+    item->InsertNotify(smart_playlist_node_);
 }
 
 void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name,
@@ -938,6 +948,54 @@ void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name
   gen->set_name(name);
   gen->Load(search);
   SaveGenerator(s, i, boost::static_pointer_cast<Generator>(gen));
+}
+
+void LibraryModel::AddGenerator(GeneratorPtr gen) {
+  QSettings s;
+
+  // Count the existing items
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+  const int count = s.beginReadArray("smart");
+  s.endArray();
+
+  // Add this one to the end
+  s.beginWriteArray("smart", count + 1);
+  SaveGenerator(&s, count, gen);
+
+  // Add it to the model
+  ItemFromSmartPlaylist(s, true);
+
+  s.endArray();
+}
+
+void LibraryModel::UpdateGenerator(const QModelIndex& index, GeneratorPtr gen) {
+  if (index.parent() != ItemToIndex(smart_playlist_node_))
+    return;
+  LibraryItem* item = IndexToItem(index);
+  if (!item)
+    return;
+
+  // Update the config
+  QSettings s;
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+
+  // Count the existing items
+  const int count = s.beginReadArray("smart");
+  s.endArray();
+
+  s.beginWriteArray("smart", count);
+  SaveGenerator(&s, index.row(), gen);
+
+  // Update the text of the item
+  item->display_text = gen->name();
+  item->sort_text = item->display_text;
+  item->key = gen->type();
+  item->smart_playlist_data = gen->Save();
+  item->ChangedNotify();
+}
+
+void LibraryModel::DeleteGenerator(const QModelIndex& index) {
+  // TODO
 }
 
 void LibraryModel::SaveGenerator(QSettings* s, int i, GeneratorPtr generator) const {

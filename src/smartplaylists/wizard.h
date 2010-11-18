@@ -17,9 +17,12 @@
 #ifndef SMARTPLAYLISTWIZARD_H
 #define SMARTPLAYLISTWIZARD_H
 
+#include "generator_fwd.h"
+
 #include <QWizard>
 
 class LibraryBackend;
+class Ui_SmartPlaylistWizardFinishPage;
 
 class QSignalMapper;
 
@@ -34,12 +37,12 @@ public:
   Wizard(LibraryBackend* library, QWidget* parent);
   ~Wizard();
 
+  void SetGenerator(GeneratorPtr gen);
+  GeneratorPtr CreateGenerator() const;
+
 private:
-  struct TypePage : public QWizardPage {
-    TypePage(QWidget* parent) : QWizardPage(parent), next_id_(0) {}
-    int nextId() const { return next_id_; }
-    int next_id_;
-  };
+  class TypePage;
+  class FinishPage;
 
   void AddPlugin(WizardPlugin* plugin);
 
@@ -49,9 +52,12 @@ private slots:
 private:
   LibraryBackend* library_;
   TypePage* type_page_;
-  QSignalMapper* type_mapper_;
+  FinishPage* finish_page_;
+  int finish_id_;
 
+  int type_index_;
   QList<WizardPlugin*> plugins_;
+  QSignalMapper* type_mapper_;
 };
 
 } // namespace

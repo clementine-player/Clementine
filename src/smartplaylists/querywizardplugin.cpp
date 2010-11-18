@@ -14,6 +14,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "querygenerator.h"
 #include "querywizardplugin.h"
 #include "searchtermwidget.h"
 #include "ui_querysearchpage.h"
@@ -22,6 +23,47 @@
 #include <QWizardPage>
 
 namespace smart_playlists {
+
+class QueryWizardPlugin::SearchPage : public QWizardPage {
+  friend class QueryWizardPlugin;
+
+public:
+  SearchPage(QWidget* parent = 0)
+    : QWizardPage(parent),
+      ui_(new Ui_SmartPlaylistQuerySearchPage)
+  {
+    ui_->setupUi(this);
+  }
+
+  bool isComplete() const {
+    if (ui_->type->currentIndex() == 2) // All songs
+      return true;
+
+    foreach (SearchTermWidget* widget, terms_) {
+      if (!widget->Term().is_valid())
+        return false;
+    }
+    return true;
+  }
+
+  QVBoxLayout* layout_;
+  QList<SearchTermWidget*> terms_;
+  SearchTermWidget* new_term_;
+
+  SearchPreview* preview_;
+
+  boost::scoped_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
+};
+
+class QueryWizardPlugin::SortPage : public QWizardPage {
+public:
+  SortPage(QWidget* parent, int next_id)
+    : QWizardPage(parent), next_id_(next_id) {}
+
+  int nextId() const { return next_id_; }
+  int next_id_;
+};
+
 
 QueryWizardPlugin::QueryWizardPlugin(LibraryBackend* library, QObject* parent)
   : WizardPlugin(library, parent),
@@ -40,11 +82,11 @@ QString QueryWizardPlugin::description() const {
   return tr("Find songs in your library that match the criteria you specify.");
 }
 
-int QueryWizardPlugin::CreatePages(QWizard* wizard) {
+int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   // Create the UI
   search_page_ = new SearchPage(wizard);
 
-  QWizardPage* sort_page = new QWizardPage(wizard);
+  QWizardPage* sort_page = new SortPage(wizard, finish_page_id);
   sort_ui_.reset(new Ui_SmartPlaylistQuerySortPage);
   sort_ui_->setupUi(sort_page);
 
@@ -91,7 +133,6 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard) {
   search_page_->setSubTitle(tr("A song will be included in the playlist if it matches these conditions."));
   sort_page->setTitle(tr("Search options"));
   sort_page->setSubTitle(tr("Choose how the playlist is sorted and how many songs it will contain."));
-  sort_page->setFinalPage(true);
 
   // Add the pages
   const int first_page = wizard->addPage(search_page_);
@@ -99,9 +140,48 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard) {
   return first_page;
 }
 
+void QueryWizardPlugin::SetGenerator(GeneratorPtr g) {
+  boost::shared_ptr<QueryGenerator> gen =
+      boost::dynamic_pointer_cast<QueryGenerator>(g);
+  if (!gen)
+    return;
+  Search search = gen->search();
+
+  // Search type
+  search_page_->ui_->type->setCurrentIndex(search.search_type_);
+
+  // Search terms
+  qDeleteAll(search_page_->terms_);
+  search_page_->terms_.clear();
+
+  foreach (const SearchTerm& term, search.terms_) {
+    AddSearchTerm();
+    search_page_->terms_.last()->SetTerm(term);
+  }
+
+  // Sort order
+  if (search.sort_type_ == Search::Sort_Random) {
+    sort_ui_->random->setChecked(true);
+  } else {
+    sort_ui_->field->setChecked(true);
+    sort_ui_->order->setCurrentIndex(search.sort_type_ == Search::Sort_FieldAsc ? 0 : 1);
+    sort_ui_->field_value->setCurrentIndex(search.sort_field_);
+  }
+
+  // Limit
+  if (search.limit_ == -1) {
+    sort_ui_->limit_none->setChecked(true);
+  } else {
+    sort_ui_->limit_limit->setChecked(true);
+    sort_ui_->limit_value->setValue(search.limit_);
+  }
+}
+
 GeneratorPtr QueryWizardPlugin::CreateGenerator() const {
-  // TODO
-  return GeneratorPtr();
+  boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
+  gen->Load(MakeSearch());
+
+  return boost::static_pointer_cast<Generator>(gen);
 }
 
 void QueryWizardPlugin::UpdateSortOrder() {
@@ -199,25 +279,6 @@ void QueryWizardPlugin::SearchTypeChanged() {
   search_page_->ui_->terms_group->setEnabled(!all);
 
   UpdateTermPreview();
-}
-
-
-QueryWizardPlugin::SearchPage::SearchPage(QWidget* parent)
-  : QWizardPage(parent),
-    ui_(new Ui_SmartPlaylistQuerySearchPage)
-{
-  ui_->setupUi(this);
-}
-
-bool QueryWizardPlugin::SearchPage::isComplete() const {
-  if (ui_->type->currentIndex() == 2) // All songs
-    return true;
-
-  foreach (SearchTermWidget* widget, terms_) {
-    if (!widget->Term().is_valid())
-      return false;
-  }
-  return true;
 }
 
 } // namespace smart_playlists

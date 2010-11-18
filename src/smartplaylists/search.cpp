@@ -86,17 +86,19 @@ QDataStream& operator <<(QDataStream& s, const smart_playlists::Search& search) 
   s << quint8(search.sort_type_);
   s << quint8(search.sort_field_);
   s << qint32(search.limit_);
+  s << quint8(search.search_type_);
   return s;
 }
 
 QDataStream& operator >>(QDataStream& s, smart_playlists::Search& search) {
-  quint8 sort_type, sort_field;
+  quint8 sort_type, sort_field, search_type;
   qint32 limit;
 
-  s >> search.terms_ >> sort_type >> sort_field >> limit;
+  s >> search.terms_ >> sort_type >> sort_field >> limit >> search_type;
   search.sort_type_ = smart_playlists::Search::SortType(sort_type);
   search.sort_field_ = smart_playlists::SearchTerm::Field(sort_field);
   search.limit_ = limit;
+  search.search_type_ = smart_playlists::Search::SearchType(search_type);
 
   return s;
 }

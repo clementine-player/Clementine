@@ -44,6 +44,7 @@ public:
   float overlay_opacity() const;
   void set_overlay_opacity(float opacity);
 
+  void SetTerm(const SearchTerm& term);
   SearchTerm Term() const;
 
 signals:

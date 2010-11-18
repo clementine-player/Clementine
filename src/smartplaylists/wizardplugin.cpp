@@ -25,8 +25,8 @@ WizardPlugin::WizardPlugin(LibraryBackend* library, QObject* parent)
 {
 }
 
-void WizardPlugin::Init(QWizard* wizard) {
-  start_page_ = CreatePages(wizard);
+void WizardPlugin::Init(QWizard* wizard, int finish_page_id) {
+  start_page_ = CreatePages(wizard, finish_page_id);
 }
 
 } // namespace smart_playlists

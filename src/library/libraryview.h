@@ -87,13 +87,15 @@ class LibraryView : public AutoExpandingTreeView {
   void EditSmartPlaylist();
   void DeleteSmartPlaylist();
 
+  void NewSmartPlaylistFinished();
+  void EditSmartPlaylistFinished();
+
   void DeleteFinished(const SongList& songs_with_errors);
 
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
   SongList GetSelectedSongs() const;
-  void CreateSmartPlaylistWizard();
 
  private:
   LibraryModel* library_;
@@ -119,7 +121,6 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* delete_smart_playlist_;
 
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-  boost::scoped_ptr<smart_playlists::Wizard> smart_playlist_wizard_;
 
   bool is_in_keyboard_search_;
 };

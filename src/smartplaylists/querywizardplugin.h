@@ -41,10 +41,12 @@ public:
   QueryWizardPlugin(LibraryBackend* library, QObject* parent);
   ~QueryWizardPlugin();
 
+  QString type() const { return "Query"; }
   QString name() const;
   QString description() const;
 
-  int CreatePages(QWizard* wizard);
+  int CreatePages(QWizard* wizard, int finish_page_id);
+  void SetGenerator(GeneratorPtr);
   GeneratorPtr CreateGenerator() const;
 
 private slots:
@@ -58,21 +60,8 @@ private slots:
   void UpdateSortOrder();
 
 private:
-  class SearchPage : public QWizardPage {
-    friend class QueryWizardPlugin;
-
-  public:
-    SearchPage(QWidget* parent = 0);
-    bool isComplete() const;
-
-    QVBoxLayout* layout_;
-    QList<SearchTermWidget*> terms_;
-    SearchTermWidget* new_term_;
-
-    SearchPreview* preview_;
-
-    boost::scoped_ptr<Ui_SmartPlaylistQuerySearchPage> ui_;
-  };
+  class SearchPage;
+  class SortPage;
 
   Search MakeSearch() const;
 
