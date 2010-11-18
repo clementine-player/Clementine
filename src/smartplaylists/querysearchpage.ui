@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SmartPlaylistQuerySearchPage</class>
+ <widget class="QWidget" name="SmartPlaylistQuerySearchPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Search mode</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QComboBox" name="type">
+        <item>
+         <property name="text">
+          <string>Match every search term (AND)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Match one or more search terms (OR)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Don't use search terms (include all songs)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="terms_group">
+     <property name="title">
+      <string>Search terms</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5"/>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

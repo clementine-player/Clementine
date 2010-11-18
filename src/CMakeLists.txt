@@ -132,11 +132,13 @@ set(SOURCES
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
+  smartplaylists/querywizardplugin.cpp
   smartplaylists/search.cpp
   smartplaylists/searchpreview.cpp
   smartplaylists/searchterm.cpp
   smartplaylists/searchtermwidget.cpp
   smartplaylists/wizard.cpp
+  smartplaylists/wizardplugin.cpp
 
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
@@ -290,9 +292,11 @@ set(HEADERS
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
   smartplaylists/generatormimedata.h
+  smartplaylists/querywizardplugin.h
   smartplaylists/searchpreview.h
   smartplaylists/searchtermwidget.h
   smartplaylists/wizard.h
+  smartplaylists/wizardplugin.h
 
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
@@ -374,9 +378,10 @@ set(UI
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
 
+  smartplaylists/querysearchpage.ui
+  smartplaylists/querysortpage.ui
   smartplaylists/searchpreview.ui
   smartplaylists/searchtermwidget.ui
-  smartplaylists/wizard.ui
 
   songinfo/lyricsettings.ui
 

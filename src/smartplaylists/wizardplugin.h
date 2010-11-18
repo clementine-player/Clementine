@@ -14,46 +14,42 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SMARTPLAYLISTWIZARD_H
-#define SMARTPLAYLISTWIZARD_H
+#ifndef WIZARDPLUGIN_H
+#define WIZARDPLUGIN_H
 
-#include <QWizard>
+#include <QObject>
+
+#include "generator_fwd.h"
 
 class LibraryBackend;
 
-class QSignalMapper;
+class QWizard;
 
 namespace smart_playlists {
 
-class WizardPlugin;
-
-class Wizard : public QWizard {
+class WizardPlugin : public QObject {
   Q_OBJECT
 
 public:
-  Wizard(LibraryBackend* library, QWidget* parent);
-  ~Wizard();
+  WizardPlugin(LibraryBackend* library, QObject* parent);
 
-private:
-  struct TypePage : public QWizardPage {
-    TypePage(QWidget* parent) : QWizardPage(parent), next_id_(0) {}
-    int nextId() const { return next_id_; }
-    int next_id_;
-  };
+  virtual QString name() const = 0;
+  virtual QString description() const = 0;
+  int start_page() const { return start_page_; }
 
-  void AddPlugin(WizardPlugin* plugin);
+  virtual GeneratorPtr CreateGenerator() const = 0;
 
-private slots:
-  void TypeChanged(int index);
+  void Init(QWizard* wizard);
 
-private:
+protected:
+  virtual int CreatePages(QWizard* wizard) = 0;
+
   LibraryBackend* library_;
-  TypePage* type_page_;
-  QSignalMapper* type_mapper_;
 
-  QList<WizardPlugin*> plugins_;
+private:
+  int start_page_;
 };
 
-} // namespace
+} // namespace smart_playlists
 
-#endif // SMARTPLAYLISTWIZARD_H
+#endif // WIZARDPLUGIN_H
