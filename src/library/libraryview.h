@@ -27,6 +27,7 @@
 class DeviceManager;
 class LibraryModel;
 class OrganiseDialog;
+class SmartPlaylistWizard;
 class TaskManager;
 
 class LibraryItemDelegate : public QStyledItemDelegate {
@@ -81,12 +82,17 @@ class LibraryView : public AutoExpandingTreeView {
   void ShowInVarious();
   void NoShowInVarious();
 
+  void NewSmartPlaylist();
+  void EditSmartPlaylist();
+  void DeleteSmartPlaylist();
+
   void DeleteFinished(const SongList& songs_with_errors);
 
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
   SongList GetSelectedSongs() const;
+  void CreateSmartPlaylistWizard();
 
  private:
   LibraryModel* library_;
@@ -107,7 +113,12 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* show_in_various_;
   QAction* no_show_in_various_;
 
+  QAction* new_smart_playlist_;
+  QAction* edit_smart_playlist_;
+  QAction* delete_smart_playlist_;
+
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
+  boost::scoped_ptr<SmartPlaylistWizard> smart_playlist_wizard_;
 
   bool is_in_keyboard_search_;
 };

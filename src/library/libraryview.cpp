@@ -23,6 +23,7 @@
 #include "core/musicstorage.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
+#include "smartplaylists/smartplaylistwizard.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
@@ -179,6 +180,15 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
         tr("Load"), this, SLOT(Load()));
     add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
         tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+
+    context_menu_->addSeparator();
+    new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
+        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
+    edit_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+        tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
+    delete_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+        tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
+
     context_menu_->addSeparator();
     organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
         tr("Organise files..."), this, SLOT(Organise()));
@@ -186,6 +196,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
         tr("Copy to device..."), this, SLOT(CopyToDevice()));
     delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
         tr("Delete from disk..."), this, SLOT(Delete()));
+
     context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(
         tr("Show in various artists"), this, SLOT(ShowInVarious()));
@@ -204,16 +215,32 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
                         ->mapToSource(context_menu_index_);
 
-  int type = library_->data(context_menu_index_, LibraryModel::Role_Type).toInt();
-  int container_type = library_->data(context_menu_index_, LibraryModel::Role_ContainerType).toInt();
-  bool enable_various = container_type == LibraryModel::GroupBy_Album;
-  bool enable_add = type == LibraryItem::Type_Container ||
-                    type == LibraryItem::Type_Song;
+  const int type = library_->data(context_menu_index_, LibraryModel::Role_Type).toInt();
+  const int container_type  = library_->data(context_menu_index_, LibraryModel::Role_ContainerType).toInt();
+  const bool enable_various = container_type == LibraryModel::GroupBy_Album;
+  const bool smart_playlist = type == LibraryItem::Type_SmartPlaylist;
+  const bool show_smart     = type == LibraryItem::Type_PlaylistContainer ||
+                              smart_playlist;
+  const bool enable_add     = type == LibraryItem::Type_Container ||
+                              type == LibraryItem::Type_Song ||
+                              smart_playlist;
 
   load_->setEnabled(enable_add);
   add_to_playlist_->setEnabled(enable_add);
   show_in_various_->setEnabled(enable_various);
   no_show_in_various_->setEnabled(enable_various);
+
+  new_smart_playlist_->setVisible(show_smart);
+  edit_smart_playlist_->setVisible(show_smart);
+  delete_smart_playlist_->setVisible(show_smart);
+  organise_->setVisible(!show_smart);
+  copy_to_device_->setVisible(!show_smart);
+  delete_->setVisible(!show_smart);
+  show_in_various_->setVisible(!show_smart);
+  no_show_in_various_->setVisible(!show_smart);
+
+  edit_smart_playlist_->setEnabled(smart_playlist);
+  delete_smart_playlist_->setEnabled(smart_playlist);
 
   context_menu_->popup(e->globalPos());
 }
@@ -358,4 +385,24 @@ void LibraryView::FilterReturnPressed() {
     return;
 
   emit doubleClicked(currentIndex());
+}
+
+void LibraryView::CreateSmartPlaylistWizard() {
+  if (smart_playlist_wizard_)
+    return;
+
+  smart_playlist_wizard_.reset(new SmartPlaylistWizard(library_->backend(), this));
+}
+
+void LibraryView::NewSmartPlaylist() {
+  CreateSmartPlaylistWizard();
+  smart_playlist_wizard_->show();
+}
+
+void LibraryView::EditSmartPlaylist() {
+  // TODO
+}
+
+void LibraryView::DeleteSmartPlaylist() {
+  // TODO
 }
