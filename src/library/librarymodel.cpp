@@ -21,9 +21,9 @@
 #include "sqlrow.h"
 #include "core/database.h"
 #include "playlist/songmimedata.h"
+#include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
-#include "smartplaylists/playlistgenerator.h"
-#include "smartplaylists/queryplaylistgenerator.h"
+#include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
 
 #include <QSettings>
@@ -32,6 +32,11 @@
 #include <QMetaEnum>
 
 #include <boost/bind.hpp>
+
+using smart_playlists::Generator;
+using smart_playlists::GeneratorMimeData;
+using smart_playlists::GeneratorPtr;
+using smart_playlists::QueryGenerator;
 
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
@@ -747,7 +752,7 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
 
   // Special case: a smart playlist was dragged
   if (IndexToItem(indexes.first())->type == LibraryItem::Type_SmartPlaylist) {
-    PlaylistGeneratorPtr generator = CreateGenerator(indexes.first());
+    GeneratorPtr generator = CreateGenerator(indexes.first());
     if (!generator)
       return NULL;
 
@@ -882,30 +887,33 @@ void LibraryModel::CreateSmartPlaylists() {
     s.beginGroup(kSmartPlaylistsSettingsGroup);
     s.beginWriteArray("smart");
 
-    // These defines really make this section more concise
-    #define S SmartPlaylistSearch
-    #define T SmartPlaylistSearchTerm
+    using smart_playlists::Search;
+    using smart_playlists::SearchTerm;
 
     int i = 0;
-    SaveDefaultGenerator(&s, i++, tr("50 random tracks"), S(
-        S::Type_All, S::TermList(), S::Sort_Random, T::Field_Title, 50));
-    SaveDefaultGenerator(&s, i++, tr("Ever played"), S(
-        S::Type_And, S::TermList() << T(T::Field_PlayCount, T::Op_GreaterThan, 0),
-        S::Sort_Random, T::Field_Title));
-    SaveDefaultGenerator(&s, i++, tr("Never played"), S(
-        S::Type_And, S::TermList() << T(T::Field_PlayCount, T::Op_Equals, 0),
-        S::Sort_Random, T::Field_Title));
-    SaveDefaultGenerator(&s, i++, tr("Last played"), S(
-        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_LastPlayed));
-    SaveDefaultGenerator(&s, i++, tr("Most played"), S(
-        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_PlayCount));
-    SaveDefaultGenerator(&s, i++, tr("Favourite tracks"), S(
-        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_Score));
-    SaveDefaultGenerator(&s, i++, tr("Newest tracks"), S(
-        S::Type_All, S::TermList(), S::Sort_FieldDesc, T::Field_DateCreated));
-
-    #undef S
-    #undef T
+    SaveDefaultGenerator(&s, i++, tr("50 random tracks"), Search(
+        Search::Type_All, Search::TermList(),
+        Search::Sort_Random, SearchTerm::Field_Title, 50));
+    SaveDefaultGenerator(&s, i++, tr("Ever played"), Search(
+        Search::Type_And, Search::TermList()
+          << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_GreaterThan, 0),
+        Search::Sort_Random, SearchTerm::Field_Title));
+    SaveDefaultGenerator(&s, i++, tr("Never played"), Search(
+        Search::Type_And, Search::TermList()
+          << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_Equals, 0),
+        Search::Sort_Random, SearchTerm::Field_Title));
+    SaveDefaultGenerator(&s, i++, tr("Last played"), Search(
+        Search::Type_All, Search::TermList(),
+        Search::Sort_FieldDesc, SearchTerm::Field_LastPlayed));
+    SaveDefaultGenerator(&s, i++, tr("Most played"), Search(
+        Search::Type_All, Search::TermList(),
+        Search::Sort_FieldDesc, SearchTerm::Field_PlayCount));
+    SaveDefaultGenerator(&s, i++, tr("Favourite tracks"), Search(
+        Search::Type_All, Search::TermList(),
+        Search::Sort_FieldDesc, SearchTerm::Field_Score));
+    SaveDefaultGenerator(&s, i++, tr("Newest tracks"), Search(
+        Search::Type_All, Search::TermList(),
+        Search::Sort_FieldDesc, SearchTerm::Field_DateCreated));
 
     s.endArray();
     s.endGroup();
@@ -925,28 +933,28 @@ void LibraryModel::CreateSmartPlaylists() {
 }
 
 void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name,
-                                        const SmartPlaylistSearch& search) const {
-  boost::shared_ptr<QueryPlaylistGenerator> gen(new QueryPlaylistGenerator);
+                                        const smart_playlists::Search& search) const {
+  boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
   gen->set_name(name);
   gen->Load(search);
-  SaveGenerator(s, i, boost::static_pointer_cast<PlaylistGenerator>(gen));
+  SaveGenerator(s, i, boost::static_pointer_cast<Generator>(gen));
 }
 
-void LibraryModel::SaveGenerator(QSettings* s, int i, PlaylistGeneratorPtr generator) const {
+void LibraryModel::SaveGenerator(QSettings* s, int i, GeneratorPtr generator) const {
   s->setArrayIndex(i);
   s->setValue("name", generator->name());
   s->setValue("type", generator->type());
   s->setValue("data", generator->Save());
 }
 
-PlaylistGeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
-  PlaylistGeneratorPtr ret;
+GeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
+  GeneratorPtr ret;
 
   const LibraryItem* item = IndexToItem(index);
   if (!item || item->type != LibraryItem::Type_SmartPlaylist)
     return ret;
 
-  ret = PlaylistGenerator::Create(item->key);
+  ret = Generator::Create(item->key);
   if (!ret)
     return ret;
 

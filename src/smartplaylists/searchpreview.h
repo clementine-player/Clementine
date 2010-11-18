@@ -17,7 +17,7 @@
 #ifndef SMARTPLAYLISTSEARCHPREVIEW_H
 #define SMARTPLAYLISTSEARCHPREVIEW_H
 
-#include "smartplaylistsearch.h"
+#include "search.h"
 
 #include <QWidget>
 
@@ -25,35 +25,40 @@
 
 class LibraryBackend;
 class Playlist;
-class QueryPlaylistGenerator;
 class Ui_SmartPlaylistSearchPreview;
 
-class SmartPlaylistSearchPreview : public QWidget {
+namespace smart_playlists {
+
+class QueryGenerator;
+
+class SearchPreview : public QWidget {
   Q_OBJECT
 
 public:
-  SmartPlaylistSearchPreview(QWidget *parent = 0);
-  ~SmartPlaylistSearchPreview();
+  SearchPreview(QWidget *parent = 0);
+  ~SearchPreview();
 
   void set_library(LibraryBackend* backend);
 
-  void Update(const SmartPlaylistSearch& search);
+  void Update(const Search& search);
 
 private:
-  void RunSearch(const SmartPlaylistSearch& search);
+  void RunSearch(const Search& search);
 
 private slots:
   void SearchFinished();
 
 private:
   Ui_SmartPlaylistSearchPreview* ui_;
-  QList<SmartPlaylistSearchTerm::Field> fields_;
+  QList<SearchTerm::Field> fields_;
 
   LibraryBackend* backend_;
   Playlist* model_;
 
-  SmartPlaylistSearch pending_search_;
-  boost::scoped_ptr<QueryPlaylistGenerator> generator_;
+  Search pending_search_;
+  boost::scoped_ptr<QueryGenerator> generator_;
 };
+
+} // namespace
 
 #endif // SMARTPLAYLISTSEARCHPREVIEW_H

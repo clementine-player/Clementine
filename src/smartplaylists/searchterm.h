@@ -20,7 +20,9 @@
 #include <QDataStream>
 #include <QVariant>
 
-class SmartPlaylistSearchTerm {
+namespace smart_playlists {
+
+class SearchTerm {
 public:
   // These values are persisted, so add to the end of the enum only
   enum Field {
@@ -74,8 +76,8 @@ public:
     Type_Rating,
   };
 
-  SmartPlaylistSearchTerm();
-  SmartPlaylistSearchTerm(Field field, Operator op, const QVariant& value);
+  SearchTerm();
+  SearchTerm(Field field, Operator op, const QVariant& value);
 
   Field field_;
   Operator operator_;
@@ -92,9 +94,11 @@ public:
   static QString FieldSortOrderText(Type type, bool ascending);
 };
 
-typedef QList<SmartPlaylistSearchTerm::Operator> OperatorList;
+typedef QList<SearchTerm::Operator> OperatorList;
 
-QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearchTerm& term);
-QDataStream& operator >>(QDataStream& s, SmartPlaylistSearchTerm& term);
+} // namespace
+
+QDataStream& operator <<(QDataStream& s, const smart_playlists::SearchTerm& term);
+QDataStream& operator >>(QDataStream& s, smart_playlists::SearchTerm& term);
 
 #endif // SMARTPLAYLISTSEARCHTERM_H

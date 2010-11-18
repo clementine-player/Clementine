@@ -198,7 +198,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
   void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
-  void AddSmartPlaylistToPlaylist(bool clear_first, PlaylistGeneratorPtr gen);
+  void AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::GeneratorPtr gen);
   void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);
   void ConnectInfoView(SongInfoBase* view);

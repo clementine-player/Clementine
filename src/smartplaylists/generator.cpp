@@ -14,26 +14,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef QUERYPLAYLISTGENERATOR_H
-#define QUERYPLAYLISTGENERATOR_H
+#include "generator.h"
+#include "querygenerator.h"
 
-#include "playlistgenerator.h"
-#include "smartplaylistsearch.h"
+#include <QSettings>
 
-class QueryPlaylistGenerator : public PlaylistGenerator {
-public:
-  QueryPlaylistGenerator();
+namespace smart_playlists {
 
-  QString type() const { return "Query"; }
+const int Generator::kDefaultLimit = 20;
 
-  void Load(const SmartPlaylistSearch& search);
-  void Load(const QByteArray& data);
-  QByteArray Save() const;
+Generator::Generator()
+  : QObject(NULL),
+    backend_(NULL)
+{
+}
 
-  PlaylistItemList Generate();
+GeneratorPtr Generator::Create(const QString& type) {
+  if (type == "Query")
+    return GeneratorPtr(new QueryGenerator);
 
-private:
-  SmartPlaylistSearch search_;
-};
+  qWarning() << "Invalid playlist generator type:" << type;
+  return GeneratorPtr();
+}
 
-#endif // QUERYPLAYLISTGENERATOR_H
+} // namespace
+

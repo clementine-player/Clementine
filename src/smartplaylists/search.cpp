@@ -14,18 +14,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "smartplaylistsearch.h"
+#include "search.h"
 #include "core/song.h"
 
 #include <QStringList>
 
-SmartPlaylistSearch::SmartPlaylistSearch() {
+namespace smart_playlists {
+
+Search::Search() {
   Reset();
 }
 
-SmartPlaylistSearch::SmartPlaylistSearch(
+Search::Search(
     SearchType type, TermList terms, SortType sort_type,
-    SmartPlaylistSearchTerm::Field sort_field, int limit)
+    SearchTerm::Field sort_field, int limit)
   : search_type_(type),
     terms_(terms),
     sort_type_(sort_type),
@@ -34,20 +36,20 @@ SmartPlaylistSearch::SmartPlaylistSearch(
 {
 }
 
-void SmartPlaylistSearch::Reset() {
+void Search::Reset() {
   search_type_ = Type_And;
   terms_.clear();
   sort_type_ = Sort_Random;
-  sort_field_ = SmartPlaylistSearchTerm::Field_Title;
+  sort_field_ = SearchTerm::Field_Title;
   limit_ = -1;
 }
 
-QString SmartPlaylistSearch::ToSql(const QString& songs_table) const {
+QString Search::ToSql(const QString& songs_table) const {
   QString sql = "SELECT ROWID," + Song::kColumnSpec + " FROM " + songs_table;
 
   // Add search terms
   QStringList term_sql;
-  foreach (const SmartPlaylistSearchTerm& term, terms_) {
+  foreach (const SearchTerm& term, terms_) {
     term_sql += term.ToSql();
   }
   if (!terms_.isEmpty() && search_type_ != Type_All) {
@@ -59,7 +61,7 @@ QString SmartPlaylistSearch::ToSql(const QString& songs_table) const {
   if (sort_type_ == Sort_Random) {
     sql += " ORDER BY random()";
   } else {
-    sql += " ORDER BY " + SmartPlaylistSearchTerm::FieldColumnName(sort_field_)
+    sql += " ORDER BY " + SearchTerm::FieldColumnName(sort_field_)
         + (sort_type_ == Sort_FieldAsc ? " ASC" : " DESC");
   }
 
@@ -71,13 +73,15 @@ QString SmartPlaylistSearch::ToSql(const QString& songs_table) const {
   return sql;
 }
 
-bool SmartPlaylistSearch::is_valid() const {
+bool Search::is_valid() const {
   if (search_type_ == Type_All)
     return true;
   return !terms_.isEmpty();
 }
 
-QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearch& search) {
+} // namespace
+
+QDataStream& operator <<(QDataStream& s, const smart_playlists::Search& search) {
   s << search.terms_;
   s << quint8(search.sort_type_);
   s << quint8(search.sort_field_);
@@ -85,13 +89,13 @@ QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearch& search) {
   return s;
 }
 
-QDataStream& operator >>(QDataStream& s, SmartPlaylistSearch& search) {
+QDataStream& operator >>(QDataStream& s, smart_playlists::Search& search) {
   quint8 sort_type, sort_field;
   qint32 limit;
 
   s >> search.terms_ >> sort_type >> sort_field >> limit;
-  search.sort_type_ = SmartPlaylistSearch::SortType(sort_type);
-  search.sort_field_ = SmartPlaylistSearchTerm::Field(sort_field);
+  search.sort_type_ = smart_playlists::Search::SortType(sort_type);
+  search.sort_field_ = smart_playlists::SearchTerm::Field(sort_field);
   search.limit_ = limit;
 
   return s;

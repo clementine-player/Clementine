@@ -14,24 +14,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "queryplaylistgenerator.h"
-#include "playlistgenerator.h"
+#ifndef PLAYLISTGENERATOR_FWD_H
+#define PLAYLISTGENERATOR_FWD_H
 
-#include <QSettings>
+#include <boost/shared_ptr.hpp>
 
-const int PlaylistGenerator::kDefaultLimit = 20;
+namespace smart_playlists {
 
-PlaylistGenerator::PlaylistGenerator()
-  : QObject(NULL),
-    backend_(NULL)
-{
-}
+class Generator;
 
-PlaylistGeneratorPtr PlaylistGenerator::Create(const QString& type) {
-  if (type == "Query")
-    return PlaylistGeneratorPtr(new QueryPlaylistGenerator);
+typedef boost::shared_ptr<Generator> GeneratorPtr;
 
-  qWarning() << "Invalid playlist generator type:" << type;
-  return PlaylistGeneratorPtr();
-}
+} // namespace
 
+#endif // PLAYLISTGENERATOR_FWD_H

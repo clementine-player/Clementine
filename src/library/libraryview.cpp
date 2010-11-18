@@ -23,7 +23,7 @@
 #include "core/musicstorage.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
-#include "smartplaylists/smartplaylistwizard.h"
+#include "smartplaylists/wizard.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
@@ -34,6 +34,8 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QSettings>
+
+using smart_playlists::Wizard;
 
 const char* LibraryView::kSettingsGroup = "LibraryView";
 
@@ -391,7 +393,7 @@ void LibraryView::CreateSmartPlaylistWizard() {
   if (smart_playlist_wizard_)
     return;
 
-  smart_playlist_wizard_.reset(new SmartPlaylistWizard(library_->backend(), this));
+  smart_playlist_wizard_.reset(new Wizard(library_->backend(), this));
 }
 
 void LibraryView::NewSmartPlaylist() {

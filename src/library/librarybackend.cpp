@@ -19,7 +19,7 @@
 #include "sqlrow.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
-#include "smartplaylists/smartplaylistsearch.h"
+#include "smartplaylists/search.h"
 
 #include <QDir>
 #include <QVariant>
@@ -814,7 +814,7 @@ bool LibraryBackend::ExecQuery(LibraryQuery *q) {
   return !db_->CheckErrors(q->Exec(db_->Connect(), songs_table_, fts_table_));
 }
 
-SongList LibraryBackend::FindSongs(const SmartPlaylistSearch& search) {
+SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 

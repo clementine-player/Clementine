@@ -14,35 +14,37 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "smartplaylistsearchpreview.h"
-#include "smartplaylistsearchtermwidget.h"
-#include "smartplaylistwizard.h"
-#include "ui_smartplaylistwizard.h"
-#include "playlistgenerator.h"
+#include "generator.h"
+#include "searchpreview.h"
+#include "searchtermwidget.h"
+#include "wizard.h"
+#include "ui_wizard.h"
 
-SmartPlaylistWizard::SearchPage::SearchPage(QWidget* parent)
+namespace smart_playlists {
+
+Wizard::SearchPage::SearchPage(QWidget* parent)
   : QWizardPage(parent)
 {
 }
 
-bool SmartPlaylistWizard::SearchPage::isComplete() const {
+bool Wizard::SearchPage::isComplete() const {
   if (type_->currentIndex() == 2) // All songs
     return true;
 
-  foreach (SmartPlaylistSearchTermWidget* widget, terms_) {
+  foreach (SearchTermWidget* widget, terms_) {
     if (!widget->Term().is_valid())
       return false;
   }
   return true;
 }
 
-SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* parent)
+Wizard::Wizard(LibraryBackend* library, QWidget* parent)
   : QWizard(parent),
     ui_(new Ui_SmartPlaylistWizard),
     library_(library)
 {
   ui_->setupUi(this);
-  ui_->limit_value->setValue(PlaylistGenerator::kDefaultLimit);
+  ui_->limit_value->setValue(Generator::kDefaultLimit);
 
   connect(ui_->search_type, SIGNAL(currentIndexChanged(int)), SLOT(SearchTypeChanged()));
 
@@ -50,7 +52,7 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
   ui_->page_query_search->type_ = ui_->search_type;
 
   // Create the new search term widget
-  ui_->page_query_search->new_term_ = new SmartPlaylistSearchTermWidget(library_, this);
+  ui_->page_query_search->new_term_ = new SearchTermWidget(library_, this);
   ui_->page_query_search->new_term_->SetActive(false);
   connect(ui_->page_query_search->new_term_, SIGNAL(Clicked()), SLOT(AddSearchTerm()));
 
@@ -62,14 +64,14 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
   // Add the preview widget at the bottom of the search terms page
   QVBoxLayout* terms_page_layout = static_cast<QVBoxLayout*>(ui_->page_query_search->layout());
   terms_page_layout->addStretch();
-  ui_->page_query_search->preview_ = new SmartPlaylistSearchPreview(this);
+  ui_->page_query_search->preview_ = new SearchPreview(this);
   ui_->page_query_search->preview_->set_library(library_);
   terms_page_layout->addWidget(ui_->page_query_search->preview_);
 
   // Add sort field texts
-  for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {
-    const SmartPlaylistSearchTerm::Field field = SmartPlaylistSearchTerm::Field(i);
-    const QString field_name = SmartPlaylistSearchTerm::FieldName(field);
+  for (int i=0 ; i<SearchTerm::FieldCount ; ++i) {
+    const SearchTerm::Field field = SearchTerm::Field(i);
+    const QString field_name = SearchTerm::FieldName(field);
     ui_->sort_field_value->addItem(field_name);
   }
   connect(ui_->sort_field_value, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortOrder()));
@@ -84,25 +86,25 @@ SmartPlaylistWizard::SmartPlaylistWizard(LibraryBackend* library, QWidget* paren
   ui_->sort_preview->set_library(library_);
 }
 
-SmartPlaylistWizard::~SmartPlaylistWizard() {
+Wizard::~Wizard() {
   delete ui_;
 }
 
-void SmartPlaylistWizard::UpdateSortOrder() {
-  const SmartPlaylistSearchTerm::Field field =
-      SmartPlaylistSearchTerm::Field(ui_->sort_field_value->currentIndex());
-  const SmartPlaylistSearchTerm::Type type = SmartPlaylistSearchTerm::TypeOf(field);
-  const QString asc = SmartPlaylistSearchTerm::FieldSortOrderText(type, true);
-  const QString desc = SmartPlaylistSearchTerm::FieldSortOrderText(type, false);
+void Wizard::UpdateSortOrder() {
+  const SearchTerm::Field field =
+      SearchTerm::Field(ui_->sort_field_value->currentIndex());
+  const SearchTerm::Type type = SearchTerm::TypeOf(field);
+  const QString asc = SearchTerm::FieldSortOrderText(type, true);
+  const QString desc = SearchTerm::FieldSortOrderText(type, false);
 
   ui_->sort_order->clear();
   ui_->sort_order->addItem(asc);
   ui_->sort_order->addItem(desc);
 }
 
-void SmartPlaylistWizard::AddSearchTerm() {
-  SmartPlaylistSearchTermWidget* widget =
-      new SmartPlaylistSearchTermWidget(library_, this);
+void Wizard::AddSearchTerm() {
+  SearchTermWidget* widget =
+      new SearchTermWidget(library_, this);
   connect(widget, SIGNAL(RemoveClicked()), SLOT(RemoveSearchTerm()));
   connect(widget, SIGNAL(Changed()), SLOT(UpdateTermPreview()));
 
@@ -113,9 +115,9 @@ void SmartPlaylistWizard::AddSearchTerm() {
   UpdateTermPreview();
 }
 
-void SmartPlaylistWizard::RemoveSearchTerm() {
-  SmartPlaylistSearchTermWidget* widget =
-      qobject_cast<SmartPlaylistSearchTermWidget*>(sender());
+void Wizard::RemoveSearchTerm() {
+  SearchTermWidget* widget =
+      qobject_cast<SearchTermWidget*>(sender());
   if (!widget)
     return;
 
@@ -127,8 +129,8 @@ void SmartPlaylistWizard::RemoveSearchTerm() {
   UpdateTermPreview();
 }
 
-void SmartPlaylistWizard::UpdateTermPreview() {
-  SmartPlaylistSearch search = MakeSearch();
+void Wizard::UpdateTermPreview() {
+  Search search = MakeSearch();
   emit ui_->page_query_search->completeChanged();
   if (!search.is_valid())
     return;
@@ -139,35 +141,35 @@ void SmartPlaylistWizard::UpdateTermPreview() {
   ui_->page_query_search->preview_->Update(search);
 }
 
-void SmartPlaylistWizard::UpdateSortPreview() {
-  SmartPlaylistSearch search = MakeSearch();
+void Wizard::UpdateSortPreview() {
+  Search search = MakeSearch();
   if (!search.is_valid())
     return;
 
   ui_->sort_preview->Update(search);
 }
 
-SmartPlaylistSearch SmartPlaylistWizard::MakeSearch() const {
-  SmartPlaylistSearch ret;
+Search Wizard::MakeSearch() const {
+  Search ret;
 
   // Search type
-  ret.search_type_ = SmartPlaylistSearch::SearchType(ui_->search_type->currentIndex());
+  ret.search_type_ = Search::SearchType(ui_->search_type->currentIndex());
 
   // Search terms
-  foreach (SmartPlaylistSearchTermWidget* widget, ui_->page_query_search->terms_) {
-    SmartPlaylistSearchTerm term = widget->Term();
+  foreach (SearchTermWidget* widget, ui_->page_query_search->terms_) {
+    SearchTerm term = widget->Term();
     if (term.is_valid())
       ret.terms_ << term;
   }
 
   // Sort order
   if (ui_->sort_random->isChecked()) {
-    ret.sort_type_ = SmartPlaylistSearch::Sort_Random;
+    ret.sort_type_ = Search::Sort_Random;
   } else {
     const bool ascending = ui_->sort_order->currentIndex() == 0;
-    ret.sort_type_ = ascending ? SmartPlaylistSearch::Sort_FieldAsc :
-                                 SmartPlaylistSearch::Sort_FieldDesc;
-    ret.sort_field_ = SmartPlaylistSearchTerm::Field(
+    ret.sort_type_ = ascending ? Search::Sort_FieldAsc :
+                                 Search::Sort_FieldDesc;
+    ret.sort_field_ = SearchTerm::Field(
           ui_->sort_field_value->currentIndex());
   }
 
@@ -180,9 +182,11 @@ SmartPlaylistSearch SmartPlaylistWizard::MakeSearch() const {
   return ret;
 }
 
-void SmartPlaylistWizard::SearchTypeChanged() {
+void Wizard::SearchTypeChanged() {
   const bool all = ui_->search_type->currentIndex() == 2;
   ui_->terms_group->setEnabled(!all);
 
   UpdateTermPreview();
 }
+
+} // namespace

@@ -14,9 +14,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "smartplaylistsearchterm.h"
-#include "smartplaylistsearchtermwidget.h"
-#include "ui_smartplaylistsearchtermwidget.h"
+#include "searchterm.h"
+#include "searchtermwidget.h"
+#include "ui_searchtermwidget.h"
 #include "core/utilities.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistdelegates.h"
@@ -31,9 +31,11 @@
 // Exported by QtGui
 void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
 
-class SmartPlaylistSearchTermWidget::Overlay : public QWidget {
+namespace smart_playlists {
+
+class SearchTermWidget::Overlay : public QWidget {
 public:
-  Overlay(SmartPlaylistSearchTermWidget* parent);
+  Overlay(SearchTermWidget* parent);
   void Grab();
   void SetOpacity(float opacity);
   float opacity() const { return opacity_; }
@@ -46,7 +48,7 @@ protected:
   void mouseReleaseEvent(QMouseEvent*);
 
 private:
-  SmartPlaylistSearchTermWidget* parent_;
+  SearchTermWidget* parent_;
 
   float opacity_;
   QString text_;
@@ -54,11 +56,11 @@ private:
   QPixmap icon_;
 };
 
-const int SmartPlaylistSearchTermWidget::Overlay::kSpacing = 6;
-const int SmartPlaylistSearchTermWidget::Overlay::kIconSize = 22;
+const int SearchTermWidget::Overlay::kSpacing = 6;
+const int SearchTermWidget::Overlay::kIconSize = 22;
 
 
-SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* library, QWidget* parent)
+SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_SmartPlaylistSearchTermWidget),
     library_(library),
@@ -80,8 +82,8 @@ SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* lib
   ui_->value_date->setDate(QDate::currentDate());
 
   // Populate the combo boxes
-  for (int i=0 ; i<SmartPlaylistSearchTerm::FieldCount ; ++i) {
-    ui_->field->addItem(SmartPlaylistSearchTerm::FieldName(SmartPlaylistSearchTerm::Field(i)));
+  for (int i=0 ; i<SearchTerm::FieldCount ; ++i) {
+    ui_->field->addItem(SearchTerm::FieldName(SearchTerm::Field(i)));
     ui_->field->setItemData(i, i);
   }
   ui_->field->model()->sort(0);
@@ -101,41 +103,41 @@ SmartPlaylistSearchTermWidget::SmartPlaylistSearchTermWidget(LibraryBackend* lib
   setStyleSheet(stylesheet);
 }
 
-SmartPlaylistSearchTermWidget::~SmartPlaylistSearchTermWidget() {
+SearchTermWidget::~SearchTermWidget() {
   delete ui_;
 }
 
-void SmartPlaylistSearchTermWidget::FieldChanged(int index) {
-  SmartPlaylistSearchTerm::Field field = SmartPlaylistSearchTerm::Field(
+void SearchTermWidget::FieldChanged(int index) {
+  SearchTerm::Field field = SearchTerm::Field(
         ui_->field->itemData(index).toInt());
-  SmartPlaylistSearchTerm::Type type = SmartPlaylistSearchTerm::TypeOf(field);
+  SearchTerm::Type type = SearchTerm::TypeOf(field);
 
   // Populate the operator combo box
   ui_->op->clear();
-  foreach (SmartPlaylistSearchTerm::Operator op, SmartPlaylistSearchTerm::OperatorsForType(type)) {
+  foreach (SearchTerm::Operator op, SearchTerm::OperatorsForType(type)) {
     const int i = ui_->op->count();
-    ui_->op->addItem(SmartPlaylistSearchTerm::OperatorText(type, op));
+    ui_->op->addItem(SearchTerm::OperatorText(type, op));
     ui_->op->setItemData(i, op);
   }
 
   // Show the correct value editor
   QWidget* page = NULL;
   switch (type) {
-    case SmartPlaylistSearchTerm::Type_Time:   page = ui_->page_time;   break;
-    case SmartPlaylistSearchTerm::Type_Number: page = ui_->page_number; break;
-    case SmartPlaylistSearchTerm::Type_Date:   page = ui_->page_date;   break;
-    case SmartPlaylistSearchTerm::Type_Rating: page = ui_->page_rating; break;
-    case SmartPlaylistSearchTerm::Type_Text:   page = ui_->page_text;   break;
+    case SearchTerm::Type_Time:   page = ui_->page_time;   break;
+    case SearchTerm::Type_Number: page = ui_->page_number; break;
+    case SearchTerm::Type_Date:   page = ui_->page_date;   break;
+    case SearchTerm::Type_Rating: page = ui_->page_rating; break;
+    case SearchTerm::Type_Text:   page = ui_->page_text;   break;
   }
   ui_->value_stack->setCurrentWidget(page);
 
   // Maybe set a tag completer
   switch (field) {
-  case SmartPlaylistSearchTerm::Field_Artist:
+  case SearchTerm::Field_Artist:
     new TagCompleter(library_, Playlist::Column_Artist, ui_->value_text);
     break;
 
-  case SmartPlaylistSearchTerm::Field_Album:
+  case SearchTerm::Field_Album:
     new TagCompleter(library_, Playlist::Column_Album, ui_->value_text);
     break;
 
@@ -146,7 +148,7 @@ void SmartPlaylistSearchTermWidget::FieldChanged(int index) {
   emit Changed();
 }
 
-void SmartPlaylistSearchTermWidget::SetActive(bool active) {
+void SearchTermWidget::SetActive(bool active) {
   active_ = active;
   delete overlay_;
   overlay_ = NULL;
@@ -156,7 +158,7 @@ void SmartPlaylistSearchTermWidget::SetActive(bool active) {
   }
 }
 
-void SmartPlaylistSearchTermWidget::enterEvent(QEvent*) {
+void SearchTermWidget::enterEvent(QEvent*) {
   if (!overlay_)
     return;
 
@@ -166,7 +168,7 @@ void SmartPlaylistSearchTermWidget::enterEvent(QEvent*) {
   animation_->start();
 }
 
-void SmartPlaylistSearchTermWidget::leaveEvent(QEvent*) {
+void SearchTermWidget::leaveEvent(QEvent*) {
   if (!overlay_)
     return;
 
@@ -176,40 +178,40 @@ void SmartPlaylistSearchTermWidget::leaveEvent(QEvent*) {
   animation_->start();
 }
 
-void SmartPlaylistSearchTermWidget::resizeEvent(QResizeEvent* e) {
+void SearchTermWidget::resizeEvent(QResizeEvent* e) {
   QWidget::resizeEvent(e);
   if (overlay_ && overlay_->isVisible()) {
     QTimer::singleShot(0, this, SLOT(Grab()));
   }
 }
 
-void SmartPlaylistSearchTermWidget::showEvent(QShowEvent* e) {
+void SearchTermWidget::showEvent(QShowEvent* e) {
   QWidget::showEvent(e);
   if (overlay_) {
     QTimer::singleShot(0, this, SLOT(Grab()));
   }
 }
 
-void SmartPlaylistSearchTermWidget::Grab() {
+void SearchTermWidget::Grab() {
   overlay_->Grab();
 }
 
-void SmartPlaylistSearchTermWidget::set_overlay_opacity(float opacity) {
+void SearchTermWidget::set_overlay_opacity(float opacity) {
   if (overlay_)
     overlay_->SetOpacity(opacity);
 }
 
-float SmartPlaylistSearchTermWidget::overlay_opacity() const {
+float SearchTermWidget::overlay_opacity() const {
   return overlay_ ? overlay_->opacity() : 0.0;
 }
 
-SmartPlaylistSearchTerm SmartPlaylistSearchTermWidget::Term() const {
+SearchTerm SearchTermWidget::Term() const {
   const int field = ui_->field->itemData(ui_->field->currentIndex()).toInt();
   const int op    = ui_->op->itemData(ui_->op->currentIndex()).toInt();
 
-  SmartPlaylistSearchTerm ret;
-  ret.field_ = SmartPlaylistSearchTerm::Field(field);
-  ret.operator_ = SmartPlaylistSearchTerm::Operator(op);
+  SearchTerm ret;
+  ret.field_ = SearchTerm::Field(field);
+  ret.operator_ = SearchTerm::Operator(op);
 
   // The value depends on the data type
   const QWidget* value_page = ui_->value_stack->currentWidget();
@@ -230,7 +232,7 @@ SmartPlaylistSearchTerm SmartPlaylistSearchTermWidget::Term() const {
 
 
 
-SmartPlaylistSearchTermWidget::Overlay::Overlay(SmartPlaylistSearchTermWidget* parent)
+SearchTermWidget::Overlay::Overlay(SearchTermWidget* parent)
   : QWidget(parent),
     parent_(parent),
     opacity_(0.0),
@@ -240,12 +242,12 @@ SmartPlaylistSearchTermWidget::Overlay::Overlay(SmartPlaylistSearchTermWidget* p
   raise();
 }
 
-void SmartPlaylistSearchTermWidget::Overlay::SetOpacity(float opacity) {
+void SearchTermWidget::Overlay::SetOpacity(float opacity) {
   opacity_ = opacity;
   update();
 }
 
-void SmartPlaylistSearchTermWidget::Overlay::Grab() {
+void SearchTermWidget::Overlay::Grab() {
   hide();
 
   // Take a "screenshot" of the window
@@ -267,7 +269,7 @@ void SmartPlaylistSearchTermWidget::Overlay::Grab() {
   update();
 }
 
-void SmartPlaylistSearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
+void SearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   // Background
@@ -300,6 +302,8 @@ void SmartPlaylistSearchTermWidget::Overlay::paintEvent(QPaintEvent*) {
   p.drawText(text, Qt::TextDontClip | Qt::AlignVCenter, text_);
 }
 
-void SmartPlaylistSearchTermWidget::Overlay::mouseReleaseEvent(QMouseEvent*) {
+void SearchTermWidget::Overlay::mouseReleaseEvent(QMouseEvent*) {
   emit parent_->Clicked();
 }
+
+} // namespace

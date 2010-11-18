@@ -24,15 +24,17 @@
 
 class LibraryBackend;
 
-class PlaylistGenerator : public QObject, public boost::enable_shared_from_this<PlaylistGenerator> {
+namespace smart_playlists {
+
+class Generator : public QObject, public boost::enable_shared_from_this<Generator> {
   Q_OBJECT
 
 public:
-  PlaylistGenerator();
-  virtual ~PlaylistGenerator() {}
+  Generator();
+  virtual ~Generator() {}
 
   static const int kDefaultLimit;
-  static boost::shared_ptr<PlaylistGenerator> Create(const QString& type);
+  static boost::shared_ptr<Generator> Create(const QString& type);
 
   void set_library(LibraryBackend* backend) { backend_ = backend; }
 
@@ -55,6 +57,8 @@ protected:
   QString name_;
 };
 
-#include "playlistgenerator_fwd.h"
+} // namespace
+
+#include "generator_fwd.h"
 
 #endif // PLAYLISTGENERATOR_H

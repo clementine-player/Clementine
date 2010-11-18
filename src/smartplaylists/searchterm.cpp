@@ -14,16 +14,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "smartplaylistsearchterm.h"
+#include "searchterm.h"
 #include "playlist/playlist.h"
 
-SmartPlaylistSearchTerm::SmartPlaylistSearchTerm()
+namespace smart_playlists {
+
+SearchTerm::SearchTerm()
   : field_(Field_Title),
     operator_(Op_Equals)
 {
 }
 
-SmartPlaylistSearchTerm::SmartPlaylistSearchTerm(
+SearchTerm::SearchTerm(
     Field field, Operator op, const QVariant& value)
   : field_(field),
     operator_(op),
@@ -31,7 +33,7 @@ SmartPlaylistSearchTerm::SmartPlaylistSearchTerm(
 {
 }
 
-QString SmartPlaylistSearchTerm::ToSql() const {
+QString SearchTerm::ToSql() const {
   const QString col = FieldColumnName(field_);
   QString value = value_.toString();
   value.replace('\'', "''");
@@ -58,7 +60,7 @@ QString SmartPlaylistSearchTerm::ToSql() const {
   return QString();
 }
 
-bool SmartPlaylistSearchTerm::is_valid() const {
+bool SearchTerm::is_valid() const {
   switch (TypeOf(field_)) {
     case Type_Text:   return !value_.toString().isEmpty();
     case Type_Date:   return value_.toInt() != 0;
@@ -69,7 +71,7 @@ bool SmartPlaylistSearchTerm::is_valid() const {
   return false;
 }
 
-SmartPlaylistSearchTerm::Type SmartPlaylistSearchTerm::TypeOf(Field field) {
+SearchTerm::Type SearchTerm::TypeOf(Field field) {
   switch (field) {
     case Field_Length:
       return Type_Time;
@@ -99,7 +101,7 @@ SmartPlaylistSearchTerm::Type SmartPlaylistSearchTerm::TypeOf(Field field) {
   }
 }
 
-OperatorList SmartPlaylistSearchTerm::OperatorsForType(Type type) {
+OperatorList SearchTerm::OperatorsForType(Type type) {
   switch (type) {
     case Type_Text:
       return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
@@ -109,7 +111,7 @@ OperatorList SmartPlaylistSearchTerm::OperatorsForType(Type type) {
   }
 }
 
-QString SmartPlaylistSearchTerm::OperatorText(Type type, Operator op) {
+QString SearchTerm::OperatorText(Type type, Operator op) {
   if (type == Type_Date) {
     switch (op) {
       case Op_GreaterThan: return QObject::tr("after");
@@ -132,7 +134,7 @@ QString SmartPlaylistSearchTerm::OperatorText(Type type, Operator op) {
   return QString();
 }
 
-QString SmartPlaylistSearchTerm::FieldColumnName(Field field) {
+QString SearchTerm::FieldColumnName(Field field) {
   switch (field) {
     case Field_Length:      return "length";
     case Field_Track:       return "track";
@@ -161,7 +163,7 @@ QString SmartPlaylistSearchTerm::FieldColumnName(Field field) {
   return QString();
 }
 
-QString SmartPlaylistSearchTerm::FieldName(Field field) {
+QString SearchTerm::FieldName(Field field) {
   switch (field) {
     case Field_Length:      return Playlist::column_name(Playlist::Column_Length);
     case Field_Track:       return Playlist::column_name(Playlist::Column_Track);
@@ -190,7 +192,7 @@ QString SmartPlaylistSearchTerm::FieldName(Field field) {
   return QString();
 }
 
-QString SmartPlaylistSearchTerm::FieldSortOrderText(Type type, bool ascending) {
+QString SearchTerm::FieldSortOrderText(Type type, bool ascending) {
   switch (type) {
     case Type_Text:   return ascending ? QObject::tr("A-Z")            : QObject::tr("Z-A");
     case Type_Date:   return ascending ? QObject::tr("oldest first")   : QObject::tr("newest first");
@@ -201,17 +203,19 @@ QString SmartPlaylistSearchTerm::FieldSortOrderText(Type type, bool ascending) {
   return QString();
 }
 
-QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearchTerm& term) {
+} // namespace
+
+QDataStream& operator <<(QDataStream& s, const smart_playlists::SearchTerm& term) {
   s << quint8(term.field_);
   s << quint8(term.operator_);
   s << term.value_;
   return s;
 }
 
-QDataStream& operator >>(QDataStream& s, SmartPlaylistSearchTerm& term) {
+QDataStream& operator >>(QDataStream& s, smart_playlists::SearchTerm& term) {
   quint8 field, op;
   s >> field >> op >> term.value_;
-  term.field_ = SmartPlaylistSearchTerm::Field(field);
-  term.operator_ = SmartPlaylistSearchTerm::Operator(op);
+  term.field_ = smart_playlists::SearchTerm::Field(field);
+  term.operator_ = smart_playlists::SearchTerm::Operator(op);
   return s;
 }

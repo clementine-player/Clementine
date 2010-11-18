@@ -17,7 +17,7 @@
 #ifndef SMARTPLAYLISTSEARCHTERMWIDGET_H
 #define SMARTPLAYLISTSEARCHTERMWIDGET_H
 
-#include "smartplaylistsearchterm.h"
+#include "searchterm.h"
 
 #include <QPushButton>
 #include <QWidget>
@@ -27,22 +27,24 @@ class Ui_SmartPlaylistSearchTermWidget;
 
 class QPropertyAnimation;
 
-class SmartPlaylistSearchTermWidget : public QWidget {
+namespace smart_playlists {
+
+class SearchTermWidget : public QWidget {
   Q_OBJECT
   Q_PROPERTY(float overlay_opacity
              READ  overlay_opacity
              WRITE set_overlay_opacity);
 
 public:
-  SmartPlaylistSearchTermWidget(LibraryBackend* library, QWidget* parent);
-  ~SmartPlaylistSearchTermWidget();
+  SearchTermWidget(LibraryBackend* library, QWidget* parent);
+  ~SearchTermWidget();
 
   void SetActive(bool active);
 
   float overlay_opacity() const;
   void set_overlay_opacity(float opacity);
 
-  SmartPlaylistSearchTerm Term() const;
+  SearchTerm Term() const;
 
 signals:
   void Clicked();
@@ -71,5 +73,7 @@ private:
   QPropertyAnimation* animation_;
   bool active_;
 };
+
+} // namespace
 
 #endif // SMARTPLAYLISTSEARCHTERMWIDGET_H

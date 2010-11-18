@@ -17,12 +17,14 @@
 #ifndef SMARTPLAYLISTSEARCH_H
 #define SMARTPLAYLISTSEARCH_H
 
-#include "playlistgenerator.h"
-#include "smartplaylistsearchterm.h"
+#include "generator.h"
+#include "searchterm.h"
 
-class SmartPlaylistSearch {
+namespace smart_playlists {
+
+class Search {
 public:
-  typedef QList<SmartPlaylistSearchTerm> TermList;
+  typedef QList<SearchTerm> TermList;
 
   // These values are persisted, so add to the end of the enum only
   enum SearchType {
@@ -38,24 +40,26 @@ public:
     Sort_FieldDesc,
   };
 
-  SmartPlaylistSearch();
-  SmartPlaylistSearch(SearchType type, TermList terms, SortType sort_type,
-                      SmartPlaylistSearchTerm::Field sort_field,
-                      int limit = PlaylistGenerator::kDefaultLimit);
+  Search();
+  Search(SearchType type, TermList terms, SortType sort_type,
+         SearchTerm::Field sort_field,
+         int limit = Generator::kDefaultLimit);
 
   bool is_valid() const;
 
   SearchType search_type_;
   TermList terms_;
   SortType sort_type_;
-  SmartPlaylistSearchTerm::Field sort_field_;
+  SearchTerm::Field sort_field_;
   int limit_;
 
   void Reset();
   QString ToSql(const QString& songs_table) const;
 };
 
-QDataStream& operator <<(QDataStream& s, const SmartPlaylistSearch& search);
-QDataStream& operator >>(QDataStream& s, SmartPlaylistSearch& search);
+} // namespace
+
+QDataStream& operator <<(QDataStream& s, const smart_playlists::Search& search);
+QDataStream& operator >>(QDataStream& s, smart_playlists::Search& search);
 
 #endif // SMARTPLAYLISTSEARCH_H

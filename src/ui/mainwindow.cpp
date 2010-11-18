@@ -653,7 +653,7 @@ void MainWindow::LibrarySongsDoubleClicked(const SongList &songs) {
   AddLibrarySongsToPlaylist(autoclear_playlist_, songs);
 }
 
-void MainWindow::AddSmartPlaylistToPlaylist(bool clear_first, PlaylistGeneratorPtr gen) {
+void MainWindow::AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::GeneratorPtr gen) {
   if (clear_first)
     playlists_->ClearCurrent();
 

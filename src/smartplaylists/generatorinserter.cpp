@@ -14,18 +14,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlistgenerator.h"
-#include "playlistgeneratorinserter.h"
+#include "generator.h"
+#include "generatorinserter.h"
 #include "core/taskmanager.h"
 #include "playlist/playlist.h"
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
 
+namespace smart_playlists {
+
 typedef QFuture<PlaylistItemList> Future;
 typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
-PlaylistGeneratorInserter::PlaylistGeneratorInserter(
+GeneratorInserter::GeneratorInserter(
     TaskManager* task_manager, LibraryBackend* library, QObject* parent)
   : QObject(parent),
     task_manager_(task_manager),
@@ -34,12 +36,12 @@ PlaylistGeneratorInserter::PlaylistGeneratorInserter(
 {
 }
 
-static PlaylistItemList Generate(PlaylistGeneratorPtr generator) {
+static PlaylistItemList Generate(GeneratorPtr generator) {
   return generator->Generate();
 }
 
-void PlaylistGeneratorInserter::Load(
-    Playlist* destination, int row, bool play_now, PlaylistGeneratorPtr generator) {
+void GeneratorInserter::Load(
+    Playlist* destination, int row, bool play_now, GeneratorPtr generator) {
   task_id_ = task_manager_->StartTask(tr("Loading smart playlist"));
 
   destination_ = destination;
@@ -55,7 +57,7 @@ void PlaylistGeneratorInserter::Load(
   connect(watcher, SIGNAL(finished()), SLOT(Finished()));
 }
 
-void PlaylistGeneratorInserter::Finished() {
+void GeneratorInserter::Finished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
 
@@ -69,3 +71,5 @@ void PlaylistGeneratorInserter::Finished() {
 
   deleteLater();
 }
+
+} // namespace

@@ -33,8 +33,8 @@
 #include "radio/radiomodel.h"
 #include "radio/radioplaylistitem.h"
 #include "radio/savedradio.h"
+#include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
-#include "smartplaylists/playlistgeneratorinserter.h"
 
 #include <QtDebug>
 #include <QMimeData>
@@ -48,6 +48,9 @@
 #include <algorithm>
 
 #include <lastfm/ScrobblePoint>
+
+using smart_playlists::GeneratorInserter;
+using smart_playlists::GeneratorPtr;
 
 using boost::shared_ptr;
 
@@ -530,6 +533,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
   if (action == Qt::IgnoreAction)
     return false;
 
+  using smart_playlists::GeneratorMimeData;
+
   if (const SongMimeData* song_data = qobject_cast<const SongMimeData*>(data)) {
     // Dragged from a library
     // We want to check if these songs are from the actual local file backend,
@@ -592,8 +597,8 @@ void Playlist::InsertUrls(const QList<QUrl> &urls, bool play_now, int pos) {
   inserter->Load(this, pos, play_now, urls);
 }
 
-void Playlist::InsertSmartPlaylist(PlaylistGeneratorPtr generator, int pos, bool play_now) {
-  PlaylistGeneratorInserter* inserter = new PlaylistGeneratorInserter(task_manager_, library_, this);
+void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos, bool play_now) {
+  GeneratorInserter* inserter = new GeneratorInserter(task_manager_, library_, this);
   connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 

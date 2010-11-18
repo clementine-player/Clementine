@@ -14,13 +14,30 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PLAYLISTGENERATOR_FWD_H
-#define PLAYLISTGENERATOR_FWD_H
+#ifndef QUERYPLAYLISTGENERATOR_H
+#define QUERYPLAYLISTGENERATOR_H
 
-#include <boost/shared_ptr.hpp>
+#include "generator.h"
+#include "search.h"
 
-class PlaylistGenerator;
+namespace smart_playlists {
 
-typedef boost::shared_ptr<PlaylistGenerator> PlaylistGeneratorPtr;
+class QueryGenerator : public Generator {
+public:
+  QueryGenerator();
 
-#endif // PLAYLISTGENERATOR_FWD_H
+  QString type() const { return "Query"; }
+
+  void Load(const Search& search);
+  void Load(const QByteArray& data);
+  QByteArray Save() const;
+
+  PlaylistItemList Generate();
+
+private:
+  Search search_;
+};
+
+} // namespace
+
+#endif // QUERYPLAYLISTGENERATOR_H

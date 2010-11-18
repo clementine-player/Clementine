@@ -14,18 +14,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "queryplaylistgenerator.h"
-#include "smartplaylistsearchpreview.h"
-#include "ui_smartplaylistsearchpreview.h"
+#include "querygenerator.h"
+#include "searchpreview.h"
+#include "ui_searchpreview.h"
 #include "playlist/playlist.h"
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>
 
+namespace smart_playlists {
+
 typedef QFuture<PlaylistItemList> Future;
 typedef QFutureWatcher<PlaylistItemList> FutureWatcher;
 
-SmartPlaylistSearchPreview::SmartPlaylistSearchPreview(QWidget *parent)
+SearchPreview::SearchPreview(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_SmartPlaylistSearchPreview),
     model_(NULL)
@@ -42,11 +44,11 @@ SmartPlaylistSearchPreview::SmartPlaylistSearchPreview(QWidget *parent)
   ui_->busy_container->hide();
 }
 
-SmartPlaylistSearchPreview::~SmartPlaylistSearchPreview() {
+SearchPreview::~SearchPreview() {
   delete ui_;
 }
 
-void SmartPlaylistSearchPreview::set_library(LibraryBackend* backend) {
+void SearchPreview::set_library(LibraryBackend* backend) {
   backend_ = backend;
 
   model_ = new Playlist(NULL, NULL, backend_, -1, this);
@@ -55,7 +57,7 @@ void SmartPlaylistSearchPreview::set_library(LibraryBackend* backend) {
   ui_->tree->SetItemDelegates(backend_);
 }
 
-void SmartPlaylistSearchPreview::Update(const SmartPlaylistSearch& search) {
+void SearchPreview::Update(const Search& search) {
   if (generator_) {
     // It's busy generating something already
     pending_search_ = search;
@@ -65,21 +67,21 @@ void SmartPlaylistSearchPreview::Update(const SmartPlaylistSearch& search) {
   RunSearch(search);
 }
 
-void SmartPlaylistSearchPreview::RunSearch(const SmartPlaylistSearch& search) {
-  generator_.reset(new QueryPlaylistGenerator);
+void SearchPreview::RunSearch(const Search& search) {
+  generator_.reset(new QueryGenerator);
   generator_->set_library(backend_);
   generator_->Load(search);
 
   ui_->busy_container->show();
   ui_->count_label->hide();
-  Future future = QtConcurrent::run(generator_.get(), &QueryPlaylistGenerator::Generate);
+  Future future = QtConcurrent::run(generator_.get(), &QueryGenerator::Generate);
 
   FutureWatcher* watcher = new FutureWatcher(this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(SearchFinished()));
 }
 
-void SmartPlaylistSearchPreview::SearchFinished() {
+void SearchPreview::SearchFinished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
   generator_.reset();
@@ -88,12 +90,12 @@ void SmartPlaylistSearchPreview::SearchFinished() {
     // There was another search done while we were running - throw away these
     // results and do that one now instead
     RunSearch(pending_search_);
-    pending_search_ = SmartPlaylistSearch();
+    pending_search_ = Search();
     return;
   }
 
   PlaylistItemList all_items = watcher->result();
-  PlaylistItemList displayed_items = all_items.mid(0, PlaylistGenerator::kDefaultLimit);
+  PlaylistItemList displayed_items = all_items.mid(0, Generator::kDefaultLimit);
 
   model_->Clear();
   model_->InsertItems(displayed_items);
@@ -108,3 +110,5 @@ void SmartPlaylistSearchPreview::SearchFinished() {
   ui_->busy_container->hide();
   ui_->count_label->show();
 }
+
+} // namespace

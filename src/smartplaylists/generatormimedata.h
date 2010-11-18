@@ -19,15 +19,19 @@
 
 #include <QMimeData>
 
-#include "playlistgenerator_fwd.h"
+#include "generator_fwd.h"
+
+namespace smart_playlists {
 
 class GeneratorMimeData : public QMimeData {
   Q_OBJECT
 
 public:
-  GeneratorMimeData(PlaylistGeneratorPtr generator) : generator_(generator) {}
+  GeneratorMimeData(GeneratorPtr generator) : generator_(generator) {}
 
-  PlaylistGeneratorPtr generator_;
+  GeneratorPtr generator_;
 };
+
+} // namespace
 
 #endif // GENERATORMIMEDATA_H

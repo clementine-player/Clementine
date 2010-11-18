@@ -81,7 +81,7 @@ QLabel {
     </item>
    </layout>
   </widget>
-  <widget class="SmartPlaylistWizard::SearchPage" name="page_query_search">
+  <widget class="smart_playlists::Wizard::SearchPage" name="page_query_search">
    <property name="styleSheet">
     <string notr="true">#termframe {
   border: 1px solid grey;
@@ -233,22 +233,22 @@ margin-left: 9px;
      </widget>
     </item>
     <item>
-     <widget class="SmartPlaylistSearchPreview" name="sort_preview" native="true"/>
+     <widget class="smart_playlists::SearchPreview" name="sort_preview" native="true"/>
     </item>
    </layout>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>SmartPlaylistSearchPreview</class>
+   <class>smart_playlists::SearchPreview</class>
    <extends>QWidget</extends>
-   <header>smartplaylists/smartplaylistsearchpreview.h</header>
+   <header>smartplaylists/searchpreview.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SmartPlaylistWizard::SearchPage</class>
+   <class>smart_playlists::Wizard::SearchPage</class>
    <extends>QWizardPage</extends>
-   <header>smartplaylists/smartplaylistwizard.h</header>
+   <header>smartplaylists/wizard.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

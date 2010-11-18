@@ -17,7 +17,7 @@
 #ifndef PLAYLISTGENERATORINSERTER_H
 #define PLAYLISTGENERATORINSERTER_H
 
-#include "playlistgenerator_fwd.h"
+#include "generator_fwd.h"
 
 #include <QObject>
 
@@ -27,15 +27,17 @@ class TaskManager;
 
 class QModelIndex;
 
-class PlaylistGeneratorInserter : public QObject {
+namespace smart_playlists {
+
+class GeneratorInserter : public QObject {
   Q_OBJECT
 
 public:
-  PlaylistGeneratorInserter(TaskManager* task_manager,
-                            LibraryBackend* library, QObject* parent);
+  GeneratorInserter(TaskManager* task_manager,
+                    LibraryBackend* library, QObject* parent);
 
   void Load(Playlist* destination, int row, bool play_now,
-            PlaylistGeneratorPtr generator);
+            GeneratorPtr generator);
 
 signals:
   void Error(const QString& message);
@@ -53,5 +55,7 @@ private:
   int row_;
   bool play_now_;
 };
+
+} // namespace
 
 #endif // PLAYLISTGENERATORINSERTER_H

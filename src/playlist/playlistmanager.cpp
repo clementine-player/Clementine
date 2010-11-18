@@ -22,10 +22,12 @@
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "smartplaylists/playlistgenerator.h"
+#include "smartplaylists/generator.h"
 
 #include <QFileInfo>
 #include <QtDebug>
+
+using smart_playlists::GeneratorPtr;
 
 PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
   : QObject(parent),
@@ -275,7 +277,7 @@ void PlaylistManager::SongsDiscovered(const SongList& songs) {
   }
 }
 
-void PlaylistManager::PlaySmartPlaylist(PlaylistGeneratorPtr generator, bool as_new, bool clear) {
+void PlaylistManager::PlaySmartPlaylist(GeneratorPtr generator, bool as_new, bool clear) {
   if (as_new) {
     New(generator->name());
   }

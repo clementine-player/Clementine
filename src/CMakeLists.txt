@@ -129,14 +129,14 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
-  smartplaylists/playlistgenerator.cpp
-  smartplaylists/playlistgeneratorinserter.cpp
-  smartplaylists/smartplaylistsearch.cpp
-  smartplaylists/smartplaylistsearchpreview.cpp
-  smartplaylists/smartplaylistsearchterm.cpp
-  smartplaylists/smartplaylistsearchtermwidget.cpp
-  smartplaylists/smartplaylistwizard.cpp
-  smartplaylists/queryplaylistgenerator.cpp
+  smartplaylists/generator.cpp
+  smartplaylists/generatorinserter.cpp
+  smartplaylists/querygenerator.cpp
+  smartplaylists/search.cpp
+  smartplaylists/searchpreview.cpp
+  smartplaylists/searchterm.cpp
+  smartplaylists/searchtermwidget.cpp
+  smartplaylists/wizard.cpp
 
   songinfo/artistinfoview.cpp
   songinfo/collapsibleinfoheader.cpp
@@ -287,12 +287,12 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
+  smartplaylists/generator.h
+  smartplaylists/generatorinserter.h
   smartplaylists/generatormimedata.h
-  smartplaylists/playlistgenerator.h
-  smartplaylists/playlistgeneratorinserter.h
-  smartplaylists/smartplaylistsearchpreview.h
-  smartplaylists/smartplaylistsearchtermwidget.h
-  smartplaylists/smartplaylistwizard.h
+  smartplaylists/searchpreview.h
+  smartplaylists/searchtermwidget.h
+  smartplaylists/wizard.h
 
   songinfo/artistinfoview.h
   songinfo/collapsibleinfoheader.h
@@ -374,9 +374,9 @@ set(UI
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
 
-  smartplaylists/smartplaylistsearchpreview.ui
-  smartplaylists/smartplaylistsearchtermwidget.ui
-  smartplaylists/smartplaylistwizard.ui
+  smartplaylists/searchpreview.ui
+  smartplaylists/searchtermwidget.ui
+  smartplaylists/wizard.ui
 
   songinfo/lyricsettings.ui
 

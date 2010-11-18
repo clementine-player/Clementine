@@ -27,8 +27,9 @@
 class DeviceManager;
 class LibraryModel;
 class OrganiseDialog;
-class SmartPlaylistWizard;
 class TaskManager;
+
+namespace smart_playlists { class Wizard; }
 
 class LibraryItemDelegate : public QStyledItemDelegate {
  public:
@@ -118,7 +119,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* delete_smart_playlist_;
 
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
-  boost::scoped_ptr<SmartPlaylistWizard> smart_playlist_wizard_;
+  boost::scoped_ptr<smart_playlists::Wizard> smart_playlist_wizard_;
 
   bool is_in_keyboard_search_;
 };

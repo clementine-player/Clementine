@@ -27,13 +27,13 @@
 #include "core/simpletreemodel.h"
 #include "core/song.h"
 #include "engines/engine_fwd.h"
-#include "smartplaylists/playlistgenerator_fwd.h"
+#include "smartplaylists/generator_fwd.h"
 
 #include <boost/scoped_ptr.hpp>
 
 class LibraryDirectoryModel;
 class LibraryBackend;
-class SmartPlaylistSearch;
+namespace smart_playlists { class Search; }
 
 class QSettings;
 
@@ -102,7 +102,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   SongList GetChildSongs(const QModelIndex& index) const;
   SongList GetChildSongs(const QModelIndexList& indexes) const;
 
-  PlaylistGeneratorPtr CreateGenerator(const QModelIndex& index) const;
+  smart_playlists::GeneratorPtr CreateGenerator(const QModelIndex& index) const;
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
@@ -158,8 +158,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Smart playlists are shown in another top-level node
   void CreateSmartPlaylists();
   void SaveDefaultGenerator(QSettings* s, int i, const QString& name,
-                            const SmartPlaylistSearch& search) const;
-  void SaveGenerator(QSettings* s, int i, PlaylistGeneratorPtr generator) const;
+                            const smart_playlists::Search& search) const;
+  void SaveGenerator(QSettings* s, int i, smart_playlists::GeneratorPtr generator) const;
 
   // Helpers for ItemFromQuery and ItemFromSong
   LibraryItem* InitItem(GroupBy type, bool signal, LibraryItem* parent,

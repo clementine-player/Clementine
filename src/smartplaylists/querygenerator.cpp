@@ -14,26 +14,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "queryplaylistgenerator.h"
+#include "querygenerator.h"
 #include "library/librarybackend.h"
 #include "library/libraryplaylistitem.h"
 
 #include <QtDebug>
 
-QueryPlaylistGenerator::QueryPlaylistGenerator()
+namespace smart_playlists {
+
+QueryGenerator::QueryGenerator()
 {
 }
 
-void QueryPlaylistGenerator::Load(const SmartPlaylistSearch& search) {
+void QueryGenerator::Load(const Search& search) {
   search_ = search;
 }
 
-void QueryPlaylistGenerator::Load(const QByteArray& data) {
+void QueryGenerator::Load(const QByteArray& data) {
   QDataStream s(data);
   s >> search_;
 }
 
-QByteArray QueryPlaylistGenerator::Save() const {
+QByteArray QueryGenerator::Save() const {
   QByteArray ret;
   QDataStream s(&ret, QIODevice::WriteOnly);
   s << search_;
@@ -41,7 +43,7 @@ QByteArray QueryPlaylistGenerator::Save() const {
   return ret;
 }
 
-PlaylistItemList QueryPlaylistGenerator::Generate() {
+PlaylistItemList QueryGenerator::Generate() {
   SongList songs = backend_->FindSongs(search_);
 
   PlaylistItemList items;
@@ -50,3 +52,5 @@ PlaylistItemList QueryPlaylistGenerator::Generate() {
   }
   return items;
 }
+
+} // namespace
