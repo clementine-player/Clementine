@@ -56,6 +56,7 @@ private:
   Playlist* model_;
 
   Search pending_search_;
+  Search last_search_;
   boost::scoped_ptr<QueryGenerator> generator_;
 };
 

@@ -46,6 +46,8 @@ public:
          int limit = Generator::kDefaultLimit);
 
   bool is_valid() const;
+  bool operator ==(const Search& other) const;
+  bool operator !=(const Search& other) const { return !(*this == other); }
 
   SearchType search_type_;
   TermList terms_;

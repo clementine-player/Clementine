@@ -127,6 +127,13 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
 
   // Set up the preview widget that's already at the bottom of the sort page
   sort_ui_->preview->set_library(library_);
+  connect(sort_ui_->field, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->field_value, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->limit_limit, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->limit_none, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->limit_value, SIGNAL(valueChanged(QString)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->order, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortPreview()));
+  connect(sort_ui_->random, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
 
   // Configure the page text
   search_page_->setTitle(tr("Search terms"));

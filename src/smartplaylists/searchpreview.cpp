@@ -58,6 +58,11 @@ void SearchPreview::set_library(LibraryBackend* backend) {
 }
 
 void SearchPreview::Update(const Search& search) {
+  if (search == last_search_) {
+    // This search was the same as the last one we did
+    return;
+  }
+
   if (generator_) {
     // It's busy generating something already
     pending_search_ = search;
@@ -84,9 +89,11 @@ void SearchPreview::RunSearch(const Search& search) {
 void SearchPreview::SearchFinished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
+
+  last_search_ = generator_->search();
   generator_.reset();
 
-  if (pending_search_.is_valid()) {
+  if (pending_search_.is_valid() && pending_search_ != last_search_) {
     // There was another search done while we were running - throw away these
     // results and do that one now instead
     RunSearch(pending_search_);

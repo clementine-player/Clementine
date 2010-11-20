@@ -71,6 +71,12 @@ bool SearchTerm::is_valid() const {
   return false;
 }
 
+bool SearchTerm::operator ==(const SearchTerm& other) const {
+  return field_ == other.field_ &&
+         operator_ == other.operator_ &&
+         value_ == other.value_;
+}
+
 SearchTerm::Type SearchTerm::TypeOf(Field field) {
   switch (field) {
     case Field_Length:

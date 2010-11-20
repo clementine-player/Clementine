@@ -79,6 +79,14 @@ bool Search::is_valid() const {
   return !terms_.isEmpty();
 }
 
+bool Search::operator ==(const Search& other) const {
+  return search_type_ == other.search_type_ &&
+         terms_ == other.terms_ &&
+         sort_type_ == other.sort_type_ &&
+         sort_field_ == other.sort_field_ &&
+         limit_ == other.limit_;
+}
+
 } // namespace
 
 QDataStream& operator <<(QDataStream& s, const smart_playlists::Search& search) {
