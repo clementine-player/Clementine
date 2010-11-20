@@ -57,11 +57,15 @@ public:
 
 class QueryWizardPlugin::SortPage : public QWizardPage {
 public:
-  SortPage(QWidget* parent, int next_id)
-    : QWizardPage(parent), next_id_(next_id) {}
+  SortPage(QueryWizardPlugin* plugin, QWidget* parent, int next_id)
+    : QWizardPage(parent), next_id_(next_id), plugin_(plugin) {}
+
+  void showEvent(QShowEvent*) { plugin_->UpdateSortPreview(); }
 
   int nextId() const { return next_id_; }
   int next_id_;
+
+  QueryWizardPlugin* plugin_;
 };
 
 
@@ -86,7 +90,7 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   // Create the UI
   search_page_ = new SearchPage(wizard);
 
-  QWizardPage* sort_page = new SortPage(wizard, finish_page_id);
+  QWizardPage* sort_page = new SortPage(this, wizard, finish_page_id);
   sort_ui_.reset(new Ui_SmartPlaylistQuerySortPage);
   sort_ui_->setupUi(sort_page);
 

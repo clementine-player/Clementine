@@ -42,6 +42,9 @@ public:
 
   void Update(const Search& search);
 
+protected:
+  void showEvent(QShowEvent*);
+
 private:
   void RunSearch(const Search& search);
 

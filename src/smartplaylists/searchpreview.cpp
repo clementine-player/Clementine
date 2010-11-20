@@ -63,13 +63,23 @@ void SearchPreview::Update(const Search& search) {
     return;
   }
 
-  if (generator_) {
-    // It's busy generating something already
+  if (generator_ || isHidden()) {
+    // It's busy generating something already, or the widget isn't visible
     pending_search_ = search;
     return;
   }
 
   RunSearch(search);
+}
+
+void SearchPreview::showEvent(QShowEvent* e) {
+  if (pending_search_.is_valid() && !generator_) {
+    // There was a search waiting while we were hidden, so run it now
+    RunSearch(pending_search_);
+    pending_search_ = Search();
+  }
+
+  QWidget::showEvent(e);
 }
 
 void SearchPreview::RunSearch(const Search& search) {
