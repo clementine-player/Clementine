@@ -182,11 +182,11 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
-  ui_->tabs->AddTab(radio_view_, QIcon(":last.fm/icon_radio.png"), tr("Internet"));
+  ui_->tabs->AddTab(radio_view_, IconLoader::Load("applications-internet"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
   ui_->tabs->AddTab(song_info_view_, IconLoader::Load("view-media-lyrics"), tr("Song info"));
-  ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("view-media-lyrics"), tr("Artist info"));
+  ui_->tabs->AddTab(artist_info_view_, IconLoader::Load("x-clementine-artist"), tr("Artist info"));
 
   // Add the now playing widget to the fancy tab widget
   ui_->tabs->AddBottomWidget(ui_->now_playing);
