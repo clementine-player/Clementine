@@ -142,7 +142,33 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   const SuitableElement& best = suitable_elements_.last();
 
   LogLine(QString("Using '%1' (rank %2)").arg(best.name_).arg(best.rank_));
-  return CreateElement(best.name_, bin);
+
+  if (best.name_ == "lamemp3enc") {
+    // Special case: we need to add xingmux and id3v2mux to the pipeline when
+    // using lamemp3enc because it doesn't write the VBR or ID3v2 headers itself.
+    LogLine("Adding xingmux and id3v2mux to the pipeline");
+
+    GstElement* mp3bin = gst_bin_new("mp3bin");
+    gst_bin_add(GST_BIN(bin), mp3bin);
+
+    GstElement* lame  = CreateElement("lamemp3enc", mp3bin);
+    GstElement* xing  = CreateElement("xingmux", mp3bin);
+    GstElement* id3v2 = CreateElement("id3v2mux", mp3bin);
+
+    gst_element_link_many(lame, xing, id3v2, NULL);
+
+    GstPad* pad = gst_element_get_static_pad(lame, "sink");
+    gst_element_add_pad(mp3bin, gst_ghost_pad_new("sink", pad));
+    gst_object_unref(GST_OBJECT(pad));
+
+    pad = gst_element_get_static_pad(id3v2, "src");
+    gst_element_add_pad(mp3bin, gst_ghost_pad_new("src", pad));
+    gst_object_unref(GST_OBJECT(pad));
+
+    return mp3bin;
+  } else {
+    return CreateElement(best.name_, bin);
+  }
 }
 
 
