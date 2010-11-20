@@ -1030,7 +1030,7 @@ void LibraryModel::DeleteGenerator(const QModelIndex& index) {
   s.beginWriteArray(kSmartPlaylistsArray, smart_playlist_node_->children.count());
   int i = 0;
   foreach (LibraryItem* item, smart_playlist_node_->children) {
-    s.setArrayIndex(i);
+    s.setArrayIndex(i++);
     s.setValue("name", item->display_text);
     s.setValue("type", item->key);
     s.setValue("data", item->smart_playlist_data);
