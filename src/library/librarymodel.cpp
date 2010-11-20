@@ -971,9 +971,9 @@ void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name
 
 void LibraryModel::AddGenerator(GeneratorPtr gen) {
   QSettings s;
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
 
   // Count the existing items
-  s.beginGroup(kSmartPlaylistsSettingsGroup);
   const int count = s.beginReadArray(kSmartPlaylistsArray);
   s.endArray();
 
@@ -1014,7 +1014,25 @@ void LibraryModel::UpdateGenerator(const QModelIndex& index, GeneratorPtr gen) {
 }
 
 void LibraryModel::DeleteGenerator(const QModelIndex& index) {
-  // TODO
+  if (index.parent() != ItemToIndex(smart_playlist_node_))
+    return;
+
+  // Remove the item from the tree
+  smart_playlist_node_->DeleteNotify(index.row());
+
+  QSettings s;
+  s.beginGroup(kSmartPlaylistsSettingsGroup);
+
+  // Rewrite all the items to the settings
+  s.beginWriteArray(kSmartPlaylistsArray, smart_playlist_node_->children.count());
+  int i = 0;
+  foreach (LibraryItem* item, smart_playlist_node_->children) {
+    s.setArrayIndex(i);
+    s.setValue("name", item->display_text);
+    s.setValue("type", item->key);
+    s.setValue("data", item->smart_playlist_data);
+  }
+  s.endArray();
 }
 
 void LibraryModel::SaveGenerator(QSettings* s, int i, GeneratorPtr generator) const {
