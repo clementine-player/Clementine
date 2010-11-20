@@ -159,7 +159,7 @@ void SearchTermWidget::SetActive(bool active) {
 }
 
 void SearchTermWidget::enterEvent(QEvent*) {
-  if (!overlay_)
+  if (!overlay_ || !isEnabled())
     return;
 
   animation_->stop();

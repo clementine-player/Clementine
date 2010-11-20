@@ -65,6 +65,9 @@
    </item>
    <item>
     <widget class="PlaylistView" name="tree">
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
      <property name="rootIsDecorated">
       <bool>false</bool>
      </property>
