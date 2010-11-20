@@ -395,8 +395,8 @@ TEST_F(PlaylistTest, UndoRemoveOldCurrent) {
   playlist_.set_current_index(-1);
 
   playlist_.undo_stack()->undo();
-  EXPECT_EQ(-1, playlist_.current_index());
-  EXPECT_EQ(-1, playlist_.last_played_index());
+  EXPECT_EQ(0, playlist_.current_index());
+  EXPECT_EQ(0, playlist_.last_played_index());
 }
 
 TEST_F(PlaylistTest, ShuffleThenNext) {
