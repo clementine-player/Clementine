@@ -52,8 +52,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png"),
     no_cover_icon_(":nocover.png"),
-    playlists_dir_icon_(IconLoader::Load("folder")),
-    playlist_icon_(IconLoader::Load("view-media-playlist"))
+    playlists_dir_icon_(IconLoader::Load("folder-sound")),
+    playlist_icon_(":/icons/22x22/x-clementine-albums.png")
 {
   root_->lazy_loaded = true;
 
@@ -343,7 +343,7 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
       return item->DisplayText();
 
     case Qt::DecorationRole:
-      switch (item->type)
+      switch (item->type) {
         case LibraryItem::Type_PlaylistContainer:
           return playlists_dir_icon_;
         case LibraryItem::Type_Container:
@@ -356,10 +356,12 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
             default:
               break;
           }
+          break;
         case LibraryItem::Type_SmartPlaylist:
           return playlist_icon_;
         default:
           break;
+      }
       break;
 
     case Role_Type:
