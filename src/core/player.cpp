@@ -213,8 +213,8 @@ void Player::NextInternal(Engine::TrackChangeType change) {
 
 void Player::NextItem(Engine::TrackChangeType change) {
   int i = playlists_->active()->next_index();
-  playlists_->active()->set_current_index(i);
   if (i == -1) {
+    playlists_->active()->set_current_index(i);
     emit PlaylistFinished();
     Stop();
     return;
@@ -319,7 +319,7 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
     playlists_->active()->set_current_index(-1);
   playlists_->active()->set_current_index(index);
 
-  current_item_ = playlists_->active()->item_at(index);
+  current_item_ = playlists_->active()->current_item();
 
   if (current_item_->options() & PlaylistItem::SpecialPlayBehaviour) {
     // It's already loading

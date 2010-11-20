@@ -42,7 +42,7 @@ using smart_playlists::QueryGenerator;
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
 const char* LibraryModel::kSmartPlaylistsArray = "smart";
-const int LibraryModel::kSmartPlaylistsVersion = 2;
+const int LibraryModel::kSmartPlaylistsVersion = 3;
 
 LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
@@ -922,7 +922,9 @@ void LibraryModel::CreateSmartPlaylists() {
         Search::Sort_FieldDesc, SearchTerm::Field_DateCreated));
 
     s.endArray();
-  } else if (version == 1) {
+  }
+
+  if (version <= 1) {
     // Some additional smart playlists
 
     const int count = s.beginReadArray(kSmartPlaylistsArray);
@@ -938,6 +940,21 @@ void LibraryModel::CreateSmartPlaylists() {
           << SearchTerm(SearchTerm::Field_Rating, SearchTerm::Op_LessThan, 0.6)
           << SearchTerm(SearchTerm::Field_SkipCount, SearchTerm::Op_GreaterThan, 4),
         Search::Sort_FieldDesc, SearchTerm::Field_SkipCount));
+
+    s.endArray();
+  }
+
+  if (version <= 2) {
+    // Dynamic playlists
+
+    const int count = s.beginReadArray(kSmartPlaylistsArray);
+    s.endArray();
+    s.beginWriteArray(kSmartPlaylistsArray);
+
+    int i = count;
+    SaveDefaultGenerator(&s, i++, tr("Dynamic random mix"), Search(
+        Search::Type_All, Search::TermList(),
+        Search::Sort_Random, SearchTerm::Field_Title), true);
 
     s.endArray();
   }
@@ -965,10 +982,12 @@ void LibraryModel::ItemFromSmartPlaylist(const QSettings& s, bool notify) const 
 }
 
 void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name,
-                                        const smart_playlists::Search& search) const {
+                                        const smart_playlists::Search& search,
+                                        bool dynamic) const {
   boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
-  gen->set_name(name);
   gen->Load(search);
+  gen->set_name(name);
+  gen->set_dynamic(dynamic);
   SaveGenerator(s, i, boost::static_pointer_cast<Generator>(gen));
 }
 

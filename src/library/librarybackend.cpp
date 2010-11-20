@@ -821,7 +821,6 @@ SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
 
   // Build the query
   QString sql = search.ToSql(songs_table());
-  qDebug() << sql;
 
   // Run the query
   SongList ret;

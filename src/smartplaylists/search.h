@@ -56,6 +56,8 @@ public:
   SearchTerm::Field sort_field_;
   int limit_;
 
+  QList<int> id_not_in_;
+
   void Reset();
   QString ToSql(const QString& songs_table) const;
 };

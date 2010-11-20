@@ -102,6 +102,7 @@ void Wizard::SetGenerator(GeneratorPtr gen) {
 
   // Set the name
   finish_page_->ui_->name->setText(gen->name());
+  finish_page_->ui_->dynamic->setChecked(gen->is_dynamic());
 
   // Tell the plugin to load
   plugins_[type_index_]->SetGenerator(gen);
@@ -142,7 +143,16 @@ GeneratorPtr Wizard::CreateGenerator() const {
     return ret;
 
   ret->set_name(finish_page_->ui_->name->text());
+  ret->set_dynamic(finish_page_->ui_->dynamic->isChecked());
   return ret;
+}
+
+void Wizard::initializePage(int id) {
+  if (id == finish_id_) {
+    finish_page_->ui_->dynamic_container->setEnabled(
+          plugins_[type_index_]->is_dynamic());
+  }
+  QWizard::initializePage(id);
 }
 
 } // namespace

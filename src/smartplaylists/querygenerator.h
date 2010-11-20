@@ -34,11 +34,17 @@ public:
   QByteArray Save() const;
 
   PlaylistItemList Generate();
+  PlaylistItemList GenerateMore(int count);
+  bool is_dynamic() const { return dynamic_; }
+  void set_dynamic(bool dynamic) { dynamic_ = dynamic; }
 
   Search search() const { return search_; }
 
 private:
   Search search_;
+  bool dynamic_;
+
+  QList<int> previous_ids_;
 };
 
 } // namespace

@@ -37,6 +37,7 @@ public:
   virtual QString type() const = 0;
   virtual QString name() const = 0;
   virtual QString description() const = 0;
+  virtual bool is_dynamic() const { return false; }
   int start_page() const { return start_page_; }
 
   virtual void SetGenerator(GeneratorPtr gen) = 0;

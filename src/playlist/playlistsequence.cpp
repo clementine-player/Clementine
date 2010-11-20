@@ -35,7 +35,8 @@ PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
     shuffle_menu_(new QMenu(this)),
     loading_(false),
     repeat_mode_(Repeat_Off),
-    shuffle_mode_(Shuffle_Off)
+    shuffle_mode_(Shuffle_Off),
+    dynamic_(false)
 {
   ui_->setupUi(this);
 
@@ -154,4 +155,21 @@ void PlaylistSequence::SetShuffleMode(ShuffleMode mode) {
     emit ShuffleModeChanged(mode);
   shuffle_mode_ = mode;
   Save();
+}
+
+void PlaylistSequence::SetUsingDynamicPlaylist(bool dynamic) {
+  dynamic_ = dynamic;
+  const QString not_available(tr("Not available while using a dynamic playlist"));
+
+  setEnabled(!dynamic);
+  ui_->shuffle->setToolTip(dynamic ? not_available : tr("Shuffle"));
+  ui_->repeat->setToolTip(dynamic ? not_available : tr("Repeat"));
+}
+
+PlaylistSequence::ShuffleMode PlaylistSequence::shuffle_mode() const {
+  return dynamic_ ? Shuffle_Off : shuffle_mode_;
+}
+
+PlaylistSequence::RepeatMode PlaylistSequence::repeat_mode() const {
+  return dynamic_ ? Repeat_Off : repeat_mode_;
 }

@@ -38,7 +38,7 @@ public:
                     LibraryBackend* library, QObject* parent);
 
   void Load(Playlist* destination, int row, bool play_now,
-            GeneratorPtr generator);
+            GeneratorPtr generator, int dynamic_count = 0);
 
 signals:
   void Error(const QString& message);

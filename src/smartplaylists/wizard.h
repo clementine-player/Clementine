@@ -41,6 +41,9 @@ public:
   void SetGenerator(GeneratorPtr gen);
   GeneratorPtr CreateGenerator() const;
 
+protected:
+  void initializePage(int id);
+
 private:
   class TypePage;
   class FinishPage;

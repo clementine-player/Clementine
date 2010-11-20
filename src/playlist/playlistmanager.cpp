@@ -192,6 +192,8 @@ void PlaylistManager::SetActivePlaylist(int id) {
 
   active_ = id;
   emit ActiveChanged(active());
+
+  sequence_->SetUsingDynamicPlaylist(active()->is_dynamic());
 }
 
 void PlaylistManager::ClearCurrent() {

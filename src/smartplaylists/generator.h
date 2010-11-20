@@ -32,22 +32,36 @@ class Generator : public QObject, public boost::enable_shared_from_this<Generato
 
 public:
   Generator();
-  virtual ~Generator() {}
 
   static const int kDefaultLimit;
+  static const int kDynamicHistory;
+  static const int kDynamicFuture;
+
+  // Creates a new Generator of the given type
   static boost::shared_ptr<Generator> Create(const QString& type);
 
+  // Should be called before Load on a new Generator
   void set_library(LibraryBackend* backend) { backend_ = backend; }
-
-  QString name() const { return name_; }
   void set_name(const QString& name) { name_ = name; }
+  QString name() const { return name_; }
 
+  // Name of the subclass
   virtual QString type() const = 0;
 
+  // Serialises the Generator's settings
   virtual void Load(const QByteArray& data) = 0;
   virtual QByteArray Save() const = 0;
 
+  // Creates and returns a playlist
   virtual PlaylistItemList Generate() = 0;
+
+  // If the generator can be used as a dynamic playlist then GenerateMore
+  // should return the next tracks in the sequence.  The subclass should
+  // remember the last kDynamicHistory + kDynamicFuture tracks and ensure that
+  // the tracks returned from this method are not in that set.
+  virtual bool is_dynamic() const { return false; }
+  virtual void set_dynamic(bool dynamic) {}
+  virtual PlaylistItemList GenerateMore(int count) { return PlaylistItemList(); }
 
 signals:
   void Error(const QString& message);
@@ -55,6 +69,7 @@ signals:
 protected:
   LibraryBackend* backend_;
 
+private:
   QString name_;
 };
 

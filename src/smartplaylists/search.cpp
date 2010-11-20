@@ -49,13 +49,28 @@ QString Search::ToSql(const QString& songs_table) const {
   QString sql = "SELECT ROWID," + Song::kColumnSpec + " FROM " + songs_table;
 
   // Add search terms
-  QStringList term_sql;
+  QStringList where_clauses;
+  QStringList term_where_clauses;
   foreach (const SearchTerm& term, terms_) {
-    term_sql += term.ToSql();
+    term_where_clauses << term.ToSql();
   }
+
   if (!terms_.isEmpty() && search_type_ != Type_All) {
     QString boolean_op = search_type_ == Type_And ? " AND " : " OR ";
-    sql += " WHERE " + term_sql.join(boolean_op);
+    where_clauses << "(" + term_where_clauses.join(boolean_op) + ")";
+  }
+
+  // Restrict the IDs of songs if we're making a dynamic playlist
+  if (!id_not_in_.isEmpty()) {
+    QString numbers;
+    foreach (int id, id_not_in_) {
+      numbers += (numbers.isEmpty() ? "" : ",") + QString::number(id);
+    }
+    where_clauses << "(ROWID NOT IN (" + numbers + "))";
+  }
+
+  if (!where_clauses.isEmpty()) {
+    sql += " WHERE " + where_clauses.join(" AND ");
   }
 
   // Add sort by
@@ -71,6 +86,7 @@ QString Search::ToSql(const QString& songs_table) const {
     sql += " LIMIT " + QString::number(limit_);
   }
 
+  qDebug() << sql;
   return sql;
 }
 

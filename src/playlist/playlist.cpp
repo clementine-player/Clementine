@@ -34,10 +34,12 @@
 #include "radio/radiomodel.h"
 #include "radio/radioplaylistitem.h"
 #include "radio/savedradio.h"
+#include "smartplaylists/generator.h"
 #include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
 
 #include <QtDebug>
+#include <QApplication>
 #include <QMimeData>
 #include <QBuffer>
 #include <QFileInfo>
@@ -252,6 +254,11 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         default:
           return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
       }
+
+    case Qt::ForegroundRole:
+      if (items_[index.row()]->IsDynamicHistory())
+        return QApplication::palette().brush(QPalette::Disabled, QPalette::Text);
+      return QVariant();
 
     default:
       return QVariant();
@@ -469,6 +476,9 @@ void Playlist::set_current_index(int i) {
 
   current_item_index_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
 
+  if (current_item_index_ == old_current)
+    return;
+
   if (current_item_index_.isValid()) {
     last_played_item_index_ = current_item_index_;
     current_item_ = items_[current_item_index_.row()];
@@ -477,10 +487,15 @@ void Playlist::set_current_index(int i) {
     current_item_.reset();
   }
 
-  if (old_current.isValid())
-    emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount-1));
+  if (old_current.isValid()) {
+    if (dynamic_playlist_) {
+      items_[old_current.row()]->SetDynamicHistory(true);
+    }
 
-  if (current_item_index_.isValid() && current_item_index_ != old_current) {
+    emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount-1));
+  }
+
+  if (current_item_index_.isValid()) {
     emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount-1));
     emit CurrentSongChanged(current_item_metadata());
   }
@@ -505,6 +520,25 @@ void Playlist::set_current_index(int i) {
     current_virtual_index_ = virtual_items_.indexOf(i);
   else
     current_virtual_index_ = i;
+
+  if (dynamic_playlist_ && current_item_index_.isValid() && old_current.isValid()) {
+    using smart_playlists::Generator;
+
+    // Add more dynamic playlist items
+    const int count = current_item_index_.row() + Generator::kDynamicFuture - items_.count();
+    if (count > 0) {
+      GeneratorInserter* inserter = new GeneratorInserter(task_manager_, library_, this);
+      connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+      connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
+
+      inserter->Load(this, -1, false, dynamic_playlist_, count);
+    }
+
+    // Remove the first item
+    if (current_item_index_.row() > Generator::kDynamicHistory) {
+      RemoveItemsWithoutUndo(0, 1);
+    }
+  }
 
   UpdateScrobblePoint();
 }
@@ -604,6 +638,12 @@ void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos, bool play_no
   connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 
   inserter->Load(this, pos, play_now, generator);
+
+  if (generator->is_dynamic()) {
+    dynamic_playlist_ = generator;
+    playlist_sequence_->SetUsingDynamicPlaylist(true);
+    ShuffleModeChanged(PlaylistSequence::Shuffle_Off);
+  }
 }
 
 void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
@@ -623,6 +663,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
   // Put the items back in
   const int start = pos == -1 ? items_.count() : pos;
   for (int i=start ; i<start+moved_items.count() ; ++i) {
+    moved_items[i - start]->SetDynamicHistory(false);
     items_.insert(i, moved_items[i - start]);
   }
 
@@ -1106,8 +1147,18 @@ void Playlist::UpdateScrobblePoint() {
 
 void Playlist::Clear() {
   undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, 0, items_.count()));
+  TurnOffDynamicPlaylist();
 
   Save();
+}
+
+void Playlist::TurnOffDynamicPlaylist() {
+  dynamic_playlist_.reset();
+
+  if (playlist_sequence_) {
+    playlist_sequence_->SetUsingDynamicPlaylist(false);
+    ShuffleModeChanged(playlist_sequence_->shuffle_mode());
+  }
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {

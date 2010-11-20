@@ -165,7 +165,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Smart playlists are shown in another top-level node
   void CreateSmartPlaylists();
   void SaveDefaultGenerator(QSettings* s, int i, const QString& name,
-                            const smart_playlists::Search& search) const;
+                            const smart_playlists::Search& search,
+                            bool dynamic = false) const;
   void SaveGenerator(QSettings* s, int i, smart_playlists::GeneratorPtr generator) const;
   void ItemFromSmartPlaylist(const QSettings& s, bool notify) const;
 

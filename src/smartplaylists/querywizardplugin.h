@@ -45,6 +45,7 @@ public:
   QString type() const { return "Query"; }
   QString name() const;
   QString description() const;
+  bool is_dynamic() const { return true; }
 
   int CreatePages(QWizard* wizard, int finish_page_id);
   void SetGenerator(GeneratorPtr);

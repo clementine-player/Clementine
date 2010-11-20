@@ -30,7 +30,7 @@ class SqlRow;
 
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
-  PlaylistItem(const QString& type) : type_(type) {}
+  PlaylistItem(const QString& type) : type_(type), is_dynamic_history_(false) {}
   virtual ~PlaylistItem() {}
 
   static PlaylistItem* NewFromType(const QString& type);
@@ -111,6 +111,9 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   void ClearTemporaryMetadata();
   bool HasTemporaryMetadata() const { return temp_metadata_.is_valid(); }
 
+  void SetDynamicHistory(bool history) { is_dynamic_history_ = history; }
+  bool IsDynamicHistory() const { return is_dynamic_history_; }
+
   // Convenience function to find out whether this item is from the local
   // library, as opposed to a device, a file on disk, or a stream.
   virtual bool IsLocalLibraryItem() const { return false; }
@@ -132,6 +135,7 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   QString type_;
 
   Song temp_metadata_;
+  bool is_dynamic_history_;
 };
 typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;

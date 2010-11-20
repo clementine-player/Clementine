@@ -124,6 +124,7 @@ class Playlist : public QAbstractListModel {
   int next_index() const;
   int previous_index() const;
   bool stop_after_current() const;
+  bool is_dynamic() const { return dynamic_playlist_; }
 
   const PlaylistItemPtr& item_at(int index) const { return items_[index]; }
   PlaylistItemPtr current_item() const { return current_item_; }
@@ -186,6 +187,8 @@ class Playlist : public QAbstractListModel {
   void Shuffle();
 
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
+
+  void TurnOffDynamicPlaylist();
 
  signals:
   void CurrentSongChanged(const Song& metadata);
@@ -257,6 +260,8 @@ class Playlist : public QAbstractListModel {
   bool ignore_sorting_;
 
   QUndoStack* undo_stack_;
+
+  smart_playlists::GeneratorPtr dynamic_playlist_;
 };
 
 QDataStream& operator <<(QDataStream&, const Playlist*);
