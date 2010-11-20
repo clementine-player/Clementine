@@ -140,11 +140,10 @@ void LibraryView::TotalSongCountUpdated(int count) {
 }
 
 void LibraryView::paintEvent(QPaintEvent* event) {
-  QTreeView::paintEvent(event);
-  QPainter p(viewport());
-
-  QRect rect(viewport()->rect());
   if (total_song_count_ == 0) {
+    QPainter p(viewport());
+    QRect rect(viewport()->rect());
+
     // Draw the confused clementine
     QRect image_rect((rect.width() - nomusic_.width()) / 2, 50,
                      nomusic_.width(), nomusic_.height());
@@ -165,6 +164,8 @@ void LibraryView::paintEvent(QPaintEvent* event) {
 
     QRect text_rect(0, title_rect.bottom() + 5, rect.width(), metrics.height());
     p.drawText(text_rect, Qt::AlignHCenter, tr("Click here to add some music"));
+  } else {
+    QTreeView::paintEvent(event);
   }
 }
 
