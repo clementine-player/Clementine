@@ -47,6 +47,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   static const char* kSmartPlaylistsMimeType;
   static const char* kSmartPlaylistsSettingsGroup;
+  static const char* kSmartPlaylistsArray;
   static const int kSmartPlaylistsVersion;
 
   enum Role {

@@ -191,9 +191,11 @@ void QueryWizardPlugin::UpdateSortOrder() {
   const QString asc = SearchTerm::FieldSortOrderText(type, true);
   const QString desc = SearchTerm::FieldSortOrderText(type, false);
 
+  const int old_current_index = sort_ui_->order->currentIndex();
   sort_ui_->order->clear();
   sort_ui_->order->addItem(asc);
   sort_ui_->order->addItem(desc);
+  sort_ui_->order->setCurrentIndex(old_current_index);
 }
 
 void QueryWizardPlugin::AddSearchTerm() {
