@@ -31,6 +31,7 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QSortFilterProxyModel>
+#include <QScrollBar>
 
 #include <math.h>
 
@@ -104,6 +105,9 @@ PlaylistView::PlaylistView(QWidget *parent)
   inhibit_autoscroll_timer_->setInterval(kAutoscrollGraceTimeout * 1000);
   inhibit_autoscroll_timer_->setSingleShot(true);
   connect(inhibit_autoscroll_timer_, SIGNAL(timeout()), SLOT(InhibitAutoscrollTimeout()));
+
+  horizontalScrollBar()->installEventFilter(this);
+  verticalScrollBar()->installEventFilter(this);
 
   setAlternatingRowColors(true);
 
@@ -768,4 +772,13 @@ void PlaylistView::RepositionDynamicControls() {
   dynamic_controls_->resize(dynamic_controls_->sizeHint());
   dynamic_controls_->move((width() - dynamic_controls_->width()) / 2,
                           height() - dynamic_controls_->height() - 20);
+}
+
+bool PlaylistView::eventFilter(QObject* object, QEvent* event) {
+  if (event->type() == QEvent::Enter &&
+      (object == horizontalScrollBar() || object == verticalScrollBar())) {
+    RatingHoverOut();
+    return false;
+  }
+  return QObject::eventFilter(object, event);
 }

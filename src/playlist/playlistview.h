@@ -74,9 +74,6 @@ class PlaylistView : public QTreeView {
   void keyPressEvent(QKeyEvent* event);
   void setModel(QAbstractItemModel *model);
 
-  // QAbstractScrollArea
-  void contextMenuEvent(QContextMenuEvent* e);
-
  public slots:
   void ReloadSettings();
   void StopGlowing();
@@ -91,6 +88,7 @@ class PlaylistView : public QTreeView {
   void SongRatingSet(const QModelIndex& index, double rating);
 
  protected:
+  void contextMenuEvent(QContextMenuEvent* e);
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);
   void timerEvent(QTimerEvent* event);
@@ -104,6 +102,7 @@ class PlaylistView : public QTreeView {
   void dragLeaveEvent(QDragLeaveEvent *event);
   void dropEvent(QDropEvent *event);
   void resizeEvent(QResizeEvent* event);
+  bool eventFilter(QObject* object, QEvent* event);
 
  private slots:
   void LoadGeometry();
