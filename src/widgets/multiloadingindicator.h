@@ -20,27 +20,37 @@
 
 #include <QWidget>
 
+class BusyIndicator;
 class TaskManager;
-class Ui_MultiLoadingIndicator;
 
 class MultiLoadingIndicator : public QWidget {
   Q_OBJECT
 
- public:
+public:
   MultiLoadingIndicator(QWidget* parent = 0);
-  ~MultiLoadingIndicator();
+
+  static const int kVerticalPadding;
+  static const int kHorizontalPadding;
+  static const int kSpacing;
 
   void SetTaskManager(TaskManager* task_manager);
 
- signals:
+  QSize sizeHint() const;
+
+signals:
   void TaskCountChange(int tasks);
 
- private slots:
+protected:
+  void paintEvent(QPaintEvent*);
+
+private slots:
   void UpdateText();
 
- private:
-  Ui_MultiLoadingIndicator* ui_;
+private:
   TaskManager* task_manager_;
+
+  BusyIndicator* spinner_;
+  QString text_;
 };
 
 #endif // MULTILOADINGINDICATOR_H

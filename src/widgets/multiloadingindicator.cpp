@@ -16,18 +16,29 @@
 */
 
 #include "multiloadingindicator.h"
-#include "ui_multiloadingindicator.h"
 #include "core/taskmanager.h"
+#include "widgets/busyindicator.h"
+
+#include <QHBoxLayout>
+#include <QPainter>
+
+const int MultiLoadingIndicator::kVerticalPadding = 4;
+const int MultiLoadingIndicator::kHorizontalPadding = 6;
+const int MultiLoadingIndicator::kSpacing = 6;
 
 MultiLoadingIndicator::MultiLoadingIndicator(QWidget *parent)
   : QWidget(parent),
-    ui_(new Ui_MultiLoadingIndicator)
+    spinner_(new BusyIndicator(this))
 {
-  ui_->setupUi(this);
+  spinner_->move(kHorizontalPadding, kVerticalPadding);
+  setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
 }
 
-MultiLoadingIndicator::~MultiLoadingIndicator() {
-  delete ui_;
+QSize MultiLoadingIndicator::sizeHint() const {
+  const int width = kHorizontalPadding*2 + spinner_->sizeHint().width() + kSpacing + fontMetrics().width(text_);
+  const int height = kVerticalPadding*2 + qMax(spinner_->sizeHint().height(), fontMetrics().height());
+
+  return QSize(width, height);
 }
 
 void MultiLoadingIndicator::SetTaskManager(TaskManager* task_manager) {
@@ -51,11 +62,24 @@ void MultiLoadingIndicator::UpdateText() {
     strings << task_text;
   }
 
-  QString text(strings.join(", "));
-  if (!text.isEmpty()) {
-    text[0] = text[0].toUpper();
+  text_ = strings.join(", ");
+  if (!text_.isEmpty()) {
+    text_[0] = text_[0].toUpper();
+    text_ += "...";
   }
 
-  ui_->text->setText(text + "...");
   emit TaskCountChange(tasks.count());
+  update();
+  updateGeometry();
+}
+
+void MultiLoadingIndicator::paintEvent(QPaintEvent*) {
+  QPainter p(this);
+
+  const QRect text_rect(
+        kHorizontalPadding + spinner_->sizeHint().width() + kSpacing,
+        kVerticalPadding,
+        width() - kHorizontalPadding*2 - spinner_->sizeHint().width() - kSpacing,
+        height() - kVerticalPadding*2);
+  p.drawText(text_rect, fontMetrics().elidedText(text_, Qt::ElideRight, text_rect.width()));
 }

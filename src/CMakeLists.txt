@@ -404,7 +404,6 @@ set(UI
   widgets/equalizerslider.ui
   widgets/errordialog.ui
   widgets/fileview.ui
-  widgets/multiloadingindicator.ui
   widgets/osdpretty.ui
   widgets/trackslider.ui
 )

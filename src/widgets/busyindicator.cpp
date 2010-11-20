@@ -24,6 +24,7 @@ BusyIndicator::BusyIndicator(QWidget* parent)
       movie_(new QMovie(":spinner.gif"))
 {
   setMovie(movie_);
+  setMinimumSize(16, 16);
 }
 
 BusyIndicator::~BusyIndicator() {
