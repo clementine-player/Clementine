@@ -188,6 +188,7 @@ class Playlist : public QAbstractListModel {
 
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 
+  void RepopulateDynamicPlaylist();
   void TurnOffDynamicPlaylist();
 
  signals:
@@ -196,6 +197,7 @@ class Playlist : public QAbstractListModel {
   void PlayRequested(const QModelIndex& index);
 
   void PlaylistChanged();
+  void DynamicModeChanged(bool dynamic);
 
   void LoadTracksError(const QString& message);
 

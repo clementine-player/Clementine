@@ -28,6 +28,7 @@
 
 class QCleanlooksStyle;
 
+class DynamicPlaylistControls;
 class LibraryBackend;
 class PlaylistHeader;
 class RadioLoadingIndicator;
@@ -82,6 +83,7 @@ class PlaylistView : public QTreeView {
   void StartGlowing();
   void JumpToCurrentlyPlayingTrack();
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint);
+  void DynamicModeChanged(bool dynamic);
 
  signals:
   void PlayPauseItem(const QModelIndex& index);
@@ -101,6 +103,7 @@ class PlaylistView : public QTreeView {
   void dragEnterEvent(QDragEnterEvent *event);
   void dragLeaveEvent(QDragLeaveEvent *event);
   void dropEvent(QDropEvent *event);
+  void resizeEvent(QResizeEvent* event);
 
  private slots:
   void LoadGeometry();
@@ -132,6 +135,8 @@ class PlaylistView : public QTreeView {
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
   QModelIndex PrevEditableIndex(const QModelIndex& current);
+
+  void RepositionDynamicControls();
 
   PlaylistProxyStyle* style_;
   Playlist* playlist_;
@@ -166,6 +171,8 @@ class PlaylistView : public QTreeView {
 
   QPixmap cached_tree_;
   int drop_indicator_row_;
+
+  DynamicPlaylistControls* dynamic_controls_;
 };
 
 #endif // PLAYLISTVIEW_H

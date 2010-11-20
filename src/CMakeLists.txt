@@ -86,6 +86,7 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
+  playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
   playlist/playlistbackend.cpp
   playlist/playlistcontainer.cpp
@@ -252,6 +253,7 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
 
+  playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
   playlist/playlistbackend.h
   playlist/playlistcontainer.h
@@ -368,6 +370,7 @@ set(UI
   library/libraryfilterwidget.ui
   library/libraryviewcontainer.ui
 
+  playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui

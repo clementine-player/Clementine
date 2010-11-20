@@ -643,6 +643,7 @@ void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos, bool play_no
     dynamic_playlist_ = generator;
     playlist_sequence_->SetUsingDynamicPlaylist(true);
     ShuffleModeChanged(PlaylistSequence::Shuffle_Off);
+    emit DynamicModeChanged(true);
   }
 }
 
@@ -1159,6 +1160,16 @@ void Playlist::TurnOffDynamicPlaylist() {
     playlist_sequence_->SetUsingDynamicPlaylist(false);
     ShuffleModeChanged(playlist_sequence_->shuffle_mode());
   }
+  emit DynamicModeChanged(false);
+}
+
+void Playlist::RepopulateDynamicPlaylist() {
+  if (!dynamic_playlist_)
+    return;
+
+  // Can't use Clear() because it turns off dynamic playlist
+  RemoveItemsWithoutUndo(0, items_.count());
+  InsertSmartPlaylist(dynamic_playlist_);
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {

@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "dynamicplaylistcontrols.h"
 #include "playlistview.h"
 #include "playlist.h"
 #include "playlistheader.h"
@@ -82,7 +83,8 @@ PlaylistView::PlaylistView(QWidget *parent)
     currenttrack_play_(":currenttrack_play.png"),
     currenttrack_pause_(":currenttrack_pause.png"),
     cached_current_row_row_(-1),
-    drop_indicator_row_(-1)
+    drop_indicator_row_(-1),
+    dynamic_controls_(new DynamicPlaylistControls(this))
 {
   setHeader(header_);
   header_->setMovable(true);
@@ -106,6 +108,8 @@ PlaylistView::PlaylistView(QWidget *parent)
   setAlternatingRowColors(true);
 
   setAttribute(Qt::WA_MacShowFocusRect, false);
+
+  dynamic_controls_->hide();
 
 #ifdef Q_OS_DARWIN
   setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
@@ -140,15 +144,26 @@ void PlaylistView::SetPlaylist(Playlist *playlist) {
   if (playlist_) {
     disconnect(playlist_, SIGNAL(CurrentSongChanged(Song)),
                this, SLOT(MaybeAutoscroll()));
+    disconnect(playlist_, SIGNAL(DynamicModeChanged(bool)),
+               this, SLOT(DynamicModeChanged(bool)));
     disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
+
+    disconnect(dynamic_controls_, SIGNAL(Repopulate()),
+               playlist_, SLOT(RepopulateDynamicPlaylist()));
+    disconnect(dynamic_controls_, SIGNAL(TurnOff()),
+               playlist_, SLOT(TurnOffDynamicPlaylist()));
   }
 
   playlist_ = playlist;
   LoadGeometry();
   ReloadSettings();
+  DynamicModeChanged(playlist->is_dynamic());
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
-  connect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
+  connect(playlist_, SIGNAL(DynamicModeChanged(bool)), SLOT(DynamicModeChanged(bool)));
+  connect(playlist_, SIGNAL(destroyed()), SLOT(PlaylistDestroyed()));
+  connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_, SLOT(RepopulateDynamicPlaylist()));
+  connect(dynamic_controls_, SIGNAL(TurnOff()), playlist_, SLOT(TurnOffDynamicPlaylist()));
 }
 
 void PlaylistView::setModel(QAbstractItemModel *m) {
@@ -731,4 +746,26 @@ void PlaylistView::SaveSettings() {
 
 void PlaylistView::StretchChanged(bool stretch) {
   setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff : Qt::ScrollBarAsNeeded);
+}
+
+void PlaylistView::DynamicModeChanged(bool dynamic) {
+  if (!dynamic) {
+    dynamic_controls_->hide();
+  } else {
+    RepositionDynamicControls();
+    dynamic_controls_->show();
+  }
+}
+
+void PlaylistView::resizeEvent(QResizeEvent* e) {
+  QTreeView::resizeEvent(e);
+  if (dynamic_controls_->isVisible()) {
+    RepositionDynamicControls();
+  }
+}
+
+void PlaylistView::RepositionDynamicControls() {
+  dynamic_controls_->resize(dynamic_controls_->sizeHint());
+  dynamic_controls_->move((width() - dynamic_controls_->width()) / 2,
+                          height() - dynamic_controls_->height() - 20);
 }

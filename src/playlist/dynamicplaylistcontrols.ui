@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DynamicPlaylistControls</class>
+ <widget class="QWidget" name="DynamicPlaylistControls">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>397</width>
+    <height>50</height>
+   </rect>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#container {
+	background: rgba(200, 200, 200, 50%);
+    border-radius: 10px;
+    border: 1px solid rgb(200, 200, 200, 75%);
+}
+
+#label1 {
+	font-weight: bold;
+}
+
+#label2 {
+	font-size: 7.5pt;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="container">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label1">
+          <property name="text">
+           <string>Dynamic mode is on</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label2">
+          <property name="text">
+           <string>New tracks will be added automatically.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="repopulate">
+        <property name="text">
+         <string>Repopulate</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="off">
+        <property name="text">
+         <string>Turn off</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
