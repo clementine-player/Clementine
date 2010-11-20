@@ -32,6 +32,7 @@
 #include "engines/enginebase.h"
 #include "library/directory.h"
 #include "radio/lastfmservice.h"
+#include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
@@ -126,6 +127,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<const char*>("const char*");
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
   qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
+  qRegisterMetaType<smart_playlists::GeneratorPtr>("smart_playlists::GeneratorPtr");
 
 #ifdef HAVE_GSTREAMER
   qRegisterMetaType<GstBuffer*>("GstBuffer*");

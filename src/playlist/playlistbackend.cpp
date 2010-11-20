@@ -20,10 +20,13 @@
 #include "core/scopedtransaction.h"
 #include "core/song.h"
 #include "library/sqlrow.h"
+#include "smartplaylists/generator.h"
 
 #include <QSqlQuery>
 #include <QtConcurrentMap>
 #include <QtDebug>
+
+using smart_playlists::GeneratorPtr;
 
 using boost::shared_ptr;
 
@@ -58,7 +61,9 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, name, last_played FROM playlists"
+  QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
+              "       dynamic_playlist_data"
+              " FROM playlists"
               " WHERE ROWID=:id", db);
   q.bindValue(":id", id);
   q.exec();
@@ -71,6 +76,8 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   p.id = q.value(0).toInt();
   p.name = q.value(1).toString();
   p.last_played = q.value(2).toInt();
+  p.dynamic_type = q.value(3).toString();
+  p.dynamic_data = q.value(4).toByteArray();
 
   return p;
 }
@@ -118,15 +125,16 @@ PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row) {
 }
 
 void PlaylistBackend::SavePlaylistAsync(int playlist, const PlaylistItemList &items,
-                                        int last_played) {
+                                        int last_played, GeneratorPtr dynamic) {
   metaObject()->invokeMethod(this, "SavePlaylist", Qt::QueuedConnection,
                              Q_ARG(int, playlist),
                              Q_ARG(PlaylistItemList, items),
-                             Q_ARG(int, last_played));
+                             Q_ARG(int, last_played),
+                             Q_ARG(smart_playlists::GeneratorPtr, dynamic));
 }
 
 void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
-                                   int last_played) {
+                                   int last_played, GeneratorPtr dynamic) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -135,7 +143,10 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
                    " (playlist, type, library_id, url, title, artist, album,"
                    "  length, radio_service)"
                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", db);
-  QSqlQuery update("UPDATE playlists SET last_played=:last_played"
+  QSqlQuery update("UPDATE playlists SET "
+                   "   last_played=:last_played,"
+                   "   dynamic_playlist_type=:dynamic_type,"
+                   "   dynamic_playlist_data=:dynamic_data"
                    " WHERE ROWID=:playlist", db);
 
   ScopedTransaction transaction(&db);
@@ -157,7 +168,14 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
 
   // Update the last played track number
   update.bindValue(":last_played", last_played);
-  update.bindValue(":id", playlist);
+  if (dynamic) {
+    update.bindValue(":dynamic_type", dynamic->type());
+    update.bindValue(":dynamic_data", dynamic->Save());
+  } else {
+    update.bindValue(":dynamic_type", QString());
+    update.bindValue(":dynamic_data", QByteArray());
+  }
+  update.bindValue(":playlist", playlist);
   update.exec();
   if (db_->CheckErrors(update.lastError()))
     return;

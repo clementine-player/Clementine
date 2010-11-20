@@ -208,6 +208,7 @@ class Playlist : public QAbstractListModel {
   int NextVirtualIndex(int i) const;
   int PreviousVirtualIndex(int i) const;
   bool FilterContainsVirtualIndex(int i) const;
+  void TurnOnDynamicPlaylist(smart_playlists::GeneratorPtr gen);
 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands

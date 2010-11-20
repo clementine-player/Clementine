@@ -23,6 +23,7 @@
 #include <QObject>
 
 #include "playlistitem.h"
+#include "smartplaylists/generator_fwd.h"
 
 #include <boost/shared_ptr.hpp>
 
@@ -39,6 +40,8 @@ class PlaylistBackend : public QObject {
     int id;
     QString name;
     int last_played;
+    QString dynamic_type;
+    QByteArray dynamic_data;
   };
   typedef QList<Playlist> PlaylistList;
   typedef QFuture<PlaylistItemPtr> PlaylistItemFuture;
@@ -47,7 +50,7 @@ class PlaylistBackend : public QObject {
   Playlist GetPlaylist(int id);
   PlaylistItemFuture GetPlaylistItems(int playlist);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
-                         int last_played);
+                         int last_played, smart_playlists::GeneratorPtr dynamic);
   void SetPlaylistOrder(const QList<int>& ids);
 
   int CreatePlaylist(const QString& name);
@@ -55,7 +58,8 @@ class PlaylistBackend : public QObject {
   void RenamePlaylist(int id, const QString& new_name);
 
  public slots:
-  void SavePlaylist(int playlist, const PlaylistItemList& items, int last_played);
+  void SavePlaylist(int playlist, const PlaylistItemList& items,
+                    int last_played, smart_playlists::GeneratorPtr dynamic);
 
  private:
   static PlaylistItemPtr NewSongFromQuery(const SqlRow& row);

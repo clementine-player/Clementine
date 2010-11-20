@@ -52,6 +52,7 @@
 
 #include <lastfm/ScrobblePoint>
 
+using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;
 using smart_playlists::GeneratorPtr;
 
@@ -640,11 +641,16 @@ void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos, bool play_no
   inserter->Load(this, pos, play_now, generator);
 
   if (generator->is_dynamic()) {
-    dynamic_playlist_ = generator;
-    playlist_sequence_->SetUsingDynamicPlaylist(true);
-    ShuffleModeChanged(PlaylistSequence::Shuffle_Off);
-    emit DynamicModeChanged(true);
+    TurnOnDynamicPlaylist(generator);
   }
+}
+
+void Playlist::TurnOnDynamicPlaylist(GeneratorPtr gen) {
+  dynamic_playlist_ = gen;
+  playlist_sequence_->SetUsingDynamicPlaylist(true);
+  ShuffleModeChanged(PlaylistSequence::Shuffle_Off);
+  emit DynamicModeChanged(true);
+  Save();
 }
 
 void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
@@ -991,7 +997,7 @@ void Playlist::Save() const {
   if (!backend_)
     return;
 
-  backend_->SavePlaylistAsync(id_, items_, last_played_index());
+  backend_->SavePlaylistAsync(id_, items_, last_played_index(), dynamic_playlist_);
 }
 
 namespace {
@@ -1023,6 +1029,15 @@ void Playlist::ItemsLoaded() {
 
   last_played_item_index_ =
       p.last_played == -1 ? QModelIndex() : index(p.last_played);
+
+  if (!p.dynamic_type.isEmpty()) {
+    GeneratorPtr gen = Generator::Create(p.dynamic_type);
+    if (gen) {
+      gen->set_library(library_);
+      gen->Load(p.dynamic_data);
+      TurnOnDynamicPlaylist(gen);
+    }
+  }
 }
 
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
@@ -1161,6 +1176,7 @@ void Playlist::TurnOffDynamicPlaylist() {
     ShuffleModeChanged(playlist_sequence_->shuffle_mode());
   }
   emit DynamicModeChanged(false);
+  Save();
 }
 
 void Playlist::RepopulateDynamicPlaylist() {
