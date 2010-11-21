@@ -1,0 +1,45 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node>
+	<interface name='org.mpris.MediaPlayer2.TrackList'>
+		<method name='GetTracksMetadata'>
+			<arg direction='in' name='TrackIds' type='ao'/>
+			<arg direction='out' name='Metadata' type='aa{sv}'>
+				<annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="TrackMetadata" />
+			</arg>
+		</method>
+		<method name='AddTrack'>
+			<arg direction='in' name='Uri' type='s'/>
+			<arg direction='in' name='AfterTrack' type='o'/>
+			<arg direction='in' name='SetAsCurrent' type='b'/>
+		</method>
+		<method name='RemoveTrack'>
+			<arg direction='in' name='TrackId' type='o'/>
+		</method>
+		<method name='GoTo'>
+			<arg direction='in' name='TrackId' type='o'/>
+		</method>
+		<signal name='TrackListReplaced'>
+			<arg name='Tracks' type='ao'/>
+			<arg name='CurrentTrack' type='o'/>
+		</signal>
+		<signal name='TrackAdded'>
+			<arg name='Metadata' type='a{sv}'>
+				<annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="TrackMetadata"/>
+			</arg>
+			<arg name='AfterTrack' type='o'/>
+		</signal>
+		<signal name='TrackRemoved'>
+			<arg name='TrackId' type='o'/>
+		</signal>
+		<signal name='TrackMetadataChanged'>
+			<arg name='TrackId' type='o'/>
+			<arg name='Metadata' type='a{sv}'>
+				<annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="TrackMetadata"/>
+			</arg>
+		</signal>
+		<property name='Tracks' type='ao' access='read'/>
+		<property name='CanEditTracks' type='b' access='read'/>
+	</interface>
+</node>

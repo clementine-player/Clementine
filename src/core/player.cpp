@@ -37,9 +37,10 @@
 #endif
 
 #ifdef Q_WS_X11
-#  include "core/mpris_player.h"
-#  include "core/mpris_tracklist.h"
+#  include "mpris.h"
+#  include "mpris2.h"
 #  include <QDBusConnection>
+#  include <QImage>
 #endif
 
 #include <QtDebug>
@@ -73,9 +74,11 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
 }
 #endif
 
-Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
-               Engine::Type engine, QObject* parent)
+Player::Player(MainWindow* main_window, PlaylistManager* playlists,
+               LastFMService* lastfm, Engine::Type engine, QObject* parent)
   : QObject(parent),
+    mpris_(NULL),
+    mpris2_(NULL),
     playlists_(playlists),
     lastfm_(lastfm),
     engine_(CreateEngine(engine)),
@@ -84,21 +87,25 @@ Player::Player(PlaylistManager* playlists, LastFMService* lastfm,
     toad_stream_(-1),
     volume_before_mute_(0)
 {
+#ifdef Q_WS_X11
+  // MPRIS DBus interface.
+  qDBusRegisterMetaType<DBusStatus>();
+  qDBusRegisterMetaType<Version>();
+  qDBusRegisterMetaType<QImage>();
+  qDBusRegisterMetaType<TrackMetadata>();
+  qDBusRegisterMetaType<TrackIds>();
+  //MPRIS 1.0 implementation
+  mpris_ = new MPRIS(this, this);
+  //MPRIS 2.0 implementation
+  mpris2_ = new MPRIS2(main_window, this, this);
+#endif
+
   settings_.beginGroup("Player");
 
   SetVolume(settings_.value("volume", 50).toInt());
 
   connect(engine_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
-  // MPRIS DBus interface.
-#ifdef Q_WS_X11
-  MprisPlayer* mpris = new MprisPlayer(this);
-  // Hack so the next registerObject() doesn't override this one.
-  QDBusConnection::sessionBus().registerObject(
-      "/Player", mpris, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
-  new MprisTrackList(this);
-  QDBusConnection::sessionBus().registerObject("/TrackList", this);
-#endif
 }
 
 Player::~Player() {
@@ -265,6 +272,9 @@ void Player::PlayPause() {
     break;
   }
   }
+
+  if (mpris2_)
+    mpris2_->emitNotification("PlaybackStatus");
 }
 
 void Player::Stop() {
@@ -291,8 +301,14 @@ void Player::EngineStateChanged(Engine::State state) {
     case Engine::Empty:
     case Engine::Idle: emit Stopped(); break;
   }
-  emit StatusChange(GetStatus());
-  emit CapsChange(GetCaps());
+  if (mpris_) {
+    mpris_->EmitStatusChange(mpris_->GetStatus());
+    mpris_->EmitCapsChange(mpris_->GetCaps());
+  }
+  if (mpris2_) {
+    mpris2_->emitNotification("PlaybackStatus");
+    mpris2_->emitNotification("Metadata");
+  }
 }
 
 void Player::SetVolume(int value) {
@@ -302,8 +318,12 @@ void Player::SetVolume(int value) {
   settings_.setValue("volume", volume);
   engine_->SetVolume(volume);
 
-  if (volume != old_volume)
+  if (volume != old_volume){
     emit VolumeChanged(volume);
+    if (mpris2_)
+      mpris2_->emitNotification("Volume");
+  }
+
 }
 
 int Player::GetVolume() const {
@@ -337,12 +357,23 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
       lastfm_->NowPlaying(current_item_->Metadata());
   }
 
-  emit CapsChange(GetCaps());
+  if (mpris_) {
+    mpris_->EmitCapsChange(mpris_->GetCaps());
+  }
+  if (mpris2_) {
+    mpris2_->emitNotification("PlaybackStatus");
+    mpris2_->emitNotification("Metadata");
+  }
 }
 
-void Player::CurrentMetadataChanged(const Song &metadata) {
+void Player::CurrentMetadataChanged(const Song& metadata) {
   lastfm_->NowPlaying(metadata);
-  emit TrackChange(GetMetadata());
+
+  PlaylistItemPtr item = playlists_->active()->current_item();
+  if (mpris_)
+    mpris_->EmitTrackChange(mpris_->GetMetadata(item));
+  if (mpris2_)
+    mpris2_->UpdateMetadata(item);
 }
 
 void Player::Seek(int seconds) {
@@ -354,7 +385,7 @@ void Player::Seek(int seconds) {
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
-  shared_ptr<PlaylistItem> item = playlists_->active()->current_item();
+  PlaylistItemPtr item = playlists_->active()->current_item();
   if (!item)
     return;
 
@@ -383,102 +414,10 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   playlists_->active()->SetStreamMetadata(item->Url(), song);
 }
 
-int Player::GetCaps() const {
-  int caps = CAN_HAS_TRACKLIST;
-  if (current_item_) { caps |= CAN_PROVIDE_METADATA; }
-  if (GetState() == Engine::Playing && current_item_->options() & PlaylistItem::PauseDisabled) {
-    caps |= CAN_PAUSE;
-  }
-  if (GetState() == Engine::Paused) {
-    caps |= CAN_PLAY;
-  }
-  if (GetState() != Engine::Empty && current_item_->Metadata().filetype() != Song::Type_Stream) {
-    caps |= CAN_SEEK;
-  }
-  if (playlists_->active()->next_index() != -1 ||
-      playlists_->active()->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
-    caps |= CAN_GO_NEXT;
-  }
-  if (playlists_->active()->previous_index() != -1) {
-    caps |= CAN_GO_PREV;
-  }
-  return caps;
-}
-
-DBusStatus Player::GetStatus() const {
-  DBusStatus status;
-  switch (GetState()) {
-    case Engine::Empty:
-    case Engine::Idle:
-      status.play = DBusStatus::Mpris_Stopped;
-      break;
-    case Engine::Playing:
-      status.play = DBusStatus::Mpris_Playing;
-      break;
-    case Engine::Paused:
-      status.play = DBusStatus::Mpris_Paused;
-      break;
-  }
-  status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
-  PlaylistSequence::RepeatMode repeat_mode = playlists_->sequence()->repeat_mode();
-  status.repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
-  status.repeat_playlist = (repeat_mode == PlaylistSequence::Repeat_Album ||
-                            repeat_mode == PlaylistSequence::Repeat_Playlist) ? 1 : 0;
-  return status;
-}
-
-namespace {
-inline void AddMetadata(const QString& key, const QString& metadata, QVariantMap* map) {
-  if (!metadata.isEmpty()) {
-    (*map)[key] = metadata;
-  }
-}
-
-inline void AddMetadata(const QString& key, int metadata, QVariantMap* map) {
-  if (metadata > 0) {
-    (*map)[key] = metadata;
-  }
-}
-
-}  // namespace
-
-QVariantMap Player::GetMetadata(const PlaylistItem& item) const {
-  QVariantMap ret;
-
-  const Song& song = item.Metadata();
-  AddMetadata("location", item.Url().toString(), &ret);
-  AddMetadata("title", song.PrettyTitle(), &ret);
-  AddMetadata("artist", song.artist(), &ret);
-  AddMetadata("album", song.album(), &ret);
-  AddMetadata("time", song.length(), &ret);
-  AddMetadata("tracknumber", song.track(), &ret);
-  AddMetadata("year", song.year(), &ret);
-  AddMetadata("genre", song.genre(), &ret);
-  AddMetadata("disc", song.disc(), &ret);
-  AddMetadata("comment", song.comment(), &ret);
-  AddMetadata("bitrate", song.bitrate(), &ret);
-  AddMetadata("samplerate", song.samplerate(), &ret);
-  AddMetadata("bpm", song.bpm(), &ret);
-  AddMetadata("composer", song.composer(), &ret);
-  AddMetadata("mtime", song.length() * 1000, &ret);
-
-  return ret;
-}
-
-QVariantMap Player::GetMetadata() const {
-  shared_ptr<PlaylistItem> item = playlists_->active()->current_item();
-  if (item) {
-    return GetMetadata(*item);
-  }
-  return QVariantMap();
-}
-
-QVariantMap Player::GetMetadata(int track) const {
-  if (track >= playlists_->active()->rowCount() || track < 0) {
-    return QVariantMap();
-  }
-  const PlaylistItem& item = *(playlists_->active()->item_at(track));
-  return GetMetadata(item);
+PlaylistItemPtr Player::GetItemAt(int pos) const {
+  if (pos < 0 || pos >= playlists_->active()->rowCount())
+    return PlaylistItemPtr();
+  return playlists_->active()->item_at(pos);
 }
 
 void Player::Mute() {
@@ -527,10 +466,6 @@ int Player::PositionGet() const {
   return engine_->position();
 }
 
-void Player::PositionSet(int x) {
-  Seek(x / 1000);
-}
-
 void Player::Repeat(bool enable) {
   playlists_->sequence()->SetRepeatMode(
       enable ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
@@ -551,10 +486,6 @@ void Player::VolumeUp(int change) {
 
 int Player::VolumeGet() const {
   return GetVolume();
-}
-
-void Player::VolumeSet(int volume) {
-  SetVolume(volume);
 }
 
 int Player::AddTrack(const QString& track, bool play_now) {
@@ -584,12 +515,9 @@ void Player::SetRandom(bool enable) {
       enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
 }
 
-void Player::PlayTrack(int index) {
-  PlayAt(index, Engine::Manual, true);
-}
-
 void Player::PlaylistChanged() {
-  emit TrackListChange(GetLength());
+  if (mpris_)
+    mpris_->EmitTrackListChange(GetLength());
 }
 
 void Player::TrackAboutToEnd() {

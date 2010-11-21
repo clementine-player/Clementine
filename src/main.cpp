@@ -50,12 +50,7 @@
 
 #include <echonest/Config.h>
 
-#ifdef Q_WS_X11
-#  include <QDBusConnection>
-#  include <QDBusMetaType>
-#  include "core/mpris.h"
-#  include "widgets/osd.h"
-#endif
+
 
 #ifdef HAVE_GSTREAMER
 #  include <gst/gst.h>
@@ -203,15 +198,6 @@ int main(int argc, char *argv[]) {
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
-
-  // MPRIS DBus interface.
-#ifdef Q_WS_X11
-  qDBusRegisterMetaType<DBusStatus>();
-  qDBusRegisterMetaType<Version>();
-  qDBusRegisterMetaType<QImage>();
-  QDBusConnection::sessionBus().registerService("org.mpris.clementine");
-  MPRIS mpris;
-#endif
 
   // Seed the random number generator
   srand(time(NULL));

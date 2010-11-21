@@ -170,7 +170,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 
   // Create stuff that needs the database
   radio_model_ = new RadioModel(database_, task_manager_, this);
-  player_ = new Player(playlists_, radio_model_->GetLastFMService(), engine, this);
+  player_ = new Player(this, playlists_, radio_model_->GetLastFMService(), engine, this);
   library_ = new Library(database_, task_manager_, this);
   devices_ = new DeviceManager(database_, task_manager_, this);
 

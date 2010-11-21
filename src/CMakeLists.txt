@@ -19,6 +19,11 @@ include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
 
+if(HAVE_LIBINDICATE)
+  link_directories(${INDICATEQT_LIBRARY_DIRS})
+  include_directories(${INDICATEQT_INCLUDE_DIRS})
+endif(HAVE_LIBINDICATE)
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/AddEngine.cmake)
 include(../cmake/ParseArguments.cmake)
@@ -529,13 +534,24 @@ if(NOT APPLE AND NOT WIN32)
   # MPRIS DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.player.xml
-      core/player.h Player core/mpris_player MprisPlayer)
+      core/mpris.h MPRIS core/mpris_player MprisPlayer)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.root.xml
       core/mpris.h MPRIS core/mpris_root MprisRoot)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.tracklist.xml
-      core/player.h Player core/mpris_tracklist MprisTrackList)
+      core/mpris.h MPRIS core/mpris_tracklist MprisTrackList)
+
+  # MPRIS 2.0 DBUS interfaces
+  qt4_add_dbus_adaptor(SOURCES
+      dbus/org.mpris.MediaPlayer2.Player.xml
+      core/mpris2.h MPRIS2 core/mpris2_player Mpris2Player)
+  qt4_add_dbus_adaptor(SOURCES
+      dbus/org.mpris.MediaPlayer2.xml
+      core/mpris2.h MPRIS2 core/mpris2_root Mpris2Root)
+  qt4_add_dbus_adaptor(SOURCES
+      dbus/org.mpris.MediaPlayer2.TrackList.xml
+      core/mpris2.h MPRIS2 core/mpris2_tracklist Mpris2TrackList)
 
   # org.freedesktop.Notifications DBUS interface
   qt4_add_dbus_interface(SOURCES
@@ -551,8 +567,8 @@ if(NOT APPLE AND NOT WIN32)
       dbus/udisksdevice)
 
   # MPRIS source
-  list(APPEND SOURCES core/mpris.cpp)
-  list(APPEND HEADERS core/mpris.h)
+  list(APPEND SOURCES core/mpris.cpp core/mpris2.cpp)
+  list(APPEND HEADERS core/mpris.h   core/mpris2.h)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
@@ -651,6 +667,10 @@ list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
   core/modelfuturewatcher.h
+  core/mpris.cpp
+  core/mpris.h
+  core/mpris2.cpp
+  core/mpris2.h
   devices/afcdevice.cpp
   devices/afcdevice.h
   devices/afcfile.cpp
@@ -718,6 +738,7 @@ add_library(clementine_lib STATIC
 
 add_dependencies(clementine_lib pot)
 
+
 target_link_libraries(clementine_lib
   chardet
   echonest
@@ -760,6 +781,10 @@ endif(HAVE_IMOBILEDEVICE)
 if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
 endif(HAVE_LIBMTP)
+
+if(HAVE_LIBINDICATE)
+  target_link_libraries(clementine_lib ${INDICATEQT_LIBRARIES})
+endif(HAVE_LIBINDICATE)
 
 if (APPLE)
   target_link_libraries(clementine_lib
