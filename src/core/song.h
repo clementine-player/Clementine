@@ -223,7 +223,7 @@ class Song {
   void set_playcount(int v) { d->playcount_ = v; }
   void set_skipcount(int v) { d->skipcount_ = v; }
   void set_lastplayed(int v) { d->lastplayed_ = v; }
-  void set_score(int v) { d->score_ = v; }
+  void set_score(int v) { d->score_ = qBound(0, v, 100); }
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }
