@@ -446,7 +446,7 @@ void LibraryModel::Reset() {
     CreateCompilationArtistNode(false, root_);
 
   // Smart playlists?
-  if (show_smart_playlists_)
+  if (show_smart_playlists_ && query_options_.filter.isEmpty())
     CreateSmartPlaylists();
 
   // Populate top level
