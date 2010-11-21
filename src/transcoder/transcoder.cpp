@@ -146,17 +146,32 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   if (best.name_ == "lamemp3enc") {
     // Special case: we need to add xingmux and id3v2mux to the pipeline when
     // using lamemp3enc because it doesn't write the VBR or ID3v2 headers itself.
+    // We also turn off VBR since it isn't compatible with some music players.
+    // TODO: Should make settings like these configurable.
+
     LogLine("Adding xingmux and id3v2mux to the pipeline");
 
+    // Create the bin
     GstElement* mp3bin = gst_bin_new("mp3bin");
     gst_bin_add(GST_BIN(bin), mp3bin);
 
+    // Create the elements
     GstElement* lame  = CreateElement("lamemp3enc", mp3bin);
     GstElement* xing  = CreateElement("xingmux", mp3bin);
     GstElement* id3v2 = CreateElement("id3v2mux", mp3bin);
 
+    if (!lame || !xing || !id3v2) {
+      return NULL;
+    }
+
+    // Configure the lame element
+    g_object_set(G_OBJECT(lame), "target", 1, NULL); // 1 == bitrate
+    g_object_set(G_OBJECT(lame), "cbr", true, NULL);
+
+    // Link the elements together
     gst_element_link_many(lame, xing, id3v2, NULL);
 
+    // Link the bin's ghost pads to the elements on each end
     GstPad* pad = gst_element_get_static_pad(lame, "sink");
     gst_element_add_pad(mp3bin, gst_ghost_pad_new("sink", pad));
     gst_object_unref(GST_OBJECT(pad));
