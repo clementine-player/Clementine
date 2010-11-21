@@ -273,8 +273,9 @@ void Player::PlayPause() {
   }
   }
 
-  if (mpris2_)
-    mpris2_->emitNotification("PlaybackStatus");
+#ifdef Q_WS_X11
+  mpris2_->emitNotification("PlaybackStatus");
+#endif
 }
 
 void Player::Stop() {
@@ -301,14 +302,13 @@ void Player::EngineStateChanged(Engine::State state) {
     case Engine::Empty:
     case Engine::Idle: emit Stopped(); break;
   }
-  if (mpris_) {
-    mpris_->EmitStatusChange(mpris_->GetStatus());
-    mpris_->EmitCapsChange(mpris_->GetCaps());
-  }
-  if (mpris2_) {
-    mpris2_->emitNotification("PlaybackStatus");
-    mpris2_->emitNotification("Metadata");
-  }
+
+#ifdef Q_WS_X11
+  mpris_->EmitStatusChange(mpris_->GetStatus());
+  mpris_->EmitCapsChange(mpris_->GetCaps());
+  mpris2_->emitNotification("PlaybackStatus");
+  mpris2_->emitNotification("Metadata");
+#endif
 }
 
 void Player::SetVolume(int value) {
@@ -320,8 +320,9 @@ void Player::SetVolume(int value) {
 
   if (volume != old_volume){
     emit VolumeChanged(volume);
-    if (mpris2_)
-      mpris2_->emitNotification("Volume");
+#ifdef Q_WS_X11
+    mpris2_->emitNotification("Volume");
+#endif
   }
 
 }
@@ -357,23 +358,21 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
       lastfm_->NowPlaying(current_item_->Metadata());
   }
 
-  if (mpris_) {
-    mpris_->EmitCapsChange(mpris_->GetCaps());
-  }
-  if (mpris2_) {
-    mpris2_->emitNotification("PlaybackStatus");
-    mpris2_->emitNotification("Metadata");
-  }
+#ifdef Q_WS_X11
+  mpris_->EmitCapsChange(mpris_->GetCaps());
+  mpris2_->emitNotification("PlaybackStatus");
+  mpris2_->emitNotification("Metadata");
+#endif
 }
 
 void Player::CurrentMetadataChanged(const Song& metadata) {
   lastfm_->NowPlaying(metadata);
 
+#ifdef Q_WS_X11
   PlaylistItemPtr item = playlists_->active()->current_item();
-  if (mpris_)
-    mpris_->EmitTrackChange(mpris_->GetMetadata(item));
-  if (mpris2_)
-    mpris2_->UpdateMetadata(item);
+  mpris_->EmitTrackChange(mpris_->GetMetadata(item));
+  mpris2_->UpdateMetadata(item);
+#endif
 }
 
 void Player::Seek(int seconds) {
@@ -516,8 +515,9 @@ void Player::SetRandom(bool enable) {
 }
 
 void Player::PlaylistChanged() {
-  if (mpris_)
-    mpris_->EmitTrackListChange(GetLength());
+#ifdef Q_WS_X11
+  mpris_->EmitTrackListChange(GetLength());
+#endif
 }
 
 void Player::TrackAboutToEnd() {
