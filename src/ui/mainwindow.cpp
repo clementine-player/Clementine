@@ -177,7 +177,10 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   // Initialise the UI
   ui_->setupUi(this);
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);
-  ui_->volume->setValue(player_->GetVolume());
+
+  int volume = player_->GetVolume();
+  ui_->volume->setValue(volume);
+  VolumeChanged(volume);
 
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
@@ -274,6 +277,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->action_stop, SIGNAL(triggered()), player_, SLOT(Stop()));
   connect(ui_->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
+  connect(ui_->action_mute, SIGNAL(triggered()), player_, SLOT(Mute()));
   connect(ui_->action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
   connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlists_, SLOT(ClearCurrent()));
@@ -334,6 +338,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
   connect(player_, SIGNAL(TrackSkipped(PlaylistItemPtr)), SLOT(TrackSkipped(PlaylistItemPtr)));
+  connect(player_, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged(int)));
 
   connect(player_, SIGNAL(Paused()), playlists_, SLOT(SetActivePaused()));
   connect(player_, SIGNAL(Playing()), playlists_, SLOT(SetActivePlaying()));
@@ -457,6 +462,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
                         ui_->action_stop,
                         ui_->action_stop_after_this_track,
                         ui_->action_next_track,
+                        ui_->action_mute,
                         ui_->action_love,
                         ui_->action_ban,
                         ui_->action_quit);
@@ -759,6 +765,10 @@ void MainWindow::MediaPlaying() {
   UpdateTrackPosition();
 
   tray_icon_->SetPlaying();
+}
+
+void MainWindow::VolumeChanged(int volume) {
+  ui_->action_mute->setChecked(!volume);
 }
 
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {

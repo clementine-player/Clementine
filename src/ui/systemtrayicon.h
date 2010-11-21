@@ -32,8 +32,8 @@ class SystemTrayIcon : public QObject {
 
   // Called once to create the icon's context menu
   virtual void SetupMenu(QAction* previous, QAction* play, QAction* stop,
-                         QAction* stop_after, QAction* next, QAction* love,
-                         QAction* ban, QAction* quit) = 0;
+                         QAction* stop_after, QAction* next, QAction* mute,
+                         QAction* love, QAction* ban, QAction* quit) = 0;
 
   virtual bool IsVisible() const { return true; }
   virtual void SetVisible(bool visible) {}

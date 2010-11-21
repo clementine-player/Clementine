@@ -404,6 +404,8 @@
     <addaction name="action_stop"/>
     <addaction name="action_next_track"/>
     <addaction name="separator"/>
+    <addaction name="action_mute"/>
+    <addaction name="separator"/>
     <addaction name="action_love"/>
     <addaction name="action_ban"/>
     <addaction name="separator"/>
@@ -726,6 +728,17 @@
   <action name="action_about_qt">
    <property name="text">
     <string>About Qt...</string>
+   </property>
+  </action>
+  <action name="action_mute">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mute</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
    </property>
   </action>
  </widget>

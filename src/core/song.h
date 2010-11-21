@@ -186,6 +186,8 @@ class Song {
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
 
+  QString TitleWithCompilationArtist() const;
+
   // Setters
   bool IsEditable() const;
   bool Save() const;

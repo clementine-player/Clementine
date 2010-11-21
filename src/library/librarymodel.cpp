@@ -591,7 +591,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
   case GroupBy_None:
     item->metadata.InitFromQuery(q);
     item->key = item->metadata.title();
-    item->display_text = item->metadata.PrettyTitleWithArtist();
+    item->display_text = item->metadata.TitleWithCompilationArtist();
     item->sort_text = SortTextForSong(item->metadata);
     break;
   }
@@ -644,7 +644,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   case GroupBy_None:
     item->metadata = s;
     item->key = s.title();
-    item->display_text = s.PrettyTitleWithArtist();
+    item->display_text = s.TitleWithCompilationArtist();
     item->sort_text = SortTextForSong(s);
     break;
   }

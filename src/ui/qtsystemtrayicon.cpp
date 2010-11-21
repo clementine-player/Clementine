@@ -18,6 +18,8 @@
 #include "iconloader.h"
 #include "qtsystemtrayicon.h"
 
+#include "core/song.h"
+
 #include <QCoreApplication>
 #include <QMenu>
 #include <QSystemTrayIcon>
@@ -43,8 +45,8 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
   }
 
   tray_->setIcon(orange_icon_);
-  tray_->setToolTip(QCoreApplication::applicationName());
   tray_->installEventFilter(this);
+  ClearNowPlaying();
 
   connect(tray_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           SLOT(Clicked(QSystemTrayIcon::ActivationReason)));
@@ -72,12 +74,14 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
 
 void QtSystemTrayIcon::SetupMenu(
     QAction* previous, QAction* play, QAction* stop, QAction* stop_after,
-    QAction* next, QAction* love, QAction* ban, QAction* quit) {
+    QAction* next, QAction* mute, QAction* love, QAction* ban, QAction* quit) {
   menu_->addAction(previous);
   menu_->addAction(play);
   menu_->addAction(stop);
   menu_->addAction(stop_after);
   menu_->addAction(next);
+  menu_->addSeparator();
+  menu_->addAction(mute);
   menu_->addSeparator();
   menu_->addAction(love);
   menu_->addAction(ban);
@@ -118,4 +122,12 @@ bool QtSystemTrayIcon::IsVisible() const {
 
 void QtSystemTrayIcon::SetVisible(bool visible) {
   tray_->setVisible(visible);
+}
+
+void QtSystemTrayIcon::SetNowPlaying(const Song& song) {
+  tray_->setToolTip(song.PrettyTitleWithArtist());
+}
+
+void QtSystemTrayIcon::ClearNowPlaying() {
+  tray_->setToolTip(QCoreApplication::applicationName());
 }

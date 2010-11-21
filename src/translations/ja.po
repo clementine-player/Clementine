@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-11-01 00:44+0000\n"
 "Last-Translator: Nardog <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2010-11-02 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 個のトラック"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev モジュール"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 曲失敗しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n が完了しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 曲残っています"
 
@@ -594,6 +594,9 @@ msgstr "Ctrl+K"
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
+msgid "Ctrl+M"
+msgstr ""
+
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
@@ -781,7 +784,7 @@ msgstr "トラック情報の編集..."
 msgid "Edit..."
 msgstr "編集..."
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "Editing %n tracks"
 msgstr "%n 個のトラックを編集しています"
 
@@ -2337,7 +2340,7 @@ msgstr "Zero"
 msgid "[click to edit]"
 msgstr "[クリックで編集する]"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 曲追加"
 
@@ -2396,7 +2399,7 @@ msgstr "on"
 msgid "options"
 msgstr "オプション"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 曲削除"
 

@@ -954,18 +954,6 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setSource(lastfm::Track::Player);
 }
 
-QString Song::PrettyTitleWithArtist() const {
-  QString title(d->title_);
-
-  if (title.isEmpty())
-    title = QFileInfo(d->filename_).baseName();
-
-  if (is_compilation() && !d->artist_.isEmpty() && !d->artist_.toLower().contains("various"))
-    title = d->artist_ + " - " + title;
-
-  return title;
-}
-
 QString Song::PrettyTitle() const {
   QString title(d->title_);
 
@@ -975,11 +963,35 @@ QString Song::PrettyTitle() const {
   return title;
 }
 
+QString Song::PrettyTitleWithArtist() const {
+  QString title(d->title_);
+
+  if (title.isEmpty())
+    title = QFileInfo(d->filename_).baseName();
+
+  if (!d->artist_.isEmpty())
+    title = d->artist_ + " - " + title;
+
+  return title;
+}
+
 QString Song::PrettyLength() const {
   if (d->length_ == -1)
     return QString::null;
 
   return Utilities::PrettyTime(d->length_);
+}
+
+QString Song::TitleWithCompilationArtist() const {
+  QString title(d->title_);
+
+  if (title.isEmpty())
+    title = QFileInfo(d->filename_).baseName();
+
+  if (is_compilation() && !d->artist_.isEmpty() && !d->artist_.toLower().contains("various"))
+    title = d->artist_ + " - " + title;
+
+  return title;
 }
 
 bool Song::IsMetadataEqual(const Song& other) const {

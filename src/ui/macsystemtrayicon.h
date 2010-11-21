@@ -33,8 +33,8 @@ public:
   ~MacSystemTrayIcon();
 
   void SetupMenu(QAction* previous, QAction* play, QAction* stop,
-                 QAction* stop_after, QAction* next, QAction* love,
-                 QAction* ban, QAction* quit);
+                 QAction* stop_after, QAction* next, QAction* mute,
+                 QAction* love, QAction* ban, QAction* quit);
 
   void SetNowPlaying(const Song& song);
   void ClearNowPlaying();

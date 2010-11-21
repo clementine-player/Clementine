@@ -167,13 +167,15 @@ MacSystemTrayIcon::~MacSystemTrayIcon() {
 
 void MacSystemTrayIcon::SetupMenu(
     QAction* previous, QAction* play, QAction* stop, QAction* stop_after,
-    QAction* next, QAction* love, QAction* ban, QAction* quit) {
+    QAction* next, QAction* mute, QAction* love, QAction* ban, QAction* quit) {
   p_.reset(new MacSystemTrayIconPrivate());
   SetupMenuItem(previous);
   SetupMenuItem(play);
   SetupMenuItem(stop);
   SetupMenuItem(stop_after);
   SetupMenuItem(next);
+  p_->AddSeparator();
+  SetupMenuItem(mute);
   p_->AddSeparator();
   SetupMenuItem(love);
   SetupMenuItem(ban);
