@@ -24,13 +24,15 @@
 namespace smart_playlists {
 
 QueryGenerator::QueryGenerator()
-  : dynamic_(false)
+  : dynamic_(false),
+    current_pos_(0)
 {
 }
 
 void QueryGenerator::Load(const Search& search) {
   search_ = search;
   dynamic_ = false;
+  current_pos_ = 0;
 }
 
 void QueryGenerator::Load(const QByteArray& data) {
@@ -50,6 +52,7 @@ QByteArray QueryGenerator::Save() const {
 
 PlaylistItemList QueryGenerator::Generate() {
   previous_ids_.clear();
+  current_pos_ = 0;
   return GenerateMore(0);
 }
 
@@ -60,6 +63,11 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
     search_copy.limit_ = count;
   } else if (dynamic_) {
     search_copy.limit_ = kDynamicFuture;
+  }
+
+  if (search_copy.sort_type_ != Search::Sort_Random) {
+    search_copy.first_item_ = current_pos_;
+    current_pos_ += search_copy.limit_;
   }
 
   SongList songs = backend_->FindSongs(search_copy);

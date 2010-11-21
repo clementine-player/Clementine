@@ -45,6 +45,7 @@ private:
   bool dynamic_;
 
   QList<int> previous_ids_;
+  int current_pos_;
 };
 
 } // namespace

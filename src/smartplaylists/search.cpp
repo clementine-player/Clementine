@@ -33,7 +33,8 @@ Search::Search(
     terms_(terms),
     sort_type_(sort_type),
     sort_field_(sort_field),
-    limit_(limit)
+    limit_(limit),
+    first_item_(-1)
 {
 }
 
@@ -43,6 +44,7 @@ void Search::Reset() {
   sort_type_ = Sort_Random;
   sort_field_ = SearchTerm::Field_Title;
   limit_ = -1;
+  first_item_ = -1;
 }
 
 QString Search::ToSql(const QString& songs_table) const {
@@ -82,7 +84,9 @@ QString Search::ToSql(const QString& songs_table) const {
   }
 
   // Add limit
-  if (limit_ != -1) {
+  if (first_item_) {
+    sql += QString(" LIMIT %1,%2").arg(first_item_).arg(limit_);
+  } else if (limit_ != -1) {
     sql += " LIMIT " + QString::number(limit_);
   }
 
