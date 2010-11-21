@@ -34,6 +34,14 @@
     </exclude>
     <invalidIndicator value="Page not Found"/>
   </provider>
+  <provider name="letras.mus.br" title="" charset="iso-8859-1" url="http://letras.terra.com.br/winamp.php?musica={title}&amp;artista={artist}">
+    <urlFormat replace="_@,;&amp;\/&quot;" with="_"/>
+    <urlFormat replace=" " with="+"/>
+    <extract>
+      <item begin="&lt;/div&gt;" end="&lt;/div&gt;"/>
+    </extract>
+    <invalidIndicator value="Verifique se o nome do seu arquivo e sua"/>
+  </provider>
   <provider name="loudson.gs" title="" charset="utf-8" url="http://www.loudson.gs/{a}/{artist}/{album}/{title}">
     <urlFormat replace=" _@,;&amp;\/&quot;" with="-"/>
     <urlFormat replace="." with=""/>
