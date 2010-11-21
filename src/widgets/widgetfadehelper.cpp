@@ -21,6 +21,9 @@
 #include <QTimeLine>
 #include <QtDebug>
 
+const int WidgetFadeHelper::kLoadingPadding = 9;
+const int WidgetFadeHelper::kLoadingBorderRadius = 10;
+
 // Exported by QtGui
 void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
 
@@ -49,7 +52,33 @@ void WidgetFadeHelper::StartBlur() {
   blurred.fill(Qt::transparent);
 
   QPainter blur_painter(&blurred);
+  blur_painter.save();
   qt_blurImage(&blur_painter, original_image, 10.0, true, false);
+  blur_painter.restore();
+
+  // Draw some loading text over the top
+  QFont loading_font(font());
+  loading_font.setBold(true);
+  QFontMetrics loading_font_metrics(loading_font);
+
+  const QString loading_text = tr("Loading...");
+  const QSize loading_size(
+        kLoadingPadding*2 + loading_font_metrics.width(loading_text),
+        kLoadingPadding*2 + loading_font_metrics.height());
+  const QRect loading_rect((blurred.width() - loading_size.width()) / 2, 100,
+                           loading_size.width(), loading_size.height());
+
+  blur_painter.setRenderHint(QPainter::Antialiasing);
+  blur_painter.setRenderHint(QPainter::HighQualityAntialiasing);
+
+  blur_painter.setPen(QColor(200, 200, 200, 255));
+  blur_painter.setBrush(QColor(200, 200, 200, 192));
+  blur_painter.drawRoundedRect(loading_rect, kLoadingBorderRadius, kLoadingBorderRadius);
+
+  blur_painter.setPen(palette().brush(QPalette::Text).color());
+  blur_painter.setFont(loading_font);
+  blur_painter.drawText(loading_rect, Qt::AlignCenter, loading_text);
+
   blur_painter.end();
 
   blurred_pixmap_ = QPixmap::fromImage(blurred);

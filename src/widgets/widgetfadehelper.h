@@ -39,6 +39,9 @@ private slots:
   void FadeFinished();
 
 private:
+  static const int kLoadingPadding;
+  static const int kLoadingBorderRadius;
+
   QWidget* parent_;
   QTimeLine* blur_timeline_;
   QTimeLine* fade_timeline_;
