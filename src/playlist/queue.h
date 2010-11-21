@@ -33,6 +33,7 @@ public:
   // Query the queue
   bool is_empty() const;
   int PositionOf(const QModelIndex& source_index) const;
+  bool ContainsSourceRow(int source_row) const;
   int PeekNext() const;
 
   // Modify the queue

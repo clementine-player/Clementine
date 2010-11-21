@@ -217,6 +217,8 @@ class Playlist : public QAbstractListModel {
   void MoveItemsWithoutUndo(const QList<int>& source_rows, int pos);
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
 
+  void RemoveItemsNotInQueue();
+
  private slots:
   void TracksAboutToBeDequeued(const QModelIndex&, int begin, int end);
   void TracksDequeued();

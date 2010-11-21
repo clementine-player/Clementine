@@ -1183,9 +1183,41 @@ void Playlist::RepopulateDynamicPlaylist() {
   if (!dynamic_playlist_)
     return;
 
-  // Can't use Clear() because it turns off dynamic playlist
-  RemoveItemsWithoutUndo(0, items_.count());
+  RemoveItemsNotInQueue();
   InsertSmartPlaylist(dynamic_playlist_);
+}
+
+void Playlist::RemoveItemsNotInQueue() {
+  if (queue_->is_empty()) {
+    RemoveItemsWithoutUndo(0, items_.count());
+    return;
+  }
+
+  int start = 0;
+  forever {
+    // Find a place to start - first row that isn't in the queue
+    forever {
+      if (start >= rowCount())
+        return;
+      if (!queue_->ContainsSourceRow(start))
+        break;
+      start ++;
+    }
+
+    // Figure out how many rows to remove - keep going until we find a row
+    // that is in the queue
+    int count = 1;
+    forever {
+      if (start + count >= rowCount())
+        break;
+      if (queue_->ContainsSourceRow(start + count))
+        break;
+      count ++;
+    }
+
+    RemoveItemsWithoutUndo(start, count);
+    start ++;
+  }
 }
 
 void Playlist::ReloadItems(const QList<int>& rows) {

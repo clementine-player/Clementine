@@ -40,6 +40,14 @@ QModelIndex Queue::mapFromSource(const QModelIndex& source_index) const {
   return QModelIndex();
 }
 
+bool Queue::ContainsSourceRow(int source_row) const {
+  for (int i=0 ; i<source_indexes_.count() ; ++i) {
+    if (source_indexes_[i].row() == source_row)
+      return true;
+  }
+  return false;
+}
+
 QModelIndex Queue::mapToSource(const QModelIndex& proxy_index) const {
   if (!proxy_index.isValid())
     return QModelIndex();
