@@ -13,7 +13,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     add_definitions( -Wall -Wundef -Wcast-align -Wchar-subscripts -Wpointer-arith
        -Wwrite-strings -Wpacked -Wformat-security -Wmissing-format-attribute
        -Wold-style-cast -Woverloaded-virtual -Wnon-virtual-dtor -Werror )
-    if ( NOT WIN32 )
+    if (NOT WIN32 AND NOT APPLE)
         add_definitions( -fvisibility=hidden )
     endif()
 # to be added:
