@@ -74,8 +74,15 @@ struct GenreSorter {
 
 template <typename T>
 struct StationSorter {
-  bool operator() (T a, T b) const {
+  bool operator() (const T& a, const T& b) const {
     return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
+  }
+};
+
+template <typename T>
+struct StationSorter<T*> {
+  bool operator() (const T* a, const T* b) const {
+    return a->name.compare(b->name, Qt::CaseInsensitive) < 0;
   }
 };
 
@@ -132,9 +139,32 @@ void IcecastService::ParseDirectoryFinished() {
     }
   }
 
-  // Sort genres by station count.
+  QSet<QString> genre_set = genres.keys().toSet();
+
+  // Merge genres with only 1 or 2 stations into "Other".
+  foreach (const QString& genre, genre_set) {
+    if (genres.count(genre) < 3) {
+      const QList<const Station*>& small_genre = genres.values(genre);
+      foreach (const Station* s, small_genre) {
+        genres.insert("other", s);
+      }
+      genres.remove(genre);
+    }
+  }
+  // Re-sort "Other" genre.
+  QList<const Station*> other_genre = genres.values("other");
+  sort(other_genre.begin(), other_genre.end(), StationSorter<const Station*>());
+  genres.remove("other");
+  QListIterator<const Station*> other_genre_it(other_genre);
+  other_genre_it.toBack();
+  while (other_genre_it.hasPrevious()) {
+    const Station* s = other_genre_it.previous();
+    genres.insert("other", s);
+  }
+
   // HACK: De-dupe keys.
   QList<QString> genre_names = genres.keys().toSet().toList();
+  // Sort genres by station count.
   sort(genre_names.begin(), genre_names.end(), GenreSorter<const Station*>(genres));
 
   foreach (const QString& genre, genre_names) {
