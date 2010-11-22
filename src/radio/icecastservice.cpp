@@ -105,7 +105,9 @@ void IcecastService::ParseDirectoryFinished() {
   sort(genre_names.begin(), genre_names.end(), GenreSorter<const Station*>(genres));
 
   foreach (const QString& genre, genre_names) {
-    RadioItem* genre_item = new RadioItem(this, Type_Genre, genre);
+    QString genre_name(genre);
+    genre_name[0] = genre_name[0].toUpper();
+    RadioItem* genre_item = new RadioItem(this, Type_Genre, genre_name);
     genre_item->icon = QIcon(":last.fm/icon_tag.png");
 
     QList<const Station*> stations = genres.values(genre);
