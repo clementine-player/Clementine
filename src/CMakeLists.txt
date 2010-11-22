@@ -818,6 +818,15 @@ if (WIN32)
   )
 endif (WIN32)
 
+if (UNIX AND NOT APPLE)
+  # Hack: the Gold linker pays attention to the order that libraries are
+  # specified on the link line.  -lX11 and -ldl are provided earlier in the link
+  # command but they're actually used by libraries that appear after them, so
+  # they end up getting ignored.  This appends them to the very end of the link
+  # line, ensuring they're always used.
+  target_link_libraries(clementine_lib -lX11 -ldl)
+endif (UNIX AND NOT APPLE)
+
 add_dependencies(clementine_lib qtsingleapplication)
 
 
