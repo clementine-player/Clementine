@@ -100,6 +100,10 @@ QStringList FilterGenres(const QStringList& genres) {
       ret << genre;
     }
   }
+
+  if (ret.empty()) {
+    ret << "other";
+  }
   return ret;
 }
 
