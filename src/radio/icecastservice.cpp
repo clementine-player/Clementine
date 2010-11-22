@@ -89,7 +89,7 @@ struct StationEquality {
 void IcecastService::ParseDirectoryFinished() {
   QFutureWatcher<QList<Station> >* watcher =
       static_cast<QFutureWatcher<QList<Station> >*>(sender());
-  const QList<Station>& all_stations = watcher->result();
+  QList<Station> all_stations = watcher->result();
 
   // Cluster stations by genre.
   QMultiHash<QString, const Station*> genres;
@@ -100,6 +100,7 @@ void IcecastService::ParseDirectoryFinished() {
   }
 
   // Sort genres by station count.
+  // HACK: De-dupe keys.
   QList<QString> genre_names = genres.keys().toSet().toList();
   sort(genre_names.begin(), genre_names.end(), GenreSorter<const Station*>(genres));
 
