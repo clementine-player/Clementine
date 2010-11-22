@@ -119,6 +119,7 @@ set(SOURCES
   playlistparsers/xspfparser.cpp
 
   radio/fixlastfm.cpp
+  radio/icecastservice.cpp
   radio/lastfmconfig.cpp
   radio/lastfmservice.cpp
   radio/lastfmstationdialog.cpp
@@ -282,6 +283,7 @@ set(HEADERS
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
 
+  radio/icecastservice.h
   radio/lastfmconfig.h
   radio/lastfmservice.h
   radio/lastfmstationdialog.h

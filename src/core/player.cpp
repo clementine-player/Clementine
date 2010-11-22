@@ -398,8 +398,9 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
     bundle_copy.title = bundle_copy.title.left(dash_pos).trimmed();
   }
 
-  // Hack as SomaFM's artist/title descriptions are backwards.
-  if (item->Url().host().contains("somafm.com")) {
+  // Hack as SomaFM's and icecast's artist/title descriptions are backwards.
+  if (item->Url().host().contains("somafm.com") ||
+      item->Url().fragment() == "icecast") {
     qSwap(bundle_copy.artist, bundle_copy.title);
   }
 

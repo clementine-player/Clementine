@@ -17,6 +17,7 @@
 
 #include "radiomodel.h"
 #include "radioservice.h"
+#include "icecastservice.h"
 #include "lastfmservice.h"
 #include "somafmservice.h"
 #include "radiomimedata.h"
@@ -44,6 +45,7 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   AddService(new LastFMService(this));
   AddService(new SomaFMService(this));
   AddService(new MagnatuneService(this));
+  AddService(new IcecastService(this));
   AddService(new SavedRadio(this));
 }
 
