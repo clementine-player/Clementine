@@ -75,14 +75,14 @@ struct GenreSorter {
 template <typename T>
 struct StationSorter {
   bool operator() (T a, T b) const {
-    return a->name.compare(b->name, Qt::CaseInsensitive) < 0;
+    return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
   }
 };
 
 template <typename T>
 struct StationEquality {
   bool operator() (T a, T b) const {
-    return a->name == b->name;
+    return a.name == b.name;
   }
 };
 
@@ -109,10 +109,19 @@ void IcecastService::ParseDirectoryFinished() {
   QFutureWatcher<QList<Station> >* watcher =
       static_cast<QFutureWatcher<QList<Station> >*>(sender());
   QList<Station> all_stations = watcher->result();
+  sort(all_stations.begin(), all_stations.end(), StationSorter<Station>());
+  // Remove duplicates by name. These tend to be multiple URLs for the same station.
+  QList<Station>::iterator it =
+      unique(all_stations.begin(), all_stations.end(), StationEquality<Station>());
+  all_stations.erase(it, all_stations.end());
 
   // Cluster stations by genre.
   QMultiHash<QString, const Station*> genres;
-  foreach (const Station& s, all_stations) {
+  // Add stations in reverse.
+  QListIterator<Station> reverse_it(all_stations);
+  reverse_it.toBack();
+  while (reverse_it.hasPrevious()) {
+    const Station& s = reverse_it.previous();
     QStringList filtered_genres = FilterGenres(s.genres);
     foreach (const QString& genre, filtered_genres) {
       genres.insert(genre, &s);
@@ -131,11 +140,6 @@ void IcecastService::ParseDirectoryFinished() {
     genre_item->icon = QIcon(":last.fm/icon_tag.png");
 
     QList<const Station*> stations = genres.values(genre);
-    sort(stations.begin(), stations.end(), StationSorter<const Station*>());
-    // Remove duplicates by name. These tend to be multiple URLs for the same station.
-    QList<const Station*>::iterator it =
-        unique(stations.begin(), stations.end(), StationEquality<const Station*>());
-    stations.erase(it, stations.end());
     foreach (const Station* station, stations) {
       RadioItem* radio = new RadioItem(
           this, Type_Stream, station->url.toString(), genre_item);
