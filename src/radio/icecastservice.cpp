@@ -7,6 +7,7 @@ using std::unique;
 #include <QFutureWatcher>
 #include <QMultiHash>
 #include <QNetworkReply>
+#include <QRegExp>
 #include <QtConcurrentRun>
 
 #include "core/network.h"
@@ -84,6 +85,24 @@ struct StationEquality {
     return a->name == b->name;
   }
 };
+
+QStringList FilterGenres(const QStringList& genres) {
+  QStringList ret;
+  foreach (const QString& genre, genres) {
+    if (genre.length() < 2) continue;
+    if (genre.contains("ÃÂ")) continue;  // Broken unicode.
+    if (genre.contains(QRegExp("^#x[0-9a-f][0-9a-f]"))) continue;  // Broken XML entities.
+
+    // Convert 80 -> 80s.
+    if (genre.contains(QRegExp("^[0-9]0$"))) {
+      ret << genre + 's';
+    } else {
+      ret << genre;
+    }
+  }
+  return ret;
+}
+
 }
 
 void IcecastService::ParseDirectoryFinished() {
@@ -94,7 +113,8 @@ void IcecastService::ParseDirectoryFinished() {
   // Cluster stations by genre.
   QMultiHash<QString, const Station*> genres;
   foreach (const Station& s, all_stations) {
-    foreach (const QString& genre, s.genres) {
+    QStringList filtered_genres = FilterGenres(s.genres);
+    foreach (const QString& genre, filtered_genres) {
       genres.insert(genre, &s);
     }
   }
