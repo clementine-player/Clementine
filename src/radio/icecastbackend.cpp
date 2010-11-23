@@ -138,35 +138,37 @@ bool IcecastBackend::IsEmpty() {
 }
 
 void IcecastBackend::ClearAndAddStations(const StationList& stations) {
-  QMutexLocker l(db_->Mutex());
-  QSqlDatabase db = db_->Connect();
-  ScopedTransaction t(&db);
+  {
+    QMutexLocker l(db_->Mutex());
+    QSqlDatabase db = db_->Connect();
+    ScopedTransaction t(&db);
 
-  // Remove all existing items
-  QSqlQuery q(QString("DELETE FROM %1").arg(kTableName), db);
-  q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
-
-  q = QSqlQuery(QString("INSERT INTO %1 (name, url, mime_type, bitrate,"
-                        "                channels, samplerate, genre)"
-                        " VALUES (:name, :url, :mime_type, :bitrate,"
-                        "         :channels, :samplerate, :genre)")
-                .arg(kTableName), db);
-
-  // Add these ones
-  foreach (const Station& station, stations) {
-    q.bindValue(":name", station.name);
-    q.bindValue(":url", station.url);
-    q.bindValue(":mime_type", station.mime_type);
-    q.bindValue(":bitrate", station.bitrate);
-    q.bindValue(":channels", station.channels);
-    q.bindValue(":samplerate", station.samplerate);
-    q.bindValue(":genre", station.genre);
+    // Remove all existing items
+    QSqlQuery q(QString("DELETE FROM %1").arg(kTableName), db);
     q.exec();
     if (db_->CheckErrors(q.lastError())) return;
-  }
 
-  t.Commit();
+    q = QSqlQuery(QString("INSERT INTO %1 (name, url, mime_type, bitrate,"
+                          "                channels, samplerate, genre)"
+                          " VALUES (:name, :url, :mime_type, :bitrate,"
+                          "         :channels, :samplerate, :genre)")
+                  .arg(kTableName), db);
+
+    // Add these ones
+    foreach (const Station& station, stations) {
+      q.bindValue(":name", station.name);
+      q.bindValue(":url", station.url);
+      q.bindValue(":mime_type", station.mime_type);
+      q.bindValue(":bitrate", station.bitrate);
+      q.bindValue(":channels", station.channels);
+      q.bindValue(":samplerate", station.samplerate);
+      q.bindValue(":genre", station.genre);
+      q.exec();
+      if (db_->CheckErrors(q.lastError())) return;
+    }
+
+    t.Commit();
+  }
 
   emit DatabaseReset();
 }
