@@ -18,10 +18,13 @@
 #ifndef ICECASTSERVICE_H
 #define ICECASTSERVICE_H
 
+#include "icecastbackend.h"
 #include "radioservice.h"
 
 #include <QXmlStreamReader>
 
+class IcecastFilterWidget;
+class IcecastModel;
 class NetworkAccessManager;
 
 class IcecastService : public RadioService {
@@ -29,9 +32,6 @@ class IcecastService : public RadioService {
  public:
   IcecastService(RadioModel* parent);
   ~IcecastService();
-
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem* item);
 
   static const char* kServiceName;
   static const char* kDirectoryUrl;
@@ -41,28 +41,22 @@ class IcecastService : public RadioService {
     Type_Genre,
   };
 
- private:
-  struct Station {
-    Station()
-      : bitrate(0),
-        channels(0),
-        samplerate(0) {
-    }
-    QString name;
-    QUrl url;
-    QString mime_type;
-    int bitrate;
-    int channels;
-    int samplerate;
-    QStringList genres;
-  };
+  RadioItem* CreateRootItem(RadioItem* parent);
+  void LazyPopulate(RadioItem* item);
 
+  QWidget* HeaderWidget() const;
+
+ private:
   void LoadDirectory();
-  QList<Station> ParseDirectory(QIODevice* device) const;
-  Station ReadStation(QXmlStreamReader* reader) const;
+  IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
+  IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
 
   RadioItem* root_;
   NetworkAccessManager* network_;
+
+  IcecastBackend* backend_;
+  IcecastModel* model_;
+  IcecastFilterWidget* filter_;
 
   int load_directory_task_id_;
 

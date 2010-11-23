@@ -1,0 +1,142 @@
+/* This file is part of Clementine.
+   Copyright 2010, David Sansome <me@davidsansome.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "icecastbackend.h"
+#include "core/database.h"
+#include "core/scopedtransaction.h"
+
+#include <QSqlQuery>
+#include <QVariant>
+
+const char* IcecastBackend::kTableName = "icecast_stations";
+
+IcecastBackend::IcecastBackend(QObject* parent)
+  : QObject(parent)
+{
+}
+
+void IcecastBackend::Init(boost::shared_ptr<Database> db) {
+  db_ = db;
+}
+
+QStringList IcecastBackend::GetGenresAlphabetical() {
+  QStringList ret;
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db = db_->Connect();
+
+  QSqlQuery q(QString("SELECT DISTINCT genre FROM %1 ORDER BY genre")
+              .arg(kTableName), db);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return ret;
+
+  while (q.next()) {
+    ret << q.value(0).toString();
+  }
+  return ret;
+}
+
+QStringList IcecastBackend::GetGenresByPopularity() {
+  QStringList ret;
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db = db_->Connect();
+
+  QSqlQuery q(QString("SELECT genre, COUNT(*) AS count FROM %1 "
+                      " GROUP BY genre"
+                      " ORDER BY count DESC")
+              .arg(kTableName), db);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return ret;
+
+  while (q.next()) {
+    ret << q.value(0).toString();
+  }
+  return ret;
+}
+
+IcecastBackend::StationList IcecastBackend::GetStations(const QString& genre) {
+  StationList ret;
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db = db_->Connect();
+
+  QString sql = QString("SELECT name, url, mime_type, bitrate, channels,"
+                        "       samplerate, genre"
+                        " FROM %1").arg(kTableName);
+  if (!genre.isEmpty()) {
+    sql += " WHERE genre = :genre";
+  }
+  QSqlQuery q(sql, db);
+  if (!genre.isEmpty()) {
+    q.bindValue(":genre", genre);
+  }
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return ret;
+
+  while (q.next()) {
+    Station station;
+    station.name       = q.value(0).toString();
+    station.url        = q.value(1).toString();
+    station.mime_type  = q.value(2).toString();
+    station.bitrate    = q.value(3).toInt();
+    station.channels   = q.value(4).toInt();
+    station.samplerate = q.value(5).toInt();
+    station.genre      = q.value(6).toString();
+    ret << station;
+  }
+  return ret;
+}
+
+bool IcecastBackend::IsEmpty() {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db = db_->Connect();
+  QSqlQuery q(QString("SELECT ROWID FROM %1 LIMIT 1").arg(kTableName), db);
+  q.exec();
+  return !q.next();
+}
+
+void IcecastBackend::ClearAndAddStations(const StationList& stations) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db = db_->Connect();
+  ScopedTransaction t(&db);
+
+  // Remove all existing items
+  QSqlQuery q(QString("DELETE FROM %1").arg(kTableName), db);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return;
+
+  q = QSqlQuery(QString("INSERT INTO %1 (name, url, mime_type, bitrate,"
+                        "                channels, samplerate, genre)"
+                        " VALUES (:name, :url, :mime_type, :bitrate,"
+                        "         :channels, :samplerate, :genre)")
+                .arg(kTableName), db);
+
+  // Add these ones
+  foreach (const Station& station, stations) {
+    q.bindValue(":name", station.name);
+    q.bindValue(":url", station.url);
+    q.bindValue(":mime_type", station.mime_type);
+    q.bindValue(":bitrate", station.bitrate);
+    q.bindValue(":channels", station.channels);
+    q.bindValue(":samplerate", station.samplerate);
+    q.bindValue(":genre", station.genre);
+    q.exec();
+    if (db_->CheckErrors(q.lastError())) return;
+  }
+
+  t.Commit();
+
+  emit DatabaseReset();
+}

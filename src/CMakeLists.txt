@@ -119,6 +119,9 @@ set(SOURCES
   playlistparsers/xspfparser.cpp
 
   radio/fixlastfm.cpp
+  radio/icecastbackend.cpp
+  radio/icecastfilterwidget.cpp
+  radio/icecastmodel.cpp
   radio/icecastservice.cpp
   radio/jamendoservice.cpp
   radio/lastfmconfig.cpp
@@ -284,6 +287,9 @@ set(HEADERS
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
 
+  radio/icecastbackend.h
+  radio/icecastfilterwidget.h
+  radio/icecastmodel.h
   radio/icecastservice.h
   radio/jamendoservice.h
   radio/lastfmconfig.h
@@ -384,6 +390,7 @@ set(UI
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 
+  radio/icecastfilterwidget.ui
   radio/lastfmconfig.ui
   radio/lastfmstationdialog.ui
   radio/magnatuneconfig.ui
