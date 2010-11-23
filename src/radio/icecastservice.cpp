@@ -27,14 +27,18 @@ using std::unique;
 #include <QRegExp>
 #include <QtConcurrentRun>
 
+#include "radiomodel.h"
 #include "core/network.h"
+#include "core/taskmanager.h"
 
 const char* IcecastService::kServiceName = "Icecast";
 const char* IcecastService::kDirectoryUrl = "http://dir.xiph.org/yp.xml";
 
 IcecastService::IcecastService(RadioModel* parent)
     : RadioService(kServiceName, parent),
-      network_(new NetworkAccessManager(this)) {
+      network_(new NetworkAccessManager(this)),
+      load_directory_task_id_(0)
+{
 }
 
 IcecastService::~IcecastService() {
@@ -60,6 +64,10 @@ void IcecastService::LoadDirectory() {
   QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
+
+  if (!load_directory_task_id_)
+    load_directory_task_id_ = model()->task_manager()->StartTask(
+        tr("Downloading Icecast directory"));
 }
 
 void IcecastService::DownloadDirectoryFinished() {
@@ -204,6 +212,9 @@ void IcecastService::ParseDirectoryFinished() {
 
   root_->lazy_loaded = true;
   delete watcher;
+
+  model()->task_manager()->SetTaskFinished(load_directory_task_id_);
+  load_directory_task_id_ = 0;
 }
 
 QList<IcecastService::Station> IcecastService::ParseDirectory(QIODevice* device) const {

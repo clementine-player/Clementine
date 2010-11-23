@@ -26,6 +26,7 @@
 
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
+#include "core/taskmanager.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
@@ -46,6 +47,9 @@ const char* JamendoService::kFtsTable = "jamendo_songs_fts";
 
 const char* JamendoService::kSettingsGroup = "Jamendo";
 
+const int JamendoService::kBatchSize = 10000;
+const int JamendoService::kApproxDatabaseSize = 300000;
+
 JamendoService::JamendoService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       network_(new NetworkAccessManager(this)),
@@ -54,6 +58,7 @@ JamendoService::JamendoService(RadioModel* parent)
       library_filter_(NULL),
       library_model_(NULL),
       library_sort_model_(new QSortFilterProxyModel(this)),
+      load_database_task_id_(0),
       total_song_count_(0) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(parent->db_thread());
@@ -105,11 +110,26 @@ void JamendoService::DownloadDirectory() {
   QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
+  connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
+                 SLOT(DownloadDirectoryProgress(qint64,qint64)));
+
+  if (!load_database_task_id_)
+    load_database_task_id_ = model()->task_manager()->StartTask(
+        tr("Downloading Jamendo catalogue"));
+}
+
+void JamendoService::DownloadDirectoryProgress(qint64 received, qint64 total) {
+  float progress = float(received) / total;
+  model()->task_manager()->SetTaskProgress(load_database_task_id_,
+                                           int(progress * 100), 100);
 }
 
 void JamendoService::DownloadDirectoryFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   Q_ASSERT(reply);
+
+  model()->task_manager()->SetTaskFinished(load_database_task_id_);
+  load_database_task_id_ = 0;
 
   // TODO: Not leak reply.
   QtIOCompressor* gzip = new QtIOCompressor(reply);
@@ -120,25 +140,49 @@ void JamendoService::DownloadDirectoryFinished() {
     return;
   }
 
-  QFuture<SongList> future = QtConcurrent::run(
+  load_database_task_id_ = model()->task_manager()->StartTask(
+      tr("Parsing Jamendo catalogue"));
+
+  QFuture<void> future = QtConcurrent::run(
       this, &JamendoService::ParseDirectory, gzip);
-  QFutureWatcher<SongList>* watcher = new QFutureWatcher<SongList>();
+  QFutureWatcher<void>* watcher = new QFutureWatcher<void>();
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(ParseDirectoryFinished()));
 }
 
-SongList JamendoService::ParseDirectory(QIODevice* device) const {
-  SongList ret;
+void JamendoService::ParseDirectory(QIODevice* device) const {
+  int total_count = 0;
+
+  // Bit of a hack: don't update the model while we're parsing the xml
+  disconnect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
+             library_model_, SLOT(SongsDiscovered(SongList)));
+
+  SongList songs;
   QXmlStreamReader reader(device);
   while (!reader.atEnd()) {
     reader.readNext();
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
         reader.name() == "artist") {
-      ret << ReadArtist(&reader);
+      songs << ReadArtist(&reader);
+    }
+
+    if (songs.count() >= kBatchSize) {
+      // Add the songs to the database in batches
+      library_backend_->AddOrUpdateSongs(songs);
+      total_count += songs.count();
+      songs.clear();
+
+      // Update progress info
+      model()->task_manager()->SetTaskProgress(
+            load_database_task_id_, total_count, kApproxDatabaseSize);
     }
   }
-  library_backend_->AddOrUpdateSongs(ret);
-  return ret;
+
+  library_backend_->AddOrUpdateSongs(songs);
+
+  connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
+          library_model_, SLOT(SongsDiscovered(SongList)));
+  library_model_->Reset();
 }
 
 SongList JamendoService::ReadArtist(QXmlStreamReader* reader) const {
@@ -235,8 +279,10 @@ Song JamendoService::ReadTrack(const QString& artist,
 }
 
 void JamendoService::ParseDirectoryFinished() {
-  QFutureWatcher<SongList>* watcher = static_cast<QFutureWatcher<SongList>*>(sender());
-  SongList songs = watcher->result();
+  QFutureWatcher<void>* watcher = static_cast<QFutureWatcher<void>*>(sender());
+
+  model()->task_manager()->SetTaskFinished(load_database_task_id_);
+  load_database_task_id_ = 0;
 }
 
 void JamendoService::EnsureMenuCreated() {

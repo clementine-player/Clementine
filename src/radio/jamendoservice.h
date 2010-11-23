@@ -54,9 +54,12 @@ class JamendoService : public RadioService {
 
   static const char* kSettingsGroup;
 
+  static const int kBatchSize;
+  static const int kApproxDatabaseSize;
+
  private:
   void DownloadDirectory();
-  SongList ParseDirectory(QIODevice* device) const;
+  void ParseDirectory(QIODevice* device) const;
 
   SongList ReadArtist(QXmlStreamReader* reader) const;
   SongList ReadAlbum(const QString& artist, QXmlStreamReader* reader) const;
@@ -68,6 +71,7 @@ class JamendoService : public RadioService {
   void EnsureMenuCreated();
 
  private slots:
+  void DownloadDirectoryProgress(qint64 received, qint64 total);
   void DownloadDirectoryFinished();
   void ParseDirectoryFinished();
   void UpdateTotalSongCount(int count);
@@ -80,6 +84,8 @@ class JamendoService : public RadioService {
   LibraryFilterWidget* library_filter_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
+
+  int load_database_task_id_;
 
   int total_song_count_;
 };

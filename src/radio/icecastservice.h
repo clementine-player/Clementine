@@ -64,6 +64,8 @@ class IcecastService : public RadioService {
   RadioItem* root_;
   NetworkAccessManager* network_;
 
+  int load_directory_task_id_;
+
  private slots:
   void DownloadDirectoryFinished();
   void ParseDirectoryFinished();

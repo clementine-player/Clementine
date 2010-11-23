@@ -127,6 +127,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SetFilterText(const QString& text);
   void SetGroupBy(const LibraryModel::Grouping& g);
   void Init();
+  void Reset();
 
  protected:
   void LazyPopulate(LibraryItem* item) { LazyPopulate(item, true); }
@@ -137,7 +138,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsStatisticsChanged(const SongList& songs);
-  void Reset();
 
  private:
   void Initialise();
