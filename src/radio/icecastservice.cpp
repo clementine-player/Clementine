@@ -87,9 +87,10 @@ void IcecastService::LoadDirectory() {
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
 
-  if (!load_directory_task_id_)
+  if (!load_directory_task_id_) {
     load_directory_task_id_ = model()->task_manager()->StartTask(
         tr("Downloading Icecast directory"));
+  }
 }
 
 void IcecastService::DownloadDirectoryFinished() {

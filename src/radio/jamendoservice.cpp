@@ -113,9 +113,10 @@ void JamendoService::DownloadDirectory() {
   connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
                  SLOT(DownloadDirectoryProgress(qint64,qint64)));
 
-  if (!load_database_task_id_)
+  if (!load_database_task_id_) {
     load_database_task_id_ = model()->task_manager()->StartTask(
         tr("Downloading Jamendo catalogue"));
+  }
 }
 
 void JamendoService::DownloadDirectoryProgress(qint64 received, qint64 total) {
