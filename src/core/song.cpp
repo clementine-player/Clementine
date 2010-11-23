@@ -27,6 +27,7 @@
 #include <taglib/commentsframe.h>
 #include <taglib/fileref.h>
 #include <taglib/flacfile.h>
+#include <taglib/id3v1genres.h>
 #include <taglib/id3v2tag.h>
 #include <taglib/mp4file.h>
 #include <taglib/mpcfile.h>
@@ -194,6 +195,10 @@ void Song::Init(const QString& title, const QString& artist, const QString& albu
   d->artist_ = artist;
   d->album_ = album;
   d->length_ = length;
+}
+
+void Song::set_genre(int id) {
+  set_genre(TStringToQString(TagLib::ID3v1::genre(id)));
 }
 
 QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) {
@@ -905,7 +910,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":bitrate", intval(d->bitrate_));
   query->bindValue(":samplerate", intval(d->samplerate_));
 
-  query->bindValue(":directory_id", notnullintval(d->directory_id_));
+  query->bindValue(":directory", notnullintval(d->directory_id_));
   query->bindValue(":filename", d->filename_);
   query->bindValue(":mtime", notnullintval(d->mtime_));
   query->bindValue(":ctime", notnullintval(d->ctime_));

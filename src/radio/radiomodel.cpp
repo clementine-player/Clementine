@@ -15,15 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/mergedproxymodel.h"
+#include "icecastservice.h"
+#include "jamendoservice.h"
+#include "lastfmservice.h"
+#include "magnatuneservice.h"
+#include "radiomimedata.h"
 #include "radiomodel.h"
 #include "radioservice.h"
-#include "icecastservice.h"
-#include "lastfmservice.h"
-#include "somafmservice.h"
-#include "radiomimedata.h"
 #include "savedradio.h"
-#include "magnatuneservice.h"
-#include "core/mergedproxymodel.h"
+#include "somafmservice.h"
 
 #include <QMimeData>
 #include <QtDebug>
@@ -45,6 +46,7 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   AddService(new LastFMService(this));
   AddService(new SomaFMService(this));
   AddService(new MagnatuneService(this));
+  AddService(new JamendoService(this));
   AddService(new IcecastService(this));
   AddService(new SavedRadio(this));
 }

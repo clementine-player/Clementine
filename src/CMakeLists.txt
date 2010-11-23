@@ -120,6 +120,7 @@ set(SOURCES
 
   radio/fixlastfm.cpp
   radio/icecastservice.cpp
+  radio/jamendoservice.cpp
   radio/lastfmconfig.cpp
   radio/lastfmservice.cpp
   radio/lastfmstationdialog.cpp
@@ -284,6 +285,7 @@ set(HEADERS
   playlistparsers/xspfparser.h
 
   radio/icecastservice.h
+  radio/jamendoservice.h
   radio/lastfmconfig.h
   radio/lastfmservice.h
   radio/lastfmstationdialog.h
