@@ -130,6 +130,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
+  void SongChanged(const Song& song);
   void VolumeChanged(int volume);
 
   void LoadLibraryItemToPlaylist(const QModelIndexList& indexes);

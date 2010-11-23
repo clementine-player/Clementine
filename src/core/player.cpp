@@ -85,7 +85,7 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
     stream_change_type_(Engine::First),
     rain_stream_(-1),
     toad_stream_(-1),
-    volume_before_mute_(0)
+    volume_before_mute_(50)
 {
 #ifdef Q_WS_X11
   // MPRIS DBus interface.

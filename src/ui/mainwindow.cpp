@@ -357,6 +357,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
+  connect(playlists_, SIGNAL(CurrentSongChanged(Song)), SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
   connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
@@ -715,6 +716,8 @@ void MainWindow::AddDeviceSongsToPlaylist(bool clear_first, const SongList &song
 }
 
 void MainWindow::MediaStopped() {
+  setWindowTitle(QCoreApplication::applicationName());
+
   ui_->action_stop->setEnabled(false);
   ui_->action_stop_after_this_track->setEnabled(false);
   ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start"));
@@ -769,6 +772,10 @@ void MainWindow::MediaPlaying() {
 
 void MainWindow::VolumeChanged(int volume) {
   ui_->action_mute->setChecked(!volume);
+}
+
+void MainWindow::SongChanged(const Song& song) {
+  setWindowTitle(song.PrettyTitleWithArtist());
 }
 
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
