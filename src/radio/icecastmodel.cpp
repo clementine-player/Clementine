@@ -45,6 +45,8 @@ void IcecastModel::Reset() {
   root_->lazy_loaded = false;
 
   LazyPopulate(root_);
+
+  reset();
 }
 
 void IcecastModel::LazyPopulate(IcecastItem* parent) {
@@ -63,11 +65,11 @@ void IcecastModel::LazyPopulate(IcecastItem* parent) {
     case IcecastItem::Type_Root:
       switch (sort_mode_) {
         case SortMode_GenreAlphabetical:
-          AddGenres(backend_->GetGenresAlphabetical());
+          AddGenres(backend_->GetGenresAlphabetical(filter_));
           break;
 
         case SortMode_GenreByPopularity:
-          AddGenres(backend_->GetGenresByPopularity());
+          AddGenres(backend_->GetGenresByPopularity(filter_));
           break;
 
         case SortMode_StationAlphabetical:
@@ -79,7 +81,7 @@ void IcecastModel::LazyPopulate(IcecastItem* parent) {
 }
 
 void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre) {
-  IcecastBackend::StationList stations = backend_->GetStations(genre);
+  IcecastBackend::StationList stations = backend_->GetStations(filter_, genre);
   foreach (const IcecastBackend::Station& station, stations) {
     IcecastItem* item = new IcecastItem(IcecastItem::Type_Station, parent);
     item->display_text = station.name;
@@ -115,4 +117,14 @@ QVariant IcecastModel::data(const IcecastItem* item, int role) const {
       break;
   }
   return QVariant();
+}
+
+void IcecastModel::SetFilterText(const QString& filter) {
+  filter_ = filter;
+  Reset();
+}
+
+void IcecastModel::SetSortMode(SortMode mode) {
+  sort_mode_ = mode;
+  Reset();
 }

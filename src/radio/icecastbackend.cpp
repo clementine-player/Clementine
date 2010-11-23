@@ -33,13 +33,21 @@ void IcecastBackend::Init(boost::shared_ptr<Database> db) {
   db_ = db;
 }
 
-QStringList IcecastBackend::GetGenresAlphabetical() {
+QStringList IcecastBackend::GetGenresAlphabetical(const QString& filter) {
   QStringList ret;
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db = db_->Connect();
 
-  QSqlQuery q(QString("SELECT DISTINCT genre FROM %1 ORDER BY genre")
-              .arg(kTableName), db);
+  QString where = filter.isEmpty() ? "" : "WHERE name LIKE :filter";
+
+  QString sql = QString("SELECT DISTINCT genre FROM %1 %2 ORDER BY genre")
+      .arg(kTableName, where);
+
+  QSqlQuery q(sql, db);
+  if (!filter.isEmpty()) {
+    q.bindValue(":filter", "%" + filter + "%");
+  }
+
   q.exec();
   if (db_->CheckErrors(q.lastError())) return ret;
 
@@ -49,15 +57,22 @@ QStringList IcecastBackend::GetGenresAlphabetical() {
   return ret;
 }
 
-QStringList IcecastBackend::GetGenresByPopularity() {
+QStringList IcecastBackend::GetGenresByPopularity(const QString& filter) {
   QStringList ret;
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db = db_->Connect();
 
-  QSqlQuery q(QString("SELECT genre, COUNT(*) AS count FROM %1 "
-                      " GROUP BY genre"
-                      " ORDER BY count DESC")
-              .arg(kTableName), db);
+  QString where = filter.isEmpty() ? "" : "WHERE name LIKE :filter";
+
+  QString sql = QString("SELECT genre, COUNT(*) AS count FROM %1 "
+                        " %2"
+                        " GROUP BY genre"
+                        " ORDER BY count DESC").arg(kTableName, where);
+  QSqlQuery q(sql, db);
+  if (!filter.isEmpty()) {
+    q.bindValue(":filter", "%" + filter + "%");
+  }
+
   q.exec();
   if (db_->CheckErrors(q.lastError())) return ret;
 
@@ -67,21 +82,36 @@ QStringList IcecastBackend::GetGenresByPopularity() {
   return ret;
 }
 
-IcecastBackend::StationList IcecastBackend::GetStations(const QString& genre) {
+IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
+                                                        const QString& genre) {
   StationList ret;
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db = db_->Connect();
 
+  QStringList where_clauses;
+  QStringList bound_items;
+
+  if (!genre.isEmpty()) {
+    where_clauses << "genre = :genre";
+    bound_items << genre;
+  }
+  if (!filter.isEmpty()) {
+    where_clauses << "name LIKE :filter";
+    bound_items << "%" + filter + "%";
+  }
+
   QString sql = QString("SELECT name, url, mime_type, bitrate, channels,"
                         "       samplerate, genre"
                         " FROM %1").arg(kTableName);
-  if (!genre.isEmpty()) {
-    sql += " WHERE genre = :genre";
+
+  if (!where_clauses.isEmpty()) {
+    sql += " WHERE " + where_clauses.join(" AND ");
   }
   QSqlQuery q(sql, db);
-  if (!genre.isEmpty()) {
-    q.bindValue(":genre", genre);
+  foreach (const QString& value, bound_items) {
+    q.addBindValue(value);
   }
+
   q.exec();
   if (db_->CheckErrors(q.lastError())) return ret;
 

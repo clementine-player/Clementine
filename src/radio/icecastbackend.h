@@ -51,9 +51,10 @@ public:
   };
   typedef QList<Station> StationList;
 
-  QStringList GetGenresAlphabetical();
-  QStringList GetGenresByPopularity();
-  StationList GetStations(const QString& genre = QString());
+  QStringList GetGenresAlphabetical(const QString& filter = QString());
+  QStringList GetGenresByPopularity(const QString& filter = QString());
+  StationList GetStations(const QString& filter = QString(),
+                          const QString& genre = QString());
 
   void ClearAndAddStations(const StationList& stations);
 

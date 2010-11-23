@@ -18,11 +18,15 @@
 #ifndef ICECASTFILTERWIDGET_H
 #define ICECASTFILTERWIDGET_H
 
+#include "icecastmodel.h"
+
 #include <QWidget>
 
-class IcecastModel;
 class LineEditInterface;
 class Ui_IcecastFilterWidget;
+
+class QActionGroup;
+class QSignalMapper;
 
 class IcecastFilterWidget : public QWidget {
   Q_OBJECT
@@ -35,10 +39,16 @@ public:
 
 private slots:
   void ClearFilter();
+  void SortModeChanged(int mode);
+
+private:
+  void AddAction(QActionGroup* group, QAction* action, IcecastModel::SortMode mode);
 
 private:
   Ui_IcecastFilterWidget* ui_;
   IcecastModel* model_;
+
+  QSignalMapper* sort_mode_mapper_;
 
   LineEditInterface* filter_;
 };

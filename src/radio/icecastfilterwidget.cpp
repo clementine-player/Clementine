@@ -15,16 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "icecastmodel.h"
 #include "icecastfilterwidget.h"
 #include "ui_icecastfilterwidget.h"
 #include "ui/iconloader.h"
 #include "widgets/maclineedit.h"
 
 #include <QMenu>
+#include <QSignalMapper>
 
 IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   : QWidget(parent),
-    ui_(new Ui_IcecastFilterWidget)
+    ui_(new Ui_IcecastFilterWidget),
+    sort_mode_mapper_(new QSignalMapper(this))
 {
   ui_->setupUi(this);
   connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
@@ -33,12 +36,18 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   ui_->options->setIcon(IconLoader::Load("configure"));
 
-  QMenu* options_menu = new QMenu(this);
-  options_menu->addAction(ui_->action_sort_genre_popularity);
-  options_menu->addAction(ui_->action_sort_genre_alphabetically);
-  options_menu->addAction(ui_->action_sort_station);
+  // Options actions
+  QActionGroup* group = new QActionGroup(this);
+  AddAction(group, ui_->action_sort_genre_popularity, IcecastModel::SortMode_GenreByPopularity);
+  AddAction(group, ui_->action_sort_genre_alphabetically, IcecastModel::SortMode_GenreAlphabetical);
+  AddAction(group, ui_->action_sort_station, IcecastModel::SortMode_StationAlphabetical);
 
+  // Options menu
+  QMenu* options_menu = new QMenu(this);
+  options_menu->addActions(group->actions());
   ui_->options->setMenu(options_menu);
+
+  connect(sort_mode_mapper_, SIGNAL(mapped(int)), SLOT(SortModeChanged(int)));
 
 #ifdef Q_OS_DARWIN
   delete ui_->filter;
@@ -51,15 +60,28 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
 #endif
 }
 
+void IcecastFilterWidget::AddAction(
+    QActionGroup* group, QAction* action, IcecastModel::SortMode mode) {
+  group->addAction(action);
+  sort_mode_mapper_->setMapping(action, mode);
+  connect(action, SIGNAL(triggered()), sort_mode_mapper_, SLOT(map()));
+}
+
 IcecastFilterWidget::~IcecastFilterWidget() {
   delete ui_;
 }
 
 void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
   model_ = model;
+  connect(filter_->object(), SIGNAL(textChanged(QString)),
+          model_, SLOT(SetFilterText(QString)));
 }
 
 void IcecastFilterWidget::ClearFilter() {
   filter_->clear();
   filter_->setFocus();
+}
+
+void IcecastFilterWidget::SortModeChanged(int mode) {
+  model_->SetSortMode(IcecastModel::SortMode(mode));
 }

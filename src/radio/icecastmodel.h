@@ -34,8 +34,8 @@ public:
 
   // These values get saved in QSettings - don't change them
   enum SortMode {
-    SortMode_GenreAlphabetical = 0,
-    SortMode_GenreByPopularity = 1,
+    SortMode_GenreByPopularity = 0,
+    SortMode_GenreAlphabetical = 1,
     SortMode_StationAlphabetical = 2,
   };
 
@@ -52,6 +52,9 @@ public slots:
   void Init();
   void Reset();
 
+  void SetFilterText(const QString& filter);
+  void SetSortMode(SortMode mode);
+
 protected:
   void LazyPopulate(IcecastItem* parent);
 
@@ -63,6 +66,7 @@ private:
 private:
   IcecastBackend* backend_;
 
+  QString filter_;
   SortMode sort_mode_;
 
   QIcon genre_icon_;
