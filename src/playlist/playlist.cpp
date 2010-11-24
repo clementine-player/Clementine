@@ -575,9 +575,9 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     // Dragged from a library
     // We want to check if these songs are from the actual local file backend,
     // if they are we treat them differently.
-    if (song_data->backend->songs_table() == Library::kSongsTable)
+    if (song_data->backend && song_data->backend->songs_table() == Library::kSongsTable)
       InsertLibraryItems(song_data->songs, row);
-    else if (song_data->backend->songs_table() == MagnatuneService::kSongsTable)
+    else if (song_data->backend && song_data->backend->songs_table() == MagnatuneService::kSongsTable)
       InsertMagnatuneItems(song_data->songs, row);
     else
       InsertSongs(song_data->songs, row);

@@ -17,7 +17,7 @@
 
 #include "icecastbackend.h"
 #include "icecastmodel.h"
-
+#include "playlist/songmimedata.h"
 IcecastModel::IcecastModel(IcecastBackend* backend, QObject* parent)
   : SimpleTreeModel<IcecastItem>(new IcecastItem(this), parent),
     backend_(backend),
@@ -84,6 +84,7 @@ void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre) {
   IcecastBackend::StationList stations = backend_->GetStations(filter_, genre);
   foreach (const IcecastBackend::Station& station, stations) {
     IcecastItem* item = new IcecastItem(IcecastItem::Type_Station, parent);
+    item->station = station;
     item->display_text = station.name;
     item->sort_text = station.name;
     item->key = station.url.toString();
@@ -127,4 +128,41 @@ void IcecastModel::SetFilterText(const QString& filter) {
 void IcecastModel::SetSortMode(SortMode mode) {
   sort_mode_ = mode;
   Reset();
+}
+
+Qt::ItemFlags IcecastModel::flags(const QModelIndex& index) const {
+  switch (IndexToItem(index)->type) {
+  case IcecastItem::Type_Station:
+    return Qt::ItemIsSelectable |
+           Qt::ItemIsEnabled |
+           Qt::ItemIsDragEnabled;
+  case IcecastItem::Type_Genre:
+  case IcecastItem::Type_Root:
+  default:
+    return Qt::ItemIsEnabled;
+  }
+}
+
+QStringList IcecastModel::mimeTypes() const {
+  return QStringList() << "text/uri-list";
+}
+
+QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
+  if (indexes.isEmpty())
+    return NULL;
+
+  SongMimeData* data = new SongMimeData;
+  QList<QUrl> urls;
+
+  foreach (const QModelIndex& index, indexes) {
+    IcecastItem* item = IndexToItem(index);
+    if (!item)
+      continue;
+
+    data->songs << item->station.ToSong();
+    urls << item->station.url;
+  }
+
+  data->setUrls(urls);
+  return data;
 }

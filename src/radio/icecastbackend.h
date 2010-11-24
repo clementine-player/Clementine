@@ -18,6 +18,8 @@
 #ifndef ICECASTBACKEND_H
 #define ICECASTBACKEND_H
 
+#include "core/song.h"
+
 #include <QObject>
 #include <QUrl>
 
@@ -48,6 +50,8 @@ public:
     int channels;
     int samplerate;
     QString genre;
+
+    Song ToSong() const;
   };
   typedef QList<Station> StationList;
 

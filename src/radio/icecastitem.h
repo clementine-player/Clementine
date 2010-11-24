@@ -18,6 +18,7 @@
 #ifndef ICECASTITEM_H
 #define ICECASTITEM_H
 
+#include "icecastbackend.h"
 #include "core/simpletreeitem.h"
 
 class IcecastItem : public SimpleTreeItem<IcecastItem> {
@@ -32,6 +33,8 @@ public:
     : SimpleTreeItem<IcecastItem>(Type_Root, model) {}
   IcecastItem(Type type, IcecastItem* parent = NULL)
     : SimpleTreeItem<IcecastItem>(type, parent) {}
+
+  IcecastBackend::Station station;
 };
 
 #endif // ICECASTITEM_H

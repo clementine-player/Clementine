@@ -43,10 +43,9 @@ public:
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-  /*Qt::ItemFlags flags(const QModelIndex& index) const;
+  Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
-  bool canFetchMore(const QModelIndex &parent) const;*/
 
 public slots:
   void Init();
