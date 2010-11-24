@@ -46,43 +46,34 @@ LibraryItemDelegate::LibraryItemDelegate(QObject *parent)
 }
 
 void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt, const QModelIndex &index) const {
-  LibraryItem::Type type =
-      static_cast<LibraryItem::Type>(index.data(LibraryModel::Role_Type).toInt());
+  const bool is_divider = index.data(LibraryModel::Role_IsDivider).toBool();
 
-  switch (type) {
-    case LibraryItem::Type_Divider: {
-      QString text(index.data().toString());
+  if (is_divider) {
+    QString text(index.data().toString());
 
-      // Draw the background
-      //QStyledItemDelegate::paint(painter, opt, QModelIndex());
+    painter->save();
 
-      painter->save();
+    // Draw the text
+    QFont bold_font(opt.font);
+    bold_font.setBold(true);
 
-      // Draw the text
-      QFont bold_font(opt.font);
-      bold_font.setBold(true);
+    QRect text_rect(opt.rect);
+    text_rect.setLeft(text_rect.left() + 30);
 
-      QRect text_rect(opt.rect);
-      text_rect.setLeft(text_rect.left() + 30);
+    painter->setPen(opt.palette.color(QPalette::Text));
+    painter->setFont(bold_font);
+    painter->drawText(text_rect, text);
 
-      painter->setPen(opt.palette.color(QPalette::Text));
-      painter->setFont(bold_font);
-      painter->drawText(text_rect, text);
+    // Draw the line under the item
+    QPen line_pen(opt.palette.color(QPalette::Dark));
+    line_pen.setWidth(2);
 
-      //Draw the line under the item
-      QPen line_pen(opt.palette.color(QPalette::Dark));
-      line_pen.setWidth(2);
+    painter->setPen(line_pen);
+    painter->drawLine(opt.rect.bottomLeft(), opt.rect.bottomRight());
 
-      painter->setPen(line_pen);
-      painter->drawLine(opt.rect.bottomLeft(), opt.rect.bottomRight());
-
-      painter->restore();
-      break;
-    }
-
-    default:
-      QStyledItemDelegate::paint(painter, opt, index);
-      break;
+    painter->restore();
+  } else {
+    QStyledItemDelegate::paint(painter, opt, index);
   }
 }
 

@@ -27,6 +27,7 @@ public:
     Type_Root,
     Type_Genre,
     Type_Station,
+    Type_Divider,
   };
 
   IcecastItem(SimpleTreeModel<IcecastItem>* model)

@@ -57,6 +57,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     Role_SortText,
     Role_Key,
     Role_Artist,
+    Role_IsDivider,
 
     LastRole
   };

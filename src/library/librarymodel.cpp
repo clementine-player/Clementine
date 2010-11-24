@@ -367,6 +367,9 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
     case Role_Type:
       return item->type;
 
+    case Role_IsDivider:
+      return item->type == LibraryItem::Type_Divider;
+
     case Role_ContainerType:
       return container_type;
 

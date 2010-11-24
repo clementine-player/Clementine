@@ -59,30 +59,42 @@ void IcecastModel::LazyPopulate(IcecastItem* parent) {
       return;
 
     case IcecastItem::Type_Genre:
-      PopulateGenre(parent, parent->key);
+      PopulateGenre(parent, parent->key, false);
       break;
 
     case IcecastItem::Type_Root:
       switch (sort_mode_) {
         case SortMode_GenreAlphabetical:
-          AddGenres(backend_->GetGenresAlphabetical(filter_));
+          AddGenres(backend_->GetGenresAlphabetical(filter_), true);
           break;
 
         case SortMode_GenreByPopularity:
-          AddGenres(backend_->GetGenresByPopularity(filter_));
+          AddGenres(backend_->GetGenresByPopularity(filter_), false);
           break;
 
         case SortMode_StationAlphabetical:
-          PopulateGenre(parent, QString());
+          PopulateGenre(parent, QString(), true);
           break;
       }
       break;
   }
 }
 
-void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre) {
+void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre,
+                                 bool create_dividers) {
+  QChar last_divider;
+
   IcecastBackend::StationList stations = backend_->GetStations(filter_, genre);
   foreach (const IcecastBackend::Station& station, stations) {
+    QChar divider_char = DividerKey(station.name);
+    if (create_dividers && !divider_char.isNull() && divider_char != last_divider) {
+      last_divider = divider_char;
+
+      IcecastItem* divider = new IcecastItem(IcecastItem::Type_Divider, parent);
+      divider->display_text = DividerDisplayText(divider_char);
+      divider->lazy_loaded = true;
+    }
+
     IcecastItem* item = new IcecastItem(IcecastItem::Type_Station, parent);
     item->station = station;
     item->display_text = station.name;
@@ -92,11 +104,45 @@ void IcecastModel::PopulateGenre(IcecastItem* parent, const QString& genre) {
   }
 }
 
-void IcecastModel::AddGenres(const QStringList& genres) {
+void IcecastModel::AddGenres(const QStringList& genres, bool create_dividers) {
+  QChar last_divider;
+
   foreach (const QString& genre, genres) {
+    QChar divider_char = DividerKey(genre);
+    if (create_dividers && divider_char != last_divider) {
+      last_divider = divider_char;
+
+      IcecastItem* divider = new IcecastItem(IcecastItem::Type_Divider, root_);
+      divider->display_text = DividerDisplayText(divider_char);
+      divider->lazy_loaded = true;
+    }
+
     IcecastItem* item = new IcecastItem(IcecastItem::Type_Genre, root_);
     item->key = genre;
   }
+}
+
+QChar IcecastModel::DividerKey(const QString& text) {
+  if (text.isEmpty())
+    return QChar();
+
+  QChar c;
+  c = text[0];
+
+  if (c.isDigit())
+    return '0';
+  if (c.isPunct() || c.isSymbol())
+    return QChar();
+
+  if (c.decompositionTag() != QChar::NoDecomposition)
+    return QChar(c.decomposition()[0]);
+  return c.toUpper();
+}
+
+QString IcecastModel::DividerDisplayText(const QChar& key) {
+  if (key == '0')
+    return "0-9";
+  return key;
 }
 
 QVariant IcecastModel::data(const QModelIndex& index, int role) const {
@@ -116,6 +162,9 @@ QVariant IcecastModel::data(const IcecastItem* item, int role) const {
         case IcecastItem::Type_Station: return station_icon_;
       }
       break;
+
+    case Role_IsDivider:
+      return item->type == IcecastItem::Type_Divider;
   }
   return QVariant();
 }
@@ -138,6 +187,7 @@ Qt::ItemFlags IcecastModel::flags(const QModelIndex& index) const {
            Qt::ItemIsDragEnabled;
   case IcecastItem::Type_Genre:
   case IcecastItem::Type_Root:
+  case IcecastItem::Type_Divider:
   default:
     return Qt::ItemIsEnabled;
   }

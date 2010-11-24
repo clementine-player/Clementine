@@ -20,6 +20,7 @@
 
 #include "icecastitem.h"
 #include "core/simpletreemodel.h"
+#include "library/librarymodel.h"
 
 #include <QIcon>
 
@@ -37,6 +38,10 @@ public:
     SortMode_GenreByPopularity = 0,
     SortMode_GenreAlphabetical = 1,
     SortMode_StationAlphabetical = 2,
+  };
+
+  enum Role {
+    Role_IsDivider = LibraryModel::Role_IsDivider,
   };
 
   IcecastBackend* backend() const { return backend_; }
@@ -61,8 +66,11 @@ protected:
 
 private:
   QVariant data(const IcecastItem* item, int role) const;
-  void PopulateGenre(IcecastItem* parent, const QString& genre);
-  void AddGenres(const QStringList& genres);
+  void PopulateGenre(IcecastItem* parent, const QString& genre, bool create_dividers);
+  void AddGenres(const QStringList& genres, bool create_separators);
+
+  static QChar DividerKey(const QString& text);
+  static QString DividerDisplayText(const QChar& key);
 
 private:
   IcecastBackend* backend_;
