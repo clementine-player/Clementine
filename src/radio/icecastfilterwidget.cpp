@@ -22,7 +22,10 @@
 #include "widgets/maclineedit.h"
 
 #include <QMenu>
+#include <QSettings>
 #include <QSignalMapper>
+
+const char* IcecastFilterWidget::kSettingsGroup = "Icecast";
 
 IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   : QWidget(parent),
@@ -75,6 +78,23 @@ void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
   model_ = model;
   connect(filter_->object(), SIGNAL(textChanged(QString)),
           model_, SLOT(SetFilterText(QString)));
+
+  // Load settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  switch (s.value("sort_by", IcecastModel::SortMode_GenreByPopularity).toInt()) {
+    case IcecastModel::SortMode_GenreByPopularity:
+      ui_->action_sort_genre_popularity->trigger();
+      break;
+
+    case IcecastModel::SortMode_GenreAlphabetical:
+      ui_->action_sort_genre_alphabetically->trigger();
+      break;
+
+    case IcecastModel::SortMode_StationAlphabetical:
+      ui_->action_sort_station->trigger();
+      break;
+  }
 }
 
 void IcecastFilterWidget::ClearFilter() {
@@ -84,4 +104,8 @@ void IcecastFilterWidget::ClearFilter() {
 
 void IcecastFilterWidget::SortModeChanged(int mode) {
   model_->SetSortMode(IcecastModel::SortMode(mode));
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("sort_by", mode);
 }

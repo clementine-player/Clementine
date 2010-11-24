@@ -35,6 +35,8 @@ public:
   IcecastFilterWidget(QWidget* parent = 0);
   ~IcecastFilterWidget();
 
+  static const char* kSettingsGroup;
+
   void SetIcecastModel(IcecastModel* model);
 
 private slots:
