@@ -21,7 +21,9 @@
 using std::sort;
 using std::unique;
 
+#include <QDesktopServices>
 #include <QFutureWatcher>
+#include <QMenu>
 #include <QMultiHash>
 #include <QNetworkReply>
 #include <QRegExp>
@@ -34,13 +36,17 @@ using std::unique;
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
 #include "core/taskmanager.h"
+#include "playlist/songplaylistitem.h"
+#include "ui/iconloader.h"
 
 const char* IcecastService::kServiceName = "Icecast";
 const char* IcecastService::kDirectoryUrl = "http://dir.xiph.org/yp.xml";
+const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 
 IcecastService::IcecastService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       network_(new NetworkAccessManager(this)),
+      context_menu_(NULL),
       backend_(NULL),
       model_(NULL),
       filter_(new IcecastFilterWidget(0)),
@@ -251,4 +257,44 @@ IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader) co
 
 QWidget* IcecastService::HeaderWidget() const {
   return filter_;
+}
+
+void IcecastService::ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                                     const QPoint& global_pos) {
+  EnsureMenuCreated();
+
+  if (index.model() == model_)
+    context_item_ = index;
+  else
+    context_item_ = QModelIndex();
+
+  add_to_playlist_->setEnabled(context_item_.isValid() &&
+                               model_->GetSong(context_item_).is_valid());
+  context_menu_->popup(global_pos);
+}
+
+void IcecastService::EnsureMenuCreated() {
+  if (context_menu_)
+    return;
+
+  context_menu_ = new QMenu;
+
+  add_to_playlist_ = context_menu_->addAction(
+      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open dir.xiph.org in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh station list"), this, SLOT(LoadDirectory()));
+}
+
+void IcecastService::Homepage() {
+  QDesktopServices::openUrl(QUrl(kHomepage));
+}
+
+void IcecastService::AddToPlaylist() {
+  Song song(model_->GetSong(context_item_));
+  if (!song.is_valid())
+    return;
+
+  emit AddItemsToPlaylist(PlaylistItemList() <<
+                          PlaylistItemPtr(new SongPlaylistItem(song)));
 }

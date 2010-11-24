@@ -41,6 +41,8 @@ public:
 
   IcecastBackend* backend() const { return backend_; }
 
+  Song GetSong(const QModelIndex& index) const;
+
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
   Qt::ItemFlags flags(const QModelIndex& index) const;

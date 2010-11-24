@@ -156,13 +156,26 @@ QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
 
   foreach (const QModelIndex& index, indexes) {
     IcecastItem* item = IndexToItem(index);
-    if (!item)
+    if (!item || item->type != IcecastItem::Type_Station)
       continue;
 
     data->songs << item->station.ToSong();
     urls << item->station.url;
   }
 
+  if (data->songs.isEmpty()) {
+    delete data;
+    return NULL;
+  }
+
   data->setUrls(urls);
   return data;
+}
+
+Song IcecastModel::GetSong(const QModelIndex& index) const {
+  IcecastItem* item = IndexToItem(index);
+  if (!item || item->type != IcecastItem::Type_Station)
+    return Song();
+
+  return item->station.ToSong();
 }

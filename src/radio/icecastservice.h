@@ -27,6 +27,9 @@ class IcecastFilterWidget;
 class IcecastModel;
 class NetworkAccessManager;
 
+class QAction;
+class QMenu;
+
 class IcecastService : public RadioService {
   Q_OBJECT
  public:
@@ -35,6 +38,7 @@ class IcecastService : public RadioService {
 
   static const char* kServiceName;
   static const char* kDirectoryUrl;
+  static const char* kHomepage;
 
   enum ItemType {
     Type_Stream = 3000,
@@ -44,15 +48,26 @@ class IcecastService : public RadioService {
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
 
+  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                       const QPoint& global_pos);
+
   QWidget* HeaderWidget() const;
 
- private:
+ private slots:
   void LoadDirectory();
+  void Homepage();
+  void AddToPlaylist();
+
+ private:
+  void EnsureMenuCreated();
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
   IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
 
   RadioItem* root_;
   NetworkAccessManager* network_;
+  QMenu* context_menu_;
+  QModelIndex context_item_;
+  QAction* add_to_playlist_;
 
   IcecastBackend* backend_;
   IcecastModel* model_;
