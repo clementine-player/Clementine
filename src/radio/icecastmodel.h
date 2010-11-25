@@ -67,7 +67,7 @@ protected:
 private:
   QVariant data(const IcecastItem* item, int role) const;
   void PopulateGenre(IcecastItem* parent, const QString& genre, bool create_dividers);
-  void AddGenres(const QStringList& genres, bool create_separators);
+  void AddGenres(const QStringList& genres, bool create_dividers);
 
   static QChar DividerKey(const QString& text);
   static QString DividerDisplayText(const QChar& key);
