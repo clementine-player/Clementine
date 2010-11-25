@@ -90,6 +90,7 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
 
   QSqlQuery q("SELECT songs.ROWID, " + Song::JoinSpec("songs") + ","
               "       magnatune_songs.ROWID, " + Song::JoinSpec("magnatune_songs") + ","
+              "       jamendo_songs.ROWID, " + Song::JoinSpec("jamendo_songs") + ","
               "       p.type, p.url, p.title, p.artist, p.album, p.length,"
               "       p.radio_service"
               " FROM playlist_items AS p"
@@ -97,6 +98,8 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
               "    ON p.library_id = songs.ROWID"
               " LEFT JOIN magnatune_songs"
               "    ON p.library_id = magnatune_songs.ROWID"
+              " LEFT JOIN jamendo_songs"
+              "    ON p.library_id = jamendo_songs.ROWID"
               " WHERE p.playlist = :playlist", db);
   q.bindValue(":playlist", playlist);
   q.exec();
@@ -113,8 +116,8 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
 }
 
 PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row) {
-  // The song tables gets joined first, plus one each for the song ROWIDs
-  const int playlist_row = (Song::kColumns.count() + 1) * 2;
+  // The song tables get joined first, plus one each for the song ROWIDs
+  const int playlist_row = (Song::kColumns.count() + 1) * 3;
 
   PlaylistItemPtr item(
       PlaylistItem::NewFromType(row.value(playlist_row).toString()));

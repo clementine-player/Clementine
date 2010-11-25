@@ -150,7 +150,6 @@ class Playlist : public QAbstractListModel {
   // Changing the playlist
   QModelIndex InsertItems(const PlaylistItemList& items, int pos = -1);
   QModelIndex InsertLibraryItems(const SongList& items, int pos = -1);
-  QModelIndex InsertMagnatuneItems(const SongList& items, int pos = -1);
   QModelIndex InsertSongs(const SongList& items, int pos = -1);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1, bool play_now = false);
   void InsertSmartPlaylist(smart_playlists::GeneratorPtr generator, int pos = -1, bool play_now = false);

@@ -18,6 +18,7 @@
 #include "playlistitem.h"
 #include "songplaylistitem.h"
 #include "library/libraryplaylistitem.h"
+#include "radio/jamendoplaylistitem.h"
 #include "radio/magnatuneplaylistitem.h"
 #include "radio/radioplaylistitem.h"
 
@@ -35,6 +36,8 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
     return new LibraryPlaylistItem(type);
   if (type == "Magnatune")
     return new MagnatunePlaylistItem(type);
+  if (type == "Jamendo")
+    return new JamendoPlaylistItem(type);
   if (type == "Stream" || type == "File")
     return new SongPlaylistItem(type);
   if (type == "Radio")

@@ -15,40 +15,26 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "magnatuneplaylistitem.h"
-#include "magnatuneservice.h"
-#include "radiomodel.h"
+#include "jamendoplaylistitem.h"
 
-MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)
+JamendoPlaylistItem::JamendoPlaylistItem(const QString& type)
   : LibraryPlaylistItem(type)
 {
 }
 
-MagnatunePlaylistItem::MagnatunePlaylistItem(const Song& song)
-  : LibraryPlaylistItem("Magnatune")
+JamendoPlaylistItem::JamendoPlaylistItem(const Song& song)
+  : LibraryPlaylistItem("Jamendo")
 {
   song_ = song;
 }
 
-bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
+bool JamendoPlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
-  song_.InitFromQuery(query, Song::kColumns.count() + 1);
+  song_.InitFromQuery(query, (Song::kColumns.count() + 1) * 2);
 
   return song_.is_valid();
 }
 
-PlaylistItem::Options MagnatunePlaylistItem::options() const {
-  return SpecialPlayBehaviour;
-}
-
-QUrl MagnatunePlaylistItem::Url() const {
+QUrl JamendoPlaylistItem::Url() const {
   return QUrl::fromEncoded(song_.filename().toAscii());
-}
-
-PlaylistItem::SpecialLoadResult MagnatunePlaylistItem::StartLoading() {
-  MagnatuneService* service = RadioModel::Service<MagnatuneService>();
-  QUrl url(Url());
-
-  return SpecialLoadResult(PlaylistItem::SpecialLoadResult::TrackAvailable,
-                           url, service->ModifyUrl(url));
 }

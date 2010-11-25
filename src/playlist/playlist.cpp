@@ -28,8 +28,10 @@
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "library/libraryplaylistitem.h"
-#include "radio/magnatuneservice.h"
+#include "radio/jamendoplaylistitem.h"
+#include "radio/jamendoservice.h"
 #include "radio/magnatuneplaylistitem.h"
+#include "radio/magnatuneservice.h"
 #include "radio/radiomimedata.h"
 #include "radio/radiomodel.h"
 #include "radio/radioplaylistitem.h"
@@ -103,6 +105,15 @@ Playlist::Playlist(PlaylistBackend* backend,
 Playlist::~Playlist() {
   items_.clear();
   library_items_by_id_.clear();
+}
+
+template<typename T>
+QModelIndex InsertSongItems(Playlist* playlist, const SongList& songs, int pos) {
+  PlaylistItemList items;
+  foreach (const Song& song, songs) {
+    items << shared_ptr<PlaylistItem>(new T(song));
+  }
+  return playlist->InsertItems(items, pos);
 }
 
 QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
@@ -576,11 +587,13 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     // We want to check if these songs are from the actual local file backend,
     // if they are we treat them differently.
     if (song_data->backend && song_data->backend->songs_table() == Library::kSongsTable)
-      InsertLibraryItems(song_data->songs, row);
+      InsertSongItems<LibraryPlaylistItem>(this, song_data->songs, row);
     else if (song_data->backend && song_data->backend->songs_table() == MagnatuneService::kSongsTable)
-      InsertMagnatuneItems(song_data->songs, row);
+      InsertSongItems<MagnatunePlaylistItem>(this, song_data->songs, row);
+    else if (song_data->backend && song_data->backend->songs_table() == JamendoService::kSongsTable)
+      InsertSongItems<JamendoPlaylistItem>(this, song_data->songs, row);
     else
-      InsertSongs(song_data->songs, row);
+      InsertSongItems<SongPlaylistItem>(this, song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
     InsertRadioStations(radio_data->items, row, data->hasFormat(kPlayNowMimetype));
@@ -788,27 +801,11 @@ QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
 }
 
 QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos) {
-  PlaylistItemList items;
-  foreach (const Song& song, songs) {
-    items << shared_ptr<PlaylistItem>(new LibraryPlaylistItem(song));
-  }
-  return InsertItems(items, pos);
-}
-
-QModelIndex Playlist::InsertMagnatuneItems(const SongList& songs, int pos) {
-  PlaylistItemList items;
-  foreach (const Song& song, songs) {
-    items << shared_ptr<PlaylistItem>(new MagnatunePlaylistItem(song));
-  }
-  return InsertItems(items, pos);
+  return InsertSongItems<LibraryPlaylistItem>(this, songs, pos);
 }
 
 QModelIndex Playlist::InsertSongs(const SongList& songs, int pos) {
-  PlaylistItemList items;
-  foreach (const Song& song, songs) {
-    items << shared_ptr<PlaylistItem>(new SongPlaylistItem(song));
-  }
-  return InsertItems(items, pos);
+  return InsertSongItems<SongPlaylistItem>(this, songs, pos);
 }
 
 QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos, bool play_now) {

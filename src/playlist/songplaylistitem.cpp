@@ -35,8 +35,8 @@ SongPlaylistItem::SongPlaylistItem(const Song& song)
 }
 
 bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
-  // The song tables gets joined first, plus one each for the song ROWIDs
-  const int row = (Song::kColumns.count() + 1) * 2;
+  // The song tables get joined first, plus one each for the song ROWIDs
+  const int row = (Song::kColumns.count() + 1) * 3;
 
   QString filename(query.value(row + 1).toString());
 

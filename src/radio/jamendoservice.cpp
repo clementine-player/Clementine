@@ -17,7 +17,9 @@
 
 #include "jamendoservice.h"
 
+#include <QDesktopServices>
 #include <QFutureWatcher>
+#include <QMenu>
 #include <QNetworkReply>
 #include <QSortFilterProxyModel>
 #include <QtConcurrentRun>
@@ -31,6 +33,8 @@
 #include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
 #include "radio/radiomodel.h"
+#include "radio/jamendoplaylistitem.h"
+#include "ui/iconloader.h"
 
 const char* JamendoService::kServiceName = "Jamendo";
 const char* JamendoService::kDirectoryUrl =
@@ -41,6 +45,7 @@ const char* JamendoService::kOggStreamUrl =
     "http://api.jamendo.com/get2/stream/track/redirect/?id=%1&streamencoding=ogg2";
 const char* JamendoService::kAlbumCoverUrl =
     "http://api.jamendo.com/get2/image/album/redirect/?id=%1&imagesize=260";
+const char* JamendoService::kHomepage = "http://www.jamendo.com/";
 
 const char* JamendoService::kSongsTable = "jamendo_songs";
 const char* JamendoService::kFtsTable = "jamendo_songs_fts";
@@ -54,6 +59,7 @@ JamendoService::JamendoService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       network_(new NetworkAccessManager(this)),
       root_(NULL),
+      context_menu_(NULL),
       library_backend_(NULL),
       library_filter_(NULL),
       library_model_(NULL),
@@ -291,6 +297,17 @@ void JamendoService::EnsureMenuCreated() {
   if (library_filter_)
     return;
 
+  context_menu_ = new QMenu;
+  add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  album_info_ = context_menu_->addAction(IconLoader::Load("view-media-lyrics"),
+      tr("Album info on jamendo.com..."), this, SLOT(AlbumInfo()));
+  download_album_ = context_menu_->addAction(IconLoader::Load("download"),
+      tr("Download this album..."), this, SLOT(DownloadAlbum()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open jamendo.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);
   library_filter_->SetLibraryModel(library_model_);
@@ -298,7 +315,50 @@ void JamendoService::EnsureMenuCreated() {
   library_filter_->SetAgeFilterEnabled(false);
 }
 
+void JamendoService::ShowContextMenu(RadioItem*, const QModelIndex& index,
+                                     const QPoint& global_pos) {
+  EnsureMenuCreated();
+
+  bool is_song = false;
+  if (index.model() == library_sort_model_) {
+    context_item_ = index;
+    is_song = index.data(LibraryModel::Role_Type).toInt() == LibraryItem::Type_Song;
+  } else {
+    context_item_ = QModelIndex();
+  }
+
+  add_to_playlist_->setEnabled(context_item_.isValid());
+  album_info_->setEnabled(is_song);
+  download_album_->setEnabled(is_song);
+  context_menu_->popup(global_pos);
+}
+
 QWidget* JamendoService::HeaderWidget() const {
   const_cast<JamendoService*>(this)->EnsureMenuCreated();
   return library_filter_;
+}
+
+void JamendoService::AddToPlaylist() {
+  SongList songs(library_model_->GetChildSongs(
+      library_sort_model_->mapToSource(context_item_)));
+
+  PlaylistItemList items;
+
+  foreach (const Song& song, songs) {
+    items << PlaylistItemPtr(new JamendoPlaylistItem(song));
+  }
+
+  emit AddItemsToPlaylist(items);
+}
+
+void JamendoService::AlbumInfo() {
+  // TODO
+}
+
+void JamendoService::DownloadAlbum() {
+  // TODO
+}
+
+void JamendoService::Homepage() {
+  QDesktopServices::openUrl(QUrl(kHomepage));
 }

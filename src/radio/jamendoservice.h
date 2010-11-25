@@ -41,6 +41,9 @@ class JamendoService : public RadioService {
   RadioItem* CreateRootItem(RadioItem* parent);
   void LazyPopulate(RadioItem* item);
 
+  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
+                       const QPoint& global_pos);
+
   QWidget* HeaderWidget() const;
 
   static const char* kServiceName;
@@ -48,6 +51,7 @@ class JamendoService : public RadioService {
   static const char* kMp3StreamUrl;
   static const char* kOggStreamUrl;
   static const char* kAlbumCoverUrl;
+  static const char* kHomepage;
 
   static const char* kSongsTable;
   static const char* kFtsTable;
@@ -76,9 +80,21 @@ class JamendoService : public RadioService {
   void ParseDirectoryFinished();
   void UpdateTotalSongCount(int count);
 
+  void AddToPlaylist();
+  void AlbumInfo();
+  void DownloadAlbum();
+  void Homepage();
+
  private:
   NetworkAccessManager* network_;
   RadioItem* root_;
+
+  QMenu* context_menu_;
+  QModelIndex context_item_;
+
+  QAction* add_to_playlist_;
+  QAction* album_info_;
+  QAction* download_album_;
 
   LibraryBackend* library_backend_;
   LibraryFilterWidget* library_filter_;

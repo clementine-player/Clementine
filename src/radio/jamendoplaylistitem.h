@@ -15,22 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNEPLAYLISTITEM_H
-#define MAGNATUNEPLAYLISTITEM_H
+#ifndef JAMENDOPLAYLISTITEM_H
+#define JAMENDOPLAYLISTITEM_H
 
 #include "library/libraryplaylistitem.h"
 
-class MagnatunePlaylistItem : public LibraryPlaylistItem {
- public:
-  MagnatunePlaylistItem(const QString& type);
-  MagnatunePlaylistItem(const Song& song);
+class JamendoPlaylistItem : public LibraryPlaylistItem {
+public:
+  JamendoPlaylistItem(const QString& type);
+  JamendoPlaylistItem(const Song& song);
 
   bool InitFromQuery(const SqlRow& query);
 
-  Options options() const;
-
   QUrl Url() const;
-  SpecialLoadResult StartLoading();
 };
 
-#endif // MAGNATUNEPLAYLISTITEM_H
+#endif // JAMENDOPLAYLISTITEM_H

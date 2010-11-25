@@ -123,6 +123,7 @@ set(SOURCES
   radio/icecastfilterwidget.cpp
   radio/icecastmodel.cpp
   radio/icecastservice.cpp
+  radio/jamendoplaylistitem.cpp
   radio/jamendoservice.cpp
   radio/lastfmconfig.cpp
   radio/lastfmservice.cpp
