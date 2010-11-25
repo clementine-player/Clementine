@@ -166,6 +166,9 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
   disconnect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
              library_model_, SLOT(SongsDiscovered(SongList)));
 
+  // Delete all existing songs in the db
+  library_backend_->DeleteAll();
+
   SongList songs;
   QXmlStreamReader reader(device);
   while (!reader.atEnd()) {
@@ -177,7 +180,7 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
 
     if (songs.count() >= kBatchSize) {
       // Add the songs to the database in batches
-      library_backend_->AddOrUpdateSongs(songs);
+      library_backend_->AddOrUpdateSongs(songs, true);
       total_count += songs.count();
       songs.clear();
 
@@ -187,7 +190,7 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
     }
   }
 
-  library_backend_->AddOrUpdateSongs(songs);
+  library_backend_->AddOrUpdateSongs(songs, true);
 
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
           library_model_, SLOT(SongsDiscovered(SongList)));
@@ -279,11 +282,16 @@ Song JamendoService::ReadTrack(const QString& artist,
           song.set_genre(genre_id);
         }
       } else if (name == "id") {
-        QString id = reader->readElementText();
-        QString ogg_url = QString(kOggStreamUrl).arg(id);
+        QString id_text = reader->readElementText();
+        int id = id_text.toInt();
+        if (id == 0)
+          continue;
+
+        QString ogg_url = QString(kOggStreamUrl).arg(id_text);
         song.set_filename(ogg_url);
 
         song.set_art_automatic(album_cover);
+        song.set_id(id);
         song.set_valid(true);
       }
     } else if (reader->isEndElement() && reader->name() == "track") {
@@ -314,7 +322,7 @@ void JamendoService::EnsureMenuCreated() {
       tr("Download this album..."), this, SLOT(DownloadAlbum()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download"), tr("Open jamendo.com in browser"), this, SLOT(Homepage()));
-  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(DownloadDirectory()));
 
   library_filter_ = new LibraryFilterWidget(0);
   library_filter_->SetSettingsGroup(kSettingsGroup);

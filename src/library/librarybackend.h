@@ -140,10 +140,12 @@ class LibraryBackend : public LibraryBackendInterface {
   void IncrementSkipCountAsync(int id, float progress);
   void UpdateSongRatingAsync(int id, float rating);
 
+  void DeleteAll();
+
  public slots:
   void LoadDirectories();
   void UpdateTotalSongCount();
-  void AddOrUpdateSongs(const SongList& songs);
+  void AddOrUpdateSongs(const SongList& songs, bool insert_with_id = false);
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
   void AddOrUpdateSubdirs(const SubdirectoryList& subdirs);
@@ -161,6 +163,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsStatisticsChanged(const SongList& songs);
+  void DatabaseReset();
 
   void TotalSongCountUpdated(int total);
 

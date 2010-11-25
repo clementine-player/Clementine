@@ -64,7 +64,6 @@ class JamendoService : public RadioService {
   static const int kApproxDatabaseSize;
 
  private:
-  void DownloadDirectory();
   void ParseDirectory(QIODevice* device) const;
 
   SongList ReadArtist(QXmlStreamReader* reader) const;
@@ -78,6 +77,7 @@ class JamendoService : public RadioService {
   void EnsureMenuCreated();
 
  private slots:
+  void DownloadDirectory();
   void DownloadDirectoryProgress(qint64 received, qint64 total);
   void DownloadDirectoryFinished();
   void ParseDirectoryFinished();

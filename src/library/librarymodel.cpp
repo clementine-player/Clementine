@@ -70,6 +70,7 @@ void LibraryModel::Init() {
   connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
   connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
+  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
   connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SIGNAL(TotalSongCountUpdated(int)));
 
   backend_->UpdateTotalSongCountAsync();

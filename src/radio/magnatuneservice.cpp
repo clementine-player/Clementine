@@ -169,13 +169,11 @@ void MagnatuneService::ReloadDatabaseFinished() {
   }
 
   // Remove all existing songs in the database
-  // FindSongsByDirectory isn't the nicest way to do it, but it's easy
-  SongList songs = library_backend_->FindSongsInDirectory(0);
-  library_backend_->DeleteSongs(songs);
-  songs.clear();
+  library_backend_->DeleteAll();
 
   // Parse the XML we got from Magnatune
   QXmlStreamReader reader(&gzip);
+  SongList songs;
   while (!reader.atEnd()) {
     reader.readNext();
 

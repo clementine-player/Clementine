@@ -287,7 +287,7 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   transaction.Commit();
 }
 
-void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
+void LibraryBackend::AddOrUpdateSongs(const SongList& songs, bool insert_with_id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -295,6 +295,9 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
                       .arg(dirs_table_), db);
   QSqlQuery add_song(QString("INSERT INTO %1 (" + Song::kColumnSpec + ")"
                              " VALUES (" + Song::kBindSpec + ")")
+                     .arg(songs_table_), db);
+  QSqlQuery add_song_id(QString("INSERT INTO %1 (ROWID, " + Song::kColumnSpec + ")"
+                               " VALUES (:id, " + Song::kBindSpec + ")")
                      .arg(songs_table_), db);
   QSqlQuery update_song(QString("UPDATE %1 SET " + Song::kUpdateSpec +
                                 " WHERE ROWID = :id").arg(songs_table_), db);
@@ -323,14 +326,27 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
     }
 
 
-    if (song.id() == -1) {
+    if (insert_with_id || song.id() == -1) {
       // Create
-      song.BindToQuery(&add_song);
-      add_song.exec();
-      if (db_->CheckErrors(add_song.lastError())) continue;
 
-      const int id = add_song.lastInsertId().toInt();
+      int id = song.id();
+      if (insert_with_id) {
+        // Insert the row with the existing ID
+        add_song_id.bindValue(":id", song.id());
+        song.BindToQuery(&add_song_id);
+        add_song_id.exec();
+        if (db_->CheckErrors(add_song_id.lastError())) continue;
+      } else {
+        // Insert the row and create a new ID
+        song.BindToQuery(&add_song);
+        add_song.exec();
+        if (db_->CheckErrors(add_song.lastError())) continue;
 
+        // Get the new ID
+        id = add_song.lastInsertId().toInt();
+      }
+
+      // Add to the FTS index
       add_song_fts.bindValue(":id", id);
       song.BindToFtsQuery(&add_song_fts);
       add_song_fts.exec();
@@ -896,4 +912,26 @@ void LibraryBackend::UpdateSongRating(int id, float rating) {
 
   Song new_song = GetSongById(id, db);
   emit SongsStatisticsChanged(SongList() << new_song);
+}
+
+void LibraryBackend::DeleteAll() {
+  {
+    QMutexLocker l(db_->Mutex());
+    QSqlDatabase db(db_->Connect());
+    ScopedTransaction t(&db);
+
+    QSqlQuery q("DELETE FROM " + songs_table_, db);
+    q.exec();
+    if (db_->CheckErrors(q.lastError()))
+      return;
+
+    q = QSqlQuery("DELETE FROM " + fts_table_, db);
+    q.exec();
+    if (db_->CheckErrors(q.lastError()))
+      return;
+
+    t.Commit();
+  }
+
+  emit DatabaseReset();
 }
