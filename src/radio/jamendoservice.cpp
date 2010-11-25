@@ -280,6 +280,9 @@ Song JamendoService::ReadTrack(const QString& artist,
 }
 
 void JamendoService::ParseDirectoryFinished() {
+  QFutureWatcher<void>* watcher = static_cast<QFutureWatcher<void>*>(sender());
+  delete watcher;
+
   model()->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;
 }
