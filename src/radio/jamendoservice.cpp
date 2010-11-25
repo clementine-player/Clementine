@@ -46,6 +46,8 @@ const char* JamendoService::kOggStreamUrl =
 const char* JamendoService::kAlbumCoverUrl =
     "http://api.jamendo.com/get2/image/album/redirect/?id=%1&imagesize=260";
 const char* JamendoService::kHomepage = "http://www.jamendo.com/";
+const char* JamendoService::kAlbumInfoUrl = "http://www.jamendo.com/album/%1";
+const char* JamendoService::kDownloadAlbumUrl = "http://www.jamendo.com/download/album/%1";
 
 const char* JamendoService::kSongsTable = "jamendo_songs";
 const char* JamendoService::kFtsTable = "jamendo_songs_fts";
@@ -220,6 +222,7 @@ SongList JamendoService::ReadAlbum(
   SongList ret;
   QString current_album;
   QString cover;
+  int current_album_id = 0;
 
   while (!reader->atEnd()) {
     reader->readNext();
@@ -230,8 +233,9 @@ SongList JamendoService::ReadAlbum(
       } else if (reader->name() == "id") {
         QString id = reader->readElementText();
         cover = QString(kAlbumCoverUrl).arg(id);
+        current_album_id = id.toInt();
       } else if (reader->name() == "track") {
-        ret << ReadTrack(artist, current_album, cover, reader);
+        ret << ReadTrack(artist, current_album, cover, current_album_id, reader);
       }
     } else if (reader->isEndElement() && reader->name() == "album") {
       break;
@@ -243,6 +247,7 @@ SongList JamendoService::ReadAlbum(
 Song JamendoService::ReadTrack(const QString& artist,
                                const QString& album,
                                const QString& album_cover,
+                               int album_id,
                                QXmlStreamReader* reader) const {
   Song song;
   song.set_artist(artist);
@@ -252,6 +257,9 @@ Song JamendoService::ReadTrack(const QString& artist,
   song.set_mtime(0);
   song.set_ctime(0);
   song.set_filesize(0);
+
+  // Shoehorn the album ID into the comment field
+  song.set_comment(QString::number(album_id));
 
   while (!reader->atEnd()) {
     reader->readNext();
@@ -319,17 +327,15 @@ void JamendoService::ShowContextMenu(RadioItem*, const QModelIndex& index,
                                      const QPoint& global_pos) {
   EnsureMenuCreated();
 
-  bool is_song = false;
   if (index.model() == library_sort_model_) {
     context_item_ = index;
-    is_song = index.data(LibraryModel::Role_Type).toInt() == LibraryItem::Type_Song;
   } else {
     context_item_ = QModelIndex();
   }
 
   add_to_playlist_->setEnabled(context_item_.isValid());
-  album_info_->setEnabled(is_song);
-  download_album_->setEnabled(is_song);
+  album_info_->setEnabled(context_item_.isValid());
+  download_album_->setEnabled(context_item_.isValid());
   context_menu_->popup(global_pos);
 }
 
@@ -352,11 +358,31 @@ void JamendoService::AddToPlaylist() {
 }
 
 void JamendoService::AlbumInfo() {
-  // TODO
+  SongList songs(library_model_->GetChildSongs(
+      library_sort_model_->mapToSource(context_item_)));
+  if (songs.isEmpty())
+    return;
+
+  // We put the album ID into the comment field
+  int id = songs.first().comment().toInt();
+  if (!id)
+    return;
+
+  QDesktopServices::openUrl(QUrl(QString(kAlbumInfoUrl).arg(id)));
 }
 
 void JamendoService::DownloadAlbum() {
-  // TODO
+  SongList songs(library_model_->GetChildSongs(
+      library_sort_model_->mapToSource(context_item_)));
+  if (songs.isEmpty())
+    return;
+
+  // We put the album ID into the comment field
+  int id = songs.first().comment().toInt();
+  if (!id)
+    return;
+
+  QDesktopServices::openUrl(QUrl(QString(kDownloadAlbumUrl).arg(id)));
 }
 
 void JamendoService::Homepage() {

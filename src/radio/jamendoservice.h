@@ -51,6 +51,8 @@ class JamendoService : public RadioService {
   static const char* kMp3StreamUrl;
   static const char* kOggStreamUrl;
   static const char* kAlbumCoverUrl;
+  static const char* kAlbumInfoUrl;
+  static const char* kDownloadAlbumUrl;
   static const char* kHomepage;
 
   static const char* kSongsTable;
@@ -70,6 +72,7 @@ class JamendoService : public RadioService {
   Song ReadTrack(const QString& artist,
                  const QString& album,
                  const QString& album_cover,
+                 int album_id,
                  QXmlStreamReader* reader) const;
 
   void EnsureMenuCreated();
