@@ -1,6 +1,7 @@
 #include "jamendodynamicplaylist.h"
 
 #include <QEventLoop>
+#include <QtDebug>
 
 #include "core/network.h"
 #include "core/songloader.h"
