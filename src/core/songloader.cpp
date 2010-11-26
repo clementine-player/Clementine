@@ -297,7 +297,8 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   instance->mime_type_ = gst_structure_get_name(gst_caps_get_structure(caps, 0));
   qDebug() << "Mime type is" << instance->mime_type_;
   if (instance->mime_type_ == "text/plain" ||
-      instance->mime_type_ == "text/uri-list") {
+      instance->mime_type_ == "text/uri-list" ||
+      instance->mime_type_ == "application/xml") {
     // Yeah it might be a playlist, let's get some data and have a better look
     instance->state_ = WaitingForMagic;
     return;

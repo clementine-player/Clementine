@@ -34,6 +34,7 @@
 #include "library/librarymodel.h"
 #include "radio/radiomodel.h"
 #include "radio/jamendoplaylistitem.h"
+#include "smartplaylists/generator.h"
 #include "ui/iconloader.h"
 
 const char* JamendoService::kServiceName = "Jamendo";
@@ -76,6 +77,7 @@ JamendoService::JamendoService(RadioModel* parent)
           SLOT(UpdateTotalSongCount(int)));
 
   library_model_ = new LibraryModel(library_backend_, this);
+  library_model_->set_show_smart_playlists(true);
 
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
@@ -94,12 +96,17 @@ RadioItem* JamendoService::CreateRootItem(RadioItem* parent) {
 
 void JamendoService::LazyPopulate(RadioItem* item) {
   switch (item->type) {
-    case RadioItem::Type_Service:
+    case RadioItem::Type_Service: {
       library_model_->Init();
+      smart_playlists::GeneratorPtr generator =
+          smart_playlists::Generator::Create("Jamendo");
+      generator->set_name(tr("Jamendo Top Tracks of the Month"));
+      library_model_->AddGenerator(generator);
       model()->merged_model()->AddSubModel(
           model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
           library_sort_model_);
       break;
+    }
     default:
       break;
   }

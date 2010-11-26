@@ -123,6 +123,7 @@ set(SOURCES
   radio/icecastfilterwidget.cpp
   radio/icecastmodel.cpp
   radio/icecastservice.cpp
+  radio/jamendodynamicplaylist.cpp
   radio/jamendoplaylistitem.cpp
   radio/jamendoservice.cpp
   radio/lastfmconfig.cpp
@@ -292,6 +293,7 @@ set(HEADERS
   radio/icecastfilterwidget.h
   radio/icecastmodel.h
   radio/icecastservice.h
+  radio/jamendodynamicplaylist.h
   radio/jamendoservice.h
   radio/lastfmconfig.h
   radio/lastfmservice.h

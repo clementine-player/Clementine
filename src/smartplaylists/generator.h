@@ -49,10 +49,13 @@ public:
   virtual QString type() const = 0;
 
   // Serialises the Generator's settings
+  // Called on UI-thread.
   virtual void Load(const QByteArray& data) = 0;
+  // Called on UI-thread.
   virtual QByteArray Save() const = 0;
 
   // Creates and returns a playlist
+  // Called from non-UI thread.
   virtual PlaylistItemList Generate() = 0;
 
   // If the generator can be used as a dynamic playlist then GenerateMore
@@ -61,6 +64,7 @@ public:
   // the tracks returned from this method are not in that set.
   virtual bool is_dynamic() const { return false; }
   virtual void set_dynamic(bool dynamic) {}
+  // Called from non-UI thread.
   virtual PlaylistItemList GenerateMore(int count) { return PlaylistItemList(); }
 
 signals:

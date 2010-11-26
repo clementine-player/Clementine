@@ -17,6 +17,7 @@
 
 #include "generator.h"
 #include "querygenerator.h"
+#include "radio/jamendodynamicplaylist.h"
 
 #include <QSettings>
 
@@ -35,6 +36,8 @@ Generator::Generator()
 GeneratorPtr Generator::Create(const QString& type) {
   if (type == "Query")
     return GeneratorPtr(new QueryGenerator);
+  else if (type == "Jamendo")
+    return GeneratorPtr(new JamendoDynamicPlaylist);
 
   qWarning() << "Invalid playlist generator type:" << type;
   return GeneratorPtr();
