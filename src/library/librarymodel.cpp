@@ -27,10 +27,13 @@
 #include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
 
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QMetaEnum>
 #include <QSettings>
 #include <QStringList>
 #include <QUrl>
-#include <QMetaEnum>
+#include <QtConcurrentRun>
 
 #include <boost/bind.hpp>
 
@@ -42,6 +45,9 @@ using smart_playlists::QueryGenerator;
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
 const int LibraryModel::kSmartPlaylistsVersion = 3;
+
+typedef QFuture<SqlRowList> RootQueryFuture;
+typedef QFutureWatcher<SqlRowList> RootQueryWatcher;
 
 LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
@@ -386,10 +392,41 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
   return QVariant();
 }
 
+SqlRowList LibraryModel::RunRootQuery(const QueryOptions& query_options,
+                                      const Grouping& group_by) {
+  // Warning: Some copy-paste with LazyPopulate here
+
+  // Information about what we want the children to be
+  GroupBy child_type = group_by[0];
+
+  // Initialise the query.  child_type says what type of thing we want (artists,
+  // songs, etc.)
+  LibraryQuery q(query_options);
+  InitQuery(child_type, &q);
+
+  // Top-level artists is special - we don't want compilation albums appearing
+  if (child_type == GroupBy_Artist) {
+    q.AddCompilationRequirement(false);
+  }
+
+  // Execute the query
+  QMutexLocker l(backend_->db()->Mutex());
+  if (!backend_->ExecQuery(&q))
+    return SqlRowList();
+
+  SqlRowList rows;
+  while (q.Next()) {
+    rows << SqlRow(q);
+  }
+  return rows;
+}
+
 void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
   if (parent->lazy_loaded)
     return;
   parent->lazy_loaded = true;
+
+  // Warning: Some copy-paste with RunRootQuery here
 
   // Information about what we want the children to be
   int child_level = parent->container_level + 1;
@@ -419,9 +456,12 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
 
   // Step through the results
   while (q.Next()) {
+    // Warning: Some copy-paste with ResetAsyncQueryFinished here
+
     // Create the item - it will get inserted into the model here
     LibraryItem* item =
-        ItemFromQuery(child_type, signal, child_level == 0, parent, q, child_level);
+        ItemFromQuery(child_type, signal, child_level == 0, parent, SqlRow(q),
+                      child_level);
 
     // Save a pointer to it for later
     if (child_type == GroupBy_None)
@@ -431,7 +471,43 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
   }
 }
 
-void LibraryModel::Reset() {
+void LibraryModel::ResetAsync() {
+  RootQueryFuture future = QtConcurrent::run(
+        this, &LibraryModel::RunRootQuery, query_options_, group_by_);
+  RootQueryWatcher* watcher = new RootQueryWatcher(this);
+  watcher->setFuture(future);
+
+  connect(watcher, SIGNAL(finished()), SLOT(ResetAsyncQueryFinished()));
+}
+
+void LibraryModel::ResetAsyncQueryFinished() {
+  RootQueryWatcher* watcher = static_cast<RootQueryWatcher*>(sender());
+  const SqlRowList rows = watcher->result();
+  watcher->deleteLater();
+
+  BeginReset();
+  root_->lazy_loaded = true;
+
+  foreach (const SqlRow& row, rows) {
+    // Warning: Some copy-paste with LazyPopulate here
+
+    const GroupBy child_type = group_by_[0];
+
+    // Create the item - it will get inserted into the model here
+    LibraryItem* item =
+        ItemFromQuery(child_type, false, true, root_, row, 0);
+
+    // Save a pointer to it for later
+    if (child_type == GroupBy_None)
+      song_nodes_[item->metadata.id()] = item;
+    else
+      container_nodes_[0][item->key] = item;
+  }
+
+  reset();
+}
+
+void LibraryModel::BeginReset() {
   delete root_;
   song_nodes_.clear();
   container_nodes_[0].clear();
@@ -454,6 +530,10 @@ void LibraryModel::Reset() {
   // Smart playlists?
   if (show_smart_playlists_ && query_options_.filter.isEmpty())
     CreateSmartPlaylists();
+}
+
+void LibraryModel::Reset() {
+  BeginReset();
 
   // Populate top level
   LazyPopulate(root_, false);
@@ -553,29 +633,29 @@ LibraryItem* LibraryModel::InitItem(GroupBy type, bool signal, LibraryItem *pare
 }
 
 LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
-                                    bool signal, bool create_divider,
-                                    LibraryItem* parent, const LibraryQuery& q,
-                                    int container_level) {
+                                         bool signal, bool create_divider,
+                                         LibraryItem* parent, const SqlRow& row,
+                                         int container_level) {
   LibraryItem* item = InitItem(type, signal, parent, container_level);
   int year = 0;
 
   switch (type) {
   case GroupBy_Artist:
-    item->key = q.Value(0).toString();
+    item->key = row.value(0).toString();
     item->display_text = TextOrUnknown(item->key);
     item->sort_text = SortTextForArtist(item->key);
     break;
 
   case GroupBy_YearAlbum:
-    year = qMax(0, q.Value(0).toInt());
-    item->metadata.set_year(q.Value(0).toInt());
-    item->metadata.set_album(q.Value(1).toString());
+    year = qMax(0, row.value(0).toInt());
+    item->metadata.set_year(row.value(0).toInt());
+    item->metadata.set_album(row.value(1).toString());
     item->key = PrettyYearAlbum(year, item->metadata.album());
     item->sort_text = SortTextForYear(year) + item->metadata.album();
     break;
 
   case GroupBy_Year:
-    year = qMax(0, q.Value(0).toInt());
+    year = qMax(0, row.value(0).toInt());
     item->key = QString::number(year);
     item->sort_text = SortTextForYear(year) + " ";
     break;
@@ -584,18 +664,18 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
   case GroupBy_Genre:
   case GroupBy_Album:
   case GroupBy_AlbumArtist:
-    item->key = q.Value(0).toString();
+    item->key = row.value(0).toString();
     item->display_text = TextOrUnknown(item->key);
     item->sort_text = SortTextForArtist(item->key);
     break;
 
   case GroupBy_FileType:
-    item->metadata.set_filetype(Song::FileType(q.Value(0).toInt()));
+    item->metadata.set_filetype(Song::FileType(row.value(0).toInt()));
     item->key = item->metadata.TextForFiletype();
     break;
 
   case GroupBy_None:
-    item->metadata.InitFromQuery(q);
+    item->metadata.InitFromQuery(row);
     item->key = item->metadata.title();
     item->display_text = item->metadata.TitleWithCompilationArtist();
     item->sort_text = SortTextForSong(item->metadata);
@@ -841,12 +921,12 @@ SongList LibraryModel::GetChildSongs(const QModelIndex &index) const {
 
 void LibraryModel::SetFilterAge(int age) {
   query_options_.max_age = age;
-  Reset();
+  ResetAsync();
 }
 
 void LibraryModel::SetFilterText(const QString& text) {
   query_options_.filter = text;
-  Reset();
+  ResetAsync();
 }
 
 bool LibraryModel::canFetchMore(const QModelIndex &parent) const {
@@ -860,7 +940,7 @@ bool LibraryModel::canFetchMore(const QModelIndex &parent) const {
 void LibraryModel::SetGroupBy(const Grouping& g) {
   group_by_ = g;
 
-  Reset();
+  ResetAsync();
   emit GroupingChanged(g);
 }
 

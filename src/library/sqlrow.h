@@ -31,7 +31,7 @@ class SqlRow {
   SqlRow(const QSqlQuery& query);
   SqlRow(const LibraryQuery& query);
 
-  QVariant value(int i) const { return columns_[i]; }
+  const QVariant& value(int i) const { return columns_[i]; }
 
  private:
   SqlRow();
@@ -40,5 +40,7 @@ class SqlRow {
 
   QList<QVariant> columns_;
 };
+
+typedef QList<SqlRow> SqlRowList;
 
 #endif

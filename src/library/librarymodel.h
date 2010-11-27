@@ -21,9 +21,10 @@
 #include <QAbstractItemModel>
 #include <QIcon>
 
-#include "librarywatcher.h"
-#include "libraryquery.h"
 #include "libraryitem.h"
+#include "libraryquery.h"
+#include "librarywatcher.h"
+#include "sqlrow.h"
 #include "core/backgroundthread.h"
 #include "core/simpletreemodel.h"
 #include "core/song.h"
@@ -134,6 +135,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SetGroupBy(const LibraryModel::Grouping& g);
   void Init();
   void Reset();
+  void ResetAsync();
 
  protected:
   void LazyPopulate(LibraryItem* item) { LazyPopulate(item, true); }
@@ -145,21 +147,32 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SongsDeleted(const SongList& songs);
   void SongsStatisticsChanged(const SongList& songs);
 
+  // Called after ResetAsync
+  void ResetAsyncQueryFinished();
+
  private:
   void Initialise();
+
+  // Provides some optimisations for loading the list of items in the root.
+  // This gets called a lot when filtering the playlist, so it's nice to be
+  // able to do it in a background thread.
+  SqlRowList RunRootQuery(const QueryOptions& query_options,
+                          const Grouping& group_by);
+
+  void BeginReset();
 
   // Functions for working with queries and creating items.
   // When the model is reset or when a node is lazy-loaded the Library
   // constructs a database query to populate the items.  Filters are added
   // for each parent item, restricting the songs returned to a particular
   // album or artist for example.
-  void InitQuery(GroupBy type, LibraryQuery* q);
+  static void InitQuery(GroupBy type, LibraryQuery* q);
   void FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q);
 
   // Items can be created either from a query that's been run to populate a
   // node, or by a spontaneous SongsDiscovered emission from the backend.
   LibraryItem* ItemFromQuery(GroupBy type, bool signal, bool create_divider,
-                             LibraryItem* parent, const LibraryQuery& q,
+                             LibraryItem* parent, const SqlRow& row,
                              int container_level);
   LibraryItem* ItemFromSong(GroupBy type, bool signal, bool create_divider,
                             LibraryItem* parent, const Song& s,
