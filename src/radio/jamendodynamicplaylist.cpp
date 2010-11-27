@@ -1,6 +1,5 @@
 #include "jamendodynamicplaylist.h"
 
-#include <QCoreApplication>
 #include <QEventLoop>
 #include <QHttp>
 #include <QHttpRequestHeader>
