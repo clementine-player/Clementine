@@ -41,7 +41,6 @@ using smart_playlists::QueryGenerator;
 
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
-const char* LibraryModel::kSmartPlaylistsArray = "smart";
 const int LibraryModel::kSmartPlaylistsVersion = 3;
 
 LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
@@ -890,82 +889,33 @@ void LibraryModel::CreateSmartPlaylists() {
 
   QSettings s;
   s.beginGroup(kSmartPlaylistsSettingsGroup);
-  const int version = s.value("version", 0).toInt();
+  int version = s.value(backend_->songs_table() + "_version", 0).toInt();
 
-  using smart_playlists::Search;
-  using smart_playlists::SearchTerm;
+  // How many defaults do we have to write?
+  int unwritten_defaults = 0;
+  for (int i=version; i < default_smart_playlists_.count() ; ++i) {
+    unwritten_defaults += default_smart_playlists_[i].count();
+  }
 
-  if (version == 0) {
-    // No smart playlists existed in the settings, so create some defaults
+  // Save the defaults if there are any unwritten ones
+  if (unwritten_defaults) {
+    // How many items are stored already?
+    int playlist_index = s.beginReadArray(backend_->songs_table());
+    s.endArray();
 
-    s.beginWriteArray(kSmartPlaylistsArray);
-
-    int i = 0;
-    SaveDefaultGenerator(&s, i++, tr("50 random tracks"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_Random, SearchTerm::Field_Title, 50));
-    SaveDefaultGenerator(&s, i++, tr("Ever played"), Search(
-        Search::Type_And, Search::TermList()
-          << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_GreaterThan, 0),
-        Search::Sort_Random, SearchTerm::Field_Title));
-    SaveDefaultGenerator(&s, i++, tr("Never played"), Search(
-        Search::Type_And, Search::TermList()
-          << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_Equals, 0),
-        Search::Sort_Random, SearchTerm::Field_Title));
-    SaveDefaultGenerator(&s, i++, tr("Last played"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_FieldDesc, SearchTerm::Field_LastPlayed));
-    SaveDefaultGenerator(&s, i++, tr("Most played"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_FieldDesc, SearchTerm::Field_PlayCount));
-    SaveDefaultGenerator(&s, i++, tr("Favourite tracks"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_FieldDesc, SearchTerm::Field_Score));
-    SaveDefaultGenerator(&s, i++, tr("Newest tracks"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_FieldDesc, SearchTerm::Field_DateCreated));
-
+    // Append the new ones
+    s.beginWriteArray(backend_->songs_table(), playlist_index + unwritten_defaults);
+    for (; version < default_smart_playlists_.count() ; ++version) {
+      foreach (smart_playlists::GeneratorPtr gen, default_smart_playlists_[version]) {
+        SaveGenerator(&s, playlist_index++, gen);
+      }
+    }
     s.endArray();
   }
 
-  if (version <= 1) {
-    // Some additional smart playlists
+  s.setValue(backend_->songs_table() + "_version", version);
 
-    const int count = s.beginReadArray(kSmartPlaylistsArray);
-    s.endArray();
-    s.beginWriteArray(kSmartPlaylistsArray);
-
-    int i = count;
-    SaveDefaultGenerator(&s, i++, tr("All tracks"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_FieldAsc, SearchTerm::Field_Artist, -1));
-    SaveDefaultGenerator(&s, i++, tr("Least favourite tracks"), Search(
-        Search::Type_Or, Search::TermList()
-          << SearchTerm(SearchTerm::Field_Rating, SearchTerm::Op_LessThan, 0.6)
-          << SearchTerm(SearchTerm::Field_SkipCount, SearchTerm::Op_GreaterThan, 4),
-        Search::Sort_FieldDesc, SearchTerm::Field_SkipCount));
-
-    s.endArray();
-  }
-
-  if (version <= 2) {
-    // Dynamic playlists
-
-    const int count = s.beginReadArray(kSmartPlaylistsArray);
-    s.endArray();
-    s.beginWriteArray(kSmartPlaylistsArray);
-
-    int i = count;
-    SaveDefaultGenerator(&s, i++, tr("Dynamic random mix"), Search(
-        Search::Type_All, Search::TermList(),
-        Search::Sort_Random, SearchTerm::Field_Title), true);
-
-    s.endArray();
-  }
-
-  s.setValue("version", kSmartPlaylistsVersion);
-
-  const int count = s.beginReadArray(kSmartPlaylistsArray);
+  const int count = s.beginReadArray(backend_->songs_table());
   for (int i=0 ; i<count ; ++i) {
     s.setArrayIndex(i);
     ItemFromSmartPlaylist(s, false);
@@ -985,26 +935,16 @@ void LibraryModel::ItemFromSmartPlaylist(const QSettings& s, bool notify) const 
     item->InsertNotify(smart_playlist_node_);
 }
 
-void LibraryModel::SaveDefaultGenerator(QSettings* s, int i, const QString& name,
-                                        const smart_playlists::Search& search,
-                                        bool dynamic) const {
-  boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
-  gen->Load(search);
-  gen->set_name(name);
-  gen->set_dynamic(dynamic);
-  SaveGenerator(s, i, boost::static_pointer_cast<Generator>(gen));
-}
-
 void LibraryModel::AddGenerator(GeneratorPtr gen) {
   QSettings s;
   s.beginGroup(kSmartPlaylistsSettingsGroup);
 
   // Count the existing items
-  const int count = s.beginReadArray(kSmartPlaylistsArray);
+  const int count = s.beginReadArray(backend_->songs_table());
   s.endArray();
 
   // Add this one to the end
-  s.beginWriteArray(kSmartPlaylistsArray, count + 1);
+  s.beginWriteArray(backend_->songs_table(), count + 1);
   SaveGenerator(&s, count, gen);
 
   // Add it to the model
@@ -1025,10 +965,10 @@ void LibraryModel::UpdateGenerator(const QModelIndex& index, GeneratorPtr gen) {
   s.beginGroup(kSmartPlaylistsSettingsGroup);
 
   // Count the existing items
-  const int count = s.beginReadArray(kSmartPlaylistsArray);
+  const int count = s.beginReadArray(backend_->songs_table());
   s.endArray();
 
-  s.beginWriteArray(kSmartPlaylistsArray, count);
+  s.beginWriteArray(backend_->songs_table(), count);
   SaveGenerator(&s, index.row(), gen);
 
   // Update the text of the item
@@ -1050,7 +990,7 @@ void LibraryModel::DeleteGenerator(const QModelIndex& index) {
   s.beginGroup(kSmartPlaylistsSettingsGroup);
 
   // Rewrite all the items to the settings
-  s.beginWriteArray(kSmartPlaylistsArray, smart_playlist_node_->children.count());
+  s.beginWriteArray(backend_->songs_table(), smart_playlist_node_->children.count());
   int i = 0;
   foreach (LibraryItem* item, smart_playlist_node_->children) {
     s.setArrayIndex(i++);

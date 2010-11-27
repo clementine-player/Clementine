@@ -97,8 +97,12 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   LibraryBackend* backend() const { return backend_; }
   LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
+  typedef QList<smart_playlists::GeneratorPtr> GeneratorList;
+  typedef QList<GeneratorList> DefaultGenerators;
+
   // Call before Init()
   void set_show_smart_playlists(bool show_smart_playlists) { show_smart_playlists_ = show_smart_playlists; }
+  void set_default_smart_playlists(const DefaultGenerators& defaults) { default_smart_playlists_ = defaults; }
 
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
@@ -165,9 +169,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   // Smart playlists are shown in another top-level node
   void CreateSmartPlaylists();
-  void SaveDefaultGenerator(QSettings* s, int i, const QString& name,
-                            const smart_playlists::Search& search,
-                            bool dynamic = false) const;
   void SaveGenerator(QSettings* s, int i, smart_playlists::GeneratorPtr generator) const;
   void ItemFromSmartPlaylist(const QSettings& s, bool notify) const;
 
@@ -197,6 +198,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   LibraryBackend* backend_;
   LibraryDirectoryModel* dir_model_;
   bool show_smart_playlists_;
+  DefaultGenerators default_smart_playlists_;
 
   QueryOptions query_options_;
   Grouping group_by_;

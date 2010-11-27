@@ -509,20 +509,23 @@ SongList LibraryBackend::GetSongsByForeignId(
 
   QString in = ids.join(",");
 
-  QSqlQuery q(QString("SELECT %2.ROWID, " + Song::kColumnSpec +
-                      " FROM %1, %2"
-                      " WHERE %1.ROWID = %2.ROWID AND %2.%3 IN (%4)")
+  QSqlQuery q(QString("SELECT %2.ROWID, " + Song::kColumnSpec + ", %2.%3"
+                      " FROM %2, %1"
+                      " WHERE %2.%3 IN (%4) AND %1.ROWID = %2.ROWID")
               .arg(songs_table_, table, column, in), db);
   q.exec();
   if (db_->CheckErrors(q.lastError())) return SongList();
 
-  SongList ret;
+  QVector<Song> ret(ids.count());
   while (q.next()) {
-    Song song;
-    song.InitFromQuery(q);
-    ret << song;
+    const QString foreign_id = q.value(Song::kColumns.count() + 1).toString();
+    const int index = ids.indexOf(foreign_id);
+    if (index == -1)
+      continue;
+
+    ret[index].InitFromQuery(q);
   }
-  return ret;
+  return ret.toList();
 }
 
 Song LibraryBackend::GetSongById(int id, QSqlDatabase& db) {

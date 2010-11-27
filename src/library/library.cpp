@@ -15,15 +15,33 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/database.h"
 #include "library.h"
 #include "librarymodel.h"
 #include "librarybackend.h"
+#include "core/database.h"
+#include "smartplaylists/generator.h"
+#include "smartplaylists/querygenerator.h"
+#include "smartplaylists/search.h"
 
 const char* Library::kSongsTable = "songs";
 const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 const char* Library::kFtsTable = "songs_fts";
+
+using smart_playlists::Generator;
+using smart_playlists::GeneratorPtr;
+using smart_playlists::QueryGenerator;
+using smart_playlists::Search;
+using smart_playlists::SearchTerm;
+
+static GeneratorPtr NewQuery(
+    const QString& name, const smart_playlists::Search& search, bool dynamic = false) {
+  boost::shared_ptr<QueryGenerator> gen(new QueryGenerator);
+  gen->Load(search);
+  gen->set_name(name);
+  gen->set_dynamic(dynamic);
+  return boost::static_pointer_cast<Generator>(gen);
+}
 
 Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
                  QObject *parent)
@@ -41,6 +59,46 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
 
   model_ = new LibraryModel(backend_, this);
   model_->set_show_smart_playlists(true);
+  model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
+    << (LibraryModel::GeneratorList()
+      << NewQuery(tr("50 random tracks"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_Random, SearchTerm::Field_Title, 50))
+      << NewQuery(tr("Ever played"), Search(
+                  Search::Type_And, Search::TermList()
+                    << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_GreaterThan, 0),
+                  Search::Sort_Random, SearchTerm::Field_Title))
+      << NewQuery(tr("Never played"), Search(
+                  Search::Type_And, Search::TermList()
+                    << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_Equals, 0),
+                  Search::Sort_Random, SearchTerm::Field_Title))
+      << NewQuery(tr("Last played"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_FieldDesc, SearchTerm::Field_LastPlayed))
+      << NewQuery(tr("Most played"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_FieldDesc, SearchTerm::Field_PlayCount))
+      << NewQuery(tr("Favourite tracks"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_FieldDesc, SearchTerm::Field_Score))
+      << NewQuery(tr("Newest tracks"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_FieldDesc, SearchTerm::Field_DateCreated))
+    ) << (LibraryModel::GeneratorList()
+      << NewQuery(tr("All tracks"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_FieldAsc, SearchTerm::Field_Artist, -1))
+      << NewQuery(tr("Least favourite tracks"), Search(
+                  Search::Type_Or, Search::TermList()
+                    << SearchTerm(SearchTerm::Field_Rating, SearchTerm::Op_LessThan, 0.6)
+                    << SearchTerm(SearchTerm::Field_SkipCount, SearchTerm::Op_GreaterThan, 4),
+                  Search::Sort_FieldDesc, SearchTerm::Field_SkipCount))
+    ) << (LibraryModel::GeneratorList()
+      << NewQuery(tr("Dynamic random mix"), Search(
+                  Search::Type_All, Search::TermList(),
+                  Search::Sort_Random, SearchTerm::Field_Title), true)
+    )
+  );
 }
 
 void Library::set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory) {

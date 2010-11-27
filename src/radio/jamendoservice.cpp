@@ -35,6 +35,7 @@
 #include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
 #include "radio/radiomodel.h"
+#include "radio/jamendodynamicplaylist.h"
 #include "radio/jamendoplaylistitem.h"
 #include "smartplaylists/generator.h"
 #include "ui/iconloader.h"
@@ -62,6 +63,9 @@ const char* JamendoService::kSettingsGroup = "Jamendo";
 const int JamendoService::kBatchSize = 10000;
 const int JamendoService::kApproxDatabaseSize = 300000;
 
+using smart_playlists::Generator;
+using smart_playlists::GeneratorPtr;
+
 JamendoService::JamendoService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       network_(new NetworkAccessManager(this)),
@@ -82,6 +86,18 @@ JamendoService::JamendoService(RadioModel* parent)
 
   library_model_ = new LibraryModel(library_backend_, this);
   library_model_->set_show_smart_playlists(true);
+  library_model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
+    << (LibraryModel::GeneratorList()
+      << GeneratorPtr(new JamendoDynamicPlaylist(tr("Jamendo Top Tracks of the Month"),
+                      JamendoDynamicPlaylist::OrderBy_RatingMonth))
+      << GeneratorPtr(new JamendoDynamicPlaylist(tr("Jamendo Top Tracks of the Week"),
+                      JamendoDynamicPlaylist::OrderBy_RatingWeek))
+      << GeneratorPtr(new JamendoDynamicPlaylist(tr("Jamendo Top Tracks"),
+                      JamendoDynamicPlaylist::OrderBy_Rating))
+      << GeneratorPtr(new JamendoDynamicPlaylist(tr("Jamendo Most Listened Tracks"),
+                      JamendoDynamicPlaylist::OrderBy_Listened))
+    )
+  );
 
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
@@ -102,10 +118,6 @@ void JamendoService::LazyPopulate(RadioItem* item) {
   switch (item->type) {
     case RadioItem::Type_Service: {
       library_model_->Init();
-      smart_playlists::GeneratorPtr generator =
-          smart_playlists::Generator::Create("Jamendo");
-      generator->set_name(tr("Jamendo Top Tracks of the Month"));
-      library_model_->AddGenerator(generator);
       model()->merged_model()->AddSubModel(
           model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
           library_sort_model_);
@@ -227,12 +239,14 @@ void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
 
   ScopedTransaction t(&db);
 
-  QSqlQuery insert(QString("INSERT INTO jamendo.%1 (%2) VALUES (:id)")
+  QSqlQuery insert(QString("INSERT INTO %1 (%2) VALUES (:id)")
                    .arg(kTrackIdsTable, kTrackIdsColumn), db);
 
   foreach (int id, ids) {
     insert.bindValue(":id", id);
-    insert.exec();
+    if (!insert.exec()) {
+      qWarning() << "Query failed" << insert.lastQuery();
+    }
   }
 
   t.Commit();

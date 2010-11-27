@@ -9,8 +9,6 @@ class JamendoDynamicPlaylist : public smart_playlists::Generator {
   friend QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p);
 
 public:
-  JamendoDynamicPlaylist();
-
   // These values are persisted - only add to the end
   enum OrderBy {
     OrderBy_Rating = 0,
@@ -24,6 +22,9 @@ public:
     Order_Ascending = 0,
     Order_Descending = 1,
   };
+
+  JamendoDynamicPlaylist();
+  JamendoDynamicPlaylist(const QString& name, OrderBy order_by);
 
   QString type() const { return "Jamendo"; }
 
@@ -49,6 +50,7 @@ private:
   int current_index_;
 
   static const int kPageSize = 100;
+  static const int kApiRetryLimit = 5;
   static const char* kUrl;
 };
 

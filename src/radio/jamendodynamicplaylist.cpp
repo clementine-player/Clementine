@@ -17,7 +17,14 @@ JamendoDynamicPlaylist::JamendoDynamicPlaylist()
     order_direction_(Order_Descending),
     current_page_(0),
     current_index_(0) {
+}
 
+JamendoDynamicPlaylist::JamendoDynamicPlaylist(const QString& name, OrderBy order_by)
+  : order_by_(order_by),
+    order_direction_(Order_Descending),
+    current_page_(0),
+    current_index_(0) {
+  set_name(name);
 }
 
 void JamendoDynamicPlaylist::Load(const QByteArray& data) {
@@ -43,8 +50,10 @@ PlaylistItemList JamendoDynamicPlaylist::Generate() {
 }
 
 PlaylistItemList JamendoDynamicPlaylist::GenerateMore(int count) {
+  int tries = 0;
+
   PlaylistItemList items;
-  while (items.size() < count) {
+  while (items.size() < count && tries++ < kApiRetryLimit) {
     // Add items from current list.
     if (current_index_ < current_items_.size()) {
       PlaylistItemList more_items = current_items_.mid(current_index_, count);
@@ -79,12 +88,15 @@ void JamendoDynamicPlaylist::Fetch() {
   url.addQueryItem("pn", QString::number(current_page_++));
   url.addQueryItem("n", QString::number(kPageSize));
   url.addQueryItem("order", OrderSpec(order_by_, order_direction_));
-  qDebug() << url;
 
   // Have to make a new NetworkAccessManager here because we're in a different
   // thread.
   NetworkAccessManager network;
-  QNetworkReply* reply = network.get(QNetworkRequest(url));
+  QNetworkRequest req(url);
+  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                   QNetworkRequest::AlwaysNetwork);
+
+  QNetworkReply* reply = network.get(req);
 
   // Blocking wait for reply.
   {
@@ -95,10 +107,12 @@ void JamendoDynamicPlaylist::Fetch() {
 
   // The reply will contain one track ID per line
   QStringList lines = QString::fromAscii(reply->readAll()).split('\n');
+  delete reply;
 
   // Get the songs from the database
   SongList songs = backend_->GetSongsByForeignId(
         lines, JamendoService::kTrackIdsTable, JamendoService::kTrackIdsColumn);
+
   if (songs.empty()) {
     qWarning() << "No songs returned from Jamendo:"
                << url.toString();
