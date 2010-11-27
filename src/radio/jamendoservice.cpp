@@ -38,6 +38,7 @@
 #include "radio/jamendodynamicplaylist.h"
 #include "radio/jamendoplaylistitem.h"
 #include "smartplaylists/generator.h"
+#include "smartplaylists/querygenerator.h"
 #include "ui/iconloader.h"
 
 const char* JamendoService::kServiceName = "Jamendo";
@@ -63,9 +64,6 @@ const char* JamendoService::kSettingsGroup = "Jamendo";
 const int JamendoService::kBatchSize = 10000;
 const int JamendoService::kApproxDatabaseSize = 300000;
 
-using smart_playlists::Generator;
-using smart_playlists::GeneratorPtr;
-
 JamendoService::JamendoService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       network_(new NetworkAccessManager(this)),
@@ -84,6 +82,12 @@ JamendoService::JamendoService(RadioModel* parent)
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
 
+  using smart_playlists::Generator;
+  using smart_playlists::GeneratorPtr;
+  using smart_playlists::QueryGenerator;
+  using smart_playlists::Search;
+  using smart_playlists::SearchTerm;
+
   library_model_ = new LibraryModel(library_backend_, this);
   library_model_->set_show_smart_playlists(true);
   library_model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
@@ -96,6 +100,11 @@ JamendoService::JamendoService(RadioModel* parent)
                       JamendoDynamicPlaylist::OrderBy_Rating))
       << GeneratorPtr(new JamendoDynamicPlaylist(tr("Jamendo Most Listened Tracks"),
                       JamendoDynamicPlaylist::OrderBy_Listened))
+    )
+    << (LibraryModel::GeneratorList()
+      << GeneratorPtr(new QueryGenerator(tr("Dynamic random mix"), Search(
+                      Search::Type_All, Search::TermList(),
+                      Search::Sort_Random, SearchTerm::Field_Title), true))
     )
   );
 

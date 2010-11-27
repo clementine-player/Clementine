@@ -26,6 +26,7 @@ namespace smart_playlists {
 class QueryGenerator : public Generator {
 public:
   QueryGenerator();
+  QueryGenerator(const QString& name, const Search& search, bool dynamic = false);
 
   QString type() const { return "Query"; }
 

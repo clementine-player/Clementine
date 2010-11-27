@@ -29,6 +29,14 @@ QueryGenerator::QueryGenerator()
 {
 }
 
+QueryGenerator::QueryGenerator(const QString& name, const Search& search, bool dynamic)
+  : search_(search),
+    dynamic_(dynamic),
+    current_pos_(0)
+{
+  set_name(name);
+}
+
 void QueryGenerator::Load(const Search& search) {
   search_ = search;
   dynamic_ = false;
