@@ -884,7 +884,7 @@ LibraryModel::GroupBy& LibraryModel::Grouping::operator [](int i) {
 void LibraryModel::CreateSmartPlaylists() {
   smart_playlist_node_ = new LibraryItem(LibraryItem::Type_PlaylistContainer, root_);
   smart_playlist_node_->container_level = 0;
-  smart_playlist_node_->sort_text = "\0smart";
+  smart_playlist_node_->sort_text = "\0";
   smart_playlist_node_->key = tr("Smart playlists");
 
   QSettings s;

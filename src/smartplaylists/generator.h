@@ -43,6 +43,7 @@ public:
   // Should be called before Load on a new Generator
   void set_library(LibraryBackend* backend) { backend_ = backend; }
   void set_name(const QString& name) { name_ = name; }
+  LibraryBackend* library() const { return backend_; }
   QString name() const { return name_; }
 
   // Name of the subclass

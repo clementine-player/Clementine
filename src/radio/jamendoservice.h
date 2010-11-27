@@ -46,6 +46,8 @@ class JamendoService : public RadioService {
 
   QWidget* HeaderWidget() const;
 
+  LibraryBackend* library_backend() const { return library_backend_; }
+
   static const char* kServiceName;
   static const char* kDirectoryUrl;
   static const char* kMp3StreamUrl;

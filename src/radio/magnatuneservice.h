@@ -82,6 +82,7 @@ class MagnatuneService : public RadioService {
   PreferredFormat preferred_format() const { return format_; }
   QString username() const { return username_; }
   QString password() const { return password_; }
+  LibraryBackend* library_backend() const { return library_backend_; }
 
   QUrl ModifyUrl(const QUrl& url) const;
 

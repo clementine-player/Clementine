@@ -19,6 +19,7 @@
 #include "core/database.h"
 #include "core/scopedtransaction.h"
 #include "core/song.h"
+#include "library/librarybackend.h"
 #include "library/sqlrow.h"
 #include "smartplaylists/generator.h"
 
@@ -41,7 +42,9 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
 
   PlaylistList ret;
 
-  QSqlQuery q("SELECT ROWID, name, last_played FROM playlists ORDER BY ui_order", db);
+  QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
+              "       dynamic_playlist_data, dynamic_playlist_backend"
+              " FROM playlists", db);
   q.exec();
   if (db_->CheckErrors(q.lastError()))
     return ret;
@@ -51,6 +54,9 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
     p.id = q.value(0).toInt();
     p.name = q.value(1).toString();
     p.last_played = q.value(2).toInt();
+    p.dynamic_type = q.value(3).toString();
+    p.dynamic_data = q.value(4).toByteArray();
+    p.dynamic_backend = q.value(5).toString();
     ret << p;
   }
 
@@ -62,7 +68,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
-              "       dynamic_playlist_data"
+              "       dynamic_playlist_data, dynamic_playlist_backend"
               " FROM playlists"
               " WHERE ROWID=:id", db);
   q.bindValue(":id", id);
@@ -78,6 +84,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   p.last_played = q.value(2).toInt();
   p.dynamic_type = q.value(3).toString();
   p.dynamic_data = q.value(4).toByteArray();
+  p.dynamic_backend = q.value(5).toString();
 
   return p;
 }
@@ -147,7 +154,8 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   QSqlQuery update("UPDATE playlists SET "
                    "   last_played=:last_played,"
                    "   dynamic_playlist_type=:dynamic_type,"
-                   "   dynamic_playlist_data=:dynamic_data"
+                   "   dynamic_playlist_data=:dynamic_data,"
+                   "   dynamic_playlist_backend=:dynamic_backend"
                    " WHERE ROWID=:playlist", db);
 
   ScopedTransaction transaction(&db);
@@ -172,9 +180,11 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   if (dynamic) {
     update.bindValue(":dynamic_type", dynamic->type());
     update.bindValue(":dynamic_data", dynamic->Save());
+    update.bindValue(":dynamic_backend", dynamic->library()->songs_table());
   } else {
     update.bindValue(":dynamic_type", QString());
     update.bindValue(":dynamic_data", QByteArray());
+    update.bindValue(":dynamic_backend", QString());
   }
   update.bindValue(":playlist", playlist);
   update.exec();

@@ -69,6 +69,7 @@ Playlist::Playlist(PlaylistBackend* backend,
                    int id,
                    QObject *parent)
   : QAbstractListModel(parent),
+    is_loading_(false),
     proxy_(new PlaylistFilter(this)),
     queue_(new Queue(this)),
     backend_(backend),
@@ -991,7 +992,7 @@ void Playlist::SetCurrentIsPaused(bool paused) {
 }
 
 void Playlist::Save() const {
-  if (!backend_)
+  if (!backend_ || is_loading_)
     return;
 
   backend_->SavePlaylistAsync(id_, items_, last_played_index(), dynamic_playlist_);
@@ -1020,7 +1021,9 @@ void Playlist::ItemsLoaded() {
   watcher->deleteLater();
 
   PlaylistItemList items = watcher->future().results();
+  is_loading_ = true;
   InsertItems(items, 0);
+  is_loading_ = false;
 
   PlaylistBackend::Playlist p = backend_->GetPlaylist(id_);
 
@@ -1030,9 +1033,20 @@ void Playlist::ItemsLoaded() {
   if (!p.dynamic_type.isEmpty()) {
     GeneratorPtr gen = Generator::Create(p.dynamic_type);
     if (gen) {
-      gen->set_library(library_);
-      gen->Load(p.dynamic_data);
-      TurnOnDynamicPlaylist(gen);
+      // Hack: can't think of a better way to get the right backend
+      LibraryBackend* backend = NULL;
+      if (p.dynamic_backend == library_->songs_table())
+        backend = library_;
+      else if (p.dynamic_backend == MagnatuneService::kSongsTable)
+        backend = RadioModel::Service<MagnatuneService>()->library_backend();
+      else if (p.dynamic_backend == JamendoService::kSongsTable)
+        backend = RadioModel::Service<JamendoService>()->library_backend();
+
+      if (backend) {
+        gen->set_library(backend);
+        gen->Load(p.dynamic_data);
+        TurnOnDynamicPlaylist(gen);
+      }
     }
   }
 }

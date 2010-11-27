@@ -41,6 +41,7 @@ class PlaylistBackend : public QObject {
     QString name;
     int last_played;
     QString dynamic_type;
+    QString dynamic_backend;
     QByteArray dynamic_data;
   };
   typedef QList<Playlist> PlaylistList;

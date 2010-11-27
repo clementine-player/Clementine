@@ -228,6 +228,7 @@ class Playlist : public QAbstractListModel {
   void ItemsLoaded();
 
  private:
+  bool is_loading_;
   PlaylistFilter* proxy_;
   Queue* queue_;
 
