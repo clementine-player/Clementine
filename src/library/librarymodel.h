@@ -103,6 +103,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Call before Init()
   void set_show_smart_playlists(bool show_smart_playlists) { show_smart_playlists_ = show_smart_playlists; }
   void set_default_smart_playlists(const DefaultGenerators& defaults) { default_smart_playlists_ = defaults; }
+  void set_show_various_artists(bool show_various_artists) { show_various_artists_ = show_various_artists; }
 
   // Get information about the library
   void GetChildSongs(LibraryItem* item, QList<QUrl>* urls, SongList* songs,
@@ -199,6 +200,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   LibraryDirectoryModel* dir_model_;
   bool show_smart_playlists_;
   DefaultGenerators default_smart_playlists_;
+  bool show_various_artists_;
 
   QueryOptions query_options_;
   Grouping group_by_;

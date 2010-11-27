@@ -89,6 +89,7 @@ JamendoService::JamendoService(RadioModel* parent)
   using smart_playlists::SearchTerm;
 
   library_model_ = new LibraryModel(library_backend_, this);
+  library_model_->set_show_various_artists(false);
   library_model_->set_show_smart_playlists(true);
   library_model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()

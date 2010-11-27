@@ -48,6 +48,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
     backend_(backend),
     dir_model_(new LibraryDirectoryModel(backend, this)),
     show_smart_playlists_(false),
+    show_various_artists_(true),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png"),
     no_cover_icon_(":nocover.png"),
@@ -443,10 +444,12 @@ void LibraryModel::Reset() {
   root_ = new LibraryItem(this);
   root_->lazy_loaded = false;
 
-  // Various artists?
-  if (group_by_[0] == GroupBy_Artist &&
-      backend_->HasCompilations(query_options_))
-    CreateCompilationArtistNode(false, root_);
+  if (show_various_artists_) {
+    // Various artists?
+    if (group_by_[0] == GroupBy_Artist &&
+        backend_->HasCompilations(query_options_))
+      CreateCompilationArtistNode(false, root_);
+  }
 
   // Smart playlists?
   if (show_smart_playlists_ && query_options_.filter.isEmpty())
