@@ -335,6 +335,9 @@ Database::Database(QObject* parent, const QString& database_name)
   directory_ = QDir::toNativeSeparators(
       QDir::homePath() + "/.config/" + QCoreApplication::organizationName());
 
+  attached_databases_["jamendo"] = AttachedDatabase(
+        directory_ + "/jamendo.db", ":/schema/jamendo.sql");
+
   QMutexLocker l(&mutex_);
   Connect();
 }
@@ -405,6 +408,25 @@ QSqlDatabase Database::Connect() {
     UpdateDatabaseSchema(0, db);
   }
 
+  // Attach external databases
+  foreach (const QString& key, attached_databases_.keys()) {
+    const QString filename = attached_databases_[key].filename_;
+    const bool already_exists = QFile::exists(filename);
+
+    // Attach the db
+    QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
+    q.bindValue(":filename", filename);
+    q.bindValue(":alias", key);
+    if (!q.exec()) {
+      qFatal("Couldn't attach external database '%s'", key.toAscii().constData());
+    }
+
+    // Set up initial schema if it didn't exist already
+    if (!already_exists) {
+      ExecFromFile(attached_databases_[key].schema_, db);
+    }
+  }
+
   // Get the database's schema version
   QSqlQuery q("SELECT version FROM schema_version", db);
   int schema_version = 0;
@@ -423,6 +445,38 @@ QSqlDatabase Database::Connect() {
   }
 
   return db;
+}
+
+void Database::RecreateAttachedDb(const QString& database_name) {
+  if (!attached_databases_.contains(database_name)) {
+    qWarning() << "Attached database does not exist:" << database_name;
+    return;
+  }
+
+  const QString filename = attached_databases_[database_name].filename_;
+
+  QMutexLocker l(&mutex_);
+  {
+    QSqlDatabase db(Connect());
+
+    QSqlQuery q("DETACH DATABASE :alias", db);
+    q.bindValue(":alias", database_name);
+    if (!q.exec()) {
+      qWarning() << "Failed to detach database" << database_name;
+      return;
+    }
+
+    if (!QFile::remove(filename)) {
+      qWarning() << "Failed to remove file" << filename;
+    }
+  }
+
+  // We can't just re-attach the database now because it needs to be done for
+  // each thread.  Close all the database connections, so each thread will
+  // re-attach it when they next connect.
+  foreach (const QString& name, QSqlDatabase::connectionNames()) {
+    QSqlDatabase::removeDatabase(name);
+  }
 }
 
 void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {

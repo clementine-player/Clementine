@@ -287,7 +287,7 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
   transaction.Commit();
 }
 
-void LibraryBackend::AddOrUpdateSongs(const SongList& songs, bool insert_with_id) {
+void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
@@ -295,9 +295,6 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs, bool insert_with_id
                       .arg(dirs_table_), db);
   QSqlQuery add_song(QString("INSERT INTO %1 (" + Song::kColumnSpec + ")"
                              " VALUES (" + Song::kBindSpec + ")")
-                     .arg(songs_table_), db);
-  QSqlQuery add_song_id(QString("INSERT INTO %1 (ROWID, " + Song::kColumnSpec + ")"
-                               " VALUES (:id, " + Song::kBindSpec + ")")
                      .arg(songs_table_), db);
   QSqlQuery update_song(QString("UPDATE %1 SET " + Song::kUpdateSpec +
                                 " WHERE ROWID = :id").arg(songs_table_), db);
@@ -325,26 +322,16 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs, bool insert_with_id
         continue; // Directory didn't exist
     }
 
-
-    if (insert_with_id || song.id() == -1) {
+    if (song.id() == -1) {
       // Create
 
-      int id = song.id();
-      if (insert_with_id) {
-        // Insert the row with the existing ID
-        add_song_id.bindValue(":id", song.id());
-        song.BindToQuery(&add_song_id);
-        add_song_id.exec();
-        if (db_->CheckErrors(add_song_id.lastError())) continue;
-      } else {
-        // Insert the row and create a new ID
-        song.BindToQuery(&add_song);
-        add_song.exec();
-        if (db_->CheckErrors(add_song.lastError())) continue;
+      // Insert the row and create a new ID
+      song.BindToQuery(&add_song);
+      add_song.exec();
+      if (db_->CheckErrors(add_song.lastError())) continue;
 
-        // Get the new ID
-        id = add_song.lastInsertId().toInt();
-      }
+      // Get the new ID
+      const int id = add_song.lastInsertId().toInt();
 
       // Add to the FTS index
       add_song_fts.bindValue(":id", id);
@@ -493,22 +480,71 @@ SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, c
 Song LibraryBackend::GetSongById(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
-
   return GetSongById(id, db);
 }
 
-Song LibraryBackend::GetSongById(int id, QSqlDatabase& db) {
-  QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
-                      " WHERE ROWID = :id").arg(songs_table_), db);
-  q.bindValue(":id", id);
+SongList LibraryBackend::GetSongsById(const QList<int>& ids) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QStringList str_ids;
+  foreach (int id, ids) {
+    str_ids << QString::number(id);
+  }
+
+  return GetSongsById(str_ids, db);
+}
+
+SongList LibraryBackend::GetSongsById(const QStringList& ids) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  return GetSongsById(ids, db);
+}
+
+SongList LibraryBackend::GetSongsByForeignId(
+    const QStringList& ids, const QString& table, const QString& column) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QString in = ids.join(",");
+
+  QSqlQuery q(QString("SELECT %2.ROWID, " + Song::kColumnSpec +
+                      " FROM %1, %2"
+                      " WHERE %1.ROWID = %2.ROWID AND %2.%3 IN (%4)")
+              .arg(songs_table_, table, column, in), db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return Song();
+  if (db_->CheckErrors(q.lastError())) return SongList();
 
-  q.next();
+  SongList ret;
+  while (q.next()) {
+    Song song;
+    song.InitFromQuery(q);
+    ret << song;
+  }
+  return ret;
+}
 
-  Song ret;
-  if (q.isValid()) {
-    ret.InitFromQuery(q);
+Song LibraryBackend::GetSongById(int id, QSqlDatabase& db) {
+  SongList list = GetSongsById(QStringList() << QString::number(id), db);
+  if (list.isEmpty())
+    return Song();
+  return list.first();
+}
+
+SongList LibraryBackend::GetSongsById(const QStringList& ids, QSqlDatabase& db) {
+  QString in = ids.join(",");
+
+  QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
+                      " WHERE ROWID IN (%2)").arg(songs_table_, in), db);
+  q.exec();
+  if (db_->CheckErrors(q.lastError())) return SongList();
+
+  SongList ret;
+  while (q.next()) {
+    Song song;
+    song.InitFromQuery(q);
+    ret << song;
   }
   return ret;
 }

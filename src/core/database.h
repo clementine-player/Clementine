@@ -18,10 +18,11 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <QMap>
+#include <QMutex>
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlError>
-#include <QMutex>
 #include <QStringList>
 
 #include <sqlite3.h>
@@ -52,6 +53,7 @@ class Database : public QObject {
   bool CheckErrors(const QSqlError& error);
   QMutex* Mutex() { return &mutex_; }
 
+  void RecreateAttachedDb(const QString& database_name);
   void ExecFromFile(const QString& filename, QSqlDatabase &db);
   void ExecCommands(const QString& commands, QSqlDatabase &db);
 
@@ -61,6 +63,18 @@ class Database : public QObject {
  private:
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
   QStringList SongsTables(QSqlDatabase& db) const;
+
+  struct AttachedDatabase {
+    AttachedDatabase() {}
+    AttachedDatabase(const QString& filename, const QString& schema)
+      : filename_(filename), schema_(schema) {}
+
+    QString filename_;
+    QString schema_;
+  };
+
+  // Alias -> filename
+  QMap<QString, AttachedDatabase> attached_databases_;
 
   QString directory_;
   QMutex connect_mutex_;

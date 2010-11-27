@@ -26,8 +26,10 @@
 #include <QXmlStreamReader>
 #include "qtiocompressor.h"
 
+#include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
+#include "core/scopedtransaction.h"
 #include "core/taskmanager.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
@@ -50,8 +52,10 @@ const char* JamendoService::kHomepage = "http://www.jamendo.com/";
 const char* JamendoService::kAlbumInfoUrl = "http://www.jamendo.com/album/%1";
 const char* JamendoService::kDownloadAlbumUrl = "http://www.jamendo.com/download/album/%1";
 
-const char* JamendoService::kSongsTable = "jamendo_songs";
-const char* JamendoService::kFtsTable = "jamendo_songs_fts";
+const char* JamendoService::kSongsTable = "jamendo.songs";
+const char* JamendoService::kFtsTable = "jamendo.songs_fts";
+const char* JamendoService::kTrackIdsTable = "jamendo.track_ids";
+const char* JamendoService::kTrackIdsColumn = "track_id";
 
 const char* JamendoService::kSettingsGroup = "Jamendo";
 
@@ -114,15 +118,17 @@ void JamendoService::LazyPopulate(RadioItem* item) {
 }
 
 void JamendoService::UpdateTotalSongCount(int count) {
-  qDebug() << Q_FUNC_INFO << count;
   total_song_count_ = count;
-  if (total_song_count_ == 0) {
+  if (total_song_count_ == 0 && !load_database_task_id_) {
     DownloadDirectory();
   }
 }
 
 void JamendoService::DownloadDirectory() {
   QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
+  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                   QNetworkRequest::AlwaysNetwork);
+
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
   connect(reply, SIGNAL(downloadProgress(qint64,qint64)),
@@ -172,24 +178,31 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
   // Bit of a hack: don't update the model while we're parsing the xml
   disconnect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
              library_model_, SLOT(SongsDiscovered(SongList)));
+  disconnect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+             this, SLOT(UpdateTotalSongCount(int)));
 
-  // Delete all existing songs in the db
-  library_backend_->DeleteAll();
+  // Delete the database and recreate it.  This is faster than dropping tables
+  // or removing rows.
+  library_backend_->db()->RecreateAttachedDb("jamendo");
 
+  TrackIdList track_ids;
   SongList songs;
   QXmlStreamReader reader(device);
   while (!reader.atEnd()) {
     reader.readNext();
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
         reader.name() == "artist") {
-      songs << ReadArtist(&reader);
+      songs << ReadArtist(&reader, &track_ids);
     }
 
     if (songs.count() >= kBatchSize) {
       // Add the songs to the database in batches
-      library_backend_->AddOrUpdateSongs(songs, true);
+      library_backend_->AddOrUpdateSongs(songs);
+      InsertTrackIds(track_ids);
+
       total_count += songs.count();
       songs.clear();
+      track_ids.clear();
 
       // Update progress info
       model()->task_manager()->SetTaskProgress(
@@ -197,17 +210,38 @@ void JamendoService::ParseDirectory(QIODevice* device) const {
     }
   }
 
-  library_backend_->AddOrUpdateSongs(songs, true);
+  library_backend_->AddOrUpdateSongs(songs);
+  InsertTrackIds(track_ids);
 
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)),
           library_model_, SLOT(SongsDiscovered(SongList)));
-  library_model_->Reset();
+  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+          SLOT(UpdateTotalSongCount(int)));
+
+  library_backend_->UpdateTotalSongCount();
 }
 
-SongList JamendoService::ReadArtist(QXmlStreamReader* reader) const {
+void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
+  QMutexLocker l(library_backend_->db()->Mutex());
+  QSqlDatabase db(library_backend_->db()->Connect());
+
+  ScopedTransaction t(&db);
+
+  QSqlQuery insert(QString("INSERT INTO jamendo.%1 (%2) VALUES (:id)")
+                   .arg(kTrackIdsTable, kTrackIdsColumn), db);
+
+  foreach (int id, ids) {
+    insert.bindValue(":id", id);
+    insert.exec();
+  }
+
+  t.Commit();
+}
+
+SongList JamendoService::ReadArtist(QXmlStreamReader* reader,
+                                    TrackIdList* track_ids) const {
   SongList ret;
   QString current_artist;
-  QString current_album;
 
   while (!reader->atEnd()) {
     reader->readNext();
@@ -217,7 +251,7 @@ SongList JamendoService::ReadArtist(QXmlStreamReader* reader) const {
       if (name == "name") {
         current_artist = reader->readElementText().trimmed();
       } else if (name == "album") {
-        ret << ReadAlbum(current_artist, reader);
+        ret << ReadAlbum(current_artist, reader, track_ids);
       }
     } else if (reader->isEndElement() && reader->name() == "artist") {
       break;
@@ -228,7 +262,7 @@ SongList JamendoService::ReadArtist(QXmlStreamReader* reader) const {
 }
 
 SongList JamendoService::ReadAlbum(
-    const QString& artist, QXmlStreamReader* reader) const {
+    const QString& artist, QXmlStreamReader* reader, TrackIdList* track_ids) const {
   SongList ret;
   QString current_album;
   QString cover;
@@ -245,7 +279,8 @@ SongList JamendoService::ReadAlbum(
         cover = QString(kAlbumCoverUrl).arg(id);
         current_album_id = id.toInt();
       } else if (reader->name() == "track") {
-        ret << ReadTrack(artist, current_album, cover, current_album_id, reader);
+        ret << ReadTrack(artist, current_album, cover, current_album_id,
+                         reader, track_ids);
       }
     } else if (reader->isEndElement() && reader->name() == "album") {
       break;
@@ -258,7 +293,8 @@ Song JamendoService::ReadTrack(const QString& artist,
                                const QString& album,
                                const QString& album_cover,
                                int album_id,
-                               QXmlStreamReader* reader) const {
+                               QXmlStreamReader* reader,
+                               TrackIdList* track_ids) const {
   Song song;
   song.set_artist(artist);
   song.set_album(album);
@@ -296,10 +332,11 @@ Song JamendoService::ReadTrack(const QString& artist,
 
         QString ogg_url = QString(kOggStreamUrl).arg(id_text);
         song.set_filename(ogg_url);
-
         song.set_art_automatic(album_cover);
-        song.set_id(id);
         song.set_valid(true);
+
+        // Rely on songs getting added in this exact order
+        track_ids->append(id);
       }
     } else if (reader->isEndElement() && reader->name() == "track") {
       break;
@@ -311,6 +348,8 @@ Song JamendoService::ReadTrack(const QString& artist,
 void JamendoService::ParseDirectoryFinished() {
   QFutureWatcher<void>* watcher = static_cast<QFutureWatcher<void>*>(sender());
   delete watcher;
+
+  library_model_->Reset();
 
   model()->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;

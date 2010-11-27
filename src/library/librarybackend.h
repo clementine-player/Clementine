@@ -129,6 +129,10 @@ class LibraryBackend : public LibraryBackendInterface {
   Album GetAlbumArt(const QString& artist, const QString& album);
 
   Song GetSongById(int id);
+  SongList GetSongsById(const QList<int>& ids);
+  SongList GetSongsById(const QStringList& ids);
+  SongList GetSongsByForeignId(const QStringList& ids, const QString& table,
+                               const QString& column);
 
   void AddDirectory(const QString& path);
   void RemoveDirectory(const Directory& dir);
@@ -145,7 +149,7 @@ class LibraryBackend : public LibraryBackendInterface {
  public slots:
   void LoadDirectories();
   void UpdateTotalSongCount();
-  void AddOrUpdateSongs(const SongList& songs, bool insert_with_id = false);
+  void AddOrUpdateSongs(const SongList& songs);
   void UpdateMTimesOnly(const SongList& songs);
   void DeleteSongs(const SongList& songs);
   void AddOrUpdateSubdirs(const SubdirectoryList& subdirs);
@@ -186,7 +190,9 @@ class LibraryBackend : public LibraryBackendInterface {
   AlbumList GetAlbums(const QString& artist, bool compilation = false,
                       const QueryOptions& opt = QueryOptions());
   SubdirectoryList SubdirsInDirectory(int id, QSqlDatabase& db);
+
   Song GetSongById(int id, QSqlDatabase& db);
+  SongList GetSongsById(const QStringList& ids, QSqlDatabase& db);
 
  private:
   boost::shared_ptr<Database> db_;

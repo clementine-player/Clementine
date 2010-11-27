@@ -90,6 +90,9 @@ void IcecastService::LazyPopulate(RadioItem* item) {
 
 void IcecastService::LoadDirectory() {
   QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
+  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                   QNetworkRequest::AlwaysNetwork);
+
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
 

@@ -57,6 +57,8 @@ class JamendoService : public RadioService {
 
   static const char* kSongsTable;
   static const char* kFtsTable;
+  static const char* kTrackIdsTable;
+  static const char* kTrackIdsColumn;
 
   static const char* kSettingsGroup;
 
@@ -66,13 +68,18 @@ class JamendoService : public RadioService {
  private:
   void ParseDirectory(QIODevice* device) const;
 
-  SongList ReadArtist(QXmlStreamReader* reader) const;
-  SongList ReadAlbum(const QString& artist, QXmlStreamReader* reader) const;
+  typedef QList<int> TrackIdList;
+
+  SongList ReadArtist(QXmlStreamReader* reader, TrackIdList* track_ids) const;
+  SongList ReadAlbum(const QString& artist, QXmlStreamReader* reader,
+                     TrackIdList* track_ids) const;
   Song ReadTrack(const QString& artist,
                  const QString& album,
                  const QString& album_cover,
                  int album_id,
-                 QXmlStreamReader* reader) const;
+                 QXmlStreamReader* reader,
+                 TrackIdList* track_ids) const;
+  void InsertTrackIds(const TrackIdList& ids) const;
 
   void EnsureMenuCreated();
 

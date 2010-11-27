@@ -88,8 +88,13 @@ QNetworkReply* NetworkAccessManager::createRequest(
   new_request.setRawHeader("User-Agent", QString("%1 %2").arg(
       QCoreApplication::applicationName(),
       QCoreApplication::applicationVersion()).toUtf8());
-  new_request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                           QNetworkRequest::PreferCache);
+
+  // Prefer the cache unless the caller has changed the setting already
+  if (request.attribute(QNetworkRequest::CacheLoadControlAttribute).toInt()
+      == QNetworkRequest::PreferNetwork) {
+    new_request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                             QNetworkRequest::PreferCache);
+  }
 
   return QNetworkAccessManager::createRequest(op, new_request, outgoingData);
 }

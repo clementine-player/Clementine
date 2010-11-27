@@ -3,33 +3,56 @@
 
 #include "smartplaylists/generator.h"
 
-class NetworkAccessManager;
-
 class JamendoDynamicPlaylist : public smart_playlists::Generator {
   Q_OBJECT
- public:
+  friend QDataStream& operator <<(QDataStream& s, const JamendoDynamicPlaylist& p);
+  friend QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p);
+
+public:
   JamendoDynamicPlaylist();
 
-  virtual QString type() const { return "Jamendo"; }
-  virtual void Load(const QByteArray& data);
-  virtual QByteArray Save() const;
+  // These values are persisted - only add to the end
+  enum OrderBy {
+    OrderBy_Rating = 0,
+    OrderBy_RatingWeek = 1,
+    OrderBy_RatingMonth = 2,
+    OrderBy_Listened = 3,
+  };
 
-  virtual PlaylistItemList Generate();
+  // These values are persisted - only add to the end
+  enum OrderDirection {
+    Order_Ascending = 0,
+    Order_Descending = 1,
+  };
 
-  virtual bool is_dynamic() const { return true; }
-  virtual PlaylistItemList GenerateMore(int count);
+  QString type() const { return "Jamendo"; }
 
- private:
+  void Load(const QByteArray& data);
+  void Load(OrderBy order_by, OrderDirection order_direction = Order_Descending);
+  QByteArray Save() const;
+
+  PlaylistItemList Generate();
+
+  bool is_dynamic() const { return true; }
+  PlaylistItemList GenerateMore(int count);
+
+private:
   void Fetch();
+  static QString OrderSpec(OrderBy by, OrderDirection dir);
 
-  NetworkAccessManager* network_;
+private:
+  OrderBy order_by_;
+  OrderDirection order_direction_;
+
   int current_page_;
   PlaylistItemList current_items_;
   int current_index_;
 
-  static const int kPageSize = 20;
-
-  static const char* kTopTracksMonthUrl;
+  static const int kPageSize = 100;
+  static const char* kUrl;
 };
+
+QDataStream& operator <<(QDataStream& s, const JamendoDynamicPlaylist& p);
+QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p);
 
 #endif

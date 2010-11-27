@@ -133,8 +133,8 @@ void MagnatuneService::LazyPopulate(RadioItem *item) {
 
 void MagnatuneService::ReloadDatabase() {
   QNetworkRequest request = QNetworkRequest(QUrl(kDatabaseUrl));
-  request.setRawHeader("User-Agent", QString("%1 %2").arg(
-      QCoreApplication::applicationName(), QCoreApplication::applicationVersion()).toUtf8());
+  request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                       QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(request);
   connect(reply, SIGNAL(finished()), SLOT(ReloadDatabaseFinished()));

@@ -1,31 +1,41 @@
 #include "jamendodynamicplaylist.h"
 
 #include <QEventLoop>
+#include <QNetworkReply>
 #include <QtDebug>
 
 #include "core/network.h"
-#include "core/songloader.h"
 #include "library/librarybackend.h"
 #include "radio/jamendoplaylistitem.h"
+#include "radio/jamendoservice.h"
 
-const char* JamendoDynamicPlaylist::kTopTracksMonthUrl =
-    "http://api.jamendo.com/get2/id+name+url+stream+album_name+"
-    "album_url+album_id+artist_id+artist_name/track/xspf/"
-    "track_album+album_artist/?order=ratingmonth_desc&streamencoding=ogg2";
+const char* JamendoDynamicPlaylist::kUrl =
+    "http://api.jamendo.com/get2/id/track/plain/";
 
 JamendoDynamicPlaylist::JamendoDynamicPlaylist()
-  : network_(new NetworkAccessManager(this)),
+  : order_by_(OrderBy_Rating),
+    order_direction_(Order_Descending),
     current_page_(0),
     current_index_(0) {
 
 }
 
 void JamendoDynamicPlaylist::Load(const QByteArray& data) {
+  QDataStream s(data);
+  s >> *this;
+}
 
+void JamendoDynamicPlaylist::Load(OrderBy order_by, OrderDirection order_direction) {
+  order_by_ = order_by;
+  order_direction_ = order_direction;
 }
 
 QByteArray JamendoDynamicPlaylist::Save() const {
-  return QByteArray();
+  QByteArray ret;
+  QDataStream s(&ret, QIODevice::WriteOnly);
+  s << *this;
+
+  return ret;
 }
 
 PlaylistItemList JamendoDynamicPlaylist::Generate() {
@@ -49,37 +59,69 @@ PlaylistItemList JamendoDynamicPlaylist::GenerateMore(int count) {
   return items;
 }
 
+QString JamendoDynamicPlaylist::OrderSpec(OrderBy by, OrderDirection dir) {
+  QString ret;
+  switch (by) {
+    case OrderBy_Listened:    ret += "listened";    break;
+    case OrderBy_Rating:      ret += "rating";      break;
+    case OrderBy_RatingMonth: ret += "ratingmonth"; break;
+    case OrderBy_RatingWeek:  ret += "ratingweek";  break;
+  }
+  switch (dir) {
+    case Order_Ascending:     ret += "_asc";        break;
+    case Order_Descending:    ret += "_desc";       break;
+  }
+  return ret;
+}
+
 void JamendoDynamicPlaylist::Fetch() {
-  QUrl url = QUrl(kTopTracksMonthUrl);
+  QUrl url(kUrl);
   url.addQueryItem("pn", QString::number(current_page_++));
   url.addQueryItem("n", QString::number(kPageSize));
+  url.addQueryItem("order", OrderSpec(order_by_, order_direction_));
+  qDebug() << url;
 
-  SongLoader loader(backend_);
-  SongLoader::Result result = loader.Load(url);
-
-  if (result != SongLoader::WillLoadAsync) {
-    qWarning() << "Jamendo dynamic playlist fetch failed with:"
-               << url;
-    return;
-  }
+  // Have to make a new NetworkAccessManager here because we're in a different
+  // thread.
+  NetworkAccessManager network;
+  QNetworkReply* reply = network.get(QNetworkRequest(url));
 
   // Blocking wait for reply.
   {
     QEventLoop event_loop;
-    connect(&loader, SIGNAL(LoadFinished(bool)), &event_loop, SLOT(quit()));
+    connect(reply, SIGNAL(finished()), &event_loop, SLOT(quit()));
     event_loop.exec();
   }
 
-  const SongList& songs = loader.songs();
+  // The reply will contain one track ID per line
+  QStringList lines = QString::fromAscii(reply->readAll()).split('\n');
+
+  // Get the songs from the database
+  SongList songs = backend_->GetSongsByForeignId(
+        lines, JamendoService::kTrackIdsTable, JamendoService::kTrackIdsColumn);
   if (songs.empty()) {
     qWarning() << "No songs returned from Jamendo:"
-               << url;
+               << url.toString();
     return;
   }
 
   current_items_.clear();
   foreach (const Song& song, songs) {
-    current_items_ << PlaylistItemPtr(new JamendoPlaylistItem(song));
+    if (song.is_valid())
+      current_items_ << PlaylistItemPtr(new JamendoPlaylistItem(song));
   }
   current_index_ = 0;
+}
+
+QDataStream& operator <<(QDataStream& s, const JamendoDynamicPlaylist& p) {
+  s << quint8(p.order_by_) << quint8(p.order_direction_);
+  return s;
+}
+
+QDataStream& operator >>(QDataStream& s, JamendoDynamicPlaylist& p) {
+  quint8 order_by, order_direction;
+  s >> order_by >> order_direction;
+  p.order_by_ = JamendoDynamicPlaylist::OrderBy(order_by);
+  p.order_direction_ = JamendoDynamicPlaylist::OrderDirection(order_direction);
+  return s;
 }
