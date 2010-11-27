@@ -48,7 +48,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
         query += token + "* ";
     }
 
-    where_clauses_ << "fts.%fts_table MATCH ?";
+    where_clauses_ << "fts.%fts_table_noprefix MATCH ?";
     bound_values_ << query;
     join_with_fts_ = true;
   }
@@ -98,6 +98,7 @@ QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
     sql += " LIMIT " + QString::number(limit_);
 
   sql.replace("%songs_table", songs_table);
+  sql.replace("%fts_table_noprefix", fts_table.section('.', -1, -1));
   sql.replace("%fts_table", fts_table);
   query_ = QSqlQuery(sql, db);
 
