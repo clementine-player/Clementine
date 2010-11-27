@@ -40,6 +40,8 @@ class LibraryFilterWidget : public QWidget {
   LibraryFilterWidget(QWidget* parent = 0);
   ~LibraryFilterWidget();
 
+  static const int kFilterDelay = 500; // msec
+
   void SetFilterHint(const QString& hint);
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
@@ -64,6 +66,9 @@ class LibraryFilterWidget : public QWidget {
   void GroupByClicked(QAction* action);
   void ClearFilter();
 
+  void FilterTextChanged(const QString& text);
+  void FilterDelayTimeout();
+
  private:
   Ui_LibraryFilterWidget* ui_;
   LibraryModel* model_;
@@ -76,6 +81,8 @@ class LibraryFilterWidget : public QWidget {
   QMenu* library_menu_;
   QActionGroup* group_by_group_;
   QSignalMapper* filter_age_mapper_;
+
+  QTimer* filter_delay_;
 
   QString settings_group_;
 

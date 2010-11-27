@@ -112,6 +112,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   SongList GetChildSongs(const QModelIndex& index) const;
   SongList GetChildSongs(const QModelIndexList& indexes) const;
 
+  // Might be accurate
+  int total_song_count() const { return total_song_count_; }
+
   // Smart playlists
   smart_playlists::GeneratorPtr CreateGenerator(const QModelIndex& index) const;
   void AddGenerator(smart_playlists::GeneratorPtr gen);
@@ -146,6 +149,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsStatisticsChanged(const SongList& songs);
+  void TotalSongCountUpdatedSlot(int count);
 
   // Called after ResetAsync
   void ResetAsyncQueryFinished();
@@ -214,6 +218,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   bool show_smart_playlists_;
   DefaultGenerators default_smart_playlists_;
   bool show_various_artists_;
+
+  int total_song_count_;
 
   QueryOptions query_options_;
   Grouping group_by_;

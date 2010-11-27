@@ -23,20 +23,26 @@
 #include "ui/settingsdialog.h"
 #include "widgets/maclineedit.h"
 
+#include <QActionGroup>
 #include <QKeyEvent>
 #include <QMenu>
-#include <QActionGroup>
-#include <QSignalMapper>
 #include <QSettings>
+#include <QSignalMapper>
+#include <QTimer>
 
 LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_LibraryFilterWidget),
     model_(NULL),
-    group_by_dialog_(new GroupByDialog)
+    group_by_dialog_(new GroupByDialog),
+    filter_delay_(new QTimer(this))
 {
   ui_->setupUi(this);
   connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
+  connect(filter_delay_, SIGNAL(timeout()), SLOT(FilterDelayTimeout()));
+
+  filter_delay_->setInterval(kFilterDelay);
+  filter_delay_->setSingleShot(true);
 
   // Icons
   ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
@@ -114,6 +120,8 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
 #else
   filter_ = ui_->filter;
 #endif
+
+  connect(filter_->object(), SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {
@@ -125,7 +133,6 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
     disconnect(model_, 0, this, 0);
     disconnect(model_, 0, group_by_dialog_.get(), 0);
     disconnect(group_by_dialog_.get(), 0, model_, 0);
-    disconnect(filter_->object(), 0, model_, 0);
     disconnect(filter_age_mapper_, 0, model_, 0);
   }
 
@@ -138,7 +145,6 @@ void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
           SLOT(GroupingChanged(LibraryModel::Grouping)));
   connect(group_by_dialog_.get(), SIGNAL(Accepted(LibraryModel::Grouping)),
           model_, SLOT(SetGroupBy(LibraryModel::Grouping)));
-  connect(filter_->object(), SIGNAL(textChanged(QString)), model_, SLOT(SetFilterText(QString)));
   connect(filter_age_mapper_, SIGNAL(mapped(int)), model_, SLOT(SetFilterAge(int)));
 
   // Load settings
@@ -225,4 +231,21 @@ void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {
   }
 
   QWidget::keyReleaseEvent(e);
+}
+
+void LibraryFilterWidget::FilterTextChanged(const QString& text) {
+  // Searching with one or two characters can be very expensive on the database
+  // even with FTS, so if there are a large number of songs in the database
+  // introduce a small delay before actually filtering the model, so if the
+  // user is typing the first few characters of something it will be quicker.
+  if (!text.isEmpty() && text.length() < 3 && model_->total_song_count() >= 100000) {
+    filter_delay_->start();
+  } else {
+    filter_delay_->stop();
+    model_->SetFilterText(text);
+  }
+}
+
+void LibraryFilterWidget::FilterDelayTimeout() {
+  model_->SetFilterText(filter_->text());
 }

@@ -55,6 +55,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
     dir_model_(new LibraryDirectoryModel(backend, this)),
     show_smart_playlists_(false),
     show_various_artists_(true),
+    total_song_count_(0),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png"),
     no_cover_icon_(":nocover.png"),
@@ -77,7 +78,7 @@ void LibraryModel::Init() {
   connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
   connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
   connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
-  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SIGNAL(TotalSongCountUpdated(int)));
+  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
 
   backend_->UpdateTotalSongCountAsync();
 
@@ -1106,4 +1107,9 @@ GeneratorPtr LibraryModel::CreateGenerator(const QModelIndex& index) const {
   ret->set_library(backend());
   ret->Load(item->smart_playlist_data);
   return ret;
+}
+
+void LibraryModel::TotalSongCountUpdatedSlot(int count) {
+  total_song_count_ = count;
+  emit TotalSongCountUpdated(count);
 }
