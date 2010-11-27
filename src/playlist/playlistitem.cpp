@@ -17,9 +17,12 @@
 
 #include "playlistitem.h"
 #include "songplaylistitem.h"
+#include "library/library.h"
 #include "library/libraryplaylistitem.h"
 #include "radio/jamendoplaylistitem.h"
+#include "radio/jamendoservice.h"
 #include "radio/magnatuneplaylistitem.h"
+#include "radio/magnatuneservice.h"
 #include "radio/radioplaylistitem.h"
 
 #include <QtConcurrentRun>
@@ -44,6 +47,18 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
     return new RadioPlaylistItem(type);
 
   qWarning() << "Invalid PlaylistItem type:" << type;
+  return NULL;
+}
+
+PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& song) {
+  if (table == Library::kSongsTable)
+    return new LibraryPlaylistItem(song);
+  if (table == MagnatuneService::kSongsTable)
+    return new MagnatunePlaylistItem(song);
+  if (table == JamendoService::kSongsTable)
+    return new JamendoPlaylistItem(song);
+
+  qWarning() << "Invalid PlaylistItem songs table:" << table;
   return NULL;
 }
 

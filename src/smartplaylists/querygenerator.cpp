@@ -17,7 +17,6 @@
 
 #include "querygenerator.h"
 #include "library/librarybackend.h"
-#include "library/libraryplaylistitem.h"
 
 #include <QtDebug>
 
@@ -81,7 +80,8 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
   SongList songs = backend_->FindSongs(search_copy);
   PlaylistItemList items;
   foreach (const Song& song, songs) {
-    items << PlaylistItemPtr(new LibraryPlaylistItem(song));
+    items << PlaylistItemPtr(PlaylistItem::NewFromSongsTable(
+                               backend_->songs_table(), song));
     previous_ids_ << song.id();
 
     if (previous_ids_.count() > kDynamicFuture + kDynamicHistory)

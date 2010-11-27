@@ -34,6 +34,7 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   virtual ~PlaylistItem() {}
 
   static PlaylistItem* NewFromType(const QString& type);
+  static PlaylistItem* NewFromSongsTable(const QString& table, const Song& song);
 
   enum Option {
     Default = 0x00,
