@@ -1,7 +1,9 @@
 #include "jamendodynamicplaylist.h"
 
+#include <QCoreApplication>
 #include <QEventLoop>
-#include <QNetworkReply>
+#include <QHttp>
+#include <QHttpRequestHeader>
 #include <QtDebug>
 
 #include "core/network.h"
@@ -89,25 +91,29 @@ void JamendoDynamicPlaylist::Fetch() {
   url.addQueryItem("n", QString::number(kPageSize));
   url.addQueryItem("order", OrderSpec(order_by_, order_direction_));
 
-  // Have to make a new NetworkAccessManager here because we're in a different
-  // thread.
-  NetworkAccessManager network;
-  QNetworkRequest req(url);
-  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                   QNetworkRequest::AlwaysNetwork);
+  // We have to use QHttp here because there's no way to disable Keep-Alive
+  // with QNetworkManager.
+  QHttpRequestHeader header("GET", url.encodedPath() + "?" + url.encodedQuery());
+  header.setValue("Host", url.encodedHost());
 
-  QNetworkReply* reply = network.get(req);
+  QHttp http(url.host());
+  http.request(header);
 
-  // Blocking wait for reply.
+  // Wait for the reply
   {
     QEventLoop event_loop;
-    connect(reply, SIGNAL(finished()), &event_loop, SLOT(quit()));
+    connect(&http, SIGNAL(requestFinished(int,bool)), &event_loop, SLOT(quit()));
     event_loop.exec();
   }
 
+  if (http.error() != QHttp::NoError) {
+    qWarning() << "HTTP error returned from Jamendo:" << http.errorString()
+               << ", url:" << url.toString();
+    return;
+  }
+
   // The reply will contain one track ID per line
-  QStringList lines = QString::fromAscii(reply->readAll()).split('\n');
-  delete reply;
+  QStringList lines = QString::fromAscii(http.readAll()).split('\n');
 
   // Get the songs from the database
   SongList songs = backend_->GetSongsByForeignId(
