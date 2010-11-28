@@ -140,6 +140,7 @@ bool Playlist::column_is_editable(Playlist::Column column) {
     case Column_Year:
     case Column_Genre:
     case Column_Score:
+    case Column_Comment:
       return true;
     default:
       break;
@@ -183,6 +184,10 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
       break;
     case Column_Score:
       song.set_score(value.toInt());
+      break;
+    case Column_Comment:
+      song.set_comment(value.toString());
+      break;
     default:
       break;
   }
@@ -246,6 +251,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Filetype:     return song.filetype();
         case Column_DateModified: return song.mtime();
         case Column_DateCreated:  return song.ctime();
+        case Column_Comment:      return song.comment();
       }
     }
 
@@ -893,6 +899,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_Filetype:     cmp(filetype);
     case Column_DateModified: cmp(mtime);
     case Column_DateCreated:  cmp(ctime);
+
+    case Column_Comment:      strcmp(comment);
   }
 
 #undef cmp
@@ -929,6 +937,8 @@ QString Playlist::column_name(Column column) {
     case Column_Filetype:     return tr("File type");
     case Column_DateModified: return tr("Date modified");
     case Column_DateCreated:  return tr("Date created");
+
+    case Column_Comment:      return tr("Comment");
     default: return QString();
   }
   return "";

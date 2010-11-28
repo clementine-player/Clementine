@@ -36,7 +36,7 @@
 #include <math.h>
 
 const char* PlaylistView::kSettingsGroup = "Playlist";
-const int PlaylistView::kStateVersion = 2;
+const int PlaylistView::kStateVersion = 3;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
@@ -220,6 +220,9 @@ void PlaylistView::LoadGeometry() {
   }
   if (state_version < 2) {
     header_->HideSection(Playlist::Column_Score);
+  }
+  if (state_version < 3) {
+    header_->HideSection(Playlist::Column_Comment);
   }
 }
 
