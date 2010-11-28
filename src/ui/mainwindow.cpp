@@ -217,6 +217,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
+  connect(ui_->playlist, SIGNAL(ViewSelectionModelChanged()), SLOT(PlaylistViewSelectionModelChanged()));
   ui_->playlist->SetManager(playlists_);
 
   library_view_->view()->setModel(library_sort_model_);
@@ -1664,4 +1665,20 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
 
 void MainWindow::ShowSongInfoConfig() {
   OpenSettingsDialogAtPage(SettingsDialog::Page_SongInformation);
+}
+
+void MainWindow::PlaylistViewSelectionModelChanged() {
+  connect(ui_->playlist->view()->selectionModel(),
+          SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+          SLOT(PlaylistCurrentChanged(QModelIndex)));
+}
+
+void MainWindow::PlaylistCurrentChanged(const QModelIndex& proxy_current) {
+  const QModelIndex source_current =
+      playlists_->current()->proxy()->mapToSource(proxy_current);
+
+  // If the user moves the current index using the keyboard and then presses
+  // F2, we don't want that editing the last column that was right clicked on.
+  if (source_current != playlist_menu_index_)
+    playlist_menu_index_ = QModelIndex();
 }

@@ -164,6 +164,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 
   connect(view()->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
           this, SLOT(SelectionChanged()));
+  emit ViewSelectionModelChanged();
 
   // Update filter
   filter_->setText(playlist->proxy()->filterRegExp().pattern());

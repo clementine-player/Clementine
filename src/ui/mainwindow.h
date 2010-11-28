@@ -109,6 +109,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void ForceShowOSD(const Song& song);
 
   void PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index);
+  void PlaylistCurrentChanged(const QModelIndex& current);
+  void PlaylistViewSelectionModelChanged();
   void PlaylistPlay();
   void PlaylistStopAfter();
   void PlaylistQueue();

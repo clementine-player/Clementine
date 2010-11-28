@@ -52,6 +52,7 @@ signals:
   void Remove(int id);
 
   void UndoRedoActionsChanged(QAction* undo, QAction* redo);
+  void ViewSelectionModelChanged();
 
 protected:
   // QWidget
