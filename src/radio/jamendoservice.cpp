@@ -337,11 +337,9 @@ Song JamendoService::ReadTrack(const QString& artist,
       QStringRef name = reader->name();
       if (name == "name") {
         song.set_title(reader->readElementText().trimmed());
-      } else if (name == "length") {
-        QString length = reader->readElementText();
-        // Some durations are 123.0 and some are 123.
-        length = length.split('.')[0];
-        song.set_length(length.toInt());
+      } else if (name == "duration") {
+        const int length = reader->readElementText().toFloat();
+        song.set_length(length);
       } else if (name == "id3genre") {
         int genre_id = reader->readElementText().toInt();
         // In theory, genre 0 is "blues"; in practice it's invalid.
