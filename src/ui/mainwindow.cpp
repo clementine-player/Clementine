@@ -1029,9 +1029,9 @@ void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
 }
 
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
-  playlist_menu_index_ = index;
-
   QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
+
+  playlist_menu_index_ = source_index;
 
   // Is this song currently playing?
   if (playlists_->current()->current_index() == source_index.row() && player_->GetState() == Engine::Playing) {
@@ -1141,8 +1141,7 @@ void MainWindow::PlaylistPlay() {
 }
 
 void MainWindow::PlaylistStopAfter() {
-  playlists_->current()->StopAfter(
-      playlists_->current()->proxy()->mapToSource(playlist_menu_index_).row());
+  playlists_->current()->StopAfter(playlist_menu_index_.row());
 }
 
 void MainWindow::EditTracks() {
@@ -1208,7 +1207,7 @@ void MainWindow::SongSaveComplete() {
   ModelFutureWatcher<bool>* watcher = static_cast<ModelFutureWatcher<bool>*>(sender());
   watcher->deleteLater();
   if (watcher->index().isValid()) {
-    playlists_->current()->item_at(watcher->index().row())->Reload();
+    playlists_->current()->ReloadItems(QList<int>() << watcher->index().row());
   }
 }
 
@@ -1216,7 +1215,8 @@ void MainWindow::SelectionSetValue() {
   Playlist::Column column = (Playlist::Column)playlist_menu_index_.column();
   QVariant column_value = playlists_->current()->data(playlist_menu_index_);
 
-  QModelIndexList indexes=ui_->playlist->view()->selectionModel()->selection().indexes();
+  QModelIndexList indexes =
+      ui_->playlist->view()->selectionModel()->selection().indexes();
   foreach (const QModelIndex& index, indexes) {
     if (index.column() != 0)
       continue;
@@ -1224,7 +1224,7 @@ void MainWindow::SelectionSetValue() {
     int row = playlists_->current()->proxy()->mapToSource(index).row();
     Song song = playlists_->current()->item_at(row)->Metadata();
 
-    if(Playlist::set_column_value(song, column, column_value)) {
+    if (Playlist::set_column_value(song, column, column_value)) {
       QFuture<bool> future = song.BackgroundSave();
       ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
       watcher->setFuture(future);

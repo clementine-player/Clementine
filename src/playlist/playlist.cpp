@@ -310,8 +310,6 @@ void Playlist::SongSaveComplete() {
     ModelFutureWatcher<void>* watcher = new ModelFutureWatcher<void>(index, this);
     watcher->setFuture(future);
     connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
-
-    emit EditingFinished(index);
   }
 }
 
@@ -321,6 +319,7 @@ void Playlist::ItemReloadComplete() {
   const QPersistentModelIndex& index = watcher->index();
   if (index.isValid()) {
     emit dataChanged(index, index);
+    emit EditingFinished(index);
   }
 }
 
