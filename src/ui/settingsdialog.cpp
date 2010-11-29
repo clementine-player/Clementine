@@ -164,7 +164,8 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_->list->setMinimumWidth(ui_->list->sizeHintForColumn(0));
 
 #ifdef Q_OS_DARWIN
-  ui_->list->item(Page_Behaviour)->setHidden(true);  // Hide "Behaviour" on mac.
+  ui_->b_show_tray_icon_->setEnabled(false);
+  ui_->startup_group_->setEnabled(false);
 #endif
 }
 
