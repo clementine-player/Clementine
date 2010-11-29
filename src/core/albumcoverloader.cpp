@@ -177,20 +177,34 @@ void AlbumCoverLoader::RemoteFetchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply)
     return;
+  reply->deleteLater();
 
   Task task = remote_tasks_.take(reply);
+
+  // Handle redirects.
+  QVariant redirect = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+  if (redirect.isValid()) {
+    if (++task.redirects > kMaxRedirects) {
+      return;  // Give up.
+    }
+    QNetworkRequest request = reply->request();
+    request.setUrl(redirect.toUrl());
+    QNetworkReply* redirected_reply = network_->get(request);
+    connect(redirected_reply, SIGNAL(finished()), SLOT(RemoteFetchFinished()));
+
+    remote_tasks_.insert(redirected_reply, task);
+    return;
+  }
 
   if (reply->error() == QNetworkReply::NoError) {
     // Try to load the image
     QImage image;
     if (image.load(reply, 0)) {
       emit ImageLoaded(task.id, ScaleAndPad(image));
-      reply->deleteLater();
       return;
     }
   }
 
-  reply->deleteLater();
   NextState(&task);
 }
 

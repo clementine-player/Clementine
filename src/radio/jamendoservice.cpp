@@ -49,7 +49,7 @@ const char* JamendoService::kMp3StreamUrl =
 const char* JamendoService::kOggStreamUrl =
     "http://api.jamendo.com/get2/stream/track/redirect/?id=%1&streamencoding=ogg2";
 const char* JamendoService::kAlbumCoverUrl =
-    "http://api.jamendo.com/get2/image/album/redirect/?id=%1&imagesize=260";
+    "http://api.jamendo.com/get2/image/album/redirect/?id=%1&imagesize=300";
 const char* JamendoService::kHomepage = "http://www.jamendo.com/";
 const char* JamendoService::kAlbumInfoUrl = "http://www.jamendo.com/album/%1";
 const char* JamendoService::kDownloadAlbumUrl = "http://www.jamendo.com/download/album/%1";

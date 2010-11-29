@@ -72,12 +72,14 @@ class AlbumCoverLoader : public QObject {
   };
 
   struct Task {
+    Task() : redirects(0) {}
     quint64 id;
     QString art_automatic;
     QString art_manual;
     QString song_filename;
     QImage embedded_image;
     State state;
+    int redirects;
   };
 
   struct TryLoadResult {
@@ -107,6 +109,8 @@ class AlbumCoverLoader : public QObject {
   quint64 next_id_;
 
   NetworkAccessManager* network_;
+
+  static const int kMaxRedirects = 3;
 };
 
 #endif // ALBUMCOVERLOADER_H
