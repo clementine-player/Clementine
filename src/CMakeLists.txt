@@ -40,6 +40,7 @@ set(SOURCES
 
   core/albumcoverfetcher.cpp
   core/albumcoverloader.cpp
+  core/backgroundstreams.cpp
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
   core/database.cpp
@@ -231,6 +232,7 @@ set(HEADERS
 
   core/albumcoverfetcher.h
   core/albumcoverloader.h
+  core/backgroundstreams.h
   core/backgroundthread.h
   core/database.h
   core/deletefiles.h

@@ -762,6 +762,12 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
 
 shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
   shared_ptr<GstEnginePipeline> ret = CreatePipeline();
+
+  if (url.scheme() == "hypnotoad") {
+    ret->InitFromString(kHypnotoadPipeline);
+    return ret;
+  }
+
   if (!ret->InitFromUrl(url))
     ret.reset();
 
@@ -877,12 +883,8 @@ void GstEngine::BackgroundStreamFinished() {
   pipeline->SetNextUrl(pipeline->url());
 }
 
-int GstEngine::AllGloryToTheHypnotoad() {
-  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline();
-  pipeline->InitFromString(kHypnotoadPipeline);
-  if (!pipeline) {
-    return -1;
-  }
-  pipeline->SetVolume(5);  // Hypnotoad is *loud*.
-  return AddBackgroundStream(pipeline);
+void GstEngine::SetBackgroundStreamVolume(int id, int volume) {
+  shared_ptr<GstEnginePipeline> pipeline = background_streams_[id];
+  Q_ASSERT(pipeline);
+  pipeline->SetVolume(volume);
 }

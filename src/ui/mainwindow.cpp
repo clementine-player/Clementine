@@ -17,6 +17,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "core/backgroundstreams.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
 #include "core/globalshortcuts.h"
@@ -202,6 +203,9 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 
   // Start initialising the player
   player_->Init();
+  background_streams_ = new BackgroundStreams(player_->GetEngine(), this);
+  background_streams_->LoadStreams();
+
 
 #ifdef HAVE_GSTREAMER
   if (qobject_cast<GstEngine*>(player_->GetEngine()) == NULL) {
@@ -300,8 +304,10 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
-  connect(ui_->action_rain, SIGNAL(toggled(bool)), player_, SLOT(MakeItRain(bool)));
-  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), player_, SLOT(AllHail(bool)));
+  connect(ui_->action_rain, SIGNAL(toggled(bool)),
+          background_streams_, SLOT(MakeItRain(bool)));
+  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)),
+          background_streams_, SLOT(AllGloryToTheHypnotoad(bool)));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
 
   // Give actions to buttons
@@ -471,7 +477,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(tray_icon_, SIGNAL(PlayPause()), player_, SLOT(PlayPause()));
   connect(tray_icon_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
-  
+
 #ifdef Q_OS_DARWIN
   // Add check for updates item to application menu.
   QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
@@ -1557,7 +1563,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   if (settings_dialog_)
     return;
 
-  settings_dialog_.reset(new SettingsDialog);
+  settings_dialog_.reset(new SettingsDialog(background_streams_));
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
 #ifdef HAVE_GSTREAMER

@@ -54,7 +54,7 @@ class Base : public QObject, boost::noncopyable {
 
   virtual int AddBackgroundStream(const QUrl& url);
   virtual void StopBackgroundStream(int id) {}
-  virtual int AllGloryToTheHypnotoad() { return -1; }
+  virtual void SetBackgroundStreamVolume(int id, int volume) {}
 
   virtual State state() const = 0;
   virtual uint position() const = 0;

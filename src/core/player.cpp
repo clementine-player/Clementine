@@ -50,8 +50,6 @@
 
 using boost::shared_ptr;
 
-const char* Player::kRainUrl = "http://data.clementine-player.org/rainymood";
-
 #ifdef Q_WS_X11
 QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
   arg.beginStructure();
@@ -83,8 +81,6 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
     lastfm_(lastfm),
     engine_(CreateEngine(engine)),
     stream_change_type_(Engine::First),
-    rain_stream_(-1),
-    toad_stream_(-1),
     volume_before_mute_(50)
 {
 #ifdef Q_WS_X11
@@ -558,27 +554,5 @@ void Player::TrackAboutToEnd() {
       }
     }
     engine_->StartPreloading(url);
-  }
-}
-
-void Player::MakeItRain(bool rain) {
-  const bool is_raining = rain_stream_ != -1;
-  if (rain && !is_raining) {
-    rain_stream_ = engine_->AddBackgroundStream(QUrl(kRainUrl));
-  }
-  if (!rain && is_raining) {
-    engine_->StopBackgroundStream(rain_stream_);
-    rain_stream_ = -1;
-  }
-}
-
-void Player::AllHail(bool hypnotoad) {
-  const bool is_hailing = toad_stream_ != -1;
-  if (hypnotoad && !is_hailing) {
-    toad_stream_ = engine_->AllGloryToTheHypnotoad();
-  }
-  if (!hypnotoad && is_hailing) {
-    engine_->StopBackgroundStream(toad_stream_);
-    toad_stream_ = -1;
   }
 }

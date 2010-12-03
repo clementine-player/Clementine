@@ -70,7 +70,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
-  int AllGloryToTheHypnotoad();
+  void SetBackgroundStreamVolume(int id, int volume);
 
   uint position() const;
   uint length() const;

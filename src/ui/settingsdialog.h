@@ -20,9 +20,15 @@
 
 #include <QDialog>
 #include <QMap>
+#include <QUrl>
 
 #include "config.h"
 
+class QBoxLayout;
+class QCheckBox;
+class QSlider;
+
+class BackgroundStreams;
 class GlobalShortcuts;
 class LibraryDirectoryModel;
 class OSDPretty;
@@ -39,7 +45,7 @@ class SettingsDialog : public QDialog {
   Q_OBJECT
 
  public:
-  SettingsDialog(QWidget* parent = 0);
+  SettingsDialog(BackgroundStreams* streams, QWidget* parent = 0);
   ~SettingsDialog();
 
   enum Page {
@@ -51,6 +57,7 @@ class SettingsDialog : public QDialog {
     Page_Library,
     Page_Lastfm,
     Page_Magnatune,
+    Page_BackgroundStreams,
 #ifdef ENABLE_WIIMOTEDEV
     Page_Wiimotedev,
 #endif
@@ -70,6 +77,11 @@ class SettingsDialog : public QDialog {
   void showEvent(QShowEvent* e);
   void hideEvent(QHideEvent *);
 
+ private:
+  void AddStream(const QString& name);
+  void AddStreams();
+  void LoadStreams();
+
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
@@ -88,6 +100,10 @@ class SettingsDialog : public QDialog {
 
   void SongInfoFontSizeChanged(double value);
 
+  // Background streams.
+  void EnableStream(int state);
+  void StreamVolumeChanged(int value);
+
  private:
 #ifdef ENABLE_WIIMOTEDEV
   WiimotedevShortcutsConfig* wiimotedev_config_;
@@ -95,6 +111,8 @@ class SettingsDialog : public QDialog {
   const GstEngine* gst_engine_;
 
   Ui_SettingsDialog* ui_;
+  QWidget* streams_page_;
+  QBoxLayout* streams_layout_;
 
   bool loading_settings_;
 
@@ -102,8 +120,14 @@ class SettingsDialog : public QDialog {
 
   QMap<QString, QString> language_map_;
 
-#ifdef ENABLE_WIIMOTEDEV
+  QMap<QSlider*, QString> sliders_;
+  QMap<QCheckBox*, QString> checkboxes_;
+
+  BackgroundStreams* streams_;
+
  signals:
+  void StreamVolumeChanged(const QUrl& url, int value);
+#ifdef ENABLE_WIIMOTEDEV
   void SetWiimotedevInterfaceActived(bool);
 #endif
 };

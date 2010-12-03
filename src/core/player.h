@@ -85,9 +85,6 @@ class Player : public QObject {
 
   void PlaylistChanged();
 
-  void MakeItRain(bool rain);
-  void AllHail(bool hypnotoad);
-
   // MPRIS /Player
   void Mute();
   void Pause();
@@ -148,12 +145,7 @@ class Player : public QObject {
 
   QUrl loading_async_;
 
-  int rain_stream_;
-  int toad_stream_;
-
   int volume_before_mute_;
-
-  static const char* kRainUrl;
 };
 
 #endif // PLAYER_H

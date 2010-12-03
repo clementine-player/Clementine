@@ -16,15 +16,17 @@
 */
 
 #include "config.h"
+#include "core/backgroundstreams.h"
 #include "iconloader.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
-#include "ui_settingsdialog.h"
 #include "engines/enginebase.h"
 #include "playlist/playlistview.h"
 #include "songinfo/songinfotextview.h"
 #include "widgets/osd.h"
 #include "widgets/osdpretty.h"
+
+#include "ui_settingsdialog.h"
 
 #ifdef ENABLE_WIIMOTEDEV
 #include "ui/wiimotedevshortcutsconfig.h"
@@ -43,12 +45,57 @@
 
 #include <QtDebug>
 
-SettingsDialog::SettingsDialog(QWidget* parent)
+void SettingsDialog::AddStream(const QString& name) {
+  QGroupBox* box = new QGroupBox(name, streams_page_);
+  QSlider* slider = new QSlider(Qt::Horizontal, box);
+  QCheckBox* check = new QCheckBox(box);
+  QHBoxLayout* layout = new QHBoxLayout(box);
+  layout->addWidget(slider);
+  layout->addWidget(check);
+
+  streams_layout_->addWidget(box);
+
+  sliders_[slider] = name;
+  checkboxes_[check] = name;
+
+  connect(slider, SIGNAL(valueChanged(int)), SLOT(StreamVolumeChanged(int)));
+  connect(check, SIGNAL(stateChanged(int)), SLOT(EnableStream(int)));
+
+  slider->setValue(streams_->GetStreamVolume(name));
+  check->setCheckState(streams_->IsPlaying(name) ? Qt::Checked : Qt::Unchecked);
+}
+
+void SettingsDialog::EnableStream(int state) {
+  QCheckBox* check = qobject_cast<QCheckBox*>(sender());
+  Q_ASSERT(check);
+  const QString& name = checkboxes_[check];
+  streams_->EnableStream(name, state == Qt::Checked ? true : false);
+}
+
+void SettingsDialog::StreamVolumeChanged(int value) {
+  QSlider* slider = qobject_cast<QSlider*>(sender());
+  Q_ASSERT(slider);
+
+  const QString& name = sliders_[slider];
+  streams_->SetStreamVolume(name, value);
+}
+
+void SettingsDialog::AddStreams() {
+  const QList<QString>& streams = streams_->streams();
+  foreach (const QString& name, streams) {
+    AddStream(name);
+  }
+}
+
+SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   : QDialog(parent),
     gst_engine_(NULL),
     ui_(new Ui_SettingsDialog),
+    streams_page_(new QWidget(this)),
+    streams_layout_(new QVBoxLayout(streams_page_)),
     loading_settings_(false),
-    pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable))
+    pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable)),
+    streams_(streams)
 {
   ui_->setupUi(this);
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
@@ -60,6 +107,14 @@ SettingsDialog::SettingsDialog(QWidget* parent)
   ui_->list->item(Page_GlobalShortcuts)->setIcon(IconLoader::Load("input-keyboard"));
   ui_->list->item(Page_Notifications)->setIcon(IconLoader::Load("help-hint"));
   ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
+  ui_->list->item(Page_BackgroundStreams)->setIcon(IconLoader::Load("folder-sound"));
+
+  streams_page_->setObjectName(QString::fromUtf8("streams_page"));
+  streams_layout_->setObjectName(QString::fromUtf8("streams_layout"));
+
+  AddStreams();
+  streams_layout_->addStretch(1);
+  ui_->stacked_widget->addWidget(streams_page_);
 
 #ifdef ENABLE_WIIMOTEDEV
   // Wiimotedev page
@@ -294,6 +349,8 @@ void SettingsDialog::accept() {
   ui_->library_config->Save();
   ui_->magnatune->Save();
   ui_->global_shortcuts->Save();
+
+  streams_->SaveStreams();
 
   QDialog::accept();
 }

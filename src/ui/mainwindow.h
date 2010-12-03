@@ -35,6 +35,7 @@ class About;
 class AddStreamDialog;
 class AlbumCoverManager;
 class ArtistInfoView;
+class BackgroundStreams;
 class CommandlineOptions;
 class Database;
 class DeviceManager;
@@ -272,6 +273,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   bool was_maximized_;
   bool autoclear_playlist_;
+
+  BackgroundStreams* background_streams_;
 };
 
 #endif // MAINWINDOW_H
