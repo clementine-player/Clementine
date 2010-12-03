@@ -118,7 +118,8 @@ DBusStatus MPRIS::GetStatus() const {
   status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
   status.repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
   status.repeat_playlist = (repeat_mode == PlaylistSequence::Repeat_Album ||
-                            repeat_mode == PlaylistSequence::Repeat_Playlist) ? 1 : 0;
+                            repeat_mode == PlaylistSequence::Repeat_Playlist ||
+                            repeat_mode == PlaylistSequence::Repeat_Track) ? 1 : 0;
   return status;
 
 }
@@ -255,10 +256,15 @@ QVariantMap MPRIS::GetMetadata(PlaylistItemPtr item) const {
   AddMetadata("genre", song.genre(), &ret);
   AddMetadata("disc", song.disc(), &ret);
   AddMetadata("comment", song.comment(), &ret);
-  AddMetadata("bitrate", song.bitrate(), &ret);
-  AddMetadata("samplerate", song.samplerate(), &ret);
+  AddMetadata("audio-bitrate", song.bitrate(), &ret);
+  AddMetadata("audio-samplerate", song.samplerate(), &ret);
   AddMetadata("bpm", song.bpm(), &ret);
   AddMetadata("composer", song.composer(), &ret);
+  AddMetadata("artUrl",
+      song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual(), &ret);
+  if (song.rating() != -1.0) {
+    AddMetadata("rating", song.rating(), &ret);
+  }
 
   return ret;
 }
