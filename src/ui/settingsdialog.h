@@ -125,9 +125,8 @@ class SettingsDialog : public QDialog {
 
   BackgroundStreams* streams_;
 
- signals:
-  void StreamVolumeChanged(const QUrl& url, int value);
 #ifdef ENABLE_WIIMOTEDEV
+ signals:
   void SetWiimotedevInterfaceActived(bool);
 #endif
 };
