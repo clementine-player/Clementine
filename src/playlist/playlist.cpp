@@ -251,7 +251,11 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Filetype:     return song.filetype();
         case Column_DateModified: return song.mtime();
         case Column_DateCreated:  return song.ctime();
-        case Column_Comment:      return song.comment();
+
+        case Column_Comment:
+          if (role == Qt::DisplayRole)
+            return song.comment().simplified();
+          return song.comment();
       }
     }
 

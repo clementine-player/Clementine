@@ -24,14 +24,15 @@
 
 #include <QDateTime>
 #include <QDir>
+#include <QHeaderView>
+#include <QHelpEvent>
+#include <QLinearGradient>
 #include <QLineEdit>
 #include <QPainter>
+#include <QScrollBar>
+#include <QTextDocument>
 #include <QToolTip>
 #include <QWhatsThis>
-#include <QHelpEvent>
-#include <QHeaderView>
-#include <QScrollBar>
-#include <QLinearGradient>
 
 const int   QueuedItemDelegate::kQueueBoxBorder = 1;
 const int   QueuedItemDelegate::kQueueBoxCornerRadius = 3;
@@ -209,6 +210,12 @@ bool PlaylistDelegateBase::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 
   QHelpEvent *he = static_cast<QHelpEvent*>(event);
   QString text = displayText(index.data(), QLocale::system());
+
+  // Special case: we want newlines in the comment tooltip
+  if (index.column() == Playlist::Column_Comment) {
+    text = Qt::escape(index.data(Qt::ToolTipRole).toString());
+    text.replace("\n", "<br />");
+  }
 
   if (text.isEmpty() || !he)
     return false;
