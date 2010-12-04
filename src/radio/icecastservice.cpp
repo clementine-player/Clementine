@@ -271,8 +271,11 @@ void IcecastService::ShowContextMenu(RadioItem* item, const QModelIndex& index,
   else
     context_item_ = QModelIndex();
 
-  add_to_playlist_->setEnabled(context_item_.isValid() &&
-                               model_->GetSong(context_item_).is_valid());
+  const bool can_play = context_item_.isValid() &&
+                        model_->GetSong(context_item_).is_valid();
+
+  add_to_playlist_->setEnabled(can_play);
+  load_to_playlist_->setEnabled(can_play);
   context_menu_->popup(global_pos);
 }
 
@@ -284,6 +287,8 @@ void IcecastService::EnsureMenuCreated() {
 
   add_to_playlist_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  load_to_playlist_ = context_menu_->addAction(
+      IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download"), tr("Open dir.xiph.org in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh station list"), this, SLOT(LoadDirectory()));
@@ -294,10 +299,19 @@ void IcecastService::Homepage() {
 }
 
 void IcecastService::AddToPlaylist() {
+  AddSelectedToPlaylist(false);
+}
+
+void IcecastService::LoadToPlaylist() {
+  AddSelectedToPlaylist(true);
+}
+
+void IcecastService::AddSelectedToPlaylist(bool clear_first) {
   Song song(model_->GetSong(context_item_));
   if (!song.is_valid())
     return;
 
   emit AddItemsToPlaylist(PlaylistItemList() <<
-                          PlaylistItemPtr(new SongPlaylistItem(song)));
+                          PlaylistItemPtr(new SongPlaylistItem(song)),
+                          clear_first);
 }

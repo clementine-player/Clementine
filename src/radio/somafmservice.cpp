@@ -73,6 +73,7 @@ void SomaFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("download"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
     context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
@@ -225,7 +226,11 @@ void SomaFMService::Homepage() {
 }
 
 void SomaFMService::AddToPlaylist() {
-  emit AddItemToPlaylist(context_item_);
+  emit AddItemToPlaylist(context_item_, false);
+}
+
+void SomaFMService::LoadToPlaylist() {
+  emit AddItemToPlaylist(context_item_, true);
 }
 
 PlaylistItem::Options SomaFMService::playlistitem_options() const {

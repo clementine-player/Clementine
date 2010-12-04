@@ -47,7 +47,7 @@ public slots:
 
 signals:
   void ShowSettingsDialog();
-  void AddPlaylistItems(const PlaylistItemList& items);
+  void AddPlaylistItems(const PlaylistItemList& items, bool clear_first = false);
 
 protected:
   void showEvent(QShowEvent* e);

@@ -69,8 +69,8 @@ class RadioService : public QObject {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
   void OpenSettingsAtPage(SettingsDialog::Page page);
 
-  void AddItemToPlaylist(RadioItem* item);
-  void AddItemsToPlaylist(const PlaylistItemList& items);
+  void AddItemToPlaylist(RadioItem* item, bool clear_first);
+  void AddItemsToPlaylist(const PlaylistItemList& items, bool clear_first);
 
  private:
   RadioModel* model_;

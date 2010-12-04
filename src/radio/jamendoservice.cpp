@@ -384,6 +384,8 @@ void JamendoService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
   add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
       tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  load_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+      tr("Load"), this, SLOT(LoadToPlaylist()));
   album_info_ = context_menu_->addAction(IconLoader::Load("view-media-lyrics"),
       tr("Album info on jamendo.com..."), this, SLOT(AlbumInfo()));
   download_album_ = context_menu_->addAction(IconLoader::Load("download"),
@@ -410,6 +412,7 @@ void JamendoService::ShowContextMenu(RadioItem*, const QModelIndex& index,
   }
 
   add_to_playlist_->setEnabled(context_item_.isValid());
+  load_to_playlist_->setEnabled(context_item_.isValid());
   album_info_->setEnabled(context_item_.isValid());
   download_album_->setEnabled(context_item_.isValid());
   context_menu_->popup(global_pos);
@@ -421,6 +424,14 @@ QWidget* JamendoService::HeaderWidget() const {
 }
 
 void JamendoService::AddToPlaylist() {
+  AddSelectedToPlaylist(false);
+}
+
+void JamendoService::LoadToPlaylist() {
+  AddSelectedToPlaylist(true);
+}
+
+void JamendoService::AddSelectedToPlaylist(bool clear_first) {
   SongList songs(library_model_->GetChildSongs(
       library_sort_model_->mapToSource(context_item_)));
 
@@ -430,7 +441,7 @@ void JamendoService::AddToPlaylist() {
     items << PlaylistItemPtr(new JamendoPlaylistItem(song));
   }
 
-  emit AddItemsToPlaylist(items);
+  emit AddItemsToPlaylist(items, clear_first);
 }
 
 void JamendoService::AlbumInfo() {

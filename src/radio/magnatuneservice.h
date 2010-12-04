@@ -95,12 +95,14 @@ class MagnatuneService : public RadioService {
   void ReloadDatabaseFinished();
 
   void AddToPlaylist();
+  void LoadToPlaylist();
   void Download();
   void Homepage();
   void ShowConfig();
 
  private:
   void EnsureMenuCreated();
+  void AddSelectedToPlaylist(bool clear_first);
 
   Song ReadTrack(QXmlStreamReader& reader);
 
@@ -110,6 +112,7 @@ class MagnatuneService : public RadioService {
   QModelIndex context_item_;
 
   QAction* add_to_playlist_;
+  QAction* load_to_playlist_;
   QAction* download_;
 
   LibraryBackend* library_backend_;

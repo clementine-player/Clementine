@@ -129,6 +129,7 @@ class LastFMService : public RadioService {
   void TunerError(lastfm::ws::Error error);
 
   void AddToPlaylist();
+  void LoadToPlaylist();
   void AddArtistRadio();
   void AddTagRadio();
   void AddCustomRadio();
@@ -157,6 +158,8 @@ class LastFMService : public RadioService {
 
   void Tune(const lastfm::RadioStation& station);
 
+  void AddSelectedToPlaylist(bool clear_first);
+
  private:
   lastfm::Audioscrobbler* scrobbler_;
   lastfm::Track last_track_;
@@ -167,6 +170,7 @@ class LastFMService : public RadioService {
 
   boost::scoped_ptr<QMenu> context_menu_;
   QAction* play_action_;
+  QAction* load_action_;
   QAction* remove_action_;
   QAction* add_artist_action_;
   QAction* add_tag_action_;

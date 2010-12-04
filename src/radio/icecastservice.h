@@ -57,17 +57,21 @@ class IcecastService : public RadioService {
   void LoadDirectory();
   void Homepage();
   void AddToPlaylist();
+  void LoadToPlaylist();
 
  private:
   void EnsureMenuCreated();
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
   IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
 
+  void AddSelectedToPlaylist(bool clear_first);
+
   RadioItem* root_;
   NetworkAccessManager* network_;
   QMenu* context_menu_;
   QModelIndex context_item_;
   QAction* add_to_playlist_;
+  QAction* load_to_playlist_;
 
   IcecastBackend* backend_;
   IcecastModel* model_;

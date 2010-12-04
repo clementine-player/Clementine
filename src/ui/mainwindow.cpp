@@ -449,8 +449,8 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
-  connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*)), SLOT(InsertRadioItem(RadioItem*)));
-  connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList)), SLOT(InsertRadioItems(PlaylistItemList)));
+  connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*,bool)), SLOT(InsertRadioItem(RadioItem*,bool)));
+  connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)), SLOT(InsertRadioItems(PlaylistItemList,bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
   connect(radio_view_->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
@@ -1006,7 +1006,10 @@ void MainWindow::RadioDoubleClick(const QModelIndex& index) {
   }
 }
 
-void MainWindow::InsertRadioItem(RadioItem* item) {
+void MainWindow::InsertRadioItem(RadioItem* item, bool clear_first) {
+  if (clear_first)
+    playlists_->ClearCurrent();
+
   QModelIndex first_song = playlists_->current()->InsertRadioStations(
       QList<RadioItem*>() << item);
 
@@ -1021,7 +1024,10 @@ void MainWindow::InsertRadioItem(RadioItem* item) {
   }
 }
 
-void MainWindow::InsertRadioItems(const PlaylistItemList& items) {
+void MainWindow::InsertRadioItems(const PlaylistItemList& items, bool clear_first) {
+  if (clear_first)
+    playlists_->ClearCurrent();
+
   QModelIndex first_song = playlists_->current()->InsertItems(items);
 
   if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
@@ -1666,7 +1672,8 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
   connect(player_, SIGNAL(Stopped()), view, SLOT(SongFinished()));
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
-  connect(view, SIGNAL(AddPlaylistItems(PlaylistItemList)), SLOT(InsertRadioItems(PlaylistItemList)));
+  connect(view, SIGNAL(AddPlaylistItems(PlaylistItemList,bool)),
+                SLOT(InsertRadioItems(PlaylistItemList,bool)));
 }
 
 void MainWindow::ShowSongInfoConfig() {

@@ -253,6 +253,8 @@ void MagnatuneService::EnsureMenuCreated() {
 
   add_to_playlist_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  load_to_playlist_ = context_menu_->addAction(
+      IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
   download_ = context_menu_->addAction(
       IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
   context_menu_->addSeparator();
@@ -278,11 +280,20 @@ void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
     context_item_ = QModelIndex();
 
   add_to_playlist_->setEnabled(context_item_.isValid());
+  load_to_playlist_->setEnabled(context_item_.isValid());
   download_->setEnabled(context_item_.isValid() && membership_ == Membership_Download);
   context_menu_->popup(global_pos);
 }
 
 void MagnatuneService::AddToPlaylist() {
+  AddSelectedToPlaylist(false);
+}
+
+void MagnatuneService::LoadToPlaylist() {
+  AddSelectedToPlaylist(true);
+}
+
+void MagnatuneService::AddSelectedToPlaylist(bool clear_first) {
   SongList songs(library_model_->GetChildSongs(
       library_sort_model_->mapToSource(context_item_)));
 
@@ -292,7 +303,7 @@ void MagnatuneService::AddToPlaylist() {
     items << shared_ptr<PlaylistItem>(new MagnatunePlaylistItem(song));
   }
 
-  emit AddItemsToPlaylist(items);
+  emit AddItemsToPlaylist(items, clear_first);
 }
 
 void MagnatuneService::Homepage() {

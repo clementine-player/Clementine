@@ -90,6 +90,7 @@ void SavedRadio::ShowContextMenu(RadioItem* item, const QModelIndex&,
   if (!context_menu_) {
     context_menu_ = new QMenu;
     add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    load_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
     remove_action_ = context_menu_->addAction(IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
     edit_action_ = context_menu_->addAction(IconLoader::Load("edit-rename"), tr("Edit..."), this, SLOT(Edit()));
     context_menu_->addSeparator();
@@ -99,6 +100,7 @@ void SavedRadio::ShowContextMenu(RadioItem* item, const QModelIndex&,
   context_item_ = item;
 
   add_action_->setEnabled(item != root_);
+  load_action_->setEnabled(item != root_);
   remove_action_->setEnabled(item != root_);
   edit_action_->setEnabled(item != root_);
 
@@ -135,7 +137,11 @@ void SavedRadio::Edit() {
 }
 
 void SavedRadio::AddToPlaylist() {
-  emit AddItemToPlaylist(context_item_);
+  emit AddItemToPlaylist(context_item_, false);
+}
+
+void SavedRadio::LoadToPlaylist() {
+  emit AddItemToPlaylist(context_item_, true);
 }
 
 RadioItem* SavedRadio::ItemForStream(const Stream& stream, RadioItem* parent) {

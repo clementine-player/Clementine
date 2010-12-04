@@ -85,6 +85,8 @@ class JamendoService : public RadioService {
 
   void EnsureMenuCreated();
 
+  void AddSelectedToPlaylist(bool clear_first);
+
  private slots:
   void DownloadDirectory();
   void DownloadDirectoryProgress(qint64 received, qint64 total);
@@ -93,6 +95,7 @@ class JamendoService : public RadioService {
   void UpdateTotalSongCount(int count);
 
   void AddToPlaylist();
+  void LoadToPlaylist();
   void AlbumInfo();
   void DownloadAlbum();
   void Homepage();
@@ -105,6 +108,7 @@ class JamendoService : public RadioService {
   QModelIndex context_item_;
 
   QAction* add_to_playlist_;
+  QAction* load_to_playlist_;
   QAction* album_info_;
   QAction* download_album_;
 

@@ -56,6 +56,7 @@ class SomaFMService : public RadioService {
   void LoadPlaylistFinished();
 
   void AddToPlaylist();
+  void LoadToPlaylist();
   void Homepage();
 
  private:

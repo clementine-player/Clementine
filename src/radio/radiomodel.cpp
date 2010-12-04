@@ -59,8 +59,8 @@ void RadioModel::AddService(RadioService *service) {
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
   connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));
-  connect(service, SIGNAL(AddItemToPlaylist(RadioItem*)), SIGNAL(AddItemToPlaylist(RadioItem*)));
-  connect(service, SIGNAL(AddItemsToPlaylist(PlaylistItemList)), SIGNAL(AddItemsToPlaylist(PlaylistItemList)));
+  connect(service, SIGNAL(AddItemToPlaylist(RadioItem*,bool)), SIGNAL(AddItemToPlaylist(RadioItem*,bool)));
+  connect(service, SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)), SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)));
 }
 
 RadioService* RadioModel::ServiceByName(const QString& name) {

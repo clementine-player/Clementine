@@ -69,6 +69,8 @@ LastFMService::LastFMService(RadioModel* parent)
 
   play_action_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+  load_action_ = context_menu_->addAction(
+      IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
   remove_action_ = context_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
   context_menu_->addSeparator();
@@ -479,6 +481,7 @@ void LastFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
   }
 
   play_action_->setEnabled(item->playable);
+  load_action_->setEnabled(item->playable);
   context_menu_->popup(global_pos);
 }
 
@@ -557,7 +560,11 @@ void LastFMService::RefreshNeighboursFinished() {
 }
 
 void LastFMService::AddToPlaylist() {
-  emit AddItemToPlaylist(context_item_);
+  emit AddItemToPlaylist(context_item_, false);
+}
+
+void LastFMService::LoadToPlaylist() {
+  emit AddItemToPlaylist(context_item_, true);
 }
 
 void LastFMService::AddArtistRadio() {
@@ -587,7 +594,7 @@ void LastFMService::AddArtistOrTag(const QString& name,
   item->playable = true;
   item->lazy_loaded = true;
   item->InsertNotify(list);
-  emit AddItemToPlaylist(item);
+  emit AddItemToPlaylist(item, false);
 
   SaveList(name, list);
 }

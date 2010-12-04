@@ -80,8 +80,8 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
   void OpenSettingsAtPage(SettingsDialog::Page);
 
-  void AddItemToPlaylist(RadioItem* item);
-  void AddItemsToPlaylist(const PlaylistItemList& items);
+  void AddItemToPlaylist(RadioItem* item, bool clear_first);
+  void AddItemsToPlaylist(const PlaylistItemList& items, bool clear_first);
 
  protected:
   void LazyPopulate(RadioItem* parent);
