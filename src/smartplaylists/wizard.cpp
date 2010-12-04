@@ -84,6 +84,9 @@ Wizard::Wizard(LibraryBackend* library, QWidget* parent)
 
   new QVBoxLayout(type_page_);
   AddPlugin(new QueryWizardPlugin(library_, this));
+
+  // Skip the type page - remove this when we have more than one type
+  setStartId(2);
 }
 
 Wizard::~Wizard() {
@@ -95,7 +98,8 @@ void Wizard::SetGenerator(GeneratorPtr gen) {
   for (int i=0 ; i<plugins_.count() ; ++i) {
     if (plugins_[i]->type() == gen->type()) {
       TypeChanged(i);
-      next();
+      // TODO: Put this back in when the setStartId is removed from the ctor
+      // next();
       break;
     }
   }
