@@ -41,7 +41,10 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     // Split on whitespace
     QStringList tokens(options.filter.split(QRegExp("\\s+")));
     QString query;
-    foreach (const QString& token, tokens) {
+    foreach (QString token, tokens) {
+      token.remove('(');
+      token.remove(')');
+
       if (token.contains(':'))
         query += "fts" + token + "* ";
       else
