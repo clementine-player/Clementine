@@ -904,19 +904,18 @@ void MainWindow::StopAfterCurrent() {
   playlists_->current()->StopAfter(playlists_->current()->current_index());
 }
 
-/**
-  * Exit if the tray icon is not visible, otherwise ignore and set hidden in tray.
-  * On OS X, never quit when the main window is closed. This is equivalent to hiding in the tray.
-  */
 void MainWindow::closeEvent(QCloseEvent* event) {
-#ifndef Q_OS_DARWIN
-  if (tray_icon_->IsVisible() && event->spontaneous()) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  bool keep_running = s.value("keeprunning", tray_icon_->IsVisible()).toBool();
+
+  if (keep_running && event->spontaneous()) {
     event->ignore();
     SetHiddenInTray(true);
   } else {
     QApplication::quit();
   }
-#endif
 }
 
 void MainWindow::SetHiddenInTray(bool hidden) {

@@ -256,6 +256,7 @@ void SettingsDialog::accept() {
 
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
+  s.setValue("keeprunning", ui_->b_keep_running_->isChecked());
   s.setValue("startupbehaviour", int(behaviour));
   s.endGroup();
 
@@ -367,6 +368,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
   // Behaviour
   s.beginGroup(MainWindow::kSettingsGroup);
   ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
+  ui_->b_keep_running_->setChecked(s.value("keeprunning",
+      ui_->b_show_tray_icon_->isChecked()).toBool());
+
   MainWindow::StartupBehaviour behaviour = MainWindow::StartupBehaviour(
       s.value("startupbehaviour", MainWindow::Startup_Remember).toInt());
   switch (behaviour) {

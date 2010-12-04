@@ -124,7 +124,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -403,6 +403,13 @@
            </property>
            <property name="checked">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="b_keep_running_">
+           <property name="text">
+            <string>Keep running in the background when the window is closed</string>
            </property>
           </widget>
          </item>
@@ -881,6 +888,13 @@
  </customwidgets>
  <tabstops>
   <tabstop>list</tabstop>
+  <tabstop>b_show_tray_icon_</tabstop>
+  <tabstop>b_keep_running_</tabstop>
+  <tabstop>b_always_show_</tabstop>
+  <tabstop>b_always_hide_</tabstop>
+  <tabstop>b_remember_</tabstop>
+  <tabstop>language</tabstop>
+  <tabstop>current_glow</tabstop>
   <tabstop>fading_out</tabstop>
   <tabstop>fading_cross</tabstop>
   <tabstop>fading_auto</tabstop>
@@ -891,7 +905,9 @@
   <tabstop>replaygain_compression</tabstop>
   <tabstop>gst_plugin</tabstop>
   <tabstop>gst_device</tabstop>
-  <tabstop>buttonBox</tabstop>
+  <tabstop>buffer_duration</tabstop>
+  <tabstop>notifications_none</tabstop>
+  <tabstop>notifications_native</tabstop>
   <tabstop>notifications_pretty</tabstop>
   <tabstop>notifications_tray</tabstop>
   <tabstop>notifications_duration</tabstop>
@@ -900,12 +916,9 @@
   <tabstop>notifications_opacity</tabstop>
   <tabstop>notifications_bg_preset</tabstop>
   <tabstop>notifications_fg_choose</tabstop>
-  <tabstop>notifications_native</tabstop>
-  <tabstop>b_remember_</tabstop>
-  <tabstop>notifications_none</tabstop>
-  <tabstop>b_show_tray_icon_</tabstop>
-  <tabstop>b_always_hide_</tabstop>
-  <tabstop>b_always_show_</tabstop>
+  <tabstop>song_info_font_size</tabstop>
+  <tabstop>song_info_font_preview</tabstop>
+  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
