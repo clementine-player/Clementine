@@ -128,16 +128,16 @@ void FancyTabProxyStyle::drawControl(
     const QString animation_key = "tab_" + text + "_animation";
 
     const QString tab_hover = widget->property("tab_hover").toString();
-    int fader = widget->property(fader_key.toAscii().constData()).toInt();
-    QPropertyAnimation* animation = widget->property(animation_key.toAscii().constData()).value<QPropertyAnimation*>();
+    int fader = widget->property(fader_key.toUtf8().constData()).toInt();
+    QPropertyAnimation* animation = widget->property(animation_key.toUtf8().constData()).value<QPropertyAnimation*>();
 
     if (!animation) {
       QWidget* mut_widget = const_cast<QWidget*>(widget);
       fader = 0;
-      mut_widget->setProperty(fader_key.toAscii().constData(), fader);
-      animation = new QPropertyAnimation(mut_widget, fader_key.toAscii(), mut_widget);
+      mut_widget->setProperty(fader_key.toUtf8().constData(), fader);
+      animation = new QPropertyAnimation(mut_widget, fader_key.toUtf8(), mut_widget);
       connect(animation, SIGNAL(valueChanged(QVariant)), mut_widget, SLOT(update()));
-      mut_widget->setProperty(animation_key.toAscii().constData(), QVariant::fromValue(animation));
+      mut_widget->setProperty(animation_key.toUtf8().constData(), QVariant::fromValue(animation));
     }
 
     if (text == tab_hover) {
@@ -285,14 +285,8 @@ QSize FancyTabBar::tabSizeHint(bool minimum) const
   QFontMetrics fm(boldFont);
   int spacing = 8;
   int width = 60 + spacing + 2;
-  int maxLabelwidth = 0;
-  for (int tab=0 ; tab<count() ;++tab) {
-      int width = fm.width(m_tabs[tab]->text);
-      if (width > maxLabelwidth)
-          maxLabelwidth = width;
-  }
   int iconHeight = minimum ? 0 : 32;
-  return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());
+  return QSize(width, iconHeight + spacing + fm.height());
 }
 
 void FancyTabBar::paintEvent(QPaintEvent *event)
@@ -309,13 +303,11 @@ void FancyTabBar::paintEvent(QPaintEvent *event)
         paintTab(&p, currentIndex());
 }
 
-// Resets hover animation on mouse enter
 void FancyTab::enterEvent(QEvent*)
 {
     fadeIn();
 }
 
-// Resets hover animation on mouse enter
 void FancyTab::leaveEvent(QEvent*)
 {
     fadeOut();
@@ -417,7 +409,7 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
         painter->drawLine(rect.bottomLeft() + QPoint(0,-1), rect.bottomRight()-QPoint(0,1));
     }
 
-    QString tabText(this->tabText(tabIndex));
+    QString tabText(painter->fontMetrics().elidedText(this->tabText(tabIndex), Qt::ElideMiddle, width()));
     QRect tabTextRect(tabRect(tabIndex));
     QRect tabIconRect(tabTextRect);
     tabIconRect.adjust(+4, +4, -4, -4);
@@ -427,7 +419,7 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
     boldFont.setBold(true);
     painter->setFont(boldFont);
     painter->setPen(selected ? QColor(255, 255, 255, 160) : QColor(0, 0, 0, 110));
-    int textFlags = Qt::AlignCenter | Qt::AlignBottom | Qt::TextWordWrap;
+    int textFlags = Qt::AlignCenter | Qt::AlignBottom;
     painter->drawText(tabTextRect, textFlags, tabText);
     painter->setPen(selected ? QColor(60, 60, 60) : Utils::StyleHelper::panelTextColor());
 #ifndef Q_WS_MAC
@@ -446,7 +438,7 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
     }
 #endif
 
-    int textHeight = painter->fontMetrics().boundingRect(QRect(0, 0, width(), height()), Qt::TextWordWrap, tabText).height();
+    const int textHeight = painter->fontMetrics().height();
     tabIconRect.adjust(0, 4, 0, -textHeight);
     Utils::StyleHelper::drawIconWithShadow(tabIcon(tabIndex), tabIconRect, painter, QIcon::Normal);
 
@@ -678,12 +670,20 @@ void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons) {
     if (item.type_ != Item::Type_Tab)
       continue;
 
+    QString label = item.tab_label_;
+    if (shape == QTabBar::RoundedWest) {
+      label = QFontMetrics(font()).elidedText(label, Qt::ElideMiddle, 100);
+    }
+
+    int tab_id = -1;
     if (icons && text)
-      bar->addTab(item.tab_icon_, item.tab_label_);
+      tab_id = bar->addTab(item.tab_icon_, label);
     else if (icons)
-      bar->setTabToolTip(bar->addTab(item.tab_icon_, QString()), item.tab_label_);
+      tab_id = bar->addTab(item.tab_icon_, QString());
     else if (text)
-      bar->addTab(item.tab_label_);
+      tab_id = bar->addTab(label);
+
+    bar->setTabToolTip(tab_id, item.tab_label_);
   }
 
   bar->setCurrentIndex(stack_->currentIndex());
