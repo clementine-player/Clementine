@@ -204,12 +204,12 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 
   // Start initialising the player
   player_->Init();
-  background_streams_ = new BackgroundStreams(player_->GetEngine(), this);
+  background_streams_ = new BackgroundStreams(player_->engine(), this);
   background_streams_->LoadStreams();
 
 
 #ifdef HAVE_GSTREAMER
-  if (qobject_cast<GstEngine*>(player_->GetEngine()) == NULL) {
+  if (qobject_cast<GstEngine*>(player_->engine()) == NULL) {
     ui_->action_transcode->setEnabled(false);
   }
 #else // HAVE_GSTREAMER
@@ -368,7 +368,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
-  connect(playlists_, SIGNAL(PlaylistChanged()), player_, SLOT(PlaylistChanged()));
   connect(playlists_, SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
@@ -518,16 +517,16 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   ConnectInfoView(artist_info_view_);
 
   // Analyzer
-  ui_->analyzer->SetEngine(player_->GetEngine());
+  ui_->analyzer->SetEngine(player_->engine());
   ui_->analyzer->SetActions(ui_->action_visualisations);
 
   // Equalizer
   connect(equalizer_.get(), SIGNAL(ParametersChanged(int,QList<int>)),
-          player_->GetEngine(), SLOT(SetEqualizerParameters(int,QList<int>)));
+          player_->engine(), SLOT(SetEqualizerParameters(int,QList<int>)));
   connect(equalizer_.get(), SIGNAL(EnabledChanged(bool)),
-          player_->GetEngine(), SLOT(SetEqualizerEnabled(bool)));
-  player_->GetEngine()->SetEqualizerEnabled(equalizer_->is_enabled());
-  player_->GetEngine()->SetEqualizerParameters(
+          player_->engine(), SLOT(SetEqualizerEnabled(bool)));
+  player_->engine()->SetEqualizerEnabled(equalizer_->is_enabled());
+  player_->engine()->SetEqualizerParameters(
       equalizer_->preamp_value(), equalizer_->gain_values());
 
   // Statusbar widgets
@@ -791,8 +790,8 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // the database.
   if (item && item->IsLocalLibraryItem() && !playlists_->active()->has_scrobbled()) {
     Song song = item->Metadata();
-    const int position = player_->GetEngine()->position();
-    const int length = player_->GetEngine()->length();
+    const int position = player_->engine()->position();
+    const int length = player_->engine()->length();
     const float percentage = (length == 0 ? 1 : float(position) / length);
 
     library_->backend()->IncrementSkipCountAsync(song.id(), percentage);
@@ -941,7 +940,7 @@ void MainWindow::FilePathChanged(const QString& path) {
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   PlaylistItemPtr item(player_->GetCurrentItem());
-  const int position = std::floor(float(player_->GetEngine()->position()) / 1000.0 + 0.5);
+  const int position = std::floor(float(player_->engine()->position()) / 1000.0 + 0.5);
   const int length = item->Metadata().length();
 
   if (length <= 0) {
@@ -1573,7 +1572,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
 #ifdef HAVE_GSTREAMER
-  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine())) {
+  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->engine())) {
     settings_dialog_->SetGstEngine(engine);
   }
 #endif
@@ -1588,7 +1587,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), library_view_->view(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), song_info_view_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), player_->GetEngine(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), player_->engine(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
 #ifdef ENABLE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
@@ -1657,7 +1656,7 @@ void MainWindow::ShowVisualisations() {
     connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
 
 #ifdef HAVE_GSTREAMER
-    if (GstEngine* engine = qobject_cast<GstEngine*>(player_->GetEngine()))
+    if (GstEngine* engine = qobject_cast<GstEngine*>(player_->engine()))
     visualisation_->SetEngine(engine);
 #endif
   }

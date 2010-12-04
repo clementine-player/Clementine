@@ -32,8 +32,11 @@ class PlaylistManager;
 class Settings;
 class LastFMService;
 class MainWindow;
-class MPRIS;
-class MPRIS2;
+
+namespace mpris {
+  class Mpris1;
+  class Mpris2;
+}
 
 
 #ifdef Q_WS_X11
@@ -53,13 +56,13 @@ class Player : public QObject {
   EngineBase* CreateEngine(Engine::Type engine);
   void Init();
 
-  EngineBase* GetEngine() { return engine_.get(); }
+  EngineBase* engine() const { return engine_.get(); }
   Engine::State GetState() const;
   int GetVolume() const;
 
   PlaylistItemPtr GetCurrentItem() const { return current_item_; }
   PlaylistItemPtr GetItemAt(int pos) const;
-  PlaylistManager* GetPlaylists() {return playlists_; }
+  PlaylistManager* playlists() const { return playlists_; }
 
  public slots:
   void ReloadSettings();
@@ -83,8 +86,6 @@ class Player : public QObject {
   void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result);
   void CurrentMetadataChanged(const Song& metadata);
 
-  void PlaylistChanged();
-
   // MPRIS /Player
   void Mute();
   void Pause();
@@ -104,7 +105,6 @@ class Player : public QObject {
   int AddTrack(const QString&, bool);
   void DelTrack(int index);
   int GetCurrentTrack() const;
-  int GetLength() const;
   void SetLoop(bool enable);
   void SetRandom(bool enable);
 
@@ -131,8 +131,8 @@ class Player : public QObject {
   void NextInternal(Engine::TrackChangeType);
 
  private:
-  MPRIS* mpris_;
-  MPRIS2* mpris2_;
+  mpris::Mpris1* mpris1_;
+  mpris::Mpris2* mpris2_;
 
   PlaylistManager* playlists_;
   LastFMService* lastfm_;

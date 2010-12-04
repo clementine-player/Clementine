@@ -18,7 +18,6 @@
 #ifndef MPRIS2_H
 #define MPRIS2_H
 
-#include "core/backgroundthread.h"
 #include "playlist/playlistitem.h"
 
 #include <QMetaObject>
@@ -27,17 +26,18 @@
 
 #include <boost/scoped_ptr.hpp>
 
-class AlbumCoverLoader;
 class MainWindow;
 class Player;
-
-class QTemporaryFile;
 
 typedef QList<QVariantMap> TrackMetadata;
 typedef QList<QDBusObjectPath> TrackIds;
 Q_DECLARE_METATYPE(TrackMetadata)
 
-class MPRIS2 : public QObject {
+namespace mpris {
+
+class ArtLoader;
+
+class Mpris2 : public QObject {
   Q_OBJECT
 
   //org.mpris.MediaPlayer2 MPRIS 2.0 Root interface
@@ -71,9 +71,7 @@ class MPRIS2 : public QObject {
   Q_PROPERTY( bool CanEditTracks READ CanEditTracks )
 
 public:
-  MPRIS2(MainWindow* main_window, Player* player, QObject* parent);
-  void emitNotification(const QString& name);
-  void emitNotification(const QString& name, const QVariant& val);
+  Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader, QObject* parent);
 
   // Root Properties
   bool CanQuit() const;
@@ -130,9 +128,6 @@ public:
   void RemoveTrack(const QDBusObjectPath& trackId);
   void GoTo(const QDBusObjectPath& trackId);
 
-public slots:
-  void UpdateMetadata(PlaylistItemPtr item);
-
 signals:
   // Player
   void Seeked(qlonglong position);
@@ -144,23 +139,25 @@ signals:
   void TrackMetadataChanged(const QDBusObjectPath& trackId, const TrackMetadata& metadata);
 
 private slots:
-  void Initialised();
-  void TempArtLoaded(quint64 id, const QImage& image);
+  void ArtLoaded(const Song& song, const QString& art_uri);
+  void EngineStateChanged();
+  void VolumeChanged();
+
+private:
+  void EmitNotification(const QString& name);
+  void EmitNotification(const QString& name, const QVariant& val);
 
 private:
   static const char* kMprisObjectPath;
   static const char* kServiceName;
   static const char* kFreedesktopPath;
 
-  boost::scoped_ptr<QTemporaryFile> temp_art_;
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  quint64 art_request_id_;
-  PlaylistItemPtr art_request_item_;
-
   QVariantMap last_metadata_;
 
   MainWindow* ui_;
   Player* player_;
 };
+
+} // namespace mpris
 
 #endif

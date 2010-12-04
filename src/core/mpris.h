@@ -26,7 +26,6 @@
 
 class Player;
 
-
 struct DBusStatus {    // From Amarok.
   int play;            // Playing = 0, Paused = 1, Stopped = 2
   int random;          // Linearly = 0, Randomly = 1
@@ -41,11 +40,21 @@ struct DBusStatus {    // From Amarok.
 };
 Q_DECLARE_METATYPE(DBusStatus);
 
+QDBusArgument& operator <<(QDBusArgument& arg, const DBusStatus& status);
+const QDBusArgument& operator >>(const QDBusArgument& arg, DBusStatus& status);
+
+
 struct Version {
   quint16 minor;
   quint16 major;
 };
-Q_DECLARE_METATYPE(Version)
+Q_DECLARE_METATYPE(Version);
+
+QDBusArgument& operator <<(QDBusArgument& arg, const Version& version);
+const QDBusArgument& operator >>(const QDBusArgument& arg, Version& version);
+
+
+namespace mpris {
 
 enum DBusCaps {
   NONE                 = 0,
@@ -59,56 +68,48 @@ enum DBusCaps {
 };
 
 
-#ifdef Q_WS_X11
-# include <QDBusArgument>
-  QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status);
-  const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status);
-#endif
+class ArtLoader;
+class Mpris1Root;
+class Mpris1Player;
+class Mpris1TrackList;
 
 
-namespace metadata {
-
-inline void AddMetadata(const QString& key, const QString& metadata, QVariantMap* map) {
-  if (!metadata.isEmpty()) {
-    (*map)[key] = metadata;
-  }
-}
-
-inline void AddMetadata(const QString& key, int metadata, QVariantMap* map) {
-  if (metadata > 0) {
-    (*map)[key] = metadata;
-  }
-}
-
-inline void AddMetadata(const QString& key, const QDateTime& metadata, QVariantMap* map) {
-  if (metadata.isValid()) {
-    (*map)[key] = metadata;
-  }
-}
-
-inline void AddMetadata(const QString &key, const QStringList& metadata, QVariantMap *map) {
-    if (!metadata.isEmpty()) {
-      (*map)[key] = metadata;
-    }
-}
-
-} // namespace metadata
-
-QDBusArgument& operator<< (QDBusArgument& arg, const Version& version);
-const QDBusArgument& operator>> (const QDBusArgument& arg, Version& version);
-
-class MPRIS : public QObject {
+class Mpris1 : public QObject {
   Q_OBJECT
 
 public:
-  // Root interface
-  MPRIS(Player* player, QObject* parent);
+  Mpris1(Player* player, ArtLoader* art_loader, QObject* parent);
+
+  static QVariantMap GetMetadata(const Song& song);
+
+private:
+  Mpris1Root* root_;
+  Mpris1Player* player_;
+  Mpris1TrackList* tracklist_;
+};
+
+
+class Mpris1Root : public QObject {
+  Q_OBJECT
+
+public:
+  Mpris1Root(Player* player, QObject* parent);
 
   QString Identity();
   void Quit();
   Version MprisVersion();
 
-  // Player Interface
+private:
+  Player* player_;
+};
+
+
+class Mpris1Player : public QObject {
+  Q_OBJECT
+
+public:
+  Mpris1Player(Player* player, QObject* parent);
+
   void Pause();
   void Stop();
   void Prev();
@@ -121,16 +122,38 @@ public:
   void PositionSet(int pos);
   int PositionGet() const;
   QVariantMap GetMetadata() const;
-  QVariantMap GetMetadata(PlaylistItemPtr item) const;
   int GetCaps() const;
 
-  // Amarok Extensions for Player
+  // Amarok extensions
   void VolumeUp(int vol);
   void VolumeDown(int vol);
   void Mute();
   void ShowOSD();
 
-  // Tracklist Interface
+public slots:
+  void CurrentSongChanged(const Song& song, const QString& art_uri);
+
+signals:
+  void CapsChange(int);
+  void TrackChange(const QVariantMap&);
+  void StatusChange(DBusStatus);
+
+private slots:
+  void EngineStateChanged();
+
+private:
+  Player* player_;
+
+  QVariantMap last_metadata_;
+};
+
+
+class Mpris1TrackList : public QObject {
+  Q_OBJECT
+
+public:
+  Mpris1TrackList(Player* player, QObject* parent);
+
   int AddTrack(const QString&, bool);
   void DelTrack(int index);
   int GetCurrentTrack() const;
@@ -139,27 +162,19 @@ public:
   void SetLoop(bool enable);
   void SetRandom(bool enable);
 
-  // Amarok extension.
+  // Amarok extension
   void PlayTrack(int index);
 
-  // Signals Emitters
-  void EmitCapsChange(int param);
-  void EmitTrackChange(QVariantMap param);
-  void EmitStatusChange(DBusStatus);
-  void EmitTrackListChange(int i);
-
 signals:
-  void CapsChange(int);
-  void TrackChange(QVariantMap);
-  void StatusChange(DBusStatus);
-  // TrackList
   void TrackListChange(int i);
+
+private slots:
+  void PlaylistChanged();
 
 private:
   Player* player_;
 };
 
+} // namespace mpris
+
 #endif // MPRIS_H
-
-
-

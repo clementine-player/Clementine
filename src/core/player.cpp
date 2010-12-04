@@ -37,6 +37,7 @@
 #endif
 
 #ifdef Q_WS_X11
+#  include "mpris_common.h"
 #  include "mpris.h"
 #  include "mpris2.h"
 #  include <QDBusConnection>
@@ -50,32 +51,11 @@
 
 using boost::shared_ptr;
 
-#ifdef Q_WS_X11
-QDBusArgument& operator<< (QDBusArgument& arg, const DBusStatus& status) {
-  arg.beginStructure();
-  arg << status.play;
-  arg << status.random;
-  arg << status.repeat;
-  arg << status.repeat_playlist;
-  arg.endStructure();
-  return arg;
-}
-
-const QDBusArgument& operator>> (const QDBusArgument& arg, DBusStatus& status) {
-  arg.beginStructure();
-  arg >> status.play;
-  arg >> status.random;
-  arg >> status.repeat;
-  arg >> status.repeat_playlist;
-  arg.endStructure();
-  return arg;
-}
-#endif
 
 Player::Player(MainWindow* main_window, PlaylistManager* playlists,
                LastFMService* lastfm, Engine::Type engine, QObject* parent)
   : QObject(parent),
-    mpris_(NULL),
+    mpris1_(NULL),
     mpris2_(NULL),
     playlists_(playlists),
     lastfm_(lastfm),
@@ -85,15 +65,20 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
 {
 #ifdef Q_WS_X11
   // MPRIS DBus interface.
-  qDBusRegisterMetaType<DBusStatus>();
-  qDBusRegisterMetaType<Version>();
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
+
+  // Loads album art and saves it to a file in /tmp for MPRIS clients to use
+  mpris::ArtLoader* art_loader = new mpris::ArtLoader(this);
+  connect(playlists, SIGNAL(CurrentSongChanged(Song)),
+          art_loader, SLOT(LoadArt(Song)));
+
   //MPRIS 1.0 implementation
-  mpris_ = new MPRIS(this, this);
+  mpris1_ = new mpris::Mpris1(this, art_loader, this);
+
   //MPRIS 2.0 implementation
-  mpris2_ = new MPRIS2(main_window, this, this);
+  mpris2_ = new mpris::Mpris2(main_window, this, art_loader, this);
 #endif
 
   settings_.beginGroup("Player");
@@ -101,7 +86,6 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
   SetVolume(settings_.value("volume", 50).toInt());
 
   connect(engine_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
-
 }
 
 Player::~Player() {
@@ -268,10 +252,6 @@ void Player::PlayPause() {
     break;
   }
   }
-
-#ifdef Q_WS_X11
-  mpris2_->emitNotification("PlaybackStatus");
-#endif
 }
 
 void Player::Stop() {
@@ -298,13 +278,6 @@ void Player::EngineStateChanged(Engine::State state) {
     case Engine::Empty:
     case Engine::Idle: emit Stopped(); break;
   }
-
-#ifdef Q_WS_X11
-  mpris_->EmitStatusChange(mpris_->GetStatus());
-  mpris_->EmitCapsChange(mpris_->GetCaps());
-  mpris2_->emitNotification("PlaybackStatus");
-  mpris2_->emitNotification("Metadata");
-#endif
 }
 
 void Player::SetVolume(int value) {
@@ -316,9 +289,6 @@ void Player::SetVolume(int value) {
 
   if (volume != old_volume){
     emit VolumeChanged(volume);
-#ifdef Q_WS_X11
-    mpris2_->emitNotification("Volume");
-#endif
   }
 
 }
@@ -353,22 +323,10 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
     if (lastfm_->IsScrobblingEnabled())
       lastfm_->NowPlaying(current_item_->Metadata());
   }
-
-#ifdef Q_WS_X11
-  mpris_->EmitCapsChange(mpris_->GetCaps());
-  mpris2_->emitNotification("PlaybackStatus");
-  mpris2_->emitNotification("Metadata");
-#endif
 }
 
 void Player::CurrentMetadataChanged(const Song& metadata) {
   lastfm_->NowPlaying(metadata);
-
-#ifdef Q_WS_X11
-  PlaylistItemPtr item = playlists_->active()->current_item();
-  mpris_->EmitTrackChange(mpris_->GetMetadata(item));
-  mpris2_->UpdateMetadata(item);
-#endif
 }
 
 void Player::Seek(int seconds) {
@@ -497,10 +455,6 @@ int Player::GetCurrentTrack() const {
   return playlists_->active()->current_index();
 }
 
-int Player::GetLength() const {
-  return playlists_->active()->rowCount();
-}
-
 void Player::SetLoop(bool enable) {
   playlists_->active()->sequence()->SetRepeatMode(
       enable ? PlaylistSequence::Repeat_Playlist : PlaylistSequence::Repeat_Off);
@@ -509,12 +463,6 @@ void Player::SetLoop(bool enable) {
 void Player::SetRandom(bool enable) {
   playlists_->active()->sequence()->SetShuffleMode(
       enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
-}
-
-void Player::PlaylistChanged() {
-#ifdef Q_WS_X11
-  mpris_->EmitTrackListChange(GetLength());
-#endif
 }
 
 void Player::TrackAboutToEnd() {

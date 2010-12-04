@@ -550,24 +550,24 @@ if(NOT APPLE AND NOT WIN32)
   # MPRIS DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.player.xml
-      core/mpris.h MPRIS core/mpris_player MprisPlayer)
+      core/mpris.h mpris::Mpris1Player core/mpris_player MprisPlayer)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.root.xml
-      core/mpris.h MPRIS core/mpris_root MprisRoot)
+      core/mpris.h mpris::Mpris1Root core/mpris_root MprisRoot)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.freedesktop.MediaPlayer.tracklist.xml
-      core/mpris.h MPRIS core/mpris_tracklist MprisTrackList)
+      core/mpris.h mpris::Mpris1TrackList core/mpris_tracklist MprisTrackList)
 
   # MPRIS 2.0 DBUS interfaces
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.Player.xml
-      core/mpris2.h MPRIS2 core/mpris2_player Mpris2Player)
+      core/mpris2.h mpris::Mpris2 core/mpris2_player Mpris2Player)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.xml
-      core/mpris2.h MPRIS2 core/mpris2_root Mpris2Root)
+      core/mpris2.h mpris::Mpris2 core/mpris2_root Mpris2Root)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
-      core/mpris2.h MPRIS2 core/mpris2_tracklist Mpris2TrackList)
+      core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
 
   # org.freedesktop.Notifications DBUS interface
   qt4_add_dbus_interface(SOURCES
@@ -583,8 +583,8 @@ if(NOT APPLE AND NOT WIN32)
       dbus/udisksdevice)
 
   # MPRIS source
-  list(APPEND SOURCES core/mpris.cpp core/mpris2.cpp)
-  list(APPEND HEADERS core/mpris.h   core/mpris2.h)
+  list(APPEND SOURCES core/mpris_common.cpp core/mpris.cpp core/mpris2.cpp)
+  list(APPEND HEADERS core/mpris_common.h   core/mpris.h   core/mpris2.h)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
@@ -683,6 +683,8 @@ list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
   core/modelfuturewatcher.h
+  core/mpris_common.cpp
+  core/mpris_common.h
   core/mpris.cpp
   core/mpris.h
   core/mpris2.cpp
