@@ -124,7 +124,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>8</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -365,9 +365,6 @@
             </item>
             <item row="2" column="1">
              <widget class="QSpinBox" name="buffer_duration">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
               <property name="suffix">
                <string> ms</string>
               </property>
