@@ -369,11 +369,11 @@ FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
 
-print 'Would run %d commands:' % len(commands)
-for command in commands:
-  print ' '.join(command)
-
 if len(sys.argv) <= 2:
+  print 'Would run %d commands:' % len(commands)
+  for command in commands:
+    print ' '.join(command)
+
   print 'OK?'
   raw_input()
 
