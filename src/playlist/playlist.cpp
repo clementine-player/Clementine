@@ -498,6 +498,10 @@ void Playlist::set_current_index(int i) {
 
   current_item_index_ = QPersistentModelIndex(index(i, 0, QModelIndex()));
 
+  if (current_item_index_.row() == queue_->PeekNext()) {
+    queue_->TakeNext();
+  }
+
   if (current_item_index_ == old_current)
     return;
 
@@ -520,10 +524,6 @@ void Playlist::set_current_index(int i) {
   if (current_item_index_.isValid()) {
     emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount-1));
     emit CurrentSongChanged(current_item_metadata());
-  }
-
-  if (current_item_index_.row() == queue_->PeekNext()) {
-    queue_->TakeNext();
   }
 
   // Update the virtual index
