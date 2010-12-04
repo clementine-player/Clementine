@@ -59,11 +59,10 @@ void EchoNestTags::RequestFinished() {
     data.type_ = CollapsibleInfoPane::Data::Type_Tags;
     data.icon_ = QIcon(":/last.fm/icon_tag.png");
 
-    TagWidget* widget = new TagWidget;
+    TagWidget* widget = new TagWidget(TagWidget::Type_Tags);
     data.contents_ = widget;
 
     widget->SetIcon(data.icon_);
-    widget->SetUrlPattern("lastfm://globaltags/%1");
 
     foreach (const Echonest::Term& term, request->artist_->terms()) {
       widget->AddTag(term.name());

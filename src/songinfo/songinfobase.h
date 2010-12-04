@@ -24,6 +24,7 @@
 #include "songinfofetcher.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
+#include "smartplaylists/generator_fwd.h"
 #include "widgets/widgetfadehelper.h"
 
 class CollapsibleInfoPane;
@@ -48,6 +49,7 @@ public slots:
 signals:
   void ShowSettingsDialog();
   void AddPlaylistItems(const PlaylistItemList& items, bool clear_first = false);
+  void AddGenerator(smart_playlists::GeneratorPtr gen);
 
 protected:
   void showEvent(QShowEvent* e);

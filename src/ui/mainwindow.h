@@ -201,6 +201,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void SaveGeometry();
 
+  void AddSongInfoGenerator(smart_playlists::GeneratorPtr gen);
+
  private:
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);

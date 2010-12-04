@@ -209,11 +209,17 @@ void SongInfoBase::ReloadSettings() {
 }
 
 void SongInfoBase::ConnectWidget(QWidget* widget) {
-  if (widget->metaObject()->indexOfSignal("ShowSettingsDialog()") != -1) {
+  const QMetaObject* m = widget->metaObject();
+
+  if (m->indexOfSignal("ShowSettingsDialog()") != -1) {
     connect(widget, SIGNAL(ShowSettingsDialog()), SIGNAL(ShowSettingsDialog()));
   }
 
-  if (widget->metaObject()->indexOfSignal("AddPlaylistItems(PlaylistItemList)") != -1) {
+  if (m->indexOfSignal("AddPlaylistItems(PlaylistItemList)") != -1) {
     connect(widget, SIGNAL(AddPlaylistItems(PlaylistItemList)), SIGNAL(AddPlaylistItems(PlaylistItemList)));
+  }
+
+  if (m->indexOfSignal("AddGenerator(smart_playlists::GeneratorPtr)") != -1) {
+    connect(widget, SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)), SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)));
   }
 }

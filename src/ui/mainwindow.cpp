@@ -55,6 +55,7 @@
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
 #include "radio/savedradio.h"
+#include "smartplaylists/generator.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
 #include "transcoder/transcodedialog.h"
@@ -1674,6 +1675,16 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
   connect(view, SIGNAL(AddPlaylistItems(PlaylistItemList,bool)),
                 SLOT(InsertRadioItems(PlaylistItemList,bool)));
+  connect(view, SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)),
+                SLOT(AddSongInfoGenerator(smart_playlists::GeneratorPtr)));
+}
+
+void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
+  if (!gen)
+    return;
+  gen->set_library(library_->backend());
+
+  AddSmartPlaylistToPlaylist(false, gen);
 }
 
 void MainWindow::ShowSongInfoConfig() {

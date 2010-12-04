@@ -19,10 +19,12 @@
 #define TAGWIDGET_H
 
 #include "playlist/playlistitem.h"
+#include "smartplaylists/generator_fwd.h"
 
 #include <QIcon>
 #include <QWidget>
 
+class QMenu;
 class QPropertyAnimation;
 
 class TagWidgetTag : public QWidget {
@@ -53,6 +55,7 @@ protected:
   void leaveEvent(QEvent*);
   void paintEvent(QPaintEvent*);
   void mouseReleaseEvent(QMouseEvent*);
+  void contextMenuEvent(QContextMenuEvent*);
 
 private:
   QString text_;
@@ -66,9 +69,13 @@ class TagWidget : public QWidget {
   Q_OBJECT
 
 public:
-  TagWidget(QWidget* parent = 0);
+  enum Type {
+    Type_Tags,
+    Type_Artists,
+  };
 
-  void SetUrlPattern(const QString& pattern) { url_pattern_ = pattern; }
+  TagWidget(Type type, QWidget* parent = 0);
+
   void SetIcon(const QIcon& icon) { icon_ = icon; }
   void AddTag(const QString& tag);
 
@@ -76,14 +83,26 @@ public:
 
 signals:
   void AddPlaylistItems(const PlaylistItemList& items);
+  void AddGenerator(smart_playlists::GeneratorPtr gen);
 
 private slots:
   void TagClicked();
 
+  void PlayLastFmTagRadio();
+  void PlayLastFmArtistRadio();
+  void PlayFromLibrary();
+
 private:
-  QString url_pattern_;
+  void EnsureMenuCreated();
+  void PlayLastFm(const QString& url_pattern);
+
+private:
+  Type type_;
   QIcon icon_;
   QList<TagWidgetTag*> tags_;
+
+  QString context_item_;
+  QMenu* menu_;
 };
 
 #endif // TAGWIDGET_H
