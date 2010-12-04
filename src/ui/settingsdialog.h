@@ -101,7 +101,7 @@ class SettingsDialog : public QDialog {
   void SongInfoFontSizeChanged(double value);
 
   // Background streams.
-  void EnableStream(int state);
+  void EnableStream(bool enabled);
   void StreamVolumeChanged(int value);
 
  private:
@@ -111,17 +111,11 @@ class SettingsDialog : public QDialog {
   const GstEngine* gst_engine_;
 
   Ui_SettingsDialog* ui_;
-  QWidget* streams_page_;
-  QBoxLayout* streams_layout_;
-
   bool loading_settings_;
 
   OSDPretty* pretty_popup_;
 
   QMap<QString, QString> language_map_;
-
-  QMap<QSlider*, QString> sliders_;
-  QMap<QCheckBox*, QString> checkboxes_;
 
   BackgroundStreams* streams_;
 

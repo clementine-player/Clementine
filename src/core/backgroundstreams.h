@@ -1,9 +1,9 @@
 #ifndef BACKGROUNDSTREAMS_H
 #define BACKGROUNDSTREAMS_H
 
-#include <QList>
 #include <QMap>
 #include <QObject>
+#include <QStringList>
 #include <QUrl>
 
 #include "engines/engine_fwd.h"
@@ -17,7 +17,7 @@ class BackgroundStreams : public QObject {
   void LoadStreams();
   void SaveStreams();
 
-  QList<QString> streams() const { return streams_.keys(); }
+  QStringList streams() const { return streams_.keys(); }
 
   void EnableStream(const QString& name, bool enable);
   void SetStreamVolume(const QString& name, int volume);

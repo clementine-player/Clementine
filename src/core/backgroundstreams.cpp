@@ -25,9 +25,8 @@ void BackgroundStreams::LoadStreams() {
   int version = s.value("version", 0).toInt();
   if (version < kVersion) {
     s.setValue("version", kVersion);
-    // TODO: Make these robust against translations.
-    AddStream(tr("Hypnotoad"), QUrl(kHypnotoadUrl));
-    AddStream(tr("Rain"), QUrl(kRainUrl));
+    AddStream(QT_TR_NOOP("Hypnotoad"), QUrl(kHypnotoadUrl));
+    AddStream(QT_TR_NOOP("Rain"), QUrl(kRainUrl));
     SaveStreams();
     return;
   }
@@ -115,16 +114,15 @@ bool BackgroundStreams::IsPlaying(const QString& name) {
 }
 
 void BackgroundStreams::MakeItRain(bool enable) {
-  if (!streams_.contains(tr("Rain"))) {
-    AddStream(tr("Rain"), QUrl(kRainUrl));
+  if (!streams_.contains("Rain")) {
+    AddStream("Rain", QUrl(kRainUrl));
   }
-  EnableStream(tr("Rain"), enable);
+  EnableStream("Rain", enable);
 }
 
 void BackgroundStreams::AllGloryToTheHypnotoad(bool enable) {
-  if (!streams_.contains(tr("Hypnotoad"))) {
-    AddStream(tr("Hypnotoad"), QUrl(kHypnotoadUrl));
+  if (!streams_.contains("Hypnotoad")) {
+    AddStream("Hypnotoad", QUrl(kHypnotoadUrl));
   }
-  EnableStream(tr("Hypnotoad"), enable);
-
+  EnableStream("Hypnotoad", enable);
 }

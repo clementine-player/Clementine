@@ -124,7 +124,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -366,7 +366,7 @@
             <item row="2" column="1">
              <widget class="QSpinBox" name="buffer_duration">
               <property name="enabled">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="suffix">
                <string> ms</string>
@@ -793,6 +793,30 @@
          </property>
          <item>
           <widget class="MagnatuneConfig" name="magnatune" native="true"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="streams_page">
+        <layout class="QVBoxLayout" name="verticalLayout_16">
+         <item>
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>You can listen to background streams at the same time as other music.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>

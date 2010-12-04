@@ -46,43 +46,39 @@
 #include <QtDebug>
 
 void SettingsDialog::AddStream(const QString& name) {
-  QGroupBox* box = new QGroupBox(name, streams_page_);
+  QGroupBox* box = new QGroupBox(tr(name.toUtf8()));
   QSlider* slider = new QSlider(Qt::Horizontal, box);
   QCheckBox* check = new QCheckBox(box);
   QHBoxLayout* layout = new QHBoxLayout(box);
   layout->addWidget(slider);
   layout->addWidget(check);
 
-  streams_layout_->addWidget(box);
+  QVBoxLayout* streams_layout = qobject_cast<QVBoxLayout*>(
+        ui_->streams_page->layout());
+  streams_layout->insertWidget(streams_layout->count() - 1, box);
 
-  sliders_[slider] = name;
-  checkboxes_[check] = name;
+  slider->setProperty("stream_name", name);
+  check->setProperty("stream_name", name);
 
   connect(slider, SIGNAL(valueChanged(int)), SLOT(StreamVolumeChanged(int)));
-  connect(check, SIGNAL(stateChanged(int)), SLOT(EnableStream(int)));
+  connect(check, SIGNAL(toggled(bool)), SLOT(EnableStream(bool)));
 
   slider->setValue(streams_->GetStreamVolume(name));
   check->setCheckState(streams_->IsPlaying(name) ? Qt::Checked : Qt::Unchecked);
 }
 
-void SettingsDialog::EnableStream(int state) {
-  QCheckBox* check = qobject_cast<QCheckBox*>(sender());
-  Q_ASSERT(check);
-  const QString& name = checkboxes_[check];
-  streams_->EnableStream(name, state == Qt::Checked ? true : false);
+void SettingsDialog::EnableStream(bool enabled) {
+  const QString name = sender()->property("stream_name").toString();
+  streams_->EnableStream(name, enabled);
 }
 
 void SettingsDialog::StreamVolumeChanged(int value) {
-  QSlider* slider = qobject_cast<QSlider*>(sender());
-  Q_ASSERT(slider);
-
-  const QString& name = sliders_[slider];
+  const QString name = sender()->property("stream_name").toString();
   streams_->SetStreamVolume(name, value);
 }
 
 void SettingsDialog::AddStreams() {
-  const QList<QString>& streams = streams_->streams();
-  foreach (const QString& name, streams) {
+  foreach (const QString& name, streams_->streams()) {
     AddStream(name);
   }
 }
@@ -91,8 +87,6 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   : QDialog(parent),
     gst_engine_(NULL),
     ui_(new Ui_SettingsDialog),
-    streams_page_(new QWidget(this)),
-    streams_layout_(new QVBoxLayout(streams_page_)),
     loading_settings_(false),
     pretty_popup_(new OSDPretty(OSDPretty::Mode_Draggable)),
     streams_(streams)
@@ -107,14 +101,9 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->list->item(Page_GlobalShortcuts)->setIcon(IconLoader::Load("input-keyboard"));
   ui_->list->item(Page_Notifications)->setIcon(IconLoader::Load("help-hint"));
   ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
-  ui_->list->item(Page_BackgroundStreams)->setIcon(IconLoader::Load("folder-sound"));
-
-  streams_page_->setObjectName(QString::fromUtf8("streams_page"));
-  streams_layout_->setObjectName(QString::fromUtf8("streams_layout"));
+  ui_->list->item(Page_BackgroundStreams)->setIcon(QIcon(":/icons/32x32/weather-showers-scattered.png"));
 
   AddStreams();
-  streams_layout_->addStretch(1);
-  ui_->stacked_widget->addWidget(streams_page_);
 
 #ifdef ENABLE_WIIMOTEDEV
   // Wiimotedev page
