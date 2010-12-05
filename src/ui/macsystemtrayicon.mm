@@ -201,6 +201,8 @@ void MacSystemTrayIcon::ClearNowPlaying() {
   p_->ClearNowPlaying();
 }
 
-void MacSystemTrayIcon::SetNowPlaying(const Song& song) {
+void MacSystemTrayIcon::SetNowPlaying(const Song& song, const QString& image_path) {
+  // TODO: implement a rich tooltip with cover art, similar to the one used in QT environment
+  // see SetNowPlaying's documentation in systemtrayicon.h
   p_->ShowNowPlaying(song.artist(), song.PrettyTitle());
 }

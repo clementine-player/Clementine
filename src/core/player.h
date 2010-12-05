@@ -36,8 +36,8 @@ class MainWindow;
 namespace mpris {
   class Mpris1;
   class Mpris2;
+  class ArtLoader;
 }
-
 
 #ifdef Q_WS_X11
 # include <QDBusArgument>
@@ -63,6 +63,7 @@ class Player : public QObject {
   PlaylistItemPtr GetCurrentItem() const { return current_item_; }
   PlaylistItemPtr GetItemAt(int pos) const;
   PlaylistManager* playlists() const { return playlists_; }
+  mpris::ArtLoader* ArtLoader() const { return art_loader_; }
 
  public slots:
   void ReloadSettings();
@@ -117,6 +118,8 @@ class Player : public QObject {
   void NextInternal(Engine::TrackChangeType);
 
  private:
+  mpris::ArtLoader* art_loader_;
+
   mpris::Mpris1* mpris1_;
   mpris::Mpris2* mpris2_;
 

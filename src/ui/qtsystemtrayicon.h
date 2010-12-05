@@ -37,7 +37,7 @@ public:
 
   void ShowPopup(const QString &summary, const QString &message, int timeout);
 
-  void SetNowPlaying(const Song& song);
+  void SetNowPlaying(const Song& song, const QString& image_path);
   void ClearNowPlaying();
   
 protected:
@@ -53,6 +53,8 @@ private slots:
 private:
   QSystemTrayIcon* tray_;
   QMenu* menu_;
+
+  QString pattern_;
 
   QPixmap orange_icon_;
   QPixmap grey_icon_;

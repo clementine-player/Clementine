@@ -185,6 +185,7 @@ class Song {
   QString PrettyTitle() const;
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
+  QString PrettyYear() const;
 
   QString TitleWithCompilationArtist() const;
 

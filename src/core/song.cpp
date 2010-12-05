@@ -987,6 +987,13 @@ QString Song::PrettyLength() const {
   return Utilities::PrettyTime(d->length_);
 }
 
+QString Song::PrettyYear() const {
+  if (d->year_ == -1)
+    return QString::null;
+
+  return QString::number(d->year_);
+}
+
 QString Song::TitleWithCompilationArtist() const {
   QString title(d->title_);
 

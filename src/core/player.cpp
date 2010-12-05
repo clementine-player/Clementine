@@ -22,6 +22,7 @@
 #include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
 #include "radio/lastfmservice.h"
+#include "mpris_common.h"
 
 #ifdef HAVE_GSTREAMER
 #  include "engines/gstengine.h"
@@ -37,7 +38,6 @@
 #endif
 
 #ifdef Q_WS_X11
-#  include "mpris_common.h"
 #  include "mpris.h"
 #  include "mpris2.h"
 #  include <QDBusConnection>
@@ -55,6 +55,7 @@ using boost::shared_ptr;
 Player::Player(MainWindow* main_window, PlaylistManager* playlists,
                LastFMService* lastfm, Engine::Type engine, QObject* parent)
   : QObject(parent),
+    art_loader_(new mpris::ArtLoader(this)),
     mpris1_(NULL),
     mpris2_(NULL),
     playlists_(playlists),
@@ -63,22 +64,23 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
     stream_change_type_(Engine::First),
     volume_before_mute_(50)
 {
+  // Loads album art and saves it to a file in /tmp for MPRIS clients and those
+  // objects which need cover art's filepath, not the image itself
+  connect(playlists, SIGNAL(CurrentSongChanged(Song)),
+          art_loader_, SLOT(LoadArt(Song)));
+
 #ifdef Q_WS_X11
   // MPRIS DBus interface.
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
 
-  // Loads album art and saves it to a file in /tmp for MPRIS clients to use
-  mpris::ArtLoader* art_loader = new mpris::ArtLoader(this);
-  connect(playlists, SIGNAL(CurrentSongChanged(Song)),
-          art_loader, SLOT(LoadArt(Song)));
 
   //MPRIS 1.0 implementation
-  mpris1_ = new mpris::Mpris1(this, art_loader, this);
+  mpris1_ = new mpris::Mpris1(this, art_loader_, this);
 
   //MPRIS 2.0 implementation
-  mpris2_ = new mpris::Mpris2(main_window, this, art_loader, mpris1_, this);
+  mpris2_ = new mpris::Mpris2(main_window, this, art_loader_, mpris1_, this);
 #endif
 
   settings_.beginGroup("Player");

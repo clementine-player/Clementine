@@ -21,7 +21,10 @@
 #include "core/song.h"
 
 #include <QCoreApplication>
+#include <QTextDocument>
+#include <QStringBuilder>
 #include <QMenu>
+#include <QFile>
 #include <QSystemTrayIcon>
 #include <QWheelEvent>
 
@@ -47,6 +50,10 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
   tray_->setIcon(orange_icon_);
   tray_->installEventFilter(this);
   ClearNowPlaying();
+
+  QFile pattern_file(":/now_playing_tooltip.txt");
+  pattern_file.open(QIODevice::ReadOnly);
+  pattern_ = QString::fromAscii(pattern_file.readAll());
 
   connect(tray_, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           SLOT(Clicked(QSystemTrayIcon::ActivationReason)));
@@ -124,8 +131,37 @@ void QtSystemTrayIcon::SetVisible(bool visible) {
   tray_->setVisible(visible);
 }
 
-void QtSystemTrayIcon::SetNowPlaying(const Song& song) {
-  tray_->setToolTip(song.PrettyTitleWithArtist());
+void QtSystemTrayIcon::SetNowPlaying(const Song& song, const QString& image_path) {
+  int columns = image_path == NULL ? 1 : 2;
+
+  QString clone = pattern_;
+
+  clone.replace("%columns"    , QString::number(columns));
+  clone.replace("%appName"    , QCoreApplication::applicationName());
+
+  clone.replace("%titleKey"   , tr("Title") % ":");
+  clone.replace("%titleValue" , Qt::escape(song.PrettyTitle()));
+  clone.replace("%artistKey"  , tr("Artist") % ":");
+  clone.replace("%artistValue", Qt::escape(song.artist()));
+  clone.replace("%albumKey"   , tr("Album") % ":");
+  clone.replace("%albumValue" , Qt::escape(song.album()));
+
+  clone.replace("%lengthKey"  , tr("Length") % ":");
+  clone.replace("%lengthValue", Qt::escape(song.PrettyLength()));
+
+  if(columns == 2) {
+    QString final_path = image_path.startsWith("file://")
+                                         ? image_path.mid(7)
+                                         : image_path;
+    clone.replace("%image", "    <td>"
+                            "      <img src=\"" % final_path % "\" />"
+                            "    </td>");
+  } else {
+    clone.replace("%image", "");
+  }
+
+  // TODO: we should also repaint this
+  tray_->setToolTip(clone);
 }
 
 void QtSystemTrayIcon::ClearNowPlaying() {

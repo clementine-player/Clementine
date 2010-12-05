@@ -24,6 +24,7 @@
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
 #include "core/modelfuturewatcher.h"
+#include "core/mpris_common.h"
 #include "core/player.h"
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
@@ -372,6 +373,8 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
   connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
+
+  connect(player_->ArtLoader(), SIGNAL(ArtLoaded(Song,QString)), osd_, SLOT(CoverArtPathReady(Song,QString)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));

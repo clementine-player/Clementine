@@ -78,7 +78,8 @@ void OSD::ReloadSettings() {
 }
 
 void OSD::SongChanged(const Song &song) {
-  tray_icon_->SetNowPlaying(song);
+  // no cover art yet
+  tray_icon_->SetNowPlaying(song, NULL);
   QString summary(song.PrettyTitle());
   if (!song.artist().isEmpty())
     summary = QString("%1 - %2").arg(song.artist(), summary);
@@ -104,6 +105,10 @@ void OSD::SongChanged(const Song &song) {
   } else {
     AlbumArtLoaded(waiting, QImage());
   }
+}
+
+void OSD::CoverArtPathReady(const Song& song, const QString& image_path) {
+  tray_icon_->SetNowPlaying(song, image_path);
 }
 
 void OSD::AlbumArtLoaded(quint64 id, const QImage& image) {

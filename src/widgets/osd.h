@@ -103,6 +103,7 @@ class OSD : public QObject {
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
   void CoverLoaderInitialised();
+  void CoverArtPathReady(const Song& song, const QString& image_path);
   void AlbumArtLoaded(quint64 id, const QImage& image);
   void AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image);
 
