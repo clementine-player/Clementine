@@ -1,3 +1,52 @@
+Version 0.6:
+  Features:
+    * Added a Song Info tab that contains:
+      - Lyrics fetched from 17 different websites
+      - Statistics, play counts and tags from Last.fm
+      - Wiki from Last.fm
+    * Added an Artist Info tab that contains:
+      - Photos
+      - Biographies from Wikipedia, Last.fm, Amazon and more
+      - Similar artists
+    * Added smart playlists and dynamic playlists.
+    * Add ratings, play counts and skip counts to the library, and remember
+      when a song was last played.
+    * Add a directory of Icecast radio stations to the Internet tab.
+    * Add Jamendo support to the Internet tab.
+    * Redesigned the sidebar so it looks better with the new "Song info" and
+      "Artist info" tabs.  The old style can be used again by right clicking
+      on the sidebar.
+    * Add support for "custom" Last.fm radio stations - see:
+      http://burnysblog.blogspot.com/2010/04/combo-station-urls.html
+    * Inhibit the Gnome, KDE and OS X screensavers when watching visualisations.
+    * Add an option to configure the gstreamer buffer size.
+    * Add a Mute option to the menus and the panel icon.
+    * Add a tooltip to the panel icon showing the currently playing track.
+    * Change the window title to the name of the currently playing track.
+    * Add a comment column to the playlist.
+    * Add volume controls for Rain and Hypnotoad.
+    * (Linux) Add MPRIS2 support, see http://www.mpris.org/2.0/spec/
+    * (Ubuntu) Add monochrome panel icons.
+    * (Ubuntu) Show Clementine in the Gnome sound menu.
+
+  Bugfixes:
+    * Replace Last.fm loved tracks with mix radio, see:
+      http://www.last.fm/stationchanges2010
+    * Don't block the GUI when starting a background stream.
+    * Don't block the GUI when searching or sorting a large library.
+    * Fix a large number of bugs in the MPRIS API.
+    * Use CBR instead of VBR when encoding MP3 files to copy to devices.
+    * Fixed parsing of DOS line endings in M3U files.
+    * Fix inline editing of multiple tracks in the playlist.
+    * Fix a bug where pressing F2 would sometimes edit the wrong field.
+    * Ignore duplicate items from playlists when opening directories.
+    * Ignore bad metadata in a file if good metadata has already been loaded.
+    * Don't show CD drives in the devices tab.
+    * (Windows Vista) Fix a memory leak when using visualisations.
+    * (Ubuntu) Fix compilation with the Gold linker which is used on Natty.
+
+
+
 Version 0.5.3:
   Bugfixes:
     * Fix a crash that would occur when the library scanner encountered a
