@@ -411,7 +411,6 @@ QSqlDatabase Database::Connect() {
   // Attach external databases
   foreach (const QString& key, attached_databases_.keys()) {
     const QString filename = attached_databases_[key].filename_;
-    const bool already_exists = QFile::exists(filename);
 
     // Attach the db
     QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
@@ -419,11 +418,6 @@ QSqlDatabase Database::Connect() {
     q.bindValue(":alias", key);
     if (!q.exec()) {
       qFatal("Couldn't attach external database '%s'", key.toAscii().constData());
-    }
-
-    // Set up initial schema if it didn't exist already
-    if (!already_exists) {
-      ExecFromFile(attached_databases_[key].schema_, db);
     }
   }
 
