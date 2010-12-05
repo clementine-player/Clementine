@@ -7,28 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-09-15 23:46+0000\n"
-"PO-Revision-Date: 2010-09-18 20:39+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
+"POT-Creation-Date: 2010-11-27 23:28+0000\n"
+"PO-Revision-Date: 2010-11-28 18:41+0000\n"
+"Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
-"X-Launchpad-Export-Date: 2010-09-19 05:46+0000\n"
+"X-Launchpad-Export-Date: 2010-11-29 05:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Language: ca\n"
 
 msgid " ms"
 msgstr " ms"
 
 msgid " pt"
-msgstr ""
+msgstr " pt"
 
 msgid " seconds"
 msgstr " segons"
 
 msgid " songs"
-msgstr ""
+msgstr " cançons"
 
 #, qt-format
 msgid "%1 albums"
@@ -72,7 +72,7 @@ msgstr ""
 
 #, qt-format
 msgid "%1 total plays"
-msgstr ""
+msgstr "%1 reproduccions"
 
 #, qt-format
 msgid "%1 tracks"
@@ -122,7 +122,7 @@ msgid "128k MP3"
 msgstr "128k MP3"
 
 msgid "50 random tracks"
-msgstr ""
+msgstr "50 pistes aleatòries"
 
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -142,12 +142,16 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
+"Una llista de reproducció intel·ligent és una llista dinàmica de cançons que "
+"es troben a la seva biblioteca. Existeixen diferents tipus de llistes de "
+"reproducció intel·ligent que ofereixen diferents formes de seleccionar "
+"cançons."
 
 msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -160,7 +164,7 @@ msgid "About Clementine..."
 msgstr "Sobre Clementine..."
 
 msgid "About Qt..."
-msgstr ""
+msgstr "Sobre Qt..."
 
 msgid "Account details"
 msgstr "Detalls del compte"
@@ -308,7 +312,7 @@ msgid "And:"
 msgstr "I:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Aparença"
 
 msgid "Append files/URLs to the playlist"
 msgstr "Afegir fitxers/URLs a la llista de reproducció"
@@ -330,7 +334,7 @@ msgid "Artist radio"
 msgstr "Radio de l'artista"
 
 msgid "Artist tags"
-msgstr ""
+msgstr "Etiquetes de l'artista"
 
 msgid "Artist's initial"
 msgstr "Inicials de l'artista"
@@ -339,7 +343,7 @@ msgid "Audio format"
 msgstr "Format d'àudio"
 
 msgid "Authenticating..."
-msgstr "Autenticant..."
+msgstr "S'està autenticant..."
 
 msgid "Authentication failed"
 msgstr "Ha fallat l'autenticació"
@@ -383,7 +387,7 @@ msgstr "Comportament"
 
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "Biografia de %1"
 
 msgid "Bit rate"
 msgstr "Taxa de bits"
@@ -435,6 +439,7 @@ msgstr "Tria de la llista"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
+"Elegir com ordenar la llista de reproducció i quantes cançons contindrà."
 
 msgid "Choose manual cover"
 msgstr "Tria la caràtula manualment"
@@ -442,6 +447,8 @@ msgstr "Tria la caràtula manualment"
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
+"Elegeixi els llocs web que vol que Clementine utilitzi per a cercar lletres "
+"de cançons."
 
 msgid "Classical"
 msgstr "Clàssica"
@@ -482,7 +489,7 @@ msgstr ""
 "instal·lat Clementine correctament."
 
 msgid "Clementine image viewer"
-msgstr ""
+msgstr "Visor d'imatges Clementine"
 
 msgid "Click here to add some music"
 msgstr "Fes click aquí per afegir música"
@@ -555,6 +562,8 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
+"No s'ha pogut trobar un muxer per %1, comprovi que té instal·lats els "
+"complements correctes de GStreamer"
 
 #, qt-format
 msgid ""
@@ -565,7 +574,7 @@ msgstr ""
 "complements GStreamer adequat instal·lat"
 
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "No s'ha pogut carregar l'estació de ràdio de last.fm"
 
 #, qt-format
 msgid "Couldn't open output file %1"
@@ -626,10 +635,10 @@ msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
 msgid "Custom"
-msgstr ""
+msgstr "Personalitzat"
 
 msgid "Custom radio"
-msgstr ""
+msgstr "Ràdio personalitzada"
 
 msgid "Custom..."
 msgstr "Personalitza..."
@@ -773,7 +782,7 @@ msgid "Drag to reposition"
 msgstr "Arrossegueu per canviar de posició"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Lletra d'unitat"
 
 msgid "Dynamic mode is on"
 msgstr ""
@@ -811,7 +820,7 @@ msgid "Enable equalizer"
 msgstr "Habilitar l'equalitzador"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "Habilitar les dreceres només quan Clementine tengui el focus"
 
 msgid "Enter a name for the new playlist"
 msgstr "Introduïu un nom per la nova llista de reproducció"
@@ -894,7 +903,7 @@ msgid "Fading duration"
 msgstr "Durada de l'esvaïment"
 
 msgid "Favourite tracks"
-msgstr ""
+msgstr "Cançons favorites"
 
 msgid "Fetch Missing Covers"
 msgstr "Cercar caràtules perdudes"
@@ -1064,7 +1073,7 @@ msgid "Icon"
 msgstr "Icona"
 
 msgid "Icons on top"
-msgstr ""
+msgstr "icones a la part superior"
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1144,11 +1153,11 @@ msgstr "Salta a la pista que s'esta reproduint"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Pressioni els botons per %1 segon..."
 
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Pressioni els botons per %1 segons..."
 
 msgid "Keep running in the background when the window is closed"
 msgstr ""
@@ -1169,10 +1178,10 @@ msgid "Large album cover"
 msgstr "Caràtula gran de l'àlbum"
 
 msgid "Large sidebar"
-msgstr ""
+msgstr "Barra lateral gran"
 
 msgid "Last played"
-msgstr ""
+msgstr "Últim reproduït"
 
 msgid "Last.fm"
 msgstr "Last.fm"
@@ -2490,20 +2499,20 @@ msgstr "atura"
 msgid "track %1"
 msgstr "peça %1"
 
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Cançons favorites a Last.fm - %1"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Les meves peces preferides"
+#~ msgid "ASF"
+#~ msgstr "ASF"
 
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "No es va poder carregar l'estació de ràdio de last.fm: %1"
 
-#~ msgid "ASF"
-#~ msgstr "ASF"
+#~ msgid "Last.fm Loved Tracks - %1"
+#~ msgstr "Cançons favorites a Last.fm - %1"
 
 #~ msgid "MP4"
 #~ msgstr "MP4"
+
+#~ msgid "My Loved Tracks"
+#~ msgstr "Les meves peces preferides"
 
 #~ msgid "Ogg FLAC"
 #~ msgstr "Ogg FLAC"

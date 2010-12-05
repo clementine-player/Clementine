@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-11-02 01:51+0000\n"
-"PO-Revision-Date: 2010-11-01 16:17+0000\n"
-"Last-Translator: David Bengtsson <Unknown>\n"
+"POT-Creation-Date: 2010-11-24 23:26+0000\n"
+"PO-Revision-Date: 2010-11-24 18:28+0000\n"
+"Last-Translator: Björn Stenmark <Unknown>\n"
 "Language-Team: Launchpad Swedish Translators <lp-l10n-sv@lists.launchpad."
 "net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
-"X-Launchpad-Export-Date: 2010-11-02 05:02+0000\n"
+"X-Launchpad-Export-Date: 2010-11-25 05:07+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Language: sv\n"
 "X-Poedit-Language: Swedish\n"
 
 msgid " ms"
@@ -132,6 +132,10 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
+"<p>En variabel  påbörjas med %, till exempel: %artist %album %titel </p>\n"
+"\n"
+"<p>Om du omgärdar en variabel med klammerparanteser (måsvingar), så kommer "
+"den inte att visas om variabeln är tom.</p>"
 
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -144,9 +148,10 @@ msgstr ""
 
 msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
+"En låt kommer att inkluderas i spellistan om den matchar dessa villkor."
 
 msgid "A-Z"
-msgstr ""
+msgstr "A-Ö"
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -277,7 +282,7 @@ msgid "All playlists (%1)"
 msgstr "Alla spellistor (%1)"
 
 msgid "All tracks"
-msgstr ""
+msgstr "Alla spår"
 
 msgid "Alongside the originals"
 msgstr "Tillsammans med originalen"
@@ -400,7 +405,7 @@ msgid "Browse..."
 msgstr "Bläddra..."
 
 msgid "Buffer duration"
-msgstr ""
+msgstr "Längd på buffer"
 
 msgid "Buttons"
 msgstr "Knappar"
@@ -418,7 +423,7 @@ msgid "Check for updates..."
 msgstr "Leta efter uppdateringar..."
 
 msgid "Choose a name for your smart playlist"
-msgstr ""
+msgstr "Välj ett namn för din smara spellista"
 
 msgid "Choose automatically"
 msgstr "Välj automatiskt"
@@ -603,7 +608,7 @@ msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
 msgid "Ctrl+M"
-msgstr ""
+msgstr "Ctrl+M"
 
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
@@ -642,10 +647,10 @@ msgid "Dance"
 msgstr "Dans"
 
 msgid "Date created"
-msgstr "Datum skapat"
+msgstr "Datum skapad"
 
 msgid "Date modified"
-msgstr "Datum ändrat"
+msgstr "Datum ändrad"
 
 msgid "De&fault"
 msgstr "S&tandard"
@@ -678,7 +683,7 @@ msgid "Delete preset"
 msgstr "Ta bort förinställning"
 
 msgid "Delete smart playlist"
-msgstr ""
+msgstr "Radera smart spellista"
 
 msgid "Delete the original files"
 msgstr "Ta bort originalfilerna"
@@ -762,10 +767,10 @@ msgid "Download this album..."
 msgstr ""
 
 msgid "Downloading Icecast directory"
-msgstr ""
+msgstr "Ladda ner Icecast-katalog"
 
 msgid "Downloading Jamendo catalogue"
-msgstr ""
+msgstr "Ladda ner Jamendo-katalog"
 
 msgid "Downloading Magnatune catalogue"
 msgstr "Hämtar katalog från Magnatune"
@@ -777,17 +782,17 @@ msgid "Drive letter"
 msgstr "Enhetsbeteckning"
 
 msgid "Dynamic mode is on"
-msgstr ""
+msgstr "Dynamisk läge är på"
 
 msgid "Dynamic random mix"
-msgstr ""
+msgstr "Dynamisk slumpmässig blandning"
 
 msgid "Edit smart playlist..."
-msgstr ""
+msgstr "Redigera smart spellista..."
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Redigera tagg \"%1\"..."
+msgstr "Redigera \"%1\"-taggen..."
 
 msgid "Edit tag..."
 msgstr "Redigera tagg..."
@@ -827,7 +832,7 @@ msgstr ""
 "radio."
 
 msgid "Enter search terms here"
-msgstr "Skriv in sökbegrepp här"
+msgstr "Ange söktermer här"
 
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Skriv in webbadressen till en radiostation på Internet:"
@@ -943,7 +948,7 @@ msgid "Find songs in your library that match the criteria you specify."
 msgstr "Hitta låtar i ditt bibliotek som matchar de kriterier du anger."
 
 msgid "Finish"
-msgstr ""
+msgstr "Avsluta"
 
 msgid "First level"
 msgstr "Första nivån"
@@ -1085,12 +1090,15 @@ msgid ""
 "time a song finishes.  Enabling dynamic mode will ignore any size limit you "
 "set on the playlist."
 msgstr ""
+"I dynamiskt läge så läggs nya spår till i spellistan varje gång ett spår "
+"avslutas. Att aktivera dynamiskt läge gör att storleksgränser du valt för "
+"spellistan ignoreras."
 
 msgid "Include album art in the notification"
 msgstr "Inkludera albumomslag i notifieringen"
 
 msgid "Include all songs"
-msgstr ""
+msgstr "Inkludera alla spår"
 
 msgid "Increase the volume by 4%"
 msgstr "Öka volymen med 4%"
@@ -1141,7 +1149,7 @@ msgid "Jamendo Top Tracks of the Week"
 msgstr ""
 
 msgid "Jump to the currently playing track"
-msgstr "Hoppa till spåret som spelas för närvarande"
+msgstr "Hoppa till spåret som spelas just nu"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
@@ -1180,7 +1188,7 @@ msgstr "Last.fm"
 
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
-msgstr ""
+msgstr "Last.fm Anpassad Radio: %1"
 
 #, qt-format
 msgid "Last.fm Library - %1"
@@ -1188,7 +1196,7 @@ msgstr "Last.fm-bibliotek - %1"
 
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
-msgstr ""
+msgstr "Last.fm Blandad Radio - %1"
 
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
@@ -1229,7 +1237,7 @@ msgid "Last.fm wiki"
 msgstr "Last.fm-wiki"
 
 msgid "Least favourite tracks"
-msgstr ""
+msgstr "Minst omtyckta spår"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Lämna tomt för standardvärdet. Exempel: \"/dev/dsp\", \"front\", etc."
@@ -1332,10 +1340,10 @@ msgid "Manufacturer"
 msgstr "Tillverkare"
 
 msgid "Match every search term (AND)"
-msgstr ""
+msgstr "Matcha varje sökterm (OCH)"
 
 msgid "Match one or more search terms (OR)"
-msgstr ""
+msgstr "Matcha en eller flera söktermer (ELLER)"
 
 msgid "Medium (25 fps)"
 msgstr "Mellan (25 fps)"
@@ -1386,7 +1394,7 @@ msgid "Mute"
 msgstr "Tyst"
 
 msgid "My Mix Radio"
-msgstr ""
+msgstr "Min Blandade Radio"
 
 msgid "My Neighborhood"
 msgstr "Mitt grannskap"
@@ -1422,7 +1430,7 @@ msgid "New songs"
 msgstr "Nya låtar"
 
 msgid "New tracks will be added automatically."
-msgstr ""
+msgstr "Nya spår läggs till automatiskt."
 
 msgid "Newest tracks"
 msgstr "Nyaste spåren"
@@ -1435,7 +1443,7 @@ msgstr "Ingen analysator"
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Inga träffar hittades. Tom sökrutan för att visa hela spellistan igen."
+msgstr "Inga träffar hittades. Töm sökrutan för att visa hela spellistan igen."
 
 msgid "None"
 msgstr "Inga"
@@ -1444,7 +1452,7 @@ msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
 msgid "Not available while using a dynamic playlist"
-msgstr ""
+msgstr "Inte tillgängligt när du använder en dynamisk spellista"
 
 msgid "Not connected"
 msgstr "Inte ansluten"
@@ -1567,7 +1575,7 @@ msgid "Play artist radio..."
 msgstr "Spela upp artistradio..."
 
 msgid "Play count"
-msgstr "Antal spelningar"
+msgstr "Antal uppspelningar"
 
 msgid "Play custom radio..."
 msgstr "Spela upp anpassad radio..."
@@ -1603,13 +1611,13 @@ msgid "Playlist"
 msgstr "Spellista"
 
 msgid "Playlist finished"
-msgstr "Spellistan klar"
+msgstr "Spellistan slutförd"
 
 msgid "Playlist options"
 msgstr "Alternativ för spellista"
 
 msgid "Playlist search"
-msgstr "Sök i spellista"
+msgstr "Sök i spellistan"
 
 msgid "Playlist type"
 msgstr "Spellistetyp"
@@ -1727,16 +1735,16 @@ msgid "Remove folder"
 msgstr "Ta bort mapp"
 
 msgid "Remove from playlist"
-msgstr "Ta bort från spellista"
+msgstr "Ta bort från spellistan"
 
 msgid "Remove playlist"
-msgstr "Ta bort spellista"
+msgstr "Ta bort spellistan"
 
 msgid "Rename playlist"
-msgstr "Byt namn på spellista"
+msgstr "Döp om spellista"
 
 msgid "Rename playlist..."
-msgstr "Byt namn på spellista..."
+msgstr "Döp om spellistan..."
 
 msgid "Renumber tracks in this order..."
 msgstr "Omnumrera spår i denna ordning..."
@@ -1766,7 +1774,7 @@ msgid "Replay Gain mode"
 msgstr "Replay Gain-läge"
 
 msgid "Repopulate"
-msgstr ""
+msgstr "Fyll i igen"
 
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
@@ -1793,7 +1801,7 @@ msgid "Save playlist"
 msgstr "Spara spellista"
 
 msgid "Save playlist..."
-msgstr "Spara spellista..."
+msgstr "Spara spellistan..."
 
 msgid "Save preset"
 msgstr "Spara förinställning"
@@ -1802,7 +1810,7 @@ msgid "Save this stream in the Internet tab"
 msgstr "Spara denna ström i Internet-filken"
 
 msgid "Score"
-msgstr ""
+msgstr "Poäng"
 
 msgid "Scrobble tracks that I listen to"
 msgstr "Skrobbla låtar som jag lyssnar på"
@@ -1811,10 +1819,10 @@ msgid "Search"
 msgstr "Sök"
 
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "Leta efter stationer på Icecast"
 
 msgid "Search Jamendo"
-msgstr ""
+msgstr "Sök på Jamendo"
 
 msgid "Search Magnatune"
 msgstr "Sök i Magnatune"
@@ -1823,7 +1831,7 @@ msgid "Search for album covers..."
 msgstr "Sök efter albumomslag..."
 
 msgid "Search mode"
-msgstr ""
+msgstr "Sökläge"
 
 msgid "Search options"
 msgstr "Sökalternativ"
@@ -1991,13 +1999,13 @@ msgid "Sonogram"
 msgstr "Spektrogram"
 
 msgid "Sort by genre (alphabetically)"
-msgstr ""
+msgstr "Sortera på genre (alfabetiskt ordning)"
 
 msgid "Sort by genre (by popularity)"
-msgstr ""
+msgstr "Sortera på genre (ordning efter popularitet)"
 
 msgid "Sort by station name"
-msgstr ""
+msgstr "Sortera efter stationsnamn"
 
 msgid "Sort songs by"
 msgstr "Ordna låtar efter"
@@ -2197,7 +2205,7 @@ msgid "Turbine"
 msgstr "Turbin"
 
 msgid "Turn off"
-msgstr ""
+msgstr "Stäng av"
 
 msgid "URI"
 msgstr "URI"
@@ -2252,7 +2260,7 @@ msgid "Use Wii Remote"
 msgstr "Använd Wii-kontroll"
 
 msgid "Use dynamic mode"
-msgstr ""
+msgstr "Aktivera dynamiskt läge"
 
 msgid "Use notifications to report Wii Remote status"
 msgstr "Använd notifieringar för rapportering av Wii-kontrollstatus"
@@ -2407,7 +2415,7 @@ msgid "Your scrobbles: %1"
 msgstr "Dina skrobblingar: %1"
 
 msgid "Z-A"
-msgstr ""
+msgstr "Ö-A"
 
 msgid "Zero"
 msgstr "Noll"
@@ -2426,7 +2434,7 @@ msgid "before"
 msgstr "före"
 
 msgid "biggest first"
-msgstr ""
+msgstr "största först"
 
 msgid "bpm"
 msgstr "bpm"
@@ -2457,16 +2465,16 @@ msgid "less than"
 msgstr "som är mindre än"
 
 msgid "longest first"
-msgstr ""
+msgstr "längsta först"
 
 msgid "move songs"
 msgstr "flytta låtar"
 
 msgid "newest first"
-msgstr ""
+msgstr "nyaste först"
 
 msgid "oldest first"
-msgstr ""
+msgstr "äldsta först"
 
 msgid "on"
 msgstr "på"
@@ -2479,10 +2487,10 @@ msgid "remove %n songs"
 msgstr "ta bort %n låtar"
 
 msgid "shortest first"
-msgstr ""
+msgstr "korstaste först"
 
 msgid "smallest first"
-msgstr ""
+msgstr "minsta först"
 
 msgid "starts with"
 msgstr "som börjar med"
@@ -2493,44 +2501,6 @@ msgstr "stoppa"
 #, qt-format
 msgid "track %1"
 msgstr "spår %1"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Buffringstid (ms)"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Älskade Last.fm-spår - %1"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Mina älskade spår"
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Liknande Last.fm-artister"
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Låt Last.fm föreslå låtar från ditt bibliotek som liknar den du anger."
-
-#~ msgid "Playlists"
-#~ msgstr "Spellistor"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Lägg till som ny spellista..."
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Dynamiska spellistor"
-
-#~ msgid "New"
-#~ msgstr "Ny"
-
-#~ msgid "New folder..."
-#~ msgstr "Ny mapp..."
-
-#~ msgid ""
-#~ "A song will be included in the playlist if it matches all of these "
-#~ "conditions."
-#~ msgstr "En låt inkluderas i spellistan om den matchar alla dessa villkor."
 
 #~ msgid "Show section"
 #~ msgstr "Visa kolumn"
@@ -2619,3 +2589,41 @@ msgstr "spår %1"
 
 #~ msgid "Capacity"
 #~ msgstr "Kapacitet"
+
+#~ msgid "Buffer Duration (ms)"
+#~ msgstr "Buffringstid (ms)"
+
+#~ msgid "My Loved Tracks"
+#~ msgstr "Mina älskade spår"
+
+#~ msgid "Last.fm Loved Tracks - %1"
+#~ msgstr "Älskade Last.fm-spår - %1"
+
+#~ msgid "Add as new playlist..."
+#~ msgstr "Lägg till som ny spellista..."
+
+#~ msgid ""
+#~ "A song will be included in the playlist if it matches all of these "
+#~ "conditions."
+#~ msgstr "En låt inkluderas i spellistan om den matchar alla dessa villkor."
+
+#~ msgid "Dynamic playlists"
+#~ msgstr "Dynamiska spellistor"
+
+#~ msgid "Last.fm similar artists"
+#~ msgstr "Liknande Last.fm-artister"
+
+#~ msgid ""
+#~ "Let Last.fm suggest songs from your library that are similar to one you "
+#~ "specify."
+#~ msgstr ""
+#~ "Låt Last.fm föreslå låtar från ditt bibliotek som liknar den du anger."
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#~ msgid "New folder..."
+#~ msgstr "Ny mapp..."
+
+#~ msgid "Playlists"
+#~ msgstr "Spellistor"
