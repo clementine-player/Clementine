@@ -24,6 +24,7 @@
 #include "core/mpris2_tracklist.h"
 #include "core/player.h"
 #include "engines/enginebase.h"
+#include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "ui/mainwindow.h"
@@ -42,10 +43,11 @@ const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
 Mpris2::Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader,
-               QObject* parent)
+               Mpris1* mpris1, QObject* parent)
   : QObject(parent),
     ui_(main_window),
-    player_(player)
+    player_(player),
+    mpris1_(mpris1)
 {
   new Mpris2Root(this);
   new Mpris2TrackList(this);
@@ -202,13 +204,17 @@ QString Mpris2::LoopStatus() const {
 }
 
 void Mpris2::SetLoopStatus(const QString& value) {
+  PlaylistSequence::RepeatMode mode = PlaylistSequence::Repeat_Off;
+
   if (value == "None") {
-    player_->SetLoop(PlaylistSequence::Repeat_Off);
+    mode = PlaylistSequence::Repeat_Off;
   } else if (value == "Track") {
-    player_->SetLoop(PlaylistSequence::Repeat_Track);
+    mode = PlaylistSequence::Repeat_Track;
   } else if (value == "Playlist") {
-    player_->SetLoop(PlaylistSequence::Repeat_Playlist);
+    mode = PlaylistSequence::Repeat_Playlist;
   }
+
+  player_->playlists()->active()->sequence()->SetRepeatMode(mode);
   EmitNotification("LoopStatus", value);
 }
 
@@ -226,7 +232,7 @@ bool Mpris2::Shuffle() const {
 }
 
 void Mpris2::SetShuffle(bool value) {
-  player_->SetRandom(value);
+  mpris1_->tracklist()->SetRandom(value);
   EmitNotification("Shuffle", value);
 }
 
@@ -234,14 +240,16 @@ QVariantMap Mpris2::Metadata() const {
   return last_metadata_;
 }
 
+QString Mpris2::current_track_id() const {
+  return QString("/org/mpris/MediaPlayer2/Track/%1").arg(
+        QString::number(mpris1_->tracklist()->GetCurrentTrack()));
+}
+
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
   last_metadata_ = QVariantMap();
 
-  QString track_id = QString("/org/mpris/MediaPlayer2/Track/%1").
-                     arg(QString::number(player_->GetCurrentTrack()));
-
   using mpris::AddMetadata;
-  AddMetadata("mpris:trackid", track_id, &last_metadata_);
+  AddMetadata("mpris:trackid", current_track_id(), &last_metadata_);
   AddMetadata("xesam:url", song.filename(), &last_metadata_);
   AddMetadata("xesam:title", song.PrettyTitle(), &last_metadata_);
   AddMetadata("xesam:artist", QStringList() << song.artist(), &last_metadata_);
@@ -264,7 +272,7 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
 }
 
 double Mpris2::Volume() const {
-  return player_->VolumeGet() / 100;
+  return double(player_->GetVolume()) / 100;
 }
 
 void Mpris2::SetVolume(double value) {
@@ -273,7 +281,7 @@ void Mpris2::SetVolume(double value) {
 }
 
 qlonglong Mpris2::Position() const {
-  return player_->PositionGet() * 1e6;
+  return mpris1_->player()->PositionGet() * 1e3;
 }
 
 double Mpris2::MaximumRate() const {
@@ -285,23 +293,23 @@ double Mpris2::MinimumRate() const {
 }
 
 bool Mpris2::CanGoNext() const {
-  return true;
+  return mpris1_->player()->GetCaps() & CAN_GO_NEXT;
 }
 
 bool Mpris2::CanGoPrevious() const {
-  return true;
+  return mpris1_->player()->GetCaps() & CAN_GO_PREV;
 }
 
 bool Mpris2::CanPlay() const {
-  return true;
+  return mpris1_->player()->GetCaps() & CAN_PLAY;
 }
 
 bool Mpris2::CanPause() const {
-  return true;
+  return mpris1_->player()->GetCaps() & CAN_PAUSE;
 }
 
 bool Mpris2::CanSeek() const {
-  return true;
+  return mpris1_->player()->GetCaps() & CAN_SEEK;
 }
 
 bool Mpris2::CanControl() const {
@@ -310,50 +318,41 @@ bool Mpris2::CanControl() const {
 
 void Mpris2::Next() {
   player_->Next();
-  EmitNotification("PlaybackStatus",PlaybackStatus());
-  EmitNotification("Metadata",Metadata());
 }
 
 void Mpris2::Previous() {
   player_->Previous();
-  EmitNotification("PlaybackStatus",PlaybackStatus());
-  EmitNotification("Metadata",Metadata());
 }
 
 void Mpris2::Pause() {
   player_->Pause();
-  EmitNotification("PlaybackStatus",PlaybackStatus());
-  EmitNotification("Metadata",Metadata());
 }
 
 void Mpris2::PlayPause() {
   player_->PlayPause();
-  EmitNotification("PlaybackStatus",PlaybackStatus());
-  EmitNotification("Metadata",Metadata());
 }
 
 void Mpris2::Stop() {
   player_->Stop();
-  EmitNotification("PlaybackStatus",PlaybackStatus());
-  EmitNotification("Metadata",Metadata());
 }
 
 void Mpris2::Play() {
   player_->Play();
-  EmitNotification("PlaybackStatus",PlaybackStatus());
-  EmitNotification("Metadata",Metadata());
 }
 
 void Mpris2::Seek(qlonglong offset) {
-  player_->Seek(offset*1e6);
+  player_->Seek((Position() + offset) / 1e6);
 }
 
 void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
-  //TODO
+  if (trackId.path() != current_track_id())
+    return;
+
+  player_->Seek(offset / 1e6);
 }
 
-void Mpris2::OpenUri(const QString &uri) {
-  player_->AddTrack(uri,true);
+void Mpris2::OpenUri(const QString& uri) {
+  mpris1_->tracklist()->AddTrack(uri, true);
 }
 
 TrackIds Mpris2::Tracks() const {

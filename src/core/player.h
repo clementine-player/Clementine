@@ -79,6 +79,8 @@ class Player : public QObject {
 
   void Previous();
   void SetVolume(int value);
+  void VolumeUp() { SetVolume(GetVolume() + 5); }
+  void VolumeDown() { SetVolume(GetVolume() + 5); }
   void Seek(int seconds);
   void SeekForward() { Seek(+5); }
   void SeekBackward() { Seek(-5); }
@@ -86,27 +88,11 @@ class Player : public QObject {
   void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result);
   void CurrentMetadataChanged(const Song& metadata);
 
-  // MPRIS /Player
   void Mute();
   void Pause();
   void Stop();
   void Play();
-  void Prev();
-  int PositionGet() const;
-  void Repeat(bool);
   void ShowOSD();
-  void VolumeDown(int);
-  void VolumeUp(int);
-  void VolumeDown() { VolumeDown(4); }
-  void VolumeUp() { VolumeUp(4); }
-  int VolumeGet() const;
-
-  // MPRIS /Tracklist
-  int AddTrack(const QString&, bool);
-  void DelTrack(int index);
-  int GetCurrentTrack() const;
-  void SetLoop(bool enable);
-  void SetRandom(bool enable);
 
  signals:
   void Playing();

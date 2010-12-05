@@ -78,7 +78,7 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
   mpris1_ = new mpris::Mpris1(this, art_loader, this);
 
   //MPRIS 2.0 implementation
-  mpris2_ = new mpris::Mpris2(main_window, this, art_loader, this);
+  mpris2_ = new mpris::Mpris2(main_window, this, art_loader, mpris1_, this);
 #endif
 
   settings_.beginGroup("Player");
@@ -412,57 +412,9 @@ void Player::Play() {
   }
 }
 
-void Player::Prev() {
-  Previous();
-}
-
-int Player::PositionGet() const {
-  return engine_->position();
-}
-
-void Player::Repeat(bool enable) {
-  playlists_->sequence()->SetRepeatMode(
-      enable ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
-}
-
 void Player::ShowOSD() {
   if (current_item_)
     emit ForceShowOSD(current_item_->Metadata());
-}
-
-void Player::VolumeDown(int change) {
-  SetVolume(GetVolume() - change);
-}
-
-void Player::VolumeUp(int change) {
-  SetVolume(GetVolume() + change);
-}
-
-int Player::VolumeGet() const {
-  return GetVolume();
-}
-
-int Player::AddTrack(const QString& track, bool play_now) {
-  playlists_->active()->InsertUrls(QList<QUrl>() << QUrl(track), play_now);
-  return 0;
-}
-
-void Player::DelTrack(int index) {
-  playlists_->active()->removeRows(index, 1);
-}
-
-int Player::GetCurrentTrack() const {
-  return playlists_->active()->current_index();
-}
-
-void Player::SetLoop(bool enable) {
-  playlists_->active()->sequence()->SetRepeatMode(
-      enable ? PlaylistSequence::Repeat_Playlist : PlaylistSequence::Repeat_Off);
-}
-
-void Player::SetRandom(bool enable) {
-  playlists_->active()->sequence()->SetShuffleMode(
-      enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
 }
 
 void Player::TrackAboutToEnd() {

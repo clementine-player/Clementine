@@ -36,6 +36,7 @@ Q_DECLARE_METATYPE(TrackMetadata)
 namespace mpris {
 
 class ArtLoader;
+class Mpris1;
 
 class Mpris2 : public QObject {
   Q_OBJECT
@@ -71,7 +72,8 @@ class Mpris2 : public QObject {
   Q_PROPERTY( bool CanEditTracks READ CanEditTracks )
 
 public:
-  Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader, QObject* parent);
+  Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader,
+         Mpris1* mpris1, QObject* parent);
 
   // Root Properties
   bool CanQuit() const;
@@ -147,6 +149,8 @@ private:
   void EmitNotification(const QString& name);
   void EmitNotification(const QString& name, const QVariant& val);
 
+  QString current_track_id() const;
+
 private:
   static const char* kMprisObjectPath;
   static const char* kServiceName;
@@ -156,6 +160,7 @@ private:
 
   MainWindow* ui_;
   Player* player_;
+  Mpris1* mpris1_;
 };
 
 } // namespace mpris

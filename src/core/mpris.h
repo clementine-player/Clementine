@@ -82,6 +82,10 @@ public:
 
   static QVariantMap GetMetadata(const Song& song);
 
+  Mpris1Root* root() const { return root_; }
+  Mpris1Player* player() const { return player_; }
+  Mpris1TrackList* tracklist() const { return tracklist_; }
+
 private:
   Mpris1Root* root_;
   Mpris1Player* player_;

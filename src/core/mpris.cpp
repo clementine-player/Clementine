@@ -118,7 +118,7 @@ void Mpris1Player::Stop() {
 }
 
 void Mpris1Player::Prev() {
-  player_->Prev();
+  player_->Previous();
 }
 
 void Mpris1Player::Play() {
@@ -130,7 +130,8 @@ void Mpris1Player::Next() {
 }
 
 void Mpris1Player::Repeat(bool repeat) {
-  player_->Repeat(repeat);
+  player_->playlists()->sequence()->SetRepeatMode(
+      repeat ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
 }
 
 DBusStatus Mpris1Player::GetStatus() const {
@@ -165,7 +166,7 @@ void Mpris1Player::VolumeSet(int volume) {
 }
 
 int Mpris1Player::VolumeGet() const {
-  return player_->VolumeGet();
+  return player_->GetVolume();
 }
 
 void Mpris1Player::PositionSet(int pos) {
@@ -173,7 +174,7 @@ void Mpris1Player::PositionSet(int pos) {
 }
 
 int Mpris1Player::PositionGet() const {
-  return player_->PositionGet();
+  return player_->engine()->position();
 }
 
 QVariantMap Mpris1Player::GetMetadata() const {
@@ -192,7 +193,7 @@ int Mpris1Player::GetCaps() const {
 
   if (current_item) {
     caps |= CAN_PROVIDE_METADATA;
-    if (state == Engine::Playing && (!current_item->options() & PlaylistItem::PauseDisabled)) {
+    if (state == Engine::Playing && !(current_item->options() & PlaylistItem::PauseDisabled)) {
       caps |= CAN_PAUSE;
     }
     if (state != Engine::Empty && current_item->Metadata().filetype() != Song::Type_Stream) {
@@ -211,12 +212,12 @@ int Mpris1Player::GetCaps() const {
   return caps;
 }
 
-void Mpris1Player::VolumeUp(int vol) {
-  player_->VolumeUp(vol);
+void Mpris1Player::VolumeUp(int change) {
+  VolumeSet(VolumeGet() + change);
 }
 
-void Mpris1Player::VolumeDown(int vol) {
-  player_->VolumeDown(vol);
+void Mpris1Player::VolumeDown(int change) {
+  VolumeSet(VolumeGet() - change);
 }
 
 void Mpris1Player::Mute() {
@@ -228,15 +229,17 @@ void Mpris1Player::ShowOSD() {
 }
 
 int Mpris1TrackList::AddTrack(const QString& track, bool play) {
-  return player_->AddTrack(track, play);
+  player_->playlists()->active()->InsertUrls(
+        QList<QUrl>() << QUrl(track), play);
+  return 0;
 }
 
 void Mpris1TrackList::DelTrack(int index) {
-  player_->DelTrack(index);
+  player_->playlists()->active()->removeRows(index, 1);
 }
 
 int Mpris1TrackList::GetCurrentTrack() const {
-  return player_->GetCurrentTrack();
+  return player_->playlists()->active()->current_index();
 }
 
 int Mpris1TrackList::GetLength() const {
@@ -248,11 +251,13 @@ QVariantMap Mpris1TrackList::GetMetadata(int pos) const {
 }
 
 void Mpris1TrackList::SetLoop(bool enable) {
-  player_->SetLoop(enable);
+  player_->playlists()->active()->sequence()->SetRepeatMode(
+      enable ? PlaylistSequence::Repeat_Playlist : PlaylistSequence::Repeat_Off);
 }
 
 void Mpris1TrackList::SetRandom(bool enable) {
-  player_->SetRandom(enable);
+  player_->playlists()->active()->sequence()->SetShuffleMode(
+      enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
 }
 
 void Mpris1TrackList::PlayTrack(int index) {
