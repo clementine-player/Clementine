@@ -410,7 +410,10 @@ QSqlDatabase Database::Connect() {
 
   // Attach external databases
   foreach (const QString& key, attached_databases_.keys()) {
-    const QString filename = attached_databases_[key].filename_;
+    QString filename = attached_databases_[key].filename_;
+
+    if (!injected_database_name_.isNull())
+      filename = injected_database_name_;
 
     // Attach the db
     QSqlQuery q("ATTACH DATABASE :filename AS :alias", db);
