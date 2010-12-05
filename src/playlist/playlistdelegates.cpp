@@ -214,6 +214,9 @@ bool PlaylistDelegateBase::helpEvent(QHelpEvent *event, QAbstractItemView *view,
   // Special case: we want newlines in the comment tooltip
   if (index.column() == Playlist::Column_Comment) {
     text = Qt::escape(index.data(Qt::ToolTipRole).toString());
+    text.replace("\\r\\n", "<br />");
+    text.replace("\\n", "<br />");
+    text.replace("\r\n", "<br />");
     text.replace("\n", "<br />");
   }
 
