@@ -53,6 +53,7 @@ set(SOURCES
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
+  core/mpris_common.cpp
   core/musicstorage.cpp
   core/network.cpp
   core/organise.cpp
@@ -239,6 +240,7 @@ set(HEADERS
   core/globalshortcuts.h
   core/gnomeglobalshortcutbackend.h
   core/mergedproxymodel.h
+  core/mpris_common.h
   core/network.h
   core/organise.h
   core/player.h
@@ -583,8 +585,8 @@ if(NOT APPLE AND NOT WIN32)
       dbus/udisksdevice)
 
   # MPRIS source
-  list(APPEND SOURCES core/mpris_common.cpp core/mpris.cpp core/mpris2.cpp)
-  list(APPEND HEADERS core/mpris_common.h   core/mpris.h   core/mpris2.h)
+  list(APPEND SOURCES core/mpris.cpp core/mpris2.cpp)
+  list(APPEND HEADERS core/mpris.h   core/mpris2.h)
 
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
@@ -683,8 +685,6 @@ list(APPEND OTHER_SOURCES
   core/macglobalshortcutbackend.h
   core/macglobalshortcutbackend.mm
   core/modelfuturewatcher.h
-  core/mpris_common.cpp
-  core/mpris_common.h
   core/mpris.cpp
   core/mpris.h
   core/mpris2.cpp
