@@ -32,6 +32,8 @@ class About : public QDialog {
   struct Person {
     Person(const QString& n, const QString& e = QString()) : name(n), email(e) {}
 
+    bool operator <(const Person& other) const { return name < other.name; }
+
     QString name;
     QString email;
   };
