@@ -170,6 +170,7 @@ class PlaylistView : public QTreeView {
 
   QPixmap cached_tree_;
   int drop_indicator_row_;
+  bool drag_over_;
 
   DynamicPlaylistControls* dynamic_controls_;
 };

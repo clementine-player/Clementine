@@ -85,6 +85,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     currenttrack_pause_(":currenttrack_pause.png"),
     cached_current_row_row_(-1),
     drop_indicator_row_(-1),
+    drag_over_(false),
     dynamic_controls_(new DynamicPlaylistControls(this))
 {
   setHeader(header_);
@@ -515,7 +516,9 @@ void PlaylistView::mouseMoveEvent(QMouseEvent* event) {
   } else if (rating_delegate_->is_mouse_over()) {
     RatingHoverOut();
   }
-  QTreeView::mouseMoveEvent(event);
+  if (!drag_over_) {
+    QTreeView::mouseMoveEvent(event);
+  }
 }
 
 void PlaylistView::leaveEvent(QEvent* e) {
@@ -704,11 +707,13 @@ void PlaylistView::dragMoveEvent(QDragMoveEvent *event) {
 void PlaylistView::dragEnterEvent(QDragEnterEvent *event) {
   QTreeView::dragEnterEvent(event);
   cached_tree_ = QPixmap();
+  drag_over_ = true;
 }
 
 void PlaylistView::dragLeaveEvent(QDragLeaveEvent *event) {
   QTreeView::dragLeaveEvent(event);
   cached_tree_ = QPixmap();
+  drag_over_ = false;
   drop_indicator_row_ = -1;
 }
 
@@ -716,6 +721,7 @@ void PlaylistView::dropEvent(QDropEvent *event) {
   QTreeView::dropEvent(event);
   cached_tree_ = QPixmap();
   drop_indicator_row_ = -1;
+  drag_over_ = false;
 }
 
 void PlaylistView::PlaylistDestroyed() {
