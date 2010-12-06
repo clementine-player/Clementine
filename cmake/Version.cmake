@@ -11,8 +11,14 @@ set(BUILDBOT_REVISION $ENV{BUILDBOT_REVISION})
 if(NOT BUILDBOT_REVISION)
   find_package(Subversion)
   if(SUBVERSION_FOUND)
-    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} clementine)
-    set(BUILDBOT_REVISION ${clementine_WC_REVISION})
+    execute_process(COMMAND ${Subversion_SVN_EXECUTABLE} info ${PROJECT_SOURCE_DIR}
+        RESULT_VARIABLE SVN_INFO_RESULT
+        OUTPUT_QUIET
+        ERROR_QUIET)
+    if(${SVN_INFO_RESULT} EQUAL 0)
+      Subversion_WC_INFO(${PROJECT_SOURCE_DIR} clementine)
+      set(BUILDBOT_REVISION ${clementine_WC_REVISION})
+    endif(${SVN_INFO_RESULT} EQUAL 0)
   endif(SUBVERSION_FOUND)
 endif(NOT BUILDBOT_REVISION)
 
