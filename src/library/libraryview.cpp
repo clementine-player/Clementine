@@ -193,6 +193,10 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
         tr("Delete from disk..."), this, SLOT(Delete()));
 
     context_menu_->addSeparator();
+    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+      tr("Edit track information..."), this, SLOT(EditTracks()));
+
+    context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(
         tr("Show in various artists"), this, SLOT(ShowInVarious()));
     no_show_in_various_ = context_menu_->addAction(
@@ -222,6 +226,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
 
   load_->setEnabled(enable_add);
   add_to_playlist_->setEnabled(enable_add);
+  edit_track_->setEnabled(enable_add);
   show_in_various_->setEnabled(enable_various);
   no_show_in_various_->setEnabled(enable_various);
 
@@ -321,6 +326,15 @@ void LibraryView::Delete() {
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
   connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
   delete_files->Start(GetSelectedSongs());
+}
+
+void LibraryView::EditTracks() {
+  if(!edit_tag_dialog_) {
+    edit_tag_dialog_.reset(new EditTagDialog(this));
+  }
+  edit_tag_dialog_->SetSongs(GetSelectedSongs());
+  edit_tag_dialog_->SetTagCompleter(library_->backend());
+  edit_tag_dialog_->show();
 }
 
 void LibraryView::CopyToDevice() {

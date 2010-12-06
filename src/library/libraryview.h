@@ -19,6 +19,7 @@
 #define LIBRARYVIEW_H
 
 #include "core/song.h"
+#include "ui/edittagdialog.h"
 #include "widgets/autoexpandingtreeview.h"
 
 #include <QStyledItemDelegate>
@@ -81,6 +82,7 @@ class LibraryView : public AutoExpandingTreeView {
   void Organise();
   void CopyToDevice();
   void Delete();
+  void EditTracks();
   void ShowInVarious();
   void NoShowInVarious();
 
@@ -114,6 +116,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* organise_;
   QAction* copy_to_device_;
   QAction* delete_;
+  QAction* edit_track_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
 
@@ -122,6 +125,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* delete_smart_playlist_;
 
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
+  boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
 
   bool is_in_keyboard_search_;
 };
