@@ -22,6 +22,7 @@ void CheckForUpdates();
 
 QString GetBundlePath();
 QString GetResourcesPath();
+QString GetApplicationSupportPath();
 
 }  // namespace mac
 

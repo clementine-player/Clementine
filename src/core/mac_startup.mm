@@ -22,6 +22,7 @@
 
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
+#import <Foundation/NSPathUtilities.h>
 #import <Foundation/NSTimer.h>
 #import <Foundation/NSURL.h>
 #import <AppKit/NSNibDeclarations.h>
@@ -199,6 +200,18 @@ QString GetBundlePath() {
 QString GetResourcesPath() {
   QString bundle_path = GetBundlePath();
   return bundle_path + "/Contents/Resources";
+}
+
+QString GetApplicationSupportPath() {
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(
+      NSApplicationSupportDirectory,
+      NSUserDomainMask,
+      YES);
+  if ([paths count] > 0) {
+    NSString* user_path = [paths objectAtIndex:0];
+    return QString::fromUtf8([user_path UTF8String]);
+  }
+  return "~/Library/Application Support";
 }
 
 }  // namespace mac
