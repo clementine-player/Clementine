@@ -27,6 +27,7 @@ AutoExpandingTreeView::AutoExpandingTreeView(QWidget *parent)
     expand_on_reset_(true)
 {
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
+  connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
 }
 
 void AutoExpandingTreeView::reset() {
@@ -68,4 +69,8 @@ bool AutoExpandingTreeView::RecursivelyExpand(const QModelIndex& index, int* cou
 void AutoExpandingTreeView::ItemExpanded(const QModelIndex& index) {
   if (model()->rowCount(index) == 1 && auto_open_)
     expand(model()->index(0, 0, index));
+}
+
+void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
+  expand(index);
 }
