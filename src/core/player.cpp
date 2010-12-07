@@ -423,6 +423,13 @@ void Player::TrackAboutToEnd() {
   if (engine_->is_autocrossfade_enabled()) {
     // Crossfade is on, so just start playing the next track.  The current one
     // will fade out, and the new one will fade in
+
+    // But, if there's no next track and we don't want to fade out, then do
+    // nothing and just let the track finish to completion.
+    if (!engine_->is_fadeout_enabled() &&
+        playlists_->active()->next_index() == -1)
+      return;
+
     NextInternal(Engine::Auto);
   } else {
     // Crossfade is off, so start preloading the next track so we don't get a
