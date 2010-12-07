@@ -89,6 +89,8 @@ public slots:
   void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator, bool as_new, bool clear);
 
 signals:
+  void PlaylistManagerInitialized();
+
   void PlaylistAdded(int id, const QString& name);
   void PlaylistRemoved(int id);
   void PlaylistRenamed(int id, const QString& new_name);

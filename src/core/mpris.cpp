@@ -46,7 +46,6 @@ Mpris1::Mpris1(Player* player, ArtLoader* art_loader, QObject* parent)
           player_, SLOT(CurrentSongChanged(Song,QString)));
 }
 
-
 Mpris1Root::Mpris1Root(Player* player, QObject* parent)
     : QObject(parent), player_(player) {
   new MprisRoot(this);
@@ -58,7 +57,16 @@ Mpris1Player::Mpris1Player(Player* player, QObject* parent)
   new MprisPlayer(this);
   QDBusConnection::sessionBus().registerObject("/Player", this);
 
-  connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged()));
+  connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(player_->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
+}
+
+// when PlaylistManager gets it ready, we connect PlaylistSequence with this
+void Mpris1Player::PlaylistManagerInitialized() {
+  connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+          SLOT(ShuffleModeChanged()));
+  connect(player_->playlists()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+          SLOT(RepeatModeChanged()));
 }
 
 Mpris1TrackList::Mpris1TrackList(Player* player, QObject* parent)
@@ -69,14 +77,15 @@ Mpris1TrackList::Mpris1TrackList(Player* player, QObject* parent)
   connect(player->playlists(), SIGNAL(PlaylistChanged()), SLOT(PlaylistChanged()));
 }
 
-
 void Mpris1TrackList::PlaylistChanged() {
   emit TrackListChange(GetLength());
 }
 
-void Mpris1Player::EngineStateChanged() {
-  emit StatusChange(GetStatus());
-  emit CapsChange(GetCaps());
+// we use the state from event and don't try to obtain it from Player 
+// later because only the event's version is really the current one
+void Mpris1Player::EngineStateChanged(Engine::State state) {
+  emit StatusChange(GetStatus(state));
+  emit CapsChange(GetCaps(state));
 }
 
 void Mpris1Player::CurrentSongChanged(const Song& song, const QString& art_uri) {
@@ -134,9 +143,21 @@ void Mpris1Player::Repeat(bool repeat) {
       repeat ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
 }
 
+void Mpris1Player::ShuffleModeChanged() {
+  emit StatusChange(GetStatus());
+}
+
+void Mpris1Player::RepeatModeChanged() {
+  emit StatusChange(GetStatus());
+}
+
 DBusStatus Mpris1Player::GetStatus() const {
+  return GetStatus(player_->GetState());
+}
+
+DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
   DBusStatus status;
-  switch (player_->GetState()) {
+  switch (state) {
     case Engine::Empty:
     case Engine::Idle:
       status.play = DBusStatus::Mpris_Stopped;
@@ -182,12 +203,17 @@ QVariantMap Mpris1Player::GetMetadata() const {
 }
 
 int Mpris1Player::GetCaps() const {
+  return GetCaps(player_->GetState());
+}
+
+int Mpris1Player::GetCaps(Engine::State state) const {
   int caps = CAN_HAS_TRACKLIST;
-  Engine::State state = player_->GetState();
   PlaylistItemPtr current_item = player_->GetCurrentItem();
   PlaylistManager* playlists = player_->playlists();
 
-  if (playlists->active()->rowCount() != 0) {
+  // play is disabled when playlist is empty or when last.fm stream is already playing
+  if (playlists->active()->rowCount() != 0
+      && !(state == Engine::Playing && (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls))) {
     caps |= CAN_PLAY;
   }
 
@@ -282,8 +308,6 @@ QVariantMap Mpris1::GetMetadata(const Song& song) {
   AddMetadata("audio-samplerate", song.samplerate(), &ret);
   AddMetadata("bpm", song.bpm(), &ret);
   AddMetadata("composer", song.composer(), &ret);
-  AddMetadata("artUrl",
-      song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual(), &ret);
   if (song.rating() != -1.0) {
     AddMetadata("rating", song.rating() * 5, &ret);
   }

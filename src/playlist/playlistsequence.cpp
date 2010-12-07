@@ -136,9 +136,11 @@ void PlaylistSequence::SetRepeatMode(RepeatMode mode) {
     case Repeat_Playlist: ui_->action_repeat_playlist->setChecked(true); break;
   }
 
-  if (mode != repeat_mode_)
+  if (mode != repeat_mode_) {
+    repeat_mode_ = mode;
     emit RepeatModeChanged(mode);
-  repeat_mode_ = mode;
+  }
+
   Save();
 }
 
@@ -151,9 +153,12 @@ void PlaylistSequence::SetShuffleMode(ShuffleMode mode) {
     case Shuffle_Album: ui_->action_shuffle_album->setChecked(true); break;
   }
 
-  if (mode != shuffle_mode_)
+
+  if (mode != shuffle_mode_) {
+    shuffle_mode_ = mode;
     emit ShuffleModeChanged(mode);
-  shuffle_mode_ = mode;
+  }
+
   Save();
 }
 

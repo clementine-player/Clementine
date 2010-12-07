@@ -120,13 +120,19 @@ public:
   void Play();
   void Next();
   void Repeat(bool);
+
+  // those methods will use engine's state obtained with player->GetState() method
   DBusStatus GetStatus() const;
+  int GetCaps() const;
+  // those methods will use engine's state provided as an argument
+  DBusStatus GetStatus(Engine::State state) const;
+  int GetCaps(Engine::State state) const;
+
   void VolumeSet(int volume);
   int VolumeGet() const;
   void PositionSet(int pos);
   int PositionGet() const;
   QVariantMap GetMetadata() const;
-  int GetCaps() const;
 
   // Amarok extensions
   void VolumeUp(int vol);
@@ -143,7 +149,11 @@ signals:
   void StatusChange(DBusStatus);
 
 private slots:
-  void EngineStateChanged();
+  void PlaylistManagerInitialized();
+
+  void EngineStateChanged(Engine::State state);
+  void ShuffleModeChanged();
+  void RepeatModeChanged();
 
 private:
   Player* player_;

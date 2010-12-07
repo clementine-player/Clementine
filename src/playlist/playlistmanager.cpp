@@ -65,6 +65,8 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   // If no playlist exists then make a new one
   if (playlists_.isEmpty())
     New(tr("Playlist"));
+
+  emit PlaylistManagerInitialized();
 }
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
