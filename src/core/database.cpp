@@ -441,6 +441,19 @@ QSqlDatabase Database::Connect() {
     }
   }
 
+  // We might have to initialise the schema in some attached databases now, if
+  // they were deleted and don't match up with the main schema version.
+  foreach (const QString& key, attached_databases_.keys()) {
+    // Find out if there are any tables in this database
+    QSqlQuery q(QString("SELECT ROWID FROM %1.sqlite_master"
+                        " WHERE type='table'").arg(key), db);
+    if (!q.exec() || !q.next()) {
+      ScopedTransaction t(&db);
+      ExecFromFile(attached_databases_[key].schema_, db);
+      t.Commit();
+    }
+  }
+
   return db;
 }
 
