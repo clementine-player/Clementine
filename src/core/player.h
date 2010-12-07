@@ -81,7 +81,7 @@ class Player : public QObject {
   void Previous();
   void SetVolume(int value);
   void VolumeUp() { SetVolume(GetVolume() + 5); }
-  void VolumeDown() { SetVolume(GetVolume() + 5); }
+  void VolumeDown() { SetVolume(GetVolume() - 5); }
   void Seek(int seconds);
   void SeekForward() { Seek(+5); }
   void SeekBackward() { Seek(-5); }
