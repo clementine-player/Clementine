@@ -488,6 +488,7 @@ FancyTabWidget::FancyTabWidget(QWidget* parent)
     side_widget_(new QWidget),
     side_layout_(new QVBoxLayout),
     top_layout_(new QVBoxLayout),
+    use_background_(false),
     menu_(NULL),
     proxy_style_(new FancyTabProxyStyle)
 {
@@ -524,8 +525,10 @@ void FancyTabWidget::SetBackgroundPixmap(const QPixmap& pixmap) {
   update();
 }
 
-void FancyTabWidget::paintEvent(QPaintEvent* event) {
-  Q_UNUSED(event)
+void FancyTabWidget::paintEvent(QPaintEvent*) {
+  if (!use_background_)
+    return;
+
   QPainter painter(this);
 
   QRect rect = side_widget_->rect().adjusted(0, 0, 1, 0);
@@ -580,6 +583,8 @@ void FancyTabWidget::SetMode(Mode mode) {
   delete tab_bar_;
   tab_bar_ = NULL;
 
+  use_background_ = false;
+
   // Create new tab bar
   switch (mode) {
     case Mode_None:
@@ -602,24 +607,32 @@ void FancyTabWidget::SetMode(Mode mode) {
       bar->setCurrentIndex(stack_->currentIndex());
       connect(bar, SIGNAL(currentChanged(int)), SLOT(ShowWidget(int)));
 
+      use_background_ = true;
+
       break;
     }
 
     case Mode_Tabs:
-      MakeTabBar(QTabBar::RoundedNorth, true, false);
+      MakeTabBar(QTabBar::RoundedNorth, true, false, false);
       break;
 
     case Mode_IconOnlyTabs:
-      MakeTabBar(QTabBar::RoundedNorth, false, true);
+      MakeTabBar(QTabBar::RoundedNorth, false, true, false);
       break;
 
     case Mode_SmallSidebar:
-      MakeTabBar(QTabBar::RoundedWest, true, true);
+      MakeTabBar(QTabBar::RoundedWest, true, true, true);
+      use_background_ = true;
+      break;
+
+    case Mode_PlainSidebar:
+      MakeTabBar(QTabBar::RoundedWest, true, true, false);
       break;
   }
 
   mode_ = mode;
   emit ModeChanged(mode);
+  update();
 }
 
 void FancyTabWidget::contextMenuEvent(QContextMenuEvent* e) {
@@ -630,6 +643,7 @@ void FancyTabWidget::contextMenuEvent(QContextMenuEvent* e) {
     QActionGroup* group = new QActionGroup(this);
     AddMenuItem(mapper, group, tr("Large sidebar"), Mode_LargeSidebar);
     AddMenuItem(mapper, group, tr("Small sidebar"), Mode_SmallSidebar);
+    AddMenuItem(mapper, group, tr("Plain sidebar"), Mode_PlainSidebar);
     AddMenuItem(mapper, group, tr("Tabs on top"), Mode_Tabs);
     AddMenuItem(mapper, group, tr("Icons on top"), Mode_IconOnlyTabs);
     menu_->addActions(group->actions());
@@ -651,14 +665,18 @@ void FancyTabWidget::AddMenuItem(QSignalMapper* mapper, QActionGroup* group,
     action->setChecked(true);
 }
 
-void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons) {
+void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons,
+                                bool fancy) {
   QTabBar* bar = new QTabBar(this);
   bar->setShape(shape);
   bar->setDocumentMode(true);
 
   if (shape == QTabBar::RoundedWest) {
-    bar->setStyle(proxy_style_.get());
     bar->setIconSize(QSize(22, 22));
+  }
+
+  if (fancy) {
+    bar->setStyle(proxy_style_.get());
   }
 
   if (shape == QTabBar::RoundedNorth)

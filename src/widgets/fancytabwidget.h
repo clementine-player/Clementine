@@ -146,6 +146,7 @@ class FancyTabWidget : public QWidget {
 public:
   FancyTabWidget(QWidget* parent = 0);
 
+  // Values are persisted - only add to the end
   enum Mode {
     Mode_None = 0,
 
@@ -153,6 +154,7 @@ public:
     Mode_SmallSidebar = 2,
     Mode_Tabs = 3,
     Mode_IconOnlyTabs = 4,
+    Mode_PlainSidebar = 5,
   };
 
   struct Item {
@@ -197,7 +199,7 @@ private slots:
   void ShowWidget(int index);
 
 private:
-  void MakeTabBar(QTabBar::Shape shape, bool text, bool icons);
+  void MakeTabBar(QTabBar::Shape shape, bool text, bool icons, bool fancy);
   void AddMenuItem(QSignalMapper* mapper, QActionGroup* group,
                    const QString& text, Mode mode);
 
@@ -210,6 +212,8 @@ private:
   QWidget* side_widget_;
   QVBoxLayout* side_layout_;
   QVBoxLayout* top_layout_;
+
+  bool use_background_;
 
   QMenu* menu_;
 
