@@ -146,7 +146,6 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   query.AddWhere("filename", info.canonicalFilePath());
   Song song;
   if (library_->ExecQuery(&query) && query.Next()) {
-    qDebug() << "Found it in db!";
     song.InitFromQuery(query);
   } else {
     song.InitFromFile(filename, -1);

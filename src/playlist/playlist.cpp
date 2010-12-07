@@ -112,7 +112,7 @@ template<typename T>
 QModelIndex InsertSongItems(Playlist* playlist, const SongList& songs, int pos) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
-    items << shared_ptr<PlaylistItem>(new T(song));
+    items << PlaylistItemPtr(new T(song));
   }
   return playlist->InsertItems(items, pos);
 }
@@ -816,6 +816,17 @@ QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos) {
 
 QModelIndex Playlist::InsertSongs(const SongList& songs, int pos) {
   return InsertSongItems<SongPlaylistItem>(this, songs, pos);
+}
+
+QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos) {
+  PlaylistItemList items;
+  foreach (const Song& song, songs) {
+    if (song.id() == -1)
+      items << PlaylistItemPtr(new SongPlaylistItem(song));
+    else
+      items << PlaylistItemPtr(new LibraryPlaylistItem(song));
+  }
+  return InsertItems(items, pos);
 }
 
 QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos, bool play_now) {

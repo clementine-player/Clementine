@@ -153,6 +153,7 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertItems(const PlaylistItemList& items, int pos = -1);
   QModelIndex InsertLibraryItems(const SongList& items, int pos = -1);
   QModelIndex InsertSongs(const SongList& items, int pos = -1);
+  QModelIndex InsertSongsOrLibraryItems(const SongList& items, int pos = -1);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1, bool play_now = false);
   void InsertSmartPlaylist(smart_playlists::GeneratorPtr generator, int pos = -1, bool play_now = false);
   void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);

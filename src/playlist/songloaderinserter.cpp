@@ -89,7 +89,7 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
 }
 
 void SongLoaderInserter::Finished() {
-  QModelIndex index = destination_->InsertSongs(songs_, row_);
+  QModelIndex index = destination_->InsertSongsOrLibraryItems(songs_, row_);
   if (play_now_)
     emit PlayRequested(index);
 
