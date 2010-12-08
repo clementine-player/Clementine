@@ -102,11 +102,12 @@ signals:
 
   // Forwarded from individual playlists
   void CurrentSongChanged(const Song& song);
-  void PlaylistChanged();
+  void PlaylistChanged(Playlist* playlist);
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);
 
 private slots:
+  void OneOfPlaylistsChanged();
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
   void LoadFinished(bool success);

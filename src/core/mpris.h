@@ -25,6 +25,7 @@
 #include <QObject>
 
 class Player;
+class Playlist;
 
 struct DBusStatus {    // From Amarok.
   int play;            // Playing = 0, Paused = 1, Stopped = 2
@@ -183,7 +184,7 @@ signals:
   void TrackListChange(int i);
 
 private slots:
-  void PlaylistChanged();
+  void PlaylistChanged(Playlist* playlist);
 
 private:
   Player* player_;

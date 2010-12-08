@@ -74,11 +74,11 @@ Mpris1TrackList::Mpris1TrackList(Player* player, QObject* parent)
   new MprisTrackList(this);
   QDBusConnection::sessionBus().registerObject("/TrackList", this);
 
-  connect(player->playlists(), SIGNAL(PlaylistChanged()), SLOT(PlaylistChanged()));
+  connect(player->playlists(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged(Playlist*)));
 }
 
-void Mpris1TrackList::PlaylistChanged() {
-  emit TrackListChange(GetLength());
+void Mpris1TrackList::PlaylistChanged(Playlist* playlist) {
+  emit TrackListChange(playlist->rowCount());
 }
 
 // we use the state from event and don't try to obtain it from Player 

@@ -74,7 +74,7 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   ret->set_sequence(sequence_);
 
   connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
-  connect(ret, SIGNAL(PlaylistChanged()), SIGNAL(PlaylistChanged()));
+  connect(ret, SIGNAL(PlaylistChanged()), SLOT(OneOfPlaylistsChanged()));
   connect(ret, SIGNAL(PlaylistChanged()), SLOT(UpdateSummaryText()));
   connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
   connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
@@ -175,6 +175,10 @@ void PlaylistManager::Remove(int id) {
   delete data.p;
 
   emit PlaylistRemoved(id);
+}
+
+void PlaylistManager::OneOfPlaylistsChanged() {
+  emit PlaylistChanged(qobject_cast<Playlist*>(sender()));
 }
 
 void PlaylistManager::SetCurrentPlaylist(int id) {
