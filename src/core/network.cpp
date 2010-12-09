@@ -32,7 +32,7 @@ ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent) {
   QMutexLocker l(&sMutex);
   if (!sCache) {
     sCache = new QNetworkDiskCache;
-    sCache->setCacheDirectory(Utilities::GetConfigPath(Utilities::NETWORK_CACHE));
+    sCache->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_NetworkCache));
   }
 }
 
