@@ -201,7 +201,7 @@ QString ColorToRgba(const QColor& c) {
 
 QString GetConfigPath(ConfigPath config) {
   switch (config) {
-    case ROOT: {
+    case Path_Root: {
       #ifdef Q_OS_DARWIN
         return mac::GetApplicationSupportPath() + "/" + QCoreApplication::organizationName();
       #else
@@ -210,14 +210,14 @@ QString GetConfigPath(ConfigPath config) {
     }
     break;
 
-    case ALBUM_COVERS:
-      return GetConfigPath(ROOT) + "/albumcovers";
+    case Path_AlbumCovers:
+      return GetConfigPath(Path_Root) + "/albumcovers";
 
-    case NETWORK_CACHE:
-      return GetConfigPath(ROOT) + "/networkcache";
+    case Path_NetworkCache:
+      return GetConfigPath(Path_Root) + "/networkcache";
 
-    case GSTREAMER_REGISTRY:
-      return GetConfigPath(ROOT) +
+    case Path_GstreamerRegistry:
+      return GetConfigPath(Path_Root) +
           QString("/gst-registry-%1-bin").arg(QCoreApplication::applicationVersion());
 
     default:

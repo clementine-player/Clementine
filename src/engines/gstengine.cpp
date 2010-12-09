@@ -121,7 +121,7 @@ bool GstEngine::Init() {
 #endif
 
 #if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
-  registry_filename = Utilities::GetConfigPath(Utilities::GSTREAMER_REGISTRY);
+  registry_filename = Utilities::GetConfigPath(Utilities::Path_GstreamerRegistry);
 #endif
 
   if (!scanner_path.isEmpty())

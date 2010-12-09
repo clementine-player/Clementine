@@ -232,7 +232,9 @@ bool MigrateLegacyConfigFiles() {
   if (!QFile::exists(old_config_dir)) {
     return false;
   }
-  QString new_config_dir = Utilities::GetConfigPath(Utilities::ROOT);
+  QString new_config_dir = Utilities::GetConfigPath(Utilities::Path_Root);
+  // Create ~/Library/Application Support which should already exist anyway.
+  QDir::root().mkpath(GetApplicationSupportPath());
 
   qDebug() << "Move from:" << old_config_dir
            << "to:" << new_config_dir;

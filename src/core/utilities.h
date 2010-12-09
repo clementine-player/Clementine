@@ -43,10 +43,10 @@ namespace Utilities {
 
 
   enum ConfigPath {
-    ROOT,
-    ALBUM_COVERS,
-    NETWORK_CACHE,
-    GSTREAMER_REGISTRY,
+    Path_Root,
+    Path_AlbumCovers,
+    Path_NetworkCache,
+    Path_GstreamerRegistry,
   };
   QString GetConfigPath(ConfigPath config);
 }

@@ -44,7 +44,7 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
 }
 
 QString AlbumCoverLoader::ImageCacheDir() {
-  return Utilities::GetConfigPath(Utilities::ALBUM_COVERS);
+  return Utilities::GetConfigPath(Utilities::Path_AlbumCovers);
 }
 
 void AlbumCoverLoader::Clear() {

@@ -112,14 +112,15 @@ int main(int argc, char *argv[]) {
   if (mac::MigrateLegacyConfigFiles()) {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(Utilities::GetConfigPath(
-        Utilities::ROOT) + "/" + Database::kDatabaseFilename);
+        Utilities::Path_Root) + "/" + Database::kDatabaseFilename);
     db.open();
     QSqlQuery query(
         "UPDATE songs SET art_manual = replace("
         "art_manual, '.config', 'Library/Application Support') "
-        "WHERE art_manual LIKE '%.config%';", db);
+        "WHERE art_manual LIKE '%.config%'", db);
     query.exec();
     db.close();
+    QSqlDatabase::removeDatabase(db.connectionName());
   }
 #endif
 

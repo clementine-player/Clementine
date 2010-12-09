@@ -334,7 +334,7 @@ Database::Database(QObject* parent, const QString& database_name)
   }
 
   directory_ = QDir::toNativeSeparators(
-      Utilities::GetConfigPath(Utilities::ROOT));
+      Utilities::GetConfigPath(Utilities::Path_Root));
 
   attached_databases_["jamendo"] = AttachedDatabase(
         directory_ + "/jamendo.db", ":/schema/jamendo.sql");
