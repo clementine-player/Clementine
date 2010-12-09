@@ -347,7 +347,7 @@ void LibraryView::CopyToDevice() {
   organise_dialog_->show();
 }
 
-void LibraryView::keyReleaseEvent(QKeyEvent* e) {
+void LibraryView::keyPressEvent(QKeyEvent* e) {
   switch (e->key()) {
     case Qt::Key_Enter:
     case Qt::Key_Return:
@@ -356,7 +356,7 @@ void LibraryView::keyReleaseEvent(QKeyEvent* e) {
       break;
   }
 
-  QTreeView::keyReleaseEvent(e);
+  QTreeView::keyPressEvent(e);
 }
 
 void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
