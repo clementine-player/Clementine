@@ -1339,8 +1339,8 @@ void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
 
 void MainWindow::PlaylistSongRated(const QModelIndex& index, double rating) {
   const QModelIndex source_index =
-      playlists_->active()->proxy()->mapToSource(index);
-  PlaylistItemPtr item(playlists_->active()->item_at(source_index.row()));
+      playlists_->current()->proxy()->mapToSource(index);
+  PlaylistItemPtr item(playlists_->current()->item_at(source_index.row()));
   if (item && item->IsLocalLibraryItem()) {
     library_->backend()->UpdateSongRatingAsync(item->Metadata().id(), rating);
   }
