@@ -18,6 +18,7 @@
 #include "config.h"
 #include "database.h"
 #include "scopedtransaction.h"
+#include "utilities.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -333,7 +334,7 @@ Database::Database(QObject* parent, const QString& database_name)
   }
 
   directory_ = QDir::toNativeSeparators(
-      QDir::homePath() + "/.config/" + QCoreApplication::organizationName());
+      Utilities::GetConfigPath(Utilities::ROOT));
 
   attached_databases_["jamendo"] = AttachedDatabase(
         directory_ + "/jamendo.db", ":/schema/jamendo.sql");

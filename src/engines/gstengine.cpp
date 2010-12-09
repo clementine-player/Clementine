@@ -25,6 +25,7 @@
 #include "gstengine.h"
 #include "gstenginepipeline.h"
 #include "core/boundfuturewatcher.h"
+#include "core/utilities.h"
 
 #ifdef HAVE_IMOBILEDEVICE
 # include "gstafcsrc/gstafcsrc.h"
@@ -120,9 +121,7 @@ bool GstEngine::Init() {
 #endif
 
 #if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
-  registry_filename = QString("%1/.config/%2/gst-registry-%3.bin").arg(
-      QDir::homePath(), QCoreApplication::organizationName(),
-      QCoreApplication::applicationVersion());
+  registry_filename = Utilities::GetConfigPath(Utilities::GSTREAMER_REGISTRY);
 #endif
 
   if (!scanner_path.isEmpty())

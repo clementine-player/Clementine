@@ -23,12 +23,14 @@
 
 #include "config.h"
 #include "core/commandlineoptions.h"
+#include "core/database.h"
 #include "core/encoding.h"
 #include "core/mac_startup.h"
 #include "core/network.h"
 #include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
+#include "core/utilities.h"
 #include "engines/enginebase.h"
 #include "library/directory.h"
 #include "radio/lastfmservice.h"
@@ -40,10 +42,12 @@
 #include "qtsingleapplication.h"
 #include "qtsinglecoreapplication.h"
 
-#include <QtDebug>
-#include <QLibraryInfo>
-#include <QTranslator>
 #include <QDir>
+#include <QLibraryInfo>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QTranslator>
+#include <QtDebug>
 
 #include <glib-object.h>
 #include <glib/gutils.h>
@@ -102,6 +106,22 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_STRING);
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
+
+#ifdef Q_OS_DARWIN
+  // Must happen after QCoreApplication::setOrganizationName().
+  if (mac::MigrateLegacyConfigFiles()) {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(Utilities::GetConfigPath(
+        Utilities::ROOT) + "/" + Database::kDatabaseFilename);
+    db.open();
+    QSqlQuery query(
+        "UPDATE songs SET art_manual = replace("
+        "art_manual, '.config', 'Library/Application Support') "
+        "WHERE art_manual LIKE '%.config%';", db);
+    query.exec();
+    db.close();
+  }
+#endif
 
   // This makes us show up nicely in gnome-volume-control
   g_type_init();

@@ -17,6 +17,7 @@
 
 #include "utilities.h"
 
+#include <QtGlobal>
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QDir>
@@ -28,6 +29,10 @@
 #  include <sys/statvfs.h>
 #elif defined(Q_OS_WIN32)
 #  include <windows.h>
+#endif
+
+#ifdef Q_OS_DARWIN
+#  include "core/mac_startup.h"
 #endif
 
 #include <boost/scoped_array.hpp>
@@ -194,7 +199,34 @@ QString ColorToRgba(const QColor& c) {
       .arg(c.red()).arg(c.green()).arg(c.blue()).arg(c.alpha());
 }
 
-} // namespace
+QString GetConfigPath(ConfigPath config) {
+  switch (config) {
+    case ROOT: {
+      #ifdef Q_OS_DARWIN
+        return mac::GetApplicationSupportPath() + "/" + QCoreApplication::organizationName();
+      #else
+        return QString("%1/.config/%2").arg(QDir::homePath(), QCoreApplication::organizationName());
+      #endif
+    }
+    break;
+
+    case ALBUM_COVERS:
+      return GetConfigPath(ROOT) + "/albumcovers";
+
+    case NETWORK_CACHE:
+      return GetConfigPath(ROOT) + "/networkcache";
+
+    case GSTREAMER_REGISTRY:
+      return GetConfigPath(ROOT) +
+          QString("/gst-registry-%1-bin").arg(QCoreApplication::applicationVersion());
+
+    default:
+      qFatal("%s", Q_FUNC_INFO);
+      return QString::null;
+  }
+}
+
+}  // namespace Utilities
 
 
 ScopedWCharArray::ScopedWCharArray(const QString& str)

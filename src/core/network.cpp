@@ -22,6 +22,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
 
+#include "utilities.h"
+
 QMutex ThreadSafeNetworkDiskCache::sMutex;
 QNetworkDiskCache* ThreadSafeNetworkDiskCache::sCache = NULL;
 
@@ -30,8 +32,7 @@ ThreadSafeNetworkDiskCache::ThreadSafeNetworkDiskCache(QObject* parent) {
   QMutexLocker l(&sMutex);
   if (!sCache) {
     sCache = new QNetworkDiskCache;
-    sCache->setCacheDirectory(QString("%1/.config/%2/networkcache/")
-        .arg(QDir::homePath(), QCoreApplication::organizationName()));
+    sCache->setCacheDirectory(Utilities::GetConfigPath(Utilities::NETWORK_CACHE));
   }
 }
 

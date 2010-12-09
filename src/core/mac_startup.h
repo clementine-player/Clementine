@@ -24,6 +24,8 @@ QString GetBundlePath();
 QString GetResourcesPath();
 QString GetApplicationSupportPath();
 
+bool MigrateLegacyConfigFiles();
+
 }  // namespace mac
 
 #endif

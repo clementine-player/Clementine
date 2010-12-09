@@ -17,6 +17,7 @@
 
 #include "albumcoverloader.h"
 #include "network.h"
+#include "utilities.h"
 
 #include <QPainter>
 #include <QDir>
@@ -43,8 +44,7 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
 }
 
 QString AlbumCoverLoader::ImageCacheDir() {
-  return QString("%1/.config/%2/albumcovers/")
-      .arg(QDir::homePath(), QCoreApplication::organizationName());
+  return Utilities::GetConfigPath(Utilities::ALBUM_COVERS);
 }
 
 void AlbumCoverLoader::Clear() {

@@ -22,7 +22,10 @@
 
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
+#import <Foundation/NSError.h>
+#import <Foundation/NSFileManager.h>
 #import <Foundation/NSPathUtilities.h>
+#import <Foundation/NSThread.h>
 #import <Foundation/NSTimer.h>
 #import <Foundation/NSURL.h>
 #import <AppKit/NSNibDeclarations.h>
@@ -34,9 +37,12 @@
 #include "globalshortcuts.h"
 #include "mac_startup.h"
 #include "macglobalshortcutbackend.h"
+#include "utilities.h"
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QEvent>
+#include <QFile>
 
 #include <QtDebug>
 
@@ -203,15 +209,45 @@ QString GetResourcesPath() {
 }
 
 QString GetApplicationSupportPath() {
+  NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
+  [pool init];
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSApplicationSupportDirectory,
       NSUserDomainMask,
       YES);
+  QString ret;
   if ([paths count] > 0) {
     NSString* user_path = [paths objectAtIndex:0];
-    return QString::fromUtf8([user_path UTF8String]);
+    ret = QString::fromUtf8([user_path UTF8String]);
+  } else {
+    ret = "~/Library/Application Support";
   }
-  return "~/Library/Application Support";
+  [pool drain];
+  return ret;
+}
+
+bool MigrateLegacyConfigFiles() {
+  QString old_config_dir = QString("%1/.config/%2").arg(
+      QDir::homePath(), QCoreApplication::organizationName());
+  if (!QFile::exists(old_config_dir)) {
+    return false;
+  }
+  QString new_config_dir = Utilities::GetConfigPath(Utilities::ROOT);
+
+  qDebug() << "Move from:" << old_config_dir
+           << "to:" << new_config_dir;
+
+  NSFileManager* file_manager = [[NSFileManager alloc] init];
+  NSError* error;
+  bool ret = [file_manager moveItemAtPath:
+      [NSString stringWithUTF8String: old_config_dir.toUtf8().constData()]
+      toPath:[NSString stringWithUTF8String: new_config_dir.toUtf8().constData()]
+      error: &error];
+  if (!ret) {
+    qWarning() << [[error localizedDescription] UTF8String];
+    return false;
+  }
+  return true;
 }
 
 }  // namespace mac

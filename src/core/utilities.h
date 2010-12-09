@@ -40,6 +40,15 @@ namespace Utilities {
   QString MakeTempDir();
   void RemoveRecursive(const QString& path);
   bool Copy(QIODevice* source, QIODevice* destination);
+
+
+  enum ConfigPath {
+    ROOT,
+    ALBUM_COVERS,
+    NETWORK_CACHE,
+    GSTREAMER_REGISTRY,
+  };
+  QString GetConfigPath(ConfigPath config);
 }
 
 class ScopedWCharArray {
