@@ -102,6 +102,9 @@ signals:
 
   // Forwarded from individual playlists
   void CurrentSongChanged(const Song& song);
+  
+  // Signals that one of manager's playlists has changed (new items, new
+  // ordering etc.) - the argument shows which.
   void PlaylistChanged(Playlist* playlist);
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);

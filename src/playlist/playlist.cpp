@@ -989,6 +989,7 @@ void Playlist::sort(int column, Qt::SortOrder order) {
   // TODO
   undo_stack_->clear();
 
+  emit PlaylistChanged();
   Save();
 }
 
@@ -1285,6 +1286,7 @@ void Playlist::Shuffle() {
   // TODO
   undo_stack_->clear();
 
+  emit PlaylistChanged();
   Save();
 }
 

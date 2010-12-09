@@ -198,6 +198,8 @@ class Playlist : public QAbstractListModel {
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);
 
+  // Signals that the underlying list of items was changed, meaning that
+  // something was added to it, removed from it or the ordering changed.
   void PlaylistChanged();
   void DynamicModeChanged(bool dynamic);
 
