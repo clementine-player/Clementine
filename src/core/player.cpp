@@ -176,10 +176,6 @@ void Player::Next() {
 }
 
 void Player::NextInternal(Engine::TrackChangeType change) {
-  if (change == Engine::Manual) {
-    emit TrackSkipped(current_item_);
-  }
-
   if (playlists_->active()->stop_after_current()) {
     playlists_->active()->StopAfter(-1);
     Stop();
@@ -257,6 +253,9 @@ void Player::PlayPause() {
 }
 
 void Player::Stop() {
+  if (engine_->position() != engine_->length()) {
+    emit TrackSkipped(current_item_);
+  }
   engine_->Stop();
   playlists_->active()->set_current_index(-1);
   current_item_.reset();
@@ -304,6 +303,10 @@ Engine::State Player::GetState() const {
 }
 
 void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
+  if (change == Engine::Manual && engine_->position() != engine_->length()) {
+    emit TrackSkipped(current_item_);
+  }
+
   if (reshuffle)
     playlists_->active()->set_current_index(-1);
   playlists_->active()->set_current_index(index);
