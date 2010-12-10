@@ -35,7 +35,6 @@ class AlbumCoverLoader : public QObject {
  public:
   AlbumCoverLoader(QObject* parent = 0);
 
-  
   void Stop() { stop_requested_ = true; }
 
   static QString ImageCacheDir();
@@ -46,10 +45,11 @@ class AlbumCoverLoader : public QObject {
 
 
   quint64 LoadImageAsync(const Song& song);
-  quint64 LoadImageAsync(const QString& art_automatic,
-                         const QString& art_manual,
-                         const QString& song_filename = QString(),
-                         const QImage& embedded_image = QImage());
+  virtual quint64 LoadImageAsync(
+      const QString& art_automatic,
+      const QString& art_manual,
+      const QString& song_filename = QString(),
+      const QImage& embedded_image = QImage());
 
   void Clear();
 
@@ -61,11 +61,11 @@ class AlbumCoverLoader : public QObject {
  signals:
   void ImageLoaded(quint64 id, const QImage& image);
 
- private slots:
+ protected slots:
   void ProcessTasks();
   void RemoteFetchFinished();
 
- private:
+ protected:
   enum State {
     State_TryingManual,
     State_TryingAuto,

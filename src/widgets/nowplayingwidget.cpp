@@ -17,6 +17,7 @@
 
 #include "nowplayingwidget.h"
 #include "core/albumcoverloader.h"
+#include "core/kittenloader.h"
 
 #include <QMenu>
 #include <QMovie>
@@ -52,6 +53,7 @@ const int NowPlayingWidget::kTopBorder = 4;
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
+    kitten_loader_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
     above_statusbar_action_(NULL),
@@ -63,7 +65,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     load_cover_id_(0),
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0),
-    hypnotoad_(NULL)
+    hypnotoad_(NULL),
+    aww_(false)
 {
   // Load settings
   QSettings s;
@@ -108,7 +111,9 @@ void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionG
 
 void NowPlayingWidget::set_ideal_height(int height) {
   small_ideal_height_ = height;
-  UpdateHeight();
+  UpdateHeight(aww_
+      ?  kitten_loader_->Worker().get()
+      : cover_loader_->Worker().get());
 }
 
 QSize NowPlayingWidget::sizeHint() const {
@@ -116,13 +121,15 @@ QSize NowPlayingWidget::sizeHint() const {
 }
 
 void NowPlayingWidget::CoverLoaderInitialised() {
-  UpdateHeight();
-  cover_loader_->Worker()->SetPadOutputImage(true);
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
+  BackgroundThread<AlbumCoverLoader>* loader =
+      static_cast<BackgroundThread<AlbumCoverLoader>*>(sender());
+  UpdateHeight(loader->Worker().get());
+  loader->Worker()->SetPadOutputImage(true);
+  connect(loader->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 }
 
-void NowPlayingWidget::UpdateHeight() {
+void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {
   switch (mode_) {
   case SmallSongDetails:
     cover_height_ = small_ideal_height_;
@@ -141,11 +148,11 @@ void NowPlayingWidget::UpdateHeight() {
     setMaximumHeight(total_height_);
 
   // Tell the cover loader what size we want the images in
-  cover_loader_->Worker()->SetDesiredHeight(cover_height_);
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
+  loader->SetDesiredHeight(cover_height_);
+  loader->SetDefaultOutputImage(QImage(":nocover.png"));
 
   // Re-fetch the current image
-  load_cover_id_ = cover_loader_->Worker()->LoadImageAsync(metadata_);
+  load_cover_id_ = loader->LoadImageAsync(metadata_);
 
   // Tell Qt we've changed size
   updateGeometry();
@@ -165,7 +172,10 @@ void NowPlayingWidget::NowPlaying(const Song& metadata) {
   metadata_ = metadata;
   cover_ = QPixmap();
 
-  UpdateHeight(); // Loads the cover too
+  // Loads the cover too.
+  UpdateHeight(aww_
+      ?  kitten_loader_->Worker().get()
+      : cover_loader_->Worker().get());
   UpdateDetailsText();
 
   SetVisible(true);
@@ -305,7 +315,9 @@ void NowPlayingWidget::FadePreviousTrack(qreal value) {
 
 void NowPlayingWidget::SetMode(int mode) {
   mode_ = Mode(mode);
-  UpdateHeight();
+  UpdateHeight(aww_
+      ?  kitten_loader_->Worker().get()
+      : cover_loader_->Worker().get());
   UpdateDetailsText();
   update();
 
@@ -316,7 +328,9 @@ void NowPlayingWidget::SetMode(int mode) {
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
   if (visible_ && mode_ == LargeSongDetails && e->oldSize().width() != e->size().width()) {
-    UpdateHeight();
+    UpdateHeight(aww_
+        ?  kitten_loader_->Worker().get()
+        : cover_loader_->Worker().get());
     UpdateDetailsText();
   }
 }
@@ -348,4 +362,16 @@ void NowPlayingWidget::AllHail(bool hypnotoad) {
     hypnotoad_ = NULL;
     update();
   }
+}
+
+void NowPlayingWidget::EnableKittens(bool aww) {
+  if (!kitten_loader_ && aww) {
+    kitten_loader_ = new BackgroundThreadImplementation<AlbumCoverLoader, KittenLoader>(this);
+    kitten_loader_->Start();
+    connect(kitten_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
+  } else if (aww) {
+    NowPlaying(metadata_);
+  }
+
+  aww_ = aww;
 }

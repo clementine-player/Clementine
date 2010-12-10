@@ -52,6 +52,7 @@ set(SOURCES
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
+  core/kittenloader.cpp
   core/mergedproxymodel.cpp
   core/mpris_common.cpp
   core/musicstorage.cpp
@@ -239,6 +240,7 @@ set(HEADERS
   core/deletefiles.h
   core/globalshortcuts.h
   core/gnomeglobalshortcutbackend.h
+  core/kittenloader.h
   core/mergedproxymodel.h
   core/mpris_common.h
   core/network.h

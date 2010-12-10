@@ -65,6 +65,7 @@ public slots:
   void NowPlaying(const Song& metadata);
   void Stopped();
   void AllHail(bool hypnotoad);
+  void EnableKittens(bool aww);
 
 protected:
   void paintEvent(QPaintEvent* e);
@@ -87,11 +88,12 @@ private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
                         QSignalMapper* mapper);
   void UpdateDetailsText();
-  void UpdateHeight();
+  void UpdateHeight(AlbumCoverLoader* loader);
   void DrawContents(QPainter* p);
 
 private:
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  BackgroundThread<AlbumCoverLoader>* kitten_loader_;
 
   Mode mode_;
 
@@ -117,6 +119,8 @@ private:
 
   static const char* kHypnotoadPath;
   QMovie* hypnotoad_;
+
+  bool aww_;
 };
 
 #endif // NOWPLAYINGWIDGET_H

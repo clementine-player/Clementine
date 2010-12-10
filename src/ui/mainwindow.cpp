@@ -546,6 +546,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
           SLOT(NowPlayingWidgetPositionChanged(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
+  connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
