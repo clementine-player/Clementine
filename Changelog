@@ -25,6 +25,10 @@ Version 0.6:
     * Change the window title to the name of the currently playing track.
     * Add a comment column to the playlist.
     * Add volume controls for Rain and Hypnotoad.
+    * Allow editing tags from the library pane.
+    * Add a "Delete from disk" item in the playlist menu.
+    * Single clicking an item in the library view now expands it.
+    * Kittens!
     * (Linux) Add MPRIS2 support, see http://www.mpris.org/2.0/spec/
     * (Ubuntu) Add monochrome panel icons.
     * (Ubuntu) Show Clementine in the Gnome sound menu.
@@ -42,8 +46,17 @@ Version 0.6:
     * Ignore duplicate items from playlists when opening directories.
     * Ignore bad metadata in a file if good metadata has already been loaded.
     * Don't show CD drives in the devices tab.
+    * Don't stop the track prematurely if it's the last one in the playlist
+      and fadeout is disabled.
+    * Write URLs in XSPF playlists properly when saving to a folder inside
+      the library.
+    * Fix some usability issues with the "Show in various artists" feature.
+    * Prevent the last playlist column from being hidden.
+    * Don't download the entire Magnatune catalogue each time Clementine is run.
     * (Windows Vista) Fix a memory leak when using visualisations.
+    * (KDE) Fix a bug with session management on KDE.
     * (Ubuntu) Fix compilation with the Gold linker which is used on Natty.
+    * (Mac OS X) Store user files in Library/Application Support/
 
 
 
