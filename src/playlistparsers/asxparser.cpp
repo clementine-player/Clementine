@@ -59,7 +59,7 @@ SongList ASXParser::Load(QIODevice *device, const QDir&) const {
 
   while (!reader.atEnd() && ParseUntilElement(&reader, "entry")) {
     Song song = ParseTrack(&reader);
-    if (!song.is_valid()) {
+    if (song.is_valid()) {
       ret << song;
     }
   }
