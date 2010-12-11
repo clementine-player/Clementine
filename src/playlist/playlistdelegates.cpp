@@ -314,7 +314,11 @@ void RatingItemDelegate::paint(
   if (!index.data(Playlist::Role_CanSetRating).toBool())
     return;
 
-  const bool hover = mouse_over_index_ == index;
+  const bool hover = mouse_over_index_.isValid() && (
+      mouse_over_index_ == index || (
+          selected_indexes_.contains(mouse_over_index_) &&
+          selected_indexes_.contains(index)));
+
   const double rating =
       (hover ? RatingPainter::RatingForPos(mouse_over_pos_, option.rect)
              : index.data().toDouble());

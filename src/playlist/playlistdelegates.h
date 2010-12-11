@@ -113,8 +113,14 @@ public:
   QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
   QString displayText(const QVariant& value, const QLocale& locale) const;
 
-  void set_mouse_over(const QModelIndex& index, const QPoint& pos) {
-      mouse_over_index_ = index ; mouse_over_pos_ = pos; }
+  void set_mouse_over(const QModelIndex& index,
+                      const QModelIndexList& selected_indexes,
+                      const QPoint& pos) {
+      mouse_over_index_ = index;
+      selected_indexes_ = selected_indexes;
+      mouse_over_pos_ = pos;
+  }
+
   void set_mouse_out() { mouse_over_index_ = QModelIndex(); }
   bool is_mouse_over() const { return mouse_over_index_.isValid(); }
   QModelIndex mouse_over_index() const { return mouse_over_index_; }
@@ -124,6 +130,7 @@ private:
 
   QModelIndex mouse_over_index_;
   QPoint mouse_over_pos_;
+  QModelIndexList selected_indexes_;
 };
 
 class TagCompletionModel : public QStringListModel {

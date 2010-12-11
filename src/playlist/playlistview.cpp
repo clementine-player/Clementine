@@ -546,9 +546,16 @@ void PlaylistView::RatingHoverIn(const QModelIndex& index, const QPoint& pos) {
   }
 
   const QModelIndex old_index = rating_delegate_->mouse_over_index();
-  rating_delegate_->set_mouse_over(index, pos);
-  update(index);
+  rating_delegate_->set_mouse_over(index, selectedIndexes(), pos);
   setCursor(Qt::PointingHandCursor);
+
+  update(index);
+  update(old_index);
+  foreach (const QModelIndex& index, selectedIndexes()) {
+    if (index.column() == Playlist::Column_Rating) {
+      update(index);
+    }
+  }
 
   if (index.data(Playlist::Role_IsCurrent).toBool() ||
       old_index.data(Playlist::Role_IsCurrent).toBool()) {
@@ -563,8 +570,14 @@ void PlaylistView::RatingHoverOut() {
 
   const QModelIndex old_index = rating_delegate_->mouse_over_index();
   rating_delegate_->set_mouse_out();
-  update(old_index);
   setCursor(QCursor());
+
+  update(old_index);
+  foreach (const QModelIndex& index, selectedIndexes()) {
+    if (index.column() == Playlist::Column_Rating) {
+      update(index);
+    }
+  }
 
   if (old_index.data(Playlist::Role_IsCurrent).toBool()) {
     InvalidateCachedCurrentPixmap();
@@ -583,7 +596,18 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
     // Calculate which star was clicked
     double new_rating = RatingPainter::RatingForPos(
         event->pos(), visualRect(index));
-    emit SongRatingSet(index, new_rating);
+
+    if (selectedIndexes().contains(index)) {
+      // Update all the selected items
+      foreach (const QModelIndex& index, selectedIndexes()) {
+        if (index.data(Playlist::Role_CanSetRating).toBool()) {
+          emit SongRatingSet(index, new_rating);
+        }
+      }
+    } else {
+      // Update only this item
+      emit SongRatingSet(index, new_rating);
+    }
   } else {
     QTreeView::mousePressEvent(event);
   }
