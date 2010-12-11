@@ -90,7 +90,7 @@ class MagnatuneService : public RadioService {
   void DownloadFinished(const QStringList& albums);
 
  private slots:
-  void UpdateTotalSongCount(int count) { total_song_count_ = count; }
+  void UpdateTotalSongCount(int count);
   void ReloadDatabase();
   void ReloadDatabaseFinished();
 

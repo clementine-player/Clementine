@@ -119,9 +119,6 @@ void MagnatuneService::LazyPopulate(RadioItem *item) {
       model()->merged_model()->AddSubModel(
           model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
           library_sort_model_);
-
-      if (total_song_count_ == 0)
-        ReloadDatabase();
       break;
 
     default:
@@ -129,6 +126,13 @@ void MagnatuneService::LazyPopulate(RadioItem *item) {
   }
 
   item->lazy_loaded = true;
+}
+
+void MagnatuneService::UpdateTotalSongCount(int count) {
+  total_song_count_ = count;
+  if (total_song_count_ == 0 && !load_database_task_id_) {
+    ReloadDatabase();
+  }
 }
 
 void MagnatuneService::ReloadDatabase() {
