@@ -130,9 +130,7 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-      if (!art.contains(QRegExp("^\\w+://"))) {
-        art = QUrl::fromLocalFile(MakeRelativeTo(art, dir)).toString();
-      }
+      art = MakeRelativeTo(art, dir);
       writer.writeTextElement("image", art);
     }
   }
