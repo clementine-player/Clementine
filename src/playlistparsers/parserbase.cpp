@@ -81,6 +81,9 @@ QString ParserBase::MakeUrl(const QString& filename_or_url) const {
 }
 
 Song ParserBase::LoadLibrarySong(const QString& filename_or_url) const {
+  if (!library_)
+    return Song();
+
   QFileInfo info;
 
   if (filename_or_url.contains("://"))

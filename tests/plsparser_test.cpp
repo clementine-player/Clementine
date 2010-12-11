@@ -31,6 +31,8 @@ using boost::shared_ptr;
 
 class PLSParserTest : public ::testing::Test {
 protected:
+  PLSParserTest() : parser_(NULL) {}
+
   shared_ptr<QFile> Open(const QString& filename) {
     shared_ptr<QFile> ret(new QFile(":/testdata/" + filename));
     if (!ret->open(QIODevice::ReadOnly))

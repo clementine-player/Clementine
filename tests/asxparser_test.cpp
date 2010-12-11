@@ -39,7 +39,7 @@ TEST_F(ASXParserTest, ParsesOneTrackFromXML) {
       "</entry></asx>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  ASXParser parser;
+  ASXParser parser(NULL);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
   const Song& song = songs[0];
@@ -61,7 +61,7 @@ TEST_F(ASXParserTest, ParsesMoreThanOneTrackFromXML) {
       "</entry></asx>";
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
-  ASXParser parser;
+  ASXParser parser(NULL);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(2, songs.length());
   EXPECT_EQ("http://example.com/foo.mp3", songs[0].filename());
@@ -74,7 +74,7 @@ TEST_F(ASXParserTest, SavesSong) {
   QByteArray data;
   QBuffer buffer(&data);
   buffer.open(QIODevice::WriteOnly);
-  ASXParser parser;
+  ASXParser parser(NULL);
   Song one;
   one.set_filename("http://www.example.com/foo.mp3");
   one.set_filetype(Song::Type_Stream);
@@ -94,7 +94,7 @@ TEST_F(ASXParserTest, ParsesSomaFM) {
   QFile somafm(":/testdata/secretagent.asx");
   somafm.open(QIODevice::ReadOnly);
 
-  ASXParser parser;
+  ASXParser parser(NULL);
   SongList songs = parser.Load(&somafm);
 
   ASSERT_EQ(4, songs.count());
