@@ -62,6 +62,7 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
     lastfm_(lastfm),
     engine_(CreateEngine(engine)),
     stream_change_type_(Engine::First),
+    last_state_(Engine::Empty),
     volume_before_mute_(50)
 {
   // Loads album art and saves it to a file in /tmp for MPRIS clients and those
@@ -74,7 +75,6 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
-
 
   //MPRIS 1.0 implementation
   mpris1_ = new mpris::Mpris1(this, art_loader_, this);
@@ -279,6 +279,7 @@ void Player::EngineStateChanged(Engine::State state) {
     case Engine::Empty:
     case Engine::Idle: emit Stopped(); break;
   }
+  last_state_ = state;
 }
 
 void Player::SetVolume(int value) {
@@ -296,10 +297,6 @@ void Player::SetVolume(int value) {
 
 int Player::GetVolume() const {
   return engine_->volume();
-}
-
-Engine::State Player::GetState() const {
-  return engine_->state();
 }
 
 void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {

@@ -57,7 +57,7 @@ class Player : public QObject {
   void Init();
 
   EngineBase* engine() const { return engine_.get(); }
-  Engine::State GetState() const;
+  Engine::State GetState() const { return last_state_; }
   int GetVolume() const;
 
   PlaylistItemPtr GetCurrentItem() const { return current_item_; }
@@ -131,6 +131,7 @@ class Player : public QObject {
 
   boost::scoped_ptr<EngineBase> engine_;
   Engine::TrackChangeType stream_change_type_;
+  Engine::State last_state_;
 
   QUrl loading_async_;
 
