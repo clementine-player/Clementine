@@ -75,18 +75,24 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
 {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
+  RemoveArg("-psn", 1);
+#endif
+
+  // Remove the -session option that KDE passes
+  RemoveArg("-session", 2);
+}
+
+void CommandlineOptions::RemoveArg(const QString& starts_with, int count) {
   for (int i = 0; i < argc_; ++i) {
     QString opt(argv_[i]);
-    if (opt.startsWith("-psn")) {
-      // Shuffle remaining args.
-      for (int j = i; j < argc_; ++j) {
-        argv_[j] = argv_[j+1];
+    if (opt.startsWith(starts_with)) {
+      for (int j = i; j < argc_ - count + 1; ++j) {
+        argv_[j] = argv_[j+count];
       }
-      --argc_;
+      argc_ -= count;
       break;
     }
   }
-#endif
 }
 
 bool CommandlineOptions::Parse() {
