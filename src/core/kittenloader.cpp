@@ -9,13 +9,11 @@
 const char* KittenLoader::kFlickrKittenUrl =
     "http://api.flickr.com/services/rest/"
     "?method=flickr.photos.search"
-    "&api_key=d4dbb3e0fcb0cc0331da7d6a40df9d26"
+    "&api_key=b60e59d549d314c98ddb1dc06008a2c4"
     "&tags=cat"
     "&sort=random"
     "&safe_search=1"
-    "&content_type=1"
-    "&auth_token=72157625568449786-b84430cc6d3a8665"
-    "&api_sig=66b58c9c4aa61a48d62409bc6d7b1326";
+    "&content_type=1";
 
 const char* KittenLoader::kFlickrPhotoUrl =
     "http://farm%1.static.flickr.com/%2/%3_%4_m.jpg";
