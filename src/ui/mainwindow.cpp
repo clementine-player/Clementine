@@ -20,6 +20,7 @@
 #include "core/backgroundstreams.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
+#include "core/deletefiles.h"
 #include "core/globalshortcuts.h"
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
@@ -70,6 +71,7 @@
 #include "ui/macsystemtrayicon.h"
 #endif
 #include "ui/organisedialog.h"
+#include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
@@ -428,7 +430,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
   playlist_organise_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Organise files..."), this, SLOT(PlaylistMoveToLibrary()));
   playlist_copy_to_device_ = playlist_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
-  playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete files..."), this, SLOT(PlaylistDelete()));
+  playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
@@ -436,8 +438,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 #ifdef Q_OS_DARWIN
   ui_->action_shuffle->setShortcut(QKeySequence());
 #endif
-
-  playlist_delete_->setVisible(false); // TODO
 
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
           SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
@@ -1097,6 +1097,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_move_to_library_->setVisible(false);
   playlist_organise_->setVisible(false);
   playlist_delete_->setVisible(false);
+  playlist_copy_to_device_->setVisible(false);
 
   if (in_queue == 1 && not_in_queue == 0)
     playlist_queue_->setText(tr("Dequeue track"));
@@ -1142,6 +1143,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
       playlist_copy_to_library_->setVisible(editable);
       playlist_move_to_library_->setVisible(editable);
     }
+
+    playlist_delete_->setVisible(editable);
+    playlist_copy_to_device_->setVisible(editable);
   }
 
   playlist_menu_->popup(global_pos);
@@ -1520,7 +1524,42 @@ void MainWindow::PlaylistOrganiseSelected(bool copy) {
 }
 
 void MainWindow::PlaylistDelete() {
-  // TODO
+  // Note: copied from LibraryView::Delete
+
+  if (QMessageBox::question(this, tr("Delete files"),
+        tr("These files will be deleted from disk, are you sure you want to continue?"),
+        QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+    return;
+
+  // We can cheat and always take the storage of the first directory, since
+  // they'll all be FilesystemMusicStorage in a library and deleting doesn't
+  // check the actual directory.
+  boost::shared_ptr<MusicStorage> storage =
+      library_->model()->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
+      .value<boost::shared_ptr<MusicStorage> >();
+
+  // Get selected songs
+  SongList selected_songs;
+  QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+  foreach (const QModelIndex& proxy_index, proxy_indexes) {
+    QModelIndex index = playlists_->current()->proxy()->mapToSource(proxy_index);
+    selected_songs << playlists_->current()->item_at(index.row())->Metadata();
+  }
+
+  ui_->playlist->view()->RemoveSelected();
+
+  DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
+  connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
+  delete_files->Start(selected_songs);
+}
+
+void MainWindow::DeleteFinished(const SongList& songs_with_errors) {
+  if (songs_with_errors.isEmpty())
+    return;
+
+  OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
+  dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
+  // It deletes itself when the user closes it
 }
 
 void MainWindow::PlaylistQueue() {

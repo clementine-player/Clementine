@@ -202,6 +202,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void AddSongInfoGenerator(smart_playlists::GeneratorPtr gen);
 
+  void DeleteFinished(const SongList& songs_with_errors);
+
  private:
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
   void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
