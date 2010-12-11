@@ -630,6 +630,8 @@ void FancyTabWidget::SetMode(Mode mode) {
       break;
   }
 
+  tab_bar_->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+
   mode_ = mode;
   emit ModeChanged(mode);
   update();
@@ -670,6 +672,7 @@ void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons,
   QTabBar* bar = new QTabBar(this);
   bar->setShape(shape);
   bar->setDocumentMode(true);
+  bar->setUsesScrollButtons(true);
 
   if (shape == QTabBar::RoundedWest) {
     bar->setIconSize(QSize(22, 22));
