@@ -215,8 +215,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
                         ->mapToSource(context_menu_index_);
 
   const int type = library_->data(context_menu_index_, LibraryModel::Role_Type).toInt();
-  const int container_type  = library_->data(context_menu_index_, LibraryModel::Role_ContainerType).toInt();
-  const bool enable_various = container_type == LibraryModel::GroupBy_Album;
+  const bool enable_various = type == LibraryItem::Type_Container ||
+                              type == LibraryItem::Type_Song;
   const bool smart_playlist = type == LibraryItem::Type_SmartPlaylist;
   const bool show_smart     = type == LibraryItem::Type_PlaylistContainer ||
                               smart_playlist;
@@ -257,9 +257,17 @@ void LibraryView::ShowInVarious(bool on) {
   if (!context_menu_index_.isValid())
     return;
 
-  QString artist = library_->data(context_menu_index_, LibraryModel::Role_Artist).toString();
-  QString album = library_->data(context_menu_index_, LibraryModel::Role_Key).toString();
-  library_->backend()->ForceCompilation(artist, album, on);
+  // Build a list of the selected unique album/artist combos
+  typedef QPair<QString, QString> AlbumArtist;
+  QSet<AlbumArtist> selected;
+  foreach (const Song& song, GetSelectedSongs()) {
+    selected << AlbumArtist(song.album(), song.artist());
+  }
+
+  foreach (const AlbumArtist& albumartist, selected.values()) {
+    library_->backend()->ForceCompilation(
+          albumartist.second, albumartist.first, on);
+  }
 }
 
 void LibraryView::Load() {
