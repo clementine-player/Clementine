@@ -273,7 +273,11 @@ int Mpris1TrackList::GetLength() const {
 }
 
 QVariantMap Mpris1TrackList::GetMetadata(int pos) const {
-  return Mpris1::GetMetadata(player_->GetItemAt(pos)->Metadata());
+  PlaylistItemPtr item = player_->GetItemAt(pos);
+  if (!item)
+    return QVariantMap();
+
+  return Mpris1::GetMetadata(item->Metadata());
 }
 
 void Mpris1TrackList::SetLoop(bool enable) {
