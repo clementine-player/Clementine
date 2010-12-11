@@ -72,5 +72,5 @@ void AutoExpandingTreeView::ItemExpanded(const QModelIndex& index) {
 }
 
 void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
-  expand(index);
+  setExpanded(index, !isExpanded(index));
 }
