@@ -24,7 +24,7 @@ class ASXParser : public XMLParser {
   Q_OBJECT
 
  public:
-  ASXParser(QObject* parent = 0);
+  ASXParser(LibraryBackendInterface* library, QObject* parent = 0);
 
   QString name() const { return "ASX"; }
   QStringList file_extensions() const { return QStringList() << "asx"; }

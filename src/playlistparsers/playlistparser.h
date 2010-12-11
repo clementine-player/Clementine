@@ -23,12 +23,13 @@
 #include "core/song.h"
 
 class ParserBase;
+class LibraryBackendInterface;
 
 class PlaylistParser : public QObject {
   Q_OBJECT
 
 public:
-  PlaylistParser(QObject *parent = 0);
+  PlaylistParser(LibraryBackendInterface* library, QObject* parent = 0);
 
   static const int kMagicSize;
 

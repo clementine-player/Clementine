@@ -23,11 +23,13 @@
 
 #include "core/song.h"
 
+class LibraryBackendInterface;
+
 class ParserBase : public QObject {
   Q_OBJECT
 
 public:
-  ParserBase(QObject *parent = 0);
+  ParserBase(LibraryBackendInterface* library, QObject *parent = 0);
 
   virtual QString name() const = 0;
   virtual QStringList file_extensions() const = 0;
@@ -47,6 +49,17 @@ protected:
   // Takes a URL, relative path or absolute path, and in the case of absolute
   // paths makes them relative to dir if they are subdirectories.
   QString MakeRelativeTo(const QString& filename_or_url, const QDir& dir) const;
+
+  // Takes a URL or absolute path and returns a URL
+  QString MakeUrl(const QString& filename_or_url) const;
+
+  // Converts the URL or path to a canonical path and searches the library for
+  // a song with that path.  If one is found, returns it, otherwise returns an
+  // invalid song.
+  Song LoadLibrarySong(const QString& filename_or_url) const;
+
+private:
+  LibraryBackendInterface* library_;
 };
 
 #endif // PARSERBASE_H

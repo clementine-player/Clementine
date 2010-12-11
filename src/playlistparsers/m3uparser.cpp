@@ -20,8 +20,8 @@
 #include <QBuffer>
 #include <QtDebug>
 
-M3UParser::M3UParser(QObject* parent)
-    : ParserBase(parent)
+M3UParser::M3UParser(LibraryBackendInterface* library, QObject* parent)
+    : ParserBase(library, parent)
 {
 }
 
@@ -67,7 +67,13 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
       if (!ParseTrackLocation(line, dir, &song)) {
         qWarning() << "Failed to parse location: " << line;
       } else {
-        ret << song;
+        // Load the song from the library if it's there.
+        Song library_song = LoadLibrarySong(song.filename());
+        if (library_song.is_valid())
+          ret << library_song;
+        else
+          ret << song;
+
         current_metadata.artist.clear();
         current_metadata.title.clear();
         current_metadata.length = -1;

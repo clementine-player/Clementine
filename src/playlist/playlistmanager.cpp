@@ -36,7 +36,7 @@ PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
     playlist_backend_(NULL),
     library_backend_(NULL),
     sequence_(NULL),
-    parser_(new PlaylistParser(this)),
+    parser_(NULL),
     current_(-1),
     active_(-1)
 {
@@ -54,6 +54,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   library_backend_ = library_backend;
   playlist_backend_ = playlist_backend;
   sequence_ = sequence;
+  parser_ = new PlaylistParser(library_backend, this);
 
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsDiscovered(SongList)));
@@ -101,7 +102,7 @@ void PlaylistManager::New(const QString& name, const SongList& songs) {
     qFatal("Couldn't create playlist");
 
   Playlist* playlist = AddPlaylist(id, name);
-  playlist->InsertSongs(songs);
+  playlist->InsertSongsOrLibraryItems(songs);
 
   SetCurrentPlaylist(id);
 }

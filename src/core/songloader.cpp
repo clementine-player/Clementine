@@ -38,7 +38,7 @@ const int SongLoader::kDefaultTimeout = 5000;
 SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
-    playlist_parser_(new PlaylistParser(this)),
+    playlist_parser_(new PlaylistParser(library, this)),
     timeout_(kDefaultTimeout),
     state_(WaitingForType),
     success_(false),

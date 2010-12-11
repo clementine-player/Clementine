@@ -29,7 +29,7 @@ class XSPFParser : public XMLParser {
   Q_OBJECT
 
  public:
-  XSPFParser(QObject* parent = 0);
+  XSPFParser(LibraryBackendInterface* library, QObject* parent = 0);
 
   QString name() const { return "XSPF"; }
   QStringList file_extensions() const { return QStringList() << "xspf"; }

@@ -30,11 +30,10 @@ class QDomNode;
 
 class XMLParser : public ParserBase {
  protected:
-  XMLParser(QObject* parent);
+  XMLParser(LibraryBackendInterface* library, QObject* parent);
+
   bool ParseUntilElement(QXmlStreamReader* reader, const QString& element) const;
   void IgnoreElement(QXmlStreamReader* reader) const;
-
-  QString MakeRelativeTo(const QString& filename, const QDir& dir) const;
 
   class StreamElement : public boost::noncopyable {
    public:

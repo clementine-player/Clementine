@@ -135,7 +135,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
     radio_model_(NULL),
     playlist_backend_(NULL),
     playlists_(new PlaylistManager(task_manager_, this)),
-    playlist_parser_(new PlaylistParser(this)),
     player_(NULL),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
@@ -1275,7 +1274,7 @@ void MainWindow::AddFile() {
   // Last used directory
   QString directory = settings_.value("add_media_path", QDir::currentPath()).toString();
 
-  PlaylistParser parser;
+  PlaylistParser parser(library_->backend());
 
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(

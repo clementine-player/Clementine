@@ -26,8 +26,8 @@
 #include <QXmlStreamReader>
 #include <QtDebug>
 
-ASXParser::ASXParser(QObject* parent)
-    : XMLParser(parent)
+ASXParser::ASXParser(LibraryBackendInterface* library, QObject* parent)
+    : XMLParser(library, parent)
 {
 }
 
@@ -59,7 +59,7 @@ SongList ASXParser::Load(QIODevice *device, const QDir&) const {
 
   while (!reader.atEnd() && ParseUntilElement(&reader, "entry")) {
     Song song = ParseTrack(&reader);
-    if (song.is_valid()) {
+    if (!song.is_valid()) {
       ret << song;
     }
   }
@@ -83,6 +83,12 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
             if (!QFile::exists(filename)) {
               return Song();
             }
+
+            // Load the song from the library if it's there.
+            Song library_song = LoadLibrarySong(filename);
+            if (library_song.is_valid())
+              return library_song;
+
             song.InitFromFile(filename, -1);
             return song;
           } else {
@@ -112,7 +118,7 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
   return song;
 }
 
-void ASXParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.writeStartDocument();
@@ -124,7 +130,7 @@ void ASXParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
       writer.writeTextElement("title", song.title());
       {
         StreamElement ref("ref", &writer);
-        writer.writeAttribute("href", MakeRelativeTo(song.filename(), dir));
+        writer.writeAttribute("href", MakeUrl(song.filename()));
       }
       if (!song.artist().isEmpty()) {
         writer.writeTextElement("author", song.artist());

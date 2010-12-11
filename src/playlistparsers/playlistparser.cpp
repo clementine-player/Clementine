@@ -26,15 +26,15 @@
 
 const int PlaylistParser::kMagicSize = 512;
 
-PlaylistParser::PlaylistParser(QObject *parent)
+PlaylistParser::PlaylistParser(LibraryBackendInterface* library, QObject *parent)
   : QObject(parent)
 {
-  default_parser_ = new XSPFParser(this);
-  parsers_ << new M3UParser(this);
+  default_parser_ = new XSPFParser(library, this);
+  parsers_ << new M3UParser(library, this);
   parsers_ << default_parser_;
-  parsers_ << new PLSParser(this);
-  parsers_ << new ASXParser(this);
-  parsers_ << new AsxIniParser(this);
+  parsers_ << new PLSParser(library, this);
+  parsers_ << new ASXParser(library, this);
+  parsers_ << new AsxIniParser(library, this);
 }
 
 QStringList PlaylistParser::file_extensions() const {

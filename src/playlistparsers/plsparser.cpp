@@ -20,8 +20,8 @@
 #include <QTextStream>
 #include <QtDebug>
 
-PLSParser::PLSParser(QObject* parent)
-  : ParserBase(parent)
+PLSParser::PLSParser(LibraryBackendInterface* library, QObject* parent)
+  : ParserBase(library, parent)
 {
 }
 
@@ -41,6 +41,12 @@ SongList PLSParser::Load(QIODevice *device, const QDir &dir) const {
     if (key.startsWith("file")) {
       if (!ParseTrackLocation(value, dir, &songs[n]))
         qWarning() << "Failed to parse location: " << value;
+
+      // Load the song from the library if it's there.
+      Song library_song = LoadLibrarySong(songs[n].filename());
+      if (library_song.is_valid())
+        songs[n] = library_song;
+
     } else if (key.startsWith("title")) {
       songs[n].set_title(value);
     } else if (key.startsWith("length")) {

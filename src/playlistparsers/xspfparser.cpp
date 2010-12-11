@@ -24,8 +24,8 @@
 #include <QUrl>
 #include <QXmlStreamReader>
 
-XSPFParser::XSPFParser(QObject* parent)
-    : XMLParser(parent)
+XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
+    : XMLParser(library, parent)
 {
 }
 
@@ -63,6 +63,12 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
             if (!QFile::exists(filename)) {
               return Song();
             }
+
+            // Load the song from the library if it's there.
+            Song library_song = LoadLibrarySong(filename);
+            if (library_song.is_valid())
+              return library_song;
+
             song.InitFromFile(filename, -1);
             return song;
           } else {
@@ -104,7 +110,7 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
   return song;
 }
 
-void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
+void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) const {
   QXmlStreamWriter writer(device);
   writer.writeStartDocument();
   StreamElement playlist("playlist", &writer);
@@ -114,7 +120,7 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
   StreamElement tracklist("trackList", &writer);
   foreach (const Song& song, songs) {
     StreamElement track("track", &writer);
-    writer.writeTextElement("location", MakeRelativeTo(song.filename(), dir));
+    writer.writeTextElement("location", MakeUrl(song.filename()));
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
       writer.writeTextElement("creator", song.artist());
@@ -130,7 +136,7 @@ void XSPFParser::Save(const SongList &songs, QIODevice *device, const QDir &dir)
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-      art = MakeRelativeTo(art, dir);
+      art = MakeUrl(art);
       writer.writeTextElement("image", art);
     }
   }

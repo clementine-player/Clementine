@@ -28,7 +28,7 @@ class M3UParser : public ParserBase {
   Q_OBJECT
 
  public:
-  M3UParser(QObject* parent = 0);
+  M3UParser(LibraryBackendInterface* library, QObject* parent = 0);
 
   QString name() const { return "M3U"; }
   QStringList file_extensions() const { return QStringList() << "m3u" << "m3u8"; }

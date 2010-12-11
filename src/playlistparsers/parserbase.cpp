@@ -16,11 +16,15 @@
 */
 
 #include "parserbase.h"
+#include "library/librarybackend.h"
+#include "library/libraryquery.h"
+#include "library/sqlrow.h"
 
 #include <QUrl>
 
-ParserBase::ParserBase(QObject *parent)
-  : QObject(parent)
+ParserBase::ParserBase(LibraryBackendInterface* library, QObject *parent)
+  : QObject(parent),
+    library_(library)
 {
 }
 
@@ -66,4 +70,31 @@ QString ParserBase::MakeRelativeTo(const QString& filename_or_url,
       return relative;
   }
   return filename_or_url;
+}
+
+QString ParserBase::MakeUrl(const QString& filename_or_url) const {
+  if (filename_or_url.contains(QRegExp("^[a-z]+://"))) {
+    return filename_or_url;
+  }
+
+  return QUrl::fromLocalFile(filename_or_url).toString();
+}
+
+Song ParserBase::LoadLibrarySong(const QString& filename_or_url) const {
+  QFileInfo info;
+
+  if (filename_or_url.contains("://"))
+    info.setFile(QUrl(filename_or_url).path());
+  else
+    info.setFile(filename_or_url);
+
+  LibraryQuery query;
+  query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
+  query.AddWhere("filename", info.canonicalFilePath());
+
+  Song song;
+  if (library_->ExecQuery(&query) && query.Next()) {
+    song.InitFromQuery(query);
+  }
+  return song;
 }

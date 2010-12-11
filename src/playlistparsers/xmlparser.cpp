@@ -24,8 +24,8 @@
 #include <QUrl>
 #include <QXmlStreamReader>
 
-XMLParser::XMLParser(QObject* parent)
-    : ParserBase(parent) {
+XMLParser::XMLParser(LibraryBackendInterface* library, QObject* parent)
+    : ParserBase(library, parent) {
 }
 
 bool XMLParser::ParseUntilElement(QXmlStreamReader* reader, const QString& name) const {
@@ -59,12 +59,4 @@ void XMLParser::IgnoreElement(QXmlStreamReader* reader) const {
         break;
     }
   }
-}
-
-QString XMLParser::MakeRelativeTo(const QString& filename_or_url, const QDir& dir) const {
-  QString file = ParserBase::MakeRelativeTo(filename_or_url, dir);
-  if (!file.contains(QRegExp("^[a-z]+://"))) {
-    return QUrl::fromLocalFile(file).toString();
-  }
-  return file;
 }

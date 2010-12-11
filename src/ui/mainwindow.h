@@ -54,7 +54,6 @@ class OSD;
 class Player;
 class PlaylistBackend;
 class PlaylistManager;
-class PlaylistParser;
 class QueueManager;
 class RadioItem;
 class RadioModel;
@@ -225,7 +224,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   RadioModel* radio_model_;
   PlaylistBackend* playlist_backend_;
   PlaylistManager* playlists_;
-  PlaylistParser* playlist_parser_;
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;

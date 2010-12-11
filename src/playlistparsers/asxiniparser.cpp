@@ -20,8 +20,8 @@
 #include <QTextStream>
 #include <QtDebug>
 
-AsxIniParser::AsxIniParser(QObject* parent)
-  : ParserBase(parent)
+AsxIniParser::AsxIniParser(LibraryBackendInterface* library, QObject* parent)
+  : ParserBase(library, parent)
 {
 }
 
@@ -42,7 +42,13 @@ SongList AsxIniParser::Load(QIODevice *device, const QDir &dir) const {
       Song song;
       if (!ParseTrackLocation(value, dir, &song))
         qWarning() << "Failed to parse location: " << value;
-      ret << song;
+
+      // Load the song from the library if it's there.
+      Song library_song = LoadLibrarySong(song.filename());
+      if (library_song.is_valid())
+        ret << library_song;
+      else
+        ret << song;
     }
   }
 
