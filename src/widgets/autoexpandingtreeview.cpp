@@ -24,10 +24,14 @@ const int AutoExpandingTreeView::kRowsToShow = 50;
 AutoExpandingTreeView::AutoExpandingTreeView(QWidget *parent)
   : QTreeView(parent),
     auto_open_(true),
-    expand_on_reset_(true)
+    expand_on_reset_(true),
+    ignore_next_click_(false)
 {
+  setExpandsOnDoubleClick(false);
+
   connect(this, SIGNAL(expanded(QModelIndex)), SLOT(ItemExpanded(QModelIndex)));
   connect(this, SIGNAL(clicked(QModelIndex)), SLOT(ItemClicked(QModelIndex)));
+  connect(this, SIGNAL(doubleClicked(QModelIndex)), SLOT(ItemDoubleClicked(QModelIndex)));
 }
 
 void AutoExpandingTreeView::reset() {
@@ -72,5 +76,14 @@ void AutoExpandingTreeView::ItemExpanded(const QModelIndex& index) {
 }
 
 void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
+  if (ignore_next_click_) {
+    ignore_next_click_ = false;
+    return;
+  }
+
   setExpanded(index, !isExpanded(index));
+}
+
+void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
+  ignore_next_click_ = true;
 }

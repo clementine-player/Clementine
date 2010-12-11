@@ -43,6 +43,7 @@ class AutoExpandingTreeView : public QTreeView {
  private slots:
   void ItemExpanded(const QModelIndex& index);
   void ItemClicked(const QModelIndex& index);
+  void ItemDoubleClicked(const QModelIndex& index);
 
  private:
   bool RecursivelyExpand(const QModelIndex& index, int* count);
@@ -50,6 +51,8 @@ class AutoExpandingTreeView : public QTreeView {
  private:
   bool auto_open_;
   bool expand_on_reset_;
+
+  bool ignore_next_click_;
 };
 
 #endif // AUTOEXPANDINGTREEVIEW_H
