@@ -225,6 +225,18 @@ void PlaylistView::LoadGeometry() {
   if (state_version < 3) {
     header_->HideSection(Playlist::Column_Comment);
   }
+
+  // Make sure at least one column is visible
+  bool all_hidden = true;
+  for (int i=0 ; i<header_->count() ; ++i) {
+    if (!header_->isSectionHidden(i) && header_->sectionSize(i) > 0) {
+      all_hidden = false;
+      break;
+    }
+  }
+  if (all_hidden) {
+    header_->ShowSection(Playlist::Column_Title);
+  }
 }
 
 void PlaylistView::SaveGeometry() {

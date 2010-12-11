@@ -95,6 +95,18 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
 }
 
 void StretchHeaderView::HideSection(int logical) {
+  // Would this hide the last section?
+  bool all_hidden = true;
+  for (int i=0 ; i<count() ; ++i) {
+    if (i != logical && !isSectionHidden(i) && sectionSize(i) > 0) {
+      all_hidden = false;
+      break;
+    }
+  }
+  if (all_hidden) {
+    return;
+  }
+
   if (!stretch_enabled_) {
     hideSection(logical);
     return;
