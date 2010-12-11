@@ -81,5 +81,6 @@ void MultiLoadingIndicator::paintEvent(QPaintEvent*) {
         kVerticalPadding,
         width() - kHorizontalPadding*2 - spinner_->sizeHint().width() - kSpacing,
         height() - kVerticalPadding*2);
-  p.drawText(text_rect, fontMetrics().elidedText(text_, Qt::ElideRight, text_rect.width()));
+  p.drawText(text_rect, Qt::TextSingleLine | Qt::AlignLeft,
+             fontMetrics().elidedText(text_, Qt::ElideRight, text_rect.width()));
 }
