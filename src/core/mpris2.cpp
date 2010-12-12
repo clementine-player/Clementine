@@ -65,16 +65,41 @@ Mpris2::Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader,
 
   connect(art_loader, SIGNAL(ArtLoaded(Song,QString)), SLOT(ArtLoaded(Song,QString)));
 
-  connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged()));
+  connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(player, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));
+
+  connect(player_->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
+  connect(player_->playlists(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
 }
 
-void Mpris2::EngineStateChanged() {
-  EmitNotification("PlaybackStatus");
+
+// when PlaylistManager gets it ready, we connect PlaylistSequence with this
+void Mpris2::PlaylistManagerInitialized() {
+  connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+          SLOT(ShuffleModeChanged()));
+  connect(player_->playlists()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+          SLOT(RepeatModeChanged()));
+}
+
+void Mpris2::EngineStateChanged(Engine::State newState) {
+  if(newState != Engine::Playing && newState != Engine::Paused) {
+    last_metadata_= QVariantMap();
+    EmitNotification("Metadata");
+  }
+
+  EmitNotification("PlaybackStatus", PlaybackStatus(newState));
 }
 
 void Mpris2::VolumeChanged() {
   EmitNotification("Volume");
+}
+
+void Mpris2::ShuffleModeChanged() {
+  EmitNotification("Shuffle");
+}
+
+void Mpris2::RepeatModeChanged() {
+  EmitNotification("LoopStatus");
 }
 
 void Mpris2::EmitNotification(const QString& name, const QVariant& val) {
@@ -123,6 +148,8 @@ QString Mpris2::Identity() const {
       QCoreApplication::applicationVersion());
 }
 
+// Returning the whole path to the desktop file seems to be inconsistent with the
+// spec but SoundMenu requires this to work this way.
 QString Mpris2::DesktopEntry() const {
   QStringList xdg_data_dirs = QString(getenv("XDG_DATA_DIRS")).split(":");
   xdg_data_dirs.append("/usr/local/share/");
@@ -187,7 +214,11 @@ void Mpris2::Quit() {
 }
 
 QString Mpris2::PlaybackStatus() const {
-  switch (player_->GetState()) {
+  return PlaybackStatus(player_->GetState());
+}
+
+QString Mpris2::PlaybackStatus(Engine::State state) const {
+  switch (state) {
     case Engine::Playing: return "Playing";
     case Engine::Paused:  return "Paused";
     default:              return "Stopped";
@@ -215,25 +246,24 @@ void Mpris2::SetLoopStatus(const QString& value) {
   }
 
   player_->playlists()->active()->sequence()->SetRepeatMode(mode);
-  EmitNotification("LoopStatus", value);
 }
 
 double Mpris2::Rate() const {
   return 1.0;
 }
 
-void Mpris2::SetRate(double) {
-  // Do nothing
+void Mpris2::SetRate(double rate) {
+  if(rate == 0) {
+    mpris1_->player()->Pause();
+  }
 }
 
 bool Mpris2::Shuffle() const {
-  return player_->playlists()->sequence()->shuffle_mode() !=
-      PlaylistSequence::Shuffle_Off;
+  return mpris1_->player()->GetStatus().random;
 }
 
 void Mpris2::SetShuffle(bool value) {
   mpris1_->tracklist()->SetRandom(value);
-  EmitNotification("Shuffle", value);
 }
 
 QVariantMap Mpris2::Metadata() const {
@@ -245,6 +275,13 @@ QString Mpris2::current_track_id() const {
         QString::number(mpris1_->tracklist()->GetCurrentTrack()));
 }
 
+// We send Metadata change notification as soon as the process of
+// changing song starts...
+void Mpris2::CurrentSongChanged(const Song& song) {
+  ArtLoaded(song, "");
+}
+
+// ... and we add the cover information later, when it's available.
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
   last_metadata_ = QVariantMap();
 
@@ -252,18 +289,23 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
   AddMetadata("mpris:trackid", current_track_id(), &last_metadata_);
   AddMetadata("xesam:url", song.filename(), &last_metadata_);
   AddMetadata("xesam:title", song.PrettyTitle(), &last_metadata_);
-  AddMetadata("xesam:artist", QStringList() << song.artist(), &last_metadata_);
+  AddMetadataAsList("xesam:artist", song.artist(), &last_metadata_);
   AddMetadata("xesam:album", song.album(), &last_metadata_);
-  AddMetadata("xesam:albumArtist", song.albumartist(), &last_metadata_);
+  AddMetadataAsList("xesam:albumArtist", song.albumartist(), &last_metadata_);
   AddMetadata("mpris:length", song.length()*1e6, &last_metadata_);
   AddMetadata("xesam:trackNumber", song.track(), &last_metadata_);
-  AddMetadata("xesam:genre", song.genre(), &last_metadata_);
+  AddMetadataAsList("xesam:genre", song.genre(), &last_metadata_);
   AddMetadata("xesam:discNumber", song.disc(), &last_metadata_);
-  AddMetadata("xesam:comment", song.comment(), &last_metadata_);
-  AddMetadata("xesam:contentCreated", QDateTime(QDate(song.year(),1,1)), &last_metadata_);
+  AddMetadataAsList("xesam:comment", song.comment(), &last_metadata_);
+  AddMetadata("xesam:contentCreated", AsMPRISDateTimeType(song.ctime()), &last_metadata_);
+  AddMetadata("xesam:lastUsed", AsMPRISDateTimeType(song.lastplayed()), &last_metadata_);
   AddMetadata("xesam:audioBPM", song.bpm(), &last_metadata_);
-  AddMetadata("xesam:composer", song.composer(), &last_metadata_);
-
+  AddMetadataAsList("xesam:composer", song.composer(), &last_metadata_);
+  AddMetadata("xesam:useCount", song.playcount(), &last_metadata_);
+  AddMetadata("xesam:autoRating", song.score(), &last_metadata_);
+  if (song.rating() != -1.0) {
+    AddMetadata("rating", song.rating() * 5, &last_metadata_);
+  }
   if (!art_uri.isEmpty()) {
     AddMetadata("mpris:artUrl", art_uri, &last_metadata_);
   }
@@ -272,12 +314,11 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
 }
 
 double Mpris2::Volume() const {
-  return double(player_->GetVolume()) / 100;
+  return double(mpris1_->player()->VolumeGet()) / 100;
 }
 
 void Mpris2::SetVolume(double value) {
   player_->SetVolume(value * 100);
-  EmitNotification("Volume",value);
 }
 
 qlonglong Mpris2::Position() const {
@@ -304,8 +345,10 @@ bool Mpris2::CanPlay() const {
   return mpris1_->player()->GetCaps() & CAN_PLAY;
 }
 
+// This one's a bit different than MPRIS 1 - we want this to be true even when
+// the song is already paused.
 bool Mpris2::CanPause() const {
-  return mpris1_->player()->GetCaps() & CAN_PAUSE;
+  return mpris1_->player()->GetCaps() & CAN_PAUSE || PlaybackStatus() == "Paused";
 }
 
 bool Mpris2::CanSeek() const {

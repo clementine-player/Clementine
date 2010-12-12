@@ -65,16 +65,16 @@ inline void AddMetadata(const QString& key, const QString& metadata, QVariantMap
   if (!metadata.isEmpty())   (*map)[key] = metadata;
 }
 
+inline void AddMetadataAsList(const QString& key, const QString& metadata, QVariantMap* map) {
+  if (!metadata.isEmpty())   (*map)[key] =  QStringList() << metadata;
+}
+
 inline void AddMetadata(const QString& key, int metadata, QVariantMap* map) {
   if (metadata > 0)          (*map)[key] = metadata;
 }
 
 inline void AddMetadata(const QString& key, const QDateTime& metadata, QVariantMap* map) {
   if (metadata.isValid())    (*map)[key] = metadata;
-}
-
-inline void AddMetadata(const QString &key, const QStringList& metadata, QVariantMap *map) {
-  if (!metadata.isEmpty())   (*map)[key] = metadata;
 }
 
 } // namespace mpris

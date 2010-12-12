@@ -142,12 +142,19 @@ signals:
 
 private slots:
   void ArtLoaded(const Song& song, const QString& art_uri);
-  void EngineStateChanged();
+  void EngineStateChanged(Engine::State newState);
   void VolumeChanged();
+
+  void PlaylistManagerInitialized();
+  void CurrentSongChanged(const Song& song);
+  void ShuffleModeChanged();
+  void RepeatModeChanged();
 
 private:
   void EmitNotification(const QString& name);
   void EmitNotification(const QString& name, const QVariant& val);
+
+  QString PlaybackStatus(Engine::State state) const;
 
   QString current_track_id() const;
 
@@ -162,6 +169,10 @@ private:
   Player* player_;
   Mpris1* mpris1_;
 };
+
+inline QString AsMPRISDateTimeType(uint time) {
+  return time != -1 ? QDateTime::fromTime_t(time).toString(Qt::ISODate) : "";
+}
 
 } // namespace mpris
 
