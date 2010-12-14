@@ -56,7 +56,7 @@ void SongInfoTextView::resizeEvent(QResizeEvent* e) {
   document()->setTextWidth(w);
   setMinimumHeight(document()->size().height());
 
-  QTextEdit::resizeEvent(e);
+  QTextBrowser::resizeEvent(e);
 }
 
 QSize SongInfoTextView::sizeHint() const {
