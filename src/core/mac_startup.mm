@@ -29,7 +29,6 @@
 #import <Foundation/NSTimer.h>
 #import <Foundation/NSURL.h>
 #import <AppKit/NSNibDeclarations.h>
-#import <Sparkle/SUUpdater.h>
 
 #import <Kernel/AvailabilityMacros.h>
 
@@ -38,6 +37,10 @@
 #include "mac_startup.h"
 #include "macglobalshortcutbackend.h"
 #include "utilities.h"
+
+#ifdef HAVE_SPARKLE
+#import <Sparkle/SUUpdater.h>
+#endif
 
 #include <QCoreApplication>
 #include <QDir>
@@ -177,8 +180,10 @@ void MacMain() {
   [[NSAutoreleasePool alloc] init];
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
-  // Creates and sets the magic global variable for Sparkle.
-  [[SUUpdater sharedUpdater] setDelegate: NSApp];
+  #ifdef HAVE_SPARKLE
+    // Creates and sets the magic global variable for Sparkle.
+    [[SUUpdater sharedUpdater] setDelegate: NSApp];
+  #endif
 }
 
 void SetShortcutHandler(MacGlobalShortcutBackend* handler) {
@@ -190,7 +195,9 @@ void SetApplicationHandler(PlatformInterface* handler) {
 }
 
 void CheckForUpdates() {
+  #ifdef HAVE_SPARKLE
   [[SUUpdater sharedUpdater] checkForUpdates: NSApp];
+  #endif
 }
 
 QString GetBundlePath() {

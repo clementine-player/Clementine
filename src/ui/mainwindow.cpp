@@ -481,10 +481,12 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
 
 #ifdef Q_OS_DARWIN
-  // Add check for updates item to application menu.
-  QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
-  check_updates->setMenuRole(QAction::ApplicationSpecificRole);
-  connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
+  #ifdef HAVE_SPARKLE
+    // Add check for updates item to application menu.
+    QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
+    check_updates->setMenuRole(QAction::ApplicationSpecificRole);
+    connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
+  #endif
 
   // Force this menu to be the app "Preferences".
   ui_->action_configure->setMenuRole(QAction::PreferencesRole);

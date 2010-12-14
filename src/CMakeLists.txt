@@ -4,7 +4,6 @@ set(CMAKE_C_FLAGS "-Wall ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall -Wno-sign-compare ${CMAKE_CXX_FLAGS}")
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${SPARKLE})
 include_directories(../3rdparty/gmock/gtest/include)
 if(WIN32)
   include_directories(../3rdparty/qtwin)
@@ -809,14 +808,16 @@ endif(HAVE_LIBINDICATE)
 if (APPLE)
   target_link_libraries(clementine_lib
     ${GROWL}
-    ${SPARKLE}
     /System/Library/Frameworks/AppKit.framework
     /System/Library/Frameworks/Carbon.framework
     /System/Library/Frameworks/DiskArbitration.framework
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/IOKit.framework
   )
-  include_directories(${SPARKLE}/Headers)
+  if (HAVE_SPARKLE)
+    include_directories(${SPARKLE}/Headers)
+    target_link_libraries(${SPARKLE})
+  endif (HAVE_SPARKLE)
 else (APPLE)
   target_link_libraries(clementine_lib ${QXT_LIBRARIES})
 endif (APPLE)
@@ -888,8 +889,12 @@ if (APPLE)
 
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-  install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
-    DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
+
+  if (HAVE_SPARKLE)
+    install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
+  endif (HAVE_SPARKLE)
+
   install(DIRECTORY "${GROWL}/Versions/Current/Resources"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Growl.framework")
 

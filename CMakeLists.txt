@@ -58,7 +58,11 @@ find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
 if (APPLE)
   find_library(GROWL Growl)
+  option(ENABLE_SPARKLE "Sparkle updating" ON)
   find_library(SPARKLE Sparkle)
+  if (ENABLE_SPARKLE AND SPARKLE)
+    set(HAVE_SPARKLE ON)
+  endif (ENABLE_SPARKLE AND SPARKLE)
   # Uses Darwin kernel version.
   # 9.8.0  -> 10.5/Leopard
   # 10.4.0 -> 10.6/Snow Leopard
@@ -258,4 +262,5 @@ summary_add("devices: GIO backend" HAVE_GIO)
 summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
 summary_add("Wiimote support" ENABLE_WIIMOTEDEV)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)
+summary_add("Sparkle integration" HAVE_SPARKLE)
 summary_show()
