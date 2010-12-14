@@ -23,6 +23,9 @@
 #include "ui_queuemanager.h"
 #include "ui/iconloader.h"
 
+#include <QKeySequence>
+#include <QShortcut>
+
 QueueManager::QueueManager(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_QueueManager),
@@ -41,6 +44,9 @@ QueueManager::QueueManager(QWidget *parent)
   connect(ui_->move_down, SIGNAL(clicked()), SLOT(MoveDown()));
   connect(ui_->move_up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->clear, SIGNAL(clicked()), SLOT(Clear()));
+
+  QShortcut* close = new QShortcut(QKeySequence("Ctrl+w"), this);
+  connect(close, SIGNAL(activated()), SLOT(close()));
 }
 
 QueueManager::~QueueManager() {
