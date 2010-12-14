@@ -25,20 +25,22 @@
 #include "library/sqlrow.h"
 #include "widgets/maclineedit.h"
 
-#include <QSettings>
-#include <QPainter>
-#include <QMenu>
 #include <QActionGroup>
-#include <QListWidget>
+#include <QContextMenuEvent>
 #include <QCryptographicHash>
 #include <QDir>
 #include <QEvent>
-#include <QScrollBar>
-#include <QContextMenuEvent>
-#include <QLabel>
 #include <QFileDialog>
+#include <QKeySequence>
+#include <QLabel>
+#include <QListWidget>
+#include <QMenu>
 #include <QMessageBox>
+#include <QPainter>
 #include <QProgressBar>
+#include <QScrollBar>
+#include <QSettings>
+#include <QShortcut>
 #include <QTimer>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
@@ -92,6 +94,9 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
 
   ui_->albums->setAttribute(Qt::WA_MacShowFocusRect, false);
   ui_->artists->setAttribute(Qt::WA_MacShowFocusRect, false);
+
+  QShortcut* close = new QShortcut(QKeySequence("Ctrl+w"), this);
+  connect(close, SIGNAL(activated()), SLOT(close()));
 }
 
 AlbumCoverManager::~AlbumCoverManager() {
