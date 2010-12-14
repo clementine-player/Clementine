@@ -47,6 +47,7 @@ namespace Utilities {
     Path_AlbumCovers,
     Path_NetworkCache,
     Path_GstreamerRegistry,
+    Path_DefaultMusicLibrary,
   };
   QString GetConfigPath(ConfigPath config);
 }

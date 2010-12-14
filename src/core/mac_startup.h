@@ -23,6 +23,7 @@ void CheckForUpdates();
 QString GetBundlePath();
 QString GetResourcesPath();
 QString GetApplicationSupportPath();
+QString GetMusicDirectory();
 
 bool MigrateLegacyConfigFiles();
 

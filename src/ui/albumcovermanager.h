@@ -28,9 +28,10 @@
 #include "core/backgroundthread.h"
 #include "core/song.h"
 
-class LibraryBackend;
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
+class LibraryBackend;
+class LineEditInterface;
 class Ui_CoverManager;
 
 class QListWidgetItem;
@@ -145,6 +146,8 @@ class AlbumCoverManager : public QMainWindow {
   int jobs_;
   int got_covers_;
   int missing_covers_;
+
+  LineEditInterface* filter_;
 
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);

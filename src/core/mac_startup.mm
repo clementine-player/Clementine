@@ -226,6 +226,24 @@ QString GetApplicationSupportPath() {
   return ret;
 }
 
+QString GetMusicDirectory() {
+  NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
+  [pool init];
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(
+      NSMusicDirectory,
+      NSUserDomainMask,
+      YES);
+  QString ret;
+  if ([paths count] > 0) {
+    NSString* user_path = [paths objectAtIndex:0];
+    ret = QString::fromUtf8([user_path UTF8String]);
+  } else {
+    ret = "~/Music";
+  }
+  [pool drain];
+  return ret;
+}
+
 bool MigrateLegacyConfigFiles() {
   QString old_config_dir = QString("%1/.config/%2").arg(
       QDir::homePath(), QCoreApplication::organizationName());

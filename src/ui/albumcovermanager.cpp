@@ -23,6 +23,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
+#include "widgets/maclineedit.h"
 
 #include <QSettings>
 #include <QPainter>
@@ -141,6 +142,19 @@ void AlbumCoverManager::Init() {
   connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
   connect(ui_->action_load, SIGNAL(triggered()), SLOT(LoadSelectedToPlaylist()));
   connect(ui_->action_search_manual, SIGNAL(triggered()), SLOT(SearchManual()));
+
+  #ifdef Q_OS_DARWIN
+    MacLineEdit* lineedit = new MacLineEdit(ui_->filter->parentWidget());
+    lineedit->SetHint(ui_->filter->GetHint());
+    delete ui_->filter;
+    ui_->horizontalLayout->insertWidget(0, lineedit);
+    filter_ = lineedit;
+    delete ui_->clear;
+    connect(lineedit, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
+    lineedit->show();
+  #else
+    filter_ = ui_->filter;
+  #endif
 
   // Restore settings
   QSettings s;
@@ -285,7 +299,7 @@ void AlbumCoverManager::CoverImageLoaded(quint64 id, const QImage &image) {
 }
 
 void AlbumCoverManager::UpdateFilter() {
-  const QString filter = ui_->filter->text().toLower();
+  const QString filter = filter_->text().toLower();
   const bool hide_with_covers = filter_without_covers_->isChecked();
   const bool hide_without_covers = filter_with_covers_->isChecked();
 

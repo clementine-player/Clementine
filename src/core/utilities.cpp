@@ -220,6 +220,13 @@ QString GetConfigPath(ConfigPath config) {
       return GetConfigPath(Path_Root) +
           QString("/gst-registry-%1-bin").arg(QCoreApplication::applicationVersion());
 
+    case Path_DefaultMusicLibrary:
+      #ifdef Q_OS_DARWIN
+        return mac::GetMusicDirectory();
+      #else
+        return QDir::homePath();
+      #endif
+
     default:
       qFatal("%s", Q_FUNC_INFO);
       return QString::null;

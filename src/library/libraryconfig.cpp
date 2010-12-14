@@ -22,6 +22,7 @@
 #include "ui_libraryconfig.h"
 #include "playlist/playlistdelegates.h"
 #include "ui/iconloader.h"
+#include "core/utilities.h"
 
 #include <QFileDialog>
 #include <QSettings>
@@ -68,7 +69,8 @@ void LibraryConfig::Add() {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  QString path(settings.value("last_path", QDir::homePath()).toString());
+  QString path(settings.value("last_path",
+      Utilities::GetConfigPath(Utilities::Path_DefaultMusicLibrary)).toString());
   path = QFileDialog::getExistingDirectory(this, tr("Add directory..."), path);
 
   if (!path.isNull()) {
