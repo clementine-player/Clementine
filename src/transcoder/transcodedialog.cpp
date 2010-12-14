@@ -84,6 +84,8 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   cancel_button_ = ui_->button_box->button(QDialogButtonBox::Cancel);
   close_button_ = ui_->button_box->button(QDialogButtonBox::Close);
 
+  close_button_->setShortcut(QKeySequence::Close);
+
   // Hide elements
   cancel_button_->hide();
   ui_->progress_group->hide();
