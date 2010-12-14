@@ -89,6 +89,9 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   // Set up the status bar
   statusBar()->addPermanentWidget(progress_bar_);
   progress_bar_->hide();
+
+  ui_->albums->setAttribute(Qt::WA_MacShowFocusRect, false);
+  ui_->artists->setAttribute(Qt::WA_MacShowFocusRect, false);
 }
 
 AlbumCoverManager::~AlbumCoverManager() {
