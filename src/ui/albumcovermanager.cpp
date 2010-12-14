@@ -95,7 +95,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   ui_->albums->setAttribute(Qt::WA_MacShowFocusRect, false);
   ui_->artists->setAttribute(Qt::WA_MacShowFocusRect, false);
 
-  QShortcut* close = new QShortcut(QKeySequence("Ctrl+w"), this);
+  QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
 }
 

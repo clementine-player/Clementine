@@ -45,7 +45,7 @@ QueueManager::QueueManager(QWidget *parent)
   connect(ui_->move_up, SIGNAL(clicked()), SLOT(MoveUp()));
   connect(ui_->clear, SIGNAL(clicked()), SLOT(Clear()));
 
-  QShortcut* close = new QShortcut(QKeySequence("Ctrl+w"), this);
+  QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
 }
 

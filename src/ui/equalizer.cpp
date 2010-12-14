@@ -20,10 +20,11 @@
 #include "widgets/equalizerslider.h"
 #include "ui/iconloader.h"
 
-#include <QSettings>
-#include <QtDebug>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QSettings>
+#include <QShortcut>
+#include <QtDebug>
 
 // We probably don't need to translate these, right?
 const char* Equalizer::kGainText[] = {
@@ -61,6 +62,9 @@ Equalizer::Equalizer(QWidget *parent)
   connect(ui_->preset, SIGNAL(currentIndexChanged(QString)), SLOT(PresetChanged(QString)));
   connect(ui_->preset_save, SIGNAL(clicked()), SLOT(SavePreset()));
   connect(ui_->preset_del, SIGNAL(clicked()), SLOT(DelPreset()));
+
+  QShortcut* close = new QShortcut(QKeySequence::Close, this);
+  connect(close, SIGNAL(activated()), SLOT(close()));
 }
 
 Equalizer::~Equalizer() {

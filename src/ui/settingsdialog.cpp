@@ -211,6 +211,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->b_show_tray_icon_->setEnabled(false);
   ui_->startup_group_->setEnabled(false);
 #endif
+
+  ui_->buttonBox->button(QDialogButtonBox::Cancel)->setShortcut(QKeySequence::Close);
 }
 
 SettingsDialog::~SettingsDialog() {

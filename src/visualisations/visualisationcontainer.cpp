@@ -24,15 +24,15 @@
 #include "ui/iconloader.h"
 #include "ui/screensaver.h"
 
-#include <QHBoxLayout>
-#include <QSettings>
 #include <QGLWidget>
-#include <QtDebug>
 #include <QGraphicsProxyWidget>
-#include <QMenu>
-#include <QSignalMapper>
-
+#include <QHBoxLayout>
 #include <QLabel>
+#include <QMenu>
+#include <QSettings>
+#include <QShortcut>
+#include <QSignalMapper>
+#include <QtDebug>
 
 const char* VisualisationContainer::kSettingsGroup = "Visualisations";
 const int VisualisationContainer::kDefaultWidth = 828;
@@ -59,6 +59,9 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
   }
   fps_ = s.value("fps", kDefaultFps).toInt();
   size_ = s.value("size", kDefaultTextureSize).toInt();
+
+  QShortcut* close = new QShortcut(QKeySequence::Close, this);
+  connect(close, SIGNAL(activated()), SLOT(close()));
 }
 
 void VisualisationContainer::Init() {
