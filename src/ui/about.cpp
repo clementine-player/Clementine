@@ -19,6 +19,7 @@
 #include "ui_about.h"
 
 #include <QCoreApplication>
+#include <QPushButton>
 
 const char* About::kUrl = "http://www.clementine-player.org/";
 
@@ -51,6 +52,8 @@ About::About(QWidget *parent)
   qSort(thanks_to_);
 
   ui_.content->setHtml(MakeHtml());
+
+  ui_.buttonBox->button(QDialogButtonBox::Close)->setShortcut(QKeySequence::Close);
 }
 
 QString About::MakeHtml() const {
