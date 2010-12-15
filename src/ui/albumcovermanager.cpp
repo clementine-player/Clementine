@@ -510,8 +510,11 @@ void AlbumCoverManager::ChooseManualCover() {
     return;
   QListWidgetItem* item = context_menu_items_[0];
 
+  QString dir = InitialPathForOpenCoverDialog(item->data(Role_PathAutomatic).toString(),
+                                              item->data(Role_FirstFilename).toString());
+
   QString cover = QFileDialog::getOpenFileName(
-      this, tr("Choose manual cover"), item->data(Role_PathAutomatic).toString(),
+      this, tr("Choose manual cover"), dir,
       tr("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)") + ";;" +
       tr("All files (*)"));
   if (cover.isNull())
@@ -531,6 +534,18 @@ void AlbumCoverManager::ChooseManualCover() {
   quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
   item->setData(Role_PathManual, cover);
   cover_loading_tasks_[id] = item;
+}
+
+QString AlbumCoverManager::InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const {
+  if(!path_automatic.isEmpty() && path_automatic != "embedded") {
+    return path_automatic;
+  } else if (!first_file_name.isEmpty() && first_file_name.contains('/')) {
+    // we get rid of the filename because it's extension is screwing with the dialog's
+    // filters
+    return first_file_name.section('/', 0, -2);
+  } else {
+    return QString();
+  }
 }
 
 void AlbumCoverManager::UnsetCover() {

@@ -111,6 +111,8 @@ class AlbumCoverManager : public QMainWindow {
     Hide_WithoutCovers,
   };
 
+  QString InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const;
+
   void CancelRequests();
 
   void UpdateStatusText();
