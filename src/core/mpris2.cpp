@@ -360,19 +360,29 @@ bool Mpris2::CanControl() const {
 }
 
 void Mpris2::Next() {
-  player_->Next();
+  if(CanGoNext()) {
+    player_->Next();
+  }
 }
 
 void Mpris2::Previous() {
-  player_->Previous();
+  if(CanGoPrevious()) {
+    player_->Previous();
+  }
 }
 
 void Mpris2::Pause() {
-  player_->Pause();
+  if(CanPause() && player_->GetState() != Engine::Paused) {
+    player_->Pause();
+  }
 }
 
 void Mpris2::PlayPause() {
-  player_->PlayPause();
+  if(CanPause()) {
+    player_->PlayPause();
+  } else {
+    // TODO: raise an error
+  }
 }
 
 void Mpris2::Stop() {
@@ -380,18 +390,25 @@ void Mpris2::Stop() {
 }
 
 void Mpris2::Play() {
-  player_->Play();
+  if(CanPlay()) {
+    player_->Play();
+  }
 }
 
 void Mpris2::Seek(qlonglong offset) {
-  player_->Seek((Position() + offset) / 1e6);
+  if(CanSeek()) {
+    player_->Seek((Position() + offset) / 1e6);
+  }
 }
 
 void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
-  if (trackId.path() != current_track_id())
-    return;
+  if (CanSeek() && trackId.path() == current_track_id() && offset >= 0) {
+    offset /= 1e6;
 
-  player_->Seek(offset / 1e6);
+    if(offset < player_->GetCurrentItem()->Metadata().length()) {
+      player_->Seek(offset);
+    }
+  }
 }
 
 void Mpris2::OpenUri(const QString& uri) {

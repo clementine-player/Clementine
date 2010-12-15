@@ -165,6 +165,7 @@ QString SearchTerm::FieldColumnName(Field field) {
     case Field_Composer:    return "composer";
     case Field_Genre:       return "genre";
     case Field_Comment:     return "comment";
+    case Field_Filepath:    return "filename";
     case FieldCount:        Q_ASSERT(0);
   }
   return QString();
@@ -194,6 +195,7 @@ QString SearchTerm::FieldName(Field field) {
     case Field_Composer:    return Playlist::column_name(Playlist::Column_Composer);
     case Field_Genre:       return Playlist::column_name(Playlist::Column_Genre);
     case Field_Comment:     return QObject::tr("Comment");
+    case Field_Filepath:    return Playlist::column_name(Playlist::Column_Filename);
     case FieldCount:        Q_ASSERT(0);
   }
   return QString();

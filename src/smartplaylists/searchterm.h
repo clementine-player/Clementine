@@ -49,6 +49,7 @@ public:
     Field_SkipCount,
     Field_LastPlayed,
     Field_Comment,
+    Field_Filepath,
 
     FieldCount
   };
