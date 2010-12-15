@@ -46,6 +46,7 @@ class FileView : public QWidget {
   void SetTaskManager(TaskManager* task_manager);
 
   void showEvent(QShowEvent*);
+  void keyPressEvent(QKeyEvent* e);
 
  signals:
   void PathChanged(const QString& path);

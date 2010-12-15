@@ -22,6 +22,7 @@
 #include "ui/iconloader.h"
 #include "ui/organiseerrordialog.h"
 
+#include <QKeyEvent>
 #include <QFileSystemModel>
 #include <QMessageBox>
 #include <QScrollBar>
@@ -197,4 +198,15 @@ void FileView::showEvent(QShowEvent* e) {
 
   if (!lazy_set_path_.isEmpty())
     ChangeFilePathWithoutUndo(lazy_set_path_);
+}
+
+void FileView::keyPressEvent(QKeyEvent* e) {
+  switch (e->key()) {
+    case Qt::Key_Back:
+    case Qt::Key_Backspace:
+      ui_->up->click();
+      break;
+  }
+
+  QWidget::keyPressEvent(e);
 }
