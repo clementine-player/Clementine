@@ -118,6 +118,11 @@ void StretchHeaderView::HideSection(int logical) {
 }
 
 void StretchHeaderView::ShowSection(int logical) {
+  // makes sure the column will apear no matter what
+  if (sectionSize(logical) < 10) {
+    resizeSection(logical, 10);
+  }
+
   if (!stretch_enabled_) {
     showSection(logical);
     return;
