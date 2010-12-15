@@ -26,7 +26,7 @@ class StretchHeaderView : public QHeaderView {
 public:
   StretchHeaderView(Qt::Orientation orientation, QWidget* parent = 0);
 
-  static const float kMinimumColumnWidth;
+  static const int kMinimumColumnWidth;
 
   void setModel(QAbstractItemModel* model);
 
@@ -49,6 +49,7 @@ protected:
   void resizeEvent(QResizeEvent* event);
 
 private:
+  void AssertMinimalColumnWidth(int logical);
   void NormaliseWidths(const QList<int>& sections = QList<int>());
   void UpdateWidths(const QList<int>& sections = QList<int>());
 
