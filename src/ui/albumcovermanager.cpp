@@ -339,7 +339,8 @@ bool AlbumCoverManager::ShouldHide(
 
   QStringList query = filter.split(' ');
   foreach (const QString& s, query) {
-    if (!item.text().contains(s, Qt::CaseInsensitive)) {
+    if (!item.text().contains(s, Qt::CaseInsensitive)
+        && !item.data(Role_ArtistName).toString().contains(s, Qt::CaseInsensitive)) {
       return true;
     }
   }
