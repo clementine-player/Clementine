@@ -35,7 +35,8 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   : QObject(parent),
     gnome_backend_(NULL),
     system_backend_(NULL),
-    use_gnome_(false)
+    use_gnome_(false),
+    rating_signals_mapper_(new QSignalMapper(this))
 {
   settings_.beginGroup(kSettingsGroup);
 
@@ -55,6 +56,15 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   AddShortcut("show_hide", tr("Show/Hide"), SIGNAL(ShowHide()));
   AddShortcut("show_osd", tr("Show OSD"), SIGNAL(ShowOSD()));
 
+  AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"), rating_signals_mapper_, 0);
+  AddRatingShortcut("rate_one_star", tr("Rate the current song 1 star"), rating_signals_mapper_, 1);
+  AddRatingShortcut("rate_two_star", tr("Rate the current song 2 stars"), rating_signals_mapper_, 2);
+  AddRatingShortcut("rate_three_star", tr("Rate the current song 3 stars"), rating_signals_mapper_, 3);
+  AddRatingShortcut("rate_four_star", tr("Rate the current song 4 stars"), rating_signals_mapper_, 4);
+  AddRatingShortcut("rate_five_star", tr("Rate the current song 5 stars"), rating_signals_mapper_, 5);
+
+  connect(rating_signals_mapper_, SIGNAL(mapped(int)), SIGNAL(RateCurrentSong(int)));
+
   // Create backends - these do the actual shortcut registration
   if (IsGsdAvailable())
     gnome_backend_ = new GnomeGlobalShortcutBackend(this);
@@ -68,9 +78,23 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   ReloadSettings();
 }
 
-void GlobalShortcuts::AddShortcut(const QString &id, const QString &name,
+void GlobalShortcuts::AddShortcut(const QString& id, const QString& name,
                                   const char* signal,
-                                  const QKeySequence &default_key) {
+                                  const QKeySequence& default_key) {
+  Shortcut shortcut = AddShortcut(id, name, default_key);
+  connect(shortcut.action, SIGNAL(triggered()), this, signal);
+}
+
+void GlobalShortcuts::AddRatingShortcut(const QString& id, const QString& name,
+                                        QSignalMapper* mapper, int rating,
+                                        const QKeySequence& default_key) {
+  Shortcut shortcut = AddShortcut(id, name, default_key);
+  connect(shortcut.action, SIGNAL(triggered()), mapper, SLOT(map()));
+  mapper->setMapping(shortcut.action, rating);
+}
+
+GlobalShortcuts::Shortcut GlobalShortcuts::AddShortcut(const QString& id, const QString& name,
+                                                       const QKeySequence& default_key) {
   Shortcut shortcut;
   shortcut.action = new QAction(name, this);
   shortcut.action->setShortcut(QKeySequence::fromString(
@@ -78,9 +102,9 @@ void GlobalShortcuts::AddShortcut(const QString &id, const QString &name,
   shortcut.id = id;
   shortcut.default_key = default_key;
 
-  connect(shortcut.action, SIGNAL(triggered()), this, signal);
-
   shortcuts_[id] = shortcut;
+
+  return shortcut;
 }
 
 bool GlobalShortcuts::IsGsdAvailable() const {

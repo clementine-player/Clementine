@@ -121,10 +121,14 @@ class Playlist : public QAbstractListModel {
   Queue* queue() const { return queue_; }
 
   int id() const { return id_; }
-  int current_index() const;
-  int last_played_index() const;
-  int next_index() const;
-  int previous_index() const;
+
+  int current_row() const;
+  int last_played_row() const;
+  int next_row() const;
+  int previous_row() const;
+
+  const QModelIndex current_index() const;
+
   bool stop_after_current() const;
   bool is_dynamic() const { return dynamic_playlist_; }
 
@@ -160,6 +164,9 @@ class Playlist : public QAbstractListModel {
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 
+  // Changes rating of a song to the given value asynchronously
+  void RateSong(const QModelIndex& index, double rating);
+
   // QAbstractListModel
   int rowCount(const QModelIndex& = QModelIndex()) const { return items_.count(); }
   int columnCount(const QModelIndex& = QModelIndex()) const { return ColumnCount; }
@@ -175,7 +182,7 @@ class Playlist : public QAbstractListModel {
   bool removeRows(int row, int count, const QModelIndex& parent = QModelIndex());
 
  public slots:
-  void set_current_index(int index);
+  void set_current_row(int index);
   void Paused();
   void Playing();
   void Stopped();

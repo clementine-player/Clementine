@@ -116,7 +116,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistQueue();
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
-  void PlaylistSongRated(const QModelIndex& index, double rating);
   void EditTracks();
   void RenumberTracks();
   void SelectionSetValue();

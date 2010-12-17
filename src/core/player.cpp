@@ -149,7 +149,7 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
 
   case PlaylistItem::SpecialLoadResult::TrackAvailable: {
     // Might've been an async load, so check we're still on the same item
-    int current_index = playlists_->active()->current_index();
+    int current_index = playlists_->active()->current_row();
     if (current_index == -1)
       return;
 
@@ -197,9 +197,9 @@ void Player::NextInternal(Engine::TrackChangeType change) {
 }
 
 void Player::NextItem(Engine::TrackChangeType change) {
-  int i = playlists_->active()->next_index();
+  int i = playlists_->active()->next_row();
   if (i == -1) {
-    playlists_->active()->set_current_index(i);
+    playlists_->active()->set_current_row(i);
     emit PlaylistFinished();
     Stop();
     return;
@@ -242,8 +242,8 @@ void Player::PlayPause() {
     if (playlists_->active()->rowCount() == 0)
       break;
 
-             int i = playlists_->active()->current_index();
-    if (i == -1) i = playlists_->active()->last_played_index();
+             int i = playlists_->active()->current_row();
+    if (i == -1) i = playlists_->active()->last_played_row();
     if (i == -1) i = 0;
 
     PlayAt(i, Engine::First, true);
@@ -257,13 +257,13 @@ void Player::Stop() {
     emit TrackSkipped(current_item_);
   }
   engine_->Stop();
-  playlists_->active()->set_current_index(-1);
+  playlists_->active()->set_current_row(-1);
   current_item_.reset();
 }
 
 void Player::Previous() {
-  int i = playlists_->active()->previous_index();
-  playlists_->active()->set_current_index(i);
+  int i = playlists_->active()->previous_row();
+  playlists_->active()->set_current_row(i);
   if (i == -1) {
     Stop();
     return;
@@ -305,8 +305,8 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
   }
 
   if (reshuffle)
-    playlists_->active()->set_current_index(-1);
-  playlists_->active()->set_current_index(index);
+    playlists_->active()->set_current_row(-1);
+  playlists_->active()->set_current_row(index);
 
   current_item_ = playlists_->active()->current_item();
 
@@ -427,7 +427,7 @@ void Player::TrackAboutToEnd() {
     // But, if there's no next track and we don't want to fade out, then do
     // nothing and just let the track finish to completion.
     if (!engine_->is_fadeout_enabled() &&
-        playlists_->active()->next_index() == -1)
+        playlists_->active()->next_row() == -1)
       return;
 
     NextInternal(Engine::Auto);
@@ -436,11 +436,11 @@ void Player::TrackAboutToEnd() {
     // gap between songs.
     if (current_item_->options() & PlaylistItem::ContainsMultipleTracks)
       return;
-    if (playlists_->active()->next_index() == -1)
+    if (playlists_->active()->next_row() == -1)
       return;
 
     shared_ptr<PlaylistItem> item = playlists_->active()->item_at(
-        playlists_->active()->next_index());
+        playlists_->active()->next_row());
     if (!item)
       return;
 

@@ -227,11 +227,11 @@ int Mpris1Player::GetCaps(Engine::State state) const {
     }
   }
 
-  if (playlists->active()->next_index() != -1 ||
+  if (playlists->active()->next_row() != -1 ||
       playlists->active()->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
     caps |= CAN_GO_NEXT;
   }
-  if (playlists->active()->previous_index() != -1) {
+  if (playlists->active()->previous_row() != -1) {
     caps |= CAN_GO_PREV;
   }
 
@@ -265,7 +265,7 @@ void Mpris1TrackList::DelTrack(int index) {
 }
 
 int Mpris1TrackList::GetCurrentTrack() const {
-  return player_->playlists()->active()->current_index();
+  return player_->playlists()->active()->current_row();
 }
 
 int Mpris1TrackList::GetLength() const {

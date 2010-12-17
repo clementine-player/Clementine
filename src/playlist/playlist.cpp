@@ -333,11 +333,15 @@ void Playlist::ItemReloadComplete() {
   }
 }
 
-int Playlist::current_index() const {
+int Playlist::current_row() const {
   return current_item_index_.isValid() ? current_item_index_.row() : -1;
 }
 
-int Playlist::last_played_index() const {
+const QModelIndex Playlist::current_index() const {
+  return current_item_index_;
+}
+
+int Playlist::last_played_row() const {
   return last_played_item_index_.isValid() ? last_played_item_index_.row() : -1;
 }
 
@@ -433,9 +437,9 @@ int Playlist::PreviousVirtualIndex(int i) const {
   return -1;
 }
 
-int Playlist::next_index() const {
+int Playlist::next_row() const {
   // Did we want to stop after this track?
-  if (stop_after_.isValid() && current_index() == stop_after_.row())
+  if (stop_after_.isValid() && current_row() == stop_after_.row())
     return -1;
 
   // Any queued items take priority
@@ -467,7 +471,7 @@ int Playlist::next_index() const {
   return virtual_items_[next_virtual_index];
 }
 
-int Playlist::previous_index() const {
+int Playlist::previous_row() const {
   int prev_virtual_index = PreviousVirtualIndex(current_virtual_index_);
   if (prev_virtual_index < 0) {
     // We've gone off the beginning of the playlist.
@@ -492,7 +496,7 @@ int Playlist::previous_index() const {
   return virtual_items_[prev_virtual_index];
 }
 
-void Playlist::set_current_index(int i) {
+void Playlist::set_current_row(int i) {
   QModelIndex old_current = current_item_index_;
   ClearStreamMetadata();
 
@@ -715,7 +719,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
       changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
     }
   }
-  current_virtual_index_ = virtual_items_.indexOf(current_index());
+  current_virtual_index_ = virtual_items_.indexOf(current_row());
 
   layoutChanged();
   Save();
@@ -759,7 +763,7 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
       changePersistentIndex(pidx, index(pidx.row() + d, pidx.column(), QModelIndex()));
     }
   }
-  current_virtual_index_ = virtual_items_.indexOf(current_index());
+  current_virtual_index_ = virtual_items_.indexOf(current_row());
 
   layoutChanged();
   Save();
@@ -1020,7 +1024,7 @@ void Playlist::Save() const {
   if (!backend_ || is_loading_)
     return;
 
-  backend_->SavePlaylistAsync(id_, items_, last_played_index(), dynamic_playlist_);
+  backend_->SavePlaylistAsync(id_, items_, last_played_row(), dynamic_playlist_);
 }
 
 namespace {
@@ -1118,10 +1122,10 @@ PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
   }
 
   // Reset current_virtual_index_
-  if (current_index() == -1)
+  if (current_row() == -1)
     current_virtual_index_ = -1;
   else
-    current_virtual_index_ = virtual_items_.indexOf(current_index());
+    current_virtual_index_ = virtual_items_.indexOf(current_row());
 
   Save();
   return ret;
@@ -1263,6 +1267,13 @@ void Playlist::ReloadItems(const QList<int>& rows) {
   }
 }
 
+void Playlist::RateSong(const QModelIndex& index, double rating) {
+  PlaylistItemPtr item = item_at(index.row());
+  if (item && item->IsLocalLibraryItem()) {
+    library_->UpdateSongRatingAsync(item->Metadata().id(), rating);
+  }
+}
+
 void Playlist::Shuffle() {
   layoutAboutToBeChanged();
 
@@ -1279,7 +1290,7 @@ void Playlist::Shuffle() {
         changePersistentIndex(pidx, index(i, pidx.column(), QModelIndex()));
     }
   }
-  current_virtual_index_ = virtual_items_.indexOf(current_index());
+  current_virtual_index_ = virtual_items_.indexOf(current_row());
 
   layoutChanged();
 
@@ -1293,8 +1304,8 @@ void Playlist::Shuffle() {
 void Playlist::ReshuffleIndices() {
   if (!is_shuffled_) {
     std::sort(virtual_items_.begin(), virtual_items_.end());
-    if (current_index() != -1)
-      current_virtual_index_ = virtual_items_.indexOf(current_index());
+    if (current_row() != -1)
+      current_virtual_index_ = virtual_items_.indexOf(current_row());
   } else {
     QList<int>::iterator begin = virtual_items_.begin();
     if (current_virtual_index_ != -1)

@@ -85,6 +85,10 @@ public slots:
   void SetActivePaused();
   void SetActiveStopped();
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
+  // Rate current song using 0.0 - 1.0 scale.
+  void RateCurrentSong(double rating);
+  // Rate current song using 0 - 5 scale.
+  void RateCurrentSong(int rating);
 
   void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator, bool as_new, bool clear);
 

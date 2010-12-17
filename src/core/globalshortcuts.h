@@ -26,6 +26,7 @@
 class QAction;
 
 class GlobalShortcutBackend;
+class QSignalMapper;
 
 class GlobalShortcuts : public QObject {
   Q_OBJECT
@@ -67,10 +68,14 @@ signals:
   void SeekBackward();
   void ShowHide();
   void ShowOSD();
+  void RateCurrentSong(int);
 
 private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,
                    const QKeySequence& default_key = QKeySequence(0));
+  void AddRatingShortcut(const QString& id, const QString& name, QSignalMapper* mapper,
+                         int rating, const QKeySequence& default_key = QKeySequence(0));
+  Shortcut AddShortcut(const QString& id, const QString& name, const QKeySequence& default_key);
 
 private:
   GlobalShortcutBackend* gnome_backend_;
@@ -80,6 +85,7 @@ private:
   QSettings settings_;
 
   bool use_gnome_;
+  QSignalMapper* rating_signals_mapper_;
 };
 
 #endif

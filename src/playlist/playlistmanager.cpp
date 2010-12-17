@@ -195,7 +195,7 @@ void PlaylistManager::SetActivePlaylist(int id) {
   // Kinda a hack: unset the current item from the old active playlist before
   // setting the new one
   if (active_ != -1 && active_ != id)
-    active()->set_current_index(-1);
+    active()->set_current_row(-1);
 
   active_ = id;
   emit ActiveChanged(active());
@@ -225,6 +225,14 @@ void PlaylistManager::SetActiveStopped() {
 
 void PlaylistManager::SetActiveStreamMetadata(const QUrl &url, const Song &song) {
   active()->SetStreamMetadata(url, song);
+}
+
+void PlaylistManager::RateCurrentSong(double rating) {
+  active()->RateSong(active()->current_index(), rating);
+}
+
+void PlaylistManager::RateCurrentSong(int rating) {
+  RateCurrentSong(rating / 5.0);
 }
 
 void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {

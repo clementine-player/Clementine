@@ -380,7 +380,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
-  connect(ui_->playlist->view(), SIGNAL(SongRatingSet(QModelIndex,double)), SLOT(PlaylistSongRated(QModelIndex,double)));
 
   connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
 
@@ -511,6 +510,8 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
+
+  connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)), playlists_, SLOT(RateCurrentSong(int)));
 
   // Fancy tabs
   connect(ui_->tabs, SIGNAL(ModeChanged(FancyTabWidget::Mode)), SLOT(SaveGeometry()));
@@ -905,7 +906,7 @@ void MainWindow::ToggleShowHide() {
 }
 
 void MainWindow::StopAfterCurrent() {
-  playlists_->current()->StopAfter(playlists_->current()->current_index());
+  playlists_->current()->StopAfter(playlists_->current()->current_row());
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
@@ -1051,7 +1052,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   playlist_menu_index_ = source_index;
 
   // Is this song currently playing?
-  if (playlists_->current()->current_index() == source_index.row() && player_->GetState() == Engine::Playing) {
+  if (playlists_->current()->current_row() == source_index.row() && player_->GetState() == Engine::Playing) {
     playlist_play_pause_->setText(tr("Pause"));
     playlist_play_pause_->setIcon(IconLoader::Load("media-playback-pause"));
   } else {
@@ -1062,7 +1063,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   // Are we allowed to pause?
   if (index.isValid()) {
     playlist_play_pause_->setEnabled(
-        playlists_->current()->current_index() != source_index.row() ||
+        playlists_->current()->current_row() != source_index.row() ||
         ! (playlists_->current()->item_at(source_index.row())->options() & PlaylistItem::PauseDisabled));
   } else {
     playlist_play_pause_->setEnabled(false);
@@ -1154,7 +1155,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 }
 
 void MainWindow::PlaylistPlay() {
-  if (playlists_->current()->current_index() == playlist_menu_index_.row()) {
+  if (playlists_->current()->current_row() == playlist_menu_index_.row()) {
     player_->PlayPause();
   } else {
     PlayIndex(playlist_menu_index_);
@@ -1341,15 +1342,6 @@ void MainWindow::PlaylistRemoveCurrent() {
 void MainWindow::PlaylistEditFinished(const QModelIndex& index) {
   if (index == playlist_menu_index_)
     SelectionSetValue();
-}
-
-void MainWindow::PlaylistSongRated(const QModelIndex& index, double rating) {
-  const QModelIndex source_index =
-      playlists_->current()->proxy()->mapToSource(index);
-  PlaylistItemPtr item(playlists_->current()->item_at(source_index.row()));
-  if (item && item->IsLocalLibraryItem()) {
-    library_->backend()->UpdateSongRatingAsync(item->Metadata().id(), rating);
-  }
 }
 
 void MainWindow::CommandlineOptionsReceived(const QByteArray& serialized_options) {

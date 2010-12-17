@@ -601,12 +601,12 @@ void PlaylistView::mousePressEvent(QMouseEvent* event) {
       // Update all the selected items
       foreach (const QModelIndex& index, selectedIndexes()) {
         if (index.data(Playlist::Role_CanSetRating).toBool()) {
-          emit SongRatingSet(index, new_rating);
+          playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
         }
       }
     } else {
       // Update only this item
-      emit SongRatingSet(index, new_rating);
+      playlist_->RateSong(playlist_->proxy()->mapToSource(index), new_rating);
     }
   } else {
     QTreeView::mousePressEvent(event);
@@ -645,11 +645,11 @@ void PlaylistView::MaybeAutoscroll() {
 void PlaylistView::JumpToCurrentlyPlayingTrack() {
   Q_ASSERT(playlist_);
 
-  if (playlist_->current_index() == -1)
+  if (playlist_->current_row() == -1)
     return;
 
   QModelIndex current = playlist_->proxy()->mapFromSource(
-      playlist_->index(playlist_->current_index(), 0));
+      playlist_->index(playlist_->current_row(), 0));
   if (!current.isValid())
     return;
 
