@@ -24,6 +24,7 @@
 
 #include <QtDebug>
 #include <QAction>
+#include <QSignalMapper>
 
 #ifdef QT_DBUS_LIB
 #  include <QtDBus>
