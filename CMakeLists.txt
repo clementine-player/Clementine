@@ -229,7 +229,15 @@ else (USE_SYSTEM_QXT)
   endif (NOT APPLE)
 endif (USE_SYSTEM_QXT)
 
-set(ECHONEST_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/3rdparty/libechonest)
+# Use system libechonest if it's available
+find_path(ECHONEST_INCLUDE_DIRS echonest/echonest_export.h)
+find_library(ECHONEST_LIBRARIES echonest)
+if(NOT ECHONEST_INCLUDE_DIRS OR NOT ECHONEST_LIBRARIES)
+  add_subdirectory(3rdparty/libechonest)
+  set(ECHONEST_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/3rdparty/libechonest)
+  set(ECHONEST_LIBRARIES echonest)
+endif(NOT ECHONEST_INCLUDE_DIRS OR NOT ECHONEST_LIBRARIES)
+
 
 # Subdirectories
 add_subdirectory(src)
@@ -237,7 +245,6 @@ if (WIN32)
   add_subdirectory(3rdparty/qtwin)
 endif (WIN32)
 add_subdirectory(3rdparty/universalchardet)
-add_subdirectory(3rdparty/libechonest)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)

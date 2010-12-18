@@ -770,7 +770,7 @@ add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
   chardet
-  echonest
+  ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
