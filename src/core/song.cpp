@@ -969,7 +969,7 @@ QString Song::PrettyTitle() const {
   QString title(d->title_);
 
   if (title.isEmpty())
-    title = QFileInfo(d->filename_).baseName();
+    title = d->basefilename_;
 
   return title;
 }
@@ -978,7 +978,7 @@ QString Song::PrettyTitleWithArtist() const {
   QString title(d->title_);
 
   if (title.isEmpty())
-    title = QFileInfo(d->filename_).baseName();
+    title = d->basefilename_;
 
   if (!d->artist_.isEmpty())
     title = d->artist_ + " - " + title;
@@ -1004,7 +1004,7 @@ QString Song::TitleWithCompilationArtist() const {
   QString title(d->title_);
 
   if (title.isEmpty())
-    title = QFileInfo(d->filename_).baseName();
+    title = d->basefilename_;
 
   if (is_compilation() && !d->artist_.isEmpty() && !d->artist_.toLower().contains("various"))
     title = d->artist_ + " - " + title;
