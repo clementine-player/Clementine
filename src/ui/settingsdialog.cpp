@@ -611,7 +611,7 @@ void SettingsDialog::SetSongInfoView(SongInfoView* view) {
   ui_->lyric_settings->SetSongInfoView(view);
 }
 
-void SettingsDialog::SongInfoFontSizeChanged(qreal value) {
+void SettingsDialog::SongInfoFontSizeChanged(double value) {
   QFont font;
   font.setPointSizeF(value);
 

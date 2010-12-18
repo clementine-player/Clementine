@@ -105,7 +105,7 @@ class SettingsDialog : public QDialog {
   void FadingOptionsChanged();
   void RgPreampChanged(int value);
 
-  void SongInfoFontSizeChanged(qreal value);
+  void SongInfoFontSizeChanged(double value);
 
   // Background streams.
   void EnableStream(bool enabled);
