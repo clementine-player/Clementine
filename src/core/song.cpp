@@ -286,7 +286,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         const TagLib::ID3v2::CommentsFrame* frame =
             dynamic_cast<const TagLib::ID3v2::CommentsFrame*>(map["COMM"][i]);
 
-        if (TStringToQString(frame->description()) != "iTunNORM") {
+        if (frame && TStringToQString(frame->description()) != "iTunNORM") {
           d->comment_ = Decode(frame->text(), codec);
           break;
         }
@@ -297,7 +297,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         const TagLib::ID3v2::UserTextIdentificationFrame* frame =
             dynamic_cast<const TagLib::ID3v2::UserTextIdentificationFrame*>(map["TXXX"][i]);
 
-        if (frame->description().startsWith("FMPS_")) {
+        if (frame && frame->description().startsWith("FMPS_")) {
           ParseFMPSFrame(TStringToQString(frame->description()),
                          TStringToQString(frame->fieldList()[1]));
         }
