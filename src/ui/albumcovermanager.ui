@@ -58,19 +58,6 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QToolButton" name="clear">
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="autoRaise">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="LineEdit" name="filter">
             <property name="hint" stdset="0">
              <string>Enter search terms here</string>
@@ -214,7 +201,6 @@
  </customwidgets>
  <tabstops>
   <tabstop>artists</tabstop>
-  <tabstop>clear</tabstop>
   <tabstop>filter</tabstop>
   <tabstop>view</tabstop>
   <tabstop>fetch</tabstop>
@@ -223,22 +209,5 @@
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>clear</sender>
-   <signal>clicked()</signal>
-   <receiver>filter</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>352</x>
-     <y>19</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>397</x>
-     <y>15</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

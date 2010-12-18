@@ -16,25 +16,57 @@
 */
 
 #include "lineedit.h"
+#include "ui/iconloader.h"
 
 #include <QPainter>
 #include <QPaintEvent>
+#include <QStyle>
+#include <QToolButton>
 
 LineEdit::LineEdit(QWidget* parent)
   : QLineEdit(parent),
-    LineEditInterface(this)
+    LineEditInterface(this),
+    has_clear_button_(true),
+    clear_button_(new QToolButton(this))
 {
+  clear_button_->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
+  clear_button_->setIconSize(QSize(16, 16));
+  clear_button_->setCursor(Qt::ArrowCursor);
+  clear_button_->setStyleSheet("QToolButton { border: none; padding: 0px; }");
+  set_clear_button(true);
+
+  connect(clear_button_, SIGNAL(clicked()), SLOT(clear()));
+  connect(clear_button_, SIGNAL(clicked()), SLOT(setFocus()));
 }
 
-void LineEdit::SetHint(const QString& hint) {
+void LineEdit::set_hint(const QString& hint) {
   hint_ = hint;
   update();
+}
+
+void LineEdit::set_clear_button(bool visible) {
+  has_clear_button_ = visible;
+  clear_button_->setVisible(visible);
+
+  if (visible) {
+    const int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+    setStyleSheet(QString("QLineEdit { padding-left: %1px; } ").arg(
+                    clear_button_->sizeHint().width() + frame_width + 1));
+
+    QSize msz = minimumSizeHint();
+    setMinimumSize(qMax(msz.width(), clear_button_->sizeHint().height() + frame_width * 2 + 2),
+                   qMax(msz.height(), clear_button_->sizeHint().height() + frame_width * 2 + 2));
+  } else {
+    setStyleSheet(QString());
+  }
 }
 
 void LineEdit::paintEvent(QPaintEvent* e) {
   QLineEdit::paintEvent(e);
 
   if (!hasFocus() && displayText().isEmpty() && !hint_.isEmpty()) {
+    clear_button_->hide();
+
     QPainter p(this);
 
     QFont font;
@@ -50,5 +82,13 @@ void LineEdit::paintEvent(QPaintEvent* e) {
     QRect r(rect().topLeft() + QPoint(kBorder + 5, kBorder),
             rect().bottomRight() - QPoint(kBorder, kBorder));
     p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter, hint_);
+  } else {
+    clear_button_->setVisible(has_clear_button_);
   }
+}
+
+void LineEdit::resizeEvent(QResizeEvent*) {
+  const QSize sz = clear_button_->sizeHint();
+  const int frame_width = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  clear_button_->move(frame_width, (rect().height() - sz.height()) / 2);
 }

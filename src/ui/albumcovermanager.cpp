@@ -70,7 +70,6 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   ui_->action_choose_manual->setIcon(IconLoader::Load("document-open"));
   ui_->action_show_fullsize->setIcon(IconLoader::Load("zoom-in"));
   ui_->action_unset_cover->setIcon(IconLoader::Load("list-remove"));
-  ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   ui_->view->setIcon(IconLoader::Load("view-choose"));
   ui_->fetch->setIcon(IconLoader::Load("download"));
   ui_->action_search_manual->setIcon(IconLoader::Load("download"));

@@ -64,7 +64,6 @@ class LibraryFilterWidget : public QWidget {
  private slots:
   void GroupingChanged(const LibraryModel::Grouping& g);
   void GroupByClicked(QAction* action);
-  void ClearFilter();
 
   void FilterTextChanged(const QString& text);
   void FilterDelayTimeout();

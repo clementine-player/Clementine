@@ -45,7 +45,6 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   filter_delay_->setSingleShot(true);
 
   // Icons
-  ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   ui_->options->setIcon(IconLoader::Load("configure"));
 
   // Filter by age
@@ -74,7 +73,6 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   connect(ui_->filter_age_month, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
   connect(ui_->filter_age_three_months, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
   connect(ui_->filter_age_year, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
-  connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
 
   // "Group by ..."
   ui_->group_by_artist->setProperty("group_by", QVariant::fromValue(
@@ -116,7 +114,6 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   MacLineEdit* lineedit = new MacLineEdit(this);
   ui_->horizontalLayout->insertWidget(1, lineedit);
   filter_ = lineedit;
-  ui_->clear->setHidden(true);
 #else
   filter_ = ui_->filter;
 #endif
@@ -191,13 +188,8 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
   ui_->group_by_advanced->setChecked(true);
 }
 
-void LibraryFilterWidget::ClearFilter() {
-  filter_->clear();
-  filter_->setFocus();
-}
-
 void LibraryFilterWidget::SetFilterHint(const QString& hint) {
-  filter_->SetHint(hint);
+  filter_->set_hint(hint);
 }
 
 void LibraryFilterWidget::SetAgeFilterEnabled(bool enabled) {

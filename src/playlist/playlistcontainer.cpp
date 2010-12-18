@@ -67,9 +67,6 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
 
   settings_.beginGroup(kSettingsGroup);
 
-  // Icons
-  ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
-
   // Tab bar
   ui_->tab_bar->setExpanding(false);
   ui_->tab_bar->setMovable(true);
@@ -78,7 +75,6 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   ui_->tab_bar->setMaximumHeight(0);
 
   // Connections
-  connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
   connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
 
@@ -118,11 +114,6 @@ void PlaylistContainer::SetActions(
   connect(new_playlist, SIGNAL(triggered()), SLOT(NewPlaylist()));
   connect(save_playlist, SIGNAL(triggered()), SLOT(SavePlaylist()));
   connect(load_playlist, SIGNAL(triggered()), SLOT(LoadPlaylist()));
-}
-
-void PlaylistContainer::ClearFilter() {
-  filter_->clear();
-  filter_->setFocus();
 }
 
 void PlaylistContainer::SetManager(PlaylistManager *manager) {

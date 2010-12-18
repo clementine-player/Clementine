@@ -20,6 +20,8 @@
 
 #include <QLineEdit>
 
+class QToolButton;
+
 class LineEditInterface {
  public:
   LineEditInterface(QObject* object) : object_(object) {}
@@ -28,7 +30,7 @@ class LineEditInterface {
   virtual void setFocus() = 0;
   virtual void setText(const QString&) = 0;
   virtual QString text() const = 0;
-  virtual void SetHint(const QString&) = 0;
+  virtual void set_hint(const QString&) = 0;
 
   QObject* object() const { return object_; }
 
@@ -36,27 +38,35 @@ class LineEditInterface {
   QObject* object_;
 };
 
-// Remove in Qt 4.7: QLineEdit has placeholderText
 class LineEdit : public QLineEdit, public LineEditInterface {
   Q_OBJECT
-  Q_PROPERTY(QString hint READ GetHint WRITE SetHint);
+  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
 
  public:
   LineEdit(QWidget* parent = 0);
 
-  QString GetHint() const { return hint_; }
-  void SetHint(const QString& hint);
-  void ClearHint() { SetHint(QString()); }
+  QString hint() const { return hint_; }
+  void set_hint(const QString& hint);
+  void clear_hint() { set_hint(QString()); }
 
-  void paintEvent(QPaintEvent* e);
+  bool has_clear_button() const { return has_clear_button_; }
+  void set_clear_button(bool visible);
 
   void clear() { QLineEdit::clear(); }
   void setFocus() { QLineEdit::setFocus(); }
   void setText(const QString& t) { QLineEdit::setText(t); }
   QString text() const { return QLineEdit::text(); }
 
+ protected:
+  void paintEvent(QPaintEvent* e);
+  void resizeEvent(QResizeEvent*);
+
  private:
   QString hint_;
+
+  bool has_clear_button_;
+  QToolButton* clear_button_;
 };
 
 #endif // LINEEDIT_H

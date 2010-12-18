@@ -85,9 +85,9 @@ bool EditTagDialog::SetSongs(const SongList &s) {
 
     ui_->filename->setText(QDir::toNativeSeparators(song.filename()));
 
-    ui_->artist->ClearHint();
-    ui_->album->ClearHint();
-    ui_->genre->ClearHint();
+    ui_->artist->clear_hint();
+    ui_->album->clear_hint();
+    ui_->genre->clear_hint();
   } else {
     // Find any fields that are common to all items
 
@@ -98,17 +98,17 @@ bool EditTagDialog::SetSongs(const SongList &s) {
     foreach (const Song& song, songs) {
       if (common_artist_ != song.artist()) {
         common_artist_ = QString::null;
-        ui_->artist->SetHint(kHintText);
+        ui_->artist->set_hint(kHintText);
       }
 
       if (common_album_ != song.album()) {
         common_album_ = QString::null;
-        ui_->album->SetHint(kHintText);
+        ui_->album->set_hint(kHintText);
       }
 
       if (common_genre_ != song.genre()) {
         common_genre_ = QString::null;
-        ui_->genre->SetHint(kHintText);
+        ui_->genre->set_hint(kHintText);
       }
 
       if (common_year_ != song.year())

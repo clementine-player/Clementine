@@ -59,7 +59,6 @@ protected:
   void resizeEvent(QResizeEvent *);
 
 private slots:
-  void ClearFilter();
   void NewPlaylist();
   void LoadPlaylist();
   void SavePlaylist() { SavePlaylist(-1); }
