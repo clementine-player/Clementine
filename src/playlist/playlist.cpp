@@ -1265,9 +1265,13 @@ void Playlist::ReloadItems(const QList<int>& rows) {
 }
 
 void Playlist::RateSong(const QModelIndex& index, double rating) {
-  PlaylistItemPtr item = item_at(index.row());
-  if (item && item->IsLocalLibraryItem()) {
-    library_->UpdateSongRatingAsync(item->Metadata().id(), rating);
+  int row = index.row();
+
+  if(has_item_at(row)) {
+    PlaylistItemPtr item = item_at(row);
+    if (item && item->IsLocalLibraryItem()) {
+      library_->UpdateSongRatingAsync(item->Metadata().id(), rating);
+    }
   }
 }
 

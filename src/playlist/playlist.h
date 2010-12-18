@@ -133,6 +133,8 @@ class Playlist : public QAbstractListModel {
   bool is_dynamic() const { return dynamic_playlist_; }
 
   const PlaylistItemPtr& item_at(int index) const { return items_[index]; }
+  const bool has_item_at(int index) const { return index >= 0 && index < rowCount(); }
+
   PlaylistItemPtr current_item() const { return current_item_; }
 
   PlaylistItem::Options current_item_options() const;
