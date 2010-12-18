@@ -42,8 +42,10 @@
 #include <taglib/vorbisfile.h>
 #include <taglib/wavfile.h>
 
-#include "radio/fixlastfm.h"
-#include <lastfm/Track>
+#ifdef HAVE_LIBLASTFM
+  #include "radio/fixlastfm.h"
+  #include <lastfm/Track>
+#endif
 
 #include <QFile>
 #include <QFileInfo>
@@ -485,6 +487,7 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   #undef tofloat
 }
 
+#ifdef HAVE_LIBLASTFM
 void Song::InitFromLastFM(const lastfm::Track& track) {
   d->valid_ = true;
   d->filetype_ = Type_Stream;
@@ -495,6 +498,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->track_ = track.trackNumber();
   d->length_ = track.duration();
 }
+#endif // HAVE_LIBLASTFM
 
 #ifdef HAVE_LIBGPOD
   void Song::InitFromItdb(const Itdb_Track* track) {
@@ -948,6 +952,7 @@ void Song::BindToFtsQuery(QSqlQuery *query) const {
   query->bindValue(":ftscomment", d->comment_);
 }
 
+#ifdef HAVE_LIBLASTFM
 void Song::ToLastFM(lastfm::Track* track) const {
   lastfm::MutableTrack mtrack(*track);
 
@@ -958,6 +963,7 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setTrackNumber(d->track_);
   mtrack.setSource(lastfm::Track::Player);
 }
+#endif // HAVE_LIBLASTFM
 
 QString Song::PrettyTitle() const {
   QString title(d->title_);

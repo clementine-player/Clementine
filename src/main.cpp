@@ -33,7 +33,6 @@
 #include "core/utilities.h"
 #include "engines/enginebase.h"
 #include "library/directory.h"
-#include "radio/lastfmservice.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -55,6 +54,9 @@
 #include <echonest/Config.h>
 
 
+#ifdef HAVE_LIBLASTFM
+  #include "radio/lastfmservice.h"
+#endif
 
 #ifdef HAVE_GSTREAMER
 #  include <gst/gst.h>
@@ -151,8 +153,10 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
 #endif
 
+#ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
+#endif
 
   // Parse commandline options - need to do this before starting the
   // QApplication so it works without an X server

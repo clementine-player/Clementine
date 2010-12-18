@@ -35,6 +35,9 @@ class OSDPretty;
 class SongInfoView;
 class Ui_SettingsDialog;
 
+#ifdef HAVE_LIBLASTFM
+  class LastFMConfig;
+#endif
 #ifdef ENABLE_WIIMOTEDEV
   class WiimotedevShortcutsConfig;
 #endif
@@ -55,7 +58,9 @@ class SettingsDialog : public QDialog {
     Page_GlobalShortcuts,
     Page_Notifications,
     Page_Library,
+#ifdef HAVE_LIBLASTFM
     Page_Lastfm,
+#endif
     Page_Magnatune,
     Page_BackgroundStreams,
 #ifdef ENABLE_WIIMOTEDEV
@@ -85,7 +90,9 @@ class SettingsDialog : public QDialog {
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
+#ifdef HAVE_LIBLASTFM
   void LastFMValidationComplete(bool success);
+#endif
 
   void PrettyOpacityChanged(int value);
   void PrettyColorPresetChanged(int index);
@@ -105,6 +112,9 @@ class SettingsDialog : public QDialog {
   void StreamVolumeChanged(int value);
 
  private:
+#ifdef HAVE_LIBLASTFM
+  LastFMConfig* lastfm_config_;
+#endif
 #ifdef ENABLE_WIIMOTEDEV
   WiimotedevShortcutsConfig* wiimotedev_config_;
 #endif

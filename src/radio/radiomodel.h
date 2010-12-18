@@ -27,11 +27,14 @@
 #include "widgets/multiloadingindicator.h"
 
 class Database;
-class LastFMService;
 class MergedProxyModel;
 class RadioService;
 class SettingsDialog;
 class TaskManager;
+
+#ifdef HAVE_LIBLASTFM
+  class LastFMService;
+#endif
 
 class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
@@ -58,7 +61,9 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   }
 
   // This is special because Player needs it for scrobbling
+#ifdef HAVE_LIBLASTFM
   LastFMService* GetLastFMService() const;
+#endif
 
   // QAbstractItemModel
   QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

@@ -18,18 +18,23 @@
 #include "artistinfoview.h"
 #include "echonestbiographies.h"
 #include "echonestimages.h"
-#include "echonestsimilarartists.h"
-#include "echonesttags.h"
 #include "songinfofetcher.h"
 #include "widgets/prettyimageview.h"
+
+#ifdef HAVE_LIBLASTFM
+  #include "echonestsimilarartists.h"
+  #include "echonesttags.h"
+#endif
 
 ArtistInfoView::ArtistInfoView(QWidget *parent)
   : SongInfoBase(parent)
 {
   fetcher_->AddProvider(new EchoNestBiographies);
   fetcher_->AddProvider(new EchoNestImages);
+#ifdef HAVE_LIBLASTFM
   fetcher_->AddProvider(new EchoNestSimilarArtists);
   fetcher_->AddProvider(new EchoNestTags);
+#endif
 }
 
 ArtistInfoView::~ArtistInfoView() {

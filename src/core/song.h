@@ -46,9 +46,11 @@
 
 class SqlRow;
 
-namespace lastfm {
-  class Track;
-}
+#ifdef HAVE_LIBLASTFM
+  namespace lastfm {
+    class Track;
+  }
+#endif
 
 namespace TagLib {
   class FileRef;
@@ -112,7 +114,9 @@ class Song {
   void Init(const QString& title, const QString& artist, const QString& album, int length);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const SqlRow& query, int col = 0);
+#ifdef HAVE_LIBLASTFM
   void InitFromLastFM(const lastfm::Track& track);
+#endif
 
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
@@ -137,7 +141,9 @@ class Song {
   // Save
   void BindToQuery(QSqlQuery* query) const;
   void BindToFtsQuery(QSqlQuery* query) const;
+#ifdef HAVE_LIBLASTFM
   void ToLastFM(lastfm::Track* track) const;
+#endif
 
   // Simple accessors
   bool is_valid() const { return d->valid_; }

@@ -30,8 +30,11 @@
 
 class PlaylistManager;
 class Settings;
-class LastFMService;
 class MainWindow;
+
+#ifdef HAVE_LIBLASTFM
+  class LastFMService;
+#endif
 
 namespace mpris {
   class Mpris1;
@@ -50,7 +53,10 @@ class Player : public QObject {
 
  public:
   Player(MainWindow* main_window, PlaylistManager* playlists,
-         LastFMService* lastfm, Engine::Type engine, QObject* parent = 0);
+#ifdef HAVE_LIBLASTFM
+         LastFMService* lastfm,
+#endif
+         Engine::Type engine, QObject* parent = 0);
   ~Player();
 
   EngineBase* CreateEngine(Engine::Type engine);
@@ -124,7 +130,9 @@ class Player : public QObject {
   mpris::Mpris2* mpris2_;
 
   PlaylistManager* playlists_;
+#ifdef HAVE_LIBLASTFM
   LastFMService* lastfm_;
+#endif
   QSettings settings_;
 
   PlaylistItemPtr current_item_;

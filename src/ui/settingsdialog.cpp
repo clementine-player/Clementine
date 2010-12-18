@@ -28,6 +28,10 @@
 
 #include "ui_settingsdialog.h"
 
+#ifdef HAVE_LIBLASTFM
+#include "radio/lastfmconfig.h"
+#endif
+
 #ifdef ENABLE_WIIMOTEDEV
 #include "ui/wiimotedevshortcutsconfig.h"
 #include "ui_wiimotedevshortcutsconfig.h"
@@ -94,6 +98,22 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->setupUi(this);
   pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
+
+#ifdef HAVE_LIBLASTFM
+  ui_->list->insertItem(Page_Lastfm, tr("Last.fm"));
+  ui_->list->item(Page_Lastfm)->setIcon(QIcon(":/last.fm/as.png"));
+
+  QWidget* lastfm_page = new QWidget;
+  QVBoxLayout* lastfm_layout = new QVBoxLayout;
+  lastfm_layout->setContentsMargins(0, 0, 0, 0);
+  lastfm_config_ = new LastFMConfig;
+  lastfm_layout->addWidget(lastfm_config_);
+  lastfm_page->setLayout(lastfm_layout);
+
+  ui_->stacked_widget->insertWidget(Page_Lastfm, lastfm_page);
+
+  connect(lastfm_config_, SIGNAL(ValidationComplete(bool)), SLOT(LastFMValidationComplete(bool)));
+#endif
 
   // Icons
   ui_->list->item(Page_Playback)->setIcon(IconLoader::Load("media-playback-start"));
@@ -177,9 +197,6 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   }
 #endif
 
-  // Last.fm
-  connect(ui_->lastfm, SIGNAL(ValidationComplete(bool)), SLOT(LastFMValidationComplete(bool)));
-
   // List box
   connect(ui_->list, SIGNAL(currentTextChanged(QString)), SLOT(CurrentTextChanged(QString)));
   ui_->list->setCurrentRow(Page_Playback);
@@ -232,21 +249,25 @@ void SettingsDialog::SetGlobalShortcutManager(GlobalShortcuts *manager) {
   ui_->global_shortcuts->SetManager(manager);
 }
 
+#ifdef HAVE_LIBLASTFM
 void SettingsDialog::LastFMValidationComplete(bool success) {
   ui_->buttonBox->setEnabled(true);
 
   if (success)
     accept();
 }
+#endif
 
 void SettingsDialog::accept() {
-  if (ui_->lastfm->NeedsValidation()) {
-    ui_->lastfm->Validate();
+#ifdef HAVE_LIBLASTFM
+  if (lastfm_config_->NeedsValidation()) {
+    lastfm_config_->Validate();
     ui_->buttonBox->setEnabled(false);
     return;
   } else {
-    ui_->lastfm->Save();
+    lastfm_config_->Save();
   }
+#endif
 
   QSettings s;
 
@@ -399,7 +420,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->lyric_settings->Load();
 
   // Last.fm
-  ui_->lastfm->Load();
+#ifdef HAVE_LIBLASTFM
+  lastfm_config_->Load();
+#endif
 
   // Magnatune
   ui_->magnatune->Load();

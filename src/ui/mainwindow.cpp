@@ -51,7 +51,6 @@
 #include "playlist/songloaderinserter.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "radio/lastfmservice.h"
 #include "radio/magnatuneservice.h"
 #include "radio/radiomodel.h"
 #include "radio/radioview.h"
@@ -63,13 +62,9 @@
 #include "transcoder/transcodedialog.h"
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
-#include "ui/albumcovermanager.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
-#ifdef Q_OS_DARWIN
-#include "ui/macsystemtrayicon.h"
-#endif
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
 #include "ui/qtsystemtrayicon.h"
@@ -81,6 +76,15 @@
 #include "widgets/osd.h"
 #include "widgets/stylehelper.h"
 #include "widgets/trackslider.h"
+
+#ifdef Q_OS_DARWIN
+# include "ui/macsystemtrayicon.h"
+#endif
+
+#ifdef HAVE_LIBLASTFM
+# include "radio/lastfmservice.h"
+# include "ui/albumcovermanager.h"
+#endif
 
 #ifdef ENABLE_WIIMOTEDEV
 # include "wiimotedev/shortcuts.h"
@@ -148,7 +152,9 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
     song_info_view_(new SongInfoView(this)),
     artist_info_view_(new ArtistInfoView(this)),
     settings_dialog_(NULL),
+#ifdef HAVE_LIBLASTFM
     cover_manager_(NULL),
+#endif
     equalizer_(new Equalizer),
     error_dialog_(NULL),
     organise_dialog_(new OrganiseDialog(task_manager_)),
@@ -174,7 +180,11 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 
   // Create stuff that needs the database
   radio_model_ = new RadioModel(database_, task_manager_, this);
-  player_ = new Player(this, playlists_, radio_model_->GetLastFMService(), engine, this);
+  player_ = new Player(this, playlists_,
+#ifdef HAVE_LIBLASTFM
+                       radio_model_->GetLastFMService(),
+#endif
+                       engine, this);
   library_ = new Library(database_, task_manager_, this);
   devices_ = new DeviceManager(database_, task_manager_, this);
 
@@ -286,8 +296,10 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
   connect(ui_->action_mute, SIGNAL(triggered()), player_, SLOT(Mute()));
+#ifdef HAVE_LIBLASTFM
   connect(ui_->action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
+#endif
   connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlists_, SLOT(ClearCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()), SLOT(PlaylistRemoveCurrent()));
   connect(ui_->action_edit_track, SIGNAL(triggered()), SLOT(EditTracks()));
@@ -302,7 +314,11 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
+#ifdef HAVE_LIBLASTFM
   connect(ui_->action_cover_manager, SIGNAL(triggered()), SLOT(ShowCoverManager()));
+#else
+  ui_->action_cover_manager->setVisible(false);
+#endif
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
@@ -452,12 +468,18 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*,bool)), SLOT(InsertRadioItem(RadioItem*,bool)));
   connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)), SLOT(InsertRadioItems(PlaylistItemList,bool)));
+#ifdef HAVE_LIBLASTFM
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
+#endif
   connect(radio_view_->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
   connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
 
+#ifdef HAVE_LIBLASTFM
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
+#else
+  LastFMButtonVisibilityChanged(false);
+#endif
 
   // Connections to the saved streams service
   connect(RadioModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()), SLOT(AddStream()));
@@ -769,6 +791,7 @@ void MainWindow::MediaPlaying() {
   ui_->action_play_pause->setEnabled(
       ! (player_->GetCurrentItem()->options() & PlaylistItem::PauseDisabled));
 
+#ifdef HAVE_LIBLASTFM
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   LastFMService* lastfm = radio_model_->GetLastFMService();
 
@@ -776,6 +799,9 @@ void MainWindow::MediaPlaying() {
   ui_->action_love->setEnabled(lastfm->IsScrobblingEnabled());
 
   ui_->track_slider->SetCanSeek(!is_lastfm);
+#else
+  ui_->track_slider->SetCanSeek(true);
+#endif
 
   track_position_timer_->start();
   UpdateTrackPosition();
@@ -804,6 +830,7 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   }
 }
 
+#ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobblingEnabledChanged(bool value) {
   if (!player_->GetState() == Engine::Idle)
     return;
@@ -812,6 +839,7 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   ui_->action_ban->setEnabled(value && is_lastfm);
   ui_->action_love->setEnabled(value);
 }
+#endif
 
 void MainWindow::LastFMButtonVisibilityChanged(bool value) {
   ui_->action_ban->setVisible(value);
@@ -957,11 +985,12 @@ void MainWindow::UpdateTrackPosition() {
   }
 
   // Time to scrobble?
-  LastFMService* lastfm = radio_model_->GetLastFMService();
 
   if (!playlists_->active()->has_scrobbled() &&
       position >= playlists_->active()->scrobble_point()) {
-    lastfm->Scrobble();
+#ifdef HAVE_LIBLASTFM
+    radio_model_->GetLastFMService()->Scrobble();
+#endif
     playlists_->active()->set_scrobbled(true);
 
     // Update the play count for the song if it's from the library
@@ -979,10 +1008,12 @@ void MainWindow::UpdateTrackPosition() {
   }
 }
 
+#ifdef HAVE_LIBLASTFM
 void MainWindow::Love() {
   radio_model_->GetLastFMService()->Love();
   ui_->action_love->setEnabled(false);
 }
+#endif
 
 void MainWindow::RadioDoubleClick(const QModelIndex& index) {
   if (autoclear_playlist_)
@@ -1586,6 +1617,7 @@ void MainWindow::PlaylistCopyToDevice() {
   }
 }
 
+#ifdef HAVE_LIBLASTFM
 void MainWindow::ShowCoverManager() {
   if (!cover_manager_) {
     cover_manager_.reset(new AlbumCoverManager(library_->backend()));
@@ -1599,6 +1631,7 @@ void MainWindow::ShowCoverManager() {
 
   cover_manager_->show();
 }
+#endif
 
 void MainWindow::EnsureSettingsDialogCreated() {
   if (settings_dialog_)

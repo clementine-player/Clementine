@@ -18,13 +18,16 @@
 #include "core/mergedproxymodel.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
-#include "lastfmservice.h"
 #include "magnatuneservice.h"
 #include "radiomimedata.h"
 #include "radiomodel.h"
 #include "radioservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
+
+#ifdef HAVE_LIBLASTFM
+  #include "lastfmservice.h"
+#endif
 
 #include <QMimeData>
 #include <QtDebug>
@@ -43,7 +46,9 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   root_->lazy_loaded = true;
   merged_model_->setSourceModel(this);
 
+#ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(this));
+#endif
   AddService(new SomaFMService(this));
   AddService(new MagnatuneService(this));
   AddService(new JamendoService(this));
@@ -139,11 +144,13 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   return data;
 }
 
+#ifdef HAVE_LIBLASTFM
 LastFMService* RadioModel::GetLastFMService() const {
   if (sServices.contains(LastFMService::kServiceName))
     return static_cast<LastFMService*>(sServices[LastFMService::kServiceName]);
   return NULL;
 }
+#endif
 
 void RadioModel::ShowContextMenu(RadioItem* item, const QModelIndex& index,
                                  const QPoint& global_pos) {

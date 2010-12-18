@@ -15,11 +15,15 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "lastfmtrackinfoprovider.h"
+#include "config.h"
 #include "songinfoprovider.h"
 #include "songinfoview.h"
 #include "ultimatelyricsprovider.h"
 #include "ultimatelyricsreader.h"
+
+#ifdef HAVE_LIBLASTFM
+  #include "lastfmtrackinfoprovider.h"
+#endif
 
 #include <QFuture>
 #include <QFutureWatcher>
@@ -42,7 +46,9 @@ SongInfoView::SongInfoView(QWidget* parent)
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(UltimateLyricsParsed()));
 
+#ifdef HAVE_LIBLASTFM
   fetcher_->AddProvider(new LastfmTrackInfoProvider);
+#endif
 }
 
 SongInfoView::~SongInfoView() {

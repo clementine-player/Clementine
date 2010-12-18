@@ -86,15 +86,6 @@
      </item>
      <item>
       <property name="text">
-       <string>Last.fm</string>
-      </property>
-      <property name="icon">
-       <iconset resource="../../data/data.qrc">
-        <normaloff>:/last.fm/as.png</normaloff>:/last.fm/as.png</iconset>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>Magnatune</string>
       </property>
       <property name="icon">
@@ -777,16 +768,6 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="lastfm_page">
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="LastFMConfig" name="lastfm" native="true"/>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="magnatune_page">
         <layout class="QVBoxLayout" name="verticalLayout_11">
          <property name="spacing">
@@ -849,12 +830,6 @@
    <class>LineEdit</class>
    <extends>QLineEdit</extends>
    <header>widgets/lineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>LastFMConfig</class>
-   <extends>QWidget</extends>
-   <header>radio/lastfmconfig.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>LibraryConfig</class>

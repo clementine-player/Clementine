@@ -52,8 +52,6 @@
 #include <boost/bind.hpp>
 #include <algorithm>
 
-#include <lastfm/ScrobblePoint>
-
 using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;
 using smart_playlists::GeneratorPtr;
@@ -1194,10 +1192,9 @@ Song Playlist::current_item_metadata() const {
 }
 
 void Playlist::UpdateScrobblePoint() {
-  int length = qMin(current_item_metadata().length(), 240);
+  const int length = current_item_metadata().length();
 
-  ScrobblePoint point(length / 2);
-  scrobble_point_ = point;
+  scrobble_point_ = length == 0 ? 240 : qBound(31, length/2, 240);
   has_scrobbled_ = false;
 }
 

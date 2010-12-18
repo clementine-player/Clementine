@@ -37,7 +37,6 @@ set(SOURCES
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
 
-  core/albumcoverfetcher.cpp
   core/albumcoverloader.cpp
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
@@ -120,7 +119,6 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
-  radio/fixlastfm.cpp
   radio/icecastbackend.cpp
   radio/icecastfilterwidget.cpp
   radio/icecastmodel.cpp
@@ -128,9 +126,6 @@ set(SOURCES
   radio/jamendodynamicplaylist.cpp
   radio/jamendoplaylistitem.cpp
   radio/jamendoservice.cpp
-  radio/lastfmconfig.cpp
-  radio/lastfmservice.cpp
-  radio/lastfmstationdialog.cpp
   radio/magnatuneconfig.cpp
   radio/magnatunedownloaddialog.cpp
   radio/magnatuneplaylistitem.cpp
@@ -160,9 +155,6 @@ set(SOURCES
   songinfo/collapsibleinfopane.cpp
   songinfo/echonestbiographies.cpp
   songinfo/echonestimages.cpp
-  songinfo/echonestsimilarartists.cpp
-  songinfo/echonesttags.cpp
-  songinfo/lastfmtrackinfoprovider.cpp
   songinfo/lyricsettings.cpp
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
@@ -170,15 +162,11 @@ set(SOURCES
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songplaystats.cpp
-  songinfo/tagwidget.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
   ui/about.cpp
   ui/addstreamdialog.cpp
-  ui/albumcovermanager.cpp
-  ui/albumcovermanagerlist.cpp
-  ui/albumcoversearcher.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
   ui/flowlayout.cpp
@@ -231,7 +219,6 @@ set(HEADERS
   analyzers/sonogram.h
   analyzers/turbine.h
 
-  core/albumcoverfetcher.h
   core/albumcoverloader.h
   core/backgroundstreams.h
   core/backgroundthread.h
@@ -300,9 +287,6 @@ set(HEADERS
   radio/icecastservice.h
   radio/jamendodynamicplaylist.h
   radio/jamendoservice.h
-  radio/lastfmconfig.h
-  radio/lastfmservice.h
-  radio/lastfmstationdialog.h
   radio/magnatuneconfig.h
   radio/magnatunedownloaddialog.h
   radio/magnatuneservice.h
@@ -328,9 +312,6 @@ set(HEADERS
   songinfo/collapsibleinfopane.h
   songinfo/echonestbiographies.h
   songinfo/echonestimages.h
-  songinfo/echonestsimilarartists.h
-  songinfo/echonesttags.h
-  songinfo/lastfmtrackinfoprovider.h
   songinfo/lyricsettings.h
   songinfo/songinfobase.h
   songinfo/songinfofetcher.h
@@ -338,15 +319,11 @@ set(HEADERS
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songplaystats.h
-  songinfo/tagwidget.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 
   ui/about.h
   ui/addstreamdialog.h
-  ui/albumcovermanager.h
-  ui/albumcovermanagerlist.h
-  ui/albumcoversearcher.h
   ui/edittagdialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h
@@ -399,8 +376,6 @@ set(UI
   playlist/queuemanager.ui
 
   radio/icecastfilterwidget.ui
-  radio/lastfmconfig.ui
-  radio/lastfmstationdialog.ui
   radio/magnatuneconfig.ui
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
@@ -415,8 +390,6 @@ set(UI
 
   ui/about.ui
   ui/addstreamdialog.ui
-  ui/albumcovermanager.ui
-  ui/albumcoversearcher.ui
   ui/edittagdialog.ui
   ui/equalizer.ui
   ui/globalshortcutgrabber.ui
@@ -500,6 +473,43 @@ if(ENABLE_VISUALISATIONS)
     visualisations/visualisationselector.ui
   )
 endif(ENABLE_VISUALISATIONS)
+
+# Lastfm
+if(HAVE_LIBLASTFM)
+  list(APPEND SOURCES
+    core/albumcoverfetcher.cpp
+    radio/fixlastfm.cpp
+    radio/lastfmconfig.cpp
+    radio/lastfmservice.cpp
+    radio/lastfmstationdialog.cpp
+    songinfo/echonestsimilarartists.cpp
+    songinfo/echonesttags.cpp
+    songinfo/lastfmtrackinfoprovider.cpp
+    songinfo/tagwidget.cpp
+    ui/albumcovermanager.cpp
+    ui/albumcovermanagerlist.cpp
+    ui/albumcoversearcher.cpp
+  )
+  list(APPEND HEADERS
+    core/albumcoverfetcher.h
+    radio/lastfmconfig.h
+    radio/lastfmservice.h
+    radio/lastfmstationdialog.h
+    songinfo/echonestsimilarartists.h
+    songinfo/echonesttags.h
+    songinfo/lastfmtrackinfoprovider.h
+    songinfo/tagwidget.h
+    ui/albumcovermanager.h
+    ui/albumcovermanagerlist.h
+    ui/albumcoversearcher.h
+  )
+  list(APPEND UI
+    radio/lastfmconfig.ui
+    radio/lastfmstationdialog.ui
+    ui/albumcovermanager.ui
+    ui/albumcoversearcher.ui
+  )
+endif(HAVE_LIBLASTFM)
 
 # Transcoder
 if(HAVE_GSTREAMER)
@@ -766,7 +776,6 @@ target_link_libraries(clementine_lib
   ${TAGLIB_LIBRARIES}
   ${QT_LIBRARIES}
   ${ENGINE_LIBRARIES}
-  ${LASTFM_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
@@ -778,6 +787,10 @@ target_link_libraries(clementine_lib
 if(ENABLE_VISUALISATIONS)
   target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
 endif(ENABLE_VISUALISATIONS)
+
+if(HAVE_LIBLASTFM)
+  target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
+endif(HAVE_LIBLASTFM)
 
 if(HAVE_LIBGPOD)
   target_link_libraries(clementine_lib ${LIBGPOD_LIBRARIES})

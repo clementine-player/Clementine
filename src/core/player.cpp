@@ -21,7 +21,6 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
-#include "radio/lastfmservice.h"
 #include "mpris_common.h"
 
 #ifdef HAVE_GSTREAMER
@@ -35,6 +34,9 @@
 #endif
 #ifdef HAVE_QT_PHONON
 #  include "engines/phononengine.h"
+#endif
+#ifdef HAVE_LIBLASTFM
+#  include "radio/lastfmservice.h"
 #endif
 
 #ifdef Q_WS_X11
@@ -53,13 +55,18 @@ using boost::shared_ptr;
 
 
 Player::Player(MainWindow* main_window, PlaylistManager* playlists,
-               LastFMService* lastfm, Engine::Type engine, QObject* parent)
+#ifdef HAVE_LIBLASTFM
+               LastFMService* lastfm,
+#endif
+               Engine::Type engine, QObject* parent)
   : QObject(parent),
     art_loader_(new mpris::ArtLoader(this)),
     mpris1_(NULL),
     mpris2_(NULL),
     playlists_(playlists),
+#ifdef HAVE_LIBLASTFM
     lastfm_(lastfm),
+#endif
     engine_(CreateEngine(engine)),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
@@ -322,13 +329,17 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
     loading_async_ = QUrl();
     engine_->Play(current_item_->Url(), change);
 
+#ifdef HAVE_LIBLASTFM
     if (lastfm_->IsScrobblingEnabled())
       lastfm_->NowPlaying(current_item_->Metadata());
+#endif
   }
 }
 
 void Player::CurrentMetadataChanged(const Song& metadata) {
+#ifdef HAVE_LIBLASTFM
   lastfm_->NowPlaying(metadata);
+#endif
 }
 
 void Player::Seek(int seconds) {
