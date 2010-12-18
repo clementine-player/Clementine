@@ -169,12 +169,14 @@ void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
 static bool CompareSongs(const Song& left, const Song& right) {
   // Order by artist, album, disc, track
   if (left.artist() < right.artist()) return true;
-  if (left.artist() > right.artist()) return true;
+  if (left.artist() > right.artist()) return false;
   if (left.album() < right.album()) return true;
-  if (left.album() > right.album()) return true;
+  if (left.album() > right.album()) return false;
   if (left.disc() < right.disc()) return true;
-  if (left.disc() > right.disc()) return true;
-  return left.track() < right.track();
+  if (left.disc() > right.disc()) return false;
+  if (left.track() < right.track()) return true;
+  if (left.track() > right.track()) return false;
+  return left.filename() < right.filename();
 }
 
 void SongLoader::LoadLocalDirectoryAndEmit(const QString& filename) {
