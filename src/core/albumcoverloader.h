@@ -40,6 +40,7 @@ class AlbumCoverLoader : public QObject {
   static QString ImageCacheDir();
 
   void SetDesiredHeight(int height) { height_ = height; }
+  void SetScaleOutputImage(bool scale) { scale_ = scale; }
   void SetPadOutputImage(bool padding) { padding_ = padding; }
   void SetDefaultOutputImage(const QImage& image);
 
@@ -100,6 +101,7 @@ class AlbumCoverLoader : public QObject {
   bool stop_requested_;
 
   int height_;
+  bool scale_;
   bool padding_;
   QImage default_;
 

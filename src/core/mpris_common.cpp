@@ -36,7 +36,8 @@ ArtLoader::~ArtLoader() {
 }
 
 void ArtLoader::Initialised() {
-  cover_loader_->Worker()->SetPadOutputImage(true);
+  cover_loader_->Worker()->SetScaleOutputImage(false);
+  cover_loader_->Worker()->SetPadOutputImage(false);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(TempArtLoaded(quint64,QImage)));

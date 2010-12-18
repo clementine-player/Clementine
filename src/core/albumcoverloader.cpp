@@ -37,6 +37,7 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
     height_(120),
+    scale_(true),
     padding_(true),
     next_id_(0),
     network_(new NetworkAccessManager(this))
@@ -213,8 +214,13 @@ QImage AlbumCoverLoader::ScaleAndPad(const QImage &image) const {
     return image;
 
   // Scale the image down
-  QImage copy = image.scaled(QSize(height_, height_),
-                             Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  QImage copy;
+  if (scale_) {
+    copy = image.scaled(QSize(height_, height_),
+                        Qt::KeepAspectRatio, Qt::SmoothTransformation);
+  } else {
+    copy = image;
+  }
 
   if (!padding_)
     return copy;
