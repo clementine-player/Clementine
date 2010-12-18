@@ -34,9 +34,13 @@ public slots:
 
 protected:
   void paintEvent(QPaintEvent*);
+  bool eventFilter(QObject* obj, QEvent* event);
 
 private slots:
   void FadeFinished();
+
+private:
+  void CaptureParent();
 
 private:
   static const int kLoadingPadding;

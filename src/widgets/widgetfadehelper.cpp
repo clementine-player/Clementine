@@ -17,6 +17,7 @@
 
 #include "widgetfadehelper.h"
 
+#include <QResizeEvent>
 #include <QPainter>
 #include <QTimeLine>
 #include <QtDebug>
@@ -33,7 +34,7 @@ WidgetFadeHelper::WidgetFadeHelper(QWidget* parent, int msec)
     blur_timeline_(new QTimeLine(msec, this)),
     fade_timeline_(new QTimeLine(msec, this))
 {
-  setAttribute(Qt::WA_TransparentForMouseEvents);
+  parent->installEventFilter(this);
 
   connect(blur_timeline_, SIGNAL(valueChanged(qreal)), SLOT(update()));
   connect(fade_timeline_, SIGNAL(valueChanged(qreal)), SLOT(update()));
@@ -42,7 +43,37 @@ WidgetFadeHelper::WidgetFadeHelper(QWidget* parent, int msec)
   hide();
 }
 
+bool WidgetFadeHelper::eventFilter(QObject* obj, QEvent* event) {
+  // We're only interested in our parent's resize events
+  if (obj != parent_ || event->type() != QEvent::Resize)
+    return false;
+
+  // Don't care if we're hidden
+  if (!isVisible())
+    return false;
+
+  // Get a new capture of the parent
+  hide();
+  CaptureParent();
+  show();
+  return false;
+}
+
 void WidgetFadeHelper::StartBlur() {
+  CaptureParent();
+
+  // Cover the parent
+  raise();
+  show();
+
+  // Start the timeline
+  blur_timeline_->stop();
+  blur_timeline_->start();
+
+  setAttribute(Qt::WA_TransparentForMouseEvents, false);
+}
+
+void WidgetFadeHelper::CaptureParent() {
   // Take a "screenshot" of the window
   original_pixmap_ = QPixmap::grabWidget(parent_);
   QImage original_image = original_pixmap_.toImage();
@@ -83,14 +114,7 @@ void WidgetFadeHelper::StartBlur() {
 
   blurred_pixmap_ = QPixmap::fromImage(blurred);
 
-  // Cover the parent
   resize(parent_->size());
-  raise();
-  show();
-
-  // Start the timeline
-  blur_timeline_->stop();
-  blur_timeline_->start();
 }
 
 void WidgetFadeHelper::StartFade() {
@@ -110,6 +134,8 @@ void WidgetFadeHelper::StartFade() {
   // Start the timeline
   fade_timeline_->stop();
   fade_timeline_->start();
+
+  setAttribute(Qt::WA_TransparentForMouseEvents, true);
 }
 
 void WidgetFadeHelper::paintEvent(QPaintEvent* ) {
