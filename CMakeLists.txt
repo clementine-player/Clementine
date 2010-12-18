@@ -109,7 +109,6 @@ include_directories(${LIBXML_INCLUDE_DIRS})
 if (HAVE_LIBLASTFM)
   include_directories(${LASTFM_INCLUDE_DIRS})
 endif (HAVE_LIBLASTFM)
-include_directories("3rdparty/qsqlite")
 include_directories("3rdparty/universalchardet")
 
 # Remove GLU and GL from the link line - they're not really required
@@ -186,6 +185,7 @@ if(STATIC_SQLITE)
   message(STATUS "Building static qsqlite plugin")
   add_definitions(-DQT_STATICPLUGIN)
   add_subdirectory(3rdparty/qsqlite)
+  include_directories("3rdparty/qsqlite")
 endif(STATIC_SQLITE)
 
 # When/if upstream accepts our patches then these options can be used to link
