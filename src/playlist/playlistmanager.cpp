@@ -165,7 +165,15 @@ void PlaylistManager::Remove(int id) {
 
   playlist_backend_->RemovePlaylist(id);
 
-  int next_id = playlists_.constBegin()->p->id();
+  int next_id = -1;
+  foreach (int possible_next_id, playlists_.keys()) {
+    if (possible_next_id != id) {
+      next_id = possible_next_id;
+      break;
+    }
+  }
+  if (next_id == -1)
+    return;
 
   if (id == active_)
     SetActivePlaylist(next_id);
