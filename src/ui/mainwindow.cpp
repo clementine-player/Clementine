@@ -391,7 +391,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
   connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
 
-  connect(player_->ArtLoader(), SIGNAL(ArtLoaded(Song,QString)), osd_, SLOT(CoverArtPathReady(Song,QString)));
+  connect(player_->ArtLoader(), SIGNAL(ThumbnailLoaded(Song,QString)), osd_, SLOT(CoverArtPathReady(Song,QString)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));

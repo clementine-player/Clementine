@@ -25,6 +25,7 @@ namespace mpris {
 
 ArtLoader::ArtLoader(QObject* parent)
   : QObject(parent),
+    temp_file_pattern_(QDir::tempPath() + "/clementine-art-XXXXXX.jpg"),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     id_(0)
 {
@@ -54,16 +55,26 @@ void ArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
   id_ = 0;
 
   QString uri;
+  QString thumbnail_uri;
 
   if (!image.isNull()) {
-    temp_art_.reset(new QTemporaryFile(QDir::tempPath() + "/clementine-art-XXXXXX.jpg"));
+    temp_art_.reset(new QTemporaryFile(temp_file_pattern_));
     temp_art_->open();
     image.save(temp_art_->fileName(), "JPEG");
 
+    // Scale the image down to make a thumbnail.  It's a bit crap doing it here
+    // since it's the GUI thread, but the alternative is hard.
+    temp_art_thumbnail_.reset(new QTemporaryFile(temp_file_pattern_));
+    temp_art_thumbnail_->open();
+    image.scaledToHeight(120, Qt::SmoothTransformation)
+        .save(temp_art_thumbnail_->fileName(), "JPEG");
+
     uri = "file://" + temp_art_->fileName();
+    thumbnail_uri = "file://" + temp_art_thumbnail_->fileName();
   }
 
   emit ArtLoaded(last_song_, uri);
+  emit ThumbnailLoaded(last_song_, thumbnail_uri);
 }
 
 

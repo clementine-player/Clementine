@@ -47,13 +47,17 @@ public slots:
 
 signals:
   void ArtLoaded(const Song& song, const QString& uri);
+  void ThumbnailLoaded(const Song& song, const QString& uri);
 
 private slots:
   void Initialised();
   void TempArtLoaded(quint64 id, const QImage& image);
 
 private:
+  QString temp_file_pattern_;
+
   boost::scoped_ptr<QTemporaryFile> temp_art_;
+  boost::scoped_ptr<QTemporaryFile> temp_art_thumbnail_;
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   quint64 id_;
 
