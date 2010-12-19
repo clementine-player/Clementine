@@ -26,23 +26,21 @@ class SearchTargetWrapper;
 
 class MacLineEdit : public QMacCocoaViewContainer, public LineEditInterface {
   Q_OBJECT
-  Q_PROPERTY(QString hint READ GetHint WRITE SetHint);
+  Q_PROPERTY(QString hint READ hint WRITE set_hint);
 
  public:
   MacLineEdit(QWidget* parent = 0);
   ~MacLineEdit();
 
-  QString GetHint() const { return hint_; }
-  void SetHint(const QString& hint);
-  void ClearHint() { SetHint(QString()); }
+  QString hint() const { return hint_; }
+  void set_hint(const QString& hint);
+  void clear_hint() { set_hint(QString()); }
 
   void paintEvent(QPaintEvent* e);
 
-  void clear() {}
-
-  void setText(const QString&);
+  void set_text(const QString&);
   QString text() const;
-  void setFocus() {}
+  void set_focus() {}
 
  signals:
   void textChanged(const QString& text);

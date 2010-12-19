@@ -19,18 +19,21 @@
 #define EDITTAGDIALOG_H
 
 #include <QDialog>
-#include <QFutureWatcher>
-#include <QMutex>
+#include <QLabel>
+#include <QModelIndexList>
 
 #include "core/song.h"
+#include "widgets/lineedit.h"
 
 class LibraryBackend;
 class Ui_EditTagDialog;
 
+class QItemSelection;
+
 class EditTagDialog : public QDialog {
   Q_OBJECT
 
- public:
+public:
   EditTagDialog(QWidget* parent = 0);
   ~EditTagDialog();
 
@@ -39,26 +42,49 @@ class EditTagDialog : public QDialog {
   bool SetSongs(const SongList& songs);
   void SetTagCompleter(LibraryBackend* backend);
 
- public slots:
-  void accept();
+private slots:
+  void SelectionChanged();
+  void FieldValueEdited();
+  void ResetField();
 
- private slots:
-  void SongsEdited();
+private:
+  struct Data {
+    Data(const Song& song = Song()) : original_(song), current_(song) {}
 
- private:
-  void SaveSong(const Song& song);
+    static QVariant value(const Song& song, const QString& id);
+    QVariant original_value(const QString& id) const { return value(original_, id); }
+    QVariant current_value(const QString& id) const { return value(current_, id); }
 
+    void set_value(const QString& id, const QVariant& value);
+
+    Song original_;
+    Song current_;
+  };
+
+  struct FieldData {
+    FieldData(QLabel* label = NULL, QWidget* editor = NULL,
+              const QString& id = QString())
+      : label_(label), editor_(editor), id_(id) {}
+
+    QLabel* label_;
+    QWidget* editor_;
+    QString id_;
+  };
+
+  bool DoesValueVary(const QModelIndexList& sel, const QString& id) const;
+  bool IsValueModified(const QModelIndexList& sel, const QString& id) const;
+
+  void InitFieldValue(const FieldData& field, const QModelIndexList& sel);
+  void UpdateFieldValue(const FieldData& field, const QModelIndexList& sel);
+  void ResetFieldValue(const FieldData& field, const QModelIndexList& sel);
+
+private:
   Ui_EditTagDialog* ui_;
 
-  SongList songs_;
+  QList<Data> data_;
+  QList<FieldData> fields_;
 
-  QString common_artist_;
-  QString common_album_;
-  QString common_genre_;
-  int common_year_;
-
-  QFutureWatcher<void> watcher_;
-  QMutex taglib_mutex_;
+  bool ignore_edits_;
 };
 
 #endif // EDITTAGDIALOG_H

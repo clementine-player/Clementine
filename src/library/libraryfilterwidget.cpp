@@ -118,7 +118,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   filter_ = ui_->filter;
 #endif
 
-  connect(filter_->object(), SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
+  connect(filter_->widget(), SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {

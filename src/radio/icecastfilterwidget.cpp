@@ -76,7 +76,7 @@ IcecastFilterWidget::~IcecastFilterWidget() {
 
 void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
   model_ = model;
-  connect(filter_->object(), SIGNAL(textChanged(QString)),
+  connect(filter_->widget(), SIGNAL(textChanged(QString)),
           model_, SLOT(SetFilterText(QString)));
 
   // Load settings
@@ -99,7 +99,7 @@ void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
 
 void IcecastFilterWidget::ClearFilter() {
   filter_->clear();
-  filter_->setFocus();
+  filter_->set_focus();
 }
 
 void IcecastFilterWidget::SortModeChanged(int mode) {

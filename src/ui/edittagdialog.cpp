@@ -20,30 +20,53 @@
 #include "library/library.h"
 #include "playlist/playlistdelegates.h"
 
-#include <boost/bind.hpp>
-using boost::bind;
-
-#include <QtConcurrentMap>
 #include <QtDebug>
-#include <QDir>
 
-const char* EditTagDialog::kHintText = QT_TR_NOOP("[click to edit]");
+const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
 
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
-    ui_(new Ui_EditTagDialog)
+    ui_(new Ui_EditTagDialog),
+    ignore_edits_(false)
 {
   ui_->setupUi(this);
-  ui_->busy->hide();
-  connect(&watcher_, SIGNAL(finished()), SLOT(SongsEdited()));
+  ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
+
+  // An editable field is one that has a label as a buddy.  The label is
+  // important because it gets turned bold when the field is changed.
+  foreach (QLabel* label, findChildren<QLabel*>()) {
+    QWidget* widget = label->buddy();
+    if (widget) {
+      // Store information about the field
+      fields_ << FieldData(label, widget, widget->objectName());
+
+      // Connect the Reset signal
+      if (dynamic_cast<ExtendedEditor*>(widget)) {
+        connect(widget, SIGNAL(Reset()), SLOT(ResetField()));
+      }
+
+      // Connect the edited signal
+      if (qobject_cast<QLineEdit*>(widget)) {
+        connect(widget, SIGNAL(textChanged(QString)), SLOT(FieldValueEdited()));
+      } else if (qobject_cast<QPlainTextEdit*>(widget)) {
+        connect(widget, SIGNAL(textChanged()), SLOT(FieldValueEdited()));
+      } else if (qobject_cast<QSpinBox*>(widget)) {
+        connect(widget, SIGNAL(valueChanged(int)), SLOT(FieldValueEdited()));
+      }
+    }
+  }
+
+  connect(ui_->song_list->selectionModel(),
+          SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+          SLOT(SelectionChanged()));
 }
 
 EditTagDialog::~EditTagDialog() {
   delete ui_;
 }
 
-bool EditTagDialog::SetSongs(const SongList &s) {
-  SongList songs;
+bool EditTagDialog::SetSongs(const SongList& s) {
+  data_.clear();
 
   foreach (const Song& song, s) {
     if (song.IsEditable()) {
@@ -52,76 +75,24 @@ bool EditTagDialog::SetSongs(const SongList &s) {
       copy.InitFromFile(copy.filename(), copy.directory_id());
 
       if (copy.is_valid())
-        songs << copy;
-      else
-        songs << song;
+        data_ << Data(copy);
     }
   }
-  songs_ = songs;
 
-  if (songs.count() == 0)
+  if (data_.count() == 0)
     return false;
 
-  // Don't allow editing of fields that don't make sense for multiple items
-  ui_->title->setEnabled(songs.count() == 1);
-  ui_->track->setEnabled(songs.count() == 1);
-  ui_->comment->setEnabled(songs.count() == 1);
-
-  common_artist_ = songs[0].artist();
-  common_album_ = songs[0].album();
-  common_genre_ = songs[0].genre();
-  common_year_ = songs[0].year();
-
-  if (songs.count() == 1) {
-    const Song& song = songs[0];
-
-    ui_->title->setText(song.title());
-    ui_->artist->setText(song.artist());
-    ui_->album->setText(song.album());
-    ui_->genre->setText(song.genre());
-    ui_->year->setValue(song.year());
-    ui_->track->setValue(song.track());
-    ui_->comment->setPlainText(song.comment());
-
-    ui_->filename->setText(QDir::toNativeSeparators(song.filename()));
-
-    ui_->artist->clear_hint();
-    ui_->album->clear_hint();
-    ui_->genre->clear_hint();
-  } else {
-    // Find any fields that are common to all items
-
-    ui_->title->clear();
-    ui_->track->clear();
-    ui_->comment->clear();
-
-    foreach (const Song& song, songs) {
-      if (common_artist_ != song.artist()) {
-        common_artist_ = QString::null;
-        ui_->artist->set_hint(kHintText);
-      }
-
-      if (common_album_ != song.album()) {
-        common_album_ = QString::null;
-        ui_->album->set_hint(kHintText);
-      }
-
-      if (common_genre_ != song.genre()) {
-        common_genre_ = QString::null;
-        ui_->genre->set_hint(kHintText);
-      }
-
-      if (common_year_ != song.year())
-        common_year_ = -1;
-    }
-
-    ui_->artist->setText(common_artist_);
-    ui_->album->setText(common_album_);
-    ui_->genre->setText(common_genre_);
-    ui_->year->setValue(common_year_);
-
-    ui_->filename->setText(tr("Editing %n tracks", "", songs.count()));
+  // Add the filenames to the list
+  ui_->song_list->clear();
+  foreach (const Data& data, data_) {
+    ui_->song_list->addItem(data.current_.basefilename());
   }
+
+  // Select all
+  ui_->song_list->selectAll();
+
+  // Hide the list if there's only one song in it
+  ui_->song_list->setVisible(data_.count() != 1);
 
   return true;
 }
@@ -131,47 +102,153 @@ void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
   new TagCompleter(backend, Playlist::Column_Album, ui_->album);
 }
 
-void EditTagDialog::SaveSong(const Song& old) {
-  Song song(old);
+QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
+  if (id == "title")       return song.title();
+  if (id == "artist")      return song.artist();
+  if (id == "album")       return song.album();
+  if (id == "albumartist") return song.albumartist();
+  if (id == "composer")    return song.composer();
+  if (id == "genre")       return song.genre();
+  if (id == "comment")     return song.comment();
+  if (id == "track")       return song.track();
+  if (id == "disc")        return song.disc();
+  if (id == "year")        return song.year();
+  qDebug() << "Unknown ID" << id;
+  return QVariant();
+}
 
-  int track = ui_->track->text().isEmpty() ? -1 : ui_->track->value();
-  int year = ui_->year->text().isEmpty() ? -1 : ui_->year->value();
+void EditTagDialog::Data::set_value(const QString& id, const QVariant& value) {
+  if (id == "title")       current_.set_title(value.toString());
+  if (id == "artist")      current_.set_artist(value.toString());
+  if (id == "album")       current_.set_album(value.toString());
+  if (id == "albumartist") current_.set_albumartist(value.toString());
+  if (id == "composer")    current_.set_composer(value.toString());
+  if (id == "genre")       current_.set_genre(value.toString());
+  if (id == "comment")     current_.set_comment(value.toString());
+  if (id == "track")       current_.set_track(value.toInt());
+  if (id == "disc")        current_.set_disc(value.toInt());
+  if (id == "year")        current_.set_year(value.toInt());
+}
 
-  if (ui_->title->isEnabled())
-    song.set_title(ui_->title->text());
+bool EditTagDialog::DoesValueVary(const QModelIndexList& sel, const QString& id) const {
+  QVariant value = data_[sel.first().row()].current_value(id);
+  for (int i=1 ; i<sel.count() ; ++i) {
+    if (value != data_[sel[i].row()].current_value(id))
+      return true;
+  }
+  return false;
+}
 
-  if (ui_->artist->isEnabled() && !(common_artist_.isNull() && ui_->artist->text().isEmpty()))
-    song.set_artist(ui_->artist->text());
-  if (ui_->album->isEnabled() && !(common_album_.isNull() && ui_->album->text().isEmpty()))
-    song.set_album(ui_->album->text());
-  if (ui_->genre->isEnabled() && !(common_genre_.isNull() && ui_->genre->text().isEmpty()))
-    song.set_genre(ui_->genre->text());
-  if (ui_->year->isEnabled() && !(common_year_ == -1 && year == -1))
-    song.set_year(year);
+bool EditTagDialog::IsValueModified(const QModelIndexList& sel, const QString& id) const {
+  foreach (const QModelIndex& i, sel) {
+    if (data_[i.row()].original_value(id) != data_[i.row()].current_value(id))
+      return true;
+  }
+  return false;
+}
 
-  if (ui_->track->isEnabled())
-    song.set_track(track);
+void EditTagDialog::InitFieldValue(const FieldData& field, const QModelIndexList& sel) {
+  const bool varies = DoesValueVary(sel, field.id_);
+  const bool modified = IsValueModified(sel, field.id_);
 
-  if (ui_->comment->isEnabled())
-    song.set_comment(ui_->comment->toPlainText());
+  if (ExtendedEditor* editor = dynamic_cast<ExtendedEditor*>(field.editor_)) {
+    editor->clear();
+    editor->clear_hint();
+    if (varies) {
+      editor->set_hint(EditTagDialog::kHintText);
+    } else {
+      editor->set_text(data_[sel[0].row()].current_value(field.id_).toString());
+    }
+  }
 
-  {
-    QMutexLocker l(&taglib_mutex_);
-    song.Save();
+  QFont new_font(font());
+  new_font.setBold(modified);
+  field.label_->setFont(new_font);
+  field.editor_->setFont(new_font);
+}
+
+void EditTagDialog::UpdateFieldValue(const FieldData& field, const QModelIndexList& sel) {
+  // Get the value from the field
+  QVariant value;
+  if (ExtendedEditor* editor = dynamic_cast<ExtendedEditor*>(field.editor_)) {
+    value = editor->text();
+  }
+
+  // Did we get it?
+  if (!value.isValid()) {
+    return;
+  }
+
+  // Set it in each selected song
+  foreach (const QModelIndex& i, sel) {
+    data_[i.row()].set_value(field.id_, value);
+  }
+
+  // Update the boldness
+  const bool modified = IsValueModified(sel, field.id_);
+
+  QFont new_font(font());
+  new_font.setBold(modified);
+  field.label_->setFont(new_font);
+  field.editor_->setFont(new_font);
+}
+
+void EditTagDialog::ResetFieldValue(const FieldData& field, const QModelIndexList& sel) {
+  // Reset each selected song
+  foreach (const QModelIndex& i, sel) {
+    Data& data = data_[i.row()];
+    data.set_value(field.id_, data.original_value(field.id_));
+  }
+
+  // Reset the field
+  InitFieldValue(field, sel);
+}
+
+void EditTagDialog::SelectionChanged() {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+
+  ignore_edits_ = true;
+  foreach (const FieldData& field, fields_) {
+    InitFieldValue(field, sel);
+  }
+  ignore_edits_ = false;
+}
+
+void EditTagDialog::FieldValueEdited() {
+  if (ignore_edits_)
+    return;
+
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+
+  QWidget* w = qobject_cast<QWidget*>(sender());
+
+  // Find the field
+  foreach (const FieldData& field, fields_) {
+    if (field.editor_ == w) {
+      UpdateFieldValue(field, sel);
+      return;
+    }
   }
 }
 
-void EditTagDialog::accept() {
-  QFuture<void> future = QtConcurrent::map(songs_, bind(&EditTagDialog::SaveSong, this, _1));
-  watcher_.setFuture(future);
-  ui_->busy->show();
-  ui_->buttonBox->setEnabled(false);
-}
+void EditTagDialog::ResetField() {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
 
-void EditTagDialog::SongsEdited() {
-  qDebug() << Q_FUNC_INFO;
-  ui_->busy->hide();
-  ui_->buttonBox->setEnabled(true);
+  QWidget* w = qobject_cast<QWidget*>(sender());
 
-  QDialog::accept();
+  // Find the field
+  foreach (const FieldData& field, fields_) {
+    if (field.editor_ == w) {
+      ignore_edits_ = true;
+      ResetFieldValue(field, sel);
+      ignore_edits_ = false;
+      return;
+    }
+  }
 }

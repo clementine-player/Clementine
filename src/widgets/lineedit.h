@@ -19,32 +19,40 @@
 #define LINEEDIT_H
 
 #include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QSpinBox>
+
+#include "ui/iconloader.h"
 
 class QToolButton;
 
 class LineEditInterface {
- public:
-  LineEditInterface(QObject* object) : object_(object) {}
+public:
+  LineEditInterface(QWidget* widget) : widget_(widget) {}
+
+  QWidget* widget() const { return widget_; }
+
   virtual ~LineEditInterface() {}
-  virtual void clear() = 0;
-  virtual void setFocus() = 0;
-  virtual void setText(const QString&) = 0;
+
+  virtual void clear() { set_text(QString()); }
+  virtual void set_focus() = 0;
   virtual QString text() const = 0;
-  virtual void set_hint(const QString&) = 0;
+  virtual void set_text(const QString& text) = 0;
 
-  QObject* object() const { return object_; }
+  virtual QString hint() const = 0;
+  virtual void set_hint(const QString& hint) = 0;
+  virtual void clear_hint() = 0;
 
- private:
-  QObject* object_;
+protected:
+  QWidget* widget_;
 };
 
-class LineEdit : public QLineEdit, public LineEditInterface {
-  Q_OBJECT
-  Q_PROPERTY(QString hint READ hint WRITE set_hint);
-  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
+class ExtendedEditor : public LineEditInterface {
+public:
+  ExtendedEditor(QWidget* widget, int extra_right_padding = 0, bool draw_hint = true);
+  virtual ~ExtendedEditor() {}
 
- public:
-  LineEdit(QWidget* parent = 0);
+  virtual bool is_empty() const { return text().isEmpty(); }
 
   QString hint() const { return hint_; }
   void set_hint(const QString& hint);
@@ -53,20 +61,98 @@ class LineEdit : public QLineEdit, public LineEditInterface {
   bool has_clear_button() const { return has_clear_button_; }
   void set_clear_button(bool visible);
 
-  void clear() { QLineEdit::clear(); }
-  void setFocus() { QLineEdit::setFocus(); }
-  void setText(const QString& t) { QLineEdit::setText(t); }
-  QString text() const { return QLineEdit::text(); }
+  bool has_reset_button() const;
+  void set_reset_button(bool visible);
 
- protected:
-  void paintEvent(QPaintEvent* e);
-  void resizeEvent(QResizeEvent*);
+protected:
+  void Paint(QPaintDevice* device);
+  void Resize();
 
- private:
+private:
+  void UpdateButtonGeometry();
+
+protected:
   QString hint_;
 
   bool has_clear_button_;
   QToolButton* clear_button_;
+  QToolButton* reset_button_;
+
+  int extra_right_padding_;
+  bool draw_hint_;
+};
+
+class LineEdit : public QLineEdit,
+                 public ExtendedEditor {
+  Q_OBJECT
+  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+
+public:
+  LineEdit(QWidget* parent = 0);
+
+  // ExtendedEditor
+  void set_focus() { QLineEdit::setFocus(); }
+  QString text() const { return QLineEdit::text(); }
+  void set_text(const QString& text) { QLineEdit::setText(text); }
+
+protected:
+  void paintEvent(QPaintEvent*);
+  void resizeEvent(QResizeEvent*);
+
+signals:
+  void Reset();
+};
+
+class TextEdit : public QPlainTextEdit,
+                 public ExtendedEditor {
+  Q_OBJECT
+  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+
+public:
+  TextEdit(QWidget* parent = 0);
+
+  // ExtendedEditor
+  void set_focus() { QPlainTextEdit::setFocus(); }
+  QString text() const { return QPlainTextEdit::toPlainText(); }
+  void set_text(const QString& text) { QPlainTextEdit::setPlainText(text); }
+
+protected:
+  void paintEvent(QPaintEvent*);
+  void resizeEvent(QResizeEvent*);
+
+signals:
+  void Reset();
+};
+
+class SpinBox : public QSpinBox,
+                public ExtendedEditor {
+  Q_OBJECT
+  Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
+  Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
+
+public:
+  SpinBox(QWidget* parent = 0);
+
+  // QSpinBox
+  QString textFromValue(int val) const;
+
+  // ExtendedEditor
+  bool is_empty() const { return text().isEmpty() || text() == "0"; }
+  void set_focus() { QSpinBox::setFocus(); }
+  QString text() const { return QSpinBox::text(); }
+  void set_text(const QString& text) { QSpinBox::setValue(text.toInt()); }
+
+protected:
+  void paintEvent(QPaintEvent*);
+  void resizeEvent(QResizeEvent*);
+
+signals:
+  void Reset();
 };
 
 #endif // LINEEDIT_H

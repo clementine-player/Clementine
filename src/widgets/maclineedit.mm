@@ -121,10 +121,10 @@ QString MacLineEdit::text() const {
   return wrapper_->text();
 }
 
-void MacLineEdit::setText(const QString& text) {
+void MacLineEdit::set_text(const QString& text) {
   wrapper_->setText(text);
 }
 
-void MacLineEdit::SetHint(const QString& hint) {
+void MacLineEdit::set_hint(const QString& hint) {
   wrapper_->SetHint(hint);
 }

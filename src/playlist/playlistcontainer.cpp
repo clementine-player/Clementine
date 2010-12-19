@@ -158,7 +158,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   emit ViewSelectionModelChanged();
 
   // Update filter
-  filter_->setText(playlist->proxy()->filterRegExp().pattern());
+  filter_->set_text(playlist->proxy()->filterRegExp().pattern());
 
   // Ensure that tab is current
   if (ui_->tab_bar->current_id() != manager_->current_id())
