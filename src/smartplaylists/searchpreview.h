@@ -19,18 +19,15 @@
 #define SMARTPLAYLISTSEARCHPREVIEW_H
 
 #include "search.h"
+#include "smartplaylists/generator_fwd.h"
 
 #include <QWidget>
-
-#include <boost/scoped_ptr.hpp>
 
 class LibraryBackend;
 class Playlist;
 class Ui_SmartPlaylistSearchPreview;
 
 namespace smart_playlists {
-
-class QueryGenerator;
 
 class SearchPreview : public QWidget {
   Q_OBJECT
@@ -61,7 +58,7 @@ private:
 
   Search pending_search_;
   Search last_search_;
-  boost::scoped_ptr<QueryGenerator> generator_;
+  GeneratorPtr generator_;
 };
 
 } // namespace

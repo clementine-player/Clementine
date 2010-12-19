@@ -83,14 +83,18 @@ void SearchPreview::showEvent(QShowEvent* e) {
   QWidget::showEvent(e);
 }
 
+PlaylistItemList DoRunSearch(GeneratorPtr gen) {
+  return gen->Generate();
+}
+
 void SearchPreview::RunSearch(const Search& search) {
   generator_.reset(new QueryGenerator);
   generator_->set_library(backend_);
-  generator_->Load(search);
+  boost::dynamic_pointer_cast<QueryGenerator>(generator_)->Load(search);
 
   ui_->busy_container->show();
   ui_->count_label->hide();
-  Future future = QtConcurrent::run(generator_.get(), &QueryGenerator::Generate);
+  Future future = QtConcurrent::run(DoRunSearch, generator_);
 
   FutureWatcher* watcher = new FutureWatcher(this);
   watcher->setFuture(future);
@@ -101,7 +105,7 @@ void SearchPreview::SearchFinished() {
   FutureWatcher* watcher = static_cast<FutureWatcher*>(sender());
   watcher->deleteLater();
 
-  last_search_ = generator_->search();
+  last_search_ = boost::dynamic_pointer_cast<QueryGenerator>(generator_)->search();
   generator_.reset();
 
   if (pending_search_.is_valid() && pending_search_ != last_search_) {
