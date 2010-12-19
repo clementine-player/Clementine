@@ -56,10 +56,6 @@ endif (WIN32)
 find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
-if (ENABLE_LIBLASTFM AND LASTFM_LIBRARIES AND LASTFM_INCLUDE_DIRS)
-  set(HAVE_LIBLASTFM ON)
-endif (ENABLE_LIBLASTFM AND LASTFM_LIBRARIES AND LASTFM_INCLUDE_DIRS)
-
 if (APPLE)
   find_library(GROWL Growl)
   option(ENABLE_SPARKLE "Sparkle updating" ON)
@@ -106,9 +102,6 @@ include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
-if (HAVE_LIBLASTFM)
-  include_directories(${LASTFM_INCLUDE_DIRS})
-endif (HAVE_LIBLASTFM)
 include_directories("3rdparty/universalchardet")
 
 # Remove GLU and GL from the link line - they're not really required
@@ -163,6 +156,10 @@ endif(ENABLE_LIBMTP AND LIBMTP_FOUND)
 if(ENABLE_SOUNDMENU AND INDICATEQT_FOUND)
   set(HAVE_LIBINDICATE ON)
 endif(ENABLE_SOUNDMENU AND INDICATEQT_FOUND)
+
+if(ENABLE_LIBLASTFM AND LASTFM_LIBRARIES AND LASTFM_INCLUDE_DIRS)
+  set(HAVE_LIBLASTFM ON)
+endif(ENABLE_LIBLASTFM AND LASTFM_LIBRARIES AND LASTFM_INCLUDE_DIRS)
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link

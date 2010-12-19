@@ -23,6 +23,10 @@ if(HAVE_LIBINDICATE)
   include_directories(${INDICATEQT_INCLUDE_DIRS})
 endif(HAVE_LIBINDICATE)
 
+if(HAVE_LIBLASTFM)
+  include_directories(${LASTFM_INCLUDE_DIRS})
+endif(HAVE_LIBLASTFM)
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/AddEngine.cmake)
 include(../cmake/ParseArguments.cmake)
