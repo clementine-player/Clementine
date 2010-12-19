@@ -46,6 +46,8 @@ const int OSDPretty::kDropShadowSize = 13;
 const int OSDPretty::kBorderRadius = 10;
 const int OSDPretty::kMaxIconSize = 100;
 
+const int OSDPretty::kSnapProximity = 20;
+
 const QRgb OSDPretty::kPresetBlue = qRgb(102, 150, 227);
 const QRgb OSDPretty::kPresetOrange = qRgb(254, 156, 67);
 
@@ -336,6 +338,13 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
 
     new_pos.setX(qBound(geometry.left(), new_pos.x(), geometry.right() - width()));
     new_pos.setY(qBound(geometry.top(), new_pos.y(), geometry.bottom() - height()));
+
+    // Snap to center
+    int snap_x = geometry.center().x() - width() / 2;
+    qDebug() << snap_x << new_pos.x();
+    if (new_pos.x() > snap_x - kSnapProximity && new_pos.x() < snap_x + kSnapProximity) {
+      new_pos.setX(snap_x);
+    }
 
     move(new_pos);
 

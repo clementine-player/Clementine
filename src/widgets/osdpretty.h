@@ -42,6 +42,8 @@ class OSDPretty : public QWidget {
   static const int kBorderRadius;
   static const int kMaxIconSize;
 
+  static const int kSnapProximity;
+
   static const QRgb kPresetBlue;
   static const QRgb kPresetOrange;
 
