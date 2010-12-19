@@ -585,7 +585,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 
   restoreGeometry(settings_.value("geometry").toByteArray());
   if (!ui_->splitter->restoreState(settings_.value("splitter_state").toByteArray())) {
-    ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
+    ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
   ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 0).toInt());
   ui_->tabs->SetMode(FancyTabWidget::Mode(settings_.value(
