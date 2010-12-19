@@ -72,7 +72,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this)),
     setting_initial_header_layout_(false),
-    read_only_settings_(false),
+    read_only_settings_(true),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -163,6 +163,7 @@ void PlaylistView::SetPlaylist(Playlist *playlist) {
   LoadGeometry();
   ReloadSettings();
   DynamicModeChanged(playlist->is_dynamic());
+  read_only_settings_ = false;
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(DynamicModeChanged(bool)), SLOT(DynamicModeChanged(bool)));
