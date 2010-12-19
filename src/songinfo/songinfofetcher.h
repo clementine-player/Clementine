@@ -27,6 +27,8 @@
 
 class SongInfoProvider;
 
+class QSignalMapper;
+
 class SongInfoFetcher : public QObject {
   Q_OBJECT
 
@@ -37,6 +39,10 @@ public:
     QList<QUrl> images_;
     QList<CollapsibleInfoPane::Data> info_;
   };
+
+  static const int kDefaultTimeoutDuration = 2500; // msec
+
+  void set_timeout(int msec) { timeout_duration_ = msec; }
 
   void AddProvider(SongInfoProvider* provider);
   int FetchInfo(const Song& metadata);
@@ -50,12 +56,17 @@ private slots:
   void ImageReady(int id, const QUrl& url);
   void InfoReady(int id, const CollapsibleInfoPane::Data& data);
   void ProviderFinished(int id);
+  void Timeout(int id);
 
 private:
   QList<SongInfoProvider*> providers_;
 
   QMap<int, Result> results_;
   QMap<int, QList<SongInfoProvider*> > waiting_for_;
+  QMap<int, QTimer*> timeout_timers_;
+
+  QSignalMapper* timeout_timer_mapper_;
+  int timeout_duration_;
 
   int next_id_;
 };

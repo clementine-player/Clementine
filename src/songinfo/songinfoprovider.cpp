@@ -21,3 +21,7 @@ SongInfoProvider::SongInfoProvider()
   : enabled_(true)
 {
 }
+
+QString SongInfoProvider::name() const {
+  return metaObject()->className();
+}

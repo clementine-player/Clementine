@@ -31,6 +31,9 @@ public:
   SongInfoProvider();
 
   virtual void FetchInfo(int id, const Song& metadata) = 0;
+  virtual void Cancel(int id) {}
+
+  virtual QString name() const;
 
   bool is_enabled() const { return enabled_; }
   void set_enabled(bool enabled) { enabled_ = enabled; }

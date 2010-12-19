@@ -18,10 +18,16 @@
 #include "songinfofetcher.h"
 #include "songinfoprovider.h"
 
+#include <QSignalMapper>
+#include <QTimer>
+
 SongInfoFetcher::SongInfoFetcher(QObject* parent)
   : QObject(parent),
+    timeout_timer_mapper_(new QSignalMapper(this)),
+    timeout_duration_(kDefaultTimeoutDuration),
     next_id_(1)
 {
+  connect(timeout_timer_mapper_, SIGNAL(mapped(int)), SLOT(Timeout(int)));
 }
 
 void SongInfoFetcher::AddProvider(SongInfoProvider* provider) {
@@ -34,6 +40,13 @@ void SongInfoFetcher::AddProvider(SongInfoProvider* provider) {
 int SongInfoFetcher::FetchInfo(const Song& metadata) {
   const int id = next_id_ ++;
   results_[id] = Result();
+  timeout_timers_[id] = new QTimer(this);
+  timeout_timers_[id]->setSingleShot(true);
+  timeout_timers_[id]->setInterval(timeout_duration_);
+  timeout_timers_[id]->start();
+
+  timeout_timer_mapper_->setMapping(timeout_timers_[id], id);
+  connect(timeout_timers_[id], SIGNAL(timeout()), timeout_timer_mapper_, SLOT(map()));
 
   foreach (SongInfoProvider* provider, providers_) {
     if (provider->is_enabled()) {
@@ -70,5 +83,26 @@ void SongInfoFetcher::ProviderFinished(int id) {
   if (waiting_for_[id].isEmpty()) {
     emit ResultReady(id, results_.take(id));
     waiting_for_.remove(id);
+    delete timeout_timers_.take(id);
   }
+}
+
+void SongInfoFetcher::Timeout(int id) {
+  if (!results_.contains(id))
+    return;
+  if (!waiting_for_.contains(id))
+    return;
+
+  // Emit the results that we have already
+  emit ResultReady(id, results_.take(id));
+
+  // Cancel any providers that we're still waiting for
+  foreach (SongInfoProvider* provider, waiting_for_[id]) {
+    qDebug() << "Request timed out from info provider" << provider->name();
+    provider->Cancel(id);
+  }
+  waiting_for_.remove(id);
+
+  // Remove the timer
+  delete timeout_timers_.take(id);
 }

@@ -22,6 +22,7 @@
 #include "settingsdialog.h"
 #include "engines/enginebase.h"
 #include "playlist/playlistview.h"
+#include "songinfo/songinfofetcher.h"
 #include "songinfo/songinfotextview.h"
 #include "widgets/osd.h"
 #include "widgets/osdpretty.h"
@@ -315,6 +316,7 @@ void SettingsDialog::accept() {
   // Song info
   s.beginGroup(SongInfoTextView::kSettingsGroup);
   s.setValue("font_size", ui_->song_info_font_preview->font().pointSizeF());
+  s.setValue("timeout", ui_->song_info_timeout->value());
   s.endGroup();
 
   ui_->lyric_settings->Save();
@@ -415,6 +417,8 @@ void SettingsDialog::showEvent(QShowEvent*) {
   s.beginGroup(SongInfoTextView::kSettingsGroup);
   ui_->song_info_font_size->setValue(
       s.value("font_size", SongInfoTextView::kDefaultFontSize).toReal());
+  ui_->song_info_timeout->setValue(
+      s.value("timeout", SongInfoFetcher::kDefaultTimeoutDuration).toInt());
   s.endGroup();
 
   ui_->lyric_settings->Load();
