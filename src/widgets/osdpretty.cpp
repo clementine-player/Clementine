@@ -341,7 +341,6 @@ void OSDPretty::mouseMoveEvent(QMouseEvent* e) {
 
     // Snap to center
     int snap_x = geometry.center().x() - width() / 2;
-    qDebug() << snap_x << new_pos.x();
     if (new_pos.x() > snap_x - kSnapProximity && new_pos.x() < snap_x + kSnapProximity) {
       new_pos.setX(snap_x);
     }
