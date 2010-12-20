@@ -402,10 +402,12 @@ void GstEngine::UpdateScope() {
 void GstEngine::StartPreloading(const QUrl& url) {
   EnsureInitialised();
 
+  QUrl gst_url = FixupUrl(url);
+
   if (autocrossfade_enabled_) {
     // Have to create a new pipeline so we can crossfade between the two
 
-    preload_pipeline_ = CreatePipeline(url);
+    preload_pipeline_ = CreatePipeline(gst_url);
     if (!preload_pipeline_)
       return;
 
@@ -413,14 +415,28 @@ void GstEngine::StartPreloading(const QUrl& url) {
     // we reconnect this in GstEngine::Load
     disconnect(preload_pipeline_.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
 
-    preloaded_url_ = url;
+    preloaded_url_ = gst_url;
     preload_pipeline_->SetState(GST_STATE_PAUSED);
   } else {
     // No crossfading, so we can just queue the new URL in the existing
     // pipeline and get gapless playback (hopefully)
     if (current_pipeline_)
-      current_pipeline_->SetNextUrl(url);
+      current_pipeline_->SetNextUrl(gst_url);
   }
+}
+
+QUrl GstEngine::FixupUrl(const QUrl& url) {
+  QUrl copy = url;
+
+  // It's a file:// url with a hostname set.  QUrl::fromLocalFile does this
+  // when given a \\host\share\file path on Windows.  Munge it back into a
+  // path that gstreamer will recognise.
+  if (url.scheme() == "file" && !url.host().isEmpty()) {
+    copy.setPath("//" + copy.host() + copy.path());
+    copy.setHost(QString());
+  }
+
+  return copy;
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
@@ -434,15 +450,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
   if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
     return false;
 
-  QUrl gst_url = url;
-
-  // It's a file:// url with a hostname set.  QUrl::fromLocalFile does this
-  // when given a \\host\share\file path on Windows.  Munge it back into a
-  // path that gstreamer will recognise.
-  if (url.scheme() == "file" && !url.host().isEmpty()) {
-    gst_url.setPath("//" + gst_url.host() + gst_url.path());
-    gst_url.setHost(QString());
-  }
+  QUrl gst_url = FixupUrl(url);
 
   const bool crossfade = current_pipeline_ &&
                          ((crossfade_enabled_ && change == Engine::Manual) ||

@@ -146,6 +146,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   int AddBackgroundStream(boost::shared_ptr<GstEnginePipeline> pipeline);
 
+  static QUrl FixupUrl(const QUrl& url);
+
  private:
   static const int kTimerInterval = 1000; // msec
   static const int kPreloadGap = 1000; // msec
