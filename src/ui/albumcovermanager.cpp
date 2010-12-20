@@ -152,11 +152,10 @@ void AlbumCoverManager::Init() {
 
   #ifdef Q_OS_DARWIN
     MacLineEdit* lineedit = new MacLineEdit(ui_->filter->parentWidget());
-    lineedit->SetHint(ui_->filter->GetHint());
+    lineedit->set_hint(ui_->filter->hint());
     delete ui_->filter;
     ui_->horizontalLayout->insertWidget(0, lineedit);
     filter_ = lineedit;
-    delete ui_->clear;
     connect(lineedit, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
     lineedit->show();
   #else

@@ -85,10 +85,8 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   filter->setObjectName("filter");
   ui_->horizontalLayout->addWidget(filter);
   connect(filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
-  filter->SetHint(tr("Playlist search"));
+  filter->set_hint(tr("Playlist search"));
   filter_ = filter;
-
-  ui_->clear->hide();
 #else
   filter_ = ui_->filter;
   connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
