@@ -602,9 +602,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="button_box">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Discard|QDialogButtonBox::Reset|QDialogButtonBox::Save</set>
+      <set>QDialogButtonBox::Discard|QDialogButtonBox::Save</set>
      </property>
     </widget>
    </item>
@@ -638,7 +638,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>accepted()</signal>
    <receiver>EditTagDialog</receiver>
    <slot>accept()</slot>
@@ -654,7 +654,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>button_box</sender>
    <signal>rejected()</signal>
    <receiver>EditTagDialog</receiver>
    <slot>reject()</slot>

@@ -30,6 +30,7 @@
 #include <QFileDialog>
 #include <QLabel>
 #include <QMenu>
+#include <QPushButton>
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
@@ -97,6 +98,15 @@ EditTagDialog::EditTagDialog(QWidget* parent)
         IconLoader::Load("zoom-in"), tr("Show fullsize..."),
         this, SLOT(ZoomCover()));
   ui_->summary_art_button->setMenu(cover_menu_);
+
+  // Add the next/previous buttons
+  previous_button_ = new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
+  next_button_ = new QPushButton(IconLoader::Load("go-next"), tr("Next"), this);
+  ui_->button_box->addButton(previous_button_, QDialogButtonBox::ResetRole);
+  ui_->button_box->addButton(next_button_, QDialogButtonBox::ResetRole);
+
+  connect(previous_button_, SIGNAL(clicked()), SLOT(PreviousSong()));
+  connect(next_button_, SIGNAL(clicked()), SLOT(NextSong()));
 }
 
 EditTagDialog::~EditTagDialog() {
@@ -130,7 +140,10 @@ bool EditTagDialog::SetSongs(const SongList& s) {
   ui_->song_list->selectAll();
 
   // Hide the list if there's only one song in it
-  ui_->song_list->setVisible(data_.count() != 1);
+  const bool multiple = data_.count() != 1;
+  ui_->song_list->setVisible(multiple);
+  previous_button_->setEnabled(multiple);
+  next_button_->setEnabled(multiple);
 
   return true;
 }
@@ -444,4 +457,14 @@ void EditTagDialog::SetAlbumArt(const QString& path) {
   song.set_art_manual(path);
   backend_->UpdateManualAlbumArtAsync(song.artist(), song.album(), path);
   UpdateSummaryTab(song);
+}
+
+void EditTagDialog::NextSong() {
+  int row = (ui_->song_list->currentRow() + 1) % ui_->song_list->count();
+  ui_->song_list->setCurrentRow(row);
+}
+
+void EditTagDialog::PreviousSong() {
+  int row = (ui_->song_list->currentRow() - 1) % ui_->song_list->count();
+  ui_->song_list->setCurrentRow(row);
 }

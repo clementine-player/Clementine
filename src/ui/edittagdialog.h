@@ -33,6 +33,7 @@ class Ui_EditTagDialog;
 
 class QItemSelection;
 class QLabel;
+class QPushButton;
 
 class EditTagDialog : public QDialog {
   Q_OBJECT
@@ -57,6 +58,9 @@ private slots:
   void SearchCover();
   void UnsetCover();
   void ZoomCover();
+
+  void PreviousSong();
+  void NextSong();
 
 private:
   struct Data {
@@ -114,6 +118,9 @@ private:
   QAction* download_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;
+
+  QPushButton* previous_button_;
+  QPushButton* next_button_;
 };
 
 #endif // EDITTAGDIALOG_H
