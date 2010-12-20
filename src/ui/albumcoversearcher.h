@@ -21,11 +21,11 @@
 #include "core/albumcoverfetcher.h"
 
 #include <QDialog>
+#include <QIcon>
 
 #include <boost/shared_ptr.hpp>
 
 class AlbumCoverLoader;
-class AlbumCoverManager;
 class Ui_AlbumCoverSearcher;
 
 class QListWidgetItem;
@@ -35,7 +35,7 @@ class AlbumCoverSearcher : public QDialog {
   Q_OBJECT
 
 public:
-  AlbumCoverSearcher(AlbumCoverManager* parent);
+  AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent);
   ~AlbumCoverSearcher();
 
   enum Role {
@@ -61,7 +61,7 @@ private slots:
 private:
   Ui_AlbumCoverSearcher* ui_;
 
-  AlbumCoverManager* manager_;
+  QIcon no_cover_icon_;
   boost::shared_ptr<AlbumCoverLoader> loader_;
   AlbumCoverFetcher* fetcher_;
 

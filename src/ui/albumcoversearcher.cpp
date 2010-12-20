@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcovermanager.h"
 #include "albumcoversearcher.h"
 #include "ui_albumcoversearcher.h"
 #include "core/albumcoverfetcher.h"
@@ -24,10 +23,10 @@
 #include <QKeyEvent>
 #include <QListWidgetItem>
 
-AlbumCoverSearcher::AlbumCoverSearcher(AlbumCoverManager* parent)
+AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_AlbumCoverSearcher),
-    manager_(parent),
+    no_cover_icon_(no_cover_icon),
     fetcher_(NULL),
     id_(0)
 {
@@ -62,7 +61,7 @@ QImage AlbumCoverSearcher::Exec(const QString &query) {
     return QImage();
 
   QIcon icon = ui_->covers->currentItem()->icon();
-  if (icon.cacheKey() == manager_->no_cover_icon().cacheKey())
+  if (icon.cacheKey() == no_cover_icon_.cacheKey())
     return QImage();
 
   return icon.pixmap(icon.availableSizes()[0]).toImage();
@@ -95,7 +94,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const AlbumCoverFetcher::Sea
     quint64 id = loader_->LoadImageAsync(result.image_url, QString());
 
     QListWidgetItem* item = new QListWidgetItem(ui_->covers);
-    item->setIcon(manager_->no_cover_icon());
+    item->setIcon(no_cover_icon_);
     item->setText(result.artist + " - " + result.album);
     item->setData(Role_ImageURL, result.image_url);
     item->setData(Role_ImageRequestId, id);

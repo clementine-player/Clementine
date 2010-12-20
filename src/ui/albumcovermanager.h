@@ -47,6 +47,8 @@ class AlbumCoverManager : public QMainWindow {
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
+  static const char* kImageFileFilter;
+  static const char* kAllFilesFilter;
 
   LibraryBackend* backend() const { return backend_; }
   QIcon no_cover_icon() const { return no_cover_icon_; }
@@ -56,6 +58,9 @@ class AlbumCoverManager : public QMainWindow {
 
   SongList GetSongsInAlbum(const QModelIndex& index) const;
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
+
+  static QString SaveCoverInCache(
+      const QString& artist, const QString& album, const QImage& image);
 
  signals:
   void AddSongsToPlaylist(const SongList& songs);

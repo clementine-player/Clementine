@@ -15,15 +15,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "albumcovermanager.h"
+#include "albumcoversearcher.h"
 #include "edittagdialog.h"
 #include "ui_edittagdialog.h"
+#include "core/albumcoverfetcher.h"
 #include "core/albumcoverloader.h"
 #include "core/utilities.h"
 #include "library/library.h"
+#include "library/librarybackend.h"
 #include "playlist/playlistdelegates.h"
 
 #include <QDateTime>
+#include <QFileDialog>
 #include <QLabel>
+#include <QMenu>
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
@@ -31,14 +37,19 @@ const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple so
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
+    backend_(NULL),
+    ignore_edits_(false),
+    cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
+    cover_fetcher_(new AlbumCoverFetcher(this)),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
-    ignore_edits_(false)
+    cover_art_is_set_(false)
 {
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(ArtLoaded(quint64,QImage)));
+  cover_searcher_->Init(cover_loader_->Worker(), cover_fetcher_);
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
@@ -70,6 +81,22 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(ui_->song_list->selectionModel(),
           SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
           SLOT(SelectionChanged()));
+
+  // Set up the album cover menu
+  cover_menu_ = new QMenu(this);
+  choose_cover_ = cover_menu_->addAction(
+        IconLoader::Load("document-open"), tr("Load cover from disk..."),
+        this, SLOT(LoadCoverFromFile()));
+  download_cover_ = cover_menu_->addAction(
+        IconLoader::Load("download"), tr("Search for album covers..."),
+        this, SLOT(SearchCover()));
+  unset_cover_ = cover_menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Unset cover"),
+        this, SLOT(UnsetCover()));
+  show_cover_ = cover_menu_->addAction(
+        IconLoader::Load("zoom-in"), tr("Show fullsize..."),
+        this, SLOT(ZoomCover()));
+  ui_->summary_art_button->setMenu(cover_menu_);
 }
 
 EditTagDialog::~EditTagDialog() {
@@ -109,6 +136,7 @@ bool EditTagDialog::SetSongs(const SongList& s) {
 }
 
 void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
+  backend_ = backend;
   new TagCompleter(backend, Playlist::Column_Artist, ui_->artist);
   new TagCompleter(backend, Playlist::Column_Album, ui_->album);
 }
@@ -248,8 +276,10 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
 
   QString summary = "<b>" + Qt::escape(song.PrettyTitleWithArtist()) + "</b><br/>";
 
+  bool art_is_set = true;
   if (song.art_manual() == AlbumCoverLoader::kManuallyUnsetCover) {
     summary += Qt::escape(tr("Cover art manually unset"));
+    art_is_set = false;
   } else if (!song.art_manual().isEmpty()) {
     summary += Qt::escape(tr("Cover art set from %1").arg(song.art_manual()));
   } else if (song.art_automatic() == AlbumCoverLoader::kEmbeddedCover) {
@@ -258,9 +288,14 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
     summary += Qt::escape(tr("Cover art loaded automatically from %1").arg(song.art_manual()));
   } else {
     summary += Qt::escape(tr("Cover art not set"));
+    art_is_set = false;
   }
 
   ui_->summary->setText(summary);
+
+  unset_cover_->setEnabled(art_is_set);
+  show_cover_->setEnabled(art_is_set);
+  ui_->summary_art_button->setEnabled(song.id() != -1);
 
   ui_->length->setText(Utilities::PrettyTime(song.length()));
   SetText(ui_->bpm, song.bpm(), tr("bpm"));
@@ -325,4 +360,88 @@ void EditTagDialog::ResetField() {
       return;
     }
   }
+}
+
+void EditTagDialog::LoadCoverFromFile() {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  const Song& song = data_[sel.first().row()].original_;
+
+  // Figure out the initial path.  Logic copied from
+  // AlbumCoverManager::InitialPathForOpenCoverDialog
+  QString dir;
+  if (!song.art_automatic().isEmpty() && song.art_automatic() != AlbumCoverLoader::kEmbeddedCover) {
+    dir = song.art_automatic();
+  } else {
+    dir = song.filename().section('/', 0, -1);
+  }
+
+  QString cover = QFileDialog::getOpenFileName(
+      this, tr("Choose manual cover"), dir,
+      tr(AlbumCoverManager::kImageFileFilter) + ";;" + tr(AlbumCoverManager::kAllFilesFilter));
+  if (cover.isNull())
+    return;
+
+  // Can we load the image?
+  QImage image(cover);
+  if (image.isNull())
+    return;
+
+  // Update database
+  SetAlbumArt(cover);
+}
+
+void EditTagDialog::SearchCover() {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  const Song& song = data_[sel.first().row()].original_;
+
+  // Get something sensible to stick in the search box
+  QString query = song.artist();
+  if (!query.isEmpty())
+    query += " ";
+  query += song.album();
+
+  QImage image = cover_searcher_->Exec(query);
+  if (image.isNull())
+    return;
+
+  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(song.artist(), song.album(), image));
+}
+
+void EditTagDialog::UnsetCover() {
+  SetAlbumArt(AlbumCoverLoader::kManuallyUnsetCover);
+}
+
+void EditTagDialog::ZoomCover() {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  const Song& song = data_[sel.first().row()].original_;
+
+  QDialog* dialog = new QDialog(this);
+  dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+  dialog->setWindowTitle(song.title());
+
+  QLabel* label = new QLabel(dialog);
+  label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
+      song.art_automatic(), song.art_manual()));
+
+  dialog->resize(label->pixmap()->size());
+  dialog->show();
+}
+
+void EditTagDialog::SetAlbumArt(const QString& path) {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  Song& song = data_[sel.first().row()].original_;
+  if (!song.is_valid() || song.id() == -1)
+    return;
+
+  song.set_art_manual(path);
+  backend_->UpdateManualAlbumArtAsync(song.artist(), song.album(), path);
+  UpdateSummaryTab(song);
 }

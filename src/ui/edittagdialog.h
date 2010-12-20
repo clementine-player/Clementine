@@ -25,7 +25,9 @@
 #include "core/song.h"
 #include "widgets/lineedit.h"
 
+class AlbumCoverFetcher;
 class AlbumCoverLoader;
+class AlbumCoverSearcher;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
@@ -50,6 +52,11 @@ private slots:
   void ResetField();
 
   void ArtLoaded(quint64 id, const QImage& image);
+
+  void LoadCoverFromFile();
+  void SearchCover();
+  void UnsetCover();
+  void ZoomCover();
 
 private:
   struct Data {
@@ -85,16 +92,28 @@ private:
   void UpdateSummaryTab(const Song& song);
   void UpdateStatisticsTab(const Song& song);
 
+  void SetAlbumArt(const QString& path);
+
 private:
   Ui_EditTagDialog* ui_;
-
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  quint64 cover_art_id_;
+  LibraryBackend* backend_;
 
   QList<Data> data_;
   QList<FieldData> fields_;
 
   bool ignore_edits_;
+
+  AlbumCoverSearcher* cover_searcher_;
+  AlbumCoverFetcher* cover_fetcher_;
+  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  quint64 cover_art_id_;
+  bool cover_art_is_set_;
+
+  QMenu* cover_menu_;
+  QAction* choose_cover_;
+  QAction* download_cover_;
+  QAction* unset_cover_;
+  QAction* show_cover_;
 };
 
 #endif // EDITTAGDIALOG_H

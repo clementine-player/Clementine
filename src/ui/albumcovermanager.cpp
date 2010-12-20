@@ -44,6 +44,10 @@
 #include <QTimer>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
+const char* AlbumCoverManager::kImageFileFilter =
+  QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)");
+const char* AlbumCoverManager::kAllFilesFilter =
+  QT_TR_NOOP("All files (*)");
 
 AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
                                      QNetworkAccessManager* network)
@@ -53,7 +57,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this, network)),
-    cover_searcher_(new AlbumCoverSearcher(this)),
+    cover_searcher_(NULL),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
     context_menu_(new QMenu(this)),
@@ -86,6 +90,8 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   p.drawImage((120 - nocover.width()) / 2, (120 - nocover.height()) / 2, nocover);
   p.end();
   no_cover_icon_ = QPixmap::fromImage(square_nocover);
+
+  cover_searcher_ = new AlbumCoverSearcher(no_cover_icon_, this);
 
   // Set up the status bar
   statusBar()->addPermanentWidget(progress_bar_);
@@ -387,10 +393,8 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
   UpdateStatusText();
 }
 
-void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &image) {
-  const QString artist = item->data(Role_ArtistName).toString();
-  const QString album = item->data(Role_AlbumName).toString();
-
+QString AlbumCoverManager::SaveCoverInCache(
+    const QString& artist, const QString& album, const QImage& image) {
   // Hash the artist and album into a filename for the image
   QCryptographicHash hash(QCryptographicHash::Sha1);
   hash.addData(artist.toLower().toUtf8().constData());
@@ -405,6 +409,15 @@ void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &ima
 
   // Save the image to disk
   image.save(path, "JPG");
+
+  return path;
+}
+
+void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &image) {
+  const QString artist = item->data(Role_ArtistName).toString();
+  const QString album = item->data(Role_AlbumName).toString();
+
+  QString path = SaveCoverInCache(artist, album, image);
 
   // Save the image in the database
   backend_->UpdateManualAlbumArtAsync(artist, album, path);
@@ -514,8 +527,7 @@ void AlbumCoverManager::ChooseManualCover() {
 
   QString cover = QFileDialog::getOpenFileName(
       this, tr("Choose manual cover"), dir,
-      tr("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)") + ";;" +
-      tr("All files (*)"));
+      tr(kImageFileFilter) + ";;" + tr(kAllFilesFilter));
   if (cover.isNull())
     return;
 
@@ -536,10 +548,10 @@ void AlbumCoverManager::ChooseManualCover() {
 }
 
 QString AlbumCoverManager::InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const {
-  if(!path_automatic.isEmpty() && path_automatic != "embedded") {
+  if(!path_automatic.isEmpty() && path_automatic != AlbumCoverLoader::kEmbeddedCover) {
     return path_automatic;
   } else if (!first_file_name.isEmpty() && first_file_name.contains('/')) {
-    // we get rid of the filename because it's extension is screwing with the dialog's
+    // we get rid of the filename because its extension is screwing with the dialog's
     // filters
     return first_file_name.section('/', 0, -2);
   } else {
