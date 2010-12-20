@@ -96,13 +96,14 @@ RatingWidget::RatingWidget(QWidget* parent)
     rating_(0.0),
     hover_rating_(-1.0)
 {
-  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+  setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
   setMouseTracking(true);
 }
 
 QSize RatingWidget::sizeHint() const {
-  return QSize(RatingPainter::kStarSize * RatingPainter::kStarCount,
-               RatingPainter::kStarSize);
+  const int frame_width = 1 + style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+  return QSize(RatingPainter::kStarSize * (RatingPainter::kStarCount+2) + frame_width*2,
+               RatingPainter::kStarSize + frame_width*2);
 }
 
 void RatingWidget::set_rating(float rating) {

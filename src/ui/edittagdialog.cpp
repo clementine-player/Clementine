@@ -17,9 +17,13 @@
 
 #include "edittagdialog.h"
 #include "ui_edittagdialog.h"
+#include "core/albumcoverloader.h"
+#include "core/utilities.h"
 #include "library/library.h"
 #include "playlist/playlistdelegates.h"
 
+#include <QDateTime>
+#include <QLabel>
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
@@ -27,8 +31,15 @@ const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple so
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
+    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
+    cover_art_id_(0),
     ignore_edits_(false)
 {
+  cover_loader_->Start(true);
+  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
+  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(ArtLoaded(quint64,QImage)));
+
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
 
@@ -209,11 +220,74 @@ void EditTagDialog::SelectionChanged() {
   if (sel.isEmpty())
     return;
 
+  // Set the editable fields
   ignore_edits_ = true;
   foreach (const FieldData& field, fields_) {
     InitFieldValue(field, sel);
   }
   ignore_edits_ = false;
+
+  // If we're editing multiple songs then we have to disable certain tabs
+  const bool multiple = sel.count() > 1;
+  ui_->tab_widget->setTabEnabled(ui_->tab_widget->indexOf(ui_->summary_tab), !multiple);
+  ui_->tab_widget->setTabEnabled(ui_->tab_widget->indexOf(ui_->statistics_tab), !multiple);
+
+  if (!multiple) {
+    const Song& song = data_[sel.first().row()].original_;
+    UpdateSummaryTab(song);
+    UpdateStatisticsTab(song);
+  }
+}
+
+static void SetText(QLabel* label, int value, const QString& suffix, const QString& def = QString()) {
+  label->setText(value <= 0 ? def : (QString::number(value) + " " + suffix));
+}
+
+void EditTagDialog::UpdateSummaryTab(const Song& song) {
+  cover_art_id_ = cover_loader_->Worker()->LoadImageAsync(song);
+
+  QString summary = "<b>" + Qt::escape(song.PrettyTitleWithArtist()) + "</b><br/>";
+
+  if (song.art_manual() == AlbumCoverLoader::kManuallyUnsetCover) {
+    summary += Qt::escape(tr("Cover art manually unset"));
+  } else if (!song.art_manual().isEmpty()) {
+    summary += Qt::escape(tr("Cover art set from %1").arg(song.art_manual()));
+  } else if (song.art_automatic() == AlbumCoverLoader::kEmbeddedCover) {
+    summary += Qt::escape(tr("Cover art from embedded image"));
+  } else if (!song.art_automatic().isEmpty()) {
+    summary += Qt::escape(tr("Cover art loaded automatically from %1").arg(song.art_manual()));
+  } else {
+    summary += Qt::escape(tr("Cover art not set"));
+  }
+
+  ui_->summary->setText(summary);
+
+  ui_->length->setText(Utilities::PrettyTime(song.length()));
+  SetText(ui_->bpm, song.bpm(), tr("bpm"));
+  SetText(ui_->samplerate, song.samplerate(), "Hz");
+  SetText(ui_->bitrate, song.bitrate(), tr("kbps"));
+  ui_->mtime->setText(QDateTime::fromTime_t(song.mtime()).toString(
+        QLocale::system().dateTimeFormat(QLocale::LongFormat)));
+  ui_->ctime->setText(QDateTime::fromTime_t(song.ctime()).toString(
+        QLocale::system().dateTimeFormat(QLocale::LongFormat)));
+  ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
+}
+
+void EditTagDialog::UpdateStatisticsTab(const Song& song) {
+  ui_->playcount->setText(QString::number(qMax(0, song.playcount())));
+  ui_->skipcount->setText(QString::number(qMax(0, song.skipcount())));
+  ui_->score->setText(QString::number(qMax(0, song.score())));
+  ui_->rating->set_rating(song.rating());
+
+  ui_->lastplayed->setText(song.lastplayed() <= 0 ? tr("Never") :
+      QDateTime::fromTime_t(song.lastplayed()).toString(
+          QLocale::system().dateTimeFormat(QLocale::LongFormat)));
+}
+
+void EditTagDialog::ArtLoaded(quint64 id, const QImage& image) {
+  if (id == cover_art_id_) {
+    ui_->art->setPixmap(QPixmap::fromImage(image));
+  }
 }
 
 void EditTagDialog::FieldValueEdited() {

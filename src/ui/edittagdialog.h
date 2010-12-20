@@ -19,16 +19,18 @@
 #define EDITTAGDIALOG_H
 
 #include <QDialog>
-#include <QLabel>
 #include <QModelIndexList>
 
+#include "core/backgroundthread.h"
 #include "core/song.h"
 #include "widgets/lineedit.h"
 
+class AlbumCoverLoader;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
 class QItemSelection;
+class QLabel;
 
 class EditTagDialog : public QDialog {
   Q_OBJECT
@@ -46,6 +48,8 @@ private slots:
   void SelectionChanged();
   void FieldValueEdited();
   void ResetField();
+
+  void ArtLoaded(quint64 id, const QImage& image);
 
 private:
   struct Data {
@@ -78,8 +82,14 @@ private:
   void UpdateFieldValue(const FieldData& field, const QModelIndexList& sel);
   void ResetFieldValue(const FieldData& field, const QModelIndexList& sel);
 
+  void UpdateSummaryTab(const Song& song);
+  void UpdateStatisticsTab(const Song& song);
+
 private:
   Ui_EditTagDialog* ui_;
+
+  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  quint64 cover_art_id_;
 
   QList<Data> data_;
   QList<FieldData> fields_;

@@ -28,72 +28,73 @@
        <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
      </widget>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="tab_widget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="summary_tab">
        <attribute name="title">
         <string>Summary</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QLabel" name="art">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
-              <height>120</height>
+              <width>124</width>
+              <height>124</height>
              </size>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>120</width>
-              <height>120</height>
-             </size>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
             </property>
             <property name="text">
              <string/>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="margin">
+             <number>2</number>
+            </property>
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>2</number>
+            </property>
             <item>
              <widget class="QLabel" name="summary">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string/>
               </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
               </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Preferred</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>18</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="summary_art">
-              <property name="text">
-               <string/>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QToolButton" name="summary_art_button">
               <property name="text">
-               <string>Change album cover</string>
+               <string>Change cover art</string>
               </property>
               <property name="popupMode">
                <enum>QToolButton::InstantPopup</enum>
@@ -113,6 +114,9 @@
         </item>
         <item>
          <layout class="QFormLayout" name="formLayout">
+          <property name="horizontalSpacing">
+           <number>18</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_5">
             <property name="text">
@@ -122,6 +126,9 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="length">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
@@ -136,6 +143,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="bpm">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
@@ -150,6 +160,9 @@
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="bitrate">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
@@ -164,48 +177,60 @@
           </item>
           <item row="3" column="1">
            <widget class="QLabel" name="samplerate">
-            <property name="textInteractionFlags">
-             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>Date modified</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="mtime">
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
            </widget>
           </item>
           <item row="5" column="0">
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="label_8">
             <property name="text">
-             <string>Date created</string>
+             <string>Date modified</string>
             </property>
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLabel" name="ctime">
+           <widget class="QLabel" name="mtime">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
            </widget>
           </item>
           <item row="6" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Date created</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLabel" name="ctime">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
            <widget class="QLabel" name="label_10">
             <property name="text">
              <string>File size</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="4" column="1">
            <widget class="QLabel" name="filesize">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
@@ -228,7 +253,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="tags_tab">
        <attribute name="title">
         <string>Edit tags</string>
        </attribute>
@@ -444,13 +469,16 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="statistics_tab">
        <attribute name="title">
         <string>Statistics</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <layout class="QFormLayout" name="formLayout_2">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="horizontalSpacing">
+           <number>18</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_18">
             <property name="text">
@@ -460,6 +488,9 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="playcount">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
@@ -474,6 +505,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="skipcount">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
@@ -488,34 +522,57 @@
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="lastplayed">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_21">
-            <property name="text">
-             <string>Rating</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="RatingWidget" name="widget" native="true"/>
-          </item>
-          <item row="4" column="0">
            <widget class="QLabel" name="label_22">
             <property name="text">
              <string>Score</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="3" column="1">
            <widget class="QLabel" name="score">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
             <property name="textInteractionFlags">
              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
             </property>
            </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>Rating</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="RatingWidget" name="rating" native="true"/>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
