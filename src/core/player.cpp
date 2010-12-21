@@ -260,9 +260,6 @@ void Player::PlayPause() {
 }
 
 void Player::Stop() {
-  if (engine_->position() != engine_->length()) {
-    emit TrackSkipped(current_item_);
-  }
   engine_->Stop();
   playlists_->active()->set_current_row(-1);
   current_item_.reset();
