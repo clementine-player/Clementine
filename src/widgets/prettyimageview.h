@@ -57,6 +57,8 @@ private:
 
   int current_index_;
   QPropertyAnimation* scroll_animation_;
+
+  bool recursion_filter_;
 };
 
 #endif // PRETTYIMAGEVIEW_H

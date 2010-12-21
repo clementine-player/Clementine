@@ -30,7 +30,8 @@ PrettyImageView::PrettyImageView(QWidget* parent)
     container_(new QWidget(this)),
     layout_(new QHBoxLayout(container_)),
     current_index_(-1),
-    scroll_animation_(new QPropertyAnimation(horizontalScrollBar(), "value", this))
+    scroll_animation_(new QPropertyAnimation(horizontalScrollBar(), "value", this)),
+    recursion_filter_(false)
 {
   setWidget(container_);
   setWidgetResizable(true);
@@ -54,7 +55,14 @@ PrettyImageView::PrettyImageView(QWidget* parent)
 }
 
 bool PrettyImageView::eventFilter(QObject* obj, QEvent* event) {
-  return false;
+  // Work around infinite recursion in QScrollArea resizes.
+  if (recursion_filter_) {
+    return false;
+  }
+  recursion_filter_ = true;
+  bool ret = QScrollArea::eventFilter(obj, event);
+  recursion_filter_ = false;
+  return ret;
 }
 
 void PrettyImageView::AddImage(const QUrl& url) {
