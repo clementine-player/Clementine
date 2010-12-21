@@ -53,6 +53,11 @@
 
 #include <echonest/Config.h>
 
+#ifdef Q_OS_DARWIN
+  #include <sys/resource.h>
+  #include <sys/sysctl.h>
+#endif
+
 
 #ifdef HAVE_LIBLASTFM
   #include "radio/lastfmservice.h"
@@ -102,6 +107,23 @@ int main(int argc, char *argv[]) {
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
   mac::MacMain();
+
+  // Bump the soft limit for the number of file descriptors from the default of 256 to
+  // the maximum (usually 1024).
+  struct rlimit limit;
+  getrlimit(RLIMIT_NOFILE, &limit);
+
+  // getrlimit() lies about the hard limit so we have to check sysctl.
+  int max_fd = 0;
+  size_t len = sizeof(max_fd);
+  sysctlbyname("kern.maxfilesperproc", &max_fd, &len, NULL, 0);
+
+  limit.rlim_cur = max_fd;
+  int ret = setrlimit(RLIMIT_NOFILE, &limit);
+
+  if (ret == 0) {
+    qDebug() << "Max fd:" << max_fd;
+  }
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
