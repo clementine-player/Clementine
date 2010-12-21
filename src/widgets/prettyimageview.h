@@ -50,6 +50,8 @@ private slots:
   void ScrollToCurrent();
 
 private:
+  bool eventFilter(QObject*, QEvent*);
+
   QWidget* container_;
   QHBoxLayout* layout_;
 

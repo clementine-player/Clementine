@@ -53,6 +53,10 @@ PrettyImageView::PrettyImageView(QWidget* parent)
   container_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 }
 
+bool PrettyImageView::eventFilter(QObject* obj, QEvent* event) {
+  return false;
+}
+
 void PrettyImageView::AddImage(const QUrl& url) {
   PrettyImage* image = new PrettyImage(url, container_);
   connect(image, SIGNAL(destroyed()), SLOT(ScrollToCurrent()));
