@@ -1199,29 +1199,35 @@ void MainWindow::PlaylistStopAfter() {
 
 void MainWindow::EditTracks() {
   SongList songs;
-  QList<int> rows;
+  PlaylistItemList items;
 
   foreach (const QModelIndex& index,
            ui_->playlist->view()->selectionModel()->selection().indexes()) {
     if (index.column() != 0)
       continue;
     int row = playlists_->current()->proxy()->mapToSource(index).row();
-    Song song = playlists_->current()->item_at(row)->Metadata();
+    PlaylistItemPtr item(playlists_->current()->item_at(row));
+    Song song = item->Metadata();
 
     if (song.IsEditable()) {
       songs << song;
-      rows << index.row();
+      items << item;
     }
   }
 
   EnsureEditTagDialogCreated();
-  edit_tag_dialog_->SetSongs(songs);
+  edit_tag_dialog_->SetSongs(songs, items);
   edit_tag_dialog_->SetTagCompleter(library_->model()->backend());
+  edit_tag_dialog_->show();
+}
 
-  if (edit_tag_dialog_->exec() == QDialog::Rejected)
-    return;
+void MainWindow::EditTagDialogAccepted() {
+  foreach (PlaylistItemPtr item, edit_tag_dialog_->playlist_items()) {
+    item->Reload();
+  }
 
-  playlists_->current()->ReloadItems(rows);
+  // This is really lame but we don't know what rows have changed
+  ui_->playlist->view()->update();
 }
 
 void MainWindow::RenumberTracks() {
@@ -1679,6 +1685,8 @@ void MainWindow::EnsureEditTagDialogCreated() {
     return;
 
   edit_tag_dialog_.reset(new EditTagDialog);
+  connect(edit_tag_dialog_.get(), SIGNAL(accepted()), SLOT(EditTagDialogAccepted()));
+  connect(edit_tag_dialog_.get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 }
 
 void MainWindow::ShowAboutDialog() {

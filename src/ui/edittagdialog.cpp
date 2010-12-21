@@ -28,9 +28,12 @@
 
 #include <QDateTime>
 #include <QFileDialog>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
 #include <QPushButton>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
@@ -39,6 +42,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
     backend_(NULL),
+    loading_(false),
     ignore_edits_(false),
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
@@ -54,6 +58,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
+  ui_->loading_container->hide();
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -82,6 +87,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(ui_->song_list->selectionModel(),
           SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
           SLOT(SelectionChanged()));
+  connect(ui_->button_box, SIGNAL(clicked(QAbstractButton*)),
+                           SLOT(ButtonClicked(QAbstractButton*)));
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
@@ -113,25 +120,67 @@ EditTagDialog::~EditTagDialog() {
   delete ui_;
 }
 
-bool EditTagDialog::SetSongs(const SongList& s) {
-  data_.clear();
+bool EditTagDialog::SetLoading(const QString& message) {
+  const bool loading = !message.isEmpty();
+  if (loading == loading_)
+    return false;
+  loading_ = loading;
 
-  foreach (const Song& song, s) {
+  ui_->loading_container->setVisible(loading);
+  ui_->button_box->setEnabled(!loading);
+  ui_->tab_widget->setEnabled(!loading);
+  ui_->song_list->setEnabled(!loading);
+  ui_->loading_label->setText(message);
+  return true;
+}
+
+QList<EditTagDialog::Data> EditTagDialog::LoadData(const SongList& songs) const {
+  QList<Data> ret;
+
+  foreach (const Song& song, songs) {
     if (song.IsEditable()) {
       // Try reloading the tags from file
       Song copy(song);
       copy.InitFromFile(copy.filename(), copy.directory_id());
 
       if (copy.is_valid())
-        data_ << Data(copy);
+        ret << Data(copy);
     }
   }
 
+  return ret;
+}
+
+void EditTagDialog::SetSongs(const SongList& s, const PlaylistItemList& items) {
+  // Show the loading indicator
+  if (!SetLoading(tr("Loading tracks") + "..."))
+    return;
+
+  data_.clear();
+  playlist_items_ = items;
+  ui_->song_list->clear();
+
+  // Reload tags in the background
+  QFuture<QList<Data> > future = QtConcurrent::run(this, &EditTagDialog::LoadData, s);
+  QFutureWatcher<QList<Data> >* watcher = new QFutureWatcher<QList<Data> >(this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(SetSongsFinished()));
+}
+
+void EditTagDialog::SetSongsFinished() {
+  QFutureWatcher<QList<Data> >* watcher = dynamic_cast<QFutureWatcher<QList<Data> >*>(sender());
+  if (!watcher)
+    return;
+  watcher->deleteLater();
+
+  if (!SetLoading(QString()))
+    return;
+
+  data_ = watcher->result();
   if (data_.count() == 0)
-    return false;
+    return;
 
   // Add the filenames to the list
-  ui_->song_list->clear();
   foreach (const Data& data, data_) {
     ui_->song_list->addItem(data.current_.basefilename());
   }
@@ -145,7 +194,7 @@ bool EditTagDialog::SetSongs(const SongList& s) {
   previous_button_->setEnabled(multiple);
   next_button_->setEnabled(multiple);
 
-  return true;
+  ui_->tab_widget->setCurrentWidget(multiple ? ui_->tags_tab : ui_->summary_tab);
 }
 
 void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
@@ -467,4 +516,46 @@ void EditTagDialog::NextSong() {
 void EditTagDialog::PreviousSong() {
   int row = (ui_->song_list->currentRow() - 1) % ui_->song_list->count();
   ui_->song_list->setCurrentRow(row);
+}
+
+void EditTagDialog::ButtonClicked(QAbstractButton* button) {
+  if (button == ui_->button_box->button(QDialogButtonBox::Discard)) {
+    reject();
+  }
+}
+
+void EditTagDialog::SaveData(const QList<Data>& data) {
+  for (int i=0 ; i<data.count() ; ++i) {
+    const Data& ref = data[i];
+    if (ref.current_.IsMetadataEqual(ref.original_))
+      continue;
+
+    if (!ref.current_.Save()) {
+      emit Error(tr("An error occurred writing metadata to '%1'").arg(ref.current_.filename()));
+    }
+  }
+}
+
+void EditTagDialog::accept() {
+  // Show the loading indicator
+  if (!SetLoading(tr("Saving tracks") + "..."))
+    return;
+
+  // Savetags in the background
+  QFuture<void> future = QtConcurrent::run(this, &EditTagDialog::SaveData, data_);
+  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(AcceptFinished()));
+}
+
+void EditTagDialog::AcceptFinished() {
+  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
+  if (!watcher)
+    return;
+  watcher->deleteLater();
+
+  if (!SetLoading(QString()))
+    return;
+
+  QDialog::accept();
 }

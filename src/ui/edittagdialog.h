@@ -23,6 +23,7 @@
 
 #include "core/backgroundthread.h"
 #include "core/song.h"
+#include "playlist/playlistitem.h"
 #include "widgets/lineedit.h"
 
 class AlbumCoverFetcher;
@@ -31,6 +32,7 @@ class AlbumCoverSearcher;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
+class QAbstractButton;
 class QItemSelection;
 class QLabel;
 class QPushButton;
@@ -44,13 +46,24 @@ public:
 
   static const char* kHintText;
 
-  bool SetSongs(const SongList& songs);
+  void SetSongs(const SongList& songs, const PlaylistItemList& items = PlaylistItemList());
   void SetTagCompleter(LibraryBackend* backend);
 
+  PlaylistItemList playlist_items() const { return playlist_items_; }
+
+  void accept();
+
+signals:
+  void Error(const QString& message);
+
 private slots:
+  void SetSongsFinished();
+  void AcceptFinished();
+
   void SelectionChanged();
   void FieldValueEdited();
   void ResetField();
+  void ButtonClicked(QAbstractButton* button);
 
   void ArtLoaded(quint64 id, const QImage& image);
 
@@ -98,10 +111,19 @@ private:
 
   void SetAlbumArt(const QString& path);
 
+  bool SetLoading(const QString& message);
+
+  // Called by QtConcurrentRun
+  QList<Data> LoadData(const SongList& songs) const;
+  void SaveData(const QList<Data>& data);
+
 private:
   Ui_EditTagDialog* ui_;
   LibraryBackend* backend_;
 
+  bool loading_;
+
+  PlaylistItemList playlist_items_;
   QList<Data> data_;
   QList<FieldData> fields_;
 

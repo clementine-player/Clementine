@@ -120,6 +120,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistRemoveCurrent();
   void PlaylistEditFinished(const QModelIndex& index);
   void EditTracks();
+  void EditTagDialogAccepted();
   void RenumberTracks();
   void SelectionSetValue();
   void EditValue();
