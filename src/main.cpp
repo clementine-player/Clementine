@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
   mac::MacMain();
 
   // Bump the soft limit for the number of file descriptors from the default of 256 to
-  // the maximum (usually 1024).
+  // the maximum (usually 10240).
   struct rlimit limit;
   getrlimit(RLIMIT_NOFILE, &limit);
 
