@@ -117,6 +117,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* copy_to_device_;
   QAction* delete_;
   QAction* edit_track_;
+  QAction* edit_tracks_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
 

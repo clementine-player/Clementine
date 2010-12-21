@@ -195,6 +195,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
     context_menu_->addSeparator();
     edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
       tr("Edit track information..."), this, SLOT(EditTracks()));
+    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+      tr("Edit tracks information..."), this, SLOT(EditTracks()));
 
     context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(
@@ -223,9 +225,13 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   const bool enable_add     = type == LibraryItem::Type_Container ||
                               type == LibraryItem::Type_Song ||
                               smart_playlist;
-
+  const bool many_songs     = GetSelectedSongs().size() > 1;
+  
   load_->setEnabled(enable_add);
   add_to_playlist_->setEnabled(enable_add);
+  edit_tracks_->setVisible(many_songs);
+  edit_track_->setVisible(!many_songs);
+  edit_tracks_->setEnabled(enable_add);
   edit_track_->setEnabled(enable_add);
   show_in_various_->setEnabled(enable_various);
   no_show_in_various_->setEnabled(enable_various);
