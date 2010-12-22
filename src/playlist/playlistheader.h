@@ -35,10 +35,14 @@ class PlaylistHeader : public StretchHeaderView {
 
  signals:
   void SectionVisibilityChanged(int logical, bool visible);
+  void ColumnAlignmentChanged();
   void MouseEntered();
 
  private slots:
   void HideCurrent();
+  void AlignCurrentLeft();
+  void AlignCurrentCenter();
+  void AlignCurrentRight();
   void ToggleVisible(int section);
 
  private:
@@ -49,6 +53,9 @@ class PlaylistHeader : public StretchHeaderView {
   QMenu* menu_;
   QAction* hide_action_;
   QAction* stretch_action_;
+  QAction* align_left_action_;
+  QAction* align_center_action_;
+  QAction* align_right_action_;
   QList<QAction*> show_actions_;
 
   QSignalMapper* show_mapper_;

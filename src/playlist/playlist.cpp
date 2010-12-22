@@ -99,6 +99,20 @@ Playlist::Playlist(PlaylistBackend* backend,
           SLOT(TracksEnqueued(const QModelIndex&, int, int)));
 
   connect(queue_, SIGNAL(layoutChanged()), SLOT(QueueLayoutChanged()));
+
+  column_alignments_[Column_Length]
+      = column_alignments_[Column_Track]
+      = column_alignments_[Column_Disc]
+      = column_alignments_[Column_Year]
+      = column_alignments_[Column_BPM]
+      = column_alignments_[Column_Bitrate]
+      = column_alignments_[Column_Samplerate]
+      = column_alignments_[Column_Filesize]
+      = column_alignments_[Column_PlayCount]
+      = column_alignments_[Column_SkipCount]
+      = (Qt::AlignRight | Qt::AlignVCenter);
+
+  column_alignments_[Column_Score] = (Qt::AlignCenter);
 }
 
 Playlist::~Playlist() {
@@ -258,23 +272,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
     }
 
     case Qt::TextAlignmentRole:
-      switch (index.column()) {
-        case Column_Length:
-        case Column_Track:
-        case Column_Disc:
-        case Column_Year:
-        case Column_BPM:
-        case Column_Bitrate:
-        case Column_Samplerate:
-        case Column_Filesize:
-        case Column_PlayCount:
-        case Column_SkipCount:
-          return QVariant(Qt::AlignRight | Qt::AlignVCenter);
-        case Column_Score:
-          return QVariant(Qt::AlignCenter | Qt::AlignVCenter);
-        default:
-          return QVariant(Qt::AlignLeft | Qt::AlignVCenter);
-      }
+      return QVariant(column_alignments_.value(index.column(), (Qt::AlignLeft | Qt::AlignVCenter)));
 
     case Qt::ForegroundRole:
       if (items_[index.row()]->IsDynamicHistory())
@@ -1393,4 +1391,20 @@ void Playlist::ItemChanged(PlaylistItemPtr item) {
       return;
     }
   }
+}
+
+void Playlist::set_column_alignments(const ColumnAlignmentMap& column_alignments) {
+  column_alignments_ = column_alignments;
+}
+
+void Playlist::set_column_align_left(int column) {
+  column_alignments_[column] = (Qt::AlignLeft | Qt::AlignVCenter);
+}
+
+void Playlist::set_column_align_center(int column) {
+  column_alignments_[column] = Qt::AlignCenter;
+}
+
+void Playlist::set_column_align_right(int column) {
+  column_alignments_[column] = (Qt::AlignRight | Qt::AlignVCenter);
 }

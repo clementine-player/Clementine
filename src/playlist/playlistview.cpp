@@ -100,6 +100,7 @@ PlaylistView::PlaylistView(QWidget *parent)
   connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(SaveSettings()));
+  connect(header_, SIGNAL(ColumnAlignmentChanged()), SLOT(SaveSettings()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(StretchChanged(bool)));
   connect(header_, SIGNAL(MouseEntered()), SLOT(RatingHoverOut()));
 
@@ -782,6 +783,9 @@ void PlaylistView::ReloadSettings() {
     header_->SetColumnWidth(Playlist::Column_Track, 0.05);
     setting_initial_header_layout_ = false;
   }
+
+  ColumnAlignmentMap column_alignments = s.value("column_alignments").value<ColumnAlignmentMap>();
+  if (!column_alignments.isEmpty()) playlist_->set_column_alignments(column_alignments);
 }
 
 void PlaylistView::SaveSettings() {
@@ -792,6 +796,7 @@ void PlaylistView::SaveSettings() {
   s.beginGroup(kSettingsGroup);
   s.setValue("glow_effect", glow_enabled_);
   s.setValue("stretch", header_->is_stretch_enabled());
+  s.setValue("column_alignments", QVariant::fromValue(playlist_->column_alignments()));
 }
 
 void PlaylistView::StretchChanged(bool stretch) {

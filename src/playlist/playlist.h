@@ -45,6 +45,10 @@ namespace PlaylistUndoCommands {
   class MoveItems;
 }
 
+typedef QMap<int, Qt::Alignment> ColumnAlignmentMap;
+Q_DECLARE_METATYPE(Qt::Alignment);
+Q_DECLARE_METATYPE(ColumnAlignmentMap);
+
 class Playlist : public QAbstractListModel {
   Q_OBJECT
 
@@ -149,6 +153,12 @@ class Playlist : public QAbstractListModel {
   PlaylistSequence* sequence() const { return playlist_sequence_; }
 
   QUndoStack* undo_stack() const { return undo_stack_; }
+
+  ColumnAlignmentMap column_alignments() const { return column_alignments_; }
+  void set_column_alignments(const ColumnAlignmentMap& column_alignments);
+  void set_column_align_left(int column);
+  void set_column_align_center(int column);
+  void set_column_align_right(int column);
 
   // Scrobbling
   int scrobble_point() const { return scrobble_point_; }
@@ -281,6 +291,7 @@ class Playlist : public QAbstractListModel {
   QUndoStack* undo_stack_;
 
   smart_playlists::GeneratorPtr dynamic_playlist_;
+  ColumnAlignmentMap column_alignments_;
 };
 
 QDataStream& operator <<(QDataStream&, const Playlist*);

@@ -16,6 +16,7 @@
 */
 
 #include "playlistheader.h"
+#include "playlistview.h"
 
 #include <QtDebug>
 #include <QContextMenuEvent>
@@ -27,8 +28,16 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
       menu_(new QMenu(this)),
       show_mapper_(new QSignalMapper(this))
 {
-  hide_action_ = menu_->addAction(tr("Hide..."), this, SLOT(HideCurrent()));
-  stretch_action_ = menu_->addAction(tr("Stretch columns to fit window"), this, SLOT(ToggleStretchEnabled()));
+  hide_action_ = menu_->addAction(tr("&Hide..."), this, SLOT(HideCurrent()));
+  stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this, SLOT(ToggleStretchEnabled()));
+  menu_->addSeparator();
+
+  QMenu* align_menu = new QMenu(tr("&Align text"), this);
+  align_left_action_ = align_menu->addAction(tr("&Left"), this, SLOT(AlignCurrentLeft()));
+  align_center_action_ = align_menu->addAction(tr("&Center"), this, SLOT(AlignCurrentCenter()));
+  align_right_action_ = align_menu->addAction(tr("&Right"), this, SLOT(AlignCurrentRight()));
+
+  menu_->addMenu(align_menu);
   menu_->addSeparator();
 
   stretch_action_->setCheckable(true);
@@ -48,7 +57,7 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
     hide_action_->setVisible(true);
 
     QString title(model()->headerData(menu_section_, Qt::Horizontal).toString());
-    hide_action_->setText(tr("Hide %1").arg(title));
+    hide_action_->setText(tr("&Hide %1").arg(title));
   }
 
   qDeleteAll(show_actions_);
@@ -76,6 +85,30 @@ void PlaylistHeader::HideCurrent() {
     return;
 
   SetSectionHidden(menu_section_, true);
+}
+
+void PlaylistHeader::AlignCurrentLeft() {
+  if (menu_section_ == -1)
+    return;
+  PlaylistView* view = static_cast<PlaylistView*>(parent());
+  view->playlist()->set_column_align_left(menu_section_);
+  emit ColumnAlignmentChanged();
+}
+
+void PlaylistHeader::AlignCurrentCenter() {
+  if (menu_section_ == -1)
+    return;
+  PlaylistView* view = static_cast<PlaylistView*>(parent());
+  view->playlist()->set_column_align_center(menu_section_);
+  emit ColumnAlignmentChanged();
+}
+
+void PlaylistHeader::AlignCurrentRight() {
+  if (menu_section_ == -1)
+    return;
+  PlaylistView* view = static_cast<PlaylistView*>(parent());
+  view->playlist()->set_column_align_right(menu_section_);
+  emit ColumnAlignmentChanged();
 }
 
 void PlaylistHeader::ToggleVisible(int section) {

@@ -33,6 +33,7 @@
 #include "core/utilities.h"
 #include "engines/enginebase.h"
 #include "library/directory.h"
+#include "playlist/playlist.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -168,6 +169,8 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
   qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
   qRegisterMetaType<smart_playlists::GeneratorPtr>("smart_playlists::GeneratorPtr");
+  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
+  qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
 
 #ifdef HAVE_GSTREAMER
   qRegisterMetaType<GstBuffer*>("GstBuffer*");

@@ -68,6 +68,8 @@ class PlaylistView : public QTreeView {
 
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
 
+  Playlist* playlist() const { return playlist_; }
+
   // QTreeView
   void drawTree(QPainter* painter, const QRegion& region) const;
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
