@@ -158,7 +158,8 @@ Song::Private::Private()
     skipcount_(0),
     lastplayed_(-1),
     score_(0),
-    length_(-1),
+    beginning_(0),
+    end_(-1),
     bitrate_(-1),
     samplerate_(-1),
     directory_id_(-1),
@@ -193,10 +194,23 @@ Song::Song(FileRefFactory* factory)
 
 void Song::Init(const QString& title, const QString& artist, const QString& album, int length) {
   d->valid_ = true;
+
   d->title_ = title;
   d->artist_ = artist;
   d->album_ = album;
-  d->length_ = length;
+
+  set_length(length);
+}
+
+void Song::Init(const QString& title, const QString& artist, const QString& album, int beginning, int end) {
+  d->valid_ = true;
+
+  d->title_ = title;
+  d->artist_ = artist;
+  d->album_ = album;
+
+  d->beginning_ = beginning;
+  d->end_ = end;
 }
 
 void Song::set_genre(int id) {
@@ -339,8 +353,8 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   if (fileref->audioProperties()) {
     d->bitrate_    = fileref->audioProperties()->bitrate();
-    d->length_     = fileref->audioProperties()->length();
     d->samplerate_ = fileref->audioProperties()->sampleRate();
+    set_length(fileref->audioProperties()->length());
   }
 
   // Get the filetype if we can
@@ -452,7 +466,8 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   d->comment_ = tostr(col + 11);
   d->compilation_ = q.value(col + 12).toBool();
 
-  d->length_ = toint(col + 13);
+  // TODO: this should be replaced by beginning and end
+  set_length(toint(col + 13));
   d->bitrate_ = toint(col + 14);
   d->samplerate_ = toint(col + 15);
 
@@ -496,7 +511,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->album_ = track.album();
   d->artist_ = track.artist();
   d->track_ = track.trackNumber();
-  d->length_ = track.duration();
+
+  set_length(track.duration());
 }
 #endif // HAVE_LIBLASTFM
 
@@ -516,7 +532,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->genre_ = QString::fromUtf8(track->genre);
     d->comment_ = QString::fromUtf8(track->comment);
     d->compilation_ = track->compilation;
-    d->length_ = track->tracklen / 1000;
+    set_length(track->tracklen / 1000);
     d->bitrate_ = track->bitrate;
     d->samplerate_ = track->samplerate;
     d->mtime_ = track->time_modified;
@@ -546,7 +562,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->genre = strdup(d->genre_.toUtf8().constData());
     track->comment = strdup(d->comment_.toUtf8().constData());
     track->compilation = d->compilation_;
-    track->tracklen = d->length_ * 1000;
+    track->tracklen = length() * 1000;
     track->bitrate = d->bitrate_;
     track->samplerate = d->samplerate_;
     track->time_modified = d->mtime_;
@@ -575,7 +591,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->basefilename_ = d->filename_;
 
     d->track_ = track->tracknumber;
-    d->length_ = track->duration / 1000;
+    set_length(track->duration / 1000);
     d->samplerate_ = track->samplerate;
     d->bitrate_ = track->bitrate;
     d->filesize_ = track->filesize;
@@ -615,7 +631,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->filename = strdup(d->basefilename_.toUtf8().constData());
 
     track->tracknumber = d->track_;
-    track->duration = d->length_ * 1000;
+    track->duration = length() * 1000;
     track->samplerate = d->samplerate_;
     track->nochannels = 0;
     track->wavecodec = 0;
@@ -749,7 +765,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
         d->filename_ = item_value.toString();
 
       else if (wcscmp(name, g_wszWMDMDuration) == 0)
-        d->length_ = item_value.toULongLong() / 10000000ll;
+        set_length(item_value.toULongLong() / 10000000ll);
 
       else if (wcscmp(name, L"WMDM/FileSize") == 0)
         d->filesize_ = item_value.toULongLong();
@@ -813,7 +829,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
       if (!d->title_.isEmpty() || !d->artist_.isEmpty() ||
           !d->album_.isEmpty() || !d->comment_.isEmpty() ||
           !d->genre_.isEmpty() || d->track_ != -1 || d->year_ != -1 ||
-          d->length_ != -1) {
+          length() != -1) {
         d->filetype_ = Song::Type_Unknown;
         break;
       }
@@ -847,7 +863,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     AddWmdmItem(metadata, g_wszWMDMComposer, d->composer_);
     AddWmdmItem(metadata, g_wszWMDMBitrate, d->bitrate_);
     AddWmdmItem(metadata, g_wszWMDMFileName, d->basefilename_);
-    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(d->length_) * 10000000ll);
+    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(length()) * 10000000ll);
     AddWmdmItem(metadata, L"WMDM/FileSize", d->filesize_);
 
     WMDM_FORMATCODE format;
@@ -885,7 +901,7 @@ void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   if (!bundle.genre.isEmpty()) d->genre_ = Decode(bundle.genre, codec);
   if (!bundle.bitrate.isEmpty()) d->bitrate_ = bundle.bitrate.toInt();
   if (!bundle.samplerate.isEmpty()) d->samplerate_ = bundle.samplerate.toInt();
-  if (!bundle.length.isEmpty()) d->length_ = bundle.length.toInt();
+  if (!bundle.length.isEmpty()) set_length(bundle.length.toInt());
   if (!bundle.year.isEmpty()) d->year_ = bundle.year.toInt();
   if (!bundle.tracknr.isEmpty()) d->track_ = bundle.tracknr.toInt();
 }
@@ -910,7 +926,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":comment", strval(d->comment_));
   query->bindValue(":compilation", d->compilation_ ? 1 : 0);
 
-  query->bindValue(":length", intval(d->length_));
+  // TODO: replace this with beginning and end
+  query->bindValue(":length", intval(length()));
   query->bindValue(":bitrate", intval(d->bitrate_));
   query->bindValue(":samplerate", intval(d->samplerate_));
 
@@ -959,7 +976,7 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setArtist(d->artist_);
   mtrack.setAlbum(d->album_);
   mtrack.setTitle(d->title_);
-  mtrack.setDuration(d->length_);
+  mtrack.setDuration(length());
   mtrack.setTrackNumber(d->track_);
   mtrack.setSource(lastfm::Track::Player);
 }
@@ -987,10 +1004,10 @@ QString Song::PrettyTitleWithArtist() const {
 }
 
 QString Song::PrettyLength() const {
-  if (d->length_ == -1)
+  if (length() == -1)
     return QString::null;
 
-  return Utilities::PrettyTime(d->length_);
+  return Utilities::PrettyTime(length());
 }
 
 QString Song::PrettyYear() const {
@@ -1025,7 +1042,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->genre_ == other.d->genre_ &&
          d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
-         d->length_ == other.d->length_ &&
+         // this should be replaced by beginning and end
+         length() == other.length() &&
          d->bitrate_ == other.d->bitrate_ &&
          d->samplerate_ == other.d->samplerate_ &&
          d->sampler_ == other.d->sampler_ &&

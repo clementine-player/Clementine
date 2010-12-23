@@ -112,6 +112,7 @@ class Song {
 
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, int length);
+  void Init(const QString& title, const QString& artist, const QString& album, int beginning, int end);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const SqlRow& query, int col = 0);
 #ifdef HAVE_LIBLASTFM
@@ -170,7 +171,11 @@ class Song {
   int lastplayed() const { return d->lastplayed_; }
   int score() const { return d->score_; }
 
-  int length() const { return d->length_; }
+  int beginning() const { return d->beginning_; }
+  int end() const { return d->end_; }
+
+  int length() const { return d->end_ - d->beginning_; }
+
   int bitrate() const { return d->bitrate_; }
   int samplerate() const { return d->samplerate_; }
 
@@ -217,7 +222,9 @@ class Song {
   void set_comment(const QString& v) { d->comment_ = v; }
   void set_compilation(bool v) { d->compilation_ = v; }
   void set_sampler(bool v) { d->sampler_ = v; }
-  void set_length(int v) { d->length_ = v; }
+  void set_beginning(int v) { d->beginning_ = v; }
+  void set_end(int v) { d->end_ = v; }
+  void set_length(int v) { d->end_ = d->beginning_ + v; }
   void set_bitrate(int v) { d->bitrate_ = v; }
   void set_samplerate(int v) { d->samplerate_ = v; }
   void set_mtime(int v) { d->mtime_ = v; }
@@ -281,7 +288,17 @@ class Song {
     int lastplayed_;
     int score_;
 
-    int length_;  // Seconds.
+    // The beginning of the song in seconds. In case of single-part media
+    // streams, this will equal to 0. In case of multi-part streams on the
+    // other hand, this will mark the beginning of a section represented by
+    // this Song object.
+    int beginning_;
+    // The end of the song in seconds. In case of single-part media
+    // streams, this will equal to the song's length. In case of multi-part
+    // streams on the other hand, this will mark the end of a section
+    // represented by this Song object.
+    int end_;
+
     int bitrate_;
     int samplerate_;
 

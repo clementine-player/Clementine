@@ -116,6 +116,7 @@ set(SOURCES
 
   playlistparsers/asxparser.cpp
   playlistparsers/asxiniparser.cpp
+  playlistparsers/cueparser.cpp
   playlistparsers/m3uparser.cpp
   playlistparsers/parserbase.cpp
   playlistparsers/playlistparser.cpp
@@ -279,6 +280,7 @@ set(HEADERS
 
   playlistparsers/asxparser.h
   playlistparsers/asxiniparser.h
+  playlistparsers/cueparser.h
   playlistparsers/m3uparser.h
   playlistparsers/parserbase.h
   playlistparsers/playlistparser.h
