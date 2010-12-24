@@ -84,6 +84,25 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     }
   }
 
+  // Set the colour of all the labels on the summary page
+  const bool light = palette().color(QPalette::Base).value() > 128;
+  const QColor color = palette().color(QPalette::Dark);
+  QPalette summary_label_palette(palette());
+  summary_label_palette.setColor(QPalette::WindowText,
+      light ? color.darker(150) : color.lighter(125));
+
+  foreach (QLabel* label, ui_->summary_tab->findChildren<QLabel*>()) {
+    if (label->property("field_label").toBool()) {
+      label->setPalette(summary_label_palette);
+    }
+  }
+
+  // Pretend the summary text is just a label
+  ui_->summary->setMaximumHeight(ui_->art->height() - ui_->summary_art_button->height() - 4);
+
+  // Set the dialog's height to the smallest possible
+  resize(width(), minimumHeight());
+
   connect(ui_->song_list->selectionModel(),
           SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
           SLOT(SelectionChanged()));
@@ -105,6 +124,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
         IconLoader::Load("zoom-in"), tr("Show fullsize..."),
         this, SLOT(ZoomCover()));
   ui_->summary_art_button->setMenu(cover_menu_);
+
+  ui_->art->installEventFilter(this);
 
   // Add the next/previous buttons
   previous_button_ = new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
@@ -320,7 +341,6 @@ void EditTagDialog::SelectionChanged() {
   // If we're editing multiple songs then we have to disable certain tabs
   const bool multiple = sel.count() > 1;
   ui_->tab_widget->setTabEnabled(ui_->tab_widget->indexOf(ui_->summary_tab), !multiple);
-  ui_->tab_widget->setTabEnabled(ui_->tab_widget->indexOf(ui_->statistics_tab), !multiple);
 
   if (!multiple) {
     const Song& song = data_[sel.first().row()].original_;
@@ -368,6 +388,8 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   ui_->ctime->setText(QDateTime::fromTime_t(song.ctime()).toString(
         QLocale::system().dateTimeFormat(QLocale::LongFormat)));
   ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
+  ui_->filetype->setText(song.TextForFiletype());
+  ui_->filename->setText(song.filename());
 }
 
 void EditTagDialog::UpdateStatisticsTab(const Song& song) {
@@ -558,4 +580,11 @@ void EditTagDialog::AcceptFinished() {
     return;
 
   QDialog::accept();
+}
+
+bool EditTagDialog::eventFilter(QObject* o, QEvent* e) {
+  if (o == ui_->art && e->type() == QEvent::MouseButtonRelease) {
+    cover_menu_->popup(static_cast<QMouseEvent*>(e)->globalPos());
+  }
+  return false;
 }

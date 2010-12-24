@@ -56,6 +56,9 @@ public:
 signals:
   void Error(const QString& message);
 
+protected:
+  bool eventFilter(QObject* o, QEvent* e);
+
 private slots:
   void SetSongsFinished();
   void AcceptFinished();
