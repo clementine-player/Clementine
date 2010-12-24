@@ -33,6 +33,7 @@
 #include <QLabel>
 #include <QMenu>
 #include <QPushButton>
+#include <QShortcut>
 #include <QtConcurrentRun>
 #include <QtDebug>
 
@@ -135,6 +136,12 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 
   connect(previous_button_, SIGNAL(clicked()), SLOT(PreviousSong()));
   connect(next_button_, SIGNAL(clicked()), SLOT(NextSong()));
+
+  // Set some shortcuts for the buttons
+  new QShortcut(QKeySequence::Back, previous_button_, SLOT(click()));
+  new QShortcut(QKeySequence::Forward, next_button_, SLOT(click()));
+  new QShortcut(QKeySequence::MoveToPreviousPage, previous_button_, SLOT(click()));
+  new QShortcut(QKeySequence::MoveToNextPage, next_button_, SLOT(click()));
 }
 
 EditTagDialog::~EditTagDialog() {
@@ -536,7 +543,7 @@ void EditTagDialog::NextSong() {
 }
 
 void EditTagDialog::PreviousSong() {
-  int row = (ui_->song_list->currentRow() - 1) % ui_->song_list->count();
+  int row = (ui_->song_list->currentRow() - 1 + ui_->song_list->count()) % ui_->song_list->count();
   ui_->song_list->setCurrentRow(row);
 }
 
