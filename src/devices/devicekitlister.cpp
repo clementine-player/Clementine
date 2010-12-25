@@ -47,12 +47,6 @@ void DeviceKitLister::Init() {
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       "/org/freedesktop/UDisks", QDBusConnection::systemBus()));
 
-  if (!interface_->isValid()) {
-    qWarning() << "Error connecting to the DeviceKit-disks DBUS service";
-    interface_.reset();
-    return;
-  }
-
   // Listen for changes
   connect(interface_.get(), SIGNAL(DeviceAdded(QDBusObjectPath)), SLOT(DBusDeviceAdded(QDBusObjectPath)));
   connect(interface_.get(), SIGNAL(DeviceRemoved(QDBusObjectPath)), SLOT(DBusDeviceRemoved(QDBusObjectPath)));
