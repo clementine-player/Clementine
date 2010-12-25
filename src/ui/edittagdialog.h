@@ -58,6 +58,7 @@ signals:
 
 protected:
   bool eventFilter(QObject* o, QEvent* e);
+  void showEvent(QShowEvent*);
 
 private slots:
   void SetSongsFinished();

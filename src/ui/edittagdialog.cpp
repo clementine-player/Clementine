@@ -101,9 +101,6 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   // Pretend the summary text is just a label
   ui_->summary->setMaximumHeight(ui_->art->height() - ui_->summary_art_button->height() - 4);
 
-  // Set the dialog's height to the smallest possible
-  resize(width(), minimumHeight());
-
   connect(ui_->song_list->selectionModel(),
           SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
           SLOT(SelectionChanged()));
@@ -535,6 +532,19 @@ void EditTagDialog::SetAlbumArt(const QString& path) {
   song.set_art_manual(path);
   backend_->UpdateManualAlbumArtAsync(song.artist(), song.album(), path);
   UpdateSummaryTab(song);
+
+  // Now check if we have any other songs cached that share that artist and
+  // album (and would therefore be changed as well)
+  for (int i=0 ; i<data_.count() ; ++i) {
+    if (i == sel.first().row()) // Already changed this one
+      continue;
+
+    Song& other_song = data_[i].original_;
+    if (song.artist() == other_song.artist() &&
+        song.album()  == other_song.album()) {
+      other_song.set_art_manual(path);
+    }
+  }
 }
 
 void EditTagDialog::NextSong() {
@@ -570,7 +580,7 @@ void EditTagDialog::accept() {
   if (!SetLoading(tr("Saving tracks") + "..."))
     return;
 
-  // Savetags in the background
+  // Save tags in the background
   QFuture<void> future = QtConcurrent::run(this, &EditTagDialog::SaveData, data_);
   QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
   watcher->setFuture(future);
@@ -594,4 +604,11 @@ bool EditTagDialog::eventFilter(QObject* o, QEvent* e) {
     cover_menu_->popup(static_cast<QMouseEvent*>(e)->globalPos());
   }
   return false;
+}
+
+void EditTagDialog::showEvent(QShowEvent* e) {
+  // Set the dialog's height to the smallest possible
+  resize(width(), sizeHint().height());
+
+  QDialog::showEvent(e);
 }
