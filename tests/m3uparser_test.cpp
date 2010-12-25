@@ -57,7 +57,10 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
   Song song(&taglib_);
   QString line(temp.fileName());
   ASSERT_TRUE(parser_.ParseTrackLocation(line, QDir(), &song));
-  EXPECT_EQ(temp.fileName(), song.filename());
+  ASSERT_EQ(temp.fileName(), song.filename());
+
+  song.InitFromFile(song.filename(), -1);
+
   EXPECT_EQ("foo", song.title());
   EXPECT_EQ("bar", song.artist());
   EXPECT_EQ("baz", song.album());
@@ -72,7 +75,10 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
   QString line(info.fileName());
   Song song(&taglib_);
   ASSERT_TRUE(parser.ParseTrackLocation(line, info.dir(), &song));
-  EXPECT_EQ(temp.fileName(), song.filename());
+  ASSERT_EQ(temp.fileName(), song.filename());
+
+  song.InitFromFile(song.filename(), -1);
+
   EXPECT_EQ("foo", song.title());
 }
 
