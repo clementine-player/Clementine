@@ -230,6 +230,9 @@ void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
   backend_ = backend;
   new TagCompleter(backend, Playlist::Column_Artist, ui_->artist);
   new TagCompleter(backend, Playlist::Column_Album, ui_->album);
+  new TagCompleter(backend, Playlist::Column_AlbumArtist, ui_->albumartist);
+  new TagCompleter(backend, Playlist::Column_Genre, ui_->genre);
+  new TagCompleter(backend, Playlist::Column_Composer, ui_->composer);
 }
 
 QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {

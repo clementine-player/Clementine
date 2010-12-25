@@ -134,13 +134,25 @@ private:
 };
 
 class TagCompletionModel : public QStringListModel {
- public:
+public:
   TagCompletionModel(LibraryBackend* backend, Playlist::Column column);
+
+private:
+  static QString database_column(Playlist::Column column);
 };
 
 class TagCompleter : public QCompleter {
- public:
-  TagCompleter(LibraryBackend* backend, Playlist::Column column, QLineEdit* editor);
+  Q_OBJECT
+
+public:
+  TagCompleter(LibraryBackend* backend, Playlist::Column column,
+               QLineEdit* editor);
+
+private slots:
+  void ModelReady();
+
+private:
+  QLineEdit* editor_;
 };
 
 class TagCompletionItemDelegate : public PlaylistDelegateBase {

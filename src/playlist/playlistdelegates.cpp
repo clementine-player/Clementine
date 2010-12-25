@@ -24,6 +24,8 @@
 
 #include <QDateTime>
 #include <QDir>
+#include <QFuture>
+#include <QFutureWatcher>
 #include <QHeaderView>
 #include <QHelpEvent>
 #include <QLinearGradient>
@@ -33,6 +35,7 @@
 #include <QTextDocument>
 #include <QToolTip>
 #include <QWhatsThis>
+#include <QtConcurrentRun>
 
 const int   QueuedItemDelegate::kQueueBoxBorder = 1;
 const int   QueuedItemDelegate::kQueueBoxCornerRadius = 3;
@@ -344,37 +347,57 @@ QString RatingItemDelegate::displayText(
   return QString::number(rating, 'f', 1);
 }
 
-TagCompletionModel::TagCompletionModel(LibraryBackend* backend, Playlist::Column column) :
-  QStringListModel() {
-
-  switch(column) {
-    case Playlist::Column_Artist: {
-      setStringList(backend->GetAllArtists());
-      break;
-    }
-    case Playlist::Column_Album: {
-      QStringList album_names;
-      LibraryBackend::AlbumList albums = backend->GetAllAlbums();
-      foreach(const LibraryBackend::Album& album, albums)
-        album_names << album.album_name;
-      setStringList(album_names);
-      break;
-    }
-    case Playlist::Column_AlbumArtist: {
-      // TODO: get all albumartists?
-      break;
-    }
-    default:
-      break;
+TagCompletionModel::TagCompletionModel(LibraryBackend* backend, Playlist::Column column)
+  : QStringListModel()
+{
+  QString col = database_column(column);
+  if (!col.isEmpty()) {
+    setStringList(backend->GetAll(col));
   }
 }
 
-TagCompleter::TagCompleter(LibraryBackend* backend, Playlist::Column column, QLineEdit* editor) :
-  QCompleter(editor) {
+QString TagCompletionModel::database_column(Playlist::Column column) {
+  switch (column) {
+    case Playlist::Column_Artist:       return "artist";
+    case Playlist::Column_Album:        return "album";
+    case Playlist::Column_AlbumArtist:  return "albumartist";
+    case Playlist::Column_Composer:     return "composer";
+    case Playlist::Column_Genre:        return "genre";
+    default:
+      qWarning() << __PRETTY_FUNCTION__ << "Unknown column" << column;
+      return QString();
+  }
+}
 
-  setModel(new TagCompletionModel(backend, column));
+static TagCompletionModel* InitCompletionModel(LibraryBackend* backend,
+                                               Playlist::Column column) {
+  return new TagCompletionModel(backend, column);
+}
+
+TagCompleter::TagCompleter(LibraryBackend* backend, Playlist::Column column,
+                           QLineEdit* editor)
+  : QCompleter(editor),
+    editor_(editor)
+{
+  QFuture<TagCompletionModel*> future = QtConcurrent::run(
+      &InitCompletionModel, backend, column);
+  QFutureWatcher<TagCompletionModel*>* watcher =
+      new QFutureWatcher<TagCompletionModel*>(this);
+  watcher->setFuture(future);
+
+  connect(watcher, SIGNAL(finished()), SLOT(ModelReady()));
+}
+
+void TagCompleter::ModelReady() {
+  QFutureWatcher<TagCompletionModel*>* watcher =
+      dynamic_cast<QFutureWatcher<TagCompletionModel*>*>(sender());
+  if (!watcher)
+    return;
+
+  TagCompletionModel* model = watcher->result();
+  setModel(model);
   setCaseSensitivity(Qt::CaseInsensitive);
-  editor->setCompleter(this);
+  editor_->setCompleter(this);
 }
 
 QWidget* TagCompletionItemDelegate::createEditor(

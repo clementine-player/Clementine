@@ -423,9 +423,9 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
   UpdateTotalSongCountAsync();
 }
 
-QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
+QStringList LibraryBackend::GetAll(const QString& column, const QueryOptions& opt) {
   LibraryQuery query(opt);
-  query.SetColumnSpec("DISTINCT artist");
+  query.SetColumnSpec("DISTINCT " + column);
   query.AddCompilationRequirement(false);
 
   QMutexLocker l(db_->Mutex());
@@ -436,6 +436,10 @@ QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
     ret << query.Value(0).toString();
   }
   return ret;
+}
+
+QStringList LibraryBackend::GetAllArtists(const QueryOptions& opt) {
+  return GetAll("artist", opt);
 }
 
 QStringList LibraryBackend::GetAllArtistsWithAlbums(const QueryOptions& opt) {

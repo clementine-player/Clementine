@@ -114,6 +114,7 @@ class LibraryBackend : public LibraryBackendInterface {
   DirectoryList GetAllDirectories();
   void ChangeDirPath(int id, const QString& new_path);
 
+  QStringList GetAll(const QString& column, const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());

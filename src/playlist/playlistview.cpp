@@ -133,6 +133,10 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Artist));
   setItemDelegateForColumn(Playlist::Column_AlbumArtist,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_AlbumArtist));
+  setItemDelegateForColumn(Playlist::Column_Genre,
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Genre));
+  setItemDelegateForColumn(Playlist::Column_Composer,
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Composer));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
