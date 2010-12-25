@@ -527,13 +527,13 @@ void EditTagDialog::SetAlbumArt(const QString& path) {
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
   if (sel.isEmpty())
     return;
-  Song& song = data_[sel.first().row()].original_;
-  if (!song.is_valid() || song.id() == -1)
+  Song* song = &data_[sel.first().row()].original_;
+  if (!song->is_valid() || song->id() == -1)
     return;
 
-  song.set_art_manual(path);
-  backend_->UpdateManualAlbumArtAsync(song.artist(), song.album(), path);
-  UpdateSummaryTab(song);
+  song->set_art_manual(path);
+  backend_->UpdateManualAlbumArtAsync(song->artist(), song->album(), path);
+  UpdateSummaryTab(*song);
 
   // Now check if we have any other songs cached that share that artist and
   // album (and would therefore be changed as well)
@@ -541,10 +541,10 @@ void EditTagDialog::SetAlbumArt(const QString& path) {
     if (i == sel.first().row()) // Already changed this one
       continue;
 
-    Song& other_song = data_[i].original_;
-    if (song.artist() == other_song.artist() &&
-        song.album()  == other_song.album()) {
-      other_song.set_art_manual(path);
+    Song* other_song = &data_[i].original_;
+    if (song->artist() == other_song->artist() &&
+        song->album()  == other_song->album()) {
+      other_song->set_art_manual(path);
     }
   }
 }
@@ -619,10 +619,10 @@ void EditTagDialog::SongRated(float rating) {
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
   if (sel.isEmpty())
     return;
-  Song& song = data_[sel.first().row()].original_;
-  if (!song.is_valid() || song.id() == -1)
+  Song* song = &data_[sel.first().row()].original_;
+  if (!song->is_valid() || song->id() == -1)
     return;
 
-  song.set_rating(rating);
-  backend_->UpdateSongRatingAsync(song.id(), rating);
+  song->set_rating(rating);
+  backend_->UpdateSongRatingAsync(song->id(), rating);
 }
