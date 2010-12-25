@@ -67,6 +67,11 @@ void LibraryBackend::IncrementSkipCountAsync(int id, float progress) {
                              Q_ARG(int, id), Q_ARG(float, progress));
 }
 
+void LibraryBackend::ResetStatisticsAsync(int id) {
+  metaObject()->invokeMethod(this, "ResetStatistics", Qt::QueuedConnection,
+                             Q_ARG(int, id));
+}
+
 void LibraryBackend::UpdateSongRatingAsync(int id, float rating) {
   metaObject()->invokeMethod(this, "UpdateSongRating", Qt::QueuedConnection,
                              Q_ARG(int, id), Q_ARG(float, rating));
@@ -925,6 +930,26 @@ void LibraryBackend::IncrementSkipCount(int id, float progress) {
   QSqlQuery q(QString("UPDATE %1 SET skipcount = skipcount + 1,"
                       "              score = " + QString(kNewScoreSql).arg(progress) +
                       " WHERE ROWID = :id").arg(songs_table_), db);
+  q.bindValue(":id", id);
+  q.exec();
+  if (db_->CheckErrors(q.lastError()))
+    return;
+
+  Song new_song = GetSongById(id, db);
+  emit SongsStatisticsChanged(SongList() << new_song);
+}
+
+void LibraryBackend::ResetStatistics(int id) {
+  if (id == -1)
+    return;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q(QString(
+      "UPDATE %1 SET playcount = 0, skipcount = 0,"
+      "              lastplayed = -1, score = 0"
+      " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q.lastError()))

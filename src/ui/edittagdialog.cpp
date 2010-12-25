@@ -32,6 +32,7 @@
 #include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QShortcut>
 #include <QtConcurrentRun>
@@ -108,6 +109,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
                            SLOT(ButtonClicked(QAbstractButton*)));
   connect(ui_->rating, SIGNAL(RatingChanged(float)),
                        SLOT(SongRated(float)));
+  connect(ui_->playcount_reset, SIGNAL(clicked()), SLOT(ResetPlayCounts()));
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
@@ -625,4 +627,26 @@ void EditTagDialog::SongRated(float rating) {
 
   song->set_rating(rating);
   backend_->UpdateSongRatingAsync(song->id(), rating);
+}
+
+void EditTagDialog::ResetPlayCounts() {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  Song* song = &data_[sel.first().row()].original_;
+  if (!song->is_valid() || song->id() == -1)
+    return;
+
+  if (QMessageBox::question(this, tr("Reset play counts"),
+        tr("Are you sure you want to reset this song's statistics?"),
+        QMessageBox::Reset, QMessageBox::Cancel) != QMessageBox::Reset) {
+    return;
+  }
+
+  song->set_playcount(0);
+  song->set_skipcount(0);
+  song->set_lastplayed(-1);
+  song->set_score(0);
+  backend_->ResetStatisticsAsync(song->id());
+  UpdateStatisticsTab(*song);
 }

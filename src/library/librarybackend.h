@@ -142,6 +142,7 @@ class LibraryBackend : public LibraryBackendInterface {
 
   void IncrementPlayCountAsync(int id);
   void IncrementSkipCountAsync(int id, float progress);
+  void ResetStatisticsAsync(int id);
   void UpdateSongRatingAsync(int id, float rating);
 
   void DeleteAll();
@@ -158,6 +159,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void ForceCompilation(const QString& artist, const QString& album, bool on);
   void IncrementPlayCount(int id);
   void IncrementSkipCount(int id, float progress);
+  void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
 
  signals:

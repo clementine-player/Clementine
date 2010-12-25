@@ -69,6 +69,7 @@ private slots:
   void ResetField();
   void ButtonClicked(QAbstractButton* button);
   void SongRated(float rating);
+  void ResetPlayCounts();
 
   void ArtLoaded(quint64 id, const QImage& image);
 
