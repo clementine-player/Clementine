@@ -217,7 +217,11 @@ int main(int argc, char *argv[]) {
 #endif
 
   a.setQuitOnLastWindowClosed(false);
-  a.isRunning(); // Otherwise QtLocalPeer won't lock the lockfile :S
+
+  // Do this check again because another instance might have started by now
+  if (a.isRunning() && a.sendMessage(options.Serialize(), 5000)) {
+    return 0;
+  }
 
 #ifndef Q_OS_DARWIN
   // Gnome on Ubuntu has menu icons disabled by default.  I think that's a bad
