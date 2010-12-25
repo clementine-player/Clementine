@@ -18,6 +18,7 @@
 #include "config.h"
 #include "player.h"
 #include "engines/enginebase.h"
+#include "library/librarybackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
@@ -220,6 +221,14 @@ void Player::TrackEnded() {
     playlists_->active()->StopAfter(-1);
     Stop();
     return;
+  }
+
+  if (current_item_ && current_item_->IsLocalLibraryItem() &&
+      !playlists_->active()->has_scrobbled()) {
+    // The track finished before its scrobble point (30 seconds), so increment
+    // the play count now.
+    playlists_->library_backend()->IncrementPlayCountAsync(
+        current_item_->Metadata().id());
   }
 
   NextInternal(Engine::Auto);
@@ -438,7 +447,7 @@ void Player::TrackAboutToEnd() {
         playlists_->active()->next_row() == -1)
       return;
 
-    NextInternal(Engine::Auto);
+    TrackEnded();
   } else {
     // Crossfade is off, so start preloading the next track so we don't get a
     // gap between songs.
