@@ -98,6 +98,11 @@
        <string>Background Streams</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Network Proxy</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
@@ -115,7 +120,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>8</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -837,6 +842,139 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="proxy_page">
+        <layout class="QVBoxLayout" name="verticalLayout_17">
+         <item>
+          <widget class="QRadioButton" name="proxy_system">
+           <property name="text">
+            <string>Use the system proxy settings</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="proxy_direct">
+           <property name="text">
+            <string>Direct internet connection</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="proxy_manual">
+           <property name="text">
+            <string>Manual proxy configuration</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="proxy_manual_container" native="true">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>24</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QComboBox" name="proxy_type">
+                <item>
+                 <property name="text">
+                  <string>HTTP proxy</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>SOCKS proxy</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="proxy_hostname"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_15">
+                <property name="text">
+                 <string>Port</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="proxy_port">
+                <property name="maximum">
+                 <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>8080</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="proxy_auth">
+              <property name="title">
+               <string>Use authentication</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QFormLayout" name="formLayout_7">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+               </property>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_16">
+                 <property name="text">
+                  <string>Username</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="proxy_username"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_17">
+                 <property name="text">
+                  <string>Password</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="proxy_password">
+                 <property name="echoMode">
+                  <enum>QLineEdit::Password</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>247</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>
@@ -954,8 +1092,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>518</x>
-     <y>524</y>
+     <x>742</x>
+     <y>812</y>
     </hint>
     <hint type="destinationlabel">
      <x>521</x>
@@ -970,8 +1108,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>324</x>
-     <y>521</y>
+     <x>548</x>
+     <y>812</y>
     </hint>
     <hint type="destinationlabel">
      <x>322</x>
@@ -986,12 +1124,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>476</x>
-     <y>277</y>
+     <x>305</x>
+     <y>82</y>
     </hint>
     <hint type="destinationlabel">
-     <x>459</x>
-     <y>362</y>
+     <x>305</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>proxy_manual</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>proxy_manual_container</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>148</y>
     </hint>
    </hints>
   </connection>

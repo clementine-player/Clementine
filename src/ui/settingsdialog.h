@@ -63,6 +63,7 @@ class SettingsDialog : public QDialog {
 #endif
     Page_Magnatune,
     Page_BackgroundStreams,
+    Page_Proxy,
 #ifdef ENABLE_WIIMOTEDEV
     Page_Wiimotedev,
 #endif

@@ -59,6 +59,7 @@ set(SOURCES
   core/mpris_common.cpp
   core/musicstorage.cpp
   core/network.cpp
+  core/networkproxyfactory.cpp
   core/organise.cpp
   core/organiseformat.cpp
   core/player.cpp

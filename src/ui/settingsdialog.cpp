@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "core/backgroundstreams.h"
+#include "core/networkproxyfactory.h"
 #include "iconloader.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
@@ -30,13 +31,13 @@
 #include "ui_settingsdialog.h"
 
 #ifdef HAVE_LIBLASTFM
-#include "radio/lastfmconfig.h"
+# include "radio/lastfmconfig.h"
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
-#include "ui/wiimotedevshortcutsconfig.h"
-#include "ui_wiimotedevshortcutsconfig.h"
-#include "wiimotedev/shortcuts.h"
+# include "ui/wiimotedevshortcutsconfig.h"
+# include "ui_wiimotedevshortcutsconfig.h"
+# include "wiimotedev/shortcuts.h"
 #endif
 
 #ifdef HAVE_GSTREAMER
@@ -123,6 +124,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->list->item(Page_Notifications)->setIcon(IconLoader::Load("help-hint"));
   ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
   ui_->list->item(Page_BackgroundStreams)->setIcon(QIcon(":/icons/32x32/weather-showers-scattered.png"));
+  ui_->list->item(Page_Proxy)->setIcon(IconLoader::Load("applications-internet"));
 
   AddStreams();
 
@@ -361,6 +363,23 @@ void SettingsDialog::accept() {
   s.setValue("popup_pos", pretty_popup_->popup_pos());
   s.endGroup();
 
+  // Network proxy
+  NetworkProxyFactory::Mode mode = NetworkProxyFactory::Mode_System;
+  if      (ui_->proxy_direct->isChecked()) mode = NetworkProxyFactory::Mode_Direct;
+  else if (ui_->proxy_system->isChecked()) mode = NetworkProxyFactory::Mode_System;
+  else if (ui_->proxy_manual->isChecked()) mode = NetworkProxyFactory::Mode_Manual;
+
+  s.beginGroup(NetworkProxyFactory::kSettingsGroup);
+  s.setValue("mode", mode);
+  s.setValue("type", ui_->proxy_type->currentIndex() == 0 ?
+             QNetworkProxy::HttpProxy : QNetworkProxy::Socks5Proxy);
+  s.setValue("hostname", ui_->proxy_hostname->text());
+  s.setValue("port", ui_->proxy_port->value());
+  s.setValue("use_authentication", ui_->proxy_auth->isChecked());
+  s.setValue("username", ui_->proxy_username->text());
+  s.setValue("password", ui_->proxy_password->text());
+  s.endGroup();
+
   ui_->library_config->Save();
   ui_->magnatune->Save();
   ui_->global_shortcuts->Save();
@@ -368,6 +387,8 @@ void SettingsDialog::accept() {
   streams_->SaveStreams();
 
   QDialog::accept();
+
+  NetworkProxyFactory::Instance()->ReloadSettings();
 }
 
 void SettingsDialog::showEvent(QShowEvent*) {
@@ -512,6 +533,34 @@ void SettingsDialog::showEvent(QShowEvent*) {
   UpdatePopupVisible();
 
   ui_->library_config->Load();
+
+  // Network proxy
+  s.beginGroup(NetworkProxyFactory::kSettingsGroup);
+  NetworkProxyFactory::Mode mode = NetworkProxyFactory::Mode(
+      s.value("mode", NetworkProxyFactory::Mode_System).toInt());
+  switch (mode) {
+  case NetworkProxyFactory::Mode_Manual:
+    ui_->proxy_manual->setChecked(true);
+    break;
+
+  case NetworkProxyFactory::Mode_Direct:
+    ui_->proxy_direct->setChecked(true);
+    break;
+
+  case NetworkProxyFactory::Mode_System:
+  default:
+    ui_->proxy_system->setChecked(true);
+    break;
+  }
+
+  ui_->proxy_type->setCurrentIndex(s.value("type", QNetworkProxy::HttpProxy)
+      .toInt() == QNetworkProxy::HttpProxy ? 0 : 1);
+  ui_->proxy_hostname->setText(s.value("hostname").toString());
+  ui_->proxy_port->setValue(s.value("port").toInt());
+  ui_->proxy_auth->setChecked(s.value("use_authentication", false).toBool());
+  ui_->proxy_username->setText(s.value("username").toString());
+  ui_->proxy_password->setText(s.value("password").toString());
+  s.endGroup();
 
   loading_settings_ = false;
 }

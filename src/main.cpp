@@ -27,6 +27,7 @@
 #include "core/encoding.h"
 #include "core/mac_startup.h"
 #include "core/network.h"
+#include "core/networkproxyfactory.h"
 #include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
@@ -44,6 +45,7 @@
 
 #include <QDir>
 #include <QLibraryInfo>
+#include <QNetworkProxyFactory>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QTranslator>
@@ -248,6 +250,10 @@ int main(int argc, char *argv[]) {
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
+
+  // Network proxy
+  QNetworkProxyFactory::setApplicationProxyFactory(
+      NetworkProxyFactory::Instance());
 
   // Seed the random number generator
   srand(time(NULL));
