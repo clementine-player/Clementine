@@ -4,6 +4,8 @@
 #include <QSettings>
 #include <QStringList>
 
+#include <stdlib.h>
+
 NetworkProxyFactory* NetworkProxyFactory::sInstance = NULL;
 const char* NetworkProxyFactory::kSettingsGroup = "Proxy";
 
