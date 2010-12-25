@@ -106,6 +106,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
           SLOT(SelectionChanged()));
   connect(ui_->button_box, SIGNAL(clicked(QAbstractButton*)),
                            SLOT(ButtonClicked(QAbstractButton*)));
+  connect(ui_->rating, SIGNAL(RatingChanged(float)),
+                       SLOT(SongRated(float)));
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
@@ -611,4 +613,16 @@ void EditTagDialog::showEvent(QShowEvent* e) {
   resize(width(), sizeHint().height());
 
   QDialog::showEvent(e);
+}
+
+void EditTagDialog::SongRated(float rating) {
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  Song& song = data_[sel.first().row()].original_;
+  if (!song.is_valid() || song.id() == -1)
+    return;
+
+  song.set_rating(rating);
+  backend_->UpdateSongRatingAsync(song.id(), rating);
 }
