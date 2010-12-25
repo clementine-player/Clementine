@@ -47,19 +47,20 @@ void DeviceKitLister::Init() {
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       "/org/freedesktop/UDisks", QDBusConnection::systemBus()));
 
-  // Listen for changes
-  connect(interface_.get(), SIGNAL(DeviceAdded(QDBusObjectPath)), SLOT(DBusDeviceAdded(QDBusObjectPath)));
-  connect(interface_.get(), SIGNAL(DeviceRemoved(QDBusObjectPath)), SLOT(DBusDeviceRemoved(QDBusObjectPath)));
-  connect(interface_.get(), SIGNAL(DeviceChanged(QDBusObjectPath)), SLOT(DBusDeviceChanged(QDBusObjectPath)));
-
   // Get all the devices currently attached
   QDBusPendingReply<QList<QDBusObjectPath> > reply = interface_->EnumerateDevices();
   reply.waitForFinished();
 
   if (!reply.isValid()) {
     qWarning() << "Error enumerating DeviceKit-disks devices:" << reply.error().name() << reply.error().message();
+    interface_.reset();
     return;
   }
+
+  // Listen for changes
+  connect(interface_.get(), SIGNAL(DeviceAdded(QDBusObjectPath)), SLOT(DBusDeviceAdded(QDBusObjectPath)));
+  connect(interface_.get(), SIGNAL(DeviceRemoved(QDBusObjectPath)), SLOT(DBusDeviceRemoved(QDBusObjectPath)));
+  connect(interface_.get(), SIGNAL(DeviceChanged(QDBusObjectPath)), SLOT(DBusDeviceChanged(QDBusObjectPath)));
 
   // Get information about each one
   QMap<QString, DeviceData> device_data;
