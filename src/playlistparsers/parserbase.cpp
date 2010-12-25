@@ -54,7 +54,6 @@ bool ParserBase::ParseTrackLocation(const QString& filename_or_url,
     QString absolute_path = dir.absoluteFilePath(proper_path);
     song->set_filename(absolute_path);
   }
-  song->InitFromFile(song->filename(), -1);
   return true;
 }
 

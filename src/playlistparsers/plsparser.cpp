@@ -44,9 +44,11 @@ SongList PLSParser::Load(QIODevice *device, const QDir &dir) const {
 
       // Load the song from the library if it's there.
       Song library_song = LoadLibrarySong(songs[n].filename());
-      if (library_song.is_valid())
+      if (library_song.is_valid()) {
         songs[n] = library_song;
-
+      } else {
+        songs[n].InitFromFile(songs[n].filename(), -1);
+      }
     } else if (key.startsWith("title")) {
       songs[n].set_title(value);
     } else if (key.startsWith("length")) {

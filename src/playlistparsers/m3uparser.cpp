@@ -58,10 +58,6 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
       }
     } else {
       Song song;
-      song.Init(current_metadata.title,
-                current_metadata.artist,
-                QString(),  // Unknown album.
-                current_metadata.length);
 
       // Track location.
       if (!ParseTrackLocation(line, dir, &song)) {
@@ -69,10 +65,16 @@ SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
       } else {
         // Load the song from the library if it's there.
         Song library_song = LoadLibrarySong(song.filename());
-        if (library_song.is_valid())
+        if (library_song.is_valid()) {
           ret << library_song;
-        else
+        } else {
+          song.Init(current_metadata.title,
+                    current_metadata.artist,
+                    QString(),  // Unknown album.
+                    current_metadata.length);
+          song.InitFromFile(song.filename(), -1);
           ret << song;
+        }
 
         current_metadata.artist.clear();
         current_metadata.title.clear();

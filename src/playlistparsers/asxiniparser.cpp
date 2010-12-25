@@ -45,10 +45,12 @@ SongList AsxIniParser::Load(QIODevice *device, const QDir &dir) const {
 
       // Load the song from the library if it's there.
       Song library_song = LoadLibrarySong(song.filename());
-      if (library_song.is_valid())
+      if (library_song.is_valid()) {
         ret << library_song;
-      else
+      } else {
+        song.InitFromFile(song.filename(), -1);
         ret << song;
+      }
     }
   }
 
