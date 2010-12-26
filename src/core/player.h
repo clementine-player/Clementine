@@ -23,6 +23,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include "config.h"
 #include "core/albumcoverloader.h"
 #include "core/song.h"
 #include "engines/engine_fwd.h"

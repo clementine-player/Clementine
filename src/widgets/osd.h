@@ -22,6 +22,7 @@
 #include <QImage>
 #include <QObject>
 
+#include "config.h"
 #include "engines/engine_fwd.h"
 #include "core/albumcoverloader.h"
 #include "core/backgroundthread.h"
