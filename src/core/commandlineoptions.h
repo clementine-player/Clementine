@@ -22,8 +22,6 @@
 #include <QUrl>
 #include <QDataStream>
 
-#include "engines/engine_fwd.h"
-
 class CommandlineOptions {
   friend QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a);
   friend QDataStream& operator>>(QDataStream& s, CommandlineOptions& a);
@@ -62,7 +60,6 @@ class CommandlineOptions {
   int play_track_at() const { return play_track_at_; }
   bool show_osd() const { return show_osd_; }
   QList<QUrl> urls() const { return urls_; }
-  Engine::Type engine() const { return engine_; }
   QString language() const { return language_; }
 
   QByteArray Serialize() const;
@@ -95,7 +92,6 @@ class CommandlineOptions {
   int seek_by_;
   int play_track_at_;
   bool show_osd_;
-  Engine::Type engine_;
   QString language_;
 
   QList<QUrl> urls_;

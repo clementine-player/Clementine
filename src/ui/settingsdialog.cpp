@@ -22,6 +22,7 @@
 #include "mainwindow.h"
 #include "settingsdialog.h"
 #include "engines/enginebase.h"
+#include "engines/gstengine.h"
 #include "playlist/playlistview.h"
 #include "songinfo/songinfofetcher.h"
 #include "songinfo/songinfotextview.h"
@@ -38,10 +39,6 @@
 # include "ui/wiimotedevshortcutsconfig.h"
 # include "ui_wiimotedevshortcutsconfig.h"
 # include "wiimotedev/shortcuts.h"
-#endif
-
-#ifdef HAVE_GSTREAMER
-# include "engines/gstengine.h"
 #endif
 
 #include <QColorDialog>
@@ -150,9 +147,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   connect(ui_->fading_cross, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
   connect(ui_->fading_out, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
   connect(ui_->fading_auto, SIGNAL(toggled(bool)), SLOT(FadingOptionsChanged()));
-#ifdef HAVE_GSTREAMER
   connect(ui_->gst_plugin, SIGNAL(currentIndexChanged(int)), SLOT(GstPluginChanged(int)));
-#endif
 
   connect(ui_->replaygain_preamp, SIGNAL(valueChanged(int)), SLOT(RgPreampChanged(int)));
   ui_->replaygain_preamp_label->setMinimumWidth(
@@ -303,7 +298,6 @@ void SettingsDialog::accept() {
   s.setValue("AutoCrossfadeEnabled", ui_->fading_auto->isChecked());
   s.endGroup();
 
-#ifdef HAVE_GSTREAMER
   s.beginGroup(GstEngine::kSettingsGroup);
   s.setValue("sink", ui_->gst_plugin->itemData(ui_->gst_plugin->currentIndex()).toString());
   s.setValue("device", ui_->gst_device->text());
@@ -313,7 +307,6 @@ void SettingsDialog::accept() {
   s.setValue("rgcompression", ui_->replaygain_compression->isChecked());
   s.setValue("bufferduration", ui_->buffer_duration->value());
   s.endGroup();
-#endif
 
   // Song info
   s.beginGroup(SongInfoTextView::kSettingsGroup);
@@ -395,7 +388,6 @@ void SettingsDialog::showEvent(QShowEvent*) {
   QSettings s;
   loading_settings_ = true;
 
-#ifdef HAVE_GSTREAMER
   if (ui_->gst_plugin->count() <= 1 && gst_engine_) {
     GstEngine::PluginDetailsList list = gst_engine_->GetOutputsList();
 
@@ -409,7 +401,6 @@ void SettingsDialog::showEvent(QShowEvent*) {
     ui_->gst_group->setEnabled(true);
     ui_->replaygain_group->setEnabled(true);
   }
-#endif // HAVE_GSTREAMER
 
   // Behaviour
   s.beginGroup(MainWindow::kSettingsGroup);
@@ -467,7 +458,6 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->fading_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
   s.endGroup();
 
-#ifdef HAVE_GSTREAMER
   s.beginGroup(GstEngine::kSettingsGroup);
   QString sink = s.value("sink", GstEngine::kAutoSink).toString();
   ui_->gst_plugin->setCurrentIndex(0);
@@ -484,7 +474,6 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->replaygain_compression->setChecked(s.value("rgcompression", true).toBool());
   ui_->buffer_duration->setValue(s.value("bufferduration", 1000).toInt());
   s.endGroup();
-#endif
 
   // Notifications
   s.beginGroup(OSD::kSettingsGroup);
@@ -632,14 +621,12 @@ void SettingsDialog::ShowTrayIconToggled(bool on) {
 }
 
 void SettingsDialog::GstPluginChanged(int index) {
-#ifdef HAVE_GSTREAMER
   QString name = ui_->gst_plugin->itemData(index).toString();
 
   bool enabled = GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(name);
 
   ui_->gst_device->setEnabled(enabled);
   ui_->gst_device_label->setEnabled(enabled);
-#endif // HAVE_GSTREAMER
 }
 
 void SettingsDialog::RgPreampChanged(int value) {

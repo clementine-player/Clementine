@@ -34,6 +34,7 @@
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
 #include "engines/enginebase.h"
+#include "engines/gstengine.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -90,10 +91,6 @@
 # include "wiimotedev/shortcuts.h"
 #endif
 
-#ifdef HAVE_GSTREAMER
-# include "engines/gstengine.h"
-#endif
-
 #ifdef ENABLE_VISUALISATIONS
 # include "visualisations/visualisationcontainer.h"
 #endif
@@ -131,7 +128,7 @@ const char* MainWindow::kMusicFilterSpec =
 const char* MainWindow::kAllFilesFilterSpec =
     QT_TR_NOOP("All Files (*)");
 
-MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
+MainWindow::MainWindow(QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
     tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
@@ -184,7 +181,7 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
 #ifdef HAVE_LIBLASTFM
                        radio_model_->GetLastFMService(),
 #endif
-                       engine, this);
+                       this);
   library_ = new Library(database_, task_manager_, this);
   devices_ = new DeviceManager(database_, task_manager_, this);
 
@@ -218,15 +215,6 @@ MainWindow::MainWindow(Engine::Type engine, QWidget *parent)
   player_->Init();
   background_streams_ = new BackgroundStreams(player_->engine(), this);
   background_streams_->LoadStreams();
-
-
-#ifdef HAVE_GSTREAMER
-  if (qobject_cast<GstEngine*>(player_->engine()) == NULL) {
-    ui_->action_transcode->setEnabled(false);
-  }
-#else // HAVE_GSTREAMER
-  ui_->action_transcode->setEnabled(false);
-#endif // HAVE_GSTREAMER
 
   // Models
   library_sort_model_->setSourceModel(library_->model());
@@ -1646,11 +1634,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   settings_dialog_.reset(new SettingsDialog(background_streams_));
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
 
-#ifdef HAVE_GSTREAMER
-  if (GstEngine* engine = qobject_cast<GstEngine*>(player_->engine())) {
-    settings_dialog_->SetGstEngine(engine);
-  }
-#endif
+  settings_dialog_->SetGstEngine(qobject_cast<GstEngine*>(player_->engine()));
 
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
   settings_dialog_->SetSongInfoView(song_info_view_);
@@ -1698,12 +1682,10 @@ void MainWindow::ShowAboutDialog() {
 }
 
 void MainWindow::ShowTranscodeDialog() {
-#ifdef HAVE_GSTREAMER
   if (!transcode_dialog_) {
     transcode_dialog_.reset(new TranscodeDialog);
   }
   transcode_dialog_->show();
-#endif
 }
 
 void MainWindow::ShowErrorDialog(const QString& message) {
@@ -1732,10 +1714,7 @@ void MainWindow::ShowVisualisations() {
     connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
     connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
 
-#ifdef HAVE_GSTREAMER
-    if (GstEngine* engine = qobject_cast<GstEngine*>(player_->engine()))
-    visualisation_->SetEngine(engine);
-#endif
+    visualisation_->SetEngine(qobject_cast<GstEngine*>(player_->engine()));
   }
 
   visualisation_->show();

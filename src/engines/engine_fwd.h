@@ -10,13 +10,6 @@ namespace Engine
     struct SimpleMetaBundle;
     class Base;
 
-    enum Type {
-      Type_GStreamer,
-      Type_VLC,
-      Type_Xine,
-      Type_QtPhonon,
-    };
-
     /**
      * You should return:
      * Playing when playing,

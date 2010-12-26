@@ -48,8 +48,7 @@ const char* CommandlineOptions::kHelpText =
     "\n"
     "%20:\n"
     "  -o, --show-osd            %21\n"
-    "  -e, --engine              %22\n"
-    "  -g, --language <lang>     %23\n";
+    "  -g, --language <lang>     %22\n";
 
 
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
@@ -62,16 +61,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     seek_to_(-1),
     seek_by_(0),
     play_track_at_(-1),
-    show_osd_(false),
-#ifdef HAVE_GSTREAMER
-    engine_(Engine::Type_GStreamer)
-#elif defined(HAVE_LIBVLC)
-    engine_(Engine::Type_VLC)
-#elif defined(HAVE_LIBXINE)
-    engine_(Engine::Type_Xine)
-#elif defined(HAVE_QT_PHONON)
-    engine_(Engine::Type_QtPhonon)
-#endif
+    show_osd_(false)
 {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -116,7 +106,6 @@ bool CommandlineOptions::Parse() {
     {"play-track",  required_argument, 0, 'k'},
 
     {"show-osd",    no_argument,       0, 'o'},
-    {"engine",      required_argument, 0, 'e'},
     {"language",    required_argument, 0, 'g'},
 
     {0, 0, 0, 0}
@@ -125,7 +114,7 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oe:g:", kOptions, NULL);
+    int c = getopt_long(argc_, argv_, "hptusrfv:alk:og:", kOptions, NULL);
 
     // End of the options
     if (c == -1)
@@ -152,7 +141,6 @@ bool CommandlineOptions::Parse() {
             tr("Play the <n>th track in the playlist"),
             tr("Other options"),
             tr("Display the on-screen-display"),
-            tr("Select engine"),
             tr("Change the language"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
@@ -190,39 +178,6 @@ bool CommandlineOptions::Parse() {
       case 'k':
         play_track_at_ = QString(optarg).toInt(&ok);
         if (!ok) play_track_at_ = -1;
-        break;
-
-      case 'e':
-        {
-          ok = true;
-          QString engine = optarg;
-          if(engine == "gst")
-            engine_ = Engine::Type_GStreamer;
-          else if(engine == "vlc")
-            engine_ = Engine::Type_VLC;
-          else if(engine == "xine")
-            engine_ = Engine::Type_Xine;
-          else if(engine == "qt-phonon")
-            engine_ = Engine::Type_QtPhonon;
-          else
-          {
-            qFatal("%s%s",
-                tr("Unknown audio engine \"%1\". Choices are:").arg(engine).toAscii().data(),
-#ifdef HAVE_GSTREAMER
-                " gst"
-#endif
-#ifdef HAVE_LIBVLC
-                " vlc"
-#endif
-#ifdef HAVE_LIBXINE
-                " xine"
-#endif
-#ifdef HAVE_QT_PHONON
-                " qt-phonon"
-#endif
-            );
-          }
-        }
         break;
 
       case '?':

@@ -53,6 +53,7 @@
 
 #include <glib-object.h>
 #include <glib/gutils.h>
+#include <gst/gst.h>
 
 #include <echonest/Config.h>
 
@@ -61,15 +62,11 @@
   #include <sys/sysctl.h>
 #endif
 
-
 #ifdef HAVE_LIBLASTFM
   #include "radio/lastfmservice.h"
 #endif
 
-#ifdef HAVE_GSTREAMER
-#  include <gst/gst.h>
-   class GstEnginePipeline;
-#endif
+class GstEnginePipeline;
 
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
@@ -174,11 +171,9 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
   qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
 
-#ifdef HAVE_GSTREAMER
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
-#endif
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -263,7 +258,7 @@ int main(int argc, char *argv[]) {
   srand(time(NULL));
 
   // Window
-  MainWindow w(options.engine());
+  MainWindow w;
 
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);

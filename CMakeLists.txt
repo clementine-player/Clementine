@@ -13,7 +13,7 @@ if(UNIX AND NOT APPLE)
 endif(UNIX AND NOT APPLE)
 
 if(NOT APPLE)
-  find_package(Qt4 COMPONENTS Phonon QtWebKit)
+  find_package(Qt4 COMPONENTS QtWebKit)
 endif(NOT APPLE)
 
 # Find Qt's lconvert binary.  Try qt's binary dir first, fall back to looking in PATH
@@ -34,8 +34,6 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 pkg_check_modules(GSTREAMER gstreamer-0.10)
 pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
-pkg_check_modules(LIBVLC libvlc)
-pkg_check_modules(LIBXINE libxine)
 pkg_check_modules(GLIB glib-2.0)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(GOBJECT gobject-2.0)
@@ -86,11 +84,7 @@ add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
-# Don't try to use Phonon or webkit if their include directories couldn't be found.
-if (NOT QT_PHONON_INCLUDE_DIR)
-  set (QT_USE_PHONON 0)
-endif (NOT QT_PHONON_INCLUDE_DIR)
-
+# Don't try to use webkit if their include directories couldn't be found.
 if (NOT QT_QTWEBKIT_INCLUDE_DIR)
   set (QT_USE_QTWEBKIT 0)
 endif (NOT QT_QTWEBKIT_INCLUDE_DIR)

@@ -52,18 +52,14 @@ SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
 
   timeout_timer_->setSingleShot(true);
 
-#ifdef HAVE_GSTREAMER
   connect(timeout_timer_, SIGNAL(timeout()), SLOT(Timeout()));
-#endif
 }
 
 SongLoader::~SongLoader() {
-#ifdef HAVE_GSTREAMER
   if (pipeline_) {
     state_ = Finished;
     gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
   }
-#endif // HAVE_GSTREAMER
 }
 
 SongLoader::Result SongLoader::Load(const QUrl& url) {
@@ -80,15 +76,8 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
     return Success;
   }
 
-#ifdef HAVE_GSTREAMER
   timeout_timer_->start(timeout_);
   return LoadRemote();
-#else
-  // If we don't have GStreamer we can't check the type of remote playlists,
-  // so just assume it's a raw stream and get on with our lives.
-  AddAsRawStream();
-  return Success;
-#endif
 }
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
@@ -212,7 +201,6 @@ void SongLoader::Timeout() {
 }
 
 void SongLoader::StopTypefind() {
-#ifdef HAVE_GSTREAMER
   // Destroy the pipeline
   if (pipeline_) {
     gst_element_set_state(pipeline_.get(), GST_STATE_NULL);
@@ -233,12 +221,10 @@ void SongLoader::StopTypefind() {
     // It wasn't a playlist - just put the URL in as a stream
     AddAsRawStream();
   }
-#endif // HAVE_GSTREAMER
 
   emit LoadFinished(success_);
 }
 
-#ifdef HAVE_GSTREAMER
 SongLoader::Result SongLoader::LoadRemote() {
   qDebug() << "Loading remote file" << url_;
 
@@ -439,4 +425,3 @@ void SongLoader::StopTypefindAsync(bool success) {
 
   metaObject()->invokeMethod(this, "StopTypefind", Qt::QueuedConnection);
 }
-#endif // HAVE_GSTREAMER

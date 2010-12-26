@@ -18,24 +18,13 @@
 #include "config.h"
 #include "player.h"
 #include "engines/enginebase.h"
+#include "engines/gstengine.h"
 #include "library/librarybackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
 #include "mpris_common.h"
 
-#ifdef HAVE_GSTREAMER
-#  include "engines/gstengine.h"
-#endif
-#ifdef HAVE_LIBVLC
-#  include "engines/vlcengine.h"
-#endif
-#ifdef HAVE_LIBXINE
-#  include "engines/xine-engine.h"
-#endif
-#ifdef HAVE_QT_PHONON
-#  include "engines/phononengine.h"
-#endif
 #ifdef HAVE_LIBLASTFM
 #  include "radio/lastfmservice.h"
 #endif
@@ -59,7 +48,7 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
 #ifdef HAVE_LIBLASTFM
                LastFMService* lastfm,
 #endif
-               Engine::Type engine, QObject* parent)
+               QObject* parent)
   : QObject(parent),
     art_loader_(new mpris::ArtLoader(this)),
     mpris1_(NULL),
@@ -68,7 +57,7 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
 #ifdef HAVE_LIBLASTFM
     lastfm_(lastfm),
 #endif
-    engine_(CreateEngine(engine)),
+    engine_(new GstEngine),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
     volume_before_mute_(50)
@@ -99,36 +88,6 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
 }
 
 Player::~Player() {
-}
-
-EngineBase* Player::CreateEngine(Engine::Type engine) {
-  switch(engine) {
-#ifdef HAVE_GSTREAMER
-    case Engine::Type_GStreamer:
-      return new GstEngine();
-      break;
-#endif
-#ifdef HAVE_LIBVLC
-    case Engine::Type_VLC:
-      return new VlcEngine();
-      break;
-#endif
-#ifdef HAVE_LIBXINE
-    case Engine::Type_Xine:
-      return new XineEngine();
-      break;
-#endif
-#ifdef HAVE_QT_PHONON
-    case Engine::Type_QtPhonon:
-      return new PhononEngine();
-      break;
-#endif
-    default:
-      qFatal("Selected engine not compiled in");
-      break;
-  }
-  /* NOT REACHED */
-  return NULL;
 }
 
 void Player::Init() {

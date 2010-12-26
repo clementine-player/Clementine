@@ -21,14 +21,11 @@
 #include <QObject>
 #include <QUrl>
 
-#include "config.h"
 #include "song.h"
 
 #include <boost/shared_ptr.hpp>
 
-#ifdef HAVE_GSTREAMER
-# include <gst/gst.h>
-#endif
+#include <gst/gst.h>
 
 class LibraryBackendInterface;
 class ParserBase;
@@ -79,7 +76,6 @@ private:
 
   void AddAsRawStream();
 
-#ifdef HAVE_GSTREAMER
   Result LoadRemote();
 
   // GStreamer callbacks
@@ -92,7 +88,6 @@ private:
   void ErrorMessageReceived(GstMessage* msg);
   void EndOfStreamReached();
   void MagicReady();
-#endif // HAVE_GSTREAMER
 
 private:
   static QSet<QString> sRawUriSchemes;
@@ -112,9 +107,7 @@ private:
   QByteArray buffer_;
   LibraryBackendInterface* library_;
 
-#ifdef HAVE_GSTREAMER
   boost::shared_ptr<GstElement> pipeline_;
-#endif
 };
 
 #endif // SONGLOADER_H

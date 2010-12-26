@@ -28,7 +28,6 @@ if(HAVE_LIBLASTFM)
 endif(HAVE_LIBLASTFM)
 
 cmake_policy(SET CMP0011 NEW)
-include(../cmake/AddEngine.cmake)
 include(../cmake/ParseArguments.cmake)
 include(../cmake/Translations.cmake)
 
@@ -82,6 +81,9 @@ set(SOURCES
   devices/filesystemdevice.cpp
 
   engines/enginebase.cpp
+  engines/gstengine.cpp
+  engines/gstenginepipeline.cpp
+  engines/gstelementdeleter.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -171,6 +173,9 @@ set(SOURCES
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
+  transcoder/transcodedialog.cpp
+  transcoder/transcoder.cpp
+
   ui/about.cpp
   ui/addstreamdialog.cpp
   ui/edittagdialog.cpp
@@ -251,6 +256,9 @@ set(HEADERS
   devices/filesystemdevice.h
 
   engines/enginebase.h
+  engines/gstengine.h
+  engines/gstenginepipeline.h
+  engines/gstelementdeleter.h
 
   library/groupbydialog.h
   library/library.h
@@ -329,6 +337,9 @@ set(HEADERS
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 
+  transcoder/transcodedialog.h
+  transcoder/transcoder.h
+
   ui/about.h
   ui/addstreamdialog.h
   ui/edittagdialog.h
@@ -395,6 +406,9 @@ set(UI
 
   songinfo/lyricsettings.ui
 
+  transcoder/transcodedialog.ui
+  transcoder/transcodelogdialog.ui
+
   ui/about.ui
   ui/addstreamdialog.ui
   ui/edittagdialog.ui
@@ -435,27 +449,6 @@ else (LINGUAS STREQUAL "All")
            LANGUAGES ${LINGUAS})
   endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
 endif (LINGUAS STREQUAL "All")
-
-# Engines
-set(GST_ENGINE_SRC
-  engines/gstengine.cpp
-  engines/gstenginepipeline.cpp
-  engines/gstelementdeleter.cpp
-)
-set(GST_ENGINE_MOC
-  engines/gstengine.h
-  engines/gstenginepipeline.h
-  engines/gstelementdeleter.h
-)
-set(GST_ENGINE_LIB GSTREAMER GSTREAMER_BASE)
-set(XINE_ENGINE_SRC engines/xine-engine.cpp engines/xine-scope.c)
-set(XINE_ENGINE_MOC engines/xine-engine.h)
-
-add_engine(gst "${GST_ENGINE_LIB}" "${GST_ENGINE_SRC}" "${GST_ENGINE_MOC}" ON)
-add_engine(vlc LIBVLC engines/vlcengine.cpp engines/vlcengine.h OFF)
-add_engine(xine LIBXINE "${XINE_ENGINE_SRC}" "${XINE_ENGINE_MOC}" OFF)
-add_engine(qt-phonon QT_PHONON engines/phononengine.cpp engines/phononengine.h OFF)
-print_engines()
 
 # Visualisations
 if(ENABLE_VISUALISATIONS)
@@ -517,24 +510,6 @@ if(HAVE_LIBLASTFM)
     ui/albumcoversearcher.ui
   )
 endif(HAVE_LIBLASTFM)
-
-# Transcoder
-if(HAVE_GSTREAMER)
-  list(APPEND SOURCES
-    transcoder/transcodedialog.cpp
-    transcoder/transcoder.cpp
-  )
-
-  list(APPEND HEADERS
-    transcoder/transcodedialog.h
-    transcoder/transcoder.h
-  )
-
-  list(APPEND UI
-    transcoder/transcodedialog.ui
-    transcoder/transcodelogdialog.ui
-  )
-endif(HAVE_GSTREAMER)
 
 # OSDs
 if(APPLE)
@@ -782,7 +757,8 @@ target_link_libraries(clementine_lib
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${QT_LIBRARIES}
-  ${ENGINE_LIBRARIES}
+  ${GSTREAMER_BASE_LIBRARIES}
+  ${GSTREAMER_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}

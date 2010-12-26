@@ -56,10 +56,9 @@ class Player : public QObject {
 #ifdef HAVE_LIBLASTFM
          LastFMService* lastfm,
 #endif
-         Engine::Type engine, QObject* parent = 0);
+         QObject* parent = 0);
   ~Player();
 
-  EngineBase* CreateEngine(Engine::Type engine);
   void Init();
 
   EngineBase* engine() const { return engine_.get(); }

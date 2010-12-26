@@ -77,7 +77,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(Engine::Type engine, QWidget *parent = 0);
+  MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
   static const char* kSettingsGroup;
