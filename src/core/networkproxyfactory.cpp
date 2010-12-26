@@ -11,7 +11,7 @@ const char* NetworkProxyFactory::kSettingsGroup = "Proxy";
 
 NetworkProxyFactory::NetworkProxyFactory()
   : mode_(Mode_System),
-  type_(QNetworkProxy::HttpProxy),
+    type_(QNetworkProxy::HttpProxy),
     port_(8080),
     use_authentication_(false)
 {
@@ -71,14 +71,18 @@ QList<QNetworkProxy> NetworkProxyFactory::queryProxy(
 #ifdef Q_OS_LINUX
     Q_UNUSED(query);
 
-    ret.setHostName(env_url_.host());
-    ret.setPort(env_url_.port());
-    ret.setUser(env_url_.userName());
-    ret.setPassword(env_url_.password());
-    if (env_url_.scheme().startsWith("http"))
-      ret.setType(QNetworkProxy::HttpProxy);
-    else
-      ret.setType(QNetworkProxy::Socks5Proxy);
+    if (env_url_.isEmpty()) {
+      ret.setType(QNetworkProxy::NoProxy);
+    } else {
+      ret.setHostName(env_url_.host());
+      ret.setPort(env_url_.port());
+      ret.setUser(env_url_.userName());
+      ret.setPassword(env_url_.password());
+      if (env_url_.scheme().startsWith("http"))
+        ret.setType(QNetworkProxy::HttpProxy);
+      else
+        ret.setType(QNetworkProxy::Socks5Proxy);
+    }
     break;
 #else
     return systemProxyForQuery(query);
