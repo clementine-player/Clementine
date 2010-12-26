@@ -24,8 +24,6 @@
 
 #include <QBuffer>
 #include <QFileInfo>
-#include <QTextCodec>
-#include <QtDebug>
 
 const char* CommandlineOptions::kHelpText =
     "%1: clementine [%2] [%3]\n"

@@ -96,32 +96,30 @@ void SongInfoView::ReloadSettings() {
   // Put the providers in the right order
   QList<SongInfoProvider*> ordered_providers;
 
-  QVariant saved_order = s.value("search_order");
-  if (saved_order.isNull()) {
-    // Hardcoded default order
-    ordered_providers << ProviderByName("lyrics.wikia.com")
-                      << ProviderByName("lyricstime.com")
-                      << ProviderByName("lyricsreg.com")
-                      << ProviderByName("lyricsmania.com")
-                      << ProviderByName("metrolyrics.com")
-                      << ProviderByName("azlyrics.com")
-                      << ProviderByName("songlyrics.com")
-                      << ProviderByName("elyrics.net")
-                      << ProviderByName("lyricsdownload.com")
-                      << ProviderByName("lyrics.com")
-                      << ProviderByName("lyricsbay.com")
-                      << ProviderByName("directlyrics.com")
-                      << ProviderByName("loudson.gs")
-                      << ProviderByName("teksty.org")
-                      << ProviderByName("tekstowo.pl (Polish translations)")
-                      << ProviderByName("vagalume.uol.com.br")
-                      << ProviderByName("vagalume.uol.com.br (Portuguese translations)");
-  } else {
-    foreach (const QVariant& name, saved_order.toList()) {
-      SongInfoProvider* provider = ProviderByName(name.toString());
-      if (provider)
-        ordered_providers << provider;
-    }
+  QVariantList default_order;
+  default_order << "lyrics.wikia.com"
+                << "lyricstime.com"
+                << "lyricsreg.com"
+                << "lyricsmania.com"
+                << "metrolyrics.com"
+                << "azlyrics.com"
+                << "songlyrics.com"
+                << "elyrics.net"
+                << "lyricsdownload.com"
+                << "lyrics.com"
+                << "lyricsbay.com"
+                << "directlyrics.com"
+                << "loudson.gs"
+                << "teksty.org"
+                << "tekstowo.pl (Polish translations)"
+                << "vagalume.uol.com.br"
+                << "vagalume.uol.com.br (Portuguese translations)";
+
+  QVariant saved_order = s.value("search_order", default_order);
+  foreach (const QVariant& name, saved_order.toList()) {
+    SongInfoProvider* provider = ProviderByName(name.toString());
+    if (provider)
+      ordered_providers << provider;
   }
 
   // Enable all the providers in the list and rank them
