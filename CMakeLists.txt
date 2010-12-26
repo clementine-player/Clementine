@@ -9,7 +9,18 @@ include(cmake/Rpm.cmake)
 
 find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
 if(UNIX AND NOT APPLE)
-  find_package(Qt4 REQUIRED QtDbus)
+  option(ENABLE_DBUS "Enable D-Bus, MPRIS and native notifications. Required for DeviceKit and Wii remote support" ON)
+  if(ENABLE_DBUS)
+    find_package(Qt4 REQUIRED QtDbus)
+    set(HAVE_DBUS ON)
+
+    option(ENABLE_DEVICEKIT "DeviceKit backend" ON)
+    if(ENABLE_DEVICEKIT)
+      set(HAVE_DEVICEKIT ON)
+    endif(ENABLE_DEVICEKIT)
+
+    option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
+  endif(ENABLE_DBUS)
 endif(UNIX AND NOT APPLE)
 
 if(NOT APPLE)
@@ -126,10 +137,6 @@ option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 option(ENABLE_SOUNDMENU "Add Clementine to the Gnome sound menu" ON)
 option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and radio streams" ON)
-
-if(NOT APPLE AND NOT WIN32)
-  option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
-endif(NOT APPLE AND NOT WIN32)
 
 if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
   set(HAVE_LIBGPOD ON)
@@ -260,10 +267,12 @@ add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 # Show a summary of what we have enabled
+summary_add("devices: DeviceKit backend" HAVE_DEVICEKIT)
 summary_add("devices: iPod classic support" HAVE_LIBGPOD)
 summary_add("devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
 summary_add("devices: MTP support" HAVE_LIBMTP)
 summary_add("devices: GIO backend" HAVE_GIO)
+summary_add("D-Bus support" HAVE_DBUS)
 summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
 summary_add("Wiimote support" ENABLE_WIIMOTEDEV)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)

@@ -19,7 +19,7 @@
 
 #include <QtGlobal>
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
   #include "dbusscreensaver.h"
   #include <QDBusConnection>
   #include <QDBusConnectionInterface>
@@ -42,7 +42,7 @@ Screensaver* Screensaver::screensaver_ = 0;
 
 Screensaver* Screensaver::GetScreensaver() {
   if (!screensaver_) {
-    #if defined(Q_WS_X11)
+    #if defined(HAVE_DBUS)
       if (QDBusConnection::sessionBus().interface()->isServiceRegistered(kGnomeService)) {
         screensaver_ = new DBusScreensaver(kGnomeService, kGnomePath, kGnomeInterface);
       } else if (QDBusConnection::sessionBus().interface()->isServiceRegistered(kKdeService)) {

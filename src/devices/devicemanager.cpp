@@ -182,7 +182,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   connected_devices_model_ = new DeviceStateFilterModel(this);
   connected_devices_model_->setSourceModel(this);
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DEVICEKIT
   AddLister(new DeviceKitLister);
 #endif
 #ifdef HAVE_GIO

@@ -42,7 +42,7 @@ namespace mpris {
   class ArtLoader;
 }
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
 # include <QDBusArgument>
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);

@@ -534,7 +534,7 @@ else(APPLE)
 endif(APPLE)
 
 # DBUS and MPRIS - Linux specific
-if(NOT APPLE AND NOT WIN32)
+if(HAVE_DBUS)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dbus)
 
   # Hack to get it to generate interfaces without namespaces - required
@@ -570,12 +570,14 @@ if(NOT APPLE AND NOT WIN32)
       dbus/notification)
 
   # DeviceKit DBUS interfaces
-  qt4_add_dbus_interface(SOURCES
-      dbus/org.freedesktop.UDisks.xml
-      dbus/udisks)
-  qt4_add_dbus_interface(SOURCES
-      dbus/org.freedesktop.UDisks.Device.xml
-      dbus/udisksdevice)
+  if(HAVE_DEVICEKIT)
+    qt4_add_dbus_interface(SOURCES
+        dbus/org.freedesktop.UDisks.xml
+        dbus/udisks)
+    qt4_add_dbus_interface(SOURCES
+        dbus/org.freedesktop.UDisks.Device.xml
+        dbus/udisksdevice)
+  endif(HAVE_DEVICEKIT)
 
   # MPRIS source
   list(APPEND SOURCES core/mpris.cpp core/mpris2.cpp)
@@ -599,12 +601,14 @@ if(NOT APPLE AND NOT WIN32)
   endif(ENABLE_WIIMOTEDEV)
 
   # DeviceKit lister source
-  list(APPEND SOURCES devices/devicekitlister.cpp)
-  list(APPEND HEADERS devices/devicekitlister.h)
+  if(HAVE_DEVICEKIT)
+    list(APPEND SOURCES devices/devicekitlister.cpp)
+    list(APPEND HEADERS devices/devicekitlister.h)
+  endif(HAVE_DEVICEKIT)
 
   # Gnome Screensaver DBus interface
   list(APPEND SOURCES ui/dbusscreensaver.cpp)
-endif(NOT APPLE AND NOT WIN32)
+endif(HAVE_DBUS)
 
 # Libgpod device backend
 if(HAVE_LIBGPOD)

@@ -19,7 +19,7 @@
 #include "osdpretty.h"
 #include "ui/systemtrayicon.h"
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
 # include "dbus/notification.h"
 #endif
 
@@ -193,7 +193,7 @@ void OSD::ShowMessage(const QString& summary,
   }
 }
 
-#ifndef Q_WS_X11
+#ifndef HAVE_DBUS
 void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 #endif
 

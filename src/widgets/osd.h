@@ -33,7 +33,7 @@ class SystemTrayIcon;
 
 class QDBusPendingCallWatcher;
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
 # include <QDBusArgument>
 # include <boost/scoped_ptr.hpp>
 
@@ -127,7 +127,7 @@ class OSD : public QObject {
   GrowlNotificationWrapper* wrapper_;
 #endif  // Q_OS_DARWIN
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
   boost::scoped_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
   QDateTime last_notification_time_;

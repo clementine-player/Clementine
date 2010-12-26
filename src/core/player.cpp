@@ -29,7 +29,7 @@
 #  include "radio/lastfmservice.h"
 #endif
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
 #  include "mpris.h"
 #  include "mpris2.h"
 #  include <QDBusConnection>
@@ -67,7 +67,7 @@ Player::Player(MainWindow* main_window, PlaylistManager* playlists,
   connect(playlists, SIGNAL(CurrentSongChanged(Song)),
           art_loader_, SLOT(LoadArt(Song)));
 
-#ifdef Q_WS_X11
+#ifdef HAVE_DBUS
   // MPRIS DBus interface.
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();

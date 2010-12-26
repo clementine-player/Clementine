@@ -16,10 +16,12 @@
 */
 
 #include "osd.h"
-#include "dbus/notification.h"
 
-#include <QCoreApplication>
 #include <QtDebug>
+
+#ifdef HAVE_DBUS
+#include "dbus/notification.h"
+#include <QCoreApplication>
 #include <QTextDocument>
 
 using boost::scoped_ptr;
@@ -52,8 +54,10 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
   Q_ASSERT(0);
   return arg;
 }
+#endif // HAVE_DBUS
 
 void OSD::Init() {
+#ifdef HAVE_DBUS
   interface_.reset(new OrgFreedesktopNotificationsInterface(
       OrgFreedesktopNotificationsInterface::staticInterfaceName(),
       "/org/freedesktop/Notifications",
@@ -63,10 +67,15 @@ void OSD::Init() {
   }
 
   notification_id_ = 0;
+#endif // HAVE_DBUS
 }
 
 bool OSD::SupportsNativeNotifications() {
+#ifdef HAVE_DBUS
   return true;
+#else
+  return false;
+#endif
 }
 
 bool OSD::SupportsTrayPopups() {
@@ -75,6 +84,7 @@ bool OSD::SupportsTrayPopups() {
 
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon, const QImage& image) {
+#ifdef HAVE_DBUS
   QVariantMap hints;
   if (!image.isNull()) {
     hints["image_data"] = QVariant(image);
@@ -101,8 +111,12 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
   connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
       SLOT(CallFinished(QDBusPendingCallWatcher*)));
+#else // HAVE_DBUS
+  qWarning() << __PRETTY_FUNCTION__ << ": NOT IMPLEMENTED";
+#endif // HAVE_DBUS
 }
 
+#ifdef HAVE_DBUS
 void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
   scoped_ptr<QDBusPendingCallWatcher> w(watcher);
 
@@ -118,3 +132,4 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
     last_notification_time_ = QDateTime::currentDateTime();
   }
 }
+#endif
