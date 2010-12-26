@@ -21,14 +21,18 @@
 #include <QDialog>
 #include <QModelIndexList>
 
+#include "config.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
 #include "widgets/lineedit.h"
 
-class AlbumCoverFetcher;
+#ifdef HAVE_LIBLASTFM
+  class AlbumCoverFetcher;
+  class AlbumCoverSearcher;
+#endif
+
 class AlbumCoverLoader;
-class AlbumCoverSearcher;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
@@ -135,8 +139,11 @@ private:
 
   bool ignore_edits_;
 
+#ifdef HAVE_LIBLASTFM
   AlbumCoverSearcher* cover_searcher_;
   AlbumCoverFetcher* cover_fetcher_;
+#endif
+
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   quint64 cover_art_id_;
   bool cover_art_is_set_;

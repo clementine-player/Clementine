@@ -16,15 +16,18 @@
 */
 
 #include "albumcovermanager.h"
-#include "albumcoversearcher.h"
 #include "edittagdialog.h"
 #include "ui_edittagdialog.h"
-#include "core/albumcoverfetcher.h"
 #include "core/albumcoverloader.h"
 #include "core/utilities.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "playlist/playlistdelegates.h"
+
+#ifdef HAVE_LIBLASTFM
+# include "albumcoversearcher.h"
+# include "core/albumcoverfetcher.h"
+#endif
 
 #include <QDateTime>
 #include <QFileDialog>
@@ -46,8 +49,10 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     backend_(NULL),
     loading_(false),
     ignore_edits_(false),
+#ifdef HAVE_LIBLASTFM
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
+#endif
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
     cover_art_is_set_(false)
@@ -56,7 +61,10 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(ArtLoaded(quint64,QImage)));
+
+#ifdef HAVE_LIBLASTFM
   cover_searcher_->Init(cover_loader_->Worker(), cover_fetcher_);
+#endif
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
@@ -386,6 +394,11 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
 
   ui_->summary->setText(summary);
 
+#ifndef HAVE_LIBLASTFM
+  choose_cover_->setEnabled(false);
+  download_cover_->setEnabled(false);
+#endif
+
   unset_cover_->setEnabled(art_is_set);
   show_cover_->setEnabled(art_is_set);
   ui_->summary_art_button->setEnabled(song.id() != -1);
@@ -458,6 +471,7 @@ void EditTagDialog::ResetField() {
 }
 
 void EditTagDialog::LoadCoverFromFile() {
+#ifdef HAVE_LIBLASTFM
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
   if (sel.isEmpty())
     return;
@@ -485,9 +499,11 @@ void EditTagDialog::LoadCoverFromFile() {
 
   // Update database
   SetAlbumArt(cover);
+#endif
 }
 
 void EditTagDialog::SearchCover() {
+#ifdef HAVE_LIBLASTFM
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
   if (sel.isEmpty())
     return;
@@ -504,6 +520,7 @@ void EditTagDialog::SearchCover() {
     return;
 
   SetAlbumArt(AlbumCoverManager::SaveCoverInCache(song.artist(), song.album(), image));
+#endif
 }
 
 void EditTagDialog::UnsetCover() {
