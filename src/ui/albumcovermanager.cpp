@@ -180,6 +180,7 @@ void AlbumCoverManager::Init() {
 
   cover_loader_->Start(true);
   CoverLoaderInitialised();
+  cover_searcher_->Init(cover_fetcher_);
   constructed_ = true;
 }
 
@@ -187,8 +188,6 @@ void AlbumCoverManager::CoverLoaderInitialised() {
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(CoverImageLoaded(quint64,QImage)));
-
-  cover_searcher_->Init(cover_loader_->Worker(), cover_fetcher_);
 }
 
 void AlbumCoverManager::showEvent(QShowEvent *) {

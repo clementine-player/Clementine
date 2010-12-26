@@ -27,11 +27,19 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
   : QDialog(parent),
     ui_(new Ui_AlbumCoverSearcher),
     no_cover_icon_(no_cover_icon),
+    loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     fetcher_(NULL),
     id_(0)
 {
   ui_->setupUi(this);
   ui_->busy->hide();
+
+  loader_->Start(true);
+  loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
+  loader_->Worker()->SetScaleOutputImage(false);
+  loader_->Worker()->SetPadOutputImage(false);
+  connect(loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(ImageLoaded(quint64,QImage)));
 
   connect(ui_->search, SIGNAL(clicked()), SLOT(Search()));
   connect(ui_->covers, SIGNAL(doubleClicked(QModelIndex)), SLOT(CoverDoubleClicked(QModelIndex)));
@@ -41,13 +49,10 @@ AlbumCoverSearcher::~AlbumCoverSearcher() {
   delete ui_;
 }
 
-void AlbumCoverSearcher::Init(boost::shared_ptr<AlbumCoverLoader> loader,
-                              AlbumCoverFetcher *fetcher) {
-  loader_ = loader;
+void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
   fetcher_ = fetcher;
 
   connect(fetcher_, SIGNAL(SearchFinished(quint64,AlbumCoverFetcher::SearchResults)), SLOT(SearchFinished(quint64,AlbumCoverFetcher::SearchResults)));
-  connect(loader_.get(), SIGNAL(ImageLoaded(quint64,QImage)), SLOT(ImageLoaded(quint64,QImage)));
 }
 
 QImage AlbumCoverSearcher::Exec(const QString &query) {
@@ -91,7 +96,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const AlbumCoverFetcher::Sea
     if (result.image_url.isEmpty())
       continue;
 
-    quint64 id = loader_->LoadImageAsync(result.image_url, QString());
+    quint64 id = loader_->Worker()->LoadImageAsync(result.image_url, QString());
 
     QListWidgetItem* item = new QListWidgetItem(ui_->covers);
     item->setIcon(no_cover_icon_);
@@ -107,12 +112,18 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const AlbumCoverFetcher::Sea
     ui_->busy->hide();
 }
 
-void AlbumCoverSearcher::ImageLoaded(quint64 id, const QImage &image) {
+void AlbumCoverSearcher::ImageLoaded(quint64 id, const QImage& image) {
   if (!cover_loading_tasks_.contains(id))
     return;
 
+  QIcon icon(QPixmap::fromImage(image));
+
+  // Add an icon that's the right size for the view
+  icon.addPixmap(QPixmap::fromImage(image.scaled(ui_->covers->iconSize(),
+      Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+
   QListWidgetItem* item = cover_loading_tasks_.take(id);
-  item->setIcon(QIcon(QPixmap::fromImage(image)));
+  item->setIcon(icon);
 
   if (cover_loading_tasks_.isEmpty())
     ui_->busy->hide();

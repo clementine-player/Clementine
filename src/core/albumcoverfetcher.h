@@ -31,6 +31,8 @@
 class QNetworkReply;
 class QString;
 
+// This class searches for album covers for a given query or artist/album and
+// returns URLs.
 class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 

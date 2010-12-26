@@ -117,7 +117,7 @@ void AlbumCoverFetcher::AlbumSearchFinished() {
       SearchResult result;
       result.album = element["name"].text();
       result.artist = element["artist"].text();
-      result.image_url = element["image size=large"].text();
+      result.image_url = element["image size=extralarge"].text();
       results << result;
     }
 

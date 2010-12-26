@@ -125,6 +125,10 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   // Start loading the cover loader thread
   cover_loader_->Start();
   connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
+
+#ifdef HAVE_LIBLASTFM
+  cover_searcher_->Init(cover_fetcher_);
+#endif
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
@@ -155,10 +159,6 @@ void NowPlayingWidget::CoverLoaderInitialised() {
   loader->Worker()->SetPadOutputImage(true);
   connect(loader->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
-
-#ifdef HAVE_LIBLASTFM
-  cover_searcher_->Init(cover_loader_->Worker(), cover_fetcher_);
-#endif
 }
 
 void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {

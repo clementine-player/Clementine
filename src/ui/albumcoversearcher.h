@@ -19,6 +19,7 @@
 #define ALBUMCOVERSEARCHER_H
 
 #include "core/albumcoverfetcher.h"
+#include "core/backgroundthread.h"
 
 #include <QDialog>
 #include <QIcon>
@@ -31,6 +32,7 @@ class Ui_AlbumCoverSearcher;
 class QListWidgetItem;
 class QModelIndex;
 
+// This is a dialog that lets the user search for album covers
 class AlbumCoverSearcher : public QDialog {
   Q_OBJECT
 
@@ -43,8 +45,7 @@ public:
     Role_ImageRequestId,
   };
 
-  void Init(boost::shared_ptr<AlbumCoverLoader> loader,
-            AlbumCoverFetcher* fetcher);
+  void Init(AlbumCoverFetcher* fetcher);
 
   QImage Exec(const QString& query);
 
@@ -62,7 +63,7 @@ private:
   Ui_AlbumCoverSearcher* ui_;
 
   QIcon no_cover_icon_;
-  boost::shared_ptr<AlbumCoverLoader> loader_;
+  BackgroundThread<AlbumCoverLoader>* loader_;
   AlbumCoverFetcher* fetcher_;
 
   quint64 id_;

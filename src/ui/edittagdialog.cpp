@@ -63,7 +63,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
           SLOT(ArtLoaded(quint64,QImage)));
 
 #ifdef HAVE_LIBLASTFM
-  cover_searcher_->Init(cover_loader_->Worker(), cover_fetcher_);
+  cover_searcher_->Init(cover_fetcher_);
 #endif
 
   ui_->setupUi(this);
