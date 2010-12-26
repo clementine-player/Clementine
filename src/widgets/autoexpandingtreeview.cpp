@@ -17,6 +17,7 @@
 
 #include "autoexpandingtreeview.h"
 
+#include <QMouseEvent>
 #include <QtDebug>
 
 const int AutoExpandingTreeView::kRowsToShow = 50;
@@ -86,4 +87,12 @@ void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
 
 void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
   ignore_next_click_ = true;
+}
+
+void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
+  if (event->modifiers() != Qt::NoModifier) {
+    ignore_next_click_ = true;
+  }
+
+  QTreeView::mousePressEvent(event);
 }
