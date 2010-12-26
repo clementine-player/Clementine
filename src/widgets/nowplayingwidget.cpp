@@ -18,7 +18,17 @@
 #include "nowplayingwidget.h"
 #include "core/albumcoverloader.h"
 #include "core/kittenloader.h"
+#include "library/librarybackend.h"
+#include "ui/iconloader.h"
 
+#ifdef HAVE_LIBLASTFM
+# include "core/albumcoverfetcher.h"
+# include "ui/albumcovermanager.h"
+# include "ui/albumcoversearcher.h"
+#endif
+
+#include <QFileDialog>
+#include <QLabel>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -54,6 +64,11 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     kitten_loader_(NULL),
+#ifdef HAVE_LIBLASTFM
+    cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
+    cover_fetcher_(new AlbumCoverFetcher(this)),
+#endif
+    backend_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
     above_statusbar_action_(NULL),
@@ -81,6 +96,19 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   CreateModeAction(LargeSongDetails, tr("Large album cover"), mode_group, mode_mapper);
 
   menu_->addActions(mode_group->actions());
+  menu_->addSeparator();
+  choose_cover_ = menu_->addAction(
+        IconLoader::Load("document-open"), tr("Load cover from disk..."),
+        this, SLOT(LoadCoverFromFile()));
+  download_cover_ = menu_->addAction(
+        IconLoader::Load("download"), tr("Search for album covers..."),
+        this, SLOT(SearchCover()));
+  unset_cover_ = menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Unset cover"),
+        this, SLOT(UnsetCover()));
+  show_cover_ = menu_->addAction(
+        IconLoader::Load("zoom-in"), tr("Show fullsize..."),
+        this, SLOT(ZoomCover()));
   menu_->addSeparator();
   above_statusbar_action_ = menu_->addAction(tr("Show above status bar"));
   above_statusbar_action_->setCheckable(true);
@@ -127,6 +155,10 @@ void NowPlayingWidget::CoverLoaderInitialised() {
   loader->Worker()->SetPadOutputImage(true);
   connect(loader->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
+
+#ifdef HAVE_LIBLASTFM
+  cover_searcher_->Init(cover_loader_->Worker(), cover_fetcher_);
+#endif
 }
 
 void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {
@@ -336,6 +368,18 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 }
 
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
+#ifndef HAVE_LIBLASTFM
+  choose_cover_->setEnabled(false);
+  download_cover_->setEnabled(false);
+#endif
+
+  const bool art_is_set =
+      !metadata_.art_manual().isEmpty() &&
+      metadata_.art_manual() != AlbumCoverLoader::kManuallyUnsetCover;
+
+  unset_cover_->setEnabled(art_is_set);
+  show_cover_->setEnabled(art_is_set);
+
   menu_->popup(mapToGlobal(e->pos()));
 }
 
@@ -374,4 +418,75 @@ void NowPlayingWidget::EnableKittens(bool aww) {
   }
 
   aww_ = aww;
+}
+
+void NowPlayingWidget::LoadCoverFromFile() {
+#ifdef HAVE_LIBLASTFM
+  // Figure out the initial path.  Logic copied from
+  // AlbumCoverManager::InitialPathForOpenCoverDialog
+  QString dir;
+  if (!metadata_.art_automatic().isEmpty() && metadata_.art_automatic() != AlbumCoverLoader::kEmbeddedCover) {
+    dir = metadata_.art_automatic();
+  } else {
+    dir = metadata_.filename().section('/', 0, -1);
+  }
+
+  QString cover = QFileDialog::getOpenFileName(
+      this, tr("Choose manual cover"), dir,
+      tr(AlbumCoverManager::kImageFileFilter) + ";;" + tr(AlbumCoverManager::kAllFilesFilter));
+  if (cover.isNull())
+    return;
+
+  // Can we load the image?
+  QImage image(cover);
+  if (image.isNull())
+    return;
+
+  // Update database
+  SetAlbumArt(cover);
+#endif
+}
+
+void NowPlayingWidget::SearchCover() {
+#ifdef HAVE_LIBLASTFM
+  // Get something sensible to stick in the search box
+  QString query = metadata_.artist();
+  if (!query.isEmpty())
+    query += " ";
+  query += metadata_.album();
+
+  QImage image = cover_searcher_->Exec(query);
+  if (image.isNull())
+    return;
+
+  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(
+      metadata_.artist(), metadata_.album(), image));
+#endif
+}
+
+void NowPlayingWidget::UnsetCover() {
+  SetAlbumArt(AlbumCoverLoader::kManuallyUnsetCover);
+}
+
+void NowPlayingWidget::ZoomCover() {
+  QDialog* dialog = new QDialog(this);
+  dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+  dialog->setWindowTitle(metadata_.title());
+
+  QLabel* label = new QLabel(dialog);
+  label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
+      metadata_.art_automatic(), metadata_.art_manual()));
+
+  dialog->resize(label->pixmap()->size());
+  dialog->show();
+}
+
+void NowPlayingWidget::SetAlbumArt(const QString& path) {
+  metadata_.set_art_manual(path);
+  backend_->UpdateManualAlbumArtAsync(metadata_.artist(), metadata_.album(), path);
+  NowPlaying(metadata_);
+}
+
+void NowPlayingWidget::SetLibraryBackend(LibraryBackend* backend) {
+  backend_ = backend;
 }

@@ -188,6 +188,7 @@ MainWindow::MainWindow(QWidget* parent)
   // Initialise the UI
   ui_->setupUi(this);
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);
+  ui_->now_playing->SetLibraryBackend(library_->backend());
 
   int volume = player_->GetVolume();
   ui_->volume->setValue(volume);

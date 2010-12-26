@@ -23,7 +23,13 @@
 
 #include <QWidget>
 
+#ifdef HAVE_LIBLASTFM
+  class AlbumCoverFetcher;
+  class AlbumCoverSearcher;
+#endif
+
 class AlbumCoverLoader;
+class LibraryBackend;
 
 class QActionGroup;
 class QMenu;
@@ -52,8 +58,9 @@ public:
     LargeSongDetails = 1,
   };
 
-  void set_ideal_height(int height);
+  void SetLibraryBackend(LibraryBackend* backend);
 
+  void set_ideal_height(int height);
   bool show_above_status_bar() const;
 
   QSize sizeHint() const;
@@ -84,6 +91,11 @@ private slots:
 
   void FadePreviousTrack(qreal value);
 
+  void LoadCoverFromFile();
+  void SearchCover();
+  void UnsetCover();
+  void ZoomCover();
+
 private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
                         QSignalMapper* mapper);
@@ -91,14 +103,27 @@ private:
   void UpdateHeight(AlbumCoverLoader* loader);
   void DrawContents(QPainter* p);
 
+  void SetAlbumArt(const QString& path);
+
 private:
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   BackgroundThread<AlbumCoverLoader>* kitten_loader_;
+
+#ifdef HAVE_LIBLASTFM
+  AlbumCoverSearcher* cover_searcher_;
+  AlbumCoverFetcher* cover_fetcher_;
+#endif
+
+  LibraryBackend* backend_;
 
   Mode mode_;
 
   QMenu* menu_;
   QAction* above_statusbar_action_;
+  QAction* choose_cover_;
+  QAction* download_cover_;
+  QAction* unset_cover_;
+  QAction* show_cover_;
 
   bool visible_;
   int small_ideal_height_;
