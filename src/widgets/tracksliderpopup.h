@@ -10,6 +10,8 @@ public:
   TrackSliderPopup(QWidget* parent);
 
 public slots:
+  static bool IsTransparencyAvailable();
+
   void SetText(const QString& text);
   void SetPopupPosition(const QPoint& pos);
 
@@ -44,6 +46,7 @@ private:
   QFont font_;
   QFontMetrics font_metrics_;
   QPixmap pixmap_;
+  QPixmap background_cache_;
 
   bool mouse_over_slider_;
   bool mouse_over_popup_;
