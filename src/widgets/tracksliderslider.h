@@ -20,14 +20,22 @@
 
 #include <QSlider>
 
-// It's the slider inside the TrackSliderSlider
+class TrackSliderPopup;
 
+// It's the slider inside the TrackSliderSlider
 class TrackSliderSlider : public QSlider {
 public:
   TrackSliderSlider(QWidget* parent = 0);
 
- protected:
+protected:
   void mousePressEvent(QMouseEvent* e);
+  void mouseReleaseEvent(QMouseEvent* e);
+  void mouseMoveEvent(QMouseEvent* e);
+  void enterEvent(QEvent*);
+  void leaveEvent(QEvent*);
+
+private:
+  TrackSliderPopup* popup_;
 };
 
 #endif // TRACKSLIDERSLIDER_H

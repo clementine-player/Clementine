@@ -217,6 +217,7 @@ set(SOURCES
   widgets/stretchheaderview.cpp
   widgets/stylehelper.cpp
   widgets/trackslider.cpp
+  widgets/tracksliderpopup.cpp
   widgets/tracksliderslider.cpp
   widgets/widgetfadehelper.cpp
 )
@@ -377,6 +378,7 @@ set(HEADERS
   widgets/stickyslider.h
   widgets/stretchheaderview.h
   widgets/trackslider.h
+  widgets/tracksliderpopup.h
   widgets/widgetfadehelper.h
 )
 

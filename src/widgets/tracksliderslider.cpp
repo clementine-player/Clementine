@@ -15,15 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "tracksliderpopup.h"
 #include "tracksliderslider.h"
+#include "core/utilities.h"
 
 #include <QMouseEvent>
 #include <QStyle>
+#include <QStyleOptionSlider>
 #include <QtDebug>
 
 TrackSliderSlider::TrackSliderSlider(QWidget* parent)
-  : QSlider(parent)
+  : QSlider(parent),
+    popup_(new TrackSliderPopup(this))
 {
+  setMouseTracking(true);
 }
 
 void TrackSliderSlider::mousePressEvent(QMouseEvent* e) {
@@ -47,4 +52,39 @@ void TrackSliderSlider::mousePressEvent(QMouseEvent* e) {
 
   if (new_event.isAccepted())
     e->accept();
+}
+
+void TrackSliderSlider::mouseReleaseEvent(QMouseEvent* e) {
+  QSlider::mouseReleaseEvent(e);
+}
+
+void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
+  QSlider::mouseMoveEvent(e);
+
+  // Borrowed from QSliderPrivate::pixelPosToRangeValue
+  QStyleOptionSlider opt;
+  initStyleOption(&opt);
+  QRect gr = style()->subControlRect(QStyle::CC_Slider, &opt, QStyle::SC_SliderGroove, this);
+  QRect sr = style()->subControlRect(QStyle::CC_Slider, &opt, QStyle::SC_SliderHandle, this);
+
+  int slider_length = sr.width();
+  int slider_min = gr.x();
+  int slider_max = gr.right() - slider_length + 1;
+
+  int seconds = QStyle::sliderValueFromPosition(
+      minimum(), maximum(), e->x() - slider_length/2, slider_max - slider_min);
+
+  popup_->SetText(Utilities::PrettyTime(seconds));
+  popup_->SetPopupPosition(mapToGlobal(QPoint(
+      e->x(), rect().center().y())));
+}
+
+void TrackSliderSlider::enterEvent(QEvent* e) {
+  QSlider::enterEvent(e);
+  popup_->SetMouseOverSlider(true);
+}
+
+void TrackSliderSlider::leaveEvent(QEvent* e) {
+  QSlider::leaveEvent(e);
+  popup_->SetMouseOverSlider(false);
 }
