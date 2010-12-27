@@ -10,7 +10,7 @@ const int TrackSliderPopup::kTextMargin = 4;
 const int TrackSliderPopup::kPointLength = 16;
 const int TrackSliderPopup::kPointWidth = 4;
 const int TrackSliderPopup::kBorderRadius = 4;
-const qreal TrackSliderPopup::kBlurRadius = 10.0;
+const qreal TrackSliderPopup::kBlurRadius = 20.0;
 
 void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
 
@@ -39,6 +39,7 @@ TrackSliderPopup::TrackSliderPopup(QWidget* parent)
   connect(visibility_timer_, SIGNAL(timeout()), SLOT(UpdateVisibility()));
 
   font_.setPointSizeF(7.5);
+  font_.setBold(true);
   font_metrics_ = QFontMetrics(font_);
 
   UpdatePixmap();
@@ -97,9 +98,16 @@ void TrackSliderPopup::UpdatePixmap() {
   blur_painter.setRenderHint(QPainter::Antialiasing);
   blur_painter.setRenderHint(QPainter::HighQualityAntialiasing);
   blur_painter.setBrush(bg_color_2);
-  blur_painter.setOpacity(0.5);
-  blur_painter.drawRoundedRect(bubble_rect.adjusted(1, 1, -1, -1), kBorderRadius, kBorderRadius);
-  blur_painter.drawPolygon(inner_pointy);
+  blur_painter.drawRoundedRect(bubble_rect, kBorderRadius, kBorderRadius);
+  blur_painter.drawPolygon(pointy);
+
+  // Fade the shadow out towards the bottom
+  QLinearGradient fade_gradient(QPoint(0, bubble_bottom),
+                                QPoint(0, bubble_bottom + kPointLength));
+  fade_gradient.setColorAt(0.0, QColor(255, 0, 0, 0));
+  fade_gradient.setColorAt(1.0, QColor(255, 0, 0, 255));
+  blur_painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+  blur_painter.fillRect(total_rect, fade_gradient);
   blur_painter.end();
 
   p.save();
@@ -173,5 +181,11 @@ void TrackSliderPopup::mouseReleaseEvent(QMouseEvent* e) {
 }
 
 void TrackSliderPopup::mouseMoveEvent(QMouseEvent* e) {
+  if (!parentWidget()->rect().contains(
+      parentWidget()->mapFromGlobal(e->globalPos()))) {
+    // The mouse left the parent widget - close this popup
+    mouse_over_popup_ = false;
+    visibility_timer_->start();
+  }
   SendMouseEventToParent(e);
 }
