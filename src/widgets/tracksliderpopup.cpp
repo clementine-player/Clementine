@@ -25,9 +25,13 @@ TrackSliderPopup::TrackSliderPopup(QWidget* parent)
   setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
   setAttribute(Qt::WA_NoSystemBackground);
-  setAttribute(Qt::WA_OpaquePaintEvent);
   setAttribute(Qt::WA_TranslucentBackground);
+#ifndef Q_OS_DARWIN
+  // Paints the whole rect with a white background on Mac.
+  setAttribute(Qt::WA_OpaquePaintEvent);
+  // Creates flicker on Mac.
   setAttribute(Qt::WA_TransparentForMouseEvents);
+#endif
   setMouseTracking(true);
 
   visibility_timer_->setSingleShot(true);
