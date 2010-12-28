@@ -98,6 +98,11 @@ void LibraryConfig::Save() {
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   s.setValue("startup_scan", ui_->startup_scan->isChecked());
   s.setValue("monitor", ui_->monitor->isChecked());
+  
+  QString filter_text = ui_->cover_art_patterns->text();
+  QStringList filters = filter_text.split(',', QString::SkipEmptyParts);
+  s.setValue("cover_art_patterns", filters);
+  
   s.endGroup();
 }
 
@@ -115,5 +120,10 @@ void LibraryConfig::Load() {
   s.beginGroup(LibraryWatcher::kSettingsGroup);
   ui_->startup_scan->setChecked(s.value("startup_scan", true).toBool());
   ui_->monitor->setChecked(s.value("monitor", true).toBool());
+  
+  QStringList filters = s.value("cover_art_patterns",
+      QStringList() << "front" << "cover").toStringList();
+  ui_->cover_art_patterns->setText(filters.join(","));
+  
   s.endGroup();
 }

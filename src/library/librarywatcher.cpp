@@ -450,13 +450,38 @@ void LibraryWatcher::RescanPathsNow() {
 }
 
 QString LibraryWatcher::PickBestImage(const QStringList& images) {
+  
   // This is used when there is more than one image in a directory.
-  // Just pick the biggest image.
+  // Pick the biggest image that matches the most important filter
+  
+  QStringList filtered;
+  
+  foreach(const QString& filter_text, best_image_filters_) {
+    // the images in the images list are represented by a full path, 
+    // so we need to isolate just the filename
+    foreach(const QString& image, images) {
+      QFileInfo file_info(image);
+      QString filename(file_info.fileName());
+      if (filename.contains(filter_text, Qt::CaseInsensitive))
+        filtered << image;
+    }
+
+    /* We assume the filters are give in the order best to worst, so 
+      if we've got a result, we go with it. Otherwise we might
+      start capturing more generic rules */
+    if (!filtered.isEmpty())
+      break;
+  }
+  
+  if (filtered.isEmpty()){
+    // the filter was too restrictive, just use the original list
+    filtered = images;
+  }
 
   int biggest_size = 0;
   QString biggest_path;
 
-  foreach (const QString& path, images) {
+  foreach (const QString& path, filtered) {
     QImage image(path);
     if (image.isNull())
       continue;
@@ -497,7 +522,16 @@ void LibraryWatcher::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
   scan_on_startup_ = s.value("startup_scan", true).toBool();
   monitor_ = s.value("monitor", true).toBool();
-
+  
+  best_image_filters_.clear();
+  QStringList filters = s.value("cover_art_patterns",
+      QStringList() << "front" << "cover").toStringList();
+  foreach(const QString& filter, filters) {
+    QString s = filter.trimmed();
+    if (!s.isEmpty())
+      best_image_filters_ << s;
+  }
+  
   if (!monitor_ && was_monitoring_before) {
     // Remove all directories from all QFileSystemWatchers
     foreach (const DirData& data, watched_dirs_.values()) {

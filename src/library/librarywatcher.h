@@ -42,7 +42,7 @@ class LibraryWatcher : public QObject {
   void set_backend(LibraryBackend* backend) { backend_ = backend; }
   void set_task_manager(TaskManager* task_manager) { task_manager_ = task_manager; }
   void set_device_name(const QString& device_name) { device_name_ = device_name; }
-
+  
   void IncrementalScanAsync();
   void SetRescanPausedAsync(bool pause);
   void ReloadSettingsAsync();
@@ -128,8 +128,8 @@ class LibraryWatcher : public QObject {
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
   inline static QString ExtensionPart( const QString &fileName );
   inline static QString DirectoryPart( const QString &fileName );
-  static QString PickBestImage(const QStringList& images);
-  static QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
+  QString PickBestImage(const QStringList& images);
+  QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
   void AddWatch(QFileSystemWatcher* w, const QString& path);
 
  private:
@@ -142,6 +142,14 @@ class LibraryWatcher : public QObject {
   LibraryBackend* backend_;
   TaskManager* task_manager_;
   QString device_name_;
+  
+  /* A list of words use to try to identify the (likely) best image 
+   * found in an directory to use as cover artwork.
+   * e.g. using ["front", "cover"] would identify front.jpg and
+   * exclude back.jpg.
+   */
+  QStringList best_image_filters_; 
+  
   bool stop_requested_;
   bool scan_on_startup_;
   bool monitor_;
