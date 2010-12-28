@@ -150,7 +150,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
 }
 
-QImage AlbumCoverLoader::LoadFromTaglib(const QString& filename) const {
+QImage AlbumCoverLoader::LoadFromTaglib(const QString& filename) {
   QImage ret;
   if (filename.isEmpty())
     return ret;
@@ -237,14 +237,20 @@ QImage AlbumCoverLoader::ScaleAndPad(const QImage &image) const {
   return padded_image;
 }
 
-QPixmap AlbumCoverLoader::TryLoadPixmap(const QString &automatic, const QString &manual) {
+QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
+                                        const QString& manual,
+                                        const QString& filename) {
   QPixmap ret;
   if (manual == kManuallyUnsetCover)
     return ret;
   if (!manual.isEmpty())
     ret.load(manual);
-  if (!automatic.isEmpty() && ret.isNull())
-    ret.load(automatic);
+  if (ret.isNull()) {
+    if (automatic == kEmbeddedCover && !filename.isNull())
+      ret = QPixmap::fromImage(LoadFromTaglib(filename));
+    else if (!automatic.isEmpty())
+      ret.load(automatic);
+  }
   return ret;
 }
 

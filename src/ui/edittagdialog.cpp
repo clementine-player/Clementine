@@ -539,7 +539,7 @@ void EditTagDialog::ZoomCover() {
 
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
-      song.art_automatic(), song.art_manual()));
+      song.art_automatic(), song.art_manual(), song.filename()));
 
   dialog->resize(label->pixmap()->size());
   dialog->show();

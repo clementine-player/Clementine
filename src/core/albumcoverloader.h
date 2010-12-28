@@ -54,7 +54,8 @@ class AlbumCoverLoader : public QObject {
 
   void Clear();
 
-  static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual);
+  static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual,
+                               const QString& filename = QString());
 
   static const char* kManuallyUnsetCover;
   static const char* kEmbeddedCover;
@@ -96,7 +97,7 @@ class AlbumCoverLoader : public QObject {
   void NextState(Task* task);
   TryLoadResult TryLoadImage(const Task& task);
   QImage ScaleAndPad(const QImage& image) const;
-  QImage LoadFromTaglib(const QString& filename) const;
+  static QImage LoadFromTaglib(const QString& filename);
 
   bool stop_requested_;
 

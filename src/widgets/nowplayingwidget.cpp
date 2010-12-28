@@ -475,7 +475,7 @@ void NowPlayingWidget::ZoomCover() {
 
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
-      metadata_.art_automatic(), metadata_.art_manual()));
+      metadata_.art_automatic(), metadata_.art_manual(), metadata_.filename()));
 
   dialog->resize(label->pixmap()->size());
   dialog->show();
