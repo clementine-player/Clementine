@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QTimer>
+#include <QWheelEvent>
 #include <QtDebug>
 
 #ifdef Q_WS_X11
@@ -203,6 +204,13 @@ void TrackSliderPopup::SendMouseEventToParent(QMouseEvent* e) {
   QMouseEvent event(
       e->type(), parentWidget()->mapFromGlobal(e->globalPos()),
       e->button(), e->buttons(), e->modifiers());
+  QCoreApplication::sendEvent(parentWidget(), &event);
+}
+
+void TrackSliderPopup::wheelEvent(QWheelEvent* e) {
+  QWheelEvent event(
+      parentWidget()->mapFromGlobal(e->globalPos()), e->delta(), e->buttons(),
+      e->modifiers(), e->orientation());
   QCoreApplication::sendEvent(parentWidget(), &event);
 }
 

@@ -24,6 +24,7 @@ protected:
   void mousePressEvent(QMouseEvent*);
   void mouseReleaseEvent(QMouseEvent*);
   void mouseMoveEvent(QMouseEvent*);
+  void wheelEvent(QWheelEvent*);
 
 private:
   static const int kTextMargin;
