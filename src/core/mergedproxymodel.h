@@ -95,6 +95,7 @@ class MergedProxyModel : public QAbstractProxyModel {
                                     QAbstractItemModel* model) const;
   QAbstractItemModel* GetModel(const QModelIndex& source_index) const;
   void DeleteAllMappings();
+  bool IsKnownModel(const QAbstractItemModel* model) const;
 
   struct Mapping {
     Mapping(const QModelIndex& _source_index)

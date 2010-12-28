@@ -277,6 +277,9 @@ QModelIndex MergedProxyModel::parent(const QModelIndex &child) const {
   if (source_child.model() == sourceModel())
     return mapFromSource(source_child.parent());
 
+  if (!IsKnownModel(source_child.model()))
+    return QModelIndex();
+
   if (!source_child.parent().isValid())
     return mapFromSource(merge_points_.value(GetModel(source_child)));
   return mapFromSource(source_child.parent());
@@ -287,6 +290,9 @@ int MergedProxyModel::rowCount(const QModelIndex &parent) const {
     return sourceModel()->rowCount(QModelIndex());
 
   QModelIndex source_parent = mapToSource(parent);
+  if (!IsKnownModel(source_parent.model()))
+    return 0;
+
   const QAbstractItemModel* child_model = merge_points_.key(source_parent);
   if (child_model) {
     // Query the source model but disregard what it says, so it gets a chance
@@ -304,6 +310,9 @@ int MergedProxyModel::columnCount(const QModelIndex &parent) const {
     return sourceModel()->columnCount(QModelIndex());
 
   QModelIndex source_parent = mapToSource(parent);
+  if (!IsKnownModel(source_parent.model()))
+    return 0;
+
   const QAbstractItemModel* child_model = merge_points_.key(source_parent);
   if (child_model)
     return child_model->columnCount(QModelIndex());
@@ -315,6 +324,9 @@ bool MergedProxyModel::hasChildren(const QModelIndex &parent) const {
     return sourceModel()->hasChildren(QModelIndex());
 
   QModelIndex source_parent = mapToSource(parent);
+  if (!IsKnownModel(source_parent.model()))
+    return false;
+
   const QAbstractItemModel* child_model = merge_points_.key(source_parent);
 
   if (child_model)
@@ -323,8 +335,11 @@ bool MergedProxyModel::hasChildren(const QModelIndex &parent) const {
   return source_parent.model()->hasChildren(source_parent);
 }
 
-QVariant MergedProxyModel::data(const QModelIndex &proxyIndex, int role) const {
+QVariant MergedProxyModel::data(const QModelIndex& proxyIndex, int role) const {
   QModelIndex source_index = mapToSource(proxyIndex);
+  if (!IsKnownModel(source_index.model()))
+    return QVariant();
+
   return source_index.model()->data(source_index, role);
 }
 
@@ -448,4 +463,11 @@ void MergedProxyModel::LayoutChanged() {
       return;
     }
   }
+}
+
+bool MergedProxyModel::IsKnownModel(const QAbstractItemModel* model) const {
+  if (model == this || model == sourceModel() ||
+      merge_points_.contains(const_cast<QAbstractItemModel*>(model)))
+    return true;
+  return false;
 }
