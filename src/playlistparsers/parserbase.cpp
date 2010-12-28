@@ -79,7 +79,7 @@ QString ParserBase::MakeUrl(const QString& filename_or_url) const {
   return QUrl::fromLocalFile(filename_or_url).toString();
 }
 
-Song ParserBase::LoadLibrarySong(const QString& filename_or_url) const {
+Song ParserBase::LoadLibrarySong(const QString& filename_or_url, int beginning) const {
   if (!library_)
     return Song();
 
@@ -93,10 +93,15 @@ Song ParserBase::LoadLibrarySong(const QString& filename_or_url) const {
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   query.AddWhere("filename", info.canonicalFilePath());
+  query.AddWhere("beginning", beginning);
 
   Song song;
   if (library_->ExecQuery(&query) && query.Next()) {
     song.InitFromQuery(query);
   }
   return song;
+}
+
+Song ParserBase::LoadLibrarySong(const QString& filename_or_url) const {
+  return LoadLibrarySong(filename_or_url, 0);
 }

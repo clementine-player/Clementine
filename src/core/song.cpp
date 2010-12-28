@@ -93,7 +93,7 @@ const QStringList Song::kColumns = QStringList()
     << "mtime" << "ctime" << "filesize" << "sampler" << "art_automatic"
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
-    << "effective_compilation" << "skipcount" << "score";
+    << "effective_compilation" << "skipcount" << "score" << "beginning";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
@@ -466,8 +466,6 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   d->comment_ = tostr(col + 11);
   d->compilation_ = q.value(col + 12).toBool();
 
-  // TODO: this should be replaced by beginning and end
-  set_length(toint(col + 13));
   d->bitrate_ = toint(col + 14);
   d->samplerate_ = toint(col + 15);
 
@@ -494,8 +492,11 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   // effective_compilation = 30
 
   d->skipcount_ = q.value(col + 31).isNull() ? 0 : q.value(col + 31).toInt();
-
   d->score_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toInt();
+
+  // TODO: 'end' instead of 'length'
+  d->beginning_ = q.value(col + 33).isNull() ? 0 : q.value(col + 33).toInt();
+  set_length(toint(col + 13));
 
   #undef tostr
   #undef toint
@@ -926,7 +927,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":comment", strval(d->comment_));
   query->bindValue(":compilation", d->compilation_ ? 1 : 0);
 
-  // TODO: replace this with beginning and end
+  // TODO: replace this with 'end'
   query->bindValue(":length", intval(length()));
   query->bindValue(":bitrate", intval(d->bitrate_));
   query->bindValue(":samplerate", intval(d->samplerate_));
@@ -952,8 +953,9 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":effective_compilation", is_compilation() ? 1 : 0);
 
   query->bindValue(":skipcount", d->skipcount_);
-
   query->bindValue(":score", d->score_);
+
+  query->bindValue(":beginning", d->beginning_);
 
   #undef intval
   #undef notnullintval
@@ -1042,7 +1044,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->genre_ == other.d->genre_ &&
          d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
-         // this should be replaced by beginning and end
+         d->beginning_ == other.d->beginning_ &&
+         // this should be replaced by 'end'
          length() == other.length() &&
          d->bitrate_ == other.d->bitrate_ &&
          d->samplerate_ == other.d->samplerate_ &&

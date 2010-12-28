@@ -93,19 +93,21 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT songs.ROWID, " + Song::JoinSpec("songs") + ","
-              "       magnatune_songs.ROWID, " + Song::JoinSpec("magnatune_songs") + ","
-              "       jamendo_songs.ROWID, " + Song::JoinSpec("jamendo_songs") + ","
-              "       p.type, p.url, p.title, p.artist, p.album, p.length,"
-              "       p.radio_service"
-              " FROM playlist_items AS p"
-              " LEFT JOIN songs"
-              "    ON p.library_id = songs.ROWID"
-              " LEFT JOIN magnatune_songs"
-              "    ON p.library_id = magnatune_songs.ROWID"
-              " LEFT JOIN jamendo.songs AS jamendo_songs"
-              "    ON p.library_id = jamendo_songs.ROWID"
-              " WHERE p.playlist = :playlist", db);
+  QString query = "SELECT songs.ROWID, " + Song::JoinSpec("songs") + ","
+                  "       magnatune_songs.ROWID, " + Song::JoinSpec("magnatune_songs") + ","
+                  "       jamendo_songs.ROWID, " + Song::JoinSpec("jamendo_songs") + ","
+                  "       p.type, p.url, p.title, p.artist, p.album, p.length,"
+                  "       p.radio_service"
+                  " FROM playlist_items AS p"
+                  " LEFT JOIN songs"
+                  "    ON p.library_id = songs.ROWID"
+                  " LEFT JOIN magnatune_songs"
+                  "    ON p.library_id = magnatune_songs.ROWID"
+                  " LEFT JOIN jamendo.songs AS jamendo_songs"
+                  "    ON p.library_id = jamendo_songs.ROWID"
+                  " WHERE p.playlist = :playlist";
+  QSqlQuery q(query, db);
+
   q.bindValue(":playlist", playlist);
   q.exec();
   if (db_->CheckErrors(q.lastError()))

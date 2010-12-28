@@ -175,13 +175,14 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
     if (!ParseTrackLocation(entry.file, dir, &current)) {
       qWarning() << "failed to parse location in .cue file from " << dir_path;
     } else {
-      Song song = LoadLibrarySong(current.filename());
+      // look for the section in library
+      Song song = LoadLibrarySong(current.filename(), IndexToMarker(entry.index));
       if (!song.is_valid()) {
         song.InitFromFile(current.filename(), -1);
       }
 
-      // overwrite the stuff, we may have read from the file, using
-      // the .cue's metadata
+      // overwrite the stuff, we may have read from the file or library, using
+      // the current .cue metadata
       if(i + 1 < entries.size()) {
         // incorrect indices?
         if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {

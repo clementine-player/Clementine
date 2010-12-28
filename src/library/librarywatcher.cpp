@@ -18,6 +18,7 @@
 #include "librarywatcher.h"
 #include "librarybackend.h"
 #include "core/taskmanager.h"
+#include "playlistparsers/cueparser.h"
 
 #include <QFileSystemWatcher>
 #include <QDirIterator>
@@ -26,12 +27,15 @@
 #include <QDateTime>
 #include <QTimer>
 #include <QSettings>
+#include <QSet>
 
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
 
+// TODO: test removing a folder with cues
+// TODO: what about .cue vs it's media file changes?
+
 QStringList LibraryWatcher::sValidImages;
-QStringList LibraryWatcher::sValidPlaylists;
 
 const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
 
@@ -44,14 +48,14 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     monitor_(true),
     rescan_timer_(new QTimer(this)),
     rescan_paused_(false),
-    total_watches_(0)
+    total_watches_(0),
+    cue_parser_(new CueParser(backend_, this))
 {
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 
   if (sValidImages.isEmpty()) {
     sValidImages << "jpg" << "png" << "gif" << "jpeg";
-    sValidPlaylists << "m3u" << "pls";
   }
 
   ReloadSettings();
@@ -278,6 +282,8 @@ void LibraryWatcher::ScanSubdirectory(
   // Ask the database for a list of files in this directory
   SongList songs_in_db = t->FindSongsInSubdirectory(path);
 
+  QSet<QString> cues_processed;
+
   // Now compare the list from the database with the list of files on disk
   foreach (const QString& file, files_on_disk) {
     if (stop_requested_) return;
@@ -304,6 +310,7 @@ void LibraryWatcher::ScanSubdirectory(
         changed = true;
       }
 
+      // TODO: cues
       if (changed) {
         qDebug() << file << "changed";
 
@@ -334,18 +341,42 @@ void LibraryWatcher::ScanSubdirectory(
       }
     } else {
       // The song is on disk but not in the DB
+      SongList song_list;
 
-      Song song;
-      song.InitFromFile(file, t->dir());
-      if (!song.is_valid())
+      QString matching_cue = NoExtensionPart(file) + ".cue";
+
+      // don't process the same cue many times
+      if(cues_processed.contains(matching_cue))
         continue;
+
+      // it's a cue - create virtual tracks
+      if(QFile::exists(matching_cue)) {
+        QFile cue(matching_cue);
+        cue.open(QIODevice::ReadOnly);
+
+        song_list = cue_parser_->Load(&cue, path);
+        cues_processed << matching_cue;
+
+      // it's a normal media file
+      } else {
+        Song song;
+        song.InitFromFile(file, -1);
+        if (!song.is_valid())
+          continue;
+        song_list << song;
+      }
+
       qDebug() << file << "created";
+      // choose an image for the song(s)
+      QString image = ImageForSong(file, album_art);
 
-      // Choose an image for the song
-      if (song.art_automatic().isEmpty())
-        song.set_art_automatic(ImageForSong(file, album_art));
+      foreach (Song song, song_list) {
+        song.set_directory_id(t->dir());
+        if (song.art_automatic().isEmpty())
+          song.set_art_automatic(image);
 
-      t->new_songs << song;
+        t->new_songs << song;
+      }
     }
   }
 

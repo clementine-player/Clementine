@@ -31,7 +31,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 23;
+const int Database::kSchemaVersion = 24;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
@@ -536,10 +536,25 @@ void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
 
 QStringList Database::SongsTables(QSqlDatabase& db) const {
   QStringList ret;
+
+  // look for the tables in the main db
   foreach (const QString& table, db.tables()) {
     if (table == "songs" || table.endsWith("_songs"))
       ret << table;
   }
+
+  // look for the tables in attached dbs
+  foreach (const QString& key, attached_databases_.keys()) {
+    QSqlQuery q(QString("SELECT NAME FROM %1.sqlite_master"
+                        " WHERE type='table' AND name='songs' OR name LIKE '%songs'").arg(key), db);
+    if (q.exec()) {
+      while(q.next()) {
+        QString tab_name = key + "." + q.value(0).toString();
+        ret << tab_name;
+      }
+    }
+  }
+
   return ret;
 }
 

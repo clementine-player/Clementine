@@ -28,6 +28,7 @@
 class QFileSystemWatcher;
 class QTimer;
 
+class CueParser;
 class LibraryBackend;
 class TaskManager;
 
@@ -126,6 +127,7 @@ class LibraryWatcher : public QObject {
 
  private:
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
+  inline static QString NoExtensionPart( const QString &fileName );
   inline static QString ExtensionPart( const QString &fileName );
   inline static QString DirectoryPart( const QString &fileName );
   QString PickBestImage(const QStringList& images);
@@ -161,14 +163,18 @@ class LibraryWatcher : public QObject {
 
   int total_watches_;
 
+  CueParser* cue_parser_;
+
   static QStringList sValidImages;
-  static QStringList sValidPlaylists;
 
   #ifdef Q_OS_DARWIN
   static const int kMaxWatches = 100;
   #endif
 };
 
+inline QString LibraryWatcher::NoExtensionPart( const QString &fileName ) {
+  return fileName.contains( '.' ) ? fileName.section( '.', 0, -2 ) : "";
+}
 // Thanks Amarok
 inline QString LibraryWatcher::ExtensionPart( const QString &fileName ) {
   return fileName.contains( '.' ) ? fileName.mid( fileName.lastIndexOf('.') + 1 ).toLower() : "";

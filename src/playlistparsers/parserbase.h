@@ -57,6 +57,8 @@ protected:
   // a song with that path.  If one is found, returns it, otherwise returns an
   // invalid song.
   Song LoadLibrarySong(const QString& filename_or_url) const;
+  // Just like the method above, but looks for a SECTION of a song.
+  Song LoadLibrarySong(const QString& filename_or_url, int beginning) const;
 
 private:
   LibraryBackendInterface* library_;
