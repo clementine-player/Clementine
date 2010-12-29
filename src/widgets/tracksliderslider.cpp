@@ -82,7 +82,9 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
 
 void TrackSliderSlider::enterEvent(QEvent* e) {
   QSlider::enterEvent(e);
-  popup_->SetMouseOverSlider(true);
+  if (isEnabled()) {
+    popup_->SetMouseOverSlider(true);
+  }
 }
 
 void TrackSliderSlider::leaveEvent(QEvent* e) {
