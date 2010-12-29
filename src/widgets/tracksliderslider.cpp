@@ -26,7 +26,7 @@
 
 TrackSliderSlider::TrackSliderSlider(QWidget* parent)
   : QSlider(parent),
-    popup_(new TrackSliderPopup(this))
+    popup_(new TrackSliderPopup(window()))
 {
   setMouseTracking(true);
 }
@@ -76,18 +76,18 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
       slider_max - slider_min);
 
   popup_->SetText(Utilities::PrettyTime(seconds));
-  popup_->SetPopupPosition(mapToGlobal(QPoint(
+  popup_->SetPopupPosition(mapTo(window(), QPoint(
       e->x(), rect().center().y())));
 }
 
 void TrackSliderSlider::enterEvent(QEvent* e) {
   QSlider::enterEvent(e);
   if (isEnabled()) {
-    popup_->SetMouseOverSlider(true);
+    popup_->show();
   }
 }
 
 void TrackSliderSlider::leaveEvent(QEvent* e) {
   QSlider::leaveEvent(e);
-  popup_->SetMouseOverSlider(false);
+  popup_->hide();
 }

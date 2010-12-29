@@ -8,10 +8,6 @@
 #include <QWheelEvent>
 #include <QtDebug>
 
-#ifdef Q_WS_X11
-#  include <QX11Info>
-#endif
-
 const int TrackSliderPopup::kTextMargin = 4;
 const int TrackSliderPopup::kPointLength = 16;
 const int TrackSliderPopup::kPointWidth = 4;
@@ -22,31 +18,14 @@ void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bo
 
 TrackSliderPopup::TrackSliderPopup(QWidget* parent)
   : QWidget(parent),
-    font_metrics_(fontMetrics()),
-    mouse_over_slider_(false),
-    mouse_over_popup_(false),
-    visibility_timer_(new QTimer(this))
+    font_metrics_(fontMetrics())
 {
-  setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint |
-                 Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-  setAttribute(Qt::WA_NoSystemBackground);
-  setAttribute(Qt::WA_TranslucentBackground);
+  setAttribute(Qt::WA_TransparentForMouseEvents);
   setMouseTracking(true);
-
-  visibility_timer_->setSingleShot(true);
-  visibility_timer_->setInterval(10);
-  connect(visibility_timer_, SIGNAL(timeout()), SLOT(UpdateVisibility()));
 
   font_.setPointSizeF(7.5);
   font_.setBold(true);
   font_metrics_ = QFontMetrics(font_);
-}
-
-bool TrackSliderPopup::IsTransparencyAvailable() {
-#ifdef Q_WS_X11
-  return QX11Info::isCompositingManagerRunning();
-#endif
-  return true;
 }
 
 void TrackSliderPopup::SetText(const QString& text) {
@@ -90,48 +69,34 @@ void TrackSliderPopup::UpdatePixmap() {
                  << QPoint(pointy[2].x() - 1, pointy[2].y() - 1);
 
     background_cache_ = QPixmap(total_rect.size());
-    background_cache_.fill(IsTransparencyAvailable() ?
-                           Qt::transparent : bg_color_2);
+    background_cache_.fill(Qt::transparent);
     QPainter p(&background_cache_);
     p.setRenderHint(QPainter::Antialiasing);
     p.setRenderHint(QPainter::HighQualityAntialiasing);
 
-    if (IsTransparencyAvailable()) {
-      // Draw the shadow to a different image
-      QImage blur_source(total_rect.size(), QImage::Format_ARGB32_Premultiplied);
-      blur_source.fill(Qt::transparent);
+    // Draw the shadow to a different image
+    QImage blur_source(total_rect.size(), QImage::Format_ARGB32);
+    blur_source.fill(Qt::transparent);
 
-      QPainter blur_painter(&blur_source);
-      blur_painter.setRenderHint(QPainter::Antialiasing);
-      blur_painter.setRenderHint(QPainter::HighQualityAntialiasing);
-      blur_painter.setBrush(bg_color_2);
-      blur_painter.drawRoundedRect(bubble_rect, kBorderRadius, kBorderRadius);
-      blur_painter.drawPolygon(pointy);
+    QPainter blur_painter(&blur_source);
+    blur_painter.setRenderHint(QPainter::Antialiasing);
+    blur_painter.setRenderHint(QPainter::HighQualityAntialiasing);
+    blur_painter.setBrush(bg_color_2);
+    blur_painter.drawRoundedRect(bubble_rect, kBorderRadius, kBorderRadius);
+    blur_painter.drawPolygon(pointy);
 
-      // Fade the shadow out towards the bottom
-      QLinearGradient fade_gradient(QPoint(0, bubble_bottom),
-                                    QPoint(0, bubble_bottom + kPointLength));
-      fade_gradient.setColorAt(0.0, QColor(255, 0, 0, 0));
-      fade_gradient.setColorAt(1.0, QColor(255, 0, 0, 255));
-      blur_painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-      blur_painter.fillRect(total_rect, fade_gradient);
-      blur_painter.end();
+    // Fade the shadow out towards the bottom
+    QLinearGradient fade_gradient(QPoint(0, bubble_bottom),
+                                  QPoint(0, bubble_bottom + kPointLength));
+    fade_gradient.setColorAt(0.0, QColor(255, 0, 0, 0));
+    fade_gradient.setColorAt(1.0, QColor(255, 0, 0, 255));
+    blur_painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+    blur_painter.fillRect(total_rect, fade_gradient);
+    blur_painter.end();
 
-      p.save();
-      qt_blurImage(&p, blur_source, kBlurRadius, true, false);
-      p.restore();
-    } else {
-      QBitmap mask(total_rect.size());
-      mask.clear();
-      QPainter mask_painter(&mask);
-
-      mask_painter.setBrush(Qt::color1);
-      mask_painter.drawRoundedRect(bubble_rect, kBorderRadius, kBorderRadius);
-      mask_painter.drawPolygon(pointy);
-      mask_painter.end();
-
-      setMask(mask);
-    }
+    p.save();
+    qt_blurImage(&p, blur_source, kBlurRadius, true, false);
+    p.restore();
 
     // Outer bubble
     p.setPen(Qt::NoPen);
@@ -173,55 +138,4 @@ void TrackSliderPopup::UpdatePixmap() {
 void TrackSliderPopup::UpdatePosition() {
   move(pos_.x() - pixmap_.width() / 2,
        pos_.y() - pixmap_.height() + kBlurRadius);
-}
-
-void TrackSliderPopup::enterEvent(QEvent* e) {
-  mouse_over_popup_ = true;
-  visibility_timer_->start();
-}
-
-void TrackSliderPopup::leaveEvent(QEvent* e) {
-  mouse_over_popup_ = false;
-  visibility_timer_->start();
-}
-
-void TrackSliderPopup::SetMouseOverSlider(bool mouse_over_slider) {
-  mouse_over_slider_ = mouse_over_slider;
-  visibility_timer_->start();
-}
-
-void TrackSliderPopup::UpdateVisibility() {
-  setVisible(mouse_over_popup_ || mouse_over_slider_);
-}
-
-void TrackSliderPopup::SendMouseEventToParent(QMouseEvent* e) {
-  QMouseEvent event(
-      e->type(), parentWidget()->mapFromGlobal(e->globalPos()),
-      e->button(), e->buttons(), e->modifiers());
-  QCoreApplication::sendEvent(parentWidget(), &event);
-}
-
-void TrackSliderPopup::wheelEvent(QWheelEvent* e) {
-  QWheelEvent event(
-      parentWidget()->mapFromGlobal(e->globalPos()), e->delta(), e->buttons(),
-      e->modifiers(), e->orientation());
-  QCoreApplication::sendEvent(parentWidget(), &event);
-}
-
-void TrackSliderPopup::mousePressEvent(QMouseEvent* e) {
-  SendMouseEventToParent(e);
-}
-
-void TrackSliderPopup::mouseReleaseEvent(QMouseEvent* e) {
-  SendMouseEventToParent(e);
-}
-
-void TrackSliderPopup::mouseMoveEvent(QMouseEvent* e) {
-  if (!parentWidget()->rect().contains(
-      parentWidget()->mapFromGlobal(e->globalPos()))) {
-    // The mouse left the parent widget - close this popup
-    mouse_over_popup_ = false;
-    visibility_timer_->start();
-  }
-  SendMouseEventToParent(e);
 }

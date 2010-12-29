@@ -10,21 +10,11 @@ public:
   TrackSliderPopup(QWidget* parent);
 
 public slots:
-  static bool IsTransparencyAvailable();
-
   void SetText(const QString& text);
   void SetPopupPosition(const QPoint& pos);
 
-  void SetMouseOverSlider(bool mouse_over_slider);
-
 protected:
   void paintEvent(QPaintEvent*);
-  void enterEvent(QEvent*);
-  void leaveEvent(QEvent*);
-  void mousePressEvent(QMouseEvent*);
-  void mouseReleaseEvent(QMouseEvent*);
-  void mouseMoveEvent(QMouseEvent*);
-  void wheelEvent(QWheelEvent*);
 
 private:
   static const int kTextMargin;
@@ -37,9 +27,6 @@ private:
   void UpdatePosition();
   void SendMouseEventToParent(QMouseEvent* e);
 
-private slots:
-  void UpdateVisibility();
-
 private:
   QString text_;
   QPoint pos_;
@@ -48,10 +35,6 @@ private:
   QFontMetrics font_metrics_;
   QPixmap pixmap_;
   QPixmap background_cache_;
-
-  bool mouse_over_slider_;
-  bool mouse_over_popup_;
-  QTimer* visibility_timer_;
 };
 
 #endif // TRACKSLIDERPOPUP_H
