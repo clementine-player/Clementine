@@ -121,12 +121,13 @@ Playlist::~Playlist() {
 }
 
 template<typename T>
-QModelIndex InsertSongItems(Playlist* playlist, const SongList& songs, int pos) {
+static QModelIndex InsertSongItems(Playlist* playlist, const SongList& songs,
+                                   int pos, bool enqueue = false) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     items << PlaylistItemPtr(new T(song));
   }
-  return playlist->InsertItems(items, pos);
+  return playlist->InsertItems(items, pos, enqueue);
 }
 
 QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
@@ -765,18 +766,18 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
   Save();
 }
 
-QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int pos) {
+QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int pos, bool enqueue) {
   if (items.isEmpty())
     return QModelIndex();
 
   const int start = pos == -1 ? items_.count() : pos;
-  undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos));
+  undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos, enqueue));
 
   return index(start, 0);
 }
 
 QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
-                                             int pos) {
+                                             int pos, bool enqueue) {
   if (items.isEmpty())
     return QModelIndex();
 
@@ -804,21 +805,29 @@ QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
   }
   endInsertRows();
 
+  if (enqueue) {
+    QModelIndexList indexes;
+    for (int i=start ; i<=end ; ++i) {
+      indexes << index(i, 0);
+    }
+    queue_->ToggleTracks(indexes);
+  }
+
   Save();
   ReshuffleIndices();
 
   return index(start, 0);
 }
 
-QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos) {
-  return InsertSongItems<LibraryPlaylistItem>(this, songs, pos);
+QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos, bool enqueue) {
+  return InsertSongItems<LibraryPlaylistItem>(this, songs, pos, enqueue);
 }
 
-QModelIndex Playlist::InsertSongs(const SongList& songs, int pos) {
-  return InsertSongItems<SongPlaylistItem>(this, songs, pos);
+QModelIndex Playlist::InsertSongs(const SongList& songs, int pos, bool enqueue) {
+  return InsertSongItems<SongPlaylistItem>(this, songs, pos, enqueue);
 }
 
-QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos) {
+QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, bool enqueue) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     if (song.id() == -1)
@@ -826,7 +835,7 @@ QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos) 
     else
       items << PlaylistItemPtr(new LibraryPlaylistItem(song));
   }
-  return InsertItems(items, pos);
+  return InsertItems(items, pos, enqueue);
 }
 
 QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos, bool play_now) {

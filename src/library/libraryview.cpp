@@ -175,6 +175,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
         tr("Load"), this, SLOT(Load()));
     add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
         tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Enqueue to playlist"), this, SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
@@ -288,6 +290,13 @@ void LibraryView::AddToPlaylist() {
     return;
 
   emit AddToPlaylist(selectedIndexes());
+}
+
+void LibraryView::AddToPlaylistEnqueue() {
+  if (!context_menu_index_.isValid())
+    return;
+
+  emit AddToPlaylistEnqueue(selectedIndexes());
 }
 
 void LibraryView::keyboardSearch(const QString& search) {

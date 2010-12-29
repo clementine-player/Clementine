@@ -140,6 +140,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void LoadLibraryItemToPlaylist(const QModelIndexList& indexes);
   void AddLibraryItemToPlaylist(const QModelIndexList& indexes);
+  void AddLibraryItemToPlaylistEnqueue(const QModelIndexList& indexes);
   void LibraryItemDoubleClicked(const QModelIndex& index);
 
   void LoadFilesToPlaylist(const QList<QUrl>& urls);
@@ -213,8 +214,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  private:
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
-  void AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes);
-  void AddLibrarySongsToPlaylist(bool clear_first, const SongList& songs);
+  void AddLibraryItemToPlaylist(bool clear_first, bool enqueue, const QModelIndexList& indexes);
+  void AddLibrarySongsToPlaylist(bool clear_first, bool enqueue, const SongList& songs);
   void AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::GeneratorPtr gen);
   void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
   void AddUrls(bool play_now, const QList<QUrl>& urls);

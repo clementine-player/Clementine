@@ -166,10 +166,10 @@ class Playlist : public QAbstractListModel {
   void set_scrobbled(bool v) { has_scrobbled_ = v; }
 
   // Changing the playlist
-  QModelIndex InsertItems(const PlaylistItemList& items, int pos = -1);
-  QModelIndex InsertLibraryItems(const SongList& items, int pos = -1);
-  QModelIndex InsertSongs(const SongList& items, int pos = -1);
-  QModelIndex InsertSongsOrLibraryItems(const SongList& items, int pos = -1);
+  QModelIndex InsertItems(const PlaylistItemList& items, int pos = -1, bool enqueue = false);
+  QModelIndex InsertLibraryItems(const SongList& items, int pos = -1, bool enqueue = false);
+  QModelIndex InsertSongs(const SongList& items, int pos = -1, bool enqueue = false);
+  QModelIndex InsertSongsOrLibraryItems(const SongList& items, int pos = -1, bool enqueue = false);
   QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1, bool play_now = false);
   void InsertSmartPlaylist(smart_playlists::GeneratorPtr generator, int pos = -1, bool play_now = false);
   void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);
@@ -235,7 +235,8 @@ class Playlist : public QAbstractListModel {
 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands
-  QModelIndex InsertItemsWithoutUndo(const PlaylistItemList& items, int pos);
+  QModelIndex InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
+                                     bool enqueue = false);
   PlaylistItemList RemoveItemsWithoutUndo(int pos, int count);
   void MoveItemsWithoutUndo(const QList<int>& source_rows, int pos);
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);

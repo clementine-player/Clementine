@@ -27,16 +27,18 @@ Base::Base(Playlist *playlist)
 }
 
 
-InsertItems::InsertItems(Playlist *playlist, const PlaylistItemList& items, int pos)
+InsertItems::InsertItems(Playlist *playlist, const PlaylistItemList& items,
+                         int pos, bool enqueue)
   : Base(playlist),
     items_(items),
-    pos_(pos)
+    pos_(pos),
+    enqueue_(enqueue)
 {
   setText(tr("add %n songs", "", items_.count()));
 }
 
 void InsertItems::redo() {
-  playlist_->InsertItemsWithoutUndo(items_, pos_);
+  playlist_->InsertItemsWithoutUndo(items_, pos_, enqueue_);
 }
 
 void InsertItems::undo() {

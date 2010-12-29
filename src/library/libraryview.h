@@ -68,6 +68,7 @@ class LibraryView : public AutoExpandingTreeView {
   void ShowConfigDialog();
   void Load(const QModelIndexList& indexes);
   void AddToPlaylist(const QModelIndexList& indexes);
+  void AddToPlaylistEnqueue(const QModelIndexList& indexes);
 
  protected:
   // QWidget
@@ -79,6 +80,7 @@ class LibraryView : public AutoExpandingTreeView {
  private slots:
   void Load();
   void AddToPlaylist();
+  void AddToPlaylistEnqueue();
   void Organise();
   void CopyToDevice();
   void Delete();
@@ -113,6 +115,7 @@ class LibraryView : public AutoExpandingTreeView {
   QModelIndex context_menu_index_;
   QAction* load_;
   QAction* add_to_playlist_;
+  QAction* add_to_playlist_enqueue_;
   QAction* organise_;
   QAction* copy_to_device_;
   QAction* delete_;

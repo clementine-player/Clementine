@@ -395,6 +395,7 @@ MainWindow::MainWindow(QWidget* parent)
   connect(library_view_->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
   connect(library_view_->view(), SIGNAL(Load(QModelIndexList)), SLOT(LoadLibraryItemToPlaylist(QModelIndexList)));
   connect(library_view_->view(), SIGNAL(AddToPlaylist(QModelIndexList)), SLOT(AddLibraryItemToPlaylist(QModelIndexList)));
+  connect(library_view_->view(), SIGNAL(AddToPlaylistEnqueue(QModelIndexList)), SLOT(AddLibraryItemToPlaylistEnqueue(QModelIndexList)));
   connect(library_view_->view(), SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), library_view_->view(), SLOT(TotalSongCountUpdated(int)));
 
@@ -674,15 +675,15 @@ void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
 }
 
 void MainWindow::AddLibrarySongsToPlaylist(const SongList &songs) {
-  AddLibrarySongsToPlaylist(false, songs);
+  AddLibrarySongsToPlaylist(false, false, songs);
 }
 
 void MainWindow::LoadLibrarySongsToPlaylist(const SongList &songs) {
-  AddLibrarySongsToPlaylist(true, songs);
+  AddLibrarySongsToPlaylist(true, false, songs);
 }
 
 void MainWindow::LibrarySongsDoubleClicked(const SongList &songs) {
-  AddLibrarySongsToPlaylist(autoclear_playlist_, songs);
+  AddLibrarySongsToPlaylist(autoclear_playlist_, false, songs);
 }
 
 void MainWindow::AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::GeneratorPtr gen) {
@@ -693,11 +694,12 @@ void MainWindow::AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::G
   playlists_->current()->InsertSmartPlaylist(gen, -1, play_now);
 }
 
-void MainWindow::AddLibrarySongsToPlaylist(bool clear_first, const SongList &songs) {
+void MainWindow::AddLibrarySongsToPlaylist(bool clear_first, bool enqueue,
+                                           const SongList &songs) {
   if (clear_first)
     playlists_->ClearCurrent();
 
-  QModelIndex first_song = playlists_->current()->InsertLibraryItems(songs);
+  QModelIndex first_song = playlists_->current()->InsertLibraryItems(songs, -1, enqueue);
 
   if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
     // The first song doesn't match the filter, so don't play it
@@ -863,18 +865,23 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
 }
 
 void MainWindow::LoadLibraryItemToPlaylist(const QModelIndexList& indexes) {
-  AddLibraryItemToPlaylist(true, indexes);
+  AddLibraryItemToPlaylist(true, false, indexes);
 }
 
 void MainWindow::AddLibraryItemToPlaylist(const QModelIndexList& indexes) {
-  AddLibraryItemToPlaylist(false, indexes);
+  AddLibraryItemToPlaylist(false, false, indexes);
+}
+
+void MainWindow::AddLibraryItemToPlaylistEnqueue(const QModelIndexList& indexes) {
+  AddLibraryItemToPlaylist(false, true, indexes);
 }
 
 void MainWindow::LibraryItemDoubleClicked(const QModelIndex &index) {
-  AddLibraryItemToPlaylist(autoclear_playlist_, QModelIndexList() << index);
+  AddLibraryItemToPlaylist(autoclear_playlist_, false, QModelIndexList() << index);
 }
 
-void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndexList& indexes) {
+void MainWindow::AddLibraryItemToPlaylist(bool clear_first, bool enqueue,
+                                          const QModelIndexList& indexes) {
   QModelIndexList source_indexes;
   foreach (const QModelIndex& index, indexes) {
     if (index.model() == library_sort_model_)
@@ -892,7 +899,8 @@ void MainWindow::AddLibraryItemToPlaylist(bool clear_first, const QModelIndexLis
     return;
   }
 
-  AddLibrarySongsToPlaylist(clear_first, library_->model()->GetChildSongs(source_indexes));
+  AddLibrarySongsToPlaylist(clear_first, enqueue,
+                            library_->model()->GetChildSongs(source_indexes));
 }
 
 void MainWindow::VolumeWheelEvent(int delta) {
