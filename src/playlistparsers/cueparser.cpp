@@ -183,6 +183,7 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
 
       // overwrite the stuff, we may have read from the file or library, using
       // the current .cue metadata
+      song.set_track(i + 1);
       if(i + 1 < entries.size()) {
         // incorrect indices?
         if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {
@@ -204,8 +205,6 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
 
 // This and the kFileLineRegExp do most of the "dirty" work, namely: splitting the raw .cue
 // line into logical parts and getting rid of all the unnecessary whitespaces and quoting.
-// This also validates the input: if returned list has less than two positions, the given
-// line should be considered irrelevant.
 QStringList CueParser::SplitCueLine(const QString& line) const {
   QRegExp line_regexp(kFileLineRegExp);
   if(!line_regexp.exactMatch(line.trimmed())) {
