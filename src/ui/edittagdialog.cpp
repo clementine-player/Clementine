@@ -413,7 +413,7 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
         QLocale::system().dateTimeFormat(QLocale::LongFormat)));
   ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
   ui_->filetype->setText(song.TextForFiletype());
-  ui_->filename->setText(song.filename());
+  ui_->filename->setText(QDir::toNativeSeparators(song.filename()));
 }
 
 void EditTagDialog::UpdateStatisticsTab(const Song& song) {

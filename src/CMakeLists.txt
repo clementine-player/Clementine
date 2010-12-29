@@ -881,6 +881,10 @@ set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
 )
 
+if(WIN32)
+  target_link_libraries(clementine ${WINSPARKLE_LIBRARIES})
+endif(WIN32)
+
 if (APPLE)
   install(FILES ../dist/clementine.icns
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
