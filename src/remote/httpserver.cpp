@@ -1,6 +1,7 @@
 #include "httpserver.h"
 
 #include <QTcpSocket>
+#include <QtDebug>
 
 #include "httpconnection.h"
 
