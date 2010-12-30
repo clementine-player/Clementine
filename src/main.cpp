@@ -38,6 +38,8 @@
 #include "engines/enginebase.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
+#include "remote/httpserver.h"
+#include "remote/zeroconf.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -111,21 +113,23 @@ int main(int argc, char *argv[]) {
   // This must go before QApplication initialisation.
   mac::MacMain();
 
-  // Bump the soft limit for the number of file descriptors from the default of 256 to
-  // the maximum (usually 10240).
-  struct rlimit limit;
-  getrlimit(RLIMIT_NOFILE, &limit);
+  {
+    // Bump the soft limit for the number of file descriptors from the default of 256 to
+    // the maximum (usually 10240).
+    struct rlimit limit;
+    getrlimit(RLIMIT_NOFILE, &limit);
 
-  // getrlimit() lies about the hard limit so we have to check sysctl.
-  int max_fd = 0;
-  size_t len = sizeof(max_fd);
-  sysctlbyname("kern.maxfilesperproc", &max_fd, &len, NULL, 0);
+    // getrlimit() lies about the hard limit so we have to check sysctl.
+    int max_fd = 0;
+    size_t len = sizeof(max_fd);
+    sysctlbyname("kern.maxfilesperproc", &max_fd, &len, NULL, 0);
 
-  limit.rlim_cur = max_fd;
-  int ret = setrlimit(RLIMIT_NOFILE, &limit);
+    limit.rlim_cur = max_fd;
+    int ret = setrlimit(RLIMIT_NOFILE, &limit);
 
-  if (ret == 0) {
-    qDebug() << "Max fd:" << max_fd;
+    if (ret == 0) {
+      qDebug() << "Max fd:" << max_fd;
+    }
   }
 #endif
 
@@ -268,6 +272,14 @@ int main(int argc, char *argv[]) {
 
   // Seed the random number generator
   srand(time(NULL));
+
+  Zeroconf* zeroconf = Zeroconf::GetZeroconf();
+  if (zeroconf) {
+    HttpServer* server = new HttpServer;
+    server->Listen(QHostAddress::Any, 12345);
+
+    zeroconf->Publish("local", "_clementine._tcp", "Clementine", 12345);
+  }
 
   // Window
   MainWindow w;

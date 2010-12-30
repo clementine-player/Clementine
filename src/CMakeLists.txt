@@ -147,6 +147,10 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
+  remote/httpserver.cpp
+  remote/httpconnection.cpp
+  remote/zeroconf.cpp
+
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
@@ -313,6 +317,9 @@ set(HEADERS
   radio/radioviewcontainer.h
   radio/savedradio.h
   radio/somafmservice.h
+
+  remote/httpserver.h
+  remote/httpconnection.h
 
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
@@ -513,19 +520,19 @@ if(HAVE_LIBLASTFM)
   )
 endif(HAVE_LIBLASTFM)
 
-# OSDs
 if(APPLE)
-  list(APPEND SOURCES widgets/osd_mac.mm)
-  list(APPEND SOURCES core/macglobalshortcutbackend.mm)
-  list(APPEND SOURCES devices/macdevicelister.mm)
-  list(APPEND HEADERS devices/macdevicelister.h)
-  list(APPEND SOURCES ui/macsystemtrayicon.mm)
   list(APPEND HEADERS core/macglobalshortcutbackend.h)
+  list(APPEND HEADERS devices/macdevicelister.h)
+  list(APPEND HEADERS ui/macscreensaver.h)
   list(APPEND HEADERS ui/macsystemtrayicon.h)
   list(APPEND HEADERS widgets/maclineedit.h)
-  list(APPEND SOURCES widgets/maclineedit.mm)
+  list(APPEND SOURCES core/macglobalshortcutbackend.mm)
+  list(APPEND SOURCES devices/macdevicelister.mm)
+  list(APPEND SOURCES remote/bonjour.mm)
   list(APPEND SOURCES ui/macscreensaver.cpp)
-  list(APPEND HEADERS ui/macscreensaver.h)
+  list(APPEND SOURCES ui/macsystemtrayicon.mm)
+  list(APPEND SOURCES widgets/maclineedit.mm)
+  list(APPEND SOURCES widgets/osd_mac.mm)
   include_directories(${GROWL}/Headers)
 else(APPLE)
   if(WIN32)
