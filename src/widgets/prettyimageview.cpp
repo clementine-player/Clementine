@@ -25,8 +25,9 @@
 #include <QTimer>
 #include <QtDebug>
 
-PrettyImageView::PrettyImageView(QWidget* parent)
+PrettyImageView::PrettyImageView(QNetworkAccessManager* network, QWidget* parent)
   : QScrollArea(parent),
+    network_(network),
     container_(new QWidget(this)),
     layout_(new QHBoxLayout(container_)),
     current_index_(-1),
@@ -66,7 +67,7 @@ bool PrettyImageView::eventFilter(QObject* obj, QEvent* event) {
 }
 
 void PrettyImageView::AddImage(const QUrl& url) {
-  PrettyImage* image = new PrettyImage(url, container_);
+  PrettyImage* image = new PrettyImage(url, network_, container_);
   connect(image, SIGNAL(destroyed()), SLOT(ScrollToCurrent()));
   connect(image, SIGNAL(Loaded()), SLOT(ScrollToCurrent()));
 

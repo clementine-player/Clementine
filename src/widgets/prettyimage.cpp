@@ -16,7 +16,6 @@
 */
 
 #include "prettyimage.h"
-#include "core/network.h"
 #include "ui/iconloader.h"
 
 #include <QApplication>
@@ -28,6 +27,7 @@
 #include <QFutureWatcher>
 #include <QLabel>
 #include <QMenu>
+#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QPainter>
 #include <QScrollArea>
@@ -43,9 +43,10 @@ const int PrettyImage::kMaxImageWidth = 300;
 
 const char* PrettyImage::kSettingsGroup = "PrettyImageView";
 
-PrettyImage::PrettyImage(const QUrl& url, QWidget* parent)
+PrettyImage::PrettyImage(const QUrl& url, QNetworkAccessManager* network,
+                         QWidget* parent)
   : QWidget(parent),
-    network_(new NetworkAccessManager(this)),
+    network_(network),
     state_(State_WaitingForLazyLoad),
     url_(url),
     menu_(NULL)

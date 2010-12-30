@@ -16,6 +16,7 @@
 */
 
 #include "songinfobase.h"
+#include "core/network.h"
 
 #include <QFile>
 #include <QScrollArea>
@@ -28,6 +29,7 @@ const char* SongInfoBase::kSettingsGroup = "SongInfo";
 
 SongInfoBase::SongInfoBase(QWidget* parent)
   : QWidget(parent),
+    network_(new NetworkAccessManager(this)),
     fetcher_(new SongInfoFetcher(this)),
     current_request_id_(-1),
     scroll_area_(new QScrollArea),

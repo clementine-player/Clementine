@@ -24,6 +24,7 @@
 
 class QHBoxLayout;
 class QMenu;
+class QNetworkAccessManager;
 class QNetworkReply;
 class QPropertyAnimation;
 class QTimeLine;
@@ -32,7 +33,7 @@ class PrettyImageView : public QScrollArea {
   Q_OBJECT
 
 public:
-  PrettyImageView(QWidget* parent = 0);
+  PrettyImageView(QNetworkAccessManager* network, QWidget* parent = 0);
 
   static const char* kSettingsGroup;
 
@@ -51,6 +52,8 @@ private slots:
 
 private:
   bool eventFilter(QObject*, QEvent*);
+
+  QNetworkAccessManager* network_;
 
   QWidget* container_;
   QHBoxLayout* layout_;

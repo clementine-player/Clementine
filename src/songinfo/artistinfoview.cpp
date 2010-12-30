@@ -55,7 +55,7 @@ void ArtistInfoView::ResultReady(int id, const SongInfoFetcher::Result& result) 
 
   if (!result.images_.isEmpty()) {
     // Image view goes at the top
-    PrettyImageView* image_view = new PrettyImageView(this);
+    PrettyImageView* image_view = new PrettyImageView(network_, this);
     AddWidget(image_view);
 
     foreach (const QUrl& url, result.images_) {

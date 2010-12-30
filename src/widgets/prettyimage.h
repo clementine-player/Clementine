@@ -21,16 +21,16 @@
 #include <QUrl>
 #include <QWidget>
 
-class NetworkAccessManager;
-
 class QMenu;
+class QNetworkAccessManager;
 class QNetworkReply;
 
 class PrettyImage : public QWidget {
   Q_OBJECT
 
 public:
-  PrettyImage(const QUrl& url, QWidget* parent = 0);
+  PrettyImage(const QUrl& url, QNetworkAccessManager* network,
+              QWidget* parent = 0);
 
   static const int kTotalHeight;
   static const int kReflectionHeight;
@@ -70,7 +70,7 @@ private:
   void DrawThumbnail(QPainter* p, const QRect& rect);
 
 private:
-  NetworkAccessManager* network_;
+  QNetworkAccessManager* network_;
   State state_;
   QUrl url_;
 

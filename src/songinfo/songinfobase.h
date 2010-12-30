@@ -30,6 +30,7 @@
 class CollapsibleInfoPane;
 class WidgetFadeHelper;
 
+class QNetworkAccessManager;
 class QScrollArea;
 class QVBoxLayout;
 
@@ -66,6 +67,7 @@ protected slots:
   virtual void ResultReady(int id, const SongInfoFetcher::Result& result);
 
 protected:
+  QNetworkAccessManager* network_;
   SongInfoFetcher* fetcher_;
   int current_request_id_;
 
