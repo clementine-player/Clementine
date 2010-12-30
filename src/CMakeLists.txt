@@ -677,7 +677,6 @@ IF(WIN32)
   list(APPEND HEADERS devices/wmdmdevice.h)
   list(APPEND HEADERS devices/wmdmlister.h)
   list(APPEND HEADERS devices/wmdmloader.h)
-  list(APPEND HEADERS devices/wmdmthread.h)
 ENDIF(WIN32)
 
 # Mac specific startup stuff

@@ -172,7 +172,11 @@ Song::Private::Private()
 }
 
 TagLib::FileRef* TagLibFileRefFactory::GetFileRef(const QString& filename) {
+#ifdef Q_OS_WIN32
+  return new TagLib::FileRef(filename.toStdWString().c_str());
+#else
   return new TagLib::FileRef(QFile::encodeName(filename).constData());
+#endif
 }
 
 Song::Song()
