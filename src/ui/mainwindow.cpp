@@ -26,6 +26,7 @@
 #include "core/mergedproxymodel.h"
 #include "core/modelfuturewatcher.h"
 #include "core/mpris_common.h"
+#include "core/network.h"
 #include "core/player.h"
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
@@ -110,6 +111,10 @@
 #include <QtDebug>
 #include <QTimer>
 #include <QUndoStack>
+
+#ifdef Q_OS_WIN32
+# include <qtsparkle/Updater>
+#endif
 
 
 #include <cmath>
@@ -491,20 +496,27 @@ MainWindow::MainWindow(QWidget* parent)
   connect(tray_icon_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
 
-#ifdef Q_OS_DARWIN
-  #ifdef HAVE_SPARKLE
-    // Add check for updates item to application menu.
-    QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
-    check_updates->setMenuRole(QAction::ApplicationSpecificRole);
-    connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
-  #endif
+#if (defined(Q_OS_DARWIN) && defined(HAVE_SPARKLE)) || defined(Q_OS_WIN32)
+  // Add check for updates item to application menu.
+  QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
+  check_updates->setMenuRole(QAction::ApplicationSpecificRole);
+  connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
+#endif
 
+#ifdef Q_OS_DARWIN
   // Force this menu to be the app "Preferences".
   ui_->action_configure->setMenuRole(QAction::PreferencesRole);
   // Force this menu to be the app "About".
   ui_->action_about->setMenuRole(QAction::AboutRole);
   // Force this menu to be the app "Quit".
   ui_->action_quit->setMenuRole(QAction::QuitRole);
+#endif
+
+#ifdef Q_OS_WIN32
+  qtsparkle::Updater* updater = new qtsparkle::Updater(
+      QUrl("http://data.clementine-player.org/sparkle-windows"), this);
+  updater->SetNetworkAccessManager(new NetworkAccessManager(this));
+  connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
 #endif
 
   // Global shortcuts
@@ -1468,7 +1480,7 @@ bool MainWindow::LoadUrl(const QString& url) {
 }
 
 void MainWindow::CheckForUpdates() {
-#ifdef Q_OS_DARWIN
+#if defined(Q_OS_DARWIN)
   mac::CheckForUpdates();
 #endif
 }

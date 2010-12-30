@@ -21,7 +21,6 @@
 #  define _WIN32_WINNT 0x0500
 #  include <windows.h>
 #  include <iostream>
-#  include <winsparkle.h>
 #endif // Q_OS_WIN32
 
 #include "config.h"
@@ -155,11 +154,6 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
-#ifdef Q_OS_WIN32
-  win_sparkle_set_appcast_url("http://data.clementine-player.org/winsparkle");
-  win_sparkle_init();
-#endif
-
   // This makes us show up nicely in gnome-volume-control
   g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
@@ -287,11 +281,5 @@ int main(int argc, char *argv[]) {
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
 
-  int ret = a.exec();
-
-#ifdef Q_OS_WIN32
-  win_sparkle_cleanup();
-#endif
-
-  return ret;
+  return a.exec();
 }

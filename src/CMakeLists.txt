@@ -889,7 +889,7 @@ set_target_properties(clementine PROPERTIES
 )
 
 if(WIN32)
-  target_link_libraries(clementine ${WINSPARKLE_LIBRARIES})
+  target_link_libraries(clementine ${QTSPARKLE_LIBRARIES})
 endif(WIN32)
 
 if (APPLE)

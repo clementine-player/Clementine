@@ -60,7 +60,7 @@ if (WIN32)
   find_package(ZLIB REQUIRED)
   find_library(MSWMDM_LIBRARIES mswmdm)
   find_library(SAC_SHIM_LIBRARIES sac_shim)
-  find_library(WINSPARKLE_LIBRARIES winsparkle)
+  find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
 find_library(LASTFM_LIBRARIES lastfm)
