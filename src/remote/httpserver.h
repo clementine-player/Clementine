@@ -11,7 +11,6 @@ class HttpServer : public QObject {
 
  private slots:
   void NewConnection();
-  void ReadyRead();
 
  private:
   QTcpServer server_;
