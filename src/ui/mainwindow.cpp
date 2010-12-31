@@ -96,6 +96,11 @@
 # include "visualisations/visualisationcontainer.h"
 #endif
 
+#ifdef HAVE_SCRIPTING
+# include "scripting/scriptdialog.h"
+# include "scripting/scriptmanager.h"
+#endif
+
 #include <QCloseEvent>
 #include <QDir>
 #include <QFileDialog>
@@ -166,6 +171,9 @@ MainWindow::MainWindow(QWidget* parent)
 #endif
 #ifdef ENABLE_WIIMOTEDEV
     wiimotedev_shortcuts_(NULL),
+#endif
+#ifdef HAVE_SCRIPTING
+    scripts_(new ScriptManager(this)),
 #endif
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
@@ -311,7 +319,7 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef HAVE_LIBLASTFM
   connect(ui_->action_cover_manager, SIGNAL(triggered()), SLOT(ShowCoverManager()));
 #else
-  ui_->action_cover_manager->setVisible(false);
+  ui_->action_cover_manager->setEnabled(false);
 #endif
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
@@ -322,6 +330,12 @@ MainWindow::MainWindow(QWidget* parent)
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)),
           background_streams_, SLOT(AllGloryToTheHypnotoad(bool)));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
+
+#ifdef HAVE_SCRIPTING
+  connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
+#else
+  ui_->action_script_manager->setEnabled(false);
+#endif
 
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
@@ -1780,4 +1794,14 @@ void MainWindow::PlaylistCurrentChanged(const QModelIndex& proxy_current) {
   // F2, we don't want that editing the last column that was right clicked on.
   if (source_current != playlist_menu_index_)
     playlist_menu_index_ = QModelIndex();
+}
+
+void MainWindow::ShowScriptDialog() {
+#ifdef HAVE_SCRIPTING
+  if (!script_dialog_) {
+    script_dialog_.reset(new ScriptDialog);
+    script_dialog_->SetManager(scripts_);
+  }
+  script_dialog_->show();
+#endif
 }

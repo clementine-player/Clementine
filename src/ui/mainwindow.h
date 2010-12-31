@@ -57,6 +57,8 @@ class QueueManager;
 class RadioItem;
 class RadioModel;
 class RadioViewContainer;
+class ScriptDialog;
+class ScriptManager;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -205,6 +207,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
+  void ShowScriptDialog();
 
   void SaveGeometry();
 
@@ -258,12 +261,18 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
   boost::scoped_ptr<QueueManager> queue_manager_;
 
+
 #ifdef ENABLE_VISUALISATIONS
   boost::scoped_ptr<VisualisationContainer> visualisation_;
 #endif
 
 #ifdef ENABLE_WIIMOTEDEV
   boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
+#endif
+
+#ifdef HAVE_SCRIPTING
+  ScriptManager* scripts_;
+  boost::scoped_ptr<ScriptDialog> script_dialog_;
 #endif
 
   QMenu* playlist_menu_;

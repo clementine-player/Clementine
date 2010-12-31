@@ -27,6 +27,10 @@ if(HAVE_LIBLASTFM)
   include_directories(${LASTFM_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
+if(HAVE_SCRIPTING_PYTHON)
+  include_directories(${PYTHON_INCLUDE_DIRS})
+endif(HAVE_SCRIPTING_PYTHON)
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
 include(../cmake/Translations.cmake)
@@ -684,6 +688,33 @@ if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
 endif(APPLE)
 
+if(HAVE_SCRIPTING)
+  list(APPEND SOURCES
+    scripting/languageengine.cpp
+    scripting/script.cpp
+    scripting/scriptdialog.cpp
+    scripting/scriptmanager.cpp
+  )
+  list(APPEND HEADERS
+    scripting/scriptdialog.h
+    scripting/scriptmanager.h
+  )
+  list(APPEND UI
+    scripting/scriptdialog.ui
+  )
+
+  if(HAVE_SCRIPTING_PYTHON)
+    list(APPEND SOURCES
+      scripting/python/pythonengine.cpp
+      scripting/python/pythonscript.cpp
+    )
+
+    add_sip_bindings(SOURCES
+      scripting/python/clementine.sip
+    )
+  endif(HAVE_SCRIPTING_PYTHON)
+endif(HAVE_SCRIPTING)
+
 # OS-specific sources that should be searched for translatable strings even
 # if they're not compiled
 list(APPEND OTHER_SOURCES
@@ -812,6 +843,10 @@ endif(HAVE_LIBMTP)
 if(HAVE_LIBINDICATE)
   target_link_libraries(clementine_lib ${INDICATEQT_LIBRARIES})
 endif(HAVE_LIBINDICATE)
+
+if(HAVE_SCRIPTING_PYTHON)
+  target_link_libraries(clementine_lib ${PYTHON_LIBRARIES})
+endif(HAVE_SCRIPTING_PYTHON)
 
 if (APPLE)
   target_link_libraries(clementine_lib

@@ -36,7 +36,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="FancyTabWidget" name="tabs" />
+         <widget class="FancyTabWidget" name="tabs" native="true"/>
         </item>
         <item>
          <widget class="NowPlayingWidget" name="now_playing" native="true"/>
@@ -390,7 +390,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMusic">
@@ -443,7 +443,7 @@
     </property>
     <addaction name="action_rain"/>
     <addaction name="action_hypnotoad"/>
-    <addaction name="action_kittens" />
+    <addaction name="action_kittens"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -451,6 +451,7 @@
     </property>
     <addaction name="action_cover_manager"/>
     <addaction name="action_queue_manager"/>
+    <addaction name="action_script_manager"/>
     <addaction name="action_equalizer"/>
     <addaction name="action_visualisations"/>
     <addaction name="action_transcode"/>
@@ -750,6 +751,11 @@
     <string>Ctrl+M</string>
    </property>
   </action>
+  <action name="action_script_manager">
+   <property name="text">
+    <string>Script Manager</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -798,7 +804,6 @@
    <class>FancyTabWidget</class>
    <extends>QWidget</extends>
    <header>widgets/fancytabwidget.h</header>
-   <container>0</container>
   </customwidget>
  </customwidgets>
  <resources>

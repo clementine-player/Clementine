@@ -220,6 +220,9 @@ QString GetConfigPath(ConfigPath config) {
       return GetConfigPath(Path_Root) +
           QString("/gst-registry-%1-bin").arg(QCoreApplication::applicationVersion());
 
+    case Path_Scripts:
+      return GetConfigPath(Path_Root) + "/scripts";
+
     case Path_DefaultMusicLibrary:
       #ifdef Q_OS_DARWIN
         return mac::GetMusicDirectory();
