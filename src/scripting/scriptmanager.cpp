@@ -32,19 +32,26 @@
 const char* ScriptManager::kIniFileName = "script.ini";
 
 ScriptManager::ScriptManager(QObject* parent)
-  : QAbstractListModel(parent)
+  : QAbstractListModel(parent),
+    player_(NULL)
 {
 #ifdef HAVE_SCRIPTING_PYTHON
   engines_ << new PythonEngine;
 #endif
 
   search_paths_ << Utilities::GetConfigPath(Utilities::Path_Scripts);
-
-  Reset();
 }
 
 ScriptManager::~ScriptManager() {
   qDeleteAll(engines_);
+}
+
+void ScriptManager::Init(const GlobalData& data) {
+  foreach (LanguageEngine* engine, engines_) {
+    engine->Init(data);
+  }
+
+  Reset();
 }
 
 void ScriptManager::Reset() {

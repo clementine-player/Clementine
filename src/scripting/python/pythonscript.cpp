@@ -16,15 +16,53 @@
 */
 
 #include <Python.h>
+#include <sip.h>
 
+#include "pythonengine.h"
 #include "pythonscript.h"
+#include "sipAPIclementine.h"
 
 #include <QFile>
 #include <QtDebug>
 
 
-PythonScript::PythonScript(const QString& path, const QString& script_file)
+static const sipAPIDef* GetSIPApi() {
+#if defined(SIP_USE_PYCAPSULE)
+  return (const sipAPIDef *)PyCapsule_Import("sip._C_API", 0);
+#else
+  PyObject *sip_module;
+  PyObject *sip_module_dict;
+  PyObject *c_api;
+
+  /* Import the SIP module. */
+  sip_module = PyImport_ImportModule("sip");
+
+  if (sip_module == NULL)
+      return NULL;
+
+  /* Get the module's dictionary. */
+  sip_module_dict = PyModule_GetDict(sip_module);
+
+  /* Get the "_C_API" attribute. */
+  c_api = PyDict_GetItemString(sip_module_dict, "_C_API");
+
+  if (c_api == NULL)
+      return NULL;
+
+  /* Sanity check that it is the right type. */
+  if (!PyCObject_Check(c_api))
+      return NULL;
+
+  /* Get the actual pointer from the object. */
+  return (const sipAPIDef *)PyCObject_AsVoidPtr(c_api);
+#endif
+}
+
+
+PythonScript::PythonScript(PythonEngine* engine,
+                           const QString& path, const QString& script_file)
   : Script(path, script_file),
+    engine_(engine),
     interpreter_(NULL)
 {
 }
@@ -40,6 +78,15 @@ bool PythonScript::Init() {
   // Create a python interpreter
   PyEval_AcquireLock();
   interpreter_ = Py_NewInterpreter();
+
+  // Get the clementine module so we can put stuff in it
+  PyObject* clementine = PyImport_ImportModule("clementine");
+
+  const sipAPIDef* sip_api = GetSIPApi();
+  PyObject* player = sip_api->api_convert_from_type(
+      engine_->data().player_, sipType_Player, NULL);
+  PyModule_AddObject(clementine, "player", player);
+
   PyEval_ReleaseLock();
 
   // Get a file stream from the file handle

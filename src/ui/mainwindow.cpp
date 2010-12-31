@@ -332,6 +332,7 @@ MainWindow::MainWindow(QWidget* parent)
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
 
 #ifdef HAVE_SCRIPTING
+  scripts_->Init(ScriptManager::GlobalData(player_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 #else
   ui_->action_script_manager->setEnabled(false);

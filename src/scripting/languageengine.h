@@ -29,6 +29,8 @@ public:
   virtual ScriptManager::Language language() const = 0;
   virtual QString name() const = 0;
 
+  virtual void Init(const ScriptManager::GlobalData& data) = 0;
+
   virtual Script* CreateScript(const QString& path, const QString& script_file) = 0;
 };
 

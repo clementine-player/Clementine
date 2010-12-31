@@ -5,16 +5,16 @@ class Player : QObject {
 %End
 
 public:
-  // Engine::State GetState() const;
+   Engine::State GetState() const;
   int GetVolume() const;
 
-  //PlaylistItemPtr GetCurrentItem() const { return current_item_; }
-  //PlaylistItemPtr GetItemAt(int pos) const;
+  PlaylistItemPtr GetCurrentItem() const;
+  PlaylistItemPtr GetItemAt(int pos) const;
   //PlaylistManager* playlists() const { return playlists_; }
 
 public slots:
   // Manual track change to the specified track
-  //void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle);
+  void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle);
 
   // If there's currently a song playing, pause it, otherwise play the track
   // that was playing last, or the first one on the playlist
@@ -45,9 +45,9 @@ signals:
   void PlaylistFinished();
   void VolumeChanged(int volume);
   void Error(const QString& message);
-  //void TrackSkipped(PlaylistItemPtr old_track);
+  void TrackSkipped(PlaylistItemPtr old_track);
 
-  //void ForceShowOSD(Song);
+  void ForceShowOSD(Song);
 
 private:
   Player();

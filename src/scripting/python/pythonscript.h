@@ -22,14 +22,19 @@
 
 struct _ts; // PyThreadState
 
+class PythonEngine;
+
 class PythonScript : public Script {
 public:
-  PythonScript(const QString& path, const QString& script_file);
+  PythonScript(PythonEngine* engine,
+               const QString& path, const QString& script_file);
 
   bool Init();
   bool Unload();
 
 private:
+  PythonEngine* engine_;
+
   _ts* interpreter_;
 };
 

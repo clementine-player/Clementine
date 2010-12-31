@@ -22,6 +22,7 @@
 #include <QStringList>
 
 class LanguageEngine;
+class Player;
 class Script;
 
 class ScriptManager : public QAbstractListModel {
@@ -46,7 +47,16 @@ public:
     Language_Python,
   };
 
+  struct GlobalData {
+    GlobalData() : player_(NULL) {}
+    GlobalData(Player* player) : player_(player) {}
+
+    Player* player_;
+  };
+
   static const char* kIniFileName;
+
+  void Init(const GlobalData& data);
 
   // QAbstractListModel
   int rowCount(const QModelIndex& parent) const;
@@ -82,6 +92,8 @@ private:
 
   QStringList search_paths_;
   QList<ScriptInfo> info_;
+
+  Player* player_;
 };
 
 #endif // SCRIPTMANAGER_H

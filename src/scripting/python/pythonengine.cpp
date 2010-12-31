@@ -29,6 +29,10 @@ PythonEngine::PythonEngine()
 {
 }
 
+void PythonEngine::Init(const ScriptManager::GlobalData& data) {
+  data_ = data;
+}
+
 Script* PythonEngine::CreateScript(const QString& path, const QString& script_file) {
   // Initialise Python if it hasn't been done yet
   if (!initialised_) {
@@ -43,5 +47,5 @@ Script* PythonEngine::CreateScript(const QString& path, const QString& script_fi
     initialised_ = true;
   }
 
-  return new PythonScript(path, script_file);
+  return new PythonScript(this, path, script_file);
 }

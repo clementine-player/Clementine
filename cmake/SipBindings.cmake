@@ -40,7 +40,7 @@ macro(add_sip_bindings outputvar)
       # Sip creates 1 file per class... so we have to figure out what classes
       # it will generate
       execute_process(
-        COMMAND "awk" "/^\\s*class +([A-Za-z0-9]+)/ {ORS=\";\"; print $2}"
+        COMMAND "awk" "/^\\s*(class|namespace) +([A-Za-z0-9]+)/ {ORS=\";\"; print $2}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/${included_file}"
         OUTPUT_VARIABLE classes
       )

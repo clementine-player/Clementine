@@ -27,9 +27,14 @@ public:
   ScriptManager::Language language() const { return ScriptManager::Language_Python; }
   QString name() const { return "python"; }
 
+  const ScriptManager::GlobalData& data() const { return data_; }
+
+  void Init(const ScriptManager::GlobalData& data);
   Script* CreateScript(const QString& path, const QString& script_file);
 
 private:
+  ScriptManager::GlobalData data_;
+
   bool initialised_;
 };
 
