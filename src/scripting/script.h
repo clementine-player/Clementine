@@ -20,18 +20,29 @@
 
 #include <QString>
 
+#include <boost/scoped_ptr.hpp>
+
+class ScriptInterface;
+
 class Script {
 public:
   Script(const QString& path, const QString& script_file);
-  virtual ~Script() {}
+  virtual ~Script();
 
   const QString& path() const { return path_; }
   const QString& script_file() const { return script_file_; }
 
+  ScriptInterface* interface() const { return interface_.get(); }
+
   virtual bool Init() = 0;
   virtual bool Unload() = 0;
 
+protected:
+  boost::scoped_ptr<ScriptInterface> interface_;
+
 private:
+  Q_DISABLE_COPY(Script);
+
   QString path_;
   QString script_file_;
 };

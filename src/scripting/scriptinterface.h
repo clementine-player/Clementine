@@ -15,15 +15,25 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "script.h"
-#include "scriptinterface.h"
+#ifndef SCRIPTINTERFACE_H
+#define SCRIPTINTERFACE_H
 
-Script::Script(const QString& path, const QString& script_file)
-  : interface_(new ScriptInterface),
-    path_(path),
-    script_file_(script_file)
-{
-}
+#include <QObject>
 
-Script::~Script() {
-}
+// An instance of this class is made available to each script
+class ScriptInterface : public QObject {
+  Q_OBJECT
+
+public:
+  ScriptInterface(QObject* parent = 0);
+
+public slots:
+  // Callable by C++
+  void ShowSettingsDialog();
+
+signals:
+  // Scripts should connect to this and show a settings dialog
+  void SettingsDialogRequested();
+};
+
+#endif // SCRIPTINTERFACE_H

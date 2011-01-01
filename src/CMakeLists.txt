@@ -693,10 +693,12 @@ if(HAVE_SCRIPTING)
     scripting/languageengine.cpp
     scripting/script.cpp
     scripting/scriptdialog.cpp
+    scripting/scriptinterface.cpp
     scripting/scriptmanager.cpp
   )
   list(APPEND HEADERS
     scripting/scriptdialog.h
+    scripting/scriptinterface.h
     scripting/scriptmanager.h
   )
   list(APPEND UI

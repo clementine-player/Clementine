@@ -6,4 +6,5 @@
 %Include engine_fwd.sip
 %Include player.sip
 %Include playlistitem.sip
+%Include scriptinterface.sip
 %Include song.sip

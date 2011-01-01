@@ -18,6 +18,7 @@
 #include "config.h"
 #include "languageengine.h"
 #include "script.h"
+#include "scriptinterface.h"
 #include "scriptmanager.h"
 #include "core/utilities.h"
 
@@ -253,4 +254,15 @@ void ScriptManager::Disable(const QModelIndex& index) {
   SaveSettings();
 
   emit dataChanged(index, index);
+}
+
+void ScriptManager::ShowSettingsDialog(const QModelIndex& index) {
+  if (index.row() < 0 || index.row() >= info_.count())
+    return;
+
+  ScriptInfo* info = &info_[index.row()];
+  if (!info->loaded_)
+    return;
+
+  info->loaded_->interface()->ShowSettingsDialog();
 }

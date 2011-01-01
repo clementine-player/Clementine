@@ -137,23 +137,15 @@ void ScriptDialog::DataChanged(const QModelIndex&, const QModelIndex&) {
 }
 
 void ScriptDialog::Enable() {
-  QModelIndex index = ui_->list->currentIndex();
-  if (!index.isValid())
-    return;
-
-  manager_->Enable(index);
+  manager_->Enable(ui_->list->currentIndex());
 }
 
 void ScriptDialog::Disable() {
-  QModelIndex index = ui_->list->currentIndex();
-  if (!index.isValid())
-    return;
-
-  manager_->Disable(index);
+  manager_->Disable(ui_->list->currentIndex());
 }
 
 void ScriptDialog::Settings() {
-
+  manager_->ShowSettingsDialog(ui_->list->currentIndex());
 }
 
 void ScriptDialog::Details() {

@@ -20,6 +20,9 @@
 
 #include "scripting/script.h"
 
+struct _object; // PyObject
+struct _sipAPIDef;
+struct _sipTypeDef;
 struct _ts; // PyThreadState
 
 class PythonEngine;
@@ -33,9 +36,14 @@ public:
   bool Unload();
 
 private:
+  void AddObject(void* object, const _sipTypeDef* type, const char* name) const;
+
+private:
   PythonEngine* engine_;
 
   _ts* interpreter_;
+  _object* clementine_module_;
+  const _sipAPIDef* sip_api_;
 };
 
 #endif // PYTHONSCRIPT_H

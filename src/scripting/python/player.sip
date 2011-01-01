@@ -5,7 +5,7 @@ class Player : QObject {
 %End
 
 public:
-   Engine::State GetState() const;
+  Engine::State GetState() const;
   int GetVolume() const;
 
   PlaylistItemPtr GetCurrentItem() const;

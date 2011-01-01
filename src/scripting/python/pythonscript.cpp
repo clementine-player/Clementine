@@ -63,7 +63,9 @@ PythonScript::PythonScript(PythonEngine* engine,
                            const QString& path, const QString& script_file)
   : Script(path, script_file),
     engine_(engine),
-    interpreter_(NULL)
+    interpreter_(NULL),
+    clementine_module_(NULL),
+    sip_api_(NULL)
 {
 }
 
@@ -80,12 +82,11 @@ bool PythonScript::Init() {
   interpreter_ = Py_NewInterpreter();
 
   // Get the clementine module so we can put stuff in it
-  PyObject* clementine = PyImport_ImportModule("clementine");
+  clementine_module_ = PyImport_ImportModule("clementine");
+  sip_api_ = GetSIPApi();
 
-  const sipAPIDef* sip_api = GetSIPApi();
-  PyObject* player = sip_api->api_convert_from_type(
-      engine_->data().player_, sipType_Player, NULL);
-  PyModule_AddObject(clementine, "player", player);
+  AddObject(engine_->data().player_, sipType_Player, "player");
+  AddObject(interface(), sipType_ScriptInterface, "script");
 
   PyEval_ReleaseLock();
 
@@ -104,8 +105,15 @@ bool PythonScript::Init() {
   return true;
 }
 
+void PythonScript::AddObject(void* object, const _sipTypeDef* type,
+                             const char * name) const {
+  PyObject* python_object = sip_api_->api_convert_from_type(object, type, NULL);
+  PyModule_AddObject(clementine_module_, name, python_object);
+}
+
 bool PythonScript::Unload() {
   PyEval_AcquireLock();
+  PyThreadState_Swap(interpreter_);
   Py_EndInterpreter(interpreter_);
   PyEval_ReleaseLock();
 

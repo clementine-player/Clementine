@@ -65,6 +65,7 @@ public:
 
   void Enable(const QModelIndex& index);
   void Disable(const QModelIndex& index);
+  void ShowSettingsDialog(const QModelIndex& index);
 
   // QAbstractListModel
   int rowCount(const QModelIndex& parent = QModelIndex()) const;

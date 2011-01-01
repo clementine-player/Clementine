@@ -15,15 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "script.h"
 #include "scriptinterface.h"
 
-Script::Script(const QString& path, const QString& script_file)
-  : interface_(new ScriptInterface),
-    path_(path),
-    script_file_(script_file)
+ScriptInterface::ScriptInterface(QObject* parent)
+  : QObject(parent)
 {
 }
 
-Script::~Script() {
+void ScriptInterface::ShowSettingsDialog() {
+  emit SettingsDialogRequested();
 }
