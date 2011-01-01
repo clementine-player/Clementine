@@ -19,9 +19,33 @@
 #define SCRIPTDIALOG_H
 
 #include <QDialog>
+#include <QFont>
+#include <QFontMetrics>
+#include <QStyledItemDelegate>
 
 class ScriptManager;
 class Ui_ScriptDialog;
+
+class ScriptDelegate : public QStyledItemDelegate {
+public:
+  ScriptDelegate(QObject* parent = 0);
+
+  static const int kIconSize;
+  static const int kPadding;
+  static const int kItemHeight;
+  static const int kLinkSpacing;
+
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
+  QSize sizeHint(const QStyleOptionViewItem& option,
+                 const QModelIndex& index) const;
+
+private:
+  QFont bold_;
+  QFontMetrics bold_metrics_;
+
+  QFont link_;
+};
 
 class ScriptDialog : public QDialog {
   Q_OBJECT
@@ -31,6 +55,15 @@ public:
   ~ScriptDialog();
 
   void SetManager(ScriptManager* manager);
+
+private slots:
+  void DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right);
+  void CurrentChanged(const QModelIndex& index);
+
+  void Enable();
+  void Disable();
+  void Settings();
+  void Details();
 
 private:
   Ui_ScriptDialog* ui_;

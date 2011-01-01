@@ -19,12 +19,87 @@
 #include "scriptmanager.h"
 #include "ui_scriptdialog.h"
 
+#include <QPainter>
+#include <QPushButton>
+#include <QtDebug>
+
+const int ScriptDelegate::kIconSize = 64;
+const int ScriptDelegate::kPadding = 6;
+const int ScriptDelegate::kItemHeight = kIconSize + kPadding*2;
+const int ScriptDelegate::kLinkSpacing = 10;
+
+ScriptDelegate::ScriptDelegate(QObject* parent)
+  : QStyledItemDelegate(parent),
+    bold_metrics_(bold_)
+{
+  bold_.setBold(true);
+  bold_metrics_ = QFontMetrics(bold_);
+
+  link_.setUnderline(true);
+}
+
+void ScriptDelegate::paint(
+    QPainter* p, const QStyleOptionViewItem& opt,
+    const QModelIndex& index) const {
+  // Draw the background
+  const QStyleOptionViewItemV3* vopt = qstyleoption_cast<const QStyleOptionViewItemV3*>(&opt);
+  const QWidget* widget = vopt->widget;
+  QStyle* style = widget->style() ? widget->style() : QApplication::style();
+  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, p, widget);
+
+  // Get the data
+  QIcon icon = index.data(Qt::DecorationRole).value<QIcon>();
+  const QString title = index.data(Qt::DisplayRole).toString();
+  const QString description = index.data(ScriptManager::Role_Description).toString();
+  const bool is_enabled = index.data(ScriptManager::Role_IsEnabled).toBool();
+
+  // Calculate the geometry
+  QRect icon_rect(opt.rect.left() + kPadding, opt.rect.top() + kPadding,
+                  kIconSize, kIconSize);
+  QRect title_rect(icon_rect.right() + kPadding, icon_rect.top(),
+                   opt.rect.width() - icon_rect.width() - kPadding*3,
+                   bold_metrics_.height());
+  QRect description_rect(title_rect.left(), title_rect.bottom(),
+                         title_rect.width(), opt.rect.bottom() - kPadding - title_rect.bottom());
+
+  // Draw the icon
+  p->drawPixmap(icon_rect, icon.pixmap(kIconSize, is_enabled ? QIcon::Normal : QIcon::Disabled));
+
+  // Disabled items get greyed out
+  if (is_enabled) {
+    p->setPen(opt.palette.color(QPalette::Text));
+  } else {
+    const bool light = opt.palette.color(QPalette::Base).value() > 128;
+    const QColor color = opt.palette.color(QPalette::Dark);
+    p->setPen(light ? color.darker(150) : color.lighter(125));
+  }
+
+  // Draw the title
+  p->setFont(bold_);
+  p->drawText(title_rect, Qt::AlignLeft | Qt::AlignVCenter, title);
+
+  // Draw the description
+  p->setFont(opt.font);
+  p->drawText(description_rect, Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, description);
+}
+
+QSize ScriptDelegate::sizeHint(const QStyleOptionViewItem&, const QModelIndex&) const {
+  return QSize(100, kItemHeight);
+}
+
+
 ScriptDialog::ScriptDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_ScriptDialog),
     manager_(NULL)
 {
   ui_->setupUi(this);
+  connect(ui_->enable, SIGNAL(clicked()), SLOT(Enable()));
+  connect(ui_->disable, SIGNAL(clicked()), SLOT(Disable()));
+  connect(ui_->settings, SIGNAL(clicked()), SLOT(Settings()));
+  connect(ui_->details, SIGNAL(clicked()), SLOT(Details()));
+
+  ui_->list->setItemDelegate(new ScriptDelegate(this));
 }
 
 ScriptDialog::~ScriptDialog() {
@@ -34,4 +109,53 @@ ScriptDialog::~ScriptDialog() {
 void ScriptDialog::SetManager(ScriptManager* manager) {
   manager_ = manager;
   ui_->list->setModel(manager);
+
+  connect(manager, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+          SLOT(DataChanged(QModelIndex,QModelIndex)));
+  connect(ui_->list->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+          SLOT(CurrentChanged(QModelIndex)));
+}
+
+void ScriptDialog::CurrentChanged(const QModelIndex& index) {
+  if (!index.isValid()) {
+    ui_->enable->setEnabled(false);
+    ui_->disable->setEnabled(false);
+    ui_->settings->setEnabled(false);
+    ui_->details->setEnabled(false);
+    return;
+  }
+
+  const bool is_enabled = index.data(ScriptManager::Role_IsEnabled).toBool();
+  ui_->enable->setEnabled(!is_enabled);
+  ui_->disable->setEnabled(is_enabled);
+  ui_->settings->setEnabled(is_enabled);
+  ui_->details->setEnabled(true);
+}
+
+void ScriptDialog::DataChanged(const QModelIndex&, const QModelIndex&) {
+  CurrentChanged(ui_->list->currentIndex());
+}
+
+void ScriptDialog::Enable() {
+  QModelIndex index = ui_->list->currentIndex();
+  if (!index.isValid())
+    return;
+
+  manager_->Enable(index);
+}
+
+void ScriptDialog::Disable() {
+  QModelIndex index = ui_->list->currentIndex();
+  if (!index.isValid())
+    return;
+
+  manager_->Disable(index);
+}
+
+void ScriptDialog::Settings() {
+
+}
+
+void ScriptDialog::Details() {
+
 }

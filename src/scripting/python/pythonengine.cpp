@@ -47,5 +47,11 @@ Script* PythonEngine::CreateScript(const QString& path, const QString& script_fi
     initialised_ = true;
   }
 
-  return new PythonScript(this, path, script_file);
+  Script* ret = new PythonScript(this, path, script_file);
+  if (ret->Init()) {
+    return ret;
+  }
+
+  delete ret;
+  return NULL;
 }

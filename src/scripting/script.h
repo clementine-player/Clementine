@@ -30,7 +30,6 @@ public:
 
   virtual bool Init() = 0;
   virtual bool Unload() = 0;
-  virtual bool Reload() { return Unload() && Init(); }
 
 private:
   QString path_;

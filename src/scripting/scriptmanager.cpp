@@ -29,7 +29,9 @@
 #include <QSettings>
 #include <QtDebug>
 
+const char* ScriptManager::kSettingsGroup = "Scripts";
 const char* ScriptManager::kIniFileName = "script.ini";
+const char* ScriptManager::kIniSettingsGroup = "Script";
 
 ScriptManager::ScriptManager(QObject* parent)
   : QAbstractListModel(parent),
@@ -43,6 +45,13 @@ ScriptManager::ScriptManager(QObject* parent)
 }
 
 ScriptManager::~ScriptManager() {
+  foreach (const ScriptInfo& info, info_) {
+    if (info.loaded_) {
+      info.loaded_->Unload();
+      delete info.loaded_;
+    }
+  }
+
   qDeleteAll(engines_);
 }
 
@@ -51,17 +60,8 @@ void ScriptManager::Init(const GlobalData& data) {
     engine->Init(data);
   }
 
-  Reset();
-}
-
-void ScriptManager::Reset() {
-  // Remove any scripts that aren't loaded
-  for (int i=0 ; i<info_.count() ; ++i) {
-    if (!info_[i].loaded_) {
-      info_.removeAt(i);
-      --i;
-    }
-  }
+  // Load settings
+  LoadSettings();
 
   // Search for scripts
   foreach (const QString& search_path, search_paths_) {
@@ -86,6 +86,19 @@ void ScriptManager::Reset() {
   reset();
 }
 
+void ScriptManager::LoadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  enabled_scripts_ = QSet<QString>::fromList(
+      s.value("enabled_scripts").toStringList());
+}
+
+void ScriptManager::SaveSettings() const {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("enabled_scripts", QVariant::fromValue<QStringList>(enabled_scripts_.toList()));
+}
+
 LanguageEngine* ScriptManager::EngineForLanguage(const QString& language_name) const {
   foreach (LanguageEngine* engine, engines_) {
     if (engine->name() == language_name) {
@@ -106,6 +119,7 @@ LanguageEngine* ScriptManager::EngineForLanguage(ScriptManager::Language languag
 
 ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) {
   const QString ini_file = path + "/" + kIniFileName;
+  const QString id = QFileInfo(path).completeBaseName();
 
   // Does the file exist?
   ScriptManager::ScriptInfo ret;
@@ -116,11 +130,11 @@ ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) {
 
   // Open it
   QSettings s(ini_file, QSettings::IniFormat);
-  if (!s.childGroups().contains("Script")) {
-    qWarning() << "Missing [Script] section in" << ini_file;
+  if (!s.childGroups().contains(kIniSettingsGroup)) {
+    qWarning() << "Missing" << kIniSettingsGroup << "section in" << ini_file;
     return ret;
   }
-  s.beginGroup("Script");
+  s.beginGroup(kIniSettingsGroup);
 
   // Find out what language it's in
   QString language_name = s.value("language").toString();
@@ -133,16 +147,22 @@ ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) {
 
   // Load the rest of the metadata
   ret.path_ = path;
+  ret.id_ = id;
   ret.name_ = s.value("name").toString();
   ret.description_ = s.value("description").toString();
   ret.author_ = s.value("author").toString();
   ret.url_ = s.value("url").toString();
-  ret.script_file_ = path + "/" + s.value("script_file").toString();
+  ret.script_file_ = QFileInfo(QDir(path), s.value("script_file").toString()).absoluteFilePath();
+  ret.icon_ = QIcon(QFileInfo(QDir(path), s.value("icon").toString()).absoluteFilePath());
 
-  // Load the script - TODO: move somewhere else
-  ret.loaded_ = engine->CreateScript(path, ret.script_file_);
-  if (ret.loaded_) {
-    ret.loaded_->Init();
+  if (enabled_scripts_.contains(id)) {
+    // Load the script if it's enabled
+    ret.loaded_ = engine->CreateScript(path, ret.script_file_);
+    if (!ret.loaded_) {
+      // Failed to load?  Disable it so we don't try again
+      enabled_scripts_.remove(id);
+      SaveSettings();
+    }
   }
 
   return ret;
@@ -164,6 +184,9 @@ QVariant ScriptManager::data(const QModelIndex& index, int role) const {
     case Qt::DisplayRole:
       return info.name_;
 
+    case Qt::DecorationRole:
+      return info.icon_;
+
     case Role_Author:
       return info.author_;
 
@@ -179,7 +202,55 @@ QVariant ScriptManager::data(const QModelIndex& index, int role) const {
     case Role_Url:
       return info.url_;
 
+    case Role_IsEnabled:
+      return info.loaded_ != NULL;
+
     default:
       return QVariant();
   }
+}
+
+void ScriptManager::Enable(const QModelIndex& index) {
+  if (index.row() < 0 || index.row() >= info_.count())
+    return;
+
+  ScriptInfo* info = &info_[index.row()];
+  if (info->loaded_)
+    return;
+
+  // Find an engine for it
+  LanguageEngine* engine = EngineForLanguage(info->language_);
+  if (!engine) {
+    qWarning() << "Unknown language in" << info->path_;
+    return;
+  }
+
+  // Load the script
+  info->loaded_ = engine->CreateScript(info->path_, info->script_file_);
+
+  // If it loaded correctly then automatically load it in the future
+  if (info->loaded_) {
+    enabled_scripts_.insert(info->id_);
+    SaveSettings();
+  }
+
+  emit dataChanged(index, index);
+}
+
+void ScriptManager::Disable(const QModelIndex& index) {
+  if (index.row() < 0 || index.row() >= info_.count())
+    return;
+
+  ScriptInfo* info = &info_[index.row()];
+  if (!info->loaded_)
+    return;
+
+  info->loaded_->Unload();
+  delete info->loaded_;
+  info->loaded_ = NULL;
+
+  enabled_scripts_.remove(info->id_);
+  SaveSettings();
+
+  emit dataChanged(index, index);
 }

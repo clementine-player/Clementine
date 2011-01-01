@@ -19,6 +19,8 @@
 #define SCRIPTMANAGER_H
 
 #include <QAbstractItemModel>
+#include <QIcon>
+#include <QSet>
 #include <QStringList>
 
 class LanguageEngine;
@@ -38,6 +40,7 @@ public:
     Role_Url,
     Role_Language,
     Role_ScriptFile,
+    Role_IsEnabled,
 
     RoleCount
   };
@@ -54,12 +57,17 @@ public:
     Player* player_;
   };
 
+  static const char* kSettingsGroup;
   static const char* kIniFileName;
+  static const char* kIniSettingsGroup;
 
   void Init(const GlobalData& data);
 
+  void Enable(const QModelIndex& index);
+  void Disable(const QModelIndex& index);
+
   // QAbstractListModel
-  int rowCount(const QModelIndex& parent) const;
+  int rowCount(const QModelIndex& parent = QModelIndex()) const;
   QVariant data(const QModelIndex& index, int role) const;
 
 private:
@@ -69,11 +77,13 @@ private:
     bool is_valid() const { return language_ != Language_Unknown; }
 
     QString path_;
+    QString id_;
 
     QString name_;
     QString description_;
     QString author_;
     QString url_;
+    QIcon icon_;
 
     Language language_;
     QString script_file_;
@@ -81,7 +91,9 @@ private:
     Script* loaded_;
   };
 
-  void Reset();
+  void LoadSettings();
+  void SaveSettings() const;
+
   ScriptInfo LoadScriptInfo(const QString& path);
 
   LanguageEngine* EngineForLanguage(const QString& language_name) const;
@@ -92,6 +104,8 @@ private:
 
   QStringList search_paths_;
   QList<ScriptInfo> info_;
+
+  QSet<QString> enabled_scripts_;
 
   Player* player_;
 };
