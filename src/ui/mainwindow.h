@@ -271,10 +271,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
 #endif
 
-#ifdef HAVE_SCRIPTING
   ScriptManager* scripts_;
   boost::scoped_ptr<ScriptDialog> script_dialog_;
-#endif
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

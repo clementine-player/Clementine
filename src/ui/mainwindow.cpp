@@ -58,6 +58,9 @@
 #include "radio/radioview.h"
 #include "radio/radioviewcontainer.h"
 #include "radio/savedradio.h"
+#include "scripting/scriptdialog.h"
+#include "scripting/scriptmanager.h"
+#include "scripting/uiinterface.h"
 #include "smartplaylists/generator.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
@@ -94,12 +97,6 @@
 
 #ifdef ENABLE_VISUALISATIONS
 # include "visualisations/visualisationcontainer.h"
-#endif
-
-#ifdef HAVE_SCRIPTING
-# include "scripting/scriptdialog.h"
-# include "scripting/scriptmanager.h"
-# include "scripting/uiinterface.h"
 #endif
 
 #include <QCloseEvent>
@@ -173,9 +170,7 @@ MainWindow::MainWindow(QWidget* parent)
 #ifdef ENABLE_WIIMOTEDEV
     wiimotedev_shortcuts_(NULL),
 #endif
-#ifdef HAVE_SCRIPTING
     scripts_(new ScriptManager(this)),
-#endif
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
@@ -584,6 +579,9 @@ MainWindow::MainWindow(QWidget* parent)
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
+  // Add places where scripts can make actions
+  scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
+
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
@@ -640,13 +638,8 @@ MainWindow::MainWindow(QWidget* parent)
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
 #endif
 
-#ifdef HAVE_SCRIPTING
-  scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
   scripts_->Init(ScriptManager::GlobalData(player_, playlists_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
-#else
-  ui_->action_script_manager->setEnabled(false);
-#endif
 }
 
 MainWindow::~MainWindow() {
@@ -1808,11 +1801,9 @@ void MainWindow::PlaylistCurrentChanged(const QModelIndex& proxy_current) {
 }
 
 void MainWindow::ShowScriptDialog() {
-#ifdef HAVE_SCRIPTING
   if (!script_dialog_) {
     script_dialog_.reset(new ScriptDialog);
     script_dialog_->SetManager(scripts_);
   }
   script_dialog_->show();
-#endif
 }

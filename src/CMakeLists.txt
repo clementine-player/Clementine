@@ -155,6 +155,14 @@ set(SOURCES
   remote/httpconnection.cpp
   remote/zeroconf.cpp
 
+  scripting/languageengine.cpp
+  scripting/script.cpp
+  scripting/scriptdialog.cpp
+  scripting/scriptdialogtabwidget.cpp
+  scripting/scriptinterface.cpp
+  scripting/scriptmanager.cpp
+  scripting/uiinterface.cpp
+
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
@@ -325,6 +333,12 @@ set(HEADERS
   remote/httpserver.h
   remote/httpconnection.h
 
+  scripting/scriptdialog.h
+  scripting/scriptdialogtabwidget.h
+  scripting/scriptinterface.h
+  scripting/scriptmanager.h
+  scripting/uiinterface.h
+
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
   smartplaylists/generatormimedata.h
@@ -410,6 +424,8 @@ set(UI
   radio/magnatuneconfig.ui
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
+
+  scripting/scriptdialog.ui
 
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
@@ -688,42 +704,20 @@ if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
 endif(APPLE)
 
-if(HAVE_SCRIPTING)
+if(HAVE_SCRIPTING_PYTHON)
   list(APPEND SOURCES
-    scripting/languageengine.cpp
-    scripting/script.cpp
-    scripting/scriptdialog.cpp
-    scripting/scriptdialogtabwidget.cpp
-    scripting/scriptinterface.cpp
-    scripting/scriptmanager.cpp
-    scripting/uiinterface.cpp
-  )
-  list(APPEND HEADERS
-    scripting/scriptdialog.h
-    scripting/scriptdialogtabwidget.h
-    scripting/scriptinterface.h
-    scripting/scriptmanager.h
-    scripting/uiinterface.h
-  )
-  list(APPEND UI
-    scripting/scriptdialog.ui
+    scripting/python/pythonengine.cpp
+    scripting/python/pythonscript.cpp
   )
 
-  if(HAVE_SCRIPTING_PYTHON)
-    list(APPEND SOURCES
-      scripting/python/pythonengine.cpp
-      scripting/python/pythonscript.cpp
-    )
-
-    add_sip_binding(SOURCES
-      scripting/python/clementine.sip
-      ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
-      ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
-      ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp
-      ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
-    )
-  endif(HAVE_SCRIPTING_PYTHON)
-endif(HAVE_SCRIPTING)
+  add_sip_binding(SOURCES
+    scripting/python/clementine.sip
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
+  )
+endif(HAVE_SCRIPTING_PYTHON)
 
 # OS-specific sources that should be searched for translatable strings even
 # if they're not compiled
