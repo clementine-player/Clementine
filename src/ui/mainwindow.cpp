@@ -331,13 +331,6 @@ MainWindow::MainWindow(QWidget* parent)
           background_streams_, SLOT(AllGloryToTheHypnotoad(bool)));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
 
-#ifdef HAVE_SCRIPTING
-  scripts_->Init(ScriptManager::GlobalData(player_, playlists_));
-  connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
-#else
-  ui_->action_script_manager->setEnabled(false);
-#endif
-
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
   ui_->back_button->setDefaultAction(ui_->action_previous_track);
@@ -644,6 +637,13 @@ MainWindow::MainWindow(QWidget* parent)
 // Switched position, mayby something is not ready ?
 
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
+#endif
+
+#ifdef HAVE_SCRIPTING
+  scripts_->Init(ScriptManager::GlobalData(player_, playlists_));
+  connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
+#else
+  ui_->action_script_manager->setEnabled(false);
 #endif
 
 }
