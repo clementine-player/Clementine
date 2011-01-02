@@ -22,6 +22,8 @@
 
 class PythonEngine;
 
+struct _object; // PyObject
+
 class PythonScript : public Script {
 public:
   PythonScript(PythonEngine* engine, const QString& path,
@@ -32,6 +34,8 @@ public:
 
 private:
   PythonEngine* engine_;
+
+  QString module_name_;
 };
 
 #endif // PYTHONSCRIPT_H

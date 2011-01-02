@@ -28,6 +28,8 @@ class PythonEngine : public LanguageEngine {
 public:
   PythonEngine(ScriptManager* manager);
 
+  static const char* kModulePrefix;
+
   ScriptManager::Language language() const { return ScriptManager::Language_Python; }
   QString name() const { return "python"; }
 

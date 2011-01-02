@@ -24,6 +24,8 @@
 
 #include <QFile>
 
+const char* PythonEngine::kModulePrefix = "clementinescripts";
+
 extern "C" {
   void initclementine();
 }
@@ -90,8 +92,7 @@ Script* PythonEngine::CreateScript(const QString& path,
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
     // Create a module for scripts
-    PyObject* scripts_module = PyImport_AddModule("clementinescripts");
-    Py_DECREF(scripts_module);
+    PyObject* scripts_module = PyImport_AddModule(kModulePrefix);
 
     // Run the startup script - this redirects sys.stdout and sys.stderr to our
     // log handler.

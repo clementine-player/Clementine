@@ -29,7 +29,8 @@
 PythonScript::PythonScript(PythonEngine* engine, const QString& path,
                            const QString& script_file, const QString& id)
   : Script(engine, path, script_file, id),
-    engine_(engine)
+    engine_(engine),
+    module_name_(QString(PythonEngine::kModulePrefix) + "." + id)
 {
 }
 
@@ -47,7 +48,7 @@ bool PythonScript::Init() {
 
   // Create a module for this script
   // TODO: allowed characters?
-  PyObject* module = PyImport_AddModule(("clementinescripts." + id()).toAscii().constData());
+  PyObject* module = PyImport_AddModule(module_name_.toAscii().constData());
   PyObject* dict = PyModule_GetDict(module);
 
   // Add __builtins__
@@ -85,9 +86,32 @@ bool PythonScript::Init() {
   return true;
 }
 
-
-
 bool PythonScript::Unload() {
-  // TODO: Actually do some cleanup
+  // Remove this module and all its children from sys.modules.  That should be
+  // the only place that references it, so this will clean up the modules'
+  // dict and all globals.
+  PyEval_AcquireLock();
+  PyInterpreterState *interp = PyThreadState_GET()->interp;
+  PyObject* modules = interp->modules;
+
+  QStringList keys_to_delete;
+
+  Py_ssize_t pos = 0;
+  PyObject* key;
+  PyObject* value;
+  while (PyDict_Next(modules, &pos, &key, &value)) {
+    const char* name = PyString_AS_STRING(key);
+    if (PyString_Check(key) && PyModule_Check(value)) {
+      if (QString(name).startsWith(module_name_)) {
+        keys_to_delete << name;
+      }
+    }
+  }
+
+  foreach (const QString& key, keys_to_delete) {
+    PyDict_DelItemString(modules, key.toAscii().constData());
+  }
+
+  PyEval_ReleaseLock();
   return true;
 }
