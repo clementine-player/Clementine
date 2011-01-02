@@ -507,7 +507,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 #if (defined(Q_OS_DARWIN) && defined(HAVE_SPARKLE)) || defined(Q_OS_WIN32)
   // Add check for updates item to application menu.
-  QAction* check_updates = ui_->menuTools->addAction(tr("Check for updates..."));
+  QAction* check_updates = ui_->menu_tools->addAction(tr("Check for updates..."));
   check_updates->setMenuRole(QAction::ApplicationSpecificRole);
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
 #endif
