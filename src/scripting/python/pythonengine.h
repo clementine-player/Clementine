@@ -20,22 +20,33 @@
 
 #include "scripting/languageengine.h"
 
+struct _object; // PyObject
+struct _sipAPIDef;
+struct _sipTypeDef;
+
 class PythonEngine : public LanguageEngine {
 public:
-  PythonEngine();
+  PythonEngine(ScriptManager* manager);
 
   ScriptManager::Language language() const { return ScriptManager::Language_Python; }
   QString name() const { return "python"; }
 
-  const ScriptManager::GlobalData& data() const { return data_; }
+  Script* CreateScript(const QString& path, const QString& script_file,
+                       const QString& id);
 
-  void Init(const ScriptManager::GlobalData& data);
-  Script* CreateScript(const QString& path, const QString& script_file);
+  const _sipAPIDef* sip_api() const { return sip_api_; }
+
+  void AddLogLine(const QString& message, bool error = false);
 
 private:
-  ScriptManager::GlobalData data_;
+  static const _sipAPIDef* GetSIPApi();
+  void AddObject(void* object, const _sipTypeDef* type, const char* name) const;
 
+private:
   bool initialised_;
+
+  _object* clementine_module_;
+  const _sipAPIDef* sip_api_;
 };
 
 #endif // PYTHONENGINE_H

@@ -59,6 +59,7 @@ public:
 private slots:
   void DataChanged(const QModelIndex& top_left, const QModelIndex& bottom_right);
   void CurrentChanged(const QModelIndex& index);
+  void LogLineAdded(const QString& html);
 
   void Enable();
   void Disable();

@@ -26,97 +26,64 @@
 #include <QtDebug>
 
 
-static const sipAPIDef* GetSIPApi() {
-#if defined(SIP_USE_PYCAPSULE)
-  return (const sipAPIDef *)PyCapsule_Import("sip._C_API", 0);
-#else
-  PyObject *sip_module;
-  PyObject *sip_module_dict;
-  PyObject *c_api;
-
-  /* Import the SIP module. */
-  sip_module = PyImport_ImportModule("sip");
-
-  if (sip_module == NULL)
-      return NULL;
-
-  /* Get the module's dictionary. */
-  sip_module_dict = PyModule_GetDict(sip_module);
-
-  /* Get the "_C_API" attribute. */
-  c_api = PyDict_GetItemString(sip_module_dict, "_C_API");
-
-  if (c_api == NULL)
-      return NULL;
-
-  /* Sanity check that it is the right type. */
-  if (!PyCObject_Check(c_api))
-      return NULL;
-
-  /* Get the actual pointer from the object. */
-  return (const sipAPIDef *)PyCObject_AsVoidPtr(c_api);
-#endif
-}
-
-
-PythonScript::PythonScript(PythonEngine* engine,
-                           const QString& path, const QString& script_file)
-  : Script(path, script_file),
-    engine_(engine),
-    interpreter_(NULL),
-    clementine_module_(NULL),
-    sip_api_(NULL)
+PythonScript::PythonScript(PythonEngine* engine, const QString& path,
+                           const QString& script_file, const QString& id)
+  : Script(engine, path, script_file, id),
+    engine_(engine)
 {
 }
 
 bool PythonScript::Init() {
+  engine_->AddLogLine("Loading script file \"" + script_file() + "\"", false);
+
   // Open the file
   QFile file(script_file());
   if (!file.open(QIODevice::ReadOnly)) {
-    qWarning() << "Error opening file:" << script_file();
+    engine_->AddLogLine("Could not open file", true);
     return false;
   }
 
-  // Create a python interpreter
   PyEval_AcquireLock();
-  interpreter_ = Py_NewInterpreter();
 
-  // Get the clementine module so we can put stuff in it
-  clementine_module_ = PyImport_ImportModule("clementine");
-  sip_api_ = GetSIPApi();
+  // Create a module for this script
+  // TODO: allowed characters?
+  PyObject* module = PyImport_AddModule(id().toAscii().constData());
+  PyObject* dict = PyModule_GetDict(module);
 
-  AddObject(engine_->data().player_, sipType_Player, "player");
-  AddObject(interface(), sipType_ScriptInterface, "script");
+  // Add __builtins__
+  PyObject* builtin_mod = PyImport_ImportModule("__builtin__");
+  PyModule_AddObject(module, "__builtins__", builtin_mod);
+  Py_DECREF(builtin_mod);
 
-  PyEval_ReleaseLock();
+  // Set __file__
+  PyModule_AddStringConstant(module, "__file__", script_file().toLocal8Bit().constData());
+
+  // Set script
+  PyObject* script = engine_->sip_api()->api_convert_from_type(
+        interface(), sipType_ScriptInterface, NULL);
+  PyModule_AddObject(module, "script", script);
 
   // Get a file stream from the file handle
   FILE* stream = fdopen(file.handle(), "r");
 
-  if (PyRun_SimpleFile(stream, script_file().toLocal8Bit().constData()) != 0) {
-    PyEval_AcquireLock();
-    Py_EndInterpreter(interpreter_);
+  // Run the script
+  PyObject* result = PyRun_File(
+      stream, script_file().toLocal8Bit().constData(), Py_file_input, dict, dict);
+  if (result == NULL) {
+    engine_->AddLogLine("Could not execute file", true);
+    PyErr_Print();
     PyEval_ReleaseLock();
-
-    interpreter_ = NULL;
     return false;
   }
 
+  Py_DECREF(result);
+  PyEval_ReleaseLock();
   return true;
 }
 
-void PythonScript::AddObject(void* object, const _sipTypeDef* type,
-                             const char * name) const {
-  PyObject* python_object = sip_api_->api_convert_from_type(object, type, NULL);
-  PyModule_AddObject(clementine_module_, name, python_object);
-}
+
 
 bool PythonScript::Unload() {
-  PyEval_AcquireLock();
-  PyThreadState_Swap(interpreter_);
-  Py_EndInterpreter(interpreter_);
-  PyEval_ReleaseLock();
-
-  interpreter_ = NULL;
+  // TODO: Actually do some cleanup
   return true;
 }

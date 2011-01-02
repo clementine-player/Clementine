@@ -20,20 +20,30 @@
 
 #include <QObject>
 
+#include <cstdlib>
+
+class Script;
+
 // An instance of this class is made available to each script
 class ScriptInterface : public QObject {
   Q_OBJECT
 
 public:
-  ScriptInterface(QObject* parent = 0);
+  ScriptInterface(Script* script, QObject* parent = 0);
 
 public slots:
   // Callable by C++
   void ShowSettingsDialog();
 
+  // Callable by the script
+  void AddLogLine(const QString& message, bool error = false);
+
 signals:
   // Scripts should connect to this and show a settings dialog
   void SettingsDialogRequested();
+
+private:
+  Script* script_;
 };
 
 #endif // SCRIPTINTERFACE_H

@@ -112,8 +112,13 @@ void ScriptDialog::SetManager(ScriptManager* manager) {
 
   connect(manager, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           SLOT(DataChanged(QModelIndex,QModelIndex)));
+  connect(manager, SIGNAL(LogLineAdded(QString)), SLOT(LogLineAdded(QString)));
   connect(ui_->list->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(CurrentChanged(QModelIndex)));
+
+  foreach (const QString& html, manager->log_lines()) {
+    LogLineAdded(html);
+  }
 }
 
 void ScriptDialog::CurrentChanged(const QModelIndex& index) {
@@ -150,4 +155,8 @@ void ScriptDialog::Settings() {
 
 void ScriptDialog::Details() {
 
+}
+
+void ScriptDialog::LogLineAdded(const QString& html) {
+  ui_->console->append(html);
 }

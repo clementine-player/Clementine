@@ -28,6 +28,7 @@
 
 #include <QDirIterator>
 #include <QSettings>
+#include <QTextDocument>
 #include <QtDebug>
 
 const char* ScriptManager::kSettingsGroup = "Scripts";
@@ -35,11 +36,10 @@ const char* ScriptManager::kIniFileName = "script.ini";
 const char* ScriptManager::kIniSettingsGroup = "Script";
 
 ScriptManager::ScriptManager(QObject* parent)
-  : QAbstractListModel(parent),
-    player_(NULL)
+  : QAbstractListModel(parent)
 {
 #ifdef HAVE_SCRIPTING_PYTHON
-  engines_ << new PythonEngine;
+  engines_ << new PythonEngine(this);
 #endif
 
   search_paths_ << Utilities::GetConfigPath(Utilities::Path_Scripts);
@@ -57,9 +57,7 @@ ScriptManager::~ScriptManager() {
 }
 
 void ScriptManager::Init(const GlobalData& data) {
-  foreach (LanguageEngine* engine, engines_) {
-    engine->Init(data);
-  }
+  data_ = data;
 
   // Load settings
   LoadSettings();
@@ -158,7 +156,7 @@ ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) {
 
   if (enabled_scripts_.contains(id)) {
     // Load the script if it's enabled
-    ret.loaded_ = engine->CreateScript(path, ret.script_file_);
+    ret.loaded_ = engine->CreateScript(path, ret.script_file_, ret.id_);
     if (!ret.loaded_) {
       // Failed to load?  Disable it so we don't try again
       enabled_scripts_.remove(id);
@@ -227,7 +225,7 @@ void ScriptManager::Enable(const QModelIndex& index) {
   }
 
   // Load the script
-  info->loaded_ = engine->CreateScript(info->path_, info->script_file_);
+  info->loaded_ = engine->CreateScript(info->path_, info->script_file_, info->id_);
 
   // If it loaded correctly then automatically load it in the future
   if (info->loaded_) {
@@ -265,4 +263,21 @@ void ScriptManager::ShowSettingsDialog(const QModelIndex& index) {
     return;
 
   info->loaded_->interface()->ShowSettingsDialog();
+}
+
+void ScriptManager::AddLogLine(const QString& who, const QString& message, bool error) {
+  foreach (const QString& line, message.split("\n", QString::SkipEmptyParts)) {
+    QString plain = "[" + who + "] " + line;
+    QString html = "<b>[" + Qt::escape(who) + "]</b> " + Qt::escape(line);
+    html.replace(' ', "&nbsp;");
+
+    if (error) {
+      html = "<font color=\"red\">" + html + "</font>";
+    }
+
+    log_lines_ << html;
+    emit LogLineAdded(html);
+
+    qDebug() << plain.toLocal8Bit().constData();
+  }
 }

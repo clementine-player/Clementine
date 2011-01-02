@@ -18,10 +18,13 @@
 #include "script.h"
 #include "scriptinterface.h"
 
-Script::Script(const QString& path, const QString& script_file)
-  : interface_(new ScriptInterface),
+Script::Script(LanguageEngine* language, const QString& path,
+               const QString& script_file, const QString& id)
+  : interface_(new ScriptInterface(this)),
+    language_(language),
     path_(path),
-    script_file_(script_file)
+    script_file_(script_file),
+    id_(id)
 {
 }
 

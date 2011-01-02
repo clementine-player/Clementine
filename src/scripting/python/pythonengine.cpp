@@ -16,42 +16,111 @@
 */
 
 #include <Python.h>
+#include <sip.h>
 
 #include "pythonengine.h"
 #include "pythonscript.h"
+#include "sipAPIclementine.h"
+
+#include <QFile>
 
 extern "C" {
   void initclementine();
 }
 
-PythonEngine::PythonEngine()
-  : initialised_(false)
+PythonEngine::PythonEngine(ScriptManager* manager)
+  : LanguageEngine(manager),
+    initialised_(false)
 {
 }
 
-void PythonEngine::Init(const ScriptManager::GlobalData& data) {
-  data_ = data;
+const sipAPIDef* PythonEngine::GetSIPApi() {
+#if defined(SIP_USE_PYCAPSULE)
+  return (const sipAPIDef *)PyCapsule_Import("sip._C_API", 0);
+#else
+  PyObject *sip_module;
+  PyObject *sip_module_dict;
+  PyObject *c_api;
+
+  /* Import the SIP module. */
+  sip_module = PyImport_ImportModule("sip");
+
+  if (sip_module == NULL)
+      return NULL;
+
+  /* Get the module's dictionary. */
+  sip_module_dict = PyModule_GetDict(sip_module);
+
+  /* Get the "_C_API" attribute. */
+  c_api = PyDict_GetItemString(sip_module_dict, "_C_API");
+
+  if (c_api == NULL)
+      return NULL;
+
+  /* Sanity check that it is the right type. */
+  if (!PyCObject_Check(c_api))
+      return NULL;
+
+  /* Get the actual pointer from the object. */
+  return (const sipAPIDef *)PyCObject_AsVoidPtr(c_api);
+#endif
 }
 
-Script* PythonEngine::CreateScript(const QString& path, const QString& script_file) {
+Script* PythonEngine::CreateScript(const QString& path,
+                                   const QString& script_file,
+                                   const QString& id) {
   // Initialise Python if it hasn't been done yet
   if (!initialised_) {
+    AddLogLine("Initialising python...", false);
+
     // Add the Clementine builtin module
     PyImport_AppendInittab(const_cast<char*>("clementine"), initclementine);
 
+    // Initialise python
     Py_SetProgramName(const_cast<char*>("clementine"));
     PyEval_InitThreads();
     Py_InitializeEx(0);
+
+    // Get the clementine module so we can put stuff in it
+    clementine_module_ = PyImport_ImportModule("clementine");
+    sip_api_ = GetSIPApi();
+
+    // Add objects to the module
+    AddObject(manager()->data().player_, sipType_Player, "player");
+    AddObject(this, sipType_PythonEngine, "pythonengine");
+
+    // Run the startup script - this redirects sys.stdout and sys.stderr to our
+    // log handler.
+    QFile python_startup(":pythonstartup.py");
+    python_startup.open(QIODevice::ReadOnly);
+    QByteArray python_startup_script = python_startup.readAll();
+
+    if (PyRun_SimpleString(python_startup_script.constData()) != 0) {
+      AddLogLine("Could not execute startup code", true);
+      Py_Finalize();
+      return NULL;
+    }
+
     PyEval_ReleaseLock();
 
     initialised_ = true;
   }
 
-  Script* ret = new PythonScript(this, path, script_file);
+  Script* ret = new PythonScript(this, path, script_file, id);
   if (ret->Init()) {
     return ret;
   }
 
   delete ret;
   return NULL;
+}
+
+void PythonEngine::AddObject(void* object, const _sipTypeDef* type,
+                             const char * name) const {
+  PyObject* python_object = sip_api_->api_convert_from_type(object, type, NULL);
+  PyModule_AddObject(clementine_module_, name, python_object);
+}
+
+void PythonEngine::AddLogLine(const QString& message, bool error) {
+  manager()->AddLogLine("Python", message, error);
 }

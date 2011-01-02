@@ -16,3 +16,8 @@
 */
 
 #include "languageengine.h"
+
+LanguageEngine::LanguageEngine(ScriptManager* manager)
+  : manager_(manager)
+{
+}

@@ -22,16 +22,19 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class LanguageEngine;
 class ScriptInterface;
 
 class Script {
 public:
-  Script(const QString& path, const QString& script_file);
+  Script(LanguageEngine* language, const QString& path,
+         const QString& script_file, const QString& id);
   virtual ~Script();
 
+  LanguageEngine* language() const { return language_; }
   const QString& path() const { return path_; }
   const QString& script_file() const { return script_file_; }
-
+  const QString& id() const { return id_; }
   ScriptInterface* interface() const { return interface_.get(); }
 
   virtual bool Init() = 0;
@@ -43,8 +46,10 @@ protected:
 private:
   Q_DISABLE_COPY(Script);
 
+  LanguageEngine* language_;
   QString path_;
   QString script_file_;
+  QString id_;
 };
 
 #endif // SCRIPT_H

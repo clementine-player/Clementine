@@ -62,14 +62,23 @@ public:
   static const char* kIniSettingsGroup;
 
   void Init(const GlobalData& data);
+  const GlobalData& data() const { return data_; }
 
   void Enable(const QModelIndex& index);
   void Disable(const QModelIndex& index);
   void ShowSettingsDialog(const QModelIndex& index);
 
+  QStringList log_lines() const { return log_lines_; }
+
   // QAbstractListModel
   int rowCount(const QModelIndex& parent = QModelIndex()) const;
   QVariant data(const QModelIndex& index, int role) const;
+
+public slots:
+  void AddLogLine(const QString& who, const QString& message, bool error);
+
+signals:
+  void LogLineAdded(const QString& html);
 
 private:
   struct ScriptInfo {
@@ -101,14 +110,21 @@ private:
   LanguageEngine* EngineForLanguage(Language language) const;
 
 private:
+  // Language engines
   QList<LanguageEngine*> engines_;
 
+  // All scripts we know about
   QStringList search_paths_;
   QList<ScriptInfo> info_;
 
+  // Names of scripts that get loaded automatically
   QSet<QString> enabled_scripts_;
 
-  Player* player_;
+  // HTML log messages
+  QStringList log_lines_;
+
+  // Things available to scripts
+  GlobalData data_;
 };
 
 #endif // SCRIPTMANAGER_H

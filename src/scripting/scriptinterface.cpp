@@ -15,13 +15,20 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "languageengine.h"
+#include "script.h"
 #include "scriptinterface.h"
 
-ScriptInterface::ScriptInterface(QObject* parent)
-  : QObject(parent)
+ScriptInterface::ScriptInterface(Script* script, QObject* parent)
+  : QObject(parent),
+    script_(script)
 {
 }
 
 void ScriptInterface::ShowSettingsDialog() {
   emit SettingsDialogRequested();
+}
+
+void ScriptInterface::AddLogLine(const QString& message, bool error) {
+  script_->language()->manager()->AddLogLine(script_->id(), message, error);
 }
