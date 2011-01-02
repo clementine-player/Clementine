@@ -43,6 +43,7 @@ public slots:
 protected:
   void mouseReleaseEvent(QMouseEvent*);
   void resizeEvent(QResizeEvent* e);
+  void wheelEvent(QWheelEvent* e);
 
 private slots:
   void ScrollBarReleased();

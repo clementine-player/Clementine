@@ -159,3 +159,8 @@ void PrettyImageView::resizeEvent(QResizeEvent* e) {
   QScrollArea::resizeEvent(e);
   ScrollTo(current_index_, false);
 }
+
+void PrettyImageView::wheelEvent(QWheelEvent* e) {
+  const int d = e->delta() > 0 ? 1 : -1;
+  ScrollTo(current_index_ + d, true);
+}
