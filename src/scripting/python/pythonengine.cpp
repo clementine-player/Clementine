@@ -85,6 +85,14 @@ Script* PythonEngine::CreateScript(const QString& path,
 
     // Get the clementine module so we can put stuff in it
     clementine_module_ = PyImport_ImportModule("clementine");
+    if (!clementine_module_) {
+      AddLogLine("Failed to import the clementine module", true);
+      if (PyErr_Occurred()) {
+        PyErr_Print();
+      }
+      Py_Finalize();
+      return NULL;
+    }
     sip_api_ = GetSIPApi();
 
     // Add objects to the module
