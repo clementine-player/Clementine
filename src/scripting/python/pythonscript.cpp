@@ -47,16 +47,20 @@ bool PythonScript::Init() {
 
   // Create a module for this script
   // TODO: allowed characters?
-  PyObject* module = PyImport_AddModule(id().toAscii().constData());
+  PyObject* module = PyImport_AddModule(("clementinescripts." + id()).toAscii().constData());
   PyObject* dict = PyModule_GetDict(module);
 
   // Add __builtins__
   PyObject* builtin_mod = PyImport_ImportModule("__builtin__");
   PyModule_AddObject(module, "__builtins__", builtin_mod);
-  Py_DECREF(builtin_mod);
 
   // Set __file__
   PyModule_AddStringConstant(module, "__file__", script_file().toLocal8Bit().constData());
+
+  // Set __path__
+  PyObject* __path__ = PyList_New(1);
+  PyList_SetItem(__path__, 0, PyString_FromString(path().toLocal8Bit().constData()));
+  PyModule_AddObject(module, "__path__", __path__);
 
   // Set script
   PyObject* script = engine_->sip_api()->api_convert_from_type(
@@ -67,8 +71,8 @@ bool PythonScript::Init() {
   FILE* stream = fdopen(file.handle(), "r");
 
   // Run the script
-  PyObject* result = PyRun_File(
-      stream, script_file().toLocal8Bit().constData(), Py_file_input, dict, dict);
+  PyObject* result = PyRun_File(stream,
+      script_file().toLocal8Bit().constData(), Py_file_input, dict, dict);
   if (result == NULL) {
     engine_->AddLogLine("Could not execute file", true);
     PyErr_Print();
