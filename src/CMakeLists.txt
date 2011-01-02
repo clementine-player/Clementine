@@ -696,12 +696,14 @@ if(HAVE_SCRIPTING)
     scripting/scriptdialogtabwidget.cpp
     scripting/scriptinterface.cpp
     scripting/scriptmanager.cpp
+    scripting/uiinterface.cpp
   )
   list(APPEND HEADERS
     scripting/scriptdialog.h
     scripting/scriptdialogtabwidget.h
     scripting/scriptinterface.h
     scripting/scriptmanager.h
+    scripting/uiinterface.h
   )
   list(APPEND UI
     scripting/scriptdialog.ui

@@ -30,3 +30,7 @@ Script::Script(LanguageEngine* language, const QString& path,
 
 Script::~Script() {
 }
+
+void Script::AddNativeObject(QObject* object) {
+  native_objects_ << object;
+}

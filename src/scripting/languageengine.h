@@ -34,6 +34,7 @@ public:
 
   virtual Script* CreateScript(const QString& path, const QString& script_file,
                                const QString& id) = 0;
+  virtual void DestroyScript(Script* script) = 0;
 
 private:
   ScriptManager* manager_;

@@ -19,6 +19,8 @@
 #include "script.h"
 #include "scriptinterface.h"
 
+#include <QDebug>
+
 ScriptInterface::ScriptInterface(Script* script, QObject* parent)
   : QObject(parent),
     script_(script)
@@ -27,8 +29,4 @@ ScriptInterface::ScriptInterface(Script* script, QObject* parent)
 
 void ScriptInterface::ShowSettingsDialog() {
   emit SettingsDialogRequested();
-}
-
-void ScriptInterface::AddLogLine(const QString& message, bool error) {
-  script_->language()->manager()->AddLogLine(script_->id(), message, error);
 }

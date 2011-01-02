@@ -27,6 +27,9 @@ struct _sipTypeDef;
 class PythonEngine : public LanguageEngine {
 public:
   PythonEngine(ScriptManager* manager);
+  ~PythonEngine();
+
+  static PythonEngine* instance() { return sInstance; }
 
   static const char* kModulePrefix;
 
@@ -35,20 +38,32 @@ public:
 
   Script* CreateScript(const QString& path, const QString& script_file,
                        const QString& id);
+  void DestroyScript(Script* script);
 
   const _sipAPIDef* sip_api() const { return sip_api_; }
 
   void AddLogLine(const QString& message, bool error = false);
+  void RegisterNativeObject(QObject* object);
 
 private:
   static const _sipAPIDef* GetSIPApi();
   void AddObject(void* object, const _sipTypeDef* type, const char* name) const;
 
-private:
-  bool initialised_;
+  // Looks for a loaded script whose ID either exactly matches id, or matches
+  // some string at the start of id followed by a dot.  For example,
+  // FindScriptMatchingId("foo") and FindScriptMatchingId("foo.bar") would both
+  // match a Script with an ID of foo, but FindScriptMatchingId("foobar")
+  // would not.
+  Script* FindScriptMatchingId(const QString& id) const;
 
+private:
+  static PythonEngine* sInstance;
+
+  bool initialised_;
   _object* clementine_module_;
   const _sipAPIDef* sip_api_;
+
+  QMap<QString, Script*> loaded_scripts_;
 };
 
 #endif // PYTHONENGINE_H

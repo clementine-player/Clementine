@@ -393,7 +393,7 @@
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuMusic">
+   <widget class="QMenu" name="menu_music">
     <property name="title">
      <string>Music</string>
     </property>
@@ -411,7 +411,7 @@
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
-   <widget class="QMenu" name="menuPlaylist">
+   <widget class="QMenu" name="menu_playlist">
     <property name="title">
      <string>Playlist</string>
     </property>
@@ -430,14 +430,14 @@
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menu_help">
     <property name="title">
      <string>Help</string>
     </property>
     <addaction name="action_about"/>
     <addaction name="action_about_qt"/>
    </widget>
-   <widget class="QMenu" name="menuExtras">
+   <widget class="QMenu" name="menu_extras">
     <property name="title">
      <string>Extras</string>
     </property>
@@ -445,7 +445,7 @@
     <addaction name="action_hypnotoad"/>
     <addaction name="action_kittens"/>
    </widget>
-   <widget class="QMenu" name="menuTools">
+   <widget class="QMenu" name="menu_tools">
     <property name="title">
      <string>Tools</string>
     </property>
@@ -460,11 +460,11 @@
     <addaction name="separator"/>
     <addaction name="action_configure"/>
    </widget>
-   <addaction name="menuMusic"/>
-   <addaction name="menuPlaylist"/>
-   <addaction name="menuTools"/>
-   <addaction name="menuExtras"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menu_music"/>
+   <addaction name="menu_playlist"/>
+   <addaction name="menu_tools"/>
+   <addaction name="menu_extras"/>
+   <addaction name="menu_help"/>
   </widget>
   <action name="action_previous_track">
    <property name="text">

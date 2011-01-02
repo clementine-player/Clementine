@@ -27,6 +27,7 @@ class LanguageEngine;
 class Player;
 class PlaylistManager;
 class Script;
+class UIInterface;
 
 class ScriptManager : public QAbstractListModel {
   Q_OBJECT
@@ -68,6 +69,7 @@ public:
 
   void Init(const GlobalData& data);
   const GlobalData& data() const { return data_; }
+  UIInterface* ui() const { return ui_interface_; }
 
   void Enable(const QModelIndex& index);
   void Disable(const QModelIndex& index);
@@ -130,6 +132,7 @@ private:
 
   // Things available to scripts
   GlobalData data_;
+  UIInterface* ui_interface_;
 };
 
 #endif // SCRIPTMANAGER_H

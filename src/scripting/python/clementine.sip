@@ -11,3 +11,4 @@
 %Include pythonengine.sip
 %Include scriptinterface.sip
 %Include song.sip
+%Include uiinterface.sip

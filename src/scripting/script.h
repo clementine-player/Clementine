@@ -18,12 +18,15 @@
 #ifndef SCRIPT_H
 #define SCRIPT_H
 
+#include <QList>
 #include <QString>
 
 #include <boost/scoped_ptr.hpp>
 
 class LanguageEngine;
 class ScriptInterface;
+
+class QObject;
 
 class Script {
 public:
@@ -37,15 +40,20 @@ public:
   const QString& id() const { return id_; }
   ScriptInterface* interface() const { return interface_.get(); }
 
+  // The script can "own" QObjects like QActions that must be deleted (and
+  // removed from the UI, etc.) when the script is unloaded.
+  void AddNativeObject(QObject* object);
+
   virtual bool Init() = 0;
   virtual bool Unload() = 0;
 
 protected:
-  boost::scoped_ptr<ScriptInterface> interface_;
+  QList<QObject*> native_objects_;
 
 private:
   Q_DISABLE_COPY(Script);
 
+  boost::scoped_ptr<ScriptInterface> interface_;
   LanguageEngine* language_;
   QString path_;
   QString script_file_;

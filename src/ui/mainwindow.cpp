@@ -99,6 +99,7 @@
 #ifdef HAVE_SCRIPTING
 # include "scripting/scriptdialog.h"
 # include "scripting/scriptmanager.h"
+# include "scripting/uiinterface.h"
 #endif
 
 #include <QCloseEvent>
@@ -640,12 +641,12 @@ MainWindow::MainWindow(QWidget* parent)
 #endif
 
 #ifdef HAVE_SCRIPTING
+  scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
   scripts_->Init(ScriptManager::GlobalData(player_, playlists_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 #else
   ui_->action_script_manager->setEnabled(false);
 #endif
-
 }
 
 MainWindow::~MainWindow() {

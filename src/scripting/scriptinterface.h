@@ -35,9 +35,6 @@ public slots:
   // Callable by C++
   void ShowSettingsDialog();
 
-  // Callable by the script
-  void AddLogLine(const QString& message, bool error = false);
-
 signals:
   // Scripts should connect to this and show a settings dialog
   void SettingsDialogRequested();

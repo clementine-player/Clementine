@@ -16,6 +16,7 @@
 */
 
 #include <Python.h>
+#include <frameobject.h>
 #include <sip.h>
 
 #include "pythonengine.h"
@@ -23,8 +24,10 @@
 #include "sipAPIclementine.h"
 
 #include <QFile>
+#include <QtDebug>
 
 const char* PythonEngine::kModulePrefix = "clementinescripts";
+PythonEngine* PythonEngine::sInstance = NULL;
 
 extern "C" {
   void initclementine();
@@ -34,6 +37,12 @@ PythonEngine::PythonEngine(ScriptManager* manager)
   : LanguageEngine(manager),
     initialised_(false)
 {
+  Q_ASSERT(sInstance == NULL);
+  sInstance = this;
+}
+
+PythonEngine::~PythonEngine() {
+  sInstance = NULL;
 }
 
 const sipAPIDef* PythonEngine::GetSIPApi() {
@@ -98,6 +107,7 @@ Script* PythonEngine::CreateScript(const QString& path,
     // Add objects to the module
     AddObject(manager()->data().player_, sipType_Player, "player");
     AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
+    AddObject(manager()->ui(), sipType_UIInterface, "ui");
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
     // Create a module for scripts
@@ -121,13 +131,19 @@ Script* PythonEngine::CreateScript(const QString& path,
   }
 
   Script* ret = new PythonScript(this, path, script_file, id);
+  loaded_scripts_[id] = ret; // Used by RegisterNativeObject during startup
   if (ret->Init()) {
     return ret;
   }
 
-  ret->Unload();
-  delete ret;
+  DestroyScript(ret);
   return NULL;
+}
+
+void PythonEngine::DestroyScript(Script* script) {
+  loaded_scripts_.remove(script->id());
+  script->Unload();
+  delete script;
 }
 
 void PythonEngine::AddObject(void* object, const _sipTypeDef* type,
@@ -138,4 +154,49 @@ void PythonEngine::AddObject(void* object, const _sipTypeDef* type,
 
 void PythonEngine::AddLogLine(const QString& message, bool error) {
   manager()->AddLogLine("Python", message, error);
+}
+
+Script* PythonEngine::FindScriptMatchingId(const QString& id) const {
+  foreach (const QString& script_id, loaded_scripts_.keys()) {
+    if (script_id == id || id.startsWith(script_id + ".")) {
+      return loaded_scripts_[script_id];
+    }
+  }
+  return NULL;
+}
+
+void PythonEngine::RegisterNativeObject(QObject* object) {
+  // This function is called from Python, we need to figure out which script
+  // called it, so we look at the __package__ variable in the bottom stack
+  // frame.
+
+  PyFrameObject* frame = PyEval_GetFrame();
+  if (!frame) {
+    qWarning() << __PRETTY_FUNCTION__ << "unable to get stack frame";
+    return;
+  }
+  while (frame->f_back) {
+    frame = frame->f_back;
+  }
+
+  PyObject* __package__ = PyMapping_GetItemString(
+      frame->f_globals, const_cast<char*>("__package__"));
+  if (!__package__) {
+    qWarning() << __PRETTY_FUNCTION__ << "unable to get __package__";
+    return;
+  }
+
+  QString package = PyString_AsString(__package__);
+  Py_DECREF(__package__);
+  package.remove(QString(kModulePrefix) + ".");
+
+  Script* script = FindScriptMatchingId(package);
+  if (!script) {
+    qWarning() << __PRETTY_FUNCTION__ << "unable to find script for package" << package;
+    return;
+  }
+
+  // Finally got the script - tell it about this object so it will get destroyed
+  // when the script is unloaded.
+  script->AddNativeObject(object);
 }

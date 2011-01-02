@@ -20,6 +20,7 @@
 #include "script.h"
 #include "scriptinterface.h"
 #include "scriptmanager.h"
+#include "uiinterface.h"
 #include "core/utilities.h"
 
 #ifdef HAVE_SCRIPTING_PYTHON
@@ -36,7 +37,8 @@ const char* ScriptManager::kIniFileName = "script.ini";
 const char* ScriptManager::kIniSettingsGroup = "Script";
 
 ScriptManager::ScriptManager(QObject* parent)
-  : QAbstractListModel(parent)
+  : QAbstractListModel(parent),
+    ui_interface_(new UIInterface(this))
 {
 #ifdef HAVE_SCRIPTING_PYTHON
   engines_ << new PythonEngine(this);
@@ -48,8 +50,7 @@ ScriptManager::ScriptManager(QObject* parent)
 ScriptManager::~ScriptManager() {
   foreach (const ScriptInfo& info, info_) {
     if (info.loaded_) {
-      info.loaded_->Unload();
-      delete info.loaded_;
+      info.loaded_->language()->DestroyScript(info.loaded_);
     }
   }
 
@@ -244,8 +245,7 @@ void ScriptManager::Disable(const QModelIndex& index) {
   if (!info->loaded_)
     return;
 
-  info->loaded_->Unload();
-  delete info->loaded_;
+  info->loaded_->language()->DestroyScript(info->loaded_);
   info->loaded_ = NULL;
 
   enabled_scripts_.remove(info->id_);

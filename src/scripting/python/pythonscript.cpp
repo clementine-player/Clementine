@@ -111,7 +111,10 @@ bool PythonScript::Unload() {
   foreach (const QString& key, keys_to_delete) {
     PyDict_DelItemString(modules, key.toAscii().constData());
   }
-
   PyEval_ReleaseLock();
+
+  // Delete any native objects this script created
+  qDeleteAll(native_objects_);
+
   return true;
 }
