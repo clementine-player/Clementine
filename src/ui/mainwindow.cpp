@@ -580,6 +580,8 @@ MainWindow::MainWindow(QWidget* parent)
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Add places where scripts can make actions
+  scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_update_library);
+  scripts_->ui()->RegisterActionLocation("extras_menu", ui_->menu_extras, NULL);
   scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
 
   // Load theme
