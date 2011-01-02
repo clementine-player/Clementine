@@ -243,10 +243,14 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   QIcon artist_icon_;
   QIcon album_icon_;
+  // used as a generic icon to show when no cover art is found,
+  // fixed to the same size as the artwork (32x32)
+  QImage no_cover_icon_pretty_;
   QIcon no_cover_icon_;
   QIcon playlists_dir_icon_;
   QIcon playlist_icon_;
   
+  QSize pretty_cover_size_;
   bool use_pretty_covers_;
 };
 

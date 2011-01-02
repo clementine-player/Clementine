@@ -62,6 +62,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
     no_cover_icon_(":nocover.png"),
     playlists_dir_icon_(IconLoader::Load("folder-sound")),
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
+    pretty_cover_size_(32, 32),
     use_pretty_covers_(false)
 {
   root_->lazy_loaded = true;
@@ -69,6 +70,11 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
   group_by_[0] = GroupBy_Artist;
   group_by_[1] = GroupBy_Album;
   group_by_[2] = GroupBy_None;
+  
+  no_cover_icon_pretty_ = QImage(":nocover.png").scaled(pretty_cover_size_,
+                                                    Qt::KeepAspectRatio,
+                                                    Qt::SmoothTransformation);
+
 }
 
 LibraryModel::~LibraryModel() {
@@ -352,7 +358,7 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index, int role) const {
   // Cache the art in the item's metadata field
   LibraryItem* item = IndexToItem(index);
   if (!item)
-    return album_icon_;
+    return no_cover_icon_pretty_;
   if (!item->metadata.image().isNull())
     return item->metadata.image();
   
@@ -364,12 +370,12 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index, int role) const {
 
     if (!pixmap.isNull()) {
       QImage image = pixmap.toImage().scaled(
-            32, 32, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            pretty_cover_size_, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
       item->metadata.set_image(image);
       return image;
     }
   }
-  return album_icon_;
+  return no_cover_icon_pretty_;
 }
 
 QVariant LibraryModel::data(const QModelIndex& index, int role) const {
