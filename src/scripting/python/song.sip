@@ -132,3 +132,4 @@ public:
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;
 };
+typedef QList<Song> SongList;

@@ -25,6 +25,7 @@
 
 class LanguageEngine;
 class Player;
+class PlaylistManager;
 class Script;
 
 class ScriptManager : public QAbstractListModel {
@@ -51,10 +52,14 @@ public:
   };
 
   struct GlobalData {
-    GlobalData() : player_(NULL) {}
-    GlobalData(Player* player) : player_(player) {}
+    GlobalData() {}
+    GlobalData(Player* player, PlaylistManager* playlists)
+      : player_(player),
+        playlists_(playlists)
+    {}
 
     Player* player_;
+    PlaylistManager* playlists_;
   };
 
   static const char* kSettingsGroup;

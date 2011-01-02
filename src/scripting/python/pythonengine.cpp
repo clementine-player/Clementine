@@ -89,6 +89,7 @@ Script* PythonEngine::CreateScript(const QString& path,
 
     // Add objects to the module
     AddObject(manager()->data().player_, sipType_Player, "player");
+    AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
     // Create a module for scripts

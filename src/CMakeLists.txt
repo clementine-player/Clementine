@@ -723,6 +723,7 @@ if(HAVE_SCRIPTING)
       ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
       ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
       ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
     )
   endif(HAVE_SCRIPTING_PYTHON)
 endif(HAVE_SCRIPTING)
