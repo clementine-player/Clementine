@@ -32,7 +32,7 @@
 #include <QMimeData>
 #include <QtDebug>
 
-QMap<QString, RadioService*> RadioModel::sServices;
+QMap<QString, RadioService*>* RadioModel::sServices = NULL;
 
 RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
                        TaskManager* task_manager, QObject* parent)
@@ -41,7 +41,10 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
     merged_model_(new MergedProxyModel(this)),
     task_manager_(task_manager)
 {
-  Q_ASSERT(sServices.isEmpty());
+  if (!sServices) {
+    sServices = new QMap<QString, RadioService*>;
+  }
+  Q_ASSERT(sServices->isEmpty());
 
   root_->lazy_loaded = true;
   merged_model_->setSourceModel(this);
@@ -57,7 +60,7 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
 }
 
 void RadioModel::AddService(RadioService *service) {
-  sServices[service->name()] = service;
+  sServices->insert(service->name(), service);
   service->CreateRootItem(root_);
 
   connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));
@@ -69,8 +72,8 @@ void RadioModel::AddService(RadioService *service) {
 }
 
 RadioService* RadioModel::ServiceByName(const QString& name) {
-  if (sServices.contains(name))
-    return sServices[name];
+  if (sServices->contains(name))
+    return sServices->value(name);
   return NULL;
 }
 
@@ -146,9 +149,7 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
 
 #ifdef HAVE_LIBLASTFM
 LastFMService* RadioModel::GetLastFMService() const {
-  if (sServices.contains(LastFMService::kServiceName))
-    return static_cast<LastFMService*>(sServices[LastFMService::kServiceName]);
-  return NULL;
+  return Service<LastFMService>();
 }
 #endif
 
@@ -159,7 +160,7 @@ void RadioModel::ShowContextMenu(RadioItem* item, const QModelIndex& index,
 }
 
 void RadioModel::ReloadSettings() {
-  foreach (RadioService* service, sServices.values()) {
+  foreach (RadioService* service, sServices->values()) {
     service->ReloadSettings();
   }
 }

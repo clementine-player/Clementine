@@ -39,7 +39,7 @@ class TaskManager;
 class RadioModel : public SimpleTreeModel<RadioItem> {
   Q_OBJECT
 
- public:
+public:
   RadioModel(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
              QObject* parent = 0);
 
@@ -54,10 +54,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
 
   template<typename T>
   static T* Service() {
-    if (sServices.contains(T::kServiceName)) {
-      return static_cast<T*>(sServices[T::kServiceName]);
-    }
-    return NULL;
+    return static_cast<T*>(ServiceByName(T::kServiceName));
   }
 
   // This is special because Player needs it for scrobbling
@@ -79,7 +76,7 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   MergedProxyModel* merged_model() const { return merged_model_; }
   TaskManager* task_manager() const { return task_manager_; }
 
- signals:
+signals:
   void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
@@ -88,15 +85,15 @@ class RadioModel : public SimpleTreeModel<RadioItem> {
   void AddItemToPlaylist(RadioItem* item, bool clear_first);
   void AddItemsToPlaylist(const PlaylistItemList& items, bool clear_first);
 
- protected:
+protected:
   void LazyPopulate(RadioItem* parent);
 
- private:
+private:
   QVariant data(const RadioItem* item, int role) const;
   void AddService(RadioService* service);
 
- private:
-  static QMap<QString, RadioService*> sServices;
+private:
+  static QMap<QString, RadioService*>* sServices;
   BackgroundThread<Database>* db_thread_;
   MergedProxyModel* merged_model_;
   TaskManager* task_manager_;
