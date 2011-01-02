@@ -179,6 +179,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void ShowLibraryConfig();
   void ReloadSettings();
+  void ReloadAllSettings();
   void SetHiddenInTray() { SetHiddenInTray(true); }
 
   void AddFile();

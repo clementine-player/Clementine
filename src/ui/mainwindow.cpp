@@ -669,8 +669,24 @@ void MainWindow::ReloadSettings() {
 
   QSettings library_settings;
   library_settings.beginGroup(LibraryView::kSettingsGroup);
-
   autoclear_playlist_ = library_settings.value("autoclear_playlist", false).toBool();
+}
+
+void MainWindow::ReloadAllSettings() {
+  ReloadSettings();
+
+  // Other settings
+  library_->ReloadSettings();
+  player_->ReloadSettings();
+  osd_->ReloadSettings();
+  library_view_->view()->ReloadSettings();
+  song_info_view_->ReloadSettings();
+  player_->engine()->ReloadSettings();
+  ui_->playlist->view()->ReloadSettings();
+  radio_model_->ReloadSettings();
+#ifdef ENABLE_WIIMOTEDEV
+  wiimotedev_shortcuts_->ReloadSettings();
+#endif
 }
 
 void MainWindow::AddFilesToPlaylist(const QList<QUrl>& urls) {
@@ -1676,16 +1692,9 @@ void MainWindow::EnsureSettingsDialogCreated() {
   settings_dialog_->SetSongInfoView(song_info_view_);
 
   // Settings
-  connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), library_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), player_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), osd_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), library_view_->view(), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), song_info_view_, SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), player_->engine(), SLOT(ReloadSettings()));
-  connect(settings_dialog_.get(), SIGNAL(accepted()), ui_->playlist->view(), SLOT(ReloadSettings()));
+  connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadAllSettings()));
+
 #ifdef ENABLE_WIIMOTEDEV
-  connect(settings_dialog_.get(), SIGNAL(accepted()), wiimotedev_shortcuts_.get(), SLOT(ReloadSettings()));
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 }
