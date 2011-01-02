@@ -64,6 +64,7 @@ const char* GstEngine::kHypnotoadPipeline =
       "band0=-24 band1=-3 band2=7.5 band3=12 band4=8 "
       "band5=6 band6=5 band7=6 band8=0 band9=-24";
 
+// TODO: weird analyzer problems with .cues
 
 GstEngine::GstEngine()
   : Engine::Base(),
@@ -266,16 +267,17 @@ uint GstEngine::position() const {
   if (!current_pipeline_)
     return 0;
 
-  return uint(current_pipeline_->position() / GST_MSECOND);
+  int result = (current_pipeline_->position() / GST_MSECOND) - beginning_;
+  return uint(qMax(0, result));
 }
 
 uint GstEngine::length() const {
   if (!current_pipeline_)
     return 0;
 
-  return uint(current_pipeline_->length() / GST_MSECOND);
+  int result = end_ - beginning_;
+  return uint(qMax(0, result));
 }
-
 
 Engine::State GstEngine::state() const {
   if (!current_pipeline_)
@@ -439,10 +441,11 @@ QUrl GstEngine::FixupUrl(const QUrl& url) {
   return copy;
 }
 
-bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change) {
+bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change,
+                     uint beginning, int end) {
   EnsureInitialised();
 
-  Engine::Base::Load(url, change);
+  Engine::Base::Load(url, change, beginning, end);
 
   // Clementine just crashes when asked to load a file that doesn't exist on
   // Windows, so check for that here.  This is definitely the wrong place for
@@ -503,7 +506,7 @@ void GstEngine::StartFadeout() {
 }
 
 
-bool GstEngine::Play( uint offset ) {
+bool GstEngine::Play(uint offset) {
   EnsureInitialised();
 
   if (!current_pipeline_)
@@ -522,7 +525,9 @@ void GstEngine::PlayDone() {
   BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
       static_cast<BoundFutureWatcher<GstStateChangeReturn, uint>*>(sender());
   watcher->deleteLater();
+
   GstStateChangeReturn ret = watcher->result();
+  uint offset = watcher->data();
 
   if (!current_pipeline_)
     return;
@@ -533,7 +538,7 @@ void GstEngine::PlayDone() {
     if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
       qDebug() << "Redirecting to" << redirect_url;
       current_pipeline_ = CreatePipeline(redirect_url);
-      Play(watcher->data());
+      Play(offset);
       return;
     }
 
@@ -547,8 +552,9 @@ void GstEngine::PlayDone() {
 
   current_sample_ = 0;
 
-  if (watcher->data()) {
-    Seek(watcher->data());
+  // initial offset
+  if(offset != 0 || beginning_ != 0) {
+    Seek(offset);
   }
 
   emit StateChanged(Engine::Playing);
@@ -559,6 +565,7 @@ void GstEngine::Stop() {
   StopTimers();
 
   url_ = QUrl(); // To ensure we return Empty from state()
+  beginning_ = end_ = 0;
 
   if (fadeout_enabled_ && current_pipeline_)
     StartFadeout();
@@ -599,7 +606,7 @@ void GstEngine::Seek(uint ms) {
   if (!current_pipeline_)
     return;
 
-  seek_pos_ = ms;
+  seek_pos_ = beginning_ + ms;
   waiting_to_seek_ = true;
 
   if (!seek_timer_->isActive()) {
@@ -664,16 +671,29 @@ void GstEngine::timerEvent(QTimerEvent* e) {
   // we are fading
   PruneScope();
 
-  // Emit TrackAboutToEnd when we're a few seconds away from finishing
   if (current_pipeline_) {
-    const qint64 nanosec_position = current_pipeline_->position();
-    const qint64 nanosec_length = current_pipeline_->length();
-    const qint64 remaining = (nanosec_length - nanosec_position) / 1000000;
+    const qint64 current_position = position();
+    const qint64 current_length = length();
+
+    const qint64 remaining = current_length - current_position;
+
     const qint64 fudge = kTimerInterval + 100; // Mmm fudge
     const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
 
-    if (nanosec_length > 0 && remaining < gap + fudge)
-      EmitAboutToEnd();
+    // only if we know the length of the current stream...
+    if(current_length > 0) {
+      // emit TrackAboutToEnd when we're a few seconds away from finishing
+      if (remaining < gap + fudge) {
+        EmitAboutToEnd();
+      }
+
+      // when at the end, kill the track if it didn't stop yet (probably a
+      // multisection media file)
+      // TODO: EndOfStreamReached
+      if(current_position > current_length) {
+        emit TrackEnded();
+      }
+    }
   }
 }
 
@@ -786,7 +806,7 @@ qint64 GstEngine::PruneScope() {
     return 0;
 
   // get the position playing in the audio device
-  const qint64 pos = current_pipeline_->position();
+  const qint64 pos = position() * 1e6;
   const qint64 segment_start = current_pipeline_->segment_start();
 
   GstBuffer *buf = 0;

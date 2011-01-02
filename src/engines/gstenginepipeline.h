@@ -74,7 +74,11 @@ class GstEnginePipeline : public QObject {
   // Get information about the music playback
   QUrl url() const { return url_; }
   bool is_valid() const { return valid_; }
+  // Please note that this method (unlike GstEngine's.position()) is
+  // multiple-section media unaware.
   qint64 position() const;
+  // Please note that this method (unlike GstEngine's.length()) is
+  // multiple-section media unaware.
   qint64 length() const;
   GstState state() const;
   qint64 segment_start() const { return segment_start_; }

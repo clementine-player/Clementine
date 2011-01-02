@@ -29,6 +29,8 @@ const char* Engine::Base::kSettingsGroup = "Player";
 
 Engine::Base::Base()
   : volume_(50),
+    beginning_(0),
+    end_(0),
     scope_(kScopeSize),
     fadeout_enabled_(true),
     fadeout_duration_(2000),
@@ -41,8 +43,12 @@ Engine::Base::Base()
 Engine::Base::~Base() {
 }
 
-bool Engine::Base::Load(const QUrl &url, TrackChangeType) {
+bool Engine::Base::Load(const QUrl &url, TrackChangeType,
+                        uint beginning, int end) {
   url_ = url;
+  beginning_ = beginning;
+  end_ = end;
+
   about_to_end_emitted_ = false;
   return true;
 }
@@ -80,8 +86,9 @@ int Engine::Base::AddBackgroundStream(const QUrl& url) {
   return -1;
 }
 
-bool Engine::Base::Play(const QUrl& u, TrackChangeType c) {
-  if (!Load(u, c))
+bool Engine::Base::Play(const QUrl& u, TrackChangeType c, uint beginning, int end) {
+  if (!Load(u, c, beginning, end))
     return false;
-  return Play();
+
+  return Play(0);
 }

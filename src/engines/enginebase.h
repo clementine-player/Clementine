@@ -46,7 +46,7 @@ class Base : public QObject, boost::noncopyable {
   virtual bool CanDecode(const QUrl &url) = 0;
 
   virtual void StartPreloading(const QUrl&) {}
-  virtual bool Play(uint offset = 0) = 0;
+  virtual bool Play(uint offset) = 0;
   virtual void Stop() = 0;
   virtual void Pause() = 0;
   virtual void Unpause() = 0;
@@ -60,11 +60,19 @@ class Base : public QObject, boost::noncopyable {
   virtual uint position() const = 0;
   virtual uint length() const { return 0; }
 
-  // Helpers
-  virtual bool Load(const QUrl &url, TrackChangeType change);
-  bool Play(const QUrl &u, TrackChangeType c);
-  void SetVolume( uint value );
+  // Subclasses should respect given markers (beginning and end) which are
+  // in miliseconds.
+  virtual bool Load(const QUrl& url, TrackChangeType change,
+                    uint beginning, int end);
 
+  // Plays a media stream represented with the URL 'u' from the given 'beginning'
+  // to the given 'end' (usually from 0 to a song's length). Both markers
+  // should be passed in miliseconds. 'end' can be negative, indicating that the
+  // real length of 'u' stream is unknown.
+  bool Play(const QUrl& u, TrackChangeType c,
+            uint beginning, int end);
+
+  void SetVolume(uint value);
 
   // Simple accessors
   inline uint volume() const { return volume_; }
@@ -108,6 +116,8 @@ class Base : public QObject, boost::noncopyable {
 
  protected:
   uint  volume_;
+  uint beginning_;
+  int end_;
   QUrl  url_;
   Scope scope_;
 

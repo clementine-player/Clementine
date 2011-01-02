@@ -87,7 +87,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  public slots:
   void StartPreloading(const QUrl &);
-  bool Load(const QUrl&, Engine::TrackChangeType change);
+  bool Load(const QUrl&, Engine::TrackChangeType change,
+            uint beginning, int end);
   bool Play(uint offset);
   void Stop();
   void Pause();

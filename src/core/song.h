@@ -222,7 +222,7 @@ class Song {
   void set_comment(const QString& v) { d->comment_ = v; }
   void set_compilation(bool v) { d->compilation_ = v; }
   void set_sampler(bool v) { d->sampler_ = v; }
-  void set_beginning(int v) { d->beginning_ = v; }
+  void set_beginning(int v) { d->beginning_ = qMax(0, v); }
   void set_end(int v) { d->end_ = v; }
   void set_length(int v) { d->end_ = d->beginning_ + v; }
   void set_bitrate(int v) { d->bitrate_ = v; }
@@ -291,12 +291,14 @@ class Song {
     // The beginning of the song in seconds. In case of single-part media
     // streams, this will equal to 0. In case of multi-part streams on the
     // other hand, this will mark the beginning of a section represented by
-    // this Song object.
+    // this Song object. This is always greater than 0.
     int beginning_;
     // The end of the song in seconds. In case of single-part media
     // streams, this will equal to the song's length. In case of multi-part
     // streams on the other hand, this will mark the end of a section
     // represented by this Song object.
+    // This may be negative indicating that the length of this song is
+    // unknown.
     int end_;
 
     int bitrate_;
