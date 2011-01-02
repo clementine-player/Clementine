@@ -94,6 +94,7 @@ LibraryView::LibraryView(QWidget* parent)
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
   ReloadSettings();
+  setStyleSheet("QTreeView::item{padding-top:1px;}");
 }
 
 LibraryView::~LibraryView() {
@@ -104,6 +105,8 @@ void LibraryView::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   SetAutoOpen(s.value("auto_open", true).toBool());
+  if (library_ != NULL)
+    library_->set_pretty_covers(s.value("pretty_covers", true).toBool());
 }
 
 void LibraryView::SetTaskManager(TaskManager *task_manager) {
@@ -112,6 +115,9 @@ void LibraryView::SetTaskManager(TaskManager *task_manager) {
 
 void LibraryView::SetLibrary(LibraryModel *library) {
   library_ = library;
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  library_->set_pretty_covers(s.value("pretty_covers", true).toBool());
 }
 
 void LibraryView::SetDeviceManager(DeviceManager *device_manager) {

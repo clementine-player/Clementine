@@ -128,6 +128,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QMimeData* mimeData(const QModelIndexList& indexes) const;
   bool canFetchMore(const QModelIndex &parent) const;
 
+  // Whether or not to use album cover art, if it exists, in the library view
+  void set_pretty_covers(bool use_pretty_covers);
+
  signals:
   void TotalSongCountUpdated(int count);
   void GroupingChanged(const LibraryModel::Grouping& g);
@@ -155,8 +158,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void ResetAsyncQueryFinished();
 
  private:
-  void Initialise();
-
   // Provides some optimisations for loading the list of items in the root.
   // This gets called a lot when filtering the playlist, so it's nice to be
   // able to do it in a background thread.
@@ -209,6 +210,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QString DividerDisplayText(GroupBy type, const QString& key) const;
 
   // Helpers
+  QVariant AlbumIcon(const QModelIndex& index, int role) const;
   QVariant data(const LibraryItem* item, int role) const;
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
 
@@ -244,6 +246,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QIcon no_cover_icon_;
   QIcon playlists_dir_icon_;
   QIcon playlist_icon_;
+  
+  bool use_pretty_covers_;
 };
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);

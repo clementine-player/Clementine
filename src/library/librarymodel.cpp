@@ -20,6 +20,7 @@
 #include "libraryitem.h"
 #include "librarydirectorymodel.h"
 #include "sqlrow.h"
+#include "core/albumcoverloader.h"
 #include "core/database.h"
 #include "playlist/songmimedata.h"
 #include "smartplaylists/generator.h"
@@ -60,7 +61,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
     album_icon_(":/icons/22x22/x-clementine-album.png"),
     no_cover_icon_(":nocover.png"),
     playlists_dir_icon_(IconLoader::Load("folder-sound")),
-    playlist_icon_(":/icons/22x22/x-clementine-albums.png")
+    playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
+    use_pretty_covers_(false)
 {
   root_->lazy_loaded = true;
 
@@ -71,6 +73,13 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
 
 LibraryModel::~LibraryModel() {
   delete root_;
+}
+
+void LibraryModel::set_pretty_covers(bool use_pretty_covers) {
+  if (use_pretty_covers != use_pretty_covers_) {
+    use_pretty_covers_ = use_pretty_covers;
+    Reset();
+  }
 }
 
 void LibraryModel::Init() {
@@ -334,8 +343,53 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   }
 }
 
+QVariant LibraryModel::AlbumIcon(const QModelIndex& index, int role) const {  
+  
+  // the easiest way to get from *here* to working out what album art an index 
+  // represents seems to be to get the node's child songs and look at their metadata.
+  // if none is found, return the generic CD icon
+
+  // Cache the art in the item's metadata field
+  LibraryItem* item = IndexToItem(index);
+  if (!item)
+    return album_icon_;
+  if (!item->metadata.image().isNull())
+    return item->metadata.image();
+  
+  SongList songs = GetChildSongs(index);
+  if (!songs.isEmpty()) {
+    const Song& s = songs.first();
+    QPixmap pixmap = AlbumCoverLoader::TryLoadPixmap(
+      s.art_automatic(), s.art_manual(), s.filename());
+
+    if (!pixmap.isNull()) {
+      QImage image = pixmap.toImage().scaled(
+            32, 32, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+      item->metadata.set_image(image);
+      return image;
+    }
+  }
+  return album_icon_;
+}
+
 QVariant LibraryModel::data(const QModelIndex& index, int role) const {
   const LibraryItem* item = IndexToItem(index);
+  
+  // Handle a special case for returning album artwork instead of a generic CD icon.
+  // this is here instead of in the other data() function to let us use the
+  // QModelIndex& version of GetChildSongs, which satisfies const-ness, instead
+  // of the LibraryItem* version, which doesn't.
+  if (use_pretty_covers_) {    
+    bool album_node = false;
+    if (role == Qt::DecorationRole && item->type == LibraryItem::Type_Container) {
+      GroupBy container_type = group_by_[item->container_level];
+      album_node = container_type == GroupBy_Album 
+                    || container_type == GroupBy_YearAlbum
+                    || container_type == GroupBy_AlbumArtist;
+    }
+    if (album_node)
+      return AlbumIcon(index, role);
+  }
 
   return data(item, role);
 }
