@@ -99,6 +99,7 @@ ScriptDialog::ScriptDialog(QWidget* parent)
   connect(ui_->settings, SIGNAL(clicked()), SLOT(Settings()));
   connect(ui_->details, SIGNAL(clicked()), SLOT(Details()));
 
+  ui_->tab_widget->setCurrentIndex(0);
   ui_->list->setItemDelegate(new ScriptDelegate(this));
 }
 
@@ -158,5 +159,10 @@ void ScriptDialog::Details() {
 }
 
 void ScriptDialog::LogLineAdded(const QString& html) {
+  // This is such a hack, I'm sorry.
+  if (html.startsWith("<font color=\"red\">") &&
+      ui_->tab_widget->currentWidget() != ui_->console_tab) {
+    ui_->tab_widget->SetTabAlert(ui_->tab_widget->indexOf(ui_->console_tab));
+  }
   ui_->console->append(html);
 }

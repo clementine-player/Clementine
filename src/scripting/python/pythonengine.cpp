@@ -92,7 +92,7 @@ Script* PythonEngine::CreateScript(const QString& path,
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
     // Create a module for scripts
-    PyObject* scripts_module = PyImport_AddModule(kModulePrefix);
+    PyImport_AddModule(kModulePrefix);
 
     // Run the startup script - this redirects sys.stdout and sys.stderr to our
     // log handler.
@@ -116,6 +116,7 @@ Script* PythonEngine::CreateScript(const QString& path,
     return ret;
   }
 
+  ret->Unload();
   delete ret;
   return NULL;
 }

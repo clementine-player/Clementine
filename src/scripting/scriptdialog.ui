@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="ScriptDialogTabWidget" name="tab_widget">
      <property name="currentIndex">
       <number>2</number>
      </property>
@@ -91,7 +91,7 @@
        <string>Get new scripts</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="tab_3">
+     <widget class="QWidget" name="console_tab">
       <attribute name="title">
        <string>Script console</string>
       </attribute>
@@ -122,6 +122,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ScriptDialogTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>scripting/scriptdialogtabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
