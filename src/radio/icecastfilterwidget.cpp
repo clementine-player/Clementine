@@ -33,10 +33,8 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
     sort_mode_mapper_(new QSignalMapper(this))
 {
   ui_->setupUi(this);
-  connect(ui_->clear, SIGNAL(clicked()), SLOT(ClearFilter()));
 
   // Icons
-  ui_->clear->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   ui_->options->setIcon(IconLoader::Load("configure"));
 
   // Options actions
@@ -95,11 +93,6 @@ void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
       ui_->action_sort_station->trigger();
       break;
   }
-}
-
-void IcecastFilterWidget::ClearFilter() {
-  filter_->clear();
-  filter_->set_focus();
 }
 
 void IcecastFilterWidget::SortModeChanged(int mode) {

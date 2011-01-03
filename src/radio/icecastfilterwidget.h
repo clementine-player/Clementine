@@ -40,7 +40,6 @@ public:
   void SetIcecastModel(IcecastModel* model);
 
 private slots:
-  void ClearFilter();
   void SortModeChanged(int mode);
 
 private:
