@@ -10,7 +10,7 @@ set(INCLUDE_SVN_REVISION ON)
 
 # The format for version numbers is:
 # Display: $major.$minor [$prerelease] [$svn]
-# Deb:     $major.$minor[~$prerelease][~$svn]
+# Deb:     $major.$minor[~$prerelease][.$svn]
 # Rpm:     $major.$minor[$prerelease][.$svn]
 # And the rpm version is used for mac and windows
 
@@ -47,6 +47,6 @@ endif(FORCE_SVN_REVISION)
 
 if(INCLUDE_SVN_REVISION AND SVN_REVISION)
   set(CLEMENTINE_VERSION_DISPLAY "${CLEMENTINE_VERSION_DISPLAY} r${SVN_REVISION}")
-  set(CLEMENTINE_VERSION_DEB "${CLEMENTINE_VERSION_DEB}~r${SVN_REVISION}")
+  set(CLEMENTINE_VERSION_DEB "${CLEMENTINE_VERSION_DEB}.r${SVN_REVISION}")
   set(CLEMENTINE_VERSION_RPM "${CLEMENTINE_VERSION_RPM}.r${SVN_REVISION}")
 endif(INCLUDE_SVN_REVISION AND SVN_REVISION)
