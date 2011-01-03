@@ -24,6 +24,7 @@
 #include <QStringList>
 
 class LanguageEngine;
+class Library;
 class Player;
 class PlaylistManager;
 class Script;
@@ -54,11 +55,13 @@ public:
 
   struct GlobalData {
     GlobalData() {}
-    GlobalData(Player* player, PlaylistManager* playlists)
-      : player_(player),
+    GlobalData(Library* library, Player* player, PlaylistManager* playlists)
+      : library_(library),
+        player_(player),
         playlists_(playlists)
     {}
 
+    Library* library_;
     Player* player_;
     PlaylistManager* playlists_;
   };

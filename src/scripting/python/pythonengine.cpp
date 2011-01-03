@@ -22,6 +22,7 @@
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "sipAPIclementine.h"
+#include "library/library.h"
 
 #include <QFile>
 #include <QtDebug>
@@ -105,6 +106,7 @@ Script* PythonEngine::CreateScript(const QString& path,
     sip_api_ = GetSIPApi();
 
     // Add objects to the module
+    AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
     AddObject(manager()->data().player_, sipType_Player, "player");
     AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
     AddObject(manager()->ui(), sipType_UIInterface, "ui");

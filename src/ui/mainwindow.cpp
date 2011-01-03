@@ -640,7 +640,7 @@ MainWindow::MainWindow(QWidget* parent)
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
 #endif
 
-  scripts_->Init(ScriptManager::GlobalData(player_, playlists_));
+  scripts_->Init(ScriptManager::GlobalData(library_, player_, playlists_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 }
 
