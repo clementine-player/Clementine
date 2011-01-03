@@ -23,7 +23,7 @@
 #include <QTextStream>
 #include <QtDebug>
 
-const char* CueParser::kFileLineRegExp = "([^ \t\r\n]+)\\s+(?:\"([^\"]+)\"|([^ \t\r\n]+))\\s*(?:\"([^\"]+)\"|([^ \t\r\n]+))?";
+const char* CueParser::kFileLineRegExp = "(\\S+)\\s+(?:\"([^\"]+)\"|(\\S+))\\s*(?:\"([^\"]+)\"|(\\S+))?";
 const char* CueParser::kIndexRegExp = "(\\d{2}):(\\d{2}):(\\d{2})";
 
 const char* CueParser::kPerformer = "performer";
@@ -33,9 +33,6 @@ const char* CueParser::kTrack = "track";
 const char* CueParser::kIndex = "index";
 const char* CueParser::kAudioTrackType = "audio";
 
-// TODO: if some song misses it's next one (because the next one was somehow
-// broken), we need to discard the song too (can't really determine where it
-// ends
 // TODO: utf and regexps (check on Zucchero - there's something wrong)
 
 CueParser::CueParser(LibraryBackendInterface* library, QObject* parent)
@@ -228,6 +225,7 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Son
 
   song->Init(entry.title, entry.PrettyArtist(),
              entry.album, beginning, end);
+  song->set_albumartist(entry.album_artist);
 
   return true;
 }
@@ -245,6 +243,7 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
   song->set_title(entry.title);
   song->set_artist(entry.PrettyArtist());
   song->set_album(entry.album);
+  song->set_albumartist(entry.album_artist);
 
   // we don't do anything with the end here because it's already set to
   // the end of the media file (if it exists)

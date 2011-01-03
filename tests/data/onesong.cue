@@ -1,4 +1,4 @@
-PERFORMER "Zucchero"
+PERFORMER "Zucchero himself"
 FILE "file.mp3" WAVE
   TRACK 01 AUDIO
     TITLE "Un soffio caldo"

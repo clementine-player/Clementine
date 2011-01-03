@@ -27,6 +27,7 @@
 
 #include <gst/gst.h>
 
+class CueParser;
 class LibraryBackendInterface;
 class ParserBase;
 class PlaylistParser;
@@ -97,6 +98,7 @@ private:
 
   QTimer* timeout_timer_;
   PlaylistParser* playlist_parser_;
+  CueParser* cue_parser_;
 
   // For async loads
   int timeout_;

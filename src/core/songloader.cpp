@@ -20,6 +20,7 @@
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
 #include "playlistparsers/parserbase.h"
+#include "playlistparsers/cueparser.h"
 #include "playlistparsers/playlistparser.h"
 #include "radio/fixlastfm.h"
 
@@ -39,6 +40,7 @@ SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
   : QObject(parent),
     timeout_timer_(new QTimer(this)),
     playlist_parser_(new PlaylistParser(library, this)),
+    cue_parser_(new CueParser(library, this)),
     timeout_(kDefaultTimeout),
     state_(WaitingForType),
     success_(false),
@@ -130,17 +132,46 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
   // Not a playlist, so just assume it's a song
   QFileInfo info(filename);
+
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   query.AddWhere("filename", info.canonicalFilePath());
-  Song song;
+
+  SongList song_list;
+
   if (library_->ExecQuery(&query) && query.Next()) {
-    song.InitFromQuery(query);
+    // we may have many results when the file has many sections
+    do {
+      Song song;
+      song.InitFromQuery(query);
+
+      song_list << song;
+    } while(query.Next());
   } else {
-    song.InitFromFile(filename, -1);
+    QString matching_cue = filename.section('.', 0, -2) + ".cue";
+
+    // it's a cue - create virtual tracks
+    if(QFile::exists(matching_cue)) {
+      QFile cue(matching_cue);
+      cue.open(QIODevice::ReadOnly);
+
+      song_list = cue_parser_->Load(&cue, QDir(filename.section('/', 0, -2)));
+
+    // it's a normal media file
+    } else {
+      Song song;
+      song.InitFromFile(filename, -1);
+
+      song_list << song;
+
+    }
   }
-  if (song.is_valid())
-    songs_ << song;
+
+  foreach(const Song& song, song_list) {
+    if (song.is_valid())
+      songs_ << song;
+  }
+
   return Success;
 }
 
