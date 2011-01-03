@@ -954,7 +954,7 @@ if (APPLE)
     DEPENDS clementine
   )
   add_custom_target(dmg
-    ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine.dmg 
+    ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
     COMMAND macdeployqt clementine.app -no-plugins -dmg
     DEPENDS clementine
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}

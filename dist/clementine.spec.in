@@ -1,5 +1,5 @@
 Name:           clementine
-Version:        @CLEMENTINE_VERSION@
+Version:        @CLEMENTINE_VERSION_RPM@
 Release:        1%{?dist}
 Summary:        A music player and library organiser
 
@@ -82,5 +82,5 @@ make clean
 %{_datadir}/clementine/projectm-presets
 
 %changelog
-* @RPM_DATE@ David Sansome <me@davidsansome.com> - @CLEMENTINE_VERSION@
-- Version @CLEMENTINE_VERSION_STRING@
+* @RPM_DATE@ David Sansome <me@davidsansome.com> - @CLEMENTINE_VERSION_RPM@
+- Version @CLEMENTINE_VERSION_DISPLAY@

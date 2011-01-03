@@ -1,7 +1,7 @@
 clementine ICON "clementine.ico"
 1 VERSIONINFO
-FILEVERSION     ${CLEMENTINE_VERSION_MAJOR},${CLEMENTINE_VERSION_MINOR},${CLEMENTINE_VERSION_PATCH},0
-PRODUCTVERSION  ${CLEMENTINE_VERSION_MAJOR},${CLEMENTINE_VERSION_MINOR},${CLEMENTINE_VERSION_PATCH},0
+FILEVERSION     ${CLEMENTINE_VERSION_MAJOR},${CLEMENTINE_VERSION_MINOR},0
+PRODUCTVERSION  ${CLEMENTINE_VERSION_MAJOR},${CLEMENTINE_VERSION_MINOR},0
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
@@ -9,12 +9,12 @@ BEGIN
     BEGIN
       VALUE "CompanyName", "Clementine"
       VALUE "FileDescription", "Clementine music player"
-      VALUE "FileVersion", "${CLEMENTINE_VERSION_STRING}"
+      VALUE "FileVersion", "${CLEMENTINE_VERSION_DISPLAY}"
       VALUE "InternalName", "clementine"
       VALUE "LegalCopyright", "David Sansome"
       VALUE "OriginalFilename", "clementine.exe"
       VALUE "ProductName", "Clementine"
-      VALUE "ProductVersion", "${CLEMENTINE_VERSION_STRING}"
+      VALUE "ProductVersion", "${CLEMENTINE_VERSION_DISPLAY}"
     END
   END
 

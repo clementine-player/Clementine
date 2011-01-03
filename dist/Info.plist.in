@@ -7,7 +7,7 @@
   <key>CFBundleExecutable</key>
   <string>clementine</string>
   <key>CFBundleGetInfoString</key>
-  <string>Clementine ${CLEMENTINE_VERSION_STRING}</string>
+  <string>Clementine ${CLEMENTINE_VERSION_DISPLAY}</string>
   <key>CFBundleIconFile</key>
   <string>clementine</string>
   <key>CFBundleIdentifier</key>
@@ -15,15 +15,15 @@
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleLongVersionString</key>
-  <string>${CLEMENTINE_VERSION_STRING}</string>
+  <string>${CLEMENTINE_VERSION_DISPLAY}</string>
   <key>CFBundleName</key>
   <string>Clementine</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>
-  <string>${CLEMENTINE_VERSION_SHORT_STRING}</string>
+  <string>${CLEMENTINE_VERSION_RPM}</string>
   <key>CFBundleVersion</key>
-  <string>${BUILDBOT_REVISION}</string>
+  <string>${CLEMENTINE_VERSION_RPM}</string>
   <key>CSResourcesFileMapped</key>
   <true/>
   <key>LSRequiresCarbon</key>

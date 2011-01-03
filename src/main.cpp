@@ -133,7 +133,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
-  QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_STRING);
+  QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);
   QCoreApplication::setOrganizationName("Clementine");
   QCoreApplication::setOrganizationDomain("davidsansome.com");
 
