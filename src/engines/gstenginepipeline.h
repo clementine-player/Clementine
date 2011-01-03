@@ -70,6 +70,7 @@ class GstEnginePipeline : public QObject {
   // If this is set then it will be loaded automatically when playback finishes
   // for gapless playback
   void SetNextUrl(const QUrl& url) { next_url_ = url; }
+  bool has_next_valid_url() const { return next_url_.isValid(); }
 
   // Get information about the music playback
   QUrl url() const { return url_; }

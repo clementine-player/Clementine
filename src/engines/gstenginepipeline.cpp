@@ -422,7 +422,7 @@ bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self
 void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  if (instance->next_url_.isValid()) {
+  if (instance->has_next_valid_url()) {
     GstElement* old_decode_bin = instance->uridecodebin_;
 
     instance->ignore_tags_ = true;
