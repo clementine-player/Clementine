@@ -10,7 +10,7 @@ public:
 
   PlaylistItemPtr GetCurrentItem() const;
   PlaylistItemPtr GetItemAt(int pos) const;
-  //PlaylistManager* playlists() const { return playlists_; }
+  PlaylistManager* playlists() const;
 
 public slots:
   // Manual track change to the specified track

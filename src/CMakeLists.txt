@@ -712,14 +712,14 @@ if(HAVE_SCRIPTING_PYTHON)
 
   add_sip_binding(SOURCES
     scripting/python/clementine.sip
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Directory.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100LibraryBackendAlbum.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Subdirectory.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineLibraryBackendAlbum.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Directory.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100LibraryBackendAlbum.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Subdirectory.cpp
   )
 endif(HAVE_SCRIPTING_PYTHON)
 

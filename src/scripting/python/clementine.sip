@@ -11,7 +11,9 @@
 %Include playlist.sip
 %Include playlistitem.sip
 %Include playlistmanager.sip
+%Include playlistsequence.sip
 %Include pythonengine.sip
+%Include queue.sip
 %Include scriptinterface.sip
 %Include song.sip
 %Include uiinterface.sip

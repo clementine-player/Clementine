@@ -58,7 +58,7 @@ public:
 
   // Accessors
   QSortFilterProxyModel* proxy() const;
-  // Queue* queue() const;
+  Queue* queue() const;
 
   int id() const;
 
@@ -85,7 +85,7 @@ public:
   SongList GetAllSongs() const;
   quint64 GetTotalLength() const; // in seconds
 
-  // PlaylistSequence* sequence() const { return playlist_sequence_; }
+  PlaylistSequence* sequence() const;
 
   QUndoStack* undo_stack() const;
 

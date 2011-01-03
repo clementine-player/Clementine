@@ -18,9 +18,9 @@ public:
 
   QString name(int index) const;
 
-  // LibraryBackend* library_backend() const;
+  LibraryBackend* library_backend() const;
   // PlaylistBackend* playlist_backend() const;
-  // PlaylistSequence* sequence() const;
+  PlaylistSequence* sequence() const;
   // PlaylistParser* parser() const;
 
 public slots:
