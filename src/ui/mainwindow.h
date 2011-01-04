@@ -79,7 +79,14 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget *parent = 0);
+  MainWindow(BackgroundThread<Database>* database,
+             TaskManager* task_manager,
+             PlaylistManager* playlists,
+             RadioModel* radio_model,
+             Player* player,
+             SystemTrayIcon* tray_icon,
+             OSD* osd,
+             QWidget *parent = 0);
   ~MainWindow();
 
   static const char* kSettingsGroup;
@@ -215,6 +222,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddSongInfoGenerator(smart_playlists::GeneratorPtr gen);
 
   void DeleteFinished(const SongList& songs_with_errors);
+
+  void Raise();
 
  private:
   void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);

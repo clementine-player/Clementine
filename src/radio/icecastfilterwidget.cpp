@@ -55,7 +55,6 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   MacLineEdit* lineedit = new MacLineEdit(this);
   ui_->horizontalLayout->insertWidget(1, lineedit);
   filter_ = lineedit;
-  ui_->clear->setHidden(true);
 #else
   filter_ = ui_->filter;
 #endif

@@ -72,7 +72,7 @@ class Mpris2 : public QObject {
   Q_PROPERTY( bool CanEditTracks READ CanEditTracks )
 
 public:
-  Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader,
+  Mpris2(Player* player, ArtLoader* art_loader,
          Mpris1* mpris1, QObject* parent);
 
   // Root Properties
@@ -140,6 +140,8 @@ signals:
   void TrackRemoved(const QDBusObjectPath& trackId);
   void TrackMetadataChanged(const QDBusObjectPath& trackId, const TrackMetadata& metadata);
 
+  void RaiseMainWindow();
+
 private slots:
   void ArtLoaded(const Song& song, const QString& art_uri);
   void EngineStateChanged(Engine::State newState);
@@ -165,7 +167,6 @@ private:
 
   QVariantMap last_metadata_;
 
-  MainWindow* ui_;
   Player* player_;
   Mpris1* mpris1_;
 };

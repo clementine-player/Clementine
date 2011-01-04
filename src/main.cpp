@@ -33,16 +33,21 @@
 #include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
+#include "core/taskmanager.h"
 #include "core/utilities.h"
 #include "engines/enginebase.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistmanager.h"
+#include "radio/radiomodel.h"
 #include "remote/httpserver.h"
 #include "remote/zeroconf.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
+#include "ui/systemtrayicon.h"
+#include "widgets/osd.h"
 
 #include "qtsingleapplication.h"
 #include "qtsinglecoreapplication.h"
@@ -59,6 +64,9 @@
 #include <glib/gutils.h>
 #include <gst/gst.h>
 
+#include <boost/scoped_ptr.hpp>
+using boost::scoped_ptr;
+
 #include <echonest/Config.h>
 
 #ifdef Q_OS_DARWIN
@@ -68,6 +76,18 @@
 
 #ifdef HAVE_LIBLASTFM
   #include "radio/lastfmservice.h"
+#endif
+
+#ifdef HAVE_DBUS
+  #include "core/mpris_common.h"
+  #include "core/mpris.h"
+  #include "core/mpris2.h"
+  #include <QDBusArgument>
+  #include <QDBusConnection>
+  #include <QImage>
+
+  QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
+  const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
 #endif
 
 class GstEnginePipeline;
@@ -267,6 +287,36 @@ int main(int argc, char *argv[]) {
   // Seed the random number generator
   srand(time(NULL));
 
+  scoped_ptr<BackgroundThread<Database> > database(
+      new BackgroundThreadImplementation<Database, Database>(NULL));
+  database->Start(true);
+  TaskManager task_manager;
+  PlaylistManager playlists(&task_manager, NULL);
+
+  RadioModel radio_model(database.get(), &task_manager, NULL);
+  Player player(&playlists,
+#ifdef HAVE_LIBLASTFM
+                radio_model.GetLastFMService()
+#endif
+                );
+
+  scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
+  OSD osd(tray_icon.get());
+
+#ifdef HAVE_DBUS
+  qDBusRegisterMetaType<QImage>();
+  qDBusRegisterMetaType<TrackMetadata>();
+  qDBusRegisterMetaType<TrackIds>();
+
+  mpris::ArtLoader art_loader;
+  mpris::Mpris1 mpris1(&player, &art_loader);
+  mpris::Mpris2 mpris2(&player, &art_loader, &mpris1);
+
+  QObject::connect(&playlists, SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
+  QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString)),
+                   &osd, SLOT(CoverArtPathReady(Song, QString)));
+#endif
+
   Zeroconf* zeroconf = Zeroconf::GetZeroconf();
   if (zeroconf) {
     HttpServer* server = new HttpServer;
@@ -276,8 +326,17 @@ int main(int argc, char *argv[]) {
   }
 
   // Window
-  MainWindow w;
-
+  MainWindow w(
+      database.get(),
+      &task_manager,
+      &playlists,
+      &radio_model,
+      &player,
+      tray_icon.get(),
+      &osd);
+#ifdef HAVE_DBUS
+  QObject::connect(&mpris2, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
+#endif
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
 

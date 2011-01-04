@@ -136,17 +136,25 @@ const char* MainWindow::kMusicFilterSpec =
 const char* MainWindow::kAllFilesFilterSpec =
     QT_TR_NOOP("All Files (*)");
 
-MainWindow::MainWindow(QWidget* parent)
+MainWindow::MainWindow(
+    BackgroundThread<Database>* database,
+    TaskManager* task_manager,
+    PlaylistManager* playlist_manager,
+    RadioModel* radio_model,
+    Player* player,
+    SystemTrayIcon* tray_icon,
+    OSD* osd,
+    QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
-    tray_icon_(SystemTrayIcon::CreateSystemTrayIcon(this)),
-    osd_(new OSD(tray_icon_, this)),
-    task_manager_(new TaskManager(this)),
-    database_(new BackgroundThreadImplementation<Database, Database>(this)),
-    radio_model_(NULL),
+    tray_icon_(tray_icon),
+    osd_(osd),
+    task_manager_(task_manager),
+    database_(database),
+    radio_model_(radio_model),
     playlist_backend_(NULL),
-    playlists_(new PlaylistManager(task_manager_, this)),
-    player_(NULL),
+    playlists_(playlist_manager),
+    player_(player),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
     devices_(NULL),
@@ -176,21 +184,12 @@ MainWindow::MainWindow(QWidget* parent)
     track_position_timer_(new QTimer(this)),
     was_maximized_(false)
 {
-  // Wait for the database thread to start - lots of stuff depends on it.
-  database_->Start(true);
-
   // Create some objects in the database thread
   playlist_backend_ = new PlaylistBackend;
   playlist_backend_->moveToThread(database_);
   playlist_backend_->SetDatabase(database_->Worker());
 
   // Create stuff that needs the database
-  radio_model_ = new RadioModel(database_, task_manager_, this);
-  player_ = new Player(this, playlists_,
-#ifdef HAVE_LIBLASTFM
-                       radio_model_->GetLastFMService(),
-#endif
-                       this);
   library_ = new Library(database_, task_manager_, this);
   devices_ = new DeviceManager(database_, task_manager_, this);
 
@@ -388,8 +387,6 @@ MainWindow::MainWindow(QWidget* parent)
   connect(playlists_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(playlists_, SIGNAL(SummaryTextChanged(QString)), ui_->playlist_summary, SLOT(setText(QString)));
   connect(playlists_, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
-
-  connect(player_->ArtLoader(), SIGNAL(ThumbnailLoaded(Song,QString)), osd_, SLOT(CoverArtPathReady(Song,QString)));
 
   connect(ui_->playlist->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(PlayPauseItem(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
@@ -1800,6 +1797,11 @@ void MainWindow::PlaylistCurrentChanged(const QModelIndex& proxy_current) {
   // F2, we don't want that editing the last column that was right clicked on.
   if (source_current != playlist_menu_index_)
     playlist_menu_index_ = QModelIndex();
+}
+
+void MainWindow::Raise() {
+  show();
+  activateWindow();
 }
 
 void MainWindow::ShowScriptDialog() {

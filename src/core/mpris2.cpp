@@ -42,10 +42,9 @@ const char* Mpris2::kMprisObjectPath = "/org/mpris/MediaPlayer2";
 const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
-Mpris2::Mpris2(MainWindow* main_window, Player* player, ArtLoader* art_loader,
+Mpris2::Mpris2(Player* player, ArtLoader* art_loader,
                Mpris1* mpris1, QObject* parent)
   : QObject(parent),
-    ui_(main_window),
     player_(player),
     mpris1_(mpris1)
 {
@@ -205,8 +204,7 @@ QStringList Mpris2::SupportedMimeTypes() const {
 }
 
 void Mpris2::Raise() {
-  ui_->show();
-  ui_->activateWindow();
+  emit RaiseMainWindow();
 }
 
 void Mpris2::Quit() {
