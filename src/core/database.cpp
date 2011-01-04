@@ -513,12 +513,17 @@ void Database::ExecFromFile(const QString &filename, QSqlDatabase &db) {
 void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
   // Run each command
   QStringList commands(schema.split(";\n\n"));
+
+  // We don't want this list to reflect possible DB schema changes
+  // so we initialize it before executing any statements.
+  QStringList tables = SongsTables(db);
+
   foreach (const QString& command, commands) {
     // There are now lots of "songs" tables that need to have the same schema:
     // songs, magnatune_songs, and device_*_songs.  We allow a magic value
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
-      foreach (const QString& table, SongsTables(db)) {
+      foreach (const QString& table, tables) {
         qDebug() << "Updating" << table << "for" << kMagicAllSongsTables;
         QString new_command(command);
         new_command.replace(kMagicAllSongsTables, table);

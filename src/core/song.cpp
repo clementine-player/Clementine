@@ -89,11 +89,11 @@ static QStringList Updateify(const QStringList& list) {
 const QStringList Song::kColumns = QStringList()
     << "title" << "album" << "artist" << "albumartist" << "composer" << "track"
     << "disc" << "bpm" << "year" << "genre" << "comment" << "compilation"
-    << "length" << "bitrate" << "samplerate" << "directory" << "filename"
+    << "bitrate" << "samplerate" << "directory" << "filename"
     << "mtime" << "ctime" << "filesize" << "sampler" << "art_automatic"
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
-    << "effective_compilation" << "skipcount" << "score" << "beginning";
+    << "effective_compilation" << "skipcount" << "score" << "beginning" << "length";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
@@ -470,37 +470,38 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   d->comment_ = tostr(col + 11);
   d->compilation_ = q.value(col + 12).toBool();
 
-  d->bitrate_ = toint(col + 14);
-  d->samplerate_ = toint(col + 15);
+  d->bitrate_ = toint(col + 13);
+  d->samplerate_ = toint(col + 14);
 
-  d->directory_id_ = toint(col + 16);
-  d->filename_ = tostr(col + 17);
+  d->directory_id_ = toint(col + 15);
+  d->filename_ = tostr(col + 16);
   d->basefilename_ = QFileInfo(d->filename_).fileName();
-  d->mtime_ = toint(col + 18);
-  d->ctime_ = toint(col + 19);
-  d->filesize_ = toint(col + 20);
+  d->mtime_ = toint(col + 17);
+  d->ctime_ = toint(col + 18);
+  d->filesize_ = toint(col + 19);
 
-  d->sampler_ = q.value(col + 21).toBool();
+  d->sampler_ = q.value(col + 20).toBool();
 
-  d->art_automatic_ = q.value(col + 22).toString();
-  d->art_manual_ = q.value(col + 23).toString();
+  d->art_automatic_ = q.value(col + 21).toString();
+  d->art_manual_ = q.value(col + 22).toString();
 
-  d->filetype_ = FileType(q.value(col + 24).toInt());
-  d->playcount_ = q.value(col + 25).isNull() ? 0 : q.value(col + 25).toInt();
-  d->lastplayed_ = toint(col + 26);
-  d->rating_ = tofloat(col + 27);
+  d->filetype_ = FileType(q.value(col + 23).toInt());
+  d->playcount_ = q.value(col + 24).isNull() ? 0 : q.value(col + 24).toInt();
+  d->lastplayed_ = toint(col + 25);
+  d->rating_ = tofloat(col + 26);
 
-  d->forced_compilation_on_ = q.value(col + 28).toBool();
-  d->forced_compilation_off_ = q.value(col + 29).toBool();
+  d->forced_compilation_on_ = q.value(col + 27).toBool();
+  d->forced_compilation_off_ = q.value(col + 28).toBool();
 
-  // effective_compilation = 30
+  // effective_compilation = 29
 
-  d->skipcount_ = q.value(col + 31).isNull() ? 0 : q.value(col + 31).toInt();
-  d->score_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toInt();
+  d->skipcount_ = q.value(col + 30).isNull() ? 0 : q.value(col + 30).toInt();
+  d->score_ = q.value(col + 31).isNull() ? 0 : q.value(col + 31).toInt();
 
-  // TODO: 'end' instead of 'length'
-  d->beginning_ = q.value(col + 33).isNull() ? 0 : q.value(col + 33).toInt();
-  set_length(toint(col + 13));
+  // do not move those statements - beginning must be initialized before
+  // length is!
+  d->beginning_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toInt();
+  set_length(toint(col + 33));
 
   #undef tostr
   #undef toint
@@ -931,8 +932,6 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":comment", strval(d->comment_));
   query->bindValue(":compilation", d->compilation_ ? 1 : 0);
 
-  // TODO: replace this with 'end'
-  query->bindValue(":length", intval(length()));
   query->bindValue(":bitrate", intval(d->bitrate_));
   query->bindValue(":samplerate", intval(d->samplerate_));
 
@@ -960,6 +959,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":score", d->score_);
 
   query->bindValue(":beginning", d->beginning_);
+  query->bindValue(":length", intval(length()));
 
   #undef intval
   #undef notnullintval
@@ -1049,7 +1049,6 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
          d->beginning_ == other.d->beginning_ &&
-         // this should be replaced by 'end'
          length() == other.length() &&
          d->bitrate_ == other.d->bitrate_ &&
          d->samplerate_ == other.d->samplerate_ &&

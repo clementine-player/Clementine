@@ -20,6 +20,7 @@
 #include <QBuffer>
 #include <QStringBuilder>
 #include <QRegExp>
+#include <QTextCodec>
 #include <QTextStream>
 #include <QtDebug>
 
@@ -33,8 +34,6 @@ const char* CueParser::kTrack = "track";
 const char* CueParser::kIndex = "index";
 const char* CueParser::kAudioTrackType = "audio";
 
-// TODO: utf and regexps (check on Zucchero - there's something wrong)
-
 CueParser::CueParser(LibraryBackendInterface* library, QObject* parent)
     : ParserBase(library, parent)
 {
@@ -44,6 +43,8 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
   SongList ret;
 
   QTextStream text_stream(device);
+  text_stream.setCodec(QTextCodec::codecForUtfText(device->peek(1024), QTextCodec::codecForName("UTF-8")));
+
   QString dir_path = dir.absolutePath();
 
   QString line;
