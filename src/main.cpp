@@ -294,9 +294,9 @@ int main(int argc, char *argv[]) {
   PlaylistManager playlists(&task_manager, NULL);
 
   RadioModel radio_model(database.get(), &task_manager, NULL);
-  Player player(&playlists,
+  Player player(&playlists
 #ifdef HAVE_LIBLASTFM
-                radio_model.GetLastFMService()
+                ,radio_model.GetLastFMService()
 #endif
                 );
 
