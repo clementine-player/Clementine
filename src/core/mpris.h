@@ -79,7 +79,7 @@ class Mpris1 : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1(Player* player, ArtLoader* art_loader, QObject* parent);
+  Mpris1(Player* player, ArtLoader* art_loader, QObject* parent = 0);
 
   static QVariantMap GetMetadata(const Song& song);
 

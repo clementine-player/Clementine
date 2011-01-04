@@ -39,7 +39,7 @@ class ArtLoader : public QObject {
   Q_OBJECT
 
 public:
-  ArtLoader(QObject* parent);
+  ArtLoader(QObject* parent = 0);
   ~ArtLoader();
 
 public slots:

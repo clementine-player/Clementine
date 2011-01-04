@@ -72,9 +72,7 @@ class Mpris2 : public QObject {
   Q_PROPERTY( bool CanEditTracks READ CanEditTracks )
 
 public:
-  Mpris2(Player* player, ArtLoader* art_loader,
-         Mpris1* mpris1, QObject* parent);
-
+  Mpris2(Player* player, ArtLoader* art_loader, Mpris1* mpris1, QObject* parent = 0); 
   // Root Properties
   bool CanQuit() const;
   bool CanRaise() const;
