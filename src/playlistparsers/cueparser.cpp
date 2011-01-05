@@ -29,6 +29,7 @@ const char* CueParser::kIndexRegExp = "(\\d{2}):(\\d{2}):(\\d{2})";
 
 const char* CueParser::kPerformer = "performer";
 const char* CueParser::kTitle = "title";
+const char* CueParser::kSongWriter = "songwriter";
 const char* CueParser::kFile = "file";
 const char* CueParser::kTrack = "track";
 const char* CueParser::kIndex = "index";
@@ -46,123 +47,155 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
   text_stream.setCodec(QTextCodec::codecForUtfText(device->peek(1024), QTextCodec::codecForName("UTF-8")));
 
   QString dir_path = dir.absolutePath();
-
-  QString line;
-
-  QString album_artist;
-  QString album;
-  QString file;
-
-  // header
-  while (!(line = text_stream.readLine()).isNull()) {
-    QStringList splitted = SplitCueLine(line);
-
-    // uninteresting or incorrect line
-    if(splitted.size() < 2) {
-      continue;
-    }
-
-    QString line_name = splitted[0].toLower();
-    QString line_value = splitted[1];
-
-    // PERFORMER
-    if(line_name == kPerformer) {
-
-      album_artist = line_value;
-
-    // TITLE
-    } else if(line_name == kTitle) {
-
-      album = line_value;
-
-    // FILE
-    } else if(line_name == kFile) {
-
-      file = QDir::isAbsolutePath(line_value)
-                ? line_value
-                : dir.absoluteFilePath(line_value);
-
-    // end of the header -> go into the track mode
-    } else if(line_name == kTrack) {
-
-      break;
-
-    }
-
-    // just ignore the rest of possible field types for now...
-  }
-
-  if(line.isNull()) {
-    qWarning() << "the .cue file from " << dir_path << " defines no tracks!";
-    return ret;
-  }
-
-  QString track_type;
-  QString index;
-  QString artist;
-  QString title;
+  // read the first line already
+  QString line = text_stream.readLine();
 
   QList<CueEntry> entries;
+  int files = 0;
 
-  // tracks
-  do {
-    QStringList splitted = SplitCueLine(line);
+  // -- whole file
+  while (!text_stream.atEnd()) {
 
-    // uninteresting or incorrect line
-    if(splitted.size() < 2) {
-      continue;
+    QString album_artist;
+    QString album;
+    QString album_composer;
+    QString file;
+    QString file_type;
+
+    // -- FILE section
+    do {
+      QStringList splitted = SplitCueLine(line);
+
+      // uninteresting or incorrect line
+      if(splitted.size() < 2) {
+        continue;
+      }
+
+      QString line_name = splitted[0].toLower();
+      QString line_value = splitted[1];
+
+      // PERFORMER
+      if(line_name == kPerformer) {
+
+        album_artist = line_value;
+
+      // TITLE
+      } else if(line_name == kTitle) {
+
+        album = line_value;
+
+      // SONGWRITER
+      } else if(line_name == kSongWriter) {
+
+        album_composer = line_value;
+
+      // FILE
+      } else if(line_name == kFile) {
+
+        file = QDir::isAbsolutePath(line_value)
+               ? line_value
+                 : dir.absoluteFilePath(line_value);
+
+        if(splitted.size() > 2) {
+          file_type = splitted[2];
+        }
+
+      // end of the header -> go into the track mode
+      } else if(line_name == kTrack) {
+
+        files++;
+        break;
+
+      }
+
+      // just ignore the rest of possible field types for now...
+    } while(!(line = text_stream.readLine()).isNull());
+
+    if(line.isNull()) {
+      qWarning() << "the .cue file from " << dir_path << " defines no tracks!";
+      return ret;
     }
 
-    QString line_name = splitted[0].toLower();
-    QString line_value = splitted[1];
-    QString line_additional = splitted.size() > 2 ? splitted[2].toLower() : "";
+    // if this is a data file, all of it's tracks will be ignored
+    bool valid_file = file_type.compare("BINARY", Qt::CaseInsensitive) &&
+                      file_type.compare("MOTOROLA", Qt::CaseInsensitive);
 
-    if(line_name == kTrack) {
+    QString track_type;
+    QString index;
+    QString artist;
+    QString composer;
+    QString title;
 
-      // the beginning of another track's definition - we're saving the current one
-      // for later (if it's valid of course)
-      if(!index.isEmpty() && (track_type.isEmpty() || track_type == kAudioTrackType)) {
-        entries.append(CueEntry(file, index, title, artist, album_artist, album));
+    // TRACK section
+    do {
+      QStringList splitted = SplitCueLine(line);
+
+      // uninteresting or incorrect line
+      if(splitted.size() < 2) {
+        continue;
       }
 
-      // clear the state
-      track_type = index = artist = title = "";
+      QString line_name = splitted[0].toLower();
+      QString line_value = splitted[1];
+      QString line_additional = splitted.size() > 2 ? splitted[2].toLower() : "";
 
-      if(!line_additional.isEmpty()) {
-        track_type = line_additional;
-      }
+      if(line_name == kTrack) {
 
-    } else if(line_name == kIndex) {
+        // the beginning of another track's definition - we're saving the current one
+        // for later (if it's valid of course)
+        // please note that the same code is repeated just after this 'do-while' loop
+        if(valid_file && !index.isEmpty() && (track_type.isEmpty() || track_type == kAudioTrackType)) {
+          entries.append(CueEntry(file, index, title, artist, album_artist, album, composer, album_composer));
+        }
 
-      // we need the index's position field
-      if(!line_additional.isEmpty()) {
+        // clear the state
+        track_type = index = artist = title = "";
 
-        // if there's none "01" index, we'll just take the first one
-        // also, we'll take the "01" index even if it's the last one
-        if(line_value == "01" || index.isEmpty()) {
+        if(!line_additional.isEmpty()) {
+          track_type = line_additional;
+        }
 
-          index = line_additional;
+      } else if(line_name == kIndex) {
+
+        // we need the index's position field
+        if(!line_additional.isEmpty()) {
+
+          // if there's none "01" index, we'll just take the first one
+          // also, we'll take the "01" index even if it's the last one
+          if(line_value == "01" || index.isEmpty()) {
+
+            index = line_additional;
+
+          }
 
         }
 
+      } else if(line_name == kPerformer) {
+
+        artist = line_value;
+
+      } else if(line_name == kTitle) {
+
+        title = line_value;
+
+      } else if(line_name == kSongWriter) {
+
+        composer = line_value;
+
+      // end of track's for the current file -> parse next one
+      } else if(line_name == kFile) {
+
+        break;
+
       }
 
-    } else if(line_name == kPerformer) {
+      // just ignore the rest of possible field types for now...
+    } while(!(line = text_stream.readLine()).isNull());
 
-      artist = line_value;
-
-    } else if(line_name == kTitle) {
-
-      title = line_value;
-
+    // we didn't add the last song yet...
+    if(valid_file && !index.isEmpty() && (track_type.isEmpty() || track_type == kAudioTrackType)) {
+      entries.append(CueEntry(file, index, title, artist, album_artist, album, composer, album_composer));
     }
-
-    // just ignore the rest of possible field types for now...
-  } while(!(line = text_stream.readLine()).isNull());
-
-  // we didn't add the last song yet...
-  if(!index.isEmpty() && (track_type.isEmpty() || track_type == kAudioTrackType)) {
-    entries.append(CueEntry(file, index, title, artist, album_artist, album));
   }
 
   // finalize parsing songs
@@ -181,7 +214,12 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
 
       // overwrite the stuff, we may have read from the file or library, using
       // the current .cue metadata
-      song.set_track(i + 1);
+
+      // set track number only in single-file mode
+      if(files == 1) {
+        song.set_track(i + 1);
+      }
+
       if(i + 1 < entries.size()) {
         // incorrect indices?
         if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {
@@ -227,6 +265,7 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Son
   song->Init(entry.title, entry.PrettyArtist(),
              entry.album, beginning, end);
   song->set_albumartist(entry.album_artist);
+  song->set_composer(entry.PrettyComposer());
 
   return true;
 }
@@ -245,6 +284,7 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
   song->set_artist(entry.PrettyArtist());
   song->set_album(entry.album);
   song->set_albumartist(entry.album_artist);
+  song->set_composer(entry.PrettyComposer());
 
   // we don't do anything with the end here because it's already set to
   // the end of the media file (if it exists)

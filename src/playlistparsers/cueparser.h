@@ -34,6 +34,7 @@ class CueParser : public ParserBase {
 
   static const char* kPerformer;
   static const char* kTitle;
+  static const char* kSongWriter;
   static const char* kFile;
   static const char* kTrack;
   static const char* kIndex;
@@ -62,16 +63,22 @@ class CueParser : public ParserBase {
     QString album_artist;
     QString album;
 
+    QString composer;
+    QString album_composer;
+
     QString PrettyArtist() const { return artist.isEmpty() ? album_artist : artist; }
+    QString PrettyComposer() const { return composer.isEmpty() ? album_composer : composer; }
 
     CueEntry(QString& file, QString& index, QString& title, QString& artist,
-             QString& album_artist, QString& album) {
+             QString& album_artist, QString& album, QString& composer, QString& album_composer) {
       this->file = file;
       this->index = index;
       this->title = title;
       this->artist = artist;
       this->album_artist = album_artist;
       this->album = album;
+      this->composer = composer;
+      this->album_composer = album_composer;
     }
   };
 
