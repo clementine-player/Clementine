@@ -96,6 +96,8 @@ class Player : public QObject {
   void VolumeChanged(int volume);
   void Error(const QString& message);
   void TrackSkipped(PlaylistItemPtr old_track);
+  // Emitted when there's a manual change to the current's track position.
+  void Seeked(qlonglong milliseconds);
 
   void ForceShowOSD(Song);
 

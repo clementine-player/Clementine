@@ -66,11 +66,11 @@ Mpris2::Mpris2(Player* player, ArtLoader* art_loader,
 
   connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(player, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));
+  connect(player, SIGNAL(Seeked(qlonglong)), SIGNAL(Seeked(qlonglong)));
 
   connect(player_->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
   connect(player_->playlists(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
 }
-
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
 void Mpris2::PlaylistManagerInitialized() {
