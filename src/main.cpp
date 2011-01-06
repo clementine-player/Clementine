@@ -40,8 +40,6 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "radio/radiomodel.h"
-#include "remote/httpserver.h"
-#include "remote/zeroconf.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -88,6 +86,11 @@ using boost::scoped_ptr;
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
+#endif
+
+#ifdef HAVE_REMOTE
+#include "remote/httpserver.h"
+#include "remote/zeroconf.h"
 #endif
 
 class GstEnginePipeline;
@@ -317,6 +320,7 @@ int main(int argc, char *argv[]) {
                    &osd, SLOT(CoverArtPathReady(Song, QString)));
 #endif
 
+#ifdef HAVE_REMOTE
   Zeroconf* zeroconf = Zeroconf::GetZeroconf();
   if (zeroconf) {
     HttpServer* server = new HttpServer(&player);
@@ -325,6 +329,7 @@ int main(int argc, char *argv[]) {
 
     zeroconf->Publish("local", "_clementine._tcp", "Clementine", port);
   }
+#endif
 
   // Window
   MainWindow w(

@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_C_FLAGS "-Wall ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "-Woverloaded-virtual -Wall -Wno-sign-compare ${CMAKE_CXX_FLAGS}")
@@ -150,10 +149,6 @@ set(SOURCES
   radio/radioviewcontainer.cpp
   radio/savedradio.cpp
   radio/somafmservice.cpp
-
-  remote/httpserver.cpp
-  remote/httpconnection.cpp
-  remote/zeroconf.cpp
 
   scripting/languageengine.cpp
   scripting/script.cpp
@@ -329,9 +324,6 @@ set(HEADERS
   radio/radioviewcontainer.h
   radio/savedradio.h
   radio/somafmservice.h
-
-  remote/httpserver.h
-  remote/httpconnection.h
 
   scripting/scriptdialog.h
   scripting/scriptdialogtabwidget.h
@@ -548,7 +540,6 @@ if(APPLE)
   list(APPEND HEADERS widgets/maclineedit.h)
   list(APPEND SOURCES core/macglobalshortcutbackend.mm)
   list(APPEND SOURCES devices/macdevicelister.mm)
-  list(APPEND SOURCES remote/bonjour.mm)
   list(APPEND SOURCES ui/macscreensaver.cpp)
   list(APPEND SOURCES ui/macsystemtrayicon.mm)
   list(APPEND SOURCES widgets/maclineedit.mm)
@@ -723,6 +714,19 @@ if(HAVE_SCRIPTING_PYTHON)
   )
 endif(HAVE_SCRIPTING_PYTHON)
 
+if(HAVE_REMOTE)
+  include_directories(${QJSON_INCLUDE_DIRS})
+  list(APPEND HEADERS remote/httpserver.h)
+  list(APPEND HEADERS remote/httpconnection.h)
+  list(APPEND SOURCES remote/httpserver.cpp)
+  list(APPEND SOURCES remote/httpconnection.cpp)
+  list(APPEND SOURCES remote/zeroconf.cpp)
+
+  if(APPLE)
+    list(APPEND SOURCES remote/bonjour.mm)
+  endif(APPLE)
+endif(HAVE_REMOTE)
+
 # OS-specific sources that should be searched for translatable strings even
 # if they're not compiled
 list(APPEND OTHER_SOURCES
@@ -814,7 +818,6 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
-  ${QJSON_LIBRARIES}
   dl
   z
 )
@@ -856,6 +859,10 @@ endif(HAVE_LIBINDICATE)
 if(HAVE_SCRIPTING_PYTHON)
   target_link_libraries(clementine_lib ${PYTHON_LIBRARIES})
 endif(HAVE_SCRIPTING_PYTHON)
+
+if(HAVE_REMOTE)
+  target_link_libraries(clementine_lib ${QJSON_LIBRARIES})
+endif(HAVE_REMOTE)
 
 if (APPLE)
   target_link_libraries(clementine_lib

@@ -112,7 +112,6 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories("3rdparty/universalchardet")
-include_directories(${QJSON_INCLUDE_DIRS})
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain
@@ -143,6 +142,7 @@ option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm p
 option(ENABLE_SOUNDMENU "Add Clementine to the Gnome sound menu" ON)
 option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and radio streams" ON)
 option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" ON)
+option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" ON)
 
 if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
   set(HAVE_LIBGPOD ON)
@@ -188,6 +188,10 @@ endif(ENABLE_VISUALISATIONS)
 # We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
 # need from it are private.
 option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
+
+if(ENABLE_REMOTE AND QJSON_LIBRARIES AND QJSON_INCLUDE_DIRS)
+  set(HAVE_REMOTE ON)
+endif(ENABLE_REMOTE AND QJSON_LIBRARIES AND QJSON_INCLUDE_DIRS)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
 if(STATIC_SQLITE)
@@ -289,4 +293,5 @@ summary_add("Visualisations" ENABLE_VISUALISATIONS)
 summary_add("Last.fm support" HAVE_LIBLASTFM)
 summary_add("Scripting support: Python" HAVE_SCRIPTING_PYTHON)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
+summary_add("Remote control support" HAVE_REMOTE)
 summary_show()
