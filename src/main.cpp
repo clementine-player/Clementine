@@ -319,10 +319,11 @@ int main(int argc, char *argv[]) {
 
   Zeroconf* zeroconf = Zeroconf::GetZeroconf();
   if (zeroconf) {
-    HttpServer* server = new HttpServer;
-    server->Listen(QHostAddress::Any, 12345);
+    HttpServer* server = new HttpServer(&player);
+    int port = 12345;
+    while (!server->Listen(QHostAddress::Any, port)) { ++port; }
 
-    zeroconf->Publish("local", "_clementine._tcp", "Clementine", 12345);
+    zeroconf->Publish("local", "_clementine._tcp", "Clementine", port);
   }
 
   // Window

@@ -57,6 +57,7 @@ pkg_check_modules(PLIST libplist)
 pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
+pkg_check_modules(QJSON QJson)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -111,6 +112,7 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories("3rdparty/universalchardet")
+include_directories(${QJSON_INCLUDE_DIRS})
 
 # Remove GLU and GL from the link line - they're not really required
 # and don't exist on my mingw toolchain

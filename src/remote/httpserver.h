@@ -3,10 +3,12 @@
 
 #include <QTcpServer>
 
+class Player;
+
 class HttpServer : public QObject {
   Q_OBJECT
  public:
-  HttpServer(QObject* parent = 0);
+  HttpServer(Player* player, QObject* parent = 0);
   bool Listen(const QHostAddress& addr, quint16 port);
 
  private slots:
@@ -14,6 +16,8 @@ class HttpServer : public QObject {
 
  private:
   QTcpServer server_;
+
+  Player* player_;
 };
 
 #endif
