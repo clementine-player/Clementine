@@ -158,6 +158,8 @@ private:
 
   QString current_track_id() const;
 
+  QString DesktopEntryAbsolutePath() const;
+
 private:
   static const char* kMprisObjectPath;
   static const char* kServiceName;

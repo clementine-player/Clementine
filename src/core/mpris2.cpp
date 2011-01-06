@@ -58,7 +58,7 @@ Mpris2::Mpris2(Player* player, ArtLoader* art_loader,
 #ifdef HAVE_LIBINDICATE
   QIndicate::Server* indicate_server = QIndicate::Server::defaultInstance();
   indicate_server->setType("music.clementine");
-  indicate_server->setDesktopFile(DesktopEntry());
+  indicate_server->setDesktopFile(DesktopEntryAbsolutePath());
   indicate_server->show();
 #endif
 
@@ -147,9 +147,7 @@ QString Mpris2::Identity() const {
       QCoreApplication::applicationVersion());
 }
 
-// Returning the whole path to the desktop file seems to be inconsistent with the
-// spec but SoundMenu requires this to work this way.
-QString Mpris2::DesktopEntry() const {
+QString Mpris2::DesktopEntryAbsolutePath() const {
   QStringList xdg_data_dirs = QString(getenv("XDG_DATA_DIRS")).split(":");
   xdg_data_dirs.append("/usr/local/share/");
   xdg_data_dirs.append("/usr/share/");
@@ -161,6 +159,10 @@ QString Mpris2::DesktopEntry() const {
       return path;
   }
   return QString();
+}
+
+QString Mpris2::DesktopEntry() const {
+  return QApplication::applicationName().toLower();
 }
 
 QStringList Mpris2::SupportedUriSchemes() const {
