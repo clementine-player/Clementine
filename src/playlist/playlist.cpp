@@ -462,7 +462,7 @@ int Playlist::next_row() const {
   }
 
   // Still off the end?  Then just give up
-  if (next_virtual_index >= virtual_items_.count())
+  if (next_virtual_index < 0 || next_virtual_index >= virtual_items_.count())
     return -1;
 
   return virtual_items_[next_virtual_index];
