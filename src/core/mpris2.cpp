@@ -17,7 +17,7 @@
 
 #include "config.h"
 #include "mpris_common.h"
-#include "mpris.h"
+#include "mpris1.h"
 #include "mpris2.h"
 #include "core/mpris2_player.h"
 #include "core/mpris2_root.h"
@@ -31,6 +31,7 @@
 
 #include <QApplication>
 #include <QDBusConnection>
+#include <QtConcurrentRun>
 
 #ifdef HAVE_LIBINDICATE
 # include <qindicateserver.h>
@@ -55,21 +56,23 @@ Mpris2::Mpris2(Player* player, ArtLoader* art_loader,
   QDBusConnection::sessionBus().registerService(kServiceName);
   QDBusConnection::sessionBus().registerObject(kMprisObjectPath, this);
 
-#ifdef HAVE_LIBINDICATE
-  QIndicate::Server* indicate_server = QIndicate::Server::defaultInstance();
-  indicate_server->setType("music.clementine");
-  indicate_server->setDesktopFile(DesktopEntryAbsolutePath());
-  indicate_server->show();
-#endif
-
   connect(art_loader, SIGNAL(ArtLoaded(Song,QString)), SLOT(ArtLoaded(Song,QString)));
 
   connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(player, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));
   connect(player, SIGNAL(Seeked(qlonglong)), SIGNAL(Seeked(qlonglong)));
 
-  connect(player_->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
-  connect(player_->playlists(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
+  connect(player->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
+  connect(player->playlists(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
+}
+
+void Mpris2::InitLibIndicate() {
+#ifdef HAVE_LIBINDICATE
+  QIndicate::Server* indicate_server = QIndicate::Server::defaultInstance();
+  indicate_server->setType("music.clementine");
+  indicate_server->setDesktopFile(DesktopEntryAbsolutePath());
+  indicate_server->show();
+#endif
 }
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this

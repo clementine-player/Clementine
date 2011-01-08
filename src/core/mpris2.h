@@ -73,6 +73,9 @@ class Mpris2 : public QObject {
 
 public:
   Mpris2(Player* player, ArtLoader* art_loader, Mpris1* mpris1, QObject* parent = 0); 
+
+  void InitLibIndicate();
+
   // Root Properties
   bool CanQuit() const;
   bool CanRaise() const;

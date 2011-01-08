@@ -312,8 +312,7 @@ int main(int argc, char *argv[]) {
   qDBusRegisterMetaType<TrackIds>();
 
   mpris::ArtLoader art_loader;
-  mpris::Mpris1 mpris1(&player, &art_loader);
-  mpris::Mpris2 mpris2(&player, &art_loader, &mpris1);
+  mpris::Mpris mpris(&player, &art_loader);
 
   QObject::connect(&playlists, SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
   QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString)),
@@ -341,7 +340,7 @@ int main(int argc, char *argv[]) {
       tray_icon.get(),
       &osd);
 #ifdef HAVE_DBUS
-  QObject::connect(&mpris2, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
+  QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
