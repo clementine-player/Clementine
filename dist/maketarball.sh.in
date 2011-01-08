@@ -18,5 +18,5 @@ tar -czf $name-$version.tar.gz "$root" \
     --exclude "$root/dist/*.tar.gz"
 
 echo "Also creating ${name}_${deb_version}~${deb_dist}.orig.tar.gz..."
-cp "$name-$version.tar.gz" "${name}_${deb_version}~${deb_dist}.orig.tar.gzz"
+cp "$name-$version.tar.gz" "${name}_${deb_version}~${deb_dist}.orig.tar.gz"
 
