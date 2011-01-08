@@ -1,4 +1,5 @@
 set(DEB_ARCH amd64 CACHE STRING "Architecture of the deb file")
+set(DEB_DIST "unstable" CACHE STRING "Distribution to set in the .deb changelog")
 
 add_custom_target(deb
   COMMAND dpkg-buildpackage -b -d -uc -us
