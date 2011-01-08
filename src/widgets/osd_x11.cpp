@@ -24,6 +24,7 @@
 #include "dbus/notification.h"
 #include <QCoreApplication>
 #include <QTextDocument>
+#include <QtConcurrentRun>
 
 using boost::scoped_ptr;
 
@@ -58,6 +59,12 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
 #endif // HAVE_DBUS
 
 void OSD::Init() {
+  notification_id_ = 0;
+
+  QtConcurrent::run(this, &OSD::DoInit);
+}
+
+void OSD::DoInit() {
 #ifdef HAVE_DBUS
   interface_.reset(new OrgFreedesktopNotificationsInterface(
       OrgFreedesktopNotificationsInterface::staticInterfaceName(),
@@ -66,8 +73,6 @@ void OSD::Init() {
   if (!interface_->isValid()) {
     qWarning() << "Error connecting to notifications service.";
   }
-
-  notification_id_ = 0;
 #endif // HAVE_DBUS
 }
 
@@ -86,6 +91,9 @@ bool OSD::SupportsTrayPopups() {
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon, const QImage& image) {
 #ifdef HAVE_DBUS
+  if (!interface_)
+    return;
+
   QVariantMap hints;
   if (!image.isNull()) {
     hints["image_data"] = QVariant(image);
