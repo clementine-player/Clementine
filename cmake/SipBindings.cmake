@@ -1,4 +1,4 @@
-find_path(PYQT_SIP_DIR pyqt-gpl.sip
+find_path(PYQT_SIP_DIR Qt/Qtmod.sip
   PATH_SUFFIXES share/sip/PyQt4
 )
 
