@@ -32,6 +32,8 @@ Mpris::Mpris(Player* player, ArtLoader* art_loader, QObject* parent)
     mpris1_(NULL),
     mpris2_(NULL)
 {
+  qDebug() << __PRETTY_FUNCTION__;
+
   QFuture<void> future = QtConcurrent::run(this, &Mpris::Init);
 
   QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
@@ -41,7 +43,10 @@ Mpris::Mpris(Player* player, ArtLoader* art_loader, QObject* parent)
 }
 
 void Mpris::Init() {
+  qDebug() << __PRETTY_FUNCTION__ << "- starting";
+  qDebug() << __PRETTY_FUNCTION__ << "- registering MPRIS1";
   mpris1_ = new mpris::Mpris1(player_, art_loader_);
+  qDebug() << __PRETTY_FUNCTION__ << "- registering MPRIS2";
   mpris2_ = new mpris::Mpris2(player_, art_loader_, mpris1_);
 
   mpris1_->moveToThread(thread());
@@ -51,9 +56,12 @@ void Mpris::Init() {
   mpris2_->setParent(this);
 
   connect(mpris2_, SIGNAL(RaiseMainWindow()), SIGNAL(RaiseMainWindow()));
+
+  qDebug() << __PRETTY_FUNCTION__ << "- complete";
 }
 
 void Mpris::Initialised() {
+  qDebug() << __PRETTY_FUNCTION__;
   mpris2_->InitLibIndicate();
 }
 
