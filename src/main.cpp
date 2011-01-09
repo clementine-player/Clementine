@@ -311,6 +311,9 @@ int main(int argc, char *argv[]) {
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
 
+  // Create the session bus here so it's sure to live in the main thread
+  QDBusConnection::sessionBus();
+
   mpris::ArtLoader art_loader;
   mpris::Mpris mpris(&player, &art_loader);
 
