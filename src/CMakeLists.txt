@@ -247,6 +247,7 @@ set(HEADERS
   core/database.h
   core/deletefiles.h
   core/globalshortcuts.h
+  core/globalshortcutbackend.h
   core/gnomeglobalshortcutbackend.h
   core/kittenloader.h
   core/mergedproxymodel.h

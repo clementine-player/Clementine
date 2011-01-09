@@ -23,22 +23,34 @@
 class GlobalShortcuts;
 
 class GlobalShortcutBackend : public QObject {
+  Q_OBJECT
+
 public:
   GlobalShortcutBackend(GlobalShortcuts* parent = 0);
   virtual ~GlobalShortcutBackend() {}
 
   bool is_active() const { return active_; }
 
-  bool Register();
+  void Register();
   void Unregister();
-  void Reregister();
+
+signals:
+  void RegisterFinished(bool success);
 
 protected:
+  virtual bool RegisterInNewThread() const { return false; }
   virtual bool DoRegister() = 0;
   virtual void DoUnregister() = 0;
 
   GlobalShortcuts* manager_;
   bool active_;
+
+private slots:
+  void RegisterFinishedSlot();
+
+private:
+  bool register_in_progress_;
+  bool should_unregister_;
 };
 
 #endif // GLOBALSHORTCUTBACKEND_H

@@ -33,6 +33,7 @@ public:
   static const char* kGsdInterface;
 
 protected:
+  bool RegisterInNewThread() const { return true; }
   bool DoRegister();
   void DoUnregister();
 

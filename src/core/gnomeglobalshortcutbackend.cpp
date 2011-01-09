@@ -36,22 +36,29 @@ GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
 }
 
 bool GnomeGlobalShortcutBackend::DoRegister() {
-  qDebug() << __PRETTY_FUNCTION__;
 #ifdef QT_DBUS_LIB
+  qDebug() << __PRETTY_FUNCTION__ << "- starting";
   // Check if the GSD service is available
-  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService))
+  if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService)) {
+    qDebug() << __PRETTY_FUNCTION__ << "- gnome settings daemon not registered";
     return false;
+  }
 
   if (!interface_) {
     interface_ = new QDBusInterface(
-        kGsdService, kGsdPath, kGsdInterface, QDBusConnection::sessionBus(), this);
+        kGsdService, kGsdPath, kGsdInterface, QDBusConnection::sessionBus());
+    interface_->moveToThread(thread());
+    interface_->setParent(this);
   }
 
   connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
           this, SLOT(GnomeMediaKeyPressed(QString,QString)));
 
+  qDebug() << __PRETTY_FUNCTION__ << "- complete";
+
   return true;
 #else // QT_DBUS_LIB
+  qDebug() << __PRETTY_FUNCTION__ << "- dbus not available";
   return false;
 #endif
 }

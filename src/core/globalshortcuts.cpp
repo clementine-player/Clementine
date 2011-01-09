@@ -67,14 +67,16 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   connect(rating_signals_mapper_, SIGNAL(mapped(int)), SIGNAL(RateCurrentSong(int)));
 
   // Create backends - these do the actual shortcut registration
-  if (IsGsdAvailable())
-    gnome_backend_ = new GnomeGlobalShortcutBackend(this);
+  gnome_backend_ = new GnomeGlobalShortcutBackend(this);
 
 #ifndef Q_OS_DARWIN
   system_backend_ = new QxtGlobalShortcutBackend(this);
 #else
   system_backend_ = new MacGlobalShortcutBackend(this);
 #endif
+
+  connect(gnome_backend_, SIGNAL(RegisterFinished(bool)), SLOT(RegisterFinished(bool)));
+  connect(system_backend_, SIGNAL(RegisterFinished(bool)), SLOT(RegisterFinished(bool)));
 
   ReloadSettings();
 }
@@ -127,17 +129,25 @@ void GlobalShortcuts::ReloadSettings() {
 }
 
 void GlobalShortcuts::Unregister() {
-  if (gnome_backend_ && gnome_backend_->is_active())
+  if (gnome_backend_->is_active())
     gnome_backend_->Unregister();
-  if (system_backend_ && system_backend_->is_active())
+  if (system_backend_->is_active())
     system_backend_->Unregister();
 }
 
 void GlobalShortcuts::Register() {
-  if (gnome_backend_ && use_gnome_)
+  if (use_gnome_)
     gnome_backend_->Register();
-  else if (system_backend_)
+  else
     system_backend_->Register();
+}
+
+void GlobalShortcuts::RegisterFinished(bool success) {
+  GlobalShortcutBackend* backend = qobject_cast<GlobalShortcutBackend*>(sender());
+
+  if (backend == gnome_backend_ && !success) {
+    system_backend_->Register();
+  }
 }
 
 bool GlobalShortcuts::IsMacAccessibilityEnabled() const {
