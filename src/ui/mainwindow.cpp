@@ -515,6 +515,7 @@ MainWindow::MainWindow(
   qtsparkle::Updater* updater = new qtsparkle::Updater(
       QUrl("http://data.clementine-player.org/sparkle-windows"), this);
   updater->SetNetworkAccessManager(new NetworkAccessManager(this));
+  updater->SetVersion(CLEMENTINE_VERSION);
   connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
 #endif
 
