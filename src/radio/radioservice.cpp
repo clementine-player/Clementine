@@ -25,18 +25,6 @@ RadioService::RadioService(const QString& name, RadioModel* model)
 {
 }
 
-QUrl RadioService::UrlForItem(const RadioItem* item) const {
-  return item->key;
-}
-
-QString RadioService::TitleForItem(const RadioItem* item) const {
-  return item->DisplayText();
-}
-
-QString RadioService::ArtistForItem(const RadioItem* item) const {
-  return item->artist;
-}
-
 PlaylistItem::SpecialLoadResult RadioService::StartLoading(const QUrl &url) {
   return PlaylistItem::SpecialLoadResult(
       PlaylistItem::SpecialLoadResult::TrackAvailable, url, url);

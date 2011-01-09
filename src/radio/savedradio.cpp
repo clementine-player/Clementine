@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "radiomodel.h"
 #include "savedradio.h"
 #include "ui/addstreamdialog.h"
 #include "ui/iconloader.h"
@@ -27,8 +28,8 @@ const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
 SavedRadio::SavedRadio(RadioModel* parent)
   : RadioService(kServiceName, parent),
-    root_(NULL),
-    context_menu_(NULL)
+    context_menu_(NULL),
+    root_(NULL)
 {
   LoadStreams();
 }
@@ -37,25 +38,24 @@ SavedRadio::~SavedRadio() {
   delete context_menu_;
 }
 
-RadioItem* SavedRadio::CreateRootItem(RadioItem* parent) {
-  root_ = new RadioItem(this, RadioItem::Type_Service, tr("Your radio streams"), parent);
-  root_->icon = IconLoader::Load("document-open-remote");
+QStandardItem* SavedRadio::CreateRootItem() {
+  root_ = new QStandardItem(IconLoader::Load("document-open-remote"),
+                            tr("Your radio streams"));
+  root_->setData(true, RadioModel::Role_CanLazyLoad);
   return root_;
 }
 
-void SavedRadio::LazyPopulate(RadioItem* item) {
-  switch (item->type) {
-    case RadioItem::Type_Service:
+void SavedRadio::LazyPopulate(QStandardItem* item) {
+  switch (item->data(RadioModel::Role_Type).toInt()) {
+    case RadioModel::Type_Service:
       foreach (const Stream& stream, streams_)
-        ItemForStream(stream, root_);
+        AddStreamToList(stream, root_);
 
       break;
 
     default:
       break;
   }
-
-  item->lazy_loaded = true;
 }
 
 void SavedRadio::LoadStreams() {
@@ -85,7 +85,7 @@ void SavedRadio::SaveStreams() {
   s.endArray();
 }
 
-void SavedRadio::ShowContextMenu(RadioItem* item, const QModelIndex&,
+void SavedRadio::ShowContextMenu(const QModelIndex& index,
                                  const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
@@ -97,19 +97,20 @@ void SavedRadio::ShowContextMenu(RadioItem* item, const QModelIndex&,
     context_menu_->addAction(IconLoader::Load("document-open-remote"), tr("Add another stream..."), this, SIGNAL(ShowAddStreamDialog()));
   }
 
-  context_item_ = item;
+  context_item_ = model()->itemFromIndex(index);
+  const bool is_root = index.data(RadioModel::Role_Type).toInt() == RadioModel::Type_Service;
 
-  add_action_->setEnabled(item != root_);
-  load_action_->setEnabled(item != root_);
-  remove_action_->setEnabled(item != root_);
-  edit_action_->setEnabled(item != root_);
+  add_action_->setEnabled(!is_root);
+  load_action_->setEnabled(!is_root);
+  remove_action_->setEnabled(!is_root);
+  edit_action_->setEnabled(!is_root);
 
   context_menu_->popup(global_pos);
 }
 
 void SavedRadio::Remove() {
-  streams_.removeAll(Stream(QUrl(context_item_->key)));
-  context_item_->parent->DeleteNotify(context_item_->row);
+  streams_.removeAll(Stream(QUrl(context_item_->data(RadioModel::Role_Url).toUrl())));
+  context_item_->parent()->removeRow(context_item_->row());
   SaveStreams();
 }
 
@@ -119,19 +120,18 @@ void SavedRadio::Edit() {
     edit_dialog_->set_save_visible(false);
   }
 
-  edit_dialog_->set_name(context_item_->display_text);
-  edit_dialog_->set_url(context_item_->key);
+  edit_dialog_->set_name(context_item_->text());
+  edit_dialog_->set_url(context_item_->data(RadioModel::Role_Url).toUrl());
   if (edit_dialog_->exec() == QDialog::Rejected)
     return;
 
-  int i = streams_.indexOf(Stream(QUrl(context_item_->key)));
+  int i = streams_.indexOf(Stream(QUrl(context_item_->data(RadioModel::Role_Url).toUrl())));
   Stream& stream = streams_[i];
   stream.name_ = edit_dialog_->name();
   stream.url_ = edit_dialog_->url();
 
-  context_item_->display_text = stream.name_;
-  context_item_->key = stream.url_.toString();
-  context_item_->ChangedNotify();
+  context_item_->setText(stream.name_);
+  context_item_->setData(stream.url_, RadioModel::Role_Url);
 
   SaveStreams();
 }
@@ -144,15 +144,11 @@ void SavedRadio::LoadToPlaylist() {
   emit AddItemToPlaylist(context_item_, true);
 }
 
-RadioItem* SavedRadio::ItemForStream(const Stream& stream, RadioItem* parent) {
-  RadioItem* s = new RadioItem(this, Type_Stream, stream.url_.toString(), parent);
-  if (!stream.name_.isEmpty())
-    s->display_text = stream.name_;
-  s->lazy_loaded = true;
-  s->icon = QIcon(":last.fm/icon_radio.png");
-  s->playable = true;
-  s->use_song_loader = true;
-  return s;
+void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {
+  QStandardItem* s = new QStandardItem(QIcon(":last.fm/icon_radio.png"), stream.name_);
+  s->setData(stream.url_, RadioModel::Role_Url);
+  s->setData(RadioModel::PlayBehaviour_UseSongLoader, RadioModel::Role_PlayBehaviour);
+  parent->appendRow(s);
 }
 
 void SavedRadio::Add(const QUrl &url, const QString& name) {
@@ -162,9 +158,8 @@ void SavedRadio::Add(const QUrl &url, const QString& name) {
   Stream stream(url, name);
   streams_ << stream;
 
-  if (root_->lazy_loaded) {
-    RadioItem* s = ItemForStream(stream, NULL);
-    s->InsertNotify(root_);
+  if (!root_->data(RadioModel::Role_CanLazyLoad).toBool()) {
+    AddStreamToList(stream, root_);
   }
   SaveStreams();
 }

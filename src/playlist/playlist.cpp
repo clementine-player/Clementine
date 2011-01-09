@@ -607,7 +607,8 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       InsertSongItems<SongPlaylistItem>(this, song_data->songs, row);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
-    InsertRadioStations(radio_data->items, row, data->hasFormat(kPlayNowMimetype));
+    InsertRadioStations(radio_data->model, radio_data->indexes,
+                        row, data->hasFormat(kPlayNowMimetype));
   } else if (const GeneratorMimeData* generator_data = qobject_cast<const GeneratorMimeData*>(data)) {
     InsertSmartPlaylist(generator_data->generator_, row, data->hasFormat(kPlayNowMimetype));
   } else if (data->hasFormat(kRowsMimetype)) {
@@ -838,18 +839,24 @@ QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, 
   return InsertItems(items, pos, enqueue);
 }
 
-QModelIndex Playlist::InsertRadioStations(const QList<RadioItem*>& items, int pos, bool play_now) {
+QModelIndex Playlist::InsertRadioStations(
+    const RadioModel* model, const QModelIndexList& items, int pos, bool play_now) {
   PlaylistItemList playlist_items;
   QList<QUrl> song_urls;
-  foreach (RadioItem* item, items) {
-    if (!item->playable)
-      continue;
 
-    if (item->use_song_loader) {
-      song_urls << item->Url();
-    } else {
-      playlist_items << shared_ptr<PlaylistItem>(
-          new RadioPlaylistItem(item->service, item->Url(), item->Title(), item->Artist()));
+  foreach (const QModelIndex& item, items) {
+    switch (item.data(RadioModel::Role_PlayBehaviour).toInt()) {
+    case RadioModel::PlayBehaviour_SingleItem:
+      playlist_items << shared_ptr<PlaylistItem>(new RadioPlaylistItem(
+          model->ServiceForIndex(item),
+          item.data(RadioModel::Role_Url).toUrl(),
+          item.data(RadioModel::Role_Title).toString(),
+          item.data(RadioModel::Role_Artist).toString()));
+      break;
+
+    case RadioModel::PlayBehaviour_UseSongLoader:
+      song_urls << item.data(RadioModel::Role_Url).toUrl();
+      break;
     }
   }
 

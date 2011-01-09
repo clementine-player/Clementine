@@ -19,14 +19,18 @@
 #define RADIOMIMEDATA_H
 
 #include <QMimeData>
+#include <QModelIndexList>
 
-class RadioItem;
+class RadioModel;
 
 class RadioMimeData : public QMimeData {
   Q_OBJECT
 
- public:
-  QList<RadioItem*> items;
+public:
+  RadioMimeData(const RadioModel* _model) : model(_model) {}
+
+  const RadioModel* model;
+  QModelIndexList indexes;
 };
 
 #endif // RADIOMIMEDATA_H

@@ -49,27 +49,24 @@ SomaFMService::~SomaFMService() {
   delete context_menu_;
 }
 
-RadioItem* SomaFMService::CreateRootItem(RadioItem* parent) {
-  root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  root_->icon = QIcon(":/providers/somafm.png");
+QStandardItem* SomaFMService::CreateRootItem() {
+  root_ = new QStandardItem(QIcon(":/providers/somafm.png"), kServiceName);
+  root_->setData(true, RadioModel::Role_CanLazyLoad);
   return root_;
 }
 
-void SomaFMService::LazyPopulate(RadioItem* item) {
-  switch (item->type) {
-    case RadioItem::Type_Service:
+void SomaFMService::LazyPopulate(QStandardItem* item) {
+  switch (item->data(RadioModel::Role_Type).toInt()) {
+    case RadioModel::Type_Service:
       RefreshChannels();
       break;
 
     default:
       break;
   }
-
-  item->lazy_loaded = true;
 }
 
-void SomaFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
-                                    const QPoint& global_pos) {
+void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
@@ -79,7 +76,7 @@ void SomaFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
     context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
   }
 
-  context_item_ = item;
+  context_item_ = model()->itemFromIndex(index);
   context_menu_->popup(global_pos);
 }
 
@@ -151,7 +148,8 @@ void SomaFMService::RefreshChannelsFinished() {
     return;
   }
 
-  root_->ClearNotify();
+  if (root_->hasChildren())
+    root_->removeRows(0, root_->rowCount());
 
   QXmlStreamReader reader(reply);
   while (!reader.atEnd()) {
@@ -162,34 +160,31 @@ void SomaFMService::RefreshChannelsFinished() {
       ReadChannel(reader);
     }
   }
-
-  root_->lazy_loaded = true;
 }
 
 void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
-  RadioItem* item = new RadioItem(this, Type_Stream, QString::null);
-  item->lazy_loaded = true;
-  item->playable = true;
-  item->icon = QIcon(":last.fm/icon_radio.png");
+  QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
+  item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
 
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
       case QXmlStreamReader::EndElement:
-        if (item->key.isNull()) {
+        if (item->data(RadioModel::Role_Url).toString().isNull()) {
           // Didn't find a URL
           delete item;
         } else {
-          item->InsertNotify(root_);
+          root_->appendRow(item);
         }
         return;
 
       case QXmlStreamReader::StartElement:
         if (reader.name() == "title") {
-          item->display_text = reader.readElementText();
+          item->setText(reader.readElementText());
+          item->setData("SomaFM " + item->text(), RadioModel::Role_Title);
         } else if (reader.name() == "dj") {
-          item->artist = reader.readElementText();
+          item->setData(reader.readElementText(), RadioModel::Role_Artist);
         } else if (reader.name() == "fastpls" && reader.attributes().value("format") == "mp3") {
-          item->key = reader.readElementText();
+          item->setData(reader.readElementText(), RadioModel::Role_Url);
         } else {
           ConsumeElement(reader);
         }
@@ -215,10 +210,6 @@ void SomaFMService::ConsumeElement(QXmlStreamReader& reader) {
     if (level == 0)
       return;
   }
-}
-
-QString SomaFMService::TitleForItem(const RadioItem* item) const {
-  return "SomaFM " + item->display_text;
 }
 
 void SomaFMService::Homepage() {

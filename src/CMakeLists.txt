@@ -141,7 +141,6 @@ set(SOURCES
   radio/magnatunedownloaddialog.cpp
   radio/magnatuneplaylistitem.cpp
   radio/magnatuneservice.cpp
-  radio/radioitem.cpp
   radio/radiomodel.cpp
   radio/radioplaylistitem.cpp
   radio/radioservice.cpp

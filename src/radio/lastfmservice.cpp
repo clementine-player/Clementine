@@ -16,7 +16,6 @@
 */
 
 #include "lastfmservice.h"
-#include "radioitem.h"
 #include "lastfmstationdialog.h"
 #include "radiomodel.h"
 #include "radioplaylistitem.h"
@@ -50,6 +49,14 @@ const char* LastFMService::kSettingsGroup = "Last.fm";
 const char* LastFMService::kAudioscrobblerClientId = "tng";
 const char* LastFMService::kApiKey = "75d20fb472be99275392aefa2760ea09";
 const char* LastFMService::kSecret = "d3072b60ae626be12be69448f5c46e70";
+
+const char* LastFMService::kUrlArtist   = "lastfm://artist/%1/similarartists";
+const char* LastFMService::kUrlTag      = "lastfm://globaltags/%1";
+const char* LastFMService::kUrlCustom   = "lastfm://rql/%1";
+
+const char* LastFMService::kTitleArtist = QT_TR_NOOP("Last.fm Similar Artists to %1");
+const char* LastFMService::kTitleTag    = QT_TR_NOOP("Last.fm Tag Radio: %1");
+const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1");
 
 LastFMService::LastFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
@@ -112,43 +119,63 @@ bool LastFMService::IsAuthenticated() const {
   return !lastfm::ws::SessionKey.isEmpty();
 }
 
-RadioItem* LastFMService::CreateRootItem(RadioItem* parent) {
-  RadioItem* item = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  item->icon = QIcon(":last.fm/as.png");
+QStandardItem* LastFMService::CreateRootItem() {
+  QStandardItem* item = new QStandardItem(QIcon(":last.fm/as.png"), kServiceName);
+  item->setData(true, RadioModel::Role_CanLazyLoad);
   return item;
 }
 
-void LastFMService::LazyPopulate(RadioItem *item) {
-  switch (item->type) {
-    case RadioItem::Type_Service:
+void LastFMService::LazyPopulate(QStandardItem* parent) {
+  switch (parent->data(RadioModel::Role_Type).toInt()) {
+    case RadioModel::Type_Service:
       // Normal radio types
-      CreateStationItem(Type_MyRecommendations, tr("My Recommendations"), ":last.fm/recommended_radio.png", item);
-      CreateStationItem(Type_MyRadio, tr("My Radio Station"), ":last.fm/personal_radio.png", item);
-      CreateStationItem(Type_MyMix, tr("My Mix Radio"), ":last.fm/loved_radio.png", item);
-      CreateStationItem(Type_MyNeighbourhood, tr("My Neighborhood"), ":last.fm/neighbour_radio.png", item);
+      CreateStationItem(parent,
+          tr("My Recommendations"),
+          ":last.fm/recommended_radio.png",
+          "lastfm://user/USERNAME/recommended",
+          tr("My Last.fm Recommended Radio"));
+      CreateStationItem(parent,
+          tr("My Radio Station"),
+          ":last.fm/personal_radio.png",
+          "lastfm://user/USERNAME/library",
+          tr("My Last.fm Library"));
+      CreateStationItem(parent,
+          tr("My Mix Radio"),
+          ":last.fm/loved_radio.png",
+          "lastfm://user/USERNAME/mix",
+          tr("My Last.fm Mix Radio"));
+      CreateStationItem(parent,
+          tr("My Neighborhood"),
+          ":last.fm/neighbour_radio.png",
+          "lastfm://user/USERNAME/neighbours",
+          tr("My Last.fm Neighborhood"));
 
       // Types that have children
-      artist_list_ = new RadioItem(this, Type_ArtistRadio, tr("Artist radio"), item);
-      artist_list_->icon = QIcon(":last.fm/icon_radio.png");
-      artist_list_->lazy_loaded = true;
+      artist_list_ = new QStandardItem(QIcon(":last.fm/icon_radio.png"), tr("Artist radio"));
+      artist_list_->setData(Type_Artists, RadioModel::Role_Type);
+      parent->appendRow(artist_list_);
 
-      tag_list_ = new RadioItem(this, Type_TagRadio, tr("Tag radio"), item);
-      tag_list_->icon = QIcon(":last.fm/icon_tag.png");
-      tag_list_->lazy_loaded = true;
+      tag_list_ = new QStandardItem(QIcon(":last.fm/icon_tag.png"), tr("Tag radio"));
+      tag_list_->setData(Type_Tags, RadioModel::Role_Type);
+      parent->appendRow(tag_list_);
 
-      custom_list_ = new RadioItem(this, Type_CustomRadio, tr("Custom radio"), item);
-      custom_list_->icon = QIcon(":last.fm/icon_radio.png");
-      custom_list_->lazy_loaded = true;
+      custom_list_ = new QStandardItem(QIcon(":last.fm/icon_radio.png"), tr("Custom radio"));
+      custom_list_->setData(Type_Custom, RadioModel::Role_Type);
+      parent->appendRow(custom_list_);
 
-      RestoreList("artists", Type_Artist, QIcon(":last.fm/icon_radio.png"), artist_list_);
-      RestoreList("tags", Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
-      RestoreList("custom", Type_Custom, QIcon(":last.fm/icon_radio.png"), custom_list_);
+      RestoreList("artists", kUrlArtist, kTitleArtist, QIcon(":last.fm/icon_radio.png"), artist_list_);
+      RestoreList("tags", kUrlTag, kTitleTag, QIcon(":last.fm/icon_tag.png"), tag_list_);
+      RestoreList("custom", kUrlCustom, kTitleCustom, QIcon(":last.fm/icon_radio.png"), custom_list_);
 
-      friends_list_ = new RadioItem(this, Type_MyFriends, tr("Friends"), item);
-      friends_list_->icon = QIcon(":last.fm/my_friends.png");
+      friends_list_ = new QStandardItem(QIcon(":last.fm/my_friends.png"), tr("Friends"));
+      friends_list_->setData(Type_Friends, RadioModel::Role_Type);
+      friends_list_->setData(true, RadioModel::Role_CanLazyLoad);
+      parent->appendRow(friends_list_);
 
-      neighbours_list_ = new RadioItem(this, Type_MyNeighbours, tr("Neighbors"), item);
-      neighbours_list_->icon = QIcon(":last.fm/my_neighbours.png");
+      neighbours_list_ = new QStandardItem(QIcon(":last.fm/my_neighbours.png"), tr("Neighbors"));
+      neighbours_list_->setData(Type_Neighbours, RadioModel::Role_Type);
+      neighbours_list_->setData(true, RadioModel::Role_CanLazyLoad);
+      parent->appendRow(neighbours_list_);
 
       if (!IsAuthenticated())
         ShowConfig();
@@ -158,37 +185,45 @@ void LastFMService::LazyPopulate(RadioItem *item) {
       add_custom_action_->setEnabled(true);
       break;
 
-    case Type_MyFriends:
+    case Type_Friends:
       RefreshFriends();
       break;
 
-    case Type_MyNeighbours:
+    case Type_Neighbours:
       RefreshNeighbours();
       break;
 
     case Type_OtherUser:
-      CreateStationItem(Type_OtherUserRadio, item->key, ":last.fm/recommended_radio.png", item)
-          ->display_text = tr("Last.fm Radio Station - %1").arg(item->key);
-      CreateStationItem(Type_OtherUserMix, item->key, ":last.fm/loved_radio.png", item)
-          ->display_text = tr("Last.fm Mix Radio - %1").arg(item->key);
-      CreateStationItem(Type_OtherUserNeighbourhood, item->key, ":last.fm/neighbour_radio.png", item)
-          ->display_text = tr("Last.fm Neighbor Radio - %1").arg(item->key);
+      CreateStationItem(parent,
+          tr("Last.fm Radio Station - %1").arg(parent->text()),
+          ":last.fm/personal_radio.png",
+          "lastfm://user/" + parent->text() + "/library",
+          tr("Last.fm Library - %1").arg(parent->text()));
+      CreateStationItem(parent,
+          tr("Last.fm Mix Radio - %1").arg(parent->text()),
+          ":last.fm/loved_radio.png",
+          "lastfm://user/" + parent->text() + "/mix",
+          tr("Last.fm Mix Radio - %1").arg(parent->text()));
+      CreateStationItem(parent,
+          tr("Last.fm Neighbor Radio - %1").arg(parent->text()),
+          ":last.fm/neighbour_radio.png",
+          "lastfm://user/" + parent->text() + "/neighbours",
+          tr("Last.fm Neighbor Radio - %1").arg(parent->text()));
       break;
 
     default:
       break;
   }
-
-  item->lazy_loaded = true;
 }
 
-RadioItem* LastFMService::CreateStationItem(ItemType type, const QString& name,
-                                            const QString& icon, RadioItem* parent) {
-  RadioItem* ret = new RadioItem(this, type, name, parent);
-  ret->lazy_loaded = true;
-  ret->icon = QIcon(icon);
-  ret->playable = true;
-
+QStandardItem* LastFMService::CreateStationItem(
+    QStandardItem* parent, const QString& name, const QString& icon,
+    const QString& url, const QString& title) {
+  QStandardItem* ret = new QStandardItem(QIcon(icon), name);
+  ret->setData(url, RadioModel::Role_Url);
+  ret->setData(title, RadioModel::Role_Title);
+  ret->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+  parent->appendRow(ret);
   return ret;
 }
 
@@ -248,59 +283,11 @@ void LastFMService::AuthenticateReplyFinished() {
   emit AuthenticationComplete(true);
 }
 
-QUrl LastFMService::UrlForItem(const RadioItem* item) const {
-  switch (item->type) {
-    case Type_MyRecommendations:
-      return "lastfm://user/" + lastfm::ws::Username + "/recommended";
-
-    case Type_MyMix:
-      return QString("lastfm://rql/") + QString("adv:" + lastfm::ws::Username).toUtf8().toBase64();
-
-    case Type_MyNeighbourhood:
-      return "lastfm://user/" + lastfm::ws::Username + "/neighbours";
-
-    case Type_MyRadio:
-      return "lastfm://user/" + lastfm::ws::Username + "/library";
-
-    case Type_OtherUser:
-    case Type_OtherUserRadio:
-      return "lastfm://user/" + item->key + "/library";
-
-    case Type_OtherUserMix:
-      return QString("lastfm://rql/") + QString("adv:" + item->key).toUtf8().toBase64();
-
-    case Type_OtherUserNeighbourhood:
-      return "lastfm://user/" + item->key + "/neighbours";
-
-    case Type_Artist:
-      return "lastfm://artist/" + item->key + "/similarartists";
-
-    case Type_Tag:
-      return "lastfm://globaltags/" + item->key;
-
-    case Type_Custom:
-      return QString("lastfm://rql/" + item->key.toUtf8().toBase64());
-  }
-  return QUrl();
-}
-
-QString LastFMService::TitleForItem(const RadioItem* item) const {
-  const QString me(lastfm::ws::Username);
-
-  switch (item->type) {
-    case Type_MyRecommendations: return tr("Last.fm Recommended Radio - %1").arg(me);
-    case Type_MyMix:             return tr("Last.fm Mix Radio - %1").arg(me);
-    case Type_MyNeighbourhood:   return tr("Last.fm Neighbor Radio - %1").arg(me);
-    case Type_MyRadio:           return tr("Last.fm Library - %1").arg(me);
-    case Type_OtherUser:
-    case Type_OtherUserRadio:    return tr("Last.fm Library - %1").arg(item->key);
-    case Type_OtherUserMix:      return tr("Last.fm Mix Radio - %1").arg(item->key);
-    case Type_OtherUserNeighbourhood: return tr("Last.fm Neighbor Radio - %1").arg(item->key);
-    case Type_Artist:            return tr("Last.fm Similar Artists to %1").arg(item->key);
-    case Type_Tag:               return tr("Last.fm Tag Radio: %1").arg(item->key);
-    case Type_Custom:            return tr("Last.fm Custom Radio: %1").arg(item->key);
-  }
-  return QString();
+QUrl LastFMService::FixupUrl(const QUrl& url) {
+  QUrl ret;
+  ret.setEncodedUrl(url.toEncoded().replace(
+      "USERNAME", QUrl::toPercentEncoding(lastfm::ws::Username)));
+  return ret;
 }
 
 PlaylistItem::SpecialLoadResult LastFMService::StartLoading(const QUrl& url) {
@@ -314,13 +301,13 @@ PlaylistItem::SpecialLoadResult LastFMService::StartLoading(const QUrl& url) {
 
   last_url_ = url;
   initial_tune_ = true;
-  Tune(lastfm::RadioStation(url));
+  Tune(lastfm::RadioStation(FixupUrl(url)));
 
   return PlaylistItem::SpecialLoadResult(
       PlaylistItem::SpecialLoadResult::WillLoadAsynchronously, url);
 }
 
-PlaylistItem::SpecialLoadResult LastFMService::LoadNext(const QUrl &) {
+PlaylistItem::SpecialLoadResult LastFMService::LoadNext(const QUrl&) {
   if (playlist_.empty()) {
     return PlaylistItem::SpecialLoadResult();
   }
@@ -464,13 +451,12 @@ void LastFMService::Ban() {
   emit AsyncLoadFinished(LoadNext(last_url_));
 }
 
-void LastFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
-                                    const QPoint &global_pos) {
-  context_item_ = item;
+void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &global_pos) {
+  context_item_ = model()->itemFromIndex(index);
 
-  switch (item->type) {
-    case Type_Artist:
-    case Type_Tag:
+  switch (index.parent().data(RadioModel::Role_Type).toInt()) {
+    case Type_Artists:
+    case Type_Tags:
     case Type_Custom:
       remove_action_->setEnabled(true);
       break;
@@ -480,8 +466,9 @@ void LastFMService::ShowContextMenu(RadioItem* item, const QModelIndex&,
       break;
   }
 
-  play_action_->setEnabled(item->playable);
-  load_action_->setEnabled(item->playable);
+  const bool playable = model()->IsPlayable(index);
+  play_action_->setEnabled(playable);
+  load_action_->setEnabled(playable);
   context_menu_->popup(global_pos);
 }
 
@@ -489,7 +476,8 @@ void LastFMService::RefreshFriends() {
   if (!friends_list_ || !IsAuthenticated())
     return;
 
-  friends_list_->ClearNotify();
+  if (friends_list_->hasChildren())
+    friends_list_->removeRows(0, friends_list_->rowCount());
 
   lastfm::AuthenticatedUser user;
   QNetworkReply* reply = user.getFriends();
@@ -497,10 +485,11 @@ void LastFMService::RefreshFriends() {
 }
 
 void LastFMService::RefreshNeighbours() {
-  if (!friends_list_ || !IsAuthenticated())
+  if (!neighbours_list_ || !IsAuthenticated())
     return;
 
-  neighbours_list_->ClearNotify();
+  if (neighbours_list_->hasChildren())
+    neighbours_list_->removeRows(0, neighbours_list_->rowCount());
 
   lastfm::AuthenticatedUser user;
   QNetworkReply* reply = user.getNeighbours();
@@ -526,10 +515,13 @@ void LastFMService::RefreshFriendsFinished() {
   }
 
   foreach (const lastfm::User& f, friends) {
-    RadioItem* item = new RadioItem(this, Type_OtherUser, f);
-    item->icon = QIcon(":last.fm/icon_user.png");
-    item->playable = true;
-    item->InsertNotify(friends_list_);
+    QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_user.png"), f.name());
+    item->setData(QUrl("lastfm://user/" + f.name() + "/library"), RadioModel::Role_Url);
+    item->setData(tr("Last.fm Library - %1").arg(f.name()), RadioModel::Role_Title);
+    item->setData(true, RadioModel::Role_CanLazyLoad);
+    item->setData(Type_OtherUser, RadioModel::Role_Type);
+    item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+    friends_list_->appendRow(item);
   }
 }
 
@@ -552,10 +544,13 @@ void LastFMService::RefreshNeighboursFinished() {
   }
 
   foreach (const lastfm::User& n, neighbours) {
-    RadioItem* item = new RadioItem(this, Type_OtherUser, n);
-    item->icon = QIcon(":last.fm/user_purple.png");
-    item->playable = true;
-    item->InsertNotify(neighbours_list_);
+    QStandardItem* item = new QStandardItem(QIcon(":last.fm/user_purple.png"), n.name());
+    item->setData(QUrl("lastfm://user/" + n.name() + "/library"), RadioModel::Role_Url);
+    item->setData(tr("Last.fm Library - %1").arg(n.name()), RadioModel::Role_Title);
+    item->setData(true, RadioModel::Role_CanLazyLoad);
+    item->setData(Type_OtherUser, RadioModel::Role_Type);
+    item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+    neighbours_list_->appendRow(item);
   }
 }
 
@@ -568,20 +563,28 @@ void LastFMService::LoadToPlaylist() {
 }
 
 void LastFMService::AddArtistRadio() {
-  AddArtistOrTag("artists", LastFMStationDialog::Artist, Type_Artist, QIcon(":last.fm/icon_radio.png"), artist_list_);
+  AddArtistOrTag("artists", LastFMStationDialog::Artist,
+                 kUrlArtist, tr(kTitleArtist),
+                 ":last.fm/icon_radio.png", artist_list_);
 }
 
 void LastFMService::AddTagRadio() {
-  AddArtistOrTag("tags", LastFMStationDialog::Tag, Type_Tag, QIcon(":last.fm/icon_tag.png"), tag_list_);
+  AddArtistOrTag("tags", LastFMStationDialog::Tag,
+                 kUrlTag, tr(kTitleTag),
+                 ":last.fm/icon_tag.png", tag_list_);
 }
 
 void LastFMService::AddCustomRadio() {
-  AddArtistOrTag("custom", LastFMStationDialog::Custom, Type_Custom, QIcon(":last.fm/icon_radio.png"), custom_list_);
+  AddArtistOrTag("custom", LastFMStationDialog::Custom,
+                 kUrlCustom, tr(kTitleCustom),
+                 ":last.fm/icon_radio.png", custom_list_);
 }
 
 void LastFMService::AddArtistOrTag(const QString& name,
-                                   LastFMStationDialog::Type dialog_type, ItemType item_type,
-                                   const QIcon& icon, RadioItem* list) {
+                                   LastFMStationDialog::Type dialog_type,
+                                   const QString& url_pattern,
+                                   const QString& title_pattern,
+                                   const QString& icon, QStandardItem* list) {
   station_dialog_->SetType(dialog_type);
   if (station_dialog_->exec() == QDialog::Rejected)
     return;
@@ -589,55 +592,72 @@ void LastFMService::AddArtistOrTag(const QString& name,
   if (station_dialog_->content().isEmpty())
     return;
 
-  RadioItem* item = new RadioItem(this, item_type, station_dialog_->content());
-  item->icon = icon;
-  item->playable = true;
-  item->lazy_loaded = true;
-  item->InsertNotify(list);
+  QString content = station_dialog_->content();
+  QString url_content;
+  if (name == "custom")
+    url_content = content.toUtf8().toBase64();
+  else
+    url_content = content;
+
+  QStandardItem* item = new QStandardItem(QIcon(icon), content);
+  item->setData(url_pattern.arg(url_content), RadioModel::Role_Url);
+  item->setData(title_pattern.arg(content), RadioModel::Role_Title);
+  item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+  list->appendRow(item);
   emit AddItemToPlaylist(item, false);
 
   SaveList(name, list);
 }
 
-void LastFMService::SaveList(const QString& name, RadioItem* list) const {
+void LastFMService::SaveList(const QString& name, QStandardItem* list) const {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  settings.beginWriteArray(name, list->children.count());
-  for (int i=0 ; i<list->children.count() ; ++i) {
+  settings.beginWriteArray(name, list->rowCount());
+  for (int i=0 ; i<list->rowCount() ; ++i) {
     settings.setArrayIndex(i);
-    settings.setValue("key", list->children[i]->key);
+    settings.setValue("key", list->child(i)->text());
   }
   settings.endArray();
 }
 
-void LastFMService::RestoreList(const QString &name, ItemType item_type,
-                                const QIcon& icon, RadioItem *list) {
+void LastFMService::RestoreList(const QString& name,
+                                const QString& url_pattern,
+                                const QString& title_pattern,
+                                const QIcon& icon, QStandardItem* parent) {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
-  list->ClearNotify();
+  if (parent->hasChildren())
+    parent->removeRows(0, parent->rowCount());
 
   int count = settings.beginReadArray(name);
   for (int i=0 ; i<count ; ++i) {
     settings.setArrayIndex(i);
-    RadioItem* item = new RadioItem(this, item_type,
-                                    settings.value("key").toString(), list);
-    item->icon = icon;
-    item->playable = true;
-    item->lazy_loaded = true;
+    QString content = settings.value("key").toString();
+    QString url_content;
+    if (name == "custom")
+      url_content = content.toUtf8().toBase64();
+    else
+      url_content = content;
+
+    QStandardItem* item = new QStandardItem(icon, content);
+    item->setData(url_pattern.arg(url_content), RadioModel::Role_Url);
+    item->setData(title_pattern.arg(content), RadioModel::Role_Title);
+    item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+    parent->appendRow(item);
   }
   settings.endArray();
 }
 
 void LastFMService::Remove() {
-  int type = context_item_->type;
+  int type = context_item_->parent()->data(RadioModel::Role_Type).toInt();
 
-  context_item_->parent->DeleteNotify(context_item_->row);
+  context_item_->parent()->removeRow(context_item_->row());
 
-  if (type == Type_Artist)
+  if (type == Type_Artists)
     SaveList("artists", artist_list_);
-  else if (type == Type_Tag)
+  else if (type == Type_Tags)
     SaveList("tags", tag_list_);
   else if (type == Type_Custom)
     SaveList("custom", custom_list_);

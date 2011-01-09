@@ -45,11 +45,10 @@ class IcecastService : public RadioService {
     Type_Genre,
   };
 
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem* item);
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
-                       const QPoint& global_pos);
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
 
@@ -66,7 +65,7 @@ class IcecastService : public RadioService {
 
   void AddSelectedToPlaylist(bool clear_first);
 
-  RadioItem* root_;
+  QStandardItem* root_;
   NetworkAccessManager* network_;
   QMenu* context_menu_;
   QModelIndex context_item_;

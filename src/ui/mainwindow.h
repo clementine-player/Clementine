@@ -174,8 +174,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void UpdateTrackPosition();
 
   void RadioDoubleClick(const QModelIndex& index);
-  void InsertRadioItem(RadioItem*, bool clear_first);
-  void InsertRadioItems(const PlaylistItemList& items, bool clear_first);
+  void InsertPlaylistItems(const PlaylistItemList& items, bool clear_first);
   void LastFMButtonVisibilityChanged(bool value);
 #ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);

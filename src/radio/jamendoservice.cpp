@@ -67,7 +67,6 @@ const int JamendoService::kApproxDatabaseSize = 300000;
 JamendoService::JamendoService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       network_(new NetworkAccessManager(this)),
-      root_(NULL),
       context_menu_(NULL),
       library_backend_(NULL),
       library_filter_(NULL),
@@ -118,25 +117,22 @@ JamendoService::JamendoService(RadioModel* parent)
 JamendoService::~JamendoService() {
 }
 
-RadioItem* JamendoService::CreateRootItem(RadioItem* parent) {
-  root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  root_->icon = QIcon(":providers/jamendo.png");
-  return root_;
+QStandardItem* JamendoService::CreateRootItem() {
+  QStandardItem* item = new QStandardItem(QIcon(":providers/jamendo.png"), kServiceName);
+  item->setData(true, RadioModel::Role_CanLazyLoad);
+  return item;
 }
 
-void JamendoService::LazyPopulate(RadioItem* item) {
-  switch (item->type) {
-    case RadioItem::Type_Service: {
+void JamendoService::LazyPopulate(QStandardItem* item) {
+  switch (item->data(RadioModel::Role_Type).toInt()) {
+    case RadioModel::Type_Service: {
       library_model_->Init();
-      model()->merged_model()->AddSubModel(
-          model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
-          library_sort_model_);
+      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
     }
     default:
       break;
   }
-  item->lazy_loaded = true;
 }
 
 void JamendoService::UpdateTotalSongCount(int count) {
@@ -401,8 +397,7 @@ void JamendoService::EnsureMenuCreated() {
   library_filter_->SetAgeFilterEnabled(false);
 }
 
-void JamendoService::ShowContextMenu(RadioItem*, const QModelIndex& index,
-                                     const QPoint& global_pos) {
+void JamendoService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
   EnsureMenuCreated();
 
   if (index.model() == library_sort_model_) {

@@ -26,14 +26,13 @@
 #include "playlistitem.h"
 #include "playlistsequence.h"
 #include "core/song.h"
-#include "radio/radioitem.h"
 #include "smartplaylists/generator_fwd.h"
 
 class LibraryBackend;
 class PlaylistBackend;
 class PlaylistFilter;
 class Queue;
-class RadioService;
+class RadioModel;
 class TaskManager;
 
 class QSortFilterProxyModel;
@@ -170,7 +169,6 @@ class Playlist : public QAbstractListModel {
   QModelIndex InsertLibraryItems(const SongList& items, int pos = -1, bool enqueue = false);
   QModelIndex InsertSongs(const SongList& items, int pos = -1, bool enqueue = false);
   QModelIndex InsertSongsOrLibraryItems(const SongList& items, int pos = -1, bool enqueue = false);
-  QModelIndex InsertRadioStations(const QList<RadioItem*>& items, int pos = -1, bool play_now = false);
   void InsertSmartPlaylist(smart_playlists::GeneratorPtr generator, int pos = -1, bool play_now = false);
   void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);
   void StopAfter(int row);
@@ -232,6 +230,9 @@ class Playlist : public QAbstractListModel {
   int PreviousVirtualIndex(int i) const;
   bool FilterContainsVirtualIndex(int i) const;
   void TurnOnDynamicPlaylist(smart_playlists::GeneratorPtr gen);
+
+  QModelIndex InsertRadioStations(
+    const RadioModel* model, const QModelIndexList& items, int pos, bool play_now);
 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands

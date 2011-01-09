@@ -462,8 +462,6 @@ MainWindow::MainWindow(
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
-  connect(radio_model_, SIGNAL(AddItemToPlaylist(RadioItem*,bool)), SLOT(InsertRadioItem(RadioItem*,bool)));
-  connect(radio_model_, SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)), SLOT(InsertRadioItems(PlaylistItemList,bool)));
 #ifdef HAVE_LIBLASTFM
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
@@ -1075,25 +1073,7 @@ void MainWindow::RadioDoubleClick(const QModelIndex& index) {
   }
 }
 
-void MainWindow::InsertRadioItem(RadioItem* item, bool clear_first) {
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  QModelIndex first_song = playlists_->current()->InsertRadioStations(
-      QList<RadioItem*>() << item);
-
-  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-    // The first song doesn't match the filter, so don't play it
-    return;
-  }
-
-  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(first_song.row(), Engine::First, true);
-  }
-}
-
-void MainWindow::InsertRadioItems(const PlaylistItemList& items, bool clear_first) {
+void MainWindow::InsertPlaylistItems(const PlaylistItemList& items, bool clear_first) {
   if (clear_first)
     playlists_->ClearCurrent();
 
@@ -1766,7 +1746,7 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
   connect(view, SIGNAL(AddPlaylistItems(PlaylistItemList,bool)),
-                SLOT(InsertRadioItems(PlaylistItemList,bool)));
+                SLOT(InsertPlaylistItems(PlaylistItemList,bool)));
   connect(view, SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)),
                 SLOT(AddSongInfoGenerator(smart_playlists::GeneratorPtr)));
 }

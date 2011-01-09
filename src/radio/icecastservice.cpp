@@ -63,19 +63,17 @@ IcecastService::IcecastService(RadioModel* parent)
 IcecastService::~IcecastService() {
 }
 
-RadioItem* IcecastService::CreateRootItem(RadioItem* parent) {
-  root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  root_->icon = QIcon(":last.fm/icon_radio.png");
+QStandardItem* IcecastService::CreateRootItem() {
+  root_ = new QStandardItem(QIcon(":last.fm/icon_radio.png"), kServiceName);
+  root_->setData(true, RadioModel::Role_CanLazyLoad);
   return root_;
 }
 
-void IcecastService::LazyPopulate(RadioItem* item) {
-  switch (item->type) {
-    case RadioItem::Type_Service:
+void IcecastService::LazyPopulate(QStandardItem* item) {
+  switch (item->data(RadioModel::Role_Type).toInt()) {
+    case RadioModel::Type_Service:
       model_->Init();
-      model()->merged_model()->AddSubModel(
-            model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
-            model_);
+      model()->merged_model()->AddSubModel(model()->indexFromItem(item), model_);
 
       if (backend_->IsEmpty()) {
         LoadDirectory();
@@ -85,7 +83,6 @@ void IcecastService::LazyPopulate(RadioItem* item) {
     default:
       break;
   }
-  item->lazy_loaded = true;
 }
 
 void IcecastService::LoadDirectory() {
@@ -262,7 +259,7 @@ QWidget* IcecastService::HeaderWidget() const {
   return filter_;
 }
 
-void IcecastService::ShowContextMenu(RadioItem* item, const QModelIndex& index,
+void IcecastService::ShowContextMenu(const QModelIndex& index,
                                      const QPoint& global_pos) {
   EnsureMenuCreated();
 

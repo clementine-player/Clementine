@@ -30,6 +30,7 @@ uint qHash(const lastfm::Track& track);
 #include <lastfm/Track>
 #include <lastfm/ws.h>
 
+#include "radiomodel.h"
 #include "radioservice.h"
 #include "lastfmstationdialog.h"
 #include "core/song.h"
@@ -58,34 +59,29 @@ class LastFMService : public RadioService {
   static const char* kApiKey;
   static const char* kSecret;
 
+  static const char* kUrlArtist;
+  static const char* kUrlTag;
+  static const char* kUrlCustom;
+
+  static const char* kTitleArtist;
+  static const char* kTitleTag;
+  static const char* kTitleCustom;
+
   enum ItemType {
-    Type_MyRecommendations = 1000,
-    Type_MyRadio,
-    Type_MyMix,
-    Type_MyNeighbourhood,
-    Type_ArtistRadio,
-    Type_TagRadio,
-    Type_MyFriends,
-    Type_MyNeighbours,
-    Type_OtherUser,
-    Type_OtherUserRadio,
-    Type_OtherUserMix,
-    Type_OtherUserNeighbourhood,
-    Type_Artist,
-    Type_Tag,
+    Type_Root = RadioModel::TypeCount,
+    Type_Artists,
+    Type_Tags,
     Type_Custom,
-    Type_CustomRadio,
+    Type_Friends,
+    Type_Neighbours,
+    Type_OtherUser,
   };
 
   // RadioService
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem *item);
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* parent);
 
-  QUrl UrlForItem(const RadioItem* item) const;
-  QString TitleForItem(const RadioItem* item) const;
-
-  void ShowContextMenu(RadioItem *item, const QModelIndex& index,
-                       const QPoint &global_pos);
+  void ShowContextMenu(const QModelIndex& index, const QPoint &global_pos);
 
   PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
   PlaylistItem::SpecialLoadResult LoadNext(const QUrl& url);
@@ -142,20 +138,26 @@ class LastFMService : public RadioService {
   void StreamMetadataReady();
 
  private:
-  RadioItem* CreateStationItem(ItemType type, const QString& name,
-                               const QString& icon, RadioItem* parent);
+  QStandardItem* CreateStationItem(QStandardItem* parent,
+      const QString& name, const QString& icon, const QString& url,
+      const QString& title);
   QString ErrorString(lastfm::ws::Error error) const;
   bool InitScrobbler();
   lastfm::Track TrackFromSong(const Song& song) const;
   void RefreshFriends();
   void RefreshNeighbours();
   void AddArtistOrTag(const QString& name,
-                      LastFMStationDialog::Type dialog_type, ItemType item_type,
-                      const QIcon& icon, RadioItem* list);
-  void SaveList(const QString& name, RadioItem* list) const;
-  void RestoreList(const QString &name, ItemType item_type,
-                   const QIcon& icon, RadioItem *list);
+                      LastFMStationDialog::Type dialog_type,
+                      const QString& url_pattern,
+                      const QString& title_pattern,
+                      const QString& icon, QStandardItem* list);
+  void SaveList(const QString& name, QStandardItem* list) const;
+  void RestoreList(const QString& name,
+                   const QString& url_pattern,
+                   const QString& title_pattern,
+                   const QIcon& icon, QStandardItem* parent);
 
+  static QUrl FixupUrl(const QUrl& url);
   void Tune(const lastfm::RadioStation& station);
 
   void AddSelectedToPlaylist(bool clear_first);
@@ -175,7 +177,7 @@ class LastFMService : public RadioService {
   QAction* add_artist_action_;
   QAction* add_tag_action_;
   QAction* add_custom_action_;
-  RadioItem* context_item_;
+  QStandardItem* context_item_;
 
   QUrl last_url_;
   bool initial_tune_;
@@ -184,11 +186,11 @@ class LastFMService : public RadioService {
   bool scrobbling_enabled_;
   bool buttons_visible_;
 
-  RadioItem* artist_list_;
-  RadioItem* tag_list_;
-  RadioItem* custom_list_;
-  RadioItem* friends_list_;
-  RadioItem* neighbours_list_;
+  QStandardItem* artist_list_;
+  QStandardItem* tag_list_;
+  QStandardItem* custom_list_;
+  QStandardItem* friends_list_;
+  QStandardItem* neighbours_list_;
 
   QHash<lastfm::Track, QString> art_urls_;
 };

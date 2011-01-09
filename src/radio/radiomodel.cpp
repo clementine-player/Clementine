@@ -36,7 +36,7 @@ QMap<QString, RadioService*>* RadioModel::sServices = NULL;
 
 RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
                        TaskManager* task_manager, QObject* parent)
-  : SimpleTreeModel<RadioItem>(new RadioItem(this), parent),
+  : QStandardItemModel(parent),
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
     task_manager_(task_manager)
@@ -46,7 +46,6 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   }
   Q_ASSERT(sServices->isEmpty());
 
-  root_->lazy_loaded = true;
   merged_model_->setSourceModel(this);
 
 #ifdef HAVE_LIBLASTFM
@@ -60,15 +59,22 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
 }
 
 void RadioModel::AddService(RadioService *service) {
+  QStandardItem* root = service->CreateRootItem();
+  if (!root)
+    return;
+
+  root->setData(Type_Service, Role_Type);
+  root->setData(QVariant::fromValue(service), Role_Service);
+
+  invisibleRootItem()->appendRow(root);
   sServices->insert(service->name(), service);
-  service->CreateRootItem(root_);
 
   connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
   connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));
-  connect(service, SIGNAL(AddItemToPlaylist(RadioItem*,bool)), SIGNAL(AddItemToPlaylist(RadioItem*,bool)));
-  connect(service, SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)), SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)));
+  //connect(service, SIGNAL(AddItemToPlaylist(RadioItem*,bool)), SIGNAL(AddItemToPlaylist(RadioItem*,bool)));
+  //connect(service, SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)), SIGNAL(AddItemsToPlaylist(PlaylistItemList,bool)));
 }
 
 RadioService* RadioModel::ServiceByName(const QString& name) {
@@ -77,41 +83,24 @@ RadioService* RadioModel::ServiceByName(const QString& name) {
   return NULL;
 }
 
-QVariant RadioModel::data(const QModelIndex& index, int role) const {
-  const RadioItem* item = IndexToItem(index);
-
-  return data(item, role);
+RadioService* RadioModel::ServiceForItem(const QStandardItem* item) const {
+  return ServiceForIndex(indexFromItem(item));
 }
 
-QVariant RadioModel::data(const RadioItem* item, int role) const {
-  switch (role) {
-    case Qt::DisplayRole:
-      return item->DisplayText();
-
-    case Qt::DecorationRole:
-      return item->icon;
-      break;
-
-    case Role_Type:
-      return item->type;
-
-    case Role_Key:
-      return item->key;
-
-    case Role_SortText:
-      return item->SortText();
+RadioService* RadioModel::ServiceForIndex(const QModelIndex& index) const {
+  QModelIndex current_index = index;
+  while (current_index.isValid()) {
+    RadioService* service = current_index.data(Role_Service).value<RadioService*>();
+    if (service) {
+      return service;
+    }
+    current_index = current_index.parent();
   }
-  return QVariant();
-}
-
-void RadioModel::LazyPopulate(RadioItem* parent) {
-  if (parent->service)
-    parent->service->LazyPopulate(parent);
+  return NULL;
 }
 
 Qt::ItemFlags RadioModel::flags(const QModelIndex& index) const {
-  RadioItem* item = IndexToItem(index);
-  if (item->playable)
+  if (IsPlayable(index))
     return Qt::ItemIsSelectable |
            Qt::ItemIsEnabled |
            Qt::ItemIsDragEnabled;
@@ -120,29 +109,54 @@ Qt::ItemFlags RadioModel::flags(const QModelIndex& index) const {
          Qt::ItemIsEnabled;
 }
 
+bool RadioModel::hasChildren(const QModelIndex& parent) const {
+  if (parent.data(Role_CanLazyLoad).toBool())
+    return true;
+  return QStandardItemModel::hasChildren(parent);
+}
+
+int RadioModel::rowCount(const QModelIndex& parent) const {
+  if (parent.data(Role_CanLazyLoad).toBool()) {
+    QStandardItem* item = itemFromIndex(parent);
+    RadioService* service = ServiceForItem(item);
+    if (service) {
+      item->setData(false, Role_CanLazyLoad);
+      service->LazyPopulate(item);
+    }
+  }
+
+  return QStandardItemModel::rowCount(parent);
+}
+
+bool RadioModel::IsPlayable(const QModelIndex& index) const {
+  QVariant behaviour = index.data(Role_PlayBehaviour);
+  if (!behaviour.isValid() || behaviour.toInt() == PlayBehaviour_None)
+    return false;
+  return true;
+}
+
 QStringList RadioModel::mimeTypes() const {
   return QStringList() << "text/uri-list";
 }
 
 QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
-  QList<RadioItem*> items;
+  QModelIndexList items;
 
   foreach (const QModelIndex& index, indexes) {
-    RadioItem* item = IndexToItem(index);
-    if (!item || !item->service || !item->playable)
+    if (!IsPlayable(index))
       continue;
 
-    items << item;
-    urls << item->service->UrlForItem(item);
+    items << index;
+    urls << index.data(Role_Url).toUrl();
   }
 
   if (urls.isEmpty())
     return NULL;
 
-  RadioMimeData* data = new RadioMimeData;
+  RadioMimeData* data = new RadioMimeData(this);
   data->setUrls(urls);
-  data->items = items;
+  data->indexes = indexes;
 
   return data;
 }
@@ -153,10 +167,11 @@ LastFMService* RadioModel::GetLastFMService() const {
 }
 #endif
 
-void RadioModel::ShowContextMenu(RadioItem* item, const QModelIndex& index,
+void RadioModel::ShowContextMenu(const QModelIndex& merged_model_index,
                                  const QPoint& global_pos) {
-  if (item->service)
-    item->service->ShowContextMenu(item, index, global_pos);
+  RadioService* service = ServiceForIndex(merged_model_index);
+  if (service)
+    service->ShowContextMenu(merged_model_->mapToSource(merged_model_index), global_pos);
 }
 
 void RadioModel::ReloadSettings() {

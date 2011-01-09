@@ -58,12 +58,7 @@ void RadioViewContainer::SetModel(RadioModel* model) {
 }
 
 void RadioViewContainer::ServiceChanged(const QModelIndex& index) {
-  RadioItem* item = model_->IndexToItem(
-      model_->merged_model()->FindSourceParent(index));
-  if (!item)
-    return;
-
-  RadioService* service = item->service;
+  RadioService* service = index.data(RadioModel::Role_Service).value<RadioService*>();
   if (!service || service == current_service_)
     return;
   current_service_ = service;

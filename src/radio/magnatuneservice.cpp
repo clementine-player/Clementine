@@ -60,8 +60,8 @@ const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
-    root_(NULL),
     context_menu_(NULL),
+    root_(NULL),
     library_backend_(NULL),
     library_model_(NULL),
     library_filter_(NULL),
@@ -105,27 +105,22 @@ void MagnatuneService::ReloadSettings() {
   format_ = PreferredFormat(s.value("format", Format_Ogg).toInt());
 }
 
-RadioItem* MagnatuneService::CreateRootItem(RadioItem *parent) {
-  root_ = new RadioItem(this, RadioItem::Type_Service, kServiceName, parent);
-  root_->icon = QIcon(":/providers/magnatune.png");
-
+QStandardItem* MagnatuneService::CreateRootItem() {
+  root_ = new QStandardItem(QIcon(":/providers/magnatune.png"), kServiceName);
+  root_->setData(true, RadioModel::Role_CanLazyLoad);
   return root_;
 }
 
-void MagnatuneService::LazyPopulate(RadioItem *item) {
-  switch (item->type) {
-    case RadioItem::Type_Service:
+void MagnatuneService::LazyPopulate(QStandardItem* item) {
+  switch (item->data(RadioModel::Role_Type).toInt()) {
+    case RadioModel::Type_Service:
       library_model_->Init();
-      model()->merged_model()->AddSubModel(
-          model()->index(root_->row, 0, model()->ItemToIndex(item->parent)),
-          library_sort_model_);
+      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
 
     default:
       break;
   }
-
-  item->lazy_loaded = true;
 }
 
 void MagnatuneService::UpdateTotalSongCount(int count) {
@@ -154,15 +149,14 @@ void MagnatuneService::ReloadDatabaseFinished() {
   model()->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;
 
-  root_->lazy_loaded = true;
-
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
     qDebug() << reply->errorString();
     return;
   }
 
-  root_->ClearNotify();
+  if (root_->hasChildren())
+    root_->removeRows(0, root_->rowCount());
 
   // The XML file is compressed
   QtIOCompressor gzip(reply);
@@ -274,8 +268,7 @@ void MagnatuneService::EnsureMenuCreated() {
   library_filter_->AddMenuAction(config_action);
 }
 
-void MagnatuneService::ShowContextMenu(RadioItem*, const QModelIndex& index,
-                                       const QPoint& global_pos) {
+void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
   EnsureMenuCreated();
 
   if (index.model() == library_sort_model_)

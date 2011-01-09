@@ -38,11 +38,10 @@ class JamendoService : public RadioService {
   JamendoService(RadioModel* parent);
   ~JamendoService();
 
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem* item);
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
-                       const QPoint& global_pos);
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
 
@@ -102,7 +101,6 @@ class JamendoService : public RadioService {
 
  private:
   NetworkAccessManager* network_;
-  RadioItem* root_;
 
   QMenu* context_menu_;
   QModelIndex context_item_;

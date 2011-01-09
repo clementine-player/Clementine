@@ -40,12 +40,10 @@ class SomaFMService : public RadioService {
   static const char* kChannelListUrl;
   static const char* kHomepage;
 
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem* item);
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* item);
 
-  QString TitleForItem(const RadioItem* item) const;
-
-  void ShowContextMenu(RadioItem* item, const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
   PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
@@ -64,9 +62,9 @@ class SomaFMService : public RadioService {
   void ConsumeElement(QXmlStreamReader& reader);
 
  private:
-  RadioItem* root_;
+  QStandardItem* root_;
   QMenu* context_menu_;
-  RadioItem* context_item_;
+  QStandardItem* context_item_;
 
   int get_channels_task_id_;
   int get_stream_task_id_;

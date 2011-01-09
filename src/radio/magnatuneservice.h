@@ -67,11 +67,10 @@ class MagnatuneService : public RadioService {
 
   static QString ReadElementText(QXmlStreamReader& reader);
 
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem* item);
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
-                       const QPoint& global_pos);
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
 
@@ -107,9 +106,9 @@ class MagnatuneService : public RadioService {
   Song ReadTrack(QXmlStreamReader& reader);
 
  private:
-  RadioItem* root_;
   QMenu* context_menu_;
   QModelIndex context_item_;
+  QStandardItem* root_;
 
   QAction* add_to_playlist_;
   QAction* load_to_playlist_;

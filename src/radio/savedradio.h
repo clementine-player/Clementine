@@ -40,11 +40,10 @@ class SavedRadio : public RadioService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
 
-  RadioItem* CreateRootItem(RadioItem* parent);
-  void LazyPopulate(RadioItem* item);
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(RadioItem* item, const QModelIndex& index,
-                       const QPoint& global_pos);
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   void Add(const QUrl& url, const QString& name = QString());
 
@@ -71,12 +70,12 @@ class SavedRadio : public RadioService {
 
   void LoadStreams();
   void SaveStreams();
-  RadioItem* ItemForStream(const Stream& stream, RadioItem* parent);
+  void AddStreamToList(const Stream& stream, QStandardItem* parent);
 
  private:
-  RadioItem* root_;
   QMenu* context_menu_;
-  RadioItem* context_item_;
+  QStandardItem* context_item_;
+  QStandardItem* root_;
 
   QAction* add_action_;
   QAction* load_action_;

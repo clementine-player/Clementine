@@ -22,7 +22,6 @@
 #include <QList>
 #include <QUrl>
 
-#include "radioitem.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
 #include "ui/settingsdialog.h"
@@ -41,16 +40,11 @@ class RadioService : public QObject {
   QString name() const { return name_; }
   RadioModel* model() const { return model_; }
 
-  virtual RadioItem* CreateRootItem(RadioItem* parent) = 0;
-  virtual void LazyPopulate(RadioItem* item) = 0;
+  virtual QStandardItem* CreateRootItem() = 0;
+  virtual void LazyPopulate(QStandardItem* parent) = 0;
 
-  virtual QUrl UrlForItem(const RadioItem* item) const;
-  virtual QString TitleForItem(const RadioItem* item) const;
-  virtual QString ArtistForItem(const RadioItem* item) const;
-
-  virtual void ShowContextMenu(RadioItem* item, const QModelIndex& index,
-                               const QPoint& global_pos) {
-    Q_UNUSED(item); Q_UNUSED(index); Q_UNUSED(global_pos); }
+  virtual void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+    Q_UNUSED(index); Q_UNUSED(global_pos); }
 
   virtual PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
   virtual PlaylistItem::SpecialLoadResult LoadNext(const QUrl& url);
@@ -69,12 +63,14 @@ class RadioService : public QObject {
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
   void OpenSettingsAtPage(SettingsDialog::Page page);
 
-  void AddItemToPlaylist(RadioItem* item, bool clear_first);
+  void AddItemToPlaylist(QStandardItem* item, bool clear_first);
   void AddItemsToPlaylist(const PlaylistItemList& items, bool clear_first);
 
  private:
   RadioModel* model_;
   QString name_;
 };
+
+Q_DECLARE_METATYPE(RadioService*);
 
 #endif // RADIOSERVICE_H
