@@ -16,6 +16,7 @@
 */
 
 #include "fileviewlist.h"
+#include "core/mimedata.h"
 #include "ui/iconloader.h"
 
 #include <QMenu>
@@ -60,6 +61,12 @@ QList<QUrl> FileViewList::UrlListFromSelection() const {
   return urls;
 }
 
+MimeData* FileViewList::MimeDataFromSelection() const {
+  MimeData* data = new MimeData;
+  data->setUrls(UrlListFromSelection());
+  return data;
+}
+
 QStringList FileViewList::FilenamesFromSelection() const {
   QStringList filenames;
   foreach (const QModelIndex& index, menu_selection_.indexes()) {
@@ -70,11 +77,13 @@ QStringList FileViewList::FilenamesFromSelection() const {
 }
 
 void FileViewList::LoadSlot() {
-  emit Load(UrlListFromSelection());
+  MimeData* data = MimeDataFromSelection();
+  data->clear_first_ = true;
+  emit AddToPlaylist(data);
 }
 
 void FileViewList::AddToPlaylistSlot() {
-  emit AddToPlaylist(UrlListFromSelection());
+  emit AddToPlaylist(MimeDataFromSelection());
 }
 
 void FileViewList::CopyToLibrarySlot() {

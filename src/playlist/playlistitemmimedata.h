@@ -15,26 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GENERATORMIMEDATA_H
-#define GENERATORMIMEDATA_H
+#ifndef PLAYLISTITEMMIMEDATA_H
+#define PLAYLISTITEMMIMEDATA_H
 
-#include <QMimeData>
-
-#include "generator_fwd.h"
+#include "playlistitem.h"
 #include "core/mimedata.h"
 
-namespace smart_playlists {
-
-class GeneratorMimeData : public MimeData {
+class PlaylistItemMimeData : public MimeData {
   Q_OBJECT
 
 public:
-  GeneratorMimeData(GeneratorPtr generator)
-    : generator_(generator) {}
+  PlaylistItemMimeData(const PlaylistItemPtr& item)
+    : items_(PlaylistItemList() << item) {}
+  PlaylistItemMimeData(const PlaylistItemList& items)
+    : items_(items) {}
 
-  GeneratorPtr generator_;
+  PlaylistItemList items_;
 };
 
-} // namespace
-
-#endif // GENERATORMIMEDATA_H
+#endif // PLAYLISTITEMMIMEDATA_H

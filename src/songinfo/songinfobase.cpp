@@ -221,11 +221,7 @@ void SongInfoBase::ConnectWidget(QWidget* widget) {
     connect(widget, SIGNAL(ShowSettingsDialog()), SIGNAL(ShowSettingsDialog()));
   }
 
-  if (m->indexOfSignal("AddPlaylistItems(PlaylistItemList)") != -1) {
-    connect(widget, SIGNAL(AddPlaylistItems(PlaylistItemList)), SIGNAL(AddPlaylistItems(PlaylistItemList)));
-  }
-
-  if (m->indexOfSignal("AddGenerator(smart_playlists::GeneratorPtr)") != -1) {
-    connect(widget, SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)), SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)));
+  if (m->indexOfSignal("AddToPlaylist(QMimeData*)") != -1) {
+    connect(widget, SIGNAL(AddToPlaylist(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
   }
 }

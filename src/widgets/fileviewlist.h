@@ -21,6 +21,8 @@
 #include <QListView>
 #include <QUrl>
 
+class MimeData;
+
 class FileViewList : public QListView {
   Q_OBJECT
 
@@ -28,8 +30,7 @@ class FileViewList : public QListView {
   FileViewList(QWidget* parent = 0);
 
  signals:
-  void Load(const QList<QUrl>& urls);
-  void AddToPlaylist(const QList<QUrl>& urls);
+  void AddToPlaylist(QMimeData* data);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
   void CopyToDevice(const QList<QUrl>& urls);
@@ -46,8 +47,9 @@ class FileViewList : public QListView {
   void CopyToDeviceSlot();
   void DeleteSlot();
 
-  QList<QUrl> UrlListFromSelection() const;
   QStringList FilenamesFromSelection() const;
+  QList<QUrl> UrlListFromSelection() const;
+  MimeData* MimeDataFromSelection() const;
 
  private:
   QMenu* menu_;

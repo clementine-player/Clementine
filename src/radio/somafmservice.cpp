@@ -217,11 +217,11 @@ void SomaFMService::Homepage() {
 }
 
 void SomaFMService::AddToPlaylist() {
-  emit AddItemToPlaylist(context_item_, false);
+  AddItemToPlaylist(context_item_->index(), false);
 }
 
 void SomaFMService::LoadToPlaylist() {
-  emit AddItemToPlaylist(context_item_, true);
+  AddItemToPlaylist(context_item_->index(), true);
 }
 
 PlaylistItem::Options SomaFMService::playlistitem_options() const {

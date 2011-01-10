@@ -20,15 +20,17 @@
 
 #include <QMimeData>
 
+#include "core/mimedata.h"
 #include "core/song.h"
 
 class LibraryBackend;
 
-class SongMimeData : public QMimeData {
+class SongMimeData : public MimeData {
   Q_OBJECT
 
- public:
-  SongMimeData() : backend(NULL) {}
+public:
+  SongMimeData()
+    : backend(NULL) {}
 
   LibraryBackend* backend;
   SongList songs;

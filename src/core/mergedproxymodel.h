@@ -74,6 +74,10 @@ class MergedProxyModel : public QAbstractProxyModel {
   QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
   void setSourceModel(QAbstractItemModel *sourceModel);
 
+  // Convenience functions that call map{To,From}Source multiple times.
+  QModelIndexList mapFromSource(const QModelIndexList& source_indexes) const;
+  QModelIndexList mapToSource(const QModelIndexList& proxy_indexes) const;
+
  signals:
   void SubModelReset(const QModelIndex& root, QAbstractItemModel* model);
 

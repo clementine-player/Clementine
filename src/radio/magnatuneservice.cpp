@@ -283,24 +283,11 @@ void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& g
 }
 
 void MagnatuneService::AddToPlaylist() {
-  AddSelectedToPlaylist(false);
+  AddItemToPlaylist(context_item_, false);
 }
 
 void MagnatuneService::LoadToPlaylist() {
-  AddSelectedToPlaylist(true);
-}
-
-void MagnatuneService::AddSelectedToPlaylist(bool clear_first) {
-  SongList songs(library_model_->GetChildSongs(
-      library_sort_model_->mapToSource(context_item_)));
-
-  PlaylistItemList items;
-
-  foreach (const Song& song, songs) {
-    items << shared_ptr<PlaylistItem>(new MagnatunePlaylistItem(song));
-  }
-
-  emit AddItemsToPlaylist(items, clear_first);
+  AddItemToPlaylist(context_item_, true);
 }
 
 void MagnatuneService::Homepage() {

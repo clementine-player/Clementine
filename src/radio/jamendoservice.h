@@ -84,8 +84,6 @@ class JamendoService : public RadioService {
 
   void EnsureMenuCreated();
 
-  void AddSelectedToPlaylist(bool clear_first);
-
  private slots:
   void DownloadDirectory();
   void DownloadDirectoryProgress(qint64 received, qint64 total);

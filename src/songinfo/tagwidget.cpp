@@ -16,9 +16,12 @@
 */
 
 #include "tagwidget.h"
+#include "playlist/playlistitemmimedata.h"
 #include "radio/lastfmservice.h"
+#include "radio/radiomimedata.h"
 #include "radio/radiomodel.h"
 #include "smartplaylists/generator.h"
+#include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/querygenerator.h"
 #include "ui/flowlayout.h"
 #include "ui/iconloader.h"
@@ -167,6 +170,7 @@ void TagWidget::PlayLastFmTagRadio() {
 }
 
 void TagWidget::PlayFromLibrary() {
+  using smart_playlists::GeneratorMimeData;
   using smart_playlists::GeneratorPtr;
   using smart_playlists::QueryGenerator;
   using smart_playlists::Search;
@@ -176,7 +180,7 @@ void TagWidget::PlayFromLibrary() {
       Search::Type_And, Search::TermList() <<
         SearchTerm(SearchTerm::Field_Artist, SearchTerm::Op_Contains, context_item_),
       Search::Sort_FieldAsc, SearchTerm::Field_Album, 100)));
-  emit AddGenerator(gen);
+  emit AddToPlaylist(new GeneratorMimeData(gen));
 }
 
 void TagWidget::PlayLastFm(const QString& url_pattern) {
@@ -191,5 +195,5 @@ void TagWidget::PlayLastFm(const QString& url_pattern) {
   if (!item)
     return;
 
-  emit AddPlaylistItems(PlaylistItemList() << item);
+  emit AddToPlaylist(new PlaylistItemMimeData(item));
 }

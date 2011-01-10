@@ -17,6 +17,7 @@
 
 #include "radiomodel.h"
 #include "savedradio.h"
+#include "core/mimedata.h"
 #include "ui/addstreamdialog.h"
 #include "ui/iconloader.h"
 
@@ -137,11 +138,11 @@ void SavedRadio::Edit() {
 }
 
 void SavedRadio::AddToPlaylist() {
-  emit AddItemToPlaylist(context_item_, false);
+  AddItemToPlaylist(context_item_->index(), false);
 }
 
 void SavedRadio::LoadToPlaylist() {
-  emit AddItemToPlaylist(context_item_, true);
+  AddItemToPlaylist(context_item_->index(), true);
 }
 
 void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {

@@ -21,6 +21,7 @@
 #include "deviceview.h"
 #include "core/deletefiles.h"
 #include "core/mergedproxymodel.h"
+#include "core/mimedata.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 #include "ui/iconloader.h"
@@ -331,12 +332,6 @@ void DeviceView::mouseDoubleClickEvent(QMouseEvent *event) {
       menu_index_ = merged_index;
       Connect();
     }
-    return;
-  }
-
-  QModelIndex library_index = MapToLibrary(merged_index);
-  if (library_index.isValid()) {
-    emit DoubleClicked(GetSelectedSongs());
   }
 }
 
@@ -359,11 +354,15 @@ SongList DeviceView::GetSelectedSongs() const {
 }
 
 void DeviceView::Load() {
-  emit Load(GetSelectedSongs());
+  QMimeData* data = model()->mimeData(selectedIndexes());
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->clear_first_ = true;
+  }
+  emit AddToPlaylistSignal(data);
 }
 
 void DeviceView::AddToPlaylist() {
-  emit AddToPlaylist(GetSelectedSongs());
+  emit AddToPlaylistSignal(model()->mimeData(selectedIndexes()));
 }
 
 void DeviceView::Delete() {

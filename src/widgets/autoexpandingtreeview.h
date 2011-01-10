@@ -23,7 +23,7 @@
 class AutoExpandingTreeView : public QTreeView {
   Q_OBJECT
 
- public:
+public:
   AutoExpandingTreeView(QWidget* parent = 0);
 
   static const int kRowsToShow;
@@ -31,10 +31,13 @@ class AutoExpandingTreeView : public QTreeView {
   void SetAutoOpen(bool v) { auto_open_ = v; }
   void SetExpandOnReset(bool v) { expand_on_reset_ = v; }
 
- public slots:
+public slots:
   void RecursivelyExpand(const QModelIndex &index);
 
- protected:
+signals:
+  void AddToPlaylistSignal(QMimeData* data);
+
+protected:
   // QAbstractItemView
   void reset();
 
@@ -43,15 +46,15 @@ class AutoExpandingTreeView : public QTreeView {
 
   virtual bool CanRecursivelyExpand(const QModelIndex& index) const { return true; }
 
- private slots:
+private slots:
   void ItemExpanded(const QModelIndex& index);
   void ItemClicked(const QModelIndex& index);
   void ItemDoubleClicked(const QModelIndex& index);
 
- private:
+private:
   bool RecursivelyExpand(const QModelIndex& index, int* count);
 
- private:
+private:
   bool auto_open_;
   bool expand_on_reset_;
 

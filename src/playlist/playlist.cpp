@@ -18,6 +18,7 @@
 #include "playlist.h"
 #include "playlistbackend.h"
 #include "playlistfilter.h"
+#include "playlistitemmimedata.h"
 #include "playlistundocommands.h"
 #include "queue.h"
 #include "songloaderinserter.h"
@@ -121,13 +122,13 @@ Playlist::~Playlist() {
 }
 
 template<typename T>
-static QModelIndex InsertSongItems(Playlist* playlist, const SongList& songs,
-                                   int pos, bool enqueue = false) {
+static void InsertSongItems(Playlist* playlist, const SongList& songs,
+                            int pos, bool play_now, bool enqueue) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     items << PlaylistItemPtr(new T(song));
   }
-  return playlist->InsertItems(items, pos, enqueue);
+  playlist->InsertItems(items, pos, play_now, enqueue);
 }
 
 QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
@@ -554,7 +555,7 @@ void Playlist::set_current_row(int i) {
       connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
       connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 
-      inserter->Load(this, -1, false, dynamic_playlist_, count);
+      inserter->Load(this, -1, false, false, dynamic_playlist_, count);
     }
 
     // Remove the first item
@@ -593,24 +594,36 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 
   using smart_playlists::GeneratorMimeData;
 
+  bool play_now = false;
+  bool enqueue_now = false;
+  if (const MimeData* mime_data = qobject_cast<const MimeData*>(data)) {
+    if (mime_data->clear_first_) {
+      Clear();
+    }
+    play_now = mime_data->play_now_;
+    enqueue_now = mime_data->enqueue_now_;
+  }
+
   if (const SongMimeData* song_data = qobject_cast<const SongMimeData*>(data)) {
     // Dragged from a library
     // We want to check if these songs are from the actual local file backend,
     // if they are we treat them differently.
     if (song_data->backend && song_data->backend->songs_table() == Library::kSongsTable)
-      InsertSongItems<LibraryPlaylistItem>(this, song_data->songs, row);
+      InsertSongItems<LibraryPlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
     else if (song_data->backend && song_data->backend->songs_table() == MagnatuneService::kSongsTable)
-      InsertSongItems<MagnatunePlaylistItem>(this, song_data->songs, row);
+      InsertSongItems<MagnatunePlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
     else if (song_data->backend && song_data->backend->songs_table() == JamendoService::kSongsTable)
-      InsertSongItems<JamendoPlaylistItem>(this, song_data->songs, row);
+      InsertSongItems<JamendoPlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
     else
-      InsertSongItems<SongPlaylistItem>(this, song_data->songs, row);
+      InsertSongItems<SongPlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
     InsertRadioStations(radio_data->model, radio_data->indexes,
-                        row, data->hasFormat(kPlayNowMimetype));
+                        row, play_now, enqueue_now);
   } else if (const GeneratorMimeData* generator_data = qobject_cast<const GeneratorMimeData*>(data)) {
-    InsertSmartPlaylist(generator_data->generator_, row, data->hasFormat(kPlayNowMimetype));
+    InsertSmartPlaylist(generator_data->generator_, row, play_now, enqueue_now);
+  } else if (const PlaylistItemMimeData* item_data = qobject_cast<const PlaylistItemMimeData*>(data)) {
+    InsertItems(item_data->items_, row, play_now, enqueue_now);
   } else if (data->hasFormat(kRowsMimetype)) {
     // Dragged from the playlist
     // Rearranging it is tricky...
@@ -644,26 +657,29 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     }
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
-    InsertUrls(data->urls(), false, row);
+    InsertUrls(data->urls(), row, play_now, enqueue_now);
   }
 
   return true;
 }
 
-void Playlist::InsertUrls(const QList<QUrl> &urls, bool play_now, int pos) {
+void Playlist::InsertUrls(const QList<QUrl> &urls, int pos, bool play_now, bool enqueue) {
   SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_, this);
   connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
-  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 
-  inserter->Load(this, pos, play_now, urls);
+  inserter->Load(this, pos, play_now, enqueue, urls);
 }
 
-void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos, bool play_now) {
+void Playlist::InsertSmartPlaylist(GeneratorPtr generator, int pos, bool play_now, bool enqueue) {
+  // Hack: If the generator hasn't got a library set then use the main one
+  if (!generator->library()) {
+    generator->set_library(library_);
+  }
+
   GeneratorInserter* inserter = new GeneratorInserter(task_manager_, library_, this);
   connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
-  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
 
-  inserter->Load(this, pos, play_now, generator);
+  inserter->Load(this, pos, play_now, enqueue, generator);
 
   if (generator->is_dynamic()) {
     TurnOnDynamicPlaylist(generator);
@@ -767,20 +783,21 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
   Save();
 }
 
-QModelIndex Playlist::InsertItems(const PlaylistItemList& items, int pos, bool enqueue) {
+void Playlist::InsertItems(const PlaylistItemList& items, int pos, bool play_now, bool enqueue) {
   if (items.isEmpty())
-    return QModelIndex();
+    return;
 
   const int start = pos == -1 ? items_.count() : pos;
   undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos, enqueue));
 
-  return index(start, 0);
+  if (play_now)
+    emit PlayRequested(index(start, 0));
 }
 
-QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
-                                             int pos, bool enqueue) {
+void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
+                                      int pos, bool enqueue) {
   if (items.isEmpty())
-    return QModelIndex();
+    return;
 
   const int start = pos == -1 ? items_.count() : pos;
   const int end = start + items.count() - 1;
@@ -816,19 +833,17 @@ QModelIndex Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
 
   Save();
   ReshuffleIndices();
-
-  return index(start, 0);
 }
 
-QModelIndex Playlist::InsertLibraryItems(const SongList& songs, int pos, bool enqueue) {
-  return InsertSongItems<LibraryPlaylistItem>(this, songs, pos, enqueue);
+void Playlist::InsertLibraryItems(const SongList& songs, int pos, bool play_now, bool enqueue) {
+  InsertSongItems<LibraryPlaylistItem>(this, songs, pos, play_now, enqueue);
 }
 
-QModelIndex Playlist::InsertSongs(const SongList& songs, int pos, bool enqueue) {
-  return InsertSongItems<SongPlaylistItem>(this, songs, pos, enqueue);
+void Playlist::InsertSongs(const SongList& songs, int pos, bool play_now, bool enqueue) {
+  InsertSongItems<SongPlaylistItem>(this, songs, pos, play_now, enqueue);
 }
 
-QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, bool enqueue) {
+void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, bool play_now, bool enqueue) {
   PlaylistItemList items;
   foreach (const Song& song, songs) {
     if (song.id() == -1)
@@ -836,11 +851,12 @@ QModelIndex Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, 
     else
       items << PlaylistItemPtr(new LibraryPlaylistItem(song));
   }
-  return InsertItems(items, pos, enqueue);
+  InsertItems(items, pos, play_now, enqueue);
 }
 
-QModelIndex Playlist::InsertRadioStations(
-    const RadioModel* model, const QModelIndexList& items, int pos, bool play_now) {
+void Playlist::InsertRadioStations(const RadioModel* model,
+                                   const QModelIndexList& items,
+                                   int pos, bool play_now, bool enqueue) {
   PlaylistItemList playlist_items;
   QList<QUrl> song_urls;
 
@@ -861,10 +877,11 @@ QModelIndex Playlist::InsertRadioStations(
   }
 
   if (!song_urls.isEmpty()) {
-    InsertUrls(song_urls, play_now, pos);
+    InsertUrls(song_urls, pos, play_now, enqueue);
+    play_now = false;
   }
 
-  return InsertItems(playlist_items, pos);
+  InsertItems(playlist_items, pos, play_now, enqueue);
 }
 
 QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {

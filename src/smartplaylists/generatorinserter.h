@@ -37,7 +37,7 @@ public:
   GeneratorInserter(TaskManager* task_manager,
                     LibraryBackend* library, QObject* parent);
 
-  void Load(Playlist* destination, int row, bool play_now,
+  void Load(Playlist* destination, int row, bool play_now, bool enqueue,
             GeneratorPtr generator, int dynamic_count = 0);
 
 signals:
@@ -55,6 +55,7 @@ private:
   Playlist* destination_;
   int row_;
   bool play_now_;
+  bool enqueue_;
 };
 
 } // namespace

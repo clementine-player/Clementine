@@ -24,6 +24,7 @@
 #include "core/globalshortcuts.h"
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
+#include "core/mimedata.h"
 #include "core/modelfuturewatcher.h"
 #include "core/mpris_common.h"
 #include "core/network.h"
@@ -62,6 +63,7 @@
 #include "scripting/scriptmanager.h"
 #include "scripting/uiinterface.h"
 #include "smartplaylists/generator.h"
+#include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
 #include "songinfo/songinfoview.h"
 #include "transcoder/transcodedialog.h"
@@ -276,9 +278,7 @@ MainWindow::MainWindow(
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
 
   // File view connections
-  connect(file_view_, SIGNAL(AddToPlaylist(QList<QUrl>)), SLOT(AddFilesToPlaylist(QList<QUrl>)));
-  connect(file_view_, SIGNAL(Load(QList<QUrl>)), SLOT(LoadFilesToPlaylist(QList<QUrl>)));
-  connect(file_view_, SIGNAL(DoubleClicked(QList<QUrl>)), SLOT(FilesDoubleClicked(QList<QUrl>)));
+  connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(file_view_, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
   connect(file_view_, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
   connect(file_view_, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
@@ -398,10 +398,7 @@ MainWindow::MainWindow(
   connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 
   // Library connections
-  connect(library_view_->view(), SIGNAL(doubleClicked(QModelIndex)), SLOT(LibraryItemDoubleClicked(QModelIndex)));
-  connect(library_view_->view(), SIGNAL(Load(QModelIndexList)), SLOT(LoadLibraryItemToPlaylist(QModelIndexList)));
-  connect(library_view_->view(), SIGNAL(AddToPlaylist(QModelIndexList)), SLOT(AddLibraryItemToPlaylist(QModelIndexList)));
-  connect(library_view_->view(), SIGNAL(AddToPlaylistEnqueue(QModelIndexList)), SLOT(AddLibraryItemToPlaylistEnqueue(QModelIndexList)));
+  connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(library_view_->view(), SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(library_->model(), SIGNAL(TotalSongCountUpdated(int)), library_view_->view(), SLOT(TotalSongCountUpdated(int)));
 
@@ -410,9 +407,7 @@ MainWindow::MainWindow(
 
   // Devices connections
   connect(devices_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
-  connect(device_view_, SIGNAL(Load(SongList)), SLOT(LoadDeviceSongsToPlaylist(SongList)));
-  connect(device_view_, SIGNAL(AddToPlaylist(SongList)), SLOT(AddDeviceSongsToPlaylist(SongList)));
-  connect(device_view_, SIGNAL(DoubleClicked(SongList)), SLOT(DeviceSongsDoubleClicked(SongList)));
+  connect(device_view_, SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
   // Library filter widget
   QAction* library_config_action = new QAction(
@@ -462,12 +457,13 @@ MainWindow::MainWindow(
   connect(radio_model_, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), player_, SLOT(HandleSpecialLoad(PlaylistItem::SpecialLoadResult)));
   connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
+  connect(radio_model_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 #ifdef HAVE_LIBLASTFM
   connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
 #endif
-  connect(radio_view_->tree(), SIGNAL(doubleClicked(QModelIndex)), SLOT(RadioDoubleClick(QModelIndex)));
   connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
+  connect(radio_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
 #ifdef HAVE_LIBLASTFM
   LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
@@ -681,101 +677,6 @@ void MainWindow::ReloadAllSettings() {
 #endif
 }
 
-void MainWindow::AddFilesToPlaylist(const QList<QUrl>& urls) {
-  AddFilesToPlaylist(false, urls);
-}
-
-void MainWindow::LoadFilesToPlaylist(const QList<QUrl>& urls) {
-  AddFilesToPlaylist(true, urls);
-}
-
-void MainWindow::FilesDoubleClicked(const QList<QUrl>& urls) {
-  AddFilesToPlaylist(autoclear_playlist_, urls);
-}
-
-void MainWindow::AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls) {
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  AddUrls(player_->GetState() != Engine::Playing, urls);
-}
-
-void MainWindow::AddUrls(bool play_now, const QList<QUrl> &urls) {
-  SongLoaderInserter* inserter =
-      new SongLoaderInserter(task_manager_, library_->backend(), this);
-  connect(inserter, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
-  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SLOT(PlayIndex(QModelIndex)));
-
-  inserter->Load(playlists_->current(), -1, play_now, urls);
-}
-
-void MainWindow::AddLibrarySongsToPlaylist(const SongList &songs) {
-  AddLibrarySongsToPlaylist(false, false, songs);
-}
-
-void MainWindow::LoadLibrarySongsToPlaylist(const SongList &songs) {
-  AddLibrarySongsToPlaylist(true, false, songs);
-}
-
-void MainWindow::LibrarySongsDoubleClicked(const SongList &songs) {
-  AddLibrarySongsToPlaylist(autoclear_playlist_, false, songs);
-}
-
-void MainWindow::AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::GeneratorPtr gen) {
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  const bool play_now = player_->GetState() != Engine::Playing;
-  playlists_->current()->InsertSmartPlaylist(gen, -1, play_now);
-}
-
-void MainWindow::AddLibrarySongsToPlaylist(bool clear_first, bool enqueue,
-                                           const SongList &songs) {
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  QModelIndex first_song = playlists_->current()->InsertLibraryItems(songs, -1, enqueue);
-
-  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-    // The first song doesn't match the filter, so don't play it
-    return;
-  }
-
-  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(first_song.row(), Engine::First, true);
-  }
-}
-
-void MainWindow::AddDeviceSongsToPlaylist(const SongList &songs) {
-  AddDeviceSongsToPlaylist(false, songs);
-}
-
-void MainWindow::LoadDeviceSongsToPlaylist(const SongList &songs) {
-  AddDeviceSongsToPlaylist(true, songs);
-}
-
-void MainWindow::DeviceSongsDoubleClicked(const SongList &songs) {
-  AddDeviceSongsToPlaylist(autoclear_playlist_, songs);
-}
-
-void MainWindow::AddDeviceSongsToPlaylist(bool clear_first, const SongList &songs) {
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  QModelIndex first_song = playlists_->current()->InsertSongs(songs);
-
-  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-    // The first song doesn't match the filter, so don't play it
-    return;
-  }
-
-  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(first_song.row(), Engine::First, true);
-  }
-}
-
 void MainWindow::MediaStopped() {
   setWindowTitle(QCoreApplication::applicationName());
 
@@ -899,45 +800,6 @@ void MainWindow::PlayIndex(const QModelIndex& index) {
   player_->PlayAt(row, Engine::Manual, true);
 }
 
-void MainWindow::LoadLibraryItemToPlaylist(const QModelIndexList& indexes) {
-  AddLibraryItemToPlaylist(true, false, indexes);
-}
-
-void MainWindow::AddLibraryItemToPlaylist(const QModelIndexList& indexes) {
-  AddLibraryItemToPlaylist(false, false, indexes);
-}
-
-void MainWindow::AddLibraryItemToPlaylistEnqueue(const QModelIndexList& indexes) {
-  AddLibraryItemToPlaylist(false, true, indexes);
-}
-
-void MainWindow::LibraryItemDoubleClicked(const QModelIndex &index) {
-  AddLibraryItemToPlaylist(autoclear_playlist_, false, QModelIndexList() << index);
-}
-
-void MainWindow::AddLibraryItemToPlaylist(bool clear_first, bool enqueue,
-                                          const QModelIndexList& indexes) {
-  QModelIndexList source_indexes;
-  foreach (const QModelIndex& index, indexes) {
-    if (index.model() == library_sort_model_)
-      source_indexes << library_sort_model_->mapToSource(index);
-    else
-      source_indexes << index;
-  }
-
-  // Special case: is the first item a smart playlist?
-  if (!source_indexes.isEmpty() &&
-      source_indexes.first().data(LibraryModel::Role_Type).toInt() ==
-        LibraryItem::Type_SmartPlaylist) {
-    AddSmartPlaylistToPlaylist(
-        clear_first, library_->model()->CreateGenerator(source_indexes.first()));
-    return;
-  }
-
-  AddLibrarySongsToPlaylist(clear_first, enqueue,
-                            library_->model()->GetChildSongs(source_indexes));
-}
-
 void MainWindow::VolumeWheelEvent(int delta) {
   ui_->volume->setValue(ui_->volume->value() + delta / 30);
 }
@@ -1047,48 +909,29 @@ void MainWindow::Love() {
 }
 #endif
 
-void MainWindow::RadioDoubleClick(const QModelIndex& index) {
-  if (autoclear_playlist_)
-    playlists_->ClearCurrent();
-
-  scoped_ptr<QMimeData> data(
-      radio_model_->merged_model()->mimeData(QModelIndexList() << index));
+void MainWindow::AddToPlaylist(QMimeData* data) {
   if (!data)
     return;
 
-  if (player_->GetState() != Engine::Playing)
-    data->setData(Playlist::kPlayNowMimetype, "true");
-
-  int rows = playlists_->current()->rowCount();
-  playlists_->current()->dropMimeData(data.get(), Qt::CopyAction, -1, 0, QModelIndex());
-
-  if (player_->GetState() != Engine::Playing && playlists_->current()->rowCount() > rows) {
-    QModelIndex first_song = playlists_->current()->index(rows, 0);
-    if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-      // The first song doesn't match the filter, so don't play it
-      return;
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    // Should we replace the flags with the user's preference?
+    if (mime_data->autoset_flags_) {
+      if (autoclear_playlist_) {
+        mime_data->clear_first_ = true;
+      }
     }
 
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(first_song.row(), Engine::First, true);
-  }
-}
+    // TODO: make this an option
+    mime_data->play_now_ = true;
 
-void MainWindow::InsertPlaylistItems(const PlaylistItemList& items, bool clear_first) {
-  if (clear_first)
-    playlists_->ClearCurrent();
-
-  QModelIndex first_song = playlists_->current()->InsertItems(items);
-
-  if (!playlists_->current()->proxy()->mapFromSource(first_song).isValid()) {
-    // The first song doesn't match the filter, so don't play it
-    return;
+    // If there's already a song playing, don't autoplay
+    if (player_->GetState() == Engine::Playing) {
+      mime_data->play_now_ = false;
+    }
   }
 
-  if (first_song.isValid() && player_->GetState() != Engine::Playing) {
-    playlists_->SetActiveToCurrent();
-    player_->PlayAt(first_song.row(), Engine::First, true);
-  }
+  playlists_->current()->dropMimeData(data, Qt::CopyAction, -1, 0, QModelIndex());
+  delete data;
 }
 
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
@@ -1350,7 +1193,10 @@ void MainWindow::AddFile() {
   foreach (const QString& path, file_names) {
     urls << QUrl::fromLocalFile(path);
   }
-  AddUrls(player_->GetState() != Engine::Playing, urls);
+
+  MimeData* data = new MimeData;
+  data->setUrls(urls);
+  AddToPlaylist(data);
 }
 
 void MainWindow::AddFolder() {
@@ -1366,8 +1212,9 @@ void MainWindow::AddFolder() {
   settings_.setValue("add_folder_path", directory);
 
   // Add media
-  AddUrls(player_->GetState() != Engine::Playing,
-          QList<QUrl>() << QUrl::fromLocalFile(directory));
+  MimeData* data = new MimeData;
+  data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(directory));
+  AddToPlaylist(data);
 }
 
 void MainWindow::AddStream() {
@@ -1382,8 +1229,9 @@ void MainWindow::AddStream() {
 }
 
 void MainWindow::AddStreamAccepted() {
-  AddUrls(player_->GetState() != Engine::Playing,
-          QList<QUrl>() << add_stream_dialog_->url());
+  MimeData* data = new MimeData;
+  data->setUrls(QList<QUrl>() << add_stream_dialog_->url());
+  AddToPlaylist(data);
 }
 
 void MainWindow::PlaylistRemoveCurrent() {
@@ -1442,9 +1290,12 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
       playlists_->ClearCurrent();
 
       // fallthrough
-    case CommandlineOptions::UrlList_Append:
-      AddUrls(player_->GetState() != Engine::Playing, options.urls());
+    case CommandlineOptions::UrlList_Append: {
+      MimeData* data = new MimeData;
+      data->setUrls(options.urls());
+      AddToPlaylist(data);
       break;
+    }
   }
 
   if (options.set_volume() != -1)
@@ -1478,9 +1329,10 @@ bool MainWindow::LoadUrl(const QString& url) {
   if (!QFile::exists(url))
     return false;
 
-  QList<QUrl> urls;
-  urls << QUrl::fromLocalFile(url);
-  AddUrls(true, urls);  // Always play now as this was a direct request from Finder.
+  MimeData* data = new MimeData;
+  data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(url));
+  AddToPlaylist(data);
+
   return true;
 }
 
@@ -1644,9 +1496,7 @@ void MainWindow::ShowCoverManager() {
     cover_manager_->Init();
 
     // Cover manager connections
-    connect(cover_manager_.get(), SIGNAL(AddSongsToPlaylist(SongList)), SLOT(AddLibrarySongsToPlaylist(SongList)));
-    connect(cover_manager_.get(), SIGNAL(LoadSongsToPlaylist(SongList)), SLOT(LoadLibrarySongsToPlaylist(SongList)));
-    connect(cover_manager_.get(), SIGNAL(SongsDoubleClicked(SongList)), SLOT(LibrarySongsDoubleClicked(SongList)));
+    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   }
 
   cover_manager_->show();
@@ -1746,10 +1596,7 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
   connect(player_, SIGNAL(Stopped()), view, SLOT(SongFinished()));
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
-  connect(view, SIGNAL(AddPlaylistItems(PlaylistItemList,bool)),
-                SLOT(InsertPlaylistItems(PlaylistItemList,bool)));
-  connect(view, SIGNAL(AddGenerator(smart_playlists::GeneratorPtr)),
-                SLOT(AddSongInfoGenerator(smart_playlists::GeneratorPtr)));
+  connect(view, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 }
 
 void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
@@ -1757,7 +1604,7 @@ void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
     return;
   gen->set_library(library_->backend());
 
-  AddSmartPlaylistToPlaylist(false, gen);
+  AddToPlaylist(new smart_playlists::GeneratorMimeData(gen));
 }
 
 void MainWindow::ShowSongInfoConfig() {

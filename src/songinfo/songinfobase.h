@@ -49,8 +49,7 @@ public slots:
 
 signals:
   void ShowSettingsDialog();
-  void AddPlaylistItems(const PlaylistItemList& items, bool clear_first = false);
-  void AddGenerator(smart_playlists::GeneratorPtr gen);
+  void AddToPlaylist(QMimeData* data);
 
 protected:
   void showEvent(QShowEvent* e);

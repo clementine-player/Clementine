@@ -32,6 +32,7 @@ class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class LibraryBackend;
 class LineEditInterface;
+class SongMimeData;
 class Ui_CoverManager;
 
 class QListWidgetItem;
@@ -58,14 +59,13 @@ class AlbumCoverManager : public QMainWindow {
 
   SongList GetSongsInAlbum(const QModelIndex& index) const;
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
+  SongMimeData* GetMimeDataForAlbums(const QModelIndexList& indexes) const;
 
   static QString SaveCoverInCache(
       const QString& artist, const QString& album, const QImage& image);
 
  signals:
-  void AddSongsToPlaylist(const SongList& songs);
-  void LoadSongsToPlaylist(const SongList& songs);
-  void SongsDoubleClicked(const SongList& songs);
+  void AddToPlaylist(QMimeData* data);
 
  protected:
   void showEvent(QShowEvent *);

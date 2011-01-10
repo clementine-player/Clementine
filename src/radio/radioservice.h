@@ -33,7 +33,7 @@ class LibraryFilterWidget;
 class RadioService : public QObject {
   Q_OBJECT
 
- public:
+public:
   RadioService(const QString& name, RadioModel* model);
   virtual ~RadioService() {}
 
@@ -55,18 +55,22 @@ class RadioService : public QObject {
 
   virtual void ReloadSettings() {}
 
+  // TODO: remove?
   virtual QString Icon() { return QString(); }
 
- signals:
+signals:
   void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
   void OpenSettingsAtPage(SettingsDialog::Page page);
 
-  void AddItemToPlaylist(QStandardItem* item, bool clear_first);
-  void AddItemsToPlaylist(const PlaylistItemList& items, bool clear_first);
+  void AddToPlaylistSignal(QMimeData* data);
 
- private:
+protected:
+  void AddItemToPlaylist(const QModelIndex& index, bool clear = false, bool enqueue = false);
+  void AddItemsToPlaylist(const QModelIndexList& indexes, bool clear = false, bool enqueue = false);
+
+private:
   RadioModel* model_;
   QString name_;
 };

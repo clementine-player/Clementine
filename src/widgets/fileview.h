@@ -51,9 +51,7 @@ class FileView : public QWidget {
  signals:
   void PathChanged(const QString& path);
 
-  void Load(const QList<QUrl>& urls);
-  void AddToPlaylist(const QList<QUrl>& urls);
-  void DoubleClicked(const QList<QUrl>& urls);
+  void AddToPlaylist(QMimeData* data);
   void CopyToLibrary(const QList<QUrl>& urls);
   void MoveToLibrary(const QList<QUrl>& urls);
   void CopyToDevice(const QList<QUrl>& urls);

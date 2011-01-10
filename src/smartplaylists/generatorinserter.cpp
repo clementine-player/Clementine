@@ -46,13 +46,14 @@ static PlaylistItemList Generate(GeneratorPtr generator, int dynamic_count) {
 }
 
 void GeneratorInserter::Load(
-    Playlist* destination, int row, bool play_now, GeneratorPtr generator,
-    int dynamic_count) {
+    Playlist* destination, int row, bool play_now, bool enqueue,
+    GeneratorPtr generator, int dynamic_count) {
   task_id_ = task_manager_->StartTask(tr("Loading smart playlist"));
 
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
+  enqueue_ = enqueue;
 
   connect(generator.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
@@ -69,13 +70,10 @@ void GeneratorInserter::Finished() {
 
   PlaylistItemList items = watcher->result();
 
-  QModelIndex index = destination_->InsertItems(items, row_);
-  if (play_now_) {
-    emit PlayRequested(index);
-  }
-
   if (items.isEmpty()) {
     destination_->TurnOffDynamicPlaylist();
+  } else {
+    destination_->InsertItems(items, row_, play_now_, enqueue_);
   }
 
   task_manager_->SetTaskFinished(task_id_);

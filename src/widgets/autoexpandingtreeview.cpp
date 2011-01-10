@@ -16,6 +16,7 @@
 */
 
 #include "autoexpandingtreeview.h"
+#include "core/mimedata.h"
 
 #include <QMouseEvent>
 #include <QtDebug>
@@ -87,6 +88,12 @@ void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
 
 void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
   ignore_next_click_ = true;
+
+  QMimeData* data = model()->mimeData(QModelIndexList() << index);
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->autoset_flags_ = true;
+  }
+  emit AddToPlaylistSignal(data);
 }
 
 void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {

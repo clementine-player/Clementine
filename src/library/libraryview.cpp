@@ -21,6 +21,7 @@
 #include "libraryitem.h"
 #include "librarybackend.h"
 #include "core/deletefiles.h"
+#include "core/mimedata.h"
 #include "core/musicstorage.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
@@ -285,24 +286,23 @@ void LibraryView::ShowInVarious(bool on) {
 }
 
 void LibraryView::Load() {
-  if (!context_menu_index_.isValid())
-    return;
-
-  emit Load(selectedIndexes());
+  QMimeData* data = model()->mimeData(selectedIndexes());
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->clear_first_ = true;
+  }
+  emit AddToPlaylistSignal(data);
 }
 
 void LibraryView::AddToPlaylist() {
-  if (!context_menu_index_.isValid())
-    return;
-
-  emit AddToPlaylist(selectedIndexes());
+  emit AddToPlaylistSignal(model()->mimeData(selectedIndexes()));
 }
 
 void LibraryView::AddToPlaylistEnqueue() {
-  if (!context_menu_index_.isValid())
-    return;
-
-  emit AddToPlaylistEnqueue(selectedIndexes());
+  QMimeData* data = model()->mimeData(selectedIndexes());
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->enqueue_now_ = true;
+  }
+  emit AddToPlaylistSignal(data);
 }
 
 void LibraryView::keyboardSearch(const QString& search) {

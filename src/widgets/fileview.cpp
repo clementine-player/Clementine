@@ -19,6 +19,7 @@
 #include "ui_fileview.h"
 #include "core/deletefiles.h"
 #include "core/filesystemmusicstorage.h"
+#include "core/mimedata.h"
 #include "ui/iconloader.h"
 #include "ui/organiseerrordialog.h"
 
@@ -54,8 +55,7 @@ FileView::FileView(QWidget* parent)
 
   connect(ui_->list, SIGNAL(activated(QModelIndex)), SLOT(ItemActivated(QModelIndex)));
   connect(ui_->list, SIGNAL(doubleClicked(QModelIndex)), SLOT(ItemDoubleClick(QModelIndex)));
-  connect(ui_->list, SIGNAL(Load(QList<QUrl>)), SIGNAL(Load(QList<QUrl>)));
-  connect(ui_->list, SIGNAL(AddToPlaylist(QList<QUrl>)), SIGNAL(AddToPlaylist(QList<QUrl>)));
+  connect(ui_->list, SIGNAL(AddToPlaylist(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
   connect(ui_->list, SIGNAL(CopyToLibrary(QList<QUrl>)), SIGNAL(CopyToLibrary(QList<QUrl>)));
   connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)), SIGNAL(MoveToLibrary(QList<QUrl>)));
   connect(ui_->list, SIGNAL(CopyToDevice(QList<QUrl>)), SIGNAL(CopyToDevice(QList<QUrl>)));
@@ -132,7 +132,10 @@ void FileView::ItemDoubleClick(const QModelIndex& index) {
   if (model_->isDir(index))
     return;
 
-  emit DoubleClicked(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
+  MimeData* data = new MimeData;
+  data->autoset_flags_ = true;
+  data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
+  emit AddToPlaylist(data);
 }
 
 

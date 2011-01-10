@@ -101,7 +101,6 @@ class MagnatuneService : public RadioService {
 
  private:
   void EnsureMenuCreated();
-  void AddSelectedToPlaylist(bool clear_first);
 
   Song ReadTrack(QXmlStreamReader& reader);
 

@@ -163,9 +163,9 @@ void LastFMService::LazyPopulate(QStandardItem* parent) {
       custom_list_->setData(Type_Custom, RadioModel::Role_Type);
       parent->appendRow(custom_list_);
 
-      RestoreList("artists", kUrlArtist, kTitleArtist, QIcon(":last.fm/icon_radio.png"), artist_list_);
-      RestoreList("tags", kUrlTag, kTitleTag, QIcon(":last.fm/icon_tag.png"), tag_list_);
-      RestoreList("custom", kUrlCustom, kTitleCustom, QIcon(":last.fm/icon_radio.png"), custom_list_);
+      RestoreList("artists", kUrlArtist, tr(kTitleArtist), QIcon(":last.fm/icon_radio.png"), artist_list_);
+      RestoreList("tags", kUrlTag, tr(kTitleTag), QIcon(":last.fm/icon_tag.png"), tag_list_);
+      RestoreList("custom", kUrlCustom, tr(kTitleCustom), QIcon(":last.fm/icon_radio.png"), custom_list_);
 
       friends_list_ = new QStandardItem(QIcon(":last.fm/my_friends.png"), tr("Friends"));
       friends_list_->setData(Type_Friends, RadioModel::Role_Type);
@@ -555,11 +555,11 @@ void LastFMService::RefreshNeighboursFinished() {
 }
 
 void LastFMService::AddToPlaylist() {
-  emit AddItemToPlaylist(context_item_, false);
+  AddItemToPlaylist(context_item_->index(), false);
 }
 
 void LastFMService::LoadToPlaylist() {
-  emit AddItemToPlaylist(context_item_, true);
+  AddItemToPlaylist(context_item_->index(), true);
 }
 
 void LastFMService::AddArtistRadio() {
@@ -604,7 +604,7 @@ void LastFMService::AddArtistOrTag(const QString& name,
   item->setData(title_pattern.arg(content), RadioModel::Role_Title);
   item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
   list->appendRow(item);
-  emit AddItemToPlaylist(item, false);
+  emit AddItemToPlaylist(item->index(), false);
 
   SaveList(name, list);
 }
@@ -767,10 +767,10 @@ PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {
 
   if (sections.count() == 2 && url.host() == "artist" && sections[1] == "similarartists") {
     ret.reset(new RadioPlaylistItem(this, url,
-        tr("Last.fm Similar Artists to %1").arg(sections[0]), QString()));
+        tr(kTitleArtist).arg(sections[0]), QString()));
   } else if (sections.count() == 1 && url.host() == "globaltags") {
     ret.reset(new RadioPlaylistItem(this, url,
-        tr("Last.fm Tag Radio: %1").arg(sections[0]), QString()));
+        tr(kTitleTag).arg(sections[0]), QString()));
   }
 
   return ret;

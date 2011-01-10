@@ -471,3 +471,19 @@ bool MergedProxyModel::IsKnownModel(const QAbstractItemModel* model) const {
     return true;
   return false;
 }
+
+QModelIndexList MergedProxyModel::mapFromSource(const QModelIndexList& source_indexes) const {
+  QModelIndexList ret;
+  foreach (const QModelIndex& index, source_indexes) {
+    ret << mapFromSource(index);
+  }
+  return ret;
+}
+
+QModelIndexList MergedProxyModel::mapToSource(const QModelIndexList& proxy_indexes) const {
+  QModelIndexList ret;
+  foreach (const QModelIndex& index, proxy_indexes) {
+    ret << mapToSource(index);
+  }
+  return ret;
+}

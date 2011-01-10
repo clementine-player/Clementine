@@ -31,6 +31,8 @@ class LibraryModel;
 class OrganiseDialog;
 class TaskManager;
 
+class QMimeData;
+
 namespace smart_playlists { class Wizard; }
 
 class LibraryItemDelegate : public QStyledItemDelegate {
@@ -66,9 +68,6 @@ class LibraryView : public AutoExpandingTreeView {
 
  signals:
   void ShowConfigDialog();
-  void Load(const QModelIndexList& indexes);
-  void AddToPlaylist(const QModelIndexList& indexes);
-  void AddToPlaylistEnqueue(const QModelIndexList& indexes);
 
  protected:
   // QWidget

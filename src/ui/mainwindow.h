@@ -147,34 +147,17 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void SongChanged(const Song& song);
   void VolumeChanged(int volume);
 
-  void LoadLibraryItemToPlaylist(const QModelIndexList& indexes);
-  void AddLibraryItemToPlaylist(const QModelIndexList& indexes);
-  void AddLibraryItemToPlaylistEnqueue(const QModelIndexList& indexes);
-  void LibraryItemDoubleClicked(const QModelIndex& index);
-
-  void LoadFilesToPlaylist(const QList<QUrl>& urls);
-  void AddFilesToPlaylist(const QList<QUrl>& urls);
-  void FilesDoubleClicked(const QList<QUrl>& urls);
-
   void CopyFilesToLibrary(const QList<QUrl>& urls);
   void MoveFilesToLibrary(const QList<QUrl>& urls);
   void CopyFilesToDevice(const QList<QUrl>& urls);
 
-  void LoadLibrarySongsToPlaylist(const SongList& songs);
-  void AddLibrarySongsToPlaylist(const SongList& songs);
-  void LibrarySongsDoubleClicked(const SongList& songs);
-
-  void LoadDeviceSongsToPlaylist(const SongList& songs);
-  void AddDeviceSongsToPlaylist(const SongList& songs);
-  void DeviceSongsDoubleClicked(const SongList& songs);
+  void AddToPlaylist(QMimeData* data);
 
   void VolumeWheelEvent(int delta);
   void ToggleShowHide();
 
   void UpdateTrackPosition();
 
-  void RadioDoubleClick(const QModelIndex& index);
-  void InsertPlaylistItems(const PlaylistItemList& items, bool clear_first);
   void LastFMButtonVisibilityChanged(bool value);
 #ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);
@@ -225,12 +208,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Raise();
 
  private:
-  void AddFilesToPlaylist(bool clear_first, const QList<QUrl>& urls);
-  void AddLibraryItemToPlaylist(bool clear_first, bool enqueue, const QModelIndexList& indexes);
-  void AddLibrarySongsToPlaylist(bool clear_first, bool enqueue, const SongList& songs);
-  void AddSmartPlaylistToPlaylist(bool clear_first, smart_playlists::GeneratorPtr gen);
-  void AddDeviceSongsToPlaylist(bool clear_first, const SongList& songs);
-  void AddUrls(bool play_now, const QList<QUrl>& urls);
   void ConnectInfoView(SongInfoBase* view);
 
  private:

@@ -27,6 +27,7 @@ SongLoaderInserter::SongLoaderInserter(
       destination_(NULL),
       row_(-1),
       play_now_(true),
+      enqueue_(false),
       async_load_id_(0),
       async_progress_(0),
       library_(library) {
@@ -36,7 +37,8 @@ SongLoaderInserter::~SongLoaderInserter() {
   qDeleteAll(pending_);
 }
 
-void SongLoaderInserter::Load(Playlist *destination, int row, bool play_now,
+void SongLoaderInserter::Load(Playlist *destination,
+                              int row, bool play_now, bool enqueue,
                               const QList<QUrl> &urls) {
   destination_ = destination;
   row_ = row;
@@ -89,9 +91,7 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
 }
 
 void SongLoaderInserter::Finished() {
-  QModelIndex index = destination_->InsertSongsOrLibraryItems(songs_, row_);
-  if (play_now_)
-    emit PlayRequested(index);
+  destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_);
 
   deleteLater();
 }

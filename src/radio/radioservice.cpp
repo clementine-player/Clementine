@@ -17,6 +17,8 @@
 
 #include "radioservice.h"
 #include "radiomodel.h"
+#include "core/mergedproxymodel.h"
+#include "core/mimedata.h"
 
 RadioService::RadioService(const QString& name, RadioModel* model)
   : QObject(model),
@@ -32,4 +34,18 @@ PlaylistItem::SpecialLoadResult RadioService::StartLoading(const QUrl &url) {
 
 PlaylistItem::SpecialLoadResult RadioService::LoadNext(const QUrl&) {
   return PlaylistItem::SpecialLoadResult();
+}
+
+void RadioService::AddItemToPlaylist(const QModelIndex& index, bool clear, bool enqueue) {
+  AddItemsToPlaylist(QModelIndexList() << index, clear, enqueue);
+}
+
+void RadioService::AddItemsToPlaylist(const QModelIndexList& indexes, bool clear, bool enqueue) {
+  QMimeData* data = model()->merged_model()->mimeData(
+        model()->merged_model()->mapFromSource(indexes));
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->clear_first_ = clear;
+    mime_data->enqueue_now_ = enqueue;
+  }
+  emit AddToPlaylistSignal(data);
 }

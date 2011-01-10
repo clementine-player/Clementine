@@ -82,8 +82,7 @@ public:
   int count() const { return tags_.count(); }
 
 signals:
-  void AddPlaylistItems(const PlaylistItemList& items);
-  void AddGenerator(smart_playlists::GeneratorPtr gen);
+  void AddToPlaylist(QMimeData* data);
 
 private slots:
   void TagClicked();

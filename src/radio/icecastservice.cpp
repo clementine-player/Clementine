@@ -296,19 +296,9 @@ void IcecastService::Homepage() {
 }
 
 void IcecastService::AddToPlaylist() {
-  AddSelectedToPlaylist(false);
+  AddItemToPlaylist(context_item_, false);
 }
 
 void IcecastService::LoadToPlaylist() {
-  AddSelectedToPlaylist(true);
-}
-
-void IcecastService::AddSelectedToPlaylist(bool clear_first) {
-  Song song(model_->GetSong(context_item_));
-  if (!song.is_valid())
-    return;
-
-  emit AddItemsToPlaylist(PlaylistItemList() <<
-                          PlaylistItemPtr(new SongPlaylistItem(song)),
-                          clear_first);
+  AddItemToPlaylist(context_item_, true);
 }

@@ -419,24 +419,11 @@ QWidget* JamendoService::HeaderWidget() const {
 }
 
 void JamendoService::AddToPlaylist() {
-  AddSelectedToPlaylist(false);
+  AddItemToPlaylist(context_item_, false);
 }
 
 void JamendoService::LoadToPlaylist() {
-  AddSelectedToPlaylist(true);
-}
-
-void JamendoService::AddSelectedToPlaylist(bool clear_first) {
-  SongList songs(library_model_->GetChildSongs(
-      library_sort_model_->mapToSource(context_item_)));
-
-  PlaylistItemList items;
-
-  foreach (const Song& song, songs) {
-    items << PlaylistItemPtr(new JamendoPlaylistItem(song));
-  }
-
-  emit AddItemsToPlaylist(items, clear_first);
+  AddItemToPlaylist(context_item_, true);
 }
 
 void JamendoService::AlbumInfo() {

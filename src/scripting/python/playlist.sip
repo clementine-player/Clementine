@@ -101,12 +101,12 @@ public:
   void set_scrobbled(bool v);
 
   // Changing the playlist
-  QModelIndex InsertItems(const PlaylistItemList& items, int pos = -1, bool enqueue = false);
-  QModelIndex InsertLibraryItems(const SongList& items, int pos = -1, bool enqueue = false);
-  QModelIndex InsertSongs(const SongList& items, int pos = -1, bool enqueue = false);
-  QModelIndex InsertSongsOrLibraryItems(const SongList& items, int pos = -1, bool enqueue = false);
-  // void InsertSmartPlaylist(smart_playlists::GeneratorPtr generator, int pos = -1, bool play_now = false);
-  void InsertUrls(const QList<QUrl>& urls, bool play_now, int pos = -1);
+  void InsertItems              (const PlaylistItemList& items,     int pos = -1, bool play_now = false, bool enqueue = false);
+  void InsertLibraryItems       (const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
+  void InsertSongs              (const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
+  void InsertSongsOrLibraryItems(const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
+  // void InsertSmartPlaylist      (smart_playlists::GeneratorPtr gen, int pos = -1, bool play_now = false, bool enqueue = false);
+  void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 

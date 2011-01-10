@@ -63,8 +63,6 @@ class IcecastService : public RadioService {
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
   IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
 
-  void AddSelectedToPlaylist(bool clear_first);
-
   QStandardItem* root_;
   NetworkAccessManager* network_;
   QMenu* context_menu_;

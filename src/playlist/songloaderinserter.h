@@ -37,11 +37,11 @@ public:
   SongLoaderInserter(TaskManager* task_manager, LibraryBackendInterface* library, QObject* parent = 0);
   ~SongLoaderInserter();
 
-  void Load(Playlist* destination, int row, bool play_now, const QList<QUrl>& urls);
+  void Load(Playlist* destination, int row, bool play_now, bool enqueue,
+            const QList<QUrl>& urls);
 
 signals:
   void Error(const QString& message);
-  void PlayRequested(const QModelIndex& index);
 
 private slots:
   void PendingLoadFinished(bool success);
@@ -55,6 +55,7 @@ private:
   Playlist* destination_;
   int row_;
   bool play_now_;
+  bool enqueue_;
 
   SongList songs_;
 

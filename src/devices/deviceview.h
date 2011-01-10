@@ -51,11 +51,6 @@ public:
   void SetDeviceManager(DeviceManager* manager);
   void SetLibrary(LibraryModel* library);
 
-signals:
-  void Load(const SongList& songs);
-  void AddToPlaylist(const SongList& songs);
-  void DoubleClicked(const SongList& songs);
-
 protected:
   void contextMenuEvent(QContextMenuEvent *);
   void mouseDoubleClickEvent(QMouseEvent *event);

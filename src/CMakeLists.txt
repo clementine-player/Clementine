@@ -251,6 +251,7 @@ set(HEADERS
   core/gnomeglobalshortcutbackend.h
   core/kittenloader.h
   core/mergedproxymodel.h
+  core/mimedata.h
   core/mpris_common.h
   core/network.h
   core/organise.h
@@ -290,6 +291,7 @@ set(HEADERS
   playlist/playlistdelegates.h
   playlist/playlistfilter.h
   playlist/playlistheader.h
+  playlist/playlistitemmimedata.h
   playlist/playlistmanager.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h

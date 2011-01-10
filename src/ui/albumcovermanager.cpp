@@ -23,6 +23,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
+#include "playlist/songmimedata.h"
 #include "widgets/maclineedit.h"
 
 #include <QActionGroup>
@@ -600,18 +601,35 @@ SongList AlbumCoverManager::GetSongsInAlbums(const QModelIndexList& indexes) con
   return ret;
 }
 
+SongMimeData* AlbumCoverManager::GetMimeDataForAlbums(const QModelIndexList& indexes) const {
+  SongList songs = GetSongsInAlbums(indexes);
+  if (songs.isEmpty())
+    return NULL;
+
+  SongMimeData* data = new SongMimeData;
+  data->backend = backend_;
+  data->songs = songs;
+  return data;
+}
+
 void AlbumCoverManager::AlbumDoubleClicked(const QModelIndex &index) {
-  emit SongsDoubleClicked(GetSongsInAlbum(index));
+  SongMimeData* data = GetMimeDataForAlbums(QModelIndexList() << index);
+  if (data) {
+    data->autoset_flags_ = true;
+    emit AddToPlaylist(data);
+  }
 }
 
 void AlbumCoverManager::AddSelectedToPlaylist() {
-  emit AddSongsToPlaylist(GetSongsInAlbums(
-      ui_->albums->selectionModel()->selectedIndexes()));
+  emit AddToPlaylist(GetMimeDataForAlbums(ui_->albums->selectionModel()->selectedIndexes()));
 }
 
 void AlbumCoverManager::LoadSelectedToPlaylist() {
-  emit LoadSongsToPlaylist(GetSongsInAlbums(
-      ui_->albums->selectionModel()->selectedIndexes()));
+  SongMimeData* data = GetMimeDataForAlbums(ui_->albums->selectionModel()->selectedIndexes());
+  if (data) {
+    data->clear_first_ = true;
+    emit AddToPlaylist(data);
+  }
 }
 
 void AlbumCoverManager::SearchManual() {
