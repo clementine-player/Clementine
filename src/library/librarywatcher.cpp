@@ -21,6 +21,7 @@
 #include "playlistparsers/cueparser.h"
 
 #include <QFileSystemWatcher>
+#include <QDateTime>
 #include <QDirIterator>
 #include <QtDebug>
 #include <QThread>
@@ -31,9 +32,6 @@
 
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
-
-// TODO: test removing a folder with cues
-// TODO: what about .cue vs it's media file changes?
 
 QStringList LibraryWatcher::sValidImages;
 
@@ -288,6 +286,13 @@ void LibraryWatcher::ScanSubdirectory(
   foreach (const QString& file, files_on_disk) {
     if (stop_requested_) return;
 
+    QString matching_cue = NoExtensionPart(file) + ".cue";
+    QDateTime cue_last_modified = QFileInfo(matching_cue).lastModified();
+
+    uint cue_mtime = cue_last_modified.isValid()
+                         ? cue_last_modified.toTime_t()
+                         : 0;
+
     Song matching_song;
     if (FindSongByPath(songs_in_db, file, &matching_song)) {
       // The song is in the database and still on disk.
@@ -301,7 +306,8 @@ void LibraryWatcher::ScanSubdirectory(
         continue;
       }
 
-      bool changed = matching_song.mtime() != file_info.lastModified().toTime_t();
+      // watch out for cue songs which have their mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
+      bool changed = matching_song.mtime() != qMax(file_info.lastModified().toTime_t(), cue_mtime);
 
       // Also want to look to see whether the album art has changed
       QString image = ImageForSong(file, album_art);
@@ -310,59 +316,69 @@ void LibraryWatcher::ScanSubdirectory(
         changed = true;
       }
 
-      // TODO: cues
+      // the song's changed - reread the metadata from file
+      // TODO: problem if cue gets deleted or added before an update
       if (changed) {
         qDebug() << file << "changed";
 
-        // It's changed - reread the metadata from the file
-        Song song_on_disk;
-        song_on_disk.InitFromFile(file, t->dir());
-        if (!song_on_disk.is_valid())
-          continue;
-        song_on_disk.set_id(matching_song.id());
-        song_on_disk.set_art_automatic(image);
+        // cue associated?
+        if(cue_mtime) {
+          QFile cue(matching_cue);
+          cue.open(QIODevice::ReadOnly);
 
-        // Preserve user-settable fields
-        song_on_disk.set_playcount(matching_song.playcount());
-        song_on_disk.set_skipcount(matching_song.skipcount());
-        song_on_disk.set_lastplayed(matching_song.lastplayed());
-        song_on_disk.set_rating(matching_song.rating());
-        song_on_disk.set_score(matching_song.score());
-        song_on_disk.set_art_manual(matching_song.art_manual());
-
-        if (!matching_song.IsMetadataEqual(song_on_disk)) {
-          qDebug() << file << "metadata changed";
-          // Update the song in the DB
-          t->new_songs << song_on_disk;
+          foreach(Song cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
+            // update every song that's in the cue and library
+            Song matching_section = backend_->GetSongByFilename(cue_song.filename(), cue_song.beginning());
+            if(matching_section.is_valid()) {
+              cue_song.set_directory_id(t->dir());
+              PreserveUserSetData(file, image, matching_section, &cue_song, t);
+            }
+          }
         } else {
-          // Only the mtimes changed
-          t->touched_songs << song_on_disk;
+          Song song_on_disk;
+          song_on_disk.InitFromFile(file, t->dir());
+
+          if (!song_on_disk.is_valid())
+            continue;
+
+          PreserveUserSetData(file, image, matching_song, &song_on_disk, t);
         }
       }
     } else {
       // The song is on disk but not in the DB
       SongList song_list;
 
-      QString matching_cue = NoExtensionPart(file) + ".cue";
-
       // don't process the same cue many times
       if(cues_processed.contains(matching_cue))
         continue;
 
       // it's a cue - create virtual tracks
-      if(QFile::exists(matching_cue)) {
+      if(cue_mtime) {
         QFile cue(matching_cue);
         cue.open(QIODevice::ReadOnly);
 
-        song_list = cue_parser_->Load(&cue, path);
+        // ignore FILEs pointing to other media files
+        foreach(const Song& cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
+          if(cue_song.filename() == file) {
+            song_list << cue_song;
+          }
+        }
+
+        if(song_list.isEmpty()) {
+          continue;
+        }
+
         cues_processed << matching_cue;
 
       // it's a normal media file
       } else {
         Song song;
         song.InitFromFile(file, -1);
-        if (!song.is_valid())
+
+        if (!song.is_valid()) {
           continue;
+        }
+
         song_list << song;
       }
 
@@ -407,6 +423,29 @@ void LibraryWatcher::ScanSubdirectory(
   foreach (const Subdirectory& my_new_subdir, my_new_subdirs) {
     if (stop_requested_) return;
     ScanSubdirectory(my_new_subdir.path, my_new_subdir, t, true);
+  }
+}
+
+void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& image,
+                                         const Song& matching_song, Song* out, ScanTransaction* t) {
+  out->set_id(matching_song.id());
+  out->set_art_automatic(image);
+
+  out->set_playcount(matching_song.playcount());
+  out->set_skipcount(matching_song.skipcount());
+  out->set_lastplayed(matching_song.lastplayed());
+  out->set_rating(matching_song.rating());
+  out->set_score(matching_song.score());
+  out->set_art_manual(matching_song.art_manual());
+
+  if (!matching_song.IsMetadataEqual(*out)) {
+    qDebug() << file << "metadata changed";
+
+    // Update the song in the DB
+    t->new_songs << *out;
+  } else {
+    // Only the mtime's changed
+    t->touched_songs << *out;
   }
 }
 

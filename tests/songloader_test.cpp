@@ -53,6 +53,9 @@ protected:
     library_.reset(new MockLibraryBackend);
     loader_.reset(new SongLoader(library_.get()));
     loader_->set_timeout(20000);
+
+    // the thing we return is not really important
+    EXPECT_CALL(*library_.get(), GetSongByFilename(_, _)).WillRepeatedly(Return(Song()));
   }
 
   void LoadLocalDirectory(const QString& dir);

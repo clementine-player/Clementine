@@ -29,7 +29,7 @@ XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList XSPFParser::Load(QIODevice *device, const QDir&) const {
+SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path, const QDir&) const {
   SongList ret;
 
   QXmlStreamReader reader(device);

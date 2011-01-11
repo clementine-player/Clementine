@@ -41,7 +41,7 @@ TEST_F(CueParserTest, ParsesASong) {
   QFile file(":testdata/onesong.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // one song
   ASSERT_EQ(1, song_list.size());
@@ -60,7 +60,7 @@ TEST_F(CueParserTest, ParsesTwoSongs) {
   QFile file(":testdata/twosongs.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // two songs
   ASSERT_EQ(2, song_list.size());
@@ -89,7 +89,7 @@ TEST_F(CueParserTest, SkipsBrokenSongs) {
   QFile file(":testdata/brokensong.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // two songs (the broken one is not in the list)
   ASSERT_EQ(2, song_list.size());
@@ -120,7 +120,7 @@ TEST_F(CueParserTest, UsesAllMetadataInformation) {
   QFile file(":testdata/fullmetadata.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // two songs
   ASSERT_EQ(2, song_list.size());
@@ -153,7 +153,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   QFile file(":testdata/manyfiles.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // five songs
   ASSERT_EQ(5, song_list.size());
@@ -212,7 +212,7 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   QFile file(":testdata/manyfilesbroken.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // four songs
   ASSERT_EQ(4, song_list.size());
@@ -262,7 +262,7 @@ TEST_F(CueParserTest, SkipsDataFiles) {
   QFile file(":testdata/withdatafiles.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, QDir(""));
+  SongList song_list = parser_.Load(&file, "", QDir(""));
 
   // two songs
   ASSERT_EQ(2, song_list.size());

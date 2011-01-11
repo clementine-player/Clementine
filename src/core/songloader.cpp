@@ -155,7 +155,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
       QFile cue(matching_cue);
       cue.open(QIODevice::ReadOnly);
 
-      song_list = cue_parser_->Load(&cue, QDir(filename.section('/', 0, -2)));
+      song_list = cue_parser_->Load(&cue, matching_cue, QDir(filename.section('/', 0, -2)));
 
     // it's a normal media file
     } else {
@@ -183,7 +183,7 @@ void SongLoader::LoadPlaylistAndEmit(ParserBase* parser, const QString& filename
 void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
-  songs_ = parser->Load(&file, QFileInfo(filename).path());
+  songs_ = parser->Load(&file, filename, QFileInfo(filename).path());
 }
 
 static bool CompareSongs(const Song& left, const Song& right) {

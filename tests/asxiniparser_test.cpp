@@ -35,7 +35,7 @@ TEST_F(AsxIniParserTest, ParsesBasicTrackList) {
   QFile file(":/testdata/test.asxini");
   file.open(QIODevice::ReadOnly);
 
-  SongList songs = parser_.Load(&file, QDir());
+  SongList songs = parser_.Load(&file, "", QDir());
   ASSERT_EQ(2, songs.length());
   EXPECT_EQ("http://195.245.168.21/antena3?MSWMExt=.asf", songs[0].filename());
   EXPECT_EQ("http://195.245.168.21:80/antena3?MSWMExt=.asf", songs[1].filename());

@@ -37,7 +37,7 @@ public:
 
   virtual bool TryMagic(const QByteArray& data) const = 0;
 
-  virtual SongList Load(QIODevice* device, const QDir& dir = QDir()) const = 0;
+  virtual SongList Load(QIODevice* device, const QString& playlist_path = "", const QDir& dir = QDir()) const = 0;
   virtual void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const = 0;
 
 protected:
@@ -54,11 +54,9 @@ protected:
   QString MakeUrl(const QString& filename_or_url) const;
 
   // Converts the URL or path to a canonical path and searches the library for
-  // a song with that path.  If one is found, returns it, otherwise returns an
-  // invalid song.
-  Song LoadLibrarySong(const QString& filename_or_url) const;
-  // Just like the method above, but looks for a SECTION of a song.
-  Song LoadLibrarySong(const QString& filename_or_url, int beginning) const;
+  // a section of a song with that path and the given beginning. If one is found,
+  // returns it, otherwise returns an invalid song.
+  Song LoadLibrarySong(const QString& filename_or_url, int beginning = 0) const;
 
 private:
   LibraryBackendInterface* library_;

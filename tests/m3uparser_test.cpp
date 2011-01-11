@@ -112,7 +112,7 @@ TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
   M3UParser parser(NULL);
-  SongList songs = parser.Load(&buffer, QDir("somedir"));
+  SongList songs = parser.Load(&buffer, "", QDir("somedir"));
   ASSERT_EQ(2, songs.size());
   EXPECT_PRED_FORMAT2(::testing::IsSubstring,
       "http://foo.com/bar/somefile.mp3", songs[0].filename().toStdString());
@@ -127,7 +127,7 @@ TEST_F(M3UParserTest, ParsesActualM3U) {
   QFile file(":testdata/test.m3u");
   file.open(QIODevice::ReadOnly);
   M3UParser parser(NULL);
-  SongList songs = parser.Load(&file, QDir("somedir"));
+  SongList songs = parser.Load(&file, "", QDir("somedir"));
   ASSERT_EQ(239, songs.size());
   EXPECT_EQ("gravity", songs[0].title());
   EXPECT_EQ(203, songs[0].length());

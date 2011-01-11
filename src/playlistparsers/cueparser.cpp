@@ -18,6 +18,8 @@
 #include "cueparser.h"
 
 #include <QBuffer>
+#include <QDateTime>
+#include <QFileInfo>
 #include <QStringBuilder>
 #include <QRegExp>
 #include <QTextCodec>
@@ -40,7 +42,7 @@ CueParser::CueParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
+SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const QDir& dir) const {
   SongList ret;
 
   QTextStream text_stream(device);
@@ -198,6 +200,8 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
     }
   }
 
+  QDateTime cue_mtime = QFileInfo(playlist_path).lastModified();
+
   // finalize parsing songs
   for(int i = 0; i < entries.length(); i++) {
     CueEntry entry = entries.at(i);
@@ -212,6 +216,11 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
         song.InitFromFile(current.filename(), -1);
       }
 
+      // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
+      if(cue_mtime.isValid()) {
+        song.set_mtime(qMax(cue_mtime.toTime_t(), song.mtime()));
+      }
+
       // overwrite the stuff, we may have read from the file or library, using
       // the current .cue metadata
 
@@ -220,7 +229,9 @@ SongList CueParser::Load(QIODevice* device, const QDir& dir) const {
         song.set_track(i + 1);
       }
 
-      if(i + 1 < entries.size()) {
+      // the last TRACK for every FILE gets it's 'end' marker from the media file's
+      // length
+      if(i + 1 < entries.size() && entries.at(i).file == entries.at(i + 1).file) {
         // incorrect indices?
         if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {
           continue;

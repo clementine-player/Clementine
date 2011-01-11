@@ -25,7 +25,7 @@ PLSParser::PLSParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList PLSParser::Load(QIODevice *device, const QDir &dir) const {
+SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const QDir &dir) const {
   QMap<int, Song> songs;
   QRegExp n_re("\\d+$");
 

@@ -43,7 +43,7 @@ public:
                                      const QString& mime_type = QString()) const;
   ParserBase* ParserForExtension(const QString& suffix) const;
 
-  SongList Load(const QString& filename, ParserBase* parser = 0) const;
+  SongList Load(const QString& filename, const QString& playlist_path = "", ParserBase* parser = 0) const;
   void Save(const SongList& songs, const QString& filename) const;
 
 private:

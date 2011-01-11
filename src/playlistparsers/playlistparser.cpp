@@ -99,7 +99,7 @@ ParserBase* PlaylistParser::MaybeGetParserForMagic(const QByteArray& data,
   return NULL;
 }
 
-SongList PlaylistParser::Load(const QString &filename, ParserBase* p) const {
+SongList PlaylistParser::Load(const QString &filename, const QString& playlist_path, ParserBase* p) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension
@@ -113,7 +113,7 @@ SongList PlaylistParser::Load(const QString &filename, ParserBase* p) const {
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
 
-  return parser->Load(&file, info.absolutePath());
+  return parser->Load(&file, playlist_path, info.absolutePath());
 }
 
 void PlaylistParser::Save(const SongList &songs, const QString &filename) const {

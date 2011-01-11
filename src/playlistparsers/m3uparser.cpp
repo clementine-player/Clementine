@@ -25,7 +25,7 @@ M3UParser::M3UParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList M3UParser::Load(QIODevice* device, const QDir& dir) const {
+SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const QDir& dir) const {
   SongList ret;
 
   M3UType type = STANDARD;

@@ -46,7 +46,7 @@ protected:
 TEST_F(PLSParserTest, ParseOneTrack) {
   shared_ptr<QFile> file(Open("pls_one.pls"));
 
-  SongList songs = parser_.Load(file.get(), QDir("/relative/to/"));
+  SongList songs = parser_.Load(file.get(), "", QDir("/relative/to/"));
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ("/relative/to/filename with spaces.mp3", songs[0].filename());
   EXPECT_EQ("Title", songs[0].title());
@@ -103,7 +103,7 @@ TEST_F(PLSParserTest, SaveAndLoad) {
   parser_.Save(songs, &temp);
 
   temp.seek(0);
-  songs = parser_.Load(&temp, QDir("/meep"));
+  songs = parser_.Load(&temp, "", QDir("/meep"));
 
   ASSERT_EQ(2, songs.count());
   EXPECT_EQ(one.filename(), songs[0].filename());

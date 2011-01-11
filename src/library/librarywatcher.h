@@ -133,6 +133,8 @@ class LibraryWatcher : public QObject {
   QString PickBestImage(const QStringList& images);
   QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
   void AddWatch(QFileSystemWatcher* w, const QString& path);
+  void PreserveUserSetData(const QString& file, const QString& image,
+                           const Song& matching_song, Song* out, ScanTransaction* t);
 
  private:
   // One of these gets stored for each Directory we're watching

@@ -90,18 +90,5 @@ Song ParserBase::LoadLibrarySong(const QString& filename_or_url, int beginning) 
   else
     info.setFile(filename_or_url);
 
-  LibraryQuery query;
-  query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-  query.AddWhere("filename", info.canonicalFilePath());
-  query.AddWhere("beginning", beginning);
-
-  Song song;
-  if (library_->ExecQuery(&query) && query.Next()) {
-    song.InitFromQuery(query);
-  }
-  return song;
-}
-
-Song ParserBase::LoadLibrarySong(const QString& filename_or_url) const {
-  return LoadLibrarySong(filename_or_url, 0);
+  return library_->GetSongByFilename(info.canonicalFilePath(), beginning);
 }

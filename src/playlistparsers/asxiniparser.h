@@ -31,7 +31,7 @@ public:
 
   bool TryMagic(const QByteArray &data) const;
 
-  SongList Load(QIODevice *device, const QDir &dir = QDir()) const;
+  SongList Load(QIODevice *device, const QString& playlist_path = "", const QDir &dir = QDir()) const;
   void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
 };
 

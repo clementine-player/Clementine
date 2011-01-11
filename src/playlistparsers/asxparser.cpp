@@ -31,7 +31,7 @@ ASXParser::ASXParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList ASXParser::Load(QIODevice *device, const QDir&) const {
+SongList ASXParser::Load(QIODevice *device, const QString& playlist_path, const QDir&) const {
   // We have to load everything first so we can munge the "XML".
   QByteArray data = device->readAll();
 

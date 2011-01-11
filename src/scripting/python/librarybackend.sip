@@ -56,6 +56,8 @@ public:
   SongList GetSongsByForeignId(const QStringList& ids, const QString& table,
                                const QString& column);
 
+  Song GetSongByFilename(const QString& filename, int beginning);
+
   void AddDirectory(const QString& path);
   void RemoveDirectory(const Directory& dir);
 
