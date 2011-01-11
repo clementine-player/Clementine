@@ -630,6 +630,36 @@ if(HAVE_DBUS)
 
   # Gnome Screensaver DBus interface
   list(APPEND SOURCES ui/dbusscreensaver.cpp)
+
+  if(HAVE_REMOTE)
+    # TODO: Use CMake macro when it supports -i
+    find_program(QDBUSXML2CPP qdbusxml2cpp)
+    add_custom_command(
+        OUTPUT
+        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp
+        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h
+        COMMAND ${QDBUSXML2CPP}
+        dbus/org.freedesktop.Avahi.EntryGroup.xml
+        -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup
+        -i dbus/metatypes.h
+        DEPENDS dbus/org.freedesktop.Avahi.EntryGroup.xml
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h)
+    list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp)
+
+    add_custom_command(
+        OUTPUT
+        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp
+        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h
+        COMMAND ${QDBUSXML2CPP}
+        dbus/org.freedesktop.Avahi.Server.xml
+        -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver
+        -i dbus/metatypes.h
+        DEPENDS dbus/org.freedesktop.Avahi.Server.xml
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h)
+    list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp)
+  endif(HAVE_REMOTE)
 endif(HAVE_DBUS)
 
 # Libgpod device backend
@@ -727,6 +757,10 @@ if(HAVE_REMOTE)
   if(APPLE)
     list(APPEND SOURCES remote/bonjour.mm)
   endif(APPLE)
+
+  if(HAVE_DBUS)
+    list(APPEND SOURCES remote/avahi.cpp)
+  endif(HAVE_DBUS)
 endif(HAVE_REMOTE)
 
 # OS-specific sources that should be searched for translatable strings even

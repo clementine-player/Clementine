@@ -80,6 +80,7 @@ using boost::scoped_ptr;
   #include "core/mpris_common.h"
   #include "core/mpris.h"
   #include "core/mpris2.h"
+  #include "dbus/metatypes.h"
   #include <QDBusArgument>
   #include <QDBusConnection>
   #include <QImage>
@@ -310,8 +311,9 @@ int main(int argc, char *argv[]) {
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
+  qDBusRegisterMetaType<QList<QByteArray> >();
 
-  // Create the session bus here so it's sure to live in the main thread
+  // Create the session bus here so it's sure to live in the main thread.
   QDBusConnection::sessionBus();
 
   mpris::ArtLoader art_loader;
@@ -323,6 +325,10 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef HAVE_REMOTE
+  #ifdef HAVE_DBUS
+    // Create the system bus here so it's sure to live in the main thread.
+    QDBusConnection::systemBus();
+  #endif
   Zeroconf* zeroconf = Zeroconf::GetZeroconf();
   if (zeroconf) {
     HttpServer* server = new HttpServer(&player);
