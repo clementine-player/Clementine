@@ -47,12 +47,15 @@ class RadioPlaylistItem : public PlaylistItem {
 
  private:
   void InitMetadata();
+  RadioService* service() const;
 
  private:
-  RadioService* service_;
   QUrl url_;
   QString title_;
   QString artist_;
+  QString service_name_;
+
+  RadioService* service_;
 
   Song metadata_;
 };
