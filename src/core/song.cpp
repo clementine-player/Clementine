@@ -266,7 +266,10 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   TagLib::Tag* tag = fileref->tag();
   QTextCodec* codec = NULL;
   if (tag) {
-    codec = detector.Guess(*fileref);
+    TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file());
+    if (file && (file->ID3v2Tag() || file->ID3v1Tag())) {
+      codec = detector.Guess(*fileref);
+    }
     d->title_ = Decode(tag->title(), codec);
     d->artist_ = Decode(tag->artist(), codec);
     d->album_ = Decode(tag->album(), codec);
