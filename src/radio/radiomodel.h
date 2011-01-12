@@ -104,15 +104,19 @@ public:
     return static_cast<T*>(ServiceByName(T::kServiceName));
   }
 
+  // Add and remove services.  Ownership is not transferred and the service
+  // is not reparented.  If the service is deleted it will be automatically
+  // removed from the model.
+  void AddService(RadioService* service);
+  void RemoveService(RadioService* service);
+
+  // Returns the service that is a parent of this item.  Works by walking up
+  // the tree until it finds an item with Role_Service set.
   RadioService* ServiceForItem(const QStandardItem* item) const;
   RadioService* ServiceForIndex(const QModelIndex& index) const;
 
+  // Returns true if the given item has a PlayBehaviour other than None.
   bool IsPlayable(const QModelIndex& index) const;
-
-  // This is special because Player needs it for scrobbling
-#ifdef HAVE_LIBLASTFM
-  LastFMService* GetLastFMService() const;
-#endif
 
   // QAbstractItemModel
   Qt::ItemFlags flags(const QModelIndex& index) const;
@@ -137,8 +141,8 @@ signals:
 
   void AddToPlaylist(QMimeData* data);
 
-private:
-  void AddService(RadioService* service);
+private slots:
+  void ServiceDeleted();
 
 private:
   static QMap<QString, RadioService*>* sServices;

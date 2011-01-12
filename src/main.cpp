@@ -300,7 +300,7 @@ int main(int argc, char *argv[]) {
   RadioModel radio_model(database.get(), &task_manager, NULL);
   Player player(&playlists
 #ifdef HAVE_LIBLASTFM
-                ,radio_model.GetLastFMService()
+                ,RadioModel::Service<LastFMService>()
 #endif
                 );
 

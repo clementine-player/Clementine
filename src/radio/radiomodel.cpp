@@ -60,8 +60,10 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
 
 void RadioModel::AddService(RadioService *service) {
   QStandardItem* root = service->CreateRootItem();
-  if (!root)
+  if (!root) {
+    qWarning() << "Radio service" << service->name() << "did not return a root item";
     return;
+  }
 
   root->setData(Type_Service, Role_Type);
   root->setData(QVariant::fromValue(service), Role_Service);
@@ -74,6 +76,33 @@ void RadioModel::AddService(RadioService *service) {
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
   connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));
   connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
+  connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
+}
+
+void RadioModel::RemoveService(RadioService* service) {
+  if (!sServices->contains(service->name()))
+    return;
+
+  // Find and remove the root item that this service created
+  for (int i=0 ; i<invisibleRootItem()->rowCount() ; ++i) {
+    if (invisibleRootItem()->child(i)->data(Role_Service).value<RadioService*>()
+        == service) {
+      invisibleRootItem()->removeRow(i);
+      break;
+    }
+  }
+
+  // Remove the service from the list
+  sServices->remove(service->name());
+
+  // Disconnect the service
+  disconnect(service, 0, this, 0);
+}
+
+void RadioModel::ServiceDeleted() {
+  RadioService* service = qobject_cast<RadioService*>(sender());
+  if (service)
+    RemoveService(service);
 }
 
 RadioService* RadioModel::ServiceByName(const QString& name) {
@@ -159,12 +188,6 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
 
   return data;
 }
-
-#ifdef HAVE_LIBLASTFM
-LastFMService* RadioModel::GetLastFMService() const {
-  return Service<LastFMService>();
-}
-#endif
 
 void RadioModel::ShowContextMenu(const QModelIndex& merged_model_index,
                                  const QPoint& global_pos) {

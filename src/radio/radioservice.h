@@ -55,7 +55,6 @@ public:
 
   virtual void ReloadSettings() {}
 
-  // TODO: remove?
   virtual QString Icon() { return QString(); }
 
 signals:

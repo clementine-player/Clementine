@@ -294,7 +294,7 @@ MainWindow::MainWindow(
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
   connect(ui_->action_mute, SIGNAL(triggered()), player_, SLOT(Mute()));
 #ifdef HAVE_LIBLASTFM
-  connect(ui_->action_ban, SIGNAL(triggered()), radio_model_->GetLastFMService(), SLOT(Ban()));
+  connect(ui_->action_ban, SIGNAL(triggered()), RadioModel::Service<LastFMService>(), SLOT(Ban()));
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
 #endif
   connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlists_, SLOT(ClearCurrent()));
@@ -459,14 +459,14 @@ MainWindow::MainWindow(
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(radio_model_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 #ifdef HAVE_LIBLASTFM
-  connect(radio_model_->GetLastFMService(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
-  connect(radio_model_->GetLastFMService(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
+  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
+  connect(RadioModel::Service<LastFMService>(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
 #endif
   connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
   connect(radio_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
 #ifdef HAVE_LIBLASTFM
-  LastFMButtonVisibilityChanged(radio_model_->GetLastFMService()->AreButtonsVisible());
+  LastFMButtonVisibilityChanged(RadioModel::Service<LastFMService>()->AreButtonsVisible());
 #else
   LastFMButtonVisibilityChanged(false);
 #endif
@@ -720,7 +720,7 @@ void MainWindow::MediaPlaying() {
 
 #ifdef HAVE_LIBLASTFM
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
-  LastFMService* lastfm = radio_model_->GetLastFMService();
+  LastFMService* lastfm = RadioModel::Service<LastFMService>();
 
   ui_->action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
   ui_->action_love->setEnabled(lastfm->IsScrobblingEnabled());
@@ -883,7 +883,7 @@ void MainWindow::UpdateTrackPosition() {
   if (!playlists_->active()->has_scrobbled() &&
       position >= playlists_->active()->scrobble_point()) {
 #ifdef HAVE_LIBLASTFM
-    radio_model_->GetLastFMService()->Scrobble();
+    radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
 #endif
     playlists_->active()->set_scrobbled(true);
 
@@ -904,7 +904,7 @@ void MainWindow::UpdateTrackPosition() {
 
 #ifdef HAVE_LIBLASTFM
 void MainWindow::Love() {
-  radio_model_->GetLastFMService()->Love();
+  RadioModel::Service<LastFMService>()->Love();
   ui_->action_love->setEnabled(false);
 }
 #endif
