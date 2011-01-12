@@ -109,6 +109,9 @@ Script* PythonEngine::CreateScript(const QString& path,
     AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
     AddObject(manager()->data().player_, sipType_Player, "player");
     AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
+    AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
+    AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
+    AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
     AddObject(manager()->ui(), sipType_UIInterface, "ui");
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
@@ -201,4 +204,16 @@ void PythonEngine::RegisterNativeObject(QObject* object) {
   // Finally got the script - tell it about this object so it will get destroyed
   // when the script is unloaded.
   script->AddNativeObject(object);
+
+  // Save the script as a property on the object so we can remove it later
+  object->setProperty("owning_python_script", QVariant::fromValue(script));
+  connect(object, SIGNAL(destroyed(QObject*)), SLOT(NativeObjectDestroyed(QObject*)));
+}
+
+void PythonEngine::NativeObjectDestroyed(QObject* object) {
+  Script* script = object->property("owning_python_script").value<Script*>();
+  if (!script || !loaded_scripts_.values().contains(script))
+    return;
+
+  script->RemoveNativeObject(object);
 }

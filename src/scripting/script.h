@@ -19,6 +19,7 @@
 #define SCRIPT_H
 
 #include <QList>
+#include <QMetaType>
 #include <QString>
 
 #include <boost/scoped_ptr.hpp>
@@ -43,6 +44,7 @@ public:
   // The script can "own" QObjects like QActions that must be deleted (and
   // removed from the UI, etc.) when the script is unloaded.
   void AddNativeObject(QObject* object);
+  void RemoveNativeObject(QObject* object);
 
   virtual bool Init() = 0;
   virtual bool Unload() = 0;
@@ -59,5 +61,6 @@ private:
   QString script_file_;
   QString id_;
 };
+Q_DECLARE_METATYPE(Script*);
 
 #endif // SCRIPT_H

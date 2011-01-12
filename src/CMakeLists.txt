@@ -327,6 +327,7 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
+  scripting/languageengine.h
   scripting/scriptdialog.h
   scripting/scriptdialogtabwidget.h
   scripting/scriptinterface.h
@@ -733,16 +734,23 @@ if(HAVE_SCRIPTING_PYTHON)
     scripting/python/pythonscript.cpp
   )
 
+  list(APPEND HEADERS
+    scripting/python/pythonengine.h
+  )
+
   add_sip_binding(SOURCES
     scripting/python/clementine.sip
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineLibraryBackendAlbum.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemSpecialLoadResult.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineTaskManagerTask.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Directory.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100LibraryBackendAlbum.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Subdirectory.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100TaskManagerTask.cpp
   )
 endif(HAVE_SCRIPTING_PYTHON)
 

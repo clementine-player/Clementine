@@ -100,7 +100,8 @@ void RadioModel::RemoveService(RadioService* service) {
 }
 
 void RadioModel::ServiceDeleted() {
-  RadioService* service = qobject_cast<RadioService*>(sender());
+  // qobject_cast doesn't work here with services created by python
+  RadioService* service = static_cast<RadioService*>(sender());
   if (service)
     RemoveService(service);
 }

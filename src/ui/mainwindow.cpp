@@ -632,7 +632,9 @@ MainWindow::MainWindow(
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
 #endif
 
-  scripts_->Init(ScriptManager::GlobalData(library_, player_, playlists_));
+  scripts_->Init(ScriptManager::GlobalData(
+      library_, player_, playlists_, task_manager_, settings_dialog_.get(),
+      radio_model_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 }
 

@@ -27,7 +27,10 @@ class LanguageEngine;
 class Library;
 class Player;
 class PlaylistManager;
+class RadioModel;
 class Script;
+class SettingsDialog;
+class TaskManager;
 class UIInterface;
 
 class ScriptManager : public QAbstractListModel {
@@ -55,15 +58,23 @@ public:
 
   struct GlobalData {
     GlobalData() {}
-    GlobalData(Library* library, Player* player, PlaylistManager* playlists)
+    GlobalData(Library* library, Player* player, PlaylistManager* playlists,
+               TaskManager* task_manager, SettingsDialog* settings_dialog,
+               RadioModel* radio_model)
       : library_(library),
         player_(player),
-        playlists_(playlists)
+        playlists_(playlists),
+        task_manager_(task_manager),
+        settings_dialog_(settings_dialog),
+        radio_model_(radio_model)
     {}
 
     Library* library_;
     Player* player_;
     PlaylistManager* playlists_;
+    TaskManager* task_manager_;
+    SettingsDialog* settings_dialog_;
+    RadioModel* radio_model_;
   };
 
   static const char* kSettingsGroup;

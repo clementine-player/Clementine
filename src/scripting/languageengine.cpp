@@ -17,7 +17,8 @@
 
 #include "languageengine.h"
 
-LanguageEngine::LanguageEngine(ScriptManager* manager)
-  : manager_(manager)
+LanguageEngine::LanguageEngine(ScriptManager* parent)
+  : QObject(parent),
+    manager_(parent)
 {
 }

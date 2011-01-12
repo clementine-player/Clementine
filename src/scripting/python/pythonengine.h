@@ -25,6 +25,8 @@ struct _sipAPIDef;
 struct _sipTypeDef;
 
 class PythonEngine : public LanguageEngine {
+  Q_OBJECT
+
 public:
   PythonEngine(ScriptManager* manager);
   ~PythonEngine();
@@ -55,6 +57,9 @@ private:
   // match a Script with an ID of foo, but FindScriptMatchingId("foobar")
   // would not.
   Script* FindScriptMatchingId(const QString& id) const;
+
+private slots:
+  void NativeObjectDestroyed(QObject* object);
 
 private:
   static PythonEngine* sInstance;

@@ -53,8 +53,6 @@ ScriptManager::~ScriptManager() {
       info.loaded_->language()->DestroyScript(info.loaded_);
     }
   }
-
-  qDeleteAll(engines_);
 }
 
 void ScriptManager::Init(const GlobalData& data) {

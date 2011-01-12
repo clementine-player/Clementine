@@ -115,6 +115,7 @@ bool PythonScript::Unload() {
 
   // Delete any native objects this script created
   qDeleteAll(native_objects_);
+  native_objects_.clear();
 
   return true;
 }

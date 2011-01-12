@@ -34,3 +34,7 @@ Script::~Script() {
 void Script::AddNativeObject(QObject* object) {
   native_objects_ << object;
 }
+
+void Script::RemoveNativeObject(QObject* object) {
+  native_objects_.removeAll(object);
+}

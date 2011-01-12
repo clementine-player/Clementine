@@ -20,11 +20,15 @@
 
 #include "scriptmanager.h"
 
+#include <QObject>
+
 class Script;
 
-class LanguageEngine {
+class LanguageEngine : public QObject {
+  Q_OBJECT
+
 public:
-  LanguageEngine(ScriptManager* manager);
+  LanguageEngine(ScriptManager* parent);
   virtual ~LanguageEngine() {}
 
   ScriptManager* manager() const { return manager_; }

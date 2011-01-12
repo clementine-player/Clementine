@@ -26,6 +26,22 @@ public:
   };
   typedef QFlags<PlaylistItem::Option> Options;
 
+  struct SpecialLoadResult {
+    enum Type {
+      NoMoreTracks,
+      WillLoadAsynchronously,
+      TrackAvailable,
+    };
+
+    SpecialLoadResult(Type type = NoMoreTracks,
+                      const QUrl& original_url = QUrl(),
+                      const QUrl& media_url = QUrl());
+
+    Type type_;
+    QUrl original_url_;
+    QUrl media_url_;
+  };
+
   QString type() const;
   Options options() const;
 
