@@ -1007,11 +1007,13 @@ if (APPLE)
   install(DIRECTORY "${GROWL}/Versions/Current/Resources"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Growl.framework")
 
-  add_custom_target(bundle
+  add_custom_command(TARGET clementine
+    POST_BUILD
+    COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
-    DEPENDS clementine
   )
-  add_custom_target(dmg
+  add_custom_command(
+    OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
     ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
     COMMAND macdeployqt clementine.app -no-plugins -dmg
     COMMAND ${CMAKE_COMMAND} -E rename
@@ -1020,6 +1022,8 @@ if (APPLE)
     DEPENDS clementine
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
+  add_custom_target(dmg
+    DEPENDS ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg)
 else (APPLE)
   install(TARGETS clementine
     RUNTIME DESTINATION bin
