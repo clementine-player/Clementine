@@ -27,7 +27,9 @@
 #include <QMap>
 #include <QXmlStreamReader>
 
-#include <tunepimp-0.5/tp_c.h>
+#ifdef HAVE_LIBTUNEPIMP
+  #include <tunepimp-0.5/tp_c.h>
+#endif
 
 class TagFetcherItem;
 
