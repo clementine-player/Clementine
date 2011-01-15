@@ -42,6 +42,8 @@
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
+const char* EditTagDialog::kTagFetchText = QT_TR_NOOP("Complete automatically");
+const char* EditTagDialog::kTagFetchOnLoadText = QT_TR_NOOP("Generating audio fingerprint and fetching results...");
 
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
@@ -49,6 +51,9 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     backend_(NULL),
     loading_(false),
     ignore_edits_(false),
+#ifdef HAVE_LIBTUNEPIMP
+    tag_fetcher_(new TagFetcher()),
+#endif
 #ifdef HAVE_LIBLASTFM
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
@@ -61,6 +66,9 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(ArtLoaded(quint64,QImage)));
+#ifdef HAVE_LIBTUNEPIMP
+  connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)), SLOT(FetchTagFinished(QString, SongList)));
+#endif
 
 #ifdef HAVE_LIBLASTFM
   cover_searcher_->Init(cover_fetcher_);
@@ -69,6 +77,11 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_container->hide();
+#ifdef HAVE_LIBTUNEPIMP
+  ui_->fetch_tag->setText(kTagFetchText);
+#else
+  ui_->fetch_tag->setVisible(false);
+#endif
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -118,6 +131,10 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(ui_->rating, SIGNAL(RatingChanged(float)),
                        SLOT(SongRated(float)));
   connect(ui_->playcount_reset, SIGNAL(clicked()), SLOT(ResetPlayCounts()));
+#ifdef HAVE_LIBTUNEPIMP
+  connect(ui_->fetch_tag, SIGNAL(clicked()), SLOT(FetchTag()));
+  ui_->fetch_tag->setText(kTagFetchText);
+#endif
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
@@ -167,6 +184,7 @@ bool EditTagDialog::SetLoading(const QString& message) {
   ui_->button_box->setEnabled(!loading);
   ui_->tab_widget->setEnabled(!loading);
   ui_->song_list->setEnabled(!loading);
+  ui_->fetch_tag->setEnabled(!loading);
   ui_->loading_label->setText(message);
   return true;
 }
@@ -230,6 +248,9 @@ void EditTagDialog::SetSongsFinished() {
   ui_->song_list->setVisible(multiple);
   previous_button_->setEnabled(multiple);
   next_button_->setEnabled(multiple);
+
+  // Display tag fetcher if there's only one song
+  ui_->fetch_tag->setVisible(!multiple);
 
   ui_->tab_widget->setCurrentWidget(multiple ? ui_->tags_tab : ui_->summary_tab);
 }
@@ -669,4 +690,32 @@ void EditTagDialog::ResetPlayCounts() {
   song->set_score(0);
   backend_->ResetStatisticsAsync(song->id());
   UpdateStatisticsTab(*song);
+}
+
+void EditTagDialog::FetchTag() {
+#ifdef HAVE_LIBTUNEPIMP
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  Song* song = &data_[sel.first().row()].original_;
+  if (!song->is_valid() || song->id() == -1)
+    return;
+  tag_fetcher_->FetchFromFile(song->filename());
+  ui_->fetch_tag->setDisabled(true); // disable button, will be re-enabled later
+  ui_->fetch_tag->setText(kTagFetchOnLoadText);
+#endif
+}
+
+void EditTagDialog::FetchTagFinished(QString filename, SongList songs_guessed) {
+#ifdef HAVE_LIBTUNEPIMP
+  ui_->fetch_tag->setDisabled(false);
+  ui_->fetch_tag->setText(kTagFetchText);
+  // TODO: pop-up a window with suggestions (songs_guessed) and complete tags
+  foreach(const Song& song, songs_guessed) {
+    qDebug() << "Song guessed:";
+    qDebug() << "Artist: " + song.artist();
+    qDebug() << "Album:  " + song.album();
+    qDebug() << "Title:  " + song.title();
+  }
+#endif
 }

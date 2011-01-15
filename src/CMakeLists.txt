@@ -26,6 +26,10 @@ if(HAVE_LIBLASTFM)
   include_directories(${LASTFM_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
+if(HAVE_LIBTUNEPIMP)
+  include_directories(${TUNEPIMP_INCLUDE_DIRS})
+endif(HAVE_LIBTUNEPIMP)
+
 if(HAVE_SCRIPTING_PYTHON)
   include_directories(${PYTHON_INCLUDE_DIRS})
 endif(HAVE_SCRIPTING_PYTHON)
@@ -73,6 +77,7 @@ set(SOURCES
   core/stylesheetloader.cpp
   core/taskmanager.cpp
   core/utilities.cpp
+  core/tagfetcher.cpp
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
@@ -257,6 +262,7 @@ set(HEADERS
   core/player.h
   core/songloader.h
   core/taskmanager.h
+  core/tagfetcher.h
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
@@ -873,6 +879,10 @@ endif(ENABLE_VISUALISATIONS)
 if(HAVE_LIBLASTFM)
   target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
 endif(HAVE_LIBLASTFM)
+
+if(HAVE_LIBTUNEPIMP)
+  target_link_libraries(clementine_lib ${TUNEPIMP_LIBRARIES})
+endif(HAVE_LIBTUNEPIMP)
 
 if(HAVE_LIBGPOD)
   target_link_libraries(clementine_lib ${LIBGPOD_LIBRARIES})

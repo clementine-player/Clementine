@@ -24,6 +24,9 @@
 #include "config.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
+#ifdef HAVE_LIBTUNEPIMP
+# include "core/tagfetcher.h"
+#endif
 #include "playlist/playlistitem.h"
 #include "widgets/lineedit.h"
 
@@ -49,6 +52,8 @@ public:
   ~EditTagDialog();
 
   static const char* kHintText;
+  static const char* kTagFetchText;
+  static const char* kTagFetchOnLoadText;
 
   void SetSongs(const SongList& songs, const PlaylistItemList& items = PlaylistItemList());
   void SetTagCompleter(LibraryBackend* backend);
@@ -74,6 +79,8 @@ private slots:
   void ButtonClicked(QAbstractButton* button);
   void SongRated(float rating);
   void ResetPlayCounts();
+  void FetchTag();
+  void FetchTagFinished(QString filename, SongList songs_guessed);
 
   void ArtLoaded(quint64 id, const QImage& image);
 
@@ -138,6 +145,10 @@ private:
   QList<FieldData> fields_;
 
   bool ignore_edits_;
+
+#ifdef HAVE_LIBTUNEPIMP
+  TagFetcher* tag_fetcher_;
+#endif
 
 #ifdef HAVE_LIBLASTFM
   AlbumCoverSearcher* cover_searcher_;
