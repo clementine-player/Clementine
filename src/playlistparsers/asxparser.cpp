@@ -47,6 +47,18 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path, const 
     index += ex.matchedLength();
   }
 
+  // Some playlists have unescaped & characters in URLs :(
+  ex.setPattern("(href\\s*=\\s*\")([^\"]+)\"");
+  index = 0;
+  while ((index = ex.indexIn(data, index)) != -1) {
+    QString url = ex.cap(2);
+    url.replace(QRegExp("&(?!amp;|quot;|apos;|lt;|gt;)"), "&amp;");
+
+    QByteArray replacement = (ex.cap(1) + url + "\"").toLocal8Bit();
+    data.replace(ex.cap(0).toLocal8Bit(), replacement);
+    index += replacement.length();
+  }
+
   QBuffer buffer(&data);
   buffer.open(QIODevice::ReadOnly);
 

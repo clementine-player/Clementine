@@ -70,6 +70,29 @@ TEST_F(ASXParserTest, ParsesMoreThanOneTrackFromXML) {
   EXPECT_EQ(Song::Type_Stream, songs[1].filetype());
 }
 
+TEST_F(ASXParserTest, ParsesBrokenXmlEntities) {
+  QByteArray data =
+      "<asx version = \"3.0\">"
+      "<Title>DI.fm</Title>"
+      "<Author>Digitally Imported Radio</Author>"
+      "<Copyright>2006 Digitally Imported., Inc</Copyright>"
+      "<MoreInfo href=\"http://www.di.fm/\" />"
+      "  <entry>"
+      "    <PARAM name=\"HTMLView\" value=\"http://www.di.fm/classictrance/pro/mini_playlist.html\"/>"
+      "    <ref href = \"mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx\"/>"
+      "    <Title>Classic Trance</Title>"
+      "    <Author>Digitally Imported Premium</Author>"
+      "  </entry>"
+      "</asx>";
+
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+  ASXParser parser(NULL);
+  SongList songs = parser.Load(&buffer);
+  ASSERT_EQ(1, songs.length());
+  EXPECT_EQ("mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx", songs[0].filename());
+}
+
 TEST_F(ASXParserTest, SavesSong) {
   QByteArray data;
   QBuffer buffer(&data);
