@@ -146,8 +146,8 @@ Script* PythonEngine::CreateScript(const QString& path,
 }
 
 void PythonEngine::DestroyScript(Script* script) {
-  loaded_scripts_.remove(script->id());
   script->Unload();
+  loaded_scripts_.remove(script->id());
   delete script;
 }
 
