@@ -3,7 +3,7 @@ import clementine
 from servicebase import DigitallyImportedServiceBase
 
 from PyQt4.QtCore    import QSettings, QUrl
-from PyQt4.QtNetwork import QNetworkCookie, QNetworkCookieJar
+from PyQt4.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
 
 class DigitallyImportedService(DigitallyImportedServiceBase):
   HOMEPAGE_URL = QUrl("http://www.di.fm/")
