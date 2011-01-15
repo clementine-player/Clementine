@@ -126,11 +126,7 @@ void SomaFMService::LoadPlaylistFinished() {
 }
 
 void SomaFMService::RefreshChannels() {
-  QNetworkRequest request = QNetworkRequest(QUrl(kChannelListUrl));
-  request.setRawHeader("User-Agent", QString("%1 %2").arg(
-      QCoreApplication::applicationName(), QCoreApplication::applicationVersion()).toUtf8());
-
-  QNetworkReply* reply = network_->get(request);
+  QNetworkReply* reply = network_->get(QNetworkRequest(QUrl(kChannelListUrl)));
   connect(reply, SIGNAL(finished()), SLOT(RefreshChannelsFinished()));
 
   if (!get_channels_task_id_)
