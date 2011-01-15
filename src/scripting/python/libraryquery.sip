@@ -20,7 +20,8 @@ class LibraryQuery {
 %End
 
 public:
-  LibraryQuery(const QueryOptions& options = QueryOptions());
+  LibraryQuery(); // Workaround SIP Mercurial 3e647ed0f2a2
+  LibraryQuery(const QueryOptions& options);
 
   void SetColumnSpec(const QString& spec);
   void SetOrderBy(const QString& order_by);

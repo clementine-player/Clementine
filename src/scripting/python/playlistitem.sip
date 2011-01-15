@@ -33,7 +33,8 @@ public:
       TrackAvailable,
     };
 
-    SpecialLoadResult(Type type = NoMoreTracks,
+    SpecialLoadResult(); // Workaround SIP Mercurial 3e647ed0f2a2
+    SpecialLoadResult(Type type,
                       const QUrl& original_url = QUrl(),
                       const QUrl& media_url = QUrl());
 
