@@ -27,7 +27,7 @@
 
 RadioPlaylistItem::RadioPlaylistItem(const QString& type)
   : PlaylistItem(type),
-    service_(NULL)
+    set_service_icon_(false)
 {
 }
 
@@ -38,7 +38,7 @@ RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
     title_(title),
     artist_(artist),
     service_name_(service->name()),
-    service_(service)
+    set_service_icon_(false)
 {
   InitMetadata();
 }
@@ -52,30 +52,23 @@ bool RadioPlaylistItem::InitFromQuery(const SqlRow& query) {
   artist_ = query.value(row + 3).toString();
   service_name_ = query.value(row + 6).toString();
 
-  // It's ok if this returns NULL at this point - the service might get added
-  // later eg. by a plugin.
-  service_ = RadioModel::ServiceByName(service_name_);
-
   InitMetadata();
   return true;
 }
 
 RadioService* RadioPlaylistItem::service() const {
-  if (!service_) {
-    // Lazy load the service if it's not cached
-    const_cast<RadioPlaylistItem*>(this)->service_ =
-        RadioModel::ServiceByName(service_name_);
+  RadioService* ret = RadioModel::ServiceByName(service_name_);
 
-    // Maybe we should set an icon now as well
-    if (service_) {
-      QString icon = service_->Icon();
-      if (!icon.isEmpty()) {
-        const_cast<RadioPlaylistItem*>(this)->metadata_.set_art_manual(icon);
-      }
+  if (ret && !set_service_icon_) {
+    const_cast<RadioPlaylistItem*>(this)->set_service_icon_ = true;
+
+    QString icon = ret->Icon();
+    if (!icon.isEmpty()) {
+      const_cast<RadioPlaylistItem*>(this)->metadata_.set_art_manual(icon);
     }
   }
 
-  return service_;
+  return ret;
 }
 
 QVariant RadioPlaylistItem::DatabaseValue(DatabaseColumn column) const {
@@ -83,7 +76,7 @@ QVariant RadioPlaylistItem::DatabaseValue(DatabaseColumn column) const {
     case Column_Url:          return url_.toString();
     case Column_Title:        return title_;
     case Column_Artist:       return artist_;
-    case Column_RadioService: return service_->name();
+    case Column_RadioService: return service_name_;
     default:                  return PlaylistItem::DatabaseValue(column);
   }
 }
@@ -96,13 +89,6 @@ void RadioPlaylistItem::InitMetadata() {
 
   metadata_.set_artist(artist_);
   metadata_.set_filetype(Song::Type_Stream);
-
-  if (service()) {
-    QString icon = service_->Icon();
-    if (!icon.isEmpty()) {
-      metadata_.set_art_manual(icon);
-    }
-  }
 }
 
 Song RadioPlaylistItem::Metadata() const {
@@ -112,15 +98,17 @@ Song RadioPlaylistItem::Metadata() const {
 }
 
 PlaylistItem::SpecialLoadResult RadioPlaylistItem::StartLoading() {
-  if (!service())
+  RadioService* s = service();
+  if (!s)
     return SpecialLoadResult();
-  return service_->StartLoading(url_);
+  return s->StartLoading(url_);
 }
 
 PlaylistItem::SpecialLoadResult RadioPlaylistItem::LoadNext() {
-  if (!service())
+  RadioService* s = service();
+  if (!s)
     return SpecialLoadResult();
-  return service_->LoadNext(url_);
+  return s->LoadNext(url_);
 }
 
 QUrl RadioPlaylistItem::Url() const {
@@ -128,7 +116,8 @@ QUrl RadioPlaylistItem::Url() const {
 }
 
 PlaylistItem::Options RadioPlaylistItem::options() const {
-  if (!service())
+  RadioService* s = service();
+  if (!s)
     return Default;
-  return service_->playlistitem_options();
+  return s->playlistitem_options();
 }

@@ -55,7 +55,7 @@ class RadioPlaylistItem : public PlaylistItem {
   QString artist_;
   QString service_name_;
 
-  RadioService* service_;
+  bool set_service_icon_;
 
   Song metadata_;
 };
