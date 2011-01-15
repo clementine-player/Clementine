@@ -85,10 +85,10 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     self.menu.popup(global_pos)
 
   def AddToPlaylist(self):
-    print "Add to playlist"
+    self.AddItemToPlaylist(self.context_index, False)
 
   def LoadToPlaylist(self):
-    print "Load to playlist"
+    self.AddItemToPlaylist(self.context_index, True)
 
   def Homepage(self):
     QDesktopServices.openUrl(self.HOMEPAGE_URL)
