@@ -78,7 +78,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_container->hide();
 #ifdef HAVE_LIBTUNEPIMP
-  ui_->fetch_tag->setText(kTagFetchText);
+  ui_->fetch_tag->setText(tr(kTagFetchText));
 #else
   ui_->fetch_tag->setVisible(false);
 #endif
@@ -133,7 +133,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(ui_->playcount_reset, SIGNAL(clicked()), SLOT(ResetPlayCounts()));
 #ifdef HAVE_LIBTUNEPIMP
   connect(ui_->fetch_tag, SIGNAL(clicked()), SLOT(FetchTag()));
-  ui_->fetch_tag->setText(kTagFetchText);
+  ui_->fetch_tag->setText(tr(kTagFetchText));
 #endif
 
   // Set up the album cover menu
@@ -702,14 +702,14 @@ void EditTagDialog::FetchTag() {
     return;
   tag_fetcher_->FetchFromFile(song->filename());
   ui_->fetch_tag->setDisabled(true); // disable button, will be re-enabled later
-  ui_->fetch_tag->setText(kTagFetchOnLoadText);
+  ui_->fetch_tag->setText(tr(kTagFetchOnLoadText));
 #endif
 }
 
 void EditTagDialog::FetchTagFinished(QString filename, SongList songs_guessed) {
 #ifdef HAVE_LIBTUNEPIMP
   ui_->fetch_tag->setDisabled(false);
-  ui_->fetch_tag->setText(kTagFetchText);
+  ui_->fetch_tag->setText(tr(kTagFetchText));
   // TODO: pop-up a window with suggestions (songs_guessed) and complete tags
   foreach(const Song& song, songs_guessed) {
     qDebug() << "Song guessed:";
