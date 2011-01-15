@@ -21,7 +21,7 @@ public:
   LibraryBackend* library_backend() const;
   // PlaylistBackend* playlist_backend() const;
   PlaylistSequence* sequence() const;
-  // PlaylistParser* parser() const;
+  PlaylistParser* parser() const;
 
 public slots:
   void New(const QString& name, const SongList& songs = SongList());
