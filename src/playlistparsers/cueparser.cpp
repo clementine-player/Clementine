@@ -220,6 +220,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
       if(cue_mtime.isValid()) {
         song.set_mtime(qMax(cue_mtime.toTime_t(), song.mtime()));
       }
+      song.set_cue_path(playlist_path);
 
       // overwrite the stuff, we may have read from the file or library, using
       // the current .cue metadata

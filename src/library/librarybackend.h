@@ -82,6 +82,9 @@ class LibraryBackendInterface : public QObject {
 
   virtual Song GetSongById(int id) = 0;
 
+  // Returns all sections of a song with the given filename. If there's just one section
+  // the resulting list will have it's size equal to 1.
+  virtual SongList GetSongsByFilename(const QString& filename) = 0;
   // Returns a section of a song with the given filename and beginning. If the section
   // is not present in library, returns invalid song.
   // Using default beginning value is suitable when searching for single-section songs.
@@ -140,6 +143,7 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList GetSongsByForeignId(const QStringList& ids, const QString& table,
                                const QString& column);
 
+  SongList GetSongsByFilename(const QString& filename);
   Song GetSongByFilename(const QString& filename, int beginning = 0);
 
   void AddDirectory(const QString& path);

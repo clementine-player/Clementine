@@ -55,6 +55,9 @@ public:
   int lastplayed() const;
   int score() const;
 
+  const QString& cue_path() const;
+  bool has_cue() const;
+
   int beginning() const;
   int end() const;
 
@@ -128,6 +131,7 @@ public:
   void set_filename(const QString& v);
   void set_basefilename(const QString& v);
   void set_directory_id(int v);
+  void set_cue_path(const QString& v);
 
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;

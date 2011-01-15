@@ -36,7 +36,9 @@ CREATE TABLE jamendo.songs (
   effective_compilation NOT NULL DEFAULT 0,
   skipcount NOT NULL DEFAULT 0,
   score NOT NULL DEFAULT 0,
-  beginning NOT NULL DEFAULT 0
+  beginning NOT NULL DEFAULT 0,
+
+  cue_path TEXT
 );
 
 CREATE VIRTUAL TABLE jamendo.songs_fts USING fts3(

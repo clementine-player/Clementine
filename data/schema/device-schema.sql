@@ -49,7 +49,9 @@ CREATE TABLE device_%deviceid_songs (
 
   skipcount INTEGER NOT NULL DEFAULT 0,
   score INTEGER NOT NULL DEFAULT 0,
-  beginning NOT NULL DEFAULT 0
+  beginning NOT NULL DEFAULT 0,
+
+  cue_path TEXT
 );
 
 CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);

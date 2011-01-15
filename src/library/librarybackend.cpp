@@ -574,6 +574,23 @@ Song LibraryBackend::GetSongByFilename(const QString& filename, int beginning) {
   return song;
 }
 
+SongList LibraryBackend::GetSongsByFilename(const QString& filename) {
+  LibraryQuery query;
+  query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
+  query.AddWhere("filename", filename);
+
+  SongList songlist;
+  if (ExecQuery(&query)) {
+    while(query.Next()) {
+      Song song;
+      song.InitFromQuery(query);
+
+      songlist << song;
+    }
+  }
+  return songlist;
+}
+
 bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
   LibraryQuery query(opt);
   query.SetColumnSpec("%songs_table.ROWID");

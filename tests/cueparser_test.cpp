@@ -41,7 +41,7 @@ TEST_F(CueParserTest, ParsesASong) {
   QFile file(":testdata/onesong.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, "", QDir(""));
+  SongList song_list = parser_.Load(&file, "CUEPATH", QDir(""));
 
   // one song
   ASSERT_EQ(1, song_list.size());
@@ -54,6 +54,7 @@ TEST_F(CueParserTest, ParsesASong) {
   ASSERT_EQ("", first_song.album());
   ASSERT_EQ(1, first_song.beginning());
   ASSERT_EQ(1, first_song.track());
+  ASSERT_EQ("CUEPATH", first_song.cue_path());
 }
 
 TEST_F(CueParserTest, ParsesTwoSongs) {
@@ -153,7 +154,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   QFile file(":testdata/manyfiles.cue");
   file.open(QIODevice::ReadOnly);
 
-  SongList song_list = parser_.Load(&file, "", QDir(""));
+  SongList song_list = parser_.Load(&file, "CUEPATH", QDir(""));
 
   // five songs
   ASSERT_EQ(5, song_list.size());
@@ -173,6 +174,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(1, first_song.beginning());
   ASSERT_EQ(second_song.beginning() - first_song.beginning(), first_song.length());
   ASSERT_EQ(-1, first_song.track());
+  ASSERT_EQ("CUEPATH", first_song.cue_path());
 
   ASSERT_TRUE(second_song.filename().endsWith("files/longer_one.mp3"));
   ASSERT_EQ("A1Song2", second_song.title());
@@ -190,6 +192,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(0, third_song.beginning());
   ASSERT_EQ(fourth_song.beginning() - third_song.beginning(), third_song.length());
   ASSERT_EQ(-1, third_song.track());
+  ASSERT_EQ("CUEPATH", third_song.cue_path());
 
   ASSERT_TRUE(fourth_song.filename().endsWith("files/longer_two_p1.mp3"));
   ASSERT_EQ("A2P1Song2", fourth_song.title());
@@ -206,6 +209,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ("Artist Two", fifth_song.albumartist());
   ASSERT_EQ(1, fifth_song.beginning());
   ASSERT_EQ(-1, fifth_song.track());
+  ASSERT_EQ("CUEPATH", fifth_song.cue_path());
 }
 
 TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {

@@ -171,6 +171,9 @@ class Song {
   int lastplayed() const { return d->lastplayed_; }
   int score() const { return d->score_; }
 
+  const QString& cue_path() const { return d->cue_path_; }
+  bool has_cue() const { return !d->cue_path_.isEmpty(); }
+
   int beginning() const { return d->beginning_; }
   int end() const { return d->end_; }
 
@@ -241,6 +244,7 @@ class Song {
   void set_skipcount(int v) { d->skipcount_ = v; }
   void set_lastplayed(int v) { d->lastplayed_ = v; }
   void set_score(int v) { d->score_ = qBound(0, v, 100); }
+  void set_cue_path(const QString& v) { d->cue_path_ = v; }
 
   // Setters that should only be used by tests
   void set_filename(const QString& v) { d->filename_ = v; }
@@ -311,6 +315,9 @@ class Song {
     int ctime_;
     int filesize_;
     FileType filetype_;
+
+    // If the song has a CUE, this contains it's path.
+    QString cue_path_;
 
     // Filenames to album art for this song.
     QString art_automatic_; // Guessed by LibraryWatcher

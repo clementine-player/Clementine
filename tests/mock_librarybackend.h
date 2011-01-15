@@ -51,6 +51,7 @@ class MockLibraryBackend : public LibraryBackendInterface {
 
   MOCK_METHOD1(GetSongById, Song(int));
 
+  MOCK_METHOD1(GetSongsByFilename, SongList(const QString&));
   MOCK_METHOD2(GetSongByFilename, Song(const QString&, int));
 
   MOCK_METHOD1(AddDirectory, void(const QString&));

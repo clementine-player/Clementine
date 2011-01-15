@@ -133,8 +133,27 @@ class LibraryWatcher : public QObject {
   QString PickBestImage(const QStringList& images);
   QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
   void AddWatch(QFileSystemWatcher* w, const QString& path);
+  uint GetMtimeForCue(const QString& cue_path);
+
+  // Updates the sections of a cue associated and altered (according to mtime)
+  // media file during a scan.
+  void UpdateCueAssociatedSongs(const QString& file, const QString& path,
+                                const QString& matching_cue, const QString& image,
+                                ScanTransaction* t);
+  // Updates a single non-cue associated and altered (according to mtime) song
+  // during a scan.
+  void UpdateNonCueAssociatedSong(const QString& file, const Song& matching_song,
+                                  const QString& image, bool cue_deleted,
+                                  ScanTransaction* t)  ;
+  // Updates a new song with some metadata taken from it's equivalent old 
+  // song (for example rating and score).
   void PreserveUserSetData(const QString& file, const QString& image,
                            const Song& matching_song, Song* out, ScanTransaction* t);
+  // Scans a single media file that's present on the disk but not yet in the library.
+  // It may result in a multiple files added to the library when the media file
+  // has many sections (like a CUE related media file).
+  SongList ScanNewFile(const QString& file, const QString& path,
+                       const QString& matching_cue, QSet<QString>* cues_processed);
 
  private:
   // One of these gets stored for each Directory we're watching

@@ -93,7 +93,8 @@ const QStringList Song::kColumns = QStringList()
     << "mtime" << "ctime" << "filesize" << "sampler" << "art_automatic"
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
-    << "effective_compilation" << "skipcount" << "score" << "beginning" << "length";
+    << "effective_compilation" << "skipcount" << "score" << "beginning" << "length"
+    << "cue_path";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
@@ -505,6 +506,8 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   // length is!
   d->beginning_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toInt();
   set_length(toint(col + 33));
+
+  d->cue_path_ = tostr(col + 34);
 
   #undef tostr
   #undef toint
@@ -964,6 +967,8 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":beginning", d->beginning_);
   query->bindValue(":length", intval(length()));
 
+  query->bindValue(":cue_path", d->cue_path_);
+
   #undef intval
   #undef notnullintval
 }
@@ -1057,7 +1062,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->samplerate_ == other.d->samplerate_ &&
          d->sampler_ == other.d->sampler_ &&
          d->art_automatic_ == other.d->art_automatic_ &&
-         d->art_manual_ == other.d->art_manual_;
+         d->art_manual_ == other.d->art_manual_ &&
+         d->cue_path_ == other.d->cue_path_;
 }
 
 void Song::SetTextFrame(const QString& id, const QString& value,
