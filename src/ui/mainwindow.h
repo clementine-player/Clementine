@@ -107,6 +107,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void resizeEvent(QResizeEvent* event);
   void closeEvent(QCloseEvent* event);
 
+#ifdef Q_OS_WIN32
+  bool winEvent(MSG* message, long* result);
+#endif
+
   // PlatformInterface
   void Activate();
   bool LoadUrl(const QString& url);
@@ -280,6 +284,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   bool autoclear_playlist_;
 
   BackgroundStreams* background_streams_;
+
+  // Really an ITaskbarList3* but I don't want to have to include windows.h here
+  void* taskbar_list_;
 };
 
 #endif // MAINWINDOW_H
