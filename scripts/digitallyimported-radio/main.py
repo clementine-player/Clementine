@@ -18,11 +18,11 @@ class Plugin:
     self.service.SettingsDialogRequested.connect(self.ShowSettings)
 
   def ShowSettings(self):
-    # Create the dialog the first time it's shown
     if not self.settings_dialog:
+      # Create the dialog the first time it's shown
       self.settings_dialog = SettingsDialog()
+      self.settings_dialog.accepted.connect(self.service.ReloadSettings)
 
-    # Show the dialog
     self.settings_dialog.show()
 
 plugin = Plugin()

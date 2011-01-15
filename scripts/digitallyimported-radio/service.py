@@ -1,9 +1,11 @@
+import common
+
 import clementine
 
 from PyQt4.QtCore    import QSettings, QUrl
 from PyQt4.QtGui     import QAction, QDesktopServices, QIcon, QMenu, \
                             QStandardItem
-from PyQt4.QtNetwork import QNetworkRequest
+from PyQt4.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
 import PyQt4.QtCore
 
 import json
@@ -15,18 +17,6 @@ class DigitallyImportedService(clementine.RadioService):
   HOMEPAGE_URL = QUrl("http://www.di.fm/")
   STREAM_LIST_URL = QUrl("http://listen.di.fm/")
 
-  # These have to be in the same order as in the settings dialog
-  PLAYLISTS = [
-    {"premium": False, "url": "http://listen.di.fm/public3/%s.pls"},
-    {"premium": True,  "url": "http://www.di.fm/listen/%s/premium.pls"},
-    {"premium": False, "url": "http://listen.di.fm/public2/%s.pls"},
-    {"premium": True,  "url": "http://www.di.fm/listen/%s/64k.pls"},
-    {"premium": True,  "url": "http://www.di.fm/listen/%s/128k.pls"},
-    {"premium": False, "url": "http://listen.di.fm/public5/%s.asx"},
-    {"premium": True,  "url": "http://www.di.fm/listen/%s/64k.asx"},
-    {"premium": True,  "url": "http://www.di.fm/listen/%s/128k.asx"},
-  ]
-
   SettingsDialogRequested = PyQt4.QtCore.pyqtSignal()
 
   def __init__(self, model):
@@ -36,6 +26,7 @@ class DigitallyImportedService(clementine.RadioService):
     self.path = os.path.dirname(__file__)
 
     self.audio_type = 0
+
     self.context_index = None
     self.last_original_url = None
     self.menu = None
@@ -50,6 +41,20 @@ class DigitallyImportedService(clementine.RadioService):
     settings.beginGroup(self.SERVICE_NAME)
 
     self.audio_type = int(settings.value("audio_type", 0).toPyObject())
+    username = unicode(settings.value("username", "").toPyObject().toUtf8())
+    password = unicode(settings.value("password", "").toPyObject().toUtf8())
+
+    # If a username and password were set by the user then set them in the
+    # cookies we pass to www.di.fm
+    cookie_jar = None
+    if len(username) and len(password):
+      cookie_jar = QNetworkCookieJar()
+      cookie_jar.setCookiesFromUrl([
+        QNetworkCookie("_amember_ru", username),
+        QNetworkCookie("_amember_rp", password),
+      ], QUrl("http://www.di.fm/"))
+
+    self.network.setCookieJar(cookie_jar)
 
   def CreateRootItem(self):
     self.root = QStandardItem(QIcon(os.path.join(self.path, "icon-small.png")),
@@ -80,7 +85,7 @@ class DigitallyImportedService(clementine.RadioService):
       self.menu.addSeparator()
 
       self.menu.addAction(clementine.IconLoader.Load("configure"),
-        self.tr("Configure Digitally Imported..."), self.SettingsDialogRequested)
+        self.tr("Configure Digitally Imported..."), self.SettingsDialogRequested.emit)
 
     self.context_index = index
     self.menu.popup(global_pos)
@@ -152,12 +157,12 @@ class DigitallyImportedService(clementine.RadioService):
       return result
 
     key = original_url.host()
-    playlist_url = self.PLAYLISTS[self.audio_type]["url"] % key
+    playlist_url = common.PLAYLISTS[self.audio_type]["url"] % key
 
-    # Start fetching the playlist
-    self.song_loader = clementine.SongLoader(clementine.library)
-    self.song_loader.LoadFinished.connect(self.LoadPlaylistFinished)
-    self.song_loader.Load(QUrl(playlist_url))
+    # Start fetching the playlist.  Can't use a SongLoader to do this because
+    # we have to use the cookies we set in ReloadSettings()
+    reply = self.network.get(QNetworkRequest(QUrl(playlist_url)))
+    reply.finished.connect(self.LoadPlaylistFinished)
 
     # Save the original URL so we can emit it in the finished signal later
     self.last_original_url = original_url
@@ -167,10 +172,13 @@ class DigitallyImportedService(clementine.RadioService):
 
     result.type_ = clementine.PlaylistItem.SpecialLoadResult.WillLoadAsynchronously
     result.original_url_ = original_url
-    print result
     return result
 
-  def LoadPlaylistFinished(self, success):
+  def LoadPlaylistFinished(self):
+    # Get the QNetworkReply that called this slot
+    reply = self.sender()
+    reply.deleteLater()
+
     if self.task_id is None:
       return
 
@@ -178,16 +186,20 @@ class DigitallyImportedService(clementine.RadioService):
     clementine.task_manager.SetTaskFinished(self.task_id)
     self.task_id = None
 
+    # Try to parse the playlist
+    parser = clementine.PlaylistParser(clementine.library)
+    songs = parser.Load(reply)
+
     # Failed to get the playlist?
-    if not success:
+    if len(songs) == 0:
       self.StreamError.emit("Error loading playlist '%s'" % self.song_loader.url().toString())
       return
 
     result = clementine.PlaylistItem.SpecialLoadResult()
     result.original_url_ = self.last_original_url
-    if len(self.song_loader.songs()) > 0:
-      # Take the first track in the playlist
-      result.type_ = clementine.PlaylistItem.SpecialLoadResult.TrackAvailable
-      result.media_url_ = QUrl(self.song_loader.songs()[0].filename())
+
+    # Take the first track in the playlist
+    result.type_ = clementine.PlaylistItem.SpecialLoadResult.TrackAvailable
+    result.media_url_ = QUrl(songs[0].filename())
 
     self.AsyncLoadFinished.emit(result)
