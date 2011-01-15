@@ -18,6 +18,7 @@
 #ifndef PLAYLISTPARSER_H
 #define PLAYLISTPARSER_H
 
+#include <QDir>
 #include <QObject>
 
 #include "core/song.h"
@@ -44,6 +45,7 @@ public:
   ParserBase* ParserForExtension(const QString& suffix) const;
 
   SongList Load(const QString& filename, const QString& playlist_path = "", ParserBase* parser = 0) const;
+  SongList Load(QIODevice* device, const QString& path_hint = "", const QDir& dir_hint = QDir()) const;
   void Save(const SongList& songs, const QString& filename) const;
 
 private:

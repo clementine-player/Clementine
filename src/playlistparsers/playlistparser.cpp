@@ -116,6 +116,17 @@ SongList PlaylistParser::Load(const QString &filename, const QString& playlist_p
   return parser->Load(&file, playlist_path, info.absolutePath());
 }
 
+SongList PlaylistParser::Load(QIODevice* device, const QString& path_hint,
+                              const QDir& dir_hint) const {
+  // Find a parser that supports this data
+  ParserBase* parser = MaybeGetParserForMagic(device->peek(kMagicSize));
+  if (!parser) {
+    return SongList();
+  }
+
+  return parser->Load(device, path_hint, dir_hint);
+}
+
 void PlaylistParser::Save(const SongList &songs, const QString &filename) const {
   QFileInfo info(filename);
 

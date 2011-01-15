@@ -11,10 +11,12 @@
 %Include libraryquery.sip
 %Include mergedproxymodel.sip
 %Include network.sip
+%Include parserbase.sip
 %Include player.sip
 %Include playlist.sip
 %Include playlistitem.sip
 %Include playlistmanager.sip
+%Include playlistparser.sip
 %Include playlistsequence.sip
 %Include pythonengine.sip
 %Include radiomodel.sip
