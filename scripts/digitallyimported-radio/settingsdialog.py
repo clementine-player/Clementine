@@ -1,4 +1,4 @@
-from service import DigitallyImportedService
+from servicebase import DigitallyImportedServiceBase
 
 from PyQt4.QtCore import QSettings
 from PyQt4.QtGui  import QDialog, QIcon
@@ -21,7 +21,7 @@ class SettingsDialog(QDialog):
   def showEvent(self, event):
     # Load the settings
     settings = QSettings()
-    settings.beginGroup(DigitallyImportedService.SERVICE_NAME)
+    settings.beginGroup(DigitallyImportedServiceBase.SETTINGS_GROUP)
     self.type.setCurrentIndex(int(settings.value("audio_type", 0).toPyObject()))
     self.username.setText(settings.value("username", "").toPyObject())
     self.password.setText(settings.value("password", "").toPyObject())
@@ -31,7 +31,7 @@ class SettingsDialog(QDialog):
   def accept(self):
     # Save the settings
     settings = QSettings()
-    settings.beginGroup(DigitallyImportedService.SERVICE_NAME)
+    settings.beginGroup(DigitallyImportedServiceBase.SETTINGS_GROUP)
     settings.setValue("audio_type", self.type.currentIndex())
     settings.setValue("username", self.username.text())
     settings.setValue("password", self.password.text())
