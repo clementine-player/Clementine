@@ -152,7 +152,6 @@ set(SOURCES
   scripting/languageengine.cpp
   scripting/script.cpp
   scripting/scriptdialog.cpp
-  scripting/scriptdialogtabwidget.cpp
   scripting/scriptinterface.cpp
   scripting/scriptmanager.cpp
   scripting/uiinterface.cpp
@@ -329,7 +328,6 @@ set(HEADERS
 
   scripting/languageengine.h
   scripting/scriptdialog.h
-  scripting/scriptdialogtabwidget.h
   scripting/scriptinterface.h
   scripting/scriptmanager.h
   scripting/uiinterface.h

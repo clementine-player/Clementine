@@ -64,7 +64,7 @@ private slots:
   void Enable();
   void Disable();
   void Settings();
-  void Details();
+  void Reload();
 
 private:
   Ui_ScriptDialog* ui_;

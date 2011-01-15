@@ -97,10 +97,13 @@ ScriptDialog::ScriptDialog(QWidget* parent)
   connect(ui_->enable, SIGNAL(clicked()), SLOT(Enable()));
   connect(ui_->disable, SIGNAL(clicked()), SLOT(Disable()));
   connect(ui_->settings, SIGNAL(clicked()), SLOT(Settings()));
-  connect(ui_->details, SIGNAL(clicked()), SLOT(Details()));
+  connect(ui_->reload, SIGNAL(clicked()), SLOT(Reload()));
 
   ui_->tab_widget->setCurrentIndex(0);
   ui_->list->setItemDelegate(new ScriptDelegate(this));
+
+  ui_->console->hide();
+  resize(width(), minimumSizeHint().height());
 }
 
 ScriptDialog::~ScriptDialog() {
@@ -127,7 +130,7 @@ void ScriptDialog::CurrentChanged(const QModelIndex& index) {
     ui_->enable->setEnabled(false);
     ui_->disable->setEnabled(false);
     ui_->settings->setEnabled(false);
-    ui_->details->setEnabled(false);
+    ui_->reload->setEnabled(false);
     return;
   }
 
@@ -135,7 +138,7 @@ void ScriptDialog::CurrentChanged(const QModelIndex& index) {
   ui_->enable->setEnabled(!is_enabled);
   ui_->disable->setEnabled(is_enabled);
   ui_->settings->setEnabled(is_enabled);
-  ui_->details->setEnabled(true);
+  ui_->reload->setEnabled(is_enabled);
 }
 
 void ScriptDialog::DataChanged(const QModelIndex&, const QModelIndex&) {
@@ -154,15 +157,11 @@ void ScriptDialog::Settings() {
   manager_->ShowSettingsDialog(ui_->list->currentIndex());
 }
 
-void ScriptDialog::Details() {
-
+void ScriptDialog::Reload() {
+  Disable();
+  Enable();
 }
 
 void ScriptDialog::LogLineAdded(const QString& html) {
-  // This is such a hack, I'm sorry.
-  if (html.startsWith("<font color=\"red\">") &&
-      ui_->tab_widget->currentWidget() != ui_->console_tab) {
-    ui_->tab_widget->SetTabAlert(ui_->tab_widget->indexOf(ui_->console_tab));
-  }
   ui_->console->append(html);
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>718</width>
-    <height>447</height>
+    <width>758</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,15 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="ScriptDialogTabWidget" name="tab_widget">
+    <widget class="QTabWidget" name="tab_widget">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>300</height>
+      </size>
+     </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -50,22 +56,22 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="reload">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Reload</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="settings">
            <property name="enabled">
             <bool>false</bool>
            </property>
            <property name="text">
             <string>Settings...</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="details">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Details...</string>
            </property>
           </widget>
          </item>
@@ -91,45 +97,47 @@
        <string>Get new scripts</string>
       </attribute>
      </widget>
-     <widget class="QWidget" name="console_tab">
-      <attribute name="title">
-       <string>Script console</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QTextEdit" name="console">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="button_box">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QCheckBox" name="developer_mode">
+       <property name="text">
+        <string>Developer mode</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="button_box">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Close</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTextEdit" name="console">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>130</height>
+      </size>
      </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ScriptDialogTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>scripting/scriptdialogtabwidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -139,8 +147,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>398</x>
+     <y>392</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -155,12 +163,28 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>466</x>
+     <y>392</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>developer_mode</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>console</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>68</x>
+     <y>379</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>81</x>
+     <y>455</y>
     </hint>
    </hints>
   </connection>
