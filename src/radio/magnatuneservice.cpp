@@ -92,7 +92,6 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
 
 MagnatuneService::~MagnatuneService() {
   delete context_menu_;
-  delete library_filter_;
 }
 
 void MagnatuneService::ReloadSettings() {
