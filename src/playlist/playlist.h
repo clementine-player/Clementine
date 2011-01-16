@@ -48,6 +48,19 @@ typedef QMap<int, Qt::Alignment> ColumnAlignmentMap;
 Q_DECLARE_METATYPE(Qt::Alignment);
 Q_DECLARE_METATYPE(ColumnAlignmentMap);
 
+// Objects that may prevent a song being added to the playlist. When there
+// is something about to be inserted into it, Playlist notifies all of it's
+// listeners about the fact and every one of them picks 'invalid' songs.
+class SongInsertVetoListener : public QObject {
+  Q_OBJECT
+
+public:
+  // Listener returns a list of 'invalid' songs. 'old_songs' are songs that are
+  // currently in the playlist and 'new_songs' are the songs about to be added if
+  // nobody exercises a veto.
+  virtual SongList AboutToInsertSongs(const SongList& old_songs, const SongList& new_songs) = 0;
+};
+
 class Playlist : public QAbstractListModel {
   Q_OBJECT
 
@@ -171,12 +184,20 @@ class Playlist : public QAbstractListModel {
   void InsertSongsOrLibraryItems(const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertSmartPlaylist      (smart_playlists::GeneratorPtr gen, int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
+  // Removes items with given indices from the playlist. This operation is not undoable.
+  void RemoveItemsWithoutUndo   (const QList<int>& indices);
 
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 
   // Changes rating of a song to the given value asynchronously
   void RateSong(const QModelIndex& index, double rating);
+
+  // Registers an object which will get notifications when new songs
+  // are about to be inserted into this playlist.
+  void AddSongInsertVetoListener(SongInsertVetoListener* listener);
+  // Unregisters a SongInsertVetoListener object.
+  void RemoveSongInsertVetoListener(SongInsertVetoListener* listener);
 
   // QAbstractListModel
   int rowCount(const QModelIndex& = QModelIndex()) const { return items_.count(); }
@@ -236,6 +257,9 @@ class Playlist : public QAbstractListModel {
                            const QModelIndexList& items,
                            int pos, bool play_now, bool enqueue);
 
+  template<typename T>
+  void InsertSongItems(const SongList& songs, int pos, bool play_now, bool enqueue);
+
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands
   void InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,
@@ -254,6 +278,7 @@ class Playlist : public QAbstractListModel {
   void SongSaveComplete();
   void ItemReloadComplete();
   void ItemsLoaded();
+  void SongInsertVetoListenerDestroyed();
 
  private:
   bool is_loading_;
@@ -296,6 +321,8 @@ class Playlist : public QAbstractListModel {
 
   smart_playlists::GeneratorPtr dynamic_playlist_;
   ColumnAlignmentMap column_alignments_;
+
+  QList<SongInsertVetoListener*> veto_listeners_;
 };
 
 QDataStream& operator <<(QDataStream&, const Playlist*);

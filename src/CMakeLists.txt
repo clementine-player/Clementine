@@ -758,6 +758,7 @@ if(HAVE_SCRIPTING_PYTHON)
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Subdirectory.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100TaskManagerTask.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0101Playlist.cpp
   )
 endif(HAVE_SCRIPTING_PYTHON)
 

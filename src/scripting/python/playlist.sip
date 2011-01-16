@@ -2,6 +2,7 @@ class Playlist : QAbstractListModel {
 
 %TypeHeaderCode
 #include "playlist/playlist.h"
+#include "scripting/python/pythonengine.h"
 %End
 
 public:
@@ -107,11 +108,20 @@ public:
   void InsertSongsOrLibraryItems(const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
   // void InsertSmartPlaylist      (smart_playlists::GeneratorPtr gen, int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
+  void RemoveItemsWithoutUndo   (const QList<int>& indicesIn);
+
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 
   // Changes rating of a song to the given value asynchronously
   void RateSong(const QModelIndex& index, double rating);
+
+  void AddSongInsertVetoListener(SongInsertVetoListener* listener /Transfer/);
+%MethodCode
+  sipCpp->AddSongInsertVetoListener(a0);
+  PythonEngine::instance()->RegisterNativeObject(a0);
+%End
+  void RemoveSongInsertVetoListener(SongInsertVetoListener* listener);
 
 public slots:
   void set_current_row(int index);

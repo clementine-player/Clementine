@@ -26,6 +26,7 @@ class ScriptInterface : QObject {
     CLASS(RadioService),
     CLASS(ScriptInterface),
     CLASS(SettingsDialog),
+    CLASS(SongInsertVetoListener),
     CLASS(SongLoader),
     CLASS(TaskManager),
     CLASS(UIInterface),

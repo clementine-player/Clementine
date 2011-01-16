@@ -32,7 +32,9 @@ Script::~Script() {
 }
 
 void Script::AddNativeObject(QObject* object) {
-  native_objects_ << object;
+  if(!native_objects_.contains(object)) {
+    native_objects_ << object;
+  }
 }
 
 void Script::RemoveNativeObject(QObject* object) {

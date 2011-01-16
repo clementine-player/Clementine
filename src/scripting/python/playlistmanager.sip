@@ -12,6 +12,8 @@ public:
   Playlist* current() const;
   Playlist* active() const;
 
+  const QList<Playlist*> GetAllPlaylists() const;
+
   const QItemSelection& selection(int id) const;
   const QItemSelection& current_selection() const;
   const QItemSelection& active_selection() const;

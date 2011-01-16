@@ -25,6 +25,7 @@
 %Include scriptinterface.sip
 %Include settingsdialog.sip
 %Include song.sip
+%Include songinsertvetolistener.sip
 %Include songloader.sip
 %Include taskmanager.sip
 %Include uiinterface.sip

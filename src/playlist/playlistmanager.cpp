@@ -70,6 +70,16 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   emit PlaylistManagerInitialized();
 }
 
+const QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
+  QList<Playlist*> result;
+
+  foreach(const Data& data, playlists_.values()) {
+    result.append(data.p);
+  }
+
+  return result;
+}
+
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   Playlist* ret = new Playlist(playlist_backend_, task_manager_, library_backend_, id);
   ret->set_sequence(sequence_);

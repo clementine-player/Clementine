@@ -1154,3 +1154,9 @@ QFuture<bool> Song::BackgroundSave() const {
   QFuture<bool> future = QtConcurrent::run(&Song::Save, Song(*this));
   return future;
 }
+
+bool Song::operator==(const Song& other) const {
+  // TODO: this isn't working for radios
+  return filename() == other.filename() &&
+         beginning() == other.beginning();
+}

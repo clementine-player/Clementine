@@ -49,6 +49,9 @@ public:
   Playlist* current() const { return playlist(current_id()); }
   Playlist* active() const { return playlist(active_id()); }
 
+  // Returns the collection of playlists managed by this PlaylistManager.
+  const QList<Playlist*> GetAllPlaylists() const;
+
   const QItemSelection& selection(int id) const { return playlists_[id].selection; }
   const QItemSelection& current_selection() const { return selection(current_id()); }
   const QItemSelection& active_selection() const { return selection(active_id()); }

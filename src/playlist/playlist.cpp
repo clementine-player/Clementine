@@ -41,14 +41,15 @@
 #include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
 
-#include <QtDebug>
 #include <QApplication>
-#include <QMimeData>
 #include <QBuffer>
-#include <QFileInfo>
 #include <QDirIterator>
-#include <QUndoStack>
+#include <QFileInfo>
+#include <QMimeData>
+#include <QMutableListIterator>
 #include <QSortFilterProxyModel>
+#include <QUndoStack>
+#include <QtDebug>
 
 #include <boost/bind.hpp>
 #include <algorithm>
@@ -122,13 +123,14 @@ Playlist::~Playlist() {
 }
 
 template<typename T>
-static void InsertSongItems(Playlist* playlist, const SongList& songs,
-                            int pos, bool play_now, bool enqueue) {
+void Playlist::InsertSongItems(const SongList& songs, int pos, bool play_now, bool enqueue) {
   PlaylistItemList items;
+
   foreach (const Song& song, songs) {
     items << PlaylistItemPtr(new T(song));
   }
-  playlist->InsertItems(items, pos, play_now, enqueue);
+
+  InsertItems(items, pos, play_now, enqueue);
 }
 
 QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
@@ -609,13 +611,13 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     // We want to check if these songs are from the actual local file backend,
     // if they are we treat them differently.
     if (song_data->backend && song_data->backend->songs_table() == Library::kSongsTable)
-      InsertSongItems<LibraryPlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
+      InsertSongItems<LibraryPlaylistItem>(song_data->songs, row, play_now, enqueue_now);
     else if (song_data->backend && song_data->backend->songs_table() == MagnatuneService::kSongsTable)
-      InsertSongItems<MagnatunePlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
+      InsertSongItems<MagnatunePlaylistItem>(song_data->songs, row, play_now, enqueue_now);
     else if (song_data->backend && song_data->backend->songs_table() == JamendoService::kSongsTable)
-      InsertSongItems<JamendoPlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
+      InsertSongItems<JamendoPlaylistItem>(song_data->songs, row, play_now, enqueue_now);
     else
-      InsertSongItems<SongPlaylistItem>(this, song_data->songs, row, play_now, enqueue_now);
+      InsertSongItems<SongPlaylistItem>(song_data->songs, row, play_now, enqueue_now);
   } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
     // Dragged from the Radio pane
     InsertRadioStations(radio_data->model, radio_data->indexes,
@@ -783,9 +785,43 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
   Save();
 }
 
-void Playlist::InsertItems(const PlaylistItemList& items, int pos, bool play_now, bool enqueue) {
-  if (items.isEmpty())
+void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos, bool play_now, bool enqueue) {
+  if (itemsIn.isEmpty())
     return;
+
+  PlaylistItemList items = itemsIn;
+
+  // exercise vetoes
+  SongList songs;
+
+  foreach(PlaylistItemPtr item, items) {
+    songs << item.get()->Metadata();
+  }
+
+  QList<Song> vetoed;
+  foreach(SongInsertVetoListener* listener, veto_listeners_) {
+    foreach(const Song& song, listener->AboutToInsertSongs(GetAllSongs(), songs)) {
+      vetoed.append(song);
+    }
+  }
+
+  if(!vetoed.isEmpty()) {
+    QMutableListIterator<PlaylistItemPtr> it(items);
+    while (it.hasNext()) {
+      PlaylistItemPtr item = it.next();
+      const Song& current = item.get()->Metadata();
+
+      if(vetoed.contains(current)) {
+        vetoed.removeOne(current);
+        it.remove();
+      }
+    }
+
+    // check for empty items once again after veto
+    if(items.isEmpty()) {
+      return;
+    }
+  }
 
   const int start = pos == -1 ? items_.count() : pos;
   undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos, enqueue));
@@ -836,11 +872,11 @@ void Playlist::InsertItemsWithoutUndo(const PlaylistItemList& items,
 }
 
 void Playlist::InsertLibraryItems(const SongList& songs, int pos, bool play_now, bool enqueue) {
-  InsertSongItems<LibraryPlaylistItem>(this, songs, pos, play_now, enqueue);
+  InsertSongItems<LibraryPlaylistItem>(songs, pos, play_now, enqueue);
 }
 
 void Playlist::InsertSongs(const SongList& songs, int pos, bool play_now, bool enqueue) {
-  InsertSongItems<SongPlaylistItem>(this, songs, pos, play_now, enqueue);
+  InsertSongItems<SongPlaylistItem>(songs, pos, play_now, enqueue);
 }
 
 void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, bool play_now, bool enqueue) {
@@ -1109,6 +1145,31 @@ void Playlist::ItemsLoaded() {
   }
 }
 
+static bool DescendingIntLessThan(int a, int b) {
+  return a > b;
+}
+
+void Playlist::RemoveItemsWithoutUndo(const QList<int>& indicesIn) {
+  // Sort the indices descending because removing elements 'backwards'
+  // is easier - indices don't 'move' in the process.
+  QList<int> indices = indicesIn;
+  qSort(indices.begin(), indices.end(), DescendingIntLessThan);
+
+  for(int j = 0; j < indices.count(); j++) {
+    int beginning = indices[j], end = indices[j];
+
+    // Splits the indices into sequences. For example this: [1, 2, 4],
+    // will get split into [1, 2] and [4].
+    while(j != indices.count() - 1 && indices[j] == indices[j + 1] + 1) {
+      beginning--;
+      j++;
+    }
+
+    // Remove the current sequence.
+    removeRows(beginning, end - beginning + 1);
+  }
+}
+
 bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
   if (row < 0 || row >= items_.size() || row + count > items_.size()) {
     return false;
@@ -1304,6 +1365,21 @@ void Playlist::RateSong(const QModelIndex& index, double rating) {
       library_->UpdateSongRatingAsync(item->Metadata().id(), rating);
     }
   }
+}
+
+void Playlist::AddSongInsertVetoListener(SongInsertVetoListener* listener) {
+  veto_listeners_.append(listener);
+  connect(listener, SIGNAL(destroyed()), this, SLOT(SongInsertVetoListenerDestroyed()));
+}
+
+void Playlist::RemoveSongInsertVetoListener(SongInsertVetoListener* listener) {
+  disconnect(listener, SIGNAL(destroyed()), this, SLOT(SongInsertVetoListenerDestroyed()));
+  veto_listeners_.removeAll(listener);
+}
+
+void Playlist::SongInsertVetoListenerDestroyed() {
+  // qobject_cast returns NULL here for Python SIP listeners.
+  veto_listeners_.removeAll(static_cast<SongInsertVetoListener*>(sender()));
 }
 
 void Playlist::Shuffle() {
