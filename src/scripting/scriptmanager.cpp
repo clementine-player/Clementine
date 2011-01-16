@@ -27,6 +27,11 @@
 # include "scripting/python/pythonengine.h"
 #endif
 
+#ifdef Q_OS_MAC
+# include "core/mac_startup.h"
+#endif
+
+#include <QCoreApplication>
 #include <QDirIterator>
 #include <QFileSystemWatcher>
 #include <QSettings>
