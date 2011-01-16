@@ -78,7 +78,7 @@ ScriptManager::ScriptManager(QObject* parent)
 #if defined(Q_OS_WIN32)
   search_paths_ << QCoreApplication::applicationDirPath() + "/scripts";
 #elif defined(Q_OS_MAC)
-  search_paths_ << mac::GetResourcesPath() + "/scripts");
+  search_paths_ << mac::GetResourcesPath() + "/scripts";
 #endif
 }
 
