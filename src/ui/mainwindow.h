@@ -67,6 +67,7 @@ class TaskManager;
 class TranscodeDialog;
 class VisualisationContainer;
 class WiimotedevShortcuts;
+class Windows7ThumbBar;
 class Ui_MainWindow;
 
 class QSortFilterProxyModel;
@@ -216,6 +217,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  private:
   Ui_MainWindow* ui_;
+  Windows7ThumbBar* thumbbar_;
 
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
@@ -284,9 +286,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   bool autoclear_playlist_;
 
   BackgroundStreams* background_streams_;
-
-  // Really an ITaskbarList3* but I don't want to have to include windows.h here
-  void* taskbar_list_;
 };
 
 #endif // MAINWINDOW_H

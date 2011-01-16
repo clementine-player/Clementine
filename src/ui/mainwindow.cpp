@@ -15,10 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifdef Q_OS_WIN32
-# define _WIN32_WINNT 0x0600
-#endif
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "core/backgroundstreams.h"
@@ -81,6 +77,7 @@
 #include "ui/qtsystemtrayicon.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
+#include "ui/windows7thumbbar.h"
 #include "widgets/errordialog.h"
 #include "widgets/fileview.h"
 #include "widgets/multiloadingindicator.h"
@@ -123,9 +120,6 @@
 
 #ifdef Q_OS_WIN32
 # include <qtsparkle/Updater>
-# include <windows.h>
-# include <commctrl.h>
-# include <shobjidl.h>
 #endif
 
 
@@ -156,6 +150,7 @@ MainWindow::MainWindow(
     QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
+    thumbbar_(new Windows7ThumbBar(this)),
     tray_icon_(tray_icon),
     osd_(osd),
     task_manager_(task_manager),
@@ -191,8 +186,7 @@ MainWindow::MainWindow(
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
-    was_maximized_(false),
-    taskbar_list_(NULL)
+    was_maximized_(false)
 {
   // Create some objects in the database thread
   playlist_backend_ = new PlaylistBackend;
@@ -498,6 +492,16 @@ MainWindow::MainWindow(
   connect(tray_icon_, SIGNAL(PlayPause()), player_, SLOT(PlayPause()));
   connect(tray_icon_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
+
+  // Windows 7 thumbbar buttons
+  thumbbar_->SetActions(QList<QAction*>()
+      << ui_->action_previous_track
+      << ui_->action_play_pause
+      << ui_->action_stop
+      << ui_->action_next_track
+      << NULL // spacer
+      << ui_->action_love
+      << ui_->action_ban);
 
 #if (defined(Q_OS_DARWIN) && defined(HAVE_SPARKLE)) || defined(Q_OS_WIN32)
   // Add check for updates item to application menu.
@@ -1651,51 +1655,8 @@ void MainWindow::ShowScriptDialog() {
 }
 
 #ifdef Q_OS_WIN32
-static const int kTaskbarIconSize = 16;
-
-static void SetButton(const QIcon& icon, const QString& tooltip, uint id,
-                      THUMBBUTTON* button) {
-  button->dwMask = THUMBBUTTONMASK(THB_ICON | THB_TOOLTIP | THB_FLAGS);
-  button->iId = id;
-  button->dwFlags = THBF_ENABLED;
-  button->hIcon = icon.pixmap(kTaskbarIconSize).toWinHICON();
-  tooltip.toWCharArray(button->szTip);
-}
-
-bool MainWindow::winEvent(MSG* m, long* result) {
-  static UINT sTaskbarButtonCreated = WM_NULL;
-
-  if (sTaskbarButtonCreated == WM_NULL) {
-    // Compute the value for the TaskbarButtonCreated message
-    sTaskbarButtonCreated = RegisterWindowMessage("TaskbarButtonCreated");
-  }
-
-  if (m->message == sTaskbarButtonCreated) {
-    if (!taskbar_list_) {
-      // Get the interface
-      if (CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
-                           IID_ITaskbarList3, (void**) &taskbar_list_)) {
-        qWarning() << "Error creating the ITaskbarList3 interface";
-        return false;
-      }
-
-      ITaskbarList3* taskbar_list = reinterpret_cast<ITaskbarList3*>(taskbar_list_);
-      if (taskbar_list->HrInit()) {
-        taskbar_list->Release();
-        taskbar_list_ = NULL;
-        return false;
-      }
-
-      // Add the playback control buttons
-      THUMBBUTTON buttons[4] = {};
-      SetButton(IconLoader::Load("media-skip-backward"), tr("Previous track"), 0, &buttons[0]);
-      SetButton(IconLoader::Load("media-playback-start"), tr("Pause"), 1, &buttons[1]);
-      SetButton(IconLoader::Load("media-playback-stop"), tr("Stop"), 2, &buttons[2]);
-      SetButton(IconLoader::Load("media-skip-forward"), tr("Next track"), 3, &buttons[3]);
-
-      taskbar_list->ThumbBarAddButtons(winId(), 4, buttons);
-    }
-  }
+bool MainWindow::winEvent(MSG* msg, long*) {
+  thumbbar_->HandleWinEvent(msg);
   return false;
 }
 #endif // Q_OS_WIN32

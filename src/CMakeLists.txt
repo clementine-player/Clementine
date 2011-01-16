@@ -205,6 +205,7 @@ set(SOURCES
   ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
+  ui/windows7thumbbar.cpp
 
   widgets/autoexpandingtreeview.cpp
   widgets/busyindicator.cpp
@@ -377,6 +378,7 @@ set(HEADERS
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/systemtrayicon.h
+  ui/windows7thumbbar.h
 
   widgets/autoexpandingtreeview.h
   widgets/busyindicator.h
