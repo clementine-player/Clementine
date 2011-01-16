@@ -269,6 +269,7 @@ add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)
+add_subdirectory(scripts)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
