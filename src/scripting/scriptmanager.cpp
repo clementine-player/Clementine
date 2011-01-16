@@ -28,8 +28,10 @@
 #endif
 
 #include <QDirIterator>
+#include <QFileSystemWatcher>
 #include <QSettings>
 #include <QTextDocument>
+#include <QTimer>
 #include <QtDebug>
 
 const char* ScriptManager::kSettingsGroup = "Scripts";
@@ -38,13 +40,41 @@ const char* ScriptManager::kIniSettingsGroup = "Script";
 
 ScriptManager::ScriptManager(QObject* parent)
   : QAbstractListModel(parent),
-    ui_interface_(new UIInterface(this))
+    ui_interface_(new UIInterface(this)),
+    watcher_(new QFileSystemWatcher(this)),
+    rescan_timer_(new QTimer(this))
 {
 #ifdef HAVE_SCRIPTING_PYTHON
   engines_ << new PythonEngine(this);
 #endif
 
-  search_paths_ << Utilities::GetConfigPath(Utilities::Path_Scripts);
+  connect(watcher_, SIGNAL(directoryChanged(QString)), SLOT(ScriptDirectoryChanged()));
+
+  rescan_timer_->setSingleShot(true);
+  rescan_timer_->setInterval(1000);
+  connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanScripts()));
+
+  // Create the user's scripts directory if it doesn't exist yet
+  QString local_path = Utilities::GetConfigPath(Utilities::Path_Scripts);
+  if (!QFile::exists(local_path)) {
+    if (!QDir().mkpath(local_path)) {
+      qWarning() << "Couldn't create directory" << local_path;
+    }
+  }
+
+  search_paths_
+      << local_path
+#ifdef USE_INSTALL_PREFIX
+      << CMAKE_INSTALL_PREFIX "/share/clementine/scripts"
+#endif
+      << "/usr/share/clementine/scripts"
+      << "/usr/local/share/clementine/scripts";
+
+#if defined(Q_OS_WIN32)
+  search_paths_ << QCoreApplication::applicationDirPath() + "/scripts";
+#elif defined(Q_OS_MAC)
+  search_paths_ << mac::GetResourcesPath() + "/scripts");
+#endif
 }
 
 ScriptManager::~ScriptManager() {
@@ -62,26 +92,73 @@ void ScriptManager::Init(const GlobalData& data) {
   LoadSettings();
 
   // Search for scripts
+  info_ = LoadAllScriptInfo().values();
+
+  // Enable the ones that were enabled last time
+  for (int i=0 ; i<info_.count() ; ++i) {
+    MaybeAutoEnable(&info_[i]);
+  }
+
+  reset();
+}
+
+void ScriptManager::MaybeAutoEnable(ScriptInfo* info) {
+  // Load the script if it's enabled
+  if (enabled_scripts_.contains(info->id_)) {
+    // Find an engine for it
+    LanguageEngine* engine = EngineForLanguage(info->language_);
+    if (!engine) {
+      qWarning() << "Unknown language in" << info->path_;
+      return;
+    }
+
+    info->loaded_ = engine->CreateScript(info->path_, info->script_file_, info->id_);
+    if (!info->loaded_) {
+      // Failed to load?  Disable it so we don't try again
+      enabled_scripts_.remove(info->id_);
+      SaveSettings();
+    }
+  }
+}
+
+QMap<QString, ScriptManager::ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
+  QMap<QString, ScriptInfo> ret;
+
   foreach (const QString& search_path, search_paths_) {
+    if (!QFile::exists(search_path))
+      continue;
+
+    if (!watcher_->directories().contains(search_path)) {
+      watcher_->addPath(search_path);
+    }
+
     QDirIterator it(search_path,
         QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable | QDir::Executable,
         QDirIterator::FollowSymlinks);
     while (it.hasNext()) {
       it.next();
       const QString path = it.filePath();
-      ScriptInfo info = LoadScriptInfo(path);
+      if (!watcher_->directories().contains(path)) {
+        watcher_->addPath(path);
+      }
 
+      ScriptInfo info = LoadScriptInfo(path);
       if (!info.is_valid()) {
         qWarning() << "Not a valid Clementine script directory, ignoring:"
                    << path;
         continue;
       }
 
-      info_ << info;
+      if (ret.contains(info.id_)) {
+        // Seen this script already
+        continue;
+      }
+
+      ret.insert(info.id_, info);
     }
   }
 
-  reset();
+  return ret;
 }
 
 void ScriptManager::LoadSettings() {
@@ -115,7 +192,7 @@ LanguageEngine* ScriptManager::EngineForLanguage(ScriptManager::Language languag
   return NULL;
 }
 
-ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) {
+ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) const {
   const QString ini_file = path + "/" + kIniFileName;
   const QString id = QFileInfo(path).completeBaseName();
 
@@ -152,16 +229,6 @@ ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) {
   ret.url_ = s.value("url").toString();
   ret.script_file_ = QFileInfo(QDir(path), s.value("script_file").toString()).absoluteFilePath();
   ret.icon_ = QIcon(QFileInfo(QDir(path), s.value("icon").toString()).absoluteFilePath());
-
-  if (enabled_scripts_.contains(id)) {
-    // Load the script if it's enabled
-    ret.loaded_ = engine->CreateScript(path, ret.script_file_, ret.id_);
-    if (!ret.loaded_) {
-      // Failed to load?  Disable it so we don't try again
-      enabled_scripts_.remove(id);
-      SaveSettings();
-    }
-  }
 
   return ret;
 }
@@ -278,4 +345,83 @@ void ScriptManager::AddLogLine(const QString& who, const QString& message, bool 
 
     qDebug() << plain.toLocal8Bit().constData();
   }
+}
+
+void ScriptManager::ScriptDirectoryChanged() {
+  rescan_timer_->start();
+}
+
+void ScriptManager::RescanScripts() {
+  // Get the new list of scripts
+  QMap<QString, ScriptInfo> new_info = LoadAllScriptInfo();
+
+  // Look at existing scripts, find ones that have changed or been deleted
+  for (int i=0 ; i<info_.count() ; ++i) {
+    ScriptInfo* info = &info_[i];
+    const QString id = info->id_;
+
+    if (!new_info.contains(id)) {
+      // This script was deleted - unload it and remove it from the model
+      Disable(index(i));
+
+      beginRemoveRows(QModelIndex(), i, i);
+      info_.removeAt(i);
+      endRemoveRows();
+
+      --i;
+      continue;
+    }
+
+    if (*info != new_info[id]) {
+      // This script was modified - change the metadata in the existing entry
+      info->TakeMetadataFrom(new_info[id]);
+
+      emit dataChanged(index(i), index(i));
+
+      AddLogLine("Watcher",
+        tr("The '%1' script was modified, you might have to reload it").arg(id), false);
+    }
+
+    new_info.remove(id);
+  }
+
+  // Things that are left in new_info are newly added scripts
+  if (!new_info.isEmpty()) {
+    const int begin = info_.count();
+    const int end = begin + new_info.count() - 1;
+
+    beginInsertRows(QModelIndex(), begin, end);
+    info_.append(new_info.values());
+
+    for (int i=begin ; i<=end ; ++i) {
+      MaybeAutoEnable(&info_[i]);
+    }
+
+    endInsertRows();
+  }
+}
+
+bool ScriptManager::ScriptInfo::operator ==(const ScriptInfo& other) const {
+  return path_ == other.path_ &&
+         name_ == other.name_ &&
+         description_ == other.description_ &&
+         author_ == other.author_ &&
+         url_ == other.url_ &&
+         language_ == other.language_ &&
+         script_file_ == other.script_file_;
+}
+
+bool ScriptManager::ScriptInfo::operator !=(const ScriptInfo& other) const {
+  return !(*this == other);
+}
+
+void ScriptManager::ScriptInfo::TakeMetadataFrom(const ScriptInfo& other) {
+  path_ = other.path_;
+  name_ = other.name_;
+  description_ = other.description_;
+  author_ = other.author_;
+  url_ = other.url_;
+  icon_ = other.icon_;
+  language_ = other.language_;
+  script_file_ = other.script_file_;
 }

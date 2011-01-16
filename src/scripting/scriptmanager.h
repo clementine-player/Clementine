@@ -33,6 +33,8 @@ class SettingsDialog;
 class TaskManager;
 class UIInterface;
 
+class QFileSystemWatcher;
+
 class ScriptManager : public QAbstractListModel {
   Q_OBJECT
 
@@ -106,6 +108,10 @@ private:
     ScriptInfo() : language_(Language_Unknown), loaded_(NULL) {}
 
     bool is_valid() const { return language_ != Language_Unknown; }
+    bool operator ==(const ScriptInfo& other) const;
+    bool operator !=(const ScriptInfo& other) const;
+
+    void TakeMetadataFrom(const ScriptInfo& other);
 
     QString path_;
     QString id_;
@@ -125,10 +131,17 @@ private:
   void LoadSettings();
   void SaveSettings() const;
 
-  ScriptInfo LoadScriptInfo(const QString& path);
+  QMap<QString, ScriptInfo> LoadAllScriptInfo() const;
+  ScriptInfo LoadScriptInfo(const QString& path) const;
+
+  void MaybeAutoEnable(ScriptInfo* info);
 
   LanguageEngine* EngineForLanguage(const QString& language_name) const;
   LanguageEngine* EngineForLanguage(Language language) const;
+
+private slots:
+  void ScriptDirectoryChanged();
+  void RescanScripts();
 
 private:
   // Language engines
@@ -147,6 +160,10 @@ private:
   // Things available to scripts
   GlobalData data_;
   UIInterface* ui_interface_;
+
+  // Watches script directories for changes
+  QFileSystemWatcher* watcher_;
+  QTimer* rescan_timer_;
 };
 
 #endif // SCRIPTMANAGER_H

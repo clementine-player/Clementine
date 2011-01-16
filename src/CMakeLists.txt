@@ -480,9 +480,10 @@ else (LINGUAS STREQUAL "All")
   endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
 endif (LINGUAS STREQUAL "All")
 
+option(USE_INSTALL_PREFIX "Look for data in CMAKE_INSTALL_PREFIX" ON)
+
 # Visualisations
 if(ENABLE_VISUALISATIONS)
-  option(VISUALISATIONS_USE_INSTALL_PREFIX "Look for visualisations in CMAKE_INSTALL_PREFIX" ON)
 
   list(APPEND SOURCES
     visualisations/projectmpresetmodel.cpp

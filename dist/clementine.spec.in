@@ -59,7 +59,7 @@ Features include:
 
 %build
 cd bin
-%{cmake} .. -DVISUALISATIONS_USE_INSTALL_PREFIX=OFF
+%{cmake} .. -DUSE_INSTALL_PREFIX=OFF
 make %{?_smp_mflags}
 
 %install
