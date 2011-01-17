@@ -75,9 +75,9 @@ set(SOURCES
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
+  core/tagfetcher.cpp
   core/taskmanager.cpp
   core/utilities.cpp
-  core/tagfetcher.cpp
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
@@ -264,8 +264,8 @@ set(HEADERS
   core/organise.h
   core/player.h
   core/songloader.h
-  core/taskmanager.h
   core/tagfetcher.h
+  core/taskmanager.h
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h

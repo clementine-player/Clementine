@@ -44,12 +44,16 @@ class TagFetcher : public QObject {
   void CallReturned(int fileId, TPFileStatus status);
 
  signals:
-  void FetchFinished(QString filename, SongList songs_guessed); 
+  void FetchFinished(const QString& filename, const SongList& songs_guessed); 
  
  private slots:
   void FetchFinishedSlot(int id);
 
  private:
+  // Callback that will be called by libtunepimp
+  static void NotifyCallback(tunepimp_t /*pimp*/, void */*data*/, TPCallbackEnum type, int fileId, TPFileStatus status);
+  QMutex mutex_active_fetchers_;
+
   NetworkAccessManager *network_;
   tunepimp_t  pimp_;
   QMap<int, TagFetcherItem*> active_fetchers_;
@@ -60,9 +64,7 @@ class TagFetcherItem : public QObject {
   Q_OBJECT
 #ifdef HAVE_LIBTUNEPIMP
  public:
-  TagFetcherItem();
   TagFetcherItem(const QString& filename, int filedId, tunepimp_t pimp, NetworkAccessManager *network);
-  ~TagFetcherItem();
 
   void setFileId(int _fileId) { fileId_ = _fileId; };
   int getFileId() { return fileId_; };

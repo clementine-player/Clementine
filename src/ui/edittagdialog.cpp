@@ -703,13 +703,15 @@ void EditTagDialog::FetchTag() {
   tag_fetcher_->FetchFromFile(song->filename());
   ui_->fetch_tag->setDisabled(true); // disable button, will be re-enabled later
   ui_->fetch_tag->setText(tr(kTagFetchOnLoadText));
+  QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
 #endif
 }
 
-void EditTagDialog::FetchTagFinished(QString filename, SongList songs_guessed) {
+void EditTagDialog::FetchTagFinished(const QString& filename, const SongList& songs_guessed) {
 #ifdef HAVE_LIBTUNEPIMP
   ui_->fetch_tag->setDisabled(false);
   ui_->fetch_tag->setText(tr(kTagFetchText));
+  QApplication::restoreOverrideCursor();
   // TODO: pop-up a window with suggestions (songs_guessed) and complete tags
   foreach(const Song& song, songs_guessed) {
     qDebug() << "Song guessed:";

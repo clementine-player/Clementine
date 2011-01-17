@@ -80,7 +80,7 @@ private slots:
   void SongRated(float rating);
   void ResetPlayCounts();
   void FetchTag();
-  void FetchTagFinished(QString filename, SongList songs_guessed);
+  void FetchTagFinished(const QString& filename, const SongList& songs_guessed);
 
   void ArtLoaded(quint64 id, const QImage& image);
 

@@ -19,12 +19,11 @@
 
 #include <QtDebug>
 #include <QFile>
-#include <QStringList>
+#include <QMutex>
 #include <QNetworkReply>
+#include <QStringList>
 
 #ifdef HAVE_LIBTUNEPIMP
-
-static void NotifyCallback(tunepimp_t /*pimp*/, void */*data*/, TPCallbackEnum type, int fileId, TPFileStatus status);
 
 const char* kMusicBrainzLookupUrl = "http://musicbrainz.org/ws/1/track/?type=xml&puid=%1";
 
@@ -33,7 +32,6 @@ TagFetcher::TagFetcher(QObject *parent)
       network_(new NetworkAccessManager(this)),
       pimp_(NULL)
 {
-  //active_fetchers_ = new QMap<int, TagFetcherItem*>;
   pimp_ = tp_New("FETCHTAG", "0.1");
   tp_SetDebug(pimp_, true);
   tp_SetAutoSaveThreshold(pimp_, -1);
@@ -50,29 +48,31 @@ TagFetcher::~TagFetcher() {
 }
 
 void TagFetcher::FetchFromFile(const QString& path) {
+  mutex_active_fetchers_.lock();
   int id = tp_AddFile(pimp_, QFile::encodeName(path), 0);
   TagFetcherItem* tagFetcherItem = new TagFetcherItem(path, id, pimp_, network_);
-  connect(tagFetcherItem, SIGNAL(PuidGeneratedSignal()), tagFetcherItem, SLOT(PuidGeneratedSlot()), Qt::QueuedConnection);
   active_fetchers_.insert(id, tagFetcherItem);
+  mutex_active_fetchers_.unlock();
+  connect(tagFetcherItem, SIGNAL(PuidGeneratedSignal()), tagFetcherItem, SLOT(PuidGeneratedSlot()), Qt::QueuedConnection);
   connect(tagFetcherItem, SIGNAL(FetchFinishedSignal(int)), SLOT(FetchFinishedSlot(int)));
 }
 
-static void NotifyCallback(tunepimp_t pimp, void *data, TPCallbackEnum type, int fileId, TPFileStatus status)
+void TagFetcher::NotifyCallback(tunepimp_t pimp, void *data, TPCallbackEnum type, int fileId, TPFileStatus status)
 {
-  TagFetcher *tagFetcher = (TagFetcher*)data;
-  tagFetcher->CallReturned(fileId, status);
-  if(type != tpFileChanged)
-    return;
+  if(type == tpFileChanged) {
+    TagFetcher *tagFetcher = (TagFetcher*)data;
+    tagFetcher->CallReturned(fileId, status);
+  }
 }
 
 void TagFetcher::CallReturned(int fileId, TPFileStatus status)
 {
-  /*for(QMap<int, TagFetcherItem*>::Iterator it = active_fetchers_.begin();
-      it != active_fetchers_.end(); ++it) {
-    qDebug() <<  it.key();
-    active_fetchers_.insert(it.key(), it.value());
-  }*/
+  // Using a lock, to prevent getting NULL item, when callback is called but
+  // item not yet inserted: this could happen because libtunepimp proceed in
+  // a separate thread after tp_AddFile call
+  mutex_active_fetchers_.lock();
   TagFetcherItem *tagFetcherItem = active_fetchers_.value(fileId);
+  mutex_active_fetchers_.unlock();
   switch(status) {
     case eRecognized:
       // TODO
@@ -105,8 +105,6 @@ void TagFetcher::FetchFinishedSlot(int id) {
   delete tagFetcherItem;
 }
 
-TagFetcherItem::TagFetcherItem() { }
-
 TagFetcherItem::TagFetcherItem(const QString& _filename, int _fileId, tunepimp_t _pimp, NetworkAccessManager *_network)
   : filename_(_filename),
     fileId_(_fileId),
@@ -114,12 +112,8 @@ TagFetcherItem::TagFetcherItem(const QString& _filename, int _fileId, tunepimp_t
     network_(_network)
 { }
 
-TagFetcherItem::~TagFetcherItem()
-{ }
-
 void TagFetcherItem::Unrecognized() {
   char trm[255];
-  bool finish = false;
   trm[0] = 0;
   track_t track = tp_GetTrack(pimp_, fileId_);
   tr_Lock(track);
@@ -128,14 +122,8 @@ void TagFetcherItem::Unrecognized() {
     tr_SetStatus(track, ePending);
     tp_Wake(pimp_, track);
   }
-  else {
-    finish = true;
-  }
   tr_Unlock(track);
   tp_ReleaseTrack(pimp_, track);
-  if ( !finish )
-    return;
-  //TODO clear
 }
 
 void TagFetcherItem::PuidGenerated() {
