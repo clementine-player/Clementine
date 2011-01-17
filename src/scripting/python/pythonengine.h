@@ -35,11 +35,10 @@ public:
 
   static const char* kModulePrefix;
 
-  ScriptManager::Language language() const { return ScriptManager::Language_Python; }
+  ScriptInfo::Language language() const { return ScriptInfo::Language_Python; }
   QString name() const { return "python"; }
 
-  Script* CreateScript(const QString& path, const QString& script_file,
-                       const QString& id);
+  Script* CreateScript(const ScriptInfo& info);
   void DestroyScript(Script* script);
 
   const _sipAPIDef* sip_api() const { return sip_api_; }

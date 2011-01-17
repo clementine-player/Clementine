@@ -78,9 +78,7 @@ const sipAPIDef* PythonEngine::GetSIPApi() {
 #endif
 }
 
-Script* PythonEngine::CreateScript(const QString& path,
-                                   const QString& script_file,
-                                   const QString& id) {
+Script* PythonEngine::CreateScript(const ScriptInfo& info) {
   // Initialise Python if it hasn't been done yet
   if (!initialised_) {
     AddLogLine("Initialising python...", false);
@@ -135,8 +133,8 @@ Script* PythonEngine::CreateScript(const QString& path,
     initialised_ = true;
   }
 
-  Script* ret = new PythonScript(this, path, script_file, id);
-  loaded_scripts_[id] = ret; // Used by RegisterNativeObject during startup
+  Script* ret = new PythonScript(this, info);
+  loaded_scripts_[ret->info().id()] = ret; // Used by RegisterNativeObject during startup
   if (ret->Init()) {
     return ret;
   }
@@ -147,7 +145,7 @@ Script* PythonEngine::CreateScript(const QString& path,
 
 void PythonEngine::DestroyScript(Script* script) {
   script->Unload();
-  loaded_scripts_.remove(script->id());
+  loaded_scripts_.remove(script->info().id());
   delete script;
 }
 

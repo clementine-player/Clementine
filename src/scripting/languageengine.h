@@ -23,6 +23,7 @@
 #include <QObject>
 
 class Script;
+class ScriptInfo;
 
 class LanguageEngine : public QObject {
   Q_OBJECT
@@ -33,11 +34,10 @@ public:
 
   ScriptManager* manager() const { return manager_; }
 
-  virtual ScriptManager::Language language() const = 0;
+  virtual ScriptInfo::Language language() const = 0;
   virtual QString name() const = 0;
 
-  virtual Script* CreateScript(const QString& path, const QString& script_file,
-                               const QString& id) = 0;
+  virtual Script* CreateScript(const ScriptInfo& info) = 0;
   virtual void DestroyScript(Script* script) = 0;
 
 private:

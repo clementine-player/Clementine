@@ -18,6 +18,8 @@
 #ifndef SCRIPT_H
 #define SCRIPT_H
 
+#include "scriptinfo.h"
+
 #include <QList>
 #include <QMetaType>
 #include <QString>
@@ -31,14 +33,11 @@ class QObject;
 
 class Script {
 public:
-  Script(LanguageEngine* language, const QString& path,
-         const QString& script_file, const QString& id);
+  Script(LanguageEngine* language, const ScriptInfo& info);
   virtual ~Script();
 
   LanguageEngine* language() const { return language_; }
-  const QString& path() const { return path_; }
-  const QString& script_file() const { return script_file_; }
-  const QString& id() const { return id_; }
+  const ScriptInfo& info() const { return info_; }
   ScriptInterface* interface() const { return interface_.get(); }
 
   // The script can "own" QObjects like QActions that must be deleted (and
@@ -57,9 +56,7 @@ private:
 
   boost::scoped_ptr<ScriptInterface> interface_;
   LanguageEngine* language_;
-  QString path_;
-  QString script_file_;
-  QString id_;
+  ScriptInfo info_;
 };
 Q_DECLARE_METATYPE(Script*);
 

@@ -21,24 +21,24 @@
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "sipAPIclementine.h"
+#include "scripting/scriptinfo.h"
 
 #include <QFile>
 #include <QtDebug>
 
 
-PythonScript::PythonScript(PythonEngine* engine, const QString& path,
-                           const QString& script_file, const QString& id)
-  : Script(engine, path, script_file, id),
+PythonScript::PythonScript(PythonEngine* engine, const ScriptInfo& info)
+  : Script(engine, info),
     engine_(engine),
-    module_name_(QString(PythonEngine::kModulePrefix) + "." + id)
+    module_name_(QString(PythonEngine::kModulePrefix) + "." + info.id())
 {
 }
 
 bool PythonScript::Init() {
-  engine_->AddLogLine("Loading script file \"" + script_file() + "\"", false);
+  engine_->AddLogLine("Loading script file \"" + info().script_file() + "\"", false);
 
   // Open the file
-  QFile file(script_file());
+  QFile file(info().script_file());
   if (!file.open(QIODevice::ReadOnly)) {
     engine_->AddLogLine("Could not open file", true);
     return false;
@@ -56,11 +56,11 @@ bool PythonScript::Init() {
   PyModule_AddObject(module, "__builtins__", builtin_mod);
 
   // Set __file__
-  PyModule_AddStringConstant(module, "__file__", script_file().toLocal8Bit().constData());
+  PyModule_AddStringConstant(module, "__file__", info().script_file().toLocal8Bit().constData());
 
   // Set __path__
   PyObject* __path__ = PyList_New(1);
-  PyList_SetItem(__path__, 0, PyString_FromString(path().toLocal8Bit().constData()));
+  PyList_SetItem(__path__, 0, PyString_FromString(info().path().toLocal8Bit().constData()));
   PyModule_AddObject(module, "__path__", __path__);
 
   // Set script
@@ -73,7 +73,7 @@ bool PythonScript::Init() {
 
   // Run the script
   PyObject* result = PyRun_File(stream,
-      script_file().toLocal8Bit().constData(), Py_file_input, dict, dict);
+      info().script_file().toLocal8Bit().constData(), Py_file_input, dict, dict);
   if (result == NULL) {
     engine_->AddLogLine("Could not execute file", true);
     PyErr_Print();

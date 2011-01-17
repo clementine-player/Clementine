@@ -18,6 +18,8 @@
 #ifndef SCRIPTMANAGER_H
 #define SCRIPTMANAGER_H
 
+#include "scriptinfo.h"
+
 #include <QAbstractItemModel>
 #include <QIcon>
 #include <QSet>
@@ -53,11 +55,6 @@ public:
     RoleCount
   };
 
-  enum Language {
-    Language_Unknown = 0,
-    Language_Python,
-  };
-
   struct GlobalData {
     GlobalData() {}
     GlobalData(Library* library, Player* player, PlaylistManager* playlists,
@@ -80,8 +77,6 @@ public:
   };
 
   static const char* kSettingsGroup;
-  static const char* kIniFileName;
-  static const char* kIniSettingsGroup;
 
   void Init(const GlobalData& data);
   const GlobalData& data() const { return data_; }
@@ -97,6 +92,10 @@ public:
   int rowCount(const QModelIndex& parent = QModelIndex()) const;
   QVariant data(const QModelIndex& index, int role) const;
 
+  // These need to be public for ScriptInfo
+  LanguageEngine* EngineForLanguage(const QString& language_name) const;
+  LanguageEngine* EngineForLanguage(ScriptInfo::Language language) const;
+
 public slots:
   void AddLogLine(const QString& who, const QString& message, bool error);
 
@@ -104,40 +103,12 @@ signals:
   void LogLineAdded(const QString& html);
 
 private:
-  struct ScriptInfo {
-    ScriptInfo() : language_(Language_Unknown), loaded_(NULL) {}
-
-    bool is_valid() const { return language_ != Language_Unknown; }
-    bool operator ==(const ScriptInfo& other) const;
-    bool operator !=(const ScriptInfo& other) const;
-
-    void TakeMetadataFrom(const ScriptInfo& other);
-
-    QString path_;
-    QString id_;
-
-    QString name_;
-    QString description_;
-    QString author_;
-    QString url_;
-    QIcon icon_;
-
-    Language language_;
-    QString script_file_;
-
-    Script* loaded_;
-  };
-
   void LoadSettings();
   void SaveSettings() const;
 
   QMap<QString, ScriptInfo> LoadAllScriptInfo() const;
-  ScriptInfo LoadScriptInfo(const QString& path) const;
 
   void MaybeAutoEnable(ScriptInfo* info);
-
-  LanguageEngine* EngineForLanguage(const QString& language_name) const;
-  LanguageEngine* EngineForLanguage(Language language) const;
 
 private slots:
   void ScriptDirectoryChanged();

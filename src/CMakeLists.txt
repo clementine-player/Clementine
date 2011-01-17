@@ -156,7 +156,9 @@ set(SOURCES
 
   scripting/languageengine.cpp
   scripting/script.cpp
+  scripting/scriptarchive.cpp
   scripting/scriptdialog.cpp
+  scripting/scriptinfo.cpp
   scripting/scriptinterface.cpp
   scripting/scriptmanager.cpp
   scripting/uiinterface.cpp
@@ -872,6 +874,7 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
+  ${ARCHIVE_LIBRARIES}
   dl
   z
 )

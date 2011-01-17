@@ -40,8 +40,6 @@
 #include <QtDebug>
 
 const char* ScriptManager::kSettingsGroup = "Scripts";
-const char* ScriptManager::kIniFileName = "script.ini";
-const char* ScriptManager::kIniSettingsGroup = "Script";
 
 ScriptManager::ScriptManager(QObject* parent)
   : QAbstractListModel(parent),
@@ -84,8 +82,8 @@ ScriptManager::ScriptManager(QObject* parent)
 
 ScriptManager::~ScriptManager() {
   foreach (const ScriptInfo& info, info_) {
-    if (info.loaded_) {
-      info.loaded_->language()->DestroyScript(info.loaded_);
+    if (info.loaded()) {
+      info.loaded()->language()->DestroyScript(info.loaded());
     }
   }
 }
@@ -109,24 +107,24 @@ void ScriptManager::Init(const GlobalData& data) {
 
 void ScriptManager::MaybeAutoEnable(ScriptInfo* info) {
   // Load the script if it's enabled
-  if (enabled_scripts_.contains(info->id_)) {
+  if (enabled_scripts_.contains(info->id())) {
     // Find an engine for it
-    LanguageEngine* engine = EngineForLanguage(info->language_);
+    LanguageEngine* engine = EngineForLanguage(info->language());
     if (!engine) {
-      qWarning() << "Unknown language in" << info->path_;
+      qWarning() << "Unknown language in" << info->path();
       return;
     }
 
-    info->loaded_ = engine->CreateScript(info->path_, info->script_file_, info->id_);
-    if (!info->loaded_) {
+    info->set_loaded(engine->CreateScript(*info));
+    if (!info->loaded()) {
       // Failed to load?  Disable it so we don't try again
-      enabled_scripts_.remove(info->id_);
+      enabled_scripts_.remove(info->id());
       SaveSettings();
     }
   }
 }
 
-QMap<QString, ScriptManager::ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
+QMap<QString, ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
   QMap<QString, ScriptInfo> ret;
 
   foreach (const QString& search_path, search_paths_) {
@@ -147,19 +145,20 @@ QMap<QString, ScriptManager::ScriptInfo> ScriptManager::LoadAllScriptInfo() cons
         watcher_->addPath(path);
       }
 
-      ScriptInfo info = LoadScriptInfo(path);
+      ScriptInfo info;
+      info.InitFromDirectory(this, path);
       if (!info.is_valid()) {
         qWarning() << "Not a valid Clementine script directory, ignoring:"
                    << path;
         continue;
       }
 
-      if (ret.contains(info.id_)) {
+      if (ret.contains(info.id())) {
         // Seen this script already
         continue;
       }
 
-      ret.insert(info.id_, info);
+      ret.insert(info.id(), info);
     }
   }
 
@@ -188,54 +187,13 @@ LanguageEngine* ScriptManager::EngineForLanguage(const QString& language_name) c
   return NULL;
 }
 
-LanguageEngine* ScriptManager::EngineForLanguage(ScriptManager::Language language) const {
+LanguageEngine* ScriptManager::EngineForLanguage(ScriptInfo::Language language) const {
   foreach (LanguageEngine* engine, engines_) {
     if (engine->language() == language) {
       return engine;
     }
   }
   return NULL;
-}
-
-ScriptManager::ScriptInfo ScriptManager::LoadScriptInfo(const QString& path) const {
-  const QString ini_file = path + "/" + kIniFileName;
-  const QString id = QFileInfo(path).completeBaseName();
-
-  // Does the file exist?
-  ScriptManager::ScriptInfo ret;
-  if (!QFile::exists(ini_file)) {
-    qWarning() << "Script definition file not found:" << ini_file;
-    return ret;
-  }
-
-  // Open it
-  QSettings s(ini_file, QSettings::IniFormat);
-  if (!s.childGroups().contains(kIniSettingsGroup)) {
-    qWarning() << "Missing" << kIniSettingsGroup << "section in" << ini_file;
-    return ret;
-  }
-  s.beginGroup(kIniSettingsGroup);
-
-  // Find out what language it's in
-  QString language_name = s.value("language").toString();
-  LanguageEngine* engine = EngineForLanguage(language_name);
-  if (!engine) {
-    qWarning() << "Unknown language" << language_name << "in" << ini_file;
-    return ret;
-  }
-  ret.language_ = engine->language();
-
-  // Load the rest of the metadata
-  ret.path_ = path;
-  ret.id_ = id;
-  ret.name_ = s.value("name").toString();
-  ret.description_ = s.value("description").toString();
-  ret.author_ = s.value("author").toString();
-  ret.url_ = s.value("url").toString();
-  ret.script_file_ = QFileInfo(QDir(path), s.value("script_file").toString()).absoluteFilePath();
-  ret.icon_ = QIcon(QFileInfo(QDir(path), s.value("icon").toString()).absoluteFilePath());
-
-  return ret;
 }
 
 int ScriptManager::rowCount(const QModelIndex& parent) const {
@@ -252,28 +210,28 @@ QVariant ScriptManager::data(const QModelIndex& index, int role) const {
 
   switch (role) {
     case Qt::DisplayRole:
-      return info.name_;
+      return info.name();
 
     case Qt::DecorationRole:
-      return info.icon_;
+      return info.icon();
 
     case Role_Author:
-      return info.author_;
+      return info.author();
 
     case Role_Description:
-      return info.description_;
+      return info.description();
 
     case Role_Language:
-      return info.language_;
+      return info.language();
 
     case Role_ScriptFile:
-      return info.script_file_;
+      return info.script_file();
 
     case Role_Url:
-      return info.url_;
+      return info.url();
 
     case Role_IsEnabled:
-      return info.loaded_ != NULL;
+      return info.loaded() != NULL;
 
     default:
       return QVariant();
@@ -285,22 +243,22 @@ void ScriptManager::Enable(const QModelIndex& index) {
     return;
 
   ScriptInfo* info = &info_[index.row()];
-  if (info->loaded_)
+  if (info->loaded())
     return;
 
   // Find an engine for it
-  LanguageEngine* engine = EngineForLanguage(info->language_);
+  LanguageEngine* engine = EngineForLanguage(info->language());
   if (!engine) {
-    qWarning() << "Unknown language in" << info->path_;
+    qWarning() << "Unknown language in" << info->path();
     return;
   }
 
   // Load the script
-  info->loaded_ = engine->CreateScript(info->path_, info->script_file_, info->id_);
+  info->set_loaded(engine->CreateScript(*info));
 
   // If it loaded correctly then automatically load it in the future
-  if (info->loaded_) {
-    enabled_scripts_.insert(info->id_);
+  if (info->loaded()) {
+    enabled_scripts_.insert(info->id());
     SaveSettings();
   }
 
@@ -312,13 +270,13 @@ void ScriptManager::Disable(const QModelIndex& index) {
     return;
 
   ScriptInfo* info = &info_[index.row()];
-  if (!info->loaded_)
+  if (!info->loaded())
     return;
 
-  info->loaded_->language()->DestroyScript(info->loaded_);
-  info->loaded_ = NULL;
+  info->loaded()->language()->DestroyScript(info->loaded());
+  info->set_loaded(NULL);
 
-  enabled_scripts_.remove(info->id_);
+  enabled_scripts_.remove(info->id());
   SaveSettings();
 
   emit dataChanged(index, index);
@@ -329,10 +287,10 @@ void ScriptManager::ShowSettingsDialog(const QModelIndex& index) {
     return;
 
   ScriptInfo* info = &info_[index.row()];
-  if (!info->loaded_)
+  if (!info->loaded())
     return;
 
-  info->loaded_->interface()->ShowSettingsDialog();
+  info->loaded()->interface()->ShowSettingsDialog();
 }
 
 void ScriptManager::AddLogLine(const QString& who, const QString& message, bool error) {
@@ -363,7 +321,7 @@ void ScriptManager::RescanScripts() {
   // Look at existing scripts, find ones that have changed or been deleted
   for (int i=0 ; i<info_.count() ; ++i) {
     ScriptInfo* info = &info_[i];
-    const QString id = info->id_;
+    const QString id = info->id();
 
     if (!new_info.contains(id)) {
       // This script was deleted - unload it and remove it from the model
@@ -404,29 +362,4 @@ void ScriptManager::RescanScripts() {
 
     endInsertRows();
   }
-}
-
-bool ScriptManager::ScriptInfo::operator ==(const ScriptInfo& other) const {
-  return path_ == other.path_ &&
-         name_ == other.name_ &&
-         description_ == other.description_ &&
-         author_ == other.author_ &&
-         url_ == other.url_ &&
-         language_ == other.language_ &&
-         script_file_ == other.script_file_;
-}
-
-bool ScriptManager::ScriptInfo::operator !=(const ScriptInfo& other) const {
-  return !(*this == other);
-}
-
-void ScriptManager::ScriptInfo::TakeMetadataFrom(const ScriptInfo& other) {
-  path_ = other.path_;
-  name_ = other.name_;
-  description_ = other.description_;
-  author_ = other.author_;
-  url_ = other.url_;
-  icon_ = other.icon_;
-  language_ = other.language_;
-  script_file_ = other.script_file_;
 }

@@ -58,6 +58,7 @@ pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(QJSON QJson)
+pkg_check_modules(ARCHIVE REQUIRED libarchive)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)

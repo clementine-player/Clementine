@@ -15,27 +15,26 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PYTHONSCRIPT_H
-#define PYTHONSCRIPT_H
+#ifndef SCRIPTARCHIVE_H
+#define SCRIPTARCHIVE_H
 
-#include "scripting/script.h"
+#include "scriptinfo.h"
 
-class PythonEngine;
-class ScriptInfo;
+#include <QFuture>
 
-struct _object; // PyObject
-
-class PythonScript : public Script {
+class ScriptArchive {
 public:
-  PythonScript(PythonEngine* engine, const ScriptInfo& info);
+  bool Load(const QString& filename);
+  bool Load(QIODevice* device);
+  QFuture<bool> LoadAsync(const QString& filename);
+  QFuture<bool> LoadAsync(QIODevice* device);
 
-  bool Init();
-  bool Unload();
+  const ScriptInfo& info() const { return info_; }
+
+  bool Install() const;
 
 private:
-  PythonEngine* engine_;
-
-  QString module_name_;
+  ScriptInfo info_;
 };
 
-#endif // PYTHONSCRIPT_H
+#endif // SCRIPTARCHIVE_H
