@@ -27,6 +27,10 @@
 const char* ScriptInfo::kIniFileName = "script.ini";
 const char* ScriptInfo::kIniSettingsGroup = "Script";
 
+ScriptInfo::ScriptInfo()
+  : d(new Private)
+{
+}
 
 void ScriptInfo::InitFromDirectory(const ScriptManager* manager, const QString& path) {
   const QString ini_file = path + "/" + kIniFileName;

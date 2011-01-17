@@ -27,6 +27,8 @@ class ScriptManager;
 
 class ScriptInfo {
 public:
+  ScriptInfo();
+
   enum Language {
     Language_Unknown = 0,
     Language_Python,
