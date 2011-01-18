@@ -82,6 +82,7 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
 LibraryView::LibraryView(QWidget* parent)
   : AutoExpandingTreeView(parent),
+    scripts_(NULL),
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
