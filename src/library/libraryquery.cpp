@@ -71,8 +71,17 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value, const 
   if (value.type() == QVariant::Int)
     where_clauses_ << QString("%1 %2 %3").arg(column, op, value.toString());
   else {
-    where_clauses_ << QString("%1 %2 ?").arg(column, op);
-    bound_values_ << value;
+    if(!op.compare("IN", Qt::CaseInsensitive)) {
+      QStringList final;
+      foreach(const QString& old, value.toStringList()) {
+        final << "'" + QString(old).replace("'", "''") + "'";
+      }
+
+      where_clauses_ << QString("%1 IN (%3)").arg(column, final.join(","));
+    } else {
+      where_clauses_ << QString("%1 %2 ?").arg(column, op);
+      bound_values_ << value;
+    }
   }
 }
 
@@ -83,6 +92,7 @@ void LibraryQuery::AddCompilationRequirement(bool compilation) {
 QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
                              const QString& fts_table) {
   QString sql;
+
   if (join_with_fts_) {
     sql = QString("SELECT %1 FROM %2 INNER JOIN %3 AS fts ON %2.ROWID = fts.ROWID")
           .arg(column_spec_, songs_table, fts_table);
@@ -103,6 +113,7 @@ QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
   sql.replace("%songs_table", songs_table);
   sql.replace("%fts_table_noprefix", fts_table.section('.', -1, -1));
   sql.replace("%fts_table", fts_table);
+
   query_ = QSqlQuery(sql, db);
 
   // Bind values

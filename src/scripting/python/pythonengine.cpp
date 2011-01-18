@@ -114,6 +114,7 @@ Script* PythonEngine::CreateScript(const ScriptInfo& info) {
     AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
     AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
     AddObject(manager()->ui(), sipType_UIInterface, "ui");
+    AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
     // Create a module for scripts

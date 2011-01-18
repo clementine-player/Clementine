@@ -4,11 +4,13 @@
 %Import QtGui/QtGuimod.sip
 %Import QtNetwork/QtNetworkmod.sip
 
+%Include autoexpandingtreeview.sip
 %Include directory.sip
 %Include engine_fwd.sip
 %Include iconloader.sip
 %Include librarybackend.sip
 %Include libraryquery.sip
+%Include libraryview.sip
 %Include mergedproxymodel.sip
 %Include network.sip
 %Include parserbase.sip

@@ -50,6 +50,11 @@ class LibraryView : public AutoExpandingTreeView {
 
   static const char* kSettingsGroup;
 
+  // Returns Songs currently selected in the library view. Please note that the
+  // selection is recursive meaning that if for example an album is selected
+  // this will return all of it's songs.
+  SongList GetSelectedSongs() const;
+
   void SetTaskManager(TaskManager* task_manager);
   void SetLibrary(LibraryModel* library);
   void SetDeviceManager(DeviceManager* device_manager);
@@ -57,6 +62,8 @@ class LibraryView : public AutoExpandingTreeView {
   // QTreeView
   void keyboardSearch(const QString &search);
   void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible);
+
+  QMenu* context_menu() const { return context_menu_; }
 
  public slots:
   void TotalSongCountUpdated(int count);
@@ -99,7 +106,6 @@ class LibraryView : public AutoExpandingTreeView {
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
-  SongList GetSelectedSongs() const;
 
  private:
   LibraryModel* library_;

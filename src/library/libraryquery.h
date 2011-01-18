@@ -42,6 +42,9 @@ class LibraryQuery {
 
   void SetColumnSpec(const QString& spec) { column_spec_ = spec; }
   void SetOrderBy(const QString& order_by) { order_by_ = order_by; }
+  // Adds a fragment of WHERE clause. When executed, this Query will connect all
+  // the fragments with AND operator.
+  // Please note that IN operator expects a QStringList as value.
   void AddWhere(const QString& column, const QVariant& value, const QString& op = "=");
   void AddCompilationRequirement(bool compilation);
   void SetLimit(int limit) { limit_ = limit; }

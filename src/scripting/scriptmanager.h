@@ -27,6 +27,7 @@
 
 class LanguageEngine;
 class Library;
+class LibraryView;
 class Player;
 class PlaylistManager;
 class RadioModel;
@@ -57,10 +58,11 @@ public:
 
   struct GlobalData {
     GlobalData() {}
-    GlobalData(Library* library, Player* player, PlaylistManager* playlists,
-               TaskManager* task_manager, SettingsDialog* settings_dialog,
-               RadioModel* radio_model)
+    GlobalData(Library* library, LibraryView* library_view, Player* player,
+               PlaylistManager* playlists, TaskManager* task_manager,
+               SettingsDialog* settings_dialog, RadioModel* radio_model)
       : library_(library),
+        library_view_(library_view),
         player_(player),
         playlists_(playlists),
         task_manager_(task_manager),
@@ -69,6 +71,7 @@ public:
     {}
 
     Library* library_;
+    LibraryView* library_view_;
     Player* player_;
     PlaylistManager* playlists_;
     TaskManager* task_manager_;
