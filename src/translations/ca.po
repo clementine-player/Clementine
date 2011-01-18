@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-10 19:37+0000\n"
-"PO-Revision-Date: 2010-12-05 20:23+0000\n"
+"POT-Creation-Date: 2011-01-16 16:07+0000\n"
+"PO-Revision-Date: 2010-12-22 17:50+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2011-01-17 05:03+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 "Language: ca\n"
-"X-Launchpad-Export-Date: 2010-12-11 05:26+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 
 msgid " ms"
 msgstr " ms"
@@ -155,8 +155,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album "
+"%title </p>\n"
 "\n"
 "<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
 "remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
@@ -172,7 +172,8 @@ msgstr ""
 "reproducció intel·ligent que ofereixen diferents formes de seleccionar "
 "cançons."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -1311,8 +1312,8 @@ msgstr ""
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Deixar-ho en blanc per assignar el valor per defecte. Exemples : \"/dev/dsp"
-"\", \"front\", etc."
+"Deixar-ho en blanc per assignar el valor per defecte. Exemples : "
+"\"/dev/dsp\", \"front\", etc."
 
 msgid "Length"
 msgstr "Durada"
@@ -1460,7 +1461,8 @@ msgid "Music"
 msgstr "Música"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr ""
+"Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Biblioteca de Música"
@@ -2533,14 +2535,15 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You love this track"
@@ -2656,33 +2659,32 @@ msgstr "atura"
 msgid "track %1"
 msgstr "peça %1"
 
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "El server de radio no s'ha pogut carregar :-("
+#~ msgid "ASF"
+#~ msgstr "ASF"
 
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Radio recomanada de Last.fm - %1"
-
-#~ msgid "Select engine"
-#~ msgstr "Seleccionar motor"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Motor d'àudio \"%1\" desconegut. Les opcions són:"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Editant %n pistes"
-
-#~ msgid "[click to edit]"
-#~ msgstr "[clickar per editar]"
+#, qt-format
+#~ msgid "Couldn't load the last.fm radio station: %1"
+#~ msgstr "No es va poder carregar l'estació de ràdio de last.fm: %1"
 
 #~ msgid "Delete files..."
 #~ msgstr "Esborra els fitxers..."
 
-#~ msgid "ASF"
-#~ msgstr "ASF"
+#, c-format
+#~ msgid "Editing %n tracks"
+#~ msgstr "Editant %n pistes"
 
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "No es va poder carregar l'estació de ràdio de last.fm: %1"
+#, qt-format
+#~ msgid "Hide %1"
+#~ msgstr "Amaga %1"
 
+#~ msgid "Hide..."
+#~ msgstr "Amaga..."
+
+#, qt-format
+#~ msgid "Last.fm Recommended Radio - %1"
+#~ msgstr "Radio recomanada de Last.fm - %1"
+
+#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Cançons favorites a Last.fm - %1"
 
@@ -2694,3 +2696,25 @@ msgstr "peça %1"
 
 #~ msgid "Ogg FLAC"
 #~ msgstr "Ogg FLAC"
+
+#~ msgid "Radio service couldn't be loaded :-("
+#~ msgstr "El server de radio no s'ha pogut carregar :-("
+
+#~ msgid "[click to edit]"
+#~ msgstr "[clickar per editar]"
+
+#~ msgid "Select engine"
+#~ msgstr "Seleccionar motor"
+
+#, qt-format
+#~ msgid "Unknown audio engine \"%1\". Choices are:"
+#~ msgstr "Motor d'àudio \"%1\" desconegut. Les opcions són:"
+
+#~ msgid "Add as new playlist..."
+#~ msgstr "Afegir com una nova llista de reproducció"
+
+#~ msgid "Buffer Duration (ms)"
+#~ msgstr "Duració del Buffer (ms)"
+
+#~ msgid "Dynamic playlists"
+#~ msgstr "Llista de reproducció dinàmica"

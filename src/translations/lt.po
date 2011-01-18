@@ -5,30 +5,33 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
+"Project-Id-Version: clementine 0.6\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-10 19:37+0000\n"
-"PO-Revision-Date: 2010-07-24 16:03+0000\n"
-"Last-Translator: David Sansome <me@davidsansome.com>\n"
-"Language-Team: Lithuanian <lt@li.org>\n"
+"POT-Creation-Date: 2011-01-16 16:07+0000\n"
+"PO-Revision-Date: 2011-01-16 07:13+0000\n"
+"Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
+"Language-Team: Lithuanian <liudas@akmc.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
+"X-Poedit-Country: LITHUANIA\n"
 "Language: lt\n"
-"X-Launchpad-Export-Date: 2010-12-11 05:27+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Poedit-Language: Lithuanian\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 msgid " ms"
 msgstr " ms"
 
 msgid " pt"
-msgstr ""
+msgstr " pt"
 
 msgid " seconds"
-msgstr " sekundžių"
+msgstr " sek."
 
 msgid " songs"
-msgstr ""
+msgstr " dainos"
 
 #, qt-format
 msgid "%1 albums"
@@ -40,11 +43,11 @@ msgstr "%1 dienos"
 
 #, qt-format
 msgid "%1 days ago"
-msgstr ""
+msgstr "prieš %1 dienų"
 
 #, qt-format
 msgid "%1 other listeners"
-msgstr ""
+msgstr "%1 kiti klausytojai"
 
 #, qt-format
 msgid "%1 playlists (%2)"
@@ -56,23 +59,23 @@ msgstr "%1 pažymėta iš"
 
 #, qt-format
 msgid "%1 song"
-msgstr ""
+msgstr "%1 daina"
 
 #, qt-format
 msgid "%1 songs"
-msgstr ""
+msgstr "%1 dainos"
 
 #, qt-format
 msgid "%1 songs found"
-msgstr ""
+msgstr "%1 dainų rasta"
 
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr ""
+msgstr "%1 dainų rasta (rodoma %2)"
 
 #, qt-format
 msgid "%1 total plays"
-msgstr ""
+msgstr "%1 viso grojimų"
 
 #, qt-format
 msgid "%1 tracks"
@@ -80,74 +83,74 @@ msgstr "%1 takeliai"
 
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1: Wii pulto modulis"
 
 #, c-format
 msgid "%n failed"
-msgstr ""
+msgstr "%n nepavyko"
 
 #, c-format
 msgid "%n finished"
-msgstr ""
+msgstr "%n baigta"
 
 #, c-format
 msgid "%n remaining"
-msgstr ""
+msgstr "%n pervardinama"
 
 msgid "&Align text"
-msgstr ""
+msgstr "&Lygiuoti tekstą"
 
 msgid "&Center"
-msgstr ""
+msgstr "&Centras"
 
 msgid "&Custom"
-msgstr ""
+msgstr "&Pasirinktinė"
 
 #, qt-format
 msgid "&Hide %1"
-msgstr ""
+msgstr "&Paslėpti %1"
 
 msgid "&Hide..."
-msgstr ""
+msgstr "&Paslėpti..."
 
 msgid "&Left"
-msgstr ""
+msgstr "&Kairė"
 
 msgid "&None"
-msgstr ""
+msgstr "&Nėra"
 
 msgid "&Quit"
-msgstr ""
+msgstr "&Baigti"
 
 msgid "&Right"
-msgstr ""
+msgstr "&Dešinė"
 
 msgid "&Stretch columns to fit window"
-msgstr ""
+msgstr "&Ištempti stilpelius, kad užpildytų langą"
 
 msgid "(different across multiple songs)"
-msgstr ""
+msgstr "(skirtingai tarp daugelio dainų)"
 
 msgid "...and all the Amarok contributors"
-msgstr ""
+msgstr "...ir visiems prisidėjusiems prie Amarok"
 
 msgid "0:00:00"
-msgstr ""
+msgstr "0:00:00"
 
 msgid "1 day"
-msgstr ""
+msgstr "1 diena"
 
 msgid "1 track"
-msgstr ""
+msgstr "1 takelis"
 
 msgid "128K MP3"
-msgstr ""
+msgstr "Transliuoti kaip MP3"
 
 msgid "128k MP3"
-msgstr ""
+msgstr "Transliuoti kaip MP3"
 
 msgid "50 random tracks"
-msgstr ""
+msgstr "50 atsitiktinių takelių"
 
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
@@ -155,2046 +158,2081 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
+"<p>Atpažinimo ženklas prasideda iš %, pav.: %albumas %pavadinimas </p>\n"
+"\n"
+"<p>Jei bus teksto skyriai, kurie turi atpažinimo ženklą su riestiniais "
+"skliausteliais, tas skyrius bus paslėptas, jei atpažinimo ženklas yra "
+"tuščias.</p>"
 
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
+"Išmanusis grojaraštis yra dinaminis sąrašas padaromas iš jūsų fonotekos. "
+"Išmaniųjų grojaraščių yra keli tiptai, jie padeda skirtingai atrinkti dainas."
 
-msgid "A song will be included in the playlist if it matches these conditions."
-msgstr ""
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
+msgstr "Daina bus įtraukta į grojaraštį jei atitiks sąlygas"
 
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 msgid "AIFF"
-msgstr ""
+msgstr "AIFF išpynimo metodas"
 
 #, qt-format
 msgid "About %1"
-msgstr ""
+msgstr "Apie %1"
 
 msgid "About Clementine..."
-msgstr ""
+msgstr "Apie Clementine..."
 
 msgid "About Qt..."
-msgstr ""
+msgstr "Apie Qt..."
 
 msgid "Account details"
-msgstr ""
+msgstr "Paskyros informacija"
 
 msgid "Action"
-msgstr ""
+msgstr "Veiksmas"
 
 msgid "Active/deactive Wiiremote"
-msgstr ""
+msgstr "Aktyvuoti/Dezaktyvuoti Wii pultą"
 
 msgid "Add Stream"
-msgstr ""
+msgstr "Pridėti srautą"
 
 msgid "Add action"
-msgstr ""
+msgstr "Pridėti veiksmą"
 
 msgid "Add another stream..."
-msgstr ""
+msgstr "Pridėti kitą srautą..."
 
 msgid "Add directory..."
-msgstr ""
+msgstr "Pridėti aplanką..."
 
 msgid "Add file..."
-msgstr ""
+msgstr "Pridėti failą..."
 
 msgid "Add files to transcode"
-msgstr ""
+msgstr "Pridėti failus perkodavimui"
 
 msgid "Add folder"
-msgstr ""
+msgstr "Pridėti aplanką"
 
 msgid "Add folder..."
-msgstr ""
+msgstr "Pridėti aplanką..."
 
 msgid "Add media"
-msgstr ""
+msgstr "Pridėti media"
 
 msgid "Add new folder..."
-msgstr ""
+msgstr "Pridėti naują aplanką..."
 
 msgid "Add search term"
-msgstr ""
+msgstr "Pridėti paieškos frazę"
 
 msgid "Add stream..."
-msgstr ""
+msgstr "Pridėti srautą..."
 
 msgid "Add to playlist"
-msgstr ""
+msgstr "Įdėti į grojaraštį"
 
 msgid "Add wiimotedev action"
-msgstr ""
+msgstr "Pridėti Wii pulto veiksmą"
 
 msgid "Add..."
-msgstr ""
+msgstr "Pridėti..."
 
 msgid "Added this month"
-msgstr ""
+msgstr "Pridėta šį mėnesį"
 
 msgid "Added this week"
-msgstr ""
+msgstr "Pridėta šią savaitę"
 
 msgid "Added this year"
-msgstr ""
+msgstr "Pridėta šiais metais"
 
 msgid "Added today"
-msgstr ""
+msgstr "Pridėta šiandien"
 
 msgid "Added within three months"
-msgstr ""
+msgstr "Pridėta per tris mėnesius"
 
 msgid "Advanced grouping..."
-msgstr ""
+msgstr "Sudėtingesnis grupavimas..."
 
 msgid "After copying..."
-msgstr ""
+msgstr "Po kopijavimo..."
 
 msgid "Album"
-msgstr ""
+msgstr "Albumas"
 
 msgid "Album (ideal loudness for all tracks)"
-msgstr ""
+msgstr "Albumas (idealus garsumas visiems takeliams)"
 
 msgid "Album artist"
-msgstr ""
+msgstr "Albumo atlikėjas"
 
 msgid "Album info on jamendo.com..."
-msgstr ""
+msgstr "Albumo info iš jamendo.com..."
 
 msgid "Albumartist"
-msgstr ""
+msgstr "Albumo atlikėjas"
 
 msgid "Albums with covers"
-msgstr ""
+msgstr "Albumai su viršeliais"
 
 msgid "Albums without covers"
-msgstr ""
+msgstr "Albumai be viršelių"
 
 msgid "All Files (*)"
-msgstr ""
+msgstr "Visi failai (*)"
 
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "Šlovė Hypnotoad'ui!"
 
 msgid "All albums"
-msgstr ""
+msgstr "Visi albumai"
 
 msgid "All artists"
-msgstr ""
+msgstr "Visi atlikėjai"
 
 msgid "All files (*)"
-msgstr ""
+msgstr "Visi failai (*)"
 
 #, qt-format
 msgid "All playlists (%1)"
-msgstr ""
+msgstr "Visi grojaraščiai (%1)"
 
 msgid "All tracks"
-msgstr ""
+msgstr "Visi takeliai"
 
 msgid "Alongside the originals"
-msgstr ""
+msgstr "Šalia originalų"
 
 msgid "Always hide the main window"
-msgstr ""
+msgstr "Visada paslėpti pagrindinį langą"
 
 msgid "Always show the main window"
-msgstr ""
+msgstr "Visada rodyti pagrindinį langą"
 
 msgid "An error occurred copying the iTunes database from the device"
-msgstr ""
+msgstr "Iškilo klaida kopijuojant iTunes duomenų bazę iš įrenginio"
 
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr ""
+msgstr "Iškilo klaida kopijuojant iTunes duomenų bazę į įrenginį"
 
 msgid "An error occurred loading the iTunes database"
-msgstr ""
+msgstr "Iškilo klaida įkeliant iTunes duomenų bazę"
 
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr ""
+msgstr "Klaida rašant meta duomenis į '%1'"
 
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
-msgstr ""
+msgstr "Nežinomas last.fm klaida: %1"
 
 msgid "And:"
-msgstr ""
+msgstr "ir:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Išvaizda"
 
 msgid "Append files/URLs to the playlist"
-msgstr ""
+msgstr "Pridėti failus/URL į grojaraštį"
 
 msgid "Apply compression to prevent clipping"
-msgstr ""
+msgstr "Pritaikyti suspaudimą, kad išvengti nukirtimų"
 
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr ""
+msgstr "Ar tikrai norite ištrinti \"%1\" šabloną?"
 
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr ""
+msgstr "Ar tikrai norite atstatyti šios dainos statistiką?"
 
 msgid "Artist"
-msgstr ""
+msgstr "Atlikėjas"
 
 msgid "Artist info"
-msgstr ""
+msgstr "Atlikėjo info"
 
 msgid "Artist radio"
-msgstr ""
+msgstr "Atlikėjo radijas"
 
 msgid "Artist tags"
-msgstr ""
+msgstr "Atlikėjo žymės"
 
 msgid "Artist's initial"
-msgstr ""
+msgstr "Atlikėjo inicialai"
 
 msgid "Audio format"
-msgstr ""
+msgstr "Audio formatas"
 
 msgid "Authenticating..."
-msgstr ""
+msgstr "Autorizuojama..."
 
 msgid "Authentication failed"
-msgstr ""
+msgstr "Autorizacija nepavyko"
 
 msgid "Authors"
-msgstr ""
+msgstr "Autoriai"
 
 msgid "Automatic updating"
-msgstr ""
+msgstr "Automatinis atnaujinimas..."
 
 msgid "Automatically open single categories in the library tree"
-msgstr ""
+msgstr "Automatiškai atverti pavienias kategorijas fonotekos medyje"
 
 msgid "Available"
-msgstr ""
+msgstr "Galima"
 
 msgid "BPM"
-msgstr ""
+msgstr "DPM"
 
 msgid "Background Streams"
-msgstr ""
+msgstr "Fono srautai"
 
 msgid "Background color"
-msgstr ""
+msgstr "Fono spalva"
 
 msgid "Background opacity"
-msgstr ""
+msgstr "Fono permatomumas"
 
 msgid "Ban"
-msgstr ""
+msgstr "Blokavimas"
 
 msgid "Bar analyzer"
-msgstr ""
+msgstr "Juostinis analizatorius"
 
 msgid "Basic Blue"
-msgstr ""
+msgstr "Paprasta mėlyna"
 
 msgid "Behavior"
-msgstr ""
+msgstr "Elgsena"
 
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "Biografija iš %1"
 
 msgid "Bit rate"
-msgstr ""
+msgstr "Bitų dažnis"
 
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitų dažnis"
 
 msgid "Block analyzer"
-msgstr ""
+msgstr "Blokų analizatorius"
 
 msgid "Bluetooth MAC Address"
-msgstr ""
+msgstr "Bluetooth MAC adresas"
 
 msgid "Boom analyzer"
-msgstr ""
+msgstr "Boom analizatorius"
 
 msgid "Browse..."
-msgstr ""
+msgstr "Naršyti..."
 
 msgid "Buffer duration"
-msgstr ""
+msgstr "Buferio trukmė"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Mygtukai"
 
 msgid "Change cover art"
-msgstr ""
+msgstr "Keisti viršelio paveikslėlį"
 
 msgid "Change font size..."
-msgstr ""
+msgstr "Keisti šrifto dydį..."
 
 msgid "Change shortcut..."
-msgstr ""
+msgstr "Keisti konbinaciją..."
 
 msgid "Change the language"
-msgstr ""
+msgstr "Pakeisti programos kalbą"
 
 msgid "Check for updates..."
-msgstr ""
+msgstr "Tikrinti, ar yra atnaujinimų..."
 
 msgid "Choose a name for your smart playlist"
-msgstr ""
+msgstr "Parinkite pavadinimą savo išmaniajam grojaraščiui"
 
 msgid "Choose automatically"
-msgstr ""
+msgstr "Automatiškai pasirinkti"
 
 msgid "Choose color..."
-msgstr ""
+msgstr "Pasirinkti spalvą..."
 
 msgid "Choose from the list"
-msgstr ""
+msgstr "Pasirinkti iš sąrašo"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
+"Pasirinkite kaip grojaraštis turės dainų ir kaip jos bus rikiuojamos."
 
 msgid "Choose manual cover"
-msgstr ""
+msgstr "Pasirinkti savarankiškai viršelio paveikslėlį"
 
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
+"Pasirinkite tinklapius, kuriuose Clementine galėtų ieškoti dainų žodžių."
 
 msgid "Classical"
-msgstr ""
+msgstr "Klasika"
 
 msgid "Clear"
-msgstr ""
+msgstr "Išvalyti"
 
 msgid "Clear playlist"
-msgstr ""
+msgstr "Išvalyti grojaraštį"
 
 msgid "Clementine"
-msgstr ""
+msgstr "Clementine"
 
 msgid "Clementine Error"
-msgstr ""
+msgstr "Clementine klaida"
 
 msgid "Clementine Orange"
-msgstr ""
+msgstr "Clementine Oranžinė"
 
 msgid "Clementine Visualization"
-msgstr ""
+msgstr "Clementine vaizdinys"
 
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
+"Clementine gali automatiškai konvertuoti kopijuojamą į įrenginį muziką "
+"formatu, kurį įrenginys palaiko."
 
 msgid "Clementine can show a message when the track changes."
-msgstr ""
+msgstr "Clementine gali rodyti pranešimą kai keičiami takeliai."
 
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
+"Clementine negalėjo įkelti jokio projectM vaizdinio. Patikrinkite ar "
+"tinkamai įdiegėte Clementine."
 
 msgid "Clementine image viewer"
-msgstr ""
+msgstr "Clementine nuotraukų peržiūros programa"
 
 msgid "Click here to add some music"
-msgstr ""
+msgstr "Paspauskite čia, kad pridėti muzikos"
 
 msgid "Close visualization"
-msgstr ""
+msgstr "Uždaryti vaizdinius"
 
 msgid "Closing this window will cancel the download."
-msgstr ""
+msgstr "Uždarant šį langą bus atšaukti atsisiuntimai."
 
 msgid "Closing this window will stop searching for album covers."
-msgstr ""
+msgstr "Uždarant šį langą bus sustabdyta albumo viršelių paieška."
 
 msgid "Club"
-msgstr ""
+msgstr "Klubinė"
 
 msgid "Color"
-msgstr ""
+msgstr "Spalva"
 
 msgid "Comment"
-msgstr ""
+msgstr "Komentaras"
 
 msgid "Complete automatically"
-msgstr ""
+msgstr "Baigti automatiškai"
 
 msgid "Composer"
-msgstr ""
+msgstr "Kompozitorius"
 
 msgid "Configure Last.fm..."
-msgstr ""
+msgstr "Konfigūruoti Last.fm..."
 
 msgid "Configure Magnatune..."
-msgstr ""
+msgstr "Konfigūruoti Magnatune..."
 
 msgid "Configure Shortcuts"
-msgstr ""
+msgstr "Konfigūruoti klavišų kombinacijas"
 
 msgid "Configure library..."
-msgstr ""
+msgstr "Konfigūruoti biblioteką..."
 
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Prijungti Wii pultą naudojant aktyvuoti/dezaktyvuoti veiksmą"
 
 msgid "Connect device"
-msgstr ""
+msgstr "Prijungti įrenginį"
 
 msgid "Convert all music"
-msgstr ""
+msgstr "Konvertuoti visą muziką"
 
 msgid "Convert any music that the device can't play"
-msgstr ""
+msgstr "Konvertuoti visą muziką, kurios negali įrenginys groti"
 
 msgid "Copy to device..."
-msgstr ""
+msgstr "Kopijuoti į įrenginį..."
 
 msgid "Copy to library..."
-msgstr ""
+msgstr "Kopijuoti į fonoteką..."
 
 msgid "Copying iPod database"
-msgstr ""
+msgstr "Kopijuojama iPod duomenų bazė..."
 
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
+"Nepavyko sukurti GStreamer elemento \"%1\" - patikrinkite ar įdiegti visi "
+"reikalingi GStreamer plėtiniai"
 
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
+"Nepavyko rasti maišytuvo %1, patikrinkite ar įdiegti visi reikalingi "
+"GStreamer plėtiniai"
 
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr ""
+"Nepavyko rasti koduotuvo %1, patikrinkite ar įdiegti visi reikalingi "
+"GStreamer plėtiniai"
 
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "Nepavyko įkelti Last.fm radijo stoties"
 
 #, qt-format
 msgid "Couldn't open output file %1"
-msgstr ""
+msgstr "Nepavyko atverti išvesties failo %1"
 
 msgid "Cover Manager"
-msgstr ""
+msgstr "Viršelių tvarkyklė"
 
 msgid "Cover art from embedded image"
-msgstr ""
+msgstr "Viršelio paveikslėlis iš įdėtos nuotraukos"
 
 #, qt-format
 msgid "Cover art loaded automatically from %1"
-msgstr ""
+msgstr "Viršelio paveikslėlis įkeltas automatiškai iš %1"
 
 msgid "Cover art manually unset"
-msgstr ""
+msgstr "Viršelio paveikslėlis savarankiškai pašalintas"
 
 msgid "Cover art not set"
-msgstr ""
+msgstr "Viršelio paveikslėlis nenustatytas"
 
 #, qt-format
 msgid "Cover art set from %1"
-msgstr ""
+msgstr "Viršelio paveikslėlis nustatytas iš %1"
 
 msgid "Cross-fade when changing tracks automatically"
-msgstr ""
+msgstr "Kryžminis suliejimas kai takeliai keičiami automatiškai"
 
 msgid "Cross-fade when changing tracks manually"
-msgstr ""
+msgstr "Kryžminis suliejimas kai takeliai keičiami savarankiškai"
 
 msgid "Ctrl+Alt+V"
-msgstr ""
+msgstr "Ctrl+Alt+V"
 
 msgid "Ctrl+B"
-msgstr ""
+msgstr "Ctrl+B"
 
 msgid "Ctrl+E"
-msgstr ""
+msgstr "Ctrl+E"
 
 msgid "Ctrl+H"
-msgstr ""
+msgstr "Ctrl+H"
 
 msgid "Ctrl+J"
-msgstr ""
+msgstr "Ctrl+J"
 
 msgid "Ctrl+K"
-msgstr ""
+msgstr "Ctrl+K"
 
 msgid "Ctrl+L"
-msgstr ""
+msgstr "Ctrl+L"
 
 msgid "Ctrl+M"
-msgstr ""
+msgstr "Ctrl+M"
 
 msgid "Ctrl+N"
-msgstr ""
+msgstr "Ctrl+N"
 
 msgid "Ctrl+O"
-msgstr ""
+msgstr "Ctrl+O"
 
 msgid "Ctrl+P"
-msgstr ""
+msgstr "Ctrl+P"
 
 msgid "Ctrl+Q"
-msgstr ""
+msgstr "Ctrl+Q"
 
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Ctrl+S"
 
 msgid "Ctrl+Shift+A"
-msgstr ""
+msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
-msgstr ""
+msgstr "Ctrl+Shift+O"
 
 msgid "Custom"
-msgstr ""
+msgstr "Pasirinktinis"
 
 msgid "Custom radio"
-msgstr ""
+msgstr "Pasirinktinis radijas"
 
 msgid "Custom..."
-msgstr ""
+msgstr "Pasirinktinis..."
 
 msgid "DBus path"
-msgstr ""
+msgstr "DBus kelias"
 
 msgid "Dance"
-msgstr ""
+msgstr "Šokių"
 
 msgid "Date created"
-msgstr ""
+msgstr "Sukūrimo data"
 
 msgid "Date modified"
-msgstr ""
+msgstr "Pakeitimo data"
 
 msgid "De&fault"
-msgstr ""
+msgstr "Numatytas"
 
 msgid "Decrease the volume by 4%"
-msgstr ""
+msgstr "Patildyti garsą per 4%"
 
 msgid "Decrease volume"
-msgstr ""
+msgstr "Patylinti"
 
 msgid "Defaults"
-msgstr ""
+msgstr "Numatytieji"
 
 msgid "Delay between visualizations"
-msgstr ""
+msgstr "Delsa tarp vaizdinių"
 
 msgid "Delete files"
-msgstr ""
+msgstr "Ištrinti failus"
 
 msgid "Delete from device..."
-msgstr ""
+msgstr "Ištrinti iš disko..."
 
 msgid "Delete from disk..."
-msgstr ""
+msgstr "Ištrinti iš disko..."
 
 msgid "Delete preset"
-msgstr ""
+msgstr "Ištrinti šabloną"
 
 msgid "Delete smart playlist"
-msgstr ""
+msgstr "Ištrinti išmanųjį grojaraštį"
 
 msgid "Delete the original files"
-msgstr ""
+msgstr "Ištrinti originalius failus"
 
 msgid "Deleting files"
-msgstr ""
+msgstr "Trinami failai"
 
 msgid "Dequeue selected tracks"
-msgstr ""
+msgstr "Iš eilės pažymėtus takelius"
 
 msgid "Dequeue track"
-msgstr ""
+msgstr "Iš eilės takelį"
 
 msgid "Destination"
-msgstr ""
+msgstr "Kopijuoti į aplanką"
 
 msgid "Details..."
-msgstr ""
+msgstr "Detalės..."
 
 msgid "Developer mode"
-msgstr ""
+msgstr "Kūrėjo režimas"
 
 msgid "Device"
-msgstr ""
+msgstr "Įrenginys"
 
 msgid "Device Properties"
-msgstr ""
+msgstr "Įrenginio savybės"
 
 msgid "Device name"
-msgstr ""
+msgstr "Įrenginio pavadinimas"
 
 msgid "Device properties..."
-msgstr ""
+msgstr "Įrenginio savybės..."
 
 msgid "Devices"
-msgstr ""
+msgstr "Įrenginiai"
 
 msgid "Direct internet connection"
-msgstr ""
+msgstr "Tiesioginis interneto ryšys"
 
 msgid "Directory"
-msgstr ""
+msgstr "Aplankas"
 
 msgid "Disable"
-msgstr ""
+msgstr "Išjungti"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Išjungtas"
 
 msgid "Disc"
-msgstr ""
+msgstr "Diskas"
 
 msgid "Display options"
-msgstr ""
+msgstr "Rodymo nuostatos"
 
 msgid "Display the on-screen-display"
-msgstr ""
+msgstr "Rodyti OSD"
 
 msgid "Do not convert any music"
-msgstr ""
+msgstr "Nekonvertuoti jokios muzikos"
 
 msgid "Don't repeat"
-msgstr ""
+msgstr "Nekartoti"
 
 msgid "Don't show in various artists"
-msgstr ""
+msgstr "Nerodyti įvairiuose atlikėjuose"
 
 msgid "Don't shuffle"
-msgstr ""
+msgstr "Nemaišyti"
 
 msgid "Don't stop!"
-msgstr ""
+msgstr "Nesustoti!"
 
 msgid "Double click to open"
-msgstr ""
+msgstr "Du kart spustelėkite norėdami atverti"
 
 msgid "Double-clicking a song clears the playlist first"
-msgstr ""
+msgstr "Išvalyti grojaraštį du kartus spragtelėjus ant dainos"
 
 msgid "Download directory"
-msgstr ""
+msgstr "Atsisiuntimų aplankas"
 
 msgid "Download membership"
-msgstr ""
+msgstr "Atsiųsti narystę"
 
 msgid "Download this album"
-msgstr ""
+msgstr "Atsisiųsti šį albumą"
 
 msgid "Download this album..."
-msgstr ""
+msgstr "Atsisiunčiamas šis albumas"
 
 msgid "Downloading Icecast directory"
-msgstr ""
+msgstr "Atsiunčiamas Icecast aplankas"
 
 msgid "Downloading Jamendo catalogue"
-msgstr ""
+msgstr "Atsiunčiamas Jamendo katalogas"
 
 msgid "Downloading Magnatune catalogue"
-msgstr ""
+msgstr "Atsiunčiamas  Magnatune katalogas"
 
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Temkite, kad pakeisti poziciją"
 
 msgid "Drive letter"
-msgstr ""
+msgstr "Disko raidė"
 
 msgid "Dynamic mode is on"
-msgstr ""
+msgstr "Dinaminė veiksena yra įjungta"
 
 msgid "Dynamic random mix"
-msgstr ""
+msgstr "Dinaminis atsitiktinis maišymas"
 
 msgid "Edit smart playlist..."
-msgstr ""
+msgstr "Taisyti išmanųjį grojaraštį..."
 
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Taisyti žymą \"%1\"..."
 
 msgid "Edit tag..."
-msgstr ""
+msgstr "Taisyti žymę..."
 
 msgid "Edit tags"
-msgstr ""
+msgstr "Taisyti žymes"
 
 msgid "Edit track information"
-msgstr ""
+msgstr "Taisyti takelio informaciją"
 
 msgid "Edit track information..."
-msgstr ""
+msgstr "Taisyti takelio informaciją..."
 
 msgid "Edit tracks information..."
-msgstr ""
+msgstr "Taisyti takelių informaciją..."
 
 msgid "Edit..."
-msgstr ""
+msgstr "Keisti..."
 
 msgid "Enable"
-msgstr ""
+msgstr "Įgalinti"
 
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Įgalinti Wii nuotolinio pulto palaikymą"
 
 msgid "Enable equalizer"
-msgstr ""
+msgstr "Įjungti glodintuvą"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "Įgalinti kombinacijas tik tada kai Clementine yra aktyvus"
 
 msgid "Enqueue to playlist"
-msgstr ""
+msgstr "Įdėti į grojaraščio eilę"
 
 msgid "Enter a name for the new playlist"
-msgstr ""
+msgstr "Įveskite naujo grojaraščio pavadinimą"
 
 msgid "Enter a new name for this playlist"
-msgstr ""
+msgstr "Įveskite naują pavadinimą šiam grojaraščiui"
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
+"Įveskite <b>atlikėją</b> arba <b>žymę</b>, kad pradėti klausytis Last.fm "
+"radijo."
 
 msgid "Enter search terms here"
-msgstr ""
+msgstr "Įveskite paieškos žodžius čia"
 
 msgid "Enter the URL of an internet radio stream:"
-msgstr ""
+msgstr "Įveskite internetinio radijo srauto URL:"
 
 msgid "Entire collection"
-msgstr ""
+msgstr "Visa kolekcija"
 
 msgid "Equalizer"
-msgstr ""
+msgstr "Glodintuvas"
 
 msgid "Error"
-msgstr ""
+msgstr "Klaida"
 
 msgid "Error connecting MTP device"
-msgstr ""
+msgstr "Klaida prijungiant MTP įrenginį"
 
 msgid "Error copying songs"
-msgstr ""
+msgstr "Klaida kopijuojant dainas"
 
 msgid "Error deleting songs"
-msgstr ""
+msgstr "Klaida trinant dainas"
 
 #, qt-format
 msgid "Error loading %1"
-msgstr ""
+msgstr "Klaida įkeliant %1"
 
 #, qt-format
 msgid "Error processing %1: %2"
-msgstr ""
+msgstr "Klaida apdorojant %1: %2"
 
 msgid "Ever played"
-msgstr ""
+msgstr "Bet kada grota"
 
 msgid "Extras"
-msgstr ""
+msgstr "Ekstra"
 
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 msgid "F5"
-msgstr ""
+msgstr "F5"
 
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
 msgid "F7"
-msgstr ""
+msgstr "F7"
 
 msgid "F8"
-msgstr ""
+msgstr "F8"
 
 msgid "FLAC"
-msgstr ""
+msgstr "FLAC"
 
 msgid "Fade out when stopping a track"
-msgstr ""
+msgstr "Palaipsniui nutilti kai stabdomas takelis"
 
 msgid "Fading"
-msgstr ""
+msgstr "Pradingimas"
 
 msgid "Fading duration"
-msgstr ""
+msgstr "Suliejimo trukmė"
 
 msgid "Favourite tracks"
-msgstr ""
+msgstr "Megstami takeliai"
 
 msgid "Fetch Missing Covers"
-msgstr ""
+msgstr "Gauti trūkstamus albumų viršelius"
 
 msgid "Fetch automatically"
-msgstr ""
+msgstr "Gauti automatiškai"
 
 msgid "File extension"
-msgstr ""
+msgstr "Failo plėtinys"
 
 msgid "File formats"
-msgstr ""
+msgstr "Failų formatai"
 
 msgid "File name"
-msgstr ""
+msgstr "Failo vardas"
 
 msgid "File name (without path)"
-msgstr ""
+msgstr "Failo vardas (be kelio)"
 
 msgid "File size"
-msgstr ""
+msgstr "Failo dydis"
 
 msgid "File type"
-msgstr ""
+msgstr "Failo tipas"
 
 msgid "Filename"
-msgstr ""
+msgstr "Failopavadinimas"
 
 msgid "Files"
-msgstr ""
+msgstr "Failai"
 
 msgid "Files to transcode"
-msgstr ""
+msgstr "Failai perkodavimui"
 
 msgid "Filesystem name"
-msgstr ""
+msgstr "Failų sistemos pavadinimas"
 
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Failų sistemos serijinis numeris"
 
 msgid "Filesystem type"
-msgstr ""
+msgstr "Failų sistemos tipas"
 
 msgid "Find songs in your library that match the criteria you specify."
-msgstr ""
+msgstr "Rasti fonotekoje dainas, kurios atitinka jūsų nurodytus kriterijus."
 
 msgid "Finish"
-msgstr ""
+msgstr "Baigti"
 
 msgid "First level"
-msgstr ""
+msgstr "Pirmas lygis"
 
 msgid "Flac"
-msgstr ""
+msgstr "Flac"
 
 msgid "Font size"
-msgstr ""
+msgstr "Šrifto dydis"
 
 msgid "Forget device"
-msgstr ""
+msgstr "Pamiršti įrenginį"
 
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
 msgstr ""
+"Pamirštant įrenginys bus pašalintas iš šio sąrašo ir Clementine turės vėl  "
+"skenuoti visas dainas kai kitą kartą prijungsite šį įrenginį."
 
 msgid "Form"
-msgstr ""
+msgstr "Forma"
 
 msgid "Format"
-msgstr ""
+msgstr "Formatas"
 
 msgid "Framerate"
-msgstr ""
+msgstr "Kadrų dažnis"
 
 msgid "Friends"
-msgstr ""
+msgstr "Draugai"
 
 msgid "Full Bass"
-msgstr ""
+msgstr "Visi žemi tonai"
 
 msgid "Full Bass + Treble"
-msgstr ""
+msgstr "Visi žemi ir aukšti tonai"
 
 msgid "Full Treble"
-msgstr ""
+msgstr "Visi aukšti tonai"
 
 msgid "GStreamer audio engine"
-msgstr ""
+msgstr "GStreamer audio variklis"
 
 msgid "General settings"
-msgstr ""
+msgstr "Pagrindiniai nustatymai"
 
 msgid "Generating audio fingerprint and fetching results..."
-msgstr ""
+msgstr "Generuojamas audio parašas ir gaunami duomenys"
 
 msgid "Genre"
-msgstr ""
+msgstr "Žanras"
 
 msgid "Get new scripts"
-msgstr ""
+msgstr "Gauti naujus skriptus"
 
 msgid "Getting channels"
-msgstr ""
+msgstr "gaunami kanalai"
 
 msgid "Give it a name:"
-msgstr ""
+msgstr "Suteikti pavadinimą"
 
 msgid "Global Shortcuts"
-msgstr ""
+msgstr "Klavišų kombinacijos"
 
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr ""
+msgstr "VaizdasGauta %1 viršelių iš %2 (%3 nepavyko)"
 
 msgid "Group Library by..."
-msgstr ""
+msgstr "Grupuoti fonoteką pagal..."
 
 msgid "Group by"
-msgstr ""
+msgstr "Grupuoti pagal"
 
 msgid "Group by Album"
-msgstr ""
+msgstr "Grupuoti pagal Albumą"
 
 msgid "Group by Artist"
-msgstr ""
+msgstr "Grupuoti  pagal Atlikėją"
 
 msgid "Group by Artist/Album"
-msgstr ""
+msgstr "Grupuoti  pagal Atlikėją/Albumą"
 
 msgid "Group by Artist/Year - Album"
-msgstr ""
+msgstr "Grupuoti  pagal Atlikėją/Metus - Albumą"
 
 msgid "Group by Genre/Album"
-msgstr ""
+msgstr "Grupuoti pagal Žanrą/Albumą"
 
 msgid "Group by Genre/Artist/Album"
-msgstr ""
+msgstr "Grupuoti pagal Žanrą/Atlikėją/Albumą"
 
 msgid "HTTP proxy"
-msgstr ""
+msgstr "HTTP įgaliotasis serveris"
 
 msgid "Hardware information"
-msgstr ""
+msgstr "Įrangos informacija"
 
 msgid "Hardware information is only available while the device is connected."
-msgstr ""
+msgstr "Aparatūros informacija prieinama tik kai įrenginys yra prijungtas."
 
 msgid "Help"
-msgstr ""
+msgstr "Pagalba"
 
 msgid "High (1024x1024)"
-msgstr ""
+msgstr "Aukšta (1024x1024)"
 
 msgid "High (35 fps)"
-msgstr ""
+msgstr "Aukštas (35 kps)"
 
 msgid "Hypnotoad"
-msgstr ""
+msgstr "Hypnotoad'as"
 
 msgid "I don't have a Magnatune account"
-msgstr ""
+msgstr "Aš neturiu Magnatune paskyros"
 
 msgid "Icon"
-msgstr ""
+msgstr "Piktograma"
 
 msgid "Icons on top"
-msgstr ""
+msgstr "Piktogramos viršuje"
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
 "work."
 msgstr ""
+"Jei tęsite, šis įrenginys dirbs lėtai ir nukopijuotos dainos gali nedirbti."
 
 msgid "Ignore \"The\" in artist names"
-msgstr ""
+msgstr "Nepaisyti \"The\" atlikėjų varduose"
 
 msgid ""
 "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 msgstr ""
+"Paveikslai (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
+"*.tiff)"
 
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes.  Enabling dynamic mode will ignore any size limit you "
 "set on the playlist."
 msgstr ""
+"Dinaminėje veiksenoje nauji takeliai bus išrinkti ir įdėti į grojaraštį kas "
+"kartą kai daina baigiasi. Dinaminės veiksenos įgalinimas nepaisys jokio "
+"dydžio apribojimo, kurį nustatėte  grojaraščiui."
 
 msgid "Include album art in the notification"
-msgstr ""
+msgstr "Rodyti albumo paveikslus pranešime"
 
 msgid "Include all songs"
-msgstr ""
+msgstr "Įtraukti visas dainas"
 
 msgid "Increase the volume by 4%"
-msgstr ""
+msgstr "Pagarsinti 4%"
 
 msgid "Increase volume"
-msgstr ""
+msgstr "Pagarsinti"
 
 msgid "Information"
-msgstr ""
+msgstr "Informacija"
 
 msgid "Insert..."
-msgstr ""
+msgstr "Įterpti..."
 
 msgid "Internet"
-msgstr ""
+msgstr "Internetas"
 
 msgid "Invalid API key"
-msgstr ""
+msgstr "Netinkamas API raktas"
 
 msgid "Invalid format"
-msgstr ""
+msgstr "Netinkamas formatas"
 
 msgid "Invalid method"
-msgstr ""
+msgstr "Netinkamas metodas"
 
 msgid "Invalid parameters"
-msgstr ""
+msgstr "Netinkami parametrai"
 
 msgid "Invalid resource specified"
-msgstr ""
+msgstr "Nurodytas netinkamas šaltinis"
 
 msgid "Invalid service"
-msgstr ""
+msgstr "Netinkama paslauga"
 
 msgid "Invalid session key"
-msgstr ""
+msgstr "Netinkamas sesijos raktas"
 
 msgid "Jamendo Most Listened Tracks"
-msgstr ""
+msgstr "Jamendo Daugiausia klausyti takeliai"
 
 msgid "Jamendo Top Tracks"
-msgstr ""
+msgstr "Jamendo Top takeliai"
 
 msgid "Jamendo Top Tracks of the Month"
-msgstr ""
+msgstr "Jamendo mėnesio Top takeliai"
 
 msgid "Jamendo Top Tracks of the Week"
-msgstr ""
+msgstr "Jamendo savaitės Top takelia"
 
 msgid "Jump to the currently playing track"
-msgstr ""
+msgstr "Peršokti prie dabar grojamo takelio"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Laikykite mygtukus %1 sek."
 
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Laikyti mygtukus %1 sekundžių..."
 
 msgid "Keep running in the background when the window is closed"
-msgstr ""
+msgstr "Veikti fone kai langas uždaromas"
 
 msgid "Keep the original files"
-msgstr ""
+msgstr "Palikti originialius failus"
 
 msgid "Kittens"
-msgstr ""
+msgstr "Kačiukai"
 
 msgid "Language"
-msgstr ""
+msgstr "Kalba"
 
 msgid "Laptop/Headphones"
-msgstr ""
+msgstr "Nešiojamojo kompiuterio kolonėlės/ausinės"
 
 msgid "Large Hall"
-msgstr ""
+msgstr "Didelė salė"
 
 msgid "Large album cover"
-msgstr ""
+msgstr "Didelis albumo viršelio paveikslėlis"
 
 msgid "Large sidebar"
-msgstr ""
+msgstr "Didelė juosta"
 
 msgid "Last played"
-msgstr ""
+msgstr "Vėliausiai grota"
 
 msgid "Last.fm"
-msgstr ""
+msgstr "Last.fm"
 
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
-msgstr ""
+msgstr "Last.fm Savitas Radijas: %1"
 
 #, qt-format
 msgid "Last.fm Library - %1"
-msgstr ""
+msgstr "Last.fm Biblioteka - %1"
 
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
-msgstr ""
+msgstr "Last.fm Mix Radijas - %1"
 
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
-msgstr ""
+msgstr "Last.fm Kaimyninis Radijas - %1"
 
 #, qt-format
 msgid "Last.fm Radio Station - %1"
-msgstr ""
+msgstr "Last.fm Radijo Stotis - %1"
 
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
-msgstr ""
+msgstr "Last.fm Panašūs Atlikėjai į %1"
 
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
-msgstr ""
+msgstr "Last.fm Žymės Radijas: %1"
 
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr ""
+msgstr "Last.fm šiuo metu užimtas, prašome pamėginti po kelių minučių"
 
 msgid "Last.fm password"
-msgstr ""
+msgstr "Last.fm slaptažodis"
 
 msgid "Last.fm play counts"
-msgstr ""
+msgstr "Last.fm grojimų skaitliukas"
 
 msgid "Last.fm tags"
-msgstr ""
+msgstr "Last.fm žymės"
 
 msgid "Last.fm username"
-msgstr ""
+msgstr "Last.fm naudotojo vardas"
 
 msgid "Last.fm wiki"
-msgstr ""
+msgstr "Last.fm wiki"
 
 msgid "Least favourite tracks"
-msgstr ""
+msgstr "Mažiausiai populiarūs takeliai"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
+"Palikite tuščią numatytoms reikšmėms. Pavyzdžiai: \"/dev/dsp\", \"front\", "
+"ir t.t."
 
 msgid "Length"
-msgstr ""
+msgstr "Trukmė"
 
 msgid "Library"
-msgstr ""
+msgstr "Fonoteka"
 
 msgid "Library advanced grouping"
-msgstr ""
+msgstr "Sudėtingesnis fonotekos grupavimas"
 
 msgid "Library search"
-msgstr ""
+msgstr "Fonotekos paieška"
 
 msgid "Limits"
-msgstr ""
+msgstr "Apribojimai"
 
 msgid "Live"
-msgstr ""
+msgstr "Gyvai"
 
 msgid "Load"
-msgstr ""
+msgstr "Įkelti"
 
 msgid "Load cover from disk..."
-msgstr ""
+msgstr "Įkelti viršelį iš disko..."
 
 msgid "Load playlist"
-msgstr ""
+msgstr "Įkelti grojaraštį"
 
 msgid "Load playlist..."
-msgstr ""
+msgstr "Įkelti grojaraštį..."
 
 msgid "Loading Last.fm radio"
-msgstr ""
+msgstr "Įkeliama Last.fm radijo stotis"
 
 msgid "Loading MTP device"
-msgstr ""
+msgstr "Įkeliamas MTP įrenginys"
 
 msgid "Loading Windows Media device"
-msgstr ""
+msgstr "Įkeliamas Windows Media įrenginys"
 
 msgid "Loading iPod database"
-msgstr ""
+msgstr "Įkeliama iPod duomenų bazė"
 
 msgid "Loading smart playlist"
-msgstr ""
+msgstr "Įkeliamas išmanusis grojaraštis"
 
 msgid "Loading stream"
-msgstr ""
+msgstr "Įkeliamas srautas"
 
 msgid "Loading tracks"
-msgstr ""
+msgstr "Įkeliami takeliai"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Įkeliama..."
 
 msgid "Loads files/URLs, replacing current playlist"
-msgstr ""
+msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 
 msgid "Love"
-msgstr ""
+msgstr "Meilė"
 
 msgid "Low (15 fps)"
-msgstr ""
+msgstr "Žemas (15 kps)"
 
 msgid "Low (256x256)"
-msgstr ""
+msgstr "Žema (256x256)"
 
 msgid "Lyrics"
-msgstr ""
+msgstr "Dainų žodžiai"
 
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "Žodžiai iš %1"
 
 msgid "MP3"
-msgstr ""
+msgstr "MP3"
 
 msgid "MP4 AAC"
-msgstr ""
+msgstr "MP4 AAC"
 
 msgid "MPC"
-msgstr ""
+msgstr "MPC"
 
 msgid "Magnatune"
-msgstr ""
+msgstr "Magnatune"
 
 msgid "Magnatune Download"
-msgstr ""
+msgstr "Magnatune atsiuntimas"
 
 msgid "Magnatune download finished"
-msgstr ""
+msgstr "Magnatune  atsiuntimas baigtas"
 
 msgid "Malformed response"
-msgstr ""
+msgstr "Netinkamas atsakymas"
 
 msgid "Manual proxy configuration"
-msgstr ""
+msgstr "Rankinis tarpinės stoties konfigūravimas"
 
 msgid "Manufacturer"
-msgstr ""
+msgstr "Gamintojas"
 
 msgid "Match every search term (AND)"
-msgstr ""
+msgstr "Atitikti kiekvieną paieškos frazę (IR)"
 
 msgid "Match one or more search terms (OR)"
-msgstr ""
+msgstr "Atitinka vieną ar daugiau paieškos frazių (ARBA)"
 
 msgid "Medium (25 fps)"
-msgstr ""
+msgstr "Vidutinis (25 kps)"
 
 msgid "Medium (512x512)"
-msgstr ""
+msgstr "Vidutinė (512x512)"
 
 msgid "Membership type"
-msgstr ""
+msgstr "Narystės tipas"
 
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "Trūksta projectM šablonų"
 
 msgid "Model"
-msgstr ""
+msgstr "Modelis"
 
 msgid "Monitor the library for changes"
-msgstr ""
+msgstr "Stebėti fonoteką dėl pasikeitimų"
 
 msgid "Most played"
-msgstr ""
+msgstr "Dažniausiai grota"
 
 msgid "Mount point"
-msgstr ""
+msgstr "Prijungimo vieta"
 
 msgid "Mount points"
-msgstr ""
+msgstr "Prijungimo vietos"
 
 msgid "Move down"
-msgstr ""
+msgstr "Perkelti žemyn"
 
 msgid "Move to library..."
-msgstr ""
+msgstr "Perkelti į fonoteką"
 
 msgid "Move up"
-msgstr ""
+msgstr "Perkelti aukštyn"
 
 msgid "Music"
-msgstr ""
+msgstr "Muzika"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr ""
+"Muzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
-msgstr ""
+msgstr "Fonoteka"
 
 msgid "Mute"
-msgstr ""
+msgstr "Nutildyti"
 
 msgid "My Last.fm Library"
-msgstr ""
+msgstr "Mano Last.fm fonoteka"
 
 msgid "My Last.fm Mix Radio"
-msgstr ""
+msgstr "Mano Last.fm Mix radijas"
 
 msgid "My Last.fm Neighborhood"
-msgstr ""
+msgstr "Mano Last.fm kaiminystė"
 
 msgid "My Last.fm Recommended Radio"
-msgstr ""
+msgstr "Mano Last.fm rekomenduotos stotys"
 
 msgid "My Mix Radio"
-msgstr ""
+msgstr "Mano Mix radijas"
 
 msgid "My Neighborhood"
-msgstr ""
+msgstr "Mano kaiminystė"
 
 msgid "My Radio Station"
-msgstr ""
+msgstr "Mano radijo stotis"
 
 msgid "My Recommendations"
-msgstr ""
+msgstr "Mano rekomendacijos"
 
 msgid "My scripts"
-msgstr ""
+msgstr "Mano scenarijai"
 
 msgid "Name"
-msgstr ""
+msgstr "Veiksmas"
 
 msgid "Naming options"
-msgstr ""
+msgstr "Pavadinimų nustatymai"
 
 msgid "Neighbors"
-msgstr ""
+msgstr "Kaimynai"
 
 msgid "Network"
-msgstr ""
+msgstr "Tinklas"
 
 msgid "Network Proxy"
-msgstr ""
+msgstr "Tinklo įgaliotasis serveris"
 
 msgid "Never"
-msgstr ""
+msgstr "Naujesni"
 
 msgid "Never played"
-msgstr ""
+msgstr "Niekada negrota"
 
 msgid "New playlist"
-msgstr ""
+msgstr "Naujas grojaraštis"
 
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Naujas išmanusis grojaraštis..."
 
 msgid "New songs"
-msgstr ""
+msgstr "Naujos dainos"
 
 msgid "New tracks will be added automatically."
-msgstr ""
+msgstr "Nauji takeliai bus pridėti automatiškai."
 
 msgid "Newest tracks"
-msgstr ""
+msgstr "Naujausi takeliai"
 
 msgid "Next"
-msgstr ""
+msgstr "Toliau"
 
 msgid "Next track"
-msgstr ""
+msgstr "Kitas takelis"
 
 msgid "No analyzer"
-msgstr ""
+msgstr "Jokio analizatoriaus"
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
+"Nieko nerasta. Išvalykite paieškos laukelį, kad vėl matyti visą sąrašą."
 
 msgid "None"
-msgstr ""
+msgstr "Nėra"
 
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr ""
+msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
 msgid "Not available while using a dynamic playlist"
-msgstr ""
+msgstr "Negalimas naudojant dinaminį grojaraštį"
 
 msgid "Not connected"
-msgstr ""
+msgstr "Neprisijungus"
 
 msgid "Not enough content"
-msgstr ""
+msgstr "Nepakanka turinio"
 
 msgid "Not enough fans"
-msgstr ""
+msgstr "Nepakanka gerbėjų"
 
 msgid "Not enough members"
-msgstr ""
+msgstr "Nepakanka narių"
 
 msgid "Not enough neighbors"
-msgstr ""
+msgstr "Nepakanka kaimynų"
 
 msgid "Not mounted - double click to mount"
-msgstr ""
+msgstr "Neprijungtas - du kartus spragtelėkite, kad prijungti"
 
 msgid "Notification type"
-msgstr ""
+msgstr "Pranešimo tipas"
 
 msgid "Notifications"
-msgstr ""
+msgstr "Pranešimai"
 
 msgid "Now Playing"
-msgstr ""
+msgstr "Dabar leidžiama"
 
 msgid "OSD Preview"
-msgstr ""
+msgstr "OSD peržiūra"
 
 msgid "Ogg Flac"
-msgstr ""
+msgstr "Ogg Flac"
 
 msgid "Ogg Speex"
-msgstr ""
+msgstr "Ogg Speex"
 
 msgid "Ogg Vorbis"
-msgstr ""
+msgstr "Ogg Vorbis"
 
 msgid "Only show the first"
-msgstr ""
+msgstr "Rodyti tik pirmą"
 
 msgid "Open device"
-msgstr ""
+msgstr "Atverti įrenginį"
 
 msgid "Open dir.xiph.org in browser"
-msgstr ""
+msgstr "Atverti dir.xiph.org interneto naršyklėje"
 
 msgid "Open jamendo.com in browser"
-msgstr ""
+msgstr "Atverti jamendo.com interneto naršyklėje"
 
 msgid "Open magnatune.com in browser"
-msgstr ""
+msgstr "Atverti magnatune.com interneto naršyklėje"
 
 msgid "Open media..."
-msgstr ""
+msgstr "Atverti media..."
 
 msgid "Open somafm.com in browser"
-msgstr ""
+msgstr "Atverti somafm.com interneto naršyklėje"
 
 msgid "Open..."
-msgstr ""
+msgstr "Atverti..."
 
 msgid "Operation failed"
-msgstr ""
+msgstr "Operacija nepavyko"
 
 msgid "Organise Files"
-msgstr ""
+msgstr "Tvarkyti failus"
 
 msgid "Organise files..."
-msgstr ""
+msgstr "Tvarkyti failus..."
 
 msgid "Organising files"
-msgstr ""
+msgstr "Tvarkomi failai"
 
 msgid "Other options"
-msgstr ""
+msgstr "Kitos parinktys"
 
 msgid "Output device"
-msgstr ""
+msgstr "Išvesties įrenginys"
 
 msgid "Output options"
-msgstr ""
+msgstr "Išvesties parinktys"
 
 msgid "Output plugin"
-msgstr ""
+msgstr "Išvesties įskiepis"
 
 msgid "Overwrite existing files"
-msgstr ""
+msgstr "Perrašyti egzistuojančius failus"
 
 msgid "Parsing Jamendo catalogue"
-msgstr ""
+msgstr "Apdorojamas Jamendo katalogas"
 
 msgid "Party"
-msgstr ""
+msgstr "Vakarėlis"
 
 msgid "Password"
-msgstr ""
+msgstr "Slaptažodis"
 
 msgid "Password Protected"
-msgstr ""
+msgstr "Apsaugota slaptažodžiu"
 
 msgid "Pause"
-msgstr ""
+msgstr "Pristabdyti"
 
 msgid "Pause playback"
-msgstr ""
+msgstr "Sulaikyti grojimą"
 
 msgid "Paused"
-msgstr ""
+msgstr "Pristabdyta"
 
 msgid "Plain sidebar"
-msgstr ""
+msgstr "Paprasta juosta"
 
 msgid "Play"
-msgstr ""
+msgstr "Groti"
 
 msgid "Play Artist or Tag"
-msgstr ""
+msgstr "Groti Atlikėją ar Žymę"
 
 msgid "Play artist radio..."
-msgstr ""
+msgstr "Groti Atlikėjoradijo stotį"
 
 msgid "Play count"
-msgstr ""
+msgstr "Grojimo skaitiklis"
 
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Groti savitą radijo stotį..."
 
 msgid "Play from my Library"
-msgstr ""
+msgstr "Groti iš mano fonotekos"
 
 msgid "Play if stopped, pause if playing"
-msgstr ""
+msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 
 msgid "Play last.fm artist radio"
-msgstr ""
+msgstr "Play last.fm atklikėjo radijas"
 
 msgid "Play last.fm tag radio"
-msgstr ""
+msgstr "Play last.fm žymės radijas"
 
 msgid "Play tag radio..."
-msgstr ""
+msgstr "Groti pažymėtą radijo stotį..."
 
 msgid "Play the <n>th track in the playlist"
-msgstr ""
+msgstr "Groti <n> takelį grojaraštyje"
 
 msgid "Play/Pause"
-msgstr ""
+msgstr "Groti/Pristabdyti"
 
 msgid "Playback"
-msgstr ""
+msgstr "Grojimas"
 
 msgid "Player options"
-msgstr ""
+msgstr "Leistuvo parinktys"
 
 msgid "Playlist"
-msgstr ""
+msgstr "Grojaraštis"
 
 msgid "Playlist finished"
-msgstr ""
+msgstr "Grojaraštis baigtas"
 
 msgid "Playlist options"
-msgstr ""
+msgstr "Grojaraščio parinktys"
 
 msgid "Playlist search"
-msgstr ""
+msgstr "Ieškoti grojaraštyje"
 
 msgid "Playlist type"
-msgstr ""
+msgstr "Grojaraščio tipas"
 
 msgid "Pop"
-msgstr ""
+msgstr "Pop"
 
 msgid "Popup duration"
-msgstr ""
+msgstr "Pranešino rodymo trukmė"
 
 msgid "Port"
-msgstr ""
+msgstr "Prievadas"
 
 msgid "Pre-amp"
-msgstr ""
+msgstr "Sustiprinti"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Nustatymai"
 
 msgid "Preferences..."
-msgstr ""
+msgstr "Nustatymai..."
 
 msgid "Preferred album art filenames (comma separated)"
 msgstr ""
+"Pageidaujamas viršelio paveikslėlio failo pavadinimas (atskirta kableliais)"
 
 msgid "Preferred audio format"
-msgstr ""
+msgstr "Pageidaujamas audio formatas"
 
 msgid "Preferred format"
-msgstr ""
+msgstr "Pageidaujamas formatas"
 
 msgid "Preset:"
-msgstr ""
+msgstr "Šablonas:"
 
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "Spauskite mygtukų kombinaciją panaudojimui"
 
 msgid "Press a key"
-msgstr ""
+msgstr "Paspauskite klavišą"
 
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "Spauskite mygtukų kombinaciją panaudojimui  %1..."
 
 msgid "Pretty OSD options"
-msgstr ""
+msgstr "Gražus OSD"
 
 msgid "Preview"
-msgstr ""
+msgstr "Peržiūra"
 
 msgid "Previous"
-msgstr ""
+msgstr "Atgal"
 
 msgid "Previous track"
-msgstr ""
+msgstr "Ankstesnis takelis"
 
 msgid "Progress"
-msgstr ""
+msgstr "Progresas"
 
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "Spauskite Wii pulto mygtuką"
 
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "Dėti dainas atsitiktine tvarka"
 
 msgid "Quality"
-msgstr ""
+msgstr "Kokybė"
 
 msgid "Querying device..."
-msgstr ""
+msgstr "Pateikiama užklausa įrenginiui..."
 
 msgid "Queue Manager"
-msgstr ""
+msgstr "Eilės tvarkyklė"
 
 msgid "Queue selected tracks"
-msgstr ""
+msgstr "į eilę pažymėtus takelius"
 
 msgid "Queue track"
-msgstr ""
+msgstr "į eilę takelį"
 
 msgid "Radio (equal loudness for all tracks)"
-msgstr ""
+msgstr "Radijas (vienodas garsumas visiems takeliams)"
 
 msgid "Rain"
-msgstr ""
+msgstr "Lietus"
 
 msgid "Random visualization"
-msgstr ""
+msgstr "Atsitiktinis vaizdinys"
 
 msgid "Rate the current song 0 stars"
-msgstr ""
+msgstr "Įvertinti šią dainą 0 žvaigždžių"
 
 msgid "Rate the current song 1 star"
-msgstr ""
+msgstr "Įvertinti šią dainą 1 žvaigžde"
 
 msgid "Rate the current song 2 stars"
-msgstr ""
+msgstr "Įvertinti šią dainą 2 žvaigždėmis"
 
 msgid "Rate the current song 3 stars"
-msgstr ""
+msgstr "Įvertinti šią dainą 3 žvaigždėmis"
 
 msgid "Rate the current song 4 stars"
-msgstr ""
+msgstr "Įvertinti šią dainą 4 žvaigždėmis"
 
 msgid "Rate the current song 5 stars"
-msgstr ""
+msgstr "Įvertinti šią dainą 5 žvaigždėmis"
 
 msgid "Rating"
-msgstr ""
+msgstr "Įvertinimas"
 
 msgid "Really cancel?"
-msgstr ""
+msgstr "Tikrai atšaukti?"
 
 msgid "Refresh catalogue"
-msgstr ""
+msgstr "Atnaujinti katalogus"
 
 msgid "Refresh channels"
-msgstr ""
+msgstr "Atnaujinti kanalus"
 
 msgid "Refresh station list"
-msgstr ""
+msgstr "Atnaujinti stočių sąrašą"
 
 msgid "Reggae"
-msgstr ""
+msgstr "Regis"
 
 msgid "Reload"
-msgstr ""
+msgstr "Įkelti iš naujo"
 
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Prisiminti Wii pulto pasukimą"
 
 msgid "Remember from last time"
-msgstr ""
+msgstr "Prisiminti paskutinio karto būseną"
 
 msgid "Remove"
-msgstr ""
+msgstr "Pašalinti"
 
 msgid "Remove action"
-msgstr ""
+msgstr "Pašalinti veiksmą"
 
 msgid "Remove folder"
-msgstr ""
+msgstr "Pašalinti aplanką"
 
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Ištrinti iš grojaraščio"
 
 msgid "Remove playlist"
-msgstr ""
+msgstr "Pašalinti grojaraštį"
 
 msgid "Rename playlist"
-msgstr ""
+msgstr "Pervadinti grojaraštį"
 
 msgid "Rename playlist..."
-msgstr ""
+msgstr "Pervadinti grojaraštį..."
 
 msgid "Renumber tracks in this order..."
-msgstr ""
+msgstr "Pernumeruoti takelius šia tvarka..."
 
 msgid "Repeat"
-msgstr ""
+msgstr "Kartoti"
 
 msgid "Repeat album"
-msgstr ""
+msgstr "Kartoti albumą"
 
 msgid "Repeat mode"
-msgstr ""
+msgstr "Kartojimo režimas"
 
 msgid "Repeat playlist"
-msgstr ""
+msgstr "Kartoti grojaraštį"
 
 msgid "Repeat track"
-msgstr ""
+msgstr "Kartoti takelį"
 
 msgid "Replaces spaces with underscores"
-msgstr ""
+msgstr "Pakeisti tarpus pabraukimo simboliais"
 
 msgid "Replay Gain"
-msgstr ""
+msgstr "Garsumo suvienodinimas"
 
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Garsumo suvienodinimo veiksena"
 
 msgid "Repopulate"
-msgstr ""
+msgstr "Užpildyti naujai"
 
 msgid "Reset"
-msgstr ""
+msgstr "Atstatyti"
 
 msgid "Reset play counts"
-msgstr ""
+msgstr "Atstatyti perklausų skaičių"
 
 msgid "Restrict to ASCII characters"
-msgstr ""
+msgstr "Naudoti tik SCII simbolius"
 
 msgid "Rock"
-msgstr ""
+msgstr "Rokas"
 
 msgid "SOCKS proxy"
-msgstr ""
+msgstr "SOCKS įgaliotasis serveris"
 
 msgid "Safely remove device"
-msgstr ""
+msgstr "Saugiai pašalinti įrenginį"
 
 msgid "Safely remove the device after copying"
-msgstr ""
+msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 
 msgid "Sample rate"
-msgstr ""
+msgstr "Išrankos dažnis"
 
 msgid "Samplerate"
-msgstr ""
+msgstr "Išrankosdažnis"
 
 msgid "Save image"
-msgstr ""
+msgstr "Išsaugoti paveikslėlį"
 
 msgid "Save playlist"
-msgstr ""
+msgstr "Įrašyti grojaraštį"
 
 msgid "Save playlist..."
-msgstr ""
+msgstr "Įrašyti grojaraštį..."
 
 msgid "Save preset"
-msgstr ""
+msgstr "Išsaugoti šabloną"
 
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Išsaugoti šį srautą interneto kortelėje"
 
 msgid "Saving tracks"
-msgstr ""
+msgstr "Išsaugomi takeliai"
 
 msgid "Score"
-msgstr ""
+msgstr "Įvertinimas"
 
 msgid "Script Manager"
-msgstr ""
+msgstr "Scenarijų tvarkyklė"
 
 msgid "Scrobble tracks that I listen to"
-msgstr ""
+msgstr "Pateikti klausomų takelių informaciją"
 
 msgid "Search"
-msgstr ""
+msgstr "Ieškoti"
 
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "Ieškoti Icecast stočių"
 
 msgid "Search Jamendo"
-msgstr ""
+msgstr "Ieškoti Jamendo"
 
 msgid "Search Magnatune"
-msgstr ""
+msgstr "Ieškoti Magnatune"
 
 msgid "Search for album covers..."
-msgstr ""
+msgstr "Ieškoti albumo viršelių..."
 
 msgid "Search mode"
-msgstr ""
+msgstr "Paieškos veiksena"
 
 msgid "Search options"
-msgstr ""
+msgstr "Paieškos parinktys"
 
 msgid "Search terms"
-msgstr ""
+msgstr "Paieškos terminai"
 
 msgid "Second level"
-msgstr ""
+msgstr "Antras lygis"
 
 msgid "Seek backward"
-msgstr ""
+msgstr "Sukti atgal"
 
 msgid "Seek forward"
-msgstr ""
+msgstr "Sukti į priekį"
 
 msgid "Seek the currently playing track by a relative amount"
-msgstr ""
+msgstr "Rasti dabar grojamą takelį pagal santykinį kiekį"
 
 msgid "Seek the currently playing track to an absolute position"
-msgstr ""
+msgstr "Rasti dabar grojamą takelį į absoliučiąją poziciją"
 
 msgid "Select All"
-msgstr ""
+msgstr "Pažymėti visus"
 
 msgid "Select None"
-msgstr ""
+msgstr "N"
 
 msgid "Select visualizations"
-msgstr ""
+msgstr "Pasirinkti vaizdinius"
 
 msgid "Select visualizations..."
-msgstr ""
+msgstr "Parinkti vaizdinius"
 
 msgid "Serial number"
-msgstr ""
+msgstr "Serijos numeris"
 
 msgid "Service offline"
-msgstr ""
+msgstr "Servisas nepasiekiamas"
 
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr ""
+msgstr "Nustatyti %1 į \"%2\"..."
 
 msgid "Set the volume to <value> percent"
-msgstr ""
+msgstr "Nustatyti garsumą iki <value> procentų"
 
 msgid "Set value for all selected tracks..."
-msgstr ""
+msgstr "Nustatyti vertę visiems pažymėtiems takeliams..."
 
 msgid "Settings..."
-msgstr ""
+msgstr "Nuostatos..."
 
 msgid "Shortcut"
-msgstr ""
+msgstr "Kombinacija"
 
 #, qt-format
 msgid "Shortcut for %1"
-msgstr ""
+msgstr "Kombinacija veiksmui: %1"
 
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr ""
+msgstr "Kombinacija veiksmui %1 jau egzistuoja"
 
 msgid "Show"
-msgstr ""
+msgstr "Rodyti"
 
 msgid "Show OSD"
-msgstr ""
+msgstr "Rodyti OSD"
 
 msgid "Show a glowing animation on the current track"
-msgstr ""
+msgstr "Švytėjimo efektas ant dabar grojamo takelio"
 
 msgid "Show a native desktop notification"
-msgstr ""
+msgstr "Rodyti numatytą darbastalio pranešimą"
 
 msgid "Show a notification when I change the volume"
-msgstr ""
+msgstr "Rodyti pranešimą kai keičiu garsumą"
 
 msgid "Show a popup from the system tray"
-msgstr ""
+msgstr "Rodyti iššokantį langą iš sistemos dėklo"
 
 msgid "Show a pretty OSD"
-msgstr ""
+msgstr "Rodyti gražų OSD"
 
 msgid "Show above status bar"
-msgstr ""
+msgstr "Rodyti virš būsenos juostos"
 
 msgid "Show all the songs"
-msgstr ""
+msgstr "Rodyti visas dainas"
 
 msgid "Show cover art in library"
-msgstr ""
+msgstr "Rodyti albumo viršelius fonotekoje"
 
 msgid "Show fullsize..."
-msgstr ""
+msgstr "Rodyti viso dydžio..."
 
 msgid "Show in various artists"
-msgstr ""
+msgstr "Rodyti įvairiuose atlikėjuose"
 
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr ""
+msgstr "Rodyti \"meilė\" ir \"blokavimas\" mygtukus"
 
 msgid "Show tray icon"
-msgstr ""
+msgstr "Rodyti piktogramą sistemos dėkle"
 
 msgid "Show/Hide"
-msgstr ""
+msgstr "Rodyti/Slėpti"
 
 msgid "Shuffle"
-msgstr ""
+msgstr "Maišyti"
 
 msgid "Shuffle all"
-msgstr ""
+msgstr "Maišyti viską"
 
 msgid "Shuffle by album"
-msgstr ""
+msgstr "Maišyti pagal albumus"
 
 msgid "Shuffle mode"
-msgstr ""
+msgstr "Maišymo veiksena"
 
 msgid "Shuffle playlist"
-msgstr ""
+msgstr "Maišyti grojaraštį"
 
 msgid "Sign out"
-msgstr ""
+msgstr "Atsijungti"
 
 msgid "Similar artists"
-msgstr ""
+msgstr "Panašūs atlikėjai"
 
 msgid "Ska"
-msgstr ""
+msgstr "Ska"
 
 msgid "Skip backwards in playlist"
-msgstr ""
+msgstr "Ankstesnis kūrinys grojaraštyje"
 
 msgid "Skip count"
-msgstr ""
+msgstr "Praleisti skaičiavimą"
 
 msgid "Skip forwards in playlist"
-msgstr ""
+msgstr "Kitas grojaraščio kūrinys"
 
 msgid "Small album cover"
-msgstr ""
+msgstr "Mažas albumo viršelio paveikslėlis"
 
 msgid "Small sidebar"
-msgstr ""
+msgstr "Maža juosta"
 
 msgid "Smart playlist"
-msgstr ""
+msgstr "Išmanusis grojaraštis"
 
 msgid "Smart playlists"
-msgstr ""
+msgstr "Išmanūs grojaraščiai"
 
 msgid "Soft"
-msgstr ""
+msgstr "Rami"
 
 msgid "Soft Rock"
-msgstr ""
+msgstr "Ramus rokas"
 
 msgid "Song Information"
-msgstr ""
+msgstr "Dainos informacija"
 
 msgid "Song info"
-msgstr ""
+msgstr "Dainos info"
 
 msgid "Sonogram"
-msgstr ""
+msgstr "Sonograma"
 
 msgid "Sort by genre (alphabetically)"
-msgstr ""
+msgstr "Rikiuoti pagal žanrą (alfabetiškai)"
 
 msgid "Sort by genre (by popularity)"
-msgstr ""
+msgstr "Rikiuoti pagal žanrą (pagal populiarumą)"
 
 msgid "Sort by station name"
-msgstr ""
+msgstr "Rikiuoti stoties pavadinimą"
 
 msgid "Sort songs by"
-msgstr ""
+msgstr "Rikiuoti dainas pagal"
 
 msgid "Sorting"
-msgstr ""
+msgstr "Rikiavimas"
 
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "Pradėti grajaraštį nuo dabar grojančio"
 
 msgid "Start transcoding"
-msgstr ""
+msgstr "Perkoduoti"
 
 #, qt-format
 msgid "Starting %1"
-msgstr ""
+msgstr "Paleidžiama %1"
 
 msgid "Starting..."
-msgstr ""
+msgstr "Pradedama..."
 
 msgid "Stop"
-msgstr ""
+msgstr "Stabdyti"
 
 msgid "Stop after"
-msgstr ""
+msgstr "Stabdyti po"
 
 msgid "Stop after this track"
-msgstr ""
+msgstr "Sustabdyti po šio takelio"
 
 msgid "Stop playback"
-msgstr ""
+msgstr "Stabdyti grojimą"
 
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "Sustoti po grojamo takelio"
 
 msgid "Stopped"
-msgstr ""
+msgstr "Sustabdyta"
 
 msgid "Stream"
-msgstr ""
+msgstr "Srautas"
 
 msgid "Streaming membership"
-msgstr ""
+msgstr "Transliavimo narystė"
 
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "Sėkmingai įrašyta %1"
 
 msgid "Summary"
-msgstr ""
+msgstr "Santrauka"
 
 msgid "Super high (60 fps)"
-msgstr ""
+msgstr "Labai aukštas (60 kps)"
 
 msgid "Supported formats"
-msgstr ""
+msgstr "Palaikomi formatai"
 
 msgid "Tabs on top"
-msgstr ""
+msgstr "Kortelės viršuje"
 
 msgid "Tag"
-msgstr ""
+msgstr "Žyma"
 
 msgid "Tag radio"
-msgstr ""
+msgstr "Žymėti radijas"
 
 msgid "Techno"
-msgstr ""
+msgstr "Techno"
 
 msgid "Text color"
-msgstr ""
+msgstr "Teksto spalva"
 
 msgid "Thanks to"
-msgstr ""
+msgstr "Dėkojame"
 
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""
+msgstr "Komanda \"%1\" negalėjo būti paleista."
 
 #, qt-format
 msgid "The '%1' script was modified, you might have to reload it"
@@ -2202,402 +2240,459 @@ msgstr ""
 
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr ""
+msgstr "Aplankas %1 yra netinkamas"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
+msgstr "Grojaraštis '%1' buvo tuščias arba negalėjo būti įkeltas."
 
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr ""
+msgstr "Įvyko klaida gaunant meta duomenis iš Magnatune"
 
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
+"Iškilo problemų kopijuojant failus. Šie failai negalėjo būti nukopijuoti:"
 
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr ""
+msgstr "Iškilo problemų trinant dainas. Šie failai negalėjo būti ištrinti:"
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
+msgstr "Šie failai bus ištrinti iš disko, ar tikrai norite tęsti?"
 
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
+msgstr "Šie aplankai bus skenuojami formuojant fonoteką"
 
 msgid "Third level"
-msgstr ""
+msgstr "Trečias lygis"
 
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "Albumas yra negalimas prašomu formatu"
 
 msgid ""
 "This device must be connected and opened before Clementine can see what file "
 "formats it supports."
 msgstr ""
+"Įrenginys privalo būti prijungtas ir atidarytas, kad Clementine matytų "
+"kokius formatus jis palaiko."
 
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "Šis įrenginys palaiko šiuos formatus:"
 
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Šis įrenginys neveiks tinkamai"
 
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"Tai yra MTP įrenginys, bet jūs sukompiliavę Clementine be libmtp palaikymo."
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
+"Tai yra iPod įrenginys, bet jūs sukompiliavę Clementine be libgpod palaikymo."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr ""
+"Tai pirmas kartas kai prijungėte šį įrenginį. Clementine dabar nuskenuos "
+"įrenginį, kad rastų muzikinius failus - tai gali šiek tiek užtrukti."
 
 msgid "This stream is for paid subscribers only"
-msgstr ""
+msgstr "Šis srautas yra tik apmokamiems prenumeratoriams"
 
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr ""
+msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 
 msgid "Timeout"
-msgstr ""
+msgstr "Pertrauka"
 
 msgid "Timezone"
-msgstr ""
+msgstr "Laiko juosta"
 
 msgid "Title"
-msgstr ""
+msgstr "Pavadinimas"
 
 msgid "Today"
-msgstr ""
+msgstr "Šiandien"
 
 msgid "Toggle fullscreen"
-msgstr ""
+msgstr "Visame ekrane"
 
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Perjungti eilės statusą"
 
 msgid "Tools"
-msgstr ""
+msgstr "Įrankiai"
 
 msgid "Track"
-msgstr ""
+msgstr "Takelis"
 
 msgid "Transcode Music"
-msgstr ""
+msgstr "Perkoduoti muziką"
 
 msgid "Transcoder Log"
-msgstr ""
+msgstr "Perkodavimo logas"
 
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "Perkoduojami %1 failai naudojant %2 gijų"
 
 msgid "TrueAudio"
-msgstr ""
+msgstr "TrueAudio"
 
 msgid "Turbine"
-msgstr ""
+msgstr "Turbina"
 
 msgid "Turn off"
-msgstr ""
+msgstr "Išjungti"
 
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 msgid "URL(s)"
-msgstr ""
+msgstr "URL"
 
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr ""
+msgstr "Nepavyko atsiųsti %1 (%2)"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Nežinomas"
 
 msgid "Unknown error"
-msgstr ""
+msgstr "Nežinoma klaida"
 
 msgid "Unset cover"
-msgstr ""
+msgstr "Pašalinti viršelį"
 
 msgid "Update Library"
-msgstr ""
+msgstr "Atnaujinti fonoteką"
 
 msgid "Update the library when Clementine starts"
-msgstr ""
+msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
 #, qt-format
 msgid "Updating %1"
-msgstr ""
+msgstr "Atnaujinama %1"
 
 #, qt-format
 msgid "Updating %1%..."
-msgstr ""
+msgstr "Atnaujinama %1..."
 
 msgid "Updating library"
-msgstr ""
+msgstr "Atnaujinama biblioteka"
 
 msgid "Usage"
-msgstr ""
+msgstr "Naudojimas"
 
 msgid "Use Gnome's shortcut keys"
-msgstr ""
+msgstr "Naudoti Gnome klavišų kombinacijas"
 
 msgid "Use Replay Gain metadata if it is available"
-msgstr ""
+msgstr "Naudoti garsumo suvienodinimo meta duodeninis jei tai yra prieinama"
 
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Naudoti Wii valdymo pultą"
 
 msgid "Use authentication"
-msgstr ""
+msgstr "Naudoti tapatybės patvirtinimą"
 
 msgid "Use dynamic mode"
-msgstr ""
+msgstr "Naudoti dinaminę veikseną"
 
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Naudoti pranešimus Wii pulto būsenos rodymui"
 
 msgid "Use the system default"
-msgstr ""
+msgstr "Naudoti sistemos numatytus"
 
 msgid "Use the system proxy settings"
-msgstr ""
+msgstr "Naudoti sistemos tarpinio serverio nustatymus"
 
 msgid "Used"
-msgstr ""
+msgstr "Panaudota"
 
 msgid "Username"
-msgstr ""
+msgstr "Naudotojo vardas"
 
 msgid "VBR MP3"
-msgstr ""
+msgstr "VBR MP3"
 
 msgid "Various Artists"
-msgstr ""
+msgstr "Įvairūs atlikėjai"
 
 msgid "Various artists"
-msgstr ""
+msgstr "Įvairūs atlikėjai"
 
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Versija %1"
 
 msgid "View"
-msgstr ""
+msgstr "Rodymas"
 
 msgid "Visualization mode"
-msgstr ""
+msgstr "Vaizdinio veiksena"
 
 msgid "Visualizations"
-msgstr ""
+msgstr "Vaizdiniai"
 
 msgid "Visualizations Settings"
-msgstr ""
+msgstr "Vaizdinio nustatymai"
 
 #, qt-format
 msgid "Volume %1%"
-msgstr ""
+msgstr "Garsumas %1%"
 
 msgid "Volume name"
-msgstr ""
+msgstr "Rinkinio pavadinimas"
 
 msgid "WAV"
-msgstr ""
+msgstr "WAV"
 
 msgid "Wav"
-msgstr ""
+msgstr "Wav"
 
 msgid "When Clementine starts"
-msgstr ""
+msgstr "Kai  Clementine paleidžiamas"
 
 msgid ""
 "When looking for album art Clementine will first look for picture files that "
 "contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
+"Ieškant albumo viršelių Clementine pirmiausia ieško paveikslėlių failų, "
+"kuriuose yra vienas iš šių žodžių.\n"
+"Jei nėra atitikmens tada bus naudojamas didžiausias paveikslas kataloge."
 
 msgid "WiFi MAC Address"
-msgstr ""
+msgstr "WiFi MAC Adresas"
 
 #, qt-format
 msgid "Wii Remote %1: actived"
-msgstr ""
+msgstr "Wii pultas %1: aktyvuotas"
 
 #, qt-format
 msgid "Wii Remote %1: connected"
-msgstr ""
+msgstr "Wii pultas %1: prijungtas"
 
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
-msgstr ""
+msgstr "Wii pultas %1: kritinė baterija (%2%) "
 
 #, qt-format
 msgid "Wii Remote %1: disactived"
-msgstr ""
+msgstr "Wii pultas %1: dezaktyvuotas"
 
 #, qt-format
 msgid "Wii Remote %1: disconnected"
-msgstr ""
+msgstr "Wii pultas %1: atjungtas"
 
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
-msgstr ""
+msgstr "Wii pultas %1: išsekusi baterija (%2%)"
 
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Windows Media Audio"
 
 msgid "Year"
-msgstr ""
+msgstr "Metai"
 
 msgid "Year - Album"
-msgstr ""
+msgstr "Metai - Albumas"
 
 msgid "Yesterday"
-msgstr ""
+msgstr "Vakar"
 
 msgid "You are about to download the following albums"
-msgstr ""
+msgstr "Jūs ketinate atsisiųsti šiuos albumus"
 
 msgid "You can change the way the songs in the library are organised."
-msgstr ""
+msgstr "Galite nustatyti kaip organizuoti dainas fonotekoje"
 
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a "
 "membership removes the messages at the end of each track."
 msgstr ""
+"Galite klausyti Magnatune dainų nemokamai be abonento. Nupirkta narystė "
+"pašalina žinutes iš kiekvieno takelio pabaigos."
 
 msgid "You can listen to background streams at the same time as other music."
-msgstr ""
+msgstr "Galite klausyti foninių garsų kartu su kita muzika."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
+"Galite teikti informaciją apie klausomus takelius į Last.fm nemokamai, bet "
+"tik <span style=\" font-weight:600;\">apmokami prenumeratoriai</span> gali "
+"transliuoti Last.fm radiją per Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
+"Galite naudoti Wii pultą nuotoliniam Clementine valdymui. Daugiau "
+"informacijos apie Wii pulto panaudojimą galite rasti <a "
+"href=\"http://www.clementine-player.org/wiimote\">Clementine wiki "
+"puslapyje</a>.\n"
 
 msgid "You love this track"
-msgstr ""
+msgstr "Jūs mylite šį takelį"
 
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
+"Jums reikia paleisti Sistemos nustatymus ir įjungti \"<span style=\" font-"
+"style:italic;\">Suteikti prieigą pagalbiniams įrenginiams</span>\", kad "
+"naudoti Bendrąsias klavišų kombinacijas Clementine programoje."
 
 msgid "You will need to restart Clementine if you change the language."
-msgstr ""
+msgstr "Reikės paleisti iš naujo Clementine, kad pasikeistų kalba."
 
 msgid "Your Last.fm credentials were incorrect"
-msgstr ""
+msgstr "Jūsų Last.fm duomenys buvo neteisingi"
 
 msgid "Your library is empty!"
-msgstr ""
+msgstr "Jūsų fonoteka yra tuščia!"
 
 msgid "Your radio streams"
-msgstr ""
+msgstr "Tavo radijo srautai"
 
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "Jūsų pateikta informacija: %1"
 
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 msgid "Zero"
-msgstr ""
+msgstr "Nulis"
 
 #, c-format
 msgid "add %n songs"
-msgstr ""
+msgstr "pridėti %n dainų"
 
 msgid "after"
-msgstr ""
+msgstr "po"
 
 msgid "before"
-msgstr ""
+msgstr "anksčiau"
 
 msgid "biggest first"
-msgstr ""
+msgstr "Didžiausi pirmiausia"
 
 msgid "bpm"
-msgstr ""
+msgstr "dpm"
 
 msgid "contains"
-msgstr ""
+msgstr "susideda iš"
 
 #, qt-format
 msgid "disc %1"
-msgstr ""
+msgstr "diskas %1"
 
 msgid "does not contain"
-msgstr ""
+msgstr "neturi"
 
 msgid "ends with"
-msgstr ""
+msgstr "baigiasi iš"
 
 msgid "equals"
-msgstr ""
+msgstr "lygus"
 
 msgid "greater than"
-msgstr ""
+msgstr "daugiau nei"
 
 msgid "kbps"
-msgstr ""
+msgstr "kbps"
 
 msgid "less than"
-msgstr ""
+msgstr "mažiau nei"
 
 msgid "longest first"
-msgstr ""
+msgstr "Ilgiausi pirmiausia"
 
 msgid "move songs"
-msgstr ""
+msgstr "perkelti dainas"
 
 msgid "newest first"
-msgstr ""
+msgstr "naujausi pirmiausia"
 
 msgid "oldest first"
-msgstr ""
+msgstr "seniausi pirmiausia"
 
 msgid "on"
-msgstr ""
+msgstr "iš"
 
 msgid "options"
-msgstr ""
+msgstr "parinktys"
 
 #, c-format
 msgid "remove %n songs"
-msgstr ""
+msgstr "pašalinti %n dainas"
 
 msgid "shortest first"
-msgstr ""
+msgstr "trumpiausi pirmiausia"
 
 msgid "smallest first"
-msgstr ""
+msgstr "mažiausi pirmiausia"
 
 msgid "starts with"
-msgstr ""
+msgstr "prasideda iš"
 
 msgid "stop"
-msgstr ""
+msgstr "stabdyti"
 
 #, qt-format
 msgid "track %1"
-msgstr ""
+msgstr "takelis %1"
+
+#, c-format
+#~ msgid "Editing %n tracks"
+#~ msgstr "Taisomi %n takeliai"
+
+#, qt-format
+#~ msgid "Hide %1"
+#~ msgstr "Slėpti %1"
+
+#~ msgid "Hide..."
+#~ msgstr "Slėpti..."
+
+#~ msgid "Select engine"
+#~ msgstr "Pažymėkite variklį"
+
+#~ msgid "Stretch columns to fit window"
+#~ msgstr "Ištemti stulpelius, kad užpildyti langą"
+
+#, qt-format
+#~ msgid "Unknown audio engine \"%1\". Choices are:"
+#~ msgstr "Nežinomas audio varikliukas \"%1\". Pasirinkimai yra:"
+
+#~ msgid "[click to edit]"
+#~ msgstr "[Spustelėkite norėdami taisyti]"
+
+#~ msgid "Script console"
+#~ msgstr "Scenarijų konsolė"
+
+#, qt-format
+#~ msgid "Last.fm Recommended Radio - %1"
+#~ msgstr "Last.fm Rekomenduotas Radijas - %1"
+
+#~ msgid "Radio service couldn't be loaded :-("
+#~ msgstr "Radijo paslauga negalėjo būti įkelta :-("
