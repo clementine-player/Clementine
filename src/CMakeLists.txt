@@ -766,6 +766,7 @@ endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
   include_directories(${QJSON_INCLUDE_DIRS})
+  link_directories(${QJSON_LIBRARY_DIRS})
   list(APPEND HEADERS remote/httpserver.h)
   list(APPEND HEADERS remote/httpconnection.h)
   list(APPEND SOURCES remote/httpserver.cpp)
