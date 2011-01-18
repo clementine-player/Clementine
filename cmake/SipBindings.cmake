@@ -1,6 +1,10 @@
 find_path(PYQT_SIP_DIR Qt/Qtmod.sip
+  PATHS /System/Library/Frameworks/Python.framework/Versions/2.6
   PATH_SUFFIXES share/sip/PyQt4
 )
+
+find_program(SIP_BINARY "sip"
+  PATHS /System/Library/Frameworks/Python.framework/Versions/2.6/bin)
 
 macro(add_sip_binding outputvar source)
   # Work out what the SIP flags should be for PyQt4.  These would normally be
@@ -9,13 +13,13 @@ macro(add_sip_binding outputvar source)
   set(PYQT_SIP_FLAGS
     "-x" "VendorID"
     "-x" "PyQt_NoPrintRangeBug"
-    "-t" "Qt_4_6_2"
+    "-t" "Qt_4_7_1"
   )
 
   if(WIN32)
     list(APPEND PYQT_SIP_FLAGS "-t" "WS_WIN")
   elseif(APPLE)
-    list(APPEND PYQT_SIP_FLAGS "-t" "WS_MAC")
+    list(APPEND PYQT_SIP_FLAGS "-t" "WS_MACX")
   else(WIN32)
     list(APPEND PYQT_SIP_FLAGS "-t" "WS_X11")
   endif(WIN32)
@@ -51,7 +55,7 @@ macro(add_sip_binding outputvar source)
 
   add_custom_command(
     OUTPUT ${outputs}
-    COMMAND "sip" ${PYQT_SIP_FLAGS}
+    COMMAND ${SIP_BINARY} ${PYQT_SIP_FLAGS}
       "-I${PYQT_SIP_DIR}"
       "-c" "${CMAKE_CURRENT_BINARY_DIR}"
       "${CMAKE_CURRENT_SOURCE_DIR}/${source}"
