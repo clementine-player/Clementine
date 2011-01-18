@@ -587,6 +587,7 @@ MainWindow::MainWindow(
   scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_update_library);
   scripts_->ui()->RegisterActionLocation("extras_menu", ui_->menu_extras, NULL);
   scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
+  scripts_->ui()->RegisterActionLocation("playlist_menu", ui_->menu_playlist, NULL);
 
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
