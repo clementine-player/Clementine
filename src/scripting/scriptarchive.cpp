@@ -15,13 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "scriptarchive.h"
 
 #include <QFile>
 
-#include <archive.h>
-#include <archive_entry.h>
+#ifdef HAVE_LIBARCHIVE
+# include <archive.h>
+# include <archive_entry.h>
+#endif
 
+#ifdef HAVE_LIBARCHIVE
 namespace {
   // Read callbacks for libarchive
   struct IODeviceReadState {
@@ -43,6 +47,7 @@ namespace {
     return 0;
   }
 }
+#endif // HAVE_LIBARCHIVE
 
 bool ScriptArchive::Load(const QString& filename) {
   QFile file(filename);
@@ -54,6 +59,7 @@ bool ScriptArchive::Load(const QString& filename) {
 }
 
 bool ScriptArchive::Load(QIODevice* device) {
+#ifdef HAVE_LIBARCHIVE
   archive* a = archive_read_new();
   archive_read_support_compression_gzip(a);
   archive_read_support_format_tar(a);
@@ -74,4 +80,7 @@ bool ScriptArchive::Load(QIODevice* device) {
   archive_read_finish(a);
 
   return true;
+#else // HAVE_LIBARCHIVE
+  return false;
+#endif // HAVE_LIBARCHIVE
 }

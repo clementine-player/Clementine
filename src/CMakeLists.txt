@@ -874,7 +874,6 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
-  ${ARCHIVE_LIBRARIES}
   dl
   z
 )
@@ -898,6 +897,10 @@ endif(HAVE_LIBGPOD)
 if(HAVE_GIO)
   target_link_libraries(clementine_lib ${GIO_LIBRARIES})
 endif(HAVE_GIO)
+
+if(HAVE_LIBARCHIVE)
+  target_link_libraries(clementine_lib ${ARCHIVE_LIBRARIES})
+endif(HAVE_LIBARCHIVE)
 
 if(HAVE_IMOBILEDEVICE)
   target_link_libraries(clementine_lib
