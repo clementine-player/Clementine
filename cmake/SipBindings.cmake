@@ -13,7 +13,7 @@ macro(add_sip_binding outputvar source)
   set(PYQT_SIP_FLAGS
     "-x" "VendorID"
     "-x" "PyQt_NoPrintRangeBug"
-    "-t" "Qt_4_7_1"
+    "-t" "Qt_4_6_2"
   )
 
   if(WIN32)
