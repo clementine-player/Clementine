@@ -29,6 +29,7 @@
 class DeviceManager;
 class LibraryModel;
 class OrganiseDialog;
+class ScriptManager;
 class TaskManager;
 
 class QMimeData;
@@ -55,6 +56,7 @@ class LibraryView : public AutoExpandingTreeView {
   // this will return all of it's songs.
   SongList GetSelectedSongs() const;
 
+  void SetScriptManager(ScriptManager* scripts);
   void SetTaskManager(TaskManager* task_manager);
   void SetLibrary(LibraryModel* library);
   void SetDeviceManager(DeviceManager* device_manager);
@@ -62,8 +64,6 @@ class LibraryView : public AutoExpandingTreeView {
   // QTreeView
   void keyboardSearch(const QString &search);
   void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible);
-
-  QMenu* context_menu() const { return context_menu_; }
 
  public slots:
   void TotalSongCountUpdated(int count);
@@ -108,6 +108,8 @@ class LibraryView : public AutoExpandingTreeView {
   void ShowInVarious(bool on);
 
  private:
+  ScriptManager* scripts_;
+
   LibraryModel* library_;
   DeviceManager* devices_;
   TaskManager* task_manager_;

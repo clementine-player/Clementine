@@ -587,7 +587,6 @@ MainWindow::MainWindow(
   scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_update_library);
   scripts_->ui()->RegisterActionLocation("extras_menu", ui_->menu_extras, NULL);
   scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
-  scripts_->ui()->RegisterActionLocation("library_context_menu", library_view_->view()->context_menu(), NULL);
 
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
@@ -649,6 +648,8 @@ MainWindow::MainWindow(
       library_, library_view_->view(), player_, playlists_,
       task_manager_, settings_dialog_.get(), radio_model_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
+
+  library_view_->view()->SetScriptManager(scripts_);
 }
 
 MainWindow::~MainWindow() {

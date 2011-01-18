@@ -25,6 +25,8 @@
 #include "core/musicstorage.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
+#include "scripting/scriptmanager.h"
+#include "scripting/uiinterface.h"
 #include "smartplaylists/wizard.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
@@ -96,46 +98,6 @@ LibraryView::LibraryView(QWidget* parent)
 
   ReloadSettings();
   setStyleSheet("QTreeView::item{padding-top:1px;}");
-
-  context_menu_ = new QMenu(this);
-  load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Load"), this, SLOT(Load()));
-  add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-  add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Enqueue to playlist"), this, SLOT(AddToPlaylistEnqueue()));
-
-  context_menu_->addSeparator();
-  new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
-      tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
-  edit_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
-      tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
-  delete_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
-      tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
-
-  context_menu_->addSeparator();
-  organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
-      tr("Organise files..."), this, SLOT(Organise()));
-  copy_to_device_ = context_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
-      tr("Copy to device..."), this, SLOT(CopyToDevice()));
-  // this will get finalized later
-  copy_to_device_->setDisabled(true);
-  delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
-      tr("Delete from disk..."), this, SLOT(Delete()));
-
-  context_menu_->addSeparator();
-  edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
-    tr("Edit track information..."), this, SLOT(EditTracks()));
-  edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
-    tr("Edit tracks information..."), this, SLOT(EditTracks()));
-
-  context_menu_->addSeparator();
-  show_in_various_ = context_menu_->addAction(
-      tr("Show in various artists"), this, SLOT(ShowInVarious()));
-  no_show_in_various_ = context_menu_->addAction(
-      tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
-
-  context_menu_->addSeparator();
 }
 
 LibraryView::~LibraryView() {
@@ -154,20 +116,19 @@ void LibraryView::SetTaskManager(TaskManager *task_manager) {
   task_manager_ = task_manager;
 }
 
-void LibraryView::SetLibrary(LibraryModel *library) {
+void LibraryView::SetLibrary(LibraryModel* library) {
   library_ = library;
   QSettings s;
   s.beginGroup(kSettingsGroup);
   library_->set_pretty_covers(s.value("pretty_covers", true).toBool());
 }
 
-void LibraryView::SetDeviceManager(DeviceManager *device_manager) {
+void LibraryView::SetDeviceManager(DeviceManager* device_manager) {
   devices_ = device_manager;
+}
 
-  // lazy finalization
-  copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
-  connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
-          copy_to_device_, SLOT(setDisabled(bool)));
+void LibraryView::SetScriptManager(ScriptManager* scripts) {
+  scripts_ = scripts;
 }
 
 void LibraryView::TotalSongCountUpdated(int count) {
@@ -221,6 +182,54 @@ void LibraryView::mouseReleaseEvent(QMouseEvent* e) {
 }
 
 void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
+  if(!context_menu_) {
+    context_menu_ = new QMenu(this);
+    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Load"), this, SLOT(Load()));
+    add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+    add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Enqueue to playlist"), this, SLOT(AddToPlaylistEnqueue()));
+
+    context_menu_->addSeparator();
+    new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
+        tr("New smart playlist..."), this, SLOT(NewSmartPlaylist()));
+    edit_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+        tr("Edit smart playlist..."), this, SLOT(EditSmartPlaylist()));
+    delete_smart_playlist_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+        tr("Delete smart playlist"), this, SLOT(DeleteSmartPlaylist()));
+
+    context_menu_->addSeparator();
+    organise_ = context_menu_->addAction(IconLoader::Load("edit-copy"),
+        tr("Organise files..."), this, SLOT(Organise()));
+    copy_to_device_ = context_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"),
+        tr("Copy to device..."), this, SLOT(CopyToDevice()));
+    delete_ = context_menu_->addAction(IconLoader::Load("edit-delete"),
+        tr("Delete from disk..."), this, SLOT(Delete()));
+
+    context_menu_->addSeparator();
+    edit_track_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+      tr("Edit track information..."), this, SLOT(EditTracks()));
+    edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
+      tr("Edit tracks information..."), this, SLOT(EditTracks()));
+
+    context_menu_->addSeparator();
+    show_in_various_ = context_menu_->addAction(
+        tr("Show in various artists"), this, SLOT(ShowInVarious()));
+    no_show_in_various_ = context_menu_->addAction(
+        tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
+
+    context_menu_->addSeparator();
+
+    copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
+    connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
+            copy_to_device_, SLOT(setDisabled(bool)));
+
+    if(scripts_) {
+      scripts_->ui()->RegisterActionLocation("library_context_menu", context_menu_, NULL);
+    }
+  }
+
   context_menu_index_ = indexAt(e->pos());
   if (!context_menu_index_.isValid())
     return;

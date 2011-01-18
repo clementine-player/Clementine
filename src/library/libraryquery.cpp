@@ -73,11 +73,12 @@ void LibraryQuery::AddWhere(const QString& column, const QVariant& value, const 
   else {
     if(!op.compare("IN", Qt::CaseInsensitive)) {
       QStringList final;
-      foreach(const QString& old, value.toStringList()) {
-        final << "'" + QString(old).replace("'", "''") + "'";
+      foreach(const QString& single_value, value.toStringList()) {
+        final.append("?");
+        bound_values_ << single_value;
       }
 
-      where_clauses_ << QString("%1 IN (%3)").arg(column, final.join(","));
+      where_clauses_ << QString("%1 IN (" + final.join(",") + ")").arg(column);
     } else {
       where_clauses_ << QString("%1 %2 ?").arg(column, op);
       bound_values_ << value;
