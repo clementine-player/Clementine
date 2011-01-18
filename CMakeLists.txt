@@ -67,6 +67,14 @@ if (WIN32)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
+if (APPLE)
+  find_library(ARCHIVE_LIBRARIES archive)
+  find_path(ARCHIVE_INCLUDE_DIRS archive.h)
+  if (ARCHIVE_LIBRARIES)
+    set(ARCHIVE_FOUND ON)
+  endif (ARCHIVE_LIBRARIES)
+endif (APPLE)
+
 find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
