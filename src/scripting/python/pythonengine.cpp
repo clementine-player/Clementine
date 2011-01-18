@@ -40,6 +40,9 @@ PythonEngine::PythonEngine(ScriptManager* manager)
 {
   Q_ASSERT(sInstance == NULL);
   sInstance = this;
+  #ifdef Q_OS_DARWIN
+    setenv("PYTHONPATH", (QCoreApplication::applicationDirPath() + "/../PlugIns").toLocal8Bit().constData(), 1);
+  #endif
 }
 
 PythonEngine::~PythonEngine() {

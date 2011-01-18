@@ -1018,6 +1018,14 @@ if (APPLE)
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
 
+  if (HAVE_SCRIPTING_PYTHON)
+    install(DIRECTORY "/Library/Python/2.6/site-packages/PyQt4/uic"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/PlugIns/PyQt4")
+    install(FILES "/Library/Python/2.6/site-packages/PyQt4/__init__.py"
+      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/PlugIns/PyQt4")
+  endif (HAVE_SCRIPTING_PYTHON)
+
+
   if (HAVE_SPARKLE)
     install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"
       DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Sparkle.framework")
@@ -1031,6 +1039,7 @@ if (APPLE)
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
   )
+
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
     ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg

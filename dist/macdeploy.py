@@ -21,7 +21,6 @@ import subprocess
 import sys
 
 FRAMEWORK_SEARCH_PATH=[
-    '/usr/local/Trolltech/Qt-4.7.0/lib',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
@@ -122,6 +121,16 @@ QT_PLUGINS_SEARCH_PATH=[
     '/Developer/Applications/Qt/plugins',
 ]
 
+SCRIPT_PLUGINS = [
+    'sip.so',
+    'PyQt4/QtCore.so',
+    'PyQt4/QtGui.so',
+    'PyQt4/QtNetwork.so',
+]
+SCRIPT_PLUGINS_SEARCH_PATH = [
+    '/Library/Python/2.6/site-packages',
+]
+
 
 class Error(Exception):
   pass
@@ -144,6 +153,10 @@ class CouldNotFindQtPluginError(Error):
 
 
 class CouldNotFindGstreamerPluginError(Error):
+  pass
+
+
+class CouldNotFindScriptPluginError(Error):
   pass
 
 
@@ -359,6 +372,14 @@ def FindGstreamerPlugin(name):
   raise CouldNotFindGstreamerPluginError(name)
 
 
+def FindScriptPlugin(name):
+  for path in SCRIPT_PLUGINS_SEARCH_PATH:
+    if os.path.exists(path):
+      if os.path.exists(os.path.join(path, name)):
+        return os.path.join(path, name)
+  raise CouldNotFindScriptPluginError(name)
+
+
 FixBinary(binary)
 
 for plugin in GSTREAMER_PLUGINS:
@@ -368,6 +389,9 @@ FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
+
+for plugin in SCRIPT_PLUGINS:
+  FixPlugin(FindScriptPlugin(plugin), os.path.dirname(plugin))
 
 if len(sys.argv) <= 2:
   print 'Would run %d commands:' % len(commands)
