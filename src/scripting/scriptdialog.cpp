@@ -15,18 +15,28 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
+#include "installscriptdialog.h"
+#include "scriptarchive.h"
 #include "scriptdialog.h"
 #include "scriptmanager.h"
 #include "ui_scriptdialog.h"
+#include "core/boundfuturewatcher.h"
+#include "ui/iconloader.h"
 
+#include <QFileDialog>
+#include <QMessageBox>
 #include <QPainter>
 #include <QPushButton>
+#include <QSettings>
 #include <QtDebug>
 
 const int ScriptDelegate::kIconSize = 64;
 const int ScriptDelegate::kPadding = 6;
 const int ScriptDelegate::kItemHeight = kIconSize + kPadding*2;
 const int ScriptDelegate::kLinkSpacing = 10;
+
+const char* ScriptDialog::kSettingsGroup = "ScriptDialog";
 
 ScriptDelegate::ScriptDelegate(QObject* parent)
   : QStyledItemDelegate(parent),
@@ -99,11 +109,31 @@ ScriptDialog::ScriptDialog(QWidget* parent)
   connect(ui_->settings, SIGNAL(clicked()), SLOT(Settings()));
   connect(ui_->reload, SIGNAL(clicked()), SLOT(Reload()));
 
+  // Add a button to install a script from a file
+  QPushButton* install_button = new QPushButton(
+        IconLoader::Load("document-open"), tr("Install from file..."), this);
+  connect(install_button, SIGNAL(clicked()), SLOT(InstallFromFile()));
+  ui_->button_box->addButton(install_button, QDialogButtonBox::ActionRole);
+
+  // But disable it if we don't have libarchive
+#ifndef HAVE_LIBARCHIVE
+  install_button->setEnabled(false);
+#endif
+
+  // Start on the first tab
   ui_->tab_widget->setCurrentIndex(0);
+
+  // Make the list pretty
   ui_->list->setItemDelegate(new ScriptDelegate(this));
 
+  // Hide developer mode stuff by default
   ui_->console->hide();
+  ui_->reload->hide();
+
+  // Make the dialog smaller
   resize(width(), minimumSizeHint().height());
+
+  ReloadSettings();
 }
 
 ScriptDialog::~ScriptDialog() {
@@ -164,4 +194,53 @@ void ScriptDialog::Reload() {
 
 void ScriptDialog::LogLineAdded(const QString& html) {
   ui_->console->append(html);
+}
+
+void ScriptDialog::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  last_open_dir_ = s.value("last_open_dir", QDir::homePath()).toString();
+}
+
+void ScriptDialog::InstallFromFile() {
+  QString filename = QFileDialog::getOpenFileName(
+        this, tr("Install script file"), last_open_dir_,
+        tr("Clementine scripts") + " (*.tar.gz *.clem)");
+  if (filename.isEmpty())
+    return;
+
+  // Save this directory
+  last_open_dir_ = filename;
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("last_open_dir", last_open_dir_);
+
+  // Try opening the archive.  We do this in the background.
+  ScriptArchive* archive = new ScriptArchive(manager_);
+  QFuture<bool> future = archive->LoadFromFileAsync(filename);
+
+  BoundFutureWatcher<bool, ScriptArchive*>* watcher =
+      new BoundFutureWatcher<bool, ScriptArchive*>(archive);
+  watcher->setFuture(future);
+
+  connect(watcher, SIGNAL(finished()), SLOT(InstallFromFileLoaded()));
+}
+
+void ScriptDialog::InstallFromFileLoaded() {
+  BoundFutureWatcher<bool, ScriptArchive*>* watcher =
+      reinterpret_cast<BoundFutureWatcher<bool, ScriptArchive*>*>(sender());
+  watcher->deleteLater();
+
+  ScriptArchive* archive = watcher->data();
+  const bool success = watcher->result();
+
+  if (success) {
+    // The dialog will delete itself and the archive when it's done.
+    InstallScriptDialog* dialog = new InstallScriptDialog(archive, this);
+    dialog->show();
+  } else {
+    QMessageBox::warning(this, tr("Error opening script archive"),
+      tr("This is not a valid Clementine script file."), QMessageBox::Close);
+    delete archive;
+  }
 }

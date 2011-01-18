@@ -54,6 +54,8 @@ public:
   ScriptDialog(QWidget* parent = 0);
   ~ScriptDialog();
 
+  static const char* kSettingsGroup;
+
   void SetManager(ScriptManager* manager);
 
 private slots:
@@ -66,10 +68,18 @@ private slots:
   void Settings();
   void Reload();
 
+  void InstallFromFile();
+  void InstallFromFileLoaded();
+
+private:
+  void ReloadSettings();
+
 private:
   Ui_ScriptDialog* ui_;
 
   ScriptManager* manager_;
+
+  QString last_open_dir_;
 };
 
 #endif // SCRIPTDIALOG_H

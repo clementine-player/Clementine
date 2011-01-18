@@ -55,7 +55,8 @@ public:
   const QString& description() const { return d->description_; }
   const QString& author() const { return d->author_; }
   const QString& url() const { return d->url_; }
-  const QIcon& icon() const { return d->icon_; }
+  const QString& icon_filename() const { return d->icon_filename_; }
+  QIcon icon() const { return QIcon(icon_filename()); }
 
   Language language() const { return d->language_; }
   const QString& script_file() const { return d->script_file_; }
@@ -74,7 +75,7 @@ private:
     QString description_;
     QString author_;
     QString url_;
-    QIcon icon_;
+    QString icon_filename_;
 
     Language language_;
     QString script_file_;

@@ -39,6 +39,7 @@ namespace Utilities {
 
   QString MakeTempDir();
   void RemoveRecursive(const QString& path);
+  bool CopyRecursive(const QString& source, const QString& destination);
   bool Copy(QIODevice* source, QIODevice* destination);
 
 

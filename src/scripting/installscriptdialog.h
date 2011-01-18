@@ -15,36 +15,30 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SCRIPTARCHIVE_H
-#define SCRIPTARCHIVE_H
+#ifndef INSTALLSCRIPTDIALOG_H
+#define INSTALLSCRIPTDIALOG_H
 
-#include "scriptinfo.h"
+#include <QDialog>
 
-#include <QFuture>
+class ScriptArchive;
+class Ui_InstallScriptDialog;
 
-class ScriptManager;
+class InstallScriptDialog : public QDialog {
+  Q_OBJECT
 
-class ScriptArchive {
 public:
-  ScriptArchive(ScriptManager* manager);
-  ~ScriptArchive();
+  // The dialog will take ownership of the archive and will destroy the archive
+  // *and itself* when it is closed.
+  InstallScriptDialog(ScriptArchive* archive, QWidget* parent = 0);
+  ~InstallScriptDialog();
 
-  bool LoadFromFile(const QString& filename);
-  bool LoadFromDevice(QIODevice* device);
-  QFuture<bool> LoadFromFileAsync(const QString& filename);
-  QFuture<bool> LoadFromDeviceAsync(QIODevice* device);
-
-  const QList<ScriptInfo>& info() const { return info_; }
-
-  bool Install() const;
+public slots:
+  void accept();
 
 private:
-  Q_DISABLE_COPY(ScriptArchive);
+  Ui_InstallScriptDialog* ui_;
 
-  ScriptManager* manager_;
-
-  QString temp_dir_name_;
-  QList<ScriptInfo> info_;
+  ScriptArchive* archive_;
 };
 
-#endif // SCRIPTARCHIVE_H
+#endif // INSTALLSCRIPTDIALOG_H

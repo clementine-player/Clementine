@@ -17,13 +17,14 @@
 
 #include "utilities.h"
 
-#include <QtGlobal>
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QDir>
 #include <QIODevice>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QtDebug>
+#include <QtGlobal>
 
 #if defined(Q_OS_UNIX)
 #  include <sys/statvfs.h>
@@ -152,13 +153,36 @@ QString MakeTempDir() {
 
 void RemoveRecursive(const QString& path) {
   QDir dir(path);
-  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs))
+  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs | QDir::Hidden))
     RemoveRecursive(path + "/" + child);
 
-  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files))
+  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files | QDir::Hidden))
     QFile::remove(path + "/" + child);
 
   dir.rmdir(path);
+}
+
+bool CopyRecursive(const QString& source, const QString& destination) {
+  // Make the destination directory
+  QString dir_name = source.section('/', -1, -1);
+  QString dest_path = destination + "/" + dir_name;
+  QDir().mkpath(dest_path);
+
+  QDir dir(source);
+  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
+    if (!CopyRecursive(source + "/" + child, dest_path)) {
+      qWarning() << "Failed to copy dir" << source + "/" + child << "to" << dest_path;
+      return false;
+    }
+  }
+
+  foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
+    if (!QFile::copy(source + "/" + child, dest_path + "/" + child)) {
+      qWarning() << "Failed to copy file" << source + "/" + child << "to" << dest_path;
+      return false;
+    }
+  }
+  return true;
 }
 
 bool Copy(QIODevice* source, QIODevice* destination) {

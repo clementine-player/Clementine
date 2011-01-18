@@ -74,7 +74,7 @@ void ScriptInfo::InitFromFile(const ScriptManager* manager,
   d->author_ = s.value("author").toString();
   d->url_ = s.value("url").toString();
   d->script_file_ = QFileInfo(QDir(path), s.value("script_file").toString()).absoluteFilePath();
-  d->icon_ = QIcon(QFileInfo(QDir(path), s.value("icon").toString()).absoluteFilePath());
+  d->icon_filename_ = QFileInfo(QDir(path), s.value("icon").toString()).absoluteFilePath();
 }
 
 bool ScriptInfo::operator ==(const ScriptInfo& other) const {
@@ -97,7 +97,7 @@ void ScriptInfo::TakeMetadataFrom(const ScriptInfo& other) {
   d->description_ = other.description();
   d->author_ = other.author();
   d->url_ = other.url();
-  d->icon_ = other.icon();
+  d->icon_filename_ = other.icon_filename();
   d->language_ = other.language();
   d->script_file_ = other.script_file();
 }

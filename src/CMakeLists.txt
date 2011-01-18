@@ -154,6 +154,7 @@ set(SOURCES
   radio/savedradio.cpp
   radio/somafmservice.cpp
 
+  scripting/installscriptdialog.cpp
   scripting/languageengine.cpp
   scripting/script.cpp
   scripting/scriptarchive.cpp
@@ -335,6 +336,7 @@ set(HEADERS
   radio/savedradio.h
   radio/somafmservice.h
 
+  scripting/installscriptdialog.h
   scripting/languageengine.h
   scripting/scriptdialog.h
   scripting/scriptinterface.h
@@ -428,6 +430,7 @@ set(UI
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
 
+  scripting/installscriptdialog.ui
   scripting/scriptdialog.ui
 
   smartplaylists/querysearchpage.ui
