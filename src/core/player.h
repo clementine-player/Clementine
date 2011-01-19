@@ -76,8 +76,10 @@ class Player : public QObject {
   void VolumeUp() { SetVolume(GetVolume() + 5); }
   void VolumeDown() { SetVolume(GetVolume() - 5); }
   void Seek(int seconds);
-  void SeekForward() { Seek(+5); }
-  void SeekBackward() { Seek(-5); }
+  // Moves the position of the currently playing song five seconds forward.
+  void SeekForward();
+  // Moves the position of the currently playing song five seconds backwards.
+  void SeekBackward();
 
   void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result);
   void CurrentMetadataChanged(const Song& metadata);

@@ -292,6 +292,14 @@ void Player::Seek(int seconds) {
   emit Seeked(msec * 1000);
 }
 
+void Player::SeekForward() {
+  Seek(engine()->position() / 1000 + 5);
+}
+
+void Player::SeekBackward() {
+  Seek(engine()->position() / 1000 - 5);
+}
+
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
   PlaylistItemPtr item = playlists_->active()->current_item();
   if (!item)
