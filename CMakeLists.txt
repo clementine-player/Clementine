@@ -154,6 +154,7 @@ option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm p
 option(ENABLE_SOUNDMENU "Add Clementine to the Gnome sound menu" ON)
 option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and radio streams" ON)
 option(ENABLE_LIBTUNEPIMP "Use libtunepimp for generating fingerprinting for musicbrainz, for auto tagging" ON)
+option(ENABLE_SCRIPTING_ARCHIVES "Enable support for loading scripts from archives (.clem or .tar.gz files)" ON)
 option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" ON)
 option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" ON)
 
@@ -185,9 +186,9 @@ if(ENABLE_LIBTUNEPIMP AND TUNEPIMP_LIBRARIES AND TUNEPIMP_INCLUDE_DIRS)
   set(HAVE_LIBTUNEPIMP ON)
 endif(ENABLE_LIBTUNEPIMP AND TUNEPIMP_LIBRARIES AND TUNEPIMP_INCLUDE_DIRS)
 
-if(ARCHIVE_FOUND)
+if(ENABLE_SCRIPTING_ARCHIVES AND ARCHIVE_FOUND)
   set(HAVE_LIBARCHIVE ON)
-endif(ARCHIVE_FOUND)
+endif(ENABLE_SCRIPTING_ARCHIVES AND ARCHIVE_FOUND)
 
 if(ENABLE_SCRIPTING_PYTHON AND PYTHONLIBS_FOUND AND PYQT_SIP_DIR)
   set(HAVE_SCRIPTING_PYTHON ON)
