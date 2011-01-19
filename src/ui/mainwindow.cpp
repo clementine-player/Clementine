@@ -197,6 +197,8 @@ MainWindow::MainWindow(
   library_ = new Library(database_, task_manager_, this);
   devices_ = new DeviceManager(database_, task_manager_, this);
 
+  playlist_backend_->SetLibrary(library_->backend());
+
   // Initialise the UI
   ui_->setupUi(this);
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);

@@ -128,6 +128,8 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
     Column_Album,
     Column_Length,
     Column_RadioService,
+    Column_Beginning,
+    Column_CuePath,
   };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {

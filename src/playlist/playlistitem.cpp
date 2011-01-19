@@ -71,6 +71,8 @@ void PlaylistItem::BindToQuery(QSqlQuery* query) const {
   query->bindValue(6, DatabaseValue(Column_Album));
   query->bindValue(7, DatabaseValue(Column_Length));
   query->bindValue(8, DatabaseValue(Column_RadioService));
+  query->bindValue(9, DatabaseValue(Column_Beginning));
+  query->bindValue(10, DatabaseValue(Column_CuePath));
 }
 
 void PlaylistItem::SetTemporaryMetadata(const Song& metadata) {

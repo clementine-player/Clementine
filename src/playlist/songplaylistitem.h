@@ -26,6 +26,9 @@ class SongPlaylistItem : public PlaylistItem {
   SongPlaylistItem(const QString& type);
   SongPlaylistItem(const Song& song);
 
+  // Restores a stream- or file-related playlist item using query row.
+  // If it's a file related playlist item, this will restore it's CUE
+  // attributes (if any) but won't parse the CUE!
   bool InitFromQuery(const SqlRow& query);
   void Reload();
 

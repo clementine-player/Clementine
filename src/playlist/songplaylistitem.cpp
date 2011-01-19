@@ -55,18 +55,27 @@ bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
 
     if (!song_.is_valid())
       return false;
+
+    int beginning(query.value(row + 7).toInt());
+    QString cue_path(query.value(row + 8).toString());
+
+    song_.set_beginning(beginning);
+    song_.set_cue_path(cue_path);
   }
+
   return true;
 }
 
 QVariant SongPlaylistItem::DatabaseValue(DatabaseColumn column) const {
   switch (column) {
-    case Column_Url:    return song_.filename();
-    case Column_Title:  return song_.title();
-    case Column_Artist: return song_.artist();
-    case Column_Album:  return song_.album();
-    case Column_Length: return song_.length();
-    default:            return PlaylistItem::DatabaseValue(column);
+    case Column_Url:       return song_.filename();
+    case Column_Title:     return song_.title();
+    case Column_Artist:    return song_.artist();
+    case Column_Album:     return song_.album();
+    case Column_Length:    return song_.length();
+    case Column_Beginning: return song_.beginning();
+    case Column_CuePath:   return song_.cue_path();
+    default:               return PlaylistItem::DatabaseValue(column);
   }
 }
 

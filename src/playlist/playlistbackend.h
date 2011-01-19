@@ -19,7 +19,9 @@
 #define PLAYLISTBACKEND_H
 
 #include <QFuture>
+#include <QHash>
 #include <QList>
+#include <QMutex>
 #include <QObject>
 
 #include "playlistitem.h"
@@ -28,6 +30,7 @@
 #include <boost/shared_ptr.hpp>
 
 class Database;
+class LibraryBackend;
 
 class PlaylistBackend : public QObject {
   Q_OBJECT
@@ -58,12 +61,22 @@ class PlaylistBackend : public QObject {
   void RemovePlaylist(int id);
   void RenamePlaylist(int id, const QString& new_name);
 
+  void SetLibrary(LibraryBackend* library);
+
  public slots:
   void SavePlaylist(int playlist, const PlaylistItemList& items,
                     int last_played, smart_playlists::GeneratorPtr dynamic);
 
  private:
-  static PlaylistItemPtr NewSongFromQuery(const SqlRow& row);
+  struct NewSongFromQueryState {
+    QHash<QString, SongList> cached_cues_;
+    QMutex mutex_;
+  };
+
+  PlaylistItemPtr NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
+  PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
+
+  LibraryBackend* library_;
 
   boost::shared_ptr<Database> db_;
 };
