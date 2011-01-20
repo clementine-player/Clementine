@@ -48,6 +48,12 @@ QString SearchTerm::ToSql() const {
   if (TypeOf(field_) == Type_Rating) {
     col = "CAST ((" + col + " + 0.05) * 10 AS INTEGER)";
     value = "CAST ((" + value + " + 0.05) * 10 AS INTEGER)";
+
+  // The calendar widget specifies no time so ditch the possible time part
+  // from integers representing the dates.
+  } else if (TypeOf(field_) == Type_Date) {
+    col = "DATE(" + col + ", 'unixepoch', 'localtime')";
+    value = "DATE(" + value + ", 'unixepoch', 'localtime')";
   }
 
   switch (operator_) {
@@ -62,17 +68,20 @@ QString SearchTerm::ToSql() const {
     case Op_Equals:
       if (TypeOf(field_) == Type_Text)
         return col + " LIKE '" + value + "'";
-      else if (TypeOf(field_) == Type_Rating)
+      else if (TypeOf(field_) == Type_Rating ||
+               TypeOf(field_) == Type_Date)
         return col + " = " + value + "";
       else
         return col + " = '" + value + "'";
     case Op_GreaterThan:
-      if (TypeOf(field_) == Type_Rating)
+      if (TypeOf(field_) == Type_Rating ||
+          TypeOf(field_) == Type_Date)
         return col + " > " + value + "";
       else
         return col + " > '" + value + "'";
     case Op_LessThan:
-      if (TypeOf(field_) == Type_Rating)
+      if (TypeOf(field_) == Type_Rating ||
+          TypeOf(field_) == Type_Date)
         return col + " < " + value + "";
       else
         return col + " < '" + value + "'";
