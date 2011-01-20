@@ -688,8 +688,11 @@ void GstEngine::timerEvent(QTimerEvent* e) {
       }
 
       // when at the end, kill the track if it didn't stop yet (probably a
-      // multisection media file)
-      if(current_position >= current_length) {
+      // multisection media file).  We add 1 second onto the length during this
+      // check to allow for the fact that the length has been rounded down to
+      // the nearest second, and to stop us from occasionally stopping the
+      // stream just before it ends normally.
+      if(current_position >= current_length + 1000) {
         EndOfStreamReached(current_pipeline_->has_next_valid_url());
       }
     }
