@@ -35,9 +35,20 @@ SearchTerm::SearchTerm(
 }
 
 QString SearchTerm::ToSql() const {
-  const QString col = FieldColumnName(field_);
+  QString col = FieldColumnName(field_);
   QString value = value_.toString();
   value.replace('\'', "''");
+
+  // Floating point problems...
+  // Theoretically 0.0 == 0 stars, 0.1 == 0.5 star, 0.2 == 1 star etc.
+  // but in reality we need to consider anything from [0.05, 0.15) range
+  // to be 0.5 star etc.
+  // To make this simple, I transform the ranges to integeres and then
+  // operate on ints: [0.0, 0.05) -> 0, [0.05, 0.15) -> 1 etc.
+  if (TypeOf(field_) == Type_Rating) {
+    col = "CAST ((" + col + " + 0.05) * 10 AS INTEGER)";
+    value = "CAST ((" + value + " + 0.05) * 10 AS INTEGER)";
+  }
 
   switch (operator_) {
     case Op_Contains:
@@ -51,11 +62,20 @@ QString SearchTerm::ToSql() const {
     case Op_Equals:
       if (TypeOf(field_) == Type_Text)
         return col + " LIKE '" + value + "'";
-      return col + " = '" + value + "'";
+      else if (TypeOf(field_) == Type_Rating)
+        return col + " = " + value + "";
+      else
+        return col + " = '" + value + "'";
     case Op_GreaterThan:
-      return col + " > '" + value + "'";
+      if (TypeOf(field_) == Type_Rating)
+        return col + " > " + value + "";
+      else
+        return col + " > '" + value + "'";
     case Op_LessThan:
-      return col + " < '" + value + "'";
+      if (TypeOf(field_) == Type_Rating)
+        return col + " < " + value + "";
+      else
+        return col + " < '" + value + "'";
   }
 
   return QString();
