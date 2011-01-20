@@ -1,4 +1,4 @@
-find_path(PYQT_SIP_DIR Qt/Qtmod.sip
+find_path(PYQT_SIP_DIR QtCore/qstring.sip
   PATHS /System/Library/Frameworks/Python.framework/Versions/2.6
   PATH_SUFFIXES share/sip/PyQt4
 )
