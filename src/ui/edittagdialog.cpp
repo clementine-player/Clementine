@@ -175,7 +175,9 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 }
 
 EditTagDialog::~EditTagDialog() {
+#ifdef HAVE_LIBTUNEPIMP
   delete tag_fetcher_;
+# endif
   delete ui_;
 }
 
