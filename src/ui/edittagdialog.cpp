@@ -17,6 +17,7 @@
 
 #include "albumcovermanager.h"
 #include "edittagdialog.h"
+#include "trackselectiondialog.h"
 #include "ui_edittagdialog.h"
 #include "core/albumcoverloader.h"
 #include "core/utilities.h"
@@ -42,7 +43,7 @@
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
-const char* EditTagDialog::kTagFetchText = QT_TR_NOOP("Complete automatically");
+const char* EditTagDialog::kTagFetchText = QT_TR_NOOP("Complete tags automatically");
 const char* EditTagDialog::kTagFetchOnLoadText = QT_TR_NOOP("Generating audio fingerprint and fetching results...");
 
 EditTagDialog::EditTagDialog(QWidget* parent)
@@ -60,14 +61,17 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 #endif
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
-    cover_art_is_set_(false)
+    cover_art_is_set_(false),
+    resultsDialog_(new TrackSelectionDialog(this))
 {
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(ArtLoaded(quint64,QImage)));
 #ifdef HAVE_LIBTUNEPIMP
-  connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)), SLOT(FetchTagFinished(QString, SongList)));
+  connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)),
+          this, SLOT(FetchTagFinished(QString, SongList)), Qt::QueuedConnection);
+  connect(resultsDialog_, SIGNAL(SongChoosen(QString, Song)), SLOT(FetchTagSongChoosen(QString, Song)));
 #endif
 
 #ifdef HAVE_LIBLASTFM
@@ -171,6 +175,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 }
 
 EditTagDialog::~EditTagDialog() {
+  delete tag_fetcher_;
   delete ui_;
 }
 
@@ -709,15 +714,57 @@ void EditTagDialog::FetchTag() {
 
 void EditTagDialog::FetchTagFinished(const QString& filename, const SongList& songs_guessed) {
 #ifdef HAVE_LIBTUNEPIMP
-  ui_->fetch_tag->setDisabled(false);
-  ui_->fetch_tag->setText(tr(kTagFetchText));
+  // Restore cursor
   QApplication::restoreOverrideCursor();
-  // TODO: pop-up a window with suggestions (songs_guessed) and complete tags
-  foreach(const Song& song, songs_guessed) {
-    qDebug() << "Song guessed:";
-    qDebug() << "Artist: " + song.artist();
-    qDebug() << "Album:  " + song.album();
-    qDebug() << "Title:  " + song.title();
+
+  // Get current song
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  Song* current_song = &data_[sel.first().row()].original_;
+
+  // Check if the user has closed edit tag dialog or if it has reopened a new one.
+  // If so, ignore this signal; else open a dialog for selecting best result
+  if(isVisible() && current_song->filename() == filename) {
+    // Restore some components as "no working"
+    ui_->fetch_tag->setDisabled(false);
+    ui_->fetch_tag->setText(tr(kTagFetchText));
+
+    // If no songs have been guessed, just display a message
+    if(songs_guessed.empty()) {
+      QMessageBox messageBox(this);
+      messageBox.setWindowTitle(tr("Sorry"));
+      messageBox.setText(tr("Clementine was unable to find results for this file"));
+      messageBox.exec();
+    } else {  // Else, display song's tags selection dialog only if edittagdialog is still opened
+      resultsDialog_->Init(filename, songs_guessed);
+      resultsDialog_->show();
+    }
   }
 #endif
 }
+
+void EditTagDialog::FetchTagSongChoosen(const QString& filename, const Song& song_choosen) {
+  // Get current song
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  Song* current_song = &data_[sel.first().row()].original_;
+  if (!current_song->is_valid() || current_song->id() == -1)
+    return;
+  // Check it's still the same song, using filename
+  if(filename != current_song->filename()) {
+    // different song: we shouldn't erase tags with wrong metadata
+    return;
+  }
+
+  if(song_choosen.title() != "")
+    ui_->title->set_text(song_choosen.title());
+  if(song_choosen.album() != "")
+    ui_->album->set_text(song_choosen.album());
+  if(song_choosen.album() != "")
+    ui_->artist->set_text(song_choosen.artist());
+  if(song_choosen.track() > 0)
+    ui_->track->set_text(QString::number(song_choosen.track()));
+}
+

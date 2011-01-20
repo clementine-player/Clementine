@@ -29,6 +29,7 @@
 #endif
 #include "playlist/playlistitem.h"
 #include "widgets/lineedit.h"
+#include "trackselectiondialog.h"
 
 #ifdef HAVE_LIBLASTFM
   class AlbumCoverFetcher;
@@ -81,6 +82,7 @@ private slots:
   void ResetPlayCounts();
   void FetchTag();
   void FetchTagFinished(const QString& filename, const SongList& songs_guessed);
+  void FetchTagSongChoosen(const QString& filename, const Song& song);
 
   void ArtLoaded(quint64 id, const QImage& image);
 
@@ -167,6 +169,8 @@ private:
 
   QPushButton* previous_button_;
   QPushButton* next_button_;
+
+  TrackSelectionDialog *resultsDialog_;
 };
 
 #endif // EDITTAGDIALOG_H

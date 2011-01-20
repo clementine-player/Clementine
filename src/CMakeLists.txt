@@ -208,6 +208,7 @@ set(SOURCES
   ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/systemtrayicon.cpp
+  ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
 
   widgets/autoexpandingtreeview.cpp
@@ -382,6 +383,7 @@ set(HEADERS
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/systemtrayicon.h
+  ui/trackselectiondialog.h
   ui/windows7thumbbar.h
 
   widgets/autoexpandingtreeview.h
@@ -454,6 +456,7 @@ set(UI
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
   ui/settingsdialog.ui
+  ui/trackselectiondialog.ui
   ui/wiimotedevshortcutsconfig.ui
   ui/wiimotedevshortcutgrabber.ui
 

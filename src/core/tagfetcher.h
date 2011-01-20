@@ -93,6 +93,7 @@ class TagFetcherItem : public QObject {
   NetworkAccessManager *network_;
   char puid_[255];
   SongList  songs_fetched_;
+  bool  already_tried_to_recognize; // to prevent infinite loops while always trying to recognize a file
 #endif // HAVE_LIBTUNEPIMP
 };
 

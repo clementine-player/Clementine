@@ -109,21 +109,28 @@ TagFetcherItem::TagFetcherItem(const QString& _filename, int _fileId, tunepimp_t
   : filename_(_filename),
     fileId_(_fileId),
     pimp_(_pimp),
-    network_(_network)
+    network_(_network),
+    already_tried_to_recognize(false)
 { }
 
 void TagFetcherItem::Unrecognized() {
-  char trm[255];
-  trm[0] = 0;
-  track_t track = tp_GetTrack(pimp_, fileId_);
-  tr_Lock(track);
-  tr_GetPUID(track, trm, 255);
-  if ( !trm[0] ) {
-    tr_SetStatus(track, ePending);
-    tp_Wake(pimp_, track);
+  if(already_tried_to_recognize) {
+    // We already tried to recognize this music and, apparently, nothing has been found: stopping here
+    emit FetchFinishedSignal(fileId_);
+  } else {
+    already_tried_to_recognize = true;
+    char trm[255];
+    trm[0] = 0;
+    track_t track = tp_GetTrack(pimp_, fileId_);
+    tr_Lock(track);
+    tr_GetPUID(track, trm, 255);
+    if ( !trm[0] ) {
+      tr_SetStatus(track, ePending);
+      tp_Wake(pimp_, track);
+    }
+    tr_Unlock(track);
+    tp_ReleaseTrack(pimp_, track);
   }
-  tr_Unlock(track);
-  tp_ReleaseTrack(pimp_, track);
 }
 
 void TagFetcherItem::PuidGenerated() {
@@ -177,16 +184,27 @@ SongList TagFetcherItem::ReadTrack(QXmlStreamReader *reader) {
           currentArtist = reader->readElementText();
         }
       } else if(reader->name() == "release-list") {
+        reader->readNext();
         while(!reader->atEnd()) {
-          reader->readNext();
           if(reader->name() == "title") { // album (release) title
             QString albumTitle = reader->readElementText();
             Song newSongMatch;
             newSongMatch.Init(currentTitle, currentArtist, albumTitle, 0); // Using 0 as length. We could have used <duration> field but it is not usefull, so don't wasting our time and keeping 0
+            reader->readNext();
+            if(reader->name() == "track-list") {
+              QXmlStreamAttributes attributes = reader->attributes();
+              if(attributes.hasAttribute("offset")) {
+                int track = attributes.value("offset").toString().toInt()+1;
+                newSongMatch.set_track(track);
+              }
+              reader->readNext();
+            }
             songs << newSongMatch;
           } else if(reader->tokenType() == QXmlStreamReader::EndElement &&
               reader->name() == "release-list") {
             break;
+          } else {
+            reader->readNext();
           }
         }
       }
