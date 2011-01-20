@@ -38,7 +38,8 @@ About::About(QWidget *parent)
   ui_.title->setFont(title_font);
 
   authors_ << Person("David Sansome", "me@davidsansome.com")
-           << Person("John Maguire", "john.maguire@gmail.com");
+           << Person("John Maguire", "john.maguire@gmail.com")
+           << Person("Keiran", "keirangtp@gmail.com");
   thanks_to_ << Person("Mark Kretschmann", "kretschmann@kde.org")
              << Person("Max Howell", "max.howell@methylblue.com")
              << Person(QString::fromUtf8("Bartłomiej Burdukiewicz"), "dev.strikeu@gmail.com")
