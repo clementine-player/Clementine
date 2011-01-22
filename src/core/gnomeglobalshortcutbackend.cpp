@@ -17,7 +17,10 @@
 
 #include "gnomeglobalshortcutbackend.h"
 #include "globalshortcuts.h"
-#include "dbus/gnomesettingsdaemon.h"
+
+#ifdef QT_DBUS_LIB
+#  include "dbus/gnomesettingsdaemon.h"
+#endif
 
 #include <QAction>
 #include <QtDebug>
