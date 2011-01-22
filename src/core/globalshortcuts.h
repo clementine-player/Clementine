@@ -77,9 +77,6 @@ private:
                          int rating, const QKeySequence& default_key = QKeySequence(0));
   Shortcut AddShortcut(const QString& id, const QString& name, const QKeySequence& default_key);
 
-private slots:
-  void RegisterFinished(bool success);
-
 private:
   GlobalShortcutBackend* gnome_backend_;
   GlobalShortcutBackend* system_backend_;

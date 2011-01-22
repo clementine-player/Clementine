@@ -31,26 +31,18 @@ public:
 
   bool is_active() const { return active_; }
 
-  void Register();
+  bool Register();
   void Unregister();
 
 signals:
   void RegisterFinished(bool success);
 
 protected:
-  virtual bool RegisterInNewThread() const { return false; }
   virtual bool DoRegister() = 0;
   virtual void DoUnregister() = 0;
 
   GlobalShortcuts* manager_;
   bool active_;
-
-private slots:
-  void RegisterFinishedSlot();
-
-private:
-  bool register_in_progress_;
-  bool should_unregister_;
 };
 
 #endif // GLOBALSHORTCUTBACKEND_H

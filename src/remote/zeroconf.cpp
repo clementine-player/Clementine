@@ -14,13 +14,11 @@ Zeroconf* Zeroconf::instance_ = NULL;
 
 Zeroconf* Zeroconf::GetZeroconf() {
   if (!instance_) {
-  #ifdef Q_OS_DARWIN
-    return new Bonjour();
-  #endif
-
-  #ifdef HAVE_DBUS
-    return new Avahi();
-  #endif
+    #if defined(Q_OS_DARWIN)
+      instance_ = new Bonjour();
+    #elif defined(HAVE_DBUS)
+      instance_ = new Avahi();
+    #endif
   }
 
   return instance_;

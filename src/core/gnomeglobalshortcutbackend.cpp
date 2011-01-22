@@ -17,6 +17,7 @@
 
 #include "gnomeglobalshortcutbackend.h"
 #include "globalshortcuts.h"
+#include "dbus/gnomesettingsdaemon.h"
 
 #include <QAction>
 #include <QtDebug>
@@ -45,10 +46,8 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
   }
 
   if (!interface_) {
-    interface_ = new QDBusInterface(
-        kGsdService, kGsdPath, kGsdInterface, QDBusConnection::sessionBus());
-    interface_->moveToThread(thread());
-    interface_->setParent(this);
+    interface_ = new OrgGnomeSettingsDaemonMediaKeysInterface(
+        kGsdService, kGsdPath, QDBusConnection::sessionBus(), this);
   }
 
   connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),

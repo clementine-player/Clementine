@@ -25,56 +25,18 @@
 GlobalShortcutBackend::GlobalShortcutBackend(GlobalShortcuts *parent)
   : QObject(parent),
     manager_(parent),
-    active_(false),
-    register_in_progress_(false),
-    should_unregister_(false)
+    active_(false)
 {
 }
 
-void GlobalShortcutBackend::Register() {
-  if (register_in_progress_) {
-    should_unregister_ = false;
-    return;
-  }
-
-  if (RegisterInNewThread()) {
-    register_in_progress_ = true;
-    QFuture<bool> future = QtConcurrent::run(this, &GlobalShortcutBackend::DoRegister);
-
-    QFutureWatcher<bool>* watcher = new QFutureWatcher<bool>(this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(RegisterFinishedSlot()));
-  } else {
-    bool ret = DoRegister();
-    if (ret)
-      active_ = true;
-    emit RegisterFinished(ret);
-  }
+bool GlobalShortcutBackend::Register() {
+  bool ret = DoRegister();
+  if (ret)
+    active_ = true;
+  return ret;
 }
 
 void GlobalShortcutBackend::Unregister() {
-  if (register_in_progress_) {
-    should_unregister_ = true;
-    return;
-  }
-
   DoUnregister();
   active_ = false;
-}
-
-void GlobalShortcutBackend::RegisterFinishedSlot() {
-  QFutureWatcher<bool>* watcher = dynamic_cast<QFutureWatcher<bool>*>(sender());
-  const bool success = watcher->result();
-  watcher->deleteLater();
-
-  register_in_progress_ = false;
-  if (success)
-    active_ = true;
-
-  if (should_unregister_) {
-    Unregister();
-    should_unregister_ = false;
-  } else {
-    emit RegisterFinished(success);
-  }
 }

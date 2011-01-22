@@ -75,9 +75,6 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   system_backend_ = new MacGlobalShortcutBackend(this);
 #endif
 
-  connect(gnome_backend_, SIGNAL(RegisterFinished(bool)), SLOT(RegisterFinished(bool)));
-  connect(system_backend_, SIGNAL(RegisterFinished(bool)), SLOT(RegisterFinished(bool)));
-
   ReloadSettings();
 }
 
@@ -136,18 +133,9 @@ void GlobalShortcuts::Unregister() {
 }
 
 void GlobalShortcuts::Register() {
-  if (use_gnome_)
-    gnome_backend_->Register();
-  else
-    system_backend_->Register();
-}
-
-void GlobalShortcuts::RegisterFinished(bool success) {
-  GlobalShortcutBackend* backend = qobject_cast<GlobalShortcutBackend*>(sender());
-
-  if (backend == gnome_backend_ && !success) {
-    system_backend_->Register();
-  }
+  if (use_gnome_ && gnome_backend_->Register())
+    return;
+  system_backend_->Register();
 }
 
 bool GlobalShortcuts::IsMacAccessibilityEnabled() const {

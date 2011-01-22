@@ -1,0 +1,18 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.gnome.SettingsDaemon.MediaKeys">
+    <method name="ReleaseMediaPlayerKeys">
+      <arg name="application" type="s" direction="in"/>
+    </method>
+    <method name="GrabMediaPlayerKeys">
+      <arg name="application" type="s" direction="in"/>
+      <arg name="time" type="u" direction="in"/>
+    </method>
+    <signal name="MediaPlayerKeyPressed">
+      <arg type="s"/>
+      <arg type="s"/>
+    </signal>
+  </interface>
+</node>
+"

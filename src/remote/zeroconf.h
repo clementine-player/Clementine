@@ -4,13 +4,17 @@
 #include <QString>
 
 class Zeroconf {
- public:
-  virtual void Publish(
-      const QString& domain, const QString& type, const QString& name, quint16 port) = 0;
+public:
+  virtual ~Zeroconf() {}
+
+  virtual void Publish(const QString& domain,
+                       const QString& type,
+                       const QString& name,
+                       quint16 port) = 0;
 
   static Zeroconf* GetZeroconf();
 
- private:
+private:
   static Zeroconf* instance_;
 };
 

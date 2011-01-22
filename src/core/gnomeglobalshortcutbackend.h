@@ -20,7 +20,7 @@
 
 #include "globalshortcutbackend.h"
 
-class QDBusInterface;
+class OrgGnomeSettingsDaemonMediaKeysInterface;
 
 class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
@@ -41,7 +41,7 @@ private slots:
   void GnomeMediaKeyPressed(const QString& application, const QString& key);
 
 private:
-  QDBusInterface* interface_;
+  OrgGnomeSettingsDaemonMediaKeysInterface* interface_;
 };
 
 #endif // GNOMEGLOBALSHORTCUTBACKEND_H

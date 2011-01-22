@@ -313,9 +313,6 @@ int main(int argc, char *argv[]) {
   qDBusRegisterMetaType<TrackIds>();
   qDBusRegisterMetaType<QList<QByteArray> >();
 
-  // Create the session bus here so it's sure to live in the main thread.
-  QDBusConnection::sessionBus();
-
   mpris::ArtLoader art_loader;
   mpris::Mpris mpris(&player, &art_loader);
 
@@ -325,10 +322,6 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef HAVE_REMOTE
-  #ifdef HAVE_DBUS
-    // Create the system bus here so it's sure to live in the main thread.
-    QDBusConnection::systemBus();
-  #endif
   Zeroconf* zeroconf = Zeroconf::GetZeroconf();
   if (zeroconf) {
     HttpServer* server = new HttpServer(&player);

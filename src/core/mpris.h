@@ -37,16 +37,7 @@ public:
 signals:
   void RaiseMainWindow();
 
-private slots:
-  void Initialised();
-
 private:
-  void Init();
-
-private:
-  Player* player_;
-  ArtLoader* art_loader_;
-
   Mpris1* mpris1_;
   Mpris2* mpris2_;
 };

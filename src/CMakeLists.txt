@@ -607,6 +607,12 @@ if(HAVE_DBUS)
       dbus/org.freedesktop.Notifications.xml
       dbus/notification)
 
+  # org.gnome.SettingsDaemon interface
+  qt4_add_dbus_interface(SOURCES
+      dbus/org.gnome.SettingsDaemon.MediaKeys.xml
+      dbus/gnomesettingsdaemon)
+
+
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
     qt4_add_dbus_interface(SOURCES
@@ -785,6 +791,7 @@ if(HAVE_REMOTE)
 
   if(HAVE_DBUS)
     list(APPEND SOURCES remote/avahi.cpp)
+    list(APPEND HEADERS remote/avahi.h)
   endif(HAVE_DBUS)
 endif(HAVE_REMOTE)
 
