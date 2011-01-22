@@ -73,6 +73,8 @@ bool WmdmDevice::StartCopy(QList<Song::FileType>* supported_types) {
 
   // This initialises COM and gets a connection to the device
   thread_.reset(new WmdmThread);
+  if (!thread_->manager())
+    return false;
 
   // Find a place to put the files.  We default to the root folder for now, but
   // could look for a "Music" folder in the future?

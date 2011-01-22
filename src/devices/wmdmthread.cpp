@@ -29,7 +29,8 @@ BYTE abCert[] = {0x00};
 
 
 WmdmThread::WmdmThread()
-  : device_manager_(NULL)
+  : device_manager_(NULL),
+    sac_(NULL)
 {
   // Initialise COM
   CoInitialize(0);
@@ -63,11 +64,15 @@ WmdmThread::WmdmThread()
 }
 
 WmdmThread::~WmdmThread() {
-  // Release the device manager
-  device_manager_->Release();
+  if (device_manager_) {
+    // Release the device manager
+    device_manager_->Release();
+  }
 
-  // SAC
-  CSecureChannelClient_Free(sac_);
+  if (sac_) {
+    // SAC
+    CSecureChannelClient_Free(sac_);
+  }
 
   // Uninitialise COM
   CoUninitialize();

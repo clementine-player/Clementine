@@ -55,6 +55,8 @@ WmdmLister::~WmdmLister() {
 
 void WmdmLister::Init() {
   thread_.reset(new WmdmThread);
+  if (!thread_->manager())
+    return;
 
   // Register for notifications
   IConnectionPointContainer* cp_container = NULL;
