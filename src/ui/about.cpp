@@ -39,7 +39,7 @@ About::About(QWidget *parent)
 
   authors_ << Person("David Sansome", "me@davidsansome.com")
            << Person("John Maguire", "john.maguire@gmail.com")
-           << Person("Keiran", "keirangtp@gmail.com");
+           << Person(QString::fromUtf8("Paweł Bara"), "keirangtp@gmail.com");
   thanks_to_ << Person("Mark Kretschmann", "kretschmann@kde.org")
              << Person("Max Howell", "max.howell@methylblue.com")
              << Person(QString::fromUtf8("Bartłomiej Burdukiewicz"), "dev.strikeu@gmail.com")
@@ -68,6 +68,8 @@ QString About::MakeHtml() const {
 
   foreach (const Person& person, thanks_to_)
     ret += "<br />" + MakeHtml(person);
+  ret += QString("<br />" + tr("All the translators") + " &lt;<a href=\"https://translations.launchpad.net/clementine\">"
+                 "https://translations.launchpad.net/clementine</a>&gt;");
 
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
   ret += QString("<p><b>%1</b>").arg(tr("And:"));
