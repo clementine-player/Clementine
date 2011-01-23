@@ -41,7 +41,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
          gstreamer0.10-plugins-good,
          gstreamer0.10-alsa | gstreamer0.10-audiosink,
          gstreamer0.10-plugins-ugly,
-         libprojectm-data | projectm-data
+         libprojectm-data | projectm-data,
+         python-qt4
 Description: Clementine is a modern music player and library organiser.
   It is inspired by Amarok 1.4, focusing on a fast and easy-to-use interface for
   searching and playing your music.
