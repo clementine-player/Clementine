@@ -10,12 +10,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-12 17:55+0000\n"
 "Last-Translator: Adam Czabara <kolofaza@o2.pl>\n"
 "Language-Team: Polish <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: \n"
 "X-Language: pl_PL\n"
 
 msgid " ms"
@@ -82,15 +82,15 @@ msgstr "%1 ścieżek"
 msgid "%1: Wiimotedev module"
 msgstr "%1: moduł Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nieudane"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n zakończone"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "pozostało %n"
 
@@ -304,6 +304,9 @@ msgstr "Wszystkie pliki (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Wszystkie listy odtwarzania (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Wszystkie ścieżki"
@@ -905,6 +908,9 @@ msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr "Wpisz <b>wykonawcę</b> lub <b>znacznik</b>, aby słuchać radia Last.fm."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Wpisz szukane wyrażenie"
 
@@ -987,6 +993,9 @@ msgstr "Pobierz brakujące okładki"
 
 msgid "Fetch automatically"
 msgstr "Pobierz automatycznie"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Rozszerzenie pliku"
@@ -1357,6 +1366,12 @@ msgstr "Na żywo"
 
 msgid "Load"
 msgstr "Wczytaj"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Wczytaj okładkę z dysku..."
@@ -2282,6 +2297,12 @@ msgstr "Katalog %1 jest nieprawidłowy"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Lista odtwarzania \"%1\" była pusta lub nie można było jej wczytać."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Wystąpił problem podczas pobierania metadanych z Magnatune"
 
@@ -2632,7 +2653,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodaj %n utworów"
 
@@ -2691,7 +2712,7 @@ msgstr "w dniu"
 msgid "options"
 msgstr "opcje"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "usuń %n utworów"
 

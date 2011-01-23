@@ -11,6 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2011-01-12 19:24+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -83,15 +84,15 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -304,6 +305,9 @@ msgstr "Sve datoteke (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Svi popisi izvođenja (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Sve pjesme"
@@ -905,6 +909,9 @@ msgid ""
 msgstr ""
 "Unesite <b>izvođač</b> ili <b>oznaku</b> da počnete slušati Last.fm radio."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Upišite zahtjev za pretraživanje ovdje"
 
@@ -987,6 +994,9 @@ msgstr "Dohvati prazan omot"
 
 msgid "Fetch automatically"
 msgstr "Dohvati automatski"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Ekstenzija datoteke"
@@ -1352,6 +1362,12 @@ msgstr ""
 
 msgid "Load"
 msgstr "Učitaj"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Učitaj omot sa diska..."
@@ -2276,6 +2292,12 @@ msgstr "Mapa %1 nije valjana"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Popis izvođenja '%1' je prazan ili se ne može očitati."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Dogodio se problem u preuzimanju podataka iz Magnatune"
 
@@ -2625,7 +2647,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -2684,7 +2706,7 @@ msgstr "na"
 msgid "options"
 msgstr "opcije"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 

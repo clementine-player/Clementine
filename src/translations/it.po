@@ -12,12 +12,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-16 14:24+0000\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: it\n"
 
 msgid " ms"
 msgstr " ms"
@@ -83,15 +83,15 @@ msgstr "%1 tracce"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n non riusciti"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completati"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n rimanenti"
 
@@ -305,6 +305,9 @@ msgstr "Tutti i file (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Tutte le scalette (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Tutte le tracce"
@@ -911,6 +914,9 @@ msgstr ""
 "Inserisci un <b>artista</b> o un <b>tag</b> per iniziare l'ascolto di una "
 "radio Last.fm."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Inserisci qui i termini di ricerca"
 
@@ -993,6 +999,9 @@ msgstr "Scarica copertine mancanti"
 
 msgid "Fetch automatically"
 msgstr "Scarica automaticamente"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Estensione file"
@@ -1365,6 +1374,12 @@ msgstr "Live"
 
 msgid "Load"
 msgstr "Carica"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Carica copertina da disco..."
@@ -2290,6 +2305,12 @@ msgstr "La cartella %1 non è valida"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "La scaletta '%1' è vuota o non può essere caricata."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 "Si è verificato un problema durante il recupero dei dati aggiuntivi da "
@@ -2648,7 +2669,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "aggiungi %n brani"
 
@@ -2707,7 +2728,7 @@ msgstr "il"
 msgid "options"
 msgstr "opzioni"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "rimuovi %n brani"
 

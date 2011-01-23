@@ -24,6 +24,7 @@
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "playlist/playlistdelegates.h"
+#include "ui/coverfromurldialog.h"
 
 #ifdef HAVE_LIBLASTFM
 # include "albumcoversearcher.h"
@@ -49,6 +50,7 @@ const char* EditTagDialog::kTagFetchOnLoadText = QT_TR_NOOP("Generating audio fi
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
+    cover_from_url_dialog_(NULL),
     backend_(NULL),
     loading_(false),
     ignore_edits_(false),
@@ -146,7 +148,10 @@ EditTagDialog::EditTagDialog(QWidget* parent)
         IconLoader::Load("document-open"), tr("Load cover from disk..."),
         this, SLOT(LoadCoverFromFile()));
   download_cover_ = cover_menu_->addAction(
-        IconLoader::Load("download"), tr("Search for album covers..."),
+        IconLoader::Load("download"), tr("Load cover from URL..."),
+        this, SLOT(LoadCoverFromURL()));
+  search_for_cover_ = cover_menu_->addAction(
+        IconLoader::Load("find"), tr("Search for album covers..."),
         this, SLOT(SearchCover()));
   unset_cover_ = cover_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Unset cover"),
@@ -179,6 +184,9 @@ EditTagDialog::~EditTagDialog() {
   delete tag_fetcher_;
 # endif
   delete ui_;
+  if(cover_from_url_dialog_) {
+    delete cover_from_url_dialog_;
+  }
 }
 
 bool EditTagDialog::SetLoading(const QString& message) {
@@ -424,7 +432,7 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
 
 #ifndef HAVE_LIBLASTFM
   choose_cover_->setEnabled(false);
-  download_cover_->setEnabled(false);
+  search_for_cover_->setEnabled(false);
 #endif
 
   unset_cover_->setEnabled(art_is_set);
@@ -528,6 +536,24 @@ void EditTagDialog::LoadCoverFromFile() {
   // Update database
   SetAlbumArt(cover);
 #endif
+}
+
+void EditTagDialog::LoadCoverFromURL() {
+  // TODO: duplication
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+  if (sel.isEmpty())
+    return;
+  const Song& song = data_[sel.first().row()].original_;
+
+  if(!cover_from_url_dialog_) {
+    cover_from_url_dialog_ = new CoverFromURLDialog(this);
+  }
+
+  QImage image = cover_from_url_dialog_->Exec();
+  if (image.isNull())
+    return;
+
+  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(song.artist(), song.album(), image));
 }
 
 void EditTagDialog::SearchCover() {

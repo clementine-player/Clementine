@@ -25,6 +25,7 @@
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
 #include "widgets/maclineedit.h"
+#include "ui/coverfromurldialog.h"
 
 #include <QActionGroup>
 #include <QContextMenuEvent>
@@ -55,6 +56,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
+    cover_from_url_dialog_(NULL),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this, network)),
@@ -73,11 +75,12 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   // Icons
   ui_->action_fetch->setIcon(IconLoader::Load("download"));
   ui_->action_choose_manual->setIcon(IconLoader::Load("document-open"));
+  ui_->action_choose_url->setIcon(IconLoader::Load("download"));
   ui_->action_show_fullsize->setIcon(IconLoader::Load("zoom-in"));
   ui_->action_unset_cover->setIcon(IconLoader::Load("list-remove"));
   ui_->view->setIcon(IconLoader::Load("view-choose"));
   ui_->fetch->setIcon(IconLoader::Load("download"));
-  ui_->action_search_manual->setIcon(IconLoader::Load("download"));
+  ui_->action_search_manual->setIcon(IconLoader::Load("find"));
   ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
 
@@ -109,6 +112,9 @@ AlbumCoverManager::~AlbumCoverManager() {
   CancelRequests();
 
   delete ui_;
+  if(cover_from_url_dialog_) {
+    delete cover_from_url_dialog_;
+  }
 }
 
 void AlbumCoverManager::Init() {
@@ -129,11 +135,11 @@ void AlbumCoverManager::Init() {
   ui_->view->setMenu(view_menu);
 
   // Context menu
-  context_menu_->addAction(ui_->action_show_fullsize);
-  context_menu_->addAction(ui_->action_search_manual);
   context_menu_->addAction(ui_->action_choose_manual);
-  context_menu_->addSeparator();
+  context_menu_->addAction(ui_->action_choose_url);
+  context_menu_->addAction(ui_->action_search_manual);
   context_menu_->addAction(ui_->action_unset_cover);
+  context_menu_->addAction(ui_->action_show_fullsize);
   context_menu_->addSeparator();
   context_menu_->addAction(ui_->action_load);
   context_menu_->addAction(ui_->action_add_to_playlist);
@@ -151,6 +157,7 @@ void AlbumCoverManager::Init() {
   connect(ui_->action_show_fullsize, SIGNAL(triggered()), SLOT(ShowFullsize()));
   connect(ui_->action_fetch, SIGNAL(triggered()), SLOT(FetchSingleCover()));
   connect(ui_->action_choose_manual, SIGNAL(triggered()), SLOT(ChooseManualCover()));
+  connect(ui_->action_choose_url, SIGNAL(triggered()), SLOT(ChooseURLCover()));
   connect(ui_->action_unset_cover, SIGNAL(triggered()), SLOT(UnsetCover()));
   connect(ui_->albums, SIGNAL(doubleClicked(QModelIndex)), SLOT(AlbumDoubleClicked(QModelIndex)));
   connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
@@ -473,6 +480,7 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
 
     ui_->action_show_fullsize->setEnabled(some_with_covers && context_menu_items_.size() == 1);
     ui_->action_choose_manual->setEnabled(context_menu_items_.size() == 1);
+    ui_->action_choose_url->setEnabled(context_menu_items_.size() == 1);
     ui_->action_unset_cover->setEnabled(some_with_covers);
 
     QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
@@ -545,6 +553,22 @@ void AlbumCoverManager::ChooseManualCover() {
   quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
   item->setData(Role_PathManual, cover);
   cover_loading_tasks_[id] = item;
+}
+
+void AlbumCoverManager::ChooseURLCover() {
+  if (context_menu_items_.size() != 1)
+    return;
+  QListWidgetItem* item = context_menu_items_[0];
+
+  if(!cover_from_url_dialog_) {
+    cover_from_url_dialog_ = new CoverFromURLDialog(this);
+  }
+
+  QImage image = cover_from_url_dialog_->Exec();
+  if (image.isNull())
+    return;
+
+  SaveAndSetCover(item, image);
 }
 
 QString AlbumCoverManager::InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const {

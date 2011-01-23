@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-03 13:31+0000\n"
 "Last-Translator: Ofir Klinger <klinger.ofir@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:04+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: he\n"
 
 msgid " ms"
 msgstr " מילי־שניות"
@@ -82,15 +82,15 @@ msgstr "%1 רצועות"
 msgid "%1: Wiimotedev module"
 msgstr "%1: המודול Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n נכשל"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n הסתיים"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n נותר"
 
@@ -301,6 +301,9 @@ msgstr "כל הקבצים (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "כל רשימות־ההשמעה (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "כל הרצועות"
@@ -898,6 +901,9 @@ msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr "הזן <b>אמן</b> או <b>תגית</b> כדי להתחיל להאזין לרדיו של Last.fm."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "הזן כאן מונחי חיפוש"
 
@@ -980,6 +986,9 @@ msgstr "מצא עטיפות חסרות"
 
 msgid "Fetch automatically"
 msgstr "מצא אוטומטית"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "סיומת הקובץ"
@@ -1342,6 +1351,12 @@ msgstr "חי"
 
 msgid "Load"
 msgstr "טען"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "טען עטיפה מהדיסק..."
@@ -2265,6 +2280,12 @@ msgstr "התיקייה %1 לא חוקית"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "רשימת־ההשמעה %1 ריקה או שלא ניתן היה לטעון אותה."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "ארעה בעיה בקבלת המידע הנוסף מתוך Magnatune"
 
@@ -2605,7 +2626,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "אפס"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "הוסף %n שירים"
 
@@ -2664,7 +2685,7 @@ msgstr "ב־"
 msgid "options"
 msgstr "אפשרויות"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "הסרת %n שירים"
 

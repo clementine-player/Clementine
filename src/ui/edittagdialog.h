@@ -37,6 +37,7 @@
 #endif
 
 class AlbumCoverLoader;
+class CoverFromURLDialog;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
@@ -87,6 +88,7 @@ private slots:
   void ArtLoaded(quint64 id, const QImage& image);
 
   void LoadCoverFromFile();
+  void LoadCoverFromURL();
   void SearchCover();
   void UnsetCover();
   void ZoomCover();
@@ -138,6 +140,8 @@ private:
 
 private:
   Ui_EditTagDialog* ui_;
+  CoverFromURLDialog* cover_from_url_dialog_;
+
   LibraryBackend* backend_;
 
   bool loading_;
@@ -164,6 +168,7 @@ private:
   QMenu* cover_menu_;
   QAction* choose_cover_;
   QAction* download_cover_;
+  QAction* search_for_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;
 

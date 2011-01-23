@@ -30,6 +30,7 @@
 
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
+class CoverFromURLDialog;
 class LibraryBackend;
 class LineEditInterface;
 class SongMimeData;
@@ -88,6 +89,7 @@ class AlbumCoverManager : public QMainWindow {
   void FetchSingleCover();
   void SearchManual();
   void ChooseManualCover();
+  void ChooseURLCover();
   void UnsetCover();
 
   // For adding albums to the playlist
@@ -128,6 +130,7 @@ class AlbumCoverManager : public QMainWindow {
   bool constructed_;
 
   Ui_CoverManager* ui_;
+  CoverFromURLDialog* cover_from_url_dialog_;
   LibraryBackend* backend_;
 
   QAction* filter_all_;

@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-18 15:45+0200\n"
 "Last-Translator: Ekrem Kocadere <ekocadere@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "X-Launchpad-Export-Date: 2010-12-11 05:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 parça"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modülü"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -303,6 +303,9 @@ msgstr "Tüm Dosyalar (*)"
 msgid "All playlists (%1)"
 msgstr "Tüm çalma listeleri (%1)"
 
+msgid "All the translators"
+msgstr ""
+
 msgid "All tracks"
 msgstr "Tüm parçalar"
 
@@ -347,6 +350,9 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
+
+msgid "Are you sure you want to install the following scripts?"
+msgstr ""
 
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Bu şarkının istatistik bilgisini sıfırlamak istiyor musunuz?"
@@ -517,6 +523,12 @@ msgstr ""
 msgid "Clementine image viewer"
 msgstr "Clementine resim görüntüleyici"
 
+msgid "Clementine scripts"
+msgstr ""
+
+msgid "Clementine was unable to find results for this file"
+msgstr ""
+
 msgid "Click here to add some music"
 msgstr "Parça eklemek için buraya tıklayın"
 
@@ -537,6 +549,9 @@ msgstr "Renk"
 
 msgid "Comment"
 msgstr "Yorum"
+
+msgid "Complete tags automatically"
+msgstr ""
 
 msgid "Composer"
 msgstr "Besteci"
@@ -890,6 +905,9 @@ msgstr ""
 "Last.fm radyosunu dinlemeye başlamak için <b>artist</b> veya <b>etiket</b> "
 "girin."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Aranacak ifadeyi girin"
 
@@ -914,9 +932,15 @@ msgstr "Şarkılar kopyalanırken hata"
 msgid "Error deleting songs"
 msgstr "Şarkılar silinirken hata"
 
+msgid "Error installing script"
+msgstr ""
+
 #, qt-format
 msgid "Error loading %1"
 msgstr "%1 yüklenirken hata"
+
+msgid "Error opening script archive"
+msgstr ""
 
 #, qt-format
 msgid "Error processing %1: %2"
@@ -966,6 +990,9 @@ msgstr "Eksik Albüm Kapaklarını İndir"
 
 msgid "Fetch automatically"
 msgstr "Otomatik indir"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Dosya uzantısı"
@@ -1054,6 +1081,9 @@ msgstr "GStreamer ses motoru"
 
 msgid "General settings"
 msgstr "Genel ayarlar"
+
+msgid "Generating audio fingerprint and fetching results..."
+msgstr ""
 
 msgid "Genre"
 msgstr "Tür"
@@ -1170,6 +1200,15 @@ msgstr "Bilgi"
 
 msgid "Insert..."
 msgstr "Ekle..."
+
+msgid "Install from file..."
+msgstr ""
+
+msgid "Install script file"
+msgstr ""
+
+msgid "Install scripts"
+msgstr ""
 
 msgid "Internet"
 msgstr "Internet"
@@ -1322,6 +1361,12 @@ msgstr "Canlı"
 
 msgid "Load"
 msgstr "Yükle"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Albüm kapağını diskten yükle..."
@@ -1904,6 +1949,9 @@ msgstr "Çalma sayısını sıfırla"
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
 
+msgid "Results fetched"
+msgstr ""
+
 msgid "Rock"
 msgstr "Rock"
 
@@ -1993,6 +2041,9 @@ msgstr "Tümünü Seç"
 
 msgid "Select None"
 msgstr "Hiçbirini Seçme"
+
+msgid "Select best possible match"
+msgstr ""
 
 msgid "Select visualizations"
 msgstr "Görsel seç"
@@ -2126,6 +2177,9 @@ msgstr "Hafif"
 msgid "Soft Rock"
 msgstr "Hafif Rock"
 
+msgid "Some files failed to install.  The script may not work correctly."
+msgstr ""
+
 msgid "Song Information"
 msgstr "Şarkı Bilgisi"
 
@@ -2134,6 +2188,9 @@ msgstr "Şarkı bilgisi"
 
 msgid "Sonogram"
 msgstr "Sonogram"
+
+msgid "Sorry"
+msgstr ""
 
 msgid "Sort by genre (alphabetically)"
 msgstr "Türe göre sırala (alfabetik)"
@@ -2223,12 +2280,22 @@ msgid "The \"%1\" command could not be started."
 msgstr "\"%1\" komutu başlatılamadı."
 
 #, qt-format
+msgid "The '%1' script was modified, you might have to reload it"
+msgstr ""
+
+#, qt-format
 msgid "The directory %1 is not valid"
 msgstr "%1 dizini geçersiz"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Çalma listesi '%1' boş veya yüklenemiyor."
+
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatude servisinden veri alınırken hata oluştu"
@@ -2280,6 +2347,9 @@ msgstr "Bu bir MTP aygıtı fakat Clementine libmtp desteği olmadan derlenmiş.
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr "Bu bir iPod fakat Clementine libgpod desteği olmadan derlenmiş."
+
+msgid "This is not a valid Clementine script file."
+msgstr ""
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -2442,6 +2512,11 @@ msgstr "Hacim adı"
 msgid "WAV"
 msgstr "WAV"
 
+msgid ""
+"Warning: scripts have full access to your computer and your music.  Only "
+"install scripts that you trust."
+msgstr ""
+
 msgid "Wav"
 msgstr "Wav"
 
@@ -2455,7 +2530,8 @@ msgid ""
 msgstr ""
 "Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini "
 "içeren resim dosyasına bakacak.\n"
-"Eğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi kullanacak."
+"Eğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi "
+"kullanacak."
 
 msgid "WiFi MAC Address"
 msgstr "WiFi MAC Adresi"
@@ -2563,7 +2639,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -2622,7 +2698,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 

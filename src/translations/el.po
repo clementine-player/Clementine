@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-16 14:11+0000\n"
 "Last-Translator: koleoptero <Unknown>\n"
 "Language-Team: <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:04+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: \n"
 "X-Language: el_GR\n"
 "X-Source-Language: en\n"
 
@@ -84,15 +84,15 @@ msgstr "%1 κομμάτια"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Άρθρωμα Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n απομένει"
 
@@ -308,6 +308,9 @@ msgstr "Όλα τα αρχεία (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Όλες οι λίστες αναπαραγωγής (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Όλα τα κομμάτια"
@@ -917,6 +920,9 @@ msgstr ""
 "Εισάγετε έναν <b>καλλιτέχνη</b> ή <b>ετικέτα</b> για να ξεκινήσετε να ακούτε "
 "Last.fm."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Εισάγετε όρους αναζήτησης εδώ"
 
@@ -999,6 +1005,9 @@ msgstr "Κατέβασμα εξώφυλλων που λείπουν"
 
 msgid "Fetch automatically"
 msgstr "Αυτόματο κατέβασμα"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Επέκταση αρχείου"
@@ -1367,6 +1376,12 @@ msgstr "Ζωντανά"
 
 msgid "Load"
 msgstr "Φόρτωση"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Φόρτωση εξώφυλλου από τον δίσκο..."
@@ -2295,6 +2310,12 @@ msgstr "Ο κατάλογος %1 δεν είναι έγκυρος"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Η λίστα αναπαραγωγής '%1' ήταν άδεια ή δεν μπόρεσε να φορτωθεί."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 "Υπήρξε κάποιο σφάλμα κατά την μεταφορά των μετα-δεδομένων από το Magnatune"
@@ -2653,7 +2674,7 @@ msgstr "Ω-Α"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
@@ -2712,7 +2733,7 @@ msgstr "σε"
 msgid "options"
 msgstr "επιλογές"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 

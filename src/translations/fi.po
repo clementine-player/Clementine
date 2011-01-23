@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2010-12-22 17:24+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:04+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: fi\n"
 
 msgid " ms"
 msgstr " ms"
@@ -82,15 +82,15 @@ msgstr "%1 kappaletta"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n epäonnistui"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n valmistui"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n jäljellä"
 
@@ -295,6 +295,9 @@ msgstr "Kaikki tiedostot (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Kaikki soittolistat (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr ""
@@ -883,6 +886,9 @@ msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr ""
 
@@ -965,6 +971,9 @@ msgstr "Nouda puuttuvat kansikuvat"
 
 msgid "Fetch automatically"
 msgstr "Nouda automaattisesti"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Tiedostopääte"
@@ -1323,6 +1332,12 @@ msgstr ""
 
 msgid "Load"
 msgstr "Lataa"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Lataa kansikuva levyltä..."
@@ -2246,6 +2261,12 @@ msgstr ""
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr ""
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 
@@ -2569,7 +2590,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -2628,7 +2649,7 @@ msgstr ""
 msgid "options"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 

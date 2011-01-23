@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2010-12-31 20:38+0000\n"
 "Last-Translator: George Karavasilev <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:03+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: bg\n"
 
 msgid " ms"
 msgstr " ms"
@@ -82,15 +82,15 @@ msgstr "%1 песни"
 msgid "%1: Wiimotedev module"
 msgstr "%1:Wiimotedev модул"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завършено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n оставащо"
 
@@ -302,6 +302,9 @@ msgstr "Всички файлове (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Всички плейлисти (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Всички песни"
@@ -905,6 +908,9 @@ msgstr ""
 "Въведете <b>изпълнител</b> или <b>етикет</b> за да започнете да слушате Last."
 "fm радио"
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Въведете критерий за търсене"
 
@@ -987,6 +993,9 @@ msgstr "Сваляне на липсващите обложки"
 
 msgid "Fetch automatically"
 msgstr "Автоматично изтегляне"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Файлово разширение"
@@ -1357,6 +1366,12 @@ msgstr "На живо"
 
 msgid "Load"
 msgstr "Зареди"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Зареждане на обложката от диска..."
@@ -2282,6 +2297,12 @@ msgstr "Директорията \"%1\" не е валидна"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Плейлиста '%1' беше празене или не можа да бъде зареден"
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Имаше проблем с изтеглянето на метаданните от Magnatune"
 
@@ -2636,7 +2657,7 @@ msgstr "Я-А"
 msgid "Zero"
 msgstr "Нула"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавете %n песни"
 
@@ -2695,7 +2716,7 @@ msgstr "вкл."
 msgid "options"
 msgstr "опции"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "премахване на %n песни"
 

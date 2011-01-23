@@ -195,6 +195,7 @@ set(SOURCES
 
   ui/about.cpp
   ui/addstreamdialog.cpp
+  ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
   ui/flowlayout.cpp
@@ -373,6 +374,7 @@ set(HEADERS
 
   ui/about.h
   ui/addstreamdialog.h
+  ui/coverfromurldialog.h
   ui/edittagdialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h
@@ -448,6 +450,7 @@ set(UI
 
   ui/about.ui
   ui/addstreamdialog.ui
+  ui/coverfromurldialog.ui
   ui/edittagdialog.ui
   ui/equalizer.ui
   ui/globalshortcutgrabber.ui

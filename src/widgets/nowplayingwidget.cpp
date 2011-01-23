@@ -19,6 +19,7 @@
 #include "core/albumcoverloader.h"
 #include "core/kittenloader.h"
 #include "library/librarybackend.h"
+#include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
 
 #ifdef HAVE_LIBLASTFM
@@ -62,6 +63,7 @@ const int NowPlayingWidget::kTopBorder = 4;
 
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
+    cover_from_url_dialog_(NULL),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     kitten_loader_(NULL),
 #ifdef HAVE_LIBLASTFM
@@ -101,7 +103,10 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
         IconLoader::Load("document-open"), tr("Load cover from disk..."),
         this, SLOT(LoadCoverFromFile()));
   download_cover_ = menu_->addAction(
-        IconLoader::Load("download"), tr("Search for album covers..."),
+        IconLoader::Load("download"), tr("Load cover from URL..."),
+        this, SLOT(LoadCoverFromURL()));
+  search_for_cover_ = menu_->addAction(
+        IconLoader::Load("find"), tr("Search for album covers..."),
         this, SLOT(SearchCover()));
   unset_cover_ = menu_->addAction(
         IconLoader::Load("list-remove"), tr("Unset cover"),
@@ -129,6 +134,12 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
 #ifdef HAVE_LIBLASTFM
   cover_searcher_->Init(cover_fetcher_);
 #endif
+}
+
+NowPlayingWidget::~NowPlayingWidget() {
+  if(cover_from_url_dialog_) {
+    delete cover_from_url_dialog_;
+  }
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
@@ -370,7 +381,7 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
 #ifndef HAVE_LIBLASTFM
   choose_cover_->setEnabled(false);
-  download_cover_->setEnabled(false);
+  search_for_cover_->setEnabled(false);
 #endif
 
   const bool art_is_set =
@@ -445,6 +456,19 @@ void NowPlayingWidget::LoadCoverFromFile() {
   // Update database
   SetAlbumArt(cover);
 #endif
+}
+
+void NowPlayingWidget::LoadCoverFromURL() {
+  if(!cover_from_url_dialog_) {
+    cover_from_url_dialog_ = new CoverFromURLDialog(this);
+  }
+
+  QImage image = cover_from_url_dialog_->Exec();
+  if (image.isNull())
+    return;
+
+  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(
+      metadata_.artist(), metadata_.album(), image));
 }
 
 void NowPlayingWidget::SearchCover() {

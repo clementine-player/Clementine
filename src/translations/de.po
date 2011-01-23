@@ -12,12 +12,12 @@ msgstr ""
 "PO-Revision-Date: 2011-01-11 19:47+0000\n"
 "Last-Translator: cmdrhenner <cmdrhenner@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:04+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
-"Language: de\n"
 
 msgid " ms"
 msgstr " ms"
@@ -83,15 +83,15 @@ msgstr "%1 Stücke"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev-Modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -305,6 +305,9 @@ msgstr "Alle Dateien (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Alle Wiedergabelisten (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Alle Stücke"
@@ -911,6 +914,9 @@ msgstr ""
 "Geben Sie einen <b>Künstler</b> oder ein <b>Stichwort</b> ein, um Last.fm "
 "Radio zu hören."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Sammlung durchsuchen"
 
@@ -993,6 +999,9 @@ msgstr "Fehlende Cover holen"
 
 msgid "Fetch automatically"
 msgstr "Cover automatisch holen"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Dateiendung"
@@ -1362,6 +1371,12 @@ msgstr "Live"
 
 msgid "Load"
 msgstr "Laden"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Cover von Datenträger wählen..."
@@ -2286,6 +2301,12 @@ msgstr "Ordner %1 ist ungültig"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Die Wiedergabeliste \"%1\" ist leer oder konnte nicht geladen werden."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Beim Holen der Metadaten von Magnatune ist ein Fehler aufgetreten"
 
@@ -2642,7 +2663,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -2701,7 +2722,7 @@ msgstr "auf"
 msgid "options"
 msgstr "Einstellungen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 

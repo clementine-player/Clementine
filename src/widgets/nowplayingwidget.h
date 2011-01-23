@@ -29,6 +29,7 @@
 #endif
 
 class AlbumCoverLoader;
+class CoverFromURLDialog;
 class LibraryBackend;
 
 class QActionGroup;
@@ -43,6 +44,7 @@ class NowPlayingWidget : public QWidget {
 
 public:
   NowPlayingWidget(QWidget* parent = 0);
+  ~NowPlayingWidget();
 
   static const char* kSettingsGroup;
   static const int kPadding;
@@ -92,6 +94,7 @@ private slots:
   void FadePreviousTrack(qreal value);
 
   void LoadCoverFromFile();
+  void LoadCoverFromURL();
   void SearchCover();
   void UnsetCover();
   void ZoomCover();
@@ -106,6 +109,8 @@ private:
   void SetAlbumArt(const QString& path);
 
 private:
+  CoverFromURLDialog* cover_from_url_dialog_;
+
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   BackgroundThread<AlbumCoverLoader>* kitten_loader_;
 
@@ -122,6 +127,7 @@ private:
   QAction* above_statusbar_action_;
   QAction* choose_cover_;
   QAction* download_cover_;
+  QAction* search_for_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;
 

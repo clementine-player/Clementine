@@ -11,13 +11,13 @@ msgstr ""
 "PO-Revision-Date: 2011-01-16 07:13+0000\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: LITHUANIA\n"
-"Language: lt\n"
 "X-Poedit-Language: Lithuanian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -305,6 +305,9 @@ msgstr "Visi failai (*)"
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Visi grojaraščiai (%1)"
+
+msgid "All the translators"
+msgstr ""
 
 msgid "All tracks"
 msgstr "Visi takeliai"
@@ -906,6 +909,9 @@ msgstr ""
 "Įveskite <b>atlikėją</b> arba <b>žymę</b>, kad pradėti klausytis Last.fm "
 "radijo."
 
+msgid "Enter an URL to download a cover from the Internet:"
+msgstr ""
+
 msgid "Enter search terms here"
 msgstr "Įveskite paieškos žodžius čia"
 
@@ -988,6 +994,9 @@ msgstr "Gauti trūkstamus albumų viršelius"
 
 msgid "Fetch automatically"
 msgstr "Gauti automatiškai"
+
+msgid "Fetching cover error"
+msgstr ""
 
 msgid "File extension"
 msgstr "Failo plėtinys"
@@ -1355,6 +1364,12 @@ msgstr "Gyvai"
 
 msgid "Load"
 msgstr "Įkelti"
+
+msgid "Load cover from URL"
+msgstr ""
+
+msgid "Load cover from URL..."
+msgstr ""
 
 msgid "Load cover from disk..."
 msgstr "Įkelti viršelį iš disko..."
@@ -2279,6 +2294,12 @@ msgstr "Aplankas %1 yra netinkamas"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Grojaraštis '%1' buvo tuščias arba negalėjo būti įkeltas."
 
+msgid "The site you requested does not exist!"
+msgstr ""
+
+msgid "The site you requested is not an image!"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Įvyko klaida gaunant meta duomenis iš Magnatune"
 
@@ -2623,7 +2644,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -2682,7 +2703,7 @@ msgstr "iš"
 msgid "options"
 msgstr "parinktys"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
