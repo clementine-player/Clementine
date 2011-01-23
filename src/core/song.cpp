@@ -420,6 +420,9 @@ void Song::ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* c
 
   if (!map["COMPILATION"].isEmpty() )
     *compilation = TStringToQString( map["COMPILATION"].front() ).trimmed();
+  
+  if (!map["COVERART"].isEmpty())
+    d->art_automatic_ = AlbumCoverLoader::kEmbeddedCover;
 }
 
 void Song::GuessFileType(TagLib::FileRef* fileref) {
