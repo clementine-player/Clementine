@@ -110,6 +110,11 @@ class Song {
   static QString TextForFiletype(FileType type);
   QString TextForFiletype() const { return TextForFiletype(filetype()); }
 
+  // Helper function to load embedded cover art from a music file.  This is not
+  // actually used by the Song class, but instead it is called by
+  // AlbumCoverLoader and is here so it can lock on the taglib mutex.
+  static QImage LoadEmbeddedArt(const QString& filename);
+
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, int length);
   void Init(const QString& title, const QString& artist, const QString& album, int beginning, int end);

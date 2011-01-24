@@ -25,15 +25,6 @@
 #include <QUrl>
 #include <QNetworkReply>
 
-#include <taglib/attachedpictureframe.h>
-#include <taglib/fileref.h>
-#include <taglib/id3v2tag.h>
-#include <taglib/mpegfile.h>
-#include <taglib/oggfile.h>
-#include <taglib/oggflacfile.h>
-#include <taglib/speexfile.h>
-#include <taglib/vorbisfile.h>
-
 const char* AlbumCoverLoader::kManuallyUnsetCover = "(unset)";
 const char* AlbumCoverLoader::kEmbeddedCover = "(embedded)";
 
@@ -137,7 +128,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     return TryLoadResult(false, true, default_);
 
   if (filename == kEmbeddedCover && !task.song_filename.isEmpty()) {
-    QImage taglib_image = LoadFromTaglib(task.song_filename);
+    QImage taglib_image = Song::LoadEmbeddedArt(task.song_filename);
     if (!taglib_image.isNull())
       return TryLoadResult(false, true, ScaleAndPad(taglib_image));
   }
@@ -152,57 +143,6 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
   QImage image(filename);
   return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
-}
-
-QImage AlbumCoverLoader::LoadFromTaglib(const QString& filename) {
-  QImage ret;
-  if (filename.isEmpty())
-    return ret;
-
-#ifdef Q_OS_WIN32
-  TagLib::FileRef ref(filename.toStdWString().c_str());
-#else
-  TagLib::FileRef ref(QFile::encodeName(filename).constData());
-#endif
-
-  if (ref.isNull() || !ref.file())
-    return ret;
-
-  // mp3
-  TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(ref.file());
-  if (file && file->ID3v2Tag()) {
-    TagLib::ID3v2::FrameList apic_frames = file->ID3v2Tag()->frameListMap()["APIC"];
-    if (apic_frames.isEmpty())
-      return ret;
-
-    TagLib::ID3v2::AttachedPictureFrame* pic =
-        static_cast<TagLib::ID3v2::AttachedPictureFrame*>(apic_frames.front());
-
-    ret.loadFromData((const uchar*) pic->picture().data(), pic->picture().size());
-    return ret;
-  }
-  
-  // Ogg vorbis/flac/speex
-  TagLib::Ogg::XiphComment* xiph_comment =
-      dynamic_cast<TagLib::Ogg::XiphComment*>(ref.file()->tag());
-
-  if (xiph_comment) {
-    TagLib::Ogg::FieldListMap map = xiph_comment->fieldListMap();
-
-    // Ogg lacks a definitive standard for embedding cover art, but it seems
-    // b64 encoding a field called COVERART is the general convention
-    if (!map.contains("COVERART"))
-      return ret;
-    
-    QByteArray image_data_b64(map["COVERART"].toString().toCString());
-    QByteArray image_data = QByteArray::fromBase64(image_data_b64);
-    
-    if (!ret.loadFromData(image_data))
-      ret.loadFromData(image_data_b64); //maybe it's not b64 after all
-    return ret;
-  }
-  
-  return ret;
 }
 
 void AlbumCoverLoader::RemoteFetchFinished() {
@@ -278,7 +218,7 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
     ret.load(manual);
   if (ret.isNull()) {
     if (automatic == kEmbeddedCover && !filename.isNull())
-      ret = QPixmap::fromImage(LoadFromTaglib(filename));
+      ret = QPixmap::fromImage(Song::LoadEmbeddedArt(filename));
     else if (!automatic.isEmpty())
       ret.load(automatic);
   }

@@ -24,6 +24,7 @@
 
 #include <taglib/aifffile.h>
 #include <taglib/asffile.h>
+#include <taglib/attachedpictureframe.h>
 #include <taglib/commentsframe.h>
 #include <taglib/fileref.h>
 #include <taglib/flacfile.h>
@@ -1162,4 +1163,56 @@ bool Song::operator==(const Song& other) const {
   // TODO: this isn't working for radios
   return filename() == other.filename() &&
          beginning() == other.beginning();
+}
+
+QImage Song::LoadEmbeddedArt(const QString& filename) {
+  QImage ret;
+  if (filename.isEmpty())
+    return ret;
+
+  QMutexLocker l(&taglib_mutex_);
+
+#ifdef Q_OS_WIN32
+  TagLib::FileRef ref(filename.toStdWString().c_str());
+#else
+  TagLib::FileRef ref(QFile::encodeName(filename).constData());
+#endif
+
+  if (ref.isNull() || !ref.file())
+    return ret;
+
+  // MP3
+  TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(ref.file());
+  if (file && file->ID3v2Tag()) {
+    TagLib::ID3v2::FrameList apic_frames = file->ID3v2Tag()->frameListMap()["APIC"];
+    if (apic_frames.isEmpty())
+      return ret;
+
+    TagLib::ID3v2::AttachedPictureFrame* pic =
+        static_cast<TagLib::ID3v2::AttachedPictureFrame*>(apic_frames.front());
+
+    ret.loadFromData((const uchar*) pic->picture().data(), pic->picture().size());
+    return ret;
+  }
+
+  // Ogg vorbis/flac/speex
+  TagLib::Ogg::XiphComment* xiph_comment =
+      dynamic_cast<TagLib::Ogg::XiphComment*>(ref.file()->tag());
+
+  if (xiph_comment) {
+    TagLib::Ogg::FieldListMap map = xiph_comment->fieldListMap();
+
+    // Ogg lacks a definitive standard for embedding cover art, but it seems
+    // b64 encoding a field called COVERART is the general convention
+    if (!map.contains("COVERART"))
+      return ret;
+
+    QByteArray image_data_b64(map["COVERART"].toString().toCString());
+    QByteArray image_data = QByteArray::fromBase64(image_data_b64);
+
+    if (!ret.loadFromData(image_data))
+      ret.loadFromData(image_data_b64); //maybe it's not b64 after all
+  }
+
+  return ret;
 }

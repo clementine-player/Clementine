@@ -97,7 +97,6 @@ class AlbumCoverLoader : public QObject {
   void NextState(Task* task);
   TryLoadResult TryLoadImage(const Task& task);
   QImage ScaleAndPad(const QImage& image) const;
-  static QImage LoadFromTaglib(const QString& filename);
 
   bool stop_requested_;
 
