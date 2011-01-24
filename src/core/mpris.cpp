@@ -19,10 +19,6 @@
 #include "mpris1.h"
 #include "mpris2.h"
 
-#include <QFuture>
-#include <QFutureWatcher>
-#include <QtConcurrentRun>
-
 namespace mpris {
 
 Mpris::Mpris(Player* player, ArtLoader* art_loader, QObject* parent)

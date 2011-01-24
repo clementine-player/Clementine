@@ -24,7 +24,6 @@
 #include "dbus/notification.h"
 #include <QCoreApplication>
 #include <QTextDocument>
-#include <QtConcurrentRun>
 
 using boost::scoped_ptr;
 
@@ -61,10 +60,6 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
 void OSD::Init() {
   notification_id_ = 0;
 
-  QtConcurrent::run(this, &OSD::DoInit);
-}
-
-void OSD::DoInit() {
 #ifdef HAVE_DBUS
   interface_.reset(new OrgFreedesktopNotificationsInterface(
       OrgFreedesktopNotificationsInterface::staticInterfaceName(),

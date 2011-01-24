@@ -129,8 +129,6 @@ class OSD : public QObject {
 #endif  // Q_OS_DARWIN
 
 #ifdef HAVE_DBUS
-  void DoInit();
-
   boost::scoped_ptr<OrgFreedesktopNotificationsInterface> interface_;
   uint notification_id_;
   QDateTime last_notification_time_;
