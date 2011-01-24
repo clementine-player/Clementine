@@ -132,21 +132,23 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
-  cover_from_file_ = cover_menu_->addAction(
-        IconLoader::Load("document-open"), tr("Load cover from disk..."),
-        this, SLOT(LoadCoverFromFile()));
-  cover_from_url_ = cover_menu_->addAction(
-        IconLoader::Load("download"), tr("Load cover from URL..."),
-        this, SLOT(LoadCoverFromURL()));
-  search_for_cover_ = cover_menu_->addAction(
-        IconLoader::Load("find"), tr("Search for album covers..."),
-        this, SLOT(SearchForCover()));
-  unset_cover_ = cover_menu_->addAction(
-        IconLoader::Load("list-remove"), tr("Unset cover"),
-        this, SLOT(UnsetCover()));
-  show_cover_ = cover_menu_->addAction(
-        IconLoader::Load("zoom-in"), tr("Show fullsize..."),
-        this, SLOT(ShowCover()));
+
+  QList<QAction*> actions = album_cover_choice_controller_->PrepareAlbumChoiceMenu(this);
+
+  cover_from_file_ = actions[0];
+  cover_from_url_ = actions[1];
+  search_for_cover_ = actions[2];
+  unset_cover_ = actions[3];
+  show_cover_ = actions[4];
+
+  connect(cover_from_file_, SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(cover_from_url_, SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
+  connect(search_for_cover_, SIGNAL(triggered()), this, SLOT(SearchForCover()));
+  connect(unset_cover_, SIGNAL(triggered()), this, SLOT(UnsetCover()));
+  connect(show_cover_, SIGNAL(triggered()), this, SLOT(ShowCover()));
+
+  cover_menu_->addActions(actions);
+
   ui_->summary_art_button->setMenu(cover_menu_);
 
   ui_->art->installEventFilter(this);

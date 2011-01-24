@@ -39,7 +39,10 @@ CoverFromURLDialog::~CoverFromURLDialog() {
 }
 
 QImage CoverFromURLDialog::Exec() {
+  // reset state
+  ui_->url->setText("");;
   last_image_ = QImage();
+
   exec();
   return last_image_;
 }

@@ -18,6 +18,8 @@
 #ifndef ALBUMCOVERCHOICECONTROLLER_H
 #define ALBUMCOVERCHOICECONTROLLER_H
 
+#include <QAction>
+#include <QList>
 #include <QWidget>
 
 class AlbumCoverFetcher;
@@ -26,12 +28,7 @@ class CoverFromURLDialog;
 class LibraryBackend;
 class Song;
 
-// Controller for the common album cover related menu options. This includes:
-// - loading cover from file
-// - loading cover from URL
-// - searching for cover using last.fm
-// - unsetting the cover manually
-// - showing the cover in original size
+// Controller for the common album cover related menu options.
 class AlbumCoverChoiceController : public QWidget {
   Q_OBJECT
 
@@ -41,6 +38,15 @@ class AlbumCoverChoiceController : public QWidget {
 
   static const char* kImageFileFilter;
   static const char* kAllFilesFilter;
+
+  // Returns QAction* for every operation implemented by this controller.
+  // The list contains QAction* for:
+  // 1. loading cover from file
+  // 2. loading cover from URL
+  // 3. searching for cover using last.fm
+  // 4. unsetting the cover manually
+  // 5. showing the cover in original size
+  QList<QAction*> PrepareAlbumChoiceMenu(QObject* parent);
 
   // All of the methods below require a currently selected song as an
   // input parameter. Also - LoadCoverFromFile, LoadCoverFromURL,

@@ -53,6 +53,15 @@ AlbumCoverChoiceController::~AlbumCoverChoiceController()
 {
 }
 
+QList<QAction*> AlbumCoverChoiceController::PrepareAlbumChoiceMenu(QObject* parent) {
+  return QList<QAction*>()
+           << new QAction(IconLoader::Load("document-open"), tr("Load cover from disk..."), parent)
+           << new QAction(IconLoader::Load("download"), tr("Load cover from URL..."), parent)
+           << new QAction(IconLoader::Load("find"), tr("Search for album covers..."), parent)
+           << new QAction(IconLoader::Load("list-remove"), tr("Unset cover"), parent)
+           << new QAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."), parent);
+}
+
 QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
   QString dir;
 
