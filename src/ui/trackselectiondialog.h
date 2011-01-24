@@ -33,7 +33,6 @@ public:
   ~TrackSelectionDialog();
 
   void Init(const QString& filename, const SongList& songs);
-  void Clean();
 
   void accept();
 

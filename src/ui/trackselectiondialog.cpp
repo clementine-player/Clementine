@@ -30,7 +30,7 @@ TrackSelectionDialog::TrackSelectionDialog(QWidget *parent)
 }
 
 TrackSelectionDialog::~TrackSelectionDialog() {
-  Clean();
+  ui_->resultsTreeWidget->clear();
   delete ui_;
 }
 
@@ -40,6 +40,9 @@ void TrackSelectionDialog::Init(const QString& filename, const SongList& songs) 
 
   // Set filename
   ui_->filenameLabel->setText(current_filename_); //TODO: use basefilename, it's nicer
+
+  // Clear tree widget
+  ui_->resultsTreeWidget->clear();
 
   // Fill tree view with songs
   int song_index = 0;
@@ -62,11 +65,6 @@ void TrackSelectionDialog::Init(const QString& filename, const SongList& songs) 
   ui_->resultsTreeWidget->setColumnWidth(1, 175); // Artist column
   ui_->resultsTreeWidget->setColumnWidth(2, 175); // Album column
   ui_->resultsTreeWidget->setColumnWidth(3, 50);  // Track column
-}
-
-void TrackSelectionDialog::Clean() {
-  // Remove and deleted all items
-  ui_->resultsTreeWidget->clear();
 }
 
 void TrackSelectionDialog::accept() {

@@ -169,7 +169,7 @@ private:
   QPushButton* previous_button_;
   QPushButton* next_button_;
 
-  TrackSelectionDialog *resultsDialog_;
+  TrackSelectionDialog *results_dialog_;
 };
 
 #endif // EDITTAGDIALOG_H

@@ -110,15 +110,15 @@ TagFetcherItem::TagFetcherItem(const QString& _filename, int _fileId, tunepimp_t
     fileId_(_fileId),
     pimp_(_pimp),
     network_(_network),
-    already_tried_to_recognize(false)
+    already_tried_to_recognize_(false)
 { }
 
 void TagFetcherItem::Unrecognized() {
-  if(already_tried_to_recognize) {
+  if(already_tried_to_recognize_) {
     // We already tried to recognize this music and, apparently, nothing has been found: stopping here
     emit FetchFinishedSignal(fileId_);
   } else {
-    already_tried_to_recognize = true;
+    already_tried_to_recognize_ = true;
     char trm[255];
     trm[0] = 0;
     track_t track = tp_GetTrack(pimp_, fileId_);

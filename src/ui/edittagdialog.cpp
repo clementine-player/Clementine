@@ -56,7 +56,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
     cover_art_is_set_(false),
-    resultsDialog_(new TrackSelectionDialog(this))
+    results_dialog_(new TrackSelectionDialog(this))
 {
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
@@ -65,7 +65,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 #ifdef HAVE_LIBTUNEPIMP
   connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)),
           this, SLOT(FetchTagFinished(QString, SongList)), Qt::QueuedConnection);
-  connect(resultsDialog_, SIGNAL(SongChoosen(QString, Song)), SLOT(FetchTagSongChoosen(QString, Song)));
+  connect(results_dialog_, SIGNAL(SongChoosen(QString, Song)), SLOT(FetchTagSongChoosen(QString, Song)));
 #endif
 
   ui_->setupUi(this);
@@ -711,13 +711,10 @@ void EditTagDialog::FetchTagFinished(const QString& filename, const SongList& so
 
     // If no songs have been guessed, just display a message
     if(songs_guessed.empty()) {
-      QMessageBox messageBox(this);
-      messageBox.setWindowTitle(tr("Sorry"));
-      messageBox.setText(tr("Clementine was unable to find results for this file"));
-      messageBox.exec();
+      QMessageBox::information(this, tr("Sorry"), tr("Clementine was unable to find results for this file"));
     } else {  // Else, display song's tags selection dialog only if edittagdialog is still opened
-      resultsDialog_->Init(filename, songs_guessed);
-      resultsDialog_->show();
+      results_dialog_->Init(filename, songs_guessed);
+      results_dialog_->show();
     }
   }
 #endif
@@ -737,11 +734,12 @@ void EditTagDialog::FetchTagSongChoosen(const QString& filename, const Song& son
     return;
   }
 
-  if(song_choosen.title() != "")
+  // Fill tags' fields
+  if(!song_choosen.title().isEmpty())
     ui_->title->set_text(song_choosen.title());
-  if(song_choosen.album() != "")
+  if(!song_choosen.album().isEmpty())
     ui_->album->set_text(song_choosen.album());
-  if(song_choosen.album() != "")
+  if(!song_choosen.album().isEmpty())
     ui_->artist->set_text(song_choosen.artist());
   if(song_choosen.track() > 0)
     ui_->track->set_text(QString::number(song_choosen.track()));
