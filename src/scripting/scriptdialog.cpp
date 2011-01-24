@@ -133,6 +133,8 @@ ScriptDialog::ScriptDialog(QWidget* parent)
   // Make the dialog smaller
   resize(width(), minimumSizeHint().height());
 
+  ui_->button_box->button(QDialogButtonBox::Close)->setShortcut(QKeySequence::Close);
+
   ReloadSettings();
 }
 
