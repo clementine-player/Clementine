@@ -31,13 +31,8 @@
 #include "widgets/lineedit.h"
 #include "trackselectiondialog.h"
 
-#ifdef HAVE_LIBLASTFM
-  class AlbumCoverFetcher;
-  class AlbumCoverSearcher;
-#endif
-
+class AlbumCoverChoiceController;
 class AlbumCoverLoader;
-class CoverFromURLDialog;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
@@ -89,9 +84,9 @@ private slots:
 
   void LoadCoverFromFile();
   void LoadCoverFromURL();
-  void SearchCover();
+  void SearchForCover();
   void UnsetCover();
-  void ZoomCover();
+  void ShowCover();
 
   void PreviousSong();
   void NextSong();
@@ -120,6 +115,8 @@ private:
     QString id_;
   };
 
+  Song GetFirstSelected();
+
   bool DoesValueVary(const QModelIndexList& sel, const QString& id) const;
   bool IsValueModified(const QModelIndexList& sel, const QString& id) const;
 
@@ -140,7 +137,8 @@ private:
 
 private:
   Ui_EditTagDialog* ui_;
-  CoverFromURLDialog* cover_from_url_dialog_;
+
+  AlbumCoverChoiceController* album_cover_choice_controller_;
 
   LibraryBackend* backend_;
 
@@ -156,18 +154,14 @@ private:
   TagFetcher* tag_fetcher_;
 #endif
 
-#ifdef HAVE_LIBLASTFM
-  AlbumCoverSearcher* cover_searcher_;
-  AlbumCoverFetcher* cover_fetcher_;
-#endif
-
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   quint64 cover_art_id_;
   bool cover_art_is_set_;
 
   QMenu* cover_menu_;
-  QAction* choose_cover_;
-  QAction* download_cover_;
+
+  QAction* cover_from_file_;
+  QAction* cover_from_url_;
   QAction* search_for_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;

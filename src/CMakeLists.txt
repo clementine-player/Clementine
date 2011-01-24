@@ -195,6 +195,7 @@ set(SOURCES
 
   ui/about.cpp
   ui/addstreamdialog.cpp
+  ui/albumcoverchoicecontroller.cpp
   ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
@@ -374,6 +375,7 @@ set(HEADERS
 
   ui/about.h
   ui/addstreamdialog.h
+  ui/albumcoverchoicecontroller.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
   ui/equalizer.h

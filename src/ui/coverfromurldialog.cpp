@@ -39,6 +39,7 @@ CoverFromURLDialog::~CoverFromURLDialog() {
 }
 
 QImage CoverFromURLDialog::Exec() {
+  last_image_ = QImage();
   exec();
   return last_image_;
 }
@@ -54,8 +55,6 @@ void CoverFromURLDialog::accept() {
 
 void CoverFromURLDialog::LoadCoverFromURLFinished() {
   ui_->busy->hide();
-
-  last_image_ = QImage();
 
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();

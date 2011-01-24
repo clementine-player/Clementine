@@ -28,9 +28,9 @@
 #include "core/backgroundthread.h"
 #include "core/song.h"
 
+class AlbumCoverChoiceController;
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
-class CoverFromURLDialog;
 class LibraryBackend;
 class LineEditInterface;
 class SongMimeData;
@@ -49,8 +49,6 @@ class AlbumCoverManager : public QMainWindow {
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
-  static const char* kImageFileFilter;
-  static const char* kAllFilesFilter;
 
   LibraryBackend* backend() const { return backend_; }
   QIcon no_cover_icon() const { return no_cover_icon_; }
@@ -85,12 +83,13 @@ class AlbumCoverManager : public QMainWindow {
   void AlbumCoverFetched(quint64 id, const QImage& image);
 
   // On the context menu
-  void ShowFullsize();
   void FetchSingleCover();
-  void SearchManual();
-  void ChooseManualCover();
-  void ChooseURLCover();
+
+  void LoadCoverFromFile();
+  void LoadCoverFromURL();
+  void SearchForCover();
   void UnsetCover();
+  void ShowCover();
 
   // For adding albums to the playlist
   void AlbumDoubleClicked(const QModelIndex& index);
@@ -120,6 +119,17 @@ class AlbumCoverManager : public QMainWindow {
 
   QString InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const;
 
+  // Returns the selected element in form of a Song ready to be used 
+  // by AlbumCoverChoiceController or invalid song if there's nothing
+  // or multiple elements selected.
+  Song GetSingleSelectionAsSong();
+  // Returns the first of the selected elements in form of a Song ready
+  // to be used by AlbumCoverChoiceController or invalid song if there's nothing
+  // selected.
+  Song GetFirstSelectedAsSong();
+
+  Song ItemAsSong(QListWidgetItem* item);
+
   void CancelRequests();
 
   void UpdateStatusText();
@@ -130,8 +140,15 @@ class AlbumCoverManager : public QMainWindow {
   bool constructed_;
 
   Ui_CoverManager* ui_;
-  CoverFromURLDialog* cover_from_url_dialog_;
+
+  AlbumCoverChoiceController* album_cover_choice_controller_;
   LibraryBackend* backend_;
+
+  QAction* cover_from_file_;
+  QAction* cover_from_url_;
+  QAction* search_for_cover_;
+  QAction* unset_cover_;
+  QAction* show_cover_;
 
   QAction* filter_all_;
   QAction* filter_with_covers_;

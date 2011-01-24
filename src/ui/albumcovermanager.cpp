@@ -25,7 +25,7 @@
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
 #include "widgets/maclineedit.h"
-#include "ui/coverfromurldialog.h"
+#include "ui/albumcoverchoicecontroller.h"
 
 #include <QActionGroup>
 #include <QContextMenuEvent>
@@ -46,17 +46,13 @@
 #include <QTimer>
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
-const char* AlbumCoverManager::kImageFileFilter =
-  QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)");
-const char* AlbumCoverManager::kAllFilesFilter =
-  QT_TR_NOOP("All files (*)");
 
 AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
                                      QNetworkAccessManager* network)
   : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
-    cover_from_url_dialog_(NULL),
+    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this, network)),
@@ -74,13 +70,8 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
 
   // Icons
   ui_->action_fetch->setIcon(IconLoader::Load("download"));
-  ui_->action_choose_manual->setIcon(IconLoader::Load("document-open"));
-  ui_->action_choose_url->setIcon(IconLoader::Load("download"));
-  ui_->action_show_fullsize->setIcon(IconLoader::Load("zoom-in"));
-  ui_->action_unset_cover->setIcon(IconLoader::Load("list-remove"));
   ui_->view->setIcon(IconLoader::Load("view-choose"));
   ui_->fetch->setIcon(IconLoader::Load("download"));
-  ui_->action_search_manual->setIcon(IconLoader::Load("find"));
   ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
 
@@ -112,9 +103,6 @@ AlbumCoverManager::~AlbumCoverManager() {
   CancelRequests();
 
   delete ui_;
-  if(cover_from_url_dialog_) {
-    delete cover_from_url_dialog_;
-  }
 }
 
 void AlbumCoverManager::Init() {
@@ -135,11 +123,22 @@ void AlbumCoverManager::Init() {
   ui_->view->setMenu(view_menu);
 
   // Context menu
-  context_menu_->addAction(ui_->action_choose_manual);
-  context_menu_->addAction(ui_->action_choose_url);
-  context_menu_->addAction(ui_->action_search_manual);
-  context_menu_->addAction(ui_->action_unset_cover);
-  context_menu_->addAction(ui_->action_show_fullsize);
+  cover_from_file_ = context_menu_->addAction(
+        IconLoader::Load("document-open"), tr("Load cover from disk..."),
+        this, SLOT(LoadCoverFromFile()));
+  cover_from_url_ = context_menu_->addAction(
+        IconLoader::Load("download"), tr("Load cover from URL..."),
+        this, SLOT(LoadCoverFromURL()));
+  search_for_cover_ = context_menu_->addAction(
+        IconLoader::Load("find"), tr("Search for album covers..."),
+        this, SLOT(SearchForCover()));
+  unset_cover_ = context_menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Unset cover"),
+        this, SLOT(UnsetCover()));
+  show_cover_ = context_menu_->addAction(
+        IconLoader::Load("zoom-in"), tr("Show fullsize..."),
+        this, SLOT(ShowCover()));
+
   context_menu_->addSeparator();
   context_menu_->addAction(ui_->action_load);
   context_menu_->addAction(ui_->action_add_to_playlist);
@@ -154,15 +153,10 @@ void AlbumCoverManager::Init() {
   connect(ui_->fetch, SIGNAL(clicked()), SLOT(FetchAlbumCovers()));
   connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage)),
           SLOT(AlbumCoverFetched(quint64,QImage)));
-  connect(ui_->action_show_fullsize, SIGNAL(triggered()), SLOT(ShowFullsize()));
   connect(ui_->action_fetch, SIGNAL(triggered()), SLOT(FetchSingleCover()));
-  connect(ui_->action_choose_manual, SIGNAL(triggered()), SLOT(ChooseManualCover()));
-  connect(ui_->action_choose_url, SIGNAL(triggered()), SLOT(ChooseURLCover()));
-  connect(ui_->action_unset_cover, SIGNAL(triggered()), SLOT(UnsetCover()));
   connect(ui_->albums, SIGNAL(doubleClicked(QModelIndex)), SLOT(AlbumDoubleClicked(QModelIndex)));
   connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
   connect(ui_->action_load, SIGNAL(triggered()), SLOT(LoadSelectedToPlaylist()));
-  connect(ui_->action_search_manual, SIGNAL(triggered()), SLOT(SearchManual()));
 
   #ifdef Q_OS_DARWIN
     MacLineEdit* lineedit = new MacLineEdit(ui_->filter->parentWidget());
@@ -478,10 +472,10 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
         some_with_covers = true;
     }
 
-    ui_->action_show_fullsize->setEnabled(some_with_covers && context_menu_items_.size() == 1);
-    ui_->action_choose_manual->setEnabled(context_menu_items_.size() == 1);
-    ui_->action_choose_url->setEnabled(context_menu_items_.size() == 1);
-    ui_->action_unset_cover->setEnabled(some_with_covers);
+    cover_from_file_->setEnabled(context_menu_items_.size() == 1);
+    cover_from_url_->setEnabled(context_menu_items_.size() == 1);
+    show_cover_->setEnabled(some_with_covers && context_menu_items_.size() == 1);
+    unset_cover_->setEnabled(some_with_covers);
 
     QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
     context_menu_->popup(e->globalPos());
@@ -490,26 +484,45 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
   return QMainWindow::eventFilter(obj, event);
 }
 
-void AlbumCoverManager::ShowFullsize() {
-  if (context_menu_items_.size() != 1)
-    return;
-  QListWidgetItem* item = context_menu_items_[0];
+Song AlbumCoverManager::GetSingleSelectionAsSong() {
+  return context_menu_items_.size() != 1
+             ? Song()
+             : ItemAsSong(context_menu_items_[0]);
+}
+
+Song AlbumCoverManager::GetFirstSelectedAsSong() {
+  return context_menu_items_.isEmpty()
+             ? Song()
+             : ItemAsSong(context_menu_items_[0]);
+}
+
+Song AlbumCoverManager::ItemAsSong(QListWidgetItem* item) {
+  Song result;
 
   QString title = item->data(Role_AlbumName).toString();
   if (!item->data(Role_ArtistName).toString().isNull())
-    title = item->data(Role_ArtistName).toString() + " - " + title;
+    result.set_title(item->data(Role_ArtistName).toString() + " - " + title);
+  else
+    result.set_title(title);
 
-  QDialog* dialog = new QDialog(this);
-  dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-  dialog->setWindowTitle(title);
+  result.set_artist(item->data(Role_ArtistName).toString());
+  result.set_album(item->data(Role_AlbumName).toString());
 
-  QLabel* label = new QLabel(dialog);
-  label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
-      item->data(Role_PathAutomatic).toString(),
-      item->data(Role_PathManual).toString()));
+  result.set_filename(item->data(Role_FirstFilename).toString());
 
-  dialog->resize(label->pixmap()->size());
-  dialog->show();
+  result.set_art_automatic(item->data(Role_PathAutomatic).toString());
+  result.set_art_manual(item->data(Role_PathManual).toString());
+
+  result.set_valid(true);
+  return result;
+}
+
+void AlbumCoverManager::ShowCover() {
+  Song song = GetSingleSelectionAsSong();
+  if(!song.is_valid())
+    return;
+
+  album_cover_choice_controller_->ShowCover(song);
 }
 
 void AlbumCoverManager::FetchSingleCover() {
@@ -525,19 +538,14 @@ void AlbumCoverManager::FetchSingleCover() {
   UpdateStatusText();
 }
 
-void AlbumCoverManager::ChooseManualCover() {
-  if (context_menu_items_.size() != 1)
+void AlbumCoverManager::LoadCoverFromFile() {
+  Song song = GetSingleSelectionAsSong();
+  if(!song.is_valid())
     return;
+
   QListWidgetItem* item = context_menu_items_[0];
 
-  QString dir = InitialPathForOpenCoverDialog(item->data(Role_PathAutomatic).toString(),
-                                              item->data(Role_FirstFilename).toString());
-
-  QString cover = QFileDialog::getOpenFileName(
-      this, tr("Choose manual cover"), dir,
-      tr(kImageFileFilter) + ";;" + tr(kAllFilesFilter));
-  if (cover.isNull())
-    return;
+  QString cover = album_cover_choice_controller_->LoadCoverFromFile(song);
 
   // Can we load the image?
   QImage image(cover);
@@ -545,8 +553,8 @@ void AlbumCoverManager::ChooseManualCover() {
     return;
 
   // Update database
-  backend_->UpdateManualAlbumArtAsync(item->data(Role_ArtistName).toString(),
-                                      item->data(Role_AlbumName).toString(),
+  backend_->UpdateManualAlbumArtAsync(song.artist(),
+                                      song.album(),
                                       cover);
 
   // Update the icon in our list
@@ -555,41 +563,27 @@ void AlbumCoverManager::ChooseManualCover() {
   cover_loading_tasks_[id] = item;
 }
 
-void AlbumCoverManager::ChooseURLCover() {
-  if (context_menu_items_.size() != 1)
+void AlbumCoverManager::LoadCoverFromURL() {
+  Song song = GetSingleSelectionAsSong();
+  if(!song.is_valid())
     return;
-  QListWidgetItem* item = context_menu_items_[0];
 
-  if(!cover_from_url_dialog_) {
-    cover_from_url_dialog_ = new CoverFromURLDialog(this);
-  }
-
-  QImage image = cover_from_url_dialog_->Exec();
+  QImage image = album_cover_choice_controller_->LoadCoverFromURL();
   if (image.isNull())
     return;
 
-  SaveAndSetCover(item, image);
-}
-
-QString AlbumCoverManager::InitialPathForOpenCoverDialog(const QString& path_automatic, const QString& first_file_name) const {
-  if(!path_automatic.isEmpty() && path_automatic != AlbumCoverLoader::kEmbeddedCover) {
-    return path_automatic;
-  } else if (!first_file_name.isEmpty() && first_file_name.contains('/')) {
-    // we get rid of the filename because its extension is screwing with the dialog's
-    // filters
-    return first_file_name.section('/', 0, -2);
-  } else {
-    return QString();
-  }
+  SaveAndSetCover(context_menu_items_[0], image);
 }
 
 void AlbumCoverManager::UnsetCover() {
+  QString unset = album_cover_choice_controller_->UnsetCover();
+
   foreach (QListWidgetItem* item, context_menu_items_) {
     item->setIcon(no_cover_icon_);
-    item->setData(Role_PathManual, AlbumCoverLoader::kManuallyUnsetCover);
+    item->setData(Role_PathManual, unset);
     backend_->UpdateManualAlbumArtAsync(item->data(Role_ArtistName).toString(),
                                         item->data(Role_AlbumName).toString(),
-                                        AlbumCoverLoader::kManuallyUnsetCover);
+                                        unset);
   }
 }
 
@@ -656,17 +650,12 @@ void AlbumCoverManager::LoadSelectedToPlaylist() {
   }
 }
 
-void AlbumCoverManager::SearchManual() {
-  if (context_menu_items_.isEmpty())
+void AlbumCoverManager::SearchForCover() {
+  Song song = GetFirstSelectedAsSong();
+  if(!song.is_valid())
     return;
 
-  // Get something sensible to stick in the search box
-  QString query = context_menu_items_[0]->data(Role_ArtistName).toString();
-  if (!query.isEmpty())
-    query += " ";
-  query += context_menu_items_[0]->data(Role_AlbumName).toString();
-
-  QImage image = cover_searcher_->Exec(query);
+  QImage image = album_cover_choice_controller_->SearchForCover(song);
   if (image.isNull())
     return;
 

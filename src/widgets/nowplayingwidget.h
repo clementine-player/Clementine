@@ -28,10 +28,11 @@
   class AlbumCoverSearcher;
 #endif
 
+class AlbumCoverChoiceController;
 class AlbumCoverLoader;
-class CoverFromURLDialog;
 class LibraryBackend;
 
+class QAction;
 class QActionGroup;
 class QMenu;
 class QMovie;
@@ -44,7 +45,6 @@ class NowPlayingWidget : public QWidget {
 
 public:
   NowPlayingWidget(QWidget* parent = 0);
-  ~NowPlayingWidget();
 
   static const char* kSettingsGroup;
   static const int kPadding;
@@ -95,9 +95,9 @@ private slots:
 
   void LoadCoverFromFile();
   void LoadCoverFromURL();
-  void SearchCover();
+  void SearchForCover();
   void UnsetCover();
-  void ZoomCover();
+  void ShowCover();
 
 private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
@@ -109,24 +109,21 @@ private:
   void SetAlbumArt(const QString& path);
 
 private:
-  CoverFromURLDialog* cover_from_url_dialog_;
+  AlbumCoverChoiceController* album_cover_choice_controller_;
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   BackgroundThread<AlbumCoverLoader>* kitten_loader_;
-
-#ifdef HAVE_LIBLASTFM
-  AlbumCoverSearcher* cover_searcher_;
-  AlbumCoverFetcher* cover_fetcher_;
-#endif
 
   LibraryBackend* backend_;
 
   Mode mode_;
 
   QMenu* menu_;
+
   QAction* above_statusbar_action_;
-  QAction* choose_cover_;
-  QAction* download_cover_;
+
+  QAction* cover_from_file_;
+  QAction* cover_from_url_;
   QAction* search_for_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;

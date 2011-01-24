@@ -19,7 +19,7 @@
 #include "core/albumcoverloader.h"
 #include "core/kittenloader.h"
 #include "library/librarybackend.h"
-#include "ui/coverfromurldialog.h"
+#include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
 #ifdef HAVE_LIBLASTFM
@@ -28,8 +28,6 @@
 # include "ui/albumcoversearcher.h"
 #endif
 
-#include <QFileDialog>
-#include <QLabel>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -63,13 +61,9 @@ const int NowPlayingWidget::kTopBorder = 4;
 
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
-    cover_from_url_dialog_(NULL),
+    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     kitten_loader_(NULL),
-#ifdef HAVE_LIBLASTFM
-    cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
-    cover_fetcher_(new AlbumCoverFetcher(this)),
-#endif
     backend_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
@@ -99,21 +93,23 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
 
   menu_->addActions(mode_group->actions());
   menu_->addSeparator();
-  choose_cover_ = menu_->addAction(
+
+  cover_from_file_ = menu_->addAction(
         IconLoader::Load("document-open"), tr("Load cover from disk..."),
         this, SLOT(LoadCoverFromFile()));
-  download_cover_ = menu_->addAction(
+  cover_from_url_ = menu_->addAction(
         IconLoader::Load("download"), tr("Load cover from URL..."),
         this, SLOT(LoadCoverFromURL()));
   search_for_cover_ = menu_->addAction(
         IconLoader::Load("find"), tr("Search for album covers..."),
-        this, SLOT(SearchCover()));
+        this, SLOT(SearchForCover()));
   unset_cover_ = menu_->addAction(
         IconLoader::Load("list-remove"), tr("Unset cover"),
         this, SLOT(UnsetCover()));
   show_cover_ = menu_->addAction(
         IconLoader::Load("zoom-in"), tr("Show fullsize..."),
-        this, SLOT(ZoomCover()));
+        this, SLOT(ShowCover()));
+
   menu_->addSeparator();
   above_statusbar_action_ = menu_->addAction(tr("Show above status bar"));
   above_statusbar_action_->setCheckable(true);
@@ -130,16 +126,6 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   // Start loading the cover loader thread
   cover_loader_->Start();
   connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
-
-#ifdef HAVE_LIBLASTFM
-  cover_searcher_->Init(cover_fetcher_);
-#endif
-}
-
-NowPlayingWidget::~NowPlayingWidget() {
-  if(cover_from_url_dialog_) {
-    delete cover_from_url_dialog_;
-  }
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
@@ -155,7 +141,7 @@ void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionG
 void NowPlayingWidget::set_ideal_height(int height) {
   small_ideal_height_ = height;
   UpdateHeight(aww_
-      ?  kitten_loader_->Worker().get()
+      ? kitten_loader_->Worker().get()
       : cover_loader_->Worker().get());
 }
 
@@ -217,7 +203,7 @@ void NowPlayingWidget::NowPlaying(const Song& metadata) {
 
   // Loads the cover too.
   UpdateHeight(aww_
-      ?  kitten_loader_->Worker().get()
+      ? kitten_loader_->Worker().get()
       : cover_loader_->Worker().get());
   UpdateDetailsText();
 
@@ -359,7 +345,7 @@ void NowPlayingWidget::FadePreviousTrack(qreal value) {
 void NowPlayingWidget::SetMode(int mode) {
   mode_ = Mode(mode);
   UpdateHeight(aww_
-      ?  kitten_loader_->Worker().get()
+      ? kitten_loader_->Worker().get()
       : cover_loader_->Worker().get());
   UpdateDetailsText();
   update();
@@ -372,7 +358,7 @@ void NowPlayingWidget::SetMode(int mode) {
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
   if (visible_ && mode_ == LargeSongDetails && e->oldSize().width() != e->size().width()) {
     UpdateHeight(aww_
-        ?  kitten_loader_->Worker().get()
+        ? kitten_loader_->Worker().get()
         : cover_loader_->Worker().get());
     UpdateDetailsText();
   }
@@ -380,7 +366,7 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
 #ifndef HAVE_LIBLASTFM
-  choose_cover_->setEnabled(false);
+  cover_from_file_->setEnabled(false);
   search_for_cover_->setEnabled(false);
 #endif
 
@@ -432,38 +418,15 @@ void NowPlayingWidget::EnableKittens(bool aww) {
 }
 
 void NowPlayingWidget::LoadCoverFromFile() {
-#ifdef HAVE_LIBLASTFM
-  // Figure out the initial path.  Logic copied from
-  // AlbumCoverManager::InitialPathForOpenCoverDialog
-  QString dir;
-  if (!metadata_.art_automatic().isEmpty() && metadata_.art_automatic() != AlbumCoverLoader::kEmbeddedCover) {
-    dir = metadata_.art_automatic();
-  } else {
-    dir = metadata_.filename().section('/', 0, -1);
+  QString cover = album_cover_choice_controller_->LoadCoverFromFile(metadata_);
+
+  if(!cover.isEmpty()) {
+    SetAlbumArt(cover);
   }
-
-  QString cover = QFileDialog::getOpenFileName(
-      this, tr("Choose manual cover"), dir,
-      tr(AlbumCoverManager::kImageFileFilter) + ";;" + tr(AlbumCoverManager::kAllFilesFilter));
-  if (cover.isNull())
-    return;
-
-  // Can we load the image?
-  QImage image(cover);
-  if (image.isNull())
-    return;
-
-  // Update database
-  SetAlbumArt(cover);
-#endif
 }
 
 void NowPlayingWidget::LoadCoverFromURL() {
-  if(!cover_from_url_dialog_) {
-    cover_from_url_dialog_ = new CoverFromURLDialog(this);
-  }
-
-  QImage image = cover_from_url_dialog_->Exec();
+  QImage image = album_cover_choice_controller_->LoadCoverFromURL();
   if (image.isNull())
     return;
 
@@ -471,38 +434,21 @@ void NowPlayingWidget::LoadCoverFromURL() {
       metadata_.artist(), metadata_.album(), image));
 }
 
-void NowPlayingWidget::SearchCover() {
-#ifdef HAVE_LIBLASTFM
-  // Get something sensible to stick in the search box
-  QString query = metadata_.artist();
-  if (!query.isEmpty())
-    query += " ";
-  query += metadata_.album();
-
-  QImage image = cover_searcher_->Exec(query);
+void NowPlayingWidget::SearchForCover() {
+  QImage image = album_cover_choice_controller_->SearchForCover(metadata_);
   if (image.isNull())
     return;
 
   SetAlbumArt(AlbumCoverManager::SaveCoverInCache(
       metadata_.artist(), metadata_.album(), image));
-#endif
 }
 
 void NowPlayingWidget::UnsetCover() {
-  SetAlbumArt(AlbumCoverLoader::kManuallyUnsetCover);
+  SetAlbumArt(album_cover_choice_controller_->UnsetCover());
 }
 
-void NowPlayingWidget::ZoomCover() {
-  QDialog* dialog = new QDialog(this);
-  dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-  dialog->setWindowTitle(metadata_.title());
-
-  QLabel* label = new QLabel(dialog);
-  label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
-      metadata_.art_automatic(), metadata_.art_manual(), metadata_.filename()));
-
-  dialog->resize(label->pixmap()->size());
-  dialog->show();
+void NowPlayingWidget::ShowCover() {
+  album_cover_choice_controller_->ShowCover(metadata_);
 }
 
 void NowPlayingWidget::SetAlbumArt(const QString& path) {
