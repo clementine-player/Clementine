@@ -93,7 +93,6 @@ void LibraryConfig::Save() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
   s.setValue("auto_open", ui_->auto_open->isChecked());
-  s.setValue("autoclear_playlist", ui_->auto_load->isChecked());
   s.setValue("pretty_covers", ui_->pretty_covers->isChecked());
   s.endGroup();
 
@@ -116,7 +115,6 @@ void LibraryConfig::Load() {
   QSettings s;
   s.beginGroup(LibraryView::kSettingsGroup);
   ui_->auto_open->setChecked(s.value("auto_open", true).toBool());
-  ui_->auto_load->setChecked(s.value("autoclear_playlist", false).toBool());
   ui_->pretty_covers->setChecked(s.value("pretty_covers", true).toBool());
   s.endGroup();
 

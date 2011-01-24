@@ -47,6 +47,7 @@ class GlobalShortcuts;
 class GroupByDialog;
 class Library;
 class LibraryViewContainer;
+class MimeData;
 class MultiLoadingIndicator;
 class OrganiseDialog;
 class OSD;
@@ -99,6 +100,20 @@ class MainWindow : public QMainWindow, public PlatformInterface {
     Startup_Remember = 1,
     Startup_AlwaysShow = 2,
     Startup_AlwaysHide = 3,
+  };
+
+  // Don't change the values
+  enum AddBehaviour {
+    AddBehaviour_Append = 1,
+    AddBehaviour_Enqueue = 2,
+    AddBehaviour_Load = 3,
+  };
+
+  // Don't change the values
+  enum PlayBehaviour {
+    PlayBehaviour_Never = 1,
+    PlayBehaviour_IfStopped = 2,
+    PlayBehaviour_Always = 3,
   };
 
   void SetHiddenInTray(bool hidden);
@@ -215,6 +230,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
  private:
   void ConnectInfoView(SongInfoBase* view);
 
+  void ApplyAddBehaviour(AddBehaviour b, MimeData* data) const;
+  void ApplyPlayBehaviour(PlayBehaviour b, MimeData* data) const;
+
  private:
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;
@@ -283,7 +301,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QSettings settings_;
 
   bool was_maximized_;
-  bool autoclear_playlist_;
+  AddBehaviour doubleclick_addmode_;
+  PlayBehaviour doubleclick_playmode_;
+  PlayBehaviour menu_playmode_;
 
   BackgroundStreams* background_streams_;
 };

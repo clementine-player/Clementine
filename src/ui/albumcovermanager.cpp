@@ -631,7 +631,7 @@ SongMimeData* AlbumCoverManager::GetMimeDataForAlbums(const QModelIndexList& ind
 void AlbumCoverManager::AlbumDoubleClicked(const QModelIndex &index) {
   SongMimeData* data = GetMimeDataForAlbums(QModelIndexList() << index);
   if (data) {
-    data->autoset_flags_ = true;
+    data->from_doubleclick_ = true;
     emit AddToPlaylist(data);
   }
 }

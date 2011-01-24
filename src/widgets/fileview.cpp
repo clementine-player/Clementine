@@ -133,7 +133,7 @@ void FileView::ItemDoubleClick(const QModelIndex& index) {
     return;
 
   MimeData* data = new MimeData;
-  data->autoset_flags_ = true;
+  data->from_doubleclick_ = true;
   data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
   emit AddToPlaylist(data);
 }

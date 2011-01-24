@@ -28,14 +28,15 @@ public:
     : clear_first_(clear),
       play_now_(play_now),
       enqueue_now_(enqueue),
-      autoset_flags_(false) {}
+      from_doubleclick_(false) {}
 
   // If this is set then the playlist will be cleared before these songs
   // are inserted.
   bool clear_first_;
 
   // If this is set then the first item that is inserted will start playing
-  // immediately.
+  // immediately.  Note: this is always overridden with the user's preference
+  // if the MimeData goes via MainWindow.
   bool play_now_;
 
   // If this is set then the items are added to the queue after being inserted.
@@ -44,7 +45,7 @@ public:
   // This can be set if this MimeData goes via MainWindow (ie. it is created
   // manually in a double-click).  The MainWindow will set the above three
   // flags to the defaults set by the user.
-  bool autoset_flags_;
+  bool from_doubleclick_;
 };
 
 #endif // MIMEDATA_H

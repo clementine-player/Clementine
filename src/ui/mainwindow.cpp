@@ -187,7 +187,10 @@ MainWindow::MainWindow(
     playlist_menu_(new QMenu(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
-    was_maximized_(false)
+    was_maximized_(false),
+    doubleclick_addmode_(AddBehaviour_Append),
+    doubleclick_playmode_(PlayBehaviour_IfStopped),
+    menu_playmode_(PlayBehaviour_IfStopped)
 {
   // Create some objects in the database thread
   playlist_backend_ = new PlaylistBackend;
@@ -675,9 +678,15 @@ void MainWindow::ReloadSettings() {
     show();
 #endif
 
-  QSettings library_settings;
-  library_settings.beginGroup(LibraryView::kSettingsGroup);
-  autoclear_playlist_ = library_settings.value("autoclear_playlist", false).toBool();
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  doubleclick_addmode_ = AddBehaviour(
+      s.value("doubleclick_addmode", AddBehaviour_Append).toInt());
+  doubleclick_playmode_ = PlayBehaviour(
+      s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
+  menu_playmode_ = PlayBehaviour(
+      s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
 }
 
 void MainWindow::ReloadAllSettings() {
@@ -929,24 +938,52 @@ void MainWindow::Love() {
 }
 #endif
 
+void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b, MimeData* data) const {
+  switch (b) {
+  case AddBehaviour_Append:
+    data->clear_first_ = false;
+    data->enqueue_now_ = false;
+    break;
+
+  case AddBehaviour_Enqueue:
+    data->clear_first_ = false;
+    data->enqueue_now_ = true;
+    break;
+
+  case AddBehaviour_Load:
+    data->clear_first_ = true;
+    data->enqueue_now_ = false;
+    break;
+  }
+}
+
+void MainWindow::ApplyPlayBehaviour(MainWindow::PlayBehaviour b, MimeData* data) const {
+  switch (b) {
+  case PlayBehaviour_Always:
+    data->play_now_ = true;
+    break;
+
+  case PlayBehaviour_Never:
+    data->play_now_ = false;
+    break;
+
+  case PlayBehaviour_IfStopped:
+    data->play_now_ = !(player_->GetState() == Engine::Playing);
+    break;
+  }
+}
+
 void MainWindow::AddToPlaylist(QMimeData* data) {
   if (!data)
     return;
 
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
     // Should we replace the flags with the user's preference?
-    if (mime_data->autoset_flags_) {
-      if (autoclear_playlist_) {
-        mime_data->clear_first_ = true;
-      }
-    }
-
-    // TODO: make this an option
-    mime_data->play_now_ = true;
-
-    // If there's already a song playing, don't autoplay
-    if (player_->GetState() == Engine::Playing) {
-      mime_data->play_now_ = false;
+    if (mime_data->from_doubleclick_) {
+      ApplyAddBehaviour(doubleclick_addmode_, mime_data);
+      ApplyPlayBehaviour(doubleclick_playmode_, mime_data);
+    } else {
+      ApplyPlayBehaviour(menu_playmode_, mime_data);
     }
   }
 

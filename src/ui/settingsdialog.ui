@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
+    <width>774</width>
     <height>604</height>
    </rect>
   </property>
@@ -120,7 +120,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>8</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -437,6 +437,90 @@
               <property name="checked">
                <bool>true</bool>
               </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_7">
+           <property name="title">
+            <string>Double clicking a song will...</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QComboBox" name="doubleclick_addmode">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Append to the playlist</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Add to the queue</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Replace the playlist</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="doubleclick_playmode">
+              <property name="currentIndex">
+               <number>1</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Never start playing</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Play if there is nothing already playing</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Always start playing</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_8">
+           <property name="title">
+            <string>Using the menu to add a song will...</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_18">
+            <item>
+             <widget class="QComboBox" name="menu_playmode">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Never start playing</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Play if there is nothing already playing</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Always start playing</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
@@ -1038,10 +1122,9 @@
   <tabstop>b_always_show_</tabstop>
   <tabstop>b_always_hide_</tabstop>
   <tabstop>b_remember_</tabstop>
+  <tabstop>doubleclick_playmode</tabstop>
+  <tabstop>menu_playmode</tabstop>
   <tabstop>language</tabstop>
-  <tabstop>current_glow</tabstop>
-  <tabstop>fading_out</tabstop>
-  <tabstop>fading_cross</tabstop>
   <tabstop>fading_auto</tabstop>
   <tabstop>fading_duration</tabstop>
   <tabstop>replaygain</tabstop>
@@ -1064,6 +1147,19 @@
   <tabstop>song_info_font_size</tabstop>
   <tabstop>song_info_font_preview</tabstop>
   <tabstop>buttonBox</tabstop>
+  <tabstop>song_info_timeout</tabstop>
+  <tabstop>proxy_system</tabstop>
+  <tabstop>proxy_direct</tabstop>
+  <tabstop>proxy_manual</tabstop>
+  <tabstop>proxy_type</tabstop>
+  <tabstop>proxy_hostname</tabstop>
+  <tabstop>proxy_port</tabstop>
+  <tabstop>proxy_auth</tabstop>
+  <tabstop>proxy_username</tabstop>
+  <tabstop>proxy_password</tabstop>
+  <tabstop>fading_cross</tabstop>
+  <tabstop>current_glow</tabstop>
+  <tabstop>fading_out</tabstop>
  </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>

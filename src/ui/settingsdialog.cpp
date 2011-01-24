@@ -157,6 +157,18 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   // Behaviour
   connect(ui_->b_show_tray_icon_, SIGNAL(toggled(bool)), SLOT(ShowTrayIconToggled(bool)));
 
+  ui_->doubleclick_addmode->setItemData(0, MainWindow::AddBehaviour_Append);
+  ui_->doubleclick_addmode->setItemData(1, MainWindow::AddBehaviour_Enqueue);
+  ui_->doubleclick_addmode->setItemData(2, MainWindow::AddBehaviour_Load);
+
+  ui_->doubleclick_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
+  ui_->doubleclick_playmode->setItemData(1, MainWindow::PlayBehaviour_IfStopped);
+  ui_->doubleclick_playmode->setItemData(2, MainWindow::PlayBehaviour_Always);
+
+  ui_->menu_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
+  ui_->menu_playmode->setItemData(1, MainWindow::PlayBehaviour_IfStopped);
+  ui_->menu_playmode->setItemData(2, MainWindow::PlayBehaviour_Always);
+
   // Populate the language combo box.  We do this by looking at all the
   // compiled in translations.
   QDir dir(":/translations/");
@@ -275,10 +287,20 @@ void SettingsDialog::accept() {
   if (ui_->b_always_show_->isChecked()) behaviour = MainWindow::Startup_AlwaysShow;
   if (ui_->b_remember_->isChecked())    behaviour = MainWindow::Startup_Remember;
 
+  MainWindow::AddBehaviour doubleclick_addmode = MainWindow::AddBehaviour(
+    ui_->doubleclick_addmode->itemData(ui_->doubleclick_addmode->currentIndex()).toInt());
+  MainWindow::PlayBehaviour doubleclick_playmode = MainWindow::PlayBehaviour(
+    ui_->doubleclick_playmode->itemData(ui_->doubleclick_playmode->currentIndex()).toInt());
+  MainWindow::PlayBehaviour menu_playmode = MainWindow::PlayBehaviour(
+    ui_->menu_playmode->itemData(ui_->menu_playmode->currentIndex()).toInt());
+
   s.beginGroup(MainWindow::kSettingsGroup);
   s.setValue("showtray", ui_->b_show_tray_icon_->isChecked());
   s.setValue("keeprunning", ui_->b_keep_running_->isChecked());
   s.setValue("startupbehaviour", int(behaviour));
+  s.setValue("doubleclick_addmode", doubleclick_addmode);
+  s.setValue("doubleclick_playmode", doubleclick_playmode);
+  s.setValue("menu_playmode", menu_playmode);
   s.endGroup();
 
   s.beginGroup("General");
@@ -407,6 +429,12 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->b_show_tray_icon_->setChecked(s.value("showtray", true).toBool());
   ui_->b_keep_running_->setChecked(s.value("keeprunning",
       ui_->b_show_tray_icon_->isChecked()).toBool());
+  ui_->doubleclick_addmode->setCurrentIndex(ui_->doubleclick_addmode->findData(
+      s.value("doubleclick_addmode", MainWindow::AddBehaviour_Append).toInt()));
+  ui_->doubleclick_playmode->setCurrentIndex(ui_->doubleclick_playmode->findData(
+      s.value("doubleclick_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
+  ui_->menu_playmode->setCurrentIndex(ui_->menu_playmode->findData(
+      s.value("menu_playmode", MainWindow::PlayBehaviour_IfStopped).toInt()));
 
   MainWindow::StartupBehaviour behaviour = MainWindow::StartupBehaviour(
       s.value("startupbehaviour", MainWindow::Startup_Remember).toInt());

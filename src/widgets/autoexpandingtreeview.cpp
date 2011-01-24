@@ -91,7 +91,7 @@ void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
 
   QMimeData* data = model()->mimeData(QModelIndexList() << index);
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->autoset_flags_ = true;
+    mime_data->from_doubleclick_ = true;
   }
   emit AddToPlaylistSignal(data);
 }
