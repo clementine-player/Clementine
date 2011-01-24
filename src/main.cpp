@@ -45,6 +45,7 @@
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 #include "ui/systemtrayicon.h"
+#include "version.h"
 #include "widgets/osd.h"
 
 #include "qtsingleapplication.h"

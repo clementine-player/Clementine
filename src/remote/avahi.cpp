@@ -88,8 +88,8 @@ void Avahi::CommitFinished(QDBusPendingCallWatcher* call) {
   call->deleteLater();
 
   if (call->isError()) {
-    qDebug() << "Remote interface published on Avahi";
-  } else {
     qWarning() << "Failed to commit Avahi changes:" << call->error().message();
+  } else {
+    qDebug() << "Remote interface published on Avahi";
   }
 }

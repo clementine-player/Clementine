@@ -78,6 +78,7 @@
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
 #include "ui/windows7thumbbar.h"
+#include "version.h"
 #include "widgets/errordialog.h"
 #include "widgets/fileview.h"
 #include "widgets/multiloadingindicator.h"

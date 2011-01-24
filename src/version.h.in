@@ -14,33 +14,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIG_H_IN
-#define CONFIG_H_IN
+#ifndef VERSION_H_IN
+#define VERSION_H_IN
 
-#define CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}"
+#define CLEMENTINE_VERSION_DISPLAY "${CLEMENTINE_VERSION_DISPLAY}"
+#define CLEMENTINE_VERSION "${CLEMENTINE_VERSION_DEB}"
 
-#cmakedefine ENABLE_WIIMOTEDEV
-#cmakedefine ENABLE_VISUALISATIONS
-#cmakedefine USE_INSTALL_PREFIX
-#cmakedefine USE_SYSTEM_PROJECTM
-
-#cmakedefine SNOW_LEOPARD
-#cmakedefine LEOPARD
-#cmakedefine HAVE_SPARKLE
-#cmakedefine HAVE_STATIC_SQLITE
-
-#cmakedefine HAVE_DBUS
-#cmakedefine HAVE_GIO
-#cmakedefine HAVE_IMOBILEDEVICE
-#cmakedefine HAVE_LIBARCHIVE
-#cmakedefine HAVE_LIBGPOD
-#cmakedefine HAVE_LIBINDICATE
-#cmakedefine HAVE_LIBLASTFM
-#cmakedefine HAVE_LIBTUNEPIMP
-#cmakedefine HAVE_LIBMTP
-
-#cmakedefine HAVE_SCRIPTING_PYTHON
-
-#cmakedefine HAVE_REMOTE
-
-#endif // CONFIG_H_IN
+#endif // VERSION_H_IN
