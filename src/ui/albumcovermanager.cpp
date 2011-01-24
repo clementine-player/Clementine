@@ -29,8 +29,6 @@
 
 #include <QActionGroup>
 #include <QContextMenuEvent>
-#include <QCryptographicHash>
-#include <QDir>
 #include <QEvent>
 #include <QFileDialog>
 #include <QKeySequence>
@@ -52,7 +50,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
-    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
+    album_cover_choice_controller_(new AlbumCoverChoiceController(backend, this)),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this, network)),
@@ -394,41 +392,6 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
   UpdateStatusText();
 }
 
-QString AlbumCoverManager::SaveCoverInCache(
-    const QString& artist, const QString& album, const QImage& image) {
-  // Hash the artist and album into a filename for the image
-  QCryptographicHash hash(QCryptographicHash::Sha1);
-  hash.addData(artist.toLower().toUtf8().constData());
-  hash.addData(album.toLower().toUtf8().constData());
-
-  QString filename = hash.result().toHex() + ".jpg";
-  QString path = AlbumCoverLoader::ImageCacheDir() + "/" + filename;
-
-  // Make sure this directory exists first
-  QDir dir;
-  dir.mkdir(AlbumCoverLoader::ImageCacheDir());
-
-  // Save the image to disk
-  image.save(path, "JPG");
-
-  return path;
-}
-
-void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &image) {
-  const QString artist = item->data(Role_ArtistName).toString();
-  const QString album = item->data(Role_AlbumName).toString();
-
-  QString path = SaveCoverInCache(artist, album, image);
-
-  // Save the image in the database
-  backend_->UpdateManualAlbumArtAsync(artist, album, path);
-
-  // Update the icon in our list
-  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), path);
-  item->setData(Role_PathManual, path);
-  cover_loading_tasks_[id] = item;
-}
-
 void AlbumCoverManager::UpdateStatusText() {
   QString message = tr("Got %1 covers out of %2 (%3 failed)")
                     .arg(got_covers_).arg(jobs_).arg(missing_covers_);
@@ -513,7 +476,10 @@ Song AlbumCoverManager::ItemAsSong(QListWidgetItem* item) {
   result.set_art_automatic(item->data(Role_PathAutomatic).toString());
   result.set_art_manual(item->data(Role_PathManual).toString());
 
+  // force validity
   result.set_valid(true);
+  result.set_id(0);
+
   return result;
 }
 
@@ -538,6 +504,13 @@ void AlbumCoverManager::FetchSingleCover() {
   UpdateStatusText();
 }
 
+
+void AlbumCoverManager::UpdateCoverInList(QListWidgetItem* item, const QString& cover) {
+  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
+  item->setData(Role_PathManual, cover);
+  cover_loading_tasks_[id] = item;
+}
+
 void AlbumCoverManager::LoadCoverFromFile() {
   Song song = GetSingleSelectionAsSong();
   if(!song.is_valid())
@@ -545,22 +518,11 @@ void AlbumCoverManager::LoadCoverFromFile() {
 
   QListWidgetItem* item = context_menu_items_[0];
 
-  QString cover = album_cover_choice_controller_->LoadCoverFromFile(song);
+  QString cover = album_cover_choice_controller_->LoadCoverFromFile(&song);
 
-  // Can we load the image?
-  QImage image(cover);
-  if (image.isNull())
-    return;
-
-  // Update database
-  backend_->UpdateManualAlbumArtAsync(song.artist(),
-                                      song.album(),
-                                      cover);
-
-  // Update the icon in our list
-  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
-  item->setData(Role_PathManual, cover);
-  cover_loading_tasks_[id] = item;
+  if (!cover.isEmpty()) {
+    UpdateCoverInList(item, cover);
+  }
 }
 
 void AlbumCoverManager::LoadCoverFromURL() {
@@ -568,22 +530,57 @@ void AlbumCoverManager::LoadCoverFromURL() {
   if(!song.is_valid())
     return;
 
-  QImage image = album_cover_choice_controller_->LoadCoverFromURL();
-  if (image.isNull())
+  QListWidgetItem* item = context_menu_items_[0];
+
+  QString cover = album_cover_choice_controller_->LoadCoverFromURL(&song);
+
+  if (!cover.isEmpty()) {
+    UpdateCoverInList(item, cover);
+  }
+}
+
+void AlbumCoverManager::SearchForCover() {
+  Song song = GetFirstSelectedAsSong();
+  if(!song.is_valid())
     return;
 
-  SaveAndSetCover(context_menu_items_[0], image);
+  QListWidgetItem* item = context_menu_items_[0];
+
+  QString cover = album_cover_choice_controller_->SearchForCover(&song);
+  if (cover.isEmpty())
+    return;
+
+  // force the found cover on all of the selected items
+  foreach (QListWidgetItem* current, context_menu_items_) {
+    // don't save the first one twice
+    if(current != item) {
+      Song current_song = ItemAsSong(current);
+      album_cover_choice_controller_->SaveCover(&current_song, cover);
+    }
+
+    UpdateCoverInList(current, cover);
+  }
 }
 
 void AlbumCoverManager::UnsetCover() {
-  QString unset = album_cover_choice_controller_->UnsetCover();
+  Song song = GetFirstSelectedAsSong();
+  if(!song.is_valid())
+    return;
 
-  foreach (QListWidgetItem* item, context_menu_items_) {
-    item->setIcon(no_cover_icon_);
-    item->setData(Role_PathManual, unset);
-    backend_->UpdateManualAlbumArtAsync(item->data(Role_ArtistName).toString(),
-                                        item->data(Role_AlbumName).toString(),
-                                        unset);
+  QListWidgetItem* item = context_menu_items_[0];
+
+  QString cover = album_cover_choice_controller_->UnsetCover(&song);
+
+  // force the 'none' cover on all of the selected items
+  foreach (QListWidgetItem* current, context_menu_items_) {
+    current->setIcon(no_cover_icon_);
+    current->setData(Role_PathManual, cover);
+
+    // don't save the first one twice
+    if(current != item) {
+      Song current_song = ItemAsSong(current);
+      album_cover_choice_controller_->SaveCover(&current_song, cover);
+    }
   }
 }
 
@@ -650,16 +647,17 @@ void AlbumCoverManager::LoadSelectedToPlaylist() {
   }
 }
 
-void AlbumCoverManager::SearchForCover() {
-  Song song = GetFirstSelectedAsSong();
-  if(!song.is_valid())
-    return;
+void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &image) {
+  const QString artist = item->data(Role_ArtistName).toString();
+  const QString album = item->data(Role_AlbumName).toString();
 
-  QImage image = album_cover_choice_controller_->SearchForCover(song);
-  if (image.isNull())
-    return;
+  QString path = album_cover_choice_controller_->SaveCoverInCache(artist, album, image);
 
-  foreach (QListWidgetItem* item, context_menu_items_) {
-    SaveAndSetCover(item, image);
-  }
+  // Save the image in the database
+  backend_->UpdateManualAlbumArtAsync(artist, album, path);
+
+  // Update the icon in our list
+  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), path);
+  item->setData(Role_PathManual, path);
+  cover_loading_tasks_[id] = item;
 }

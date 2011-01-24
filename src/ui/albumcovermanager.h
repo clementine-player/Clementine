@@ -60,9 +60,6 @@ class AlbumCoverManager : public QMainWindow {
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
   SongMimeData* GetMimeDataForAlbums(const QModelIndexList& indexes) const;
 
-  static QString SaveCoverInCache(
-      const QString& artist, const QString& album, const QImage& image);
-
  signals:
   void AddToPlaylist(QMimeData* data);
 
@@ -95,6 +92,8 @@ class AlbumCoverManager : public QMainWindow {
   void AlbumDoubleClicked(const QModelIndex& index);
   void AddSelectedToPlaylist();
   void LoadSelectedToPlaylist();
+
+  void UpdateCoverInList(QListWidgetItem* item, const QString& cover);
 
  private:
   enum ArtistItemType {

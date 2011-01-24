@@ -46,7 +46,7 @@ const char* EditTagDialog::kTagFetchOnLoadText = QT_TR_NOOP("Generating audio fi
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
-    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
+    album_cover_choice_controller_(NULL),
     backend_(NULL),
     loading_(false),
     ignore_edits_(false),
@@ -257,6 +257,8 @@ void EditTagDialog::SetSongsFinished() {
 
 void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
   backend_ = backend;
+  album_cover_choice_controller_ = new AlbumCoverChoiceController(backend, this);
+
   new TagCompleter(backend, Playlist::Column_Artist, ui_->artist);
   new TagCompleter(backend, Playlist::Column_Album, ui_->album);
   new TagCompleter(backend, Playlist::Column_AlbumArtist, ui_->albumartist);
@@ -491,76 +493,78 @@ void EditTagDialog::ResetField() {
   }
 }
 
-Song EditTagDialog::GetFirstSelected() {
+Song* EditTagDialog::GetFirstSelected() {
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
   if (sel.isEmpty())
-    return Song();
-  return data_[sel.first().row()].original_;
+    return NULL;
+  return &data_[sel.first().row()].original_;
 }
 
 void EditTagDialog::LoadCoverFromFile() {
-  Song song = GetFirstSelected();
-  if(!song.is_valid()) {
+  Song* song = GetFirstSelected();
+  if(!song)
     return;
-  }
+
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
 
   QString cover = album_cover_choice_controller_->LoadCoverFromFile(song);
 
-  if(!cover.isEmpty()) {
-    SetAlbumArt(cover);
-  }
+  if(!cover.isEmpty())
+    UpdateCoverOf(*song, sel, cover);
 }
 
 void EditTagDialog::LoadCoverFromURL() {
-  Song song = GetFirstSelected();
-  if(!song.is_valid()) {
-    return;
-  }
-
-  QImage image = album_cover_choice_controller_->LoadCoverFromURL();
-  if (image.isNull())
+  Song* song = GetFirstSelected();
+  if(!song)
     return;
 
-  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(song.artist(), song.album(), image));
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+
+  QString cover = album_cover_choice_controller_->LoadCoverFromURL(song);
+
+  if(!cover.isEmpty())
+    UpdateCoverOf(*song, sel, cover);
 }
 
 void EditTagDialog::SearchForCover() {
-  Song song = GetFirstSelected();
-  if(!song.is_valid()) {
-    return;
-  }
-
-  QImage image = album_cover_choice_controller_->SearchForCover(song);
-  if (image.isNull())
+  Song* song = GetFirstSelected();
+  if(!song)
     return;
 
-  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(song.artist(), song.album(), image));
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+
+  QString cover = album_cover_choice_controller_->SearchForCover(song);
+
+  if(!cover.isEmpty())
+    UpdateCoverOf(*song, sel, cover);
 }
 
 void EditTagDialog::UnsetCover() {
-  SetAlbumArt(album_cover_choice_controller_->UnsetCover());
+  Song* song = GetFirstSelected();
+  if(!song)
+    return;
+
+  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+
+  QString cover = album_cover_choice_controller_->UnsetCover(song);
+  UpdateCoverOf(*song, sel, cover);
 }
 
 void EditTagDialog::ShowCover() {
-  Song song = GetFirstSelected();
-  if(!song.is_valid()) {
+  Song* song = GetFirstSelected();
+  if(!song) {
     return;
   }
 
-  album_cover_choice_controller_->ShowCover(song);
+  album_cover_choice_controller_->ShowCover(*song);
 }
 
-void EditTagDialog::SetAlbumArt(const QString& path) {
-  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
-  if (sel.isEmpty())
-    return;
-  Song* song = &data_[sel.first().row()].original_;
-  if (!song->is_valid() || song->id() == -1)
+void EditTagDialog::UpdateCoverOf(const Song& selected, const QModelIndexList& sel,
+                                  const QString& cover) {
+  if (!selected.is_valid() || selected.id() == -1)
     return;
 
-  song->set_art_manual(path);
-  backend_->UpdateManualAlbumArtAsync(song->artist(), song->album(), path);
-  UpdateSummaryTab(*song);
+  UpdateSummaryTab(selected);
 
   // Now check if we have any other songs cached that share that artist and
   // album (and would therefore be changed as well)
@@ -569,9 +573,9 @@ void EditTagDialog::SetAlbumArt(const QString& path) {
       continue;
 
     Song* other_song = &data_[i].original_;
-    if (song->artist() == other_song->artist() &&
-        song->album()  == other_song->album()) {
-      other_song->set_art_manual(path);
+    if (selected.artist() == other_song->artist() &&
+        selected.album()  == other_song->album()) {
+      other_song->set_art_manual(cover);
     }
   }
 }

@@ -115,7 +115,9 @@ private:
     QString id_;
   };
 
-  Song GetFirstSelected();
+  Song* GetFirstSelected();
+  void UpdateCoverOf(const Song& selected, const QModelIndexList& sel,
+                     const QString& cover);
 
   bool DoesValueVary(const QModelIndexList& sel, const QString& id) const;
   bool IsValueModified(const QModelIndexList& sel, const QString& id) const;
@@ -126,8 +128,6 @@ private:
 
   void UpdateSummaryTab(const Song& song);
   void UpdateStatisticsTab(const Song& song);
-
-  void SetAlbumArt(const QString& path);
 
   bool SetLoading(const QString& message);
 

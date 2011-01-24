@@ -106,15 +106,11 @@ private:
   void UpdateHeight(AlbumCoverLoader* loader);
   void DrawContents(QPainter* p);
 
-  void SetAlbumArt(const QString& path);
-
 private:
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   BackgroundThread<AlbumCoverLoader>* kitten_loader_;
-
-  LibraryBackend* backend_;
 
   Mode mode_;
 

@@ -18,12 +18,14 @@
 
 #include "core/albumcoverfetcher.h"
 #include "core/albumcoverloader.h"
+#include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcovermanager.h"
 #include "ui/albumcoversearcher.h"
 #include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
 
+#include <QCryptographicHash>
 #include <QDialog>
 #include <QFileDialog>
 #include <QLabel>
@@ -33,13 +35,14 @@ const char* AlbumCoverChoiceController::kImageFileFilter =
 const char* AlbumCoverChoiceController::kAllFilesFilter =
   QT_TR_NOOP("All files (*)");
 
-AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
+AlbumCoverChoiceController::AlbumCoverChoiceController(LibraryBackend* library, QWidget* parent)
   : QWidget(parent),
 #ifdef HAVE_LIBLASTFM
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
 #endif
-    cover_from_url_dialog_(NULL)
+    cover_from_url_dialog_(NULL),
+    library_(library)
 {
 #ifdef HAVE_LIBLASTFM
   cover_searcher_->Init(cover_fetcher_);
@@ -48,21 +51,17 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
 
 AlbumCoverChoiceController::~AlbumCoverChoiceController()
 {
-  if(cover_from_url_dialog_) {
-    delete cover_from_url_dialog_;
-  }
 }
 
-QString AlbumCoverChoiceController::LoadCoverFromFile(const Song& song) {
-#ifdef HAVE_LIBLASTFM
+QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
   QString dir;
 
-  if (!song.art_automatic().isEmpty() && song.art_automatic() != AlbumCoverLoader::kEmbeddedCover) {
-    dir = song.art_automatic();
-  } else if (!song.filename().isEmpty() && song.filename().contains('/')) {
+  if (!song->art_automatic().isEmpty() && song->art_automatic() != AlbumCoverLoader::kEmbeddedCover) {
+    dir = song->art_automatic();
+  } else if (!song->filename().isEmpty() && song->filename().contains('/')) {
     // we get rid of the filename because it's extension is screwing with the dialog's
     // filters
-    dir = song.filename().section('/', 0, -2);
+    dir = song->filename().section('/', 0, -2);
   } else {
     dir = "";
   }
@@ -72,45 +71,64 @@ QString AlbumCoverChoiceController::LoadCoverFromFile(const Song& song) {
       tr(kImageFileFilter) + ";;" + tr(kAllFilesFilter));
 
   if (cover.isNull())
-    return "";
+    return QString();
 
   // Can we load the image?
   QImage image(cover);
-  if (image.isNull())
-    return "";
 
-  return cover;
-#else
-  return "";
-#endif
+  if(!image.isNull()) {
+    SaveCover(song, cover);
+    return cover;
+  } else {
+    return QString();
+  }
 }
 
-QImage AlbumCoverChoiceController::LoadCoverFromURL() {
+QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
   if(!cover_from_url_dialog_) {
     cover_from_url_dialog_ = new CoverFromURLDialog(this);
   }
 
   QImage image = cover_from_url_dialog_->Exec();
-  return image;
+
+  if(!image.isNull()) {
+    QString cover = SaveCoverInCache(song->artist(), song->album(), image);
+    SaveCover(song, cover);
+
+    return cover;
+  } else {
+    return QString();
+  }
 }
 
-QImage AlbumCoverChoiceController::SearchForCover(const Song& song) const {
+QString AlbumCoverChoiceController::SearchForCover(Song* song) {
 #ifdef HAVE_LIBLASTFM
   // Get something sensible to stick in the search box
-  QString query = song.artist();
+  QString query = song->artist();
   if (!query.isEmpty())
     query += " ";
-  query += song.album();
+  query += song->album();
 
   QImage image = cover_searcher_->Exec(query);
-  return image;
+
+  if(!image.isNull()) {
+    QString cover = SaveCoverInCache(song->artist(), song->album(), image);
+    SaveCover(song, cover);
+
+    return cover;
+  } else {
+    return QString();
+  }
 #else
-  return QImage();
+  return QString();
 #endif
 }
 
-QString AlbumCoverChoiceController::UnsetCover() const {
-  return AlbumCoverLoader::kManuallyUnsetCover;
+QString AlbumCoverChoiceController::UnsetCover(Song* song) {
+  QString cover = AlbumCoverLoader::kManuallyUnsetCover;
+  SaveCover(song, cover);
+
+  return cover;
 }
 
 void AlbumCoverChoiceController::ShowCover(const Song& song) {
@@ -124,4 +142,33 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 
   dialog->resize(label->pixmap()->size());
   dialog->show();
+}
+
+void AlbumCoverChoiceController::SaveCover(Song* song, const QString &cover) {
+  if(song->is_valid() && song->id() != -1) {
+    song->set_art_manual(cover);
+    library_->UpdateManualAlbumArtAsync(song->artist(), song->album(), cover);
+  }
+}
+
+QString AlbumCoverChoiceController::SaveCoverInCache(
+    const QString& artist, const QString& album, const QImage& image) {
+
+  // Hash the artist and album into a filename for the image
+  QCryptographicHash hash(QCryptographicHash::Sha1);
+  hash.addData(artist.toLower().toUtf8().constData());
+  hash.addData(album.toLower().toUtf8().constData());
+
+  QString filename = hash.result().toHex() + ".jpg";
+  QString path = AlbumCoverLoader::ImageCacheDir() + "/" + filename;
+
+  // Make sure this directory exists first
+  QDir dir;
+  dir.mkdir(AlbumCoverLoader::ImageCacheDir());
+
+  // Save the image to disk
+  image.save(path, "JPG");
+
+  return path;
+
 }

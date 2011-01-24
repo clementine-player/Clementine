@@ -61,10 +61,9 @@ const int NowPlayingWidget::kTopBorder = 4;
 
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
-    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
+    album_cover_choice_controller_(NULL),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     kitten_loader_(NULL),
-    backend_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
     above_statusbar_action_(NULL),
@@ -418,45 +417,35 @@ void NowPlayingWidget::EnableKittens(bool aww) {
 }
 
 void NowPlayingWidget::LoadCoverFromFile() {
-  QString cover = album_cover_choice_controller_->LoadCoverFromFile(metadata_);
+  QString cover = album_cover_choice_controller_->LoadCoverFromFile(&metadata_);
 
-  if(!cover.isEmpty()) {
-    SetAlbumArt(cover);
-  }
+  if(!cover.isEmpty())
+    NowPlaying(metadata_);
 }
 
 void NowPlayingWidget::LoadCoverFromURL() {
-  QImage image = album_cover_choice_controller_->LoadCoverFromURL();
-  if (image.isNull())
-    return;
+  QString cover = album_cover_choice_controller_->LoadCoverFromURL(&metadata_);
 
-  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(
-      metadata_.artist(), metadata_.album(), image));
+  if(!cover.isEmpty())
+    NowPlaying(metadata_);
 }
 
 void NowPlayingWidget::SearchForCover() {
-  QImage image = album_cover_choice_controller_->SearchForCover(metadata_);
-  if (image.isNull())
-    return;
+  QString cover = album_cover_choice_controller_->SearchForCover(&metadata_);
 
-  SetAlbumArt(AlbumCoverManager::SaveCoverInCache(
-      metadata_.artist(), metadata_.album(), image));
+  if(!cover.isEmpty())
+    NowPlaying(metadata_);
 }
 
 void NowPlayingWidget::UnsetCover() {
-  SetAlbumArt(album_cover_choice_controller_->UnsetCover());
+  album_cover_choice_controller_->UnsetCover(&metadata_);
+  NowPlaying(metadata_);
 }
 
 void NowPlayingWidget::ShowCover() {
   album_cover_choice_controller_->ShowCover(metadata_);
 }
 
-void NowPlayingWidget::SetAlbumArt(const QString& path) {
-  metadata_.set_art_manual(path);
-  backend_->UpdateManualAlbumArtAsync(metadata_.artist(), metadata_.album(), path);
-  NowPlaying(metadata_);
-}
-
 void NowPlayingWidget::SetLibraryBackend(LibraryBackend* backend) {
-  backend_ = backend;
+  album_cover_choice_controller_ = new AlbumCoverChoiceController(backend, this);
 }
