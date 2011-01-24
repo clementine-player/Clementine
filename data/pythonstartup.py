@@ -1,6 +1,7 @@
 import clementine
 import sys
 
+
 class __ClementineLogger__:
   def __init__(self, error):
     self._error = error
@@ -18,3 +19,11 @@ class __ClementineLogger__:
 
 sys.stdout = __ClementineLogger__(False)
 sys.stderr = __ClementineLogger__(True)
+
+
+# Hack StackedWidget -> QStackedWidget to work around bug in PyQt 4.8.2
+try:
+  import PyQt4.QtGui
+  PyQt4.QtGui.StackedWidget = PyQt4.QtGui.QStackedWidget
+except:
+  pass
