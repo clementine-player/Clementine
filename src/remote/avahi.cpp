@@ -45,7 +45,7 @@ void Avahi::EntryGroupNewFinished(QDBusPendingCallWatcher* call) {
   QDBusPendingReply<QDBusObjectPath> reply = *call;
 
   if (reply.isError()) {
-    qWarning() << "Failed to create new Avahi entry group:" << call->error();
+    qWarning() << "Failed to create new Avahi entry group:" << call->error().message();
     return;
   }
 
@@ -74,7 +74,7 @@ void Avahi::AddServiceFinished(QDBusPendingCallWatcher* call) {
   call->deleteLater();
 
   if (call->isError()) {
-    qWarning() << "Failed to add Avahi service:" << call->error();
+    qWarning() << "Failed to add Avahi service:" << call->error().message();
     return;
   }
 
@@ -90,6 +90,6 @@ void Avahi::CommitFinished(QDBusPendingCallWatcher* call) {
   if (call->isError()) {
     qDebug() << "Remote interface published on Avahi";
   } else {
-    qWarning() << "Failed to commit Avahi changes:" << call->error();
+    qWarning() << "Failed to commit Avahi changes:" << call->error().message();
   }
 }
