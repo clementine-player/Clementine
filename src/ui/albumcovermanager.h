@@ -143,12 +143,6 @@ class AlbumCoverManager : public QMainWindow {
   AlbumCoverChoiceController* album_cover_choice_controller_;
   LibraryBackend* backend_;
 
-  QAction* cover_from_file_;
-  QAction* cover_from_url_;
-  QAction* search_for_cover_;
-  QAction* unset_cover_;
-  QAction* show_cover_;
-
   QAction* filter_all_;
   QAction* filter_with_covers_;
   QAction* filter_without_covers_;

@@ -46,7 +46,7 @@ const char* EditTagDialog::kTagFetchOnLoadText = QT_TR_NOOP("Generating audio fi
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
-    album_cover_choice_controller_(NULL),
+    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(NULL),
     loading_(false),
     ignore_edits_(false),
@@ -133,19 +133,18 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
 
-  QList<QAction*> actions = album_cover_choice_controller_->PrepareAlbumChoiceMenu(this);
+  QList<QAction*> actions = album_cover_choice_controller_->GetAllActions();
 
-  cover_from_file_ = actions[0];
-  cover_from_url_ = actions[1];
-  search_for_cover_ = actions[2];
-  unset_cover_ = actions[3];
-  show_cover_ = actions[4];
-
-  connect(cover_from_file_, SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
-  connect(cover_from_url_, SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
-  connect(search_for_cover_, SIGNAL(triggered()), this, SLOT(SearchForCover()));
-  connect(unset_cover_, SIGNAL(triggered()), this, SLOT(UnsetCover()));
-  connect(show_cover_, SIGNAL(triggered()), this, SLOT(ShowCover()));
+  connect(album_cover_choice_controller_->cover_from_file_action(),
+          SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(album_cover_choice_controller_->cover_from_url_action(),
+          SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
+  connect(album_cover_choice_controller_->search_for_cover_action(),
+          SIGNAL(triggered()), this, SLOT(SearchForCover()));
+  connect(album_cover_choice_controller_->unset_cover_action(),
+          SIGNAL(triggered()), this, SLOT(UnsetCover()));
+  connect(album_cover_choice_controller_->show_cover_action(),
+          SIGNAL(triggered()), this, SLOT(ShowCover()));
 
   cover_menu_->addActions(actions);
 
@@ -259,7 +258,7 @@ void EditTagDialog::SetSongsFinished() {
 
 void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
   backend_ = backend;
-  album_cover_choice_controller_ = new AlbumCoverChoiceController(backend, this);
+  album_cover_choice_controller_->SetLibrary(backend);
 
   new TagCompleter(backend, Playlist::Column_Artist, ui_->artist);
   new TagCompleter(backend, Playlist::Column_Album, ui_->album);
@@ -420,12 +419,12 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   ui_->summary->setText(summary);
 
 #ifndef HAVE_LIBLASTFM
-  cover_from_file_->setEnabled(false);
-  search_for_cover_->setEnabled(false);
+  album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
 #endif
 
-  unset_cover_->setEnabled(art_is_set);
-  show_cover_->setEnabled(art_is_set);
+  album_cover_choice_controller_->unset_cover_action()->setEnabled(art_is_set);
+  album_cover_choice_controller_->show_cover_action()->setEnabled(art_is_set);
   ui_->summary_art_button->setEnabled(song.id() != -1);
 
   ui_->length->setText(Utilities::PrettyTime(song.length()));

@@ -50,7 +50,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   : QMainWindow(parent),
     constructed_(false),
     ui_(new Ui_CoverManager),
-    album_cover_choice_controller_(new AlbumCoverChoiceController(backend, this)),
+    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(this, network)),
@@ -72,6 +72,8 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   ui_->fetch->setIcon(IconLoader::Load("download"));
   ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
+
+  album_cover_choice_controller_->SetLibrary(backend_);
 
   // Get a square version of nocover.png
   QImage nocover(":/nocover.png");
@@ -122,19 +124,18 @@ void AlbumCoverManager::Init() {
 
   // Context menu
 
-  QList<QAction*> actions = album_cover_choice_controller_->PrepareAlbumChoiceMenu(this);
+  QList<QAction*> actions = album_cover_choice_controller_->GetAllActions();
 
-  cover_from_file_ = actions[0];
-  cover_from_url_ = actions[1];
-  search_for_cover_ = actions[2];
-  unset_cover_ = actions[3];
-  show_cover_ = actions[4];
-
-  connect(cover_from_file_, SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
-  connect(cover_from_url_, SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
-  connect(search_for_cover_, SIGNAL(triggered()), this, SLOT(SearchForCover()));
-  connect(unset_cover_, SIGNAL(triggered()), this, SLOT(UnsetCover()));
-  connect(show_cover_, SIGNAL(triggered()), this, SLOT(ShowCover()));
+  connect(album_cover_choice_controller_->cover_from_file_action(),
+          SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(album_cover_choice_controller_->cover_from_url_action(),
+          SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
+  connect(album_cover_choice_controller_->search_for_cover_action(),
+          SIGNAL(triggered()), this, SLOT(SearchForCover()));
+  connect(album_cover_choice_controller_->unset_cover_action(),
+          SIGNAL(triggered()), this, SLOT(UnsetCover()));
+  connect(album_cover_choice_controller_->show_cover_action(),
+          SIGNAL(triggered()), this, SLOT(ShowCover()));
 
   context_menu_->addActions(actions);
   context_menu_->addSeparator();
@@ -436,10 +437,10 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
         some_with_covers = true;
     }
 
-    cover_from_file_->setEnabled(context_menu_items_.size() == 1);
-    cover_from_url_->setEnabled(context_menu_items_.size() == 1);
-    show_cover_->setEnabled(some_with_covers && context_menu_items_.size() == 1);
-    unset_cover_->setEnabled(some_with_covers);
+    album_cover_choice_controller_->cover_from_file_action()->setEnabled(context_menu_items_.size() == 1);
+    album_cover_choice_controller_->cover_from_url_action()->setEnabled(context_menu_items_.size() == 1);
+    album_cover_choice_controller_->show_cover_action()->setEnabled(some_with_covers && context_menu_items_.size() == 1);
+    album_cover_choice_controller_->unset_cover_action()->setEnabled(some_with_covers);
 
     QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
     context_menu_->popup(e->globalPos());

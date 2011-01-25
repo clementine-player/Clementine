@@ -58,7 +58,10 @@ void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
 QImage AlbumCoverSearcher::Exec(const QString &query) {
   ui_->query->setText(query);
   ui_->query->setFocus();
-  Search();
+
+  if(!query.isEmpty()) {
+    Search();
+  }
 
   if (exec() == QDialog::Rejected)
     return QImage();

@@ -20,6 +20,7 @@
 
 #include <QAction>
 #include <QList>
+#include <QMenu>
 #include <QWidget>
 
 class AlbumCoverFetcher;
@@ -33,11 +34,16 @@ class AlbumCoverChoiceController : public QWidget {
   Q_OBJECT
 
  public:
-  AlbumCoverChoiceController(LibraryBackend* library, QWidget* parent = 0);
+  AlbumCoverChoiceController(QWidget* parent = 0);
   ~AlbumCoverChoiceController();
 
-  static const char* kImageFileFilter;
-  static const char* kAllFilesFilter;
+  // Getters for all QActions implemented by this controller.
+
+  QAction* cover_from_file_action() const { return cover_from_file_; }
+  QAction* cover_from_url_action() const { return cover_from_url_; }
+  QAction* search_for_cover_action() const { return search_for_cover_; }
+  QAction* unset_cover_action() const { return unset_cover_; }
+  QAction* show_cover_action() const { return show_cover_; }
 
   // Returns QAction* for every operation implemented by this controller.
   // The list contains QAction* for:
@@ -46,7 +52,11 @@ class AlbumCoverChoiceController : public QWidget {
   // 3. searching for cover using last.fm
   // 4. unsetting the cover manually
   // 5. showing the cover in original size
-  QList<QAction*> PrepareAlbumChoiceMenu(QObject* parent);
+  QList<QAction*> GetAllActions();
+
+  // Sets LibraryBackend on this controller. This is necessary for the controller
+  // to work properly!
+  void SetLibrary(LibraryBackend* library);
 
   // All of the methods below require a currently selected song as an
   // input parameter. Also - LoadCoverFromFile, LoadCoverFromURL,
@@ -81,6 +91,8 @@ class AlbumCoverChoiceController : public QWidget {
   QString SaveCoverInCache(const QString& artist, const QString& album, const QImage& image);
 
 private:
+  static const char* kImageFileFilter;
+  static const char* kAllFilesFilter;
 
 #ifdef HAVE_LIBLASTFM
   AlbumCoverSearcher* cover_searcher_;
@@ -90,6 +102,14 @@ private:
   CoverFromURLDialog* cover_from_url_dialog_;
 
   LibraryBackend* library_;
+
+  QMenu* menu_;
+
+  QAction* cover_from_file_;
+  QAction* cover_from_url_;
+  QAction* search_for_cover_;
+  QAction* unset_cover_;
+  QAction* show_cover_;
 };
 
 #endif // ALBUMCOVERCHOICECONTROLLER_H

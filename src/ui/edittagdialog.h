@@ -160,12 +160,6 @@ private:
 
   QMenu* cover_menu_;
 
-  QAction* cover_from_file_;
-  QAction* cover_from_url_;
-  QAction* search_for_cover_;
-  QAction* unset_cover_;
-  QAction* show_cover_;
-
   QPushButton* previous_button_;
   QPushButton* next_button_;
 

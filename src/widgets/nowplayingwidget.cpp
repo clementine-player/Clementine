@@ -22,12 +22,6 @@
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
-#ifdef HAVE_LIBLASTFM
-# include "core/albumcoverfetcher.h"
-# include "ui/albumcovermanager.h"
-# include "ui/albumcoversearcher.h"
-#endif
-
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -61,7 +55,7 @@ const int NowPlayingWidget::kTopBorder = 4;
 
 NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   : QWidget(parent),
-    album_cover_choice_controller_(NULL),
+    album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     kitten_loader_(NULL),
     mode_(SmallSongDetails),
@@ -93,19 +87,18 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   menu_->addActions(mode_group->actions());
   menu_->addSeparator();
 
-  QList<QAction*> actions = album_cover_choice_controller_->PrepareAlbumChoiceMenu(this);
+  QList<QAction*> actions = album_cover_choice_controller_->GetAllActions();
 
-  cover_from_file_ = actions[0];
-  cover_from_url_ = actions[1];
-  search_for_cover_ = actions[2];
-  unset_cover_ = actions[3];
-  show_cover_ = actions[4];
-
-  connect(cover_from_file_, SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
-  connect(cover_from_url_, SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
-  connect(search_for_cover_, SIGNAL(triggered()), this, SLOT(SearchForCover()));
-  connect(unset_cover_, SIGNAL(triggered()), this, SLOT(UnsetCover()));
-  connect(show_cover_, SIGNAL(triggered()), this, SLOT(ShowCover()));
+  connect(album_cover_choice_controller_->cover_from_file_action(),
+          SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(album_cover_choice_controller_->cover_from_url_action(),
+          SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
+  connect(album_cover_choice_controller_->search_for_cover_action(),
+          SIGNAL(triggered()), this, SLOT(SearchForCover()));
+  connect(album_cover_choice_controller_->unset_cover_action(),
+          SIGNAL(triggered()), this, SLOT(UnsetCover()));
+  connect(album_cover_choice_controller_->show_cover_action(),
+          SIGNAL(triggered()), this, SLOT(ShowCover()));
 
   menu_->addActions(actions);
   menu_->addSeparator();
@@ -365,16 +358,16 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
 #ifndef HAVE_LIBLASTFM
-  cover_from_file_->setEnabled(false);
-  search_for_cover_->setEnabled(false);
+  album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
 #endif
 
   const bool art_is_set =
       !metadata_.art_manual().isEmpty() &&
       metadata_.art_manual() != AlbumCoverLoader::kManuallyUnsetCover;
 
-  unset_cover_->setEnabled(art_is_set);
-  show_cover_->setEnabled(art_is_set);
+  album_cover_choice_controller_->unset_cover_action()->setEnabled(art_is_set);
+  album_cover_choice_controller_->show_cover_action()->setEnabled(art_is_set);
 
   menu_->popup(mapToGlobal(e->pos()));
 }
@@ -447,5 +440,5 @@ void NowPlayingWidget::ShowCover() {
 }
 
 void NowPlayingWidget::SetLibraryBackend(LibraryBackend* backend) {
-  album_cover_choice_controller_ = new AlbumCoverChoiceController(backend, this);
+  album_cover_choice_controller_->SetLibrary(backend);
 }

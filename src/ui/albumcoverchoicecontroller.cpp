@@ -25,41 +25,52 @@
 #include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
 
+#include <QAction>
 #include <QCryptographicHash>
 #include <QDialog>
 #include <QFileDialog>
 #include <QLabel>
+#include <QList>
+#include <QMenu>
 
 const char* AlbumCoverChoiceController::kImageFileFilter =
   QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)");
 const char* AlbumCoverChoiceController::kAllFilesFilter =
   QT_TR_NOOP("All files (*)");
 
-AlbumCoverChoiceController::AlbumCoverChoiceController(LibraryBackend* library, QWidget* parent)
+AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
 #ifdef HAVE_LIBLASTFM
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
     cover_fetcher_(new AlbumCoverFetcher(this)),
 #endif
     cover_from_url_dialog_(NULL),
-    library_(library)
+    library_(NULL),
+    menu_(new QMenu(this))
 {
 #ifdef HAVE_LIBLASTFM
   cover_searcher_->Init(cover_fetcher_);
 #endif
+
+  cover_from_file_ = menu_->addAction(IconLoader::Load("document-open"), tr("Load cover from disk..."));
+  cover_from_url_ = menu_->addAction(IconLoader::Load("download"), tr("Load cover from URL..."));
+  search_for_cover_ = menu_->addAction(IconLoader::Load("find"), tr("Search for album covers..."));
+  unset_cover_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Unset cover"));
+  show_cover_ = menu_->addAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."));
 }
 
 AlbumCoverChoiceController::~AlbumCoverChoiceController()
 {
 }
 
-QList<QAction*> AlbumCoverChoiceController::PrepareAlbumChoiceMenu(QObject* parent) {
-  return QList<QAction*>()
-           << new QAction(IconLoader::Load("document-open"), tr("Load cover from disk..."), parent)
-           << new QAction(IconLoader::Load("download"), tr("Load cover from URL..."), parent)
-           << new QAction(IconLoader::Load("find"), tr("Search for album covers..."), parent)
-           << new QAction(IconLoader::Load("list-remove"), tr("Unset cover"), parent)
-           << new QAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."), parent);
+QList<QAction*> AlbumCoverChoiceController::GetAllActions() {
+  return QList<QAction*>() << cover_from_file_ << cover_from_url_
+                           << search_for_cover_ << unset_cover_
+                           << show_cover_;
+}
+
+void AlbumCoverChoiceController::SetLibrary(LibraryBackend* library) {
+  library_ = library;
 }
 
 QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {

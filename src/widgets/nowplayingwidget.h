@@ -23,11 +23,6 @@
 
 #include <QWidget>
 
-#ifdef HAVE_LIBLASTFM
-  class AlbumCoverFetcher;
-  class AlbumCoverSearcher;
-#endif
-
 class AlbumCoverChoiceController;
 class AlbumCoverLoader;
 class LibraryBackend;
@@ -117,12 +112,6 @@ private:
   QMenu* menu_;
 
   QAction* above_statusbar_action_;
-
-  QAction* cover_from_file_;
-  QAction* cover_from_url_;
-  QAction* search_for_cover_;
-  QAction* unset_cover_;
-  QAction* show_cover_;
 
   bool visible_;
   int small_ideal_height_;
