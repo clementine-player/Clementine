@@ -19,10 +19,16 @@
 #include "ui_trackslider.h"
 #include "core/utilities.h"
 
+#include <QSettings>
+
+const char* TrackSlider::kSettingsGroup = "MainWindow";
+
 TrackSlider::TrackSlider(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_TrackSlider),
-    setting_value_(false)
+    setting_value_(false),
+    show_remaining_time_(true),
+    slider_maximum_value_(0)
 {
   ui_->setupUi(this);
 
@@ -32,8 +38,14 @@ TrackSlider::TrackSlider(QWidget* parent)
 
   UpdateLabelWidth();
 
+  // Load settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  show_remaining_time_ = s.value("show_remaining_time").toBool();
+
   connect(ui_->slider, SIGNAL(sliderMoved(int)), SIGNAL(ValueChanged(int)));
   connect(ui_->slider, SIGNAL(valueChanged(int)), SLOT(ValueMaybeChanged(int)));
+  connect(ui_->remaining, SIGNAL(Clicked()), SLOT(ToggleTimeDisplay()));
 }
 
 TrackSlider::~TrackSlider() {
@@ -78,8 +90,17 @@ void TrackSlider::SetValue(int elapsed, int total) {
 
 void TrackSlider::UpdateTimes(int elapsed) {
   ui_->elapsed->setText(Utilities::PrettyTime(elapsed));
-  ui_->remaining->setText("-" + Utilities::PrettyTime(ui_->slider->maximum() - elapsed));
-
+  //update normally if showing remaining time
+  if (show_remaining_time_) {
+    ui_->remaining->setText("-" + Utilities::PrettyTime(ui_->slider->maximum() - elapsed));
+  }
+  else {
+    //check if slider maximum value is changed before updating
+    if (slider_maximum_value_ != ui_->slider->maximum()) {
+      slider_maximum_value_ = ui_->slider->maximum();
+      ui_->remaining->setText(Utilities::PrettyTime(ui_->slider->maximum()));
+    }
+  }
   setEnabled(true);
 }
 
@@ -90,6 +111,7 @@ void TrackSlider::SetStopped() {
 
   setting_value_ = true;
   ui_->slider->setValue(0);
+  slider_maximum_value_ = 0;
   setting_value_ = false;
 }
 
@@ -115,4 +137,18 @@ bool TrackSlider::event(QEvent* e) {
       break;
   }
   return false;
+}
+
+void TrackSlider::ToggleTimeDisplay() {
+  show_remaining_time_ = !show_remaining_time_;
+  if (!show_remaining_time_) {
+    //we set the value to -1 because the label must be updated
+    slider_maximum_value_ = -1;
+  }
+  UpdateTimes(ui_->slider->value());
+
+  //save this setting
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("show_remaining_time", show_remaining_time_);
 }

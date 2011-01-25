@@ -41,7 +41,10 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="remaining">
+    <widget class="ClickableLabel" name="remaining">
+     <property name="toolTip">
+      <string>Click to toggle between remaining time and total time</string>
+     </property>
      <property name="text">
       <string>0:00:00</string>
      </property>
@@ -54,6 +57,11 @@
    <class>TrackSliderSlider</class>
    <extends>QSlider</extends>
    <header>widgets/tracksliderslider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>widgets/clickablelabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

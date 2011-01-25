@@ -37,6 +37,8 @@ class TrackSlider : public QWidget {
   // QObject
   bool event(QEvent *);
 
+  static const char* kSettingsGroup;
+
  public slots:
   void SetValue(int elapsed, int total);
   void SetStopped();
@@ -47,6 +49,7 @@ class TrackSlider : public QWidget {
 
  private slots:
   void ValueMaybeChanged(int value);
+  void ToggleTimeDisplay();
 
  private:
   void UpdateTimes(int elapsed);
@@ -57,6 +60,8 @@ class TrackSlider : public QWidget {
   Ui_TrackSlider* ui_;
 
   bool setting_value_;
+  bool show_remaining_time_;
+  int slider_maximum_value_; //we cache it to avoid unnecessary updates
 };
 
 #endif // TRACKSLIDER_H
