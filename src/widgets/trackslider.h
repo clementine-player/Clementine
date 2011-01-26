@@ -43,6 +43,7 @@ class TrackSlider : public QWidget {
   void SetValue(int elapsed, int total);
   void SetStopped();
   void SetCanSeek(bool can_seek);
+  void Seek(int gap);
 
  signals:
   void ValueChanged(int value);

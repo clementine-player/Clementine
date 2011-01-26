@@ -87,6 +87,7 @@ class PlaylistView : public QTreeView {
  signals:
   void PlayPauseItem(const QModelIndex& index);
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);
+  void SeekTrack(int gap);
 
  protected:
   void contextMenuEvent(QContextMenuEvent* e);

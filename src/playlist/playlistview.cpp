@@ -438,6 +438,10 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     if (currentIndex().isValid())
       emit PlayPauseItem(currentIndex());
     event->accept();
+  } else if(event->key() == Qt::Key_Left) {
+    emit SeekTrack(-1);
+  } else if(event->key() == Qt::Key_Right) {
+    emit SeekTrack(1);
   } else {
     QTreeView::keyPressEvent(event);
   }

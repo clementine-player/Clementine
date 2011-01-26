@@ -119,6 +119,10 @@ void TrackSlider::SetCanSeek(bool can_seek) {
   ui_->slider->setEnabled(can_seek);
 }
 
+void TrackSlider::Seek(int gap) {
+  ui_->slider->setValue(ui_->slider->value()+gap);
+}
+
 void TrackSlider::ValueMaybeChanged(int value) {
   if (setting_value_)
     return;
