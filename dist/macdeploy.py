@@ -131,6 +131,22 @@ SCRIPT_PLUGINS_SEARCH_PATH = [
     '/Library/Python/2.6/site-packages',
 ]
 
+TUNEPIMP_PLUGINS = [
+    'flac.tpp',
+    'mp3.tpp',
+    'mp4.tpp',
+    'mpc.tpp',
+    'speex.tpp',
+    'tta.tpp',
+    'vorbis.tpp',
+    'wav.tpp',
+    'wma.tpp',
+    'wv.tpp',
+]
+TUNEPIMP_PLUGINS_SEARCH_PATH = [
+    '/usr/local/lib/tunepimp/plugins',
+]
+
 
 class Error(Exception):
   pass
@@ -157,6 +173,10 @@ class CouldNotFindGstreamerPluginError(Error):
 
 
 class CouldNotFindScriptPluginError(Error):
+  pass
+
+
+class CouldNotFindTunepimpPluginError(Error):
   pass
 
 
@@ -380,6 +400,14 @@ def FindScriptPlugin(name):
   raise CouldNotFindScriptPluginError(name)
 
 
+def FindTunepimpPlugin(name):
+  for path in TUNEPIMP_PLUGINS_SEARCH_PATH:
+    if os.path.exists(path):
+      if os.path.exists(os.path.join(path, name)):
+        return os.path.join(path, name)
+  raise CouldNotFindTunepimpPluginError(name)
+
+
 FixBinary(binary)
 
 for plugin in GSTREAMER_PLUGINS:
@@ -392,6 +420,9 @@ for plugin in QT_PLUGINS:
 
 for plugin in SCRIPT_PLUGINS:
   FixPlugin(FindScriptPlugin(plugin), os.path.dirname(plugin))
+
+for plugin in TUNEPIMP_PLUGINS:
+  FixPlugin(FindTunepimpPlugin(plugin), 'tunepimp')
 
 if len(sys.argv) <= 2:
   print 'Would run %d commands:' % len(commands)

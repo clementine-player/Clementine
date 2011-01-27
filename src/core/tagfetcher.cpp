@@ -18,10 +18,13 @@
 #include "tagfetcher.h"
 
 #include <QtDebug>
+#include <QCoreApplication>
 #include <QFile>
 #include <QMutex>
 #include <QNetworkReply>
 #include <QStringList>
+
+#include "version.h"
 
 #ifdef HAVE_LIBTUNEPIMP
 
@@ -32,7 +35,18 @@ TagFetcher::TagFetcher(QObject *parent)
       network_(new NetworkAccessManager(this)),
       pimp_(NULL)
 {
-  pimp_ = tp_New("FETCHTAG", "0.1");
+  QString plugin_path =
+  #ifdef Q_OS_DARWIN
+      QCoreApplication::applicationDirPath() + "/../PlugIns/tunepimp";
+  #else
+      "";
+  #endif
+  pimp_ = tp_NewWithArgs(
+      QCoreApplication::applicationName().toAscii().constData(),
+      CLEMENTINE_VERSION,
+      TP_THREAD_ALL,
+      plugin_path.toLocal8Bit().constData());
+
   tp_SetDebug(pimp_, true);
   tp_SetAutoSaveThreshold(pimp_, -1);
   tp_SetMoveFiles(pimp_, false);
