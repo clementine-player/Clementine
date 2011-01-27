@@ -10,7 +10,7 @@ const char* KittenLoader::kFlickrKittenUrl =
     "http://api.flickr.com/services/rest/"
     "?method=flickr.photos.search"
     "&api_key=b60e59d549d314c98ddb1dc06008a2c4"
-    "&tags=cat"
+    "&tags=kitten"
     "&sort=random"
     "&safe_search=1"
     "&content_type=1";
