@@ -10,11 +10,19 @@ macro(add_sip_binding outputvar source)
   # Work out what the SIP flags should be for PyQt4.  These would normally be
   # obtained from PyQt4.pyqtconfig.Configuration().pyqt_sip_flags, but we can't
   # call that when cross-compiling.
-  set(PYQT_SIP_FLAGS
-    "-x" "VendorID"
-    "-x" "PyQt_NoPrintRangeBug"
-    "-t" "Qt_4_6_2"
-  )
+  if (APPLE)
+    set(PYQT_SIP_FLAGS
+      "-x" "VendorID"
+      "-x" "PyQt_NoPrintRangeBug"
+      "-t" "Qt_4_7_1"
+    )
+  else (APPLE)
+    set(PYQT_SIP_FLAGS
+      "-x" "VendorID"
+      "-x" "PyQt_NoPrintRangeBug"
+      "-t" "Qt_4_6_2"
+    )
+  endif (APPLE)
 
   if(WIN32)
     list(APPEND PYQT_SIP_FLAGS "-t" "WS_WIN")
