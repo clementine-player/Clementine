@@ -7,7 +7,7 @@ add_custom_target(rpm
   COMMAND ${CMAKE_SOURCE_DIR}/dist/maketarball.sh
   COMMAND ${CMAKE_COMMAND} -E copy clementine-${CLEMENTINE_VERSION_RPM}.tar.gz ${RPMBUILD_DIR}/SOURCES/
   COMMAND rpmbuild -bs ${CMAKE_SOURCE_DIR}/dist/clementine.spec
-  COMMAND mock -r ${MOCK_CHROOT} ${RPMBUILD_DIR}/SRPMS/clementine-${CLEMENTINE_VERSION_RPM}-1.${RPM_DISTRO}.src.rpm
+  COMMAND mock -r ${MOCK_CHROOT} ${RPMBUILD_DIR}/SRPMS/clementine-${CLEMENTINE_VERSION_RPM}-1.*.src.rpm
   COMMAND ${CMAKE_COMMAND} -E copy /var/lib/mock/${MOCK_CHROOT}/result/clementine-${CLEMENTINE_VERSION_RPM}-1.${RPM_DISTRO}.${RPM_ARCH}.rpm
                                    ${CMAKE_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}-1.${RPM_DISTRO}.${RPM_ARCH}.rpm
 )
