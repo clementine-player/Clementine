@@ -137,10 +137,13 @@ quint64 FileSystemFreeSpace(const QString& path) {
   return 0;
 }
 
-QString MakeTempDir() {
+QString MakeTempDir(const QString template_name) {
   QString path;
   {
     QTemporaryFile tempfile;
+    if (!template_name.isEmpty())
+      tempfile.setFileTemplate(template_name);
+
     tempfile.open();
     path = tempfile.fileName();
   }

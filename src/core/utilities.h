@@ -37,7 +37,7 @@ namespace Utilities {
   quint64 FileSystemCapacity(const QString& path);
   quint64 FileSystemFreeSpace(const QString& path);
 
-  QString MakeTempDir();
+  QString MakeTempDir(const QString template_name = QString());
   void RemoveRecursive(const QString& path);
   bool CopyRecursive(const QString& source, const QString& destination);
   bool Copy(QIODevice* source, QIODevice* destination);

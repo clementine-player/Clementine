@@ -35,8 +35,8 @@ namespace {
 
 class TemporaryScript : boost::noncopyable {
 public:
-  TemporaryScript(const char* code) {
-    directory_ = Utilities::MakeTempDir();
+  TemporaryScript(const QString& code, const QString& directory_template = QString()) {
+    directory_ = Utilities::MakeTempDir(directory_template);
 
     QSettings ini(directory_ + "/script.ini", QSettings::IniFormat);
     ini.beginGroup("Script");
@@ -45,7 +45,7 @@ public:
 
     QFile script(directory_ + "/script.py");
     script.open(QIODevice::WriteOnly);
-    script.write(code);
+    script.write(code.toUtf8());
   }
 
   ~TemporaryScript() {
@@ -114,15 +114,38 @@ TEST_F(PythonTest, CleanupModuleDict) {
         "  def __del__(self):\n"
         "    print 'destructor'\n"
         "f = Foo()\n");
-
   ScriptInfo info;
   info.InitFromDirectory(manager_, script.directory_);
 
   Script* s = engine_->CreateScript(info);
-  ASSERT_TRUE(manager_->log_lines().last().endsWith("constructor"));
+  ASSERT_TRUE(manager_->log_lines_plain().last().endsWith("constructor"));
 
   engine_->DestroyScript(s);
-  ASSERT_TRUE(manager_->log_lines().last().endsWith("destructor"));
+  ASSERT_TRUE(manager_->log_lines_plain().last().endsWith("destructor"));
+}
+
+TEST_F(PythonTest, ModuleConstants) {
+  TemporaryScript script(
+        "print __builtins__\n"
+        "print __file__\n"
+        "print __name__\n"
+        "print __package__\n"
+        "print __path__\n"
+        "print script\n");
+  ScriptInfo info;
+  info.InitFromDirectory(manager_, script.directory_);
+
+  engine_->CreateScript(info);
+
+  const QStringList log = manager_->log_lines_plain();
+  const int n = log.count();
+  ASSERT_GE(n, 6);
+  EXPECT_TRUE(log.at(n-6).endsWith("<module '__builtin__' (built-in)>"));     // __builtins__
+  EXPECT_TRUE(log.at(n-5).endsWith(script.directory_ + "/script.py"));        // __file__
+  EXPECT_TRUE(log.at(n-4).endsWith("clementinescripts." + info.id()));        // __name__
+  EXPECT_TRUE(log.at(n-3).endsWith("None"));                                  // __package__
+  EXPECT_TRUE(log.at(n-2).endsWith("['" + script.directory_ + "']"));         // __path__
+  EXPECT_TRUE(log.at(n-1).contains("<clementine.ScriptInterface object at")); // script
 }
 
 }  // namespace

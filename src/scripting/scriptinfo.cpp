@@ -34,7 +34,7 @@ ScriptInfo::ScriptInfo()
 
 void ScriptInfo::InitFromDirectory(const ScriptManager* manager, const QString& path) {
   const QString ini_file = path + "/" + kIniFileName;
-  const QString id = QFileInfo(path).completeBaseName();
+  const QString id = QFileInfo(path).fileName();
 
   // Does the file exist?
   if (!QFile::exists(ini_file)) {
