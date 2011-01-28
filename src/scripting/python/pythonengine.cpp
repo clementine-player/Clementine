@@ -47,6 +47,10 @@ PythonEngine::PythonEngine(ScriptManager* manager)
 
 PythonEngine::~PythonEngine() {
   sInstance = NULL;
+
+  if (initialised_) {
+    Py_Finalize();
+  }
 }
 
 const sipAPIDef* PythonEngine::GetSIPApi() {
@@ -107,14 +111,17 @@ Script* PythonEngine::CreateScript(const ScriptInfo& info) {
     sip_api_ = GetSIPApi();
 
     // Add objects to the module
-    AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
-    AddObject(manager()->data().player_, sipType_Player, "player");
-    AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
-    AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
-    AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
-    AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
+    if (manager()->data().valid_) {
+      AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
+      AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
+      AddObject(manager()->data().player_, sipType_Player, "player");
+      AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
+      AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
+      AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
+      AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
+    }
+
     AddObject(manager()->ui(), sipType_UIInterface, "ui");
-    AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
     AddObject(this, sipType_PythonEngine, "pythonengine");
 
     // Create a module for scripts

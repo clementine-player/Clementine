@@ -86,6 +86,7 @@ ScriptManager::~ScriptManager() {
       info.loaded()->language()->DestroyScript(info.loaded());
     }
   }
+  qDeleteAll(engines_);
 }
 
 void ScriptManager::Init(const GlobalData& data) {
@@ -304,6 +305,7 @@ void ScriptManager::AddLogLine(const QString& who, const QString& message, bool 
     }
 
     log_lines_ << html;
+    log_lines_plain_ << plain;
     emit LogLineAdded(html);
 
     qDebug() << plain.toLocal8Bit().constData();

@@ -57,11 +57,12 @@ public:
   };
 
   struct GlobalData {
-    GlobalData() {}
+    GlobalData() : valid_(false) {}
     GlobalData(Library* library, LibraryView* library_view, Player* player,
                PlaylistManager* playlists, TaskManager* task_manager,
                SettingsDialog* settings_dialog, RadioModel* radio_model)
-      : library_(library),
+      : valid_(true),
+        library_(library),
         library_view_(library_view),
         player_(player),
         playlists_(playlists),
@@ -70,6 +71,7 @@ public:
         radio_model_(radio_model)
     {}
 
+    bool valid_;
     Library* library_;
     LibraryView* library_view_;
     Player* player_;
@@ -90,6 +92,7 @@ public:
   void ShowSettingsDialog(const QModelIndex& index);
 
   QStringList log_lines() const { return log_lines_; }
+  QStringList log_lines_plain() const { return log_lines_plain_; }
 
   // QAbstractListModel
   int rowCount(const QModelIndex& parent = QModelIndex()) const;
@@ -130,6 +133,7 @@ private:
 
   // HTML log messages
   QStringList log_lines_;
+  QStringList log_lines_plain_;
 
   // Things available to scripts
   GlobalData data_;
