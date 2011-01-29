@@ -74,6 +74,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 #ifdef HAVE_LIBTUNEPIMP
   ui_->fetch_tag->setText(tr(kTagFetchText));
 #else
+  ui_->fetch_tag->setDisabled(true);
   ui_->fetch_tag->setVisible(false);
 #endif
 
@@ -687,7 +688,7 @@ void EditTagDialog::FetchTag() {
   if (sel.isEmpty())
     return;
   Song* song = &data_[sel.first().row()].original_;
-  if (!song->is_valid() || song->id() == -1)
+  if (!song->is_valid())
     return;
   tag_fetcher_->FetchFromFile(song->filename());
   ui_->fetch_tag->setDisabled(true); // disable button, will be re-enabled later
