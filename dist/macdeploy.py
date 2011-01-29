@@ -418,11 +418,14 @@ FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
 
-for plugin in SCRIPT_PLUGINS:
-  FixPlugin(FindScriptPlugin(plugin), os.path.dirname(plugin))
+try:
+  for plugin in SCRIPT_PLUGINS:
+    FixPlugin(FindScriptPlugin(plugin), os.path.dirname(plugin))
 
-for plugin in TUNEPIMP_PLUGINS:
-  FixPlugin(FindTunepimpPlugin(plugin), 'tunepimp')
+  for plugin in TUNEPIMP_PLUGINS:
+    FixPlugin(FindTunepimpPlugin(plugin), 'tunepimp')
+except:
+  print 'Failed to find script or tunepimp plugins'
 
 if len(sys.argv) <= 2:
   print 'Would run %d commands:' % len(commands)
