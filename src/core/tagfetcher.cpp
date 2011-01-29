@@ -39,13 +39,13 @@ TagFetcher::TagFetcher(QObject *parent)
   #ifdef Q_OS_DARWIN
       QCoreApplication::applicationDirPath() + "/../PlugIns/tunepimp";
   #else
-      NULL;
+      QString();
   #endif
   pimp_ = tp_NewWithArgs(
       QCoreApplication::applicationName().toAscii().constData(),
       CLEMENTINE_VERSION,
       TP_THREAD_ALL,
-      plugin_path==NULL? NULL:plugin_path.toLocal8Bit().constData());
+      plugin_path.isNull()? NULL:plugin_path.toLocal8Bit().constData());
 
   tp_SetDebug(pimp_, true);
   tp_SetAutoSaveThreshold(pimp_, -1);
