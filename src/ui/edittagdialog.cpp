@@ -732,7 +732,7 @@ void EditTagDialog::FetchTagSongChoosen(const QString& filename, const Song& son
   if (sel.isEmpty())
     return;
   Song* current_song = &data_[sel.first().row()].original_;
-  if (!current_song->is_valid() || current_song->id() == -1)
+  if (!current_song->is_valid())
     return;
   // Check it's still the same song, using filename
   if(filename != current_song->filename()) {
