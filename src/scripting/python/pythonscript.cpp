@@ -109,6 +109,9 @@ bool PythonScript::Unload() {
   }
 
   foreach (const QString& key, keys_to_delete) {
+    // Workaround Python issue 10068 (only affects 2.7.0)
+    _PyModule_Clear(PyDict_GetItemString(modules, key.toAscii().constData()));
+
     PyDict_DelItemString(modules, key.toAscii().constData());
   }
   PyEval_ReleaseLock();
