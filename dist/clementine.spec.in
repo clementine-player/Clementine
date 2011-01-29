@@ -19,7 +19,7 @@ BuildRequires:  libtunepimp-devel
 Requires:       libgpod PyQt4
 
 # GStreamer codec dependencies
-Requires:       gstreamer-plugins-ugly
+Requires:       gstreamer-plugins-ugly libtunepimp-extras-freeworld
 
 %ifarch x86_64
 Requires:       gstreamer0.10(decoder-audio/x-vorbis)()(64bit)
