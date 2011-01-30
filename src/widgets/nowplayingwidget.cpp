@@ -362,12 +362,12 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
 #endif
 
-  const bool art_is_set =
-      !metadata_.art_manual().isEmpty() &&
-      metadata_.art_manual() != AlbumCoverLoader::kManuallyUnsetCover;
+  const bool art_is_not_set =
+     metadata_.art_manual() == AlbumCoverLoader::kManuallyUnsetCover
+ || (metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty());
 
-  album_cover_choice_controller_->unset_cover_action()->setEnabled(art_is_set);
-  album_cover_choice_controller_->show_cover_action()->setEnabled(art_is_set);
+  album_cover_choice_controller_->unset_cover_action()->setEnabled(!art_is_not_set);
+  album_cover_choice_controller_->show_cover_action()->setEnabled(!art_is_not_set);
 
   menu_->popup(mapToGlobal(e->pos()));
 }
