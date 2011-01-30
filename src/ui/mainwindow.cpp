@@ -419,11 +419,18 @@ MainWindow::MainWindow(
   connect(device_view_, SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
   // Library filter widget
+  QAction* duplicates_only_action = new QAction(tr("Show duplicates only"), this);
+  duplicates_only_action->setCheckable(true);
+  connect(duplicates_only_action, SIGNAL(toggled(bool)), library_view_->filter(), SLOT(SetDuplicatesOnly(bool)));
+
   QAction* library_config_action = new QAction(
       IconLoader::Load("configure"), tr("Configure library..."), this);
   connect(library_config_action, SIGNAL(triggered()), SLOT(ShowLibraryConfig()));
   library_view_->filter()->SetSettingsGroup(kSettingsGroup);
   library_view_->filter()->SetLibraryModel(library_->model());
+
+  library_view_->filter()->AddMenuAction(duplicates_only_action);
+  library_view_->filter()->AddSeparator();
   library_view_->filter()->AddMenuAction(library_config_action);
 
   // Playlist menu

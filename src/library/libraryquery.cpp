@@ -23,7 +23,8 @@
 #include <QSqlError>
 
 QueryOptions::QueryOptions()
-  : max_age(-1)
+  : max_age(-1),
+    duplicates_only(false)
 {
 }
 
@@ -62,23 +63,43 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     where_clauses_ << "ctime > ?";
     bound_values_ << cutoff;
   }
+
+  duplicates_only_ = false;
+
+  if(options.duplicates_only) {
+    // TODO: currently you cannot use the duplicates_only flag and fts at the same time.
+    // joining songs, duplicated_songs and songs_fts all together takes a huge amount of
+    // time. the query takes about 20 seconds then. why?
+    Q_ASSERT(!join_with_fts_);
+    duplicates_only_ = true;
+  }
 }
 
-void LibraryQuery::AddWhere(const QString& column, const QVariant& value, const QString& op) {
-  // Do integers inline - sqlite seems to get confused when you pass integers
-  // to bound parameters
+QString LibraryQuery::GetInnerQuery() {
+  return duplicates_only_
+             ? QString(" INNER JOIN (select * from duplicated_songs) dsongs        "
+                                "ON (%songs_table.artist = dsongs.dup_artist       "
+                                    "AND %songs_table.album = dsongs.dup_album     "
+                                    "AND %songs_table.title = dsongs.dup_title)    ")
+             : QString();
+}
 
-  if (value.type() == QVariant::Int)
-    where_clauses_ << QString("%1 %2 %3").arg(column, op, value.toString());
-  else {
-    if(!op.compare("IN", Qt::CaseInsensitive)) {
-      QStringList final;
-      foreach(const QString& single_value, value.toStringList()) {
-        final.append("?");
-        bound_values_ << single_value;
-      }
+void LibraryQuery::AddWhere(const QString& column, const QVariant& value,
+                            const QString& op) {
+  // ignore 'literal' for IN
+  if(!op.compare("IN", Qt::CaseInsensitive)) {
+    QStringList final;
+    foreach(const QString& single_value, value.toStringList()) {
+      final.append("?");
+      bound_values_ << single_value;
+    }
 
-      where_clauses_ << QString("%1 IN (" + final.join(",") + ")").arg(column);
+    where_clauses_ << QString("%1 IN (" + final.join(",") + ")").arg(column);
+  } else {
+    // Do integers inline - sqlite seems to get confused when you pass integers
+    // to bound parameters
+    if(value.type() == QVariant::Int) {
+      where_clauses_ << QString("%1 %2 %3").arg(column, op, value.toString());
     } else {
       where_clauses_ << QString("%1 %2 ?").arg(column, op);
       bound_values_ << value;
@@ -98,8 +119,8 @@ QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
     sql = QString("SELECT %1 FROM %2 INNER JOIN %3 AS fts ON %2.ROWID = fts.ROWID")
           .arg(column_spec_, songs_table, fts_table);
   } else {
-    sql = QString("SELECT %1 FROM %2")
-          .arg(column_spec_, songs_table);
+    sql = QString("SELECT %1 FROM %2 %3")
+          .arg(column_spec_, songs_table, GetInnerQuery());
   }
 
   if (!where_clauses_.isEmpty())

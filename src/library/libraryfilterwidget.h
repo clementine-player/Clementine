@@ -45,13 +45,16 @@ class LibraryFilterWidget : public QWidget {
   void SetFilterHint(const QString& hint);
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
+
   void AddMenuAction(QAction* action);
+  void AddSeparator();
 
   void SetSettingsGroup(const QString& group) { settings_group_ = group; }
   void SetLibraryModel(LibraryModel* model);
 
  public slots:
   void AppendAndFocus(const QString& text);
+  void SetDuplicatesOnly(bool duplicates_only);
 
  signals:
   void UpPressed();

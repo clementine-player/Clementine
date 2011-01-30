@@ -192,6 +192,14 @@ void LibraryFilterWidget::SetFilterHint(const QString& hint) {
   filter_->set_hint(hint);
 }
 
+void LibraryFilterWidget::SetDuplicatesOnly(bool duplicates_only) {
+  // no filtering in duplicates_only mode
+  ui_->filter->setText("");
+  ui_->filter->setEnabled(!duplicates_only);
+
+  model_->SetFilterDuplicatesOnly(duplicates_only);
+}
+
 void LibraryFilterWidget::SetAgeFilterEnabled(bool enabled) {
   filter_age_menu_->setEnabled(enabled);
 }
@@ -202,6 +210,10 @@ void LibraryFilterWidget::SetGroupByEnabled(bool enabled) {
 
 void LibraryFilterWidget::AddMenuAction(QAction* action) {
   library_menu_->addAction(action);
+}
+
+void LibraryFilterWidget::AddSeparator() {
+  library_menu_->addSeparator();
 }
 
 void LibraryFilterWidget::AppendAndFocus(const QString& text) {

@@ -986,7 +986,18 @@ void LibraryModel::SetFilterAge(int age) {
 }
 
 void LibraryModel::SetFilterText(const QString& text) {
+  // duplicates_only and filter are mutually exclusive
   query_options_.filter = text;
+  query_options_.duplicates_only = false;
+
+  ResetAsync();
+}
+
+void LibraryModel::SetFilterDuplicatesOnly(bool duplicates_only) {
+  // duplicates_only and filter are mutually exclusive
+  query_options_.duplicates_only = duplicates_only;
+  query_options_.filter = "";
+
   ResetAsync();
 }
 

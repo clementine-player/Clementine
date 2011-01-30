@@ -11,6 +11,7 @@ public:
 
   QString filter;
   int max_age;
+  bool duplicates_only;
 };
 
 class LibraryQuery {
@@ -25,7 +26,9 @@ public:
 
   void SetColumnSpec(const QString& spec);
   void SetOrderBy(const QString& order_by);
+
   void AddWhere(const QString& column, const QVariant& value, const QString& op = "=");
+
   void AddCompilationRequirement(bool compilation);
   void SetLimit(int limit);
 
