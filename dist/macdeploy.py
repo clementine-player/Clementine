@@ -86,6 +86,7 @@ GSTREAMER_PLUGINS=[
     'libgstreplaygain.so',
     'libgstspeex.so',
     'libgstvorbis.so',
+    'libgstwavpack.so',
     'libgstwavparse.so',
 
     # HTTP src support
