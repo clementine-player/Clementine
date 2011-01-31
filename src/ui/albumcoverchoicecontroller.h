@@ -23,8 +23,11 @@
 #include <QMenu>
 #include <QWidget>
 
-class AlbumCoverFetcher;
-class AlbumCoverSearcher;
+#ifdef HAVE_LIBLASTFM
+  class AlbumCoverFetcher;
+  class AlbumCoverSearcher;
+#endif
+
 class CoverFromURLDialog;
 class LibraryBackend;
 class Song;

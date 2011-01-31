@@ -194,7 +194,7 @@ void LibraryFilterWidget::SetFilterHint(const QString& hint) {
 
 void LibraryFilterWidget::SetDuplicatesOnly(bool duplicates_only) {
   // no filtering in duplicates_only mode
-  ui_->filter->setText("");
+  static_cast<QLineEdit*>(ui_->filter)->clear();
   ui_->filter->setEnabled(!duplicates_only);
 
   model_->SetFilterDuplicatesOnly(duplicates_only);

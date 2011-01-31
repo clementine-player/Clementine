@@ -16,14 +16,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/albumcoverfetcher.h"
 #include "core/albumcoverloader.h"
 #include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcovermanager.h"
-#include "ui/albumcoversearcher.h"
 #include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
+
+#ifdef HAVE_LIBLASTFM
+# include "ui/albumcoversearcher.h"
+# include "core/albumcoverfetcher.h"
+#endif
 
 #include <QAction>
 #include <QCryptographicHash>
