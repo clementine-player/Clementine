@@ -42,7 +42,6 @@ find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
-find_package(PythonLibs)
 
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 pkg_check_modules(GSTREAMER gstreamer-0.10)
@@ -65,6 +64,27 @@ if (WIN32)
   find_library(MSWMDM_LIBRARIES mswmdm)
   find_library(SAC_SHIM_LIBRARIES sac_shim)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
+
+  # FindPythonLibs.cmake doesn't look for 2.7 on lucid
+  find_library(PYTHON_LIBRARIES python2.7)
+  find_path(PYTHON_INCLUDE_DIRS Python.h PATH_SUFFIXES python2.7)
+  if (PYTHON_LIBRARIES AND PYTHON_INCLUDE_DIRS)
+    set(PYTHONLIBS_FOUND ON)
+  endif (PYTHON_LIBRARIES AND PYTHON_INCLUDE_DIRS)
+
+  add_definitions(-DPy_NO_ENABLE_SHARED)
+
+  # Find the SIP and PyQt libraries
+  find_library(SIP_LIBRARY sip)
+  set(PYQT_LIB_DIR /share/python2.7/dist-packages/PyQt4)
+  find_library(PYQT_QPYCORE_LIBRARY qpycore NO_DEFAULT_PATH PATHS ${PYQT_LIB_DIR})
+  find_library(PYQT_QPYGUI_LIBRARY qpygui NO_DEFAULT_PATH PATHS ${PYQT_LIB_DIR})
+  find_library(PYQT_QT_LIBRARY Qt NO_DEFAULT_PATH PATHS ${PYQT_LIB_DIR})
+  find_library(PYQT_QTCORE_LIBRARY QtCore NO_DEFAULT_PATH PATHS ${PYQT_LIB_DIR})
+  find_library(PYQT_QTGUI_LIBRARY QtGui NO_DEFAULT_PATH PATHS ${PYQT_LIB_DIR})
+  find_library(PYQT_QTNETWORK_LIBRARY QtNetwork NO_DEFAULT_PATH PATHS ${PYQT_LIB_DIR})
+else (WIN32)
+  find_package(PythonLibs)
 endif (WIN32)
 
 if (APPLE)

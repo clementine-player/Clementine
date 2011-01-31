@@ -1,10 +1,12 @@
 find_path(PYQT_SIP_DIR QtCore/qstring.sip
   PATHS /System/Library/Frameworks/Python.framework/Versions/2.6
-  PATH_SUFFIXES share/sip/PyQt4
+  PATH_SUFFIXES share/sip/PyQt4 share/sip ../share/sip
 )
 
 find_program(SIP_BINARY "sip"
-  PATHS /System/Library/Frameworks/Python.framework/Versions/2.6/bin)
+  PATHS /System/Library/Frameworks/Python.framework/Versions/2.6/bin
+  CMAKE_FIND_ROOT_PATH_BOTH
+)
 
 macro(add_sip_binding outputvar source)
   # Work out what the SIP flags should be for PyQt4.  These would normally be

@@ -32,6 +32,14 @@ PythonEngine* PythonEngine::sInstance = NULL;
 
 extern "C" {
   void initclementine();
+
+#ifdef Q_OS_WIN32
+  void initsip();
+  void initQt();
+  void initQtCore();
+  void initQtGui();
+  void initQtNetwork();
+#endif
 }
 
 PythonEngine::PythonEngine(ScriptManager* manager)
@@ -89,6 +97,16 @@ Script* PythonEngine::CreateScript(const ScriptInfo& info) {
   // Initialise Python if it hasn't been done yet
   if (!initialised_) {
     AddLogLine("Initialising python...", false);
+
+#ifdef Q_OS_WIN32
+    // On Windows we statically link against SIP and PyQt, so add those modules
+    // to Python's inittab here.
+    PyImport_AppendInittab(const_cast<char*>("sip"), initsip);
+    PyImport_AppendInittab(const_cast<char*>("PyQt4.Qt"), initQt);
+    PyImport_AppendInittab(const_cast<char*>("PyQt4.QtCore"), initQtCore);
+    PyImport_AppendInittab(const_cast<char*>("PyQt4.QtGui"), initQtGui);
+    PyImport_AppendInittab(const_cast<char*>("PyQt4.QtNetwork"), initQtNetwork);
+#endif
 
     // Add the Clementine builtin module
     PyImport_AppendInittab(const_cast<char*>("clementine"), initclementine);
