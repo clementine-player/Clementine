@@ -29,6 +29,7 @@ class LibraryBackend;
 
 class QAction;
 class QActionGroup;
+class QFileDialog;
 class QMenu;
 class QMovie;
 class QSignalMapper;
@@ -81,7 +82,7 @@ private slots:
   void ShowAboveStatusBar(bool above);
 
   void CoverLoaderInitialised();
-  void AlbumArtLoaded(quint64 id, const QImage& image);
+  void AlbumArtLoaded(quint64 id, const QImage& scaled, const QImage& original);
 
   void SetVisible(bool visible);
   void SetHeight(int height);
@@ -91,6 +92,7 @@ private slots:
   void LoadCoverFromFile();
   void LoadCoverFromURL();
   void SearchForCover();
+  void SaveCover();
   void UnsetCover();
   void ShowCover();
 
@@ -111,6 +113,8 @@ private:
 
   QMenu* menu_;
 
+  QFileDialog* save_dialog_;
+
   QAction* above_statusbar_action_;
 
   bool visible_;
@@ -124,6 +128,8 @@ private:
   Song metadata_;
   quint64 load_cover_id_;
   QPixmap cover_;
+  // A copy of the original, unscaled album cover.
+  QImage original_;
   QTextDocument* details_;
 
   // Holds the last track while we're fading to the new track

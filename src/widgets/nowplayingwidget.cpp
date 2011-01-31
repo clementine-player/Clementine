@@ -22,6 +22,8 @@
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
+#include <QFileDialog>
+#include <QImageWriter>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -60,6 +62,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     kitten_loader_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
+    save_dialog_(NULL),
     above_statusbar_action_(NULL),
     visible_(false),
     small_ideal_height_(0),
@@ -99,6 +102,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
           SIGNAL(triggered()), this, SLOT(UnsetCover()));
   connect(album_cover_choice_controller_->show_cover_action(),
           SIGNAL(triggered()), this, SLOT(ShowCover()));
+  connect(album_cover_choice_controller_->save_cover_action(),
+          SIGNAL(triggered()), this, SLOT(SaveCover()));
 
   menu_->addActions(actions);
   menu_->addSeparator();
@@ -146,8 +151,8 @@ void NowPlayingWidget::CoverLoaderInitialised() {
       static_cast<BackgroundThread<AlbumCoverLoader>*>(sender());
   UpdateHeight(loader->Worker().get());
   loader->Worker()->SetPadOutputImage(true);
-  connect(loader->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(AlbumArtLoaded(quint64,QImage)));
+  connect(loader->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
+          SLOT(AlbumArtLoaded(quint64,QImage,QImage)));
 }
 
 void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {
@@ -236,11 +241,12 @@ void NowPlayingWidget::UpdateDetailsText() {
   details_->setHtml(html);
 }
 
-void NowPlayingWidget::AlbumArtLoaded(quint64 id, const QImage& image) {
+void NowPlayingWidget::AlbumArtLoaded(quint64 id, const QImage& scaled, const QImage& original) {
   if (id != load_cover_id_)
     return;
 
-  cover_ = QPixmap::fromImage(image);
+  cover_ = QPixmap::fromImage(scaled);
+  original_ = original;
   update();
 
   // Were we waiting for this cover to load before we started fading?
@@ -428,6 +434,32 @@ void NowPlayingWidget::SearchForCover() {
 
   if(!cover.isEmpty())
     NowPlaying(metadata_);
+}
+
+void NowPlayingWidget::SaveCover() {
+  if (!save_dialog_) {
+    save_dialog_ = new QFileDialog(
+        this,
+        tr("Save Album Cover"),
+        QDir::home().absolutePath(),
+        tr("Images (*.jpg)"));
+    save_dialog_->setAcceptMode(QFileDialog::AcceptSave);
+  }
+  save_dialog_->selectFile(metadata_.album() + ".jpg");
+
+  if (!save_dialog_->exec()) {
+    return;
+  }
+
+  QStringList filenames = save_dialog_->selectedFiles();
+  QString save_filename = filenames[0];
+
+  QString extension = save_filename.right(4);
+  if (!extension.startsWith('.') ||
+      !QImageWriter::supportedImageFormats().contains(extension.right(3).toUtf8())) {
+    save_filename.append(".jpg");
+  }
+  original_.save(save_filename);
 }
 
 void NowPlayingWidget::UnsetCover() {

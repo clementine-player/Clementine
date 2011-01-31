@@ -58,6 +58,7 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   cover_from_file_ = menu_->addAction(IconLoader::Load("document-open"), tr("Load cover from disk..."));
   cover_from_url_ = menu_->addAction(IconLoader::Load("download"), tr("Load cover from URL..."));
   search_for_cover_ = menu_->addAction(IconLoader::Load("find"), tr("Search for album covers..."));
+  save_cover_ = menu_->addAction(IconLoader::Load("document-save"), tr("Save cover to disk..."));
   unset_cover_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Unset cover"));
   show_cover_ = menu_->addAction(IconLoader::Load("zoom-in"), tr("Show fullsize..."));
 }
@@ -68,8 +69,8 @@ AlbumCoverChoiceController::~AlbumCoverChoiceController()
 
 QList<QAction*> AlbumCoverChoiceController::GetAllActions() {
   return QList<QAction*>() << cover_from_file_ << cover_from_url_
-                           << search_for_cover_ << unset_cover_
-                           << show_cover_;
+                           << search_for_cover_ << save_cover_
+                           << unset_cover_ << show_cover_;
 }
 
 void AlbumCoverChoiceController::SetLibrary(LibraryBackend* library) {

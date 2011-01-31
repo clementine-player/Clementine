@@ -94,7 +94,9 @@ void AlbumCoverLoader::ProcessTask(Task *task) {
   }
 
   if (result.loaded_success) {
-    emit ImageLoaded(task->id, ScaleAndPad(result.image));
+    QImage scaled = ScaleAndPad(result.image);
+    emit ImageLoaded(task->id, scaled);
+    emit ImageLoaded(task->id, scaled, result.image);
     return;
   }
 
@@ -109,6 +111,7 @@ void AlbumCoverLoader::NextState(Task* task) {
   } else {
     // Give up
     emit ImageLoaded(task->id, default_);
+    emit ImageLoaded(task->id, default_, default_);
   }
 }
 
@@ -172,7 +175,9 @@ void AlbumCoverLoader::RemoteFetchFinished() {
     // Try to load the image
     QImage image;
     if (image.load(reply, 0)) {
-      emit ImageLoaded(task.id, ScaleAndPad(image));
+      QImage scaled = ScaleAndPad(image);
+      emit ImageLoaded(task.id, scaled);
+      emit ImageLoaded(task.id, scaled, image);
       return;
     }
   }

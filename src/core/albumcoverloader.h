@@ -62,6 +62,7 @@ class AlbumCoverLoader : public QObject {
 
  signals:
   void ImageLoaded(quint64 id, const QImage& image);
+  void ImageLoaded(quint64 id, const QImage& scaled, const QImage& original);
 
  protected slots:
   void ProcessTasks();

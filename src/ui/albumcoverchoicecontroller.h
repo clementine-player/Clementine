@@ -45,6 +45,7 @@ class AlbumCoverChoiceController : public QWidget {
   QAction* cover_from_file_action() const { return cover_from_file_; }
   QAction* cover_from_url_action() const { return cover_from_url_; }
   QAction* search_for_cover_action() const { return search_for_cover_; }
+  QAction* save_cover_action() const { return save_cover_; }
   QAction* unset_cover_action() const { return unset_cover_; }
   QAction* show_cover_action() const { return show_cover_; }
 
@@ -111,6 +112,7 @@ private:
   QAction* cover_from_file_;
   QAction* cover_from_url_;
   QAction* search_for_cover_;
+  QAction* save_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;
 };
