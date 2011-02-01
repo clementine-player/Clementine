@@ -39,7 +39,7 @@ void TrackSelectionDialog::Init(const QString& filename, const SongList& songs) 
   current_songs_ = songs;
 
   // Set filename
-  ui_->filenameLabel->setText(current_filename_); //TODO: use basefilename, it's nicer
+  ui_->filenameLineEdit->setText(current_filename_); //TODO: use basefilename, it's nicer
 
   // Clear tree widget
   ui_->resultsTreeWidget->clear();
@@ -48,10 +48,10 @@ void TrackSelectionDialog::Init(const QString& filename, const SongList& songs) 
   int song_index = 0;
   foreach(const Song& song, songs) {
     QStringList valuesStringList;
-    valuesStringList << song.title() << song.artist() << song.album();
     if (song.track() > 0) {
       valuesStringList << QString::number(song.track());
     }
+    valuesStringList << song.title() << song.artist() << song.album();
     QTreeWidgetItem* item = new QTreeWidgetItem(
         ui_->resultsTreeWidget, valuesStringList);
     if(song_index==0) { // if it's the first item, set focus on it
@@ -61,10 +61,10 @@ void TrackSelectionDialog::Init(const QString& filename, const SongList& songs) 
   }
 
   // Resize columns
-  ui_->resultsTreeWidget->setColumnWidth(0, 175); // Title column
-  ui_->resultsTreeWidget->setColumnWidth(1, 175); // Artist column
-  ui_->resultsTreeWidget->setColumnWidth(2, 175); // Album column
-  ui_->resultsTreeWidget->setColumnWidth(3, 50);  // Track column
+  ui_->resultsTreeWidget->setColumnWidth(0, 50);  // Track column
+  ui_->resultsTreeWidget->setColumnWidth(1, 175); // Title column
+  ui_->resultsTreeWidget->setColumnWidth(2, 175); // Artist column
+  ui_->resultsTreeWidget->setColumnWidth(3, 175); // Album column
 }
 
 void TrackSelectionDialog::accept() {

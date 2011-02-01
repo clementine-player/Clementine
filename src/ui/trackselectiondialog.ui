@@ -17,106 +17,182 @@
    <iconset resource="../../data/data.qrc">
     <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>330</y>
-     <width>341</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="fileNameGroupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>571</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>File name</string>
-   </property>
-   <widget class="QLabel" name="filenameLabel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>551</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QGroupBox" name="resultsGroupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>591</width>
-     <height>271</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Select best possible match</string>
-   </property>
-   <widget class="QTreeWidget" name="resultsTreeWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>20</y>
-      <width>591</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
-    </property>
-    <attribute name="headerDefaultSectionSize">
-     <number>150</number>
-    </attribute>
-    <attribute name="headerMinimumSectionSize">
-     <number>50</number>
-    </attribute>
-    <attribute name="headerDefaultSectionSize">
-     <number>150</number>
-    </attribute>
-    <attribute name="headerMinimumSectionSize">
-     <number>50</number>
-    </attribute>
-    <column>
-     <property name="text">
-      <string>Title</string>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="fileNameGroupBox">
+     <property name="title">
+      <string>File name</string>
      </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Artist</string>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="filenameLineEdit">
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Button">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Button">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Button">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="0">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="resultsGroupBox">
+     <property name="title">
+      <string>Select best possible match</string>
      </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Album</string>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QTreeWidget" name="resultsTreeWidget">
+        <property name="editTriggers">
+         <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+        </property>
+        <attribute name="headerDefaultSectionSize">
+         <number>150</number>
+        </attribute>
+        <attribute name="headerMinimumSectionSize">
+         <number>50</number>
+        </attribute>
+        <attribute name="headerDefaultSectionSize">
+         <number>150</number>
+        </attribute>
+        <attribute name="headerMinimumSectionSize">
+         <number>50</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Track</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Title</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Artist</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Album</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Track</string>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-    </column>
-   </widget>
-  </widget>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources>
   <include location="../../data/data.qrc"/>
