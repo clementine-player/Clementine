@@ -39,6 +39,8 @@ class SearchTargetWrapper {
 
   void SetHint(const QString& hint);
 
+  void setEnabled(bool enabled);
+
  private:
   NSSearchField* search_;
   SearchTarget* target_;
@@ -88,7 +90,9 @@ void SearchTargetWrapper::SetHint(const QString& hint) {
   [t release];
 }
 
-
+void SearchTargetWrapper::SetEnabled(bool enabled) {
+  // TODO: implement this!
+}
 
 MacLineEdit::MacLineEdit(QWidget* parent)
     : QMacCocoaViewContainer(0, parent),
@@ -123,6 +127,10 @@ QString MacLineEdit::text() const {
 
 void MacLineEdit::set_text(const QString& text) {
   wrapper_->setText(text);
+}
+
+void set_enabled(bool enabled) {
+  wrapper_->setEnabled(enabled);
 }
 
 void MacLineEdit::set_hint(const QString& hint) {

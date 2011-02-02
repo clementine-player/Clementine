@@ -42,6 +42,8 @@ class MacLineEdit : public QMacCocoaViewContainer, public LineEditInterface {
   QString text() const;
   void set_focus() {}
 
+  void set_enabled(bool enabled);
+
  signals:
   void textChanged(const QString& text);
   void textEdited(const QString& text);

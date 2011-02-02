@@ -43,6 +43,8 @@ public:
   virtual void set_hint(const QString& hint) = 0;
   virtual void clear_hint() = 0;
 
+  virtual void set_enabled(bool enabled) = 0;
+
 protected:
   QWidget* widget_;
 };
@@ -96,6 +98,7 @@ public:
   void set_focus() { QLineEdit::setFocus(); }
   QString text() const { return QLineEdit::text(); }
   void set_text(const QString& text) { QLineEdit::setText(text); }
+  void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
 
 protected:
   void paintEvent(QPaintEvent*);
@@ -119,6 +122,7 @@ public:
   void set_focus() { QPlainTextEdit::setFocus(); }
   QString text() const { return QPlainTextEdit::toPlainText(); }
   void set_text(const QString& text) { QPlainTextEdit::setPlainText(text); }
+  void set_enabled(bool enabled) { QPlainTextEdit::setEnabled(enabled); }
 
 protected:
   void paintEvent(QPaintEvent*);
@@ -146,6 +150,7 @@ public:
   void set_focus() { QSpinBox::setFocus(); }
   QString text() const { return QSpinBox::text(); }
   void set_text(const QString& text) { QSpinBox::setValue(text.toInt()); }
+  void set_enabled(bool enabled) { QSpinBox::setEnabled(enabled); }
 
 protected:
   void paintEvent(QPaintEvent*);

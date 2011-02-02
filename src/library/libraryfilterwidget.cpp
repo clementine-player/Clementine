@@ -195,8 +195,7 @@ void LibraryFilterWidget::SetFilterHint(const QString& hint) {
 void LibraryFilterWidget::SetDuplicatesOnly(bool duplicates_only) {
   // no filtering in duplicates_only mode
   filter_->clear();
-  // TODO: won't work on Mac
-  ui_->filter->setEnabled(!duplicates_only);
+  filter_->set_enabled(!duplicates_only);
 
   model_->SetFilterDuplicatesOnly(duplicates_only);
 }
