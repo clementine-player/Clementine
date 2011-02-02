@@ -77,6 +77,12 @@ public:
   QString art_automatic() const;
   QString art_manual() const;
 
+  bool has_manually_unset_cover() const;
+  void manually_unset_cover();
+
+  bool has_embedded_cover() const;
+  void set_embedded_cover();
+
   QImage image() const;
 
   // Pretty accessors
