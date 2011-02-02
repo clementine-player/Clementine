@@ -39,7 +39,7 @@ class SearchTargetWrapper {
 
   void SetHint(const QString& hint);
 
-  void setEnabled(bool enabled);
+  void SetEnabled(bool enabled);
 
  private:
   NSSearchField* search_;
@@ -129,8 +129,8 @@ void MacLineEdit::set_text(const QString& text) {
   wrapper_->setText(text);
 }
 
-void set_enabled(bool enabled) {
-  wrapper_->setEnabled(enabled);
+void MacLineEdit::set_enabled(bool enabled) {
+  wrapper_->SetEnabled(enabled);
 }
 
 void MacLineEdit::set_hint(const QString& hint) {
