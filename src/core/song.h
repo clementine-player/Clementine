@@ -88,6 +88,9 @@ class Song {
   static const QString kFtsBindSpec;
   static const QString kFtsUpdateSpec;
 
+  static const QString kManuallyUnsetCover;
+  static const QString kEmbeddedCover;
+
   static QString JoinSpec(const QString& table);
 
   // Don't change these values - they're stored in the database
@@ -197,6 +200,18 @@ class Song {
 
   const QString& art_automatic() const { return d->art_automatic_; }
   const QString& art_manual() const { return d->art_manual_; }
+
+  // Returns true if this Song had it's cover manually unset by user.
+  bool has_manually_unset_cover() const { return d->art_manual_ == kManuallyUnsetCover; }
+  // This method represents an explicit request to unset this song's
+  // cover.
+  void manually_unset_cover() { d->art_manual_ = kManuallyUnsetCover; }
+
+  // Returns true if this song (it's media file) has an embedded cover.
+  bool has_embedded_cover() const { return d->art_automatic_ == kEmbeddedCover; }
+  // Sets a flag saying that this song (it's media file) has an embedded
+  // cover.
+  void set_embedded_cover() { d->art_automatic_ = kEmbeddedCover; }
 
   const QImage& image() const { return d->image_; }
 

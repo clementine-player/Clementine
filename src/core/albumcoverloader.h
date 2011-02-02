@@ -57,9 +57,6 @@ class AlbumCoverLoader : public QObject {
   static QPixmap TryLoadPixmap(const QString& automatic, const QString& manual,
                                const QString& filename = QString());
 
-  static const char* kManuallyUnsetCover;
-  static const char* kEmbeddedCover;
-
  signals:
   void ImageLoaded(quint64 id, const QImage& image);
   void ImageLoaded(quint64 id, const QImage& scaled, const QImage& original);

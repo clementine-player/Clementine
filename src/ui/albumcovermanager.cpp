@@ -537,7 +537,7 @@ void AlbumCoverManager::SaveCoverToFile() {
   QImage image;
 
   // load the image from disk
-  if(song.art_manual() == AlbumCoverLoader::kManuallyUnsetCover) {
+  if(song.has_manually_unset_cover()) {
     image = QImage(":/nocover.png");
   } else {
     if(!song.art_manual().isEmpty() && QFile::exists(song.art_manual())) {

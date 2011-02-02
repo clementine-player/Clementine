@@ -87,7 +87,7 @@ void AlbumCoverChoiceController::SetLibrary(LibraryBackend* library) {
 QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
   QString dir;
 
-  if (!song->art_automatic().isEmpty() && song->art_automatic() != AlbumCoverLoader::kEmbeddedCover) {
+  if (!song->art_automatic().isEmpty() && !song->has_embedded_cover()) {
     dir = song->art_automatic();
   } else if (!song->filename().isEmpty() && song->filename().contains('/')) {
     // we get rid of the filename because it's extension is screwing with the dialog's
@@ -186,7 +186,7 @@ QString AlbumCoverChoiceController::SearchForCover(Song* song) {
 }
 
 QString AlbumCoverChoiceController::UnsetCover(Song* song) {
-  QString cover = AlbumCoverLoader::kManuallyUnsetCover;
+  QString cover = Song::kManuallyUnsetCover;
   SaveCover(song, cover);
 
   return cover;

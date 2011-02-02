@@ -17,7 +17,6 @@
 
 #include "librarywatcher.h"
 #include "librarybackend.h"
-#include "core/albumcoverloader.h"
 #include "core/taskmanager.h"
 #include "playlistparsers/cueparser.h"
 
@@ -321,7 +320,7 @@ void LibraryWatcher::ScanSubdirectory(
       QString image = ImageForSong(file, album_art);
       if ((matching_song.art_automatic().isEmpty() && !image.isEmpty()) ||
           (!matching_song.art_automatic().isEmpty()
-           && matching_song.art_automatic() != AlbumCoverLoader::kEmbeddedCover
+           && !matching_song.has_embedded_cover()
            && !QFile::exists(matching_song.art_automatic()))) {
         changed = true;
       }
@@ -499,7 +498,7 @@ void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& ima
   // Previous versions of Clementine incorrectly overwrote this and
   // stored it in the DB, so we can't rely on matching_song to
   // know if it has embedded artwork or not, but we can check here.
-  if (out->art_automatic() != AlbumCoverLoader::kEmbeddedCover)
+  if (!out->has_embedded_cover())
     out->set_art_automatic(image);
 
   out->set_playcount(matching_song.playcount());

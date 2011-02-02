@@ -405,12 +405,12 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   QString summary = "<b>" + Qt::escape(song.PrettyTitleWithArtist()) + "</b><br/>";
 
   bool art_is_set = true;
-  if (song.art_manual() == AlbumCoverLoader::kManuallyUnsetCover) {
+  if (song.has_manually_unset_cover()) {
     summary += Qt::escape(tr("Cover art manually unset"));
     art_is_set = false;
   } else if (!song.art_manual().isEmpty()) {
     summary += Qt::escape(tr("Cover art set from %1").arg(song.art_manual()));
-  } else if (song.art_automatic() == AlbumCoverLoader::kEmbeddedCover) {
+  } else if (song.has_embedded_cover()) {
     summary += Qt::escape(tr("Cover art from embedded image"));
   } else if (!song.art_automatic().isEmpty()) {
     summary += Qt::escape(tr("Cover art loaded automatically from %1").arg(song.art_manual()));

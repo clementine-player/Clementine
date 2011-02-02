@@ -25,9 +25,6 @@
 #include <QUrl>
 #include <QNetworkReply>
 
-const char* AlbumCoverLoader::kManuallyUnsetCover = "(unset)";
-const char* AlbumCoverLoader::kEmbeddedCover = "(embedded)";
-
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
@@ -127,10 +124,10 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     case State_TryingManual: filename = task.art_manual;    break;
   }
 
-  if (filename == kManuallyUnsetCover)
+  if (filename == Song::kManuallyUnsetCover)
     return TryLoadResult(false, true, default_);
 
-  if (filename == kEmbeddedCover && !task.song_filename.isEmpty()) {
+  if (filename == Song::kEmbeddedCover && !task.song_filename.isEmpty()) {
     QImage taglib_image = Song::LoadEmbeddedArt(task.song_filename);
     if (!taglib_image.isNull())
       return TryLoadResult(false, true, ScaleAndPad(taglib_image));
@@ -217,12 +214,12 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
                                         const QString& manual,
                                         const QString& filename) {
   QPixmap ret;
-  if (manual == kManuallyUnsetCover)
+  if (manual == Song::kManuallyUnsetCover)
     return ret;
   if (!manual.isEmpty())
     ret.load(manual);
   if (ret.isNull()) {
-    if (automatic == kEmbeddedCover && !filename.isNull())
+    if (automatic == Song::kEmbeddedCover && !filename.isNull())
       ret = QPixmap::fromImage(Song::LoadEmbeddedArt(filename));
     else if (!automatic.isEmpty())
       ret.load(automatic);

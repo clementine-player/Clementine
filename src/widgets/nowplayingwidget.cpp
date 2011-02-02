@@ -377,8 +377,7 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
     album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
   #endif
 
-    const bool art_is_not_set =
-        metadata_.art_manual() == AlbumCoverLoader::kManuallyUnsetCover
+    const bool art_is_not_set = metadata_.has_manually_unset_cover()
         || (metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty());
 
     album_cover_choice_controller_->unset_cover_action()->setEnabled(!art_is_not_set);

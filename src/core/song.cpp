@@ -110,6 +110,9 @@ const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
 const QString Song::kFtsBindSpec = Prepend(":", Song::kFtsColumns).join(", ");
 const QString Song::kFtsUpdateSpec = Updateify(Song::kFtsColumns).join(", ");
 
+const QString Song::kManuallyUnsetCover = "(unset)";
+const QString Song::kEmbeddedCover = "(embedded)";
+
 QString Song::JoinSpec(const QString& table) {
   return Prepend(table + ".", kColumns).join(", ");
 }
@@ -304,7 +307,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         compilation = TStringToQString(map["TCMP"].front()->toString()).trimmed();
 
       if (!map["APIC"].isEmpty())
-        d->art_automatic_ = AlbumCoverLoader::kEmbeddedCover;
+        set_embedded_cover();
 
       // Find a suitable comment tag.  For now we ignore iTunNORM comments.
       for (int i=0 ; i<map["COMM"].size() ; ++i) {
@@ -423,7 +426,7 @@ void Song::ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* c
     *compilation = TStringToQString( map["COMPILATION"].front() ).trimmed();
   
   if (!map["COVERART"].isEmpty())
-    d->art_automatic_ = AlbumCoverLoader::kEmbeddedCover;
+    set_embedded_cover();
 }
 
 void Song::GuessFileType(TagLib::FileRef* fileref) {
