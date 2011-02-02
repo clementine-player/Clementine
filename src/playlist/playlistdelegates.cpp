@@ -226,12 +226,12 @@ bool PlaylistDelegateBase::helpEvent(QHelpEvent *event, QAbstractItemView *view,
   if (text.isEmpty() || !he)
     return false;
 
-  QRect displayed_text;
-  QSize real_text;
-  bool is_elided = false;
-
   switch (event->type()) {
-    case QEvent::ToolTip:
+    case QEvent::ToolTip: {
+      QRect displayed_text;
+      QSize real_text;
+      bool is_elided = false;
+
       real_text = sizeHint(option, index);
       displayed_text = view->visualRect(index);
       is_elided = displayed_text.width() < real_text.width();
@@ -241,6 +241,7 @@ bool PlaylistDelegateBase::helpEvent(QHelpEvent *event, QAbstractItemView *view,
         QToolTip::hideText();
       }
       return true;
+    }
 
     case QEvent::QueryWhatsThis:
       return true;
