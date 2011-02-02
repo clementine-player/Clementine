@@ -429,8 +429,11 @@ MainWindow::MainWindow(
   library_view_->filter()->SetSettingsGroup(kSettingsGroup);
   library_view_->filter()->SetLibraryModel(library_->model());
 
+  QAction* separator = new QAction(this);
+  separator->setSeparator(true);
+
   library_view_->filter()->AddMenuAction(duplicates_only_action);
-  library_view_->filter()->AddSeparator();
+  library_view_->filter()->AddMenuAction(separator);
   library_view_->filter()->AddMenuAction(library_config_action);
 
   // Playlist menu

@@ -30,6 +30,7 @@
 
 class CoverFromURLDialog;
 class LibraryBackend;
+class QFileDialog;
 class Song;
 
 // Controller for the common album cover related menu options.
@@ -43,9 +44,9 @@ class AlbumCoverChoiceController : public QWidget {
   // Getters for all QActions implemented by this controller.
 
   QAction* cover_from_file_action() const { return cover_from_file_; }
+  QAction* cover_to_file_action() const { return cover_to_file_; }
   QAction* cover_from_url_action() const { return cover_from_url_; }
   QAction* search_for_cover_action() const { return search_for_cover_; }
-  QAction* save_cover_action() const { return save_cover_; }
   QAction* unset_cover_action() const { return unset_cover_; }
   QAction* show_cover_action() const { return show_cover_; }
 
@@ -72,6 +73,10 @@ class AlbumCoverChoiceController : public QWidget {
   // path to the chosen cover will be returned.
   QString LoadCoverFromFile(Song* song);
 
+  // Shows a dialog that allows user to save the given image on disk. The image
+  // is supposed to be the cover of the given song's album.
+  void SaveCoverToFile(const Song& song, const QImage& image);
+
   // Downloads the cover from an URL given by user. This returns the downloaded image
   // or null image if something went wrong for example when user cancelled the
   // dialog.
@@ -95,7 +100,8 @@ class AlbumCoverChoiceController : public QWidget {
   QString SaveCoverInCache(const QString& artist, const QString& album, const QImage& image);
 
 private:
-  static const char* kImageFileFilter;
+  static const char* kLoadImageFileFilter;
+  static const char* kSaveImageFileFilter;
   static const char* kAllFilesFilter;
 
 #ifdef HAVE_LIBLASTFM
@@ -103,16 +109,16 @@ private:
   AlbumCoverFetcher* cover_fetcher_;
 #endif
 
+  QFileDialog* save_file_dialog_;
   CoverFromURLDialog* cover_from_url_dialog_;
 
   LibraryBackend* library_;
 
-  QMenu* menu_;
-
   QAction* cover_from_file_;
+  QAction* cover_to_file_;
+  QAction* separator_;
   QAction* cover_from_url_;
   QAction* search_for_cover_;
-  QAction* save_cover_;
   QAction* unset_cover_;
   QAction* show_cover_;
 };

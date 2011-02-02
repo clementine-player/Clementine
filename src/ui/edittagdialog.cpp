@@ -60,8 +60,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 {
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(ArtLoaded(quint64,QImage)));
+  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
+          SLOT(ArtLoaded(quint64,QImage,QImage)));
 #ifdef HAVE_LIBTUNEPIMP
   connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)),
           this, SLOT(FetchTagFinished(QString, SongList)), Qt::QueuedConnection);
@@ -138,6 +138,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 
   connect(album_cover_choice_controller_->cover_from_file_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(album_cover_choice_controller_->cover_to_file_action(),
+          SIGNAL(triggered()), this, SLOT(SaveCoverToFile()));
   connect(album_cover_choice_controller_->cover_from_url_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
   connect(album_cover_choice_controller_->search_for_cover_action(),
@@ -452,9 +454,10 @@ void EditTagDialog::UpdateStatisticsTab(const Song& song) {
           QLocale::system().dateTimeFormat(QLocale::LongFormat)));
 }
 
-void EditTagDialog::ArtLoaded(quint64 id, const QImage& image) {
+void EditTagDialog::ArtLoaded(quint64 id, const QImage& scaled, const QImage& original) {
   if (id == cover_art_id_) {
-    ui_->art->setPixmap(QPixmap::fromImage(image));
+    ui_->art->setPixmap(QPixmap::fromImage(scaled));
+    original_ = original;
   }
 }
 
@@ -513,6 +516,14 @@ void EditTagDialog::LoadCoverFromFile() {
 
   if(!cover.isEmpty())
     UpdateCoverOf(*song, sel, cover);
+}
+
+void EditTagDialog::SaveCoverToFile() {
+  Song* song = GetFirstSelected();
+  if(!song)
+    return;
+
+  album_cover_choice_controller_->SaveCoverToFile(*song, original_);
 }
 
 void EditTagDialog::LoadCoverFromURL() {

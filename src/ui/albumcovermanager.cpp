@@ -128,6 +128,8 @@ void AlbumCoverManager::Init() {
 
   connect(album_cover_choice_controller_->cover_from_file_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(album_cover_choice_controller_->cover_to_file_action(),
+          SIGNAL(triggered()), this, SLOT(SaveCoverToFile()));
   connect(album_cover_choice_controller_->cover_from_url_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
   connect(album_cover_choice_controller_->search_for_cover_action(),
@@ -525,6 +527,29 @@ void AlbumCoverManager::LoadCoverFromFile() {
   if (!cover.isEmpty()) {
     UpdateCoverInList(item, cover);
   }
+}
+
+void AlbumCoverManager::SaveCoverToFile() {
+  Song song = GetSingleSelectionAsSong();
+  if(!song.is_valid())
+    return;
+
+  QImage image;
+
+  // load the image from disk
+  if(song.art_manual() == AlbumCoverLoader::kManuallyUnsetCover) {
+    image = QImage(":/nocover.png");
+  } else {
+    if(!song.art_manual().isEmpty() && QFile::exists(song.art_manual())) {
+      image = QImage(song.art_manual());
+    } else if(!song.art_automatic().isEmpty() && QFile::exists(song.art_automatic())) {
+      image = QImage(song.art_automatic());
+    } else {
+      image = QImage(":/nocover.png");
+    }
+  }
+
+  album_cover_choice_controller_->SaveCoverToFile(song, image);
 }
 
 void AlbumCoverManager::LoadCoverFromURL() {

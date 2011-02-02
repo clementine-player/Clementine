@@ -29,7 +29,6 @@ class LibraryBackend;
 
 class QAction;
 class QActionGroup;
-class QFileDialog;
 class QMenu;
 class QMovie;
 class QSignalMapper;
@@ -90,9 +89,9 @@ private slots:
   void FadePreviousTrack(qreal value);
 
   void LoadCoverFromFile();
+  void SaveCoverToFile();
   void LoadCoverFromURL();
   void SearchForCover();
-  void SaveCover();
   void UnsetCover();
   void ShowCover();
 
@@ -112,8 +111,6 @@ private:
   Mode mode_;
 
   QMenu* menu_;
-
-  QFileDialog* save_dialog_;
 
   QAction* above_statusbar_action_;
 

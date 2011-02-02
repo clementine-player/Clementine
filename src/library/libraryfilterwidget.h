@@ -47,13 +47,11 @@ class LibraryFilterWidget : public QWidget {
   void SetGroupByEnabled(bool enabled);
 
   void AddMenuAction(QAction* action);
-  void AddSeparator();
 
   void SetSettingsGroup(const QString& group) { settings_group_ = group; }
   void SetLibraryModel(LibraryModel* model);
 
  public slots:
-  void AppendAndFocus(const QString& text);
   void SetDuplicatesOnly(bool duplicates_only);
 
  signals:
@@ -88,6 +86,9 @@ class LibraryFilterWidget : public QWidget {
 
   QString settings_group_;
 
+  // Since on Mac ui_->filter is nonexistent and on other platforms
+  // filter_ == ui_->filter, make sure to always use this field and
+  // not the one in the ui_ object!
   LineEditInterface* filter_;
 };
 

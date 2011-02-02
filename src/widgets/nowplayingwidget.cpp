@@ -22,8 +22,6 @@
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"
 
-#include <QFileDialog>
-#include <QImageWriter>
 #include <QMenu>
 #include <QMovie>
 #include <QPainter>
@@ -62,7 +60,6 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     kitten_loader_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
-    save_dialog_(NULL),
     above_statusbar_action_(NULL),
     visible_(false),
     small_ideal_height_(0),
@@ -94,6 +91,8 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
 
   connect(album_cover_choice_controller_->cover_from_file_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromFile()));
+  connect(album_cover_choice_controller_->cover_to_file_action(),
+          SIGNAL(triggered()), this, SLOT(SaveCoverToFile()));
   connect(album_cover_choice_controller_->cover_from_url_action(),
           SIGNAL(triggered()), this, SLOT(LoadCoverFromURL()));
   connect(album_cover_choice_controller_->search_for_cover_action(),
@@ -102,8 +101,6 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
           SIGNAL(triggered()), this, SLOT(UnsetCover()));
   connect(album_cover_choice_controller_->show_cover_action(),
           SIGNAL(triggered()), this, SLOT(ShowCover()));
-  connect(album_cover_choice_controller_->save_cover_action(),
-          SIGNAL(triggered()), this, SLOT(SaveCover()));
 
   menu_->addActions(actions);
   menu_->addSeparator();
@@ -363,18 +360,32 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 }
 
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
-#ifndef HAVE_LIBLASTFM
-  album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
-#endif
+  // initial 'enabled' values depending on the kitty mode
+  album_cover_choice_controller_->cover_from_file_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->cover_to_file_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->cover_from_url_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->unset_cover_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->show_cover_action()->setEnabled(!aww_);
 
-  const bool art_is_not_set =
-     metadata_.art_manual() == AlbumCoverLoader::kManuallyUnsetCover
- || (metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty());
+  // some special cases
+  if(aww_) {
+    album_cover_choice_controller_->cover_to_file_action()->setEnabled(true);
+  } else {
+  #ifndef HAVE_LIBLASTFM
+    album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
+    album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
+  #endif
 
-  album_cover_choice_controller_->unset_cover_action()->setEnabled(!art_is_not_set);
-  album_cover_choice_controller_->show_cover_action()->setEnabled(!art_is_not_set);
+    const bool art_is_not_set =
+        metadata_.art_manual() == AlbumCoverLoader::kManuallyUnsetCover
+        || (metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty());
 
+    album_cover_choice_controller_->unset_cover_action()->setEnabled(!art_is_not_set);
+    album_cover_choice_controller_->show_cover_action()->setEnabled(!art_is_not_set);
+  }
+
+  // show the menu
   menu_->popup(mapToGlobal(e->pos()));
 }
 
@@ -436,30 +447,8 @@ void NowPlayingWidget::SearchForCover() {
     NowPlaying(metadata_);
 }
 
-void NowPlayingWidget::SaveCover() {
-  if (!save_dialog_) {
-    save_dialog_ = new QFileDialog(
-        this,
-        tr("Save Album Cover"),
-        QDir::home().absolutePath(),
-        tr("Images (*.jpg)"));
-    save_dialog_->setAcceptMode(QFileDialog::AcceptSave);
-  }
-  save_dialog_->selectFile(metadata_.album() + ".jpg");
-
-  if (!save_dialog_->exec()) {
-    return;
-  }
-
-  QStringList filenames = save_dialog_->selectedFiles();
-  QString save_filename = filenames[0];
-
-  QString extension = save_filename.right(4);
-  if (!extension.startsWith('.') ||
-      !QImageWriter::supportedImageFormats().contains(extension.right(3).toUtf8())) {
-    save_filename.append(".jpg");
-  }
-  original_.save(save_filename);
+void NowPlayingWidget::SaveCoverToFile() {
+  album_cover_choice_controller_->SaveCoverToFile(metadata_, original_);
 }
 
 void NowPlayingWidget::UnsetCover() {

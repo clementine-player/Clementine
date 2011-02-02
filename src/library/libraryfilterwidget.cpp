@@ -194,7 +194,8 @@ void LibraryFilterWidget::SetFilterHint(const QString& hint) {
 
 void LibraryFilterWidget::SetDuplicatesOnly(bool duplicates_only) {
   // no filtering in duplicates_only mode
-  static_cast<QLineEdit*>(ui_->filter)->clear();
+  filter_->clear();
+  // TODO: won't work on Mac
   ui_->filter->setEnabled(!duplicates_only);
 
   model_->SetFilterDuplicatesOnly(duplicates_only);
@@ -210,15 +211,6 @@ void LibraryFilterWidget::SetGroupByEnabled(bool enabled) {
 
 void LibraryFilterWidget::AddMenuAction(QAction* action) {
   library_menu_->addAction(action);
-}
-
-void LibraryFilterWidget::AddSeparator() {
-  library_menu_->addSeparator();
-}
-
-void LibraryFilterWidget::AppendAndFocus(const QString& text) {
-  ui_->filter->setText(ui_->filter->text() + text);
-  ui_->filter->setFocus();
 }
 
 void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {

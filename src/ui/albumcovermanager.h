@@ -83,6 +83,7 @@ class AlbumCoverManager : public QMainWindow {
   void FetchSingleCover();
 
   void LoadCoverFromFile();
+  void SaveCoverToFile();
   void LoadCoverFromURL();
   void SearchForCover();
   void UnsetCover();

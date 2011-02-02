@@ -80,9 +80,10 @@ private slots:
   void FetchTagFinished(const QString& filename, const SongList& songs_guessed);
   void FetchTagSongChoosen(const QString& filename, const Song& song);
 
-  void ArtLoaded(quint64 id, const QImage& image);
+  void ArtLoaded(quint64 id, const QImage& scaled, const QImage& original);
 
   void LoadCoverFromFile();
+  void SaveCoverToFile();
   void LoadCoverFromURL();
   void SearchForCover();
   void UnsetCover();
@@ -157,6 +158,9 @@ private:
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   quint64 cover_art_id_;
   bool cover_art_is_set_;
+
+  // A copy of the original, unscaled album cover.
+  QImage original_;
 
   QMenu* cover_menu_;
 
