@@ -91,7 +91,7 @@ void SearchTargetWrapper::SetHint(const QString& hint) {
 }
 
 void SearchTargetWrapper::SetEnabled(bool enabled) {
-  // TODO: implement this!
+  [search_ setEnabled:enabled];
 }
 
 MacLineEdit::MacLineEdit(QWidget* parent)
