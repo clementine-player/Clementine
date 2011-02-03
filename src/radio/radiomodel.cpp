@@ -170,13 +170,11 @@ QStringList RadioModel::mimeTypes() const {
 
 QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
-  QModelIndexList items;
 
   foreach (const QModelIndex& index, indexes) {
     if (!IsPlayable(index))
       continue;
 
-    items << index;
     urls << index.data(Role_Url).toUrl();
   }
 
