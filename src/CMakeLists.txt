@@ -992,6 +992,7 @@ if (WIN32)
     ${ZLIB_LIBRARIES}
     ${MSWMDM_LIBRARIES}
     ${SAC_SHIM_LIBRARIES}
+    ${QTSPARKLE_LIBRARIES}
     qtwin
   )
 endif (WIN32)
@@ -1037,10 +1038,6 @@ target_link_libraries(clementine
 set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
 )
-
-if(WIN32)
-  target_link_libraries(clementine ${QTSPARKLE_LIBRARIES})
-endif(WIN32)
 
 if (APPLE)
   install(FILES ../dist/clementine.icns
