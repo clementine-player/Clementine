@@ -49,8 +49,6 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
       } else {
         songs[n].InitFromFile(songs[n].filename(), -1);
       }
-      // force validity
-      songs[n].set_valid(true);
     } else if (key.startsWith("title")) {
       songs[n].set_title(value);
     } else if (key.startsWith("length")) {

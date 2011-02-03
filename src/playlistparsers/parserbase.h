@@ -37,6 +37,13 @@ public:
 
   virtual bool TryMagic(const QByteArray& data) const = 0;
 
+  // Loads all songs from playlist found at path 'playlist_path' in directory 'dir'.
+  // The 'device' argument is an opened and ready to read from represantation of
+  // this playlist.
+  // This method might not return all of the songs found in the playlist. Any playlist
+  // parser may decide to leave out some entries if it finds them incomplete or invalid.
+  // This means that the final resulting SongList should be considered valid (at least
+  // from the parser's point of view).
   virtual SongList Load(QIODevice* device, const QString& playlist_path = "", const QDir& dir = QDir()) const = 0;
   virtual void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const = 0;
 
