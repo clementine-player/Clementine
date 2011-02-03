@@ -183,7 +183,15 @@ void SongLoader::LoadPlaylistAndEmit(ParserBase* parser, const QString& filename
 void SongLoader::LoadPlaylist(ParserBase* parser, const QString& filename) {
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
-  songs_ = parser->Load(&file, filename, QFileInfo(filename).path());
+
+  SongList all_songs = parser->Load(&file, filename, QFileInfo(filename).path());
+  songs_.clear();
+
+  foreach(const Song& song, all_songs) {
+    if(song.is_valid()) {
+      songs_ << song;
+    }
+  }
 }
 
 static bool CompareSongs(const Song& left, const Song& right) {

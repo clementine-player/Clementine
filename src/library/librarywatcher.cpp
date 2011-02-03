@@ -399,9 +399,7 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file, const QString
 
   QHash<int, Song> sections_map;
   foreach(const Song& song, old_sections) {
-    if(song.is_valid()) {
-      sections_map[song.beginning()] = song;
-    }
+    sections_map[song.beginning()] = song;
   }
 
   QSet<int> used_ids;
@@ -438,7 +436,7 @@ void LibraryWatcher::UpdateNonCueAssociatedSong(const QString& file, const Song&
   // from the library
   if(cue_deleted) {
     foreach(const Song& song, backend_->GetSongsByFilename(file)) {
-      if(!song.IsMetadataEqual(matching_song) && song.is_valid()) {
+      if(!song.IsMetadataEqual(matching_song)) {
         t->deleted_songs << song;
       }
     }

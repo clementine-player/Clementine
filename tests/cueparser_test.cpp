@@ -33,6 +33,17 @@ class CueParserTest : public ::testing::Test {
       : parser_(NULL) {
   }
 
+  // We believe CUE - all songs with proper CUE entries should be valid.
+  bool validate_songs(SongList songs) {
+    foreach(const Song& song, songs) {
+      if(!song.is_valid()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   CueParser parser_;
   MockFileRefFactory taglib_;
 };
@@ -55,6 +66,8 @@ TEST_F(CueParserTest, ParsesASong) {
   ASSERT_EQ(1, first_song.beginning());
   ASSERT_EQ(1, first_song.track());
   ASSERT_EQ("CUEPATH", first_song.cue_path());
+
+  validate_songs(song_list);
 }
 
 TEST_F(CueParserTest, ParsesTwoSongs) {
@@ -84,6 +97,8 @@ TEST_F(CueParserTest, ParsesTwoSongs) {
   ASSERT_EQ("Zucchero himself", second_song.albumartist());
   ASSERT_EQ(5 * 60 + 3, second_song.beginning());
   ASSERT_EQ(2, second_song.track());
+
+  validate_songs(song_list);
 }
 
 TEST_F(CueParserTest, SkipsBrokenSongs) {
@@ -115,6 +130,8 @@ TEST_F(CueParserTest, SkipsBrokenSongs) {
   ASSERT_EQ("Zucchero himself", second_song.albumartist());
   ASSERT_EQ(5 * 60, second_song.beginning());
   ASSERT_EQ(2, second_song.track());
+
+  validate_songs(song_list);
 }
 
 TEST_F(CueParserTest, UsesAllMetadataInformation) {
@@ -148,6 +165,8 @@ TEST_F(CueParserTest, UsesAllMetadataInformation) {
   ASSERT_EQ("Some other guy", second_song.composer());
   ASSERT_EQ(2, second_song.beginning());
   ASSERT_EQ(2, second_song.track());
+
+  validate_songs(song_list);
 }
 
 TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
@@ -210,6 +229,8 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(1, fifth_song.beginning());
   ASSERT_EQ(-1, fifth_song.track());
   ASSERT_EQ("CUEPATH", fifth_song.cue_path());
+
+  validate_songs(song_list);
 }
 
 TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
@@ -260,6 +281,8 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   ASSERT_EQ("D2", fourth_song.title());
   ASSERT_EQ(61, fourth_song.beginning());
   ASSERT_EQ(-1, fourth_song.track());
+
+  validate_songs(song_list);
 }
 
 TEST_F(CueParserTest, SkipsDataFiles) {
@@ -288,4 +311,6 @@ TEST_F(CueParserTest, SkipsDataFiles) {
   ASSERT_EQ("D1", second_song.title());
   ASSERT_EQ(61, second_song.beginning());
   ASSERT_EQ(-1, second_song.track());
+
+  validate_songs(song_list);
 }

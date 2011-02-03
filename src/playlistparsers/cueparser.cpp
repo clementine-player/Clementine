@@ -274,6 +274,7 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Son
     return false;
   }
 
+  // believe the CUE: Init() forces validity
   song->Init(entry.title, entry.PrettyArtist(),
              entry.album, beginning, end);
   song->set_albumartist(entry.album_artist);
@@ -291,6 +292,9 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
   if(beginning == -1) {
     return false;
   }
+
+  // believe the CUE and force validity (like UpdateSong() does)
+  song->set_valid(true);
 
   song->set_title(entry.title);
   song->set_artist(entry.PrettyArtist());
