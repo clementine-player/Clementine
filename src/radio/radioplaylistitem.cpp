@@ -92,6 +92,11 @@ void RadioPlaylistItem::InitMetadata() {
 }
 
 Song RadioPlaylistItem::Metadata() const {
+  if (!set_service_icon_) {
+    // Get the icon if we don't have it already
+    service();
+  }
+
   if (HasTemporaryMetadata())
     return temp_metadata_;
   return metadata_;
