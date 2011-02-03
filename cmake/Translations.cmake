@@ -11,7 +11,8 @@ set (XGETTEXT_OPTIONS --qt --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pa
 
 macro(add_pot header pot)
   # Generate the .pot
-  add_custom_target(pot ALL
+  add_custom_command(
+    OUTPUT ${pot}
     COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
         ${XGETTEXT_OPTIONS} -s -C --omit-header --no-location
         --directory=${CMAKE_CURRENT_SOURCE_DIR}
@@ -35,32 +36,30 @@ macro(add_po outfiles po_prefix)
     ${ARGN}
   )
 
-  add_custom_target(po_all ALL)
-
-  # Merge the .pot into .po files
-  foreach (_lang ${ADD_PO_LANGUAGES})
-    set(_po ${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PO_DIRECTORY}/${_lang}.po)
-    add_custom_target("po_${_lang}" ALL
-      COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location --no-fuzzy-matching --backup=off
-          ${_po} ${ADD_PO_POT}
-      DEPENDS ${_po})
-    add_dependencies("po_${_lang}" pot)
-    add_dependencies(po_all "po_${_lang}")
-  endforeach (_lang)
-
-  # Convert the .po files to .qm files
   foreach (_lang ${ADD_PO_LANGUAGES})
     set(_po_filename "${_lang}.po")
+    set(_po_stubpath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}")
     set(_po_filepath "${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}")
     set(_qm_filename "clementine_${_lang}.qm")
     set(_qm_filepath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_qm_filename}")
 
+    # Merge the .pot into .po files
+    add_custom_command(
+      OUTPUT ${_po_stubpath}
+      COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-location --no-fuzzy-matching --backup=off
+          ${_po_filepath} ${ADD_PO_POT}
+      COMMAND ${CMAKE_COMMAND} -E touch ${_po_stubpath}
+      DEPENDS ${ADD_PO_POT}
+    )
+
+    # Convert the .po files to .qm files
     add_custom_command(
       OUTPUT ${_qm_filepath}
       COMMAND ${QT_LCONVERT_EXECUTABLE} ARGS ${_po_filepath} -o ${_qm_filepath} -of qm
-      MAIN_DEPENDENCY ${_po_filepath}
+      DEPENDS ${_po_filepath} ${_po_stubpath}
     )
-    list(APPEND ${outfiles} ${_qm_filepath})
+
+    list(APPEND ${outfiles} ${_po_filepath} ${_qm_filepath})
   endforeach (_lang)
 
   # Generate a qrc file for the translations
