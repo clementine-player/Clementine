@@ -21,8 +21,8 @@
 #include "gmock/gmock.h"
 
 #include <QMap>
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
+#include <fileref.h>
+#include <tag.h>
 
 #include <boost/scoped_ptr.hpp>
 

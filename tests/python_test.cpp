@@ -29,7 +29,6 @@
 #include <QtDebug>
 
 #include <boost/noncopyable.hpp>
-#include <taglib/id3v2tag.h>
 
 namespace {
 
