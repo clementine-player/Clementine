@@ -20,12 +20,12 @@
 #include <QTextCodec>
 #include <QtDebug>
 
-#include <taglib/fileref.h>
-#include <taglib/mpegfile.h>
-#include <taglib/id3v2tag.h>
-#include <taglib/oggfile.h>
-#include <taglib/vorbisfile.h>
-#include <taglib/flacfile.h>
+#include <fileref.h>
+#include <mpegfile.h>
+#include <id3v2tag.h>
+#include <oggfile.h>
+#include <vorbisfile.h>
+#include <flacfile.h>
 
 #include "engines/enginebase.h"
 

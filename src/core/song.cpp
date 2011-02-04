@@ -22,26 +22,26 @@
 
 #include <sys/stat.h>
 
-#include <taglib/aifffile.h>
-#include <taglib/asffile.h>
-#include <taglib/attachedpictureframe.h>
-#include <taglib/commentsframe.h>
-#include <taglib/fileref.h>
-#include <taglib/flacfile.h>
-#include <taglib/id3v1genres.h>
-#include <taglib/id3v2tag.h>
-#include <taglib/mp4file.h>
-#include <taglib/mpcfile.h>
-#include <taglib/mpegfile.h>
-#include <taglib/oggfile.h>
-#include <taglib/oggflacfile.h>
-#include <taglib/speexfile.h>
-#include <taglib/tag.h>
-#include <taglib/textidentificationframe.h>
-#include <taglib/trueaudiofile.h>
-#include <taglib/tstring.h>
-#include <taglib/vorbisfile.h>
-#include <taglib/wavfile.h>
+#include <aifffile.h>
+#include <asffile.h>
+#include <attachedpictureframe.h>
+#include <commentsframe.h>
+#include <fileref.h>
+#include <flacfile.h>
+#include <id3v1genres.h>
+#include <id3v2tag.h>
+#include <mp4file.h>
+#include <mpcfile.h>
+#include <mpegfile.h>
+#include <oggfile.h>
+#include <oggflacfile.h>
+#include <speexfile.h>
+#include <tag.h>
+#include <textidentificationframe.h>
+#include <trueaudiofile.h>
+#include <tstring.h>
+#include <vorbisfile.h>
+#include <wavfile.h>
 
 #ifdef HAVE_LIBLASTFM
   #include "radio/fixlastfm.h"

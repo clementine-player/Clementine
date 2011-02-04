@@ -27,7 +27,7 @@
 #include <QSqlQuery>
 #include <QString>
 
-#include <taglib/xiphcomment.h>
+#include <xiphcomment.h>
 
 #include "config.h"
 #include "engines/engine_fwd.h"

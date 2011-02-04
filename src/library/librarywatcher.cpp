@@ -31,8 +31,8 @@
 #include <QSettings>
 #include <QTimer>
 
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
+#include <fileref.h>
+#include <tag.h>
 
 QStringList LibraryWatcher::sValidImages;
 

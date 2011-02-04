@@ -21,7 +21,7 @@
 #include <QHash>
 #include <QString>
 
-#include <taglib/id3v1tag.h>
+#include <id3v1tag.h>
 
 #include "nsUniversalDetector.h"
 
