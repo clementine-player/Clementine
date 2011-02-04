@@ -80,6 +80,11 @@ const QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   return result;
 }
 
+const QItemSelection& PlaylistManager::selection(int id) const {
+  QMap<int, Data>::const_iterator it = playlists_.find(id);
+  return it->selection;
+}
+
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   Playlist* ret = new Playlist(playlist_backend_, task_manager_, library_backend_, id);
   ret->set_sequence(sequence_);

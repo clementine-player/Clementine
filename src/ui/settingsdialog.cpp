@@ -282,7 +282,7 @@ void SettingsDialog::accept() {
   QSettings s;
 
   // Behaviour
-  MainWindow::StartupBehaviour behaviour;
+  MainWindow::StartupBehaviour behaviour = MainWindow::Startup_Remember;
   if (ui_->b_always_hide_->isChecked()) behaviour = MainWindow::Startup_AlwaysHide;
   if (ui_->b_always_show_->isChecked()) behaviour = MainWindow::Startup_AlwaysShow;
   if (ui_->b_remember_->isChecked())    behaviour = MainWindow::Startup_Remember;

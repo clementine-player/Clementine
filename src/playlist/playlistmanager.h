@@ -52,7 +52,7 @@ public:
   // Returns the collection of playlists managed by this PlaylistManager.
   const QList<Playlist*> GetAllPlaylists() const;
 
-  const QItemSelection& selection(int id) const { return playlists_[id].selection; }
+  const QItemSelection& selection(int id) const;
   const QItemSelection& current_selection() const { return selection(current_id()); }
   const QItemSelection& active_selection() const { return selection(active_id()); }
 
