@@ -8,8 +8,12 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SipBindings.cmake)
 
+if (UNIX AND NOT APPLE)
+  set(LINUX 1)
+endif (UNIX AND NOT APPLE)
+
 find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
-if(UNIX AND NOT APPLE)
+if (LINUX)
   option(ENABLE_DBUS "Enable D-Bus, MPRIS and native notifications. Required for DeviceKit and Wii remote support" ON)
   if(ENABLE_DBUS)
     find_package(Qt4 REQUIRED QtDbus)
@@ -22,7 +26,7 @@ if(UNIX AND NOT APPLE)
 
     option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
   endif(ENABLE_DBUS)
-endif(UNIX AND NOT APPLE)
+endif (LINUX)
 
 if(NOT APPLE)
   find_package(Qt4 COMPONENTS QtWebKit)
