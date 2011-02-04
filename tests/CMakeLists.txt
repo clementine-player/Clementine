@@ -11,6 +11,10 @@ if(HAVE_LIBGPOD)
   include_directories(${LIBGPOD_INCLUDE_DIRS})
 endif(HAVE_LIBGPOD)
 
+if(HAVE_LIBLASTFM)
+  include_directories(${LASTFM_INCLUDE_DIRS})
+endif(HAVE_LIBLASTFM)
+
 set(GTEST-SOURCES
     ../3rdparty/gmock/gtest/src/gtest.cc
     ../3rdparty/gmock/gtest/src/gtest-death-test.cc
