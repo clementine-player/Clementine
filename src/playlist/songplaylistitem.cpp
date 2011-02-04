@@ -53,9 +53,6 @@ bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   } else {
     song_.InitFromFile(filename, -1);
 
-    if (!song_.is_valid())
-      return false;
-
     int beginning(query.value(row + 7).toInt());
     QString cue_path(query.value(row + 8).toString());
 
