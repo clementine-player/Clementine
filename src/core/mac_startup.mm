@@ -34,6 +34,7 @@
 
 #include "config.h"
 #include "globalshortcuts.h"
+#include "mac_delegate.h"
 #include "mac_startup.h"
 #include "macglobalshortcutbackend.h"
 #include "utilities.h"
@@ -64,22 +65,6 @@
 - (void) SetApplicationHandler: (PlatformInterface*)handler;
 
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
-@end
-
-#ifdef SNOW_LEOPARD
-@interface AppDelegate :NSObject <NSApplicationDelegate> {
-#else
-@interface AppDelegate :NSObject {
-#endif
-  PlatformInterface* application_handler_;
-  NSMenu* dock_menu_;
-}
-
-- (id) initWithHandler: (PlatformInterface*)handler;
-// NSApplicationDelegate
-- (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
-- (NSMenu*) applicationDockMenu: (NSApplication*)sender;
-- (void) setDockMenu: (NSMenu*)menu;
 @end
 
 @implementation AppDelegate

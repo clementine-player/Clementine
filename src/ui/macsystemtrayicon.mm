@@ -17,6 +17,7 @@
 
 #include "macsystemtrayicon.h"
 
+#include "core/mac_delegate.h"
 #include "core/song.h"
 
 #include <QAction>
@@ -83,7 +84,7 @@ class MacSystemTrayIconPrivate : boost::noncopyable {
 
     // Don't look now.
     // This must be called after our custom NSApplicationDelegate has been set.
-    [[NSApp delegate] setDockMenu:dock_menu_];
+    [(AppDelegate*)([NSApp delegate]) setDockMenu:dock_menu_];
 
     ClearNowPlaying();
   }
