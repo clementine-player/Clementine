@@ -30,7 +30,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="layoutWidget">
+      <widget class="QWidget" name="sidebar_layout">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <property name="spacing">
          <number>0</number>
@@ -43,7 +43,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="layoutWidget">
+      <widget class="QWidget" name="playlist_layout">
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <property name="spacing">
          <number>0</number>
@@ -74,7 +74,7 @@
           </item>
           <item>
            <widget class="QWidget" name="player_controls_container" native="true">
-            <layout class="QVBoxLayout" name="status_bar_layout">
+            <layout class="QVBoxLayout" name="player_controls_layout">
              <property name="spacing">
               <number>0</number>
              </property>
@@ -289,7 +289,7 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout">
+               <layout class="QVBoxLayout" name="status_bar_layout">
                 <property name="spacing">
                  <number>0</number>
                 </property>
@@ -322,7 +322,7 @@
                     <widget class="QStackedWidget" name="status_bar_stack">
                      <widget class="MultiLoadingIndicator" name="multi_loading_indicator"/>
                      <widget class="QWidget" name="playlist_summary_page">
-                      <layout class="QVBoxLayout" name="verticalLayout">
+                      <layout class="QVBoxLayout" name="playlist_summary_layout">
                        <property name="spacing">
                         <number>0</number>
                        </property>
