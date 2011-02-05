@@ -49,7 +49,7 @@ QStringList IcecastBackend::GetGenresAlphabetical(const QString& filter) {
   }
 
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return ret;
+  if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
     ret << q.value(0).toString();
@@ -74,7 +74,7 @@ QStringList IcecastBackend::GetGenresByPopularity(const QString& filter) {
   }
 
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return ret;
+  if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
     ret << q.value(0).toString();
@@ -113,7 +113,7 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
   }
 
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return ret;
+  if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
     Station station;
@@ -146,7 +146,7 @@ void IcecastBackend::ClearAndAddStations(const StationList& stations) {
     // Remove all existing items
     QSqlQuery q(QString("DELETE FROM %1").arg(kTableName), db);
     q.exec();
-    if (db_->CheckErrors(q.lastError())) return;
+    if (db_->CheckErrors(q)) return;
 
     q = QSqlQuery(QString("INSERT INTO %1 (name, url, mime_type, bitrate,"
                           "                channels, samplerate, genre)"
@@ -164,7 +164,7 @@ void IcecastBackend::ClearAndAddStations(const StationList& stations) {
       q.bindValue(":samplerate", station.samplerate);
       q.bindValue(":genre", station.genre);
       q.exec();
-      if (db_->CheckErrors(q.lastError())) return;
+      if (db_->CheckErrors(q)) return;
     }
 
     t.Commit();

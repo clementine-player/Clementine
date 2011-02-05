@@ -111,7 +111,7 @@ void LibraryQuery::AddCompilationRequirement(bool compilation) {
   where_clauses_ << QString("effective_compilation = %1").arg(compilation ? 1 : 0);
 }
 
-QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
+QSqlQuery LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
                              const QString& fts_table) {
   QString sql;
 
@@ -144,7 +144,7 @@ QSqlError LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
   }
 
   query_.exec();
-  return query_.lastError();
+  return query_;
 }
 
 bool LibraryQuery::Next() {

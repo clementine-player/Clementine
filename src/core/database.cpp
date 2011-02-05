@@ -528,12 +528,12 @@ void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
         QString new_command(command);
         new_command.replace(kMagicAllSongsTables, table);
         QSqlQuery query(db.exec(new_command));
-        if (CheckErrors(query.lastError()))
+        if (CheckErrors(query))
           qFatal("Unable to update music library database");
       }
     } else {
       QSqlQuery query(db.exec(command));
-      if (CheckErrors(query.lastError()))
+      if (CheckErrors(query))
         qFatal("Unable to update music library database");
     }
   }
@@ -563,11 +563,16 @@ QStringList Database::SongsTables(QSqlDatabase& db) const {
   return ret;
 }
 
-bool Database::CheckErrors(const QSqlError& error) {
-  if (error.isValid()) {
-    qDebug() << error;
-    emit Error("LibraryBackend: " + error.text());
+bool Database::CheckErrors(const QSqlQuery& query) {
+  QSqlError last_error = query.lastError();
+  if (last_error.isValid()) {
+    qDebug() << "db error: " << last_error;
+    qDebug() << "faulty query: " << query.lastQuery();
+    qDebug() << "bound values: " << query.boundValues();
+
+    emit Error("LibraryBackend: " + last_error.text());
     return true;
   }
+
   return false;
 }

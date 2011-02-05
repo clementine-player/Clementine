@@ -44,7 +44,7 @@ DeviceDatabaseBackend::DeviceList DeviceDatabaseBackend::GetAllDevices() {
               "   transcode_mode, transcode_format"
               " FROM devices", db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return ret;
+  if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
     Device dev;
@@ -79,7 +79,7 @@ int DeviceDatabaseBackend::AddDevice(const Device& device) {
   q.bindValue(":transcode_mode", device.transcode_mode_);
   q.bindValue(":transcode_format", device.transcode_format_);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return -1;
+  if (db_->CheckErrors(q)) return -1;
   int id = q.lastInsertId().toInt();
 
   // Create the songs tables for the device
@@ -106,7 +106,7 @@ void DeviceDatabaseBackend::RemoveDevice(int id) {
   QSqlQuery q("DELETE FROM devices WHERE ROWID=:id", db);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   // Remove the songs tables for the device
   db.exec(QString("DROP TABLE device_%1_songs").arg(id));
@@ -135,5 +135,5 @@ void DeviceDatabaseBackend::SetDeviceOptions(int id,
   q.bindValue(":transcode_format", format);
   q.bindValue(":id", id);
   q.exec();
-  db_->CheckErrors(q.lastError());
+  db_->CheckErrors(q);
 }

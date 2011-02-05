@@ -58,7 +58,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
               "       dynamic_playlist_data, dynamic_playlist_backend"
               " FROM playlists", db);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return ret;
 
   while (q.next()) {
@@ -85,7 +85,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
               " WHERE ROWID=:id", db);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return Playlist();
 
   q.next();
@@ -122,7 +122,7 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
 
   q.bindValue(":playlist", playlist);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return QFuture<PlaylistItemPtr>();
 
   QList<SqlRow> rows;
@@ -233,7 +233,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   // Clear the existing items in the playlist
   clear.bindValue(":playlist", playlist);
   clear.exec();
-  if (db_->CheckErrors(clear.lastError()))
+  if (db_->CheckErrors(clear))
     return;
 
   // Save the new ones
@@ -242,7 +242,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
     item->BindToQuery(&insert);
 
     insert.exec();
-    db_->CheckErrors(insert.lastError());
+    db_->CheckErrors(insert);
   }
 
   // Update the last played track number
@@ -258,7 +258,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   }
   update.bindValue(":playlist", playlist);
   update.exec();
-  if (db_->CheckErrors(update.lastError()))
+  if (db_->CheckErrors(update))
     return;
 
   transaction.Commit();
@@ -271,7 +271,7 @@ int PlaylistBackend::CreatePlaylist(const QString &name) {
   QSqlQuery q("INSERT INTO playlists (name) VALUES (:name)", db);
   q.bindValue(":name", name);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return -1;
 
   return q.lastInsertId().toInt();
@@ -289,11 +289,11 @@ void PlaylistBackend::RemovePlaylist(int id) {
   ScopedTransaction transaction(&db);
 
   delete_playlist.exec();
-  if (db_->CheckErrors(delete_playlist.lastError()))
+  if (db_->CheckErrors(delete_playlist))
     return;
 
   delete_items.exec();
-  if (db_->CheckErrors(delete_items.lastError()))
+  if (db_->CheckErrors(delete_items))
     return;
 
   transaction.Commit();
@@ -307,7 +307,7 @@ void PlaylistBackend::RenamePlaylist(int id, const QString &new_name) {
   q.bindValue(":id", id);
 
   q.exec();
-  db_->CheckErrors(q.lastError());
+  db_->CheckErrors(q);
 }
 
 void PlaylistBackend::SetPlaylistOrder(const QList<int>& ids) {
@@ -321,7 +321,7 @@ void PlaylistBackend::SetPlaylistOrder(const QList<int>& ids) {
     q.bindValue(":index", i);
     q.bindValue(":id", ids[i]);
     q.exec();
-    if (db_->CheckErrors(q.lastError()))
+    if (db_->CheckErrors(q))
       return;
   }
 

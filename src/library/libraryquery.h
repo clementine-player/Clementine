@@ -60,7 +60,7 @@ class LibraryQuery {
   void AddCompilationRequirement(bool compilation);
   void SetLimit(int limit) { limit_ = limit; }
 
-  QSqlError Exec(QSqlDatabase db, const QString& songs_table, const QString& fts_table);
+  QSqlQuery Exec(QSqlDatabase db, const QString& songs_table, const QString& fts_table);
   bool Next();
   QVariant Value(int column) const;
 

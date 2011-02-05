@@ -243,6 +243,21 @@ QString Song::Decode(const QString& tag, const QTextCodec* codec) {
   return codec->toUnicode(tag.toUtf8());
 }
 
+bool Song::HasProperMediaFile() const {
+#ifndef QT_NO_DEBUG_OUTPUT
+  if (qApp->thread() == QThread::currentThread())
+    qWarning() << Q_FUNC_INFO << "on GUI thread!";
+#endif
+
+  QMutexLocker l(&taglib_mutex_);
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
+
+  if(fileref->isNull())
+    return false;
+
+  return fileref->tag();
+}
+
 void Song::InitFromFile(const QString& filename, int directory_id) {
 #ifndef QT_NO_DEBUG_OUTPUT
   if (qApp->thread() == QThread::currentThread())

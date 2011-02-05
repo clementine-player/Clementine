@@ -98,7 +98,7 @@ void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
   q.bindValue(":path", new_path);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   const int path_len = new_path.length();
 
@@ -108,7 +108,7 @@ void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
   q.bindValue(":path", new_path);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   // Do the songs table
   q = QSqlQuery(QString("UPDATE %1 SET filename=:path || substr(filename, %2)"
@@ -116,7 +116,7 @@ void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
   q.bindValue(":path", new_path);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   t.Commit();
 }
@@ -129,7 +129,7 @@ DirectoryList LibraryBackend::GetAllDirectories() {
 
   QSqlQuery q(QString("SELECT ROWID, path FROM %1").arg(dirs_table_), db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return ret;
+  if (db_->CheckErrors(q)) return ret;
 
   while (q.next()) {
     Directory dir;
@@ -152,7 +152,7 @@ SubdirectoryList LibraryBackend::SubdirsInDirectory(int id, QSqlDatabase &db) {
                       " WHERE directory = :dir").arg(subdirs_table_), db);
   q.bindValue(":dir", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return SubdirectoryList();
+  if (db_->CheckErrors(q)) return SubdirectoryList();
 
   SubdirectoryList subdirs;
   while (q.next()) {
@@ -172,7 +172,7 @@ void LibraryBackend::UpdateTotalSongCount() {
 
   QSqlQuery q(QString("SELECT COUNT(*) FROM %1").arg(songs_table_), db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
   if (!q.next()) return;
 
   emit TotalSongCountUpdated(q.value(0).toInt());
@@ -186,7 +186,7 @@ void LibraryBackend::AddDirectory(const QString &path) {
                       " VALUES (:path, 1)").arg(dirs_table_), db);
   q.bindValue(":path", path);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   Directory dir;
   dir.path = path;
@@ -209,14 +209,14 @@ void LibraryBackend::RemoveDirectory(const Directory& dir) {
               .arg(subdirs_table_), db);
   q.bindValue(":id", dir.id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   // Now remove the directory itself
   q = QSqlQuery(QString("DELETE FROM %1 WHERE ROWID = :id")
                 .arg(dirs_table_), db);
   q.bindValue(":id", dir.id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   emit DirectoryDeleted(dir);
 
@@ -232,7 +232,7 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
               .arg(songs_table_), db);
   q.bindValue(":directory", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return SongList();
+  if (db_->CheckErrors(q)) return SongList();
 
   SongList ret;
   while (q.next()) {
@@ -266,26 +266,26 @@ void LibraryBackend::AddOrUpdateSubdirs(const SubdirectoryList& subdirs) {
       delete_query.bindValue(":id", subdir.directory_id);
       delete_query.bindValue(":path", subdir.path);
       delete_query.exec();
-      db_->CheckErrors(delete_query.lastError());
+      db_->CheckErrors(delete_query);
     } else {
       // See if this subdirectory already exists in the database
       find_query.bindValue(":id", subdir.directory_id);
       find_query.bindValue(":path", subdir.path);
       find_query.exec();
-      if (db_->CheckErrors(find_query.lastError())) continue;
+      if (db_->CheckErrors(find_query)) continue;
 
       if (find_query.next()) {
         update_query.bindValue(":mtime", subdir.mtime);
         update_query.bindValue(":id", subdir.directory_id);
         update_query.bindValue(":path", subdir.path);
         update_query.exec();
-        db_->CheckErrors(update_query.lastError());
+        db_->CheckErrors(update_query);
       } else {
         add_query.bindValue(":id", subdir.directory_id);
         add_query.bindValue(":path", subdir.path);
         add_query.bindValue(":mtime", subdir.mtime);
         add_query.exec();
-        db_->CheckErrors(add_query.lastError());
+        db_->CheckErrors(add_query);
       }
     }
   }
@@ -321,7 +321,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
     if (!dirs_table_.isEmpty()) {
       check_dir.bindValue(":id", song.directory_id());
       check_dir.exec();
-      if (db_->CheckErrors(check_dir.lastError())) continue;
+      if (db_->CheckErrors(check_dir)) continue;
 
       if (!check_dir.next())
         continue; // Directory didn't exist
@@ -333,7 +333,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
       // Insert the row and create a new ID
       song.BindToQuery(&add_song);
       add_song.exec();
-      if (db_->CheckErrors(add_song.lastError())) continue;
+      if (db_->CheckErrors(add_song)) continue;
 
       // Get the new ID
       const int id = add_song.lastInsertId().toInt();
@@ -342,7 +342,7 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
       add_song_fts.bindValue(":id", id);
       song.BindToFtsQuery(&add_song_fts);
       add_song_fts.exec();
-      if (db_->CheckErrors(add_song_fts.lastError())) continue;
+      if (db_->CheckErrors(add_song_fts)) continue;
 
       Song copy(song);
       copy.set_id(id);
@@ -357,12 +357,12 @@ void LibraryBackend::AddOrUpdateSongs(const SongList& songs) {
       song.BindToQuery(&update_song);
       update_song.bindValue(":id", song.id());
       update_song.exec();
-      if (db_->CheckErrors(update_song.lastError())) continue;
+      if (db_->CheckErrors(update_song)) continue;
 
       song.BindToFtsQuery(&update_song_fts);
       update_song_fts.bindValue(":id", song.id());
       update_song_fts.exec();
-      if (db_->CheckErrors(update_song_fts.lastError())) continue;
+      if (db_->CheckErrors(update_song_fts)) continue;
 
       deleted_songs << old_song;
       added_songs << song;
@@ -392,7 +392,7 @@ void LibraryBackend::UpdateMTimesOnly(const SongList& songs) {
     q.bindValue(":mtime", song.mtime());
     q.bindValue(":id", song.id());
     q.exec();
-    db_->CheckErrors(q.lastError());
+    db_->CheckErrors(q);
   }
   transaction.Commit();
 }
@@ -410,11 +410,11 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
   foreach (const Song& song, songs) {
     remove.bindValue(":id", song.id());
     remove.exec();
-    db_->CheckErrors(remove.lastError());
+    db_->CheckErrors(remove);
 
     remove_fts.bindValue(":id", song.id());
     remove_fts.exec();
-    db_->CheckErrors(remove_fts.lastError());
+    db_->CheckErrors(remove_fts);
   }
   transaction.Commit();
 
@@ -523,7 +523,7 @@ SongList LibraryBackend::GetSongsByForeignId(
                       " WHERE %2.%3 IN (%4) AND %1.ROWID = %2.ROWID")
               .arg(songs_table_, table, column, in), db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return SongList();
+  if (db_->CheckErrors(q)) return SongList();
 
   QVector<Song> ret(ids.count());
   while (q.next()) {
@@ -550,7 +550,7 @@ SongList LibraryBackend::GetSongsById(const QStringList& ids, QSqlDatabase& db) 
   QSqlQuery q(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
                       " WHERE ROWID IN (%2)").arg(songs_table_, in), db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return SongList();
+  if (db_->CheckErrors(q)) return SongList();
 
   SongList ret;
   while (q.next()) {
@@ -634,7 +634,7 @@ void LibraryBackend::UpdateCompilations() {
 
   QSqlQuery q("SELECT artist, album, filename, sampler FROM songs ORDER BY album", db);
   q.exec();
-  if (db_->CheckErrors(q.lastError())) return;
+  if (db_->CheckErrors(q)) return;
 
   QMap<QString, CompilationInfo> compilation_info;
   while (q.next()) {
@@ -718,7 +718,7 @@ void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update
   update.bindValue(":sampler", sampler);
   update.bindValue(":album", album);
   update.exec();
-  db_->CheckErrors(update.lastError());
+  db_->CheckErrors(update);
 }
 
 LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
@@ -832,7 +832,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
     q.bindValue(":artist", artist);
 
   q.exec();
-  db_->CheckErrors(q.lastError());
+  db_->CheckErrors(q);
 
 
   // Now get the updated songs
@@ -887,7 +887,7 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
     q.bindValue(":artist", artist);
 
   q.exec();
-  db_->CheckErrors(q.lastError());
+  db_->CheckErrors(q);
 
   // Now get the updated songs
   if (!ExecQuery(&query)) return;
@@ -920,7 +920,7 @@ SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
   SongList ret;
   QSqlQuery query(sql, db);
   query.exec();
-  if (db_->CheckErrors(query.lastError()))
+  if (db_->CheckErrors(query))
     return ret;
 
   // Read the results
@@ -946,7 +946,7 @@ void LibraryBackend::IncrementPlayCount(int id) {
   q.bindValue(":now", QDateTime::currentDateTime().toTime_t());
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return;
 
   Song new_song = GetSongById(id, db);
@@ -966,7 +966,7 @@ void LibraryBackend::IncrementSkipCount(int id, float progress) {
                       " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return;
 
   Song new_song = GetSongById(id, db);
@@ -986,7 +986,7 @@ void LibraryBackend::ResetStatistics(int id) {
       " WHERE ROWID = :id").arg(songs_table_), db);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return;
 
   Song new_song = GetSongById(id, db);
@@ -1005,7 +1005,7 @@ void LibraryBackend::UpdateSongRating(int id, float rating) {
   q.bindValue(":rating", rating);
   q.bindValue(":id", id);
   q.exec();
-  if (db_->CheckErrors(q.lastError()))
+  if (db_->CheckErrors(q))
     return;
 
   Song new_song = GetSongById(id, db);
@@ -1020,12 +1020,12 @@ void LibraryBackend::DeleteAll() {
 
     QSqlQuery q("DELETE FROM " + songs_table_, db);
     q.exec();
-    if (db_->CheckErrors(q.lastError()))
+    if (db_->CheckErrors(q))
       return;
 
     q = QSqlQuery("DELETE FROM " + fts_table_, db);
     q.exec();
-    if (db_->CheckErrors(q.lastError()))
+    if (db_->CheckErrors(q))
       return;
 
     t.Commit();

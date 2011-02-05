@@ -464,9 +464,11 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     QFile cue(matching_cue);
     cue.open(QIODevice::ReadOnly);
 
-    // ignore FILEs pointing to other media files
+    // Ignore FILEs pointing to other media files. Also, watch out for incorrect
+    // media files. Playlist parser for CUEs considers every entry in sheet
+    // valid and we don't want invalid media getting into library!
     foreach(const Song& cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
-      if(cue_song.filename() == file) {
+      if(cue_song.filename() == file && cue_song.HasProperMediaFile()) {
         song_list << cue_song;
       }
     }

@@ -50,7 +50,7 @@ class Database : public QObject {
   void Stop() {}
 
   QSqlDatabase Connect();
-  bool CheckErrors(const QSqlError& error);
+  bool CheckErrors(const QSqlQuery& query);
   QMutex* Mutex() { return &mutex_; }
 
   void RecreateAttachedDb(const QString& database_name);
