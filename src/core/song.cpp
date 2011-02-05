@@ -252,10 +252,7 @@ bool Song::HasProperMediaFile() const {
   QMutexLocker l(&taglib_mutex_);
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
 
-  if(fileref->isNull())
-    return false;
-
-  return fileref->tag();
+  return !fileref->isNull() && fileref->tag();
 }
 
 void Song::InitFromFile(const QString& filename, int directory_id) {
