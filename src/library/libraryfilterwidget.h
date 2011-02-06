@@ -26,9 +26,10 @@
 
 class GroupByDialog;
 class LineEditInterface;
-class QueryOptions;
 class SettingsDialog;
 class Ui_LibraryFilterWidget;
+
+struct QueryOptions;
 
 class QMenu;
 class QActionGroup;

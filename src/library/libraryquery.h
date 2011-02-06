@@ -49,7 +49,7 @@ struct QueryOptions {
   bool Matches(const Song& song) const;
 
   QString get_filter() const { return filter; }
-  void set_filter(QString filter) {
+  void set_filter(const QString& filter) {
     this->filter = filter;
     this->query_mode = QueryMode_All;
   }

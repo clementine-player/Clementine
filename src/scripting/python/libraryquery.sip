@@ -16,7 +16,7 @@ public:
   bool Matches(const Song& song) const;
 
   QString get_filter() const;
-  void set_filter(QString filter);
+  void set_filter(const QString& filter);
 
   int get_max_age() const;
   void set_max_age(int max_age);
