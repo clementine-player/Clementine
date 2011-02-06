@@ -27,20 +27,46 @@
 class Song;
 class LibraryBackend;
 
+// This structure let's you customize behaviour of any LibraryQuery.
 struct QueryOptions {
+  // Modes of LibraryQuery:
+  // - use the all songs table
+  // - use the duplicated songs view; by duplicated we mean those songs 
+  //   for which the (artist, album, title) tuple is found more than once 
+  //   in the songs table
+  // - use the untagged songs view; by untagged we mean those for which
+  //   at least one of the (artist, album, title) tags is empty
+  // Please note that additional filtering based on fts table (the filter
+  // attribute) won't work in Duplicates and Untagged modes.
+  enum QueryMode {
+    QueryMode_All,
+    QueryMode_Duplicates,
+    QueryMode_Untagged
+  };
+
   QueryOptions();
 
   bool Matches(const Song& song) const;
 
-  // Please note that this attribute is mutually exclusive with the 'duplicates_only'
-  // flag!
+  QString get_filter() const { return filter; }
+  void set_filter(QString filter) {
+    this->filter = filter;
+    this->query_mode = QueryMode_All;
+  }
+
+  int get_max_age() const { return max_age; }
+  void set_max_age(int max_age) { this->max_age = max_age; }
+
+  QueryMode get_query_mode() const { return query_mode; }
+  void set_query_mode(QueryMode query_mode) {
+    this->query_mode = query_mode;
+    this->filter = QString();
+  }
+
+ private:
   QString filter;
   int max_age;
-  // If true, the query will operate not on the whole songs table but only on those rows
-  // which are duplicated. By duplication we mean a situation where two or more songs
-  // with equal (artist, album, title) tuple exist (case sensitive).
-  // Please note that this flag is mutually exclusive with the 'filter' attribute!
-  bool duplicates_only;
+  QueryMode query_mode;
 };
 
 class LibraryQuery {

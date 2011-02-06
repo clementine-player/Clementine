@@ -589,7 +589,7 @@ void LibraryModel::BeginReset() {
   }
 
   // Smart playlists?
-  if (show_smart_playlists_ && query_options_.filter.isEmpty())
+  if (show_smart_playlists_ && query_options_.get_filter().isEmpty())
     CreateSmartPlaylists();
 }
 
@@ -981,23 +981,17 @@ SongList LibraryModel::GetChildSongs(const QModelIndex &index) const {
 }
 
 void LibraryModel::SetFilterAge(int age) {
-  query_options_.max_age = age;
+  query_options_.set_max_age(age);
   ResetAsync();
 }
 
 void LibraryModel::SetFilterText(const QString& text) {
-  // duplicates_only and filter are mutually exclusive
-  query_options_.filter = text;
-  query_options_.duplicates_only = false;
-
+  query_options_.set_filter(text);
   ResetAsync();
 }
 
-void LibraryModel::SetFilterDuplicatesOnly(bool duplicates_only) {
-  // duplicates_only and filter are mutually exclusive
-  query_options_.duplicates_only = duplicates_only;
-  query_options_.filter = "";
-
+void LibraryModel::SetFilterQueryMode(QueryOptions::QueryMode query_mode) {
+  query_options_.set_query_mode(query_mode);
   ResetAsync();
 }
 

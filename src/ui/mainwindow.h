@@ -161,6 +161,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void PlaylistOrganiseSelected(bool copy);
   void PlaylistDelete();
 
+  void ChangeLibraryQueryMode(QAction* action);
+
   void PlayIndex(const QModelIndex& index);
   void StopAfterCurrent();
 
@@ -282,6 +284,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   ScriptManager* scripts_;
   boost::scoped_ptr<ScriptDialog> script_dialog_;
+
+  QAction* library_show_all_;
+  QAction* library_show_duplicates_;
+  QAction* library_show_untagged_;
 
   QMenu* playlist_menu_;
   QAction* playlist_play_pause_;

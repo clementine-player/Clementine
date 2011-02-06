@@ -17,6 +17,7 @@
 
 #include "libraryfilterwidget.h"
 #include "librarymodel.h"
+#include "libraryquery.h"
 #include "groupbydialog.h"
 #include "ui_libraryfilterwidget.h"
 #include "ui/iconloader.h"
@@ -192,12 +193,11 @@ void LibraryFilterWidget::SetFilterHint(const QString& hint) {
   filter_->set_hint(hint);
 }
 
-void LibraryFilterWidget::SetDuplicatesOnly(bool duplicates_only) {
-  // no filtering in duplicates_only mode
+void LibraryFilterWidget::SetQueryMode(QueryOptions::QueryMode query_mode) {
   filter_->clear();
-  filter_->set_enabled(!duplicates_only);
+  filter_->set_enabled(query_mode == QueryOptions::QueryMode_All);
 
-  model_->SetFilterDuplicatesOnly(duplicates_only);
+  model_->SetFilterQueryMode(query_mode);
 }
 
 void LibraryFilterWidget::SetAgeFilterEnabled(bool enabled) {

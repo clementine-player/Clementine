@@ -24,7 +24,7 @@
 
 QueryOptions::QueryOptions()
   : max_age(-1),
-    duplicates_only(false)
+    query_mode(QueryMode_All)
 {
 }
 
@@ -33,14 +33,14 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   : join_with_fts_(false),
     limit_(-1)
 {
-  if (!options.filter.isEmpty()) {
+  if (!options.get_filter().isEmpty()) {
     // We need to munge the filter text a little bit to get it to work as
     // expected with sqlite's FTS3:
     //  1) Append * to all tokens.
     //  2) Prefix "fts" to column names.
 
     // Split on whitespace
-    QStringList tokens(options.filter.split(QRegExp("\\s+")));
+    QStringList tokens(options.get_filter().split(QRegExp("\\s+")));
     QString query;
     foreach (QString token, tokens) {
       token.remove('(');
@@ -57,21 +57,24 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     join_with_fts_ = true;
   }
 
-  if (options.max_age != -1) {
-    int cutoff = QDateTime::currentDateTime().toTime_t() - options.max_age;
+  if (options.get_max_age() != -1) {
+    int cutoff = QDateTime::currentDateTime().toTime_t() - options.get_max_age();
 
     where_clauses_ << "ctime > ?";
     bound_values_ << cutoff;
   }
 
-  duplicates_only_ = false;
+  // TODO: currently you cannot use any QueryMode other than All and fts at the same time.
+  // joining songs, duplicated_songs and songs_fts all together takes a huge amount of
+  // time. the query takes about 20 seconds on my machine then. why?
+  // untagged mode could work with additional filtering but I'm disabling it just to be
+  // consistent - this way filtering is available only in the All mode.
+  // remember though that when you fix the Duplicates + FTS cooperation, enable the
+  // filtering in both Duplicates and Untagged modes.
+  duplicates_only_ = options.get_query_mode() == QueryOptions::QueryMode_Duplicates;
 
-  if(options.duplicates_only) {
-    // TODO: currently you cannot use the duplicates_only flag and fts at the same time.
-    // joining songs, duplicated_songs and songs_fts all together takes a huge amount of
-    // time. the query takes about 20 seconds then. why?
-    Q_ASSERT(!join_with_fts_);
-    duplicates_only_ = true;
+  if (options.get_query_mode() == QueryOptions::QueryMode_Untagged) {
+    where_clauses_ << "(artist = '' OR album = '' OR title ='')";
   }
 }
 

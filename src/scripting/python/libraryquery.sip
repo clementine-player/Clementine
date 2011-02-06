@@ -5,13 +5,24 @@ class QueryOptions {
 %End
 
 public:
+  enum QueryMode {
+    QueryMode_All,
+    QueryMode_Duplicates,
+    QueryMode_Untagged
+  };
+
   QueryOptions();
 
   bool Matches(const Song& song) const;
 
-  QString filter;
-  int max_age;
-  bool duplicates_only;
+  QString get_filter() const;
+  void set_filter(QString filter);
+
+  int get_max_age() const;
+  void set_max_age(int max_age);
+
+  QueryMode get_query_mode() const;
+  void set_query_mode(QueryMode view);
 };
 
 class LibraryQuery {

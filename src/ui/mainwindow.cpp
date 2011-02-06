@@ -419,9 +419,18 @@ MainWindow::MainWindow(
   connect(device_view_, SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
   // Library filter widget
-  QAction* duplicates_only_action = new QAction(tr("Show duplicates only"), this);
-  duplicates_only_action->setCheckable(true);
-  connect(duplicates_only_action, SIGNAL(toggled(bool)), library_view_->filter(), SLOT(SetDuplicatesOnly(bool)));
+  QActionGroup* library_view_group = new QActionGroup(this);
+
+  library_show_all_ = library_view_group->addAction(tr("Show all songs"));
+  library_show_duplicates_ = library_view_group->addAction(tr("Show only duplicates"));
+  library_show_untagged_ = library_view_group->addAction(tr("Show only untagged"));
+
+  library_show_all_->setCheckable(true);
+  library_show_duplicates_->setCheckable(true);
+  library_show_untagged_->setCheckable(true);
+  library_show_all_->setChecked(true);
+
+  connect(library_view_group, SIGNAL(triggered(QAction*)), SLOT(ChangeLibraryQueryMode(QAction*)));
 
   QAction* library_config_action = new QAction(
       IconLoader::Load("configure"), tr("Configure library..."), this);
@@ -432,7 +441,9 @@ MainWindow::MainWindow(
   QAction* separator = new QAction(this);
   separator->setSeparator(true);
 
-  library_view_->filter()->AddMenuAction(duplicates_only_action);
+  library_view_->filter()->AddMenuAction(library_show_all_);
+  library_view_->filter()->AddMenuAction(library_show_duplicates_);
+  library_view_->filter()->AddMenuAction(library_show_untagged_);
   library_view_->filter()->AddMenuAction(separator);
   library_view_->filter()->AddMenuAction(library_config_action);
 
@@ -1560,6 +1571,16 @@ void MainWindow::PlaylistCopyToDevice() {
   else {
     QMessageBox::warning(this, tr("Error"),
         tr("None of the selected songs were suitable for copying to a device"));
+  }
+}
+
+void MainWindow::ChangeLibraryQueryMode(QAction* action) {
+  if(action == library_show_duplicates_) {
+    library_view_->filter()->SetQueryMode(QueryOptions::QueryMode_Duplicates);
+  } else if (action == library_show_untagged_) {
+    library_view_->filter()->SetQueryMode(QueryOptions::QueryMode_Untagged);
+  } else {
+    library_view_->filter()->SetQueryMode(QueryOptions::QueryMode_All);
   }
 }
 

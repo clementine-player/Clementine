@@ -26,6 +26,7 @@
 
 class GroupByDialog;
 class LineEditInterface;
+class QueryOptions;
 class SettingsDialog;
 class Ui_LibraryFilterWidget;
 
@@ -52,7 +53,7 @@ class LibraryFilterWidget : public QWidget {
   void SetLibraryModel(LibraryModel* model);
 
  public slots:
-  void SetDuplicatesOnly(bool duplicates_only);
+  void SetQueryMode(QueryOptions::QueryMode view);
 
  signals:
   void UpPressed();

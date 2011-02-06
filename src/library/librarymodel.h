@@ -138,7 +138,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
  public slots:
   void SetFilterAge(int age);
   void SetFilterText(const QString& text);
-  void SetFilterDuplicatesOnly(bool duplicates_only);
+  void SetFilterQueryMode(QueryOptions::QueryMode query_mode);
 
   void SetGroupBy(const LibraryModel::Grouping& g);
   void Init();
