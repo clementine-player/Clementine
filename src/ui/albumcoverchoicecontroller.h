@@ -100,6 +100,9 @@ class AlbumCoverChoiceController : public QWidget {
   QString SaveCoverInCache(const QString& artist, const QString& album, const QImage& image);
 
 private:
+  QString GetInitialPathForFileDialog(const Song& song,
+                                      const QString& filename);
+
   static const char* kLoadImageFileFilter;
   static const char* kSaveImageFileFilter;
   static const char* kAllFilesFilter;

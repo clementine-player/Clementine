@@ -85,20 +85,8 @@ void AlbumCoverChoiceController::SetLibrary(LibraryBackend* library) {
 }
 
 QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
-  QString dir;
-
-  if (!song->art_automatic().isEmpty() && !song->has_embedded_cover()) {
-    dir = song->art_automatic();
-  } else if (!song->filename().isEmpty() && song->filename().contains('/')) {
-    // we get rid of the filename because it's extension is screwing with the dialog's
-    // filters
-    dir = song->filename().section('/', 0, -2);
-  } else {
-    dir = "";
-  }
-
   QString cover = QFileDialog::getOpenFileName(
-      this, tr("Choose manual cover"), dir,
+      this, tr("Choose manual cover"), GetInitialPathForFileDialog(*song, QString()),
       tr(kLoadImageFileFilter) + ";;" + tr(kAllFilesFilter));
 
   if (cover.isNull())
@@ -116,25 +104,16 @@ QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
 }
 
 void AlbumCoverChoiceController::SaveCoverToFile(const Song& song, const QImage& image) {
-  if (!save_file_dialog_) {
-    save_file_dialog_ = new QFileDialog(
-        this,
-        tr("Save Album Cover"),
-        QDir::home().absolutePath(),
-        tr(kSaveImageFileFilter) + ";;" + tr(kAllFilesFilter));
-    save_file_dialog_->setAcceptMode(QFileDialog::AcceptSave);
-  }
+  QString initial_file_name = "/" + (song.album().isEmpty()
+                                         ? tr("Unknown")
+                                         : song.album()) + ".jpg";
 
-  QString initial_file_name = (song.album().isEmpty()
-                                  ? tr("Unknown")
-                                  : song.album()) + ".jpg";
-  save_file_dialog_->selectFile(initial_file_name);
+  QString save_filename = QFileDialog::getSaveFileName(
+      this, tr("Save album cover"), GetInitialPathForFileDialog(song, initial_file_name),
+      tr(kSaveImageFileFilter) + ";;" + tr(kAllFilesFilter));
 
-  if (!save_file_dialog_->exec()) {
+  if(save_filename.isNull())
     return;
-  }
-
-  QString save_filename = save_file_dialog_->selectedFiles()[0];
 
   QString extension = save_filename.right(4);
   if (!extension.startsWith('.') ||
@@ -143,6 +122,24 @@ void AlbumCoverChoiceController::SaveCoverToFile(const Song& song, const QImage&
   }
 
   image.save(save_filename);
+}
+
+QString AlbumCoverChoiceController::GetInitialPathForFileDialog(const Song& song,
+                                                                const QString& filename) {
+  // art automatic is first to show user which cover the album may be
+  // using now; the song is using it if there's no manual path but we
+  // cannot use manual path here because it can contain cached paths
+  if (!song.art_automatic().isEmpty() && !song.has_embedded_cover()) {
+    return song.art_automatic();
+
+  // if no automatic art, start in the song's folder
+  } else if (!song.filename().isEmpty() && song.filename().contains('/')) {
+    return song.filename().section('/', 0, -2) + filename;
+
+  // fallback - start in home
+  } else {
+    return QDir::home().absolutePath() + filename;
+  }
 }
 
 QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
