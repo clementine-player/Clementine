@@ -34,10 +34,13 @@
 
 #include <QPainter>
 #include <QContextMenuEvent>
+#include <QHelpEvent>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QSettings>
+#include <QToolTip>
+#include <QWhatsThis>
 
 using smart_playlists::Wizard;
 
@@ -78,6 +81,50 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
   } else {
     QStyledItemDelegate::paint(painter, opt, index);
   }
+}
+
+bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
+                                     const QStyleOptionViewItem &option,
+                                     const QModelIndex &index) {
+  Q_UNUSED(option);
+
+  if (!event || !view)
+    return false;
+
+  QHelpEvent *he = static_cast<QHelpEvent*>(event);
+  QString text = displayText(index.data(), QLocale::system());
+
+  if (text.isEmpty() || !he)
+    return false;
+
+  switch (event->type()) {
+    case QEvent::ToolTip: {
+      QRect displayed_text;
+      QSize real_text;
+      bool is_elided = false;
+
+      real_text = sizeHint(option, index);
+      displayed_text = view->visualRect(index);
+      is_elided = displayed_text.width() < real_text.width();
+      if(is_elided) {
+        QToolTip::showText(he->globalPos(), text, view);
+      } else { // in case that another text was previously displayed
+        QToolTip::hideText();
+      }
+      return true;
+    }
+
+    case QEvent::QueryWhatsThis:
+      return true;
+
+    case QEvent::WhatsThis:
+      QWhatsThis::showText(he->globalPos(), text, view);
+      return true;
+
+    default:
+      break;
+  }
+  return false;
 }
 
 LibraryView::LibraryView(QWidget* parent)

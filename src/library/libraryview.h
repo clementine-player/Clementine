@@ -37,9 +37,14 @@ class QMimeData;
 namespace smart_playlists { class Wizard; }
 
 class LibraryItemDelegate : public QStyledItemDelegate {
+  Q_OBJECT
  public:
   LibraryItemDelegate(QObject* parent);
   void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+
+ public slots:
+  bool helpEvent(QHelpEvent *event, QAbstractItemView *view,
+                 const QStyleOptionViewItem &option, const QModelIndex &index);
 };
 
 class LibraryView : public AutoExpandingTreeView {
