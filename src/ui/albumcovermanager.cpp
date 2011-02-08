@@ -287,6 +287,7 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     item->setData(Role_FirstFilename, info.first_filename);
     item->setData(Qt::TextAlignmentRole, QVariant(Qt::AlignTop | Qt::AlignHCenter));
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled);
+    item->setToolTip(info.artist + " - " + info.album_name);
 
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
       quint64 id = cover_loader_->Worker()->LoadImageAsync(
