@@ -90,8 +90,8 @@ void SavedRadio::ShowContextMenu(const QModelIndex& index,
                                  const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
-    add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-    load_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
+    add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
+    load_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
     remove_action_ = context_menu_->addAction(IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
     edit_action_ = context_menu_->addAction(IconLoader::Load("edit-rename"), tr("Edit..."), this, SLOT(Edit()));
     context_menu_->addSeparator();

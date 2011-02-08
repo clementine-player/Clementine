@@ -28,10 +28,10 @@ FileViewList::FileViewList(QWidget* parent)
     : QListView(parent),
       menu_(new QMenu(this))
 {
-  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Load"),
-                   this, SLOT(LoadSlot()));
-  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Add to playlist"),
+  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Append to current playlist"),
                    this, SLOT(AddToPlaylistSlot()));
+  menu_->addAction(IconLoader::Load("media-playback-start"), tr("Replace current playlist"),
+                   this, SLOT(LoadSlot()));
   menu_->addSeparator();
   menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."),
                    this, SLOT(CopyToLibrarySlot()));

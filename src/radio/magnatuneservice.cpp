@@ -249,9 +249,9 @@ void MagnatuneService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   add_to_playlist_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_to_playlist_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
   download_ = context_menu_->addAction(
       IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
   context_menu_->addSeparator();

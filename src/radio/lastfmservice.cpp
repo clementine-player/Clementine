@@ -75,9 +75,9 @@ LastFMService::LastFMService(RadioModel* parent)
   ReloadSettings();
 
   play_action_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_action_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
   remove_action_ = context_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
   context_menu_->addSeparator();

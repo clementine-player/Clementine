@@ -283,9 +283,9 @@ void IcecastService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   add_to_playlist_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_to_playlist_ = context_menu_->addAction(
-      IconLoader::Load("media-playback-start"), tr("Load"), this, SLOT(LoadToPlaylist()));
+      IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download"), tr("Open dir.xiph.org in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh station list"), this, SLOT(LoadDirectory()));

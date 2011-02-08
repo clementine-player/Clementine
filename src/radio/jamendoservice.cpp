@@ -379,9 +379,9 @@ void JamendoService::EnsureMenuCreated() {
 
   context_menu_ = new QMenu;
   add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+      tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Load"), this, SLOT(LoadToPlaylist()));
+      tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
   album_info_ = context_menu_->addAction(IconLoader::Load("view-media-lyrics"),
       tr("Album info on jamendo.com..."), this, SLOT(AlbumInfo()));
   download_album_ = context_menu_->addAction(IconLoader::Load("download"),

@@ -232,12 +232,14 @@ void LibraryView::mouseReleaseEvent(QMouseEvent* e) {
 void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   if(!context_menu_) {
     context_menu_ = new QMenu(this);
-    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Load"), this, SLOT(Load()));
     add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Add to playlist"), this, SLOT(AddToPlaylist()));
-    add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Enqueue to playlist"), this, SLOT(AddToPlaylistEnqueue()));
+        tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
+    load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Replace current playlist"), this, SLOT(Load()));
+
+    context_menu_->addSeparator();
+    add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("go-next"),
+        tr("Add to the queue"), this, SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),

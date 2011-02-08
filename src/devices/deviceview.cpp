@@ -210,10 +210,10 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
         IconLoader::Load("configure"), tr("Device properties..."), this, SLOT(Properties()));
 
     // Library menu
-    load_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Load"), this, SLOT(Load()));
     add_to_playlist_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
-        tr("Add to playlist"), this, SLOT(AddToPlaylist()));
+        tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
+    load_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Replace current playlist"), this, SLOT(Load()));
     library_menu_->addSeparator();
     organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy"),
         tr("Copy to library..."), this, SLOT(Organise()));
