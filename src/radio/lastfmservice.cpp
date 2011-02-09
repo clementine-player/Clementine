@@ -78,6 +78,9 @@ LastFMService::LastFMService(RadioModel* parent)
       IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_action_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
+  open_in_new_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
+      tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
+  context_menu_->addSeparator();
   remove_action_ = context_menu_->addAction(
       IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
   context_menu_->addSeparator();
@@ -469,6 +472,7 @@ void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &glob
   const bool playable = model()->IsPlayable(index);
   play_action_->setEnabled(playable);
   load_action_->setEnabled(playable);
+  open_in_new_playlist_->setEnabled(playable);
   context_menu_->popup(global_pos);
 }
 
@@ -560,6 +564,10 @@ void LastFMService::AddToPlaylist() {
 
 void LastFMService::LoadToPlaylist() {
   AddItemToPlaylist(context_item_->index(), true);
+}
+
+void LastFMService::OpenInNewPlaylist() {
+  AddItemToPlaylist(context_item_->index(), false, false, true);
 }
 
 void LastFMService::AddArtistRadio() {

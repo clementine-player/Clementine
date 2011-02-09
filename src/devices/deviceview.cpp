@@ -214,6 +214,8 @@ void DeviceView::contextMenuEvent(QContextMenuEvent* e) {
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
     load_action_ = library_menu_->addAction(IconLoader::Load("media-playback-start"),
         tr("Replace current playlist"), this, SLOT(Load()));
+    open_in_new_playlist_ = library_menu_->addAction(IconLoader::Load("document-new"),
+        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
     library_menu_->addSeparator();
     organise_action_ = library_menu_->addAction(IconLoader::Load("edit-copy"),
         tr("Copy to library..."), this, SLOT(Organise()));
@@ -363,6 +365,14 @@ void DeviceView::Load() {
 
 void DeviceView::AddToPlaylist() {
   emit AddToPlaylistSignal(model()->mimeData(selectedIndexes()));
+}
+
+void DeviceView::OpenInNewPlaylist() {
+  QMimeData* data = model()->mimeData(selectedIndexes());
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->new_playlist_ = true;
+  }
+  emit AddToPlaylistSignal(data);
 }
 
 void DeviceView::Delete() {

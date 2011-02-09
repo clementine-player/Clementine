@@ -65,6 +65,7 @@ private slots:
   // Library menu actions
   void Load();
   void AddToPlaylist();
+  void OpenInNewPlaylist();
   void Organise();
   void Delete();
 
@@ -99,6 +100,7 @@ private:
   QMenu* library_menu_;
   QAction* load_action_;
   QAction* add_to_playlist_action_;
+  QAction* open_in_new_playlist_;
   QAction* organise_action_;
   QAction* delete_action_;
 

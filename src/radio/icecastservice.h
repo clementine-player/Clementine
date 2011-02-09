@@ -57,6 +57,7 @@ class IcecastService : public RadioService {
   void Homepage();
   void AddToPlaylist();
   void LoadToPlaylist();
+  void OpenInNewPlaylist();
 
  private:
   void EnsureMenuCreated();
@@ -69,6 +70,7 @@ class IcecastService : public RadioService {
   QModelIndex context_item_;
   QAction* add_to_playlist_;
   QAction* load_to_playlist_;
+  QAction* open_in_new_playlist_;
 
   IcecastBackend* backend_;
   IcecastModel* model_;

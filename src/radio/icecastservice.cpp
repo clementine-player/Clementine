@@ -273,6 +273,7 @@ void IcecastService::ShowContextMenu(const QModelIndex& index,
 
   add_to_playlist_->setEnabled(can_play);
   load_to_playlist_->setEnabled(can_play);
+  open_in_new_playlist_->setEnabled(can_play);
   context_menu_->popup(global_pos);
 }
 
@@ -286,6 +287,8 @@ void IcecastService::EnsureMenuCreated() {
       IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_to_playlist_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
+  open_in_new_playlist_ = context_menu_->addAction(
+      IconLoader::Load("document-new"), tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("download"), tr("Open dir.xiph.org in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh station list"), this, SLOT(LoadDirectory()));
@@ -301,4 +304,8 @@ void IcecastService::AddToPlaylist() {
 
 void IcecastService::LoadToPlaylist() {
   AddItemToPlaylist(context_item_, true);
+}
+
+void IcecastService::OpenInNewPlaylist() {
+  AddItemToPlaylist(context_item_, false, false, true);
 }

@@ -93,6 +93,7 @@ class JamendoService : public RadioService {
 
   void AddToPlaylist();
   void LoadToPlaylist();
+  void OpenInNewPlaylist();
   void AlbumInfo();
   void DownloadAlbum();
   void Homepage();
@@ -105,6 +106,7 @@ class JamendoService : public RadioService {
 
   QAction* add_to_playlist_;
   QAction* load_to_playlist_;
+  QAction* open_in_new_playlist_;
   QAction* album_info_;
   QAction* download_album_;
 

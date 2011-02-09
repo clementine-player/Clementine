@@ -35,6 +35,6 @@ signals:
   void AddToPlaylistSignal(QMimeData* data);
 
 protected:
-  void AddItemToPlaylist(const QModelIndex& index, bool clear = false, bool enqueue = false);
-  void AddItemsToPlaylist(const QModelIndexList& indexes, bool clear = false, bool enqueue = false);
+  void AddItemToPlaylist(const QModelIndex& index, bool clear = false, bool enqueue = false, bool start_new = false);
+  void AddItemsToPlaylist(const QModelIndexList& indexes, bool clear = false, bool enqueue = false, bool start_new = false);
 };

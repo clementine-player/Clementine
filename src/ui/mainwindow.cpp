@@ -982,6 +982,10 @@ void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b, MimeData* data) c
     data->clear_first_ = true;
     data->enqueue_now_ = false;
     break;
+
+  case AddBehaviour_OpenInNew:
+    data->new_playlist_ = true;
+    break;
   }
 }
 
@@ -1012,6 +1016,11 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
       ApplyPlayBehaviour(doubleclick_playmode_, mime_data);
     } else {
       ApplyPlayBehaviour(menu_playmode_, mime_data);
+    }
+
+    // Should we create a new playlist for the songs?
+    if(mime_data->new_playlist_) {
+      playlists_->New(tr("Playlist"));
     }
   }
 

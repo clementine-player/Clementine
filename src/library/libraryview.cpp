@@ -236,6 +236,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
         tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
     load_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
         tr("Replace current playlist"), this, SLOT(Load()));
+    open_in_new_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
+        tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
 
     context_menu_->addSeparator();
     add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("go-next"),
@@ -301,6 +303,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   
   load_->setEnabled(enable_add);
   add_to_playlist_->setEnabled(enable_add);
+  open_in_new_playlist_->setEnabled(enable_add);
   edit_tracks_->setVisible(many_songs);
   edit_track_->setVisible(!many_songs);
   edit_tracks_->setEnabled(enable_add);
@@ -364,6 +367,14 @@ void LibraryView::AddToPlaylistEnqueue() {
   QMimeData* data = model()->mimeData(selectedIndexes());
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
     mime_data->enqueue_now_ = true;
+  }
+  emit AddToPlaylistSignal(data);
+}
+
+void LibraryView::OpenInNewPlaylist() {
+  QMimeData* data = model()->mimeData(selectedIndexes());
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    mime_data->new_playlist_ = true;
   }
   emit AddToPlaylistSignal(data);
 }

@@ -65,9 +65,11 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     if not self.menu:
       self.menu = QMenu()
       self.menu.addAction(clementine.IconLoader.Load("media-playback-start"),
-        self.tr("Add to playlist"), self.AddToPlaylist)
+        self.tr("Append to current playlist"), self.AddToPlaylist)
       self.menu.addAction(clementine.IconLoader.Load("media-playback-start"),
-        self.tr("Load"), self.LoadToPlaylist)
+        self.tr("Replace current playlist"), self.LoadToPlaylist)
+      self.menu.addAction(clementine.IconLoader.Load("document-new"),
+        self.tr("Open in new playlist"), self.OpenInNewPlaylist)
 
       self.menu.addSeparator()
 
@@ -89,6 +91,9 @@ class DigitallyImportedServiceBase(clementine.RadioService):
 
   def LoadToPlaylist(self):
     self.AddItemToPlaylist(self.context_index, True)
+
+  def OpenInNewPlaylist(self):
+    self.AddItemToPlaylist(self.context_index, False, False, True)
 
   def Homepage(self):
     QDesktopServices.openUrl(self.HOMEPAGE_URL)

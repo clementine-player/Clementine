@@ -159,7 +159,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 
   ui_->doubleclick_addmode->setItemData(0, MainWindow::AddBehaviour_Append);
   ui_->doubleclick_addmode->setItemData(1, MainWindow::AddBehaviour_Load);
-  ui_->doubleclick_addmode->setItemData(2, MainWindow::AddBehaviour_Enqueue);
+  ui_->doubleclick_addmode->setItemData(2, MainWindow::AddBehaviour_OpenInNew);
+  ui_->doubleclick_addmode->setItemData(3, MainWindow::AddBehaviour_Enqueue);
 
   ui_->doubleclick_playmode->setItemData(0, MainWindow::PlayBehaviour_Never);
   ui_->doubleclick_playmode->setItemData(1, MainWindow::PlayBehaviour_IfStopped);

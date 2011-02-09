@@ -95,6 +95,7 @@ class MagnatuneService : public RadioService {
 
   void AddToPlaylist();
   void LoadToPlaylist();
+  void OpenInNewPlaylist();
   void Download();
   void Homepage();
   void ShowConfig();
@@ -111,6 +112,7 @@ class MagnatuneService : public RadioService {
 
   QAction* add_to_playlist_;
   QAction* load_to_playlist_;
+  QAction* open_in_new_playlist_;
   QAction* download_;
 
   LibraryBackend* library_backend_;

@@ -92,6 +92,7 @@ class LibraryView : public AutoExpandingTreeView {
   void Load();
   void AddToPlaylist();
   void AddToPlaylistEnqueue();
+  void OpenInNewPlaylist();
   void Organise();
   void CopyToDevice();
   void Delete();
@@ -128,6 +129,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* load_;
   QAction* add_to_playlist_;
   QAction* add_to_playlist_enqueue_;
+  QAction* open_in_new_playlist_;
   QAction* organise_;
   QAction* copy_to_device_;
   QAction* delete_;

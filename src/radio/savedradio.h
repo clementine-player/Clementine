@@ -53,6 +53,7 @@ class SavedRadio : public RadioService {
  private slots:
   void AddToPlaylist();
   void LoadToPlaylist();
+  void OpenInNewPlaylist();
   void Remove();
   void Edit();
 
@@ -79,6 +80,7 @@ class SavedRadio : public RadioService {
 
   QAction* add_action_;
   QAction* load_action_;
+  QAction* open_in_new_playlist_;
   QAction* remove_action_;
   QAction* edit_action_;
 

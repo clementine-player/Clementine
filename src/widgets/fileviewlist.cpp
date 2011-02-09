@@ -32,6 +32,8 @@ FileViewList::FileViewList(QWidget* parent)
                    this, SLOT(AddToPlaylistSlot()));
   menu_->addAction(IconLoader::Load("media-playback-start"), tr("Replace current playlist"),
                    this, SLOT(LoadSlot()));
+  menu_->addAction(IconLoader::Load("document-new"), tr("Open in new playlist"),
+                   this, SLOT(OpenInNewPlaylistSlot()));
   menu_->addSeparator();
   menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."),
                    this, SLOT(CopyToLibrarySlot()));
@@ -84,6 +86,12 @@ void FileViewList::LoadSlot() {
 
 void FileViewList::AddToPlaylistSlot() {
   emit AddToPlaylist(MimeDataFromSelection());
+}
+
+void FileViewList::OpenInNewPlaylistSlot() {
+  MimeData* data = MimeDataFromSelection();
+  data->new_playlist_ = true;
+  emit AddToPlaylist(data);
 }
 
 void FileViewList::CopyToLibrarySlot() {

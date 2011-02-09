@@ -252,6 +252,9 @@ void MagnatuneService::EnsureMenuCreated() {
       IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
   load_to_playlist_ = context_menu_->addAction(
       IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
+  open_in_new_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
+      tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
+  context_menu_->addSeparator();
   download_ = context_menu_->addAction(
       IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
   context_menu_->addSeparator();
@@ -277,6 +280,7 @@ void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& g
 
   add_to_playlist_->setEnabled(context_item_.isValid());
   load_to_playlist_->setEnabled(context_item_.isValid());
+  open_in_new_playlist_->setEnabled(context_item_.isValid());
   download_->setEnabled(context_item_.isValid() && membership_ == Membership_Download);
   context_menu_->popup(global_pos);
 }
@@ -287,6 +291,10 @@ void MagnatuneService::AddToPlaylist() {
 
 void MagnatuneService::LoadToPlaylist() {
   AddItemToPlaylist(context_item_, true);
+}
+
+void MagnatuneService::OpenInNewPlaylist() {
+  AddItemToPlaylist(context_item_, false, false, true);
 }
 
 void MagnatuneService::Homepage() {

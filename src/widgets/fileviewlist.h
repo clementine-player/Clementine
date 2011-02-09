@@ -42,6 +42,7 @@ class FileViewList : public QListView {
  private slots:
   void LoadSlot();
   void AddToPlaylistSlot();
+  void OpenInNewPlaylistSlot();
   void CopyToLibrarySlot();
   void MoveToLibrarySlot();
   void CopyToDeviceSlot();

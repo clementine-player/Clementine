@@ -107,6 +107,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
     AddBehaviour_Append = 1,
     AddBehaviour_Enqueue = 2,
     AddBehaviour_Load = 3,
+    AddBehaviour_OpenInNew = 4
   };
 
   // Don't change the values

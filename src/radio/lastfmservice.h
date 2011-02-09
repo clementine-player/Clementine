@@ -126,6 +126,7 @@ class LastFMService : public RadioService {
 
   void AddToPlaylist();
   void LoadToPlaylist();
+  void OpenInNewPlaylist();
   void AddArtistRadio();
   void AddTagRadio();
   void AddCustomRadio();
@@ -173,6 +174,7 @@ class LastFMService : public RadioService {
   boost::scoped_ptr<QMenu> context_menu_;
   QAction* play_action_;
   QAction* load_action_;
+  QAction* open_in_new_playlist_;
   QAction* remove_action_;
   QAction* add_artist_action_;
   QAction* add_tag_action_;

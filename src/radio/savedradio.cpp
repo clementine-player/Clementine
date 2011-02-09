@@ -92,6 +92,8 @@ void SavedRadio::ShowContextMenu(const QModelIndex& index,
     context_menu_ = new QMenu;
     add_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
     load_action_ = context_menu_->addAction(IconLoader::Load("media-playback-start"), tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
+    open_in_new_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"), tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
+    context_menu_->addSeparator();
     remove_action_ = context_menu_->addAction(IconLoader::Load("list-remove"), tr("Remove"), this, SLOT(Remove()));
     edit_action_ = context_menu_->addAction(IconLoader::Load("edit-rename"), tr("Edit..."), this, SLOT(Edit()));
     context_menu_->addSeparator();
@@ -103,6 +105,7 @@ void SavedRadio::ShowContextMenu(const QModelIndex& index,
 
   add_action_->setEnabled(!is_root);
   load_action_->setEnabled(!is_root);
+  open_in_new_playlist_->setEnabled(!is_root);
   remove_action_->setEnabled(!is_root);
   edit_action_->setEnabled(!is_root);
 
@@ -143,6 +146,10 @@ void SavedRadio::AddToPlaylist() {
 
 void SavedRadio::LoadToPlaylist() {
   AddItemToPlaylist(context_item_->index(), true);
+}
+
+void SavedRadio::OpenInNewPlaylist() {
+  AddItemToPlaylist(context_item_->index(), false, false, true);
 }
 
 void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {
