@@ -173,8 +173,7 @@ void PlaylistTabBar::TabMoved() {
 void PlaylistTabBar::dragEnterEvent(QDragEnterEvent* e) {
   if (e->mimeData()->hasUrls() ||
       e->mimeData()->hasFormat(Playlist::kRowsMimetype) ||
-      qobject_cast<const SongMimeData*>(e->mimeData()) ||
-      qobject_cast<const RadioMimeData*>(e->mimeData())) {
+      qobject_cast<const MimeData*>(e->mimeData())) {
     e->acceptProposedAction();
   }
 }
@@ -182,16 +181,14 @@ void PlaylistTabBar::dragEnterEvent(QDragEnterEvent* e) {
 void PlaylistTabBar::dragMoveEvent(QDragMoveEvent* e) {
   drag_hover_tab_ = tabAt(e->pos());
 
-  if (drag_hover_tab_ == -1) {
-    e->setDropAction(Qt::IgnoreAction);
-    e->ignore();
-    drag_hover_timer_.stop();
-  } else {
+  if (drag_hover_tab_ != -1) {
     e->setDropAction(Qt::CopyAction);
     e->accept(tabRect(drag_hover_tab_));
 
     if (!drag_hover_timer_.isActive())
       drag_hover_timer_.start(kDragHoverTimeout, this);
+  } else {
+    drag_hover_timer_.stop();
   }
 }
 
@@ -211,10 +208,10 @@ void PlaylistTabBar::timerEvent(QTimerEvent* e) {
 
 void PlaylistTabBar::dropEvent(QDropEvent* e) {
   if (drag_hover_tab_ == -1) {
-    e->ignore();
-    return;
+    manager_->New(tr("Playlist"));
+  } else {
+    setCurrentIndex(drag_hover_tab_);
   }
 
-  setCurrentIndex(drag_hover_tab_);
   manager_->current()->dropMimeData(e->mimeData(), e->proposedAction(), -1, 0, QModelIndex());
 }
