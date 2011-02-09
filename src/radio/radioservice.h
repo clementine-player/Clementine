@@ -66,8 +66,20 @@ signals:
   void AddToPlaylistSignal(QMimeData* data);
 
 protected:
-  void AddItemToPlaylist(const QModelIndex& index, bool clear = false, bool enqueue = false, bool start_new = false);
-  void AddItemsToPlaylist(const QModelIndexList& indexes, bool clear = false, bool enqueue = false, bool start_new = false);
+  // Describes how songs should be added to playlist.
+  enum AddMode {
+    // appends songs to the current playlist
+    AddMode_Append,
+    // clears the current playlist and then appends all songs to it
+    AddMode_Replace,
+    // creates a new, empty playlist and then adds all songs to it
+    AddMode_OpenInNew
+  };
+
+  // Adds the 'index' element to playlist using the 'add_mode' mode.
+  void AddItemToPlaylist(const QModelIndex& index, AddMode add_mode);
+  // Adds the 'indexes' elements to playlist using the 'add_mode' mode.
+  void AddItemsToPlaylist(const QModelIndexList& indexes, AddMode add_mode);
 
 private:
   RadioModel* model_;

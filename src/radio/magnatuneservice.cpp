@@ -286,15 +286,15 @@ void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& g
 }
 
 void MagnatuneService::AddToPlaylist() {
-  AddItemToPlaylist(context_item_, false);
+  AddItemToPlaylist(context_item_, AddMode_Append);
 }
 
 void MagnatuneService::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_, true);
+  AddItemToPlaylist(context_item_, AddMode_Replace);
 }
 
 void MagnatuneService::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_, false, false, true);
+  AddItemToPlaylist(context_item_, AddMode_OpenInNew);
 }
 
 void MagnatuneService::Homepage() {

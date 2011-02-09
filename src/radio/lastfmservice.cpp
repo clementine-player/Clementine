@@ -559,15 +559,15 @@ void LastFMService::RefreshNeighboursFinished() {
 }
 
 void LastFMService::AddToPlaylist() {
-  AddItemToPlaylist(context_item_->index(), false);
+  AddItemToPlaylist(context_item_->index(), AddMode_Append);
 }
 
 void LastFMService::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_->index(), true);
+  AddItemToPlaylist(context_item_->index(), AddMode_Replace);
 }
 
 void LastFMService::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_->index(), false, false, true);
+  AddItemToPlaylist(context_item_->index(), AddMode_OpenInNew);
 }
 
 void LastFMService::AddArtistRadio() {
@@ -612,7 +612,7 @@ void LastFMService::AddArtistOrTag(const QString& name,
   item->setData(title_pattern.arg(content), RadioModel::Role_Title);
   item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
   list->appendRow(item);
-  emit AddItemToPlaylist(item->index(), false);
+  emit AddItemToPlaylist(item->index(), AddMode_Append);
 
   SaveList(name, list);
 }

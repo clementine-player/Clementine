@@ -141,15 +141,15 @@ void SavedRadio::Edit() {
 }
 
 void SavedRadio::AddToPlaylist() {
-  AddItemToPlaylist(context_item_->index(), false);
+  AddItemToPlaylist(context_item_->index(), AddMode_Append);
 }
 
 void SavedRadio::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_->index(), true);
+  AddItemToPlaylist(context_item_->index(), AddMode_Replace);
 }
 
 void SavedRadio::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_->index(), false, false, true);
+  AddItemToPlaylist(context_item_->index(), AddMode_OpenInNew);
 }
 
 void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {

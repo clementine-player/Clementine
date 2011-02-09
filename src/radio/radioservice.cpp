@@ -36,17 +36,16 @@ PlaylistItem::SpecialLoadResult RadioService::LoadNext(const QUrl&) {
   return PlaylistItem::SpecialLoadResult();
 }
 
-void RadioService::AddItemToPlaylist(const QModelIndex& index, bool clear, bool enqueue, bool start_new) {
-  AddItemsToPlaylist(QModelIndexList() << index, clear, enqueue, start_new);
+void RadioService::AddItemToPlaylist(const QModelIndex& index, AddMode add_mode) {
+  AddItemsToPlaylist(QModelIndexList() << index, add_mode);
 }
 
-void RadioService::AddItemsToPlaylist(const QModelIndexList& indexes, bool clear, bool enqueue, bool start_new) {
+void RadioService::AddItemsToPlaylist(const QModelIndexList& indexes, AddMode add_mode) {
   QMimeData* data = model()->merged_model()->mimeData(
         model()->merged_model()->mapFromSource(indexes));
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->clear_first_ = clear;
-    mime_data->enqueue_now_ = enqueue;
-    mime_data->new_playlist_ = start_new;
+    mime_data->clear_first_ = add_mode == AddMode_Replace;
+    mime_data->new_playlist_ = add_mode == AddMode_OpenInNew;
   }
   emit AddToPlaylistSignal(data);
 }

@@ -35,6 +35,12 @@ signals:
   void AddToPlaylistSignal(QMimeData* data);
 
 protected:
-  void AddItemToPlaylist(const QModelIndex& index, bool clear = false, bool enqueue = false, bool start_new = false);
-  void AddItemsToPlaylist(const QModelIndexList& indexes, bool clear = false, bool enqueue = false, bool start_new = false);
+  enum AddMode {
+    AddMode_Append,
+    AddMode_Replace,
+    AddMode_OpenInNew
+  };
+
+  void AddItemToPlaylist(const QModelIndex& index, AddMode add_mode);
+  void AddItemsToPlaylist(const QModelIndexList& indexes, AddMode add_mode);
 };

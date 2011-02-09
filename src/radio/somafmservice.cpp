@@ -214,15 +214,15 @@ void SomaFMService::Homepage() {
 }
 
 void SomaFMService::AddToPlaylist() {
-  AddItemToPlaylist(context_item_->index(), false);
+  AddItemToPlaylist(context_item_->index(), AddMode_Append);
 }
 
 void SomaFMService::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_->index(), true);
+  AddItemToPlaylist(context_item_->index(), AddMode_Replace);
 }
 
 void SomaFMService::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_->index(), false, false, true);
+  AddItemToPlaylist(context_item_->index(), AddMode_OpenInNew);
 }
 
 PlaylistItem::Options SomaFMService::playlistitem_options() const {

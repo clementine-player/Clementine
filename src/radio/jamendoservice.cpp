@@ -423,15 +423,15 @@ QWidget* JamendoService::HeaderWidget() const {
 }
 
 void JamendoService::AddToPlaylist() {
-  AddItemToPlaylist(context_item_, false);
+  AddItemToPlaylist(context_item_, AddMode_Append);
 }
 
 void JamendoService::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_, true);
+  AddItemToPlaylist(context_item_, AddMode_Replace);
 }
 
 void JamendoService::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_, false, false, true);
+  AddItemToPlaylist(context_item_, AddMode_OpenInNew);
 }
 
 void JamendoService::AlbumInfo() {

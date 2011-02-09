@@ -299,13 +299,13 @@ void IcecastService::Homepage() {
 }
 
 void IcecastService::AddToPlaylist() {
-  AddItemToPlaylist(context_item_, false);
+  AddItemToPlaylist(context_item_, AddMode_Append);
 }
 
 void IcecastService::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_, true);
+  AddItemToPlaylist(context_item_, AddMode_Replace);
 }
 
 void IcecastService::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_, false, false, true);
+  AddItemToPlaylist(context_item_, AddMode_OpenInNew);
 }
