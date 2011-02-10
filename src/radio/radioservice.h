@@ -65,7 +65,26 @@ signals:
 
   void AddToPlaylistSignal(QMimeData* data);
 
+private slots:
+  void AppendToPlaylist();
+  void ReplacePlaylist();
+  void OpenInNewPlaylist();
+
 protected:
+  // Subclass provides the currently selected QModelIndex on RadioService's
+  // request.
+  virtual QModelIndex GetCurrentIndex() = 0;
+
+  // Returns all the playlist insertion related QActions (see below).
+  QList<QAction*> GetPlaylistActions();
+
+  // Returns the 'append to playlist' QAction.
+  QAction* GetAppendToPlaylistAction();
+  // Returns the 'replace playlist' QAction.
+  QAction* GetReplacePlaylistAction();
+  // Returns the 'open in new playlist' QAction.
+  QAction* GetOpenInNewPlaylistAction();
+
   // Describes how songs should be added to playlist.
   enum AddMode {
     // appends songs to the current playlist
@@ -84,6 +103,11 @@ protected:
 private:
   RadioModel* model_;
   QString name_;
+
+  QAction* append_to_playlist_;
+  QAction* replace_playlist_;
+  QAction* open_in_new_playlist_;
+  QAction* separator_;
 };
 
 Q_DECLARE_METATYPE(RadioService*);

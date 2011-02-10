@@ -378,13 +378,7 @@ void JamendoService::EnsureMenuCreated() {
     return;
 
   context_menu_ = new QMenu;
-  add_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Append to current playlist"), this, SLOT(AddToPlaylist()));
-  load_to_playlist_ = context_menu_->addAction(IconLoader::Load("media-playback-start"),
-      tr("Replace current playlist"), this, SLOT(LoadToPlaylist()));
-  open_in_new_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
-      tr("Open in new playlist"), this, SLOT(OpenInNewPlaylist()));
-  context_menu_->addSeparator();
+  context_menu_->addActions(GetPlaylistActions());
   album_info_ = context_menu_->addAction(IconLoader::Load("view-media-lyrics"),
       tr("Album info on jamendo.com..."), this, SLOT(AlbumInfo()));
   download_album_ = context_menu_->addAction(IconLoader::Load("download"),
@@ -409,9 +403,9 @@ void JamendoService::ShowContextMenu(const QModelIndex& index, const QPoint& glo
     context_item_ = QModelIndex();
   }
 
-  add_to_playlist_->setEnabled(context_item_.isValid());
-  load_to_playlist_->setEnabled(context_item_.isValid());
-  open_in_new_playlist_->setEnabled(context_item_.isValid());
+  GetAppendToPlaylistAction()->setEnabled(context_item_.isValid());
+  GetReplacePlaylistAction()->setEnabled(context_item_.isValid());
+  GetOpenInNewPlaylistAction()->setEnabled(context_item_.isValid());
   album_info_->setEnabled(context_item_.isValid());
   download_album_->setEnabled(context_item_.isValid());
   context_menu_->popup(global_pos);
@@ -422,16 +416,8 @@ QWidget* JamendoService::HeaderWidget() const {
   return library_filter_;
 }
 
-void JamendoService::AddToPlaylist() {
-  AddItemToPlaylist(context_item_, AddMode_Append);
-}
-
-void JamendoService::LoadToPlaylist() {
-  AddItemToPlaylist(context_item_, AddMode_Replace);
-}
-
-void JamendoService::OpenInNewPlaylist() {
-  AddItemToPlaylist(context_item_, AddMode_OpenInNew);
+QModelIndex JamendoService::GetCurrentIndex() {
+  return context_item_;
 }
 
 void JamendoService::AlbumInfo() {

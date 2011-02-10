@@ -116,6 +116,9 @@ class LastFMService : public RadioService {
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
 
+ protected:
+  QModelIndex GetCurrentIndex();
+
  private slots:
   void AuthenticateReplyFinished();
   void RefreshFriendsFinished();
@@ -124,9 +127,6 @@ class LastFMService : public RadioService {
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
 
-  void AddToPlaylist();
-  void LoadToPlaylist();
-  void OpenInNewPlaylist();
   void AddArtistRadio();
   void AddTagRadio();
   void AddCustomRadio();
@@ -172,9 +172,6 @@ class LastFMService : public RadioService {
   boost::scoped_ptr<LastFMStationDialog> station_dialog_;
 
   boost::scoped_ptr<QMenu> context_menu_;
-  QAction* play_action_;
-  QAction* load_action_;
-  QAction* open_in_new_playlist_;
   QAction* remove_action_;
   QAction* add_artist_action_;
   QAction* add_tag_action_;

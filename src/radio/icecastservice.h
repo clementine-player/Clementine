@@ -52,12 +52,12 @@ class IcecastService : public RadioService {
 
   QWidget* HeaderWidget() const;
 
+protected:
+  QModelIndex GetCurrentIndex();
+
  private slots:
   void LoadDirectory();
   void Homepage();
-  void AddToPlaylist();
-  void LoadToPlaylist();
-  void OpenInNewPlaylist();
 
  private:
   void EnsureMenuCreated();
@@ -68,9 +68,6 @@ class IcecastService : public RadioService {
   NetworkAccessManager* network_;
   QMenu* context_menu_;
   QModelIndex context_item_;
-  QAction* add_to_playlist_;
-  QAction* load_to_playlist_;
-  QAction* open_in_new_playlist_;
 
   IcecastBackend* backend_;
   IcecastModel* model_;

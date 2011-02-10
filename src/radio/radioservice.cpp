@@ -19,12 +19,61 @@
 #include "radiomodel.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
+#include "ui/iconloader.h"
+
+#include <QMenu>
 
 RadioService::RadioService(const QString& name, RadioModel* model)
   : QObject(model),
     model_(model),
-    name_(name)
+    name_(name),
+    append_to_playlist_(NULL),
+    replace_playlist_(NULL),
+    open_in_new_playlist_(NULL),
+    separator_(NULL)
 {
+}
+
+QList<QAction*> RadioService::GetPlaylistActions() {
+  if(!separator_) {
+    separator_ = new QAction(this);
+    separator_->setSeparator(true);
+  }
+
+  return QList<QAction*>() << GetAppendToPlaylistAction()
+                           << GetReplacePlaylistAction()
+                           << GetOpenInNewPlaylistAction()
+                           << separator_;
+}
+
+QAction* RadioService::GetAppendToPlaylistAction() {
+  if(!append_to_playlist_) {
+    append_to_playlist_ = new QAction(IconLoader::Load("media-playback-start"),
+                                      tr("Append to current playlist"), this);
+    connect(append_to_playlist_, SIGNAL(triggered()), this, SLOT(AppendToPlaylist()));
+  }
+
+  return append_to_playlist_;
+}
+
+QAction* RadioService::GetReplacePlaylistAction() {
+  if(!replace_playlist_) {
+    replace_playlist_ = new QAction(IconLoader::Load("media-playback-start"),
+                                    tr("Replace current playlist"), this);
+    connect(replace_playlist_, SIGNAL(triggered()), this, SLOT(ReplacePlaylist()));
+  }
+
+  return replace_playlist_;
+}
+
+QAction* RadioService::GetOpenInNewPlaylistAction() {
+  if(!open_in_new_playlist_) {
+    open_in_new_playlist_ = new QAction(IconLoader::Load("document-new"),
+                                        tr("Open in new playlist"), this);
+    connect(open_in_new_playlist_, SIGNAL(triggered()), this, SLOT(OpenInNewPlaylist()));
+  }
+
+  return open_in_new_playlist_;
 }
 
 PlaylistItem::SpecialLoadResult RadioService::StartLoading(const QUrl &url) {
@@ -48,4 +97,16 @@ void RadioService::AddItemsToPlaylist(const QModelIndexList& indexes, AddMode ad
     mime_data->new_playlist_ = add_mode == AddMode_OpenInNew;
   }
   emit AddToPlaylistSignal(data);
+}
+
+void RadioService::AppendToPlaylist() {
+  AddItemToPlaylist(GetCurrentIndex(), AddMode_Append);
+}
+
+void RadioService::ReplacePlaylist() {
+  AddItemToPlaylist(GetCurrentIndex(), AddMode_Replace);
+}
+
+void RadioService::OpenInNewPlaylist() {
+  AddItemToPlaylist(GetCurrentIndex(), AddMode_OpenInNew);
 }

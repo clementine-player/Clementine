@@ -88,14 +88,14 @@ class MagnatuneService : public RadioService {
  signals:
   void DownloadFinished(const QStringList& albums);
 
+ protected:
+  QModelIndex GetCurrentIndex();
+
  private slots:
   void UpdateTotalSongCount(int count);
   void ReloadDatabase();
   void ReloadDatabaseFinished();
 
-  void AddToPlaylist();
-  void LoadToPlaylist();
-  void OpenInNewPlaylist();
   void Download();
   void Homepage();
   void ShowConfig();
@@ -110,9 +110,6 @@ class MagnatuneService : public RadioService {
   QModelIndex context_item_;
   QStandardItem* root_;
 
-  QAction* add_to_playlist_;
-  QAction* load_to_playlist_;
-  QAction* open_in_new_playlist_;
   QAction* download_;
 
   LibraryBackend* library_backend_;

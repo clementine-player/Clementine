@@ -35,6 +35,14 @@ signals:
   void AddToPlaylistSignal(QMimeData* data);
 
 protected:
+  virtual QModelIndex GetCurrentIndex() = 0;
+
+  QList<QAction*> GetPlaylistActions();
+
+  QAction* GetAppendToPlaylistAction();
+  QAction* GetReplacePlaylistAction();
+  QAction* GetOpenInNewPlaylistAction();
+
   enum AddMode {
     AddMode_Append,
     AddMode_Replace,

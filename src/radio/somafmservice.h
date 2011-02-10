@@ -48,14 +48,14 @@ class SomaFMService : public RadioService {
   PlaylistItem::Options playlistitem_options() const;
   PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
 
+ protected:
+  QModelIndex GetCurrentIndex();
+
  private slots:
   void RefreshChannels();
   void RefreshChannelsFinished();
   void LoadPlaylistFinished();
 
-  void AddToPlaylist();
-  void LoadToPlaylist();
-  void OpenInNewPlaylist();
   void Homepage();
 
  private:

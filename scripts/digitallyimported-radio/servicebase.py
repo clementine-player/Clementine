@@ -64,15 +64,9 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   def ShowContextMenu(self, index, global_pos):
     if not self.menu:
       self.menu = QMenu()
-      self.menu.addAction(clementine.IconLoader.Load("media-playback-start"),
-        self.tr("Append to current playlist"), self.AddToPlaylist)
-      self.menu.addAction(clementine.IconLoader.Load("media-playback-start"),
-        self.tr("Replace current playlist"), self.LoadToPlaylist)
-      self.menu.addAction(clementine.IconLoader.Load("document-new"),
-        self.tr("Open in new playlist"), self.OpenInNewPlaylist)
 
-      self.menu.addSeparator()
-
+      for action in self.GetPlaylistActions():
+          self.menu.addAction(action)
       self.menu.addAction(clementine.IconLoader.Load("download"),
         self.tr("Open " + self.HOMEPAGE_NAME + " in browser"), self.Homepage)
       self.menu.addAction(clementine.IconLoader.Load("view-refresh"),
@@ -86,14 +80,8 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     self.context_index = index
     self.menu.popup(global_pos)
 
-  def AddToPlaylist(self):
-    self.AddItemToPlaylist(self.context_index, self.AddMode_Append)
-
-  def LoadToPlaylist(self):
-    self.AddItemToPlaylist(self.context_index, self.AddMode_Replace)
-
-  def OpenInNewPlaylist(self):
-    self.AddItemToPlaylist(self.context_index, self.AddMode_OpenInNew)
+  def GetCurrentIndex(self):
+    return self.context_index
 
   def Homepage(self):
     QDesktopServices.openUrl(self.HOMEPAGE_URL)

@@ -66,6 +66,9 @@ class JamendoService : public RadioService {
   static const int kBatchSize;
   static const int kApproxDatabaseSize;
 
+ protected:
+  QModelIndex GetCurrentIndex();
+
  private:
   void ParseDirectory(QIODevice* device) const;
 
@@ -91,9 +94,6 @@ class JamendoService : public RadioService {
   void ParseDirectoryFinished();
   void UpdateTotalSongCount(int count);
 
-  void AddToPlaylist();
-  void LoadToPlaylist();
-  void OpenInNewPlaylist();
   void AlbumInfo();
   void DownloadAlbum();
   void Homepage();
@@ -104,9 +104,6 @@ class JamendoService : public RadioService {
   QMenu* context_menu_;
   QModelIndex context_item_;
 
-  QAction* add_to_playlist_;
-  QAction* load_to_playlist_;
-  QAction* open_in_new_playlist_;
   QAction* album_info_;
   QAction* download_album_;
 
