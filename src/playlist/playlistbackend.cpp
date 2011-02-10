@@ -56,7 +56,8 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
               "       dynamic_playlist_data, dynamic_playlist_backend"
-              " FROM playlists", db);
+              " FROM playlists"
+              " ORDER BY ui_order", db);
   q.exec();
   if (db_->CheckErrors(q))
     return ret;
