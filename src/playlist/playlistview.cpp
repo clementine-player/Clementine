@@ -168,7 +168,10 @@ void PlaylistView::SetPlaylist(Playlist *playlist) {
   LoadGeometry();
   ReloadSettings();
   DynamicModeChanged(playlist->is_dynamic());
+  setFocus();
   read_only_settings_ = false;
+
+  connect(playlist_, SIGNAL(RestoreFinished()), SLOT(JumpToLastPlayedTrack()));
 
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(DynamicModeChanged(bool)), SLOT(DynamicModeChanged(bool)));
@@ -667,6 +670,25 @@ void PlaylistView::JumpToCurrentlyPlayingTrack() {
 
   // Scroll to the item
   scrollTo(current, QAbstractItemView::PositionAtCenter);
+
+  currently_autoscrolling_ = false;
+}
+
+void PlaylistView::JumpToLastPlayedTrack() {
+  Q_ASSERT(playlist_);
+
+  if (playlist_->last_played_row() == -1)
+    return;
+
+  QModelIndex last_played = playlist_->proxy()->mapFromSource(
+      playlist_->index(playlist_->last_played_row(), 0));
+  if (!last_played.isValid())
+    return;
+
+  currently_autoscrolling_ = true;
+
+  // Scroll to the item
+  scrollTo(last_played, QAbstractItemView::PositionAtCenter);
 
   currently_autoscrolling_ = false;
 }

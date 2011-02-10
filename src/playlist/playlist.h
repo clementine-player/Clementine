@@ -233,6 +233,7 @@ class Playlist : public QAbstractListModel {
   void TurnOffDynamicPlaylist();
 
  signals:
+  void RestoreFinished();
   void CurrentSongChanged(const Song& metadata);
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);

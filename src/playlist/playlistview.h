@@ -81,6 +81,7 @@ class PlaylistView : public QTreeView {
   void StopGlowing();
   void StartGlowing();
   void JumpToCurrentlyPlayingTrack();
+  void JumpToLastPlayedTrack();
   void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint);
   void DynamicModeChanged(bool dynamic);
 
