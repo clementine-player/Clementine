@@ -1123,7 +1123,6 @@ void Playlist::ItemsLoaded() {
 
   last_played_item_index_ =
       p.last_played == -1 ? QModelIndex() : index(p.last_played);
-  current_item_index_ = last_played_item_index_;
 
   if (!p.dynamic_type.isEmpty()) {
     GeneratorPtr gen = Generator::Create(p.dynamic_type);

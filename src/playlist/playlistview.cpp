@@ -685,6 +685,10 @@ void PlaylistView::JumpToLastPlayedTrack() {
   if (!last_played.isValid())
     return;
 
+  // Select last played song
+  last_current_item_ = last_played;
+  setCurrentIndex(last_current_item_);
+
   currently_autoscrolling_ = true;
 
   // Scroll to the item
