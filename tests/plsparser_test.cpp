@@ -50,7 +50,7 @@ TEST_F(PLSParserTest, ParseOneTrack) {
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ("/relative/to/filename with spaces.mp3", songs[0].filename());
   EXPECT_EQ("Title", songs[0].title());
-  EXPECT_EQ(123, songs[0].length());
+  EXPECT_EQ(123 * 1e9, songs[0].length_nanosec());
 }
 
 TEST_F(PLSParserTest, ParseSomaFM) {
@@ -65,7 +65,7 @@ TEST_F(PLSParserTest, ParseSomaFM) {
   EXPECT_EQ("SomaFM: Groove Salad (#1 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[0].title());
   EXPECT_EQ("SomaFM: Groove Salad (#2 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[1].title());
   EXPECT_EQ("SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[2].title());
-  EXPECT_EQ(-1, songs[0].length());
+  EXPECT_EQ(-1, songs[0].length_nanosec());
   EXPECT_EQ(Song::Type_Stream, songs[0].filetype());
 }
 
@@ -81,7 +81,7 @@ TEST_F(PLSParserTest, ParseSomaFM2) {
   EXPECT_EQ("SomaFM: Secret Agent (#1 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[0].title());
   EXPECT_EQ("SomaFM: Secret Agent (#2 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[1].title());
   EXPECT_EQ("SomaFM: Secret Agent (#3 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[2].title());
-  EXPECT_EQ(-1, songs[0].length());
+  EXPECT_EQ(-1, songs[0].length_nanosec());
   EXPECT_EQ(Song::Type_Stream, songs[0].filetype());
 }
 
@@ -93,7 +93,7 @@ TEST_F(PLSParserTest, SaveAndLoad) {
   Song two;
   two.set_filename("relative/bar.mp3");
   two.set_title("Bar");
-  two.set_length(123);
+  two.set_length_nanosec(123 * 1e9);
 
   SongList songs;
   songs << one << two;
@@ -110,6 +110,6 @@ TEST_F(PLSParserTest, SaveAndLoad) {
   EXPECT_EQ("/meep/relative/bar.mp3", songs[1].filename());
   EXPECT_EQ(one.title(), songs[0].title());
   EXPECT_EQ(two.title(), songs[1].title());
-  EXPECT_EQ(one.length(), songs[0].length());
-  EXPECT_EQ(two.length(), songs[1].length());
+  EXPECT_EQ(one.length_nanosec(), songs[0].length_nanosec());
+  EXPECT_EQ(two.length_nanosec(), songs[1].length_nanosec());
 }

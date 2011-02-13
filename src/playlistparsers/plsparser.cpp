@@ -52,7 +52,10 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
     } else if (key.startsWith("title")) {
       songs[n].set_title(value);
     } else if (key.startsWith("length")) {
-      songs[n].set_length_nanosec(value.toLongLong() * 1e9);
+      qint64 seconds = value.toLongLong();
+      if (seconds > 0) {
+        songs[n].set_length_nanosec(seconds * 1e9);
+      }
     }
   }
 

@@ -50,7 +50,7 @@ class M3UParser : public ParserBase {
     Metadata() : length(-1) {}
     QString artist;
     QString title;
-    int length;
+    qint64 length;
   };
 
   bool ParseMetadata(const QString& line, Metadata* metadata) const;

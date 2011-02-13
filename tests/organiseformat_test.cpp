@@ -37,7 +37,7 @@ TEST_F(OrganiseFormatTest, BasicReplace) {
   song_.set_composer("composer");
   song_.set_disc(789);
   song_.set_genre("genre");
-  song_.set_length(987);
+  song_.set_length_nanosec(987 * 1e9);
   song_.set_samplerate(654);
   song_.set_title("title");
   song_.set_track(321);

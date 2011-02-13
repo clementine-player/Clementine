@@ -50,7 +50,7 @@ SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path, const
 Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
   Song song;
   QString title, artist, album;
-  int length = -1;
+  qint64 nanosec = -1;
   while (!reader->atEnd()) {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
@@ -84,9 +84,9 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
         } else if (name == "duration") {  // in milliseconds.
           const QString& duration = reader->readElementText();
           bool ok = false;
-          length = duration.toInt(&ok) / 1000;
+          nanosec = duration.toInt(&ok) * 1e6;
           if (!ok) {
-            length = -1;
+            nanosec = -1;
           }
         } else if (name == "image") {
           // TODO: Fetch album covers.
@@ -97,7 +97,7 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
       }
       case QXmlStreamReader::EndElement: {
         if (reader->name() == "track") {
-          song.Init(title, artist, album, length);
+          song.Init(title, artist, album, nanosec);
           return song;
         }
       }
@@ -106,7 +106,7 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
     }
   }
   // At least make an effort if we never find a </track>.
-  song.Init(title, artist, album, length);
+  song.Init(title, artist, album, nanosec);
   return song;
 }
 
