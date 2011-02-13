@@ -927,7 +927,7 @@ void MainWindow::UpdateTrackPosition() {
   PlaylistItemPtr item(player_->GetCurrentItem());
   const int position = std::floor(
       float(player_->engine()->position_nanosec()) / 1e9 + 0.5);
-  const int length = item->Metadata().length();
+  const int length = item->Metadata().length_nanosec() / 1e9;
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of

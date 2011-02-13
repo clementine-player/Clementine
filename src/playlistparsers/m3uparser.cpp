@@ -119,7 +119,9 @@ void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
     if (song.filename().isEmpty()) {
       continue;
     }
-    QString meta = QString("#EXTINF:%1,%2 - %3\n").arg(song.length()).arg(song.artist()).arg(song.title());
+    QString meta = QString("#EXTINF:%1,%2 - %3\n")
+                   .arg(song.length_nanosec())
+                   .arg(song.artist()).arg(song.title());
     device->write(meta.toUtf8());
     device->write(MakeRelativeTo(song.filename(), dir).toUtf8());
     device->write("\n");

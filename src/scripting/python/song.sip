@@ -58,10 +58,10 @@ public:
   const QString& cue_path() const;
   bool has_cue() const;
 
-  int beginning() const;
-  int end() const;
+  int beginning_nanosec() const;
+  int end_nanosec() const;
 
-  int length() const;
+  int length_nanosec() const;
 
   int bitrate() const;
   int samplerate() const;
@@ -115,9 +115,9 @@ public:
   void set_comment(const QString& v);
   void set_compilation(bool v);
   void set_sampler(bool v);
-  void set_beginning(int v);
-  void set_end(int v);
-  void set_length(int v);
+  void set_beginning_nanosec(int v);
+  void set_end_nanosec(int v);
+  void set_length_nanosec(int v);
   void set_bitrate(int v);
   void set_samplerate(int v);
   void set_mtime(int v);

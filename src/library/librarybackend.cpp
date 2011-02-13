@@ -561,7 +561,7 @@ SongList LibraryBackend::GetSongsById(const QStringList& ids, QSqlDatabase& db) 
   return ret;
 }
 
-Song LibraryBackend::GetSongByFilename(const QString& filename, int beginning) {
+Song LibraryBackend::GetSongByFilename(const QString& filename, qint64 beginning) {
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   query.AddWhere("filename", filename);

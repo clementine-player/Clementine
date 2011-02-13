@@ -86,7 +86,7 @@ class CueParser : public ParserBase {
   bool UpdateLastSong(const CueEntry& entry, Song* song) const;
 
   QStringList SplitCueLine(const QString& line) const;
-  int IndexToMarker(const QString& index) const;
+  qint64 IndexToMarker(const QString& index) const;
 };
 
 #endif  // CUEPARSER_H

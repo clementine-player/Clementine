@@ -397,9 +397,9 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file, const QString
 
   SongList old_sections = backend_->GetSongsByFilename(file);
 
-  QHash<int, Song> sections_map;
+  QHash<quint64, Song> sections_map;
   foreach(const Song& song, old_sections) {
-    sections_map[song.beginning()] = song;
+    sections_map[song.beginning_nanosec()] = song;
   }
 
   QSet<int> used_ids;
@@ -408,7 +408,7 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file, const QString
   foreach(Song cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
     cue_song.set_directory_id(t->dir());
 
-    Song matching = sections_map[cue_song.beginning()];
+    Song matching = sections_map[cue_song.beginning_nanosec()];
     // a new section
     if(!matching.is_valid()) {
       t->new_songs << cue_song;

@@ -302,8 +302,8 @@ QVariantMap Mpris1::GetMetadata(const Song& song) {
   AddMetadata("title", song.PrettyTitle(), &ret);
   AddMetadata("artist", song.artist(), &ret);
   AddMetadata("album", song.album(), &ret);
-  AddMetadata("time", song.length(), &ret);
-  AddMetadata("mtime", song.length() * 1000, &ret);
+  AddMetadata("time", song.length_nanosec() / 1e9, &ret);
+  AddMetadata("mtime", song.length_nanosec() / 1e6, &ret);
   AddMetadata("tracknumber", song.track(), &ret);
   AddMetadata("year", song.year(), &ret);
   AddMetadata("genre", song.genre(), &ret);

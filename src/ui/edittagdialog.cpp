@@ -430,7 +430,7 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   album_cover_choice_controller_->show_cover_action()->setEnabled(art_is_set);
   ui_->summary_art_button->setEnabled(song.id() != -1);
 
-  ui_->length->setText(Utilities::PrettyTime(song.length()));
+  ui_->length->setText(Utilities::PrettyTimeNanosec(song.length_nanosec()));
   SetText(ui_->bpm, song.bpm(), tr("bpm"));
   SetText(ui_->samplerate, song.samplerate(), "Hz");
   SetText(ui_->bitrate, song.bitrate(), tr("kbps"));

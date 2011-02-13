@@ -62,6 +62,10 @@ QString PrettyTime(int seconds) {
   return ret;
 }
 
+QString PrettyTimeNanosec(qint64 nanoseconds) {
+  return PrettyTime(nanoseconds / 1e9);
+}
+
 QString WordyTime(quint64 seconds) {
   quint64 days = seconds / (60*60*24);
 
@@ -73,6 +77,10 @@ QString WordyTime(quint64 seconds) {
   parts << PrettyTime(seconds - days*60*60*24);
 
   return parts.join(" ");
+}
+
+QString WordyTimeNanosec(qint64 nanoseconds) {
+  return WordyTime(nanoseconds / 1e9);
 }
 
 QString Ago(int seconds_since_epoch, const QLocale& locale) {

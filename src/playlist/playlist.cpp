@@ -244,7 +244,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
           return song.filename();
         case Column_Artist:       return song.artist();
         case Column_Album:        return song.album();
-        case Column_Length:       return song.length();
+        case Column_Length:       return song.length_nanosec();
         case Column_Track:        return song.track();
         case Column_Disc:         return song.disc();
         case Column_Year:         return song.year();
@@ -960,7 +960,7 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_Title:        strcmp(title);
     case Column_Artist:       strcmp(artist);
     case Column_Album:        strcmp(album);
-    case Column_Length:       cmp(length);
+    case Column_Length:       cmp(length_nanosec);
     case Column_Track:        cmp(track);
     case Column_Disc:         cmp(disc);
     case Column_Year:         cmp(year);
@@ -1285,7 +1285,7 @@ Song Playlist::current_item_metadata() const {
 }
 
 void Playlist::UpdateScrobblePoint() {
-  const int length = current_item_metadata().length();
+  const int length = current_item_metadata().length_nanosec();
 
   scrobble_point_ = length == 0 ? 240 : qBound(31, length/2, 240);
   has_scrobbled_ = false;
@@ -1447,7 +1447,7 @@ SongList Playlist::GetAllSongs() const {
 quint64 Playlist::GetTotalLength() const {
   quint64 ret = 0;
   foreach (PlaylistItemPtr item, items_) {
-    int length = item->Metadata().length();
+    quint64 length = item->Metadata().length_nanosec();
     if (length > 0)
       ret += length;
   }

@@ -79,7 +79,7 @@ QString ParserBase::MakeUrl(const QString& filename_or_url) const {
   return QUrl::fromLocalFile(filename_or_url).toString();
 }
 
-Song ParserBase::LoadLibrarySong(const QString& filename_or_url, int beginning) const {
+Song ParserBase::LoadLibrarySong(const QString& filename_or_url, qint64 beginning) const {
   if (!library_)
     return Song();
 

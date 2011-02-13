@@ -203,7 +203,7 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       if (name == "tracknum")        song.set_track(value.toInt());
       if (name == "year")            song.set_year(value.toInt());
       if (name == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
-      if (name == "seconds")         song.set_length(value.toInt());
+      if (name == "seconds")         song.set_length_nanosec(value.toInt() * 1e9);
       if (name == "url")             song.set_filename(value);
       if (name == "cover_small")     song.set_art_automatic(value);
       if (name == "albumsku")        song.set_comment(value);

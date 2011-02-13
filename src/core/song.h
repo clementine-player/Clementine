@@ -122,8 +122,8 @@ class Song {
   bool HasProperMediaFile() const;
 
   // Constructors
-  void Init(const QString& title, const QString& artist, const QString& album, int length);
-  void Init(const QString& title, const QString& artist, const QString& album, int beginning, int end);
+  void Init(const QString& title, const QString& artist, const QString& album, qint64 length);
+  void Init(const QString& title, const QString& artist, const QString& album, qint64 beginning, qint64 end);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const SqlRow& query, int col = 0);
 #ifdef HAVE_LIBLASTFM
@@ -185,10 +185,10 @@ class Song {
   const QString& cue_path() const { return d->cue_path_; }
   bool has_cue() const { return !d->cue_path_.isEmpty(); }
 
-  int beginning() const { return d->beginning_; }
-  int end() const { return d->end_; }
+  qint64 beginning_nanosec() const { return d->beginning_; }
+  qint64 end_nanosec() const { return d->end_; }
 
-  int length() const { return d->end_ - d->beginning_; }
+  qint64 length_nanosec() const { return d->end_ - d->beginning_; }
 
   int bitrate() const { return d->bitrate_; }
   int samplerate() const { return d->samplerate_; }
@@ -248,9 +248,9 @@ class Song {
   void set_comment(const QString& v) { d->comment_ = v; }
   void set_compilation(bool v) { d->compilation_ = v; }
   void set_sampler(bool v) { d->sampler_ = v; }
-  void set_beginning(int v) { d->beginning_ = qMax(0, v); }
-  void set_end(int v) { d->end_ = v; }
-  void set_length(int v) { d->end_ = d->beginning_ + v; }
+  void set_beginning_nanosec(qint64 v) { d->beginning_ = qMax(0ll, v); }
+  void set_end_nanosec(qint64 v) { d->end_ = v; }
+  void set_length_nanosec(qint64 v) { d->end_ = d->beginning_ + v; }
   void set_bitrate(int v) { d->bitrate_ = v; }
   void set_samplerate(int v) { d->samplerate_ = v; }
   void set_mtime(int v) { d->mtime_ = v; }
@@ -321,14 +321,14 @@ class Song {
     // streams, this will equal to 0. In case of multi-part streams on the
     // other hand, this will mark the beginning of a section represented by
     // this Song object. This is always greater than 0.
-    int beginning_;
+    qint64 beginning_;
     // The end of the song in seconds. In case of single-part media
     // streams, this will equal to the song's length. In case of multi-part
     // streams on the other hand, this will mark the end of a section
     // represented by this Song object.
     // This may be negative indicating that the length of this song is
     // unknown.
-    int end_;
+    qint64 end_;
 
     int bitrate_;
     int samplerate_;

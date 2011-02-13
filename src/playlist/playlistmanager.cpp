@@ -264,7 +264,7 @@ void PlaylistManager::ChangePlaylistOrder(const QList<int>& ids) {
 
 void PlaylistManager::UpdateSummaryText() {
   int tracks = current()->rowCount();
-  quint64 seconds = 0;
+  quint64 nanoseconds = 0;
   int selected = 0;
 
   // Get the length of the selected tracks
@@ -274,9 +274,9 @@ void PlaylistManager::UpdateSummaryText() {
 
     selected += range.bottom() - range.top() + 1;
     for (int i=range.top() ; i<=range.bottom() ; ++i) {
-      int length = range.model()->index(i, Playlist::Column_Length).data().toInt();
+      int length = range.model()->index(i, Playlist::Column_Length).data().toLongLong();
       if (length > 0)
-        seconds += length;
+        nanoseconds += length;
     }
   }
 
@@ -284,14 +284,14 @@ void PlaylistManager::UpdateSummaryText() {
   if (selected > 1) {
     summary += tr("%1 selected of").arg(selected) + " ";
   } else {
-    seconds = current()->GetTotalLength();
+    nanoseconds = current()->GetTotalLength();
   }
 
   // TODO: Make the plurals translatable
   summary += tracks == 1 ? tr("1 track") : tr("%1 tracks").arg(tracks);
 
-  if (seconds)
-    summary += " - [ " + Utilities::WordyTime(seconds) + " ]";
+  if (nanoseconds)
+    summary += " - [ " + Utilities::WordyTimeNanosec(nanoseconds) + " ]";
 
   emit SummaryTextChanged(summary);
 }

@@ -63,7 +63,7 @@ protected:
   // Converts the URL or path to a canonical path and searches the library for
   // a section of a song with that path and the given beginning. If one is found,
   // returns it, otherwise returns an invalid song.
-  Song LoadLibrarySong(const QString& filename_or_url, int beginning = 0) const;
+  Song LoadLibrarySong(const QString& filename_or_url, qint64 beginning = 0) const;
 
 private:
   LibraryBackendInterface* library_;

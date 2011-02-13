@@ -266,8 +266,8 @@ QStringList CueParser::SplitCueLine(const QString& line) const {
 // Updates the song with data from the .cue entry. This one mustn't be used for the
 // last song in the .cue file.
 bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Song* song) const {
-  int beginning = IndexToMarker(entry.index);
-  int end = IndexToMarker(next_index);
+  qint64 beginning = IndexToMarker(entry.index);
+  qint64 end = IndexToMarker(next_index);
 
   // incorrect indices (we won't be able to calculate beginning or end)
   if(beginning == -1 || end == -1) {
@@ -286,7 +286,7 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index, Son
 // Updates the song with data from the .cue entry. This one must be used only for the
 // last song in the .cue file.
 bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
-  int beginning = IndexToMarker(entry.index);
+  qint64 beginning = IndexToMarker(entry.index);
 
   // incorrect index (we won't be able to calculate beginning)
   if(beginning == -1) {
@@ -304,12 +304,12 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
 
   // we don't do anything with the end here because it's already set to
   // the end of the media file (if it exists)
-  song->set_beginning(beginning);
+  song->set_beginning_nanosec(beginning);
 
   return true;
 }
 
-int CueParser::IndexToMarker(const QString& index) const {
+qint64 CueParser::IndexToMarker(const QString& index) const {
   QRegExp index_regexp(kIndexRegExp);
   if(!index_regexp.exactMatch(index)) {
     return -1;
@@ -317,7 +317,7 @@ int CueParser::IndexToMarker(const QString& index) const {
 
   QStringList splitted = index_regexp.capturedTexts().mid(1, -1);
   // TODO: use frames when #1166 is fixed
-  return splitted.at(0).toInt() * 60 + splitted.at(1).toInt();
+  return splitted.at(0).toLongLong() * 60 + splitted.at(1).toLongLong();
 }
 
 void CueParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {

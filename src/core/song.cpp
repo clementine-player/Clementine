@@ -201,17 +201,19 @@ Song::Song(FileRefFactory* factory)
       factory_(factory) {
 }
 
-void Song::Init(const QString& title, const QString& artist, const QString& album, int length) {
+void Song::Init(const QString& title, const QString& artist,
+                const QString& album, qint64 length) {
   d->valid_ = true;
 
   d->title_ = title;
   d->artist_ = artist;
   d->album_ = album;
 
-  set_length(length);
+  set_length_nanosec(length);
 }
 
-void Song::Init(const QString& title, const QString& artist, const QString& album, int beginning, int end) {
+void Song::Init(const QString& title, const QString& artist,
+                const QString& album, qint64 beginning, qint64 end) {
   d->valid_ = true;
 
   d->title_ = title;
@@ -378,7 +380,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   if (fileref->audioProperties()) {
     d->bitrate_    = fileref->audioProperties()->bitrate();
     d->samplerate_ = fileref->audioProperties()->sampleRate();
-    set_length(fileref->audioProperties()->length());
+    set_length_nanosec(fileref->audioProperties()->length() * 1e9);
   }
 
   // Get the filetype if we can
@@ -475,9 +477,10 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
 
   d->init_from_file_ = true;
 
-  #define tostr(n) (q.value(n).isNull() ? QString::null : q.value(n).toString())
-  #define toint(n) (q.value(n).isNull() ? -1 : q.value(n).toInt())
-  #define tofloat(n) (q.value(n).isNull() ? -1 : q.value(n).toDouble())
+  #define tostr(n)      (q.value(n).isNull() ? QString::null : q.value(n).toString())
+  #define toint(n)      (q.value(n).isNull() ? -1 : q.value(n).toInt())
+  #define tolonglong(n) (q.value(n).isNull() ? -1 : q.value(n).toLongLong())
+  #define tofloat(n)    (q.value(n).isNull() ? -1 : q.value(n).toDouble())
 
   d->id_ = toint(col + 0);
   d->title_ = tostr(col + 1);
@@ -523,13 +526,14 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
 
   // do not move those statements - beginning must be initialized before
   // length is!
-  d->beginning_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toInt();
-  set_length(toint(col + 33));
+  d->beginning_ = q.value(col + 32).isNull() ? 0 : q.value(col + 32).toLongLong();
+  set_length_nanosec(tolonglong(col + 33));
 
   d->cue_path_ = tostr(col + 34);
 
   #undef tostr
   #undef toint
+  #undef tolonglong
   #undef tofloat
 }
 
@@ -543,7 +547,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->artist_ = track.artist();
   d->track_ = track.trackNumber();
 
-  set_length(track.duration());
+  set_length_nanosec(track.duration() * 1e9);
 }
 #endif // HAVE_LIBLASTFM
 
@@ -563,7 +567,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->genre_ = QString::fromUtf8(track->genre);
     d->comment_ = QString::fromUtf8(track->comment);
     d->compilation_ = track->compilation;
-    set_length(track->tracklen / 1000);
+    set_length_nanosec(track->tracklen * 1e6);
     d->bitrate_ = track->bitrate;
     d->samplerate_ = track->samplerate;
     d->mtime_ = track->time_modified;
@@ -593,7 +597,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->genre = strdup(d->genre_.toUtf8().constData());
     track->comment = strdup(d->comment_.toUtf8().constData());
     track->compilation = d->compilation_;
-    track->tracklen = length() * 1000;
+    track->tracklen = length_nanosec() / 1e6;
     track->bitrate = d->bitrate_;
     track->samplerate = d->samplerate_;
     track->time_modified = d->mtime_;
@@ -622,7 +626,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->basefilename_ = d->filename_;
 
     d->track_ = track->tracknumber;
-    set_length(track->duration / 1000);
+    set_length_nanosec(track->duration * 1e6);
     d->samplerate_ = track->samplerate;
     d->bitrate_ = track->bitrate;
     d->filesize_ = track->filesize;
@@ -662,7 +666,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->filename = strdup(d->basefilename_.toUtf8().constData());
 
     track->tracknumber = d->track_;
-    track->duration = length() * 1000;
+    track->duration = length_nanosec() / 1e6;
     track->samplerate = d->samplerate_;
     track->nochannels = 0;
     track->wavecodec = 0;
@@ -796,7 +800,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
         d->filename_ = item_value.toString();
 
       else if (wcscmp(name, g_wszWMDMDuration) == 0)
-        set_length(item_value.toULongLong() / 10000000ll);
+        set_length(item_value.toULongLong() * 1e2);
 
       else if (wcscmp(name, L"WMDM/FileSize") == 0)
         d->filesize_ = item_value.toULongLong();
@@ -894,7 +898,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     AddWmdmItem(metadata, g_wszWMDMComposer, d->composer_);
     AddWmdmItem(metadata, g_wszWMDMBitrate, d->bitrate_);
     AddWmdmItem(metadata, g_wszWMDMFileName, d->basefilename_);
-    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(length()) * 10000000ll);
+    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(length_nanosec()) / 1e2);
     AddWmdmItem(metadata, L"WMDM/FileSize", d->filesize_);
 
     WMDM_FORMATCODE format;
@@ -932,7 +936,7 @@ void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   if (!bundle.genre.isEmpty()) d->genre_ = Decode(bundle.genre, codec);
   if (!bundle.bitrate.isEmpty()) d->bitrate_ = bundle.bitrate.toInt();
   if (!bundle.samplerate.isEmpty()) d->samplerate_ = bundle.samplerate.toInt();
-  if (!bundle.length.isEmpty()) set_length(bundle.length.toInt());
+  if (!bundle.length.isEmpty()) set_length_nanosec(bundle.length.toLongLong());
   if (!bundle.year.isEmpty()) d->year_ = bundle.year.toInt();
   if (!bundle.tracknr.isEmpty()) d->track_ = bundle.tracknr.toInt();
 }
@@ -984,7 +988,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":score", d->score_);
 
   query->bindValue(":beginning", d->beginning_);
-  query->bindValue(":length", intval(length()));
+  query->bindValue(":length", intval(length_nanosec()));
 
   query->bindValue(":cue_path", d->cue_path_);
 
@@ -1009,7 +1013,7 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setArtist(d->artist_);
   mtrack.setAlbum(d->album_);
   mtrack.setTitle(d->title_);
-  mtrack.setDuration(length());
+  mtrack.setDuration(length_nanosec() / 1e9);
   mtrack.setTrackNumber(d->track_);
   mtrack.setSource(lastfm::Track::Player);
 }
@@ -1037,10 +1041,10 @@ QString Song::PrettyTitleWithArtist() const {
 }
 
 QString Song::PrettyLength() const {
-  if (length() == -1)
+  if (length_nanosec() == -1)
     return QString::null;
 
-  return Utilities::PrettyTime(length());
+  return Utilities::PrettyTimeNanosec(length_nanosec());
 }
 
 QString Song::PrettyYear() const {
@@ -1076,7 +1080,7 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->comment_ == other.d->comment_ &&
          d->compilation_ == other.d->compilation_ &&
          d->beginning_ == other.d->beginning_ &&
-         length() == other.length() &&
+         length_nanosec() == other.length_nanosec() &&
          d->bitrate_ == other.d->bitrate_ &&
          d->samplerate_ == other.d->samplerate_ &&
          d->sampler_ == other.d->sampler_ &&
@@ -1177,7 +1181,7 @@ QFuture<bool> Song::BackgroundSave() const {
 bool Song::operator==(const Song& other) const {
   // TODO: this isn't working for radios
   return filename() == other.filename() &&
-         beginning() == other.beginning();
+         beginning_nanosec() == other.beginning_nanosec();
 }
 
 QImage Song::LoadEmbeddedArt(const QString& filename) {

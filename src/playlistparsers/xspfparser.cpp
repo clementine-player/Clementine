@@ -128,8 +128,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
     if (!song.album().isEmpty()) {
       writer.writeTextElement("album", song.album());
     }
-    if (song.length() != -1) {
-      writer.writeTextElement("duration", QString::number(song.length() * 1000));
+    if (song.length_nanosec() != -1) {
+      writer.writeTextElement("duration", QString::number(song.length_nanosec() / 1e6));
     }
 
     QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();

@@ -191,7 +191,7 @@ PlaylistItemPtr PlaylistBackend::RestoreCueData(PlaylistItemPtr item, boost::sha
 
   foreach(const Song& from_list, song_list) {
     if(from_list.filename() == song.filename() &&
-       from_list.beginning() == song.beginning()) {
+       from_list.beginning_nanosec() == song.beginning_nanosec()) {
       // we found a matching section; replace the input
       // item with a new one containing CUE metadata
       return PlaylistItemPtr(new SongPlaylistItem(from_list));

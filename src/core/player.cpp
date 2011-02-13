@@ -96,8 +96,8 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
       return;
 
     engine_->Play(result.media_url_, stream_change_type_,
-                  item->Metadata().beginning() * 1e9,
-                  item->Metadata().end() * 1e9);
+                  item->Metadata().beginning_nanosec(),
+                  item->Metadata().end_nanosec());
 
     current_item_ = item;
     loading_async_ = QUrl();
@@ -266,8 +266,8 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
   else {
     loading_async_ = QUrl();
     engine_->Play(current_item_->Url(), change,
-                  current_item_->Metadata().beginning() * 1e9,
-                  current_item_->Metadata().end() * 1e9);
+                  current_item_->Metadata().beginning_nanosec(),
+                  current_item_->Metadata().end_nanosec());
 
 #ifdef HAVE_LIBLASTFM
     if (lastfm_->IsScrobblingEnabled())

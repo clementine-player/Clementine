@@ -259,10 +259,10 @@ bool PlaylistDelegateBase::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 
 QString LengthItemDelegate::displayText(const QVariant& value, const QLocale&) const {
   bool ok = false;
-  int seconds = value.toInt(&ok);
+  qint64 nanoseconds = value.toLongLong(&ok);
 
-  if (ok && seconds > 0)
-    return Utilities::PrettyTime(seconds);
+  if (ok && nanoseconds > 0)
+    return Utilities::PrettyTimeNanosec(nanoseconds);
   return QString::null;
 }
 

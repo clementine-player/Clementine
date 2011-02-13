@@ -131,7 +131,7 @@ public:
 
   void VolumeSet(int volume);
   int VolumeGet() const;
-  void PositionSet(int pos);
+  void PositionSet(int pos_msec);
   int PositionGet() const;
   QVariantMap GetMetadata() const;
 

@@ -28,8 +28,10 @@ class QIODevice;
 
 namespace Utilities {
   QString PrettyTime(int seconds);
+  QString PrettyTimeNanosec(qint64 nanoseconds);
   QString PrettySize(quint64 bytes);
   QString WordyTime(quint64 seconds);
+  QString WordyTimeNanosec(qint64 nanoseconds);
   QString Ago(int seconds_since_epoch, const QLocale& locale);
 
   QString ColorToRgba(const QColor& color);
