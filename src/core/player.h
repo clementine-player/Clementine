@@ -29,23 +29,77 @@
 #include "engines/engine_fwd.h"
 #include "playlist/playlistitem.h"
 
+class LastFMService;
 class PlaylistManager;
 class Settings;
 class MainWindow;
 
-#ifdef HAVE_LIBLASTFM
-  class LastFMService;
-#endif
 
-class Player : public QObject {
+class PlayerInterface : public QObject {
   Q_OBJECT
 
- public:
-  Player(PlaylistManager* playlists,
-#ifdef HAVE_LIBLASTFM
-         LastFMService* lastfm,
-#endif
-         QObject* parent = 0);
+public:
+  PlayerInterface(QObject* parent = 0) : QObject(parent) {}
+
+  virtual EngineBase* engine() const = 0;
+  virtual Engine::State GetState() const = 0;
+  virtual int GetVolume() const = 0;
+
+  virtual PlaylistItemPtr GetCurrentItem() const = 0;
+  virtual PlaylistItemPtr GetItemAt(int pos) const = 0;
+  virtual PlaylistManager* playlists() const = 0;
+
+public slots:
+  virtual void ReloadSettings() = 0;
+
+  // Manual track change to the specified track
+  virtual void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle) = 0;
+
+  // If there's currently a song playing, pause it, otherwise play the track
+  // that was playing last, or the first one on the playlist
+  virtual void PlayPause() = 0;
+
+  // Skips this track.  Might load more of the current radio station.
+  virtual void Next() = 0;
+
+  virtual void Previous() = 0;
+  virtual void SetVolume(int value) = 0;
+  virtual void VolumeUp() = 0;
+  virtual void VolumeDown() = 0;
+  virtual void SeekTo(int seconds) = 0;
+  // Moves the position of the currently playing song five seconds forward.
+  virtual void SeekForward() = 0;
+  // Moves the position of the currently playing song five seconds backwards.
+  virtual void SeekBackward() = 0;
+
+  virtual void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result) = 0;
+  virtual void CurrentMetadataChanged(const Song& metadata) = 0;
+
+  virtual void Mute() = 0;
+  virtual void Pause() = 0;
+  virtual void Stop() = 0;
+  virtual void Play() = 0;
+  virtual void ShowOSD() = 0;
+
+signals:
+  void Playing();
+  void Paused();
+  void Stopped();
+  void PlaylistFinished();
+  void VolumeChanged(int volume);
+  void Error(const QString& message);
+  void TrackSkipped(PlaylistItemPtr old_track);
+  // Emitted when there's a manual change to the current's track position.
+  void Seeked(qlonglong microseconds);
+
+  void ForceShowOSD(Song);
+};
+
+class Player : public PlayerInterface {
+  Q_OBJECT
+
+public:
+  Player(PlaylistManager* playlists, LastFMService* lastfm, QObject* parent = 0);
   ~Player();
 
   void Init();
@@ -58,27 +112,18 @@ class Player : public QObject {
   PlaylistItemPtr GetItemAt(int pos) const;
   PlaylistManager* playlists() const { return playlists_; }
 
- public slots:
+public slots:
   void ReloadSettings();
 
-  // Manual track change to the specified track
   void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle);
-
-  // If there's currently a song playing, pause it, otherwise play the track
-  // that was playing last, or the first one on the playlist
   void PlayPause();
-
-  // Skips this track.  Might load more of the current radio station.
   void Next();
-
   void Previous();
   void SetVolume(int value);
   void VolumeUp() { SetVolume(GetVolume() + 5); }
   void VolumeDown() { SetVolume(GetVolume() - 5); }
-  void Seek(int seconds);
-  // Moves the position of the currently playing song five seconds forward.
+  void SeekTo(int seconds);
   void SeekForward();
-  // Moves the position of the currently playing song five seconds backwards.
   void SeekBackward();
 
   void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result);
@@ -89,19 +134,6 @@ class Player : public QObject {
   void Stop();
   void Play();
   void ShowOSD();
-
- signals:
-  void Playing();
-  void Paused();
-  void Stopped();
-  void PlaylistFinished();
-  void VolumeChanged(int volume);
-  void Error(const QString& message);
-  void TrackSkipped(PlaylistItemPtr old_track);
-  // Emitted when there's a manual change to the current's track position.
-  void Seeked(qlonglong microseconds);
-
-  void ForceShowOSD(Song);
 
  private slots:
   void EngineStateChanged(Engine::State);
@@ -116,9 +148,7 @@ class Player : public QObject {
 
  private:
   PlaylistManager* playlists_;
-#ifdef HAVE_LIBLASTFM
   LastFMService* lastfm_;
-#endif
   QSettings settings_;
 
   PlaylistItemPtr current_item_;

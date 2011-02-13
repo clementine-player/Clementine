@@ -24,7 +24,7 @@
 #include <QDBusArgument>
 #include <QObject>
 
-class Player;
+class PlayerInterface;
 class Playlist;
 
 struct DBusStatus {    // From Amarok.
@@ -79,7 +79,7 @@ class Mpris1 : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1(Player* player, ArtLoader* art_loader, QObject* parent = 0);
+  Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent = 0);
 
   static QVariantMap GetMetadata(const Song& song);
 
@@ -98,14 +98,14 @@ class Mpris1Root : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1Root(Player* player, QObject* parent = 0);
+  Mpris1Root(PlayerInterface* player, QObject* parent = 0);
 
   QString Identity();
   void Quit();
   Version MprisVersion();
 
 private:
-  Player* player_;
+  PlayerInterface* player_;
 };
 
 
@@ -113,7 +113,7 @@ class Mpris1Player : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1Player(Player* player, QObject* parent = 0);
+  Mpris1Player(PlayerInterface* player, QObject* parent = 0);
 
   void Pause();
   void Stop();
@@ -157,7 +157,7 @@ private slots:
   void RepeatModeChanged();
 
 private:
-  Player* player_;
+  PlayerInterface* player_;
 
   QVariantMap last_metadata_;
 };
@@ -167,7 +167,7 @@ class Mpris1TrackList : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1TrackList(Player* player, QObject* parent = 0);
+  Mpris1TrackList(PlayerInterface* player, QObject* parent = 0);
 
   int AddTrack(const QString&, bool);
   void DelTrack(int index);
@@ -187,7 +187,7 @@ private slots:
   void PlaylistChanged(Playlist* playlist);
 
 private:
-  Player* player_;
+  PlayerInterface* player_;
 };
 
 } // namespace mpris

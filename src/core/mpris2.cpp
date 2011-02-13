@@ -43,7 +43,7 @@ const char* Mpris2::kMprisObjectPath = "/org/mpris/MediaPlayer2";
 const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
-Mpris2::Mpris2(Player* player, ArtLoader* art_loader,
+Mpris2::Mpris2(PlayerInterface* player, ArtLoader* art_loader,
                Mpris1* mpris1, QObject* parent)
   : QObject(parent),
     player_(player),
@@ -400,7 +400,7 @@ void Mpris2::Play() {
 
 void Mpris2::Seek(qlonglong offset) {
   if(CanSeek()) {
-    player_->Seek(player_->engine()->position_nanosec() / 1e9 + offset / 1e6);
+    player_->SeekTo(player_->engine()->position_nanosec() / 1e9 + offset / 1e6);
   }
 }
 
@@ -409,7 +409,7 @@ void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
     offset *= 1e3;
 
     if(offset < player_->GetCurrentItem()->Metadata().length_nanosec()) {
-      player_->Seek(offset / 1e9);
+      player_->SeekTo(offset / 1e9);
     }
   }
 }

@@ -27,7 +27,7 @@
 #include <boost/scoped_ptr.hpp>
 
 class MainWindow;
-class Player;
+class PlayerInterface;
 
 typedef QList<QVariantMap> TrackMetadata;
 typedef QList<QDBusObjectPath> TrackIds;
@@ -72,7 +72,8 @@ class Mpris2 : public QObject {
   Q_PROPERTY( bool CanEditTracks READ CanEditTracks )
 
 public:
-  Mpris2(Player* player, ArtLoader* art_loader, Mpris1* mpris1, QObject* parent = 0); 
+  Mpris2(PlayerInterface* player, ArtLoader* art_loader, Mpris1* mpris1,
+         QObject* parent = 0);
 
   void InitLibIndicate();
 
@@ -170,7 +171,7 @@ private:
 
   QVariantMap last_metadata_;
 
-  Player* player_;
+  PlayerInterface* player_;
   Mpris1* mpris1_;
 };
 

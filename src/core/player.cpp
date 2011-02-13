@@ -36,16 +36,10 @@
 using boost::shared_ptr;
 
 
-Player::Player(PlaylistManager* playlists,
-#ifdef HAVE_LIBLASTFM
-               LastFMService* lastfm,
-#endif
-               QObject* parent)
-  : QObject(parent),
+Player::Player(PlaylistManager* playlists, LastFMService* lastfm, QObject* parent)
+  : PlayerInterface(parent),
     playlists_(playlists),
-#ifdef HAVE_LIBLASTFM
     lastfm_(lastfm),
-#endif
     engine_(new GstEngine),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
@@ -282,7 +276,7 @@ void Player::CurrentMetadataChanged(const Song& metadata) {
 #endif
 }
 
-void Player::Seek(int seconds) {
+void Player::SeekTo(int seconds) {
   qint64 nanosec = qBound(0ll, qint64(seconds) * qint64(1e9),
                           engine_->length_nanosec());
   engine_->Seek(nanosec);
@@ -294,11 +288,11 @@ void Player::Seek(int seconds) {
 }
 
 void Player::SeekForward() {
-  Seek(engine()->position_nanosec() / 1e9 + 5);
+  SeekTo(engine()->position_nanosec() / 1e9 + 5);
 }
 
 void Player::SeekBackward() {
-  Seek(engine()->position_nanosec() / 1e9 - 5);
+  SeekTo(engine()->position_nanosec() / 1e9 - 5);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
@@ -365,7 +359,7 @@ void Player::Pause() {
 void Player::Play() {
   switch (GetState()) {
     case Engine::Playing:
-      Seek(0);
+      SeekTo(0);
       break;
     case Engine::Paused:
       engine_->Unpause();

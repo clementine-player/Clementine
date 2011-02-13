@@ -16,7 +16,7 @@ class ScriptInterface : QObject {
     CLASS(MergedProxyModel),
     CLASS(NetworkAccessManager),
     CLASS(ParserBase),
-    CLASS(Player),
+    CLASS(PlayerInterface),
     CLASS(Playlist),
     CLASS(PlaylistManager),
     CLASS(PlaylistParser),

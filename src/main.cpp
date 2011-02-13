@@ -75,6 +75,8 @@ using boost::scoped_ptr;
 
 #ifdef HAVE_LIBLASTFM
   #include "radio/lastfmservice.h"
+#else
+  class LastFMService;
 #endif
 
 #ifdef HAVE_DBUS
@@ -292,19 +294,24 @@ int main(int argc, char *argv[]) {
   // Seed the random number generator
   srand(time(NULL));
 
+  // Create some key objects
   scoped_ptr<BackgroundThread<Database> > database(
       new BackgroundThreadImplementation<Database, Database>(NULL));
   database->Start(true);
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
-
   RadioModel radio_model(database.get(), &task_manager, NULL);
-  Player player(&playlists
-#ifdef HAVE_LIBLASTFM
-                ,RadioModel::Service<LastFMService>()
-#endif
-                );
 
+  // Get the last.fm service if it's available
+  LastFMService* lastfm_service = NULL;
+#ifdef HAVE_LIBLASTFM
+  lastfm_service = RadioModel::Service<LastFMService>();
+#endif
+
+  // Create the player
+  Player player(&playlists, lastfm_service);
+
+  // Create the tray icon and OSD
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
   OSD osd(tray_icon.get());
 

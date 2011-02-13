@@ -401,7 +401,7 @@ MainWindow::MainWindow(
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(SeekTrack(int)), ui_->track_slider, SLOT(Seek(int)));
 
-  connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(Seek(int)));
+  connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(SeekTo(int)));
 
   // Database connections
   connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
@@ -1400,9 +1400,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     player_->SetVolume(player_->GetVolume() + options.volume_modifier());
 
   if (options.seek_to() != -1)
-    player_->Seek(options.seek_to() * 1e9);
+    player_->SeekTo(options.seek_to() * 1e9);
   else if (options.seek_by() != 0)
-    player_->Seek(player_->engine()->position_nanosec() + options.seek_by() * 1e9);
+    player_->SeekTo(player_->engine()->position_nanosec() + options.seek_by() * 1e9);
 
   if (options.play_track_at() != -1)
     player_->PlayAt(options.play_track_at(), Engine::Manual, true);

@@ -1,4 +1,4 @@
-class Player : QObject {
+class PlayerInterface : QObject {
 
 %TypeHeaderCode
 #include "core/player.h"
@@ -29,7 +29,7 @@ public slots:
   void VolumeDown();
   void Mute();
 
-  void Seek(int seconds);
+  void SeekTo(int seconds);
   void SeekForward();
   void SeekBackward();
 
@@ -50,5 +50,5 @@ signals:
   void ForceShowOSD(Song);
 
 private:
-  Player();
+  PlayerInterface();
 };

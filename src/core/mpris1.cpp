@@ -31,7 +31,7 @@
 
 namespace mpris {
 
-Mpris1::Mpris1(Player* player, ArtLoader* art_loader, QObject* parent)
+Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent)
   : QObject(parent)
 {
   qDBusRegisterMetaType<DBusStatus>();
@@ -47,13 +47,13 @@ Mpris1::Mpris1(Player* player, ArtLoader* art_loader, QObject* parent)
           player_, SLOT(CurrentSongChanged(Song,QString)));
 }
 
-Mpris1Root::Mpris1Root(Player* player, QObject* parent)
+Mpris1Root::Mpris1Root(PlayerInterface* player, QObject* parent)
     : QObject(parent), player_(player) {
   new MprisRoot(this);
   QDBusConnection::sessionBus().registerObject("/", this);
 }
 
-Mpris1Player::Mpris1Player(Player* player, QObject* parent)
+Mpris1Player::Mpris1Player(PlayerInterface* player, QObject* parent)
     : QObject(parent), player_(player) {
   new MprisPlayer(this);
   QDBusConnection::sessionBus().registerObject("/Player", this);
@@ -70,7 +70,7 @@ void Mpris1Player::PlaylistManagerInitialized() {
           SLOT(RepeatModeChanged()));
 }
 
-Mpris1TrackList::Mpris1TrackList(Player* player, QObject* parent)
+Mpris1TrackList::Mpris1TrackList(PlayerInterface* player, QObject* parent)
     : QObject(parent), player_(player) {
   new MprisTrackList(this);
   QDBusConnection::sessionBus().registerObject("/TrackList", this);
@@ -192,7 +192,7 @@ int Mpris1Player::VolumeGet() const {
 }
 
 void Mpris1Player::PositionSet(int pos_msec) {
-  player_->Seek(pos_msec / 1e3);
+  player_->SeekTo(pos_msec / 1e3);
 }
 
 int Mpris1Player::PositionGet() const {

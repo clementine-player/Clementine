@@ -28,7 +28,7 @@
 class LanguageEngine;
 class Library;
 class LibraryView;
-class Player;
+class PlayerInterface;
 class PlaylistManager;
 class RadioModel;
 class Script;
@@ -58,9 +58,10 @@ public:
 
   struct GlobalData {
     GlobalData() : valid_(false) {}
-    GlobalData(Library* library, LibraryView* library_view, Player* player,
-               PlaylistManager* playlists, TaskManager* task_manager,
-               SettingsDialog* settings_dialog, RadioModel* radio_model)
+    GlobalData(Library* library, LibraryView* library_view,
+               PlayerInterface* player, PlaylistManager* playlists,
+               TaskManager* task_manager, SettingsDialog* settings_dialog,
+               RadioModel* radio_model)
       : valid_(true),
         library_(library),
         library_view_(library_view),
@@ -74,7 +75,7 @@ public:
     bool valid_;
     Library* library_;
     LibraryView* library_view_;
-    Player* player_;
+    PlayerInterface* player_;
     PlaylistManager* playlists_;
     TaskManager* task_manager_;
     SettingsDialog* settings_dialog_;
