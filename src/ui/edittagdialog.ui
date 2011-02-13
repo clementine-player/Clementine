@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>863</width>
-    <height>587</height>
+    <height>635</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -118,7 +118,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0">
+         <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0">
           <property name="horizontalSpacing">
            <number>18</number>
           </property>
@@ -461,7 +461,7 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="filetype_label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -477,7 +477,7 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="1" colspan="3">
+          <item row="7" column="1" colspan="3">
            <widget class="QLabel" name="filetype">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -496,7 +496,7 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="0">
+          <item row="8" column="0">
            <widget class="QLabel" name="mtime_label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -512,7 +512,7 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="1" colspan="3">
+          <item row="8" column="1" colspan="3">
            <widget class="QLabel" name="mtime">
             <property name="wordWrap">
              <bool>true</bool>
@@ -522,7 +522,7 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="0">
+          <item row="9" column="0">
            <widget class="QLabel" name="ctime_label">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -538,7 +538,7 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="1" colspan="3">
+          <item row="9" column="1" colspan="3">
            <widget class="QLabel" name="ctime">
             <property name="wordWrap">
              <bool>true</bool>
@@ -548,7 +548,7 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="filename_label">
             <property name="text">
              <string>File name</string>
@@ -558,7 +558,7 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="1" colspan="3">
+          <item row="6" column="1" colspan="3">
            <widget class="QLineEdit" name="filename">
             <property name="styleSheet">
              <string notr="true">QLineEdit {
@@ -572,19 +572,6 @@
              <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item row="6" column="0" colspan="4">
-           <spacer name="edit_tag_spacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
