@@ -800,7 +800,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
         d->filename_ = item_value.toString();
 
       else if (wcscmp(name, g_wszWMDMDuration) == 0)
-        set_length(item_value.toULongLong() * 1e2);
+        set_length_nanosec(item_value.toULongLong() * 1e2);
 
       else if (wcscmp(name, L"WMDM/FileSize") == 0)
         d->filesize_ = item_value.toULongLong();
@@ -864,7 +864,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
       if (!d->title_.isEmpty() || !d->artist_.isEmpty() ||
           !d->album_.isEmpty() || !d->comment_.isEmpty() ||
           !d->genre_.isEmpty() || d->track_ != -1 || d->year_ != -1 ||
-          length() != -1) {
+          length_nanosec() != -1) {
         d->filetype_ = Song::Type_Unknown;
         break;
       }
