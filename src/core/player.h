@@ -30,7 +30,7 @@
 #include "playlist/playlistitem.h"
 
 class LastFMService;
-class PlaylistManager;
+class PlaylistManagerInterface;
 class Settings;
 class MainWindow;
 
@@ -47,7 +47,7 @@ public:
 
   virtual PlaylistItemPtr GetCurrentItem() const = 0;
   virtual PlaylistItemPtr GetItemAt(int pos) const = 0;
-  virtual PlaylistManager* playlists() const = 0;
+  virtual PlaylistManagerInterface* playlists() const = 0;
 
 public slots:
   virtual void ReloadSettings() = 0;
@@ -99,7 +99,8 @@ class Player : public PlayerInterface {
   Q_OBJECT
 
 public:
-  Player(PlaylistManager* playlists, LastFMService* lastfm, QObject* parent = 0);
+  Player(PlaylistManagerInterface* playlists, LastFMService* lastfm,
+         QObject* parent = 0);
   ~Player();
 
   void Init();
@@ -110,7 +111,7 @@ public:
 
   PlaylistItemPtr GetCurrentItem() const { return current_item_; }
   PlaylistItemPtr GetItemAt(int pos) const;
-  PlaylistManager* playlists() const { return playlists_; }
+  PlaylistManagerInterface* playlists() const { return playlists_; }
 
 public slots:
   void ReloadSettings();
@@ -147,7 +148,7 @@ public slots:
   void NextInternal(Engine::TrackChangeType);
 
  private:
-  PlaylistManager* playlists_;
+  PlaylistManagerInterface* playlists_;
   LastFMService* lastfm_;
   QSettings settings_;
 

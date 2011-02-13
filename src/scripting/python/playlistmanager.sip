@@ -1,4 +1,4 @@
-class PlaylistManager : QObject {
+class PlaylistManagerInterface : QObject {
 
 %TypeHeaderCode
 #include "playlist/playlistmanager.h"
@@ -73,5 +73,5 @@ signals:
   void PlayRequested(const QModelIndex& index);
 
 private:
-  PlaylistManager();
+  PlaylistManagerInterface();
 };

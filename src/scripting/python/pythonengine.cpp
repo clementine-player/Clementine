@@ -133,7 +133,7 @@ Script* PythonEngine::CreateScript(const ScriptInfo& info) {
       AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
       AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
       AddObject(manager()->data().player_, sipType_PlayerInterface, "player");
-      AddObject(manager()->data().playlists_, sipType_PlaylistManager, "playlists");
+      AddObject(manager()->data().playlists_, sipType_PlaylistManagerInterface, "playlists");
       AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
       AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
       AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");

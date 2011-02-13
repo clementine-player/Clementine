@@ -18,6 +18,8 @@
 #include "core/encoding.h"
 #include "core/mpris1.h"
 #include "core/song.h"
+#include "playlist/playlistmanager.h"
+#include "playlist/playlistsequence.h"
 #include "radio/fixlastfm.h"
 #include <lastfm/Track>
 
@@ -25,20 +27,31 @@
 #include "gtest/gtest.h"
 
 #include "test_utils.h"
+#include "mock_engine.h"
 #include "mock_player.h"
+#include "mock_playlistmanager.h"
 
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
+#include <QSignalSpy>
 #include <QTemporaryFile>
 #include <QTextCodec>
 
 #include <id3v2tag.h>
 
+using ::testing::_;
+using ::testing::Return;
+
 namespace {
 
-class Mpris1Test : public ::testing::Test {
+class Mpris1BasicTest : public ::testing::Test {
 protected:
   void SetUp() {
+    sequence_.reset(new PlaylistSequence);
+
+    EXPECT_CALL(player_, engine()).WillRepeatedly(Return(&engine_));
+    EXPECT_CALL(player_, playlists()).WillRepeatedly(Return(&playlists_));
+    EXPECT_CALL(playlists_, sequence()).WillRepeatedly(Return(sequence_.get()));
   }
 
   QString service_name() const {
@@ -46,11 +59,14 @@ protected:
         QString::number(QCoreApplication::applicationPid());
   }
 
+  MockEngine engine_;
   MockPlayer player_;
+  MockPlaylistManager playlists_;
+
+  boost::scoped_ptr<PlaylistSequence> sequence_;
 };
 
-
-TEST_F(Mpris1Test, CreatesDBusService) {
+TEST_F(Mpris1BasicTest, CreatesDBusService) {
   EXPECT_FALSE(QDBusConnection::sessionBus().interface()->
                isServiceRegistered(service_name()));
 
@@ -62,6 +78,168 @@ TEST_F(Mpris1Test, CreatesDBusService) {
   mpris.reset();
   EXPECT_FALSE(QDBusConnection::sessionBus().interface()->
                isServiceRegistered(service_name()));
+}
+
+
+class Mpris1Test : public Mpris1BasicTest {
+protected:
+  void SetUp() {
+    Mpris1BasicTest::SetUp();
+
+    mpris_.reset(new mpris::Mpris1(&player_, NULL, NULL, service_name()));
+  }
+
+  boost::scoped_ptr<mpris::Mpris1> mpris_;
+};
+
+TEST_F(Mpris1Test, CorrectNameAndVersion) {
+  QCoreApplication::setApplicationName("Banana");
+  QCoreApplication::setApplicationVersion("Cheese");
+  EXPECT_EQ("Banana Cheese", mpris_->root()->Identity());
+
+  Version version = mpris_->root()->MprisVersion();
+  EXPECT_EQ(1, version.major);
+  EXPECT_EQ(0, version.minor);
+}
+
+TEST_F(Mpris1Test, Mutes) {
+  EXPECT_CALL(player_, Mute());
+  mpris_->player()->Mute();
+}
+
+TEST_F(Mpris1Test, GetsVolume) {
+  EXPECT_CALL(player_, GetVolume()).WillOnce(Return(50));
+  EXPECT_EQ(50, mpris_->player()->VolumeGet());
+}
+
+TEST_F(Mpris1Test, SetsVolume) {
+  EXPECT_CALL(player_, SetVolume(42));
+  mpris_->player()->VolumeSet(42);
+}
+
+TEST_F(Mpris1Test, RaisesVolume) {
+  EXPECT_CALL(player_, GetVolume()).WillOnce(Return(50));
+  EXPECT_CALL(player_, SetVolume(51));
+  mpris_->player()->VolumeUp(1);
+}
+
+TEST_F(Mpris1Test, LowersVolume) {
+  EXPECT_CALL(player_, GetVolume()).WillOnce(Return(50));
+  EXPECT_CALL(player_, SetVolume(49));
+  mpris_->player()->VolumeDown(1);
+}
+
+TEST_F(Mpris1Test, Pauses) {
+  EXPECT_CALL(player_, Pause());
+  mpris_->player()->Pause();
+}
+
+TEST_F(Mpris1Test, Stops) {
+  EXPECT_CALL(player_, Stop());
+  mpris_->player()->Stop();
+}
+
+TEST_F(Mpris1Test, Plays) {
+  EXPECT_CALL(player_, Play());
+  mpris_->player()->Play();
+}
+
+TEST_F(Mpris1Test, GoesPrevious) {
+  EXPECT_CALL(player_, Previous());
+  mpris_->player()->Prev();
+}
+
+TEST_F(Mpris1Test, GoesNext) {
+  EXPECT_CALL(player_, Next());
+  mpris_->player()->Next();
+}
+
+TEST_F(Mpris1Test, SetsPosition) {
+  EXPECT_CALL(player_, SeekTo(42));
+  mpris_->player()->PositionSet(42000);
+}
+
+TEST_F(Mpris1Test, GetsStatus) {
+  // Engine statuses
+  EXPECT_CALL(player_, GetState()).WillOnce(Return(Engine::Empty));
+  DBusStatus status = mpris_->player()->GetStatus();
+  EXPECT_EQ(DBusStatus::Mpris_Stopped, status.play);
+
+  EXPECT_CALL(player_, GetState()).WillOnce(Return(Engine::Idle));
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(DBusStatus::Mpris_Stopped, status.play);
+
+  EXPECT_CALL(player_, GetState()).WillOnce(Return(Engine::Paused));
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(DBusStatus::Mpris_Paused, status.play);
+
+  EXPECT_CALL(player_, GetState()).WillOnce(Return(Engine::Playing));
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(DBusStatus::Mpris_Playing, status.play);
+
+  EXPECT_CALL(player_, GetState()).WillRepeatedly(Return(Engine::Empty));
+
+  // Repeat modes
+  sequence_->SetRepeatMode(PlaylistSequence::Repeat_Off);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(0, status.repeat);
+  EXPECT_EQ(0, status.repeat_playlist);
+
+  sequence_->SetRepeatMode(PlaylistSequence::Repeat_Album);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(0, status.repeat);
+  EXPECT_EQ(1, status.repeat_playlist);
+
+  sequence_->SetRepeatMode(PlaylistSequence::Repeat_Playlist);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(0, status.repeat);
+  EXPECT_EQ(1, status.repeat_playlist);
+
+  sequence_->SetRepeatMode(PlaylistSequence::Repeat_Track);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(1, status.repeat);
+  EXPECT_EQ(1, status.repeat_playlist);
+
+  // Shuffle modes
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_Off);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(0, status.random);
+
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_Album);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(1, status.random);
+
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_All);
+  status = mpris_->player()->GetStatus();
+  EXPECT_EQ(1, status.random);
+}
+
+TEST_F(Mpris1Test, HandlesShuffleModeChanged) {
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_Off);
+  EXPECT_CALL(player_, GetState()).WillRepeatedly(Return(Engine::Empty));
+
+  QSignalSpy spy(mpris_->player(), SIGNAL(StatusChange(DBusStatus)));
+
+  playlists_.EmitPlaylistManagerInitialized();
+  EXPECT_EQ(0, spy.count());
+
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_All);
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(1, spy[0][0].value<DBusStatus>().random);
+  spy.clear();
+
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_All);
+  ASSERT_EQ(0, spy.count());
+
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_Album);
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(1, spy[0][0].value<DBusStatus>().random);
+  spy.clear();
+
+  sequence_->SetShuffleMode(PlaylistSequence::Shuffle_Off);
+  ASSERT_EQ(1, spy.count());
+  EXPECT_EQ(0, spy[0][0].value<DBusStatus>().random);
+  spy.clear();
 }
 
 }  // namespace

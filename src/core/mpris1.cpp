@@ -189,7 +189,7 @@ DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
       break;
   }
 
-  PlaylistManager* playlists_ = player_->playlists();
+  PlaylistManagerInterface* playlists_ = player_->playlists();
   PlaylistSequence::RepeatMode repeat_mode = playlists_->sequence()->repeat_mode();
 
   status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
@@ -228,7 +228,7 @@ int Mpris1Player::GetCaps() const {
 int Mpris1Player::GetCaps(Engine::State state) const {
   int caps = CAN_HAS_TRACKLIST;
   PlaylistItemPtr current_item = player_->GetCurrentItem();
-  PlaylistManager* playlists = player_->playlists();
+  PlaylistManagerInterface* playlists = player_->playlists();
 
   // play is disabled when playlist is empty or when last.fm stream is already playing
   if (playlists->active()->rowCount() != 0

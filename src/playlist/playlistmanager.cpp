@@ -31,7 +31,7 @@
 using smart_playlists::GeneratorPtr;
 
 PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
-  : QObject(parent),
+  : PlaylistManagerInterface(parent),
     task_manager_(task_manager),
     playlist_backend_(NULL),
     library_backend_(NULL),
@@ -70,7 +70,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   emit PlaylistManagerInitialized();
 }
 
-const QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
+QList<Playlist*> PlaylistManager::GetAllPlaylists() const {
   QList<Playlist*> result;
 
   foreach(const Data& data, playlists_.values()) {

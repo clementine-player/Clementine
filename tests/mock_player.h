@@ -27,7 +27,7 @@
 
 class MockPlayer : public PlayerInterface {
 public:
-  MockPlayer();
+  MockPlayer() {}
 
   MOCK_CONST_METHOD0(engine, EngineBase*());
   MOCK_CONST_METHOD0(GetState, Engine::State());
@@ -35,7 +35,7 @@ public:
 
   MOCK_CONST_METHOD0(GetCurrentItem, PlaylistItemPtr());
   MOCK_CONST_METHOD1(GetItemAt, PlaylistItemPtr(int));
-  MOCK_CONST_METHOD0(playlists, PlaylistManager*());
+  MOCK_CONST_METHOD0(playlists, PlaylistManagerInterface*());
 
   MOCK_METHOD0(ReloadSettings, void());
 

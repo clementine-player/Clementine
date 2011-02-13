@@ -18,7 +18,7 @@ class ScriptInterface : QObject {
     CLASS(ParserBase),
     CLASS(PlayerInterface),
     CLASS(Playlist),
-    CLASS(PlaylistManager),
+    CLASS(PlaylistManagerInterface),
     CLASS(PlaylistParser),
     CLASS(PlaylistSequence),
     CLASS(Queue),

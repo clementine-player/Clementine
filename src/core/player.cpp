@@ -36,7 +36,8 @@
 using boost::shared_ptr;
 
 
-Player::Player(PlaylistManager* playlists, LastFMService* lastfm, QObject* parent)
+Player::Player(PlaylistManagerInterface* playlists, LastFMService* lastfm,
+               QObject* parent)
   : PlayerInterface(parent),
     playlists_(playlists),
     lastfm_(lastfm),
