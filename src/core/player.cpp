@@ -96,8 +96,8 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
       return;
 
     engine_->Play(result.media_url_, stream_change_type_,
-                  item->Metadata().beginning() * 1000,
-                  item->Metadata().end() * 1000);
+                  item->Metadata().beginning() * 1e9,
+                  item->Metadata().end() * 1e9);
 
     current_item_ = item;
     loading_async_ = QUrl();
@@ -245,7 +245,7 @@ int Player::GetVolume() const {
 }
 
 void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
-  if (change == Engine::Manual && engine_->position() != engine_->length()) {
+  if (change == Engine::Manual && engine_->position_nanosec() != engine_->length_nanosec()) {
     emit TrackSkipped(current_item_);
   }
 
@@ -266,8 +266,8 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
   else {
     loading_async_ = QUrl();
     engine_->Play(current_item_->Url(), change,
-                  current_item_->Metadata().beginning() * 1000,
-                  current_item_->Metadata().end() * 1000);
+                  current_item_->Metadata().beginning() * 1e9,
+                  current_item_->Metadata().end() * 1e9);
 
 #ifdef HAVE_LIBLASTFM
     if (lastfm_->IsScrobblingEnabled())
@@ -283,21 +283,22 @@ void Player::CurrentMetadataChanged(const Song& metadata) {
 }
 
 void Player::Seek(int seconds) {
-  int msec = qBound(0, seconds * 1000, int(engine_->length()));
-  engine_->Seek(msec);
+  qint64 nanosec = qBound(0ll, qint64(seconds) * qint64(1e9),
+                          engine_->length_nanosec());
+  engine_->Seek(nanosec);
 
   // If we seek the track we don't want to submit it to last.fm
   playlists_->active()->set_scrobbled(true);
 
-  emit Seeked(msec * 1000);
+  emit Seeked(nanosec / 1000);
 }
 
 void Player::SeekForward() {
-  Seek(engine()->position() / 1000 + 5);
+  Seek(engine()->position_nanosec() / 1e9 + 5);
 }
 
 void Player::SeekBackward() {
-  Seek(engine()->position() / 1000 - 5);
+  Seek(engine()->position_nanosec() / 1e9 - 5);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {

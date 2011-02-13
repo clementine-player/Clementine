@@ -191,12 +191,12 @@ int Mpris1Player::VolumeGet() const {
   return player_->GetVolume();
 }
 
-void Mpris1Player::PositionSet(int pos) {
-  player_->Seek(pos/1000);
+void Mpris1Player::PositionSet(int pos_msec) {
+  player_->Seek(pos_msec / 1e3);
 }
 
 int Mpris1Player::PositionGet() const {
-  return player_->engine()->position();
+  return player_->engine()->position_nanosec() / 1e6;
 }
 
 QVariantMap Mpris1Player::GetMetadata() const {

@@ -75,13 +75,13 @@ GstEngine::GstEngine()
     rg_mode_(0),
     rg_preamp_(0.0),
     rg_compression_(true),
-    buffer_duration_ms_(1000),
+    buffer_duration_nanosec_(1000 * 1e6), // 1s
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
     next_element_id_(0)
 {
   seek_timer_->setSingleShot(true);
-  seek_timer_->setInterval(kSeekDelay);
+  seek_timer_->setInterval(kSeekDelayNanosec / 1e6);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
 
   ReloadSettings();
@@ -168,7 +168,7 @@ void GstEngine::ReloadSettings() {
   rg_preamp_ = s.value("rgpreamp", 0.0).toDouble();
   rg_compression_ = s.value("rgcompression", true).toBool();
 
-  buffer_duration_ms_ = s.value("bufferduration", 1000).toInt();
+  buffer_duration_nanosec_ = s.value("bufferduration", 1000).toLongLong() * 1e6;
 }
 
 
@@ -263,20 +263,20 @@ gboolean GstEngine::CanDecodeBusCallback(GstBus*, GstMessage* msg, gpointer) {
 }
 
 
-uint GstEngine::position() const {
+qint64 GstEngine::position_nanosec() const {
   if (!current_pipeline_)
     return 0;
 
-  int result = (current_pipeline_->position() / GST_MSECOND) - beginning_;
-  return uint(qMax(0, result));
+  qint64 result = current_pipeline_->position() - beginning_nanosec_;
+  return qint64(qMax(0ll, result));
 }
 
-uint GstEngine::length() const {
+qint64 GstEngine::length_nanosec() const {
   if (!current_pipeline_)
     return 0;
 
-  int result = end_ - beginning_;
-  return uint(qMax(0, result));
+  qint64 result = end_nanosec_ - beginning_nanosec_;
+  return qint64(qMax(0ll, result));
 }
 
 Engine::State GstEngine::state() const {
@@ -442,10 +442,10 @@ QUrl GstEngine::FixupUrl(const QUrl& url) {
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change,
-                     uint beginning, int end) {
+                     quint64 beginning_nanosec, qint64 end_nanosec) {
   EnsureInitialised();
 
-  Engine::Base::Load(url, change, beginning, end);
+  Engine::Base::Load(url, change, beginning_nanosec, end_nanosec);
 
   // Clementine just crashes when asked to load a file that doesn't exist on
   // Windows, so check for that here.  This is definitely the wrong place for
@@ -490,7 +490,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change,
 
   // Maybe fade in this track
   if (crossfade)
-    current_pipeline_->StartFader(fadeout_duration_, QTimeLine::Forward);
+    current_pipeline_->StartFader(fadeout_duration_nanosec_, QTimeLine::Forward);
 
   return true;
 }
@@ -501,20 +501,20 @@ void GstEngine::StartFadeout() {
   fadeout_pipeline_->RemoveAllBufferConsumers();
   ClearScopeBuffers();
 
-  fadeout_pipeline_->StartFader(fadeout_duration_, QTimeLine::Backward);
+  fadeout_pipeline_->StartFader(fadeout_duration_nanosec_, QTimeLine::Backward);
   connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutFinished()));
 }
 
 
-bool GstEngine::Play(uint offset) {
+bool GstEngine::Play(quint64 offset_nanosec) {
   EnsureInitialised();
 
   if (!current_pipeline_)
     return false;
 
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
-  BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
-      new BoundFutureWatcher<GstStateChangeReturn, uint>(offset, this);
+  BoundFutureWatcher<GstStateChangeReturn, quint64>* watcher =
+      new BoundFutureWatcher<GstStateChangeReturn, quint64>(offset_nanosec, this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
@@ -522,12 +522,12 @@ bool GstEngine::Play(uint offset) {
 }
 
 void GstEngine::PlayDone() {
-  BoundFutureWatcher<GstStateChangeReturn, uint>* watcher =
-      static_cast<BoundFutureWatcher<GstStateChangeReturn, uint>*>(sender());
+  BoundFutureWatcher<GstStateChangeReturn, quint64>* watcher =
+      static_cast<BoundFutureWatcher<GstStateChangeReturn, quint64>*>(sender());
   watcher->deleteLater();
 
   GstStateChangeReturn ret = watcher->result();
-  uint offset = watcher->data();
+  quint64 offset_nanosec = watcher->data();
 
   if (!current_pipeline_)
     return;
@@ -538,7 +538,7 @@ void GstEngine::PlayDone() {
     if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
       qDebug() << "Redirecting to" << redirect_url;
       current_pipeline_ = CreatePipeline(redirect_url);
-      Play(offset);
+      Play(offset_nanosec);
       return;
     }
 
@@ -553,8 +553,8 @@ void GstEngine::PlayDone() {
   current_sample_ = 0;
 
   // initial offset
-  if(offset != 0 || beginning_ != 0) {
-    Seek(offset);
+  if(offset_nanosec != 0 || beginning_nanosec_ != 0) {
+    Seek(offset_nanosec);
   }
 
   emit StateChanged(Engine::Playing);
@@ -565,7 +565,7 @@ void GstEngine::Stop() {
   StopTimers();
 
   url_ = QUrl(); // To ensure we return Empty from state()
-  beginning_ = end_ = 0;
+  beginning_nanosec_ = end_nanosec_ = 0;
 
   if (fadeout_enabled_ && current_pipeline_)
     StartFadeout();
@@ -602,11 +602,11 @@ void GstEngine::Unpause() {
   }
 }
 
-void GstEngine::Seek(uint ms) {
+void GstEngine::Seek(quint64 offset_nanosec) {
   if (!current_pipeline_)
     return;
 
-  seek_pos_ = beginning_ + ms;
+  seek_pos_ = beginning_nanosec_ + offset_nanosec;
   waiting_to_seek_ = true;
 
   if (!seek_timer_->isActive()) {
@@ -622,7 +622,7 @@ void GstEngine::SeekNow() {
   if (!current_pipeline_)
     return;
 
-  if (current_pipeline_->Seek(seek_pos_ * GST_MSECOND))
+  if (current_pipeline_->Seek(seek_pos_))
     ClearScopeBuffers();
   else
     qDebug() << "Seek failed";
@@ -652,7 +652,7 @@ void GstEngine::SetVolumeSW( uint percent ) {
 void GstEngine::StartTimers() {
   StopTimers();
 
-  timer_id_ = startTimer(kTimerInterval);
+  timer_id_ = startTimer(kTimerIntervalNanosec / 1e6);
 }
 
 void GstEngine::StopTimers() {
@@ -672,13 +672,13 @@ void GstEngine::timerEvent(QTimerEvent* e) {
   PruneScope();
 
   if (current_pipeline_) {
-    const qint64 current_position = position();
-    const qint64 current_length = length();
+    const qint64 current_position = position_nanosec();
+    const qint64 current_length = length_nanosec();
 
     const qint64 remaining = current_length - current_position;
 
-    const qint64 fudge = kTimerInterval + 100; // Mmm fudge
-    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_ : kPreloadGap;
+    const qint64 fudge = kTimerIntervalNanosec + 100 * 1e6; // Mmm fudge
+    const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_nanosec_ : kPreloadGapNanosec;
 
     // only if we know the length of the current stream...
     if(current_length > 0) {
@@ -692,7 +692,7 @@ void GstEngine::timerEvent(QTimerEvent* e) {
       // check to allow for the fact that the length has been rounded down to
       // the nearest second, and to stop us from occasionally stopping the
       // stream just before it ends normally.
-      if(current_position >= current_length + 1000) {
+      if(current_position >= current_length + 1000 * 1e6) {
         EndOfStreamReached(current_pipeline_->has_next_valid_url());
       }
     }
@@ -774,7 +774,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   shared_ptr<GstEnginePipeline> ret(new GstEnginePipeline(this));
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
-  ret->set_buffer_duration_ms(buffer_duration_ms_);
+  ret->set_buffer_duration_nanosec(buffer_duration_nanosec_);
 
   ret->AddBufferConsumer(this);
   foreach (BufferConsumer* consumer, buffer_consumers_)
@@ -808,7 +808,7 @@ qint64 GstEngine::PruneScope() {
     return 0;
 
   // get the position playing in the audio device
-  const qint64 pos = position() * 1e6;
+  const qint64 pos = position_nanosec();
   const qint64 segment_start = current_pipeline_->segment_start();
 
   GstBuffer *buf = 0;

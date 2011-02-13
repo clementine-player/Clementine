@@ -72,8 +72,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StopBackgroundStream(int id);
   void SetBackgroundStreamVolume(int id, int volume);
 
-  uint position() const;
-  uint length() const;
+  qint64 position_nanosec() const;
+  qint64 length_nanosec() const;
   Engine::State state() const;
   const Engine::Scope& scope();
 
@@ -88,12 +88,12 @@ class GstEngine : public Engine::Base, public BufferConsumer {
  public slots:
   void StartPreloading(const QUrl &);
   bool Load(const QUrl&, Engine::TrackChangeType change,
-            uint beginning, int end);
-  bool Play(uint offset);
+            quint64 beginning_nanosec, qint64 end_nanosec);
+  bool Play(quint64 offset_nanosec);
   void Stop();
   void Pause();
   void Unpause();
-  void Seek(uint ms);
+  void Seek(quint64 offset_nanosec);
 
   /** Set whether equalizer is enabled */
   void SetEqualizerEnabled(bool);
@@ -150,9 +150,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  static const int kTimerInterval = 1000; // msec
-  static const int kPreloadGap = 1000; // msec
-  static const int kSeekDelay = 100; // msec
+  static const int kTimerIntervalNanosec = 1000 * 1e6; // 1s
+  static const int kPreloadGapNanosec = 1000 * 1e6; // 1s
+  static const int kSeekDelayNanosec = 100 * 1e6; // 100msec
 
   static const char* kHypnotoadPipeline;
 
@@ -181,7 +181,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   float rg_preamp_;
   bool rg_compression_;
 
-  int buffer_duration_ms_;
+  qint64 buffer_duration_nanosec_;
 
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
@@ -189,7 +189,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   // Hack to stop seeks happening too often
   QTimer* seek_timer_;
   bool waiting_to_seek_;
-  uint seek_pos_;
+  quint64 seek_pos_;
 
   int timer_id_;
   int next_element_id_;

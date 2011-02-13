@@ -806,8 +806,8 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // the database.
   if (item && item->IsLocalLibraryItem() && !playlists_->active()->has_scrobbled()) {
     Song song = item->Metadata();
-    const int position = player_->engine()->position();
-    const int length = player_->engine()->length();
+    const qint64 position = player_->engine()->position_nanosec();
+    const qint64 length = player_->engine()->length_nanosec();
     const float percentage = (length == 0 ? 1 : float(position) / length);
 
     library_->backend()->IncrementSkipCountAsync(song.id(), percentage);
@@ -925,7 +925,8 @@ void MainWindow::FilePathChanged(const QString& path) {
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   PlaylistItemPtr item(player_->GetCurrentItem());
-  const int position = std::floor(float(player_->engine()->position()) / 1000.0 + 0.5);
+  const int position = std::floor(
+      float(player_->engine()->position_nanosec()) / 1e9 + 0.5);
   const int length = item->Metadata().length();
 
   if (length <= 0) {
@@ -1399,9 +1400,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     player_->SetVolume(player_->GetVolume() + options.volume_modifier());
 
   if (options.seek_to() != -1)
-    player_->Seek(options.seek_to());
+    player_->Seek(options.seek_to() * 1e9);
   else if (options.seek_by() != 0)
-    player_->Seek(player_->engine()->position() / 1000 + options.seek_by());
+    player_->Seek(player_->engine()->position_nanosec() + options.seek_by() * 1e9);
 
   if (options.play_track_at() != -1)
     player_->PlayAt(options.play_track_at(), Engine::Manual, true);

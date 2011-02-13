@@ -46,31 +46,31 @@ class Base : public QObject, boost::noncopyable {
   virtual bool CanDecode(const QUrl &url) = 0;
 
   virtual void StartPreloading(const QUrl&) {}
-  virtual bool Play(uint offset) = 0;
+  virtual bool Play(quint64 offset_nanosec) = 0;
   virtual void Stop() = 0;
   virtual void Pause() = 0;
   virtual void Unpause() = 0;
-  virtual void Seek( uint ms ) = 0;
+  virtual void Seek(quint64 offset_nanosec) = 0;
 
   virtual int AddBackgroundStream(const QUrl& url);
   virtual void StopBackgroundStream(int id) {}
   virtual void SetBackgroundStreamVolume(int id, int volume) {}
 
   virtual State state() const = 0;
-  virtual uint position() const = 0;
-  virtual uint length() const { return 0; }
+  virtual qint64 position_nanosec() const = 0;
+  virtual qint64 length_nanosec() const = 0;
 
   // Subclasses should respect given markers (beginning and end) which are
   // in miliseconds.
   virtual bool Load(const QUrl& url, TrackChangeType change,
-                    uint beginning, int end);
+                    quint64 beginning_nanosec, qint64 end_nanosec);
 
   // Plays a media stream represented with the URL 'u' from the given 'beginning'
   // to the given 'end' (usually from 0 to a song's length). Both markers
-  // should be passed in miliseconds. 'end' can be negative, indicating that the
+  // should be passed in nanoseconds. 'end' can be negative, indicating that the
   // real length of 'u' stream is unknown.
   bool Play(const QUrl& u, TrackChangeType c,
-            uint beginning, int end);
+            quint64 beginning_nanosec, qint64 end_nanosec);
 
   void SetVolume(uint value);
 
@@ -115,14 +115,14 @@ class Base : public QObject, boost::noncopyable {
   void EmitAboutToEnd();
 
  protected:
-  uint  volume_;
-  uint beginning_;
-  int end_;
-  QUrl  url_;
+  uint volume_;
+  quint64 beginning_nanosec_;
+  qint64 end_nanosec_;
+  QUrl url_;
   Scope scope_;
 
   bool fadeout_enabled_;
-  int fadeout_duration_;
+  qint64 fadeout_duration_nanosec_;
   bool crossfade_enabled_;
   bool autocrossfade_enabled_;
   int next_background_stream_id_;

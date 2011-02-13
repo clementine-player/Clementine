@@ -325,7 +325,7 @@ void Mpris2::SetVolume(double value) {
 }
 
 qlonglong Mpris2::Position() const {
-  return mpris1_->player()->PositionGet() * 1e3;
+  return mpris1_->player()->PositionGet() / 1e3;
 }
 
 double Mpris2::MaximumRate() const {
@@ -400,16 +400,16 @@ void Mpris2::Play() {
 
 void Mpris2::Seek(qlonglong offset) {
   if(CanSeek()) {
-    player_->Seek((Position() + offset) / 1e6);
+    player_->Seek(player_->engine()->position_nanosec() / 1e9 + offset / 1e6);
   }
 }
 
 void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
   if (CanSeek() && trackId.path() == current_track_id() && offset >= 0) {
-    offset /= 1e6;
+    offset *= 1e3;
 
     if(offset < player_->GetCurrentItem()->Metadata().length()) {
-      player_->Seek(offset);
+      player_->Seek(offset / 1e9);
     }
   }
 }

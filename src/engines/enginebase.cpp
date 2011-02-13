@@ -29,11 +29,11 @@ const char* Engine::Base::kSettingsGroup = "Player";
 
 Engine::Base::Base()
   : volume_(50),
-    beginning_(0),
-    end_(0),
+    beginning_nanosec_(0),
+    end_nanosec_(0),
     scope_(kScopeSize),
     fadeout_enabled_(true),
-    fadeout_duration_(2000),
+    fadeout_duration_nanosec_(2000 * 1e6), // 2s
     crossfade_enabled_(true),
     next_background_stream_id_(0),
     about_to_end_emitted_(false)
@@ -43,11 +43,11 @@ Engine::Base::Base()
 Engine::Base::~Base() {
 }
 
-bool Engine::Base::Load(const QUrl &url, TrackChangeType,
-                        uint beginning, int end) {
+bool Engine::Base::Load(const QUrl& url, TrackChangeType,
+                        quint64 beginning_nanosec, qint64 end_nanosec) {
   url_ = url;
-  beginning_ = beginning;
-  end_ = end;
+  beginning_nanosec_ = beginning_nanosec;
+  end_nanosec_ = end_nanosec;
 
   about_to_end_emitted_ = false;
   return true;
@@ -69,7 +69,7 @@ void Engine::Base::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
-  fadeout_duration_ = s.value("FadeoutDuration", 2000).toInt();
+  fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * 1e6;
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
   autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
 }
@@ -86,8 +86,9 @@ int Engine::Base::AddBackgroundStream(const QUrl& url) {
   return -1;
 }
 
-bool Engine::Base::Play(const QUrl& u, TrackChangeType c, uint beginning, int end) {
-  if (!Load(u, c, beginning, end))
+bool Engine::Base::Play(const QUrl& u, TrackChangeType c,
+                        quint64 beginning_nanosec, qint64 end_nanosec) {
+  if (!Load(u, c, beginning_nanosec, end_nanosec))
     return false;
 
   return Play(0);
