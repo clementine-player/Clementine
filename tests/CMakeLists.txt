@@ -42,6 +42,7 @@ set(TESTUTILS-SOURCES
     test_utils.cpp
     mock_networkaccessmanager.cpp
     mock_taglib.cpp
+    mock_player.cpp
     mock_playlistitem.cpp
 )
 
@@ -114,6 +115,7 @@ add_test_file(organiseformat_test.cpp false)
 add_test_file(playlist_test.cpp true)
 add_test_file(plsparser_test.cpp false)
 add_test_file(python_test.cpp true)
+add_test_file(mpris1_test.cpp false)
 add_test_file(scopedtransaction_test.cpp false)
 add_test_file(songloader_test.cpp false)
 add_test_file(songplaylistitem_test.cpp false)

@@ -79,7 +79,9 @@ class Mpris1 : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent = 0);
+  Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent = 0,
+         const QString& dbus_service_name = QString());
+  ~Mpris1();
 
   static QVariantMap GetMetadata(const Song& song);
 
@@ -88,6 +90,10 @@ public:
   Mpris1TrackList* tracklist() const { return tracklist_; }
 
 private:
+  static const char* kDefaultDbusServiceName;
+
+  QString dbus_service_name_;
+
   Mpris1Root* root_;
   Mpris1Player* player_;
   Mpris1TrackList* tracklist_;

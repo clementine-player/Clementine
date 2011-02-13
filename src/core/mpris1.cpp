@@ -31,13 +31,27 @@
 
 namespace mpris {
 
-Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent)
-  : QObject(parent)
+const char* Mpris1::kDefaultDbusServiceName = "org.mpris.clementine";
+
+Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent,
+               const QString& dbus_service_name)
+  : QObject(parent),
+    dbus_service_name_(dbus_service_name),
+    root_(NULL),
+    player_(NULL),
+    tracklist_(NULL)
 {
   qDBusRegisterMetaType<DBusStatus>();
   qDBusRegisterMetaType<Version>();
 
-  QDBusConnection::sessionBus().registerService("org.mpris.clementine");
+  if (dbus_service_name_.isEmpty()) {
+    dbus_service_name_ = kDefaultDbusServiceName;
+  }
+
+  if (!QDBusConnection::sessionBus().registerService(dbus_service_name_)) {
+    qWarning() << "Failed to register" << dbus_service_name_ << "on the session bus";
+    return;
+  }
 
   root_ = new Mpris1Root(player, this);
   player_ = new Mpris1Player(player, this);
@@ -45,6 +59,10 @@ Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent)
 
   connect(art_loader, SIGNAL(ArtLoaded(Song,QString)),
           player_, SLOT(CurrentSongChanged(Song,QString)));
+}
+
+Mpris1::~Mpris1() {
+  QDBusConnection::sessionBus().unregisterService(dbus_service_name_);
 }
 
 Mpris1Root::Mpris1Root(PlayerInterface* player, QObject* parent)
