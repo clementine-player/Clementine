@@ -918,6 +918,11 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
   QSet<int> song_ids;
 
   data->backend = backend_;
+  
+  if(!indexes.isEmpty()) {
+    // Give a "name" to the mime data. Will be used for naming playlist, if needed
+    data->setText(IndexToItem(indexes.first())->DisplayText());
+  }
 
   foreach (const QModelIndex& index, indexes) {
     GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);
