@@ -589,7 +589,7 @@ void LibraryModel::BeginReset() {
   }
 
   // Smart playlists?
-  if (show_smart_playlists_ && query_options_.get_filter().isEmpty())
+  if (show_smart_playlists_ && query_options_.filter().isEmpty())
     CreateSmartPlaylists();
 }
 

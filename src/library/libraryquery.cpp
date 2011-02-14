@@ -23,8 +23,8 @@
 #include <QSqlError>
 
 QueryOptions::QueryOptions()
-  : max_age(-1),
-    query_mode(QueryMode_All)
+  : max_age_(-1),
+    query_mode_(QueryMode_All)
 {
 }
 
@@ -33,14 +33,14 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   : join_with_fts_(false),
     limit_(-1)
 {
-  if (!options.get_filter().isEmpty()) {
+  if (!options.filter().isEmpty()) {
     // We need to munge the filter text a little bit to get it to work as
     // expected with sqlite's FTS3:
     //  1) Append * to all tokens.
     //  2) Prefix "fts" to column names.
 
     // Split on whitespace
-    QStringList tokens(options.get_filter().split(QRegExp("\\s+")));
+    QStringList tokens(options.filter().split(QRegExp("\\s+")));
     QString query;
     foreach (QString token, tokens) {
       token.remove('(');
@@ -57,8 +57,8 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     join_with_fts_ = true;
   }
 
-  if (options.get_max_age() != -1) {
-    int cutoff = QDateTime::currentDateTime().toTime_t() - options.get_max_age();
+  if (options.max_age() != -1) {
+    int cutoff = QDateTime::currentDateTime().toTime_t() - options.max_age();
 
     where_clauses_ << "ctime > ?";
     bound_values_ << cutoff;
@@ -71,9 +71,9 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
   // consistent - this way filtering is available only in the All mode.
   // remember though that when you fix the Duplicates + FTS cooperation, enable the
   // filtering in both Duplicates and Untagged modes.
-  duplicates_only_ = options.get_query_mode() == QueryOptions::QueryMode_Duplicates;
+  duplicates_only_ = options.query_mode() == QueryOptions::QueryMode_Duplicates;
 
-  if (options.get_query_mode() == QueryOptions::QueryMode_Untagged) {
+  if (options.query_mode() == QueryOptions::QueryMode_Untagged) {
     where_clauses_ << "(artist = '' OR album = '' OR title ='')";
   }
 }
@@ -159,16 +159,16 @@ QVariant LibraryQuery::Value(int column) const {
 }
 
 bool QueryOptions::Matches(const Song& song) const {
-  if (max_age != -1) {
-    const uint cutoff = QDateTime::currentDateTime().toTime_t() - max_age;
+  if (max_age_ != -1) {
+    const uint cutoff = QDateTime::currentDateTime().toTime_t() - max_age_;
     if (song.ctime() <= cutoff)
       return false;
   }
 
-  if (!filter.isNull()) {
-    return song.artist().contains(filter, Qt::CaseInsensitive) ||
-           song.album().contains(filter, Qt::CaseInsensitive) ||
-           song.title().contains(filter, Qt::CaseInsensitive);
+  if (!filter_.isNull()) {
+    return song.artist().contains(filter_, Qt::CaseInsensitive) ||
+           song.album().contains(filter_, Qt::CaseInsensitive) ||
+           song.title().contains(filter_, Qt::CaseInsensitive);
   }
 
   return true;
