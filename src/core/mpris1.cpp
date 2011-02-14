@@ -215,7 +215,7 @@ void Mpris1Player::PositionSet(int pos_msec) {
 }
 
 int Mpris1Player::PositionGet() const {
-  return player_->engine()->position_nanosec() / KNsecPerMsec;
+  return player_->engine()->position_nanosec() / kNsecPerMsec;
 }
 
 QVariantMap Mpris1Player::GetMetadata() const {
@@ -322,7 +322,7 @@ QVariantMap Mpris1::GetMetadata(const Song& song) {
   AddMetadata("artist", song.artist(), &ret);
   AddMetadata("album", song.album(), &ret);
   AddMetadata("time", song.length_nanosec() / kNsecPerSec, &ret);
-  AddMetadata("mtime", song.length_nanosec() / KNsecPerMsec, &ret);
+  AddMetadata("mtime", song.length_nanosec() / kNsecPerMsec, &ret);
   AddMetadata("tracknumber", song.track(), &ret);
   AddMetadata("year", song.year(), &ret);
   AddMetadata("genre", song.genre(), &ret);
