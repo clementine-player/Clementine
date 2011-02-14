@@ -70,7 +70,7 @@ void Engine::Base::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
-  fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * KNsecPerMSec;
+  fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * kNsecPerMsec;
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
   autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
 }
