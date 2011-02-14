@@ -111,7 +111,7 @@ TEST_F(SongLoaderTest, LoadLocalPls) {
   // Check the song got loaded
   ASSERT_EQ(1, loader_->songs().count());
   EXPECT_EQ("Title", loader_->songs()[0].title());
-  EXPECT_EQ(123 * 1e9, loader_->songs()[0].length_nanosec());
+  EXPECT_EQ(123 * kNsecPerSec, loader_->songs()[0].length_nanosec());
 }
 
 TEST_F(SongLoaderTest, LoadLocalM3U) {

@@ -47,7 +47,7 @@ TEST_F(M3UParserTest, ParsesMetadata) {
   ASSERT_TRUE(parser_.ParseMetadata(line, &metadata));
   EXPECT_EQ("Foo artist", metadata.artist.toStdString());
   EXPECT_EQ("Foo track", metadata.title.toStdString());
-  EXPECT_EQ(123 * 1e9, metadata.length);
+  EXPECT_EQ(123 * kNsecPerSec, metadata.length);
 }
 
 TEST_F(M3UParserTest, ParsesTrackLocation) {
@@ -101,7 +101,7 @@ TEST_F(M3UParserTest, ParsesSongsFromDevice) {
   Song s = songs[0];
   EXPECT_EQ("Some Artist", s.artist());
   EXPECT_EQ("Some Title", s.title());
-  EXPECT_EQ(123 * 1e9, s.length_nanosec());
+  EXPECT_EQ(123 * kNsecPerSec, s.length_nanosec());
   EXPECT_PRED_FORMAT2(::testing::IsSubstring,
       "http://foo.com/bar/somefile.mp3", s.filename().toStdString());
 }
@@ -130,9 +130,9 @@ TEST_F(M3UParserTest, ParsesActualM3U) {
   SongList songs = parser.Load(&file, "", QDir("somedir"));
   ASSERT_EQ(239, songs.size());
   EXPECT_EQ("gravity", songs[0].title());
-  EXPECT_EQ(203 * 1e9, songs[0].length_nanosec());
+  EXPECT_EQ(203 * kNsecPerSec, songs[0].length_nanosec());
   EXPECT_EQ(QString::fromUtf8("ほっぴンちょっぴン"), songs.back().title());
-  EXPECT_EQ(85 * 1e9, songs.back().length_nanosec());
+  EXPECT_EQ(85 * kNsecPerSec, songs.back().length_nanosec());
 }
 
 TEST_F(M3UParserTest, SavesSong) {
@@ -143,7 +143,7 @@ TEST_F(M3UParserTest, SavesSong) {
   one.set_filetype(Song::Type_Stream);
   one.set_title("foo");
   one.set_artist("bar");
-  one.set_length_nanosec(123 * 1e9);
+  one.set_length_nanosec(123 * kNsecPerSec);
   one.set_filename("http://www.example.com/foo.mp3");
   SongList songs;
   songs << one;

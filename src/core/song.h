@@ -30,6 +30,7 @@
 #include <xiphcomment.h>
 
 #include "config.h"
+#include "timeconstants.h"
 #include "engines/engine_fwd.h"
 
 #ifdef HAVE_LIBGPOD
@@ -71,6 +72,7 @@ class TagLibFileRefFactory : public FileRefFactory {
  public:
   virtual TagLib::FileRef* GetFileRef(const QString& filename);
 };
+
 
 class Song {
  public:

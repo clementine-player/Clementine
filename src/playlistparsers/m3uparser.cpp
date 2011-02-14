@@ -100,7 +100,7 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
   if (!ok) {
     return false;
   }
-  metadata->length = length * 1e9;
+  metadata->length = length * kNsecPerSec;
 
   QString track_info = info.section(',', 1);
   QStringList list = track_info.split('-');
@@ -120,7 +120,7 @@ void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
       continue;
     }
     QString meta = QString("#EXTINF:%1,%2 - %3\n")
-                   .arg(song.length_nanosec() / 1e9)
+                   .arg(song.length_nanosec() / kNsecPerSec)
                    .arg(song.artist()).arg(song.title());
     device->write(meta.toUtf8());
     device->write(MakeRelativeTo(song.filename(), dir).toUtf8());

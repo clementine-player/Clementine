@@ -380,7 +380,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   if (fileref->audioProperties()) {
     d->bitrate_    = fileref->audioProperties()->bitrate();
     d->samplerate_ = fileref->audioProperties()->sampleRate();
-    set_length_nanosec(fileref->audioProperties()->length() * 1e9);
+    set_length_nanosec(fileref->audioProperties()->length() * kNsecPerSec);
   }
 
   // Get the filetype if we can
@@ -547,7 +547,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   d->artist_ = track.artist();
   d->track_ = track.trackNumber();
 
-  set_length_nanosec(track.duration() * 1e9);
+  set_length_nanosec(track.duration() * kNsecPerSec);
 }
 #endif // HAVE_LIBLASTFM
 
@@ -567,7 +567,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->genre_ = QString::fromUtf8(track->genre);
     d->comment_ = QString::fromUtf8(track->comment);
     d->compilation_ = track->compilation;
-    set_length_nanosec(track->tracklen * 1e6);
+    set_length_nanosec(track->tracklen * kNsecPerMsec);
     d->bitrate_ = track->bitrate;
     d->samplerate_ = track->samplerate;
     d->mtime_ = track->time_modified;
@@ -597,7 +597,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->genre = strdup(d->genre_.toUtf8().constData());
     track->comment = strdup(d->comment_.toUtf8().constData());
     track->compilation = d->compilation_;
-    track->tracklen = length_nanosec() / 1e6;
+    track->tracklen = length_nanosec() / kNsecPerMsec;
     track->bitrate = d->bitrate_;
     track->samplerate = d->samplerate_;
     track->time_modified = d->mtime_;
@@ -626,7 +626,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->basefilename_ = d->filename_;
 
     d->track_ = track->tracknumber;
-    set_length_nanosec(track->duration * 1e6);
+    set_length_nanosec(track->duration * kNsecPerMsec);
     d->samplerate_ = track->samplerate;
     d->bitrate_ = track->bitrate;
     d->filesize_ = track->filesize;
@@ -666,7 +666,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->filename = strdup(d->basefilename_.toUtf8().constData());
 
     track->tracknumber = d->track_;
-    track->duration = length_nanosec() / 1e6;
+    track->duration = length_nanosec() / kNsecPerMsec;
     track->samplerate = d->samplerate_;
     track->nochannels = 0;
     track->wavecodec = 0;
@@ -1013,7 +1013,7 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setArtist(d->artist_);
   mtrack.setAlbum(d->album_);
   mtrack.setTitle(d->title_);
-  mtrack.setDuration(length_nanosec() / 1e9);
+  mtrack.setDuration(length_nanosec() / kNsecPerSec);
   mtrack.setTrackNumber(d->track_);
   mtrack.setSource(lastfm::Track::Player);
 }

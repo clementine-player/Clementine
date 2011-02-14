@@ -50,7 +50,7 @@ TEST_F(XSPFParserTest, ParsesOneTrackFromXML) {
   EXPECT_EQ("Bar", song.artist());
   EXPECT_EQ("Baz", song.album());
   EXPECT_EQ("http://example.com/foo.mp3", song.filename());
-  EXPECT_EQ(60 * 1e9, song.length_nanosec());
+  EXPECT_EQ(60 * kNsecPerSec, song.length_nanosec());
   EXPECT_TRUE(song.is_valid());
 }
 
@@ -103,7 +103,7 @@ TEST_F(XSPFParserTest, SavesSong) {
   one.set_filename("http://www.example.com/foo.mp3");
   one.set_filetype(Song::Type_Stream);
   one.set_title("foo");
-  one.set_length_nanosec(123 * 1e9);
+  one.set_length_nanosec(123 * kNsecPerSec);
   one.set_artist("bar");
   SongList songs;
   songs << one;
@@ -124,7 +124,7 @@ TEST_F(XSPFParserTest, SavesLocalFile) {
   one.set_filename("/bar/foo.mp3");
   one.set_filetype(Song::Type_Mpeg);
   one.set_title("foo");
-  one.set_length_nanosec(123 * 1e9);
+  one.set_length_nanosec(123 * kNsecPerSec);
   one.set_artist("bar");
   SongList songs;
   songs << one;

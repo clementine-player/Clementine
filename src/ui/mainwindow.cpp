@@ -926,8 +926,8 @@ void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
   PlaylistItemPtr item(player_->GetCurrentItem());
   const int position = std::floor(
-      float(player_->engine()->position_nanosec()) / 1e9 + 0.5);
-  const int length = item->Metadata().length_nanosec() / 1e9;
+      float(player_->engine()->position_nanosec()) / kNsecPerSec + 0.5);
+  const int length = item->Metadata().length_nanosec() / kNsecPerSec;
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
@@ -1400,9 +1400,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     player_->SetVolume(player_->GetVolume() + options.volume_modifier());
 
   if (options.seek_to() != -1)
-    player_->SeekTo(options.seek_to() * 1e9);
+    player_->SeekTo(options.seek_to() * kNsecPerSec);
   else if (options.seek_by() != 0)
-    player_->SeekTo(player_->engine()->position_nanosec() + options.seek_by() * 1e9);
+    player_->SeekTo(player_->engine()->position_nanosec() + options.seek_by() * kNsecPerSec);
 
   if (options.play_track_at() != -1)
     player_->PlayAt(options.play_track_at(), Engine::Manual, true);

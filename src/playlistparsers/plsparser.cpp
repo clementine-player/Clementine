@@ -54,7 +54,7 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
     } else if (key.startsWith("length")) {
       qint64 seconds = value.toLongLong();
       if (seconds > 0) {
-        songs[n].set_length_nanosec(seconds * 1e9);
+        songs[n].set_length_nanosec(seconds * kNsecPerSec);
       }
     }
   }
@@ -72,7 +72,7 @@ void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
   foreach (const Song& song, songs) {
     s << "File" << n << "=" << MakeRelativeTo(song.filename(), dir) << endl;
     s << "Title" << n << "=" << song.title() << endl;
-    s << "Length" << n << "=" << song.length_nanosec() / 1e9 << endl;
+    s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;
     ++n;
   }
 }

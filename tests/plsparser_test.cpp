@@ -50,7 +50,7 @@ TEST_F(PLSParserTest, ParseOneTrack) {
   ASSERT_EQ(1, songs.length());
   EXPECT_EQ("/relative/to/filename with spaces.mp3", songs[0].filename());
   EXPECT_EQ("Title", songs[0].title());
-  EXPECT_EQ(123 * 1e9, songs[0].length_nanosec());
+  EXPECT_EQ(123 * kNsecPerSec, songs[0].length_nanosec());
 }
 
 TEST_F(PLSParserTest, ParseSomaFM) {
@@ -93,7 +93,7 @@ TEST_F(PLSParserTest, SaveAndLoad) {
   Song two;
   two.set_filename("relative/bar.mp3");
   two.set_title("Bar");
-  two.set_length_nanosec(123 * 1e9);
+  two.set_length_nanosec(123 * kNsecPerSec);
 
   SongList songs;
   songs << one << two;

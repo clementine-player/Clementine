@@ -84,7 +84,7 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
         } else if (name == "duration") {  // in milliseconds.
           const QString& duration = reader->readElementText();
           bool ok = false;
-          nanosec = duration.toInt(&ok) * 1e6;
+          nanosec = duration.toInt(&ok) * kNsecPerMsec;
           if (!ok) {
             nanosec = -1;
           }
@@ -129,7 +129,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
       writer.writeTextElement("album", song.album());
     }
     if (song.length_nanosec() != -1) {
-      writer.writeTextElement("duration", QString::number(song.length_nanosec() / 1e6));
+      writer.writeTextElement("duration", QString::number(song.length_nanosec() / kNsecPerMsec));
     }
 
     QString art = song.art_manual().isEmpty() ? song.art_automatic() : song.art_manual();

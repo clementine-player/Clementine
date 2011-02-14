@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "timeconstants.h"
 #include "utilities.h"
 
 #include <QCoreApplication>
@@ -63,7 +64,7 @@ QString PrettyTime(int seconds) {
 }
 
 QString PrettyTimeNanosec(qint64 nanoseconds) {
-  return PrettyTime(nanoseconds / 1e9);
+  return PrettyTime(nanoseconds / kNsecPerSec);
 }
 
 QString WordyTime(quint64 seconds) {
@@ -80,7 +81,7 @@ QString WordyTime(quint64 seconds) {
 }
 
 QString WordyTimeNanosec(qint64 nanoseconds) {
-  return WordyTime(nanoseconds / 1e9);
+  return WordyTime(nanoseconds / kNsecPerSec);
 }
 
 QString Ago(int seconds_since_epoch, const QLocale& locale) {

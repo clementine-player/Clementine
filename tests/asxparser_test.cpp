@@ -102,7 +102,7 @@ TEST_F(ASXParserTest, SavesSong) {
   one.set_filename("http://www.example.com/foo.mp3");
   one.set_filetype(Song::Type_Stream);
   one.set_title("foo");
-  one.set_length_nanosec(123 * 1e9);
+  one.set_length_nanosec(123 * kNsecPerSec);
   one.set_artist("bar");
   SongList songs;
   songs << one;

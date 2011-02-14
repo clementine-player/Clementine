@@ -48,7 +48,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_mode_(0),
     rg_preamp_(0.0),
     rg_compression_(true),
-    buffer_duration_nanosec_(1000 * 1e6),
+    buffer_duration_nanosec_(1 * kNsecPerSec),
     ignore_tags_(false),
     volume_percent_(100),
     volume_modifier_(1.0),
@@ -532,7 +532,7 @@ void GstEnginePipeline::UpdateVolume() {
 void GstEnginePipeline::StartFader(qint64 duration_nanosec,
                                    QTimeLine::Direction direction,
                                    QTimeLine::CurveShape shape) {
-  const int duration_msec = duration_nanosec / 1e6;
+  const int duration_msec = duration_nanosec / kNsecPerMsec;
 
   // If there's already another fader running then start from the same time
   // that one was already at.

@@ -20,6 +20,7 @@
 //License:   See COPYING
 
 #include "enginebase.h"
+#include "core/timeconstants.h"
 
 #include <cmath>
 
@@ -33,7 +34,7 @@ Engine::Base::Base()
     end_nanosec_(0),
     scope_(kScopeSize),
     fadeout_enabled_(true),
-    fadeout_duration_nanosec_(2000 * 1e6), // 2s
+    fadeout_duration_nanosec_(2 * kNsecPerSec), // 2s
     crossfade_enabled_(true),
     next_background_stream_id_(0),
     about_to_end_emitted_(false)
@@ -69,7 +70,7 @@ void Engine::Base::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   fadeout_enabled_ = s.value("FadeoutEnabled", true).toBool();
-  fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * 1e6;
+  fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * KNsecPerMSec;
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
   autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
 }

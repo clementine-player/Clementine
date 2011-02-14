@@ -75,13 +75,13 @@ GstEngine::GstEngine()
     rg_mode_(0),
     rg_preamp_(0.0),
     rg_compression_(true),
-    buffer_duration_nanosec_(1000 * 1e6), // 1s
+    buffer_duration_nanosec_(1 * kNsecPerSec), // 1s
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
     next_element_id_(0)
 {
   seek_timer_->setSingleShot(true);
-  seek_timer_->setInterval(kSeekDelayNanosec / 1e6);
+  seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
   connect(seek_timer_, SIGNAL(timeout()), SLOT(SeekNow()));
 
   ReloadSettings();
@@ -168,7 +168,7 @@ void GstEngine::ReloadSettings() {
   rg_preamp_ = s.value("rgpreamp", 0.0).toDouble();
   rg_compression_ = s.value("rgcompression", true).toBool();
 
-  buffer_duration_nanosec_ = s.value("bufferduration", 1000).toLongLong() * 1e6;
+  buffer_duration_nanosec_ = s.value("bufferduration", 1000).toLongLong() * kNsecPerMsec;
 }
 
 
@@ -652,7 +652,7 @@ void GstEngine::SetVolumeSW( uint percent ) {
 void GstEngine::StartTimers() {
   StopTimers();
 
-  timer_id_ = startTimer(kTimerIntervalNanosec / 1e6);
+  timer_id_ = startTimer(kTimerIntervalNanosec / kNsecPerMsec);
 }
 
 void GstEngine::StopTimers() {
@@ -677,7 +677,7 @@ void GstEngine::timerEvent(QTimerEvent* e) {
 
     const qint64 remaining = current_length - current_position;
 
-    const qint64 fudge = kTimerIntervalNanosec + 100 * 1e6; // Mmm fudge
+    const qint64 fudge = kTimerIntervalNanosec + 100 * kNsecPerMsec; // Mmm fudge
     const qint64 gap = autocrossfade_enabled_ ? fadeout_duration_nanosec_ : kPreloadGapNanosec;
 
     // only if we know the length of the current stream...
@@ -692,7 +692,7 @@ void GstEngine::timerEvent(QTimerEvent* e) {
       // check to allow for the fact that the length has been rounded down to
       // the nearest second, and to stop us from occasionally stopping the
       // stream just before it ends normally.
-      if(current_position >= current_length + 1000 * 1e6) {
+      if(current_position >= current_length + 1000 * kNsecPerMsec) {
         EndOfStreamReached(current_pipeline_->has_next_valid_url());
       }
     }

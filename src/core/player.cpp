@@ -278,7 +278,7 @@ void Player::CurrentMetadataChanged(const Song& metadata) {
 }
 
 void Player::SeekTo(int seconds) {
-  qint64 nanosec = qBound(0ll, qint64(seconds) * qint64(1e9),
+  qint64 nanosec = qBound(0ll, qint64(seconds) * kNsecPerSec,
                           engine_->length_nanosec());
   engine_->Seek(nanosec);
 
@@ -289,11 +289,11 @@ void Player::SeekTo(int seconds) {
 }
 
 void Player::SeekForward() {
-  SeekTo(engine()->position_nanosec() / 1e9 + 5);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec + 5);
 }
 
 void Player::SeekBackward() {
-  SeekTo(engine()->position_nanosec() / 1e9 - 5);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec - 5);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {

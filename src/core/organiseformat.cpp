@@ -136,7 +136,7 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
   else if (tag == "track")       value = QString::number(song.track());
   else if (tag == "disc")        value = QString::number(song.disc());
   else if (tag == "bpm")         value = QString::number(song.bpm());
-  else if (tag == "length")      value = QString::number(song.length_nanosec() / 1e9);
+  else if (tag == "length")      value = QString::number(song.length_nanosec() / kNsecPerSec);
   else if (tag == "bitrate")     value = QString::number(song.bitrate());
   else if (tag == "samplerate")  value = QString::number(song.samplerate());
   else if (tag == "extension")   value = song.filename().section('.', -1, -1);

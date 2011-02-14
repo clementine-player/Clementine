@@ -22,8 +22,9 @@
 #ifndef AMAROK_GSTENGINE_H
 #define AMAROK_GSTENGINE_H
 
-#include "enginebase.h"
 #include "bufferconsumer.h"
+#include "enginebase.h"
+#include "core/timeconstants.h"
 
 #include <QFuture>
 #include <QHash>
@@ -150,9 +151,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static QUrl FixupUrl(const QUrl& url);
 
  private:
-  static const int kTimerIntervalNanosec = 1000 * 1e6; // 1s
-  static const int kPreloadGapNanosec = 1000 * 1e6; // 1s
-  static const int kSeekDelayNanosec = 100 * 1e6; // 100msec
+  static const int kTimerIntervalNanosec = 1000 * kNsecPerMsec; // 1s
+  static const int kPreloadGapNanosec = 1000 * kNsecPerMsec; // 1s
+  static const int kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
 
   static const char* kHypnotoadPipeline;
 
