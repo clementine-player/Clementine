@@ -15,13 +15,13 @@ public:
 
   bool Matches(const Song& song) const;
 
-  QString get_filter() const;
+  QString filter() const;
   void set_filter(const QString& filter);
 
-  int get_max_age() const;
+  int max_age() const;
   void set_max_age(int max_age);
 
-  QueryMode get_query_mode() const;
+  QueryMode query_mode() const;
   void set_query_mode(QueryMode view);
 };
 
