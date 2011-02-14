@@ -64,18 +64,18 @@ TagFetcher::~TagFetcher() {
 void TagFetcher::FetchFromFile(const QString& path) {
   mutex_active_fetchers_.lock();
   int id = tp_AddFile(pimp_, QFile::encodeName(path), 0);
-  TagFetcherItem* tagFetcherItem = new TagFetcherItem(path, id, pimp_, network_);
-  active_fetchers_.insert(id, tagFetcherItem);
+  TagFetcherItem* tag_fetcher_item = new TagFetcherItem(path, id, pimp_, network_);
+  active_fetchers_.insert(id, tag_fetcher_item);
   mutex_active_fetchers_.unlock();
-  connect(tagFetcherItem, SIGNAL(PuidGeneratedSignal()), tagFetcherItem, SLOT(PuidGeneratedSlot()), Qt::QueuedConnection);
-  connect(tagFetcherItem, SIGNAL(FetchFinishedSignal(int)), SLOT(FetchFinishedSlot(int)));
+  connect(tag_fetcher_item, SIGNAL(PuidGeneratedSignal()), tag_fetcher_item, SLOT(PuidGeneratedSlot()), Qt::QueuedConnection);
+  connect(tag_fetcher_item, SIGNAL(FetchFinishedSignal(int)), SLOT(FetchFinishedSlot(int)));
 }
 
 void TagFetcher::NotifyCallback(tunepimp_t pimp, void *data, TPCallbackEnum type, int fileId, TPFileStatus status)
 {
   if(type == tpFileChanged) {
-    TagFetcher *tagFetcher = (TagFetcher*)data;
-    tagFetcher->CallReturned(fileId, status);
+    TagFetcher *tag_fetcher = (TagFetcher*)data;
+    tag_fetcher->CallReturned(fileId, status);
   }
 }
 
@@ -85,20 +85,20 @@ void TagFetcher::CallReturned(int fileId, TPFileStatus status)
   // item not yet inserted: this could happen because libtunepimp proceed in
   // a separate thread after tp_AddFile call
   mutex_active_fetchers_.lock();
-  TagFetcherItem *tagFetcherItem = active_fetchers_.value(fileId);
+  TagFetcherItem *tag_fetcher_item = active_fetchers_.value(fileId);
   mutex_active_fetchers_.unlock();
   switch(status) {
     case eRecognized:
       // TODO
       break;
     case eUnrecognized:
-      tagFetcherItem->Unrecognized();
+      tag_fetcher_item->Unrecognized();
       break;
     case ePUIDLookup:
     case ePUIDCollision:
     case eFileLookup:
       //TODO
-      tagFetcherItem->PuidGenerated();
+      tag_fetcher_item->PuidGenerated();
       break;
     case eUserSelection:
       // TODO
@@ -112,11 +112,11 @@ void TagFetcher::CallReturned(int fileId, TPFileStatus status)
 }
 
 void TagFetcher::FetchFinishedSlot(int id) {
-  TagFetcherItem *tagFetcherItem = active_fetchers_.value(id);
+  TagFetcherItem *tag_fetcher_item = active_fetchers_.value(id);
   tp_Remove(pimp_, id);
   active_fetchers_.erase(active_fetchers_.find(id));
-  emit FetchFinished(tagFetcherItem->getFilename(), tagFetcherItem->getSongsFetched());
-  delete tagFetcherItem;
+  emit FetchFinished(tag_fetcher_item->getFilename(), tag_fetcher_item->getSongsFetched());
+  delete tag_fetcher_item;
 }
 
 TagFetcherItem::TagFetcherItem(const QString& _filename, int _fileId, tunepimp_t _pimp, NetworkAccessManager *_network)
