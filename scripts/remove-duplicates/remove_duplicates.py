@@ -59,7 +59,7 @@ class RemoveDuplicatesListener(SongInsertVetoListener):
 
   def url_for_song(self, song):
     if not song.filename() == "":
-      return song.filename() + ":" + str(song.beginning())
+      return song.filename() + ":" + str(song.beginning_nanosec())
     else:
       return ""
 		

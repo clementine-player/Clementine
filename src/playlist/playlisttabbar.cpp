@@ -209,6 +209,7 @@ void PlaylistTabBar::timerEvent(QTimerEvent* e) {
 void PlaylistTabBar::dropEvent(QDropEvent* e) {
   if (drag_hover_tab_ == -1) {
     manager_->New(tr("Playlist"));
+    setCurrentIndex(count() - 1);
   } else {
     setCurrentIndex(drag_hover_tab_);
   }
