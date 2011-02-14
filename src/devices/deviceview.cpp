@@ -24,6 +24,7 @@
 #include "core/mimedata.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
+#include "library/libraryview.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
 #include "ui/organiseerrordialog.h"
@@ -370,7 +371,7 @@ void DeviceView::AddToPlaylist() {
 void DeviceView::OpenInNewPlaylist() {
   QMimeData* data = model()->mimeData(selectedIndexes());
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->new_playlist_ = true;
+    mime_data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(GetSelectedSongs());
   }
   emit AddToPlaylistSignal(data);
 }

@@ -10,7 +10,7 @@ class DigitallyImportedService(DigitallyImportedServiceBase):
   HOMEPAGE_NAME = "di.fm"
   STREAM_LIST_URL = QUrl("http://listen.di.fm/")
   ICON_FILENAME = "icon-small.png"
-  SERVICE_NAME = "digitally_imported"
+  SERVICE_NAME = "DigitallyImported"
   SERVICE_DESCRIPTION = "Digitally Imported"
 
   # These have to be in the same order as in the settings dialog

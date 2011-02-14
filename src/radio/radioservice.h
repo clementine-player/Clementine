@@ -34,6 +34,8 @@ class RadioService : public QObject {
   Q_OBJECT
 
 public:
+  // Constructs a new radio service with the given name and model. The name
+  // should be user-friendly (like 'DigitallyImported' or 'Last.fm').
   RadioService(const QString& name, RadioModel* model);
   virtual ~RadioService() {}
 

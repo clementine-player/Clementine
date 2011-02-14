@@ -37,8 +37,9 @@
 #include <QHelpEvent>
 #include <QMenu>
 #include <QMessageBox>
-#include <QSortFilterProxyModel>
+#include <QSet>
 #include <QSettings>
+#include <QSortFilterProxyModel>
 #include <QToolTip>
 #include <QWhatsThis>
 
@@ -374,7 +375,7 @@ void LibraryView::AddToPlaylistEnqueue() {
 void LibraryView::OpenInNewPlaylist() {
   QMimeData* data = model()->mimeData(selectedIndexes());
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->new_playlist_ = true;
+    mime_data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(GetSelectedSongs());
   }
   emit AddToPlaylistSignal(data);
 }
@@ -528,4 +529,37 @@ void LibraryView::NewSmartPlaylistFinished() {
 void LibraryView::EditSmartPlaylistFinished() {
   const Wizard* wizard = qobject_cast<Wizard*>(sender());
   library_->UpdateGenerator(context_menu_index_, wizard->CreateGenerator());
+}
+
+QString LibraryView::GetNameForNewPlaylist(const SongList& songs) {
+  QSet<QString> artists;
+  QSet<QString> albums;
+
+  foreach(const Song& song, songs) {
+    artists << (song.artist().isEmpty()
+                    ? tr("Unknown")
+                    : song.artist());
+    albums << (song.album().isEmpty()
+                    ? tr("Unknown")
+                    : song.album());
+
+    if(artists.size() > 1) {
+      break;
+    }
+  }
+
+  bool various_artists = artists.size() > 1;
+
+  QString result;
+  if(various_artists) {
+    result = tr("Various artists");
+  } else {
+    result = artists.values().at(0);
+  }
+
+  if(!various_artists && albums.size() == 1) {
+    result += " - " + albums.toList()[0];
+  }
+
+  return result;
 }

@@ -90,7 +90,7 @@ void FileViewList::AddToPlaylistSlot() {
 
 void FileViewList::OpenInNewPlaylistSlot() {
   MimeData* data = MimeDataFromSelection();
-  data->new_playlist_ = true;
+  data->name_for_new_playlist_ = static_cast<QFileSystemModel*>(model())->rootPath();
   emit AddToPlaylist(data);
 }
 
