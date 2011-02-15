@@ -45,7 +45,12 @@ signals:
   void PlaylistFinished();
   void VolumeChanged(int volume);
   void Error(const QString& message);
-  void TrackSkipped(PlaylistItemPtr old_track);
+
+  // Disabled for now because it causes:
+  // TypeError: C++ type 'PlaylistItemPtr' is not supported as a native Qt signal type
+  // void TrackSkipped(PlaylistItemPtr old_track);
+
+  void Seeked(qlonglong microseconds);
 
   void ForceShowOSD(Song);
 

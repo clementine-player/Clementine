@@ -93,73 +93,81 @@ const sipAPIDef* PythonEngine::GetSIPApi() {
 #endif
 }
 
-Script* PythonEngine::CreateScript(const ScriptInfo& info) {
-  // Initialise Python if it hasn't been done yet
-  if (!initialised_) {
-    AddLogLine("Initialising python...", false);
+bool PythonEngine::EnsureInitialised() {
+  if (initialised_)
+    return true;
+
+  AddLogLine("Initialising python...", false);
 
 #ifdef Q_OS_WIN32
-    // On Windows we statically link against SIP and PyQt, so add those modules
-    // to Python's inittab here.
-    PyImport_AppendInittab(const_cast<char*>("sip"), initsip);
-    PyImport_AppendInittab(const_cast<char*>("PyQt4.Qt"), initQt);
-    PyImport_AppendInittab(const_cast<char*>("PyQt4.QtCore"), initQtCore);
-    PyImport_AppendInittab(const_cast<char*>("PyQt4.QtGui"), initQtGui);
-    PyImport_AppendInittab(const_cast<char*>("PyQt4.QtNetwork"), initQtNetwork);
+  // On Windows we statically link against SIP and PyQt, so add those modules
+  // to Python's inittab here.
+  PyImport_AppendInittab(const_cast<char*>("sip"), initsip);
+  PyImport_AppendInittab(const_cast<char*>("PyQt4.Qt"), initQt);
+  PyImport_AppendInittab(const_cast<char*>("PyQt4.QtCore"), initQtCore);
+  PyImport_AppendInittab(const_cast<char*>("PyQt4.QtGui"), initQtGui);
+  PyImport_AppendInittab(const_cast<char*>("PyQt4.QtNetwork"), initQtNetwork);
 #endif
 
-    // Add the Clementine builtin module
-    PyImport_AppendInittab(const_cast<char*>("clementine"), initclementine);
+  // Add the Clementine builtin module
+  PyImport_AppendInittab(const_cast<char*>("clementine"), initclementine);
 
-    // Initialise python
-    Py_SetProgramName(const_cast<char*>("clementine"));
-    PyEval_InitThreads();
-    Py_InitializeEx(0);
+  // Initialise python
+  Py_SetProgramName(const_cast<char*>("clementine"));
+  PyEval_InitThreads();
+  Py_InitializeEx(0);
 
-    // Get the clementine module so we can put stuff in it
-    clementine_module_ = PyImport_ImportModule("clementine");
-    if (!clementine_module_) {
-      AddLogLine("Failed to import the clementine module", true);
-      if (PyErr_Occurred()) {
-        PyErr_Print();
-      }
-      Py_Finalize();
-      return NULL;
+  // Get the clementine module so we can put stuff in it
+  clementine_module_ = PyImport_ImportModule("clementine");
+  if (!clementine_module_) {
+    AddLogLine("Failed to import the clementine module", true);
+    if (PyErr_Occurred()) {
+      PyErr_Print();
     }
-    sip_api_ = GetSIPApi();
+    Py_Finalize();
+    return false;
+  }
+  sip_api_ = GetSIPApi();
 
-    // Add objects to the module
-    if (manager()->data().valid_) {
-      AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
-      AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
-      AddObject(manager()->data().player_, sipType_PlayerInterface, "player");
-      AddObject(manager()->data().playlists_, sipType_PlaylistManagerInterface, "playlists");
-      AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
-      AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
-      AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
-    }
+  // Add objects to the module
+  if (manager()->data().valid_) {
+    AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
+    AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
+    AddObject(manager()->data().player_, sipType_PlayerInterface, "player");
+    AddObject(manager()->data().playlists_, sipType_PlaylistManagerInterface, "playlists");
+    AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
+    AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
+    AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
+  }
 
-    AddObject(manager()->ui(), sipType_UIInterface, "ui");
-    AddObject(this, sipType_PythonEngine, "pythonengine");
+  AddObject(manager()->ui(), sipType_UIInterface, "ui");
+  AddObject(this, sipType_PythonEngine, "pythonengine");
 
-    // Create a module for scripts
-    PyImport_AddModule(kModulePrefix);
+  // Create a module for scripts
+  PyImport_AddModule(kModulePrefix);
 
-    // Run the startup script - this redirects sys.stdout and sys.stderr to our
-    // log handler.
-    QFile python_startup(":pythonstartup.py");
-    python_startup.open(QIODevice::ReadOnly);
-    QByteArray python_startup_script = python_startup.readAll();
+  // Run the startup script - this redirects sys.stdout and sys.stderr to our
+  // log handler.
+  QFile python_startup(":pythonstartup.py");
+  python_startup.open(QIODevice::ReadOnly);
+  QByteArray python_startup_script = python_startup.readAll();
 
-    if (PyRun_SimpleString(python_startup_script.constData()) != 0) {
-      AddLogLine("Could not execute startup code", true);
-      Py_Finalize();
-      return NULL;
-    }
+  if (PyRun_SimpleString(python_startup_script.constData()) != 0) {
+    AddLogLine("Could not execute startup code", true);
+    Py_Finalize();
+    return false;
+  }
 
-    PyEval_ReleaseLock();
+  PyEval_ReleaseLock();
 
-    initialised_ = true;
+  initialised_ = true;
+  return true;
+}
+
+Script* PythonEngine::CreateScript(const ScriptInfo& info) {
+  // Initialise Python if it hasn't been done yet
+  if (!EnsureInitialised()) {
+    return NULL;
   }
 
   Script* ret = new PythonScript(this, info);

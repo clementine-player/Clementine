@@ -308,6 +308,7 @@ add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)
 add_subdirectory(scripts)
+add_subdirectory(doc/python)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)

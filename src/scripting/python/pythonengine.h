@@ -38,6 +38,8 @@ public:
   ScriptInfo::Language language() const { return ScriptInfo::Language_Python; }
   QString name() const { return "python"; }
 
+  bool EnsureInitialised();
+
   Script* CreateScript(const ScriptInfo& info);
   void DestroyScript(Script* script);
 
