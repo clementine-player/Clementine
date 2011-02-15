@@ -15,6 +15,7 @@ macro(add_sip_binding outputvar source)
   set(PYQT_SIP_FLAGS
     "-x" "VendorID"
     "-x" "PyQt_NoPrintRangeBug"
+    "-o"
   )
 
   if(WIN32)

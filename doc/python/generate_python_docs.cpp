@@ -27,9 +27,6 @@
 int main(int argc, char** argv) {
   QApplication a(argc, argv);
 
-  // Register some meta types required by the exposed classes
-  qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
-
   // Create the python engine
   ScriptManager manager;
   LanguageEngine* language_engine =
