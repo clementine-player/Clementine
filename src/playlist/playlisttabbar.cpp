@@ -60,7 +60,7 @@ void PlaylistTabBar::SetManager(PlaylistManager *manager) {
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
   menu_index_ = tabAt(e->pos());
   rename_->setEnabled(menu_index_ != -1);
-  remove_->setEnabled(menu_index_ != -1 && count() > 1 && menu_index_ != index_of(manager_->active_id()));
+  remove_->setEnabled(menu_index_ != -1 && count() > 1);
   save_->setEnabled(menu_index_ != -1);
 
   menu_->popup(e->globalPos());
