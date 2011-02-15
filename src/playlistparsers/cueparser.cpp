@@ -316,8 +316,9 @@ qint64 CueParser::IndexToMarker(const QString& index) const {
   }
 
   QStringList splitted = index_regexp.capturedTexts().mid(1, -1);
-  // TODO: use frames when #1166 is fixed
-  return (splitted.at(0).toLongLong() * 60 + splitted.at(1).toLongLong()) * kNsecPerSec;
+  qlonglong frames = splitted.at(0).toLongLong() * 60 * 75 + splitted.at(1).toLongLong() * 75 +
+                     splitted.at(2).toLongLong();
+  return (frames * kNsecPerSec) / 75;
 }
 
 void CueParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {

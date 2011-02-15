@@ -22,7 +22,6 @@
 #include <QContextMenuEvent>
 #include <QFileSystemModel>
 #include <QMenu>
-#include <QSet>
 #include <QtDebug>
 
 FileViewList::FileViewList(QWidget* parent)
@@ -92,18 +91,10 @@ void FileViewList::AddToPlaylistSlot() {
 void FileViewList::OpenInNewPlaylistSlot() {
   MimeData* data = MimeDataFromSelection();
 
-  QSet<QString> filenames;
-  foreach(const QString& filename, FilenamesFromSelection()) {
-    filenames.insert(filename);
-
-    if(filenames.size() > 1) {
-      break;
-    }
-  }
-
+  QList<QString> filenames = FilenamesFromSelection();
   // if just one file / folder selected - use it's path as the new playlist's name
   if(filenames.size() == 1) {
-    data->name_for_new_playlist_ = filenames.toList()[0];
+    data->name_for_new_playlist_ = filenames[0];
   // otherwise, use the current root path
   } else {
     data->name_for_new_playlist_ = static_cast<QFileSystemModel*>(model())->rootPath();

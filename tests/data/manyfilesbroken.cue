@@ -3,12 +3,12 @@ PERFORMER "Artist One"
 TITLE "Artist One Album"
   TRACK 01 AUDIO
     TITLE "A1"
-    INDEX 01 00:01:00
+    INDEX 01 00:01:15
   TRACK 02 AUDIO
     TITLE "A2"
   TRACK 03 AUDIO
     TITLE "A3"
-    INDEX 01 01:00:00
+    INDEX 01 01:00:16
 FILE file2.mp3 WAVE
 PERFORMER "Artist Two"
 TITLE "Artist Two Album"
@@ -30,4 +30,4 @@ TITLE "Artist Four Album"
     TITLE "D1"
   TRACK 02 AUDIO
     TITLE "D2"
-    INDEX 00 01:01:00
+    INDEX 00 15:55:66
