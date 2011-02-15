@@ -18,6 +18,12 @@ qt4_add_resources(QRC ${RESOURCES})
 add_executable(generate_python_docs EXCLUDE_FROM_ALL ${SOURCES} ${QRC})
 target_link_libraries(generate_python_docs clementine_lib)
 
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/epydoc.css
+  ${CMAKE_CURRENT_BINARY_DIR}/epydoc.css
+  COPYONLY
+)
+
 add_custom_target(pythondocs
   generate_python_docs
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

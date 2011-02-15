@@ -5,13 +5,20 @@ import sys
 
 import inspect
 
+# SIP does some strange stuff with the __dict__ of wrapped C++ classes:
+#   someclass.__dict__["function"] != someclass.function
+# These little hacks make epydoc generate documentation for the actual functions
+# instead of their sip.methoddescriptor wrappers.
+
 def is_pyqt_wrapper_class(thing):
   return epydoc.docintrospecter.isclass(thing) and \
          isinstance(thing, PyQt4.QtCore.pyqtWrapperType)
 
 def introspect_pyqt_wrapper_class(thing, doc, module_name=None):
+  # Inspect the class as normal
   doc = epydoc.docintrospecter.introspect_class(thing, doc, module_name=module_name)
 
+  # Re-inspect the actual member functions
   for name in thing.__dict__.keys():
     if name in doc.variables and hasattr(thing, name):
       actual_var = getattr(thing, name)
@@ -33,6 +40,9 @@ sys.argv = [
   "-v",
   "--name", "clementine",
   "--url", "http://www.clementine-player.org",
+  "--css", "epydoc.css",
+  "--no-sourcecode",
+  "--no-private",
   "clementine",
 ]
 
