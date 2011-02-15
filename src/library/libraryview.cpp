@@ -374,9 +374,28 @@ void LibraryView::AddToPlaylistEnqueue() {
 
 void LibraryView::OpenInNewPlaylist() {
   QMimeData* data = model()->mimeData(selectedIndexes());
-  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(GetSelectedSongs());
+
+  // we look for the first smart playlist among selection because this
+  // is the one which will get into the new playlist eventually
+  QString first_smart_playlist_name;
+  foreach(const QModelIndex& index, selectedIndexes()) {
+    const int type = model()->data(index, LibraryModel::Role_Type).toInt();
+
+    if(type == LibraryItem::Type_SmartPlaylist) {
+      first_smart_playlist_name = model()->data(index).toString();
+      break;
+    }
   }
+
+  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+    if(first_smart_playlist_name.isEmpty()) {
+      mime_data->name_for_new_playlist_
+          = LibraryView::GetNameForNewPlaylist(GetSelectedSongs());
+    } else {
+      mime_data->name_for_new_playlist_ = first_smart_playlist_name;
+    }
+  }
+
   emit AddToPlaylistSignal(data);
 }
 
