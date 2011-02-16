@@ -985,7 +985,7 @@ void MainWindow::ApplyAddBehaviour(MainWindow::AddBehaviour b, MimeData* data) c
     break;
 
   case AddBehaviour_OpenInNew:
-    data->name_for_new_playlist_ = tr("Playlist");
+    data->open_in_new_playlist_ = true;
     break;
   }
 }
@@ -1020,8 +1020,8 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
     }
 
     // Should we create a new playlist for the songs?
-    if(!mime_data->name_for_new_playlist_.isEmpty()) {
-      playlists_->New(mime_data->name_for_new_playlist_);
+    if(mime_data->open_in_new_playlist_) {
+      playlists_->New(mime_data->get_name_for_new_playlist());
     }
   }
 

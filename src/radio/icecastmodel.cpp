@@ -219,6 +219,8 @@ QMimeData* IcecastModel::mimeData(const QModelIndexList& indexes) const {
   }
 
   data->setUrls(urls);
+  data->name_for_new_playlist_ = "Icecast";
+
   return data;
 }
 

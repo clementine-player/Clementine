@@ -66,6 +66,16 @@ QList<QUrl> FileViewList::UrlListFromSelection() const {
 MimeData* FileViewList::MimeDataFromSelection() const {
   MimeData* data = new MimeData;
   data->setUrls(UrlListFromSelection());
+
+  QList<QString> filenames = FilenamesFromSelection();
+  // if just one file / folder selected - use it's path as the new playlist's name
+  if(filenames.size() == 1) {
+    data->name_for_new_playlist_ = filenames[0];
+  // otherwise, use the current root path
+  } else {
+    data->name_for_new_playlist_ = static_cast<QFileSystemModel*>(model())->rootPath();
+  }
+
   return data;
 }
 
@@ -90,16 +100,7 @@ void FileViewList::AddToPlaylistSlot() {
 
 void FileViewList::OpenInNewPlaylistSlot() {
   MimeData* data = MimeDataFromSelection();
-
-  QList<QString> filenames = FilenamesFromSelection();
-  // if just one file / folder selected - use it's path as the new playlist's name
-  if(filenames.size() == 1) {
-    data->name_for_new_playlist_ = filenames[0];
-  // otherwise, use the current root path
-  } else {
-    data->name_for_new_playlist_ = static_cast<QFileSystemModel*>(model())->rootPath();
-  }
-
+  data->open_in_new_playlist_ = true;
   emit AddToPlaylist(data);
 }
 

@@ -132,9 +132,13 @@ void FileView::ItemDoubleClick(const QModelIndex& index) {
   if (model_->isDir(index))
     return;
 
+  QString file_path = model_->filePath(index);
+
   MimeData* data = new MimeData;
   data->from_doubleclick_ = true;
-  data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(model_->filePath(index)));
+  data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(file_path));
+  data->name_for_new_playlist_ = file_path;
+
   emit AddToPlaylist(data);
 }
 

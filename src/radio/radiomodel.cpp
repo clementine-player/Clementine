@@ -171,10 +171,12 @@ QStringList RadioModel::mimeTypes() const {
 QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
 
+  QModelIndex last_valid_index;
   foreach (const QModelIndex& index, indexes) {
     if (!IsPlayable(index))
       continue;
 
+    last_valid_index = index;
     urls << index.data(Role_Url).toUrl();
   }
 
@@ -184,6 +186,7 @@ QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
   RadioMimeData* data = new RadioMimeData(this);
   data->setUrls(urls);
   data->indexes = indexes;
+  data->name_for_new_playlist_ = RadioModel::ServiceForIndex(last_valid_index)->name();
 
   return data;
 }

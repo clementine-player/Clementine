@@ -25,11 +25,12 @@ class MimeData : public QMimeData {
 
 public:
   MimeData(bool clear = false, bool play_now = false,
-           bool enqueue = false, const QString& name_for_new_playlist_ = QString())
+           bool enqueue = false, bool open_in_new_playlist = false)
     : clear_first_(clear),
       play_now_(play_now),
       enqueue_now_(enqueue),
-      name_for_new_playlist_(name_for_new_playlist_),
+      open_in_new_playlist_(open_in_new_playlist),
+      name_for_new_playlist_(QString()),
       from_doubleclick_(false) {}
 
   // If this is set then the playlist will be cleared before these songs
@@ -44,14 +45,24 @@ public:
   // If this is set then the items are added to the queue after being inserted.
   bool enqueue_now_;
 
-  // If this is not empty then the items are inserted into a newly created playlist
-  // with this name.
+  // If this is set then the items are inserted into a newly created playlist.
+  bool open_in_new_playlist_;
+
+  // This serves as a name for the new playlist in 'open_in_new_playlist_' mode.
   QString name_for_new_playlist_;
 
   // This can be set if this MimeData goes via MainWindow (ie. it is created
-  // manually in a double-click).  The MainWindow will set the above three
-  // flags to the defaults set by the user.
+  // manually in a double-click).  The MainWindow will set the above flags to
+  // the defaults set by the user.
   bool from_doubleclick_;
+
+  // Returns a pretty name for a playlist containing songs described by this MimeData
+  // object. By pretty name we mean the value of 'name_for_new_playlist_' or generic
+  // "Playlist" string if the 'name_for_new_playlist_' attribute is empty.
+  QString get_name_for_new_playlist() {
+    return name_for_new_playlist_.isEmpty() ? tr("Playlist") : name_for_new_playlist_;
+  }
+
 };
 
 #endif // MIMEDATA_H

@@ -371,7 +371,7 @@ void DeviceView::AddToPlaylist() {
 void DeviceView::OpenInNewPlaylist() {
   QMimeData* data = model()->mimeData(selectedIndexes());
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(GetSelectedSongs());
+    mime_data->open_in_new_playlist_ = true;
   }
   emit AddToPlaylistSignal(data);
 }

@@ -911,6 +911,7 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
 
     GeneratorMimeData* data = new GeneratorMimeData(generator);
     data->setData(kSmartPlaylistsMimeType, QByteArray());
+    data->name_for_new_playlist_ = this->data(indexes.first()).toString();
     return data;
   }
 
@@ -924,11 +925,8 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
     GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);
   }
 
-  if(!indexes.isEmpty()) {
-    data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(data->songs);
-  }
-
   data->setUrls(urls);
+  data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(data->songs);
 
   return data;
 }

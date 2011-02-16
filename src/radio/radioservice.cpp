@@ -94,9 +94,7 @@ void RadioService::AddItemsToPlaylist(const QModelIndexList& indexes, AddMode ad
         model()->merged_model()->mapFromSource(indexes));
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
     mime_data->clear_first_ = add_mode == AddMode_Replace;
-    if(add_mode == AddMode_OpenInNew) {
-      mime_data->name_for_new_playlist_ = name();
-    }
+    mime_data->open_in_new_playlist_ = add_mode == AddMode_OpenInNew;
   }
   emit AddToPlaylistSignal(data);
 }
