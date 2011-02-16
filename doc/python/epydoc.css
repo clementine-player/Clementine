@@ -78,7 +78,8 @@ td.footer                   { font-size: 85%; }
  *   - Summary tables that contain user-defined groups mark those
  *     groups using 'group header' rows.
  */
-td.table-header             { font-weight: bold;
+td.table-header,
+th.group-header             { font-weight: bold;
                               text-align: left;
                               padding: 6px 12px;
                               border: 1px solid #BBB;
@@ -86,10 +87,6 @@ td.table-header             { font-weight: bold;
 td.table-header table       { color: #000000; }
 td.table-header table a:link      { color: #0000ff; }
 td.table-header table a:visited   { color: #204080; }
-th.group-header             { background: #c0e0f8; color: #000000;
-                              text-align: left; font-style: italic; 
-                              font-size: 115%; 
-                              border: 1px solid #608090; }
 
 /* Summary Tables (functions, variables, etc)
  *   - Each object is described by a single row of the table with

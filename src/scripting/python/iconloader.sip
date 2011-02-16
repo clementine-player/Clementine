@@ -8,10 +8,10 @@ class IconLoader {
 Singleton class that loads icons from the system theme if possible, falling
 back on Clementine's builtin icons otherwise.
 
-You can access the IconLoader directly, there is no need to create an instance
-of the class first.
+You can access the IconLoader methods directly, there is no need to create an
+instance of the class first.
 
-    >>> clementine.IconLoader.Load("media-pause")
+  >>> clementine.IconLoader.Load("media-pause")
 
 Icons are identified by their name without any extension, and they follow the
 U{Freedesktop icon naming specification<http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html#names>}.
