@@ -687,23 +687,18 @@ void GstEngine::timerEvent(QTimerEvent* e) {
         EmitAboutToEnd();
       }
 
-      // TODO: a simpler version now that we have nanoseconds - let's see if this
-      // works...
-      if(current_position >= current_length) {
-        EndOfStreamReached(current_pipeline_->has_next_valid_url());
-      }
-
-      // TODO: below is the previous versions; after the nanoseconds improvement,
-      // this stops my test CUE songs about two seconds too late
+      // TODO: the code below stops my test CUE songs about two seconds too late now that
+      // we have nanoseconds; we should find a more clever way to implement this
+      // see issue #1233
 
       // when at the end, kill the track if it didn't stop yet (probably a
       // multisection media file).  We add 1 second onto the length during this
       // check to allow for the fact that the length has been rounded down to
       // the nearest second, and to stop us from occasionally stopping the
       // stream just before it ends normally.
-      // if(current_position >= current_length + 1000 * kNsecPerMsec) {
-      //   EndOfStreamReached(current_pipeline_->has_next_valid_url());
-      // }
+      if(current_position >= current_length + 1000 * kNsecPerMsec) {
+         EndOfStreamReached(current_pipeline_->has_next_valid_url());
+      }
     }
   }
 }
