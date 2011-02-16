@@ -1,11 +1,21 @@
+import epydoc
 import epydoc.apidoc
 import epydoc.cli
+import epydoc.docbuilder
 import epydoc.docintrospecter
 import epydoc.docwriter.html
+import epydoc.markup.epytext
 import inspect
 import PyQt4.QtCore
 import sys
 import types
+
+DOC_PAGES = [
+  ("Hello world!", "doc-hello-world"),
+]
+
+OUTPUT_DIR = "output"
+
 
 # SIP does some strange stuff with the __dict__ of wrapped C++ classes:
 #   someclass.__dict__["function"] != someclass.function
@@ -43,21 +53,27 @@ def my_write_header(self, out, title):
 
   out('<div class="sidebar">')
 
-  self.write_toc_section(out, "All Classes", self.class_list)
+  # General doc pages
+  out('<h2 class="toc">%s</h2>\n' % "Documentation")
+  for (title, filename) in DOC_PAGES:
+    out('<a href="%s.html">%s</a><br/>' % (filename, title))
 
-  # List the functions.
+  # Classes
+  self.write_toc_section(out, "Class reference", self.class_list)
+
+  # Functions
   funcs = [d for d in self.routine_list
               if not isinstance(self.docindex.container(d),
                 (epydoc.apidoc.ClassDoc, types.NoneType))]
-  self.write_toc_section(out, "All Functions", funcs)
+  self.write_toc_section(out, "Function reference", funcs)
 
-  # List the variables.
+  # Variables
   vars = []
   for doc in self.module_list:
       vars += doc.select_variables(value_type='other',
                                       imported=False,
                                       public=self._public_filter)
-  self.write_toc_section(out, "All Variables", vars)
+  self.write_toc_section(out, "Variable reference", vars)
 
   out('</div>')
   out('<div class="maincontent">')
@@ -82,7 +98,7 @@ epydoc.docwriter.html.HTMLWriter.write_toc_section = my_write_toc_section
 sys.argv = [
   "epydoc",
   "--html",
-  "-o", "output",
+  "-o", OUTPUT_DIR,
   "-v",
   "--name", "clementine",
   "--url", "http://www.clementine-player.org",
@@ -94,4 +110,29 @@ sys.argv = [
 ]
 
 print "Running '%s'" % ' '.join(sys.argv)
-epydoc.cli.cli()
+
+# Parse arguments
+(options, names) = epydoc.cli.parse_arguments()
+
+# Write the main docs - this is copied from cli()
+epydoc.docstringparser.DEFAULT_DOCFORMAT = options.docformat
+docindex = epydoc.docbuilder.build_doc_index(names,
+    options.introspect, options.parse,
+    add_submodules=True)
+html_writer = epydoc.docwriter.html.HTMLWriter(docindex, **options.__dict__)
+html_writer.write(options.target)
+
+# Write extra pages
+def write_extra_page(out, title, source):
+  handle = open(source, 'r')
+  parsed_docstring = epydoc.markup.epytext.parse_docstring(handle.read(), [])
+  html_writer.write_header(out, title)
+  out(html_writer.docstring_to_html(parsed_docstring))
+  html_writer.write_footer(out)
+
+for (title, filename) in DOC_PAGES:
+  source = "%s.epydoc" % filename
+  html   = "%s.html" % filename
+  print "Generating '%s' from '%s'..." % (html, source)
+
+  html_writer._write(write_extra_page, OUTPUT_DIR, html, title, source)

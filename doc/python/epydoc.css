@@ -34,7 +34,7 @@ h2                          { font-size: +125%;
                               font-weight: bold; }
 h3                          { font-size: +110%; font-style: italic;
                               font-weight: normal; }
-code                        { font-size: 100%; font-family: monospace;
+code                        { font-family: monospace;
                               color: #007000; }
 hr                          { height: 1px; background-color: #BBB; border: 0px; }
 /* N.B.: class, not pseudoclass */
@@ -76,8 +76,9 @@ div.sidebar {
   left: 0px;
   top: 0px;
   width: 350px;
-  margin-left: 6px;
-  margin-right: 6px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-right: 3px solid #E5ECF9;
 }
 
 div.maincontent {
@@ -286,8 +287,8 @@ div.py-highlight-hdr        { border-top: 2px solid #000000;
                               background: #d8e8e8; }
 div.py-highlight            { border-bottom: 2px solid #000000;
                               background: #d0e0e0; }
-.py-prompt                  { color: #005050; font-weight: bold;}
-.py-more                    { color: #005050; font-weight: bold;}
+.py-prompt                  { color: #005050; font-weight: bold; display: none; }
+.py-more                    { color: #005050; font-weight: bold; display: none; }
 .py-string                  { color: #006030; }
 .py-comment                 { color: #003060; }
 .py-keyword                 { color: #600000; }

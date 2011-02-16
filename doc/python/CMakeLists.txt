@@ -24,6 +24,16 @@ configure_file(
   COPYONLY
 )
 
+file(GLOB EPYDOC_PAGES ${CMAKE_CURRENT_SOURCE_DIR}/*.epydoc)
+foreach(file ${EPYDOC_PAGES})
+  get_filename_component(filename ${file} NAME)
+  configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+    ${CMAKE_CURRENT_BINARY_DIR}/${filename}
+    COPYONLY
+  )
+endforeach(file)
+
 add_custom_target(pythondocs
   generate_python_docs
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
