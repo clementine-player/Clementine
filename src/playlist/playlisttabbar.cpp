@@ -208,10 +208,11 @@ void PlaylistTabBar::timerEvent(QTimerEvent* e) {
 
 void PlaylistTabBar::dropEvent(QDropEvent* e) {
   if (drag_hover_tab_ == -1) {
-    if(e->mimeData()->text().isEmpty()) {
-      manager_->New(tr("Playlist"));
+    const MimeData *mime_data = qobject_cast<const MimeData*>(e->mimeData());
+    if(mime_data && !mime_data->name_for_new_playlist_.isEmpty()) {
+      manager_->New(mime_data->name_for_new_playlist_);
     } else {
-      manager_->New(e->mimeData()->text());
+      manager_->New(tr("Playlist"));
     }
     setCurrentIndex(count() - 1);
   } else {

@@ -19,6 +19,7 @@
 #include "librarybackend.h"
 #include "libraryitem.h"
 #include "librarydirectorymodel.h"
+#include "libraryview.h"
 #include "sqlrow.h"
 #include "core/albumcoverloader.h"
 #include "core/database.h"
@@ -919,13 +920,12 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
 
   data->backend = backend_;
   
-  if(!indexes.isEmpty()) {
-    // Give a "name" to the mime data. Will be used for naming playlist, if needed
-    data->setText(IndexToItem(indexes.first())->DisplayText());
-  }
-
   foreach (const QModelIndex& index, indexes) {
     GetChildSongs(IndexToItem(index), &urls, &data->songs, &song_ids);
+  }
+
+  if(!indexes.isEmpty()) {
+    data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(data->songs);
   }
 
   data->setUrls(urls);
