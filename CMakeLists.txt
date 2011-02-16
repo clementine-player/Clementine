@@ -60,8 +60,8 @@ pkg_check_modules(PLIST libplist)
 pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
-pkg_check_modules(QJSON QJson)
 pkg_check_modules(ARCHIVE libarchive)
+pkg_check_modules(GLOOX gloox>=1.0)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -235,9 +235,9 @@ endif(ENABLE_VISUALISATIONS)
 # need from it are private.
 option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
-if(ENABLE_REMOTE AND QJSON_LIBRARIES AND QJSON_INCLUDE_DIRS)
+if(ENABLE_REMOTE AND GLOOX_LIBRARIES)
   set(HAVE_REMOTE ON)
-endif(ENABLE_REMOTE AND QJSON_LIBRARIES AND QJSON_INCLUDE_DIRS)
+endif(ENABLE_REMOTE AND GLOOX_LIBRARIES)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
 if(STATIC_SQLITE)

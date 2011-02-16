@@ -93,7 +93,7 @@ using boost::scoped_ptr;
 #endif
 
 #ifdef HAVE_REMOTE
-#include "remote/httpserver.h"
+#include "remote/xmpp.h"
 #include "remote/zeroconf.h"
 #endif
 
@@ -333,12 +333,10 @@ int main(int argc, char *argv[]) {
 #ifdef HAVE_REMOTE
   Zeroconf* zeroconf = Zeroconf::GetZeroconf();
   if (zeroconf) {
-    HttpServer* server = new HttpServer(&player);
-    int port = 12345;
-    while (!server->Listen(QHostAddress::Any, port)) { ++port; }
-
-    zeroconf->Publish("local", "_clementine._tcp", "Clementine", port);
+    zeroconf->Publish("local", "_clementine._tcp", "Clementine", 12345);
   }
+  XMPP xmpp;
+  xmpp.Connect("timetabletest2@googlemail.com", "timetabletestpassword");
 #endif
 
   // Window
