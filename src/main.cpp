@@ -166,6 +166,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef Q_OS_DARWIN
   // Must happen after QCoreApplication::setOrganizationName().
+  setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
   if (mac::MigrateLegacyConfigFiles()) {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(Utilities::GetConfigPath(
