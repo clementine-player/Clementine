@@ -1753,13 +1753,15 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 #endif // Q_OS_WIN32
 
 void MainWindow::Exit() {
-  // To shut down the application when fadeout will be finished
-  connect(player_->engine(), SIGNAL(FadeoutFinishedSignal()), qApp, SLOT(quit()));
-  if(player_->GetState() == Engine::Playing) {
-    player_->Stop();
-    hide();
-    tray_icon_->SetVisible(false);
-  } else {
-    qApp->quit();
+  if(player_->engine()->is_fadeout_enabled()) {
+    // To shut down the application when fadeout will be finished
+    connect(player_->engine(), SIGNAL(FadeoutFinishedSignal()), qApp, SLOT(quit()));
+    if(player_->GetState() == Engine::Playing) {
+      player_->Stop();
+      hide();
+      tray_icon_->SetVisible(false);
+      return; // Don't quit the application now: wait for the fadeout finished signal
+    }
   }
+  qApp->quit();
 }
