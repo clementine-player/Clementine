@@ -30,7 +30,7 @@ h1                          { font-size: 140%;
                               position: relative;
                               border-top: 1px solid #36C;
                               background-color: #E5ECF9; }
-h2                          { font-size: +125%; font-style: italic;
+h2                          { font-size: +125%;
                               font-weight: bold; }
 h3                          { font-size: +110%; font-style: italic;
                               font-weight: normal; }
@@ -69,6 +69,26 @@ span.breadcrumbs            { font-size: 85%; font-weight: bold; }
 span.options                { font-size: 70%; }
 span.codelink               { font-size: 85%; }
 td.footer                   { font-size: 85%; }
+
+div.sidebar {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 350px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+div.maincontent {
+  float: left;
+  position: absolute;
+  left: 362px;
+  top: 0px;
+  border-left: 3px solid #E5ECF9;
+  padding-left: 6px;
+  padding-top: 3px;
+}
 
 /* Table Headers
  *   - Each summary table and details section begins with a 'header'
@@ -222,8 +242,13 @@ pre.base-tree               { color: #555555; margin: 0; }
 h1.toc                      { text-align: center; font-size: 105%;
                               margin: 0; font-weight: bold;
                               padding: 0; }
-h2.toc                      { font-size: 100%; font-weight: bold; 
-                              margin: 0.5em 0 0 -0.3em; }
+h2.toc                      { font-size: 100%;
+                              font-weight: bold;
+                              margin: 3px 0px 3px 0px;
+                              padding: 1px 3px;
+                              position: relative;
+                              border-top: 1px solid #36C;
+                              background-color: #E5ECF9; }
 
 /* Syntax Highlighting for Source Code
  *   - doctest examples are displayed in a 'pre.py-doctest' block.
