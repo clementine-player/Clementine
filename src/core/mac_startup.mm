@@ -47,6 +47,7 @@
 #include <QDir>
 #include <QEvent>
 #include <QFile>
+#include <QSettings>
 
 #include <QtDebug>
 
@@ -237,29 +238,39 @@ QString GetMusicDirectory() {
 }
 
 bool MigrateLegacyConfigFiles() {
+  bool moved_dir = false;
   QString old_config_dir = QString("%1/.config/%2").arg(
       QDir::homePath(), QCoreApplication::organizationName());
-  if (!QFile::exists(old_config_dir)) {
-    return false;
-  }
-  QString new_config_dir = Utilities::GetConfigPath(Utilities::Path_Root);
-  // Create ~/Library/Application Support which should already exist anyway.
-  QDir::root().mkpath(GetApplicationSupportPath());
+  if (QFile::exists(old_config_dir)) {
+    QString new_config_dir = Utilities::GetConfigPath(Utilities::Path_Root);
+    // Create ~/Library/Application Support which should already exist anyway.
+    QDir::root().mkpath(GetApplicationSupportPath());
 
-  qDebug() << "Move from:" << old_config_dir
-           << "to:" << new_config_dir;
+    qDebug() << "Move from:" << old_config_dir
+             << "to:" << new_config_dir;
 
-  NSFileManager* file_manager = [[NSFileManager alloc] init];
-  NSError* error;
-  bool ret = [file_manager moveItemAtPath:
-      [NSString stringWithUTF8String: old_config_dir.toUtf8().constData()]
-      toPath:[NSString stringWithUTF8String: new_config_dir.toUtf8().constData()]
-      error: &error];
-  if (!ret) {
-    qWarning() << [[error localizedDescription] UTF8String];
-    return false;
+    NSFileManager* file_manager = [[NSFileManager alloc] init];
+    NSError* error;
+    bool ret = [file_manager moveItemAtPath:
+        [NSString stringWithUTF8String: old_config_dir.toUtf8().constData()]
+        toPath:[NSString stringWithUTF8String: new_config_dir.toUtf8().constData()]
+        error: &error];
+    if (!ret) {
+      qWarning() << [[error localizedDescription] UTF8String];
+    }
+    moved_dir = true;
   }
-  return true;
+
+  QString old_config_path = QDir::homePath() + "/Library/Preferences/com.davidsansome.Clementine.plist";
+  if (QFile::exists(old_config_path)) {
+    QSettings settings;
+    bool ret = QFile::rename(old_config_path, settings.fileName());
+    if (ret) {
+      qWarning() << "Migrated old config file: " << old_config_path << "to: " << settings.fileName();
+    }
+  }
+
+  return moved_dir;
 }
 
 }  // namespace mac

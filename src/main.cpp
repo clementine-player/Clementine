@@ -162,7 +162,7 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("Clementine");
   QCoreApplication::setApplicationVersion(CLEMENTINE_VERSION_DISPLAY);
   QCoreApplication::setOrganizationName("Clementine");
-  QCoreApplication::setOrganizationDomain("davidsansome.com");
+  QCoreApplication::setOrganizationDomain("clementine-player.org");
 
 #ifdef Q_OS_DARWIN
   // Must happen after QCoreApplication::setOrganizationName().
