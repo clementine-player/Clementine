@@ -1755,9 +1755,11 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 void MainWindow::Exit() {
   // To shut down the application when fadeout will be finished
   connect(player_->engine(), SIGNAL(FadeoutFinishedSignal()), qApp, SLOT(quit()));
-
-  player_->Stop();
-
-  hide();
-  tray_icon_->SetVisible(false);
+  if(player_->GetState() == Engine::Playing) {
+    player_->Stop();
+    hide();
+    tray_icon_->SetVisible(false);
+  } else {
+    qApp->quit();
+  }
 }
