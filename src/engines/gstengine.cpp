@@ -576,6 +576,7 @@ void GstEngine::Stop() {
 
 void GstEngine::FadeoutFinished() {
   fadeout_pipeline_.reset();
+  emit FadeoutFinishedSignal();
 }
 
 void GstEngine::Pause() {

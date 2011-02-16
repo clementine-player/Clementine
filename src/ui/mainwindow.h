@@ -230,6 +230,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void Raise();
 
+  void Exit();
+
  private:
   void ConnectInfoView(SongInfoBase* view);
 

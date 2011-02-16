@@ -97,6 +97,8 @@ class Base : public QObject, boost::noncopyable {
 
   void TrackEnded();
 
+  void FadeoutFinishedSignal();
+
   void StatusText(const QString&);
   void Error(const QString&);
 

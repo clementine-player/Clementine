@@ -298,7 +298,7 @@ MainWindow::MainWindow(
   connect(ui_->action_previous_track, SIGNAL(triggered()), player_, SLOT(Previous()));
   connect(ui_->action_play_pause, SIGNAL(triggered()), player_, SLOT(PlayPause()));
   connect(ui_->action_stop, SIGNAL(triggered()), player_, SLOT(Stop()));
-  connect(ui_->action_quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+  connect(ui_->action_quit, SIGNAL(triggered()), SLOT(Exit()));
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
   connect(ui_->action_mute, SIGNAL(triggered()), player_, SLOT(Mute()));
 #ifdef HAVE_LIBLASTFM
@@ -1751,3 +1751,13 @@ bool MainWindow::winEvent(MSG* msg, long*) {
   return false;
 }
 #endif // Q_OS_WIN32
+
+void MainWindow::Exit() {
+  // To shut down the application when fadeout will be finished
+  connect(player_->engine(), SIGNAL(FadeoutFinishedSignal()), qApp, SLOT(quit()));
+
+  player_->Stop();
+
+  hide();
+  tray_icon_->SetVisible(false);
+}
