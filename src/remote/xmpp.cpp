@@ -7,6 +7,7 @@
 #include <QtDebug>
 
 #include "keychain.h"
+#include "remoteconfig.h"
 
 using gloox::Client;
 using gloox::ConnectionTCPClient;
@@ -24,7 +25,7 @@ XMPP::~XMPP() {
 
 void XMPP::Connect() {
   QSettings s;
-  s.beginGroup("remote");
+  s.beginGroup(RemoteConfig::kSettingsGroup);
   QVariant username = s.value("username");
   if (username.isValid()) {
     Keychain* keychain = Keychain::getDefault();

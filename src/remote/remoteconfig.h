@@ -20,8 +20,6 @@
 
 #include <QWidget>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "core/network.h"
 
 class Ui_RemoteConfig;
@@ -34,6 +32,8 @@ class RemoteConfig : public QWidget {
   ~RemoteConfig();
 
   bool NeedsValidation() const;
+
+  static const char* kSettingsGroup;
 
  public slots:
   void Validate();
@@ -53,7 +53,7 @@ class RemoteConfig : public QWidget {
 
   Ui_RemoteConfig* ui_;
   bool waiting_for_auth_;
-  boost::scoped_ptr<NetworkAccessManager> network_;
+  NetworkAccessManager* network_;
 };
 
 #endif // REMOTECONFIG_H

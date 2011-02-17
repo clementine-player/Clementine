@@ -26,13 +26,13 @@
 #include <QSettings>
 
 const char* kClientLoginUrl = "https://www.google.com/accounts/ClientLogin";
-const char* kSettingsGroup = "remote";
+const char* RemoteConfig::kSettingsGroup = "Remote";
 
 RemoteConfig::RemoteConfig(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_RemoteConfig),
     waiting_for_auth_(false),
-    network_(new NetworkAccessManager)
+    network_(new NetworkAccessManager(this))
 {
   ui_->setupUi(this);
   ui_->busy->hide();

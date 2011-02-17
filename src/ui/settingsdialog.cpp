@@ -120,7 +120,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 
 #ifdef HAVE_REMOTE
   ui_->list->insertItem(Page_Remote, tr("Remote Control"));
-  ui_->list->item(Page_Remote)->setIcon(QIcon(":/network-server.png"));
+  ui_->list->item(Page_Remote)->setIcon(IconLoader::Load("network-server"));
 
   QWidget* remote_page = new QWidget;
   QVBoxLayout* remote_layout = new QVBoxLayout;
