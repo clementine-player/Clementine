@@ -148,7 +148,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 
 #ifdef ENABLE_WIIMOTEDEV
   // Wiimotedev page
-  ui_->list->addItem("Wiimotedev");
+  ui_->list->insertItem(Page_Wiimotedev, "Wiimotedev");
   ui_->list->item(Page_Wiimotedev)->setIcon(QIcon(":/icons/32x32/wiimotedev.png"));
 
   QWidget* wiimotedev_page = new QWidget(this);
