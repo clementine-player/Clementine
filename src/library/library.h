@@ -59,6 +59,7 @@ class Library : public QObject {
 
  private slots:
   void IncrementalScan();
+  void FullScan();
   void WatcherInitialised();
 
  private:

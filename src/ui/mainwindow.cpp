@@ -282,7 +282,7 @@ MainWindow::MainWindow(
   ui_->action_new_playlist->setIcon(IconLoader::Load("document-new"));
   ui_->action_load_playlist->setIcon(IconLoader::Load("document-open"));
   ui_->action_save_playlist->setIcon(IconLoader::Load("document-save"));
-  ui_->action_update_library->setIcon(IconLoader::Load("view-refresh"));
+  ui_->action_full_library_scan->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
 
   // File view connections
@@ -328,6 +328,7 @@ MainWindow::MainWindow(
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
+  connect(ui_->action_full_library_scan, SIGNAL(triggered()), library_, SLOT(FullScan()));
   connect(ui_->action_rain, SIGNAL(toggled(bool)),
           background_streams_, SLOT(MakeItRain(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)),
@@ -612,7 +613,7 @@ MainWindow::MainWindow(
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Add places where scripts can make actions
-  scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_update_library);
+  scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_full_library_scan);
   scripts_->ui()->RegisterActionLocation("extras_menu", ui_->menu_extras, NULL);
   scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
   scripts_->ui()->RegisterActionLocation("playlist_menu", ui_->menu_playlist, NULL);

@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-16 14:24+0000\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
@@ -83,15 +83,15 @@ msgstr "%1 tracce"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n non riusciti"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completati"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n rimanenti"
 
@@ -826,6 +826,9 @@ msgstr "Opzioni di visualizzazione"
 msgid "Display the on-screen-display"
 msgstr "Visualizza l'on-screen-display"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr "Non convertire qualsiasi musica"
 
@@ -1504,6 +1507,9 @@ msgstr "Controlla i cambiamenti alla raccolta"
 
 msgid "Most played"
 msgstr "Più riprodotti"
+
+msgid "Mount point"
+msgstr "Punto di mount"
 
 msgid "Mount points"
 msgstr "Punti di mount"
@@ -2485,6 +2491,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Spegni"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL"
 
@@ -2501,8 +2510,8 @@ msgstr "Errore sconosciuto"
 msgid "Unset cover"
 msgstr "Rimuovi copertina"
 
-msgid "Update Library"
-msgstr "Aggiorna la raccolta"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Aggiorna la raccolta all'avvio di Clementine"
@@ -2720,7 +2729,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "aggiungi %n brani"
 
@@ -2779,7 +2788,7 @@ msgstr "il"
 msgid "options"
 msgstr "opzioni"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "rimuovi %n brani"
 
@@ -2799,11 +2808,8 @@ msgstr "ferma"
 msgid "track %1"
 msgstr "traccia %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Punto di mount"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Aggiorna la raccolta"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Accoda alla scaletta"

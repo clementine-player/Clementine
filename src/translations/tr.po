@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-18 15:45+0200\n"
 "Last-Translator: Ekrem Kocadere <ekocadere@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "X-Launchpad-Export-Date: 2010-12-11 05:28+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 parça"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modülü"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -817,6 +817,9 @@ msgstr "Gösterim seçenekleri"
 msgid "Display the on-screen-display"
 msgstr "Ekran görselini göster"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr "Hiç bir müziği dönüştürme"
 
@@ -1491,6 +1494,9 @@ msgstr "Kütüphanede olacak değişiklikleri izle"
 
 msgid "Most played"
 msgstr "En fazla çalınan"
+
+msgid "Mount point"
+msgstr "Bağlama noktası"
 
 msgid "Mount points"
 msgstr "Bağlama noktaları"
@@ -2456,6 +2462,9 @@ msgstr "Türbin"
 msgid "Turn off"
 msgstr "Kapat"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(ler)"
 
@@ -2472,8 +2481,8 @@ msgstr "Bilinmeyen hata"
 msgid "Unset cover"
 msgstr "Albüm kapağını çıkar"
 
-msgid "Update Library"
-msgstr "Kütüphaneyi Güncelle"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Clementine başladığında kütüphaneyi güncelle"
@@ -2690,7 +2699,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -2749,7 +2758,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 
@@ -2769,11 +2778,8 @@ msgstr "durdur"
 msgid "track %1"
 msgstr "parça %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Bağlama noktası"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Kütüphaneyi Güncelle"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Parça listesine ekle"

@@ -45,6 +45,7 @@ class LibraryWatcher : public QObject {
   void set_device_name(const QString& device_name) { device_name_ = device_name; }
   
   void IncrementalScanAsync();
+  void FullScanAsync();
   void SetRescanPausedAsync(bool pause);
   void ReloadSettingsAsync();
 
@@ -78,7 +79,8 @@ class LibraryWatcher : public QObject {
   // LibraryBackend::FindSongsInDirectory.
   class ScanTransaction {
    public:
-    ScanTransaction(LibraryWatcher* watcher, int dir, bool incremental);
+    ScanTransaction(LibraryWatcher* watcher, int dir,
+                    bool incremental, bool ignores_mtime = false);
     ~ScanTransaction();
 
     SongList FindSongsInSubdirectory(const QString& path);
@@ -92,6 +94,7 @@ class LibraryWatcher : public QObject {
 
     int dir() const { return dir_; }
     bool is_incremental() const { return incremental_; }
+    bool ignores_mtime() const { return ignores_mtime_; }
 
     SongList deleted_songs;
     SongList new_songs;
@@ -108,7 +111,15 @@ class LibraryWatcher : public QObject {
     int progress_max_;
 
     int dir_;
+    // Incremental scan goes deeper only if directory has changed.
     bool incremental_;
+    // Scan that ignores mtime updates every file in a folder that's
+    // being scanned - even if it detects the file hasn't changed since
+    // the last scan. Also, since this type of scan is ignoring mtimes 
+    // on folders too, it will go as deep in the folder hierarchy as 
+    // it's possible.
+    bool ignores_mtime_;
+
     LibraryWatcher* watcher_;
 
     SongList cached_songs_;
@@ -121,6 +132,7 @@ class LibraryWatcher : public QObject {
  private slots:
   void DirectoryChanged(const QString& path);
   void IncrementalScanNow();
+  void FullScanNow();
   void RescanPathsNow();
   void ScanSubdirectory(const QString& path, const Subdirectory& subdir,
                         ScanTransaction* t, bool force_noincremental = false);
@@ -134,6 +146,7 @@ class LibraryWatcher : public QObject {
   QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
   void AddWatch(QFileSystemWatcher* w, const QString& path);
   uint GetMtimeForCue(const QString& cue_path);
+  void PerformScan(bool incremental, bool ignore_mtimes);
 
   // Updates the sections of a cue associated and altered (according to mtime)
   // media file during a scan.

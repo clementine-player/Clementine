@@ -62,12 +62,13 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
   connect(rescan_timer_, SIGNAL(timeout()), SLOT(RescanPathsNow()));
 }
 
-LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher,
-                                                 int dir, bool incremental)
+LibraryWatcher::ScanTransaction::ScanTransaction(LibraryWatcher* watcher, int dir,
+                                                 bool incremental, bool ignores_mtime)
   : progress_(0),
     progress_max_(0),
     dir_(dir),
     incremental_(incremental),
+    ignores_mtime_(ignores_mtime),
     watcher_(watcher),
     cached_songs_dirty_(true),
     known_subdirs_dirty_(true)
@@ -223,7 +224,7 @@ void LibraryWatcher::ScanSubdirectory(
     }
   }
 
-  if (!force_noincremental && t->is_incremental() &&
+  if (!t->ignores_mtime() && !force_noincremental && t->is_incremental() &&
       subdir.mtime == path_info.lastModified().toTime_t()) {
     // The directory hasn't changed since last time
     t->AddToProgress(1);
@@ -309,12 +310,12 @@ void LibraryWatcher::ScanSubdirectory(
       QString song_cue = matching_song.cue_path();
       uint song_cue_mtime = GetMtimeForCue(song_cue);
 
-      bool cue_deleted = song_cue_mtime == 0 &&  matching_song.has_cue();
+      bool cue_deleted = song_cue_mtime == 0 && matching_song.has_cue();
       bool cue_added = matching_cue_mtime != 0 && !matching_song.has_cue();
 
       // watch out for cue songs which have their mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
       bool changed = (matching_song.mtime() != qMax(file_info.lastModified().toTime_t(), song_cue_mtime))
-                      || cue_deleted || cue_added;
+                     || cue_deleted || cue_added;
 
       // Also want to look to see whether the album art has changed
       QString image = ImageForSong(file, album_art);
@@ -326,7 +327,7 @@ void LibraryWatcher::ScanSubdirectory(
       }
 
       // the song's changed - reread the metadata from file
-      if (changed) {
+      if (t->ignores_mtime() || changed) {
         qDebug() << file << "changed";
 
         // if cue associated...
@@ -716,9 +717,22 @@ void LibraryWatcher::IncrementalScanAsync() {
   QMetaObject::invokeMethod(this, "IncrementalScanNow", Qt::QueuedConnection);
 }
 
+void LibraryWatcher::FullScanAsync() {
+  QMetaObject::invokeMethod(this, "FullScanNow", Qt::QueuedConnection);
+}
+
 void LibraryWatcher::IncrementalScanNow() {
+  PerformScan(true, false);
+}
+
+void LibraryWatcher::FullScanNow() {
+  PerformScan(false, true);
+}
+
+void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
   foreach (const DirData& data, watched_dirs_.values()) {
-    ScanTransaction transaction(this, data.dir.id, true);
+    ScanTransaction transaction(this, data.dir.id,
+                                incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
     transaction.AddToProgressMax(subdirs.count());
 
@@ -728,5 +742,6 @@ void LibraryWatcher::IncrementalScanNow() {
       ScanSubdirectory(subdir.path, subdir, &transaction);
     }
   }
+
   emit CompilationsNeedUpdating();
 }

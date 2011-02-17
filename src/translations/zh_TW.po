@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-12-22 18:03+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-01-17 05:06+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 歌曲"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 失敗的"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 剩餘的"
 
@@ -804,6 +804,9 @@ msgstr "顯示選項"
 msgid "Display the on-screen-display"
 msgstr "顯示屏幕顯示器"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr ""
 
@@ -1466,6 +1469,9 @@ msgid "Monitor the library for changes"
 msgstr "監視音樂庫的變化"
 
 msgid "Most played"
+msgstr ""
+
+msgid "Mount point"
 msgstr ""
 
 msgid "Mount points"
@@ -2426,6 +2432,9 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
+msgid "URI"
+msgstr ""
+
 msgid "URL(s)"
 msgstr ""
 
@@ -2442,7 +2451,7 @@ msgstr "不明的錯誤"
 msgid "Unset cover"
 msgstr "未設置覆蓋"
 
-msgid "Update Library"
+msgid "Update changed library folders"
 msgstr ""
 
 msgid "Update the library when Clementine starts"
@@ -2647,7 +2656,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "加入 %n 歌"
 
@@ -2706,7 +2715,7 @@ msgstr ""
 msgid "options"
 msgstr "選項"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 

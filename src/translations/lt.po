@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-16 07:13+0000\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lt\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: LITHUANIA\n"
@@ -85,15 +85,15 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -821,6 +821,9 @@ msgstr "Rodymo nuostatos"
 msgid "Display the on-screen-display"
 msgstr "Rodyti OSD"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr "Nekonvertuoti jokios muzikos"
 
@@ -1494,6 +1497,9 @@ msgstr "Stebėti fonoteką dėl pasikeitimų"
 
 msgid "Most played"
 msgstr "Dažniausiai grota"
+
+msgid "Mount point"
+msgstr "Prijungimo vieta"
 
 msgid "Mount points"
 msgstr "Prijungimo vietos"
@@ -2462,6 +2468,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Išjungti"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL"
 
@@ -2478,8 +2487,8 @@ msgstr "Nežinoma klaida"
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-msgid "Update Library"
-msgstr "Atnaujinti fonoteką"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
@@ -2695,7 +2704,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -2754,7 +2763,7 @@ msgstr "iš"
 msgid "options"
 msgstr "parinktys"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
@@ -2774,11 +2783,8 @@ msgstr "stabdyti"
 msgid "track %1"
 msgstr "takelis %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Prijungimo vieta"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Atnaujinti fonoteką"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Įdėti į grojaraščio eilę"

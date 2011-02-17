@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-12-22 17:50+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:03+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 temes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 mòdul Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restants"
 
@@ -158,8 +158,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album "
+"%title </p>\n"
 "\n"
 "<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
 "remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
@@ -826,6 +826,9 @@ msgstr "Opcions de visualització"
 
 msgid "Display the on-screen-display"
 msgstr "Mostrar la indicació-a-pantalla"
+
+msgid "Do a full library rescan"
+msgstr ""
 
 msgid "Do not convert any music"
 msgstr "No converteixis cap musica"
@@ -1498,6 +1501,9 @@ msgstr ""
 
 msgid "Most played"
 msgstr ""
+
+msgid "Mount point"
+msgstr "Punt de muntatge"
 
 msgid "Mount points"
 msgstr "Punts de muntatge"
@@ -2469,6 +2475,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr ""
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2485,8 +2494,8 @@ msgstr "Error desconegut"
 msgid "Unset cover"
 msgstr ""
 
-msgid "Update Library"
-msgstr "Actualitza llibreria"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Actualitza la llibreria quan Clementine arranqui"
@@ -2694,7 +2703,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "afegeix %n cançons"
 
@@ -2753,7 +2762,7 @@ msgstr ""
 msgid "options"
 msgstr "opcions"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimina %n cançons"
 
@@ -2773,11 +2782,8 @@ msgstr "atura"
 msgid "track %1"
 msgstr "peça %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Punt de muntatge"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Actualitza llibreria"
 
 #~ msgid ""
 #~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."

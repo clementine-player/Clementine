@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-16 19:10+0000\n"
 "Last-Translator: Sérgio Marques <Unknown>\n"
 "Language-Team: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt\n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Poedit-Country: PORTUGAL\n"
@@ -84,15 +84,15 @@ msgstr "%1 músicas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falha(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n concluída(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n por converter"
 
@@ -825,6 +825,9 @@ msgstr "Opções de exibição"
 msgid "Display the on-screen-display"
 msgstr "Mostrar a exibição no ecrã"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr "Não converter quaisquer músicas"
 
@@ -1500,6 +1503,9 @@ msgstr "Vigiar alterações na coleção"
 
 msgid "Most played"
 msgstr "Mais reproduzidas"
+
+msgid "Mount point"
+msgstr "Ponto de montagem"
 
 msgid "Mount points"
 msgstr "Pontos de montagem"
@@ -2478,6 +2484,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Desligar"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2494,8 +2503,8 @@ msgstr "Erro desconhecido"
 msgid "Unset cover"
 msgstr "Sem capa"
 
-msgid "Update Library"
-msgstr "Atualizar coleção"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Atualizar coleção ao iniciar o Clementine"
@@ -2714,7 +2723,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "adicionar %n músicas"
 
@@ -2773,7 +2782,7 @@ msgstr "em"
 msgid "options"
 msgstr "opções"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n músicas"
 
@@ -2793,11 +2802,8 @@ msgstr "parar"
 msgid "track %1"
 msgstr "música %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Ponto de montagem"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Atualizar coleção"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Colocar na fila da lista de reprodução"

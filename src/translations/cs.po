@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-17 18:14+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 "X-Launchpad-Export-Date: 2011-01-18 05:35+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Language: cs_CZ\n"
@@ -84,15 +84,15 @@ msgstr "%1 skladeb"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "nepodařilo se %n"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "dokončeno %n"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "zůstávají %n"
 
@@ -823,6 +823,9 @@ msgstr "Volby pro zobrazení"
 msgid "Display the on-screen-display"
 msgstr "Zobrazit zobrazování údajů na obrazovce"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr "Nepřevádět žádnou hudbu"
 
@@ -1500,6 +1503,9 @@ msgstr "Sledovat změny v knihovně"
 
 msgid "Most played"
 msgstr "Nejvíce hráno"
+
+msgid "Mount point"
+msgstr "Bod připojení"
 
 msgid "Mount points"
 msgstr "Přípojné body"
@@ -2474,6 +2480,9 @@ msgstr "Turbína"
 msgid "Turn off"
 msgstr "Vypnout"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "Adresa (URL)"
 
@@ -2490,8 +2499,8 @@ msgstr "Neznámá chyba"
 msgid "Unset cover"
 msgstr "Odebrat obal"
 
-msgid "Update Library"
-msgstr "Obnovit hudební knihovnu"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Hudební knihovnu obnovit při spuštění Clementine"
@@ -2708,7 +2717,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "Přidat %n písniček"
 
@@ -2767,7 +2776,7 @@ msgstr "Na"
 msgid "options"
 msgstr "Volby"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "Odstranit %n skladeb"
 
@@ -2787,11 +2796,8 @@ msgstr "Zastavit"
 msgid "track %1"
 msgstr "Skladba %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Bod připojení"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Obnovit hudební knihovnu"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Zařadit do seznamu skladeb"

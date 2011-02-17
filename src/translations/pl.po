@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-12 17:55+0000\n"
 "Last-Translator: Adam Czabara <kolofaza@o2.pl>\n"
 "Language-Team: Polish <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-01-17 05:05+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Language: pl_PL\n"
@@ -82,15 +82,15 @@ msgstr "%1 ścieżek"
 msgid "%1: Wiimotedev module"
 msgstr "%1: moduł Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nieudane"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n zakończone"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "pozostało %n"
 
@@ -822,6 +822,9 @@ msgstr "Opcje wyświetlania"
 msgid "Display the on-screen-display"
 msgstr "Pokaż menu ekranowe"
 
+msgid "Do a full library rescan"
+msgstr ""
+
 msgid "Do not convert any music"
 msgstr "Nie konwertuj"
 
@@ -1497,6 +1500,9 @@ msgstr "Monitoruj zmiany biblioteki"
 
 msgid "Most played"
 msgstr "Najwięcej grane"
+
+msgid "Mount point"
+msgstr "Punkt montowania"
 
 msgid "Mount points"
 msgstr "Punkty montowania"
@@ -2469,6 +2475,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Wyłącz"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL"
 
@@ -2485,8 +2494,8 @@ msgstr "Nieznany błąd"
 msgid "Unset cover"
 msgstr "Usuń okładkę"
 
-msgid "Update Library"
-msgstr "Odśwież bibliotekę"
+msgid "Update changed library folders"
+msgstr ""
 
 msgid "Update the library when Clementine starts"
 msgstr "Odświeżaj bibliotekę przy uruchomieniu Clementine"
@@ -2705,7 +2714,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodaj %n utworów"
 
@@ -2764,7 +2773,7 @@ msgstr "w dniu"
 msgid "options"
 msgstr "opcje"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "usuń %n utworów"
 
@@ -2784,11 +2793,8 @@ msgstr "zatrzymaj"
 msgid "track %1"
 msgstr "utwór %1"
 
-#~ msgid "Mount point"
-#~ msgstr "Punkt montowania"
-
-#~ msgid "URI"
-#~ msgstr "URI"
+#~ msgid "Update Library"
+#~ msgstr "Odśwież bibliotekę"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Dodaj do listy odtwarzania"
