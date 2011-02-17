@@ -90,7 +90,7 @@ GSTREAMER_PLUGINS=[
     'libgstwavparse.so',
 
     # HTTP src support
-    'libgstneonhttpsrc.so',
+    'libgstsouphttpsrc.so',
 
     # Icecast support
     'libgsticydemux.so',
