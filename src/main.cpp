@@ -331,12 +331,8 @@ int main(int argc, char *argv[]) {
 #endif
 
 #ifdef HAVE_REMOTE
-  Zeroconf* zeroconf = Zeroconf::GetZeroconf();
-  if (zeroconf) {
-    zeroconf->Publish("local", "_clementine._tcp", "Clementine", 12345);
-  }
   XMPP xmpp;
-  xmpp.Connect("timetabletest2@googlemail.com", "timetabletestpassword");
+  xmpp.Connect();
 #endif
 
   // Window
