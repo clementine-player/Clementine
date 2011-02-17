@@ -111,13 +111,13 @@ class LibraryWatcher : public QObject {
     int progress_max_;
 
     int dir_;
-    // Incremental scan goes deeper only if directory has changed.
+    // Incremental scan enters a directory only if it has changed since the
+    // last scan.
     bool incremental_;
-    // Scan that ignores mtime updates every file in a folder that's
-    // being scanned - even if it detects the file hasn't changed since
-    // the last scan. Also, since this type of scan is ignoring mtimes 
-    // on folders too, it will go as deep in the folder hierarchy as 
-    // it's possible.
+    // This type of scan updates every file in a folder that's
+    // being scanned. Even if it detects the file hasn't changed since
+    // the last scan. Also, since it's ignoring mtimes on folders too,
+    // it will go as deep in the folder hierarchy as it's possible.
     bool ignores_mtime_;
 
     LibraryWatcher* watcher_;
