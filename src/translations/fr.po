@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-01-21 00:20+0000\n"
 "Last-Translator: Arnaud Bienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Launchpad-Export-Date: 2011-01-17 05:04+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 "X-Language: fr_FR\n"
@@ -83,15 +83,15 @@ msgstr "%1 pistes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 : Module wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n échoué"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n terminé"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n manquant"
 
@@ -103,6 +103,9 @@ msgstr "&Centrer"
 
 msgid "&Custom"
 msgstr "&Personnaliser"
+
+msgid "&Help"
+msgstr "Aide"
 
 #, qt-format
 msgid "&Hide %1"
@@ -1131,6 +1134,12 @@ msgstr "Donner un nom"
 msgid "Global Shortcuts"
 msgstr "Raccourcis globaux"
 
+msgid "Google password"
+msgstr ""
+
+msgid "Google username"
+msgstr ""
+
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 jaquettes récupérées sur %2 (%3 échecs)"
@@ -1169,9 +1178,6 @@ msgid "Hardware information is only available while the device is connected."
 msgstr ""
 "Les informations sur le matériel sont disponibles uniquement lorsque le "
 "périphérique est connecté."
-
-msgid "&Help"
-msgstr "Aide"
 
 msgid "High (1024x1024)"
 msgstr "Élevé (1024x1024)"
@@ -1508,9 +1514,6 @@ msgstr "Surveiller les modifications de la bibliothèque"
 
 msgid "Most played"
 msgstr "Les plus jouées"
-
-msgid "Mount point"
-msgstr "Point de montage"
 
 msgid "Mount points"
 msgstr "Points de montage"
@@ -1934,6 +1937,9 @@ msgstr "Mémoriser le mouvement de la Wiimote"
 
 msgid "Remember from last time"
 msgstr "Se souvenir de la dernière fois"
+
+msgid "Remote Control"
+msgstr ""
 
 msgid "Remove"
 msgstr "Supprimer"
@@ -2489,9 +2495,6 @@ msgstr "Spectrogramme \"Turbine\""
 msgid "Turn off"
 msgstr "Éteindre"
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2707,6 +2710,9 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Vous devez redémarrer Clementine si vous changez de langage"
 
+msgid "Your Google credentials were incorrect"
+msgstr ""
+
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Vos identifiants Last.fm sont incorrects"
 
@@ -2726,7 +2732,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zéro"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "ajouter %n morceaux"
 
@@ -2785,7 +2791,7 @@ msgstr "sur"
 msgid "options"
 msgstr "options"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "enlever %n morceaux"
 
@@ -2804,6 +2810,12 @@ msgstr "stop"
 #, qt-format
 msgid "track %1"
 msgstr "piste %1"
+
+#~ msgid "Mount point"
+#~ msgstr "Point de montage"
+
+#~ msgid "URI"
+#~ msgstr "URI"
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Ajouter à la liste de lecture"

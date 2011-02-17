@@ -41,6 +41,9 @@ class Ui_SettingsDialog;
 #ifdef ENABLE_WIIMOTEDEV
   class WiimotedevShortcutsConfig;
 #endif
+#ifdef HAVE_REMOTE
+  class RemoteConfig;
+#endif
 
 class GstEngine;
 
@@ -67,6 +70,9 @@ class SettingsDialog : public QDialog {
 #ifdef ENABLE_WIIMOTEDEV
     Page_Wiimotedev,
 #endif
+#ifdef HAVE_REMOTE
+    Page_Remote,
+#endif
   };
 
   void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
@@ -91,9 +97,7 @@ class SettingsDialog : public QDialog {
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
-#ifdef HAVE_LIBLASTFM
-  void LastFMValidationComplete(bool success);
-#endif
+  void ValidationComplete(bool success);
 
   void PrettyOpacityChanged(int value);
   void PrettyColorPresetChanged(int index);
@@ -118,6 +122,9 @@ class SettingsDialog : public QDialog {
 #endif
 #ifdef ENABLE_WIIMOTEDEV
   WiimotedevShortcutsConfig* wiimotedev_config_;
+#endif
+#ifdef HAVE_REMOTE
+  RemoteConfig* remote_config_;
 #endif
   const GstEngine* gst_engine_;
 

@@ -41,6 +41,10 @@
 # include "wiimotedev/shortcuts.h"
 #endif
 
+#ifdef HAVE_REMOTE
+# include "remote/remoteconfig.h"
+#endif
+
 #include <QColorDialog>
 #include <QDir>
 #include <QFontDialog>
@@ -111,7 +115,24 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 
   ui_->stacked_widget->insertWidget(Page_Lastfm, lastfm_page);
 
-  connect(lastfm_config_, SIGNAL(ValidationComplete(bool)), SLOT(LastFMValidationComplete(bool)));
+  connect(lastfm_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
+#endif
+
+#ifdef HAVE_REMOTE
+  ui_->list->insertItem(Page_Remote, tr("Remote Control"));
+  ui_->list->item(Page_Remote)->setIcon(QIcon(":/network-server.png"));
+
+  QWidget* remote_page = new QWidget;
+  QVBoxLayout* remote_layout = new QVBoxLayout;
+  remote_layout->setContentsMargins(0, 0, 0, 0);
+
+  remote_config_ = new RemoteConfig;
+  remote_layout->addWidget(remote_config_);
+  remote_page->setLayout(remote_layout);
+
+  ui_->stacked_widget->insertWidget(Page_Remote, remote_page);
+
+  connect(remote_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 #endif
 
   // Icons
@@ -260,14 +281,12 @@ void SettingsDialog::SetGlobalShortcutManager(GlobalShortcuts *manager) {
   ui_->global_shortcuts->SetManager(manager);
 }
 
-#ifdef HAVE_LIBLASTFM
-void SettingsDialog::LastFMValidationComplete(bool success) {
+void SettingsDialog::ValidationComplete(bool success) {
   ui_->buttonBox->setEnabled(true);
 
   if (success)
     accept();
 }
-#endif
 
 void SettingsDialog::accept() {
 #ifdef HAVE_LIBLASTFM
@@ -277,6 +296,16 @@ void SettingsDialog::accept() {
     return;
   } else {
     lastfm_config_->Save();
+  }
+#endif
+
+#ifdef HAVE_REMOTE
+  if (remote_config_->NeedsValidation()) {
+    remote_config_->Validate();
+    ui_->buttonBox->setEnabled(false);
+    return;
+  } else {
+    remote_config_->Save();
   }
 #endif
 
@@ -467,6 +496,10 @@ void SettingsDialog::showEvent(QShowEvent*) {
   // Last.fm
 #ifdef HAVE_LIBLASTFM
   lastfm_config_->Load();
+#endif
+
+#ifdef HAVE_REMOTE
+  remote_config_->Load();
 #endif
 
   // Magnatune
