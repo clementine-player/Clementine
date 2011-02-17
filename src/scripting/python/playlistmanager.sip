@@ -31,8 +31,8 @@ active and current playlists are guaranteed to always be valid.
 Each playlist has an ID that is used to save it in the database.  You can get
 the ID of a playlist by calling the L{Playlist.id()} method.
 
-You can't create new PlaylistManagers, there is only one instance of this
-class ever created.  You can access it through the global variable in the
+You can't create new PlaylistManagers, there is only one instance of
+this class ever created.  You can access it through the global variable in the
 L{clementine} module:
 
   >>> clementine.playlists
