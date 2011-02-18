@@ -17,8 +17,6 @@ public:
 
 	virtual const QString& implementationName() const { return kImplementationName; }
 
-	static void init() {}
-
 	static const QString kImplementationName;
 private:
 	org::kde::KWallet kwallet_;

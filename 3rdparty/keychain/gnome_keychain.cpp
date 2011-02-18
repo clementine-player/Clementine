@@ -1,7 +1,9 @@
-#include "config.h"
 #include "gnome_keychain.h"
 
 #include <glib.h>
+
+#include <QCoreApplication>
+#include <QtDebug>
 
 const QString GnomeKeychain::kImplementationName = "Gnome Keyring";
 
@@ -24,8 +26,8 @@ const QString GnomeKeychain::getPassword(const QString& account) {
 	GnomeKeyringResult result = gnome_keyring_find_password_sync(
 		&kOurSchema,
 		&password,
-		"username", account.toStdString().c_str(),
-		"service", kServiceName.toStdString().c_str(),
+    "username", account.toUtf8().constData(),
+    "service", kServiceName.toUtf8().constData(),
 		NULL);
 	
 	if (result == GNOME_KEYRING_RESULT_OK) {
@@ -34,27 +36,23 @@ const QString GnomeKeychain::getPassword(const QString& account) {
 		return pass;
 	}
 
+  qWarning() << "Failed to get password from keychain for account" << account;
 	return QString::null;
 }
 
 bool GnomeKeychain::setPassword(const QString& account, const QString& password) {
 	Q_ASSERT(isAvailable());
-	QString displayName = "%1 Google Reader account for %2";
-	displayName.arg(TITLE);
-	displayName.arg(account);
+  QString displayName = QString("%1 account for %2").arg(
+        QCoreApplication::applicationName(), account);
 
 	GnomeKeyringResult result = gnome_keyring_store_password_sync(
 		&kOurSchema,
 		NULL,
-		displayName.toStdString().c_str(),
-		password.toStdString().c_str(),
-		"username", account.toStdString().c_str(),
-		"service", kServiceName.toStdString().c_str(),
+    displayName.toUtf8().constData(),
+    password.toUtf8().constData(),
+    "username", account.toUtf8().constData(),
+    "service", kServiceName.toUtf8().constData(),
 		NULL);
 	
 	return result == GNOME_KEYRING_RESULT_OK;
-}
-
-void GnomeKeychain::init() {
-	g_set_application_name("PurpleHatstands");
 }

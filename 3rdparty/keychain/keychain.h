@@ -17,7 +17,6 @@ public:
 
   static Keychain* getDefault();
 
-  static void init();
 protected:
   static const QString kServiceName;
 
@@ -33,7 +32,7 @@ private:
   };
   template<typename T>
   struct KeychainImpl : public KeychainDefinition {
-    KeychainImpl() : KeychainDefinition(T::kImplementationName) { T::init(); }
+    KeychainImpl() : KeychainDefinition(T::kImplementationName) { }
     virtual Keychain* getInstance() const {
       return new T();
     }

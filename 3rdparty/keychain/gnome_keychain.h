@@ -16,8 +16,6 @@ public:
 
 	virtual const QString& implementationName() const { return kImplementationName; }
 
-	static void init();
-
 	static const QString kImplementationName;
 private:
 	static const GnomeKeyringPasswordSchema kOurSchema;

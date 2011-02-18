@@ -14,8 +14,6 @@ public:
 	virtual const QString& implementationName() const { return kImplementationName; }
 
 	static const QString kImplementationName;
-
-	static void init() {}
 };
 
 #endif
