@@ -36,6 +36,10 @@ this class ever created.  You can access it through the global variable in the
 L{clementine} module:
 
   >>> clementine.playlists
+
+@group Signals: PlaylistManagerInitialized, PlaylistAdded, PlaylistRemoved,
+  PlaylistRenamed, CurrentChanged, ActiveChanged, Error, SummaryTextChanged,
+  CurrentSongChanged, PlaylistChanged, EditingFinished, PlayRequested
 %End
 
 public:
@@ -321,24 +325,107 @@ Equivalent to calling C{active().RateSong(active().current_index(), rating)}.
 
 signals:
   void PlaylistManagerInitialized();
+%Docstring
+PlaylistManagerInitialized()
+Emitted during Clementine startup when all the playlists stored in the
+database have been created and added to the UI.
+%End
 
   void PlaylistAdded(int id, const QString& name);
+%Docstring
+PlaylistAdded(id, name)
+Emitted when a new playlist is added.
+%End
+
   void PlaylistRemoved(int id);
+%Docstring
+PlaylistRemoved(id)
+Emitted when a playlist is removed.
+%End
+
   void PlaylistRenamed(int id, const QString& new_name);
+%Docstring
+PlaylistRenamed(id, new_name)
+Emitted when a playlist is renamed.
+%End
+
   void CurrentChanged(Playlist* new_playlist);
+%Docstring
+CurrentChanged(new_current_playlist)
+Emitted when the current playlist is changed (ie the user clicked on a
+different tab).
+%End
+
   void ActiveChanged(Playlist* new_playlist);
+%Docstring
+ActiveChanged(new_active_playlist)
+Emitted when the active playlist is changed.
+%End
 
   void Error(const QString& message);
-  void SummaryTextChanged(const QString& summary);
+%Docstring
+Error(message)
+Emitted whenever an error occurs in the PlaylistManager.
 
-  // Forwarded from individual playlists
+Errors are typically raised when loading a playlist file from disk.  Note: any
+errors emitted through this signal will already have been displayed in an
+error dialog.
+%End
+
+  void SummaryTextChanged(const QString& summary);
+%Docstring
+SummaryTextChanged(summary)
+The summary text is a short string displayed in Clementine's status bar to say
+how many (if any) songs are selected, and the total length of the songs in the
+current playlist.
+
+This signal is emitted whenever that text changes, for example when the
+current playlist is changed, or when the user selects some different songs.
+%End
+
   void CurrentSongChanged(const Song& song);
+%Docstring
+CurrentSongChanged(new_current_song)
+Emitted when the currently playling song in the active playlist changes.
+
+This is a convenience signal that is forwarded from the active playlist.  The
+current song is the song that is currently playing - it has an animation and
+a special appearance in the playlist view.
+
+@type new_current_song: L{Song}
+%End
 
   // Signals that one of manager's playlists has changed (new items, new
   // ordering etc.) - the argument shows which.
   void PlaylistChanged(Playlist* playlist);
+%Docstring
+PlaylistChanged(playlist)
+Emitted when any playlist changes (items added, items removed, order changed,
+etc.).
+
+This is a convenience signal that is forwarded from individual playlists.
+
+@type playlist: L{Playlist}
+%End
+
   void EditingFinished(const QModelIndex& index);
+%Docstring
+EditingFinished(index)
+Emitted after the user has made a change to one of the indexes in the current
+playlist.
+
+@type index: L{PyQt4.QtCore.QModelIndex}
+%End
+
   void PlayRequested(const QModelIndex& index);
+%Docstring
+PlayRequested(index)
+Emitted after songs are added to a playlist if the user wants them to start
+playing immediately (eg by double clicking on a song in the library view).
+
+@param index: The first of the newly added indexes in the playlist.
+@type index: L{PyQt4.QtCore.QModelIndex}
+%End
 
 private:
   PlaylistManagerInterface();
