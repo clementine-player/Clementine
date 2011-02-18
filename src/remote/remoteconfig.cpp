@@ -96,6 +96,7 @@ void RemoteConfig::AuthenticationComplete(bool success) {
   waiting_for_auth_ = false;
 
   if (success) {
+    validated_password_ = ui_->password->text();
     ui_->password->clear();
   } else {
     QMessageBox::warning(this, tr("Authentication failed"), tr("Your Google credentials were incorrect"));
@@ -119,7 +120,8 @@ void RemoteConfig::Save() {
   const QString& username = ui_->username->text();
   s.setValue("username", username);
   Keychain* keychain = Keychain::getDefault();
-  keychain->setPassword(username, ui_->password->text());
+  keychain->setPassword(username, validated_password_);
+  validated_password_.clear();
 }
 
 void RemoteConfig::SignOut() {

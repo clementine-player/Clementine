@@ -54,6 +54,8 @@ class RemoteConfig : public QWidget {
   Ui_RemoteConfig* ui_;
   bool waiting_for_auth_;
   NetworkAccessManager* network_;
+
+  QString validated_password_;
 };
 
 #endif // REMOTECONFIG_H
