@@ -1,7 +1,6 @@
 #include "xmpp.h"
 
 #include <gloox/connectiontcpclient.h>
-#include <gloox/message.h>
 
 #include <QSettings>
 #include <QtDebug>
@@ -12,7 +11,6 @@
 using gloox::Client;
 using gloox::ConnectionTCPClient;
 using gloox::JID;
-using gloox::Message;
 using gloox::MessageSession;
 
 XMPP::XMPP() {
@@ -39,30 +37,39 @@ void XMPP::Connect() {
 void XMPP::Connect(const QString& jid, const QString& password) {
   // TODO: Generate <256 char resource.
   JID j(jid.toUtf8().constData());
+
   client_.reset(new Client(j, password.toUtf8().constData()));
+  ConnectionTCPClient* connection = new ConnectionTCPClient(
+        client_.get(), client_->logInstance(), "talk.google.com");
+  client_->setConnectionImpl(connection);
+
   client_->registerConnectionListener(this);
   client_->registerMessageHandler(this);
-  client_->setServer("talk.google.com");
+  client_->logInstance().registerLogHandler(gloox::LogLevelDebug, gloox::LogAreaAll, this);
+  client_->setPresence(gloox::PresenceAvailable, -128);
   client_->connect(false);
-  int fd = static_cast<ConnectionTCPClient*>(client_->connectionImpl())->socket();
 
-  notifier_.reset(new QSocketNotifier(fd, QSocketNotifier::Read));
+  notifier_.reset(new QSocketNotifier(connection->socket(), QSocketNotifier::Read));
   connect(notifier_.get(), SIGNAL(activated(int)), SLOT(Receive()));
 }
 
-void XMPP::handleMessage(const Message& stanza, MessageSession* session) {
+void XMPP::handleMessage(gloox::Stanza* stanza, MessageSession* session) {
   qDebug() << Q_FUNC_INFO;
-  qDebug() << stanza.tag()->xml().c_str();
-  Message reply(Message::Chat, stanza.from(), "Hello World!");
+  qDebug() << stanza->xml().c_str();
+  gloox::Stanza* reply = gloox::Stanza::createMessageStanza(
+        stanza->from(), "Hello world!");
   client_->send(reply);
 }
 
 void XMPP::onConnect() {
-  qDebug() << "Connected with resource:" << client_->resource().c_str();
+  qDebug() << "Connected with resource:" << client_->resource().c_str()
+           << client_->jid().full().c_str();
+  client_->login();
 }
 
 void XMPP::onDisconnect(gloox::ConnectionError e) {
   qDebug() << "Disconnected:" << e;
+  notifier_->setEnabled(false);
 }
 
 bool XMPP::onTLSConnect(const gloox::CertInfo& info) {
@@ -71,4 +78,16 @@ bool XMPP::onTLSConnect(const gloox::CertInfo& info) {
 
 void XMPP::Receive() {
   client_->recv();
+}
+
+void XMPP::handleLog(gloox::LogLevel level, gloox::LogArea area,
+                     const std::string& message) {
+  QString prefix = "---";
+  if (area == gloox::LogAreaXmlIncoming) {
+    prefix = "<<<";
+  } else if (area == gloox::LogAreaXmlOutgoing) {
+    prefix = ">>>";
+  }
+
+  qDebug() << "XMPP" << prefix.toAscii().constData() << message.c_str();
 }
