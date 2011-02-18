@@ -5,15 +5,15 @@
 
 class DefaultKeychain : public Keychain {
 public:
-	virtual ~DefaultKeychain() {}
-	virtual bool isAvailable() { return true; }
+  virtual ~DefaultKeychain() {}
+  virtual bool isAvailable() { return true; }
 
-	virtual const QString getPassword(const QString& account);
-	virtual bool setPassword(const QString& account, const QString& password);
+  virtual const QString getPassword(const QString& account);
+  virtual bool setPassword(const QString& account, const QString& password);
 
-	virtual const QString& implementationName() const { return kImplementationName; }
+  virtual const QString& implementationName() const { return kImplementationName; }
 
-	static const QString kImplementationName;
+  static const QString kImplementationName;
 private:
 	QString password_;
 };

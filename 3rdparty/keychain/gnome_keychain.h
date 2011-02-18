@@ -9,16 +9,16 @@ extern "C" {
 
 class GnomeKeychain : public Keychain {
 public:
-	virtual ~GnomeKeychain() {}
-	virtual bool isAvailable();
-	virtual const QString getPassword(const QString& account);
-	virtual bool setPassword(const QString& account, const QString& password);
+  virtual ~GnomeKeychain() {}
+  virtual bool isAvailable();
+  virtual const QString getPassword(const QString& account);
+  virtual bool setPassword(const QString& account, const QString& password);
 
-	virtual const QString& implementationName() const { return kImplementationName; }
+  virtual const QString& implementationName() const { return kImplementationName; }
 
-	static const QString kImplementationName;
+  static const QString kImplementationName;
 private:
-	static const GnomeKeyringPasswordSchema kOurSchema;
+  static const GnomeKeyringPasswordSchema kOurSchema;
 };
 
 #endif
