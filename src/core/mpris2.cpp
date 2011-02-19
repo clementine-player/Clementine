@@ -257,16 +257,24 @@ double Mpris2::Rate() const {
 
 void Mpris2::SetRate(double rate) {
   if(rate == 0) {
-    mpris1_->player()->Pause();
+    if (mpris1_->player()) {
+      mpris1_->player()->Pause();
+    }
   }
 }
 
 bool Mpris2::Shuffle() const {
-  return mpris1_->player()->GetStatus().random;
+  if (mpris1_->player()) {
+    return mpris1_->player()->GetStatus().random;
+  } else {
+    return false;
+  }
 }
 
 void Mpris2::SetShuffle(bool value) {
-  mpris1_->tracklist()->SetRandom(value);
+  if (mpris1_->tracklist()) {
+    mpris1_->tracklist()->SetRandom(value);
+  }
 }
 
 QVariantMap Mpris2::Metadata() const {
@@ -274,6 +282,10 @@ QVariantMap Mpris2::Metadata() const {
 }
 
 QString Mpris2::current_track_id() const {
+  if (!mpris1_->tracklist()) {
+    return QString();
+  }
+
   return QString("/org/mpris/MediaPlayer2/Track/%1").arg(
         QString::number(mpris1_->tracklist()->GetCurrentTrack()));
 }
@@ -317,7 +329,11 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
 }
 
 double Mpris2::Volume() const {
-  return double(mpris1_->player()->VolumeGet()) / 100;
+  if (mpris1_->player()) {
+    return double(mpris1_->player()->VolumeGet()) / 100;
+  } else {
+    return 0.0;
+  }
 }
 
 void Mpris2::SetVolume(double value) {
@@ -337,11 +353,19 @@ double Mpris2::MinimumRate() const {
 }
 
 bool Mpris2::CanGoNext() const {
-  return mpris1_->player()->GetCaps() & CAN_GO_NEXT;
+  if (mpris1_->player()) {
+    return mpris1_->player()->GetCaps() & CAN_GO_NEXT;
+  } else {
+    return true;
+  }
 }
 
 bool Mpris2::CanGoPrevious() const {
-  return mpris1_->player()->GetCaps() & CAN_GO_PREV;
+  if (mpris1_->player()) {
+    return mpris1_->player()->GetCaps() & CAN_GO_PREV;
+  } else {
+    return true;
+  }
 }
 
 bool Mpris2::CanPlay() const {
@@ -351,11 +375,19 @@ bool Mpris2::CanPlay() const {
 // This one's a bit different than MPRIS 1 - we want this to be true even when
 // the song is already paused.
 bool Mpris2::CanPause() const {
-  return mpris1_->player()->GetCaps() & CAN_PAUSE || PlaybackStatus() == "Paused";
+  if (mpris1_->player()) {
+    return mpris1_->player()->GetCaps() & CAN_PAUSE || PlaybackStatus() == "Paused";
+  } else {
+    return true;
+  }
 }
 
 bool Mpris2::CanSeek() const {
-  return mpris1_->player()->GetCaps() & CAN_SEEK;
+  if (mpris1_->player()) {
+    return mpris1_->player()->GetCaps() & CAN_SEEK;
+  } else {
+    return true;
+  }
 }
 
 bool Mpris2::CanControl() const {
@@ -416,7 +448,9 @@ void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
 }
 
 void Mpris2::OpenUri(const QString& uri) {
-  mpris1_->tracklist()->AddTrack(uri, true);
+  if (mpris1_->tracklist()) {
+    mpris1_->tracklist()->AddTrack(uri, true);
+  }
 }
 
 TrackIds Mpris2::Tracks() const {
