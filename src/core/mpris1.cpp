@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "artloader.h"
 #include "mpris1.h"
 #include "mpris_common.h"
 

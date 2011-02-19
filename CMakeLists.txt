@@ -237,7 +237,7 @@ option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
 if(ENABLE_REMOTE AND GLOOX_LIBRARIES)
   set(HAVE_REMOTE ON)
-  add_subdirectory(3rdparty/keychain)
+  add_subdirectory(3rdparty/libxrme)
 endif(ENABLE_REMOTE AND GLOOX_LIBRARIES)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})

@@ -34,6 +34,7 @@
 class About;
 class AddStreamDialog;
 class ArtistInfoView;
+class ArtLoader;
 class BackgroundStreams;
 class CommandlineOptions;
 class Database;
@@ -58,6 +59,7 @@ class QueueManager;
 class RadioItem;
 class RadioModel;
 class RadioViewContainer;
+class Remote;
 class ScriptDialog;
 class ScriptManager;
 class Song;
@@ -88,6 +90,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
              Player* player,
              SystemTrayIcon* tray_icon,
              OSD* osd,
+             ArtLoader* art_loader,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -255,6 +258,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
+  Remote* remote_;
 
   DeviceManager* devices_;
 

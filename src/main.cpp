@@ -24,6 +24,7 @@
 #endif // Q_OS_WIN32
 
 #include "config.h"
+#include "core/artloader.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
 #include "core/encoding.h"
@@ -80,7 +81,6 @@ using boost::scoped_ptr;
 #endif
 
 #ifdef HAVE_DBUS
-  #include "core/mpris_common.h"
   #include "core/mpris.h"
   #include "core/mpris2.h"
   #include "dbus/metatypes.h"
@@ -90,11 +90,6 @@ using boost::scoped_ptr;
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
-#endif
-
-#ifdef HAVE_REMOTE
-#include "remote/xmpp.h"
-#include "remote/zeroconf.h"
 #endif
 
 class GstEnginePipeline;
@@ -316,23 +311,19 @@ int main(int argc, char *argv[]) {
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
   OSD osd(tray_icon.get());
 
+  ArtLoader art_loader;
+
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
   qDBusRegisterMetaType<QList<QByteArray> >();
 
-  mpris::ArtLoader art_loader;
   mpris::Mpris mpris(&player, &art_loader);
 
   QObject::connect(&playlists, SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
-  QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString)),
+  QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
                    &osd, SLOT(CoverArtPathReady(Song, QString)));
-#endif
-
-#ifdef HAVE_REMOTE
-  XMPP xmpp;
-  xmpp.Connect();
 #endif
 
   // Window
@@ -343,7 +334,8 @@ int main(int argc, char *argv[]) {
       &radio_model,
       &player,
       tray_icon.get(),
-      &osd);
+      &osd,
+      &art_loader);
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif

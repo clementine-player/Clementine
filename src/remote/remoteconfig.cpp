@@ -19,8 +19,8 @@
 #include "ui_remoteconfig.h"
 #include "ui/iconloader.h"
 
-#include "keychain.h"
-
+#include <QCoreApplication>
+#include <QHostInfo>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QSettings>
@@ -44,6 +44,11 @@ RemoteConfig::RemoteConfig(QWidget *parent)
 
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
   resize(sizeHint());
+}
+
+QString RemoteConfig::DefaultAgentName() {
+  return QString("%1 on %2").arg(QCoreApplication::applicationName(),
+                                 QHostInfo::localHostName());
 }
 
 RemoteConfig::~RemoteConfig() {
@@ -95,11 +100,13 @@ void RemoteConfig::AuthenticationComplete(bool success) {
   ui_->busy->hide();
   waiting_for_auth_ = false;
 
-  if (success) {
-    validated_password_ = ui_->password->text();
-    ui_->password->clear();
-  } else {
+  if (!success) {
     QMessageBox::warning(this, tr("Authentication failed"), tr("Your Google credentials were incorrect"));
+  } else {
+    QSettings s;
+    s.beginGroup(kSettingsGroup);
+    s.setValue("password", ui_->password->text());
+    ui_->password->clear();
   }
 
   emit ValidationComplete(success);
@@ -108,24 +115,25 @@ void RemoteConfig::AuthenticationComplete(bool success) {
 void RemoteConfig::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  QVariant username = s.value("username");
-  if (username.isValid()) {
-    ui_->username->setText(username.toString());
-  }
+
+  ui_->username->setText(s.value("username").toString());
+  ui_->agent_name->setText(s.value("agent_name", DefaultAgentName()).toString());
 }
 
 void RemoteConfig::Save() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  const QString& username = ui_->username->text();
-  s.setValue("username", username);
-  Keychain* keychain = Keychain::getDefault();
-  keychain->setPassword(username, validated_password_);
-  validated_password_.clear();
+
+  s.setValue("username", ui_->username->text());
+  s.setValue("agent_name", ui_->agent_name->text());
 }
 
 void RemoteConfig::SignOut() {
   ui_->username->clear();
   ui_->password->clear();
   ui_->sign_out->setEnabled(false);
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("password", QString());
 }

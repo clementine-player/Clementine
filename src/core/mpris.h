@@ -20,11 +20,11 @@
 
 #include <QObject>
 
+class ArtLoader;
 class Player;
 
 namespace mpris {
 
-class ArtLoader;
 class Mpris1;
 class Mpris2;
 

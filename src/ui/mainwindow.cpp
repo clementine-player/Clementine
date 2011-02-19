@@ -17,6 +17,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "core/artloader.h"
 #include "core/backgroundstreams.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
@@ -103,6 +104,10 @@
 # include "visualisations/visualisationcontainer.h"
 #endif
 
+#ifdef HAVE_REMOTE
+# include "remote/remote.h"
+#endif
+
 #include <QCloseEvent>
 #include <QDir>
 #include <QFileDialog>
@@ -148,6 +153,7 @@ MainWindow::MainWindow(
     Player* player,
     SystemTrayIcon* tray_icon,
     OSD* osd,
+    ArtLoader* art_loader,
     QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
@@ -162,6 +168,7 @@ MainWindow::MainWindow(
     player_(player),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
+    remote_(NULL),
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
@@ -574,6 +581,14 @@ MainWindow::MainWindow(
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)), playlists_, SLOT(RateCurrentSong(int)));
 
+  // XMPP Remote control
+#ifdef HAVE_REMOTE
+  remote_ = new Remote(player_, this);
+  connect(remote_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+  connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)),
+          remote_,      SLOT(ArtLoaded(Song,QString,QImage)));
+#endif
+
   // Fancy tabs
   connect(ui_->tabs, SIGNAL(ModeChanged(FancyTabWidget::Mode)), SLOT(SaveGeometry()));
   connect(ui_->tabs, SIGNAL(CurrentChanged(int)), SLOT(SaveGeometry()));
@@ -732,6 +747,9 @@ void MainWindow::ReloadAllSettings() {
   radio_model_->ReloadSettings();
 #ifdef ENABLE_WIIMOTEDEV
   wiimotedev_shortcuts_->ReloadSettings();
+#endif
+#ifdef HAVE_REMOTE
+  remote_->ReloadSettings();
 #endif
 }
 

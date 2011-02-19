@@ -12,6 +12,7 @@ if(WIN32)
   include_directories(../3rdparty/qtwin)
 endif(WIN32)
 
+include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
 include_directories(${GOBJECT_INCLUDE_DIRS})
@@ -52,6 +53,7 @@ set(SOURCES
   analyzers/turbine.cpp
 
   core/albumcoverloader.cpp
+  core/artloader.cpp
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
@@ -66,7 +68,6 @@ set(SOURCES
   core/gnomeglobalshortcutbackend.cpp
   core/kittenloader.cpp
   core/mergedproxymodel.cpp
-  core/mpris_common.cpp
   core/musicstorage.cpp
   core/network.cpp
   core/networkproxyfactory.cpp
@@ -258,6 +259,7 @@ set(HEADERS
   analyzers/turbine.h
 
   core/albumcoverloader.h
+  core/artloader.h
   core/backgroundstreams.h
   core/backgroundthread.h
   core/database.h
@@ -268,7 +270,6 @@ set(HEADERS
   core/kittenloader.h
   core/mergedproxymodel.h
   core/mimedata.h
-  core/mpris_common.h
   core/network.h
   core/organise.h
   core/player.h
@@ -663,36 +664,6 @@ if(HAVE_DBUS)
 
   # Gnome Screensaver DBus interface
   list(APPEND SOURCES ui/dbusscreensaver.cpp)
-
-  if(HAVE_REMOTE)
-    # TODO: Use CMake macro when it supports -i
-    find_program(QDBUSXML2CPP qdbusxml2cpp)
-    add_custom_command(
-        OUTPUT
-        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h
-        COMMAND ${QDBUSXML2CPP}
-        dbus/org.freedesktop.Avahi.EntryGroup.xml
-        -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup
-        -i dbus/metatypes.h
-        DEPENDS dbus/org.freedesktop.Avahi.EntryGroup.xml
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h)
-    list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp)
-
-    add_custom_command(
-        OUTPUT
-        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h
-        COMMAND ${QDBUSXML2CPP}
-        dbus/org.freedesktop.Avahi.Server.xml
-        -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver
-        -i dbus/metatypes.h
-        DEPENDS dbus/org.freedesktop.Avahi.Server.xml
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h)
-    list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp)
-  endif(HAVE_REMOTE)
 endif(HAVE_DBUS)
 
 # Libgpod device backend
@@ -788,24 +759,15 @@ if(HAVE_SCRIPTING_PYTHON)
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
-  include_directories(${GLOOX_INCLUDE_DIRS})
-  link_directories(${GLOOX_LIBRARY_DIRS})
-  include_directories(../3rdparty/keychain)
   list(APPEND UI remote/remoteconfig.ui)
-  list(APPEND HEADERS remote/remoteconfig.h)
-  list(APPEND SOURCES remote/remoteconfig.cpp)
-  list(APPEND HEADERS remote/xmpp.h)
-  list(APPEND SOURCES remote/xmpp.cpp)
-  list(APPEND SOURCES remote/zeroconf.cpp)
-
-  if(APPLE)
-    list(APPEND SOURCES remote/bonjour.mm)
-  endif(APPLE)
-
-  if(HAVE_DBUS)
-    list(APPEND SOURCES remote/avahi.cpp)
-    list(APPEND HEADERS remote/avahi.h)
-  endif(HAVE_DBUS)
+  list(APPEND HEADERS
+    remote/remote.h
+    remote/remoteconfig.h
+  )
+  list(APPEND SOURCES
+    remote/remote.cpp
+    remote/remoteconfig.cpp
+  )
 endif(HAVE_REMOTE)
 
 # OS-specific sources that should be searched for translatable strings even
@@ -846,6 +808,11 @@ list(APPEND OTHER_SOURCES
   devices/wmdmlister.h
   devices/wmdmloader.h
   devices/wmdmloader.cpp
+  remote/remote.cpp
+  remote/remote.h
+  remote/remoteconfig.cpp
+  remote/remoteconfig.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_remoteconfig.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   ui/wiimotedevshortcutsconfig.cpp
@@ -968,7 +935,7 @@ endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
   target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})
-  target_link_libraries(clementine_lib keychain)
+  target_link_libraries(clementine_lib xrme)
 endif(HAVE_REMOTE)
 
 if (APPLE)

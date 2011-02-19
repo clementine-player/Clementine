@@ -24,6 +24,7 @@
 #include <QDBusArgument>
 #include <QObject>
 
+class ArtLoader;
 class PlayerInterface;
 class Playlist;
 
@@ -54,7 +55,6 @@ Q_DECLARE_METATYPE(Version);
 QDBusArgument& operator <<(QDBusArgument& arg, const Version& version);
 const QDBusArgument& operator >>(const QDBusArgument& arg, Version& version);
 
-
 namespace mpris {
 
 enum DBusCaps {
@@ -68,8 +68,6 @@ enum DBusCaps {
   CAN_HAS_TRACKLIST    = 1 << 6,
 };
 
-
-class ArtLoader;
 class Mpris1Root;
 class Mpris1Player;
 class Mpris1TrackList;

@@ -19,6 +19,7 @@
 #include "mpris_common.h"
 #include "mpris1.h"
 #include "mpris2.h"
+#include "core/artloader.h"
 #include "core/mpris2_player.h"
 #include "core/mpris2_root.h"
 #include "core/mpris2_tracklist.h"
@@ -56,7 +57,7 @@ Mpris2::Mpris2(PlayerInterface* player, ArtLoader* art_loader,
   QDBusConnection::sessionBus().registerService(kServiceName);
   QDBusConnection::sessionBus().registerObject(kMprisObjectPath, this);
 
-  connect(art_loader, SIGNAL(ArtLoaded(Song,QString)), SLOT(ArtLoaded(Song,QString)));
+  connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
 
   connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(player, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));

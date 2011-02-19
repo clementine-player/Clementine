@@ -18,6 +18,7 @@
 #include "mpris.h"
 #include "mpris1.h"
 #include "mpris2.h"
+#include "core/artloader.h"
 
 namespace mpris {
 

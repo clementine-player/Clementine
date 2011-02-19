@@ -31,6 +31,8 @@ class RemoteConfig : public QWidget {
   RemoteConfig(QWidget* parent = 0);
   ~RemoteConfig();
 
+  static QString DefaultAgentName();
+
   bool NeedsValidation() const;
 
   static const char* kSettingsGroup;
@@ -54,8 +56,6 @@ class RemoteConfig : public QWidget {
   Ui_RemoteConfig* ui_;
   bool waiting_for_auth_;
   NetworkAccessManager* network_;
-
-  QString validated_password_;
 };
 
 #endif // REMOTECONFIG_H

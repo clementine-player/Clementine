@@ -16,12 +16,10 @@
 */
 
 #include "albumcoverloader.h"
-#include "mpris_common.h"
+#include "artloader.h"
 
 #include <QDir>
 #include <QTemporaryFile>
-
-namespace mpris {
 
 ArtLoader::ArtLoader(QObject* parent)
   : QObject(parent),
@@ -56,6 +54,7 @@ void ArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
 
   QString uri;
   QString thumbnail_uri;
+  QImage thumbnail;
 
   if (!image.isNull()) {
     temp_art_.reset(new QTemporaryFile(temp_file_pattern_));
@@ -66,16 +65,13 @@ void ArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
     // since it's the GUI thread, but the alternative is hard.
     temp_art_thumbnail_.reset(new QTemporaryFile(temp_file_pattern_));
     temp_art_thumbnail_->open();
-    image.scaledToHeight(120, Qt::SmoothTransformation)
-        .save(temp_art_thumbnail_->fileName(), "JPEG");
+    thumbnail = image.scaledToHeight(120, Qt::SmoothTransformation);
+    thumbnail.save(temp_art_thumbnail_->fileName(), "JPEG");
 
     uri = "file://" + temp_art_->fileName();
     thumbnail_uri = "file://" + temp_art_thumbnail_->fileName();
   }
 
-  emit ArtLoaded(last_song_, uri);
-  emit ThumbnailLoaded(last_song_, thumbnail_uri);
+  emit ArtLoaded(last_song_, uri, image);
+  emit ThumbnailLoaded(last_song_, thumbnail_uri, thumbnail);
 }
-
-
-} // namespace mpris

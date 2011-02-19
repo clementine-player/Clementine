@@ -18,52 +18,12 @@
 #ifndef MPRIS_COMMON_H
 #define MPRIS_COMMON_H
 
-#include "backgroundthread.h"
-#include "song.h"
-
 #include <QDateTime>
 #include <QObject>
 #include <QStringList>
 #include <QVariantMap>
 
-#include <boost/scoped_ptr.hpp>
-
-class AlbumCoverLoader;
-
-class QImage;
-class QTemporaryFile;
-
 namespace mpris {
-
-class ArtLoader : public QObject {
-  Q_OBJECT
-
-public:
-  ArtLoader(QObject* parent = 0);
-  ~ArtLoader();
-
-public slots:
-  void LoadArt(const Song& song);
-
-signals:
-  void ArtLoaded(const Song& song, const QString& uri);
-  void ThumbnailLoaded(const Song& song, const QString& uri);
-
-private slots:
-  void Initialised();
-  void TempArtLoaded(quint64 id, const QImage& image);
-
-private:
-  QString temp_file_pattern_;
-
-  boost::scoped_ptr<QTemporaryFile> temp_art_;
-  boost::scoped_ptr<QTemporaryFile> temp_art_thumbnail_;
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  quint64 id_;
-
-  Song last_song_;
-};
-
 
 inline void AddMetadata(const QString& key, const QString& metadata, QVariantMap* map) {
   if (!metadata.isEmpty())   (*map)[key] = metadata;

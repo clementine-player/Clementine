@@ -26,6 +26,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class ArtLoader;
 class MainWindow;
 class PlayerInterface;
 
@@ -35,7 +36,6 @@ Q_DECLARE_METATYPE(TrackMetadata)
 
 namespace mpris {
 
-class ArtLoader;
 class Mpris1;
 
 class Mpris2 : public QObject {
