@@ -15,7 +15,7 @@ public:
 
   static const QString kImplementationName;
 private:
-	QString password_;
+  QString password_;
 };
 
 #endif
