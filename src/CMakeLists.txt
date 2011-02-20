@@ -443,6 +443,8 @@ set(UI
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
 
+  remote/remoteconfig.ui
+
   scripting/installscriptdialog.ui
   scripting/scriptdialog.ui
 
@@ -759,7 +761,6 @@ if(HAVE_SCRIPTING_PYTHON)
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
-  list(APPEND UI remote/remoteconfig.ui)
   list(APPEND HEADERS
     remote/remote.h
     remote/remoteconfig.h
