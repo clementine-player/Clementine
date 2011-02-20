@@ -68,9 +68,9 @@ MimeData* FileViewList::MimeDataFromSelection() const {
   data->setUrls(UrlListFromSelection());
 
   QList<QString> filenames = FilenamesFromSelection();
-  // if just one file / folder selected - use it's path as the new playlist's name
-  if(filenames.size() == 1) {
-    data->name_for_new_playlist_ = filenames[0];
+  // if just one folder selected - use it's path as the new playlist's name
+  if(filenames.size() == 1 && QFileInfo(filenames.first()).isDir()) {
+    data->name_for_new_playlist_ = filenames.first();
   // otherwise, use the current root path
   } else {
     data->name_for_new_playlist_ = static_cast<QFileSystemModel*>(model())->rootPath();

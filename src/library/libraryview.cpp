@@ -554,11 +554,11 @@ QString LibraryView::GetNameForNewPlaylist(const SongList& songs) {
   if(various_artists) {
     result = tr("Various artists");
   } else {
-    result = artists.values().at(0);
+    result = artists.values().first();
   }
 
   if(!various_artists && albums.size() == 1) {
-    result += " - " + albums.toList()[0];
+    result += " - " + albums.toList().first();
   }
 
   return result;
