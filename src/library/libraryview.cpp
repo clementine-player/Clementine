@@ -242,7 +242,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
 
     context_menu_->addSeparator();
     add_to_playlist_enqueue_ = context_menu_->addAction(IconLoader::Load("go-next"),
-        tr("Add to the queue"), this, SLOT(AddToPlaylistEnqueue()));
+        tr("Queue track"), this, SLOT(AddToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
     new_smart_playlist_ = context_menu_->addAction(IconLoader::Load("document-new"),
