@@ -290,39 +290,73 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   context_menu_index_ = qobject_cast<QSortFilterProxyModel*>(model())
                         ->mapToSource(context_menu_index_);
 
+  QModelIndexList selected_indexes =
+      qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
+          selectionModel()->selection()).indexes();
+
+  // number of smart playlists selected
+  int smart_playlists = 0;
+  // is the smart playlists header selected?
+  int smart_playlists_header = 0;
+  // number of non smart playlists selected
+  int regular_elements = 0;
+  // number of editable non smart playlists selected
+  int regular_editable = 0;
+
+  foreach(const QModelIndex& index, selected_indexes) {
+    int type = library_->data(index, LibraryModel::Role_Type).toInt();
+
+    if(type == LibraryItem::Type_SmartPlaylist) {
+      smart_playlists++;
+    } else if(type == LibraryItem::Type_PlaylistContainer) {
+      smart_playlists_header++;
+    } else {
+      regular_elements++;
+    }
+
+    if(library_->data(index, LibraryModel::Role_Editable).toBool()) {
+      regular_editable++;
+    }
+  }
+
   // TODO: check if custom plugin actions should be enabled / visible
-  const int type = library_->data(context_menu_index_, LibraryModel::Role_Type).toInt();
-  const bool enable_various = type == LibraryItem::Type_Container ||
-                              type == LibraryItem::Type_Song;
-  const bool smart_playlist = type == LibraryItem::Type_SmartPlaylist;
-  const bool show_smart     = type == LibraryItem::Type_PlaylistContainer ||
-                              smart_playlist;
-  const bool enable_add     = type == LibraryItem::Type_Container ||
-                              type == LibraryItem::Type_Song ||
-                              smart_playlist;
-  const bool many_songs     = GetSelectedSongs().size() > 1;
-  
-  load_->setEnabled(enable_add);
-  add_to_playlist_->setEnabled(enable_add);
-  open_in_new_playlist_->setEnabled(enable_add);
-  edit_tracks_->setVisible(many_songs);
-  edit_track_->setVisible(!many_songs);
-  edit_tracks_->setEnabled(enable_add);
-  edit_track_->setEnabled(enable_add);
-  show_in_various_->setEnabled(enable_various);
-  no_show_in_various_->setEnabled(enable_various);
+  const int songs_selected     = smart_playlists + smart_playlists_header + regular_elements;
+  const bool regular_elements_only = songs_selected == regular_elements;
+  const bool smart_playlists_only = songs_selected == smart_playlists + smart_playlists_header;
+  const bool only_smart_playlist_selected = smart_playlists == 1 && songs_selected == 1;
 
-  new_smart_playlist_->setVisible(show_smart);
-  edit_smart_playlist_->setVisible(show_smart);
-  delete_smart_playlist_->setVisible(show_smart);
-  organise_->setVisible(!show_smart);
-  copy_to_device_->setVisible(!show_smart);
-  delete_->setVisible(!show_smart);
-  show_in_various_->setVisible(!show_smart);
-  no_show_in_various_->setVisible(!show_smart);
+  // in all modes
+  load_->setEnabled(songs_selected);
+  add_to_playlist_->setEnabled(songs_selected);
+  open_in_new_playlist_->setEnabled(songs_selected);
+  add_to_playlist_enqueue_->setEnabled(songs_selected);
 
-  edit_smart_playlist_->setEnabled(smart_playlist);
-  delete_smart_playlist_->setEnabled(smart_playlist);
+  // allow mixed smart playlists / regular elements selected
+  edit_tracks_->setVisible(!smart_playlists_only && regular_editable > 1);
+  // if neither edit_track not edit_tracks are available, we show disabled
+  // edit_track element
+  edit_track_->setVisible(!smart_playlists_only && (regular_editable <= 1));
+  edit_track_->setEnabled(regular_editable == 1);
+
+  // only when no smart playlists selected
+  organise_->setVisible(regular_elements_only);
+  copy_to_device_->setVisible(regular_elements_only);
+  delete_->setVisible(regular_elements_only);
+  show_in_various_->setVisible(regular_elements_only);
+  no_show_in_various_->setVisible(regular_elements_only);
+
+  // only when all selected items are editable
+  organise_->setEnabled(regular_elements == regular_editable);
+  copy_to_device_->setEnabled(regular_elements == regular_editable);
+  delete_->setEnabled(regular_elements == regular_editable);
+
+  // only when no regular elements selected
+  new_smart_playlist_->setVisible(smart_playlists_only);
+  edit_smart_playlist_->setVisible(smart_playlists_only);
+  delete_smart_playlist_->setVisible(smart_playlists_only);
+
+  edit_smart_playlist_->setEnabled(only_smart_playlist_selected);
+  delete_smart_playlist_->setEnabled(only_smart_playlist_selected);
 
   context_menu_->popup(e->globalPos());
 }

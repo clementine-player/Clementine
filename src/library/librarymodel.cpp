@@ -448,6 +448,26 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
     case Role_Artist:
       return item->metadata.artist();
 
+    case Role_Editable:
+      if(item->type == LibraryItem::Type_Container) {
+        // if we have even one non editable item as a child, we ourselves
+        // are not available for edit
+        if(!item->children.isEmpty()) {
+          foreach(LibraryItem* child, item->children) {
+            if(!data(child, role).toBool()) {
+              return false;
+            }
+          }
+          return true;
+        } else {
+          return false;
+        }
+      } else if(item->type == LibraryItem::Type_Song) {
+        return item->metadata.IsEditable();
+      } else {
+        return false;
+      }
+
     case Role_SortText:
       return item->SortText();
   }
