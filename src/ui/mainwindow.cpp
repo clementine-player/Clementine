@@ -1052,6 +1052,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
 
   playlist_menu_index_ = source_index;
+  PlaylistItemPtr current_item = playlists_->current()->item_at(source_index.row());
 
   // Is this song currently playing?
   if (playlists_->current()->current_row() == source_index.row() && player_->GetState() == Engine::Playing) {
@@ -1066,7 +1067,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   if (index.isValid()) {
     playlist_play_pause_->setEnabled(
         playlists_->current()->current_row() != source_index.row() ||
-        ! (playlists_->current()->item_at(source_index.row())->options() & PlaylistItem::PauseDisabled));
+        ! (current_item->options() & PlaylistItem::PauseDisabled));
   } else {
     playlist_play_pause_->setEnabled(false);
   }
@@ -1075,13 +1076,17 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   // Are any of the selected songs editable or queued?
   QModelIndexList selection = ui_->playlist->view()->selectionModel()->selection().indexes();
+  bool cue_selected = false;
   int editable = 0;
   int in_queue = 0;
   int not_in_queue = 0;
   foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
       continue;
-    if (playlists_->current()->item_at(index.row())->Metadata().IsEditable()) {
+
+    if(playlists_->current()->item_at(index.row())->Metadata().has_cue()) {
+      cue_selected = true;
+    } else if (playlists_->current()->item_at(index.row())->Metadata().IsEditable()) {
       editable++;
     }
 
@@ -1090,7 +1095,15 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     else
       in_queue ++;
   }
+
+  // this is available when we have one or many files and at least one of
+  // those is not CUE related
   ui_->action_edit_track->setEnabled(editable);
+  ui_->action_edit_track->setVisible(editable);
+  // the rest of the read / write actions work only when there are no CUEs
+  // involved
+  if(cue_selected)
+    editable = 0;
 
   bool track_column = (index.column() == Playlist::Column_Track);
   ui_->action_renumber_tracks->setVisible(editable >= 2 && track_column);
@@ -1125,7 +1138,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     ui_->action_edit_value->setVisible(false);
   } else {
     Playlist::Column column = (Playlist::Column)index.column();
-    bool column_is_editable = Playlist::column_is_editable(column);
+    bool column_is_editable = Playlist::column_is_editable(column)
+                              && editable;
 
     ui_->action_selection_set_value->setVisible(
         ui_->action_selection_set_value->isVisible() && column_is_editable);
@@ -1142,7 +1156,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     ui_->action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
 
     // Is it a library item?
-    if (playlists_->current()->item_at(source_index.row())->IsLocalLibraryItem()) {
+    if (current_item->IsLocalLibraryItem()) {
       playlist_organise_->setVisible(editable);
     } else {
       playlist_copy_to_library_->setVisible(editable);
