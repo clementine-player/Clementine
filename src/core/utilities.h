@@ -28,6 +28,7 @@ class QIODevice;
 
 namespace Utilities {
   QString PrettyTime(int seconds);
+  QString PrettyTimeDelta(int seconds);
   QString PrettyTimeNanosec(qint64 nanoseconds);
   QString PrettySize(quint64 bytes);
   QString WordyTime(quint64 seconds);

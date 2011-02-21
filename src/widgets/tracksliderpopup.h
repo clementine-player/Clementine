@@ -11,6 +11,7 @@ public:
 
 public slots:
   void SetText(const QString& text);
+  void SetSmallText(const QString& small_text);
   void SetPopupPosition(const QPoint& pos);
 
 protected:
@@ -29,10 +30,13 @@ private:
 
 private:
   QString text_;
+  QString small_text_;
   QPoint pos_;
 
   QFont font_;
+  QFont small_font_;
   QFontMetrics font_metrics_;
+  QFontMetrics small_font_metrics_;
   QPixmap pixmap_;
   QPixmap background_cache_;
 };

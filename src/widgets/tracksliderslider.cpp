@@ -74,8 +74,10 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
   int seconds = QStyle::sliderValueFromPosition(
       minimum(), maximum(), e->x() - slider_length/2 - slider_min + 1,
       slider_max - slider_min);
+  int delta_seconds = seconds - value();
 
   popup_->SetText(Utilities::PrettyTime(seconds));
+  popup_->SetSmallText(Utilities::PrettyTimeDelta(delta_seconds));
   popup_->SetPopupPosition(mapTo(window(), QPoint(
       e->x(), rect().center().y())));
 }

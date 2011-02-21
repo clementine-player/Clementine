@@ -45,6 +45,10 @@ static QString tr(const char* str) {
   return QCoreApplication::translate("", str);
 }
 
+QString PrettyTimeDelta(int seconds) {
+  return (seconds >= 0 ? "+" : "-") + PrettyTime(seconds);
+}
+
 QString PrettyTime(int seconds) {
   // last.fm sometimes gets the track length wrong, so you end up with
   // negative times.

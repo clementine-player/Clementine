@@ -18,18 +18,26 @@ void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bo
 
 TrackSliderPopup::TrackSliderPopup(QWidget* parent)
   : QWidget(parent),
-    font_metrics_(fontMetrics())
+    font_metrics_(fontMetrics()),
+    small_font_metrics_(fontMetrics())
 {
   setAttribute(Qt::WA_TransparentForMouseEvents);
   setMouseTracking(true);
 
   font_.setPointSizeF(7.5);
   font_.setBold(true);
+  small_font_.setPointSizeF(6.5);
   font_metrics_ = QFontMetrics(font_);
+  small_font_metrics_ = QFontMetrics(small_font_);
 }
 
 void TrackSliderPopup::SetText(const QString& text) {
   text_ = text;
+  UpdatePixmap();
+}
+
+void TrackSliderPopup::SetSmallText(const QString& text) {
+  small_text_ = text;
   UpdatePixmap();
 }
 
@@ -44,10 +52,15 @@ void TrackSliderPopup::paintEvent(QPaintEvent*) {
 }
 
 void TrackSliderPopup::UpdatePixmap() {
-  const QRect text_rect(kBlurRadius + kTextMargin, kBlurRadius + kTextMargin,
-                        font_metrics_.width(text_) + 2, font_metrics_.height());
-  const int bubble_bottom = text_rect.bottom() + kTextMargin;
-  const QRect total_rect(0, 0, text_rect.right() + kBlurRadius + kTextMargin,
+  const int text_width = qMax(font_metrics_.width(text_),
+                              small_font_metrics_.width(small_text_));
+  const QRect text_rect1(kBlurRadius + kTextMargin, kBlurRadius + kTextMargin,
+                         text_width + 2, font_metrics_.height());
+  const QRect text_rect2(kBlurRadius + kTextMargin, text_rect1.bottom(),
+                         text_width, small_font_metrics_.height());
+
+  const int bubble_bottom = text_rect2.bottom() + kTextMargin;
+  const QRect total_rect(0, 0, text_rect1.right() + kBlurRadius + kTextMargin,
                          kBlurRadius + bubble_bottom + kPointLength);
   const QRect bubble_rect(kBlurRadius, kBlurRadius,
                           total_rect.width() - kBlurRadius * 2,
@@ -127,7 +140,12 @@ void TrackSliderPopup::UpdatePixmap() {
   // Text
   p.setPen(palette().color(QPalette::Text));
   p.setFont(font_);
-  p.drawText(text_rect, Qt::AlignHCenter, text_);
+  p.drawText(text_rect1, Qt::AlignHCenter, text_);
+
+  p.setFont(small_font_);
+  p.setOpacity(0.65);
+  p.drawText(text_rect2, Qt::AlignHCenter, small_text_);
+
   p.end();
 
   resize(pixmap_.size());
