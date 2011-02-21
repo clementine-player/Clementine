@@ -26,9 +26,12 @@
 
 TrackSliderSlider::TrackSliderSlider(QWidget* parent)
   : QSlider(parent),
-    popup_(new TrackSliderPopup(window()))
+    popup_(new TrackSliderPopup(window())),
+    mouse_hover_seconds_(0)
 {
   setMouseTracking(true);
+
+  connect(this, SIGNAL(valueChanged(int)), SLOT(UpdateDeltaTime()));
 }
 
 void TrackSliderSlider::mousePressEvent(QMouseEvent* e) {
@@ -71,13 +74,12 @@ void TrackSliderSlider::mouseMoveEvent(QMouseEvent* e) {
   int slider_min = gr.x();
   int slider_max = gr.right() - slider_length + 1;
 
-  int seconds = QStyle::sliderValueFromPosition(
+  mouse_hover_seconds_ = QStyle::sliderValueFromPosition(
       minimum(), maximum(), e->x() - slider_length/2 - slider_min + 1,
       slider_max - slider_min);
-  int delta_seconds = seconds - value();
 
-  popup_->SetText(Utilities::PrettyTime(seconds));
-  popup_->SetSmallText(Utilities::PrettyTimeDelta(delta_seconds));
+  popup_->SetText(Utilities::PrettyTime(mouse_hover_seconds_));
+  UpdateDeltaTime();
   popup_->SetPopupPosition(mapTo(window(), QPoint(
       e->x(), rect().center().y())));
 }
@@ -92,4 +94,11 @@ void TrackSliderSlider::enterEvent(QEvent* e) {
 void TrackSliderSlider::leaveEvent(QEvent* e) {
   QSlider::leaveEvent(e);
   popup_->hide();
+}
+
+void TrackSliderSlider::UpdateDeltaTime() {
+  if (popup_->isVisible()) {
+    int delta_seconds = mouse_hover_seconds_ - value();
+    popup_->SetSmallText(Utilities::PrettyTimeDelta(delta_seconds));
+  }
 }

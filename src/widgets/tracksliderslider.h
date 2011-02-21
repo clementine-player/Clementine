@@ -24,6 +24,8 @@ class TrackSliderPopup;
 
 // It's the slider inside the TrackSliderSlider
 class TrackSliderSlider : public QSlider {
+  Q_OBJECT
+
 public:
   TrackSliderSlider(QWidget* parent = 0);
 
@@ -34,8 +36,13 @@ protected:
   void enterEvent(QEvent*);
   void leaveEvent(QEvent*);
 
+private slots:
+  void UpdateDeltaTime();
+
 private:
   TrackSliderPopup* popup_;
+
+  int mouse_hover_seconds_;
 };
 
 #endif // TRACKSLIDERSLIDER_H

@@ -422,6 +422,7 @@ set(HEADERS
   widgets/stretchheaderview.h
   widgets/trackslider.h
   widgets/tracksliderpopup.h
+  widgets/tracksliderslider.h
   widgets/widgetfadehelper.h
 )
 
