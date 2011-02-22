@@ -108,7 +108,7 @@ struct Connection::Private : public gloox::ConnectionListener,
   void handleItemUnsubscribed(const gloox::JID&) {}
   void handleRoster(const gloox::Roster&) {}
   void handleRosterPresence(const gloox::RosterItem& item, const std::string& resource, gloox::Presence presence, const std::string& msg);
-  void handleSelfPresence(const gloox::RosterItem&, const std::string&, gloox::Presence, const std::string&) {}
+  void handleSelfPresence(const gloox::RosterItem&, const std::string&, gloox::Presence, const std::string&);
   bool handleSubscriptionRequest(const gloox::JID&, const std::string&) { return false; }
   bool handleUnsubscriptionRequest(const gloox::JID&, const std::string&) { return false; }
   void handleNonrosterPresence(gloox::Stanza*) {}
@@ -358,14 +358,11 @@ Connection::Peer::Peer()
     : caps_(0) {
 }
 
-void Connection::Private::handleRosterPresence(
-    const gloox::RosterItem& item, const std::string& res,
-    gloox::Presence presence, const std::string&) {
-  // Ignore presence from anyone else
-  if (item.jid() != client_->jid().bare()) {
-    return;
-  }
-
+void Connection::Private::handleSelfPresence(
+    const gloox::RosterItem& item,
+    const std::string& res,
+    gloox::Presence presence,
+    const std::string&) {
   QString resource = QString::fromUtf8(res.c_str());
 
   switch (presence) {
@@ -405,6 +402,16 @@ void Connection::Private::handleRosterPresence(
       client_->disco()->getDiscoInfo(full_jid, std::string(), this, 0);
     }
   }
+}
+
+void Connection::Private::handleRosterPresence(
+    const gloox::RosterItem& item, const std::string& res,
+    gloox::Presence presence, const std::string& message) {
+  // Forward incorrect calls of this with our JID.
+  if (item.jid() == client_->jid().bare()) {
+    handleSelfPresence(item, res, presence, message);
+  }
+  // Ignore presence from anyone else
 }
 
 bool Connection::Private::has_peer(const QString& jid_resource) const {
