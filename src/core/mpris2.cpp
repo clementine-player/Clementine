@@ -414,11 +414,7 @@ void Mpris2::Pause() {
 }
 
 void Mpris2::PlayPause() {
-  if(CanPause()) {
-    player_->PlayPause();
-  } else {
-    // TODO: raise an error
-  }
+  player_->PlayPause();
 }
 
 void Mpris2::Stop() {
