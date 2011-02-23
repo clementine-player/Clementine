@@ -1050,9 +1050,7 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
 
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
   QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
-
   playlist_menu_index_ = source_index;
-  PlaylistItemPtr current_item = playlists_->current()->item_at(source_index.row());
 
   // Is this song currently playing?
   if (playlists_->current()->current_row() == source_index.row() && player_->GetState() == Engine::Playing) {
@@ -1067,7 +1065,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   if (index.isValid()) {
     playlist_play_pause_->setEnabled(
         playlists_->current()->current_row() != source_index.row() ||
-        ! (current_item->options() & PlaylistItem::PauseDisabled));
+        ! (playlists_->current()->item_at(source_index.row())->options() & PlaylistItem::PauseDisabled));
   } else {
     playlist_play_pause_->setEnabled(false);
   }
@@ -1156,7 +1154,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     ui_->action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
 
     // Is it a library item?
-    if (current_item->IsLocalLibraryItem()) {
+    if (playlists_->current()->item_at(source_index.row())->IsLocalLibraryItem()) {
       playlist_organise_->setVisible(editable);
     } else {
       playlist_copy_to_library_->setVisible(editable);
