@@ -54,7 +54,11 @@ Mpris2::Mpris2(PlayerInterface* player, ArtLoader* art_loader,
   new Mpris2TrackList(this);
   new Mpris2Player(this);
 
-  QDBusConnection::sessionBus().registerService(kServiceName);
+  if (!QDBusConnection::sessionBus().registerService(kServiceName)) {
+    qWarning() << "Failed to register" << QString(kServiceName) << "on the session bus";
+    return;
+  }
+
   QDBusConnection::sessionBus().registerObject(kMprisObjectPath, this);
 
   connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
@@ -374,10 +378,12 @@ bool Mpris2::CanPlay() const {
 }
 
 // This one's a bit different than MPRIS 1 - we want this to be true even when
-// the song is already paused.
+// the song is already paused or stopped.
 bool Mpris2::CanPause() const {
   if (mpris1_->player()) {
-    return mpris1_->player()->GetCaps() & CAN_PAUSE || PlaybackStatus() == "Paused";
+    return mpris1_->player()->GetCaps() & CAN_PAUSE
+        || PlaybackStatus() == "Paused"
+        || PlaybackStatus() == "Stopped";
   } else {
     return true;
   }
@@ -414,7 +420,9 @@ void Mpris2::Pause() {
 }
 
 void Mpris2::PlayPause() {
-  player_->PlayPause();
+  if (CanPause()) {
+    player_->PlayPause();
+  }
 }
 
 void Mpris2::Stop() {
