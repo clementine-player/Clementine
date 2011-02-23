@@ -59,8 +59,8 @@ Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent,
   player_ = new Mpris1Player(player, this);
   tracklist_ = new Mpris1TrackList(player, this);
 
-  connect(art_loader, SIGNAL(ArtLoaded(Song,QString)),
-          player_, SLOT(CurrentSongChanged(Song,QString)));
+  connect(art_loader, SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
+          player_, SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
 }
 
 Mpris1::~Mpris1() {
@@ -109,7 +109,8 @@ void Mpris1Player::EngineStateChanged(Engine::State state) {
   emit CapsChange(GetCaps(state));
 }
 
-void Mpris1Player::CurrentSongChanged(const Song& song, const QString& art_uri) {
+void Mpris1Player::CurrentSongChanged(
+    const Song& song, const QString& art_uri, const QImage&) {
   last_metadata_ = Mpris1::GetMetadata(song);
 
   if (!art_uri.isEmpty()) {

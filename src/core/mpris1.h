@@ -146,7 +146,8 @@ public:
   void ShowOSD();
 
 public slots:
-  void CurrentSongChanged(const Song& song, const QString& art_uri);
+  void CurrentSongChanged(
+      const Song& song, const QString& art_uri, const QImage&);
 
 signals:
   void CapsChange(int);
