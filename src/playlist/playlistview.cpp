@@ -435,20 +435,25 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     RemoveSelected();
     event->accept();
   } else if (event->key() == Qt::Key_Enter ||
-             event->key() == Qt::Key_Return ||
-             event->key() == Qt::Key_Space) {
+             event->key() == Qt::Key_Return) {
     if (currentIndex().isValid())
-      emit PlayPauseItem(currentIndex());
+      emit PlayItem(currentIndex());
+    event->accept();
+  } else if(event->key() == Qt::Key_Space) {
+    emit PlayPause();
     event->accept();
   } else if(event->key() == Qt::Key_Left) {
     emit SeekTrack(-1);
+    event->accept();
   } else if(event->key() == Qt::Key_Right) {
     emit SeekTrack(1);
+    event->accept();
   } else if(event->modifiers() == Qt::NoModifier // No modifier keys currently pressed...
-            // ... and key pressed is something related to text
-            && ( (event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z)
-                || event->key() == Qt::Key_Backspace )) {
-      emit FocusOnFilterSignal(event);
+      // ... and key pressed is something related to text
+      && ( (event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z)
+        || event->key() == Qt::Key_Backspace )) {
+    emit FocusOnFilterSignal(event);
+    event->accept();
   } else {
     QTreeView::keyPressEvent(event);
   }

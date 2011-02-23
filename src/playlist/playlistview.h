@@ -86,7 +86,8 @@ class PlaylistView : public QTreeView {
   void DynamicModeChanged(bool dynamic);
 
  signals:
-  void PlayPauseItem(const QModelIndex& index);
+  void PlayItem(const QModelIndex& index);
+  void PlayPause();
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);
   void SeekTrack(int gap);
   void FocusOnFilterSignal(QKeyEvent *event);
