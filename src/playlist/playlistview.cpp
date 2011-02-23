@@ -431,8 +431,7 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     QTreeView::keyPressEvent(event);
   } else if (state() == QAbstractItemView::EditingState) {
     QTreeView::keyPressEvent(event);
-  } else if (event->matches(QKeySequence::Delete) ||
-      event->key() == Qt::Key_Backspace) {
+  } else if (event->matches(QKeySequence::Delete)) {
     RemoveSelected();
     event->accept();
   } else if (event->key() == Qt::Key_Enter ||
@@ -445,6 +444,11 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     emit SeekTrack(-1);
   } else if(event->key() == Qt::Key_Right) {
     emit SeekTrack(1);
+  } else if(event->modifiers() == Qt::NoModifier // No modifier keys currently pressed...
+            // ... and key pressed is something related to text
+            && ( (event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z)
+                || event->key() == Qt::Key_Backspace )) {
+      emit FocusOnFilterSignal(event);
   } else {
     QTreeView::keyPressEvent(event);
   }

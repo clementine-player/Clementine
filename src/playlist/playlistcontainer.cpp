@@ -90,6 +90,8 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
 #else
   filter_ = ui_->filter;
   connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
+  connect(ui_->playlist, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
+  ui_->filter->installEventFilter(this);
 #endif
 }
 
@@ -336,6 +338,11 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
   RepositionNoMatchesLabel();
 }
 
+void PlaylistContainer::FocusOnFilter(QKeyEvent *event) {
+  ui_->filter->setFocus(Qt::OtherFocusReason);
+  QApplication::sendEvent(ui_->filter, event);
+}
+
 void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
   if (!force && !no_matches_label_->isVisible())
     return;
@@ -353,4 +360,28 @@ void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
 
 void PlaylistContainer::SelectionChanged() {
   manager_->SelectionChanged(view()->selectionModel()->selection());
+}
+
+bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
+  if(objectWatched == ui_->filter) {
+    if (event->type() == QEvent::KeyPress) {
+      QKeyEvent *e = static_cast<QKeyEvent*>(event);
+      switch(e->key()) {
+        case Qt::Key_Up:
+        case Qt::Key_Down:
+        case Qt::Key_PageUp:
+        case Qt::Key_PageDown:
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+          view()->setFocus(Qt::OtherFocusReason);
+          QApplication::sendEvent(ui_->playlist, event);
+          return true;
+        case Qt::Key_Escape:
+          ui_->filter->LineEditInterface::clear();
+        default:
+          break;
+      }
+    }
+  }
+  return QWidget::eventFilter(objectWatched, event);
 }

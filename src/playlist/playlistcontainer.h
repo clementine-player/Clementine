@@ -46,6 +46,8 @@ public:
 
   PlaylistView* view() const;
 
+  bool eventFilter(QObject *objectWatched, QEvent *event);
+
 signals:
   void TabChanged(int id);
   void Rename(int id, const QString& new_name);
@@ -80,6 +82,7 @@ private slots:
 
   void SelectionChanged();
   void UpdateFilter();
+  void FocusOnFilter(QKeyEvent *event);
 
 private:
   void UpdateActiveIcon(const QIcon& icon);
