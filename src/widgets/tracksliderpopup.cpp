@@ -26,7 +26,7 @@ TrackSliderPopup::TrackSliderPopup(QWidget* parent)
 
   font_.setPointSizeF(7.5);
   font_.setBold(true);
-  small_font_.setPointSizeF(6.5);
+  small_font_.setPointSizeF(7.5);
   font_metrics_ = QFontMetrics(font_);
   small_font_metrics_ = QFontMetrics(small_font_);
 }
