@@ -378,6 +378,7 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
           return true;
         case Qt::Key_Escape:
           ui_->filter->LineEditInterface::clear();
+          return true;
         default:
           break;
       }
