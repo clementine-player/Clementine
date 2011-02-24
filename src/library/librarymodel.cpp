@@ -98,7 +98,7 @@ void LibraryModel::Init() {
 
   backend_->UpdateTotalSongCountAsync();
 
-  Reset();
+  ResetAsync();
 }
 
 void LibraryModel::SongsDiscovered(const SongList& songs) {
