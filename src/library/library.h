@@ -51,15 +51,18 @@ class Library : public QObject {
   LibraryBackend* backend() const { return backend_; }
   LibraryModel* model() const { return model_; }
 
+  QString full_rescan_reason(int schema_version) const { return full_rescan_revisions_.value(schema_version, QString()); }
+
  public slots:
   void ReloadSettings();
 
   void PauseWatcher();
   void ResumeWatcher();
 
+  void FullScan();
+
  private slots:
   void IncrementalScan();
-  void FullScan();
   void WatcherInitialised();
 
  private:
@@ -69,6 +72,10 @@ class Library : public QObject {
 
   boost::scoped_ptr<BackgroundThreadFactory<LibraryWatcher> > watcher_factory_;
   BackgroundThread<LibraryWatcher>* watcher_;
+
+  // DB schema versions which should trigger a full library rescan (each of those with
+  // a short reason why).
+  QHash<int, QString> full_rescan_revisions_;
 };
 
 #endif

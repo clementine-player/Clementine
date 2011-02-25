@@ -199,6 +199,9 @@ MainWindow::MainWindow(
     doubleclick_playmode_(PlayBehaviour_IfStopped),
     menu_playmode_(PlayBehaviour_IfStopped)
 {
+  // Database connections
+  connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+
   // Create some objects in the database thread
   playlist_backend_ = new PlaylistBackend;
   playlist_backend_->moveToThread(database_);
@@ -411,9 +414,6 @@ MainWindow::MainWindow(
   connect(ui_->playlist->view(), SIGNAL(SeekTrack(int)), ui_->track_slider, SLOT(Seek(int)));
 
   connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(SeekTo(int)));
-
-  // Database connections
-  connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 
   // Library connections
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
@@ -702,6 +702,8 @@ MainWindow::MainWindow(
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 
   library_view_->view()->SetScriptManager(scripts_);
+
+  CheckFullRescanRevisions();
 }
 
 MainWindow::~MainWindow() {
@@ -1699,6 +1701,46 @@ void MainWindow::ShowErrorDialog(const QString& message) {
     error_dialog_.reset(new ErrorDialog);
   }
   error_dialog_->ShowMessage(message);
+}
+
+void MainWindow::CheckFullRescanRevisions() {
+  int from = database_->Worker()->startup_schema_version();
+  int to = database_->Worker()->current_schema_version();
+
+  // if we're restoring DB from scratch or nothing has
+  // changed, do nothing
+  if(from == 0 || from == to) {
+    return;
+  }
+
+  // collect all reasons
+  QSet<QString> reasons;
+  for(int i = from; i <= to; i++) {
+    QString reason = library_->full_rescan_reason(i);
+
+    if(!reason.isEmpty()) {
+      reasons.insert(reason);
+    }
+  }
+
+  // if we have any...
+  if(!reasons.isEmpty()) {
+    qDebug() << "cool";
+
+    QString message = tr("The version of Clementine you've just updated to requires a full library rescan "
+                         "because of the new features listed below:"
+                         "<ul>");
+    foreach(const QString& reason, reasons) {
+      message += ("<li>" + reason + "</li>");
+    }
+    message += "</ul>"
+               "Would you like to run a full rescan right now?";
+
+    if(QMessageBox::question(this, tr("Library rescan notice"),
+                             message, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
+      library_->FullScan();
+    }
+  }
 }
 
 void MainWindow::ShowQueueManager() {

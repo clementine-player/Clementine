@@ -12,16 +12,12 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:39+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:51+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
-"Language: da\n"
-
-#, qt-format
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Last.fm anbefaletradio - %1"
 
 msgid " ms"
 msgstr " ms"
@@ -170,8 +166,7 @@ msgid ""
 "selecting songs."
 msgstr ""
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -459,6 +454,9 @@ msgstr ""
 msgid "Buttons"
 msgstr ""
 
+msgid "CUE sheet support"
+msgstr ""
+
 msgid "Change cover art"
 msgstr ""
 
@@ -520,6 +518,11 @@ msgstr ""
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
+msgstr ""
+
+msgid ""
+"Clementine can be controlled remotely by an Android phone.  To enable this "
+"feature log in with the same Google account that is configured on your phone."
 msgstr ""
 
 msgid "Clementine can show a message when the track changes."
@@ -1171,6 +1174,11 @@ msgid ""
 "work."
 msgstr ""
 
+msgid ""
+"If you use the remote on more than one computer, this name will help you "
+"choose which one to connect to on your phone."
+msgstr ""
+
 msgid "Ignore \"The\" in artist names"
 msgstr ""
 
@@ -1350,6 +1358,9 @@ msgstr "Bibliotek"
 
 msgid "Library advanced grouping"
 msgstr "Avanceret bibliotektsgruppering"
+
+msgid "Library rescan notice"
+msgstr ""
 
 msgid "Library search"
 msgstr ""
@@ -1749,6 +1760,9 @@ msgstr ""
 msgid "Playback"
 msgstr "Afspilning"
 
+msgid "Player name"
+msgstr ""
+
 msgid "Player options"
 msgstr "Afspiller indstillinger"
 
@@ -2092,6 +2106,9 @@ msgstr "Sæt lydstyrken til <value> percent"
 msgid "Set value for all selected tracks..."
 msgstr "Sæt værdi på alle valgte spor..."
 
+msgid "Settings"
+msgstr "Indstillinger"
+
 msgid "Settings..."
 msgstr ""
 
@@ -2331,6 +2348,11 @@ msgstr ""
 msgid "The site you requested is not an image!"
 msgstr ""
 
+msgid ""
+"The version of Clementine you've just updated to requires a full library "
+"rescan because of the new features listed below:<ul>"
+msgstr ""
+
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr ""
 
@@ -2354,8 +2376,7 @@ msgid ""
 msgstr ""
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
-"Disse mapper vil blive scannet for musik til at opbygget dit bibliotek"
+msgstr "Disse mapper vil blive scannet for musik til at opbygget dit bibliotek"
 
 msgid "Third level"
 msgstr "Tredje niveau"
@@ -2617,15 +2638,14 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You love this track"
@@ -2741,20 +2761,21 @@ msgstr ""
 msgid "track %1"
 msgstr "spor %1"
 
+#~ msgid "Last.fm Recommended Radio - %1"
+#~ msgstr "Last.fm anbefaletradio - %1"
+
 #~ msgid "Hide..."
 #~ msgstr "Skjul..."
 
 #~ msgid "Show section"
 #~ msgstr "Vis sektion"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Skjul %1"
 
 #~ msgid "My Loved Tracks"
 #~ msgstr "Mine elskede spor"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Last.fm elskede spor - %1"
 
@@ -2764,7 +2785,6 @@ msgstr "spor %1"
 #~ msgid "[click to edit]"
 #~ msgstr "[Klik for at redigere]"
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Redigerer %n spor"
 
@@ -2772,10 +2792,11 @@ msgstr "spor %1"
 #~ msgstr "Indlæser lydmotor"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "Billeder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-#~ "*.tiff)"
+#~ "Billeder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"
@@ -2789,7 +2810,6 @@ msgstr "spor %1"
 #~ msgid "Select engine"
 #~ msgstr "Vælg motor"
 
-#, qt-format
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Ukendt lydmotor \"%1\". Valgmulighederne er:"
 
@@ -2801,9 +2821,6 @@ msgstr "spor %1"
 
 #~ msgid "Radio"
 #~ msgstr "Radio"
-
-#~ msgid "Settings"
-#~ msgstr "Indstillinger"
 
 #~ msgid "Help"
 #~ msgstr "Hjælp"

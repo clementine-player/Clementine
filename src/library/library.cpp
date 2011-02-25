@@ -90,6 +90,9 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
                   Search::Sort_Random, SearchTerm::Field_Title), true))
     )
   );
+
+  // full rescan revisions
+  full_rescan_revisions_[26] = tr("CUE sheet support");
 }
 
 void Library::set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory) {

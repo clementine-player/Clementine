@@ -326,7 +326,8 @@ Database::Database(QObject* parent, const QString& database_name)
   : QObject(parent),
     mutex_(QMutex::Recursive),
     injected_database_name_(database_name),
-    query_hash_(0)
+    query_hash_(0),
+    startup_schema_version_(-1)
 {
   {
     QMutexLocker l(&sNextConnectionIdMutex);
@@ -425,21 +426,8 @@ QSqlDatabase Database::Connect() {
     }
   }
 
-  // Get the database's schema version
-  QSqlQuery q("SELECT version FROM schema_version", db);
-  int schema_version = 0;
-  if (q.next())
-    schema_version = q.value(0).toInt();
-
-  if (schema_version > kSchemaVersion) {
-    qWarning() << "The database schema (version" << schema_version << ") is newer than I was expecting";
-    return db;
-  }
-  if (schema_version < kSchemaVersion) {
-    // Update the schema
-    for (int v=schema_version+1 ; v<= kSchemaVersion ; ++v) {
-      UpdateDatabaseSchema(v, db);
-    }
+  if(startup_schema_version_ == -1) {
+    UpdateMainSchema(&db);
   }
 
   // We might have to initialise the schema in some attached databases now, if
@@ -456,6 +444,27 @@ QSqlDatabase Database::Connect() {
   }
 
   return db;
+}
+
+void Database::UpdateMainSchema(QSqlDatabase* db) {
+  // Get the database's schema version
+  QSqlQuery q("SELECT version FROM schema_version", *db);
+  int schema_version = 0;
+  if (q.next())
+    schema_version = q.value(0).toInt();
+
+  startup_schema_version_ = schema_version;
+
+  if (schema_version > kSchemaVersion) {
+    qWarning() << "The database schema (version" << schema_version << ") is newer than I was expecting";
+    return;
+  }
+  if (schema_version < kSchemaVersion) {
+    // Update the schema
+    for (int v=schema_version+1 ; v<= kSchemaVersion ; ++v) {
+      UpdateDatabaseSchema(v, *db);
+    }
+  }
 }
 
 void Database::RecreateAttachedDb(const QString& database_name) {

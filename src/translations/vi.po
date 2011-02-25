@@ -11,6 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2011-02-19 14:46+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -171,8 +172,7 @@ msgstr ""
 "thay đổi. Có nhiều loại danh sách nhạc thông minh khác nhau và chúng cung "
 "cấp cho bạn thật nhiều cách để lựa chọn các bài hát."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Một bài hát sẽ được đưa vào danh sách nếu như nó đáp ứng những điều kiện sau."
 
@@ -461,6 +461,9 @@ msgstr "Thời gian đệm"
 msgid "Buttons"
 msgstr "Nút"
 
+msgid "CUE sheet support"
+msgstr ""
+
 msgid "Change cover art"
 msgstr "Đổi ảnh bìa"
 
@@ -525,6 +528,11 @@ msgid ""
 msgstr ""
 "Clementine có thể tự động chuyển đổi định dạng nhạc mà bạn chép sang thiết "
 "bị này sang một định dạng mà nó có thể chơi."
+
+msgid ""
+"Clementine can be controlled remotely by an Android phone.  To enable this "
+"feature log in with the same Google account that is configured on your phone."
+msgstr ""
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine hiển thị một tin nhắn khi bài hát thay đổi."
@@ -1188,6 +1196,11 @@ msgstr ""
 "Nếu bạn tiếp tục, thiết bị này sẽ hoạt động chậm lại và các bài hát đã được "
 "sao chép có thể sẽ không phát được."
 
+msgid ""
+"If you use the remote on more than one computer, this name will help you "
+"choose which one to connect to on your phone."
+msgstr ""
+
 msgid "Ignore \"The\" in artist names"
 msgstr "Lượt bỏ \"The\" trong phần tên nghệ sĩ"
 
@@ -1371,6 +1384,9 @@ msgstr "Thư viện"
 
 msgid "Library advanced grouping"
 msgstr "Nâng cao cách nhóm thư viện"
+
+msgid "Library rescan notice"
+msgstr ""
 
 msgid "Library search"
 msgstr "Tìm kiếm trong thư viện"
@@ -1772,6 +1788,9 @@ msgstr "Chơi/Tạm dừng"
 msgid "Playback"
 msgstr "Phát lại"
 
+msgid "Player name"
+msgstr ""
+
 msgid "Player options"
 msgstr "Tùy chỉnh phần mềm phát nhạc"
 
@@ -2113,6 +2132,9 @@ msgstr "Thiết lập âm lượng đến <value> phần trăm"
 msgid "Set value for all selected tracks..."
 msgstr "Thiết lập giá trị cho tất cả các track đã được chọn..."
 
+msgid "Settings"
+msgstr ""
+
 msgid "Settings..."
 msgstr "Thiết lập..."
 
@@ -2352,6 +2374,11 @@ msgstr "Trang bạn đã yêu cầu không tồn tại!"
 
 msgid "The site you requested is not an image!"
 msgstr "Trang bạn đã yêu cầu không phải là một tấm ảnh!"
+
+msgid ""
+"The version of Clementine you've just updated to requires a full library "
+"rescan because of the new features listed below:<ul>"
+msgstr ""
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Có vấn đề khi lấy siêu dữ liệu từ Magnatune"
@@ -2657,22 +2684,21 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Bạn có thể nghe các nhạc nền cùng một lúc như những loại nhạc khác."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Bạn có thể scrobble bài hát này một cách miễn phí nhưng chỉ  <span style=\" "
 "font-weight:600;\">những khách hàng đã thanh toán phí thue bao</span> mới có "
 "thể lấy dữ liệu kênh ra-đi-ô Last.fm từ Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
-"Bạn có thể điều khiển Clementine từ xa với Wii Remote.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">Xem bài viết trên "
-"Clementin wiki<a> để biết thêm chi tiết.\n"
+"Bạn có thể điều khiển Clementine từ xa với Wii Remote.  <a href=\"http://www."
+"clementine-player.org/wiimote\">Xem bài viết trên Clementin wiki<a> để biết "
+"thêm chi tiết.\n"
 
 msgid "You love this track"
 msgstr "Bạn thích bài hát này"
@@ -2797,7 +2823,8 @@ msgstr "bài hát %1"
 #~ msgstr "Xếp vào danh sách bài hát"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
 #~ "Ảnh (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 

@@ -241,6 +241,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void ApplyAddBehaviour(AddBehaviour b, MimeData* data) const;
   void ApplyPlayBehaviour(PlayBehaviour b, MimeData* data) const;
 
+  void CheckFullRescanRevisions();
+
  private:
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;

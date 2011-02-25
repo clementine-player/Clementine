@@ -57,10 +57,15 @@ class Database : public QObject {
   void ExecFromFile(const QString& filename, QSqlDatabase &db);
   void ExecCommands(const QString& commands, QSqlDatabase &db);
 
+  int startup_schema_version() const { return startup_schema_version_; }
+  int current_schema_version() const { return kSchemaVersion; }
+
  signals:
   void Error(const QString& message);
 
  private:
+  void UpdateMainSchema(QSqlDatabase* db);
+
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
   QStringList SongsTables(QSqlDatabase& db) const;
 
@@ -92,6 +97,9 @@ class Database : public QObject {
 
   uint query_hash_;
   QStringList query_cache_;
+
+  // This is the schema version of Clementine's DB from the app's last run.
+  int startup_schema_version_;
 
   FRIEND_TEST(DatabaseTest, LikeWorksWithAllAscii);
   FRIEND_TEST(DatabaseTest, LikeWorksWithUnicode);
@@ -126,7 +134,6 @@ class Database : public QObject {
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
   static void* (*_sqlite3_user_data) (sqlite3_context*);
-
 
   static bool sStaticInitDone;
   static bool sLoadedSqliteSymbols;

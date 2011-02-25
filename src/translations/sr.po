@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:28+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:52+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
-"Language: sr\n"
 
 msgid " ms"
 msgstr " ms"
@@ -165,8 +165,7 @@ msgid ""
 "selecting songs."
 msgstr ""
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -454,6 +453,9 @@ msgstr ""
 msgid "Buttons"
 msgstr ""
 
+msgid "CUE sheet support"
+msgstr ""
+
 msgid "Change cover art"
 msgstr ""
 
@@ -515,6 +517,11 @@ msgstr "Визуелизација Клементине"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
+msgstr ""
+
+msgid ""
+"Clementine can be controlled remotely by an Android phone.  To enable this "
+"feature log in with the same Google account that is configured on your phone."
 msgstr ""
 
 msgid "Clementine can show a message when the track changes."
@@ -1167,6 +1174,11 @@ msgid ""
 "work."
 msgstr ""
 
+msgid ""
+"If you use the remote on more than one computer, this name will help you "
+"choose which one to connect to on your phone."
+msgstr ""
+
 msgid "Ignore \"The\" in artist names"
 msgstr ""
 
@@ -1348,6 +1360,9 @@ msgstr "Библиотека"
 msgid "Library advanced grouping"
 msgstr "Напредно груписање библиотеке"
 
+msgid "Library rescan notice"
+msgstr ""
+
 msgid "Library search"
 msgstr ""
 
@@ -1491,8 +1506,7 @@ msgid "Music"
 msgstr "Музика"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Музика (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Музика (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Музичка библиотека"
@@ -1746,6 +1760,9 @@ msgstr "Пусти/паузирај"
 
 msgid "Playback"
 msgstr "Пуштање"
+
+msgid "Player name"
+msgstr ""
 
 msgid "Player options"
 msgstr "Опције плејера"
@@ -2088,6 +2105,9 @@ msgstr ""
 msgid "Set value for all selected tracks..."
 msgstr "Подеси вредност за све означене нумере"
 
+msgid "Settings"
+msgstr ""
+
 msgid "Settings..."
 msgstr ""
 
@@ -2325,6 +2345,11 @@ msgid "The site you requested does not exist!"
 msgstr ""
 
 msgid "The site you requested is not an image!"
+msgstr ""
+
+msgid ""
+"The version of Clementine you've just updated to requires a full library "
+"rescan because of the new features listed below:<ul>"
 msgstr ""
 
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -2614,15 +2639,14 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You love this track"
@@ -2750,7 +2774,6 @@ msgstr "нумера %1"
 #~ msgid "Disconnect device"
 #~ msgstr "Прекини везу са уређајем"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Сакриј %1"
 
@@ -2781,19 +2804,19 @@ msgstr "нумера %1"
 #~ msgid "Help"
 #~ msgstr "Помоћ"
 
-#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "Неспело учитавање радио станице %1 са ЛастФМ"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "IСлике (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "IСлике (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
 #~ msgid "Double-clicking a song clears the playlist first"
 #~ msgstr "Двоструки клик на песму претходно ће очистити листу нумера"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Препоручни ЛастФМ радио -%1"
 
@@ -2803,10 +2826,8 @@ msgstr "нумера %1"
 #~ msgid "Update Library"
 #~ msgstr "Ажурирај библиотеку"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "ЛастФМ вољене нумере - %1"
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Уређивање %n нумера"
