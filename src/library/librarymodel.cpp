@@ -89,7 +89,7 @@ void LibraryModel::set_pretty_covers(bool use_pretty_covers) {
   }
 }
 
-void LibraryModel::Init() {
+void LibraryModel::Init(bool async) {
   connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
   connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
@@ -98,7 +98,11 @@ void LibraryModel::Init() {
 
   backend_->UpdateTotalSongCountAsync();
 
-  ResetAsync();
+  if (async) {
+    ResetAsync();
+  } else {
+    Reset();
+  }
 }
 
 void LibraryModel::SongsDiscovered(const SongList& songs) {

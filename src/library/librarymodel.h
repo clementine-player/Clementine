@@ -142,7 +142,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void SetFilterQueryMode(QueryOptions::QueryMode query_mode);
 
   void SetGroupBy(const LibraryModel::Grouping& g);
-  void Init();
+  void Init(bool async = true);
   void Reset();
   void ResetAsync();
 

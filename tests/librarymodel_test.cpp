@@ -34,7 +34,7 @@ class LibraryModelTest : public ::testing::Test {
  protected:
   void SetUp() {
     database_.reset(new MemoryDatabase);
-    backend_.reset(new LibraryBackend());
+    backend_.reset(new LibraryBackend);
     backend_->Init(database_, Library::kSongsTable,
                    Library::kDirsTable, Library::kSubdirsTable, Library::kFtsTable);
     model_.reset(new LibraryModel(backend_.get()));
@@ -86,7 +86,7 @@ TEST_F(LibraryModelTest, WithInitialArtists) {
   AddSong("Title", "Artist 1", "Album", 123);
   AddSong("Title", "Artist 2", "Album", 123);
   AddSong("Title", "Foo", "Album", 123);
-  model_->Init();
+  model_->Init(false);
 
   ASSERT_EQ(5, model_sorted_->rowCount(QModelIndex()));
   EXPECT_EQ("A", model_sorted_->index(0, 0, QModelIndex()).data().toString());
@@ -102,7 +102,7 @@ TEST_F(LibraryModelTest, CompilationAlbums) {
   song.set_compilation(true);
 
   AddSong(song);
-  model_->Init();
+  model_->Init(false);
   model_->fetchMore(model_->index(0, 0));
 
   ASSERT_EQ(1, model_->rowCount(QModelIndex()));
@@ -122,7 +122,7 @@ TEST_F(LibraryModelTest, NumericHeaders) {
   AddSong("Title", "2artist", "Album", 123);
   AddSong("Title", "0artist", "Album", 123);
   AddSong("Title", "zartist", "Album", 123);
-  model_->Init();
+  model_->Init(false);
 
   ASSERT_EQ(6, model_sorted_->rowCount(QModelIndex()));
   EXPECT_EQ("0-9", model_sorted_->index(0, 0, QModelIndex()).data().toString());
@@ -136,7 +136,7 @@ TEST_F(LibraryModelTest, NumericHeaders) {
 TEST_F(LibraryModelTest, MixedCaseHeaders) {
   AddSong("Title", "Artist", "Album", 123);
   AddSong("Title", "artist", "Album", 123);
-  model_->Init();
+  model_->Init(false);
 
   ASSERT_EQ(3, model_sorted_->rowCount(QModelIndex()));
   EXPECT_EQ("A", model_sorted_->index(0, 0, QModelIndex()).data().toString());
@@ -146,7 +146,7 @@ TEST_F(LibraryModelTest, MixedCaseHeaders) {
 
 TEST_F(LibraryModelTest, UnknownArtists) {
   AddSong("Title", "", "Album", 123);
-  model_->Init();
+  model_->Init(false);
   model_->fetchMore(model_->index(0, 0));
 
   ASSERT_EQ(1, model_->rowCount(QModelIndex()));
@@ -160,7 +160,7 @@ TEST_F(LibraryModelTest, UnknownArtists) {
 TEST_F(LibraryModelTest, UnknownAlbums) {
   AddSong("Title", "Artist", "", 123);
   AddSong("Title", "Artist", "Album", 123);
-  model_->Init();
+  model_->Init(false);
   model_->fetchMore(model_->index(0, 0));
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
@@ -190,7 +190,7 @@ TEST_F(LibraryModelTest, VariousArtistSongs) {
 
   for (int i=0 ; i<4 ; ++i)
     AddSong(songs[i]);
-  model_->Init();
+  model_->Init(false);
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
   model_->fetchMore(artist_index);
@@ -210,7 +210,7 @@ TEST_F(LibraryModelTest, RemoveSongsLazyLoaded) {
   Song one = AddSong("Title 1", "Artist", "Album", 123); one.set_id(1);
   Song two = AddSong("Title 2", "Artist", "Album", 123); two.set_id(2);
   AddSong("Title 3", "Artist", "Album", 123);
-  model_->Init();
+  model_->Init(false);
 
   // Lazy load the items
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
@@ -241,7 +241,7 @@ TEST_F(LibraryModelTest, RemoveSongsLazyLoaded) {
 TEST_F(LibraryModelTest, RemoveSongsNotLazyLoaded) {
   Song one = AddSong("Title 1", "Artist", "Album", 123); one.set_id(1);
   Song two = AddSong("Title 2", "Artist", "Album", 123); two.set_id(2);
-  model_->Init();
+  model_->Init(false);
 
   // Remove the first two songs
   QSignalSpy spy_preremove(model_.get(), SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)));
@@ -259,7 +259,7 @@ TEST_F(LibraryModelTest, RemoveEmptyAlbums) {
   Song one = AddSong("Title 1", "Artist", "Album 1", 123); one.set_id(1);
   Song two = AddSong("Title 2", "Artist", "Album 2", 123); two.set_id(2);
   Song three = AddSong("Title 3", "Artist", "Album 2", 123); three.set_id(3);
-  model_->Init();
+  model_->Init(false);
 
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
   model_->fetchMore(artist_index);
@@ -282,7 +282,7 @@ TEST_F(LibraryModelTest, RemoveEmptyAlbums) {
 
 TEST_F(LibraryModelTest, RemoveEmptyArtists) {
   Song one = AddSong("Title", "Artist", "Album", 123); one.set_id(1);
-  model_->Init();
+  model_->Init(false);
 
   // Lazy load the items
   QModelIndex artist_index = model_->index(0, 0, QModelIndex());
