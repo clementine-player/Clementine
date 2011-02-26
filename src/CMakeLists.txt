@@ -938,6 +938,7 @@ endif(HAVE_SCRIPTING_PYTHON)
 if(HAVE_REMOTE)
   target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})
   target_link_libraries(clementine_lib xrme)
+  link_directories(${GLOOX_LIBRARY_DIRS})
 endif(HAVE_REMOTE)
 
 if (APPLE)
