@@ -23,6 +23,7 @@
 #include "sqlrow.h"
 #include "core/albumcoverloader.h"
 #include "core/database.h"
+#include "core/taskmanager.h"
 #include "playlist/songmimedata.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
@@ -51,9 +52,11 @@ const int LibraryModel::kSmartPlaylistsVersion = 3;
 typedef QFuture<SqlRowList> RootQueryFuture;
 typedef QFutureWatcher<SqlRowList> RootQueryWatcher;
 
-LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
+LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
+                           QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     backend_(backend),
+    task_manager_(task_manager),
     dir_model_(new LibraryDirectoryModel(backend, this)),
     show_smart_playlists_(false),
     show_various_artists_(true),
@@ -63,6 +66,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, QObject* parent)
     no_cover_icon_(":nocover.png"),
     playlists_dir_icon_(IconLoader::Load("folder-sound")),
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
+    init_task_id_(-1),
     pretty_cover_size_(32, 32),
     use_pretty_covers_(false)
 {
@@ -99,6 +103,15 @@ void LibraryModel::Init(bool async) {
   backend_->UpdateTotalSongCountAsync();
 
   if (async) {
+    // Show a loading indicator in the model.
+    LibraryItem* loading = new LibraryItem(LibraryItem::Type_LoadingIndicator, root_);
+    loading->display_text = tr("Loading...");
+    loading->lazy_loaded = true;
+    reset();
+
+    // Show a loading indicator in the status bar too.
+    init_task_id_ = task_manager_->StartTask(tr("Loading songs"));
+
     ResetAsync();
   } else {
     Reset();
@@ -590,6 +603,11 @@ void LibraryModel::ResetAsyncQueryFinished() {
       container_nodes_[0][item->key] = item;
   }
 
+  if (init_task_id_ != -1) {
+    task_manager_->SetTaskFinished(init_task_id_);
+    init_task_id_ = -1;
+  }
+
   reset();
 }
 
@@ -914,6 +932,7 @@ Qt::ItemFlags LibraryModel::flags(const QModelIndex& index) const {
            Qt::ItemIsDragEnabled;
   case LibraryItem::Type_Divider:
   case LibraryItem::Type_Root:
+  case LibraryItem::Type_LoadingIndicator:
   default:
     return Qt::ItemIsEnabled;
   }

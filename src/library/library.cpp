@@ -48,7 +48,7 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
   using smart_playlists::Search;
   using smart_playlists::SearchTerm;
 
-  model_ = new LibraryModel(backend_, this);
+  model_ = new LibraryModel(backend_, task_manager_, this);
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()

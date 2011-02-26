@@ -79,7 +79,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_backend_->moveToThread(parent->db_thread());
   library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
                          QString::null, QString::null, kFtsTable);
-  library_model_ = new LibraryModel(library_backend_, this);
+  library_model_ = new LibraryModel(library_backend_, parent->task_manager(), this);
 
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));

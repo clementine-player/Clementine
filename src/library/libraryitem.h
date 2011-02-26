@@ -33,6 +33,7 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
     Type_Song,
     Type_PlaylistContainer,
     Type_SmartPlaylist,
+    Type_LoadingIndicator,
   };
 
   LibraryItem(SimpleTreeModel<LibraryItem>* model)

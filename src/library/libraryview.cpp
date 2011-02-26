@@ -566,6 +566,10 @@ void LibraryView::EditSmartPlaylistFinished() {
 }
 
 QString LibraryView::GetNameForNewPlaylist(const SongList& songs) {
+  if (songs.isEmpty()) {
+    return tr("Playlist");
+  }
+
   QSet<QString> artists;
   QSet<QString> albums;
 

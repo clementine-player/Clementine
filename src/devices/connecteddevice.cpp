@@ -54,7 +54,7 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
                  QString("device_%1_fts").arg(database_id));
 
   // Create the model
-  model_ = new LibraryModel(backend_, this);
+  model_ = new LibraryModel(backend_, manager->task_manager(), this);
 }
 
 ConnectedDevice::~ConnectedDevice() {

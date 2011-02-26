@@ -44,7 +44,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy);
 
  public:
-  LibraryModel(LibraryBackend* backend, QObject* parent = 0);
+  LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
+               QObject* parent = 0);
   ~LibraryModel();
 
   static const char* kSmartPlaylistsMimeType;
@@ -219,6 +220,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
  private:
   LibraryBackend* backend_;
+  TaskManager* task_manager_;
   LibraryDirectoryModel* dir_model_;
   bool show_smart_playlists_;
   DefaultGenerators default_smart_playlists_;
@@ -252,6 +254,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QIcon no_cover_icon_;
   QIcon playlists_dir_icon_;
   QIcon playlist_icon_;
+
+  int init_task_id_;
   
   QSize pretty_cover_size_;
   bool use_pretty_covers_;
