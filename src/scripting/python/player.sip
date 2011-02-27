@@ -1,4 +1,4 @@
-class PlayerInterface : QObject {
+class PlayerInterface : QObject /PyName=Player/ {
 
 %TypeHeaderCode
 #include "core/player.h"

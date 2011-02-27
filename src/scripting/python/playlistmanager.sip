@@ -1,4 +1,4 @@
-class PlaylistManagerInterface : QObject {
+class PlaylistManagerInterface : QObject /PyName=PlaylistManager/ {
 
 %TypeHeaderCode
 #include "playlist/playlistmanager.h"
