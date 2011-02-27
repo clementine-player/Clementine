@@ -4,6 +4,26 @@ class ScriptInterface : QObject {
 #include "scripting/scriptinterface.h"
 %End
 
+%Docstring
+Helper functions that are specific to a single script running inside Clementine.
+
+An instance of this class is created as a global variable in a script's main
+package, similar to the Python global variables C{__name__} and C{__file__}.
+You can access it through C{script}:
+
+  >>> def show_settings_dialog():
+  ...   pass
+  ...
+  ... script.SettingsDialogRequested().connect(show_settings_dialog())
+
+The signals in this object are emitted by Clementine when the user does things
+related to your script, such as clicking on the Settings... button.  You should
+connect these signals to slots in your Python code and respond to them
+appropriately.
+
+@group Signals: SettingsDialogRequested
+%End
+
 %ConvertToSubClassCode
   // Any classes that inherit from QObject must be added to this list
 
@@ -49,11 +69,13 @@ class ScriptInterface : QObject {
   }
 %End
 
-public:
-  void Abort();
-
 signals:
   void SettingsDialogRequested();
+%Docstring
+SettingsDialogRequested()
+Emitted when the user clicks the Settings... button in the Script Manager
+dialog.
+%End
 
 private:
   ScriptInterface();

@@ -202,14 +202,14 @@ Song::Song(FileRefFactory* factory)
 }
 
 void Song::Init(const QString& title, const QString& artist,
-                const QString& album, qint64 length) {
+                const QString& album, qint64 length_nanosec) {
   d->valid_ = true;
 
   d->title_ = title;
   d->artist_ = artist;
   d->album_ = album;
 
-  set_length_nanosec(length);
+  set_length_nanosec(length_nanosec);
 }
 
 void Song::Init(const QString& title, const QString& artist,
@@ -224,7 +224,7 @@ void Song::Init(const QString& title, const QString& artist,
   d->end_ = end;
 }
 
-void Song::set_genre(int id) {
+void Song::set_genre_id3(int id) {
   set_genre(TStringToQString(TagLib::ID3v1::genre(id)));
 }
 

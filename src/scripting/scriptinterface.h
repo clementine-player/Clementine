@@ -31,9 +31,6 @@ class ScriptInterface : public QObject {
 public:
   ScriptInterface(Script* script, QObject* parent = 0);
 
-  // Gdb will break here
-  void Abort();
-
 public slots:
   // Callable by C++
   void ShowSettingsDialog();

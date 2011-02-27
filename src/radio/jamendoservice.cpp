@@ -340,7 +340,7 @@ Song JamendoService::ReadTrack(const QString& artist,
         int genre_id = reader->readElementText().toInt();
         // In theory, genre 0 is "blues"; in practice it's invalid.
         if (genre_id != 0) {
-          song.set_genre(genre_id);
+          song.set_genre_id3(genre_id);
         }
       } else if (name == "id") {
         QString id_text = reader->readElementText();

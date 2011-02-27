@@ -124,7 +124,7 @@ class Song {
   bool HasProperMediaFile() const;
 
   // Constructors
-  void Init(const QString& title, const QString& artist, const QString& album, qint64 length);
+  void Init(const QString& title, const QString& artist, const QString& album, qint64 length_nanosec);
   void Init(const QString& title, const QString& artist, const QString& album, qint64 beginning, qint64 end);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const SqlRow& query, int col = 0);
@@ -246,7 +246,7 @@ class Song {
   void set_bpm(float v) { d->bpm_ = v; }
   void set_year(int v) { d->year_ = v; }
   void set_genre(const QString& v) { d->genre_ = v; }
-  void set_genre(int id);
+  void set_genre_id3(int id);
   void set_comment(const QString& v) { d->comment_ = v; }
   void set_compilation(bool v) { d->compilation_ = v; }
   void set_sampler(bool v) { d->sampler_ = v; }

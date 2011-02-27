@@ -27,10 +27,6 @@ ScriptInterface::ScriptInterface(Script* script, QObject* parent)
 {
 }
 
-void ScriptInterface::Abort() {
-  abort();
-}
-
 void ScriptInterface::ShowSettingsDialog() {
   emit SettingsDialogRequested();
 }

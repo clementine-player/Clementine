@@ -46,7 +46,8 @@ epydoc.docintrospecter.register_introspecter(is_pyqt_wrapper_class, introspect_p
 
 
 # Monkey-patch some functions in the HTML docwriter to show a table of contents
-# down the side of each page, instead of in a separate frame.
+# down the side of each page, instead of in a separate frame, and to do external
+# API links.
 original_write_header = epydoc.docwriter.html.HTMLWriter.write_header
 def my_write_header(self, out, title):
   original_write_header(self, out, title)
@@ -89,10 +90,57 @@ def my_write_toc_section(self, out, name, docs, fullname=True):
   docs = [x for x in docs if not str(x.canonical_name).startswith('PyQt4')]
   original_write_toc_section(self, out, name, docs, fullname=fullname)
 
+def qt_url(name):
+  if not isinstance(name, str) and \
+     not isinstance(name, epydoc.apidoc.DottedName) and \
+     not isinstance(name, unicode):
+    return None
+
+  parts = str(name).split('.')
+  if len(parts) >= 3 and parts[0] == "PyQt4":
+    parts = parts[2:]
+
+  if not parts or not parts[0].startswith("Q"):
+    return None
+
+  label = '.'.join(parts)
+  url = "http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/"
+  url += "%s.html" % parts[0].lower()
+
+  if len(parts) >= 2:
+    url += "#%s" % parts[1].lower()
+
+  return url
+
+original_translate_identifier_xref = epydoc.docwriter.html._HTMLDocstringLinker.translate_identifier_xref
+def my_translate_identifier_xref(self, identifier, label=None):
+  url = qt_url(identifier)
+  if url:
+    label = '.'.join(identifier.split('.')[2:])
+    return '<a href="%s" class="link">%s</a>' % (url, label)
+  return original_translate_identifier_xref(self, identifier, label)
+
+original_url = epydoc.docwriter.html.HTMLWriter.url
+def my_url(self, obj):
+  if isinstance(obj, epydoc.apidoc.ValueDoc):
+    url = qt_url(obj.canonical_name)
+    if url:
+      return url
+  return original_url(self, obj)
+
+original__write = epydoc.docwriter.html.HTMLWriter._write
+def my__write(self, write_func, directory, filename, *args):
+  if filename.startswith("http://"):
+    return
+  original__write(self, write_func, directory, filename, *args)
+
+epydoc.docwriter.html.HTMLWriter._write = my__write
 epydoc.docwriter.html.HTMLWriter.write_header = my_write_header
 epydoc.docwriter.html.HTMLWriter.write_footer = my_write_footer
 epydoc.docwriter.html.HTMLWriter.write_navbar = my_write_navbar
 epydoc.docwriter.html.HTMLWriter.write_toc_section = my_write_toc_section
+epydoc.docwriter.html._HTMLDocstringLinker.translate_identifier_xref = my_translate_identifier_xref
+epydoc.docwriter.html.HTMLWriter.url = my_url
 
 
 sys.argv = [
@@ -113,6 +161,10 @@ print "Running '%s'" % ' '.join(sys.argv)
 
 # Parse arguments
 (options, names) = epydoc.cli.parse_arguments()
+
+# Set up the logger
+logger = epydoc.cli.ConsoleLogger(1, 'hide')
+epydoc.log.register_logger(logger)
 
 # Write the main docs - this is copied from cli()
 epydoc.docstringparser.DEFAULT_DOCFORMAT = options.docformat

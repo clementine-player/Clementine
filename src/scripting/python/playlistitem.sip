@@ -30,7 +30,7 @@ L{Playlist.InsertSongsOrLibraryItems()}.
 You can get individual PlaylistItems from a L{Playlist} using
 L{Playlist.item_at()}.  Get the PlaylistItem that is currently playing (in any
 playlist) using L{Player.GetCurrentItem()}.  These functions are marked as
-returning L{PlaylistItemPtr}s, because in C++ the playlist items are held
+returning C{PlaylistItemPtr}s, because in C++ the playlist items are held
 inside and managed by smart pointers.  This doesn't affect Python at all
 however - you can use a PlaylistItemPtr in just the same way as you would a
 PlaylistItem.

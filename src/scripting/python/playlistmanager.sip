@@ -220,7 +220,7 @@ last playlist - this function will silently return if you try.
 ChangePlaylistOrder(new_order)
 Rearranges the order of the tabs in the tab bar.
 
-@field new_order: A list of playlist IDs in the new desired order.
+@param new_order: A list of playlist IDs in the new desired order.
 @type new_order: list of ints
 %End
 
