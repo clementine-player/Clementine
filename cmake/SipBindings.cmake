@@ -1,6 +1,6 @@
 find_path(PYQT_SIP_DIR QtCore/qstring.sip
   PATHS /System/Library/Frameworks/Python.framework/Versions/2.6
-  PATH_SUFFIXES share/sip/PyQt4 share/sip ../share/sip
+  PATH_SUFFIXES share/sip/PyQt4 share/sip ../share/sip share/py-sip/
 )
 
 find_program(SIP_BINARY "sip"
