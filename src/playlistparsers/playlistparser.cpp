@@ -89,8 +89,8 @@ ParserBase* PlaylistParser::ParserForExtension(const QString& suffix) const {
   return NULL;
 }
 
-ParserBase* PlaylistParser::MaybeGetParserForMagic(const QByteArray& data,
-                                                   const QString& mime_type) const {
+ParserBase* PlaylistParser::ParserForMagic(const QByteArray& data,
+                                           const QString& mime_type) const {
   foreach (ParserBase* p, parsers_) {
     if ((!mime_type.isEmpty() && mime_type == p->mime_type()) ||
         p->TryMagic(data))
@@ -99,11 +99,11 @@ ParserBase* PlaylistParser::MaybeGetParserForMagic(const QByteArray& data,
   return NULL;
 }
 
-SongList PlaylistParser::Load(const QString &filename, const QString& playlist_path, ParserBase* p) const {
+SongList PlaylistParser::LoadFromFile(const QString& filename) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension
-  ParserBase* parser = p ? p : ParserForExtension(info.suffix());
+  ParserBase* parser = ParserForExtension(info.suffix());
   if (!parser) {
     qWarning() << "Unknown filetype:" << filename;
     return SongList();
@@ -113,13 +113,14 @@ SongList PlaylistParser::Load(const QString &filename, const QString& playlist_p
   QFile file(filename);
   file.open(QIODevice::ReadOnly);
 
-  return parser->Load(&file, playlist_path, info.absolutePath());
+  return parser->Load(&file, filename, info.absolutePath());
 }
 
-SongList PlaylistParser::Load(QIODevice* device, const QString& path_hint,
-                              const QDir& dir_hint) const {
+SongList PlaylistParser::LoadFromDevice(QIODevice* device,
+                                        const QString& path_hint,
+                                        const QDir& dir_hint) const {
   // Find a parser that supports this data
-  ParserBase* parser = MaybeGetParserForMagic(device->peek(kMagicSize));
+  ParserBase* parser = ParserForMagic(device->peek(kMagicSize));
   if (!parser) {
     return SongList();
   }
@@ -127,7 +128,7 @@ SongList PlaylistParser::Load(QIODevice* device, const QString& path_hint,
   return parser->Load(device, path_hint, dir_hint);
 }
 
-void PlaylistParser::Save(const SongList &songs, const QString &filename) const {
+void PlaylistParser::Save(const SongList& songs, const QString& filename) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension

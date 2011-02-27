@@ -105,7 +105,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
     return Error;
   QByteArray data(file.read(PlaylistParser::kMagicSize));
 
-  ParserBase* parser = playlist_parser_->MaybeGetParserForMagic(data);
+  ParserBase* parser = playlist_parser_->ParserForMagic(data);
   if (!parser) {
     // Check the file extension as well, maybe the magic failed, or it was a
     // basic M3U file which is just a plain list of filenames.
@@ -428,7 +428,7 @@ void SongLoader::EndOfStreamReached() {
 }
 
 void SongLoader::MagicReady() {
-  parser_ = playlist_parser_->MaybeGetParserForMagic(buffer_, mime_type_);
+  parser_ = playlist_parser_->ParserForMagic(buffer_, mime_type_);
 
   if (!parser_) {
     qWarning() << url_.toString() << "is text, but not a recognised playlist";
