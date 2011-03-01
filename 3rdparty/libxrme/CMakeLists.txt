@@ -1,7 +1,5 @@
 include_directories(${CMAKE_BINARY_DIR})
-include_directories(${GLOOX_INCLUDE_DIRS})
-
-link_directories(${GLOOX_LIBRARY_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../gloox/src)
 
 set(SOURCES
   common.cpp
@@ -28,8 +26,8 @@ qt4_wrap_cpp(MOC ${HEADERS})
 
 add_library(xrme ${SOURCES} ${MOC})
 target_link_libraries(xrme
+  gloox
   ${QT_LIBRARIES}
-  ${GLOOX_LIBRARIES}
 )
 
 # Install library

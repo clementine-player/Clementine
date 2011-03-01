@@ -16,6 +16,7 @@
 */
 
 #include "connection.h"
+#include "extensions.h"
 #include "mediaplayerhandler.h"
 #include "mediaplayerinterface.h"
 #include "remotecontrolhandler.h"
@@ -23,8 +24,8 @@
 #include <QBuffer>
 #include <QtDebug>
 
-#include <gloox/client.h>
-#include <gloox/disco.h>
+#include <client.h>
+#include <disco.h>
 
 namespace xrme {
 
@@ -44,13 +45,15 @@ void MediaPlayerHandler::StateChanged() {
     gloox::JID to(client_->jid().bareJID());
     to.setResource(peer.jid_resource_.toUtf8().constData());
 
-    gloox::Tag* stanza = gloox::Stanza::createIqStanza(
-          to, std::string(), gloox::StanzaIqSet, kXmlnsXrmeRemoteControl);
-    gloox::Tag* state = new gloox::Tag(stanza, "state");
-    state->addAttribute("xmlns", kXmlnsXrmeRemoteControl);
+    gloox::IQ iq(gloox::IQ::Set, to, client_->getID());
+    gloox::Tag* tag = iq.tag();
+    gloox::Tag* c = new gloox::Tag(tag, "xrme");
+    c->setXmlns(kXmlnsXrmeRemoteControl);
+    gloox::Tag* state = new gloox::Tag(c, "state");
     state->addAttribute("playback_state", s.playback_state);
     state->addAttribute("position_millisec", s.position_millisec);
-    state->addAttribute("volume", QString::number(s.volume, 'f').toUtf8().constData());
+    state->addAttribute(
+        "volume", QString::number(s.volume, 'f').toUtf8().constData());
     state->addAttribute("can_go_next", s.can_go_next ? 1 : 0);
     state->addAttribute("can_go_previous", s.can_go_previous ? 1 : 0);
     state->addAttribute("can_seek", s.can_seek ? 1 : 0);
@@ -59,16 +62,20 @@ void MediaPlayerHandler::StateChanged() {
     metadata->addAttribute("title", s.metadata.title.toUtf8().constData());
     metadata->addAttribute("artist", s.metadata.artist.toUtf8().constData());
     metadata->addAttribute("album", s.metadata.album.toUtf8().constData());
-    metadata->addAttribute("albumartist", s.metadata.albumartist.toUtf8().constData());
-    metadata->addAttribute("composer", s.metadata.composer.toUtf8().constData());
+    metadata->addAttribute(
+        "albumartist", s.metadata.albumartist.toUtf8().constData());
+    metadata->addAttribute(
+        "composer", s.metadata.composer.toUtf8().constData());
     metadata->addAttribute("genre", s.metadata.genre.toUtf8().constData());
     metadata->addAttribute("track", s.metadata.track);
     metadata->addAttribute("disc", s.metadata.disc);
     metadata->addAttribute("year", s.metadata.year);
     metadata->addAttribute("length_millisec", s.metadata.length_millisec);
-    metadata->addAttribute("rating", QString::number(s.metadata.rating, 'f').toUtf8().constData());
+    metadata->addAttribute(
+        "rating",
+        QString::number(s.metadata.rating, 'f').toUtf8().constData());
 
-    client_->send(stanza);
+    client_->send(tag);
   }
 }
 
@@ -102,44 +109,46 @@ void MediaPlayerHandler::AlbumArtChanged() {
     gloox::JID to(client_->jid().bareJID());
     to.setResource(peer.jid_resource_.toUtf8().constData());
 
-    gloox::Tag* stanza = gloox::Stanza::createIqStanza(
-          to, std::string(), gloox::StanzaIqSet, kXmlnsXrmeRemoteControl);
-    gloox::Tag* album_art = new gloox::Tag(stanza, "album_art");
-    album_art->addAttribute("xmlns", kXmlnsXrmeRemoteControl);
+    gloox::IQ iq(gloox::IQ::Set, to, client_->getID());
+    gloox::Tag* tag = iq.tag();
+    gloox::Tag* c = new gloox::Tag(tag, "xrme");
+    c->setXmlns(kXmlnsXrmeRemoteControl);
+    gloox::Tag* album_art = new gloox::Tag(c, "album_art");
     album_art->setCData(image_data_base64.constData());
 
-    client_->send(stanza);
+    client_->send(tag);
   }
 }
 
 void MediaPlayerHandler::Init(Connection* connection, gloox::Client* client) {
   Handler::Init(connection, client);
 
-  client->registerIqHandler(this, kXmlnsXrmeMediaPlayer);
+  client->registerIqHandler(this, XRMEExtension::kExtensionType);
   client->disco()->addFeature(kXmlnsXrmeMediaPlayer);
 }
 
-bool MediaPlayerHandler::handleIq(gloox::Stanza* stanza) {
+bool MediaPlayerHandler::handleIq(const gloox::IQ& stanza) {
+  qDebug() << Q_FUNC_INFO << stanza.tag()->xml().c_str();
   // Ignore stanzas from anyone else
-  if (stanza->from().bareJID() != client_->jid().bareJID()) {
+  if (stanza.from().bareJID() != client_->jid().bareJID()) {
     return false;
   }
 
-  if (stanza->hasChild("playpause")) {
+  if (stanza.tag()->hasChild("playpause")) {
     interface_->PlayPause();
-  } else if (stanza->hasChild("stop")) {
+  } else if (stanza.tag()->hasChild("stop")) {
     interface_->Stop();
-  } else if (stanza->hasChild("previous")) {
+  } else if (stanza.tag()->hasChild("previous")) {
     interface_->Previous();
-  } else if (stanza->hasChild("next")) {
+  } else if (stanza.tag()->hasChild("next")) {
     interface_->Next();
-  } else if (stanza->hasChild("querystate")) {
+  } else if (stanza.tag()->hasChild("querystate")) {
     StateChanged();
     AlbumArtChanged();
   } else {
     qWarning() << "Unknown command received from"
-               << stanza->from().resource().c_str()
-               << stanza->xml().c_str();
+               << stanza.from().resource().c_str()
+               << stanza.tag()->xml().c_str();
     return false;
   }
 

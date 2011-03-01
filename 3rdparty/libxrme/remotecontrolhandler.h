@@ -22,7 +22,8 @@
 
 #include <QString>
 
-#include <gloox/iqhandler.h>
+#include <iq.h>
+#include <iqhandler.h>
 
 namespace xrme {
 
@@ -44,11 +45,11 @@ public:
   void Init(Connection* connection, gloox::Client* client);
 
   // gloox::IqHandler
-  bool handleIq(gloox::Stanza* stanza);
-  bool handleIqID(gloox::Stanza*, int) {}
+  bool handleIq(const gloox::IQ& stanza);
+  void handleIqID(const gloox::IQ&, int) {}
 
 private:
-  void SendIQ(const QString& jid_resource, gloox::StanzaSubType type,
+  void SendIQ(const QString& jid_resource, gloox::IQ::IqType type,
               const QString& command);
   static int ParseInt(gloox::Tag* tag, const char* attribute_name);
   static double ParseDouble(gloox::Tag* tag, const char* attribute_name);

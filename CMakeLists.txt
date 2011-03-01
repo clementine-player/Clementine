@@ -61,7 +61,6 @@ pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(ARCHIVE libarchive)
-pkg_check_modules(GLOOX gloox>=0.9)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -235,10 +234,16 @@ endif(ENABLE_VISUALISATIONS)
 # need from it are private.
 option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
 
-if(ENABLE_REMOTE AND GLOOX_LIBRARIES)
+pkg_check_modules(GNUTLS gnutls)
+if (GNUTLS_LIBRARIES)
+  set(HAVE_GNUTLS 1)
+endif (GNUTLS_LIBRARIES)
+
+if(ENABLE_REMOTE AND HAVE_GNUTLS)
   set(HAVE_REMOTE ON)
+  add_subdirectory(3rdparty/gloox)
   add_subdirectory(3rdparty/libxrme)
-endif(ENABLE_REMOTE AND GLOOX_LIBRARIES)
+endif(ENABLE_REMOTE AND HAVE_GNUTLS)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
 if(STATIC_SQLITE)

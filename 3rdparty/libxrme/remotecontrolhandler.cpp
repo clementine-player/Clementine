@@ -15,6 +15,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "extensions.h"
 #include "mediaplayerhandler.h"
 #include "remotecontrolinterface.h"
 #include "remotecontrolhandler.h"
@@ -22,8 +23,8 @@
 #include <QImage>
 #include <QtDebug>
 
-#include <gloox/client.h>
-#include <gloox/disco.h>
+#include <client.h>
+#include <disco.h>
 
 namespace xrme {
 
@@ -35,12 +36,12 @@ RemoteControlHandler::RemoteControlHandler(RemoteControlInterface* interface)
 void RemoteControlHandler::Init(Connection* connection, gloox::Client* client) {
   Handler::Init(connection, client);
 
-  client->registerIqHandler(this, kXmlnsXrmeRemoteControl);
+  client->registerIqHandler(this, XRMEExtension::kExtensionType);
   client->disco()->addFeature(kXmlnsXrmeRemoteControl);
 }
 
 void RemoteControlHandler::SendIQ(const QString& jid_resource,
-                                  gloox::StanzaSubType type,
+                                  gloox::IQ::IqType type,
                                   const QString& command) {
   if (!client_) {
     return;
@@ -49,32 +50,33 @@ void RemoteControlHandler::SendIQ(const QString& jid_resource,
   gloox::JID to(client_->jid());
   to.setResource(jid_resource.toUtf8().constData());
 
-  gloox::Tag* stanza = gloox::Stanza::createIqStanza(
-        to, client_->getID(), type, kXmlnsXrmeMediaPlayer);
-  gloox::Tag* c = new gloox::Tag(stanza, command.toUtf8().constData());
+  gloox::IQ iq(type, to, client_->getID());
+  gloox::Tag* tag = iq.tag();
+  gloox::Tag* c = new gloox::Tag(tag, "xrme");
   c->addAttribute("xmlns", kXmlnsXrmeMediaPlayer);
+  gloox::Tag* command_tag = new gloox::Tag(c, command.toUtf8().constData());
 
-  client_->send(stanza);
+  client_->send(tag);
 }
 
 void RemoteControlHandler::PlayPause(const QString& jid_resource) {
-  SendIQ(jid_resource, gloox::StanzaIqSet, "playpause");
+  SendIQ(jid_resource, gloox::IQ::Set, "playpause");
 }
 
 void RemoteControlHandler::Stop(const QString& jid_resource) {
-  SendIQ(jid_resource, gloox::StanzaIqSet, "stop");
+  SendIQ(jid_resource, gloox::IQ::Set, "stop");
 }
 
 void RemoteControlHandler::Next(const QString& jid_resource) {
-  SendIQ(jid_resource, gloox::StanzaIqSet, "next");
+  SendIQ(jid_resource, gloox::IQ::Set, "next");
 }
 
 void RemoteControlHandler::Previous(const QString& jid_resource) {
-  SendIQ(jid_resource, gloox::StanzaIqSet, "previous");
+  SendIQ(jid_resource, gloox::IQ::Set, "previous");
 }
 
 void RemoteControlHandler::QueryState(const QString& jid_resource) {
-  SendIQ(jid_resource, gloox::StanzaIqGet, "querystate");
+  SendIQ(jid_resource, gloox::IQ::Get, "querystate");
 }
 
 int RemoteControlHandler::ParseInt(gloox::Tag* tag, const char* attribute_name) {
@@ -89,17 +91,17 @@ QString RemoteControlHandler::ParseString(gloox::Tag* tag, const char* attribute
   return QString::fromUtf8(tag->findAttribute(attribute_name).c_str());
 }
 
-bool RemoteControlHandler::handleIq(gloox::Stanza* stanza) {
+bool RemoteControlHandler::handleIq(const gloox::IQ& stanza) {
   // Ignore stanzas from anyone else
-  if (stanza->from().bareJID() != client_->jid().bareJID()) {
+  if (stanza.from().bareJID() != client_->jid().bareJID()) {
     return false;
   }
 
-  QString resource = QString::fromUtf8(stanza->from().resource().c_str());
+  QString resource = QString::fromUtf8(stanza.from().resource().c_str());
 
-  qDebug() << resource << stanza->xml().c_str();
+  qDebug() << resource << stanza.tag()->xml().c_str();
 
-  gloox::Tag* state = stanza->findChild("state");
+  gloox::Tag* state = stanza.tag()->findChild("state");
   if (state) {
     gloox::Tag* metadata = state->findChild("metadata");
     if (metadata) {
@@ -127,7 +129,7 @@ bool RemoteControlHandler::handleIq(gloox::Stanza* stanza) {
     }
   }
 
-  gloox::Tag* album_art = stanza->findChild("album_art");
+  gloox::Tag* album_art = stanza.tag()->findChild("album_art");
   if (album_art) {
     QByteArray data(album_art->cdata().c_str(), album_art->cdata().size());
 
