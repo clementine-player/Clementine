@@ -66,7 +66,8 @@ void RemoteConfig::Validate() {
   ValidateGoogleAccount(ui_->username->text(), ui_->password->text());
 }
 
-// Validates a Google account against ClientLogin:
+// Validates a Google account against ClientLogin and fetches a token usable for
+// X-GOOGLE-TOKEN SASL authentication for Google Talk:
 // http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html#ClientLogin
 void RemoteConfig::ValidateGoogleAccount(const QString& username, const QString& password) {
   QNetworkRequest request = QNetworkRequest(QUrl(kClientLoginUrl));
