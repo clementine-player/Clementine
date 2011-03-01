@@ -22,8 +22,8 @@
 
 #include <QString>
 
-#include <iq.h>
-#include <iqhandler.h>
+#include <gloox/iq.h>
+#include <gloox/iqhandler.h>
 
 namespace xrme {
 

@@ -24,8 +24,8 @@
 #include <QBuffer>
 #include <QtDebug>
 
-#include <client.h>
-#include <disco.h>
+#include <gloox/client.h>
+#include <gloox/disco.h>
 
 namespace xrme {
 

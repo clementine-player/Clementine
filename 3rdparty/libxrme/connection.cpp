@@ -24,14 +24,14 @@
 #include <QTimer>
 #include <QtDebug>
 
-#include <client.h>
-#include <connectionlistener.h>
-#include <connectiontcpclient.h>
-#include <disco.h>
-#include <discohandler.h>
-#include <loghandler.h>
-#include <rosterlistener.h>
-#include <rostermanager.h>
+#include <gloox/client.h>
+#include <gloox/connectionlistener.h>
+#include <gloox/connectiontcpclient.h>
+#include <gloox/disco.h>
+#include <gloox/discohandler.h>
+#include <gloox/loghandler.h>
+#include <gloox/rosterlistener.h>
+#include <gloox/rostermanager.h>
 
 namespace xrme {
 

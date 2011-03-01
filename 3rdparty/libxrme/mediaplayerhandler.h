@@ -20,7 +20,7 @@
 
 #include "handler.h"
 
-#include <iqhandler.h>
+#include <gloox/iqhandler.h>
 
 namespace xrme {
 
