@@ -36,7 +36,8 @@ RemoteControlHandler::RemoteControlHandler(RemoteControlInterface* interface)
 void RemoteControlHandler::Init(Connection* connection, gloox::Client* client) {
   Handler::Init(connection, client);
 
-  client->registerIqHandler(this, XRMEExtension::kExtensionType);
+  client->registerIqHandler(
+      this, RemoteControlExtension::kExtensionType);
   client->disco()->addFeature(kXmlnsXrmeRemoteControl);
 }
 
@@ -92,6 +93,7 @@ QString RemoteControlHandler::ParseString(gloox::Tag* tag, const char* attribute
 }
 
 bool RemoteControlHandler::handleIq(const gloox::IQ& stanza) {
+  qDebug() << Q_FUNC_INFO << stanza.tag()->xml().c_str();
   // Ignore stanzas from anyone else
   if (stanza.from().bareJID() != client_->jid().bareJID()) {
     return false;
@@ -101,7 +103,9 @@ bool RemoteControlHandler::handleIq(const gloox::IQ& stanza) {
 
   qDebug() << resource << stanza.tag()->xml().c_str();
 
-  gloox::Tag* state = stanza.tag()->findChild("state");
+  gloox::Tag* xrme = stanza.tag()->findChild("xrme");
+
+  gloox::Tag* state = xrme->findChild("state");
   if (state) {
     gloox::Tag* metadata = state->findChild("metadata");
     if (metadata) {
@@ -129,7 +133,7 @@ bool RemoteControlHandler::handleIq(const gloox::IQ& stanza) {
     }
   }
 
-  gloox::Tag* album_art = stanza.tag()->findChild("album_art");
+  gloox::Tag* album_art = xrme->findChild("album_art");
   if (album_art) {
     QByteArray data(album_art->cdata().c_str(), album_art->cdata().size());
 

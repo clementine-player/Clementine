@@ -1,9 +1,9 @@
 include_directories(${CMAKE_BINARY_DIR})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../gloox/src)
 
 set(SOURCES
   common.cpp
   connection.cpp
+  extensions.cpp
   handler.cpp
   mediaplayerhandler.cpp
   mediaplayerinterface.cpp

@@ -17,6 +17,7 @@
 
 #include "common.h"
 #include "connection.h"
+#include "extensions.h"
 #include "mediaplayerhandler.h"
 #include "remotecontrolhandler.h"
 
@@ -47,7 +48,9 @@ struct Connection::Private : public gloox::ConnectionListener,
       verbose_(false),
       media_player_(NULL),
       remote_control_(NULL),
-      spontaneous_disconnect_(true) {}
+      spontaneous_disconnect_(true),
+      media_player_extension_(new MediaPlayerExtension()),
+      remote_control_extension_(new RemoteControlExtension()) {}
 
   static const char* kDefaultServer;
   static const char* kDefaultJIDResource;
@@ -72,6 +75,9 @@ struct Connection::Private : public gloox::ConnectionListener,
   // Stuff that is valid when we're connected.
   QScopedPointer<gloox::Client> client_;
   QScopedPointer<QSocketNotifier> socket_notifier_;
+
+  MediaPlayerExtension* media_player_extension_;
+  RemoteControlExtension* remote_control_extension_;
 
   // After discovering a peer we query it to find its capabilities.  Only after
   // it replies to the query do we put it in peers_ and emit PeerFound().
@@ -244,6 +250,9 @@ bool Connection::Connect() {
   d->client_->disco()->setIdentity("client", "bot");
   d->client_->disco()->setVersion(d->agent_name_.toUtf8().constData(), std::string());
   d->client_->disco()->addFeature(kXmlnsXrme);
+
+  d->client_->registerStanzaExtension(d->media_player_extension_);
+  d->client_->registerStanzaExtension(d->remote_control_extension_);
 
   // Initialise the handlers
   foreach (Handler* handler, d->handlers_) {

@@ -123,7 +123,8 @@ void MediaPlayerHandler::AlbumArtChanged() {
 void MediaPlayerHandler::Init(Connection* connection, gloox::Client* client) {
   Handler::Init(connection, client);
 
-  client->registerIqHandler(this, XRMEExtension::kExtensionType);
+  client->registerIqHandler(
+      this, MediaPlayerExtension::kExtensionType);
   client->disco()->addFeature(kXmlnsXrmeMediaPlayer);
 }
 
@@ -134,15 +135,17 @@ bool MediaPlayerHandler::handleIq(const gloox::IQ& stanza) {
     return false;
   }
 
-  if (stanza.tag()->hasChild("playpause")) {
+  gloox::Tag* xrme = stanza.tag()->findChild("xrme");
+
+  if (xrme->hasChild("playpause")) {
     interface_->PlayPause();
-  } else if (stanza.tag()->hasChild("stop")) {
+  } else if (xrme->hasChild("stop")) {
     interface_->Stop();
-  } else if (stanza.tag()->hasChild("previous")) {
+  } else if (xrme->hasChild("previous")) {
     interface_->Previous();
-  } else if (stanza.tag()->hasChild("next")) {
+  } else if (xrme->hasChild("next")) {
     interface_->Next();
-  } else if (stanza.tag()->hasChild("querystate")) {
+  } else if (xrme->hasChild("querystate")) {
     StateChanged();
     AlbumArtChanged();
   } else {
