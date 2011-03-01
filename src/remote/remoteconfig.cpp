@@ -84,18 +84,26 @@ void RemoteConfig::ValidateFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   Q_ASSERT(reply);
   reply->deleteLater();
+  QString data = QString::fromUtf8(reply->readAll());
 
-  QVariant status_code =  reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-  if (reply->error() != QNetworkReply::NoError || !status_code.isValid() || status_code.toInt() != 200) {
-    AuthenticationComplete(false);
-    return;
+  QVariant status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+  if (reply->error() == QNetworkReply::NoError && status_code.isValid() && status_code.toInt() == 200) {
+    QStringList params = data.split('\n');
+    foreach (const QString& param, params) {
+      if (param.startsWith("Auth=")) {
+        AuthenticationComplete(param.split('=')[1]);
+        return;
+      }
+    }
   }
-  AuthenticationComplete(true);
+  AuthenticationComplete(QString::null);
 }
 
-void RemoteConfig::AuthenticationComplete(bool success) {
+void RemoteConfig::AuthenticationComplete(const QString& token) {
   if (!waiting_for_auth_)
     return; // Wasn't us that was waiting for auth
+
+  const bool success = !token.isNull();
 
   ui_->busy->hide();
   waiting_for_auth_ = false;
@@ -106,6 +114,7 @@ void RemoteConfig::AuthenticationComplete(bool success) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
     s.setValue("password", ui_->password->text());
+    s.setValue("token", token);
     ui_->password->clear();
   }
 

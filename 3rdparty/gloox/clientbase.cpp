@@ -515,6 +515,17 @@ namespace gloox
 #endif
         break;
       }
+      case SaslMechGoogleToken:
+      {
+        a->addAttribute("mechanism", "X-GOOGLE-TOKEN");
+        std::string tmp;
+        tmp += '\0';
+        tmp += m_jid.username();
+        tmp += '\0';
+        tmp += m_password;
+        a->setCData( Base64::encode64( tmp ) );
+        break;
+      }
       default:
         break;
     }

@@ -46,7 +46,7 @@ class RemoteConfig : public QWidget {
   void ValidationComplete(bool success);
 
  private slots:
-  void AuthenticationComplete(bool success);
+  void AuthenticationComplete(const QString& token);
   void SignOut();
   void ValidateFinished();
 

@@ -361,6 +361,9 @@ namespace gloox
     if( tag->hasChildWithCData( mech, "NTLM" ) )
       mechs |= SaslMechNTLM;
 
+    if( tag->hasChildWithCData( mech, "X-GOOGLE-TOKEN" ) )
+      mechs |= SaslMechGoogleToken;
+
     return mechs;
   }
 
@@ -392,6 +395,13 @@ namespace gloox
     {
       notifyStreamEvent( StreamEventAuthentication );
       startSASL( SaslMechPlain );
+    }
+    else if( m_streamFeatures & SaslMechGoogleToken &&
+             m_availableSaslMechs & SaslMechGoogleToken
+             && !m_forceNonSasl )
+    {
+      notifyStreamEvent( StreamEventAuthentication );
+      startSASL( SaslMechGoogleToken );
     }
     else if( m_streamFeatures & StreamFeatureIqAuth || m_forceNonSasl )
     {

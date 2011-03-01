@@ -49,8 +49,8 @@ struct Connection::Private : public gloox::ConnectionListener,
       media_player_(NULL),
       remote_control_(NULL),
       spontaneous_disconnect_(true),
-      media_player_extension_(new MediaPlayerExtension()),
-      remote_control_extension_(new RemoteControlExtension()) {}
+      media_player_extension_(NULL),
+      remote_control_extension_(NULL) {}
 
   static const char* kDefaultServer;
   static const char* kDefaultJIDResource;
@@ -251,6 +251,8 @@ bool Connection::Connect() {
   d->client_->disco()->setVersion(d->agent_name_.toUtf8().constData(), std::string());
   d->client_->disco()->addFeature(kXmlnsXrme);
 
+  d->media_player_extension_ = new MediaPlayerExtension;
+  d->remote_control_extension_ = new RemoteControlExtension;
   d->client_->registerStanzaExtension(d->media_player_extension_);
   d->client_->registerStanzaExtension(d->remote_control_extension_);
 
@@ -261,6 +263,8 @@ bool Connection::Connect() {
 
   // Set presence
   d->client_->setPresence(gloox::Presence::Available, -128);
+
+  d->client_->setSASLMechanisms(gloox::SaslMechGoogleToken);
 
   // Connect
   if (!d->client_->connect(false)) {

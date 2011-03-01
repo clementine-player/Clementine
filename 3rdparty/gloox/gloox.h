@@ -719,6 +719,7 @@ namespace gloox
     SaslMechExternal       =  2048, /**< SASL EXTERNAL according to RFC 2222 Section 7.4. */
     SaslMechGssapi         =  4096, /**< SASL GSSAPI (Win32 only). */
     SaslMechNTLM           =  8192, /**< SASL NTLM (Win32 only). */
+    SaslMechGoogleToken    = 16384, /**< SASL X-GOOGLE-TOKEN. */
     SaslMechAll            = 65535  /**< Includes all supported SASL mechanisms. */
   };
 

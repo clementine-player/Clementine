@@ -243,6 +243,8 @@ if(ENABLE_REMOTE AND HAVE_GNUTLS)
   set(HAVE_REMOTE ON)
   add_subdirectory(3rdparty/gloox)
   add_subdirectory(3rdparty/libxrme)
+  include_directories(3rdparty)
+  include_directories(3rdparty/libxrme)
 endif(ENABLE_REMOTE AND HAVE_GNUTLS)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
