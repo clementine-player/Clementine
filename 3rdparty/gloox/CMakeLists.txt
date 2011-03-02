@@ -106,3 +106,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 add_library(gloox STATIC
     ${GLOOX-SOURCES}
 )
+
+target_link_libraries(gloox
+    ${GNUTLS_LIBRARIES}
+)
