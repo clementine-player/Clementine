@@ -32,20 +32,22 @@ target_link_libraries(xrme
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-# Install library
-install(TARGETS xrme
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-)
+if(NOT APPLE)
+  # Install library
+  install(TARGETS xrme
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+  )
 
-# Install public headers
-install(FILES ${PUBLIC_HEADERS}
-  DESTINATION include/xrme/
-)
+  # Install public headers
+  install(FILES ${PUBLIC_HEADERS}
+    DESTINATION include/xrme/
+  )
 
-# Also install public headers into the cmake binary dir so packages can use
-# libxrme in their source tree by doing include_directories(${CMAKE_BINARY_DIR})
-foreach(header ${PUBLIC_HEADERS})
-  configure_file(${header} ${CMAKE_BINARY_DIR}/xrme/${header} COPYONLY)
-endforeach(header)
+  # Also install public headers into the cmake binary dir so packages can use
+  # libxrme in their source tree by doing include_directories(${CMAKE_BINARY_DIR})
+  foreach(header ${PUBLIC_HEADERS})
+    configure_file(${header} ${CMAKE_BINARY_DIR}/xrme/${header} COPYONLY)
+  endforeach(header)
+endif(NOT APPLE)
