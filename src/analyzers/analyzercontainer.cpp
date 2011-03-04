@@ -30,11 +30,19 @@
 
 const char* AnalyzerContainer::kSettingsGroup = "Analyzer";
 
+// For framerate
+const int kHighTimeout = 50;
+const int kNormalTimeout = 40;
+const int kLowTimeout = 33;
+
 AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   : QWidget(parent),
     context_menu_(new QMenu(this)),
+    context_menu_framerate_(new QMenu(tr("Framerate"), this)),
     group_(new QActionGroup(this)),
+    group_framerate_(new QActionGroup(this)),
     mapper_(new QSignalMapper(this)),
+    mapper_framerate_(new QSignalMapper(this)),
     visualisation_action_(NULL),
     double_click_timer_(new QTimer(this)),
     ignore_next_click_(false),
@@ -44,6 +52,15 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   QHBoxLayout* layout = new QHBoxLayout(this);
   setLayout(layout);
   layout->setContentsMargins(0, 0, 0, 0);
+
+  // Init framerate sub-menu
+  AddFramerate(tr("Low"), kHighTimeout);
+  AddFramerate(tr("Normal"), kNormalTimeout);
+  AddFramerate(tr("High"), kLowTimeout);
+  connect(mapper_framerate_, SIGNAL(mapped(int)), SLOT(ChangeTimeOut(int)));
+
+  context_menu_->addMenu(context_menu_framerate_);
+  context_menu_->addSeparator();
 
   AddAnalyzerType<BarAnalyzer>();
   AddAnalyzerType<BlockAnalyzer>();
@@ -128,10 +145,18 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   Save();
 }
 
+void AnalyzerContainer::ChangeTimeOut(int new_timeout) {
+  if(current_analyzer_) {
+    current_analyzer_->changeTimeout(new_timeout);
+  }
+  SaveTimeout(new_timeout);
+}
+
 void AnalyzerContainer::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
+  // Analyzer
   QString type = s.value("type", "BlockAnalyzer").toString();
   if (type.isEmpty()) {
     DisableAnalyzer();
@@ -145,6 +170,26 @@ void AnalyzerContainer::Load() {
       }
     }
   }
+
+  // Framerate
+  int framerate = s.value("framerate_timeout", kNormalTimeout).toInt();
+  QList<QAction*> actions = group_framerate_->actions();
+  for (int i=0 ; i<framerate_timeout_list_.count() ; ++i) {
+    if(framerate == framerate_timeout_list_[i]) {
+      ChangeTimeOut(framerate);
+      group_framerate_->actions()[i]->setChecked(true);
+      break;
+    }
+  }
+}
+
+void AnalyzerContainer::SaveTimeout(int timeout) {
+// For now, framerate is common for all analyzers. Maybe each analyzer should
+// have its own framerate?
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  s.setValue("framerate_timeout", timeout);
 }
 
 void AnalyzerContainer::Save() {
@@ -154,4 +199,12 @@ void AnalyzerContainer::Save() {
   s.setValue("type", current_analyzer_ ?
              current_analyzer_->metaObject()->className() :
              QVariant());
+}
+
+void AnalyzerContainer::AddFramerate(const QString& name, int timeout) {
+  QAction *action = context_menu_framerate_->addAction(name, mapper_framerate_, SLOT(map()));
+  mapper_framerate_->setMapping(action, timeout);
+  group_framerate_->addAction(action);
+  framerate_timeout_list_ << timeout;
+  action->setCheckable(true);
 }

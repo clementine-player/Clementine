@@ -45,6 +45,14 @@ public:
 
     void set_engine(EngineBase* engine) { m_engine = engine; }
 
+    void changeTimeout( uint newTimeout ) {
+      m_timeout = newTimeout;
+      if (m_timer.isActive()) {
+        m_timer.stop();
+        m_timer.start(m_timeout, this);
+      }
+    }
+
 protected:
     Base( QWidget*, uint scopeSize = 7 );
 
@@ -62,14 +70,6 @@ protected:
     virtual void analyze( QPainter& p, const Scope& ) = 0;
     virtual void paused(QPainter& p);
     virtual void demo(QPainter& p);
-
-    void changeTimeout( uint newTimeout ) {
-      m_timeout = newTimeout;
-      if (m_timer.isActive()) {
-        m_timer.stop();
-        m_timer.start(m_timeout, this);
-      }
-    }
 
 protected:
     QBasicTimer m_timer;
