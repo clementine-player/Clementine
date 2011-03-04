@@ -45,6 +45,7 @@ LibraryQuery::LibraryQuery(const QueryOptions& options)
     foreach (QString token, tokens) {
       token.remove('(');
       token.remove(')');
+      token.remove('"');
 
       if (token.contains(':'))
         query += "fts" + token + "* ";
