@@ -28,8 +28,8 @@
 
 namespace xrme {
 
-RemoteControlHandler::RemoteControlHandler(RemoteControlInterface* interface)
-    : interface_(interface) {
+RemoteControlHandler::RemoteControlHandler(RemoteControlInterface* iface)
+    : interface_(iface) {
   interface_->Attach(this);
 }
 

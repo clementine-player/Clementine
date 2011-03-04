@@ -92,14 +92,14 @@ public:
   // remote control agents.  Should be called before calling Connect().  The
   // Connection will NOT take ownership of the MediaPlayerInterface, and the
   // MediaPlayerInterface MUST stay alive for as long as the connection.
-  void SetMediaPlayer(MediaPlayerInterface* interface);
+  void SetMediaPlayer(MediaPlayerInterface* iface);
 
   // Sets a remote control on the connection.  Calling this means the XRME agent
   // will advertise itself as a remote control, and will receive state changes
   // from media player agents.  Should be called before calling Connect().  The
   // Connection will NOT take ownership of the RemoteControlInterface, and the
   // RemoteControlInterface MUST stay alive for as long as the connection.
-  void SetRemoteControl(RemoteControlInterface* interface);
+  void SetRemoteControl(RemoteControlInterface* iface);
 
   // Returns true after Connected() is emitted.
   bool is_connected() const;

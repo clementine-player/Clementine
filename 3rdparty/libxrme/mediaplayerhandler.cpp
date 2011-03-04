@@ -29,8 +29,8 @@
 
 namespace xrme {
 
-MediaPlayerHandler::MediaPlayerHandler(MediaPlayerInterface* interface)
-    : interface_(interface) {
+MediaPlayerHandler::MediaPlayerHandler(MediaPlayerInterface* iface)
+    : interface_(iface) {
   interface_->Attach(this);
 }
 

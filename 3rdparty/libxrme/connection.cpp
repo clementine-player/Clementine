@@ -158,36 +158,36 @@ QString Connection::jid_resource() const { return d->jid_resource_; }
 QString Connection::jid_host() const { return d->jid_host_; }
 bool Connection::is_verbose() const { return d->verbose_; }
 
-void Connection::SetMediaPlayer(MediaPlayerInterface* interface) {
+void Connection::SetMediaPlayer(MediaPlayerInterface* iface) {
   if (d->media_player_) {
     qWarning() << "Connection::SetMediaPlayer: this connection already has a"
                   " MediaPlayerInterface set";
     return;
   }
 
-  if (!interface) {
+  if (!iface) {
     qWarning() << "Connection::SetMediaPlayer called with NULL interface";
     return;
   }
 
-  d->media_player_ = interface;
-  d->handlers_ << new MediaPlayerHandler(interface);
+  d->media_player_ = iface;
+  d->handlers_ << new MediaPlayerHandler(iface);
 }
 
-void Connection::SetRemoteControl(RemoteControlInterface* interface) {
+void Connection::SetRemoteControl(RemoteControlInterface* iface) {
   if (d->media_player_) {
     qWarning() << "Connection::RemoteControlInterface: this connection already"
                   " has a RemoteControlInterface set";
     return;
   }
 
-  if (!interface) {
+  if (!iface) {
     qWarning() << "Connection::SetRemoteControl called with NULL interface";
     return;
   }
 
-  d->remote_control_ = interface;
-  d->handlers_ << new RemoteControlHandler(interface);
+  d->remote_control_ = iface;
+  d->handlers_ << new RemoteControlHandler(iface);
 }
 
 bool Connection::is_connected() const {
