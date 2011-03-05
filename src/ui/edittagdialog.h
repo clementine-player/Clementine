@@ -49,8 +49,6 @@ public:
   ~EditTagDialog();
 
   static const char* kHintText;
-  static const char* kTagFetchText;
-  static const char* kTagFetchOnLoadText;
 
   void SetSongs(const SongList& songs, const PlaylistItemList& items = PlaylistItemList());
   void SetTagCompleter(LibraryBackend* backend);
@@ -77,8 +75,7 @@ private slots:
   void SongRated(float rating);
   void ResetPlayCounts();
   void FetchTag();
-  void FetchTagFinished(const QString& filename, const SongList& songs_guessed);
-  void FetchTagSongChoosen(const QString& filename, const Song& song);
+  void FetchTagSongChosen(const QString& filename, const Song& new_metadata);
 
   void ArtLoaded(quint64 id, const QImage& scaled, const QImage& original);
 
@@ -167,7 +164,7 @@ private:
   QPushButton* previous_button_;
   QPushButton* next_button_;
 
-  TrackSelectionDialog *results_dialog_;
+  TrackSelectionDialog* results_dialog_;
 };
 
 #endif // EDITTAGDIALOG_H

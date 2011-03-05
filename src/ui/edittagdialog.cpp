@@ -40,8 +40,6 @@
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
-const char* EditTagDialog::kTagFetchText = QT_TR_NOOP("Complete tags automatically");
-const char* EditTagDialog::kTagFetchOnLoadText = QT_TR_NOOP("Generating audio fingerprint and fetching results...");
 
 EditTagDialog::EditTagDialog(QWidget* parent)
   : QDialog(parent),
@@ -51,7 +49,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     loading_(false),
     ignore_edits_(false),
 #ifdef HAVE_LIBTUNEPIMP
-    tag_fetcher_(new TagFetcher()),
+    tag_fetcher_(new TagFetcher(this)),
 #endif
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
@@ -64,17 +62,16 @@ EditTagDialog::EditTagDialog(QWidget* parent)
           SLOT(ArtLoaded(quint64,QImage,QImage)));
 #ifdef HAVE_LIBTUNEPIMP
   connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)),
-          this, SLOT(FetchTagFinished(QString, SongList)), Qt::QueuedConnection);
-  connect(results_dialog_, SIGNAL(SongChoosen(QString, Song)), SLOT(FetchTagSongChoosen(QString, Song)));
+          results_dialog_, SLOT(FetchTagFinished(QString, SongList)),
+          Qt::QueuedConnection);
+  connect(results_dialog_, SIGNAL(SongChosen(QString, Song)),
+          SLOT(FetchTagSongChosen(QString, Song)));
 #endif
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_container->hide();
-#ifdef HAVE_LIBTUNEPIMP
-  ui_->fetch_tag->setText(tr(kTagFetchText));
-#else
-  ui_->fetch_tag->setDisabled(true);
+#ifndef HAVE_LIBTUNEPIMP
   ui_->fetch_tag->setVisible(false);
 #endif
 
@@ -128,7 +125,6 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(ui_->playcount_reset, SIGNAL(clicked()), SLOT(ResetPlayCounts()));
 #ifdef HAVE_LIBTUNEPIMP
   connect(ui_->fetch_tag, SIGNAL(clicked()), SLOT(FetchTag()));
-  ui_->fetch_tag->setText(tr(kTagFetchText));
 #endif
 
   // Set up the album cover menu
@@ -172,9 +168,6 @@ EditTagDialog::EditTagDialog(QWidget* parent)
 }
 
 EditTagDialog::~EditTagDialog() {
-#ifdef HAVE_LIBTUNEPIMP
-  delete tag_fetcher_;
-# endif
   delete ui_;
 }
 
@@ -245,6 +238,7 @@ void EditTagDialog::SetSongsFinished() {
   }
 
   // Select all
+  ui_->song_list->setCurrentRow(0);
   ui_->song_list->selectAll();
 
   // Hide the list if there's only one song in it
@@ -252,9 +246,6 @@ void EditTagDialog::SetSongsFinished() {
   ui_->song_list->setVisible(multiple);
   previous_button_->setEnabled(multiple);
   next_button_->setEnabled(multiple);
-
-  // Display tag fetcher if there's only one song
-  ui_->fetch_tag->setVisible(!multiple);
 
   ui_->tab_widget->setCurrentWidget(multiple ? ui_->tags_tab : ui_->summary_tab);
 }
@@ -696,69 +687,50 @@ void EditTagDialog::ResetPlayCounts() {
 void EditTagDialog::FetchTag() {
 #ifdef HAVE_LIBTUNEPIMP
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
-  if (sel.isEmpty())
-    return;
-  Song* song = &data_[sel.first().row()].original_;
-  if (!song->is_valid())
-    return;
-  tag_fetcher_->FetchFromFile(song->filename());
-  ui_->fetch_tag->setDisabled(true); // disable button, will be re-enabled later
-  ui_->fetch_tag->setText(tr(kTagFetchOnLoadText));
-  QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
-#endif
-}
 
-void EditTagDialog::FetchTagFinished(const QString& filename, const SongList& songs_guessed) {
-#ifdef HAVE_LIBTUNEPIMP
-  // Restore cursor
-  QApplication::restoreOverrideCursor();
+  SongList songs;
 
-  // Get current song
-  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
-  if (sel.isEmpty())
-    return;
-  Song* current_song = &data_[sel.first().row()].original_;
-
-  // Check if the user has closed edit tag dialog or if it has reopened a new one.
-  // If so, ignore this signal; else open a dialog for selecting best result
-  if(isVisible() && current_song->filename() == filename) {
-    // Restore some components as "no working"
-    ui_->fetch_tag->setDisabled(false);
-    ui_->fetch_tag->setText(tr(kTagFetchText));
-
-    // If no songs have been guessed, just display a message
-    if(songs_guessed.empty()) {
-      QMessageBox::information(this, tr("Sorry"), tr("Clementine was unable to find results for this file"));
-    } else {  // Else, display song's tags selection dialog only if edittagdialog is still opened
-      results_dialog_->Init(filename, songs_guessed);
-      results_dialog_->show();
+  foreach (const QModelIndex& index, sel) {
+    Song song = data_[index.row()].original_;
+    if (!song.is_valid()) {
+      continue;
     }
+
+    songs << song;
+    tag_fetcher_->FetchFromFile(song.filename());
   }
+
+  if (songs.isEmpty())
+    return;
+
+  results_dialog_->Init(songs);
+  results_dialog_->show();
 #endif
 }
 
-void EditTagDialog::FetchTagSongChoosen(const QString& filename, const Song& song_choosen) {
-  // Get current song
-  const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
-  if (sel.isEmpty())
-    return;
-  Song* current_song = &data_[sel.first().row()].original_;
-  if (!current_song->is_valid())
-    return;
-  // Check it's still the same song, using filename
-  if(filename != current_song->filename()) {
-    // different song: we shouldn't erase tags with wrong metadata
-    return;
-  }
+void EditTagDialog::FetchTagSongChosen(const QString& filename, const Song& new_metadata) {
 
-  // Fill tags' fields
-  if(!song_choosen.title().isEmpty())
-    ui_->title->set_text(song_choosen.title());
-  if(!song_choosen.album().isEmpty())
-    ui_->album->set_text(song_choosen.album());
-  if(!song_choosen.album().isEmpty())
-    ui_->artist->set_text(song_choosen.artist());
-  if(song_choosen.track() > 0)
-    ui_->track->set_text(QString::number(song_choosen.track()));
+  // Find the song with this filename
+  for (int i=0 ; i<data_.count() ; ++i) {
+    Data* data = &data_[i];
+    if (data->original_.filename() != filename)
+      continue;
+
+    // Is it currently being displayed in the UI?
+    if (ui_->song_list->currentRow() == i) {
+      // Yes!  We can just set the fields in the UI
+      ui_->title->set_text(new_metadata.title());
+      ui_->artist->set_text(new_metadata.artist());
+      ui_->album->set_text(new_metadata.album());
+      ui_->track->setValue(new_metadata.track());
+    } else {
+      data->current_.set_title(new_metadata.title());
+      data->current_.set_artist(new_metadata.artist());
+      data->current_.set_album(new_metadata.album());
+      data->current_.set_track(new_metadata.track());
+    }
+
+    break;
+  }
 }
 

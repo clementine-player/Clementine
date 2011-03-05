@@ -32,18 +32,45 @@ public:
   TrackSelectionDialog(QWidget *parent = 0);
   ~TrackSelectionDialog();
 
-  void Init(const QString& filename, const SongList& songs);
+  void Init(const SongList& songs);
 
+public slots:
+  void FetchTagFinished(const QString& filename, const SongList& songs_guessed);
+
+  // QDialog
   void accept();
 
 signals:
-  void SongChoosen(const QString& filename, const Song& song);
+  void SongChosen(const QString& filename, const Song& song);
+
+private slots:
+  void UpdateStack();
+
+  void NextSong();
+  void PreviousSong();
+
+  void ResultSelected();
 
 private:
-  Ui_TrackSelectionDialog *ui_;
+  void AddDivider(const QString& text, QTreeWidget* parent) const;
+  void AddSong(const Song& song, int result_index, QTreeWidget* parent) const;
 
-  QString   current_filename_;
-  SongList  current_songs_;
+private:
+  Ui_TrackSelectionDialog* ui_;
+
+  struct Data {
+    Data() : pending_(true), selected_result_(0) {}
+
+    Song original_song_;
+    bool pending_;
+    SongList results_;
+    int selected_result_;
+  };
+
+  QList<Data> data_;
+
+  QPushButton* previous_button_;
+  QPushButton* next_button_;
 };
 
 #endif // TRACKSELECTIONDIALOG_H

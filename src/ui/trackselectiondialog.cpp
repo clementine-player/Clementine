@@ -15,8 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "iconloader.h"
 #include "trackselectiondialog.h"
 
+#include <QFileInfo>
+#include <QPushButton>
+#include <QShortcut>
 #include <QtDebug>
 
 TrackSelectionDialog::TrackSelectionDialog(QWidget *parent)
@@ -25,57 +29,183 @@ TrackSelectionDialog::TrackSelectionDialog(QWidget *parent)
 {
   // Setup dialog window
   ui_->setupUi(this);
-  setModal(true);
-  connect(ui_->resultsTreeWidget, SIGNAL(itemDoubleClicked (QTreeWidgetItem*, int)), this, SLOT(accept()));
+
+  connect(ui_->song_list, SIGNAL(currentRowChanged(int)), SLOT(UpdateStack()));
+  connect(ui_->results, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+          SLOT(ResultSelected()));
+
+  ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
+
+  // Add the next/previous buttons
+  previous_button_ = new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
+  next_button_ = new QPushButton(IconLoader::Load("go-next"), tr("Next"), this);
+  ui_->button_box->addButton(previous_button_, QDialogButtonBox::ResetRole);
+  ui_->button_box->addButton(next_button_, QDialogButtonBox::ResetRole);
+
+  connect(previous_button_, SIGNAL(clicked()), SLOT(PreviousSong()));
+  connect(next_button_, SIGNAL(clicked()), SLOT(NextSong()));
+
+  // Set some shortcuts for the buttons
+  new QShortcut(QKeySequence::Back, previous_button_, SLOT(click()));
+  new QShortcut(QKeySequence::Forward, next_button_, SLOT(click()));
+  new QShortcut(QKeySequence::MoveToPreviousPage, previous_button_, SLOT(click()));
+  new QShortcut(QKeySequence::MoveToNextPage, next_button_, SLOT(click()));
+
+  // Resize columns
+  ui_->results->setColumnWidth(0, 50);  // Track column
+  ui_->results->setColumnWidth(1, 175); // Title column
+  ui_->results->setColumnWidth(2, 175); // Artist column
+  ui_->results->setColumnWidth(3, 175); // Album column
 }
 
 TrackSelectionDialog::~TrackSelectionDialog() {
-  ui_->resultsTreeWidget->clear();
   delete ui_;
 }
 
-void TrackSelectionDialog::Init(const QString& filename, const SongList& songs) {
-  current_filename_ = filename;
-  current_songs_ = songs;
+void TrackSelectionDialog::Init(const SongList& songs) {
+  ui_->song_list->clear();
+  ui_->stack->setCurrentWidget(ui_->loading_page);
+  data_.clear();
 
-  // Set filename
-  ui_->filenameLineEdit->setText(current_filename_); //TODO: use basefilename, it's nicer
+  foreach (const Song& song, songs) {
+    Data data;
+    data.original_song_ = song;
+    data_ << data;
 
-  // Clear tree widget
-  ui_->resultsTreeWidget->clear();
-
-  // Fill tree view with songs
-  int song_index = 0;
-  foreach(const Song& song, songs) {
-    QStringList valuesStringList;
-    if (song.track() > 0) {
-      valuesStringList << QString::number(song.track());
-    }
-    valuesStringList << song.title() << song.artist() << song.album();
-    QTreeWidgetItem* item = new QTreeWidgetItem(
-        ui_->resultsTreeWidget, valuesStringList);
-    if(song_index==0) { // if it's the first item, set focus on it
-      ui_->resultsTreeWidget->setCurrentItem(item);
-    }
-    item->setData(0,  Qt::UserRole, song_index++); // To remember this widget corresponds to the ith song of our list
+    QListWidgetItem* item = new QListWidgetItem(ui_->song_list);
+    item->setText(QFileInfo(song.filename()).fileName());
+    item->setForeground(palette().color(QPalette::Disabled, QPalette::Text));
   }
 
-  // Resize columns
-  ui_->resultsTreeWidget->setColumnWidth(0, 50);  // Track column
-  ui_->resultsTreeWidget->setColumnWidth(1, 175); // Title column
-  ui_->resultsTreeWidget->setColumnWidth(2, 175); // Artist column
-  ui_->resultsTreeWidget->setColumnWidth(3, 175); // Album column
+  const bool multiple = songs.count() > 1;
+  ui_->song_list->setVisible(multiple);
+  next_button_->setEnabled(multiple);
+  previous_button_->setEnabled(multiple);
+
+  ui_->song_list->setCurrentRow(0);
+}
+
+void TrackSelectionDialog::FetchTagFinished(const QString& filename,
+                                            const SongList& songs_guessed) {
+  // Find the item with this filename
+  int row = -1;
+  for (int i=0 ; i<data_.count() ; ++i) {
+    if (data_[i].original_song_.filename() == filename) {
+      row = i;
+      break;
+    }
+  }
+
+  if (row == -1)
+    return;
+
+  // Set the color back to black
+  ui_->song_list->item(row)->setForeground(palette().text());
+
+  // Add the results to the list
+  data_[row].pending_ = false;
+  data_[row].results_ = songs_guessed;
+
+  // If it's the current item, update the display
+  if (ui_->song_list->currentIndex().row() == row) {
+    UpdateStack();
+  }
+}
+
+void TrackSelectionDialog::UpdateStack() {
+  const int row = ui_->song_list->currentRow();
+  if (row < 0 || row >= data_.count())
+    return;
+
+  const Data& data = data_[row];
+
+  if (data.pending_) {
+    ui_->stack->setCurrentWidget(ui_->loading_page);
+    return;
+  } else if (data.results_.isEmpty()) {
+    ui_->stack->setCurrentWidget(ui_->error_page);
+    return;
+  }
+  ui_->stack->setCurrentWidget(ui_->results_page);
+
+  // Clear tree widget
+  ui_->results->clear();
+
+  // Put the original tags at the top
+  AddDivider(tr("Original tags"), ui_->results);
+  AddSong(data.original_song_, -1, ui_->results);
+
+  // Fill tree view with songs
+  AddDivider(tr("Suggested tags"), ui_->results);
+
+  int song_index = 0;
+  foreach (const Song& song, data.results_) {
+    AddSong(song, song_index++, ui_->results);
+  }
+
+  // Find the item that was selected last time
+  for (int i=0 ; i<ui_->results->model()->rowCount() ; ++i) {
+    const QModelIndex index = ui_->results->model()->index(i, 0);
+    const QVariant id = index.data(Qt::UserRole);
+    if (!id.isNull() && id.toInt() == data.selected_result_) {
+      ui_->results->setCurrentIndex(index);
+      break;
+    }
+  }
+}
+
+void TrackSelectionDialog::AddDivider(const QString& text, QTreeWidget* parent) const {
+  QTreeWidgetItem* item = new QTreeWidgetItem(parent);
+  item->setFirstColumnSpanned(true);
+  item->setText(0, text);
+  item->setFlags(Qt::NoItemFlags);
+  item->setForeground(0, palette().color(QPalette::Disabled, QPalette::Text));
+
+  QFont bold_font(font());
+  bold_font.setBold(true);
+  item->setFont(0, bold_font);
+}
+
+void TrackSelectionDialog::AddSong(const Song& song, int result_index, QTreeWidget* parent) const {
+  QStringList values;
+  values << ((song.track() > 0) ? QString::number(song.track()) : QString());
+  values << song.title() << song.artist() << song.album();
+
+  QTreeWidgetItem* item = new QTreeWidgetItem(parent, values);
+  item->setData(0, Qt::UserRole, result_index);
+  item->setData(0, Qt::TextAlignmentRole, Qt::AlignRight);
+}
+
+void TrackSelectionDialog::ResultSelected() {
+  if (!ui_->results->currentItem())
+    return;
+
+  const int song_row = ui_->song_list->currentRow();
+  if (song_row == -1)
+    return;
+
+  const int result_index = ui_->results->currentItem()->data(0, Qt::UserRole).toInt();
+  data_[song_row].selected_result_ = result_index;
 }
 
 void TrackSelectionDialog::accept() {
   QDialog::accept();
-  QTreeWidgetItem *item =ui_->resultsTreeWidget->currentItem();
-  if(!item) { // no item selected
-    return;
+
+  foreach (const Data& data, data_) {
+    if (data.pending_ || data.results_.isEmpty() || data.selected_result_ == -1)
+      continue;
+
+    emit SongChosen(data.original_song_.filename(), data.results_[data.selected_result_]);
   }
-  int selected_song_index =  item->data(0, Qt::UserRole).toInt();
-  if(selected_song_index >= 0 && selected_song_index < current_songs_.size()) {
-    emit SongChoosen(current_filename_, current_songs_[selected_song_index]);
-  }
+}
+
+void TrackSelectionDialog::NextSong() {
+  int row = (ui_->song_list->currentRow() + 1) % ui_->song_list->count();
+  ui_->song_list->setCurrentRow(row);
+}
+
+void TrackSelectionDialog::PreviousSong() {
+  int row = (ui_->song_list->currentRow() - 1 + ui_->song_list->count()) % ui_->song_list->count();
+  ui_->song_list->setCurrentRow(row);
 }
 

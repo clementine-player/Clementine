@@ -819,7 +819,11 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QPushButton" name="fetch_tag"/>
+         <widget class="QPushButton" name="fetch_tag">
+          <property name="text">
+           <string>Complete tags automatically</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
