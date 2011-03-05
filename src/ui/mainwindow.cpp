@@ -696,12 +696,17 @@ MainWindow::MainWindow(
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
 #endif
 
+  // If we support more languages this ifdef will need to be changed.
+#ifdef HAVE_SCRIPTING_PYTHON
   scripts_->Init(ScriptManager::GlobalData(
       library_, library_view_->view(), player_, playlists_,
       task_manager_, settings_dialog_.get(), radio_model_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 
   library_view_->view()->SetScriptManager(scripts_);
+#else
+  ui_->action_script_manager->setVisible(false);
+#endif
 
   CheckFullRescanRevisions();
 }
