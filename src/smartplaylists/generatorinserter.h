@@ -56,6 +56,7 @@ private:
   int row_;
   bool play_now_;
   bool enqueue_;
+  bool is_dynamic_;
 };
 
 } // namespace

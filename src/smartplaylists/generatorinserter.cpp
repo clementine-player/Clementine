@@ -33,7 +33,8 @@ GeneratorInserter::GeneratorInserter(
   : QObject(parent),
     task_manager_(task_manager),
     library_(library),
-    task_id_(-1)
+    task_id_(-1),
+    is_dynamic_(false)
 {
 }
 
@@ -54,6 +55,7 @@ void GeneratorInserter::Load(
   row_ = row;
   play_now_ = play_now;
   enqueue_ = enqueue;
+  is_dynamic_ = generator->is_dynamic();
 
   connect(generator.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
 
@@ -71,7 +73,9 @@ void GeneratorInserter::Finished() {
   PlaylistItemList items = watcher->result();
 
   if (items.isEmpty()) {
-    destination_->TurnOffDynamicPlaylist();
+    if (is_dynamic_) {
+      destination_->TurnOffDynamicPlaylist();
+    }
   } else {
     destination_->InsertItems(items, row_, play_now_, enqueue_);
   }
