@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:55+0000\n"
 "Last-Translator: Ofir Klinger <klinger.ofir@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
-"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: he\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:51+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 רצועות"
 msgid "%1: Wiimotedev module"
 msgstr "%1: המודול Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n נכשל"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n הסתיים"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n נותר"
 
@@ -1165,7 +1165,8 @@ msgstr "מידע על החומרה"
 msgid "Hardware information is only available while the device is connected."
 msgstr "מידע על החומרה זמין רק כאשר ההתקן מחובר."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1441,7 +1442,8 @@ msgstr "טען קבצים/כתובות, והחלף את רשימת ההשמעה 
 msgid "Love"
 msgstr "אוהב"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1489,6 +1491,10 @@ msgstr "כלול את כל נתוני החיפוש (AND)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "כלול נתון אחד או יותר מנתוני החיפוש (OR)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "בינוני (25 fps)"
@@ -1623,9 +1629,6 @@ msgstr "אין"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "אף אחד מהשירים הנבחרים לא היה ראוי להעתקה להתקן"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "לא זמין בזמן שימוש ברשימת השמעה דינמית"
@@ -2332,6 +2335,10 @@ msgstr "נכתב בהצלחה %1"
 msgid "Summary"
 msgstr "סיכום"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "ממש גבוה (60 fps)"
 
@@ -2729,7 +2736,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "אפס"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "הוסף %n שירים"
 
@@ -2788,7 +2795,7 @@ msgstr "ב־"
 msgid "options"
 msgstr "אפשרויות"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "הסרת %n שירים"
 

@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:51+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
-"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:53+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -83,15 +83,15 @@ msgstr "%1 faixas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Modulo do dispositivo Wiimote"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n falhou"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n finalizado"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n faltando"
 
@@ -1176,7 +1176,8 @@ msgstr ""
 "Informação do hardware só está disponível quando o dispositivo está "
 "conectado."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1457,7 +1458,8 @@ msgstr "Carregar arquivos/sites, substiuindo a lista de reprodução atual"
 msgid "Love"
 msgstr "Adoro"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1505,6 +1507,10 @@ msgstr "Buscar por todos os termos de pesquisa juntos (E)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Buscar um ou mais termos de pesquisa (OU)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Médio (25 fps)"
@@ -1642,9 +1648,6 @@ msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 "Nenhuma das músicas selecionadas estão adequadas para copiar para um "
 "dispositivo"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Não disponível enquanto uma lista dinâmica estiver em uso"
@@ -2353,6 +2356,10 @@ msgstr "%1 gravado com sucesso"
 msgid "Summary"
 msgstr "Resumo"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Super alto (60 fps)"
 
@@ -2762,7 +2769,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "Adicionar %n músicas"
 
@@ -2821,7 +2828,7 @@ msgstr "ligado"
 msgid "options"
 msgstr "opções"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "Remover %n músicas"
 

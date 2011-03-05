@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-19 14:46+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
-"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
 "X-Launchpad-Export-Date: 2011-02-20 05:10+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 track"
 msgid "%1: Wiimotedev module"
 msgstr "%1: mô-đun Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -1171,7 +1171,8 @@ msgstr "Thông tin phần cứng"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Chỉ xem được thông tin phần cứng trong khi đã kết nối thiết bị."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1451,7 +1452,8 @@ msgstr "Nạp các tập tin/liên kết, thay thế danh sách hiện tại"
 msgid "Love"
 msgstr "Yêu thích"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1499,6 +1501,10 @@ msgstr "Tất cả các điều kiện đều phù hợp (AND)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Một hay nhiều điều kiện phù hợp (OR)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Trung bình (25 fps)"
@@ -1634,9 +1640,6 @@ msgstr "Không"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Không khả khi khi dùng danh sách nhạc năng động"
@@ -2344,6 +2347,10 @@ msgstr "Đã ghi vào %1"
 msgid "Summary"
 msgstr "Tóm tắt"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Rất cao (60 fps)"
 
@@ -2752,7 +2759,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -2811,7 +2818,7 @@ msgstr "bật"
 msgid "options"
 msgstr "tùy chọn"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 

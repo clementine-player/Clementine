@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-18 17:36+0000\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
 "X-Launchpad-Export-Date: 2011-02-19 06:06+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -83,15 +83,15 @@ msgstr "%1 tracce"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modulo Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n non riusciti"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n completati"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n rimanenti"
 
@@ -1182,7 +1182,8 @@ msgstr ""
 "Le informazioni hardware sono disponibili solo quando il dispositivo è "
 "connesso."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1464,7 +1465,8 @@ msgstr "Carica file/URL, sostituendo la scaletta attuale"
 msgid "Love"
 msgstr "Mi piace"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1512,6 +1514,10 @@ msgstr "Verifica ogni termine di ricerca (AND)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Verifica uno o più termini di ricerca (OR)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Media (25 fps)"
@@ -1648,9 +1654,6 @@ msgstr "Nessuna"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 "Nessuna delle canzoni selezionate era adatta alla copia su un dispositivo"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Non disponibile mentre si utilizza una scaletta dinamica"
@@ -2359,6 +2362,10 @@ msgstr "%1 scritto correttamente"
 msgid "Summary"
 msgstr "Riepilogo"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Altissima (60 fps)"
 
@@ -2776,7 +2783,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "aggiungi %n brani"
 
@@ -2835,7 +2842,7 @@ msgstr "il"
 msgid "options"
 msgstr "opzioni"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "rimuovi %n brani"
 

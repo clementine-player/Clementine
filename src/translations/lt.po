@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:48+0000\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
-"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: lt\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:52+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: LITHUANIA\n"
@@ -85,15 +85,15 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -1173,7 +1173,8 @@ msgstr "Įrangos informacija"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Aparatūros informacija prieinama tik kai įrenginys yra prijungtas."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1454,7 +1455,8 @@ msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 msgid "Love"
 msgstr "Meilė"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1502,6 +1504,10 @@ msgstr "Atitikti kiekvieną paieškos frazę (IR)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Atitinka vieną ar daugiau paieškos frazių (ARBA)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Vidutinis (25 kps)"
@@ -1636,9 +1642,6 @@ msgstr "Nėra"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Negalimas naudojant dinaminį grojaraštį"
@@ -2346,6 +2349,10 @@ msgstr "Sėkmingai įrašyta %1"
 msgid "Summary"
 msgstr "Santrauka"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Labai aukštas (60 kps)"
 
@@ -2749,7 +2756,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -2808,7 +2815,7 @@ msgstr "iš"
 msgid "options"
 msgstr "parinktys"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 

@@ -29,14 +29,17 @@
 #include <QtDebug>
 
 const char* AnalyzerContainer::kSettingsGroup = "Analyzer";
+const char* AnalyzerContainer::kSettingsFramerate = "framerate";
 
-// For framerate
-const int kHighTimeout = 50;
-const int kNormalTimeout = 40;
-const int kLowTimeout = 33;
+// Framerates
+const int kLowFramerate = 20;
+const int kMediumFramerate = 25;
+const int kHighFramerate = 30;
+const int kVeryHighFramerate = 60;
 
 AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   : QWidget(parent),
+    current_framerate_(kMediumFramerate),
     context_menu_(new QMenu(this)),
     context_menu_framerate_(new QMenu(tr("Framerate"), this)),
     group_(new QActionGroup(this)),
@@ -54,10 +57,11 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   layout->setContentsMargins(0, 0, 0, 0);
 
   // Init framerate sub-menu
-  AddFramerate(tr("Low"), kHighTimeout);
-  AddFramerate(tr("Normal"), kNormalTimeout);
-  AddFramerate(tr("High"), kLowTimeout);
-  connect(mapper_framerate_, SIGNAL(mapped(int)), SLOT(ChangeTimeOut(int)));
+  AddFramerate(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate);
+  AddFramerate(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate);
+  AddFramerate(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate);
+  AddFramerate(tr("Super high (%1 fps)").arg(kVeryHighFramerate), kVeryHighFramerate);
+  connect(mapper_framerate_, SIGNAL(mapped(int)), SLOT(ChangeFramerate(int)));
 
   context_menu_->addMenu(context_menu_framerate_);
   context_menu_->addSeparator();
@@ -139,17 +143,22 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   delete current_analyzer_;
   current_analyzer_ = qobject_cast<Analyzer::Base*>(instance);
   current_analyzer_->set_engine(engine_);
+  // Even if it is not supposed to happen, I don't want to get a dbz error
+  current_framerate_ = current_framerate_ == 0 ? kMediumFramerate : current_framerate_;
+  current_analyzer_->changeTimeout(1000 / current_framerate_);
 
   layout()->addWidget(current_analyzer_);
 
   Save();
 }
 
-void AnalyzerContainer::ChangeTimeOut(int new_timeout) {
+void AnalyzerContainer::ChangeFramerate(int new_framerate) {
   if(current_analyzer_) {
-    current_analyzer_->changeTimeout(new_timeout);
+    // Even if it is not supposed to happen, I don't want to get a dbz error
+    new_framerate = new_framerate == 0 ? kMediumFramerate : new_framerate;
+    current_analyzer_->changeTimeout(1000 / new_framerate);
   }
-  SaveTimeout(new_timeout);
+  SaveFramerate(new_framerate);
 }
 
 void AnalyzerContainer::Load() {
@@ -172,24 +181,23 @@ void AnalyzerContainer::Load() {
   }
 
   // Framerate
-  int framerate = s.value("framerate_timeout", kNormalTimeout).toInt();
-  QList<QAction*> actions = group_framerate_->actions();
-  for (int i=0 ; i<framerate_timeout_list_.count() ; ++i) {
-    if(framerate == framerate_timeout_list_[i]) {
-      ChangeTimeOut(framerate);
+  current_framerate_ = s.value(kSettingsFramerate, kMediumFramerate).toInt();
+  for (int i=0 ; i<framerate_list_.count() ; ++i) {
+    if(current_framerate_ == framerate_list_[i]) {
+      ChangeFramerate(current_framerate_);
       group_framerate_->actions()[i]->setChecked(true);
       break;
     }
   }
 }
 
-void AnalyzerContainer::SaveTimeout(int timeout) {
+void AnalyzerContainer::SaveFramerate(int framerate) {
 // For now, framerate is common for all analyzers. Maybe each analyzer should
 // have its own framerate?
+  current_framerate_ = framerate;
   QSettings s;
   s.beginGroup(kSettingsGroup);
-
-  s.setValue("framerate_timeout", timeout);
+  s.setValue(kSettingsFramerate, current_framerate_);
 }
 
 void AnalyzerContainer::Save() {
@@ -201,10 +209,10 @@ void AnalyzerContainer::Save() {
              QVariant());
 }
 
-void AnalyzerContainer::AddFramerate(const QString& name, int timeout) {
+void AnalyzerContainer::AddFramerate(const QString& name, int framerate) {
   QAction *action = context_menu_framerate_->addAction(name, mapper_framerate_, SLOT(map()));
-  mapper_framerate_->setMapping(action, timeout);
+  mapper_framerate_->setMapping(action, framerate);
   group_framerate_->addAction(action);
-  framerate_timeout_list_ << timeout;
+  framerate_list_ << framerate;
   action->setCheckable(true);
 }

@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-17 22:06+0000\n"
 "Last-Translator: ntomka <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
-"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:52+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 szám"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modul"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n meghiúsult"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n befejezve"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
@@ -1176,7 +1176,8 @@ msgstr "Hardverjellemzők"
 msgid "Hardware information is only available while the device is connected."
 msgstr "A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők meg."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1457,7 +1458,8 @@ msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
 msgid "Love"
 msgstr "Kedvenc"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1505,6 +1507,10 @@ msgstr "Illeszkedés minden keresési feltételre (ÉS)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Illeszkedés legalább egy keresési feltételre (VAGY)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Közepes (25 fps)"
@@ -1640,9 +1646,6 @@ msgstr "Egyik sem"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Egy kiválasztott szám sem alkalmas az eszközre való másoláshoz"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Nem elérhető dinamikus lejátszási lista használatakor"
@@ -2350,6 +2353,10 @@ msgstr "%1 sikeresen írva"
 msgid "Summary"
 msgstr "Összegzés"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Nagyon gyors (60 fps)"
 
@@ -2759,7 +2766,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulla"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n szám felvétele"
 
@@ -2818,7 +2825,7 @@ msgstr "ezen"
 msgid "options"
 msgstr "beállítások"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n szám eltávolítása"
 

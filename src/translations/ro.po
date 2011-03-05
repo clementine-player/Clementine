@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:14+0000\n"
 "Last-Translator: Daniel Șerbănescu <cyber19rider@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:52+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr ""
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n eșuat"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n finalizat"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n rămas"
 
@@ -1152,7 +1152,8 @@ msgstr ""
 msgid "Hardware information is only available while the device is connected."
 msgstr ""
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1426,7 +1427,8 @@ msgstr ""
 msgid "Love"
 msgstr "Iubește"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1473,6 +1475,10 @@ msgid "Match every search term (AND)"
 msgstr ""
 
 msgid "Match one or more search terms (OR)"
+msgstr ""
+
+#, qt-format
+msgid "Medium (%1 fps)"
 msgstr ""
 
 msgid "Medium (25 fps)"
@@ -1606,9 +1612,6 @@ msgid "None"
 msgstr ""
 
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr ""
-
-msgid "Normal"
 msgstr ""
 
 msgid "Not available while using a dynamic playlist"
@@ -2316,6 +2319,10 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr ""
 
@@ -2696,7 +2703,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr ""
 
@@ -2755,7 +2762,7 @@ msgstr ""
 msgid "options"
 msgstr "opțiuni"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "elimină %n piese"
 

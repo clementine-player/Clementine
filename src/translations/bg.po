@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-20 10:15+0000\n"
 "Last-Translator: George Karavasilev <kokoto_java@yahoo.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
-"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
 "X-Launchpad-Export-Date: 2011-02-21 05:08+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 песни"
 msgid "%1: Wiimotedev module"
 msgstr "%1:Wiimotedev модул"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n завършено"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n оставащо"
 
@@ -1173,7 +1173,8 @@ msgid "Hardware information is only available while the device is connected."
 msgstr ""
 "Хардуерна информация е налична единствено когато устройството е свързано."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1456,7 +1457,8 @@ msgstr "Зареждане на файлове/URL адреси замества
 msgid "Love"
 msgstr "Любима"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1504,6 +1506,10 @@ msgstr "Съвпадане всеки термин за търсене (И)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Съвпадане на един или повече терминала за търсене (ИЛИ)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Средно (25 fps)"
@@ -1640,9 +1646,6 @@ msgstr "Никаква"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 "Никоя от избраните песни бяха сподобни да бъдат копирани на устройството"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Не е налично при използването на динамичен плейлист"
@@ -2350,6 +2353,10 @@ msgstr "Успешно записан %1"
 msgid "Summary"
 msgstr "Резюме"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Много високо (60 fps)"
 
@@ -2763,7 +2770,7 @@ msgstr "Я-А"
 msgid "Zero"
 msgstr "Нула"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "добавете %n песни"
 
@@ -2822,7 +2829,7 @@ msgstr "вкл."
 msgid "options"
 msgstr "опции"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "премахване на %n песни"
 

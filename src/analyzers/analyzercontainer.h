@@ -35,6 +35,7 @@ public:
   void SetActions(QAction* visualisation);
 
   static const char* kSettingsGroup;
+  static const char* kSettingsFramerate;
 
 protected:
   void mouseReleaseEvent(QMouseEvent *);
@@ -42,19 +43,20 @@ protected:
 
 private slots:
   void ChangeAnalyzer(int id);
-  void ChangeTimeOut(int new_timeout);
+  void ChangeFramerate(int new_framerate);
   void DisableAnalyzer();
   void ShowPopupMenu();
 
 private:
   void Load();
   void Save();
-  void SaveTimeout(int timeout);
+  void SaveFramerate(int framerate);
   template <typename T>
       void AddAnalyzerType();
-  void AddFramerate(const QString& name, int timeout);
+  void AddFramerate(const QString& name, int framerate);
 
 private:
+  int current_framerate_; // fps
   QMenu* context_menu_;
   QMenu* context_menu_framerate_;
   QActionGroup* group_;
@@ -63,7 +65,7 @@ private:
   QSignalMapper* mapper_framerate_;
 
   QList<const QMetaObject*> analyzer_types_;
-  QList<int> framerate_timeout_list_;
+  QList<int> framerate_list_;
   QList<QAction*> actions_;
   QAction* disable_action_;
 

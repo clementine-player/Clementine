@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:17+0000\n"
 "Last-Translator: Ekrem Kocadere <ekocadere@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:53+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 parça"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modülü"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -1169,7 +1169,8 @@ msgstr "Donanım bilgisi"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Donanım bilgisine sadece aygıt bağlıyken erişilebilir."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1450,7 +1451,8 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 msgid "Love"
 msgstr "Beğen"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1498,6 +1500,10 @@ msgstr "Her arama terimiyle eşleştir (VE)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Bir veya daha fazla arama terimiyle eşleştir (VEYA)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Orta (25 fps)"
@@ -1633,9 +1639,6 @@ msgstr "Hiçbiri"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Dinamik şarkı listesi kullanırken geçerli değil"
@@ -2342,6 +2345,10 @@ msgstr "%1 başarıyla yazıldı"
 msgid "Summary"
 msgstr "Özet"
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Süper yüksek (60 fps)"
 
@@ -2741,7 +2748,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -2800,7 +2807,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 

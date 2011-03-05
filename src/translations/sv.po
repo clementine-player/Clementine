@@ -12,10 +12,10 @@ msgstr ""
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Launchpad Swedish Translators <lp-l10n-sv@lists.launchpad."
 "net>\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:53+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Language: Swedish\n"
@@ -84,15 +84,15 @@ msgstr "%1 spår"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev-modul"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n misslyckades"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n färdig"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n återstår"
 
@@ -1176,7 +1176,8 @@ msgstr "Hårdvaruinformation"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Hårdvaruinformation är endast tillgänglig när enheten är ansluten."
 
-msgid "High"
+#, qt-format
+msgid "High (%1 fps)"
 msgstr ""
 
 msgid "High (1024x1024)"
@@ -1455,7 +1456,8 @@ msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 msgid "Love"
 msgstr "Älska"
 
-msgid "Low"
+#, qt-format
+msgid "Low (%1 fps)"
 msgstr ""
 
 msgid "Low (15 fps)"
@@ -1503,6 +1505,10 @@ msgstr "Matcha varje sökterm (OCH)"
 
 msgid "Match one or more search terms (OR)"
 msgstr "Matcha en eller flera söktermer (ELLER)"
+
+#, qt-format
+msgid "Medium (%1 fps)"
+msgstr ""
 
 msgid "Medium (25 fps)"
 msgstr "Mellan (25 fps)"
@@ -1636,9 +1642,6 @@ msgstr "Inga"
 
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
-
-msgid "Normal"
-msgstr ""
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Inte tillgängligt när du använder en dynamisk spellista"
@@ -2345,6 +2348,10 @@ msgstr "Skrev %1 med lyckat resultat"
 msgid "Summary"
 msgstr ""
 
+#, qt-format
+msgid "Super high (%1 fps)"
+msgstr ""
+
 msgid "Super high (60 fps)"
 msgstr "Super hög (60 fps)"
 
@@ -2748,7 +2755,7 @@ msgstr "Ö-A"
 msgid "Zero"
 msgstr "Noll"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "lägg till %n låtar"
 
@@ -2807,7 +2814,7 @@ msgstr "på"
 msgid "options"
 msgstr "alternativ"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "ta bort %n låtar"
 
