@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-18 10:24+0000\n"
 "Last-Translator: Ernesto Manriquez <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-02-19 06:07+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Language: es_ES\n"
@@ -83,15 +83,15 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -634,8 +634,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
-"todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
+"instalados todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -2214,6 +2214,9 @@ msgstr "Mostrar todas las canciones"
 msgid "Show cover art in library"
 msgstr "Mostrar portadas en la biblioteca"
 
+msgid "Show dividers"
+msgstr ""
+
 msgid "Show fullsize..."
 msgstr "Mostrar carátula..."
 
@@ -2774,7 +2777,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -2833,7 +2836,7 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 

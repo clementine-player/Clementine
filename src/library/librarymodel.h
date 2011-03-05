@@ -133,6 +133,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Whether or not to use album cover art, if it exists, in the library view
   void set_pretty_covers(bool use_pretty_covers);
 
+  //Whether or not to show letters heading in the library view
+  void set_show_dividers(bool show_dividers);
+
  signals:
   void TotalSongCountUpdated(int count);
   void GroupingChanged(const LibraryModel::Grouping& g);
@@ -259,6 +262,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   
   QSize pretty_cover_size_;
   bool use_pretty_covers_;
+  bool show_dividers_;
 };
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);

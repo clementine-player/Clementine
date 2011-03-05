@@ -68,7 +68,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
     init_task_id_(-1),
     pretty_cover_size_(32, 32),
-    use_pretty_covers_(false)
+    use_pretty_covers_(false),
+    show_dividers_(true)
 {
   root_->lazy_loaded = true;
 
@@ -89,6 +90,13 @@ LibraryModel::~LibraryModel() {
 void LibraryModel::set_pretty_covers(bool use_pretty_covers) {
   if (use_pretty_covers != use_pretty_covers_) {
     use_pretty_covers_ = use_pretty_covers;
+    Reset();
+  }
+}
+
+void LibraryModel::set_show_dividers(bool show_dividers) {
+  if (show_dividers != show_dividers_) {
+    show_dividers_ = show_dividers;
     Reset();
   }
 }
@@ -853,7 +861,7 @@ void LibraryModel::FinishItem(GroupBy type,
     endInsertRows();
 
   // Create the divider entry if we're supposed to
-  if (create_divider) {
+  if (create_divider && show_dividers_) {
     QString divider_key = DividerKey(type, item);
     item->sort_text.prepend(divider_key);
 
