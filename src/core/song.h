@@ -149,8 +149,8 @@ class Song {
   void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
 
-  static QString Decode(const TagLib::String& tag, const QTextCodec* codec);
-  static QString Decode(const QString& tag, const QTextCodec* codec);
+  static QString Decode(const TagLib::String& tag, const QTextCodec* codec = NULL);
+  static QString Decode(const QString& tag, const QTextCodec* codec = NULL);
 
   // Save
   void BindToQuery(QSqlQuery* query) const;
@@ -354,6 +354,8 @@ class Song {
 
     // Whether this song was loaded from a file using taglib.
     bool init_from_file_;
+    // Whether our encoding guesser thinks these tags might be incorrectly encoded.
+    bool suspicious_tags_;
   };
 
   void ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec, QString* disc, QString* compilation);

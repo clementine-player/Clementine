@@ -172,7 +172,8 @@ Song::Private::Private()
     ctime_(-1),
     filesize_(-1),
     filetype_(Type_Unknown),
-    init_from_file_(false)
+    init_from_file_(false),
+    suspicious_tags_(false)
 {
 }
 
@@ -289,10 +290,18 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     if (file && (file->ID3v2Tag() || file->ID3v1Tag())) {
       codec = detector.Guess(*fileref);
     }
-    d->title_ = Decode(tag->title(), codec);
-    d->artist_ = Decode(tag->artist(), codec);
-    d->album_ = Decode(tag->album(), codec);
-    d->genre_ = Decode(tag->genre(), codec);
+    if (codec &&
+        codec->name() != "UTF-8" &&
+        codec->name() != "ISO-8859-1") {
+      // Mark tags where we detect an unusual codec as suspicious.
+      d->suspicious_tags_ = true;
+    }
+
+
+    d->title_ = Decode(tag->title());
+    d->artist_ = Decode(tag->artist());
+    d->album_ = Decode(tag->album());
+    d->genre_ = Decode(tag->genre());
     d->year_ = tag->year();
     d->track_ = tag->track();
 
@@ -312,10 +321,10 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
         d->bpm_ = TStringToQString(map["TBPM"].front()->toString()).trimmed().toFloat();
 
       if (!map["TCOM"].isEmpty())
-        d->composer_ = Decode(map["TCOM"].front()->toString(), codec);
+        d->composer_ = Decode(map["TCOM"].front()->toString());
 
       if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
-        d->albumartist_ = Decode(map["TPE2"].front()->toString(), codec);
+        d->albumartist_ = Decode(map["TPE2"].front()->toString());
 
       if (!map["TCMP"].isEmpty())
         compilation = TStringToQString(map["TCMP"].front()->toString()).trimmed();
@@ -329,7 +338,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
             dynamic_cast<const TagLib::ID3v2::CommentsFrame*>(map["COMM"][i]);
 
         if (frame && TStringToQString(frame->description()) != "iTunNORM") {
-          d->comment_ = Decode(frame->text(), codec);
+          d->comment_ = Decode(frame->text());
           break;
         }
       }
@@ -347,16 +356,16 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
     }
   } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
-      ParseOggTag(file->tag()->fieldListMap(), codec, &disc, &compilation);
+      ParseOggTag(file->tag()->fieldListMap(), NULL, &disc, &compilation);
     }
-    d->comment_ = Decode(tag->comment(), codec);
+    d->comment_ = Decode(tag->comment());
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
-      ParseOggTag(file->xiphComment()->fieldListMap(), codec, &disc, &compilation);
+      ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation);
     }
-    d->comment_ = Decode(tag->comment(), codec);
+    d->comment_ = Decode(tag->comment());
   } else if (tag) {
-    d->comment_ = Decode(tag->comment(), codec);
+    d->comment_ = Decode(tag->comment());
   }
 
   if ( !disc.isEmpty() )   {
@@ -438,7 +447,7 @@ void Song::ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* c
 
   if (!map["COMPILATION"].isEmpty() )
     *compilation = TStringToQString( map["COMPILATION"].front() ).trimmed();
-  
+
   if (!map["COVERART"].isEmpty())
     set_embedded_cover();
 }
