@@ -87,7 +87,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline);
 
  public slots:
-  void StartPreloading(const QUrl &);
+  void StartPreloading(const QUrl& url, qint64 beginning_nanosec,
+                       qint64 end_nanosec);
   bool Load(const QUrl&, Engine::TrackChangeType change,
             quint64 beginning_nanosec, qint64 end_nanosec);
   bool Play(quint64 offset_nanosec);
@@ -141,7 +142,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void StopTimers();
 
   boost::shared_ptr<GstEnginePipeline> CreatePipeline();
-  boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url);
+  boost::shared_ptr<GstEnginePipeline> CreatePipeline(const QUrl& url, qint64 end_nanosec);
 
   void UpdateScope();
   qint64 PruneScope();

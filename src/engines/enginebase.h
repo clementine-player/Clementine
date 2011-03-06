@@ -45,7 +45,7 @@ class Base : public QObject, boost::noncopyable {
   virtual bool Init() = 0;
   virtual bool CanDecode(const QUrl &url) = 0;
 
-  virtual void StartPreloading(const QUrl&) {}
+  virtual void StartPreloading(const QUrl&, qint64, qint64) {}
   virtual bool Play(quint64 offset_nanosec) = 0;
   virtual void Stop() = 0;
   virtual void Pause() = 0;

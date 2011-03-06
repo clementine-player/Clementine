@@ -401,7 +401,8 @@ void GstEngine::UpdateScope() {
   }
 }
 
-void GstEngine::StartPreloading(const QUrl& url) {
+void GstEngine::StartPreloading(const QUrl& url, qint64 beginning_nanosec,
+                                qint64 end_nanosec) {
   EnsureInitialised();
 
   QUrl gst_url = FixupUrl(url);
@@ -409,7 +410,7 @@ void GstEngine::StartPreloading(const QUrl& url) {
   if (autocrossfade_enabled_) {
     // Have to create a new pipeline so we can crossfade between the two
 
-    preload_pipeline_ = CreatePipeline(gst_url);
+    preload_pipeline_ = CreatePipeline(gst_url, end_nanosec);
     if (!preload_pipeline_)
       return;
 
@@ -423,7 +424,7 @@ void GstEngine::StartPreloading(const QUrl& url) {
     // No crossfading, so we can just queue the new URL in the existing
     // pipeline and get gapless playback (hopefully)
     if (current_pipeline_)
-      current_pipeline_->SetNextUrl(gst_url);
+      current_pipeline_->SetNextUrl(gst_url, beginning_nanosec, end_nanosec);
   }
 }
 
@@ -473,7 +474,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change,
             SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
             SLOT(NewMetaData(Engine::SimpleMetaBundle)));
   } else {
-    pipeline = CreatePipeline(gst_url);
+    pipeline = CreatePipeline(gst_url, end_nanosec);
     if (!pipeline)
       return false;
   }
@@ -537,7 +538,7 @@ void GstEngine::PlayDone() {
     QUrl redirect_url = current_pipeline_->redirect_url();
     if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
       qDebug() << "Redirecting to" << redirect_url;
-      current_pipeline_ = CreatePipeline(redirect_url);
+      current_pipeline_ = CreatePipeline(redirect_url, end_nanosec_);
       Play(offset_nanosec);
       return;
     }
@@ -687,19 +688,6 @@ void GstEngine::timerEvent(QTimerEvent* e) {
       if (remaining < gap + fudge) {
         EmitAboutToEnd();
       }
-
-      // TODO: the code below stops my test CUE songs about two seconds too late now that
-      // we have nanoseconds; we should find a more clever way to implement this
-      // see issue #1233
-
-      // when at the end, kill the track if it didn't stop yet (probably a
-      // multisection media file).  We add 1 second onto the length during this
-      // check to allow for the fact that the length has been rounded down to
-      // the nearest second, and to stop us from occasionally stopping the
-      // stream just before it ends normally.
-      if(current_position >= current_length + 1000 * kNsecPerMsec) {
-         EndOfStreamReached(current_pipeline_->has_next_valid_url());
-      }
     }
   }
 }
@@ -714,6 +702,10 @@ void GstEngine::HandlePipelineError(const QString& message) {
 
 
 void GstEngine::EndOfStreamReached(bool has_next_track) {
+  GstEnginePipeline* pipeline_sender = qobject_cast<GstEnginePipeline*>(sender());
+  if (!pipeline_sender || pipeline_sender != current_pipeline_.get())
+    return;
+
   if (!has_next_track)
     current_pipeline_.reset();
   ClearScopeBuffers();
@@ -794,7 +786,8 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   return ret;
 }
 
-shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
+shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url,
+                                                        qint64 end_nanosec) {
   shared_ptr<GstEnginePipeline> ret = CreatePipeline();
 
   if (url.scheme() == "hypnotoad") {
@@ -802,7 +795,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url) {
     return ret;
   }
 
-  if (!ret->InitFromUrl(url))
+  if (!ret->InitFromUrl(url, end_nanosec))
     ret.reset();
 
   return ret;
@@ -899,12 +892,12 @@ void GstEngine::BackgroundStreamPlayDone() {
 }
 
 int GstEngine::AddBackgroundStream(const QUrl& url) {
-  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url);
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(url, 0);
   if (!pipeline) {
     return -1;
   }
   pipeline->SetVolume(30);
-  pipeline->SetNextUrl(url);
+  pipeline->SetNextUrl(url, 0, 0);
   return AddBackgroundStream(pipeline);
 }
 
@@ -914,7 +907,7 @@ void GstEngine::StopBackgroundStream(int id) {
 
 void GstEngine::BackgroundStreamFinished() {
   GstEnginePipeline* pipeline = qobject_cast<GstEnginePipeline*>(sender());
-  pipeline->SetNextUrl(pipeline->url());
+  pipeline->SetNextUrl(pipeline->url(), 0, 0);
 }
 
 void GstEngine::SetBackgroundStreamVolume(int id, int volume) {

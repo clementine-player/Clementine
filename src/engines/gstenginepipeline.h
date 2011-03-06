@@ -49,7 +49,7 @@ class GstEnginePipeline : public QObject {
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
 
   // Creates the pipeline, returns false on error
-  bool InitFromUrl(const QUrl& url);
+  bool InitFromUrl(const QUrl& url, qint64 end_nanosec);
   bool InitFromString(const QString& pipeline);
 
   // BufferConsumers get fed audio data.  Thread-safe.
@@ -69,7 +69,7 @@ class GstEnginePipeline : public QObject {
 
   // If this is set then it will be loaded automatically when playback finishes
   // for gapless playback
-  void SetNextUrl(const QUrl& url) { next_url_ = url; }
+  void SetNextUrl(const QUrl& url, qint64 beginning_nanosec, qint64 end_nanosec);
   bool has_next_valid_url() const { return next_url_.isValid(); }
 
   // Get information about the music playback
@@ -120,6 +120,8 @@ class GstEnginePipeline : public QObject {
   bool ReplaceDecodeBin(GstElement* new_bin);
   bool ReplaceDecodeBin(const QUrl& url);
 
+  void TransitionToNext();
+
  private slots:
   void FaderTimelineFinished();
 
@@ -160,6 +162,20 @@ class GstEnginePipeline : public QObject {
   // when the current track is close to finishing.
   QUrl url_;
   QUrl next_url_;
+
+  // If this is > 0 then the pipeline will be forced to stop when playback goes
+  // past this position.
+  qint64 end_offset_nanosec_;
+
+  // We store the beginning and end for the preloading song too, so we can just
+  // carry on without reloading the file if the sections carry on from each
+  // other.
+  qint64 next_beginning_offset_nanosec_;
+  qint64 next_end_offset_nanosec_;
+
+  // Set temporarily when moving to the next contiguous section in a multi-part
+  // file.
+  bool ignore_next_seek_;
 
   // Set temporarily when switching out the decode bin, so metadata doesn't
   // get sent while the Player still thinks it's playing the last song

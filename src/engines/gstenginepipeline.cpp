@@ -49,6 +49,9 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_preamp_(0.0),
     rg_compression_(true),
     buffer_duration_nanosec_(1 * kNsecPerSec),
+    end_offset_nanosec_(-1),
+    next_beginning_offset_nanosec_(-1),
+    next_end_offset_nanosec_(-1),
     ignore_tags_(false),
     volume_percent_(100),
     volume_modifier_(1.0),
@@ -237,10 +240,11 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
   return gst_element_link(new_bin, audiobin_);
 }
 
-bool GstEnginePipeline::InitFromUrl(const QUrl &url) {
+bool GstEnginePipeline::InitFromUrl(const QUrl &url, qint64 end_nanosec) {
   pipeline_ = gst_pipeline_new("pipeline");
 
   url_ = url;
+  end_offset_nanosec_ = end_nanosec;
 
   // Decode bin
   if (!ReplaceDecodeBin(url)) return false;
@@ -401,6 +405,40 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
     consumer->ConsumeBuffer(buf, instance);
   }
 
+  // Calculate the end time of this buffer so we can stop playback if it's
+  // after the end time of this song.
+  if (instance->end_offset_nanosec_ > 0) {
+    quint64 start_time = GST_BUFFER_TIMESTAMP(buf) - instance->segment_start_;
+    quint64 duration = GST_BUFFER_DURATION(buf);
+    quint64 end_time = start_time + duration;
+
+    if (end_time > instance->end_offset_nanosec_) {
+      if (instance->has_next_valid_url()) {
+        if (instance->next_url_ == instance->url_ &&
+            instance->next_beginning_offset_nanosec_ == instance->end_offset_nanosec_) {
+          // The "next" song is actually the next segment of this file - so
+          // cheat and keep on playing, but just tell the Engine we've moved on.
+          instance->end_offset_nanosec_ = instance->next_end_offset_nanosec_;
+          instance->next_url_ = QUrl();
+          instance->next_beginning_offset_nanosec_ = 0;
+          instance->next_end_offset_nanosec_ = 0;
+
+          // GstEngine will try to seek to the start of the new section, but
+          // we're already there so ignore it.
+          instance->ignore_next_seek_ = true;
+
+          emit instance->EndOfStreamReached(true);
+        } else {
+          // We have a next song but we can't cheat, so move to it normally.
+          instance->TransitionToNext();
+        }
+      } else {
+        // There's no next song
+        emit instance->EndOfStreamReached(false);
+      }
+    }
+  }
+
   return true;
 }
 
@@ -423,25 +461,32 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
   if (instance->has_next_valid_url()) {
-    GstElement* old_decode_bin = instance->uridecodebin_;
-
-    instance->ignore_tags_ = true;
-
-    instance->ReplaceDecodeBin(instance->next_url_);
-    gst_element_set_state(instance->uridecodebin_, GST_STATE_PLAYING);
-
-    instance->url_ = instance->next_url_;
-    instance->next_url_ = QUrl();
-
-    // This just tells the UI that we've moved on to the next song
-    emit instance->EndOfStreamReached(true);
-
-    // This has to happen *after* the gst_element_set_state on the new bin to
-    // fix an occasional race condition deadlock.
-    sElementDeleter->DeleteElementLater(old_decode_bin);
-
-    instance->ignore_tags_ = false;
+    instance->TransitionToNext();
   }
+}
+
+void GstEnginePipeline::TransitionToNext() {
+  GstElement* old_decode_bin = uridecodebin_;
+
+  ignore_tags_ = true;
+
+  ReplaceDecodeBin(next_url_);
+  gst_element_set_state(uridecodebin_, GST_STATE_PLAYING);
+
+  url_ = next_url_;
+  end_offset_nanosec_ = next_end_offset_nanosec_;
+  next_url_ = QUrl();
+  next_beginning_offset_nanosec_ = 0;
+  next_end_offset_nanosec_ = 0;
+
+  // This just tells the UI that we've moved on to the next song
+  emit EndOfStreamReached(true);
+
+  // This has to happen *after* the gst_element_set_state on the new bin to
+  // fix an occasional race condition deadlock.
+  sElementDeleter->DeleteElementLater(old_decode_bin);
+
+  ignore_tags_ = false;
 }
 
 qint64 GstEnginePipeline::position() const {
@@ -476,6 +521,11 @@ QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
 }
 
 bool GstEnginePipeline::Seek(qint64 nanosec) {
+  if (ignore_next_seek_) {
+    ignore_next_seek_ = false;
+    return true;
+  }
+
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
 }
@@ -585,4 +635,12 @@ void GstEnginePipeline::RemoveBufferConsumer(BufferConsumer *consumer) {
 void GstEnginePipeline::RemoveAllBufferConsumers() {
   QMutexLocker l(&buffer_consumers_mutex_);
   buffer_consumers_.clear();
+}
+
+void GstEnginePipeline::SetNextUrl(const QUrl& url,
+                                   qint64 beginning_nanosec,
+                                   qint64 end_nanosec) {
+  next_url_ = url;
+  next_beginning_offset_nanosec_ = beginning_nanosec;
+  next_end_offset_nanosec_ = end_nanosec;
 }

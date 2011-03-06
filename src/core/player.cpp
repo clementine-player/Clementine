@@ -437,6 +437,7 @@ void Player::TrackAboutToEnd() {
         break;
       }
     }
-    engine_->StartPreloading(url);
+    engine_->StartPreloading(url, next_item_->Metadata().beginning_nanosec(),
+                             next_item_->Metadata().end_nanosec());
   }
 }
