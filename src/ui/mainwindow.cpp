@@ -492,6 +492,10 @@ MainWindow::MainWindow(
   ui_->action_shuffle->setShortcut(QKeySequence());
 #endif
 
+  // We have to add the actions on the playlist menu to this QWidget otherwise
+  // their shortcut keys don't work
+  addActions(playlist_menu_->actions());
+
   connect(ui_->playlist, SIGNAL(UndoRedoActionsChanged(QAction*,QAction*)),
           SLOT(PlaylistUndoRedoChanged(QAction*,QAction*)));
 
