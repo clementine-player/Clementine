@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:43+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:51+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 temes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 mòdul Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restants"
 
@@ -158,8 +158,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album "
+"%title </p>\n"
 "\n"
 "<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
 "remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
@@ -589,6 +589,9 @@ msgstr "Comentari"
 msgid "Complete tags automatically"
 msgstr ""
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Compositor"
 
@@ -726,6 +729,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Personalitzat"
@@ -1118,9 +1124,6 @@ msgstr "Motor d'audio GStreamer"
 msgid "General settings"
 msgstr "Arranjaments generals"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr ""
-
 msgid "Genre"
 msgstr "Gènere"
 
@@ -1202,6 +1205,9 @@ msgstr "Icona"
 
 msgid "Icons on top"
 msgstr "icones a la part superior"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1728,6 +1734,9 @@ msgstr "Organitza fitxers..."
 msgid "Organising files"
 msgstr "Organitzant fitxers"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Altres opcions"
 
@@ -2029,9 +2038,6 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Limitar als caràcters ASCII"
 
-msgid "Results fetched"
-msgstr ""
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2209,6 +2215,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Mostra a mida completa..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Mostra a Artiste"
 
@@ -2349,6 +2358,9 @@ msgstr ""
 msgid "Successfully written %1"
 msgstr "Escrit satisfactòriament %1"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr ""
 
@@ -2367,6 +2379,9 @@ msgstr ""
 
 msgid "Tag"
 msgstr "Etiqueta"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Ràdio d'etiquetes"
@@ -2752,7 +2767,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "afegeix %n cançons"
 
@@ -2811,7 +2826,7 @@ msgstr ""
 msgid "options"
 msgstr "opcions"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimina %n cançons"
 

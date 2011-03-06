@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-19 14:46+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "X-Launchpad-Export-Date: 2011-02-20 05:10+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 track"
 msgid "%1: Wiimotedev module"
 msgstr "%1: mô-đun Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -580,6 +580,9 @@ msgstr "Lời bình"
 msgid "Complete tags automatically"
 msgstr "Tự động gán thẻ"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Người sáng tác"
 
@@ -717,6 +720,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Tuỳ chọn"
@@ -1110,9 +1116,6 @@ msgstr "Engine âm thanh GStreamer"
 msgid "General settings"
 msgstr "Thiết lập chung"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Tạo dấu hiệu cho âm thanh và lấy kết quả..."
-
 msgid "Genre"
 msgstr "Thể loại"
 
@@ -1192,6 +1195,9 @@ msgstr "Biểu tượng"
 
 msgid "Icons on top"
 msgstr "Biểu tượng ở trên cùng"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1722,6 +1728,9 @@ msgstr "Tổ chức các tập tin..."
 msgid "Organising files"
 msgstr "Tổ chức các tập tin"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Các tuỳ chọn khác"
 
@@ -2023,9 +2032,6 @@ msgstr "Đặt lại bộ đếm lần phát"
 msgid "Restrict to ASCII characters"
 msgstr "Phải dùng kí tự mã ASCII"
 
-msgid "Results fetched"
-msgstr "Kết quả nhận được"
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2203,6 +2209,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Hiện với kích thước đầy đủ..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Hiển thị bài của nhiều nghệ sĩ"
 
@@ -2344,6 +2353,9 @@ msgstr "Truyền tải thông tin thành viên"
 msgid "Successfully written %1"
 msgstr "Đã ghi vào %1"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Tóm tắt"
 
@@ -2362,6 +2374,9 @@ msgstr "Các thanh ở phía trên"
 
 msgid "Tag"
 msgstr "Thẻ"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Thẻ ra-đi-ô"
@@ -2759,7 +2774,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -2818,7 +2833,7 @@ msgstr "bật"
 msgid "options"
 msgstr "tùy chọn"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 
@@ -2837,6 +2852,12 @@ msgstr "dừng"
 #, qt-format
 msgid "track %1"
 msgstr "bài hát %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Tạo dấu hiệu cho âm thanh và lấy kết quả..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Kết quả nhận được"
 
 #~ msgid "Help"
 #~ msgstr "Trợ giúp"

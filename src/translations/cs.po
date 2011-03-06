@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-18 22:22+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 "X-Launchpad-Export-Date: 2011-02-19 06:06+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Language: cs_CZ\n"
@@ -84,15 +84,15 @@ msgstr "%1 skladeb"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "nepodařilo se %n"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "dokončeno %n"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "zůstávají %n"
 
@@ -583,6 +583,9 @@ msgstr "Poznámka"
 msgid "Complete tags automatically"
 msgstr "Doplnit značky automaticky"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Skladatel"
 
@@ -720,6 +723,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Vlastní"
@@ -1112,9 +1118,6 @@ msgstr "Zvukový systém GStreamer"
 msgid "General settings"
 msgstr "Obecná nastavení"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Probíhá identifikace stopy a stahování výsledků..."
-
 msgid "Genre"
 msgstr "Žánr"
 
@@ -1194,6 +1197,9 @@ msgstr "Ikona"
 
 msgid "Icons on top"
 msgstr "Ikony nahoře"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1725,6 +1731,9 @@ msgstr "Uspořádat soubory..."
 msgid "Organising files"
 msgstr "Uspořádávají se soubory"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Další volby"
 
@@ -2026,9 +2035,6 @@ msgstr "Vynulovat počty přehrání"
 msgid "Restrict to ASCII characters"
 msgstr "Omezit na znaky &ASCII"
 
-msgid "Results fetched"
-msgstr "Výsledky staženy"
-
 msgid "Rock"
 msgstr "Rocková hudba"
 
@@ -2206,6 +2212,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Ukázat v plné velikosti..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Ukázat pod různými umělci"
 
@@ -2347,6 +2356,9 @@ msgstr "bez stahování (pouze přehrávání)"
 msgid "Successfully written %1"
 msgstr "%1 úspěšně zapsán"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Shrnutí"
 
@@ -2365,6 +2377,9 @@ msgstr "Karty nahoře"
 
 msgid "Tag"
 msgstr "Označit"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Rádio se značkou"
@@ -2761,7 +2776,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "přidat %n písniček"
 
@@ -2820,7 +2835,7 @@ msgstr "Na"
 msgid "options"
 msgstr "Volby"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstranit %n písniček"
 
@@ -2839,6 +2854,12 @@ msgstr "Zastavit"
 #, qt-format
 msgid "track %1"
 msgstr "Skladba %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Probíhá identifikace stopy a stahování výsledků..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Výsledky staženy"
 
 #~ msgid "&Show tray icon"
 #~ msgstr "Zobrazit ikonu v &systémovém panelu"

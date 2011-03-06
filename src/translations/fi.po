@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:36+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:51+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 kappaletta"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n epäonnistui"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n valmistui"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n jäljellä"
 
@@ -570,6 +570,9 @@ msgstr "Kommentti"
 msgid "Complete tags automatically"
 msgstr ""
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Säveltäjä"
 
@@ -701,6 +704,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Oma"
@@ -1090,9 +1096,6 @@ msgstr "GStreamer-äänijärjestelmä"
 msgid "General settings"
 msgstr "Yleiset asetukset"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Luodaan sormenjälkeä ja haetaan tuloksia..."
-
 msgid "Genre"
 msgstr "Tyylilaji"
 
@@ -1172,6 +1175,9 @@ msgstr "Kuvake"
 
 msgid "Icons on top"
 msgstr "Kuvakkeet ylhäällä"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1699,6 +1705,9 @@ msgstr "Hallitse tiedostoja..."
 msgid "Organising files"
 msgstr "Hallinnoidaan tiedostoja"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Muut valinnat"
 
@@ -2000,9 +2009,6 @@ msgstr "Nollaa soittokerrat"
 msgid "Restrict to ASCII characters"
 msgstr "Rajoita ASCII-merkkeihin"
 
-msgid "Results fetched"
-msgstr ""
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2180,6 +2186,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Näytä oikeassa koossa..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr ""
 
@@ -2320,6 +2329,9 @@ msgstr ""
 msgid "Successfully written %1"
 msgstr ""
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Yhteenveto"
 
@@ -2338,6 +2350,9 @@ msgstr "Välilehdet ylhäällä"
 
 msgid "Tag"
 msgstr "Tunniste"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr ""
@@ -2719,7 +2734,7 @@ msgstr "Ö-A"
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "lisää %n kappaletta"
 
@@ -2778,7 +2793,7 @@ msgstr ""
 msgid "options"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "poista %n kappaletta"
 
@@ -2797,6 +2812,9 @@ msgstr "pysäytä"
 #, qt-format
 msgid "track %1"
 msgstr "kappale %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Luodaan sormenjälkeä ja haetaan tuloksia..."
 
 #~ msgid "Hide %1"
 #~ msgstr "Piilota %1"

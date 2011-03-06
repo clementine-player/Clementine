@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-04 01:48+0000\n"
 "Last-Translator: Arnaud Bienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-02-21 05:08+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Language: fr_FR\n"
@@ -83,15 +83,15 @@ msgstr "%1 pistes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 : Module wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n échoué"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n terminé"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n manquant"
 
@@ -593,6 +593,9 @@ msgstr "Commentaire"
 msgid "Complete tags automatically"
 msgstr "Compléter les tags automatiquement"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Compositeur"
 
@@ -730,6 +733,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Personnalisé"
@@ -1127,9 +1133,6 @@ msgstr "Moteur audio GStreamer"
 msgid "General settings"
 msgstr "Configuration générale"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Génération de l'empreinte audio et recherche des résultats"
-
 msgid "Genre"
 msgstr "Genre"
 
@@ -1211,6 +1214,9 @@ msgstr "Icône"
 
 msgid "Icons on top"
 msgstr "Icônes au dessus"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1746,6 +1752,9 @@ msgstr "Organisation des fichiers..."
 msgid "Organising files"
 msgstr "Organisation des fichiers"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Autres options"
 
@@ -2047,9 +2056,6 @@ msgstr "Réinitialiser le compteur de lecture"
 msgid "Restrict to ASCII characters"
 msgstr "Limiter aux caractères ASCII"
 
-msgid "Results fetched"
-msgstr "Résultats trouvés"
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2227,6 +2233,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Afficher en taille réelle..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Classer dans la catégorie « Compilations d'artistes »"
 
@@ -2369,6 +2378,9 @@ msgstr "Membres de streaming"
 msgid "Successfully written %1"
 msgstr "%1 écrit avec succès"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Résumé"
 
@@ -2387,6 +2399,9 @@ msgstr "Onglets au dessus"
 
 msgid "Tag"
 msgstr "Tag"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Radio par tag"
@@ -2794,7 +2809,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zéro"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "ajouter %n morceaux"
 
@@ -2853,7 +2868,7 @@ msgstr "sur"
 msgid "options"
 msgstr "options"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "enlever %n morceaux"
 
@@ -2872,6 +2887,12 @@ msgstr "stop"
 #, qt-format
 msgid "track %1"
 msgstr "piste %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Génération de l'empreinte audio et recherche des résultats"
+
+#~ msgid "Results fetched"
+#~ msgstr "Résultats trouvés"
 
 #~ msgid "High"
 #~ msgstr "Élevé"

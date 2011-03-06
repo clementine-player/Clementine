@@ -92,6 +92,7 @@ class LibraryView : public AutoExpandingTreeView {
   void mouseReleaseEvent(QMouseEvent* e);
   void contextMenuEvent(QContextMenuEvent* e);
   void keyPressEvent(QKeyEvent* e);
+  void mousePressEvent(QMouseEvent* e);
 
  private slots:
   void Load();

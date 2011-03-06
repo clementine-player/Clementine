@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-18 12:25+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
 "X-Launchpad-Export-Date: 2011-02-19 06:07+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: CROATIA\n"
@@ -84,15 +84,15 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -586,6 +586,9 @@ msgstr "Komentar"
 msgid "Complete tags automatically"
 msgstr "Završi oznake automatski"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Kompozitor"
 
@@ -723,6 +726,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Prilagođeno"
@@ -1114,9 +1120,6 @@ msgstr "GStreamer audio engine"
 msgid "General settings"
 msgstr "Opće postavke"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Generiranje audio otisaka i preuzimanje rezultata..."
-
 msgid "Genre"
 msgstr "Vrsta glazbe"
 
@@ -1196,6 +1199,9 @@ msgstr "Ikona"
 
 msgid "Icons on top"
 msgstr "Ikona na vrh"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1725,6 +1731,9 @@ msgstr "Organizirajte datoteke..."
 msgid "Organising files"
 msgstr "Organiziranje datoteka"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Druge opcije"
 
@@ -2026,9 +2035,6 @@ msgstr "Poništite broj izvođenja"
 msgid "Restrict to ASCII characters"
 msgstr "Ograniči na ASCII znakove"
 
-msgid "Results fetched"
-msgstr "Zahtjevi su dohvaćeni"
-
 msgid "Rock"
 msgstr ""
 
@@ -2206,6 +2212,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Prikaži u punoj veličini..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Prikaži u različitim izvođačima"
 
@@ -2346,6 +2355,9 @@ msgstr "Streaming račun"
 msgid "Successfully written %1"
 msgstr "Uspješno zapisano %1"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Sažetak"
 
@@ -2364,6 +2376,9 @@ msgstr "Kartice pri vrhu"
 
 msgid "Tag"
 msgstr "Oznake"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Označi radio"
@@ -2761,7 +2776,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -2820,7 +2835,7 @@ msgstr "na"
 msgid "options"
 msgstr "opcije"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 
@@ -2839,6 +2854,12 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "pjesma %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Generiranje audio otisaka i preuzimanje rezultata..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Zahtjevi su dohvaćeni"
 
 #~ msgid "Editing %n tracks"
 #~ msgstr "uređivanje %n pjesama"

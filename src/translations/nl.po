@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-18 12:02+0000\n"
 "Last-Translator: Cugel <hulshof@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "X-Launchpad-Export-Date: 2011-02-19 06:06+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 nummers"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n mislukt"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n voltooid"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n te gaan"
 
@@ -587,6 +587,9 @@ msgstr "Opmerking"
 msgid "Complete tags automatically"
 msgstr "Tags automatisch voltooien"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Componist"
 
@@ -724,6 +727,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Aangepast"
@@ -1117,9 +1123,6 @@ msgstr "GStreamer audio engine"
 msgid "General settings"
 msgstr "Algemene instellingen"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Aanmaken van de audio vingerafdruk en ophalen resultaten..."
-
 msgid "Genre"
 msgstr "Genre"
 
@@ -1200,6 +1203,9 @@ msgstr "Pictogram"
 
 msgid "Icons on top"
 msgstr "Iconen bovenaan"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1730,6 +1736,9 @@ msgstr "Bestanden sorteren..."
 msgid "Organising files"
 msgstr "Bestanden sorteren"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Overige opties"
 
@@ -2031,9 +2040,6 @@ msgstr ""
 msgid "Restrict to ASCII characters"
 msgstr "Beperken tot ASCII karakters"
 
-msgid "Results fetched"
-msgstr "Resultaten opgehaald"
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2211,6 +2217,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Volledig weergeven..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "In diverse artiesten weergeven"
 
@@ -2353,6 +2362,9 @@ msgstr "Streaming lidmaatschap"
 msgid "Successfully written %1"
 msgstr "%1 met succes weggeschreven"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Samenvatting"
 
@@ -2371,6 +2383,9 @@ msgstr "Tabs bovenaan"
 
 msgid "Tag"
 msgstr "Tag"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Tag radio"
@@ -2772,7 +2787,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n nummers toevoegen"
 
@@ -2831,7 +2846,7 @@ msgstr "aan"
 msgid "options"
 msgstr "opties"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n nummers verwijderen"
 
@@ -2850,6 +2865,12 @@ msgstr "stoppen"
 #, qt-format
 msgid "track %1"
 msgstr "track %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Aanmaken van de audio vingerafdruk en ophalen resultaten..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Resultaten opgehaald"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"

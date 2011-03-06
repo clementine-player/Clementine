@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:52+0000\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:53+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 首"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii 遥控器设备模块"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 失败"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 完成"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 剩余"
 
@@ -570,6 +570,9 @@ msgstr "备注"
 msgid "Complete tags automatically"
 msgstr ""
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "作曲"
 
@@ -701,6 +704,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "自定义"
@@ -1089,9 +1095,6 @@ msgstr "GStreamer 音频引擎"
 msgid "General settings"
 msgstr "常规设置"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr ""
-
 msgid "Genre"
 msgstr "流派"
 
@@ -1171,6 +1174,9 @@ msgstr "图标"
 
 msgid "Icons on top"
 msgstr "图标在上"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1693,6 +1699,9 @@ msgstr "组织文件..."
 msgid "Organising files"
 msgstr "组织文件"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "其它选项"
 
@@ -1994,9 +2003,6 @@ msgstr "重置播放计数"
 msgid "Restrict to ASCII characters"
 msgstr "仅使用 ASCII 字符"
 
-msgid "Results fetched"
-msgstr ""
-
 msgid "Rock"
 msgstr "摇滚"
 
@@ -2174,6 +2180,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "显示完整尺寸..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "在群星中显示"
 
@@ -2314,6 +2323,9 @@ msgstr ""
 msgid "Successfully written %1"
 msgstr "成功写入 %1"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr ""
 
@@ -2332,6 +2344,9 @@ msgstr "标签在上"
 
 msgid "Tag"
 msgstr "标签"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr ""
@@ -2701,7 +2716,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "00"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "添加 %n 首曲目"
 
@@ -2760,7 +2775,7 @@ msgstr ""
 msgid "options"
 msgstr "选项"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 

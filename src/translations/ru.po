@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:42+0000\n"
 "Last-Translator: wayman <kotpes@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "X-Launchpad-Export-Date: 2011-02-18 04:52+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -81,15 +81,15 @@ msgstr "%1 композиций"
 msgid "%1: Wiimotedev module"
 msgstr "%1: модуль Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -582,6 +582,9 @@ msgstr "Комментарий"
 msgid "Complete tags automatically"
 msgstr "Автоматически заполнять тэги"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Композитор"
 
@@ -719,6 +722,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "Пользовательский"
@@ -1111,9 +1117,6 @@ msgstr "Движок аудио GStreamer"
 msgid "General settings"
 msgstr "Общие настройки"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Генерация отпечатка аудиофайла и поиск результатов..."
-
 msgid "Genre"
 msgstr "Жанр"
 
@@ -1193,6 +1196,9 @@ msgstr "Значок"
 
 msgid "Icons on top"
 msgstr "Иконки вверху"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1724,6 +1730,9 @@ msgstr "Упорядочить файлы..."
 msgid "Organising files"
 msgstr "Организация файлов"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Другие настройки"
 
@@ -2025,9 +2034,6 @@ msgstr "Сбросить счётчики воспроизведения"
 msgid "Restrict to ASCII characters"
 msgstr "Ограничить только символами ASCII"
 
-msgid "Results fetched"
-msgstr "Получены результаты"
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2205,6 +2211,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Показать полный размер..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Показать в \"Разных исполнителях\""
 
@@ -2346,6 +2355,9 @@ msgstr "\"Streaming\" подписка"
 msgid "Successfully written %1"
 msgstr "Успешно записано %1"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Сводка"
 
@@ -2364,6 +2376,9 @@ msgstr "Вкладки вверху"
 
 msgid "Tag"
 msgstr "Тег"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Радио тега"
@@ -2763,7 +2778,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "По-умолчанию"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -2822,7 +2837,7 @@ msgstr "на"
 msgid "options"
 msgstr "настройки"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 
@@ -2841,6 +2856,12 @@ msgstr "Остановить"
 #, qt-format
 msgid "track %1"
 msgstr "композиция %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Генерация отпечатка аудиофайла и поиск результатов..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Получены результаты"
 
 #~ msgid "Hide..."
 #~ msgstr "Скрыть..."

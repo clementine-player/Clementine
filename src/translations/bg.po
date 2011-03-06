@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-20 10:15+0000\n"
 "Last-Translator: George Karavasilev <kokoto_java@yahoo.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bg\n"
 "X-Launchpad-Export-Date: 2011-02-21 05:08+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 песни"
 msgid "%1: Wiimotedev module"
 msgstr "%1:Wiimotedev модул"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завършено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n оставащо"
 
@@ -581,6 +581,9 @@ msgstr "Коментар"
 msgid "Complete tags automatically"
 msgstr "Попълвай таговете автоматично"
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "Композитор"
 
@@ -719,6 +722,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "По избор"
@@ -1111,9 +1117,6 @@ msgstr "GStreamer аудио двигател"
 msgid "General settings"
 msgstr "Общи настройки"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr "Генериране на звуков отпечатък и получаване на резултатите..."
-
 msgid "Genre"
 msgstr "Жанр"
 
@@ -1194,6 +1197,9 @@ msgstr "Икона"
 
 msgid "Icons on top"
 msgstr "Иконите отгоре"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1728,6 +1734,9 @@ msgstr "Организиране на файлове..."
 msgid "Organising files"
 msgstr "Файловете се организират"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "Други настройки"
 
@@ -2029,9 +2038,6 @@ msgstr "Нулирай пътите пускане"
 msgid "Restrict to ASCII characters"
 msgstr "Само ASCII символи"
 
-msgid "Results fetched"
-msgstr "Резултатите получени"
-
 msgid "Rock"
 msgstr "Рок"
 
@@ -2209,6 +2215,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "Покажи в пълен размер..."
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "Показвай в смесени артисти"
 
@@ -2350,6 +2359,9 @@ msgstr "Членство за слушане"
 msgid "Successfully written %1"
 msgstr "Успешно записан %1"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "Резюме"
 
@@ -2368,6 +2380,9 @@ msgstr "Табовете отгоре"
 
 msgid "Tag"
 msgstr "Етикет"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "Етикет на радио"
@@ -2770,7 +2785,7 @@ msgstr "Я-А"
 msgid "Zero"
 msgstr "Нула"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавете %n песни"
 
@@ -2829,7 +2844,7 @@ msgstr "вкл."
 msgid "options"
 msgstr "опции"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "премахване на %n песни"
 
@@ -2848,6 +2863,12 @@ msgstr "Стоп"
 #, qt-format
 msgid "track %1"
 msgstr "песен %1"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Генериране на звуков отпечатък и получаване на резултатите..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Резултатите получени"
 
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "Не може да бъде заредена last.fm радио станция: %1"

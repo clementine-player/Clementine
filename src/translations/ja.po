@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:49+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-02-18 04:52+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 
@@ -82,15 +82,15 @@ msgstr "%1 個のトラック"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev モジュール"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 曲失敗しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n が完了しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 曲残っています"
 
@@ -578,6 +578,9 @@ msgstr "コメント"
 msgid "Complete tags automatically"
 msgstr ""
 
+msgid "Complete tags automatically..."
+msgstr ""
+
 msgid "Composer"
 msgstr "作曲者"
 
@@ -716,6 +719,9 @@ msgstr "Ctrl+Shift+A"
 
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
+
+msgid "Ctrl+T"
+msgstr ""
 
 msgid "Custom"
 msgstr "カスタム"
@@ -1108,9 +1114,6 @@ msgstr "GStreamer オーディオ エンジン"
 msgid "General settings"
 msgstr "全般設定"
 
-msgid "Generating audio fingerprint and fetching results..."
-msgstr ""
-
 msgid "Genre"
 msgstr "ジャンル"
 
@@ -1190,6 +1193,9 @@ msgstr "アイコン"
 
 msgid "Icons on top"
 msgstr "アイコンを上に配置"
+
+msgid "Identifying song..."
+msgstr ""
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1720,6 +1726,9 @@ msgstr "ファイルの整理..."
 msgid "Organising files"
 msgstr "ファイルの整理中"
 
+msgid "Original tags"
+msgstr ""
+
 msgid "Other options"
 msgstr "その他のオプション"
 
@@ -2021,9 +2030,6 @@ msgstr "最整数のリセット"
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 文字に限定する"
 
-msgid "Results fetched"
-msgstr ""
-
 msgid "Rock"
 msgstr "Rock"
 
@@ -2201,6 +2207,9 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr "原寸表示"
 
+msgid "Show in file browser..."
+msgstr ""
+
 msgid "Show in various artists"
 msgstr "さまざまなアーティストに表示する"
 
@@ -2341,6 +2350,9 @@ msgstr "ストリーミングのメンバーシップ"
 msgid "Successfully written %1"
 msgstr "%1 の書き込みに成功しました"
 
+msgid "Suggested tags"
+msgstr ""
+
 msgid "Summary"
 msgstr "要約"
 
@@ -2359,6 +2371,9 @@ msgstr "タブを上に配置"
 
 msgid "Tag"
 msgstr "タグ"
+
+msgid "Tag fetcher"
+msgstr ""
 
 msgid "Tag radio"
 msgstr "タグ ラジオ"
@@ -2750,7 +2765,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 曲追加"
 
@@ -2809,7 +2824,7 @@ msgstr "on"
 msgid "options"
 msgstr "オプション"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 曲削除"
 
