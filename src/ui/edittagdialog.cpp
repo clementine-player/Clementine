@@ -64,8 +64,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)),
           results_dialog_, SLOT(FetchTagFinished(QString, SongList)),
           Qt::QueuedConnection);
-  connect(results_dialog_, SIGNAL(SongChosen(QString, Song)),
-          SLOT(FetchTagSongChosen(QString, Song)));
+  connect(results_dialog_, SIGNAL(SongChosen(Song, Song)),
+          SLOT(FetchTagSongChosen(Song, Song)));
 #endif
 
   ui_->setupUi(this);
@@ -708,7 +708,8 @@ void EditTagDialog::FetchTag() {
 #endif
 }
 
-void EditTagDialog::FetchTagSongChosen(const QString& filename, const Song& new_metadata) {
+void EditTagDialog::FetchTagSongChosen(const Song& original_song, const Song& new_metadata) {
+  const QString filename = original_song.filename();
 
   // Find the song with this filename
   for (int i=0 ; i<data_.count() ; ++i) {

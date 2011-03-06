@@ -19,13 +19,16 @@
 #include "trackselectiondialog.h"
 
 #include <QFileInfo>
+#include <QFutureWatcher>
 #include <QPushButton>
 #include <QShortcut>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 TrackSelectionDialog::TrackSelectionDialog(QWidget *parent)
   : QDialog(parent),
-    ui_(new Ui_TrackSelectionDialog)
+    ui_(new Ui_TrackSelectionDialog),
+    save_on_close_(false)
 {
   // Setup dialog window
   ui_->setupUi(this);
@@ -35,6 +38,7 @@ TrackSelectionDialog::TrackSelectionDialog(QWidget *parent)
           SLOT(ResultSelected()));
 
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
+  SetLoading(QString());
 
   // Add the next/previous buttons
   previous_button_ = new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
@@ -188,15 +192,66 @@ void TrackSelectionDialog::ResultSelected() {
   data_[song_row].selected_result_ = result_index;
 }
 
+void TrackSelectionDialog::SetLoading(const QString& message) {
+  const bool loading = !message.isEmpty();
+
+  ui_->loading_container->setVisible(loading);
+  ui_->button_box->setEnabled(!loading);
+  ui_->splitter->setEnabled(!loading);
+  ui_->loading_label->setText(message);
+}
+
+void TrackSelectionDialog::SaveData(const QList<Data>& data) {
+  for (int i=0 ; i<data.count() ; ++i) {
+    const Data& ref = data[i];
+    if (ref.pending_ || ref.results_.isEmpty() || ref.selected_result_ == -1)
+      continue;
+
+    const Song& new_metadata = ref.results_[ref.selected_result_];
+
+    Song copy(ref.original_song_);
+    copy.set_title(new_metadata.title());
+    copy.set_artist(new_metadata.artist());
+    copy.set_album(new_metadata.album());
+    copy.set_track(new_metadata.track());
+
+    copy.Save();
+  }
+}
+
 void TrackSelectionDialog::accept() {
+  if (save_on_close_) {
+    SetLoading(tr("Saving tracks") + "...");
+
+    // Save tags in the background
+    QFuture<void> future = QtConcurrent::run(&TrackSelectionDialog::SaveData, data_);
+    QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
+    watcher->setFuture(future);
+    connect(watcher, SIGNAL(finished()), SLOT(AcceptFinished()));
+
+    return;
+  }
+
   QDialog::accept();
 
   foreach (const Data& data, data_) {
     if (data.pending_ || data.results_.isEmpty() || data.selected_result_ == -1)
       continue;
 
-    emit SongChosen(data.original_song_.filename(), data.results_[data.selected_result_]);
+    const Song& new_metadata = data.results_[data.selected_result_];
+
+    emit SongChosen(data.original_song_, new_metadata);
   }
+}
+
+void TrackSelectionDialog::AcceptFinished() {
+  QFutureWatcher<void>* watcher = dynamic_cast<QFutureWatcher<void>*>(sender());
+  if (!watcher)
+    return;
+  watcher->deleteLater();
+
+  SetLoading(QString());
+  QDialog::accept();
 }
 
 void TrackSelectionDialog::NextSong() {

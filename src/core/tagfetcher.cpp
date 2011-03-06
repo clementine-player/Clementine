@@ -57,7 +57,6 @@ TagFetcher::TagFetcher(QObject *parent)
 }
 
 TagFetcher::~TagFetcher() {
-  delete network_;
   tp_Delete(pimp_);
 }
 

@@ -32,6 +32,8 @@ public:
   TrackSelectionDialog(QWidget *parent = 0);
   ~TrackSelectionDialog();
 
+  void set_save_on_close(bool save_on_close) { save_on_close_ = save_on_close; }
+
   void Init(const SongList& songs);
 
 public slots:
@@ -41,7 +43,7 @@ public slots:
   void accept();
 
 signals:
-  void SongChosen(const QString& filename, const Song& song);
+  void SongChosen(const Song& original_song, const Song& new_metadata);
 
 private slots:
   void UpdateStack();
@@ -50,10 +52,7 @@ private slots:
   void PreviousSong();
 
   void ResultSelected();
-
-private:
-  void AddDivider(const QString& text, QTreeWidget* parent) const;
-  void AddSong(const Song& song, int result_index, QTreeWidget* parent) const;
+  void AcceptFinished();
 
 private:
   Ui_TrackSelectionDialog* ui_;
@@ -67,10 +66,19 @@ private:
     int selected_result_;
   };
 
+  void AddDivider(const QString& text, QTreeWidget* parent) const;
+  void AddSong(const Song& song, int result_index, QTreeWidget* parent) const;
+
+  void SetLoading(const QString& message);
+  static void SaveData(const QList<Data>& data);
+
+private:
   QList<Data> data_;
 
   QPushButton* previous_button_;
   QPushButton* next_button_;
+
+  bool save_on_close_;
 };
 
 #endif // TRACKSELECTIONDIALOG_H

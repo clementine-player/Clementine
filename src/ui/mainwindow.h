@@ -66,7 +66,9 @@ class Song;
 class SongInfoBase;
 class SongInfoView;
 class SystemTrayIcon;
+class TagFetcher;
 class TaskManager;
+class TrackSelectionDialog;
 class TranscodeDialog;
 class VisualisationContainer;
 class WiimotedevShortcuts;
@@ -157,6 +159,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void RenumberTracks();
   void SelectionSetValue();
   void EditValue();
+  void AutoCompleteTags();
+  void AutoCompleteTagsAccepted();
   void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
 
   void PlaylistCopyToLibrary();
@@ -283,6 +287,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<OrganiseDialog> organise_dialog_;
   boost::scoped_ptr<QueueManager> queue_manager_;
 
+  boost::scoped_ptr<TagFetcher> tag_fetcher_;
+  boost::scoped_ptr<TrackSelectionDialog> track_selection_dialog_;
+  PlaylistItemList autocomplete_tag_items_;
 
 #ifdef ENABLE_VISUALISATIONS
   boost::scoped_ptr<VisualisationContainer> visualisation_;

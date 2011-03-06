@@ -32,6 +32,7 @@
 #include "core/player.h"
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
+#include "core/tagfetcher.h"
 #include "core/taskmanager.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
@@ -78,6 +79,7 @@
 #include "ui/qtsystemtrayicon.h"
 #include "ui/settingsdialog.h"
 #include "ui/systemtrayicon.h"
+#include "ui/trackselectiondialog.h"
 #include "ui/windows7thumbbar.h"
 #include "version.h"
 #include "widgets/errordialog.h"
@@ -296,6 +298,7 @@ MainWindow::MainWindow(
   ui_->action_full_library_scan->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
 
+
   // File view connections
   connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(file_view_, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
@@ -322,6 +325,7 @@ MainWindow::MainWindow(
   connect(ui_->action_renumber_tracks, SIGNAL(triggered()), SLOT(RenumberTracks()));
   connect(ui_->action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
   connect(ui_->action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
+  connect(ui_->action_auto_complete_tags, SIGNAL(triggered()), SLOT(AutoCompleteTags()));
   connect(ui_->action_configure, SIGNAL(triggered()), SLOT(OpenSettingsDialog()));
   connect(ui_->action_about, SIGNAL(triggered()), SLOT(ShowAboutDialog()));
   connect(ui_->action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
@@ -471,6 +475,9 @@ MainWindow::MainWindow(
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
+#ifdef HAVE_LIBTUNEPIMP
+  playlist_menu_->addAction(ui_->action_auto_complete_tags);
+#endif
   playlist_menu_->addSeparator();
   playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
   playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
@@ -1108,6 +1115,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   // those is not CUE related
   ui_->action_edit_track->setEnabled(editable);
   ui_->action_edit_track->setVisible(editable);
+  ui_->action_auto_complete_tags->setEnabled(editable);
+  ui_->action_auto_complete_tags->setVisible(editable);
   // the rest of the read / write actions work only when there are no CUEs
   // involved
   if(cue_selected)
@@ -1870,4 +1879,48 @@ void MainWindow::Exit() {
     }
   }
   qApp->quit();
+}
+
+void MainWindow::AutoCompleteTags() {
+  // Create the tag fetching stuff if it hasn't been already
+  if (!tag_fetcher_) {
+    tag_fetcher_.reset(new TagFetcher);
+    track_selection_dialog_.reset(new TrackSelectionDialog);
+    track_selection_dialog_->set_save_on_close(true);
+
+    connect(tag_fetcher_.get(), SIGNAL(FetchFinished(QString, SongList)),
+            track_selection_dialog_.get(), SLOT(FetchTagFinished(QString, SongList)),
+            Qt::QueuedConnection);
+    connect(track_selection_dialog_.get(), SIGNAL(accepted()),
+            SLOT(AutoCompleteTagsAccepted()));
+  }
+
+  // Get the selected songs and start fetching tags for them
+  SongList songs;
+  autocomplete_tag_items_.clear();
+  foreach (const QModelIndex& index,
+           ui_->playlist->view()->selectionModel()->selection().indexes()) {
+    if (index.column() != 0)
+      continue;
+    int row = playlists_->current()->proxy()->mapToSource(index).row();
+    PlaylistItemPtr item(playlists_->current()->item_at(row));
+    Song song = item->Metadata();
+
+    if (song.IsEditable()) {
+      songs << song;
+      autocomplete_tag_items_ << item;
+      tag_fetcher_->FetchFromFile(song.filename());
+    }
+  }
+
+  track_selection_dialog_->Init(songs);
+  track_selection_dialog_->show();
+}
+void MainWindow::AutoCompleteTagsAccepted() {
+  foreach (PlaylistItemPtr item, autocomplete_tag_items_) {
+    item->Reload();
+  }
+
+  // This is really lame but we don't know what rows have changed
+  ui_->playlist->view()->update();
 }
