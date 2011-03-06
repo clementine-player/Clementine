@@ -377,9 +377,31 @@ void Player::ShowOSD() {
 }
 
 void Player::TrackAboutToEnd() {
-  if (engine_->is_autocrossfade_enabled()) {
-    // Crossfade is on, so just start playing the next track.  The current one
-    // will fade out, and the new one will fade in
+  int row_ = -1;
+  
+  if ((row_ = playlists_->active()->next_row()) == -1)
+    return;
+  
+  shared_ptr<PlaylistItem> next_item_ = playlists_->active()->item_at(row_);
+
+  Song next_song_ = next_item_->Metadata();
+  Song current_song_ = playlists_->active()->current_item()->Metadata();
+  bool same_cue_ = next_song_.cue_path() == current_song_.cue_path();
+  qint64 length_between_ = 0;
+  bool successive_ = false;
+  
+  // Test for length so we can know if these songs are consecutively played
+  if (same_cue_)
+    length_between_ = next_song_.beginning_nanosec() - current_song_.beginning_nanosec();
+  
+  // Find out if these songs are successive by comparing the length value of the current song
+  if (length_between_ && current_song_.length_nanosec() == length_between_)
+    successive_ = true;
+  
+  if (engine_->is_autocrossfade_enabled() && !successive_) {
+    // Crossfade is on and the song is not successive in a CUE file,
+    // so just start playing the next track.
+    // The current one will fade out, and the new one will fade in
 
     // But, if there's no next track and we don't want to fade out, then do
     // nothing and just let the track finish to completion.
@@ -388,30 +410,26 @@ void Player::TrackAboutToEnd() {
       return;
 
     TrackEnded();
-  } else {
+  }
+  else {
     // Crossfade is off, so start preloading the next track so we don't get a
     // gap between songs.
     if (current_item_->options() & PlaylistItem::ContainsMultipleTracks)
       return;
-    if (playlists_->active()->next_row() == -1)
+    if (!next_item_)
       return;
 
-    shared_ptr<PlaylistItem> item = playlists_->active()->item_at(
-        playlists_->active()->next_row());
-    if (!item)
-      return;
-
-    QUrl url = item->Url();
+    QUrl url = next_item_->Url();
 
     // Get the actual track URL rather than the stream URL.
-    if (item->options() & PlaylistItem::ContainsMultipleTracks) {
-      PlaylistItem::SpecialLoadResult result = item->LoadNext();
+    if (next_item_->options() & PlaylistItem::ContainsMultipleTracks) {
+      PlaylistItem::SpecialLoadResult result = next_item_->LoadNext();
       switch (result.type_) {
       case PlaylistItem::SpecialLoadResult::NoMoreTracks:
         return;
 
       case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
-        loading_async_ = item->Url();
+        loading_async_ = next_item_->Url();
         return;
 
       case PlaylistItem::SpecialLoadResult::TrackAvailable:
