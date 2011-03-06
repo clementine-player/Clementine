@@ -813,7 +813,7 @@ qint64 GstEngine::PruneScope() {
     return 0;
 
   // get the position playing in the audio device
-  const qint64 pos = position_nanosec();
+  const qint64 pos = current_pipeline_->position();
   const qint64 segment_start = current_pipeline_->segment_start();
 
   GstBuffer *buf = 0;
