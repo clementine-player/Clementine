@@ -59,7 +59,7 @@ class GstEnginePipeline : public QObject {
 
   // Control the music playback
   QFuture<GstStateChangeReturn> SetState(GstState state);
-  bool Seek(qint64 nanosec);
+  Q_INVOKABLE bool Seek(qint64 nanosec);
   void SetEqualizerEnabled(bool enabled);
   void SetEqualizerParams(int preamp, const QList<int>& band_gains);
   void SetVolume(int percent);
@@ -110,6 +110,7 @@ class GstEnginePipeline : public QObject {
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
   void ElementMessageReceived(GstMessage*);
+  void StateChangedMessageReceived(GstMessage*);
   QString ParseTag(GstTagList* list, const char* tag) const;
 
   bool Init();
@@ -184,6 +185,13 @@ class GstEnginePipeline : public QObject {
   // When the gstreamer source requests a redirect we store the URL here and
   // callers can pick it up after the state change to PLAYING fails.
   QUrl redirect_url_;
+
+  // Seeking while the pipeline is in the READY state doesn't work, so we have
+  // to wait until it goes to PAUSED or PLAYING.
+  // Also we have to wait for the decodebin to be connected.
+  bool pipeline_is_initialised_;
+  bool pipeline_is_connected_;
+  qint64 pending_seek_nanosec_;
 
   int volume_percent_;
   qreal volume_modifier_;

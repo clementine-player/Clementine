@@ -52,7 +52,11 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     end_offset_nanosec_(-1),
     next_beginning_offset_nanosec_(-1),
     next_end_offset_nanosec_(-1),
+    ignore_next_seek_(false),
     ignore_tags_(false),
+    pipeline_is_initialised_(false),
+    pipeline_is_connected_(false),
+    pending_seek_nanosec_(-1),
     volume_percent_(100),
     volume_modifier_(1.0),
     fader_(NULL),
@@ -107,6 +111,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   uridecodebin_ = new_bin;
   segment_start_ = 0;
   segment_start_received_ = false;
+  pipeline_is_connected_ = false;
   gst_bin_add(GST_BIN(pipeline_), uridecodebin_);
 
   return true;
@@ -275,6 +280,10 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
       instance->TagMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_STATE_CHANGED:
+      instance->StateChangedMessageReceived(msg);
+      break;
+
     default:
       break;
   }
@@ -299,6 +308,10 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
 
     case GST_MESSAGE_ELEMENT:
       instance->ElementMessageReceived(msg);
+      break;
+
+    case GST_MESSAGE_STATE_CHANGED:
+      instance->StateChangedMessageReceived(msg);
       break;
 
     default:
@@ -375,6 +388,23 @@ QString GstEnginePipeline::ParseTag(GstTagList* list, const char* tag) const {
   return ret.trimmed();
 }
 
+void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
+  GstState old_state, new_state, pending;
+  gst_message_parse_state_changed(msg, &old_state, &new_state, &pending);
+
+  if (!pipeline_is_initialised_ && (new_state == GST_STATE_PAUSED || new_state == GST_STATE_PLAYING)) {
+    pipeline_is_initialised_ = true;
+    if (pending_seek_nanosec_ != -1 && pipeline_is_connected_) {
+      QMetaObject::invokeMethod(this, "Seek", Qt::QueuedConnection,
+                                Q_ARG(qint64, pending_seek_nanosec_));
+    }
+  }
+
+  if (pipeline_is_initialised_ && new_state != GST_STATE_PAUSED && new_state != GST_STATE_PLAYING) {
+    pipeline_is_initialised_ = false;
+  }
+}
+
 
 void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
@@ -388,6 +418,12 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) 
   gst_pad_link(pad, audiopad);
 
   gst_object_unref(audiopad);
+
+  instance->pipeline_is_connected_ = true;
+  if (instance->pending_seek_nanosec_ != -1 && instance->pipeline_is_initialised_) {
+    QMetaObject::invokeMethod(instance, "Seek", Qt::QueuedConnection,
+                              Q_ARG(qint64, instance->pending_seek_nanosec_));
+  }
 }
 
 
@@ -526,6 +562,12 @@ bool GstEnginePipeline::Seek(qint64 nanosec) {
     return true;
   }
 
+  if (!pipeline_is_connected_ || !pipeline_is_initialised_) {
+    pending_seek_nanosec_ = nanosec;
+    return true;
+  }
+
+  pending_seek_nanosec_ = -1;
   return gst_element_seek_simple(pipeline_, GST_FORMAT_TIME,
                                  GST_SEEK_FLAG_FLUSH, nanosec);
 }
