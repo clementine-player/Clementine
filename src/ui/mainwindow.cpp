@@ -1881,6 +1881,7 @@ void MainWindow::Exit() {
 }
 
 void MainWindow::AutoCompleteTags() {
+#ifdef HAVE_LIBTUNEPIMP
   // Create the tag fetching stuff if it hasn't been already
   if (!tag_fetcher_) {
     tag_fetcher_.reset(new TagFetcher);
@@ -1914,12 +1915,16 @@ void MainWindow::AutoCompleteTags() {
 
   track_selection_dialog_->Init(songs);
   track_selection_dialog_->show();
+#endif // HAVE_LIBTUNEPIMP
 }
+
 void MainWindow::AutoCompleteTagsAccepted() {
+#ifdef HAVE_LIBTUNEPIMP
   foreach (PlaylistItemPtr item, autocomplete_tag_items_) {
     item->Reload();
   }
 
   // This is really lame but we don't know what rows have changed
   ui_->playlist->view()->update();
+#endif // HAVE_LIBTUNEPIMP
 }
