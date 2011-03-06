@@ -386,7 +386,7 @@ void Player::TrackAboutToEnd() {
 
   Song next_song_ = next_item_->Metadata();
   Song current_song_ = playlists_->active()->current_item()->Metadata();
-  bool same_cue_ = next_song_.cue_path() == current_song_.cue_path();
+  bool same_cue_ = (current_song_.has_cue() && next_song_.has_cue()) && (next_song_.cue_path() == current_song_.cue_path());
   qint64 length_between_ = 0;
   bool successive_ = false;
   
