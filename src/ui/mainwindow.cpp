@@ -109,6 +109,7 @@
 #endif
 
 #include <QCloseEvent>
+#include <QDesktopServices>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileSystemModel>
@@ -476,6 +477,7 @@ MainWindow::MainWindow(
   playlist_organise_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Organise files..."), this, SLOT(PlaylistMoveToLibrary()));
   playlist_copy_to_device_ = playlist_menu_->addAction(IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Copy to device..."), this, SLOT(PlaylistCopyToDevice()));
   playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
+  playlist_open_in_browser_ = playlist_menu_->addAction(IconLoader::Load("document-open-folder"), tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
   playlist_menu_->addAction(ui_->action_shuffle);
@@ -1582,6 +1584,31 @@ void MainWindow::PlaylistDelete() {
   DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
   connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
   delete_files->Start(selected_songs);
+}
+
+void MainWindow::PlaylistOpenInBrowser(){
+  QSet<QString> dirs;
+  QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+  foreach (const QModelIndex& proxy_index, proxy_indexes) {
+    const QModelIndex index = playlists_->current()->proxy()->mapToSource(proxy_index);
+    const QString filename =
+        index.sibling(index.row(), Playlist::Column_Filename).data().toString();
+
+    // Ignore things that look like URLs
+    if (filename.contains("://"))
+      continue;
+
+    if (!QFile::exists(filename))
+      continue;
+
+    const QString directory = QFileInfo(filename).dir().path();
+
+    if (dirs.contains(directory))
+      continue;
+    dirs.insert(directory);
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
+  }
 }
 
 void MainWindow::DeleteFinished(const SongList& songs_with_errors) {
