@@ -39,13 +39,12 @@ bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   const int row = (Song::kColumns.count() + 1) * 3;
 
   QString filename(query.value(row + 1).toString());
+  QString title(query.value(row + 2).toString());
+  QString artist(query.value(row + 3).toString());
+  QString album(query.value(row + 4).toString());
+  qint64 length(query.value(row + 5).toLongLong());
 
   if (type() == "Stream") {
-    QString title(query.value(row + 2).toString());
-    QString artist(query.value(row + 3).toString());
-    QString album(query.value(row + 4).toString());
-    int length(query.value(row + 5).toInt());
-
     song_.set_filename(filename);
     song_.set_filetype(Song::Type_Stream);
 
@@ -53,8 +52,17 @@ bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
   } else {
     song_.InitFromFile(filename, -1);
 
-    qint64 beginning(query.value(row + 7).toInt());
+    qint64 beginning(query.value(row + 7).toLongLong());
     QString cue_path(query.value(row + 8).toString());
+
+    // If the song was part of a cuesheet then keep the title, artist etc. that
+    // was loaded last time.
+    if (!cue_path.isEmpty()) {
+      song_.set_title(title);
+      song_.set_artist(artist);
+      song_.set_album(album);
+      song_.set_length_nanosec(length);
+    }
 
     song_.set_beginning_nanosec(beginning);
     song_.set_cue_path(cue_path);
