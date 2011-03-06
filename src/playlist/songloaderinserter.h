@@ -34,7 +34,7 @@ class QModelIndex;
 class SongLoaderInserter : public QObject {
   Q_OBJECT
 public:
-  SongLoaderInserter(TaskManager* task_manager, LibraryBackendInterface* library, QObject* parent = 0);
+  SongLoaderInserter(TaskManager* task_manager, LibraryBackendInterface* library);
   ~SongLoaderInserter();
 
   void Load(Playlist* destination, int row, bool play_now, bool enqueue,
@@ -45,6 +45,7 @@ signals:
 
 private slots:
   void PendingLoadFinished(bool success);
+  void DestinationDestroyed();
 
 private:
   void Finished();

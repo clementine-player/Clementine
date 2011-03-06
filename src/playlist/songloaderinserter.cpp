@@ -21,9 +21,8 @@
 #include "core/taskmanager.h"
 
 SongLoaderInserter::SongLoaderInserter(
-    TaskManager* task_manager, LibraryBackendInterface* library, QObject *parent)
-    : QObject(parent),
-      task_manager_(task_manager),
+    TaskManager* task_manager, LibraryBackendInterface* library)
+    : task_manager_(task_manager),
       destination_(NULL),
       row_(-1),
       play_now_(true),
@@ -43,6 +42,8 @@ void SongLoaderInserter::Load(Playlist *destination,
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
+
+  connect(destination, SIGNAL(destroyed()), SLOT(DestinationDestroyed()));
 
   foreach (const QUrl& url, urls) {
     SongLoader* loader = new SongLoader(library_, this);
@@ -70,6 +71,10 @@ void SongLoaderInserter::Load(Playlist *destination,
   }
 }
 
+void SongLoaderInserter::DestinationDestroyed() {
+  destination_ = NULL;
+}
+
 void SongLoaderInserter::PendingLoadFinished(bool success) {
   SongLoader* loader = qobject_cast<SongLoader*>(sender());
   if (!loader || !pending_.contains(loader))
@@ -91,7 +96,9 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
 }
 
 void SongLoaderInserter::Finished() {
-  destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_);
+  if (destination_) {
+    destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_);
+  }
 
   deleteLater();
 }

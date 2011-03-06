@@ -53,7 +53,6 @@
 #include "playlist/playlistview.h"
 #include "playlist/queue.h"
 #include "playlist/queuemanager.h"
-#include "playlist/songloaderinserter.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
 #include "radio/magnatuneservice.h"

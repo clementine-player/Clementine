@@ -666,7 +666,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
 }
 
 void Playlist::InsertUrls(const QList<QUrl> &urls, int pos, bool play_now, bool enqueue) {
-  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_, this);
+  SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_);
   connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
 
   inserter->Load(this, pos, play_now, enqueue, urls);
