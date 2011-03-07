@@ -389,6 +389,11 @@ QString GstEnginePipeline::ParseTag(GstTagList* list, const char* tag) const {
 }
 
 void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
+  if (msg->src != GST_OBJECT(pipeline_)) {
+    // We only care about state changes of the whole pipeline.
+    return;
+  }
+
   GstState old_state, new_state, pending;
   gst_message_parse_state_changed(msg, &old_state, &new_state, &pending);
 
