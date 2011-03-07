@@ -810,25 +810,28 @@ void MainWindow::MediaPlaying() {
   ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-pause"));
   ui_->action_play_pause->setText(tr("Pause"));
 
-  ui_->action_play_pause->setEnabled(
-      ! (player_->GetCurrentItem()->options() & PlaylistItem::PauseDisabled));
+  bool enable_play_pause = !(player_->GetCurrentItem()->options() & PlaylistItem::PauseDisabled);
+  ui_->action_play_pause->setEnabled(enable_play_pause);
 
 #ifdef HAVE_LIBLASTFM
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   LastFMService* lastfm = RadioModel::Service<LastFMService>();
+  bool enable_ban = lastfm->IsScrobblingEnabled() && is_lastfm;
+  bool enable_love = lastfm->IsScrobblingEnabled();
 
-  ui_->action_ban->setEnabled(lastfm->IsScrobblingEnabled() && is_lastfm);
-  ui_->action_love->setEnabled(lastfm->IsScrobblingEnabled());
+  ui_->action_ban->setEnabled(enable_ban);
+  ui_->action_love->setEnabled(enable_love);
+
+  tray_icon_->SetPlaying(enable_play_pause, enable_ban, enable_love);
 
   ui_->track_slider->SetCanSeek(!is_lastfm);
 #else
   ui_->track_slider->SetCanSeek(true);
+  tray_icon_->SetPlaying(enable_play_pause);
 #endif
 
   track_position_timer_->start();
   UpdateTrackPosition();
-
-  tray_icon_->SetPlaying();
 }
 
 void MainWindow::VolumeChanged(int volume) {

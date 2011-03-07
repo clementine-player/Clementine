@@ -52,9 +52,10 @@ class SystemTrayIcon : public QObject {
 
  public slots:
   void SetProgress(int percentage);
-  void SetPaused();
-  void SetPlaying();
-  void SetStopped();
+  virtual void SetPaused();
+  virtual void SetPlaying(bool enable_play_pause = false,
+                          bool enable_ban = false, bool enable_love = false);
+  virtual void SetStopped();
 
  signals:
   void ChangeVolume(int delta);

@@ -88,7 +88,8 @@ void SystemTrayIcon::SetPaused() {
   UpdateIcon();
 }
 
-void SystemTrayIcon::SetPlaying() {
+void SystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
+                                bool enable_love) {
   current_state_icon_ = playing_icon_;
   UpdateIcon();
 }

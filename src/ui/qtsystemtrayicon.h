@@ -43,6 +43,10 @@ public:
 protected:
   // SystemTrayIcon
   void UpdateIcon();
+  void SetPaused();
+  void SetPlaying(bool enable_play_pause = false, bool enable_ban = false,
+                  bool enable_love = false);
+  void SetStopped();
 
   // QObject
   bool eventFilter(QObject *, QEvent *);
@@ -53,6 +57,11 @@ private slots:
 private:
   QSystemTrayIcon* tray_;
   QMenu* menu_;
+  QAction* action_play_pause_;
+  QAction* action_stop_;
+  QAction* action_stop_after_this_track_;
+  QAction* action_love_;
+  QAction* action_ban_;
 
   QString pattern_;
 

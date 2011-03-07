@@ -31,7 +31,12 @@
 QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
   : SystemTrayIcon(parent),
     tray_(new QSystemTrayIcon(this)),
-    menu_(new QMenu)
+    menu_(new QMenu),
+    action_play_pause_(NULL),
+    action_stop_(NULL),
+    action_stop_after_this_track_(NULL),
+    action_love_(NULL),
+    action_ban_(NULL)
 {
   QIcon theme_icon      = IconLoader::Load("clementine-panel");
   QIcon theme_icon_grey = IconLoader::Load("clementine-panel-grey");
@@ -82,18 +87,28 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
 void QtSystemTrayIcon::SetupMenu(
     QAction* previous, QAction* play, QAction* stop, QAction* stop_after,
     QAction* next, QAction* mute, QAction* love, QAction* ban, QAction* quit) {
-  menu_->addAction(previous);
-  menu_->addAction(play);
-  menu_->addAction(stop);
-  menu_->addAction(stop_after);
-  menu_->addAction(next);
+  // Creating new actions and connecting them to old ones. This allows us to
+  // use old actions without displaying shortcuts that can not be used when
+  // Clementine's window is hidden
+  menu_->addAction(previous->icon(), previous->text(), previous, SLOT(trigger()));
+  action_play_pause_ = menu_->addAction(play->icon(), play->text(), play, SLOT(trigger()));
+  action_stop_ = menu_->addAction(stop->icon(), stop->text(), stop, SLOT(trigger()));
+  action_stop_after_this_track_ = menu_->addAction(stop_after->icon(), stop_after->text(), stop_after, SLOT(trigger()));
+  menu_->addAction(next->icon(), next->text(), next, SLOT(trigger()));
+
   menu_->addSeparator();
-  menu_->addAction(mute);
+  menu_->addAction(mute->icon(), mute->text(), mute, SLOT(trigger()));
+
   menu_->addSeparator();
-  menu_->addAction(love);
-  menu_->addAction(ban);
+#ifdef HAVE_LIBLASTFM
+  action_love_ = menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
+  action_love_->setVisible(love->isVisible());
+  action_ban_ = menu_->addAction(ban->icon(), ban->text(), ban, SLOT(trigger()));
+  action_ban_->setVisible(ban->isVisible());
+#endif
+
   menu_->addSeparator();
-  menu_->addAction(quit);
+  menu_->addAction(quit->icon(), quit->text(), quit, SLOT(trigger()));
 
   tray_->setContextMenu(menu_);
 }
@@ -121,6 +136,48 @@ void QtSystemTrayIcon::ShowPopup(const QString &summary,
 
 void QtSystemTrayIcon::UpdateIcon() {
   tray_->setIcon(CreateIcon(orange_icon_, grey_icon_));
+}
+
+void QtSystemTrayIcon::SetPaused() {
+  SystemTrayIcon::SetPaused();
+
+  action_stop_->setEnabled(true);
+  action_stop_after_this_track_->setEnabled(true);
+  action_play_pause_->setIcon(IconLoader::Load("media-playback-start"));
+  action_play_pause_->setText(tr("Play"));
+
+  action_play_pause_->setEnabled(true);
+}
+
+void QtSystemTrayIcon::SetPlaying(bool enable_play_pause, bool enable_ban,
+                                  bool enable_love) {
+  SystemTrayIcon::SetPlaying();
+
+  action_stop_->setEnabled(true);
+  action_stop_after_this_track_->setEnabled(true);
+  action_play_pause_->setIcon(IconLoader::Load("media-playback-pause"));
+  action_play_pause_->setText(tr("Pause"));
+  action_play_pause_->setEnabled(enable_play_pause);
+#ifdef HAVE_LIBLASTFM
+  action_ban_->setEnabled(enable_ban);
+  action_love_->setEnabled(enable_love);
+#endif
+}
+
+void QtSystemTrayIcon::SetStopped() {
+  SystemTrayIcon::SetStopped();
+
+  action_stop_->setEnabled(false);
+  action_stop_after_this_track_->setEnabled(false);
+  action_play_pause_->setIcon(IconLoader::Load("media-playback-start"));
+  action_play_pause_->setText(tr("Play"));
+
+  action_play_pause_->setEnabled(true);
+
+#ifdef HAVE_LIBLASTFM
+  action_ban_->setEnabled(false);
+  action_love_->setEnabled(false);
+#endif
 }
 
 bool QtSystemTrayIcon::IsVisible() const {
