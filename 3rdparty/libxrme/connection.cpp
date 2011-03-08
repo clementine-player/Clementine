@@ -251,6 +251,9 @@ bool Connection::Connect() {
   d->client_->disco()->setVersion(d->agent_name_.toUtf8().constData(), std::string());
   d->client_->disco()->addFeature(kXmlnsXrme);
 
+  // Tomahawk support
+  d->client_->disco()->addFeature("tomahawk:player");
+
   d->media_player_extension_ = new MediaPlayerExtension;
   d->remote_control_extension_ = new RemoteControlExtension;
   d->client_->registerStanzaExtension(d->media_player_extension_);

@@ -763,10 +763,12 @@ endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
   list(APPEND HEADERS
+    remote/portforwarder.h
     remote/remote.h
     remote/remoteconfig.h
   )
   list(APPEND SOURCES
+    remote/portforwarder.h
     remote/remote.cpp
     remote/remoteconfig.cpp
   )
@@ -938,6 +940,7 @@ endif(HAVE_SCRIPTING_PYTHON)
 if(HAVE_REMOTE)
   target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})
   target_link_libraries(clementine_lib xrme)
+  target_link_libraries(clementine_lib portfwd)
   link_directories(${GLOOX_LIBRARY_DIRS})
 endif(HAVE_REMOTE)
 
