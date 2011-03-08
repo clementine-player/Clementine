@@ -941,6 +941,7 @@ if(HAVE_REMOTE)
   target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})
   target_link_libraries(clementine_lib xrme)
   target_link_libraries(clementine_lib portfwd)
+  target_link_libraries(clementine_lib qjson)
   link_directories(${GLOOX_LIBRARY_DIRS})
 endif(HAVE_REMOTE)
 

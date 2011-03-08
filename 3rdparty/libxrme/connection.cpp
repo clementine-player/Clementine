@@ -24,22 +24,29 @@
 #include <QSocketNotifier>
 #include <QTimer>
 #include <QtDebug>
+#include <QVariant>
 
+#include <gloox/capabilities.h>
 #include <gloox/client.h>
 #include <gloox/connectionlistener.h>
 #include <gloox/connectiontcpclient.h>
 #include <gloox/disco.h>
 #include <gloox/discohandler.h>
 #include <gloox/loghandler.h>
+#include <gloox/message.h>
+#include <gloox/messagehandler.h>
 #include <gloox/rosterlistener.h>
 #include <gloox/rostermanager.h>
+
+#include <qjson/parser.h>
 
 namespace xrme {
 
 struct Connection::Private : public gloox::ConnectionListener,
                              public gloox::LogHandler,
                              public gloox::RosterListener,
-                             public gloox::DiscoHandler {
+                             public gloox::DiscoHandler,
+                             public gloox::MessageHandler {
   Private(Connection* parent)
     : parent_(parent),
       server_(kDefaultServer),
@@ -126,10 +133,13 @@ struct Connection::Private : public gloox::ConnectionListener,
   void handleDiscoInfo(const gloox::JID&, const gloox::Disco::Info&, int);
   void handleDiscoItems(const gloox::JID&, const gloox::Disco::Items&, int);
   void handleDiscoError(const gloox::JID&, const gloox::Error*, int);
+
+  // gloox::MessageHandler
+  void handleMessage(const gloox::Message& message, gloox::MessageSession* session);
 };
 
 const char* Connection::Private::kDefaultServer = "talk.google.com";
-const char* Connection::Private::kDefaultJIDResource = "xrmeagent";
+const char* Connection::Private::kDefaultJIDResource = "tomahawkxrmeagent";
 const char* Connection::Private::kDefaultJIDHost = "gmail.com";
 
 
@@ -245,14 +255,12 @@ bool Connection::Connect() {
   d->client_->rosterManager()->registerRosterListener(d.data());
   d->client_->logInstance().registerLogHandler(
         gloox::LogLevelDebug, gloox::LogAreaAll, d.data());
+  d->client_->registerMessageHandler(d.data());
 
   // Setup disco
   d->client_->disco()->setIdentity("client", "bot");
   d->client_->disco()->setVersion(d->agent_name_.toUtf8().constData(), std::string());
   d->client_->disco()->addFeature(kXmlnsXrme);
-
-  // Tomahawk support
-  d->client_->disco()->addFeature("tomahawk:player");
 
   d->media_player_extension_ = new MediaPlayerExtension;
   d->remote_control_extension_ = new RemoteControlExtension;
@@ -265,7 +273,13 @@ bool Connection::Connect() {
   }
 
   // Set presence
-  d->client_->setPresence(gloox::Presence::Available, -128);
+  d->client_->setPresence(gloox::Presence::Available, 1);
+
+  // Tomahawk support
+  d->client_->disco()->addFeature("tomahawk:player");
+  gloox::Capabilities* caps = new gloox::Capabilities;
+  caps->setNode("http://tomahawk-player.org/");
+  d->client_->presence().addExtension(caps);
 
   d->client_->setSASLMechanisms(gloox::SaslMechGoogleToken);
 
@@ -526,6 +540,21 @@ void Connection::Private::handleDiscoError(
       querying_peers_.removeAt(i);
       return;
     }
+  }
+}
+
+void Connection::Private::handleMessage(const gloox::Message& message, gloox::MessageSession* session) {
+  qDebug() << Q_FUNC_INFO << message.tag()->xml().c_str();
+  const std::string body = message.body();
+  qDebug() << body.c_str();
+
+  QJson::Parser parser;
+  bool ok = false;
+  QVariant result = parser.parse(QByteArray::fromRawData(body.data(), body.size()), &ok);
+  if (ok) {
+    qDebug() << result;
+
+    emit parent_->TomahawkSIPReceived(result);
   }
 }
 

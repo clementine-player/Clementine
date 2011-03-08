@@ -22,8 +22,13 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 
+#include <QDataStream>
+#include <QHostAddress>
 #include <QSettings>
 #include <QTimer>
+
+#include <qjson/parser.h>
+#include <qjson/serializer.h>
 
 Remote::Remote(Player* player, QObject* parent)
   : QObject(parent),
@@ -43,6 +48,10 @@ Remote::Remote(Player* player, QObject* parent)
   connect(player_, SIGNAL(VolumeChanged(int)), SLOT(SetStateChanged()));
   connect(player_, SIGNAL(Seeked(qlonglong)), SLOT(SetStateChanged()));
   connect(player_->playlists(), SIGNAL(CurrentSongChanged(Song)), SLOT(SetStateChanged()));
+
+  connect(connection_,
+      SIGNAL(TomahawkSIPReceived(const QVariant&)),
+      SLOT(TomahawkSIPReceived(const QVariant&)));
 
   ReloadSettings();
 }
@@ -162,4 +171,267 @@ void Remote::SetStateChanged() {
 void Remote::ArtLoaded(const Song&, const QString&, const QImage& image) {
   last_image_ = image;
   AlbumArtChanged();
+}
+
+void Remote::TomahawkSIPReceived(const QVariant& json) {
+  QVariantMap message = json.toMap();
+  const QString& ip = message["ip"].toString();
+  const QString& key = message["key"].toString();
+  const quint16 port = message["port"].toUInt();
+  const QString& unique_name = message["uniqname"].toString();
+  const bool visible = message["visible"].toBool();
+
+  QTcpSocket* socket = new QTcpSocket(this);
+  socket->connectToHost(ip, port);
+  connect(socket, SIGNAL(connected()), SLOT(TomahawkConnected()));
+  connect(socket, SIGNAL(disconnected()), SLOT(TomahawkDisconnected()));
+  connect(socket, SIGNAL(readyRead()), SLOT(TomahawkReadyRead()));
+  connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),
+                  SLOT(TomahawkError(QAbstractSocket::SocketError)));
+
+  qDebug() << Q_FUNC_INFO << "connecting to" << ip << port;
+
+  TomahawkConnection* connection = new TomahawkConnection;
+  connection->key = key;
+  connection->unique_name = unique_name;
+  connection->visible = visible;
+  connection->num_bytes = -1;
+  tomahawk_connections_[socket] = connection;
+}
+
+void Remote::TomahawkConnected() {
+  qDebug() << Q_FUNC_INFO;
+  QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+  Q_ASSERT(socket);
+
+  TomahawkConnection* connection = tomahawk_connections_[socket];
+
+  QVariantMap map;
+  map["conntype"] = "accept-offer";
+  map["key"] = connection->key;
+  map["port"] = 12345;
+  map["nodeid"] = "foobar";
+  map["controlid"] = "foobarbaz";
+
+  QJson::Serializer serialiser;
+  const QByteArray& serialised = serialiser.serialize(map);
+  quint32 length = serialised.length();
+
+  // Send offer acceptance.
+  {
+    QDataStream stream(socket);
+    stream << (quint32)length;
+    stream << (quint8)(128 | 2);
+    stream.writeRawData(serialised.constData(), serialised.length());
+    qDebug() << "now:" << socket->bytesToWrite();
+  }
+
+  {
+    QDataStream stream(socket);
+    stream << (quint32)2;
+    stream << (quint8)(128 | 1);
+    stream.writeRawData("ok", 2);
+  }
+
+  // Send ping.
+  {
+    QDataStream stream(socket);
+    stream << (quint32)0;
+    stream << (quint8)(32);
+  }
+
+  /*
+  {
+    QVariantMap json;
+    json["method"] = "dbsync-offer";
+    json["key"] = "abcdefg";
+    const QByteArray& request = serialiser.serialize(json);
+    QDataStream stream(socket);
+    stream << (quint32)request.length();
+    stream << (quint8)2;  // JSON
+    stream.writeRawData(request.constData(), request.length());
+  }
+  */
+}
+
+void Remote::TomahawkReadyRead() {
+  QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+  Q_ASSERT(socket);
+
+  TomahawkConnection* connection = tomahawk_connections_[socket];
+  if (connection->num_bytes == -1) {
+    // Expecting header.
+    if (socket->bytesAvailable() >= 5) {
+      QDataStream stream(socket);
+      quint32 size;
+      stream >> size;
+      quint8 flags;
+      stream >> flags;
+      connection->num_bytes = size > 0 ? size : -1;
+      connection->flags = flags;
+      if (flags & 32) {
+        qDebug() << "PING!";
+      }
+      if (connection->num_bytes == -1) {
+        return;
+      }
+    } else {
+      return;
+    }
+  }
+
+  if (socket->bytesAvailable() < connection->num_bytes) {
+    return;
+  }
+
+  QByteArray data = socket->readAll();
+  connection->num_bytes = -1;
+
+  qDebug() << Q_FUNC_INFO;
+  qDebug() << data;
+  qDebug() << Q_FUNC_INFO << "done";
+
+  if (connection->flags & 2) {
+    QJson::Parser parser;
+    bool ok = false;
+    QVariant json = parser.parse(data, &ok);
+    if (ok) {
+      QVariantMap map = json.toMap();
+      QString method = map["method"].toString();
+      if (method == "dbsync-offer") {
+        qDebug() << "DBSYNC!";
+        TomahawkConnection* db_connection = new TomahawkConnection;
+        db_connection->key = map["key"].toString();
+        db_connection->num_bytes = -1;
+        QTcpSocket* sync_socket = new QTcpSocket(this);
+        sync_socket->connectToHost(socket->peerAddress(), socket->peerPort());
+        connect(sync_socket, SIGNAL(connected()), SLOT(TomahawkDBConnected()));
+        connect(sync_socket, SIGNAL(disconnected()), SLOT(TomahawkDBDisconnected()));
+        connect(sync_socket, SIGNAL(readyRead()), SLOT(TomahawkDBReadyRead()));
+        tomahawk_connections_[sync_socket] = db_connection;
+      }
+    }
+  }
+}
+
+void Remote::TomahawkDBConnected() {
+  qDebug() << Q_FUNC_INFO;
+  qDebug() << Q_FUNC_INFO;
+  QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+  Q_ASSERT(socket);
+
+  TomahawkConnection* connection = tomahawk_connections_[socket];
+
+  {
+    QVariantMap request;
+    request["method"] = "accept-offer";
+    request["key"] = connection->key;
+
+    QJson::Serializer serialiser;
+    const QByteArray& json = serialiser.serialize(request);
+
+    QDataStream stream(socket);
+    stream << (quint32)json.length();
+    stream << (quint8)(2);
+    stream.writeRawData(json.constData(), json.length());
+  }
+
+  {
+    QDataStream stream(socket);
+    stream << (quint32)2;
+    stream << (quint8)(128 | 1);  // SETUP | RAW
+    stream.writeRawData("ok", 2);
+  }
+
+  {
+    QVariantMap request;
+    request["command"] = "addfiles";
+    QVariantMap file;
+    file["url"] = "http://data.clementine-player.org/rainymood";
+    file["mtime"] = 123456;
+    file["size"] = 1e7;
+    file["hash"] = "abcdefg";
+    file["mimetype"] = "audio/mpeg";
+    file["duration"] = 1000;
+    file["bitrate"] = 128;
+    file["artist"] = "foo";
+    file["album"] = "bar";
+    file["track"] = "Rain!";
+    file["albumpos"] = 1;
+    file["year"] = 2011;
+    QVariantList files;
+    files << file;
+    request["files"] = files;
+
+    QJson::Serializer serialiser;
+    const QByteArray& json = serialiser.serialize(request);
+
+    qDebug() << json;
+
+    QDataStream stream(socket);
+    stream << (quint32)json.length();
+    stream << (quint8)(16 | 2);  // DBOP | JSON
+    stream.writeRawData(json.constData(), json.length());
+  }
+}
+
+void Remote::TomahawkDBReadyRead() {
+  qDebug() << Q_FUNC_INFO;
+  QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+  Q_ASSERT(socket);
+
+  TomahawkConnection* connection = tomahawk_connections_[socket];
+  if (connection->num_bytes == -1) {
+    // Expecting header.
+    if (socket->bytesAvailable() >= 5) {
+      QDataStream stream(socket);
+      quint32 size;
+      stream >> size;
+      quint8 flags;
+      stream >> flags;
+      connection->num_bytes = size > 0 ? size : -1;
+      connection->flags = flags;
+      if (flags & 32) {
+        qDebug() << "PING!";
+      }
+      if (connection->num_bytes == -1) {
+        return;
+      }
+    } else {
+      return;
+    }
+  }
+
+  if (socket->bytesAvailable() < connection->num_bytes) {
+    return;
+  }
+
+  QByteArray data = socket->readAll();
+  connection->num_bytes = -1;
+
+  qDebug() << Q_FUNC_INFO;
+  qDebug() << data;
+  qDebug() << Q_FUNC_INFO << "done";
+
+  if (connection->flags & 2) {
+    QJson::Parser parser;
+    bool ok = false;
+    QVariant json = parser.parse(data, &ok);
+    if (ok) {
+      QVariantMap map = json.toMap();
+      qDebug() << map;
+    }
+  }
+}
+
+void Remote::TomahawkDBDisconnected() {
+  qDebug() << Q_FUNC_INFO;
+}
+
+void Remote::TomahawkDisconnected() {
+  qDebug() << Q_FUNC_INFO;
+}
+
+void Remote::TomahawkError(QAbstractSocket::SocketError error) {
+  qDebug() << Q_FUNC_INFO << error;
 }

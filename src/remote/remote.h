@@ -21,6 +21,7 @@
 #include "core/song.h"
 
 #include <QObject>
+#include <QTcpSocket>
 
 #include <xrme/connection.h>
 #include <xrme/mediaplayerinterface.h>
@@ -59,12 +60,32 @@ private slots:
 
   void SetStateChanged();
 
+  void TomahawkSIPReceived(const QVariant& json);
+  void TomahawkConnected();
+  void TomahawkDisconnected();
+  void TomahawkReadyRead();
+  void TomahawkError(QAbstractSocket::SocketError);
+
+  void TomahawkDBConnected();
+  void TomahawkDBDisconnected();
+  void TomahawkDBReadyRead();
+
 private:
   bool is_configured() const;
 
 private:
   Player* player_;
   xrme::Connection* connection_;
+
+  struct TomahawkConnection {
+    QString key;
+    QString unique_name;
+    bool visible;
+    QTcpSocket* socket;
+    int num_bytes;
+    quint8 flags;
+  };
+  QMap<QTcpSocket*, TomahawkConnection*> tomahawk_connections_;
 
   QImage last_image_;
   int retry_count_;

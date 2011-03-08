@@ -137,6 +137,8 @@ signals:
   void PeerFound(const xrme::Connection::Peer& peer);
   void PeerRemoved(const xrme::Connection::Peer& peer);
 
+  void TomahawkSIPReceived(const QVariant& json);
+
 private slots:
   void SocketReadyReceive();
   void CleanupClient();
