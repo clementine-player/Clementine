@@ -439,7 +439,8 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     if (currentIndex().isValid())
       emit PlayItem(currentIndex());
     event->accept();
-  } else if(event->key() == Qt::Key_Space) {
+  } else if(event->modifiers() != Qt::ControlModifier //Ctrl+Space selects the item
+      && event->key() == Qt::Key_Space) {
     emit PlayPause();
     event->accept();
   } else if(event->key() == Qt::Key_Left) {
