@@ -81,6 +81,12 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
   }
 
   if (msg->message == button_created_message_id_) {
+    // Unref the old taskbar list if we had one
+    if (taskbar_list_) {
+      reinterpret_cast<ITaskbarList3*>(taskbar_list_)->Release();
+      taskbar_list_ = NULL;
+    }
+
     if (!taskbar_list_) {
       // Create the taskbar list for the first time
       if (CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
