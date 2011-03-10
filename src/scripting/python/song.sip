@@ -70,7 +70,7 @@ marked in any of these ways.
   playcount, skipcount, lastplayed, score, cue_path, has_cue, beginning_nanosec,
   end_nanosec, length_nanosec, bitrate, samplerate, directory_id, filename,
   basefilename, mtime, ctime, filesize, filetype, art_automatic, art_manual,
-  has_manually_unset_cover, has_embedded_cover, image, IsEditable,
+  has_manually_unset_cover, has_embedded_cover, image, url, IsEditable,
   IsMetadataEqual
 @group Pretty getters: PrettyTitle, PrettyTitleWithArtist, PrettyLength,
   PrettyYear, TitleWithCompilationArtist
@@ -318,6 +318,12 @@ The filename I{or URL} of this song.
 %Docstring
 basefilename() -> str
 The filename of this song without any directory component.
+%End
+
+  QUrl url() const;
+%Docstring
+url() -> QUrl
+URL for this song which may point either to a file or to another type of stream.
 %End
 
   uint mtime() const;

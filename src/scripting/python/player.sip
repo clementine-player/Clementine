@@ -52,6 +52,10 @@ signals:
 
   void Seeked(qlonglong microseconds);
 
+  // Emitted when Player has processed a request to play another song. This contains
+  // the URL of the song and a flag saying whether it was able to play the song.
+  void SongChangeRequestProcessed(const QUrl& url, bool valid);
+
   void ForceShowOSD(Song);
 
 private:
