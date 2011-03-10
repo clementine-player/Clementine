@@ -258,7 +258,8 @@ bool Connection::Connect() {
   d->client_->registerMessageHandler(d.data());
 
   // Setup disco
-  d->client_->disco()->setIdentity("client", "bot");
+  d->client_->disco()->setIdentity(
+      "client", "bot", d->agent_name_.toUtf8().constData());
   d->client_->disco()->setVersion(d->agent_name_.toUtf8().constData(), std::string());
   d->client_->disco()->addFeature(kXmlnsXrme);
 
