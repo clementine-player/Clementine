@@ -66,6 +66,8 @@ public:
   MOCK_METHOD1(RateCurrentSong, void(double));
   MOCK_METHOD1(RateCurrentSong, void(int));
 
+  MOCK_METHOD2(SongChangeRequestProcessed, void(const QUrl& url, bool));
+
   MOCK_METHOD3(PlaySmartPlaylist, void(smart_playlists::GeneratorPtr, bool, bool));
 
   void EmitPlaylistManagerInitialized() {
