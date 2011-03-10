@@ -114,7 +114,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
  private slots:
   void EndOfStreamReached(bool has_next_track);
-  void HandlePipelineError(const QString& message);
+  void HandlePipelineError(const QString& message, int domain, int error_code);
   void NewMetaData(const Engine::SimpleMetaBundle& bundle);
   void ClearScopeBuffers();
   void AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline);

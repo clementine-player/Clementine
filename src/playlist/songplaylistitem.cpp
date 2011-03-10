@@ -85,15 +85,15 @@ QVariant SongPlaylistItem::DatabaseValue(DatabaseColumn column) const {
 }
 
 QUrl SongPlaylistItem::Url() const {
-  if (QFile::exists(song_.filename())) {
-    return QUrl::fromLocalFile(song_.filename());
-  } else {
-    return song_.filename();
-  }
+  return song_.url();
 }
 
 void SongPlaylistItem::Reload() {
-  song_.InitFromFile(song_.filename(), song_.directory_id());
+  QString old_filename = song_.filename();
+  int old_directory_id = song_.directory_id();
+
+  song_ = Song();
+  song_.InitFromFile(old_filename, old_directory_id);
 }
 
 Song SongPlaylistItem::Metadata() const {

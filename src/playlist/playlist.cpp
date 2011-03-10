@@ -237,11 +237,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
       // Don't forget to change Playlist::CompareItems when adding new columns
       switch (index.column()) {
         case Column_Title:
-          if (!song.title().isEmpty())
-            return song.title();
-          if (!song.basefilename().isEmpty())
-            return song.basefilename();
-          return song.filename();
+          return song.PrettyTitle();
         case Column_Artist:       return song.artist();
         case Column_Album:        return song.album();
         case Column_Length:       return song.length_nanosec();
@@ -526,8 +522,9 @@ void Playlist::set_current_row(int i) {
   }
 
   if (current_item_index_.isValid()) {
-    emit dataChanged(current_item_index_, current_item_index_.sibling(current_item_index_.row(), ColumnCount-1));
-    emit CurrentSongChanged(current_item_metadata());
+    InformOfCurrentSongChange(current_item_index_,
+                              current_item_index_.sibling(current_item_index_.row(), ColumnCount-1),
+                              current_item_metadata());
   }
 
   // Update the virtual index
@@ -1251,8 +1248,9 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
   current_item_->SetTemporaryMetadata(song);
   UpdateScrobblePoint();
 
-  emit dataChanged(index(current_item_index_.row(), 0), index(current_item_index_.row(), ColumnCount-1));
-  emit CurrentSongChanged(song);
+  InformOfCurrentSongChange(index(current_item_index_.row(), 0),
+                            index(current_item_index_.row(), ColumnCount-1),
+                            song);
 }
 
 void Playlist::ClearStreamMetadata() {
@@ -1353,7 +1351,8 @@ void Playlist::RemoveItemsNotInQueue() {
 void Playlist::ReloadItems(const QList<int>& rows) {
   foreach (int row, rows) {
     item_at(row)->Reload();
-    emit dataChanged(index(row, 0), index(row, ColumnCount-1));
+    InformOfCurrentSongChange(index(row, 0), index(row, ColumnCount-1),
+                              item_at(row)->Metadata());
   }
 }
 
@@ -1517,4 +1516,14 @@ void Playlist::set_column_align_center(int column) {
 
 void Playlist::set_column_align_right(int column) {
   column_alignments_[column] = (Qt::AlignRight | Qt::AlignVCenter);
+}
+
+void Playlist::InformOfCurrentSongChange(const QModelIndex& top_left, const QModelIndex& bottom_right,
+                                         const Song& metadata) {
+  emit dataChanged(top_left, bottom_right);
+  // if the song is invalid, we won't play it - there's no point in
+  // informing anybody about the change
+  if(metadata.is_valid()) {
+    emit CurrentSongChanged(metadata);
+  }
 }

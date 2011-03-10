@@ -92,6 +92,10 @@ signals:
   // Emitted when there's a manual change to the current's track position.
   void Seeked(qlonglong microseconds);
 
+  // Emitted when Player has processed a request to play another song. This contains
+  // the URL of the song and a flag saying whether it was able to play the song.
+  void SongChangeRequestProcessed(const QUrl& url, bool valid);
+
   void ForceShowOSD(Song);
 };
 
@@ -146,6 +150,9 @@ public slots:
   void NextItem(Engine::TrackChangeType change);
 
   void NextInternal(Engine::TrackChangeType);
+
+  void ValidSongRequested(const QUrl&);
+  void InvalidSongRequested(const QUrl&);
 
  private:
   PlaylistManagerInterface* playlists_;

@@ -197,6 +197,9 @@ class Song {
 
   int directory_id() const { return d->directory_id_; }
   const QString& filename() const { return d->filename_; }
+  // Returns this Song's URL which may point either to a file or to another type
+  // of stream.
+  QUrl url() const;
   const QString& basefilename() const { return d->basefilename_; }
   uint mtime() const { return d->mtime_; }
   uint ctime() const { return d->ctime_; }

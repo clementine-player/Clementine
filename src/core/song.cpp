@@ -263,19 +263,22 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   if (qApp->thread() == QThread::currentThread())
     qWarning() << Q_FUNC_INFO << "on GUI thread!";
 #endif
+
+  d->init_from_file_ = true;
+
   d->filename_ = filename;
   d->directory_id_ = directory_id;
+
+  QFileInfo info(filename);
+  d->basefilename_ = info.fileName();
 
   QMutexLocker l(&taglib_mutex_);
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
-  if(fileref->isNull())
+  if(fileref->isNull()) {
     return;
+  }
 
-  d->init_from_file_ = true;
-
-  QFileInfo info(filename);
-  d->basefilename_ = info.fileName();
   d->filesize_ = info.size();
   d->mtime_ = info.lastModified().toTime_t();
   d->ctime_ = info.created().toTime_t();
@@ -928,12 +931,12 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 #endif // Q_OS_WIN32
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
-  d->valid_ = true;
-
   if (d->init_from_file_) {
     // This Song was already loaded using taglib. Our tags are probably better than the engine's.
     return;
   }
+
+  d->valid_ = true;
 
   UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
   QTextCodec* codec = detector.Guess(bundle);
@@ -1027,6 +1030,12 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setSource(lastfm::Track::Player);
 }
 #endif // HAVE_LIBLASTFM
+
+QUrl Song::url() const {
+  return QFile::exists(filename())
+             ? QUrl::fromLocalFile(filename())
+             : filename();
+}
 
 QString Song::PrettyTitle() const {
   QString title(d->title_);

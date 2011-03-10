@@ -51,6 +51,11 @@ Player::Player(PlaylistManagerInterface* playlists, LastFMService* lastfm,
   SetVolume(settings_.value("volume", 50).toInt());
 
   connect(engine_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
+
+  connect(engine_.get(), SIGNAL(ValidSongRequested(QUrl)), SLOT(ValidSongRequested(QUrl)));
+  connect(engine_.get(), SIGNAL(InvalidSongRequested(QUrl)), SLOT(InvalidSongRequested(QUrl)));
+
+  connect(playlists, SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentMetadataChanged(Song)));
 }
 
 Player::~Player() {
@@ -272,6 +277,11 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
 }
 
 void Player::CurrentMetadataChanged(const Song& metadata) {
+  // those things might have changed (especially when a previously invalid
+  // song was reloaded) so we push the latest version into Engine
+  engine_->Load(metadata.url(), Engine::Auto,
+                metadata.beginning_nanosec(), metadata.end_nanosec());
+
 #ifdef HAVE_LIBLASTFM
   lastfm_->NowPlaying(metadata);
 #endif
@@ -440,4 +450,16 @@ void Player::TrackAboutToEnd() {
     engine_->StartPreloading(url, next_item_->Metadata().beginning_nanosec(),
                              next_item_->Metadata().end_nanosec());
   }
+}
+
+void Player::ValidSongRequested(const QUrl& url) {
+  emit SongChangeRequestProcessed(url, true);
+}
+
+void Player::InvalidSongRequested(const QUrl& url) {
+  // first send the notification to others...
+  emit SongChangeRequestProcessed(url, false);
+  // ... and now when our listeners have completed their processing of the
+  // current item we can change the current item by skipping to the next song
+  NextItem(Engine::Auto);
 }

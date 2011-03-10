@@ -56,6 +56,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     ignore_tags_(false),
     pipeline_is_initialised_(false),
     pipeline_is_connected_(false),
+    pipeline_error_(PipelineError()),
     pending_seek_nanosec_(-1),
     volume_percent_(100),
     volume_modifier_(1.0),
@@ -131,16 +132,20 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
 GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
   GError* error = NULL;
   GstElement* bin = gst_parse_bin_from_description(pipeline, TRUE, &error);
+
   if (error) {
     QString message = QString::fromLocal8Bit(error->message);
+    int domain = error->domain;
+    int code = error->code;
     g_error_free(error);
 
     qWarning() << message;
-    emit Error(message);
-    return NULL;
-  }
+    emit Error(message, domain, code);
 
-  return bin;
+    return NULL;
+  } else {
+    return bin;
+  }
 }
 
 bool GstEnginePipeline::Init() {
@@ -264,6 +269,11 @@ GstEnginePipeline::~GstEnginePipeline() {
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(pipeline_));
   }
+
+  if(!pipeline_error_.message.isEmpty()) {
+    emit Error(pipeline_error_.message, pipeline_error_.domain,
+               pipeline_error_.error_code);
+  }
 }
 
 
@@ -293,6 +303,7 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
 
 GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
+
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
       emit instance->EndOfStreamReached(false);
@@ -317,6 +328,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
     default:
       break;
   }
+
   return GST_BUS_PASS;
 }
 
@@ -340,7 +352,8 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   gst_message_parse_error(msg, &error, &debugs);
   QString message = QString::fromLocal8Bit(error->message);
   QString debugstr = QString::fromLocal8Bit(debugs);
-
+  int domain = error->domain;
+  int code = error->code;
   g_error_free(error);
   free(debugs);
 
@@ -352,8 +365,13 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
     return;
   }
 
+  // we'll send the error later, when pipeline is done with it's state changes
+  pipeline_error_ = PipelineError();
+  pipeline_error_.message = message;
+  pipeline_error_.domain = domain;
+  pipeline_error_.error_code = code;
+
   qDebug() << debugstr;
-  emit Error(message);
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
@@ -410,7 +428,6 @@ void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
   }
 }
 
-
 void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
@@ -430,7 +447,6 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) 
                               Q_ARG(qint64, instance->pending_seek_nanosec_));
   }
 }
-
 
 bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
@@ -538,7 +554,6 @@ qint64 GstEnginePipeline::position() const {
   return value;
 }
 
-
 qint64 GstEnginePipeline::length() const {
   GstFormat fmt = GST_FORMAT_TIME;
   gint64 value = 0;
@@ -546,7 +561,6 @@ qint64 GstEnginePipeline::length() const {
 
   return value;
 }
-
 
 GstState GstEnginePipeline::state() const {
   GstState s, sp;
@@ -581,7 +595,6 @@ void GstEnginePipeline::SetEqualizerEnabled(bool enabled) {
   eq_enabled_ = enabled;
   UpdateEqualizer();
 }
-
 
 void GstEnginePipeline::SetEqualizerParams(int preamp, const QList<int>& band_gains) {
   eq_preamp_ = preamp;

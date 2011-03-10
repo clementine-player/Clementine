@@ -102,6 +102,12 @@ class Base : public QObject, boost::noncopyable {
   void StatusText(const QString&);
   void Error(const QString&);
 
+  // Emitted when Engine was unable to play a song with the given QUrl.
+  void InvalidSongRequested(const QUrl&);
+  // Emitted when Engine successfully started playing a song with the 
+  // given QUrl.
+  void ValidSongRequested(const QUrl&);
+
   void MetaData(const Engine::SimpleMetaBundle&);
 
   // Signals that the engine's state has changed (a stream was stopped for example).

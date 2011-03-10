@@ -71,6 +71,8 @@ public slots:
   virtual void Remove(int id) = 0;
   virtual void ChangePlaylistOrder(const QList<int>& ids) = 0;
 
+  virtual void SongChangeRequestProcessed(const QUrl& url, bool valid) = 0;
+
   virtual void SetCurrentPlaylist(int id) = 0;
   virtual void SetActivePlaylist(int id) = 0;
   virtual void SetActiveToCurrent() = 0;
@@ -172,6 +174,8 @@ public slots:
   void RateCurrentSong(int rating);
 
   void PlaySmartPlaylist(smart_playlists::GeneratorPtr generator, bool as_new, bool clear);
+
+  void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
 private slots:
   void OneOfPlaylistsChanged();

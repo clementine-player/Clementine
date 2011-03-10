@@ -64,8 +64,6 @@ const char* GstEngine::kHypnotoadPipeline =
       "band0=-24 band1=-3 band2=7.5 band3=12 band4=8 "
       "band5=6 band6=5 band7=6 band8=0 band9=-24";
 
-// TODO: weird analyzer problems with .cues
-
 GstEngine::GstEngine()
   : Engine::Base(),
     delayq_(g_queue_new()),
@@ -530,8 +528,9 @@ void GstEngine::PlayDone() {
   GstStateChangeReturn ret = watcher->result();
   quint64 offset_nanosec = watcher->data();
 
-  if (!current_pipeline_)
+  if (!current_pipeline_) {
     return;
+  }
 
   if (ret == GST_STATE_CHANGE_FAILURE) {
     // Failure, but we got a redirection URL - try loading that instead
@@ -559,6 +558,8 @@ void GstEngine::PlayDone() {
   }
 
   emit StateChanged(Engine::Playing);
+  // we've successfully started playing a media stream with this url
+  emit ValidSongRequested(url_);
 }
 
 
@@ -692,14 +693,20 @@ void GstEngine::timerEvent(QTimerEvent* e) {
   }
 }
 
-void GstEngine::HandlePipelineError(const QString& message) {
+void GstEngine::HandlePipelineError(const QString& message, int domain, int error_code) {
   qWarning() << "Gstreamer error:" << message;
 
   current_pipeline_.reset();
-  emit Error(message);
-  emit StateChanged(Engine::Empty);
-}
 
+  emit StateChanged(Engine::Empty);
+  // unable to play media stream with this url
+  emit InvalidSongRequested(url_);
+
+  // no user error message when the error is 'no such URI'
+  if(!(domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_NOT_FOUND)) {
+    emit Error(message);
+  }
+}
 
 void GstEngine::EndOfStreamReached(bool has_next_track) {
   GstEnginePipeline* pipeline_sender = qobject_cast<GstEnginePipeline*>(sender());
@@ -774,11 +781,12 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_buffer_duration_nanosec(buffer_duration_nanosec_);
 
   ret->AddBufferConsumer(this);
-  foreach (BufferConsumer* consumer, buffer_consumers_)
+  foreach (BufferConsumer* consumer, buffer_consumers_) {
     ret->AddBufferConsumer(consumer);
+  }
 
   connect(ret.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(EndOfStreamReached(bool)));
-  connect(ret.get(), SIGNAL(Error(QString)), SLOT(HandlePipelineError(QString)));
+  connect(ret.get(), SIGNAL(Error(QString,int,int)), SLOT(HandlePipelineError(QString,int,int)));
   connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(Engine::SimpleMetaBundle)));
   connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));

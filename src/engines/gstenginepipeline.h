@@ -40,6 +40,12 @@ class GstEnginePipeline : public QObject {
   Q_OBJECT
 
  public:
+  struct PipelineError {
+    QString message;
+    int domain;
+    int error_code;
+  };
+
   GstEnginePipeline(GstEngine* engine);
   ~GstEnginePipeline();
 
@@ -92,7 +98,9 @@ class GstEnginePipeline : public QObject {
  signals:
   void EndOfStreamReached(bool has_next_track);
   void MetadataFound(const Engine::SimpleMetaBundle& bundle);
-  void Error(const QString& message);
+  // This indicates an error, delegated from GStreamer, in the pipeline.
+  // The message, domain and error_code are related to GStreamer's GError.
+  void Error(const QString& message, int domain, int error_code);
   void FaderFinished();
 
  protected:
@@ -107,10 +115,12 @@ class GstEnginePipeline : public QObject {
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
+
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
   void ElementMessageReceived(GstMessage*);
   void StateChangedMessageReceived(GstMessage*);
+
   QString ParseTag(GstTagList* list, const char* tag) const;
 
   bool Init();
@@ -191,6 +201,8 @@ class GstEnginePipeline : public QObject {
   // Also we have to wait for the decodebin to be connected.
   bool pipeline_is_initialised_;
   bool pipeline_is_connected_;
+  // Cached error thrown from GStreamer during pipeline's initialization.
+  PipelineError pipeline_error_;
   qint64 pending_seek_nanosec_;
 
   int volume_percent_;

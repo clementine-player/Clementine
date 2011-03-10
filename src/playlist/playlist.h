@@ -271,6 +271,9 @@ class Playlist : public QAbstractListModel {
 
   void RemoveItemsNotInQueue();
 
+  void InformOfCurrentSongChange(const QModelIndex& top_left, const QModelIndex& bottom_right,
+                                 const Song& metadata);
+
  private slots:
   void TracksAboutToBeDequeued(const QModelIndex&, int begin, int end);
   void TracksDequeued();

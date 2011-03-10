@@ -380,6 +380,8 @@ MainWindow::MainWindow(
   connect(ui_->volume, SIGNAL(valueChanged(int)), player_, SLOT(SetVolume(int)));
 
   connect(player_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+  connect(player_, SIGNAL(SongChangeRequestProcessed(QUrl,bool)), playlists_, SLOT(SongChangeRequestProcessed(QUrl,bool)));
+
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
