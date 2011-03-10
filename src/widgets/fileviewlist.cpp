@@ -119,3 +119,18 @@ void FileViewList::CopyToDeviceSlot() {
 void FileViewList::DeleteSlot() {
   emit Delete(FilenamesFromSelection());
 }
+
+void FileViewList::mousePressEvent(QMouseEvent* e) {
+  QListView::mousePressEvent(e);
+
+  //enqueue to playlist with middleClick
+  if (e->button() == Qt::MidButton) {
+    //we need to update the menu selection
+    menu_selection_ = selectionModel()->selection();
+
+    MimeData* data = new MimeData;
+    data->setUrls(UrlListFromSelection());
+    data->enqueue_now_ = true;
+    emit AddToPlaylist(data);
+  }
+}

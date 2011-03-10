@@ -42,6 +42,7 @@ void SongLoaderInserter::Load(Playlist *destination,
   destination_ = destination;
   row_ = row;
   play_now_ = play_now;
+  enqueue_ = enqueue;
 
   connect(destination, SIGNAL(destroyed()), SLOT(DestinationDestroyed()));
 

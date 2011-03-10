@@ -497,14 +497,6 @@ void LibraryView::keyPressEvent(QKeyEvent* e) {
   QTreeView::keyPressEvent(e);
 }
 
-void LibraryView::mousePressEvent(QMouseEvent* e) {
-  QTreeView::mousePressEvent(e);
-
-  //enqueue to playlist with middleClick
-  if (e->button() == Qt::MidButton)
-    AddToPlaylistEnqueue();
-}
-
 void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
   if (songs_with_errors.isEmpty())
     return;

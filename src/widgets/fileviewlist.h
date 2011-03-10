@@ -29,6 +29,8 @@ class FileViewList : public QListView {
  public:
   FileViewList(QWidget* parent = 0);
 
+  void mousePressEvent(QMouseEvent* e);
+
  signals:
   void AddToPlaylist(QMimeData* data);
   void CopyToLibrary(const QList<QUrl>& urls);

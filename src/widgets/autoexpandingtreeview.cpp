@@ -102,4 +102,13 @@ void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
   }
 
   QTreeView::mousePressEvent(event);
+
+  //enqueue to playlist with middleClick
+  if (event->button() == Qt::MidButton) {
+    QMimeData* data = model()->mimeData(selectedIndexes());
+    if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+      mime_data->enqueue_now_ = true;
+    }
+    emit AddToPlaylistSignal(data);
+  }
 }
