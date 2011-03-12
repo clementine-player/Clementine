@@ -45,6 +45,7 @@
 #include "library/librarydirectorymodel.h"
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"
+#include "musicbrainz/fingerprinter.h"
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
@@ -1887,6 +1888,11 @@ void MainWindow::Exit() {
 }
 
 void MainWindow::AutoCompleteTags() {
+  if (!Fingerprinter::GstreamerHasOfa()) {
+    QMessageBox::warning(this, tr("Error"), tr("Your gstreamer installation is missing the 'ofa' plugin.  This is required for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' package."));
+    return;
+  }
+
   // Create the tag fetching stuff if it hasn't been already
   if (!tag_fetcher_) {
     tag_fetcher_.reset(new TagFetcher);

@@ -23,6 +23,7 @@
 #include "core/utilities.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "musicbrainz/fingerprinter.h"
 #include "playlist/playlistdelegates.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/coverfromurldialog.h"
@@ -59,7 +60,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
           SLOT(ArtLoaded(quint64,QImage,QImage)));
   connect(tag_fetcher_, SIGNAL(ResultAvailable(Song, SongList)),
-          results_dialog_, SLOT(FetchTagFinished(Songa, SongList)),
+          results_dialog_, SLOT(FetchTagFinished(Song, SongList)),
           Qt::QueuedConnection);
   connect(tag_fetcher_, SIGNAL(Progress(Song,QString)),
           results_dialog_, SLOT(FetchTagProgress(Song,QString)));
@@ -69,7 +70,6 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_container->hide();
-  ui_->fetch_tag->setVisible(false);
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -679,6 +679,11 @@ void EditTagDialog::ResetPlayCounts() {
 }
 
 void EditTagDialog::FetchTag() {
+  if (!Fingerprinter::GstreamerHasOfa()) {
+    QMessageBox::warning(this, tr("Error"), tr("Your gstreamer installation is missing the 'ofa' plugin.  This is required for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' package."));
+    return;
+  }
+
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
 
   SongList songs;

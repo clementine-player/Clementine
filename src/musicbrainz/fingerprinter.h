@@ -37,6 +37,9 @@ public:
   Fingerprinter(const QString& filename);
   ~Fingerprinter();
 
+  // Checks if this gstreamer installation has the required ofa plugin.
+  static bool GstreamerHasOfa();
+
   // Creates a fingerprint from the song.  This method is blocking, so you want
   // to call it in another thread.  Returns an empty string if no fingerprint
   // could be created.

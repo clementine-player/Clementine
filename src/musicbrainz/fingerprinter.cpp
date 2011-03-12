@@ -32,6 +32,16 @@ Fingerprinter::~Fingerprinter() {
   delete event_loop_;
 }
 
+bool Fingerprinter::GstreamerHasOfa() {
+  GstElementFactory* factory = gst_element_factory_find("ofa");
+  if (!factory) {
+    return false;
+  }
+
+  gst_object_unref(factory);
+  return true;
+}
+
 GstElement* Fingerprinter::CreateElement(const QString &factory_name,
                                        GstElement *bin) {
   GstElement* ret = gst_element_factory_make(
