@@ -32,7 +32,6 @@
 #include "core/player.h"
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
-#include "core/tagfetcher.h"
 #include "core/taskmanager.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
@@ -46,6 +45,7 @@
 #include "library/librarydirectorymodel.h"
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"
+#include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -476,9 +476,7 @@ MainWindow::MainWindow(
   playlist_menu_->addAction(ui_->action_edit_value);
   playlist_menu_->addAction(ui_->action_renumber_tracks);
   playlist_menu_->addAction(ui_->action_selection_set_value);
-#ifdef HAVE_LIBTUNEPIMP
   playlist_menu_->addAction(ui_->action_auto_complete_tags);
-#endif
   playlist_menu_->addSeparator();
   playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
   playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
@@ -1889,16 +1887,17 @@ void MainWindow::Exit() {
 }
 
 void MainWindow::AutoCompleteTags() {
-#ifdef HAVE_LIBTUNEPIMP
   // Create the tag fetching stuff if it hasn't been already
   if (!tag_fetcher_) {
     tag_fetcher_.reset(new TagFetcher);
     track_selection_dialog_.reset(new TrackSelectionDialog);
     track_selection_dialog_->set_save_on_close(true);
 
-    connect(tag_fetcher_.get(), SIGNAL(FetchFinished(QString, SongList)),
-            track_selection_dialog_.get(), SLOT(FetchTagFinished(QString, SongList)),
+    connect(tag_fetcher_.get(), SIGNAL(ResultAvailable(Song, SongList)),
+            track_selection_dialog_.get(), SLOT(FetchTagFinished(Song, SongList)),
             Qt::QueuedConnection);
+    connect(tag_fetcher_.get(), SIGNAL(Progress(Song,QString)),
+            track_selection_dialog_.get(), SLOT(FetchTagProgress(Song,QString)));
     connect(track_selection_dialog_.get(), SIGNAL(accepted()),
             SLOT(AutoCompleteTagsAccepted()));
   }
@@ -1917,22 +1916,20 @@ void MainWindow::AutoCompleteTags() {
     if (song.IsEditable()) {
       songs << song;
       autocomplete_tag_items_ << item;
-      tag_fetcher_->FetchFromFile(song.filename());
     }
   }
 
   track_selection_dialog_->Init(songs);
+  tag_fetcher_->StartFetch(songs);
+
   track_selection_dialog_->show();
-#endif // HAVE_LIBTUNEPIMP
 }
 
 void MainWindow::AutoCompleteTagsAccepted() {
-#ifdef HAVE_LIBTUNEPIMP
   foreach (PlaylistItemPtr item, autocomplete_tag_items_) {
     item->Reload();
   }
 
   // This is really lame but we don't know what rows have changed
   ui_->playlist->view()->update();
-#endif // HAVE_LIBTUNEPIMP
 }

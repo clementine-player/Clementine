@@ -31,10 +31,6 @@ if(HAVE_LIBLASTFM)
   include_directories(${LASTFM_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
-if(HAVE_LIBTUNEPIMP)
-  include_directories(${TUNEPIMP_INCLUDE_DIRS})
-endif(HAVE_LIBTUNEPIMP)
-
 if(HAVE_SCRIPTING_PYTHON)
   include_directories(${PYTHON_INCLUDE_DIRS})
 endif(HAVE_SCRIPTING_PYTHON)
@@ -80,7 +76,6 @@ set(SOURCES
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
-  core/tagfetcher.cpp
   core/taskmanager.cpp
   core/utilities.cpp
 
@@ -111,6 +106,11 @@ set(SOURCES
   library/libraryviewcontainer.cpp
   library/librarywatcher.cpp
   library/sqlrow.cpp
+
+  musicbrainz/fingerprinter.cpp
+  musicbrainz/musicbrainzclient.cpp
+  musicbrainz/musicdnsclient.cpp
+  musicbrainz/tagfetcher.cpp
 
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
@@ -274,7 +274,6 @@ set(HEADERS
   core/organise.h
   core/player.h
   core/songloader.h
-  core/tagfetcher.h
   core/taskmanager.h
 
   devices/connecteddevice.h
@@ -301,6 +300,10 @@ set(HEADERS
   library/libraryview.h
   library/libraryviewcontainer.h
   library/librarywatcher.h
+
+  musicbrainz/musicbrainzclient.h
+  musicbrainz/musicdnsclient.h
+  musicbrainz/tagfetcher.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -886,10 +889,6 @@ endif(ENABLE_VISUALISATIONS)
 if(HAVE_LIBLASTFM)
   target_link_libraries(clementine_lib ${LASTFM_LIBRARIES})
 endif(HAVE_LIBLASTFM)
-
-if(HAVE_LIBTUNEPIMP)
-  target_link_libraries(clementine_lib ${TUNEPIMP_LIBRARIES})
-endif(HAVE_LIBTUNEPIMP)
 
 if(HAVE_LIBGPOD)
   target_link_libraries(clementine_lib ${LIBGPOD_LIBRARIES})

@@ -37,7 +37,8 @@ public:
   void Init(const SongList& songs);
 
 public slots:
-  void FetchTagFinished(const QString& filename, const SongList& songs_guessed);
+  void FetchTagProgress(const Song& original_song, const QString& progress);
+  void FetchTagFinished(const Song& original_song, const SongList& songs_guessed);
 
   // QDialog
   void accept();
@@ -62,6 +63,7 @@ private:
 
     Song original_song_;
     bool pending_;
+    QString progress_string_;
     SongList results_;
     int selected_result_;
   };

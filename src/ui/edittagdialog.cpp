@@ -48,9 +48,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
     backend_(NULL),
     loading_(false),
     ignore_edits_(false),
-#ifdef HAVE_LIBTUNEPIMP
     tag_fetcher_(new TagFetcher(this)),
-#endif
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
     cover_art_is_set_(false),
@@ -60,20 +58,18 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
           SLOT(ArtLoaded(quint64,QImage,QImage)));
-#ifdef HAVE_LIBTUNEPIMP
-  connect(tag_fetcher_, SIGNAL(FetchFinished(QString, SongList)),
-          results_dialog_, SLOT(FetchTagFinished(QString, SongList)),
+  connect(tag_fetcher_, SIGNAL(ResultAvailable(Song, SongList)),
+          results_dialog_, SLOT(FetchTagFinished(Songa, SongList)),
           Qt::QueuedConnection);
+  connect(tag_fetcher_, SIGNAL(Progress(Song,QString)),
+          results_dialog_, SLOT(FetchTagProgress(Song,QString)));
   connect(results_dialog_, SIGNAL(SongChosen(Song, Song)),
           SLOT(FetchTagSongChosen(Song, Song)));
-#endif
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   ui_->loading_container->hide();
-#ifndef HAVE_LIBTUNEPIMP
   ui_->fetch_tag->setVisible(false);
-#endif
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -123,9 +119,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(ui_->rating, SIGNAL(RatingChanged(float)),
                        SLOT(SongRated(float)));
   connect(ui_->playcount_reset, SIGNAL(clicked()), SLOT(ResetPlayCounts()));
-#ifdef HAVE_LIBTUNEPIMP
   connect(ui_->fetch_tag, SIGNAL(clicked()), SLOT(FetchTag()));
-#endif
 
   // Set up the album cover menu
   cover_menu_ = new QMenu(this);
@@ -685,7 +679,6 @@ void EditTagDialog::ResetPlayCounts() {
 }
 
 void EditTagDialog::FetchTag() {
-#ifdef HAVE_LIBTUNEPIMP
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
 
   SongList songs;
@@ -697,15 +690,15 @@ void EditTagDialog::FetchTag() {
     }
 
     songs << song;
-    tag_fetcher_->FetchFromFile(song.filename());
   }
 
   if (songs.isEmpty())
     return;
 
   results_dialog_->Init(songs);
+  tag_fetcher_->StartFetch(songs);
+
   results_dialog_->show();
-#endif
 }
 
 void EditTagDialog::FetchTagSongChosen(const Song& original_song, const Song& new_metadata) {

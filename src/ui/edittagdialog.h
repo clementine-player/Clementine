@@ -24,9 +24,7 @@
 #include "config.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
-#ifdef HAVE_LIBTUNEPIMP
-# include "core/tagfetcher.h"
-#endif
+#include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistitem.h"
 #include "widgets/lineedit.h"
 #include "trackselectiondialog.h"
@@ -148,9 +146,7 @@ private:
 
   bool ignore_edits_;
 
-#ifdef HAVE_LIBTUNEPIMP
   TagFetcher* tag_fetcher_;
-#endif
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   quint64 cover_art_id_;

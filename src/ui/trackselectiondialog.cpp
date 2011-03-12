@@ -89,12 +89,34 @@ void TrackSelectionDialog::Init(const SongList& songs) {
   ui_->song_list->setCurrentRow(0);
 }
 
-void TrackSelectionDialog::FetchTagFinished(const QString& filename,
+void TrackSelectionDialog::FetchTagProgress(const Song& original_song,
+                                            const QString& progress) {
+  // Find the item with this filename
+  int row = -1;
+  for (int i=0 ; i<data_.count() ; ++i) {
+    if (data_[i].original_song_.filename() == original_song.filename()) {
+      row = i;
+      break;
+    }
+  }
+
+  if (row == -1)
+    return;
+
+  data_[row].progress_string_ = progress;
+
+  // If it's the current item, update the display
+  if (ui_->song_list->currentIndex().row() == row) {
+    UpdateStack();
+  }
+}
+
+void TrackSelectionDialog::FetchTagFinished(const Song& original_song,
                                             const SongList& songs_guessed) {
   // Find the item with this filename
   int row = -1;
   for (int i=0 ; i<data_.count() ; ++i) {
-    if (data_[i].original_song_.filename() == filename) {
+    if (data_[i].original_song_.filename() == original_song.filename()) {
       row = i;
       break;
     }
@@ -125,6 +147,7 @@ void TrackSelectionDialog::UpdateStack() {
 
   if (data.pending_) {
     ui_->stack->setCurrentWidget(ui_->loading_page);
+    ui_->progress_label->setText(data.progress_string_ + "...");
     return;
   } else if (data.results_.isEmpty()) {
     ui_->stack->setCurrentWidget(ui_->error_page);

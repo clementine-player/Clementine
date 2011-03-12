@@ -187,6 +187,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
+  qRegisterMetaType<Song>("Song");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<Engine::State>("Engine::State");

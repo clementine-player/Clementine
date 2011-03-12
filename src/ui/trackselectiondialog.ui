@@ -36,7 +36,7 @@
      </widget>
      <widget class="QStackedWidget" name="stack">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="loading_page">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -72,9 +72,9 @@
            <widget class="BusyIndicator" name="label_2"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="progress_label">
             <property name="text">
-             <string>Identifying song...</string>
+             <string/>
             </property>
            </widget>
           </item>

@@ -1,4 +1,5 @@
 /* This file is part of Clementine.
+   Copyright 2010, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,32 +15,37 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIG_H_IN
-#define CONFIG_H_IN
+#ifndef MUSICDNSCLIENT_H
+#define MUSICDNSCLIENT_H
 
-#define CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}"
+#include <QMap>
+#include <QObject>
 
-#cmakedefine ENABLE_VISUALISATIONS
-#cmakedefine USE_INSTALL_PREFIX
-#cmakedefine USE_SYSTEM_PROJECTM
+class QNetworkAccessManager;
+class QNetworkReply;
 
-#cmakedefine SNOW_LEOPARD
-#cmakedefine LEOPARD
-#cmakedefine HAVE_SPARKLE
-#cmakedefine HAVE_STATIC_SQLITE
+class MusicDnsClient : public QObject {
+  Q_OBJECT
 
-#cmakedefine HAVE_DBUS
-#cmakedefine HAVE_GIO
-#cmakedefine HAVE_IMOBILEDEVICE
-#cmakedefine HAVE_LIBARCHIVE
-#cmakedefine HAVE_LIBGPOD
-#cmakedefine HAVE_LIBINDICATE
-#cmakedefine HAVE_LIBLASTFM
-#cmakedefine HAVE_LIBMTP
-#cmakedefine HAVE_WIIMOTEDEV
+public:
+  MusicDnsClient(QObject* parent = 0);
 
-#cmakedefine HAVE_SCRIPTING_PYTHON
+  void Start(int id, const QString& fingerprint, int duration_msec);
+  void Cancel(int id);
+  void CancelAll();
 
-#cmakedefine HAVE_REMOTE
+signals:
+  void Finished(int id, const QString& puid);
 
-#endif // CONFIG_H_IN
+private slots:
+  void RequestFinished();
+
+private:
+  static const char* kClientId;
+  static const char* kUrl;
+
+  QNetworkAccessManager* network_;
+  QMap<QNetworkReply*, int> requests_;
+};
+
+#endif // MUSICDNSCLIENT_H
