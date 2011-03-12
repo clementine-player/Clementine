@@ -177,7 +177,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
 
     # Try to parse the playlist
     parser = clementine.PlaylistParser(clementine.library)
-    songs = parser.Load(reply)
+    songs = parser.LoadFromDevice(reply)
 
     # Failed to get the playlist?
     if len(songs) == 0:
