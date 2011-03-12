@@ -295,7 +295,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<VisualisationContainer> visualisation_;
 #endif
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
 #endif
 

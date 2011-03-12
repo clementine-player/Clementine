@@ -58,9 +58,9 @@ const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image) {
 #endif // HAVE_DBUS
 
 void OSD::Init() {
+#ifdef HAVE_DBUS
   notification_id_ = 0;
 
-#ifdef HAVE_DBUS
   interface_.reset(new OrgFreedesktopNotificationsInterface(
       OrgFreedesktopNotificationsInterface::staticInterfaceName(),
       "/org/freedesktop/Notifications",

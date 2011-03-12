@@ -217,6 +217,10 @@ if(ENABLE_SCRIPTING_PYTHON AND PYTHONLIBS_FOUND AND PYQT_SIP_DIR)
   set(HAVE_SCRIPTING_PYTHON ON)
 endif(ENABLE_SCRIPTING_PYTHON AND PYTHONLIBS_FOUND AND PYQT_SIP_DIR)
 
+if(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
+  set(HAVE_WIIMOTEDEV ON)
+endif(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
+
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
   # to system installed projectM instead.
@@ -349,7 +353,7 @@ summary_add("devices: MTP support" HAVE_LIBMTP)
 summary_add("devices: GIO backend" HAVE_GIO)
 summary_add("D-Bus support" HAVE_DBUS)
 summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
-summary_add("Wiimote support" ENABLE_WIIMOTEDEV)
+summary_add("Wiimote support" HAVE_WIIMOTEDEV)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)
 summary_add("Last.fm support" HAVE_LIBLASTFM)
 summary_add("MusicBrainz support" HAVE_LIBTUNEPIMP)

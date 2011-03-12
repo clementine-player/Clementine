@@ -198,7 +198,7 @@ void OSD::ShowMessage(const QString& summary,
 void OSD::CallFinished(QDBusPendingCallWatcher*) {}
 #endif
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
 
 void OSD::WiiremoteActived(int id) {
   ShowMessage(QString(tr("%1: Wiimotedev module")).arg(QCoreApplication::applicationName()),

@@ -38,7 +38,7 @@ class Ui_SettingsDialog;
 #ifdef HAVE_LIBLASTFM
   class LastFMConfig;
 #endif
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   class WiimotedevShortcutsConfig;
 #endif
 #ifdef HAVE_REMOTE
@@ -70,7 +70,7 @@ class SettingsDialog : public QDialog {
 #ifdef HAVE_REMOTE
     Page_Remote,
 #endif
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
     Page_Wiimotedev,
 #endif
   };
@@ -120,7 +120,7 @@ class SettingsDialog : public QDialog {
 #ifdef HAVE_LIBLASTFM
   LastFMConfig* lastfm_config_;
 #endif
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   WiimotedevShortcutsConfig* wiimotedev_config_;
 #endif
 #ifdef HAVE_REMOTE
@@ -137,7 +137,7 @@ class SettingsDialog : public QDialog {
 
   BackgroundStreams* streams_;
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
  signals:
   void SetWiimotedevInterfaceActived(bool);
 #endif

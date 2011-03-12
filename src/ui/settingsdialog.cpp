@@ -35,7 +35,7 @@
 # include "radio/lastfmconfig.h"
 #endif
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
 # include "ui/wiimotedevshortcutsconfig.h"
 # include "ui_wiimotedevshortcutsconfig.h"
 # include "wiimotedev/shortcuts.h"
@@ -146,7 +146,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 
   AddStreams();
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   // Wiimotedev page
   ui_->list->insertItem(Page_Wiimotedev, "Wiimotedev");
   ui_->list->item(Page_Wiimotedev)->setIcon(QIcon(":/icons/32x32/wiimotedev.png"));
@@ -369,7 +369,7 @@ void SettingsDialog::accept() {
   ui_->lyric_settings->Save();
 
   // Wii remotes
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   s.beginGroup(WiimotedevShortcuts::kActionsGroup);
   s.remove("");
   foreach (const WiimotedevShortcutsConfig::Shortcut& shortcut, wiimotedev_config_->actions_)

@@ -19,7 +19,6 @@
 
 #define CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}"
 
-#cmakedefine ENABLE_WIIMOTEDEV
 #cmakedefine ENABLE_VISUALISATIONS
 #cmakedefine USE_INSTALL_PREFIX
 #cmakedefine USE_SYSTEM_PROJECTM
@@ -38,6 +37,7 @@
 #cmakedefine HAVE_LIBLASTFM
 #cmakedefine HAVE_LIBTUNEPIMP
 #cmakedefine HAVE_LIBMTP
+#cmakedefine HAVE_WIIMOTEDEV
 
 #cmakedefine HAVE_SCRIPTING_PYTHON
 

@@ -97,7 +97,7 @@
 # include "ui/albumcovermanager.h"
 #endif
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
 # include "wiimotedev/shortcuts.h"
 #endif
 
@@ -189,7 +189,7 @@ MainWindow::MainWindow(
 #ifdef ENABLE_VISUALISATIONS
     visualisation_(NULL),
 #endif
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
     wiimotedev_shortcuts_(NULL),
 #endif
     scripts_(new ScriptManager(this)),
@@ -702,7 +702,7 @@ MainWindow::MainWindow(
   library_->Init();
   library_->StartThreads();
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
 // http://code.google.com/p/clementine-player/issues/detail?id=670
 // Switched position, mayby something is not ready ?
 
@@ -766,7 +766,7 @@ void MainWindow::ReloadAllSettings() {
   player_->engine()->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
   radio_model_->ReloadSettings();
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   wiimotedev_shortcuts_->ReloadSettings();
 #endif
 #ifdef HAVE_REMOTE
@@ -1705,7 +1705,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadAllSettings()));
 
-#ifdef ENABLE_WIIMOTEDEV
+#ifdef HAVE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
 }
