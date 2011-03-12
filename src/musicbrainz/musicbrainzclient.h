@@ -20,10 +20,10 @@
 
 #include <QMap>
 #include <QObject>
+#include <QXmlStreamReader>
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QXmlStreamReader;
 
 class MusicBrainzClient : public QObject {
   Q_OBJECT
