@@ -277,8 +277,7 @@ void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
 void Player::CurrentMetadataChanged(const Song& metadata) {
   // those things might have changed (especially when a previously invalid
   // song was reloaded) so we push the latest version into Engine
-  engine_->Load(metadata.url(), Engine::Auto,
-                metadata.beginning_nanosec(), metadata.end_nanosec());
+  engine_->RefreshMarkers(metadata.beginning_nanosec(), metadata.end_nanosec());
 
 #ifdef HAVE_LIBLASTFM
   lastfm_->NowPlaying(metadata);

@@ -64,6 +64,13 @@ class Base : public QObject, boost::noncopyable {
   // in miliseconds.
   virtual bool Load(const QUrl& url, TrackChangeType change,
                     quint64 beginning_nanosec, qint64 end_nanosec);
+  // Sets new values for the beginning and end markers of the currently playing
+  // song.
+  // This doesn't change the state of engine or the stream's current position.
+  virtual void RefreshMarkers(quint64 beginning_nanosec, qint64 end_nanosec) {
+    beginning_nanosec_ = beginning_nanosec;
+    end_nanosec_ = end_nanosec;
+  }
 
   // Plays a media stream represented with the URL 'u' from the given 'beginning'
   // to the given 'end' (usually from 0 to a song's length). Both markers
