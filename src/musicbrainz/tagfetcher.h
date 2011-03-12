@@ -29,6 +29,9 @@ class MusicDnsClient;
 class TagFetcher : public QObject {
   Q_OBJECT
 
+  // High level interface to Fingerprinter, MusicDnsClient and
+  // MusicBrainzClient.
+
 public:
   TagFetcher(QObject* parent = 0);
 

@@ -28,6 +28,12 @@ class QXmlStreamReader;
 class MusicBrainzClient : public QObject {
   Q_OBJECT
 
+  // Gets metadata for a particular PUID.
+  // A PUID is created from a fingerprint using MusicDnsClient.
+  // You can create one MusicBrainzClient and make multiple requests using it.
+  // IDs are provided by the caller when a request is started and included in
+  // the Finished signal - they have no meaning to MusicBrainzClient.
+
 public:
   MusicBrainzClient(QObject* parent = 0);
 
@@ -42,8 +48,16 @@ public:
   };
   typedef QList<Result> ResultList;
 
+  // Starts a request and returns immediately.  Finished() will be emitted
+  // later with the same ID.
   void Start(int id, const QString& puid);
+
+  // Cancels the request with the given ID.  Finished() will never be emitted
+  // for that ID.  Does nothing if there is no request with the given ID.
   void Cancel(int id);
+
+  // Cancels all requests.  Finished() will never be emitted for any pending
+  // requests.
   void CancelAll();
 
 signals:

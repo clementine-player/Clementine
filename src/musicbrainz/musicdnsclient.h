@@ -27,11 +27,27 @@ class QNetworkReply;
 class MusicDnsClient : public QObject {
   Q_OBJECT
 
+  // Gets a PUID from an OFA fingerprint.
+  // A fingerprint identifies one particular encoding of a song and is created
+  // by Fingerprinter.  A PUID identifies the actual song and can be passed to
+  // Musicbrainz to get metadata.
+  // You can create one MusicDnsClient and make multiple requests using it.
+  // IDs are provided by the caller when a request is started and included in
+  // the Finished signal - they have no meaning to MusicDnsClient.
+
 public:
   MusicDnsClient(QObject* parent = 0);
 
+  // Starts a request and returns immediately.  Finished() will be emitted
+  // later with the same ID.
   void Start(int id, const QString& fingerprint, int duration_msec);
+
+  // Cancels the request with the given ID.  Finished() will never be emitted
+  // for that ID.  Does nothing if there is no request with the given ID.
   void Cancel(int id);
+
+  // Cancels all requests.  Finished() will never be emitted for any pending
+  // requests.
   void CancelAll();
 
 signals:

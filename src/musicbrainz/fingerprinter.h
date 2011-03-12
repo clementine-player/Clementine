@@ -25,10 +25,21 @@
 class QEventLoop;
 
 class Fingerprinter {
+  // Creates an OFA fingerprint from a song.
+  // Uses GStreamer to open and decode the file, also uses gstreamer's ofa
+  // element to generate the fingerprint.  The fingerprint identifies one
+  // particular encoding of a song.  Pass the fingerprint to MusicDNS to
+  // identify it.
+  // You should create one Fingerprinter for each file you want to fingerprint.
+  // This class works well with QtConcurrentMap.
+
 public:
   Fingerprinter(const QString& filename);
   ~Fingerprinter();
 
+  // Creates a fingerprint from the song.  This method is blocking, so you want
+  // to call it in another thread.  Returns an empty string if no fingerprint
+  // could be created.
   QString CreateFingerprint();
 
 private:
