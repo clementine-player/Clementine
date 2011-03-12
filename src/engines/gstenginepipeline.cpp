@@ -56,7 +56,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     ignore_tags_(false),
     pipeline_is_initialised_(false),
     pipeline_is_connected_(false),
-    pipeline_error_(PipelineError()),
     pending_seek_nanosec_(-1),
     volume_percent_(100),
     volume_modifier_(1.0),
@@ -269,11 +268,6 @@ GstEnginePipeline::~GstEnginePipeline() {
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(pipeline_));
   }
-
-  if(!pipeline_error_.message.isEmpty()) {
-    emit Error(pipeline_error_.message, pipeline_error_.domain,
-               pipeline_error_.error_code);
-  }
 }
 
 
@@ -314,7 +308,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       break;
 
     case GST_MESSAGE_ERROR:
-      instance->ErrorMessageReceived(msg);
+      QtConcurrent::run(instance, &GstEnginePipeline::ErrorMessageReceived, msg);
       break;
 
     case GST_MESSAGE_ELEMENT:
@@ -365,13 +359,18 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
     return;
   }
 
-  // we'll send the error later, when pipeline is done with it's state changes
-  pipeline_error_ = PipelineError();
-  pipeline_error_.message = message;
-  pipeline_error_.domain = domain;
-  pipeline_error_.error_code = code;
-
   qDebug() << debugstr;
+
+  // wait until the change of state is complete and if something went
+  // wrong signal the error; this makes skipping songs work even for
+  // ASYNC changes of state
+  // we're using a higher than usual timeout here to avoid race
+  // conditions; those are visible when we try to play another song
+  // due to skipping a broken one while the broken song's state is
+  // still being processed in GStreamer
+  if(state(kGstStateTimeoutNanosecs * 5) == GST_STATE_NULL) {
+    emit Error(message, domain, code);
+  }
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
@@ -563,8 +562,12 @@ qint64 GstEnginePipeline::length() const {
 }
 
 GstState GstEnginePipeline::state() const {
+  return state(kGstStateTimeoutNanosecs);
+}
+
+GstState GstEnginePipeline::state(int delay) const {
   GstState s, sp;
-  if (gst_element_get_state(pipeline_, &s, &sp, kGstStateTimeoutNanosecs) ==
+  if (gst_element_get_state(pipeline_, &s, &sp, delay) ==
       GST_STATE_CHANGE_FAILURE)
     return GST_STATE_NULL;
 

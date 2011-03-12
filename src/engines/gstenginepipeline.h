@@ -40,12 +40,6 @@ class GstEnginePipeline : public QObject {
   Q_OBJECT
 
  public:
-  struct PipelineError {
-    QString message;
-    int domain;
-    int error_code;
-  };
-
   GstEnginePipeline(GstEngine* engine);
   ~GstEnginePipeline();
 
@@ -87,6 +81,8 @@ class GstEnginePipeline : public QObject {
   // Please note that this method (unlike GstEngine's.length()) is
   // multiple-section media unaware.
   qint64 length() const;
+  // Returns this pipeline's state. May return GST_STATE_NULL if the state check
+  // timed out. The timeout value is a reasonable default.
   GstState state() const;
   qint64 segment_start() const { return segment_start_; }
 
@@ -132,6 +128,10 @@ class GstEnginePipeline : public QObject {
   bool ReplaceDecodeBin(const QUrl& url);
 
   void TransitionToNext();
+
+  // Returns this pipeline's state. May return GST_STATE_NULL if the state check
+  // timed out. The timeout value used is the given one.
+  GstState state(int timeout) const;
 
  private slots:
   void FaderTimelineFinished();
@@ -201,8 +201,6 @@ class GstEnginePipeline : public QObject {
   // Also we have to wait for the decodebin to be connected.
   bool pipeline_is_initialised_;
   bool pipeline_is_connected_;
-  // Cached error thrown from GStreamer during pipeline's initialization.
-  PipelineError pipeline_error_;
   qint64 pending_seek_nanosec_;
 
   int volume_percent_;

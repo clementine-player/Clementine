@@ -54,8 +54,6 @@ Player::Player(PlaylistManagerInterface* playlists, LastFMService* lastfm,
 
   connect(engine_.get(), SIGNAL(ValidSongRequested(QUrl)), SLOT(ValidSongRequested(QUrl)));
   connect(engine_.get(), SIGNAL(InvalidSongRequested(QUrl)), SLOT(InvalidSongRequested(QUrl)));
-
-  connect(playlists, SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentMetadataChanged(Song)));
 }
 
 Player::~Player() {
