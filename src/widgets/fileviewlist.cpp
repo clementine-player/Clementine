@@ -58,7 +58,7 @@ QList<QUrl> FileViewList::UrlListFromSelection() const {
   foreach (const QModelIndex& index, menu_selection_.indexes()) {
     if (index.column() == 0)
       urls << QUrl::fromLocalFile(
-          static_cast<QFileSystemModel*>(model())->filePath(index));
+          static_cast<QFileSystemModel*>(model())->fileInfo(index).canonicalFilePath());
   }
   return urls;
 }

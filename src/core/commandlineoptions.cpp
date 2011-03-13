@@ -192,7 +192,7 @@ bool CommandlineOptions::Parse() {
     if (value.contains("://"))
       urls_ << value;
     else
-      urls_ << QUrl::fromLocalFile(QFileInfo(value).absoluteFilePath());
+      urls_ << QUrl::fromLocalFile(QFileInfo(value).canonicalFilePath());
   }
 
   return true;

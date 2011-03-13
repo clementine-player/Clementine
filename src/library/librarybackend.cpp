@@ -22,12 +22,13 @@
 #include "core/scopedtransaction.h"
 #include "smartplaylists/search.h"
 
-#include <QDir>
-#include <QVariant>
-#include <QSettings>
-#include <QtDebug>
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QDir>
+#include <QFileInfo>
+#include <QSettings>
+#include <QVariant>
+#include <QtDebug>
 
 const char* LibraryBackend::kNewScoreSql =
     "case when playcount <= 0 then (%1 * 100 + score) / 2"
@@ -178,18 +179,20 @@ void LibraryBackend::UpdateTotalSongCount() {
   emit TotalSongCountUpdated(q.value(0).toInt());
 }
 
-void LibraryBackend::AddDirectory(const QString &path) {
+void LibraryBackend::AddDirectory(const QString& path) {
+  QString canonical_path = QFileInfo(path).canonicalFilePath();
+
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q(QString("INSERT INTO %1 (path, subdirs)"
                       " VALUES (:path, 1)").arg(dirs_table_), db);
-  q.bindValue(":path", path);
+  q.bindValue(":path", canonical_path);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
   Directory dir;
-  dir.path = path;
+  dir.path = canonical_path;
   dir.id = q.lastInsertId().toInt();
 
   emit DirectoryDiscovered(dir, SubdirectoryList());
