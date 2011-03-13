@@ -54,4 +54,24 @@ protected:
                                QIODevice* outgoingData);
 };
 
+class NetworkTimeouts : public QObject {
+  Q_OBJECT
+
+public:
+  NetworkTimeouts(int timeout_msec, QObject* parent = 0);
+
+  void AddReply(QNetworkReply* reply);
+  void SetTimeout(int msec) { timeout_msec_ = msec; }
+
+protected:
+  void timerEvent(QTimerEvent* e);
+
+private slots:
+  void ReplyFinished();
+
+private:
+  int timeout_msec_;
+  QMap<QNetworkReply*, int> timers_;
+};
+
 #endif // NETWORK_H

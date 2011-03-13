@@ -21,6 +21,8 @@
 #include <QMap>
 #include <QObject>
 
+class NetworkTimeouts;
+
 class QNetworkAccessManager;
 class QNetworkReply;
 
@@ -37,6 +39,9 @@ class MusicDnsClient : public QObject {
 
 public:
   MusicDnsClient(QObject* parent = 0);
+
+  // Network requests will be aborted after this interval.
+  void SetTimeout(int msec);
 
   // Starts a request and returns immediately.  Finished() will be emitted
   // later with the same ID.
@@ -59,8 +64,10 @@ private slots:
 private:
   static const char* kClientId;
   static const char* kUrl;
+  static const int kDefaultTimeout;
 
   QNetworkAccessManager* network_;
+  NetworkTimeouts* timeouts_;
   QMap<QNetworkReply*, int> requests_;
 };
 

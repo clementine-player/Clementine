@@ -24,10 +24,12 @@
 #include <QtDebug>
 
 const char* MusicBrainzClient::kUrl = "http://musicbrainz.org/ws/1/track/";
+const int MusicBrainzClient::kDefaultTimeout = 5000; // msec
 
 MusicBrainzClient::MusicBrainzClient(QObject* parent)
   : QObject(parent),
-    network_(new NetworkAccessManager(this))
+    network_(new NetworkAccessManager(this)),
+    timeouts_(new NetworkTimeouts(kDefaultTimeout, this))
 {
 }
 
@@ -45,6 +47,8 @@ void MusicBrainzClient::Start(int id, const QString& puid) {
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
   requests_[reply] = id;
+
+  timeouts_->AddReply(reply);
 }
 
 void MusicBrainzClient::Cancel(int id) {

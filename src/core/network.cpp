@@ -21,6 +21,7 @@
 #include <QDir>
 #include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
+#include <QNetworkReply>
 
 #include "utilities.h"
 
@@ -98,4 +99,32 @@ QNetworkReply* NetworkAccessManager::createRequest(
   }
 
   return QNetworkAccessManager::createRequest(op, new_request, outgoingData);
+}
+
+
+NetworkTimeouts::NetworkTimeouts(int timeout_msec, QObject* parent)
+  : timeout_msec_(timeout_msec) {
+}
+
+void NetworkTimeouts::AddReply(QNetworkReply* reply) {
+  if (timers_.contains(reply))
+    return;
+
+  connect(reply, SIGNAL(destroyed()), SLOT(ReplyFinished()));
+  connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
+  timers_[reply] = startTimer(timeout_msec_);
+}
+
+void NetworkTimeouts::ReplyFinished() {
+  QNetworkReply* reply = reinterpret_cast<QNetworkReply*>(sender());
+  if (timers_.contains(reply)) {
+    killTimer(timers_.take(reply));
+  }
+}
+
+void NetworkTimeouts::timerEvent(QTimerEvent* e) {
+  QNetworkReply* reply = timers_.key(e->timerId());
+  if (reply) {
+    reply->abort();
+  }
 }

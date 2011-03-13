@@ -22,6 +22,8 @@
 #include <QObject>
 #include <QXmlStreamReader>
 
+class NetworkTimeouts;
+
 class QNetworkAccessManager;
 class QNetworkReply;
 
@@ -73,8 +75,10 @@ private:
 
 private:
   static const char* kUrl;
+  static const int kDefaultTimeout;
 
   QNetworkAccessManager* network_;
+  NetworkTimeouts* timeouts_;
   QMap<QNetworkReply*, int> requests_;
 };
 

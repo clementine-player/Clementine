@@ -25,11 +25,17 @@
 
 const char* MusicDnsClient::kClientId = "c44f70e49000dd7c0d1388bff2bf4152";
 const char* MusicDnsClient::kUrl = "http://ofa.musicdns.org/ofa/1/track";
+const int MusicDnsClient::kDefaultTimeout = 5000; // msec
 
 MusicDnsClient::MusicDnsClient(QObject* parent)
   : QObject(parent),
-    network_(new NetworkAccessManager(this))
+    network_(new NetworkAccessManager(this)),
+    timeouts_(new NetworkTimeouts(kDefaultTimeout, this))
 {
+}
+
+void MusicDnsClient::SetTimeout(int msec) {
+  timeouts_->SetTimeout(msec);
 }
 
 void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec) {
@@ -58,6 +64,8 @@ void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
   requests_[reply] = id;
+
+  timeouts_->AddReply(reply);
 }
 
 void MusicDnsClient::Cancel(int id) {
