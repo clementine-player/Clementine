@@ -36,6 +36,8 @@ public:
   TagFetcher(QObject* parent = 0);
 
   void StartFetch(const SongList& songs);
+
+public slots:
   void Cancel();
 
 signals:

@@ -48,10 +48,13 @@ void MusicBrainzClient::Start(int id, const QString& puid) {
 }
 
 void MusicBrainzClient::Cancel(int id) {
-  requests_.remove(requests_.key(id));
+  QNetworkReply* reply = requests_.key(id);
+  requests_.remove(reply);
+  delete reply;
 }
 
 void MusicBrainzClient::CancelAll() {
+  qDeleteAll(requests_.keys());
   requests_.clear();
 }
 

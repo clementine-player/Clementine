@@ -66,6 +66,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
           results_dialog_, SLOT(FetchTagProgress(Song,QString)));
   connect(results_dialog_, SIGNAL(SongChosen(Song, Song)),
           SLOT(FetchTagSongChosen(Song, Song)));
+  connect(results_dialog_, SIGNAL(finished(int)), tag_fetcher_, SLOT(Cancel()));
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);

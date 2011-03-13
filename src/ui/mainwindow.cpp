@@ -1906,6 +1906,8 @@ void MainWindow::AutoCompleteTags() {
             track_selection_dialog_.get(), SLOT(FetchTagProgress(Song,QString)));
     connect(track_selection_dialog_.get(), SIGNAL(accepted()),
             SLOT(AutoCompleteTagsAccepted()));
+    connect(track_selection_dialog_.get(), SIGNAL(finished(int)),
+            tag_fetcher_.get(), SLOT(Cancel()));
   }
 
   // Get the selected songs and start fetching tags for them

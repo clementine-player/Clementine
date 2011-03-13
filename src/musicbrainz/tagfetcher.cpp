@@ -39,6 +39,8 @@ QString TagFetcher::GetFingerprint(const Song& song) {
 }
 
 void TagFetcher::StartFetch(const SongList& songs) {
+  Cancel();
+
   songs_ = songs;
 
   QFuture<QString> future = QtConcurrent::mapped(songs_, GetFingerprint);
@@ -52,11 +54,16 @@ void TagFetcher::StartFetch(const SongList& songs) {
 }
 
 void TagFetcher::Cancel() {
-  delete fingerprint_watcher_;
-  fingerprint_watcher_ = NULL;
+  if (fingerprint_watcher_) {
+    fingerprint_watcher_->cancel();
+
+    delete fingerprint_watcher_;
+    fingerprint_watcher_ = NULL;
+  }
 
   musicdns_client_->CancelAll();
   musicbrainz_client_->CancelAll();
+  songs_.clear();
 }
 
 void TagFetcher::FingerprintFound(int index) {

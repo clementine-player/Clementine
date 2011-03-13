@@ -61,10 +61,13 @@ void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec
 }
 
 void MusicDnsClient::Cancel(int id) {
-  requests_.remove(requests_.key(id));
+  QNetworkReply* reply = requests_.key(id);
+  requests_.remove(reply);
+  delete reply;
 }
 
 void MusicDnsClient::CancelAll() {
+  qDeleteAll(requests_.keys());
   requests_.clear();
 }
 
