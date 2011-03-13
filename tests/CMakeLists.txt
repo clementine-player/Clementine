@@ -99,7 +99,7 @@ endmacro (add_test_file)
 
 
 #add_test_file(albumcoverfetcher_test.cpp false)
-add_test_file(albumcovermanager_test.cpp true)
+
 add_test_file(asxparser_test.cpp false)
 add_test_file(asxiniparser_test.cpp false)
 add_test_file(cueparser_test.cpp false)
@@ -120,10 +120,14 @@ add_test_file(song_test.cpp false)
 add_test_file(translations_test.cpp false)
 add_test_file(xspfparser_test.cpp false)
 
-if (HAVE_SCRIPTING_PYTHON)
+if(HAVE_LIBLASTFM)
+  add_test_file(albumcovermanager_test.cpp true)
+endif(HAVE_LIBLASTFM)
+
+if(LINUX AND HAVE_DBUS)
+  add_test_file(mpris1_test.cpp true)
+endif(LINUX AND HAVE_DBUS)
+
+if(HAVE_SCRIPTING_PYTHON)
   add_test_file(python_test.cpp true)
 endif (HAVE_SCRIPTING_PYTHON)
-
-if(LINUX)
-  add_test_file(mpris1_test.cpp true)
-endif(LINUX)

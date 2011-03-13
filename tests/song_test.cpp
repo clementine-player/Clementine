@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "core/encoding.h"
 #include "core/song.h"
 #include "radio/fixlastfm.h"
@@ -44,6 +45,7 @@ class SongTest : public ::testing::Test {
 };
 
 
+#ifdef HAVE_LIBLASTFM
 TEST_F(SongTest, InitsFromLastFM) {
   Song song;
   lastfm::MutableTrack track;
@@ -58,6 +60,7 @@ TEST_F(SongTest, InitsFromLastFM) {
   EXPECT_EQ("Baz", song.album());
   EXPECT_EQ("Bar", song.artist());
 }
+#endif // HAVE_LIBLASTFM
 
 TEST_F(SongTest, InitsFromFile) {
   QTemporaryFile temp;
