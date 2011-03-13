@@ -37,6 +37,7 @@ Remote::Remote(Player* player, QObject* parent)
     retry_count_(0)
 {
   connection_->SetMediaPlayer(this);
+  connection_->SetMediaStorage(this);
   connection_->set_verbose(true);
   connect(connection_, SIGNAL(Connected()), SLOT(Connected()));
   connect(connection_, SIGNAL(Disconnected(QString)), SLOT(Disconnected(QString)));
@@ -162,6 +163,10 @@ xrme::State Remote::state() const {
 
 QImage Remote::album_art() const {
   return last_image_;
+}
+
+QStringList Remote::GetArtists() const {
+  return QStringList();
 }
 
 void Remote::SetStateChanged() {
@@ -298,6 +303,7 @@ void Remote::TomahawkReadyRead() {
     if (ok) {
       QVariantMap map = json.toMap();
       QString method = map["method"].toString();
+      QString conntype = map["conntype"].toString();
       if (method == "dbsync-offer") {
         qDebug() << "DBSYNC!";
         TomahawkConnection* db_connection = new TomahawkConnection;
@@ -309,13 +315,25 @@ void Remote::TomahawkReadyRead() {
         connect(sync_socket, SIGNAL(disconnected()), SLOT(TomahawkDBDisconnected()));
         connect(sync_socket, SIGNAL(readyRead()), SLOT(TomahawkDBReadyRead()));
         tomahawk_connections_[sync_socket] = db_connection;
+      } else if (conntype == "request-offer") {
+        qDebug() << "File Transfer!";
+        TomahawkConnection* file_transfer = new TomahawkConnection;
+        file_transfer->key = map["key"].toString();
+        file_transfer->num_bytes = -1;
+        file_transfer->offer = map["offer"].toString();
+        file_transfer->controlid = map["controlid"].toString();
+        QTcpSocket* file_transfer_socket = new QTcpSocket(this);
+        file_transfer_socket->connectToHost(socket->peerAddress(), map["port"].toUInt());
+        connect(file_transfer_socket, SIGNAL(connected()), SLOT(TomahawkTransferConnected()));
+        connect(file_transfer_socket, SIGNAL(disconnected()), SLOT(TomahawkTransferDisconnected()));
+        connect(file_transfer_socket, SIGNAL(readyRead()), SLOT(TomahawkTransferReadyRead()));
+        tomahawk_connections_[file_transfer_socket] = file_transfer;
       }
     }
   }
 }
 
 void Remote::TomahawkDBConnected() {
-  qDebug() << Q_FUNC_INFO;
   qDebug() << Q_FUNC_INFO;
   QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
   Q_ASSERT(socket);
@@ -434,4 +452,41 @@ void Remote::TomahawkDisconnected() {
 
 void Remote::TomahawkError(QAbstractSocket::SocketError error) {
   qDebug() << Q_FUNC_INFO << error;
+}
+
+void Remote::TomahawkTransferConnected() {
+  qDebug() << Q_FUNC_INFO;
+  QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+  Q_ASSERT(socket);
+
+  TomahawkConnection* connection = tomahawk_connections_[socket];
+
+  {
+    QVariantMap request;
+    request["method"] = "accept-offer";
+    request["key"] = connection->key;
+
+    QJson::Serializer serialiser;
+    const QByteArray& json = serialiser.serialize(request);
+
+    QDataStream stream(socket);
+    stream << (quint32)json.length();
+    stream << (quint8)(2);
+    stream.writeRawData(json.constData(), json.length());
+  }
+
+  {
+    QDataStream stream(socket);
+    stream << (quint32)2;
+    stream << (quint8)(128 | 1);  // SETUP | RAW
+    stream.writeRawData("ok", 2);
+  }
+}
+
+void Remote::TomahawkTransferDisconnected() {
+  qDebug() << Q_FUNC_INFO;
+}
+
+void Remote::TomahawkTransferReadyRead() {
+  qDebug() << Q_FUNC_INFO;
 }

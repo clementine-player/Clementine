@@ -26,6 +26,7 @@
 namespace xrme {
 
 class MediaPlayerInterface;
+class MediaStorageInterface;
 class RemoteControlInterface;
 
 class Connection : public QObject {
@@ -100,6 +101,8 @@ public:
   // Connection will NOT take ownership of the RemoteControlInterface, and the
   // RemoteControlInterface MUST stay alive for as long as the connection.
   void SetRemoteControl(RemoteControlInterface* iface);
+
+  void SetMediaStorage(MediaStorageInterface* iface);
 
   // Returns true after Connected() is emitted.
   bool is_connected() const;

@@ -25,12 +25,14 @@
 
 #include <xrme/connection.h>
 #include <xrme/mediaplayerinterface.h>
+#include <xrme/mediastorageinterface.h>
 
 class ArtLoader;
 class Player;
 
 class Remote : public QObject,
-               protected xrme::MediaPlayerInterface {
+               protected xrme::MediaPlayerInterface,
+               protected xrme::MediaStorageInterface {
   Q_OBJECT
 
 public:
@@ -54,6 +56,9 @@ protected:
   xrme::State state() const;
   QImage album_art() const;
 
+  // xrme::MediaStorageInterface
+  QStringList GetArtists() const;
+
 private slots:
   void Connected();
   void Disconnected(const QString& error);
@@ -70,6 +75,10 @@ private slots:
   void TomahawkDBDisconnected();
   void TomahawkDBReadyRead();
 
+  void TomahawkTransferConnected();
+  void TomahawkTransferDisconnected();
+  void TomahawkTransferReadyRead();
+
 private:
   bool is_configured() const;
 
@@ -84,6 +93,8 @@ private:
     QTcpSocket* socket;
     int num_bytes;
     quint8 flags;
+    QString offer;
+    QString controlid;
   };
   QMap<QTcpSocket*, TomahawkConnection*> tomahawk_connections_;
 

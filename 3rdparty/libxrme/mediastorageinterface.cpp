@@ -15,30 +15,30 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "common.h"
+#include "mediastoragehandler.h"
+#include "mediastorageinterface.h"
+
+#include <QtDebug>
 
 namespace xrme {
 
-const char* kXmlnsXrme = "http://purplehatstands.com/xmlns/xrme";
-const char* kXmlnsXrmeMediaPlayer = "http://purplehatstands.com/xmlns/xrme/mediaplayer";
-const char* kXmlnsXrmeMediaStorage = "http://purplehatstands.com/xmlns/xrme/mediastorage";
-const char* kXmlnsXrmeRemoteControl = "http://purplehatstands.com/xmlns/xrme/remotecontrol";
+struct MediaStorageInterface::Private {
+  Private()
+    : handler_(NULL) {}
 
-Metadata::Metadata()
-    : track(0),
-      disc(0),
-      year(0),
-      length_millisec(0),
-      rating(0.0) {
+  MediaStorageHandler* handler_;
+};
+
+
+MediaStorageInterface::MediaStorageInterface()
+    : d(new Private) {
 }
 
-State::State()
-    : playback_state(PlaybackState_Stopped),
-      position_millisec(0),
-      volume(0.0),
-      can_go_next(false),
-      can_go_previous(false),
-      can_seek(false) {
+MediaStorageInterface::~MediaStorageInterface() {
+}
+
+void MediaStorageInterface::Attach(MediaStorageHandler* handler) {
+  d->handler_ = handler;
 }
 
 } // namespace xrme

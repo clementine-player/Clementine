@@ -7,6 +7,8 @@ set(SOURCES
   handler.cpp
   mediaplayerhandler.cpp
   mediaplayerinterface.cpp
+  mediastoragehandler.cpp
+  mediastorageinterface.cpp
   remotecontrolhandler.cpp
   remotecontrolinterface.cpp
 )
@@ -19,6 +21,7 @@ SET(PUBLIC_HEADERS
   connection.h
   common.h
   mediaplayerinterface.h
+  mediastorageinterface.h
   remotecontrolinterface.h
 )
 

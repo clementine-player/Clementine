@@ -46,6 +46,12 @@ class MediaPlayerExtension : public XRMEExtension<MediaPlayerExtension> {
   static const char* kFilterString;
 };
 
+class MediaStorageExtension : public XRMEExtension<MediaStorageExtension> {
+ public:
+  static const int kExtensionType = gloox::ExtUser + 3;
+  static const char* kFilterString;
+};
+
 template <typename T>
 XRMEExtension<T>::XRMEExtension()
     : StanzaExtension(T::kExtensionType),

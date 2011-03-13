@@ -19,6 +19,7 @@
 #include "connection.h"
 #include "extensions.h"
 #include "mediaplayerhandler.h"
+#include "mediastoragehandler.h"
 #include "remotecontrolhandler.h"
 
 #include <QSocketNotifier>
@@ -55,6 +56,7 @@ struct Connection::Private : public gloox::ConnectionListener,
       verbose_(false),
       media_player_(NULL),
       remote_control_(NULL),
+      media_storage_(NULL),
       spontaneous_disconnect_(true),
       media_player_extension_(NULL),
       remote_control_extension_(NULL) {}
@@ -77,6 +79,7 @@ struct Connection::Private : public gloox::ConnectionListener,
   // Interfaces
   MediaPlayerInterface* media_player_;
   RemoteControlInterface* remote_control_;
+  MediaStorageInterface* media_storage_;
   QList<Handler*> handlers_;
 
   // Stuff that is valid when we're connected.
@@ -200,6 +203,22 @@ void Connection::SetRemoteControl(RemoteControlInterface* iface) {
   d->handlers_ << new RemoteControlHandler(iface);
 }
 
+void Connection::SetMediaStorage(MediaStorageInterface* iface) {
+  if (d->media_storage_) {
+    qWarning() << "Connection::MediaStorageInterface: this connection already"
+                  " has a RemoteControlInterface set";
+    return;
+  }
+
+  if (!iface) {
+    qWarning() << "Connection::SetMediaStorage called with NULL interface";
+    return;
+  }
+
+  d->media_storage_ = iface;
+  d->handlers_ << new MediaStorageHandler(iface);
+}
+
 bool Connection::is_connected() const {
   return (d->client_ && d->client_->state() == gloox::StateConnected);
 }
@@ -267,6 +286,7 @@ bool Connection::Connect() {
   d->remote_control_extension_ = new RemoteControlExtension;
   d->client_->registerStanzaExtension(d->media_player_extension_);
   d->client_->registerStanzaExtension(d->remote_control_extension_);
+  d->client_->registerStanzaExtension(new MediaStorageExtension);
 
   // Initialise the handlers
   foreach (Handler* handler, d->handlers_) {
@@ -400,6 +420,8 @@ void Connection::Private::handleSelfPresence(
     const std::string&) {
   QString resource = QString::fromUtf8(res.c_str());
 
+  qDebug() << "Resource presence changed:" << resource << presence;
+
   switch (presence) {
     case gloox::Presence::Error:
     case gloox::Presence::Invalid:
@@ -512,6 +534,9 @@ void Connection::Private::handleDiscoInfo(
     }
     if (feature_name == kXmlnsXrmeRemoteControl) {
       peer.caps_ |= Peer::RemoteControl;
+    }
+    if (feature_name == kXmlnsXrmeMediaStorage) {
+      peer.caps_ |= Peer::MediaStorage;
     }
   }
 

@@ -24,6 +24,7 @@ namespace xrme {
 
 extern const char* kXmlnsXrme;
 extern const char* kXmlnsXrmeMediaPlayer;
+extern const char* kXmlnsXrmeMediaStorage;
 extern const char* kXmlnsXrmeRemoteControl;
 
 struct Metadata {

@@ -15,30 +15,36 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "common.h"
+#ifndef LIBXRME_MEDIASTORAGEHANDLER_H
+#define LIBXRME_MEDIASTORAGEHANDLER_H
+
+#include "handler.h"
+
+#include <gloox/iqhandler.h>
 
 namespace xrme {
 
-const char* kXmlnsXrme = "http://purplehatstands.com/xmlns/xrme";
-const char* kXmlnsXrmeMediaPlayer = "http://purplehatstands.com/xmlns/xrme/mediaplayer";
-const char* kXmlnsXrmeMediaStorage = "http://purplehatstands.com/xmlns/xrme/mediastorage";
-const char* kXmlnsXrmeRemoteControl = "http://purplehatstands.com/xmlns/xrme/remotecontrol";
+class MediaStorageInterface;
 
-Metadata::Metadata()
-    : track(0),
-      disc(0),
-      year(0),
-      length_millisec(0),
-      rating(0.0) {
-}
+class MediaStorageHandler : public Handler,
+                            public gloox::IqHandler {
+public:
+  MediaStorageHandler(MediaStorageInterface* interface);
 
-State::State()
-    : playback_state(PlaybackState_Stopped),
-      position_millisec(0),
-      volume(0.0),
-      can_go_next(false),
-      can_go_previous(false),
-      can_seek(false) {
-}
+  void GetArtists();
+
+
+  // Handler
+  void Init(Connection* connection, gloox::Client* client);
+
+  // gloox::IqHandler
+  bool handleIq(const gloox::IQ& stanza);
+  void handleIqID(const gloox::IQ&, int) {}
+
+private:
+  MediaStorageInterface* interface_;
+};
 
 } // namespace xrme
+
+#endif // LIBXRME_MEDIASTORAGEHANDLER_H

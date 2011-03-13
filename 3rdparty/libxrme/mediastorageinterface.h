@@ -15,30 +15,35 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "common.h"
+#ifndef LIBXRME_MEDIASTORAGEINTERFACE_H
+#define LIBXRME_MEDIASTORAGEINTERFACE_H
+
+#include <xrme/common.h>
+
+#include <QImage>
+#include <QScopedPointer>
 
 namespace xrme {
 
-const char* kXmlnsXrme = "http://purplehatstands.com/xmlns/xrme";
-const char* kXmlnsXrmeMediaPlayer = "http://purplehatstands.com/xmlns/xrme/mediaplayer";
-const char* kXmlnsXrmeMediaStorage = "http://purplehatstands.com/xmlns/xrme/mediastorage";
-const char* kXmlnsXrmeRemoteControl = "http://purplehatstands.com/xmlns/xrme/remotecontrol";
+class MediaStorageHandler;
 
-Metadata::Metadata()
-    : track(0),
-      disc(0),
-      year(0),
-      length_millisec(0),
-      rating(0.0) {
-}
+class MediaStorageInterface {
+public:
+  MediaStorageInterface();
+  virtual ~MediaStorageInterface();
 
-State::State()
-    : playback_state(PlaybackState_Stopped),
-      position_millisec(0),
-      volume(0.0),
-      can_go_next(false),
-      can_go_previous(false),
-      can_seek(false) {
-}
+  virtual QStringList GetArtists() const = 0;
+
+private:
+  Q_DISABLE_COPY(MediaStorageInterface);
+  friend class MediaStorageHandler;
+
+  void Attach(MediaStorageHandler* handler);
+
+  struct Private;
+  QScopedPointer<Private> d;
+};
 
 } // namespace xrme
+
+#endif // LIBXRME_MEDIASTORAGEINTERFACE_H
