@@ -68,12 +68,12 @@ TEST_F(LibraryBackendTest, EmptyDatabase) {
 TEST_F(LibraryBackendTest, AddDirectory) {
   QSignalSpy spy(backend_.get(), SIGNAL(DirectoryDiscovered(Directory, SubdirectoryList)));
 
-  backend_->AddDirectory("/test");
+  backend_->AddDirectory("/tmp");
 
   // Check the signal was emitted correctly
   ASSERT_EQ(1, spy.count());
   Directory dir = spy[0][0].value<Directory>();
-  EXPECT_EQ("/test", dir.path);
+  EXPECT_EQ("/tmp", dir.path);
   EXPECT_EQ(1, dir.id);
   EXPECT_EQ(0, spy[0][1].value<SubdirectoryList>().size());
 }
@@ -82,7 +82,7 @@ TEST_F(LibraryBackendTest, RemoveDirectory) {
   // Add a directory
   Directory dir;
   dir.id = 1;
-  dir.path = "/test";
+  dir.path = "/tmp";
   backend_->AddDirectory(dir.path);
 
   QSignalSpy spy(backend_.get(), SIGNAL(DirectoryDeleted(Directory)));
@@ -93,13 +93,13 @@ TEST_F(LibraryBackendTest, RemoveDirectory) {
   // Check the signal was emitted correctly
   ASSERT_EQ(1, spy.count());
   dir = spy[0][0].value<Directory>();
-  EXPECT_EQ("/test", dir.path);
+  EXPECT_EQ("/tmp", dir.path);
   EXPECT_EQ(1, dir.id);
 }
 
 TEST_F(LibraryBackendTest, AddInvalidSong) {
   // Adding a song without certain fields set should fail
-  backend_->AddDirectory("/test");
+  backend_->AddDirectory("/tmp");
   Song s;
   s.set_directory_id(1);
 
@@ -136,7 +136,7 @@ class SingleSong : public LibraryBackendTest {
     LibraryBackendTest::SetUp();
 
     // Add a directory - this will get ID 1
-    backend_->AddDirectory("/test");
+    backend_->AddDirectory("/tmp");
 
     // Make a song in that directory
     song_ = MakeDummySong(1);

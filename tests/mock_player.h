@@ -39,7 +39,7 @@ public:
 
   MOCK_METHOD0(ReloadSettings, void());
 
-  MOCK_METHOD3(PlayAt, void(int, Engine::TrackChangeType, bool));
+  MOCK_METHOD3(PlayAt, void(int, Engine::TrackChangeFlags, bool));
   MOCK_METHOD0(PlayPause, void());
 
   MOCK_METHOD0(Next, void());
