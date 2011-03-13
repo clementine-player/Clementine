@@ -322,7 +322,7 @@ The filename of this song without any directory component.
 
   QUrl url() const;
 %Docstring
-url() -> QUrl
+url() -> L{PyQt4.QtCore.QUrl}
 URL for this song which may point either to a file or to another type of stream.
 %End
 

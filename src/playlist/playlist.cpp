@@ -83,7 +83,9 @@ Playlist::Playlist(PlaylistBackend* backend,
     has_scrobbled_(false),
     playlist_sequence_(NULL),
     ignore_sorting_(false),
-    undo_stack_(new QUndoStack(this))
+    undo_stack_(new QUndoStack(this)),
+    dynamic_history_priority_(100),
+    dynamic_history_color_(Qt::darkGray)
 {
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
@@ -275,8 +277,15 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
       return QVariant(column_alignments_.value(index.column(), (Qt::AlignLeft | Qt::AlignVCenter)));
 
     case Qt::ForegroundRole:
-      if (items_[index.row()]->IsDynamicHistory())
-        return QApplication::palette().brush(QPalette::Disabled, QPalette::Text);
+      if (items_[index.row()]->HasCurrentForegroundColor()) {
+        return QBrush(items_[index.row()]->GetCurrentForegroundColor());
+      }
+      return QVariant();
+
+    case Qt::BackgroundRole:
+      if (items_[index.row()]->HasCurrentBackgroundColor()) {
+        return QBrush(items_[index.row()]->GetCurrentBackgroundColor());
+      }
       return QVariant();
 
     default:
@@ -515,7 +524,8 @@ void Playlist::set_current_row(int i) {
 
   if (old_current.isValid()) {
     if (dynamic_playlist_) {
-      items_[old_current.row()]->SetDynamicHistory(true);
+      items_[old_current.row()]->SetForegroundColor(dynamic_history_priority_,
+                                                    dynamic_history_color_);
     }
 
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount-1));
@@ -710,7 +720,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
   // Put the items back in
   const int start = pos == -1 ? items_.count() : pos;
   for (int i=start ; i<start+moved_items.count() ; ++i) {
-    moved_items[i - start]->SetDynamicHistory(false);
+    moved_items[i - start]->RemoveForegroundColor(dynamic_history_priority_);
     items_.insert(i, moved_items[i - start]);
   }
 
@@ -1441,6 +1451,10 @@ SongList Playlist::GetAllSongs() const {
     ret << item->Metadata();
   }
   return ret;
+}
+
+PlaylistItemList Playlist::GetAllItems() const {
+  return items_;
 }
 
 quint64 Playlist::GetTotalLength() const {

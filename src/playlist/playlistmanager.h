@@ -18,6 +18,7 @@
 #ifndef PLAYLISTMANAGER_H
 #define PLAYLISTMANAGER_H
 
+#include <QColor>
 #include <QItemSelection>
 #include <QMap>
 #include <QObject>
@@ -39,7 +40,10 @@ class PlaylistManagerInterface : public QObject {
   Q_OBJECT
 
 public:
-  PlaylistManagerInterface(QObject* parent) : QObject(parent) {}
+  PlaylistManagerInterface(QObject* parent)
+    : QObject(parent),
+      invalid_song_priority_(200),
+      invalid_song_color_(Qt::lightGray) {}
 
   virtual int current_id() const = 0;
   virtual int active_id() const = 0;
@@ -113,6 +117,10 @@ signals:
   void PlaylistChanged(Playlist* playlist);
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);
+
+protected:
+  const int invalid_song_priority_;
+  const QColor invalid_song_color_;
 };
 
 class PlaylistManager : public PlaylistManagerInterface {

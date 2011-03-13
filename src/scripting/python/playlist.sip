@@ -84,6 +84,7 @@ public:
   PlaylistItemList library_items_by_id(int id) const;
 
   SongList GetAllSongs() const;
+  PlaylistItemList GetAllItems() const;
   quint64 GetTotalLength() const; // in seconds
 
   PlaylistSequence* sequence() const;

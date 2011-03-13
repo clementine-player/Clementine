@@ -181,6 +181,65 @@ Convenience function to check whether this item is from the local library (the
 list of songs appearing in the Library tab).
 %End
 
+  void SetBackgroundColor(short priority, const QColor& color);
+%Docstring
+SetBackgroundColor(priority, color)
+Adds a background color to this PlaylistItem. PlaylistItem's background
+colors affect directly the background color of associated row in the playlist
+view. Note that every color comes with a priority.
+PlaylistItem can have many background colors set at the same time but only
+one will be used - the one with the highest priority. If at any point, the
+most important color gets removed (RemoveBackgroundColor()), the next to the
+highest one will start taking precedence.
+
+Priority must be unique across Clementine and all of it's plugins so that
+no functionality messes with another's background color settings.
+Below we list all the currently taken background priorities:
+- 1 by Rainbowizer plugin
+
+If it makes sense, one functionality (one plugin) can use many background
+priorities at the same time.
+%End
+
+  void RemoveBackgroundColor(short priority);
+%Docstring
+RemoveBackgroundColor(priority)
+Removes a background color with the given priority from this PlaylistItem's
+background. If there's no such color, this call will be ignored.
+
+@see: L{SetBackgroundColor()}
+%End
+
+  void SetForegroundColor(short priority, const QColor& color);
+%Docstring
+SetForegroundColor(priority, color)
+Adds a foreground color to this PlaylistItem. PlaylistItem's foreground
+colors affect directly the font color of associated row in the playlist
+view. Note that every color comes with a priority.
+PlaylistItem can have many foreground colors set at the same time but
+only one will be used - the one with the highest priority. If at any
+point, the most important color gets removed (RemoveForegroundColor()),
+the next to the highest one will start taking precedence.
+
+Priority must be unique across Clementine and all of it's plugins so that
+no functionality messes with another's foreground color settings.
+Below we list all the currently taken foreground priorities:
+- 100 by dynamic history items
+- 200 by unplayable items
+
+If it makes sense, one functionality (one plugin) can use many foreground
+priorities at the same time.
+  %End
+
+  void RemoveForegroundColor(short priority);
+  %Docstring
+RemoveForegroundColor(priority)
+Removes a foreground color with the given priority from this PlaylistItem's
+foreground. If there's no such color, this call will be ignored.
+
+@see: L{SetForegroundColor()}
+  %End
+
   ~PlaylistItem();
 %MethodCode
   // Don't actually destroy the PlaylistItem, just decrement the reference

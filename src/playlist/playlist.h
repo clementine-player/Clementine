@@ -159,6 +159,7 @@ class Playlist : public QAbstractListModel {
   PlaylistItemList library_items_by_id(int id) const;
 
   SongList GetAllSongs() const;
+  PlaylistItemList GetAllItems() const;
   quint64 GetTotalLength() const; // in seconds
 
   void set_sequence(PlaylistSequence* v);
@@ -322,6 +323,9 @@ class Playlist : public QAbstractListModel {
   bool ignore_sorting_;
 
   QUndoStack* undo_stack_;
+
+  const int dynamic_history_priority_;
+  const QColor dynamic_history_color_;
 
   smart_playlists::GeneratorPtr dynamic_playlist_;
   ColumnAlignmentMap column_alignments_;

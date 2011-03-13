@@ -18,6 +18,7 @@
 #ifndef PLAYLISTITEM_H
 #define PLAYLISTITEM_H
 
+#include <QMap>
 #include <QStandardItem>
 #include <QUrl>
 
@@ -30,7 +31,10 @@ class SqlRow;
 
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
-  PlaylistItem(const QString& type) : type_(type), is_dynamic_history_(false) {}
+  PlaylistItem(const QString& type)
+    : type_(type),
+      background_colors_(QMap<short, QColor>()),
+      foreground_colors_(QMap<short, QColor>()) {}
   virtual ~PlaylistItem() {}
 
   static PlaylistItem* NewFromType(const QString& type);
@@ -112,8 +116,17 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   void ClearTemporaryMetadata();
   bool HasTemporaryMetadata() const { return temp_metadata_.is_valid(); }
 
-  void SetDynamicHistory(bool history) { is_dynamic_history_ = history; }
-  bool IsDynamicHistory() const { return is_dynamic_history_; }
+  // Background colors.
+  void SetBackgroundColor(short priority, const QColor& color);
+  void RemoveBackgroundColor(short priority);
+  QColor GetCurrentBackgroundColor() const;
+  bool HasCurrentBackgroundColor() const;
+
+  // Foreground colors.
+  void SetForegroundColor(short priority, const QColor& color);
+  void RemoveForegroundColor(short priority);
+  QColor GetCurrentForegroundColor() const;
+  bool HasCurrentForegroundColor() const;
 
   // Convenience function to find out whether this item is from the local
   // library, as opposed to a device, a file on disk, or a stream.
@@ -138,7 +151,9 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   QString type_;
 
   Song temp_metadata_;
-  bool is_dynamic_history_;
+
+  QMap<short, QColor> background_colors_;
+  QMap<short, QColor> foreground_colors_;
 };
 typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;

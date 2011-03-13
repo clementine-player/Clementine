@@ -91,3 +91,33 @@ static void ReloadPlaylistItem(PlaylistItemPtr item) {
 QFuture<void> PlaylistItem::BackgroundReload() {
   return QtConcurrent::run(ReloadPlaylistItem, shared_from_this());
 }
+
+void PlaylistItem::SetBackgroundColor(short priority, const QColor& color) {
+  background_colors_[priority] = color;
+}
+void PlaylistItem::RemoveBackgroundColor(short priority) {
+  background_colors_.remove(priority);
+}
+QColor PlaylistItem::GetCurrentBackgroundColor() const {
+  return background_colors_.isEmpty()
+      ? QColor()
+      : background_colors_[background_colors_.keys().last()];
+}
+bool PlaylistItem::HasCurrentBackgroundColor() const {
+  return !background_colors_.isEmpty();
+}
+
+void PlaylistItem::SetForegroundColor(short priority, const QColor& color) {
+  foreground_colors_[priority] = color;
+}
+void PlaylistItem::RemoveForegroundColor(short priority) {
+  foreground_colors_.remove(priority);
+}
+QColor PlaylistItem::GetCurrentForegroundColor() const {
+  return foreground_colors_.isEmpty()
+      ? QColor()
+      : foreground_colors_[foreground_colors_.keys().last()];
+}
+bool PlaylistItem::HasCurrentForegroundColor() const {
+  return !foreground_colors_.isEmpty();
+}

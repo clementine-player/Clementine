@@ -344,6 +344,13 @@ void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
         playlist->ReloadItems(QList<int>() << playlist->current_row());
       }
 
+      // gray out the song if it's now broken; otherwise undo the gray color
+      if(valid) {
+        current->RemoveForegroundColor(invalid_song_priority_);
+      } else {
+        current->SetForegroundColor(invalid_song_priority_, invalid_song_color_);
+      }
+
       // we have at most one current item
       break;
     }
