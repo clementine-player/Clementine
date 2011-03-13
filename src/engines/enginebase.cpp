@@ -36,6 +36,8 @@ Engine::Base::Base()
     fadeout_enabled_(true),
     fadeout_duration_nanosec_(2 * kNsecPerSec), // 2s
     crossfade_enabled_(true),
+    autocrossfade_enabled_(false),
+    crossfade_same_album_(false),
     next_background_stream_id_(0),
     about_to_end_emitted_(false)
 {
@@ -44,7 +46,7 @@ Engine::Base::Base()
 Engine::Base::~Base() {
 }
 
-bool Engine::Base::Load(const QUrl& url, TrackChangeType,
+bool Engine::Base::Load(const QUrl& url, TrackChangeFlags,
                         quint64 beginning_nanosec, qint64 end_nanosec) {
   url_ = url;
   beginning_nanosec_ = beginning_nanosec;
@@ -73,6 +75,7 @@ void Engine::Base::ReloadSettings() {
   fadeout_duration_nanosec_ = s.value("FadeoutDuration", 2000).toLongLong() * kNsecPerMsec;
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
   autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
+  crossfade_same_album_ = !s.value("NoCrossfadeSameAlbum", true).toBool();
 }
 
 void Engine::Base::EmitAboutToEnd() {
@@ -87,7 +90,7 @@ int Engine::Base::AddBackgroundStream(const QUrl& url) {
   return -1;
 }
 
-bool Engine::Base::Play(const QUrl& u, TrackChangeType c,
+bool Engine::Base::Play(const QUrl& u, TrackChangeFlags c,
                         quint64 beginning_nanosec, qint64 end_nanosec) {
   if (!Load(u, c, beginning_nanosec, end_nanosec))
     return false;

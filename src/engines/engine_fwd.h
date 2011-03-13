@@ -21,7 +21,16 @@ namespace Engine
      */
     enum State { Empty, Idle, Playing, Paused };
 
-    enum TrackChangeType { First, Manual, Auto };
+    enum TrackChangeType {
+      // One of:
+      First  = 0x01,
+      Manual = 0x02,
+      Auto   = 0x04,
+
+      // Any of:
+      SameAlbum = 0x10,
+    };
+    Q_DECLARE_FLAGS(TrackChangeFlags, TrackChangeType);
 }
 
 typedef Engine::Base EngineBase;

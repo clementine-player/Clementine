@@ -281,6 +281,7 @@ class Song {
 
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;
+  bool IsOnSameAlbum(const Song& other) const;
 
   bool operator==(const Song& other) const;
 

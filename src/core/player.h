@@ -53,7 +53,7 @@ public slots:
   virtual void ReloadSettings() = 0;
 
   // Manual track change to the specified track
-  virtual void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle) = 0;
+  virtual void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle) = 0;
 
   // If there's currently a song playing, pause it, otherwise play the track
   // that was playing last, or the first one on the playlist
@@ -120,7 +120,7 @@ public:
 public slots:
   void ReloadSettings();
 
-  void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle);
+  void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
   void PlayPause();
   void Next();
   void Previous();
@@ -147,9 +147,9 @@ public slots:
   void TrackEnded();
   // Play the next item on the playlist - disregarding radio stations like
   // last.fm that might have more tracks.
-  void NextItem(Engine::TrackChangeType change);
+  void NextItem(Engine::TrackChangeFlags change);
 
-  void NextInternal(Engine::TrackChangeType);
+  void NextInternal(Engine::TrackChangeFlags);
 
   void ValidSongRequested(const QUrl&);
   void InvalidSongRequested(const QUrl&);
@@ -162,7 +162,7 @@ public slots:
   PlaylistItemPtr current_item_;
 
   boost::scoped_ptr<EngineBase> engine_;
-  Engine::TrackChangeType stream_change_type_;
+  Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
 
   QUrl loading_async_;

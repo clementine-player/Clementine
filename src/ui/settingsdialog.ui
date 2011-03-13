@@ -120,7 +120,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -164,6 +164,16 @@
              <widget class="QCheckBox" name="fading_auto">
               <property name="text">
                <string>Cross-fade when changing tracks automatically</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="fading_samealbum">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Except between tracks on the same album</string>
               </property>
              </widget>
             </item>
@@ -1122,15 +1132,11 @@
  </customwidgets>
  <tabstops>
   <tabstop>list</tabstop>
-  <tabstop>b_show_tray_icon_</tabstop>
-  <tabstop>b_keep_running_</tabstop>
-  <tabstop>b_always_show_</tabstop>
-  <tabstop>b_always_hide_</tabstop>
-  <tabstop>b_remember_</tabstop>
-  <tabstop>doubleclick_playmode</tabstop>
-  <tabstop>menu_playmode</tabstop>
-  <tabstop>language</tabstop>
+  <tabstop>current_glow</tabstop>
+  <tabstop>fading_out</tabstop>
+  <tabstop>fading_cross</tabstop>
   <tabstop>fading_auto</tabstop>
+  <tabstop>fading_samealbum</tabstop>
   <tabstop>fading_duration</tabstop>
   <tabstop>replaygain</tabstop>
   <tabstop>replaygain_mode</tabstop>
@@ -1139,6 +1145,10 @@
   <tabstop>gst_plugin</tabstop>
   <tabstop>gst_device</tabstop>
   <tabstop>buffer_duration</tabstop>
+  <tabstop>doubleclick_playmode</tabstop>
+  <tabstop>menu_playmode</tabstop>
+  <tabstop>language</tabstop>
+  <tabstop>b_always_hide_</tabstop>
   <tabstop>notifications_none</tabstop>
   <tabstop>notifications_native</tabstop>
   <tabstop>notifications_pretty</tabstop>
@@ -1162,9 +1172,11 @@
   <tabstop>proxy_auth</tabstop>
   <tabstop>proxy_username</tabstop>
   <tabstop>proxy_password</tabstop>
-  <tabstop>fading_cross</tabstop>
-  <tabstop>current_glow</tabstop>
-  <tabstop>fading_out</tabstop>
+  <tabstop>b_always_show_</tabstop>
+  <tabstop>b_show_tray_icon_</tabstop>
+  <tabstop>b_keep_running_</tabstop>
+  <tabstop>doubleclick_addmode</tabstop>
+  <tabstop>b_remember_</tabstop>
  </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
@@ -1193,8 +1205,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>742</x>
-     <y>812</y>
+     <x>763</x>
+     <y>593</y>
     </hint>
     <hint type="destinationlabel">
      <x>521</x>
@@ -1209,8 +1221,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>548</x>
-     <y>812</y>
+     <x>763</x>
+     <y>593</y>
     </hint>
     <hint type="destinationlabel">
      <x>322</x>
@@ -1225,12 +1237,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>305</x>
-     <y>82</y>
+     <x>558</x>
+     <y>295</y>
     </hint>
     <hint type="destinationlabel">
-     <x>305</x>
-     <y>74</y>
+     <x>558</x>
+     <y>359</y>
     </hint>
    </hints>
   </connection>
@@ -1241,12 +1253,28 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>342</x>
-     <y>121</y>
+     <x>335</x>
+     <y>70</y>
     </hint>
     <hint type="destinationlabel">
-     <x>248</x>
-     <y>148</y>
+     <x>335</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fading_auto</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>fading_samealbum</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>195</y>
     </hint>
    </hints>
   </connection>

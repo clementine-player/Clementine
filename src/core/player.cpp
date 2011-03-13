@@ -113,7 +113,7 @@ void Player::Next() {
   NextInternal(Engine::Manual);
 }
 
-void Player::NextInternal(Engine::TrackChangeType change) {
+void Player::NextInternal(Engine::TrackChangeFlags change) {
   if (playlists_->active()->stop_after_current()) {
     playlists_->active()->StopAfter(-1);
     Stop();
@@ -134,7 +134,7 @@ void Player::NextInternal(Engine::TrackChangeType change) {
   NextItem(change);
 }
 
-void Player::NextItem(Engine::TrackChangeType change) {
+void Player::NextItem(Engine::TrackChangeFlags change) {
   int i = playlists_->active()->next_row();
   if (i == -1) {
     playlists_->active()->set_current_row(i);
@@ -242,9 +242,14 @@ int Player::GetVolume() const {
   return engine_->volume();
 }
 
-void Player::PlayAt(int index, Engine::TrackChangeType change, bool reshuffle) {
+void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) {
   if (change == Engine::Manual && engine_->position_nanosec() != engine_->length_nanosec()) {
     emit TrackSkipped(current_item_);
+  }
+
+  if (current_item_ && current_item_->Metadata().IsOnSameAlbum(
+        playlists_->active()->item_at(index)->Metadata())) {
+    change |= Engine::SameAlbum;
   }
 
   if (reshuffle)
@@ -384,51 +389,62 @@ void Player::ShowOSD() {
 }
 
 void Player::TrackAboutToEnd() {
+  const bool current_contains_multiple_tracks =
+      current_item_->options() & PlaylistItem::ContainsMultipleTracks;
+  const bool has_next_row = playlists_->active()->next_row() != -1;
+  const PlaylistItemPtr next_item = playlists_->active()->item_at(
+      playlists_->active()->next_row());
+
   if (engine_->is_autocrossfade_enabled()) {
     // Crossfade is on, so just start playing the next track.  The current one
     // will fade out, and the new one will fade in
 
     // But, if there's no next track and we don't want to fade out, then do
     // nothing and just let the track finish to completion.
-    if (!engine_->is_fadeout_enabled() &&
-        playlists_->active()->next_row() == -1)
+    if (!engine_->is_fadeout_enabled() && !has_next_row)
       return;
 
-    TrackEnded();
-  } else {
-    // Crossfade is off, so start preloading the next track so we don't get a
-    // gap between songs.
-    if (current_item_->options() & PlaylistItem::ContainsMultipleTracks)
+    // If the next track is on the same album (or same cue file), and the
+    // user doesn't want to crossfade between tracks on the same album, then
+    // don't do this automatic crossfading.
+    if (engine_->crossfade_same_album() ||
+        current_contains_multiple_tracks ||
+        !has_next_row ||
+        !next_item ||
+        !current_item_->Metadata().IsOnSameAlbum(next_item->Metadata())) {
+      TrackEnded();
       return;
-    if (playlists_->active()->next_row() == -1)
-      return;
-
-    shared_ptr<PlaylistItem> item = playlists_->active()->item_at(
-        playlists_->active()->next_row());
-    if (!item)
-      return;
-
-    QUrl url = item->Url();
-
-    // Get the actual track URL rather than the stream URL.
-    if (item->options() & PlaylistItem::ContainsMultipleTracks) {
-      PlaylistItem::SpecialLoadResult result = item->LoadNext();
-      switch (result.type_) {
-      case PlaylistItem::SpecialLoadResult::NoMoreTracks:
-        return;
-
-      case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
-        loading_async_ = item->Url();
-        return;
-
-      case PlaylistItem::SpecialLoadResult::TrackAvailable:
-        url = result.media_url_;
-        break;
-      }
     }
-    engine_->StartPreloading(url, next_item_->Metadata().beginning_nanosec(),
-                             next_item_->Metadata().end_nanosec());
   }
+
+  // Crossfade is off, so start preloading the next track so we don't get a
+  // gap between songs.
+  if (current_contains_multiple_tracks || !has_next_row)
+    return;
+
+  if (!next_item)
+    return;
+
+  QUrl url = next_item->Url();
+
+  // Get the actual track URL rather than the stream URL.
+  if (next_item->options() & PlaylistItem::ContainsMultipleTracks) {
+    PlaylistItem::SpecialLoadResult result = next_item->LoadNext();
+    switch (result.type_) {
+    case PlaylistItem::SpecialLoadResult::NoMoreTracks:
+      return;
+
+    case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
+      loading_async_ = next_item->Url();
+      return;
+
+    case PlaylistItem::SpecialLoadResult::TrackAvailable:
+      url = result.media_url_;
+      break;
+    }
+  }
+  engine_->StartPreloading(url, next_item->Metadata().beginning_nanosec(),
+                           next_item->Metadata().end_nanosec());
 }
 
 void Player::ValidSongRequested(const QUrl& url) {

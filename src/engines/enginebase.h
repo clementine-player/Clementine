@@ -62,7 +62,7 @@ class Base : public QObject, boost::noncopyable {
 
   // Subclasses should respect given markers (beginning and end) which are
   // in miliseconds.
-  virtual bool Load(const QUrl& url, TrackChangeType change,
+  virtual bool Load(const QUrl& url, TrackChangeFlags change,
                     quint64 beginning_nanosec, qint64 end_nanosec);
   // Sets new values for the beginning and end markers of the currently playing
   // song.
@@ -76,7 +76,7 @@ class Base : public QObject, boost::noncopyable {
   // to the given 'end' (usually from 0 to a song's length). Both markers
   // should be passed in nanoseconds. 'end' can be negative, indicating that the
   // real length of 'u' stream is unknown.
-  bool Play(const QUrl& u, TrackChangeType c,
+  bool Play(const QUrl& u, TrackChangeFlags c,
             quint64 beginning_nanosec, qint64 end_nanosec);
 
   void SetVolume(uint value);
@@ -87,6 +87,7 @@ class Base : public QObject, boost::noncopyable {
   bool is_fadeout_enabled() const { return fadeout_enabled_; }
   bool is_crossfade_enabled() const { return crossfade_enabled_; }
   bool is_autocrossfade_enabled() const { return autocrossfade_enabled_; }
+  bool crossfade_same_album() const { return crossfade_same_album_; }
 
   static const char* kSettingsGroup;
   static const int kScopeSize = 1024;
@@ -140,6 +141,7 @@ class Base : public QObject, boost::noncopyable {
   qint64 fadeout_duration_nanosec_;
   bool crossfade_enabled_;
   bool autocrossfade_enabled_;
+  bool crossfade_same_album_;
   int next_background_stream_id_;
 
  private:

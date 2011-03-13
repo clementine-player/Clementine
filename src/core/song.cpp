@@ -1265,3 +1265,16 @@ QImage Song::LoadEmbeddedArt(const QString& filename) {
 
   return ret;
 }
+
+bool Song::IsOnSameAlbum(const Song& other) const {
+  if (is_compilation() != other.is_compilation())
+    return false;
+
+  if (has_cue() && other.has_cue() && cue_path() == other.cue_path())
+    return true;
+
+  if (is_compilation() && album() == other.album())
+    return true;
+
+  return album() == other.album() && artist() == other.artist();
+}

@@ -1772,8 +1772,6 @@ void MainWindow::CheckFullRescanRevisions() {
 
   // if we have any...
   if(!reasons.isEmpty()) {
-    qDebug() << "cool";
-
     QString message = tr("The version of Clementine you've just updated to requires a full library rescan "
                          "because of the new features listed below:"
                          "<ul>");

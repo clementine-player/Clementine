@@ -89,7 +89,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
  public slots:
   void StartPreloading(const QUrl& url, qint64 beginning_nanosec,
                        qint64 end_nanosec);
-  bool Load(const QUrl&, Engine::TrackChangeType change,
+  bool Load(const QUrl&, Engine::TrackChangeFlags change,
             quint64 beginning_nanosec, qint64 end_nanosec);
   bool Play(quint64 offset_nanosec);
   void Stop();
@@ -165,7 +165,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
-  boost::shared_ptr<GstEnginePipeline> preload_pipeline_;
   QUrl preloaded_url_;
 
   QList<BufferConsumer*> buffer_consumers_;

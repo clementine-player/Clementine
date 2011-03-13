@@ -405,25 +405,10 @@ void GstEngine::StartPreloading(const QUrl& url, qint64 beginning_nanosec,
 
   QUrl gst_url = FixupUrl(url);
 
-  if (autocrossfade_enabled_) {
-    // Have to create a new pipeline so we can crossfade between the two
-
-    preload_pipeline_ = CreatePipeline(gst_url, end_nanosec);
-    if (!preload_pipeline_)
-      return;
-
-    // We don't want to get metadata messages before the track starts playing -
-    // we reconnect this in GstEngine::Load
-    disconnect(preload_pipeline_.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
-
-    preloaded_url_ = gst_url;
-    preload_pipeline_->SetState(GST_STATE_PAUSED);
-  } else {
-    // No crossfading, so we can just queue the new URL in the existing
-    // pipeline and get gapless playback (hopefully)
-    if (current_pipeline_)
-      current_pipeline_->SetNextUrl(gst_url, beginning_nanosec, end_nanosec);
-  }
+  // No crossfading, so we can just queue the new URL in the existing
+  // pipeline and get gapless playback (hopefully)
+  if (current_pipeline_)
+    current_pipeline_->SetNextUrl(gst_url, beginning_nanosec, end_nanosec);
 }
 
 QUrl GstEngine::FixupUrl(const QUrl& url) {
@@ -440,7 +425,7 @@ QUrl GstEngine::FixupUrl(const QUrl& url) {
   return copy;
 }
 
-bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change,
+bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
                      quint64 beginning_nanosec, qint64 end_nanosec) {
   EnsureInitialised();
 
@@ -454,34 +439,28 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeType change,
 
   QUrl gst_url = FixupUrl(url);
 
-  const bool crossfade = current_pipeline_ &&
-                         ((crossfade_enabled_ && change == Engine::Manual) ||
-                          (autocrossfade_enabled_ && change == Engine::Auto));
+  bool crossfade = current_pipeline_ &&
+                   ((crossfade_enabled_ && change & Engine::Manual) ||
+                    (autocrossfade_enabled_ && change & Engine::Auto));
+
+  if (change & Engine::Auto && change & Engine::SameAlbum && !crossfade_same_album_)
+    crossfade = false;
 
   if (!crossfade && current_pipeline_ && current_pipeline_->url() == gst_url &&
-      change == Engine::Auto) {
+      change & Engine::Auto) {
     // We're not crossfading, and the pipeline is already playing the URI we
     // want, so just do nothing.
     return true;
   }
 
-  shared_ptr<GstEnginePipeline> pipeline;
-  if (preload_pipeline_ && preloaded_url_ == gst_url) {
-    pipeline = preload_pipeline_;
-    connect(preload_pipeline_.get(),
-            SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
-            SLOT(NewMetaData(Engine::SimpleMetaBundle)));
-  } else {
-    pipeline = CreatePipeline(gst_url, end_nanosec);
-    if (!pipeline)
-      return false;
-  }
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(gst_url, end_nanosec);
+  if (!pipeline)
+    return false;
 
   if (crossfade)
     StartFadeout();
 
   current_pipeline_ = pipeline;
-  preload_pipeline_.reset();
 
   SetVolume(volume_);
   SetEqualizerEnabled(equalizer_enabled_);

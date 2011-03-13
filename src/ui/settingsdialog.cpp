@@ -348,6 +348,7 @@ void SettingsDialog::accept() {
   s.setValue("FadeoutDuration", ui_->fading_duration->value());
   s.setValue("CrossfadeEnabled", ui_->fading_cross->isChecked());
   s.setValue("AutoCrossfadeEnabled", ui_->fading_auto->isChecked());
+  s.setValue("NoCrossfadeSameAlbum", ui_->fading_samealbum->isChecked());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);
@@ -518,6 +519,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->fading_cross->setChecked(s.value("CrossfadeEnabled", true).toBool());
   ui_->fading_auto->setChecked(s.value("AutoCrossfadeEnabled", false).toBool());
   ui_->fading_duration->setValue(s.value("FadeoutDuration", 2000).toInt());
+  ui_->fading_samealbum->setChecked(s.value("NoCrossfadeSameAlbum", true).toBool());
   s.endGroup();
 
   s.beginGroup(GstEngine::kSettingsGroup);
