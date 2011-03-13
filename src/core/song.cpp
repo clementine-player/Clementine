@@ -397,6 +397,18 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   // Get the filetype if we can
   GuessFileType(fileref.get());
+
+  // Set integer fields to -1 if they're not valid
+  #define intval(x) (x <= 0 ? -1 : x)
+  d->track_ = intval(d->track_);
+  d->disc_ = intval(d->disc_);
+  d->bpm_ = intval(d->bpm_);
+  d->year_ = intval(d->year_);
+  d->bitrate_ = intval(d->bitrate_);
+  d->samplerate_ = intval(d->samplerate_);
+  d->lastplayed_ = intval(d->lastplayed_);
+  d->rating_ = intval(d->rating_);
+  #undef intval
 }
 
 void Song::ParseFMPSFrame(const QString& name, const QString& value) {
@@ -1101,7 +1113,6 @@ bool Song::IsMetadataEqual(const Song& other) const {
          length_nanosec() == other.length_nanosec() &&
          d->bitrate_ == other.d->bitrate_ &&
          d->samplerate_ == other.d->samplerate_ &&
-         d->sampler_ == other.d->sampler_ &&
          d->art_automatic_ == other.d->art_automatic_ &&
          d->art_manual_ == other.d->art_manual_ &&
          d->cue_path_ == other.d->cue_path_;
