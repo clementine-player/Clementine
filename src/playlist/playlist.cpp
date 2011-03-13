@@ -63,6 +63,9 @@ using boost::shared_ptr;
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kPlayNowMimetype = "application/x-clementine-play-now";
 
+const int Playlist::kDynamicHistoryPriority = 100;
+const QRgb Playlist::kDynamicHistoryColor = qRgb(0x80, 0x80, 0x80);
+
 Playlist::Playlist(PlaylistBackend* backend,
                    TaskManager* task_manager,
                    LibraryBackend* library,
@@ -83,9 +86,7 @@ Playlist::Playlist(PlaylistBackend* backend,
     has_scrobbled_(false),
     playlist_sequence_(NULL),
     ignore_sorting_(false),
-    undo_stack_(new QUndoStack(this)),
-    dynamic_history_priority_(100),
-    dynamic_history_color_(Qt::darkGray)
+    undo_stack_(new QUndoStack(this))
 {
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
@@ -524,8 +525,8 @@ void Playlist::set_current_row(int i) {
 
   if (old_current.isValid()) {
     if (dynamic_playlist_) {
-      items_[old_current.row()]->SetForegroundColor(dynamic_history_priority_,
-                                                    dynamic_history_color_);
+      items_[old_current.row()]->SetForegroundColor(kDynamicHistoryPriority,
+                                                    kDynamicHistoryColor);
     }
 
     emit dataChanged(old_current, old_current.sibling(old_current.row(), ColumnCount-1));
@@ -720,7 +721,7 @@ void Playlist::MoveItemsWithoutUndo(const QList<int> &source_rows, int pos) {
   // Put the items back in
   const int start = pos == -1 ? items_.count() : pos;
   for (int i=start ; i<start+moved_items.count() ; ++i) {
-    moved_items[i - start]->RemoveForegroundColor(dynamic_history_priority_);
+    moved_items[i - start]->RemoveForegroundColor(kDynamicHistoryPriority);
     items_.insert(i, moved_items[i - start]);
   }
 

@@ -30,6 +30,9 @@
 
 using smart_playlists::GeneratorPtr;
 
+const int PlaylistManagerInterface::kInvalidSongPriority = 200;
+const QRgb PlaylistManagerInterface::kInvalidSongColor = qRgb(0xC0, 0xC0, 0xC0);
+
 PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
   : PlaylistManagerInterface(parent),
     task_manager_(task_manager),
@@ -346,9 +349,9 @@ void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
 
       // gray out the song if it's now broken; otherwise undo the gray color
       if(valid) {
-        current->RemoveForegroundColor(invalid_song_priority_);
+        current->RemoveForegroundColor(kInvalidSongPriority);
       } else {
-        current->SetForegroundColor(invalid_song_priority_, invalid_song_color_);
+        current->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
       }
 
       // we have at most one current item

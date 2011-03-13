@@ -41,9 +41,7 @@ class PlaylistManagerInterface : public QObject {
 
 public:
   PlaylistManagerInterface(QObject* parent)
-    : QObject(parent),
-      invalid_song_priority_(200),
-      invalid_song_color_(Qt::lightGray) {}
+    : QObject(parent) {}
 
   virtual int current_id() const = 0;
   virtual int active_id() const = 0;
@@ -119,8 +117,8 @@ signals:
   void PlayRequested(const QModelIndex& index);
 
 protected:
-  const int invalid_song_priority_;
-  const QColor invalid_song_color_;
+  static const int kInvalidSongPriority;
+  static const QRgb kInvalidSongColor;
 };
 
 class PlaylistManager : public PlaylistManagerInterface {

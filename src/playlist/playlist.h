@@ -324,8 +324,8 @@ class Playlist : public QAbstractListModel {
 
   QUndoStack* undo_stack_;
 
-  const int dynamic_history_priority_;
-  const QColor dynamic_history_color_;
+  static const int kDynamicHistoryPriority;
+  static const QRgb kDynamicHistoryColor;
 
   smart_playlists::GeneratorPtr dynamic_playlist_;
   ColumnAlignmentMap column_alignments_;

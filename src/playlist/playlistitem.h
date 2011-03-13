@@ -32,9 +32,7 @@ class SqlRow;
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
   PlaylistItem(const QString& type)
-    : type_(type),
-      background_colors_(QMap<short, QColor>()),
-      foreground_colors_(QMap<short, QColor>()) {}
+    : type_(type) {}
   virtual ~PlaylistItem() {}
 
   static PlaylistItem* NewFromType(const QString& type);
