@@ -25,9 +25,10 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include <QtDebug>
-#include <QThread>
+#include <QFileInfo>
 #include <QSignalSpy>
+#include <QThread>
+#include <QtDebug>
 
 namespace {
 
@@ -73,7 +74,7 @@ TEST_F(LibraryBackendTest, AddDirectory) {
   // Check the signal was emitted correctly
   ASSERT_EQ(1, spy.count());
   Directory dir = spy[0][0].value<Directory>();
-  EXPECT_EQ("/tmp", dir.path);
+  EXPECT_EQ(QFileInfo("/tmp").canonicalFilePath(), dir.path);
   EXPECT_EQ(1, dir.id);
   EXPECT_EQ(0, spy[0][1].value<SubdirectoryList>().size());
 }
