@@ -228,6 +228,7 @@ set(SOURCES
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
   widgets/freespacebar.cpp
+  widgets/fullscreenhypnotoad.cpp
   widgets/lineedit.cpp
   widgets/linetextedit.cpp
   widgets/multiloadingindicator.cpp

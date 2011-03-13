@@ -23,8 +23,11 @@
 
 #include <QWidget>
 
+#include <boost/scoped_ptr.hpp>
+
 class AlbumCoverChoiceController;
 class AlbumCoverLoader;
+class FullscreenHypnotoad;
 class LibraryBackend;
 
 class QAction;
@@ -40,6 +43,7 @@ class NowPlayingWidget : public QWidget {
 
 public:
   NowPlayingWidget(QWidget* parent = 0);
+  ~NowPlayingWidget();
 
   static const char* kSettingsGroup;
   static const int kPadding;
@@ -95,6 +99,8 @@ private slots:
   void UnsetCover();
   void ShowCover();
 
+  void Bask();
+
 private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
                         QSignalMapper* mapper);
@@ -134,7 +140,9 @@ private:
   qreal previous_track_opacity_;
 
   static const char* kHypnotoadPath;
-  QMovie* hypnotoad_;
+  QAction* bask_in_his_glory_action_;
+  boost::scoped_ptr<QMovie> hypnotoad_;
+  boost::scoped_ptr<FullscreenHypnotoad> big_hypnotoad_;
 
   bool aww_;
 };

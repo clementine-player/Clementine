@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "fullscreenhypnotoad.h"
 #include "nowplayingwidget.h"
 #include "core/albumcoverloader.h"
 #include "core/kittenloader.h"
@@ -69,7 +70,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
     load_cover_id_(0),
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0),
-    hypnotoad_(NULL),
+    bask_in_his_glory_action_(NULL),
     aww_(false)
 {
   // Load settings
@@ -110,6 +111,10 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   connect(above_statusbar_action_, SIGNAL(toggled(bool)), SLOT(ShowAboveStatusBar(bool)));
   above_statusbar_action_->setChecked(s.value("above_status_bar", false).toBool());
 
+  bask_in_his_glory_action_ = menu_->addAction(tr("ALL GLORY TO THE HYPNOTOAD"));
+  bask_in_his_glory_action_->setVisible(false);
+  connect(bask_in_his_glory_action_, SIGNAL(triggered()), SLOT(Bask()));
+
   // Animations
   connect(show_hide_animation_, SIGNAL(frameChanged(int)), SLOT(SetHeight(int)));
   setMaximumHeight(0);
@@ -120,6 +125,9 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   // Start loading the cover loader thread
   cover_loader_->Start();
   connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
+}
+
+NowPlayingWidget::~NowPlayingWidget() {
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
@@ -384,6 +392,8 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
     album_cover_choice_controller_->show_cover_action()->setEnabled(!art_is_not_set);
   }
 
+  bask_in_his_glory_action_->setVisible(hypnotoad_);
+
   // show the menu
   menu_->popup(mapToGlobal(e->pos()));
 }
@@ -402,13 +412,12 @@ bool NowPlayingWidget::show_above_status_bar() const {
 
 void NowPlayingWidget::AllHail(bool hypnotoad) {
   if (hypnotoad) {
-    hypnotoad_ = new QMovie(kHypnotoadPath, QByteArray(), this);
-    connect(hypnotoad_, SIGNAL(updated(const QRect&)), SLOT(update()));
+    hypnotoad_.reset(new QMovie(kHypnotoadPath, QByteArray(), this));
+    connect(hypnotoad_.get(), SIGNAL(updated(const QRect&)), SLOT(update()));
     hypnotoad_->start();
     update();
   } else {
-    delete hypnotoad_;
-    hypnotoad_ = NULL;
+    hypnotoad_.reset();
     update();
   }
 }
@@ -461,4 +470,9 @@ void NowPlayingWidget::ShowCover() {
 
 void NowPlayingWidget::SetLibraryBackend(LibraryBackend* backend) {
   album_cover_choice_controller_->SetLibrary(backend);
+}
+
+void NowPlayingWidget::Bask() {
+  big_hypnotoad_.reset(new FullscreenHypnotoad);
+  big_hypnotoad_->showFullScreen();
 }
