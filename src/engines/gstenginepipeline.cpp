@@ -308,6 +308,9 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       break;
 
     case GST_MESSAGE_ERROR:
+      // we're trying to shutdown the pipeline here to avoid consequent
+      // error notifications: we're interested in the first one only
+      gst_element_set_state(instance->pipeline_, GST_STATE_NULL);
       QtConcurrent::run(instance, &GstEnginePipeline::ErrorMessageReceived, msg);
       break;
 
@@ -360,17 +363,7 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   }
 
   qDebug() << debugstr;
-
-  // wait until the change of state is complete and if something went
-  // wrong signal the error; this makes skipping songs work even for
-  // ASYNC changes of state
-  // we're using a higher than usual timeout here to avoid race
-  // conditions; those are visible when we try to play another song
-  // due to skipping a broken one while the broken song's state is
-  // still being processed in GStreamer
-  if(state(kGstStateTimeoutNanosecs * 5) == GST_STATE_NULL) {
-    emit Error(message, domain, code);
-  }
+  emit Error(message, domain, code);
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
@@ -562,12 +555,8 @@ qint64 GstEnginePipeline::length() const {
 }
 
 GstState GstEnginePipeline::state() const {
-  return state(kGstStateTimeoutNanosecs);
-}
-
-GstState GstEnginePipeline::state(int delay) const {
   GstState s, sp;
-  if (gst_element_get_state(pipeline_, &s, &sp, delay) ==
+  if (gst_element_get_state(pipeline_, &s, &sp, kGstStateTimeoutNanosecs) ==
       GST_STATE_CHANGE_FAILURE)
     return GST_STATE_NULL;
 

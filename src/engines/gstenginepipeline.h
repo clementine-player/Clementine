@@ -129,10 +129,6 @@ class GstEnginePipeline : public QObject {
 
   void TransitionToNext();
 
-  // Returns this pipeline's state. May return GST_STATE_NULL if the state check
-  // timed out. The timeout value used is the given one.
-  GstState state(int timeout) const;
-
  private slots:
   void FaderTimelineFinished();
 

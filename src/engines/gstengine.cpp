@@ -431,11 +431,13 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 
   Engine::Base::Load(url, change, beginning_nanosec, end_nanosec);
 
+  // TODO: see if commenting this out will lead to regression on windows
+
   // Clementine just crashes when asked to load a file that doesn't exist on
   // Windows, so check for that here.  This is definitely the wrong place for
   // this "fix"...
-  if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
-    return false;
+  //if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
+  //  return false;
 
   QUrl gst_url = FixupUrl(url);
 
@@ -688,7 +690,8 @@ void GstEngine::HandlePipelineError(const QString& message, int domain, int erro
   // - come up with a less intrusive error box (not a dialog but a notification
   //   popup of some kind) and then report all errors
   if(!(domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_NOT_FOUND) &&
-     !(domain == GST_STREAM_ERROR && error_code == GST_STREAM_ERROR_TYPE_NOT_FOUND)) {
+     !(domain == GST_STREAM_ERROR && error_code == GST_STREAM_ERROR_TYPE_NOT_FOUND) &&
+     !(domain == GST_RESOURCE_ERROR && error_code == GST_RESOURCE_ERROR_OPEN_READ)) {
     emit Error(message);
   }
 }
