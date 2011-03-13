@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-17 20:42+0000\n"
-"PO-Revision-Date: 2011-02-18 10:24+0000\n"
-"Last-Translator: Ernesto Manriquez <Unknown>\n"
+"POT-Creation-Date: 2011-03-06 20:42+0000\n"
+"PO-Revision-Date: 2011-03-12 03:44+0000\n"
+"Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 06:07+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-13 05:09+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
+"Language: \n"
 "X-Language: es_ES\n"
 
 msgid " ms"
@@ -83,15 +83,15 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -172,7 +172,7 @@ msgid ""
 "selecting songs."
 msgstr ""
 "Una lista de reproducción inteligente es una lista dinámica de canciones que "
-"se encuentran en tu biblioteca. Existen diferentes tipos de listas de "
+"se encuentran en tu colección. Existen diferentes tipos de listas de "
 "reproducción inteligentes que ofrecen distintas formas de seleccionar "
 "canciones."
 
@@ -471,7 +471,7 @@ msgid "Buttons"
 msgstr "Botones"
 
 msgid "CUE sheet support"
-msgstr ""
+msgstr "Soporte de hoja CUE"
 
 msgid "Change cover art"
 msgstr "Cambiar portada"
@@ -545,6 +545,9 @@ msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your phone."
 msgstr ""
+"Clementine puede controlarse de manera remota mediante un teléfono Android. "
+"Para habilitar esta funcionalidad, inicie sesión con la misma cuenta de "
+"Google que tiene configurada en su teléfono."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine puede mostrar un mensaje cuando la pista cambie."
@@ -637,8 +640,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
-"instalados todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
+"todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -846,7 +849,7 @@ msgid "Display the on-screen-display"
 msgstr "Mostrar la indicación-en-pantalla"
 
 msgid "Do a full library rescan"
-msgstr ""
+msgstr "Hacer un re-escaneo completo de la colección"
 
 msgid "Do not convert any music"
 msgstr "No convertir ninguna música"
@@ -998,6 +1001,9 @@ msgstr "Error procesando %1: %2"
 msgid "Ever played"
 msgstr "Reproducidos alguna vez"
 
+msgid "Except between tracks on the same album"
+msgstr ""
+
 msgid "Extras"
 msgstr "Extras"
 
@@ -1081,7 +1087,7 @@ msgstr "Tipo de sistema de archivos"
 
 msgid "Find songs in your library that match the criteria you specify."
 msgstr ""
-"Encontrar canciones en su librería que coinciden con el criterio que "
+"Encontrar canciones en su colección que coinciden con el criterio que "
 "especificó."
 
 msgid "Fingerprinting song"
@@ -1232,6 +1238,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
+"Si usa el remoto en mas de un computador, este nombre le ayudará a escoger "
+"cuál de ellos conectar a su teléfono."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorar el \"The\" en los nombres de los artistas"
@@ -1420,10 +1428,10 @@ msgid "Library advanced grouping"
 msgstr "Agrupamiento avanzado de la colección"
 
 msgid "Library rescan notice"
-msgstr ""
+msgstr "Aviso de re-escaneo de la biblioteca"
 
 msgid "Library search"
-msgstr "Búsqueda en Librería"
+msgstr "Búsqueda en Colección"
 
 msgid "Limits"
 msgstr "Limites"
@@ -1552,7 +1560,7 @@ msgid "Model"
 msgstr "Modelo"
 
 msgid "Monitor the library for changes"
-msgstr "Monitorizar cambios en la biblioteca"
+msgstr "Monitorizar cambios en la colección"
 
 msgid "Most played"
 msgstr "Más reproducidas"
@@ -1585,7 +1593,7 @@ msgid "Mute"
 msgstr "SIlenciar"
 
 msgid "My Last.fm Library"
-msgstr "Mi biblioteca de Last.fm"
+msgstr "Mi colección de Last.fm"
 
 msgid "My Last.fm Mix Radio"
 msgstr "Mi radio mix de Last.fm"
@@ -1633,7 +1641,7 @@ msgid "Never played"
 msgstr "Nunca reproducidos"
 
 msgid "Never start playing"
-msgstr "Nunca comenzar a reproducir"
+msgstr "Nunca empezar a reproducir"
 
 msgid "New playlist"
 msgstr "Nueva lista de reproducción"
@@ -1812,7 +1820,7 @@ msgid "Play custom radio..."
 msgstr "Reproducir Radio Personalizada"
 
 msgid "Play from my Library"
-msgstr "Reproducir desde la biblioteca"
+msgstr "Reproducir desde la colección"
 
 msgid "Play if stopped, pause if playing"
 msgstr "Reproducir si está detenida, pausar si se está reproduciendo"
@@ -1839,7 +1847,7 @@ msgid "Playback"
 msgstr "Reproducción"
 
 msgid "Player name"
-msgstr ""
+msgstr "Nombre del reproductor"
 
 msgid "Player options"
 msgstr "Opciones del reproductor"
@@ -2227,7 +2235,7 @@ msgid "Show all the songs"
 msgstr "Mostrar todas las canciones"
 
 msgid "Show cover art in library"
-msgstr "Mostrar portadas en la biblioteca"
+msgstr "Mostrar portadas en la colección"
 
 msgid "Show dividers"
 msgstr ""
@@ -2356,7 +2364,7 @@ msgid "Stop"
 msgstr "Detener"
 
 msgid "Stop after"
-msgstr "Parar después"
+msgstr "Detener después"
 
 msgid "Stop after this track"
 msgstr "Detener reproducción al finalizar la pista"
@@ -2443,6 +2451,9 @@ msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:<ul>"
 msgstr ""
+"La versión de Clementina a la que se acaba de actualizar requiere un re-"
+"escaneo completo de la biblioteca debido a las nuevas características "
+"listadas a continuación:<ul>"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Hubo un problema obteniendo los metadatos desde Magnatune"
@@ -2583,7 +2594,7 @@ msgid "Unset cover"
 msgstr "Quitar portada"
 
 msgid "Update changed library folders"
-msgstr ""
+msgstr "Actualizar carpetas de la colección modificadas"
 
 msgid "Update the library when Clementine starts"
 msgstr "Actualizar la colección cuando Clementine inicia"
@@ -2633,7 +2644,7 @@ msgid "Username"
 msgstr "Nombre de Usuario"
 
 msgid "Using the menu to add a song will..."
-msgstr "Usar el menú para añadir una canción va a..."
+msgstr "Al usar el menú para añadir una canción..."
 
 msgid "VBR MP3"
 msgstr "VBR MP3"
@@ -2796,7 +2807,7 @@ msgid ""
 msgstr ""
 
 msgid "Your library is empty!"
-msgstr "Su biblioteca está vacía."
+msgstr "Su colección está vacía!"
 
 msgid "Your radio streams"
 msgstr "Tus flujos de radio"
@@ -2811,7 +2822,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -2870,7 +2881,7 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 
@@ -2889,12 +2900,6 @@ msgstr "detener"
 #, qt-format
 msgid "track %1"
 msgstr "Pista %1"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Generando huella de audio y obteniendo resultados..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Resultados recogidos"
 
 #~ msgid "&Show tray icon"
 #~ msgstr "&Mostrar icono de la bandeja"
@@ -3378,3 +3383,9 @@ msgstr "Pista %1"
 
 #~ msgid "Complete automatically"
 #~ msgstr "Completar automáticamente"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Generando huella de audio y obteniendo resultados..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Resultados recogidos"

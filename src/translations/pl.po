@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-17 20:42+0000\n"
-"PO-Revision-Date: 2011-02-20 16:14+0000\n"
-"Last-Translator: Paweł Bara <Unknown>\n"
+"POT-Creation-Date: 2011-03-06 20:42+0000\n"
+"PO-Revision-Date: 2011-02-23 18:17+0000\n"
+"Last-Translator: Michał Ziąbkowski <Unknown>\n"
 "Language-Team: Polish <>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-21 05:09+0000\n"
+"X-Launchpad-Export-Date: 2011-03-07 05:28+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
+"Language: \n"
 "X-Language: pl_PL\n"
 
 msgid " ms"
@@ -82,15 +82,15 @@ msgstr "%1 ścieżek"
 msgid "%1: Wiimotedev module"
 msgstr "%1: moduł Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n nieudane"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n zakończone"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "pozostało %n"
 
@@ -536,6 +536,9 @@ msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your phone."
 msgstr ""
+"Clementine można sterować zdalnie za pomocą telefonu z systemem Android. Aby "
+"włączyć tę funkcję, zaloguj się do tego samego konta Google, które jest "
+"skonfigurowane na twoim telefonie."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine może pokazywać powiadomienia, gdy zmienia się utwór."
@@ -987,6 +990,9 @@ msgstr "Błąd przetwarzania %1: %2"
 msgid "Ever played"
 msgstr "Kiedykolwiek odtwarzane"
 
+msgid "Except between tracks on the same album"
+msgstr ""
+
 msgid "Extras"
 msgstr "Dodatki"
 
@@ -1220,6 +1226,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
+"Jeśli używasz zdalnego sterowania na więcej niż jednym komputerze, ta nazwa "
+"pomoże ci wybrać z którym połączyć się z poziomu telefonu."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignoruj \"The\" w nazwach artystów"
@@ -1825,7 +1833,7 @@ msgid "Playback"
 msgstr "Odtwarzanie"
 
 msgid "Player name"
-msgstr ""
+msgstr "Nazwa odtwarzacza"
 
 msgid "Player options"
 msgstr "Opcje odtwarzacza"
@@ -2567,7 +2575,7 @@ msgid "Unset cover"
 msgstr "Usuń okładkę"
 
 msgid "Update changed library folders"
-msgstr "Odśwież zmienione foldery biblioteki"
+msgstr "Odśwież zmienione katalogi biblioteki"
 
 msgid "Update the library when Clementine starts"
 msgstr "Odświeżaj bibliotekę przy uruchomieniu Clementine"
@@ -2794,7 +2802,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "dodaj %n utworów"
 
@@ -2853,7 +2861,7 @@ msgstr "w dniu"
 msgid "options"
 msgstr "opcje"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "usuń %n utworów"
 
@@ -2872,12 +2880,6 @@ msgstr "zatrzymaj"
 #, qt-format
 msgid "track %1"
 msgstr "utwór %1"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Generowanie sygnatury audio i pobieranie wyników..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Pobrano wyniki"
 
 #~ msgid "&Show tray icon"
 #~ msgstr "&Pokaż ikonę w trayu"
@@ -3204,6 +3206,12 @@ msgstr "utwór %1"
 
 #~ msgid "Complete automatically"
 #~ msgstr "Uzupełnij automatycznie"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Generowanie sygnatury audio i pobieranie wyników..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Pobrano wyniki"
 
 #~ msgid "Save Album Cover"
 #~ msgstr "Zapisz okładkę albumu"

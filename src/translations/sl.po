@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-17 20:42+0000\n"
-"PO-Revision-Date: 2011-02-18 17:07+0000\n"
+"POT-Creation-Date: 2011-03-06 20:42+0000\n"
+"PO-Revision-Date: 2011-02-28 12:17+0000\n"
 "Last-Translator: R33D3M33R <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
-"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 06:07+0000\n"
+"X-Launchpad-Export-Date: 2011-03-07 05:28+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
+"Language: sl\n"
 
 msgid " ms"
 msgstr " ms"
@@ -82,15 +82,15 @@ msgstr "%1 skladb"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wimotedev modul"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n spodletelih"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n končanih"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n preostaja"
 
@@ -461,7 +461,7 @@ msgid "Buttons"
 msgstr "Gumbi"
 
 msgid "CUE sheet support"
-msgstr ""
+msgstr "Podpora predlogam CUE"
 
 msgid "Change cover art"
 msgstr "Spremeni ovitek albuma"
@@ -535,6 +535,9 @@ msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your phone."
 msgstr ""
+"Clementine lahko oddaljeno nadzirate preko telefona z Androidom. Da "
+"omogočite to zmožnost, se prijavite v enak račun Google kot je nastavljen na "
+"vašem telefonu."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine lahko pokaže sporočilo ob spremembi skladbe."
@@ -987,6 +990,9 @@ msgstr "Napaka med obdelavo %1: %2"
 msgid "Ever played"
 msgstr "Sploh predvajano"
 
+msgid "Except between tracks on the same album"
+msgstr ""
+
 msgid "Extras"
 msgstr "Dodatki"
 
@@ -1217,6 +1223,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
+"Če uporabljate daljinec na več kot enem računalniku, bo to ime pomagalo, da "
+"izberete s katerim želite povezati telefon."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Prezri \"The\" v imenih izvajalcev"
@@ -1402,7 +1410,7 @@ msgid "Library advanced grouping"
 msgstr "Napredno združevanje v knjižnici"
 
 msgid "Library rescan notice"
-msgstr ""
+msgstr "Obvestilo ponovnega pregledovanja knjižnice"
 
 msgid "Library search"
 msgstr "Iskanje po knjižnici"
@@ -1819,7 +1827,7 @@ msgid "Playback"
 msgstr "Predvajanje"
 
 msgid "Player name"
-msgstr ""
+msgstr "Ime predvajalnika"
 
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
@@ -2160,7 +2168,7 @@ msgid "Set value for all selected tracks..."
 msgstr "Nastavi vrednost za vse izbrane skladbe ..."
 
 msgid "Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 msgid "Settings..."
 msgstr "Nastavitve ..."
@@ -2424,6 +2432,8 @@ msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:<ul>"
 msgstr ""
+"Različica Clementine, ki ste jo posodobili, zahteva polno ponovno "
+"pregledovanje knjižnice, zaradi spodaj navedenih novih zmožnosti:<ul>"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Med pridobivanjem metapodatkov iz Magnatune je prišlo do napake"
@@ -2788,7 +2798,7 @@ msgstr "Ž-A"
 msgid "Zero"
 msgstr "Brez"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "dodaj %n skladb"
 
@@ -2847,7 +2857,7 @@ msgstr "v"
 msgid "options"
 msgstr "možnosti"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "odstrani %n skladb"
 
@@ -2866,12 +2876,6 @@ msgstr "zaustavi"
 #, qt-format
 msgid "track %1"
 msgstr "skladba %1"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Ustvarjanje prstnega odtisa zvoka in pridobivanje rezultatov ..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Rezulrati pridobljeni"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"
@@ -3076,6 +3080,12 @@ msgstr "skladba %1"
 
 #~ msgid "Complete automatically"
 #~ msgstr "Samodejno dopolni"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Ustvarjanje prstnega odtisa zvoka in pridobivanje rezultatov ..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Rezulrati pridobljeni"
 
 #~ msgid "Show duplicates only"
 #~ msgstr "Kaži le podvojene"

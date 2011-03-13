@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-17 20:42+0000\n"
-"PO-Revision-Date: 2011-02-20 00:36+0000\n"
-"Last-Translator: David Dusanic <Unknown>\n"
+"POT-Creation-Date: 2011-03-06 20:42+0000\n"
+"PO-Revision-Date: 2011-03-07 19:31+0000\n"
+"Last-Translator: David Dusanic <ivanovnegro@googlemail.com>\n"
 "Language-Team: German <de@li.org>\n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-21 05:09+0000\n"
+"X-Launchpad-Export-Date: 2011-03-08 05:23+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
+"Language: de\n"
 
 msgid " ms"
 msgstr " ms"
@@ -83,15 +83,15 @@ msgstr "%1 Stücke"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev-Modul"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -170,8 +170,8 @@ msgid ""
 "selecting songs."
 msgstr ""
 "Eine intelligente Wiedergabeliste ist eine Liste von Titeln aus Ihrer "
-"Sammlung. Es gibt verschiedene Arten von Wiedergabelisten für verschiedene "
-"Arten der Sortierung."
+"Musiksammlung. Es gibt verschiedene Arten von Wiedergabelisten für "
+"verschiedene Arten der Sortierung."
 
 msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
@@ -589,7 +589,7 @@ msgid "Complete tags automatically"
 msgstr "Tags automatisch vervollständigen"
 
 msgid "Complete tags automatically..."
-msgstr ""
+msgstr "Tags automatisch vervollständigen..."
 
 msgid "Composer"
 msgstr "Komponist"
@@ -604,7 +604,7 @@ msgid "Configure Shortcuts"
 msgstr "Tastenkürzel einrichten"
 
 msgid "Configure library..."
-msgstr "Sammlung einrichten..."
+msgstr "Musiksammlung einrichten..."
 
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Wii-Fernbedienungen mittels Aktivieren/deaktivieren-Aktion verbinden"
@@ -622,7 +622,7 @@ msgid "Copy to device..."
 msgstr "Auf das Gerät kopieren..."
 
 msgid "Copy to library..."
-msgstr "Zur Sammlung kopieren..."
+msgstr "Zur Musiksammlung kopieren..."
 
 msgid "Copying iPod database"
 msgstr "Kopiere iPod Datenbank"
@@ -841,7 +841,7 @@ msgid "Display the on-screen-display"
 msgstr "OSD anzeigen"
 
 msgid "Do a full library rescan"
-msgstr "Sammlung erneut einlesen"
+msgstr "Musiksammlung erneut einlesen"
 
 msgid "Do not convert any music"
 msgstr "Nichts konvertieren"
@@ -993,6 +993,9 @@ msgstr "Fehler bei %1: %2"
 msgid "Ever played"
 msgstr "Irgendwann gespielt"
 
+msgid "Except between tracks on the same album"
+msgstr ""
+
 msgid "Extras"
 msgstr "Extras"
 
@@ -1075,7 +1078,7 @@ msgid "Filesystem type"
 msgstr "Typ des Dateisystems"
 
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Titel in Ihrer Sammlung finden, die Ihren Kriterien entsprechen."
+msgstr "Titel in Ihrer Musiksammlung finden, die den Kriterien entsprechen."
 
 msgid "Fingerprinting song"
 msgstr ""
@@ -1406,7 +1409,7 @@ msgid "Length"
 msgstr "Länge"
 
 msgid "Library"
-msgstr "Sammlung"
+msgstr "Musiksammlung"
 
 msgid "Library advanced grouping"
 msgstr "Benutzerdefinierte Gruppierung"
@@ -1415,7 +1418,7 @@ msgid "Library rescan notice"
 msgstr ""
 
 msgid "Library search"
-msgstr "Sammlung durchsuchen"
+msgstr "Musiksammlung durchsuchen"
 
 msgid "Limits"
 msgstr "Begrenzungen"
@@ -1544,7 +1547,7 @@ msgid "Model"
 msgstr "Modell"
 
 msgid "Monitor the library for changes"
-msgstr "Die Sammlung auf Änderungen hin überwachen"
+msgstr "Musiksammlung auf Änderungen hin überwachen"
 
 msgid "Most played"
 msgstr "Meistgespielt"
@@ -1559,7 +1562,7 @@ msgid "Move down"
 msgstr "Nach unten"
 
 msgid "Move to library..."
-msgstr "Zur Sammlung verschieben..."
+msgstr "Zur Musiksammlung verschieben..."
 
 msgid "Move up"
 msgstr "Nach oben"
@@ -1829,7 +1832,7 @@ msgid "Playback"
 msgstr "Wiedergabe"
 
 msgid "Player name"
-msgstr ""
+msgstr "Spielername"
 
 msgid "Player options"
 msgstr "Player Einstellungen"
@@ -1980,7 +1983,7 @@ msgid "Remember from last time"
 msgstr "Letzte Einstellung benutzen"
 
 msgid "Remote Control"
-msgstr ""
+msgstr "Fernbedienung"
 
 msgid "Remove"
 msgstr "Entfernen"
@@ -2226,7 +2229,7 @@ msgid "Show fullsize..."
 msgstr "Vollbild..."
 
 msgid "Show in file browser..."
-msgstr ""
+msgstr "Im Dateibrowser anzeigen"
 
 msgid "Show in various artists"
 msgstr "Unter \"Verschiedene Interpreten\" anzeigen"
@@ -2433,6 +2436,8 @@ msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:<ul>"
 msgstr ""
+"Clementine wurde aktualisiert. Aufgrund der folgenden neuen Funktionen muss "
+"die Musiksammlung neu eingelesen werden:"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Beim Holen der Metadaten von Magnatune ist ein Fehler aufgetreten"
@@ -2464,7 +2469,7 @@ msgstr ""
 "Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Diese Ordner werden für Ihre Sammlung durchsucht"
+msgstr "Diese Ordner werden für Ihre Musiksammlung durchsucht"
 
 msgid "Third level"
 msgstr "Dritte Stufe"
@@ -2576,7 +2581,7 @@ msgid "Unset cover"
 msgstr "Cover löschen"
 
 msgid "Update changed library folders"
-msgstr "Aktualisiere den geänderten Bibliothek's Ordner"
+msgstr "Musiksammlung aktualisieren"
 
 msgid "Update the library when Clementine starts"
 msgstr "Musiksammlung beim Programmstart aktualisieren"
@@ -2590,7 +2595,7 @@ msgid "Updating %1%..."
 msgstr "Aktualisiere %1..."
 
 msgid "Updating library"
-msgstr "Aktualisiere Sammlung"
+msgstr "Aktualisiere Musiksammlung"
 
 msgid "Usage"
 msgstr "Benutzung"
@@ -2789,7 +2794,7 @@ msgid ""
 msgstr ""
 
 msgid "Your library is empty!"
-msgstr "Ihre Sammlung ist leer!"
+msgstr "Ihre Musiksammlung ist leer!"
 
 msgid "Your radio streams"
 msgstr "Meine Internetradios"
@@ -2804,7 +2809,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -2863,7 +2868,7 @@ msgstr "auf"
 msgid "options"
 msgstr "Einstellungen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 
@@ -2882,12 +2887,6 @@ msgstr "Anhalten"
 #, qt-format
 msgid "track %1"
 msgstr "Stück %1"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Audio-Fingerabdruck wird erzeugt und Ergebnisse geholt …"
-
-#~ msgid "Results fetched"
-#~ msgstr "Ergebnisse geholt"
 
 #~ msgid "Similar Artists to %1"
 #~ msgstr "Ähnliche Interpreten wie %1"
@@ -3191,6 +3190,12 @@ msgstr "Stück %1"
 
 #~ msgid "Complete automatically"
 #~ msgstr "Automatisch vervollständigen"
+
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "Audio-Fingerabdruck wird erzeugt und Ergebnisse geholt …"
+
+#~ msgid "Results fetched"
+#~ msgstr "Ergebnisse geholt"
 
 #~ msgid "Show duplicates only"
 #~ msgstr "Nur Duplikate anzeigen"

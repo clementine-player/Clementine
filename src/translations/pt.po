@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-02-17 20:42+0000\n"
-"PO-Revision-Date: 2011-02-18 10:15+0000\n"
+"POT-Creation-Date: 2011-03-06 20:42+0000\n"
+"PO-Revision-Date: 2011-03-11 21:26+0000\n"
 "Last-Translator: Sérgio Marques <Unknown>\n"
 "Language-Team: \n"
-"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 06:07+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-12 05:17+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: PORTUGAL\n"
+"Language: pt\n"
 "X-Poedit-Language: Portuguese\n"
 
 msgid " ms"
@@ -84,15 +84,15 @@ msgstr "%1 músicas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n falha(s)"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n concluída(s)"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n por converter"
 
@@ -364,7 +364,7 @@ msgid "Append to the playlist"
 msgstr "Acrescentar à lista de reprodução"
 
 msgid "Apply compression to prevent clipping"
-msgstr "Aplicar compressão para prevenir o corte"
+msgstr "Aplicar compressão para impedir a distorção"
 
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
@@ -416,7 +416,7 @@ msgid "BPM"
 msgstr "BPM"
 
 msgid "Background Streams"
-msgstr "Emissões em segundo plano"
+msgstr "Em segundo plano"
 
 msgid "Background color"
 msgstr "Cor do fundo"
@@ -465,7 +465,7 @@ msgid "Buttons"
 msgstr "Botões"
 
 msgid "CUE sheet support"
-msgstr ""
+msgstr "Suporte a ficheiros CUE"
 
 msgid "Change cover art"
 msgstr "Alterar capa do álbum"
@@ -505,8 +505,8 @@ msgstr "Escolher a capa manualmente"
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
-"Escolha as páginas web que o Clementine vai utilizar para pesquisar as "
-"letras das músicas"
+"Escolha as páginas que o Clementine vai utilizar para pesquisar as letras "
+"das músicas"
 
 msgid "Classical"
 msgstr "Clássica"
@@ -540,6 +540,9 @@ msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your phone."
 msgstr ""
+"O Clementine pode ser comandado através do sistema Android. Para ativar esta "
+"opção, inicie sessão na mesma conta Google que tem configurada no seu "
+"telefone."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "O Clementine pode mostrar uma mensagem ao mudar de música"
@@ -588,7 +591,7 @@ msgid "Complete tags automatically"
 msgstr "Preencher detalhes automaticamente"
 
 msgid "Complete tags automatically..."
-msgstr ""
+msgstr "Preencher detalhes automaticamente..."
 
 msgid "Composer"
 msgstr "Compositor"
@@ -624,7 +627,7 @@ msgid "Copy to library..."
 msgstr "Copiar para a coleção..."
 
 msgid "Copying iPod database"
-msgstr "Copiando a base de dados iPod"
+msgstr "A copiar base de dados do iPod"
 
 #, qt-format
 msgid ""
@@ -678,10 +681,10 @@ msgid "Cover art set from %1"
 msgstr "Capa de álbum em %1"
 
 msgid "Cross-fade when changing tracks automatically"
-msgstr "Silenciar progressivo ao mudar automaticamente de música"
+msgstr "Silêncio progressivo ao mudar automaticamente de música"
 
 msgid "Cross-fade when changing tracks manually"
-msgstr "Silenciar progressivo ao mudar manualmente de músicas"
+msgstr "Silêncio progressivo ao mudar manualmente de músicas"
 
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
@@ -729,7 +732,7 @@ msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
 msgid "Ctrl+T"
-msgstr ""
+msgstr "Ctrl+T"
 
 msgid "Custom"
 msgstr "Personalizar"
@@ -876,13 +879,13 @@ msgid "Download this album..."
 msgstr "Transferir este álbum"
 
 msgid "Downloading Icecast directory"
-msgstr "Transferindo o diretório Icecast"
+msgstr "A transferir o diretório Icecast"
 
 msgid "Downloading Jamendo catalogue"
-msgstr "Transferindo o catálogo Jamendo"
+msgstr "A transferir o catálogo Jamendo"
 
 msgid "Downloading Magnatune catalogue"
-msgstr "Transferindo catálogo Magnatune"
+msgstr "A transferir o catálogo Magnatune"
 
 msgid "Downloading metadata"
 msgstr ""
@@ -992,6 +995,9 @@ msgstr "Erro ao processar %1: %2"
 msgid "Ever played"
 msgstr "Reproduzida alguma vez"
 
+msgid "Except between tracks on the same album"
+msgstr ""
+
 msgid "Extras"
 msgstr "Extras"
 
@@ -1017,13 +1023,13 @@ msgid "FLAC"
 msgstr "FLAC"
 
 msgid "Fade out when stopping a track"
-msgstr "Desvanecer ao parar uma música"
+msgstr "Silêncio progressivo ao parar uma música"
 
 msgid "Fading"
-msgstr "Desvanecer"
+msgstr "Desvanecimento"
 
 msgid "Fading duration"
-msgstr "Duração do desvanecimento"
+msgstr "Duração"
 
 msgid "Favourite tracks"
 msgstr "Músicas preferidas"
@@ -1189,7 +1195,7 @@ msgstr "As informações só estão disponíveis se o dispositivo estiver ligado
 
 #, qt-format
 msgid "High (%1 fps)"
-msgstr ""
+msgstr "Alta (%1 ips)"
 
 msgid "High (1024x1024)"
 msgstr "Alta (1024x1024)"
@@ -1223,6 +1229,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
+"Se utilizar o controlo em mais que um computador, este nome vai ajudá-lo a "
+"escolher qual o que pretende ligar ao seu telefone."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorar \"The\" no nome dos artistas"
@@ -1238,9 +1246,9 @@ msgid ""
 "time a song finishes.  Enabling dynamic mode will ignore any size limit you "
 "set on the playlist."
 msgstr ""
-"No modo dinâmico, as novas músicas serão escolhidas e adicionadas à lista de "
-"reprodução de cada vez que uma música termine. Se ativar o modo dinâmico, "
-"quaisquer limites de tamanho das listas de reprodução será ignorado."
+"No modo dinâmico, as novas músicas serão adicionadas à lista de reprodução "
+"assim que uma música termine. Se ativar o modo dinâmico, quaisquer limites "
+"de tamanho das listas de reprodução será ignorado."
 
 msgid "Include album art in the notification"
 msgstr "Incluir a capa do álbum na notificação"
@@ -1317,7 +1325,7 @@ msgid "Keep buttons for %1 seconds..."
 msgstr "Manter botões por %1 segundos..."
 
 msgid "Keep running in the background when the window is closed"
-msgstr "Executar em segundo plano se a janela for fechada"
+msgstr "Executar em segundo plano ao fechar a janela"
 
 msgid "Keep the original files"
 msgstr "Manter os ficheiros originais"
@@ -1410,7 +1418,7 @@ msgid "Library advanced grouping"
 msgstr "Agrupamento avançado da coleção"
 
 msgid "Library rescan notice"
-msgstr ""
+msgstr "Aviso de análise da coleção"
 
 msgid "Library search"
 msgstr "Pesquisa na coleção"
@@ -1440,28 +1448,28 @@ msgid "Load playlist..."
 msgstr "Carregar lista de reprodução..."
 
 msgid "Loading Last.fm radio"
-msgstr "Carregando rádio last.fm"
+msgstr "A carregar rádio last.fm"
 
 msgid "Loading MTP device"
-msgstr "Carregando dispositivo MTP"
+msgstr "A carregar dispositivo MTP"
 
 msgid "Loading Windows Media device"
-msgstr "Carregando dispositivo Windows Media"
+msgstr "A carregar dispositivo Windows Media"
 
 msgid "Loading iPod database"
-msgstr "Carregando base de dados iPod"
+msgstr "A carregar base de dados iPod"
 
 msgid "Loading smart playlist"
-msgstr "Carregando lista de reprodução inteligentes"
+msgstr "A carregar lista de reprodução inteligente"
 
 msgid "Loading songs"
-msgstr ""
+msgstr "A carregar músicas"
 
 msgid "Loading stream"
-msgstr "Carregando emissão"
+msgstr "A carregar emissão"
 
 msgid "Loading tracks"
-msgstr "Carregando músicas"
+msgstr "A carregar músicas"
 
 msgid "Loading..."
 msgstr "A carregar..."
@@ -1474,7 +1482,7 @@ msgstr "Adorar"
 
 #, qt-format
 msgid "Low (%1 fps)"
-msgstr ""
+msgstr "Baixa (%1 ips)"
 
 msgid "Low (15 fps)"
 msgstr "Baixa (15 ips)"
@@ -1524,7 +1532,7 @@ msgstr "Coincidir com um ou mais termos de pesquisa (OU)"
 
 #, qt-format
 msgid "Medium (%1 fps)"
-msgstr ""
+msgstr "Média (%1 fps)"
 
 msgid "Medium (25 fps)"
 msgstr "Média (25 ips)"
@@ -1690,7 +1698,7 @@ msgid "Notifications"
 msgstr "Notificações"
 
 msgid "Now Playing"
-msgstr "Em reprodução"
+msgstr "A reproduzir"
 
 msgid "OSD Preview"
 msgstr "Antevisão OSD"
@@ -1744,7 +1752,7 @@ msgid "Organising files"
 msgstr "Organizando ficheiros"
 
 msgid "Original tags"
-msgstr ""
+msgstr "Detalhes originais"
 
 msgid "Other options"
 msgstr "Outras opções"
@@ -1828,7 +1836,7 @@ msgid "Playback"
 msgstr "Reprodução"
 
 msgid "Player name"
-msgstr ""
+msgstr "Nome do reprodutor"
 
 msgid "Player options"
 msgstr "Opções do reprodutor"
@@ -1913,7 +1921,7 @@ msgid "Quality"
 msgstr "Qualidade"
 
 msgid "Querying device..."
-msgstr "Consultando dispositivo..."
+msgstr "A consultar dispositivo..."
 
 msgid "Queue Manager"
 msgstr "Gestor da fila"
@@ -2087,7 +2095,7 @@ msgid "Save this stream in the Internet tab"
 msgstr "Gravar esta emissão no separador Internet"
 
 msgid "Saving tracks"
-msgstr "Gravando as músicas"
+msgstr "A gravar músicas"
 
 msgid "Score"
 msgstr "Pontuação"
@@ -2219,13 +2227,13 @@ msgid "Show cover art in library"
 msgstr "Mostrar capa de álbum na coleção"
 
 msgid "Show dividers"
-msgstr ""
+msgstr "Mostrar separadores"
 
 msgid "Show fullsize..."
 msgstr "Ver imagem em ecrã completo..."
 
 msgid "Show in file browser..."
-msgstr ""
+msgstr "Mostrar no gestor de ficheiros..."
 
 msgid "Show in various artists"
 msgstr "Mostrar em vários artistas"
@@ -2336,10 +2344,10 @@ msgstr "Iniciar conversão"
 
 #, qt-format
 msgid "Starting %1"
-msgstr "Iniciando %1"
+msgstr "A iniciar %1"
 
 msgid "Starting..."
-msgstr "Iniciando..."
+msgstr "A iniciar..."
 
 msgid "Stop"
 msgstr "Parar"
@@ -2370,14 +2378,14 @@ msgid "Successfully written %1"
 msgstr "Escrito com sucesso %1"
 
 msgid "Suggested tags"
-msgstr ""
+msgstr "Detalhes sugeridos"
 
 msgid "Summary"
 msgstr "Resumo"
 
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr ""
+msgstr "Ultra (%1 ips)"
 
 msgid "Super high (60 fps)"
 msgstr "Elevada (60 ips)"
@@ -2392,7 +2400,7 @@ msgid "Tag"
 msgstr "\"Tag\""
 
 msgid "Tag fetcher"
-msgstr ""
+msgstr "Obtenção de detalhes"
 
 msgid "Tag radio"
 msgstr "Marcar rádio"
@@ -2433,6 +2441,8 @@ msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:<ul>"
 msgstr ""
+"Esta nova versão Clementine e face às funcionalidades abaixo indicadas, "
+"obriga a que seja efetuada uma nova análise à sua coleção:<ul>"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Ocorreu um problema ao obter os metadados Magnatune"
@@ -2545,7 +2555,7 @@ msgstr "Registo do conversor"
 
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr "Convertendo %1 ficheiro(s) com %2 processo(s)"
+msgstr "A converter %1 ficheiro(s) com %2 processo(s)"
 
 msgid "TrueAudio"
 msgstr "TrueAudio"
@@ -2681,8 +2691,8 @@ msgid ""
 "contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Ao procurar pelas capas dos álbuns, o Clementine irá procurar inicialmente "
-"as imagens que contenham uma destas palavras.\n"
+"Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que "
+"contenham uma destas palavras.\n"
 "Se não existirem ocorrências, o Clementine utilizará a maior imagem do "
 "diretório."
 
@@ -2740,8 +2750,7 @@ msgstr ""
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
-"Pode ouvir as emissões em segundo plano ao mesmo tempo que ouve outras "
-"músicas."
+"Pode ouvir as emissões em segundo plano em simultâneo com outras músicas."
 
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-weight:600;"
@@ -2803,7 +2812,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "adicionar %n músicas"
 
@@ -2862,7 +2871,7 @@ msgstr "em"
 msgid "options"
 msgstr "opções"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "remover %n músicas"
 
@@ -2882,11 +2891,8 @@ msgstr "parar"
 msgid "track %1"
 msgstr "música %1"
 
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "A gerar os identificadores áudio e a obter resultados..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Resultados obtidos"
+#~ msgid "Identifying song..."
+#~ msgstr "A identificar música..."
 
 #~ msgid "My Neighbourhood"
 #~ msgstr "Os meus vizinhos"
@@ -3235,6 +3241,12 @@ msgstr "música %1"
 #~ msgid "Complete automatically"
 #~ msgstr "Conclusão automática"
 
+#~ msgid "Generating audio fingerprint and fetching results..."
+#~ msgstr "A gerar os identificadores áudio e a obter resultados..."
+
+#~ msgid "Results fetched"
+#~ msgstr "Resultados obtidos"
+
 #~ msgid "Show duplicates only"
 #~ msgstr "Mostrar apenas as repetidas"
 
@@ -3243,3 +3255,12 @@ msgstr "música %1"
 
 #~ msgid "Images (*.jpg)"
 #~ msgstr "Imagens (*.jpg)"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "High"
+#~ msgstr "Alta"
+
+#~ msgid "Low"
+#~ msgstr "Baixa"
