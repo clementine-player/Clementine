@@ -175,10 +175,15 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 
   // Get the icon
   HICON icon;
-  device->GetDeviceIcon((ULONG*)&icon);
+  if (device->GetDeviceIcon((ULONG*)&icon) == S_OK) {
+    // Extra check for whether the icon is valid (see issue 1417)
 
-  ret.icon_ = QPixmap::fromWinHICON(icon);
-  DestroyIcon(icon);
+    ICONINFO iconinfo;
+    if (GetIconInfo(icon, &iconinfo)) {
+      ret.icon_ = QPixmap::fromWinHICON(icon);
+      DestroyIcon(icon);
+    }
+  }
 
   // Get the main (first) storage for the device
   IWMDMEnumStorage* storage_it = NULL;
