@@ -21,8 +21,9 @@
 #include "ui_radioviewcontainer.h"
 #include "core/mergedproxymodel.h"
 
-#include <QtDebug>
+#include <QMetaMethod>
 #include <QTimeLine>
+#include <QtDebug>
 
 const int RadioViewContainer::kAnimationDuration = 500;
 
@@ -37,6 +38,7 @@ RadioViewContainer::RadioViewContainer(QWidget *parent)
 
   connect(ui_->tree, SIGNAL(collapsed(QModelIndex)), SLOT(Collapsed(QModelIndex)));
   connect(ui_->tree, SIGNAL(expanded(QModelIndex)), SLOT(Expanded(QModelIndex)));
+  connect(ui_->tree, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
 }
 
 RadioViewContainer::~RadioViewContainer() {
@@ -111,6 +113,19 @@ void RadioViewContainer::SetHeaderVisible(QWidget* header, bool visible) {
 
   d.animation_->setDirection(visible ? QTimeLine::Forward : QTimeLine::Backward);
   d.animation_->start();
+}
+
+void RadioViewContainer::FocusOnFilter(QKeyEvent* event) {
+  // Beware: magic
+
+  if (current_header_) {
+    int slot = current_header_->metaObject()->indexOfSlot(
+          QMetaObject::normalizedSignature("FocusOnFilter(QKeyEvent*)"));
+    if (slot != -1) {
+      current_header_->metaObject()->method(slot).invoke(
+            current_header_, Q_ARG(QKeyEvent*, event));
+    }
+  }
 }
 
 void RadioViewContainer::SetHeaderHeight(int height) {

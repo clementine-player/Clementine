@@ -126,6 +126,11 @@ LibraryFilterWidget::~LibraryFilterWidget() {
   delete ui_;
 }
 
+void LibraryFilterWidget::FocusOnFilter(QKeyEvent *event) {
+  ui_->filter->setFocus(Qt::OtherFocusReason);
+  QApplication::sendEvent(ui_->filter, event);
+}
+
 void LibraryFilterWidget::SetLibraryModel(LibraryModel *model) {
   if (model_) {
     disconnect(model_, 0, this, 0);
@@ -221,6 +226,11 @@ void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {
 
     case Qt::Key_Down:
       emit DownPressed();
+      e->accept();
+      break;
+
+    case Qt::Key_Escape:
+      ui_->filter->LineEditInterface::clear();
       e->accept();
       break;
   }

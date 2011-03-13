@@ -33,9 +33,12 @@ public:
 
 public slots:
   void RecursivelyExpand(const QModelIndex &index);
+  void UpAndFocus();
+  void DownAndFocus();
 
 signals:
   void AddToPlaylistSignal(QMimeData* data);
+  void FocusOnFilterSignal(QKeyEvent* event);
 
 protected:
   // QAbstractItemView
@@ -43,6 +46,7 @@ protected:
 
   // QWidget
   void mousePressEvent(QMouseEvent* event);
+  void keyPressEvent(QKeyEvent* event);
 
   virtual bool CanRecursivelyExpand(const QModelIndex& index) const { return true; }
 

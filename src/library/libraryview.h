@@ -79,8 +79,6 @@ class LibraryView : public AutoExpandingTreeView {
   void TotalSongCountUpdated(int count);
   void ReloadSettings();
 
-  void UpAndFocus();
-  void DownAndFocus();
   void FilterReturnPressed();
 
  signals:
@@ -91,7 +89,6 @@ class LibraryView : public AutoExpandingTreeView {
   void paintEvent(QPaintEvent* event);
   void mouseReleaseEvent(QMouseEvent* e);
   void contextMenuEvent(QContextMenuEvent* e);
-  void keyPressEvent(QKeyEvent* e);
 
  private slots:
   void Load();

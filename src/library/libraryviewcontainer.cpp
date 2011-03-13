@@ -27,6 +27,7 @@ LibraryViewContainer::LibraryViewContainer(QWidget* parent)
   connect(filter(), SIGNAL(UpPressed()), view(), SLOT(UpAndFocus()));
   connect(filter(), SIGNAL(DownPressed()), view(), SLOT(DownAndFocus()));
   connect(filter(), SIGNAL(ReturnPressed()), view(), SLOT(FilterReturnPressed()));
+  connect(view(), SIGNAL(FocusOnFilterSignal(QKeyEvent*)), filter(), SLOT(FocusOnFilter(QKeyEvent*)));
 }
 
 LibraryViewContainer::~LibraryViewContainer() {

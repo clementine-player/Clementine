@@ -39,6 +39,9 @@ public:
 
   void SetIcecastModel(IcecastModel* model);
 
+public slots:
+  void FocusOnFilter(QKeyEvent* e);
+
 private slots:
   void SortModeChanged(int mode);
 

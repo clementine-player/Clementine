@@ -485,18 +485,6 @@ void LibraryView::CopyToDevice() {
   organise_dialog_->show();
 }
 
-void LibraryView::keyPressEvent(QKeyEvent* e) {
-  switch (e->key()) {
-    case Qt::Key_Enter:
-    case Qt::Key_Return:
-      if (currentIndex().isValid())
-        emit doubleClicked(currentIndex());
-      break;
-  }
-
-  QTreeView::keyPressEvent(e);
-}
-
 void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
   if (songs_with_errors.isEmpty())
     return;
@@ -504,16 +492,6 @@ void LibraryView::DeleteFinished(const SongList& songs_with_errors) {
   OrganiseErrorDialog* dialog = new OrganiseErrorDialog(this);
   dialog->Show(OrganiseErrorDialog::Type_Delete, songs_with_errors);
   // It deletes itself when the user closes it
-}
-
-void LibraryView::UpAndFocus() {
-  setCurrentIndex(moveCursor(QAbstractItemView::MoveUp, Qt::NoModifier));
-  setFocus();
-}
-
-void LibraryView::DownAndFocus() {
-  setCurrentIndex(moveCursor(QAbstractItemView::MoveDown, Qt::NoModifier));
-  setFocus();
 }
 
 void LibraryView::FilterReturnPressed() {

@@ -71,6 +71,11 @@ IcecastFilterWidget::~IcecastFilterWidget() {
   delete ui_;
 }
 
+void IcecastFilterWidget::FocusOnFilter(QKeyEvent *event) {
+  ui_->filter->setFocus(Qt::OtherFocusReason);
+  QApplication::sendEvent(ui_->filter, event);
+}
+
 void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
   model_ = model;
   connect(filter_->widget(), SIGNAL(textChanged(QString)),

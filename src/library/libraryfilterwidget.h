@@ -55,6 +55,7 @@ class LibraryFilterWidget : public QWidget {
 
  public slots:
   void SetQueryMode(QueryOptions::QueryMode view);
+  void FocusOnFilter(QKeyEvent* e);
 
  signals:
   void UpPressed();

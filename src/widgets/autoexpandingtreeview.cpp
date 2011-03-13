@@ -112,3 +112,32 @@ void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {
     emit AddToPlaylistSignal(data);
   }
 }
+
+void AutoExpandingTreeView::keyPressEvent(QKeyEvent* e) {
+  switch (e->key()) {
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+      if (currentIndex().isValid())
+        emit doubleClicked(currentIndex());
+      e->accept();
+      break;
+
+    case Qt::Key_Backspace:
+    case Qt::Key_Escape:
+      emit FocusOnFilterSignal(e);
+      e->accept();
+      break;
+  }
+
+  QTreeView::keyPressEvent(e);
+}
+
+void AutoExpandingTreeView::UpAndFocus() {
+  setCurrentIndex(moveCursor(QAbstractItemView::MoveUp, Qt::NoModifier));
+  setFocus();
+}
+
+void AutoExpandingTreeView::DownAndFocus() {
+  setCurrentIndex(moveCursor(QAbstractItemView::MoveDown, Qt::NoModifier));
+  setFocus();
+}

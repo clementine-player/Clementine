@@ -49,6 +49,8 @@ class RadioViewContainer : public QWidget {
   void CurrentIndexChanged(const QModelIndex& index);
   void SetHeaderHeight(int height);
 
+  void FocusOnFilter(QKeyEvent* event);
+
  private:
   void ServiceChanged(const QModelIndex& index);
   void SetHeaderVisible(QWidget* header, bool visible);
