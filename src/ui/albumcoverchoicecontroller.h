@@ -95,9 +95,14 @@ class AlbumCoverChoiceController : public QWidget {
   // Saves the chosen cover as manual cover path of this song in library.
   void SaveCover(Song* song, const QString& cover);
 
+  // Saves the cover that the user picked through a drag and drop operation.
+  QString SaveCover(Song* song, const QDropEvent* e);
+
   // Saves the given image in cache as a cover for 'artist' - 'album'. 
   // The method returns path of the cached image.
   QString SaveCoverInCache(const QString& artist, const QString& album, const QImage& image);
+
+  static bool CanAcceptDrag(const QDragEnterEvent* e);
 
 private:
   QString GetInitialPathForFileDialog(const Song& song,
@@ -106,6 +111,9 @@ private:
   static const char* kLoadImageFileFilter;
   static const char* kSaveImageFileFilter;
   static const char* kAllFilesFilter;
+
+  static bool IsKnownImageExtension(const QString& suffix);
+  static QSet<QString>* sImageExtensions;
 
 #ifdef HAVE_LIBLASTFM
   AlbumCoverSearcher* cover_searcher_;

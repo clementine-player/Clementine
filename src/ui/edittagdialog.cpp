@@ -145,6 +145,7 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   ui_->summary_art_button->setMenu(cover_menu_);
 
   ui_->art->installEventFilter(this);
+  ui_->art->setAcceptDrops(true);
 
   // Add the next/previous buttons
   previous_button_ = new QPushButton(IconLoader::Load("go-previous"), tr("Previous"), this);
@@ -632,8 +633,36 @@ void EditTagDialog::AcceptFinished() {
 }
 
 bool EditTagDialog::eventFilter(QObject* o, QEvent* e) {
-  if (o == ui_->art && e->type() == QEvent::MouseButtonRelease) {
-    cover_menu_->popup(static_cast<QMouseEvent*>(e)->globalPos());
+  if (o == ui_->art) {
+    switch (e->type()) {
+      case QEvent::MouseButtonRelease:
+        cover_menu_->popup(static_cast<QMouseEvent*>(e)->globalPos());
+        break;
+
+      case QEvent::DragEnter: {
+        QDragEnterEvent* event = static_cast<QDragEnterEvent*>(e);
+        if (AlbumCoverChoiceController::CanAcceptDrag(event)) {
+          event->acceptProposedAction();
+        }
+        break;
+      }
+
+      case QEvent::Drop: {
+        const QDropEvent* event = static_cast<QDropEvent*>(e);
+        const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
+        Song* song = GetFirstSelected();
+
+        const QString cover = album_cover_choice_controller_->SaveCover(song, event);
+        if (!cover.isEmpty()) {
+          UpdateCoverOf(*song, sel, cover);
+        }
+
+        break;
+      }
+
+      default:
+        break;
+    }
   }
   return false;
 }

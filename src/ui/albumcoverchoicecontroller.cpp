@@ -31,11 +31,13 @@
 #include <QAction>
 #include <QCryptographicHash>
 #include <QDialog>
+#include <QDragEnterEvent>
 #include <QFileDialog>
 #include <QImageWriter>
 #include <QLabel>
 #include <QList>
 #include <QMenu>
+#include <QUrl>
 
 const char* AlbumCoverChoiceController::kLoadImageFileFilter =
   QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)");
@@ -43,6 +45,8 @@ const char* AlbumCoverChoiceController::kSaveImageFileFilter =
   QT_TR_NOOP("Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)");
 const char* AlbumCoverChoiceController::kAllFilesFilter =
   QT_TR_NOOP("All files (*)");
+
+QSet<QString>* AlbumCoverChoiceController::sImageExtensions = NULL;
 
 AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
@@ -228,5 +232,37 @@ QString AlbumCoverChoiceController::SaveCoverInCache(
   image.save(path, "JPG");
 
   return path;
+}
 
+bool AlbumCoverChoiceController::IsKnownImageExtension(const QString& suffix) {
+  if (!sImageExtensions) {
+    sImageExtensions = new QSet<QString>();
+    (*sImageExtensions) << "png" << "jpg" << "jpeg" << "bmp" << "gif" << "xpm"
+                        << "pbm" << "pgm" << "ppm" << "xbm";
+  }
+
+  return sImageExtensions->contains(suffix);
+}
+
+bool AlbumCoverChoiceController::CanAcceptDrag(const QDragEnterEvent* e) {
+  foreach (const QUrl& url, e->mimeData()->urls()) {
+    const QString suffix = QFileInfo(url.toLocalFile()).suffix().toLower();
+    if (IsKnownImageExtension(suffix))
+      return true;
+  }
+  return false;
+}
+
+QString AlbumCoverChoiceController::SaveCover(Song* song, const QDropEvent* e) {
+  foreach (const QUrl& url, e->mimeData()->urls()) {
+    const QString filename = url.toLocalFile();
+    const QString suffix = QFileInfo(filename).suffix().toLower();
+
+    if (IsKnownImageExtension(suffix)) {
+      SaveCover(song, filename);
+      return filename;
+    }
+  }
+
+  return QString();
 }

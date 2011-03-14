@@ -79,6 +79,8 @@ protected:
   void paintEvent(QPaintEvent* e);
   void resizeEvent(QResizeEvent*);
   void contextMenuEvent(QContextMenuEvent* e);
+  void dragEnterEvent(QDragEnterEvent* e);
+  void dropEvent(QDropEvent* e);
 
 private slots:
   void SetMode(int mode);

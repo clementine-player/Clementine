@@ -78,6 +78,9 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
   s.beginGroup(kSettingsGroup);
   mode_ = Mode(s.value("mode", SmallSongDetails).toInt());
 
+  // Accept drops for setting album art
+  setAcceptDrops(true);
+
   // Context menu
   QActionGroup* mode_group = new QActionGroup(this);
   QSignalMapper* mode_mapper = new QSignalMapper(this);
@@ -370,16 +373,14 @@ void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
 void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   // initial 'enabled' values depending on the kitty mode
   album_cover_choice_controller_->cover_from_file_action()->setEnabled(!aww_);
-  album_cover_choice_controller_->cover_to_file_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->cover_to_file_action()->setEnabled(aww_);
   album_cover_choice_controller_->cover_from_url_action()->setEnabled(!aww_);
   album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_);
   album_cover_choice_controller_->unset_cover_action()->setEnabled(!aww_);
   album_cover_choice_controller_->show_cover_action()->setEnabled(!aww_);
 
   // some special cases
-  if(aww_) {
-    album_cover_choice_controller_->cover_to_file_action()->setEnabled(true);
-  } else {
+  if (!aww_) {
   #ifndef HAVE_LIBLASTFM
     album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
     album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
@@ -475,4 +476,19 @@ void NowPlayingWidget::SetLibraryBackend(LibraryBackend* backend) {
 void NowPlayingWidget::Bask() {
   big_hypnotoad_.reset(new FullscreenHypnotoad);
   big_hypnotoad_->showFullScreen();
+}
+
+void NowPlayingWidget::dragEnterEvent(QDragEnterEvent* e) {
+  if (AlbumCoverChoiceController::CanAcceptDrag(e)) {
+    e->acceptProposedAction();
+  }
+
+  QWidget::dragEnterEvent(e);
+}
+
+void NowPlayingWidget::dropEvent(QDropEvent* e) {
+  album_cover_choice_controller_->SaveCover(&metadata_, e);
+  NowPlaying(metadata_);
+
+  QWidget::dropEvent(e);
 }
