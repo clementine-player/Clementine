@@ -392,8 +392,11 @@ void Player::TrackAboutToEnd() {
   const bool current_contains_multiple_tracks =
       current_item_->options() & PlaylistItem::ContainsMultipleTracks;
   const bool has_next_row = playlists_->active()->next_row() != -1;
-  const PlaylistItemPtr next_item = playlists_->active()->item_at(
-      playlists_->active()->next_row());
+  PlaylistItemPtr next_item;
+
+  if (has_next_row) {
+    next_item = playlists_->active()->item_at(playlists_->active()->next_row());
+  }
 
   if (engine_->is_autocrossfade_enabled()) {
     // Crossfade is on, so just start playing the next track.  The current one
