@@ -653,6 +653,12 @@ MainWindow::MainWindow(
   // Load playlists
   playlists_->Init(library_->backend(), playlist_backend_, ui_->playlist_sequence);
 
+  // We need to connect these global shortcuts here after the playlist have been initialized
+  connect(global_shortcuts_, SIGNAL(CycleShuffleMode()), player_->playlists()->sequence(), SLOT(CycleShuffleMode()));
+  connect(global_shortcuts_, SIGNAL(CycleRepeatMode()), player_->playlists()->sequence(), SLOT(CycleRepeatMode()));
+  connect(player_->playlists()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)), osd_, SLOT(RepeatModeChanged(PlaylistSequence::RepeatMode)));
+  connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)), osd_, SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
+
   // Load settings
   settings_.beginGroup(kSettingsGroup);
 

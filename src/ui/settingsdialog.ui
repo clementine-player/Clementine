@@ -120,7 +120,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -803,6 +803,13 @@
              <widget class="QCheckBox" name="notifications_volume">
               <property name="text">
                <string>Show a notification when I change the volume</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="notifications_play_mode">
+              <property name="text">
+               <string>Show a notification when I change the repeat/shuffle mode</string>
               </property>
              </widget>
             </item>

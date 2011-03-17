@@ -37,6 +37,7 @@ OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
     behaviour_(Native),
     show_on_volume_change_(false),
     show_art_(true),
+    show_on_play_mode_change_(true),
     force_show_next_(false),
     ignore_next_stopped_(false),
     pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)),
@@ -68,6 +69,7 @@ void OSD::ReloadSettings() {
   timeout_msec_ = s.value("Timeout", 5000).toInt();
   show_on_volume_change_ = s.value("ShowOnVolumeChange", false).toBool();
   show_art_ = s.value("ShowArt", true).toBool();
+  show_on_play_mode_change_ = s.value("ShowOnPlayModeChange", true).toBool();
 
   if (!SupportsNativeNotifications() && behaviour_ == Native)
     behaviour_ = Pretty;
@@ -231,3 +233,28 @@ void OSD::WiiremoteCriticalBattery(int id, int live) {
 }
 
 #endif
+
+void OSD::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
+  if (show_on_play_mode_change_) {
+    QString current_mode = QString();
+    switch (mode) {
+      case PlaylistSequence::Shuffle_Off:   current_mode = tr("Don't shuffle");   break;
+      case PlaylistSequence::Shuffle_All:   current_mode = tr("Shuffle all");   break;
+      case PlaylistSequence::Shuffle_Album: current_mode = tr("Shuffle by album"); break;
+    }
+    ShowMessage(QCoreApplication::applicationName(), current_mode);
+  }
+}
+
+void OSD::RepeatModeChanged(PlaylistSequence::RepeatMode mode) {
+  if (show_on_play_mode_change_) {
+    QString current_mode = QString();
+    switch (mode) {
+      case PlaylistSequence::Repeat_Off:      current_mode = tr("Don't repeat");   break;
+      case PlaylistSequence::Repeat_Track:    current_mode = tr("Repeat track");   break;
+      case PlaylistSequence::Repeat_Album:    current_mode = tr("Repeat album"); break;
+      case PlaylistSequence::Repeat_Playlist: current_mode = tr("Repeat playlist"); break;
+    }
+    ShowMessage(QCoreApplication::applicationName(), current_mode);
+  }
+}

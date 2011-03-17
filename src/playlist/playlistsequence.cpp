@@ -178,3 +178,30 @@ PlaylistSequence::ShuffleMode PlaylistSequence::shuffle_mode() const {
 PlaylistSequence::RepeatMode PlaylistSequence::repeat_mode() const {
   return dynamic_ ? Repeat_Off : repeat_mode_;
 }
+
+//called from global shortcut
+void PlaylistSequence::CycleShuffleMode() {
+  ShuffleMode mode = Shuffle_Off;
+  //we cycle through the shuffle modes
+  switch (shuffle_mode()) {
+    case Shuffle_Off:   mode = Shuffle_All;   break;
+    case Shuffle_All:   mode = Shuffle_Album;   break;
+    case Shuffle_Album: break;
+  }
+
+  SetShuffleMode(mode);
+}
+
+//called from global shortcut
+void PlaylistSequence::CycleRepeatMode() {
+  RepeatMode mode = Repeat_Off;
+  //we cycle through the repeat modes
+  switch (repeat_mode()) {
+    case Repeat_Off:      mode = Repeat_Track;   break;
+    case Repeat_Track:    mode = Repeat_Album;   break;
+    case Repeat_Album:    mode = Repeat_Playlist; break;
+    case Repeat_Playlist: break;
+  }
+
+  SetRepeatMode(mode);
+}

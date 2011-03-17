@@ -69,6 +69,8 @@ signals:
   void ShowHide();
   void ShowOSD();
   void RateCurrentSong(int);
+  void CycleShuffleMode();
+  void CycleRepeatMode();
 
 private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

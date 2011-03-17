@@ -58,6 +58,8 @@ class PlaylistSequence : public QWidget {
  public slots:
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
+  void CycleShuffleMode();
+  void CycleRepeatMode();
   void SetUsingDynamicPlaylist(bool dynamic);
 
  signals:

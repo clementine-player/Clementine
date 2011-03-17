@@ -56,6 +56,8 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   AddShortcut("seek_backward", tr("Seek backward"), SIGNAL(SeekBackward()));
   AddShortcut("show_hide", tr("Show/Hide"), SIGNAL(ShowHide()));
   AddShortcut("show_osd", tr("Show OSD"), SIGNAL(ShowOSD()));
+  AddShortcut("shuffle_mode", tr("Change shuffle mode"), SIGNAL(CycleShuffleMode()));
+  AddShortcut("repeat_mode", tr("Change repeat mode"), SIGNAL(CycleRepeatMode()));
 
   AddRatingShortcut("rate_zero_star", tr("Rate the current song 0 stars"), rating_signals_mapper_, 0);
   AddRatingShortcut("rate_one_star", tr("Rate the current song 1 star"), rating_signals_mapper_, 1);

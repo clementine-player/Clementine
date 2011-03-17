@@ -27,6 +27,7 @@
 #include "core/albumcoverloader.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
+#include "playlist/playlistsequence.h"
 
 class OrgFreedesktopNotificationsInterface;
 class OSDPretty;
@@ -72,6 +73,8 @@ class OSD : public QObject {
   void PlaylistFinished();
   void VolumeChanged(int value);
   void MagnatuneDownloadFinished(const QStringList& albums);
+  void RepeatModeChanged(PlaylistSequence::RepeatMode mode);
+  void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 
 #ifdef HAVE_WIIMOTEDEV
   void WiiremoteActived(int id);
@@ -114,6 +117,7 @@ class OSD : public QObject {
   Behaviour behaviour_;
   bool show_on_volume_change_;
   bool show_art_;
+  bool show_on_play_mode_change_;
 
   bool force_show_next_;
   bool ignore_next_stopped_;
