@@ -94,6 +94,9 @@ GSTREAMER_PLUGINS=[
 
     # Icecast support
     'libgsticydemux.so',
+
+    # Fingerprinting support
+    'libgstofa.so',
 ]
 
 GSTREAMER_SEARCH_PATH=[
