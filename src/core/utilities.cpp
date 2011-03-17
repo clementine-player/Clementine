@@ -20,10 +20,12 @@
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QDesktopServices>
 #include <QDir>
 #include <QIODevice>
 #include <QStringList>
 #include <QTemporaryFile>
+#include <QUrl>
 #include <QtDebug>
 #include <QtGlobal>
 
@@ -273,6 +275,27 @@ QString GetConfigPath(ConfigPath config) {
     default:
       qFatal("%s", Q_FUNC_INFO);
       return QString::null;
+  }
+}
+
+void OpenInFileBrowser(const QStringList& filenames) {
+  QSet<QString> dirs;
+
+  foreach (const QString& filename, filenames) {
+    // Ignore things that look like URLs
+    if (filename.contains("://"))
+      continue;
+
+    if (!QFile::exists(filename))
+      continue;
+
+    const QString directory = QFileInfo(filename).dir().path();
+
+    if (dirs.contains(directory))
+      continue;
+    dirs.insert(directory);
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
   }
 }
 

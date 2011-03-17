@@ -23,6 +23,7 @@
 #include "core/deletefiles.h"
 #include "core/mimedata.h"
 #include "core/musicstorage.h"
+#include "core/utilities.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "scripting/scriptmanager.h"
@@ -265,6 +266,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
       tr("Edit track information..."), this, SLOT(EditTracks()));
     edit_tracks_ = context_menu_->addAction(IconLoader::Load("edit-rename"),
       tr("Edit tracks information..."), this, SLOT(EditTracks()));
+    show_in_browser_ = context_menu_->addAction(IconLoader::Load("document-open-folder"),
+      tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
 
     context_menu_->addSeparator();
     show_in_various_ = context_menu_->addAction(
@@ -578,4 +581,13 @@ QString LibraryView::GetNameForNewPlaylist(const SongList& songs) {
   }
 
   return result;
+}
+
+void LibraryView::ShowInBrowser() {
+  QStringList filenames;
+  foreach (const Song& song, GetSelectedSongs()) {
+    filenames << song.filename();
+  }
+
+  Utilities::OpenInFileBrowser(filenames);
 }

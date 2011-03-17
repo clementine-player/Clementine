@@ -33,6 +33,7 @@
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
@@ -111,7 +112,6 @@
 #endif
 
 #include <QCloseEvent>
-#include <QDesktopServices>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileSystemModel>
@@ -1607,29 +1607,16 @@ void MainWindow::PlaylistDelete() {
   delete_files->Start(selected_songs);
 }
 
-void MainWindow::PlaylistOpenInBrowser(){
-  QSet<QString> dirs;
+void MainWindow::PlaylistOpenInBrowser() {
+  QStringList filenames;
   QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
+
   foreach (const QModelIndex& proxy_index, proxy_indexes) {
     const QModelIndex index = playlists_->current()->proxy()->mapToSource(proxy_index);
-    const QString filename =
-        index.sibling(index.row(), Playlist::Column_Filename).data().toString();
-
-    // Ignore things that look like URLs
-    if (filename.contains("://"))
-      continue;
-
-    if (!QFile::exists(filename))
-      continue;
-
-    const QString directory = QFileInfo(filename).dir().path();
-
-    if (dirs.contains(directory))
-      continue;
-    dirs.insert(directory);
-
-    QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
+    filenames << index.sibling(index.row(), Playlist::Column_Filename).data().toString();
   }
+
+  Utilities::OpenInFileBrowser(filenames);
 }
 
 void MainWindow::DeleteFinished(const SongList& songs_with_errors) {

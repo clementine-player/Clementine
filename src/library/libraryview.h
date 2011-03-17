@@ -99,6 +99,7 @@ class LibraryView : public AutoExpandingTreeView {
   void CopyToDevice();
   void Delete();
   void EditTracks();
+  void ShowInBrowser();
   void ShowInVarious();
   void NoShowInVarious();
 
@@ -137,6 +138,7 @@ class LibraryView : public AutoExpandingTreeView {
   QAction* delete_;
   QAction* edit_track_;
   QAction* edit_tracks_;
+  QAction* show_in_browser_;
   QAction* show_in_various_;
   QAction* no_show_in_various_;
 

@@ -45,6 +45,8 @@ namespace Utilities {
   bool CopyRecursive(const QString& source, const QString& destination);
   bool Copy(QIODevice* source, QIODevice* destination);
 
+  void OpenInFileBrowser(const QStringList& filenames);
+
 
   enum ConfigPath {
     Path_Root,
