@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-03-06 20:42+0000\n"
-"PO-Revision-Date: 2011-03-09 22:26+0000\n"
+"POT-Creation-Date: 2011-03-14 10:16+0000\n"
+"PO-Revision-Date: 2011-03-14 07:53+0000\n"
 "Last-Translator: Cugel <hulshof@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-10 05:30+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-15 05:10+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
+"Language: nl\n"
 
 msgid " ms"
 msgstr " ms"
@@ -82,15 +82,15 @@ msgstr "%1 nummers"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n mislukt"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n voltooid"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n te gaan"
 
@@ -183,7 +183,7 @@ msgid "AIFF"
 msgstr "AIFF"
 
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr ""
+msgstr "ERE ZIJ DE HYPNOTOAD"
 
 #, qt-format
 msgid "About %1"
@@ -897,7 +897,7 @@ msgid "Downloading Magnatune catalogue"
 msgstr "Magnatune catalogus wordt gedownload"
 
 msgid "Downloading metadata"
-msgstr ""
+msgstr "Metadata ophalen"
 
 msgid "Drag to reposition"
 msgstr "Sleep om te verplaatsen"
@@ -1092,7 +1092,7 @@ msgid "Find songs in your library that match the criteria you specify."
 msgstr "Vind liedjes in uw bibliotheek die dicht bij uw criteria aanleunen."
 
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Uniek patroon uit nummer halen"
 
 msgid "Finish"
 msgstr "Voltooien"
@@ -1226,7 +1226,7 @@ msgid "Icons on top"
 msgstr "Iconen bovenaan"
 
 msgid "Identifying song"
-msgstr ""
+msgstr "Nummer identificeren"
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -1257,6 +1257,10 @@ msgid ""
 "time a song finishes.  Enabling dynamic mode will ignore any size limit you "
 "set on the playlist."
 msgstr ""
+"In 'dynamische modus' worden nieuwe nummers gekozen en aan de afspeellijst "
+"toegevoegd op het moment dat een nummer eindigt. Het activeren van deze "
+"modus negeert eventuele limieten die voor het aantal nummers in de "
+"afspeellijst zijn ingesteld."
 
 msgid "Include album art in the notification"
 msgstr "Albumhoes in de notificatie weergeven"
@@ -2238,13 +2242,13 @@ msgid "Show cover art in library"
 msgstr "Covers in biblitheek tonen"
 
 msgid "Show dividers"
-msgstr ""
+msgstr "Toon verdelers"
 
 msgid "Show fullsize..."
 msgstr "Volledig weergeven..."
 
 msgid "Show in file browser..."
-msgstr ""
+msgstr "Toon in file browser"
 
 msgid "Show in various artists"
 msgstr "In diverse artiesten weergeven"
@@ -2301,7 +2305,7 @@ msgid "Small album cover"
 msgstr "Kleine albumhoes"
 
 msgid "Small sidebar"
-msgstr ""
+msgstr "Klein zijmenu"
 
 msgid "Smart playlist"
 msgstr "Slimme afspeellijst"
@@ -2389,14 +2393,14 @@ msgid "Successfully written %1"
 msgstr "%1 met succes weggeschreven"
 
 msgid "Suggested tags"
-msgstr ""
+msgstr "Gesuggereerde tags"
 
 msgid "Summary"
 msgstr "Samenvatting"
 
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr ""
+msgstr "Superhoog (%1 fps)"
 
 msgid "Super high (60 fps)"
 msgstr "Super hoog (60 fps)"
@@ -2411,7 +2415,7 @@ msgid "Tag"
 msgstr "Tag"
 
 msgid "Tag fetcher"
-msgstr ""
+msgstr "Tag ophaler"
 
 msgid "Tag radio"
 msgstr "Tag radio"
@@ -2705,6 +2709,10 @@ msgid ""
 "contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
+"Bij het zoeken naar album covers zoekt Clementine eerst naar filenamen die "
+"een van de volgende woorden bevatten.\n"
+"Als er geen match is dan wordt het grootste plaatjesbestand in de folder "
+"gebruikt."
 
 msgid "WiFi MAC Address"
 msgstr "WiFi MAC Address"
@@ -2805,6 +2813,8 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
+"Uw gstreamerinstallatie mist de 'ofa'-plugin. Deze is vereist om automatisch "
+"tags op te halen. Probeer het 'gstreamer-plugins-bad'-package te installeren."
 
 msgid "Your library is empty!"
 msgstr "Uw bibliotheek is leeg!"
@@ -2822,7 +2832,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nul"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n nummers toevoegen"
 
@@ -2881,7 +2891,7 @@ msgstr "aan"
 msgid "options"
 msgstr "opties"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n nummers verwijderen"
 
@@ -2900,9 +2910,6 @@ msgstr "stoppen"
 #, qt-format
 msgid "track %1"
 msgstr "track %1"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Nummer identificeren..."
 
 #~ msgid "ASF"
 #~ msgstr "ASF"
@@ -3035,3 +3042,9 @@ msgstr "track %1"
 
 #~ msgid "High"
 #~ msgstr "Hoog"
+
+#~ msgid "Identifying song..."
+#~ msgstr "Nummer identificeren..."
+
+#~ msgid "Except between tracks on the same album"
+#~ msgstr "Behalve tussen nummers van hetzelfde album"

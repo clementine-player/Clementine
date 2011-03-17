@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-06 20:42+0000\n"
-"PO-Revision-Date: 2011-03-08 10:01+0000\n"
+"POT-Creation-Date: 2011-03-14 10:16+0000\n"
+"PO-Revision-Date: 2011-03-15 14:44+0000\n"
 "Last-Translator: Arno <arnaud.bienner@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-09 05:17+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-16 05:03+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
+"Language: \n"
 "X-Language: fr_FR\n"
 
 msgid " ms"
@@ -83,15 +83,15 @@ msgstr "%1 pistes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 : Module wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n échoué"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n terminé"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n manquant"
 
@@ -187,7 +187,7 @@ msgid "AIFF"
 msgstr "AIFF"
 
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr ""
+msgstr "GLOIRE AU CRAPAUD HYPNOTIQUE !"
 
 #, qt-format
 msgid "About %1"
@@ -606,7 +606,7 @@ msgid "Complete tags automatically"
 msgstr "Compléter les tags automatiquement"
 
 msgid "Complete tags automatically..."
-msgstr ""
+msgstr "Compléter les tags automatiquement..."
 
 msgid "Composer"
 msgstr "Compositeur"
@@ -903,7 +903,7 @@ msgid "Downloading Magnatune catalogue"
 msgstr "Téléchargement du catalogue Magnatune"
 
 msgid "Downloading metadata"
-msgstr ""
+msgstr "Téléchargement des métadonnées"
 
 msgid "Drag to reposition"
 msgstr "Déplacer pour repositionner"
@@ -1013,7 +1013,7 @@ msgid "Ever played"
 msgstr "Déjà joués"
 
 msgid "Except between tracks on the same album or in the same CUE sheet"
-msgstr ""
+msgstr "Excepté entre les pistes d'un même album ou d'une même CUE sheet"
 
 msgid "Extras"
 msgstr "Extras"
@@ -1102,7 +1102,7 @@ msgstr ""
 "que vous spécifiez."
 
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Génération de l'empreinte audio"
 
 msgid "Finish"
 msgstr "Terminé"
@@ -1237,7 +1237,7 @@ msgid "Icons on top"
 msgstr "Icônes au dessus"
 
 msgid "Identifying song"
-msgstr ""
+msgstr "Identification du morceau"
 
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not "
@@ -2254,7 +2254,7 @@ msgid "Show cover art in library"
 msgstr "Afficher les jaquettes des albums dans la bibliothèque"
 
 msgid "Show dividers"
-msgstr ""
+msgstr "Montrer les séparateurs"
 
 msgid "Show fullsize..."
 msgstr "Afficher en taille réelle..."
@@ -2826,6 +2826,9 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
+"GStreamer ne possède pas le module externe « ofa », nécessaire pour compléter "
+"les tags automatiquement. Essayez d'installer le paquet « gstreamer-plugins-"
+"bad »."
 
 msgid "Your library is empty!"
 msgstr "Votre bibliothèque est vide !"
@@ -2843,7 +2846,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zéro"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "ajouter %n morceaux"
 
@@ -2902,7 +2905,7 @@ msgstr "sur"
 msgid "options"
 msgstr "options"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "enlever %n morceaux"
 
@@ -2921,9 +2924,6 @@ msgstr "stop"
 #, qt-format
 msgid "track %1"
 msgstr "piste %1"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Identification du morceau..."
 
 #~ msgid "&Show tray icon"
 #~ msgstr "&Afficher l'icône"
@@ -3288,3 +3288,6 @@ msgstr "piste %1"
 
 #~ msgid "Normal"
 #~ msgstr "Normal"
+
+#~ msgid "Identifying song..."
+#~ msgstr "Identification du morceau..."
