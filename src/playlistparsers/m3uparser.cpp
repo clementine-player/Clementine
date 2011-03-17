@@ -56,7 +56,7 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
           continue;
         }
       }
-    } else {
+    } else if (!line.isEmpty()) {
       Song song;
 
       // Track location.
