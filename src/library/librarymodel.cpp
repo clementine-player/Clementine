@@ -474,6 +474,11 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
       return item->metadata.artist();
 
     case Role_Editable:
+      if (!item->lazy_loaded) {
+        const_cast<LibraryModel*>(this)->LazyPopulate(
+              const_cast<LibraryItem*>(item), true);
+      }
+
       if(item->type == LibraryItem::Type_Container) {
         // if we have even one non editable item as a child, we ourselves
         // are not available for edit
