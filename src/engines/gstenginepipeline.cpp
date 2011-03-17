@@ -54,6 +54,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     next_end_offset_nanosec_(-1),
     ignore_next_seek_(false),
     ignore_tags_(false),
+    ignore_errors_(false),
     pipeline_is_initialised_(false),
     pipeline_is_connected_(false),
     pending_seek_nanosec_(-1),
@@ -108,6 +109,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
     // deletion in the main thread
   }
 
+  ignore_errors_ = false;
   uridecodebin_ = new_bin;
   segment_start_ = 0;
   segment_start_received_ = false;
@@ -308,10 +310,10 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       break;
 
     case GST_MESSAGE_ERROR:
-      // we're trying to shutdown the pipeline here to avoid consequent
-      // error notifications: we're interested in the first one only
-      gst_element_set_state(instance->pipeline_, GST_STATE_NULL);
-      QtConcurrent::run(instance, &GstEnginePipeline::ErrorMessageReceived, msg);
+      if (!instance->ignore_errors_) {
+        instance->ignore_errors_ = true;
+        QtConcurrent::run(instance, &GstEnginePipeline::ErrorMessageReceived, msg);
+      }
       break;
 
     case GST_MESSAGE_ELEMENT:
