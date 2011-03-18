@@ -135,6 +135,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   connect(remote_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 #endif
 
+  connect(ui_->magnatune, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
+
   // Icons
   ui_->list->item(Page_Playback)->setIcon(IconLoader::Load("media-playback-start"));
   ui_->list->item(Page_SongInformation)->setIcon(IconLoader::Load("view-media-lyrics"));
@@ -308,6 +310,14 @@ void SettingsDialog::accept() {
     remote_config_->Save();
   }
 #endif
+
+  if (ui_->magnatune->NeedsValidation()) {
+    ui_->magnatune->Validate();
+    ui_->buttonBox->setEnabled(false);
+    return;
+  } else {
+    ui_->magnatune->Save();
+  }
 
   QSettings s;
 

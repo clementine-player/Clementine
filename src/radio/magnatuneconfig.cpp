@@ -16,23 +16,93 @@
 */
 
 #include "magnatuneconfig.h"
+
+#include "core/network.h"
 #include "magnatuneservice.h"
 #include "radiomodel.h"
 #include "ui_magnatuneconfig.h"
 
+#include <QMessageBox>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QSettings>
+#include <QtDebug>
 
 MagnatuneConfig::MagnatuneConfig(QWidget *parent)
   : QWidget(parent),
+    credentials_changed_(false),
+    network_(new NetworkAccessManager(this)),
     ui_(new Ui_MagnatuneConfig)
 {
   ui_->setupUi(this);
+  ui_->busy->hide();
 
   connect(ui_->membership, SIGNAL(currentIndexChanged(int)), SLOT(MembershipChanged(int)));
+
+  connect(network_, SIGNAL(authenticationRequired(QNetworkReply*, QAuthenticator*)),
+          SLOT(AuthenticationRequired(QNetworkReply*, QAuthenticator*)));
+  connect(ui_->username, SIGNAL(textEdited(const QString&)),
+          SLOT(CredentialsChanged()));
+  connect(ui_->password, SIGNAL(textEdited(const QString&)),
+          SLOT(CredentialsChanged()));
 }
 
 MagnatuneConfig::~MagnatuneConfig() {
   delete ui_;
+}
+
+bool MagnatuneConfig::NeedsValidation() const {
+  return credentials_changed_;
+}
+
+const char* kMagnatuneDownloadValidateUrl = "http://download.magnatune.com/";
+const char* kMagnatuneStreamingValidateUrl = "http://streaming.magnatune.com/";
+
+void MagnatuneConfig::Validate() {
+  ui_->busy->show();
+
+  MagnatuneService::MembershipType type = (MagnatuneService::MembershipType)(ui_->membership->currentIndex());
+
+  QUrl url(type == MagnatuneService::Membership_Streaming ? kMagnatuneStreamingValidateUrl : kMagnatuneDownloadValidateUrl, QUrl::StrictMode);
+
+  url.setUserName(ui_->username->text());
+  // NOTE: Magnatune actually only checks the first 8 characters.
+  url.setPassword(ui_->password->text());
+
+  QNetworkRequest req(url);
+  // Disable keep-alives and gzip compression as it's broken on magnatune.
+  req.setRawHeader("Connection", "Close");
+  req.setRawHeader("Accept-Encoding", "identity");
+  // Disable caching.
+  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                   QNetworkRequest::AlwaysNetwork);
+
+  QNetworkReply* reply = network_->head(req);
+  connect(reply, SIGNAL(finished()), SLOT(ValidationFinished()));
+}
+
+void MagnatuneConfig::ValidationFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  Q_ASSERT(reply);
+  reply->deleteLater();
+
+  ui_->busy->hide();
+
+  const bool success =
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200;
+  credentials_changed_ = !success;
+  if (!success) {
+    QMessageBox::warning(
+        this, tr("Authentication failed"), tr("Your Magnatune credentials were incorrect"));
+  }
+  emit ValidationComplete(success);
+}
+
+void MagnatuneConfig::AuthenticationRequired(
+    QNetworkReply* reply, QAuthenticator*) {
+  // We send the authentication with the first request so this means we got
+  // a 401 Authentication Required, ie. the credentials are incorrect.
+  reply->abort();
 }
 
 void MagnatuneConfig::Load() {
@@ -43,6 +113,8 @@ void MagnatuneConfig::Load() {
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
   ui_->format->setCurrentIndex(s.value("format", MagnatuneService::Format_Ogg).toInt());
+
+  credentials_changed_ = false;
 }
 
 void MagnatuneConfig::Save() {
@@ -62,4 +134,8 @@ void MagnatuneConfig::MembershipChanged(int value) {
                  MagnatuneService::Membership_None;
   ui_->login_container->setEnabled(enabled);
   ui_->preferences_group->setEnabled(enabled);
+}
+
+void MagnatuneConfig::CredentialsChanged() {
+  credentials_changed_ = true;
 }

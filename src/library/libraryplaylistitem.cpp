@@ -17,7 +17,6 @@
 
 #include "libraryplaylistitem.h"
 
-#include <QtDebug>
 #include <QSettings>
 
 LibraryPlaylistItem::LibraryPlaylistItem(const QString& type)

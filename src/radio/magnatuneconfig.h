@@ -20,6 +20,10 @@
 
 #include <QWidget>
 
+class QAuthenticator;
+class QNetworkReply;
+
+class NetworkAccessManager;
 class Ui_MagnatuneConfig;
 
 class MagnatuneConfig : public QWidget {
@@ -28,14 +32,25 @@ public:
   MagnatuneConfig(QWidget* parent = 0);
   ~MagnatuneConfig();
 
+  bool NeedsValidation() const;
+  void Validate();
+
 public slots:
   void Load();
   void Save();
 
+signals:
+  void ValidationComplete(bool);
+
 private slots:
   void MembershipChanged(int value);
+  void ValidationFinished();
+  void AuthenticationRequired(QNetworkReply* reply, QAuthenticator* auth);
+  void CredentialsChanged();
 
 private:
+  bool credentials_changed_;
+  NetworkAccessManager* network_;
   Ui_MagnatuneConfig* ui_;
 };
 

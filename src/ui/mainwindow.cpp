@@ -667,12 +667,7 @@ MainWindow::MainWindow(
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
   ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 0).toInt());
-  FancyTabWidget::Mode default_mode =
-    #ifdef Q_OS_DARWIN
-      FancyTabWidget::Mode_LargeSidebar;
-    #else
-      FancyTabWidget::Mode_SmallSidebar;
-    #endif
+  FancyTabWidget::Mode default_mode = FancyTabWidget::Mode_LargeSidebar;
   ui_->tabs->SetMode(FancyTabWidget::Mode(settings_.value(
       "tab_mode", default_mode).toInt()));
   file_view_->SetPath(settings_.value("file_path", QDir::homePath()).toString());

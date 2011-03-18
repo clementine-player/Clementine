@@ -342,7 +342,8 @@ void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
       Song current_song = current->Metadata();
 
       // if validity has changed, reload the item
-      if(current_song.url() == url && current_song.filetype() != Song::Type_Stream &&
+      if(current_song.filetype() != Song::Type_Stream &&
+         current_song.filename() == url.toLocalFile() &&
          current_song.is_valid() != QFile::exists(current_song.filename())) {
         playlist->ReloadItems(QList<int>() << playlist->current_row());
       }

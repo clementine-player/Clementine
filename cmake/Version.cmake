@@ -2,11 +2,11 @@
 
 # Version numbers.
 set(CLEMENTINE_VERSION_MAJOR 0)
-set(CLEMENTINE_VERSION_MINOR 6)
-#set(CLEMENTINE_VERSION_PRERELEASE rc1)
+set(CLEMENTINE_VERSION_MINOR 7)
+set(CLEMENTINE_VERSION_PRERELEASE rc1)
 
 # This should be set to OFF in an svn tag
-set(INCLUDE_SVN_REVISION ON)
+set(INCLUDE_SVN_REVISION OFF)
 
 # The format for version numbers is:
 # Display: $major.$minor [$prerelease] [$svn]

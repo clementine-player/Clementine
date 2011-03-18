@@ -1123,14 +1123,27 @@ void Playlist::ItemsLoaded() {
   watcher->deleteLater();
 
   PlaylistItemList items = watcher->future().results();
+
+  // backend returns empty elements for items which it couldn't 
+  // match (because they got deleted); we don't need those
+  QMutableListIterator<PlaylistItemPtr> it(items);
+  while (it.hasNext()) {
+    if (it.next()->Metadata().filename().isEmpty()) {
+      it.remove();
+    }
+  }
+
   is_loading_ = true;
   InsertItems(items, 0);
   is_loading_ = false;
 
   PlaylistBackend::Playlist p = backend_->GetPlaylist(id_);
 
-  last_played_item_index_ =
-      p.last_played == -1 ? QModelIndex() : index(p.last_played);
+  // the newly loaded list of items might be shorter than it was before so
+  // look out for a bad last_played index
+  last_played_item_index_ = p.last_played == -1 || p.last_played >= rowCount()
+                                ? QModelIndex()
+                                : index(p.last_played);
 
   if (!p.dynamic_type.isEmpty()) {
     GeneratorPtr gen = Generator::Create(p.dynamic_type);
@@ -1361,9 +1374,11 @@ void Playlist::RemoveItemsNotInQueue() {
 
 void Playlist::ReloadItems(const QList<int>& rows) {
   foreach (int row, rows) {
-    item_at(row)->Reload();
+    PlaylistItemPtr item = item_at(row);
+
+    item->Reload();
     InformOfCurrentSongChange(index(row, 0), index(row, ColumnCount-1),
-                              item_at(row)->Metadata());
+                              item->Metadata());
   }
 }
 
