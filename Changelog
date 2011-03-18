@@ -1,3 +1,120 @@
+Version 0.7:
+  Major features:
+    * Brand new "Edit track information" dialog.  You can now edit more fields,
+      change multiple songs at once, change album cover art and view song
+      statistics.  Added an option to identify songs and fill in their tags
+      automatically using information from MusicBrainz.
+    * Add support for .cue files.  Songs in a cuesheet appear in the playlist
+      and your library as separate tracks.
+    * Add "Duplicates only" and "Untagged songs only" views to the library that
+      help you find and correct badly tagged music in your library.
+    * Add a "Full library rescan" option which should rescan your library much
+      more thoroughly than before (but will take longer).
+    * Add a fancy tooltip to the track seek slider, showing the position that
+      you're about to jump to and its distance from the current position.
+    * Add support for network proxies.  Clementine will use your system's proxy
+      by default, but you can configure a different one in the Preferences
+      dialog.
+    * The "Kittens" extra now fetches even fluffier kittens.
+    * Hypnotoad: now available in fullscreen HD.
+
+  Other features:
+    * Load embedded cover art from ogg files.
+    * Add a backspace shortcut to the files view.
+    * Pressing ESC will clear and focus the search box.  Typing in the playlist
+      view will focus the search box and start searching.
+    * Pressing space in the playlist will play/pause the current track.
+    * Add global shortcuts for rating songs.
+    * Middle-clicking a song now enqueues it into the playlist.
+    * Add an option to show album covers in the library view.  This is on by
+      default, but you can turn it off again in the Preferences dialog.
+    * Download higher resolution images from last.fm.
+    * Add options to the now-playing widget's menu to change the album art.
+    * Dragging an image file onto the now-playing widget will now set that
+      image as the cover art for the album.
+    * You can now tell the library scanner which filenames it should prefer
+      when looking for album cover art.
+    * Add a configurable timeout when searching for song and artist info.
+    * Add an option to load cover art directly from a URL.
+    * Add tooltips to the album cover manager that show the artist and album
+      name.
+    * Improve the options in the context menu for adding tracks to the playlist
+      from the library.  Default behaviours are now configurable in the
+      Preferences dialog.
+    * You can now use "file path" when creating dynamic playlists.
+    * Add a "Show in file browser" option to the library and playlist menus.
+    * The search box in the album cover manager now searches in artist names
+      as well.
+    * Move the clear button inside search boxes.
+    * Make the pretty OSD snap to the center of the screen when dragging.
+    * Add a text alignment setting to playlist columns.
+    * The scroll wheel now scrolls through images in the artist info view.
+    * You can now drag songs onto empty space in the playlist tab bar to add
+      the songs to a new playlist.
+    * Fade out the currently playing song when exiting Clementine.
+    * Centre on the last played song when restoring a playlist.
+    * Add a menu item to change analyzers' framerate.
+    * Add an option to hide dividers in the library view.
+    * (Windows) Add support for automatic updates.  The second time you start
+      Clementine you are asked whether you want to check for updates
+      automatically.  You can check manually at any time in the Tools menu.
+    * (Windows 7) Add playback buttons to the Windows 7 taskbar icon.
+
+  Bugfixes:
+    * Fix several issues loading files with non-ascii characters in their
+      filenames.
+    * Fix several crashes when loading malformed tags from MP3 files.
+    * Fix a crash when clicking the "cancel" button on a dynamic playlist while
+      the preview is still being loaded.
+    * Fix a crash when skipping quickly through tracks while the Artist Info
+      tab was open.
+    * Fix a crash on exit if you have the Magnatune list open.
+    * Fix a crash when closing a playlist that has songs still loading.
+    * Fix a crash when removing the first, active playlist.
+    * Fix a race condition on startup that might lead to two instances of
+      Clementine being started.
+    * Fix a display bug in the "Last played" column for songs that haven't been
+      played in the last week.
+    * Improve the sorting of untagged songs loaded from directories.
+    * Fix a build failure on ARM.
+    * Do library initialisation in the background - fixing a GUI freeze when
+      loading large collections.
+    * Fix a bug where columns would sometimes not appear in the playlist.
+    * Fix some graphical bugs when resizing the sidebar when it is blurred.
+    * Hide the score and comment columns by default, increase the size of the
+      sidebar.
+    * Fix a database error when searching for " characters in the library.
+    * Fix an issue when trying to sign in to last.fm with a username containing
+      special characters.
+    * Fix the "date" and "rating" smart playlist comparisons.
+    * Update statistics properly when playing songs shorter than 30 seconds.
+    * Don't re-read tags from files when loading a playlist if those songs are
+      already in the library.
+    * Make it possible to disable all lyric providers.
+    * Make it possible to delete the active playlist.
+    * Add a workaround for broken XML entities in ASX playlists.
+    * Sort playlist tabs properly when closing and re-opening Clementine.
+    * (Windows) Fix MP3 transcoding.
+    * (Windows) Better error handling when parts of the Windows Media Device
+      Manager SDK aren't installed (like on Windows Server).
+    * (Windows) Fix a crash on startup when a device was connected that gave
+      Clementine an invalid icon.
+    * (Linux) Various MPRIS2 fixes.
+    * (Mac OS X) Increase the maximum file descriptor limit so larger
+      collections can still be monitored for changes.
+
+  Build system changes:
+    * Remove the old xine, VLC and Phonon backends.  These weren't maintained
+      any more and didn't have as many features as the GStreamer backend.
+    * Make Last.fm optional.
+    * Clementine now builds correctly with Clang.
+    * Don't run tests for features if those features are disabled.
+    * (Linux) Make DBUS optional.
+    * (Windows) Upgrade to Qt 4.7.1.
+    * (Mac OS X) Switch the HTTP gstreamer plugin to soup instead of neon.
+
+
+
 Version 0.6:
   Features:
     * Added a Song Info tab that contains:
