@@ -53,13 +53,14 @@ class PlaylistBackend : public QObject {
   PlaylistList GetAllPlaylists();
   Playlist GetPlaylist(int id);
   PlaylistItemFuture GetPlaylistItems(int playlist);
-  void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
-                         int last_played, smart_playlists::GeneratorPtr dynamic);
+
   void SetPlaylistOrder(const QList<int>& ids);
 
   int CreatePlaylist(const QString& name);
-  void RemovePlaylist(int id);
+  void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
+                         int last_played, smart_playlists::GeneratorPtr dynamic);
   void RenamePlaylist(int id, const QString& new_name);
+  void RemovePlaylist(int id);
 
   void SetLibrary(LibraryBackend* library);
 
