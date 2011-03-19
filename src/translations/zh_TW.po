@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:35+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:14+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: \n"
 
 msgid " ms"
 msgstr " 毫秒"
@@ -82,15 +82,15 @@ msgstr "%1 歌曲"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 失敗的"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 剩餘的"
 
@@ -1139,6 +1139,9 @@ msgstr ""
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "獲得 %1 涵蓋了 %2 ( %3 失敗 )"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr ""
@@ -2750,7 +2753,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "加入 %n 歌"
 
@@ -2809,7 +2812,7 @@ msgstr ""
 msgid "options"
 msgstr "選項"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 

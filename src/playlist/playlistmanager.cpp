@@ -30,9 +30,6 @@
 
 using smart_playlists::GeneratorPtr;
 
-const int PlaylistManagerInterface::kInvalidSongPriority = 200;
-const QRgb PlaylistManagerInterface::kInvalidSongColor = qRgb(0xC0, 0xC0, 0xC0);
-
 PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
   : PlaylistManagerInterface(parent),
     task_manager_(task_manager),
@@ -336,27 +333,14 @@ void PlaylistManager::PlaySmartPlaylist(GeneratorPtr generator, bool as_new, boo
 // When Player has processed the new song chosen by the user...
 void PlaylistManager::SongChangeRequestProcessed(const QUrl& url, bool valid) {
   foreach(Playlist* playlist, GetAllPlaylists()) {
-    PlaylistItemPtr current = playlist->current_item();
-
-    if(current) {
-      Song current_song = current->Metadata();
-
-      // if validity has changed, reload the item
-      if(current_song.filetype() != Song::Type_Stream &&
-         current_song.filename() == url.toLocalFile() &&
-         current_song.is_valid() != QFile::exists(current_song.filename())) {
-        playlist->ReloadItems(QList<int>() << playlist->current_row());
-      }
-
-      // gray out the song if it's now broken; otherwise undo the gray color
-      if(valid) {
-        current->RemoveForegroundColor(kInvalidSongPriority);
-      } else {
-        current->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
-      }
-
-      // we have at most one current item
-      break;
+    if(playlist->ApplyValidityOnCurrentSong(url, valid)) {
+      return;
     }
+  }
+}
+
+void PlaylistManager::InvalidateDeletedSongs() {
+  foreach(Playlist* playlist, GetAllPlaylists()) {
+    playlist->InvalidateDeletedSongs();
   }
 }

@@ -11,13 +11,13 @@ msgstr ""
 "PO-Revision-Date: 2011-03-14 10:39+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:13+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 "X-Poedit-Country: CROATIA\n"
-"Language: hr\n"
 "X-Poedit-Language: Croatian\n"
 
 msgid " ms"
@@ -84,15 +84,15 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -1165,6 +1165,9 @@ msgstr "Google korisničko ime"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Dohvaćen %1 omot iz %2 (%3 nedohvaćeno)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Grupiraj zbirku po..."
@@ -2816,7 +2819,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -2875,7 +2878,7 @@ msgstr "na"
 msgid "options"
 msgstr "opcije"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 

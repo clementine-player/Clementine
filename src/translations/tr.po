@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-03-16 14:36+0000\n"
 "Last-Translator: Ekrem Kocadere <ekocadere@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-17 05:15+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: tr\n"
 
 msgid " ms"
 msgstr " ms"
@@ -82,15 +82,15 @@ msgstr "%1 parça"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modülü"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -1159,6 +1159,9 @@ msgstr "Google kullanıcı adı"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 kapaktan %1 tanesi alındı (%3 tanesi başarısız)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Kütüpheneyi şuna göre grupla..."
@@ -2807,7 +2810,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -2866,7 +2869,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 

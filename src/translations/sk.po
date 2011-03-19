@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-03-14 13:35+0000\n"
 "Last-Translator: DAG Software <Unknown>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:13+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: \n"
 "X-Language: sk_SK\n"
 
 msgid " ms"
@@ -83,15 +83,15 @@ msgstr "%1 skladieb"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n dokončených"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n zostávajúcich"
 
@@ -1160,6 +1160,9 @@ msgstr "Google prihlasovacie meno"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Získaných %1 obalov z %2 (%3 zlyhalo)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Zoraďovanie zbierky podľa..."
@@ -2813,7 +2816,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovať"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
@@ -2872,7 +2875,7 @@ msgstr "na"
 msgid "options"
 msgstr "možnosti"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 

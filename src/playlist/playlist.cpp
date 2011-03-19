@@ -49,6 +49,7 @@
 #include <QMutableListIterator>
 #include <QSortFilterProxyModel>
 #include <QUndoStack>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 #include <boost/bind.hpp>
@@ -63,8 +64,13 @@ using boost::shared_ptr;
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kPlayNowMimetype = "application/x-clementine-play-now";
 
+const int Playlist::kInvalidSongPriority = 200;
+const QRgb Playlist::kInvalidSongColor = qRgb(0xC0, 0xC0, 0xC0);
+
 const int Playlist::kDynamicHistoryPriority = 100;
 const QRgb Playlist::kDynamicHistoryColor = qRgb(0x80, 0x80, 0x80);
+
+const char* Playlist::kSettingsGroup = "Playlist";
 
 Playlist::Playlist(PlaylistBackend* backend,
                    TaskManager* task_manager,
@@ -1164,7 +1170,16 @@ void Playlist::ItemsLoaded() {
       }
     }
   }
+
   emit RestoreFinished();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  // should we gray out deleted songs asynchronously on startup?
+  if(s.value("greyoutdeleted", false).toBool()) {
+    QtConcurrent::run(this, &Playlist::InvalidateDeletedSongs);
+  }
 }
 
 static bool DescendingIntLessThan(int a, int b) {
@@ -1556,4 +1571,45 @@ void Playlist::InformOfCurrentSongChange(const QModelIndex& top_left, const QMod
   if(metadata.is_valid()) {
     emit CurrentSongChanged(metadata);
   }
+}
+
+void Playlist::InvalidateDeletedSongs() {
+  QList<int> invalidated_rows;
+
+  for (int row = 0; row < items_.count(); ++row) {
+    PlaylistItemPtr item = items_[row];
+    Song song = item->Metadata();
+
+    if(song.filetype() != Song::Type_Stream && !QFile::exists(song.filename())) {
+      // gray out the song if it's not there
+      item->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
+      invalidated_rows.append(row);
+    }
+  }
+
+  ReloadItems(invalidated_rows);
+}
+
+bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
+  PlaylistItemPtr current = current_item();
+
+  if(current) {
+    Song current_song = current->Metadata();
+
+    // if validity has changed, reload the item
+    if(current_song.filetype() != Song::Type_Stream &&
+       current_song.filename() == url.toLocalFile() &&
+       current_song.is_valid() != QFile::exists(current_song.filename())) {
+      ReloadItems(QList<int>() << current_row());
+    }
+
+    // gray out the song if it's now broken; otherwise undo the gray color
+    if(valid) {
+      current->RemoveForegroundColor(kInvalidSongPriority);
+    } else {
+      current->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
+    }
+  }
+
+  return current;
 }

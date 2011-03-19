@@ -59,7 +59,6 @@ class PlaylistView : public QTreeView {
  public:
   PlaylistView(QWidget* parent = 0);
 
-  static const char* kSettingsGroup;
   static const int kStateVersion;
 
   void SetItemDelegates(LibraryBackend* backend);

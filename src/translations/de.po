@@ -12,12 +12,12 @@ msgstr ""
 "PO-Revision-Date: 2011-03-07 19:31+0000\n"
 "Last-Translator: David Dusanic <ivanovnegro@googlemail.com>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:11+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: de\n"
 
 msgid " ms"
 msgstr " ms"
@@ -83,15 +83,15 @@ msgstr "%1 Stücke"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev-Modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -1165,6 +1165,9 @@ msgstr "Google Benutzername"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 Cover von %2 wurden gefunden (%3 fehlgeschlagen)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Gruppieren nach..."
@@ -2824,7 +2827,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -2883,7 +2886,7 @@ msgstr "auf"
 msgid "options"
 msgstr "Einstellungen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 

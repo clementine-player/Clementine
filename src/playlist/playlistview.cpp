@@ -35,7 +35,6 @@
 
 #include <math.h>
 
-const char* PlaylistView::kSettingsGroup = "Playlist";
 const int PlaylistView::kStateVersion = 3;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
@@ -194,7 +193,7 @@ void PlaylistView::setModel(QAbstractItemModel *m) {
 
 void PlaylistView::LoadGeometry() {
   QSettings settings;
-  settings.beginGroup(kSettingsGroup);
+  settings.beginGroup(Playlist::kSettingsGroup);
 
   if (!header_->restoreState(settings.value("state").toByteArray())) {
     header_->HideSection(Playlist::Column_Disc);
@@ -253,7 +252,7 @@ void PlaylistView::SaveGeometry() {
     return;
 
   QSettings settings;
-  settings.beginGroup(kSettingsGroup);
+  settings.beginGroup(Playlist::kSettingsGroup);
   settings.setValue("state", header_->saveState());
   settings.setValue("state_version", kStateVersion);
 }
@@ -814,7 +813,7 @@ void PlaylistView::PlaylistDestroyed() {
 
 void PlaylistView::ReloadSettings() {
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(Playlist::kSettingsGroup);
   glow_enabled_ = s.value("glow_effect", true).toBool();
   header_->SetStretchEnabled(s.value("stretch", true).toBool());
 
@@ -838,7 +837,7 @@ void PlaylistView::SaveSettings() {
     return;
 
   QSettings s;
-  s.beginGroup(kSettingsGroup);
+  s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("glow_effect", glow_enabled_);
   s.setValue("stretch", header_->is_stretch_enabled());
   s.setValue("column_alignments", QVariant::fromValue(playlist_->column_alignments()));

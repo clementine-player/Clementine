@@ -12,12 +12,12 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:51+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:13+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: pt_BR\n"
 
 msgid " ms"
 msgstr " ms"
@@ -83,15 +83,15 @@ msgstr "%1 faixas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Modulo do dispositivo Wiimote"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falhou"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n finalizado"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n faltando"
 
@@ -1161,6 +1161,9 @@ msgstr ""
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Conseguiu %1 capa(s) de %2 (%3 falharam)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Organizar Biblioteca por..."
@@ -2814,7 +2817,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "Adicionar %n músicas"
 
@@ -2873,7 +2876,7 @@ msgstr "ligado"
 msgid "options"
 msgstr "opções"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "Remover %n músicas"
 
