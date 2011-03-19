@@ -87,6 +87,13 @@ GetAllPlaylists() -> list of L{Playlist}s
 Returns a list containing all the playlists.
 %End
 
+  void InvalidateDeletedSongs();
+%Docstring
+InvalidateDeletedSongs()
+Grays out and reloads all deleted songs in all playlists. Also, "ungreys"
+those songs which were once deleted but now got restored somehow.
+%End
+
   const QItemSelection& selection(int id) const;
 %Docstring
 selection(id) -> PyQt4.QtGui.QItemSelection

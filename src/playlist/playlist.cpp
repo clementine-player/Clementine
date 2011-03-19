@@ -1580,10 +1580,17 @@ void Playlist::InvalidateDeletedSongs() {
     PlaylistItemPtr item = items_[row];
     Song song = item->Metadata();
 
-    if(song.filetype() != Song::Type_Stream && !QFile::exists(song.filename())) {
-      // gray out the song if it's not there
-      item->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
-      invalidated_rows.append(row);
+    if(song.filetype() != Song::Type_Stream) {
+      bool exists = QFile::exists(song.filename());
+
+      if(!exists && !item->HasForegroundColor(kInvalidSongPriority)) {
+        // gray out the song if it's not there
+        item->SetForegroundColor(kInvalidSongPriority, kInvalidSongColor);
+        invalidated_rows.append(row);
+      } else if(exists && item->HasForegroundColor(kInvalidSongPriority)) {
+        item->RemoveForegroundColor(kInvalidSongPriority);
+        invalidated_rows.append(row);
+      }
     }
   }
 

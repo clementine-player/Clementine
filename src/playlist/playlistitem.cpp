@@ -95,6 +95,9 @@ QFuture<void> PlaylistItem::BackgroundReload() {
 void PlaylistItem::SetBackgroundColor(short priority, const QColor& color) {
   background_colors_[priority] = color;
 }
+bool PlaylistItem::HasBackgroundColor(short priority) const {
+  return background_colors_.contains(priority);
+}
 void PlaylistItem::RemoveBackgroundColor(short priority) {
   background_colors_.remove(priority);
 }
@@ -109,6 +112,9 @@ bool PlaylistItem::HasCurrentBackgroundColor() const {
 
 void PlaylistItem::SetForegroundColor(short priority, const QColor& color) {
   foreground_colors_[priority] = color;
+}
+bool PlaylistItem::HasForegroundColor(short priority) const {
+  return foreground_colors_.contains(priority);
 }
 void PlaylistItem::RemoveForegroundColor(short priority) {
   foreground_colors_.remove(priority);

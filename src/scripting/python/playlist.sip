@@ -111,6 +111,9 @@ public:
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
   void RemoveItemsWithoutUndo   (const QList<int>& indicesIn);
 
+  // Grays out and reloads all deleted songs in this playlist.
+  void InvalidateDeletedSongs();
+
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
 

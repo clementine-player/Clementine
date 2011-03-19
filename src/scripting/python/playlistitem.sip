@@ -201,6 +201,14 @@ If it makes sense, one functionality (one plugin) can use many background
 priorities at the same time.
 %End
 
+  bool HasBackgroundColor(short priority) const;
+%Docstring
+HasBackgroundColor(priority) -> bool
+Checks if this PlaylistItem has a background color with this priority set.
+It doesn't need to be the current color, it just needs to exist in the colors
+list.
+%End
+
   void RemoveBackgroundColor(short priority);
 %Docstring
 RemoveBackgroundColor(priority)
@@ -231,14 +239,22 @@ If it makes sense, one functionality (one plugin) can use many foreground
 priorities at the same time.
   %End
 
+  bool HasForegroundColor(short priority) const;
+%Docstring
+HasForegroundColor(priority) -> bool
+Checks if this PlaylistItem has a foreground color with this priority set.
+It doesn't need to be the current color, it just needs to exist in the colors
+list.
+%End
+
   void RemoveForegroundColor(short priority);
-  %Docstring
+%Docstring
 RemoveForegroundColor(priority)
 Removes a foreground color with the given priority from this PlaylistItem's
 foreground. If there's no such color, this call will be ignored.
 
 @see: L{SetForegroundColor()}
-  %End
+%End
 
   ~PlaylistItem();
 %MethodCode

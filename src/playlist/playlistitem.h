@@ -116,12 +116,14 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
   // Background colors.
   void SetBackgroundColor(short priority, const QColor& color);
+  bool HasBackgroundColor(short priority) const;
   void RemoveBackgroundColor(short priority);
   QColor GetCurrentBackgroundColor() const;
   bool HasCurrentBackgroundColor() const;
 
   // Foreground colors.
   void SetForegroundColor(short priority, const QColor& color);
+  bool HasForegroundColor(short priority) const;
   void RemoveForegroundColor(short priority);
   QColor GetCurrentForegroundColor() const;
   bool HasCurrentForegroundColor() const;
