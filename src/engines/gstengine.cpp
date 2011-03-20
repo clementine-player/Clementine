@@ -430,14 +430,6 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 
   Engine::Base::Load(url, change, beginning_nanosec, end_nanosec);
 
-  // TODO: see if commenting this out will lead to regression on windows
-
-  // Clementine just crashes when asked to load a file that doesn't exist on
-  // Windows, so check for that here.  This is definitely the wrong place for
-  // this "fix"...
-  //if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
-  //  return false;
-
   QUrl gst_url = FixupUrl(url);
 
   bool crossfade = current_pipeline_ &&
