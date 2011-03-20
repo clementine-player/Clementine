@@ -98,7 +98,7 @@ public:
   void set_column_align_right(int column);
 
   // Scrobbling
-  int scrobble_point() const;
+  qint64 scrobble_point_nanosec() const;
   bool has_scrobbled() const;
   void set_scrobbled(bool v);
 
