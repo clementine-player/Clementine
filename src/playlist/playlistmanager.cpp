@@ -111,6 +111,9 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
 }
 
 void PlaylistManager::New(const QString& name, const SongList& songs) {
+  if (name.isNull())
+    return;
+
   int id = playlist_backend_->CreatePlaylist(name);
 
   if (id == -1)

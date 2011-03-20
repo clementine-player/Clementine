@@ -195,6 +195,7 @@ MainWindow::MainWindow(
 #endif
     scripts_(new ScriptManager(this)),
     playlist_menu_(new QMenu(this)),
+    playlist_add_to_another_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
     was_maximized_(false),
@@ -1073,6 +1074,37 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
   delete data;
 }
 
+void MainWindow::AddToPlaylist(QAction* action) {
+  int destination = action->data().toInt();
+  PlaylistItemList items;
+
+  //get the selected playlist items
+  foreach (const QModelIndex& index, ui_->playlist->view()->selectionModel()->selection().indexes()) {
+    if (index.column() != 0)
+      continue;
+    int row = playlists_->current()->proxy()->mapToSource(index).row();
+    items << playlists_->current()->item_at(row);
+  }
+
+  //we're creating a new playlist
+  if (destination == -1) {
+    //save the current playlist to reactivate it
+    int current_id = playlists_->current_id();
+    //ask for the name    
+    playlists_->New(ui_->playlist->PromptForPlaylistName());
+    if (playlists_->current()->id() != current_id) {
+      //I'm sure the new playlist was created and is selected, so I can just insert items
+      playlists_->current()->InsertItems(items);
+      //set back the current playlist
+      playlists_->SetCurrentPlaylist(current_id);
+    }
+  }
+  else {
+    //we're inserting in a existing playlist
+    playlists_->playlist(destination)->InsertItems(items);
+  }
+}
+
 void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex& index) {
   QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
   playlist_menu_index_ = source_index;
@@ -1203,6 +1235,35 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     playlist_delete_->setVisible(editable);
     playlist_copy_to_device_->setVisible(editable);
   }
+
+  //if it isn't the first time we right click, we need to remove the menu previously created
+  if (playlist_add_to_another_ != NULL) {
+    playlist_menu_->removeAction(playlist_add_to_another_);
+    delete playlist_add_to_another_;
+  }
+
+  //create the playlist submenu
+  QMenu* add_to_another_menu = new QMenu(tr("Add to another playlist"), this);
+  PlaylistBackend::Playlist playlist;
+  foreach (playlist, playlist_backend_->GetAllPlaylists()) {
+    //don't add the current playlist
+    if (playlist.id != playlists_->current()->id()) {
+      QAction* existing_playlist = new QAction(this);
+      existing_playlist->setText(playlist.name);
+      existing_playlist->setData(playlist.id);
+      add_to_another_menu->addAction(existing_playlist);
+    }
+  }
+
+  add_to_another_menu->addSeparator();
+  //add to a new playlist
+  QAction* new_playlist = new QAction(this);
+  new_playlist->setText(tr("New playlist"));
+  new_playlist->setData(-1); //fake id
+  add_to_another_menu->addAction(new_playlist);
+  playlist_add_to_another_ = playlist_menu_->addMenu(add_to_another_menu);
+
+  connect(add_to_another_menu, SIGNAL(triggered(QAction*)), SLOT(AddToPlaylist(QAction*)));
 
   playlist_menu_->popup(global_pos);
 }

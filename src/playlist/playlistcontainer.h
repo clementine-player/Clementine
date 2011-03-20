@@ -44,6 +44,8 @@ public:
                   QAction* load_playlist);
   void SetManager(PlaylistManager* manager);
 
+  QString PromptForPlaylistName();
+
   PlaylistView* view() const;
 
   bool eventFilter(QObject *objectWatched, QEvent *event);

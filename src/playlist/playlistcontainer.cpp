@@ -241,13 +241,7 @@ void PlaylistContainer::PlaylistRenamed(int id, const QString &new_name) {
 }
 
 void PlaylistContainer::NewPlaylist() {
-  QString name = QInputDialog::getText(this, tr("New playlist"),
-                                       tr("Enter a name for the new playlist"),
-                                       QLineEdit::Normal, tr("Playlist"));
-  if (name.isNull())
-    return;
-
-  manager_->New(name);
+  manager_->New(PromptForPlaylistName());
 }
 
 void PlaylistContainer::LoadPlaylist() {
@@ -385,4 +379,10 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
+}
+
+QString PlaylistContainer::PromptForPlaylistName() {
+  return QInputDialog::getText(this, tr("New playlist"),
+                                       tr("Enter a name for the new playlist"),
+                                       QLineEdit::Normal, tr("Playlist"));
 }
