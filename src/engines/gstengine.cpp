@@ -24,7 +24,6 @@
 #include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
-#include "core/boundfuturewatcher.h"
 #include "core/utilities.h"
 
 #ifdef HAVE_IMOBILEDEVICE
@@ -493,8 +492,8 @@ bool GstEngine::Play(quint64 offset_nanosec) {
     return false;
 
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
-  BoundFutureWatcher<GstStateChangeReturn, quint64>* watcher =
-      new BoundFutureWatcher<GstStateChangeReturn, quint64>(offset_nanosec, this);
+  PlayFutureWatcher* watcher = new PlayFutureWatcher(
+        PlayFutureWatcherArg(offset_nanosec, current_pipeline_.get()), this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
@@ -502,14 +501,19 @@ bool GstEngine::Play(quint64 offset_nanosec) {
 }
 
 void GstEngine::PlayDone() {
-  BoundFutureWatcher<GstStateChangeReturn, quint64>* watcher =
-      static_cast<BoundFutureWatcher<GstStateChangeReturn, quint64>*>(sender());
+  PlayFutureWatcher* watcher = static_cast<PlayFutureWatcher*>(sender());
   watcher->deleteLater();
 
   GstStateChangeReturn ret = watcher->result();
-  quint64 offset_nanosec = watcher->data();
+  quint64 offset_nanosec = watcher->data().first;
 
   if (!current_pipeline_) {
+    return;
+  }
+
+  // Don't dereference this - it might be invalid
+  GstEnginePipeline* dangerous_pipeline = watcher->data().second;
+  if (dangerous_pipeline != current_pipeline_.get()) {
     return;
   }
 
@@ -675,6 +679,10 @@ void GstEngine::timerEvent(QTimerEvent* e) {
 }
 
 void GstEngine::HandlePipelineError(const QString& message, int domain, int error_code) {
+  GstEnginePipeline* pipeline_sender = qobject_cast<GstEnginePipeline*>(sender());
+  if (!pipeline_sender || pipeline_sender != current_pipeline_.get())
+    return;
+
   qWarning() << "Gstreamer error:" << message;
 
   current_pipeline_.reset();

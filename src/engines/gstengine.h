@@ -24,6 +24,7 @@
 
 #include "bufferconsumer.h"
 #include "enginebase.h"
+#include "core/boundfuturewatcher.h"
 #include "core/timeconstants.h"
 
 #include <QFuture>
@@ -125,6 +126,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void PlayDone();
 
  private:
+  typedef QPair<quint64, GstEnginePipeline*> PlayFutureWatcherArg;
+  typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg> PlayFutureWatcher;
+
   // Callbacks
   static void CanDecodeNewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
   static void CanDecodeLastCallback(GstElement*, gpointer);

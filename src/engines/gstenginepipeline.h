@@ -188,9 +188,6 @@ class GstEnginePipeline : public QObject {
   // get sent while the Player still thinks it's playing the last song
   bool ignore_tags_;
 
-  // Set after the first error to ignore any others that arrive.
-  bool ignore_errors_;
-
   // When the gstreamer source requests a redirect we store the URL here and
   // callers can pick it up after the state change to PLAYING fails.
   QUrl redirect_url_;
