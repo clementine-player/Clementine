@@ -235,7 +235,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
 
     case Role_CanSetRating:
       return index.column() == Column_Rating &&
-             items_[index.row()]->IsLocalLibraryItem();
+             items_[index.row()]->IsLocalLibraryItem() &&
+             items_[index.row()]->Metadata().id() != -1;
 
     case Qt::EditRole:
     case Qt::ToolTipRole:
@@ -1130,11 +1131,13 @@ void Playlist::ItemsLoaded() {
 
   PlaylistItemList items = watcher->future().results();
 
-  // backend returns empty elements for items which it couldn't 
+  // backend returns empty elements for library items which it couldn't 
   // match (because they got deleted); we don't need those
   QMutableListIterator<PlaylistItemPtr> it(items);
   while (it.hasNext()) {
-    if (it.next()->Metadata().filename().isEmpty()) {
+    PlaylistItemPtr item = it.next();
+
+    if (item->IsLocalLibraryItem() && item->Metadata().filename().isEmpty()) {
       it.remove();
     }
   }
@@ -1402,7 +1405,7 @@ void Playlist::RateSong(const QModelIndex& index, double rating) {
 
   if(has_item_at(row)) {
     PlaylistItemPtr item = item_at(row);
-    if (item && item->IsLocalLibraryItem()) {
+    if (item && item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       library_->UpdateSongRatingAsync(item->Metadata().id(), rating);
     }
   }

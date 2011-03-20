@@ -130,6 +130,9 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
   // Convenience function to find out whether this item is from the local
   // library, as opposed to a device, a file on disk, or a stream.
+  // Remember that even if this returns true, the library item might be
+  // invalid so you might want to check that it's id is not equal to -1
+  // before actually using it.
   virtual bool IsLocalLibraryItem() const { return false; }
 
  protected:

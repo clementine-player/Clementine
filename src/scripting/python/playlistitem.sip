@@ -177,8 +177,11 @@ Returns true if L{SetTemporaryMetadata()} has been called.
   bool IsLocalLibraryItem() const;
 %Docstring
 IsLocalLibraryItem() -> bool
-Convenience function to check whether this item is from the local library (the
-list of songs appearing in the Library tab).
+Convenience function to check whether this item is from the local
+library, as opposed to a device, a file on disk or a stream.
+Remember that even if this returns true, the library item might be
+invalid so you might want to check that it's id is not equal to -1
+before actually using it.
 %End
 
   void SetBackgroundColor(short priority, const QColor& color);

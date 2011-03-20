@@ -154,7 +154,7 @@ void Player::TrackEnded() {
   }
 
   if (current_item_ && current_item_->IsLocalLibraryItem() &&
-      !playlists_->active()->has_scrobbled()) {
+      current_item_->Metadata().id() != -1 && !playlists_->active()->has_scrobbled()) {
     // The track finished before its scrobble point (30 seconds), so increment
     // the play count now.
     playlists_->library_backend()->IncrementPlayCountAsync(

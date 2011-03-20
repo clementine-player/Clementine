@@ -847,7 +847,8 @@ void MainWindow::SongChanged(const Song& song) {
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // If it was a library item then we have to increment its skipped count in
   // the database.
-  if (item && item->IsLocalLibraryItem() && !playlists_->active()->has_scrobbled()) {
+  if (item && item->IsLocalLibraryItem() &&
+      item->Metadata().id() != -1 && !playlists_->active()->has_scrobbled()) {
     Song song = item->Metadata();
     const qint64 position = player_->engine()->position_nanosec();
     const qint64 length = player_->engine()->length_nanosec();
@@ -989,7 +990,7 @@ void MainWindow::UpdateTrackPosition() {
     playlists_->active()->set_scrobbled(true);
 
     // Update the play count for the song if it's from the library
-    if (item->IsLocalLibraryItem()) {
+    if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       library_->backend()->IncrementPlayCountAsync(item->Metadata().id());
     }
   }
@@ -1191,7 +1192,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     ui_->action_edit_value->setText(tr("Edit tag \"%1\"...").arg(column_name));
 
     // Is it a library item?
-    if (playlists_->current()->item_at(source_index.row())->IsLocalLibraryItem()) {
+    PlaylistItemPtr item = playlists_->current()->item_at(source_index.row());
+    if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       playlist_organise_->setVisible(editable);
     } else {
       playlist_copy_to_library_->setVisible(editable);
