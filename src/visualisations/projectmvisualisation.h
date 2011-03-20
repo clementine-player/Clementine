@@ -49,7 +49,7 @@ public:
   Mode mode() const { return mode_; }
 
   // BufferConsumer
-  void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*);
+  void ConsumeBuffer(GstBuffer *buffer, int);
 
 public slots:
   void SetTextureSize(int size);

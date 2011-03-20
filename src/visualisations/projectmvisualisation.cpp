@@ -161,7 +161,7 @@ void ProjectMVisualisation::SetDuration(int seconds) {
     projectm_->changePresetDuration(duration_);
 }
 
-void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {
+void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
 #ifdef HAVE_GSTREAMER
   const int samples_per_channel = GST_BUFFER_SIZE(buffer) / sizeof(short) / 2;
   const short* data = reinterpret_cast<short*>(GST_BUFFER_DATA(buffer));

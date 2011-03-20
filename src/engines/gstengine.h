@@ -83,7 +83,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   GstElement* CreateElement(const QString& factoryName, GstElement* bin = 0);
 
   // BufferConsumer
-  void ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline);
+  void ConsumeBuffer(GstBuffer *buffer, int pipeline_id);
 
  public slots:
   void StartPreloading(const QUrl& url, qint64 beginning_nanosec,
@@ -112,11 +112,11 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void timerEvent(QTimerEvent*);
 
  private slots:
-  void EndOfStreamReached(bool has_next_track);
-  void HandlePipelineError(const QString& message, int domain, int error_code);
-  void NewMetaData(const Engine::SimpleMetaBundle& bundle);
+  void EndOfStreamReached(int pipeline_id, bool has_next_track);
+  void HandlePipelineError(int pipeline_id, const QString& message, int domain, int error_code);
+  void NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   void ClearScopeBuffers();
-  void AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline);
+  void AddBufferToScope(GstBuffer* buf, int pipeline_id);
   void FadeoutFinished();
   void SeekNow();
   void BackgroundStreamFinished();
@@ -124,7 +124,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void PlayDone();
 
  private:
-  typedef QPair<quint64, GstEnginePipeline*> PlayFutureWatcherArg;
+  typedef QPair<quint64, int> PlayFutureWatcherArg;
   typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg> PlayFutureWatcher;
 
   static void SetEnv(const char* key, const QString& value);

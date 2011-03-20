@@ -198,18 +198,18 @@ Engine::State GstEngine::state() const {
   }
 }
 
-void GstEngine::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline) {
+void GstEngine::ConsumeBuffer(GstBuffer* buffer, int pipeline_id) {
   // Schedule this to run in the GUI thread.  The buffer gets added to the
   // queue and unreffed by UpdateScope.
   if (!QMetaObject::invokeMethod(this, "AddBufferToScope",
                                  Q_ARG(GstBuffer*, buffer),
-                                 Q_ARG(GstEnginePipeline*, pipeline))) {
+                                 Q_ARG(int, pipeline_id))) {
     qWarning() << "Failed to invoke AddBufferToScope on GstEngine";
   }
 }
 
-void GstEngine::AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline) {
-  if (current_pipeline_.get() != pipeline) {
+void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
+  if (!current_pipeline_ || current_pipeline_->id() != pipeline_id) {
     gst_buffer_unref(buf);
     return;
   }
@@ -394,7 +394,7 @@ bool GstEngine::Play(quint64 offset_nanosec) {
 
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
   PlayFutureWatcher* watcher = new PlayFutureWatcher(
-        PlayFutureWatcherArg(offset_nanosec, current_pipeline_.get()), this);
+        PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
@@ -408,13 +408,7 @@ void GstEngine::PlayDone() {
   GstStateChangeReturn ret = watcher->result();
   quint64 offset_nanosec = watcher->data().first;
 
-  if (!current_pipeline_) {
-    return;
-  }
-
-  // Don't dereference this - it might be invalid
-  GstEnginePipeline* dangerous_pipeline = watcher->data().second;
-  if (dangerous_pipeline != current_pipeline_.get()) {
+  if (!current_pipeline_ || watcher->data().second != current_pipeline_->id()) {
     return;
   }
 
@@ -579,9 +573,9 @@ void GstEngine::timerEvent(QTimerEvent* e) {
   }
 }
 
-void GstEngine::HandlePipelineError(const QString& message, int domain, int error_code) {
-  GstEnginePipeline* pipeline_sender = qobject_cast<GstEnginePipeline*>(sender());
-  if (!pipeline_sender || pipeline_sender != current_pipeline_.get())
+void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
+                                    int domain, int error_code) {
+  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
   qWarning() << "Gstreamer error:" << message;
@@ -605,9 +599,8 @@ void GstEngine::HandlePipelineError(const QString& message, int domain, int erro
   }
 }
 
-void GstEngine::EndOfStreamReached(bool has_next_track) {
-  GstEnginePipeline* pipeline_sender = qobject_cast<GstEnginePipeline*>(sender());
-  if (!pipeline_sender || pipeline_sender != current_pipeline_.get())
+void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
+  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
   if (!has_next_track)
@@ -616,7 +609,10 @@ void GstEngine::EndOfStreamReached(bool has_next_track) {
   emit TrackEnded();
 }
 
-void GstEngine::NewMetaData(const Engine::SimpleMetaBundle& bundle) {
+void GstEngine::NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle) {
+  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
+    return;
+
   emit MetaData(bundle);
 }
 
@@ -682,10 +678,10 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
     ret->AddBufferConsumer(consumer);
   }
 
-  connect(ret.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(EndOfStreamReached(bool)));
-  connect(ret.get(), SIGNAL(Error(QString,int,int)), SLOT(HandlePipelineError(QString,int,int)));
-  connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
-          SLOT(NewMetaData(Engine::SimpleMetaBundle)));
+  connect(ret.get(), SIGNAL(EndOfStreamReached(int, bool)), SLOT(EndOfStreamReached(int, bool)));
+  connect(ret.get(), SIGNAL(Error(int, QString,int,int)), SLOT(HandlePipelineError(int, QString,int,int)));
+  connect(ret.get(), SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)),
+          SLOT(NewMetaData(int, Engine::SimpleMetaBundle)));
   connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
 
   return ret;
