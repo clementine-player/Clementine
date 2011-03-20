@@ -182,7 +182,7 @@ class Playlist : public QAbstractListModel {
   void set_column_align_right(int column);
 
   // Scrobbling
-  int scrobble_point() const { return scrobble_point_; }
+  qint64 scrobble_point_nanosec() const { return scrobble_point_; }
   bool has_scrobbled() const { return has_scrobbled_; }
   void set_scrobbled(bool v) { has_scrobbled_ = v; }
 
@@ -333,7 +333,7 @@ class Playlist : public QAbstractListModel {
 
   bool is_shuffled_;
 
-  int scrobble_point_;
+  qint64 scrobble_point_;
   bool has_scrobbled_;
 
   PlaylistSequence* playlist_sequence_;

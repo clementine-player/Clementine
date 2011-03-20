@@ -1325,9 +1325,16 @@ Song Playlist::current_item_metadata() const {
 }
 
 void Playlist::UpdateScrobblePoint() {
-  const int length = current_item_metadata().length_nanosec();
+  const qint64 length = current_item_metadata().length_nanosec();
 
-  scrobble_point_ = length == 0 ? 240 : qBound(31, length/2, 240);
+  if (length == 0) {
+    scrobble_point_ = 240ll * kNsecPerSec; // 4 minutes
+  } else {
+    scrobble_point_ = qBound(31ll * kNsecPerSec,
+                             length/2,
+                             240ll * kNsecPerSec);
+  }
+
   has_scrobbled_ = false;
 }
 

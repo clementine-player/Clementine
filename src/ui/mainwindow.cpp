@@ -973,6 +973,7 @@ void MainWindow::UpdateTrackPosition() {
   const int position = std::floor(
       float(player_->engine()->position_nanosec()) / kNsecPerSec + 0.5);
   const int length = item->Metadata().length_nanosec() / kNsecPerSec;
+  const int scrobble_point = playlists_->active()->scrobble_point_nanosec() / kNsecPerSec;
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
@@ -982,9 +983,7 @@ void MainWindow::UpdateTrackPosition() {
   }
 
   // Time to scrobble?
-
-  if (!playlists_->active()->has_scrobbled() &&
-      position >= playlists_->active()->scrobble_point()) {
+  if (!playlists_->active()->has_scrobbled() && position >= scrobble_point) {
 #ifdef HAVE_LIBLASTFM
     radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
 #endif
