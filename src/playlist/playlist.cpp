@@ -1580,7 +1580,7 @@ void Playlist::InvalidateDeletedSongs() {
     PlaylistItemPtr item = items_[row];
     Song song = item->Metadata();
 
-    if(song.filetype() != Song::Type_Stream) {
+    if(!song.is_stream()) {
       bool exists = QFile::exists(song.filename());
 
       if(!exists && !item->HasForegroundColor(kInvalidSongPriority)) {
@@ -1604,9 +1604,9 @@ bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
     Song current_song = current->Metadata();
 
     // if validity has changed, reload the item
-    if(current_song.filetype() != Song::Type_Stream &&
-       current_song.filename() == url.toLocalFile() &&
-       current_song.is_valid() != QFile::exists(current_song.filename())) {
+    if(!current_song.is_stream() &&
+        current_song.filename() == url.toLocalFile() &&
+        current_song.is_valid() != QFile::exists(current_song.filename())) {
       ReloadItems(QList<int>() << current_row());
     }
 

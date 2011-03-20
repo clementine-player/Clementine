@@ -244,7 +244,7 @@ int Mpris1Player::GetCaps(Engine::State state) const {
     if (state == Engine::Playing && !(current_item->options() & PlaylistItem::PauseDisabled)) {
       caps |= CAN_PAUSE;
     }
-    if (state != Engine::Empty && current_item->Metadata().filetype() != Song::Type_Stream) {
+    if (state != Engine::Empty && !current_item->Metadata().is_stream()) {
       caps |= CAN_SEEK;
     }
   }

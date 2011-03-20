@@ -71,8 +71,8 @@ TEST_F(XSPFParserTest, ParsesMoreThanOneTrackFromXML) {
   ASSERT_EQ(2, songs.length());
   EXPECT_EQ("http://example.com/foo.mp3", songs[0].filename());
   EXPECT_EQ("http://example.com/bar.mp3", songs[1].filename());
-  EXPECT_EQ(Song::Type_Stream, songs[0].filetype());
-  EXPECT_EQ(Song::Type_Stream, songs[1].filetype());
+  EXPECT_TRUE(songs[0].is_stream());
+  EXPECT_TRUE(songs[1].is_stream());
 }
 
 TEST_F(XSPFParserTest, IgnoresInvalidLength) {

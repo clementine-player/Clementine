@@ -1100,16 +1100,22 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   QModelIndexList selection = ui_->playlist->view()->selectionModel()->selection().indexes();
   bool cue_selected = false;
   int editable = 0;
+  int streams = 0;
   int in_queue = 0;
   int not_in_queue = 0;
   foreach (const QModelIndex& index, selection) {
     if (index.column() != 0)
       continue;
 
-    if(playlists_->current()->item_at(index.row())->Metadata().has_cue()) {
+    PlaylistItemPtr item = playlists_->current()->item_at(index.row());
+    if(item->Metadata().has_cue()) {
       cue_selected = true;
-    } else if (playlists_->current()->item_at(index.row())->Metadata().IsEditable()) {
+    } else if (item->Metadata().IsEditable()) {
       editable++;
+    }
+
+    if(item->Metadata().is_stream()) {
+      streams++;
     }
 
     if (index.data(Playlist::Role_QueuePosition).toInt() == -1)
@@ -1117,6 +1123,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     else
       in_queue ++;
   }
+
+  int all = not_in_queue + in_queue;
 
   // this is available when we have one or many files and at least one of
   // those is not CUE related
@@ -1128,6 +1136,9 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   // involved
   if(cue_selected)
     editable = 0;
+
+  // no 'show in browser' action if only streams are selected
+  playlist_open_in_browser_->setVisible(streams != all);
 
   bool track_column = (index.column() == Playlist::Column_Track);
   ui_->action_renumber_tracks->setVisible(editable >= 2 && track_column);

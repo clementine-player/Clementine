@@ -324,7 +324,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
 
   // TODO: check if custom plugin actions should be enabled / visible
   const int songs_selected     = smart_playlists + smart_playlists_header + regular_elements;
-  const bool regular_elements_only = songs_selected == regular_elements;
+  const bool regular_elements_only = songs_selected == regular_elements && regular_elements > 0;
   const bool smart_playlists_only = songs_selected == smart_playlists + smart_playlists_header;
   const bool only_smart_playlist_selected = smart_playlists == 1 && songs_selected == 1;
 
@@ -335,6 +335,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   add_to_playlist_enqueue_->setEnabled(songs_selected);
 
   // allow mixed smart playlists / regular elements selected
+  show_in_browser_->setVisible(!smart_playlists_only);
   edit_tracks_->setVisible(!smart_playlists_only && regular_editable > 1);
   // if neither edit_track not edit_tracks are available, we show disabled
   // edit_track element

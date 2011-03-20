@@ -66,7 +66,7 @@ TEST_F(PLSParserTest, ParseSomaFM) {
   EXPECT_EQ("SomaFM: Groove Salad (#2 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[1].title());
   EXPECT_EQ("SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient beats and grooves.", songs[2].title());
   EXPECT_EQ(-1, songs[0].length_nanosec());
-  EXPECT_EQ(Song::Type_Stream, songs[0].filetype());
+  EXPECT_TRUE(songs[0].is_stream());
 }
 
 TEST_F(PLSParserTest, ParseSomaFM2) {
@@ -82,7 +82,7 @@ TEST_F(PLSParserTest, ParseSomaFM2) {
   EXPECT_EQ("SomaFM: Secret Agent (#2 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[1].title());
   EXPECT_EQ("SomaFM: Secret Agent (#3 128k mp3): The soundtrack for your stylish, mysterious, dangerous life. For Spies and PIs too!", songs[2].title());
   EXPECT_EQ(-1, songs[0].length_nanosec());
-  EXPECT_EQ(Song::Type_Stream, songs[0].filetype());
+  EXPECT_TRUE(songs[0].is_stream());
 }
 
 TEST_F(PLSParserTest, SaveAndLoad) {
