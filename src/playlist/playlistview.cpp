@@ -183,12 +183,16 @@ void PlaylistView::setModel(QAbstractItemModel *m) {
   if (model()) {
     disconnect(model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
                this, SLOT(InvalidateCachedCurrentPixmap()));
+    disconnect(model(), SIGNAL(layoutAboutToBeChanged()),
+               this, SLOT(RatingHoverOut()));
   }
 
   QTreeView::setModel(m);
 
   connect(model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)),
           this, SLOT(InvalidateCachedCurrentPixmap()));
+  connect(model(), SIGNAL(layoutAboutToBeChanged()),
+          this, SLOT(RatingHoverOut()));
 }
 
 void PlaylistView::LoadGeometry() {
