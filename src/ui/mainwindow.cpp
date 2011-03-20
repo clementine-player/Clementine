@@ -1244,6 +1244,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   //create the playlist submenu
   QMenu* add_to_another_menu = new QMenu(tr("Add to another playlist"), this);
+  add_to_another_menu->setIcon((IconLoader::Load("add")));
+
   PlaylistBackend::Playlist playlist;
   foreach (playlist, playlist_backend_->GetAllPlaylists()) {
     //don't add the current playlist
@@ -1261,7 +1263,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   new_playlist->setText(tr("New playlist"));
   new_playlist->setData(-1); //fake id
   add_to_another_menu->addAction(new_playlist);
-  playlist_add_to_another_ = playlist_menu_->addMenu(add_to_another_menu);
+  playlist_add_to_another_ = playlist_menu_->insertMenu(ui_->action_remove_from_playlist,
+                                                        add_to_another_menu);
 
   connect(add_to_another_menu, SIGNAL(triggered(QAction*)), SLOT(AddToPlaylist(QAction*)));
 
