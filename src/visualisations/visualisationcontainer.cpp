@@ -130,10 +130,8 @@ void VisualisationContainer::AddMenuItem(const QString &name, int value, int def
 void VisualisationContainer::SetEngine(GstEngine* engine) {
   engine_ = engine;
 
-#ifdef HAVE_GSTREAMER
   if (isVisible())
     engine_->AddBufferConsumer(vis_);
-#endif
 }
 
 void VisualisationContainer::showEvent(QShowEvent* e) {
@@ -145,20 +143,16 @@ void VisualisationContainer::showEvent(QShowEvent* e) {
   QGraphicsView::showEvent(e);
   update_timer_.start(1000 / fps_, this);
 
-#ifdef HAVE_GSTREAMER
   if (engine_)
     engine_->AddBufferConsumer(vis_);
-#endif
 }
 
 void VisualisationContainer::hideEvent(QHideEvent* e) {
   QGraphicsView::hideEvent(e);
   update_timer_.stop();
 
-#ifdef HAVE_GSTREAMER
   if (engine_)
     engine_->RemoveBufferConsumer(vis_);
-#endif
 }
 
 void VisualisationContainer::resizeEvent(QResizeEvent* e) {
