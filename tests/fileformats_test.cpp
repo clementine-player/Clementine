@@ -94,21 +94,4 @@ TEST_P(FileformatsTest, LoadsTags) {
   }
 }
 
-TEST_P(FileformatsTest, GstCanDecode) {
-  QTemporaryFile temp(temp_filetemplate_);
-  SaveToTempFile(&temp);
-
-  QSignalSpy spy(sGstEngine, SIGNAL(Error(QString)));
-
-  EXPECT_TRUE(sGstEngine->CanDecode(QUrl::fromLocalFile(temp.fileName())));
-
-  QList<QList<QVariant> > calls(spy);
-  foreach (const QList<QVariant>& call, calls) {
-    qDebug() << "GstEngine::Error emitted:" << call[0].toString();
-  }
-}
-
-INSTANTIATE_TEST_CASE_P(Formats, FileformatsTest, ::testing::Values(
-    "flac", "mp3", "ogg", "spx", "wav", "wma", "m4a"));
-
 }  // namespace

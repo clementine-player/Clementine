@@ -68,8 +68,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool Init();
   void EnsureInitialised() { initialising_.waitForFinished(); }
 
-  bool CanDecode(const QUrl& url);
-
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
   void SetBackgroundStreamVolume(int id, int volume);
@@ -128,13 +126,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
  private:
   typedef QPair<quint64, GstEnginePipeline*> PlayFutureWatcherArg;
   typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg> PlayFutureWatcher;
-
-  // Callbacks
-  static void CanDecodeNewPadCallback(GstElement*, GstPad*, gboolean, gpointer);
-  static void CanDecodeLastCallback(GstElement*, gpointer);
-  static GstBusSyncReply CanDecodeBusCallbackSync(GstBus*, GstMessage*, gpointer);
-  static gboolean CanDecodeBusCallback(GstBus*, GstMessage*, gpointer);
-  static void PrintGstError(GstMessage* msg);
 
   static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
