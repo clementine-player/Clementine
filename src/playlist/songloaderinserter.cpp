@@ -48,11 +48,14 @@ void SongLoaderInserter::Load(Playlist *destination,
 
   foreach (const QUrl& url, urls) {
     SongLoader* loader = new SongLoader(library_, this);
+
+    // we're connecting this before we're even sure if this is an async load
+    // to avoid race conditions (signal emission before we're listening to it)
+    connect(loader, SIGNAL(LoadFinished(bool)), SLOT(PendingLoadFinished(bool)));
     SongLoader::Result ret = loader->Load(url);
 
     if (ret == SongLoader::WillLoadAsync) {
       pending_.insert(loader);
-      connect(loader, SIGNAL(LoadFinished(bool)), SLOT(PendingLoadFinished(bool)));
       continue;
     }
 
