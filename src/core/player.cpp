@@ -175,7 +175,7 @@ void Player::PlayPause() {
     // Stopping seems like a reasonable thing to do (especially on mac where there
     // is no media key for stop).
     if (current_item_->options() & PlaylistItem::PauseDisabled) {
-      engine_->Stop();
+      Stop();
     } else {
       engine_->Pause();
     }
