@@ -387,6 +387,7 @@ MainWindow::MainWindow(
   connect(player_, SIGNAL(Paused()), SLOT(MediaPaused()));
   connect(player_, SIGNAL(Playing()), SLOT(MediaPlaying()));
   connect(player_, SIGNAL(Stopped()), SLOT(MediaStopped()));
+  connect(player_, SIGNAL(Seeked(qlonglong)), SLOT(Seeked(qlonglong)));
   connect(player_, SIGNAL(TrackSkipped(PlaylistItemPtr)), SLOT(TrackSkipped(PlaylistItemPtr)));
   connect(player_, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged(int)));
 
@@ -541,6 +542,10 @@ MainWindow::MainWindow(
                         ui_->action_ban,
                         ui_->action_quit);
   connect(tray_icon_, SIGNAL(PlayPause()), player_, SLOT(PlayPause()));
+  connect(tray_icon_, SIGNAL(SeekForward()), player_, SLOT(SeekForward()));
+  connect(tray_icon_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
+  connect(tray_icon_, SIGNAL(NextTrack()), player_, SLOT(Next()));
+  connect(tray_icon_, SIGNAL(PreviousTrack()), player_, SLOT(Previous()));
   connect(tray_icon_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(tray_icon_, SIGNAL(ChangeVolume(int)), SLOT(VolumeWheelEvent(int)));
 
@@ -965,6 +970,12 @@ void MainWindow::SetHiddenInTray(bool hidden) {
 
 void MainWindow::FilePathChanged(const QString& path) {
   settings_.setValue("file_path", path);
+}
+
+void MainWindow::Seeked(qlonglong microseconds) {
+  const int position = microseconds / kUsecPerSec;
+  const int length = player_->GetCurrentItem()->Metadata().length_nanosec() / kNsecPerSec;
+  tray_icon_->SetProgress(double(position) / length * 100);
 }
 
 void MainWindow::UpdateTrackPosition() {

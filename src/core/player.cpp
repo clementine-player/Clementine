@@ -301,11 +301,11 @@ void Player::SeekTo(int seconds) {
 }
 
 void Player::SeekForward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec + 5);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec + 10);
 }
 
 void Player::SeekBackward() {
-  SeekTo(engine()->position_nanosec() / kNsecPerSec - 5);
+  SeekTo(engine()->position_nanosec() / kNsecPerSec - 10);
 }
 
 void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {

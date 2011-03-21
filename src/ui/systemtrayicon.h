@@ -59,6 +59,10 @@ class SystemTrayIcon : public QObject {
 
  signals:
   void ChangeVolume(int delta);
+  void SeekForward();
+  void SeekBackward();
+  void NextTrack();
+  void PreviousTrack();
   void ShowHide();
   void PlayPause();
 

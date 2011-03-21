@@ -77,7 +77,21 @@ bool QtSystemTrayIcon::eventFilter(QObject* object, QEvent* event) {
 
   if (event->type() == QEvent::Wheel) {
     QWheelEvent* e = static_cast<QWheelEvent*>(event);
-    emit ChangeVolume(e->delta());
+    if (e->modifiers() == Qt::ShiftModifier) {
+      if (e->delta() > 0) {
+        emit SeekForward();
+      } else {
+        emit SeekBackward();
+      }
+    } else if (e->modifiers() == Qt::ControlModifier) {
+      if (e->delta() < 0) {
+        emit NextTrack();
+      } else {
+        emit PreviousTrack();
+      }
+    } else {
+      emit ChangeVolume(e->delta());
+    }
     return true;
   }
 
