@@ -32,7 +32,7 @@ class QMenu;
 
 class IcecastService : public RadioService {
   Q_OBJECT
- public:
+public:
   IcecastService(RadioModel* parent);
   ~IcecastService();
 
@@ -55,11 +55,12 @@ class IcecastService : public RadioService {
 protected:
   QModelIndex GetCurrentIndex();
 
- private slots:
+private slots:
   void LoadDirectory();
   void Homepage();
 
- private:
+private:
+  void RequestDirectory(const QUrl& url);
   void EnsureMenuCreated();
   IcecastBackend::StationList ParseDirectory(QIODevice* device) const;
   IcecastBackend::Station ReadStation(QXmlStreamReader* reader) const;
