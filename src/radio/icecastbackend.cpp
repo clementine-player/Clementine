@@ -181,5 +181,6 @@ Song IcecastBackend::Station::ToSong() const {
   ret.set_bitrate(bitrate);
   ret.set_samplerate(samplerate);
   ret.set_genre(genre);
+  ret.set_filetype(Song::Type_Stream);
   return ret;
 }
