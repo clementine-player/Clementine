@@ -92,7 +92,7 @@ void Equalizer::ReloadSettings() {
 
   // Selected preset
   QString selected_preset = s.value("selected_preset", "Custom").toString();
-  QString selected_preset_display_name = QString(tr(selected_preset.toStdString().c_str()))
+  QString selected_preset_display_name = QString(tr(selected_preset.toStdString().c_str()));
   int selected_index = ui_->preset->findText(selected_preset_display_name);
   if (selected_index != -1)
     ui_->preset->setCurrentIndex(selected_index);
@@ -127,7 +127,7 @@ void Equalizer::LoadDefaultPresets() {
 }
 
 void Equalizer::AddPreset(const QString& name, const Params& params) {
-  const char* name_displayed = tr(name.toStdString().c_str());
+  QString name_displayed = tr(name.toStdString().c_str());
   presets_[name] = params;
   if (ui_->preset->findText(name_displayed) == -1) {
     ui_->preset->addItem(name_displayed, // name to display (translated)
