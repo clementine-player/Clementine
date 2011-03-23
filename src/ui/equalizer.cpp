@@ -59,7 +59,7 @@ Equalizer::Equalizer(QWidget *parent)
   connect(ui_->enable, SIGNAL(toggled(bool)), SIGNAL(EnabledChanged(bool)));
   connect(ui_->enable, SIGNAL(toggled(bool)), ui_->slider_container, SLOT(setEnabled(bool)));
   connect(ui_->enable, SIGNAL(toggled(bool)), SLOT(Save()));
-  connect(ui_->preset, SIGNAL(currentIndexChanged(QString)), SLOT(PresetChanged(QString)));
+  connect(ui_->preset, SIGNAL(currentIndexChanged(int)), SLOT(PresetChanged(int)));
   connect(ui_->preset_save, SIGNAL(clicked()), SLOT(SavePreset()));
   connect(ui_->preset_del, SIGNAL(clicked()), SLOT(DelPreset()));
 
@@ -92,7 +92,8 @@ void Equalizer::ReloadSettings() {
 
   // Selected preset
   QString selected_preset = s.value("selected_preset", "Custom").toString();
-  int selected_index = ui_->preset->findText(selected_preset);
+  QString selected_preset_display_name = QString(tr(selected_preset.toStdString().c_str()))
+  int selected_index = ui_->preset->findText(selected_preset_display_name);
   if (selected_index != -1)
     ui_->preset->setCurrentIndex(selected_index);
 
@@ -104,31 +105,39 @@ void Equalizer::ReloadSettings() {
 }
 
 void Equalizer::LoadDefaultPresets() {
-  AddPreset("Custom",                 Params(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-  AddPreset(tr("Classical"),          Params(0, 0, 0, 0, 0, 0, -40, -40, -40, -50));
-  AddPreset(tr("Club"),               Params(0, 0, 20, 30, 30, 30, 20, 0, 0, 0));
-  AddPreset(tr("Dance"),              Params(50, 35, 10, 0, 0, -30, -40, -40, 0, 0));
-  AddPreset(tr("Full Bass"),          Params(70, 70, 70, 40, 20, -45, -50, -55, -55, -55));
-  AddPreset(tr("Full Treble"),        Params(-50, -50, -50, -25, 15, 55, 80, 80, 80, 85));
-  AddPreset(tr("Full Bass + Treble"), Params(35, 30, 0, -40, -25, 10, 45, 55, 60, 60));
-  AddPreset(tr("Laptop/Headphones"),  Params(25, 50, 25, -20, 0, -30, -40, -40, 0, 0));
-  AddPreset(tr("Large Hall"),         Params(50, 50, 30, 30, 0, -25, -25, -25, 0, 0));
-  AddPreset(tr("Live"),               Params(-25, 0, 20, 25, 30, 30, 20, 15, 15, 10));
-  AddPreset(tr("Party"),              Params(35, 35, 0, 0, 0, 0, 0, 0, 35, 35));
-  AddPreset(tr("Pop"),                Params(-10, 25, 35, 40, 25, -5, -15, -15, -10, -10));
-  AddPreset(tr("Reggae"),             Params(0, 0, -5, -30, 0, -35, -35, 0, 0, 0));
-  AddPreset(tr("Rock"),               Params(40, 25, -30, -40, -20, 20, 45, 55, 55, 55));
-  AddPreset(tr("Soft"),               Params(25, 10, -5, -15, -5, 20, 45, 50, 55, 60));
-  AddPreset(tr("Ska"),                Params(-15, -25, -25, -5, 20, 30, 45, 50, 55, 50));
-  AddPreset(tr("Soft Rock"),          Params(20, 20, 10, -5, -25, -30, -20, -5, 15, 45));
-  AddPreset(tr("Techno"),             Params(40, 30, 0, -30, -25, 0, 40, 50, 50, 45));
-  AddPreset(tr("Zero"),               Params(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Custom"),             Params(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Classical"),          Params(0, 0, 0, 0, 0, 0, -40, -40, -40, -50));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Club"),               Params(0, 0, 20, 30, 30, 30, 20, 0, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Dance"),              Params(50, 35, 10, 0, 0, -30, -40, -40, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Bass"),          Params(70, 70, 70, 40, 20, -45, -50, -55, -55, -55));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Treble"),        Params(-50, -50, -50, -25, 15, 55, 80, 80, 80, 85));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Full Bass + Treble"), Params(35, 30, 0, -40, -25, 10, 45, 55, 60, 60));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Laptop/Headphones"),  Params(25, 50, 25, -20, 0, -30, -40, -40, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Large Hall"),         Params(50, 50, 30, 30, 0, -25, -25, -25, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Live"),               Params(-25, 0, 20, 25, 30, 30, 20, 15, 15, 10));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Party"),              Params(35, 35, 0, 0, 0, 0, 0, 0, 35, 35));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Pop"),                Params(-10, 25, 35, 40, 25, -5, -15, -15, -10, -10));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Reggae"),             Params(0, 0, -5, -30, 0, -35, -35, 0, 0, 0));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Rock"),               Params(40, 25, -30, -40, -20, 20, 45, 55, 55, 55));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Soft"),               Params(25, 10, -5, -15, -5, 20, 45, 50, 55, 60));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Ska"),                Params(-15, -25, -25, -5, 20, 30, 45, 50, 55, 50));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Soft Rock"),          Params(20, 20, 10, -5, -25, -30, -20, -5, 15, 45));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Techno"),             Params(40, 30, 0, -30, -25, 0, 40, 50, 50, 45));
+  AddPreset(QT_TRANSLATE_NOOP("Equalizer", "Zero"),               Params(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 }
 
 void Equalizer::AddPreset(const QString& name, const Params& params) {
+  const char* name_displayed = tr(name.toStdString().c_str());
   presets_[name] = params;
-  if (ui_->preset->findText(name) == -1)
-    ui_->preset->addItem(name);
+  if (ui_->preset->findText(name_displayed) == -1) {
+    ui_->preset->addItem(name_displayed, // name to display (translated)
+                         QVariant(name) // original name
+                        );
+  }
+}
+
+void Equalizer::PresetChanged(int index) {
+  PresetChanged(ui_->preset->itemData(index).toString());
 }
 
 void Equalizer::PresetChanged(const QString& name) {
@@ -155,13 +164,14 @@ void Equalizer::SavePreset() {
   QString name = SaveCurrentPreset();
   if (!name.isEmpty()) {
     last_preset_ = name;
-    ui_->preset->setCurrentIndex(ui_->preset->findText(name));
+    ui_->preset->setCurrentIndex(ui_->preset->findText(tr(name.toStdString().c_str())));
   }
 }
 
 QString Equalizer::SaveCurrentPreset() {
   QString name = QInputDialog::getText(this, tr("Save preset"), tr("Name"),
-                                       QLineEdit::Normal, last_preset_);
+                                       QLineEdit::Normal,
+                                       tr(last_preset_.toStdString().c_str()));
   if (name.isEmpty())
     return QString();
 
@@ -171,13 +181,14 @@ QString Equalizer::SaveCurrentPreset() {
 }
 
 void Equalizer::DelPreset() {
-  QString name = ui_->preset->currentText();
+  QString name = ui_->preset->itemData(ui_->preset->currentIndex()).toString();
+  QString name_displayed = ui_->preset->currentText();
   if (!presets_.contains(name) || name.isEmpty())
     return;
 
   int ret = QMessageBox::question(
       this, tr("Delete preset"),
-      tr("Are you sure you want to delete the \"%1\" preset?").arg(name),
+      tr("Are you sure you want to delete the \"%1\" preset?").arg(name_displayed),
       QMessageBox::Yes, QMessageBox::No);
 
   if (ret == QMessageBox::No)
@@ -243,7 +254,8 @@ void Equalizer::Save() {
   s.endArray();
 
   // Selected preset
-  s.setValue("selected_preset", ui_->preset->currentText());
+  s.setValue("selected_preset",
+    ui_->preset->itemData(ui_->preset->currentIndex()).toString());
 
   // Enabled?
   s.setValue("enabled", ui_->enable->isChecked());
