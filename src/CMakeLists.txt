@@ -35,6 +35,10 @@ if(HAVE_SCRIPTING_PYTHON)
   include_directories(${PYTHON_INCLUDE_DIRS})
 endif(HAVE_SCRIPTING_PYTHON)
 
+if(HAVE_BREAKPAD)
+  include_directories(../3rdparty/google-breakpad)
+endif(HAVE_BREAKPAD)
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
 include(../cmake/Translations.cmake)
@@ -53,6 +57,7 @@ set(SOURCES
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
+  core/crashreporting.cpp
   core/database.cpp
   core/deletefiles.cpp
   core/encoding.cpp
@@ -263,6 +268,7 @@ set(HEADERS
   core/artloader.h
   core/backgroundstreams.h
   core/backgroundthread.h
+  core/crashreporting.h
   core/database.h
   core/deletefiles.h
   core/globalshortcuts.h
@@ -944,6 +950,10 @@ if(HAVE_REMOTE)
   target_link_libraries(clementine_lib qjson)
   link_directories(${GLOOX_LIBRARY_DIRS})
 endif(HAVE_REMOTE)
+
+if(HAVE_BREAKPAD)
+  target_link_libraries(clementine_lib breakpad)
+endif(HAVE_BREAKPAD)
 
 if (APPLE)
   target_link_libraries(clementine_lib

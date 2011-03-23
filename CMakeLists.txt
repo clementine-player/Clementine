@@ -176,6 +176,7 @@ option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and ra
 option(ENABLE_SCRIPTING_ARCHIVES "Enable support for loading scripts from archives (.clem or .tar.gz files)" OFF)
 option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" OFF)
 option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" OFF)
+option(ENABLE_BREAKPAD "Enable crash reporting" ON)
 
 if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
   set(HAVE_LIBGPOD ON)
@@ -212,6 +213,11 @@ endif(ENABLE_SCRIPTING_PYTHON AND PYTHONLIBS_FOUND AND PYQT_SIP_DIR)
 if(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
   set(HAVE_WIIMOTEDEV ON)
 endif(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
+
+# TODO: Remove the LINUX later
+if(ENABLE_BREAKPAD AND LINUX)
+  set(HAVE_BREAKPAD ON)
+endif(ENABLE_BREAKPAD AND LINUX)
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
@@ -328,6 +334,10 @@ if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
   add_subdirectory(gstafcsrc)
 endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
+if(HAVE_BREAKPAD)
+  add_subdirectory(3rdparty/google-breakpad)
+endif(HAVE_BREAKPAD)
+
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -348,6 +358,7 @@ summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
 summary_add("Wiimote support" HAVE_WIIMOTEDEV)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)
 summary_add("Last.fm support" HAVE_LIBLASTFM)
+summary_add("Crash reporting" HAVE_BREAKPAD)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
 summary_add("(unstable) Scripting support: loading archives" HAVE_LIBARCHIVE)
 summary_add("(unstable) Scripting support: Python" HAVE_SCRIPTING_PYTHON)

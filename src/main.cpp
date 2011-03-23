@@ -26,6 +26,7 @@
 #include "config.h"
 #include "core/artloader.h"
 #include "core/commandlineoptions.h"
+#include "core/crashreporting.h"
 #include "core/database.h"
 #include "core/encoding.h"
 #include "core/mac_startup.h"
@@ -129,6 +130,12 @@ void GLog(const gchar* domain,
 }
 
 int main(int argc, char *argv[]) {
+  if (CrashReporting::SendCrashReport(argc, argv)) {
+    return 0;
+  }
+
+  CrashReporting crash_reporting;
+
 #ifdef Q_OS_DARWIN
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
@@ -218,6 +225,7 @@ int main(int argc, char *argv[]) {
     // This MUST be done before parsing the commandline options so QTextCodec
     // gets the right system locale for filenames.
     QtSingleCoreApplication a(argc, argv);
+    crash_reporting.SetApplicationPath(a.applicationFilePath());
 
     // Parse commandline options - need to do this before starting the
     // full QApplication so it works without an X server
