@@ -3,6 +3,7 @@
 #include <QMutexLocker>
 #include <QSettings>
 #include <QStringList>
+#include <QtDebug>
 
 #include <stdlib.h>
 
