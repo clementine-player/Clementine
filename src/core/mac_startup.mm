@@ -68,6 +68,22 @@
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
+static bool BreakpadCallback(int, int, mach_port_t, void*) {
+  return true;
+}
+
+static BreakpadRef InitBreakpad() {
+  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+  BreakpadRef breakpad = nil;
+  NSDictionary* plist = [[NSBundle mainBundle] infoDictionary];
+  if (plist) {
+    breakpad = BreakpadCreate(plist);
+    BreakpadSetFilterCallback(breakpad, &BreakpadCallback, NULL);
+  }
+  [pool release];
+  return breakpad;
+}
+
 @implementation AppDelegate
 
 - (id) init {
@@ -80,6 +96,7 @@
 
 - (id) initWithHandler: (PlatformInterface*)handler {
   application_handler_ = handler;
+  breakpad_ = InitBreakpad();
   return self;
 }
 
@@ -107,6 +124,11 @@
 
   return NO;
 }
+
+- (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*) sender {
+  BreakpadRelease(breakpad_);
+  return NSTerminateNow;
+}
 @end
 
 @implementation MacApplication
@@ -114,7 +136,6 @@
 - (id) init {
   if ((self = [super init])) {
     [self SetShortcutHandler:nil];
-    [self SetApplicationHandler:nil];
   }
   return self;
 }

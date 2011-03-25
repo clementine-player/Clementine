@@ -215,9 +215,9 @@ if(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
 endif(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
 
 # TODO: Remove the LINUX later
-if(ENABLE_BREAKPAD AND LINUX)
+if(ENABLE_BREAKPAD)
   set(HAVE_BREAKPAD ON)
-endif(ENABLE_BREAKPAD AND LINUX)
+endif(ENABLE_BREAKPAD)
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link

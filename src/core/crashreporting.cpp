@@ -29,7 +29,7 @@
 #include <QUrl>
 #include <QtDebug>
 
-#ifdef HAVE_BREAKPAD
+#if defined(HAVE_BREAKPAD) and defined(Q_OS_LINUX)
 #  include "client/linux/handler/exception_handler.h"
 #  include "third_party/lss/linux_syscall_support.h"
 #endif
@@ -39,8 +39,7 @@ const char* CrashSender::kUploadURL = "http://crashes.clementine-player.org/getu
 const char* CrashReporting::kSendCrashReportOption = "--send-crash-report";
 char* CrashReporting::sPath = NULL;
 
-
-#ifdef HAVE_BREAKPAD
+#if defined(HAVE_BREAKPAD) and defined(Q_OS_LINUX)
 
 CrashReporting::CrashReporting()
   : handler_(new google_breakpad::ExceptionHandler(

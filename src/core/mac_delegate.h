@@ -1,5 +1,7 @@
 #import <AppKit/NSApplication.h>
 
+#import <Breakpad/Breakpad.h>
+
 #include "config.h"
 
 class PlatformInterface;
@@ -11,6 +13,8 @@ class PlatformInterface;
 #endif
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
+
+  BreakpadRef breakpad_;
 }
 
 - (id) initWithHandler: (PlatformInterface*)handler;
@@ -18,5 +22,7 @@ class PlatformInterface;
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
 - (NSMenu*) applicationDockMenu: (NSApplication*)sender;
 - (void) setDockMenu: (NSMenu*)menu;
+
+- (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*)sender;
 @end
 

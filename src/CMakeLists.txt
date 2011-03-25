@@ -741,6 +741,8 @@ ENDIF(WIN32)
 
 # Mac specific startup stuff
 if(APPLE)
+  include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework)
   list(APPEND SOURCES core/mac_startup.mm)
 endif(APPLE)
 
@@ -952,7 +954,14 @@ if(HAVE_REMOTE)
 endif(HAVE_REMOTE)
 
 if(HAVE_BREAKPAD)
-  target_link_libraries(clementine_lib breakpad)
+  if (LINUX)
+    target_link_libraries(clementine_lib breakpad)
+  elseif (APPLE)
+    add_dependencies(clementine_lib breakpad)
+    target_link_libraries(clementine_lib
+        "-F${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release"
+        "-framework Breakpad")
+  endif (LINUX)
 endif(HAVE_BREAKPAD)
 
 if (APPLE)
@@ -1057,11 +1066,34 @@ if (APPLE)
   install(DIRECTORY "${GROWL}/Versions/Current/Resources"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks/Growl.framework")
 
+  if (HAVE_BREAKPAD)
+    install(DIRECTORY
+        ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
+        DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Frameworks"
+        PATTERN "*.h" EXCLUDE
+        PATTERN "Inspector" PERMISSIONS OWNER_EXECUTE OWNER_READ
+                                        GROUP_EXECUTE GROUP_READ
+                                        WORLD_READ WORLD_EXECUTE
+        PATTERN "crash_report_sender" PERMISSIONS OWNER_EXECUTE OWNER_READ
+                                                  GROUP_EXECUTE GROUP_READ
+                                                  WORLD_READ WORLD_EXECUTE)
+  endif (HAVE_BREAKPAD)
+
   add_custom_command(TARGET clementine
     POST_BUILD
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
   )
+
+  add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/clementine.breakpad
+    COMMAND
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/tools/mac/dump_syms/build/Release/dump_syms
+    -a i386 ${PROJECT_BINARY_DIR}/clementine.app/Contents/MacOS/clementine
+    > ${PROJECT_BINARY_DIR}/clementine.breakpad
+    DEPENDS clementine)
+  add_custom_target(clementine-breakpad
+    DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
+
 
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
