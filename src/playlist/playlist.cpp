@@ -810,7 +810,7 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos, bool play_n
   SongList songs;
 
   foreach(PlaylistItemPtr item, items) {
-    songs << item.get()->Metadata();
+    songs << item->Metadata();
   }
 
   QList<Song> vetoed;
@@ -824,7 +824,7 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos, bool play_n
     QMutableListIterator<PlaylistItemPtr> it(items);
     while (it.hasNext()) {
       PlaylistItemPtr item = it.next();
-      const Song& current = item.get()->Metadata();
+      const Song& current = item->Metadata();
 
       if(vetoed.contains(current)) {
         vetoed.removeOne(current);

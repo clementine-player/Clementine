@@ -71,10 +71,6 @@ class LibraryView : public AutoExpandingTreeView {
   void keyboardSearch(const QString &search);
   void scrollTo(const QModelIndex& index, ScrollHint hint = EnsureVisible);
 
-  // Returns a pretty automatic name for playlist created from the given list of
-  // songs.
-  static QString GetNameForNewPlaylist(const SongList& songs);
-
  public slots:
   void TotalSongCountUpdated(int count);
   void ReloadSettings();

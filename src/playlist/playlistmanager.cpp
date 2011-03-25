@@ -347,3 +347,40 @@ void PlaylistManager::InvalidateDeletedSongs() {
     playlist->InvalidateDeletedSongs();
   }
 }
+
+QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
+  if (songs.isEmpty()) {
+    return tr("Playlist");
+  }
+
+  QSet<QString> artists;
+  QSet<QString> albums;
+
+  foreach(const Song& song, songs) {
+    artists << (song.artist().isEmpty()
+                    ? tr("Unknown")
+                    : song.artist());
+    albums << (song.album().isEmpty()
+                    ? tr("Unknown")
+                    : song.album());
+
+    if(artists.size() > 1) {
+      break;
+    }
+  }
+
+  bool various_artists = artists.size() > 1;
+
+  QString result;
+  if(various_artists) {
+    result = tr("Various artists");
+  } else {
+    result = artists.values().first();
+  }
+
+  if(!various_artists && albums.size() == 1) {
+    result += " - " + albums.toList().first();
+  }
+
+  return result;
+}

@@ -1096,12 +1096,17 @@ void MainWindow::AddToPlaylist(QAction* action) {
     items << playlists_->current()->item_at(row);
   }
 
+  SongList songs;
+  foreach(PlaylistItemPtr item, items) {
+    songs << item->Metadata();
+  }
+
   //we're creating a new playlist
   if (destination == -1) {
     //save the current playlist to reactivate it
     int current_id = playlists_->current_id();
-    //ask for the name    
-    playlists_->New(ui_->playlist->PromptForPlaylistName());
+    //get the name from selection
+    playlists_->New(playlists_->GetNameForNewPlaylist(songs));
     if (playlists_->current()->id() != current_id) {
       //I'm sure the new playlist was created and is selected, so I can just insert items
       playlists_->current()->InsertItems(items);

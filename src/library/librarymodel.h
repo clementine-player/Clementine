@@ -29,6 +29,7 @@
 #include "core/simpletreemodel.h"
 #include "core/song.h"
 #include "engines/engine_fwd.h"
+#include "playlist/playlistmanager.h"
 #include "smartplaylists/generator_fwd.h"
 
 #include <boost/scoped_ptr.hpp>

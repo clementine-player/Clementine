@@ -982,7 +982,7 @@ QMimeData* LibraryModel::mimeData(const QModelIndexList& indexes) const {
   }
 
   data->setUrls(urls);
-  data->name_for_new_playlist_ = LibraryView::GetNameForNewPlaylist(data->songs);
+  data->name_for_new_playlist_ = PlaylistManager::GetNameForNewPlaylist(data->songs);
 
   return data;
 }

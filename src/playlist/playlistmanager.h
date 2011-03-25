@@ -138,6 +138,10 @@ public:
   // Grays out and reloads all deleted songs in all playlists.
   void InvalidateDeletedSongs();
 
+  // Returns a pretty automatic name for playlist created from the given list of
+  // songs.
+  static QString GetNameForNewPlaylist(const SongList& songs);
+
   const QItemSelection& selection(int id) const;
   const QItemSelection& current_selection() const { return selection(current_id()); }
   const QItemSelection& active_selection() const { return selection(active_id()); }
