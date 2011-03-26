@@ -68,6 +68,7 @@
 - (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
+#ifdef HAVE_BREAKPAD
 static bool BreakpadCallback(int, int, mach_port_t, void*) {
   return true;
 }
@@ -83,6 +84,7 @@ static BreakpadRef InitBreakpad() {
   [pool release];
   return breakpad;
 }
+#endif // HAVE_BREAKPAD
 
 @implementation AppDelegate
 
@@ -96,7 +98,11 @@ static BreakpadRef InitBreakpad() {
 
 - (id) initWithHandler: (PlatformInterface*)handler {
   application_handler_ = handler;
+
+#ifdef HAVE_BREAKPAD
   breakpad_ = InitBreakpad();
+#endif
+
   return self;
 }
 
@@ -126,7 +132,9 @@ static BreakpadRef InitBreakpad() {
 }
 
 - (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*) sender {
+#ifdef HAVE_BREAKPAD
   BreakpadRelease(breakpad_);
+#endif
   return NSTerminateNow;
 }
 @end

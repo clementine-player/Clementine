@@ -1,8 +1,11 @@
 #import <AppKit/NSApplication.h>
 
-#import <Breakpad/Breakpad.h>
-
 #include "config.h"
+
+#ifdef HAVE_BREAKPAD
+#import <Breakpad/Breakpad.h>
+#endif
+
 
 class PlatformInterface;
 
@@ -14,7 +17,9 @@ class PlatformInterface;
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
 
+#ifdef HAVE_BREAKPAD
   BreakpadRef breakpad_;
+#endif
 }
 
 - (id) initWithHandler: (PlatformInterface*)handler;
