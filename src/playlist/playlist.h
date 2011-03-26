@@ -121,6 +121,14 @@ class Playlist : public QAbstractListModel {
   static const char* kRowsMimetype;
   static const char* kPlayNowMimetype;
 
+  static const int kInvalidSongPriority;
+  static const QRgb kInvalidSongColor;
+
+  static const int kDynamicHistoryPriority;
+  static const QRgb kDynamicHistoryColor;
+
+  static const char* kSettingsGroup;
+
   static bool CompareItems(int column, Qt::SortOrder order,
                            PlaylistItemPtr a, PlaylistItemPtr b);
 
@@ -174,7 +182,7 @@ class Playlist : public QAbstractListModel {
   void set_column_align_right(int column);
 
   // Scrobbling
-  int scrobble_point() const { return scrobble_point_; }
+  qint64 scrobble_point_nanosec() const { return scrobble_point_; }
   bool has_scrobbled() const { return has_scrobbled_; }
   void set_scrobbled(bool v) { has_scrobbled_ = v; }
 
@@ -187,6 +195,16 @@ class Playlist : public QAbstractListModel {
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
   // Removes items with given indices from the playlist. This operation is not undoable.
   void RemoveItemsWithoutUndo   (const QList<int>& indices);
+
+  // If this playlist contains the current item, this method will apply the "valid" flag on it.
+  // If the "valid" flag is false, the song will be greyed out. Otherwise the grey color will
+  // be undone.
+  // If the song is a local file and it's valid but non existent or invalid but exists, the
+  // song will be reloaded to even out the situation because obviously something has changed.
+  // This returns true if this playlist had current item when the method was invoked.
+  bool ApplyValidityOnCurrentSong(const QUrl& url, bool valid);
+  // Grays out and reloads all deleted songs in this playlist.
+  void InvalidateDeletedSongs();
 
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
@@ -314,7 +332,7 @@ class Playlist : public QAbstractListModel {
 
   bool is_shuffled_;
 
-  int scrobble_point_;
+  qint64 scrobble_point_;
   bool has_scrobbled_;
 
   PlaylistSequence* playlist_sequence_;
@@ -323,9 +341,6 @@ class Playlist : public QAbstractListModel {
   bool ignore_sorting_;
 
   QUndoStack* undo_stack_;
-
-  static const int kDynamicHistoryPriority;
-  static const QRgb kDynamicHistoryColor;
 
   smart_playlists::GeneratorPtr dynamic_playlist_;
   ColumnAlignmentMap column_alignments_;

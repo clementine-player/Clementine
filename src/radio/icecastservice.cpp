@@ -40,7 +40,7 @@ using std::unique;
 #include "ui/iconloader.h"
 
 const char* IcecastService::kServiceName = "Icecast";
-const char* IcecastService::kDirectoryUrl = "http://dir.xiph.org/yp.xml";
+const char* IcecastService::kDirectoryUrl = "http://data.clementine-player.org/icecast-directory";
 const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 
 IcecastService::IcecastService(RadioModel* parent)
@@ -86,12 +86,7 @@ void IcecastService::LazyPopulate(QStandardItem* item) {
 }
 
 void IcecastService::LoadDirectory() {
-  QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
-  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
-                   QNetworkRequest::AlwaysNetwork);
-
-  QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
+  RequestDirectory(QUrl(kDirectoryUrl));
 
   if (!load_directory_task_id_) {
     load_directory_task_id_ = model()->task_manager()->StartTask(
@@ -99,9 +94,25 @@ void IcecastService::LoadDirectory() {
   }
 }
 
+void IcecastService::RequestDirectory(const QUrl& url) {
+  QNetworkRequest req = QNetworkRequest(url);
+  req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                   QNetworkRequest::AlwaysNetwork);
+
+  QNetworkReply* reply = network_->get(req);
+  connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
+}
+
 void IcecastService::DownloadDirectoryFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   Q_ASSERT(reply);
+
+  if (reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
+    // Discard the old reply and follow the redirect
+    reply->deleteLater();
+    RequestDirectory(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+    return;
+  }
 
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);

@@ -29,7 +29,7 @@ SongPlaylistItem::SongPlaylistItem(const QString& type)
 }
 
 SongPlaylistItem::SongPlaylistItem(const Song& song)
-  : PlaylistItem(song.filetype() == Song::Type_Stream ? "Stream" : "File"),
+  : PlaylistItem(song.is_stream() ? "Stream" : "File"),
     song_(song)
 {
 }

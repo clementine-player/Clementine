@@ -43,6 +43,9 @@ class GstEnginePipeline : public QObject {
   GstEnginePipeline(GstEngine* engine);
   ~GstEnginePipeline();
 
+  // Globally unique across all pipelines.
+  int id() const { return id_; }
+
   // Call these setters before Init
   void set_output_device(const QString& sink, const QString& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
@@ -92,11 +95,11 @@ class GstEnginePipeline : public QObject {
   void SetVolumeModifier(qreal mod);
 
  signals:
-  void EndOfStreamReached(bool has_next_track);
-  void MetadataFound(const Engine::SimpleMetaBundle& bundle);
+  void EndOfStreamReached(int pipeline_id, bool has_next_track);
+  void MetadataFound(int pipeline_id, const Engine::SimpleMetaBundle& bundle);
   // This indicates an error, delegated from GStreamer, in the pipeline.
   // The message, domain and error_code are related to GStreamer's GError.
-  void Error(const QString& message, int domain, int error_code);
+  void Error(int pipeline_id, const QString& message, int domain, int error_code);
   void FaderFinished();
 
  protected:
@@ -141,6 +144,14 @@ class GstEnginePipeline : public QObject {
   static GstElementDeleter* sElementDeleter;
 
   GstEngine* engine_;
+
+  // Using == to compare two pipelines is a bad idea, because new ones often
+  // get created in the same address as old ones.  This ID will be unique for
+  // each pipeline.
+  // Threading warning: access to the static ID field isn't protected by a
+  // mutex because all pipeline creation is currently done in the main thread.
+  static int sId;
+  int id_;
 
   // General settings for the pipeline
   bool valid_;
@@ -187,9 +198,6 @@ class GstEnginePipeline : public QObject {
   // Set temporarily when switching out the decode bin, so metadata doesn't
   // get sent while the Player still thinks it's playing the last song
   bool ignore_tags_;
-
-  // Set after the first error to ignore any others that arrive.
-  bool ignore_errors_;
 
   // When the gstreamer source requests a redirect we store the URL here and
   // callers can pick it up after the state change to PLAYING fails.

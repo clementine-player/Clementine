@@ -116,18 +116,23 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
   // Background colors.
   void SetBackgroundColor(short priority, const QColor& color);
+  bool HasBackgroundColor(short priority) const;
   void RemoveBackgroundColor(short priority);
   QColor GetCurrentBackgroundColor() const;
   bool HasCurrentBackgroundColor() const;
 
   // Foreground colors.
   void SetForegroundColor(short priority, const QColor& color);
+  bool HasForegroundColor(short priority) const;
   void RemoveForegroundColor(short priority);
   QColor GetCurrentForegroundColor() const;
   bool HasCurrentForegroundColor() const;
 
   // Convenience function to find out whether this item is from the local
   // library, as opposed to a device, a file on disk, or a stream.
+  // Remember that even if this returns true, the library item might be
+  // invalid so you might want to check that it's id is not equal to -1
+  // before actually using it.
   virtual bool IsLocalLibraryItem() const { return false; }
 
  protected:

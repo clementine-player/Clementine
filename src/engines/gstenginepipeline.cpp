@@ -32,12 +32,14 @@ const int GstEnginePipeline::kEqBandCount = 10;
 const int GstEnginePipeline::kEqBandFrequencies[] = {
   60, 170, 310, 600, 1000, 3000, 6000, 12000, 14000, 16000};
 
+int GstEnginePipeline::sId = 1;
 GstElementDeleter* GstEnginePipeline::sElementDeleter = NULL;
 
 
 GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
   : QObject(NULL),
     engine_(engine),
+    id_(sId++),
     valid_(false),
     sink_(GstEngine::kAutoSink),
     segment_start_(0),
@@ -54,7 +56,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     next_end_offset_nanosec_(-1),
     ignore_next_seek_(false),
     ignore_tags_(false),
-    ignore_errors_(false),
     pipeline_is_initialised_(false),
     pipeline_is_connected_(false),
     pending_seek_nanosec_(-1),
@@ -109,7 +110,6 @@ bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
     // deletion in the main thread
   }
 
-  ignore_errors_ = false;
   uridecodebin_ = new_bin;
   segment_start_ = 0;
   segment_start_received_ = false;
@@ -141,7 +141,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
     g_error_free(error);
 
     qWarning() << message;
-    emit Error(message, domain, code);
+    emit Error(id(), message, domain, code);
 
     return NULL;
   } else {
@@ -302,7 +302,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
-      emit instance->EndOfStreamReached(false);
+      emit instance->EndOfStreamReached(instance->id(), false);
       break;
 
     case GST_MESSAGE_TAG:
@@ -310,10 +310,7 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       break;
 
     case GST_MESSAGE_ERROR:
-      if (!instance->ignore_errors_) {
-        instance->ignore_errors_ = true;
-        QtConcurrent::run(instance, &GstEnginePipeline::ErrorMessageReceived, msg);
-      }
+      instance->ErrorMessageReceived(msg);
       break;
 
     case GST_MESSAGE_ELEMENT:
@@ -365,7 +362,7 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
   }
 
   qDebug() << debugstr;
-  emit Error(message, domain, code);
+  emit Error(id(), message, domain, code);
 }
 
 void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
@@ -385,7 +382,7 @@ void GstEnginePipeline::TagMessageReceived(GstMessage* msg) {
 
   if (!bundle.title.isEmpty() || !bundle.artist.isEmpty() ||
       !bundle.comment.isEmpty() || !bundle.album.isEmpty())
-    emit MetadataFound(bundle);
+    emit MetadataFound(id(), bundle);
 }
 
 QString GstEnginePipeline::ParseTag(GstTagList* list, const char* tag) const {
@@ -453,7 +450,7 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
 
   foreach (BufferConsumer* consumer, consumers) {
     gst_buffer_ref(buf);
-    consumer->ConsumeBuffer(buf, instance);
+    consumer->ConsumeBuffer(buf, instance->id());
   }
 
   // Calculate the end time of this buffer so we can stop playback if it's
@@ -478,14 +475,14 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
           // we're already there so ignore it.
           instance->ignore_next_seek_ = true;
 
-          emit instance->EndOfStreamReached(true);
+          emit instance->EndOfStreamReached(instance->id(), true);
         } else {
           // We have a next song but we can't cheat, so move to it normally.
           instance->TransitionToNext();
         }
       } else {
         // There's no next song
-        emit instance->EndOfStreamReached(false);
+        emit instance->EndOfStreamReached(instance->id(), false);
       }
     }
   }
@@ -531,7 +528,7 @@ void GstEnginePipeline::TransitionToNext() {
   next_end_offset_nanosec_ = 0;
 
   // This just tells the UI that we've moved on to the next song
-  emit EndOfStreamReached(true);
+  emit EndOfStreamReached(id(), true);
 
   // This has to happen *after* the gst_element_set_state on the new bin to
   // fix an occasional race condition deadlock.

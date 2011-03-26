@@ -20,8 +20,10 @@
 #include "core/song.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
+#ifdef HAVE_LIBLASTFM
 #include "radio/fixlastfm.h"
 #include <lastfm/Track>
+#endif
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

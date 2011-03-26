@@ -41,6 +41,7 @@ binary-arch: install
 	dh_testroot
 	dh_installchangelogs 
 	dh_installmenu
+	dh_installdocs
 	dh_link
 	dh_strip
 	dh_compress

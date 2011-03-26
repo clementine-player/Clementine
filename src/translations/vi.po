@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-03-15 09:42+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-16 05:03+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: vi\n"
 
 msgid " ms"
 msgstr " mili giây"
@@ -82,15 +82,15 @@ msgstr "%1 track"
 msgid "%1: Wiimotedev module"
 msgstr "%1: mô-đun Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -239,6 +239,9 @@ msgstr "Thêm điều kiện tìm kiếm"
 
 msgid "Add stream..."
 msgstr "Thêm luồng..."
+
+msgid "Add to another playlist"
+msgstr ""
 
 msgid "Add to playlist"
 msgstr "Thêm vào danh sách"
@@ -1161,6 +1164,9 @@ msgstr "Tên người dùng Google"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Đã tải %1 ảnh bìa trong số %2 (thất bại %3)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Nhóm Thư viện theo..."
@@ -2811,7 +2817,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -2870,7 +2876,7 @@ msgstr "on"
 msgid "options"
 msgstr "options"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 

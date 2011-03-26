@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-03-13 23:10+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:13+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: \n"
 "X-Language: es_ES\n"
 
 msgid " ms"
@@ -83,15 +83,15 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -244,6 +244,9 @@ msgstr "Añadir término de búsqueda"
 
 msgid "Add stream..."
 msgstr "Añadir flujo..."
+
+msgid "Add to another playlist"
+msgstr ""
 
 msgid "Add to playlist"
 msgstr "Añadir a la lista de reproducción"
@@ -649,8 +652,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
-"todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
+"instalados todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -1175,6 +1178,9 @@ msgstr "Nombre de usuario de Google"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Se obtuvieron %1 portadas de %2 (%3 fallaron)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Agrupar Colección por..."
@@ -2840,7 +2846,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Cero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -2899,7 +2905,7 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 

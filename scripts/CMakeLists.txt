@@ -8,3 +8,4 @@ endfunction(install_script_files)
 
 add_subdirectory(digitallyimported-radio)
 add_subdirectory(remove-duplicates)
+add_subdirectory(invalidate-deleted)

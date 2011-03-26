@@ -205,6 +205,7 @@ class Song {
   uint ctime() const { return d->ctime_; }
   int filesize() const { return d->filesize_; }
   FileType filetype() const { return d->filetype_; }
+  bool is_stream() const { return d->filetype_ == Type_Stream; }
 
   const QString& art_automatic() const { return d->art_automatic_; }
   const QString& art_manual() const { return d->art_manual_; }

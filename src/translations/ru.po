@@ -10,12 +10,12 @@ msgstr ""
 "PO-Revision-Date: 2011-03-09 09:33+0000\n"
 "Last-Translator: Pavel Maleev <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-15 05:12+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: ru\n"
 
 msgid " ms"
 msgstr " мс"
@@ -81,15 +81,15 @@ msgstr "%1 композиций"
 msgid "%1: Wiimotedev module"
 msgstr "%1: модуль Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -238,6 +238,9 @@ msgstr "Добавить условие поиска"
 
 msgid "Add stream..."
 msgstr "Добавить поток..."
+
+msgid "Add to another playlist"
+msgstr ""
 
 msgid "Add to playlist"
 msgstr "Добавить в плейлист"
@@ -1159,6 +1162,9 @@ msgstr "Имя пользователя Google"
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Получено %1 обложек из %2 (%3 загрузить не удалось)"
+
+msgid "Grey out non existent songs in my playlists"
+msgstr ""
 
 msgid "Group Library by..."
 msgstr "Сортировать коллекцию по..."
@@ -2808,7 +2814,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "По-умолчанию"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -2867,7 +2873,7 @@ msgstr "на"
 msgid "options"
 msgstr "настройки"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 

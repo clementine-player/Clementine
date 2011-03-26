@@ -24,7 +24,6 @@
 #include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
-#include "core/boundfuturewatcher.h"
 #include "core/utilities.h"
 
 #ifdef HAVE_IMOBILEDEVICE
@@ -170,97 +169,6 @@ void GstEngine::ReloadSettings() {
 }
 
 
-bool GstEngine::CanDecode(const QUrl &url) {
-  EnsureInitialised();
-
-  // We had some bug reports claiming that video files cause crashes in canDecode(),
-  // so don't try to decode them
-  if ( url.path().toLower().endsWith( ".mov" ) ||
-       url.path().toLower().endsWith( ".avi" ) ||
-       url.path().toLower().endsWith( ".wmv" ) )
-    return false;
-
-  can_decode_success_ = false;
-  can_decode_last_ = false;
-
-  // Create the pipeline
-  shared_ptr<GstElement> pipeline(gst_pipeline_new("pipeline"),
-                                  boost::bind(gst_object_unref, _1));
-  if (!pipeline) return false;
-  GstElement* src = CreateElement("giosrc", pipeline.get());    if (!src) return false;
-  GstElement* bin = CreateElement("decodebin2", pipeline.get()); if (!bin) return false;
-
-  gst_element_link(src, bin);
-  g_signal_connect(G_OBJECT(bin), "new-decoded-pad", G_CALLBACK(CanDecodeNewPadCallback), this);
-  g_signal_connect(G_OBJECT(bin), "no-more-pads", G_CALLBACK(CanDecodeLastCallback), this);
-
-  // These handlers just print out errors to stderr
-  gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline.get())), CanDecodeBusCallbackSync, 0);
-  gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline.get())), CanDecodeBusCallback, 0);
-
-  // Set the file we're testing
-  g_object_set(G_OBJECT(src), "location", url.toEncoded().constData(), NULL);
-
-  // Start the pipeline playing
-  gst_element_set_state(pipeline.get(), GST_STATE_PLAYING);
-
-  // Wait until found audio stream
-  int count = 0;
-  while (!can_decode_success_ && !can_decode_last_ && count < 100) {
-    count++;
-    usleep(1000);
-  }
-
-  // Stop playing
-  gst_element_set_state(pipeline.get(), GST_STATE_NULL);
-
-  return can_decode_success_;
-}
-
-
-
-void GstEngine::CanDecodeNewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer self) {
-  GstEngine* instance = reinterpret_cast<GstEngine*>(self);
-
-  GstCaps* caps = gst_pad_get_caps(pad);
-  if (gst_caps_get_size(caps) > 0) {
-    GstStructure* str = gst_caps_get_structure(caps, 0);
-    if (g_strrstr(gst_structure_get_name( str ), "audio" ))
-      instance->can_decode_success_ = true;
-  }
-  gst_caps_unref(caps);
-}
-
-void GstEngine::CanDecodeLastCallback(GstElement*, gpointer self) {
-  GstEngine* instance = reinterpret_cast<GstEngine*>(self);
-  instance->can_decode_last_ = true;
-}
-
-void GstEngine::PrintGstError(GstMessage *msg) {
-  GError* error;
-  gchar* debugs;
-
-  gst_message_parse_error(msg, &error, &debugs);
-  qDebug() << error->message;
-  qDebug() << debugs;
-
-  g_error_free(error);
-  free(debugs);
-}
-
-GstBusSyncReply GstEngine::CanDecodeBusCallbackSync(GstBus*, GstMessage* msg, gpointer) {
-  if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
-    PrintGstError(msg);
-  return GST_BUS_PASS;
-}
-
-gboolean GstEngine::CanDecodeBusCallback(GstBus*, GstMessage* msg, gpointer) {
-  if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
-    PrintGstError(msg);
-  return GST_BUS_DROP;
-}
-
-
 qint64 GstEngine::position_nanosec() const {
   if (!current_pipeline_)
     return 0;
@@ -290,18 +198,18 @@ Engine::State GstEngine::state() const {
   }
 }
 
-void GstEngine::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline* pipeline) {
+void GstEngine::ConsumeBuffer(GstBuffer* buffer, int pipeline_id) {
   // Schedule this to run in the GUI thread.  The buffer gets added to the
   // queue and unreffed by UpdateScope.
   if (!QMetaObject::invokeMethod(this, "AddBufferToScope",
                                  Q_ARG(GstBuffer*, buffer),
-                                 Q_ARG(GstEnginePipeline*, pipeline))) {
+                                 Q_ARG(int, pipeline_id))) {
     qWarning() << "Failed to invoke AddBufferToScope on GstEngine";
   }
 }
 
-void GstEngine::AddBufferToScope(GstBuffer* buf, GstEnginePipeline* pipeline) {
-  if (current_pipeline_.get() != pipeline) {
+void GstEngine::AddBufferToScope(GstBuffer* buf, int pipeline_id) {
+  if (!current_pipeline_ || current_pipeline_->id() != pipeline_id) {
     gst_buffer_unref(buf);
     return;
   }
@@ -431,14 +339,6 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 
   Engine::Base::Load(url, change, beginning_nanosec, end_nanosec);
 
-  // TODO: see if commenting this out will lead to regression on windows
-
-  // Clementine just crashes when asked to load a file that doesn't exist on
-  // Windows, so check for that here.  This is definitely the wrong place for
-  // this "fix"...
-  //if (url.scheme() == "file" && !QFile::exists(url.toLocalFile()))
-  //  return false;
-
   QUrl gst_url = FixupUrl(url);
 
   bool crossfade = current_pipeline_ &&
@@ -493,8 +393,8 @@ bool GstEngine::Play(quint64 offset_nanosec) {
     return false;
 
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
-  BoundFutureWatcher<GstStateChangeReturn, quint64>* watcher =
-      new BoundFutureWatcher<GstStateChangeReturn, quint64>(offset_nanosec, this);
+  PlayFutureWatcher* watcher = new PlayFutureWatcher(
+        PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
@@ -502,14 +402,13 @@ bool GstEngine::Play(quint64 offset_nanosec) {
 }
 
 void GstEngine::PlayDone() {
-  BoundFutureWatcher<GstStateChangeReturn, quint64>* watcher =
-      static_cast<BoundFutureWatcher<GstStateChangeReturn, quint64>*>(sender());
+  PlayFutureWatcher* watcher = static_cast<PlayFutureWatcher*>(sender());
   watcher->deleteLater();
 
   GstStateChangeReturn ret = watcher->result();
-  quint64 offset_nanosec = watcher->data();
+  quint64 offset_nanosec = watcher->data().first;
 
-  if (!current_pipeline_) {
+  if (!current_pipeline_ || watcher->data().second != current_pipeline_->id()) {
     return;
   }
 
@@ -674,7 +573,11 @@ void GstEngine::timerEvent(QTimerEvent* e) {
   }
 }
 
-void GstEngine::HandlePipelineError(const QString& message, int domain, int error_code) {
+void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
+                                    int domain, int error_code) {
+  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
+    return;
+
   qWarning() << "Gstreamer error:" << message;
 
   current_pipeline_.reset();
@@ -696,9 +599,8 @@ void GstEngine::HandlePipelineError(const QString& message, int domain, int erro
   }
 }
 
-void GstEngine::EndOfStreamReached(bool has_next_track) {
-  GstEnginePipeline* pipeline_sender = qobject_cast<GstEnginePipeline*>(sender());
-  if (!pipeline_sender || pipeline_sender != current_pipeline_.get())
+void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
+  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
   if (!has_next_track)
@@ -707,7 +609,10 @@ void GstEngine::EndOfStreamReached(bool has_next_track) {
   emit TrackEnded();
 }
 
-void GstEngine::NewMetaData(const Engine::SimpleMetaBundle& bundle) {
+void GstEngine::NewMetaData(int pipeline_id, const Engine::SimpleMetaBundle& bundle) {
+  if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
+    return;
+
   emit MetaData(bundle);
 }
 
@@ -773,10 +678,10 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
     ret->AddBufferConsumer(consumer);
   }
 
-  connect(ret.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(EndOfStreamReached(bool)));
-  connect(ret.get(), SIGNAL(Error(QString,int,int)), SLOT(HandlePipelineError(QString,int,int)));
-  connect(ret.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)),
-          SLOT(NewMetaData(Engine::SimpleMetaBundle)));
+  connect(ret.get(), SIGNAL(EndOfStreamReached(int, bool)), SLOT(EndOfStreamReached(int, bool)));
+  connect(ret.get(), SIGNAL(Error(int, QString,int,int)), SLOT(HandlePipelineError(int, QString,int,int)));
+  connect(ret.get(), SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)),
+          SLOT(NewMetaData(int, Engine::SimpleMetaBundle)));
   connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
 
   return ret;

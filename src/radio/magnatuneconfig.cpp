@@ -61,9 +61,13 @@ const char* kMagnatuneStreamingValidateUrl = "http://streaming.magnatune.com/";
 void MagnatuneConfig::Validate() {
   ui_->busy->show();
 
-  MagnatuneService::MembershipType type = (MagnatuneService::MembershipType)(ui_->membership->currentIndex());
+  MagnatuneService::MembershipType type =
+      MagnatuneService::MembershipType(ui_->membership->currentIndex());
 
-  QUrl url(type == MagnatuneService::Membership_Streaming ? kMagnatuneStreamingValidateUrl : kMagnatuneDownloadValidateUrl, QUrl::StrictMode);
+  QUrl url(type == MagnatuneService::Membership_Streaming ?
+           kMagnatuneStreamingValidateUrl :
+           kMagnatuneDownloadValidateUrl,
+           QUrl::StrictMode);
 
   url.setUserName(ui_->username->text());
   // NOTE: Magnatune actually only checks the first 8 characters.

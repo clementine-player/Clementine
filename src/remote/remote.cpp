@@ -129,8 +129,7 @@ xrme::State Remote::state() const {
   ret.can_go_next = active->next_row() != -1 ||
                     active->current_item_options() & PlaylistItem::ContainsMultipleTracks;
   ret.can_go_previous = active->previous_row() != -1;
-  ret.can_seek = current_item &&
-                 current_item->Metadata().filetype() != Song::Type_Stream;
+  ret.can_seek = current_item && !current_item->Metadata().is_stream();
 
   switch (state) {
     case Engine::Playing: ret.playback_state = xrme::State::PlaybackState_Playing; break;

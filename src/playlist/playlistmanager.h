@@ -52,6 +52,8 @@ public:
 
   // Returns the collection of playlists managed by this PlaylistManager.
   virtual QList<Playlist*> GetAllPlaylists() const = 0;
+  // Grays out and reloads all deleted songs in all playlists.
+  virtual void InvalidateDeletedSongs() = 0;
 
   virtual const QItemSelection& selection(int id) const = 0;
   virtual const QItemSelection& current_selection() const = 0;
@@ -115,10 +117,6 @@ signals:
   void PlaylistChanged(Playlist* playlist);
   void EditingFinished(const QModelIndex& index);
   void PlayRequested(const QModelIndex& index);
-
-protected:
-  static const int kInvalidSongPriority;
-  static const QRgb kInvalidSongColor;
 };
 
 class PlaylistManager : public PlaylistManagerInterface {
@@ -137,6 +135,8 @@ public:
 
   // Returns the collection of playlists managed by this PlaylistManager.
   QList<Playlist*> GetAllPlaylists() const;
+  // Grays out and reloads all deleted songs in all playlists.
+  void InvalidateDeletedSongs();
 
   const QItemSelection& selection(int id) const;
   const QItemSelection& current_selection() const { return selection(current_id()); }

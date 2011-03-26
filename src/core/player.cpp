@@ -154,7 +154,7 @@ void Player::TrackEnded() {
   }
 
   if (current_item_ && current_item_->IsLocalLibraryItem() &&
-      !playlists_->active()->has_scrobbled()) {
+      current_item_->Metadata().id() != -1 && !playlists_->active()->has_scrobbled()) {
     // The track finished before its scrobble point (30 seconds), so increment
     // the play count now.
     playlists_->library_backend()->IncrementPlayCountAsync(
@@ -175,7 +175,7 @@ void Player::PlayPause() {
     // Stopping seems like a reasonable thing to do (especially on mac where there
     // is no media key for stop).
     if (current_item_->options() & PlaylistItem::PauseDisabled) {
-      engine_->Stop();
+      Stop();
     } else {
       engine_->Pause();
     }

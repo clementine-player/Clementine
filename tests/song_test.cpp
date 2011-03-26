@@ -18,8 +18,10 @@
 #include "config.h"
 #include "core/encoding.h"
 #include "core/song.h"
+#ifdef HAVE_LIBLASTFM
 #include "radio/fixlastfm.h"
 #include <lastfm/Track>
+#endif
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

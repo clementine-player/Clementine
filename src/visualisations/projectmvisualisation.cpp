@@ -161,15 +161,13 @@ void ProjectMVisualisation::SetDuration(int seconds) {
     projectm_->changePresetDuration(duration_);
 }
 
-void ProjectMVisualisation::ConsumeBuffer(GstBuffer *buffer, GstEnginePipeline*) {
-#ifdef HAVE_GSTREAMER
+void ProjectMVisualisation::ConsumeBuffer(GstBuffer* buffer, int) {
   const int samples_per_channel = GST_BUFFER_SIZE(buffer) / sizeof(short) / 2;
   const short* data = reinterpret_cast<short*>(GST_BUFFER_DATA(buffer));
 
   if (projectm_)
     projectm_->pcm()->addPCM16Data(data, samples_per_channel);
   gst_buffer_unref(buffer);
-#endif
 }
 
 void ProjectMVisualisation::SetSelected(const QStringList& paths, bool selected) {

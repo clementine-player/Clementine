@@ -1141,9 +1141,8 @@ TagLib::String QStringToTaglibString(const QString& s) {
 }
 
 bool Song::IsEditable() const {
-  return d->valid_ && !d->filename_.isNull() &&
-         d->filetype_ != Type_Stream && d->filetype_ != Type_Unknown &&
-        !has_cue();
+  return d->valid_ && !d->filename_.isNull() && !is_stream() &&
+         d->filetype_ != Type_Unknown && !has_cue();
 }
 
 bool Song::Save() const {

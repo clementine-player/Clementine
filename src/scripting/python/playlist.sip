@@ -98,7 +98,7 @@ public:
   void set_column_align_right(int column);
 
   // Scrobbling
-  int scrobble_point() const;
+  qint64 scrobble_point_nanosec() const;
   bool has_scrobbled() const;
   void set_scrobbled(bool v);
 
@@ -110,6 +110,9 @@ public:
   // void InsertSmartPlaylist      (smart_playlists::GeneratorPtr gen, int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
   void RemoveItemsWithoutUndo   (const QList<int>& indicesIn);
+
+  // Grays out and reloads all deleted songs in this playlist.
+  void InvalidateDeletedSongs();
 
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);

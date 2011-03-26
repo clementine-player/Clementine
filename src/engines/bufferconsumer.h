@@ -29,7 +29,7 @@ public:
   // This is called in some unspecified GStreamer thread.
   // Ownership of the buffer is transferred to the BufferConsumer and it should
   // gst_buffer_unref it.
-  virtual void ConsumeBuffer(GstBuffer* buffer, GstEnginePipeline* pipeline) = 0;
+  virtual void ConsumeBuffer(GstBuffer* buffer, int pipeline_id) = 0;
 };
 
 #endif // BUFFERCONSUMER_H

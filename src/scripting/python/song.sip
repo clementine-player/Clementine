@@ -69,7 +69,7 @@ marked in any of these ways.
   composer, track, disc, bpm, year, genre, comment, is_compilation, rating,
   playcount, skipcount, lastplayed, score, cue_path, has_cue, beginning_nanosec,
   end_nanosec, length_nanosec, bitrate, samplerate, directory_id, filename,
-  basefilename, mtime, ctime, filesize, filetype, art_automatic, art_manual,
+  basefilename, mtime, ctime, filesize, filetype, is_stream, art_automatic, art_manual,
   has_manually_unset_cover, has_embedded_cover, image, url, IsEditable,
   IsMetadataEqual
 @group Pretty getters: PrettyTitle, PrettyTitleWithArtist, PrettyLength,
@@ -360,6 +360,12 @@ filetype() -> FileType
 The type of media file.
 
 @see: L{TextForFiletype}
+%End
+
+  bool is_stream() const;
+%Docstring
+is_stream() -> bool
+True if this song represents a stream (a remote file) and false otherwise.
 %End
 
   QString art_automatic() const;

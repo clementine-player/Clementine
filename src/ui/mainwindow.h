@@ -183,6 +183,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void CopyFilesToDevice(const QList<QUrl>& urls);
 
   void AddToPlaylist(QMimeData* data);
+  void AddToPlaylist(QAction* action);
 
   void VolumeWheelEvent(int delta);
   void ToggleShowHide();
@@ -317,6 +318,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_delete_;
   QAction* playlist_open_in_browser_;
   QAction* playlist_queue_;
+  QAction* playlist_add_to_another_;
   QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;

@@ -120,7 +120,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>4</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -446,6 +446,29 @@
               </property>
               <property name="checked">
                <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>10</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="b_grey_out_deleted_">
+              <property name="text">
+               <string>Grey out non existent songs in my playlists</string>
               </property>
              </widget>
             </item>

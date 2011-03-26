@@ -177,8 +177,11 @@ Returns true if L{SetTemporaryMetadata()} has been called.
   bool IsLocalLibraryItem() const;
 %Docstring
 IsLocalLibraryItem() -> bool
-Convenience function to check whether this item is from the local library (the
-list of songs appearing in the Library tab).
+Convenience function to check whether this item is from the local
+library, as opposed to a device, a file on disk or a stream.
+Remember that even if this returns true, the library item might be
+invalid so you might want to check that it's id is not equal to -1
+before actually using it.
 %End
 
   void SetBackgroundColor(short priority, const QColor& color);
@@ -199,6 +202,14 @@ Below we list all the currently taken background priorities:
 
 If it makes sense, one functionality (one plugin) can use many background
 priorities at the same time.
+%End
+
+  bool HasBackgroundColor(short priority) const;
+%Docstring
+HasBackgroundColor(priority) -> bool
+Checks if this PlaylistItem has a background color with this priority set.
+It doesn't need to be the current color, it just needs to exist in the colors
+list.
 %End
 
   void RemoveBackgroundColor(short priority);
@@ -231,14 +242,22 @@ If it makes sense, one functionality (one plugin) can use many foreground
 priorities at the same time.
   %End
 
+  bool HasForegroundColor(short priority) const;
+%Docstring
+HasForegroundColor(priority) -> bool
+Checks if this PlaylistItem has a foreground color with this priority set.
+It doesn't need to be the current color, it just needs to exist in the colors
+list.
+%End
+
   void RemoveForegroundColor(short priority);
-  %Docstring
+%Docstring
 RemoveForegroundColor(priority)
 Removes a foreground color with the given priority from this PlaylistItem's
 foreground. If there's no such color, this call will be ignored.
 
 @see: L{SetForegroundColor()}
-  %End
+%End
 
   ~PlaylistItem();
 %MethodCode
