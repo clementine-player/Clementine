@@ -176,7 +176,7 @@ option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and ra
 option(ENABLE_SCRIPTING_ARCHIVES "Enable support for loading scripts from archives (.clem or .tar.gz files)" OFF)
 option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" OFF)
 option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" OFF)
-option(ENABLE_BREAKPAD "Enable crash reporting" ON)
+option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 
 if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
   set(HAVE_LIBGPOD ON)
@@ -214,7 +214,6 @@ if(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
   set(HAVE_WIIMOTEDEV ON)
 endif(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
 
-# TODO: Remove the LINUX later
 if(ENABLE_BREAKPAD)
   set(HAVE_BREAKPAD ON)
 endif(ENABLE_BREAKPAD)
