@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: clementine\n"
 "Report-Msgid-Bugs-To: H. İbrahim Güngör <ibrahim@pardus.org.tr>\n"
-"POT-Creation-Date: 2011-03-14 10:16+0000\n"
-"PO-Revision-Date: 2011-03-16 14:36+0000\n"
+"POT-Creation-Date: 2011-03-25 22:01+0000\n"
+"PO-Revision-Date: 2011-03-23 15:33+0000\n"
 "Last-Translator: Ekrem Kocadere <ekocadere@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-17 05:15+0000\n"
+"X-Launchpad-Export-Date: 2011-03-26 05:46+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
+"Language: tr\n"
 
 msgid " ms"
 msgstr " ms"
@@ -172,7 +172,8 @@ msgstr ""
 "listesidir. Şarkı seçmenin farklı yollarını sunan farklı akıllı şarkı "
 "listesi türleri vardır."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Bir şarkı, eğer bu koşullara uyarsa çalma listesine eklenecektir."
 
 msgid "A-Z"
@@ -1409,8 +1410,8 @@ msgstr "Az beğenilen parçalar"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/dev/dsp\", \"front"
-"\" vs."
+"Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/dev/dsp\", "
+"\"front\" vs."
 
 msgid "Length"
 msgstr "Süre"
@@ -2741,28 +2742,28 @@ msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a "
 "membership removes the messages at the end of each track."
 msgstr ""
-"Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı "
-"dinleyebilirsiniz.  Üyelik alırsanız her şarkının sonunda görünen bu mesajı "
-"kaldırabilirsiniz."
+"Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı dinleyebilirsiniz. "
+" Üyelik alırsanız her şarkının sonunda görünen bu mesajı kaldırabilirsiniz."
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Arkaplan akışlarını diğer müzikler gibi aynı anda dinleyebilirsiniz."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Parçaları ücretsiz olarak skroplayabilirsiniz, fakat sadece <span style=\" "
 "font-weight:600;\">ücretli aboneler</span> Last.fm radyosunu dinleyebilir."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Wii kumandanızı kullanarak Clementine'ı uzaktan kumanda edebilirsiniz.  Daha "
-"fazla bilgi için <a href=\"http://www.clementine-player.org/wiimote"
-"\">Clementine wikideki ilgili sayfayı</a> ziyaret edin.\n"
+"fazla bilgi için <a href=\"http://www.clementine-"
+"player.org/wiimote\">Clementine wikideki ilgili sayfayı</a> ziyaret edin.\n"
 
 msgid "You love this track"
 msgstr "Bu şarkıyı seviyorsunuz"
@@ -2892,9 +2893,7 @@ msgstr "durdur"
 msgid "track %1"
 msgstr "parça %1"
 
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Yeni çalma listesi için isim girin"
-
+#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Gizle %1"
 
@@ -2913,6 +2912,7 @@ msgstr "parça %1"
 #~ msgid "Help"
 #~ msgstr "Yardım"
 
+#, qt-format
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Bilinmeyen çalma motoru \"%1\". Seçenekler:"
 
@@ -2938,12 +2938,12 @@ msgstr "parça %1"
 #~ msgstr "Aygıt bağlantısını kes"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
 #~ msgstr ""
 #~ "Görüntüler (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
 #~ "*.tiff)"
 
+#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Last.fm Önerilen Radyo - %1"
 
@@ -2956,6 +2956,7 @@ msgstr "parça %1"
 #~ msgid "[click to edit]"
 #~ msgstr "[düzenlemek için tıklayın]"
 
+#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "last.fm radyo istasyonu yüklenemiyor: %1"
 
@@ -2965,9 +2966,14 @@ msgstr "parça %1"
 #~ msgid "Double-clicking a song clears the playlist first"
 #~ msgstr "Bir şarkıya çift tıklamak önce çalma listesini temizler"
 
+#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "%n parça düzenleniyor"
 
+#~ msgid "Enter a name for the new playlist"
+#~ msgstr "Yeni çalma listesi için isim girin"
+
+#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Last.fm Beğenilen Parçalar - %1"
 
@@ -2983,6 +2989,7 @@ msgstr "parça %1"
 #~ msgid "Searching..."
 #~ msgstr "Aranıyor..."
 
+#, qt-format
 #~ msgid "Searching %1..."
 #~ msgstr "%1 aranıyor..."
 
@@ -3023,8 +3030,8 @@ msgstr "parça %1"
 #~ "Let Last.fm suggest songs from your library that are similar to one you "
 #~ "specify."
 #~ msgstr ""
-#~ "Last.fm'in kütüphanenizden, belirttiğiniz şarkıya benzer şarkılar "
-#~ "önermesine izin verin."
+#~ "Last.fm'in kütüphanenizden, belirttiğiniz şarkıya benzer şarkılar önermesine "
+#~ "izin verin."
 
 #~ msgid "Statistics"
 #~ msgstr "İstatistikler"
@@ -3034,3 +3041,10 @@ msgstr "parça %1"
 
 #~ msgid "Images (*.jpg)"
 #~ msgstr "Resimler (*.jpg)"
+
+#~ msgid ""
+#~ "The version of Clementine you've just updated to requires a full library "
+#~ "rescan because of the new features listed below:<ul>"
+#~ msgstr ""
+#~ "Güncellediğiniz Clementine sürümü, aşağıda listelenen yeni özellikler "
+#~ "nedeniyle kitaplığınızın baştan taranmasını gerektiriyor:<ul>"
