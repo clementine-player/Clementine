@@ -842,6 +842,8 @@ SectionEnd
 
 Section "Start menu items" startmenu
   ; Create Start Menu folders and shortcuts.
+  SetShellVarContext all
+
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\clementine.exe"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
@@ -1607,6 +1609,8 @@ Section "Uninstall"
   RMDir "$INSTDIR"
 
   ; Remove the Shortcuts
+  SetShellVarContext all
+
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk"
   RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
