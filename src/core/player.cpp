@@ -94,6 +94,7 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
       return;
 
     engine_->Play(result.media_url_, stream_change_type_,
+                  item->Metadata().has_cue(),
                   item->Metadata().beginning_nanosec(),
                   item->Metadata().end_nanosec());
 
@@ -269,6 +270,7 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) 
   else {
     loading_async_ = QUrl();
     engine_->Play(current_item_->Url(), change,
+                  current_item_->Metadata().has_cue(),
                   current_item_->Metadata().beginning_nanosec(),
                   current_item_->Metadata().end_nanosec());
 
@@ -446,7 +448,8 @@ void Player::TrackAboutToEnd() {
       break;
     }
   }
-  engine_->StartPreloading(url, next_item->Metadata().beginning_nanosec(),
+  engine_->StartPreloading(url, next_item->Metadata().has_cue(),
+                           next_item->Metadata().beginning_nanosec(),
                            next_item->Metadata().end_nanosec());
 }
 
