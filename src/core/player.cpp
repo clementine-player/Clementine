@@ -297,6 +297,7 @@ void Player::SeekTo(int seconds) {
   engine_->Seek(nanosec);
 
   // If we seek the track we don't want to submit it to last.fm
+  qDebug() << "Track seeked to" << nanosec << "ns - not scrobbling";
   playlists_->active()->set_scrobbled(true);
 
   emit Seeked(nanosec / 1000);

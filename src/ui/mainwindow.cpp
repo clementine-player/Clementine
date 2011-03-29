@@ -995,6 +995,7 @@ void MainWindow::UpdateTrackPosition() {
 
   // Time to scrobble?
   if (!playlists_->active()->has_scrobbled() && position >= scrobble_point) {
+    qDebug() << "Scrobbling at" << scrobble_point;
 #ifdef HAVE_LIBLASTFM
     radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
 #endif
@@ -1011,6 +1012,8 @@ void MainWindow::UpdateTrackPosition() {
 
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
+    qDebug() << "position" << position << "scrobble point" << scrobble_point
+             << "has_scrobbled" << playlists_->active()->has_scrobbled();
     tray_icon_->SetProgress(double(position) / length * 100);
   }
 }
