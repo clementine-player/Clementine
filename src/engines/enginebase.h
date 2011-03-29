@@ -44,7 +44,7 @@ class Base : public QObject, boost::noncopyable {
 
   virtual bool Init() = 0;
 
-  virtual void StartPreloading(const QUrl&, qint64, qint64) {}
+  virtual void StartPreloading(const QUrl&, bool, qint64, qint64) {}
   virtual bool Play(quint64 offset_nanosec) = 0;
   virtual void Stop() = 0;
   virtual void Pause() = 0;
@@ -62,6 +62,7 @@ class Base : public QObject, boost::noncopyable {
   // Subclasses should respect given markers (beginning and end) which are
   // in miliseconds.
   virtual bool Load(const QUrl& url, TrackChangeFlags change,
+                    bool force_stop_at_end,
                     quint64 beginning_nanosec, qint64 end_nanosec);
   // Sets new values for the beginning and end markers of the currently playing
   // song.
@@ -76,6 +77,7 @@ class Base : public QObject, boost::noncopyable {
   // should be passed in nanoseconds. 'end' can be negative, indicating that the
   // real length of 'u' stream is unknown.
   bool Play(const QUrl& u, TrackChangeFlags c,
+            bool force_stop_at_end,
             quint64 beginning_nanosec, qint64 end_nanosec);
 
   void SetVolume(uint value);

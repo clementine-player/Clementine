@@ -32,6 +32,7 @@ public:
   MOCK_CONST_METHOD0(active, Playlist*());
 
   MOCK_CONST_METHOD0(GetAllPlaylists, QList<Playlist*>());
+  MOCK_METHOD0(InvalidateDeletedSongs, void());
 
   MOCK_CONST_METHOD1(selection, const QItemSelection&(int));
   MOCK_CONST_METHOD0(current_selection, const QItemSelection&());

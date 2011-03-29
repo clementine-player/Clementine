@@ -180,15 +180,16 @@ DBusStatus Mpris1Player::GetStatus() const {
 DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
   DBusStatus status;
   switch (state) {
-    case Engine::Empty:
-    case Engine::Idle:
-      status.play = DBusStatus::Mpris_Stopped;
-      break;
     case Engine::Playing:
       status.play = DBusStatus::Mpris_Playing;
       break;
     case Engine::Paused:
       status.play = DBusStatus::Mpris_Paused;
+      break;
+    case Engine::Empty:
+    case Engine::Idle:
+    default:
+      status.play = DBusStatus::Mpris_Stopped;
       break;
   }
 

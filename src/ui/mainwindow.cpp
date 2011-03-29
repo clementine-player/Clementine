@@ -1533,9 +1533,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     player_->SetVolume(player_->GetVolume() + options.volume_modifier());
 
   if (options.seek_to() != -1)
-    player_->SeekTo(options.seek_to() * kNsecPerSec);
+    player_->SeekTo(options.seek_to());
   else if (options.seek_by() != 0)
-    player_->SeekTo(player_->engine()->position_nanosec() + options.seek_by() * kNsecPerSec);
+    player_->SeekTo(player_->engine()->position_nanosec() / kNsecPerSec + options.seek_by());
 
   if (options.play_track_at() != -1)
     player_->PlayAt(options.play_track_at(), Engine::Manual, true);

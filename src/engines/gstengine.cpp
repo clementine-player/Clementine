@@ -307,8 +307,8 @@ void GstEngine::UpdateScope() {
   }
 }
 
-void GstEngine::StartPreloading(const QUrl& url, qint64 beginning_nanosec,
-                                qint64 end_nanosec) {
+void GstEngine::StartPreloading(const QUrl& url, bool force_stop_at_end,
+                                qint64 beginning_nanosec, qint64 end_nanosec) {
   EnsureInitialised();
 
   QUrl gst_url = FixupUrl(url);
@@ -316,7 +316,8 @@ void GstEngine::StartPreloading(const QUrl& url, qint64 beginning_nanosec,
   // No crossfading, so we can just queue the new URL in the existing
   // pipeline and get gapless playback (hopefully)
   if (current_pipeline_)
-    current_pipeline_->SetNextUrl(gst_url, beginning_nanosec, end_nanosec);
+    current_pipeline_->SetNextUrl(gst_url, beginning_nanosec,
+        force_stop_at_end ? end_nanosec : 0);
 }
 
 QUrl GstEngine::FixupUrl(const QUrl& url) {
@@ -334,10 +335,11 @@ QUrl GstEngine::FixupUrl(const QUrl& url) {
 }
 
 bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
+                     bool force_stop_at_end,
                      quint64 beginning_nanosec, qint64 end_nanosec) {
   EnsureInitialised();
 
-  Engine::Base::Load(url, change, beginning_nanosec, end_nanosec);
+  Engine::Base::Load(url, change, force_stop_at_end, beginning_nanosec, end_nanosec);
 
   QUrl gst_url = FixupUrl(url);
 
@@ -355,7 +357,8 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
     return true;
   }
 
-  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(gst_url, end_nanosec);
+  shared_ptr<GstEnginePipeline> pipeline = CreatePipeline(gst_url,
+      force_stop_at_end ? end_nanosec : 0);
   if (!pipeline)
     return false;
 

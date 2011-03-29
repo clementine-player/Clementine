@@ -203,7 +203,8 @@ class Playlist : public QAbstractListModel {
   // song will be reloaded to even out the situation because obviously something has changed.
   // This returns true if this playlist had current item when the method was invoked.
   bool ApplyValidityOnCurrentSong(const QUrl& url, bool valid);
-  // Grays out and reloads all deleted songs in this playlist.
+  // Grays out and reloads all deleted songs in all playlists. Also, "ungreys" those songs
+  // which were once deleted but now got restored somehow.
   void InvalidateDeletedSongs();
 
   void StopAfter(int row);

@@ -62,6 +62,8 @@ VisualisationContainer::VisualisationContainer(QWidget *parent)
 
   QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
+
+  setMinimumSize(64, 64);
 }
 
 void VisualisationContainer::Init() {

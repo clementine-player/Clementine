@@ -243,13 +243,10 @@ void GioLister::MountAdded(GMount* mount) {
   {
     QMutexLocker l(&mutex_);
 
-    const DeviceInfo* old_info = NULL;
-
     // The volume might already exist - either mounted or unmounted.
     foreach (const QString& id, devices_.keys()) {
       if (devices_[id].volume == info.volume) {
         old_id = id;
-        old_info = &devices_[id];
         break;
       }
     }
@@ -260,7 +257,6 @@ void GioLister::MountAdded(GMount* mount) {
       devices_.remove(old_id);
       emit DeviceRemoved(old_id);
 
-      old_info = NULL;
       old_id = QString();
     }
     devices_[info.unique_id()] = info;
