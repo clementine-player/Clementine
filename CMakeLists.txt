@@ -308,6 +308,18 @@ if(NOT ECHONEST_INCLUDE_DIRS OR NOT ECHONEST_LIBRARIES)
   set(ECHONEST_LIBRARIES echonest)
 endif(NOT ECHONEST_INCLUDE_DIRS OR NOT ECHONEST_LIBRARIES)
 
+# Use system gmock if it's available
+# We need to look for both gmock and gtest
+find_path(GMOCK_INCLUDE_DIRS gmock/gmock.h)
+find_library(GMOCK_LIBRARIES gmock)
+if(GMOCK_INCLUDE_DIRS)
+  find_path(GTEST_INCLUDE_DIRS gtest/gtest.h)
+  find_library(GTEST_LIBRARIES gtest)
+  if(GTEST_INCLUDE_DIRS)
+    set(USE_SYSTEM_GMOCK 1)
+    set(GMOCK_LIBRARIES ${GMOCK_LIBRARIES} ${GTEST_LIBRARIES})
+  endif(GTEST_INCLUDE_DIRS)
+endif(GMOCK_INCLUDE_DIRS)
 
 # Subdirectories
 add_subdirectory(src)
