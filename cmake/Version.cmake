@@ -2,22 +2,30 @@
 
 # Version numbers.
 set(CLEMENTINE_VERSION_MAJOR 0)
-set(CLEMENTINE_VERSION_MINOR 6)
+set(CLEMENTINE_VERSION_MINOR 7)
+#set(CLEMENTINE_VERSION_PATCH 0)
 #set(CLEMENTINE_VERSION_PRERELEASE rc1)
 
 # This should be set to OFF in an svn tag
 set(INCLUDE_SVN_REVISION ON)
 
 # The format for version numbers is:
-# Display: $major.$minor [$prerelease] [$svn]
-# Deb:     $major.$minor[~$prerelease][.$svn]
-# Rpm:     $major.$minor[$prerelease][.$svn]
+# Display: $major.$minor[.$patch] [$prerelease] [r$svn]
+# Deb:     $major.$minor[.$patch][~$prerelease][.r$svn]
+# Rpm:     $major.$minor[.$patch][$prerelease][.r$svn]
 # And the rpm version is used for mac and windows
 
 
 set(CLEMENTINE_VERSION_DISPLAY "${CLEMENTINE_VERSION_MAJOR}.${CLEMENTINE_VERSION_MINOR}")
 set(CLEMENTINE_VERSION_DEB "${CLEMENTINE_VERSION_MAJOR}.${CLEMENTINE_VERSION_MINOR}")
 set(CLEMENTINE_VERSION_RPM "${CLEMENTINE_VERSION_MAJOR}.${CLEMENTINE_VERSION_MINOR}")
+
+# Add patch
+if(CLEMENTINE_VERSION_PATCH)
+  set(CLEMENTINE_VERSION_DISPLAY "${CLEMENTINE_VERSION_DISPLAY}.${CLEMENTINE_VERSION_PATCH}")
+  set(CLEMENTINE_VERSION_DEB "${CLEMENTINE_VERSION_DEB}.${CLEMENTINE_VERSION_PATCH}")
+  set(CLEMENTINE_VERSION_RPM "${CLEMENTINE_VERSION_RPM}.${CLEMENTINE_VERSION_PATCH}")
+endif(CLEMENTINE_VERSION_PATCH)
 
 # Add prerelease
 if(CLEMENTINE_VERSION_PRERELEASE)
