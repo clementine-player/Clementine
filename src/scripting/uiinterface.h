@@ -45,7 +45,7 @@ private slots:
 
 private:
   struct Location {
-    Location() {}
+    Location() : menu_(NULL), before_(NULL) {}
     Location(QMenu* menu, QAction* before) : menu_(menu), before_(before) {}
 
     QMenu* menu_;
