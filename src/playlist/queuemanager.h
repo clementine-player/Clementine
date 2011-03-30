@@ -42,6 +42,7 @@ private slots:
 
   void MoveUp();
   void MoveDown();
+  void Remove();
   void Clear();
 
 private:

@@ -38,11 +38,16 @@ QueueManager::QueueManager(QWidget *parent)
   // Set icons on buttons
   ui_->move_down->setIcon(IconLoader::Load("go-down"));
   ui_->move_up->setIcon(IconLoader::Load("go-up"));
+  ui_->remove->setIcon(IconLoader::Load("edit-delete"));
   ui_->clear->setIcon(IconLoader::Load("edit-clear-list"));
+
+  //Set a standard shortcut
+  ui_->remove->setShortcut(QKeySequence::Delete);
 
   // Button connections
   connect(ui_->move_down, SIGNAL(clicked()), SLOT(MoveDown()));
   connect(ui_->move_up, SIGNAL(clicked()), SLOT(MoveUp()));
+  connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
   connect(ui_->clear, SIGNAL(clicked()), SLOT(Clear()));
 
   QShortcut* close = new QShortcut(QKeySequence::Close, this);
@@ -117,15 +122,28 @@ void QueueManager::Clear() {
   current_playlist_->queue()->Clear();
 }
 
+void QueueManager::Remove() {
+  //collect the rows to be removed
+  QList<int> row_list;
+  foreach (const QModelIndex& index, ui_->list->selectionModel()->selectedRows()) {
+    if (index.isValid())
+      row_list << index.row();
+  }
+
+  current_playlist_->queue()->Remove(row_list);
+}
+
 void QueueManager::UpdateButtonState() {
   const QModelIndex current = ui_->list->selectionModel()->currentIndex();
 
   if (current.isValid()) {
     ui_->move_up->setEnabled(current.row() != 0);
     ui_->move_down->setEnabled(current.row() != current_playlist_->queue()->rowCount()-1);
+    ui_->remove->setEnabled(true);
   } else {
     ui_->move_up->setEnabled(false);
     ui_->move_down->setEnabled(false);
+    ui_->remove->setEnabled(false);
   }
 
   ui_->clear->setEnabled(!current_playlist_->queue()->is_empty());

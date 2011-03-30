@@ -331,3 +331,23 @@ int Queue::TakeNext() {
 QVariant Queue::headerData(int section, Qt::Orientation orientation, int role) const {
   return QVariant();
 }
+
+void Queue::Remove(QList<int>& proxy_rows) {
+  //order the rows
+  qStableSort(proxy_rows);
+
+  //reflects immediately changes in the playlist
+  layoutAboutToBeChanged();
+
+  int removed_rows = 0;
+  foreach (int row, proxy_rows) {
+    //after the first row, the row number needs to be updated
+    const int real_row = row-removed_rows;
+    beginRemoveRows(QModelIndex(), real_row, real_row);
+    source_indexes_.removeAt(real_row);
+    endRemoveRows();
+    removed_rows++;
+  }
+
+  layoutChanged();
+}
