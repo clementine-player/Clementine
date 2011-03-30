@@ -115,6 +115,8 @@ class JamendoService : public RadioService {
   int load_database_task_id_;
 
   int total_song_count_;
+
+  bool accepted_download_;
 };
 
 #endif

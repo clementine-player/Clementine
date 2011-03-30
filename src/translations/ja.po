@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:49+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-03-26 05:45+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
-"Language: \n"
 
 msgid " ms"
 msgstr " ms"
@@ -82,15 +82,15 @@ msgstr "%1 個のトラック"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev モジュール"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 曲失敗しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n が完了しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 曲残っています"
 
@@ -1311,6 +1311,9 @@ msgstr "Jamendo の今月のトップ トラック"
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo の今週のトップ トラック"
 
+msgid "Jamendo database"
+msgstr ""
+
 msgid "Jump to the currently playing track"
 msgstr "現在再生中のトラックへジャンプする"
 
@@ -2466,6 +2469,11 @@ msgstr "これらのフォルダーはライブラリを作成するためにス
 msgid "Third level"
 msgstr "第 3 階層"
 
+msgid ""
+"This action will create a database which could be as big as 150 MB.\n"
+"Do you want to continue anyway?"
+msgstr ""
+
 msgid "This album is not available in the requested format"
 msgstr "このアルバムは要求されたフォーマットでは利用できません"
 
@@ -2801,7 +2809,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 曲追加"
 
@@ -2860,7 +2868,7 @@ msgstr "on"
 msgid "options"
 msgstr "オプション"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 曲削除"
 

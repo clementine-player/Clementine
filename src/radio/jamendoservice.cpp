@@ -20,6 +20,7 @@
 #include <QDesktopServices>
 #include <QFutureWatcher>
 #include <QMenu>
+#include <QMessageBox>
 #include <QNetworkReply>
 #include <QSortFilterProxyModel>
 #include <QtConcurrentRun>
@@ -73,7 +74,8 @@ JamendoService::JamendoService(RadioModel* parent)
       library_model_(NULL),
       library_sort_model_(new QSortFilterProxyModel(this)),
       load_database_task_id_(0),
-      total_song_count_(0) {
+      total_song_count_(0),
+      accepted_download_(false) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(parent->db_thread());
   library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
@@ -89,7 +91,7 @@ JamendoService::JamendoService(RadioModel* parent)
 
   library_model_ = new LibraryModel(library_backend_, parent->task_manager(), this);
   library_model_->set_show_various_artists(false);
-  library_model_->set_show_smart_playlists(true);
+  library_model_->set_show_smart_playlists(false);
   library_model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()
       << GeneratorPtr(new JamendoDynamicPlaylist(tr("Jamendo Top Tracks of the Month"),
@@ -140,9 +142,21 @@ void JamendoService::UpdateTotalSongCount(int count) {
   if (total_song_count_ == 0 && !load_database_task_id_) {
     DownloadDirectory();
   }
+  else {
+    //show smart playlist in song count if the db is loaded
+    library_model_->set_show_smart_playlists(true);
+    accepted_download_ = true; //the user has previously accepted
+  }
 }
 
 void JamendoService::DownloadDirectory() {
+  //don't ask if we're refreshing the database
+  if (total_song_count_ == 0) {
+    if (QMessageBox::question(context_menu_, tr("Jamendo database"), tr("This action will create a database which could be as big as 150 MB.\n"
+                                                                      "Do you want to continue anyway?"), QMessageBox::Ok | QMessageBox::Cancel) != QMessageBox::Ok)
+      return;
+  }
+  accepted_download_ = true;
   QNetworkRequest req = QNetworkRequest(QUrl(kDirectoryUrl));
   req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                    QNetworkRequest::AlwaysNetwork);
@@ -367,6 +381,8 @@ void JamendoService::ParseDirectoryFinished() {
   QFutureWatcher<void>* watcher = static_cast<QFutureWatcher<void>*>(sender());
   delete watcher;
 
+  //show smart playlists
+  library_model_->set_show_smart_playlists(true);
   library_model_->Reset();
 
   model()->task_manager()->SetTaskFinished(load_database_task_id_);
@@ -387,11 +403,13 @@ void JamendoService::EnsureMenuCreated() {
   context_menu_->addAction(IconLoader::Load("download"), tr("Open jamendo.com in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(DownloadDirectory()));
 
-  library_filter_ = new LibraryFilterWidget(0);
-  library_filter_->SetSettingsGroup(kSettingsGroup);
-  library_filter_->SetLibraryModel(library_model_);
-  library_filter_->SetFilterHint(tr("Search Jamendo"));
-  library_filter_->SetAgeFilterEnabled(false);
+  if (accepted_download_) {
+    library_filter_ = new LibraryFilterWidget(0);
+    library_filter_->SetSettingsGroup(kSettingsGroup);
+    library_filter_->SetLibraryModel(library_model_);
+    library_filter_->SetFilterHint(tr("Search Jamendo"));
+    library_filter_->SetAgeFilterEnabled(false);
+  }
 }
 
 void JamendoService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
@@ -403,11 +421,20 @@ void JamendoService::ShowContextMenu(const QModelIndex& index, const QPoint& glo
     context_item_ = QModelIndex();
   }
 
-  GetAppendToPlaylistAction()->setEnabled(context_item_.isValid());
-  GetReplacePlaylistAction()->setEnabled(context_item_.isValid());
-  GetOpenInNewPlaylistAction()->setEnabled(context_item_.isValid());
-  album_info_->setEnabled(context_item_.isValid());
-  download_album_->setEnabled(context_item_.isValid());
+  const bool enabled = accepted_download_ && context_item_.isValid();
+
+  //make menu items visible and enabled only when needed
+  GetAppendToPlaylistAction()->setVisible(accepted_download_);
+  GetAppendToPlaylistAction()->setEnabled(enabled);
+  GetReplacePlaylistAction()->setVisible(accepted_download_);
+  GetReplacePlaylistAction()->setEnabled(enabled);
+  GetOpenInNewPlaylistAction()->setEnabled(enabled);
+  GetOpenInNewPlaylistAction()->setVisible(accepted_download_);
+  album_info_->setEnabled(enabled);
+  album_info_->setVisible(accepted_download_);
+  download_album_->setEnabled(enabled);
+  download_album_->setVisible(accepted_download_);
+
   context_menu_->popup(global_pos);
 }
 
