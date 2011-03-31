@@ -1,3 +1,16 @@
+Version 0.7.1:
+  Bugfixes:
+    * Fix several compilation errors under GCC 4.6.0.
+    * Fix a regression that broke gapless playback between certain songs.
+    * Fix the behaviour of --seek-by and --seek-to commandline options.
+    * Fix a crash when the visualisation window was resized to 0x0 pixels.
+    * (Linux) Fix the behaviour of the InsertUrls DBUS method.
+    * (Mac OS X) Fix a crash on startup on machines without X11 installed.
+    * (Mac OS X) Fix a bug that would make Clementine try to update to an
+      earlier version.
+
+
+
 Version 0.7:
   Major features:
     * Brand new "Edit track information" dialog.  You can now edit more fields,
