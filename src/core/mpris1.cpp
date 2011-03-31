@@ -279,7 +279,7 @@ void Mpris1Player::ShowOSD() {
 
 int Mpris1TrackList::AddTrack(const QString& track, bool play) {
   player_->playlists()->active()->InsertUrls(
-        QList<QUrl>() << QUrl(track), play);
+        QList<QUrl>() << QUrl(track), -1, play);
   return 0;
 }
 
