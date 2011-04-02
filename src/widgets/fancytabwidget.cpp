@@ -673,6 +673,7 @@ void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons,
   bar->setShape(shape);
   bar->setDocumentMode(true);
   bar->setUsesScrollButtons(true);
+  bar->setElideMode(Qt::ElideRight);
 
   if (shape == QTabBar::RoundedWest) {
     bar->setIconSize(QSize(22, 22));

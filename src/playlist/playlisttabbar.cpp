@@ -94,18 +94,22 @@ void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
 
 void PlaylistTabBar::mouseDoubleClickEvent(QMouseEvent *e) {
   int index = tabAt(e->pos());
-  if (index == -1) {
-    new_->activate(QAction::Trigger);
-  }
-  else {
-    //update current tab
-    menu_index_ = index;
 
-    //set position
-    rename_editor_->setGeometry(tabRect(index));
-    rename_editor_->setText(tabText(index));
-    rename_editor_->setVisible(true);
-    rename_editor_->setFocus();
+  //discard a double click with the middle button
+  if (e->button() != Qt::MiddleButton) {
+    if (index == -1) {
+      new_->activate(QAction::Trigger);
+    }
+    else {
+      //update current tab
+      menu_index_ = index;
+
+      //set position
+      rename_editor_->setGeometry(tabRect(index));
+      rename_editor_->setText(tabText(index));
+      rename_editor_->setVisible(true);
+      rename_editor_->setFocus();
+    }
   }
 
   QTabBar::mouseDoubleClickEvent(e);
