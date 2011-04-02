@@ -96,7 +96,7 @@ void PlaylistTabBar::mouseDoubleClickEvent(QMouseEvent *e) {
   int index = tabAt(e->pos());
 
   //discard a double click with the middle button
-  if (e->button() != Qt::MiddleButton) {
+  if (e->button() != Qt::MidButton) {
     if (index == -1) {
       new_->activate(QAction::Trigger);
     }
