@@ -22,6 +22,7 @@
 #include <QTabBar>
 
 class PlaylistManager;
+class RenameTabLineEdit;
 
 class QMenu;
 
@@ -69,6 +70,8 @@ protected:
 private slots:
   void CurrentIndexChanged(int index);
   void Rename();
+  void RenameInline();
+  void HideEditor();
   void Remove();
   void TabMoved();
   void Save();
@@ -87,6 +90,9 @@ private:
   int drag_hover_tab_;
 
   bool suppress_current_changed_;
+
+  //editor for inline renaming
+  RenameTabLineEdit* rename_editor_;
 };
 
 #endif // PLAYLISTTABBAR_H

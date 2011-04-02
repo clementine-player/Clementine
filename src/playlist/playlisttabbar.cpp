@@ -18,9 +18,11 @@
 #include "playlist.h"
 #include "playlistmanager.h"
 #include "playlisttabbar.h"
+#include "playlistview.h"
 #include "songmimedata.h"
 #include "radio/radiomimedata.h"
 #include "ui/iconloader.h"
+#include "widgets/renametablineedit.h"
 
 #include <QContextMenuEvent>
 #include <QMenu>
@@ -32,14 +34,21 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
     manager_(NULL),
     menu_(new QMenu(this)),
     menu_index_(-1),
-    suppress_current_changed_(false)
+    suppress_current_changed_(false),
+    rename_editor_(new RenameTabLineEdit(this))
 {
   setAcceptDrops(true);
+  setElideMode(Qt::ElideRight);
+  setUsesScrollButtons(false);
 
   remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
   rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist..."), this, SLOT(Rename()));
   save_ = menu_->addAction(IconLoader::Load("document-save"), tr("Save playlist..."), this, SLOT(Save()));
   menu_->addSeparator();
+
+  rename_editor_->setVisible(false);
+  connect(rename_editor_, SIGNAL(editingFinished()), SLOT(RenameInline()));
+  connect(rename_editor_, SIGNAL(EditingCanceled()), SLOT(HideEditor()));
 
   connect(this, SIGNAL(currentChanged(int)), this, SLOT(CurrentIndexChanged(int)));
   connect(this, SIGNAL(tabMoved(int,int)), this, SLOT(TabMoved()));
@@ -58,6 +67,12 @@ void PlaylistTabBar::SetManager(PlaylistManager *manager) {
 }
 
 void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
+  //we need to finish the renaming action before showing context menu
+  if (rename_editor_->isVisible()) {
+    //discard any change
+    HideEditor();
+  }
+
   menu_index_ = tabAt(e->pos());
   rename_->setEnabled(menu_index_ != -1);
   remove_->setEnabled(menu_index_ != -1 && count() > 1);
@@ -82,6 +97,16 @@ void PlaylistTabBar::mouseDoubleClickEvent(QMouseEvent *e) {
   if (index == -1) {
     new_->activate(QAction::Trigger);
   }
+  else {
+    //update current tab
+    menu_index_ = index;
+
+    //set position
+    rename_editor_->setGeometry(tabRect(index));
+    rename_editor_->setText(tabText(index));
+    rename_editor_->setVisible(true);
+    rename_editor_->setFocus();
+  }
 
   QTabBar::mouseDoubleClickEvent(e);
 }
@@ -99,6 +124,19 @@ void PlaylistTabBar::Rename() {
     return;
 
   emit Rename(tabData(menu_index_).toInt(), name);
+}
+
+void PlaylistTabBar::RenameInline() {
+  emit Rename(tabData(menu_index_).toInt(), rename_editor_->text());
+  HideEditor();
+}
+
+void PlaylistTabBar::HideEditor() {
+  //editingFinished() will be called twice due to Qt bug #40, so we reuse the same instance, don't delete it
+  rename_editor_->setVisible(false);
+
+  //hack to give back focus to playlist view
+  manager_->SetCurrentPlaylist(manager_->current()->id());
 }
 
 void PlaylistTabBar::Remove() {
