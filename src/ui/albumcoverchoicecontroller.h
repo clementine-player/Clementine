@@ -24,10 +24,10 @@
 #include <QWidget>
 
 #ifdef HAVE_LIBLASTFM
-  class AlbumCoverFetcher;
   class AlbumCoverSearcher;
 #endif
 
+class AlbumCoverFetcher;
 class CoverFromURLDialog;
 class LibraryBackend;
 class QFileDialog;
@@ -117,8 +117,8 @@ private:
 
 #ifdef HAVE_LIBLASTFM
   AlbumCoverSearcher* cover_searcher_;
-  AlbumCoverFetcher* cover_fetcher_;
 #endif
+  AlbumCoverFetcher* cover_fetcher_;
 
   QFileDialog* save_file_dialog_;
   CoverFromURLDialog* cover_from_url_dialog_;

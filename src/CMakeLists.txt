@@ -92,7 +92,6 @@ set(SOURCES
   covers/coverprovider.cpp
   covers/coverproviders.cpp
   covers/kittenloader.cpp
-  covers/lastfmcoverprovider.cpp
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
@@ -297,7 +296,6 @@ set(HEADERS
   covers/coverprovider.h
   covers/coverproviders.h
   covers/kittenloader.h
-  covers/lastfmcoverprovider.h
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
@@ -557,6 +555,7 @@ endif(ENABLE_VISUALISATIONS)
 # Lastfm
 if(HAVE_LIBLASTFM)
   list(APPEND SOURCES
+    covers/lastfmcoverprovider.cpp
     radio/fixlastfm.cpp
     radio/lastfmconfig.cpp
     radio/lastfmservice.cpp
@@ -570,6 +569,7 @@ if(HAVE_LIBLASTFM)
     ui/albumcoversearcher.cpp
   )
   list(APPEND HEADERS
+    covers/lastfmcoverprovider.h
     radio/lastfmconfig.h
     radio/lastfmservice.h
     radio/lastfmstationdialog.h

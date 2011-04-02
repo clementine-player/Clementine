@@ -17,7 +17,10 @@
 
 #include "coverprovider.h"
 #include "coverproviders.h"
-#include "lastfmcoverprovider.h"
+
+#ifdef HAVE_LIBLASTFM
+# include "lastfmcoverprovider.h"
+#endif
 
 CoverProviders::CoverProviders()
 {
@@ -26,7 +29,9 @@ CoverProviders::CoverProviders()
    // every built-in provider needs an explicit parent; otherwise,
    // the default parent, namely CoverProviders::instance(), will 
    // cause an infinite recursion here
-   cover_providers_.append(new LastFmCoverProvider(this));
+#ifdef HAVE_LIBLASTFM
+  cover_providers_.append(new LastFmCoverProvider(this));
+#endif
 }
 
 void CoverProviders::AddCoverProvider(CoverProvider* provider) {
