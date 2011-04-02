@@ -19,7 +19,7 @@
 #include "albumcoversearcher.h"
 #include "iconloader.h"
 #include "ui_albumcovermanager.h"
-#include "core/albumcoverfetcher.h"
+#include "covers/albumcoverfetcher.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"

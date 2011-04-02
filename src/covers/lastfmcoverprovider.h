@@ -15,20 +15,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mpris.h"
-#include "mpris1.h"
-#include "mpris2.h"
-#include "covers/artloader.h"
+#ifndef LASTFMCOVERPROVIDER_H
+#define LASTFMCOVERPROVIDER_H
 
-namespace mpris {
+#include "albumcoverfetcher.h"
+#include "coverprovider.h"
 
-Mpris::Mpris(Player* player, ArtLoader* art_loader, QObject* parent)
-  : QObject(parent),
-    mpris1_(new mpris::Mpris1(player, art_loader, this)),
-    mpris2_(new mpris::Mpris2(player, art_loader, mpris1_, this))
-{
-  connect(mpris2_, SIGNAL(RaiseMainWindow()), SIGNAL(RaiseMainWindow()));
-  mpris2_->InitLibIndicate();
-}
+#include <QObject>
 
-} // namespace mpris
+class QNetworkReply;
+
+// A built-in cover provider which fetches covers from last.fm.
+class LastFmCoverProvider : public CoverProvider {
+public:
+  LastFmCoverProvider(QObject* parent);
+  virtual ~LastFmCoverProvider() {}
+
+  QNetworkReply* SendRequest(const QString& query);
+  CoverSearchResults ParseReply(QNetworkReply* reply);
+};
+
+#endif // LASTFMCOVERPROVIDER_H

@@ -22,6 +22,7 @@
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "sipAPIclementine.h"
+#include "covers/coverproviders.h"
 #include "library/library.h"
 
 #include <QFile>
@@ -138,6 +139,7 @@ bool PythonEngine::EnsureInitialised() {
     AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
     AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
     AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
+    AddObject(&CoverProviders::instance(), sipType_CoverProviders, "cover_providers");
   }
 
   AddObject(manager()->ui(), sipType_UIInterface, "ui");

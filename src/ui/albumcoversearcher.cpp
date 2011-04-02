@@ -17,8 +17,8 @@
 
 #include "albumcoversearcher.h"
 #include "ui_albumcoversearcher.h"
-#include "core/albumcoverfetcher.h"
-#include "core/albumcoverloader.h"
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
 
 #include <QKeyEvent>
 #include <QListWidgetItem>
@@ -52,7 +52,7 @@ AlbumCoverSearcher::~AlbumCoverSearcher() {
 void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
   fetcher_ = fetcher;
 
-  connect(fetcher_, SIGNAL(SearchFinished(quint64,AlbumCoverFetcher::SearchResults)), SLOT(SearchFinished(quint64,AlbumCoverFetcher::SearchResults)));
+  connect(fetcher_, SIGNAL(SearchFinished(quint64,CoverSearchResults)), SLOT(SearchFinished(quint64,CoverSearchResults)));
 }
 
 QImage AlbumCoverSearcher::Exec(const QString &query) {
@@ -84,7 +84,7 @@ void AlbumCoverSearcher::Search() {
   id_ = fetcher_->SearchForCovers(ui_->query->text());
 }
 
-void AlbumCoverSearcher::SearchFinished(quint64 id, const AlbumCoverFetcher::SearchResults &results) {
+void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& results) {
   if (id != id_)
     return;
 
@@ -95,7 +95,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const AlbumCoverFetcher::Sea
 
   ui_->covers->clear();
   cover_loading_tasks_.clear();
-  foreach (const AlbumCoverFetcher::SearchResult& result, results) {
+  foreach (const CoverSearchResult& result, results) {
     if (result.image_url.isEmpty())
       continue;
 
@@ -103,7 +103,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const AlbumCoverFetcher::Sea
 
     QListWidgetItem* item = new QListWidgetItem(ui_->covers);
     item->setIcon(no_cover_icon_);
-    item->setText(result.artist + " - " + result.album);
+    item->setText(result.description);
     item->setData(Role_ImageURL, result.image_url);
     item->setData(Role_ImageRequestId, id);
     item->setData(Qt::TextAlignmentRole, QVariant(Qt::AlignTop | Qt::AlignHCenter));

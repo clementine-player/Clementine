@@ -18,8 +18,8 @@
 #ifndef ARTLOADER_H
 #define ARTLOADER_H
 
-#include "backgroundthread.h"
-#include "song.h"
+#include "core/backgroundthread.h"
+#include "core/song.h"
 
 #include <QObject>
 

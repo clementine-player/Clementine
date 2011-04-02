@@ -24,7 +24,6 @@
 #endif // Q_OS_WIN32
 
 #include "config.h"
-#include "core/artloader.h"
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
 #include "core/database.h"
@@ -37,6 +36,8 @@
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "covers/artloader.h"
+#include "covers/coverproviders.h"
 #include "engines/enginebase.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
@@ -306,6 +307,10 @@ int main(int argc, char *argv[]) {
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
   RadioModel radio_model(database.get(), &task_manager, NULL);
+
+  // Initialize the repository of cover providers to avoid race conditions
+  // later
+  CoverProviders::instance();
 
   // Get the last.fm service if it's available
   LastFMService* lastfm_service = NULL;

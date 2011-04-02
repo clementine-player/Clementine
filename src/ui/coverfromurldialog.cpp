@@ -17,8 +17,8 @@
 
 #include "coverfromurldialog.h"
 #include "ui_coverfromurldialog.h"
-#include "core/albumcoverloader.h"
 #include "core/network.h"
+#include "covers/albumcoverloader.h"
 
 #include <QImage>
 #include <QMessageBox>

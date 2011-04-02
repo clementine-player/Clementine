@@ -16,8 +16,8 @@
 */
 
 #include "albumcoverloader.h"
-#include "network.h"
-#include "utilities.h"
+#include "core/network.h"
+#include "core/utilities.h"
 
 #include <QPainter>
 #include <QDir>

@@ -17,8 +17,8 @@
 
 #include "fullscreenhypnotoad.h"
 #include "nowplayingwidget.h"
-#include "core/albumcoverloader.h"
-#include "core/kittenloader.h"
+#include "covers/albumcoverloader.h"
+#include "covers/kittenloader.h"
 #include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/iconloader.h"

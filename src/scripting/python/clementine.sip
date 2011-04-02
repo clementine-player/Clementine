@@ -5,6 +5,9 @@
 %Import QtNetwork/QtNetworkmod.sip
 
 %Include autoexpandingtreeview.sip
+%Include albumcoverfetcher.sip
+%Include coverprovider.sip
+%Include coverproviders.sip
 %Include directory.sip
 %Include engine_fwd.sip
 %Include iconloader.sip

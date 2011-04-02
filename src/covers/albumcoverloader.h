@@ -18,8 +18,8 @@
 #ifndef ALBUMCOVERLOADER_H
 #define ALBUMCOVERLOADER_H
 
-#include "backgroundthread.h"
-#include "song.h"
+#include "core/backgroundthread.h"
+#include "core/song.h"
 
 #include <QObject>
 #include <QImage>

@@ -16,7 +16,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/albumcoverloader.h"
+#include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
 #include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcovermanager.h"
@@ -25,7 +26,6 @@
 
 #ifdef HAVE_LIBLASTFM
 # include "ui/albumcoversearcher.h"
-# include "core/albumcoverfetcher.h"
 #endif
 
 #include <QAction>
@@ -52,8 +52,8 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
 #ifdef HAVE_LIBLASTFM
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
-    cover_fetcher_(new AlbumCoverFetcher(this)),
 #endif
+    cover_fetcher_(new AlbumCoverFetcher(this)),
     save_file_dialog_(NULL),
     cover_from_url_dialog_(NULL),
     library_(NULL)

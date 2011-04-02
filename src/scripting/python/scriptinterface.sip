@@ -32,6 +32,8 @@ appropriately.
     const char *name;
     sipTypeDef **type;
   } list[] = {
+    CLASS(CoverProvider),
+    CLASS(CoverProviders),
     CLASS(LibraryBackend),
     CLASS(MergedProxyModel),
     CLASS(NetworkAccessManager),

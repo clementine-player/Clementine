@@ -18,8 +18,8 @@
 #ifndef ALBUMCOVERSEARCHER_H
 #define ALBUMCOVERSEARCHER_H
 
-#include "core/albumcoverfetcher.h"
 #include "core/backgroundthread.h"
+#include "covers/albumcoverfetcher.h"
 
 #include <QDialog>
 #include <QIcon>
@@ -54,7 +54,7 @@ protected:
 
 private slots:
   void Search();
-  void SearchFinished(quint64 id, const AlbumCoverFetcher::SearchResults& results);
+  void SearchFinished(quint64 id, const CoverSearchResults& results);
   void ImageLoaded(quint64 id, const QImage& image);
 
   void CoverDoubleClicked(const QModelIndex& index);

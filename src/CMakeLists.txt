@@ -56,8 +56,6 @@ set(SOURCES
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
 
-  core/albumcoverloader.cpp
-  core/artloader.cpp
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
@@ -71,7 +69,6 @@ set(SOURCES
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
-  core/kittenloader.cpp
   core/mergedproxymodel.cpp
   core/musicstorage.cpp
   core/network.cpp
@@ -87,6 +84,15 @@ set(SOURCES
   core/stylesheetloader.cpp
   core/taskmanager.cpp
   core/utilities.cpp
+
+  covers/albumcoverfetcher.cpp
+  covers/albumcoverfetchersearch.cpp
+  covers/albumcoverloader.cpp
+  covers/artloader.cpp
+  covers/coverprovider.cpp
+  covers/coverproviders.cpp
+  covers/kittenloader.cpp
+  covers/lastfmcoverprovider.cpp
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
@@ -268,8 +274,6 @@ set(HEADERS
   analyzers/sonogram.h
   analyzers/turbine.h
 
-  core/albumcoverloader.h
-  core/artloader.h
   core/backgroundstreams.h
   core/backgroundthread.h
   core/crashreporting.h
@@ -278,7 +282,6 @@ set(HEADERS
   core/globalshortcuts.h
   core/globalshortcutbackend.h
   core/gnomeglobalshortcutbackend.h
-  core/kittenloader.h
   core/mergedproxymodel.h
   core/mimedata.h
   core/network.h
@@ -286,6 +289,15 @@ set(HEADERS
   core/player.h
   core/songloader.h
   core/taskmanager.h
+
+  covers/albumcoverfetcher.h
+  covers/albumcoverfetchersearch.h
+  covers/albumcoverloader.h
+  covers/artloader.h
+  covers/coverprovider.h
+  covers/coverproviders.h
+  covers/kittenloader.h
+  covers/lastfmcoverprovider.h
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
@@ -545,7 +557,6 @@ endif(ENABLE_VISUALISATIONS)
 # Lastfm
 if(HAVE_LIBLASTFM)
   list(APPEND SOURCES
-    core/albumcoverfetcher.cpp
     radio/fixlastfm.cpp
     radio/lastfmconfig.cpp
     radio/lastfmservice.cpp
@@ -559,7 +570,6 @@ if(HAVE_LIBLASTFM)
     ui/albumcoversearcher.cpp
   )
   list(APPEND HEADERS
-    core/albumcoverfetcher.h
     radio/lastfmconfig.h
     radio/lastfmservice.h
     radio/lastfmstationdialog.h
@@ -767,6 +777,7 @@ if(HAVE_SCRIPTING_PYTHON)
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemSpecialLoadResult.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineTaskManagerTask.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100CoverSearchResult.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Directory.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100LibraryBackendAlbum.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp

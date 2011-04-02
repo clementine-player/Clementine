@@ -24,9 +24,9 @@
 
 #include "gtest/gtest_prod.h"
 
-#include "core/albumcoverloader.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
+#include "covers/albumcoverloader.h"
 
 class AlbumCoverChoiceController;
 class AlbumCoverFetcher;

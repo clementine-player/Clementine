@@ -65,10 +65,9 @@
 #include <boost/scoped_ptr.hpp>
 using boost::scoped_ptr;
 
-#include "albumcoverloader.h"
 #include "encoding.h"
 #include "utilities.h"
-
+#include "covers/albumcoverloader.h"
 #include "engines/enginebase.h"
 #include "library/sqlrow.h"
 #include "widgets/trackslider.h"

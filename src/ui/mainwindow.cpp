@@ -17,7 +17,6 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "core/artloader.h"
 #include "core/backgroundstreams.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
@@ -34,6 +33,7 @@
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "covers/artloader.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"

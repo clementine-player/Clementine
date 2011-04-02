@@ -24,9 +24,9 @@
 
 #include "config.h"
 #include "engines/engine_fwd.h"
-#include "core/albumcoverloader.h"
 #include "core/backgroundthread.h"
 #include "core/song.h"
+#include "covers/albumcoverloader.h"
 #include "playlist/playlistsequence.h"
 
 class OrgFreedesktopNotificationsInterface;

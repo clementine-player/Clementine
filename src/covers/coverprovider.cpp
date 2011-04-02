@@ -15,20 +15,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mpris.h"
-#include "mpris1.h"
-#include "mpris2.h"
-#include "covers/artloader.h"
+#include "coverprovider.h"
 
-namespace mpris {
-
-Mpris::Mpris(Player* player, ArtLoader* art_loader, QObject* parent)
+CoverProvider::CoverProvider(const QString& name, QObject* parent)
   : QObject(parent),
-    mpris1_(new mpris::Mpris1(player, art_loader, this)),
-    mpris2_(new mpris::Mpris2(player, art_loader, mpris1_, this))
+    name_(name)
 {
-  connect(mpris2_, SIGNAL(RaiseMainWindow()), SIGNAL(RaiseMainWindow()));
-  mpris2_->InitLibIndicate();
 }
-
-} // namespace mpris

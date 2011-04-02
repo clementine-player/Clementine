@@ -18,34 +18,54 @@
 #ifndef ALBUMCOVERFETCHER_H
 #define ALBUMCOVERFETCHER_H
 
+#include <QHash>
 #include <QImage>
-#include <QMap>
+#include <QList>
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QQueue>
-
-#include <lastfm/Album>
 
 #include <boost/scoped_ptr.hpp>
 
 class QNetworkReply;
 class QString;
 
+class AlbumCoverFetcherSearch;
+
+// This class represents a single search-for-cover request. It identifies
+// and describes the request. 
+struct CoverSearchRequest {
+  // an unique (for one AlbumCoverFetcher) request identifier
+  quint64 id;
+  // a search query
+  QString query;
+  // is this only a search request or should we also fetch the first
+  // cover that's found?
+  bool search;
+};
+
+// This structure represents a single result of some album's cover search request.
+// It contains an URL that leads to a found cover plus it's description (usually
+// the "artist - album" string).
+struct CoverSearchResult {
+  // description of this result (we suggest using the "artist - album" format)
+  QString description;
+  // an URL of a cover image described by this CoverSearchResult
+  QString image_url;
+};
+
+// This is a complete result of a single search request (a list of results, each
+// describing one image, actually).
+typedef QList<CoverSearchResult> CoverSearchResults;
+
 // This class searches for album covers for a given query or artist/album and
-// returns URLs.
+// returns URLs. It's NOT thread-safe.
 class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
   AlbumCoverFetcher(QObject* parent = 0, QNetworkAccessManager* network = 0);
   virtual ~AlbumCoverFetcher() {}
-
-  struct SearchResult {
-    QString artist;
-    QString album;
-    QString image_url;
-  };
-  typedef QList<SearchResult> SearchResults;
 
   static const int kMaxConcurrentRequests;
 
@@ -56,27 +76,21 @@ class AlbumCoverFetcher : public QObject {
 
  signals:
   void AlbumCoverFetched(quint64, const QImage& cover);
-  void SearchFinished(quint64, const AlbumCoverFetcher::SearchResults& results);
+  void SearchFinished(quint64, const CoverSearchResults& results);
 
  private slots:
-  void AlbumSearchFinished();
-  void AlbumCoverFetchFinished();
+  void SingleSearchFinished(quint64, CoverSearchResults results);
+  void SingleCoverFetched(quint64, const QImage& cover);
   void StartRequests();
 
  private:
-  struct QueuedRequest {
-    quint64 id;
-    QString query;
-    bool search;
-  };
-
-  void AddRequest(const QueuedRequest req);
+  void AddRequest(const CoverSearchRequest& req);
 
   QNetworkAccessManager* network_;
   quint64 next_id_;
 
-  QQueue<QueuedRequest> queued_requests_;
-  QMap<QNetworkReply*, QueuedRequest> active_requests_;
+  QQueue<CoverSearchRequest> queued_requests_;
+  QHash<quint64, AlbumCoverFetcherSearch*> active_requests_;
 
   QTimer* request_starter_;
 };

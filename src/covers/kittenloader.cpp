@@ -1,10 +1,9 @@
 #include "kittenloader.h"
+#include "core/network.h"
 
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QXmlStreamReader>
-
-#include "core/network.h"
 
 const char* KittenLoader::kFlickrKittenUrl =
     "http://api.flickr.com/services/rest/"
