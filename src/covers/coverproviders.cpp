@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "coverprovider.h"
 #include "coverproviders.h"
 
@@ -30,7 +31,7 @@ CoverProviders::CoverProviders()
    // the default parent, namely CoverProviders::instance(), will 
    // cause an infinite recursion here
 #ifdef HAVE_LIBLASTFM
-  cover_providers_.append(new LastFmCoverProvider(this));
+   cover_providers_.append(new LastFmCoverProvider(this));
 #endif
 }
 

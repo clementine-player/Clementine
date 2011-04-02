@@ -33,15 +33,19 @@ AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(const CoverSearchRequest& reque
     network_(network)
 {
   // we will terminate the search after kSearchTimeout miliseconds if we are not
-  // able to find any results before that point in time
+  // able to find all of the results before that point in time
   startTimer(kSearchTimeout);
 }
 
 void AlbumCoverFetcherSearch::timerEvent(QTimerEvent* event) {
   Q_UNUSED(event);
+  TerminateSearch();
+}
 
+void AlbumCoverFetcherSearch::TerminateSearch() {
   if(request_.search) {
-    emit SearchFinished(request_.id, CoverSearchResults());
+    // send everything we've managed to find
+    emit SearchFinished(request_.id, results_);
   } else {
     emit AlbumCoverFetched(request_.id, QImage());
   }
@@ -51,11 +55,16 @@ void AlbumCoverFetcherSearch::Start() {
   QList<CoverProvider*> providers_list = CoverProviders::instance().List();
   providers_left_ = providers_list.size();
 
-  foreach(CoverProvider* provider, providers_list) {
-    QNetworkReply* reply = provider->SendRequest(request_.query);
+  // end this search before it even began if there are no providers...
+  if(!providers_left_) {
+    TerminateSearch();
+  } else {
+    foreach(CoverProvider* provider, providers_list) {
+      QNetworkReply* reply = provider->SendRequest(request_.query);
 
-    connect(reply, SIGNAL(finished()), SLOT(ProviderSearchFinished()));
-    providers_.insert(reply, provider);
+      connect(reply, SIGNAL(finished()), SLOT(ProviderSearchFinished()));
+      providers_.insert(reply, provider);
+    }
   }
 }
 

@@ -62,6 +62,9 @@ private slots:
   void ProviderCoverFetchFinished();
 
 private:
+  // Timeouts this search.
+  void TerminateSearch();
+
   // Search request encapsulated by this AlbumCoverFetcherSearch.
   CoverSearchRequest request_;
   // Complete results (from all of the available providers).
