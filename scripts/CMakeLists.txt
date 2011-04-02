@@ -7,5 +7,6 @@ function(install_script_files scriptname)
 endfunction(install_script_files)
 
 add_subdirectory(digitallyimported-radio)
+add_subdirectory(google-covers)
 add_subdirectory(remove-duplicates)
 add_subdirectory(invalidate-deleted)
