@@ -310,7 +310,6 @@ quint64 MacDeviceLister::GetFreeSpace(const QUrl& url) {
   quint64 free_bytes = 0;
   while (storage) {
     free_bytes += storage->FreeSpaceInBytes;
-    qDebug() << "Storage so far:" << free_bytes;
     storage = storage->next;
   }
   return free_bytes;
