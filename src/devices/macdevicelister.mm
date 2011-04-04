@@ -299,24 +299,37 @@ QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
 
 }
 
-int MacDeviceLister::GetFreeSpace(const QUrl& url) {
+quint64 MacDeviceLister::GetFreeSpace(const QUrl& url) {
   QMutexLocker l(&libmtp_mutex_);
   MtpConnection connection(url);
   if (!connection.is_valid()) {
     qWarning() << "Error connecting to MTP device, couldn't get device free space";
     return -1;
   }
-  return connection.device()->storage->FreeSpaceInBytes;
+  LIBMTP_devicestorage_t* storage = connection.device()->storage;
+  quint64 free_bytes = 0;
+  while (storage) {
+    free_bytes += storage->FreeSpaceInBytes;
+    qDebug() << "Storage so far:" << free_bytes;
+    storage = storage->next;
+  }
+  return free_bytes;
 }
 
-int MacDeviceLister::GetCapacity(const QUrl& url) {
+quint64 MacDeviceLister::GetCapacity(const QUrl& url) {
   QMutexLocker l(&libmtp_mutex_);
   MtpConnection connection(url);
   if (!connection.is_valid()) {
     qWarning() << "Error connecting to MTP device, couldn't get device capacity";
     return -1;
   }
-  return connection.device()->storage->MaxCapacity;
+  LIBMTP_devicestorage_t* storage = connection.device()->storage;
+  quint64 capacity_bytes = 0;
+  while (storage) {
+    capacity_bytes += storage->MaxCapacity;
+    storage = storage->next;
+  }
+  return capacity_bytes;
 }
 
 void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {

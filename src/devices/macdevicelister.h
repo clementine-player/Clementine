@@ -40,8 +40,8 @@ class MacDeviceLister : public DeviceLister {
     int bus;
     int address;
 
-    int capacity;
-    int free_space;
+    quint64 capacity;
+    quint64 free_space;
   };
 
  public slots:
@@ -61,8 +61,8 @@ class MacDeviceLister : public DeviceLister {
   void FoundMTPDevice(const MTPDevice& device, const QString& serial);
   void RemovedMTPDevice(const QString& serial);
 
-  int GetFreeSpace(const QUrl& url);
-  int GetCapacity(const QUrl& url);
+  quint64 GetFreeSpace(const QUrl& url);
+  quint64 GetCapacity(const QUrl& url);
 
   DASessionRef loop_session_;
   CFRunLoopRef run_loop_;
