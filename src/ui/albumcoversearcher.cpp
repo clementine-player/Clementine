@@ -81,6 +81,9 @@ void AlbumCoverSearcher::Search() {
   ui_->query->setEnabled(false);
   ui_->covers->setEnabled(false);
 
+  ui_->covers->clear();
+  cover_loading_tasks_.clear();
+
   id_ = fetcher_->SearchForCovers(ui_->query->text());
 }
 
@@ -93,8 +96,6 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
   ui_->covers->setEnabled(true);
   id_ = 0;
 
-  ui_->covers->clear();
-  cover_loading_tasks_.clear();
   foreach (const CoverSearchResult& result, results) {
     if (result.image_url.isEmpty())
       continue;
@@ -127,6 +128,8 @@ void AlbumCoverSearcher::ImageLoaded(quint64 id, const QImage& image) {
 
   QListWidgetItem* item = cover_loading_tasks_.take(id);
   item->setIcon(icon);
+  item->setToolTip(item->text() + " (" + QString::number(image.width()) + "x" +
+                                         QString::number(image.height()) + ")");
 
   if (cover_loading_tasks_.isEmpty())
     ui_->busy->hide();

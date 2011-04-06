@@ -13,9 +13,11 @@ class GoogleImagesCoversScript(clementine.CoverProvider):
 
     self.api_url = 'https://ajax.googleapis.com/ajax/services/search/images?{0}'
     self.api_args = {
-      'v'   : '1.0',
+      'v'     : '1.0',
       # at most five results
-      'rsz' : '5'
+      'rsz'   : '5',
+      # only larger sizes
+      'imgsz' : 'large|xlarge'
     }
     self.network = clementine.NetworkAccessManager(self)    
     self.queries = {}
