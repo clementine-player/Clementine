@@ -130,8 +130,10 @@ void GLog(const gchar* domain,
   qDebug() << "GLOG" << message;
 }
 
+#ifdef HAVE_REMOTE
 #include <xrme/connection.h>
 #include "remote/icesession.h"
+#endif
 
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
@@ -216,7 +218,9 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
 
+#ifdef HAVE_REMOTE
   qRegisterMetaType<xrme::SIPInfo>("SIPInfo");
+#endif
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -253,6 +257,7 @@ int main(int argc, char *argv[]) {
   UniversalEncodingHandler handler;
   TagLib::ID3v1::Tag::setStringHandler(&handler);
 
+#ifdef HAVE_REMOTE
   if (options.stun_test() != CommandlineOptions::StunTestNone) {
     QCoreApplication app(argc, argv);
 
@@ -312,6 +317,7 @@ int main(int argc, char *argv[]) {
 
     return 0;
   }
+#endif
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN
