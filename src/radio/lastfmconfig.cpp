@@ -81,6 +81,7 @@ void LastFMConfig::Load() {
   ui_->username->setText(lastfm::ws::Username);
   ui_->scrobble->setChecked(service_->IsScrobblingEnabled());
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
+  ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
   ui_->sign_out->setEnabled(!lastfm::ws::SessionKey.isEmpty());
 }
 
@@ -89,6 +90,7 @@ void LastFMConfig::Save() {
   s.beginGroup(LastFMService::kSettingsGroup);
   s.setValue("ScrobblingEnabled", ui_->scrobble->isChecked());
   s.setValue("ShowLoveBanButtons", ui_->love_ban_->isChecked());
+  s.setValue("ShowScrobbleButton", ui_->scrobble_button->isChecked());
   s.endGroup();
 
   service_->ReloadSettings();

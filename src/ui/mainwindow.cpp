@@ -299,7 +299,6 @@ MainWindow::MainWindow(
   ui_->action_full_library_scan->setIcon(IconLoader::Load("view-refresh"));
   ui_->action_rain->setIcon(IconLoader::Load("weather-showers-scattered"));
 
-
   // File view connections
   connect(file_view_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(file_view_, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
@@ -319,6 +318,7 @@ MainWindow::MainWindow(
 #ifdef HAVE_LIBLASTFM
   connect(ui_->action_ban, SIGNAL(triggered()), RadioModel::Service<LastFMService>(), SLOT(Ban()));
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
+  connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), RadioModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
 #endif
   connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlists_, SLOT(ClearCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()), SLOT(PlaylistRemoveCurrent()));
@@ -358,9 +358,11 @@ MainWindow::MainWindow(
   ui_->stop_button->setDefaultAction(ui_->action_stop);
   ui_->love_button->setDefaultAction(ui_->action_love);
   ui_->ban_button->setDefaultAction(ui_->action_ban);
+  ui_->scrobbling_button->setDefaultAction(ui_->action_toggle_scrobbling);
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
   ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
                             ui_->action_load_playlist);
+
 
 #ifdef ENABLE_VISUALISATIONS
   connect(ui_->action_visualisations, SIGNAL(triggered()), SLOT(ShowVisualisations()));
@@ -513,17 +515,12 @@ MainWindow::MainWindow(
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(radio_model_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 #ifdef HAVE_LIBLASTFM
-  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(RadioModel::Service<LastFMService>(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
+  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobbleButtonVisibilityChanged(bool)), SLOT(ScrobbleButtonVisibilityChanged(bool)));
+  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
 #endif
   connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
   connect(radio_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
-
-#ifdef HAVE_LIBLASTFM
-  LastFMButtonVisibilityChanged(RadioModel::Service<LastFMService>()->AreButtonsVisible());
-#else
-  LastFMButtonVisibilityChanged(false);
-#endif
 
   // Connections to the saved streams service
   connect(RadioModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()), SLOT(AddStream()));
@@ -598,6 +595,9 @@ MainWindow::MainWindow(
   connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
+#ifdef HAVE_LIBLASTFM
+  connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), radio_model->RadioModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
+#endif
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)), playlists_, SLOT(RateCurrentSong(int)));
 
@@ -664,6 +664,17 @@ MainWindow::MainWindow(
   connect(global_shortcuts_, SIGNAL(CycleRepeatMode()), player_->playlists()->sequence(), SLOT(CycleRepeatMode()));
   connect(player_->playlists()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)), osd_, SLOT(RepeatModeChanged(PlaylistSequence::RepeatMode)));
   connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)), osd_, SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
+
+#ifdef HAVE_LIBLASTFM
+  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobblerStatus(int)), SLOT(ScrobblerStatus(int)));
+
+  LastFMButtonVisibilityChanged(radio_model_->RadioModel::Service<LastFMService>()->AreButtonsVisible());
+  ScrobbleButtonVisibilityChanged(radio_model_->RadioModel::Service<LastFMService>()->IsScrobbleButtonVisible());
+  ScrobblingEnabledChanged(radio_model_->RadioModel::Service<LastFMService>()->IsScrobblingEnabled());
+#else
+  LastFMButtonVisibilityChanged(false);
+  ScrobbleButtonVisibilityChanged(false);
+#endif
 
   // Load settings
   settings_.beginGroup(kSettingsGroup);
@@ -848,13 +859,18 @@ void MainWindow::VolumeChanged(int volume) {
 
 void MainWindow::SongChanged(const Song& song) {
   setWindowTitle(song.PrettyTitleWithArtist());
+
+#ifdef HAVE_LIBLASTFM
+  if (ui_->action_toggle_scrobbling->isVisible())
+    SetToggleScrobblingIcon(RadioModel::Service<LastFMService>()->IsScrobblingEnabled());
+#endif
 }
 
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // If it was a library item then we have to increment its skipped count in
   // the database.
   if (item && item->IsLocalLibraryItem() &&
-      item->Metadata().id() != -1 && !playlists_->active()->has_scrobbled()) {
+      item->Metadata().id() != -1 && playlists_->active()->get_lastfm_status() != Playlist::LastFM_Scrobbled) {
     Song song = item->Metadata();
     const qint64 position = player_->engine()->position_nanosec();
     const qint64 length = player_->engine()->length_nanosec();
@@ -866,8 +882,17 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
 
 #ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobblingEnabledChanged(bool value) {
-  if (!player_->GetState() == Engine::Idle)
+  if (ui_->action_toggle_scrobbling->isVisible())
+    SetToggleScrobblingIcon(value);
+
+  if (!player_->GetState() == Engine::Idle) {
     return;
+  }
+  else {
+    //invalidate current song, we will scrobble the next one
+    if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_New)
+      playlists_->active()->set_lastfm_status(Playlist::LastFM_Skipped);
+  }
 
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   ui_->action_ban->setEnabled(value && is_lastfm);
@@ -879,6 +904,23 @@ void MainWindow::LastFMButtonVisibilityChanged(bool value) {
   ui_->action_ban->setVisible(value);
   ui_->action_love->setVisible(value);
   ui_->last_fm_controls->setVisible(value);
+}
+
+void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
+  ui_->action_toggle_scrobbling->setVisible(value);
+  ui_->scrobbling_button->setVisible(value);
+
+  //when you reshow the buttons
+  if (value) {
+    //check if the song was scrobbled
+    if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_Scrobbled) {
+      ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
+    } else {
+#ifdef HAVE_LIBLASTFM
+      SetToggleScrobblingIcon(radio_model_->RadioModel::Service<LastFMService>()->IsScrobblingEnabled());
+#endif
+    }
+  }
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
@@ -976,6 +1018,10 @@ void MainWindow::Seeked(qlonglong microseconds) {
   const int position = microseconds / kUsecPerSec;
   const int length = player_->GetCurrentItem()->Metadata().length_nanosec() / kNsecPerSec;
   tray_icon_->SetProgress(double(position) / length * 100);
+
+  //if we seeked, scrobbling is canceled, update the icon
+  if (ui_->action_toggle_scrobbling->isVisible())
+    SetToggleScrobblingIcon(true);
 }
 
 void MainWindow::UpdateTrackPosition() {
@@ -992,15 +1038,18 @@ void MainWindow::UpdateTrackPosition() {
     tray_icon_->SetProgress(0);
     return;
   }
+#ifdef HAVE_LIBLASTFM
+  bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() && RadioModel::Service<LastFMService>()->IsScrobblingEnabled() && RadioModel::Service<LastFMService>()->IsAuthenticated();
+#endif
 
   // Time to scrobble?
-  if (!playlists_->active()->has_scrobbled() && position >= scrobble_point) {
-    qDebug() << "Scrobbling at" << scrobble_point;
+  if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_New && position >= scrobble_point) {
 #ifdef HAVE_LIBLASTFM
-    radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
+    if (RadioModel::Service<LastFMService>()->IsScrobblingEnabled()) {
+      qDebug() << "Scrobbling at" << scrobble_point;
+      radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
+    }
 #endif
-    playlists_->active()->set_scrobbled(true);
-
     // Update the play count for the song if it's from the library
     if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       library_->backend()->IncrementPlayCountAsync(item->Metadata().id());
@@ -1013,8 +1062,15 @@ void MainWindow::UpdateTrackPosition() {
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
     qDebug() << "position" << position << "scrobble point" << scrobble_point
-             << "has_scrobbled" << playlists_->active()->has_scrobbled();
+        << "has_scrobbled" << (playlists_->active()->get_lastfm_status() == Playlist::LastFM_Scrobbled);
     tray_icon_->SetProgress(double(position) / length * 100);
+
+    //if we're waiting for the scrobble point, update the icon
+#ifdef HAVE_LIBLASTFM
+    if (position < scrobble_point && playlists_->active()->get_lastfm_status() == Playlist::LastFM_New && last_fm_enabled) {
+      ui_->action_toggle_scrobbling->setIcon(CreateOverlayedIcon(position, scrobble_point));
+    }
+#endif
   }
 }
 
@@ -2020,3 +2076,62 @@ void MainWindow::AutoCompleteTagsAccepted() {
   // This is really lame but we don't know what rows have changed
   ui_->playlist->view()->update();
 }
+
+QPixmap MainWindow::CreateOverlayedIcon(int position, int scrobble_point) {
+  QPixmap normal_icon = QIcon(":/last.fm/as_light.png").pixmap(16);
+  QPixmap light_icon = QIcon(":/last.fm/as.png").pixmap(16);
+  QRect rect(normal_icon.rect());
+
+  //calculates the progress
+  double perc = 1.0 - ((double) position / (double) scrobble_point);
+
+  QPolygon mask;
+  mask << rect.topRight();
+  mask << rect.topLeft();
+  mask << QPoint(rect.left(), rect.height()*perc);
+  mask << QPoint(rect.right(), (rect.height())*perc);
+
+  QPixmap ret(light_icon);
+  QPainter p(&ret);
+
+  // Draw the red icon over the light red one
+  p.setClipRegion(mask);
+  p.drawPixmap(0, 0, normal_icon);
+  p.setClipping(false);
+
+  p.end();
+
+  return ret;
+}
+
+void MainWindow::SetToggleScrobblingIcon(bool value) {
+  if (!value) {
+    ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as_disabled.png"));
+  } else {
+    ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as_light.png"));
+  }
+}
+
+#ifdef HAVE_LIBLASTFM
+void MainWindow::ScrobblerStatus(int value) {
+  bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() && RadioModel::Service<LastFMService>()->IsScrobblingEnabled() && RadioModel::Service<LastFMService>()->IsAuthenticated();
+
+  if (value == -1) {
+    //custom error value got from initial validity check
+    playlists_->active()->set_lastfm_status(Playlist::LastFM_Invalid);
+  }
+  //we should get 3 for a correct scrobbling, but I just get 2 for mysterious reasons
+  //seems to scrobble fine though, so for now we accept it as correct
+  if (value == 2 || value == 3) {
+    playlists_->active()->set_lastfm_status(Playlist::LastFM_Scrobbled);
+    //update the button icon
+    if (last_fm_enabled)
+      ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
+  }
+  if (value > 3) {
+    //we're for sure in an error state
+    playlists_->active()->set_lastfm_status(Playlist::LastFM_Error);
+    qWarning() << "Last.fm scrobbling error: " << value;
+  }
+}
+#endif

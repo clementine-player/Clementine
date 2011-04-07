@@ -29,6 +29,7 @@
 #include <lastfm/Audioscrobbler>
 #include <lastfm/misc.h>
 #include <lastfm/RadioStation>
+#include <lastfm/Scrobble>
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery>
 
@@ -36,6 +37,7 @@
 #include <QSettings>
 
 using boost::scoped_ptr;
+using lastfm::Scrobble;
 using lastfm::XmlQuery;
 
 uint qHash(const lastfm::Track& track) {
@@ -73,6 +75,8 @@ LastFMService::LastFMService(RadioModel* parent)
     neighbours_list_(NULL)
 {
   ReloadSettings();
+  //we emit the signal the first time to be sure the buttons are in the right state
+  emit ScrobblingEnabledChanged(scrobbling_enabled_);
 
   context_menu_->addActions(GetPlaylistActions());
   remove_action_ = context_menu_->addAction(
@@ -97,15 +101,20 @@ LastFMService::~LastFMService() {
 }
 
 void LastFMService::ReloadSettings() {
+  bool scrobbling_enabled_old = scrobbling_enabled_;
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   lastfm::ws::Username = settings.value("Username").toString();
   lastfm::ws::SessionKey = settings.value("Session").toString();
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
+  scrobble_button_visible_ = settings.value("ShowScrobbleButton", true).toBool();
 
-  emit ScrobblingEnabledChanged(scrobbling_enabled_);
+  //avoid emitting signal if it's not changed
+  if(scrobbling_enabled_old != scrobbling_enabled_)
+    emit ScrobblingEnabledChanged(scrobbling_enabled_);
   emit ButtonVisibilityChanged(buttons_visible_);
+  emit ScrobbleButtonVisibilityChanged(scrobble_button_visible_);
 }
 
 void LastFMService::ShowConfig() {
@@ -394,6 +403,7 @@ bool LastFMService::InitScrobbler() {
   if (!scrobbler_)
     scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
 
+  connect(scrobbler_, SIGNAL(status(int)), SLOT(Status(int)));
   return true;
 }
 
@@ -414,6 +424,15 @@ void LastFMService::NowPlaying(const Song &song) {
     return;
 
   last_track_ = TrackFromSong(song);
+
+  //check immediately if the song is valid
+  Scrobble::Invalidity invalidity;
+
+  if (!lastfm::Scrobble(last_track_).isValid( &invalidity )) {
+    //for now just notify this, we can also see the cause
+    emit ScrobblerStatus(-1);
+    return;
+  }
 
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.stamp();
@@ -768,4 +787,22 @@ PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {
   }
 
   return ret;
+}
+
+void LastFMService::ToggleScrobbling() {
+  //toggle status
+  scrobbling_enabled_ = !scrobbling_enabled_;
+
+  //save to the settings
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("ScrobblingEnabled", scrobbling_enabled_);
+  s.endGroup();
+
+  emit ScrobblingEnabledChanged(scrobbling_enabled_);
+}
+
+void LastFMService::Status(int value) {
+  //reemit it since the sender is private
+  emit ScrobblerStatus(value);
 }

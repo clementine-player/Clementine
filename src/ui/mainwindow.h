@@ -191,7 +191,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Seeked(qlonglong microseconds);
   void UpdateTrackPosition();
 
+  //Handle visibility of LastFM icons
   void LastFMButtonVisibilityChanged(bool value);
+  void ScrobbleButtonVisibilityChanged(bool value);
+  void SetToggleScrobblingIcon(bool value);
 #ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);
   void Love();
@@ -219,6 +222,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
 #ifdef HAVE_LIBLASTFM
   void ShowCoverManager();
+  void ScrobblerStatus(int value);
 #endif
   void ShowAboutDialog();
   void ShowTranscodeDialog();
@@ -249,6 +253,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void ApplyPlayBehaviour(PlayBehaviour b, MimeData* data) const;
 
   void CheckFullRescanRevisions();
+
+  //creates the icon by painting the full one depending on the current position
+  QPixmap CreateOverlayedIcon(int position, int scrobble_point);
 
  private:
   Ui_MainWindow* ui_;

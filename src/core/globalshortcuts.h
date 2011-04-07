@@ -71,6 +71,7 @@ signals:
   void RateCurrentSong(int);
   void CycleShuffleMode();
   void CycleRepeatMode();
+  void ToggleScrobbling();
 
 private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

@@ -89,7 +89,7 @@ Playlist::Playlist(PlaylistBackend* backend,
     current_virtual_index_(-1),
     is_shuffled_(false),
     scrobble_point_(-1),
-    has_scrobbled_(false),
+    lastfm_status_(LastFM_New),
     playlist_sequence_(NULL),
     ignore_sorting_(false),
     undo_stack_(new QUndoStack(this))
@@ -1335,7 +1335,7 @@ void Playlist::UpdateScrobblePoint() {
                              240ll * kNsecPerSec);
   }
 
-  has_scrobbled_ = false;
+  set_lastfm_status(LastFM_New);
 }
 
 void Playlist::Clear() {

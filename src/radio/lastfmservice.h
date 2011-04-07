@@ -96,6 +96,7 @@ class LastFMService : public RadioService {
   bool IsAuthenticated() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   bool AreButtonsVisible() const { return buttons_visible_; }
+  bool IsScrobbleButtonVisible() const { return scrobble_button_visible_; }
 
   void Authenticate(const QString& username, const QString& password);
   void SignOut();
@@ -110,11 +111,14 @@ class LastFMService : public RadioService {
   void Love();
   void Ban();
   void ShowConfig();
+  void ToggleScrobbling();
 
  signals:
   void AuthenticationComplete(bool success);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
+  void ScrobbleButtonVisibilityChanged(bool value);
+  void ScrobblerStatus(int value);
 
  protected:
   QModelIndex GetCurrentIndex();
@@ -126,6 +130,8 @@ class LastFMService : public RadioService {
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
+
+  void Status(int value);
 
   void AddArtistRadio();
   void AddTagRadio();
@@ -184,6 +190,7 @@ class LastFMService : public RadioService {
 
   bool scrobbling_enabled_;
   bool buttons_visible_;
+  bool scrobble_button_visible_;
 
   QStandardItem* artist_list_;
   QStandardItem* tag_list_;
