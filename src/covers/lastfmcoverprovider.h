@@ -27,6 +27,7 @@ class QNetworkReply;
 
 // A built-in cover provider which fetches covers from last.fm.
 class LastFmCoverProvider : public CoverProvider {
+  Q_OBJECT
 public:
   LastFmCoverProvider(QObject* parent);
   virtual ~LastFmCoverProvider() {}
