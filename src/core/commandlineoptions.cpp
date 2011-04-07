@@ -61,7 +61,8 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     seek_to_(-1),
     seek_by_(0),
     play_track_at_(-1),
-    show_osd_(false)
+    show_osd_(false),
+    stun_test_(StunTestNone)
 {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -107,6 +108,8 @@ bool CommandlineOptions::Parse() {
 
     {"show-osd",    no_argument,       0, 'o'},
     {"language",    required_argument, 0, 'g'},
+
+    {"stun-test",   required_argument, 0, 'z'},
 
     {0, 0, 0, 0}
   };
@@ -179,6 +182,13 @@ bool CommandlineOptions::Parse() {
         play_track_at_ = QString(optarg).toInt(&ok);
         if (!ok) play_track_at_ = -1;
         break;
+
+      case 'z': {
+        // Stun test
+        QString direction = QString(optarg);
+        stun_test_ = direction == "offer" ? StunTestOffer : StunTestAccept;
+        break;
+      }
 
       case '?':
       default:

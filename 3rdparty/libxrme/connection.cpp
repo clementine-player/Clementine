@@ -47,7 +47,8 @@ struct Connection::Private : public gloox::ConnectionListener,
                              public gloox::LogHandler,
                              public gloox::RosterListener,
                              public gloox::DiscoHandler,
-                             public gloox::MessageHandler {
+                             public gloox::MessageHandler,
+                             public gloox::IqHandler {
   Private(Connection* parent)
     : parent_(parent),
       server_(kDefaultServer),
@@ -287,6 +288,9 @@ bool Connection::Connect() {
   d->client_->registerStanzaExtension(d->media_player_extension_);
   d->client_->registerStanzaExtension(d->remote_control_extension_);
   d->client_->registerStanzaExtension(new MediaStorageExtension);
+  d->client_->registerStanzaExtension(new SIPNegotiation);
+
+  d->client_->registerIqHandler(d.data(), SIPNegotiation::kExtensionType);
 
   // Initialise the handlers
   foreach (Handler* handler, d->handlers_) {
@@ -302,7 +306,7 @@ bool Connection::Connect() {
   caps->setNode("http://tomahawk-player.org/");
   d->client_->presence().addExtension(caps);
 
-  d->client_->setSASLMechanisms(gloox::SaslMechGoogleToken);
+  //d->client_->setSASLMechanisms(gloox::SaslMechGoogleToken);
 
   // Connect
   if (!d->client_->connect(false)) {
@@ -582,6 +586,35 @@ void Connection::Private::handleMessage(const gloox::Message& message, gloox::Me
 
     emit parent_->TomahawkSIPReceived(result);
   }
+}
+
+bool Connection::Private::handleIq(const gloox::IQ& iq) {
+  gloox::Tag* xrme = iq.tag()->findChild("xrme");
+  if (!xrme) {
+    return false;
+  }
+
+  gloox::Tag* sip = xrme->findChild("sip");
+  const std::string& user_fragment = sip->findAttribute("ufrag");
+  const std::string& password = sip->findAttribute("password");
+
+  gloox::TagList candidates = sip->findChildren("candidate");
+  for (gloox::TagList::const_iterator it = candidates.begin();
+       it != candidates.end(); ++it) {
+    gloox::Tag* candidate = *it;
+    const std::string& address = candidate->findAttribute("address");
+    const std::string& port = candidate->findAttribute("port");
+    const std::string& type = candidate->findAttribute("type");
+    const std::string& component = candidate->findAttribute("component");
+    const std::string& priority = candidate->findAttribute("priority");
+    const std::string& foundation = candidate->findAttribute("foundation");
+  }
+
+  return true;
+}
+
+void Connection::Private::handleIqID(const gloox::IQ& iq, int context) {
+
 }
 
 } // namespace xrme

@@ -62,7 +62,7 @@ void Remote::ReloadSettings() {
   s.beginGroup(RemoteConfig::kSettingsGroup);
 
   QString username = s.value("username").toString();
-  QString password = s.value("token").toString();
+  QString password = s.value("password").toString();
   QString agent_name = s.value("agent_name", RemoteConfig::DefaultAgentName()).toString();
 
   // Have the settings changed?

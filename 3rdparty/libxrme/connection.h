@@ -18,6 +18,7 @@
 #ifndef LIBXRME_CONNECTION_H
 #define LIBXRME_CONNECTION_H
 
+#include <QHostAddress>
 #include <QObject>
 #include <QPair>
 #include <QScopedPointer>
@@ -28,6 +29,21 @@ namespace xrme {
 class MediaPlayerInterface;
 class MediaStorageInterface;
 class RemoteControlInterface;
+
+struct SIPInfo {
+  QString user_fragment;
+  QString password;
+
+  struct Candidate {
+    QHostAddress address;
+    quint16 port;
+    QString type;
+    int component;
+    int priority;
+    QString foundation;
+  };
+  QList<Candidate> candidates;
+};
 
 class Connection : public QObject {
   Q_OBJECT

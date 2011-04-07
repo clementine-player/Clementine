@@ -130,6 +130,9 @@ void GLog(const gchar* domain,
   qDebug() << "GLOG" << message;
 }
 
+#include <xrme/connection.h>
+#include "remote/icesession.h"
+
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -213,6 +216,8 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
 
+  qRegisterMetaType<xrme::SIPInfo>("SIPInfo");
+
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
@@ -247,6 +252,66 @@ int main(int argc, char *argv[]) {
   // Detect technically invalid usage of non-ASCII in ID3v1 tags.
   UniversalEncodingHandler handler;
   TagLib::ID3v1::Tag::setStringHandler(&handler);
+
+  if (options.stun_test() != CommandlineOptions::StunTestNone) {
+    QCoreApplication app(argc, argv);
+
+    ICESession::StaticInit();
+    ICESession ice;
+    ice.Init();
+
+    QEventLoop loop;
+    QObject::connect(&ice,
+        SIGNAL(CandidatesAvailable(const SessionInfo&)),
+        &loop, SLOT(quit()));
+    loop.exec();
+
+    const xrme::SIPInfo& candidates = ice.candidates();
+    qDebug() << candidates;
+
+    QFile file;
+    file.open(stdin, QIODevice::ReadOnly);
+    QTextStream in(&file);
+
+    xrme::SIPInfo remote_session;
+    qDebug() << "fragment";
+    in >> remote_session.user_fragment;
+    qDebug() << "password";
+    in >> remote_session.password;
+
+    xrme::SIPInfo::Candidate cand;
+    QString address;
+    qDebug() << "address";
+    in >> address;
+    cand.address = address;
+    qDebug() << "port";
+    in >> cand.port;
+    QString type;
+    qDebug() << "type";
+    in >> type;
+    if (type == "host") {
+      cand.type = PJ_ICE_CAND_TYPE_HOST;
+    } else if (type == "srflx") {
+      cand.type = PJ_ICE_CAND_TYPE_SRFLX;
+    } else if (type == "prflx") {
+      cand.type = PJ_ICE_CAND_TYPE_PRFLX;
+    }
+    qDebug() << "component";
+    in >> cand.component;
+    qDebug() << "priority";
+    in >> cand.priority;
+    qDebug() << "foundation";
+    in >> cand.foundation;
+
+    remote_session.candidates << cand;
+
+    qDebug() << "Remote:" << remote_session;
+
+    ice.StartNegotiation(remote_session);
+    loop.exec();
+
+    return 0;
+  }
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN
