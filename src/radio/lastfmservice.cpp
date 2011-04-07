@@ -423,7 +423,9 @@ void LastFMService::NowPlaying(const Song &song) {
   if (!InitScrobbler())
     return;
 
-  last_track_ = TrackFromSong(song);
+  lastfm::MutableTrack mtrack(TrackFromSong(song));
+  mtrack.stamp();
+  last_track_ = mtrack;
 
   //check immediately if the song is valid
   Scrobble::Invalidity invalidity;
@@ -433,10 +435,6 @@ void LastFMService::NowPlaying(const Song &song) {
     emit ScrobblerStatus(-1);
     return;
   }
-
-  lastfm::MutableTrack mtrack(last_track_);
-  mtrack.stamp();
-  last_track_ = mtrack;
 
   scrobbler_->nowPlaying(mtrack);
 }

@@ -1062,7 +1062,7 @@ void MainWindow::UpdateTrackPosition() {
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
     qDebug() << "position" << position << "scrobble point" << scrobble_point
-        << "has_scrobbled" << (playlists_->active()->get_lastfm_status() == Playlist::LastFM_Scrobbled);
+        << "status" << playlists_->active()->get_lastfm_status();
     tray_icon_->SetProgress(double(position) / length * 100);
 
     //if we're waiting for the scrobble point, update the icon
