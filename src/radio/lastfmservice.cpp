@@ -403,7 +403,8 @@ bool LastFMService::InitScrobbler() {
   if (!scrobbler_)
     scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
 
-  connect(scrobbler_, SIGNAL(status(int)), SLOT(Status(int)));
+  //reemit the signal since the sender is private
+  connect(scrobbler_, SIGNAL(status(int)), SIGNAL(ScrobblerStatus(int)));
   return true;
 }
 
@@ -798,9 +799,4 @@ void LastFMService::ToggleScrobbling() {
   s.endGroup();
 
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
-}
-
-void LastFMService::Status(int value) {
-  //reemit it since the sender is private
-  emit ScrobblerStatus(value);
 }

@@ -131,8 +131,6 @@ class LastFMService : public RadioService {
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
 
-  void Status(int value);
-
   void AddArtistRadio();
   void AddTagRadio();
   void AddCustomRadio();
