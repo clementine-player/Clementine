@@ -47,6 +47,19 @@ public:
     Role_CanSetRating,
   };
 
+  enum LastFMStatus {
+    //new song to scrobble
+    LastFM_New = 0,
+    //song already scrobbled
+    LastFM_Scrobbled,
+    //song we don't want to scrobble, e.g. if we seeked through it
+    LastFM_Skipped,
+    //error submitting
+    LastFM_Error,
+    //invalid Song, e.g. tags not available
+    LastFM_Invalid
+  };
+
   static const char* kRowsMimetype;
   static const char* kPlayNowMimetype;
 
@@ -99,8 +112,8 @@ public:
 
   // Scrobbling
   qint64 scrobble_point_nanosec() const;
-  bool has_scrobbled() const;
-  void set_scrobbled(bool v);
+  LastFMStatus get_lastfm_status() const;
+  void set_lastfm_status(LastFMStatus status);
 
   // Changing the playlist
   void InsertItems              (const PlaylistItemList& items,     int pos = -1, bool play_now = false, bool enqueue = false);
