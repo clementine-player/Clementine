@@ -37,6 +37,7 @@ LastFMConfig::LastFMConfig(QWidget *parent)
 
   // Icons
   ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
+  ui_->label->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));
@@ -68,8 +69,9 @@ void LastFMConfig::AuthenticationComplete(bool success) {
   waiting_for_auth_ = false;
 
   if (success) {
-    ui_->username->setText(lastfm::ws::Username);
+    //clear password just to be sure
     ui_->password->clear();
+    RefreshControls(true);
   } else {
     QMessageBox::warning(this, tr("Authentication failed"), tr("Your Last.fm credentials were incorrect"));
   }
@@ -78,11 +80,11 @@ void LastFMConfig::AuthenticationComplete(bool success) {
 }
 
 void LastFMConfig::Load() {
-  ui_->username->setText(lastfm::ws::Username);
   ui_->scrobble->setChecked(service_->IsScrobblingEnabled());
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
-  ui_->sign_out->setEnabled(!lastfm::ws::SessionKey.isEmpty());
+
+  RefreshControls(!lastfm::ws::SessionKey.isEmpty());
 }
 
 void LastFMConfig::Save() {
@@ -99,6 +101,21 @@ void LastFMConfig::Save() {
 void LastFMConfig::SignOut() {
   ui_->username->clear();
   ui_->password->clear();
-  ui_->sign_out->setEnabled(false);
+  RefreshControls(false);
+
   service_->SignOut();
+}
+
+void LastFMConfig::RefreshControls(bool authenticated) {
+  ui_->groupBox->setVisible(!authenticated);
+  ui_->sign_out->setVisible(authenticated);
+  if (authenticated) {
+    //use a qt specific icon, since freedesktop doesn't seem to have a suitable icon
+    ui_->icon->setPixmap(QIcon(":/trolltech/styles/commonstyle/images/standardbutton-apply-16.png").pixmap(16));
+    ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(lastfm::ws::Username));
+  }
+  else {
+    ui_->icon->setPixmap(IconLoader::Load("dialog-question").pixmap(16));
+    ui_->status->setText(tr("Please fill in the blanks to login into Last.fm"));
+  }
 }

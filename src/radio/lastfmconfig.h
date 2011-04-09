@@ -49,6 +49,8 @@ class LastFMConfig : public QWidget {
   Ui_LastFMConfig* ui_;
 
   bool waiting_for_auth_;
+
+  void RefreshControls(bool authenticated);
 };
 
 #endif // LASTFMCONFIG_H
