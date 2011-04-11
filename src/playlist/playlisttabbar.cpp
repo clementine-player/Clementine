@@ -187,6 +187,7 @@ void PlaylistTabBar::RemoveTab(int id) {
 
 void PlaylistTabBar::set_text_by_id(int id, const QString &text) {
   setTabText(index_of(id), text);
+  setTabToolTip(index_of(id), text);
 }
 
 void PlaylistTabBar::CurrentIndexChanged(int index) {
@@ -198,6 +199,7 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
   suppress_current_changed_ = true;
   insertTab(index, text);
   setTabData(index, id);
+  setTabToolTip(index, text);
   suppress_current_changed_ = false;
 
   if (currentIndex() == index)
