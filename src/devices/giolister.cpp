@@ -171,8 +171,18 @@ QList<QUrl> GioLister::MakeDeviceUrls(const QString& id) {
   // gphoto2 gives invalid hostnames with []:, characters in
   uri.replace(QRegExp("//\\[usb:(\\d+),(\\d+)\\]"), "//usb-\\1-\\2");
 
+  QUrl url(uri);
+
   QList<QUrl> ret;
-  ret << uri;
+
+  // Special case for file:// GIO URIs - we have to check whether they point
+  // to an ipod.
+  if (url.isValid() && url.scheme() == "file") {
+    ret << MakeUrlFromLocalPath(url.path());
+  } else {
+    ret << url;
+  }
+
   ret << MakeUrlFromLocalPath(mount_point);
   return ret;
 }

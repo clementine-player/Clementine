@@ -73,7 +73,8 @@ signals:
 
 protected:
   virtual void Init() = 0;
-  QUrl MakeUrlFromLocalPath(const QString& path);
+  QUrl MakeUrlFromLocalPath(const QString& path) const;
+  bool IsIpod(const QString& path) const;
 
   QStringList GuessIconForPath(const QString& path);
   QStringList GuessIconForModel(const QString& vendor, const QString& model);

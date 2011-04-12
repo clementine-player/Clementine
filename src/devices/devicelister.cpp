@@ -54,12 +54,6 @@ void DeviceLister::ThreadStarted() {
 
 namespace {
 
-bool IsIpod(const QString& path) {
-  return QFile::exists(path + "/iTunes_Control") ||
-         QFile::exists(path + "/iPod_Control") ||
-         QFile::exists(path + "/iTunes/iTunes_Control");
-}
-
 #ifdef HAVE_LIBGPOD
 
 QString GetIpodColour(Itdb_IpodModel model) {
@@ -164,7 +158,7 @@ QString GetIpodModel(Itdb_IpodModel model) {
 
 }
 
-QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
+QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) const {
   if (IsIpod(path)) {
     QUrl ret;
     ret.setScheme("ipod");
@@ -173,6 +167,12 @@ QUrl DeviceLister::MakeUrlFromLocalPath(const QString& path) {
   }
 
   return QUrl::fromLocalFile(path);
+}
+
+bool DeviceLister::IsIpod(const QString& path) const {
+  return QFile::exists(path + "/iTunes_Control") ||
+         QFile::exists(path + "/iPod_Control") ||
+         QFile::exists(path + "/iTunes/iTunes_Control");
 }
 
 QStringList DeviceLister::GuessIconForPath(const QString& path) {
