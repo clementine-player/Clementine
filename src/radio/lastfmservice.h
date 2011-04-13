@@ -94,6 +94,7 @@ class LastFMService : public RadioService {
 
   // Last.fm specific stuff
   bool IsAuthenticated() const;
+  bool IsSubscriber() const;
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   bool AreButtonsVisible() const { return buttons_visible_; }
   bool IsScrobbleButtonVisible() const { return scrobble_button_visible_; }

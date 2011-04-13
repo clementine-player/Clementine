@@ -82,15 +82,15 @@ msgstr "%1 spor"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n ferdige"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n gjenstående"
 
@@ -168,8 +168,7 @@ msgstr ""
 "bibliotek. Det er forskjellige typer av smart spillelister som tilbyr "
 "forskjellige måter å velge sanger."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -1550,9 +1549,6 @@ msgstr ""
 msgid "Most played"
 msgstr ""
 
-msgid "Mount point"
-msgstr ""
-
 msgid "Mount points"
 msgstr ""
 
@@ -1569,8 +1565,7 @@ msgid "Music"
 msgstr "Musikk"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Musikk (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Musikk (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Musikkbibliotek"
@@ -2557,9 +2552,6 @@ msgstr "Turbin"
 msgid "Turn off"
 msgstr ""
 
-msgid "URI"
-msgstr ""
-
 msgid "URL(s)"
 msgstr ""
 
@@ -2738,15 +2730,14 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You love this track"
@@ -2759,6 +2750,11 @@ msgid ""
 msgstr ""
 
 msgid "You will need to restart Clementine if you change the language."
+msgstr ""
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
 msgstr ""
 
 #, qt-format
@@ -2796,7 +2792,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Null"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr ""
 
@@ -2855,7 +2851,7 @@ msgstr ""
 msgid "options"
 msgstr "innstillinger"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -2875,7 +2871,6 @@ msgstr "stopp"
 msgid "track %1"
 msgstr "spor %1"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Skjul %1"
 
@@ -2888,53 +2883,45 @@ msgstr "spor %1"
 #~ msgid "Neighbours"
 #~ msgstr "Naboer"
 
-#, qt-format
 #~ msgid "%1's Recommended Radio"
 #~ msgstr "Radio som %1 anbefaler"
 
 #~ msgid "My Loved Tracks"
 #~ msgstr "Spor jeg elsker"
 
-#, qt-format
 #~ msgid "%1's Radio Station"
 #~ msgstr "%1s radiostasjon"
 
-#, qt-format
 #~ msgid "%1's Neighbour Radio"
 #~ msgstr "%1s nabolagsradio"
 
-#, qt-format
 #~ msgid "%1's Loved Tracks"
 #~ msgstr "%1s elskede spor"
 
 #~ msgid "Show section"
 #~ msgstr "Vis del"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "%1s nabolag"
 
-#, qt-format
 #~ msgid "Similar Artists to %1"
 #~ msgstr "Lignende artister til %1"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "%1s bibliotek"
 
-#, qt-format
 #~ msgid "Tag Radio: %1"
 #~ msgstr "Merkelappradio: %1"
 
 #~ msgid "Not enough neighbours"
 #~ msgstr "Ikke nok naboer"
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Endrer %n spor"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
 #~ "Bildefiler (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
 #~ "*.tiff)"
@@ -3006,8 +2993,8 @@ msgstr "spor %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Vennligst anmerk at du må være en <span style=\" font-weight:600;\">betalt "
-#~ "abonnent</span> for å lytte til Last.fm radio i Clementine."
+#~ "Vennligst anmerk at du må være en <span style=\" font-weight:600;"
+#~ "\">betalt abonnent</span> for å lytte til Last.fm radio i Clementine."
 
 #~ msgid "Fadeout duration"
 #~ msgstr "Hvor lenge utfasingen skal vare"

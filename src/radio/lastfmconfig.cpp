@@ -26,6 +26,10 @@
 #include <QMessageBox>
 #include <QSettings>
 
+// Use Qt specific icons, since freedesktop doesn't seem to have suitable icons.
+const char* kSubscribedIcon = ":/trolltech/styles/commonstyle/images/standardbutton-apply-16.png";
+const char* kNotSubscribedIcon = ":/trolltech/styles/commonstyle/images/standardbutton-no-16.png";
+
 LastFMConfig::LastFMConfig(QWidget *parent)
   : QWidget(parent),
     service_(static_cast<LastFMService*>(RadioModel::ServiceByName("Last.fm"))),
@@ -84,7 +88,7 @@ void LastFMConfig::Load() {
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
 
-  RefreshControls(!lastfm::ws::SessionKey.isEmpty());
+  RefreshControls(service_->IsAuthenticated());
 }
 
 void LastFMConfig::Save() {
@@ -110,12 +114,26 @@ void LastFMConfig::RefreshControls(bool authenticated) {
   ui_->groupBox->setVisible(!authenticated);
   ui_->sign_out->setVisible(authenticated);
   if (authenticated) {
-    //use a qt specific icon, since freedesktop doesn't seem to have a suitable icon
-    ui_->icon->setPixmap(QIcon(":/trolltech/styles/commonstyle/images/standardbutton-apply-16.png").pixmap(16));
+    const bool is_subscriber = service_->IsSubscriber();
+    const char* icon_path = is_subscriber ? kSubscribedIcon : kNotSubscribedIcon;
+    ui_->icon->setPixmap(QIcon(icon_path).pixmap(16));
     ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(lastfm::ws::Username));
+
+    if (is_subscriber) {
+      ui_->subscriber_warning->hide();
+    } else {
+      ui_->subscriber_warning->setText(
+        tr("You will not be able to play Last.fm radio stations "
+           "as you are not a Last.fm subscriber."));
+    }
   }
   else {
     ui_->icon->setPixmap(IconLoader::Load("dialog-question").pixmap(16));
     ui_->status->setText(tr("Please fill in the blanks to login into Last.fm"));
+    ui_->subscriber_warning->setText(
+        tr("You can scrobble tracks for free, but only "
+           "<span style=\" font-weight:600;\">paid subscribers</span> "
+           "can stream Last.fm radio from Clementine."));
+    ui_->subscriber_warning->show();
   }
 }

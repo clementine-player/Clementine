@@ -84,15 +84,15 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -174,8 +174,7 @@ msgstr ""
 "zbirke. Ima različitih tipova popisa izvođenja koje nude drugačiji način "
 "izbora pjesama."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Pjesma će biti odabrana u popisu izvođenja ako se poklapa sa tim uvijetima"
 
@@ -338,8 +337,7 @@ msgid "Always start playing"
 msgstr "Uvijek započinji reprodukciju glazbe"
 
 msgid "An error occurred copying the iTunes database from the device"
-msgstr ""
-"Pogreška je nastala tijekom kopiranja iTunes baze podataka sa uređaja"
+msgstr "Pogreška je nastala tijekom kopiranja iTunes baze podataka sa uređaja"
 
 msgid "An error occurred copying the iTunes database onto the device"
 msgstr "Pogreška je nastala tijekom kopiranja iTunes baze podataka na uređaj"
@@ -622,8 +620,7 @@ msgid "Configure library..."
 msgstr "Podesi zbirku..."
 
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
-"Spoji Wii Daljinski upravljač koristeći aktiviraj/deaktiviraj naredbu"
+msgstr "Spoji Wii Daljinski upravljač koristeći aktiviraj/deaktiviraj naredbu"
 
 msgid "Connect device"
 msgstr "Spoji uređaj"
@@ -1577,9 +1574,6 @@ msgstr "Nadziri zbirku radi promjena"
 msgid "Most played"
 msgstr "Najviše reproducirano"
 
-msgid "Mount point"
-msgstr "Točka montiranja"
-
 msgid "Mount points"
 msgstr "Točke montiranja"
 
@@ -1596,8 +1590,7 @@ msgid "Music"
 msgstr "Glazba"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Glazba (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Glazba (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Zbirka Glazbe"
@@ -2231,8 +2224,7 @@ msgid "Show a native desktop notification"
 msgstr "Prikaži nativnu desktop obavijest"
 
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr ""
-"Prikaži obavijest kada promijenim mod ponavljanja ili naizmjenični mod"
+msgstr "Prikaži obavijest kada promijenim mod ponavljanja ili naizmjenični mod"
 
 msgid "Show a notification when I change the volume"
 msgstr "Prikaži obavijest kada promijenite glasnoću zvuka"
@@ -2337,8 +2329,7 @@ msgid "Soft Rock"
 msgstr "Soft Rock"
 
 msgid "Some files failed to install.  The script may not work correctly."
-msgstr ""
-"Neke datoteke se nisu instalirale. Skripta možda neće raditi ispravno."
+msgstr "Neke datoteke se nisu instalirale. Skripta možda neće raditi ispravno."
 
 msgid "Song Information"
 msgstr "Informacije o pjesmi"
@@ -2602,9 +2593,6 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Isključivanje"
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2792,18 +2780,16 @@ msgstr ""
 "Možete slušati streamove u pozadini u isto vrijeme kao i ostalu glazbu."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
-"Možete scrobblat pjesme besplatno, ali samo <span style=\" font-"
-"weight:600;\">pretplatnici</span> mogu slušati streamove Last.fm radia iz "
-"Clementine."
+"Možete scrobblat pjesme besplatno, ali samo <span style=\" font-weight:600;"
+"\">pretplatnici</span> mogu slušati streamove Last.fm radia iz Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 "Možete koristiti vaš Wii Daljinski Upravljač za daljinsko upravljanje sa "
 "Clementine. <a href=\"http://www.clementine-player.org/wiimote\">Za više "
@@ -2817,12 +2803,17 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"Morate pokrenuti opcije sustava i uključiti ih \"<span style=\" font-"
-"style:italic;\">Omogući pristup za pomoćne uređaje</span>\" da koriste "
-"globalne prečace u Clementine"
+"Morate pokrenuti opcije sustava i uključiti ih \"<span style=\" font-style:"
+"italic;\">Omogući pristup za pomoćne uređaje</span>\" da koriste globalne "
+"prečace u Clementine"
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Morate ponovo pokrenuti Clementine ako mijenjate jezik."
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
+msgstr ""
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -2862,7 +2853,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -2921,7 +2912,7 @@ msgstr "na"
 msgid "options"
 msgstr "opcije"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 
@@ -2941,14 +2932,18 @@ msgstr "zaustavi"
 msgid "track %1"
 msgstr "pjesma %1"
 
-#, c-format
+#~ msgid "Mount point"
+#~ msgstr "Točka montiranja"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
 #~ msgid "Editing %n tracks"
 #~ msgstr "uređivanje %n pjesama"
 
 #~ msgid "Help"
 #~ msgstr "Pomoć"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Sakrij %1"
 
@@ -2956,11 +2951,12 @@ msgstr "pjesma %1"
 #~ msgstr "Sakrij..."
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "Slike (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Slike (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Last.fm Preporučeni Radio -  %1"
 
@@ -2976,7 +2972,6 @@ msgstr "pjesma %1"
 #~ msgid "Stretch columns to fit window"
 #~ msgstr "Razvuci stupce da bi pristajali na prozor"
 
-#, qt-format
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Nepoznat audio engine \"%1\". Ponuđeno je:"
 
@@ -3014,5 +3009,5 @@ msgstr "pjesma %1"
 #~ "The version of Clementine you've just updated to requires a full library "
 #~ "rescan because of the new features listed below:<ul>"
 #~ msgstr ""
-#~ "Verzija Clementine-a koji ste upravo nadogradili zahtjeva kompletnu pretragu "
-#~ "zbirke zbog novih mogućnosti navedenih ispod:<ul>"
+#~ "Verzija Clementine-a koji ste upravo nadogradili zahtjeva kompletnu "
+#~ "pretragu zbirke zbog novih mogućnosti navedenih ispod:<ul>"

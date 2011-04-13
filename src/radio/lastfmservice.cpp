@@ -125,6 +125,12 @@ bool LastFMService::IsAuthenticated() const {
   return !lastfm::ws::SessionKey.isEmpty();
 }
 
+bool LastFMService::IsSubscriber() const {
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  return settings.value("Subscriber", false).toBool();
+}
+
 QStandardItem* LastFMService::CreateRootItem() {
   QStandardItem* item = new QStandardItem(QIcon(":last.fm/as.png"), kServiceName);
   item->setData(true, RadioModel::Role_CanLazyLoad);
@@ -270,17 +276,22 @@ void LastFMService::AuthenticateReplyFinished() {
 
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
+    QString subscribed = lfm["session"]["subscriber"].text();
+    const bool is_subscriber = (subscribed.toInt() == 1);
+
+    // Save the session key
+    QSettings settings;
+    settings.beginGroup(kSettingsGroup);
+    settings.setValue("Username", lastfm::ws::Username);
+    settings.setValue("Session", lastfm::ws::SessionKey);
+    // TODO: Refresh this regularly either at startup or when the config
+    // dialog is loaded. See user.getInfo in the last.fm API.
+    settings.setValue("Subscriber", is_subscriber);
   } catch (std::runtime_error& e) {
     qDebug() << e.what();
     emit AuthenticationComplete(false);
     return;
   }
-
-  // Save the session key
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
-  settings.setValue("Username", lastfm::ws::Username);
-  settings.setValue("Session", lastfm::ws::SessionKey);
 
   // Invalidate the scrobbler - it will get recreated later
   delete scrobbler_;

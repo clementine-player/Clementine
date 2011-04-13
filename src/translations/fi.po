@@ -82,15 +82,15 @@ msgstr "%1 kappaletta"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n epäonnistui"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n valmistui"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n jäljellä"
 
@@ -167,8 +167,7 @@ msgstr ""
 "Älykäs soittolista on dynaaminen lista kirjastossasi olevista kappaleista. "
 "Älykkäät soittolistat mahdollistavat kappaleiden valinnan usein eri tavoin."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr "Kappale sisällytetään soittolistaan, jos se vastaa näitä ehtoja."
 
 msgid "A-Z"
@@ -1559,9 +1558,6 @@ msgstr "Tarkkaile kirjastoa muutosten varalta"
 msgid "Most played"
 msgstr "Eniten soitetut"
 
-msgid "Mount point"
-msgstr "Liitoskohta"
-
 msgid "Mount points"
 msgstr "Liitoskohdat"
 
@@ -2579,9 +2575,6 @@ msgstr "Turbine"
 msgid "Turn off"
 msgstr ""
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "Osoite/osoitteet"
 
@@ -2767,22 +2760,20 @@ msgstr ""
 "Voit kuunnella taustaääniä samalla kun kuuntelet haluamaasi kappaletta."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Voit lähettää kappaletietosi ilmaiseksi, mutta vain <span style=\" font-"
 "weight:600;\">maksavat käyttäjät</span> voivat kuunnella Last.fm-"
 "suoratoistoa."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
-"Voit käyttää Wii-ohjainta kauko-ohjaimena Clementinen hallintaan.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">Lisätietoja wiki-"
-"sivulla</a>.\n"
+"Voit käyttää Wii-ohjainta kauko-ohjaimena Clementinen hallintaan.  <a href="
+"\"http://www.clementine-player.org/wiimote\">Lisätietoja wiki-sivulla</a>.\n"
 
 msgid "You love this track"
 msgstr "Tykkäät tästä kappaleesta"
@@ -2795,6 +2786,11 @@ msgstr ""
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Clementine tulee käynnistää uudelleen, jos vaihdat kieltä."
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
+msgstr ""
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -2831,7 +2827,7 @@ msgstr "Ö-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "lisää %n kappaletta"
 
@@ -2890,7 +2886,7 @@ msgstr ""
 msgid "options"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "poista %n kappaletta"
 
@@ -2910,7 +2906,12 @@ msgstr "pysäytä"
 msgid "track %1"
 msgstr "kappale %1"
 
-#, qt-format
+#~ msgid "Mount point"
+#~ msgstr "Liitoskohta"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
 #~ msgid "Hide %1"
 #~ msgstr "Piilota %1"
 
@@ -2936,11 +2937,12 @@ msgstr "kappale %1"
 #~ msgstr "Piilota..."
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "Kuvat (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Kuvat (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Last.fm-suosikit - %1"
 

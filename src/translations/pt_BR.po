@@ -83,15 +83,15 @@ msgstr "%1 faixas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Modulo do dispositivo Wiimote"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n falhou"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n finalizado"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n faltando"
 
@@ -172,8 +172,7 @@ msgstr ""
 "biblioteca. Há diferentes tipos de listas inteligentes que oferecem formas "
 "variadas de selecionar músicas."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr "Uma música será incluída na lista se ela satisfizer estas condições."
 
 msgid "A-Z"
@@ -1256,8 +1255,7 @@ msgid "Ignore \"The\" in artist names"
 msgstr "Ignorar o \"The\" em nomes de artistas"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr ""
-"Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -1579,9 +1577,6 @@ msgstr "Vigiar mudanças na biblioteca"
 msgid "Most played"
 msgstr "Mais tocadas"
 
-msgid "Mount point"
-msgstr "Ponto de montagem"
-
 msgid "Mount points"
 msgstr "Pontos de montagem"
 
@@ -1598,8 +1593,7 @@ msgid "Music"
 msgstr "Música"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Biblioteca de Músicas"
@@ -2609,9 +2603,6 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Desligar"
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "Site(s)"
 
@@ -2797,20 +2788,19 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Você pode ouvir barulhos de fundo ao mesmo tempo que ouve música."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Você pode obter os nomes das faixas de graça, mas apenas <span style=\" font-"
 "weight:600;\">assinantes</span> podem ouvir rádio da Last.fm do Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
-"Você pode usar seu Wii Remote como controle remoto do Clementine. <a "
-"href=\"http://www.clementine-player.org/wiimote\">Veja a página na wiki do "
+"Você pode usar seu Wii Remote como controle remoto do Clementine. <a href="
+"\"http://www.clementine-player.org/wiimote\">Veja a página na wiki do "
 "Clementine</a> para mais informações.\n"
 
 msgid "You love this track"
@@ -2822,11 +2812,16 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Você precisa acessar as Preferências de Sistema e habilitar a opção \"<span "
-"style=\" font-style:italic;\">Ativar acesso por dispositivos "
-"assistidos</span>\" para utilizar os atalhos globais no Clementine."
+"style=\" font-style:italic;\">Ativar acesso por dispositivos assistidos</"
+"span>\" para utilizar os atalhos globais no Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Você precisará reiniciar o Clementine se mudar o idioma."
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
+msgstr ""
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -2865,7 +2860,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "Adicionar %n músicas"
 
@@ -2924,7 +2919,7 @@ msgstr "ligado"
 msgid "options"
 msgstr "opções"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "Remover %n músicas"
 
@@ -2944,7 +2939,12 @@ msgstr "parar"
 msgid "track %1"
 msgstr "faixa %1"
 
-#, qt-format
+#~ msgid "Mount point"
+#~ msgstr "Ponto de montagem"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Mecanismo de áudio \"%1\" desconhecido. Escolha:"
 
@@ -2966,7 +2966,6 @@ msgstr "faixa %1"
 #~ msgid "MP4"
 #~ msgstr "MP4"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Ocultar %1"
 
@@ -2979,15 +2978,12 @@ msgstr "faixa %1"
 #~ msgid "My Loved Tracks"
 #~ msgstr "Minhas Faixas Prediletas"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Rádio Recomendada Last.fm - %1"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Músicas Prediletas Last.fm - %1"
 
-#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "Não pode carregar a estação de rádio do Last.fm: %1"
 
@@ -3001,20 +2997,21 @@ msgstr "faixa %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Nota: Você deve ser um <span style=\" fonte-weight:600;\">assinante</span> "
-#~ "para ouvir a rádio Last.fm do Clementine."
+#~ "Nota: Você deve ser um <span style=\" fonte-weight:600;\">assinante</"
+#~ "span> para ouvir a rádio Last.fm do Clementine."
 
 #~ msgid "[click to edit]"
 #~ msgstr "[clique para editar]"
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Editando %n faixas"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
 #~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
 #~ msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"

@@ -85,15 +85,15 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -175,8 +175,7 @@ msgstr ""
 "Išmanusis grojaraštis yra dinaminis sąrašas padaromas iš jūsų fonotekos. "
 "Išmaniųjų grojaraščių yra keli tiptai, jie padeda skirtingai atrinkti dainas."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr "Daina bus įtraukta į grojaraštį jei atitiks sąlygas"
 
 msgid "A-Z"
@@ -507,8 +506,7 @@ msgid "Choose from the list"
 msgstr "Pasirinkti iš sąrašo"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr ""
-"Pasirinkite kaip grojaraštis turės dainų ir kaip jos bus rikiuojamos."
+msgstr "Pasirinkite kaip grojaraštis turės dainų ir kaip jos bus rikiuojamos."
 
 msgid "Choose manual cover"
 msgstr "Pasirinkti savarankiškai viršelio paveikslėlį"
@@ -1576,9 +1574,6 @@ msgstr "Stebėti fonoteką dėl pasikeitimų"
 msgid "Most played"
 msgstr "Dažniausiai grota"
 
-msgid "Mount point"
-msgstr "Prijungimo vieta"
-
 msgid "Mount points"
 msgstr "Prijungimo vietos"
 
@@ -1595,8 +1590,7 @@ msgid "Music"
 msgstr "Muzika"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Muzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Muzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Fonoteka"
@@ -2595,9 +2589,6 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Išjungti"
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "URL"
 
@@ -2783,23 +2774,21 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Galite klausyti foninių garsų kartu su kita muzika."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Galite teikti informaciją apie klausomus takelius į Last.fm nemokamai, bet "
 "tik <span style=\" font-weight:600;\">apmokami prenumeratoriai</span> gali "
 "transliuoti Last.fm radiją per Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 "Galite naudoti Wii pultą nuotoliniam Clementine valdymui. Daugiau "
-"informacijos apie Wii pulto panaudojimą galite rasti <a "
-"href=\"http://www.clementine-player.org/wiimote\">Clementine wiki "
-"puslapyje</a>.\n"
+"informacijos apie Wii pulto panaudojimą galite rasti <a href=\"http://www."
+"clementine-player.org/wiimote\">Clementine wiki puslapyje</a>.\n"
 
 msgid "You love this track"
 msgstr "Jūs mylite šį takelį"
@@ -2815,6 +2804,11 @@ msgstr ""
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Reikės paleisti iš naujo Clementine, kad pasikeistų kalba."
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
+msgstr ""
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -2853,7 +2847,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -2912,7 +2906,7 @@ msgstr "iš"
 msgid "options"
 msgstr "parinktys"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
@@ -2932,10 +2926,15 @@ msgstr "stabdyti"
 msgid "track %1"
 msgstr "takelis %1"
 
+#~ msgid "Mount point"
+#~ msgstr "Prijungimo vieta"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
 #~ msgid "Double-clicking a song clears the playlist first"
 #~ msgstr "Išvalyti grojaraštį du kartus spragtelėjus ant dainos"
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Taisomi %n takeliai"
 
@@ -2945,7 +2944,6 @@ msgstr "takelis %1"
 #~ msgid "Help"
 #~ msgstr "Pagalba"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Slėpti %1"
 
@@ -2958,7 +2956,6 @@ msgstr "takelis %1"
 #~ msgid "Stretch columns to fit window"
 #~ msgstr "Ištemti stulpelius, kad užpildyti langą"
 
-#, qt-format
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Nežinomas audio varikliukas \"%1\". Pasirinkimai yra:"
 
@@ -2975,12 +2972,12 @@ msgstr "takelis %1"
 #~ msgstr "Scenarijų konsolė"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
 #~ "Paveikslai (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
 #~ "*.tiff)"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Last.fm Rekomenduotas Radijas - %1"
 

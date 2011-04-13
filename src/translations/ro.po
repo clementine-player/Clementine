@@ -82,15 +82,15 @@ msgstr "%1 piste"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n eșuat"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n finalizat"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n rămas"
 
@@ -172,8 +172,7 @@ msgstr ""
 "biblioteca ta. Există diferite tipuri de liste de redare inteligente care "
 "oferă moduri diferite de selectare melodii."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "O melodie va fi fi inclusă în lista de redare dacă îndeplinește aceste "
 "condiții."
@@ -506,8 +505,7 @@ msgid "Choose from the list"
 msgstr "Alegeți din listă"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr ""
-"Alegeți cum va fi sortată lista de redare și câte melodii va conține."
+msgstr "Alegeți cum va fi sortată lista de redare și câte melodii va conține."
 
 msgid "Choose manual cover"
 msgstr "Alege coperta manuală"
@@ -965,8 +963,8 @@ msgstr "Introduce un nume nou pentru această listă de redare"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Introduce un <b>artist</b> or <b>tag</b> pentru a demara ascultarea la "
-"Last.fm radio."
+"Introduce un <b>artist</b> or <b>tag</b> pentru a demara ascultarea la Last."
+"fm radio."
 
 msgid "Enter an URL to download a cover from the Internet:"
 msgstr "Introduce un URL pentru a descărca de pe internet:"
@@ -1257,8 +1255,7 @@ msgid "Ignore \"The\" in artist names"
 msgstr ""
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr ""
-"Imagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr "Imagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imagini (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -1577,9 +1574,6 @@ msgid "Monitor the library for changes"
 msgstr ""
 
 msgid "Most played"
-msgstr ""
-
-msgid "Mount point"
 msgstr ""
 
 msgid "Mount points"
@@ -2584,9 +2578,6 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
-msgid "URI"
-msgstr ""
-
 msgid "URL(s)"
 msgstr "URL(-uri)"
 
@@ -2765,15 +2756,14 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You love this track"
@@ -2786,6 +2776,11 @@ msgid ""
 msgstr ""
 
 msgid "You will need to restart Clementine if you change the language."
+msgstr ""
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
 msgstr ""
 
 #, qt-format
@@ -2823,7 +2818,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr ""
 
@@ -2882,7 +2877,7 @@ msgstr ""
 msgid "options"
 msgstr "opțiuni"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "elimină %n piese"
 
@@ -2902,7 +2897,6 @@ msgstr ""
 msgid "track %1"
 msgstr "pistă %1"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Ascunde %1"
 
@@ -2915,11 +2909,9 @@ msgstr "pistă %1"
 #~ msgid "My Loved Tracks"
 #~ msgstr "Piesele mele iubite"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Piese iubite Last.fm - %1"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Radio recomandat Last.fm - %1"
 
@@ -2933,9 +2925,11 @@ msgstr "pistă %1"
 #~ msgstr "ASF"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "Imagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Imagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
 #~ msgid "MP4"
 #~ msgstr "MP4"

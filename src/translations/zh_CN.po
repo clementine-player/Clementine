@@ -82,15 +82,15 @@ msgstr "%1 首"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii 遥控器设备模块"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n 失败"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n 完成"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n 剩余"
 
@@ -163,10 +163,11 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "智能播放列表是产生于您的媒体库的动态列表。不同的智能播放列表提供帮您选歌的不同方式。"
+msgstr ""
+"智能播放列表是产生于您的媒体库的动态列表。不同的智能播放列表提供帮您选歌的不"
+"同方式。"
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr "一首歌如果满足这些条件就会被加入此播放列表。"
 
 msgid "A-Z"
@@ -1538,9 +1539,6 @@ msgstr "监控音乐库的更改"
 msgid "Most played"
 msgstr "最常播放"
 
-msgid "Mount point"
-msgstr "挂载点"
-
 msgid "Mount points"
 msgstr "挂载点"
 
@@ -2543,9 +2541,6 @@ msgstr ""
 msgid "Turn off"
 msgstr "关闭"
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "URL"
 
@@ -2724,15 +2719,14 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You love this track"
@@ -2746,6 +2740,11 @@ msgstr ""
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "如果更改语言，您需要重启 Clementine 使设置生效。"
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
+msgstr ""
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -2782,7 +2781,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "00"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "添加 %n 首曲目"
 
@@ -2841,7 +2840,7 @@ msgstr ""
 msgid "options"
 msgstr "选项"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 
@@ -2861,6 +2860,12 @@ msgstr "停止"
 msgid "track %1"
 msgstr "音轨 %1"
 
+#~ msgid "Mount point"
+#~ msgstr "挂载点"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
 #~ msgid "Select engine"
 #~ msgstr "选择引擎"
 
@@ -2870,21 +2875,18 @@ msgstr "音轨 %1"
 #~ msgid "Enter a name for the new playlist"
 #~ msgstr "输入新播放列表的名称"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "隐藏 %1"
 
 #~ msgid "Hide..."
 #~ msgstr "隐藏..."
 
-#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "无法加载 last.fm 电台: %1"
 
 #~ msgid "Delete files..."
 #~ msgstr "删除文件..."
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "编辑 %n 歌曲"
 
@@ -2901,9 +2903,11 @@ msgstr "音轨 %1"
 #~ msgstr "自动完成"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "图像文件(*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "图像文件(*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
 #~ msgid "Update Library"
 #~ msgstr "更新音乐库"

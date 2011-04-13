@@ -83,15 +83,15 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -176,8 +176,7 @@ msgstr ""
 "reproducción inteligentes que ofrecen distintas formas de seleccionar "
 "canciones."
 
-msgid ""
-"A song will be included in the playlist if it matches these conditions."
+msgid "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Una canción será incluida en la lista de reproducción si coincide con estas "
 "condiciones."
@@ -653,8 +652,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
-"instalados todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
+"todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -973,8 +972,8 @@ msgstr "Ingrese un nuevo nombre para esta lista de reproducción"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de "
-"Last.fm."
+"Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de Last."
+"fm."
 
 msgid "Enter an URL to download a cover from the Internet:"
 msgstr "Introduzca una dirección URL para descargar una portada de Internet:"
@@ -1418,8 +1417,7 @@ msgid "Last.fm Tag Radio: %1"
 msgstr "Radio en Last.fm de la etiqueta %1"
 
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr ""
-"Last.fm está actualmente saturado, intente nuevamente en unos minutos"
+msgstr "Last.fm está actualmente saturado, intente nuevamente en unos minutos"
 
 msgid "Last.fm password"
 msgstr "Contraseña"
@@ -1591,9 +1589,6 @@ msgstr "Monitorizar cambios en la colección"
 msgid "Most played"
 msgstr "Más reproducidas"
 
-msgid "Mount point"
-msgstr "Punto de montaje"
-
 msgid "Mount points"
 msgstr "Puntos de montaje"
 
@@ -1610,8 +1605,7 @@ msgid "Music"
 msgstr "Música"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
-msgstr ""
-"Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
+msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 msgid "Music Library"
 msgstr "Colección de Música"
@@ -2620,9 +2614,6 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Apagar"
 
-msgid "URI"
-msgstr "URI"
-
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2812,22 +2803,21 @@ msgstr ""
 "Puede escuchar transmisiones de fondo al mismo tiempo que a otra música."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-"
-"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
 "Puede enviar de forma gratuita la información de las canciones escuchadas, "
 "pero solo <span style=\" font-weight:600;\">los suscriptores de pago</span> "
 "pueden escuchar la radio de Last.fm desde Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
-"Puedes usar tu Wiimote como un mando a distancia para Clementine. <a "
-"href=\"http://www.clementine-player.org/wiimote\">Visita la página en el "
-"wiki de Clementine</a> para más información.\n"
+"Puedes usar tu Wiimote como un mando a distancia para Clementine. <a href="
+"\"http://www.clementine-player.org/wiimote\">Visita la página en el wiki de "
+"Clementine</a> para más información.\n"
 
 msgid "You love this track"
 msgstr "Amas esta canción"
@@ -2843,6 +2833,11 @@ msgstr ""
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Necesitaras reiniciar Clementine si cambias el idioma."
+
+msgid ""
+"You will not be able to play Last.fm radio stations as you are not a Last.fm "
+"subscriber."
+msgstr ""
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -2882,7 +2877,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Cero"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -2941,7 +2936,7 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 
@@ -2961,6 +2956,12 @@ msgstr "detener"
 msgid "track %1"
 msgstr "Pista %1"
 
+#~ msgid "Mount point"
+#~ msgstr "Punto de montaje"
+
+#~ msgid "URI"
+#~ msgstr "URI"
+
 #~ msgid "&Show tray icon"
 #~ msgstr "&Mostrar icono de la bandeja"
 
@@ -2973,7 +2974,6 @@ msgstr "Pista %1"
 #~ msgid "Show section"
 #~ msgstr "Mostrar columna"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Ocultar %1"
 
@@ -2983,31 +2983,24 @@ msgstr "Pista %1"
 #~ msgid "Neighbours"
 #~ msgstr "Vecinos"
 
-#, qt-format
 #~ msgid "%1's Radio Station"
 #~ msgstr "Estaciones de radio de %1"
 
-#, qt-format
 #~ msgid "%1's Loved Tracks"
 #~ msgstr "Pistas favoritas de %1"
 
-#, qt-format
 #~ msgid "%1's Neighborhood"
 #~ msgstr "Vecinos de %1"
 
-#, qt-format
 #~ msgid "%1's Recommended Radio"
 #~ msgstr "Radio recomendada de %1"
 
-#, qt-format
 #~ msgid "%1's Neighbour Radio"
 #~ msgstr "Radio de los vecinos de %1"
 
-#, qt-format
 #~ msgid "%1's Library"
 #~ msgstr "Colección de %1"
 
-#, qt-format
 #~ msgid "Similar Artists to %1"
 #~ msgstr "Artistas similares a %1"
 
@@ -3057,21 +3050,21 @@ msgstr "Pista %1"
 #~ msgstr "Versión"
 
 #~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-#~ "\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-#~ "type=\"text/css\">\n"
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
 #~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-#~ "weight:400; font-style:normal;\">\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-#~ "href=\"http://code.google.com/p/clementine-player/\"><span style=\" text-"
-#~ "decoration: underline; color:#0057ae;\">http://code.google.com/p/clementine-"
-#~ "player/</span></a></p>\n"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
+#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
+#~ "span></a></p>\n"
 #~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"></p>\n"
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "weight:600;\">Authors:</span></p>\n"
@@ -3080,8 +3073,8 @@ msgstr "Pista %1"
 #~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
 #~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
 #~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"></p>\n"
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "weight:600;\">Thanks to:</span></p>\n"
@@ -3090,28 +3083,28 @@ msgstr "Pista %1"
 #~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
 #~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-#~ "href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
 #~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
 #~ "contributors</p></body></html>"
 #~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
-#~ "\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
-#~ "type=\"text/css\">\n"
+#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+#~ "REC-html40/strict.dtd\">\n"
+#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
+#~ "css\">\n"
 #~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; font-"
-#~ "weight:400; font-style:normal;\">\n"
+#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
+#~ "font-weight:400; font-style:normal;\">\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a "
-#~ "href=\"http://code.google.com/p/clementine-player/\"><span style=\" text-"
-#~ "decoration: underline; color:#0057ae;\">http://code.google.com/p/clementine-"
-#~ "player/</span></a></p>\n"
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
+#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
+#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
+#~ "span></a></p>\n"
 #~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"></p>\n"
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "weight:600;\">Autores:</span></p>\n"
@@ -3120,8 +3113,8 @@ msgstr "Pista %1"
 #~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
 #~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
 #~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"></p>\n"
+#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+#~ "\"></p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
 #~ "weight:600;\">Gracias a:</span></p>\n"
@@ -3130,8 +3123,8 @@ msgstr "Pista %1"
 #~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
 #~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a "
-#~ "href=\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
+#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
+#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
 #~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
 #~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
 #~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... y a todos los que "
@@ -3195,8 +3188,8 @@ msgstr "Pista %1"
 #~ msgstr "Cuidado"
 
 #~ msgid ""
-#~ "You are about to reset to global shortcuts default values. Are you sure you "
-#~ "want to continue?"
+#~ "You are about to reset to global shortcuts default values. Are you sure "
+#~ "you want to continue?"
 #~ msgstr ""
 #~ "Estas por reinicar las teclas rapidas a sus valores por defecto. Estás "
 #~ "seguro que deseas continuar?"
@@ -3210,7 +3203,6 @@ msgstr "Pista %1"
 #~ msgid "ASF"
 #~ msgstr "ASF"
 
-#, c-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Editando %n pistas"
 
@@ -3233,12 +3225,12 @@ msgstr "Pista %1"
 #~ msgstr "Mi Vecindario"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
-#~ "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-#~ "*.tiff)"
+#~ "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 
-#, qt-format
 #~ msgid "Tag Radio: %1"
 #~ msgstr "Radio de la Etiqueta: %1"
 
@@ -3246,21 +3238,19 @@ msgstr "Pista %1"
 #~ "Note that you must be a <span style=\" font-weight:600;\">paid "
 #~ "subscriber</span> to listen to Last.fm radio from within Clementine."
 #~ msgstr ""
-#~ "Recuerda que tienes que ser un <span style=\" font-weight:600;\">Suscriptor "
-#~ "de Paga</span> para poder escuchar la radio de Last.fm desde Clementine."
+#~ "Recuerda que tienes que ser un <span style=\" font-weight:600;"
+#~ "\">Suscriptor de Paga</span> para poder escuchar la radio de Last.fm "
+#~ "desde Clementine."
 
 #~ msgid "Seek the currently playing track"
 #~ msgstr "Busca en la pista actualmente reproduciendose"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "La Radio en Last.fm Recomendada para %1"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Pistas Favoritas en Last.fm de %1"
 
-#, qt-format
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Motor de audio \"%1\" desconocido. Las opciones son:"
 
@@ -3273,7 +3263,6 @@ msgstr "Pista %1"
 #~ msgid "Playlists (*.m3u *.xspf *.xml)"
 #~ msgstr "Listas de reproducción  (*.m3u *.xspf *.xml)"
 
-#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "No se pudo cargar la estación de radio de last.fm: %1"
 
@@ -3337,7 +3326,6 @@ msgstr "Pista %1"
 #~ msgid "available"
 #~ msgstr "disponible"
 
-#, qt-format
 #~ msgid "%1 of %2"
 #~ msgstr "%1 de %2"
 
@@ -3353,37 +3341,30 @@ msgstr "Pista %1"
 #~ msgid "Use Wii remote"
 #~ msgstr "Usar mando a distancia de Wii"
 
-#, qt-format
 #~ msgid "Wiiremote %1: disconnected"
 #~ msgstr "Wiiremote %1: desconectado"
 
-#, qt-format
 #~ msgid "Wiiremote %1: low battery (%2%)"
 #~ msgstr "Wiiremote %1: batería baja (%2%)"
 
-#, qt-format
 #~ msgid "Wiiremote %1: disactived"
 #~ msgstr "Wiiremote %1: desactivado"
 
 #~ msgid "Enable Wii remote support in Clementine"
 #~ msgstr "Habilitar el uso de Wii remote en Clementine."
 
-#, qt-format
 #~ msgid "Wiiremote %1: critical battery (%2%) "
 #~ msgstr "Wiiremote %1: batería crítica (%2%) "
 
-#, qt-format
 #~ msgid "Wiiremote %1: actived"
 #~ msgstr "Wiiremote %1: activado"
 
-#, qt-format
 #~ msgid "Wiiremote %1: connected"
 #~ msgstr "Wiiremote %1: conectado"
 
 #~ msgid "Use notifications to report Wii remote status"
 #~ msgstr "Usar notificaciones para informar del estado del Wii remote"
 
-#, qt-format
 #~ msgid "Searching %1..."
 #~ msgstr "Buscando %1..."
 
@@ -3436,8 +3417,8 @@ msgstr "Pista %1"
 #~ "Let Last.fm suggest songs from your library that are similar to one you "
 #~ "specify."
 #~ msgstr ""
-#~ "Permitir que Last.fm sugiera canciones de su biblioteca que son similares a "
-#~ "la elegida."
+#~ "Permitir que Last.fm sugiera canciones de su biblioteca que son similares "
+#~ "a la elegida."
 
 #~ msgid "Change album cover"
 #~ msgstr "Cambiar la caratula del álbum"
@@ -3446,13 +3427,13 @@ msgstr "Pista %1"
 #~ msgstr "Estadísticas"
 
 #~ msgid ""
-#~ "When looking for album art Clementine will first look for picture files that "
-#~ "contain one of these words.  If there are no matches then it will use the "
-#~ "largest image in the directory."
+#~ "When looking for album art Clementine will first look for picture files "
+#~ "that contain one of these words.  If there are no matches then it will "
+#~ "use the largest image in the directory."
 #~ msgstr ""
-#~ "Cuando busque carátulas para los álbums, Clementine primero buscará archivos "
-#~ "de imágenes que contengan una de estas palabras. Si no hay conincidencias, "
-#~ "entonces se usará la imagen más grande en el directorio."
+#~ "Cuando busque carátulas para los álbums, Clementine primero buscará "
+#~ "archivos de imágenes que contengan una de estas palabras. Si no hay "
+#~ "conincidencias, entonces se usará la imagen más grande en el directorio."
 
 #~ msgid "Enqueue to playlist"
 #~ msgstr "Poner en cola a lista de reproducción"
