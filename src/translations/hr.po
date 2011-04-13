@@ -11,13 +11,13 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 15:52+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: CROATIA\n"
-"Language: hr\n"
 "X-Poedit-Language: Croatian\n"
 
 msgid " ms"
@@ -84,15 +84,15 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -1574,6 +1574,9 @@ msgstr "Nadziri zbirku radi promjena"
 msgid "Most played"
 msgstr "Najviše reproducirano"
 
+msgid "Mount point"
+msgstr "Točka montiranja"
+
 msgid "Mount points"
 msgstr "Točke montiranja"
 
@@ -2593,6 +2596,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Isključivanje"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2853,7 +2859,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -2912,7 +2918,7 @@ msgstr "na"
 msgid "options"
 msgstr "opcije"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 
@@ -2931,12 +2937,6 @@ msgstr "zaustavi"
 #, qt-format
 msgid "track %1"
 msgstr "pjesma %1"
-
-#~ msgid "Mount point"
-#~ msgstr "Točka montiranja"
-
-#~ msgid "URI"
-#~ msgstr "URI"
 
 #~ msgid "Editing %n tracks"
 #~ msgstr "uređivanje %n pjesama"

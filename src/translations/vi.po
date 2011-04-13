@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 14:39+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
-"Language: vi\n"
 
 msgid " ms"
 msgstr " mili giây"
@@ -82,15 +82,15 @@ msgstr "%1 track"
 msgid "%1: Wiimotedev module"
 msgstr "%1: mô-đun Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -1573,6 +1573,9 @@ msgstr "Giám sát các thay đổi trong thư viện"
 msgid "Most played"
 msgstr "Phát nhiều nhất"
 
+msgid "Mount point"
+msgstr "Điểm gắn"
+
 msgid "Mount points"
 msgstr "Các điểm gắn"
 
@@ -2594,6 +2597,9 @@ msgstr "Turbine"
 msgid "Turn off"
 msgstr "Tắt"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2854,7 +2860,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -2913,7 +2919,7 @@ msgstr "on"
 msgid "options"
 msgstr "options"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 
@@ -2932,12 +2938,6 @@ msgstr "stop"
 #, qt-format
 msgid "track %1"
 msgstr "track %1"
-
-#~ msgid "Mount point"
-#~ msgstr "Điểm gắn"
-
-#~ msgid "URI"
-#~ msgstr "URI"
 
 #~ msgid "Enter a name for the new playlist"
 #~ msgstr "Nhập tên cho danh sách mới"

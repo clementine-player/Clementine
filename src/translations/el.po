@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-04-08 17:06+0000\n"
 "Last-Translator: firewalker <Unknown>\n"
 "Language-Team: <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
-"Language: \n"
 "X-Language: el_GR\n"
 "X-Source-Language: en\n"
 
@@ -84,15 +84,15 @@ msgstr "%1 κομμάτια"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Άρθρωμα Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n απομένει"
 
@@ -1589,6 +1589,9 @@ msgstr "Έλεγχος της βιβλιοθήκης για αλλαγές"
 msgid "Most played"
 msgstr "Έπαιξαν περισσότερο"
 
+msgid "Mount point"
+msgstr "Σημείο φόρτωσης (mount point)"
+
 msgid "Mount points"
 msgstr "Σημεία φόρτωσης (mount points)"
 
@@ -2622,6 +2625,9 @@ msgstr "Turbine"
 msgid "Turn off"
 msgstr "Απενεργοποίηση"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2886,7 +2892,7 @@ msgstr "Ω-Α"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
@@ -2945,7 +2951,7 @@ msgstr "σε"
 msgid "options"
 msgstr "επιλογές"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 
@@ -2964,12 +2970,6 @@ msgstr "διακοπή"
 #, qt-format
 msgid "track %1"
 msgstr "κομμάτι %1"
-
-#~ msgid "Mount point"
-#~ msgstr "Σημείο φόρτωσης (mount point)"
-
-#~ msgid "URI"
-#~ msgstr "URI"
 
 #~ msgid "&Show tray icon"
 #~ msgstr "&Εμφάνιση εικονιδίου συστήματος"

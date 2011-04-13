@@ -66,6 +66,7 @@ protected:
   void dragLeaveEvent(QDragLeaveEvent* e);
   void dropEvent(QDropEvent* e);
   void timerEvent(QTimerEvent* e);
+  bool event(QEvent* e);
 
 private slots:
   void CurrentIndexChanged(int index);

@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2011-04-10 01:28+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
-"Language: uk\n"
 
 msgid " ms"
 msgstr " мс"
@@ -82,15 +82,15 @@ msgstr "%1 доріжок"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Модуль Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n з помилкою"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n залишилось"
 
@@ -1571,6 +1571,9 @@ msgstr "Стежити за змінами у фонотеці"
 msgid "Most played"
 msgstr "Найчастіше відтворювані"
 
+msgid "Mount point"
+msgstr "Точка монтування"
+
 msgid "Mount points"
 msgstr "Точки монтування"
 
@@ -2586,6 +2589,9 @@ msgstr "Турбіна"
 msgid "Turn off"
 msgstr "Вимкнути"
 
+msgid "URI"
+msgstr "Адреса"
+
 msgid "URL(s)"
 msgstr "Адреса(и)"
 
@@ -2845,7 +2851,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "додати %n композицій"
 
@@ -2904,7 +2910,7 @@ msgstr "на"
 msgid "options"
 msgstr "параметри"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "вилучити %n композицій"
 
@@ -2923,12 +2929,6 @@ msgstr "зупинити"
 #, qt-format
 msgid "track %1"
 msgstr "доріжка %1"
-
-#~ msgid "Mount point"
-#~ msgstr "Точка монтування"
-
-#~ msgid "URI"
-#~ msgstr "Адреса"
 
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Невідомий аудіо рушій \"%1\". Варіанти:"

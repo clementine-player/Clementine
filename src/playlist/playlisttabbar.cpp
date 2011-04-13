@@ -27,7 +27,7 @@
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QInputDialog>
-#include <QtDebug>
+#include <QToolTip>
 
 PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   : QTabBar(parent),
@@ -264,4 +264,29 @@ void PlaylistTabBar::dropEvent(QDropEvent* e) {
   }
 
   manager_->current()->dropMimeData(e->mimeData(), e->proposedAction(), -1, 0, QModelIndex());
+}
+
+bool PlaylistTabBar::event(QEvent* e) {
+  QHelpEvent *he = static_cast<QHelpEvent*>(e);
+  switch (he->type()) {
+    case QEvent::ToolTip: {
+      QRect displayed_tab;
+      QSize real_tab;
+      bool is_elided = false;
+
+      real_tab = tabSizeHint(tabAt(he->pos()));
+      displayed_tab = tabRect(tabAt(he->pos()));
+      // Check whether the tab is elided or not
+      is_elided = displayed_tab.width() < real_tab.width();
+      if(!is_elided) {
+        // If it's not elided, don't show the tooltip
+        QToolTip::hideText();
+      } else {
+        QToolTip::showText(he->globalPos(), tabToolTip(tabAt(he->pos())));
+      }
+      return true;
+    }
+    default:
+      return QTabBar::event(e);
+  }
 }

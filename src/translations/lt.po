@@ -11,13 +11,13 @@ msgstr ""
 "PO-Revision-Date: 2011-04-05 14:22+0000\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: LITHUANIA\n"
-"Language: lt\n"
 "X-Poedit-Language: Lithuanian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -1574,6 +1574,9 @@ msgstr "Stebėti fonoteką dėl pasikeitimų"
 msgid "Most played"
 msgstr "Dažniausiai grota"
 
+msgid "Mount point"
+msgstr "Prijungimo vieta"
+
 msgid "Mount points"
 msgstr "Prijungimo vietos"
 
@@ -2589,6 +2592,9 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Išjungti"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL"
 
@@ -2847,7 +2853,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -2906,7 +2912,7 @@ msgstr "iš"
 msgid "options"
 msgstr "parinktys"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
@@ -2925,12 +2931,6 @@ msgstr "stabdyti"
 #, qt-format
 msgid "track %1"
 msgstr "takelis %1"
-
-#~ msgid "Mount point"
-#~ msgstr "Prijungimo vieta"
-
-#~ msgid "URI"
-#~ msgstr "URI"
 
 #~ msgid "Double-clicking a song clears the playlist first"
 #~ msgstr "Išvalyti grojaraštį du kartus spragtelėjus ant dainos"

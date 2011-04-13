@@ -10,12 +10,12 @@ msgstr ""
 "PO-Revision-Date: 2011-04-12 12:34+0000\n"
 "Last-Translator: Chubakur <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-13 05:02+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
-"Language: ru\n"
 
 msgid " ms"
 msgstr " мс"
@@ -81,15 +81,15 @@ msgstr "%1 композиций"
 msgid "%1: Wiimotedev module"
 msgstr "%1: модуль Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -1573,6 +1573,9 @@ msgstr "Следить за изменениями библиотеки"
 msgid "Most played"
 msgstr "Наиболее часто прослушиваемые композиции"
 
+msgid "Mount point"
+msgstr "Точка монтирования"
+
 msgid "Mount points"
 msgstr "Точки монтирования"
 
@@ -2595,6 +2598,9 @@ msgstr "Турбина"
 msgid "Turn off"
 msgstr "Выключить"
 
+msgid "URI"
+msgstr "URI"
+
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -2852,7 +2858,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "По-умолчанию"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -2911,7 +2917,7 @@ msgstr "на"
 msgid "options"
 msgstr "настройки"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 
@@ -2930,12 +2936,6 @@ msgstr "Остановить"
 #, qt-format
 msgid "track %1"
 msgstr "композиция %1"
-
-#~ msgid "Mount point"
-#~ msgstr "Точка монтирования"
-
-#~ msgid "URI"
-#~ msgstr "URI"
 
 #~ msgid "Hide..."
 #~ msgstr "Скрыть..."
