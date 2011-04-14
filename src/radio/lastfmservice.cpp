@@ -265,6 +265,7 @@ void LastFMService::AuthenticateReplyFinished() {
     emit AuthenticationComplete(false);
     return;
   }
+  reply->deleteLater();
 
   // Parse the reply
   try {
@@ -284,8 +285,6 @@ void LastFMService::AuthenticateReplyFinished() {
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Username", lastfm::ws::Username);
     settings.setValue("Session", lastfm::ws::SessionKey);
-    // TODO: Refresh this regularly either at startup or when the config
-    // dialog is loaded. See user.getInfo in the last.fm API.
     settings.setValue("Subscriber", is_subscriber);
   } catch (std::runtime_error& e) {
     qDebug() << e.what();
@@ -298,6 +297,39 @@ void LastFMService::AuthenticateReplyFinished() {
   scrobbler_ = NULL;
 
   emit AuthenticationComplete(true);
+}
+
+void LastFMService::UpdateSubscriberStatus() {
+  QMap<QString, QString> params;
+  params["method"] = "user.getInfo";
+  params["user"] = lastfm::ws::Username;
+
+  QNetworkReply* reply = lastfm::ws::post(params);
+  connect(reply, SIGNAL(finished()), SLOT(UpdateSubscriberStatusFinished()));
+}
+
+void LastFMService::UpdateSubscriberStatusFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  Q_ASSERT(reply);
+  reply->deleteLater();
+
+  try {
+    const lastfm::XmlQuery lfm = lastfm::ws::parse(reply);
+#ifdef Q_OS_WIN32
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
+      throw std::runtime_error("");
+#endif
+
+    QString subscriber = lfm["user"]["subscriber"].text();
+    const bool is_subscriber = (subscriber.toInt() == 1);
+    QSettings settings;
+    settings.beginGroup(kSettingsGroup);
+    settings.setValue("Subscriber", is_subscriber);
+    qDebug() << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
+    emit UpdatedSubscriberStatus(is_subscriber);
+  } catch (std::runtime_error& e) {
+    qDebug() << e.what();
+  }
 }
 
 QUrl LastFMService::FixupUrl(const QUrl& url) {

@@ -24,16 +24,19 @@
 #include <lastfm/ws.h>
 
 #include <QMessageBox>
+#include <QMovie>
 #include <QSettings>
 
 // Use Qt specific icons, since freedesktop doesn't seem to have suitable icons.
 const char* kSubscribedIcon = ":/trolltech/styles/commonstyle/images/standardbutton-apply-16.png";
 const char* kNotSubscribedIcon = ":/trolltech/styles/commonstyle/images/standardbutton-no-16.png";
+const char* kWaitingIcon = ":spinner.gif";
 
 LastFMConfig::LastFMConfig(QWidget *parent)
   : QWidget(parent),
     service_(static_cast<LastFMService*>(RadioModel::ServiceByName("Last.fm"))),
     ui_(new Ui_LastFMConfig),
+    loading_icon_(new QMovie(kWaitingIcon, QByteArray(), this)),
     waiting_for_auth_(false)
 {
   ui_->setupUi(this);
@@ -42,8 +45,10 @@ LastFMConfig::LastFMConfig(QWidget *parent)
   // Icons
   ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
   ui_->label->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
+  ui_->label->setMinimumSize(16, 16);
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
+  connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)), SLOT(UpdatedSubscriberStatus(bool)));
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));
 
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
@@ -81,6 +86,7 @@ void LastFMConfig::AuthenticationComplete(bool success) {
   }
 
   emit ValidationComplete(success);
+  service_->UpdateSubscriberStatus();
 }
 
 void LastFMConfig::Load() {
@@ -88,7 +94,27 @@ void LastFMConfig::Load() {
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
 
+  ui_->icon->setMovie(loading_icon_);
+  loading_icon_->start();
+  if (service_->IsAuthenticated()) {
+    service_->UpdateSubscriberStatus();
+  }
+
   RefreshControls(service_->IsAuthenticated());
+}
+
+void LastFMConfig::UpdatedSubscriberStatus(bool is_subscriber) {
+  const char* icon_path = is_subscriber ? kSubscribedIcon : kNotSubscribedIcon;
+  ui_->icon->setPixmap(QIcon(icon_path).pixmap(16));
+  loading_icon_->stop();
+
+  if (is_subscriber) {
+    ui_->subscriber_warning->hide();
+  } else {
+    ui_->subscriber_warning->setText(
+      tr("You will not be able to play Last.fm radio stations "
+         "as you are not a Last.fm subscriber."));
+  }
 }
 
 void LastFMConfig::Save() {
@@ -114,18 +140,7 @@ void LastFMConfig::RefreshControls(bool authenticated) {
   ui_->groupBox->setVisible(!authenticated);
   ui_->sign_out->setVisible(authenticated);
   if (authenticated) {
-    const bool is_subscriber = service_->IsSubscriber();
-    const char* icon_path = is_subscriber ? kSubscribedIcon : kNotSubscribedIcon;
-    ui_->icon->setPixmap(QIcon(icon_path).pixmap(16));
     ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(lastfm::ws::Username));
-
-    if (is_subscriber) {
-      ui_->subscriber_warning->hide();
-    } else {
-      ui_->subscriber_warning->setText(
-        tr("You will not be able to play Last.fm radio stations "
-           "as you are not a Last.fm subscriber."));
-    }
   }
   else {
     ui_->icon->setPixmap(IconLoader::Load("dialog-question").pixmap(16));

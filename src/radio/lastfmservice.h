@@ -101,6 +101,7 @@ class LastFMService : public RadioService {
 
   void Authenticate(const QString& username, const QString& password);
   void SignOut();
+  void UpdateSubscriberStatus();
 
   void FetchMoreTracks();
 
@@ -120,12 +121,14 @@ class LastFMService : public RadioService {
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
   void ScrobblerStatus(int value);
+  void UpdatedSubscriberStatus(bool is_subscriber);
 
  protected:
   QModelIndex GetCurrentIndex();
 
  private slots:
   void AuthenticateReplyFinished();
+  void UpdateSubscriberStatusFinished();
   void RefreshFriendsFinished();
   void RefreshNeighboursFinished();
 

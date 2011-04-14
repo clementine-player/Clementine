@@ -43,10 +43,12 @@ class LastFMConfig : public QWidget {
  private slots:
   void AuthenticationComplete(bool success);
   void SignOut();
+  void UpdatedSubscriberStatus(bool is_subscriber);
 
  private:
   LastFMService* service_;
   Ui_LastFMConfig* ui_;
+  QMovie* loading_icon_;
 
   bool waiting_for_auth_;
 
