@@ -39,7 +39,7 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
 {
   setAcceptDrops(true);
   setElideMode(Qt::ElideRight);
-  setUsesScrollButtons(false);
+  setUsesScrollButtons(true);
 
   remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
   rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist..."), this, SLOT(Rename()));
@@ -267,9 +267,10 @@ void PlaylistTabBar::dropEvent(QDropEvent* e) {
 }
 
 bool PlaylistTabBar::event(QEvent* e) {
-  QHelpEvent *he = static_cast<QHelpEvent*>(e);
-  switch (he->type()) {
+  switch (e->type()) {
     case QEvent::ToolTip: {
+      QHelpEvent *he = static_cast<QHelpEvent*>(e);
+
       QRect displayed_tab;
       QSize real_tab;
       bool is_elided = false;
