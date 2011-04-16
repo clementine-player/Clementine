@@ -177,6 +177,7 @@ class LastFMService : public RadioService {
   lastfm::Track last_track_;
   lastfm::Track next_metadata_;
   QQueue<lastfm::Track> playlist_;
+  bool already_scrobbled_;
 
   boost::scoped_ptr<LastFMStationDialog> station_dialog_;
 

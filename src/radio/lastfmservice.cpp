@@ -64,6 +64,7 @@ const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1")
 LastFMService::LastFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
     scrobbler_(NULL),
+    already_scrobbled_(false),
     station_dialog_(new LastFMStationDialog),
     context_menu_(new QMenu),
     initial_tune_(false),
@@ -365,6 +366,7 @@ PlaylistItem::SpecialLoadResult LastFMService::LoadNext(const QUrl&) {
   lastfm::MutableTrack track = playlist_.dequeue();
   track.stamp();
 
+  already_scrobbled_ = false;
   last_track_ = track;
   if (playlist_.empty()) {
     FetchMoreTracks();
@@ -490,6 +492,7 @@ void LastFMService::NowPlaying(const Song &song) {
 
   lastfm::MutableTrack mtrack(TrackFromSong(song));
   mtrack.stamp();
+  already_scrobbled_ = false;
   last_track_ = mtrack;
 
   //check immediately if the song is valid
@@ -510,6 +513,7 @@ void LastFMService::Scrobble() {
 
   scrobbler_->cache(last_track_);
   scrobbler_->submit();
+  already_scrobbled_ = true;
 }
 
 void LastFMService::Love() {
@@ -519,6 +523,12 @@ void LastFMService::Love() {
   lastfm::MutableTrack mtrack(last_track_);
   mtrack.love();
   last_track_ = mtrack;
+
+  if (already_scrobbled_) {
+    // The love only takes effect when the song is scrobbled, but we've already
+    // scrobbled this one so we have to do it again.
+    Scrobble();
+  }
 }
 
 void LastFMService::Ban() {
