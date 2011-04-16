@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TranscoderOptionsAAC</class>
+ <widget class="QWidget" name="TranscoderOptionsAAC">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>344</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Bitrate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QSlider" name="bitrate_slider">
+       <property name="minimum">
+        <number>8</number>
+       </property>
+       <property name="maximum">
+        <number>320</number>
+       </property>
+       <property name="value">
+        <number>128</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="bitrate_spinbox">
+       <property name="suffix">
+        <string> kbps</string>
+       </property>
+       <property name="minimum">
+        <number>8</number>
+       </property>
+       <property name="maximum">
+        <number>320</number>
+       </property>
+       <property name="singleStep">
+        <number>8</number>
+       </property>
+       <property name="value">
+        <number>128</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Profile</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="profile">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>Main profile (MAIN)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Low complexity profile (LC)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Scalable sampling rate profile (SSR)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Long term prediction profile (LTP)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QCheckBox" name="tns">
+     <property name="text">
+      <string>Use temporal noise shaping</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QCheckBox" name="midside">
+     <property name="text">
+      <string>Allow mid/side encoding</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Block type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="shortctl">
+     <item>
+      <property name="text">
+       <string>Normal block type</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>No short blocks</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>No long blocks</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>bitrate_slider</tabstop>
+  <tabstop>bitrate_spinbox</tabstop>
+  <tabstop>profile</tabstop>
+  <tabstop>shortctl</tabstop>
+  <tabstop>tns</tabstop>
+  <tabstop>midside</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>bitrate_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bitrate_spinbox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>170</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>445</x>
+     <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bitrate_spinbox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bitrate_slider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>407</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

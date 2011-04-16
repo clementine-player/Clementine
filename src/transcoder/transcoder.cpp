@@ -20,6 +20,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QSettings>
 #include <QThread>
 #include <QtDebug>
 
@@ -60,6 +61,8 @@ GstElement* Transcoder::CreateElement(const QString &factory_name,
         tr("Could not create the GStreamer element \"%1\" -"
            " make sure you have all the required GStreamer plugins installed")
         .arg(factory_name));
+  } else {
+    SetElementProperties(factory_name, G_OBJECT(ret));
   }
 
   return ret;
@@ -146,8 +149,6 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
   if (best.name_ == "lamemp3enc") {
     // Special case: we need to add xingmux and id3v2mux to the pipeline when
     // using lamemp3enc because it doesn't write the VBR or ID3v2 headers itself.
-    // We also turn off VBR since it isn't compatible with some music players.
-    // TODO: Should make settings like these configurable.
 
     LogLine("Adding xingmux and id3v2mux to the pipeline");
 
@@ -163,10 +164,6 @@ GstElement* Transcoder::CreateElementForMimeType(const QString& element_type,
     if (!lame || !xing || !id3v2) {
       return NULL;
     }
-
-    // Configure the lame element
-    g_object_set(G_OBJECT(lame), "target", 1, NULL); // 1 == bitrate
-    g_object_set(G_OBJECT(lame), "cbr", true, NULL);
 
     // Link the elements together
     gst_element_link_many(lame, xing, id3v2, NULL);
@@ -210,6 +207,17 @@ Transcoder::Transcoder(QObject* parent)
 {
   if (JobFinishedEvent::sEventType == -1)
     JobFinishedEvent::sEventType = QEvent::registerEventType();
+
+  // Initialise some settings for the lamemp3enc element.
+  QSettings s;
+  s.beginGroup("Transcoder/lamemp3enc");
+
+  if (s.value("target").isNull()) {
+    s.setValue("target", 1); // 1 == bitrate
+  }
+  if (s.value("cbr").isNull()) {
+    s.setValue("cbr", true);
+  }
 }
 
 QList<TranscoderPreset> Transcoder::GetAllPresets() {
@@ -534,4 +542,33 @@ QMap<QString, float> Transcoder::GetProgress() const {
   }
 
   return ret;
+}
+
+void Transcoder::SetElementProperties(const QString& name, GObject* object) {
+  QSettings s;
+  s.beginGroup("Transcoder/" + name);
+
+  guint properties_count = 0;
+  GParamSpec** properties = g_object_class_list_properties(
+        G_OBJECT_GET_CLASS(object), &properties_count);
+
+  for (int i=0 ; i<properties_count ; ++i) {
+    GParamSpec* property = properties[i];
+
+    const QVariant value = s.value(property->name);
+    if (value.isNull())
+      continue;
+
+    LogLine(QString("Setting %1 property: %2 = %3").arg(name, property->name, value.toString()));
+
+    switch (property->value_type) {
+      case G_TYPE_DOUBLE:  g_object_set(object, property->name, value.toDouble(), NULL); break;
+      case G_TYPE_FLOAT:   g_object_set(object, property->name, value.toFloat(), NULL);  break;
+      case G_TYPE_BOOLEAN: g_object_set(object, property->name, value.toInt(), NULL);    break;
+      case G_TYPE_INT:
+      default:             g_object_set(object, property->name, value.toInt(), NULL);    break;
+    }
+  }
+
+  g_free(properties);
 }

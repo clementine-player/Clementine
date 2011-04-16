@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TranscoderOptionsSpeex</class>
+ <widget class="QWidget" name="TranscoderOptionsSpeex">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>555</width>
+    <height>424</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Quality</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QSlider" name="quality_slider">
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="value">
+        <number>8</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBelow</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="quality_spinbox">
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="value">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Bitrate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QSlider" name="bitrate_slider">
+       <property name="maximum">
+        <number>320</number>
+       </property>
+       <property name="singleStep">
+        <number>8</number>
+       </property>
+       <property name="pageStep">
+        <number>32</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="bitrate_spinbox">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="specialValueText">
+        <string>automatic</string>
+       </property>
+       <property name="suffix">
+        <string> kbps</string>
+       </property>
+       <property name="maximum">
+        <number>320</number>
+       </property>
+       <property name="singleStep">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Average bitrate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QSlider" name="abr_slider">
+       <property name="maximum">
+        <number>320</number>
+       </property>
+       <property name="singleStep">
+        <number>8</number>
+       </property>
+       <property name="pageStep">
+        <number>32</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="abr_spinbox">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="specialValueText">
+        <string>disabled</string>
+       </property>
+       <property name="suffix">
+        <string> kbps</string>
+       </property>
+       <property name="maximum">
+        <number>320</number>
+       </property>
+       <property name="singleStep">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Encoding mode</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="mode">
+     <item>
+      <property name="text">
+       <string>Auto</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ultra wide band (UWB)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Wide band (WB)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Narrow band (NB)</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QCheckBox" name="vbr">
+     <property name="text">
+      <string>Variable bit rate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QCheckBox" name="vad">
+     <property name="text">
+      <string>Voice activity detection</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="2">
+    <widget class="QCheckBox" name="dtx">
+     <property name="text">
+      <string>Discontinuous transmission</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Encoding complexity</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QSpinBox" name="complexity">
+     <property name="maximum">
+      <number>10000</number>
+     </property>
+     <property name="value">
+      <number>3</number>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Frames per buffer</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QSpinBox" name="nframes">
+     <property name="maximum">
+      <number>10000</number>
+     </property>
+     <property name="value">
+      <number>1</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>quality_slider</tabstop>
+  <tabstop>quality_spinbox</tabstop>
+  <tabstop>bitrate_slider</tabstop>
+  <tabstop>bitrate_spinbox</tabstop>
+  <tabstop>abr_slider</tabstop>
+  <tabstop>abr_spinbox</tabstop>
+  <tabstop>mode</tabstop>
+  <tabstop>vbr</tabstop>
+  <tabstop>vad</tabstop>
+  <tabstop>dtx</tabstop>
+  <tabstop>complexity</tabstop>
+  <tabstop>nframes</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>quality_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>quality_spinbox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>232</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>525</x>
+     <y>23</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quality_spinbox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>quality_slider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>517</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bitrate_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bitrate_spinbox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>66</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>445</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bitrate_spinbox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bitrate_slider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>471</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>abr_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>abr_spinbox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>90</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>500</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>abr_spinbox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>abr_slider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>493</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>339</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

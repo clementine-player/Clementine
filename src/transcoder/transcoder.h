@@ -129,6 +129,7 @@ class Transcoder : public QObject {
   GstElement* CreateElementForMimeType(const QString& element_type,
                                        const QString& mime_type,
                                        GstElement* bin = NULL);
+  void SetElementProperties(const QString& name, GObject* element);
 
   static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);

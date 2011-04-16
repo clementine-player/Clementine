@@ -103,6 +103,11 @@
        <string>Network Proxy</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Transcoding</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
@@ -120,7 +125,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>9</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1104,6 +1109,123 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="transcoding_page">
+        <layout class="QVBoxLayout" name="verticalLayout_19">
+         <item>
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>These settings are used in the &quot;Transcode Music&quot; dialog, and when converting music before copying it to a device.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTabWidget" name="tabWidget">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="tab">
+            <attribute name="title">
+             <string>MP3</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_20">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="TranscoderOptionsMP3" name="transcoding_mp3" native="true"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_2">
+            <attribute name="title">
+             <string>Vorbis</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_25">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="TranscoderOptionsVorbis" name="transcoding_vorbis" native="true"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_3">
+            <attribute name="title">
+             <string>FLAC</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_24">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="TranscoderOptionsFlac" name="transcoding_flac" native="true"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_4">
+            <attribute name="title">
+             <string>Speex</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_23">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="TranscoderOptionsSpeex" name="transcoding_speex" native="true"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_5">
+            <attribute name="title">
+             <string>AAC</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_22">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="TranscoderOptionsAAC" name="transcoding_aac" native="true"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_6">
+            <attribute name="title">
+             <string>WMA</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_21">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="TranscoderOptionsWma" name="transcoding_wma" native="true"/>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>
@@ -1157,6 +1279,42 @@
    <class>LyricSettings</class>
    <extends>QWidget</extends>
    <header>songinfo/lyricsettings.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranscoderOptionsMP3</class>
+   <extends>QWidget</extends>
+   <header>transcoder/transcoderoptionsmp3.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranscoderOptionsVorbis</class>
+   <extends>QWidget</extends>
+   <header>transcoder/transcoderoptionsvorbis.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranscoderOptionsSpeex</class>
+   <extends>QWidget</extends>
+   <header>transcoder/transcoderoptionsspeex.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranscoderOptionsAAC</class>
+   <extends>QWidget</extends>
+   <header>transcoder/transcoderoptionsaac.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranscoderOptionsFlac</class>
+   <extends>QWidget</extends>
+   <header>transcoder/transcoderoptionsflac.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TranscoderOptionsWma</class>
+   <extends>QWidget</extends>
+   <header>transcoder/transcoderoptionswma.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

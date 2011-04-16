@@ -215,6 +215,13 @@ set(SOURCES
 
   transcoder/transcodedialog.cpp
   transcoder/transcoder.cpp
+  transcoder/transcoderoptionsaac.cpp
+  transcoder/transcoderoptionsdialog.cpp
+  transcoder/transcoderoptionsflac.cpp
+  transcoder/transcoderoptionsmp3.cpp
+  transcoder/transcoderoptionsspeex.cpp
+  transcoder/transcoderoptionsvorbis.cpp
+  transcoder/transcoderoptionswma.cpp
 
   ui/about.cpp
   ui/addstreamdialog.cpp
@@ -407,6 +414,8 @@ set(HEADERS
 
   transcoder/transcodedialog.h
   transcoder/transcoder.h
+  transcoder/transcoderoptionsdialog.h
+  transcoder/transcoderoptionsmp3.h
 
   ui/about.h
   ui/addstreamdialog.h
@@ -489,6 +498,13 @@ set(UI
 
   transcoder/transcodedialog.ui
   transcoder/transcodelogdialog.ui
+  transcoder/transcoderoptionsaac.ui
+  transcoder/transcoderoptionsdialog.ui
+  transcoder/transcoderoptionsflac.ui
+  transcoder/transcoderoptionsmp3.ui
+  transcoder/transcoderoptionsspeex.ui
+  transcoder/transcoderoptionsvorbis.ui
+  transcoder/transcoderoptionswma.ui
 
   ui/about.ui
   ui/addstreamdialog.ui

@@ -145,6 +145,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->list->item(Page_Library)->setIcon(IconLoader::Load("folder-sound"));
   ui_->list->item(Page_BackgroundStreams)->setIcon(QIcon(":/icons/32x32/weather-showers-scattered.png"));
   ui_->list->item(Page_Proxy)->setIcon(IconLoader::Load("applications-internet"));
+  ui_->list->item(Page_Transcoding)->setIcon(IconLoader::Load("tools-wizard"));
 
   AddStreams();
 
@@ -438,6 +439,14 @@ void SettingsDialog::accept() {
   s.setValue("password", ui_->proxy_password->text());
   s.endGroup();
 
+  // Transcoding
+  ui_->transcoding_aac->Save();
+  ui_->transcoding_flac->Save();
+  ui_->transcoding_mp3->Save();
+  ui_->transcoding_speex->Save();
+  ui_->transcoding_vorbis->Save();
+  ui_->transcoding_wma->Save();
+
   ui_->library_config->Save();
   ui_->magnatune->Save();
   ui_->global_shortcuts->Save();
@@ -628,6 +637,14 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->proxy_username->setText(s.value("username").toString());
   ui_->proxy_password->setText(s.value("password").toString());
   s.endGroup();
+
+  // Transcoding
+  ui_->transcoding_aac->Load();
+  ui_->transcoding_flac->Load();
+  ui_->transcoding_mp3->Load();
+  ui_->transcoding_speex->Load();
+  ui_->transcoding_vorbis->Load();
+  ui_->transcoding_wma->Load();
 
   loading_settings_ = false;
 }

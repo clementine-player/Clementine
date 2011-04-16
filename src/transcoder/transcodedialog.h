@@ -48,6 +48,7 @@ class TranscodeDialog : public QDialog {
   void JobComplete(const QString& filename, bool success);
   void LogLine(const QString& message);
   void AllJobsComplete();
+  void Options();
 
  private:
   void SetWorking(bool working);

@@ -17,6 +17,7 @@
 
 #include "transcodedialog.h"
 #include "transcoder.h"
+#include "transcoderoptionsdialog.h"
 #include "ui_transcodedialog.h"
 #include "ui_transcodelogdialog.h"
 #include "ui/mainwindow.h"
@@ -97,6 +98,7 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   connect(cancel_button_, SIGNAL(clicked()), SLOT(Cancel()));
   connect(close_button_, SIGNAL(clicked()), SLOT(hide()));
   connect(ui_->details, SIGNAL(clicked()), log_dialog_, SLOT(show()));
+  connect(ui_->options, SIGNAL(clicked()), SLOT(Options()));
 
   connect(transcoder_, SIGNAL(JobComplete(QString,bool)), SLOT(JobComplete(QString,bool)));
   connect(transcoder_, SIGNAL(LogLine(QString)), SLOT(LogLine(QString)));
@@ -241,5 +243,15 @@ void TranscodeDialog::timerEvent(QTimerEvent* e) {
 
   if (e->timerId() == progress_timer_.timerId()) {
     UpdateProgress();
+  }
+}
+
+void TranscodeDialog::Options() {
+  TranscoderPreset preset = ui_->format->itemData(
+      ui_->format->currentIndex()).value<TranscoderPreset>();
+
+  TranscoderOptionsDialog dialog(preset.type_, this);
+  if (dialog.is_valid()) {
+    dialog.exec();
   }
 }

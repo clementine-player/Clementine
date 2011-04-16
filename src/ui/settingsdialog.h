@@ -67,6 +67,7 @@ class SettingsDialog : public QDialog {
     Page_Magnatune,
     Page_BackgroundStreams,
     Page_Proxy,
+    Page_Transcoding,
 #ifdef HAVE_REMOTE
     Page_Remote,
 #endif
