@@ -65,6 +65,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     pipeline_(NULL),
     uridecodebin_(NULL),
     audiobin_(NULL),
+    queue_(NULL),
     audioconvert_(NULL),
     rgvolume_(NULL),
     rglimiter_(NULL),
@@ -156,8 +157,8 @@ bool GstEnginePipeline::Init() {
   // The uri decode bin is a gstreamer builtin that automatically picks the
   // right type of source and decoder for the URI.
   // The audio bin gets created here and contains:
-  //   audioconvert -> rgvolume -> rglimiter -> equalizer_preamp -> equalizer ->
-  //   volume -> audioscale -> audioconvert -> audiosink
+  //   queue -> audioconvert -> rgvolume -> rglimiter -> equalizer_preamp ->
+  //   equalizer -> volume -> audioscale -> audioconvert -> audiosink
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
@@ -169,6 +170,7 @@ bool GstEnginePipeline::Init() {
   if (GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty())
     g_object_set(G_OBJECT(audiosink_), "device", device_.toUtf8().constData(), NULL);
 
+  if (!(queue_ = engine_->CreateElement("queue", audiobin_))) { return false; }
   if (!(equalizer_preamp_ = engine_->CreateElement("volume", audiobin_))) { return false; }
   if (!(equalizer_ = engine_->CreateElement("equalizer-nbands", audiobin_))) { return false; }
   if (!(audioconvert_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
@@ -188,7 +190,7 @@ bool GstEnginePipeline::Init() {
     g_object_set(G_OBJECT(rglimiter_), "enabled", int(rg_compression_), NULL);
   }
 
-  GstPad* pad = gst_element_get_pad(audioconvert_, "sink");
+  GstPad* pad = gst_element_get_pad(queue_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
 
@@ -217,6 +219,11 @@ bool GstEnginePipeline::Init() {
     g_object_unref(G_OBJECT(band));
   }
 
+  // Set the buffer duration.  We set this on the queue as well as on the
+  // decode bin (in ReplaceDecodeBin()) because setting it on the decode bin
+  // only affects network sources.
+  g_object_set(G_OBJECT(queue_), "max-size-time", buffer_duration_nanosec_, NULL);
+
   // Ensure we get the right type out of audioconvert for our scope
   GstCaps* caps = gst_caps_new_simple ("audio/x-raw-int",
       "width", G_TYPE_INT, 16,
@@ -228,6 +235,8 @@ bool GstEnginePipeline::Init() {
   // Add an extra audioconvert at the end as osxaudiosink supports only one format.
   GstElement* convert = engine_->CreateElement("audioconvert", audiobin_);
   if (!convert) { return false; }
+
+  gst_element_link(queue_, audioconvert_);
   if (rg_enabled_)
     gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);
   gst_element_link_many(equalizer_preamp_, equalizer_, volume_, audioscale_, convert, audiosink_, NULL);

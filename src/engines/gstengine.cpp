@@ -165,7 +165,7 @@ void GstEngine::ReloadSettings() {
   rg_preamp_ = s.value("rgpreamp", 0.0).toDouble();
   rg_compression_ = s.value("rgcompression", true).toBool();
 
-  buffer_duration_nanosec_ = s.value("bufferduration", 1000).toLongLong() * kNsecPerMsec;
+  buffer_duration_nanosec_ = s.value("bufferduration", 4000).toLongLong() * kNsecPerMsec;
 }
 
 
