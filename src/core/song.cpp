@@ -921,7 +921,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     AddWmdmItem(metadata, g_wszWMDMComposer, d->composer_);
     AddWmdmItem(metadata, g_wszWMDMBitrate, d->bitrate_);
     AddWmdmItem(metadata, g_wszWMDMFileName, d->basefilename_);
-    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(length_nanosec()) / 1e2);
+    AddWmdmItem(metadata, g_wszWMDMDuration, qint64(length_nanosec() / 1e2));
     AddWmdmItem(metadata, L"WMDM/FileSize", d->filesize_);
 
     WMDM_FORMATCODE format;
