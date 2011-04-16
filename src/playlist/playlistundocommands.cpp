@@ -47,6 +47,17 @@ void InsertItems::undo() {
   playlist_->RemoveItemsWithoutUndo(start, items_.count());
 }
 
+bool InsertItems::UpdateItem(const PlaylistItemPtr& updated_item) {
+  for (int i=0; i<items_.size(); i++) {
+    PlaylistItemPtr item = items_[i];
+    if (item->Metadata().filename() == updated_item->Metadata().filename()) {
+      items_[i] = updated_item;
+      return true;
+    }
+  }
+  return false;
+}
+
 
 RemoveItems::RemoveItems(Playlist *playlist, int pos, int count)
   : Base(playlist)

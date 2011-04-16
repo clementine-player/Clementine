@@ -54,6 +54,9 @@ public:
 
   Result Load(const QUrl& url);
 
+  // For async load, to effectively load songs 
+  void EffectiveSongsLoad();
+
 signals:
   void LoadFinished(bool success);
 
@@ -70,6 +73,7 @@ private:
   };
 
   Result LoadLocal(const QString& filename, bool block = false, bool ignore_playlists = false);
+  Result LoadLocalPartial(const QString& filename);
   void LoadLocalDirectory(const QString& filename);
   void LoadPlaylist(ParserBase* parser, const QString& filename);
   void LoadLocalDirectoryAndEmit(const QString& filename);

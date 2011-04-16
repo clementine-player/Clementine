@@ -325,6 +325,7 @@ void SongLoaderTest::LoadLocalDirectory(const QString &filename) {
   QObject::connect(loader_.get(), SIGNAL(LoadFinished(bool)),
                    &loop, SLOT(quit()));
   loop.exec(QEventLoop::ExcludeUserInputEvents);
+  loader_.get()->EffectiveSongsLoad();
 
   // Check the signal was emitted with Success
   ASSERT_EQ(1, spy.count());

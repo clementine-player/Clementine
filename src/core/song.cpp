@@ -560,6 +560,24 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   #undef tofloat
 }
 
+void Song::InitFromFilePartial(const QString& filename) {
+  d->filename_ = filename;
+  // We currently rely on filename suffix to know if it's a music file or not.
+  // TODO: I know this is not satisfying, but currently, we rely on TagLib
+  // which seems to have the behavior (filename checks). Someday, it would be
+  // nice to perform some magic tests everywhere.
+  QFileInfo info(filename);
+  d->basefilename_ = info.fileName();
+  QString suffix = info.suffix().toLower();
+  if (suffix == "mp3" || suffix == "ogg" || suffix == "flac" || suffix == "mpc"
+      || suffix == "m4a" || suffix == "aac" || suffix == "wma" || suffix == "mp4"
+      || suffix == "spx" || suffix == "wav") {
+    d->valid_ = true;
+  } else {
+    d->valid_ = false;
+  }
+}
+
 #ifdef HAVE_LIBLASTFM
 void Song::InitFromLastFM(const lastfm::Track& track) {
   d->valid_ = true;

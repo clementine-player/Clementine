@@ -48,6 +48,8 @@ private slots:
   void DestinationDestroyed();
 
 private:
+  void PartiallyFinished();
+  void EffectiveLoad();
   void Finished();
 
 private:
@@ -61,6 +63,7 @@ private:
   SongList songs_;
 
   QSet<SongLoader*> pending_;
+  QSet<SongLoader*> pending_async_;
   int async_load_id_;
   int async_progress_;
   LibraryBackendInterface* library_;

@@ -211,6 +211,7 @@ class Playlist : public QAbstractListModel {
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
   // Removes items with given indices from the playlist. This operation is not undoable.
   void RemoveItemsWithoutUndo   (const QList<int>& indices);
+  void UpdateItems              (const SongList& songs);
 
   // If this playlist contains the current item, this method will apply the "valid" flag on it.
   // If the "valid" flag is false, the song will be greyed out. Otherwise the grey color will

@@ -15,6 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QtConcurrentRun>
+
 #include "playlist.h"
 #include "songloaderinserter.h"
 #include "core/songloader.h"
@@ -34,6 +36,7 @@ SongLoaderInserter::SongLoaderInserter(
 
 SongLoaderInserter::~SongLoaderInserter() {
   qDeleteAll(pending_);
+  qDeleteAll(pending_async_);
 }
 
 void SongLoaderInserter::Load(Playlist *destination,
@@ -84,19 +87,42 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
   if (!loader || !pending_.contains(loader))
     return;
   pending_.remove(loader);
+  pending_async_.insert(loader);
 
   if (success)
     songs_ << loader->songs();
   else
     emit Error(tr("Error loading %1").arg(loader->url().toString()));
 
-  loader->deleteLater();
-
   task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
   if (pending_.isEmpty()) {
     task_manager_->SetTaskFinished(async_load_id_);
-    Finished();
+    async_progress_ = 0;
+    async_load_id_ = task_manager_->StartTask(tr("Loading tracks info"));
+    task_manager_->SetTaskProgress(async_load_id_, async_progress_, pending_async_.count());
+    PartiallyFinished();
   }
+}
+
+void SongLoaderInserter::PartiallyFinished() {
+  // Insert songs (that haven't been completelly loaded) to allow user to see
+  // and playing them while not loaded completely
+  if (destination_) {
+    destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_);
+  }
+  QtConcurrent::run(this, &SongLoaderInserter::EffectiveLoad);
+}
+
+void SongLoaderInserter::EffectiveLoad() {
+  foreach (SongLoader* loader, pending_async_) {
+    loader->EffectiveSongsLoad();
+    task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
+    if(destination_) {
+      destination_->UpdateItems(loader->songs());
+    }
+    loader->deleteLater();
+  }
+  task_manager_->SetTaskFinished(async_load_id_);
 }
 
 void SongLoaderInserter::Finished() {

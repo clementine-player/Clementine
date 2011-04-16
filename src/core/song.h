@@ -128,6 +128,7 @@ class Song {
   void Init(const QString& title, const QString& artist, const QString& album, qint64 beginning, qint64 end);
   void InitFromFile(const QString& filename, int directory_id);
   void InitFromQuery(const SqlRow& query, int col = 0);
+  void InitFromFilePartial(const QString& filename); // Just store the filename: incomplete but fast
 #ifdef HAVE_LIBLASTFM
   void InitFromLastFM(const lastfm::Track& track);
 #endif

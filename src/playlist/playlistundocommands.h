@@ -47,6 +47,11 @@ namespace PlaylistUndoCommands {
 
     void undo();
     void redo();
+    // When load is async, items have already been pushed, so we need to update them.
+    // This function try to find the equivalent item, and replace it with the
+    // new (completely loaded) one.
+    // return true if the was found (and updated), false otherwise
+    bool UpdateItem(const PlaylistItemPtr& updated_item);
 
    private:
     PlaylistItemList items_;

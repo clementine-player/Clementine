@@ -82,6 +82,21 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
   return LoadRemote();
 }
 
+SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
+  qDebug() << "Fast Loading local file" << filename;
+  // First check to see if it's a directory - if so we can load all the songs
+  // inside right away.
+  if (QFileInfo(filename).isDir()) {
+    LoadLocalDirectory(filename);
+    return Success;
+  }
+  Song song;
+  song.InitFromFilePartial(filename);
+  if (song.is_valid())
+    songs_ << song;
+  return Success;
+}
+
 SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
                                          bool ignore_playlists) {
   qDebug() << "Loading local file" << filename;
@@ -166,13 +181,34 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
     }
   }
-
-  foreach(const Song& song, song_list) {
+  foreach (const Song& song, song_list) {
     if (song.is_valid())
       songs_ << song;
   }
 
   return Success;
+}
+
+void SongLoader::EffectiveSongsLoad() {
+  for (int i = 0; i < songs_.size(); i++) {
+    Song& song = songs_[i];
+    QString filename = song.filename();
+    QFileInfo info(filename);
+
+    LibraryQuery query;
+    query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
+    query.AddWhere("filename", info.canonicalFilePath());
+
+    if (library_->ExecQuery(&query) && query.Next()) {
+      // we may have many results when the file has many sections
+      do {
+        song.InitFromQuery(query);
+      } while(query.Next());
+    } else {
+      // it's a normal media file
+      song.InitFromFile(filename, -1);
+    }
+  }
 }
 
 void SongLoader::LoadPlaylistAndEmit(ParserBase* parser, const QString& filename) {
@@ -209,8 +245,7 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
                   QDirIterator::Subdirectories);
 
   while (it.hasNext()) {
-    // This is in another thread so we can do blocking calls.
-    LoadLocal(it.next(), true, true);
+    LoadLocalPartial(it.next());
   }
 
   qStableSort(songs_.begin(), songs_.end(), CompareSongs);

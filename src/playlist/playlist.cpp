@@ -952,6 +952,38 @@ void Playlist::InsertRadioStations(const RadioModel* model,
   InsertItems(playlist_items, pos, play_now, enqueue);
 }
 
+void Playlist::UpdateItems(const SongList& songs) {
+  qDebug() << "Updating playlist with new tracks' info";
+  foreach (const Song& song, songs) {
+    // Update current items list
+    for (int i=0; i<items_.size(); i++) {
+      PlaylistItemPtr item = items_[i];
+      if (item->Metadata().filename() == song.filename()) {
+        PlaylistItemPtr new_item;
+        if (song.id() == -1) {
+          new_item = PlaylistItemPtr(new SongPlaylistItem(song));
+        } else {
+          new_item = PlaylistItemPtr(new LibraryPlaylistItem(song));
+          library_items_by_id_.insertMulti(song.id(), new_item);
+        }
+        items_[i] = new_item;
+        emit dataChanged(index(i, 0), index(i, ColumnCount-1));
+        // Also update undo actions
+        for (int i=0; i<undo_stack_->count(); i++) {
+          QUndoCommand *undo_action = const_cast<QUndoCommand*>(undo_stack_->command(i));
+          PlaylistUndoCommands::InsertItems *undo_action_insert =
+            dynamic_cast<PlaylistUndoCommands::InsertItems*>(undo_action);
+          if (undo_action_insert) {
+            bool found_and_updated = undo_action_insert->UpdateItem(new_item);
+            if (found_and_updated) break;
+          }
+        }
+        break;
+      }
+    }
+  }
+}
+
 QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
   QMimeData* data = new QMimeData;
 
