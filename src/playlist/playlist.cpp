@@ -72,6 +72,9 @@ const QRgb Playlist::kDynamicHistoryColor = qRgb(0x80, 0x80, 0x80);
 
 const char* Playlist::kSettingsGroup = "Playlist";
 
+const int Playlist::kUndoStackSize = 20;
+const int Playlist::kUndoItemLimit = 500;
+
 Playlist::Playlist(PlaylistBackend* backend,
                    TaskManager* task_manager,
                    LibraryBackend* library,
@@ -94,6 +97,8 @@ Playlist::Playlist(PlaylistBackend* backend,
     ignore_sorting_(false),
     undo_stack_(new QUndoStack(this))
 {
+  undo_stack_->setUndoLimit(kUndoStackSize);
+
   connect(this, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
   connect(this, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SIGNAL(PlaylistChanged()));
 
@@ -662,7 +667,13 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       PlaylistItemList items;
       foreach (int row, source_rows)
         items << source_playlist->item_at(row);
-      undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, row));
+
+      if (items.count() > kUndoItemLimit) {
+        // Too big to keep in the undo stack
+        InsertItemsWithoutUndo(items, row, false);
+      } else {
+        undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, row));
+      }
 
       // Remove the items from the source playlist if it was a move event
       if (action == Qt::MoveAction) {
@@ -839,7 +850,13 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos, bool play_n
   }
 
   const int start = pos == -1 ? items_.count() : pos;
-  undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos, enqueue));
+
+  if (items.count() > kUndoItemLimit) {
+    // Too big to keep in the undo stack
+    InsertItemsWithoutUndo(items, pos, enqueue);
+  } else {
+    undo_stack_->push(new PlaylistUndoCommands::InsertItems(this, items, pos, enqueue));
+  }
 
   if (play_now)
     emit PlayRequested(index(start, 0));
@@ -1215,7 +1232,13 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
     return false;
   }
 
-  undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, row, count));
+  if (count > kUndoItemLimit) {
+    // Too big to keep in the undo stack
+    RemoveItemsWithoutUndo(row, count);
+  } else {
+    undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, row, count));
+  }
+
   return true;
 }
 
@@ -1339,7 +1362,15 @@ void Playlist::UpdateScrobblePoint() {
 }
 
 void Playlist::Clear() {
-  undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, 0, items_.count()));
+  const int count = items_.count();
+
+  if (count > kUndoItemLimit) {
+    // Too big to keep in the undo stack
+    RemoveItemsWithoutUndo(0, count);
+  } else {
+    undo_stack_->push(new PlaylistUndoCommands::RemoveItems(this, 0, count));
+  }
+
   TurnOffDynamicPlaylist();
 
   Save();

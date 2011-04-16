@@ -142,6 +142,9 @@ class Playlist : public QAbstractListModel {
 
   static const char* kSettingsGroup;
 
+  static const int kUndoStackSize;
+  static const int kUndoItemLimit;
+
   static bool CompareItems(int column, Qt::SortOrder order,
                            PlaylistItemPtr a, PlaylistItemPtr b);
 
