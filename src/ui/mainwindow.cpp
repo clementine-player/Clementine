@@ -1050,8 +1050,12 @@ void MainWindow::UpdateTrackPosition() {
     if (RadioModel::Service<LastFMService>()->IsScrobblingEnabled()) {
       qDebug() << "Scrobbling at" << scrobble_point;
       radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
-    }
+    } else
 #endif
+      // If we're not scrobbling or last.fm is compiled out, mark the song
+      // as "won't scrobble", so we only update the play count below once.
+      playlists_->active()->set_lastfm_status(Playlist::LastFM_Invalid);
+
     // Update the play count for the song if it's from the library
     if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
       library_->backend()->IncrementPlayCountAsync(item->Metadata().id());
@@ -2120,24 +2124,36 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
 
 #ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobblerStatus(int value) {
-  bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() && RadioModel::Service<LastFMService>()->IsScrobblingEnabled() && RadioModel::Service<LastFMService>()->IsAuthenticated();
+  const LastFMService* lastfm_service = RadioModel::Service<LastFMService>();
+  const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
+                               lastfm_service->IsScrobblingEnabled() &&
+                               lastfm_service->IsAuthenticated();
 
-  if (value == -1) {
-    //custom error value got from initial validity check
-    playlists_->active()->set_lastfm_status(Playlist::LastFM_Invalid);
-  }
-  //we should get 3 for a correct scrobbling, but I just get 2 for mysterious reasons
-  //seems to scrobble fine though, so for now we accept it as correct
-  if (value == 2 || value == 3) {
-    playlists_->active()->set_lastfm_status(Playlist::LastFM_Scrobbled);
-    //update the button icon
-    if (last_fm_enabled)
-      ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
-  }
-  if (value > 3) {
-    //we're for sure in an error state
-    playlists_->active()->set_lastfm_status(Playlist::LastFM_Error);
-    qWarning() << "Last.fm scrobbling error: " << value;
+  switch (value) {
+    case -1:
+      // custom error value got from initial validity check
+      playlists_->active()->set_lastfm_status(Playlist::LastFM_Invalid);
+      break;
+
+    case 2:
+    case 3:
+      // we should get 3 for a correct scrobbling, but I just get 2 for
+      // mysterious reasons
+      // seems to scrobble fine though, so for now we accept it as correct
+      playlists_->active()->set_lastfm_status(Playlist::LastFM_Scrobbled);
+
+      // update the button icon
+      if (last_fm_enabled)
+        ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
+      break;
+
+    default:
+      if (value > 3) {
+        // we're for sure in an error state
+        playlists_->active()->set_lastfm_status(Playlist::LastFM_Error);
+        qWarning() << "Last.fm scrobbling error: " << value;
+      }
+      break;
   }
 }
 #endif
