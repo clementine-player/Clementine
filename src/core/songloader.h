@@ -53,8 +53,14 @@ public:
   void set_timeout(int msec) { timeout_ = msec; }
 
   Result Load(const QUrl& url);
-
-  // For async load, to effectively load songs 
+  // To effectively load the songs:
+  // when we call Load() on a directory, it will return WillLoadAsync, load the
+  // files with only filenames and emit LoadFinished(). When LoadFinished() is
+  // received by songloaderinserter, it will insert songs (incompletely loaded)
+  // in playlist, and call EffectiveSongsLoad() in a background thread to
+  // perform the real load of the songs. Next, UpdateItems() will be called on
+  // playlist and replace the partially-loaded items by the new ones, fully
+  // loaded.
   void EffectiveSongsLoad();
 
 signals:

@@ -106,7 +106,7 @@ void SongLoaderInserter::PendingLoadFinished(bool success) {
 
 void SongLoaderInserter::PartiallyFinished() {
   // Insert songs (that haven't been completelly loaded) to allow user to see
-  // and playing them while not loaded completely
+  // and play them while not loaded completely
   if (destination_) {
     destination_->InsertSongsOrLibraryItems(songs_, row_, play_now_, enqueue_);
   }
@@ -120,9 +120,10 @@ void SongLoaderInserter::EffectiveLoad() {
     if(destination_) {
       destination_->UpdateItems(loader->songs());
     }
-    loader->deleteLater();
   }
   task_manager_->SetTaskFinished(async_load_id_);
+
+  deleteLater();
 }
 
 void SongLoaderInserter::Finished() {
