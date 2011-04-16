@@ -27,4 +27,4 @@ make || exit
 make || exit
 cd ../.. || exit
 
-echo "Now change svn-www/data.py to add any new langauges"
+echo "Now change www-svn/data.py to add any new langauges"
