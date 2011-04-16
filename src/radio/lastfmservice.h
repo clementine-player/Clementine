@@ -122,6 +122,7 @@ class LastFMService : public RadioService {
   void ScrobbleButtonVisibilityChanged(bool value);
   void ScrobblerStatus(int value);
   void UpdatedSubscriberStatus(bool is_subscriber);
+  void ScrobbledRadioStream();
 
  protected:
   QModelIndex GetCurrentIndex();

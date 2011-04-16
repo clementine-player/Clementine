@@ -198,6 +198,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 #ifdef HAVE_LIBLASTFM
   void ScrobblingEnabledChanged(bool value);
   void Love();
+  void ScrobbledRadioStream();
 #endif
 
   void TaskCountChanged(int count);

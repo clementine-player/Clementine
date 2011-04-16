@@ -515,9 +515,11 @@ MainWindow::MainWindow(
   connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(radio_model_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 #ifdef HAVE_LIBLASTFM
-  connect(RadioModel::Service<LastFMService>(), SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
-  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobbleButtonVisibilityChanged(bool)), SLOT(ScrobbleButtonVisibilityChanged(bool)));
-  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
+  LastFMService* lastfm_service = RadioModel::Service<LastFMService>();
+  connect(lastfm_service, SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
+  connect(lastfm_service, SIGNAL(ScrobbleButtonVisibilityChanged(bool)), SLOT(ScrobbleButtonVisibilityChanged(bool)));
+  connect(lastfm_service, SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
+  connect(lastfm_service, SIGNAL(ScrobbledRadioStream()), SLOT(ScrobbledRadioStream()));
 #endif
   connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
   connect(radio_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
@@ -1075,6 +1077,10 @@ void MainWindow::UpdateTrackPosition() {
 }
 
 #ifdef HAVE_LIBLASTFM
+void MainWindow::ScrobbledRadioStream() {
+  ui_->action_love->setEnabled(true);
+}
+
 void MainWindow::Love() {
   RadioModel::Service<LastFMService>()->Love();
   ui_->action_love->setEnabled(false);

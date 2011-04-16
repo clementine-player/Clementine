@@ -483,6 +483,8 @@ void LastFMService::NowPlaying(const Song &song) {
       qDebug() << "Scrobbling stream track" << mtrack.title() << "length" << duration_secs;
       scrobbler_->cache(mtrack);
       scrobbler_->submit();
+
+      emit ScrobbledRadioStream();
     }
   }
 
