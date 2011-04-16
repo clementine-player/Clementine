@@ -30,6 +30,7 @@
 #include <lastfm/misc.h>
 #include <lastfm/RadioStation>
 #include <lastfm/Scrobble>
+#include <lastfm/ScrobblePoint>
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery>
 
@@ -466,6 +467,24 @@ lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
 void LastFMService::NowPlaying(const Song &song) {
   if (!InitScrobbler())
     return;
+
+  // Scrobbling streams is difficult if we don't have length of each individual
+  // part.  In Song::ToLastFm we set the Track's source to
+  // NonPersonalisedBroadcast if it's such a stream, so we have to scrobble it
+  // when we change to a different track, but only if enough time has elapsed
+  // since it started playing.
+  if (!last_track_.isNull() &&
+      last_track_.source() == lastfm::Track::NonPersonalisedBroadcast) {
+    const int duration_secs = last_track_.timestamp().secsTo(QDateTime::currentDateTime());
+    if (duration_secs >= ScrobblePoint::kScrobbleMinLength) {
+      lastfm::MutableTrack mtrack(last_track_);
+      mtrack.setDuration(duration_secs);
+
+      qDebug() << "Scrobbling stream track" << mtrack.title() << "length" << duration_secs;
+      scrobbler_->cache(mtrack);
+      scrobbler_->submit();
+    }
+  }
 
   lastfm::MutableTrack mtrack(TrackFromSong(song));
   mtrack.stamp();

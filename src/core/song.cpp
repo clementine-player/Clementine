@@ -1056,7 +1056,12 @@ void Song::ToLastFM(lastfm::Track* track) const {
   mtrack.setTitle(d->title_);
   mtrack.setDuration(length_nanosec() / kNsecPerSec);
   mtrack.setTrackNumber(d->track_);
-  mtrack.setSource(lastfm::Track::Player);
+
+  if (d->filetype_ == Type_Stream && d->end_ == -1) {
+    mtrack.setSource(lastfm::Track::NonPersonalisedBroadcast);
+  } else {
+    mtrack.setSource(lastfm::Track::Player);
+  }
 }
 #endif // HAVE_LIBLASTFM
 
