@@ -44,8 +44,8 @@ LastFMConfig::LastFMConfig(QWidget *parent)
 
   // Icons
   ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
-  ui_->label->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
-  ui_->label->setMinimumSize(16, 16);
+  ui_->warn_icon->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
+  ui_->warn_icon->setMinimumSize(16, 16);
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
   connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)), SLOT(UpdatedSubscriberStatus(bool)));
@@ -110,10 +110,12 @@ void LastFMConfig::UpdatedSubscriberStatus(bool is_subscriber) {
 
   if (is_subscriber) {
     ui_->subscriber_warning->hide();
+    ui_->warn_icon->hide();
   } else {
     ui_->subscriber_warning->setText(
       tr("You will not be able to play Last.fm radio stations "
          "as you are not a Last.fm subscriber."));
+    ui_->warn_icon->show();
   }
 }
 
@@ -145,10 +147,12 @@ void LastFMConfig::RefreshControls(bool authenticated) {
   else {
     ui_->icon->setPixmap(IconLoader::Load("dialog-question").pixmap(16));
     ui_->status->setText(tr("Please fill in the blanks to login into Last.fm"));
+
     ui_->subscriber_warning->setText(
         tr("You can scrobble tracks for free, but only "
            "<span style=\" font-weight:600;\">paid subscribers</span> "
            "can stream Last.fm radio from Clementine."));
     ui_->subscriber_warning->show();
+    ui_->warn_icon->show();
   }
 }

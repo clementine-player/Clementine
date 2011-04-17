@@ -11,11 +11,15 @@ msgstr ""
 "PO-Revision-Date: 2011-04-02 20:14+0000\n"
 "Last-Translator: Nedim Skenderovic <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
+
+msgid " kbps"
+msgstr ""
 
 msgid " ms"
 msgstr " ms"
@@ -81,15 +85,15 @@ msgstr ""
 msgid "%1: Wiimotedev module"
 msgstr "%1 Wiimotedev modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n ostalo"
 
@@ -172,6 +176,9 @@ msgstr "Pjesma će biti uključena u listu pjesama ako zadovoljava ove uslove."
 
 msgid "A-Z"
 msgstr "A-Z"
+
+msgid "AAC"
+msgstr ""
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -316,6 +323,9 @@ msgstr "Svi prevodioci"
 msgid "All tracks"
 msgstr "Sve pjesme"
 
+msgid "Allow mid/side encoding"
+msgstr ""
+
 msgid "Alongside the originals"
 msgstr "Pored orginala"
 
@@ -400,6 +410,9 @@ msgstr "Autentifikacija nije prošla"
 msgid "Authors"
 msgstr "Autori"
 
+msgid "Auto"
+msgstr ""
+
 msgid "Automatic updating"
 msgstr "Automatsko osvježavanje"
 
@@ -408,6 +421,9 @@ msgstr ""
 
 msgid "Available"
 msgstr "Dostupno"
+
+msgid "Average bitrate"
+msgstr ""
 
 msgid "BPM"
 msgstr "BPM"
@@ -433,6 +449,9 @@ msgstr "Osnovna plava"
 msgid "Behavior"
 msgstr "Ponašanje"
 
+msgid "Best"
+msgstr ""
+
 #, qt-format
 msgid "Biography from %1"
 msgstr "Biografija od %1"
@@ -444,6 +463,9 @@ msgid "Bitrate"
 msgstr ""
 
 msgid "Block analyzer"
+msgstr ""
+
+msgid "Block type"
 msgstr ""
 
 msgid "Bluetooth MAC Address"
@@ -615,6 +637,9 @@ msgstr "Spoji Wii daljinski koristeći akciju aktivacija/de-aktivacija"
 
 msgid "Connect device"
 msgstr "Spoji uređaj"
+
+msgid "Constant bitrate"
+msgstr ""
 
 msgid "Convert all music"
 msgstr "Pretvori svu muziku"
@@ -842,6 +867,9 @@ msgstr "Onemogućeno"
 msgid "Disc"
 msgstr "Disk"
 
+msgid "Discontinuous transmission"
+msgstr ""
+
 msgid "Display options"
 msgstr "Opcije prikazivanje"
 
@@ -948,6 +976,15 @@ msgstr ""
 msgid "Enable/disable Last.fm scrobbling"
 msgstr ""
 
+msgid "Encoding complexity"
+msgstr ""
+
+msgid "Encoding engine quality"
+msgstr ""
+
+msgid "Encoding mode"
+msgstr ""
+
 msgid "Enter a new name for this playlist"
 msgstr ""
 
@@ -1035,6 +1072,9 @@ msgstr ""
 msgid "Fading duration"
 msgstr ""
 
+msgid "Fast"
+msgstr ""
+
 msgid "Favourite tracks"
 msgstr ""
 
@@ -1101,6 +1141,9 @@ msgstr ""
 msgid "Font size"
 msgstr ""
 
+msgid "Force mono encoding"
+msgstr ""
+
 msgid "Forget device"
 msgstr ""
 
@@ -1116,6 +1159,9 @@ msgid "Format"
 msgstr ""
 
 msgid "Framerate"
+msgstr ""
+
+msgid "Frames per buffer"
 msgstr ""
 
 msgid "Friends"
@@ -1195,6 +1241,9 @@ msgid "Hardware information"
 msgstr ""
 
 msgid "Hardware information is only available while the device is connected."
+msgstr ""
+
+msgid "High"
 msgstr ""
 
 #, qt-format
@@ -1469,10 +1518,16 @@ msgstr ""
 msgid "Loading tracks"
 msgstr ""
 
+msgid "Loading tracks info"
+msgstr ""
+
 msgid "Loading..."
 msgstr ""
 
 msgid "Loads files/URLs, replacing current playlist"
+msgstr ""
+
+msgid "Long term prediction profile (LTP)"
 msgstr ""
 
 msgid "Love"
@@ -1486,6 +1541,9 @@ msgid "Low (15 fps)"
 msgstr ""
 
 msgid "Low (256x256)"
+msgstr ""
+
+msgid "Low complexity profile (LC)"
 msgstr ""
 
 msgid "Lyrics"
@@ -1513,6 +1571,9 @@ msgstr ""
 msgid "Magnatune download finished"
 msgstr ""
 
+msgid "Main profile (MAIN)"
+msgstr ""
+
 msgid "Malformed response"
 msgstr ""
 
@@ -1528,6 +1589,9 @@ msgstr ""
 msgid "Match one or more search terms (OR)"
 msgstr ""
 
+msgid "Maximum bitrate"
+msgstr ""
+
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr ""
@@ -1541,6 +1605,9 @@ msgstr ""
 msgid "Membership type"
 msgstr ""
 
+msgid "Minimum bitrate"
+msgstr ""
+
 msgid "Missing projectM presets"
 msgstr ""
 
@@ -1551,6 +1618,9 @@ msgid "Monitor the library for changes"
 msgstr ""
 
 msgid "Most played"
+msgstr ""
+
+msgid "Mount point"
 msgstr ""
 
 msgid "Mount points"
@@ -1610,6 +1680,9 @@ msgstr ""
 msgid "Naming options"
 msgstr ""
 
+msgid "Narrow band (NB)"
+msgstr ""
+
 msgid "Neighbors"
 msgstr ""
 
@@ -1652,14 +1725,23 @@ msgstr ""
 msgid "No analyzer"
 msgstr ""
 
+msgid "No long blocks"
+msgstr ""
+
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
+msgstr ""
+
+msgid "No short blocks"
 msgstr ""
 
 msgid "None"
 msgstr ""
 
 msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
+msgid "Normal block type"
 msgstr ""
 
 msgid "Not available while using a dynamic playlist"
@@ -1732,6 +1814,15 @@ msgid "Open..."
 msgstr ""
 
 msgid "Operation failed"
+msgstr ""
+
+msgid "Optimize for bitrate"
+msgstr ""
+
+msgid "Optimize for quality"
+msgstr ""
+
+msgid "Options..."
 msgstr ""
 
 msgid "Organise Files"
@@ -1901,6 +1992,9 @@ msgid "Previous"
 msgstr ""
 
 msgid "Previous track"
+msgstr ""
+
+msgid "Profile"
 msgstr ""
 
 msgid "Progress"
@@ -2090,6 +2184,9 @@ msgid "Save this stream in the Internet tab"
 msgstr ""
 
 msgid "Saving tracks"
+msgstr ""
+
+msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
 msgid "Score"
@@ -2335,6 +2432,12 @@ msgstr ""
 msgid "Sorting"
 msgstr ""
 
+msgid "Speex"
+msgstr ""
+
+msgid "Standard"
+msgstr ""
+
 msgid "Start the playlist currently playing"
 msgstr ""
 
@@ -2404,6 +2507,9 @@ msgstr ""
 msgid "Tag radio"
 msgstr ""
 
+msgid "Target bitrate"
+msgstr ""
+
 msgid "Techno"
 msgstr ""
 
@@ -2463,6 +2569,11 @@ msgid ""
 msgstr ""
 
 msgid "These folders will be scanned for music to make up your library"
+msgstr ""
+
+msgid ""
+"These settings are used in the \"Transcode Music\" dialog, and when "
+"converting music before copying it to a device."
 msgstr ""
 
 msgid "Third level"
@@ -2542,8 +2653,14 @@ msgstr ""
 msgid "Transcoder Log"
 msgstr ""
 
+msgid "Transcoding"
+msgstr ""
+
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
+msgstr ""
+
+msgid "Transcoding options"
 msgstr ""
 
 msgid "TrueAudio"
@@ -2555,7 +2672,13 @@ msgstr ""
 msgid "Turn off"
 msgstr ""
 
+msgid "URI"
+msgstr ""
+
 msgid "URL(s)"
+msgstr ""
+
+msgid "Ultra wide band (UWB)"
 msgstr ""
 
 #, qt-format
@@ -2603,10 +2726,16 @@ msgstr ""
 msgid "Use authentication"
 msgstr ""
 
+msgid "Use bitrate management engine"
+msgstr ""
+
 msgid "Use dynamic mode"
 msgstr ""
 
 msgid "Use notifications to report Wii Remote status"
+msgstr ""
+
+msgid "Use temporal noise shaping"
 msgstr ""
 
 msgid "Use the system default"
@@ -2625,6 +2754,9 @@ msgid "Using the menu to add a song will..."
 msgstr ""
 
 msgid "VBR MP3"
+msgstr ""
+
+msgid "Variable bit rate"
 msgstr ""
 
 msgid "Various Artists"
@@ -2649,6 +2781,9 @@ msgstr ""
 msgid "Visualizations Settings"
 msgstr ""
 
+msgid "Voice activity detection"
+msgstr ""
+
 #, qt-format
 msgid "Volume %1%"
 msgstr ""
@@ -2656,7 +2791,13 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
+msgid "Vorbis"
+msgstr ""
+
 msgid "WAV"
+msgstr ""
+
+msgid "WMA"
 msgstr ""
 
 msgid ""
@@ -2677,6 +2818,9 @@ msgid ""
 msgstr ""
 
 msgid "WiFi MAC Address"
+msgstr ""
+
+msgid "Wide band (WB)"
 msgstr ""
 
 #, qt-format
@@ -2795,11 +2939,14 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
 msgid "after"
+msgstr ""
+
+msgid "automatic"
 msgstr ""
 
 msgid "before"
@@ -2812,6 +2959,9 @@ msgid "bpm"
 msgstr ""
 
 msgid "contains"
+msgstr ""
+
+msgid "disabled"
 msgstr ""
 
 #, qt-format
@@ -2854,7 +3004,7 @@ msgstr ""
 msgid "options"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 

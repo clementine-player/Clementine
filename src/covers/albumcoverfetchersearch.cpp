@@ -22,6 +22,7 @@
 
 #include <QMutexLocker>
 #include <QNetworkReply>
+#include <QtDebug>
 
 const int AlbumCoverFetcherSearch::kSearchTimeout = 10000;
 
@@ -84,6 +85,8 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished() {
       CoverSearchResults partial_results = provider->ParseReply(reply);
       // add results from the current provider to our pool
       results_.append(partial_results);
+    } else {
+      qDebug() << "CoverProvider request error: " << reply->errorString();
     }
 
     // do we have more providers left?
