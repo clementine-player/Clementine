@@ -44,6 +44,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     sink_(GstEngine::kAutoSink),
     segment_start_(0),
     segment_start_received_(false),
+    emit_track_ended_on_segment_start_(false),
     eq_enabled_(false),
     eq_preamp_(0),
     rg_enabled_(false),
@@ -286,7 +287,7 @@ GstEnginePipeline::~GstEnginePipeline() {
 gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
-  switch ( GST_MESSAGE_TYPE(msg)) {
+  switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
       instance->ErrorMessageReceived(msg);
       break;
@@ -509,6 +510,11 @@ bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self
     gst_event_parse_new_segment(e, NULL, NULL, NULL, &start, NULL, NULL);
     instance->segment_start_ = start;
     instance->segment_start_received_ = true;
+
+    if (instance->emit_track_ended_on_segment_start_) {
+      instance->emit_track_ended_on_segment_start_ = false;
+      emit instance->EndOfStreamReached(instance->id(), true);
+    }
   }
 
   return true;
@@ -536,8 +542,10 @@ void GstEnginePipeline::TransitionToNext() {
   next_beginning_offset_nanosec_ = 0;
   next_end_offset_nanosec_ = 0;
 
-  // This just tells the UI that we've moved on to the next song
-  emit EndOfStreamReached(id(), true);
+  // This function gets called when the source has been drained, even if the
+  // song hasn't finished playing yet.  We'll get a new segment when it really
+  // does finish, so emit TrackEnded then.
+  emit_track_ended_on_segment_start_ = true;
 
   // This has to happen *after* the gst_element_set_state on the new bin to
   // fix an occasional race condition deadlock.

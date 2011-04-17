@@ -155,7 +155,9 @@ void Player::TrackEnded() {
   }
 
   if (current_item_ && current_item_->IsLocalLibraryItem() &&
-      current_item_->Metadata().id() != -1 && playlists_->active()->get_lastfm_status() != Playlist::LastFM_Scrobbled) {
+      current_item_->Metadata().id() != -1 &&
+      !playlists_->active()->have_incremented_playcount() &&
+      playlists_->active()->get_lastfm_status() != Playlist::LastFM_Seeked) {
     // The track finished before its scrobble point (30 seconds), so increment
     // the play count now.
     playlists_->library_backend()->IncrementPlayCountAsync(
@@ -299,7 +301,7 @@ void Player::SeekTo(int seconds) {
   // If we seek the track we don't want to submit it to last.fm
   qDebug() << "Track seeked to" << nanosec << "ns - not scrobbling";
   if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_New) {
-    playlists_->active()->set_lastfm_status(Playlist::LastFM_Skipped);
+    playlists_->active()->set_lastfm_status(Playlist::LastFM_Seeked);
   }
 
   emit Seeked(nanosec / 1000);

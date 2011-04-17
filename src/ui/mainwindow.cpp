@@ -893,7 +893,7 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
   else {
     //invalidate current song, we will scrobble the next one
     if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_New)
-      playlists_->active()->set_lastfm_status(Playlist::LastFM_Skipped);
+      playlists_->active()->set_lastfm_status(Playlist::LastFM_Seeked);
   }
 
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
@@ -1028,11 +1028,13 @@ void MainWindow::Seeked(qlonglong microseconds) {
 
 void MainWindow::UpdateTrackPosition() {
   // Track position in seconds
+  Playlist* playlist = playlists_->active();
+
   PlaylistItemPtr item(player_->GetCurrentItem());
   const int position = std::floor(
       float(player_->engine()->position_nanosec()) / kNsecPerSec + 0.5);
   const int length = item->Metadata().length_nanosec() / kNsecPerSec;
-  const int scrobble_point = playlists_->active()->scrobble_point_nanosec() / kNsecPerSec;
+  const int scrobble_point = playlist->scrobble_point_nanosec() / kNsecPerSec;
 
   if (length <= 0) {
     // Probably a stream that we don't know the length of
@@ -1041,24 +1043,29 @@ void MainWindow::UpdateTrackPosition() {
     return;
   }
 #ifdef HAVE_LIBLASTFM
-  bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() && RadioModel::Service<LastFMService>()->IsScrobblingEnabled() && RadioModel::Service<LastFMService>()->IsAuthenticated();
+  LastFMService* lastfm_service = RadioModel::Service<LastFMService>();
+  const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
+                               lastfm_service->IsScrobblingEnabled() &&
+                               lastfm_service->IsAuthenticated();
 #endif
 
   // Time to scrobble?
-  if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_New && position >= scrobble_point) {
-#ifdef HAVE_LIBLASTFM
-    if (RadioModel::Service<LastFMService>()->IsScrobblingEnabled()) {
-      qDebug() << "Scrobbling at" << scrobble_point;
-      radio_model_->RadioModel::Service<LastFMService>()->Scrobble();
-    } else
-#endif
-      // If we're not scrobbling or last.fm is compiled out, mark the song
-      // as "won't scrobble", so we only update the play count below once.
-      playlists_->active()->set_lastfm_status(Playlist::LastFM_Invalid);
+  if (position >= scrobble_point) {
+    if (playlist->get_lastfm_status() == Playlist::LastFM_New) {
+      #ifdef HAVE_LIBLASTFM
+        if (lastfm_service->IsScrobblingEnabled()) {
+          qDebug() << "Scrobbling at" << scrobble_point;
+          lastfm_service->Scrobble();
+        }
+      #endif
+    }
 
     // Update the play count for the song if it's from the library
-    if (item->IsLocalLibraryItem() && item->Metadata().id() != -1) {
+    if (!playlist->have_incremented_playcount() &&
+        item->IsLocalLibraryItem() && item->Metadata().id() != -1 &&
+        playlist->get_lastfm_status() != Playlist::LastFM_Seeked) {
       library_->backend()->IncrementPlayCountAsync(item->Metadata().id());
+      playlist->set_have_incremented_playcount();
     }
   }
 
@@ -1068,12 +1075,14 @@ void MainWindow::UpdateTrackPosition() {
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
     qDebug() << "position" << position << "scrobble point" << scrobble_point
-        << "status" << playlists_->active()->get_lastfm_status();
+        << "status" << playlist->get_lastfm_status();
     tray_icon_->SetProgress(double(position) / length * 100);
 
     //if we're waiting for the scrobble point, update the icon
 #ifdef HAVE_LIBLASTFM
-    if (position < scrobble_point && playlists_->active()->get_lastfm_status() == Playlist::LastFM_New && last_fm_enabled) {
+    if (position < scrobble_point &&
+        playlist->get_lastfm_status() == Playlist::LastFM_New &&
+        last_fm_enabled) {
       ui_->action_toggle_scrobbling->setIcon(CreateOverlayedIcon(position, scrobble_point));
     }
 #endif

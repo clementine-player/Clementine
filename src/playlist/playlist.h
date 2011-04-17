@@ -119,16 +119,11 @@ class Playlist : public QAbstractListModel {
   };
 
   enum LastFMStatus {
-    //new song to scrobble
-    LastFM_New = 0,
-    //song already scrobbled
-    LastFM_Scrobbled,
-    //song we don't want to scrobble, e.g. if we seeked through it
-    LastFM_Skipped,
-    //error submitting
-    LastFM_Error,
-    //invalid Song, e.g. tags not available
-    LastFM_Invalid
+    LastFM_New = 0,   // Haven't scrobbled yet, but we want to later
+    LastFM_Scrobbled, // Scrobbled ok
+    LastFM_Seeked,    // The user seeked so don't scrobble
+    LastFM_Error,     // Tried to scrobble but got an error
+    LastFM_Invalid,   // The song isn't suitable for scrobbling
   };
 
   static const char* kRowsMimetype;
@@ -200,7 +195,9 @@ class Playlist : public QAbstractListModel {
   // Scrobbling
   qint64 scrobble_point_nanosec() const { return scrobble_point_; }
   LastFMStatus get_lastfm_status() const { return lastfm_status_; }
+  bool have_incremented_playcount() const { return have_incremented_playcount_; }
   void set_lastfm_status(LastFMStatus status) {lastfm_status_ = status; }
+  void set_have_incremented_playcount() { have_incremented_playcount_ = true; }
 
   // Changing the playlist
   void InsertItems              (const PlaylistItemList& items,     int pos = -1, bool play_now = false, bool enqueue = false);
@@ -352,6 +349,7 @@ class Playlist : public QAbstractListModel {
 
   qint64 scrobble_point_;
   LastFMStatus lastfm_status_;
+  bool have_incremented_playcount_;
 
   PlaylistSequence* playlist_sequence_;
 
