@@ -52,40 +52,40 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()
-      << GeneratorPtr(new QueryGenerator(tr("50 random tracks"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "50 random tracks"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_Random, SearchTerm::Field_Title, 50)))
-      << GeneratorPtr(new QueryGenerator(tr("Ever played"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Ever played"), Search(
                   Search::Type_And, Search::TermList()
                     << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_GreaterThan, 0),
                   Search::Sort_Random, SearchTerm::Field_Title)))
-      << GeneratorPtr(new QueryGenerator(tr("Never played"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Never played"), Search(
                   Search::Type_And, Search::TermList()
                     << SearchTerm(SearchTerm::Field_PlayCount, SearchTerm::Op_Equals, 0),
                   Search::Sort_Random, SearchTerm::Field_Title)))
-      << GeneratorPtr(new QueryGenerator(tr("Last played"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Last played"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_FieldDesc, SearchTerm::Field_LastPlayed)))
-      << GeneratorPtr(new QueryGenerator(tr("Most played"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Most played"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_FieldDesc, SearchTerm::Field_PlayCount)))
-      << GeneratorPtr(new QueryGenerator(tr("Favourite tracks"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Favourite tracks"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_FieldDesc, SearchTerm::Field_Score)))
-      << GeneratorPtr(new QueryGenerator(tr("Newest tracks"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Newest tracks"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_FieldDesc, SearchTerm::Field_DateCreated)))
     ) << (LibraryModel::GeneratorList()
-      << GeneratorPtr(new QueryGenerator(tr("All tracks"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "All tracks"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_FieldAsc, SearchTerm::Field_Artist, -1)))
-      << GeneratorPtr(new QueryGenerator(tr("Least favourite tracks"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Least favourite tracks"), Search(
                   Search::Type_Or, Search::TermList()
                     << SearchTerm(SearchTerm::Field_Rating, SearchTerm::Op_LessThan, 0.6)
                     << SearchTerm(SearchTerm::Field_SkipCount, SearchTerm::Op_GreaterThan, 4),
                   Search::Sort_FieldDesc, SearchTerm::Field_SkipCount)))
     ) << (LibraryModel::GeneratorList()
-      << GeneratorPtr(new QueryGenerator(tr("Dynamic random mix"), Search(
+      << GeneratorPtr(new QueryGenerator(QT_TRANSLATE_NOOP("Library", "Dynamic random mix"), Search(
                   Search::Type_All, Search::TermList(),
                   Search::Sort_Random, SearchTerm::Field_Title), true))
     )
