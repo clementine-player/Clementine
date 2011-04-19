@@ -41,6 +41,7 @@ public:
   // indexes change).
   int index_of(int id) const;
   int current_id() const;
+  int id_of(int index) const;
 
   // Utility functions that use IDs rather than indexes
   void set_current_id(int id);

@@ -104,7 +104,8 @@ PlaylistView* PlaylistContainer::view() const {
 }
 
 void PlaylistContainer::SetActions(
-    QAction* new_playlist, QAction* save_playlist, QAction* load_playlist) {
+    QAction* new_playlist, QAction* save_playlist, QAction* load_playlist,
+    QAction* next_playlist, QAction* previous_playlist) {
   ui_->create_new->setDefaultAction(new_playlist);
   ui_->save->setDefaultAction(save_playlist);
   ui_->load->setDefaultAction(load_playlist);
@@ -114,6 +115,8 @@ void PlaylistContainer::SetActions(
   connect(new_playlist, SIGNAL(triggered()), SLOT(NewPlaylist()));
   connect(save_playlist, SIGNAL(triggered()), SLOT(SavePlaylist()));
   connect(load_playlist, SIGNAL(triggered()), SLOT(LoadPlaylist()));
+  connect(next_playlist, SIGNAL(triggered()), SLOT(GoToNextPlaylistTab()));
+  connect(previous_playlist, SIGNAL(triggered()), SLOT(GoToPreviousPlaylistTab()));
 }
 
 void PlaylistContainer::SetManager(PlaylistManager *manager) {
@@ -293,6 +296,23 @@ void PlaylistContainer::SavePlaylist(int id = -1) {
   settings_.setValue("last_save_playlist", filename);
 
   manager_->Save(id == -1 ? manager_->current_id() : id, filename);
+}
+
+void PlaylistContainer::GoToNextPlaylistTab() {
+  // Get the next tab' id
+  int id_next =
+    ui_->tab_bar->id_of((ui_->tab_bar->currentIndex()+1)%ui_->tab_bar->count());
+  // Switch to next tab
+  manager_->SetCurrentPlaylist(id_next);
+}
+
+void PlaylistContainer::GoToPreviousPlaylistTab() {
+  // Get the next tab' id
+  int id_previous = 
+    ui_->tab_bar->id_of((ui_->tab_bar->currentIndex()+ui_->tab_bar->count()-1)
+                          % ui_->tab_bar->count());
+  // Switch to next tab
+  manager_->SetCurrentPlaylist(id_previous);
 }
 
 void PlaylistContainer::Save() {

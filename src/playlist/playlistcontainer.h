@@ -41,7 +41,8 @@ public:
   static const char* kSettingsGroup;
 
   void SetActions(QAction* new_playlist, QAction* save_playlist,
-                  QAction* load_playlist);
+                  QAction* load_playlist, QAction* next_playlist, QAction*
+                  previous_playlist);
   void SetManager(PlaylistManager* manager);
 
   PlaylistView* view() const;
@@ -65,6 +66,8 @@ private slots:
   void LoadPlaylist();
   void SavePlaylist() { SavePlaylist(-1); }
   void SavePlaylist(int id);
+  void GoToNextPlaylistTab();
+  void GoToPreviousPlaylistTab();
 
   void SetViewModel(Playlist* playlist);
   void PlaylistAdded(int id, const QString& name);

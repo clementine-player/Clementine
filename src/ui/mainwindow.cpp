@@ -351,6 +351,17 @@ MainWindow::MainWindow(
           background_streams_, SLOT(AllGloryToTheHypnotoad(bool)));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
 
+  // Playlist view actions
+  ui_->action_next_playlist->setShortcuts(QList<QKeySequence>()
+                                    << QKeySequence::fromString("Ctrl+Tab")
+                                    << QKeySequence::fromString("Ctrl+PgDown"));
+  ui_->action_previous_playlist->setShortcuts(QList<QKeySequence>()
+                                    << QKeySequence::fromString("Ctrl+Shift+Tab")
+                                    << QKeySequence::fromString("Ctrl+PgUp"));
+  // Actions for switching tabs will be global to the entire window, so adding them here
+  addAction(ui_->action_next_playlist);
+  addAction(ui_->action_previous_playlist);
+
   // Give actions to buttons
   ui_->forward_button->setDefaultAction(ui_->action_next_track);
   ui_->back_button->setDefaultAction(ui_->action_previous_track);
@@ -361,7 +372,9 @@ MainWindow::MainWindow(
   ui_->scrobbling_button->setDefaultAction(ui_->action_toggle_scrobbling);
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
   ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
-                            ui_->action_load_playlist);
+                            ui_->action_load_playlist,
+                            ui_->action_next_playlist,    /* These two actions aren't associated */
+                            ui_->action_previous_playlist /* to a button but to the main window */ );
 
 
 #ifdef ENABLE_VISUALISATIONS

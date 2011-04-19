@@ -177,6 +177,14 @@ void PlaylistTabBar::set_current_id(int id) {
   setCurrentIndex(index_of(id));
 }
 
+int PlaylistTabBar::id_of(int index) const {
+  if (index<0 || index>count()) {
+    qWarning() << "Playlist tab index requested is out of bounds!";
+    return 0;
+  }
+  return tabData(index).toInt();
+}
+
 void PlaylistTabBar::set_icon_by_id(int id, const QIcon &icon) {
   setTabIcon(index_of(id), icon);
 }
