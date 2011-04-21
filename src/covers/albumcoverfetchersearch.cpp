@@ -86,7 +86,9 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished() {
       // add results from the current provider to our pool
       results_.append(partial_results);
     } else {
-      qDebug() << "CoverProvider request error: " << reply->errorString();
+      QString contents(reply->readAll());
+      qDebug() << "CoverProvider\'s request error - summary:\n" << reply->errorString()
+               << "\nCoverProvider\'s request error - contents:\n" << contents;
     }
 
     // do we have more providers left?

@@ -6,6 +6,7 @@ function(install_script_files scriptname)
   endif(APPLE)
 endfunction(install_script_files)
 
+add_subdirectory(amazon-covers)
 add_subdirectory(digitallyimported-radio)
 add_subdirectory(google-covers)
 add_subdirectory(remove-duplicates)
