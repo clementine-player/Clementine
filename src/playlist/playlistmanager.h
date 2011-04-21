@@ -54,6 +54,8 @@ public:
   virtual QList<Playlist*> GetAllPlaylists() const = 0;
   // Grays out and reloads all deleted songs in all playlists.
   virtual void InvalidateDeletedSongs() = 0;
+  // Removes all deleted songs from all playlists.
+  virtual void RemoveDeletedSongs() = 0;
 
   virtual const QItemSelection& selection(int id) const = 0;
   virtual const QItemSelection& current_selection() const = 0;
@@ -137,6 +139,8 @@ public:
   QList<Playlist*> GetAllPlaylists() const;
   // Grays out and reloads all deleted songs in all playlists.
   void InvalidateDeletedSongs();
+  // Removes all deleted songs from all playlists.
+  void RemoveDeletedSongs();
 
   // Returns a pretty automatic name for playlist created from the given list of
   // songs.

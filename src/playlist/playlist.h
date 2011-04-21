@@ -220,6 +220,8 @@ class Playlist : public QAbstractListModel {
   // Grays out and reloads all deleted songs in all playlists. Also, "ungreys" those songs
   // which were once deleted but now got restored somehow.
   void InvalidateDeletedSongs();
+  // Removes from the playlist all local files that don't exist anymore.
+  void RemoveDeletedSongs();
 
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
@@ -304,6 +306,9 @@ class Playlist : public QAbstractListModel {
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
 
   void RemoveItemsNotInQueue();
+
+  // Removes rows with given indices from this playlist.
+  bool removeRows(QList<int>& rows);
 
   void InformOfCurrentSongChange(const QModelIndex& top_left, const QModelIndex& bottom_right,
                                  const Song& metadata);

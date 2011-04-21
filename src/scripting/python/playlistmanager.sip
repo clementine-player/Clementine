@@ -94,6 +94,12 @@ Grays out and reloads all deleted songs in all playlists. Also, "ungreys"
 those songs which were once deleted but now got restored somehow.
 %End
 
+void RemoveDeletedSongs();
+%Docstring
+RemoveDeletedSongs()
+Removes all deleted songs from all playlists.
+%End
+
   const QItemSelection& selection(int id) const;
 %Docstring
 selection(id) -> PyQt4.QtGui.QItemSelection

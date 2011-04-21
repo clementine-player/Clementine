@@ -1275,6 +1275,35 @@ bool Playlist::removeRows(int row, int count, const QModelIndex& parent) {
   return true;
 }
 
+bool Playlist::removeRows(QList<int>& rows) {
+  if(rows.isEmpty()) {
+    return false;
+  }
+
+  // start from the end to be sure that indices won't 'move' during
+  // the removal process
+  qSort(rows.begin(), rows.end(), qGreater<int>());
+
+  QList<int> part;
+  while(!rows.isEmpty()) {
+    // we're splitting the input list into sequences of consecutive
+    // numbers
+    part.append(rows.takeFirst());
+    while(rows.first() == part.last() - 1) {
+      part.append(rows.takeFirst());
+    }
+
+    // and now we're removing the current sequence
+    if(!removeRows(part.last(), part.size())) {
+      return false;
+    }
+
+    part.clear();
+  }
+
+  return true;
+}
+
 PlaylistItemList Playlist::RemoveItemsWithoutUndo(int row, int count) {
   if (row < 0 || row >= items_.size() || row + count > items_.size()) {
     return PlaylistItemList();
@@ -1670,6 +1699,21 @@ void Playlist::InvalidateDeletedSongs() {
   }
 
   ReloadItems(invalidated_rows);
+}
+
+void Playlist::RemoveDeletedSongs() {
+  QList<int> rows_to_remove;
+
+  for (int row = 0; row < items_.count(); ++row) {
+    PlaylistItemPtr item = items_[row];
+    Song song = item->Metadata();
+
+    if(!song.is_stream() && !QFile::exists(song.filename())) {
+        rows_to_remove.append(row);
+    }
+  }
+
+  removeRows(rows_to_remove);
 }
 
 bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {

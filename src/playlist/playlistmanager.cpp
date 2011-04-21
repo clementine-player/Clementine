@@ -348,6 +348,12 @@ void PlaylistManager::InvalidateDeletedSongs() {
   }
 }
 
+void PlaylistManager::RemoveDeletedSongs() {
+  foreach(Playlist* playlist, GetAllPlaylists()) {
+    playlist->RemoveDeletedSongs();
+  }
+}
+
 QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   if (songs.isEmpty()) {
     return tr("Playlist");
