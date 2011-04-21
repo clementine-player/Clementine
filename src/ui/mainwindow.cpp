@@ -818,6 +818,8 @@ void MainWindow::MediaStopped() {
 
   ui_->action_ban->setEnabled(false);
   ui_->action_love->setEnabled(false);
+  tray_icon_->LastFMButtonLoveStateChanged(false);
+  tray_icon_->LastFMButtonBanStateChanged(false);
 
   track_position_timer_->stop();
   ui_->track_slider->SetStopped();
@@ -855,6 +857,8 @@ void MainWindow::MediaPlaying() {
 
   ui_->action_ban->setEnabled(enable_ban);
   ui_->action_love->setEnabled(enable_love);
+  tray_icon_->LastFMButtonBanStateChanged(enable_ban);
+  tray_icon_->LastFMButtonLoveStateChanged(enable_love);
 
   tray_icon_->SetPlaying(enable_play_pause, enable_ban, enable_love);
 
@@ -911,7 +915,9 @@ void MainWindow::ScrobblingEnabledChanged(bool value) {
 
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   ui_->action_ban->setEnabled(value && is_lastfm);
+  tray_icon_->LastFMButtonBanStateChanged(value && is_lastfm);
   ui_->action_love->setEnabled(value);
+  tray_icon_->LastFMButtonLoveStateChanged(value);
 }
 #endif
 
@@ -919,6 +925,7 @@ void MainWindow::LastFMButtonVisibilityChanged(bool value) {
   ui_->action_ban->setVisible(value);
   ui_->action_love->setVisible(value);
   ui_->last_fm_controls->setVisible(value);
+  tray_icon_->LastFMButtonVisibilityChanged(value);
 }
 
 void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
@@ -1105,11 +1112,13 @@ void MainWindow::UpdateTrackPosition() {
 #ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobbledRadioStream() {
   ui_->action_love->setEnabled(true);
+  tray_icon_->LastFMButtonLoveStateChanged(true);
 }
 
 void MainWindow::Love() {
   RadioModel::Service<LastFMService>()->Love();
   ui_->action_love->setEnabled(false);
+  tray_icon_->LastFMButtonLoveStateChanged(false);
 }
 #endif
 

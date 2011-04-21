@@ -117,8 +117,10 @@ void QtSystemTrayIcon::SetupMenu(
 #ifdef HAVE_LIBLASTFM
   action_love_ = menu_->addAction(love->icon(), love->text(), love, SLOT(trigger()));
   action_love_->setVisible(love->isVisible());
+  action_love_->setEnabled(love->isEnabled());
   action_ban_ = menu_->addAction(ban->icon(), ban->text(), ban, SLOT(trigger()));
   action_ban_->setVisible(ban->isVisible());
+  action_ban_->setEnabled(ban->isEnabled());
 #endif
 
   menu_->addSeparator();
@@ -193,6 +195,26 @@ void QtSystemTrayIcon::SetStopped() {
   action_love_->setEnabled(false);
 #endif
 }
+
+void QtSystemTrayIcon::LastFMButtonVisibilityChanged(bool value) {
+#ifdef HAVE_LIBLASTFM
+  action_ban_->setVisible(value);
+  action_love_->setVisible(value);
+#endif
+}
+
+void QtSystemTrayIcon::LastFMButtonLoveStateChanged(bool value) {
+#ifdef HAVE_LIBLASTFM
+  action_love_->setEnabled(value);
+#endif
+}
+
+void QtSystemTrayIcon::LastFMButtonBanStateChanged(bool value) {
+#ifdef HAVE_LIBLASTFM
+  action_ban_->setEnabled(value);
+#endif
+}
+
 
 bool QtSystemTrayIcon::IsVisible() const {
   return tray_->isVisible();

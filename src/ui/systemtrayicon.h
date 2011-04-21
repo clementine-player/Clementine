@@ -56,6 +56,9 @@ class SystemTrayIcon : public QObject {
   virtual void SetPlaying(bool enable_play_pause = false,
                           bool enable_ban = false, bool enable_love = false);
   virtual void SetStopped();
+  virtual void LastFMButtonVisibilityChanged(bool value) {}
+  virtual void LastFMButtonLoveStateChanged(bool value) {}
+  virtual void LastFMButtonBanStateChanged(bool value) {}
 
  signals:
   void ChangeVolume(int delta);

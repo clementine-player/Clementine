@@ -47,6 +47,9 @@ protected:
   void SetPlaying(bool enable_play_pause = false, bool enable_ban = false,
                   bool enable_love = false);
   void SetStopped();
+  void LastFMButtonVisibilityChanged(bool value);
+  void LastFMButtonLoveStateChanged(bool value);
+  void LastFMButtonBanStateChanged(bool value);
 
   // QObject
   bool eventFilter(QObject *, QEvent *);
