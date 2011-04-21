@@ -455,9 +455,7 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
   } else if(event->modifiers() == Qt::NoModifier // No modifier keys currently pressed...
       // ... and key pressed is something related to text
       && ( (event->key() >= Qt::Key_A && event->key() <= Qt::Key_Z)
-#ifndef Q_OS_MAC
-        || event->key() == Qt::Key_Backspace // On Mac OS, it should be used to remove tracks
-#endif
+        || event->key() == Qt::Key_Backspace
         || event->key() == Qt::Key_Escape)) {
     emit FocusOnFilterSignal(event);
     event->accept();
