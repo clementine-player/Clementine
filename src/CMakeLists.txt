@@ -183,6 +183,7 @@ set(SOURCES
   scripting/script.cpp
   scripting/scriptarchive.cpp
   scripting/scriptdialog.cpp
+  scripting/scriptdialoglist.cpp
   scripting/scriptinfo.cpp
   scripting/scriptinterface.cpp
   scripting/scriptmanager.cpp
