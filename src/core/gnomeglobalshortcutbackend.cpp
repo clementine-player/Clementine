@@ -17,6 +17,7 @@
 
 #include "gnomeglobalshortcutbackend.h"
 #include "globalshortcuts.h"
+#include "core/logging.h"
 
 #ifdef QT_DBUS_LIB
 #  include "dbus/gnomesettingsdaemon.h"
@@ -41,10 +42,10 @@ GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
 
 bool GnomeGlobalShortcutBackend::DoRegister() {
 #ifdef QT_DBUS_LIB
-  qDebug() << __PRETTY_FUNCTION__ << "- starting";
+  qLog(Debug) << "registering";
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService)) {
-    qDebug() << __PRETTY_FUNCTION__ << "- gnome settings daemon not registered";
+    qLog(Warning) << "gnome settings daemon not registered";
     return false;
   }
 
@@ -56,17 +57,17 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
   connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
           this, SLOT(GnomeMediaKeyPressed(QString,QString)));
 
-  qDebug() << __PRETTY_FUNCTION__ << "- complete";
+  qLog(Debug) << "registered";
 
   return true;
 #else // QT_DBUS_LIB
-  qDebug() << __PRETTY_FUNCTION__ << "- dbus not available";
+  qLog(Warning) << "dbus not available";
   return false;
 #endif
 }
 
 void GnomeGlobalShortcutBackend::DoUnregister() {
-  qDebug() << __PRETTY_FUNCTION__;
+  qLog(Debug) << "unregister";
 #ifdef QT_DBUS_LIB
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService))

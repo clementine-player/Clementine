@@ -16,6 +16,7 @@
 */
 
 #include "stylesheetloader.h"
+#include "core/logging.h"
 
 #include <QtDebug>
 #include <QFile>
@@ -38,7 +39,7 @@ void StyleSheetLoader::UpdateStyleSheet(QWidget *widget) {
   // Load the file
   QFile file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
-    qWarning() << __PRETTY_FUNCTION__ << "error opening" << filename;
+    qLog(Warning) << "error opening" << filename;
     return;
   }
   QString contents(file.readAll());

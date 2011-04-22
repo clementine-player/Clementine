@@ -19,6 +19,7 @@
 #include "lastfmstationdialog.h"
 #include "radiomodel.h"
 #include "radioplaylistitem.h"
+#include "core/logging.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "ui/iconloader.h"
@@ -289,7 +290,7 @@ void LastFMService::AuthenticateReplyFinished() {
     settings.setValue("Session", lastfm::ws::SessionKey);
     settings.setValue("Subscriber", is_subscriber);
   } catch (std::runtime_error& e) {
-    qDebug() << e.what();
+    qLog(Error) << e.what();
     emit AuthenticationComplete(false);
     return;
   }
@@ -327,10 +328,10 @@ void LastFMService::UpdateSubscriberStatusFinished() {
     QSettings settings;
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Subscriber", is_subscriber);
-    qDebug() << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
+    qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
     emit UpdatedSubscriberStatus(is_subscriber);
   } catch (std::runtime_error& e) {
-    qDebug() << e.what();
+    qLog(Error) << e.what();
   }
 }
 
@@ -482,7 +483,7 @@ void LastFMService::NowPlaying(const Song &song) {
       lastfm::MutableTrack mtrack(last_track_);
       mtrack.setDuration(duration_secs);
 
-      qDebug() << "Scrobbling stream track" << mtrack.title() << "length" << duration_secs;
+      qLog(Info) << "Scrobbling stream track" << mtrack.title() << "length" << duration_secs;
       scrobbler_->cache(mtrack);
       scrobbler_->submit();
 
@@ -600,7 +601,7 @@ void LastFMService::RefreshFriendsFinished() {
       throw std::runtime_error("");
 #endif
   } catch (std::runtime_error& e) {
-    qDebug() << e.what();
+    qLog(Error) << e.what();
     return;
   }
 
@@ -629,7 +630,7 @@ void LastFMService::RefreshNeighboursFinished() {
       throw std::runtime_error("");
 #endif
   } catch (std::runtime_error& e) {
-    qDebug() << e.what();
+    qLog(Error) << e.what();
     return;
   }
 
@@ -760,7 +761,7 @@ void LastFMService::FetchMoreTracks() {
 void LastFMService::FetchMoreTracksFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply) {
-    qWarning() << "Invalid reply on radio.getPlaylist";
+    qLog(Warning) << "Invalid reply on radio.getPlaylist";
     emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
         PlaylistItem::SpecialLoadResult::NoMoreTracks, reply->url()));
     return;
@@ -823,7 +824,7 @@ void LastFMService::Tune(const lastfm::RadioStation& station) {
 void LastFMService::TuneFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply) {
-    qWarning() << "Invalid reply on radio.tune";
+    qLog(Warning) << "Invalid reply on radio.tune";
     emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
         PlaylistItem::SpecialLoadResult::NoMoreTracks, reply->url()));
     return;

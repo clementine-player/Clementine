@@ -28,6 +28,7 @@
 #include "core/crashreporting.h"
 #include "core/database.h"
 #include "core/encoding.h"
+#include "core/logging.h"
 #include "core/mac_startup.h"
 #include "core/network.h"
 #include "core/networkproxyfactory.h"
@@ -123,13 +124,6 @@ void LoadTranslation(const QString& prefix, const QString& path,
     delete t;
 }
 
-void GLog(const gchar* domain,
-          GLogLevelFlags level,
-          const gchar* message,
-          gpointer user_data) {
-  qDebug() << "GLOG" << message;
-}
-
 #ifdef HAVE_REMOTE
 #include <xrme/connection.h>
 #include "remote/icesession.h"
@@ -162,7 +156,7 @@ int main(int argc, char *argv[]) {
     int ret = setrlimit(RLIMIT_NOFILE, &limit);
 
     if (ret == 0) {
-      qDebug() << "Max fd:" << max_fd;
+      qLog(Debug) << "Max fd:" << max_fd;
     }
   }
 #endif
@@ -193,8 +187,6 @@ int main(int argc, char *argv[]) {
   // This makes us show up nicely in gnome-volume-control
   g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
-
-  g_log_set_default_handler(&GLog, NULL);
 
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
@@ -244,7 +236,7 @@ int main(int argc, char *argv[]) {
 
     if (a.isRunning()) {
       if (options.is_empty()) {
-        qDebug() << "Clementine is already running - activating existing window";
+        qLog(Info) << "Clementine is already running - activating existing window";
       }
       if (a.sendMessage(options.Serialize(), 5000)) {
         return 0;
@@ -318,6 +310,10 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 #endif
+
+  // Initialise logging
+  logging::Init();
+  logging::SetLevels(options.log_levels());
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN

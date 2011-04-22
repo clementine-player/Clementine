@@ -16,6 +16,7 @@
 */
 
 #include "m3uparser.h"
+#include "core/logging.h"
 
 #include <QBuffer>
 #include <QtDebug>
@@ -39,7 +40,6 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
   buffer.open(QIODevice::ReadOnly);
 
   QString line = QString::fromUtf8(buffer.readLine()).trimmed();
-  qDebug() << line;
   if (line.startsWith("#EXTM3U")) {
     // This is in extended M3U format.
     type = EXTENDED;
@@ -47,12 +47,11 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
   }
 
   forever {
-    qDebug() << line;
     if (line.startsWith('#')) {
       // Extended info or comment.
       if (type == EXTENDED && line.startsWith("#EXT")) {
         if (!ParseMetadata(line, &current_metadata)) {
-          qWarning() << "Failed to parse metadata: " << line;
+          qLog(Warning) << "Failed to parse metadata: " << line;
           continue;
         }
       }
@@ -61,7 +60,7 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
 
       // Track location.
       if (!ParseTrackLocation(line, dir, &song)) {
-        qWarning() << "Failed to parse location: " << line;
+        qLog(Warning) << "Failed to parse location: " << line;
       } else {
         // Load the song from the library if it's there.
         Song library_song = LoadLibrarySong(song.filename());

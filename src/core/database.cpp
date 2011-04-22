@@ -19,6 +19,7 @@
 #include "database.h"
 #include "scopedtransaction.h"
 #include "utilities.h"
+#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -237,7 +238,7 @@ void Database::StaticInit() {
 
   QLibrary library(plugin_path);
   if (!library.load()) {
-    qDebug() << "QLibrary::load() failed for " << plugin_path;
+    qLog(Error) << "QLibrary::load() failed for " << plugin_path;
     return;
   }
 
@@ -260,7 +261,7 @@ void Database::StaticInit() {
       !_sqlite3_value_text ||
       !_sqlite3_result_int64 ||
       !_sqlite3_user_data) {
-    qDebug() << "Couldn't resolve sqlite symbols";
+    qLog(Error) << "Couldn't resolve sqlite symbols";
     sLoadedSqliteSymbols = false;
   } else {
     sLoadedSqliteSymbols = true;
@@ -384,7 +385,7 @@ QSqlDatabase Database::Connect() {
   set_fts_tokenizer.bindValue(":pointer", QByteArray(
       reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
   if (!set_fts_tokenizer.exec()) {
-    qWarning() << "Couldn't register FTS3 tokenizer";
+    qLog(Warning) << "Couldn't register FTS3 tokenizer";
   }
 
   // We want Unicode aware LIKE clauses and FTS if possible.
@@ -456,7 +457,7 @@ void Database::UpdateMainSchema(QSqlDatabase* db) {
   startup_schema_version_ = schema_version;
 
   if (schema_version > kSchemaVersion) {
-    qWarning() << "The database schema (version" << schema_version << ") is newer than I was expecting";
+    qLog(Warning) << "The database schema (version" << schema_version << ") is newer than I was expecting";
     return;
   }
   if (schema_version < kSchemaVersion) {
@@ -469,7 +470,7 @@ void Database::UpdateMainSchema(QSqlDatabase* db) {
 
 void Database::RecreateAttachedDb(const QString& database_name) {
   if (!attached_databases_.contains(database_name)) {
-    qWarning() << "Attached database does not exist:" << database_name;
+    qLog(Warning) << "Attached database does not exist:" << database_name;
     return;
   }
 
@@ -482,12 +483,12 @@ void Database::RecreateAttachedDb(const QString& database_name) {
     QSqlQuery q("DETACH DATABASE :alias", db);
     q.bindValue(":alias", database_name);
     if (!q.exec()) {
-      qWarning() << "Failed to detach database" << database_name;
+      qLog(Warning) << "Failed to detach database" << database_name;
       return;
     }
 
     if (!QFile::remove(filename)) {
-      qWarning() << "Failed to remove file" << filename;
+      qLog(Warning) << "Failed to remove file" << filename;
     }
   }
 
@@ -533,7 +534,7 @@ void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
       foreach (const QString& table, tables) {
-        qDebug() << "Updating" << table << "for" << kMagicAllSongsTables;
+        qLog(Info) << "Updating" << table << "for" << kMagicAllSongsTables;
         QString new_command(command);
         new_command.replace(kMagicAllSongsTables, table);
         QSqlQuery query(db.exec(new_command));
@@ -575,9 +576,9 @@ QStringList Database::SongsTables(QSqlDatabase& db) const {
 bool Database::CheckErrors(const QSqlQuery& query) {
   QSqlError last_error = query.lastError();
   if (last_error.isValid()) {
-    qDebug() << "db error: " << last_error;
-    qDebug() << "faulty query: " << query.lastQuery();
-    qDebug() << "bound values: " << query.boundValues();
+    qLog(Error) << "db error: " << last_error;
+    qLog(Error) << "faulty query: " << query.lastQuery();
+    qLog(Error) << "bound values: " << query.boundValues();
 
     emit Error("LibraryBackend: " + last_error.text());
     return true;

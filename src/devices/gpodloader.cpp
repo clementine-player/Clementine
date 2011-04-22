@@ -17,6 +17,7 @@
 
 #include "connecteddevice.h"
 #include "gpodloader.h"
+#include "core/logging.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "library/librarybackend.h"
@@ -53,7 +54,7 @@ void GPodLoader::LoadDatabase() {
   // Check for errors
   if (!db) {
     if (error) {
-      qDebug() << "GPodLoader error:" << error->message;
+      qLog(Error) << "loading database failed:" << error->message;
       emit Error(QString::fromUtf8(error->message));
       g_error_free(error);
     } else {

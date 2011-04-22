@@ -67,5 +67,4 @@ void FilesystemDevice::Init() {
 }
 
 FilesystemDevice::~FilesystemDevice() {
-  qDebug() << __PRETTY_FUNCTION__;
 }

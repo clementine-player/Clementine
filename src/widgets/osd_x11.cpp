@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "osd.h"
+#include "core/logging.h"
 
 #include <QtDebug>
 
@@ -66,7 +67,7 @@ void OSD::Init() {
       "/org/freedesktop/Notifications",
       QDBusConnection::sessionBus()));
   if (!interface_->isValid()) {
-    qWarning() << "Error connecting to notifications service.";
+    qLog(Warning) << "Error connecting to notifications service.";
   }
 #endif // HAVE_DBUS
 }
@@ -116,7 +117,7 @@ void OSD::ShowMessageNative(const QString& summary, const QString& message,
   connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
       SLOT(CallFinished(QDBusPendingCallWatcher*)));
 #else // HAVE_DBUS
-  qWarning() << __PRETTY_FUNCTION__ << ": NOT IMPLEMENTED";
+  qLog(Warning) << "not implemented";
 #endif // HAVE_DBUS
 }
 
@@ -126,7 +127,7 @@ void OSD::CallFinished(QDBusPendingCallWatcher* watcher) {
 
   QDBusPendingReply<uint> reply = *watcher;
   if (reply.isError()) {
-    qWarning() << "Error sending notification" << reply.error().name();
+    qLog(Warning) << "Error sending notification" << reply.error().name();
     return;
   }
 

@@ -183,9 +183,6 @@ QStringList DeviceLister::GuessIconForPath(const QString& path) {
     Itdb_Device* device = itdb_device_new();
     itdb_device_set_mountpoint(device, path.toLocal8Bit().constData());
     const Itdb_IpodInfo* info = itdb_device_get_ipod_info(device);
-    qDebug() << info->model_number
-             << info->ipod_model
-             << GetIpodColour(info->ipod_model);
 
     QString colour = GetIpodColour(info->ipod_model);
     QString model = GetIpodModel(info->ipod_model);

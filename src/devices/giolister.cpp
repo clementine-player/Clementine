@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "giolister.h"
+#include "core/logging.h"
 
 #include <QFile>
 #include <QStringList>
@@ -56,7 +57,7 @@ void OperationFinished(F f, GObject *object, GAsyncResult *result) {
   f(obj, result, &error);
 
   if (error) {
-    qDebug() << "Mount/unmount error:" << error->message;
+    qLog(Error) << "Mount/unmount error:" << error->message;
     g_error_free(error);
   }
 }
@@ -368,7 +369,7 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
       G_FILE_ATTRIBUTE_FILESYSTEM_SIZE "," G_FILE_ATTRIBUTE_FILESYSTEM_FREE ","
       G_FILE_ATTRIBUTE_FILESYSTEM_TYPE, NULL, &error);
   if (error) {
-    qWarning() << error->message;
+    qLog(Warning) << error->message;
     g_error_free(error);
   } else {
     filesystem_size = g_file_info_get_attribute_uint64(
@@ -387,7 +388,7 @@ void GioLister::DeviceInfo::ReadMountInfo(GMount* mount) {
     info = g_file_query_info(root, G_FILE_ATTRIBUTE_ID_FILESYSTEM,
                              G_FILE_QUERY_INFO_NONE, NULL, &error);
     if (error) {
-      qWarning() << error->message;
+      qLog(Warning) << error->message;
       g_error_free(error);
     } else {
       mount_uuid = QString::fromUtf8(g_file_info_get_attribute_string(
@@ -498,7 +499,7 @@ void GioLister::UpdateDeviceFreeSpace(const QString& id) {
     GFileInfo* info = g_file_query_filesystem_info(
         root, G_FILE_ATTRIBUTE_FILESYSTEM_FREE, NULL, &error);
     if (error) {
-      qWarning() << error->message;
+      qLog(Warning) << error->message;
       g_error_free(error);
     } else {
       device_info.filesystem_free = g_file_info_get_attribute_uint64(

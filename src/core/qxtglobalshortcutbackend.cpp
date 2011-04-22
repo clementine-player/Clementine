@@ -18,6 +18,7 @@
 #include "globalshortcuts.h"
 #include "qxtglobalshortcutbackend.h"
 #include "qxtglobalshortcut.h"
+#include "core/logging.h"
 
 #include <QAction>
 #include <QtDebug>
@@ -28,7 +29,7 @@ QxtGlobalShortcutBackend::QxtGlobalShortcutBackend(GlobalShortcuts *parent)
 }
 
 bool QxtGlobalShortcutBackend::DoRegister() {
-  qDebug() << __PRETTY_FUNCTION__;
+  qLog(Debug) << "registering";
   foreach (const GlobalShortcuts::Shortcut& shortcut, manager_->shortcuts().values()) {
     AddShortcut(shortcut.action);
   }
@@ -46,7 +47,7 @@ void QxtGlobalShortcutBackend::AddShortcut(QAction* action) {
 }
 
 void QxtGlobalShortcutBackend::DoUnregister() {
-  qDebug() << __PRETTY_FUNCTION__;
+  qLog(Debug) << "unregistering";
   qDeleteAll(shortcuts_);
   shortcuts_.clear();
 }

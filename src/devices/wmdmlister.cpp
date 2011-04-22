@@ -19,6 +19,7 @@
 
 #include "wmdmlister.h"
 #include "wmdmthread.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #include <objbase.h>
@@ -73,7 +74,7 @@ void WmdmLister::Init() {
   // Fetch the initial list of devices
   IWMDMEnumDevice* device_it = NULL;
   if (thread_->manager()->EnumDevices2(&device_it)) {
-    qWarning() << "Error querying WMDM devices";
+    qLog(Warning) << "Error querying WMDM devices";
     return;
   }
 
@@ -87,7 +88,7 @@ void WmdmLister::Init() {
       break;
 
     if (device->QueryInterface(IID_IWMDMDevice2, (void**)&device2)) {
-      qWarning() << "Error getting IWMDMDevice2 from device";
+      qLog(Warning) << "Error getting IWMDMDevice2 from device";
       device->Release();
       continue;
     }
@@ -193,7 +194,7 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 
     if (storage_it->Next(1, &storage, &storage_fetched) == S_OK) {
       if (storage->QueryInterface(IID_IWMDMStorage2, (void**)&ret.storage_)) {
-        qWarning() << "Error getting IWMDMStorage2 from storage";
+        qLog(Warning) << "Error getting IWMDMStorage2 from storage";
       } else {
         // Get free space information
         UpdateFreeSpace(&ret);
@@ -260,7 +261,7 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
 
         if (!GetVolumeInformationW(volume_path, name, MAX_PATH,
             &serial, NULL, NULL, type, MAX_PATH)) {
-          qWarning() << "Error getting volume information for" <<
+          qLog(Warning) << "Error getting volume information for" <<
               QString::fromWCharArray(volume_path);
         } else {
           if (name.ToString() == info->name_ && name.characters() != 0) {
@@ -297,7 +298,7 @@ bool WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
       NULL, // flags
       type, MAX_PATH // fat or ntfs
       )) {
-    qWarning() << "Error getting volume information for" << drive;
+    qLog(Warning) << "Error getting volume information for" << drive;
     return false;
   } else {
     qDebug() << "Validated drive letter" << drive;
@@ -436,13 +437,13 @@ void WmdmLister::WMDMDeviceAdded(const QString& canonical_name) {
 
   IWMDMDevice* device = NULL;
   if (thread_->manager()->GetDeviceFromCanonicalName(name, &device)) {
-    qWarning() << "Error in GetDeviceFromCanonicalName for" << canonical_name;
+    qLog(Warning) << "Error in GetDeviceFromCanonicalName for" << canonical_name;
     return;
   }
 
   IWMDMDevice2* device2 = NULL;
   if (device->QueryInterface(IID_IWMDMDevice2, (void**) &device2)) {
-    qWarning() << "Error getting IWMDMDevice2 from device";
+    qLog(Warning) << "Error getting IWMDMDevice2 from device";
     device->Release();
     return;
   }

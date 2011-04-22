@@ -17,6 +17,7 @@
 
 #include "songinfofetcher.h"
 #include "songinfoprovider.h"
+#include "core/logging.h"
 
 #include <QSignalMapper>
 #include <QTimer>
@@ -98,7 +99,7 @@ void SongInfoFetcher::Timeout(int id) {
 
   // Cancel any providers that we're still waiting for
   foreach (SongInfoProvider* provider, waiting_for_[id]) {
-    qDebug() << "Request timed out from info provider" << provider->name();
+    qLog(Info) << "Request timed out from info provider" << provider->name();
     provider->Cancel(id);
   }
   waiting_for_.remove(id);

@@ -19,6 +19,7 @@
 #include "edittagdialog.h"
 #include "trackselectiondialog.h"
 #include "ui_edittagdialog.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "library/library.h"
@@ -268,7 +269,7 @@ QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
   if (id == "track")       return song.track();
   if (id == "disc")        return song.disc();
   if (id == "year")        return song.year();
-  qDebug() << "Unknown ID" << id;
+  qLog(Warning) << "Unknown ID" << id;
   return QVariant();
 }
 

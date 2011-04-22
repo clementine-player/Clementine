@@ -16,6 +16,7 @@
 */
 
 #include "encoding.h"
+#include "core/logging.h"
 
 #include <QTextCodec>
 #include <QtDebug>
@@ -27,6 +28,7 @@
 #include <vorbisfile.h>
 #include <flacfile.h>
 
+#include "core/logging.h"
 #include "engines/enginebase.h"
 
 UniversalEncodingHandler::UniversalEncodingHandler()
@@ -91,7 +93,7 @@ QTextCodec* UniversalEncodingHandler::Guess(const char* data) {
         repeats = 0;
       }
       if (repeats > 3) {
-        qWarning() << "Heuristic guessed windows-1251";
+        qLog(Warning) << "Heuristic guessed windows-1251";
         current_codec_ = QTextCodec::codecForName("windows-1251");
       }
     }
@@ -154,7 +156,7 @@ QTextCodec* UniversalEncodingHandler::Guess(const TagLib::String& input) {
     return NULL;
   }
   if (input.isLatin1()) {
-    qWarning() << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
+    qLog(Warning) << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
     std::string broken = input.toCString(true);
     std::string fixed = QString::fromUtf8(broken.c_str()).toStdString();
     QTextCodec* codec = Guess(fixed.c_str());
@@ -181,16 +183,16 @@ QTextCodec* UniversalEncodingHandler::Guess(const Engine::SimpleMetaBundle& bund
 
 QString UniversalEncodingHandler::FixEncoding(const TagLib::String& input) {
   if (input.isLatin1() && !input.isAscii()) {
-    qWarning() << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
+    qLog(Warning) << "Extended ASCII... possibly should be CP866 or windows-1251 instead";
     std::string broken = input.toCString(true);
     std::string fixed;
     if (broken.size() > input.size()) {
       fixed = QString::fromUtf8(broken.c_str()).toStdString();
       QTextCodec* codec = Guess(fixed.c_str());
       if (!codec) {
-        qDebug() << "Could not guess encoding. Using extended ASCII.";
+        qLog(Debug) << "Could not guess encoding. Using extended ASCII.";
       } else {
-        qDebug() << "Guessed:" << codec->name();
+        qLog(Debug) << "Guessed:" << codec->name();
         QString foo = codec->toUnicode(fixed.c_str());
         return foo.trimmed();
       }

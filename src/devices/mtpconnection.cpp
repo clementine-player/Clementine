@@ -16,6 +16,7 @@
 */
 
 #include "mtpconnection.h"
+#include "core/logging.h"
 
 #include <QRegExp>
 #include <QtDebug>
@@ -28,7 +29,7 @@ MtpConnection::MtpConnection(const QUrl& url)
   QRegExp host_re("^usb-(\\d+)-(\\d+)$");
 
   if (host_re.indexIn(hostname) == -1) {
-    qWarning() << "Invalid MTP device:" << hostname;
+    qLog(Warning) << "Invalid MTP device:" << hostname;
     return;
   }
 
@@ -55,7 +56,7 @@ MtpConnection::MtpConnection(const QUrl& url)
   LIBMTP_raw_device_t* raw_devices = NULL;
   LIBMTP_error_number_t err = LIBMTP_Detect_Raw_Devices(&raw_devices, &count);
   if (err != LIBMTP_ERROR_NONE) {
-    qWarning() << "MTP error:" << err;
+    qLog(Warning) << "MTP error:" << err;
     return;
   }
 
@@ -69,7 +70,7 @@ MtpConnection::MtpConnection(const QUrl& url)
   }
 
   if (!raw_device) {
-    qWarning() << "MTP device not found";
+    qLog(Warning) << "MTP device not found";
     free(raw_devices);
     return;
   }

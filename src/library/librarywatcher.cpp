@@ -17,6 +17,7 @@
 
 #include "librarywatcher.h"
 #include "librarybackend.h"
+#include "core/logging.h"
 #include "core/taskmanager.h"
 #include "playlistparsers/cueparser.h"
 
@@ -328,7 +329,7 @@ void LibraryWatcher::ScanSubdirectory(
 
       // the song's changed - reread the metadata from file
       if (t->ignores_mtime() || changed) {
-        qDebug() << file << "changed";
+        qLog(Debug) << file << "changed";
 
         // if cue associated...
         if(!cue_deleted && (matching_song.has_cue() || cue_added)) {
@@ -346,7 +347,7 @@ void LibraryWatcher::ScanSubdirectory(
         continue;
       }
 
-      qDebug() << file << "created";
+      qLog(Debug) << file << "created";
       // choose an image for the song(s)
       QString image = ImageForSong(file, album_art);
 
@@ -363,7 +364,7 @@ void LibraryWatcher::ScanSubdirectory(
   // Look for deleted songs
   foreach (const Song& song, songs_in_db) {
     if (!files_on_disk.contains(song.filename())) {
-      qDebug() << "Song deleted from disk:" << song.filename();
+      qLog(Debug) << "Song deleted from disk:" << song.filename();
       t->deleted_songs << song;
     }
   }
@@ -510,7 +511,7 @@ void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& ima
   out->set_art_manual(matching_song.art_manual());
 
   if (!matching_song.IsMetadataEqual(*out)) {
-    qDebug() << file << "metadata changed";
+    qLog(Debug) << file << "metadata changed";
 
     // Update the song in the DB
     t->new_songs << *out;
@@ -572,7 +573,7 @@ void LibraryWatcher::DirectoryChanged(const QString &subdir) {
       dir = info.dir;
   }
 
-  qDebug() << "Subdir" << subdir << "changed under directory" << dir.path << "id" << dir.id;
+  qLog(Debug) << "Subdir" << subdir << "changed under directory" << dir.path << "id" << dir.id;
 
   // Queue the subdir for rescanning
   if (!rescan_queue_[dir.id].contains(subdir))

@@ -19,6 +19,7 @@
 #include "mpris_common.h"
 #include "mpris1.h"
 #include "mpris2.h"
+#include "core/logging.h"
 #include "core/mpris2_player.h"
 #include "core/mpris2_root.h"
 #include "core/mpris2_tracklist.h"
@@ -55,7 +56,7 @@ Mpris2::Mpris2(PlayerInterface* player, ArtLoader* art_loader,
   new Mpris2Player(this);
 
   if (!QDBusConnection::sessionBus().registerService(kServiceName)) {
-    qWarning() << "Failed to register" << QString(kServiceName) << "on the session bus";
+    qLog(Warning) << "Failed to register" << QString(kServiceName) << "on the session bus";
     return;
   }
 

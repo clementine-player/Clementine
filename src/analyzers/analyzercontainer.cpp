@@ -21,6 +21,7 @@
 #include "boomanalyzer.h"
 #include "sonogram.h"
 #include "turbine.h"
+#include "core/logging.h"
 
 #include <QMouseEvent>
 #include <QHBoxLayout>
@@ -136,7 +137,7 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   QObject* instance = analyzer_types_[id]->newInstance(Q_ARG(QWidget*, this));
 
   if (!instance) {
-    qWarning() << "Couldn't intialise a new" << analyzer_types_[id]->className();
+    qLog(Warning) << "Couldn't intialise a new" << analyzer_types_[id]->className();
     return;
   }
 

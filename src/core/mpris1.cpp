@@ -17,6 +17,7 @@
 
 #include "mpris1.h"
 #include "mpris_common.h"
+#include "core/logging.h"
 #include "covers/artloader.h"
 
 #include <QCoreApplication>
@@ -51,7 +52,7 @@ Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent,
   }
 
   if (!QDBusConnection::sessionBus().registerService(dbus_service_name_)) {
-    qWarning() << "Failed to register" << dbus_service_name_ << "on the session bus";
+    qLog(Warning) << "Failed to register" << dbus_service_name_ << "on the session bus";
     return;
   }
 

@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "player.h"
+#include "core/logging.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "library/librarybackend.h"
@@ -299,7 +300,7 @@ void Player::SeekTo(int seconds) {
   engine_->Seek(nanosec);
 
   // If we seek the track we don't want to submit it to last.fm
-  qDebug() << "Track seeked to" << nanosec << "ns - not scrobbling";
+  qLog(Info) << "Track seeked to" << nanosec << "ns - not scrobbling";
   if (playlists_->active()->get_lastfm_status() == Playlist::LastFM_New) {
     playlists_->active()->set_lastfm_status(Playlist::LastFM_Seeked);
   }

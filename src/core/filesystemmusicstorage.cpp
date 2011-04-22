@@ -16,6 +16,7 @@
 */
 
 #include "config.h"
+#include "core/logging.h"
 
 #ifdef HAVE_GIO
 #  include <gio/gio.h>
@@ -42,7 +43,7 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
   const QString dest_directory = dest_filename.section('/', 0, -2);
   QDir dir;
   if (!dir.mkpath(dest_directory)) {
-    qWarning() << "Failed to create directory" << dest_directory;
+    qLog(Warning) << "Failed to create directory" << dest_directory;
     return false;
   }
 

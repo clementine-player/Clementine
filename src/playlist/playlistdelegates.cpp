@@ -17,6 +17,7 @@
 
 #include "playlistdelegates.h"
 #include "queue.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
 #include "widgets/trackslider.h"
@@ -376,7 +377,7 @@ QString TagCompletionModel::database_column(Playlist::Column column) {
     case Playlist::Column_Composer:     return "composer";
     case Playlist::Column_Genre:        return "genre";
     default:
-      qWarning() << __PRETTY_FUNCTION__ << "Unknown column" << column;
+      qLog(Warning) << "Unknown column" << column;
       return QString();
   }
 }

@@ -16,6 +16,7 @@
 */
 
 #include "asxiniparser.h"
+#include "core/logging.h"
 
 #include <QTextStream>
 #include <QtDebug>
@@ -41,7 +42,7 @@ SongList AsxIniParser::Load(QIODevice *device, const QString& playlist_path, con
     if (key.startsWith("ref")) {
       Song song;
       if (!ParseTrackLocation(value, dir, &song))
-        qWarning() << "Failed to parse location: " << value;
+        qLog(Warning) << "Failed to parse location: " << value;
 
       // Load the song from the library if it's there.
       Song library_song = LoadLibrarySong(song.filename());

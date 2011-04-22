@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "crashreporting.h"
+#include "core/logging.h"
 
 #include <QApplication>
 #include <QDir>
@@ -106,7 +107,7 @@ CrashSender::CrashSender(const QString& path)
 
 bool CrashSender::Start() {
   if (!file_->open(QIODevice::ReadOnly)) {
-    qWarning() << "Failed to open crash report" << path_;
+    qLog(Warning) << "Failed to open crash report" << path_;
     return false;
   }
 

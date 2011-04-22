@@ -17,6 +17,7 @@
 
 #include "echonestbiographies.h"
 #include "songinfotextview.h"
+#include "core/logging.h"
 
 #include <echonest/Artist.h>
 
@@ -64,7 +65,7 @@ void EchoNestBiographies::RequestFinished() {
   try {
     request->artist_->parseProfile(reply);
   } catch (Echonest::ParseError e) {
-    qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
   }
 
   QSet<QString> already_seen;

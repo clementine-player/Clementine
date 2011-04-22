@@ -16,8 +16,8 @@
 */
 
 #include "macdevicelister.h"
-
 #include "mtpconnection.h"
+#include "core/logging.h"
 
 #include <CoreFoundation/CFRunLoop.h>
 #include <DiskArbitration/DiskArbitration.h>
@@ -93,7 +93,7 @@ void MacDeviceLister::Init() {
     LIBMTP_device_entry_t* devices = NULL;
     int num = 0;
     if (LIBMTP_Get_Supported_Devices_List(&devices, &num) != 0) {
-      qWarning() << "Failed to get MTP device list";
+      qLog(Warning) << "Failed to get MTP device list";
     } else {
       for (int i = 0; i < num; ++i) {
         LIBMTP_device_entry_t device = devices[i];
@@ -143,7 +143,7 @@ void MacDeviceLister::Init() {
   if (err == KERN_SUCCESS) {
     USBDeviceAddedCallback(this, it);
   } else {
-    qWarning() << "Could not add notification on USB device connection";
+    qLog(Warning) << "Could not add notification on USB device connection";
   }
 
   err = IOServiceAddMatchingNotification(
@@ -156,7 +156,7 @@ void MacDeviceLister::Init() {
   if (err == KERN_SUCCESS) {
     USBDeviceRemovedCallback(this, it);
   } else {
-    qWarning() << "Could not add notification USB device removal";
+    qLog(Warning) << "Could not add notification USB device removal";
   }
 
   CFRunLoopSourceRef io_source = IONotificationPortGetRunLoopSource(notification_port);
@@ -303,7 +303,7 @@ quint64 MacDeviceLister::GetFreeSpace(const QUrl& url) {
   QMutexLocker l(&libmtp_mutex_);
   MtpConnection connection(url);
   if (!connection.is_valid()) {
-    qWarning() << "Error connecting to MTP device, couldn't get device free space";
+    qLog(Warning) << "Error connecting to MTP device, couldn't get device free space";
     return -1;
   }
   LIBMTP_devicestorage_t* storage = connection.device()->storage;
@@ -319,7 +319,7 @@ quint64 MacDeviceLister::GetCapacity(const QUrl& url) {
   QMutexLocker l(&libmtp_mutex_);
   MtpConnection connection(url);
   if (!connection.is_valid()) {
-    qWarning() << "Error connecting to MTP device, couldn't get device capacity";
+    qLog(Warning) << "Error connecting to MTP device, couldn't get device capacity";
     return -1;
   }
   LIBMTP_devicestorage_t* storage = connection.device()->storage;
@@ -794,7 +794,7 @@ void MacDeviceLister::UnmountDevice(const QString& serial) {
 void MacDeviceLister::DiskUnmountCallback(
     DADiskRef disk, DADissenterRef dissenter, void* context) {
   if (dissenter) {
-    qWarning() << "Another app blocked the unmount";
+    qLog(Warning) << "Another app blocked the unmount";
   } else {
     DiskRemovedCallback(disk, context);
   }

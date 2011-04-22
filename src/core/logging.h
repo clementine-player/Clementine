@@ -15,32 +15,34 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "scopedtransaction.h"
-#include "core/logging.h"
+#ifndef LOGGING_H
+#define LOGGING_H
 
-#include <QSqlDatabase>
-#include <QtDebug>
+#include <QDebug>
 
-ScopedTransaction::ScopedTransaction(QSqlDatabase* db)
-  : db_(db),
-    pending_(true)
-{
-  db->transaction();
+#define qLog(level) \
+  logging::CreateLogger(logging::Level_##level, __PRETTY_FUNCTION__, __LINE__)
+
+namespace logging {
+  class NullDevice : public QIODevice {
+  protected:
+    qint64 readData(char*, qint64) { return -1; }
+    qint64 writeData(const char*, qint64 len) { return len; }
+  };
+
+  enum Level {
+    Level_Error = 0,
+    Level_Warning,
+    Level_Info,
+    Level_Debug,
+  };
+
+  void Init();
+  void SetLevels(const QString& levels);
+
+  QDebug CreateLogger(Level level, const char* pretty_function, int line);
+
+  extern const char* kDefaultLogLevels;
 }
 
-ScopedTransaction::~ScopedTransaction() {
-  if (pending_) {
-    qLog(Warning) << "Rolling back transaction";
-    db_->rollback();
-  }
-}
-
-void ScopedTransaction::Commit() {
-  if (!pending_) {
-    qLog(Warning) << "Tried to commit a ScopedTransaction twice";
-    return;
-  }
-
-  db_->commit();
-  pending_ = false;
-}
+#endif // LOGGING_H

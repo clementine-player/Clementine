@@ -17,6 +17,7 @@
 
 #include "playlistitem.h"
 #include "songplaylistitem.h"
+#include "core/logging.h"
 #include "library/library.h"
 #include "library/libraryplaylistitem.h"
 #include "radio/jamendoplaylistitem.h"
@@ -46,7 +47,7 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
   if (type == "Radio")
     return new RadioPlaylistItem(type);
 
-  qWarning() << "Invalid PlaylistItem type:" << type;
+  qLog(Warning) << "Invalid PlaylistItem type:" << type;
   return NULL;
 }
 
@@ -58,7 +59,7 @@ PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& 
   if (table == JamendoService::kSongsTable)
     return new JamendoPlaylistItem(song);
 
-  qWarning() << "Invalid PlaylistItem songs table:" << table;
+  qLog(Warning) << "Invalid PlaylistItem songs table:" << table;
   return NULL;
 }
 

@@ -19,6 +19,7 @@
 #include "magnatuneplaylistitem.h"
 #include "magnatuneservice.h"
 #include "radiomodel.h"
+#include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
 #include "core/song.h"
@@ -150,7 +151,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
-    qDebug() << reply->errorString();
+    qLog(Error) << reply->errorString();
     return;
   }
 
@@ -161,7 +162,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
   QtIOCompressor gzip(reply);
   gzip.setStreamFormat(QtIOCompressor::GzipFormat);
   if (!gzip.open(QIODevice::ReadOnly)) {
-    qWarning() << "Error opening gzip stream";
+    qLog(Warning) << "Error opening gzip stream";
     return;
   }
 

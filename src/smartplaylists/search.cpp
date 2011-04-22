@@ -90,7 +90,6 @@ QString Search::ToSql(const QString& songs_table) const {
     sql += " LIMIT " + QString::number(limit_);
   }
 
-  qDebug() << sql;
   return sql;
 }
 

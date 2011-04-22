@@ -16,6 +16,7 @@
 */
 
 #include "songloader.h"
+#include "core/logging.h"
 #include "core/song.h"
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
@@ -83,7 +84,7 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
 }
 
 SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
-  qDebug() << "Fast Loading local file" << filename;
+  qLog(Debug) << "Fast Loading local file" << filename;
   // First check to see if it's a directory - if so we can load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
@@ -99,7 +100,7 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 
 SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
                                          bool ignore_playlists) {
-  qDebug() << "Loading local file" << filename;
+  qLog(Debug) << "Loading local file" << filename;
 
   // First check to see if it's a directory - if so we can load all the songs
   // inside right away.
@@ -129,11 +130,11 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
   if (parser) {
     if (ignore_playlists) {
-      qDebug() << "Skipping" << parser->name() << "playlist while loading directory";
+      qLog(Debug) << "Skipping" << parser->name() << "playlist while loading directory";
       return Success;
     }
 
-    qDebug() << "Parsing using" << parser->name();
+    qLog(Debug) << "Parsing using" << parser->name();
 
     // It's a playlist!
     if (!block) {
@@ -275,14 +276,14 @@ void SongLoader::StopTypefind() {
   timeout_timer_->stop();
 
   if (success_ && parser_) {
-    qDebug() << "Parsing" << url_ << "with" << parser_->name();
+    qLog(Debug) << "Parsing" << url_ << "with" << parser_->name();
 
     // Parse the playlist
     QBuffer buf(&buffer_);
     buf.open(QIODevice::ReadOnly);
     songs_ = parser_->Load(&buf);
   } else if (success_) {
-    qDebug() << "Loading" << url_ << "as raw stream";
+    qLog(Debug) << "Loading" << url_ << "as raw stream";
 
     // It wasn't a playlist - just put the URL in as a stream
     AddAsRawStream();
@@ -292,7 +293,7 @@ void SongLoader::StopTypefind() {
 }
 
 SongLoader::Result SongLoader::LoadRemote() {
-  qDebug() << "Loading remote file" << url_;
+  qLog(Debug) << "Loading remote file" << url_;
 
   // It's not a local file so we have to fetch it to see what it is.  We use
   // gstreamer to do this since it handles funky URLs for us (http://, ssh://,
@@ -312,7 +313,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   GstElement* source = gst_element_make_from_uri(
       GST_URI_SRC, url_.toEncoded().constData(), NULL);
   if (!source) {
-    qWarning() << "Couldn't create gstreamer source element for" << url_.toString();
+    qLog(Warning) << "Couldn't create gstreamer source element for" << url_.toString();
     return Error;
   }
 
@@ -348,7 +349,7 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
 
   // Check the mimetype
   instance->mime_type_ = gst_structure_get_name(gst_caps_get_structure(caps, 0));
-  qDebug() << "Mime type is" << instance->mime_type_;
+  qLog(Debug) << "Mime type is" << instance->mime_type_;
   if (instance->mime_type_ == "text/plain" ||
       instance->mime_type_ == "text/uri-list" ||
       instance->mime_type_ == "application/xml") {
@@ -370,7 +371,7 @@ void SongLoader::DataReady(GstPad *, GstBuffer *buf, void *self) {
   // Append the data to the buffer
   instance->buffer_.append(reinterpret_cast<const char*>(GST_BUFFER_DATA(buf)),
                            GST_BUFFER_SIZE(buf));
-  qDebug() << "Received total" << instance->buffer_.size() << "bytes";
+  qLog(Debug) << "Received total" << instance->buffer_.size() << "bytes";
 
   if (instance->state_ == WaitingForMagic &&
       instance->buffer_.size() >= PlaylistParser::kMagicSize) {
@@ -419,8 +420,8 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
   gchar* debugs;
 
   gst_message_parse_error(msg, &error, &debugs);
-  qDebug() << error->message;
-  qDebug() << debugs;
+  qLog(Error) << error->message;
+  qLog(Error) << debugs;
 
   QString message_str = error->message;
 
@@ -466,7 +467,7 @@ void SongLoader::MagicReady() {
   parser_ = playlist_parser_->ParserForMagic(buffer_, mime_type_);
 
   if (!parser_) {
-    qWarning() << url_.toString() << "is text, but not a recognised playlist";
+    qLog(Warning) << url_.toString() << "is text, but not a recognised playlist";
     // It doesn't look like a playlist, so just finish
     StopTypefindAsync(false);
     return;
@@ -474,7 +475,7 @@ void SongLoader::MagicReady() {
 
   // It is a playlist - we'll get more data and parse the whole thing in
   // EndOfStreamReached
-  qDebug() << "Magic says" << parser_->name();
+  qLog(Debug) << "Magic says" << parser_->name();
   if (parser_->name() == "ASX/INI" && url_.scheme() == "http") {
     // This is actually a weird MS-WMSP stream. Changing the protocol to MMS from
     // HTTP makes it playable.

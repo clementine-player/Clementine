@@ -24,6 +24,7 @@
 #include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #ifdef HAVE_IMOBILEDEVICE
@@ -204,7 +205,7 @@ void GstEngine::ConsumeBuffer(GstBuffer* buffer, int pipeline_id) {
   if (!QMetaObject::invokeMethod(this, "AddBufferToScope",
                                  Q_ARG(GstBuffer*, buffer),
                                  Q_ARG(int, pipeline_id))) {
-    qWarning() << "Failed to invoke AddBufferToScope on GstEngine";
+    qLog(Warning) << "Failed to invoke AddBufferToScope on GstEngine";
   }
 }
 
@@ -419,14 +420,14 @@ void GstEngine::PlayDone() {
     // Failure, but we got a redirection URL - try loading that instead
     QUrl redirect_url = current_pipeline_->redirect_url();
     if (!redirect_url.isEmpty() && redirect_url != current_pipeline_->url()) {
-      qDebug() << "Redirecting to" << redirect_url;
+      qLog(Info) << "Redirecting to" << redirect_url;
       current_pipeline_ = CreatePipeline(redirect_url, end_nanosec_);
       Play(offset_nanosec);
       return;
     }
 
     // Failure - give up
-    qWarning() << "Could not set thread to PLAYING.";
+    qLog(Warning) << "Could not set thread to PLAYING.";
     current_pipeline_.reset();
     return;
   }
@@ -511,7 +512,7 @@ void GstEngine::SeekNow() {
   if (current_pipeline_->Seek(seek_pos_))
     ClearScopeBuffers();
   else
-    qDebug() << "Seek failed";
+    qLog(Warning) << "Seek failed";
 }
 
 void GstEngine::SetEqualizerEnabled(bool enabled) {
@@ -581,7 +582,7 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
   if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
-  qWarning() << "Gstreamer error:" << message;
+  qLog(Warning) << "Gstreamer error:" << message;
 
   current_pipeline_.reset();
 
@@ -790,7 +791,7 @@ void GstEngine::BackgroundStreamPlayDone() {
   GstStateChangeReturn ret = watcher->result();
 
   if (ret == GST_STATE_CHANGE_FAILURE) {
-    qWarning() << "Could not set thread to PLAYING.";
+    qLog(Warning) << "Could not set thread to PLAYING.";
     background_streams_.remove(stream_id);
   }
 }

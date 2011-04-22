@@ -28,6 +28,7 @@
 #include "qtiocompressor.h"
 
 #include "core/database.h"
+#include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
 #include "core/scopedtransaction.h"
@@ -189,7 +190,7 @@ void JamendoService::DownloadDirectoryFinished() {
   QtIOCompressor* gzip = new QtIOCompressor(reply);
   gzip->setStreamFormat(QtIOCompressor::GzipFormat);
   if (!gzip->open(QIODevice::ReadOnly)) {
-    qWarning() << "Jamendo library not in gzip format";
+    qLog(Warning) << "Jamendo library not in gzip format";
     delete gzip;
     return;
   }
@@ -265,7 +266,7 @@ void JamendoService::InsertTrackIds(const TrackIdList& ids) const {
   foreach (int id, ids) {
     insert.bindValue(":id", id);
     if (!insert.exec()) {
-      qWarning() << "Query failed" << insert.lastQuery();
+      qLog(Warning) << "Query failed" << insert.lastQuery();
     }
   }
 

@@ -19,6 +19,7 @@
 #include "mtpconnection.h"
 #include "mtpdevice.h"
 #include "mtploader.h"
+#include "core/logging.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
@@ -177,7 +178,7 @@ bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret) {
   QMutexLocker l(&db_busy_);
   MtpConnection connection(url_);
   if (!connection.is_valid()) {
-    qWarning() << "Error connecting to MTP device, couldn't get list of supported filetypes";
+    qLog(Warning) << "Error connecting to MTP device, couldn't get list of supported filetypes";
     return false;
   }
 
@@ -211,7 +212,7 @@ bool MtpDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, LIBMTP_mtpdevi
         *ret << Song::Type_OggFlac;
         break;
       default:
-        qDebug() << "Unknown MTP file format" <<
+        qLog(Error) << "Unknown MTP file format" <<
             LIBMTP_Get_Filetype_Description(LIBMTP_filetype_t(list[i]));
         break;
     }

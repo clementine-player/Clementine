@@ -21,6 +21,7 @@
 #include "devicemanager.h"
 #include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
+#include "core/logging.h"
 #include "core/musicstorage.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
@@ -389,7 +390,7 @@ int DeviceManager::FindDeviceByUrl(const QList<QUrl>& urls) const {
 void DeviceManager::PhysicalDeviceAdded(const QString &id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
 
-  qDebug() << "Device added:" << id;
+  qLog(Info) << "Device added:" << id;
 
   // Do we have this device already?
   int i = FindDeviceById(id);
@@ -438,7 +439,7 @@ void DeviceManager::PhysicalDeviceAdded(const QString &id) {
 void DeviceManager::PhysicalDeviceRemoved(const QString &id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
 
-  qDebug() << "Device removed:" << id;
+  qLog(Info) << "Device removed:" << id;
 
   int i = FindDeviceById(id);
   if (i == -1) {
@@ -533,7 +534,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   // Take the first URL that we have a handler for
   QUrl device_url;
   foreach (const QUrl& url, urls) {
-    qDebug() << "Connecting" << url;
+    qLog(Info) << "Connecting" << url;
 
     // Find a device class for this URL's scheme
     if (device_classes_.contains(url.scheme())) {
@@ -578,7 +579,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   ret.reset(static_cast<ConnectedDevice*>(instance));
 
   if (!ret) {
-    qWarning() << "Could not create device for" << device_url.toString();
+    qLog(Warning) << "Could not create device for" << device_url.toString();
   } else {
     ret->Init();
 

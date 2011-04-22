@@ -17,6 +17,7 @@
 
 #include "timeconstants.h"
 #include "utilities.h"
+#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -189,14 +190,14 @@ bool CopyRecursive(const QString& source, const QString& destination) {
   QDir dir(source);
   foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Dirs)) {
     if (!CopyRecursive(source + "/" + child, dest_path)) {
-      qWarning() << "Failed to copy dir" << source + "/" + child << "to" << dest_path;
+      qLog(Warning) << "Failed to copy dir" << source + "/" + child << "to" << dest_path;
       return false;
     }
   }
 
   foreach (const QString& child, dir.entryList(QDir::NoDotAndDotDot | QDir::Files)) {
     if (!QFile::copy(source + "/" + child, dest_path + "/" + child)) {
-      qWarning() << "Failed to copy file" << source + "/" + child << "to" << dest_path;
+      qLog(Warning) << "Failed to copy file" << source + "/" + child << "to" << dest_path;
       return false;
     }
   }

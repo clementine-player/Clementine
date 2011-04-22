@@ -16,6 +16,7 @@
 */
 
 #include "osd.h"
+#include "core/logging.h"
 
 #include <QtDebug>
 
@@ -32,5 +33,5 @@ bool OSD::SupportsTrayPopups() {
 
 void OSD::ShowMessageNative(const QString&, const QString&,
                             const QString&, const QImage&) {
-  qWarning() << __PRETTY_FUNCTION__ << ": NOT IMPLEMENTED";
+  qLog(Warning) << "not implemented";
 }

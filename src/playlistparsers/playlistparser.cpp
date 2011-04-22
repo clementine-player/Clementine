@@ -15,13 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "playlistparser.h"
-#include "xspfparser.h"
-#include "m3uparser.h"
-#include "plsparser.h"
-#include "cueparser.h"
 #include "asxparser.h"
 #include "asxiniparser.h"
+#include "cueparser.h"
+#include "m3uparser.h"
+#include "playlistparser.h"
+#include "plsparser.h"
+#include "xspfparser.h"
+#include "core/logging.h"
 
 #include <QtDebug>
 
@@ -105,7 +106,7 @@ SongList PlaylistParser::LoadFromFile(const QString& filename) const {
   // Find a parser that supports this file extension
   ParserBase* parser = ParserForExtension(info.suffix());
   if (!parser) {
-    qWarning() << "Unknown filetype:" << filename;
+    qLog(Warning) << "Unknown filetype:" << filename;
     return SongList();
   }
 
@@ -134,7 +135,7 @@ void PlaylistParser::Save(const SongList& songs, const QString& filename) const 
   // Find a parser that supports this file extension
   ParserBase* parser = ParserForExtension(info.suffix());
   if (!parser) {
-    qWarning() << "Unknown filetype:" << filename;
+    qLog(Warning) << "Unknown filetype:" << filename;
     return;
   }
 

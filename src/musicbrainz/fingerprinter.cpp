@@ -16,6 +16,7 @@
 */
 
 #include "fingerprinter.h"
+#include "core/logging.h"
 
 #include <QDir>
 #include <QEventLoop>
@@ -52,7 +53,7 @@ GstElement* Fingerprinter::CreateElement(const QString &factory_name,
     gst_bin_add(GST_BIN(bin), ret);
 
   if (!ret) {
-    qDebug() << "Couldn't create the gstreamer element" << factory_name;
+    qLog(Warning) << "Couldn't create the gstreamer element" << factory_name;
   }
 
   return ret;
@@ -102,7 +103,7 @@ void Fingerprinter::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer 
   GstPad* const audiopad = gst_element_get_pad(instance->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
-    qDebug() << "audiopad is already linked. Unlinking old pad.";
+    qLog(Warning) << "audiopad is already linked, unlinking old pad";
     gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
   }
 
@@ -120,7 +121,7 @@ void Fingerprinter::ReportError(GstMessage* msg) {
   g_error_free(error);
   free(debugs);
 
-  qDebug() << "Fingerprinter: Error processing" << filename_ << ":" << message;
+  qLog(Error) << "Error processing" << filename_ << ":" << message;
 }
 
 gboolean Fingerprinter::BusCallback(GstBus*, GstMessage* msg, gpointer data) {

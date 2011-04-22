@@ -21,6 +21,7 @@
 #include "wmdmloader.h"
 #include "wmdmprogress.h"
 #include "wmdmthread.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
@@ -133,7 +134,7 @@ bool WmdmDevice::CopyToStorage(const CopyJob& job) {
       metadata_iface,
       NULL, // data
       &new_storage)) {
-    qWarning() << "Couldn't copy file to WMDM device";
+    qLog(Warning) << "Couldn't copy file to WMDM device";
     metadata_iface->Release();
     return false;
   }
@@ -244,7 +245,7 @@ bool WmdmDevice::GetSupportedFiletypes(QList<Song::FileType>* ret, IWMDMDevice* 
 
   if (device->GetFormatSupport(
       &formats, &format_count, &mime_types, &mime_count)) {
-    qWarning() << "Unable to get a list of supported formats for device";
+    qLog(Warning) << "Unable to get a list of supported formats for device";
     return false;
   }
 

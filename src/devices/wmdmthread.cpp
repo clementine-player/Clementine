@@ -16,6 +16,7 @@
 */
 
 #include "wmdmthread.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #include <mswmdm.h>
@@ -39,26 +40,26 @@ WmdmThread::WmdmThread()
   IComponentAuthenticate* auth;
   if (CoCreateInstance(CLSID_MediaDevMgr, NULL, CLSCTX_ALL,
                        IID_IComponentAuthenticate, (void**) &auth)) {
-    qWarning() << "Error creating the IComponentAuthenticate interface";
+    qLog(Warning) << "Error creating the IComponentAuthenticate interface";
     return;
   }
 
   sac_ = CSecureChannelClient_New();
   if (CSecureChannelClient_SetCertificate(
       sac_, SAC_CERT_V1, abCert, sizeof(abCert), abPVK, sizeof(abPVK))) {
-    qWarning() << "Error setting SAC certificate";
+    qLog(Warning) << "Error setting SAC certificate";
     return;
   }
 
   CSecureChannelClient_SetInterface(sac_, auth);
   if (CSecureChannelClient_Authenticate(sac_, SAC_PROTOCOL_V1)) {
-    qWarning() << "Error authenticating with SAC";
+    qLog(Warning) << "Error authenticating with SAC";
     return;
   }
 
   // Create the device manager
   if (auth->QueryInterface(IID_IWMDeviceManager2, (void**)&device_manager_)) {
-    qWarning() << "Error creating WMDM device manager";
+    qLog(Warning) << "Error creating WMDM device manager";
     return;
   }
 }
@@ -83,7 +84,7 @@ IWMDMDevice* WmdmThread::GetDeviceByCanonicalName(const QString& device_name) {
 
   IWMDMDevice* device = NULL;
   if (device_manager_->GetDeviceFromCanonicalName(name, &device)) {
-    qWarning() << "Error in GetDeviceFromCanonicalName for" << device_name;
+    qLog(Warning) << "Error in GetDeviceFromCanonicalName for" << device_name;
     return NULL;
   }
 

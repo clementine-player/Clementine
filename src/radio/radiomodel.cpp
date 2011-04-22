@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "core/mergedproxymodel.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
@@ -24,6 +23,8 @@
 #include "radioservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
+#include "core/logging.h"
+#include "core/mergedproxymodel.h"
 
 #ifdef HAVE_LIBLASTFM
   #include "lastfmservice.h"
@@ -61,7 +62,7 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
 void RadioModel::AddService(RadioService *service) {
   QStandardItem* root = service->CreateRootItem();
   if (!root) {
-    qWarning() << "Radio service" << service->name() << "did not return a root item";
+    qLog(Warning) << "Radio service" << service->name() << "did not return a root item";
     return;
   }
 

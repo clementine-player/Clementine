@@ -22,6 +22,7 @@
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "sipAPIclementine.h"
+#include "core/logging.h"
 #include "covers/coverproviders.h"
 #include "library/library.h"
 
@@ -214,7 +215,7 @@ void PythonEngine::RegisterNativeObject(QObject* object) {
 
   PyFrameObject* frame = PyEval_GetFrame();
   if (!frame) {
-    qWarning() << __PRETTY_FUNCTION__ << "unable to get stack frame";
+    qLog(Warning) << "unable to get stack frame";
     return;
   }
   while (frame->f_back) {
@@ -224,7 +225,7 @@ void PythonEngine::RegisterNativeObject(QObject* object) {
   PyObject* __package__ = PyMapping_GetItemString(
       frame->f_globals, const_cast<char*>("__package__"));
   if (!__package__) {
-    qWarning() << __PRETTY_FUNCTION__ << "unable to get __package__";
+    qLog(Warning) << "unable to get __package__";
     return;
   }
 
@@ -234,7 +235,7 @@ void PythonEngine::RegisterNativeObject(QObject* object) {
 
   Script* script = FindScriptMatchingId(package);
   if (!script) {
-    qWarning() << __PRETTY_FUNCTION__ << "unable to find script for package" << package;
+    qLog(Warning) << "unable to find script for package" << package;
     return;
   }
 

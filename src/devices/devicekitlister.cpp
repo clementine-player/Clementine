@@ -18,6 +18,7 @@
 #include "config.h"
 #include "devicekitlister.h"
 #include "filesystemdevice.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 #include "dbus/udisks.h"
 #include "dbus/udisksdevice.h"
@@ -52,7 +53,7 @@ void DeviceKitLister::Init() {
   reply.waitForFinished();
 
   if (!reply.isValid()) {
-    qWarning() << "Error enumerating DeviceKit-disks devices:" << reply.error().name() << reply.error().message();
+    qLog(Warning) << "Error enumerating DeviceKit-disks devices:" << reply.error().name() << reply.error().message();
     interface_.reset();
     return;
   }
@@ -149,7 +150,7 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       path.path(), QDBusConnection::systemBus());
   if (!device.isValid()) {
-    qWarning() << "Error connecting to the device interface on" << path.path();
+    qLog(Warning) << "Error connecting to the device interface on" << path.path();
     return ret;
   }
 
@@ -251,7 +252,7 @@ void DeviceKitLister::UnmountDevice(const QString& id) {
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       path, QDBusConnection::systemBus());
   if (!device.isValid()) {
-    qWarning() << "Error connecting to the device interface on" << path;
+    qLog(Warning) << "Error connecting to the device interface on" << path;
     return;
   }
 
@@ -261,7 +262,7 @@ void DeviceKitLister::UnmountDevice(const QString& id) {
       OrgFreedesktopUDisksInterface::staticInterfaceName(),
       drive_path, QDBusConnection::systemBus());
   if (!drive.isValid()) {
-    qWarning() << "Error connecting to the drive interface on" << drive_path;
+    qLog(Warning) << "Error connecting to the drive interface on" << drive_path;
     return;
   }
 

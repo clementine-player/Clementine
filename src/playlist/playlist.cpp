@@ -24,6 +24,7 @@
 #include "songloaderinserter.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
+#include "core/logging.h"
 #include "core/modelfuturewatcher.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -954,7 +955,7 @@ void Playlist::InsertRadioStations(const RadioModel* model,
 }
 
 void Playlist::UpdateItems(const SongList& songs) {
-  qDebug() << "Updating playlist with new tracks' info";
+  qLog(Debug) << "Updating playlist with new tracks' info";
   foreach (const Song& song, songs) {
     // Update current items list
     for (int i=0; i<items_.size(); i++) {

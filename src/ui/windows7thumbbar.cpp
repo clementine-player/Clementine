@@ -16,6 +16,7 @@
 */
 
 #include "windows7thumbbar.h"
+#include "core/logging.h"
 
 #include <QAction>
 #include <QtDebug>
@@ -91,7 +92,7 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
       // Create the taskbar list for the first time
       if (CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
                            IID_ITaskbarList3, (void**) &taskbar_list_)) {
-        qWarning() << "Error creating the ITaskbarList3 interface";
+        qLog(Warning) << "Error creating the ITaskbarList3 interface";
         return;
       }
 

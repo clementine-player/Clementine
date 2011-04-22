@@ -17,12 +17,12 @@
 
 #include <limits>
 
-#include "gstelementdeleter.h"
-#include "gstenginepipeline.h"
-#include "gstengine.h"
 #include "bufferconsumer.h"
+#include "gstelementdeleter.h"
+#include "gstengine.h"
+#include "gstenginepipeline.h"
+#include "core/logging.h"
 
-#include <QDebug>
 #include <QtConcurrentRun>
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
@@ -142,7 +142,7 @@ GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
     int code = error->code;
     g_error_free(error);
 
-    qWarning() << message;
+    qLog(Warning) << message;
     emit Error(id(), message, domain, code);
 
     return NULL;
@@ -287,6 +287,8 @@ GstEnginePipeline::~GstEnginePipeline() {
 gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
 
+  qLog(Debug) << instance->id() << "bus message" << GST_MESSAGE_TYPE_NAME(msg);
+
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
       instance->ErrorMessageReceived(msg);
@@ -309,6 +311,8 @@ gboolean GstEnginePipeline::BusCallback(GstBus*, GstMessage* msg, gpointer self)
 
 GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
+
+  qLog(Debug) << instance->id() << "sync bus message" << GST_MESSAGE_TYPE_NAME(msg);
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
@@ -371,7 +375,8 @@ void GstEnginePipeline::ErrorMessageReceived(GstMessage* msg) {
     return;
   }
 
-  qDebug() << debugstr;
+  qLog(Error) << id() << debugstr;
+
   emit Error(id(), message, domain, code);
 }
 
@@ -434,7 +439,7 @@ void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) 
   GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
-    qDebug() << "audiopad is already linked. Unlinking old pad.";
+    qLog(Warning) << instance->id() << "audiopad is already linked, unlinking old pad";
     gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
   }
 
@@ -502,6 +507,8 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
 
 bool GstEnginePipeline::EventHandoffCallback(GstPad*, GstEvent* e, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
+
+  qLog(Debug) << instance->id() << "event" << GST_EVENT_TYPE_NAME(e);
 
   if (GST_EVENT_TYPE(e) == GST_EVENT_NEWSEGMENT && !instance->segment_start_received_) {
     // The segment start time is used to calculate the proper offset of data

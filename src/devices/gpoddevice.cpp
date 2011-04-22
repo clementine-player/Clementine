@@ -18,6 +18,7 @@
 #include "devicemanager.h"
 #include "gpoddevice.h"
 #include "gpodloader.h"
+#include "core/logging.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
@@ -114,7 +115,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
   itdb_cp_track_to_ipod(track, QDir::toNativeSeparators(job.source_)
                         .toLocal8Bit().constData(), &error);
   if (error) {
-    qDebug() << "GPodDevice error:" << error->message;
+    qLog(Error) << "copying failed:" << error->message;
     emit Error(QString::fromUtf8(error->message));
     g_error_free(error);
 
@@ -139,7 +140,7 @@ void GPodDevice::WriteDatabase(bool success) {
     GError* error = NULL;
     itdb_write(db_, &error);
     if (error) {
-      qDebug() << "GPodDevice error:" << error->message;
+      qLog(Error) << "writing database failed:" << error->message;
       emit Error(QString::fromUtf8(error->message));
       g_error_free(error);
     } else {
@@ -186,7 +187,7 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
   }
 
   if (track == NULL) {
-    qWarning() << "Couldn't find song" << path << "in iTunesDB";
+    qLog(Warning) << "Couldn't find song" << path << "in iTunesDB";
     return false;
   }
 

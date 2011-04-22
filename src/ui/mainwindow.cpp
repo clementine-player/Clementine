@@ -22,6 +22,7 @@
 #include "core/database.h"
 #include "core/deletefiles.h"
 #include "core/globalshortcuts.h"
+#include "core/logging.h"
 #include "core/mac_startup.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
@@ -1074,7 +1075,7 @@ void MainWindow::UpdateTrackPosition() {
     if (playlist->get_lastfm_status() == Playlist::LastFM_New) {
       #ifdef HAVE_LIBLASTFM
         if (lastfm_service->IsScrobblingEnabled()) {
-          qDebug() << "Scrobbling at" << scrobble_point;
+          qLog(Info) << "Scrobbling at" << scrobble_point;
           lastfm_service->Scrobble();
         }
       #endif
@@ -1094,7 +1095,7 @@ void MainWindow::UpdateTrackPosition() {
 
   // Update the tray icon every 10 seconds
   if (position % 10 == 0) {
-    qDebug() << "position" << position << "scrobble point" << scrobble_point
+    qLog(Debug) << "position" << position << "scrobble point" << scrobble_point
         << "status" << playlist->get_lastfm_status();
     tray_icon_->SetProgress(double(position) / length * 100);
 
@@ -2182,7 +2183,7 @@ void MainWindow::ScrobblerStatus(int value) {
       if (value > 3) {
         // we're for sure in an error state
         playlists_->active()->set_lastfm_status(Playlist::LastFM_Error);
-        qWarning() << "Last.fm scrobbling error: " << value;
+        qLog(Warning) << "Last.fm scrobbling error: " << value;
       }
       break;
   }

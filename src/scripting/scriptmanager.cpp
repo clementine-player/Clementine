@@ -21,6 +21,7 @@
 #include "scriptinterface.h"
 #include "scriptmanager.h"
 #include "uiinterface.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #ifdef HAVE_SCRIPTING_PYTHON
@@ -61,7 +62,7 @@ ScriptManager::ScriptManager(QObject* parent)
   QString local_path = Utilities::GetConfigPath(Utilities::Path_Scripts);
   if (!QFile::exists(local_path)) {
     if (!QDir().mkpath(local_path)) {
-      qWarning() << "Couldn't create directory" << local_path;
+      qLog(Warning) << "Couldn't create directory" << local_path;
     }
   }
 
@@ -112,7 +113,7 @@ void ScriptManager::MaybeAutoEnable(ScriptInfo* info) {
     // Find an engine for it
     LanguageEngine* engine = EngineForLanguage(info->language());
     if (!engine) {
-      qWarning() << "Unknown language in" << info->path();
+      qLog(Warning) << "Unknown language in" << info->path();
       return;
     }
 
@@ -149,7 +150,7 @@ QMap<QString, ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
       ScriptInfo info;
       info.InitFromDirectory(this, path);
       if (!info.is_valid()) {
-        qWarning() << "Not a valid Clementine script directory, ignoring:"
+        qLog(Warning) << "Not a valid Clementine script directory, ignoring:"
                    << path;
         continue;
       }
@@ -250,7 +251,7 @@ void ScriptManager::Enable(const QModelIndex& index) {
   // Find an engine for it
   LanguageEngine* engine = EngineForLanguage(info->language());
   if (!engine) {
-    qWarning() << "Unknown language in" << info->path();
+    qLog(Warning) << "Unknown language in" << info->path();
     return;
   }
 
@@ -308,7 +309,7 @@ void ScriptManager::AddLogLine(const QString& who, const QString& message, bool 
     log_lines_plain_ << plain;
     emit LogLineAdded(html);
 
-    qDebug() << plain.toLocal8Bit().constData();
+    qLog(Info) << plain.toLocal8Bit().constData();
   }
 }
 

@@ -73,6 +73,7 @@ set(SOURCES
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
+  core/logging.cpp
   core/mergedproxymodel.cpp
   core/musicstorage.cpp
   core/network.cpp

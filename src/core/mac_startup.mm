@@ -38,6 +38,7 @@
 #include "mac_startup.h"
 #include "macglobalshortcutbackend.h"
 #include "utilities.h"
+#include "core/logging.h"
 
 #ifdef HAVE_SPARKLE
 #import <Sparkle/SUUpdater.h>
@@ -285,7 +286,7 @@ bool MigrateLegacyConfigFiles() {
         toPath:[NSString stringWithUTF8String: new_config_dir.toUtf8().constData()]
         error: &error];
     if (!ret) {
-      qWarning() << [[error localizedDescription] UTF8String];
+      qLog(Warning) << [[error localizedDescription] UTF8String];
     }
     moved_dir = true;
   }
@@ -295,7 +296,7 @@ bool MigrateLegacyConfigFiles() {
     QSettings settings;
     bool ret = QFile::rename(old_config_path, settings.fileName());
     if (ret) {
-      qWarning() << "Migrated old config file: " << old_config_path << "to: " << settings.fileName();
+      qLog(Warning) << "Migrated old config file: " << old_config_path << "to: " << settings.fileName();
     }
   }
 

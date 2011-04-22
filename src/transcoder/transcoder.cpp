@@ -16,6 +16,7 @@
 */
 
 #include "transcoder.h"
+#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -252,7 +253,7 @@ TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
     case Song::Type_Wav:
       return TranscoderPreset(type, "Wav",        "wav",  QString(),        "audio/x-wav");
     default:
-      qWarning() << "Unsupported format in Transcoder::PresetForFileType:" << type;
+      qLog(Warning) << "Unsupported format in PresetForFileType:" << type;
       return TranscoderPreset();
   }
 }
@@ -337,7 +338,7 @@ void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer dat
   GstPad* const audiopad = gst_element_get_pad(state->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
-    qDebug() << "audiopad is already linked. Unlinking old pad.";
+    qLog(Debug) << "audiopad is already linked, unlinking old pad";
     gst_pad_unlink(audiopad, GST_PAD_PEER(audiopad));
   }
 

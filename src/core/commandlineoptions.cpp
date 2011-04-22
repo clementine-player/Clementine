@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "commandlineoptions.h"
+#include "logging.h"
 
 #include <cstdlib>
 #include <getopt.h>
@@ -48,7 +49,10 @@ const char* CommandlineOptions::kHelpText =
     "\n"
     "%20:\n"
     "  -o, --show-osd            %21\n"
-    "  -g, --language <lang>     %22\n";
+    "  -g, --language <lang>     %22\n"
+    "      --quiet               %23\n"
+    "      --verbose             %24\n"
+    "      --log-levels <levels> %25\n";
 
 
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
@@ -62,7 +66,8 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     seek_by_(0),
     play_track_at_(-1),
     show_osd_(false),
-    stun_test_(StunTestNone)
+    stun_test_(StunTestNone),
+    log_levels_(logging::kDefaultLogLevels)
 {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -108,6 +113,9 @@ bool CommandlineOptions::Parse() {
 
     {"show-osd",    no_argument,       0, 'o'},
     {"language",    required_argument, 0, 'g'},
+    {"quiet",       no_argument,       0, Quiet},
+    {"verbose",     no_argument,       0, Verbose},
+    {"log-levels",  required_argument, 0, LogLevels},
 
     {"stun-test",   required_argument, 0, 'z'},
 
@@ -144,24 +152,30 @@ bool CommandlineOptions::Parse() {
             tr("Play the <n>th track in the playlist"),
             tr("Other options"),
             tr("Display the on-screen-display"),
-            tr("Change the language"));
+            tr("Change the language"),
+            tr("Equivalent to --log-levels *:1"),
+            tr("Equivalent to --log-levels *:3"),
+            tr("Comma separated list of class:level, level is 0-3"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
         return false;
       }
 
-      case 'p': player_action_   = Player_Play;      break;
-      case 't': player_action_   = Player_PlayPause; break;
-      case 'u': player_action_   = Player_Pause;     break;
-      case 's': player_action_   = Player_Stop;      break;
-      case 'r': player_action_   = Player_Previous;  break;
-      case 'f': player_action_   = Player_Next;      break;
-      case 'a': url_list_action_ = UrlList_Append;   break;
-      case 'l': url_list_action_ = UrlList_Load;     break;
-      case 'o': show_osd_        = true;             break;
-      case 'g': language_        = QString(optarg);  break;
-      case VolumeUp:   volume_modifier_ = +4;        break;
-      case VolumeDown: volume_modifier_ = -4;        break;
+      case 'p': player_action_   = Player_Play;       break;
+      case 't': player_action_   = Player_PlayPause;  break;
+      case 'u': player_action_   = Player_Pause;      break;
+      case 's': player_action_   = Player_Stop;       break;
+      case 'r': player_action_   = Player_Previous;   break;
+      case 'f': player_action_   = Player_Next;       break;
+      case 'a': url_list_action_ = UrlList_Append;    break;
+      case 'l': url_list_action_ = UrlList_Load;      break;
+      case 'o': show_osd_        = true;              break;
+      case 'g': language_        = QString(optarg);   break;
+      case VolumeUp:   volume_modifier_ = +4;         break;
+      case VolumeDown: volume_modifier_ = -4;         break;
+      case Quiet:      log_levels_ = "1";             break;
+      case Verbose:    log_levels_ = "3";             break;
+      case LogLevels:  log_levels_ = QString(optarg); break;
 
       case 'v':
         set_volume_ = QString(optarg).toInt(&ok);
@@ -252,7 +266,8 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
     << a.seek_by_
     << a.play_track_at_
     << a.show_osd_
-    << a.urls_;
+    << a.urls_
+    << a.log_levels_;
 
   return s;
 }
@@ -268,7 +283,8 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
     >> a.seek_by_
     >> a.play_track_at_
     >> a.show_osd_
-    >> a.urls_;
+    >> a.urls_
+    >> a.log_levels_;
   a.player_action_ = CommandlineOptions::PlayerAction(player_action);
   a.url_list_action_ = CommandlineOptions::UrlListAction(url_list_action);
 

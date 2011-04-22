@@ -17,6 +17,7 @@
 
 #include "songinfotextview.h"
 #include "ultimatelyricsprovider.h"
+#include "core/logging.h"
 #include "core/network.h"
 
 #include <QNetworkReply>
@@ -38,7 +39,7 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   // Get the text codec
   const QTextCodec* codec = QTextCodec::codecForName(charset_.toAscii().constData());
   if (!codec) {
-    qWarning() << "Invalid codec" << charset_;
+    qLog(Warning) << "Invalid codec" << charset_;
     emit Finished(id);
     return;
   }

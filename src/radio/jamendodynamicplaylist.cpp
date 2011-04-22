@@ -5,6 +5,7 @@
 #include <QHttpRequestHeader>
 #include <QtDebug>
 
+#include "core/logging.h"
 #include "core/network.h"
 #include "library/librarybackend.h"
 #include "radio/jamendoplaylistitem.h"
@@ -106,7 +107,7 @@ void JamendoDynamicPlaylist::Fetch() {
   }
 
   if (http.error() != QHttp::NoError) {
-    qWarning() << "HTTP error returned from Jamendo:" << http.errorString()
+    qLog(Warning) << "HTTP error returned from Jamendo:" << http.errorString()
                << ", url:" << url.toString();
     return;
   }
@@ -119,7 +120,7 @@ void JamendoDynamicPlaylist::Fetch() {
         lines, JamendoService::kTrackIdsTable, JamendoService::kTrackIdsColumn);
 
   if (songs.empty()) {
-    qWarning() << "No songs returned from Jamendo:"
+    qLog(Warning) << "No songs returned from Jamendo:"
                << url.toString();
     return;
   }

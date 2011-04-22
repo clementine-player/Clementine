@@ -16,6 +16,7 @@
 */
 
 #include "cueparser.h"
+#include "core/logging.h"
 
 #include <QBuffer>
 #include <QDateTime>
@@ -114,7 +115,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
     } while(!(line = text_stream.readLine()).isNull());
 
     if(line.isNull()) {
-      qWarning() << "the .cue file from " << dir_path << " defines no tracks!";
+      qLog(Warning) << "the .cue file from " << dir_path << " defines no tracks!";
       return ret;
     }
 
@@ -208,7 +209,7 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
 
     Song current;
     if (!ParseTrackLocation(entry.file, dir, &current)) {
-      qWarning() << "failed to parse location in .cue file from " << dir_path;
+      qLog(Warning) << "failed to parse location in .cue file from " << dir_path;
     } else {
       // look for the section in library
       Song song = LoadLibrarySong(current.filename(), IndexToMarker(entry.index));

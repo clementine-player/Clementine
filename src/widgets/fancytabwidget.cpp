@@ -29,6 +29,7 @@
 
 #include "fancytabwidget.h"
 #include "stylehelper.h"
+#include "core/logging.h"
 
 #include <QDebug>
 
@@ -589,7 +590,7 @@ void FancyTabWidget::SetMode(Mode mode) {
   switch (mode) {
     case Mode_None:
     default:
-      qDebug() << "Unknown fancy tab mode" << mode;
+      qLog(Warning) << "Unknown fancy tab mode" << mode;
       // fallthrough
 
     case Mode_LargeSidebar: {

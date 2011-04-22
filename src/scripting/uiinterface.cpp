@@ -16,6 +16,7 @@
 */
 
 #include "uiinterface.h"
+#include "core/logging.h"
 
 #include <QAction>
 #include <QMenu>
@@ -28,8 +29,7 @@ UIInterface::UIInterface(QObject* parent)
 
 void UIInterface::RegisterActionLocation(const QString& id, QMenu* menu, QAction* before) {
   if (locations_.contains(id)) {
-    qDebug() << __PRETTY_FUNCTION__
-             << "A location with ID" << id << "was already registered";
+    qLog(Warning) << "A location with ID" << id << "was already registered";
     return;
   }
 

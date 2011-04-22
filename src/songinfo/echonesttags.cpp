@@ -17,6 +17,7 @@
 
 #include "echonesttags.h"
 #include "tagwidget.h"
+#include "core/logging.h"
 
 #include <echonest/Artist.h>
 
@@ -49,7 +50,7 @@ void EchoNestTags::RequestFinished() {
   try {
     request->artist_->parseProfile(reply);
   } catch (Echonest::ParseError e) {
-    qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
   }
 
   if (!request->artist_->terms().isEmpty()) {

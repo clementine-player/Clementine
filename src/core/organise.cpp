@@ -18,6 +18,7 @@
 #include "musicstorage.h"
 #include "organise.h"
 #include "taskmanager.h"
+#include "core/logging.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -87,7 +88,7 @@ void Organise::ProcessSomeFiles() {
   if (tasks_pending_.isEmpty()) {
     if (!tasks_transcoding_.isEmpty()) {
       // Just wait - FileTranscoded will start us off again in a little while
-      qDebug() << "Waiting for transcoding jobs";
+      qLog(Debug) << "Waiting for transcoding jobs";
       transcode_progress_timer_.start(kTranscodeProgressInterval, this);
       return;
     }
@@ -120,7 +121,7 @@ void Organise::ProcessSomeFiles() {
       break;
 
     Task task = tasks_pending_.takeFirst();
-    qDebug() << "Processing" << task.filename_;
+    qLog(Info) << "Processing" << task.filename_;
 
     // Is it a directory?
     if (QFileInfo(task.filename_).isDir()) {
@@ -141,7 +142,7 @@ void Organise::ProcessSomeFiles() {
 
     // Maybe this file is one that's been transcoded already?
     if (!task.transcoded_filename_.isEmpty()) {
-      qDebug() << "This file has already been transcoded";
+      qLog(Debug) << "This file has already been transcoded";
 
       // Set the new filetype on the song so the formatter gets it right
       song.set_filetype(task.new_filetype_);
@@ -158,7 +159,7 @@ void Organise::ProcessSomeFiles() {
       if (dest_type != Song::Type_Unknown) {
         // Get the preset
         TranscoderPreset preset = Transcoder::PresetForFileType(dest_type);
-        qDebug() << "Transcoding with" << preset.name_;
+        qLog(Debug) << "Transcoding with" << preset.name_;
 
         // Get a temporary name for the transcoded file
         task.transcoded_filename_ = transcode_temp_name_.fileName() + "-" +
@@ -167,7 +168,7 @@ void Organise::ProcessSomeFiles() {
         task.new_filetype_ = dest_type;
         tasks_transcoding_[task.filename_] = task;
 
-        qDebug() << "Transcoding to" << task.transcoded_filename_;
+        qLog(Debug) << "Transcoding to" << task.transcoded_filename_;
 
         // Start the transcoding - this will happen in the background and
         // FileTranscoded() will get called when it's done.  At that point the
@@ -271,7 +272,7 @@ void Organise::UpdateProgress() {
 }
 
 void Organise::FileTranscoded(const QString& filename, bool success) {
-  qDebug() << "File finished" << filename << success;
+  qLog(Info) << "File finished" << filename << success;
   transcode_progress_timer_.stop();
 
   Task task = tasks_transcoding_.take(filename);

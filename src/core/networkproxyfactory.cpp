@@ -1,4 +1,5 @@
 #include "networkproxyfactory.h"
+#include "core/logging.h"
 
 #include <QMutexLocker>
 #include <QSettings>
@@ -26,7 +27,7 @@ NetworkProxyFactory::NetworkProxyFactory()
   urls << QString::fromLocal8Bit(getenv("ALL_PROXY"));
   urls << QString::fromLocal8Bit(getenv("all_proxy"));
 
-  qDebug() << "Detected system proxy URLs:" << urls;
+  qLog(Debug) << "Detected system proxy URLs:" << urls;
 
   foreach (const QString& url_str, urls) {
     if (url_str.isEmpty())
@@ -85,7 +86,7 @@ QList<QNetworkProxy> NetworkProxyFactory::queryProxy(
         ret.setType(QNetworkProxy::HttpProxy);
       else
         ret.setType(QNetworkProxy::Socks5Proxy);
-      qDebug() << "Using proxy URL:" << env_url_;
+      qLog(Debug) << "Using proxy URL:" << env_url_;
     }
     break;
 #else

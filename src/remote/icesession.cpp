@@ -1,4 +1,5 @@
 #include "icesession.h"
+#include "core/logging.h"
 
 #include <QHostAddress>
 
@@ -35,7 +36,7 @@ bool ICESession::Init() {
       &ice_cb,
       &ice_instance_);
   if (status != PJ_SUCCESS) {
-    qWarning() << "Failed to create ICE instance";
+    qLog(Warning) << "Failed to create ICE instance";
     return false;
   }
 
@@ -147,7 +148,7 @@ void ICESession::StartNegotiation(const xrme::SIPInfo& session) {
       candidates);
 
   if (status != PJ_SUCCESS) {
-    qWarning() << "Start negotation failed";
+    qLog(Warning) << "Start negotation failed";
   } else {
     qDebug() << "ICE negotiation started";
   }

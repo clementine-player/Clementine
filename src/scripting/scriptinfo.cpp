@@ -17,6 +17,7 @@
 
 #include "languageengine.h"
 #include "scriptinfo.h"
+#include "core/logging.h"
 
 #include <QDir>
 #include <QFile>
@@ -38,7 +39,7 @@ void ScriptInfo::InitFromDirectory(const ScriptManager* manager, const QString& 
 
   // Does the file exist?
   if (!QFile::exists(ini_file)) {
-    qWarning() << "Script definition file not found:" << ini_file;
+    qLog(Warning) << "Script definition file not found:" << ini_file;
     return;
   }
 
@@ -52,7 +53,7 @@ void ScriptInfo::InitFromFile(const ScriptManager* manager,
   // Open it
   QSettings s(ini_file, QSettings::IniFormat);
   if (!s.childGroups().contains(kIniSettingsGroup)) {
-    qWarning() << "Missing" << kIniSettingsGroup << "section in" << ini_file;
+    qLog(Warning) << "Missing" << kIniSettingsGroup << "section in" << ini_file;
     return;
   }
   s.beginGroup(kIniSettingsGroup);
@@ -61,7 +62,7 @@ void ScriptInfo::InitFromFile(const ScriptManager* manager,
   QString language_name = s.value("language").toString();
   LanguageEngine* engine = manager->EngineForLanguage(language_name);
   if (!engine) {
-    qWarning() << "Unknown language" << language_name << "in" << ini_file;
+    qLog(Warning) << "Unknown language" << language_name << "in" << ini_file;
     return;
   }
   d->language_ = engine->language();

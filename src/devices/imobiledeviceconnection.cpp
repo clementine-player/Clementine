@@ -16,6 +16,7 @@
 */
 
 #include "imobiledeviceconnection.h"
+#include "core/logging.h"
 
 #include <plist/plist.h>
 
@@ -26,7 +27,7 @@ iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)
     : device_(NULL), afc_(NULL), afc_port_(0) {
   idevice_error_t err = idevice_new(&device_, uuid.toUtf8().constData());
   if (err != IDEVICE_E_SUCCESS) {
-    qWarning() << "idevice error:" << err;
+    qLog(Warning) << "idevice error:" << err;
     return;
   }
 
@@ -37,20 +38,20 @@ iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)
   lockdownd_error_t lockdown_err =
       lockdownd_client_new_with_handshake(device_, &lockdown, label);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
-    qWarning() << "lockdown error:" << lockdown_err;
+    qLog(Warning) << "lockdown error:" << lockdown_err;
     return;
   }
 
   lockdown_err = lockdownd_start_service(lockdown, "com.apple.afc", &afc_port_);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
-    qWarning() << "lockdown error:" << lockdown_err;
+    qLog(Warning) << "lockdown error:" << lockdown_err;
     lockdownd_client_free(lockdown);
     return;
   }
 
   afc_error_t afc_err = afc_client_new(device_, afc_port_, &afc_);
   if (afc_err != 0) {
-    qWarning() << "afc error:" << afc_err;
+    qLog(Warning) << "afc error:" << afc_err;
     lockdownd_client_free(lockdown);
     return;
   }
@@ -82,7 +83,7 @@ QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QSt
   lockdownd_error_t lockdown_err =
       lockdownd_client_new_with_handshake(device_, &lockdown, label);
   if (lockdown_err != LOCKDOWN_E_SUCCESS) {
-    qWarning() << "lockdown error:" << lockdown_err;
+    qLog(Warning) << "lockdown error:" << lockdown_err;
     return QVariant();
   }
 
@@ -94,7 +95,7 @@ QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QSt
   lockdownd_client_free(lockdown);
 
   if (!node) {
-    qWarning() << "get_value failed" << property << domain;
+    qLog(Warning) << "get_value failed" << property << domain;
     return QVariant();
   }
 
@@ -113,7 +114,7 @@ QVariant iMobileDeviceConnection::GetProperty(const QString& property, const QSt
     }
 
     default:
-      qWarning() << "Unhandled PList type";
+      qLog(Warning) << "Unhandled PList type";
       return QVariant();
   }
 }
@@ -199,7 +200,7 @@ QString iMobileDeviceConnection::GetUnusedFilename(
   }
 
   if (total_musicdirs <= 0) {
-    qWarning() << "No 'F..'' directories found on iPod";
+    qLog(Warning) << "No 'F..'' directories found on iPod";
     return QString();
   }
 
@@ -209,7 +210,7 @@ QString iMobileDeviceConnection::GetUnusedFilename(
   dir.sprintf("/iTunes_Control/Music/F%02d", dir_num);
 
   if (!Exists(dir)) {
-    qWarning() << "Music directory doesn't exist:" << dir;
+    qLog(Warning) << "Music directory doesn't exist:" << dir;
     return QString();
   }
 

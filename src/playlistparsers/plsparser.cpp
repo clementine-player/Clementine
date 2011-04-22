@@ -16,6 +16,7 @@
 */
 
 #include "plsparser.h"
+#include "core/logging.h"
 
 #include <QTextStream>
 #include <QtDebug>
@@ -40,7 +41,7 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
 
     if (key.startsWith("file")) {
       if (!ParseTrackLocation(value, dir, &songs[n]))
-        qWarning() << "Failed to parse location: " << value;
+        qLog(Warning) << "Failed to parse location: " << value;
 
       // Load the song from the library if it's there.
       Song library_song = LoadLibrarySong(songs[n].filename());

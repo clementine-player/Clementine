@@ -16,6 +16,7 @@
 */
 
 #include "iconloader.h"
+#include "core/logging.h"
 
 #include <QFile>
 #include <QtDebug>
@@ -50,6 +51,6 @@ QIcon IconLoader::Load(const QString &name) {
   }
 
   if (ret.isNull())
-    qWarning() << "Couldn't load icon" << name;
+    qLog(Warning) << "Couldn't load icon" << name;
   return ret;
 }

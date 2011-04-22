@@ -19,6 +19,7 @@
 #include "devicelister.h"
 #include "devicemanager.h"
 #include "core/database.h"
+#include "core/logging.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
@@ -39,7 +40,7 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
     model_(NULL),
     song_count_(0)
 {
-  qDebug() << __PRETTY_FUNCTION__;
+  qLog(Info) << "connected" << url << unique_id << first_time;
 
   // Create the backend in the database thread.
   backend_ = new LibraryBackend();
@@ -77,7 +78,7 @@ void ConnectedDevice::InitBackendDirectory(
       Directory dir = backend_->GetAllDirectories()[0];
       if (dir.path != mount_point) {
         // The directory is different, commence the munging.
-        qDebug() << "Changing path from" << dir.path << "to" << mount_point;
+        qLog(Info) << "Changing path from" << dir.path << "to" << mount_point;
         backend_->ChangeDirPath(dir.id, mount_point);
       }
     }

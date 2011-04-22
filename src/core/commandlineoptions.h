@@ -66,6 +66,7 @@ class CommandlineOptions {
   bool show_osd() const { return show_osd_; }
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
+  QString log_levels() const { return log_levels_; }
 
   StunTestDirection stun_test() const { return stun_test_; }
 
@@ -81,6 +82,9 @@ class CommandlineOptions {
     VolumeDown,
     SeekTo,
     SeekBy,
+    Quiet,
+    Verbose,
+    LogLevels,
   };
 
   QString tr(const char* source_text);
@@ -102,6 +106,7 @@ class CommandlineOptions {
   bool show_osd_;
   QString language_;
   StunTestDirection stun_test_;
+  QString log_levels_;
 
   QList<QUrl> urls_;
 };

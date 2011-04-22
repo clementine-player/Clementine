@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "scriptarchive.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #include <QDir>
@@ -59,7 +60,7 @@ namespace {
       if (bytes_read == ARCHIVE_FATAL ||
           bytes_read == ARCHIVE_WARN ||
           bytes_read == ARCHIVE_RETRY) {
-        qWarning() << "Error reading archive:" << archive_error_string(in);
+        qLog(Warning) << "Error reading archive:" << archive_error_string(in);
         return;
       }
       if (bytes_read == 0) {
@@ -67,7 +68,7 @@ namespace {
       }
 
       if (archive_write_data(out, buf, bytes_read) == -1) {
-        qWarning() << "Error extracting archive:" << archive_error_string(out);
+        qLog(Warning) << "Error extracting archive:" << archive_error_string(out);
         return;
       }
     }

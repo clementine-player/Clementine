@@ -17,6 +17,7 @@
 
 #include "ultimatelyricsprovider.h"
 #include "ultimatelyricsreader.h"
+#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QFile>
@@ -30,7 +31,7 @@ UltimateLyricsReader::UltimateLyricsReader(QObject* parent)
 QList<SongInfoProvider*> UltimateLyricsReader::Parse(const QString& filename) const {
   QFile file(filename);
   if (!file.open(QIODevice::ReadOnly)) {
-    qWarning() << "Error opening" << filename;
+    qLog(Warning) << "Error opening" << filename;
     return QList<SongInfoProvider*>();
   }
 

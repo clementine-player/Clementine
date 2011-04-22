@@ -17,6 +17,7 @@
 
 #include "somafmservice.h"
 #include "radiomodel.h"
+#include "core/logging.h"
 #include "core/network.h"
 #include "core/taskmanager.h"
 #include "ui/iconloader.h"
@@ -103,7 +104,7 @@ void SomaFMService::LoadPlaylistFinished() {
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
-    qDebug() << reply->errorString();
+    qLog(Error) << reply->errorString();
     emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
         PlaylistItem::SpecialLoadResult::NoMoreTracks, original_url));
     return;
@@ -138,7 +139,7 @@ void SomaFMService::RefreshChannelsFinished() {
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
-    qDebug() << reply->errorString();
+    qLog(Error) << reply->errorString();
     return;
   }
 

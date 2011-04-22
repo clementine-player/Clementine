@@ -17,6 +17,7 @@
 
 #include "echonestsimilarartists.h"
 #include "tagwidget.h"
+#include "core/logging.h"
 #include "ui/iconloader.h"
 
 #include <echonest/Artist.h>
@@ -47,7 +48,7 @@ void EchoNestSimilarArtists::RequestFinished() {
   try {
     artists = Echonest::Artist::parseSimilar(reply);
   } catch (Echonest::ParseError e) {
-    qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
   }
 
   if (!artists.isEmpty()) {

@@ -16,6 +16,7 @@
 */
 
 #include "echonestimages.h"
+#include "core/logging.h"
 
 #include <echonest/Artist.h>
 
@@ -48,7 +49,7 @@ void EchoNestImages::RequestFinished() {
   try {
     request->artist_->parseProfile(reply);
   } catch (Echonest::ParseError e) {
-    qWarning() << "Error parsing echonest reply:" << e.errorType() << e.what();
+    qLog(Warning) << "Error parsing echonest reply:" << e.errorType() << e.what();
   }
 
   foreach (const Echonest::ArtistImage& image, request->artist_->images()) {

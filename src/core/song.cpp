@@ -17,6 +17,7 @@
 
 #include "fmpsparser.h"
 #include "song.h"
+#include "core/logging.h"
 
 #include <algorithm>
 
@@ -248,7 +249,7 @@ QString Song::Decode(const QString& tag, const QTextCodec* codec) {
 bool Song::HasProperMediaFile() const {
 #ifndef QT_NO_DEBUG_OUTPUT
   if (qApp->thread() == QThread::currentThread())
-    qWarning() << Q_FUNC_INFO << "on GUI thread!";
+    qLog(Warning) << "HasProperMediaFile() on GUI thread!";
 #endif
 
   QMutexLocker l(&taglib_mutex_);
@@ -260,7 +261,7 @@ bool Song::HasProperMediaFile() const {
 void Song::InitFromFile(const QString& filename, int directory_id) {
 #ifndef QT_NO_DEBUG_OUTPUT
   if (qApp->thread() == QThread::currentThread())
-    qWarning() << Q_FUNC_INFO << "on GUI thread!";
+    qLog(Warning) << "InitFromFile() on GUI thread!";
 #endif
 
   d->init_from_file_ = true;
@@ -764,7 +765,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
         break;
       }
       default:
-        qWarning() << "Type" << value.type() << "not handled";
+        qLog(Warning) << "Type" << value.type() << "not handled";
         Q_ASSERT(0);
         break;
     }
