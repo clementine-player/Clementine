@@ -15,7 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <Python.h>
+#include <sip.h>
+
+#include "sipAPIclementine.h"
 #include "core/utilities.h"
+#include "playlist/songplaylistitem.h"
 #include "scripting/script.h"
 #include "scripting/scriptmanager.h"
 #include "scripting/python/pythonengine.h"
@@ -30,7 +35,6 @@
 
 #include <boost/noncopyable.hpp>
 
-namespace {
 
 class TemporaryScript : boost::noncopyable {
 public:
@@ -147,4 +151,37 @@ TEST_F(PythonTest, ModuleConstants) {
   EXPECT_TRUE(log.at(n-1).contains("<clementine.ScriptInterface object at")); // script
 }
 
-}  // namespace
+TEST_F(PythonTest, SharedPointers) {
+  engine_->EnsureInitialised();
+
+  TemporaryScript script(
+        "import clementine\n"
+        "print clementine.item.Metadata().title()\n"
+        "a = clementine.item\n"
+        "print a.Metadata().title()\n"
+        "clementine.item = None\n"
+        "print a.Metadata().title()\n"
+        "a = None\n"
+  );
+  ScriptInfo info;
+  info.InitFromDirectory(manager_, script.directory_);
+
+  Song song;
+  song.set_title("title");
+
+  PlaylistItemPtr ptr(new SongPlaylistItem(song));
+  EXPECT_EQ(1, ptr.use_count());
+
+  engine_->AddObject(&ptr, sipType_PlaylistItemPtr, "item");
+  EXPECT_EQ(2, ptr.use_count());
+
+  engine_->CreateScript(info);
+  EXPECT_EQ(1, ptr.use_count());
+
+  const QStringList log = manager_->log_lines_plain();
+  const int n = log.count();
+  ASSERT_GE(n, 3);
+  EXPECT_TRUE(log.at(n-3).endsWith("title"));
+  EXPECT_TRUE(log.at(n-2).endsWith("title"));
+  EXPECT_TRUE(log.at(n-1).endsWith("title"));
+}

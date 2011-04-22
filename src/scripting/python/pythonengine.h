@@ -20,12 +20,16 @@
 
 #include "scripting/languageengine.h"
 
+#include "gtest/gtest_prod.h"
+
 struct _object; // PyObject
 struct _sipAPIDef;
 struct _sipTypeDef;
 
 class PythonEngine : public LanguageEngine {
   Q_OBJECT
+
+  FRIEND_TEST(PythonTest, SharedPointers);
 
 public:
   PythonEngine(ScriptManager* manager);

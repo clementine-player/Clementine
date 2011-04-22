@@ -138,5 +138,6 @@ if(LINUX AND HAVE_DBUS)
 endif(LINUX AND HAVE_DBUS)
 
 if(HAVE_SCRIPTING_PYTHON)
+  include_directories(${PYTHON_INCLUDE_DIRS})
   add_test_file(python_test.cpp true)
 endif (HAVE_SCRIPTING_PYTHON)
