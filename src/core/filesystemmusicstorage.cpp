@@ -19,7 +19,12 @@
 #include "core/logging.h"
 
 #ifdef HAVE_GIO
-#  include <gio/gio.h>
+  // Work around compile issue with glib >= 2.25
+  #ifdef signals
+    #undef signals
+  #endif
+
+  #include <gio/gio.h>
 #endif
 
 #include "filesystemmusicstorage.h"
