@@ -20,8 +20,12 @@
 
 #include <QDebug>
 
-#define qLog(level) \
-  logging::CreateLogger(logging::Level_##level, __PRETTY_FUNCTION__, __LINE__)
+#ifdef QT_NO_DEBUG_STREAM
+#  define qLog(level) while (false) QNoDebug()
+#else
+#  define qLog(level) \
+     logging::CreateLogger(logging::Level_##level, __PRETTY_FUNCTION__, __LINE__)
+#endif
 
 namespace logging {
   class NullDevice : public QIODevice {
