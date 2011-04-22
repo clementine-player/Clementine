@@ -19,6 +19,7 @@
 #include "albumcoverfetchersearch.h"
 #include "coverprovider.h"
 #include "coverproviders.h"
+#include "core/logging.h"
 
 #include <QMutexLocker>
 #include <QNetworkReply>
@@ -87,8 +88,10 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished() {
       results_.append(partial_results);
     } else {
       QString contents(reply->readAll());
-      qDebug() << "CoverProvider\'s request error - summary:\n" << reply->errorString()
-               << "\nCoverProvider\'s request error - contents:\n" << contents;
+      qLog(Debug) << "CoverProvider's request error - summary:";
+      qLog(Debug) << reply->errorString();
+      qLog(Debug) << "CoverProvider's request error - contents:";
+      qLog(Debug) << contents;
     }
 
     // do we have more providers left?

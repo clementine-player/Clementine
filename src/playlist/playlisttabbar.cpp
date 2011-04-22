@@ -20,6 +20,7 @@
 #include "playlisttabbar.h"
 #include "playlistview.h"
 #include "songmimedata.h"
+#include "core/logging.h"
 #include "radio/radiomimedata.h"
 #include "ui/iconloader.h"
 #include "widgets/renametablineedit.h"
@@ -178,8 +179,8 @@ void PlaylistTabBar::set_current_id(int id) {
 }
 
 int PlaylistTabBar::id_of(int index) const {
-  if (index<0 || index>count()) {
-    qWarning() << "Playlist tab index requested is out of bounds!";
+  if (index < 0 || index >= count()) {
+    qLog(Warning) << "Playlist tab index requested is out of bounds!";
     return 0;
   }
   return tabData(index).toInt();

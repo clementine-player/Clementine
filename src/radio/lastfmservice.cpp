@@ -391,7 +391,7 @@ void LastFMService::StreamMetadataReady() {
 }
 
 void LastFMService::TunerError(lastfm::ws::Error error) {
-  qDebug() << "Last.fm error" << error;
+  qLog(Warning) << "Last.fm error" << error;
   if (!initial_tune_)
     return;
 
