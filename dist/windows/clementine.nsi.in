@@ -105,6 +105,8 @@ Section "Clementine" Clementine
   File "clementine.ico"
   File "glew32.dll"
   File "intl.dll"
+  File "libarchive.dll"
+  File "libexpat-1.dll"
   File "libfaac.dll"
   File "libfaad.dll"
   File "libfftw3-3.dll"
@@ -164,6 +166,44 @@ Section "Clementine" Clementine
   File "QtXml4.dll"
   File "zlib1.dll"
 
+  ; Python extensions
+  File "_bisect.pyd"
+  File "_codecs_iso2022.pyd"
+  File "_collections.pyd"
+  File "_csv.pyd"
+  File "_elementtree.pyd"
+  File "_functools.pyd"
+  File "_heapq.pyd"
+  File "_io.pyd"
+  File "_json.pyd"
+  File "_locale.pyd"
+  File "_md5.pyd"
+  File "_multibytecodec.pyd"
+  File "_random.pyd"
+  File "_sha.pyd"
+  File "_sha256.pyd"
+  File "_sha512.pyd"
+  File "_socket.pyd"
+  File "_struct.pyd"
+  File "array.pyd"
+  File "binascii.pyd"
+  File "cmath.pyd"
+  File "datetime.pyd"
+  File "future_builtins.pyd"
+  File "itertools.pyd"
+  File "math.pyd"
+  File "operator.pyd"
+  File "pyexpat.pyd"
+  File "select.pyd"
+  File "sip.pyd"
+  File "strop.pyd"
+  File "time.pyd"
+  File "unicodedata.pyd"
+
+  ; Python library
+  File "libpython2.7.dll"
+  File "libpython2.7.zip"
+
   ; Check the OS.  If Vista or newer, use Default Programs
   nsisos::osversion
   StrCpy $R0 $0
@@ -215,6 +255,84 @@ Section "Clementine" Clementine
     ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
     ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
   done:
+SectionEnd
+
+Section "PyQt4" PyQt4
+  SetOutPath "$INSTDIR\PyQt4"
+
+  File "/oname=Qt.pyd"        "PyQt4\Qt.pyd"
+  File "/oname=QtCore.pyd"    "PyQt4\QtCore.pyd"
+  File "/oname=QtGui.pyd"     "PyQt4\QtGui.pyd"
+  File "/oname=QtNetwork.pyd" "PyQt4\QtNetwork.pyd"
+  File "/oname=__init__.py"   "PyQt4\__init__.py"
+  File "/oname=pyqtconfig.py" "PyQt4\pyqtconfig.py"
+SectionEnd
+
+Section "PyQt4 uic" PyQt4-uic
+  SetOutPath "$INSTDIR\PyQt4\uic"
+
+  File "/oname=__init__.py"   "PyQt4\uic\__init__.py"
+  File "/oname=driver.py"     "PyQt4\uic\driver.py"
+  File "/oname=exceptions.py" "PyQt4\uic\exceptions.py"
+  File "/oname=icon_cache.py" "PyQt4\uic\icon_cache.py"
+  File "/oname=objcreator.py" "PyQt4\uic\objcreator.py"
+  File "/oname=properties.py" "PyQt4\uic\properties.py"
+  File "/oname=pyuic.py"      "PyQt4\uic\pyuic.py"
+  File "/oname=uiparser.py"   "PyQt4\uic\uiparser.py"
+SectionEnd
+
+Section "PyQt4 uic compiler" PyQt4-uic-compiler
+  SetOutPath "$INSTDIR\PyQt4\uic\Compiler"
+
+  File "/oname=__init__.py" "PyQt4\uic\Compiler\__init__.py"
+  File "/oname=compiler.py" "PyQt4\uic\Compiler\compiler.py"
+  File "/oname=indenter.py" "PyQt4\uic\Compiler\indenter.py"
+  File "/oname=misc.py" "PyQt4\uic\Compiler\misc.py"
+  File "/oname=proxy_type.py" "PyQt4\uic\Compiler\proxy_type.py"
+  File "/oname=qobjectcreator.py" "PyQt4\uic\Compiler\qobjectcreator.py"
+  File "/oname=qtproxies.py" "PyQt4\uic\Compiler\qtproxies.py"
+SectionEnd
+
+Section "PyQt4 uic loader" PyQt4-uic-loader
+  SetOutPath "$INSTDIR\PyQt4\uic\Loader"
+
+  File "/oname=__init__.py" "PyQt4\uic\Loader\__init__.py"
+  File "/oname=loader.py" "PyQt4\uic\Loader\loader.py"
+  File "/oname=qobjectcreator.py" "PyQt4\uic\Loader\qobjectcreator.py"
+SectionEnd
+
+Section "PyQt4 uic port_v2" PyQt4-uic-port_v2
+  SetOutPath "$INSTDIR\PyQt4\uic\port_v2"
+
+  File "/oname=__init__.py" "PyQt4\uic\port_v2\__init__.py"
+  File "/oname=as_string.py" "PyQt4\uic\port_v2\as_string.py"
+  File "/oname=ascii_upper.py" "PyQt4\uic\port_v2\ascii_upper.py"
+  File "/oname=invoke.py" "PyQt4\uic\port_v2\invoke.py"
+  File "/oname=load_plugin.py" "PyQt4\uic\port_v2\load_plugin.py"
+  File "/oname=proxy_base.py" "PyQt4\uic\port_v2\proxy_base.py"
+  File "/oname=string_io.py" "PyQt4\uic\port_v2\string_io.py"
+SectionEnd
+
+Section "PyQt4 uic port_v3" PyQt4-uic-port_v3
+  SetOutPath "$INSTDIR\PyQt4\uic\port_v3"
+
+  File "/oname=__init__.py" "PyQt4\uic\port_v3\__init__.py"
+  File "/oname=as_string.py" "PyQt4\uic\port_v3\as_string.py"
+  File "/oname=ascii_upper.py" "PyQt4\uic\port_v3\ascii_upper.py"
+  File "/oname=invoke.py" "PyQt4\uic\port_v3\invoke.py"
+  File "/oname=load_plugin.py" "PyQt4\uic\port_v3\load_plugin.py"
+  File "/oname=proxy_base.py" "PyQt4\uic\port_v3\proxy_base.py"
+  File "/oname=string_io.py" "PyQt4\uic\port_v3\string_io.py"
+SectionEnd
+
+Section "PyQt4 uic widget-plugins" PyQt4-uic-widget-plugins
+  SetOutPath "$INSTDIR\PyQt4\uic\widget-plugins"
+
+  File "/oname=phonon.py" "PyQt4\uic\widget-plugins\phonon.py"
+  File "/oname=qaxcontainer.py" "PyQt4\uic\widget-plugins\qaxcontainer.py"
+  File "/oname=qscintilla.py" "PyQt4\uic\widget-plugins\qscintilla.py"
+  File "/oname=qtdeclarative.py" "PyQt4\uic\widget-plugins\qtdeclarative.py"
+  File "/oname=qtwebkit.py" "PyQt4\uic\widget-plugins\qtwebkit.py"
 SectionEnd
 
 Section "Qt image format plugins" imageformats
@@ -930,6 +1048,8 @@ Section "Uninstall"
   Delete "$INSTDIR\clementine.exe"
   Delete "$INSTDIR\glew32.dll"
   Delete "$INSTDIR\intl.dll"
+  Delete "$INSTDIR\libarchive.dll"
+  Delete "$INSTDIR\libexpat-1.dll"
   Delete "$INSTDIR\libfaac.dll"
   Delete "$INSTDIR\libfaad.dll"
   Delete "$INSTDIR\libfftw3-3.dll"
@@ -988,6 +1108,86 @@ Section "Uninstall"
   Delete "$INSTDIR\QtSql4.dll"
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\zlib1.dll"
+
+  Delete "$INSTDIR\_bisect.pyd"
+  Delete "$INSTDIR\_codecs_iso2022.pyd"
+  Delete "$INSTDIR\_collections.pyd"
+  Delete "$INSTDIR\_csv.pyd"
+  Delete "$INSTDIR\_elementtree.pyd"
+  Delete "$INSTDIR\_functools.pyd"
+  Delete "$INSTDIR\_heapq.pyd"
+  Delete "$INSTDIR\_io.pyd"
+  Delete "$INSTDIR\_json.pyd"
+  Delete "$INSTDIR\_locale.pyd"
+  Delete "$INSTDIR\_md5.pyd"
+  Delete "$INSTDIR\_multibytecodec.pyd"
+  Delete "$INSTDIR\_random.pyd"
+  Delete "$INSTDIR\_sha.pyd"
+  Delete "$INSTDIR\_sha256.pyd"
+  Delete "$INSTDIR\_sha512.pyd"
+  Delete "$INSTDIR\_socket.pyd"
+  Delete "$INSTDIR\_struct.pyd"
+  Delete "$INSTDIR\array.pyd"
+  Delete "$INSTDIR\binascii.pyd"
+  Delete "$INSTDIR\cmath.pyd"
+  Delete "$INSTDIR\datetime.pyd"
+  Delete "$INSTDIR\future_builtins.pyd"
+  Delete "$INSTDIR\itertools.pyd"
+  Delete "$INSTDIR\math.pyd"
+  Delete "$INSTDIR\operator.pyd"
+  Delete "$INSTDIR\pyexpat.pyd"
+  Delete "$INSTDIR\select.pyd"
+  Delete "$INSTDIR\sip.pyd"
+  Delete "$INSTDIR\strop.pyd"
+  Delete "$INSTDIR\time.pyd"
+  Delete "$INSTDIR\unicodedata.pyd"
+
+  Delete "$INSTDIR\libpython2.7.dll"
+  Delete "$INSTDIR\libpython2.7.zip"
+
+  Delete "$INSTDIR\PyQt4\Qt.pyd"
+  Delete "$INSTDIR\PyQt4\QtCore.pyd"
+  Delete "$INSTDIR\PyQt4\QtGui.pyd"
+  Delete "$INSTDIR\PyQt4\QtNetwork.pyd"
+  Delete "$INSTDIR\PyQt4\__init__.py"
+  Delete "$INSTDIR\PyQt4\pyqtconfig.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\__init__.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\compiler.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\indenter.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\misc.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\proxy_type.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\qobjectcreator.py"
+  Delete "$INSTDIR\PyQt4\uic\Compiler\qtproxies.py"
+  Delete "$INSTDIR\PyQt4\uic\Loader\__init__.py"
+  Delete "$INSTDIR\PyQt4\uic\Loader\loader.py"
+  Delete "$INSTDIR\PyQt4\uic\Loader\qobjectcreator.py"
+  Delete "$INSTDIR\PyQt4\uic\__init__.py"
+  Delete "$INSTDIR\PyQt4\uic\driver.py"
+  Delete "$INSTDIR\PyQt4\uic\exceptions.py"
+  Delete "$INSTDIR\PyQt4\uic\icon_cache.py"
+  Delete "$INSTDIR\PyQt4\uic\objcreator.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\__init__.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\as_string.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\ascii_upper.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\invoke.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\load_plugin.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\proxy_base.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v2\string_io.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\__init__.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\as_string.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\ascii_upper.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\invoke.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\load_plugin.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\proxy_base.py"
+  Delete "$INSTDIR\PyQt4\uic\port_v3\string_io.py"
+  Delete "$INSTDIR\PyQt4\uic\properties.py"
+  Delete "$INSTDIR\PyQt4\uic\pyuic.py"
+  Delete "$INSTDIR\PyQt4\uic\uiparser.py"
+  Delete "$INSTDIR\PyQt4\uic\widget-plugins\phonon.py"
+  Delete "$INSTDIR\PyQt4\uic\widget-plugins\qaxcontainer.py"
+  Delete "$INSTDIR\PyQt4\uic\widget-plugins\qscintilla.py"
+  Delete "$INSTDIR\PyQt4\uic\widget-plugins\qtdeclarative.py"
+  Delete "$INSTDIR\PyQt4\uic\widget-plugins\qtwebkit.py"
 
   Delete "$INSTDIR\imageformats\qgif4.dll"
   Delete "$INSTDIR\imageformats\qjpeg4.dll"
