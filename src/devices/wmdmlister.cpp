@@ -55,23 +55,29 @@ WmdmLister::~WmdmLister() {
 }
 
 void WmdmLister::Init() {
+  qLog(Debug) << "Starting";
+
   thread_.reset(new WmdmThread);
   if (!thread_->manager())
     return;
 
   // Register for notifications
+  qLog(Debug) << "Obtaining CP container";
   IConnectionPointContainer* cp_container = NULL;
   thread_->manager()->QueryInterface(IID_IConnectionPointContainer, (void**)&cp_container);
 
+  qLog(Debug) << "Obtaining CP";
   IConnectionPoint* cp = NULL;
   cp_container->FindConnectionPoint(IID_IWMDMNotification, &cp);
 
+  qLog(Debug) << "Registering for notifications";
   cp->Advise(this, &notification_cookie_);
 
   cp->Release();
   cp_container->Release();
 
   // Fetch the initial list of devices
+  qLog(Debug) << "Fetching device list";
   IWMDMEnumDevice* device_it = NULL;
   if (thread_->manager()->EnumDevices2(&device_it)) {
     qLog(Warning) << "Error querying WMDM devices";
@@ -87,6 +93,7 @@ void WmdmLister::Init() {
     if (device_it->Next(1, &device, &fetched) || fetched != 1)
       break;
 
+    qLog(Debug) << "Querying device";
     if (device->QueryInterface(IID_IWMDMDevice2, (void**)&device2)) {
       qLog(Warning) << "Error getting IWMDMDevice2 from device";
       device->Release();
@@ -103,6 +110,7 @@ void WmdmLister::Init() {
   device_it->Release();
 
   // Update the internal cache
+  qLog(Debug) << "Updating device cache";
   {
     QMutexLocker l(&mutex_);
     devices_ = devices;
@@ -112,6 +120,8 @@ void WmdmLister::Init() {
   foreach (const QString& id, devices.keys()) {
     emit DeviceAdded(id);
   }
+
+  qLog(Debug) << "Startup complete";
 }
 
 void WmdmLister::ReallyShutdown() {
@@ -142,6 +152,8 @@ qint64 GetSpaceValue(F f) {
 }
 
 WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
+  qLog(Debug) << "Reading device info";
+
   DeviceInfo ret;
   ret.device_ = device;
 
@@ -156,6 +168,8 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 
   device->GetCanonicalName(buf, max_size);
   ret.canonical_name_ = QString::fromWCharArray(buf).toLower();
+
+  qLog(Debug) << "Read device strings:" << ret.name_ << ret.manufacturer_ << ret.canonical_name_;
 
   // Upgrade to a device3
   IWMDMDevice3* device3 = NULL;
@@ -213,12 +227,12 @@ WmdmLister::DeviceInfo WmdmLister::ReadDeviceInfo(IWMDMDevice2* device) {
 }
 
 void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
-  qDebug() << "Guessing drive letter for" << info->name_;
+  qLog(Debug) << "Guessing drive letter for" << info->name_;
 
   // Windows XP puts the drive letter in brackets at the end of the name
   QRegExp drive_letter("\\(([A-Z]:)\\)$");
   if (drive_letter.indexIn(info->name_) != -1) {
-    qDebug() << "Looks like an XP drive" << drive_letter.cap(1);
+    qLog(Debug) << "Looks like an XP drive" << drive_letter.cap(1);
     CheckDriveLetter(info, drive_letter.cap(1));
     return;
   }
@@ -226,7 +240,7 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
   // Windows 7 sometimes has the drive letter as the whole name
   drive_letter = QRegExp("^([A-Z]:)\\\\$");
   if (drive_letter.indexIn(info->name_) != -1) {
-    qDebug() << "Looks like a win7 drive" << drive_letter.cap(1);
+    qLog(Debug) << "Looks like a win7 drive" << drive_letter.cap(1);
     CheckDriveLetter(info, drive_letter.cap(1));
     return;
   }
@@ -266,7 +280,7 @@ void WmdmLister::GuessDriveLetter(DeviceInfo* info) {
         } else {
           if (name.ToString() == info->name_ && name.characters() != 0) {
             // We found it!
-            qDebug() << "Looks like a win7 drive name" << QString::fromWCharArray(volume_path);
+            qLog(Debug) << "Looks like a win7 drive name" << QString::fromWCharArray(volume_path);
             if (CheckDriveLetter(info, QString::fromWCharArray(volume_path))) {
               info->device_name_ = QString::fromWCharArray(device_name);
               info->volume_name_ = QString::fromWCharArray(volume_name);
@@ -301,7 +315,7 @@ bool WmdmLister::CheckDriveLetter(DeviceInfo* info, const QString& drive) {
     qLog(Warning) << "Error getting volume information for" << drive;
     return false;
   } else {
-    qDebug() << "Validated drive letter" << drive;
+    qLog(Debug) << "Validated drive letter" << drive;
     info->mount_point_ = path.ToString();
     info->fs_name_ = name.ToString();
     info->fs_type_ = type.ToString();
@@ -422,6 +436,8 @@ void WmdmLister::UpdateFreeSpace(DeviceInfo* info) {
 }
 
 HRESULT WmdmLister::WMDMMessage(DWORD message_type, LPCWSTR name) {
+  qLog(Debug) << "WMDM message" << message_type << name;
+
   QString canonical_name = QString::fromWCharArray(name).toLower();
 
   switch (message_type) {

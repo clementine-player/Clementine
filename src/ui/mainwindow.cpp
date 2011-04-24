@@ -204,6 +204,8 @@ MainWindow::MainWindow(
     doubleclick_playmode_(PlayBehaviour_IfStopped),
     menu_playmode_(PlayBehaviour_IfStopped)
 {
+  qLog(Debug) << "Starting";
+
   // Database connections
   connect(database_->Worker().get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 
@@ -246,11 +248,13 @@ MainWindow::MainWindow(
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
 
   // Start initialising the player
+  qLog(Debug) << "Initialising player";
   player_->Init();
   background_streams_ = new BackgroundStreams(player_->engine(), this);
   background_streams_->LoadStreams();
 
   // Models
+  qLog(Debug) << "Creating models";
   library_sort_model_->setSourceModel(library_->model());
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
@@ -272,6 +276,7 @@ MainWindow::MainWindow(
   organise_dialog_->SetDestinationModel(library_->model()->directory_model());
 
   // Icons
+  qLog(Debug) << "Creating UI";
   ui_->action_about->setIcon(IconLoader::Load("help-about"));
   ui_->action_about_qt->setIcon(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"));
   ui_->action_add_file->setIcon(IconLoader::Load("document-open"));
@@ -589,6 +594,7 @@ MainWindow::MainWindow(
 #endif
 
 #ifdef Q_OS_WIN32
+  qLog(Debug) << "Creating sparkle updater";
   qtsparkle::Updater* updater = new qtsparkle::Updater(
       QUrl("http://data.clementine-player.org/sparkle-windows"), this);
   updater->SetNetworkAccessManager(new NetworkAccessManager(this));
@@ -619,6 +625,7 @@ MainWindow::MainWindow(
 
   // XMPP Remote control
 #ifdef HAVE_REMOTE
+  qLog(Debug) << "Creating remote control";
   remote_ = new Remote(player_, this);
   connect(remote_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
   connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)),
@@ -638,6 +645,7 @@ MainWindow::MainWindow(
   ui_->analyzer->SetActions(ui_->action_visualisations);
 
   // Equalizer
+  qLog(Debug) << "Creating equalizer";
   connect(equalizer_.get(), SIGNAL(ParametersChanged(int,QList<int>)),
           player_->engine(), SLOT(SetEqualizerParameters(int,QList<int>)));
   connect(equalizer_.get(), SIGNAL(EnabledChanged(bool)),
@@ -652,6 +660,7 @@ MainWindow::MainWindow(
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
 
   // Now playing widget
+  qLog(Debug) << "Creating now playing widget";
   ui_->now_playing->set_ideal_height(ui_->status_bar->sizeHint().height() +
                                      ui_->player_controls->sizeHint().height());
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), ui_->now_playing, SLOT(NowPlaying(Song)));
@@ -663,6 +672,7 @@ MainWindow::MainWindow(
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Add places where scripts can make actions
+  qLog(Debug) << "Registering script action locations";
   scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_full_library_scan);
   scripts_->ui()->RegisterActionLocation("extras_menu", ui_->menu_extras, NULL);
   scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
@@ -693,6 +703,7 @@ MainWindow::MainWindow(
 #endif
 
   // Load settings
+  qLog(Debug) << "Loading settings";
   settings_.beginGroup(kSettingsGroup);
 
   restoreGeometry(settings_.value("geometry").toByteArray());
@@ -732,6 +743,7 @@ MainWindow::MainWindow(
   close_window_shortcut->setKey(Qt::CTRL + Qt::Key_W);
   connect(close_window_shortcut, SIGNAL(activated()), SLOT(SetHiddenInTray()));
 
+  qLog(Debug) << "Initialising library";
   library_->Init();
   library_->StartThreads();
 
@@ -744,6 +756,7 @@ MainWindow::MainWindow(
 
   // If we support more languages this ifdef will need to be changed.
 #ifdef HAVE_SCRIPTING_PYTHON
+  qLog(Debug) << "Initialising scripting";
   scripts_->Init(ScriptManager::GlobalData(
       library_, library_view_->view(), player_, playlists_,
       task_manager_, settings_dialog_.get(), radio_model_));
@@ -755,6 +768,8 @@ MainWindow::MainWindow(
 #endif
 
   CheckFullRescanRevisions();
+
+  qLog(Debug) << "Started";
 }
 
 MainWindow::~MainWindow() {

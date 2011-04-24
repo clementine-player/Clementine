@@ -43,6 +43,7 @@ Windows7ThumbBar::Windows7ThumbBar(QWidget* widget)
 
 void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
 #ifdef Q_OS_WIN32
+  qLog(Debug) << "Setting actions";
   Q_ASSERT(actions.count() <= kMaxButtonCount);
 
   actions_ = actions;
@@ -51,7 +52,7 @@ void Windows7ThumbBar::SetActions(const QList<QAction*>& actions) {
       connect(action, SIGNAL(changed()), SLOT(ActionChanged()));
     }
   }
-
+  qLog(Debug) << "Done";
 #endif // Q_OS_WIN32
 }
 
@@ -79,47 +80,53 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
   if (button_created_message_id_ == 0) {
     // Compute the value for the TaskbarButtonCreated message
     button_created_message_id_ = RegisterWindowMessage("TaskbarButtonCreated");
+    qLog(Debug) << "TaskbarButtonCreated message ID registered" << button_created_message_id_;
   }
 
   if (msg->message == button_created_message_id_) {
+    qLog(Debug) << "Button created";
     // Unref the old taskbar list if we had one
     if (taskbar_list_) {
+      qLog(Debug) << "Releasing old taskbar list";
       reinterpret_cast<ITaskbarList3*>(taskbar_list_)->Release();
       taskbar_list_ = NULL;
     }
 
-    if (!taskbar_list_) {
-      // Create the taskbar list for the first time
-      if (CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
-                           IID_ITaskbarList3, (void**) &taskbar_list_)) {
-        qLog(Warning) << "Error creating the ITaskbarList3 interface";
-        return;
-      }
-
-      ITaskbarList3* taskbar_list = reinterpret_cast<ITaskbarList3*>(taskbar_list_);
-      if (taskbar_list->HrInit()) {
-        taskbar_list->Release();
-        taskbar_list_ = NULL;
-        return;
-      }
-
-      // Add the buttons
-      THUMBBUTTON buttons[kMaxButtonCount];
-      for (int i=0 ; i<actions_.count() ; ++i) {
-        const QAction* action = actions_[i];
-        THUMBBUTTON* button = &buttons[i];
-
-        button->dwMask = THUMBBUTTONMASK(THB_ICON | THB_TOOLTIP | THB_FLAGS);
-        button->iId = i;
-        SetupButton(action, button);
-      }
-
-      taskbar_list->ThumbBarAddButtons(widget_->winId(), actions_.count(), buttons);
+    // Create the taskbar list
+    if (CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
+                         IID_ITaskbarList3, (void**) &taskbar_list_)) {
+      qLog(Warning) << "Error creating the ITaskbarList3 interface";
+      return;
     }
+
+    ITaskbarList3* taskbar_list = reinterpret_cast<ITaskbarList3*>(taskbar_list_);
+    if (taskbar_list->HrInit()) {
+      qLog(Warning) << "Error initialising taskbar list";
+      taskbar_list->Release();
+      taskbar_list_ = NULL;
+      return;
+    }
+
+    // Add the buttons
+    qLog(Debug) << "Initialising" << actions_.count() << "buttons";
+    THUMBBUTTON buttons[kMaxButtonCount];
+    for (int i=0 ; i<actions_.count() ; ++i) {
+      const QAction* action = actions_[i];
+      THUMBBUTTON* button = &buttons[i];
+
+      button->dwMask = THUMBBUTTONMASK(THB_ICON | THB_TOOLTIP | THB_FLAGS);
+      button->iId = i;
+      SetupButton(action, button);
+    }
+
+    qLog(Debug) << "Adding buttons";
+    taskbar_list->ThumbBarAddButtons(widget_->winId(), actions_.count(), buttons);
+    qLog(Debug) << "Done";
   } else if (msg->message == WM_COMMAND) {
     const int button_id = LOWORD(msg->wParam);
 
     if (button_id >= 0 && button_id < actions_.count()) {
+      qLog(Debug) << "Button activated";
       actions_[button_id]->activate(QAction::Trigger);
     }
   }
