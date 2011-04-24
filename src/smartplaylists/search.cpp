@@ -16,6 +16,7 @@
 */
 
 #include "search.h"
+#include "core/logging.h"
 #include "core/song.h"
 
 #include <QStringList>
@@ -89,6 +90,7 @@ QString Search::ToSql(const QString& songs_table) const {
   } else if (limit_ != -1) {
     sql += " LIMIT " + QString::number(limit_);
   }
+  qLog(Debug) << sql;
 
   return sql;
 }

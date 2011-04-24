@@ -72,6 +72,9 @@ QString SearchTerm::ToSql() const {
         second_value = QString::number(second_value_.toInt()*7);
       }
     }
+  } else if (TypeOf(field_) == Type_Time) {
+    // Convert seconds to nanoseconds
+    value = "CAST (" + value + " *1000000000 AS INTEGER)";
   }
 
   switch (operator_) {
@@ -87,19 +90,22 @@ QString SearchTerm::ToSql() const {
       if (TypeOf(field_) == Type_Text)
         return col + " LIKE '" + value + "'";
       else if (TypeOf(field_) == Type_Rating ||
-               TypeOf(field_) == Type_Date)
+               TypeOf(field_) == Type_Date ||
+               TypeOf(field_) == Type_Time)
         return col + " = " + value + "";
       else
         return col + " = '" + value + "'";
     case Op_GreaterThan:
       if (TypeOf(field_) == Type_Rating ||
-          TypeOf(field_) == Type_Date)
+          TypeOf(field_) == Type_Date ||
+          TypeOf(field_) == Type_Time)
         return col + " > " + value + "";
       else
         return col + " > '" + value + "'";
     case Op_LessThan:
       if (TypeOf(field_) == Type_Rating ||
-          TypeOf(field_) == Type_Date)
+          TypeOf(field_) == Type_Date ||
+          TypeOf(field_) == Type_Time)
         return col + " < " + value + "";
       else
         return col + " < '" + value + "'";
