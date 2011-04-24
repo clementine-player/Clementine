@@ -178,6 +178,10 @@ option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" ON)
 option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" OFF)
 option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 
+if(WIN32)
+  option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
+endif(WIN32)
+
 if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
   set(HAVE_LIBGPOD ON)
 endif(ENABLE_LIBGPOD AND LIBGPOD_FOUND)

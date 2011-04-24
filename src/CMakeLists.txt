@@ -1057,9 +1057,9 @@ add_dependencies(clementine_lib qtsingleapplication)
 set(EXECUTABLE_OUTPUT_PATH ..)
 
 # Show the console window in debug mode on Windows
-if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
   set(CLEMENTINE-WIN32-FLAG WIN32)
-endif (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+endif (NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
 
 # resource file for windows
 if(WIN32)
