@@ -50,6 +50,8 @@ void ScriptInfo::InitFromFile(const ScriptManager* manager,
                               const QString& id,
                               const QString& path,
                               const QString& ini_file) {
+  qLog(Debug) << "Reading script:" << ini_file;
+
   // Open it
   QSettings s(ini_file, QSettings::IniFormat);
   if (!s.childGroups().contains(kIniSettingsGroup)) {

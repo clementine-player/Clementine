@@ -34,14 +34,6 @@ PythonEngine* PythonEngine::sInstance = NULL;
 
 extern "C" {
   void initclementine();
-
-#ifdef Q_OS_WIN32
-  void initsip();
-  void initQt();
-  void initQtCore();
-  void initQtGui();
-  void initQtNetwork();
-#endif
 }
 
 PythonEngine::PythonEngine(ScriptManager* manager)
@@ -50,6 +42,7 @@ PythonEngine::PythonEngine(ScriptManager* manager)
 {
   Q_ASSERT(sInstance == NULL);
   sInstance = this;
+
   #ifdef Q_OS_DARWIN
     setenv("PYTHONPATH", (QCoreApplication::applicationDirPath() + "/../PlugIns").toLocal8Bit().constData(), 1);
   #endif
@@ -101,16 +94,6 @@ bool PythonEngine::EnsureInitialised() {
 
   AddLogLine("Initialising python...", false);
 
-#ifdef Q_OS_WIN32
-  // On Windows we statically link against SIP and PyQt, so add those modules
-  // to Python's inittab here.
-  PyImport_AppendInittab(const_cast<char*>("sip"), initsip);
-  PyImport_AppendInittab(const_cast<char*>("PyQt4.Qt"), initQt);
-  PyImport_AppendInittab(const_cast<char*>("PyQt4.QtCore"), initQtCore);
-  PyImport_AppendInittab(const_cast<char*>("PyQt4.QtGui"), initQtGui);
-  PyImport_AppendInittab(const_cast<char*>("PyQt4.QtNetwork"), initQtNetwork);
-#endif
-
   // Add the Clementine builtin module
   PyImport_AppendInittab(const_cast<char*>("clementine"), initclementine);
 
@@ -120,8 +103,12 @@ bool PythonEngine::EnsureInitialised() {
   Py_InitializeEx(0);
 
   // Get the clementine module so we can put stuff in it
+  qLog(Debug) << "Importing clementine module";
   clementine_module_ = PyImport_ImportModule("clementine");
+
   if (!clementine_module_) {
+    qLog(Debug) << "Failed to import the clementine module";
+
     AddLogLine("Failed to import the clementine module", true);
     if (PyErr_Occurred()) {
       PyErr_Print();
@@ -129,9 +116,12 @@ bool PythonEngine::EnsureInitialised() {
     Py_Finalize();
     return false;
   }
+
+  qLog(Debug) << "Loading SIP API";
   sip_api_ = GetSIPApi();
 
   // Add objects to the module
+  qLog(Debug) << "Adding SIP objects to clementine module";
   if (manager()->data().valid_) {
     AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
     AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
@@ -147,6 +137,7 @@ bool PythonEngine::EnsureInitialised() {
   AddObject(this, sipType_PythonEngine, "pythonengine");
 
   // Create a module for scripts
+  qLog(Debug) << "Creating scripts module";
   PyImport_AddModule(kModulePrefix);
 
   // Run the startup script - this redirects sys.stdout and sys.stderr to our
@@ -155,14 +146,18 @@ bool PythonEngine::EnsureInitialised() {
   python_startup.open(QIODevice::ReadOnly);
   QByteArray python_startup_script = python_startup.readAll();
 
+  qLog(Debug) << "Running python startup script";
   if (PyRun_SimpleString(python_startup_script.constData()) != 0) {
     AddLogLine("Could not execute startup code", true);
+    PyErr_Print();
     Py_Finalize();
     return false;
   }
 
+  qLog(Debug) << "Releasing GIL";
   PyEval_ReleaseLock();
 
+  qLog(Debug) << "Python initialisation complete";
   initialised_ = true;
   return true;
 }

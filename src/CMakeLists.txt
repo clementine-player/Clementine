@@ -971,18 +971,6 @@ if(HAVE_LIBINDICATE)
 endif(HAVE_LIBINDICATE)
 
 if(HAVE_SCRIPTING_PYTHON)
-  if(WIN32)
-    target_link_libraries(clementine_lib
-      ${PYQT_QTCORE_LIBRARY}
-      ${PYQT_QTGUI_LIBRARY}
-      ${PYQT_QTNETWORK_LIBRARY}
-      ${PYQT_QT_LIBRARY}
-      ${PYQT_QPYGUI_LIBRARY}
-      ${PYQT_QPYCORE_LIBRARY}
-      ${SIP_LIBRARY}
-    )
-  endif(WIN32)
-
   target_link_libraries(clementine_lib ${PYTHON_LIBRARIES})
 endif(HAVE_SCRIPTING_PYTHON)
 

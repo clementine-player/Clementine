@@ -21,6 +21,7 @@
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "sipAPIclementine.h"
+#include "core/logging.h"
 #include "scripting/scriptinfo.h"
 
 #include <QFile>

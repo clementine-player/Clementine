@@ -19,7 +19,7 @@ macro(add_sip_binding outputvar source)
   )
 
   if(WIN32)
-    list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_6_2")
+    list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_7_1")
     list(APPEND PYQT_SIP_FLAGS "-t" "WS_WIN")
   elseif(APPLE)
     list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_7_1")

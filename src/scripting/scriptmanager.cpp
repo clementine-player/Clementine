@@ -79,6 +79,8 @@ ScriptManager::ScriptManager(QObject* parent)
 #elif defined(Q_OS_MAC)
   search_paths_ << mac::GetResourcesPath() + "/scripts";
 #endif
+
+  qLog(Debug) << "Script search paths:" << search_paths_;
 }
 
 ScriptManager::~ScriptManager() {
@@ -91,6 +93,8 @@ ScriptManager::~ScriptManager() {
 }
 
 void ScriptManager::Init(const GlobalData& data) {
+  qLog(Debug) << "Initialising";
+
   data_ = data;
 
   // Load settings
@@ -134,6 +138,7 @@ QMap<QString, ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
       continue;
 
     if (!watcher_->directories().contains(search_path)) {
+      qLog(Debug) << "Adding directory watch:" << search_path;
       watcher_->addPath(search_path);
     }
 
@@ -144,6 +149,7 @@ QMap<QString, ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
       it.next();
       const QString path = it.filePath();
       if (!watcher_->directories().contains(path)) {
+        qLog(Debug) << "Adding directory watch:" << path;
         watcher_->addPath(path);
       }
 
@@ -151,7 +157,7 @@ QMap<QString, ScriptInfo> ScriptManager::LoadAllScriptInfo() const {
       info.InitFromDirectory(this, path);
       if (!info.is_valid()) {
         qLog(Warning) << "Not a valid Clementine script directory, ignoring:"
-                   << path;
+                      << path;
         continue;
       }
 
