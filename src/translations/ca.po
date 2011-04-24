@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-19 23:15+0000\n"
 "Last-Translator: Pau Capó <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 temes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 mòdul Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restants"
 
@@ -164,8 +164,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album "
+"%title </p>\n"
 "\n"
 "<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
 "remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
@@ -619,6 +619,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Color"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Comentari"
 
@@ -798,6 +801,9 @@ msgstr "Data de creació"
 
 msgid "Date modified"
 msgstr "Data de modificació"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "O&missió"
@@ -1021,6 +1027,12 @@ msgstr "Tota la col.lecció"
 
 msgid "Equalizer"
 msgstr "Equalitzador"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Error"
@@ -1280,6 +1292,9 @@ msgstr "Alta (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Alta (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr ""
@@ -1642,6 +1657,9 @@ msgid "Model"
 msgstr "Model"
 
 msgid "Monitor the library for changes"
+msgstr ""
+
+msgid "Months"
 msgstr ""
 
 msgid "Most played"
@@ -2564,6 +2582,9 @@ msgstr "El directori %1 bo es vàlid"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "La llista de reproducció '%1' esta buida o no es pot carregar."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr ""
 
@@ -2844,6 +2865,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Quan s'inicia Clementine"
 
@@ -2894,6 +2918,9 @@ msgstr "Any"
 
 msgid "Year - Album"
 msgstr "Any - Àlbum"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr ""
@@ -2981,17 +3008,26 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "afegeix %n cançons"
 
 msgid "after"
 msgstr ""
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
+msgstr ""
+
+msgid "between"
 msgstr ""
 
 msgid "biggest first"
@@ -3022,6 +3058,9 @@ msgstr ""
 msgid "greater than"
 msgstr ""
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3046,7 +3085,7 @@ msgstr ""
 msgid "options"
 msgstr "opcions"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimina %n cançons"
 

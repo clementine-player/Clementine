@@ -24,6 +24,7 @@
 #include "ui/iconloader.h"
 
 #include <QFile>
+#include <QMessageBox>
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QTimer>
@@ -67,27 +68,42 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
     library_(library),
     overlay_(NULL),
     animation_(new QPropertyAnimation(this, "overlay_opacity", this)),
-    active_(true)
+    active_(true),
+    initialized_(false)
 {
   ui_->setupUi(this);
   connect(ui_->field, SIGNAL(currentIndexChanged(int)), SLOT(FieldChanged(int)));
+  connect(ui_->op, SIGNAL(currentIndexChanged(int)), SLOT(OpChanged(int)));
   connect(ui_->remove, SIGNAL(clicked()), SIGNAL(RemoveClicked()));
 
-  connect(ui_->op, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
   connect(ui_->value_date, SIGNAL(dateChanged(QDate)), SIGNAL(Changed()));
   connect(ui_->value_number, SIGNAL(valueChanged(int)), SIGNAL(Changed()));
   connect(ui_->value_rating, SIGNAL(RatingChanged(float)), SIGNAL(Changed()));
   connect(ui_->value_text, SIGNAL(textChanged(QString)), SIGNAL(Changed()));
   connect(ui_->value_time, SIGNAL(timeChanged(QTime)), SIGNAL(Changed()));
+  connect(ui_->value_date_numeric, SIGNAL(valueChanged(int)), SIGNAL(Changed()));
+  connect(ui_->value_date_numeric1, SIGNAL(valueChanged(int)), SLOT(RelativeValueChanged()));
+  connect(ui_->value_date_numeric2, SIGNAL(valueChanged(int)), SLOT(RelativeValueChanged()));
+  connect(ui_->date_type, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
+  connect(ui_->date_type_relative, SIGNAL(currentIndexChanged(int)), SIGNAL(Changed()));
 
   ui_->value_date->setDate(QDate::currentDate());
 
   // Populate the combo boxes
-  for (int i=0 ; i<SearchTerm::FieldCount ; ++i) {
+  for (int i=0; i<SearchTerm::FieldCount; ++i) {
     ui_->field->addItem(SearchTerm::FieldName(SearchTerm::Field(i)));
     ui_->field->setItemData(i, i);
   }
   ui_->field->model()->sort(0);
+
+  // Populate the date type combo box
+  for (int i=0; i<5; ++i) {
+    ui_->date_type->addItem(SearchTerm::DateName(SearchTerm::DateType(i), false));
+    ui_->date_type->setItemData(i, i);
+
+    ui_->date_type_relative->addItem(SearchTerm::DateName(SearchTerm::DateType(i), false));
+    ui_->date_type_relative->setItemData(i, i);
+  }
 
   // Icons on the buttons
   ui_->remove->setIcon(IconLoader::Load("list-remove"));
@@ -146,6 +162,23 @@ void SearchTermWidget::FieldChanged(int index) {
     ui_->value_text->setCompleter(NULL);
   }
 
+  emit Changed();
+}
+
+void SearchTermWidget::OpChanged(int index) {
+  // We need to change the page only in the following case
+  if ((ui_->value_stack->currentWidget() == ui_->page_date) || (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
+      (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
+      QWidget* page = NULL;
+      if (index == 3) {
+        page = ui_->page_date_numeric;
+      } else if (index == 4) {
+        page = ui_->page_date_relative;
+      } else {
+        page = ui_->page_date;
+      }
+      ui_->value_stack->setCurrentWidget(page);
+  }
   emit Changed();
 }
 
@@ -221,7 +254,18 @@ void SearchTermWidget::SetTerm(const SearchTerm& term) {
     break;
 
   case SearchTerm::Type_Date:
-    ui_->value_date->setDateTime(QDateTime::fromTime_t(term.value_.toInt()));
+    if (ui_->value_stack->currentWidget() == ui_->page_date_numeric) {
+      ui_->value_date_numeric->setValue(term.value_.toInt());
+      ui_->date_type->setCurrentIndex(term.date_);
+    }
+    else if (ui_->value_stack->currentWidget() == ui_->page_date_relative) {
+      ui_->value_date_numeric1->setValue(term.value_.toInt());
+      ui_->value_date_numeric2->setValue(term.second_value_.toInt());
+      ui_->date_type_relative->setCurrentIndex(term.date_);
+    }
+    else if (ui_->value_stack->currentWidget() == ui_->page_date) {
+      ui_->value_date->setDateTime(QDateTime::fromTime_t(term.value_.toInt()));
+    }
     break;
 
   case SearchTerm::Type_Time:
@@ -254,11 +298,32 @@ SearchTerm SearchTermWidget::Term() const {
     ret.value_ = QTime(0,0).secsTo(ui_->value_time->time());
   } else if (value_page == ui_->page_rating) {
     ret.value_ = ui_->value_rating->rating();
+  } else if (value_page == ui_->page_date_numeric) {
+    ret.date_ = SearchTerm::DateType(ui_->date_type->currentIndex());
+    ret.value_ = ui_->value_date_numeric->value();
+  } else if (value_page == ui_->page_date_relative) {
+    ret.date_ = SearchTerm::DateType(ui_->date_type_relative->currentIndex());
+    ret.value_ = ui_->value_date_numeric1->value();
+    ret.second_value_ = ui_->value_date_numeric2->value();
   }
 
   return ret;
 }
 
+void SearchTermWidget::RelativeValueChanged() {
+  // Don't check for validity when creating the widget
+  if (!initialized_) {
+    initialized_ = true;
+    return;
+  }
+  // Explain the user why he can't proceed
+  if (ui_->value_date_numeric1->value() >= ui_->value_date_numeric2->value()) {
+    QMessageBox::warning(this, tr("Clementine"),
+                                    tr("The second value must be greater than the first one!"));
+  }
+  // Emit the signal in any case, so the Next button will be disabled
+  emit Changed();
+}
 
 
 SearchTermWidget::Overlay::Overlay(SearchTermWidget* parent)

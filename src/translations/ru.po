@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-12 12:34+0000\n"
 "Last-Translator: Chubakur <Unknown>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "X-Launchpad-Export-Date: 2011-04-13 05:02+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -84,15 +84,15 @@ msgstr "%1 композиций"
 msgid "%1: Wiimotedev module"
 msgstr "%1: модуль Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -615,6 +615,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Цвет"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Комментарий"
 
@@ -794,6 +797,9 @@ msgstr "Дата создания"
 
 msgid "Date modified"
 msgstr "Дата изменения"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "По &умолчанию"
@@ -1015,6 +1021,12 @@ msgstr "Вся коллекция"
 
 msgid "Equalizer"
 msgstr "Эквалайзер"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Ошибка"
@@ -1274,6 +1286,9 @@ msgstr "Высокое (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Высокая (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Гипножапа"
@@ -1644,6 +1659,9 @@ msgstr "Модель"
 
 msgid "Monitor the library for changes"
 msgstr "Следить за изменениями библиотеки"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Наиболее часто прослушиваемые композиции"
@@ -2566,6 +2584,9 @@ msgstr "Каталог %1 неправильный"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Список воспроизведения '%1' пуст или не может быть загружен."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Запрошенный вами сайт не существует!"
 
@@ -2855,6 +2876,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "При запуске Clementine"
 
@@ -2909,6 +2933,9 @@ msgstr "Год"
 
 msgid "Year - Album"
 msgstr "Год - Альбом"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Вчера"
@@ -3001,18 +3028,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "По-умолчанию"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
 msgid "after"
 msgstr "после"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "до"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "наибольшие сначала"
@@ -3042,6 +3078,9 @@ msgstr "ровняется"
 msgid "greater than"
 msgstr "больше"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "кбит/с"
 
@@ -3066,7 +3105,7 @@ msgstr "на"
 msgid "options"
 msgstr "настройки"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 

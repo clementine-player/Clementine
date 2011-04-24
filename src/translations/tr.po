@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-10 12:51+0000\n"
 "Last-Translator: Hamit Selahattin Naiboğlu <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 parça"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modülü"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -612,6 +612,9 @@ msgstr "Kulüp"
 msgid "Color"
 msgstr "Renk"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Yorum"
 
@@ -791,6 +794,9 @@ msgstr "Oluşturulduğu tarih"
 
 msgid "Date modified"
 msgstr "Değiştirildiği tarih"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "&Öntanımlı"
@@ -1014,6 +1020,12 @@ msgstr "Tüm koleksiyon"
 
 msgid "Equalizer"
 msgstr "Ekolayzır"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Hata"
@@ -1271,6 +1283,9 @@ msgstr "Yüksek (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Yüksek (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1642,6 +1657,9 @@ msgstr "Model"
 
 msgid "Monitor the library for changes"
 msgstr "Kütüphanede olacak değişiklikleri izle"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "En fazla çalınan"
@@ -2564,6 +2582,9 @@ msgstr "%1 dizini geçersiz"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Çalma listesi '%1' boş veya yüklenemiyor."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "İstediğiniz site mevcut değil!"
 
@@ -2844,6 +2865,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Clementine başladığında"
 
@@ -2898,6 +2922,9 @@ msgstr "Yıl"
 
 msgid "Year - Album"
 msgstr "Yıl - Albüm"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Dün"
@@ -2993,18 +3020,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
 msgid "after"
 msgstr "sonra"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "önce"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "ilk önce en büyüğü"
@@ -3034,6 +3070,9 @@ msgstr "eşittir"
 msgid "greater than"
 msgstr "büyüktür"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3058,7 +3097,7 @@ msgstr "açık"
 msgid "options"
 msgstr "seçenekler"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 

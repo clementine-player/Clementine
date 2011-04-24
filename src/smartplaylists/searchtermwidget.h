@@ -62,6 +62,8 @@ protected:
 
 private slots:
   void FieldChanged(int index);
+  void OpChanged(int index);
+  void RelativeValueChanged();
   void Grab();
 
 private:
@@ -74,6 +76,7 @@ private:
   Overlay* overlay_;
   QPropertyAnimation* animation_;
   bool active_;
+  bool initialized_;
 };
 
 } // namespace

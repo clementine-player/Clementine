@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-11 21:24+0000\n"
 "Last-Translator: Alexander Minges <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "X-Launchpad-Export-Date: 2011-04-12 05:12+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -86,15 +86,15 @@ msgstr "%1 Stücke"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev-Modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -621,6 +621,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Farbe"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -800,6 +803,9 @@ msgstr "Erstellt"
 
 msgid "Date modified"
 msgstr "Geändert"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "S&tandard"
@@ -1023,6 +1029,12 @@ msgstr "Gesamte Sammlung"
 
 msgid "Equalizer"
 msgstr "Equalizer"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Fehler"
@@ -1282,6 +1294,9 @@ msgstr "Hoch (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Hoch (35fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnosekröte"
@@ -1650,6 +1665,9 @@ msgstr "Modell"
 
 msgid "Monitor the library for changes"
 msgstr "Musiksammlung auf Änderungen hin überwachen"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Meistgespielt"
@@ -2576,6 +2594,9 @@ msgstr "Ordner %1 ist ungültig"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Die Wiedergabeliste \"%1\" ist leer oder konnte nicht geladen werden."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Die aufgerufene Seite existiert nicht!"
 
@@ -2869,6 +2890,9 @@ msgstr ""
 msgid "Wav"
 msgstr "WAV"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Bei Programmstart"
 
@@ -2923,6 +2947,9 @@ msgstr "Jahr"
 
 msgid "Year - Album"
 msgstr "Jahr – Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Gestern"
@@ -3020,18 +3047,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
 msgid "after"
 msgstr "nach"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "vor"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "größte zuerst"
@@ -3061,6 +3097,9 @@ msgstr "gleich"
 msgid "greater than"
 msgstr "größer als"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "Kb/s"
 
@@ -3085,7 +3124,7 @@ msgstr "auf"
 msgid "options"
 msgstr "Einstellungen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 

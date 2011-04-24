@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-02 20:19+0000\n"
 "Last-Translator: Punky <pyntux@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 нумера"
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завршено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n преостало"
 
@@ -600,6 +600,9 @@ msgstr "Клуб"
 msgid "Color"
 msgstr ""
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Коментар"
 
@@ -775,6 +778,9 @@ msgstr "Направљено"
 
 msgid "Date modified"
 msgstr "Измењено"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "Под&разумевано"
@@ -997,6 +1003,12 @@ msgstr "Читава колекција"
 
 msgid "Equalizer"
 msgstr "Еквилајзер"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Грешка"
@@ -1252,6 +1264,9 @@ msgstr "Висока (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Високо (35 фпс)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr ""
@@ -1615,6 +1630,9 @@ msgstr "Модел"
 
 msgid "Monitor the library for changes"
 msgstr "Надгледај измене у библиотеци"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr ""
@@ -2535,6 +2553,9 @@ msgstr ""
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr ""
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr ""
 
@@ -2805,6 +2826,9 @@ msgstr ""
 msgid "Wav"
 msgstr ""
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr ""
 
@@ -2855,6 +2879,9 @@ msgstr "Година"
 
 msgid "Year - Album"
 msgstr "Година — Албум"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr ""
@@ -2938,17 +2965,26 @@ msgstr ""
 msgid "Zero"
 msgstr "Нулто"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "додај %n песама"
 
 msgid "after"
 msgstr ""
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
+msgstr ""
+
+msgid "between"
 msgstr ""
 
 msgid "biggest first"
@@ -2979,6 +3015,9 @@ msgstr ""
 msgid "greater than"
 msgstr ""
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kb/s"
 
@@ -3003,7 +3042,7 @@ msgstr ""
 msgid "options"
 msgstr "Опције"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remove %n песама"
 

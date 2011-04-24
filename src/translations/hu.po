@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 12:21+0000\n"
 "Last-Translator: ntomka <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 szám"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n meghiúsult"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n befejezve"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
@@ -616,6 +616,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Szín"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Megjegyzés"
 
@@ -796,6 +799,9 @@ msgstr "Létrehozás dátuma"
 
 msgid "Date modified"
 msgstr "Módosítás dátuma"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "&alapértelmezés"
@@ -1020,6 +1026,12 @@ msgstr "A teljes kollekció"
 
 msgid "Equalizer"
 msgstr "Hangszínszabályzó"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Hiba"
@@ -1278,6 +1290,9 @@ msgstr "Magas (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Gyors (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1648,6 +1663,9 @@ msgstr "Modell"
 
 msgid "Monitor the library for changes"
 msgstr "Zenetár figyelése változások után"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Gyakran játszott"
@@ -2572,6 +2590,9 @@ msgstr "A %1 mappa érvénytelen"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "A '%1' lejátszási lista üres vagy érvénytelen."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "A kért oldal nem létezik!"
 
@@ -2861,6 +2882,9 @@ msgstr ""
 msgid "Wav"
 msgstr "WAV"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Amikor a Clementine elindul"
 
@@ -2914,6 +2938,9 @@ msgstr "Év"
 
 msgid "Year - Album"
 msgstr "Év - Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Tegnap"
@@ -3009,18 +3036,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulla"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n szám felvétele"
 
 msgid "after"
 msgstr "után"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "előtt"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "nagyobb először"
@@ -3050,6 +3086,9 @@ msgstr "egyenlő"
 msgid "greater than"
 msgstr "nagyobb mint"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3074,7 +3113,7 @@ msgstr "ezen"
 msgid "options"
 msgstr "beállítások"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n szám eltávolítása"
 

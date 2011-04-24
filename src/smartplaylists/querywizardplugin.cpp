@@ -239,7 +239,8 @@ void QueryWizardPlugin::RemoveSearchTerm() {
 void QueryWizardPlugin::UpdateTermPreview() {
   Search search = MakeSearch();
   emit search_page_->completeChanged();
-  if (!search.is_valid())
+  // When removing last term, update anyway the search
+  if (!search.is_valid() && !search_page_->terms_.isEmpty())
     return;
 
   // Don't apply limits in the term page

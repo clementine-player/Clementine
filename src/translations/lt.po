@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-05 14:22+0000\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lt\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: LITHUANIA\n"
@@ -88,15 +88,15 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -616,6 +616,9 @@ msgstr "Klubinė"
 msgid "Color"
 msgstr "Spalva"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Komentaras"
 
@@ -795,6 +798,9 @@ msgstr "Sukūrimo data"
 
 msgid "Date modified"
 msgstr "Pakeitimo data"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "Numatytas"
@@ -1018,6 +1024,12 @@ msgstr "Visa kolekcija"
 
 msgid "Equalizer"
 msgstr "Glodintuvas"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Klaida"
@@ -1275,6 +1287,9 @@ msgstr "Aukšta (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Aukštas (35 kps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad'as"
@@ -1645,6 +1660,9 @@ msgstr "Modelis"
 
 msgid "Monitor the library for changes"
 msgstr "Stebėti fonoteką dėl pasikeitimų"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Dažniausiai grota"
@@ -2566,6 +2584,9 @@ msgstr "Aplankas %1 yra netinkamas"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Grojaraštis '%1' buvo tuščias arba negalėjo būti įkeltas."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Puslapis, kurio prašėte neegzistuoja"
 
@@ -2849,6 +2870,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Kai  Clementine paleidžiamas"
 
@@ -2902,6 +2926,9 @@ msgstr "Metai"
 
 msgid "Year - Album"
 msgstr "Metai - Albumas"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Vakar"
@@ -2996,18 +3023,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
 msgid "after"
 msgstr "po"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "anksčiau"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "Didžiausi pirmiausia"
@@ -3037,6 +3073,9 @@ msgstr "lygus"
 msgid "greater than"
 msgstr "daugiau nei"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3061,7 +3100,7 @@ msgstr "iš"
 msgid "options"
 msgstr "parinktys"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 

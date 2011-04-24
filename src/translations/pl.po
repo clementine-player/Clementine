@@ -10,10 +10,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-02 16:43+0000\n"
 "Last-Translator: Paweł Bara <Unknown>\n"
 "Language-Team: Polish <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: pl_PL\n"
@@ -85,15 +85,15 @@ msgstr "%1 ścieżek"
 msgid "%1: Wiimotedev module"
 msgstr "%1: moduł Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nieudane"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n zakończone"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "pozostało %n"
 
@@ -617,6 +617,9 @@ msgstr "Klubowa"
 msgid "Color"
 msgstr "Kolor"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Komentarz"
 
@@ -796,6 +799,9 @@ msgstr "Data utworzenia"
 
 msgid "Date modified"
 msgstr "Data modyfikacji"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "&Domyślny"
@@ -1017,6 +1023,12 @@ msgstr "Cała kolekcja"
 
 msgid "Equalizer"
 msgstr "Korektor dźwięku"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Błąd"
@@ -1277,6 +1289,9 @@ msgstr "Wysoka (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Wysoki (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnoropucha"
@@ -1647,6 +1662,9 @@ msgstr "Model"
 
 msgid "Monitor the library for changes"
 msgstr "Monitoruj zmiany biblioteki"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Najwięcej grane"
@@ -2571,6 +2589,9 @@ msgstr "Katalog %1 jest nieprawidłowy"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Lista odtwarzania \"%1\" była pusta lub nie można było jej wczytać."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Wybrany serwis nie istnieje!"
 
@@ -2858,6 +2879,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Podczas startu Clementine"
 
@@ -2912,6 +2936,9 @@ msgstr "Rok"
 
 msgid "Year - Album"
 msgstr "Rok - Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Wczoraj"
@@ -3009,18 +3036,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodaj %n utworów"
 
 msgid "after"
 msgstr "po"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "przed"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "najpierw największe"
@@ -3050,6 +3086,9 @@ msgstr "jest równy"
 msgid "greater than"
 msgstr "większy niż"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3074,7 +3113,7 @@ msgstr "w dniu"
 msgid "options"
 msgstr "opcje"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "usuń %n utworów"
 

@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 11:31+0000\n"
 "Last-Translator: DAG Software <Unknown>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: sk_SK\n"
@@ -86,15 +86,15 @@ msgstr "%1 skladieb"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n dokončených"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n zostávajúcich"
 
@@ -613,6 +613,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Farba"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Komentár"
 
@@ -792,6 +795,9 @@ msgstr "Dátum vytvorenia"
 
 msgid "Date modified"
 msgstr "Dátum zmeny"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "Pôvo&dná"
@@ -1015,6 +1021,12 @@ msgstr "Celá zbierka"
 
 msgid "Equalizer"
 msgstr "Ekvalizér"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Chyba"
@@ -1272,6 +1284,9 @@ msgstr "Vysoká (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Vysoký (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1641,6 +1656,9 @@ msgstr "Model"
 
 msgid "Monitor the library for changes"
 msgstr "Sledovať zmeny v zbierke"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Najviac hrané"
@@ -2562,6 +2580,9 @@ msgstr "Priečinok %1 nieje platný"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Playlist '%1' je prázdny alebo nemôže byť načítaný."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Stránka, ktorú požadujete, neexistuje!"
 
@@ -2852,6 +2873,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Pri zapnutí Clementine"
 
@@ -2905,6 +2929,9 @@ msgstr "Rok"
 
 msgid "Year - Album"
 msgstr "Rok - Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Včera"
@@ -2999,18 +3026,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovať"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
 msgid "after"
 msgstr "po"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "pred"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "najprv najväčšie"
@@ -3040,6 +3076,9 @@ msgstr "rovná sa"
 msgid "greater than"
 msgstr "väčšie ako"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3064,7 +3103,7 @@ msgstr "na"
 msgid "options"
 msgstr "možnosti"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 

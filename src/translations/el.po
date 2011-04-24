@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-08 17:06+0000\n"
 "Last-Translator: firewalker <Unknown>\n"
 "Language-Team: <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: el_GR\n"
@@ -87,15 +87,15 @@ msgstr "%1 κομμάτια"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Άρθρωμα Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n απομένει"
 
@@ -626,6 +626,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Χρώμα"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Σχόλια"
 
@@ -807,6 +810,9 @@ msgstr "Ημερομηνία δημιουργίας"
 
 msgid "Date modified"
 msgstr "Ημερομηνία τροποποίησης"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "Προ&επιλογή"
@@ -1032,6 +1038,12 @@ msgstr "Ολόκληρη η συλλογή"
 
 msgid "Equalizer"
 msgstr "Ισοσταθμιστής"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Σφάλμα"
@@ -1291,6 +1303,9 @@ msgstr "Υψηλή (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Υψηλά (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1660,6 +1675,9 @@ msgstr "Μοντέλο"
 
 msgid "Monitor the library for changes"
 msgstr "Έλεγχος της βιβλιοθήκης για αλλαγές"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Έπαιξαν περισσότερο"
@@ -2588,6 +2606,9 @@ msgstr "Ο κατάλογος %1 δεν είναι έγκυρος"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Η λίστα αναπαραγωγής '%1' ήταν άδεια ή δεν μπόρεσε να φορτωθεί."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Η διεύθυνση που ζητήσατε δεν υπάρχει!"
 
@@ -2884,6 +2905,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Όταν ξεκινά το Clementine"
 
@@ -2938,6 +2962,9 @@ msgstr "Έτος"
 
 msgid "Year - Album"
 msgstr "Έτος - Άλμπουμ"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Χθες"
@@ -3035,18 +3062,27 @@ msgstr "Ω-Α"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
 msgid "after"
 msgstr "μετά"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "πριν"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "το μεγαλύτερο πρώτα"
@@ -3076,6 +3112,9 @@ msgstr "ισούται"
 msgid "greater than"
 msgstr "μεγαλύτερο από"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3100,7 +3139,7 @@ msgstr "σε"
 msgid "options"
 msgstr "επιλογές"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 

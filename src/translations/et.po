@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-02 09:32+0000\n"
 "Last-Translator: lyyser <Unknown>\n"
 "Language-Team: Estonian <et@li.org>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: et\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 pala"
 msgid "%1: Wiimotedev module"
 msgstr "%1: moodul Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n ebaõnnestus"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n lõpetatud"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "jäänud %n"
 
@@ -598,6 +598,9 @@ msgstr "Klubi"
 msgid "Color"
 msgstr "Värv"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Märkus"
 
@@ -771,6 +774,9 @@ msgstr "Loomise kuupäev"
 
 msgid "Date modified"
 msgstr "Muutmise kuupäev"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "&Vaikeväärtus"
@@ -993,6 +999,12 @@ msgstr ""
 
 msgid "Equalizer"
 msgstr "Ekvalaiser"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Viga"
@@ -1248,6 +1260,9 @@ msgstr "Kõrge (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Kõrge (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr ""
@@ -1608,6 +1623,9 @@ msgid "Model"
 msgstr "Mudel"
 
 msgid "Monitor the library for changes"
+msgstr ""
+
+msgid "Months"
 msgstr ""
 
 msgid "Most played"
@@ -2528,6 +2546,9 @@ msgstr ""
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr ""
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr ""
 
@@ -2798,6 +2819,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr ""
 
@@ -2848,6 +2872,9 @@ msgstr "Aasta"
 
 msgid "Year - Album"
 msgstr "Aasta - Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Eile"
@@ -2929,18 +2956,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "lisa %n laulu"
 
 msgid "after"
 msgstr "pärast"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "enne"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr ""
@@ -2970,6 +3006,9 @@ msgstr ""
 msgid "greater than"
 msgstr "suurem kui"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -2994,7 +3033,7 @@ msgstr ""
 msgid "options"
 msgstr "valikud"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 

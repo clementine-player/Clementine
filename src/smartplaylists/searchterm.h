@@ -68,6 +68,11 @@ public:
 
     // For everything
     Op_Equals,
+
+    // For numeric dates (e.g. in the last X days)
+    Op_NumericDate,
+    // For relative dates
+    Op_RelativeDate,
   };
 
   enum Type {
@@ -78,12 +83,24 @@ public:
     Type_Rating,
   };
 
+  // These values are persisted, so add to the end of the enum only
+  enum DateType {
+    Date_Hour = 0,
+    Date_Day,
+    Date_Week,
+    Date_Month,
+    Date_Year,
+  };
+
   SearchTerm();
   SearchTerm(Field field, Operator op, const QVariant& value);
 
   Field field_;
   Operator operator_;
   QVariant value_;
+  DateType date_;
+  // For relative dates, we need a second parameter, might be useful somewhere else
+  QVariant second_value_;
 
   QString ToSql() const;
   bool is_valid() const;
@@ -96,6 +113,7 @@ public:
   static QString FieldName(Field field);
   static QString FieldColumnName(Field field);
   static QString FieldSortOrderText(Type type, bool ascending);
+  static QString DateName(DateType date, bool forQuery);
 };
 
 typedef QList<SearchTerm::Operator> OperatorList;

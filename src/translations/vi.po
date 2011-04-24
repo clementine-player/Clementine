@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 14:39+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr "%1 track"
 msgid "%1: Wiimotedev module"
 msgstr "%1: mô-đun Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -613,6 +613,9 @@ msgstr "Hội"
 msgid "Color"
 msgstr "Màu sắc"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Lời bình"
 
@@ -792,6 +795,9 @@ msgstr "Ngày tạo"
 
 msgid "Date modified"
 msgstr "Ngày chỉnh sửa"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "&Mặc định"
@@ -1015,6 +1021,12 @@ msgstr "Trọn bộ sưu tập"
 
 msgid "Equalizer"
 msgstr "Bộ cân chỉnh âm"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Lỗi"
@@ -1275,6 +1287,9 @@ msgstr "Cao (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Cao (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1644,6 +1659,9 @@ msgstr "Model"
 
 msgid "Monitor the library for changes"
 msgstr "Giám sát các thay đổi trong thư viện"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Phát nhiều nhất"
@@ -2567,6 +2585,9 @@ msgstr "Thư mục %1 không hợp lệ"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Danh sách '%1' rỗng hoặc không thể nạp được."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Trang bạn đã yêu cầu không tồn tại!"
 
@@ -2855,6 +2876,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Khi Clementine khởi động"
 
@@ -2909,6 +2933,9 @@ msgstr "Năm"
 
 msgid "Year - Album"
 msgstr "Năm - Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Ngày hôm qua"
@@ -3003,18 +3030,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
 msgid "after"
 msgstr "sau"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "trước"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "lớn nhất trước"
@@ -3044,6 +3080,9 @@ msgstr "là"
 msgid "greater than"
 msgstr "lớn hơn"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3068,7 +3107,7 @@ msgstr "on"
 msgid "options"
 msgstr "options"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 

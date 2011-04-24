@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-08 01:46+0000\n"
 "Last-Translator: Aluísio Augusto Silva Gonçalves <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -86,15 +86,15 @@ msgstr "%1 faixas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Modulo do dispositivo Wiimote"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falhou"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n finalizado"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n faltando"
 
@@ -615,6 +615,9 @@ msgstr "Clube"
 msgid "Color"
 msgstr "Cor"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Comentário"
 
@@ -794,6 +797,9 @@ msgstr "Data de criação"
 
 msgid "Date modified"
 msgstr "Data de modificação"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "&Padrão"
@@ -1017,6 +1023,12 @@ msgstr "Toda a coletânia"
 
 msgid "Equalizer"
 msgstr "Equalizador"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Erro"
@@ -1278,6 +1290,9 @@ msgstr "Alta (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Alto (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1648,6 +1663,9 @@ msgstr "Modelo"
 
 msgid "Monitor the library for changes"
 msgstr "Vigiar mudanças na biblioteca"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Mais tocadas"
@@ -2573,6 +2591,9 @@ msgstr "O diretório %1 não é válido"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "A lista de reprodução '%1' está vazia ou não pode ser carregada."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "O site que você pediu não existe!"
 
@@ -2863,6 +2884,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Quando o Clementine iniciar"
 
@@ -2916,6 +2940,9 @@ msgstr "Ano"
 
 msgid "Year - Album"
 msgstr "Ano - Álbum"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Ontem"
@@ -3009,18 +3036,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "Adicionar %n músicas"
 
 msgid "after"
 msgstr "após"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "antes"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "maiores primeiro"
@@ -3050,6 +3086,9 @@ msgstr "iguais"
 msgid "greater than"
 msgstr "maior que"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3074,7 +3113,7 @@ msgstr "ligado"
 msgid "options"
 msgstr "opções"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "Remover %n músicas"
 

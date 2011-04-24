@@ -36,8 +36,13 @@ SearchTerm::SearchTerm(
 
 QString SearchTerm::ToSql() const {
   QString col = FieldColumnName(field_);
+  QString date = DateName(date_, true);
   QString value = value_.toString();
   value.replace('\'', "''");
+
+  QString second_value;
+
+  bool special_date_query = (operator_ == SearchTerm::Op_NumericDate || operator_ == SearchTerm::Op_RelativeDate);
 
   // Floating point problems...
   // Theoretically 0.0 == 0 stars, 0.1 == 0.5 star, 0.2 == 1 star etc.
@@ -48,12 +53,25 @@ QString SearchTerm::ToSql() const {
   if (TypeOf(field_) == Type_Rating) {
     col = "CAST ((" + col + " + 0.05) * 10 AS INTEGER)";
     value = "CAST ((" + value + " + 0.05) * 10 AS INTEGER)";
-
-  // The calendar widget specifies no time so ditch the possible time part
-  // from integers representing the dates.
   } else if (TypeOf(field_) == Type_Date) {
-    col = "DATE(" + col + ", 'unixepoch', 'localtime')";
-    value = "DATE(" + value + ", 'unixepoch', 'localtime')";
+    if (!special_date_query) {
+      // We have the exact date
+      // The calendar widget specifies no time so ditch the possible time part
+      // from integers representing the dates.
+      col = "DATE(" + col + ", 'unixepoch', 'localtime')";
+      value = "DATE(" + value + ", 'unixepoch', 'localtime')";
+    } else {
+      // We have a numeric date, consider also the time for more precision
+      col = "DATETIME(" + col + ", 'unixepoch', 'localtime')";
+      second_value = second_value_.toString();
+      second_value.replace('\'', "''");
+      if (date == "weeks") {
+        // Sqlite doesn't know weeks, transform them to days
+        date = "days";
+        value = QString::number(value_.toInt()*7);
+        second_value = QString::number(second_value_.toInt()*7);
+      }
+    }
   }
 
   switch (operator_) {
@@ -85,12 +103,25 @@ QString SearchTerm::ToSql() const {
         return col + " < " + value + "";
       else
         return col + " < '" + value + "'";
+    case Op_NumericDate:
+      return col + " > " + "DATETIME('now', '-" + value + " " + date +"', 'localtime')";
+    case Op_RelativeDate:
+      // Consider the time range before the first date but after the second one
+      return "(" + col + " < " + "DATETIME('now', '-" + value + " " + date +"', 'localtime') AND " +
+             col + " > " + "DATETIME('now', '-" + second_value + " " + date +"', 'localtime'))";
   }
 
   return QString();
 }
 
 bool SearchTerm::is_valid() const {
+  // We can accept also a zero value in these cases
+  if (operator_ == SearchTerm::Op_NumericDate) {
+    return value_.toInt() >= 0;
+  } else if (operator_ == SearchTerm::Op_RelativeDate) {
+    return (value_.toInt() >= 0 && value_.toInt() < second_value_.toInt());
+  }
+
   switch (TypeOf(field_)) {
     case Type_Text:   return !value_.toString().isEmpty();
     case Type_Date:   return value_.toInt() != 0;
@@ -104,7 +135,9 @@ bool SearchTerm::is_valid() const {
 bool SearchTerm::operator ==(const SearchTerm& other) const {
   return field_ == other.field_ &&
          operator_ == other.operator_ &&
-         value_ == other.value_;
+         value_ == other.value_ &&
+         date_ == other.date_ &&
+         second_value_ == other.second_value_;
 }
 
 SearchTerm::Type SearchTerm::TypeOf(Field field) {
@@ -142,6 +175,9 @@ OperatorList SearchTerm::OperatorsForType(Type type) {
     case Type_Text:
       return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
                             << Op_StartsWith << Op_EndsWith;
+    case Type_Date:
+      return OperatorList() << Op_Equals << Op_GreaterThan << Op_LessThan
+                            << Op_NumericDate << Op_RelativeDate;
     default:
       return OperatorList() << Op_Equals << Op_GreaterThan << Op_LessThan;
   }
@@ -150,10 +186,12 @@ OperatorList SearchTerm::OperatorsForType(Type type) {
 QString SearchTerm::OperatorText(Type type, Operator op) {
   if (type == Type_Date) {
     switch (op) {
-      case Op_GreaterThan: return QObject::tr("after");
-      case Op_LessThan:    return QObject::tr("before");
-      case Op_Equals:      return QObject::tr("on");
-      default:             return QString();
+      case Op_GreaterThan:  return QObject::tr("after");
+      case Op_LessThan:     return QObject::tr("before");
+      case Op_Equals:       return QObject::tr("on");
+      case Op_NumericDate:  return QObject::tr("in the last");
+      case Op_RelativeDate: return QObject::tr("between");
+      default:              return QString();
     }
   }
 
@@ -165,6 +203,7 @@ QString SearchTerm::OperatorText(Type type, Operator op) {
     case Op_GreaterThan: return QObject::tr("greater than");
     case Op_LessThan:    return QObject::tr("less than");
     case Op_Equals:      return QObject::tr("equals");
+    default:             return QString();
   }
 
   return QString();
@@ -241,19 +280,34 @@ QString SearchTerm::FieldSortOrderText(Type type, bool ascending) {
   return QString();
 }
 
+QString SearchTerm::DateName(DateType date, bool forQuery) {
+  // If forQuery is true, untranslated keywords are returned
+  switch (date) {
+    case Date_Hour:  return (forQuery ? "hours"  : QObject::tr("Hours"));
+    case Date_Day:   return (forQuery ? "days"   : QObject::tr("Days"));
+    case Date_Week:  return (forQuery ? "weeks"  : QObject::tr("Weeks"));
+    case Date_Month: return (forQuery ? "months" : QObject::tr("Months"));
+    case Date_Year:  return (forQuery ? "years"  : QObject::tr("Years"));
+  }
+  return QString();
+}
+
 } // namespace
 
 QDataStream& operator <<(QDataStream& s, const smart_playlists::SearchTerm& term) {
   s << quint8(term.field_);
   s << quint8(term.operator_);
   s << term.value_;
+  s << term.second_value_;
+  s << quint8(term.date_);
   return s;
 }
 
 QDataStream& operator >>(QDataStream& s, smart_playlists::SearchTerm& term) {
-  quint8 field, op;
-  s >> field >> op >> term.value_;
+  quint8 field, op, date;
+  s >> field >> op >> term.value_ >> term.second_value_ >> date;
   term.field_ = smart_playlists::SearchTerm::Field(field);
   term.operator_ = smart_playlists::SearchTerm::Operator(op);
+  term.date_ = smart_playlists::SearchTerm::DateType(date);
   return s;
 }

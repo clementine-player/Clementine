@@ -47,7 +47,7 @@ using smart_playlists::QueryGenerator;
 
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
-const int LibraryModel::kSmartPlaylistsVersion = 3;
+const int LibraryModel::kSmartPlaylistsVersion = 4;
 
 typedef QFuture<SqlRowList> RootQueryFuture;
 typedef QFutureWatcher<SqlRowList> RootQueryWatcher;

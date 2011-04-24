@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 15:52+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: CROATIA\n"
@@ -87,15 +87,15 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -619,6 +619,9 @@ msgstr "Klub"
 msgid "Color"
 msgstr "Boja"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Komentar"
 
@@ -798,6 +801,9 @@ msgstr "Izrađeno datuma"
 
 msgid "Date modified"
 msgstr "Izmjenjeno datuma"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "De&fault"
@@ -1020,6 +1026,12 @@ msgstr "Cijelu kolekciju"
 
 msgid "Equalizer"
 msgstr "Ekvilajzer"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Pogreška"
@@ -1277,6 +1289,9 @@ msgstr "Visoka (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Puno (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1645,6 +1660,9 @@ msgstr "Model"
 
 msgid "Monitor the library for changes"
 msgstr "Nadziri zbirku radi promjena"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Najviše reproducirano"
@@ -2566,6 +2584,9 @@ msgstr "Mapa %1 nije valjana"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Popis izvođenja '%1' je prazan ili se ne može očitati."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "Stranica koju ste zahtjevali ne postoji!"
 
@@ -2853,6 +2874,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Kada je Clementine pokrenut"
 
@@ -2907,6 +2931,9 @@ msgstr "Godina"
 
 msgid "Year - Album"
 msgstr "Godina - Album"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Jučer"
@@ -3002,18 +3029,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
 msgid "after"
 msgstr "nakon"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "prije"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "najveći prvi"
@@ -3043,6 +3079,9 @@ msgstr "jednak"
 msgid "greater than"
 msgstr "veći od"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3067,7 +3106,7 @@ msgstr "na"
 msgid "options"
 msgstr "opcije"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 

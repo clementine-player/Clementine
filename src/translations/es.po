@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-06 11:49+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: es_ES\n"
@@ -86,15 +86,15 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -626,6 +626,9 @@ msgstr "Club"
 msgid "Color"
 msgstr "Color"
 
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr ""
+
 msgid "Comment"
 msgstr "Comentario"
 
@@ -679,8 +682,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
-"todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
+"instalados todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -805,6 +808,9 @@ msgstr "Fecha de creación"
 
 msgid "Date modified"
 msgstr "Fecha de modificación"
+
+msgid "Days"
+msgstr ""
 
 msgid "De&fault"
 msgstr "Por &defecto"
@@ -1028,6 +1034,12 @@ msgstr "Colección completa"
 
 msgid "Equalizer"
 msgstr "Ecualizador"
+
+msgid "Equivalent to --log-levels *:1"
+msgstr ""
+
+msgid "Equivalent to --log-levels *:3"
+msgstr ""
 
 msgid "Error"
 msgstr "Error"
@@ -1289,6 +1301,9 @@ msgstr "Alta (1024x1024)"
 
 msgid "High (35 fps)"
 msgstr "Alta (35 fps)"
+
+msgid "Hours"
+msgstr ""
 
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
@@ -1660,6 +1675,9 @@ msgstr "Modelo"
 
 msgid "Monitor the library for changes"
 msgstr "Monitorizar cambios en la colección"
+
+msgid "Months"
+msgstr ""
 
 msgid "Most played"
 msgstr "Más reproducidas"
@@ -2585,6 +2603,9 @@ msgstr "El directorio %1 no es valido"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "La lista de reproducción '%1' estaba vacía o no pudo ser cargada."
 
+msgid "The second value must be greater than the first one!"
+msgstr ""
+
 msgid "The site you requested does not exist!"
 msgstr "¡No existe la dirección que ha indicado!"
 
@@ -2874,6 +2895,9 @@ msgstr ""
 msgid "Wav"
 msgstr "Wav"
 
+msgid "Weeks"
+msgstr ""
+
 msgid "When Clementine starts"
 msgstr "Cuando Clementine inicia"
 
@@ -2928,6 +2952,9 @@ msgstr "Año"
 
 msgid "Year - Album"
 msgstr "Año - Álbum"
+
+msgid "Years"
+msgstr ""
 
 msgid "Yesterday"
 msgstr "Ayer"
@@ -3026,18 +3053,27 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Cero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
 msgid "after"
 msgstr "después"
 
+msgid "ago"
+msgstr ""
+
+msgid "and"
+msgstr ""
+
 msgid "automatic"
 msgstr ""
 
 msgid "before"
 msgstr "antes"
+
+msgid "between"
+msgstr ""
 
 msgid "biggest first"
 msgstr "más grande primero"
@@ -3067,6 +3103,9 @@ msgstr "sea igual a"
 msgid "greater than"
 msgstr "mayor que"
 
+msgid "in the last"
+msgstr ""
+
 msgid "kbps"
 msgstr "kbps"
 
@@ -3091,7 +3130,7 @@ msgstr "en"
 msgid "options"
 msgstr "opciones"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 
