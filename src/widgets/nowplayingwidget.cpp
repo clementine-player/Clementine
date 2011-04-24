@@ -164,6 +164,10 @@ void NowPlayingWidget::CoverLoaderInitialised() {
 }
 
 void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {
+  if (!loader) {
+    return;
+  }
+
   switch (mode_) {
   case SmallSongDetails:
     cover_height_ = small_ideal_height_;
