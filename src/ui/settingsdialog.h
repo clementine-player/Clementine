@@ -44,6 +44,9 @@ class Ui_SettingsDialog;
 #ifdef HAVE_REMOTE
   class RemoteConfig;
 #endif
+#ifdef HAVE_SPOTIFY
+  class SpotifyConfig;
+#endif
 
 class GstEngine;
 
@@ -63,6 +66,9 @@ class SettingsDialog : public QDialog {
     Page_Library,
 #ifdef HAVE_LIBLASTFM
     Page_Lastfm,
+#endif
+#ifdef HAVE_SPOTIFY
+    Page_Spotify,
 #endif
     Page_Magnatune,
     Page_BackgroundStreams,
@@ -126,6 +132,9 @@ class SettingsDialog : public QDialog {
 #endif
 #ifdef HAVE_REMOTE
   RemoteConfig* remote_config_;
+#endif
+#ifdef HAVE_SPOTIFY
+  SpotifyConfig* spotify_config_;
 #endif
   const GstEngine* gst_engine_;
 

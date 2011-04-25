@@ -45,6 +45,10 @@
 # include "remote/remoteconfig.h"
 #endif
 
+#ifdef HAVE_SPOTIFY
+# include "radio/spotifyconfig.h"
+#endif
+
 #include <QColorDialog>
 #include <QDir>
 #include <QFontDialog>
@@ -116,6 +120,21 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->stacked_widget->insertWidget(Page_Lastfm, lastfm_page);
 
   connect(lastfm_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
+#endif
+
+#ifdef HAVE_SPOTIFY
+  ui_->list->insertItem(Page_Spotify, tr("Spotify"));
+  ui_->list->item(Page_Spotify)->setIcon(QIcon(":/icons/svg/spotify.svg"));
+
+  QWidget* spotify_page = new QWidget;
+  QVBoxLayout* spotify_layout = new QVBoxLayout;
+  spotify_layout->setContentsMargins(0, 0, 0, 0);
+  spotify_config_ = new SpotifyConfig;
+  spotify_layout->addWidget(spotify_config_);
+  spotify_page->setLayout(spotify_layout);
+
+  ui_->stacked_widget->insertWidget(Page_Spotify, spotify_page);
+  connect(spotify_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 #endif
 
 #ifdef HAVE_REMOTE
@@ -309,6 +328,16 @@ void SettingsDialog::accept() {
     return;
   } else {
     remote_config_->Save();
+  }
+#endif
+
+#ifdef HAVE_SPOTIFY
+  if (spotify_config_->NeedsValidation()) {
+    spotify_config_->Validate();
+    ui_->buttonBox->setEnabled(false);
+    return;
+  } else {
+    spotify_config_->Save();
   }
 #endif
 
@@ -522,6 +551,10 @@ void SettingsDialog::showEvent(QShowEvent*) {
 
 #ifdef HAVE_REMOTE
   remote_config_->Load();
+#endif
+
+#ifdef HAVE_SPOTIFY
+  spotify_config_->Load();
 #endif
 
   // Magnatune

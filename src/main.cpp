@@ -314,6 +314,7 @@ int main(int argc, char *argv[]) {
   // Initialise logging
   logging::Init();
   logging::SetLevels(options.log_levels());
+  g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN

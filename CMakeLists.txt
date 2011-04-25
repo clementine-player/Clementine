@@ -46,6 +46,7 @@ find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
+find_package(Protobuf)
 
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 pkg_check_modules(GSTREAMER gstreamer-0.10)
@@ -61,6 +62,7 @@ pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(ARCHIVE libarchive)
+pkg_check_modules(SPOTIFY libspotify)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -103,11 +105,13 @@ find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 
 if (APPLE)
   find_library(GROWL Growl)
+
   option(ENABLE_SPARKLE "Sparkle updating" ON)
   find_library(SPARKLE Sparkle)
   if (ENABLE_SPARKLE AND SPARKLE)
     set(HAVE_SPARKLE ON)
   endif (ENABLE_SPARKLE AND SPARKLE)
+
   # Uses Darwin kernel version.
   # 9.8.0  -> 10.5/Leopard
   # 10.4.0 -> 10.6/Snow Leopard
@@ -177,6 +181,7 @@ option(ENABLE_SCRIPTING_ARCHIVES "Enable support for loading scripts from archiv
 option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" ON)
 option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" OFF)
 option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
+option(ENABLE_SPOTIFY "Enable spotify support" OFF)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
@@ -221,6 +226,11 @@ endif(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
 if(ENABLE_BREAKPAD)
   set(HAVE_BREAKPAD ON)
 endif(ENABLE_BREAKPAD)
+
+if(ENABLE_SPOTIFY AND SPOTIFY_FOUND AND PROTOBUF_FOUND)
+  set(HAVE_SPOTIFY ON)
+endif(ENABLE_SPOTIFY AND SPOTIFY_FOUND AND PROTOBUF_FOUND)
+
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
@@ -357,6 +367,10 @@ if(HAVE_BREAKPAD)
   add_subdirectory(3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
 
+if(HAVE_SPOTIFY)
+  add_subdirectory(spotifyblob)
+endif(HAVE_SPOTIFY)
+
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -382,4 +396,5 @@ summary_add("Scripting support: loading archives" HAVE_LIBARCHIVE)
 summary_add("Scripting support: Python" HAVE_SCRIPTING_PYTHON)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
 summary_add("(unstable) Remote control support" HAVE_REMOTE)
+summary_add("(unstable) Spotify support" HAVE_SPOTIFY)
 summary_show()

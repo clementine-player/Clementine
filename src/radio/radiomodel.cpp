@@ -29,6 +29,9 @@
 #ifdef HAVE_LIBLASTFM
   #include "lastfmservice.h"
 #endif
+#ifdef HAVE_SPOTIFY
+  #include "spotifyservice.h"
+#endif
 
 #include <QMimeData>
 #include <QtDebug>
@@ -52,6 +55,9 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
 #ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(this));
 #endif
+#ifdef HAVE_SPOTIFY
+  AddService(new SpotifyService(this));
+#endif
   AddService(new SomaFMService(this));
   AddService(new MagnatuneService(this));
   AddService(new JamendoService(this));
@@ -70,6 +76,7 @@ void RadioModel::AddService(RadioService *service) {
   root->setData(QVariant::fromValue(service), Role_Service);
 
   invisibleRootItem()->appendRow(root);
+  qDebug() << "Adding:" << service->name();
   sServices->insert(service->name(), service);
 
   connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));

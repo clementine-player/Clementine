@@ -613,6 +613,21 @@ if(HAVE_LIBLASTFM)
   )
 endif(HAVE_LIBLASTFM)
 
+if(HAVE_SPOTIFY)
+  list(APPEND SOURCES
+    radio/spotifyconfig.cpp
+    radio/spotifyserver.cpp
+    radio/spotifyservice.cpp
+  )
+  list(APPEND HEADERS
+    radio/spotifyconfig.h
+    radio/spotifyserver.h
+    radio/spotifyservice.h
+  )
+  list(APPEND UI
+    radio/spotifyconfig.ui)
+endif(HAVE_SPOTIFY)
+
 if(APPLE)
   list(APPEND HEADERS core/macglobalshortcutbackend.h)
   list(APPEND HEADERS devices/macdevicelister.h)
@@ -994,6 +1009,10 @@ if(HAVE_BREAKPAD)
         "-framework Breakpad")
   endif (LINUX)
 endif(HAVE_BREAKPAD)
+
+if(HAVE_SPOTIFY)
+  target_link_libraries(clementine_lib clementine-spotifyblob-messages)
+endif(HAVE_SPOTIFY)
 
 if (APPLE)
   target_link_libraries(clementine_lib
