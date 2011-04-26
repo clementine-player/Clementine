@@ -1129,6 +1129,14 @@ if (APPLE)
                                                   WORLD_READ WORLD_EXECUTE)
   endif (HAVE_BREAKPAD)
 
+  if (HAVE_SPOTIFY)
+    install(FILES ${CMAKE_BINARY_DIR}/clementine-spotifyblob
+        DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources"
+        PERMISSIONS OWNER_EXECUTE OWNER_READ
+                    GROUP_EXECUTE GROUP_READ
+                    WORLD_EXECUTE WORLD_READ)
+  endif (HAVE_SPOTIFY)
+
   add_custom_command(TARGET clementine
     POST_BUILD
     COMMAND

@@ -112,6 +112,13 @@ if (APPLE)
     set(HAVE_SPARKLE ON)
   endif (ENABLE_SPARKLE AND SPARKLE)
 
+  find_library(SPOTIFY libspotify)
+  if (SPOTIFY)
+    set (SPOTIFY_FOUND ON)
+    set (SPOTIFY_INCLUDE_DIRS ${SPOTIFY})
+    set (SPOTIFY_LIBRARIES ${SPOTIFY})
+  endif (SPOTIFY)
+
   # Uses Darwin kernel version.
   # 9.8.0  -> 10.5/Leopard
   # 10.4.0 -> 10.6/Snow Leopard

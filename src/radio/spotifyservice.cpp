@@ -21,7 +21,12 @@ SpotifyService::SpotifyService(RadioModel* parent)
       starred_(NULL),
       inbox_(NULL),
       login_task_id_(0) {
+#ifdef Q_OS_DARWIN
+  blob_path_ = QCoreApplication::applicationDirPath() + "/../Resources/clementine-spotifyblob";
+#else
   blob_path_ = QCoreApplication::applicationFilePath() + "-spotifyblob";
+#endif
+  qLog(Debug) << "Loading spotify blob from:" << blob_path_;
 }
 
 SpotifyService::~SpotifyService() {
