@@ -34,6 +34,9 @@ public:
 
   void Login(const QString& username, const QString& password);
 
+  PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
+  PlaylistItem::Options playlistitem_options() const;
+
   static const char* kServiceName;
   static const char* kSettingsGroup;
 

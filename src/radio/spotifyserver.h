@@ -39,6 +39,8 @@ public:
   void LoadInbox();
   void LoadUserPlaylist(int index);
 
+  void StartPlayback(const QString& uri, quint16 port);
+
   int server_port() const;
 
 signals:

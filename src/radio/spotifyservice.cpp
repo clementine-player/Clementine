@@ -8,6 +8,7 @@
 #include <QCoreApplication>
 #include <QProcess>
 #include <QSettings>
+#include <QTcpServer>
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
@@ -194,6 +195,8 @@ void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlayl
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, RadioModel::Role_Type);
     child->setData(QVariant::fromValue(song), Role_Metadata);
+    child->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+    child->setData(QUrl(song.filename()), RadioModel::Role_Url);
 
     item->appendRow(child);
   }
@@ -219,4 +222,36 @@ void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) 
 
   song->set_filetype(Song::Type_Stream);
   song->set_valid(true);
+}
+
+PlaylistItem::Options SpotifyService::playlistitem_options() const {
+  return PlaylistItem::SpecialPlayBehaviour |
+         PlaylistItem::PauseDisabled;
+}
+
+PlaylistItem::SpecialLoadResult SpotifyService::StartLoading(const QUrl& url) {
+  // Pick an unused local port.  There's a possible race condition here -
+  // something else might grab the port before gstreamer does.
+  quint16 port = 0;
+
+  {
+    QTcpServer server;
+    server.listen(QHostAddress::LocalHost);
+    port = server.serverPort();
+  }
+
+  if (port == 0) {
+    qLog(Warning) << "Couldn't pick an unused port";
+    return PlaylistItem::SpecialLoadResult();
+  }
+
+  // Tell Spotify to start sending to this port
+  EnsureServerCreated();
+  server_->StartPlayback(url.toString(), port);
+
+  // Tell gstreamer to listen on this port
+  return PlaylistItem::SpecialLoadResult(
+        PlaylistItem::SpecialLoadResult::TrackAvailable,
+        url,
+        QUrl("tcp://localhost:" + QString::number(port)));
 }

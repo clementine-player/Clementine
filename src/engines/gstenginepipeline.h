@@ -127,7 +127,7 @@ class GstEnginePipeline : public QObject {
 
   void UpdateVolume();
   void UpdateEqualizer();
-  bool ReplaceDecodeBin(GstElement* new_bin);
+  bool ReplaceDecodeBin(GstElement* new_bin, GstElement* new_tcpsrc = NULL);
   bool ReplaceDecodeBin(const QUrl& url);
 
   void TransitionToNext();
@@ -220,7 +220,8 @@ class GstEnginePipeline : public QObject {
   GstElement* pipeline_;
 
   // Bins
-  // uridecodebin ! audiobin
+  // [tcpsrc !] uridecodebin ! audiobin
+  GstElement* tcpsrc_;
   GstElement* uridecodebin_;
   GstElement* audiobin_;
 

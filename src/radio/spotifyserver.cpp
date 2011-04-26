@@ -145,3 +145,12 @@ void SpotifyServer::LoadStarred() {
 void SpotifyServer::LoadUserPlaylist(int index) {
   LoadPlaylist(protobuf::LoadPlaylistRequest_Type_UserPlaylist, index);
 }
+
+void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
+  protobuf::SpotifyMessage message;
+  protobuf::PlaybackRequest* req = message.mutable_playback_request();
+
+  req->set_track_uri(DataCommaSizeFromQString(uri));
+  req->set_media_port(port);
+  SendMessage(message);
+}

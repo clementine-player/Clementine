@@ -402,7 +402,7 @@ int SpotifyClient::MusicDeliveryCallback(
 
     const int bytes_per_sample = 2;
     const int byte_rate = format->sample_rate * format->channels * bytes_per_sample;
-    const quint32 data_size = me->media_length_msec_ * byte_rate / 1000;
+    const quint32 data_size = me->media_length_msec_ * byte_rate;
 
     // RIFF header
     s.writeRawData("RIFF", 4);
@@ -479,12 +479,14 @@ void SpotifyClient::StartPlayback(const protobuf::PlaybackRequest& req) {
   }
 
   // Create the media socket
-  if (media_socket_) {
-    media_socket_->close();
-  }
+  QTcpSocket* old_media_socket = media_socket_;
   media_socket_ = new QTcpSocket(this);
   media_socket_->connectToHost(QHostAddress::LocalHost, req.media_port());
   connect(media_socket_, SIGNAL(disconnected()), SLOT(MediaSocketDisconnected()));
+
+  if (old_media_socket) {
+    old_media_socket->close();
+  }
 
   qLog(Info) << "Starting playback of uri" << req.track_uri().c_str()
              << "to port" << req.media_port();
