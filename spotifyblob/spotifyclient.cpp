@@ -227,6 +227,7 @@ void SpotifyClient::GetPlaylists() {
     const int type = sp_playlistcontainer_playlist_type(container, i);
     sp_playlist* playlist = sp_playlistcontainer_playlist(container, i);
 
+    qLog(Debug) << "Playlist loaded:" << sp_playlist_is_loaded(playlist);
     qLog(Debug) << "Got playlist" << i << type << sp_playlist_name(playlist);
 
     if (type != SP_PLAYLIST_TYPE_PLAYLIST) {
