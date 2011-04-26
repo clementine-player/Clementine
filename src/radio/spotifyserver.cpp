@@ -103,5 +103,45 @@ void SpotifyServer::ProtocolSocketReadyRead() {
     emit LoginCompleted(response.success());
   } else if (message.has_playlists_updated()) {
     emit PlaylistsUpdated(message.playlists_updated());
+  } else if (message.has_load_playlist_response()) {
+    const protobuf::LoadPlaylistResponse& response = message.load_playlist_response();
+
+    switch (response.request().type()) {
+      case protobuf::LoadPlaylistRequest_Type_Inbox:
+        emit InboxLoaded(response);
+        break;
+
+      case protobuf::LoadPlaylistRequest_Type_Starred:
+        emit StarredLoaded(response);
+        break;
+
+      case protobuf::LoadPlaylistRequest_Type_UserPlaylist:
+        emit UserPlaylistLoaded(response);
+        break;
+    }
   }
+}
+
+void SpotifyServer::LoadPlaylist(protobuf::LoadPlaylistRequest_Type type, int index) {
+  protobuf::SpotifyMessage message;
+  protobuf::LoadPlaylistRequest* req = message.mutable_load_playlist_request();
+
+  req->set_type(type);
+  if (index != -1) {
+    req->set_user_playlist_index(index);
+  }
+
+  SendMessage(message);
+}
+
+void SpotifyServer::LoadInbox() {
+  LoadPlaylist(protobuf::LoadPlaylistRequest_Type_Inbox);
+}
+
+void SpotifyServer::LoadStarred() {
+  LoadPlaylist(protobuf::LoadPlaylistRequest_Type_Starred);
+}
+
+void SpotifyServer::LoadUserPlaylist(int index) {
+  LoadPlaylist(protobuf::LoadPlaylistRequest_Type_UserPlaylist, index);
 }

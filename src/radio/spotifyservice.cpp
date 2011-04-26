@@ -38,6 +38,21 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
       EnsureServerCreated();
       break;
 
+    case Type_InboxPlaylist:
+      EnsureServerCreated();
+      server_->LoadInbox();
+      break;
+
+    case Type_StarredPlaylist:
+      EnsureServerCreated();
+      server_->LoadStarred();
+      break;
+
+    case Type_UserPlaylist:
+      EnsureServerCreated();
+      server_->LoadUserPlaylist(item->data(Role_UserPlaylistIndex).toInt());
+      break;
+
     default:
       break;
   }
@@ -86,6 +101,12 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   connect(server_, SIGNAL(LoginCompleted(bool)), SLOT(LoginCompleted(bool)));
   connect(server_, SIGNAL(PlaylistsUpdated(protobuf::Playlists)),
           SLOT(PlaylistsUpdated(protobuf::Playlists)));
+  connect(server_, SIGNAL(InboxLoaded(protobuf::LoadPlaylistResponse)),
+          SLOT(InboxLoaded(protobuf::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(StarredLoaded(protobuf::LoadPlaylistResponse)),
+          SLOT(StarredLoaded(protobuf::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(UserPlaylistLoaded(protobuf::LoadPlaylistResponse)),
+          SLOT(UserPlaylistLoaded(protobuf::LoadPlaylistResponse)));
 
   connect(blob_process_,
           SIGNAL(error(QProcess::ProcessError)),
@@ -135,10 +156,67 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
     const protobuf::Playlists::Playlist& msg = response.playlist(i);
 
     QStandardItem* item = new QStandardItem(QStringFromStdString(msg.name()));
-    item->setData(Type_Playlist, RadioModel::Role_Type);
+    item->setData(Type_UserPlaylist, RadioModel::Role_Type);
     item->setData(true, RadioModel::Role_CanLazyLoad);
-    item->setData(msg.index(), Role_PlaylistIndex);
+    item->setData(msg.index(), Role_UserPlaylistIndex);
 
     root_->appendRow(item);
+    playlists_ << item;
   }
+}
+
+void SpotifyService::InboxLoaded(const protobuf::LoadPlaylistResponse& response) {
+  FillPlaylist(inbox_, response);
+}
+
+void SpotifyService::StarredLoaded(const protobuf::LoadPlaylistResponse& response) {
+  FillPlaylist(starred_, response);
+}
+
+void SpotifyService::UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response) {
+  // Find a playlist with this index
+  foreach (QStandardItem* item, playlists_) {
+    if (item->data(Role_UserPlaylistIndex).toInt() == response.request().user_playlist_index()) {
+      FillPlaylist(item, response);
+      break;
+    }
+  }
+}
+
+void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response) {
+  if (item->hasChildren())
+    item->removeRows(0, item->rowCount());
+
+  for (int i=0 ; i<response.track_size() ; ++i) {
+    Song song;
+    SongFromProtobuf(response.track(i), &song);
+
+    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
+    child->setData(Type_Track, RadioModel::Role_Type);
+    child->setData(QVariant::fromValue(song), Role_Metadata);
+
+    item->appendRow(child);
+  }
+}
+
+void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) const {
+  song->set_rating(track.starred() ? 1.0 : 0.0);
+  song->set_title(QStringFromStdString(track.title()));
+  song->set_album(QStringFromStdString(track.album()));
+  song->set_length_nanosec(track.duration_msec() * kNsecPerMsec);
+  song->set_score(track.popularity());
+  song->set_disc(track.disc());
+  song->set_track(track.track());
+  song->set_year(track.year());
+  song->set_filename(QStringFromStdString(track.uri()));
+
+  QStringList artists;
+  for (int i=0 ; i<track.artist_size() ; ++i) {
+    artists << QStringFromStdString(track.artist(i));
+  }
+
+  song->set_artist(artists.join(", "));
+
+  song->set_filetype(Song::Type_Stream);
+  song->set_valid(true);
 }

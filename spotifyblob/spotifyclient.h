@@ -22,6 +22,7 @@
 #ifndef SPOTIFYCLIENT_H
 #define SPOTIFYCLIENT_H
 
+#include "spotifymessages.pb.h"
 #include "spotifymessageutils.h"
 
 #include <QObject>
@@ -54,6 +55,7 @@ private:
   static void NotifyMainThreadCallback(sp_session* session);
   static void LogMessageCallback(sp_session* session, const char* data);
   static void SearchCompleteCallback(sp_search* result, void* userdata);
+  static void MetadataUpdatedCallback(sp_session* session);
 
   // Spotify playlist container callbacks.
   static void PlaylistAddedCallback(
@@ -68,10 +70,25 @@ private:
   static void PlaylistContainerLoadedCallback(
     sp_playlistcontainer* pc, void* userdata);
 
+  // Spotify playlist callbacks - when loading a playlist
+  static void PlaylistStateChanged(sp_playlist* pl, void* userdata);
+
   // Request handlers.
   void Login(const QString& username, const QString& password);
   void GetPlaylists();
   void Search(const QString& query);
+  void LoadPlaylist(const protobuf::LoadPlaylistRequest& req);
+
+  void ConvertTrack(sp_track* track, protobuf::Track* pb);
+
+private:
+  struct PendingLoadPlaylist {
+    protobuf::LoadPlaylistRequest request_;
+
+    sp_playlist* playlist_;
+
+    QList<sp_track*> tracks_;
+  };
 
   QByteArray api_key_;
 
@@ -80,9 +97,12 @@ private:
   sp_session_config spotify_config_;
   sp_session_callbacks spotify_callbacks_;
   sp_playlistcontainer_callbacks playlistcontainer_callbacks_;
+  sp_playlist_callbacks load_playlist_callbacks_;
   sp_session* session_;
 
   QTimer* events_timer_;
+
+  QList<PendingLoadPlaylist> pending_load_playlists_;
 };
 
 #endif // SPOTIFYCLIENT_H

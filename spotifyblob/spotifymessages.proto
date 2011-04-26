@@ -40,8 +40,39 @@ message Playlists {
   repeated Playlist playlist = 1;
 }
 
+message Track {
+  required bool starred = 1;
+  required string title = 2;
+  repeated string artist = 3;
+  required string album = 4;
+  required int32 duration_msec = 5;
+  required int32 popularity = 6;
+  required int32 disc = 7;
+  required int32 track = 8;
+  required int32 year = 9;
+  required string uri = 10;
+}
+
+message LoadPlaylistRequest {
+  enum Type {
+    Starred = 1;
+    Inbox = 2;
+    UserPlaylist = 3;
+  }
+
+  required Type type = 1;
+  optional int32 user_playlist_index = 2;
+}
+
+message LoadPlaylistResponse {
+  required LoadPlaylistRequest request = 1;
+  repeated Track track = 2;
+}
+
 message SpotifyMessage {
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
   optional Playlists playlists_updated = 3;
+  optional LoadPlaylistRequest load_playlist_request = 4;
+  optional LoadPlaylistResponse load_playlist_response = 5;
 }

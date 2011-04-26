@@ -35,17 +35,26 @@ public:
   void Init();
   void Login(const QString& username, const QString& password);
 
+  void LoadStarred();
+  void LoadInbox();
+  void LoadUserPlaylist(int index);
+
   int server_port() const;
 
 signals:
   void LoginCompleted(bool success);
   void PlaylistsUpdated(const protobuf::Playlists& playlists);
 
+  void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
+  void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
+
 private slots:
   void NewConnection();
   void ProtocolSocketReadyRead();
 
 private:
+  void LoadPlaylist(protobuf::LoadPlaylistRequest_Type type, int index = -1);
   void SendMessage(const protobuf::SpotifyMessage& message);
 
   QTcpServer* server_;

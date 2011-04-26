@@ -38,15 +38,19 @@ SpotifyClient::SpotifyClient(QObject* parent)
   memset(&spotify_callbacks_, 0, sizeof(spotify_callbacks_));
   memset(&spotify_config_, 0, sizeof(spotify_config_));
   memset(&playlistcontainer_callbacks_, 0, sizeof(playlistcontainer_callbacks_));
+  memset(&load_playlist_callbacks_, 0, sizeof(load_playlist_callbacks_));
 
   spotify_callbacks_.logged_in = &LoggedInCallback;
   spotify_callbacks_.notify_main_thread = &NotifyMainThreadCallback;
   spotify_callbacks_.log_message = &LogMessageCallback;
+  spotify_callbacks_.metadata_updated = &MetadataUpdatedCallback;
 
   playlistcontainer_callbacks_.container_loaded = &PlaylistContainerLoadedCallback;
   playlistcontainer_callbacks_.playlist_added = &PlaylistAddedCallback;
   playlistcontainer_callbacks_.playlist_moved = &PlaylistMovedCallback;
   playlistcontainer_callbacks_.playlist_removed = &PlaylistRemovedCallback;
+
+  load_playlist_callbacks_.playlist_state_changed = &PlaylistStateChanged;
 
   spotify_config_.api_version = SPOTIFY_API_VERSION;  // From libspotify/api.h
   spotify_config_.cache_location = strdup(QDir::tempPath().toLocal8Bit().constData());
@@ -74,7 +78,7 @@ SpotifyClient::~SpotifyClient() {
 }
 
 void SpotifyClient::Init(quint16 port) {
-  qLog(Debug) << "connecting to port" << port;
+  qLog(Debug) << "Connecting to port" << port;
 
   socket_->connectToHost(QHostAddress::LocalHost, port);
 }
@@ -108,7 +112,7 @@ void SpotifyClient::ProcessEvents() {
 }
 
 void SpotifyClient::LogMessageCallback(sp_session* session, const char* data) {
-  qLog(Debug) << "libspotify:" << data;
+  qLog(Debug) << "libspotify:" << QString::fromUtf8(data).trimmed();
 }
 
 void SpotifyClient::Search(const QString& query) {
@@ -153,6 +157,8 @@ void SpotifyClient::SocketReadyRead() {
   if (message.has_login_request()) {
     const protobuf::LoginRequest& r = message.login_request();
     Login(QStringFromStdString(r.username()), QStringFromStdString(r.password()));
+  } else if (message.has_load_playlist_request()) {
+    LoadPlaylist(message.load_playlist_request());
   }
 }
 
@@ -227,4 +233,146 @@ void SpotifyClient::GetPlaylists() {
   }
 
   SendMessage(socket_, message);
+}
+
+void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
+  PendingLoadPlaylist pending_load;
+  pending_load.request_ = req;
+  pending_load.playlist_ = NULL;
+
+  switch (req.type()) {
+    case protobuf::LoadPlaylistRequest_Type_Inbox:
+      pending_load.playlist_ = sp_session_inbox_create(session_);
+      break;
+
+    case protobuf::LoadPlaylistRequest_Type_Starred:
+      pending_load.playlist_ = sp_session_starred_create(session_);
+      break;
+
+    case protobuf::LoadPlaylistRequest_Type_UserPlaylist: {
+      const int index = req.user_playlist_index();
+      sp_playlistcontainer* pc = sp_session_playlistcontainer(session_);
+
+      if (pc && index <= sp_playlistcontainer_num_playlists(pc)) {
+        if (sp_playlistcontainer_playlist_type(pc, index) == SP_PLAYLIST_TYPE_PLAYLIST) {
+          pending_load.playlist_ = sp_playlistcontainer_playlist(pc, index);
+          sp_playlist_add_ref(pending_load.playlist_);
+        }
+      }
+
+      break;
+    }
+  }
+
+  // A null playlist might mean the user wasn't logged in, or an invalid
+  // playlist index was requested, so we'd better return an error straight away.
+  if (!pending_load.playlist_) {
+    qLog(Warning) << "Invalid playlist requested or not logged in";
+
+    protobuf::SpotifyMessage message;
+    protobuf::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
+    *response->mutable_request() = req;
+    SendMessage(socket_, message);
+    return;
+  }
+
+  sp_playlist_add_callbacks(pending_load.playlist_, &load_playlist_callbacks_, this);
+  pending_load_playlists_ << pending_load;
+
+  PlaylistStateChanged(pending_load.playlist_, this);
+}
+
+void SpotifyClient::PlaylistStateChanged(sp_playlist* pl, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  // If the playlist isn't loaded yet we have to wait
+  if (!sp_playlist_is_loaded(pl)) {
+    qLog(Debug) << "Playlist isn't loaded yet, waiting";
+    return;
+  }
+
+  // Find this playlist's pending load object
+  int pending_load_index = -1;
+  PendingLoadPlaylist* pending_load = NULL;
+  for (int i=0 ; i<me->pending_load_playlists_.count() ; ++i) {
+    if (me->pending_load_playlists_[i].playlist_ == pl) {
+      pending_load_index = i;
+      pending_load = &me->pending_load_playlists_[i];
+      break;
+    }
+  }
+
+  if (!pending_load) {
+    qLog(Warning) << "Playlist not found in pending load list";
+    return;
+  }
+
+  // If the playlist was just loaded then get all its tracks and ref them
+  if (pending_load->tracks_.isEmpty()) {
+    const int count = sp_playlist_num_tracks(pl);
+    for (int i=0 ; i<count ; ++i) {
+      sp_track* track = sp_playlist_track(pl, i);
+      sp_track_add_ref(track);
+      pending_load->tracks_ << track;
+    }
+  }
+
+  // If any of the tracks aren't loaded yet we have to wait
+  foreach (sp_track* track, pending_load->tracks_) {
+    if (!sp_track_is_loaded(track)) {
+      qLog(Debug) << "One or more tracks aren't loaded yet, waiting";
+      return;
+    }
+  }
+
+  // Everything is loaded so send the response protobuf and unref everything.
+  protobuf::SpotifyMessage message;
+  protobuf::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
+
+  *response->mutable_request() = pending_load->request_;
+  foreach (sp_track* track, pending_load->tracks_) {
+    me->ConvertTrack(track, response->add_track());
+    sp_track_release(track);
+  }
+  me->SendMessage(me->socket_, message);
+
+  // Unref the playlist and remove our callbacks
+  sp_playlist_remove_callbacks(pl, &me->load_playlist_callbacks_, me);
+  sp_playlist_release(pl);
+
+  // Remove the pending load object
+  me->pending_load_playlists_.removeAt(pending_load_index);
+}
+
+void SpotifyClient::ConvertTrack(sp_track* track, protobuf::Track* pb) {
+  sp_album* album = sp_track_album(track);
+
+  pb->set_starred(sp_track_is_starred(session_, track));
+  pb->set_title(sp_track_name(track));
+  pb->set_album(sp_album_name(album));
+  pb->set_year(sp_album_year(album));
+  pb->set_duration_msec(sp_track_duration(track));
+  pb->set_popularity(sp_track_popularity(track));
+  pb->set_disc(sp_track_disc(track));
+  pb->set_track(sp_track_index(track));
+
+  for (int i=0 ; i<sp_track_num_artists(track) ; ++i) {
+    pb->add_artist(sp_artist_name(sp_track_artist(track, i)));
+  }
+
+  // Blugh
+  char uri[256];
+  sp_link* link = sp_link_create_from_track(track, 0);
+  sp_link_as_string(link, uri, sizeof(uri));
+  sp_link_release(link);
+
+  pb->set_uri(uri);
+}
+
+void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
+
+  foreach (const PendingLoadPlaylist& load, me->pending_load_playlists_) {
+    PlaylistStateChanged(load.playlist_, me);
+  }
 }

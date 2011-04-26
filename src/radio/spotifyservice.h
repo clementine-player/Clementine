@@ -20,11 +20,13 @@ public:
   enum Type {
     Type_StarredPlaylist = RadioModel::TypeCount,
     Type_InboxPlaylist,
-    Type_Playlist,
+    Type_UserPlaylist,
+    Type_Track,
   };
 
   enum Role {
-    Role_PlaylistIndex = RadioModel::RoleCount,
+    Role_UserPlaylistIndex = RadioModel::RoleCount,
+    Role_Metadata,
   };
 
   virtual QStandardItem* CreateRootItem();
@@ -44,11 +46,16 @@ protected:
 private:
   void EnsureServerCreated(const QString& username = QString(),
                            const QString& password = QString());
+  void FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response);
+  void SongFromProtobuf(const protobuf::Track& track, Song* song) const;
 
 private slots:
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success);
   void PlaylistsUpdated(const protobuf::Playlists& response);
+  void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
+  void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
 
 private:
   SpotifyServer* server_;
