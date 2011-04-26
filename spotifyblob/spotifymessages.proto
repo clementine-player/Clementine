@@ -1,0 +1,26 @@
+package protobuf;
+
+message LoginRequest {
+  required string username = 1;
+  required string password = 2;
+}
+
+message LoginResponse {
+  required bool success = 1;
+  required string error = 2;
+}
+
+message Playlists {
+  message Playlist {
+    required int32 index = 1;
+    required string name = 2;
+  }
+
+  repeated Playlist playlist = 1;
+}
+
+message SpotifyMessage {
+  optional LoginRequest login_request = 1;
+  optional LoginResponse login_response = 2;
+  optional Playlists playlists_updated = 3;
+}

@@ -18,14 +18,15 @@
 #ifndef SPOTIFYSERVER_H
 #define SPOTIFYSERVER_H
 
-#include <QObject>
+#include "spotifyblob/spotifymessages.pb.h"
+#include "spotifyblob/spotifymessageutils.h"
 
-class RequestMessage;
+#include <QObject>
 
 class QTcpServer;
 class QTcpSocket;
 
-class SpotifyServer : public QObject {
+class SpotifyServer : public QObject, protected SpotifyMessageUtils {
   Q_OBJECT
 
 public:
@@ -37,18 +38,22 @@ public:
   int server_port() const;
 
 signals:
-  void ClientConnected();
   void LoginCompleted(bool success);
+  void PlaylistsUpdated(const protobuf::Playlists& playlists);
 
 private slots:
   void NewConnection();
   void ProtocolSocketReadyRead();
 
 private:
-  void SendMessage(const RequestMessage& message);
+  void SendMessage(const protobuf::SpotifyMessage& message);
 
   QTcpServer* server_;
   QTcpSocket* protocol_socket_;
+  bool logged_in_;
+
+  QList<protobuf::SpotifyMessage> queued_login_messages_;
+  QList<protobuf::SpotifyMessage> queued_messages_;
 };
 
 #endif // SPOTIFYSERVER_H

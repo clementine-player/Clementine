@@ -1,7 +1,9 @@
 #ifndef SPOTIFYSERVICE_H
 #define SPOTIFYSERVICE_H
 
+#include "radiomodel.h"
 #include "radioservice.h"
+#include "spotifyblob/spotifymessages.pb.h"
 
 #include <QProcess>
 #include <QTimer>
@@ -12,14 +14,23 @@ class SpotifyService : public RadioService {
   Q_OBJECT
 
 public:
-  explicit SpotifyService(RadioModel* parent);
-  virtual ~SpotifyService();
+  SpotifyService(RadioModel* parent);
+  ~SpotifyService();
+
+  enum Type {
+    Type_StarredPlaylist = RadioModel::TypeCount,
+    Type_InboxPlaylist,
+    Type_Playlist,
+  };
+
+  enum Role {
+    Role_PlaylistIndex = RadioModel::RoleCount,
+  };
 
   virtual QStandardItem* CreateRootItem();
   virtual void LazyPopulate(QStandardItem* parent);
 
   void Login(const QString& username, const QString& password);
-  void Search(const QString& query);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -30,10 +41,14 @@ signals:
 protected:
   virtual QModelIndex GetCurrentIndex();
 
+private:
+  void EnsureServerCreated(const QString& username = QString(),
+                           const QString& password = QString());
+
 private slots:
-  void ClientConnected();
-  void LoginCompleted(bool success);
   void BlobProcessError(QProcess::ProcessError error);
+  void LoginCompleted(bool success);
+  void PlaylistsUpdated(const protobuf::Playlists& response);
 
 private:
   SpotifyServer* server_;
@@ -41,8 +56,12 @@ private:
   QString blob_path_;
   QProcess* blob_process_;
 
-  QString pending_username_;
-  QString pending_password_;
+  QStandardItem* root_;
+  QStandardItem* starred_;
+  QStandardItem* inbox_;
+  QList<QStandardItem*> playlists_;
+
+  int login_task_id_;
 };
 
 #endif

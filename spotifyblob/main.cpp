@@ -1,7 +1,6 @@
 #include <QCoreApplication>
 #include <QStringList>
 
-#include "spotifyblob.h"
 #include "spotifyclient.h"
 #include "core/logging.h"
 
@@ -17,8 +16,6 @@ int main(int argc, char** argv) {
   }
 
   SpotifyClient client;
-  SpotifyBlob blob(&client);
-
   client.Init(arguments[1].toInt());
 
   return a.exec();

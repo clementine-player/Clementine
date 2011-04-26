@@ -72,6 +72,8 @@ public:
     // a pointer to a RadioService.  Services should not set this field
     // themselves.
     Role_Service,
+
+    RoleCount
   };
 
   enum Type {

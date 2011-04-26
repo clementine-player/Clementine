@@ -8,28 +8,18 @@ link_directories(${SPOTIFY_LIBRARY_DIRS})
 set(EXECUTABLE_OUTPUT_PATH ..)
 
 
-set(SOURCES
-  main.cpp
-  spotifyblob.cpp
-  spotifyclient.cpp
-
-  ../src/core/logging.cpp
+set(COMMON_SOURCES
+  spotifymessageutils.cpp
 )
 
-set(HEADERS
-  spotifyblob.h
-  spotifyclient.h
+set(COMMON_MESSAGES
+  spotifymessages.proto
 )
 
-set(MESSAGES
-  messages.proto
-)
-
-qt4_wrap_cpp(MOC ${HEADERS})
-protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${MESSAGES})
-
+protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${COMMON_MESSAGES})
 
 add_library(clementine-spotifyblob-messages STATIC
+  ${COMMON_SOURCES}
   ${PROTO_SOURCES}
 )
 
@@ -38,6 +28,19 @@ target_link_libraries(clementine-spotifyblob-messages
   ${CMAKE_THREAD_LIBS_INIT}
 )
 
+
+set(SOURCES
+  main.cpp
+  spotifyclient.cpp
+
+  ../src/core/logging.cpp
+)
+
+set(HEADERS
+  spotifyclient.h
+)
+
+qt4_wrap_cpp(MOC ${HEADERS})
 
 add_executable(clementine-spotifyblob
   ${SOURCES}

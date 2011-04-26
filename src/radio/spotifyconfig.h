@@ -29,6 +29,7 @@ class SpotifyService;
 
 class SpotifyConfig : public QWidget {
   Q_OBJECT
+
 public:
   SpotifyConfig(QWidget* parent = 0);
   ~SpotifyConfig();

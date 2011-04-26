@@ -18,17 +18,16 @@
 #include "spotifyserver.h"
 #include "core/logging.h"
 
-#include "spotifyblob/messages.pb.h"
+#include "spotifyblob/spotifymessages.pb.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>
 
-#include <boost/scoped_array.hpp>
-
 SpotifyServer::SpotifyServer(QObject* parent)
   : QObject(parent),
     server_(new QTcpServer(this)),
-    protocol_socket_(NULL)
+    protocol_socket_(NULL),
+    logged_in_(false)
 {
   connect(server_, SIGNAL(newConnection()), SLOT(NewConnection()));
 }
@@ -49,60 +48,60 @@ void SpotifyServer::NewConnection() {
 
   qLog(Info) << "Connection from port" << protocol_socket_->peerPort();
 
-  emit ClientConnected();
+  // Send any login messages that were queued before the client connected
+  foreach (const protobuf::SpotifyMessage& message, queued_login_messages_) {
+    SendMessage(message);
+  }
+  queued_login_messages_.clear();
+}
+
+void SpotifyServer::SendMessage(const protobuf::SpotifyMessage& message) {
+  const bool is_login_message = message.has_login_request();
+
+  QList<protobuf::SpotifyMessage>* queue =
+      is_login_message ? &queued_login_messages_ : &queued_messages_;
+
+  if (!protocol_socket_ || (!is_login_message && !logged_in_)) {
+    queue->append(message);
+  } else {
+    SpotifyMessageUtils::SendMessage(protocol_socket_, message);
+  }
 }
 
 void SpotifyServer::Login(const QString& username, const QString& password) {
-  const QByteArray username_bytes(username.toUtf8());
-  const QByteArray password_bytes(password.toUtf8());
+  protobuf::SpotifyMessage message;
 
-  RequestMessage message;
-
-  LoginRequest* request = message.mutable_login_request();
-  request->set_username(username_bytes.constData(), username_bytes.length());
-  request->set_password(password_bytes.constData(), password_bytes.length());
+  protobuf::LoginRequest* request = message.mutable_login_request();
+  request->set_username(DataCommaSizeFromQString(username));
+  request->set_password(DataCommaSizeFromQString(password));
 
   SendMessage(message);
 }
 
-void SpotifyServer::SendMessage(const RequestMessage& message) {
-  qLog(Debug) << message.DebugString().c_str();
-
-  std::string data(message.SerializeAsString());
-
-  QDataStream s(protocol_socket_);
-  s << quint32(data.length());
-  s.writeRawData(data.data(), data.length());
-}
-
 void SpotifyServer::ProtocolSocketReadyRead() {
-  QDataStream s(protocol_socket_);
-
-  quint32 length = 0;
-  s >> length;
-
-  if (length == 0) {
-    return;
-  }
-
-  boost::scoped_array<char> data(new char[length]);
-  s.readRawData(data.get(), length);
-
-  ResponseMessage message;
-  if (!message.ParseFromArray(data.get(), length)) {
-    qLog(Error) << "Malformed protobuf message";
+  protobuf::SpotifyMessage message;
+  if (!ReadMessage(protocol_socket_, &message)) {
     protocol_socket_->deleteLater();
     protocol_socket_ = NULL;
     return;
   }
 
-  qLog(Debug) << message.DebugString().c_str();
-
   if (message.has_login_response()) {
-    const LoginResponse& response = message.login_response();
+    const protobuf::LoginResponse& response = message.login_response();
+    logged_in_ = response.success();
+
     if (!response.success()) {
-      qLog(Info) << QString::fromUtf8(response.error().data(), response.error().size());
+      qLog(Info) << QStringFromStdString(response.error());
+    } else {
+      // Send any messages that were queued before the client logged in
+      foreach (const protobuf::SpotifyMessage& message, queued_messages_) {
+        SendMessage(message);
+      }
+      queued_messages_.clear();
     }
+
     emit LoginCompleted(response.success());
+  } else if (message.has_playlists_updated()) {
+    emit PlaylistsUpdated(message.playlists_updated());
   }
 }
