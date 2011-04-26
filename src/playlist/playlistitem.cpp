@@ -18,6 +18,7 @@
 #include "playlistitem.h"
 #include "songplaylistitem.h"
 #include "core/logging.h"
+#include "core/song.h"
 #include "library/library.h"
 #include "library/libraryplaylistitem.h"
 #include "radio/jamendoplaylistitem.h"
@@ -64,16 +65,11 @@ PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& 
 }
 
 void PlaylistItem::BindToQuery(QSqlQuery* query) const {
-  query->bindValue(1, type());
-  query->bindValue(2, DatabaseValue(Column_LibraryId));
-  query->bindValue(3, DatabaseValue(Column_Url));
-  query->bindValue(4, DatabaseValue(Column_Title));
-  query->bindValue(5, DatabaseValue(Column_Artist));
-  query->bindValue(6, DatabaseValue(Column_Album));
-  query->bindValue(7, DatabaseValue(Column_Length));
-  query->bindValue(8, DatabaseValue(Column_RadioService));
-  query->bindValue(9, DatabaseValue(Column_Beginning));
-  query->bindValue(10, DatabaseValue(Column_CuePath));
+  query->bindValue(":type", type());
+  query->bindValue(":library_id", DatabaseValue(Column_LibraryId));
+  query->bindValue(":radio_service", DatabaseValue(Column_RadioService));
+
+  DatabaseSongMetadata().BindToQuery(query);
 }
 
 void PlaylistItem::SetTemporaryMetadata(const Song& metadata) {

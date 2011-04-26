@@ -54,14 +54,12 @@ public:
     Role_PlayBehaviour,
 
     // The URL of the media for this item.  This is required if the
-    // PlayBehaviour is set to something other than None.  How the URL is
-    // used depends on the PlayBehaviour.
+    // PlayBehaviour is set to PlayBehaviour_UseSongLoader.
     Role_Url,
 
-    // These fields are used to populate the playlist columns for this item
-    // only when using PlayBehaviour_SingleItem.  They are ignored otherwise
-    Role_Title,
-    Role_Artist,
+    // The metadata used in the item that is added to the playlist if the
+    // PlayBehaviour is set to PlayBehaviour_SingleItem.  Ignored otherwise.
+    Role_SongMetadata,
 
     // If this is set to true then the model will call the service's
     // LazyPopulate method when this item is expanded.  Use this if your item's

@@ -38,6 +38,8 @@ using smart_playlists::GeneratorPtr;
 
 using boost::shared_ptr;
 
+const int PlaylistBackend::kSongTableJoins = 4;
+
 PlaylistBackend::PlaylistBackend(QObject* parent)
   : QObject(parent),
     library_(NULL)
@@ -109,8 +111,8 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
   QString query = "SELECT songs.ROWID, " + Song::JoinSpec("songs") + ","
                   "       magnatune_songs.ROWID, " + Song::JoinSpec("magnatune_songs") + ","
                   "       jamendo_songs.ROWID, " + Song::JoinSpec("jamendo_songs") + ","
-                  "       p.type, p.url, p.title, p.artist, p.album, p.length,"
-                  "       p.radio_service, p.beginning, p.cue_path"
+                  "       p.ROWID, " + Song::JoinSpec("p") + ","
+                  "       p.type, p.radio_service"
                   " FROM playlist_items AS p"
                   " LEFT JOIN songs"
                   "    ON p.library_id = songs.ROWID"
@@ -140,7 +142,7 @@ QFuture<PlaylistItemPtr> PlaylistBackend::GetPlaylistItems(int playlist) {
 
 PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state) {
   // The song tables get joined first, plus one each for the song ROWIDs
-  const int playlist_row = (Song::kColumns.count() + 1) * 3;
+  const int playlist_row = (Song::kColumns.count() + 1) * kSongTableJoins;
 
   PlaylistItemPtr item(PlaylistItem::NewFromType(row.value(playlist_row).toString()));
   if (item) {
@@ -219,9 +221,10 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
 
   QSqlQuery clear("DELETE FROM playlist_items WHERE playlist = :playlist", db);
   QSqlQuery insert("INSERT INTO playlist_items"
-                   " (playlist, type, library_id, url, title, artist, album,"
-                   "  length, radio_service, beginning, cue_path)"
-                   " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", db);
+                   " (playlist, type, library_id, radio_service, " +
+                      Song::kColumnSpec + ")"
+                   " VALUES (:playlist, :type, :library_id, :radio_service, " +
+                             Song::kBindSpec + ")", db);
   QSqlQuery update("UPDATE playlists SET "
                    "   last_played=:last_played,"
                    "   dynamic_playlist_type=:dynamic_type,"
@@ -239,7 +242,7 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
 
   // Save the new ones
   foreach (PlaylistItemPtr item, items) {
-    insert.bindValue(0, playlist);
+    insert.bindValue(":playlist", playlist);
     item->BindToQuery(&insert);
 
     insert.exec();

@@ -122,12 +122,15 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       self.root.removeRows(0, self.root.rowCount())
 
     for stream in streams:
+      song = clementine.Song()
+      song.set_title(stream["name"])
+      song.set_artist(self.SERVICE_DESCRIPTION)
+      song.set_filename("digitallyimported://%s" % stream["key"])
+
       item = QStandardItem(QIcon(":last.fm/icon_radio.png"), stream["name"])
       item.setData(stream["description"], PyQt4.QtCore.Qt.ToolTipRole)
-      item.setData("digitallyimported://%s" % stream["key"], clementine.RadioModel.Role_Url)
       item.setData(clementine.RadioModel.PlayBehaviour_SingleItem, clementine.RadioModel.Role_PlayBehaviour)
-      item.setData(stream["name"], clementine.RadioModel.Role_Title)
-      item.setData(self.SERVICE_DESCRIPTION, clementine.RadioModel.Role_Artist)
+      item.setData(song, clementine.RadioModel.Role_SongMetadata)
       self.root.appendRow(item)
 
   def playlistitem_options(self):

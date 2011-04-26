@@ -90,7 +90,7 @@ int DeviceDatabaseBackend::AddDevice(const Device& device) {
   QString schema = QString::fromUtf8(schema_file.readAll());
   schema.replace("%deviceid", QString::number(id));
 
-  db_->ExecCommands(schema, db);
+  db_->ExecCommands(schema, db, 0);
 
   t.Commit();
   return id;

@@ -158,28 +158,30 @@ void SomaFMService::RefreshChannelsFinished() {
 }
 
 void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
-  QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
-  item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+  Song song;
 
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
       case QXmlStreamReader::EndElement:
-        if (item->data(RadioModel::Role_Url).toString().isNull()) {
-          // Didn't find a URL
-          delete item;
-        } else {
+        if (!song.url().isEmpty()) {
+          QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
+          item->setText(song.title());
+
+          song.set_title("SomaFM " + song.title());
+          item->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
+          item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
+
           root_->appendRow(item);
         }
         return;
 
       case QXmlStreamReader::StartElement:
         if (reader.name() == "title") {
-          item->setText(reader.readElementText());
-          item->setData("SomaFM " + item->text(), RadioModel::Role_Title);
+          song.set_title(reader.readElementText());
         } else if (reader.name() == "dj") {
-          item->setData(reader.readElementText(), RadioModel::Role_Artist);
+          song.set_artist(reader.readElementText());
         } else if (reader.name() == "fastpls" && reader.attributes().value("format") == "mp3") {
-          item->setData(reader.readElementText(), RadioModel::Role_Url);
+          song.set_filename(reader.readElementText());
         } else {
           ConsumeElement(reader);
         }
@@ -189,8 +191,6 @@ void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
         break;
     }
   }
-
-  delete item;
 }
 
 void SomaFMService::ConsumeElement(QXmlStreamReader& reader) {

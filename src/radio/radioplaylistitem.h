@@ -28,8 +28,7 @@ class RadioService;
 class RadioPlaylistItem : public PlaylistItem {
  public:
   RadioPlaylistItem(const QString& type);
-  RadioPlaylistItem(RadioService* service, const QUrl& url,
-                    const QString& title, const QString& artist);
+  RadioPlaylistItem(RadioService* service, const Song& metadata);
 
   Options options() const;
 
@@ -44,15 +43,13 @@ class RadioPlaylistItem : public PlaylistItem {
 
  protected:
   QVariant DatabaseValue(DatabaseColumn) const;
+  Song DatabaseSongMetadata() const { return metadata_; }
 
  private:
   void InitMetadata();
   RadioService* service() const;
 
  private:
-  QUrl url_;
-  QString title_;
-  QString artist_;
   QString service_name_;
 
   bool set_service_icon_;

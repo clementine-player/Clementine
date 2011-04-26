@@ -32,7 +32,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 28;
+const int Database::kSchemaVersion = 29;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
@@ -439,7 +439,7 @@ QSqlDatabase Database::Connect() {
                         " WHERE type='table'").arg(key), db);
     if (!q.exec() || !q.next()) {
       ScopedTransaction t(&db);
-      ExecFromFile(attached_databases_[key].schema_, db);
+      ExecFromFile(attached_databases_[key].schema_, db, 0);
       t.Commit();
     }
   }
@@ -508,25 +508,27 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
     filename = QString(":/schema/schema-%1.sql").arg(version);
 
   ScopedTransaction t(&db);
-  ExecFromFile(filename, db);
+  ExecFromFile(filename, db, version - 1);
   t.Commit();
 }
 
-void Database::ExecFromFile(const QString &filename, QSqlDatabase &db) {
+void Database::ExecFromFile(const QString &filename, QSqlDatabase &db,
+                            int schema_version) {
   // Open and read the database schema
   QFile schema_file(filename);
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
-  ExecCommands(QString::fromUtf8(schema_file.readAll()), db);
+  ExecCommands(QString::fromUtf8(schema_file.readAll()), db, schema_version);
 }
 
-void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
+void Database::ExecCommands(const QString& schema, QSqlDatabase& db,
+                            int schema_version) {
   // Run each command
   QStringList commands(schema.split(";\n\n"));
 
   // We don't want this list to reflect possible DB schema changes
   // so we initialize it before executing any statements.
-  QStringList tables = SongsTables(db);
+  QStringList tables = SongsTables(db, schema_version);
 
   foreach (const QString& command, commands) {
     // There are now lots of "songs" tables that need to have the same schema:
@@ -549,7 +551,7 @@ void Database::ExecCommands(const QString &schema, QSqlDatabase &db) {
   }
 }
 
-QStringList Database::SongsTables(QSqlDatabase& db) const {
+QStringList Database::SongsTables(QSqlDatabase& db, int schema_version) const {
   QStringList ret;
 
   // look for the tables in the main db
@@ -568,6 +570,11 @@ QStringList Database::SongsTables(QSqlDatabase& db) const {
         ret << tab_name;
       }
     }
+  }
+
+  if (schema_version > 29) {
+    // The playlist_items table became a songs table in version 29.
+    ret << "playlist_items";
   }
 
   return ret;

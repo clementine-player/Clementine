@@ -138,18 +138,12 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  protected:
   enum DatabaseColumn {
     Column_LibraryId,
-    Column_Url,
-    Column_Title,
-    Column_Artist,
-    Column_Album,
-    Column_Length,
     Column_RadioService,
-    Column_Beginning,
-    Column_CuePath,
   };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {
     return QVariant(QVariant::String); }
+  virtual Song DatabaseSongMetadata() const { return Song(); }
 
   QString type_;
 

@@ -234,9 +234,12 @@ void LastFMService::LazyPopulate(QStandardItem* parent) {
 QStandardItem* LastFMService::CreateStationItem(
     QStandardItem* parent, const QString& name, const QString& icon,
     const QString& url, const QString& title) {
+  Song song;
+  song.set_filename(url);
+  song.set_title(title);
+
   QStandardItem* ret = new QStandardItem(QIcon(icon), name);
-  ret->setData(url, RadioModel::Role_Url);
-  ret->setData(title, RadioModel::Role_Title);
+  ret->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
   ret->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
   parent->appendRow(ret);
   return ret;
@@ -606,9 +609,12 @@ void LastFMService::RefreshFriendsFinished() {
   }
 
   foreach (const lastfm::User& f, friends) {
+    Song song;
+    song.set_filename("lastfm://user/" + f.name() + "/library");
+    song.set_title(tr("Last.fm Library - %1").arg(f.name()));
+
     QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_user.png"), f.name());
-    item->setData(QUrl("lastfm://user/" + f.name() + "/library"), RadioModel::Role_Url);
-    item->setData(tr("Last.fm Library - %1").arg(f.name()), RadioModel::Role_Title);
+    item->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
     item->setData(true, RadioModel::Role_CanLazyLoad);
     item->setData(Type_OtherUser, RadioModel::Role_Type);
     item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
@@ -635,9 +641,12 @@ void LastFMService::RefreshNeighboursFinished() {
   }
 
   foreach (const lastfm::User& n, neighbours) {
+    Song song;
+    song.set_filename("lastfm://user/" + n.name() + "/library");
+    song.set_title(tr("Last.fm Library - %1").arg(n.name()));
+
     QStandardItem* item = new QStandardItem(QIcon(":last.fm/user_purple.png"), n.name());
-    item->setData(QUrl("lastfm://user/" + n.name() + "/library"), RadioModel::Role_Url);
-    item->setData(tr("Last.fm Library - %1").arg(n.name()), RadioModel::Role_Title);
+    item->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
     item->setData(true, RadioModel::Role_CanLazyLoad);
     item->setData(Type_OtherUser, RadioModel::Role_Type);
     item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
@@ -686,9 +695,12 @@ void LastFMService::AddArtistOrTag(const QString& name,
   else
     url_content = content;
 
+  Song song;
+  song.set_filename(url_pattern.arg(url_content));
+  song.set_title(title_pattern.arg(content));
+
   QStandardItem* item = new QStandardItem(QIcon(icon), content);
-  item->setData(url_pattern.arg(url_content), RadioModel::Role_Url);
-  item->setData(title_pattern.arg(content), RadioModel::Role_Title);
+  item->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
   item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
   list->appendRow(item);
   emit AddItemToPlaylist(item->index(), AddMode_Append);
@@ -728,9 +740,12 @@ void LastFMService::RestoreList(const QString& name,
     else
       url_content = content;
 
+    Song song;
+    song.set_filename(url_pattern.arg(url_content));
+    song.set_title(title_pattern.arg(content));
+
     QStandardItem* item = new QStandardItem(icon, content);
-    item->setData(url_pattern.arg(url_content), RadioModel::Role_Url);
-    item->setData(title_pattern.arg(content), RadioModel::Role_Title);
+    item->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
     item->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
     parent->appendRow(item);
   }
@@ -845,22 +860,23 @@ PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {
   // This is a bit of a hack, it's only used by the artist/song info tag
   // widgets for tag radio and similar artists radio.
 
-  PlaylistItemPtr ret;
-
   if (url.scheme() != "lastfm")
-    return ret;
+    return PlaylistItemPtr();
 
   QStringList sections(url.path().split("/", QString::SkipEmptyParts));
 
+  Song song;
+  song.set_filename(url.toString());
+
   if (sections.count() == 2 && url.host() == "artist" && sections[1] == "similarartists") {
-    ret.reset(new RadioPlaylistItem(this, url,
-        tr(kTitleArtist).arg(sections[0]), QString()));
+    song.set_title(tr(kTitleArtist).arg(sections[0]));
   } else if (sections.count() == 1 && url.host() == "globaltags") {
-    ret.reset(new RadioPlaylistItem(this, url,
-        tr(kTitleTag).arg(sections[0]), QString()));
+    song.set_title(tr(kTitleTag).arg(sections[0]));
+  } else {
+    return PlaylistItemPtr();
   }
 
-  return ret;
+  return PlaylistItemPtr(new RadioPlaylistItem(this, song));
 }
 
 void LastFMService::ToggleScrobbling() {

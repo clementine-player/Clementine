@@ -194,7 +194,7 @@ void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlayl
 
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, RadioModel::Role_Type);
-    child->setData(QVariant::fromValue(song), Role_Metadata);
+    child->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
     child->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
     child->setData(QUrl(song.filename()), RadioModel::Role_Url);
 

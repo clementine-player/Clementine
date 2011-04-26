@@ -935,9 +935,7 @@ void Playlist::InsertRadioStations(const RadioModel* model,
     case RadioModel::PlayBehaviour_SingleItem:
       playlist_items << shared_ptr<PlaylistItem>(new RadioPlaylistItem(
           model->ServiceForIndex(item),
-          item.data(RadioModel::Role_Url).toUrl(),
-          item.data(RadioModel::Role_Title).toString(),
-          item.data(RadioModel::Role_Artist).toString()));
+          item.data(RadioModel::Role_SongMetadata).value<Song>()));
       break;
 
     case RadioModel::PlayBehaviour_UseSongLoader:

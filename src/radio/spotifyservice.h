@@ -26,7 +26,6 @@ public:
 
   enum Role {
     Role_UserPlaylistIndex = RadioModel::RoleCount,
-    Role_Metadata,
   };
 
   virtual QStandardItem* CreateRootItem();

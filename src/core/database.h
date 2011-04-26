@@ -54,8 +54,8 @@ class Database : public QObject {
   QMutex* Mutex() { return &mutex_; }
 
   void RecreateAttachedDb(const QString& database_name);
-  void ExecFromFile(const QString& filename, QSqlDatabase &db);
-  void ExecCommands(const QString& commands, QSqlDatabase &db);
+  void ExecFromFile(const QString& filename, QSqlDatabase &db, int schema_version);
+  void ExecCommands(const QString& commands, QSqlDatabase &db, int schema_version);
 
   int startup_schema_version() const { return startup_schema_version_; }
   int current_schema_version() const { return kSchemaVersion; }
@@ -67,7 +67,7 @@ class Database : public QObject {
   void UpdateMainSchema(QSqlDatabase* db);
 
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
-  QStringList SongsTables(QSqlDatabase& db) const;
+  QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
 
   struct AttachedDatabase {
     AttachedDatabase() {}

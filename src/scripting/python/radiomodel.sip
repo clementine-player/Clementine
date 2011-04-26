@@ -10,8 +10,7 @@ public:
     Role_Type,
     Role_PlayBehaviour,
     Role_Url,
-    Role_Title,
-    Role_Artist,
+    Role_SongMetadata,
     Role_CanLazyLoad,
     Role_Service,
   };

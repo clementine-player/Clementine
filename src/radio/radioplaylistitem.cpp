@@ -20,6 +20,7 @@
 #include "radiomodel.h"
 #include "core/settingsprovider.h"
 #include "library/sqlrow.h"
+#include "playlist/playlistbackend.h"
 
 #include <QSettings>
 #include <QApplication>
@@ -31,28 +32,24 @@ RadioPlaylistItem::RadioPlaylistItem(const QString& type)
 {
 }
 
-RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const QUrl& url,
-                                     const QString& title, const QString& artist)
+RadioPlaylistItem::RadioPlaylistItem(RadioService* service, const Song& metadata)
   : PlaylistItem("Radio"),
-    url_(url),
-    title_(title),
-    artist_(artist),
     service_name_(service->name()),
-    set_service_icon_(false)
+    set_service_icon_(false),
+    metadata_(metadata)
 {
   InitMetadata();
 }
 
 bool RadioPlaylistItem::InitFromQuery(const SqlRow& query) {
   // The song tables gets joined first, plus one each for the song ROWIDs
-  const int row = (Song::kColumns.count() + 1) * 3;
+  const int row = (Song::kColumns.count() + 1) * PlaylistBackend::kSongTableJoins;
 
-  url_ = query.value(row + 1).toString();
-  title_ = query.value(row + 2).toString();
-  artist_ = query.value(row + 3).toString();
-  service_name_ = query.value(row + 6).toString();
+  service_name_ = query.value(row + 1).toString();
 
+  metadata_.InitFromQuery(query, (Song::kColumns.count() + 1) * 3);
   InitMetadata();
+
   return true;
 }
 
@@ -73,22 +70,16 @@ RadioService* RadioPlaylistItem::service() const {
 
 QVariant RadioPlaylistItem::DatabaseValue(DatabaseColumn column) const {
   switch (column) {
-    case Column_Url:          return url_.toString();
-    case Column_Title:        return title_;
-    case Column_Artist:       return artist_;
     case Column_RadioService: return service_name_;
     default:                  return PlaylistItem::DatabaseValue(column);
   }
 }
 
 void RadioPlaylistItem::InitMetadata() {
-  if (!title_.isEmpty())
-    metadata_.set_title(title_);
-  else
-    metadata_.set_title(url_.toString());
-
-  metadata_.set_artist(artist_);
+  if (metadata_.title().isEmpty())
+    metadata_.set_title(metadata_.filename());
   metadata_.set_filetype(Song::Type_Stream);
+  metadata_.set_valid(true);
 }
 
 Song RadioPlaylistItem::Metadata() const {
@@ -106,18 +97,18 @@ PlaylistItem::SpecialLoadResult RadioPlaylistItem::StartLoading() {
   RadioService* s = service();
   if (!s)
     return SpecialLoadResult();
-  return s->StartLoading(url_);
+  return s->StartLoading(Url());
 }
 
 PlaylistItem::SpecialLoadResult RadioPlaylistItem::LoadNext() {
   RadioService* s = service();
   if (!s)
     return SpecialLoadResult();
-  return s->LoadNext(url_);
+  return s->LoadNext(Url());
 }
 
 QUrl RadioPlaylistItem::Url() const {
-  return url_;
+  return QUrl(metadata_.filename());
 }
 
 PlaylistItem::Options RadioPlaylistItem::options() const {

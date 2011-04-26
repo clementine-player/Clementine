@@ -37,7 +37,7 @@ class SongPlaylistItem : public PlaylistItem {
   QUrl Url() const;
 
  protected:
-  QVariant DatabaseValue(DatabaseColumn) const;
+  Song DatabaseSongMetadata() const { return song_; }
 
  private:
   Song song_;
