@@ -402,7 +402,10 @@ int SpotifyClient::MusicDeliveryCallback(
 
     const int bytes_per_sample = 2;
     const int byte_rate = format->sample_rate * format->channels * bytes_per_sample;
-    const quint32 data_size = me->media_length_msec_ * byte_rate;
+    const quint32 data_size = quint64(me->media_length_msec_) * byte_rate / 1000;
+
+    qLog(Debug) << "length" << me->media_length_msec_ << "byte_rate" << byte_rate
+                << "data_size" << data_size;
 
     // RIFF header
     s.writeRawData("RIFF", 4);
