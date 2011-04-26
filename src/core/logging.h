@@ -14,6 +14,11 @@
    limitations under the License.
 */
 
+// Note: this file is licensed under the Apache License instead of GPL because
+// it is used by the Spotify blob which links against libspotify and is not GPL
+// compatible.
+
+
 #ifndef LOGGING_H
 #define LOGGING_H
 

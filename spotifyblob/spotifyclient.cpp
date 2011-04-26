@@ -1,19 +1,23 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
-   Clementine is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-   Clementine is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+       http://www.apache.org/licenses/LICENSE-2.0
 
-   You should have received a copy of the GNU General Public License
-   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 */
+
+// Note: this file is licensed under the Apache License instead of GPL because
+// it is used by the Spotify blob which links against libspotify and is not GPL
+// compatible.
+
 
 #include "spotifyclient.h"
 #include "spotifykey.h"
@@ -27,6 +31,7 @@
 
 SpotifyClient::SpotifyClient(QObject* parent)
   : QObject(parent),
+    api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
     socket_(new QTcpSocket(this)),
     session_(NULL),
     events_timer_(new QTimer(this)) {
@@ -46,8 +51,8 @@ SpotifyClient::SpotifyClient(QObject* parent)
   spotify_config_.api_version = SPOTIFY_API_VERSION;  // From libspotify/api.h
   spotify_config_.cache_location = strdup(QDir::tempPath().toLocal8Bit().constData());
   spotify_config_.settings_location = strdup(QDir::tempPath().toLocal8Bit().constData());
-  spotify_config_.application_key = g_appkey;
-  spotify_config_.application_key_size = g_appkey_size;
+  spotify_config_.application_key = api_key_.constData();
+  spotify_config_.application_key_size = api_key_.size();
   spotify_config_.callbacks = &spotify_callbacks_;
   spotify_config_.userdata = this;
   spotify_config_.user_agent = "Clementine Player";
@@ -65,6 +70,7 @@ SpotifyClient::~SpotifyClient() {
 
   free(const_cast<char*>(spotify_config_.cache_location));
   free(const_cast<char*>(spotify_config_.settings_location));
+  free(const_cast<void*>(spotify_config_.application_key));
 }
 
 void SpotifyClient::Init(quint16 port) {
