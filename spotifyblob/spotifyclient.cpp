@@ -32,9 +32,11 @@
 SpotifyClient::SpotifyClient(QObject* parent)
   : QObject(parent),
     api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
-    socket_(new QTcpSocket(this)),
+    protocol_socket_(new QTcpSocket(this)),
+    media_socket_(NULL),
     session_(NULL),
-    events_timer_(new QTimer(this)) {
+    events_timer_(new QTimer(this)),
+    media_length_msec_(-1) {
   memset(&spotify_callbacks_, 0, sizeof(spotify_callbacks_));
   memset(&spotify_config_, 0, sizeof(spotify_config_));
   memset(&playlistcontainer_callbacks_, 0, sizeof(playlistcontainer_callbacks_));
@@ -44,6 +46,9 @@ SpotifyClient::SpotifyClient(QObject* parent)
   spotify_callbacks_.notify_main_thread = &NotifyMainThreadCallback;
   spotify_callbacks_.log_message = &LogMessageCallback;
   spotify_callbacks_.metadata_updated = &MetadataUpdatedCallback;
+  spotify_callbacks_.music_delivery = &MusicDeliveryCallback;
+  spotify_callbacks_.end_of_track = &EndOfTrackCallback;
+  spotify_callbacks_.streaming_error = &StreamingErrorCallback;
 
   playlistcontainer_callbacks_.container_loaded = &PlaylistContainerLoadedCallback;
   playlistcontainer_callbacks_.playlist_added = &PlaylistAddedCallback;
@@ -64,7 +69,7 @@ SpotifyClient::SpotifyClient(QObject* parent)
   events_timer_->setSingleShot(true);
   connect(events_timer_, SIGNAL(timeout()), SLOT(ProcessEvents()));
 
-  connect(socket_, SIGNAL(readyRead()), SLOT(SocketReadyRead()));
+  connect(protocol_socket_, SIGNAL(readyRead()), SLOT(SocketReadyRead()));
 }
 
 SpotifyClient::~SpotifyClient() {
@@ -80,7 +85,7 @@ SpotifyClient::~SpotifyClient() {
 void SpotifyClient::Init(quint16 port) {
   qLog(Debug) << "Connecting to port" << port;
 
-  socket_->connectToHost(QHostAddress::LocalHost, port);
+  protocol_socket_->connectToHost(QHostAddress::LocalHost, port);
 }
 
 void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
@@ -148,9 +153,9 @@ void SpotifyClient::SearchCompleteCallback(sp_search* result, void* userdata) {
 
 void SpotifyClient::SocketReadyRead() {
   protobuf::SpotifyMessage message;
-  if (!ReadMessage(socket_, &message)) {
-    socket_->deleteLater();
-    socket_ = NULL;
+  if (!ReadMessage(protocol_socket_, &message)) {
+    protocol_socket_->deleteLater();
+    protocol_socket_ = NULL;
     return;
   }
 
@@ -159,6 +164,8 @@ void SpotifyClient::SocketReadyRead() {
     Login(QStringFromStdString(r.username()), QStringFromStdString(r.password()));
   } else if (message.has_load_playlist_request()) {
     LoadPlaylist(message.load_playlist_request());
+  } else if (message.has_playback_request()) {
+    StartPlayback(message.playback_request());
   }
 }
 
@@ -180,7 +187,7 @@ void SpotifyClient::SendLoginCompleted(bool success, const QString& error) {
   response->set_success(success);
   response->set_error(DataCommaSizeFromQString(error));
 
-  SendMessage(socket_, message);
+  SendMessage(protocol_socket_, message);
 }
 
 void SpotifyClient::PlaylistContainerLoadedCallback(sp_playlistcontainer* pc, void* userdata) {
@@ -232,7 +239,7 @@ void SpotifyClient::GetPlaylists() {
     msg->set_name(sp_playlist_name(playlist));
   }
 
-  SendMessage(socket_, message);
+  SendMessage(protocol_socket_, message);
 }
 
 void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
@@ -272,7 +279,7 @@ void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
     protobuf::SpotifyMessage message;
     protobuf::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
     *response->mutable_request() = req;
-    SendMessage(socket_, message);
+    SendMessage(protocol_socket_, message);
     return;
   }
 
@@ -334,7 +341,7 @@ void SpotifyClient::PlaylistStateChanged(sp_playlist* pl, void* userdata) {
     me->ConvertTrack(track, response->add_track());
     sp_track_release(track);
   }
-  me->SendMessage(me->socket_, message);
+  me->SendMessage(me->protocol_socket_, message);
 
   // Unref the playlist and remove our callbacks
   sp_playlist_remove_callbacks(pl, &me->load_playlist_callbacks_, me);
@@ -374,5 +381,144 @@ void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
 
   foreach (const PendingLoadPlaylist& load, me->pending_load_playlists_) {
     PlaylistStateChanged(load.playlist_, me);
+  }
+}
+
+int SpotifyClient::MusicDeliveryCallback(
+    sp_session* session, const sp_audioformat* format,
+    const void* frames, int num_frames) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
+
+  if (!me->media_socket_) {
+    return 0;
+  }
+
+  // Write the WAVE header if it hasn't been written yet.
+  if (me->media_length_msec_ != -1) {
+    qLog(Debug) << "Sending WAVE header";
+
+    QDataStream s(me->media_socket_);
+    s.setByteOrder(QDataStream::LittleEndian);
+
+    const int bytes_per_sample = 2;
+    const int byte_rate = format->sample_rate * format->channels * bytes_per_sample;
+    const quint32 data_size = me->media_length_msec_ * byte_rate / 1000;
+
+    // RIFF header
+    s.writeRawData("RIFF", 4);
+    s << quint32(32 + data_size);
+    s.writeRawData("WAVE", 4);
+
+    // WAVE fmt sub-chunk
+    s.writeRawData("fmt ", 4);
+    s << quint32(16);                                  // Subchunk1Size
+    s << quint16(1);                                   // AudioFormat
+    s << quint16(format->channels);                    // NumChannels
+    s << quint32(format->sample_rate);                 // SampleRate
+    s << quint32(byte_rate);                           // ByteRate
+    s << quint16(format->channels * bytes_per_sample); // BlockAlign
+    s << quint16(bytes_per_sample * 8);                // BitsPerSample
+
+    // Data sub-chunk
+    s.writeRawData("data", 4);
+    s << quint32(data_size);
+
+    me->media_length_msec_ = -1;
+  }
+
+  // Write the audio data.
+  me->media_socket_->write(reinterpret_cast<const char*>(frames),
+                           num_frames * format->channels * 2);
+
+  return num_frames;
+}
+
+void SpotifyClient::EndOfTrackCallback(sp_session* session) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
+
+  // Close the socket - it will get deleted when the other side has
+  // disconnected
+  me->media_socket_->close();
+  me->media_socket_ = NULL;
+}
+
+void SpotifyClient::StreamingErrorCallback(sp_session* session, sp_error error) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
+
+  // Close the socket - it will get deleted when the other side has
+  // disconnected
+  me->media_socket_->close();
+  me->media_socket_ = NULL;
+
+  // Send the error
+  me->SendPlaybackError(QString::fromUtf8(sp_error_message(error)));
+}
+
+void SpotifyClient::StartPlayback(const protobuf::PlaybackRequest& req) {
+  // Get a link object from the URI
+  sp_link* link = sp_link_create_from_string(req.track_uri().c_str());
+  if (!link) {
+    SendPlaybackError("Invalid Spotify URI");
+    return;
+  }
+
+  // Get the track from the link
+  sp_track* track = sp_link_as_track(link);
+  if (!track) {
+    SendPlaybackError("Spotify URI was not a track");
+    sp_track_release(track);
+    return;
+  }
+
+  // Load the track
+  sp_error error = sp_session_player_load(session_, track);
+  if (error != SP_ERROR_OK) {
+    SendPlaybackError(QString::fromUtf8(sp_error_message(error)));
+    sp_track_release(track);
+    return;
+  }
+
+  // Create the media socket
+  if (media_socket_) {
+    media_socket_->close();
+  }
+  media_socket_ = new QTcpSocket(this);
+  media_socket_->connectToHost(QHostAddress::LocalHost, req.media_port());
+  connect(media_socket_, SIGNAL(disconnected()), SLOT(MediaSocketDisconnected()));
+
+  qLog(Info) << "Starting playback of uri" << req.track_uri().c_str()
+             << "to port" << req.media_port();
+
+  // Set the track length - this will trigger MusicDeliveryCallback to send
+  // a WAVE header.
+  media_length_msec_ = sp_track_duration(track);
+
+  // Start playback
+  sp_session_player_play(session_, true);
+
+  sp_track_release(track);
+}
+
+void SpotifyClient::SendPlaybackError(const QString& error) {
+  protobuf::SpotifyMessage message;
+  protobuf::PlaybackError* msg = message.mutable_playback_error();
+
+  msg->set_error(DataCommaSizeFromQString(error));
+  SendMessage(protocol_socket_, message);
+}
+
+void SpotifyClient::MediaSocketDisconnected() {
+  QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+  if (!socket) {
+    return;
+  }
+
+  qLog(Info) << "Media socket disconnected";
+
+  socket->deleteLater();
+
+  if (socket == media_socket_) {
+    sp_session_player_unload(session_);
+    media_socket_ = NULL;
   }
 }

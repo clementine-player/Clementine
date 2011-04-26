@@ -69,10 +69,21 @@ message LoadPlaylistResponse {
   repeated Track track = 2;
 }
 
+message PlaybackRequest {
+  required string track_uri = 1;
+  required int32 media_port = 2;
+}
+
+message PlaybackError {
+  required string error = 1;
+}
+
 message SpotifyMessage {
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
   optional Playlists playlists_updated = 3;
   optional LoadPlaylistRequest load_playlist_request = 4;
   optional LoadPlaylistResponse load_playlist_response = 5;
+  optional PlaybackRequest playback_request = 6;
+  optional PlaybackError playback_error = 7;
 }

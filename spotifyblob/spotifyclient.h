@@ -46,9 +46,11 @@ public:
 private slots:
   void SocketReadyRead();
   void ProcessEvents();
+  void MediaSocketDisconnected();
 
 private:
   void SendLoginCompleted(bool success, const QString& error);
+  void SendPlaybackError(const QString& error);
 
   // Spotify session callbacks.
   static void LoggedInCallback(sp_session* session, sp_error error);
@@ -56,6 +58,11 @@ private:
   static void LogMessageCallback(sp_session* session, const char* data);
   static void SearchCompleteCallback(sp_search* result, void* userdata);
   static void MetadataUpdatedCallback(sp_session* session);
+  static int MusicDeliveryCallback(
+    sp_session* session, const sp_audioformat* format,
+    const void* frames, int num_frames);
+  static void EndOfTrackCallback(sp_session* session);
+  static void StreamingErrorCallback(sp_session* session, sp_error error);
 
   // Spotify playlist container callbacks.
   static void PlaylistAddedCallback(
@@ -78,6 +85,7 @@ private:
   void GetPlaylists();
   void Search(const QString& query);
   void LoadPlaylist(const protobuf::LoadPlaylistRequest& req);
+  void StartPlayback(const protobuf::PlaybackRequest& req);
 
   void ConvertTrack(sp_track* track, protobuf::Track* pb);
 
@@ -92,7 +100,8 @@ private:
 
   QByteArray api_key_;
 
-  QTcpSocket* socket_;
+  QTcpSocket* protocol_socket_;
+  QTcpSocket* media_socket_;
 
   sp_session_config spotify_config_;
   sp_session_callbacks spotify_callbacks_;
@@ -103,6 +112,8 @@ private:
   QTimer* events_timer_;
 
   QList<PendingLoadPlaylist> pending_load_playlists_;
+
+  int media_length_msec_;
 };
 
 #endif // SPOTIFYCLIENT_H
