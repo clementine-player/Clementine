@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 2.6)
 
 include_directories(${LIBGPOD_INCLUDE_DIRS})
 include_directories(${PYTHON_INCLUDE_DIRS})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../src)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../../src)
+include_directories(${CMAKE_SOURCE_DIR}/3rdparty/gmock/gtest/include)
+include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_BINARY_DIR}/src)
 
 set(SOURCES
   generate_python_docs.cpp
