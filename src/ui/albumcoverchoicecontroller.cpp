@@ -21,12 +21,9 @@
 #include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/albumcovermanager.h"
+#include "ui/albumcoversearcher.h"
 #include "ui/coverfromurldialog.h"
 #include "ui/iconloader.h"
-
-#ifdef HAVE_LIBLASTFM
-# include "ui/albumcoversearcher.h"
-#endif
 
 #include <QAction>
 #include <QCryptographicHash>
@@ -50,17 +47,13 @@ QSet<QString>* AlbumCoverChoiceController::sImageExtensions = NULL;
 
 AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
-#ifdef HAVE_LIBLASTFM
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
-#endif
     cover_fetcher_(new AlbumCoverFetcher(this)),
     save_file_dialog_(NULL),
     cover_from_url_dialog_(NULL),
     library_(NULL)
 {
-#ifdef HAVE_LIBLASTFM
   cover_searcher_->Init(cover_fetcher_);
-#endif
 
   cover_from_file_ = new QAction(IconLoader::Load("document-open"), tr("Load cover from disk..."), this);
   cover_to_file_ = new QAction(IconLoader::Load("document-save"), tr("Save cover to disk..."), this);
@@ -164,7 +157,6 @@ QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
 }
 
 QString AlbumCoverChoiceController::SearchForCover(Song* song) {
-#ifdef HAVE_LIBLASTFM
   // Get something sensible to stick in the search box
   QString query = song->artist();
   if (!query.isEmpty())
@@ -181,9 +173,6 @@ QString AlbumCoverChoiceController::SearchForCover(Song* song) {
   } else {
     return QString();
   }
-#else
-  return QString();
-#endif
 }
 
 QString AlbumCoverChoiceController::UnsetCover(Song* song) {

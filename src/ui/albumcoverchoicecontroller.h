@@ -23,11 +23,8 @@
 #include <QMenu>
 #include <QWidget>
 
-#ifdef HAVE_LIBLASTFM
-  class AlbumCoverSearcher;
-#endif
-
 class AlbumCoverFetcher;
+class AlbumCoverSearcher;
 class CoverFromURLDialog;
 class LibraryBackend;
 class QFileDialog;
@@ -115,9 +112,7 @@ private:
   static bool IsKnownImageExtension(const QString& suffix);
   static QSet<QString>* sImageExtensions;
 
-#ifdef HAVE_LIBLASTFM
   AlbumCoverSearcher* cover_searcher_;
-#endif
   AlbumCoverFetcher* cover_fetcher_;
 
   QFileDialog* save_file_dialog_;

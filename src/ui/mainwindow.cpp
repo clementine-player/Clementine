@@ -73,6 +73,7 @@
 #include "transcoder/transcodedialog.h"
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
+#include "ui/albumcovermanager.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -97,7 +98,6 @@
 
 #ifdef HAVE_LIBLASTFM
 # include "radio/lastfmservice.h"
-# include "ui/albumcovermanager.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
@@ -181,9 +181,7 @@ MainWindow::MainWindow(
     song_info_view_(new SongInfoView(this)),
     artist_info_view_(new ArtistInfoView(this)),
     settings_dialog_(NULL),
-#ifdef HAVE_LIBLASTFM
     cover_manager_(NULL),
-#endif
     equalizer_(new Equalizer),
     error_dialog_(NULL),
     organise_dialog_(new OrganiseDialog(task_manager_)),
@@ -341,11 +339,7 @@ MainWindow::MainWindow(
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
-#ifdef HAVE_LIBLASTFM
   connect(ui_->action_cover_manager, SIGNAL(triggered()), SLOT(ShowCoverManager()));
-#else
-  ui_->action_cover_manager->setEnabled(false);
-#endif
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
@@ -1871,7 +1865,6 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
   }
 }
 
-#ifdef HAVE_LIBLASTFM
 void MainWindow::ShowCoverManager() {
   if (!cover_manager_) {
     cover_manager_.reset(new AlbumCoverManager(library_->backend()));
@@ -1883,7 +1876,6 @@ void MainWindow::ShowCoverManager() {
 
   cover_manager_->show();
 }
-#endif
 
 void MainWindow::EnsureSettingsDialogCreated() {
   if (settings_dialog_)

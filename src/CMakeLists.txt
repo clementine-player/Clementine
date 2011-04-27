@@ -228,6 +228,9 @@ set(SOURCES
   ui/about.cpp
   ui/addstreamdialog.cpp
   ui/albumcoverchoicecontroller.cpp
+  ui/albumcovermanager.cpp
+  ui/albumcovermanagerlist.cpp
+  ui/albumcoversearcher.cpp
   ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
@@ -422,6 +425,9 @@ set(HEADERS
   ui/about.h
   ui/addstreamdialog.h
   ui/albumcoverchoicecontroller.h
+  ui/albumcovermanager.h
+  ui/albumcovermanagerlist.h
+  ui/albumcoversearcher.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
   ui/equalizer.h
@@ -510,6 +516,8 @@ set(UI
 
   ui/about.ui
   ui/addstreamdialog.ui
+  ui/albumcovermanager.ui
+  ui/albumcoversearcher.ui
   ui/coverfromurldialog.ui
   ui/edittagdialog.ui
   ui/equalizer.ui
@@ -588,9 +596,6 @@ if(HAVE_LIBLASTFM)
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
     songinfo/tagwidget.cpp
-    ui/albumcovermanager.cpp
-    ui/albumcovermanagerlist.cpp
-    ui/albumcoversearcher.cpp
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
@@ -601,15 +606,10 @@ if(HAVE_LIBLASTFM)
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
-    ui/albumcovermanager.h
-    ui/albumcovermanagerlist.h
-    ui/albumcoversearcher.h
   )
   list(APPEND UI
     radio/lastfmconfig.ui
     radio/lastfmstationdialog.ui
-    ui/albumcovermanager.ui
-    ui/albumcoversearcher.ui
   )
 endif(HAVE_LIBLASTFM)
 

@@ -39,8 +39,11 @@ public:
 
   // Let's a cover provider to register itself in the repository.
   void AddCoverProvider(CoverProvider* provider);
+
   // Returns a list of the currently registered cover providers.
   const QList<CoverProvider*> List();
+  // Returns true if this repository has at least one registered provider.
+  bool HasAnyProviders() { return !List().isEmpty(); }
 
   ~CoverProviders() {}
 

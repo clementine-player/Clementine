@@ -33,6 +33,7 @@
 
 class About;
 class AddStreamDialog;
+class AlbumCoverManager;
 class ArtistInfoView;
 class ArtLoader;
 class BackgroundStreams;
@@ -76,10 +77,6 @@ class Windows7ThumbBar;
 class Ui_MainWindow;
 
 class QSortFilterProxyModel;
-
-#ifdef HAVE_LIBLASTFM
-  class AlbumCoverManager;
-#endif
 
 class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
@@ -221,8 +218,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void SongSaveComplete();
 
-#ifdef HAVE_LIBLASTFM
   void ShowCoverManager();
+#ifdef HAVE_LIBLASTFM
   void ScrobblerStatus(int value);
 #endif
   void ShowAboutDialog();
@@ -288,9 +285,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   boost::scoped_ptr<SettingsDialog> settings_dialog_;
   boost::scoped_ptr<AddStreamDialog> add_stream_dialog_;
-#ifdef HAVE_LIBLASTFM
   boost::scoped_ptr<AlbumCoverManager> cover_manager_;
-#endif
   boost::scoped_ptr<Equalizer> equalizer_;
   boost::scoped_ptr<TranscodeDialog> transcode_dialog_;
   boost::scoped_ptr<ErrorDialog> error_dialog_;

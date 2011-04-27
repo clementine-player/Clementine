@@ -20,6 +20,7 @@
 #include "iconloader.h"
 #include "ui_albumcovermanager.h"
 #include "covers/albumcoverfetcher.h"
+#include "covers/coverproviders.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
@@ -444,6 +445,7 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
     album_cover_choice_controller_->cover_from_url_action()->setEnabled(context_menu_items_.size() == 1);
     album_cover_choice_controller_->show_cover_action()->setEnabled(some_with_covers && context_menu_items_.size() == 1);
     album_cover_choice_controller_->unset_cover_action()->setEnabled(some_with_covers);
+    album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviders());
 
     QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
     context_menu_->popup(e->globalPos());

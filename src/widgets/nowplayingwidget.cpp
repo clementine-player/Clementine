@@ -18,6 +18,7 @@
 #include "fullscreenhypnotoad.h"
 #include "nowplayingwidget.h"
 #include "covers/albumcoverloader.h"
+#include "covers/coverproviders.h"
 #include "covers/kittenloader.h"
 #include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
@@ -379,17 +380,12 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   album_cover_choice_controller_->cover_from_file_action()->setEnabled(!aww_);
   album_cover_choice_controller_->cover_to_file_action()->setEnabled(aww_);
   album_cover_choice_controller_->cover_from_url_action()->setEnabled(!aww_);
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_);
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_ && CoverProviders::instance().HasAnyProviders());
   album_cover_choice_controller_->unset_cover_action()->setEnabled(!aww_);
   album_cover_choice_controller_->show_cover_action()->setEnabled(!aww_);
 
   // some special cases
   if (!aww_) {
-  #ifndef HAVE_LIBLASTFM
-    album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
-    album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
-  #endif
-
     const bool art_is_not_set = metadata_.has_manually_unset_cover()
         || (metadata_.art_automatic().isEmpty() && metadata_.art_manual().isEmpty());
 

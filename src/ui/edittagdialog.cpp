@@ -22,6 +22,7 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "covers/albumcoverloader.h"
+#include "covers/coverproviders.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "musicbrainz/fingerprinter.h"
@@ -409,11 +410,6 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
 
   ui_->summary->setText(summary);
 
-#ifndef HAVE_LIBLASTFM
-  album_cover_choice_controller_->cover_from_file_action()->setEnabled(false);
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(false);
-#endif
-
   album_cover_choice_controller_->unset_cover_action()->setEnabled(art_is_set);
   album_cover_choice_controller_->show_cover_action()->setEnabled(art_is_set);
   ui_->summary_art_button->setEnabled(song.id() != -1);
@@ -429,6 +425,8 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
   ui_->filetype->setText(song.TextForFiletype());
   ui_->filename->setText(QDir::toNativeSeparators(song.filename()));
+
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviders());
 }
 
 void EditTagDialog::UpdateStatisticsTab(const Song& song) {
