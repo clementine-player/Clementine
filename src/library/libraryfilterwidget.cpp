@@ -36,7 +36,9 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
     ui_(new Ui_LibraryFilterWidget),
     model_(NULL),
     group_by_dialog_(new GroupByDialog),
-    filter_delay_(new QTimer(this))
+    filter_delay_(new QTimer(this)),
+    filter_applies_to_model_(true),
+    delay_behaviour_(DelayedOnLargeLibraries)
 {
   ui_->setupUi(this);
   connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
@@ -243,14 +245,22 @@ void LibraryFilterWidget::FilterTextChanged(const QString& text) {
   // even with FTS, so if there are a large number of songs in the database
   // introduce a small delay before actually filtering the model, so if the
   // user is typing the first few characters of something it will be quicker.
-  if (!text.isEmpty() && text.length() < 3 && model_->total_song_count() >= 100000) {
+  const bool delay = (delay_behaviour_ == AlwaysDelayed)
+                  || (delay_behaviour_ == DelayedOnLargeLibraries &&
+                      !text.isEmpty() && text.length() < 3 &&
+                      model_->total_song_count() >= 100000);
+
+  if (delay) {
     filter_delay_->start();
   } else {
     filter_delay_->stop();
-    model_->SetFilterText(text);
+    FilterDelayTimeout();
   }
 }
 
 void LibraryFilterWidget::FilterDelayTimeout() {
-  model_->SetFilterText(filter_->text());
+  emit Filter(filter_->text());
+  if (filter_applies_to_model_) {
+    model_->SetFilterText(filter_->text());
+  }
 }

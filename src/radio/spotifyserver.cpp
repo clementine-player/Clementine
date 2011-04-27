@@ -19,6 +19,7 @@
 #include "core/logging.h"
 
 #include "spotifyblob/spotifymessages.pb.h"
+#include "spotifyblob/spotifymessagehandler.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -27,6 +28,7 @@ SpotifyServer::SpotifyServer(QObject* parent)
   : QObject(parent),
     server_(new QTcpServer(this)),
     protocol_socket_(NULL),
+    handler_(NULL),
     logged_in_(false)
 {
   connect(server_, SIGNAL(newConnection()), SLOT(NewConnection()));
@@ -43,8 +45,13 @@ int SpotifyServer::server_port() const {
 }
 
 void SpotifyServer::NewConnection() {
+  delete protocol_socket_;
+  delete handler_;
+
   protocol_socket_ = server_->nextPendingConnection();
-  connect(protocol_socket_, SIGNAL(readyRead()), SLOT(ProtocolSocketReadyRead()));
+  handler_ = new SpotifyMessageHandler(protocol_socket_, this);
+  connect(handler_, SIGNAL(MessageArrived(protobuf::SpotifyMessage)),
+          SLOT(HandleMessage(protobuf::SpotifyMessage)));
 
   qLog(Info) << "Connection from port" << protocol_socket_->peerPort();
 
@@ -64,7 +71,7 @@ void SpotifyServer::SendMessage(const protobuf::SpotifyMessage& message) {
   if (!protocol_socket_ || (!is_login_message && !logged_in_)) {
     queue->append(message);
   } else {
-    SpotifyMessageUtils::SendMessage(protocol_socket_, message);
+    handler_->SendMessage(message);
   }
 }
 
@@ -78,14 +85,7 @@ void SpotifyServer::Login(const QString& username, const QString& password) {
   SendMessage(message);
 }
 
-void SpotifyServer::ProtocolSocketReadyRead() {
-  protobuf::SpotifyMessage message;
-  if (!ReadMessage(protocol_socket_, &message)) {
-    protocol_socket_->deleteLater();
-    protocol_socket_ = NULL;
-    return;
-  }
-
+void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
   if (message.has_login_response()) {
     const protobuf::LoginResponse& response = message.login_response();
     logged_in_ = response.success();
@@ -119,6 +119,10 @@ void SpotifyServer::ProtocolSocketReadyRead() {
         emit UserPlaylistLoaded(response);
         break;
     }
+  } else if (message.has_playback_error()) {
+    emit PlaybackError(QStringFromStdString(message.playback_error().error()));
+  } else if (message.has_search_response()) {
+    emit SearchResults(message.search_response());
   }
 }
 
@@ -152,5 +156,14 @@ void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
 
   req->set_track_uri(DataCommaSizeFromQString(uri));
   req->set_media_port(port);
+  SendMessage(message);
+}
+
+void SpotifyServer::Search(const QString& text, int limit) {
+  protobuf::SpotifyMessage message;
+  protobuf::SearchRequest* req = message.mutable_search_request();
+
+  req->set_query(DataCommaSizeFromQString(text));
+  req->set_limit(limit);
   SendMessage(message);
 }

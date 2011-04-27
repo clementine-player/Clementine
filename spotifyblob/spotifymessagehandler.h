@@ -19,14 +19,16 @@
 // compatible.
 
 
-#ifndef SPOTIFYMESSAGEUTILS_H
-#define SPOTIFYMESSAGEUTILS_H
+#ifndef SPOTIFYMESSAGEHANDLER_H
+#define SPOTIFYMESSAGEHANDLER_H
+
+#include <QBuffer>
+#include <QObject>
 
 namespace protobuf {
   class SpotifyMessage;
 }
 
-class QIODevice;
 
 #define QStringFromStdString(x) \
   QString::fromUtf8(x.data(), x.size())
@@ -34,15 +36,26 @@ class QIODevice;
   x.toUtf8().constData(), x.toUtf8().length()
 
 
-class SpotifyMessageUtils {
+class SpotifyMessageHandler : public QObject {
+  Q_OBJECT
+
 public:
-  virtual ~SpotifyMessageUtils() {}
+  SpotifyMessageHandler(QIODevice* device, QObject* parent);
 
-protected:
-  SpotifyMessageUtils() {}
+  void SendMessage(const protobuf::SpotifyMessage& message);
 
-  bool ReadMessage(QIODevice* device, protobuf::SpotifyMessage* message);
-  void SendMessage(QIODevice* device, const protobuf::SpotifyMessage& message);
+signals:
+  void MessageArrived(const protobuf::SpotifyMessage& message);
+
+private slots:
+  void DeviceReadyRead();
+
+private:
+  QIODevice* device_;
+
+  bool reading_protobuf_;
+  quint32 expected_length_;
+  QBuffer buffer_;
 };
 
-#endif // SPOTIFYMESSAGEUTILS_H
+#endif // SPOTIFYMESSAGEHANDLER_H

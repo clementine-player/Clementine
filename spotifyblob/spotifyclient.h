@@ -23,8 +23,8 @@
 #define SPOTIFYCLIENT_H
 
 #include "spotifymessages.pb.h"
-#include "spotifymessageutils.h"
 
+#include <QMap>
 #include <QObject>
 
 #include <libspotify/api.h>
@@ -33,8 +33,9 @@ class QTcpSocket;
 class QTimer;
 
 class ResponseMessage;
+class SpotifyMessageHandler;
 
-class SpotifyClient : public QObject, protected SpotifyMessageUtils {
+class SpotifyClient : public QObject {
   Q_OBJECT
 
 public:
@@ -44,7 +45,7 @@ public:
   void Init(quint16 port);
 
 private slots:
-  void SocketReadyRead();
+  void HandleMessage(const protobuf::SpotifyMessage& message);
   void ProcessEvents();
   void MediaSocketDisconnected();
 
@@ -77,15 +78,20 @@ private:
   static void PlaylistContainerLoadedCallback(
     sp_playlistcontainer* pc, void* userdata);
 
+  // Spotify playlist callbacks - when loading the list of playlists
+  // initially
+  static void PlaylistStateChangedForGetPlaylists(sp_playlist* pl, void* userdata);
+
   // Spotify playlist callbacks - when loading a playlist
-  static void PlaylistStateChanged(sp_playlist* pl, void* userdata);
+  static void PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata);
 
   // Request handlers.
   void Login(const QString& username, const QString& password);
-  void GetPlaylists();
-  void Search(const QString& query);
+  void Search(const protobuf::SearchRequest& req);
   void LoadPlaylist(const protobuf::LoadPlaylistRequest& req);
   void StartPlayback(const protobuf::PlaybackRequest& req);
+
+  void SendPlaylistList();
 
   void ConvertTrack(sp_track* track, protobuf::Track* pb);
 
@@ -102,16 +108,19 @@ private:
 
   QTcpSocket* protocol_socket_;
   QTcpSocket* media_socket_;
+  SpotifyMessageHandler* handler_;
 
   sp_session_config spotify_config_;
   sp_session_callbacks spotify_callbacks_;
   sp_playlistcontainer_callbacks playlistcontainer_callbacks_;
+  sp_playlist_callbacks get_playlists_callbacks_;
   sp_playlist_callbacks load_playlist_callbacks_;
   sp_session* session_;
 
   QTimer* events_timer_;
 
   QList<PendingLoadPlaylist> pending_load_playlists_;
+  QMap<sp_search*, protobuf::SearchRequest> pending_searches_;
 
   int media_length_msec_;
 };

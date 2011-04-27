@@ -1,32 +1,59 @@
 #include "radiomodel.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
+#include "core/database.h"
 #include "core/logging.h"
+#include "core/mergedproxymodel.h"
 #include "core/taskmanager.h"
+#include "library/library.h"
+#include "library/librarybackend.h"
+#include "library/libraryfilterwidget.h"
+#include "library/librarymodel.h"
+#include "spotifyblob/spotifymessagehandler.h"
 #include "ui/iconloader.h"
 
 #include <QCoreApplication>
+#include <QMenu>
 #include <QProcess>
 #include <QSettings>
+#include <QSortFilterProxyModel>
 #include <QTcpServer>
+#include <QTemporaryFile>
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
+const char* SpotifyService::kSearchSongsTable = "spotify_search_songs";
+const char* SpotifyService::kSearchFtsTable = "spotify_search_songs_fts";
 
 SpotifyService::SpotifyService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       server_(NULL),
       blob_process_(NULL),
       root_(NULL),
+      search_results_(NULL),
       starred_(NULL),
       inbox_(NULL),
-      login_task_id_(0) {
+      login_task_id_(0),
+      context_menu_(NULL),
+      library_filter_(NULL),
+      library_sort_model_(new QSortFilterProxyModel(this)) {
 #ifdef Q_OS_DARWIN
   blob_path_ = QCoreApplication::applicationDirPath() + "/../Resources/clementine-spotifyblob";
 #else
   blob_path_ = QCoreApplication::applicationFilePath() + "-spotifyblob";
 #endif
   qLog(Debug) << "Loading spotify blob from:" << blob_path_;
+
+  // Create the library backend in the database thread
+  library_backend_ = new LibraryBackend;
+  library_backend_->Init(parent->db_thread()->Worker(),
+                         kSearchSongsTable, QString(), QString(), kSearchFtsTable);
+  library_model_ = new LibraryModel(library_backend_, parent->task_manager(), this);
+
+  library_sort_model_->setSourceModel(library_model_);
+  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
+  library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->sort(0);
 }
 
 SpotifyService::~SpotifyService() {
@@ -42,6 +69,11 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
   switch (item->data(RadioModel::Role_Type).toInt()) {
     case RadioModel::Type_Service:
       EnsureServerCreated();
+      break;
+
+    case Type_SearchResults:
+      library_model_->Init();
+      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
 
     case Type_InboxPlaylist:
@@ -113,6 +145,10 @@ void SpotifyService::EnsureServerCreated(const QString& username,
           SLOT(StarredLoaded(protobuf::LoadPlaylistResponse)));
   connect(server_, SIGNAL(UserPlaylistLoaded(protobuf::LoadPlaylistResponse)),
           SLOT(UserPlaylistLoaded(protobuf::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(PlaybackError(QString)),
+          SIGNAL(StreamError(QString)));
+  connect(server_, SIGNAL(SearchResults(protobuf::SearchResponse)),
+          SLOT(SearchResults(protobuf::SearchResponse)));
 
   connect(blob_process_,
           SIGNAL(error(QProcess::ProcessError)),
@@ -141,7 +177,11 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
   }
 
   // Create starred and inbox playlists if they're not here already
-  if (!starred_) {
+  if (!search_results_) {
+    search_results_ = new QStandardItem(tr("Search results"));
+    search_results_->setData(Type_SearchResults, RadioModel::Role_Type);
+    search_results_->setData(true, RadioModel::Role_CanLazyLoad);
+
     starred_ = new QStandardItem(QIcon(":/star-on.png"), tr("Starred"));
     starred_->setData(Type_StarredPlaylist, RadioModel::Role_Type);
     starred_->setData(true, RadioModel::Role_CanLazyLoad);
@@ -150,12 +190,21 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
     inbox_->setData(Type_InboxPlaylist, RadioModel::Role_Type);
     inbox_->setData(true, RadioModel::Role_CanLazyLoad);
 
+    root_->appendRow(search_results_);
     root_->appendRow(starred_);
     root_->appendRow(inbox_);
   }
 
+  // Don't do anything if the playlists haven't changed since last time.
+  if (!DoPlaylistsDiffer(response)) {
+    qLog(Debug) << "Playlists haven't changed - not updating";
+    return;
+  }
+
   // Remove and recreate the other playlists
-  qDeleteAll(playlists_);
+  foreach (QStandardItem* item, playlists_) {
+    item->parent()->removeRow(item->row());
+  }
   playlists_.clear();
 
   for (int i=0 ; i<response.playlist_size() ; ++i) {
@@ -171,6 +220,27 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
   }
 }
 
+bool SpotifyService::DoPlaylistsDiffer(const protobuf::Playlists& response) {
+  if (playlists_.count() != response.playlist_size()) {
+    return true;
+  }
+
+  for (int i=0 ; i<response.playlist_size() ; ++i) {
+    const protobuf::Playlists::Playlist& msg = response.playlist(i);
+    const QStandardItem* item = PlaylistBySpotifyIndex(msg.index());
+
+    if (!item) {
+      return true;
+    }
+
+    if (QStringFromStdString(msg.name()) != item->text()) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 void SpotifyService::InboxLoaded(const protobuf::LoadPlaylistResponse& response) {
   FillPlaylist(inbox_, response);
 }
@@ -179,13 +249,20 @@ void SpotifyService::StarredLoaded(const protobuf::LoadPlaylistResponse& respons
   FillPlaylist(starred_, response);
 }
 
+QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
+  foreach (QStandardItem* item, playlists_) {
+    if (item->data(Role_UserPlaylistIndex).toInt() == index) {
+      return item;
+    }
+  }
+  return NULL;
+}
+
 void SpotifyService::UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response) {
   // Find a playlist with this index
-  foreach (QStandardItem* item, playlists_) {
-    if (item->data(Role_UserPlaylistIndex).toInt() == response.request().user_playlist_index()) {
-      FillPlaylist(item, response);
-      break;
-    }
+  QStandardItem* item = PlaylistBySpotifyIndex(response.request().user_playlist_index());
+  if (item) {
+    FillPlaylist(item, response);
   }
 }
 
@@ -227,6 +304,10 @@ void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) 
 
   song->set_filetype(Song::Type_Stream);
   song->set_valid(true);
+  song->set_directory_id(0);
+  song->set_mtime(0);
+  song->set_ctime(0);
+  song->set_filesize(0);
 }
 
 PlaylistItem::Options SpotifyService::playlistitem_options() const {
@@ -259,4 +340,61 @@ PlaylistItem::SpecialLoadResult SpotifyService::StartLoading(const QUrl& url) {
         PlaylistItem::SpecialLoadResult::TrackAvailable,
         url,
         QUrl("tcp://localhost:" + QString::number(port)));
+}
+
+void SpotifyService::EnsureMenuCreated() {
+  if (context_menu_)
+    return;
+
+  context_menu_ = new QMenu;
+
+  context_menu_->addActions(GetPlaylistActions());
+  context_menu_->addSeparator();
+  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
+
+  library_filter_ = new LibraryFilterWidget(0);
+  library_filter_->SetSettingsGroup(kSettingsGroup);
+  library_filter_->SetLibraryModel(library_model_);
+  library_filter_->SetFilterHint(tr("Search Spotify"));
+  library_filter_->SetAgeFilterEnabled(false);
+  library_filter_->SetGroupByEnabled(false);
+  library_filter_->AddMenuAction(config_action);
+  library_filter_->SetApplyFilterToLibrary(false);
+  library_filter_->SetDelayBehaviour(LibraryFilterWidget::AlwaysDelayed);
+
+  connect(library_filter_, SIGNAL(Filter(QString)), SLOT(Search(QString)));
+}
+
+QWidget* SpotifyService::HeaderWidget() const {
+  const_cast<SpotifyService*>(this)->EnsureMenuCreated();
+  return library_filter_;
+}
+
+void SpotifyService::Search(const QString& text) {
+  if (!text.isEmpty()) {
+    pending_search_ = text;
+    server_->Search(text, 250);
+  }
+}
+
+void SpotifyService::SearchResults(const protobuf::SearchResponse& response) {
+  if (QStringFromStdString(response.request().query()) != pending_search_) {
+    qLog(Debug) << "Old search result for"
+                << QStringFromStdString(response.request().query())
+                << "expecting" << pending_search_;
+    return;
+  }
+  pending_search_.clear();
+
+  SongList songs;
+  for (int i=0 ; i<response.result_size() ; ++i) {
+    Song song;
+    SongFromProtobuf(response.result(i), &song);
+    songs << song;
+  }
+
+  qLog(Debug) << "Got" << songs.count() << "results";
+
+  library_backend_->DeleteAll();
+  library_backend_->AddOrUpdateSongs(songs);
 }

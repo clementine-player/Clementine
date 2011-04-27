@@ -44,7 +44,15 @@ class LibraryFilterWidget : public QWidget {
 
   static const int kFilterDelay = 500; // msec
 
+  enum DelayBehaviour {
+    AlwaysInstant,
+    DelayedOnLargeLibraries,
+    AlwaysDelayed,
+  };
+
   void SetFilterHint(const QString& hint);
+  void SetApplyFilterToLibrary(bool filter_applies_to_model) { filter_applies_to_model_ = filter_applies_to_model; }
+  void SetDelayBehaviour(DelayBehaviour behaviour) { delay_behaviour_ = behaviour; }
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
 
@@ -61,6 +69,7 @@ class LibraryFilterWidget : public QWidget {
   void UpPressed();
   void DownPressed();
   void ReturnPressed();
+  void Filter(const QString& text);
 
  protected:
   void keyReleaseEvent(QKeyEvent* e);
@@ -86,6 +95,9 @@ class LibraryFilterWidget : public QWidget {
   QSignalMapper* filter_age_mapper_;
 
   QTimer* filter_delay_;
+
+  bool filter_applies_to_model_;
+  DelayBehaviour delay_behaviour_;
 
   QString settings_group_;
 

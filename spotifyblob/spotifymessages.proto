@@ -78,6 +78,19 @@ message PlaybackError {
   required string error = 1;
 }
 
+message SearchRequest {
+  required string query = 1;
+  optional int32 limit = 2 [default = 250];
+}
+
+message SearchResponse {
+  required SearchRequest request = 1;
+  repeated Track result = 2;
+  optional int32 total_tracks = 3;
+  optional string did_you_mean = 4;
+  optional string error = 5;
+}
+
 message SpotifyMessage {
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
@@ -86,4 +99,6 @@ message SpotifyMessage {
   optional LoadPlaylistResponse load_playlist_response = 5;
   optional PlaybackRequest playback_request = 6;
   optional PlaybackError playback_error = 7;
+  optional SearchRequest search_request = 8;
+  optional SearchResponse search_response = 9;
 }

@@ -8,7 +8,15 @@
 #include <QProcess>
 #include <QTimer>
 
+#include <boost/shared_ptr.hpp>
+
+class LibraryBackend;
+class LibraryModel;
 class SpotifyServer;
+
+class QMenu;
+class QSortFilterProxyModel;
+class QTemporaryFile;
 
 class SpotifyService : public RadioService {
   Q_OBJECT
@@ -18,7 +26,8 @@ public:
   ~SpotifyService();
 
   enum Type {
-    Type_StarredPlaylist = RadioModel::TypeCount,
+    Type_SearchResults = RadioModel::TypeCount,
+    Type_StarredPlaylist,
     Type_InboxPlaylist,
     Type_UserPlaylist,
     Type_Track,
@@ -36,8 +45,12 @@ public:
   PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
   PlaylistItem::Options playlistitem_options() const;
 
+  QWidget* HeaderWidget() const;
+
   static const char* kServiceName;
   static const char* kSettingsGroup;
+  static const char* kSearchSongsTable;
+  static const char* kSearchFtsTable;
 
 signals:
   void LoginFinished(bool success);
@@ -50,6 +63,10 @@ private:
                            const QString& password = QString());
   void FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response);
   void SongFromProtobuf(const protobuf::Track& track, Song* song) const;
+  void EnsureMenuCreated();
+
+  QStandardItem* PlaylistBySpotifyIndex(int index) const;
+  bool DoPlaylistsDiffer(const protobuf::Playlists& response);
 
 private slots:
   void BlobProcessError(QProcess::ProcessError error);
@@ -58,6 +75,9 @@ private slots:
   void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
   void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
   void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
+  void SearchResults(const protobuf::SearchResponse& response);
+
+  void Search(const QString& text);
 
 private:
   SpotifyServer* server_;
@@ -66,11 +86,23 @@ private:
   QProcess* blob_process_;
 
   QStandardItem* root_;
+  QStandardItem* search_results_;
   QStandardItem* starred_;
   QStandardItem* inbox_;
   QList<QStandardItem*> playlists_;
 
   int login_task_id_;
+  QString pending_search_;
+
+  QMenu* context_menu_;
+  QModelIndex context_item_;
+
+  QTemporaryFile* database_file_;
+  boost::shared_ptr<Database> database_;
+  LibraryBackend* library_backend_;
+  LibraryFilterWidget* library_filter_;
+  LibraryModel* library_model_;
+  QSortFilterProxyModel* library_sort_model_;
 };
 
 #endif

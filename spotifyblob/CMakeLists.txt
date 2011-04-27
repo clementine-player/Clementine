@@ -9,17 +9,23 @@ set(EXECUTABLE_OUTPUT_PATH ..)
 
 
 set(COMMON_SOURCES
-  spotifymessageutils.cpp
+  spotifymessagehandler.cpp
+)
+
+set(COMMON_HEADERS
+  spotifymessagehandler.h
 )
 
 set(COMMON_MESSAGES
   spotifymessages.proto
 )
 
+qt4_wrap_cpp(COMMON_MOC ${COMMON_HEADERS})
 protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${COMMON_MESSAGES})
 
 add_library(clementine-spotifyblob-messages STATIC
   ${COMMON_SOURCES}
+  ${COMMON_MOC}
   ${PROTO_SOURCES}
 )
 

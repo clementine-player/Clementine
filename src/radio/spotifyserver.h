@@ -19,14 +19,15 @@
 #define SPOTIFYSERVER_H
 
 #include "spotifyblob/spotifymessages.pb.h"
-#include "spotifyblob/spotifymessageutils.h"
 
 #include <QObject>
+
+class SpotifyMessageHandler;
 
 class QTcpServer;
 class QTcpSocket;
 
-class SpotifyServer : public QObject, protected SpotifyMessageUtils {
+class SpotifyServer : public QObject {
   Q_OBJECT
 
 public:
@@ -41,6 +42,8 @@ public:
 
   void StartPlayback(const QString& uri, quint16 port);
 
+  void Search(const QString& text, int limit);
+
   int server_port() const;
 
 signals:
@@ -51,9 +54,13 @@ signals:
   void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
   void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
 
+  void PlaybackError(const QString& message);
+
+  void SearchResults(const protobuf::SearchResponse& response);
+
 private slots:
   void NewConnection();
-  void ProtocolSocketReadyRead();
+  void HandleMessage(const protobuf::SpotifyMessage& message);
 
 private:
   void LoadPlaylist(protobuf::LoadPlaylistRequest_Type type, int index = -1);
@@ -61,6 +68,7 @@ private:
 
   QTcpServer* server_;
   QTcpSocket* protocol_socket_;
+  SpotifyMessageHandler* handler_;
   bool logged_in_;
 
   QList<protobuf::SpotifyMessage> queued_login_messages_;

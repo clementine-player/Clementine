@@ -21,6 +21,7 @@
 
 #include "spotifyclient.h"
 #include "spotifykey.h"
+#include "spotifymessagehandler.h"
 #include "spotifymessages.pb.h"
 #include "core/logging.h"
 
@@ -34,12 +35,14 @@ SpotifyClient::SpotifyClient(QObject* parent)
     api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
     protocol_socket_(new QTcpSocket(this)),
     media_socket_(NULL),
+    handler_(new SpotifyMessageHandler(protocol_socket_, this)),
     session_(NULL),
     events_timer_(new QTimer(this)),
     media_length_msec_(-1) {
   memset(&spotify_callbacks_, 0, sizeof(spotify_callbacks_));
   memset(&spotify_config_, 0, sizeof(spotify_config_));
   memset(&playlistcontainer_callbacks_, 0, sizeof(playlistcontainer_callbacks_));
+  memset(&get_playlists_callbacks_, 0, sizeof(get_playlists_callbacks_));
   memset(&load_playlist_callbacks_, 0, sizeof(load_playlist_callbacks_));
 
   spotify_callbacks_.logged_in = &LoggedInCallback;
@@ -55,7 +58,9 @@ SpotifyClient::SpotifyClient(QObject* parent)
   playlistcontainer_callbacks_.playlist_moved = &PlaylistMovedCallback;
   playlistcontainer_callbacks_.playlist_removed = &PlaylistRemovedCallback;
 
-  load_playlist_callbacks_.playlist_state_changed = &PlaylistStateChanged;
+  get_playlists_callbacks_.playlist_state_changed = &PlaylistStateChangedForGetPlaylists;
+
+  load_playlist_callbacks_.playlist_state_changed = &PlaylistStateChangedForLoadPlaylist;
 
   spotify_config_.api_version = SPOTIFY_API_VERSION;  // From libspotify/api.h
   spotify_config_.cache_location = strdup(QDir::tempPath().toLocal8Bit().constData());
@@ -69,7 +74,8 @@ SpotifyClient::SpotifyClient(QObject* parent)
   events_timer_->setSingleShot(true);
   connect(events_timer_, SIGNAL(timeout()), SLOT(ProcessEvents()));
 
-  connect(protocol_socket_, SIGNAL(readyRead()), SLOT(SocketReadyRead()));
+  connect(handler_, SIGNAL(MessageArrived(protobuf::SpotifyMessage)),
+          SLOT(HandleMessage(protobuf::SpotifyMessage)));
 }
 
 SpotifyClient::~SpotifyClient() {
@@ -120,45 +126,57 @@ void SpotifyClient::LogMessageCallback(sp_session* session, const char* data) {
   qLog(Debug) << "libspotify:" << QString::fromUtf8(data).trimmed();
 }
 
-void SpotifyClient::Search(const QString& query) {
-  sp_search_create(
-      session_,
-      query.toUtf8().constData(),
-      0,   // track offset
-      10,  // track count
-      0,   // album offset
-      10,  // album count
-      0,   // artist offset
-      10,  // artist count
-      &SearchCompleteCallback,
-      this);
+void SpotifyClient::Search(const protobuf::SearchRequest& req) {
+  sp_search* search = sp_search_create(
+        session_, req.query().c_str(), 0, req.limit(), 0, 0, 0, 0,
+        &SearchCompleteCallback, this);
+
+  pending_searches_[search] = req;
 }
 
 void SpotifyClient::SearchCompleteCallback(sp_search* result, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  if (!me->pending_searches_.contains(result)) {
+    qLog(Warning) << "SearchComplete called with unknown search";
+    return;
+  }
+
+  // Take the request out of the queue
+  protobuf::SearchRequest req = me->pending_searches_.take(result);
+
+  // Prepare the response
+  protobuf::SpotifyMessage message;
+  protobuf::SearchResponse* response = message.mutable_search_response();
+
+  *response->mutable_request() = req;
+
+  // Check for errors
   sp_error error = sp_search_error(result);
   if (error != SP_ERROR_OK) {
-    qLog(Warning) << "Search failed";
+    response->set_error(sp_error_message(error));
+
+    me->handler_->SendMessage(message);
     sp_search_release(result);
     return;
   }
 
-  int artists = sp_search_num_artists(result);
-  for (int i = 0; i < artists; ++i) {
-    sp_artist* artist = sp_search_artist(result, i);
-    qLog(Debug) << "Found artist:" << sp_artist_name(artist);
+  // Get the list of tracks from the search
+  const int count = sp_search_num_tracks(result);
+  for (int i=0 ; i<count ; ++i) {
+    sp_track* track = sp_search_track(result, i);
+    me->ConvertTrack(track, response->add_result());
   }
 
+  // Add other data to the response
+  response->set_total_tracks(sp_search_total_tracks(result));
+  response->set_did_you_mean(sp_search_did_you_mean(result));
+
+  me->handler_->SendMessage(message);
   sp_search_release(result);
 }
 
-void SpotifyClient::SocketReadyRead() {
-  protobuf::SpotifyMessage message;
-  if (!ReadMessage(protocol_socket_, &message)) {
-    protocol_socket_->deleteLater();
-    protocol_socket_ = NULL;
-    return;
-  }
-
+void SpotifyClient::HandleMessage(const protobuf::SpotifyMessage& message) {
   if (message.has_login_request()) {
     const protobuf::LoginRequest& r = message.login_request();
     Login(QStringFromStdString(r.username()), QStringFromStdString(r.password()));
@@ -166,6 +184,8 @@ void SpotifyClient::SocketReadyRead() {
     LoadPlaylist(message.load_playlist_request());
   } else if (message.has_playback_request()) {
     StartPlayback(message.playback_request());
+  } else if (message.has_search_request()) {
+    Search(message.search_request());
   }
 }
 
@@ -187,30 +207,46 @@ void SpotifyClient::SendLoginCompleted(bool success, const QString& error) {
   response->set_success(success);
   response->set_error(DataCommaSizeFromQString(error));
 
-  SendMessage(protocol_socket_, message);
+  handler_->SendMessage(message);
 }
 
 void SpotifyClient::PlaylistContainerLoadedCallback(sp_playlistcontainer* pc, void* userdata) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
-  me->GetPlaylists();
+
+  // Install callbacks on all the playlists
+  const int count = sp_playlistcontainer_num_playlists(pc);
+  for (int i=0 ; i<count ; ++i) {
+    sp_playlist* playlist = sp_playlistcontainer_playlist(pc, i);
+    sp_playlist_add_callbacks(playlist, &me->get_playlists_callbacks_, me);
+  }
+
+  me->SendPlaylistList();
 }
 
 void SpotifyClient::PlaylistAddedCallback(sp_playlistcontainer* pc, sp_playlist* playlist, int position, void* userdata) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
-  me->GetPlaylists();
+
+  // Install callbacks on this playlist
+  sp_playlist_add_callbacks(playlist, &me->get_playlists_callbacks_, me);
+
+  me->SendPlaylistList();
 }
 
 void SpotifyClient::PlaylistMovedCallback(sp_playlistcontainer* pc, sp_playlist* playlist, int position, int new_position, void* userdata) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
-  me->GetPlaylists();
+  me->SendPlaylistList();
 }
 
 void SpotifyClient::PlaylistRemovedCallback(sp_playlistcontainer* pc, sp_playlist* playlist, int position, void* userdata) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
-  me->GetPlaylists();
+
+  // Remove callbacks from this playlist
+  sp_playlist_remove_callbacks(playlist, &me->get_playlists_callbacks_, me);
+
+  me->SendPlaylistList();
 }
 
-void SpotifyClient::GetPlaylists() {
+void SpotifyClient::SendPlaylistList() {
   protobuf::SpotifyMessage message;
   protobuf::Playlists* response = message.mutable_playlists_updated();
 
@@ -221,14 +257,18 @@ void SpotifyClient::GetPlaylists() {
   }
 
   const int count = sp_playlistcontainer_num_playlists(container);
-  qLog(Debug) << "Playlist container has" << count << "playlists";
 
   for (int i=0 ; i<count ; ++i) {
     const int type = sp_playlistcontainer_playlist_type(container, i);
     sp_playlist* playlist = sp_playlistcontainer_playlist(container, i);
+    const bool is_loaded = sp_playlist_is_loaded(playlist);
 
-    qLog(Debug) << "Playlist loaded:" << sp_playlist_is_loaded(playlist);
-    qLog(Debug) << "Got playlist" << i << type << sp_playlist_name(playlist);
+    qLog(Debug) << "Got playlist" << i << is_loaded << type << sp_playlist_name(playlist);
+
+    if (!is_loaded) {
+      qLog(Info) << "Playlist is not loaded yet, waiting...";
+      return;
+    }
 
     if (type != SP_PLAYLIST_TYPE_PLAYLIST) {
       // Just ignore folders for now
@@ -240,7 +280,7 @@ void SpotifyClient::GetPlaylists() {
     msg->set_name(sp_playlist_name(playlist));
   }
 
-  SendMessage(protocol_socket_, message);
+  handler_->SendMessage(message);
 }
 
 void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
@@ -280,17 +320,17 @@ void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
     protobuf::SpotifyMessage message;
     protobuf::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
     *response->mutable_request() = req;
-    SendMessage(protocol_socket_, message);
+    handler_->SendMessage(message);
     return;
   }
 
   sp_playlist_add_callbacks(pending_load.playlist_, &load_playlist_callbacks_, this);
   pending_load_playlists_ << pending_load;
 
-  PlaylistStateChanged(pending_load.playlist_, this);
+  PlaylistStateChangedForLoadPlaylist(pending_load.playlist_, this);
 }
 
-void SpotifyClient::PlaylistStateChanged(sp_playlist* pl, void* userdata) {
+void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
 
   // If the playlist isn't loaded yet we have to wait
@@ -342,7 +382,7 @@ void SpotifyClient::PlaylistStateChanged(sp_playlist* pl, void* userdata) {
     me->ConvertTrack(track, response->add_track());
     sp_track_release(track);
   }
-  me->SendMessage(me->protocol_socket_, message);
+  me->handler_->SendMessage(message);
 
   // Unref the playlist and remove our callbacks
   sp_playlist_remove_callbacks(pl, &me->load_playlist_callbacks_, me);
@@ -350,6 +390,12 @@ void SpotifyClient::PlaylistStateChanged(sp_playlist* pl, void* userdata) {
 
   // Remove the pending load object
   me->pending_load_playlists_.removeAt(pending_load_index);
+}
+
+void SpotifyClient::PlaylistStateChangedForGetPlaylists(sp_playlist* pl, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  me->SendPlaylistList();
 }
 
 void SpotifyClient::ConvertTrack(sp_track* track, protobuf::Track* pb) {
@@ -381,7 +427,7 @@ void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
 
   foreach (const PendingLoadPlaylist& load, me->pending_load_playlists_) {
-    PlaylistStateChanged(load.playlist_, me);
+    PlaylistStateChangedForLoadPlaylist(load.playlist_, me);
   }
 }
 
@@ -510,7 +556,7 @@ void SpotifyClient::SendPlaybackError(const QString& error) {
   protobuf::PlaybackError* msg = message.mutable_playback_error();
 
   msg->set_error(DataCommaSizeFromQString(error));
-  SendMessage(protocol_socket_, message);
+  handler_->SendMessage(message);
 }
 
 void SpotifyClient::MediaSocketDisconnected() {
