@@ -56,6 +56,8 @@ class AlbumCoverManager : public QMainWindow {
   void Reset();
   void Init();
 
+  void ResetFetchCoversButton();
+
   SongList GetSongsInAlbum(const QModelIndex& index) const;
   SongList GetSongsInAlbums(const QModelIndexList& indexes) const;
   SongMimeData* GetMimeDataForAlbums(const QModelIndexList& indexes) const;

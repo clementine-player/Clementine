@@ -98,6 +98,8 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
 
   QShortcut* close = new QShortcut(QKeySequence::Close, this);
   connect(close, SIGNAL(activated()), SLOT(close()));
+
+  ResetFetchCoversButton();
 }
 
 AlbumCoverManager::~AlbumCoverManager() {
@@ -232,12 +234,14 @@ void AlbumCoverManager::CancelRequests() {
 
   cover_fetching_tasks_.clear();
   cover_fetcher_->Clear();
-  ui_->fetch->setEnabled(true);
   progress_bar_->hide();
   statusBar()->clearMessage();
+  ResetFetchCoversButton();
 }
 
 void AlbumCoverManager::Reset() {
+  ResetFetchCoversButton();
+
   if (!backend_)
     return;
 
@@ -251,6 +255,10 @@ void AlbumCoverManager::Reset() {
 
     new QListWidgetItem(artist_icon_, artist, ui_->artists, Specific_Artist);
   }
+}
+
+void AlbumCoverManager::ResetFetchCoversButton() {
+  ui_->fetch->setEnabled(CoverProviders::instance().HasAnyProviders());
 }
 
 void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
@@ -392,8 +400,9 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
     SaveAndSetCover(item, image);
   }
 
-  if (cover_fetching_tasks_.isEmpty())
-    ui_->fetch->setEnabled(true);
+  if (cover_fetching_tasks_.isEmpty()) {
+    ResetFetchCoversButton();
+  }
 
   UpdateStatusText();
 }
