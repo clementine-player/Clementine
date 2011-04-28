@@ -255,6 +255,7 @@ set(SOURCES
   widgets/autoexpandingtreeview.cpp
   widgets/busyindicator.cpp
   widgets/clickablelabel.cpp
+  widgets/didyoumean.cpp
   widgets/elidedlabel.cpp
   widgets/equalizerslider.cpp
   widgets/errordialog.cpp
@@ -451,6 +452,7 @@ set(HEADERS
   widgets/autoexpandingtreeview.h
   widgets/busyindicator.h
   widgets/clickablelabel.h
+  widgets/didyoumean.h
   widgets/elidedlabel.h
   widgets/equalizerslider.h
   widgets/errordialog.h

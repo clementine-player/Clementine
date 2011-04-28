@@ -21,6 +21,7 @@
 #include "ui_playlistcontainer.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
+#include "widgets/didyoumean.h"
 #include "widgets/maclineedit.h"
 
 #include <QUndoStack>
@@ -43,7 +44,8 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     starting_up_(true),
     tab_bar_visible_(false),
     tab_bar_animation_(new QTimeLine(500, this)),
-    no_matches_label_(new QLabel(this))
+    no_matches_label_(new QLabel(this)),
+    did_you_mean_(NULL)
 {
   ui_->setupUi(this);
 
@@ -94,6 +96,9 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   connect(ui_->playlist, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
   ui_->filter->installEventFilter(this);
 #endif
+
+  did_you_mean_ = new DidYouMean(filter_->widget(), this);
+  connect(did_you_mean_, SIGNAL(Accepted(QString)), SLOT(DidYouMeanAccepted(QString)));
 }
 
 PlaylistContainer::~PlaylistContainer() {
@@ -182,6 +187,8 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   ui_->redo->setDefaultAction(redo_);
 
   emit UndoRedoActionsChanged(undo_, redo_);
+
+  did_you_mean()->hide();
 
   // Implement special playlist behaviour
   const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
@@ -415,4 +422,12 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
+}
+
+void PlaylistContainer::DidYouMeanAccepted(const QString& text) {
+  filter_->set_text(text);
+
+  Playlist* playlist = manager_->current();
+  SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+  type->DidYouMeanClicked(text, playlist);
 }

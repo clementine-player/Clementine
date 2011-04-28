@@ -15,10 +15,42 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "specialplaylisttype.h"
+#ifndef DIDYOUMEAN_H
+#define DIDYOUMEAN_H
 
-#include <QObject>
+#include <QWidget>
 
-QString SpecialPlaylistType::search_hint_text(Playlist* playlist) const {
-  return QObject::tr("Playlist search");
-}
+class QToolButton;
+
+class DidYouMean : public QWidget {
+  Q_OBJECT
+
+public:
+  DidYouMean(QWidget* buddy, QWidget* parent);
+
+  static const int kPadding;
+
+public slots:
+  void SetText(const QString& text);
+  void Show(const QString& text);
+
+signals:
+  void Accepted(const QString& text);
+
+protected:
+  void paintEvent(QPaintEvent*);
+  void showEvent(QShowEvent*);
+  void mouseReleaseEvent(QMouseEvent* e);
+  bool eventFilter(QObject* object, QEvent* event);
+
+private:
+  void UpdateGeometry();
+
+private:
+  QWidget* buddy_;
+  QString text_;
+
+  QToolButton* close_;
+};
+
+#endif // DIDYOUMEAN_H

@@ -45,7 +45,7 @@ public:
   PlaylistItem::Options playlistitem_options() const;
 
   void Login(const QString& username, const QString& password);
-  void Search(const QString& text, Playlist* playlist);
+  void Search(const QString& text, Playlist* playlist, bool now = false);
 
   SpotifyServer* server() const;
 

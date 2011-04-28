@@ -29,6 +29,7 @@
 class LibraryBackend;
 class Playlist;
 class PlaylistBackend;
+class PlaylistContainer;
 class PlaylistParser;
 class PlaylistSequence;
 class SpecialPlaylistType;
@@ -69,6 +70,7 @@ public:
   virtual PlaylistBackend* playlist_backend() const = 0;
   virtual PlaylistSequence* sequence() const = 0;
   virtual PlaylistParser* parser() const = 0;
+  virtual PlaylistContainer* playlist_container() const = 0;
 
   virtual void RegisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
   virtual void UnregisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
@@ -159,13 +161,14 @@ public:
   QString name(int index) const { return playlists_[index].name; }
 
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
-            PlaylistSequence* sequence);
+            PlaylistSequence* sequence, PlaylistContainer* playlist_container);
 
   TaskManager* task_manager() const { return task_manager_; }
   LibraryBackend* library_backend() const { return library_backend_; }
   PlaylistBackend* playlist_backend() const { return playlist_backend_; }
   PlaylistSequence* sequence() const { return sequence_; }
   PlaylistParser* parser() const { return parser_; }
+  PlaylistContainer* playlist_container() const { return playlist_container_; }
 
   void RegisterSpecialPlaylistType(SpecialPlaylistType* type);
   void UnregisterSpecialPlaylistType(SpecialPlaylistType* type);
@@ -224,6 +227,7 @@ private:
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;
   PlaylistParser* parser_;
+  PlaylistContainer* playlist_container_;
 
   // key = id
   QMap<int, Data> playlists_;

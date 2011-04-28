@@ -23,6 +23,7 @@
 
 class Ui_PlaylistContainer;
 
+class DidYouMean;
 class LineEditInterface;
 class Playlist;
 class PlaylistManager;
@@ -45,6 +46,7 @@ public:
                   previous_playlist);
   void SetManager(PlaylistManager* manager);
 
+  DidYouMean* did_you_mean() const { return did_you_mean_; }
   PlaylistView* view() const;
 
   bool eventFilter(QObject *objectWatched, QEvent *event);
@@ -87,6 +89,8 @@ private slots:
   void UpdateFilter();
   void FocusOnFilter(QKeyEvent *event);
 
+  void DidYouMeanAccepted(const QString& text);
+
 private:
   void UpdateActiveIcon(const QIcon& icon);
   void RepositionNoMatchesLabel(bool force = false);
@@ -106,6 +110,8 @@ private:
 
   QLabel* no_matches_label_;
   LineEditInterface* filter_;
+
+  DidYouMean* did_you_mean_;
 };
 
 #endif // PLAYLISTCONTAINER_H

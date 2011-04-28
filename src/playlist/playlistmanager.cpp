@@ -56,11 +56,13 @@ PlaylistManager::~PlaylistManager() {
 
 void PlaylistManager::Init(LibraryBackend* library_backend,
                            PlaylistBackend* playlist_backend,
-                           PlaylistSequence* sequence) {
+                           PlaylistSequence* sequence,
+                           PlaylistContainer* playlist_container) {
   library_backend_ = library_backend;
   playlist_backend_ = playlist_backend;
   sequence_ = sequence;
   parser_ = new PlaylistParser(library_backend, this);
+  playlist_container_ = playlist_container;
 
   connect(library_backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsDiscovered(SongList)));

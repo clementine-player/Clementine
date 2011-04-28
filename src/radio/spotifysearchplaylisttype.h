@@ -36,6 +36,7 @@ public:
 
   virtual bool has_special_search_behaviour(Playlist* playlist) const;
   virtual void Search(const QString& text, Playlist* playlist);
+  virtual void DidYouMeanClicked(const QString& text, Playlist* playlist);
 
 private:
   SpotifyService* service_;

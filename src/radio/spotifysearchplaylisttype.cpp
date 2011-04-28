@@ -48,3 +48,7 @@ bool SpotifySearchPlaylistType::has_special_search_behaviour(Playlist* playlist)
 void SpotifySearchPlaylistType::Search(const QString& text, Playlist* playlist) {
   service_->Search(text, playlist);
 }
+
+void SpotifySearchPlaylistType::DidYouMeanClicked(const QString& text, Playlist* playlist) {
+  service_->Search(text, playlist, true);
+}

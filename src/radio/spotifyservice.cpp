@@ -8,8 +8,10 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "spotifyblob/spotifymessagehandler.h"
+#include "widgets/didyoumean.h"
 #include "ui/iconloader.h"
 
 #include <QCoreApplication>
@@ -318,12 +320,18 @@ void SpotifyService::EnsureMenuCreated() {
   context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
 }
 
-void SpotifyService::Search(const QString& text, Playlist* playlist) {
+void SpotifyService::Search(const QString& text, Playlist* playlist, bool now) {
   EnsureServerCreated();
 
   pending_search_ = text;
   pending_search_playlist_ = playlist;
-  search_delay_->start();
+
+  if (now) {
+    search_delay_->stop();
+    DoSearch();
+  } else {
+    search_delay_->start();
+  }
 }
 
 void SpotifyService::DoSearch() {
@@ -352,6 +360,11 @@ void SpotifyService::SearchResults(const protobuf::SearchResponse& response) {
 
   pending_search_playlist_->Clear();
   pending_search_playlist_->InsertSongs(songs);
+
+  const QString did_you_mean = QStringFromStdString(response.did_you_mean());
+  if (!did_you_mean.isEmpty()) {
+    model()->player()->playlists()->playlist_container()->did_you_mean()->Show(did_you_mean);
+  }
 }
 
 SpotifyServer* SpotifyService::server() const {

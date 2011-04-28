@@ -676,7 +676,8 @@ MainWindow::MainWindow(
   css_loader->SetStyleSheet(this, ":mainwindow.css");
 
   // Load playlists
-  playlists_->Init(library_->backend(), playlist_backend_, ui_->playlist_sequence);
+  playlists_->Init(library_->backend(), playlist_backend_,
+                   ui_->playlist_sequence, ui_->playlist);
 
   // We need to connect these global shortcuts here after the playlist have been initialized
   connect(global_shortcuts_, SIGNAL(CycleShuffleMode()), player_->playlists()->sequence(), SLOT(CycleShuffleMode()));
