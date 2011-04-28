@@ -429,6 +429,9 @@ void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
   foreach (const PendingLoadPlaylist& load, me->pending_load_playlists_) {
     PlaylistStateChangedForLoadPlaylist(load.playlist_, me);
   }
+  foreach (const PendingPlaybackRequest& playback, me->pending_playback_requests_) {
+    me->TryPlaybackAgain(playback);
+  }
 }
 
 int SpotifyClient::MusicDeliveryCallback(
@@ -516,39 +519,60 @@ void SpotifyClient::StartPlayback(const protobuf::PlaybackRequest& req) {
   sp_track* track = sp_link_as_track(link);
   if (!track) {
     SendPlaybackError("Spotify URI was not a track");
-    sp_track_release(track);
+    sp_link_release(link);
     return;
   }
 
+  PendingPlaybackRequest pending_playback;
+  pending_playback.request_ = req;
+  pending_playback.link_ = link;
+  pending_playback.track_ = track;
+
+  pending_playback_requests_ << pending_playback;
+
+  TryPlaybackAgain(pending_playback);
+}
+
+void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
+  // If the track was not loaded then we have to come back later
+  if (!sp_track_is_loaded(req.track_)) {
+    qLog(Debug) << "Playback track not loaded yet, will try again later";
+    return;
+  }
+
+  // Remove this from the pending list now
+  pending_playback_requests_.removeAll(req);
+
   // Load the track
-  sp_error error = sp_session_player_load(session_, track);
+  sp_error error = sp_session_player_load(session_, req.track_);
   if (error != SP_ERROR_OK) {
-    SendPlaybackError(QString::fromUtf8(sp_error_message(error)));
-    sp_track_release(track);
+    SendPlaybackError("Spotify playback error: " +
+                      QString::fromUtf8(sp_error_message(error)));
+    sp_link_release(req.link_);
     return;
   }
 
   // Create the media socket
   QTcpSocket* old_media_socket = media_socket_;
   media_socket_ = new QTcpSocket(this);
-  media_socket_->connectToHost(QHostAddress::LocalHost, req.media_port());
+  media_socket_->connectToHost(QHostAddress::LocalHost, req.request_.media_port());
   connect(media_socket_, SIGNAL(disconnected()), SLOT(MediaSocketDisconnected()));
 
   if (old_media_socket) {
     old_media_socket->close();
   }
 
-  qLog(Info) << "Starting playback of uri" << req.track_uri().c_str()
-             << "to port" << req.media_port();
+  qLog(Info) << "Starting playback of uri" << req.request_.track_uri().c_str()
+             << "to port" << req.request_.media_port();
 
   // Set the track length - this will trigger MusicDeliveryCallback to send
   // a WAVE header.
-  media_length_msec_ = sp_track_duration(track);
+  media_length_msec_ = sp_track_duration(req.track_);
 
   // Start playback
   sp_session_player_play(session_, true);
 
-  sp_track_release(track);
+  sp_link_release(req.link_);
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {

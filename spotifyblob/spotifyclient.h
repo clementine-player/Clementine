@@ -98,11 +98,22 @@ private:
 private:
   struct PendingLoadPlaylist {
     protobuf::LoadPlaylistRequest request_;
-
     sp_playlist* playlist_;
-
     QList<sp_track*> tracks_;
   };
+
+  struct PendingPlaybackRequest {
+    protobuf::PlaybackRequest request_;
+    sp_link* link_;
+    sp_track* track_;
+
+    bool operator ==(const PendingPlaybackRequest& other) const {
+      return request_.track_uri() == other.request_.track_uri() &&
+             request_.media_port() == other.request_.media_port();
+    }
+  };
+
+  void TryPlaybackAgain(const PendingPlaybackRequest& req);
 
   QByteArray api_key_;
 
@@ -120,6 +131,7 @@ private:
   QTimer* events_timer_;
 
   QList<PendingLoadPlaylist> pending_load_playlists_;
+  QList<PendingPlaybackRequest> pending_playback_requests_;
   QMap<sp_search*, protobuf::SearchRequest> pending_searches_;
 
   int media_length_msec_;
