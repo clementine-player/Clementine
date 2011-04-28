@@ -185,9 +185,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 
   // Implement special playlist behaviour
   const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-  ui_->filter->set_hint(type->search_hint_text(playlist));
-
-
+  filter_->set_hint(type->search_hint_text(playlist));
 }
 
 void PlaylistContainer::ActivePlaying() {
