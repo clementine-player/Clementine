@@ -46,7 +46,11 @@ public:
   MOCK_CONST_METHOD0(sequence, PlaylistSequence*());
   MOCK_CONST_METHOD0(parser, PlaylistParser*());
 
-  MOCK_METHOD2(New, void(const QString&, const SongList&));
+  MOCK_METHOD1(RegisterSpecialPlaylistType, void(SpecialPlaylistType*));
+  MOCK_METHOD1(UnregisterSpecialPlaylistType, void(SpecialPlaylistType*));
+  MOCK_CONST_METHOD1(GetPlaylistType, SpecialPlaylistType*(const QString&));
+
+  MOCK_METHOD3(New, void(const QString&, const SongList&, const QString&));
   MOCK_METHOD1(Load, void(const QString&));
   MOCK_METHOD2(Save, void(int, const QString&));
   MOCK_METHOD2(Rename, void(int, const QString&));

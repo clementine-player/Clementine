@@ -37,6 +37,9 @@ public:
   MOCK_CONST_METHOD1(GetItemAt, PlaylistItemPtr(int));
   MOCK_CONST_METHOD0(playlists, PlaylistManagerInterface*());
 
+  MOCK_METHOD1(RegisterUrlHandler, void(UrlHandler*));
+  MOCK_METHOD1(UnregisterUrlHandler, void(UrlHandler*));
+
   MOCK_METHOD0(ReloadSettings, void());
 
   MOCK_METHOD3(PlayAt, void(int, Engine::TrackChangeFlags, bool));
@@ -51,7 +54,6 @@ public:
   MOCK_METHOD1(SeekTo, void(int));
   MOCK_METHOD0(SeekForward, void());
   MOCK_METHOD0(SeekBackward, void());
-  MOCK_METHOD1(HandleSpecialLoad, void(const PlaylistItem::SpecialLoadResult&));
   MOCK_METHOD1(CurrentMetadataChanged, void(const Song&));
 
   MOCK_METHOD0(Mute, void());
