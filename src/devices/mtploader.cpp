@@ -64,9 +64,8 @@ bool MtpLoader::TryLoad() {
     LIBMTP_track_t* track = tracks;
 
     Song song;
-    song.InitFromMTP(track);
+    song.InitFromMTP(track, url_.host());
     song.set_directory_id(1);
-    song.set_filename("mtp://" + url_.host() + "/" + song.filename());
     songs << song;
 
     tracks = tracks->next;

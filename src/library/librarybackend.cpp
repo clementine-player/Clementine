@@ -89,7 +89,8 @@ void LibraryBackend::LoadDirectories() {
   }
 }
 
-void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
+void LibraryBackend::ChangeDirPath(int id, const QString& old_path,
+                                   const QString& new_path) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
   ScopedTransaction t(&db);
@@ -101,12 +102,15 @@ void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
   q.exec();
   if (db_->CheckErrors(q)) return;
 
-  const int path_len = new_path.length();
+  const QByteArray old_url = QUrl::fromLocalFile(old_path).toEncoded();
+  const QByteArray new_url = QUrl::fromLocalFile(new_path).toEncoded();
+
+  const int path_len = old_url.length();
 
   // Do the subdirs table
   q = QSqlQuery(QString("UPDATE %1 SET path=:path || substr(path, %2)"
                         " WHERE directory=:id").arg(subdirs_table_).arg(path_len), db);
-  q.bindValue(":path", new_path);
+  q.bindValue(":path", new_url);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -114,7 +118,7 @@ void LibraryBackend::ChangeDirPath(int id, const QString &new_path) {
   // Do the songs table
   q = QSqlQuery(QString("UPDATE %1 SET filename=:path || substr(filename, %2)"
                         " WHERE directory=:id").arg(songs_table_).arg(path_len), db);
-  q.bindValue(":path", new_path);
+  q.bindValue(":path", new_url);
   q.bindValue(":id", id);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -564,10 +568,10 @@ SongList LibraryBackend::GetSongsById(const QStringList& ids, QSqlDatabase& db) 
   return ret;
 }
 
-Song LibraryBackend::GetSongByFilename(const QString& filename, qint64 beginning) {
+Song LibraryBackend::GetSongByUrl(const QUrl& url, qint64 beginning) {
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-  query.AddWhere("filename", filename);
+  query.AddWhere("filename", url.toEncoded());
   query.AddWhere("beginning", beginning);
 
   Song song;
@@ -577,10 +581,10 @@ Song LibraryBackend::GetSongByFilename(const QString& filename, qint64 beginning
   return song;
 }
 
-SongList LibraryBackend::GetSongsByFilename(const QString& filename) {
+SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-  query.AddWhere("filename", filename);
+  query.AddWhere("filename", url.toEncoded());
 
   SongList songlist;
   if (ExecQuery(&query)) {
@@ -754,7 +758,7 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbums(const QString& artist,
     info.album_name = query.Value(0).toString();
     info.art_automatic = query.Value(4).toString();
     info.art_manual = query.Value(5).toString();
-    info.first_filename = query.Value(6).toString();
+    info.first_url = QUrl::fromEncoded(query.Value(6).toByteArray());
 
     if (info.artist == last_artist && info.album_name == last_album)
       continue;
@@ -784,7 +788,7 @@ LibraryBackend::Album LibraryBackend::GetAlbumArt(const QString& artist, const Q
   if (query.Next()) {
     ret.art_automatic = query.Value(0).toString();
     ret.art_manual = query.Value(1).toString();
-    ret.first_filename = query.Value(2).toString();
+    ret.first_url = QUrl::fromEncoded(query.Value(2).toByteArray());
   }
 
   return ret;

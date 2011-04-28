@@ -191,7 +191,7 @@ QList<EditTagDialog::Data> EditTagDialog::LoadData(const SongList& songs) const 
     if (song.IsEditable()) {
       // Try reloading the tags from file
       Song copy(song);
-      copy.InitFromFile(copy.filename(), copy.directory_id());
+      copy.InitFromFile(copy.url().toLocalFile(), copy.directory_id());
 
       if (copy.is_valid())
         ret << Data(copy);
@@ -424,7 +424,11 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
         QLocale::system().dateTimeFormat(QLocale::LongFormat)));
   ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
   ui_->filetype->setText(song.TextForFiletype());
-  ui_->filename->setText(QDir::toNativeSeparators(song.filename()));
+
+  if (song.url().scheme() == "file")
+    ui_->filename->setText(QDir::toNativeSeparators(song.url().toLocalFile()));
+  else
+    ui_->filename->setText(song.url().toString());
 
   album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviders());
 }
@@ -602,7 +606,7 @@ void EditTagDialog::SaveData(const QList<Data>& data) {
       continue;
 
     if (!ref.current_.Save()) {
-      emit Error(tr("An error occurred writing metadata to '%1'").arg(ref.current_.filename()));
+      emit Error(tr("An error occurred writing metadata to '%1'").arg(ref.current_.url().toLocalFile()));
     }
   }
 }
@@ -736,12 +740,12 @@ void EditTagDialog::FetchTag() {
 }
 
 void EditTagDialog::FetchTagSongChosen(const Song& original_song, const Song& new_metadata) {
-  const QString filename = original_song.filename();
+  const QString filename = original_song.url().toLocalFile();
 
   // Find the song with this filename
   for (int i=0 ; i<data_.count() ; ++i) {
     Data* data = &data_[i];
-    if (data->original_.filename() != filename)
+    if (data->original_.url().toLocalFile() != filename)
       continue;
 
     // Is it currently being displayed in the UI?

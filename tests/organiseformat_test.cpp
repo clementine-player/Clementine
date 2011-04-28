@@ -52,7 +52,7 @@ TEST_F(OrganiseFormatTest, BasicReplace) {
 }
 
 TEST_F(OrganiseFormatTest, Extension) {
-  song_.set_filename("/some/path/filename.mp3");
+  song_.set_url(QUrl("file:///some/path/filename.mp3"));
 
   format_.set_format("%extension");
   ASSERT_TRUE(format_.IsValid());

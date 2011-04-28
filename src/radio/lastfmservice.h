@@ -150,7 +150,7 @@ class LastFMService : public RadioService {
 
  private:
   QStandardItem* CreateStationItem(QStandardItem* parent,
-      const QString& name, const QString& icon, const QString& url,
+      const QString& name, const QString& icon, const QUrl& url,
       const QString& title);
   QString ErrorString(lastfm::ws::Error error) const;
   bool InitScrobbler();

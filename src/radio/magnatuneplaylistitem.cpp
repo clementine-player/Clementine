@@ -42,7 +42,7 @@ PlaylistItem::Options MagnatunePlaylistItem::options() const {
 }
 
 QUrl MagnatunePlaylistItem::Url() const {
-  return QUrl::fromEncoded(song_.filename().toAscii());
+  return song_.url();
 }
 
 PlaylistItem::SpecialLoadResult MagnatunePlaylistItem::StartLoading() {

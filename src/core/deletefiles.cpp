@@ -60,7 +60,7 @@ void DeleteFiles::Start(const QStringList& filenames) {
   SongList songs;
   foreach (const QString& filename, filenames) {
     Song song;
-    song.set_filename(filename);
+    song.set_url(QUrl::fromLocalFile(filename));
     songs << song;
   }
 

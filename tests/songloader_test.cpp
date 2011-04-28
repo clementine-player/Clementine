@@ -55,7 +55,7 @@ protected:
     loader_->set_timeout(20000);
 
     // the thing we return is not really important
-    EXPECT_CALL(*library_.get(), GetSongByFilename(_, _)).WillRepeatedly(Return(Song()));
+    EXPECT_CALL(*library_.get(), GetSongByUrl(_, _)).WillRepeatedly(Return(Song()));
   }
 
   void LoadLocalDirectory(const QString& dir);
@@ -191,7 +191,7 @@ TEST_F(SongLoaderTest, LoadRemoteMp3) {
 
   // Check the song got loaded
   ASSERT_EQ(1, loader_->songs().count());
-  EXPECT_EQ(QString(kRemoteUrl) + "/beep.mp3", loader_->songs()[0].filename());
+  EXPECT_EQ(QUrl(QString(kRemoteUrl) + "/beep.mp3"), loader_->songs()[0].url());
 }
 
 TEST_F(SongLoaderTest, LoadRemote404) {
@@ -231,7 +231,7 @@ TEST_F(SongLoaderTest, LoadRemotePls) {
   ASSERT_EQ(4, loader_->songs().count());
   EXPECT_EQ("SomaFM: Groove Salad (#3 128k mp3): A nicely chilled plate of ambient beats and grooves.",
             loader_->songs()[2].title());
-  EXPECT_EQ("http://ice.somafm.com/groovesalad", loader_->songs()[3].filename());
+  EXPECT_EQ(QUrl("http://ice.somafm.com/groovesalad"), loader_->songs()[3].url());
 }
 
 TEST_F(SongLoaderTest, LoadRemotePlainText) {
@@ -268,8 +268,8 @@ TEST_F(SongLoaderTest, LoadRemotePlainM3U) {
   EXPECT_EQ(true, spy[0][0].toBool());
 
   ASSERT_EQ(2, loader_->songs().count());
-  EXPECT_EQ("http://www.example.com/one.mp3", loader_->songs()[0].filename());
-  EXPECT_EQ("http://www.example.com/two.mp3", loader_->songs()[1].filename());
+  EXPECT_EQ(QUrl("http://www.example.com/one.mp3"), loader_->songs()[0].url());
+  EXPECT_EQ(QUrl("http://www.example.com/two.mp3"), loader_->songs()[1].url());
 }
 
 TEST_F(SongLoaderTest, LoadLocalDirectory) {

@@ -9,14 +9,14 @@ public:
     Album();
     Album(const QString& _artist, const QString& _album_name,
           const QString& _art_automatic, const QString& _art_manual,
-          const QString& _first_filename);
+          const QUrl& _first_url);
 
     QString artist;
     QString album_name;
 
     QString art_automatic;
     QString art_manual;
-    QString first_filename;
+    QUrl first_url;
   };
   typedef QList<LibraryBackend::Album> AlbumList;
 
@@ -33,7 +33,7 @@ public:
   SongList FindSongsInDirectory(int id);
   SubdirectoryList SubdirsInDirectory(int id);
   DirectoryList GetAllDirectories();
-  void ChangeDirPath(int id, const QString& new_path);
+  void ChangeDirPath(int id, const QString& old_path, const QString& new_path);
 
   QStringList GetAll(const QString& column, const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
@@ -56,8 +56,8 @@ public:
   SongList GetSongsByForeignId(const QStringList& ids, const QString& table,
                                const QString& column);
 
-  SongList GetSongsByFilename(const QString& filename);
-  Song GetSongByFilename(const QString& filename, int beginning);
+  SongList GetSongsByUrl(const QUrl& url);
+  Song GetSongByUrl(const QUrl& url, int beginning);
 
   void AddDirectory(const QString& path);
   void RemoveDirectory(const Directory& dir);

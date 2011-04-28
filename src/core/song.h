@@ -26,6 +26,7 @@
 #include <QSharedDataPointer>
 #include <QSqlQuery>
 #include <QString>
+#include <QUrl>
 
 #include <xiphcomment.h>
 
@@ -136,12 +137,12 @@ class Song {
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
 #ifdef HAVE_LIBGPOD
-  void InitFromItdb(const Itdb_Track* track);
+  void InitFromItdb(const Itdb_Track* track, const QString& prefix);
   void ToItdb(Itdb_Track* track) const;
 #endif
 
 #ifdef HAVE_LIBMTP
-  void InitFromMTP(const LIBMTP_track_t* track);
+  void InitFromMTP(const LIBMTP_track_t* track, const QString& host);
   void ToMTP(LIBMTP_track_t* track) const;
 #endif
 
@@ -197,10 +198,7 @@ class Song {
   int samplerate() const { return d->samplerate_; }
 
   int directory_id() const { return d->directory_id_; }
-  const QString& filename() const { return d->filename_; }
-  // Returns this Song's URL which may point either to a file or to another type
-  // of stream.
-  QUrl url() const;
+  const QUrl& url() const { return d->url_; }
   const QString& basefilename() const { return d->basefilename_; }
   uint mtime() const { return d->mtime_; }
   uint ctime() const { return d->ctime_; }
@@ -277,7 +275,7 @@ class Song {
   void set_cue_path(const QString& v) { d->cue_path_ = v; }
 
   // Setters that should only be used by tests
-  void set_filename(const QString& v) { d->filename_ = v; }
+  void set_url(const QUrl& v) { d->url_ = v; }
   void set_basefilename(const QString& v) { d->basefilename_ = v; } 
   void set_directory_id(int v) { d->directory_id_ = v; }
 
@@ -342,7 +340,7 @@ class Song {
     int samplerate_;
 
     int directory_id_;
-    QString filename_;
+    QUrl url_;
     QString basefilename_;
     int mtime_;
     int ctime_;

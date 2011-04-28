@@ -181,7 +181,7 @@ void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
         } else if (reader.name() == "dj") {
           song.set_artist(reader.readElementText());
         } else if (reader.name() == "fastpls" && reader.attributes().value("format") == "mp3") {
-          song.set_filename(reader.readElementText());
+          song.set_url(QUrl(reader.readElementText()));
         } else {
           ConsumeElement(reader);
         }

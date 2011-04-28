@@ -36,5 +36,5 @@ bool JamendoPlaylistItem::InitFromQuery(const SqlRow& query) {
 }
 
 QUrl JamendoPlaylistItem::Url() const {
-  return QUrl::fromEncoded(song_.filename().toAscii());
+  return song_.url();
 }

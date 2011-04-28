@@ -293,14 +293,14 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     QListWidgetItem* item = new QListWidgetItem(no_cover_icon_, info.album_name, ui_->albums);
     item->setData(Role_ArtistName, info.artist);
     item->setData(Role_AlbumName, info.album_name);
-    item->setData(Role_FirstFilename, info.first_filename);
+    item->setData(Role_FirstUrl, info.first_url);
     item->setData(Qt::TextAlignmentRole, QVariant(Qt::AlignTop | Qt::AlignHCenter));
     item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled);
     item->setToolTip(info.artist + " - " + info.album_name);
 
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
       quint64 id = cover_loader_->Worker()->LoadImageAsync(
-          info.art_automatic, info.art_manual, info.first_filename);
+          info.art_automatic, info.art_manual, info.first_url.toLocalFile());
       item->setData(Role_PathAutomatic, info.art_automatic);
       item->setData(Role_PathManual, info.art_manual);
       cover_loading_tasks_[id] = item;
@@ -487,7 +487,7 @@ Song AlbumCoverManager::ItemAsSong(QListWidgetItem* item) {
   result.set_artist(item->data(Role_ArtistName).toString());
   result.set_album(item->data(Role_AlbumName).toString());
 
-  result.set_filename(item->data(Role_FirstFilename).toString());
+  result.set_url(item->data(Role_FirstUrl).toUrl());
 
   result.set_art_automatic(item->data(Role_PathAutomatic).toString());
   result.set_art_manual(item->data(Role_PathManual).toString());

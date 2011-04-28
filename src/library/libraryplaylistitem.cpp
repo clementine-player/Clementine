@@ -32,11 +32,11 @@ LibraryPlaylistItem::LibraryPlaylistItem(const Song& song)
 
 
 QUrl LibraryPlaylistItem::Url() const {
-  return QUrl::fromLocalFile(song_.filename());
+  return song_.url();
 }
 
 void LibraryPlaylistItem::Reload() {
-  song_.InitFromFile(song_.filename(), song_.directory_id());
+  song_.InitFromFile(song_.url().toLocalFile(), song_.directory_id());
 }
 
 bool LibraryPlaylistItem::InitFromQuery(const SqlRow& query) {

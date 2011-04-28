@@ -159,7 +159,7 @@ void AfcDevice::FinaliseDatabase() {
 }
 
 bool AfcDevice::DeleteFromStorage(const DeleteJob& job) {
-  const QString path = QUrl(job.metadata_.filename()).path();
+  const QString path = job.metadata_.url().toLocalFile();
 
   if (!RemoveTrackFromITunesDb(path))
     return false;

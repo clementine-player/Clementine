@@ -48,22 +48,19 @@ public:
   virtual void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir()) const = 0;
 
 protected:
-  // Takes a URL, relative path or absolute path, and returns an absolute path.
-  // Resolves relative paths to "dir".
-  bool ParseTrackLocation(const QString& filename_or_url, const QDir& dir,
-                          Song* song) const;
+  // Loads a song.  If filename_or_url is a URL (with a scheme other than
+  // "file") then it is set on the song and the song marked as a stream.
+  // If it is a filename or a file:// URL then it is made absolute and canonical
+  // and set as a file:// url on the song.  Also sets the song's metadata by
+  // searching in the Library, or loading from the file as a fallback.
+  // This function should always be used when loading a playlist.
+  Song LoadSong(const QString& filename_or_url, qint64 beginning, const QDir& dir) const;
+  void LoadSong(const QString& filename_or_url, qint64 beginning, const QDir& dir, Song* song) const;
 
-  // Takes a URL, relative path or absolute path, and in the case of absolute
-  // paths makes them relative to dir if they are subdirectories.
-  QString MakeRelativeTo(const QString& filename_or_url, const QDir& dir) const;
-
-  // Takes a URL or absolute path and returns a URL
-  QString MakeUrl(const QString& filename_or_url) const;
-
-  // Converts the URL or path to a canonical path and searches the library for
-  // a section of a song with that path and the given beginning. If one is found,
-  // returns it, otherwise returns an invalid song.
-  Song LoadLibrarySong(const QString& filename_or_url, qint64 beginning = 0) const;
+  // If the URL is a file:// URL then returns its path relative to the
+  // directory.  Otherwise returns the URL as is.
+  // This function should always be used when saving a playlist.
+  QString URLOrRelativeFilename(const QUrl& url, const QDir& dir) const;
 
 private:
   LibraryBackendInterface* library_;

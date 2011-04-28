@@ -40,16 +40,15 @@ SongList PLSParser::Load(QIODevice *device, const QString& playlist_path, const 
     int n = n_re.cap(0).toInt();
 
     if (key.startsWith("file")) {
-      if (!ParseTrackLocation(value, dir, &songs[n]))
-        qLog(Warning) << "Failed to parse location: " << value;
+      Song song = LoadSong(value, 0, dir);
 
-      // Load the song from the library if it's there.
-      Song library_song = LoadLibrarySong(songs[n].filename());
-      if (library_song.is_valid()) {
-        songs[n] = library_song;
-      } else {
-        songs[n].InitFromFile(songs[n].filename(), -1);
-      }
+      // Use the title and length we've already loaded if any
+      if (!songs[n].title().isEmpty())
+        song.set_title(songs[n].title());
+      if (!songs[n].length_nanosec() != -1)
+        song.set_length_nanosec(songs[n].length_nanosec());
+
+      songs[n] = song;
     } else if (key.startsWith("title")) {
       songs[n].set_title(value);
     } else if (key.startsWith("length")) {
@@ -71,7 +70,7 @@ void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
 
   int n = 1;
   foreach (const Song& song, songs) {
-    s << "File" << n << "=" << MakeRelativeTo(song.filename(), dir) << endl;
+    s << "File" << n << "=" << URLOrRelativeFilename(song.url(), dir) << endl;
     s << "Title" << n << "=" << song.title() << endl;
     s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;
     ++n;

@@ -132,7 +132,7 @@ SongList LibraryWatcher::ScanTransaction::FindSongsInSubdirectory(const QString 
   // TODO: Make this faster
   SongList ret;
   foreach (const Song& song, cached_songs_) {
-    if (song.filename().section('/', 0, -2) == path)
+    if (song.url().toLocalFile().section('/', 0, -2) == path)
       ret << song;
   }
   return ret;
@@ -363,8 +363,8 @@ void LibraryWatcher::ScanSubdirectory(
 
   // Look for deleted songs
   foreach (const Song& song, songs_in_db) {
-    if (!files_on_disk.contains(song.filename())) {
-      qLog(Debug) << "Song deleted from disk:" << song.filename();
+    if (!files_on_disk.contains(song.url().toLocalFile())) {
+      qLog(Debug) << "Song deleted from disk:" << song.url().toLocalFile();
       t->deleted_songs << song;
     }
   }
@@ -397,7 +397,7 @@ void LibraryWatcher::UpdateCueAssociatedSongs(const QString& file, const QString
   QFile cue(matching_cue);
   cue.open(QIODevice::ReadOnly);
 
-  SongList old_sections = backend_->GetSongsByFilename(file);
+  SongList old_sections = backend_->GetSongsByUrl(QUrl::fromLocalFile(file));
 
   QHash<quint64, Song> sections_map;
   foreach(const Song& song, old_sections) {
@@ -437,7 +437,7 @@ void LibraryWatcher::UpdateNonCueAssociatedSong(const QString& file, const Song&
   // 'raw' (cueless) song and we just remove the rest of the sections
   // from the library
   if(cue_deleted) {
-    foreach(const Song& song, backend_->GetSongsByFilename(file)) {
+    foreach(const Song& song, backend_->GetSongsByUrl(QUrl::fromLocalFile(file))) {
       if(!song.IsMetadataEqual(matching_song)) {
         t->deleted_songs << song;
       }
@@ -470,7 +470,7 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     // media files. Playlist parser for CUEs considers every entry in sheet
     // valid and we don't want invalid media getting into library!
     foreach(const Song& cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
-      if(cue_song.filename() == file && cue_song.HasProperMediaFile()) {
+      if(cue_song.url().toLocalFile() == file && cue_song.HasProperMediaFile()) {
         song_list << cue_song;
       }
     }
@@ -553,7 +553,7 @@ void LibraryWatcher::RemoveDirectory(const Directory& dir) {
 bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, Song* out) {
   // TODO: Make this faster
   foreach (const Song& song, list) {
-    if (song.filename() == path) {
+    if (song.url().toLocalFile() == path) {
       *out = song;
       return true;
     }

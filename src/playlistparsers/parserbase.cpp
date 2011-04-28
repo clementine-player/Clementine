@@ -28,67 +28,72 @@ ParserBase::ParserBase(LibraryBackendInterface* library, QObject *parent)
 {
 }
 
-bool ParserBase::ParseTrackLocation(const QString& filename_or_url,
-                                    const QDir& dir, Song* song) const {
+void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
+                          const QDir& dir, Song* song) const {
+  if (filename_or_url.isEmpty()) {
+    return;
+  }
+
+  QString filename = filename_or_url;
+
   if (filename_or_url.contains(QRegExp("^[a-z]+://"))) {
-    // Looks like a url.
-    QUrl temp(filename_or_url);
-    if (temp.isValid()) {
-      song->set_filename(temp.toString());
+    QUrl url(filename_or_url);
+    if (url.scheme() == "file") {
+      filename = url.toLocalFile();
+    } else {
+      song->set_url(QUrl(filename_or_url));
       song->set_filetype(Song::Type_Stream);
       song->set_valid(true);
-      return true;
-    } else {
-      return false;
+      return;
     }
   }
 
-  // Should be a local path.
-  if (QDir::isAbsolutePath(filename_or_url)) {
-    // Absolute path.
-    // Fix windows \, eg. C:\foo -> C:/foo.
-    song->set_filename(QDir::fromNativeSeparators(filename_or_url));
-  } else {
-    // Relative path.
-    QString proper_path = QDir::fromNativeSeparators(filename_or_url);
-    QString absolute_path = dir.absoluteFilePath(proper_path);
-    song->set_filename(absolute_path);
+  // Convert native separators for Windows paths
+  filename = QDir::fromNativeSeparators(filename);
+
+  // Make the path absolute
+  if (!QDir::isAbsolutePath(filename)) {
+    filename = dir.absoluteFilePath(filename);
   }
-  return true;
+
+  // Use the canonical path
+  if (QFile::exists(filename)) {
+    filename = QFileInfo(filename).canonicalFilePath();
+  }
+
+  const QUrl url = QUrl::fromLocalFile(filename);
+
+  // Search in the library
+  Song library_song;
+  if (library_) {
+    library_song = library_->GetSongByUrl(url, beginning);
+  }
+
+  // If it was found in the library then use it, otherwise load metadata from
+  // disk.
+  if (library_song.is_valid()) {
+    *song = library_song;
+  } else {
+    song->InitFromFile(filename, -1);
+  }
 }
 
-QString ParserBase::MakeRelativeTo(const QString& filename_or_url,
-                                   const QDir& dir) const {
-  if (filename_or_url.contains(QRegExp("^[a-z]+://")))
-    return filename_or_url;
+Song ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning, const QDir& dir) const {
+  Song song;
+  LoadSong(filename_or_url, beginning, dir, &song);
+  return song;
+}
 
-  if (QDir::isAbsolutePath(filename_or_url)) {
-    QString relative = dir.relativeFilePath(filename_or_url);
+QString ParserBase::URLOrRelativeFilename(const QUrl& url, const QDir& dir) const {
+  if (url.scheme() != "file")
+    return url.toString();
+
+  const QString filename = url.toLocalFile();
+  if (QDir::isAbsolutePath(filename)) {
+    const QString relative = dir.relativeFilePath(filename);
 
     if (!relative.contains(".."))
       return relative;
   }
-  return filename_or_url;
-}
-
-QString ParserBase::MakeUrl(const QString& filename_or_url) const {
-  if (filename_or_url.contains(QRegExp("^[a-z]+://"))) {
-    return filename_or_url;
-  }
-
-  return QUrl::fromLocalFile(filename_or_url).toString();
-}
-
-Song ParserBase::LoadLibrarySong(const QString& filename_or_url, qint64 beginning) const {
-  if (!library_)
-    return Song();
-
-  QFileInfo info;
-
-  if (filename_or_url.contains("://"))
-    info.setFile(QUrl(filename_or_url).path());
-  else
-    info.setFile(filename_or_url);
-
-  return library_->GetSongByFilename(info.canonicalFilePath(), beginning);
+  return filename;
 }

@@ -66,14 +66,14 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
 #ifdef HAVE_GIO
   //convert QString to char
-  QByteArray ba = job.metadata_.filename().toLocal8Bit();
+  QByteArray ba = job.metadata_.url().toLocalFile().toLocal8Bit();
   const char *filepathChar = ba.data();
   GFile *file = g_file_new_for_path (filepathChar);
   bool success = g_file_trash(file, NULL, NULL);
   g_object_unref(file);
   return success;
 #else
-  return QFile::remove(job.metadata_.filename());
+  return QFile::remove(job.metadata_.url().toLocalFile());
 #endif
 }
 

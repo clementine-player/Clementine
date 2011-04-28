@@ -66,19 +66,16 @@ void GPodLoader::LoadDatabase() {
   }
 
   // Convert all the tracks from libgpod structs into Song classes
+  const QString prefix = path_prefix_.isEmpty()
+      ? QDir::fromNativeSeparators(mount_point_) : path_prefix_;
+
   SongList songs;
   for (GList* tracks = db->tracks ; tracks != NULL ; tracks = tracks->next) {
     Itdb_Track* track = static_cast<Itdb_Track*>(tracks->data);
 
     Song song;
-    song.InitFromItdb(track);
+    song.InitFromItdb(track, prefix);
     song.set_directory_id(1);
-
-    QString filename = (path_prefix_.isEmpty() ? mount_point_ : path_prefix_) +
-                       song.filename();
-    if (path_prefix_.isEmpty())
-      filename = QDir::cleanPath(QDir::fromNativeSeparators(filename));
-    song.set_filename(filename);
 
     if (type_ != Song::Type_Unknown)
       song.set_filetype(type_);

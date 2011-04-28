@@ -278,7 +278,7 @@ void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlayl
     child->setData(Type_Track, RadioModel::Role_Type);
     child->setData(QVariant::fromValue(song), RadioModel::Role_SongMetadata);
     child->setData(RadioModel::PlayBehaviour_SingleItem, RadioModel::Role_PlayBehaviour);
-    child->setData(QUrl(song.filename()), RadioModel::Role_Url);
+    child->setData(song.url(), RadioModel::Role_Url);
 
     item->appendRow(child);
   }
@@ -293,7 +293,7 @@ void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) 
   song->set_disc(track.disc());
   song->set_track(track.track());
   song->set_year(track.year());
-  song->set_filename(QStringFromStdString(track.uri()));
+  song->set_url(QUrl(QStringFromStdString(track.uri())));
 
   QStringList artists;
   for (int i=0 ; i<track.artist_size() ; ++i) {

@@ -56,10 +56,10 @@ TEST_F(M3UParserTest, ParsesTrackLocation) {
   taglib_.ExpectCall(temp.fileName(), "foo", "bar", "baz");
   Song song(&taglib_);
   QString line(temp.fileName());
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, QDir(), &song));
-  ASSERT_EQ(temp.fileName(), song.filename());
+  parser_.LoadSong(line, 0, QDir(), &song);
+  ASSERT_EQ(QUrl::fromLocalFile(temp.fileName()), song.url());
 
-  song.InitFromFile(song.filename(), -1);
+  song.InitFromFile(song.url().toLocalFile(), -1);
 
   EXPECT_EQ("foo", song.title());
   EXPECT_EQ("bar", song.artist());
@@ -74,10 +74,10 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
   M3UParser parser(NULL);
   QString line(info.fileName());
   Song song(&taglib_);
-  ASSERT_TRUE(parser.ParseTrackLocation(line, info.dir(), &song));
-  ASSERT_EQ(temp.fileName(), song.filename());
+  parser.LoadSong(line, 0, info.dir(), &song);
+  ASSERT_EQ(QUrl::fromLocalFile(temp.fileName()), song.url());
 
-  song.InitFromFile(song.filename(), -1);
+  song.InitFromFile(song.url().toLocalFile(), -1);
 
   EXPECT_EQ("foo", song.title());
 }
@@ -85,8 +85,8 @@ TEST_F(M3UParserTest, ParsesTrackLocationRelative) {
 TEST_F(M3UParserTest, ParsesTrackLocationHttp) {
   QString line("http://example.com/foo/bar.mp3");
   Song song;
-  ASSERT_TRUE(parser_.ParseTrackLocation(line, QDir(), &song));
-  EXPECT_EQ("http://example.com/foo/bar.mp3", song.filename());
+  parser_.LoadSong(line, 0, QDir(), &song);
+  EXPECT_EQ(QUrl("http://example.com/foo/bar.mp3"), song.url());
 }
 
 TEST_F(M3UParserTest, ParsesSongsFromDevice) {
@@ -102,8 +102,7 @@ TEST_F(M3UParserTest, ParsesSongsFromDevice) {
   EXPECT_EQ("Some Artist", s.artist());
   EXPECT_EQ("Some Title", s.title());
   EXPECT_EQ(123 * kNsecPerSec, s.length_nanosec());
-  EXPECT_PRED_FORMAT2(::testing::IsSubstring,
-      "http://foo.com/bar/somefile.mp3", s.filename().toStdString());
+  EXPECT_EQ(QUrl("http://foo.com/bar/somefile.mp3"), s.url());
 }
 
 TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
@@ -114,10 +113,8 @@ TEST_F(M3UParserTest, ParsesNonExtendedM3U) {
   M3UParser parser(NULL);
   SongList songs = parser.Load(&buffer, "", QDir("somedir"));
   ASSERT_EQ(2, songs.size());
-  EXPECT_PRED_FORMAT2(::testing::IsSubstring,
-      "http://foo.com/bar/somefile.mp3", songs[0].filename().toStdString());
-  EXPECT_PRED_FORMAT2(::testing::IsSubstring,
-      "http://baz.com/thing.mp3", songs[1].filename().toStdString());
+  EXPECT_EQ(QUrl("http://foo.com/bar/somefile.mp3"), songs[0].url());
+  EXPECT_EQ(QUrl("http://baz.com/thing.mp3"), songs[1].url());
   EXPECT_EQ(-1, songs[0].length_nanosec());
   EXPECT_EQ(-1, songs[1].length_nanosec());
   EXPECT_TRUE(songs[0].artist().isEmpty());
@@ -144,7 +141,7 @@ TEST_F(M3UParserTest, SavesSong) {
   one.set_title("foo");
   one.set_artist("bar");
   one.set_length_nanosec(123 * kNsecPerSec);
-  one.set_filename("http://www.example.com/foo.mp3");
+  one.set_url(QUrl("http://www.example.com/foo.mp3"));
   SongList songs;
   songs << one;
   M3UParser parser(NULL);
@@ -167,5 +164,6 @@ TEST_F(M3UParserTest, ParsesUTF8) {
   EXPECT_EQ(11, songs[0].title().length());
   EXPECT_EQ(QString::fromUtf8("Разные"), songs[0].artist());
   EXPECT_EQ(QString::fromUtf8("исполнители"), songs[0].title());
-  EXPECT_EQ(QString::fromUtf8("/foo/Разные/исполнители.mp3"), songs[0].filename());
+  EXPECT_EQ(QUrl::fromLocalFile(QString::fromUtf8("/foo/Разные/исполнители.mp3")),
+            songs[0].url());
 }

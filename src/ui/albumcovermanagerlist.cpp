@@ -43,7 +43,7 @@ QMimeData* AlbumCoverManagerList::mimeData(const QList<QListWidgetItem*> items) 
   // Get URLs from the songs
   QList<QUrl> urls;
   foreach (const Song& song, songs) {
-    urls << QUrl::fromLocalFile(song.filename());
+    urls << song.url();
   }
 
   // Get the QAbstractItemModel data so the picture works

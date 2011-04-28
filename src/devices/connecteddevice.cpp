@@ -79,7 +79,7 @@ void ConnectedDevice::InitBackendDirectory(
       if (dir.path != mount_point) {
         // The directory is different, commence the munging.
         qLog(Info) << "Changing path from" << dir.path << "to" << mount_point;
-        backend_->ChangeDirPath(dir.id, mount_point);
+        backend_->ChangeDirPath(dir.id, dir.path, mount_point);
       }
     }
 

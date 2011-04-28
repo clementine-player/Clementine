@@ -392,7 +392,7 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index, int role) const {
   if (!songs.isEmpty()) {
     const Song& s = songs.first();
     QPixmap pixmap = AlbumCoverLoader::TryLoadPixmap(
-      s.art_automatic(), s.art_manual(), s.filename());
+      s.art_automatic(), s.art_manual(), s.url().toLocalFile());
 
     if (!pixmap.isNull()) {
       QImage image = pixmap.toImage().scaled(
@@ -931,7 +931,7 @@ QString LibraryModel::SortTextForYear(int year) const {
 QString LibraryModel::SortTextForSong(const Song& song) const {
   QString ret = QString::number(qMax(0, song.disc()) * 1000 + qMax(0, song.track()));
   ret.prepend(QString("0").repeated(6 - ret.length()));
-  ret.append(song.filename());
+  ret.append(song.url().toString());
   return ret;
 }
 
@@ -1012,7 +1012,7 @@ void LibraryModel::GetChildSongs(LibraryItem* item, QList<QUrl>* urls,
     }
 
     case LibraryItem::Type_Song:
-      urls->append(QUrl::fromLocalFile(item->metadata.filename()));
+      urls->append(item->metadata.url());
       if (!song_ids->contains(item->metadata.id())) {
         songs->append(item->metadata);
         song_ids->insert(item->metadata.id());

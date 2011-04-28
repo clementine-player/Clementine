@@ -56,29 +56,13 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
         }
       }
     } else if (!line.isEmpty()) {
-      Song song;
+      Song song = LoadSong(line, 0, dir);
+      song.set_title(current_metadata.title);
+      song.set_artist(current_metadata.artist);
+      song.set_length_nanosec(current_metadata.length);
+      ret << song;
 
-      // Track location.
-      if (!ParseTrackLocation(line, dir, &song)) {
-        qLog(Warning) << "Failed to parse location: " << line;
-      } else {
-        // Load the song from the library if it's there.
-        Song library_song = LoadLibrarySong(song.filename());
-        if (library_song.is_valid()) {
-          ret << library_song;
-        } else {
-          song.Init(current_metadata.title,
-                    current_metadata.artist,
-                    QString(),  // Unknown album.
-                    current_metadata.length);
-          song.InitFromFile(song.filename(), -1);
-          ret << song;
-        }
-
-        current_metadata.artist.clear();
-        current_metadata.title.clear();
-        current_metadata.length = -1;
-      }
+      current_metadata = Metadata();
     }
     if (buffer.atEnd()) {
       break;
@@ -115,14 +99,14 @@ bool M3UParser::ParseMetadata(const QString& line, M3UParser::Metadata* metadata
 void M3UParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) const {
   device->write("#EXTM3U\n");
   foreach (const Song& song, songs) {
-    if (song.filename().isEmpty()) {
+    if (song.url().isEmpty()) {
       continue;
     }
     QString meta = QString("#EXTINF:%1,%2 - %3\n")
                    .arg(song.length_nanosec() / kNsecPerSec)
                    .arg(song.artist()).arg(song.title());
     device->write(meta.toUtf8());
-    device->write(MakeRelativeTo(song.filename(), dir).toUtf8());
+    device->write(URLOrRelativeFilename(song.url(), dir).toUtf8());
     device->write("\n");
   }
 }

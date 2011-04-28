@@ -31,7 +31,8 @@ ASXParser::ASXParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList ASXParser::Load(QIODevice *device, const QString& playlist_path, const QDir&) const {
+SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
+                         const QDir& dir) const {
   // We have to load everything first so we can munge the "XML".
   QByteArray data = device->readAll();
 
@@ -70,7 +71,7 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path, const 
   }
 
   while (!reader.atEnd() && ParseUntilElement(&reader, "entry")) {
-    Song song = ParseTrack(&reader);
+    Song song = ParseTrack(&reader, dir);
     if (song.is_valid()) {
       ret << song;
     }
@@ -79,9 +80,9 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path, const 
 }
 
 
-Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
-  Song song;
-  QString title, artist, album;
+Song ASXParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
+  QString title, artist, album, ref;
+
   while (!reader->atEnd()) {
     QXmlStreamReader::TokenType type = reader->readNext();
 
@@ -89,24 +90,7 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
       case QXmlStreamReader::StartElement: {
         QStringRef name = reader->name();
         if (name == "ref") {
-          QUrl url(reader->attributes().value("href").toString());
-          if (url.scheme() == "file") {
-            QString filename = url.toLocalFile();
-            if (!QFile::exists(filename)) {
-              return Song();
-            }
-
-            // Load the song from the library if it's there.
-            Song library_song = LoadLibrarySong(filename);
-            if (library_song.is_valid())
-              return library_song;
-
-            song.InitFromFile(filename, -1);
-            return song;
-          } else {
-            song.set_filename(url.toString());
-            song.set_filetype(Song::Type_Stream);
-          }
+          ref = reader->attributes().value("href").toString();
         } else if (name == "title") {
           title = reader->readElementText();
         } else if (name == "author") {
@@ -116,8 +100,7 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
       }
       case QXmlStreamReader::EndElement: {
         if (reader->name() == "entry") {
-          song.Init(title, artist, album, -1);
-          return song;
+          goto return_song;
         }
         break;
       }
@@ -125,8 +108,14 @@ Song ASXParser::ParseTrack(QXmlStreamReader* reader) const {
         break;
     }
   }
-  // At least make an effort if we never find a </entry>.
-  song.Init(title, artist, album, -1);
+
+return_song:
+  Song song = LoadSong(ref, 0, dir);
+
+  // Override metadata with what was in the playlist
+  song.set_title(title);
+  song.set_artist(artist);
+  song.set_album(album);
   return song;
 }
 
@@ -142,7 +131,7 @@ void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&) cons
       writer.writeTextElement("title", song.title());
       {
         StreamElement ref("ref", &writer);
-        writer.writeAttribute("href", MakeUrl(song.filename()));
+        writer.writeAttribute("href", song.url().toString());
       }
       if (!song.artist().isEmpty()) {
         writer.writeTextElement("author", song.artist());

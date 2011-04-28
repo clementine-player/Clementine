@@ -99,9 +99,8 @@ Itdb_Track* GPodDevice::AddTrackToITunesDb(const Song& metadata) {
 void GPodDevice::AddTrackToModel(Itdb_Track* track, const QString& prefix) {
   // Add it to our LibraryModel
   Song metadata_on_device;
-  metadata_on_device.InitFromItdb(track);
+  metadata_on_device.InitFromItdb(track, prefix);
   metadata_on_device.set_directory_id(1);
-  metadata_on_device.set_filename(prefix + metadata_on_device.filename());
   songs_to_add_ << metadata_on_device;
 }
 
@@ -209,11 +208,11 @@ bool GPodDevice::RemoveTrackFromITunesDb(const QString& path, const QString& rel
 bool GPodDevice::DeleteFromStorage(const DeleteJob& job) {
   Q_ASSERT(db_);
 
-  if (!RemoveTrackFromITunesDb(job.metadata_.filename(), url_.path()))
+  if (!RemoveTrackFromITunesDb(job.metadata_.url().toLocalFile(), url_.path()))
     return false;
 
   // Remove the file
-  if (!QFile::remove(job.metadata_.filename()))
+  if (!QFile::remove(job.metadata_.url().toLocalFile()))
     return false;
 
   // Remove it from our library model

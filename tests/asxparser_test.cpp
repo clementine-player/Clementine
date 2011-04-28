@@ -45,7 +45,7 @@ TEST_F(ASXParserTest, ParsesOneTrackFromXML) {
   const Song& song = songs[0];
   EXPECT_EQ("Foo", song.title());
   EXPECT_EQ("Bar", song.artist());
-  EXPECT_EQ("http://example.com/foo.mp3", song.filename());
+  EXPECT_EQ(QUrl("http://example.com/foo.mp3"), song.url());
   EXPECT_TRUE(song.is_valid());
 }
 
@@ -64,8 +64,8 @@ TEST_F(ASXParserTest, ParsesMoreThanOneTrackFromXML) {
   ASXParser parser(NULL);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(2, songs.length());
-  EXPECT_EQ("http://example.com/foo.mp3", songs[0].filename());
-  EXPECT_EQ("http://example.com/bar.mp3", songs[1].filename());
+  EXPECT_EQ(QUrl("http://example.com/foo.mp3"), songs[0].url());
+  EXPECT_EQ(QUrl("http://example.com/bar.mp3"), songs[1].url());
   EXPECT_TRUE(songs[0].is_stream());
   EXPECT_TRUE(songs[1].is_stream());
 }
@@ -90,7 +90,7 @@ TEST_F(ASXParserTest, ParsesBrokenXmlEntities) {
   ASXParser parser(NULL);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(1, songs.length());
-  EXPECT_EQ("mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx", songs[0].filename());
+  EXPECT_EQ(QUrl("mms://72.26.204.105/classictrance128k?user=h&pass=xxxxxxxxxxxxxxx"), songs[0].url());
 }
 
 TEST_F(ASXParserTest, SavesSong) {
@@ -99,7 +99,7 @@ TEST_F(ASXParserTest, SavesSong) {
   buffer.open(QIODevice::WriteOnly);
   ASXParser parser(NULL);
   Song one;
-  one.set_filename("http://www.example.com/foo.mp3");
+  one.set_url(QUrl("http://www.example.com/foo.mp3"));
   one.set_filetype(Song::Type_Stream);
   one.set_title("foo");
   one.set_length_nanosec(123 * kNsecPerSec);
@@ -123,5 +123,5 @@ TEST_F(ASXParserTest, ParsesSomaFM) {
   ASSERT_EQ(4, songs.count());
   EXPECT_EQ("SomaFM: Secret Agent", songs[0].title());
   EXPECT_EQ("Keep us on the air! Click Support SomaFM above!", songs[0].artist());
-  EXPECT_EQ("http://streamer-ntc-aa03.somafm.com:80/stream/1021", songs[0].filename());
+  EXPECT_EQ(QUrl("http://streamer-ntc-aa03.somafm.com:80/stream/1021"), songs[0].url());
 }

@@ -38,7 +38,7 @@ class SongPlaylistItemTest : public ::testing::TestWithParam<const char*> {
     absolute_file_name_ = QFileInfo(temp_file_.fileName()).absoluteFilePath();
 
     song_.Init("Title", "Artist", "Album", 123);
-    song_.set_filename(absolute_file_name_);
+    song_.set_url(QUrl::fromLocalFile(absolute_file_name_));
 
     item_.reset(new SongPlaylistItem(song_));
 

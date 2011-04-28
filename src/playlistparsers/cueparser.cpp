@@ -207,46 +207,37 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path, const 
   for(int i = 0; i < entries.length(); i++) {
     CueEntry entry = entries.at(i);
 
-    Song current;
-    if (!ParseTrackLocation(entry.file, dir, &current)) {
-      qLog(Warning) << "failed to parse location in .cue file from " << dir_path;
-    } else {
-      // look for the section in library
-      Song song = LoadLibrarySong(current.filename(), IndexToMarker(entry.index));
-      if (!song.is_valid()) {
-        song.InitFromFile(current.filename(), -1);
-      }
+    Song song = LoadSong(entry.file, IndexToMarker(entry.index), dir);
 
-      // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
-      if(cue_mtime.isValid()) {
-        song.set_mtime(qMax(cue_mtime.toTime_t(), song.mtime()));
-      }
-      song.set_cue_path(playlist_path);
-
-      // overwrite the stuff, we may have read from the file or library, using
-      // the current .cue metadata
-
-      // set track number only in single-file mode
-      if(files == 1) {
-        song.set_track(i + 1);
-      }
-
-      // the last TRACK for every FILE gets it's 'end' marker from the media file's
-      // length
-      if(i + 1 < entries.size() && entries.at(i).file == entries.at(i + 1).file) {
-        // incorrect indices?
-        if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {
-          continue;
-        }
-      } else {
-        // incorrect index?
-        if(!UpdateLastSong(entry, &song)) {
-          continue;
-        }
-      }
-
-      ret << song;
+    // cue song has mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
+    if(cue_mtime.isValid()) {
+      song.set_mtime(qMax(cue_mtime.toTime_t(), song.mtime()));
     }
+    song.set_cue_path(playlist_path);
+
+    // overwrite the stuff, we may have read from the file or library, using
+    // the current .cue metadata
+
+    // set track number only in single-file mode
+    if(files == 1) {
+      song.set_track(i + 1);
+    }
+
+    // the last TRACK for every FILE gets it's 'end' marker from the media file's
+    // length
+    if(i + 1 < entries.size() && entries.at(i).file == entries.at(i + 1).file) {
+      // incorrect indices?
+      if(!UpdateSong(entry, entries.at(i + 1).index, &song)) {
+        continue;
+      }
+    } else {
+      // incorrect index?
+      if(!UpdateLastSong(entry, &song)) {
+        continue;
+      }
+    }
+
+    ret << song;
   }
 
   return ret;

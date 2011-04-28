@@ -112,9 +112,8 @@ bool MtpDevice::CopyToStorage(const CopyJob& job) {
 
   // Add it to our LibraryModel
   Song metadata_on_device;
-  metadata_on_device.InitFromMTP(&track);
+  metadata_on_device.InitFromMTP(&track, url_.host());
   metadata_on_device.set_directory_id(1);
-  metadata_on_device.set_filename("mtp://" + url_.host() + "/" + metadata_on_device.filename());
   songs_to_add_ << metadata_on_device;
 
   // Remove the original if requested
@@ -150,8 +149,7 @@ void MtpDevice::StartDelete() {
 
 bool MtpDevice::DeleteFromStorage(const DeleteJob& job) {
   // Extract the ID from the song's URL
-  QUrl url(job.metadata_.filename());
-  QString filename = url.path();
+  QString filename = job.metadata_.url().path();
   filename.remove('/');
 
   bool ok = false;

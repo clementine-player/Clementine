@@ -308,7 +308,7 @@ void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
 
   using mpris::AddMetadata;
   AddMetadata("mpris:trackid", current_track_id(), &last_metadata_);
-  AddMetadata("xesam:url", song.filename(), &last_metadata_);
+  AddMetadata("xesam:url", song.url().toString(), &last_metadata_);
   AddMetadata("xesam:title", song.PrettyTitle(), &last_metadata_);
   AddMetadataAsList("xesam:artist", song.artist(), &last_metadata_);
   AddMetadata("xesam:album", song.album(), &last_metadata_);

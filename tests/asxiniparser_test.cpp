@@ -37,8 +37,8 @@ TEST_F(AsxIniParserTest, ParsesBasicTrackList) {
 
   SongList songs = parser_.Load(&file, "", QDir());
   ASSERT_EQ(2, songs.length());
-  EXPECT_EQ("http://195.245.168.21/antena3?MSWMExt=.asf", songs[0].filename());
-  EXPECT_EQ("http://195.245.168.21:80/antena3?MSWMExt=.asf", songs[1].filename());
+  EXPECT_EQ(QUrl("http://195.245.168.21/antena3?MSWMExt=.asf"), songs[0].url());
+  EXPECT_EQ(QUrl("http://195.245.168.21:80/antena3?MSWMExt=.asf"), songs[1].url());
   EXPECT_TRUE(songs[0].is_valid());
   EXPECT_TRUE(songs[1].is_valid());
 }
@@ -56,7 +56,7 @@ TEST_F(AsxIniParserTest, WritesBasicTrackList) {
   buffer.open(QIODevice::WriteOnly);
 
   Song song;
-  song.set_filename("http://www.example.com/foo.mp3");
+  song.set_url(QUrl("http://www.example.com/foo.mp3"));
 
   SongList songs;
   songs << song;

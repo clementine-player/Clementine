@@ -148,22 +148,22 @@ void LastFMService::LazyPopulate(QStandardItem* parent) {
       CreateStationItem(parent,
           tr("My Recommendations"),
           ":last.fm/recommended_radio.png",
-          "lastfm://user/USERNAME/recommended",
+          QUrl("lastfm://user/USERNAME/recommended"),
           tr("My Last.fm Recommended Radio"));
       CreateStationItem(parent,
           tr("My Radio Station"),
           ":last.fm/personal_radio.png",
-          "lastfm://user/USERNAME/library",
+          QUrl("lastfm://user/USERNAME/library"),
           tr("My Last.fm Library"));
       CreateStationItem(parent,
           tr("My Mix Radio"),
           ":last.fm/loved_radio.png",
-          "lastfm://user/USERNAME/mix",
+          QUrl("lastfm://user/USERNAME/mix"),
           tr("My Last.fm Mix Radio"));
       CreateStationItem(parent,
           tr("My Neighborhood"),
           ":last.fm/neighbour_radio.png",
-          "lastfm://user/USERNAME/neighbours",
+          QUrl("lastfm://user/USERNAME/neighbours"),
           tr("My Last.fm Neighborhood"));
 
       // Types that have children
@@ -213,17 +213,17 @@ void LastFMService::LazyPopulate(QStandardItem* parent) {
       CreateStationItem(parent,
           tr("Last.fm Radio Station - %1").arg(parent->text()),
           ":last.fm/personal_radio.png",
-          "lastfm://user/" + parent->text() + "/library",
+          QUrl("lastfm://user/" + parent->text() + "/library"),
           tr("Last.fm Library - %1").arg(parent->text()));
       CreateStationItem(parent,
           tr("Last.fm Mix Radio - %1").arg(parent->text()),
           ":last.fm/loved_radio.png",
-          "lastfm://user/" + parent->text() + "/mix",
+          QUrl("lastfm://user/" + parent->text() + "/mix"),
           tr("Last.fm Mix Radio - %1").arg(parent->text()));
       CreateStationItem(parent,
           tr("Last.fm Neighbor Radio - %1").arg(parent->text()),
           ":last.fm/neighbour_radio.png",
-          "lastfm://user/" + parent->text() + "/neighbours",
+          QUrl("lastfm://user/" + parent->text() + "/neighbours"),
           tr("Last.fm Neighbor Radio - %1").arg(parent->text()));
       break;
 
@@ -234,9 +234,9 @@ void LastFMService::LazyPopulate(QStandardItem* parent) {
 
 QStandardItem* LastFMService::CreateStationItem(
     QStandardItem* parent, const QString& name, const QString& icon,
-    const QString& url, const QString& title) {
+    const QUrl& url, const QString& title) {
   Song song;
-  song.set_filename(url);
+  song.set_url(url);
   song.set_title(title);
 
   QStandardItem* ret = new QStandardItem(QIcon(icon), name);
@@ -625,7 +625,7 @@ void LastFMService::RefreshFriendsFinished() {
 
   foreach (const lastfm::User& f, friends) {
     Song song;
-    song.set_filename("lastfm://user/" + f.name() + "/library");
+    song.set_url(QUrl("lastfm://user/" + f.name() + "/library"));
     song.set_title(tr("Last.fm Library - %1").arg(f.name()));
 
     QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_user.png"), f.name());
@@ -657,7 +657,7 @@ void LastFMService::RefreshNeighboursFinished() {
 
   foreach (const lastfm::User& n, neighbours) {
     Song song;
-    song.set_filename("lastfm://user/" + n.name() + "/library");
+    song.set_url(QUrl("lastfm://user/" + n.name() + "/library"));
     song.set_title(tr("Last.fm Library - %1").arg(n.name()));
 
     QStandardItem* item = new QStandardItem(QIcon(":last.fm/user_purple.png"), n.name());
@@ -711,7 +711,7 @@ void LastFMService::AddArtistOrTag(const QString& name,
     url_content = content;
 
   Song song;
-  song.set_filename(url_pattern.arg(url_content));
+  song.set_url(QUrl(url_pattern.arg(url_content)));
   song.set_title(title_pattern.arg(content));
 
   QStandardItem* item = new QStandardItem(QIcon(icon), content);
@@ -756,7 +756,7 @@ void LastFMService::RestoreList(const QString& name,
       url_content = content;
 
     Song song;
-    song.set_filename(url_pattern.arg(url_content));
+    song.set_url(QUrl(url_pattern.arg(url_content)));
     song.set_title(title_pattern.arg(content));
 
     QStandardItem* item = new QStandardItem(icon, content);
@@ -881,7 +881,7 @@ PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {
   QStringList sections(url.path().split("/", QString::SkipEmptyParts));
 
   Song song;
-  song.set_filename(url.toString());
+  song.set_url(url);
 
   if (sections.count() == 2 && url.host() == "artist" && sections[1] == "similarartists") {
     song.set_title(tr(kTitleArtist).arg(sections[0]));

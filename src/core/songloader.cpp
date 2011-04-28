@@ -193,7 +193,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 void SongLoader::EffectiveSongsLoad() {
   for (int i = 0; i < songs_.size(); i++) {
     Song& song = songs_[i];
-    QString filename = song.filename();
+    QString filename = song.url().toLocalFile();
     QFileInfo info(filename);
 
     LibraryQuery query;
@@ -233,7 +233,7 @@ static bool CompareSongs(const Song& left, const Song& right) {
   if (left.disc() > right.disc()) return false;
   if (left.track() < right.track()) return true;
   if (left.track() > right.track()) return false;
-  return left.filename() < right.filename();
+  return left.url() < right.url();
 }
 
 void SongLoader::LoadLocalDirectoryAndEmit(const QString& filename) {
@@ -256,7 +256,7 @@ void SongLoader::AddAsRawStream() {
   Song song;
   song.set_valid(true);
   song.set_filetype(Song::Type_Stream);
-  song.set_filename(url_.toString());
+  song.set_url(url_);
   song.set_title(url_.toString());
   songs_ << song;
 }

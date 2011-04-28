@@ -46,6 +46,7 @@ std::ostream& operator <<(std::ostream& stream, const QList<T>& list) {
 
 void PrintTo(const ::QString& str, std::ostream& os);
 void PrintTo(const ::QVariant& var, std::ostream& os);
+void PrintTo(const ::QUrl& url, std::ostream& os);
 
 #define EXPOSE_SIGNAL0(n) \
     void Emit##n() { emit n(); }

@@ -40,17 +40,17 @@ class LibraryBackendInterface : public QObject {
     Album() {}
     Album(const QString& _artist, const QString& _album_name,
           const QString& _art_automatic, const QString& _art_manual,
-          const QString& _first_filename)
+          const QUrl& _first_url)
             : artist(_artist), album_name(_album_name),
               art_automatic(_art_automatic), art_manual(_art_manual),
-              first_filename(_first_filename) {}
+              first_url(_first_url) {}
 
     QString artist;
     QString album_name;
 
     QString art_automatic;
     QString art_manual;
-    QString first_filename;
+    QUrl first_url;
   };
   typedef QList<Album> AlbumList;
 
@@ -63,7 +63,7 @@ class LibraryBackendInterface : public QObject {
   virtual SongList FindSongsInDirectory(int id) = 0;
   virtual SubdirectoryList SubdirsInDirectory(int id) = 0;
   virtual DirectoryList GetAllDirectories() = 0;
-  virtual void ChangeDirPath(int id, const QString& new_path) = 0;
+  virtual void ChangeDirPath(int id, const QString& old_path, const QString& new_path) = 0;
 
   virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
   virtual QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions()) = 0;
@@ -84,11 +84,11 @@ class LibraryBackendInterface : public QObject {
 
   // Returns all sections of a song with the given filename. If there's just one section
   // the resulting list will have it's size equal to 1.
-  virtual SongList GetSongsByFilename(const QString& filename) = 0;
+  virtual SongList GetSongsByUrl(const QUrl& url) = 0;
   // Returns a section of a song with the given filename and beginning. If the section
   // is not present in library, returns invalid song.
   // Using default beginning value is suitable when searching for single-section songs.
-  virtual Song GetSongByFilename(const QString& filename, qint64 beginning = 0) = 0;
+  virtual Song GetSongByUrl(const QUrl& url, qint64 beginning = 0) = 0;
 
   virtual void AddDirectory(const QString& path) = 0;
   virtual void RemoveDirectory(const Directory& dir) = 0;
@@ -120,7 +120,7 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList FindSongsInDirectory(int id);
   SubdirectoryList SubdirsInDirectory(int id);
   DirectoryList GetAllDirectories();
-  void ChangeDirPath(int id, const QString& new_path);
+  void ChangeDirPath(int id, const QString& old_path, const QString& new_path);
 
   QStringList GetAll(const QString& column, const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
@@ -143,8 +143,8 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList GetSongsByForeignId(const QStringList& ids, const QString& table,
                                const QString& column);
 
-  SongList GetSongsByFilename(const QString& filename);
-  Song GetSongByFilename(const QString& filename, qint64 beginning = 0);
+  SongList GetSongsByUrl(const QUrl& url);
+  Song GetSongByUrl(const QUrl& url, qint64 beginning = 0);
 
   void AddDirectory(const QString& path);
   void RemoveDirectory(const Directory& dir);

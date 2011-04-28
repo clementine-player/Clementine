@@ -106,19 +106,13 @@ int OrganiseDialog::SetSongs(const SongList& songs) {
   preview_songs_.clear();
 
   foreach (const Song& song, songs) {
-    const QString filename = song.filename();
-
-    if (filename.isEmpty())
+    if (song.url().scheme() != "file") {
       continue;
-    if (filename.contains("://")) {
-      QUrl url(song.filename());
-      if (!url.scheme().isEmpty() && url.scheme() != "file")
-        continue;
-    }
+    };
 
     if (song.filesize() > 0)
       total_size_ += song.filesize();
-    filenames_ << filename;
+    filenames_ << song.url().toLocalFile();
 
     if (preview_songs_.count() < kNumberOfPreviews)
       preview_songs_ << song;

@@ -321,7 +321,7 @@ void Mpris1TrackList::PlayTrack(int index) {
 QVariantMap Mpris1::GetMetadata(const Song& song) {
   QVariantMap ret;
 
-  AddMetadata("location", song.filename(), &ret);
+  AddMetadata("location", song.url().toString(), &ret);
   AddMetadata("title", song.PrettyTitle(), &ret);
   AddMetadata("artist", song.artist(), &ret);
   AddMetadata("album", song.album(), &ret);

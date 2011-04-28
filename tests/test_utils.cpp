@@ -50,6 +50,10 @@ void PrintTo(const ::QVariant& var, std::ostream& os) {
   os << var.toString().toStdString();
 }
 
+void PrintTo(const ::QUrl& url, std::ostream& os) {
+  os << url.toString().toStdString();
+}
+
 TemporaryResource::TemporaryResource(const QString& filename) {
   setFileTemplate(QDir::tempPath() + "/clementine_test-XXXXXX." +
                   filename.section('.', -1, -1));

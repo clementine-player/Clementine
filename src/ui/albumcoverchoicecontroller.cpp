@@ -130,8 +130,8 @@ QString AlbumCoverChoiceController::GetInitialPathForFileDialog(const Song& song
     return song.art_automatic();
 
   // if no automatic art, start in the song's folder
-  } else if (!song.filename().isEmpty() && song.filename().contains('/')) {
-    return song.filename().section('/', 0, -2) + filename;
+  } else if (!song.url().isEmpty() && song.url().toLocalFile().contains('/')) {
+    return song.url().toLocalFile().section('/', 0, -2) + filename;
 
   // fallback - start in home
   } else {
@@ -189,7 +189,7 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
-      song.art_automatic(), song.art_manual(), song.filename()));
+      song.art_automatic(), song.art_manual(), song.url().toLocalFile()));
 
   dialog->resize(label->pixmap()->size());
   dialog->show();

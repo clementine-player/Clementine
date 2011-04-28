@@ -33,7 +33,7 @@ class MockLibraryBackend : public LibraryBackendInterface {
   MOCK_METHOD1(FindSongsInDirectory, SongList(int));
   MOCK_METHOD1(SubdirsInDirectory, SubdirectoryList(int));
   MOCK_METHOD0(GetAllDirectories, DirectoryList());
-  MOCK_METHOD2(ChangeDirPath, void(int, const QString&));
+  MOCK_METHOD3(ChangeDirPath, void(int, const QString&, const QString&));
 
   MOCK_METHOD1(GetAllArtists, QStringList(const QueryOptions&));
   MOCK_METHOD1(GetAllArtistsWithAlbums, QStringList(const QueryOptions&));
@@ -51,8 +51,8 @@ class MockLibraryBackend : public LibraryBackendInterface {
 
   MOCK_METHOD1(GetSongById, Song(int));
 
-  MOCK_METHOD1(GetSongsByFilename, SongList(const QString&));
-  MOCK_METHOD2(GetSongByFilename, Song(const QString&, qint64));
+  MOCK_METHOD1(GetSongsByUrl, SongList(const QUrl&));
+  MOCK_METHOD2(GetSongByUrl, Song(const QUrl&, qint64));
 
   MOCK_METHOD1(AddDirectory, void(const QString&));
   MOCK_METHOD1(RemoveDirectory, void(const Directory&));

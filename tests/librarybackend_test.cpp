@@ -46,7 +46,7 @@ class LibraryBackendTest : public ::testing::Test {
     // Returns a valid song with all the required fields set
     Song ret;
     ret.set_directory_id(directory_id);
-    ret.set_filename("foo.mp3");
+    ret.set_url(QUrl::fromLocalFile("foo.mp3"));
     ret.set_mtime(1);
     ret.set_ctime(1);
     ret.set_filesize(1);
@@ -109,7 +109,7 @@ TEST_F(LibraryBackendTest, AddInvalidSong) {
   backend_->AddOrUpdateSongs(SongList() << s);
   ASSERT_EQ(1, spy.count()); spy.takeFirst();
 
-  s.set_filename("foo");
+  s.set_url(QUrl::fromLocalFile("foo"));
   backend_->AddOrUpdateSongs(SongList() << s);
   ASSERT_EQ(1, spy.count()); spy.takeFirst();
 

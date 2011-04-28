@@ -148,7 +148,7 @@ void Organise::ProcessSomeFiles() {
       song.set_filetype(task.new_filetype_);
 
       // Fiddle the filename extension as well to match the new type
-      song.set_filename(FiddleFileExtension(song.filename(), task.new_extension_));
+      song.set_url(QUrl::fromLocalFile(FiddleFileExtension(song.url().toLocalFile(), task.new_extension_)));
       song.set_basefilename(FiddleFileExtension(song.basefilename(), task.new_extension_));
 
       // Have to set this to the size of the new file or else funny stuff happens

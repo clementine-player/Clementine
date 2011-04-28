@@ -35,7 +35,7 @@ TagFetcher::TagFetcher(QObject* parent)
 }
 
 QString TagFetcher::GetFingerprint(const Song& song) {
-  return Fingerprinter(song.filename()).CreateFingerprint();
+  return Fingerprinter(song.url().toLocalFile()).CreateFingerprint();
 }
 
 void TagFetcher::StartFetch(const SongList& songs) {

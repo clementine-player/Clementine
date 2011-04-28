@@ -29,7 +29,8 @@ XSPFParser::XSPFParser(LibraryBackendInterface* library, QObject* parent)
 {
 }
 
-SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path, const QDir&) const {
+SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path,
+                          const QDir& dir) const {
   SongList ret;
 
   QXmlStreamReader reader(device);
@@ -39,7 +40,7 @@ SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path, const
   }
 
   while (!reader.atEnd() && ParseUntilElement(&reader, "track")) {
-    Song song = ParseTrack(&reader);
+    Song song = ParseTrack(&reader, dir);
     if (song.is_valid()) {
       ret << song;
     }
@@ -47,34 +48,17 @@ SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path, const
   return ret;
 }
 
-Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
-  Song song;
-  QString title, artist, album;
+Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
+  QString title, artist, album, location;
   qint64 nanosec = -1;
+
   while (!reader->atEnd()) {
     QXmlStreamReader::TokenType type = reader->readNext();
     switch (type) {
       case QXmlStreamReader::StartElement: {
         QStringRef name = reader->name();
         if (name == "location") {
-          QUrl url(reader->readElementText());
-          if (url.scheme() == "file") {
-            QString filename = url.toLocalFile();
-            if (!QFile::exists(filename)) {
-              return Song();
-            }
-
-            // Load the song from the library if it's there.
-            Song library_song = LoadLibrarySong(filename);
-            if (library_song.is_valid())
-              return library_song;
-
-            song.InitFromFile(filename, -1);
-            return song;
-          } else {
-            song.set_filename(url.toString());
-            song.set_filetype(Song::Type_Stream);
-          }
+          location = reader->readElementText();
         } else if (name == "title") {
           title = reader->readElementText();
         } else if (name == "creator") {
@@ -82,7 +66,7 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
         } else if (name == "album") {
           album = reader->readElementText();
         } else if (name == "duration") {  // in milliseconds.
-          const QString& duration = reader->readElementText();
+          const QString duration = reader->readElementText();
           bool ok = false;
           nanosec = duration.toInt(&ok) * kNsecPerMsec;
           if (!ok) {
@@ -97,16 +81,22 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader) const {
       }
       case QXmlStreamReader::EndElement: {
         if (reader->name() == "track") {
-          song.Init(title, artist, album, nanosec);
-          return song;
+          goto return_song;
         }
       }
       default:
         break;
     }
   }
-  // At least make an effort if we never find a </track>.
-  song.Init(title, artist, album, nanosec);
+
+return_song:
+  Song song = LoadSong(location, 0, dir);
+
+  // Override metadata with what was in the playlist
+  song.set_title(title);
+  song.set_artist(artist);
+  song.set_album(album);
+  song.set_length_nanosec(nanosec);
   return song;
 }
 
@@ -120,7 +110,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
   StreamElement tracklist("trackList", &writer);
   foreach (const Song& song, songs) {
     StreamElement track("track", &writer);
-    writer.writeTextElement("location", MakeUrl(song.filename()));
+    writer.writeTextElement("location", song.url().toString());
     writer.writeTextElement("title", song.title());
     if (!song.artist().isEmpty()) {
       writer.writeTextElement("creator", song.artist());
@@ -136,7 +126,9 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir&) con
     // Ignore images that are in our resource bundle.
     if (!art.startsWith(":") && !art.isEmpty()) {
       // Convert local files to URLs.
-      art = MakeUrl(art);
+      if (!art.contains("://")) {
+        art = QUrl::fromLocalFile(art).toString();
+      }
       writer.writeTextElement("image", art);
     }
   }

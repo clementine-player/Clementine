@@ -550,7 +550,7 @@ void LibraryView::EditSmartPlaylistFinished() {
 void LibraryView::ShowInBrowser() {
   QStringList filenames;
   foreach (const Song& song, GetSelectedSongs()) {
-    filenames << song.filename();
+    filenames << song.url().toLocalFile();
   }
 
   Utilities::OpenInFileBrowser(filenames);

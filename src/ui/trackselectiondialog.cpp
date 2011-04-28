@@ -77,7 +77,7 @@ void TrackSelectionDialog::Init(const SongList& songs) {
     data_ << data;
 
     QListWidgetItem* item = new QListWidgetItem(ui_->song_list);
-    item->setText(QFileInfo(song.filename()).fileName());
+    item->setText(QFileInfo(song.url().toLocalFile()).fileName());
     item->setForeground(palette().color(QPalette::Disabled, QPalette::Text));
   }
 
@@ -94,7 +94,7 @@ void TrackSelectionDialog::FetchTagProgress(const Song& original_song,
   // Find the item with this filename
   int row = -1;
   for (int i=0 ; i<data_.count() ; ++i) {
-    if (data_[i].original_song_.filename() == original_song.filename()) {
+    if (data_[i].original_song_.url() == original_song.url()) {
       row = i;
       break;
     }
@@ -116,7 +116,7 @@ void TrackSelectionDialog::FetchTagFinished(const Song& original_song,
   // Find the item with this filename
   int row = -1;
   for (int i=0 ; i<data_.count() ; ++i) {
-    if (data_[i].original_song_.filename() == original_song.filename()) {
+    if (data_[i].original_song_.url() == original_song.url()) {
       row = i;
       break;
     }

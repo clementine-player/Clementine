@@ -31,11 +31,12 @@ class ASXParser : public XMLParser {
 
   bool TryMagic(const QByteArray &data) const;
 
-  SongList Load(QIODevice *device, const QString& playlist_path = "", const QDir &dir = QDir()) const;
+  SongList Load(QIODevice *device, const QString& playlist_path = "",
+                const QDir& dir = QDir()) const;
   void Save(const SongList &songs, QIODevice *device, const QDir &dir = QDir()) const;
 
  private:
-  Song ParseTrack(QXmlStreamReader* reader) const;
+  Song ParseTrack(QXmlStreamReader* reader, const QDir& dir) const;
 };
 
 #endif

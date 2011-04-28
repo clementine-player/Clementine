@@ -125,7 +125,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       song = clementine.Song()
       song.set_title(stream["name"])
       song.set_artist(self.SERVICE_DESCRIPTION)
-      song.set_filename("digitallyimported://%s" % stream["key"])
+      song.set_url(QUrl("digitallyimported://%s" % stream["key"]))
 
       item = QStandardItem(QIcon(":last.fm/icon_radio.png"), stream["name"])
       item.setData(stream["description"], PyQt4.QtCore.Qt.ToolTipRole)
@@ -192,6 +192,6 @@ class DigitallyImportedServiceBase(clementine.RadioService):
 
     # Take the first track in the playlist
     result.type_ = clementine.PlaylistItem.SpecialLoadResult.TrackAvailable
-    result.media_url_ = QUrl(songs[0].filename())
+    result.media_url_ = songs[0].url()
 
     self.AsyncLoadFinished.emit(result)

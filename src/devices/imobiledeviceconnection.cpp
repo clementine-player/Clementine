@@ -215,7 +215,7 @@ QString iMobileDeviceConnection::GetUnusedFilename(
   }
 
   // Use the same file extension as the original file, default to mp3.
-  QString extension = metadata.filename().section('.', -1, -1).toLower();
+  QString extension = metadata.url().path().section('.', -1, -1).toLower();
   if (extension.isEmpty())
     extension = "mp3";
 

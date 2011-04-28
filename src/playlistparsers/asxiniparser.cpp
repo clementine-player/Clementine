@@ -40,16 +40,8 @@ SongList AsxIniParser::Load(QIODevice *device, const QString& playlist_path, con
     QString value = line.mid(equals + 1);
 
     if (key.startsWith("ref")) {
-      Song song;
-      if (!ParseTrackLocation(value, dir, &song))
-        qLog(Warning) << "Failed to parse location: " << value;
-
-      // Load the song from the library if it's there.
-      Song library_song = LoadLibrarySong(song.filename());
-      if (library_song.is_valid()) {
-        ret << library_song;
-      } else {
-        song.InitFromFile(song.filename(), -1);
+      Song song = LoadSong(value, 0, dir);
+      if (song.is_valid()) {
         ret << song;
       }
     }
@@ -64,7 +56,7 @@ void AsxIniParser::Save(const SongList &songs, QIODevice *device, const QDir &di
 
   int n = 1;
   foreach (const Song& song, songs) {
-    s << "Ref" << n << "=" << MakeRelativeTo(song.filename(), dir) << endl;
+    s << "Ref" << n << "=" << URLOrRelativeFilename(song.url(), dir) << endl;
     ++n;
   }
 }

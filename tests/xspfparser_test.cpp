@@ -49,7 +49,7 @@ TEST_F(XSPFParserTest, ParsesOneTrackFromXML) {
   EXPECT_EQ("Foo", song.title());
   EXPECT_EQ("Bar", song.artist());
   EXPECT_EQ("Baz", song.album());
-  EXPECT_EQ("http://example.com/foo.mp3", song.filename());
+  EXPECT_EQ(QUrl("http://example.com/foo.mp3"), song.url());
   EXPECT_EQ(60 * kNsecPerSec, song.length_nanosec());
   EXPECT_TRUE(song.is_valid());
 }
@@ -69,8 +69,8 @@ TEST_F(XSPFParserTest, ParsesMoreThanOneTrackFromXML) {
   XSPFParser parser(NULL);
   SongList songs = parser.Load(&buffer);
   ASSERT_EQ(2, songs.length());
-  EXPECT_EQ("http://example.com/foo.mp3", songs[0].filename());
-  EXPECT_EQ("http://example.com/bar.mp3", songs[1].filename());
+  EXPECT_EQ(QUrl("http://example.com/foo.mp3"), songs[0].url());
+  EXPECT_EQ(QUrl("http://example.com/bar.mp3"), songs[1].url());
   EXPECT_TRUE(songs[0].is_stream());
   EXPECT_TRUE(songs[1].is_stream());
 }
@@ -100,7 +100,7 @@ TEST_F(XSPFParserTest, SavesSong) {
   buffer.open(QIODevice::WriteOnly);
   XSPFParser parser(NULL);
   Song one;
-  one.set_filename("http://www.example.com/foo.mp3");
+  one.set_url(QUrl("http://www.example.com/foo.mp3"));
   one.set_filetype(Song::Type_Stream);
   one.set_title("foo");
   one.set_length_nanosec(123 * kNsecPerSec);
@@ -121,7 +121,7 @@ TEST_F(XSPFParserTest, SavesLocalFile) {
   buffer.open(QIODevice::WriteOnly);
   XSPFParser parser(NULL);
   Song one;
-  one.set_filename("/bar/foo.mp3");
+  one.set_url(QUrl("file:///bar/foo.mp3"));
   one.set_filetype(Song::Type_Mpeg);
   one.set_title("foo");
   one.set_length_nanosec(123 * kNsecPerSec);

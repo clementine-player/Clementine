@@ -177,7 +177,7 @@ Song IcecastBackend::Station::ToSong() const {
   Song ret;
   ret.set_valid(true);
   ret.set_title(name);
-  ret.set_filename(url.toEncoded());
+  ret.set_url(url);
   ret.set_bitrate(bitrate);
   ret.set_samplerate(samplerate);
   ret.set_genre(genre);

@@ -253,7 +253,7 @@ bool Song::HasProperMediaFile() const {
 #endif
 
   QMutexLocker l(&taglib_mutex_);
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->url_.toLocalFile()));
 
   return !fileref->isNull() && fileref->tag();
 }
@@ -266,7 +266,7 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
 
   d->init_from_file_ = true;
 
-  d->filename_ = filename;
+  d->url_ = QUrl::fromLocalFile(filename);
   d->directory_id_ = directory_id;
 
   QFileInfo info(filename);
@@ -502,6 +502,7 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   d->init_from_file_ = true;
 
   #define tostr(n)      (q.value(n).isNull() ? QString::null : q.value(n).toString())
+  #define tobytearray(n)(q.value(n).isNull() ? QByteArray()  : q.value(n).toByteArray())
   #define toint(n)      (q.value(n).isNull() ? -1 : q.value(n).toInt())
   #define tolonglong(n) (q.value(n).isNull() ? -1 : q.value(n).toLongLong())
   #define tofloat(n)    (q.value(n).isNull() ? -1 : q.value(n).toDouble())
@@ -524,8 +525,8 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   d->samplerate_ = toint(col + 14);
 
   d->directory_id_ = toint(col + 15);
-  d->filename_ = tostr(col + 16);
-  d->basefilename_ = QFileInfo(d->filename_).fileName();
+  d->url_ = QUrl::fromEncoded(tobytearray(col + 16));
+  d->basefilename_ = QFileInfo(d->url_.toLocalFile()).fileName();
   d->mtime_ = toint(col + 17);
   d->ctime_ = toint(col + 18);
   d->filesize_ = toint(col + 19);
@@ -562,7 +563,7 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
 }
 
 void Song::InitFromFilePartial(const QString& filename) {
-  d->filename_ = filename;
+  d->url_ = QUrl::fromLocalFile(filename);
   // We currently rely on filename suffix to know if it's a music file or not.
   // TODO: I know this is not satisfying, but currently, we rely on TagLib
   // which seems to have the behavior (filename checks). Someday, it would be
@@ -594,7 +595,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 #endif // HAVE_LIBLASTFM
 
 #ifdef HAVE_LIBGPOD
-  void Song::InitFromItdb(const Itdb_Track* track) {
+  void Song::InitFromItdb(const Itdb_Track* track, const QString& prefix) {
     d->valid_ = true;
 
     d->title_ = QString::fromUtf8(track->title);
@@ -621,9 +622,11 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->skipcount_ = track->skipcount;
     d->lastplayed_ = track->time_played;
 
-    d->filename_ = QString::fromLocal8Bit(track->ipod_path);
-    d->filename_.replace(':', '/');
-    d->basefilename_ = QFileInfo(d->filename_).fileName();
+    QString filename = QString::fromLocal8Bit(track->ipod_path);
+    filename.replace(':', '/');
+
+    d->url_ = QUrl::fromLocalFile(prefix + filename);
+    d->basefilename_ = QFileInfo(filename).fileName();
   }
 
   void Song::ToItdb(Itdb_Track *track) const {
@@ -656,7 +659,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 #endif
 
 #ifdef HAVE_LIBMTP
-  void Song::InitFromMTP(const LIBMTP_track_t* track) {
+  void Song::InitFromMTP(const LIBMTP_track_t* track, const QString& host) {
     d->valid_ = true;
 
     d->title_ = QString::fromUtf8(track->title);
@@ -664,8 +667,8 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->album_ = QString::fromUtf8(track->album);
     d->composer_ = QString::fromUtf8(track->composer);
     d->genre_ = QString::fromUtf8(track->genre);
-    d->filename_ = QString::number(track->item_id);
-    d->basefilename_ = d->filename_;
+    d->url_ = QUrl(QString("mtp://%1/%2").arg(host, track->item_id));
+    d->basefilename_ = QString::number(track->item_id);
 
     d->track_ = track->tracknumber;
     set_length_nanosec(track->duration * kNsecPerMsec);
@@ -839,7 +842,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
         d->bitrate_ = item_value.toInt();
 
       else if (wcscmp(name, g_wszWMDMFileName) == 0)
-        d->filename_ = item_value.toString();
+        d->url_ = QUrl::fromLocalFile(item_value.toString());
 
       else if (wcscmp(name, g_wszWMDMDuration) == 0)
         set_length_nanosec(item_value.toULongLong() * 1e2);
@@ -913,7 +916,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 
       // Make a final guess based on the file extension
       {
-        QString ext = d->filename_.section('.', -1, -1).toLower();
+        QString ext = d->url_.path().section('.', -1, -1).toLower();
         if (ext == "mp3" || ext == "wma" || ext == "flac" || ext == "ogg" ||
             ext == "spx" || ext == "mp4" || ext == "aac" || ext == "m4a")
           break;
@@ -1007,7 +1010,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":samplerate", intval(d->samplerate_));
 
   query->bindValue(":directory", notnullintval(d->directory_id_));
-  query->bindValue(":filename", d->filename_);
+  query->bindValue(":filename", d->url_.toEncoded());
   query->bindValue(":mtime", notnullintval(d->mtime_));
   query->bindValue(":ctime", notnullintval(d->ctime_));
   query->bindValue(":filesize", notnullintval(d->filesize_));
@@ -1065,12 +1068,6 @@ void Song::ToLastFM(lastfm::Track* track) const {
   }
 }
 #endif // HAVE_LIBLASTFM
-
-QUrl Song::url() const {
-  return QFile::exists(filename())
-             ? QUrl::fromLocalFile(filename())
-             : filename();
-}
 
 QString Song::PrettyTitle() const {
   QString title(d->title_);
@@ -1164,16 +1161,17 @@ TagLib::String QStringToTaglibString(const QString& s) {
 }
 
 bool Song::IsEditable() const {
-  return d->valid_ && !d->filename_.isNull() && !is_stream() &&
+  return d->valid_ && !d->url_.isEmpty() && !is_stream() &&
          d->filetype_ != Type_Unknown && !has_cue();
 }
 
 bool Song::Save() const {
-  if (d->filename_.isNull())
+  const QString filename = d->url_.toLocalFile();
+  if (filename.isNull())
     return false;
 
   QMutexLocker l(&taglib_mutex_);
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->filename_));
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
   if (!fileref || fileref->isNull()) // The file probably doesn't exist
     return false;
@@ -1214,7 +1212,7 @@ bool Song::Save() const {
   if (ret) {
     // Linux: inotify doesn't seem to notice the change to the file unless we
     // change the timestamps as well. (this is what touch does)
-    utimensat(0, QFile::encodeName(d->filename_).constData(), NULL, 0);
+    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
   }
   #endif  // Q_OS_LINUX
 
@@ -1232,7 +1230,7 @@ QFuture<bool> Song::BackgroundSave() const {
 
 bool Song::operator==(const Song& other) const {
   // TODO: this isn't working for radios
-  return filename() == other.filename() &&
+  return url() == other.url() &&
          beginning_nanosec() == other.beginning_nanosec();
 }
 

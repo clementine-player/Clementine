@@ -151,7 +151,7 @@ TEST_F(CueParserTest, UsesAllMetadataInformation) {
   Song first_song = song_list.at(0);
   Song second_song = song_list.at(1);
 
-  ASSERT_TRUE(first_song.filename().endsWith("a_file.mp3"));
+  ASSERT_TRUE(first_song.url().toString().endsWith("a_file.mp3"));
   ASSERT_EQ("Un soffio caldo", first_song.title());
   ASSERT_EQ("Album", first_song.album());
   ASSERT_EQ("Zucchero", first_song.artist());
@@ -161,7 +161,7 @@ TEST_F(CueParserTest, UsesAllMetadataInformation) {
   ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
   ASSERT_EQ(1, first_song.track());
 
-  ASSERT_TRUE(second_song.filename().endsWith("a_file.mp3"));
+  ASSERT_TRUE(second_song.url().toString().endsWith("a_file.mp3"));
   ASSERT_EQ("Hey you!", second_song.title());
   ASSERT_EQ("Album", second_song.album());
   ASSERT_EQ("Zucchero himself", second_song.artist());
@@ -189,7 +189,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   Song fourth_song = song_list.at(3);
   Song fifth_song = song_list.at(4);
 
-  ASSERT_TRUE(first_song.filename().endsWith("files/longer_one.mp3"));
+  ASSERT_TRUE(first_song.url().toString().endsWith("files/longer_one.mp3"));
   ASSERT_EQ("A1Song1", first_song.title());
   ASSERT_EQ("Artist One Album", first_song.album());
   ASSERT_EQ("Artist One", first_song.artist());
@@ -199,7 +199,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(-1, first_song.track());
   ASSERT_EQ("CUEPATH", first_song.cue_path());
 
-  ASSERT_TRUE(second_song.filename().endsWith("files/longer_one.mp3"));
+  ASSERT_TRUE(second_song.url().toString().endsWith("files/longer_one.mp3"));
   ASSERT_EQ("A1Song2", second_song.title());
   ASSERT_EQ("Artist One Album", second_song.album());
   ASSERT_EQ("Artist One", second_song.artist());
@@ -207,7 +207,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(to_nanosec(5, 3, 68), second_song.beginning_nanosec());
   ASSERT_EQ(-1, second_song.track());
 
-  ASSERT_TRUE(third_song.filename().endsWith("files/longer_two_p1.mp3"));
+  ASSERT_TRUE(third_song.url().toString().endsWith("files/longer_two_p1.mp3"));
   ASSERT_EQ("A2P1Song1", third_song.title());
   ASSERT_EQ("Artist Two Album", third_song.album());
   ASSERT_EQ("Artist X", third_song.artist());
@@ -217,7 +217,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(-1, third_song.track());
   ASSERT_EQ("CUEPATH", third_song.cue_path());
 
-  ASSERT_TRUE(fourth_song.filename().endsWith("files/longer_two_p1.mp3"));
+  ASSERT_TRUE(fourth_song.url().toString().endsWith("files/longer_two_p1.mp3"));
   ASSERT_EQ("A2P1Song2", fourth_song.title());
   ASSERT_EQ("Artist Two Album", fourth_song.album());
   ASSERT_EQ("Artist Two", fourth_song.artist());
@@ -225,7 +225,7 @@ TEST_F(CueParserTest, AcceptsMultipleFileBasedCues) {
   ASSERT_EQ(to_nanosec(4, 0, 13), fourth_song.beginning_nanosec());
   ASSERT_EQ(-1, fourth_song.track());
 
-  ASSERT_TRUE(fifth_song.filename().endsWith("files/longer_two_p2.mp3"));
+  ASSERT_TRUE(fifth_song.url().toString().endsWith("files/longer_two_p2.mp3"));
   ASSERT_EQ("A2P2Song1", fifth_song.title());
   ASSERT_EQ("Artist Two Album", fifth_song.album());
   ASSERT_EQ("Artist Two", fifth_song.artist());
@@ -253,7 +253,7 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   Song fourth_song = song_list.at(3);
 
   // A* - broken song in the middle
-  ASSERT_TRUE(first_song.filename().endsWith("file1.mp3"));
+  ASSERT_TRUE(first_song.url().toString().endsWith("file1.mp3"));
   ASSERT_EQ("Artist One", first_song.artist());
   ASSERT_EQ("Artist One Album", first_song.album());
   ASSERT_EQ("A1", first_song.title());
@@ -261,7 +261,7 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   ASSERT_EQ(second_song.beginning_nanosec() - first_song.beginning_nanosec(), first_song.length_nanosec());
   ASSERT_EQ(-1, first_song.track());
 
-  ASSERT_TRUE(second_song.filename().endsWith("file1.mp3"));
+  ASSERT_TRUE(second_song.url().toString().endsWith("file1.mp3"));
   ASSERT_EQ("Artist One", second_song.artist());
   ASSERT_EQ("Artist One Album", second_song.album());
   ASSERT_EQ("A3", second_song.title());
@@ -271,7 +271,7 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   // all B* songs are broken
 
   // C* - broken song at the end
-  ASSERT_TRUE(third_song.filename().endsWith("file3.mp3"));
+  ASSERT_TRUE(third_song.url().toString().endsWith("file3.mp3"));
   ASSERT_EQ("Artist Three", third_song.artist());
   ASSERT_EQ("Artist Three Album", third_song.album());
   ASSERT_EQ("C1", third_song.title());
@@ -279,7 +279,7 @@ TEST_F(CueParserTest, SkipsBrokenSongsInMultipleFileBasedCues) {
   ASSERT_EQ(-1, third_song.track());
 
   // D* - broken song at the beginning
-  ASSERT_TRUE(fourth_song.filename().endsWith("file4.mp3"));
+  ASSERT_TRUE(fourth_song.url().toString().endsWith("file4.mp3"));
   ASSERT_EQ("Artist Four", fourth_song.artist());
   ASSERT_EQ("Artist Four Album", fourth_song.album());
   ASSERT_EQ("D2", fourth_song.title());
@@ -302,14 +302,14 @@ TEST_F(CueParserTest, SkipsDataFiles) {
   Song first_song = song_list.at(0);
   Song second_song = song_list.at(1);
 
-  ASSERT_TRUE(first_song.filename().endsWith("file1.mp3"));
+  ASSERT_TRUE(first_song.url().toString().endsWith("file1.mp3"));
   ASSERT_EQ("Artist One", first_song.artist());
   ASSERT_EQ("Artist One Album", first_song.album());
   ASSERT_EQ("A1", first_song.title());
   ASSERT_EQ(to_nanosec(0, 1, 0), first_song.beginning_nanosec());
   ASSERT_EQ(-1, first_song.track());
 
-  ASSERT_TRUE(second_song.filename().endsWith("file4.mp3"));
+  ASSERT_TRUE(second_song.url().toString().endsWith("file4.mp3"));
   ASSERT_EQ("Artist Four", second_song.artist());
   ASSERT_EQ("Artist Four Album", second_song.album());
   ASSERT_EQ("D1", second_song.title());

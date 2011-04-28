@@ -402,7 +402,7 @@ void DeviceView::Organise() {
   SongList songs = GetSelectedSongs();
   QStringList filenames;
   foreach (const Song& song, songs) {
-    filenames << song.filename();
+    filenames << song.url().toLocalFile();
   }
 
   organise_dialog_->SetCopy(true);

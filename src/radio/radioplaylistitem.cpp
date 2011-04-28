@@ -77,7 +77,7 @@ QVariant RadioPlaylistItem::DatabaseValue(DatabaseColumn column) const {
 
 void RadioPlaylistItem::InitMetadata() {
   if (metadata_.title().isEmpty())
-    metadata_.set_title(metadata_.filename());
+    metadata_.set_title(metadata_.url().toString());
   metadata_.set_filetype(Song::Type_Stream);
   metadata_.set_valid(true);
 }
@@ -108,7 +108,7 @@ PlaylistItem::SpecialLoadResult RadioPlaylistItem::LoadNext() {
 }
 
 QUrl RadioPlaylistItem::Url() const {
-  return QUrl(metadata_.filename());
+  return metadata_.url();
 }
 
 PlaylistItem::Options RadioPlaylistItem::options() const {

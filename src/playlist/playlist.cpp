@@ -274,7 +274,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_BPM:          return song.bpm();
         case Column_Bitrate:      return song.bitrate();
         case Column_Samplerate:   return song.samplerate();
-        case Column_Filename:     return song.filename();
+        case Column_Filename:     return song.url();
         case Column_BaseFilename: return song.basefilename();
         case Column_Filesize:     return song.filesize();
         case Column_Filetype:     return song.filetype();
@@ -958,7 +958,7 @@ void Playlist::UpdateItems(const SongList& songs) {
     // Update current items list
     for (int i=0; i<items_.size(); i++) {
       PlaylistItemPtr item = items_[i];
-      if (item->Metadata().filename() == song.filename()) {
+      if (item->Metadata().url() == song.url()) {
         PlaylistItemPtr new_item;
         if (song.id() == -1) {
           new_item = PlaylistItemPtr(new SongPlaylistItem(song));
@@ -1041,7 +1041,7 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_BPM:          cmp(bpm);
     case Column_Bitrate:      cmp(bitrate);
     case Column_Samplerate:   cmp(samplerate);
-    case Column_Filename:     cmp(filename);
+    case Column_Filename:     cmp(url);
     case Column_BaseFilename: cmp(basefilename);
     case Column_Filesize:     cmp(filesize);
     case Column_Filetype:     cmp(filetype);
@@ -1186,7 +1186,7 @@ void Playlist::ItemsLoaded() {
   while (it.hasNext()) {
     PlaylistItemPtr item = it.next();
 
-    if (item->IsLocalLibraryItem() && item->Metadata().filename().isEmpty()) {
+    if (item->IsLocalLibraryItem() && item->Metadata().url().isEmpty()) {
       it.remove();
     }
   }
@@ -1684,7 +1684,7 @@ void Playlist::InvalidateDeletedSongs() {
     Song song = item->Metadata();
 
     if(!song.is_stream()) {
-      bool exists = QFile::exists(song.filename());
+      bool exists = QFile::exists(song.url().toLocalFile());
 
       if(!exists && !item->HasForegroundColor(kInvalidSongPriority)) {
         // gray out the song if it's not there
@@ -1707,7 +1707,7 @@ void Playlist::RemoveDeletedSongs() {
     PlaylistItemPtr item = items_[row];
     Song song = item->Metadata();
 
-    if(!song.is_stream() && !QFile::exists(song.filename())) {
+    if(!song.is_stream() && !QFile::exists(song.url().toLocalFile())) {
         rows_to_remove.append(row);
     }
   }
@@ -1723,8 +1723,8 @@ bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
 
     // if validity has changed, reload the item
     if(!current_song.is_stream() &&
-        current_song.filename() == url.toLocalFile() &&
-        current_song.is_valid() != QFile::exists(current_song.filename())) {
+        current_song.url() == url &&
+        current_song.is_valid() != QFile::exists(current_song.url().toLocalFile())) {
       ReloadItems(QList<int>() << current_row());
     }
 

@@ -50,7 +50,7 @@ void InsertItems::undo() {
 bool InsertItems::UpdateItem(const PlaylistItemPtr& updated_item) {
   for (int i=0; i<items_.size(); i++) {
     PlaylistItemPtr item = items_[i];
-    if (item->Metadata().filename() == updated_item->Metadata().filename()) {
+    if (item->Metadata().url() == updated_item->Metadata().url()) {
       items_[i] = updated_item;
       return true;
     }

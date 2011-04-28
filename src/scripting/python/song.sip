@@ -308,22 +308,16 @@ The ID in the L{LibraryBackend} of the directory containing this song, or -1 if
 the song is not from the library.
 %End
 
-  const QString& filename() const;
+  const QUrl& url() const;
 %Docstring
-filename() -> str
-The filename I{or URL} of this song.
+url() -> L{PyQt4.QtCore.QUrl}
+The URL of this song.
 %End
 
   const QString& basefilename() const;
 %Docstring
 basefilename() -> str
 The filename of this song without any directory component.
-%End
-
-  QUrl url() const;
-%Docstring
-url() -> L{PyQt4.QtCore.QUrl}
-URL for this song which may point either to a file or to another type of stream.
 %End
 
   uint mtime() const;
@@ -658,9 +652,9 @@ set_lastplayed(lastplayed)
 set_score(score)
 %End
 
-  void set_filename(const QString& v);
+  void set_url(const QUrl& v);
 %Docstring
-set_filename(filename)
+set_url(url)
 %End
 
   void set_basefilename(const QString& v);

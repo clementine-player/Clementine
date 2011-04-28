@@ -233,5 +233,5 @@ void AlbumCoverLoader::SetDefaultOutputImage(const QImage &image) {
 
 quint64 AlbumCoverLoader::LoadImageAsync(const Song &song) {
   return LoadImageAsync(song.art_automatic(), song.art_manual(),
-                        song.filename(), song.image());
+                        song.url().toLocalFile(), song.image());
 }
