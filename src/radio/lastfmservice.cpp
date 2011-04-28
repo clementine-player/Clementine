@@ -75,7 +75,8 @@ LastFMService::LastFMService(RadioModel* parent)
     tag_list_(NULL),
     custom_list_(NULL),
     friends_list_(NULL),
-    neighbours_list_(NULL)
+    neighbours_list_(NULL),
+    connection_problems_(false)
 {
   ReloadSettings();
   //we emit the signal the first time to be sure the buttons are in the right state
@@ -253,6 +254,7 @@ void LastFMService::Authenticate(const QString& username, const QString& passwor
 
   QNetworkReply* reply = lastfm::ws::post(params);
   connect(reply, SIGNAL(finished()), SLOT(AuthenticateReplyFinished()));
+  // If we need more detailed error reporting, handle error(NetworkError) signal
 }
 
 void LastFMService::SignOut() {
@@ -326,15 +328,24 @@ void LastFMService::UpdateSubscriberStatusFinished() {
       throw std::runtime_error("");
 #endif
 
+    connection_problems_ = false;
     QString subscriber = lfm["user"]["subscriber"].text();
     const bool is_subscriber = (subscriber.toInt() == 1);
+
     QSettings settings;
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Subscriber", is_subscriber);
     qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
     emit UpdatedSubscriberStatus(is_subscriber);
+  } catch (lastfm::ws::ParseError e) {
+    // The connection to the server is unavailable
+    connection_problems_ = true;
+    qLog(Error) << "Last.fm parse error: " << e.enumValue();
+    emit UpdatedSubscriberStatus(false);
   } catch (std::runtime_error& e) {
+    connection_problems_ = true;
     qLog(Error) << e.what();
+    emit UpdatedSubscriberStatus(false);
   }
 }
 
@@ -516,7 +527,11 @@ void LastFMService::Scrobble() {
     return;
 
   scrobbler_->cache(last_track_);
+
+  // Let's mark a track as cached, useful when the connection is down
+  emit ScrobblerStatus(30);
   scrobbler_->submit();
+
   already_scrobbled_ = true;
 }
 

@@ -124,6 +124,7 @@ class Playlist : public QAbstractListModel {
     LastFM_Seeked,    // The user seeked so don't scrobble
     LastFM_Error,     // Tried to scrobble but got an error
     LastFM_Invalid,   // The song isn't suitable for scrobbling
+    LastFM_Queued,    // Track added to the queue for scrobbling
   };
 
   static const char* kRowsMimetype;

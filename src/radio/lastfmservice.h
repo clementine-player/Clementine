@@ -98,6 +98,7 @@ class LastFMService : public RadioService {
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   bool AreButtonsVisible() const { return buttons_visible_; }
   bool IsScrobbleButtonVisible() const { return scrobble_button_visible_; }
+  bool HasConnectionProblems() const { return connection_problems_; }
 
   void Authenticate(const QString& username, const QString& password);
   void SignOut();
@@ -203,6 +204,9 @@ class LastFMService : public RadioService {
   QStandardItem* neighbours_list_;
 
   QHash<lastfm::Track, QString> art_urls_;
+
+  // Useful to inform the user that we can't scrobble right now
+  bool connection_problems_;
 };
 
 #endif // LASTFMSERVICE_H

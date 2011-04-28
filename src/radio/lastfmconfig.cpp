@@ -112,10 +112,16 @@ void LastFMConfig::UpdatedSubscriberStatus(bool is_subscriber) {
     ui_->subscriber_warning->hide();
     ui_->warn_icon->hide();
   } else {
-    ui_->subscriber_warning->setText(
-      tr("You will not be able to play Last.fm radio stations "
-         "as you are not a Last.fm subscriber."));
     ui_->warn_icon->show();
+    if (service_->HasConnectionProblems()) {
+      ui_->subscriber_warning->setText(
+        tr("Clementine couldn't fetch your subscription status since there are problems "
+           "with your connection. Played tracks will be cached and sent later to Last.fm."));
+    } else {
+      ui_->subscriber_warning->setText(
+        tr("You will not be able to play Last.fm radio stations "
+           "as you are not a Last.fm subscriber."));
+    }
   }
 }
 
@@ -143,8 +149,7 @@ void LastFMConfig::RefreshControls(bool authenticated) {
   ui_->sign_out->setVisible(authenticated);
   if (authenticated) {
     ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(lastfm::ws::Username));
-  }
-  else {
+  } else {
     ui_->icon->setPixmap(IconLoader::Load("dialog-question").pixmap(16));
     ui_->status->setText(tr("Please fill in the blanks to login into Last.fm"));
 

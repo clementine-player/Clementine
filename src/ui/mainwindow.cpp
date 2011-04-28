@@ -898,8 +898,9 @@ void MainWindow::SongChanged(const Song& song) {
 void MainWindow::TrackSkipped(PlaylistItemPtr item) {
   // If it was a library item then we have to increment its skipped count in
   // the database.
-  if (item && item->IsLocalLibraryItem() &&
-      item->Metadata().id() != -1 && playlists_->active()->get_lastfm_status() != Playlist::LastFM_Scrobbled) {
+  if (item && item->IsLocalLibraryItem() && item->Metadata().id() != -1 &&
+      playlists_->active()->get_lastfm_status() != Playlist::LastFM_Scrobbled &&
+      playlists_->active()->get_lastfm_status() != Playlist::LastFM_Queued) {
     Song song = item->Metadata();
     const qint64 position = player_->engine()->position_nanosec();
     const qint64 length = player_->engine()->length_nanosec();
@@ -1083,7 +1084,7 @@ void MainWindow::UpdateTrackPosition() {
   if (position >= scrobble_point) {
     if (playlist->get_lastfm_status() == Playlist::LastFM_New) {
       #ifdef HAVE_LIBLASTFM
-        if (lastfm_service->IsScrobblingEnabled()) {
+        if (lastfm_service->IsScrobblingEnabled() && lastfm_service->IsAuthenticated()) {
           qLog(Info) << "Scrobbling at" << scrobble_point;
           lastfm_service->Scrobble();
         }
@@ -2184,6 +2185,12 @@ void MainWindow::ScrobblerStatus(int value) {
       // update the button icon
       if (last_fm_enabled)
         ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
+      break;
+
+    case 30:
+      // Hack: when offline, liblastfm doesn't inform us, so set the status
+      // as queued; in this way we won't try to scrobble again, it will be done automatically
+      playlists_->active()->set_lastfm_status(Playlist::LastFM_Queued);
       break;
 
     default:
