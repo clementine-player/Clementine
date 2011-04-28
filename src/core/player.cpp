@@ -18,6 +18,7 @@
 #include "config.h"
 #include "player.h"
 #include "core/logging.h"
+#include "core/urlhandler.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "library/librarybackend.h"
@@ -37,11 +38,10 @@
 using boost::shared_ptr;
 
 
-Player::Player(PlaylistManagerInterface* playlists, LastFMService* lastfm,
-               QObject* parent)
+Player::Player(PlaylistManagerInterface* playlists, QObject* parent)
   : PlayerInterface(parent),
     playlists_(playlists),
-    lastfm_(lastfm),
+    lastfm_(NULL),
     engine_(new GstEngine),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
@@ -71,20 +71,27 @@ void Player::Init() {
                    SLOT(EngineMetadataReceived(Engine::SimpleMetaBundle)));
 
   engine_->SetVolume(settings_.value("volume", 50).toInt());
+
+#ifdef HAVE_LIBLASTFM
+  lastfm_ = RadioModel::Service<LastFMService>();
+#endif
 }
 
 void Player::ReloadSettings() {
   engine_->ReloadSettings();
 }
 
-void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
+void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
   switch (result.type_) {
-  case PlaylistItem::SpecialLoadResult::NoMoreTracks:
+  case UrlHandler::LoadResult::NoMoreTracks:
+    qLog(Debug) << "URL handler for" << result.original_url_
+                << "said no more tracks";
+
     loading_async_ = QUrl();
     NextItem(Engine::Auto);
     break;
 
-  case PlaylistItem::SpecialLoadResult::TrackAvailable: {
+  case UrlHandler::LoadResult::TrackAvailable: {
     // Might've been an async load, so check we're still on the same item
     int current_index = playlists_->active()->current_row();
     if (current_index == -1)
@@ -93,6 +100,9 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
     shared_ptr<PlaylistItem> item = playlists_->active()->item_at(current_index);
     if (!item || item->Url() != result.original_url_)
       return;
+
+    qLog(Debug) << "URL handler for" << result.original_url_
+                << "returned" << result.media_url_;
 
     engine_->Play(result.media_url_, stream_change_type_,
                   item->Metadata().has_cue(),
@@ -104,7 +114,10 @@ void Player::HandleSpecialLoad(const PlaylistItem::SpecialLoadResult &result) {
     break;
   }
 
-  case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
+  case UrlHandler::LoadResult::WillLoadAsynchronously:
+    qLog(Debug) << "URL handler for" << result.original_url_
+                << "is loading asynchronously";
+
     // We'll get called again later with either NoMoreTracks or TrackAvailable
     loading_async_ = result.original_url_;
     break;
@@ -122,15 +135,18 @@ void Player::NextInternal(Engine::TrackChangeFlags change) {
     return;
   }
 
-  if (playlists_->active()->current_item() &&
-      playlists_->active()->current_item()->options() & PlaylistItem::ContainsMultipleTracks) {
-    // The next track is already being loaded
-    if (playlists_->active()->current_item()->Url() == loading_async_)
-      return;
+  if (playlists_->active()->current_item()) {
+    const QUrl url = playlists_->active()->current_item()->Url();
 
-    stream_change_type_ = change;
-    HandleSpecialLoad(playlists_->active()->current_item()->LoadNext());
-    return;
+    if (url_handlers_.contains(url.scheme())) {
+      // The next track is already being loaded
+      if (url == loading_async_)
+        return;
+
+      stream_change_type_ = change;
+      HandleLoadResult(url_handlers_[url.scheme()]->LoadNext(url));
+      return;
+    }
   }
 
   NextItem(change);
@@ -261,16 +277,16 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) 
   playlists_->active()->set_current_row(index);
 
   current_item_ = playlists_->active()->current_item();
+  const QUrl url = current_item_->Url();
 
-  if (current_item_->options() & PlaylistItem::SpecialPlayBehaviour) {
+  if (url_handlers_.contains(url.scheme())) {
     // It's already loading
-    if (current_item_->Url() == loading_async_)
+    if (url == loading_async_)
       return;
 
     stream_change_type_ = change;
-    HandleSpecialLoad(current_item_->StartLoading());
-  }
-  else {
+    HandleLoadResult(url_handlers_[url.scheme()]->StartLoading(url));
+  } else {
     loading_async_ = QUrl();
     engine_->Play(current_item_->Url(), change,
                   current_item_->Metadata().has_cue(),
@@ -397,8 +413,6 @@ void Player::ShowOSD() {
 }
 
 void Player::TrackAboutToEnd() {
-  const bool current_contains_multiple_tracks =
-      current_item_->options() & PlaylistItem::ContainsMultipleTracks;
   const bool has_next_row = playlists_->active()->next_row() != -1;
   PlaylistItemPtr next_item;
 
@@ -419,7 +433,6 @@ void Player::TrackAboutToEnd() {
     // user doesn't want to crossfade between tracks on the same album, then
     // don't do this automatic crossfading.
     if (engine_->crossfade_same_album() ||
-        current_contains_multiple_tracks ||
         !has_next_row ||
         !next_item ||
         !current_item_->Metadata().IsOnSameAlbum(next_item->Metadata())) {
@@ -430,26 +443,23 @@ void Player::TrackAboutToEnd() {
 
   // Crossfade is off, so start preloading the next track so we don't get a
   // gap between songs.
-  if (current_contains_multiple_tracks || !has_next_row)
-    return;
-
-  if (!next_item)
+  if (!has_next_row || !next_item)
     return;
 
   QUrl url = next_item->Url();
 
   // Get the actual track URL rather than the stream URL.
-  if (next_item->options() & PlaylistItem::ContainsMultipleTracks) {
-    PlaylistItem::SpecialLoadResult result = next_item->LoadNext();
+  if (url_handlers_.contains(url.scheme())) {
+    UrlHandler::LoadResult result = url_handlers_[url.scheme()]->LoadNext(url);
     switch (result.type_) {
-    case PlaylistItem::SpecialLoadResult::NoMoreTracks:
+    case UrlHandler::LoadResult::NoMoreTracks:
       return;
 
-    case PlaylistItem::SpecialLoadResult::WillLoadAsynchronously:
-      loading_async_ = next_item->Url();
+    case UrlHandler::LoadResult::WillLoadAsynchronously:
+      loading_async_ = url;
       return;
 
-    case PlaylistItem::SpecialLoadResult::TrackAvailable:
+    case UrlHandler::LoadResult::TrackAvailable:
       url = result.media_url_;
       break;
     }
@@ -469,4 +479,43 @@ void Player::InvalidSongRequested(const QUrl& url) {
   // ... and now when our listeners have completed their processing of the
   // current item we can change the current item by skipping to the next song
   NextItem(Engine::Auto);
+}
+
+void Player::AddUrlHandler(UrlHandler* handler) {
+  const QString scheme = handler->scheme();
+
+  if (url_handlers_.contains(scheme)) {
+    qLog(Warning) << "Tried to register a URL handler for" << scheme
+                  << "but one was already registered";
+    return;
+  }
+
+  qLog(Info) << "Registered URL handler for" << scheme;
+  url_handlers_.insert(scheme, handler);
+  connect(handler, SIGNAL(destroyed(QObject*)), SLOT(UrlHandlerDestroyed(QObject*)));
+  connect(handler, SIGNAL(AsyncLoadComplete(UrlHandler::LoadResult)),
+          SLOT(HandleLoadResult(UrlHandler::LoadResult)));
+}
+
+void Player::RemoveUrlHandler(UrlHandler* handler) {
+  const QString scheme = url_handlers_.key(handler);
+  if (scheme.isEmpty()) {
+    qLog(Warning) << "Tried to remove a URL handler for" << handler->scheme()
+                  << "that wasn't registered";
+    return;
+  }
+
+  qLog(Info) << "Removed URL handler for" << scheme;
+  url_handlers_.remove(scheme);
+  disconnect(handler, SIGNAL(destroyed(QObject*)), this, SLOT(UrlHandlerDestroyed(QObject*)));
+  disconnect(handler, SIGNAL(AsyncLoadComplete(UrlHandler::LoadResult)),
+             this, SLOT(HandleLoadResult(UrlHandler::LoadResult)));
+}
+
+void Player::UrlHandlerDestroyed(QObject* object) {
+  UrlHandler* handler = static_cast<UrlHandler*>(object);
+  const QString scheme = url_handlers_.key(handler);
+  if (!scheme.isEmpty()) {
+    url_handlers_.remove(scheme);
+  }
 }

@@ -15,19 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNEPLAYLISTITEM_H
-#define MAGNATUNEPLAYLISTITEM_H
+#include "magnatuneservice.h"
+#include "magnatuneurlhandler.h"
 
-#include "library/libraryplaylistitem.h"
+MagnatuneUrlHandler::MagnatuneUrlHandler(MagnatuneService* service, QObject* parent)
+  : UrlHandler(parent),
+    service_(service) {
+}
 
-class MagnatunePlaylistItem : public LibraryPlaylistItem {
- public:
-  MagnatunePlaylistItem(const QString& type);
-  MagnatunePlaylistItem(const Song& song);
-
-  bool InitFromQuery(const SqlRow& query);
-
-  QUrl Url() const;
-};
-
-#endif // MAGNATUNEPLAYLISTITEM_H
+UrlHandler::LoadResult MagnatuneUrlHandler::StartLoading(const QUrl& url) {
+  return LoadResult(url, LoadResult::TrackAvailable, service_->ModifyUrl(url));
+}

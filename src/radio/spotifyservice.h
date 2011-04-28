@@ -13,6 +13,7 @@
 class LibraryBackend;
 class LibraryModel;
 class SpotifyServer;
+class SpotifyUrlHandler;
 
 class QMenu;
 class QSortFilterProxyModel;
@@ -37,20 +38,21 @@ public:
     Role_UserPlaylistIndex = RadioModel::RoleCount,
   };
 
+  static const char* kServiceName;
+  static const char* kSettingsGroup;
+  static const char* kSearchSongsTable;
+  static const char* kSearchFtsTable;
+
   virtual QStandardItem* CreateRootItem();
   virtual void LazyPopulate(QStandardItem* parent);
 
   void Login(const QString& username, const QString& password);
 
-  PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
   PlaylistItem::Options playlistitem_options() const;
 
   QWidget* HeaderWidget() const;
 
-  static const char* kServiceName;
-  static const char* kSettingsGroup;
-  static const char* kSearchSongsTable;
-  static const char* kSearchFtsTable;
+  SpotifyServer* server() const;
 
 signals:
   void LoginFinished(bool success);
@@ -81,6 +83,7 @@ private slots:
 
 private:
   SpotifyServer* server_;
+  SpotifyUrlHandler* url_handler_;
 
   QString blob_path_;
   QProcess* blob_process_;

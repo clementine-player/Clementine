@@ -93,20 +93,6 @@ Song RadioPlaylistItem::Metadata() const {
   return metadata_;
 }
 
-PlaylistItem::SpecialLoadResult RadioPlaylistItem::StartLoading() {
-  RadioService* s = service();
-  if (!s)
-    return SpecialLoadResult();
-  return s->StartLoading(Url());
-}
-
-PlaylistItem::SpecialLoadResult RadioPlaylistItem::LoadNext() {
-  RadioService* s = service();
-  if (!s)
-    return SpecialLoadResult();
-  return s->LoadNext(Url());
-}
-
 QUrl RadioPlaylistItem::Url() const {
   return metadata_.url();
 }

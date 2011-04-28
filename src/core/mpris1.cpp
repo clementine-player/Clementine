@@ -251,8 +251,7 @@ int Mpris1Player::GetCaps(Engine::State state) const {
     }
   }
 
-  if (playlists->active()->next_row() != -1 ||
-      playlists->active()->current_item_options() & PlaylistItem::ContainsMultipleTracks) {
+  if (playlists->active()->next_row() != -1) {
     caps |= CAN_GO_NEXT;
   }
   if (playlists->active()->previous_row() != -1) {

@@ -34,6 +34,7 @@
 %Include songloader.sip
 %Include taskmanager.sip
 %Include uiinterface.sip
+%Include urlhandler.sip
 
 // Remember: when adding a class that inherits from QObject, add it to the list
 // in scriptinterface.sip as well, or else it won't cast properly when calling

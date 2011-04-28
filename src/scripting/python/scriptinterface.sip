@@ -52,6 +52,7 @@ appropriately.
     CLASS(SongLoader),
     CLASS(TaskManager),
     CLASS(UIInterface),
+    CLASS(UrlHandler),
     {0, 0}
   };
   #undef CLASS

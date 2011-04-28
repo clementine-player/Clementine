@@ -39,11 +39,13 @@
 QMap<QString, RadioService*>* RadioModel::sServices = NULL;
 
 RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
-                       TaskManager* task_manager, QObject* parent)
+                       TaskManager* task_manager, PlayerInterface* player,
+                       QObject* parent)
   : QStandardItemModel(parent),
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
-    task_manager_(task_manager)
+    task_manager_(task_manager),
+    player_(player)
 {
   if (!sServices) {
     sServices = new QMap<QString, RadioService*>;
@@ -76,10 +78,9 @@ void RadioModel::AddService(RadioService *service) {
   root->setData(QVariant::fromValue(service), Role_Service);
 
   invisibleRootItem()->appendRow(root);
-  qDebug() << "Adding:" << service->name();
+  qLog(Debug) << "Adding radio service:" << service->name();
   sServices->insert(service->name(), service);
 
-  connect(service, SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)), SIGNAL(AsyncLoadFinished(PlaylistItem::SpecialLoadResult)));
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
   connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));

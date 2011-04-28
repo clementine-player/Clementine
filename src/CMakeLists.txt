@@ -88,6 +88,7 @@ set(SOURCES
   core/songloader.cpp
   core/stylesheetloader.cpp
   core/taskmanager.cpp
+  core/urlhandler.cpp
   core/utilities.cpp
 
   covers/albumcoverfetcher.cpp
@@ -170,6 +171,7 @@ set(SOURCES
   radio/magnatunedownloaddialog.cpp
   radio/magnatuneplaylistitem.cpp
   radio/magnatuneservice.cpp
+  radio/magnatuneurlhandler.cpp
   radio/radiomodel.cpp
   radio/radioplaylistitem.cpp
   radio/radioservice.cpp
@@ -177,6 +179,7 @@ set(SOURCES
   radio/radioviewcontainer.cpp
   radio/savedradio.cpp
   radio/somafmservice.cpp
+  radio/somafmurlhandler.cpp
 
   scripting/installscriptdialog.cpp
   scripting/languageengine.cpp
@@ -305,6 +308,7 @@ set(HEADERS
   core/player.h
   core/songloader.h
   core/taskmanager.h
+  core/urlhandler.h
 
   covers/albumcoverfetcher.h
   covers/albumcoverfetchersearch.h
@@ -385,6 +389,7 @@ set(HEADERS
   radio/radioviewcontainer.h
   radio/savedradio.h
   radio/somafmservice.h
+  radio/somafmurlhandler.h
 
   scripting/installscriptdialog.h
   scripting/languageengine.h
@@ -592,6 +597,7 @@ if(HAVE_LIBLASTFM)
     radio/lastfmconfig.cpp
     radio/lastfmservice.cpp
     radio/lastfmstationdialog.cpp
+    radio/lastfmurlhandler.cpp
     songinfo/echonestsimilarartists.cpp
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
@@ -618,6 +624,7 @@ if(HAVE_SPOTIFY)
     radio/spotifyconfig.cpp
     radio/spotifyserver.cpp
     radio/spotifyservice.cpp
+    radio/spotifyurlhandler.cpp
   )
   list(APPEND HEADERS
     radio/spotifyconfig.h
@@ -814,8 +821,8 @@ if(HAVE_SCRIPTING_PYTHON)
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineLibraryBackendAlbum.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemSpecialLoadResult.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineTaskManagerTask.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineUrlHandlerLoadResult.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100CoverSearchResult.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Directory.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100LibraryBackendAlbum.cpp

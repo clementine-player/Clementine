@@ -17,10 +17,7 @@ class PlaylistItem {
 Represents a single row in a playlist.
 
 Playlists in Clementine are lists of PlaylistItems.  At a minimum each
-PlaylistItem contains some metadata and a URL, but items may also have special
-loading behaviour associated with them if playing the item is more complicated
-than just loading a URL (for example, Last.fm stations have to request a
-special playlist using the Last.fm API).
+PlaylistItem contains some metadata and a URL.
 
 PlaylistItem is an abstract class and instances of it cannot be created
 directly by Python code.  If you want to add items to a playlist you should use
@@ -43,13 +40,6 @@ describe the item's behaviour when it is played.  Valid values are:
 
   - C{Default} - no special behaviour, the L{Url()} is used directly when
     playing the song.
-  - C{SpecialPlayBehaviour} - The URL returned by Url() isn't the actual URL of
-    the music - the item needs to do something special before it can get an
-    actual URL.  Causes StartLoading() to get called when the user wants to
-    play.
-  - C{ContainsMultipleTracks} - this item might be able to provide another
-    track after one finishes, for example in a radio stream.  Causes LoadNext()
-    to get called when the next URL is required.
   - C{PauseDisabled} - disables the "pause" action.
   - C{LastFMControls} - enables the last.fm "ban" action.
 
@@ -58,45 +48,10 @@ describe the item's behaviour when it is played.  Valid values are:
 public:
   enum Option {
     Default,
-    SpecialPlayBehaviour,
-    ContainsMultipleTracks,
     PauseDisabled,
     LastFMControls,
   };
   typedef QFlags<PlaylistItem::Option> Options;
-
-  struct SpecialLoadResult {
-%Docstring
-Returned by StartLoading() and LoadNext(), indicates what the player should do
-when it wants to load a playlist item that is marked SpecialPlayBehaviour or
-ContainsMultipleTracks.
-
-Valid values for the type_ field are:
-
-  - C{NoMoreTracks} - there wasn't a track available, and the player should
-    move on to the next playlist item.
-  - C{WillLoadAsynchronously} - there might be another track available,
-    something will call the player's HandleSpecialLoad() slot later with the
-    same original_url.
-  - C{TrackAvailable} - There was a track available.  Its url is in media_url.
-
-%End
-
-    enum Type {
-      NoMoreTracks,
-      WillLoadAsynchronously,
-      TrackAvailable,
-    };
-
-    SpecialLoadResult(); // Workaround SIP Mercurial 3e647ed0f2a2
-    SpecialLoadResult(Type type,
-                      const QUrl& original_url = QUrl(),
-                      const QUrl& media_url = QUrl());
-
-    Type type_;
-    QUrl original_url_;
-    QUrl media_url_;
-  };
 
   QString type() const;
 %Docstring

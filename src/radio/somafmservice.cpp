@@ -16,20 +16,20 @@
 */
 
 #include "somafmservice.h"
+#include "somafmurlhandler.h"
 #include "radiomodel.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/player.h"
 #include "core/taskmanager.h"
 #include "ui/iconloader.h"
 
+#include <QCoreApplication>
+#include <QDesktopServices>
+#include <QMenu>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QXmlStreamReader>
-#include <QSettings>
-#include <QTemporaryFile>
-#include <QMenu>
-#include <QDesktopServices>
-#include <QCoreApplication>
 #include <QtDebug>
 
 const char* SomaFMService::kServiceName = "SomaFM";
@@ -38,12 +38,13 @@ const char* SomaFMService::kHomepage = "http://somafm.com";
 
 SomaFMService::SomaFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
+    url_handler_(new SomaFMUrlHandler(this, this)),
     root_(NULL),
     context_menu_(NULL),
     get_channels_task_id_(0),
-    get_stream_task_id_(0),
     network_(new NetworkAccessManager(this))
 {
+  model()->player()->AddUrlHandler(url_handler_);
 }
 
 SomaFMService::~SomaFMService() {
@@ -77,51 +78,6 @@ void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& glob
 
   context_item_ = model()->itemFromIndex(index);
   context_menu_->popup(global_pos);
-}
-
-PlaylistItem::SpecialLoadResult SomaFMService::StartLoading(const QUrl& url) {
-  // Load the playlist
-  QNetworkRequest request = QNetworkRequest(url);
-  request.setRawHeader("User-Agent", QString("%1 %2").arg(
-      QCoreApplication::applicationName(), QCoreApplication::applicationVersion()).toUtf8());
-
-  QNetworkReply* reply = network_->get(request);
-  connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
-
-  if (!get_stream_task_id_)
-    get_stream_task_id_ = model()->task_manager()->StartTask(tr("Loading stream"));
-
-  return PlaylistItem::SpecialLoadResult(
-      PlaylistItem::SpecialLoadResult::WillLoadAsynchronously, url);
-}
-
-void SomaFMService::LoadPlaylistFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  model()->task_manager()->SetTaskFinished(get_stream_task_id_);
-  get_stream_task_id_ = 0;
-
-  QUrl original_url(reply->url());
-
-  if (reply->error() != QNetworkReply::NoError) {
-    // TODO: Error handling
-    qLog(Error) << reply->errorString();
-    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
-        PlaylistItem::SpecialLoadResult::NoMoreTracks, original_url));
-    return;
-  }
-
-  // TODO: Replace with some more robust .pls parsing :(
-  QTemporaryFile temp_file;
-  temp_file.open();
-  temp_file.write(reply->readAll());
-  temp_file.flush();
-
-  QSettings s(temp_file.fileName(), QSettings::IniFormat);
-  s.beginGroup("playlist");
-
-  emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
-      PlaylistItem::SpecialLoadResult::TrackAvailable,
-      original_url, s.value("File1").toString()));
 }
 
 void SomaFMService::RefreshChannels() {
@@ -181,7 +137,10 @@ void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
         } else if (reader.name() == "dj") {
           song.set_artist(reader.readElementText());
         } else if (reader.name() == "fastpls" && reader.attributes().value("format") == "mp3") {
-          song.set_url(QUrl(reader.readElementText()));
+          QUrl url(reader.readElementText());
+          url.setScheme("somafm");
+
+          song.set_url(url);
         } else {
           ConsumeElement(reader);
         }
@@ -216,6 +175,5 @@ QModelIndex SomaFMService::GetCurrentIndex() {
 }
 
 PlaylistItem::Options SomaFMService::playlistitem_options() const {
-  return PlaylistItem::SpecialPlayBehaviour |
-         PlaylistItem::PauseDisabled;
+  return PlaylistItem::PauseDisabled;
 }

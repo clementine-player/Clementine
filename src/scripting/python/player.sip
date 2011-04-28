@@ -12,6 +12,9 @@ public:
   PlaylistItemPtr GetItemAt(int pos) const;
   PlaylistManagerInterface* playlists() const;
 
+  void AddUrlHandler(UrlHandler* handler);
+  void RemoveUrlHandler(UrlHandler* handler);
+
 public slots:
   // Manual track change to the specified track
   void PlayAt(int i, Engine::TrackChangeType change, bool reshuffle);

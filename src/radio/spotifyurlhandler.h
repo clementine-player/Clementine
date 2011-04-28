@@ -15,19 +15,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNEPLAYLISTITEM_H
-#define MAGNATUNEPLAYLISTITEM_H
+#ifndef SPOTIFYURLHANDLER_H
+#define SPOTIFYURLHANDLER_H
 
-#include "library/libraryplaylistitem.h"
+#include "core/urlhandler.h"
 
-class MagnatunePlaylistItem : public LibraryPlaylistItem {
- public:
-  MagnatunePlaylistItem(const QString& type);
-  MagnatunePlaylistItem(const Song& song);
+class SpotifyService;
 
-  bool InitFromQuery(const SqlRow& query);
 
-  QUrl Url() const;
+class SpotifyUrlHandler : public UrlHandler {
+public:
+  SpotifyUrlHandler(SpotifyService* service, QObject* parent);
+
+  QString scheme() const { return "spotify"; }
+  LoadResult StartLoading(const QUrl& url);
+
+private:
+  SpotifyService* service_;
 };
 
-#endif // MAGNATUNEPLAYLISTITEM_H
+#endif // SPOTIFYURLHANDLER_H

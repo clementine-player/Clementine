@@ -15,9 +15,6 @@ public:
 
   virtual void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
-  virtual PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
-  virtual PlaylistItem::SpecialLoadResult LoadNext(const QUrl& url);
-
   virtual PlaylistItem::Options playlistitem_options() const;
 
   virtual QWidget* HeaderWidget() const /Transfer/;
@@ -27,7 +24,6 @@ public:
   virtual QString Icon();
 
 signals:
-  void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
   void OpenSettingsAtPage(SettingsDialog::Page page);

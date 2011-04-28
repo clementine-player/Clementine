@@ -18,10 +18,12 @@
 #include "magnatunedownloaddialog.h"
 #include "magnatuneplaylistitem.h"
 #include "magnatuneservice.h"
+#include "magnatuneurlhandler.h"
 #include "radiomodel.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
+#include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "library/librarymodel.h"
@@ -61,6 +63,7 @@ const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
   : RadioService(kServiceName, parent),
+    url_handler_(new MagnatuneUrlHandler(this, this)),
     context_menu_(NULL),
     root_(NULL),
     library_backend_(NULL),
@@ -89,6 +92,8 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
+
+  model()->player()->AddUrlHandler(url_handler_);
 }
 
 MagnatuneService::~MagnatuneService() {
@@ -205,9 +210,13 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       if (name == "year")            song.set_year(value.toInt());
       if (name == "magnatunegenres") song.set_genre(value.section(',', 0, 0));
       if (name == "seconds")         song.set_length_nanosec(value.toInt() * kNsecPerSec);
-      if (name == "url")             song.set_url(QUrl(value));
       if (name == "cover_small")     song.set_art_automatic(value);
       if (name == "albumsku")        song.set_comment(value);
+      if (name == "url") {
+        QUrl url(value);
+        url.setScheme("magnatune");
+        song.set_url(url);
+      }
     }
   }
 
@@ -290,6 +299,7 @@ void MagnatuneService::Homepage() {
 
 QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
   QUrl ret(url);
+  ret.setScheme("http");
 
   switch(membership_) {
     case Membership_None:

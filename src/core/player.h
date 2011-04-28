@@ -25,14 +25,15 @@
 
 #include "config.h"
 #include "core/song.h"
+#include "core/urlhandler.h"
 #include "covers/albumcoverloader.h"
 #include "engines/engine_fwd.h"
 #include "playlist/playlistitem.h"
 
 class LastFMService;
+class MainWindow;
 class PlaylistManagerInterface;
 class Settings;
-class MainWindow;
 
 
 class PlayerInterface : public QObject {
@@ -48,6 +49,9 @@ public:
   virtual PlaylistItemPtr GetCurrentItem() const = 0;
   virtual PlaylistItemPtr GetItemAt(int pos) const = 0;
   virtual PlaylistManagerInterface* playlists() const = 0;
+
+  virtual void AddUrlHandler(UrlHandler* handler) = 0;
+  virtual void RemoveUrlHandler(UrlHandler* handler) = 0;
 
 public slots:
   virtual void ReloadSettings() = 0;
@@ -72,7 +76,6 @@ public slots:
   // Moves the position of the currently playing song five seconds backwards.
   virtual void SeekBackward() = 0;
 
-  virtual void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result) = 0;
   virtual void CurrentMetadataChanged(const Song& metadata) = 0;
 
   virtual void Mute() = 0;
@@ -103,8 +106,7 @@ class Player : public PlayerInterface {
   Q_OBJECT
 
 public:
-  Player(PlaylistManagerInterface* playlists, LastFMService* lastfm,
-         QObject* parent = 0);
+  Player(PlaylistManagerInterface* playlists, QObject* parent = 0);
   ~Player();
 
   void Init();
@@ -116,6 +118,9 @@ public:
   PlaylistItemPtr GetCurrentItem() const { return current_item_; }
   PlaylistItemPtr GetItemAt(int pos) const;
   PlaylistManagerInterface* playlists() const { return playlists_; }
+
+  void AddUrlHandler(UrlHandler* handler);
+  void RemoveUrlHandler(UrlHandler* handler);
 
 public slots:
   void ReloadSettings();
@@ -131,7 +136,6 @@ public slots:
   void SeekForward();
   void SeekBackward();
 
-  void HandleSpecialLoad(const PlaylistItem::SpecialLoadResult& result);
   void CurrentMetadataChanged(const Song& metadata);
 
   void Mute();
@@ -154,6 +158,9 @@ public slots:
   void ValidSongRequested(const QUrl&);
   void InvalidSongRequested(const QUrl&);
 
+  void UrlHandlerDestroyed(QObject* object);
+  void HandleLoadResult(const UrlHandler::LoadResult& result);
+
  private:
   PlaylistManagerInterface* playlists_;
   LastFMService* lastfm_;
@@ -164,6 +171,8 @@ public slots:
   boost::scoped_ptr<EngineBase> engine_;
   Engine::TrackChangeFlags stream_change_type_;
   Engine::State last_state_;
+
+  QMap<QString, UrlHandler*> url_handlers_;
 
   QUrl loading_async_;
 

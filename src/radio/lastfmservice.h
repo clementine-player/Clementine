@@ -42,12 +42,14 @@ uint qHash(const lastfm::Track& track);
 
 #include <boost/scoped_ptr.hpp>
 
-class QAction;
+class LastFMUrlHandler;
 
+class QAction;
 class QNetworkAccessManager;
 
 class LastFMService : public RadioService {
   Q_OBJECT
+  friend class LastFMUrlHandler;
 
  public:
   LastFMService(RadioModel* parent);
@@ -83,9 +85,6 @@ class LastFMService : public RadioService {
 
   void ShowContextMenu(const QModelIndex& index, const QPoint &global_pos);
 
-  PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
-  PlaylistItem::SpecialLoadResult LoadNext(const QUrl& url);
-
   PlaylistItem::Options playlistitem_options() const;
 
   void ReloadSettings();
@@ -105,6 +104,7 @@ class LastFMService : public RadioService {
   void UpdateSubscriberStatus();
 
   void FetchMoreTracks();
+  QUrl DeququeNextMediaUrl();
 
   PlaylistItemPtr PlaylistItemForUrl(const QUrl& url);
 
@@ -169,11 +169,13 @@ class LastFMService : public RadioService {
                    const QIcon& icon, QStandardItem* parent);
 
   static QUrl FixupUrl(const QUrl& url);
-  void Tune(const lastfm::RadioStation& station);
+  void Tune(const QUrl& station);
 
   void AddSelectedToPlaylist(bool clear_first);
 
  private:
+  LastFMUrlHandler* url_handler_;
+
   lastfm::Audioscrobbler* scrobbler_;
   lastfm::Track last_track_;
   lastfm::Track next_metadata_;

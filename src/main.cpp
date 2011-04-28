@@ -374,20 +374,12 @@ int main(int argc, char *argv[]) {
   database->Start(true);
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
-  RadioModel radio_model(database.get(), &task_manager, NULL);
+  Player player(&playlists);
+  RadioModel radio_model(database.get(), &task_manager, &player, NULL);
 
   // Initialize the repository of cover providers to avoid race conditions
   // later
   CoverProviders::instance();
-
-  // Get the last.fm service if it's available
-  LastFMService* lastfm_service = NULL;
-#ifdef HAVE_LIBLASTFM
-  lastfm_service = RadioModel::Service<LastFMService>();
-#endif
-
-  // Create the player
-  Player player(&playlists, lastfm_service);
 
   // Create the tray icon and OSD
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());

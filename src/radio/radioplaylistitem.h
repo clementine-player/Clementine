@@ -38,9 +38,6 @@ class RadioPlaylistItem : public PlaylistItem {
   Song Metadata() const;
   QUrl Url() const;
 
-  SpecialLoadResult StartLoading();
-  SpecialLoadResult LoadNext();
-
  protected:
   QVariant DatabaseValue(DatabaseColumn) const;
   Song DatabaseSongMetadata() const { return metadata_; }

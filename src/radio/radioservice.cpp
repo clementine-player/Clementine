@@ -76,15 +76,6 @@ QAction* RadioService::GetOpenInNewPlaylistAction() {
   return open_in_new_playlist_;
 }
 
-PlaylistItem::SpecialLoadResult RadioService::StartLoading(const QUrl &url) {
-  return PlaylistItem::SpecialLoadResult(
-      PlaylistItem::SpecialLoadResult::TrackAvailable, url, url);
-}
-
-PlaylistItem::SpecialLoadResult RadioService::LoadNext(const QUrl&) {
-  return PlaylistItem::SpecialLoadResult();
-}
-
 void RadioService::AddItemToPlaylist(const QModelIndex& index, AddMode add_mode) {
   AddItemsToPlaylist(QModelIndexList() << index, add_mode);
 }

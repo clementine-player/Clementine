@@ -28,6 +28,7 @@ class QMenu;
 
 class LibraryBackend;
 class LibraryModel;
+class MagnatuneUrlHandler;
 
 class MagnatuneService : public RadioService {
   Q_OBJECT
@@ -106,6 +107,8 @@ class MagnatuneService : public RadioService {
   Song ReadTrack(QXmlStreamReader& reader);
 
  private:
+  MagnatuneUrlHandler* url_handler_;
+
   QMenu* context_menu_;
   QModelIndex context_item_;
   QStandardItem* root_;

@@ -15,19 +15,29 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNEPLAYLISTITEM_H
-#define MAGNATUNEPLAYLISTITEM_H
+#ifndef LASTFMURLHANDLER_H
+#define LASTFMURLHANDLER_H
 
-#include "library/libraryplaylistitem.h"
+#include "core/urlhandler.h"
 
-class MagnatunePlaylistItem : public LibraryPlaylistItem {
- public:
-  MagnatunePlaylistItem(const QString& type);
-  MagnatunePlaylistItem(const Song& song);
+class LastFMService;
 
-  bool InitFromQuery(const SqlRow& query);
 
-  QUrl Url() const;
+class LastFMUrlHandler : public UrlHandler {
+  friend class LastFMService;
+
+public:
+  LastFMUrlHandler(LastFMService* service, QObject* parent);
+
+  QString scheme() const { return "lastfm"; }
+  LoadResult StartLoading(const QUrl& url);
+  LoadResult LoadNext(const QUrl& url);
+
+  void TunerTrackAvailable();
+  void TunerError();
+
+private:
+  LastFMService* service_;
 };
 
-#endif // MAGNATUNEPLAYLISTITEM_H
+#endif // LASTFMURLHANDLER_H

@@ -10,6 +10,69 @@ import json
 import operator
 import os.path
 
+class DigitallyImportedUrlHandler(clementine.UrlHandler):
+  def __init__(self, service):
+    clementine.UrlHandler.__init__(self, service)
+    self.service = service
+
+    self.last_original_url = None
+    self.task_id = None
+
+  def scheme(self):
+    return "digitallyimported"
+
+  def StartLoading(self, original_url):
+    result = clementine.UrlHandler.LoadResult()
+
+    if self.task_id is not None:
+      return result
+    if self.service.PLAYLISTS[self.service.audio_type]["premium"] and \
+       (len(self.service.username) == 0 or len(self.service.password) == 0):
+      self.service.StreamError.emit(self.tr("You have selected a Premium-only audio type but do not have any account details entered"))
+      return result
+
+    key = original_url.host()
+    self.service.LoadStation(key)
+
+    # Save the original URL so we can emit it in the finished signal later
+    self.last_original_url = original_url
+
+    # Tell the user what's happening
+    self.task_id = clementine.task_manager.StartTask(self.tr("Loading stream"))
+
+    result.type_ = clementine.UrlHandler.LoadResult.WillLoadAsynchronously
+    result.original_url_ = original_url
+    return result
+
+  def LoadPlaylistFinished(self, reply):
+    reply.deleteLater()
+
+    if self.task_id is None:
+      return
+
+    # Stop the spinner in the status bar
+    clementine.task_manager.SetTaskFinished(self.task_id)
+    self.task_id = None
+
+    # Try to parse the playlist
+    parser = clementine.PlaylistParser(clementine.library)
+    songs = parser.LoadFromDevice(reply)
+
+    # Failed to get the playlist?
+    if len(songs) == 0:
+      self.service.StreamError.emit("Error loading playlist '%s'" % reply.url().toString())
+      return
+
+    result = clementine.UrlHandler.LoadResult()
+    result.original_url_ = self.last_original_url
+
+    # Take the first track in the playlist
+    result.type_ = clementine.UrlHandler.LoadResult.TrackAvailable
+    result.media_url_ = songs[0].url()
+
+    self.AsyncLoadComplete.emit(result)
+
+
 class DigitallyImportedServiceBase(clementine.RadioService):
   # Set these in subclasses
   HOMEPAGE_URL = None
@@ -27,6 +90,9 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   def __init__(self, model):
     clementine.RadioService.__init__(self, self.SERVICE_NAME, model)
 
+    self.url_handler = DigitallyImportedUrlHandler(self)
+    clementine.player.AddUrlHandler(self.url_handler)
+
     self.network = clementine.NetworkAccessManager(self)
     self.path = os.path.dirname(__file__)
 
@@ -35,7 +101,6 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     self.password = ""
 
     self.context_index = None
-    self.last_original_url = None
     self.menu = None
     self.root = None
     self.task_id = None
@@ -134,64 +199,10 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       self.root.appendRow(item)
 
   def playlistitem_options(self):
-    return clementine.PlaylistItem.Options(
-      clementine.PlaylistItem.SpecialPlayBehaviour |
-      clementine.PlaylistItem.PauseDisabled)
-
-  def StartLoading(self, original_url):
-    result = clementine.PlaylistItem.SpecialLoadResult()
-
-    if self.task_id is not None:
-      return result
-    if original_url.scheme() != "digitallyimported":
-      return result
-    if self.PLAYLISTS[self.audio_type]["premium"] and \
-       (len(self.username) == 0 or len(self.password) == 0):
-      self.StreamError.emit(self.tr("You have selected a Premium-only audio type but do not have any account details entered"))
-      return result
-
-    key = original_url.host()
-    self.LoadStation(key)
-
-    # Save the original URL so we can emit it in the finished signal later
-    self.last_original_url = original_url
-
-    # Tell the user what's happening
-    self.task_id = clementine.task_manager.StartTask(self.tr("Loading stream"))
-
-    result.type_ = clementine.PlaylistItem.SpecialLoadResult.WillLoadAsynchronously
-    result.original_url_ = original_url
-    return result
+    return clementine.PlaylistItem.Options(clementine.PlaylistItem.PauseDisabled)
 
   def LoadStation(self, key):
     raise NotImplementedError()
 
   def LoadPlaylistFinished(self):
-    # Get the QNetworkReply that called this slot
-    reply = self.sender()
-    reply.deleteLater()
-
-    if self.task_id is None:
-      return
-
-    # Stop the spinner in the status bar
-    clementine.task_manager.SetTaskFinished(self.task_id)
-    self.task_id = None
-
-    # Try to parse the playlist
-    parser = clementine.PlaylistParser(clementine.library)
-    songs = parser.LoadFromDevice(reply)
-
-    # Failed to get the playlist?
-    if len(songs) == 0:
-      self.StreamError.emit("Error loading playlist '%s'" % reply.url().toString())
-      return
-
-    result = clementine.PlaylistItem.SpecialLoadResult()
-    result.original_url_ = self.last_original_url
-
-    # Take the first track in the playlist
-    result.type_ = clementine.PlaylistItem.SpecialLoadResult.TrackAvailable
-    result.media_url_ = songs[0].url()
-
-    self.AsyncLoadFinished.emit(result)
+    self.url_handler.LoadPlaylistFinished(self.sender())

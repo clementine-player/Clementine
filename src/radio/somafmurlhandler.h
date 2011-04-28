@@ -15,19 +15,30 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAGNATUNEPLAYLISTITEM_H
-#define MAGNATUNEPLAYLISTITEM_H
+#ifndef SOMAFMURLHANDLER_H
+#define SOMAFMURLHANDLER_H
 
-#include "library/libraryplaylistitem.h"
+#include "core/urlhandler.h"
 
-class MagnatunePlaylistItem : public LibraryPlaylistItem {
- public:
-  MagnatunePlaylistItem(const QString& type);
-  MagnatunePlaylistItem(const Song& song);
+class SomaFMService;
 
-  bool InitFromQuery(const SqlRow& query);
 
-  QUrl Url() const;
+class SomaFMUrlHandler : public UrlHandler {
+  Q_OBJECT
+
+public:
+  SomaFMUrlHandler(SomaFMService* service, QObject* parent);
+
+  QString scheme() const { return "somafm"; }
+  LoadResult StartLoading(const QUrl& url);
+
+private slots:
+  void LoadPlaylistFinished();
+
+private:
+  SomaFMService* service_;
+
+  int task_id_;
 };
 
-#endif // MAGNATUNEPLAYLISTITEM_H
+#endif // SOMAFMURLHANDLER_H

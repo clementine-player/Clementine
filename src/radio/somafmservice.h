@@ -22,6 +22,8 @@
 
 #include "radioservice.h"
 
+class SomaFMUrlHandler;
+
 class QNetworkAccessManager;
 class QMenu;
 
@@ -46,7 +48,8 @@ class SomaFMService : public RadioService {
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
-  PlaylistItem::SpecialLoadResult StartLoading(const QUrl& url);
+
+  QNetworkAccessManager* network() const { return network_; }
 
  protected:
   QModelIndex GetCurrentIndex();
@@ -54,7 +57,6 @@ class SomaFMService : public RadioService {
  private slots:
   void RefreshChannels();
   void RefreshChannelsFinished();
-  void LoadPlaylistFinished();
 
   void Homepage();
 
@@ -63,12 +65,13 @@ class SomaFMService : public RadioService {
   void ConsumeElement(QXmlStreamReader& reader);
 
  private:
+  SomaFMUrlHandler* url_handler_;
+
   QStandardItem* root_;
   QMenu* context_menu_;
   QStandardItem* context_item_;
 
   int get_channels_task_id_;
-  int get_stream_task_id_;
 
   QNetworkAccessManager* network_;
 };

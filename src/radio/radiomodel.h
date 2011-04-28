@@ -26,6 +26,7 @@
 
 class Database;
 class MergedProxyModel;
+class PlayerInterface;
 class RadioService;
 class SettingsDialog;
 class TaskManager;
@@ -39,7 +40,7 @@ class RadioModel : public QStandardItemModel {
 
 public:
   RadioModel(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
-             QObject* parent = 0);
+             PlayerInterface* player, QObject* parent = 0);
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -132,9 +133,9 @@ public:
   BackgroundThread<Database>* db_thread() const { return db_thread_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
   TaskManager* task_manager() const { return task_manager_; }
+  PlayerInterface* player() const { return player_; }
 
 signals:
-  void AsyncLoadFinished(const PlaylistItem::SpecialLoadResult& result);
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
   void OpenSettingsAtPage(SettingsDialog::Page);
@@ -149,6 +150,7 @@ private:
   BackgroundThread<Database>* db_thread_;
   MergedProxyModel* merged_model_;
   TaskManager* task_manager_;
+  PlayerInterface* player_;
 };
 
 #endif // RADIOMODEL_H

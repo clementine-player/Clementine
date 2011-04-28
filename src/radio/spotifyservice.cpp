@@ -1,9 +1,11 @@
 #include "radiomodel.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
+#include "spotifyurlhandler.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
+#include "core/player.h"
 #include "core/taskmanager.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -17,8 +19,6 @@
 #include <QProcess>
 #include <QSettings>
 #include <QSortFilterProxyModel>
-#include <QTcpServer>
-#include <QTemporaryFile>
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
@@ -28,6 +28,7 @@ const char* SpotifyService::kSearchFtsTable = "spotify_search_songs_fts";
 SpotifyService::SpotifyService(RadioModel* parent)
     : RadioService(kServiceName, parent),
       server_(NULL),
+      url_handler_(new SpotifyUrlHandler(this, this)),
       blob_process_(NULL),
       root_(NULL),
       search_results_(NULL),
@@ -54,6 +55,8 @@ SpotifyService::SpotifyService(RadioModel* parent)
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
+
+  model()->player()->AddUrlHandler(url_handler_);
 }
 
 SpotifyService::~SpotifyService() {
@@ -311,35 +314,7 @@ void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) 
 }
 
 PlaylistItem::Options SpotifyService::playlistitem_options() const {
-  return PlaylistItem::SpecialPlayBehaviour |
-         PlaylistItem::PauseDisabled;
-}
-
-PlaylistItem::SpecialLoadResult SpotifyService::StartLoading(const QUrl& url) {
-  // Pick an unused local port.  There's a possible race condition here -
-  // something else might grab the port before gstreamer does.
-  quint16 port = 0;
-
-  {
-    QTcpServer server;
-    server.listen(QHostAddress::LocalHost);
-    port = server.serverPort();
-  }
-
-  if (port == 0) {
-    qLog(Warning) << "Couldn't pick an unused port";
-    return PlaylistItem::SpecialLoadResult();
-  }
-
-  // Tell Spotify to start sending to this port
-  EnsureServerCreated();
-  server_->StartPlayback(url.toString(), port);
-
-  // Tell gstreamer to listen on this port
-  return PlaylistItem::SpecialLoadResult(
-        PlaylistItem::SpecialLoadResult::TrackAvailable,
-        url,
-        QUrl("tcp://localhost:" + QString::number(port)));
+  return PlaylistItem::PauseDisabled;
 }
 
 void SpotifyService::EnsureMenuCreated() {
@@ -397,4 +372,9 @@ void SpotifyService::SearchResults(const protobuf::SearchResponse& response) {
 
   library_backend_->DeleteAll();
   library_backend_->AddOrUpdateSongs(songs);
+}
+
+SpotifyServer* SpotifyService::server() const {
+  const_cast<SpotifyService*>(this)->EnsureServerCreated();
+  return server_;
 }

@@ -16,7 +16,6 @@
 */
 
 #include "magnatuneplaylistitem.h"
-#include "magnatuneservice.h"
 #include "radiomodel.h"
 
 MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)
@@ -37,18 +36,6 @@ bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
   return song_.is_valid();
 }
 
-PlaylistItem::Options MagnatunePlaylistItem::options() const {
-  return SpecialPlayBehaviour;
-}
-
 QUrl MagnatunePlaylistItem::Url() const {
   return song_.url();
-}
-
-PlaylistItem::SpecialLoadResult MagnatunePlaylistItem::StartLoading() {
-  MagnatuneService* service = RadioModel::Service<MagnatuneService>();
-  QUrl url(Url());
-
-  return SpecialLoadResult(PlaylistItem::SpecialLoadResult::TrackAvailable,
-                           url, service->ModifyUrl(url));
 }

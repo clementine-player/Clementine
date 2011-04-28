@@ -17,9 +17,11 @@
 
 #include "lastfmservice.h"
 #include "lastfmstationdialog.h"
+#include "lastfmurlhandler.h"
 #include "radiomodel.h"
 #include "radioplaylistitem.h"
 #include "core/logging.h"
+#include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "ui/iconloader.h"
@@ -64,6 +66,7 @@ const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1")
 
 LastFMService::LastFMService(RadioModel* parent)
   : RadioService(kServiceName, parent),
+    url_handler_(new LastFMUrlHandler(this, this)),
     scrobbler_(NULL),
     already_scrobbled_(false),
     station_dialog_(new LastFMStationDialog),
@@ -99,6 +102,8 @@ LastFMService::LastFMService(RadioModel* parent)
   add_artist_action_->setEnabled(false);
   add_tag_action_->setEnabled(false);
   add_custom_action_->setEnabled(false);
+
+  model()->player()->AddUrlHandler(url_handler_);
 }
 
 LastFMService::~LastFMService() {
@@ -356,26 +361,9 @@ QUrl LastFMService::FixupUrl(const QUrl& url) {
   return ret;
 }
 
-PlaylistItem::SpecialLoadResult LastFMService::StartLoading(const QUrl& url) {
-  if (url.scheme() != "lastfm")
-    return PlaylistItem::SpecialLoadResult();
-  if (!IsAuthenticated())
-    return PlaylistItem::SpecialLoadResult();
-
-  if (!tune_task_id_)
-    tune_task_id_ = model()->task_manager()->StartTask(tr("Loading Last.fm radio"));
-
-  last_url_ = url;
-  initial_tune_ = true;
-  Tune(lastfm::RadioStation(FixupUrl(url)));
-
-  return PlaylistItem::SpecialLoadResult(
-      PlaylistItem::SpecialLoadResult::WillLoadAsynchronously, url);
-}
-
-PlaylistItem::SpecialLoadResult LastFMService::LoadNext(const QUrl&) {
+QUrl LastFMService::DeququeNextMediaUrl() {
   if (playlist_.empty()) {
-    return PlaylistItem::SpecialLoadResult();
+    return QUrl();
   }
 
   lastfm::MutableTrack track = playlist_.dequeue();
@@ -390,8 +378,7 @@ PlaylistItem::SpecialLoadResult LastFMService::LoadNext(const QUrl&) {
   next_metadata_ = track;
   StreamMetadataReady();
 
-  return PlaylistItem::SpecialLoadResult(
-      PlaylistItem::SpecialLoadResult::TrackAvailable, last_url_, last_track_.url());
+  return last_track_.url();
 }
 
 void LastFMService::StreamMetadataReady() {
@@ -413,8 +400,7 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   tune_task_id_ = 0;
 
   if (error == lastfm::ws::NotEnoughContent) {
-    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
-        PlaylistItem::SpecialLoadResult::NoMoreTracks, last_url_));
+    url_handler_->TunerError();
     return;
   }
 
@@ -452,7 +438,7 @@ QString LastFMService::ErrorString(lastfm::ws::Error error) const {
 
 void LastFMService::TunerTrackAvailable() {
   if (initial_tune_) {
-    emit AsyncLoadFinished(LoadNext(last_url_));
+    url_handler_->TunerTrackAvailable();
     initial_tune_ = false;
   }
 }
@@ -556,7 +542,7 @@ void LastFMService::Ban() {
   last_track_ = mtrack;
 
   Scrobble();
-  emit AsyncLoadFinished(LoadNext(last_url_));
+  model()->player()->Next();
 }
 
 void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &global_pos) {
@@ -792,8 +778,7 @@ void LastFMService::FetchMoreTracksFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply) {
     qLog(Warning) << "Invalid reply on radio.getPlaylist";
-    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
-        PlaylistItem::SpecialLoadResult::NoMoreTracks, reply->url()));
+    url_handler_->TunerError();
     return;
   }
   reply->deleteLater();
@@ -838,7 +823,14 @@ void LastFMService::FetchMoreTracksFinished() {
   TunerTrackAvailable();
 }
 
-void LastFMService::Tune(const lastfm::RadioStation& station) {
+void LastFMService::Tune(const QUrl& url) {
+  if (!tune_task_id_)
+    tune_task_id_ = model()->task_manager()->StartTask(tr("Loading Last.fm radio"));
+
+  last_url_ = url;
+  initial_tune_ = true;
+  const lastfm::RadioStation station(FixupUrl(url));
+
   playlist_.clear();
 
   // Remove all the old album art URLs
@@ -855,8 +847,7 @@ void LastFMService::TuneFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply) {
     qLog(Warning) << "Invalid reply on radio.tune";
-    emit AsyncLoadFinished(PlaylistItem::SpecialLoadResult(
-        PlaylistItem::SpecialLoadResult::NoMoreTracks, reply->url()));
+    url_handler_->TunerError();
     return;
   }
 
@@ -865,10 +856,8 @@ void LastFMService::TuneFinished() {
 }
 
 PlaylistItem::Options LastFMService::playlistitem_options() const {
-  return PlaylistItem::SpecialPlayBehaviour |
-         PlaylistItem::LastFMControls |
-         PlaylistItem::PauseDisabled |
-         PlaylistItem::ContainsMultipleTracks;
+  return PlaylistItem::LastFMControls |
+         PlaylistItem::PauseDisabled;
 }
 
 PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {

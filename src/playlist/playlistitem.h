@@ -41,54 +41,13 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   enum Option {
     Default = 0x00,
 
-    // The URL returned by Url() isn't the actual URL of the music - the
-    // item needs to do something special before it can get an actual URL.
-    // Causes StartLoading() to get called when the user wants to play.
-    SpecialPlayBehaviour = 0x01,
-
-    // This item might be able to provide another track after one finishes, for
-    // example in a radio stream.  Causes LoadNext() to get called when the
-    // next URL is required.
-    ContainsMultipleTracks = 0x02,
-
     // Disables the "pause" action.
-    PauseDisabled = 0x04,
+    PauseDisabled = 0x01,
 
     // Enables the last.fm "ban" action.
-    LastFMControls = 0x08,
+    LastFMControls = 0x02,
   };
   Q_DECLARE_FLAGS(Options, Option);
-
-  // Returned by StartLoading() and LoadNext(), indicates what the player
-  // should do when it wants to load a playlist item that is marked
-  // SpecialPlayBehaviour or ContainsMultipleTracks.
-  struct SpecialLoadResult {
-    enum Type {
-      // There wasn't a track available, and the player should move on to the
-      // next playlist item.
-      NoMoreTracks,
-
-      // There might be another track available, something will call the
-      // player's HandleSpecialLoad() slot later with the same original_url.
-      WillLoadAsynchronously,
-
-      // There was a track available.  Its url is in media_url.
-      TrackAvailable,
-    };
-
-    SpecialLoadResult(Type type = NoMoreTracks,
-                      const QUrl& original_url = QUrl(),
-                      const QUrl& media_url = QUrl());
-
-    Type type_;
-
-    // The url that the playlist items has in Url().
-    // Might be something unplayable like lastfm://...
-    QUrl original_url_;
-
-    // The actual url to something that gstreamer can play.
-    QUrl media_url_;
-  };
 
   virtual QString type() const { return type_; }
 
@@ -101,14 +60,6 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
   virtual Song Metadata() const = 0;
   virtual QUrl Url() const = 0;
-
-  // Called by the Player if SpecialPlayBehaviour is set - gives the playlist
-  // item a chance to do something clever to get a playable track.
-  virtual SpecialLoadResult StartLoading() { return SpecialLoadResult(); }
-
-  // Called by the player if ContainsMultipleTracks is set - gives the playlist
-  // item a chance to get another track to play.
-  virtual SpecialLoadResult LoadNext() { return SpecialLoadResult(); }
 
   void SetTemporaryMetadata(const Song& metadata);
   void ClearTemporaryMetadata();
