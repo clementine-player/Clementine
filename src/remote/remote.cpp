@@ -126,8 +126,7 @@ xrme::State Remote::state() const {
   const PlaylistItemPtr current_item = player_->GetCurrentItem();
 
   xrme::State ret;
-  ret.can_go_next = active->next_row() != -1 ||
-                    active->current_item_options() & PlaylistItem::ContainsMultipleTracks;
+  ret.can_go_next = active->next_row() != -1;
   ret.can_go_previous = active->previous_row() != -1;
   ret.can_seek = current_item && !current_item->Metadata().is_stream();
 
