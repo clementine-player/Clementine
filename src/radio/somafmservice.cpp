@@ -44,7 +44,7 @@ SomaFMService::SomaFMService(RadioModel* parent)
     get_channels_task_id_(0),
     network_(new NetworkAccessManager(this))
 {
-  model()->player()->AddUrlHandler(url_handler_);
+  model()->player()->RegisterUrlHandler(url_handler_);
 }
 
 SomaFMService::~SomaFMService() {

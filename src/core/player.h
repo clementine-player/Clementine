@@ -50,8 +50,8 @@ public:
   virtual PlaylistItemPtr GetItemAt(int pos) const = 0;
   virtual PlaylistManagerInterface* playlists() const = 0;
 
-  virtual void AddUrlHandler(UrlHandler* handler) = 0;
-  virtual void RemoveUrlHandler(UrlHandler* handler) = 0;
+  virtual void RegisterUrlHandler(UrlHandler* handler) = 0;
+  virtual void UnregisterUrlHandler(UrlHandler* handler) = 0;
 
 public slots:
   virtual void ReloadSettings() = 0;
@@ -119,8 +119,8 @@ public:
   PlaylistItemPtr GetItemAt(int pos) const;
   PlaylistManagerInterface* playlists() const { return playlists_; }
 
-  void AddUrlHandler(UrlHandler* handler);
-  void RemoveUrlHandler(UrlHandler* handler);
+  void RegisterUrlHandler(UrlHandler* handler);
+  void UnregisterUrlHandler(UrlHandler* handler);
 
 public slots:
   void ReloadSettings();

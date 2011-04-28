@@ -10,14 +10,11 @@
 
 #include <boost/shared_ptr.hpp>
 
-class LibraryBackend;
-class LibraryModel;
+class Playlist;
 class SpotifyServer;
 class SpotifyUrlHandler;
 
 class QMenu;
-class QSortFilterProxyModel;
-class QTemporaryFile;
 
 class SpotifyService : public RadioService {
   Q_OBJECT
@@ -40,17 +37,15 @@ public:
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
-  static const char* kSearchSongsTable;
-  static const char* kSearchFtsTable;
+  static const int kSearchDelayMsec;
 
-  virtual QStandardItem* CreateRootItem();
-  virtual void LazyPopulate(QStandardItem* parent);
-
-  void Login(const QString& username, const QString& password);
-
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* parent);
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
   PlaylistItem::Options playlistitem_options() const;
 
-  QWidget* HeaderWidget() const;
+  void Login(const QString& username, const QString& password);
+  void Search(const QString& text, Playlist* playlist);
 
   SpotifyServer* server() const;
 
@@ -79,7 +74,8 @@ private slots:
   void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
   void SearchResults(const protobuf::SearchResponse& response);
 
-  void Search(const QString& text);
+  void OpenSearchTab();
+  void DoSearch();
 
 private:
   SpotifyServer* server_;
@@ -96,16 +92,12 @@ private:
 
   int login_task_id_;
   QString pending_search_;
+  Playlist* pending_search_playlist_;
 
   QMenu* context_menu_;
   QModelIndex context_item_;
 
-  QTemporaryFile* database_file_;
-  boost::shared_ptr<Database> database_;
-  LibraryBackend* library_backend_;
-  LibraryFilterWidget* library_filter_;
-  LibraryModel* library_model_;
-  QSortFilterProxyModel* library_sort_model_;
+  QTimer* search_delay_;
 };
 
 #endif

@@ -91,7 +91,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     clementine.RadioService.__init__(self, self.SERVICE_NAME, model)
 
     self.url_handler = DigitallyImportedUrlHandler(self)
-    clementine.player.AddUrlHandler(self.url_handler)
+    clementine.player.RegisterUrlHandler(self.url_handler)
 
     self.network = clementine.NetworkAccessManager(self)
     self.path = os.path.dirname(__file__)

@@ -52,7 +52,7 @@ SearchPreview::~SearchPreview() {
 void SearchPreview::set_library(LibraryBackend* backend) {
   backend_ = backend;
 
-  model_ = new Playlist(NULL, NULL, backend_, -1, this);
+  model_ = new Playlist(NULL, NULL, backend_, -1, QString(), this);
   ui_->tree->setModel(model_);
   ui_->tree->SetPlaylist(model_);
   ui_->tree->SetItemDelegates(backend_);

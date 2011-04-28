@@ -73,6 +73,7 @@ class Playlist : public QAbstractListModel {
            TaskManager* task_manager,
            LibraryBackend* library,
            int id,
+           const QString& special_type = QString(),
            QObject* parent = 0);
   ~Playlist();
 
@@ -167,6 +168,9 @@ class Playlist : public QAbstractListModel {
 
   bool stop_after_current() const;
   bool is_dynamic() const { return dynamic_playlist_; }
+
+  QString special_type() const { return special_type_; }
+  void set_special_type(const QString& v) { special_type_ = v; }
 
   const PlaylistItemPtr& item_at(int index) const { return items_[index]; }
   const bool has_item_at(int index) const { return index >= 0 && index < rowCount(); }
@@ -368,6 +372,8 @@ class Playlist : public QAbstractListModel {
   ColumnAlignmentMap column_alignments_;
 
   QList<SongInsertVetoListener*> veto_listeners_;
+
+  QString special_type_;
 };
 
 QDataStream& operator <<(QDataStream&, const Playlist*);

@@ -93,7 +93,7 @@ MagnatuneService::MagnatuneService(RadioModel* parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
-  model()->player()->AddUrlHandler(url_handler_);
+  model()->player()->RegisterUrlHandler(url_handler_);
 }
 
 MagnatuneService::~MagnatuneService() {

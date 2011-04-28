@@ -103,7 +103,7 @@ LastFMService::LastFMService(RadioModel* parent)
   add_tag_action_->setEnabled(false);
   add_custom_action_->setEnabled(false);
 
-  model()->player()->AddUrlHandler(url_handler_);
+  model()->player()->RegisterUrlHandler(url_handler_);
 }
 
 LastFMService::~LastFMService() {

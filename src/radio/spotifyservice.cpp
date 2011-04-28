@@ -1,16 +1,14 @@
 #include "radiomodel.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
+#include "spotifysearchplaylisttype.h"
 #include "spotifyurlhandler.h"
 #include "core/database.h"
 #include "core/logging.h"
-#include "core/mergedproxymodel.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
-#include "library/library.h"
-#include "library/librarybackend.h"
-#include "library/libraryfilterwidget.h"
-#include "library/librarymodel.h"
+#include "playlist/playlist.h"
+#include "playlist/playlistmanager.h"
 #include "spotifyblob/spotifymessagehandler.h"
 #include "ui/iconloader.h"
 
@@ -18,12 +16,10 @@
 #include <QMenu>
 #include <QProcess>
 #include <QSettings>
-#include <QSortFilterProxyModel>
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
-const char* SpotifyService::kSearchSongsTable = "spotify_search_songs";
-const char* SpotifyService::kSearchFtsTable = "spotify_search_songs_fts";
+const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(RadioModel* parent)
     : RadioService(kServiceName, parent),
@@ -31,13 +27,12 @@ SpotifyService::SpotifyService(RadioModel* parent)
       url_handler_(new SpotifyUrlHandler(this, this)),
       blob_process_(NULL),
       root_(NULL),
-      search_results_(NULL),
       starred_(NULL),
       inbox_(NULL),
       login_task_id_(0),
+      pending_search_playlist_(NULL),
       context_menu_(NULL),
-      library_filter_(NULL),
-      library_sort_model_(new QSortFilterProxyModel(this)) {
+      search_delay_(new QTimer(this)) {
 #ifdef Q_OS_DARWIN
   blob_path_ = QCoreApplication::applicationDirPath() + "/../Resources/clementine-spotifyblob";
 #else
@@ -45,18 +40,13 @@ SpotifyService::SpotifyService(RadioModel* parent)
 #endif
   qLog(Debug) << "Loading spotify blob from:" << blob_path_;
 
-  // Create the library backend in the database thread
-  library_backend_ = new LibraryBackend;
-  library_backend_->Init(parent->db_thread()->Worker(),
-                         kSearchSongsTable, QString(), QString(), kSearchFtsTable);
-  library_model_ = new LibraryModel(library_backend_, parent->task_manager(), this);
+  model()->player()->RegisterUrlHandler(url_handler_);
+  model()->player()->playlists()->RegisterSpecialPlaylistType(
+        new SpotifySearchPlaylistType(this));
 
-  library_sort_model_->setSourceModel(library_model_);
-  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
-  library_sort_model_->setDynamicSortFilter(true);
-  library_sort_model_->sort(0);
-
-  model()->player()->AddUrlHandler(url_handler_);
+  search_delay_->setInterval(kSearchDelayMsec);
+  search_delay_->setSingleShot(true);
+  connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
 }
 
 SpotifyService::~SpotifyService() {
@@ -75,8 +65,6 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
       break;
 
     case Type_SearchResults:
-      library_model_->Init();
-      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
 
     case Type_InboxPlaylist:
@@ -181,9 +169,9 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
 
   // Create starred and inbox playlists if they're not here already
   if (!search_results_) {
-    search_results_ = new QStandardItem(tr("Search results"));
+    search_results_ = new QStandardItem(IconLoader::Load("edit-find"),
+                                        tr("Search Spotify (opens a new tab)"));
     search_results_->setData(Type_SearchResults, RadioModel::Role_Type);
-    search_results_->setData(true, RadioModel::Role_CanLazyLoad);
 
     starred_ = new QStandardItem(QIcon(":/star-on.png"), tr("Starred"));
     starred_->setData(Type_StarredPlaylist, RadioModel::Role_Type);
@@ -325,30 +313,22 @@ void SpotifyService::EnsureMenuCreated() {
 
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addSeparator();
-  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
-
-  library_filter_ = new LibraryFilterWidget(0);
-  library_filter_->SetSettingsGroup(kSettingsGroup);
-  library_filter_->SetLibraryModel(library_model_);
-  library_filter_->SetFilterHint(tr("Search Spotify"));
-  library_filter_->SetAgeFilterEnabled(false);
-  library_filter_->SetGroupByEnabled(false);
-  library_filter_->AddMenuAction(config_action);
-  library_filter_->SetApplyFilterToLibrary(false);
-  library_filter_->SetDelayBehaviour(LibraryFilterWidget::AlwaysDelayed);
-
-  connect(library_filter_, SIGNAL(Filter(QString)), SLOT(Search(QString)));
+  context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Spotify (opens a new tab)..."), this, SLOT(OpenSearchTab()));
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
 }
 
-QWidget* SpotifyService::HeaderWidget() const {
-  const_cast<SpotifyService*>(this)->EnsureMenuCreated();
-  return library_filter_;
+void SpotifyService::Search(const QString& text, Playlist* playlist) {
+  EnsureServerCreated();
+
+  pending_search_ = text;
+  pending_search_playlist_ = playlist;
+  search_delay_->start();
 }
 
-void SpotifyService::Search(const QString& text) {
-  if (!text.isEmpty()) {
-    pending_search_ = text;
-    server_->Search(text, 250);
+void SpotifyService::DoSearch() {
+  if (!pending_search_.isEmpty()) {
+    server_->Search(pending_search_, 200);
   }
 }
 
@@ -370,11 +350,21 @@ void SpotifyService::SearchResults(const protobuf::SearchResponse& response) {
 
   qLog(Debug) << "Got" << songs.count() << "results";
 
-  library_backend_->DeleteAll();
-  library_backend_->AddOrUpdateSongs(songs);
+  pending_search_playlist_->Clear();
+  pending_search_playlist_->InsertSongs(songs);
 }
 
 SpotifyServer* SpotifyService::server() const {
   const_cast<SpotifyService*>(this)->EnsureServerCreated();
   return server_;
+}
+
+void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+  EnsureMenuCreated();
+  context_menu_->popup(global_pos);
+}
+
+void SpotifyService::OpenSearchTab() {
+  model()->player()->playlists()->New(tr("Search Spotify"), SongList(),
+                                      SpotifySearchPlaylistType::kName);
 }

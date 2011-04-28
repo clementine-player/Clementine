@@ -31,6 +31,7 @@ class Playlist;
 class PlaylistBackend;
 class PlaylistParser;
 class PlaylistSequence;
+class SpecialPlaylistType;
 class TaskManager;
 
 class QModelIndex;
@@ -69,8 +70,13 @@ public:
   virtual PlaylistSequence* sequence() const = 0;
   virtual PlaylistParser* parser() const = 0;
 
+  virtual void RegisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
+  virtual void UnregisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
+  virtual SpecialPlaylistType* GetPlaylistType(const QString& type) const = 0;
+
 public slots:
-  virtual void New(const QString& name, const SongList& songs = SongList()) = 0;
+  virtual void New(const QString& name, const SongList& songs = SongList(),
+                   const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
   virtual void Save(int id, const QString& filename) = 0;
   virtual void Rename(int id, const QString& new_name) = 0;
@@ -161,8 +167,13 @@ public:
   PlaylistSequence* sequence() const { return sequence_; }
   PlaylistParser* parser() const { return parser_; }
 
+  void RegisterSpecialPlaylistType(SpecialPlaylistType* type);
+  void UnregisterSpecialPlaylistType(SpecialPlaylistType* type);
+  SpecialPlaylistType* GetPlaylistType(const QString& type) const;
+
 public slots:
-  void New(const QString& name, const SongList& songs = SongList());
+  void New(const QString& name, const SongList& songs = SongList(),
+           const QString& special_type = QString());
   void Load(const QString& filename);
   void Save(int id, const QString& filename);
   void Rename(int id, const QString& new_name);
@@ -198,7 +209,7 @@ private slots:
   void LoadFinished(bool success);
 
 private:
-  Playlist* AddPlaylist(int id, const QString& name);
+  Playlist* AddPlaylist(int id, const QString& name, const QString& special_type);
 
 private:
   struct Data {
@@ -216,6 +227,9 @@ private:
 
   // key = id
   QMap<int, Data> playlists_;
+
+  QMap<QString, SpecialPlaylistType*> special_playlist_types_;
+  SpecialPlaylistType* default_playlist_type_;
 
   int current_;
   int active_;

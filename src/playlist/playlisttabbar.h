@@ -19,6 +19,7 @@
 #define PLAYLISTTABBAR_H
 
 #include <QBasicTimer>
+#include <QIcon>
 #include <QTabBar>
 
 class PlaylistManager;
@@ -49,7 +50,8 @@ public:
   void set_text_by_id(int id, const QString& text);
 
   void RemoveTab(int id);
-  void InsertTab(int id, int index, const QString& text);
+  void InsertTab(int id, int index, const QString& text,
+                 const QIcon& icon = QIcon());
 
 signals:
   void CurrentIdChanged(int id);

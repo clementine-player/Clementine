@@ -46,6 +46,10 @@ class PlaylistBackend : public QObject {
     QString dynamic_type;
     QString dynamic_backend;
     QByteArray dynamic_data;
+
+    // Special playlists have different behaviour, eg. the "spotify-search"
+    // type has a spotify search box at the top, replacing the ordinary filter.
+    QString special_type;
   };
   typedef QList<Playlist> PlaylistList;
   typedef QFuture<PlaylistItemPtr> PlaylistItemFuture;
@@ -58,7 +62,7 @@ class PlaylistBackend : public QObject {
 
   void SetPlaylistOrder(const QList<int>& ids);
 
-  int CreatePlaylist(const QString& name);
+  int CreatePlaylist(const QString& name, const QString& special_type);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
                          int last_played, smart_playlists::GeneratorPtr dynamic);
   void RenamePlaylist(int id, const QString& new_name);

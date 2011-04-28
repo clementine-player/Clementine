@@ -18,6 +18,8 @@
 #include "playlist.h"
 #include "playlistbackend.h"
 #include "playlistmanager.h"
+#include "specialplaylisttype.h"
+#include "core/logging.h"
 #include "core/songloader.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
@@ -37,6 +39,7 @@ PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
     library_backend_(NULL),
     sequence_(NULL),
     parser_(NULL),
+    default_playlist_type_(new DefaultPlaylistType),
     current_(-1),
     active_(-1)
 {
@@ -46,6 +49,9 @@ PlaylistManager::~PlaylistManager() {
   foreach (const Data& data, playlists_.values()) {
     delete data.p;
   }
+
+  qDeleteAll(special_playlist_types_.values());
+  delete default_playlist_type_;
 }
 
 void PlaylistManager::Init(LibraryBackend* library_backend,
@@ -60,7 +66,7 @@ void PlaylistManager::Init(LibraryBackend* library_backend,
   connect(library_backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsDiscovered(SongList)));
 
   foreach (const PlaylistBackend::Playlist& p, playlist_backend->GetAllPlaylists()) {
-    AddPlaylist(p.id, p.name);
+    AddPlaylist(p.id, p.name, p.special_type);
   }
 
   // If no playlist exists then make a new one
@@ -85,8 +91,9 @@ const QItemSelection& PlaylistManager::selection(int id) const {
   return it->selection;
 }
 
-Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
-  Playlist* ret = new Playlist(playlist_backend_, task_manager_, library_backend_, id);
+Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
+                                       const QString& special_type) {
+  Playlist* ret = new Playlist(playlist_backend_, task_manager_, library_backend_, id, special_type);
   ret->set_sequence(sequence_);
 
   connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
@@ -110,16 +117,17 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name) {
   return ret;
 }
 
-void PlaylistManager::New(const QString& name, const SongList& songs) {
+void PlaylistManager::New(const QString& name, const SongList& songs,
+                          const QString& special_type) {
   if (name.isNull())
     return;
 
-  int id = playlist_backend_->CreatePlaylist(name);
+  int id = playlist_backend_->CreatePlaylist(name, special_type);
 
   if (id == -1)
     qFatal("Couldn't create playlist");
 
-  Playlist* playlist = AddPlaylist(id, name);
+  Playlist* playlist = AddPlaylist(id, name, special_type);
   playlist->InsertSongsOrLibraryItems(songs);
 
   SetCurrentPlaylist(id);
@@ -389,4 +397,36 @@ QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   }
 
   return result;
+}
+
+void PlaylistManager::RegisterSpecialPlaylistType(SpecialPlaylistType* type) {
+  const QString name = type->name();
+
+  if (special_playlist_types_.contains(name)) {
+    qLog(Warning) << "Tried to register a special playlist type" << name
+                  << "but one was already registered";
+    return;
+  }
+
+  qLog(Info) << "Registered special playlist type" << name;
+  special_playlist_types_.insert(name, type);
+}
+
+void PlaylistManager::UnregisterSpecialPlaylistType(SpecialPlaylistType* type) {
+  const QString name = special_playlist_types_.key(type);
+  if (name.isEmpty()) {
+    qLog(Warning) << "Tried to unregister a special playlist type" << type->name()
+                  << "that wasn't registered";
+    return;
+  }
+
+  qLog(Info) << "Unregistered special playlist type" << name;
+  special_playlist_types_.remove(name);
+}
+
+SpecialPlaylistType* PlaylistManager::GetPlaylistType(const QString& type) const {
+  if (special_playlist_types_.contains(type)) {
+    return special_playlist_types_[type];
+  }
+  return default_playlist_type_;
 }

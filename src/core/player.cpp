@@ -481,7 +481,7 @@ void Player::InvalidSongRequested(const QUrl& url) {
   NextItem(Engine::Auto);
 }
 
-void Player::AddUrlHandler(UrlHandler* handler) {
+void Player::RegisterUrlHandler(UrlHandler* handler) {
   const QString scheme = handler->scheme();
 
   if (url_handlers_.contains(scheme)) {
@@ -497,15 +497,15 @@ void Player::AddUrlHandler(UrlHandler* handler) {
           SLOT(HandleLoadResult(UrlHandler::LoadResult)));
 }
 
-void Player::RemoveUrlHandler(UrlHandler* handler) {
+void Player::UnregisterUrlHandler(UrlHandler* handler) {
   const QString scheme = url_handlers_.key(handler);
   if (scheme.isEmpty()) {
-    qLog(Warning) << "Tried to remove a URL handler for" << handler->scheme()
+    qLog(Warning) << "Tried to unregister a URL handler for" << handler->scheme()
                   << "that wasn't registered";
     return;
   }
 
-  qLog(Info) << "Removed URL handler for" << scheme;
+  qLog(Info) << "Unregistered URL handler for" << scheme;
   url_handlers_.remove(scheme);
   disconnect(handler, SIGNAL(destroyed(QObject*)), this, SLOT(UrlHandlerDestroyed(QObject*)));
   disconnect(handler, SIGNAL(AsyncLoadComplete(UrlHandler::LoadResult)),

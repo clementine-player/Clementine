@@ -12,8 +12,8 @@ public:
   PlaylistItemPtr GetItemAt(int pos) const;
   PlaylistManagerInterface* playlists() const;
 
-  void AddUrlHandler(UrlHandler* handler);
-  void RemoveUrlHandler(UrlHandler* handler);
+  void RegisterUrlHandler(UrlHandler* handler);
+  void UnregisterUrlHandler(UrlHandler* handler);
 
 public slots:
   // Manual track change to the specified track

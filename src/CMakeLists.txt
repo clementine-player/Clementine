@@ -145,6 +145,7 @@ set(SOURCES
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
   playlist/playlistview.cpp
+  playlist/specialplaylisttype.cpp
   playlist/queue.cpp
   playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp
@@ -624,6 +625,7 @@ if(HAVE_SPOTIFY)
     radio/spotifyconfig.cpp
     radio/spotifyserver.cpp
     radio/spotifyservice.cpp
+    radio/spotifysearchplaylisttype.cpp
     radio/spotifyurlhandler.cpp
   )
   list(APPEND HEADERS

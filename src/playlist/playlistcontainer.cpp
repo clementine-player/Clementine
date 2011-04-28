@@ -17,6 +17,7 @@
 
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
+#include "specialplaylisttype.h"
 #include "ui_playlistcontainer.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
@@ -181,6 +182,12 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   ui_->redo->setDefaultAction(redo_);
 
   emit UndoRedoActionsChanged(undo_, redo_);
+
+  // Implement special playlist behaviour
+  const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+  ui_->filter->set_hint(type->search_hint_text(playlist));
+
+
 }
 
 void PlaylistContainer::ActivePlaying() {
@@ -207,8 +214,12 @@ void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
 }
 
 void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
-  int index = ui_->tab_bar->count();
-  ui_->tab_bar->InsertTab(id, index, name);
+  Playlist* playlist = manager_->playlist(id);
+  const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+
+  const int index = ui_->tab_bar->count();
+  const QIcon icon = type->icon(playlist);
+  ui_->tab_bar->InsertTab(id, index, name, icon);
 
   // Are we startup up, should we select this tab?
   if (starting_up_ && settings_.value("current_playlist", 1).toInt() == id) {
@@ -336,15 +347,22 @@ void PlaylistContainer::SetTabBarHeight(int height) {
 }
 
 void PlaylistContainer::UpdateFilter() {
-  manager_->current()->proxy()->setFilterFixedString(filter_->text());
-  ui_->playlist->JumpToCurrentlyPlayingTrack();
+  Playlist* playlist = manager_->current();
+  SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
 
-  bool no_matches = manager_->current()->proxy()->rowCount() == 0 &&
-                    manager_->current()->rowCount() > 0;
+  if (type->has_special_search_behaviour(playlist)) {
+    type->Search(filter_->text(), playlist);
+  } else {
+    manager_->current()->proxy()->setFilterFixedString(filter_->text());
+    ui_->playlist->JumpToCurrentlyPlayingTrack();
 
-  if (no_matches)
-    RepositionNoMatchesLabel(true);
-  no_matches_label_->setVisible(no_matches);
+    const bool no_matches = manager_->current()->proxy()->rowCount() == 0 &&
+                            manager_->current()->rowCount() > 0;
+
+    if (no_matches)
+      RepositionNoMatchesLabel(true);
+    no_matches_label_->setVisible(no_matches);
+  }
 }
 
 void PlaylistContainer::resizeEvent(QResizeEvent* e) {

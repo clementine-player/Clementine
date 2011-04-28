@@ -57,7 +57,8 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
   PlaylistList ret;
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
-              "       dynamic_playlist_data, dynamic_playlist_backend"
+              "       dynamic_playlist_data, dynamic_playlist_backend,"
+              "       special_type"
               " FROM playlists"
               " ORDER BY ui_order", db);
   q.exec();
@@ -72,6 +73,7 @@ PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
     p.dynamic_type = q.value(3).toString();
     p.dynamic_data = q.value(4).toByteArray();
     p.dynamic_backend = q.value(5).toString();
+    p.special_type = q.value(6).toString();
     ret << p;
   }
 
@@ -83,7 +85,8 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   QSqlDatabase db(db_->Connect());
 
   QSqlQuery q("SELECT ROWID, name, last_played, dynamic_playlist_type,"
-              "       dynamic_playlist_data, dynamic_playlist_backend"
+              "       dynamic_playlist_data, dynamic_playlist_backend,"
+              "       special_type"
               " FROM playlists"
               " WHERE ROWID=:id", db);
   q.bindValue(":id", id);
@@ -100,6 +103,7 @@ PlaylistBackend::Playlist PlaylistBackend::GetPlaylist(int id) {
   p.dynamic_type = q.value(3).toString();
   p.dynamic_data = q.value(4).toByteArray();
   p.dynamic_backend = q.value(5).toString();
+  p.special_type = q.value(6).toString();
 
   return p;
 }
@@ -268,12 +272,15 @@ void PlaylistBackend::SavePlaylist(int playlist, const PlaylistItemList& items,
   transaction.Commit();
 }
 
-int PlaylistBackend::CreatePlaylist(const QString &name) {
+int PlaylistBackend::CreatePlaylist(const QString &name,
+                                    const QString& special_type) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("INSERT INTO playlists (name) VALUES (:name)", db);
+  QSqlQuery q("INSERT INTO playlists (name, special_type)"
+              " VALUES (:name, :special_type)", db);
   q.bindValue(":name", name);
+  q.bindValue(":special_type", special_type);
   q.exec();
   if (db_->CheckErrors(q))
     return -1;

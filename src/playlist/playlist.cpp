@@ -80,6 +80,7 @@ Playlist::Playlist(PlaylistBackend* backend,
                    TaskManager* task_manager,
                    LibraryBackend* library,
                    int id,
+                   const QString& special_type,
                    QObject *parent)
   : QAbstractListModel(parent),
     is_loading_(false),
@@ -97,7 +98,8 @@ Playlist::Playlist(PlaylistBackend* backend,
     have_incremented_playcount_(false),
     playlist_sequence_(NULL),
     ignore_sorting_(false),
-    undo_stack_(new QUndoStack(this))
+    undo_stack_(new QUndoStack(this)),
+    special_type_(special_type)
 {
   undo_stack_->setUndoLimit(kUndoStackSize);
 

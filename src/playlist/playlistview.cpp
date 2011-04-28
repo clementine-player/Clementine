@@ -16,11 +16,10 @@
 */
 
 #include "dynamicplaylistcontrols.h"
-#include "playlistview.h"
 #include "playlist.h"
-#include "playlistheader.h"
 #include "playlistdelegates.h"
-#include "playlist.h"
+#include "playlistheader.h"
+#include "playlistview.h"
 
 #include <QCleanlooksStyle>
 #include <QPainter>
