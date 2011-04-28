@@ -424,6 +424,11 @@ for plugin in GSTREAMER_PLUGINS:
 
 FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 
+try:
+  FixPlugin('clementine-spotifyblob', '.')
+except:
+  'Failed to find spotify blob'
+
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
 

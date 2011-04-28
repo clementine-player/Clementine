@@ -1021,6 +1021,8 @@ endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
   target_link_libraries(clementine_lib clementine-spotifyblob-messages)
+  add_dependencies(clementine_lib
+      clementine-spotifyblob)
 endif(HAVE_SPOTIFY)
 
 if (APPLE)
@@ -1138,18 +1140,11 @@ if (APPLE)
                                                   WORLD_READ WORLD_EXECUTE)
   endif (HAVE_BREAKPAD)
 
-  if (HAVE_SPOTIFY)
-    install(FILES ${CMAKE_BINARY_DIR}/clementine-spotifyblob
-        DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources"
-        PERMISSIONS OWNER_EXECUTE OWNER_READ
-                    GROUP_EXECUTE GROUP_READ
-                    WORLD_EXECUTE WORLD_READ)
-  endif (HAVE_SPOTIFY)
-
   add_custom_command(TARGET clementine
     POST_BUILD
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/..
   )
 
   add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/clementine.breakpad

@@ -34,7 +34,7 @@ SpotifyService::SpotifyService(RadioModel* parent)
       context_menu_(NULL),
       search_delay_(new QTimer(this)) {
 #ifdef Q_OS_DARWIN
-  blob_path_ = QCoreApplication::applicationDirPath() + "/../Resources/clementine-spotifyblob";
+  blob_path_ = QCoreApplication::applicationDirPath() + "/../PlugIns/clementine-spotifyblob";
 #else
   blob_path_ = QCoreApplication::applicationFilePath() + "-spotifyblob";
 #endif
