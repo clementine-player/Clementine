@@ -624,6 +624,7 @@ endif(HAVE_LIBLASTFM)
 
 if(HAVE_SPOTIFY)
   list(APPEND SOURCES
+    radio/spotifyblobdownloader.cpp
     radio/spotifyconfig.cpp
     radio/spotifyserver.cpp
     radio/spotifyservice.cpp
@@ -631,6 +632,7 @@ if(HAVE_SPOTIFY)
     radio/spotifyurlhandler.cpp
   )
   list(APPEND HEADERS
+    radio/spotifyblobdownloader.h
     radio/spotifyconfig.h
     radio/spotifyserver.h
     radio/spotifyservice.h
@@ -1023,8 +1025,6 @@ endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
   target_link_libraries(clementine_lib clementine-spotifyblob-messages)
-  add_dependencies(clementine_lib
-      clementine-spotifyblob)
 endif(HAVE_SPOTIFY)
 
 if (APPLE)

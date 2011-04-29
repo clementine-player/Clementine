@@ -18,8 +18,8 @@
 #include "spotifyserver.h"
 #include "core/logging.h"
 
-#include "spotifyblob/spotifymessages.pb.h"
-#include "spotifyblob/spotifymessagehandler.h"
+#include "spotifyblob/common/spotifymessages.pb.h"
+#include "spotifyblob/common/spotifymessagehandler.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>

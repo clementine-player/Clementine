@@ -58,7 +58,6 @@ void SpotifyMessageHandler::DeviceReadyRead() {
         return;
       }
 
-      qLog(Debug) << message.DebugString().c_str();
       emit MessageArrived(message);
 
       // Clear the buffer
@@ -71,8 +70,6 @@ void SpotifyMessageHandler::DeviceReadyRead() {
 }
 
 void SpotifyMessageHandler::SendMessage(const protobuf::SpotifyMessage& message) {
-  qLog(Debug) << message.DebugString().c_str();
-
   std::string data(message.SerializeAsString());
 
   QDataStream s(device_);

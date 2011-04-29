@@ -7,6 +7,7 @@ include(cmake/Version.cmake)
 include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SipBindings.cmake)
+include(cmake/SpotifyVersion.cmake)
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
@@ -137,6 +138,16 @@ if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
+# Use protobuf-lite if it's available
+find_library(PROTOBUF_LITE_LIBRARY protobuf-lite)
+if(NOT PROTOBUF_LITE_LIBRARY)
+  # Lucid doesn't have a .so symlink
+  find_file(PROTOBUF_LITE_LIBRARY
+    NAMES libprotobuf-lite.so.5
+    PATH_SUFFIXES lib
+  )
+endif(NOT PROTOBUF_LITE_LIBRARY)
+
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
@@ -188,7 +199,8 @@ option(ENABLE_SCRIPTING_ARCHIVES "Enable support for loading scripts from archiv
 option(ENABLE_SCRIPTING_PYTHON "Enable python scripting" ON)
 option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" OFF)
 option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
-option(ENABLE_SPOTIFY "Enable spotify support" OFF)
+option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
+option(ENABLE_SPOTIFY "Enable spotify support" ON)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
@@ -234,9 +246,13 @@ if(ENABLE_BREAKPAD)
   set(HAVE_BREAKPAD ON)
 endif(ENABLE_BREAKPAD)
 
-if(ENABLE_SPOTIFY AND SPOTIFY_FOUND AND PROTOBUF_FOUND)
+if(ENABLE_SPOTIFY AND PROTOBUF_FOUND)
   set(HAVE_SPOTIFY ON)
-endif(ENABLE_SPOTIFY AND SPOTIFY_FOUND AND PROTOBUF_FOUND)
+endif(ENABLE_SPOTIFY AND PROTOBUF_FOUND)
+
+if(ENABLE_SPOTIFY_BLOB AND PROTOBUF_FOUND AND SPOTIFY_FOUND)
+  set(HAVE_SPOTIFY_BLOB ON)
+endif(ENABLE_SPOTIFY_BLOB AND PROTOBUF_FOUND AND SPOTIFY_FOUND)
 
 
 if(ENABLE_VISUALISATIONS)
@@ -375,8 +391,12 @@ if(HAVE_BREAKPAD)
 endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
-  add_subdirectory(spotifyblob)
+  add_subdirectory(spotifyblob/common)
 endif(HAVE_SPOTIFY)
+
+if(HAVE_SPOTIFY_BLOB)
+  add_subdirectory(spotifyblob/blob)
+endif(HAVE_SPOTIFY_BLOB)
 
 # Uninstall support
 configure_file(
@@ -388,20 +408,21 @@ add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 # Show a summary of what we have enabled
-summary_add("devices: DeviceKit backend" HAVE_DEVICEKIT)
-summary_add("devices: iPod classic support" HAVE_LIBGPOD)
-summary_add("devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
-summary_add("devices: MTP support" HAVE_LIBMTP)
-summary_add("devices: GIO backend" HAVE_GIO)
-summary_add("D-Bus support" HAVE_DBUS)
-summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
-summary_add("Wiimote support" HAVE_WIIMOTEDEV)
-summary_add("Visualisations" ENABLE_VISUALISATIONS)
-summary_add("Last.fm support" HAVE_LIBLASTFM)
 summary_add("Crash reporting" HAVE_BREAKPAD)
+summary_add("D-Bus support" HAVE_DBUS)
+summary_add("Devices: DeviceKit backend" HAVE_DEVICEKIT)
+summary_add("Devices: iPod classic support" HAVE_LIBGPOD)
+summary_add("Devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
+summary_add("Devices: MTP support" HAVE_LIBMTP)
+summary_add("Devices: GIO backend" HAVE_GIO)
+summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
+summary_add("Last.fm support" HAVE_LIBLASTFM)
 summary_add("Scripting support: loading archives" HAVE_LIBARCHIVE)
 summary_add("Scripting support: Python" HAVE_SCRIPTING_PYTHON)
+summary_add("Spotify support: core code" HAVE_SPOTIFY)
+summary_add("Spotify support: non-GPL binary helper" HAVE_SPOTIFY_BLOB)
+summary_add("Visualisations" ENABLE_VISUALISATIONS)
+summary_add("Wiimote support" HAVE_WIIMOTEDEV)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
 summary_add("(unstable) Remote control support" HAVE_REMOTE)
-summary_add("(unstable) Spotify support" HAVE_SPOTIFY)
 summary_show()

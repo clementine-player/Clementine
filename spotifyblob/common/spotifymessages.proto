@@ -21,6 +21,9 @@
 
 package protobuf;
 
+option optimize_for = LITE_RUNTIME;
+
+
 message LoginRequest {
   required string username = 1;
   required string password = 2;

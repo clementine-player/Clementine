@@ -34,7 +34,7 @@ static Level sDefaultLevel = Level_Debug;
 static QMap<QString, Level>* sClassLevels = NULL;
 static QIODevice* sNullDevice = NULL;
 
-const char* kDefaultLogLevels = "GstEnginePipeline:2,SpotifyMessageHandler:2,*:3";
+const char* kDefaultLogLevels = "GstEnginePipeline:2,*:3";
 
 static const char* kMessageHandlerMagic = "__logging_message__";
 static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);

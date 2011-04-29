@@ -18,7 +18,7 @@
 #ifndef SPOTIFYSERVER_H
 #define SPOTIFYSERVER_H
 
-#include "spotifyblob/spotifymessages.pb.h"
+#include "spotifyblob/common/spotifymessages.pb.h"
 
 #include <QImage>
 #include <QObject>

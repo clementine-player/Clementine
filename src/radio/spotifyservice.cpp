@@ -1,4 +1,6 @@
+#include "config.h"
 #include "radiomodel.h"
+#include "spotifyblobdownloader.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "spotifysearchplaylisttype.h"
@@ -7,20 +9,26 @@
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
-#include "spotifyblob/spotifymessagehandler.h"
+#include "spotifyblob/common/blobversion.h"
+#include "spotifyblob/common/spotifymessagehandler.h"
 #include "widgets/didyoumean.h"
 #include "ui/iconloader.h"
 
 #include <QCoreApplication>
+#include <QFile>
+#include <QFileInfo>
 #include <QMenu>
+#include <QMessageBox>
 #include <QProcess>
 #include <QSettings>
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
+const char* SpotifyService::kBlobDownloadUrl = "http://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(RadioModel* parent)
@@ -35,12 +43,18 @@ SpotifyService::SpotifyService(RadioModel* parent)
       pending_search_playlist_(NULL),
       context_menu_(NULL),
       search_delay_(new QTimer(this)) {
-#ifdef Q_OS_DARWIN
-  blob_path_ = QCoreApplication::applicationDirPath() + "/../PlugIns/clementine-spotifyblob";
-#else
-  blob_path_ = QCoreApplication::applicationFilePath() + "-spotifyblob";
-#endif
-  qLog(Debug) << "Loading spotify blob from:" << blob_path_;
+  // Build the search path for the binary blob.
+  // Look for one distributed alongside clementine first, then check in the
+  // user's home directory for any that have been downloaded.
+  blob_path_ << QCoreApplication::applicationFilePath() + "-spotifyblob" CMAKE_EXECUTABLE_SUFFIX
+             << QCoreApplication::applicationDirPath() + "/../PlugIns/clementine-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;
+
+  local_blob_version_ = QString("version%1-%2bit").arg(SPOTIFY_BLOB_VERSION).arg(sizeof(void*) * 8);
+  local_blob_path_    = Utilities::GetConfigPath(Utilities::Path_LocalSpotifyBlob) +
+                        "/" + local_blob_version_ + "/blob";
+
+  qLog(Debug) << "Spotify blob search path:" << blob_path_;
+  qLog(Debug) << "Spotify local blob path:" << local_blob_path_;
 
   model()->player()->RegisterUrlHandler(url_handler_);
   model()->player()->playlists()->RegisterSpecialPlaylistType(
@@ -115,19 +129,18 @@ void SpotifyService::LoginCompleted(bool success) {
 
 void SpotifyService::BlobProcessError(QProcess::ProcessError error) {
   qLog(Error) << "Spotify blob process failed:" << error;
+  blob_process_->deleteLater();
+  blob_process_ = NULL;
 }
 
 void SpotifyService::EnsureServerCreated(const QString& username,
                                          const QString& password) {
-  if (server_) {
+  if (server_ && blob_process_) {
     return;
   }
 
-  qLog(Debug) << Q_FUNC_INFO;
-
+  delete server_;
   server_ = new SpotifyServer(this);
-  blob_process_ = new QProcess(this);
-  blob_process_->setProcessChannelMode(QProcess::ForwardedChannels);
 
   connect(server_, SIGNAL(LoginCompleted(bool)), SLOT(LoginCompleted(bool)));
   connect(server_, SIGNAL(PlaylistsUpdated(protobuf::Playlists)),
@@ -145,13 +158,7 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ImageLoaded(QString,QImage)));
 
-  connect(blob_process_,
-          SIGNAL(error(QProcess::ProcessError)),
-          SLOT(BlobProcessError(QProcess::ProcessError)));
-
   server_->Init();
-  blob_process_->start(
-        blob_path_, QStringList() << QString::number(server_->server_port()));
 
   login_task_id_ = model()->task_manager()->StartTask(tr("Connecting to Spotify"));
 
@@ -163,6 +170,71 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   } else {
     server_->Login(username, password);
   }
+
+  StartBlobProcess();
+}
+
+void SpotifyService::StartBlobProcess() {
+  // Try to find an executable to run
+  QString blob_path;
+  QProcessEnvironment env(QProcessEnvironment::systemEnvironment());
+
+  // Look in the system search path first
+  foreach (const QString& path, blob_path_) {
+    if (QFile::exists(path)) {
+      blob_path = path;
+      break;
+    }
+  }
+
+  // Next look in the local path
+  const QString local_blob_dir = QFileInfo(local_blob_path_).path();
+  if (blob_path.isEmpty()) {
+    if (QFile::exists(local_blob_path_)) {
+      blob_path = local_blob_path_;
+      env.insert("LD_LIBRARY_PATH", local_blob_dir);
+    }
+  }
+
+  if (blob_path.isEmpty()) {
+    // If the blob still wasn't found then we'll prompt the user to download one
+    if (login_task_id_) {
+      model()->task_manager()->SetTaskFinished(login_task_id_);
+    }
+
+    #ifdef Q_OS_LINUX
+      QMessageBox::StandardButton ret = QMessageBox::question(NULL,
+          tr("Spotify plugin not installed"),
+          tr("An additional plugin is required to use Spotify in Clementine.  Would you like to download and install it now?"),
+          QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+
+      if (ret == QMessageBox::Yes) {
+        // The downloader deletes itself when it finishes
+        SpotifyBlobDownloader* downloader = new SpotifyBlobDownloader(
+              local_blob_version_, local_blob_dir, this);
+        connect(downloader, SIGNAL(Finished()), SLOT(BlobDownloadFinished()));
+        downloader->Start();
+      }
+    #endif
+
+    return;
+  }
+
+  delete blob_process_;
+  blob_process_ = new QProcess(this);
+  blob_process_->setProcessChannelMode(QProcess::ForwardedChannels);
+
+  connect(blob_process_,
+          SIGNAL(error(QProcess::ProcessError)),
+          SLOT(BlobProcessError(QProcess::ProcessError)));
+
+  qLog(Info) << "Starting" << blob_path;
+  blob_process_->start(
+        blob_path, QStringList() << QString::number(server_->server_port()));
+}
+
+void SpotifyService::BlobDownloadFinished() {
+  EnsureServerCreated();
 }
 
 void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {

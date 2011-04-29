@@ -1,12 +1,9 @@
-include_directories(${SPOTIFY_INCLUDE_DIRS})
 include_directories(${PROTOBUF_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-link_directories(${SPOTIFY_LIBRARY_DIRS})
-
-set(EXECUTABLE_OUTPUT_PATH ..)
-
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/blobversion.h.in
+               ${CMAKE_CURRENT_BINARY_DIR}/blobversion.h)
 
 set(COMMON_SOURCES
   spotifymessagehandler.cpp
@@ -29,32 +26,15 @@ add_library(clementine-spotifyblob-messages STATIC
   ${PROTO_SOURCES}
 )
 
+# Use protobuf-lite if it's available
+if(PROTOBUF_LITE_LIBRARY)
+  set(protobuf ${PROTOBUF_LITE_LIBRARY})
+else(PROTOBUF_LITE_LIBRARY)
+  set(protobuf ${PROTOBUF_LIBRARY})
+endif(PROTOBUF_LITE_LIBRARY)
+
 target_link_libraries(clementine-spotifyblob-messages
-  ${PROTOBUF_LIBRARY}
+  ${protobuf}
   ${CMAKE_THREAD_LIBS_INIT}
 )
 
-
-set(SOURCES
-  main.cpp
-  spotifyclient.cpp
-
-  ../src/core/logging.cpp
-)
-
-set(HEADERS
-  spotifyclient.h
-)
-
-qt4_wrap_cpp(MOC ${HEADERS})
-
-add_executable(clementine-spotifyblob
-  ${SOURCES}
-  ${MOC}
-)
-
-target_link_libraries(clementine-spotifyblob
-  ${SPOTIFY_LIBRARIES}
-  ${QT_LIBRARIES}
-  clementine-spotifyblob-messages
-)

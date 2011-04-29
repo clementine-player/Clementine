@@ -273,6 +273,9 @@ QString GetConfigPath(ConfigPath config) {
         return QDir::homePath();
       #endif
 
+    case Path_LocalSpotifyBlob:
+      return GetConfigPath(Path_Root) + "/spotifyblob";
+
     default:
       qFatal("%s", Q_FUNC_INFO);
       return QString::null;

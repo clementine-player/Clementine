@@ -3,7 +3,7 @@
 
 #include "radiomodel.h"
 #include "radioservice.h"
-#include "spotifyblob/spotifymessages.pb.h"
+#include "spotifyblob/common/spotifymessages.pb.h"
 
 #include <QProcess>
 #include <QTimer>
@@ -37,6 +37,7 @@ public:
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
+  static const char* kBlobDownloadUrl;
   static const int kSearchDelayMsec;
 
   QStandardItem* CreateRootItem();
@@ -61,6 +62,7 @@ protected:
 private:
   void EnsureServerCreated(const QString& username = QString(),
                            const QString& password = QString());
+  void StartBlobProcess();
   void FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response);
   void SongFromProtobuf(const protobuf::Track& track, Song* song) const;
   void EnsureMenuCreated();
@@ -82,12 +84,15 @@ private slots:
   void DoSearch();
 
   void ShowConfig();
+  void BlobDownloadFinished();
 
 private:
   SpotifyServer* server_;
   SpotifyUrlHandler* url_handler_;
 
-  QString blob_path_;
+  QString local_blob_version_;
+  QString local_blob_path_;
+  QStringList blob_path_;
   QProcess* blob_process_;
 
   QStandardItem* root_;
