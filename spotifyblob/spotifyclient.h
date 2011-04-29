@@ -42,6 +42,8 @@ public:
   SpotifyClient(QObject* parent = 0);
   ~SpotifyClient();
 
+  static const int kSpotifyImageIDSize;
+
   void Init(quint16 port);
 
 private slots:
@@ -85,11 +87,15 @@ private:
   // Spotify playlist callbacks - when loading a playlist
   static void PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata);
 
+  // Spotify image callbacks.
+  static void ImageLoaded(sp_image* image, void* userdata);
+
   // Request handlers.
   void Login(const QString& username, const QString& password);
   void Search(const protobuf::SearchRequest& req);
   void LoadPlaylist(const protobuf::LoadPlaylistRequest& req);
   void StartPlayback(const protobuf::PlaybackRequest& req);
+  void LoadImage(const QString& id_b64);
 
   void SendPlaylistList();
 
@@ -113,7 +119,14 @@ private:
     }
   };
 
+  struct PendingImageRequest {
+    QString id_b64_;
+    QByteArray id_;
+    sp_image* image_;
+  };
+
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
+  void TryImageAgain(sp_image* image);
 
   QByteArray api_key_;
 
@@ -132,6 +145,8 @@ private:
 
   QList<PendingLoadPlaylist> pending_load_playlists_;
   QList<PendingPlaybackRequest> pending_playback_requests_;
+  QList<PendingImageRequest> pending_image_requests_;
+  QMap<sp_image*, int> image_callbacks_registered_;
   QMap<sp_search*, protobuf::SearchRequest> pending_searches_;
 
   int media_length_msec_;

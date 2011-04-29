@@ -30,6 +30,9 @@
 #include <QTcpSocket>
 #include <QTimer>
 
+const int SpotifyClient::kSpotifyImageIDSize = 20;
+
+
 SpotifyClient::SpotifyClient(QObject* parent)
   : QObject(parent),
     api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
@@ -186,6 +189,8 @@ void SpotifyClient::HandleMessage(const protobuf::SpotifyMessage& message) {
     StartPlayback(message.playback_request());
   } else if (message.has_search_request()) {
     Search(message.search_request());
+  } else if (message.has_image_request()) {
+    LoadImage(QStringFromStdString(message.image_request().id()));
   }
 }
 
@@ -410,11 +415,19 @@ void SpotifyClient::ConvertTrack(sp_track* track, protobuf::Track* pb) {
   pb->set_disc(sp_track_disc(track));
   pb->set_track(sp_track_index(track));
 
+  // Album art
+  const QByteArray art_id(
+        reinterpret_cast<const char*>(sp_album_cover(sp_track_album(track))),
+        kSpotifyImageIDSize);
+  const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
+  pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
+
+  // Artists
   for (int i=0 ; i<sp_track_num_artists(track) ; ++i) {
     pb->add_artist(sp_artist_name(sp_track_artist(track, i)));
   }
 
-  // Blugh
+  // URI - Blugh
   char uri[256];
   sp_link* link = sp_link_create_from_track(track, 0);
   sp_link_as_string(link, uri, sizeof(uri));
@@ -597,4 +610,84 @@ void SpotifyClient::MediaSocketDisconnected() {
     sp_session_player_unload(session_);
     media_socket_ = NULL;
   }
+}
+
+void SpotifyClient::LoadImage(const QString& id_b64) {
+  QByteArray id = QByteArray::fromBase64(id_b64.toAscii());
+  if (id.length() != kSpotifyImageIDSize) {
+    qLog(Warning) << "Invalid image ID (did not decode to"
+                  << kSpotifyImageIDSize << "bytes):" << id_b64;
+
+    // Send an error response straight away
+    protobuf::SpotifyMessage message;
+    protobuf::ImageResponse* msg = message.mutable_image_response();
+    msg->set_id(DataCommaSizeFromQString(id_b64));
+    handler_->SendMessage(message);
+    return;
+  }
+
+  PendingImageRequest pending_load;
+  pending_load.id_ = id;
+  pending_load.id_b64_ = id_b64;
+  pending_load.image_ = sp_image_create(session_,
+      reinterpret_cast<const byte*>(id.constData()));
+  pending_image_requests_ << pending_load;
+
+  if (!image_callbacks_registered_[pending_load.image_]) {
+    sp_image_add_load_callback(pending_load.image_, &ImageLoaded, this);
+  }
+  image_callbacks_registered_[pending_load.image_] ++;
+
+  TryImageAgain(pending_load.image_);
+}
+
+void SpotifyClient::TryImageAgain(sp_image* image) {
+  if (!sp_image_is_loaded(image)) {
+    qLog(Debug) << "Image not loaded, will try again later";
+    return;
+  }
+
+  // Find the pending request for this image
+  int index = -1;
+  PendingImageRequest* req = NULL;
+  for (int i=0 ; i<pending_image_requests_.count() ; ++i) {
+    if (pending_image_requests_[i].image_ == image) {
+      index = i;
+      req = &pending_image_requests_[i];
+      break;
+    }
+  }
+
+  if (index == -1) {
+    qLog(Warning) << "Image not found in pending load list";
+    return;
+  }
+
+  // Get the image data
+  size_t size = 0;
+  const void* data = sp_image_data(image, &size);
+
+  // Send the response
+  protobuf::SpotifyMessage message;
+  protobuf::ImageResponse* msg = message.mutable_image_response();
+  msg->set_id(DataCommaSizeFromQString(req->id_b64_));
+  if (data && size) {
+    msg->set_data(data, size);
+  }
+  handler_->SendMessage(message);
+
+  // Free stuff
+  image_callbacks_registered_[image] --;
+  if (!image_callbacks_registered_[image]) {
+    sp_image_remove_load_callback(image, &ImageLoaded, this);
+    image_callbacks_registered_.remove(image);
+  }
+
+  sp_image_release(image);
+  pending_image_requests_.removeAt(index);
+}
+
+void SpotifyClient::ImageLoaded(sp_image* image, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+  me->TryImageAgain(image);
 }

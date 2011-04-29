@@ -47,11 +47,13 @@ public:
 
   void Login(const QString& username, const QString& password);
   void Search(const QString& text, Playlist* playlist, bool now = false);
+  Q_INVOKABLE void LoadImage(const QUrl& url);
 
   SpotifyServer* server() const;
 
 signals:
   void LoginFinished(bool success);
+  void ImageLoaded(const QUrl& url, const QImage& image);
 
 protected:
   virtual QModelIndex GetCurrentIndex();
@@ -74,6 +76,7 @@ private slots:
   void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
   void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
   void SearchResults(const protobuf::SearchResponse& response);
+  void ImageLoaded(const QString& id, const QImage& image);
 
   void OpenSearchTab();
   void DoSearch();

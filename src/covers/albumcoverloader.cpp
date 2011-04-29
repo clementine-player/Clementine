@@ -16,8 +16,12 @@
 */
 
 #include "albumcoverloader.h"
+#include "config.h"
+#include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
+#include "radio/radiomodel.h"
+#include "radio/spotifyservice.h"
 
 #include <QPainter>
 #include <QDir>
@@ -32,7 +36,8 @@ AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
     scale_(true),
     padding_(true),
     next_id_(0),
-    network_(new NetworkAccessManager(this))
+    network_(new NetworkAccessManager(this)),
+    connected_spotify_(false)
 {
 }
 
@@ -139,10 +144,45 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 
     remote_tasks_.insert(reply, task);
     return TryLoadResult(true, false, QImage());
+  } else if (filename.toLower().startsWith("spotify://image/")) {
+    // HACK: we should add generic image URL handlers
+    #ifdef HAVE_SPOTIFY
+      SpotifyService* spotify = RadioModel::Service<SpotifyService>();
+
+      if (!connected_spotify_) {
+        connect(spotify, SIGNAL(ImageLoaded(QUrl,QImage)),
+                SLOT(SpotifyImageLoaded(QUrl,QImage)));
+        connected_spotify_ = true;
+      }
+
+      QUrl url = QUrl(filename);
+      remote_spotify_tasks_.insert(url, task);
+
+      // Need to schedule this in the spotify service's thread
+      QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
+                                Q_ARG(QUrl, url));
+      return TryLoadResult(true, false, QImage());
+    #else
+      return TryLoadResult(false, false, QImage());
+    #endif
   }
 
   QImage image(filename);
   return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
+}
+
+void AlbumCoverLoader::SpotifyImageLoaded(const QUrl& url, const QImage& image) {
+  qLog(Debug) << "Got image from spotify:" << url;
+
+  if (!remote_spotify_tasks_.contains(url))
+    return;
+
+  Task task = remote_spotify_tasks_.take(url);
+  QImage scaled = ScaleAndPad(image);
+  emit ImageLoaded(task.id, scaled);
+  emit ImageLoaded(task.id, scaled, image);
+
+  qLog(Debug) << "Spotify image was for task" << task.id;
 }
 
 void AlbumCoverLoader::RemoteFetchFinished() {

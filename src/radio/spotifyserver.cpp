@@ -123,6 +123,16 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
     emit PlaybackError(QStringFromStdString(message.playback_error().error()));
   } else if (message.has_search_response()) {
     emit SearchResults(message.search_response());
+  } else if (message.has_image_response()) {
+    const protobuf::ImageResponse& response = message.image_response();
+    const QString id = QStringFromStdString(response.id());
+
+    if (response.has_data()) {
+      emit ImageLoaded(id, QImage::fromData(QByteArray(
+          response.data().data(), response.data().size())));
+    } else {
+      emit ImageLoaded(id, QImage());
+    }
   }
 }
 
@@ -165,5 +175,13 @@ void SpotifyServer::Search(const QString& text, int limit) {
 
   req->set_query(DataCommaSizeFromQString(text));
   req->set_limit(limit);
+  SendMessage(message);
+}
+
+void SpotifyServer::LoadImage(const QString& id) {
+  protobuf::SpotifyMessage message;
+  protobuf::ImageRequest* req = message.mutable_image_request();
+
+  req->set_id(DataCommaSizeFromQString(id));
   SendMessage(message);
 }

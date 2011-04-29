@@ -51,6 +51,7 @@ message Track {
   required int32 track = 8;
   required int32 year = 9;
   required string uri = 10;
+  required string album_art_id = 11;
 }
 
 message LoadPlaylistRequest {
@@ -91,6 +92,15 @@ message SearchResponse {
   optional string error = 5;
 }
 
+message ImageRequest {
+  required string id = 1;
+}
+
+message ImageResponse {
+  required string id = 1;
+  optional bytes data = 2;
+}
+
 message SpotifyMessage {
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
@@ -101,4 +111,6 @@ message SpotifyMessage {
   optional PlaybackError playback_error = 7;
   optional SearchRequest search_request = 8;
   optional SearchResponse search_response = 9;
+  optional ImageRequest image_request = 10;
+  optional ImageResponse image_response = 11;
 }

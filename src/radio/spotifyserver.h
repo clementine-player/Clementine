@@ -20,6 +20,7 @@
 
 #include "spotifyblob/spotifymessages.pb.h"
 
+#include <QImage>
 #include <QObject>
 
 class SpotifyMessageHandler;
@@ -39,10 +40,9 @@ public:
   void LoadStarred();
   void LoadInbox();
   void LoadUserPlaylist(int index);
-
   void StartPlayback(const QString& uri, quint16 port);
-
   void Search(const QString& text, int limit);
+  void LoadImage(const QString& id);
 
   int server_port() const;
 
@@ -53,10 +53,9 @@ signals:
   void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
   void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
   void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
-
   void PlaybackError(const QString& message);
-
   void SearchResults(const protobuf::SearchResponse& response);
+  void ImageLoaded(const QString& id, const QImage& image);
 
 private slots:
   void NewConnection();

@@ -142,6 +142,8 @@ void SpotifyService::EnsureServerCreated(const QString& username,
           SIGNAL(StreamError(QString)));
   connect(server_, SIGNAL(SearchResults(protobuf::SearchResponse)),
           SLOT(SearchResults(protobuf::SearchResponse)));
+  connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
+          SLOT(ImageLoaded(QString,QImage)));
 
   connect(blob_process_,
           SIGNAL(error(QProcess::ProcessError)),
@@ -289,6 +291,7 @@ void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) 
   song->set_track(track.track());
   song->set_year(track.year());
   song->set_url(QUrl(QStringFromStdString(track.uri())));
+  song->set_art_automatic("spotify://image/" + QStringFromStdString(track.album_art_id()));
 
   QStringList artists;
   for (int i=0 ; i<track.artist_size() ; ++i) {
@@ -388,4 +391,23 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {
   if (item == search_) {
     OpenSearchTab();
   }
+}
+
+void SpotifyService::LoadImage(const QUrl& url) {
+  if (url.scheme() != "spotify" || url.host() != "image") {
+    return;
+  }
+
+  QString image_id = url.path();
+  if (image_id.startsWith('/')) {
+    image_id.remove(0, 1);
+  }
+
+  EnsureServerCreated();
+  server_->LoadImage(image_id);
+}
+
+void SpotifyService::ImageLoaded(const QString& id, const QImage& image) {
+  qLog(Debug) << "Image loaded:" << id;
+  emit ImageLoaded(QUrl("spotify://image/" + id), image);
 }
