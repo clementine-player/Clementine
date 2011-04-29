@@ -411,3 +411,8 @@ void SpotifyService::ImageLoaded(const QString& id, const QImage& image) {
   qLog(Debug) << "Image loaded:" << id;
   emit ImageLoaded(QUrl("spotify://image/" + id), image);
 }
+
+void SpotifyService::ShowConfig() {
+  emit OpenSettingsAtPage(SettingsDialog::Page_Spotify);
+}
+

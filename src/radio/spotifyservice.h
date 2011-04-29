@@ -81,6 +81,8 @@ private slots:
   void OpenSearchTab();
   void DoSearch();
 
+  void ShowConfig();
+
 private:
   SpotifyServer* server_;
   SpotifyUrlHandler* url_handler_;
