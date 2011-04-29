@@ -45,6 +45,7 @@ public:
   MOCK_CONST_METHOD0(playlist_backend, PlaylistBackend*());
   MOCK_CONST_METHOD0(sequence, PlaylistSequence*());
   MOCK_CONST_METHOD0(parser, PlaylistParser*());
+  MOCK_CONST_METHOD0(playlist_container, PlaylistContainer*());
 
   MOCK_METHOD1(RegisterSpecialPlaylistType, void(SpecialPlaylistType*));
   MOCK_METHOD1(UnregisterSpecialPlaylistType, void(SpecialPlaylistType*));
