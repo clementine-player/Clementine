@@ -21,13 +21,17 @@
 #include "core/network.h"
 #include "core/utilities.h"
 #include "radio/radiomodel.h"
-#include "radio/spotifyservice.h"
 
 #include <QPainter>
 #include <QDir>
 #include <QCoreApplication>
 #include <QUrl>
 #include <QNetworkReply>
+
+#ifdef HAVE_SPOTIFY
+# include "radio/spotifyservice.h"
+#endif
+
 
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
