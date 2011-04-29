@@ -48,7 +48,7 @@ if(LINUX)
 
   install(
     FILES ${CMAKE_BINARY_DIR}/clementine-spotifyblob
-    DESTINATION ${CMAKE_BINARY_DIR}/spotify/version${SPOTIFY_BLOB_VERSION}-${SPOTIFY_BLOB_ARCH}bit/blob
-    RENAME ${SPOTIFY_BLOB_NAME}
+    DESTINATION ${CMAKE_BINARY_DIR}/spotify/version${SPOTIFY_BLOB_VERSION}-${SPOTIFY_BLOB_ARCH}bit/
+    RENAME blob
   )
 endif(LINUX)
