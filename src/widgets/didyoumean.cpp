@@ -18,6 +18,7 @@
 #include "didyoumean.h"
 
 #include <QEvent>
+#include <QKeyEvent>
 #include <QPainter>
 #include <QToolButton>
 
@@ -26,14 +27,24 @@ const int DidYouMean::kPadding = 3;
 DidYouMean::DidYouMean(QWidget* buddy, QWidget* parent)
   : QWidget(parent),
     buddy_(buddy),
-    close_(new QToolButton(this)) {
+    close_(new QToolButton(this)),
+    normal_font_(font()),
+    correction_font_(font()),
+    press_enter_font_(font()) {
+  // Close icon
   close_->setToolTip(tr("Close"));
   close_->setIcon(QIcon(":/trolltech/styles/macstyle/images/closedock-16.png"));
   close_->setIconSize(QSize(16, 16));
   connect(close_, SIGNAL(clicked()), SLOT(hide()));
 
+  // Cursors
   setCursor(Qt::PointingHandCursor);
   close_->setCursor(Qt::ArrowCursor);
+
+  // Fonts
+  correction_font_.setBold(true);
+  press_enter_font_.setBold(true);
+  press_enter_font_.setPointSizeF(7.5);
 
   hide();
   buddy_->installEventFilter(this);
@@ -50,6 +61,26 @@ bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
       if (isVisible()) {
         UpdateGeometry();
       }
+      break;
+
+    case QEvent::KeyPress:
+      if (!isVisible()) {
+        break;
+      }
+
+      switch (static_cast<QKeyEvent*>(event)->key()) {
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+          emit Accepted(correction_);
+          // fallthrough
+        case Qt::Key_Escape:
+          hide();
+          return true;
+
+        default:
+          break;
+      }
+
       break;
 
     case QEvent::FocusOut:
@@ -78,7 +109,7 @@ void DidYouMean::UpdateGeometry() {
   close_->resize(text_height, text_height);
 }
 
-void DidYouMean::paintEvent(QPaintEvent* ) {
+void DidYouMean::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
   // Draw the background
@@ -94,30 +125,33 @@ void DidYouMean::paintEvent(QPaintEvent* ) {
                   kPadding,
                   rect().width() - kPadding,
                   rect().height() - kPadding);
-  const QString did_you_mean(tr("Did you mean") + " ");
+  const QString did_you_mean(tr("Did you mean") + ":  ");
 
+  // Text
+  p.setFont(normal_font_);
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, did_you_mean);
-  text_rect.setLeft(text_rect.left() + fontMetrics().width(did_you_mean));
+  text_rect.setLeft(text_rect.left() + p.fontMetrics().width(did_you_mean));
 
-  QFont bold_font(font());
-  bold_font.setBold(true);
-  bold_font.setItalic(true);
-  p.setFont(bold_font);
+  p.setFont(correction_font_);
+  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, correction_);
+  text_rect.setLeft(text_rect.left() + p.fontMetrics().width(correction_ + "  "));
 
-  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, text_);
+  p.setPen(palette().color(QPalette::Disabled, QPalette::Text));
+  p.setFont(press_enter_font_);
+  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, "(" + tr("press enter") + ")");
 }
 
-void DidYouMean::SetText(const QString& text) {
-  text_ = text;
+void DidYouMean::SetCorrection(const QString& correction) {
+  correction_ = correction;
   update();
 }
 
-void DidYouMean::Show(const QString& text) {
-  SetText(text);
+void DidYouMean::Show(const QString& correction) {
+  SetCorrection(correction);
   show();
 }
 
 void DidYouMean::mouseReleaseEvent(QMouseEvent* e) {
-  emit Accepted(text_);
+  emit Accepted(correction_);
   hide();
 }

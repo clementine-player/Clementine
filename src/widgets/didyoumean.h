@@ -31,11 +31,11 @@ public:
   static const int kPadding;
 
 public slots:
-  void SetText(const QString& text);
-  void Show(const QString& text);
+  void SetCorrection(const QString& correction);
+  void Show(const QString& correction);
 
 signals:
-  void Accepted(const QString& text);
+  void Accepted(const QString& correction);
 
 protected:
   void paintEvent(QPaintEvent*);
@@ -48,9 +48,13 @@ private:
 
 private:
   QWidget* buddy_;
-  QString text_;
+  QString correction_;
 
   QToolButton* close_;
+
+  QFont normal_font_;
+  QFont correction_font_;
+  QFont press_enter_font_;
 };
 
 #endif // DIDYOUMEAN_H
