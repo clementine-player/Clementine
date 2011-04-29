@@ -114,11 +114,15 @@ void WmdmLoader::LoadFile(IWMDMStorage* file, const QStringList* path_components
   }
   storage3->Release();
 
+  QUrl url;
+  url.setScheme("wmdm");
+  url.setPath(path_components->join("/"));
+
   // Store the metadata in here
   Song song;
   song.InitFromWmdm(metadata);
   song.set_directory_id(1);
-  song.set_filename(path_components->join("/"));
+  song.set_url(url);
 
   metadata->Release();
 

@@ -201,7 +201,10 @@ bool WmdmDevice::DeleteFromStorage(const DeleteJob& job) {
   // Walk down the tree until we've found the file
   IWMDMStorage3* storage = storage_;
   storage->AddRef();
-  foreach (const QString& path_component, job.metadata_.filename().split('/')) {
+
+  const QStringList path_components =
+      job.metadata_.url().path().split('/', QString::SkipEmptyParts);
+  foreach (const QString& path_component, path_components) {
     ScopedWCharArray path_component_wchar(path_component);
 
     IWMDMStorage* next_storage = NULL;
