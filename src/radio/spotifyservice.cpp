@@ -131,6 +131,12 @@ void SpotifyService::BlobProcessError(QProcess::ProcessError error) {
   qLog(Error) << "Spotify blob process failed:" << error;
   blob_process_->deleteLater();
   blob_process_ = NULL;
+
+  emit StreamError("The Spotify process failed");
+
+  if (login_task_id_) {
+    model()->task_manager()->SetTaskFinished(login_task_id_);
+  }
 }
 
 void SpotifyService::EnsureServerCreated(const QString& username,
@@ -223,6 +229,7 @@ void SpotifyService::StartBlobProcess() {
   delete blob_process_;
   blob_process_ = new QProcess(this);
   blob_process_->setProcessChannelMode(QProcess::ForwardedChannels);
+  blob_process_->setProcessEnvironment(env);
 
   connect(blob_process_,
           SIGNAL(error(QProcess::ProcessError)),
