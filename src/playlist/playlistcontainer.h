@@ -90,6 +90,7 @@ private slots:
   void FocusOnFilter(QKeyEvent *event);
 
   void DidYouMeanAccepted(const QString& text);
+  void UpdateNoMatchesLabel();
 
 private:
   void UpdateActiveIcon(const QIcon& icon);
@@ -101,6 +102,7 @@ private:
   PlaylistManager* manager_;
   QAction* undo_;
   QAction* redo_;
+  Playlist* playlist_;
 
   QSettings settings_;
   bool starting_up_;

@@ -32,7 +32,6 @@ public:
   virtual QIcon icon(Playlist* playlist) const;
   virtual QString search_hint_text(Playlist* playlist) const;
   virtual QString empty_playlist_text(Playlist* playlist) const;
-  virtual QString playlist_view_css(Playlist* playlist) const;
 
   virtual bool has_special_search_behaviour(Playlist* playlist) const;
   virtual void Search(const QString& text, Playlist* playlist);

@@ -19,19 +19,20 @@
 #include "playlistmanager.h"
 #include "specialplaylisttype.h"
 #include "ui_playlistcontainer.h"
+#include "core/logging.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 #include "widgets/didyoumean.h"
 #include "widgets/maclineedit.h"
 
-#include <QUndoStack>
-#include <QInputDialog>
-#include <QSettings>
-#include <QTimeLine>
-#include <QSortFilterProxyModel>
-#include <QLabel>
 #include <QFileDialog>
+#include <QInputDialog>
+#include <QLabel>
 #include <QMessageBox>
+#include <QSettings>
+#include <QSortFilterProxyModel>
+#include <QTimeLine>
+#include <QUndoStack>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
 
@@ -41,15 +42,16 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     manager_(NULL),
     undo_(NULL),
     redo_(NULL),
+    playlist_(NULL),
     starting_up_(true),
     tab_bar_visible_(false),
     tab_bar_animation_(new QTimeLine(500, this)),
-    no_matches_label_(new QLabel(this)),
+    no_matches_label_(NULL),
     did_you_mean_(NULL)
 {
   ui_->setupUi(this);
 
-  no_matches_label_->setText(tr("No matches found.  Clear the search box to show the whole playlist again."));
+  no_matches_label_ = new QLabel(ui_->playlist);
   no_matches_label_->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
   no_matches_label_->setAttribute(Qt::WA_TransparentForMouseEvents);
   no_matches_label_->setWordWrap(true);
@@ -58,9 +60,9 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
 
   // Set the colour of the no matches label to the disabled text colour
   QPalette no_matches_palette = no_matches_label_->palette();
-  no_matches_palette.setColor(
-      QPalette::Normal, QPalette::WindowText,
-      no_matches_palette.color(QPalette::Disabled, QPalette::Text));
+  const QColor no_matches_color = no_matches_palette.color(QPalette::Disabled, QPalette::Text);
+  no_matches_palette.setColor(QPalette::Normal, QPalette::WindowText, no_matches_color);
+  no_matches_palette.setColor(QPalette::Inactive, QPalette::WindowText, no_matches_color);
   no_matches_label_->setPalette(no_matches_palette);
 
   // Make it bold
@@ -153,6 +155,24 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
     disconnect(view()->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
                this, SLOT(SelectionChanged()));
   }
+  if (playlist_ && playlist_->proxy()) {
+    disconnect(playlist_->proxy(), SIGNAL(modelReset()),
+               this, SLOT(UpdateNoMatchesLabel()));
+    disconnect(playlist_->proxy(), SIGNAL(rowsInserted(QModelIndex,int,int)),
+               this, SLOT(UpdateNoMatchesLabel()));
+    disconnect(playlist_->proxy(), SIGNAL(rowsRemoved(QModelIndex,int,int)),
+               this, SLOT(UpdateNoMatchesLabel()));
+  }
+  if (playlist_) {
+    disconnect(playlist_, SIGNAL(modelReset()),
+               this, SLOT(UpdateNoMatchesLabel()));
+    disconnect(playlist_, SIGNAL(rowsInserted(QModelIndex,int,int)),
+               this, SLOT(UpdateNoMatchesLabel()));
+    disconnect(playlist_, SIGNAL(rowsRemoved(QModelIndex,int,int)),
+               this, SLOT(UpdateNoMatchesLabel()));
+  }
+
+  playlist_ = playlist;
 
   // Set the view
   playlist->IgnoreSorting(true);
@@ -168,6 +188,15 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 
   // Update filter
   filter_->set_text(playlist->proxy()->filterRegExp().pattern());
+
+  // Update the no matches label
+  connect(playlist_->proxy(), SIGNAL(modelReset()), SLOT(UpdateNoMatchesLabel()));
+  connect(playlist_->proxy(), SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(UpdateNoMatchesLabel()));
+  connect(playlist_->proxy(), SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(UpdateNoMatchesLabel()));
+  connect(playlist_, SIGNAL(modelReset()), SLOT(UpdateNoMatchesLabel()));
+  connect(playlist_, SIGNAL(rowsInserted(QModelIndex,int,int)), SLOT(UpdateNoMatchesLabel()));
+  connect(playlist_, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(UpdateNoMatchesLabel()));
+  UpdateNoMatchesLabel();
 
   // Ensure that tab is current
   if (ui_->tab_bar->current_id() != manager_->current_id())
@@ -210,7 +239,12 @@ void PlaylistContainer::ActiveStopped() {
 void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
   // Unset all existing icons
   for (int i=0 ; i<ui_->tab_bar->count() ; ++i) {
-    ui_->tab_bar->setTabIcon(i, QIcon());
+    // Get the default icon for this tab
+    const int id = ui_->tab_bar->tabData(i).toInt();
+    Playlist* playlist = manager_->playlist(id);
+    const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+
+    ui_->tab_bar->setTabIcon(i, type->icon(playlist));
   }
 
   // Set our icon
@@ -355,18 +389,39 @@ void PlaylistContainer::UpdateFilter() {
   Playlist* playlist = manager_->current();
   SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
 
+  did_you_mean()->hide();
+
   if (type->has_special_search_behaviour(playlist)) {
     type->Search(filter_->text(), playlist);
   } else {
     manager_->current()->proxy()->setFilterFixedString(filter_->text());
     ui_->playlist->JumpToCurrentlyPlayingTrack();
+  }
 
-    const bool no_matches = manager_->current()->proxy()->rowCount() == 0 &&
-                            manager_->current()->rowCount() > 0;
+  UpdateNoMatchesLabel();
+}
 
-    if (no_matches)
-      RepositionNoMatchesLabel(true);
-    no_matches_label_->setVisible(no_matches);
+void PlaylistContainer::UpdateNoMatchesLabel() {
+  Playlist* playlist = manager_->current();
+  SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+  const QString empty_text = type->empty_playlist_text(playlist);
+
+  const bool has_rows = playlist->rowCount() != 0;
+  const bool has_results = playlist->proxy()->rowCount() != 0;
+
+  QString text;
+  if (!empty_text.isEmpty() && !has_results) {
+    text = empty_text;
+  } else if (has_rows && !has_results) {
+    text = tr("No matches found.  Clear the search box to show the whole playlist again.");
+  }
+
+  if (!text.isEmpty()) {
+    no_matches_label_->setText(text);
+    RepositionNoMatchesLabel(true);
+    no_matches_label_->show();
+  } else {
+    no_matches_label_->hide();
   }
 }
 
@@ -386,7 +441,7 @@ void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
 
   const int kBorder = 10;
 
-  QPoint pos = ui_->playlist->viewport()->mapTo(this, QPoint(kBorder, kBorder));
+  QPoint pos = ui_->playlist->viewport()->mapTo(ui_->playlist, QPoint(kBorder, kBorder));
   QSize size = ui_->playlist->viewport()->size();
   size.setWidth(size.width() - kBorder * 2);
   size.setHeight(size.height() - kBorder * 2);

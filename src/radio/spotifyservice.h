@@ -42,6 +42,7 @@ public:
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ItemDoubleClicked(QStandardItem* item);
   PlaylistItem::Options playlistitem_options() const;
 
   void Login(const QString& username, const QString& password);
@@ -85,7 +86,7 @@ private:
   QProcess* blob_process_;
 
   QStandardItem* root_;
-  QStandardItem* search_results_;
+  QStandardItem* search_;
   QStandardItem* starred_;
   QStandardItem* inbox_;
   QList<QStandardItem*> playlists_;

@@ -168,9 +168,11 @@ int RadioModel::rowCount(const QModelIndex& parent) const {
 
 bool RadioModel::IsPlayable(const QModelIndex& index) const {
   QVariant behaviour = index.data(Role_PlayBehaviour);
-  if (!behaviour.isValid() || behaviour.toInt() == PlayBehaviour_None)
+  if (!behaviour.isValid())
     return false;
-  return true;
+
+  PlayBehaviour pb = PlayBehaviour(behaviour.toInt());
+  return (pb == PlayBehaviour_SingleItem || PlayBehaviour_UseSongLoader);
 }
 
 QStringList RadioModel::mimeTypes() const {
@@ -178,6 +180,14 @@ QStringList RadioModel::mimeTypes() const {
 }
 
 QMimeData* RadioModel::mimeData(const QModelIndexList& indexes) const {
+  // Special case for when the user double clicked on a special item.
+  if (indexes.count() == 1 &&
+      indexes[0].data(Role_PlayBehaviour).toInt() ==
+          PlayBehaviour_DoubleClickAction) {
+    RadioModel::ServiceForIndex(indexes[0])->ItemDoubleClicked(itemFromIndex(indexes[0]));
+    return NULL;
+  }
+
   QList<QUrl> urls;
 
   QModelIndex last_valid_index;

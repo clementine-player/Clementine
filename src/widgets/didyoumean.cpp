@@ -52,6 +52,10 @@ bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
       }
       break;
 
+    case QEvent::FocusOut:
+      hide();
+      break;
+
     default:
       break;
   }
@@ -90,7 +94,7 @@ void DidYouMean::paintEvent(QPaintEvent* ) {
                   kPadding,
                   rect().width() - kPadding,
                   rect().height() - kPadding);
-  const QString did_you_mean(tr("Did you mean "));
+  const QString did_you_mean(tr("Did you mean") + " ");
 
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, did_you_mean);
   text_rect.setLeft(text_rect.left() + fontMetrics().width(did_you_mean));

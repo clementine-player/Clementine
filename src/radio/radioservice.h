@@ -45,8 +45,8 @@ public:
   virtual QStandardItem* CreateRootItem() = 0;
   virtual void LazyPopulate(QStandardItem* parent) = 0;
 
-  virtual void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
-    Q_UNUSED(index); Q_UNUSED(global_pos); }
+  virtual void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {}
+  virtual void ItemDoubleClicked(QStandardItem* item) {}
 
   virtual PlaylistItem::Options playlistitem_options() const { return PlaylistItem::Default; }
 

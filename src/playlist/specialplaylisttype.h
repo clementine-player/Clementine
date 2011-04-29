@@ -33,7 +33,6 @@ public:
   virtual QIcon icon(Playlist* playlist) const { return QIcon(); }
   virtual QString search_hint_text(Playlist* playlist) const;
   virtual QString empty_playlist_text(Playlist* playlist) const { return QString(); }
-  virtual QString playlist_view_css(Playlist* playlist) const { return QString(); }
 
   virtual bool has_special_search_behaviour(Playlist* playlist) const { return false; }
   virtual void Search(const QString& text, Playlist* playlist) {}

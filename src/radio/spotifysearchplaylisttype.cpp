@@ -33,12 +33,7 @@ QString SpotifySearchPlaylistType::search_hint_text(Playlist* playlist) const {
 }
 
 QString SpotifySearchPlaylistType::empty_playlist_text(Playlist* playlist) const {
-  return QObject::tr("Start typing in the search box above to find music on Spotify");
-}
-
-QString SpotifySearchPlaylistType::playlist_view_css(Playlist* playlist) const {
-  // TODO
-  return QString();
+  return QObject::tr("Start typing in the search box above to find music on Spotify.");
 }
 
 bool SpotifySearchPlaylistType::has_special_search_behaviour(Playlist* playlist) const {

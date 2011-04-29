@@ -170,10 +170,12 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
   }
 
   // Create starred and inbox playlists if they're not here already
-  if (!search_results_) {
-    search_results_ = new QStandardItem(IconLoader::Load("edit-find"),
-                                        tr("Search Spotify (opens a new tab)"));
-    search_results_->setData(Type_SearchResults, RadioModel::Role_Type);
+  if (!search_) {
+    search_ = new QStandardItem(IconLoader::Load("edit-find"),
+                                tr("Search Spotify (opens a new tab)"));
+    search_->setData(Type_SearchResults, RadioModel::Role_Type);
+    search_->setData(RadioModel::PlayBehaviour_DoubleClickAction,
+                             RadioModel::Role_PlayBehaviour);
 
     starred_ = new QStandardItem(QIcon(":/star-on.png"), tr("Starred"));
     starred_->setData(Type_StarredPlaylist, RadioModel::Role_Type);
@@ -183,7 +185,7 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
     inbox_->setData(Type_InboxPlaylist, RadioModel::Role_Type);
     inbox_->setData(true, RadioModel::Role_CanLazyLoad);
 
-    root_->appendRow(search_results_);
+    root_->appendRow(search_);
     root_->appendRow(starred_);
     root_->appendRow(inbox_);
   }
@@ -380,4 +382,10 @@ void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& glo
 void SpotifyService::OpenSearchTab() {
   model()->player()->playlists()->New(tr("Search Spotify"), SongList(),
                                       SpotifySearchPlaylistType::kName);
+}
+
+void SpotifyService::ItemDoubleClicked(QStandardItem* item) {
+  if (item == search_) {
+    OpenSearchTab();
+  }
 }

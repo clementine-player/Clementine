@@ -95,6 +95,10 @@ public:
     // behaviour occurs - the URL is just passed straight to gstreamer when
     // the user starts playing.
     PlayBehaviour_SingleItem,
+
+    // This item might not represent a song - the service's ItemDoubleClicked()
+    // slot will get called instead to do some custom action.
+    PlayBehaviour_DoubleClickAction,
   };
 
   // Needs to be static for RadioPlaylistItem::restore
