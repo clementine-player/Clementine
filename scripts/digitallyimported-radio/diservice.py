@@ -12,6 +12,7 @@ class DigitallyImportedService(DigitallyImportedServiceBase):
   ICON_FILENAME = "icon-small.png"
   SERVICE_NAME = "DigitallyImported"
   SERVICE_DESCRIPTION = "Digitally Imported"
+  URL_SCHEME = "digitallyimported"
 
   # These have to be in the same order as in the settings dialog
   PLAYLISTS = [

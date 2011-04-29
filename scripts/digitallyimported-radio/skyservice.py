@@ -14,6 +14,7 @@ class SkyFmService(DigitallyImportedServiceBase):
   ICON_FILENAME = "icon-sky.png"
   SERVICE_NAME = "SKY.fm"
   SERVICE_DESCRIPTION = "SKY.fm"
+  URL_SCHEME = "skyfm"
 
   HASHKEY_RE = re.compile(r'hashKey\s*=\s*\'([0-9a-f]+)\'')
 

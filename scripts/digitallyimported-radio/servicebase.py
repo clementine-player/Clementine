@@ -11,15 +11,16 @@ import operator
 import os.path
 
 class DigitallyImportedUrlHandler(clementine.UrlHandler):
-  def __init__(self, service):
+  def __init__(self, url_scheme, service):
     clementine.UrlHandler.__init__(self, service)
+    self.url_scheme = url_scheme
     self.service = service
 
     self.last_original_url = None
     self.task_id = None
 
   def scheme(self):
-    return "digitallyimported"
+    return self.url_scheme
 
   def StartLoading(self, original_url):
     result = clementine.UrlHandler.LoadResult()
@@ -82,6 +83,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   SERVICE_NAME = None
   SERVICE_DESCRIPTION = None
   PLAYLISTS = []
+  URL_SCHEME = None
 
   SETTINGS_GROUP = "digitally_imported"
 
@@ -90,7 +92,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   def __init__(self, model):
     clementine.RadioService.__init__(self, self.SERVICE_NAME, model)
 
-    self.url_handler = DigitallyImportedUrlHandler(self)
+    self.url_handler = DigitallyImportedUrlHandler(self.URL_SCHEME, self)
     clementine.player.RegisterUrlHandler(self.url_handler)
 
     self.network = clementine.NetworkAccessManager(self)
@@ -190,7 +192,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       song = clementine.Song()
       song.set_title(stream["name"])
       song.set_artist(self.SERVICE_DESCRIPTION)
-      song.set_url(QUrl("digitallyimported://%s" % stream["key"]))
+      song.set_url(QUrl("%s://%s" % (self.URL_SCHEME, stream["key"])))
 
       item = QStandardItem(QIcon(":last.fm/icon_radio.png"), stream["name"])
       item.setData(stream["description"], PyQt4.QtCore.Qt.ToolTipRole)
