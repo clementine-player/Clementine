@@ -52,7 +52,11 @@ public:
 
   SpotifyServer* server() const;
 
+  bool IsBlobInstalled() const;
+  void InstallBlob();
+
 signals:
+  void BlobStateChanged();
   void LoginFinished(bool success);
   void ImageLoaded(const QUrl& url, const QImage& image);
 
@@ -72,7 +76,7 @@ private:
 
 private slots:
   void BlobProcessError(QProcess::ProcessError error);
-  void LoginCompleted(bool success);
+  void LoginCompleted(bool success, const QString& error);
   void PlaylistsUpdated(const protobuf::Playlists& response);
   void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
   void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
@@ -90,9 +94,9 @@ private:
   SpotifyServer* server_;
   SpotifyUrlHandler* url_handler_;
 
+  QString system_blob_path_;
   QString local_blob_version_;
   QString local_blob_path_;
-  QStringList blob_path_;
   QProcess* blob_process_;
 
   QStandardItem* root_;

@@ -47,7 +47,7 @@ public:
   int server_port() const;
 
 signals:
-  void LoginCompleted(bool success);
+  void LoginCompleted(bool success, const QString& error);
   void PlaylistsUpdated(const protobuf::Playlists& playlists);
 
   void StarredLoaded(const protobuf::LoadPlaylistResponse& response);

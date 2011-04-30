@@ -90,9 +90,7 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
     const protobuf::LoginResponse& response = message.login_response();
     logged_in_ = response.success();
 
-    if (!response.success()) {
-      qLog(Info) << QStringFromStdString(response.error());
-    } else {
+    if (response.success()) {
       // Send any messages that were queued before the client logged in
       foreach (const protobuf::SpotifyMessage& message, queued_messages_) {
         SendMessage(message);
@@ -100,7 +98,7 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
       queued_messages_.clear();
     }
 
-    emit LoginCompleted(response.success());
+    emit LoginCompleted(response.success(), QStringFromStdString(response.error()));
   } else if (message.has_playlists_updated()) {
     emit PlaylistsUpdated(message.playlists_updated());
   } else if (message.has_load_playlist_response()) {

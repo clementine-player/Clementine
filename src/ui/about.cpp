@@ -16,6 +16,7 @@
 */
 
 #include "about.h"
+#include "config.h"
 #include "ui_about.h"
 
 #include <QCoreApplication>
@@ -76,6 +77,12 @@ QString About::MakeHtml() const {
   ret += QString("<p><b>%1</b>").arg(tr("And:"));
   ret += QString("<br /><a href=\"http://rainymood.com\">Rainy Mood</a>");
   ret += QString("<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a></p>");
+
+#ifdef HAVE_SPOTIFY
+  ret += "<p>This product uses SPOTIFY(R) CORE but is not endorsed, certified "
+         "or otherwise approved in any way by Spotify. Spotify is the "
+         "registered trade mark of the Spotify Group.</p>";
+#endif // HAVE_SPOTIFY
 
   return ret;
 }

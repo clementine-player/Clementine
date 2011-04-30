@@ -44,6 +44,9 @@ public slots:
   void Load();
   void Save();
 
+  void BlobStateChanged();
+  void DownloadBlob();
+
 private slots:
   void LoginFinished(bool success);
 
@@ -52,7 +55,9 @@ private:
   Ui_SpotifyConfig* ui_;
   SpotifyService* service_;
 
-  bool needs_validation_;
+  bool validated_;
+  QString original_username_;
+  QString original_password_;
 };
 
 #endif // SPOTIFYCONFIG_H

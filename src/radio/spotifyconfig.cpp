@@ -33,20 +33,55 @@ SpotifyConfig::SpotifyConfig(QWidget *parent)
     network_(new NetworkAccessManager(this)),
     ui_(new Ui_SpotifyConfig),
     service_(RadioModel::Service<SpotifyService>()),
-    needs_validation_(true)
+    validated_(false)
 {
   ui_->setupUi(this);
   ui_->busy->hide();
+
+  QFont bold_font(font());
+  bold_font.setBold(true);
+  ui_->blob_status->setFont(bold_font);
+
+  connect(ui_->download_blob, SIGNAL(clicked()), SLOT(DownloadBlob()));
+
   connect(service_, SIGNAL(LoginFinished(bool)), SLOT(LoginFinished(bool)));
+  connect(service_, SIGNAL(BlobStateChanged()), SLOT(BlobStateChanged()));
+
+  BlobStateChanged();
 }
 
 SpotifyConfig::~SpotifyConfig() {
   delete ui_;
 }
 
+void SpotifyConfig::BlobStateChanged() {
+  const bool installed = service_->IsBlobInstalled();
+
+  ui_->account_group->setEnabled(installed);
+  ui_->blob_status->setText(installed ? tr("Installed") : tr("Not installed"));
+
+#ifdef Q_OS_LINUX
+  ui_->download_blob->setEnabled(!installed);
+#else
+  ui_->download_blob->setEnabled(false);
+#endif
+}
+
+void SpotifyConfig::DownloadBlob() {
+  service_->InstallBlob();
+}
+
 bool SpotifyConfig::NeedsValidation() const {
-  // FIXME
-  return needs_validation_;
+  if (!service_->IsBlobInstalled()) {
+    return false;
+  }
+
+  if (ui_->username->text() == original_username_ &&
+      ui_->password->text() == original_password_) {
+    return false;
+  }
+
+  return !validated_;
 }
 
 void SpotifyConfig::Validate() {
@@ -58,8 +93,12 @@ void SpotifyConfig::Load() {
   QSettings s;
   s.beginGroup(SpotifyService::kSettingsGroup);
 
-  ui_->username->setText(s.value("username").toString());
-  ui_->password->setText(s.value("password").toString());
+  original_username_ = s.value("username").toString();
+  original_password_ = s.value("password").toString();
+
+  ui_->username->setText(original_username_);
+  ui_->password->setText(original_password_);
+  validated_ = false;
 }
 
 void SpotifyConfig::Save() {
@@ -73,8 +112,7 @@ void SpotifyConfig::Save() {
 }
 
 void SpotifyConfig::LoginFinished(bool success) {
-  qDebug() << Q_FUNC_INFO << success;
-  needs_validation_ = !success;
+  validated_ = success;
   ui_->busy->hide();
   emit ValidationComplete(success);
 }

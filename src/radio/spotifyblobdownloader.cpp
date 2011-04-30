@@ -44,6 +44,14 @@ SpotifyBlobDownloader::~SpotifyBlobDownloader() {
   delete progress_;
 }
 
+bool SpotifyBlobDownloader::Prompt() {
+  QMessageBox::StandardButton ret = QMessageBox::question(NULL,
+      tr("Spotify plugin not installed"),
+      tr("An additional plugin is required to use Spotify in Clementine.  Would you like to download and install it now?"),
+      QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+  return ret == QMessageBox::Yes;
+}
+
 void SpotifyBlobDownloader::Start() {
   qDeleteAll(replies_);
   replies_.clear();

@@ -37,6 +37,7 @@ SpotifyService::SpotifyService(RadioModel* parent)
       url_handler_(new SpotifyUrlHandler(this, this)),
       blob_process_(NULL),
       root_(NULL),
+      search_(NULL),
       starred_(NULL),
       inbox_(NULL),
       login_task_id_(0),
@@ -46,14 +47,19 @@ SpotifyService::SpotifyService(RadioModel* parent)
   // Build the search path for the binary blob.
   // Look for one distributed alongside clementine first, then check in the
   // user's home directory for any that have been downloaded.
-  blob_path_ << QCoreApplication::applicationFilePath() + "-spotifyblob" CMAKE_EXECUTABLE_SUFFIX
-             << QCoreApplication::applicationDirPath() + "/../PlugIns/clementine-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;
+#ifdef Q_OS_MAC
+  system_blob_path_ = QCoreApplication::applicationDirPath() +
+      "/../PlugIns/clementine-spotifyblob";
+#else
+  system_blob_path_ = QCoreApplication::applicationFilePath() +
+      "-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;
+#endif
 
   local_blob_version_ = QString("version%1-%2bit").arg(SPOTIFY_BLOB_VERSION).arg(sizeof(void*) * 8);
   local_blob_path_    = Utilities::GetConfigPath(Utilities::Path_LocalSpotifyBlob) +
                         "/" + local_blob_version_ + "/blob";
 
-  qLog(Debug) << "Spotify blob search path:" << blob_path_;
+  qLog(Debug) << "Spotify system blob path:" << system_blob_path_;
   qLog(Debug) << "Spotify local blob path:" << local_blob_path_;
 
   model()->player()->RegisterUrlHandler(url_handler_);
@@ -66,6 +72,11 @@ SpotifyService::SpotifyService(RadioModel* parent)
 }
 
 SpotifyService::~SpotifyService() {
+  if (blob_process_ && blob_process_->state() == QProcess::Running) {
+    qLog(Info) << "Terminating blob process...";
+    blob_process_->terminate();
+    blob_process_->waitForFinished(1000);
+  }
 }
 
 QStandardItem* SpotifyService::CreateRootItem() {
@@ -118,10 +129,14 @@ void SpotifyService::Login(const QString& username, const QString& password) {
   EnsureServerCreated(username, password);
 }
 
-void SpotifyService::LoginCompleted(bool success) {
+void SpotifyService::LoginCompleted(bool success, const QString& error) {
   if (login_task_id_) {
     model()->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
+  }
+
+  if (!success) {
+    QMessageBox::warning(NULL, tr("Spotify login error"), error, QMessageBox::Close);
   }
 
   emit LoginFinished(success);
@@ -131,8 +146,6 @@ void SpotifyService::BlobProcessError(QProcess::ProcessError error) {
   qLog(Error) << "Spotify blob process failed:" << error;
   blob_process_->deleteLater();
   blob_process_ = NULL;
-
-  emit StreamError("The Spotify process failed");
 
   if (login_task_id_) {
     model()->task_manager()->SetTaskFinished(login_task_id_);
@@ -148,7 +161,7 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   delete server_;
   server_ = new SpotifyServer(this);
 
-  connect(server_, SIGNAL(LoginCompleted(bool)), SLOT(LoginCompleted(bool)));
+  connect(server_, SIGNAL(LoginCompleted(bool,QString)), SLOT(LoginCompleted(bool,QString)));
   connect(server_, SIGNAL(PlaylistsUpdated(protobuf::Playlists)),
           SLOT(PlaylistsUpdated(protobuf::Playlists)));
   connect(server_, SIGNAL(InboxLoaded(protobuf::LoadPlaylistResponse)),
@@ -186,19 +199,15 @@ void SpotifyService::StartBlobProcess() {
   QProcessEnvironment env(QProcessEnvironment::systemEnvironment());
 
   // Look in the system search path first
-  foreach (const QString& path, blob_path_) {
-    if (QFile::exists(path)) {
-      blob_path = path;
-      break;
-    }
+  if (QFile::exists(system_blob_path_)) {
+    blob_path = system_blob_path_;
   }
 
   // Next look in the local path
-  const QString local_blob_dir = QFileInfo(local_blob_path_).path();
   if (blob_path.isEmpty()) {
     if (QFile::exists(local_blob_path_)) {
       blob_path = local_blob_path_;
-      env.insert("LD_LIBRARY_PATH", local_blob_dir);
+      env.insert("LD_LIBRARY_PATH", QFileInfo(local_blob_path_).path());
     }
   }
 
@@ -209,17 +218,8 @@ void SpotifyService::StartBlobProcess() {
     }
 
     #ifdef Q_OS_LINUX
-      QMessageBox::StandardButton ret = QMessageBox::question(NULL,
-          tr("Spotify plugin not installed"),
-          tr("An additional plugin is required to use Spotify in Clementine.  Would you like to download and install it now?"),
-          QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-
-      if (ret == QMessageBox::Yes) {
-        // The downloader deletes itself when it finishes
-        SpotifyBlobDownloader* downloader = new SpotifyBlobDownloader(
-              local_blob_version_, local_blob_dir, this);
-        connect(downloader, SIGNAL(Finished()), SLOT(BlobDownloadFinished()));
-        downloader->Start();
+      if (SpotifyBlobDownloader::Prompt()) {
+        InstallBlob();
       }
     #endif
 
@@ -238,6 +238,20 @@ void SpotifyService::StartBlobProcess() {
   qLog(Info) << "Starting" << blob_path;
   blob_process_->start(
         blob_path, QStringList() << QString::number(server_->server_port()));
+}
+
+bool SpotifyService::IsBlobInstalled() const {
+  return QFile::exists(system_blob_path_) ||
+         QFile::exists(local_blob_path_);
+}
+
+void SpotifyService::InstallBlob() {
+  // The downloader deletes itself when it finishes
+  SpotifyBlobDownloader* downloader = new SpotifyBlobDownloader(
+        local_blob_version_, QFileInfo(local_blob_path_).path(), this);
+  connect(downloader, SIGNAL(Finished()), SLOT(BlobDownloadFinished()));
+  connect(downloader, SIGNAL(Finished()), SIGNAL(BlobStateChanged()));
+  downloader->Start();
 }
 
 void SpotifyService::BlobDownloadFinished() {

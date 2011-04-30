@@ -32,6 +32,8 @@ public:
                         QObject* parent = 0);
   ~SpotifyBlobDownloader();
 
+  static bool Prompt();
+
   void Start();
 
 signals:
