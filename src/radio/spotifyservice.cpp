@@ -51,8 +51,8 @@ SpotifyService::SpotifyService(RadioModel* parent)
   system_blob_path_ = QCoreApplication::applicationDirPath() +
       "/../PlugIns/clementine-spotifyblob";
 #else
-  system_blob_path_ = QCoreApplication::applicationFilePath() +
-      "-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;
+  system_blob_path_ = QCoreApplication::applicationDirPath() +
+      "/clementine-spotifyblob" CMAKE_EXECUTABLE_SUFFIX;
 #endif
 
   local_blob_version_ = QString("version%1-%2bit").arg(SPOTIFY_BLOB_VERSION).arg(sizeof(void*) * 8);

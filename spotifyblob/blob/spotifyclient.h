@@ -56,39 +56,39 @@ private:
   void SendPlaybackError(const QString& error);
 
   // Spotify session callbacks.
-  static void LoggedInCallback(sp_session* session, sp_error error);
-  static void NotifyMainThreadCallback(sp_session* session);
-  static void LogMessageCallback(sp_session* session, const char* data);
-  static void SearchCompleteCallback(sp_search* result, void* userdata);
-  static void MetadataUpdatedCallback(sp_session* session);
-  static int MusicDeliveryCallback(
+  static void SP_CALLCONV LoggedInCallback(sp_session* session, sp_error error);
+  static void SP_CALLCONV NotifyMainThreadCallback(sp_session* session);
+  static void SP_CALLCONV LogMessageCallback(sp_session* session, const char* data);
+  static void SP_CALLCONV SearchCompleteCallback(sp_search* result, void* userdata);
+  static void SP_CALLCONV MetadataUpdatedCallback(sp_session* session);
+  static int SP_CALLCONV MusicDeliveryCallback(
     sp_session* session, const sp_audioformat* format,
     const void* frames, int num_frames);
-  static void EndOfTrackCallback(sp_session* session);
-  static void StreamingErrorCallback(sp_session* session, sp_error error);
+  static void SP_CALLCONV EndOfTrackCallback(sp_session* session);
+  static void SP_CALLCONV StreamingErrorCallback(sp_session* session, sp_error error);
 
   // Spotify playlist container callbacks.
-  static void PlaylistAddedCallback(
+  static void SP_CALLCONV PlaylistAddedCallback(
     sp_playlistcontainer* pc, sp_playlist* playlist,
     int position, void* userdata);
-  static void PlaylistRemovedCallback(
+  static void SP_CALLCONV PlaylistRemovedCallback(
     sp_playlistcontainer* pc, sp_playlist* playlist,
     int position, void* userdata);
-  static void PlaylistMovedCallback(
+  static void SP_CALLCONV PlaylistMovedCallback(
     sp_playlistcontainer* pc, sp_playlist* playlist,
     int position, int new_position, void* userdata);
-  static void PlaylistContainerLoadedCallback(
+  static void SP_CALLCONV PlaylistContainerLoadedCallback(
     sp_playlistcontainer* pc, void* userdata);
 
   // Spotify playlist callbacks - when loading the list of playlists
   // initially
-  static void PlaylistStateChangedForGetPlaylists(sp_playlist* pl, void* userdata);
+  static void SP_CALLCONV PlaylistStateChangedForGetPlaylists(sp_playlist* pl, void* userdata);
 
   // Spotify playlist callbacks - when loading a playlist
-  static void PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata);
+  static void SP_CALLCONV PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata);
 
   // Spotify image callbacks.
-  static void ImageLoaded(sp_image* image, void* userdata);
+  static void SP_CALLCONV ImageLoaded(sp_image* image, void* userdata);
 
   // Request handlers.
   void Login(const QString& username, const QString& password);

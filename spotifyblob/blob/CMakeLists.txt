@@ -22,9 +22,14 @@ set(HEADERS
 
 qt4_wrap_cpp(MOC ${HEADERS})
 
+if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
+  set(win32_build_flag WIN32)
+endif (NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
+
 add_executable(clementine-spotifyblob
   ${SOURCES}
   ${MOC}
+  ${win32_build_flag}
 )
 
 target_link_libraries(clementine-spotifyblob
