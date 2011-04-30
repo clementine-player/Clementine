@@ -33,6 +33,7 @@
 #include <lastfm/misc.h>
 #include <lastfm/RadioStation>
 #include <lastfm/Scrobble>
+#include <lastfm/ScrobbleCache>
 #include <lastfm/ScrobblePoint>
 #include <lastfm/ws.h>
 #include <lastfm/XmlQuery>
@@ -512,6 +513,8 @@ void LastFMService::Scrobble() {
   if (!InitScrobbler())
     return;
 
+  ScrobbleCache cache(lastfm::ws::Username);
+  qLog(Debug) << "There are" << cache.tracks().count() << "tracks in the last.fm cache.";
   scrobbler_->cache(last_track_);
 
   // Let's mark a track as cached, useful when the connection is down
