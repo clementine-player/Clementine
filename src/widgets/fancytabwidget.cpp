@@ -706,7 +706,10 @@ void FancyTabWidget::MakeTabBar(QTabBar::Shape shape, bool text, bool icons,
     else if (text)
       tab_id = bar->addTab(label);
 
-    bar->setTabToolTip(tab_id, item.tab_label_);
+    // Adds tooltips only in Tabs mode or IconOnlyTabs mode
+    // TODO in tab mode, show only if not elided, complicated since this doesn't inherit from QTabWidget
+    if (shape == QTabBar::RoundedNorth && ((!text && icons) || (text && !icons)))
+      bar->setTabToolTip(tab_id, item.tab_label_);
   }
 
   bar->setCurrentIndex(stack_->currentIndex());
