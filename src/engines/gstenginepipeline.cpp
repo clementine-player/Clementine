@@ -616,8 +616,8 @@ GstState GstEnginePipeline::state() const {
   return s;
 }
 
-GstStateChangeReturn GstEnginePipeline::SetState(GstState state) {
-  return gst_element_set_state(pipeline_, state);
+QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
+  return QtConcurrent::run(&gst_element_set_state, pipeline_, state);
 }
 
 bool GstEnginePipeline::Seek(qint64 nanosec) {

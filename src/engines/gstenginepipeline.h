@@ -61,7 +61,7 @@ class GstEnginePipeline : public QObject {
   void RemoveAllBufferConsumers();
 
   // Control the music playback
-  GstStateChangeReturn SetState(GstState state);
+  QFuture<GstStateChangeReturn> SetState(GstState state);
   Q_INVOKABLE bool Seek(qint64 nanosec);
   void SetEqualizerEnabled(bool enabled);
   void SetEqualizerParams(int preamp, const QList<int>& band_gains);

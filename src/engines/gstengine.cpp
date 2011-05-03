@@ -396,10 +396,24 @@ bool GstEngine::Play(quint64 offset_nanosec) {
   if (!current_pipeline_)
     return false;
 
-  GstStateChangeReturn ret = current_pipeline_->SetState(GST_STATE_PLAYING);
+  QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
+  PlayFutureWatcher* watcher = new PlayFutureWatcher(
+        PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
 
-  if (!current_pipeline_) {
-    return false;
+  return true;
+}
+
+void GstEngine::PlayDone() {
+  PlayFutureWatcher* watcher = static_cast<PlayFutureWatcher*>(sender());
+  watcher->deleteLater();
+
+  GstStateChangeReturn ret = watcher->result();
+  quint64 offset_nanosec = watcher->data().first;
+
+  if (!current_pipeline_ || watcher->data().second != current_pipeline_->id()) {
+    return;
   }
 
   if (ret == GST_STATE_CHANGE_FAILURE) {
@@ -409,13 +423,13 @@ bool GstEngine::Play(quint64 offset_nanosec) {
       qLog(Info) << "Redirecting to" << redirect_url;
       current_pipeline_ = CreatePipeline(redirect_url, end_nanosec_);
       Play(offset_nanosec);
-      return false;
+      return;
     }
 
     // Failure - give up
     qLog(Warning) << "Could not set thread to PLAYING.";
     current_pipeline_.reset();
-    return false;
+    return;
   }
 
   StartTimers();
@@ -430,7 +444,6 @@ bool GstEngine::Play(quint64 offset_nanosec) {
   emit StateChanged(Engine::Playing);
   // we've successfully started playing a media stream with this url
   emit ValidSongRequested(url_);
-  return true;
 }
 
 
@@ -760,13 +773,27 @@ int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   const int stream_id = next_background_stream_id_++;
   background_streams_[stream_id] = pipeline;
 
-  GstStateChangeReturn ret = pipeline->SetState(GST_STATE_PLAYING);
+  QFuture<GstStateChangeReturn> future = pipeline->SetState(GST_STATE_PLAYING);
+  BoundFutureWatcher<GstStateChangeReturn, int>* watcher =
+      new BoundFutureWatcher<GstStateChangeReturn, int>(stream_id, this);
+  watcher->setFuture(future);
+  connect(watcher, SIGNAL(finished()), SLOT(BackgroundStreamPlayDone()));
+
+  return stream_id;
+}
+
+void GstEngine::BackgroundStreamPlayDone() {
+  BoundFutureWatcher<GstStateChangeReturn, int>* watcher =
+      static_cast<BoundFutureWatcher<GstStateChangeReturn, int>*>(sender());
+  watcher->deleteLater();
+
+  const int stream_id = watcher->data();
+  GstStateChangeReturn ret = watcher->result();
 
   if (ret == GST_STATE_CHANGE_FAILURE) {
     qLog(Warning) << "Could not set thread to PLAYING.";
     background_streams_.remove(stream_id);
   }
-  return stream_id;
 }
 
 int GstEngine::AddBackgroundStream(const QUrl& url) {

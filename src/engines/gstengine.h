@@ -121,6 +121,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void FadeoutFinished();
   void SeekNow();
   void BackgroundStreamFinished();
+  void BackgroundStreamPlayDone();
+  void PlayDone();
 
  private:
   typedef QPair<quint64, int> PlayFutureWatcherArg;
